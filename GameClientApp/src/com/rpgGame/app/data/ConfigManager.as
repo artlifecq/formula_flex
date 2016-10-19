@@ -1,0 +1,296 @@
+package com.rpgGame.app.data
+{
+	import com.gameClient.log.GameLog;
+	import com.rpgGame.app.manager.BiaoJuManager;
+	import com.rpgGame.app.manager.friend.FriendManager;
+	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
+	import com.rpgGame.coreData.cfg.AddSpriteStatCfgData;
+	import com.rpgGame.coreData.cfg.AnimationDataManager;
+	import com.rpgGame.coreData.cfg.BuffStateDataManager;
+	import com.rpgGame.coreData.cfg.ChatCfgData;
+	import com.rpgGame.coreData.cfg.ClientAreaCfgData;
+	import com.rpgGame.coreData.cfg.ClientBuffCfgData;
+	import com.rpgGame.coreData.cfg.ClientCountryWarChengMenCfgData;
+	import com.rpgGame.coreData.cfg.ClientDialogCfgData;
+	import com.rpgGame.coreData.cfg.ClientSceneCfgData;
+	import com.rpgGame.coreData.cfg.ClientSceneEffectCfgData;
+	import com.rpgGame.coreData.cfg.ClientSceneNpcCfgData;
+	import com.rpgGame.coreData.cfg.ClientSceneRoleCfgData;
+	import com.rpgGame.coreData.cfg.ClientTriggerCfgData;
+	import com.rpgGame.coreData.cfg.DaTiCfgData;
+	import com.rpgGame.coreData.cfg.FaceCfgData;
+	import com.rpgGame.coreData.cfg.FriendCfgData;
+	import com.rpgGame.coreData.cfg.GCDCfgData;
+	import com.rpgGame.coreData.cfg.GlobalSettingCfgData;
+	import com.rpgGame.coreData.cfg.GmConfig;
+	import com.rpgGame.coreData.cfg.GuildCfgData;
+	import com.rpgGame.coreData.cfg.HintCfgData;
+	import com.rpgGame.coreData.cfg.HintConfig;
+	import com.rpgGame.coreData.cfg.MailCfgData;
+	import com.rpgGame.coreData.cfg.MazeCfgData;
+	import com.rpgGame.coreData.cfg.RaceCfgData;
+	import com.rpgGame.coreData.cfg.ReliveCfgData;
+	import com.rpgGame.coreData.cfg.ShopCfgData;
+	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.cfg.SpellEffectDataManager;
+	import com.rpgGame.coreData.cfg.StallCfgData;
+	import com.rpgGame.coreData.cfg.StatNameCfgData;
+	import com.rpgGame.coreData.cfg.TaxCfgData;
+	import com.rpgGame.coreData.cfg.TranportsDataManager;
+	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
+	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
+	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
+	import com.rpgGame.coreData.cfg.country.CountryStaticConfigData;
+	import com.rpgGame.coreData.cfg.country.CountryTaoNiCfgData;
+	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
+	import com.rpgGame.coreData.cfg.crown.CountryUnionStatCfgData;
+	import com.rpgGame.coreData.cfg.crown.CrownNeiZhengCfgData;
+	import com.rpgGame.coreData.cfg.crown.CrownPanelPagesCfgData;
+	import com.rpgGame.coreData.cfg.demo.GmLevelAddSpellPointData;
+	import com.rpgGame.coreData.cfg.equip.CombineCfgData;
+	import com.rpgGame.coreData.cfg.equip.EquipMainStatCfgData;
+	import com.rpgGame.coreData.cfg.equip.EquipMakeCfgData;
+	import com.rpgGame.coreData.cfg.equip.EquipRefineTimesCfgData;
+	import com.rpgGame.coreData.cfg.equip.EquipTypeNameCfgData;
+	import com.rpgGame.coreData.cfg.equip.EquipmentCombineCfgData;
+	import com.rpgGame.coreData.cfg.equip.EquipmentGeneralCfgData;
+	import com.rpgGame.coreData.cfg.equip.EquipmentRefineDestoryCfgData;
+	import com.rpgGame.coreData.cfg.equip.RefineCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
+	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
+	import com.rpgGame.coreData.cfg.model.AvatarHairResCfgData;
+	import com.rpgGame.coreData.cfg.model.AvatarMountResCfgData;
+	import com.rpgGame.coreData.cfg.model.AvatarWeapontResCfgData;
+	import com.rpgGame.coreData.cfg.model.BaZhenTuResCfgData;
+	import com.rpgGame.coreData.cfg.model.HeroModelCfgData;
+	import com.rpgGame.coreData.cfg.model.MountModelCfgData;
+	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
+	import com.rpgGame.coreData.cfg.mount.MountConfigData;
+	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
+	import com.rpgGame.coreData.cfg.society.SocietyStaticConfigData;
+	import com.rpgGame.coreData.cfg.sound.GameSoundCfgData;
+	import com.rpgGame.coreData.cfg.task.TaskCfgData;
+	import com.rpgGame.coreData.clientConfig.ConfigClassRegister;
+	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.familyWar.FamilyWarCfgData;
+	
+	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
+	
+	import app.message.Config;
+	import app.message.ServiceConfig;
+	
+	import org.game.netCore.net.BytesUtil;
+
+	/**
+	 * 配置数据解析模块，这个模块只提供数据的解析，不提供数据的存储，具体的数据存储到各自模块中
+	 * 如果新写数据模块，！！！不要以这个模块为模板来做！！！
+	 * @author 康露
+	 * 2014年10月13日
+	 */
+	public class ConfigManager
+	{
+		public function ConfigManager()
+		{
+		}
+
+		/**
+		 * 直接使用缓存中的配置(如果缓存为空，向服务端请求配置文件)
+		 */
+		public function getLocalConfig() : void
+		{
+			var byte : ByteArray //= Mgr.resMgr.localConfigByte;
+			if (byte == null)
+			{
+				GameLog.throwError(new Error("本地缓存为空"));
+			}
+			else
+			{
+				setConfig(byte, true);
+			}
+		}
+
+		/**
+		 * 使用服务器下发的配置
+		 */
+		public static function recServerConfig(byte : ByteArray) : void
+		{
+			setConfig(byte, false);
+		}
+
+		/**
+		 * 设置只有客户端自己用的数据,配置在clientres/res/config/data 目录下的数据
+		 */
+		public static function recClientConfig(dic : Dictionary) : void
+		{
+			ClientSceneCfgData.setup(dic[ConfigClassRegister.ClientScene]);
+			ClientSceneNpcCfgData.setup(dic[ConfigClassRegister.ClientSceneNPC]);
+			ClientSceneEffectCfgData.setup(dic[ConfigClassRegister.ClientSceneEffect]);
+			ClientSceneRoleCfgData.setup(dic[ConfigClassRegister.ClientSceneRole]);
+			ClientTriggerCfgData.setup(dic[ConfigClassRegister.ClientTrigger]);
+			ClientAreaCfgData.setup(dic[ConfigClassRegister.ClientArea]);
+			ClientDialogCfgData.setup(dic[ConfigClassRegister.ClientDialog]);
+			GmConfig.setup(dic[ConfigClassRegister.GmInfo]);
+			GlobalSettingCfgData.setup(dic[ConfigClassRegister.GlobalSetting]);
+			HintConfig.setup(dic[ConfigClassRegister.HintInfo]);
+			GameSoundCfgData.setup(dic[ConfigClassRegister.GameSoundInfo]);
+			HeroModelCfgData.setup(dic[ConfigClassRegister.HeroModel]);
+			MountModelCfgData.setup(dic[ConfigClassRegister.MountModel]);
+			AvatarMountResCfgData.setup(dic[ConfigClassRegister.AvatarMountRes]);
+			AvatarWeapontResCfgData.setup(dic[ConfigClassRegister.AvatarWeaponRes]);
+			AvatarDeputyWeaponResCfgData.setup(dic[ConfigClassRegister.AvatarDeputyWeaponRes]);
+			AvatarClothesResCfgData.setup(dic[ConfigClassRegister.AvatarClothesRes]);
+			BaZhenTuResCfgData.setup(dic[ConfigClassRegister.BaZhenTuRes]);
+			AvatarHairResCfgData.setup(dic[ConfigClassRegister.AvatarHairRes]);
+			AvatarResConfigSetData.setup(dic[ConfigClassRegister.AvatarResConfig]);
+			EffectAnimationCfgData.setup(dic[ConfigClassRegister.EffectAnimation]);
+			FaceCfgData.setup(dic[ConfigClassRegister.FaceInfo]);
+			GmLevelAddSpellPointData.setup(dic[ConfigClassRegister.GmLevelAddSpellPoint]);
+			StatNameCfgData.setup(dic[ConfigClassRegister.SpriteStatNameInfo]);
+			EquipTypeNameCfgData.setup(dic[ConfigClassRegister.EquipTypeNameInfo]);
+			EquipRefineTimesCfgData.setup(dic[ConfigClassRegister.EquipRefineTimesInfo]);
+			RaceCfgData.setup(dic[ConfigClassRegister.RaceNameInfo]);
+			CrownNeiZhengCfgData.setup(dic[ConfigClassRegister.CrownNeiZhenInfo]);
+			EquipMainStatCfgData.setup(dic[ConfigClassRegister.EquipMainStat]);
+			HintCfgData.setUpHintTypeSet(dic[ConfigClassRegister.HintTypeSetInfo]);
+			ClientCountryWarChengMenCfgData.setup(dic[ConfigClassRegister.CountryWarChengMenInfo]);
+			CrownPanelPagesCfgData.setup(dic[ConfigClassRegister.CrownPageInfo]);
+			ClientBuffCfgData.setUpHintTypeSet(dic[ConfigClassRegister.ClientBuff]);
+			CountryUnionStatCfgData.setup(null); //待解决
+		}
+
+		/**
+		 * 保存配置文件
+		 * @param	config
+		 * @param   isUseLocalCfg 是否使用本地存储的配置
+		 */
+		private static function setConfig(byte : ByteArray, isUseLocalCfg : Boolean) : void
+		{
+			var ver : Number;
+			if (isUseLocalCfg)
+			{
+			}
+			else
+			{
+				ver = BytesUtil.readVarint64(byte);
+			}
+
+			var configLen : int = BytesUtil.readVarint32(byte);
+			var configBytes : ByteArray = new ByteArray();
+			byte.readBytes(configBytes, 0, configLen);
+			configBytes.uncompress();
+			var config : Config = new Config();
+			config.mergeFrom(configBytes);
+
+			//ServiceConfig描述这个服的单独配置，如开服时间，是否已合过服等等
+			var serviceConfigLen : int = BytesUtil.readVarint32(byte);
+			var serviceConfigBytes : ByteArray = new ByteArray();
+			byte.readBytes(serviceConfigBytes, 0, serviceConfigLen);
+			var serviceConfig : ServiceConfig = new ServiceConfig();
+			serviceConfig.mergeFrom(serviceConfigBytes);
+
+			//保存场景配置文件   抛出GAMEconfig_GET_SCENEconfig配置文件获取成功事件
+			if (config.hasSceneConfig)
+			{
+				MapDataManager.setSceneConfig(config.sceneConfig);
+			}
+
+			if (config.hasSpellConfig)
+			{
+				SpellDataManager.setConfig(config.spellConfig.spellLearnConfig);
+				//状态数据buff相关
+				BuffStateDataManager.setConfig(config.spellConfig.stateConfig);
+				SpellEffectDataManager.setConfig(config.spellConfig.spellEffectConfig);
+				AnimationDataManager.setConfig(config.spellConfig.animationConfig);
+				//公共CD配置
+				GCDCfgData.setConfig(config.spellConfig.gcdGroupsConfig);
+			}
+			if (config.hasMonsterConfig)
+			{
+				MonsterDataManager.setConfig(config.monsterConfig); //怪物//NPC
+			}
+
+			if (config.hasGuildConfig)
+			{
+				GuildCfgData.setup(config.guildConfig); //帮派
+			}
+			//传送门
+			if (config.hasSceneTranports)
+			{
+				TranportsDataManager.setConfig(config.sceneTranports);
+			}
+
+			if (config.relationConfig)
+			{
+				FriendManager.MAX_FRIEND_NUM = config.relationConfig.friendCountLimit;
+				FriendManager.MAX_BLACK_NUM = config.relationConfig.blackCountLimit;
+			}
+
+			//采集
+			CollectCfgData.setConfig(config.collecObjectConfig);
+			//聊天
+			ChatCfgData.setChatConfig(config.chatConfig, config.miscConfig.paidChatGoodsId);
+			//任务
+			TaskCfgData.setConfig(config.taskConfig);
+			//复活相关配置
+			ReliveCfgData.setConfig(config.reliveConfig);
+			//物品
+			ItemCfgData.setAllCfgData(config.goodsConfig);
+			//背包仓库解锁格子数据
+			GoodsContainerMamager.setUnlockDataConfig(config.allUnlockData);
+			//帮派
+			SocietyStaticConfigData.setConfig(config.family);
+			//商店配置
+			ShopCfgData.setConfig(config.shopConfig);
+			//职业数据
+			RaceCfgData.setConfig(config.raceConfig);
+			//邮箱
+			MailCfgData.setConfig(config.mailConfig);
+			//答题
+			DaTiCfgData.setConfig(config.exam);
+			//加点配置
+			AddSpriteStatCfgData.setConfig(config.addSpriteStatConfig);
+			//物品合成
+			CombineCfgData.setConfig(config.equipmentConfig.combineDatas);
+			//装备合成
+			EquipmentCombineCfgData.setConfig(config.equipmentConfig.combineEquipDatas);
+			//装备打造
+			EquipMakeCfgData.setConfig(config.equipmentConfig.equipBuild);
+			//装备改造
+			EquipmentGeneralCfgData.setConfig(config.equipmentConfig.generalDatas);
+			//装备拆解
+			EquipmentRefineDestoryCfgData.setConfig(config.equipmentConfig.destroyDatas);
+			//装备强化
+			RefineCfgData.setConfig(config.equipmentConfig.refineDatas);
+			//王城战配置
+			FamilyWarCfgData.setup(config.kingWarConfig.miscData);
+			//运镖配置
+			BiaoCfgData.setConfig(config.biaoConfig);
+			//迷宫
+			MazeCfgData.setup(config.mazeConfig);
+			//摆摊
+			StallCfgData.setup(config.stallConfig);
+
+			if (config.biaoConfig)
+			{ //镖局配置
+				BiaoJuManager.setMiscData(config.biaoConfig.biaoJuMisc);
+			}
+			//坐骑
+			MountConfigData.setConfig(config.mount);
+			//讨逆配置
+			CountryTaoNiCfgData.setConfig(config.taoNiConfig);
+			//税收配置
+			TaxCfgData.setConfig(config.allTaxConfig);
+			if (config.hasCountryConfig)
+			{
+				CountryStaticConfigData.setConfig(config.countryConfig);
+			}
+			//国战配置
+			CountryWarCfgData.setConfig(config.countryWarConfig);
+
+			if (config.hasRelationConfig)
+				FriendCfgData.setup(config.relationConfig);
+		}
+	}
+}

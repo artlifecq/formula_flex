@@ -1,0 +1,1098 @@
+package com.game.engine3D.scene.render
+{
+	import com.game.engine3D.core.poolObject.PoolContainer3D;
+	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.RenderUnitSyncInfo;
+	import com.game.engine3D.utils.CallBackUtil;
+	import com.game.engine3D.vo.BaseObj3D;
+	import com.game.engine3D.vo.CallBackData;
+	import com.game.mainCore.libCore.pool.Pool;
+	
+	import flash.geom.Matrix3D;
+	import flash.geom.Point;
+	import flash.geom.Vector3D;
+	import flash.utils.Dictionary;
+	
+	import away3d.containers.ObjectContainer3D;
+	import away3d.containers.View3D;
+	import away3d.core.math.Matrix3DUtils;
+	import away3d.events.MouseEvent3D;
+	import away3d.materials.lightpickers.LightPickerBase;
+
+	/**
+	 *
+	 * 3D单元渲染集合
+	 * @author L.L.M.Sunny
+	 * 创建时间：2015-6-4 下午1:26:38
+	 *
+	 */
+	public class RenderSet3D extends BaseObj3D
+	{
+		//---------------------------对象池---------------------------
+		private static var _cnt : int = 0;
+
+		private static var _pool : Pool = new Pool("RenderSet3D", 1000);
+
+		/**
+		 * 生成一个RenderUnit
+		 * @param $type
+		 * @param $value
+		 */
+		public static function create(type : String, id : Number) : RenderSet3D
+		{
+			_cnt++;
+			//利用池生成
+			return _pool.createObj(RenderSet3D, type, id) as RenderSet3D;
+		}
+
+		public static function recycle(rs : RenderSet3D) : void
+		{
+			if (!rs)
+				return;
+			_cnt--;
+			//利用池回收
+			_pool.disposeObj(rs);
+		}
+
+		public static function get cnt() : int
+		{
+			return _cnt;
+		}
+
+		//------------------------------------------------------------
+
+		/**
+		 * 换装部件集合
+		 */
+		private var _renderUnitMap : Dictionary;
+		/** 灯光 **/
+		private var _lightPicker : LightPickerBase;
+		private var _useLight : Boolean;
+		private var _shareMaterials : Boolean;
+		private var _syncInfos : Dictionary;
+		private var _volumeRender : RenderUnit3D;
+
+		private var _mouseUpCallBackList : Vector.<CallBackData>;
+		private var _mouseDownCallBackList : Vector.<CallBackData>;
+		private var _mouseOverCallBackList : Vector.<CallBackData>;
+		private var _mouseOutCallBackList : Vector.<CallBackData>;
+		private var _mouseRightUpCallBackList : Vector.<CallBackData>;
+		private var _mouseRightDownCallBackList : Vector.<CallBackData>;
+
+		public function RenderSet3D(type : String, id : Number)
+		{
+			super([type, id]);
+			_syncInfos = new Dictionary();
+			_renderUnitMap = new Dictionary();
+		}
+
+		/**
+		 * @private
+		 * 换装鼠标弹起回调
+		 * 传回参数：(this)
+		 */
+		public function setMouseUpCallBack(value : Function, ... args) : void
+		{
+			if (!_mouseUpCallBackList)
+			{
+				_mouseUpCallBackList = new Vector.<CallBackData>;
+			}
+			CallBackUtil.addCallBackData(_mouseUpCallBackList, value, args);
+		}
+
+		/**
+		 * 移除换装鼠标弹起回调
+		 */
+		public function removeMouseUpCallBack(value : Function) : void
+		{
+			CallBackUtil.removeCallBackData(_mouseUpCallBackList, value);
+		}
+
+		/**
+		 * @private
+		 * 换装鼠标按下回调
+		 * 传回参数：(this)
+		 */
+		public function setMouseDownCallBack(value : Function, ... args) : void
+		{
+			if (!_mouseDownCallBackList)
+			{
+				_mouseDownCallBackList = new Vector.<CallBackData>;
+			}
+			CallBackUtil.addCallBackData(_mouseDownCallBackList, value, args);
+		}
+
+		/**
+		 * 移除换装鼠标按下回调
+		 */
+		public function removeMouseDownCallBack(value : Function) : void
+		{
+			CallBackUtil.removeCallBackData(_mouseDownCallBackList, value);
+		}
+
+		/**
+		 * @private
+		 * 换装鼠标划滑过回调
+		 * 传回参数：(this)
+		 */
+		public function setMouseOverCallBack(value : Function, ... args) : void
+		{
+			if (!_mouseOverCallBackList)
+			{
+				_mouseOverCallBackList = new Vector.<CallBackData>;
+			}
+			CallBackUtil.addCallBackData(_mouseOverCallBackList, value, args);
+		}
+
+		/**
+		 * 移除换装鼠标滑过回调
+		 */
+		public function removeMouseOverCallBack(value : Function) : void
+		{
+			CallBackUtil.removeCallBackData(_mouseOverCallBackList, value);
+		}
+
+		/**
+		 * @private
+		 * 换装鼠标划移出回调
+		 * 传回参数：(this)
+		 */
+		public function setMouseOutCallBack(value : Function, ... args) : void
+		{
+			if (!_mouseOutCallBackList)
+			{
+				_mouseOutCallBackList = new Vector.<CallBackData>;
+			}
+			CallBackUtil.addCallBackData(_mouseOutCallBackList, value, args);
+		}
+
+		/**
+		 * 移除换装鼠标移出回调
+		 */
+		public function removeMouseOutCallBack(value : Function) : void
+		{
+			CallBackUtil.removeCallBackData(_mouseOutCallBackList, value);
+		}
+
+		/**
+		 * @private
+		 * 换装鼠标右键弹起回调
+		 * 传回参数：(this)
+		 */
+		public function setMouseRightUpCallBack(value : Function, ... args) : void
+		{
+			if (!_mouseRightUpCallBackList)
+			{
+				_mouseRightUpCallBackList = new Vector.<CallBackData>;
+			}
+			CallBackUtil.addCallBackData(_mouseRightUpCallBackList, value, args);
+		}
+
+		/**
+		 * 移除换装鼠标右键弹起回调
+		 */
+		public function removeMouseRightUpCallBack(value : Function) : void
+		{
+			CallBackUtil.removeCallBackData(_mouseRightUpCallBackList, value);
+		}
+
+		/**
+		 * @private
+		 * 换装鼠标右键按下回调
+		 * 传回参数：(this)
+		 */
+		public function setMouseRightDownCallBack(value : Function, ... args) : void
+		{
+			if (!_mouseRightDownCallBackList)
+			{
+				_mouseRightDownCallBackList = new Vector.<CallBackData>;
+			}
+			CallBackUtil.addCallBackData(_mouseRightDownCallBackList, value, args);
+		}
+
+		/**
+		 * 移除换装鼠标右键按下回调
+		 */
+		public function removeMouseRightDownCallBack(value : Function) : void
+		{
+			CallBackUtil.removeCallBackData(_mouseRightDownCallBackList, value);
+		}
+
+		//加载、添加、删除-------------------------------------------------------------------------------------------------------------------
+		/**
+		 * 添加指定的显示对象到对应的合成配件上
+		 * @param value
+		 * @param obj
+		 * @return
+		 *
+		 */
+		public function addRenderUnitToComposite(renderUnitType : String, id : int, rpd : RenderParamData, compositeIndex : int = 0, boneName : String = null) : RenderUnit3D
+		{
+			//清空同种类型换装
+			if (rpd.clearSameType)
+			{
+				removeRenderUnitsByType(rpd.type); //注意后面的参数
+			}
+			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
+			if (ru)
+			{
+				var childRu : RenderUnit3D = createRenderUnit(rpd, _graphicDis);
+				ru.addUnitAtComposite(childRu, compositeIndex, boneName);
+				return childRu;
+			}
+			return null;
+		}
+
+		/**
+		 * 添加指定的显示对象到对应的挂接点上
+		 * @param value
+		 * @param obj
+		 * @return
+		 *
+		 */
+		public function addRenderUnitToJoint(renderUnitType : String, id : int, childName : String, rpd : RenderParamData, compositeIndex : int = 0) : RenderUnit3D
+		{
+			//清空同种类型换装
+			if (rpd.clearSameType)
+			{
+				removeRenderUnitsByType(rpd.type); //注意后面的参数
+			}
+			if (childName)
+			{
+				var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
+				if (ru)
+				{
+					var childRu : RenderUnit3D = createRenderUnit(rpd, _graphicDis);
+					ru.addUnitAtJoint(childRu, childName, compositeIndex);
+					return childRu;
+				}
+			}
+			else
+			{
+				//清除同ID
+				removeRenderUnitByID(rpd.type, rpd.id);
+			}
+			return null;
+		}
+
+		/**
+		 * 添加指定的显示对象到对应的骨胳上
+		 * @param value
+		 * @param obj
+		 * @return
+		 *
+		 */
+		public function addRenderUnitToBone(renderUnitType : String, id : int, boneName : String, rpd : RenderParamData) : RenderUnit3D
+		{
+			//清空同种类型换装
+			if (rpd.clearSameType)
+			{
+				removeRenderUnitsByType(rpd.type); //注意后面的参数
+			}
+			if (boneName)
+			{
+				var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
+				if (ru)
+				{
+					var childRu : RenderUnit3D = createRenderUnit(rpd, _graphicDis);
+					ru.addUnitAtBone(childRu, boneName);
+					return childRu;
+				}
+			}
+			else
+			{
+				//清除同ID
+				removeRenderUnitByID(rpd.type, rpd.id);
+			}
+			return null;
+		}
+
+		/**
+		 * 添加指定的显示对象到对应的虚拟挂节点上
+		 * @param value
+		 * @param obj
+		 * @return
+		 *
+		 */
+		public function addRenderUnitToChild(renderUnitType : String, id : int, childName : String, rpd : RenderParamData) : RenderUnit3D
+		{
+			//清空同种类型换装
+			if (rpd.clearSameType)
+			{
+				removeRenderUnitsByType(rpd.type); //注意后面的参数
+			}
+			if (childName)
+			{
+				var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
+				if (ru)
+				{
+					var childRu : RenderUnit3D = createRenderUnit(rpd, _graphicDis);
+					ru.addUnitAtChild(childRu, childName);
+					return childRu;
+				}
+			}
+			else
+			{
+				//清除同ID
+				removeRenderUnitByID(rpd.type, rpd.id);
+			}
+			return null;
+		}
+
+		/**
+		 * 添加指定的显示对象到对应的单元上
+		 * @param value
+		 * @param obj
+		 * @return
+		 *
+		 */
+		public function addRenderUnitToUnit(renderUnitType : String, id : int, rpd : RenderParamData) : RenderUnit3D
+		{
+			//清空同种类型换装
+			if (rpd.clearSameType)
+			{
+				removeRenderUnitsByType(rpd.type); //注意后面的参数
+			}
+			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
+			if (ru)
+			{
+				var childRu : RenderUnit3D = createRenderUnit(rpd, _graphicDis);
+				ru.addUnitChild(childRu);
+				return childRu;
+			}
+			return null;
+		}
+
+		private function createRenderUnit(rpd : RenderParamData, parent : ObjectContainer3D) : RenderUnit3D
+		{
+			var ru : RenderUnit3D = getRenderUnitByID(rpd.type, rpd.id, false);
+			if (!ru)
+			{
+				ru = RenderUnit3D.create(rpd); //创建一个新的
+			}
+			ru.setRenderParamData(rpd);
+			ru.shareMaterials = _shareMaterials;
+			ru.lightPicker = _lightPicker;
+			ru.useLight = _useLight;
+			ru.isInViewDistance = _isInViewDistance;
+			ru.mouseEnable = rpd.mouseEnable && _mouseEnable;
+			ru.parent = parent;
+			ru.needRun = false;
+			ru.setMouseUpCallBack(handleMouseUp);
+			ru.setMouseDownCallBack(handleMouseDown);
+			ru.setMouseOverCallBack(handlerMouseOver);
+			ru.setMouseOutCallBack(handlerMouseOut);
+			ru.setMouseRightUpCallBack(handleMouseRightUp);
+			ru.setMouseRightDownCallBack(handleMouseRightDown);
+			ru.setRemovedCallBack(doRenderUnitRemoved);
+			if (_isRendering)
+			{
+				ru.startRender();
+			}
+			//添加进表
+			var key : String = rpd.type + "_" + rpd.id;
+			_renderUnitMap[key] = ru;
+			return ru;
+		}
+
+		private function doRenderUnitRemoved(ru : RenderUnit3D) : void
+		{
+		}
+
+		private function recycleRenderUnit(ru : RenderUnit3D) : void
+		{
+			ru.restoreAllChildUnitToParent(_graphicDis);
+			ru.removeMouseUpCallBack(handleMouseUp);
+			ru.removeMouseDownCallBack(handleMouseDown);
+			ru.removeMouseOverCallBack(handlerMouseOver);
+			ru.removeMouseOutCallBack(handlerMouseOut);
+			ru.removeMouseRightUpCallBack(handleMouseRightUp);
+			ru.removeMouseRightDownCallBack(handleMouseRightDown);
+			ru.removeRemovedCallBack(doRenderUnitRemoved);
+			//执行remove回调,回收renderUnit
+			ru.destroy();
+		}
+
+		/**
+		 * 鼠标弹起
+		 * @param ru
+		 *
+		 */
+		private function handleMouseUp(e : MouseEvent3D, ru : RenderUnit3D) : void
+		{
+			CallBackUtil.exceteCallBackData(this, _mouseUpCallBackList, e, ru);
+		}
+
+		/**
+		 * 鼠标按下
+		 * @param ru
+		 *
+		 */
+		private function handleMouseDown(e : MouseEvent3D, ru : RenderUnit3D) : void
+		{
+			CallBackUtil.exceteCallBackData(this, _mouseDownCallBackList, e, ru);
+		}
+
+		/**
+		 * 鼠标滑过
+		 * @param ru
+		 *
+		 */
+		private function handlerMouseOver(e : MouseEvent3D, ru : RenderUnit3D) : void
+		{
+			CallBackUtil.exceteCallBackData(this, _mouseOverCallBackList, e, ru);
+		}
+
+		/**
+		 * 鼠标移出
+		 * @param ru
+		 *
+		 */
+		private function handlerMouseOut(e : MouseEvent3D, ru : RenderUnit3D) : void
+		{
+			CallBackUtil.exceteCallBackData(this, _mouseOutCallBackList, e, ru);
+		}
+
+		/**
+		 * 鼠标右键弹起
+		 * @param ru
+		 *
+		 */
+		private function handleMouseRightUp(e : MouseEvent3D, ru : RenderUnit3D) : void
+		{
+			CallBackUtil.exceteCallBackData(this, _mouseRightUpCallBackList, e, ru);
+		}
+
+		/**
+		 * 鼠标右键按下
+		 * @param ru
+		 *
+		 */
+		private function handleMouseRightDown(e : MouseEvent3D, ru : RenderUnit3D) : void
+		{
+			CallBackUtil.exceteCallBackData(this, _mouseRightDownCallBackList, e, ru);
+		}
+
+		/**
+		 * 添加一项RenderUnit
+		 *  @param apd 换装数据 如果apd==null，则创建一个空RenderParamData
+		 */
+		public function addRenderUnit(rpd : RenderParamData) : RenderUnit3D
+		{
+			//清空同种类型换装
+			if (rpd.clearSameType)
+			{
+				removeRenderUnitsByType(rpd.type); //注意后面的参数
+			}
+			var ru : RenderUnit3D = createRenderUnit(rpd, _graphicDis);
+			return ru;
+		}
+
+		/**
+		 * 移除一项RenderUnit(此函数执行后,会检查主体换装，如果为空则启用默认换装)
+		 * @param renderUnit
+		 * @param clearSameType 是否清空同种类型的换装
+		 */
+		public function removeRenderUnit(renderUnit : RenderUnit3D, clearSameType : Boolean = false) : void
+		{
+			//清空同种状态换装
+			if (clearSameType)
+			{
+				removeRenderUnitsByType(renderUnit.type);
+			}
+			else
+			{
+				var key : String = renderUnit.type + "_" + renderUnit.id;
+				//从表中移除
+				_renderUnitMap[key] = null;
+				delete _renderUnitMap[key];
+				if (_volumeRender == renderUnit)
+				{
+					_volumeRender = null;
+				}
+				recycleRenderUnit(renderUnit);
+				renderUnit = null;
+			}
+		}
+
+		/**
+		 * 移除指定ID的RenderUnit(此函数执行后,会检查主体换装，如果为空则启用默认换装)
+		 * @param $renderUnitID 换装类型
+		 */
+		public function removeRenderUnitByID(renderUnitType : String, renderUnitID : int) : void
+		{
+			if (renderUnitType == null || renderUnitType == "")
+				return; //注意这个判断
+
+			//检查换装内
+			var key : String = renderUnitType + "_" + renderUnitID;
+			var ru : RenderUnit3D = _renderUnitMap[key];
+			if (ru)
+			{
+				//从表中移除
+				_renderUnitMap[key] = null;
+				delete _renderUnitMap[key];
+				if (_volumeRender == ru)
+				{
+					_volumeRender = null;
+				}
+				recycleRenderUnit(ru);
+				ru = null;
+			}
+		}
+
+		/**
+		 * 移除指定类型的RenderUnit(此函数执行后,会检查主体换装，如果为空则启用默认换装)
+		 * @param renderUnitType 换装类型
+		 */
+		public function removeRenderUnitsByType(renderUnitType : String) : void
+		{
+			if (renderUnitType == null || renderUnitType == "")
+				return; //注意这个判断
+
+			//检查换装内
+			for (var key : String in _renderUnitMap)
+			{
+				var ru : RenderUnit3D = _renderUnitMap[key];
+				if (ru.type == renderUnitType)
+				{
+					//从表中移除
+					_renderUnitMap[key] = null;
+					delete _renderUnitMap[key];
+					if (_volumeRender == ru)
+					{
+						_volumeRender = null;
+					}
+					recycleRenderUnit(ru);
+				}
+				ru = null;
+			}
+		}
+
+		/**
+		 * 移除所有RenderUnit((此函数执行后,不会检查主体换装是否存在)
+		 */
+		public function removeAllRenderUnits() : void
+		{
+			//检查换装内
+			for (var key : String in _renderUnitMap)
+			{
+				var ru : RenderUnit3D = _renderUnitMap[key];
+				//从表中移除
+				_renderUnitMap[key] = null;
+				delete _renderUnitMap[key];
+				recycleRenderUnit(ru);
+				ru = null;
+			}
+			_volumeRender = null;
+		}
+
+		/**
+		 * 是否有指定ID的换装
+		 * @param id 换装ID
+		 */
+		public function hasIDRenderUnit(type : String, id : int, checkResReady : Boolean = false) : Boolean
+		{
+			var key : String = type + "_" + id;
+			var ru : RenderUnit3D = _renderUnitMap[key];
+			if (ru && ((!checkResReady) || ru.resReady))
+			{
+				return true;
+			}
+			return false;
+		}
+
+		/**
+		 * 是否有指定类型的换装
+		 * @param type 换装类型
+		 */
+		public function hasTypeRenderUnits(type : String, checkResReady : Boolean = false) : Boolean
+		{
+			for each (var ru : RenderUnit3D in _renderUnitMap)
+			{
+				if (ru.type == type && ((!checkResReady) || ru.resReady))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		/**
+		 * 是否有相同的（主要指ID和样式）换装
+		 * @param rpd 换装RPD
+		 * 注意：不检测回调
+		 */
+		public function hasSameRenderUnit(rpd : RenderParamData, checkResReady : Boolean = false) : Boolean
+		{
+			for each (var ru : RenderUnit3D in _renderUnitMap)
+			{
+				var apd : RenderParamData = ru.renderParamData;
+				if (apd && apd.equals(rpd) && ((!checkResReady) || ru.resReady))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		/**
+		 * 是否有某个换装
+		 * @param ru 换装RU
+		 * 注意：不检测回调
+		 */
+		public function hasRenderUnit(ru : RenderUnit3D, checkResReady : Boolean = false) : Boolean
+		{
+			var key : String = ru.type + "_" + ru.id;
+			var currRu : RenderUnit3D = _renderUnitMap[key];
+			if (currRu)
+			{
+				if (checkResReady)
+					return ru.resReady;
+				return true;
+			}
+			return false;
+		}
+
+		/**
+		 * 查找指定ID的RenderUnit
+		 * @param id 换装ID
+		 */
+		public function getRenderUnitByID(renderUnitType : String, id : int, checkResReady : Boolean = false) : RenderUnit3D
+		{
+			var key : String = renderUnitType + "_" + id;
+			var ru : RenderUnit3D = _renderUnitMap[key];
+			if (ru && ((!checkResReady) || ru.resReady))
+			{
+				return ru;
+			}
+			return null;
+		}
+
+		/**
+		 * 获取指定类型的RenderUnit数组
+		 * @param renderUnitType 换装类型
+		 */
+		public function getRenderUnitsByType(renderUnitType : String, checkResReady : Boolean = false) : Array
+		{
+			var arr : Array = [];
+			for each (var ru : RenderUnit3D in _renderUnitMap)
+			{
+				if (ru.type == renderUnitType && ((!checkResReady) || ru.resReady))
+				{
+					arr.push(ru);
+				}
+			}
+			return arr;
+		}
+
+		/**
+		 * 获取所有RenderUnit数组
+		 */
+		public function getAllRenderUnits(checkResReady : Boolean = false) : Array
+		{
+			var arr : Array = [];
+			for each (var ru : RenderUnit3D in _renderUnitMap)
+			{
+				if ((!checkResReady) || ru.resReady)
+				{
+					arr.push(ru);
+				}
+			}
+			return arr;
+		}
+
+		//运行相关
+		//-----------------------------------------------------------------------------------------------------------
+		/**
+		 * 对整个换装的每一项执行函数
+		 * @param func 第一个参数是参数sceneCharacter, 第二个参数是RenderUnit
+		 *
+		 */
+		public function forEachRenderUnit(func : Function, args : Array = null) : void
+		{
+			//检查换装内
+			for each (var ru : RenderUnit3D in _renderUnitMap)
+			{
+				var funcArgs : Array;
+				if (args)
+					funcArgs = args.concat(ru);
+				else
+					funcArgs = [ru];
+				func.apply(func, funcArgs);
+			}
+		}
+
+		/**
+		 * 运行逻辑
+		 * @parma frame 帧 为0则走渲染计时计算的帧，否则选择此参数指定的帧
+		 */
+		override final public function run(gapTm : uint) : void
+		{
+			super.run(gapTm);
+			//运行逻辑
+			for each (var ru : RenderUnit3D in _renderUnitMap)
+			{
+				if (ru.usable)
+				{
+					if (ru.visible)
+					{
+						//运行逻辑
+						ru.run(gapTm);
+					}
+				}
+				else
+				{
+					removeRenderUnit(ru);
+				}
+			}
+		}
+
+		/**
+		 * 是否在可视范围内
+		 * @param value
+		 */
+		override public function set isInViewDistance(value : Boolean) : void
+		{
+			if (_isInViewDistance != value)
+			{
+				super.isInViewDistance = value;
+				for each (var ru : RenderUnit3D in _renderUnitMap)
+				{
+					ru.isInViewDistance = value;
+				}
+			}
+		}
+
+		override final public function startRender() : void
+		{
+			super.startRender();
+			for each (var ru : RenderUnit3D in _renderUnitMap)
+			{
+				ru.startRender();
+			}
+		}
+
+		override final public function stopRender() : void
+		{
+			super.stopRender();
+			for each (var ru : RenderUnit3D in _renderUnitMap)
+			{
+				ru.stopRender();
+			}
+		}
+
+		override final public function set needInViewDist(value : Boolean) : void
+		{
+			if (_needInViewDist != value)
+			{
+				super.needInViewDist = value;
+				for each (var ru : RenderUnit3D in _renderUnitMap)
+				{
+					ru.needInViewDist = value;
+				}
+			}
+		}
+
+		override final public function set renderLimitable(value : Boolean) : void
+		{
+			if (_renderLimitable != value)
+			{
+				super.renderLimitable = value;
+				for each (var ru : RenderUnit3D in _renderUnitMap)
+				{
+					ru.renderLimitable = value;
+				}
+			}
+		}
+
+		public function set lightPicker(value : LightPickerBase) : void
+		{
+			if (_lightPicker != value)
+			{
+				_lightPicker = value;
+				for each (var ru : RenderUnit3D in _renderUnitMap)
+				{
+					ru.lightPicker = value;
+				}
+			}
+		}
+
+		public function set useLight(value : Boolean) : void
+		{
+			if (_useLight != value)
+			{
+				_useLight = value;
+				for each (var ru : RenderUnit3D in _renderUnitMap)
+				{
+					ru.useLight = value;
+				}
+			}
+		}
+
+		public function set shareMaterials(value : Boolean) : void
+		{
+			if (_shareMaterials != value)
+			{
+				_shareMaterials = value;
+				for each (var ru : RenderUnit3D in _renderUnitMap)
+				{
+					ru.shareMaterials = value;
+				}
+			}
+		}
+
+		override public function set mouseEnable(value : Boolean) : void
+		{
+			if (_mouseEnable != value)
+			{
+				_mouseEnable = value;
+				for each (var ru : RenderUnit3D in _renderUnitMap)
+				{
+					ru.mouseEnable = ru.renderParamData.mouseEnable && _mouseEnable;
+				}
+			}
+		}
+
+		/**
+		 * 获取换装RenderUnit数量
+		 */
+		/*public function get length() : int
+		{
+			return _renderUnitList.length;
+		}*/
+
+		public function getChildScenePositionByName(renderUnitType : String, id : int, name : String) : Vector3D
+		{
+			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
+			if (!ru)
+				return null;
+			var result : Matrix3D = ru.getChildSceneTransformByName(name);
+			if (result)
+			{
+				return result.position;
+			}
+			return null;
+		}
+
+		public function getBoneScenePositionByName(renderUnitType : String, id : int, name : String) : Vector3D
+		{
+			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
+			if (!ru)
+				return null;
+			var result : Matrix3D = ru.getBoneSceneTransformByName(name);
+			if (result)
+			{
+				return result.position;
+			}
+			return null;
+		}
+
+		public function getChildScreenPositionByName(renderUnitType : String, id : int, name : String) : Point
+		{
+			var view : View3D = _graphicDis.scene.view;
+			if (view)
+			{
+				var pos3D : Vector3D = getChildScenePositionByName(renderUnitType, id, name);
+				if (!pos3D)
+					return null;
+				var pos2D : Vector3D = view.project(pos3D, Matrix3DUtils.CALCULATION_VECTOR3D);
+				return new Point(pos2D.x, pos2D.z);
+			}
+			return null;
+		}
+
+		public function getBoneScreenPositionByName(renderUnitType : String, id : int, name : String) : Point
+		{
+			var view : View3D = _graphicDis.scene.view;
+			if (view)
+			{
+				var pos3D : Vector3D = getBoneScenePositionByName(renderUnitType, id, name);
+				if (!pos3D)
+					return null;
+				var pos2D : Vector3D = view.project(pos3D, Matrix3DUtils.CALCULATION_VECTOR3D);
+				return new Point(pos2D.x, pos2D.z);
+			}
+			return null;
+		}
+
+		public function getChildRelativePositionByName(renderUnitType : String, id : int, name : String) : Vector3D
+		{
+			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
+			if (!ru)
+				return null;
+			var result : Matrix3D = ru.getChildSceneTransformByName(name);
+			if (result)
+			{
+				result.append(transform);
+				return result.position;
+			}
+			return null;
+		}
+
+		public function getBoneRelativePositionByName(renderUnitType : String, id : int, name : String) : Vector3D
+		{
+			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
+			if (!ru)
+				return null;
+			var result : Matrix3D = ru.getBoneSceneTransformByName(name);
+			if (result)
+			{
+				result.append(transform);
+				return result.position;
+			}
+			return null;
+		}
+
+		public function setRenderUseVolume(renderUnitType : String, id : int, useVolume : Boolean) : void
+		{
+			if (_volumeRender)
+			{
+				_volumeRender.useVolume = false;
+				_volumeRender = null;
+				volumeBounds = null;
+			}
+			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
+			if (ru)
+			{
+				_volumeRender = ru;
+				_volumeRender.useVolume = useVolume;
+				volumeBounds = _volumeRender.volumeBounds;
+			}
+		}
+
+		public function get volumeRender() : RenderUnit3D
+		{
+			return _volumeRender;
+		}
+
+		public function setRenderAddedCallBack(renderUnitType : String, id : int, value : Function, ... args) : void
+		{
+			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
+			if (ru)
+			{
+				ru.setAddedCallBack.apply(null, [value].concat(args));
+			}
+		}
+
+		public function removeRenderAddedCallBack(renderUnitType : String, id : int, value : Function) : void
+		{
+			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
+			if (ru)
+			{
+				ru.removeAddedCallBack(value);
+			}
+		}
+
+		public function buildSyncInfo(renderUnitType : String, id : int) : void
+		{
+			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
+			if (!ru)
+				return;
+			var info : RenderUnitSyncInfo = ru.buildSyncInfo();
+			if (info)
+				_syncInfos[renderUnitType + "_" + id] = info;
+		}
+
+		public function applySyncInfo(renderUnitType : String, id : int) : void
+		{
+			var key : String = renderUnitType + "_" + id;
+			var info : RenderUnitSyncInfo = _syncInfos[key];
+			if (info)
+			{
+				_syncInfos[key] = null;
+				delete _syncInfos[key];
+				var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
+				if (!ru)
+					return;
+				ru.applySyncInfo(info);
+				info.destroy();
+			}
+		}
+		
+		override public function set alpha(value:Number):void
+		{
+			super.alpha = value;
+			for each (var ru : RenderUnit3D in _renderUnitMap)
+			{
+				ru.alpha = value;
+			}
+		}
+		
+		
+		override public function reSet($parameters : Array) : void
+		{
+			super.reSet(null);
+			//
+			type = $parameters[0];
+			id = $parameters[1];
+			if (!_graphicDis)
+			{
+				_graphicDis = PoolContainer3D.create();
+			}
+			_shareMaterials = true;
+			_lightPicker = null;
+			_useLight = false;
+			_volumeRender = null;
+		}
+
+		/**销毁显示对象 */
+		override public function destroy() : void
+		{
+			recycle(this);
+		}
+
+		override public function dispose() : void
+		{
+			//标识正在释放中
+			_disposing = true;
+			_lightPicker = null;
+			_useLight = false;
+			_shareMaterials = false;
+			var key : String;
+			if (_syncInfos)
+			{
+				for (key in _syncInfos)
+				{
+					var info : RenderUnitSyncInfo = _syncInfos[key];
+					if (info)
+					{
+						_syncInfos[key] = null;
+						delete _syncInfos[key];
+						info.destroy();
+					}
+				}
+			}
+			_volumeRender = null;
+
+			//回收所有换装
+			removeAllRenderUnits();
+
+			if (_mouseUpCallBackList)
+			{
+				_mouseUpCallBackList.length = 0;
+			}
+			if (_mouseDownCallBackList)
+			{
+				_mouseDownCallBackList.length = 0;
+			}
+			if (_mouseOverCallBackList)
+			{
+				_mouseOverCallBackList.length = 0;
+			}
+			if (_mouseOutCallBackList)
+			{
+				_mouseOutCallBackList.length = 0;
+			}
+			if (_mouseRightUpCallBackList)
+			{
+				_mouseRightUpCallBackList.length = 0;
+			}
+			if (_mouseRightDownCallBackList)
+			{
+				_mouseRightDownCallBackList.length = 0;
+			}
+			super.dispose();
+		}
+	}
+}

@@ -1,0 +1,155 @@
+
+package com.rpgGame.coreData.cfg
+{
+	import com.gameClient.log.GameLog;
+	
+	import org.client.mainCore.ds.HashMap;
+	
+	/**
+	 * 常用公用常量
+	 * 
+	 * 
+	 */
+	public class StaticValue
+	{
+		
+		//-------------------------请使用以下的色值，以下都是UI正式的色，以下没有的请让UI补
+		/**米黄文字 1 (默认)**/		
+		public static const COLOR_CODE_1:uint = 0xF9F0CC;
+		/**米黄色文字 2 **/		
+		public static const COLOR_CODE_2:uint = 0xe9c099;
+		/**米黄色 3**/ 
+		public static const COLOR_CODE_3:uint = 0xd4c996;
+		/**黄色 4**/		
+		public static const COLOR_CODE_4:uint = 0xffe258;
+		/**黄色 5**/		
+		public static const COLOR_CODE_5:uint = 0xf4bd63;
+		/**暗黄色 6**/		
+		public static const COLOR_CODE_6:uint = 0x9c8049;
+		/**暗黄色 7**/		
+		public static const COLOR_CODE_7:uint = 0xbd9736;
+		/**暗黄色文字标题 8**/		
+		public static const COLOR_CODE_8:uint = 0xd69e66;
+		/**暗黄色文字9**/
+		public static const COLOR_CODE_9:uint = 0x98692d;
+		/**橘色文字 10**/
+		public static const COLOR_CODE_10:uint = 0xf17733;
+		/**橘红色文字 11**/
+		public static const COLOR_CODE_11:uint = 0xff4500;
+		/**红色文字 12**/
+		public static const COLOR_CODE_12 : uint = 0xff0000;
+		/**红色文字 13**/		
+		public static const COLOR_CODE_13:uint = 0xC21515;
+		/**草绿色 14*/		
+		public static const COLOR_CODE_14:uint = 0x808101;
+		/**绿色 15*/		
+		public static const COLOR_CODE_15:uint = 0x4efd6f;
+		/**绿色 16*/		
+		public static const COLOR_CODE_16:uint = 0x239D02;
+		/**天蓝色 17*/		
+		public static const COLOR_CODE_17:uint = 0x00e3fe;
+		/**天蓝色 18*/		
+		public static const COLOR_CODE_18:uint = 0x9fdced;
+		/**蓝色 19*/		
+		public static const COLOR_CODE_19:uint = 0x0066ff;
+		/**粉色文字 20*/		
+		public static const COLOR_CODE_20:uint = 0xcc99bb;
+		/**粉色文字 21*/		
+		public static const COLOR_CODE_21:uint = 0xe530ec;
+		/**粉色文字 22*/		
+		public static const COLOR_CODE_22:uint = 0xea63a6;
+		/**灰色文字 23*/	
+		public static const COLOR_CODE_23:uint = 0x4A4744; 
+		/**灰色文字 24*/	
+		public static const COLOR_CODE_24:uint = 0x453a2f; 
+		/**橙色文字 25*/		
+		public static const COLOR_CODE_25:uint =0xf09e01;
+		/**棕色文字 26*/		
+		public static const COLOR_CODE_26:uint = 0x6e3117;
+		/**灰色文字 27 */		
+		public static const COLOR_CODE_27:uint = 0x76726d;
+		//////////////////////////////品质色///////////////////////////////////////////
+		/**品质白*/		
+		public static const Q_WHITE:uint = COLOR_CODE_1;
+		/**品质绿*/		
+		public static const Q_GREEN:uint = COLOR_CODE_16;
+		/**品质蓝色*/		
+		public static const Q_BLUE:uint = COLOR_CODE_19;
+		/**品质紫色*/		
+		public static const Q_PURPLE:uint = COLOR_CODE_21;
+		/**品质橙色  */		
+		public static const Q_YELLOW:uint = COLOR_CODE_25;
+		
+		//////////////////////////////聊天文字颜色///////////////////////////////////////////
+		/**系统*/
+//		public static const SYSTEM_CHAT_COLOR:uint = 0xB0E0E6;
+		/**系统*/
+		public static const SYSTEM_CHAT_COLOR:uint = 0xf46868;
+		/**私聊*/
+		public static const CHAT_SI_LIAO_COLOR:uint = 0x7473E7;
+		/**普通*/
+		public static const CHAT_PU_TONG_COLOR:uint = 0xF9F0CC;
+		/**队伍*/
+		public static const CHAT_DUI_WU_COLOR:uint = 0x00E3FE;
+		/**帮派*/
+		public static const CHAT_BANG_PAI_COLOR:uint = 0xF6D621;
+		/**家族*/
+		public static const CHAT_JIA_ZU_COLOR:uint = 0xF6D621;
+		/**国家*/
+		public static const CHAT_GUO_JIA_COLOR:uint = 0x239D02;
+		/**盟国*/
+		public static const CHAT_MENG_GUO_COLOR:uint = 0xEA63A6;
+		/**世界*/
+		public static const CHAT_SHI_JIE_COLOR:uint = 0xE74502;
+		/**跨服*/
+		public static const CHAT_KUA_FU_COLOR:uint = 0x4EFD6F;
+		/**喇叭*/
+		public static const CHAT_LA_BA_COLOR:uint = 0xD60280;	
+		/**系统*/
+		public static const CHAT_XI_TONG_COLOR:uint = 0xD60280;
+		
+		
+		//////////////////////////////PK模式文字颜色///////////////////////////////////////////
+		/** 和平模式 **/
+		public static const PEACE:uint = 0xDFC8AF; 
+		/** 国家模式 **/
+		public static const COUNTRY:uint = 0x239D02; 
+		/** 盟国模式 **/
+		public static const ALLIANCE:uint = 0xEA63A6; 
+		/** 全体模式 **/
+		public static const ALL:uint = 0xC21515;
+		/** 组队模式 **/
+		public static const TEAM:uint = 0x00E3FE;
+		/** 帮派模式 **/
+		public static const GUILD:uint = 0xF6D621;	
+		/** 家族模式 **/
+		public static const FAMILY:uint = 0xFFFFFF;
+		/** 善恶模式 **/
+		public static const KIND_OR_EVIL:uint = 0xFB7C36; 
+		/** 跨服模式 **/
+		public static const DIFFERENT_SEVER:uint = 0x4EFD6F;
+		
+		/**纯白色*/		
+		public static const WHITE_PURE_COLOR:uint = 0xFFFFFF;
+		/**
+		 * 字符串颜色 转 16进制颜色
+		 */	
+		public static function tranStrTo16($strColor:String):uint
+		{
+			return parseInt($strColor.replace("#","0x"));
+		}
+		
+		/**
+		 * 16进制颜色 转 字符串颜色
+		 */	
+		public static function tran16ToStr($16Color:uint):String
+		{
+			return "#"+($16Color).toString(16);
+		}
+		
+		public function StaticValue()
+		{
+			GameLog.throwError(new Error("无法初始化tools类"));
+		}
+	}
+}

@@ -1,0 +1,49 @@
+package app.message {
+	public final class StatType {
+		public static const LI_LIANG:int = 0;
+		public static const MIN_JIE:int = 1;
+		public static const ZHI_LI:int = 2;
+		public static const JING_SHENG:int = 3;
+		public static const TI_ZHI:int = 4;
+		public static const MAX_LIFE:int = 5;
+		public static const MAX_MANA:int = 6;
+		public static const PHYSICAL_DEFENCE:int = 7;
+		public static const MAGICAL_DEFENCE:int = 8;
+		public static const PHYSICAL_ATTACK:int = 9;
+		public static const PHYSICAL_ATTACK_LOWER:int = 10;
+		public static const PHYSICAL_ATTACK_UPPER:int = 11;
+		public static const MAGICAL_ATTACK:int = 12;
+		public static const MAGICAL_ATTACK_LOWER:int = 13;
+		public static const MAGICAL_ATTACK_UPPER:int = 14;
+		public static const GLOBAL_ATTACK:int = 15;
+		public static const GLOBAL_DEFENCE:int = 16;
+		public static const GLOBAL_LIFE:int = 17;
+		public static const MAX_HURT:int = 18;
+		public static const HIT:int = 19;
+		public static const DODGE:int = 20;
+		public static const CRIT:int = 21;
+		public static const AGAINST_CRIT:int = 22;
+		public static const CRIT_ADDITIONAL:int = 23;
+		public static const THUMP:int = 24;
+		public static const AGAINST_THUMP:int = 25;
+		public static const THUMP_ADDITIONAL:int = 26;
+		public static const REBOUND:int = 27;
+		public static const AGAINST_REBOUND:int = 28;
+		public static const FENG_ATTACK:int = 29;
+		public static const FENG_DEFENCE:int = 30;
+		public static const HUO_ATTACK:int = 31;
+		public static const HUO_DEFENCE:int = 32;
+		public static const SHUI_ATTACK:int = 33;
+		public static const SHUI_DEFENCE:int = 34;
+		public static const TU_ATTACK:int = 35;
+		public static const TU_DEFENCE:int = 36;
+		public static const ELEMENT_CRIT:int = 37;
+		public static const DAMAGE_INCRE:int = 38;
+		public static const DAMAGE_INCRE_PER:int = 39;
+		public static const DAMAGE_DECRE:int = 40;
+		public static const DAMAGE_DECRE_PER:int = 41;
+		public static const MOVE_SPEED:int = 42;
+		public static const UP_MOUNT_SPEED:int = 43;
+		public static const SHOOT_RANGE:int = 44;
+	}
+}
