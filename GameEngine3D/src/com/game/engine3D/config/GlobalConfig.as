@@ -20,27 +20,12 @@ package com.game.engine3D.config
 
 		public static const DEBUG_HEAD : String = "[GameEngine3D Debug]";
 
+		public static var transformPlanarRotation:Boolean = true;
+		
 		private static var _use25DMap : Boolean = false;
 		private static var _use2DMap : Boolean = false;
 		private static var _map_2D_scale_z_dir : Number = 1;
-		private static var _MAP_2D_CAMERA_ANGLE : int = 30; //2d场景中的摄像头角度
-		public static const ANGLE_360_2PI : Number = 180 / Math.PI;
-		public static const ANGLE_2PI_360 : Number = Math.PI / 180;
-
-		public static function get MAP_2D_SCALE_Z_DIR() : Number
-		{
-			return _map_2D_scale_z_dir;
-		}
-
-		public static function transformCoord_2d_3d(y : Number) : Number
-		{
-			return int(y / _map_2D_scale_z_dir);
-		}
-
-		public static function transformCoord_3d_2d(z : Number) : Number
-		{
-			return z * _map_2D_scale_z_dir;
-		}
+		private static var _map_2D_camera_angle : int = 30; //2d场景中的摄像头角度
 
 		public function GlobalConfig()
 		{
@@ -81,14 +66,18 @@ package com.game.engine3D.config
 
 		public static function get MAP_2D_CAMERA_ANGLE() : int
 		{
-			return _MAP_2D_CAMERA_ANGLE;
+			return _map_2D_camera_angle;
 		}
 
 		public static function set MAP_2D_CAMERA_ANGLE(value : int) : void
 		{
-			_MAP_2D_CAMERA_ANGLE = value;
-			_map_2D_scale_z_dir = _use2DMap ? Math.sin(_MAP_2D_CAMERA_ANGLE * Math.PI / 180) : 1;
+			_map_2D_camera_angle = value;
+			_map_2D_scale_z_dir = _use2DMap ? Math.sin(_map_2D_camera_angle * Math.PI / 180) : 1;
 		}
-
+		
+		public static function transformCoord_2d_3d(y : Number) : Number
+		{
+			return int(y / _map_2D_scale_z_dir);
+		}
 	}
 }

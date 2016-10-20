@@ -3,6 +3,8 @@ package com.game.engine3D.scene.display
 	import com.game.engine3D.scene.render.RenderSet3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.utils.CallBackUtil;
+	import com.game.engine3D.vo.CallBackData;
 	import com.game.engine3D.vo.Render3DTextData;
 	import com.game.mainCore.libCore.pool.Pool;
 
@@ -56,10 +58,37 @@ package com.game.engine3D.scene.display
 		private var _align : String;
 		private var _styleByName : Dictionary;
 		private var _textWidth : int;
+		private var _textHeight : int;
+		private var _addedCallBackList : Vector.<CallBackData>;
+		private var _isLoaded : Boolean;
 
 		public function Render3DText(type : String, id : Number)
 		{
 			super(type, id);
+		}
+
+		/**
+		 * @private
+		 * 换装添加回调
+		 * 传回参数：(this)
+		 */
+		public function setAddedCallBack(value : Function, ... args) : void
+		{
+			if (!_addedCallBackList)
+			{
+				_addedCallBackList = new Vector.<CallBackData>;
+			}
+			CallBackUtil.addCallBackData(_addedCallBackList, value, args);
+		}
+
+		/**
+		 * @private
+		 * 移除换装添加回调
+		 * 传回参数：(this)
+		 */
+		public function removeAddedCallBack(value : Function) : void
+		{
+			CallBackUtil.removeCallBackData(_addedCallBackList, value);
 		}
 
 		override public function removeAllRenderUnits() : void
@@ -73,8 +102,6 @@ package com.game.engine3D.scene.display
 
 		public function setStyle(styleName : String, style : String) : void
 		{
-			if (_styleByName[styleName] == style)
-				return;
 			_styleByName[styleName] = style;
 			_graphicDis.visible = false;
 			var len : int = _textDatas.length;
@@ -90,6 +117,7 @@ package com.game.engine3D.scene.display
 					ru.setRenderParamData(rud);
 				}
 			}
+			tryShowText();
 		}
 
 		public function get text() : String
@@ -99,8 +127,6 @@ package com.game.engine3D.scene.display
 
 		public function set text(value : String) : void
 		{
-			if (_text == value)
-				return;
 			_text = value;
 			var chars : Array = null;
 			if (_text)
@@ -128,7 +154,7 @@ package com.game.engine3D.scene.display
 
 		public function setTextDatas(datas : Vector.<Render3DTextData>) : void
 		{
-			_textDatas = datas;
+			_textDatas = datas.slice();
 			_graphicDis.visible = false;
 			removeAllRenderUnits();
 			var len : int = _textDatas.length;
@@ -142,6 +168,11 @@ package com.game.engine3D.scene.display
 				ru.setAddedCallBack(doAddUnit, data);
 				_textRenderUnits.push(ru);
 			}
+		}
+
+		public function get isLoaded() : Boolean
+		{
+			return _isLoaded;
 		}
 
 		private function doAddUnit(data : Render3DTextData, ru : RenderUnit3D) : void
@@ -160,7 +191,23 @@ package com.game.engine3D.scene.display
 					break;
 				}
 			}
-			_graphicDis.visible = allResReady;
+			if (allResReady)
+			{
+				if (!_isLoaded)
+				{
+					_isLoaded = true;
+					//执行添加回调
+					if (_addedCallBackList)
+					{
+						CallBackUtil.exceteCallBackData(this, _addedCallBackList);
+					}
+				}
+			}
+			else
+			{
+				_isLoaded = false;
+			}
+			_graphicDis.visible = _isLoaded;
 			layoutText();
 		}
 
@@ -170,6 +217,7 @@ package com.game.engine3D.scene.display
 			{
 				return;
 			}
+			_textHeight = 0;
 			var lastX : int = 0;
 			var len : int = _textDatas.length;
 			var i : int;
@@ -188,6 +236,20 @@ package com.game.engine3D.scene.display
 				else
 				{
 					lastX += data.textWidth + (i == len - 1 ? 0 : data.spacing);
+				}
+				if (data.textHeight == 0)
+				{
+					if (ru.height > _textHeight)
+					{
+						_textHeight = ru.height;
+					}
+				}
+				else
+				{
+					if (data.textHeight > _textHeight)
+					{
+						_textHeight = data.textHeight;
+					}
 				}
 			}
 			_textWidth = lastX;
@@ -221,6 +283,11 @@ package com.game.engine3D.scene.display
 			return _textWidth;
 		}
 
+		public function get textHeight() : int
+		{
+			return _textHeight;
+		}
+
 		/**销毁显示对象 */
 		override public function destroy() : void
 		{
@@ -235,6 +302,8 @@ package com.game.engine3D.scene.display
 			_text = null;
 			_align = null;
 			_textWidth = 0;
+			_textHeight = 0;
+			_isLoaded = false;
 			_styleByName = new Dictionary(true);
 		}
 
@@ -245,7 +314,9 @@ package com.game.engine3D.scene.display
 			_text = null;
 			_align = null;
 			_textWidth = 0;
+			_textHeight = 0;
 			_styleByName = null;
+			_isLoaded = false;
 			if (_textDatas)
 			{
 				_textDatas.length = 0;
@@ -255,6 +326,10 @@ package com.game.engine3D.scene.display
 			{
 				_textRenderUnits.length = 0;
 				_textRenderUnits = null;
+			}
+			if (_addedCallBackList)
+			{
+				_addedCallBackList.length = 0;
 			}
 			super.dispose();
 		}

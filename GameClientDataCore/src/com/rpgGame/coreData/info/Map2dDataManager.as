@@ -21,6 +21,7 @@ package com.rpgGame.coreData.info
 	import flash.text.TextFormatAlign;
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
+	import flash.utils.Endian;
 	
 	import away3d.events.Event;
 	
@@ -415,30 +416,34 @@ package com.rpgGame.coreData.info
 			var byteArr:ByteArray = loader.data as ByteArray;
 			var mapDataUrl:String = ld.url;
 			var mapID:int = ld.userData.mapID;
+            byteArr.endian = Endian.LITTLE_ENDIAN;
+            
+            parseMapConfigData(mapDataUrl, mapID, byteArr);
+            parseOver(mapDataUrl);
 			
-			byteArr.position = byteArr.length - 4;
-			var len:int = byteArr.readInt();
-			var dataLen:int = byteArr.length - 4 - len;
-			var areaBytes:ByteArray = new ByteArray();
-			
-			byteArr.position = dataLen;
-			byteArr.readBytes(areaBytes, 0, len);
-			areaBytes.uncompress();
-			
-			var dataBytes:ByteArray = new ByteArray();
-			byteArr.position = 0;
-			byteArr.readBytes(dataBytes, 0, dataLen);
-			
-			parseMapConfigData(mapDataUrl, mapID, dataBytes);
-			parseMapAreaConfigLoaded(mapDataUrl, mapID, areaBytes);
+//			byteArr.position = byteArr.length - 4;
+//			var len:int = byteArr.readInt();
+//			var dataLen:int = byteArr.length - 4 - len;
+//			var areaBytes:ByteArray = new ByteArray();
+//			
+//			byteArr.position = dataLen;
+//			byteArr.readBytes(areaBytes, 0, len);
+//			areaBytes.uncompress();
+//			
+//			var dataBytes:ByteArray = new ByteArray();
+//			byteArr.position = 0;
+//			byteArr.readBytes(dataBytes, 0, dataLen);
+//			
+//			parseMapConfigData(mapDataUrl, mapID, dataBytes);
+//			parseMapAreaConfigLoaded(mapDataUrl, mapID, areaBytes);
 		}
 		
 		private static function parseMapConfigData(url:String, mapID:int,byteArr:ByteArray):void
 		{
-			byteArr.uncompress();
+			//byteArr.uncompress();
 			
-			var md:MapData = new MapData();
-			md.mergeFrom(byteArr,mapID);//解析地图数据
+			var md:MapData = new MapData(mapID);
+			md.mergeFrom(byteArr);//解析地图数据
 			
 			var mapDataInfo:MapDataInfo = new MapDataInfo();
 			_mapDataInfoMap.add(url,mapDataInfo);
@@ -475,17 +480,23 @@ package com.rpgGame.coreData.info
 			
 			mapConfig.smallWidth = mapAreaResInfo.mapWidth;
 			mapConfig.smallHeight = mapAreaResInfo.mapHeight;
-			
-			var list:Vector.<Function> = _configCmpFunMap.getValue(url);
-			if(list)
-			{
-				for each(var fun:Function in list)
-				{
-					fun(mapConfig,mapDataInfo);
-				}
-			}
-			_configCmpFunMap.remove(url);
 		}
+        
+        //======================================================================
+        // 解析地图数据结束
+        //======================================================================
+        private static function parseOver(url : String) : void {
+            var funs : Vector.<Function> = _configCmpFunMap.getValue(url);
+            if (null == funs) {
+                return;
+            }
+            var mapConfig:MapConfig = _mapConfigMap.getValue(url);
+            var mapDataInfo:MapDataInfo = _mapDataInfoMap.getValue(url);
+            for (var i : int = 0, len : int = funs.length; i < len; ++i) {
+                funs[i](mapConfig, mapDataInfo);
+            }
+            _configCmpFunMap.remove(url);
+        }
 		
 		private static var _numBlocksX:int;//宽
 		private static var _numBlocksY:int;//高

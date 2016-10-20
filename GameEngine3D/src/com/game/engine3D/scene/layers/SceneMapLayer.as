@@ -9,12 +9,12 @@ package com.game.engine3D.scene.layers
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.vo.MapPointSet;
 	import com.game.engine3D.vo.SceneMapData;
-
+	
 	import flash.geom.Rectangle;
 	import flash.geom.Vector3D;
 	import flash.net.URLRequest;
 	import flash.utils.Dictionary;
-
+	
 	import away3d.Away3D;
 	import away3d.animators.IAnimator;
 	import away3d.animators.IAnimatorOwner;
@@ -52,10 +52,11 @@ package com.game.engine3D.scene.layers
 	import away3d.pathFinding.DistrictWithPath;
 	import away3d.pathFinding.HeightMapHelper;
 	import away3d.pathFinding.PointsSet;
+	import away3d.pathFinding.PointsSetType;
 	import away3d.plant.PlantGroup;
 	import away3d.primitives.SkyBox;
 	import away3d.weather.Weather;
-
+	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
 
@@ -307,7 +308,7 @@ package com.game.engine3D.scene.layers
 						{
 							addMapObject(obj as ObjectContainer3D);
 						}
-						if (_view3DAsset && _view3DAsset.cameraMode2D)
+						if (_view3DAsset && _view3DAsset.cameraMode2D && GlobalConfig.transformPlanarRotation)
 							(obj as ObjectContainer3D).z = PlanarContainer3D.transformPlanarRotation((obj as ObjectContainer3D).y);
 						break;
 					case AssetType.SPARTICLE_MESH:
@@ -386,14 +387,11 @@ package com.game.engine3D.scene.layers
 //								Away3D.OCCLUSION_MIDDLE = view3DAsset.cameraOcclusionMiddle;
 //							}
 						}
-
+						Away3D.LOD_SCOPES = view3DAsset.lodScopes;
 						if (view3DAsset.cameraMode2D)
 						{
 							PlanarContainer3D.planarRotationX = -view3DAsset.cameraMode2DAngle;
 						}
-
-						Away3D.LOD_SCOPES = view3DAsset.lodScopes;
-
 						_view3DAsset = view3DAsset;
 						break;
 					case AssetType.FILTER_3D:
@@ -423,7 +421,7 @@ package com.game.engine3D.scene.layers
 				delete _obstaclePointsSetMap[name];
 				if (pointsSet)
 					_district.removeInternalPointsSet(pointsSet);
-				pointsSet = new PointsSet(0, _district);
+				pointsSet = new PointsSet(PointsSetType.BLOCK, _district);
 				pointsSet.points = points;
 				_district.addInternalPointsSet(pointsSet);
 				_obstaclePointsSetMap[name] = pointsSet;
@@ -461,7 +459,7 @@ package com.game.engine3D.scene.layers
 			for (var name : String in _obstaclePointsMap)
 			{
 				var points : Vector.<Vector3D> = _obstaclePointsMap[name];
-				var pointsSet : PointsSet = new PointsSet(0, _district);
+				var pointsSet : PointsSet = new PointsSet(PointsSetType.BLOCK, _district);
 				pointsSet.points = points;
 				_district.addInternalPointsSet(pointsSet);
 				_obstaclePointsSetMap[name] = pointsSet;
@@ -490,10 +488,10 @@ package com.game.engine3D.scene.layers
 					if (_mousePickerMovable)
 						o.addEventListener(MouseEvent3D.MOUSE_MOVE, handleMouseMoveEvent3D);
 				}
-			}
-			else if (_view3DAsset && _view3DAsset.cameraMode2D)
-			{
-				m.z = PlanarContainer3D.transformPlanarRotation(m.y);
+				else if (_view3DAsset && _view3DAsset.cameraMode2D && GlobalConfig.transformPlanarRotation)
+				{
+					m.z = PlanarContainer3D.transformPlanarRotation(m.y);
+				}
 			}
 		}
 

@@ -1,5 +1,7 @@
 package com.game.engine3D.scene.render.vo
 {
+	import com.game.engine3D.config.GlobalConfig;
+	import com.game.engine3D.core.poolObject.PoolContainer3D;
 	import com.game.engine3D.core.poolObject.PoolEntityContainer3D;
 	import com.game.engine3D.events.SceneEvent;
 	import com.game.engine3D.events.SceneEventAction3D;
@@ -7,16 +9,16 @@ package com.game.engine3D.scene.render.vo
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.game.engine3D.vo.BaseObjSyncInfo;
-	
+
 	import flash.geom.Matrix3D;
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
-	
+
 	import away3d.containers.ObjectContainer3D;
 	import away3d.containers.View3D;
 	import away3d.core.math.Matrix3DUtils;
 	import away3d.events.MouseEvent3D;
-	
+
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -28,7 +30,7 @@ package com.game.engine3D.scene.render.vo
 	 */
 	public class BaseEntity extends BaseObj3D
 	{
-		private var _renderSet : RenderSet3D;
+		protected var _renderSet : RenderSet3D;
 		private var _baseObjList : Vector.<BaseObjChild>;
 		protected var _camouflageEntity : BaseEntity;
 		private var _imposters : Vector.<BaseEntity>;
@@ -41,8 +43,8 @@ package com.game.engine3D.scene.render.vo
 			_baseObjList = new Vector.<BaseObjChild>();
 		}
 
-		
-		override public function set alpha(value:Number):void
+
+		override public function set alpha(value : Number) : void
 		{
 			super.alpha = value;
 			_renderSet.alpha = value;
@@ -66,17 +68,9 @@ package com.game.engine3D.scene.render.vo
 
 		public function addBaseObj(baseObj : BaseObj3D) : void
 		{
-			var childData : BaseObjChild;
-			var index : int = getChildDataIndexByObj(baseObj);
-			if (index < 0)
-			{
-				childData = new BaseObjChild(null, baseObj, null);
-				addChildDataToList(childData);
-			}
-			else
-			{
-				childData = _baseObjList[index];
-			}
+			removeBaseObjByID(baseObj.type, baseObj.id);
+			var childData : BaseObjChild = new BaseObjChild(null, baseObj, null);
+			addChildDataToList(childData);
 			//
 			doWaitAddChild(childData);
 			setBaseObjState(baseObj);
@@ -91,17 +85,9 @@ package com.game.engine3D.scene.render.vo
 			var ru : RenderUnit3D = _renderSet.getRenderUnitByID(renderUnitType, id);
 			if (ru)
 			{
-				var childData : BaseObjChild;
-				var index : int = getChildDataIndexByObj(baseObj);
-				if (index < 0)
-				{
-					childData = new BaseObjChild(ru, baseObj, childName);
-					addChildDataToList(childData);
-				}
-				else
-				{
-					childData = _baseObjList[index];
-				}
+				removeBaseObjByID(baseObj.type, baseObj.id);
+				var childData : BaseObjChild = new BaseObjChild(ru, baseObj, childName);
+				addChildDataToList(childData);
 				if (ru.resReady)
 				{
 					doWaitAddChild(childData);
@@ -145,14 +131,14 @@ package com.game.engine3D.scene.render.vo
 			childData.renderUnit.setAddedCallBack(doUnitChildAdded, childData);
 		}
 
-		private function getChildDataIndexByObj(baseObj : BaseObj3D) : int
+		private function getChildDataIndex(type : String, id : int) : int
 		{
 			var childData : BaseObjChild;
 			var len : int = _baseObjList.length;
 			for (var i : int = len - 1; i >= 0; i--)
 			{
 				childData = _baseObjList[i];
-				if (childData.baseObj == baseObj)
+				if (childData.baseObj.type == type && childData.baseObj.id == id)
 				{
 					return i;
 				}
@@ -201,7 +187,7 @@ package com.game.engine3D.scene.render.vo
 		public function removeBaseObj(baseObj : BaseObj3D) : void
 		{
 			removeWaitAddObj(baseObj);
-			var index : int = getChildDataIndexByObj(baseObj);
+			var index : int = getChildDataIndex(baseObj.type, baseObj.id);
 			var childData : BaseObjChild = index > -1 ? _baseObjList[index] : null;
 			if (childData)
 			{
@@ -216,31 +202,46 @@ package com.game.engine3D.scene.render.vo
 			}
 		}
 
-		public function removeBaseObjByID(id : Number, type : String) : void
+		public function removeBaseObjByID(type : String, id : Number) : void
 		{
 			var len : int = _baseObjList.length;
 			while (len-- > 0)
 			{
 				var childData : BaseObjChild = _baseObjList[len];
-				if (childData.baseObj.id == id && childData.baseObj.type == type)
+				if (childData.baseObj.type == type && childData.baseObj.id == id)
 				{
 					removeBaseObj(childData.baseObj);
 				}
 			}
 		}
 
-		public function getBaseObjByID(id : Number, type : String) : BaseObj3D
+		public function getBaseObjByID(type : String, id : Number) : BaseObj3D
 		{
 			var len : int = _baseObjList.length;
 			while (len-- > 0)
 			{
 				var childData : BaseObjChild = _baseObjList[len];
-				if (childData.baseObj.id == id && childData.baseObj.type == type)
+				if (childData.baseObj.type == type && childData.baseObj.id == id)
 				{
 					return childData.baseObj;
 				}
 			}
 			return null;
+		}
+
+		public function getBaseObjsByType(type : String) : Array
+		{
+			var objs : Array = [];
+			var len : int = _baseObjList.length;
+			while (len-- > 0)
+			{
+				var childData : BaseObjChild = _baseObjList[len];
+				if (childData.baseObj.type == type)
+				{
+					objs.push(childData.baseObj);
+				}
+			}
+			return objs;
 		}
 
 		/**
@@ -264,7 +265,10 @@ package com.game.engine3D.scene.render.vo
 
 			if (!_graphicDis)
 			{
-				_graphicDis = PoolEntityContainer3D.create();
+				if (GlobalConfig.use25DMap)
+					_graphicDis = PoolEntityContainer3D.create();
+				else
+					_graphicDis = PoolContainer3D.create();
 			}
 			_renderSet.parent = _graphicDis;
 			_renderSet.mouseEnable = _mouseEnable;
