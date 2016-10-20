@@ -4,6 +4,7 @@ package
 	{
 		public function Test()
 		{
+			trace("aaa");
 		}
 	}
 }
