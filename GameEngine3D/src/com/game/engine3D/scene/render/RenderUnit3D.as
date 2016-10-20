@@ -1847,7 +1847,6 @@ package com.game.engine3D.scene.render
 					if (_addedCallBackList)
 					{
 						CallBackUtil.exceteCallBackData(this, _addedCallBackList);
-						_addedCallBackList.length = 0;
 					}
 				}
 			}
