@@ -1,11 +1,11 @@
 package com.game.engine3D.scene.render.vo
 {
+	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.loader.GlobalTexture;
 	import com.game.engine3D.loader.GlobalTextureGroup;
 	import com.game.engine3D.vo.FadeAlphaRectData;
-
+	
 	import flash.display.BlendMode;
-
 	import flash.geom.ColorTransform;
 	import flash.utils.Dictionary;
 	
@@ -764,7 +764,8 @@ package com.game.engine3D.scene.render.vo
 			if (material)
 			{
 				material.copyFrom(orgMaterial);
-				material.blendMode = BlendMode.LAYER;
+				if (GlobalConfig.use25DMap)
+					material.blendMode = BlendMode.LAYER;
 				material.colorTransform = _independentColorTransform;
 				material.diffuseAcc = orgMaterial.diffuseAcc;
 				material.lightPicker = orgMaterial.lightPicker ? _lightPicker : null;
