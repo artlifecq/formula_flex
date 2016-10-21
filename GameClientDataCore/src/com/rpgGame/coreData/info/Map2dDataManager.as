@@ -420,28 +420,14 @@ package com.rpgGame.coreData.info
             
             parseMapConfigData(mapDataUrl, mapID, byteArr);
             parseOver(mapDataUrl);
-			
-//			byteArr.position = byteArr.length - 4;
-//			var len:int = byteArr.readInt();
-//			var dataLen:int = byteArr.length - 4 - len;
-//			var areaBytes:ByteArray = new ByteArray();
-//			
-//			byteArr.position = dataLen;
-//			byteArr.readBytes(areaBytes, 0, len);
-//			areaBytes.uncompress();
-//			
-//			var dataBytes:ByteArray = new ByteArray();
-//			byteArr.position = 0;
-//			byteArr.readBytes(dataBytes, 0, dataLen);
-//			
-//			parseMapConfigData(mapDataUrl, mapID, dataBytes);
-//			parseMapAreaConfigLoaded(mapDataUrl, mapID, areaBytes);
 		}
 		
-		private static function parseMapConfigData(url:String, mapID:int,byteArr:ByteArray):void
-		{
-			//byteArr.uncompress();
-			
+        //======================================================================
+        // 解析地图数据
+        //======================================================================
+        private static function parseMapConfigData(url:String, 
+                                                   mapID:int,
+                                                   byteArr:ByteArray) : void {
 			var md:MapData = new MapData(mapID);
 			md.mergeFrom(byteArr);//解析地图数据
 			
@@ -508,65 +494,6 @@ package com.rpgGame.coreData.info
 		{
 			_numBlocksX = md.numBlocksX;
 			_numBlocksY = md.numBlocksY;
-			
-//			var layers:Array = md.layers;
-//			var len:int = layers.length;
-//			var layer:Layer;
-//			var i:uint = 0;
-//			var j:uint = 0
-//			for(i;i<len;i++)
-//			{
-//				layer = layers[i];
-//				switch(layer.layerType)
-//				{
-//					case LayerType.MOVE:
-//						mapDataInfo.mapMoveData = getMapData(layer.layerType,layer.data);
-//						break;
-//					case LayerType.SHADE:
-//						mapDataInfo.mapShadeData = getMapData(layer.layerType,layer.data);
-//						break;
-//					case LayerType.PK_ABLE:
-//						mapDataInfo.mapPKAbleData = getMapData(layer.layerType,layer.data);
-//						break;
-//					case LayerType.EXP_10X:
-//						mapDataInfo.mapExp10XData = getMapData(layer.layerType,layer.data);
-//						break;
-//					case LayerType.EXP_20X:
-//						mapDataInfo.mapExp20XData = getMapData(layer.layerType,layer.data);
-//						break;
-//				}
-//			}
-//			
-//			if(mapDataInfo.mapMoveData == null)
-//			{
-//				mapDataInfo.mapMoveData = getMapData(-1,null,true,true);
-//			}
-//			if(mapDataInfo.mapShadeData == null)
-//			{
-//				mapDataInfo.mapShadeData = getMapData(-1,null,true,false);
-//			}
-//			if(mapDataInfo.mapPKAbleData == null)
-//			{
-//				mapDataInfo.mapPKAbleData = getMapData(-1,null,true,false);
-//			}
-//			if(mapDataInfo.mapExp10XData == null)
-//			{
-//				mapDataInfo.mapExp10XData = getMapData(-1,null,true,false);
-//			}
-//			if(mapDataInfo.mapExp20XData == null)
-//			{
-//				mapDataInfo.mapExp20XData = getMapData(-1,null,true,false);
-//			}
-//			var arr:Array = md.effects;
-//			var effectInfoVec:Vector.<EffectInfo> = new Vector.<EffectInfo>();
-//			for each (var efff:Effect in arr) 
-//			{
-//				var effectInfo:EffectInfo = new EffectInfo();
-//				effectInfo.setEffectProto(efff);
-//				effectInfoVec.push(effectInfo);
-//			}
-//			
-//			mapDataInfo.mapEffects = effectInfoVec;
 		}
 		
 		/**
