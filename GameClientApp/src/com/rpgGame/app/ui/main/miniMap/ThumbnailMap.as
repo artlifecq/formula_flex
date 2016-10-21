@@ -240,8 +240,9 @@ package com.rpgGame.app.ui.main.miniMap
 			if (senceData)
 			{
 				mapUrl = ClientConfig.getMap(senceData.map);
+                var mapName : String = ClientConfig.getMapName(senceData.map);
 				var mapDataName : String = ClientConfig.getMapDataName();
-				_sceneMapData = SceneMapDataManager.addMapData(this, mapUrl, mapDataName, onMapDataComplete, onMapDataFaild);
+				_sceneMapData = SceneMapDataManager.addMapData(this, mapName, mapUrl + "/" + mapDataName, onMapDataComplete, onMapDataFaild);
 			}
 
 			baseSpr.addEventListener(TouchEvent.TOUCH, onMapTouch);
@@ -347,15 +348,16 @@ package com.rpgGame.app.ui.main.miniMap
 			{
 				var senceData : SceneData = MapDataManager.getMapInfo(_currentMapId);
 				var mapUrl : String = ClientConfig.getMap(senceData.map);
+                var mapName : String = ClientConfig.getMapName(senceData.map);
 				if (isRadarMap)
 				{
 					var radarMapName : String = ClientConfig.getRadarMapName(sceneMapData.clientMapData.radarMapRes);
-					SceneMapDataManager.addRadarMap(mapUrl, radarMapName, sceneMapData.clientMapData.radarMapRect, onLoadBitmapDataComplete, onMapDataFaild);
+					SceneMapDataManager.addRadarMap(mapName, mapUrl + "/" + radarMapName, sceneMapData.clientMapData.radarMapRect, onLoadBitmapDataComplete, onMapDataFaild);
 				}
 				else
 				{
 					var miniMapName : String = ClientConfig.getMiniMapName(sceneMapData.clientMapData.miniMapRes);
-					SceneMapDataManager.addMiniMap(mapUrl, miniMapName, sceneMapData.clientMapData.miniMapRect, onLoadBitmapDataComplete, onMapDataFaild);
+					SceneMapDataManager.addMiniMap(mapName, mapUrl + "/" + miniMapName, sceneMapData.clientMapData.miniMapRect, onLoadBitmapDataComplete, onMapDataFaild);
 				}
 			}
 		}

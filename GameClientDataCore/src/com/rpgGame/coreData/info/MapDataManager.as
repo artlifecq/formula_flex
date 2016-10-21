@@ -54,7 +54,10 @@ package com.rpgGame.coreData.info
 			}
 		}
 
-		private static function addMapInfo(mapProto : SceneProto) : void
+        /*****************************************************************************************************
+         * 添加单个场景信息
+         ****************************************************************************************************/
+		public static function addMapInfo(mapProto : SceneProto) : void
 		{
 			var sceneData : SceneData = new SceneData();
 			sceneData.setData(mapProto);
