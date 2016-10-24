@@ -65,7 +65,9 @@ package com.rpgGame.app.manager.hint
 				if(!hintTypeSet.isWaitMsg)
 				{
 					hintDatas.shift();
-					labelPools.push(removeChildAt(0));
+                    if (this.numChildren > 0) {
+                        labelPools.push(removeChildAt(0));
+                    }
 					hintDatas[numChildren] = hintData;
 					addChild(label);
 				}else

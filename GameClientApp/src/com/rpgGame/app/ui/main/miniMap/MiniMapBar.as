@@ -18,15 +18,17 @@ package com.rpgGame.app.ui.main.miniMap
 	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.npc.NpcCfgData;
+	import com.rpgGame.coreData.info.Map2dDataManager;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.EnumMapUnitType;
 	import com.rpgGame.coreData.info.map.SceneData;
+	import com.rpgGame.coreData.info.map.map2d.MapInfo;
 	import com.rpgGame.coreData.lang.LangMainUi;
 	import com.rpgGame.coreData.role.MonsterBornData;
-
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.map.MiniMapBarSkin;
-
+	
 	import starling.display.DisplayObject;
 	import starling.display.Shape;
 	import starling.display.Sprite3D;

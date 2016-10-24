@@ -30,7 +30,7 @@ package com.game.engine3D.scene.render.vo
 	 */
 	public class BaseEntity extends BaseObj3D
 	{
-		private var _renderSet : RenderSet3D;
+		protected var _renderSet : RenderSet3D;
 		private var _baseObjList : Vector.<BaseObjChild>;
 		protected var _camouflageEntity : BaseEntity;
 		private var _imposters : Vector.<BaseEntity>;

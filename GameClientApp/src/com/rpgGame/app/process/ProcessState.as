@@ -29,6 +29,10 @@ package com.rpgGame.app.process
 		 * 加载配置数据
 		 */
 		public static const STATE_LOAD_CONFIG_DATA : String = "STATE_LOAD_CONFIG_DATA";
+        /*****************************************************************************************************
+         * 本地模式 基本数据
+         ****************************************************************************************************/
+        public static const STATE_LOCAL_CONFIG_DATA : String = "STATE_LOCAL_CONFIG_DATA";
 		/**
 		 * 开始游戏
 		 */
