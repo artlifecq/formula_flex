@@ -406,7 +406,7 @@ package com.rpgGame.app.manager
 				return;
 			var roleData : HeroData = role.data as HeroData;
 			var animatResID : String = null;///"pc/woman/body/an_suit_knife2_animat";
-			var bodyResID : String = "role/18/xqj-bingjia-10s";//"role/17/male_fashi_animation";//"pc/woman/body/knife_an_suit_p2_006";//"pc/woman/body/an_suit_s2006_skin";
+			var bodyResID : String = "role/17/male_fashi_animation";//"role/18/xqj-bingjia-10s";//"role/17/male_fashi_animation";//"pc/woman/body/knife_an_suit_p2_006";//"pc/woman/body/an_suit_s2006_skin";
 //			var bodyResID : String = "role/15/male_zhanshi_animation";//"pc/woman/body/knife_an_suit_p2_006";//"pc/woman/body/an_suit_s2006_skin";
 			var hairResID : String = "pc/woman/hair/fan_an_hair2_004";
 			var mountResID : String = null;

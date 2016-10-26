@@ -1,5 +1,6 @@
 package com.rpgGame.app.manager.role
 {
+	import com.game.engine3D.config.GlobalConfig;
 	import com.rpgGame.app.manager.AreaMapManager;
 	import com.rpgGame.app.manager.BaZhenTuManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
@@ -165,11 +166,18 @@ package com.rpgGame.app.manager.role
 				_actor = SceneRoleManager.getInstance().createHero(data, true);
 				_actor.type = SceneCharType.PLAYER;
 				_actor.mouseEnable = false;
+				
 				SceneManager.getScene().mainChar = _actor;
-				
-				//GameCameraManager.startPlayerMode(SceneManager.getScene().cameraTarget);
-				
 				SceneManager.scene.mainChar = _actor;
+				
+				if(GlobalConfig.use25DMap)
+				{
+					GameCameraManager.startPlayerMode(SceneManager.scene.cameraTarget);
+				}
+				else
+				{
+					GameCameraManager.startPlayerMode(SceneManager.getScene().cameraTarget);
+				}
 				
 				TrusteeshipManager.getInstance().setup(_actor);
 				//设置主角初始状态

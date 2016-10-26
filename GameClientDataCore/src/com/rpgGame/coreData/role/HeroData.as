@@ -51,11 +51,6 @@ package com.rpgGame.coreData.role
 			info.y = 100;
 			
 			/** 技能数据 **/ //临时的
-			var singleAnimation : AnimationProto = new AnimationProto();
-			singleAnimation.id = 1;
-			singleAnimation.roleRes = "tx_suit_knife1_570_pugong";
-			AnimationDataManager.addData(singleAnimation);
-			
 			var activeSpell1 : ActiveSpellProto = new ActiveSpellProto();
 			activeSpell1.spellId = 1;
 			activeSpell1.isLockingSpell = false;
@@ -87,29 +82,6 @@ package com.rpgGame.coreData.role
 			var spell3:SpellProto = new SpellProto();
 			spell3.spellType = 3;
 			spell3.activeSpell = activeSpell3;
-			
-			var spellEffect : SpellEffectProto = new SpellEffectProto();
-			spellEffect.id = 1;
-			spellEffect.attackMotionId = 215;
-			spellEffect.breakFrameTime = 100;
-			spellEffect.castAnimation = 1;
-			SpellEffectDataManager.addData(spellEffect);
-			
-			spellEffect = new SpellEffectProto();
-			spellEffect.id = 2;
-			spellEffect.attackMotionId = 215;
-			spellEffect.caromStartFrameTime = 100;
-			spellEffect.castAnimation = 1;
-			SpellEffectDataManager.addData(spellEffect);
-			
-			spellEffect = new SpellEffectProto();
-			spellEffect.id = 3;
-			spellEffect.blinkType = SpellBlinkType.TIAO_PI;
-			spellEffect.blinkSpeed = 200;
-			spellEffect.blinkHeight = 1000;
-			spellEffect.soarFrameTime = 200;
-			spellEffect.attackMotionId = 220;
-			SpellEffectDataManager.addData(spellEffect);
 			
 			info.spellList.addSpell(spell1);
 			info.spellList.addSpell(spell2);

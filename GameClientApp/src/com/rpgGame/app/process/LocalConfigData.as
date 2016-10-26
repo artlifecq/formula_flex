@@ -2,14 +2,20 @@ package com.rpgGame.app.process
 {
     import com.game.engine3D.process.BaseProcess;
     import com.gameClient.log.GameLog;
+    import com.rpgGame.coreData.cfg.AnimationDataManager;
+    import com.rpgGame.coreData.cfg.SpellEffectDataManager;
     import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
     import com.rpgGame.coreData.info.MapDataManager;
+    import com.rpgGame.coreData.type.SpellBlinkType;
     
     import flash.utils.ByteArray;
     
+    import app.message.AnimationConfig;
+    import app.message.AnimationProto;
     import app.message.MonsterConfig;
     import app.message.MonsterDataProto;
     import app.message.SceneProto;
+    import app.message.SpellEffectProto;
     
     public class LocalConfigData extends BaseProcess {
         public function LocalConfigData() {
@@ -49,6 +55,38 @@ package com.rpgGame.app.process
             _2MonsterData.bodyRes = "role/17/male_fashi_animation";
             monsterConfig.monsters.push(_2MonsterData);
             MonsterDataManager.setConfig(monsterConfig);
+            GameLog.addShow("制造技能动画数据");
+            var animationConfig : AnimationConfig = new AnimationConfig();
+            animationConfig.animations = [];
+            var _1singleAnimation : AnimationProto = new AnimationProto();
+            _1singleAnimation.id = 1;
+            _1singleAnimation.roleRes = "tx_suit_knife1_570_pugong";
+            animationConfig.animations.push(_1singleAnimation);
+            var _2singleAnimation : AnimationProto = new AnimationProto();
+            _2singleAnimation.id = 2;
+            _2singleAnimation.roleRes = "skill/zadi";
+            animationConfig.animations.push(_2singleAnimation);
+            AnimationDataManager.setConfig(animationConfig);
+            var spellEffect : SpellEffectProto = new SpellEffectProto();
+            spellEffect.id = 1;
+            spellEffect.attackMotionId = 215;
+            spellEffect.breakFrameTime = 100;
+            spellEffect.castAnimation = 2;
+            SpellEffectDataManager.addData(spellEffect);
+            spellEffect = new SpellEffectProto();
+            spellEffect.id = 2;
+            spellEffect.attackMotionId = 215;
+            spellEffect.caromStartFrameTime = 100;
+            spellEffect.castAnimation = 1;
+            SpellEffectDataManager.addData(spellEffect);
+            spellEffect = new SpellEffectProto();
+            spellEffect.id = 3;
+            spellEffect.blinkType = SpellBlinkType.TIAO_PI;
+            spellEffect.blinkSpeed = 200;
+            spellEffect.blinkHeight = 1000;
+            spellEffect.soarFrameTime = 200;
+            spellEffect.attackMotionId = 220;
+            SpellEffectDataManager.addData(spellEffect);
             GameLog.addShow("制造假数据结束");
             this.completeProcess();
         }
