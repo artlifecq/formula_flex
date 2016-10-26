@@ -187,7 +187,7 @@ package com.rpgGame.app.cmdlistener.engine
 								if(role.type == SceneCharType.MONSTER)
 								{
 									var monsterData:MonsterData = role.data as MonsterData;
-									if (TouZhuCfgData.isZhuMonster(monsterData.modelID))
+									if (false && TouZhuCfgData.isZhuMonster(monsterData.modelID))
 									{
 										WalkToRoleManager.walkToRole(currTarget as SceneRole);
 									}

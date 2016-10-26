@@ -4,6 +4,7 @@ package com.rpgGame.app.manager.chat
 	import com.rpgGame.app.manager.crown.CrownManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.shell.ShellManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.richText.RichTextCustomLinkType;
 	import com.rpgGame.app.richText.RichTextCustomUtil;
@@ -14,6 +15,7 @@ package com.rpgGame.app.manager.chat
 	import com.rpgGame.app.ui.main.chat.ChatUtil;
 	import com.rpgGame.core.events.ChatEvent;
 	import com.rpgGame.coreData.cfg.ChatCfgData;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemCfgData;
@@ -478,6 +480,11 @@ package com.rpgGame.app.manager.chat
 		 */
 		public static function sendGMMsg(msg : String) : Boolean
 		{
+            if (ClientConfig.isSingle) {
+                // todo: 单机版指令
+                ShellManager.parse(msg);
+                return true;
+            }
 			//验证gm命令
 			var isGm : Boolean = isGmMsg(msg);
 			if (isGm)
