@@ -2,9 +2,7 @@ package com.game.engine2D.controller
 {
 	import flash.geom.Vector3D;
 	
-	import away3d.animators.CameraVibrateAnimator;
 	import away3d.cameras.Camera3D;
-	import away3d.cameras.iCamera3DAnimator;
 	import away3d.containers.ObjectContainer3D;
 	import away3d.events.Object3DEvent;
 
@@ -67,12 +65,12 @@ package com.game.engine2D.controller
 				_camera.z = - LOCK_DISTANCE;
 				_camera.lookAt(_lookAtPosition);
 				
-				for each(var animator:iCamera3DAnimator in  _camera.camera3DAnimators)
+				/*for each(var animator:iCamera3DAnimator in  _camera.camera3DAnimators)
 				{
 					var cameraVibrateAnimator:CameraVibrateAnimator = animator as CameraVibrateAnimator;
 					if(cameraVibrateAnimator)
 						_camera.y += animator.offset;
-				}
+				}*/
 			}
 		}
 		

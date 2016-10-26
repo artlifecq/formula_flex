@@ -1,8 +1,5 @@
 package com.game.engine3D.vo
 {
-	import com.game.engine3D.config.GlobalConfig;
-	import com.game.engine3D.core.poolObject.PoolContainer3D;
-	import com.game.engine3D.core.poolObject.PoolEntityContainer3D;
 	import com.game.engine3D.events.SceneEvent;
 	import com.game.engine3D.events.SceneEventAction_char;
 	import com.game.engine3D.scene.render.vo.BaseEntity;
