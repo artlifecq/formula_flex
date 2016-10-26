@@ -77,7 +77,7 @@
 		/**
 		 * 尺寸倍率
 		 */
-		public var sizeScale : Number = 0.1;
+		public var sizeScale : Number = 1;
 		/**
 		 * 方向
 		 */
