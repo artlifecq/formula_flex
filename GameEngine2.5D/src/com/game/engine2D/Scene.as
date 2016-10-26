@@ -3,7 +3,6 @@ package com.game.engine2D
 	import com.game.engine2D.config.GlobalConfig2D;
 	import com.game.engine2D.config.MapConfig;
 	import com.game.engine2D.config.SceneConfig;
-	import com.game.engine2D.controller.Camera2DController;
 	import com.game.engine2D.controller.CameraFrontController;
 	import com.game.engine2D.core.AsyncMapTexture;
 	import com.game.engine2D.scene.CameraOrthographicLens;
@@ -20,7 +19,6 @@ package com.game.engine2D
 	import com.game.engine2D.utils.MaterialUtils;
 	import com.game.engine2D.utils.SceneUtil;
 	import com.game.engine2D.vo.BaseObj;
-	import com.game.engine2D.vo.PoolContainer;
 	import com.game.engine2D.vo.PoolFrontMesh;
 	import com.game.engine2D.vo.ShowContainer;
 	import com.game.engine3D.config.GlobalConfig;
@@ -74,7 +72,7 @@ package com.game.engine2D
 		private var _view:View3D;
 		private var _scene3d:GameScene3D;
 		private var _scenePos:Point = new Point(int.MIN_VALUE, int.MIN_VALUE);
-		private var _cameraTarget:ObjectContainer3D;/**虚拟目标，跟镜头绑定的，导致镜头移动的参照 */
+		private var _cameraTarget:SceneCameraTarget;/**虚拟目标，跟镜头绑定的，导致镜头移动的参照 */
 		private var _cameraOffsetX:Number = 0;
 		private var _cameraOffsetY:Number = 0;
 		private var _direction:DirectionalLight;
@@ -89,6 +87,9 @@ package com.game.engine2D
 			_current = this;
 			_view = view;
 			var len2d : CameraOrthographicLens = new CameraOrthographicLens(1000);
+			len2d.far = 3000;
+			len2d.near = -500;
+			_view.camera.lens = len2d;
 			
 			//场景引擎配置
 			sceneConfig = new SceneConfig($width,$height);
@@ -122,13 +123,10 @@ package com.game.engine2D
 			_view.mouseEnabled = true;
 			_view.mouseChildren = true;
 			_view.filters3d = _filter3ds;
-			//初始化camera
-			len2d.far = 3000;
-			len2d.near = -500;
-			_view.camera.lens = len2d;
-			_cameraTarget = PoolContainer.create();
-			this.addChild(_cameraTarget);
-			Camera2DController.initcontroller(_view.camera,_cameraTarget);
+			
+//			_cameraTarget = PoolContainer.create();
+//			this.addChild(_cameraTarget);
+//			Camera2DController.initcontroller(_view.camera,_cameraTarget);
 			
 			//添加starling stage最下层
 			Starling.current.stage.addChildAt(sceneStarlingLayer, 0);
@@ -173,11 +171,21 @@ package com.game.engine2D
 			return _view;
 		}
 		
+		public function get cameraTarget() : SceneCameraTarget
+		{
+			if (_cameraTarget == null)
+			{
+				_cameraTarget = new SceneCameraTarget();
+				_view.scene.addChild(_cameraTarget);
+			}
+			return _cameraTarget;
+		}
+		
 		public function cameraRun():void
 		{
 			sceneCamera.run(GlobalConfig2D.cameraTween);
-			_cameraTarget.x = sceneCamera.posX + _cameraOffsetX;
-			_cameraTarget.y = sceneCamera.posY + _cameraOffsetY;
+			cameraTarget.x = sceneCamera.posX + _cameraOffsetX;
+			cameraTarget.y = sceneCamera.posY + _cameraOffsetY;
 		}
 		
 		public function cameraOffset(offsetX:Number, offsetY:Number):void
@@ -211,8 +219,8 @@ package com.game.engine2D
 				//摄像机锁定
 				cameraLookAt(value);
 				
-				_cameraTarget.x = _mainChar.pos.x;
-				_cameraTarget.y = _mainChar.pos.y;
+				cameraTarget.x = _mainChar.pos.x;
+				cameraTarget.y = _mainChar.pos.y;
 			}
 		}
 
@@ -377,7 +385,7 @@ package com.game.engine2D
 			{
 				disableInteractiveHandle();
 				initLight();
-				initCamera();
+//				initCamera();
 				_view.camera.lens.near = -100000;
 				_view.camera.lens.far = 100000;
 				GlobalConfig.MAP_2D_CAMERA_ANGLE = 0;
@@ -392,11 +400,8 @@ package com.game.engine2D
 		{
 			if (_cameraInit)return;
 			_cameraInit = true;
-			this.removeChild(_cameraTarget);
-			_cameraTarget = new SceneCameraTarget();
-			this.addChild(_cameraTarget);
-			Camera2DController.destoryController();
-			CameraFrontController.initcontroller(_view.camera, _cameraTarget);
+			
+			CameraFrontController.initcontroller(_view.camera, cameraTarget);
 			CameraFrontController.LOCK_DISTANCE = 90000;
 		}
 		
@@ -686,6 +691,14 @@ package com.game.engine2D
 			}
 			sceneRenderLayer.dispose();
 			TweenLite.killTweensOf(_current);
+			
+			/*if (_cameraTarget)
+			{
+				if (_cameraTarget.parent)
+					_cameraTarget.parent.removeChild(_cameraTarget);
+				_cameraTarget.dispose();
+				_cameraTarget = null;
+			}*/
 		}
 		
 		/**
