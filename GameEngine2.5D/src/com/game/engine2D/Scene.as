@@ -385,7 +385,7 @@ package com.game.engine2D
 			{
 				disableInteractiveHandle();
 				initLight();
-//				initCamera();
+				initCamera();
 				_view.camera.lens.near = -100000;
 				_view.camera.lens.far = 100000;
 				GlobalConfig.MAP_2D_CAMERA_ANGLE = 0;

@@ -170,14 +170,14 @@ package com.rpgGame.app.manager.role
 				SceneManager.getScene().mainChar = _actor;
 				SceneManager.scene.mainChar = _actor;
 				
-				if(GlobalConfig.use25DMap)
-				{
-					GameCameraManager.startPlayerMode(SceneManager.scene.cameraTarget);
-				}
-				else
-				{
-					GameCameraManager.startPlayerMode(SceneManager.getScene().cameraTarget);
-				}
+//				if(GlobalConfig.use25DMap)
+//				{
+//					GameCameraManager.startPlayerMode(SceneManager.scene.cameraTarget);
+//				}
+//				else
+//				{
+//					GameCameraManager.startPlayerMode(SceneManager.getScene().cameraTarget);
+//				}
 				
 				TrusteeshipManager.getInstance().setup(_actor);
 				//设置主角初始状态
