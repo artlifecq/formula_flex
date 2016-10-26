@@ -11,11 +11,11 @@ package com.rpgGame.coreData.type
 	public class RoleActionType
 	{
 		/** 待机状态 **/
-		public static const IDLE : String = "100";
+		public static const IDLE : String = "stand";//"100";
 		/** 个性待机状态 **/
 		public static const SPECIFIC_IDLE : String = "110";
 		/** 行走 **/
-		public static const WALK : String = "120";
+		public static const WALK : String = "walk";//"120";
 		/** 跑步 **/
 		public static const RUN : String = "130";
 		/** 跳跃 **/
@@ -33,9 +33,9 @@ package com.rpgGame.coreData.type
 		/** 冲锋 **/
 		public static const BLINK : String = "220";
 		/** 死亡 **/
-		public static const DIE : String = "500";
+		public static const DIE : String = "death";//"500";
 		/** 受击 **/
-		public static const HIT : String = "400";
+		public static const HIT : String = "injured";//"400";
 		/** 击倒 **/
 		public static const FALL : String = "410";
 		/** 起身 **/
@@ -46,7 +46,7 @@ package com.rpgGame.coreData.type
 			if (!type)
 				return null;
 			var actionHead : String = type.substr(0, type.length - 1);
-			return onMount ? (actionHead + "5") : (actionHead + "0");
+			return onMount ? (actionHead + "5") : type;//(actionHead + "0");
 		}
 	}
 }
