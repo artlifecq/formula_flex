@@ -1,11 +1,21 @@
 package com.game.engine2D.controller
 {
+	import com.game.engine2D.scene.SceneCamera;
+	import com.game.engine3D.manager.Stage3DLayerManager;
+	
+	import flash.display.InteractiveObject;
+	import flash.display.Stage;
+	import flash.events.Event;
+	import flash.events.MouseEvent;
+	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	
 	import away3d.animators.CameraVibrateAnimator;
 	import away3d.cameras.Camera3D;
 	import away3d.cameras.iCamera3DAnimator;
 	import away3d.containers.ObjectContainer3D;
+	import away3d.entities.Entity;
+	import away3d.events.Event;
 	import away3d.events.Object3DEvent;
 
 	/**
@@ -80,6 +90,237 @@ package com.game.engine2D.controller
 		{
 			var lookAtPosition:Vector3D = _target.scenePosition;
 			lookAt(lookAtPosition.x, lookAtPosition.y);
+		}
+		
+		////////////////////////////////////////////////////////////////////////////////
+		//
+		// 以下为测试代码，主要用来监听鼠标滚轮，鼠标右键的事件，
+		// 1.鼠标滚轮，主要用来控制缩放值
+		// 2.鼠标右键，主要用来控制光照方向，用来调整阴影等
+		//
+		///////////////////////////////////////////////////////////////////////////////
+		private static var _targetObject:Entity;
+		/**控制的光照*/
+		public static function get targetObject():Entity
+		{
+			return _targetObject;
+		}
+		public static function set targetObject(value:Entity):void
+		{
+			_targetObject = value;
+		}
+		
+		private static var _sceneCamera:SceneCamera;
+		public static function get sceneCamera():SceneCamera
+		{
+			return _sceneCamera;
+		}
+		public static function set sceneCamera(value:SceneCamera):void
+		{
+			_sceneCamera = value;
+		}
+		
+		private static var _listenerTarget:InteractiveObject;
+		private static var _pan : Point = new Point();
+		private static var _mouseOutDetected : Boolean = false;
+		private static var _ispanning : Boolean;
+		
+		private static var _mouseRightSpeed : Number = 0.8;
+		/**鼠标右键速度*/
+		public static function get mouseRightSpeed():Number
+		{
+			return _mouseRightSpeed;
+		}
+		public static function set mouseRightSpeed(value:Number):void
+		{
+			_mouseRightSpeed = value;
+		}
+		
+		private static var _xDeg : Number = 0;
+		/**水平角度*/
+		public static function get xDeg():Number
+		{
+			return _xDeg;
+		}
+		public static function set xDeg(value:Number):void
+		{
+			_xDeg = value;
+			if(_targetObject)
+			{
+				_targetObject.rotationY = _xDeg;
+			}
+		}
+		
+		private static var _yDeg : Number = 0;
+		/**垂直角度*/
+		public static function get yDeg():Number
+		{
+			return _yDeg;
+		}
+		public static function set yDeg(value:Number):void
+		{
+			_yDeg = value;
+			if(_targetObject)
+			{
+				_targetObject.rotationX = _yDeg;
+			}
+		}
+		
+		private static var _xDegControlable:Boolean = true;
+		/**是否能控制水平角度旋转视角*/
+		public static function set xDegControlable(value:Boolean):void
+		{
+			_xDegControlable = value;
+		}
+		
+		private static var _yDegControlable:Boolean = true;
+		/**是否能控制垂直角度旋转视角*/
+		public static function set yDegControlable(value:Boolean):void
+		{
+			_yDegControlable = value;
+		}
+
+		
+		public static function get active() : Boolean
+		{
+			return !_mouseOutDetected;
+		}
+		
+		public static function startControl($listenerTarget:InteractiveObject):void
+		{
+			_listenerTarget = $listenerTarget;
+			_listenerTarget.addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+			_listenerTarget.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+			_listenerTarget.addEventListener(flash.events.Event.MOUSE_LEAVE, onMouseLeave);
+			_listenerTarget.addEventListener(MouseEvent.RIGHT_MOUSE_DOWN, onMouseRightDown);
+			_listenerTarget.addEventListener(MouseEvent.RIGHT_MOUSE_UP, onMouseRightUp);
+			_listenerTarget.addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
+			Stage3DLayerManager.stage3DProxy.addEventListener(away3d.events.Event.ENTER_FRAME, loop);
+		}
+		
+		public static function stopControl():void
+		{
+			if(_listenerTarget)
+			{
+				_listenerTarget.removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+				_listenerTarget.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+				_listenerTarget.removeEventListener(flash.events.Event.MOUSE_LEAVE, onMouseLeave);
+				_listenerTarget.removeEventListener(MouseEvent.RIGHT_MOUSE_DOWN, onMouseRightDown);
+				_listenerTarget.removeEventListener(MouseEvent.RIGHT_MOUSE_UP, onMouseRightUp);
+				_listenerTarget.removeEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
+				Stage3DLayerManager.stage3DProxy.removeEventListener(away3d.events.Event.ENTER_FRAME, loop);
+			}
+		}
+		
+		private static function onMouseRightDown(e : MouseEvent) : void
+		{
+			if (active)
+			{
+				var stage : Stage = Stage3DLayerManager.stage;
+				if (!stage)
+					return;
+				//鼠标右键down的时候，会触发mouseLeave事件，所以先必须移除leave事件的监听
+				stage.removeEventListener(flash.events.Event.MOUSE_LEAVE, onMouseLeave);
+				stage.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+				_pan.x = stage.mouseX;
+				_pan.y = stage.mouseY;
+				_ispanning = true;
+			}
+		}
+		
+		private static function onMouseRightUp(e : MouseEvent) : void
+		{
+			var stage : Stage = Stage3DLayerManager.stage;
+			if (!stage)
+				return;
+			stage.addEventListener(flash.events.Event.MOUSE_LEAVE, onMouseLeave);
+			stage.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+			_ispanning = false;
+		}
+		
+		private static function loop(e : away3d.events.Event) : void
+		{
+			if (active)
+			{
+				if (_ispanning)
+				{
+					updateMouseRotation();
+				}
+			}
+		}
+		
+		private static function updateMouseRotation() : void
+		{
+			var stage : Stage = Stage3DLayerManager.stage;
+			if (!stage)
+				return;
+			var dx : Number = stage.mouseX - _pan.x;
+			var dy : Number = stage.mouseY - _pan.y;
+			
+			if (!checkIfMoved(dx, dy))
+			{
+				return;
+			}
+			_pan.x = stage.mouseX;
+			_pan.y = stage.mouseY;
+			if(_yDegControlable)
+			{
+				yDeg += (dy * _mouseRightSpeed);
+			}
+			if(_xDegControlable)
+			{
+				xDeg += (dx * _mouseRightSpeed);
+			}
+		}
+		
+		private static function checkIfMoved(dx : Number, dy : Number) : Boolean
+		{
+			if (dx != 0 || dy != 0)
+			{
+				return true;
+			}
+			return false;
+		}
+		
+		private static function onMouseOver(event : MouseEvent) : void
+		{
+			_mouseOutDetected = false;
+		}
+		
+		private static function onMouseOut(event : MouseEvent) : void
+		{
+			_mouseOutDetected = true;
+			_ispanning = false;
+		}
+		
+		private static function onMouseLeave(event : flash.events.Event) : void
+		{
+			_mouseOutDetected = true;
+			_ispanning = false;
+		}
+		
+		private static var _mouseWheelSpeed : Number = 0.01;
+		
+		/**鼠标滚轮速度*/
+		public static function get mouseWheelSpeed() : Number
+		{
+			return _mouseWheelSpeed;
+		}
+		
+		public static function set mouseWheelSpeed(value : Number) : void
+		{
+			_mouseWheelSpeed = value;
+		}
+		
+		public static var distance:Number=1;
+		private static function onMouseWheel(event : MouseEvent) : void
+		{
+			distance += _mouseWheelSpeed * event.delta;
+			if(distance <= 0)
+			{
+				distance = 0;
+			}
+			sceneCamera.updateScale(distance);
 		}
 	}
 }
