@@ -318,7 +318,7 @@ package com.game.engine2D.controller
 			distance += _mouseWheelSpeed * event.delta;
 			if(distance <= 0)
 			{
-				distance = 0;
+				distance = 0.1;
 			}
 			sceneCamera.updateScale(distance);
 		}
