@@ -7,6 +7,7 @@ package com.rpgGame.app.manager
 	import com.game.engine3D.core.AreaMap;
 	import com.game.engine3D.core.GameScene3D;
 	import com.game.engine3D.events.SceneEvent;
+	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.vo.AreaMapData;
 	import com.game.engine3D.vo.map.ClientMapAreaData;
 	import com.game.engine3D.vo.map.ClientMapCameraBokehDepth;
@@ -51,6 +52,9 @@ package com.rpgGame.app.manager
 			{
 				CameraFrontController.initcontroller(SceneManager.scene.view3d.camera, target);
 				CameraFrontController.LOCK_DISTANCE = 90000;
+				////测试代码////
+				CameraFrontController.startControl(Stage3DLayerManager.stage);
+				CameraFrontController.sceneCamera = SceneManager.scene.sceneCamera;
 			}
 			else
 			{
