@@ -191,7 +191,7 @@ package com.rpgGame.app.fight.spell
 			return true;
 		}
 
-		private static function caseSpell(castInfo : CastSpellInfo, relateSelectable : Boolean = false) : int
+		public static function caseSpell(castInfo : CastSpellInfo, relateSelectable : Boolean = false) : int
 		{
 			if (!castInfo.spellData)
 			{
