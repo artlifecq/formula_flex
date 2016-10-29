@@ -17,7 +17,7 @@ package com.rpgGame.coreData.type
 		/** 行走 **/
 		public static const WALK : String = "walk";//"120";
 		/** 跑步 **/
-		public static const RUN : String = "130";
+		public static const RUN : String = "run";//"130";
 		/** 跳跃 **/
 		public static const JUMP : String = "140";
 		/** 二级跳跃 **/
