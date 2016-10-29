@@ -38,6 +38,8 @@ package com.rpgGame.app.manager.shell
             this._funcs["addMonster".toLowerCase()] = this.addMonster;
             this._funcs["skill".toLowerCase()] = this.skill;
             this._funcs["camera".toLowerCase()] = this.camera;
+            this._funcs["show".toLowerCase()] = this.show;
+            this._funcs["hide".toLowerCase()] = this.hide;
         }
         
         private function help() : void {
@@ -83,11 +85,19 @@ package com.rpgGame.app.manager.shell
         }
         
         private function camera(angle : int) : void {
-            var _angle : Number = (angle * Math.PI) / 180.0;
+            var _angle : Number = ((90 - Math.abs(angle)) * Math.PI) / 180.0;
             var plane:Plane3D = new Plane3D(0,Math.cos(_angle), -Math.sin(_angle));
             SceneManager.getScene().sceneMapLayer.view3DAsset.cameraMode2DAngle = angle;
-            PlanarContainer3D.planarRotationX = -angle;
             Scene.scene.directionalLight.planarShadowPlane = plane;
+            PlanarContainer3D.planarRotationX = -angle;
+        }
+        
+        private function show() : void {
+            RotateGizmo3D.instance().show(null);
+        }
+        
+        private function hide() : void {
+            RotateGizmo3D.instance().hide();
         }
         
         private function handler(command : String, ...params) : void {
