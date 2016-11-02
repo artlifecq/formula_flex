@@ -226,6 +226,11 @@ package com.game.engine2D.controller
 				_pan.y = stage.mouseY;
 				_ispanning = true;
 			}
+			if(distance != 1)
+			{
+				distance = 1;
+				sceneCamera.updateScale(distance);
+			}
 		}
 		
 		private static function onMouseRightUp(e : MouseEvent) : void
@@ -316,9 +321,13 @@ package com.game.engine2D.controller
 		private static function onMouseWheel(event : MouseEvent) : void
 		{
 			distance += _mouseWheelSpeed * event.delta;
-			if(distance <= 0)
+			if(distance <= 0.2)
 			{
-				distance = 0.1;
+				distance = 0.2;
+			}
+			else if(distance > 5)
+			{
+				distance = 5;
 			}
 			sceneCamera.updateScale(distance);
 		}

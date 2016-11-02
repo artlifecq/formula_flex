@@ -2,6 +2,7 @@ package com.game.engine3D.scene.render
 {
 	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.core.poolObject.PoolContainer3D;
+	import com.game.engine3D.core.poolObject.PoolEntityContainer3D;
 	import com.game.engine3D.scene.render.vo.IRenderUnit3D;
 	import com.game.engine3D.scene.render.vo.MethodData;
 	import com.game.engine3D.scene.render.vo.RenderParamData;
@@ -2528,6 +2529,10 @@ package com.game.engine3D.scene.render
 			if (!_graphicDis)
 			{
 				_graphicDis = PoolContainer3D.create();
+				/*if (GlobalConfig.use25DMap)
+					_graphicDis = PoolEntityContainer3D.create();
+				else
+					_graphicDis = PoolContainer3D.create();*/
 			}
 			_nextRenderParamData = null;
 			_currentStatus = null;

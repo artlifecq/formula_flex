@@ -36,6 +36,7 @@ package com.game.engine3D.utils
 				var pathCoordList : Vector.<Number>;
 				//兼容2.5D 对3d寻路没有影响
 				position.y = position.z;
+				
 				if (isPointInSide(district, targetPos))
 					pathCoordList = district.findPath(position, targetPos);
 

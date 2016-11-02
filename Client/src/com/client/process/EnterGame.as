@@ -50,10 +50,10 @@ package com.client.process
 			ClientGlobal.mainEntry.loadingActual = ResLoadingView;
 			ClientGlobal.mainEntry.setup(ClientGlobal, userInfo);
 
-			/*if (!ClientGlobal.isRelease)
+			if (!ClientGlobal.isRelease)
 			{
 				tryShowDebugInfo();
-			}*/
+			}
 		}
 
 		private function tryShowDebugInfo() : void
