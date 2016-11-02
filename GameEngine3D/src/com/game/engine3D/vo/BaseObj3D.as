@@ -23,7 +23,7 @@ package com.game.engine3D.vo
 	import away3d.core.math.MathConsts;
 	import away3d.core.math.Matrix3DUtils;
 	import away3d.events.Object3DEvent;
-
+	
 	import gs.TweenLite;
 	import gs.easing.Linear;
 	
@@ -629,7 +629,7 @@ package com.game.engine3D.vo
 				}
 			}
 		}
-
+		
 		/**
 		 * 获取体积法线。@L.L.M.Sunny
 		 * @param minX
@@ -645,7 +645,7 @@ package com.game.engine3D.vo
 			if (_graphicRotation && _clingGroundCalculate != null)
 			{
 				normal = new Vector3D();
-				var radianY : Number = _graphicRotation.y * 0.0175;
+				var radianY : Number = _graphicRotation.y * MathConsts.DEGREES_TO_RADIANS;
 				//求旋转后面区域
 				var dist : Number = MathUtil.getDistance(0, 0, minX, minZ);
 				var radian : Number = Math.atan2(minZ, minX);
@@ -654,6 +654,7 @@ package com.game.engine3D.vo
 				var px1 : Number = _showPosition.x + dist * dx;
 				var pz1 : Number = _showPosition.z + dist * dy;
 				var py1 : Number = _clingGroundCalculate(px1, pz1);
+				//
 				dist = MathUtil.getDistance(0, 0, maxX, minZ);
 				radian = Math.atan2(minZ, maxX);
 				dx = Math.cos(radianY + radian);
@@ -661,6 +662,7 @@ package com.game.engine3D.vo
 				var px2 : Number = _showPosition.x + dist * dx;
 				var pz2 : Number = _showPosition.z + dist * dy;
 				var py2 : Number = _clingGroundCalculate(px2, pz2);
+				//
 				dist = MathUtil.getDistance(0, 0, maxX, maxZ);
 				radian = Math.atan2(maxZ, maxX);
 				dx = Math.cos(radianY + radian);
@@ -679,9 +681,9 @@ package com.game.engine3D.vo
 				var vz : Number = c / e;
 				//trace(vx.toFixed(1), vy.toFixed(1), vz.toFixed(1));
 
-				var normalX : Number = Math.acos(vz) * 57.33 - 90;
+				var normalX : Number = Math.acos(vz) * MathConsts.RADIANS_TO_DEGREES - 90;
 				//var normalY : Number = Math.asin(vy) * 57.33;
-				var normalZ : Number = Math.acos(vx) * 57.33;
+				var normalZ : Number = Math.acos(vx) * MathConsts.RADIANS_TO_DEGREES;
 				//trace("normal:", normalX.toFixed(1) /*, normalY.toFixed(1)*/, normalZ.toFixed(1));
 				normal.setTo(normalX, 0, normalZ);
 			}
@@ -753,8 +755,8 @@ package com.game.engine3D.vo
 				Matrix3DUtil.rotateY(volumeMatrix, _graphicRotation.y - 90, false);
 
 				var rotations : Vector.<Vector3D> = Matrix3DUtils.decompose(volumeMatrix);
-				var tiltAngle : Number = rotations[1].z * 57.33 - 90;
-				var rollAngle : Number = -rotations[1].y * 57.33;
+				var tiltAngle : Number = rotations[1].z * MathConsts.RADIANS_TO_DEGREES - 90;
+				var rollAngle : Number = -rotations[1].y * MathConsts.RADIANS_TO_DEGREES;
 				//trace("rotation:", (rotations[1].x * 57.33).toFixed(1), (rotations[1].y * 57.33).toFixed(1), (rotations[1].z * 57.33).toFixed(1));
 				//trace(tiltAngle, rollAngle);
 

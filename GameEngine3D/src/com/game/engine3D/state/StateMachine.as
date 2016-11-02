@@ -113,7 +113,9 @@ package com.game.engine3D.state
 						transState.beforeEnter();
 						if (currState)
 							currState.leave();
+						//////
 						_currStates[transState.tribe] = transState;
+						//////
 						transState.enter();
 						if (currState)
 							currState.afterLeave();
