@@ -6,6 +6,10 @@ package com.rpgGame.coreData.info.map.map2d
 	{
 		public var numBlocksX:uint = 200;
 		public var numBlocksY:uint = 140;
+        
+        public var thumbnailWidth : uint = 0;
+        public var thumbnailHeight : uint = 0;
+        
         public var ID : int = -1;
         
         public function MapData(mapID : int) {
@@ -16,6 +20,8 @@ package com.rpgGame.coreData.info.map.map2d
 		{
             this.numBlocksX = byteArr.readInt();
             this.numBlocksY = byteArr.readInt();
+            this.thumbnailWidth = byteArr.readInt();
+            this.thumbnailHeight = byteArr.readInt();
 		}
 	}
 }
