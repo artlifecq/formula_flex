@@ -37,6 +37,13 @@ package com.rpgGame.app.process
             tmp.writeUTFBytes("测试地图")
             _6SceneData.name = tmp;
             MapDataManager.addMapInfo(_6SceneData);
+            var _8SceneData : SceneProto = new SceneProto();
+            _8SceneData.sceneId = 8;
+            _8SceneData.map = "yl_scene01_wc";
+            tmp = new ByteArray();
+            tmp.writeUTFBytes("测试地图")
+            _8SceneData.name = tmp;
+            MapDataManager.addMapInfo(_8SceneData);
             GameLog.addShow("制造怪物数据");
             var monsterConfig : MonsterConfig = new MonsterConfig();
             monsterConfig.monsters = [];
@@ -61,6 +68,13 @@ package com.rpgGame.app.process
             _3MonsterData.name = "普怪-奴5";
             _3MonsterData.bodyRes = "role/18/xqj-bingjia-10s";
             monsterConfig.monsters.push(_3MonsterData);
+            var _4MonsterData : MonsterDataProto = new MonsterDataProto();
+            _4MonsterData.id = 4;
+            _4MonsterData.level = 1;
+            //_2MonsterData.scale = 10;
+            _4MonsterData.name = "普怪-奴5";
+            _4MonsterData.bodyRes = "role/19/main_man_char";
+            monsterConfig.monsters.push(_4MonsterData);
             MonsterDataManager.setConfig(monsterConfig);
             GameLog.addShow("制造技能动画数据");
             var animationConfig : AnimationConfig = new AnimationConfig();

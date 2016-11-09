@@ -7,6 +7,7 @@ package com.rpgGame.coreData.info
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.info.map.map2d.MapData;
+	import com.rpgGame.coreData.info.map.map2d.MapDataFactory;
 	import com.rpgGame.coreData.info.map.map2d.MapDataInfo;
 	import com.rpgGame.coreData.info.map.map2d.MapDynamicBlockAreaInfo;
 	import com.rpgGame.coreData.info.map.map2d.MapInfo;
@@ -432,22 +433,27 @@ package com.rpgGame.coreData.info
 			md.mergeFrom(byteArr);//解析地图数据
 			
 			var mapDataInfo:MapDataInfo = new MapDataInfo();
-			_mapDataInfoMap.add(url,mapDataInfo);
-			copyMapDataToMapDataInfo(mapDataInfo,md);
+			_mapDataInfoMap.add(url, mapDataInfo);
 			
 //			var mapInfo:MapInfo = _mapInfoMap.getValue(mapID);
-			setMapConfigData(url, mapDataInfo);
+			setMapConfigData(url, mapDataInfo, md);
 		}
 		
-		private static function setMapConfigData(url:String,mapDataInfo:MapDataInfo):void
+		private static function setMapConfigData(url:String, mapDataInfo:MapDataInfo, mapData : MapData):void
 		{
-			var mapConfig:MapConfig = new MapConfig();
-			
+            
+            _numBlocksX = mapData.numBlocksX;
+            _numBlocksY = mapData.numBlocksY;
+            
+            var mapConfig:MapConfig = new MapConfig();
 			mapConfig.width = _numBlocksX*50;
 			mapConfig.height = _numBlocksY*50;
 			
 			mapConfig.gridH = _numBlocksX;
 			mapConfig.gridV = _numBlocksY;
+            
+            mapConfig.smallWidth = mapData.thumbnailWidth;
+            mapConfig.smallHeight = mapData.thumbnailHeight;
 			
 			resetMapConfigData(mapConfig,mapDataInfo);
 			_mapConfigMap.add(url,mapConfig);
