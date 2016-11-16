@@ -1,9 +1,12 @@
 package com.rpgGame.app.process
 {
+    import com.game.engine3D.manager.Stage3DLayerManager;
+    import com.game.engine3D.utils.StatsUtil;
 	import com.game.engine3D.core.poolObject.PoolContainer3D;
 	import com.game.engine3D.process.BaseProcess;
 	import com.game.engine3D.scene.render.RenderSet3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
+    import gameEngine2D.NetDebug;
 	import com.game.mainCore.core.manager.LayerManager;
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.gameClient.log.GameLog;
@@ -39,6 +42,7 @@ package com.rpgGame.app.process
 	import com.rpgGame.core.events.MiscEvent;
 	import com.rpgGame.core.manager.tips.TipManager;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+    import com.rpgGame.core.utils.ConsoleDesk;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.info.buff.BuffInfo;
 	import com.rpgGame.coreData.type.TipType;
@@ -128,13 +132,20 @@ package com.rpgGame.app.process
 				MainRoleManager.initActor();
 				GlobalSettingManager.init();
 				//
-				if (!ClientConfig.isRelease)
-				{
+//				if (!ClientConfig.isRelease)
+//				{
 //				StatsUtil.showOrHideAwayStats(Stage3DLayerManager.stage, SceneManager.getScene().view, Stage3DLayerManager.starlingView2D);
 //				LayerManager.showOrHideMM();
 //				ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
-					initMM();
-				}
+//					initMM();
+//				}
+                CONFIG::Debug {
+                    StatsUtil.showOrHideAwayStats(Stage3DLayerManager.stage,
+                                                  Stage3DLayerManager.stage3DProxy);
+                    LayerManager.showOrHideMM();
+                    ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
+                    initMM();
+                }
 			}
 
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
@@ -168,6 +179,9 @@ package com.rpgGame.app.process
 			EventManager.removeEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
 			completeProcess();
 
+            CONFIG::netDebug {
+                NetDebug.init("192.168.56.101", 10000);
+            }
 			//buff测试，过段时间删除 
 
 			MainRoleManager.actorInfo.buffList = new Vector.<BuffInfo>();
