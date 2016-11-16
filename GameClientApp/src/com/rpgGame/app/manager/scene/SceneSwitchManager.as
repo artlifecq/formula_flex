@@ -474,8 +474,8 @@ package com.rpgGame.app.manager.scene
 					var cfg : ClientScene = ClientSceneCfgData.getSceneInfo(mapID);
 					if (cfg)
 					{
-						MainRoleManager.actorInfo.x = 1000;//cfg.enter_x;
-						MainRoleManager.actorInfo.y = -1000;//cfg.enter_y;
+						MainRoleManager.actorInfo.x = 1000;//2700;//cfg.enter_x;
+						MainRoleManager.actorInfo.y = -1000;//-1400;//cfg.enter_y;
 						_mapRes = cfg.map_name_resource;
 					}
 				}
