@@ -446,7 +446,9 @@ package com.rpgGame.app.fight.spell
 		
 		private static var flySceneObjID : int = 1;
 		
-		private static function addFlyEffectOnce(info : ReleaseSpellInfo, effectRes : String, atkorPosition : Vector3D, atkorRotationY : Number, destPosition : Vector3D, moveDelay : int, playDelay : int, releaseDelayTime : int, effectQueue : Vector.<IRenderAnimator>, locusPoints : Vector.<AnimatorLocusPoint>) : void
+		private static function addFlyEffectOnce(info : ReleaseSpellInfo, effectRes : String, atkorPosition : Vector3D, atkorRotationY : Number, destPosition : Vector3D, 
+												 moveDelay : int, playDelay : int, releaseDelayTime : int, 
+												 effectQueue : Vector.<IRenderAnimator>, locusPoints : Vector.<AnimatorLocusPoint>) : void
 		{
 			var effectSet : RenderSet3D = RenderSet3D.create(SceneCharType.SCENE_FLY_SPELL + info.flySceneObjID, flySceneObjID);
 			var rud : RenderParamData = new RenderParamData(1, "effect", ClientConfig.getEffect(effectRes), effectRes);

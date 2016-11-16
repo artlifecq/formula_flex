@@ -15,7 +15,7 @@ package app.message.MountVitalityDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const VITALITY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountVitalityDatasProto.MountVitalityDataProto.vitality", "vitality", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const VITALITY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountVitalityDatasProto.MountVitalityDataProto.vitality", "vitality", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var vitality$field:int;
 
@@ -42,7 +42,7 @@ package app.message.MountVitalityDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const STAT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.MountVitalityDatasProto.MountVitalityDataProto.stat", "stat", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
+		public static const STAT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.MountVitalityDatasProto.MountVitalityDataProto.stat", "stat", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
 
 		private var stat$field:app.message.SpriteStatProto;
 
@@ -68,11 +68,11 @@ package app.message.MountVitalityDatasProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasVitality) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, vitality$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, vitality$field);
 			}
 			if (hasStat) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, stat$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, stat$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -86,14 +86,14 @@ package app.message.MountVitalityDatasProto {
 			var vitality$count:uint = 0;
 			var stat$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (vitality$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountVitalityDataProto.vitality cannot be set twice.');
 					}
 					++vitality$count;
-					this.vitality = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.vitality = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (stat$count != 0) {
@@ -101,7 +101,7 @@ package app.message.MountVitalityDatasProto {
 					}
 					++stat$count;
 					this.stat = new app.message.SpriteStatProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.stat);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.stat);
 					break;
 				default:
 					super.readUnknown(input, tag);

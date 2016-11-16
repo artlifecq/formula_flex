@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.StallTypeDataProto.type", "type", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.StallTypeDataProto.type", "type", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var type$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.StallTypeDataProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.StallTypeDataProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var name$field:String;
 
@@ -64,7 +64,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAX_STALL_NAME_LENGTH:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.StallTypeDataProto.max_stall_name_length", "maxStallNameLength", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MAX_STALL_NAME_LENGTH:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.StallTypeDataProto.max_stall_name_length", "maxStallNameLength", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var max_stall_name_length$field:int;
 
@@ -89,7 +89,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SELL_GOODS_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.StallTypeDataProto.sell_goods_count", "sellGoodsCount", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SELL_GOODS_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.StallTypeDataProto.sell_goods_count", "sellGoodsCount", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var sell_goods_count$field:int;
 
@@ -114,7 +114,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BUY_GOODS_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.StallTypeDataProto.buy_goods_count", "buyGoodsCount", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BUY_GOODS_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.StallTypeDataProto.buy_goods_count", "buyGoodsCount", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var buy_goods_count$field:int;
 
@@ -139,7 +139,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STALL_FEE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.StallTypeDataProto.stall_fee", "stallFee", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const STALL_FEE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.StallTypeDataProto.stall_fee", "stallFee", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var stall_fee$field:int;
 
@@ -164,7 +164,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BUY_PRICE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.StallTypeDataProto.buy_price", "buyPrice", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BUY_PRICE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.StallTypeDataProto.buy_price", "buyPrice", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var buy_price$field:int;
 
@@ -189,7 +189,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MIN_BUY_HOUR:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.StallTypeDataProto.min_buy_hour", "minBuyHour", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MIN_BUY_HOUR:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.StallTypeDataProto.min_buy_hour", "minBuyHour", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var min_buy_hour$field:int;
 
@@ -214,7 +214,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAX_BUY_HOUR:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.StallTypeDataProto.max_buy_hour", "maxBuyHour", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MAX_BUY_HOUR:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.StallTypeDataProto.max_buy_hour", "maxBuyHour", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var max_buy_hour$field:int;
 
@@ -239,7 +239,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const AD_MAX_LENGTH:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.StallTypeDataProto.ad_max_length", "adMaxLength", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const AD_MAX_LENGTH:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.StallTypeDataProto.ad_max_length", "adMaxLength", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var ad_max_length$field:int;
 
@@ -264,7 +264,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BROADCAST_AD_DURATION:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.StallTypeDataProto.broadcast_ad_duration", "broadcastAdDuration", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BROADCAST_AD_DURATION:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.StallTypeDataProto.broadcast_ad_duration", "broadcastAdDuration", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var broadcast_ad_duration$field:Int64;
 
@@ -287,7 +287,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STALL_RES:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.StallTypeDataProto.stall_res", "stallRes", (20 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const STALL_RES:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.StallTypeDataProto.stall_res", "stallRes", (20 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var stall_res$field:String;
 
@@ -313,51 +313,51 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, type$field);
 			}
 			if (hasName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, name$field);
 			}
 			if (hasMaxStallNameLength) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, max_stall_name_length$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, max_stall_name_length$field);
 			}
 			if (hasSellGoodsCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, sell_goods_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, sell_goods_count$field);
 			}
 			if (hasBuyGoodsCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, buy_goods_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, buy_goods_count$field);
 			}
 			if (hasStallFee) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, stall_fee$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, stall_fee$field);
 			}
 			if (hasBuyPrice) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, buy_price$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, buy_price$field);
 			}
 			if (hasMinBuyHour) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, min_buy_hour$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, min_buy_hour$field);
 			}
 			if (hasMaxBuyHour) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, max_buy_hour$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, max_buy_hour$field);
 			}
 			if (hasAdMaxLength) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, ad_max_length$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, ad_max_length$field);
 			}
 			if (hasBroadcastAdDuration) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, broadcast_ad_duration$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, broadcast_ad_duration$field);
 			}
 			if (hasStallRes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 20);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, stall_res$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, stall_res$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -381,91 +381,91 @@ package app.message {
 			var broadcast_ad_duration$count:uint = 0;
 			var stall_res$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StallTypeDataProto.type cannot be set twice.');
 					}
 					++type$count;
-					this.type = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.type = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StallTypeDataProto.name cannot be set twice.');
 					}
 					++name$count;
-					this.name = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.name = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (max_stall_name_length$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StallTypeDataProto.maxStallNameLength cannot be set twice.');
 					}
 					++max_stall_name_length$count;
-					this.maxStallNameLength = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.maxStallNameLength = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (sell_goods_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StallTypeDataProto.sellGoodsCount cannot be set twice.');
 					}
 					++sell_goods_count$count;
-					this.sellGoodsCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.sellGoodsCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (buy_goods_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StallTypeDataProto.buyGoodsCount cannot be set twice.');
 					}
 					++buy_goods_count$count;
-					this.buyGoodsCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.buyGoodsCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (stall_fee$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StallTypeDataProto.stallFee cannot be set twice.');
 					}
 					++stall_fee$count;
-					this.stallFee = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.stallFee = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (buy_price$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StallTypeDataProto.buyPrice cannot be set twice.');
 					}
 					++buy_price$count;
-					this.buyPrice = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.buyPrice = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 8:
 					if (min_buy_hour$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StallTypeDataProto.minBuyHour cannot be set twice.');
 					}
 					++min_buy_hour$count;
-					this.minBuyHour = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.minBuyHour = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 9:
 					if (max_buy_hour$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StallTypeDataProto.maxBuyHour cannot be set twice.');
 					}
 					++max_buy_hour$count;
-					this.maxBuyHour = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.maxBuyHour = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 10:
 					if (ad_max_length$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StallTypeDataProto.adMaxLength cannot be set twice.');
 					}
 					++ad_max_length$count;
-					this.adMaxLength = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.adMaxLength = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 11:
 					if (broadcast_ad_duration$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StallTypeDataProto.broadcastAdDuration cannot be set twice.');
 					}
 					++broadcast_ad_duration$count;
-					this.broadcastAdDuration = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.broadcastAdDuration = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 20:
 					if (stall_res$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StallTypeDataProto.stallRes cannot be set twice.');
 					}
 					++stall_res$count;
-					this.stallRes = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.stallRes = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

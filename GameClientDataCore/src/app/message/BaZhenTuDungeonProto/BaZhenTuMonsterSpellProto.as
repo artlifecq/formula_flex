@@ -14,7 +14,7 @@ package app.message.BaZhenTuDungeonProto {
 		/**
 		 *  @private
 		 */
-		public static const SPELL_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.BaZhenTuDungeonProto.BaZhenTuMonsterSpellProto.spell_id", "spellId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SPELL_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.BaZhenTuDungeonProto.BaZhenTuMonsterSpellProto.spell_id", "spellId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var spell_id$field:int;
 
@@ -41,7 +41,7 @@ package app.message.BaZhenTuDungeonProto {
 		/**
 		 *  @private
 		 */
-		public static const SPELL_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.BaZhenTuDungeonProto.BaZhenTuMonsterSpellProto.spell_name", "spellName", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const SPELL_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.BaZhenTuDungeonProto.BaZhenTuMonsterSpellProto.spell_name", "spellName", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var spell_name$field:String;
 
@@ -64,7 +64,7 @@ package app.message.BaZhenTuDungeonProto {
 		/**
 		 *  @private
 		 */
-		public static const SPELL_DESC:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.BaZhenTuDungeonProto.BaZhenTuMonsterSpellProto.spell_desc", "spellDesc", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const SPELL_DESC:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.BaZhenTuDungeonProto.BaZhenTuMonsterSpellProto.spell_desc", "spellDesc", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var spell_desc$field:String;
 
@@ -87,7 +87,7 @@ package app.message.BaZhenTuDungeonProto {
 		/**
 		 *  @private
 		 */
-		public static const SPELL_ICON:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.BaZhenTuDungeonProto.BaZhenTuMonsterSpellProto.spell_icon", "spellIcon", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const SPELL_ICON:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.BaZhenTuDungeonProto.BaZhenTuMonsterSpellProto.spell_icon", "spellIcon", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var spell_icon$field:String;
 
@@ -110,7 +110,7 @@ package app.message.BaZhenTuDungeonProto {
 		/**
 		 *  @private
 		 */
-		public static const MON_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.BaZhenTuDungeonProto.BaZhenTuMonsterSpellProto.mon_count", "monCount", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MON_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.BaZhenTuDungeonProto.BaZhenTuMonsterSpellProto.mon_count", "monCount", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var mon_count$field:int;
 
@@ -138,23 +138,23 @@ package app.message.BaZhenTuDungeonProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasSpellId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, spell_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, spell_id$field);
 			}
 			if (hasSpellName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, spell_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, spell_name$field);
 			}
 			if (hasSpellDesc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, spell_desc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, spell_desc$field);
 			}
 			if (hasSpellIcon) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, spell_icon$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, spell_icon$field);
 			}
 			if (hasMonCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, mon_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, mon_count$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -171,42 +171,42 @@ package app.message.BaZhenTuDungeonProto {
 			var spell_icon$count:uint = 0;
 			var mon_count$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (spell_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BaZhenTuMonsterSpellProto.spellId cannot be set twice.');
 					}
 					++spell_id$count;
-					this.spellId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.spellId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (spell_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BaZhenTuMonsterSpellProto.spellName cannot be set twice.');
 					}
 					++spell_name$count;
-					this.spellName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.spellName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (spell_desc$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BaZhenTuMonsterSpellProto.spellDesc cannot be set twice.');
 					}
 					++spell_desc$count;
-					this.spellDesc = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.spellDesc = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 4:
 					if (spell_icon$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BaZhenTuMonsterSpellProto.spellIcon cannot be set twice.');
 					}
 					++spell_icon$count;
-					this.spellIcon = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.spellIcon = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 5:
 					if (mon_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BaZhenTuMonsterSpellProto.monCount cannot be set twice.');
 					}
 					++mon_count$count;
-					this.monCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.monCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

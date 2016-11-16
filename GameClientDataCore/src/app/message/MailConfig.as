@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAIL_EXPIRE_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.MailConfig.mail_expire_time", "mailExpireTime", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MAIL_EXPIRE_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.MailConfig.mail_expire_time", "mailExpireTime", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var mail_expire_time$field:Int64;
 
@@ -38,7 +38,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BASE_BAND_MONEY_TAX:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MailConfig.base_band_money_tax", "baseBandMoneyTax", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BASE_BAND_MONEY_TAX:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MailConfig.base_band_money_tax", "baseBandMoneyTax", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var base_band_money_tax$field:int;
 
@@ -65,7 +65,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MONEY_TAX_TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.MailConfig.money_tax_type", "moneyTaxType", (3 << 3) | com.netease.protobuf.WireType.VARINT, app.message.MailConfig.MoneyTaxType);
+		public static const MONEY_TAX_TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.MailConfig.money_tax_type", "moneyTaxType", (3 << 3) | com.netease.protobuf.WireType.VARINT, app.message.MailConfig.MoneyTaxType);
 
 		private var money_tax_type$field:int;
 
@@ -90,7 +90,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MONEY_TAX:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MailConfig.money_tax", "moneyTax", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MONEY_TAX:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MailConfig.money_tax", "moneyTax", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var money_tax$field:int;
 
@@ -115,7 +115,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GOODS_TAX:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.MailConfig.goods_tax", "goodsTax", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const GOODS_TAX:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.MailConfig.goods_tax", "goodsTax", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var goodsTax:Array = [];
@@ -123,7 +123,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RECENT_MAIL_TARGET_LIMIT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MailConfig.recent_mail_target_limit", "recentMailTargetLimit", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RECENT_MAIL_TARGET_LIMIT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MailConfig.recent_mail_target_limit", "recentMailTargetLimit", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var recent_mail_target_limit$field:int;
 
@@ -151,27 +151,27 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasMailExpireTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, mail_expire_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, mail_expire_time$field);
 			}
 			if (hasBaseBandMoneyTax) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, base_band_money_tax$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, base_band_money_tax$field);
 			}
 			if (hasMoneyTaxType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, money_tax_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, money_tax_type$field);
 			}
 			if (hasMoneyTax) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, money_tax$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, money_tax$field);
 			}
 			for (var goodsTax$index:uint = 0; goodsTax$index < this.goodsTax.length; ++goodsTax$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.goodsTax[goodsTax$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.goodsTax[goodsTax$index]);
 			}
 			if (hasRecentMailTargetLimit) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, recent_mail_target_limit$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, recent_mail_target_limit$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -188,49 +188,49 @@ package app.message {
 			var money_tax$count:uint = 0;
 			var recent_mail_target_limit$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (mail_expire_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MailConfig.mailExpireTime cannot be set twice.');
 					}
 					++mail_expire_time$count;
-					this.mailExpireTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.mailExpireTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (base_band_money_tax$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MailConfig.baseBandMoneyTax cannot be set twice.');
 					}
 					++base_band_money_tax$count;
-					this.baseBandMoneyTax = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.baseBandMoneyTax = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (money_tax_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MailConfig.moneyTaxType cannot be set twice.');
 					}
 					++money_tax_type$count;
-					this.moneyTaxType = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.moneyTaxType = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 4:
 					if (money_tax$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MailConfig.moneyTax cannot be set twice.');
 					}
 					++money_tax$count;
-					this.moneyTax = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.moneyTax = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.goodsTax);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.goodsTax);
 						break;
 					}
-					this.goodsTax.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.goodsTax.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				case 6:
 					if (recent_mail_target_limit$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MailConfig.recentMailTargetLimit cannot be set twice.');
 					}
 					++recent_mail_target_limit$count;
-					this.recentMailTargetLimit = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.recentMailTargetLimit = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

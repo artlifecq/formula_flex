@@ -17,7 +17,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SPEECH:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.ChatContentProto.speech", "speech", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const SPEECH:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.ChatContentProto.speech", "speech", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var speech$field:String;
 
@@ -40,7 +40,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CHAT_GOODS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.ChatContentProto.chat_goods", "chatGoods", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsProto; });
+		public static const CHAT_GOODS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.ChatContentProto.chat_goods", "chatGoods", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsProto; });
 
 		[ArrayElementType("app.message.GoodsProto")]
 		public var chatGoods:Array = [];
@@ -48,7 +48,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CHECK_SUM:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChatContentProto.check_sum", "checkSum", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CHECK_SUM:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChatContentProto.check_sum", "checkSum", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var check_sum$field:int;
 
@@ -75,7 +75,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HERO_ID:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.ChatContentProto.hero_id", "heroId", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const HERO_ID:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.ChatContentProto.hero_id", "heroId", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var hero_id$field:Int64;
 
@@ -98,7 +98,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HERO_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.ChatContentProto.hero_name", "heroName", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const HERO_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.ChatContentProto.hero_name", "heroName", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var hero_name$field:String;
 
@@ -121,7 +121,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChatContentProto.country", "country", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COUNTRY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChatContentProto.country", "country", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var country$field:int;
 
@@ -146,7 +146,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChatContentProto.level", "level", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChatContentProto.level", "level", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level$field:int;
 
@@ -171,7 +171,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const POS_INFO:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.ChatContentProto.pos_info", "posInfo", (9 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ChatContentProto.PosInfoProto; });
+		public static const POS_INFO:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.ChatContentProto.pos_info", "posInfo", (9 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ChatContentProto.PosInfoProto; });
 
 		private var pos_info$field:app.message.ChatContentProto.PosInfoProto;
 
@@ -194,7 +194,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const OFFICER_POS:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.ChatContentProto.officer_pos", "officerPos", (10 << 3) | com.netease.protobuf.WireType.VARINT, app.message.CountryOfficerPos);
+		public static const OFFICER_POS:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.ChatContentProto.officer_pos", "officerPos", (10 << 3) | com.netease.protobuf.WireType.VARINT, app.message.CountryOfficerPos);
 
 		private var officer_pos$field:int;
 
@@ -219,7 +219,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_KING_GUILD:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.ChatContentProto.is_king_guild", "isKingGuild", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_KING_GUILD:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.ChatContentProto.is_king_guild", "isKingGuild", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_king_guild$field:Boolean;
 
@@ -244,7 +244,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_EMPEROR_GUILD:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.ChatContentProto.is_emperor_guild", "isEmperorGuild", (12 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_EMPEROR_GUILD:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.ChatContentProto.is_emperor_guild", "isEmperorGuild", (12 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_emperor_guild$field:Boolean;
 
@@ -269,7 +269,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_GM:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.ChatContentProto.is_gm", "isGm", (13 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_GM:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.ChatContentProto.is_gm", "isGm", (13 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_gm$field:Boolean;
 
@@ -294,7 +294,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PLATFORM_VIP:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChatContentProto.platform_vip", "platformVip", (14 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PLATFORM_VIP:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChatContentProto.platform_vip", "platformVip", (14 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var platform_vip$field:int;
 
@@ -319,7 +319,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const VIP_LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChatContentProto.vip_level", "vipLevel", (15 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const VIP_LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChatContentProto.vip_level", "vipLevel", (15 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var vip_level$field:int;
 
@@ -347,59 +347,59 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasSpeech) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, speech$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, speech$field);
 			}
 			for (var chatGoods$index:uint = 0; chatGoods$index < this.chatGoods.length; ++chatGoods$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.chatGoods[chatGoods$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.chatGoods[chatGoods$index]);
 			}
 			if (hasCheckSum) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, check_sum$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, check_sum$field);
 			}
 			if (hasHeroId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, hero_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, hero_id$field);
 			}
 			if (hasHeroName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, hero_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, hero_name$field);
 			}
 			if (hasCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, country$field);
 			}
 			if (hasLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level$field);
 			}
 			if (hasPosInfo) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, pos_info$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, pos_info$field);
 			}
 			if (hasOfficerPos) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, officer_pos$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, officer_pos$field);
 			}
 			if (hasIsKingGuild) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_king_guild$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_king_guild$field);
 			}
 			if (hasIsEmperorGuild) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_emperor_guild$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_emperor_guild$field);
 			}
 			if (hasIsGm) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_gm$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_gm$field);
 			}
 			if (hasPlatformVip) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 14);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, platform_vip$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, platform_vip$field);
 			}
 			if (hasVipLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 15);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, vip_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, vip_level$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -424,52 +424,52 @@ package app.message {
 			var platform_vip$count:uint = 0;
 			var vip_level$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (speech$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChatContentProto.speech cannot be set twice.');
 					}
 					++speech$count;
-					this.speech = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.speech = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 2:
-					this.chatGoods.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.GoodsProto()));
+					this.chatGoods.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.GoodsProto()));
 					break;
 				case 3:
 					if (check_sum$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChatContentProto.checkSum cannot be set twice.');
 					}
 					++check_sum$count;
-					this.checkSum = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.checkSum = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (hero_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChatContentProto.heroId cannot be set twice.');
 					}
 					++hero_id$count;
-					this.heroId = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.heroId = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 5:
 					if (hero_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChatContentProto.heroName cannot be set twice.');
 					}
 					++hero_name$count;
-					this.heroName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.heroName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 6:
 					if (country$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChatContentProto.country cannot be set twice.');
 					}
 					++country$count;
-					this.country = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.country = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChatContentProto.level cannot be set twice.');
 					}
 					++level$count;
-					this.level = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.level = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 9:
 					if (pos_info$count != 0) {
@@ -477,49 +477,49 @@ package app.message {
 					}
 					++pos_info$count;
 					this.posInfo = new app.message.ChatContentProto.PosInfoProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.posInfo);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.posInfo);
 					break;
 				case 10:
 					if (officer_pos$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChatContentProto.officerPos cannot be set twice.');
 					}
 					++officer_pos$count;
-					this.officerPos = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.officerPos = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 11:
 					if (is_king_guild$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChatContentProto.isKingGuild cannot be set twice.');
 					}
 					++is_king_guild$count;
-					this.isKingGuild = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isKingGuild = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 12:
 					if (is_emperor_guild$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChatContentProto.isEmperorGuild cannot be set twice.');
 					}
 					++is_emperor_guild$count;
-					this.isEmperorGuild = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isEmperorGuild = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 13:
 					if (is_gm$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChatContentProto.isGm cannot be set twice.');
 					}
 					++is_gm$count;
-					this.isGm = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isGm = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 14:
 					if (platform_vip$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChatContentProto.platformVip cannot be set twice.');
 					}
 					++platform_vip$count;
-					this.platformVip = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.platformVip = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 15:
 					if (vip_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChatContentProto.vipLevel cannot be set twice.');
 					}
 					++vip_level$count;
-					this.vipLevel = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.vipLevel = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -2,7 +2,7 @@ package com.rpgGame.app.sender
 {
 	import app.cmd.YuMaQiShouModuleMessages;
 	
-	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
 
 	/**
 	 * 发送消息 
@@ -18,7 +18,7 @@ package com.rpgGame.app.sender
 		public static function requestGetBiMaWenPos():void
 		{
 			_bytes.clear();
-			SocketConnection.send(YuMaQiShouModuleMessages.C2S_GET_BI_MA_WEN_POS, _bytes);
+			SocketConnection_protoBuffer.send(YuMaQiShouModuleMessages.C2S_GET_BI_MA_WEN_POS, _bytes);
 		}
 	}
 }

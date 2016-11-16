@@ -15,7 +15,7 @@ package app.message.NpcDialogProto {
 		/**
 		 *  @private
 		 */
-		public static const DATA:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.NpcDialogProto.TransportDialogProto.data", "data", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NpcDialogProto.TransportDialogProto.NpcTransportsProto; });
+		public static const DATA:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.NpcDialogProto.TransportDialogProto.data", "data", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NpcDialogProto.TransportDialogProto.NpcTransportsProto; });
 
 		private var data$field:app.message.NpcDialogProto.TransportDialogProto.NpcTransportsProto;
 
@@ -41,7 +41,7 @@ package app.message.NpcDialogProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasData) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, data$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, data$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -54,7 +54,7 @@ package app.message.NpcDialogProto {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var data$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (data$count != 0) {
@@ -62,7 +62,7 @@ package app.message.NpcDialogProto {
 					}
 					++data$count;
 					this.data = new app.message.NpcDialogProto.TransportDialogProto.NpcTransportsProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.data);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.data);
 					break;
 				default:
 					super.readUnknown(input, tag);

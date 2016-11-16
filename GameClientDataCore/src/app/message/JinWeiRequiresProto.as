@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.JinWeiRequiresProto.level", "level", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.JinWeiRequiresProto.level", "level", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FIGHTING_AMOUNT:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.JinWeiRequiresProto.fighting_amount", "fightingAmount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FIGHTING_AMOUNT:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.JinWeiRequiresProto.fighting_amount", "fightingAmount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var fighting_amount$field:Int64;
 
@@ -64,7 +64,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FIGHTING_RANK:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.JinWeiRequiresProto.fighting_rank", "fightingRank", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FIGHTING_RANK:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.JinWeiRequiresProto.fighting_rank", "fightingRank", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var fighting_rank$field:int;
 
@@ -89,7 +89,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_SELF_COUNTRY:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.JinWeiRequiresProto.is_self_country", "isSelfCountry", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_SELF_COUNTRY:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.JinWeiRequiresProto.is_self_country", "isSelfCountry", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_self_country$field:Boolean;
 
@@ -117,19 +117,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level$field);
 			}
 			if (hasFightingAmount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, fighting_amount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, fighting_amount$field);
 			}
 			if (hasFightingRank) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, fighting_rank$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, fighting_rank$field);
 			}
 			if (hasIsSelfCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_self_country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_self_country$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -145,35 +145,35 @@ package app.message {
 			var fighting_rank$count:uint = 0;
 			var is_self_country$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: JinWeiRequiresProto.level cannot be set twice.');
 					}
 					++level$count;
-					this.level = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.level = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (fighting_amount$count != 0) {
 						throw new flash.errors.IOError('Bad data format: JinWeiRequiresProto.fightingAmount cannot be set twice.');
 					}
 					++fighting_amount$count;
-					this.fightingAmount = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.fightingAmount = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 3:
 					if (fighting_rank$count != 0) {
 						throw new flash.errors.IOError('Bad data format: JinWeiRequiresProto.fightingRank cannot be set twice.');
 					}
 					++fighting_rank$count;
-					this.fightingRank = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.fightingRank = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (is_self_country$count != 0) {
 						throw new flash.errors.IOError('Bad data format: JinWeiRequiresProto.isSelfCountry cannot be set twice.');
 					}
 					++is_self_country$count;
-					this.isSelfCountry = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isSelfCountry = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -26,9 +26,9 @@ package com.rpgGame.app
 	
 	import org.client.mainCore.manager.PopUpManager;
 	import org.client.mainCore.manager.ProjectManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
-	import org.game.netCore.net.GameSocketDispatcher;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
+	import org.game.netCore.net_protobuff.GameSocketDispatcher;
 
 	/**
 	 * 社区资源都加载完成后程序运行的主入口。
@@ -86,7 +86,7 @@ package com.rpgGame.app
 			GameLog.enableTrace = true;
 			ZLog.enableLog = false;
 			ZLog.enableTrace = false;
-			SocketConnection.print = false;
+			SocketConnection_protoBuffer.print = false;
 			GameSocketDispatcher.isPrint = true;
 			KeyController.isPrint = false;
 			StarlingLayerManager.setup();

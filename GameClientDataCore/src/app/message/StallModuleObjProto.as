@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STALL_TYPE_LEFT_TIME:RepeatedFieldDescriptor$TYPE_INT64 = new RepeatedFieldDescriptor$TYPE_INT64("app.message.StallModuleObjProto.stall_type_left_time", "stallTypeLeftTime", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const STALL_TYPE_LEFT_TIME:RepeatedFieldDescriptor_TYPE_INT64 = new RepeatedFieldDescriptor_TYPE_INT64("app.message.StallModuleObjProto.stall_type_left_time", "stallTypeLeftTime", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("Int64")]
 		public var stallTypeLeftTime:Array = [];
@@ -25,7 +25,7 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			for (var stallTypeLeftTime$index:uint = 0; stallTypeLeftTime$index < this.stallTypeLeftTime.length; ++stallTypeLeftTime$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, this.stallTypeLeftTime[stallTypeLeftTime$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, this.stallTypeLeftTime[stallTypeLeftTime$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -37,14 +37,14 @@ package app.message {
 		 */
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT64, this.stallTypeLeftTime);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT64, this.stallTypeLeftTime);
 						break;
 					}
-					this.stallTypeLeftTime.push(com.netease.protobuf.ReadUtils.read$TYPE_INT64(input));
+					this.stallTypeLeftTime.push(com.netease.protobuf.ReadUtils.read_TYPE_INT64(input));
 					break;
 				default:
 					super.readUnknown(input, tag);

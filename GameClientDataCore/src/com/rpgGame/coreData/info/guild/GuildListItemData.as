@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.info.guild
 {
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 * 帮派列表中的单行列表数据 

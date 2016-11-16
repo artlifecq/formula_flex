@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const POS:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.CountryOfficerDataProto.pos", "pos", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.CountryOfficerPos);
+		public static const POS:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.CountryOfficerDataProto.pos", "pos", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.CountryOfficerPos);
 
 		private var pos$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const POS_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.CountryOfficerDataProto.pos_name", "posName", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const POS_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.CountryOfficerDataProto.pos_name", "posName", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var pos_name$field:String;
 
@@ -65,7 +65,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const OFFICER_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryOfficerDataProto.officer_count", "officerCount", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const OFFICER_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryOfficerDataProto.officer_count", "officerCount", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var officer_count$field:int;
 
@@ -90,7 +90,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STRONG_SALARY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryOfficerDataProto.strong_salary", "strongSalary", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const STRONG_SALARY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryOfficerDataProto.strong_salary", "strongSalary", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var strong_salary$field:int;
 
@@ -115,7 +115,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NORMAL_SALARY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryOfficerDataProto.normal_salary", "normalSalary", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const NORMAL_SALARY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryOfficerDataProto.normal_salary", "normalSalary", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var normal_salary$field:int;
 
@@ -140,7 +140,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const WEAK_SALARY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryOfficerDataProto.weak_salary", "weakSalary", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const WEAK_SALARY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryOfficerDataProto.weak_salary", "weakSalary", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var weak_salary$field:int;
 
@@ -165,7 +165,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_DECLARE_WAR:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.CountryOfficerDataProto.can_declare_war", "canDeclareWar", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_DECLARE_WAR:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.CountryOfficerDataProto.can_declare_war", "canDeclareWar", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_declare_war$field:Boolean;
 
@@ -190,7 +190,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_PUBLISH_COUNTRY_TASK:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.CountryOfficerDataProto.can_publish_country_task", "canPublishCountryTask", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_PUBLISH_COUNTRY_TASK:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.CountryOfficerDataProto.can_publish_country_task", "canPublishCountryTask", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_publish_country_task$field:Boolean;
 
@@ -215,7 +215,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_SET_OFFICER:RepeatedFieldDescriptor$TYPE_ENUM = new RepeatedFieldDescriptor$TYPE_ENUM("app.message.CountryOfficerDataProto.can_set_officer", "canSetOfficer", (9 << 3) | com.netease.protobuf.WireType.VARINT, app.message.CountryOfficerPos);
+		public static const CAN_SET_OFFICER:RepeatedFieldDescriptor_TYPE_ENUM = new RepeatedFieldDescriptor_TYPE_ENUM("app.message.CountryOfficerDataProto.can_set_officer", "canSetOfficer", (9 << 3) | com.netease.protobuf.WireType.VARINT, app.message.CountryOfficerPos);
 
 		[ArrayElementType("int")]
 		public var canSetOfficer:Array = [];
@@ -223,7 +223,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_SET_DONT_TALK_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryOfficerDataProto.can_set_dont_talk_times", "canSetDontTalkTimes", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_SET_DONT_TALK_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryOfficerDataProto.can_set_dont_talk_times", "canSetDontTalkTimes", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_set_dont_talk_times$field:int;
 
@@ -248,7 +248,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_CAPTIVITY_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryOfficerDataProto.can_captivity_times", "canCaptivityTimes", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_CAPTIVITY_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryOfficerDataProto.can_captivity_times", "canCaptivityTimes", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_captivity_times$field:int;
 
@@ -273,7 +273,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_USE_WANG_ZHE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.CountryOfficerDataProto.can_use_wang_zhe", "canUseWangZhe", (12 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_USE_WANG_ZHE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.CountryOfficerDataProto.can_use_wang_zhe", "canUseWangZhe", (12 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_use_wang_zhe$field:Boolean;
 
@@ -298,7 +298,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_USE_KING:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.CountryOfficerDataProto.can_use_king", "canUseKing", (22 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_USE_KING:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.CountryOfficerDataProto.can_use_king", "canUseKing", (22 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_use_king$field:Boolean;
 
@@ -323,7 +323,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_USE_HU_FU:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.CountryOfficerDataProto.can_use_hu_fu", "canUseHuFu", (23 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_USE_HU_FU:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.CountryOfficerDataProto.can_use_hu_fu", "canUseHuFu", (23 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_use_hu_fu$field:Boolean;
 
@@ -348,7 +348,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_USE_JIN_WEI_FU:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.CountryOfficerDataProto.can_use_jin_wei_fu", "canUseJinWeiFu", (13 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_USE_JIN_WEI_FU:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.CountryOfficerDataProto.can_use_jin_wei_fu", "canUseJinWeiFu", (13 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_use_jin_wei_fu$field:Boolean;
 
@@ -373,7 +373,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_PK_NOT_RED:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.CountryOfficerDataProto.is_pk_not_red", "isPkNotRed", (14 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_PK_NOT_RED:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.CountryOfficerDataProto.is_pk_not_red", "isPkNotRed", (14 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_pk_not_red$field:Boolean;
 
@@ -398,7 +398,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_CHANGE_TAX_RATE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.CountryOfficerDataProto.can_change_tax_rate", "canChangeTaxRate", (15 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_CHANGE_TAX_RATE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.CountryOfficerDataProto.can_change_tax_rate", "canChangeTaxRate", (15 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_change_tax_rate$field:Boolean;
 
@@ -423,7 +423,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_CHANGE_MILITARY:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.CountryOfficerDataProto.can_change_military", "canChangeMilitary", (16 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_CHANGE_MILITARY:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.CountryOfficerDataProto.can_change_military", "canChangeMilitary", (16 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_change_military$field:Boolean;
 
@@ -448,7 +448,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_UNION_AND_LIFT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.CountryOfficerDataProto.can_union_and_lift", "canUnionAndLift", (17 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_UNION_AND_LIFT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.CountryOfficerDataProto.can_union_and_lift", "canUnionAndLift", (17 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_union_and_lift$field:Boolean;
 
@@ -473,7 +473,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_COUNTRY_DONATE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.CountryOfficerDataProto.can_country_donate", "canCountryDonate", (18 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_COUNTRY_DONATE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.CountryOfficerDataProto.can_country_donate", "canCountryDonate", (18 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_country_donate$field:Boolean;
 
@@ -498,7 +498,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_START_DUO_JING:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.CountryOfficerDataProto.can_start_duo_jing", "canStartDuoJing", (24 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_START_DUO_JING:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.CountryOfficerDataProto.can_start_duo_jing", "canStartDuoJing", (24 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_start_duo_jing$field:Boolean;
 
@@ -523,7 +523,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_START_MI_XIN:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.CountryOfficerDataProto.can_start_mi_xin", "canStartMiXin", (25 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_START_MI_XIN:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.CountryOfficerDataProto.can_start_mi_xin", "canStartMiXin", (25 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_start_mi_xin$field:Boolean;
 
@@ -548,7 +548,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_SET_JIN_WEI_ANNOUNCEMENT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.CountryOfficerDataProto.can_set_jin_wei_announcement", "canSetJinWeiAnnouncement", (19 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_SET_JIN_WEI_ANNOUNCEMENT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.CountryOfficerDataProto.can_set_jin_wei_announcement", "canSetJinWeiAnnouncement", (19 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_set_jin_wei_announcement$field:Boolean;
 
@@ -573,7 +573,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_SET_COUNTRY_ANNOUNCEMENT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.CountryOfficerDataProto.can_set_country_announcement", "canSetCountryAnnouncement", (20 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_SET_COUNTRY_ANNOUNCEMENT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.CountryOfficerDataProto.can_set_country_announcement", "canSetCountryAnnouncement", (20 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_set_country_announcement$field:Boolean;
 
@@ -598,7 +598,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SEAL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryOfficerDataProto.seal", "seal", (21 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SEAL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryOfficerDataProto.seal", "seal", (21 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var seal$field:int;
 
@@ -623,7 +623,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_START_GUO_YUN:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.CountryOfficerDataProto.can_start_guo_yun", "canStartGuoYun", (26 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_START_GUO_YUN:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.CountryOfficerDataProto.can_start_guo_yun", "canStartGuoYun", (26 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_start_guo_yun$field:Boolean;
 
@@ -651,107 +651,107 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasPos) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, pos$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, pos$field);
 			}
 			if (hasPosName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, pos_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, pos_name$field);
 			}
 			if (hasOfficerCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, officer_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, officer_count$field);
 			}
 			if (hasStrongSalary) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, strong_salary$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, strong_salary$field);
 			}
 			if (hasNormalSalary) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, normal_salary$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, normal_salary$field);
 			}
 			if (hasWeakSalary) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, weak_salary$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, weak_salary$field);
 			}
 			if (hasCanDeclareWar) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_declare_war$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_declare_war$field);
 			}
 			if (hasCanPublishCountryTask) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_publish_country_task$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_publish_country_task$field);
 			}
 			for (var canSetOfficer$index:uint = 0; canSetOfficer$index < this.canSetOfficer.length; ++canSetOfficer$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, this.canSetOfficer[canSetOfficer$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, this.canSetOfficer[canSetOfficer$index]);
 			}
 			if (hasCanSetDontTalkTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, can_set_dont_talk_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, can_set_dont_talk_times$field);
 			}
 			if (hasCanCaptivityTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, can_captivity_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, can_captivity_times$field);
 			}
 			if (hasCanUseWangZhe) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_use_wang_zhe$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_use_wang_zhe$field);
 			}
 			if (hasCanUseKing) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 22);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_use_king$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_use_king$field);
 			}
 			if (hasCanUseHuFu) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 23);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_use_hu_fu$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_use_hu_fu$field);
 			}
 			if (hasCanUseJinWeiFu) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_use_jin_wei_fu$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_use_jin_wei_fu$field);
 			}
 			if (hasIsPkNotRed) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 14);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_pk_not_red$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_pk_not_red$field);
 			}
 			if (hasCanChangeTaxRate) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 15);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_change_tax_rate$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_change_tax_rate$field);
 			}
 			if (hasCanChangeMilitary) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 16);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_change_military$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_change_military$field);
 			}
 			if (hasCanUnionAndLift) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 17);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_union_and_lift$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_union_and_lift$field);
 			}
 			if (hasCanCountryDonate) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 18);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_country_donate$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_country_donate$field);
 			}
 			if (hasCanStartDuoJing) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 24);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_start_duo_jing$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_start_duo_jing$field);
 			}
 			if (hasCanStartMiXin) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 25);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_start_mi_xin$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_start_mi_xin$field);
 			}
 			if (hasCanSetJinWeiAnnouncement) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 19);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_set_jin_wei_announcement$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_set_jin_wei_announcement$field);
 			}
 			if (hasCanSetCountryAnnouncement) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 20);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_set_country_announcement$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_set_country_announcement$field);
 			}
 			if (hasSeal) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 21);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, seal$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, seal$field);
 			}
 			if (hasCanStartGuoYun) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 26);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_start_guo_yun$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_start_guo_yun$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -788,189 +788,189 @@ package app.message {
 			var seal$count:uint = 0;
 			var can_start_guo_yun$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (pos$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.pos cannot be set twice.');
 					}
 					++pos$count;
-					this.pos = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.pos = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 2:
 					if (pos_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.posName cannot be set twice.');
 					}
 					++pos_name$count;
-					this.posName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.posName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (officer_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.officerCount cannot be set twice.');
 					}
 					++officer_count$count;
-					this.officerCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.officerCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (strong_salary$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.strongSalary cannot be set twice.');
 					}
 					++strong_salary$count;
-					this.strongSalary = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.strongSalary = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (normal_salary$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.normalSalary cannot be set twice.');
 					}
 					++normal_salary$count;
-					this.normalSalary = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.normalSalary = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (weak_salary$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.weakSalary cannot be set twice.');
 					}
 					++weak_salary$count;
-					this.weakSalary = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.weakSalary = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (can_declare_war$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.canDeclareWar cannot be set twice.');
 					}
 					++can_declare_war$count;
-					this.canDeclareWar = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canDeclareWar = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 8:
 					if (can_publish_country_task$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.canPublishCountryTask cannot be set twice.');
 					}
 					++can_publish_country_task$count;
-					this.canPublishCountryTask = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canPublishCountryTask = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 9:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_ENUM, this.canSetOfficer);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_ENUM, this.canSetOfficer);
 						break;
 					}
-					this.canSetOfficer.push(com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input));
+					this.canSetOfficer.push(com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input));
 					break;
 				case 10:
 					if (can_set_dont_talk_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.canSetDontTalkTimes cannot be set twice.');
 					}
 					++can_set_dont_talk_times$count;
-					this.canSetDontTalkTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.canSetDontTalkTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 11:
 					if (can_captivity_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.canCaptivityTimes cannot be set twice.');
 					}
 					++can_captivity_times$count;
-					this.canCaptivityTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.canCaptivityTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 12:
 					if (can_use_wang_zhe$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.canUseWangZhe cannot be set twice.');
 					}
 					++can_use_wang_zhe$count;
-					this.canUseWangZhe = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canUseWangZhe = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 22:
 					if (can_use_king$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.canUseKing cannot be set twice.');
 					}
 					++can_use_king$count;
-					this.canUseKing = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canUseKing = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 23:
 					if (can_use_hu_fu$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.canUseHuFu cannot be set twice.');
 					}
 					++can_use_hu_fu$count;
-					this.canUseHuFu = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canUseHuFu = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 13:
 					if (can_use_jin_wei_fu$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.canUseJinWeiFu cannot be set twice.');
 					}
 					++can_use_jin_wei_fu$count;
-					this.canUseJinWeiFu = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canUseJinWeiFu = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 14:
 					if (is_pk_not_red$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.isPkNotRed cannot be set twice.');
 					}
 					++is_pk_not_red$count;
-					this.isPkNotRed = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isPkNotRed = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 15:
 					if (can_change_tax_rate$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.canChangeTaxRate cannot be set twice.');
 					}
 					++can_change_tax_rate$count;
-					this.canChangeTaxRate = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canChangeTaxRate = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 16:
 					if (can_change_military$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.canChangeMilitary cannot be set twice.');
 					}
 					++can_change_military$count;
-					this.canChangeMilitary = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canChangeMilitary = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 17:
 					if (can_union_and_lift$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.canUnionAndLift cannot be set twice.');
 					}
 					++can_union_and_lift$count;
-					this.canUnionAndLift = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canUnionAndLift = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 18:
 					if (can_country_donate$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.canCountryDonate cannot be set twice.');
 					}
 					++can_country_donate$count;
-					this.canCountryDonate = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canCountryDonate = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 24:
 					if (can_start_duo_jing$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.canStartDuoJing cannot be set twice.');
 					}
 					++can_start_duo_jing$count;
-					this.canStartDuoJing = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canStartDuoJing = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 25:
 					if (can_start_mi_xin$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.canStartMiXin cannot be set twice.');
 					}
 					++can_start_mi_xin$count;
-					this.canStartMiXin = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canStartMiXin = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 19:
 					if (can_set_jin_wei_announcement$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.canSetJinWeiAnnouncement cannot be set twice.');
 					}
 					++can_set_jin_wei_announcement$count;
-					this.canSetJinWeiAnnouncement = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canSetJinWeiAnnouncement = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 20:
 					if (can_set_country_announcement$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.canSetCountryAnnouncement cannot be set twice.');
 					}
 					++can_set_country_announcement$count;
-					this.canSetCountryAnnouncement = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canSetCountryAnnouncement = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 21:
 					if (seal$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.seal cannot be set twice.');
 					}
 					++seal$count;
-					this.seal = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.seal = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 26:
 					if (can_start_guo_yun$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficerDataProto.canStartGuoYun cannot be set twice.');
 					}
 					++can_start_guo_yun$count;
-					this.canStartGuoYun = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canStartGuoYun = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

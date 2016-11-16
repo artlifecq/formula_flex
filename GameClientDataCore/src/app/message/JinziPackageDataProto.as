@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COST:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.JinziPackageDataProto.cost", "cost", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COST:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.JinziPackageDataProto.cost", "cost", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var cost$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TITLE:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.JinziPackageDataProto.title", "title", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const TITLE:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.JinziPackageDataProto.title", "title", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var title$field:String;
 
@@ -64,7 +64,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SHOW_PRICE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.JinziPackageDataProto.show_price", "showPrice", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SHOW_PRICE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.JinziPackageDataProto.show_price", "showPrice", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var show_price$field:int;
 
@@ -92,15 +92,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, cost$field);
 			}
 			if (hasTitle) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, title$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, title$field);
 			}
 			if (hasShowPrice) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, show_price$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, show_price$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -115,28 +115,28 @@ package app.message {
 			var title$count:uint = 0;
 			var show_price$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (cost$count != 0) {
 						throw new flash.errors.IOError('Bad data format: JinziPackageDataProto.cost cannot be set twice.');
 					}
 					++cost$count;
-					this.cost = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.cost = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (title$count != 0) {
 						throw new flash.errors.IOError('Bad data format: JinziPackageDataProto.title cannot be set twice.');
 					}
 					++title$count;
-					this.title = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.title = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (show_price$count != 0) {
 						throw new flash.errors.IOError('Bad data format: JinziPackageDataProto.showPrice cannot be set twice.');
 					}
 					++show_price$count;
-					this.showPrice = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.showPrice = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.BiaoJuProto.country", "country", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COUNTRY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.BiaoJuProto.country", "country", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var country$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_MONEY:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.BiaoJuProto.total_money", "totalMoney", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOTAL_MONEY:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.BiaoJuProto.total_money", "totalMoney", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var total_money$field:Int64;
 
@@ -64,7 +64,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TODAY_PROFIT:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.BiaoJuProto.today_profit", "todayProfit", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TODAY_PROFIT:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.BiaoJuProto.today_profit", "todayProfit", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var today_profit$field:Int64;
 
@@ -87,7 +87,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PROFIT:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.BiaoJuProto.profit", "profit", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PROFIT:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.BiaoJuProto.profit", "profit", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var profit$field:Int64;
 
@@ -110,7 +110,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const REPARATION:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.BiaoJuProto.reparation", "reparation", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const REPARATION:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.BiaoJuProto.reparation", "reparation", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var reparation$field:Int64;
 
@@ -133,7 +133,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOU_BAO_BIAO_NUM:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.BiaoJuProto.tou_bao_biao_num", "touBaoBiaoNum", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOU_BAO_BIAO_NUM:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.BiaoJuProto.tou_bao_biao_num", "touBaoBiaoNum", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var tou_bao_biao_num$field:int;
 
@@ -158,7 +158,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOU_BAO_PREPARE_MONEY:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.BiaoJuProto.tou_bao_prepare_money", "touBaoPrepareMoney", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOU_BAO_PREPARE_MONEY:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.BiaoJuProto.tou_bao_prepare_money", "touBaoPrepareMoney", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var tou_bao_prepare_money$field:Int64;
 
@@ -181,7 +181,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEFT_SYSTEM_COMPENSATE_MONEY:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.BiaoJuProto.left_system_compensate_money", "leftSystemCompensateMoney", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEFT_SYSTEM_COMPENSATE_MONEY:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.BiaoJuProto.left_system_compensate_money", "leftSystemCompensateMoney", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var left_system_compensate_money$field:Int64;
 
@@ -204,7 +204,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_HU_BIAO_SUCCESS_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.BiaoJuProto.total_hu_biao_success_times", "totalHuBiaoSuccessTimes", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOTAL_HU_BIAO_SUCCESS_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.BiaoJuProto.total_hu_biao_success_times", "totalHuBiaoSuccessTimes", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var total_hu_biao_success_times$field:int;
 
@@ -229,7 +229,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_TOU_BIAO_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.BiaoJuProto.total_tou_biao_times", "totalTouBiaoTimes", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOTAL_TOU_BIAO_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.BiaoJuProto.total_tou_biao_times", "totalTouBiaoTimes", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var total_tou_biao_times$field:int;
 
@@ -254,7 +254,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_MANUAL_STOP:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.BiaoJuProto.is_manual_stop", "isManualStop", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_MANUAL_STOP:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.BiaoJuProto.is_manual_stop", "isManualStop", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_manual_stop$field:Boolean;
 
@@ -279,7 +279,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TODAY_ALLOCATE_SALARY:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.BiaoJuProto.today_allocate_salary", "todayAllocateSalary", (12 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TODAY_ALLOCATE_SALARY:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.BiaoJuProto.today_allocate_salary", "todayAllocateSalary", (12 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var today_allocate_salary$field:Boolean;
 
@@ -304,7 +304,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ACCUM_RECHARGE_MONEY:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.BiaoJuProto.accum_recharge_money", "accumRechargeMoney", (20 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ACCUM_RECHARGE_MONEY:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.BiaoJuProto.accum_recharge_money", "accumRechargeMoney", (20 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var accum_recharge_money$field:Int64;
 
@@ -327,7 +327,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ACCUM_SALARY:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.BiaoJuProto.accum_salary", "accumSalary", (21 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ACCUM_SALARY:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.BiaoJuProto.accum_salary", "accumSalary", (21 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var accum_salary$field:Int64;
 
@@ -350,7 +350,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ACCUM_REPARATION:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.BiaoJuProto.accum_reparation", "accumReparation", (22 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ACCUM_REPARATION:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.BiaoJuProto.accum_reparation", "accumReparation", (22 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var accum_reparation$field:Int64;
 
@@ -373,7 +373,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ACCUM_HU_BIAO_SUCCESS_TIMES:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.BiaoJuProto.accum_hu_biao_success_times", "accumHuBiaoSuccessTimes", (23 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ACCUM_HU_BIAO_SUCCESS_TIMES:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.BiaoJuProto.accum_hu_biao_success_times", "accumHuBiaoSuccessTimes", (23 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var accum_hu_biao_success_times$field:Int64;
 
@@ -396,7 +396,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ACCUM_TOU_BIAO_TIMES:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.BiaoJuProto.accum_tou_biao_times", "accumTouBiaoTimes", (24 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ACCUM_TOU_BIAO_TIMES:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.BiaoJuProto.accum_tou_biao_times", "accumTouBiaoTimes", (24 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var accum_tou_biao_times$field:Int64;
 
@@ -422,71 +422,71 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, country$field);
 			}
 			if (hasTotalMoney) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, total_money$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, total_money$field);
 			}
 			if (hasTodayProfit) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, today_profit$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, today_profit$field);
 			}
 			if (hasProfit) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, profit$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, profit$field);
 			}
 			if (hasReparation) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, reparation$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, reparation$field);
 			}
 			if (hasTouBaoBiaoNum) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, tou_bao_biao_num$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, tou_bao_biao_num$field);
 			}
 			if (hasTouBaoPrepareMoney) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, tou_bao_prepare_money$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, tou_bao_prepare_money$field);
 			}
 			if (hasLeftSystemCompensateMoney) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, left_system_compensate_money$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, left_system_compensate_money$field);
 			}
 			if (hasTotalHuBiaoSuccessTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, total_hu_biao_success_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, total_hu_biao_success_times$field);
 			}
 			if (hasTotalTouBiaoTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, total_tou_biao_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, total_tou_biao_times$field);
 			}
 			if (hasIsManualStop) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_manual_stop$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_manual_stop$field);
 			}
 			if (hasTodayAllocateSalary) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, today_allocate_salary$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, today_allocate_salary$field);
 			}
 			if (hasAccumRechargeMoney) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 20);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, accum_recharge_money$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, accum_recharge_money$field);
 			}
 			if (hasAccumSalary) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 21);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, accum_salary$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, accum_salary$field);
 			}
 			if (hasAccumReparation) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 22);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, accum_reparation$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, accum_reparation$field);
 			}
 			if (hasAccumHuBiaoSuccessTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 23);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, accum_hu_biao_success_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, accum_hu_biao_success_times$field);
 			}
 			if (hasAccumTouBiaoTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 24);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, accum_tou_biao_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, accum_tou_biao_times$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -515,126 +515,126 @@ package app.message {
 			var accum_hu_biao_success_times$count:uint = 0;
 			var accum_tou_biao_times$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (country$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BiaoJuProto.country cannot be set twice.');
 					}
 					++country$count;
-					this.country = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.country = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (total_money$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BiaoJuProto.totalMoney cannot be set twice.');
 					}
 					++total_money$count;
-					this.totalMoney = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.totalMoney = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 3:
 					if (today_profit$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BiaoJuProto.todayProfit cannot be set twice.');
 					}
 					++today_profit$count;
-					this.todayProfit = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.todayProfit = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 4:
 					if (profit$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BiaoJuProto.profit cannot be set twice.');
 					}
 					++profit$count;
-					this.profit = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.profit = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 5:
 					if (reparation$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BiaoJuProto.reparation cannot be set twice.');
 					}
 					++reparation$count;
-					this.reparation = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.reparation = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 6:
 					if (tou_bao_biao_num$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BiaoJuProto.touBaoBiaoNum cannot be set twice.');
 					}
 					++tou_bao_biao_num$count;
-					this.touBaoBiaoNum = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.touBaoBiaoNum = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (tou_bao_prepare_money$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BiaoJuProto.touBaoPrepareMoney cannot be set twice.');
 					}
 					++tou_bao_prepare_money$count;
-					this.touBaoPrepareMoney = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.touBaoPrepareMoney = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 8:
 					if (left_system_compensate_money$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BiaoJuProto.leftSystemCompensateMoney cannot be set twice.');
 					}
 					++left_system_compensate_money$count;
-					this.leftSystemCompensateMoney = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.leftSystemCompensateMoney = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 9:
 					if (total_hu_biao_success_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BiaoJuProto.totalHuBiaoSuccessTimes cannot be set twice.');
 					}
 					++total_hu_biao_success_times$count;
-					this.totalHuBiaoSuccessTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.totalHuBiaoSuccessTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 10:
 					if (total_tou_biao_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BiaoJuProto.totalTouBiaoTimes cannot be set twice.');
 					}
 					++total_tou_biao_times$count;
-					this.totalTouBiaoTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.totalTouBiaoTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 11:
 					if (is_manual_stop$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BiaoJuProto.isManualStop cannot be set twice.');
 					}
 					++is_manual_stop$count;
-					this.isManualStop = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isManualStop = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 12:
 					if (today_allocate_salary$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BiaoJuProto.todayAllocateSalary cannot be set twice.');
 					}
 					++today_allocate_salary$count;
-					this.todayAllocateSalary = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.todayAllocateSalary = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 20:
 					if (accum_recharge_money$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BiaoJuProto.accumRechargeMoney cannot be set twice.');
 					}
 					++accum_recharge_money$count;
-					this.accumRechargeMoney = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.accumRechargeMoney = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 21:
 					if (accum_salary$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BiaoJuProto.accumSalary cannot be set twice.');
 					}
 					++accum_salary$count;
-					this.accumSalary = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.accumSalary = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 22:
 					if (accum_reparation$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BiaoJuProto.accumReparation cannot be set twice.');
 					}
 					++accum_reparation$count;
-					this.accumReparation = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.accumReparation = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 23:
 					if (accum_hu_biao_success_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BiaoJuProto.accumHuBiaoSuccessTimes cannot be set twice.');
 					}
 					++accum_hu_biao_success_times$count;
-					this.accumHuBiaoSuccessTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.accumHuBiaoSuccessTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 24:
 					if (accum_tou_biao_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BiaoJuProto.accumTouBiaoTimes cannot be set twice.');
 					}
 					++accum_tou_biao_times$count;
-					this.accumTouBiaoTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.accumTouBiaoTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

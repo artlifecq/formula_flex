@@ -9,7 +9,7 @@ package com.rpgGame.app.sender
 	import app.cmd.EquipmentModuleMessages;
 	import app.message.UpgradeProto;
 	
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 * 装备相关数据请求 

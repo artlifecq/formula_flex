@@ -16,7 +16,7 @@ package com.rpgGame.app.fight.spell
 	import app.message.AnimationProto;
 	import app.message.SpellEffectProto;
 
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *

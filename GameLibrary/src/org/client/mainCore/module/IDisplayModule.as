@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.module
+﻿package org.client.mainCore.module
 {
     import flash.display.Sprite;
     import flash.display.DisplayObjectContainer;
@@ -11,4 +10,4 @@ package org.client.mainCore.module
         function get parentContainer():DisplayObjectContainer;
 
     }
-}//package org.client.mainCore.module
+}

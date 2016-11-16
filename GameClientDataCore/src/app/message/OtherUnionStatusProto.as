@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const UNION_CD:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.OtherUnionStatusProto.union_cd", "unionCd", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const UNION_CD:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.OtherUnionStatusProto.union_cd", "unionCd", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var union_cd$field:Int64;
 
@@ -40,7 +40,7 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasUnionCd) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, union_cd$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, union_cd$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -53,14 +53,14 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var union_cd$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (union_cd$count != 0) {
 						throw new flash.errors.IOError('Bad data format: OtherUnionStatusProto.unionCd cannot be set twice.');
 					}
 					++union_cd$count;
-					this.unionCd = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.unionCd = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

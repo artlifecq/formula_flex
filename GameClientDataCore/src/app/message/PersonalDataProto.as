@@ -17,7 +17,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.PersonalDataProto.level", "level", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.PersonalDataProto.level", "level", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level$field:int;
 
@@ -44,7 +44,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NORMAL_ACESS_COST:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.PersonalDataProto.normal_acess_cost", "normalAcessCost", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.UpgradeProto; });
+		public static const NORMAL_ACESS_COST:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.PersonalDataProto.normal_acess_cost", "normalAcessCost", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.UpgradeProto; });
 
 		private var normal_acess_cost$field:app.message.UpgradeProto;
 
@@ -67,7 +67,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ADD_BIAO_ACESS_COST:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.PersonalDataProto.add_biao_acess_cost", "addBiaoAcessCost", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.UpgradeProto; });
+		public static const ADD_BIAO_ACESS_COST:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.PersonalDataProto.add_biao_acess_cost", "addBiaoAcessCost", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.UpgradeProto; });
 
 		private var add_biao_acess_cost$field:app.message.UpgradeProto;
 
@@ -90,7 +90,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const INVICINBLE_BIAO_ACESS_COST:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.PersonalDataProto.invicinble_biao_acess_cost", "invicinbleBiaoAcessCost", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.UpgradeProto; });
+		public static const INVICINBLE_BIAO_ACESS_COST:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.PersonalDataProto.invicinble_biao_acess_cost", "invicinbleBiaoAcessCost", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.UpgradeProto; });
 
 		private var invicinble_biao_acess_cost$field:app.message.UpgradeProto;
 
@@ -113,7 +113,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NORMAL_BIAO_PRIZE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.PersonalDataProto.normal_biao_prize", "normalBiaoPrize", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BiaoQualityPrizeProto; });
+		public static const NORMAL_BIAO_PRIZE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.PersonalDataProto.normal_biao_prize", "normalBiaoPrize", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BiaoQualityPrizeProto; });
 
 		private var normal_biao_prize$field:app.message.BiaoQualityPrizeProto;
 
@@ -136,7 +136,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BROKEN_BIAO_PRIZE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.PersonalDataProto.broken_biao_prize", "brokenBiaoPrize", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BiaoQualityPrizeProto; });
+		public static const BROKEN_BIAO_PRIZE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.PersonalDataProto.broken_biao_prize", "brokenBiaoPrize", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BiaoQualityPrizeProto; });
 
 		private var broken_biao_prize$field:app.message.BiaoQualityPrizeProto;
 
@@ -159,7 +159,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const INVICINBLE_BIAO_PRIZE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.PersonalDataProto.invicinble_biao_prize", "invicinbleBiaoPrize", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BiaoQualityPrizeProto; });
+		public static const INVICINBLE_BIAO_PRIZE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.PersonalDataProto.invicinble_biao_prize", "invicinbleBiaoPrize", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BiaoQualityPrizeProto; });
 
 		private var invicinble_biao_prize$field:app.message.BiaoQualityPrizeProto;
 
@@ -182,7 +182,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NORMAL_BIAO_RES:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.PersonalDataProto.normal_biao_res", "normalBiaoRes", (8 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BiaoResProto; });
+		public static const NORMAL_BIAO_RES:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.PersonalDataProto.normal_biao_res", "normalBiaoRes", (8 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BiaoResProto; });
 
 		private var normal_biao_res$field:app.message.BiaoResProto;
 
@@ -205,7 +205,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BROKEN_BIAO_RES:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.PersonalDataProto.broken_biao_res", "brokenBiaoRes", (9 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BiaoResProto; });
+		public static const BROKEN_BIAO_RES:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.PersonalDataProto.broken_biao_res", "brokenBiaoRes", (9 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BiaoResProto; });
 
 		private var broken_biao_res$field:app.message.BiaoResProto;
 
@@ -231,39 +231,39 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level$field);
 			}
 			if (hasNormalAcessCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, normal_acess_cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, normal_acess_cost$field);
 			}
 			if (hasAddBiaoAcessCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, add_biao_acess_cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, add_biao_acess_cost$field);
 			}
 			if (hasInvicinbleBiaoAcessCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, invicinble_biao_acess_cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, invicinble_biao_acess_cost$field);
 			}
 			if (hasNormalBiaoPrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, normal_biao_prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, normal_biao_prize$field);
 			}
 			if (hasBrokenBiaoPrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, broken_biao_prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, broken_biao_prize$field);
 			}
 			if (hasInvicinbleBiaoPrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, invicinble_biao_prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, invicinble_biao_prize$field);
 			}
 			if (hasNormalBiaoRes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, normal_biao_res$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, normal_biao_res$field);
 			}
 			if (hasBrokenBiaoRes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, broken_biao_res$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, broken_biao_res$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -284,14 +284,14 @@ package app.message {
 			var normal_biao_res$count:uint = 0;
 			var broken_biao_res$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: PersonalDataProto.level cannot be set twice.');
 					}
 					++level$count;
-					this.level = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.level = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (normal_acess_cost$count != 0) {
@@ -299,7 +299,7 @@ package app.message {
 					}
 					++normal_acess_cost$count;
 					this.normalAcessCost = new app.message.UpgradeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.normalAcessCost);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.normalAcessCost);
 					break;
 				case 3:
 					if (add_biao_acess_cost$count != 0) {
@@ -307,7 +307,7 @@ package app.message {
 					}
 					++add_biao_acess_cost$count;
 					this.addBiaoAcessCost = new app.message.UpgradeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.addBiaoAcessCost);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.addBiaoAcessCost);
 					break;
 				case 4:
 					if (invicinble_biao_acess_cost$count != 0) {
@@ -315,7 +315,7 @@ package app.message {
 					}
 					++invicinble_biao_acess_cost$count;
 					this.invicinbleBiaoAcessCost = new app.message.UpgradeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.invicinbleBiaoAcessCost);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.invicinbleBiaoAcessCost);
 					break;
 				case 5:
 					if (normal_biao_prize$count != 0) {
@@ -323,7 +323,7 @@ package app.message {
 					}
 					++normal_biao_prize$count;
 					this.normalBiaoPrize = new app.message.BiaoQualityPrizeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.normalBiaoPrize);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.normalBiaoPrize);
 					break;
 				case 6:
 					if (broken_biao_prize$count != 0) {
@@ -331,7 +331,7 @@ package app.message {
 					}
 					++broken_biao_prize$count;
 					this.brokenBiaoPrize = new app.message.BiaoQualityPrizeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.brokenBiaoPrize);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.brokenBiaoPrize);
 					break;
 				case 7:
 					if (invicinble_biao_prize$count != 0) {
@@ -339,7 +339,7 @@ package app.message {
 					}
 					++invicinble_biao_prize$count;
 					this.invicinbleBiaoPrize = new app.message.BiaoQualityPrizeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.invicinbleBiaoPrize);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.invicinbleBiaoPrize);
 					break;
 				case 8:
 					if (normal_biao_res$count != 0) {
@@ -347,7 +347,7 @@ package app.message {
 					}
 					++normal_biao_res$count;
 					this.normalBiaoRes = new app.message.BiaoResProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.normalBiaoRes);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.normalBiaoRes);
 					break;
 				case 9:
 					if (broken_biao_res$count != 0) {
@@ -355,7 +355,7 @@ package app.message {
 					}
 					++broken_biao_res$count;
 					this.brokenBiaoRes = new app.message.BiaoResProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.brokenBiaoRes);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.brokenBiaoRes);
 					break;
 				default:
 					super.readUnknown(input, tag);

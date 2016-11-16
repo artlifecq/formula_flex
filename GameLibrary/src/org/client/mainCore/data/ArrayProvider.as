@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.data
+﻿package org.client.mainCore.data
 {
     import flash.events.EventDispatcher;
     import flash.events.IEventDispatcher;
@@ -19,12 +18,12 @@ package org.client.mainCore.data
             if (data)
             {
                 _data = data.concat();
-            };
+            }
         }
 
         public function get length():uint
         {
-            return (_data.length);
+            return _data.length;
         }
 
         public function refresh():void
@@ -70,34 +69,34 @@ package org.client.mainCore.data
             dispatchChangeEvent("add", items.concat(), index, ((index + items.length) - 1));
         }
 
-        public function getItemAt(index:uint)
+        public function getItemAt(index:uint):*
         {
             checkIndex(index);
-            return (_data[index]);
+            return _data[index];
         }
 
         public function getItemIndex(item:*):int
         {
-            return (_data.indexOf(item));
+            return _data.indexOf(item);
         }
 
         public function contains(item:*):Boolean
         {
-            if ((_data.indexOf(item) == -1))
+            if (_data.indexOf(item) == -1)
             {
-                return (false);
-            };
-            return (true);
+                return false;
+            }
+            return true;
         }
 
-        public function remove(item:*)
+        public function remove(item:*):*
         {
             var index:int = _data.indexOf(item);
-            if (!((index == -1)))
+            if (index != -1)
             {
-                return (removeAt(index)[0]);
-            };
-            return (null);
+                return removeAt(index)[0];
+            }
+            return null;
         }
 
         public function removeAt(index:uint, count:uint=1):Array
@@ -105,7 +104,7 @@ package org.client.mainCore.data
             checkIndex(index);
             var arr:Array = _data.splice(index, count);
             dispatchChangeEvent("remove", arr.concat(), index, ((index + arr.length) - 1));
-            return (arr);
+            return arr;
         }
 
         public function removeAll():void
@@ -121,18 +120,18 @@ package org.client.mainCore.data
             var arr:Array = [];
             _data = _data.filter(function (item:*, index:int, array:Array):Boolean
             {
-                if ((items.indexOf(_arg1) == -1))
+                if (items.indexOf(item) == -1)
                 {
-                    return (true);
-                };
-                arr.push(_arg1);
-                return (false);
+                    return true;
+                }
+                arr.push(item);
+                return false;
             }, this);
-            if ((arr.length > 0))
+            if (arr.length > 0)
             {
                 dispatchChangeEvent("remove", arr.concat(), 0, (arr.length - 1));
-            };
-            return (arr);
+            }
+            return arr;
         }
 
         public function removeMultiIndex(indexs:Array):Array
@@ -141,39 +140,39 @@ package org.client.mainCore.data
             var arr:Array = [];
             _data = _data.filter(function (item:*, index:int, array:Array):Boolean
             {
-                if ((indexs.indexOf(_arg2) == -1))
+                if ((indexs.indexOf(index) == -1))
                 {
                     return (true);
                 };
-                arr.push(_arg1);
+                arr.push(item);
                 return (false);
             }, this);
             if ((arr.length > 0))
             {
                 dispatchChangeEvent("remove", arr.concat(), 0, (arr.length - 1));
-            };
-            return (arr);
+            }
+            return arr;
         }
 
-        public function removeForProperty(p:String, value:*)
+        public function removeForProperty(p:String, value:*):*
         {
-            p = p;
-            value = value;
+			var _item:*;
+			var _index:int;
             var b:Boolean = _data.some(function (item:*, index:int, array:Array):Boolean
             {
-                if ((_arg1[p] == value))
+                if (item[p] == value)
                 {
-                    _item = _arg1;
-                    _index = _arg2;
-                    return (true);
+                    _item = item;
+                    _index = index;
+                    return true;
                 };
-                return (false);
+                return false;
             }, this);
             if (b)
             {
                 dispatchChangeEvent("remove", [_item], _index, _index);
-            };
-            return (_item);
+            }
+            return _item;
         }
 
         public function removeMultiForProperty(p:String, value:*):Array
@@ -183,9 +182,9 @@ package org.client.mainCore.data
             var arr:Array = [];
             _data = _data.filter(function (item:*, index:int, array:Array):Boolean
             {
-                if ((_arg1[p] == value))
+                if ((item[p] == value))
                 {
-                    arr.push(_arg1);
+                    arr.push(item);
                     return (false);
                 };
                 return (true);
@@ -307,25 +306,25 @@ package org.client.mainCore.data
         {
             var item = _data.shift();
             dispatchChangeEvent("remove", [item], 0, 0);
-            return (item);
+            return item;
         }
 
         public function toArray():Array
         {
-            return (_data.concat());
+            return _data.concat();
         }
 
         override public function toString():String
         {
-            return ((("ArrayProvider [" + _data.join(" , ")) + "]"));
+            return "ArrayProvider [" + _data.join(" , ") + "]";
         }
 
         protected function checkIndex(index:int):void
         {
-            if ((((index > (_data.length - 1))) || ((index < 0))))
+            if (index > (_data.length - 1) || index < 0)
             {
-                throw (new RangeError((((("ArrayProvider index (" + index.toString()) + ") is not in acceptable range (0 - ") + (_data.length - 1).toString()) + ")")));
-            };
+                throw new RangeError("ArrayProvider index (" + index.toString() + ") is not in acceptable range (0 - " + (_data.length - 1).toString() + ")");
+            }
         }
 
         public function forEach(callback:Function, thisObject:*=null):void
@@ -335,48 +334,46 @@ package org.client.mainCore.data
 
         public function filter(callback:Function, thisObject:*=null):Array
         {
-            return (_data.filter(callback, thisObject));
+            return _data.filter(callback, thisObject);
         }
 
         public function some(callback:Function, thisObject:*=null):Boolean
         {
-            return (_data.some(callback, thisObject));
+            return _data.some(callback, thisObject);
         }
 
         public function every(callback:Function, thisObject:*=null):Boolean
         {
-            return (_data.every(callback, thisObject));
+            return _data.every(callback, thisObject);
         }
 
         public function map(callback:Function, thisObject:*=null):Array
         {
-            return (_data.map(callback, thisObject));
+            return _data.map(callback, thisObject);
         }
 
         protected function dispatchChangeEvent(evtType:String, items:Array, startIndex:int=-1, endIndex:int=-1):void
         {
-            if (!(autoUpdate))
+            if (!autoUpdate)
             {
                 return;
-            };
+            }
             if (hasEventListener("dataChange"))
             {
                 dispatchEvent(new DataChangeEvent("dataChange", evtType, items, startIndex, endIndex));
-            };
+            }
         }
 
         protected function dispatchPreChangeEvent(evtType:String, items:Array, startIndex:int=-1, endIndex:int=-1):void
         {
-            if (!(autoUpdate))
+            if (!autoUpdate)
             {
                 return;
-            };
+            }
             if (hasEventListener("preDataChange"))
             {
                 dispatchEvent(new DataChangeEvent("preDataChange", evtType, items, startIndex, endIndex));
-            };
+            }
         }
-
-
     }
-}//package org.client.mainCore.data
+}

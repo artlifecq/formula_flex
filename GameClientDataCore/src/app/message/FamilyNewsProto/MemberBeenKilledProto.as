@@ -15,7 +15,7 @@ package app.message.FamilyNewsProto {
 		/**
 		 *  @private
 		 */
-		public static const BEEN_KILL_BY_OTHER_MEMBER:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.MemberBeenKilledProto.been_kill_by_other_member", "beenKillByOtherMember", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberIdAndNameProto; });
+		public static const BEEN_KILL_BY_OTHER_MEMBER:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.MemberBeenKilledProto.been_kill_by_other_member", "beenKillByOtherMember", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberIdAndNameProto; });
 
 		private var been_kill_by_other_member$field:app.message.FamilyNewsProto.MemberIdAndNameProto;
 
@@ -38,7 +38,7 @@ package app.message.FamilyNewsProto {
 		/**
 		 *  @private
 		 */
-		public static const OTHER:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.MemberBeenKilledProto.other", "other", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberIdAndNameProto; });
+		public static const OTHER:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.MemberBeenKilledProto.other", "other", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberIdAndNameProto; });
 
 		private var other$field:app.message.FamilyNewsProto.MemberIdAndNameProto;
 
@@ -61,7 +61,7 @@ package app.message.FamilyNewsProto {
 		/**
 		 *  @private
 		 */
-		public static const BEEN_KILL_BY_OTHER_SCENE_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FamilyNewsProto.MemberBeenKilledProto.been_kill_by_other_scene_id", "beenKillByOtherSceneId", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BEEN_KILL_BY_OTHER_SCENE_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FamilyNewsProto.MemberBeenKilledProto.been_kill_by_other_scene_id", "beenKillByOtherSceneId", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var been_kill_by_other_scene_id$field:int;
 
@@ -91,15 +91,15 @@ package app.message.FamilyNewsProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasBeenKillByOtherMember) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, been_kill_by_other_member$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, been_kill_by_other_member$field);
 			}
 			if (hasOther) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, other$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, other$field);
 			}
 			if (hasBeenKillByOtherSceneId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, been_kill_by_other_scene_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, been_kill_by_other_scene_id$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -114,7 +114,7 @@ package app.message.FamilyNewsProto {
 			var other$count:uint = 0;
 			var been_kill_by_other_scene_id$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (been_kill_by_other_member$count != 0) {
@@ -122,7 +122,7 @@ package app.message.FamilyNewsProto {
 					}
 					++been_kill_by_other_member$count;
 					this.beenKillByOtherMember = new app.message.FamilyNewsProto.MemberIdAndNameProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.beenKillByOtherMember);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.beenKillByOtherMember);
 					break;
 				case 2:
 					if (other$count != 0) {
@@ -130,14 +130,14 @@ package app.message.FamilyNewsProto {
 					}
 					++other$count;
 					this.other = new app.message.FamilyNewsProto.MemberIdAndNameProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.other);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.other);
 					break;
 				case 3:
 					if (been_kill_by_other_scene_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MemberBeenKilledProto.beenKillByOtherSceneId cannot be set twice.');
 					}
 					++been_kill_by_other_scene_id$count;
-					this.beenKillByOtherSceneId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.beenKillByOtherSceneId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

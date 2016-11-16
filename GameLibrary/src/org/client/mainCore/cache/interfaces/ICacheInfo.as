@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.cache.interfaces
+﻿package org.client.mainCore.cache.interfaces
 {
     public /*dynamic*/ interface ICacheInfo extends IRecycle 
     {
@@ -22,4 +21,4 @@ package org.client.mainCore.cache.interfaces
         function get isGSVars():Boolean;
 
     }
-}//package org.client.mainCore.cache.interfaces
+}

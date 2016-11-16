@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RELIVE_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ReliveCostProto.relive_times", "reliveTimes", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RELIVE_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ReliveCostProto.relive_times", "reliveTimes", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var relive_times$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MONEY_COST:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ReliveCostProto.money_cost", "moneyCost", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MONEY_COST:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ReliveCostProto.money_cost", "moneyCost", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var money_cost$field:int;
 
@@ -69,11 +69,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasReliveTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, relive_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, relive_times$field);
 			}
 			if (hasMoneyCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, money_cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, money_cost$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -87,21 +87,21 @@ package app.message {
 			var relive_times$count:uint = 0;
 			var money_cost$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (relive_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ReliveCostProto.reliveTimes cannot be set twice.');
 					}
 					++relive_times$count;
-					this.reliveTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.reliveTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (money_cost$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ReliveCostProto.moneyCost cannot be set twice.');
 					}
 					++money_cost$count;
-					this.moneyCost = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.moneyCost = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

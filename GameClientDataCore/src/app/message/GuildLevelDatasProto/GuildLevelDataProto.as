@@ -15,7 +15,7 @@ package app.message.GuildLevelDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GuildLevelDatasProto.GuildLevelDataProto.level", "level", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GuildLevelDatasProto.GuildLevelDataProto.level", "level", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level$field:int;
 
@@ -42,7 +42,7 @@ package app.message.GuildLevelDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const LEADER_COUNT:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.GuildLevelDatasProto.GuildLevelDataProto.leader_count", "leaderCount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEADER_COUNT:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.GuildLevelDatasProto.GuildLevelDataProto.leader_count", "leaderCount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var leaderCount:Array = [];
@@ -50,7 +50,7 @@ package app.message.GuildLevelDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const UPGRADE_COST_MONEY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GuildLevelDatasProto.GuildLevelDataProto.upgrade_cost_money", "upgradeCostMoney", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const UPGRADE_COST_MONEY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GuildLevelDatasProto.GuildLevelDataProto.upgrade_cost_money", "upgradeCostMoney", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var upgrade_cost_money$field:int;
 
@@ -75,7 +75,7 @@ package app.message.GuildLevelDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const UPGRADE_COST_FAN_RONG_DU:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GuildLevelDatasProto.GuildLevelDataProto.upgrade_cost_fan_rong_du", "upgradeCostFanRongDu", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const UPGRADE_COST_FAN_RONG_DU:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GuildLevelDatasProto.GuildLevelDataProto.upgrade_cost_fan_rong_du", "upgradeCostFanRongDu", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var upgrade_cost_fan_rong_du$field:int;
 
@@ -100,7 +100,7 @@ package app.message.GuildLevelDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const MAINTAIN_COST_MONEY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GuildLevelDatasProto.GuildLevelDataProto.maintain_cost_money", "maintainCostMoney", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MAINTAIN_COST_MONEY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GuildLevelDatasProto.GuildLevelDataProto.maintain_cost_money", "maintainCostMoney", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var maintain_cost_money$field:int;
 
@@ -125,7 +125,7 @@ package app.message.GuildLevelDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const MAINTAIN_COST_FAN_RONG_DU:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GuildLevelDatasProto.GuildLevelDataProto.maintain_cost_fan_rong_du", "maintainCostFanRongDu", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MAINTAIN_COST_FAN_RONG_DU:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GuildLevelDatasProto.GuildLevelDataProto.maintain_cost_fan_rong_du", "maintainCostFanRongDu", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var maintain_cost_fan_rong_du$field:int;
 
@@ -150,7 +150,7 @@ package app.message.GuildLevelDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const DEMOTE_RETURN_MONEY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GuildLevelDatasProto.GuildLevelDataProto.demote_return_money", "demoteReturnMoney", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEMOTE_RETURN_MONEY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GuildLevelDatasProto.GuildLevelDataProto.demote_return_money", "demoteReturnMoney", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var demote_return_money$field:int;
 
@@ -175,7 +175,7 @@ package app.message.GuildLevelDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const DEMOTE_RETURN_FAN_RONG_DU:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GuildLevelDatasProto.GuildLevelDataProto.demote_return_fan_rong_du", "demoteReturnFanRongDu", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEMOTE_RETURN_FAN_RONG_DU:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GuildLevelDatasProto.GuildLevelDataProto.demote_return_fan_rong_du", "demoteReturnFanRongDu", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var demote_return_fan_rong_du$field:int;
 
@@ -200,7 +200,7 @@ package app.message.GuildLevelDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAPACITY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GuildLevelDatasProto.GuildLevelDataProto.capacity", "capacity", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAPACITY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GuildLevelDatasProto.GuildLevelDataProto.capacity", "capacity", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var capacity$field:int;
 
@@ -225,7 +225,7 @@ package app.message.GuildLevelDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const GUILD_PRIZE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GuildLevelDatasProto.GuildLevelDataProto.guild_prize", "guildPrize", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
+		public static const GUILD_PRIZE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GuildLevelDatasProto.GuildLevelDataProto.guild_prize", "guildPrize", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
 
 		private var guild_prize$field:app.message.PrizeProto;
 
@@ -248,7 +248,7 @@ package app.message.GuildLevelDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const KING_GUILD_PRIZE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GuildLevelDatasProto.GuildLevelDataProto.king_guild_prize", "kingGuildPrize", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
+		public static const KING_GUILD_PRIZE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GuildLevelDatasProto.GuildLevelDataProto.king_guild_prize", "kingGuildPrize", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
 
 		private var king_guild_prize$field:app.message.PrizeProto;
 
@@ -274,47 +274,47 @@ package app.message.GuildLevelDatasProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level$field);
 			}
 			for (var leaderCount$index:uint = 0; leaderCount$index < this.leaderCount.length; ++leaderCount$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.leaderCount[leaderCount$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.leaderCount[leaderCount$index]);
 			}
 			if (hasUpgradeCostMoney) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, upgrade_cost_money$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, upgrade_cost_money$field);
 			}
 			if (hasUpgradeCostFanRongDu) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, upgrade_cost_fan_rong_du$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, upgrade_cost_fan_rong_du$field);
 			}
 			if (hasMaintainCostMoney) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, maintain_cost_money$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, maintain_cost_money$field);
 			}
 			if (hasMaintainCostFanRongDu) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, maintain_cost_fan_rong_du$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, maintain_cost_fan_rong_du$field);
 			}
 			if (hasDemoteReturnMoney) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, demote_return_money$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, demote_return_money$field);
 			}
 			if (hasDemoteReturnFanRongDu) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, demote_return_fan_rong_du$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, demote_return_fan_rong_du$field);
 			}
 			if (hasCapacity) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, capacity$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, capacity$field);
 			}
 			if (hasGuildPrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, guild_prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, guild_prize$field);
 			}
 			if (hasKingGuildPrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, king_guild_prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, king_guild_prize$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -336,70 +336,70 @@ package app.message.GuildLevelDatasProto {
 			var guild_prize$count:uint = 0;
 			var king_guild_prize$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildLevelDataProto.level cannot be set twice.');
 					}
 					++level$count;
-					this.level = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.level = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.leaderCount);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.leaderCount);
 						break;
 					}
-					this.leaderCount.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.leaderCount.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				case 3:
 					if (upgrade_cost_money$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildLevelDataProto.upgradeCostMoney cannot be set twice.');
 					}
 					++upgrade_cost_money$count;
-					this.upgradeCostMoney = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.upgradeCostMoney = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (upgrade_cost_fan_rong_du$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildLevelDataProto.upgradeCostFanRongDu cannot be set twice.');
 					}
 					++upgrade_cost_fan_rong_du$count;
-					this.upgradeCostFanRongDu = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.upgradeCostFanRongDu = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (maintain_cost_money$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildLevelDataProto.maintainCostMoney cannot be set twice.');
 					}
 					++maintain_cost_money$count;
-					this.maintainCostMoney = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.maintainCostMoney = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (maintain_cost_fan_rong_du$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildLevelDataProto.maintainCostFanRongDu cannot be set twice.');
 					}
 					++maintain_cost_fan_rong_du$count;
-					this.maintainCostFanRongDu = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.maintainCostFanRongDu = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (demote_return_money$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildLevelDataProto.demoteReturnMoney cannot be set twice.');
 					}
 					++demote_return_money$count;
-					this.demoteReturnMoney = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.demoteReturnMoney = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 8:
 					if (demote_return_fan_rong_du$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildLevelDataProto.demoteReturnFanRongDu cannot be set twice.');
 					}
 					++demote_return_fan_rong_du$count;
-					this.demoteReturnFanRongDu = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.demoteReturnFanRongDu = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 9:
 					if (capacity$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildLevelDataProto.capacity cannot be set twice.');
 					}
 					++capacity$count;
-					this.capacity = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.capacity = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 10:
 					if (guild_prize$count != 0) {
@@ -407,7 +407,7 @@ package app.message.GuildLevelDatasProto {
 					}
 					++guild_prize$count;
 					this.guildPrize = new app.message.PrizeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.guildPrize);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.guildPrize);
 					break;
 				case 11:
 					if (king_guild_prize$count != 0) {
@@ -415,7 +415,7 @@ package app.message.GuildLevelDatasProto {
 					}
 					++king_guild_prize$count;
 					this.kingGuildPrize = new app.message.PrizeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.kingGuildPrize);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.kingGuildPrize);
 					break;
 				default:
 					super.readUnknown(input, tag);

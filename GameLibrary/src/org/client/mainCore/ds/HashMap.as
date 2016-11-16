@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.ds
+﻿package org.client.mainCore.ds
 {
     import __AS3__.vec.Vector;
     import flash.utils.Dictionary;
@@ -233,7 +232,5 @@ package org.client.mainCore.ds
             };
             return (temp);
         }
-
-
     }
-}//package org.client.mainCore.ds
+}

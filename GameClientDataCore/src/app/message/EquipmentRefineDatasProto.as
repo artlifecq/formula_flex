@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COST_DATAS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentRefineDatasProto.cost_datas", "costDatas", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentRefineCostDatasProto; });
+		public static const COST_DATAS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentRefineDatasProto.cost_datas", "costDatas", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentRefineCostDatasProto; });
 
 		private var cost_datas$field:app.message.EquipmentRefineCostDatasProto;
 
@@ -39,7 +39,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAIN_STATS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentRefineDatasProto.main_stats", "mainStats", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentRefineMainStatDatasProto; });
+		public static const MAIN_STATS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentRefineDatasProto.main_stats", "mainStats", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentRefineMainStatDatasProto; });
 
 		private var main_stats$field:app.message.EquipmentRefineMainStatDatasProto;
 
@@ -65,11 +65,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasCostDatas) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, cost_datas$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, cost_datas$field);
 			}
 			if (hasMainStats) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, main_stats$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, main_stats$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -83,7 +83,7 @@ package app.message {
 			var cost_datas$count:uint = 0;
 			var main_stats$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (cost_datas$count != 0) {
@@ -91,7 +91,7 @@ package app.message {
 					}
 					++cost_datas$count;
 					this.costDatas = new app.message.EquipmentRefineCostDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.costDatas);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.costDatas);
 					break;
 				case 2:
 					if (main_stats$count != 0) {
@@ -99,7 +99,7 @@ package app.message {
 					}
 					++main_stats$count;
 					this.mainStats = new app.message.EquipmentRefineMainStatDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.mainStats);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.mainStats);
 					break;
 				default:
 					super.readUnknown(input, tag);

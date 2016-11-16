@@ -4,7 +4,7 @@ package com.rpgGame.app.sender
 	
 	import app.cmd.ExamModuleMessages;
 	
-	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
 
 	public class DaTiSender extends BaseSender
 	{
@@ -14,7 +14,7 @@ package com.rpgGame.app.sender
 		public static function reqExamGetQuestion():void
 		{
 			_bytes.clear();
-			SocketConnection.send(ExamModuleMessages.C2S_EXAM_GET_QUESTION, _bytes);
+			SocketConnection_protoBuffer.send(ExamModuleMessages.C2S_EXAM_GET_QUESTION, _bytes);
 		}
 		
 		/**
@@ -27,7 +27,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(answerIndex);
-			SocketConnection.send(ExamModuleMessages.C2S_EXAM_ANSWER_QUESTION, _bytes);
+			SocketConnection_protoBuffer.send(ExamModuleMessages.C2S_EXAM_ANSWER_QUESTION, _bytes);
 		}
 		
 		/**
@@ -48,7 +48,7 @@ package com.rpgGame.app.sender
 					break;
 			}
 			_bytes.writeVarint32(type);
-			SocketConnection.send(ExamModuleMessages.C2S_EXAM_USE_GOOD_ANSWER, _bytes);
+			SocketConnection_protoBuffer.send(ExamModuleMessages.C2S_EXAM_USE_GOOD_ANSWER, _bytes);
 		}
 		
 		/**
@@ -57,7 +57,7 @@ package com.rpgGame.app.sender
 		public static function reqExamSelfData():void
 		{
 			_bytes.clear();
-			SocketConnection.send(ExamModuleMessages.C2S_EXAM_SELF_DATA, _bytes);
+			SocketConnection_protoBuffer.send(ExamModuleMessages.C2S_EXAM_SELF_DATA, _bytes);
 		}
 		
 		/**
@@ -66,7 +66,7 @@ package com.rpgGame.app.sender
 		public static function reqExamFollowMsg():void
 		{
 			_bytes.clear();
-			SocketConnection.send(ExamModuleMessages.C2S_EXAM_FOLLOW_MSG, _bytes);
+			SocketConnection_protoBuffer.send(ExamModuleMessages.C2S_EXAM_FOLLOW_MSG, _bytes);
 		}
 	}
 }

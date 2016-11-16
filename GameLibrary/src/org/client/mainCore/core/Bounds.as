@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.core
+﻿package org.client.mainCore.core
 {
     import flash.geom.Rectangle;
 

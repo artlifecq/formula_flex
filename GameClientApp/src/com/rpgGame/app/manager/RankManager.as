@@ -7,7 +7,7 @@ package com.rpgGame.app.manager
 	import app.message.MonsterHurtRankType;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *

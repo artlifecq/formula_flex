@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DETAIL:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.ClientRelationDetail.detail", "detail", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SingleRelation; });
+		public static const DETAIL:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.ClientRelationDetail.detail", "detail", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SingleRelation; });
 
 		private var detail$field:app.message.SingleRelation;
 
@@ -38,7 +38,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_ONLINE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.ClientRelationDetail.is_online", "isOnline", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_ONLINE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.ClientRelationDetail.is_online", "isOnline", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_online$field:Boolean;
 
@@ -68,11 +68,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasDetail) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, detail$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, detail$field);
 			}
 			if (hasIsOnline) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_online$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_online$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -86,7 +86,7 @@ package app.message {
 			var detail$count:uint = 0;
 			var is_online$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (detail$count != 0) {
@@ -94,14 +94,14 @@ package app.message {
 					}
 					++detail$count;
 					this.detail = new app.message.SingleRelation();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.detail);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.detail);
 					break;
 				case 2:
 					if (is_online$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ClientRelationDetail.isOnline cannot be set twice.');
 					}
 					++is_online$count;
-					this.isOnline = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isOnline = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

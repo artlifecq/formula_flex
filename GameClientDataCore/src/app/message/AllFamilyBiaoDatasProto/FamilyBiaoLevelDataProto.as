@@ -15,7 +15,7 @@ package app.message.AllFamilyBiaoDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const BASE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.AllFamilyBiaoDatasProto.FamilyBiaoLevelDataProto.base", "base", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyBuildingBaseDataLevelProto; });
+		public static const BASE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.AllFamilyBiaoDatasProto.FamilyBiaoLevelDataProto.base", "base", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyBuildingBaseDataLevelProto; });
 
 		private var base$field:app.message.FamilyBuildingBaseDataLevelProto;
 
@@ -41,7 +41,7 @@ package app.message.AllFamilyBiaoDatasProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasBase) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, base$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, base$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -54,7 +54,7 @@ package app.message.AllFamilyBiaoDatasProto {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var base$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (base$count != 0) {
@@ -62,7 +62,7 @@ package app.message.AllFamilyBiaoDatasProto {
 					}
 					++base$count;
 					this.base = new app.message.FamilyBuildingBaseDataLevelProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.base);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.base);
 					break;
 				default:
 					super.readUnknown(input, tag);

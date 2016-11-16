@@ -15,7 +15,7 @@ package app.message.FamilyNewsProto {
 		/**
 		 *  @private
 		 */
-		public static const DONATE_TOKEN_MEMBER:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.DonateFamilyBuildTokenProto.donate_token_member", "donateTokenMember", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberIdAndNameProto; });
+		public static const DONATE_TOKEN_MEMBER:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.DonateFamilyBuildTokenProto.donate_token_member", "donateTokenMember", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberIdAndNameProto; });
 
 		private var donate_token_member$field:app.message.FamilyNewsProto.MemberIdAndNameProto;
 
@@ -38,7 +38,7 @@ package app.message.FamilyNewsProto {
 		/**
 		 *  @private
 		 */
-		public static const TOKEN_COUNT:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.FamilyNewsProto.DonateFamilyBuildTokenProto.token_count", "tokenCount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOKEN_COUNT:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.FamilyNewsProto.DonateFamilyBuildTokenProto.token_count", "tokenCount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var token_count$field:Int64;
 
@@ -61,7 +61,7 @@ package app.message.FamilyNewsProto {
 		/**
 		 *  @private
 		 */
-		public static const CONTRIBUTION:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FamilyNewsProto.DonateFamilyBuildTokenProto.contribution", "contribution", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CONTRIBUTION:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FamilyNewsProto.DonateFamilyBuildTokenProto.contribution", "contribution", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var contribution$field:int;
 
@@ -91,15 +91,15 @@ package app.message.FamilyNewsProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasDonateTokenMember) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, donate_token_member$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, donate_token_member$field);
 			}
 			if (hasTokenCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, token_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, token_count$field);
 			}
 			if (hasContribution) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, contribution$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, contribution$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -114,7 +114,7 @@ package app.message.FamilyNewsProto {
 			var token_count$count:uint = 0;
 			var contribution$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (donate_token_member$count != 0) {
@@ -122,21 +122,21 @@ package app.message.FamilyNewsProto {
 					}
 					++donate_token_member$count;
 					this.donateTokenMember = new app.message.FamilyNewsProto.MemberIdAndNameProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.donateTokenMember);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.donateTokenMember);
 					break;
 				case 2:
 					if (token_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: DonateFamilyBuildTokenProto.tokenCount cannot be set twice.');
 					}
 					++token_count$count;
-					this.tokenCount = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.tokenCount = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 3:
 					if (contribution$count != 0) {
 						throw new flash.errors.IOError('Bad data format: DonateFamilyBuildTokenProto.contribution cannot be set twice.');
 					}
 					++contribution$count;
-					this.contribution = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.contribution = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

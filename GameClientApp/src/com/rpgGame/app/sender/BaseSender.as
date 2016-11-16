@@ -4,8 +4,8 @@ package com.rpgGame.app.sender
 	
 	import flash.utils.ByteArray;
 	
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 * 所有发向服务端的数据和方法都只能通过 在BaseSender的子类sender类里定义，方法参数必须明确，
@@ -60,7 +60,7 @@ package com.rpgGame.app.sender
 //				}
 //			}
 			
-			SocketConnection.send(cmdID,data);
+			SocketConnection_protoBuffer.send(cmdID,data);
 		}
 		
 	}

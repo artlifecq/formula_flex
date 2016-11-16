@@ -15,7 +15,7 @@ package app.message.FamilyNewsProto {
 		/**
 		 *  @private
 		 */
-		public static const TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.FamilyNewsProto.FamilyBiaoNewsProto.type", "type", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.FamilyNewsProto.FamilyBiaoNewsProto.BiaoNewsType);
+		public static const TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.FamilyNewsProto.FamilyBiaoNewsProto.type", "type", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.FamilyNewsProto.FamilyBiaoNewsProto.BiaoNewsType);
 
 		private var type$field:int;
 
@@ -45,7 +45,7 @@ package app.message.FamilyNewsProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, type$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -58,14 +58,14 @@ package app.message.FamilyNewsProto {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var type$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyBiaoNewsProto.type cannot be set twice.');
 					}
 					++type$count;
-					this.type = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.type = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

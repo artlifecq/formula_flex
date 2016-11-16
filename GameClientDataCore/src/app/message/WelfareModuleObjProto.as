@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PHOENIX_MONEY_REFINE_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.WelfareModuleObjProto.phoenix_money_refine_times", "phoenixMoneyRefineTimes", (115 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PHOENIX_MONEY_REFINE_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.WelfareModuleObjProto.phoenix_money_refine_times", "phoenixMoneyRefineTimes", (115 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var phoenix_money_refine_times$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PHOENIX_EXP_REFINE_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.WelfareModuleObjProto.phoenix_exp_refine_times", "phoenixExpRefineTimes", (117 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PHOENIX_EXP_REFINE_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.WelfareModuleObjProto.phoenix_exp_refine_times", "phoenixExpRefineTimes", (117 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var phoenix_exp_refine_times$field:int;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FIRST_RECHARGE_COLLECT_INDEX:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.WelfareModuleObjProto.first_recharge_collect_index", "firstRechargeCollectIndex", (138 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FIRST_RECHARGE_COLLECT_INDEX:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.WelfareModuleObjProto.first_recharge_collect_index", "firstRechargeCollectIndex", (138 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var first_recharge_collect_index$field:int;
 
@@ -91,7 +91,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_COLLECT_WEIXIN_PACKAGE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.WelfareModuleObjProto.is_collect_weixin_package", "isCollectWeixinPackage", (167 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_COLLECT_WEIXIN_PACKAGE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.WelfareModuleObjProto.is_collect_weixin_package", "isCollectWeixinPackage", (167 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_collect_weixin_package$field:Boolean;
 
@@ -116,7 +116,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COLLECTED_ONLINE_PRIZE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.WelfareModuleObjProto.collected_online_prize", "collectedOnlinePrize", (572 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COLLECTED_ONLINE_PRIZE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.WelfareModuleObjProto.collected_online_prize", "collectedOnlinePrize", (572 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var collected_online_prize$field:Boolean;
 
@@ -141,7 +141,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ONLINE_PRIZE_BEGIN_TIME:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.WelfareModuleObjProto.online_prize_begin_time", "onlinePrizeBeginTime", (576 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ONLINE_PRIZE_BEGIN_TIME:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.WelfareModuleObjProto.online_prize_begin_time", "onlinePrizeBeginTime", (576 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var online_prize_begin_time$field:int;
 
@@ -166,7 +166,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LOGIN_PRIZE_INFO:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.WelfareModuleObjProto.login_prize_info", "loginPrizeInfo", (140 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LOGIN_PRIZE_INFO:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.WelfareModuleObjProto.login_prize_info", "loginPrizeInfo", (140 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var login_prize_info$field:int;
 
@@ -191,7 +191,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COLLECT_HERO_LEVEL_PRIZE:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.WelfareModuleObjProto.collect_hero_level_prize", "collectHeroLevelPrize", (172 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COLLECT_HERO_LEVEL_PRIZE:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.WelfareModuleObjProto.collect_hero_level_prize", "collectHeroLevelPrize", (172 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var collectHeroLevelPrize:Array = [];
@@ -202,35 +202,35 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasPhoenixMoneyRefineTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 115);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, phoenix_money_refine_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, phoenix_money_refine_times$field);
 			}
 			if (hasPhoenixExpRefineTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 117);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, phoenix_exp_refine_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, phoenix_exp_refine_times$field);
 			}
 			if (hasFirstRechargeCollectIndex) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 138);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, first_recharge_collect_index$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, first_recharge_collect_index$field);
 			}
 			if (hasIsCollectWeixinPackage) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 167);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_collect_weixin_package$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_collect_weixin_package$field);
 			}
 			if (hasCollectedOnlinePrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 572);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, collected_online_prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, collected_online_prize$field);
 			}
 			if (hasOnlinePrizeBeginTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 576);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, online_prize_begin_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, online_prize_begin_time$field);
 			}
 			if (hasLoginPrizeInfo) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 140);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, login_prize_info$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, login_prize_info$field);
 			}
 			for (var collectHeroLevelPrize$index:uint = 0; collectHeroLevelPrize$index < this.collectHeroLevelPrize.length; ++collectHeroLevelPrize$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 172);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.collectHeroLevelPrize[collectHeroLevelPrize$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.collectHeroLevelPrize[collectHeroLevelPrize$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -249,63 +249,63 @@ package app.message {
 			var online_prize_begin_time$count:uint = 0;
 			var login_prize_info$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 115:
 					if (phoenix_money_refine_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: WelfareModuleObjProto.phoenixMoneyRefineTimes cannot be set twice.');
 					}
 					++phoenix_money_refine_times$count;
-					this.phoenixMoneyRefineTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.phoenixMoneyRefineTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 117:
 					if (phoenix_exp_refine_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: WelfareModuleObjProto.phoenixExpRefineTimes cannot be set twice.');
 					}
 					++phoenix_exp_refine_times$count;
-					this.phoenixExpRefineTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.phoenixExpRefineTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 138:
 					if (first_recharge_collect_index$count != 0) {
 						throw new flash.errors.IOError('Bad data format: WelfareModuleObjProto.firstRechargeCollectIndex cannot be set twice.');
 					}
 					++first_recharge_collect_index$count;
-					this.firstRechargeCollectIndex = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.firstRechargeCollectIndex = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 167:
 					if (is_collect_weixin_package$count != 0) {
 						throw new flash.errors.IOError('Bad data format: WelfareModuleObjProto.isCollectWeixinPackage cannot be set twice.');
 					}
 					++is_collect_weixin_package$count;
-					this.isCollectWeixinPackage = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isCollectWeixinPackage = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 572:
 					if (collected_online_prize$count != 0) {
 						throw new flash.errors.IOError('Bad data format: WelfareModuleObjProto.collectedOnlinePrize cannot be set twice.');
 					}
 					++collected_online_prize$count;
-					this.collectedOnlinePrize = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.collectedOnlinePrize = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 576:
 					if (online_prize_begin_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: WelfareModuleObjProto.onlinePrizeBeginTime cannot be set twice.');
 					}
 					++online_prize_begin_time$count;
-					this.onlinePrizeBeginTime = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.onlinePrizeBeginTime = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 140:
 					if (login_prize_info$count != 0) {
 						throw new flash.errors.IOError('Bad data format: WelfareModuleObjProto.loginPrizeInfo cannot be set twice.');
 					}
 					++login_prize_info$count;
-					this.loginPrizeInfo = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.loginPrizeInfo = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 172:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.collectHeroLevelPrize);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.collectHeroLevelPrize);
 						break;
 					}
-					this.collectHeroLevelPrize.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.collectHeroLevelPrize.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				default:
 					super.readUnknown(input, tag);

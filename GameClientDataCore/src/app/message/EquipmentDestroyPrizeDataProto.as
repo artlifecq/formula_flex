@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LOWER:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentDestroyPrizeDataProto.lower", "lower", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LOWER:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentDestroyPrizeDataProto.lower", "lower", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var lower$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const UPPER:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentDestroyPrizeDataProto.upper", "upper", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const UPPER:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentDestroyPrizeDataProto.upper", "upper", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var upper$field:int;
 
@@ -67,7 +67,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GOODS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentDestroyPrizeDataProto.goods", "goods", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
+		public static const GOODS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentDestroyPrizeDataProto.goods", "goods", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
 
 		private var goods$field:app.message.GoodsWrapperProto;
 
@@ -93,15 +93,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasLower) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, lower$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, lower$field);
 			}
 			if (hasUpper) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, upper$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, upper$field);
 			}
 			if (hasGoods) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, goods$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, goods$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -116,21 +116,21 @@ package app.message {
 			var upper$count:uint = 0;
 			var goods$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (lower$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentDestroyPrizeDataProto.lower cannot be set twice.');
 					}
 					++lower$count;
-					this.lower = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.lower = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (upper$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentDestroyPrizeDataProto.upper cannot be set twice.');
 					}
 					++upper$count;
-					this.upper = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.upper = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (goods$count != 0) {
@@ -138,7 +138,7 @@ package app.message {
 					}
 					++goods$count;
 					this.goods = new app.message.GoodsWrapperProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.goods);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.goods);
 					break;
 				default:
 					super.readUnknown(input, tag);

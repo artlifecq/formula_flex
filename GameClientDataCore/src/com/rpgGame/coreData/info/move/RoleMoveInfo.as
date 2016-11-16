@@ -2,7 +2,7 @@ package com.rpgGame.coreData.info.move
 {
 	import flash.geom.Point;
 
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *

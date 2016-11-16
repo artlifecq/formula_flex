@@ -1,12 +1,15 @@
 package app.client_proto {
-	import com.netease.protobuf.*;
-	use namespace com.netease.protobuf.used_by_generated_code;
-	import com.netease.protobuf.fieldDescriptors.*;
-	import flash.utils.Endian;
+	import com.netease.protobuf.Message;
+	import com.netease.protobuf.ReadUtils;
+	import com.netease.protobuf.WireType;
+	import com.netease.protobuf.WriteUtils;
+	import com.netease.protobuf.WritingBuffer;
+	import com.netease.protobuf.used_by_generated_code;
+	import com.netease.protobuf.fieldDescriptors.RepeatedFieldDescriptor_TYPE_INT32;
+	
 	import flash.utils.IDataInput;
-	import flash.utils.IDataOutput;
-	import flash.utils.IExternalizable;
-	import flash.errors.IOError;
+
+	use namespace com.netease.protobuf.used_by_generated_code;
 	// @@protoc_insertion_point(imports)
 
 	// @@protoc_insertion_point(class_metadata)
@@ -14,7 +17,7 @@ package app.client_proto {
 		/**
 		 *  @private
 		 */
-		public static const CLIENTONLYINTCONFIGS:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.client_proto.MainSetProtoC.clientOnlyIntConfigs", "clientOnlyIntConfigs", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CLIENTONLYINTCONFIGS:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.client_proto.MainSetProtoC.clientOnlyIntConfigs", "clientOnlyIntConfigs", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var clientOnlyIntConfigs:Array = [];
@@ -25,7 +28,7 @@ package app.client_proto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			for (var clientOnlyIntConfigs$index:uint = 0; clientOnlyIntConfigs$index < this.clientOnlyIntConfigs.length; ++clientOnlyIntConfigs$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.clientOnlyIntConfigs[clientOnlyIntConfigs$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.clientOnlyIntConfigs[clientOnlyIntConfigs$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -37,14 +40,14 @@ package app.client_proto {
 		 */
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.clientOnlyIntConfigs);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.clientOnlyIntConfigs);
 						break;
 					}
-					this.clientOnlyIntConfigs.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.clientOnlyIntConfigs.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				default:
 					super.readUnknown(input, tag);

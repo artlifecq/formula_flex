@@ -24,7 +24,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SCENE_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SceneProto.scene_id", "sceneId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SCENE_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SceneProto.scene_id", "sceneId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var scene_id$field:int;
 
@@ -51,7 +51,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAP:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.SceneProto.map", "map", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const MAP:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.SceneProto.map", "map", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var map$field:String;
 
@@ -74,7 +74,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.SceneProto.name", "name", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.SceneProto.name", "name", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var name$field:flash.utils.ByteArray;
 
@@ -97,7 +97,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const POET:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.SceneProto.poet", "poet", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const POET:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.SceneProto.poet", "poet", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var poet$field:flash.utils.ByteArray;
 
@@ -120,7 +120,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FIXED_PK_MODE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SceneProto.fixed_pk_mode", "fixedPkMode", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FIXED_PK_MODE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SceneProto.fixed_pk_mode", "fixedPkMode", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var fixed_pk_mode$field:int;
 
@@ -145,7 +145,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_HERO_LEVEL_PROTECT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.SceneProto.is_hero_level_protect", "isHeroLevelProtect", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_HERO_LEVEL_PROTECT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.SceneProto.is_hero_level_protect", "isHeroLevelProtect", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_hero_level_protect$field:Boolean;
 
@@ -170,7 +170,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_NEW_HERO_PROTECT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.SceneProto.is_new_hero_protect", "isNewHeroProtect", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_NEW_HERO_PROTECT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.SceneProto.is_new_hero_protect", "isNewHeroProtect", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_new_hero_protect$field:Boolean;
 
@@ -195,7 +195,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_DEATH_PROTECT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.SceneProto.is_death_protect", "isDeathProtect", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_DEATH_PROTECT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.SceneProto.is_death_protect", "isDeathProtect", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_death_protect$field:Boolean;
 
@@ -220,7 +220,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_NIGHT_AUTO_PROTECT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.SceneProto.is_night_auto_protect", "isNightAutoProtect", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_NIGHT_AUTO_PROTECT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.SceneProto.is_night_auto_protect", "isNightAutoProtect", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_night_auto_protect$field:Boolean;
 
@@ -245,7 +245,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_MOUNT_LIMIT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.SceneProto.is_mount_limit", "isMountLimit", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_MOUNT_LIMIT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.SceneProto.is_mount_limit", "isMountLimit", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_mount_limit$field:Boolean;
 
@@ -270,7 +270,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SOUND:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.SceneProto.sound", "sound", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const SOUND:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.SceneProto.sound", "sound", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var sound$field:String;
 
@@ -293,7 +293,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAP_NAME_RESOURCE:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.SceneProto.map_name_resource", "mapNameResource", (13 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const MAP_NAME_RESOURCE:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.SceneProto.map_name_resource", "mapNameResource", (13 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var map_name_resource$field:String;
 
@@ -316,7 +316,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_TRANSPORT_GOODS_LIMIT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.SceneProto.is_transport_goods_limit", "isTransportGoodsLimit", (14 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_TRANSPORT_GOODS_LIMIT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.SceneProto.is_transport_goods_limit", "isTransportGoodsLimit", (14 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_transport_goods_limit$field:Boolean;
 
@@ -341,7 +341,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_USE_SPELL_LIMIT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.SceneProto.is_use_spell_limit", "isUseSpellLimit", (16 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_USE_SPELL_LIMIT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.SceneProto.is_use_spell_limit", "isUseSpellLimit", (16 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_use_spell_limit$field:Boolean;
 
@@ -366,7 +366,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_RELIVE_LIMIT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.SceneProto.is_relive_limit", "isReliveLimit", (17 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_RELIVE_LIMIT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.SceneProto.is_relive_limit", "isReliveLimit", (17 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_relive_limit$field:Boolean;
 
@@ -391,7 +391,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_HERO_DEAD_NOT_DROP:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.SceneProto.is_hero_dead_not_drop", "isHeroDeadNotDrop", (18 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_HERO_DEAD_NOT_DROP:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.SceneProto.is_hero_dead_not_drop", "isHeroDeadNotDrop", (18 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_hero_dead_not_drop$field:Boolean;
 
@@ -416,7 +416,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_SEE_ALL:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.SceneProto.is_see_all", "isSeeAll", (19 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_SEE_ALL:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.SceneProto.is_see_all", "isSeeAll", (19 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_see_all$field:Boolean;
 
@@ -441,7 +441,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NORMAL_SCENE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SceneProto.normal_scene", "normalScene", (30 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NormalSceneProto; });
+		public static const NORMAL_SCENE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SceneProto.normal_scene", "normalScene", (30 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NormalSceneProto; });
 
 		private var normal_scene$field:app.message.NormalSceneProto;
 
@@ -464,7 +464,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const JAIL_SCENE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SceneProto.jail_scene", "jailScene", (31 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.JailDungeonSceneProto; });
+		public static const JAIL_SCENE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SceneProto.jail_scene", "jailScene", (31 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.JailDungeonSceneProto; });
 
 		private var jail_scene$field:app.message.JailDungeonSceneProto;
 
@@ -487,7 +487,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GROUP_DUNGEON:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SceneProto.group_dungeon", "groupDungeon", (32 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GroupDungeonProto; });
+		public static const GROUP_DUNGEON:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SceneProto.group_dungeon", "groupDungeon", (32 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GroupDungeonProto; });
 
 		private var group_dungeon$field:app.message.GroupDungeonProto;
 
@@ -510,7 +510,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const KING_WAR_DUNGEON:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SceneProto.king_war_dungeon", "kingWarDungeon", (33 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.KingWarDungeonProto; });
+		public static const KING_WAR_DUNGEON:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SceneProto.king_war_dungeon", "kingWarDungeon", (33 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.KingWarDungeonProto; });
 
 		private var king_war_dungeon$field:app.message.KingWarDungeonProto;
 
@@ -533,7 +533,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FAMILY_ANIMAL_BAR_SCENE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SceneProto.family_animal_bar_scene", "familyAnimalBarScene", (34 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyAnimalBarSceneProto; });
+		public static const FAMILY_ANIMAL_BAR_SCENE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SceneProto.family_animal_bar_scene", "familyAnimalBarScene", (34 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyAnimalBarSceneProto; });
 
 		private var family_animal_bar_scene$field:app.message.FamilyAnimalBarSceneProto;
 
@@ -556,7 +556,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BA_ZHEN_TU_DUNGEON:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SceneProto.ba_zhen_tu_dungeon", "baZhenTuDungeon", (35 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BaZhenTuDungeonProto; });
+		public static const BA_ZHEN_TU_DUNGEON:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SceneProto.ba_zhen_tu_dungeon", "baZhenTuDungeon", (35 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BaZhenTuDungeonProto; });
 
 		private var ba_zhen_tu_dungeon$field:app.message.BaZhenTuDungeonProto;
 
@@ -579,7 +579,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TAO_NI_DUNGEON:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SceneProto.tao_ni_dungeon", "taoNiDungeon", (36 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TaoNiDungeonProto; });
+		public static const TAO_NI_DUNGEON:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SceneProto.tao_ni_dungeon", "taoNiDungeon", (36 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TaoNiDungeonProto; });
 
 		private var tao_ni_dungeon$field:app.message.TaoNiDungeonProto;
 
@@ -602,7 +602,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAZE_DUNGEON:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SceneProto.maze_dungeon", "mazeDungeon", (37 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MazeDungeonProto; });
+		public static const MAZE_DUNGEON:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SceneProto.maze_dungeon", "mazeDungeon", (37 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MazeDungeonProto; });
 
 		private var maze_dungeon$field:app.message.MazeDungeonProto;
 
@@ -625,7 +625,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STORY_DUNGEON:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SceneProto.story_dungeon", "storyDungeon", (38 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.StoryDungeonProto; });
+		public static const STORY_DUNGEON:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SceneProto.story_dungeon", "storyDungeon", (38 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.StoryDungeonProto; });
 
 		private var story_dungeon$field:app.message.StoryDungeonProto;
 
@@ -651,107 +651,107 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasSceneId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, scene_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, scene_id$field);
 			}
 			if (hasMap) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, map$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, map$field);
 			}
 			if (hasName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, name$field);
 			}
 			if (hasPoet) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, poet$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, poet$field);
 			}
 			if (hasFixedPkMode) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, fixed_pk_mode$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, fixed_pk_mode$field);
 			}
 			if (hasIsHeroLevelProtect) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_hero_level_protect$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_hero_level_protect$field);
 			}
 			if (hasIsNewHeroProtect) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_new_hero_protect$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_new_hero_protect$field);
 			}
 			if (hasIsDeathProtect) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_death_protect$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_death_protect$field);
 			}
 			if (hasIsNightAutoProtect) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_night_auto_protect$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_night_auto_protect$field);
 			}
 			if (hasIsMountLimit) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_mount_limit$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_mount_limit$field);
 			}
 			if (hasSound) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, sound$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, sound$field);
 			}
 			if (hasMapNameResource) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, map_name_resource$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, map_name_resource$field);
 			}
 			if (hasIsTransportGoodsLimit) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 14);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_transport_goods_limit$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_transport_goods_limit$field);
 			}
 			if (hasIsUseSpellLimit) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 16);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_use_spell_limit$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_use_spell_limit$field);
 			}
 			if (hasIsReliveLimit) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 17);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_relive_limit$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_relive_limit$field);
 			}
 			if (hasIsHeroDeadNotDrop) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 18);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_hero_dead_not_drop$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_hero_dead_not_drop$field);
 			}
 			if (hasIsSeeAll) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 19);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_see_all$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_see_all$field);
 			}
 			if (hasNormalScene) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 30);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, normal_scene$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, normal_scene$field);
 			}
 			if (hasJailScene) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 31);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, jail_scene$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, jail_scene$field);
 			}
 			if (hasGroupDungeon) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 32);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, group_dungeon$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, group_dungeon$field);
 			}
 			if (hasKingWarDungeon) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 33);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, king_war_dungeon$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, king_war_dungeon$field);
 			}
 			if (hasFamilyAnimalBarScene) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 34);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, family_animal_bar_scene$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, family_animal_bar_scene$field);
 			}
 			if (hasBaZhenTuDungeon) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 35);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, ba_zhen_tu_dungeon$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, ba_zhen_tu_dungeon$field);
 			}
 			if (hasTaoNiDungeon) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 36);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, tao_ni_dungeon$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, tao_ni_dungeon$field);
 			}
 			if (hasMazeDungeon) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 37);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, maze_dungeon$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, maze_dungeon$field);
 			}
 			if (hasStoryDungeon) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 38);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, story_dungeon$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, story_dungeon$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -789,126 +789,126 @@ package app.message {
 			var maze_dungeon$count:uint = 0;
 			var story_dungeon$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (scene_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneProto.sceneId cannot be set twice.');
 					}
 					++scene_id$count;
-					this.sceneId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.sceneId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (map$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneProto.map cannot be set twice.');
 					}
 					++map$count;
-					this.map = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.map = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneProto.name cannot be set twice.');
 					}
 					++name$count;
-					this.name = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.name = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 4:
 					if (poet$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneProto.poet cannot be set twice.');
 					}
 					++poet$count;
-					this.poet = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.poet = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 5:
 					if (fixed_pk_mode$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneProto.fixedPkMode cannot be set twice.');
 					}
 					++fixed_pk_mode$count;
-					this.fixedPkMode = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.fixedPkMode = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (is_hero_level_protect$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneProto.isHeroLevelProtect cannot be set twice.');
 					}
 					++is_hero_level_protect$count;
-					this.isHeroLevelProtect = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isHeroLevelProtect = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 7:
 					if (is_new_hero_protect$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneProto.isNewHeroProtect cannot be set twice.');
 					}
 					++is_new_hero_protect$count;
-					this.isNewHeroProtect = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isNewHeroProtect = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 8:
 					if (is_death_protect$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneProto.isDeathProtect cannot be set twice.');
 					}
 					++is_death_protect$count;
-					this.isDeathProtect = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isDeathProtect = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 9:
 					if (is_night_auto_protect$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneProto.isNightAutoProtect cannot be set twice.');
 					}
 					++is_night_auto_protect$count;
-					this.isNightAutoProtect = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isNightAutoProtect = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 11:
 					if (is_mount_limit$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneProto.isMountLimit cannot be set twice.');
 					}
 					++is_mount_limit$count;
-					this.isMountLimit = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isMountLimit = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 12:
 					if (sound$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneProto.sound cannot be set twice.');
 					}
 					++sound$count;
-					this.sound = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.sound = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 13:
 					if (map_name_resource$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneProto.mapNameResource cannot be set twice.');
 					}
 					++map_name_resource$count;
-					this.mapNameResource = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.mapNameResource = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 14:
 					if (is_transport_goods_limit$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneProto.isTransportGoodsLimit cannot be set twice.');
 					}
 					++is_transport_goods_limit$count;
-					this.isTransportGoodsLimit = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isTransportGoodsLimit = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 16:
 					if (is_use_spell_limit$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneProto.isUseSpellLimit cannot be set twice.');
 					}
 					++is_use_spell_limit$count;
-					this.isUseSpellLimit = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isUseSpellLimit = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 17:
 					if (is_relive_limit$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneProto.isReliveLimit cannot be set twice.');
 					}
 					++is_relive_limit$count;
-					this.isReliveLimit = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isReliveLimit = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 18:
 					if (is_hero_dead_not_drop$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneProto.isHeroDeadNotDrop cannot be set twice.');
 					}
 					++is_hero_dead_not_drop$count;
-					this.isHeroDeadNotDrop = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isHeroDeadNotDrop = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 19:
 					if (is_see_all$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneProto.isSeeAll cannot be set twice.');
 					}
 					++is_see_all$count;
-					this.isSeeAll = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isSeeAll = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 30:
 					if (normal_scene$count != 0) {
@@ -916,7 +916,7 @@ package app.message {
 					}
 					++normal_scene$count;
 					this.normalScene = new app.message.NormalSceneProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.normalScene);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.normalScene);
 					break;
 				case 31:
 					if (jail_scene$count != 0) {
@@ -924,7 +924,7 @@ package app.message {
 					}
 					++jail_scene$count;
 					this.jailScene = new app.message.JailDungeonSceneProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.jailScene);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.jailScene);
 					break;
 				case 32:
 					if (group_dungeon$count != 0) {
@@ -932,7 +932,7 @@ package app.message {
 					}
 					++group_dungeon$count;
 					this.groupDungeon = new app.message.GroupDungeonProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.groupDungeon);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.groupDungeon);
 					break;
 				case 33:
 					if (king_war_dungeon$count != 0) {
@@ -940,7 +940,7 @@ package app.message {
 					}
 					++king_war_dungeon$count;
 					this.kingWarDungeon = new app.message.KingWarDungeonProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.kingWarDungeon);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.kingWarDungeon);
 					break;
 				case 34:
 					if (family_animal_bar_scene$count != 0) {
@@ -948,7 +948,7 @@ package app.message {
 					}
 					++family_animal_bar_scene$count;
 					this.familyAnimalBarScene = new app.message.FamilyAnimalBarSceneProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.familyAnimalBarScene);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.familyAnimalBarScene);
 					break;
 				case 35:
 					if (ba_zhen_tu_dungeon$count != 0) {
@@ -956,7 +956,7 @@ package app.message {
 					}
 					++ba_zhen_tu_dungeon$count;
 					this.baZhenTuDungeon = new app.message.BaZhenTuDungeonProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.baZhenTuDungeon);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.baZhenTuDungeon);
 					break;
 				case 36:
 					if (tao_ni_dungeon$count != 0) {
@@ -964,7 +964,7 @@ package app.message {
 					}
 					++tao_ni_dungeon$count;
 					this.taoNiDungeon = new app.message.TaoNiDungeonProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.taoNiDungeon);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.taoNiDungeon);
 					break;
 				case 37:
 					if (maze_dungeon$count != 0) {
@@ -972,7 +972,7 @@ package app.message {
 					}
 					++maze_dungeon$count;
 					this.mazeDungeon = new app.message.MazeDungeonProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.mazeDungeon);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.mazeDungeon);
 					break;
 				case 38:
 					if (story_dungeon$count != 0) {
@@ -980,7 +980,7 @@ package app.message {
 					}
 					++story_dungeon$count;
 					this.storyDungeon = new app.message.StoryDungeonProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.storyDungeon);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.storyDungeon);
 					break;
 				default:
 					super.readUnknown(input, tag);

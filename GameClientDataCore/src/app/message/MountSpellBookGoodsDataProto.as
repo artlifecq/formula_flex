@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SPELL_GROUP:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountSpellBookGoodsDataProto.spell_group", "spellGroup", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SPELL_GROUP:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountSpellBookGoodsDataProto.spell_group", "spellGroup", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var spell_group$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SPELL_GROUP_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.MountSpellBookGoodsDataProto.spell_group_name", "spellGroupName", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const SPELL_GROUP_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.MountSpellBookGoodsDataProto.spell_group_name", "spellGroupName", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var spell_group_name$field:String;
 
@@ -64,7 +64,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SPELL_LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountSpellBookGoodsDataProto.spell_level", "spellLevel", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SPELL_LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountSpellBookGoodsDataProto.spell_level", "spellLevel", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var spell_level$field:int;
 
@@ -92,15 +92,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasSpellGroup) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, spell_group$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, spell_group$field);
 			}
 			if (hasSpellGroupName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, spell_group_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, spell_group_name$field);
 			}
 			if (hasSpellLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, spell_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, spell_level$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -115,28 +115,28 @@ package app.message {
 			var spell_group_name$count:uint = 0;
 			var spell_level$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (spell_group$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountSpellBookGoodsDataProto.spellGroup cannot be set twice.');
 					}
 					++spell_group$count;
-					this.spellGroup = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.spellGroup = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (spell_group_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountSpellBookGoodsDataProto.spellGroupName cannot be set twice.');
 					}
 					++spell_group_name$count;
-					this.spellGroupName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.spellGroupName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 2:
 					if (spell_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountSpellBookGoodsDataProto.spellLevel cannot be set twice.');
 					}
 					++spell_level$count;
-					this.spellLevel = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.spellLevel = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

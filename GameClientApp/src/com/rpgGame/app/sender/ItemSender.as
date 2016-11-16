@@ -8,8 +8,8 @@ package com.rpgGame.app.sender
 	import app.cmd.GoodsContainerModuleMessages;
 	import app.cmd.ShopModuleMessages;
 	
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 * @author lpp
@@ -50,7 +50,7 @@ package com.rpgGame.app.sender
 			by.writeVarint32(srcIndex);
 			by.writeVarint32(dstIndex);
 			by.writeVarint32(count);
-			SocketConnection.send(GoodsContainerModuleMessages.C2S_SPLIT_GOODS,by);
+			SocketConnection_protoBuffer.send(GoodsContainerModuleMessages.C2S_SPLIT_GOODS,by);
 		}
 		
 		/**
@@ -96,7 +96,7 @@ package com.rpgGame.app.sender
 			ItemUtil.writeContainerToBytes(by,dstContainerId,idx);
 			by.writeVarint32(srcGridIndex);
 			by.writeVarint32(dstGridIndex);
-			SocketConnection.send(GoodsContainerModuleMessages.C2S_MOVE_GOODS,by);
+			SocketConnection_protoBuffer.send(GoodsContainerModuleMessages.C2S_MOVE_GOODS,by);
 		}
 		
 		/**
@@ -117,7 +117,7 @@ package com.rpgGame.app.sender
 		{
 			var by:ByteBuffer = new ByteBuffer();
 			ItemUtil.writeContainerToBytes(by,controlType);
-			SocketConnection.send(GoodsContainerModuleMessages.C2S_CLEAN,by);
+			SocketConnection_protoBuffer.send(GoodsContainerModuleMessages.C2S_CLEAN,by);
 		}
 		
 		/**
@@ -143,7 +143,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeBytes(itemListVo.getByte());
-			SocketConnection.send(GoodsContainerModuleMessages.C2S_STORAGE_OPEN_PAGE, _bytes);
+			SocketConnection_protoBuffer.send(GoodsContainerModuleMessages.C2S_STORAGE_OPEN_PAGE, _bytes);
 		}
 		
 		/**
@@ -153,7 +153,7 @@ package com.rpgGame.app.sender
 		public static function reqDepotStorageGetData():void
 		{
 			var by:ByteBuffer = new ByteBuffer();
-			SocketConnection.send(GoodsContainerModuleMessages.C2S_DEPOT_STORAGE_GET_DATA, by);
+			SocketConnection_protoBuffer.send(GoodsContainerModuleMessages.C2S_DEPOT_STORAGE_GET_DATA, by);
 			isReqDepot = true;
 		}
 		
@@ -187,7 +187,7 @@ package com.rpgGame.app.sender
 			ItemUtil.writeContainerToBytes(by,container);
 			by.writeVarint32(index);
 			by.writeVarint32(itemId);
-			SocketConnection.send(GoodsContainerModuleMessages.C2S_DROP_GOODS, by);
+			SocketConnection_protoBuffer.send(GoodsContainerModuleMessages.C2S_DROP_GOODS, by);
 		}
 		
 		/**
@@ -212,7 +212,7 @@ package com.rpgGame.app.sender
 			by.writeVarint32(count);
 			if(param)
 				by.writeBytes(param,0,param.bytesAvailable);
-			SocketConnection.send(GoodsContainerModuleMessages.C2S_USE_GOODS, by); 
+			SocketConnection_protoBuffer.send(GoodsContainerModuleMessages.C2S_USE_GOODS, by); 
 		}
 		
 		/**
@@ -224,7 +224,7 @@ package com.rpgGame.app.sender
 		{
 			var by:ByteBuffer = new ByteBuffer();
 			by.writeVarint32(index);
-			SocketConnection.send(ShopModuleMessages.C2S_SELL_GOODS, by); 
+			SocketConnection_protoBuffer.send(ShopModuleMessages.C2S_SELL_GOODS, by); 
 		}
 		
 		public static function giveUpMoney(money:int):void

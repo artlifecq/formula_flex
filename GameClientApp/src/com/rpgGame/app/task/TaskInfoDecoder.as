@@ -32,7 +32,7 @@ package com.rpgGame.app.task
 	import app.message.TaskTargetProto;
 
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.net.BytesUtil;
+	import org.game.netCore.net_protobuff.BytesUtil;
 
 	/**
 	 *

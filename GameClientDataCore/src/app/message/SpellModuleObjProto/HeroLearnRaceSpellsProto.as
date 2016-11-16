@@ -16,7 +16,7 @@ package app.message.SpellModuleObjProto {
 		/**
 		 *  @private
 		 */
-		public static const RACE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.SpellModuleObjProto.HeroLearnRaceSpellsProto.race", "race", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.RaceId);
+		public static const RACE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.SpellModuleObjProto.HeroLearnRaceSpellsProto.race", "race", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.RaceId);
 
 		private var race$field:int;
 
@@ -43,7 +43,7 @@ package app.message.SpellModuleObjProto {
 		/**
 		 *  @private
 		 */
-		public static const SPELLS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.SpellModuleObjProto.HeroLearnRaceSpellsProto.spells", "spells", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpellProto; });
+		public static const SPELLS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.SpellModuleObjProto.HeroLearnRaceSpellsProto.spells", "spells", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpellProto; });
 
 		[ArrayElementType("app.message.SpellProto")]
 		public var spells:Array = [];
@@ -51,7 +51,7 @@ package app.message.SpellModuleObjProto {
 		/**
 		 *  @private
 		 */
-		public static const OBTAIN_SPELL_POINT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellModuleObjProto.HeroLearnRaceSpellsProto.obtain_spell_point", "obtainSpellPoint", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const OBTAIN_SPELL_POINT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellModuleObjProto.HeroLearnRaceSpellsProto.obtain_spell_point", "obtainSpellPoint", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var obtain_spell_point$field:int;
 
@@ -79,15 +79,15 @@ package app.message.SpellModuleObjProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasRace) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, race$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, race$field);
 			}
 			for (var spells$index:uint = 0; spells$index < this.spells.length; ++spells$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.spells[spells$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.spells[spells$index]);
 			}
 			if (hasObtainSpellPoint) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, obtain_spell_point$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, obtain_spell_point$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -101,24 +101,24 @@ package app.message.SpellModuleObjProto {
 			var race$count:uint = 0;
 			var obtain_spell_point$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (race$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroLearnRaceSpellsProto.race cannot be set twice.');
 					}
 					++race$count;
-					this.race = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.race = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 2:
-					this.spells.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.SpellProto()));
+					this.spells.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.SpellProto()));
 					break;
 				case 3:
 					if (obtain_spell_point$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroLearnRaceSpellsProto.obtainSpellPoint cannot be set twice.');
 					}
 					++obtain_spell_point$count;
-					this.obtainSpellPoint = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.obtainSpellPoint = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

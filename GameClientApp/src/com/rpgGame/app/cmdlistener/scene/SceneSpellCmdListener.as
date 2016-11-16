@@ -19,8 +19,8 @@ package com.rpgGame.app.cmdlistener.scene
 	import app.message.SpellProto;
 	
 	import org.client.mainCore.bean.BaseBean;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
@@ -39,10 +39,10 @@ package com.rpgGame.app.cmdlistener.scene
 		override public function start() : void
 		{
 			//技能相关
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_YOUR_SPELL_RELEASED, onYouSpellRelease);
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SPELL_RELEASE_FAIL, onSpellReleaseFail);
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SCENE_SPELL_RELEASED, onSpellReleased);
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SCENE_SPELL_EFFECTED, onSpellEffected);
+			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_YOUR_SPELL_RELEASED, onYouSpellRelease);
+			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SPELL_RELEASE_FAIL, onSpellReleaseFail);
+			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_SPELL_RELEASED, onSpellReleased);
+			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_SPELL_EFFECTED, onSpellEffected);
 			//
 			finish();
 		}

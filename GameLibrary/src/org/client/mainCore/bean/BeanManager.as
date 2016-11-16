@@ -1,10 +1,9 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.bean
+﻿package org.client.mainCore.bean
 {
-    import flash.utils.Dictionary;
-    import flash.events.EventDispatcher;
-    import flash.utils.getDefinitionByName;
     import flash.events.Event;
+    import flash.events.EventDispatcher;
+    import flash.utils.Dictionary;
+    import flash.utils.getDefinitionByName;
 
     public class BeanManager 
     {
@@ -24,8 +23,8 @@ package org.client.mainCore.bean
             var xmllist:XMLList = xml.elements();
             for each (var node:XML in xmllist)
             {
-                add(node.attribute("id").toString(), (getDefinitionByName(node.attribute("class").toString()) as Class));
-            };
+                add(node.attribute("id").toString(), getDefinitionByName(node.attribute("class").toString()) as Class);
+            }
         }
 
         public static function add(name:String, cls:Class):void
@@ -39,16 +38,16 @@ package org.client.mainCore.bean
 
         public static function remove(name:String):void
         {
-            var info = null;
+            var info:BeanNodeInfo = null;
             var len:int = _dataList.length;
             while (len-- > 0)
             {
                 info = _dataList[len];
-                if ((info.id == name))
+                if (info.id == name)
                 {
                     _dataList.splice(len, 1);
-                };
-            };
+                }
+            }
         }
 
         public static function start():void
@@ -58,23 +57,23 @@ package org.client.mainCore.bean
             initClasses();
         }
 
-        public static function getBeanInstance(name:String)
+        public static function getBeanInstance(name:String):*
         {
-            return (_beanMap[name]);
+            return _beanMap[name];
         }
 
-        static function initClasses():void
+        public static function initClasses():void
         {
-            var info = null;
-            var cls = null;
+            var info:BeanNodeInfo = null;
+            var cls:Class = null;
             var instance:*;
-            if ((_dataList.length > 0))
+            if (_dataList.length > 0)
             {
                 info = _dataList.shift();
                 cls = info.beanClass;
-                instance = new (cls)();
+                instance = new cls();
                 _beanMap[info.id] = instance;
-                (trace(instance, "实例化完成"));
+                trace(instance, "实例化完成");
                 dispatchEvent(new BeanEvent("progress", _current, _total));
                 _current++;
                 instance.start();
@@ -82,16 +81,16 @@ package org.client.mainCore.bean
             else
             {
                 dispatchEvent(new BeanEvent("complete", _current, _total));
-            };
+            }
         }
 
         private static function getED():EventDispatcher
         {
-            if ((_ed == null))
+            if (_ed == null)
             {
                 _ed = new EventDispatcher();
-            };
-            return (_ed);
+            }
+            return _ed;
         }
 
         public static function addEventListener(type:String, listener:Function):void
@@ -109,19 +108,17 @@ package org.client.mainCore.bean
             if (hasEventListener(e.type))
             {
                 getED().dispatchEvent(e);
-            };
+            }
         }
 
         public static function hasEventListener(type:String):Boolean
         {
-            return (getED().hasEventListener(type));
+            return getED().hasEventListener(type);
         }
 
         public static function willTrigger(type:String):Boolean
         {
-            return (getED().willTrigger(type));
+            return getED().willTrigger(type);
         }
-
-
     }
-}//package org.client.mainCore.bean
+}

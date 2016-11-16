@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.bean
+﻿package org.client.mainCore.bean
 {
     import flash.events.Event;
 
@@ -22,14 +21,12 @@ package org.client.mainCore.bean
 
         public function get current():int
         {
-            return (_current);
+            return _current;
         }
 
         public function get total():int
         {
-            return (_total);
+            return _total;
         }
-
-
     }
-}//package org.client.mainCore.bean
+}

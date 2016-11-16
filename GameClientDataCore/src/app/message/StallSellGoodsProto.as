@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IDX:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.StallSellGoodsProto.idx", "idx", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IDX:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.StallSellGoodsProto.idx", "idx", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var idx$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GOODS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.StallSellGoodsProto.goods", "goods", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsProto; });
+		public static const GOODS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.StallSellGoodsProto.goods", "goods", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsProto; });
 
 		private var goods$field:app.message.GoodsProto;
 
@@ -65,7 +65,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PRICE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.StallSellGoodsProto.price", "price", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PRICE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.StallSellGoodsProto.price", "price", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var price$field:int;
 
@@ -90,7 +90,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FLAG:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.StallSellGoodsProto.flag", "flag", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FLAG:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.StallSellGoodsProto.flag", "flag", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var flag$field:int;
 
@@ -118,19 +118,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasIdx) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, idx$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, idx$field);
 			}
 			if (hasGoods) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, goods$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, goods$field);
 			}
 			if (hasPrice) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, price$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, price$field);
 			}
 			if (hasFlag) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, flag$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, flag$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -146,14 +146,14 @@ package app.message {
 			var price$count:uint = 0;
 			var flag$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (idx$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StallSellGoodsProto.idx cannot be set twice.');
 					}
 					++idx$count;
-					this.idx = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.idx = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (goods$count != 0) {
@@ -161,21 +161,21 @@ package app.message {
 					}
 					++goods$count;
 					this.goods = new app.message.GoodsProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.goods);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.goods);
 					break;
 				case 3:
 					if (price$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StallSellGoodsProto.price cannot be set twice.');
 					}
 					++price$count;
-					this.price = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.price = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (flag$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StallSellGoodsProto.flag cannot be set twice.');
 					}
 					++flag$count;
-					this.flag = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.flag = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -15,7 +15,7 @@ package app.message.Config.AllGoodsContainerUnlockProto {
 		/**
 		 *  @private
 		 */
-		public static const PAGE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.Config.AllGoodsContainerUnlockProto.StorageUnlockProto.page", "page", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PAGE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.Config.AllGoodsContainerUnlockProto.StorageUnlockProto.page", "page", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var page$field:int;
 
@@ -42,7 +42,7 @@ package app.message.Config.AllGoodsContainerUnlockProto {
 		/**
 		 *  @private
 		 */
-		public static const UPGRADE_DATA:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.AllGoodsContainerUnlockProto.StorageUnlockProto.upgrade_data", "upgradeData", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.UpgradeProto; });
+		public static const UPGRADE_DATA:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.AllGoodsContainerUnlockProto.StorageUnlockProto.upgrade_data", "upgradeData", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.UpgradeProto; });
 
 		private var upgrade_data$field:app.message.UpgradeProto;
 
@@ -65,7 +65,7 @@ package app.message.Config.AllGoodsContainerUnlockProto {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_OPEN_SIZE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.Config.AllGoodsContainerUnlockProto.StorageUnlockProto.total_open_size", "totalOpenSize", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOTAL_OPEN_SIZE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.Config.AllGoodsContainerUnlockProto.StorageUnlockProto.total_open_size", "totalOpenSize", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var total_open_size$field:int;
 
@@ -93,15 +93,15 @@ package app.message.Config.AllGoodsContainerUnlockProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasPage) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, page$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, page$field);
 			}
 			if (hasUpgradeData) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, upgrade_data$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, upgrade_data$field);
 			}
 			if (hasTotalOpenSize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, total_open_size$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, total_open_size$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -116,14 +116,14 @@ package app.message.Config.AllGoodsContainerUnlockProto {
 			var upgrade_data$count:uint = 0;
 			var total_open_size$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (page$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StorageUnlockProto.page cannot be set twice.');
 					}
 					++page$count;
-					this.page = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.page = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (upgrade_data$count != 0) {
@@ -131,14 +131,14 @@ package app.message.Config.AllGoodsContainerUnlockProto {
 					}
 					++upgrade_data$count;
 					this.upgradeData = new app.message.UpgradeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.upgradeData);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.upgradeData);
 					break;
 				case 3:
 					if (total_open_size$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StorageUnlockProto.totalOpenSize cannot be set twice.');
 					}
 					++total_open_size$count;
-					this.totalOpenSize = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.totalOpenSize = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

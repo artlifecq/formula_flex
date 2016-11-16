@@ -2,7 +2,7 @@ package com.rpgGame.coreData.info.item
 {
 	import com.rpgGame.coreData.type.CostItemType;
 	
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 	
 	
 	/**

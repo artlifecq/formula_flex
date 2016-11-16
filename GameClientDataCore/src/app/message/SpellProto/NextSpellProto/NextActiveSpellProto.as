@@ -14,7 +14,7 @@ package app.message.SpellProto.NextSpellProto {
 		/**
 		 *  @private
 		 */
-		public static const CD:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellProto.NextSpellProto.NextActiveSpellProto.cd", "cd", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CD:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellProto.NextSpellProto.NextActiveSpellProto.cd", "cd", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var cd$field:int;
 
@@ -41,7 +41,7 @@ package app.message.SpellProto.NextSpellProto {
 		/**
 		 *  @private
 		 */
-		public static const MANA_COST:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellProto.NextSpellProto.NextActiveSpellProto.mana_cost", "manaCost", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MANA_COST:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellProto.NextSpellProto.NextActiveSpellProto.mana_cost", "manaCost", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var mana_cost$field:int;
 
@@ -69,11 +69,11 @@ package app.message.SpellProto.NextSpellProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasCd) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, cd$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, cd$field);
 			}
 			if (hasManaCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, mana_cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, mana_cost$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -87,21 +87,21 @@ package app.message.SpellProto.NextSpellProto {
 			var cd$count:uint = 0;
 			var mana_cost$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (cd$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NextActiveSpellProto.cd cannot be set twice.');
 					}
 					++cd$count;
-					this.cd = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.cd = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (mana_cost$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NextActiveSpellProto.manaCost cannot be set twice.');
 					}
 					++mana_cost$count;
-					this.manaCost = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.manaCost = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

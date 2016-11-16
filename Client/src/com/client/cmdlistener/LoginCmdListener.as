@@ -5,9 +5,9 @@ package com.client.cmdlistener
 	import com.client.process.ServerConnect;
 	import com.client.ui.alert.GameAlert;
 	import com.gameClient.log.GameLog;
-
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
@@ -28,20 +28,20 @@ package com.client.cmdlistener
 
 		public static function start() : void
 		{
-			SocketConnection.addCmdListener(ClientCmdID.S2C_DISCONNECT_REASON, onSocketDisconnect);
-			SocketConnection.addCmdListener(ClientCmdID.S2C_LOGIN_SUCCESS, onLoginSuccess);
-			SocketConnection.addCmdListener(ClientCmdID.S2C_RECONNECT_LOGIN_SUCCESS, onReLoginSuccess);
-			SocketConnection.addCmdListener(ClientCmdID.S2C_LOGIN_BY_NAME_FAIL, onLoginFail);
-			SocketConnection.addCmdListener(ClientCmdID.S2C_CREATE_USER_BY_NAME_FAIL, onCreateUserByNameFail);
-			SocketConnection.addCmdListener(ClientCmdID.S2C_CREATE_HERO_SUCCESS, onCreateHeroSuccess);
-			SocketConnection.addCmdListener(ClientCmdID.S2C_CREATE_HERO_FAIL, onCreateHeroFail);
-			SocketConnection.addCmdListener(ClientCmdID.S2C_AUTH_INFO, onGetAuthInfo);
-			SocketConnection.addCmdListener(ClientCmdID.S2C_RECONNECTED_FAIL, onReconnectedFail);
+			SocketConnection_protoBuffer.addCmdListener(ClientCmdID.S2C_DISCONNECT_REASON, onSocketDisconnect);
+			SocketConnection_protoBuffer.addCmdListener(ClientCmdID.S2C_LOGIN_SUCCESS, onLoginSuccess);
+			SocketConnection_protoBuffer.addCmdListener(ClientCmdID.S2C_RECONNECT_LOGIN_SUCCESS, onReLoginSuccess);
+			SocketConnection_protoBuffer.addCmdListener(ClientCmdID.S2C_LOGIN_BY_NAME_FAIL, onLoginFail);
+			SocketConnection_protoBuffer.addCmdListener(ClientCmdID.S2C_CREATE_USER_BY_NAME_FAIL, onCreateUserByNameFail);
+			SocketConnection_protoBuffer.addCmdListener(ClientCmdID.S2C_CREATE_HERO_SUCCESS, onCreateHeroSuccess);
+			SocketConnection_protoBuffer.addCmdListener(ClientCmdID.S2C_CREATE_HERO_FAIL, onCreateHeroFail);
+			SocketConnection_protoBuffer.addCmdListener(ClientCmdID.S2C_AUTH_INFO, onGetAuthInfo);
+			SocketConnection_protoBuffer.addCmdListener(ClientCmdID.S2C_RECONNECTED_FAIL, onReconnectedFail);
 		}
 
 		private static function onLoginSuccess(data : ByteBuffer) : void
 		{
-			ClientGlobal.loginData = SocketConnection.messsageUnCompress(data, ClientCmdID.S2C_LOGIN_SUCCESS);
+			ClientGlobal.loginData = SocketConnection_protoBuffer.messsageUnCompress(data, ClientCmdID.S2C_LOGIN_SUCCESS);
 			ClientGlobal.userID = ClientGlobal.loginData.readLong();
 			var hasUserValue : int = ClientGlobal.loginData.readByte();
 			ClientGlobal.loginType = hasUserValue >>> 1; // 登陆方式，0-内部 1-web 2-微端
@@ -59,7 +59,7 @@ package com.client.cmdlistener
 
 		private static function onReLoginSuccess(data : ByteBuffer) : void
 		{
-			ClientGlobal.loginData = SocketConnection.messsageUnCompress(data, ClientCmdID.S2C_RECONNECT_LOGIN_SUCCESS);
+			ClientGlobal.loginData = SocketConnection_protoBuffer.messsageUnCompress(data, ClientCmdID.S2C_RECONNECT_LOGIN_SUCCESS);
 			ClientGlobal.userID = ClientGlobal.loginData.readLong();
 			var hasUserValue : int = ClientGlobal.loginData.readByte();
 			ClientGlobal.loginType = hasUserValue >>> 1; // 登陆方式，0-内部 1-web 2-微端

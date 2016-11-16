@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.module
+﻿package org.client.mainCore.module
 {
     public /*dynamic*/ interface IModule 
     {
@@ -11,4 +10,4 @@ package org.client.mainCore.module
         function destroy():void;
 
     }
-}//package org.client.mainCore.module
+}

@@ -16,7 +16,7 @@ package app.message.UpgradePromotionProto {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.UpgradePromotionProto.UpgradePromotionSingleProto.level", "level", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.UpgradePromotionProto.UpgradePromotionSingleProto.level", "level", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level$field:int;
 
@@ -43,7 +43,7 @@ package app.message.UpgradePromotionProto {
 		/**
 		 *  @private
 		 */
-		public static const GLOBAL_LIMIT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.UpgradePromotionProto.UpgradePromotionSingleProto.global_limit", "globalLimit", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const GLOBAL_LIMIT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.UpgradePromotionProto.UpgradePromotionSingleProto.global_limit", "globalLimit", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var global_limit$field:int;
 
@@ -68,7 +68,7 @@ package app.message.UpgradePromotionProto {
 		/**
 		 *  @private
 		 */
-		public static const PRIZE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.UpgradePromotionProto.UpgradePromotionSingleProto.prize", "prize", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
+		public static const PRIZE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.UpgradePromotionProto.UpgradePromotionSingleProto.prize", "prize", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
 
 		private var prize$field:app.message.PrizeProto;
 
@@ -91,7 +91,7 @@ package app.message.UpgradePromotionProto {
 		/**
 		 *  @private
 		 */
-		public static const TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.UpgradePromotionProto.UpgradePromotionSingleProto.type", "type", (4 << 3) | com.netease.protobuf.WireType.VARINT, app.message.UpgradePromotionProtoType);
+		public static const TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.UpgradePromotionProto.UpgradePromotionSingleProto.type", "type", (4 << 3) | com.netease.protobuf.WireType.VARINT, app.message.UpgradePromotionProtoType);
 
 		private var type$field:int;
 
@@ -119,19 +119,19 @@ package app.message.UpgradePromotionProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level$field);
 			}
 			if (hasGlobalLimit) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, global_limit$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, global_limit$field);
 			}
 			if (hasPrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, prize$field);
 			}
 			if (hasType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, type$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -147,21 +147,21 @@ package app.message.UpgradePromotionProto {
 			var prize$count:uint = 0;
 			var type$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: UpgradePromotionSingleProto.level cannot be set twice.');
 					}
 					++level$count;
-					this.level = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.level = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (global_limit$count != 0) {
 						throw new flash.errors.IOError('Bad data format: UpgradePromotionSingleProto.globalLimit cannot be set twice.');
 					}
 					++global_limit$count;
-					this.globalLimit = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.globalLimit = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (prize$count != 0) {
@@ -169,14 +169,14 @@ package app.message.UpgradePromotionProto {
 					}
 					++prize$count;
 					this.prize = new app.message.PrizeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.prize);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.prize);
 					break;
 				case 4:
 					if (type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: UpgradePromotionSingleProto.type cannot be set twice.');
 					}
 					++type$count;
-					this.type = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.type = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

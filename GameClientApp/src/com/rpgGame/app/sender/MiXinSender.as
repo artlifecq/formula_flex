@@ -6,7 +6,7 @@ package com.rpgGame.app.sender
 	import app.cmd.TaskModuleMessages;
 	import app.message.CountryOfficerDataProto;
 	
-	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
 
 	/**
 	 * 发送消息
@@ -21,7 +21,7 @@ package com.rpgGame.app.sender
 		public static function giveUpMixin( ):void
 		{
 			_bytes.clear();
-			SocketConnection.send( TaskModuleMessages.C2S_GIVE_UP_MI_XIN ,_bytes);
+			SocketConnection_protoBuffer.send( TaskModuleMessages.C2S_GIVE_UP_MI_XIN ,_bytes);
 		}
 		
 		/**
@@ -36,7 +36,7 @@ package com.rpgGame.app.sender
 				if(!countryOfficerData.canStartMiXin)return;
 			}
 			_bytes.clear();
-			SocketConnection.send( CountryModuleMessages.C2S_START_MI_XIN ,_bytes);
+			SocketConnection_protoBuffer.send( CountryModuleMessages.C2S_START_MI_XIN ,_bytes);
 		}
 		
 		/**
@@ -48,7 +48,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(id);
-			SocketConnection.send(TaskModuleMessages.C2S_COLLECT_ROULETTE_PRIZE, _bytes);
+			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_COLLECT_ROULETTE_PRIZE, _bytes);
 		}
 	}
 }

@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PRIZES:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.TouZhuConfig.prizes", "prizes", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TouZhuConfig.TouZhuPrize; });
+		public static const PRIZES:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.TouZhuConfig.prizes", "prizes", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TouZhuConfig.TouZhuPrize; });
 
 		[ArrayElementType("app.message.TouZhuConfig.TouZhuPrize")]
 		public var prizes:Array = [];
@@ -23,7 +23,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TIMES_PER_DAY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TouZhuConfig.times_per_day", "timesPerDay", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TIMES_PER_DAY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TouZhuConfig.times_per_day", "timesPerDay", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var times_per_day$field:int;
 
@@ -50,7 +50,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TIME_DATA:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.TouZhuConfig.time_data", "timeData", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const TIME_DATA:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.TouZhuConfig.time_data", "timeData", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var time_data$field:String;
 
@@ -73,7 +73,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DURATION:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.TouZhuConfig.duration", "duration", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DURATION:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.TouZhuConfig.duration", "duration", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var duration$field:Int64;
 
@@ -99,19 +99,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			for (var prizes$index:uint = 0; prizes$index < this.prizes.length; ++prizes$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.prizes[prizes$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.prizes[prizes$index]);
 			}
 			if (hasTimesPerDay) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, times_per_day$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, times_per_day$field);
 			}
 			if (hasTimeData) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, time_data$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, time_data$field);
 			}
 			if (hasDuration) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, duration$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, duration$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -126,31 +126,31 @@ package app.message {
 			var time_data$count:uint = 0;
 			var duration$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
-					this.prizes.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.TouZhuConfig.TouZhuPrize()));
+					this.prizes.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.TouZhuConfig.TouZhuPrize()));
 					break;
 				case 6:
 					if (times_per_day$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TouZhuConfig.timesPerDay cannot be set twice.');
 					}
 					++times_per_day$count;
-					this.timesPerDay = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.timesPerDay = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (time_data$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TouZhuConfig.timeData cannot be set twice.');
 					}
 					++time_data$count;
-					this.timeData = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.timeData = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 8:
 					if (duration$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TouZhuConfig.duration cannot be set twice.');
 					}
 					++duration$count;
-					this.duration = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.duration = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

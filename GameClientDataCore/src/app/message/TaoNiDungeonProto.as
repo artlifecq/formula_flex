@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STAGES:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.TaoNiDungeonProto.stages", "stages", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TaoNiDungeonProto.TaoNiStageProto; });
+		public static const STAGES:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.TaoNiDungeonProto.stages", "stages", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TaoNiDungeonProto.TaoNiStageProto; });
 
 		[ArrayElementType("app.message.TaoNiDungeonProto.TaoNiStageProto")]
 		public var stages:Array = [];
@@ -26,7 +26,7 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			for (var stages$index:uint = 0; stages$index < this.stages.length; ++stages$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.stages[stages$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.stages[stages$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -38,10 +38,10 @@ package app.message {
 		 */
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
-					this.stages.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.TaoNiDungeonProto.TaoNiStageProto()));
+					this.stages.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.TaoNiDungeonProto.TaoNiStageProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

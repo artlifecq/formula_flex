@@ -21,7 +21,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DOING_CHAPTER_TASK:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.TaskModuleObjProto.doing_chapter_task", "doingChapterTask", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ChapterTaskProto; });
+		public static const DOING_CHAPTER_TASK:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.TaskModuleObjProto.doing_chapter_task", "doingChapterTask", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ChapterTaskProto; });
 
 		private var doing_chapter_task$field:app.message.ChapterTaskProto;
 
@@ -44,7 +44,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CHANCE_TASK_SWALLOWED_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TaskModuleObjProto.chance_task_swallowed_count", "chanceTaskSwallowedCount", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CHANCE_TASK_SWALLOWED_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TaskModuleObjProto.chance_task_swallowed_count", "chanceTaskSwallowedCount", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var chance_task_swallowed_count$field:int;
 
@@ -71,7 +71,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CHANCE_TASK_ACCEPTED_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TaskModuleObjProto.chance_task_accepted_count", "chanceTaskAcceptedCount", (12 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CHANCE_TASK_ACCEPTED_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TaskModuleObjProto.chance_task_accepted_count", "chanceTaskAcceptedCount", (12 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var chance_task_accepted_count$field:int;
 
@@ -96,7 +96,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CHANCE_TASK_AUTO_COMPLETE_COUNT:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.TaskModuleObjProto.chance_task_auto_complete_count", "chanceTaskAutoCompleteCount", (13 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CHANCE_TASK_AUTO_COMPLETE_COUNT:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.TaskModuleObjProto.chance_task_auto_complete_count", "chanceTaskAutoCompleteCount", (13 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var chanceTaskAutoCompleteCount:Array = [];
@@ -104,7 +104,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CHANCE_TASK:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.TaskModuleObjProto.chance_task", "chanceTask", (14 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ChanceTaskProto; });
+		public static const CHANCE_TASK:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.TaskModuleObjProto.chance_task", "chanceTask", (14 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ChanceTaskProto; });
 
 		[ArrayElementType("app.message.ChanceTaskProto")]
 		public var chanceTask:Array = [];
@@ -112,7 +112,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DOING_DAILY_TASK:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.TaskModuleObjProto.doing_daily_task", "doingDailyTask", (21 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.DailyTaskProto; });
+		public static const DOING_DAILY_TASK:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.TaskModuleObjProto.doing_daily_task", "doingDailyTask", (21 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.DailyTaskProto; });
 
 		private var doing_daily_task$field:app.message.DailyTaskProto;
 
@@ -135,7 +135,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BRANCH_TASK:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.TaskModuleObjProto.branch_task", "branchTask", (22 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BranchTaskProto; });
+		public static const BRANCH_TASK:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.TaskModuleObjProto.branch_task", "branchTask", (22 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BranchTaskProto; });
 
 		[ArrayElementType("app.message.BranchTaskProto")]
 		public var branchTask:Array = [];
@@ -143,7 +143,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOU_JING_TASK:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.TaskModuleObjProto.tou_jing_task", "touJingTask", (31 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TouJingTaskProto; });
+		public static const TOU_JING_TASK:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.TaskModuleObjProto.tou_jing_task", "touJingTask", (31 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TouJingTaskProto; });
 
 		private var tou_jing_task$field:app.message.TouJingTaskProto;
 
@@ -166,7 +166,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOU_JING_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TaskModuleObjProto.tou_jing_times", "touJingTimes", (32 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOU_JING_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TaskModuleObjProto.tou_jing_times", "touJingTimes", (32 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var tou_jing_times$field:int;
 
@@ -191,7 +191,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MI_XIN_TASK:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.TaskModuleObjProto.mi_xin_task", "miXinTask", (40 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MiXinTaskProto; });
+		public static const MI_XIN_TASK:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.TaskModuleObjProto.mi_xin_task", "miXinTask", (40 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MiXinTaskProto; });
 
 		private var mi_xin_task$field:app.message.MiXinTaskProto;
 
@@ -214,7 +214,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ACCEPT_MI_XIN_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TaskModuleObjProto.accept_mi_xin_times", "acceptMiXinTimes", (41 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ACCEPT_MI_XIN_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TaskModuleObjProto.accept_mi_xin_times", "acceptMiXinTimes", (41 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var accept_mi_xin_times$field:int;
 
@@ -239,7 +239,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOU_ZHU_TASK:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.TaskModuleObjProto.tou_zhu_task", "touZhuTask", (50 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TouZhuTaskProto; });
+		public static const TOU_ZHU_TASK:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.TaskModuleObjProto.tou_zhu_task", "touZhuTask", (50 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TouZhuTaskProto; });
 
 		private var tou_zhu_task$field:app.message.TouZhuTaskProto;
 
@@ -262,7 +262,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOU_ZHU_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TaskModuleObjProto.tou_zhu_times", "touZhuTimes", (51 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOU_ZHU_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TaskModuleObjProto.tou_zhu_times", "touZhuTimes", (51 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var tou_zhu_times$field:int;
 
@@ -290,55 +290,55 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasDoingChapterTask) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, doing_chapter_task$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, doing_chapter_task$field);
 			}
 			if (hasChanceTaskSwallowedCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, chance_task_swallowed_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, chance_task_swallowed_count$field);
 			}
 			if (hasChanceTaskAcceptedCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, chance_task_accepted_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, chance_task_accepted_count$field);
 			}
 			for (var chanceTaskAutoCompleteCount$index:uint = 0; chanceTaskAutoCompleteCount$index < this.chanceTaskAutoCompleteCount.length; ++chanceTaskAutoCompleteCount$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.chanceTaskAutoCompleteCount[chanceTaskAutoCompleteCount$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.chanceTaskAutoCompleteCount[chanceTaskAutoCompleteCount$index]);
 			}
 			for (var chanceTask$index:uint = 0; chanceTask$index < this.chanceTask.length; ++chanceTask$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 14);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.chanceTask[chanceTask$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.chanceTask[chanceTask$index]);
 			}
 			if (hasDoingDailyTask) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 21);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, doing_daily_task$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, doing_daily_task$field);
 			}
 			for (var branchTask$index:uint = 0; branchTask$index < this.branchTask.length; ++branchTask$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 22);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.branchTask[branchTask$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.branchTask[branchTask$index]);
 			}
 			if (hasTouJingTask) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 31);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, tou_jing_task$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, tou_jing_task$field);
 			}
 			if (hasTouJingTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 32);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, tou_jing_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, tou_jing_times$field);
 			}
 			if (hasMiXinTask) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 40);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, mi_xin_task$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, mi_xin_task$field);
 			}
 			if (hasAcceptMiXinTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 41);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, accept_mi_xin_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, accept_mi_xin_times$field);
 			}
 			if (hasTouZhuTask) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 50);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, tou_zhu_task$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, tou_zhu_task$field);
 			}
 			if (hasTouZhuTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 51);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, tou_zhu_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, tou_zhu_times$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -360,7 +360,7 @@ package app.message {
 			var tou_zhu_task$count:uint = 0;
 			var tou_zhu_times$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (doing_chapter_task$count != 0) {
@@ -368,31 +368,31 @@ package app.message {
 					}
 					++doing_chapter_task$count;
 					this.doingChapterTask = new app.message.ChapterTaskProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.doingChapterTask);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.doingChapterTask);
 					break;
 				case 11:
 					if (chance_task_swallowed_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TaskModuleObjProto.chanceTaskSwallowedCount cannot be set twice.');
 					}
 					++chance_task_swallowed_count$count;
-					this.chanceTaskSwallowedCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.chanceTaskSwallowedCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 12:
 					if (chance_task_accepted_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TaskModuleObjProto.chanceTaskAcceptedCount cannot be set twice.');
 					}
 					++chance_task_accepted_count$count;
-					this.chanceTaskAcceptedCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.chanceTaskAcceptedCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 13:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.chanceTaskAutoCompleteCount);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.chanceTaskAutoCompleteCount);
 						break;
 					}
-					this.chanceTaskAutoCompleteCount.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.chanceTaskAutoCompleteCount.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				case 14:
-					this.chanceTask.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.ChanceTaskProto()));
+					this.chanceTask.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.ChanceTaskProto()));
 					break;
 				case 21:
 					if (doing_daily_task$count != 0) {
@@ -400,10 +400,10 @@ package app.message {
 					}
 					++doing_daily_task$count;
 					this.doingDailyTask = new app.message.DailyTaskProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.doingDailyTask);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.doingDailyTask);
 					break;
 				case 22:
-					this.branchTask.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.BranchTaskProto()));
+					this.branchTask.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.BranchTaskProto()));
 					break;
 				case 31:
 					if (tou_jing_task$count != 0) {
@@ -411,14 +411,14 @@ package app.message {
 					}
 					++tou_jing_task$count;
 					this.touJingTask = new app.message.TouJingTaskProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.touJingTask);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.touJingTask);
 					break;
 				case 32:
 					if (tou_jing_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TaskModuleObjProto.touJingTimes cannot be set twice.');
 					}
 					++tou_jing_times$count;
-					this.touJingTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.touJingTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 40:
 					if (mi_xin_task$count != 0) {
@@ -426,14 +426,14 @@ package app.message {
 					}
 					++mi_xin_task$count;
 					this.miXinTask = new app.message.MiXinTaskProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.miXinTask);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.miXinTask);
 					break;
 				case 41:
 					if (accept_mi_xin_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TaskModuleObjProto.acceptMiXinTimes cannot be set twice.');
 					}
 					++accept_mi_xin_times$count;
-					this.acceptMiXinTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.acceptMiXinTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 50:
 					if (tou_zhu_task$count != 0) {
@@ -441,14 +441,14 @@ package app.message {
 					}
 					++tou_zhu_task$count;
 					this.touZhuTask = new app.message.TouZhuTaskProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.touZhuTask);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.touZhuTask);
 					break;
 				case 51:
 					if (tou_zhu_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TaskModuleObjProto.touZhuTimes cannot be set twice.');
 					}
 					++tou_zhu_times$count;
-					this.touZhuTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.touZhuTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

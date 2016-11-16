@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EFFICACY:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.NormalUsableDataProto.efficacy", "efficacy", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.NormalUsableDataProto.NormalEfficacy);
+		public static const EFFICACY:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.NormalUsableDataProto.efficacy", "efficacy", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.NormalUsableDataProto.NormalEfficacy);
 
 		private var efficacy$field:int;
 
@@ -45,7 +45,7 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasEfficacy) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, efficacy$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, efficacy$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -58,14 +58,14 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var efficacy$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (efficacy$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NormalUsableDataProto.efficacy cannot be set twice.');
 					}
 					++efficacy$count;
-					this.efficacy = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.efficacy = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

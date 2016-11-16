@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FAIL_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.TouZhuTaskProto.fail_time", "failTime", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FAIL_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.TouZhuTaskProto.fail_time", "failTime", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var fail_time$field:Int64;
 
@@ -37,7 +37,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ZHU_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TouZhuTaskProto.zhu_id", "zhuId", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ZHU_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TouZhuTaskProto.zhu_id", "zhuId", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var zhu_id$field:int;
 
@@ -67,11 +67,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasFailTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, fail_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, fail_time$field);
 			}
 			if (hasZhuId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, zhu_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, zhu_id$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -85,21 +85,21 @@ package app.message {
 			var fail_time$count:uint = 0;
 			var zhu_id$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (fail_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TouZhuTaskProto.failTime cannot be set twice.');
 					}
 					++fail_time$count;
-					this.failTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.failTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (zhu_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TouZhuTaskProto.zhuId cannot be set twice.');
 					}
 					++zhu_id$count;
-					this.zhuId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.zhuId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

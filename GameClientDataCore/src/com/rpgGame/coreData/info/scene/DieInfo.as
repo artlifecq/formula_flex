@@ -3,7 +3,7 @@ package com.rpgGame.coreData.info.scene
 	import com.rpgGame.coreData.enum.ReliveShowType;
 	import com.rpgGame.coreData.type.ReliveType;
 	
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *

@@ -354,7 +354,9 @@ package com.rpgGame.app.ui.main
 		private function __onResize(e : *) : void
 		{
 			if (nativeStage.stageWidth == starlingStage.stageWidth && nativeStage.stageHeight == starlingStage.stageHeight)
+			{
 				nativeStage.removeEventListener(Event.ENTER_FRAME, __onResize);
+			}
 			
 			resize(starlingStage.stageWidth, starlingStage.stageHeight);
 		}

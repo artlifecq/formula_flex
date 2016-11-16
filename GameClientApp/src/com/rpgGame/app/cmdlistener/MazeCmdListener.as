@@ -15,8 +15,8 @@ package com.rpgGame.app.cmdlistener
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 	
 	public class MazeCmdListener extends BaseBean
 	{
@@ -27,24 +27,24 @@ package com.rpgGame.app.cmdlistener
 		
 		override public function start():void
 		{
-			SocketConnection.addCmdListener(MazeModuleMessages.S2C_MAZE_WILL_START,mazeWillStart);
-			SocketConnection.addCmdListener(MazeModuleMessages.S2C_TRY_ENTER_DUNGEON,tryEnterDungeon);
-			SocketConnection.addCmdListener(MazeModuleMessages.S2C_TRY_ENTER_DUNGEON_FAIL,tryEnterDungeonFail);
-			SocketConnection.addCmdListener(MazeModuleMessages.S2C_GET_LAST_RANK,getLastRank);
-			SocketConnection.addCmdListener(MazeModuleMessages.S2C_DUNGEON_INFO,dungeonInfo);
-			SocketConnection.addCmdListener(MazeModuleMessages.S2C_RANK_BROADCAST,rankBroadcast);
-			SocketConnection.addCmdListener(MazeModuleMessages.S2C_COLLECT_FLOOR_PRIZE,collectFloorPrize);
-			SocketConnection.addCmdListener(MazeModuleMessages.S2C_COLLECT_FLOOR_PRIZE_FAIL,collectFloorPrizeFail);
-			SocketConnection.addCmdListener(MazeModuleMessages.S2C_COLLECT_FLOOR_PRIZE_AND_ENTER_NEXT,collectFloorPrizeAndEnterNext);
-			SocketConnection.addCmdListener(MazeModuleMessages.S2C_MAZE_END,mazeEnd);
-			SocketConnection.addCmdListener(MazeModuleMessages.S2C_TRY_TRANSPORT,tryTransport);
-			SocketConnection.addCmdListener(MazeModuleMessages.S2C_TRY_TRANSPORT_FAIL,tryTransportFail);
-			SocketConnection.addCmdListener(MazeModuleMessages.S2C_MAZE_FINISH_RANK,mazeFinishRank);
-			SocketConnection.addCmdListener(MazeModuleMessages.S2C_DUNGEON_TIME_INFO,mazeInfo);
-			SocketConnection.addCmdListener(MazeModuleMessages.S2C_MAZE_BOSS_BEEN_KILLED,mazeBossBeenKilled);
-			SocketConnection.addCmdListener(MazeModuleMessages.S2C_MAZE_FLOOR_COUNTRY_TOP_BROADCAT,mazeFloorCountryTopBroadcast);
-			SocketConnection.addCmdListener(MazeModuleMessages.S2C_MAZE_FLOOR_TOP_BROADCAT,mazeFloorTopBroadcast);
-			SocketConnection.addCmdListener(MazeModuleMessages.S2C_MAZE_SB_FLOOR_CHANGE_BROADCAT,mazeFloorChange);
+			SocketConnection_protoBuffer.addCmdListener(MazeModuleMessages.S2C_MAZE_WILL_START,mazeWillStart);
+			SocketConnection_protoBuffer.addCmdListener(MazeModuleMessages.S2C_TRY_ENTER_DUNGEON,tryEnterDungeon);
+			SocketConnection_protoBuffer.addCmdListener(MazeModuleMessages.S2C_TRY_ENTER_DUNGEON_FAIL,tryEnterDungeonFail);
+			SocketConnection_protoBuffer.addCmdListener(MazeModuleMessages.S2C_GET_LAST_RANK,getLastRank);
+			SocketConnection_protoBuffer.addCmdListener(MazeModuleMessages.S2C_DUNGEON_INFO,dungeonInfo);
+			SocketConnection_protoBuffer.addCmdListener(MazeModuleMessages.S2C_RANK_BROADCAST,rankBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(MazeModuleMessages.S2C_COLLECT_FLOOR_PRIZE,collectFloorPrize);
+			SocketConnection_protoBuffer.addCmdListener(MazeModuleMessages.S2C_COLLECT_FLOOR_PRIZE_FAIL,collectFloorPrizeFail);
+			SocketConnection_protoBuffer.addCmdListener(MazeModuleMessages.S2C_COLLECT_FLOOR_PRIZE_AND_ENTER_NEXT,collectFloorPrizeAndEnterNext);
+			SocketConnection_protoBuffer.addCmdListener(MazeModuleMessages.S2C_MAZE_END,mazeEnd);
+			SocketConnection_protoBuffer.addCmdListener(MazeModuleMessages.S2C_TRY_TRANSPORT,tryTransport);
+			SocketConnection_protoBuffer.addCmdListener(MazeModuleMessages.S2C_TRY_TRANSPORT_FAIL,tryTransportFail);
+			SocketConnection_protoBuffer.addCmdListener(MazeModuleMessages.S2C_MAZE_FINISH_RANK,mazeFinishRank);
+			SocketConnection_protoBuffer.addCmdListener(MazeModuleMessages.S2C_DUNGEON_TIME_INFO,mazeInfo);
+			SocketConnection_protoBuffer.addCmdListener(MazeModuleMessages.S2C_MAZE_BOSS_BEEN_KILLED,mazeBossBeenKilled);
+			SocketConnection_protoBuffer.addCmdListener(MazeModuleMessages.S2C_MAZE_FLOOR_COUNTRY_TOP_BROADCAT,mazeFloorCountryTopBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(MazeModuleMessages.S2C_MAZE_FLOOR_TOP_BROADCAT,mazeFloorTopBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(MazeModuleMessages.S2C_MAZE_SB_FLOOR_CHANGE_BROADCAT,mazeFloorChange);
 			
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
 			finish();

@@ -15,7 +15,7 @@ package app.message.TaskTargetProto {
 		/**
 		 *  @private
 		 */
-		public static const DROP_GOODS_MONSTER_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TaskTargetProto.DropGoodsTargetProto.drop_goods_monster_id", "dropGoodsMonsterId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DROP_GOODS_MONSTER_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TaskTargetProto.DropGoodsTargetProto.drop_goods_monster_id", "dropGoodsMonsterId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var drop_goods_monster_id$field:int;
 
@@ -42,7 +42,7 @@ package app.message.TaskTargetProto {
 		/**
 		 *  @private
 		 */
-		public static const DROP_GOODS_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TaskTargetProto.DropGoodsTargetProto.drop_goods_count", "dropGoodsCount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DROP_GOODS_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TaskTargetProto.DropGoodsTargetProto.drop_goods_count", "dropGoodsCount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var drop_goods_count$field:int;
 
@@ -67,7 +67,7 @@ package app.message.TaskTargetProto {
 		/**
 		 *  @private
 		 */
-		public static const DROP_GOODS_NAME:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.TaskTargetProto.DropGoodsTargetProto.drop_goods_name", "dropGoodsName", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const DROP_GOODS_NAME:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.TaskTargetProto.DropGoodsTargetProto.drop_goods_name", "dropGoodsName", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var drop_goods_name$field:flash.utils.ByteArray;
 
@@ -93,15 +93,15 @@ package app.message.TaskTargetProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasDropGoodsMonsterId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, drop_goods_monster_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, drop_goods_monster_id$field);
 			}
 			if (hasDropGoodsCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, drop_goods_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, drop_goods_count$field);
 			}
 			if (hasDropGoodsName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, drop_goods_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, drop_goods_name$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -116,28 +116,28 @@ package app.message.TaskTargetProto {
 			var drop_goods_count$count:uint = 0;
 			var drop_goods_name$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (drop_goods_monster_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: DropGoodsTargetProto.dropGoodsMonsterId cannot be set twice.');
 					}
 					++drop_goods_monster_id$count;
-					this.dropGoodsMonsterId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.dropGoodsMonsterId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (drop_goods_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: DropGoodsTargetProto.dropGoodsCount cannot be set twice.');
 					}
 					++drop_goods_count$count;
-					this.dropGoodsCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.dropGoodsCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (drop_goods_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: DropGoodsTargetProto.dropGoodsName cannot be set twice.');
 					}
 					++drop_goods_name$count;
-					this.dropGoodsName = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.dropGoodsName = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

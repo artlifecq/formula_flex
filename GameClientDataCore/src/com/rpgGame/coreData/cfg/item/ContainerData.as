@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.cfg.item
 {
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 * 对应服务器对容器的需求 

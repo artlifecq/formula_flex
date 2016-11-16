@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const QUALITY:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.EquipmentQualityEvaluateRateDataProto.quality", "quality", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Quality);
+		public static const QUALITY:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.EquipmentQualityEvaluateRateDataProto.quality", "quality", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Quality);
 
 		private var quality$field:int;
 
@@ -43,7 +43,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EVALUATE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.EquipmentQualityEvaluateRateDataProto.evaluate", "evaluate", (2 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Evaluate);
+		public static const EVALUATE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.EquipmentQualityEvaluateRateDataProto.evaluate", "evaluate", (2 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Evaluate);
 
 		private var evaluate$field:int;
 
@@ -68,7 +68,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RATE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentQualityEvaluateRateDataProto.rate", "rate", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RATE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentQualityEvaluateRateDataProto.rate", "rate", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var rate$field:int;
 
@@ -96,15 +96,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasQuality) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, quality$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, quality$field);
 			}
 			if (hasEvaluate) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, evaluate$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, evaluate$field);
 			}
 			if (hasRate) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, rate$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, rate$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -119,28 +119,28 @@ package app.message {
 			var evaluate$count:uint = 0;
 			var rate$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (quality$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentQualityEvaluateRateDataProto.quality cannot be set twice.');
 					}
 					++quality$count;
-					this.quality = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.quality = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 2:
 					if (evaluate$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentQualityEvaluateRateDataProto.evaluate cannot be set twice.');
 					}
 					++evaluate$count;
-					this.evaluate = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.evaluate = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 3:
 					if (rate$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentQualityEvaluateRateDataProto.rate cannot be set twice.');
 					}
 					++rate$count;
-					this.rate = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.rate = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

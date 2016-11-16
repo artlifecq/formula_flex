@@ -15,7 +15,7 @@ package app.message.AllChapterTaskConfig {
 		/**
 		 *  @private
 		 */
-		public static const CHAPTER_NAME:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.AllChapterTaskConfig.ChapterTaskConfig.chapter_name", "chapterName", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const CHAPTER_NAME:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.AllChapterTaskConfig.ChapterTaskConfig.chapter_name", "chapterName", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var chapter_name$field:flash.utils.ByteArray;
 
@@ -38,7 +38,7 @@ package app.message.AllChapterTaskConfig {
 		/**
 		 *  @private
 		 */
-		public static const CHAPTER_ICON:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.AllChapterTaskConfig.ChapterTaskConfig.chapter_icon", "chapterIcon", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const CHAPTER_ICON:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.AllChapterTaskConfig.ChapterTaskConfig.chapter_icon", "chapterIcon", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var chapter_icon$field:flash.utils.ByteArray;
 
@@ -61,7 +61,7 @@ package app.message.AllChapterTaskConfig {
 		/**
 		 *  @private
 		 */
-		public static const CHAPTER_TITLE:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.AllChapterTaskConfig.ChapterTaskConfig.chapter_title", "chapterTitle", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const CHAPTER_TITLE:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.AllChapterTaskConfig.ChapterTaskConfig.chapter_title", "chapterTitle", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var chapter_title$field:flash.utils.ByteArray;
 
@@ -84,7 +84,7 @@ package app.message.AllChapterTaskConfig {
 		/**
 		 *  @private
 		 */
-		public static const CHAPTER_DESC:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.AllChapterTaskConfig.ChapterTaskConfig.chapter_desc", "chapterDesc", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const CHAPTER_DESC:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.AllChapterTaskConfig.ChapterTaskConfig.chapter_desc", "chapterDesc", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var chapter_desc$field:flash.utils.ByteArray;
 
@@ -107,7 +107,7 @@ package app.message.AllChapterTaskConfig {
 		/**
 		 *  @private
 		 */
-		public static const CHAPTER_TASK_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AllChapterTaskConfig.ChapterTaskConfig.chapter_task_count", "chapterTaskCount", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CHAPTER_TASK_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AllChapterTaskConfig.ChapterTaskConfig.chapter_task_count", "chapterTaskCount", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var chapter_task_count$field:int;
 
@@ -137,23 +137,23 @@ package app.message.AllChapterTaskConfig {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasChapterName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, chapter_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, chapter_name$field);
 			}
 			if (hasChapterIcon) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, chapter_icon$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, chapter_icon$field);
 			}
 			if (hasChapterTitle) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, chapter_title$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, chapter_title$field);
 			}
 			if (hasChapterDesc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, chapter_desc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, chapter_desc$field);
 			}
 			if (hasChapterTaskCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, chapter_task_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, chapter_task_count$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -170,42 +170,42 @@ package app.message.AllChapterTaskConfig {
 			var chapter_desc$count:uint = 0;
 			var chapter_task_count$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (chapter_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChapterTaskConfig.chapterName cannot be set twice.');
 					}
 					++chapter_name$count;
-					this.chapterName = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.chapterName = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 2:
 					if (chapter_icon$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChapterTaskConfig.chapterIcon cannot be set twice.');
 					}
 					++chapter_icon$count;
-					this.chapterIcon = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.chapterIcon = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 3:
 					if (chapter_title$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChapterTaskConfig.chapterTitle cannot be set twice.');
 					}
 					++chapter_title$count;
-					this.chapterTitle = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.chapterTitle = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 4:
 					if (chapter_desc$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChapterTaskConfig.chapterDesc cannot be set twice.');
 					}
 					++chapter_desc$count;
-					this.chapterDesc = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.chapterDesc = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 5:
 					if (chapter_task_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChapterTaskConfig.chapterTaskCount cannot be set twice.');
 					}
 					++chapter_task_count$count;
-					this.chapterTaskCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.chapterTaskCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

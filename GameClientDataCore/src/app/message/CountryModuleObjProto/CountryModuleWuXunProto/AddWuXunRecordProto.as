@@ -14,7 +14,7 @@ package app.message.CountryModuleObjProto.CountryModuleWuXunProto {
 		/**
 		 *  @private
 		 */
-		public static const TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryModuleObjProto.CountryModuleWuXunProto.AddWuXunRecordProto.time", "time", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryModuleObjProto.CountryModuleWuXunProto.AddWuXunRecordProto.time", "time", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var time$field:Int64;
 
@@ -37,7 +37,7 @@ package app.message.CountryModuleObjProto.CountryModuleWuXunProto {
 		/**
 		 *  @private
 		 */
-		public static const KILL_ADD_AMOUNT:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryModuleObjProto.CountryModuleWuXunProto.AddWuXunRecordProto.kill_add_amount", "killAddAmount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const KILL_ADD_AMOUNT:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryModuleObjProto.CountryModuleWuXunProto.AddWuXunRecordProto.kill_add_amount", "killAddAmount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var kill_add_amount$field:Int64;
 
@@ -60,7 +60,7 @@ package app.message.CountryModuleObjProto.CountryModuleWuXunProto {
 		/**
 		 *  @private
 		 */
-		public static const OTHER_ADD_AMOUNT:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryModuleObjProto.CountryModuleWuXunProto.AddWuXunRecordProto.other_add_amount", "otherAddAmount", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const OTHER_ADD_AMOUNT:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryModuleObjProto.CountryModuleWuXunProto.AddWuXunRecordProto.other_add_amount", "otherAddAmount", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var other_add_amount$field:Int64;
 
@@ -86,15 +86,15 @@ package app.message.CountryModuleObjProto.CountryModuleWuXunProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, time$field);
 			}
 			if (hasKillAddAmount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, kill_add_amount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, kill_add_amount$field);
 			}
 			if (hasOtherAddAmount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, other_add_amount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, other_add_amount$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -109,28 +109,28 @@ package app.message.CountryModuleObjProto.CountryModuleWuXunProto {
 			var kill_add_amount$count:uint = 0;
 			var other_add_amount$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AddWuXunRecordProto.time cannot be set twice.');
 					}
 					++time$count;
-					this.time = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.time = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (kill_add_amount$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AddWuXunRecordProto.killAddAmount cannot be set twice.');
 					}
 					++kill_add_amount$count;
-					this.killAddAmount = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.killAddAmount = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 3:
 					if (other_add_amount$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AddWuXunRecordProto.otherAddAmount cannot be set twice.');
 					}
 					++other_add_amount$count;
-					this.otherAddAmount = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.otherAddAmount = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

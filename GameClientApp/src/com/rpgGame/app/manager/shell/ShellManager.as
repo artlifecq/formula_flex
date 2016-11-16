@@ -19,7 +19,7 @@ package com.rpgGame.app.manager.shell
     import away3d.containers.PlanarContainer3D;
     import away3d.core.math.Plane3D;
     
-    import org.game.netCore.net.ByteBuffer;
+    import org.game.netCore.net_protobuff.ByteBuffer;
 
     /*********************************************************************************************************
      * 单机版 指令管理

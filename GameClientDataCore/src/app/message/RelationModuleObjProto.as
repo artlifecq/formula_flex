@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MOOD:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.RelationModuleObjProto.mood", "mood", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const MOOD:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.RelationModuleObjProto.mood", "mood", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var mood$field:flash.utils.ByteArray;
 
@@ -41,7 +41,7 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasMood) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, mood$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, mood$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -54,14 +54,14 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var mood$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (mood$count != 0) {
 						throw new flash.errors.IOError('Bad data format: RelationModuleObjProto.mood cannot be set twice.');
 					}
 					++mood$count;
-					this.mood = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.mood = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

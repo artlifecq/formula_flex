@@ -23,8 +23,8 @@ package com.rpgGame.app.cmdlistener
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 	
 	/**
 	 *
@@ -34,18 +34,18 @@ package com.rpgGame.app.cmdlistener
 	{
 		override public function start():void
 		{
-			SocketConnection.addCmdListener(ShopModuleMessages.S2C_OPEN_NPC_SHOP,onOpenNpcShopSuccess);
-			SocketConnection.addCmdListener(ShopModuleMessages.S2C_COMMON_ERROR_CODE,onShopError);
-			SocketConnection.addCmdListener(ShopModuleMessages.S2C_BUY_SHOP_GOODS,onBuyGoodsSuccess);
+			SocketConnection_protoBuffer.addCmdListener(ShopModuleMessages.S2C_OPEN_NPC_SHOP,onOpenNpcShopSuccess);
+			SocketConnection_protoBuffer.addCmdListener(ShopModuleMessages.S2C_COMMON_ERROR_CODE,onShopError);
+			SocketConnection_protoBuffer.addCmdListener(ShopModuleMessages.S2C_BUY_SHOP_GOODS,onBuyGoodsSuccess);
 //			SocketConnection.addCmdListener(ShopModuleMessages.S2C_BUY_SHOP_GOODS_FAIL,onBuyGoodsFail);
-			SocketConnection.addCmdListener(ShopModuleMessages.S2C_BUY_BACK_GOODS,onBuyBackGoodsSuccess);
+			SocketConnection_protoBuffer.addCmdListener(ShopModuleMessages.S2C_BUY_BACK_GOODS,onBuyBackGoodsSuccess);
 //			SocketConnection.addCmdListener(ShopModuleMessages.S2C_BUY_BACK_GOODS_FAIL,onBuyBackGoodsFail);
-			SocketConnection.addCmdListener(ShopModuleMessages.S2C_SELL_GOODS,onSellGoodsSuccess);
+			SocketConnection_protoBuffer.addCmdListener(ShopModuleMessages.S2C_SELL_GOODS,onSellGoodsSuccess);
 //			SocketConnection.addCmdListener(ShopModuleMessages.S2C_SELL_GOODS_FAIL,onSellGoodsFail);
-			SocketConnection.addCmdListener(ShopModuleMessages.S2C_BUY_JINZI_SHOP_GOODS,onRecBuyJinziShopGoods);
+			SocketConnection_protoBuffer.addCmdListener(ShopModuleMessages.S2C_BUY_JINZI_SHOP_GOODS,onRecBuyJinziShopGoods);
 //			SocketConnection.addCmdListener(ShopModuleMessages.S2C_BUY_JINZI_SHOP_GOODS_FAIL,onRecBuyJinziShopGoodsFail);
-			SocketConnection.addCmdListener(ShopModuleMessages.S2C_REPAIR_GOODS_SUCCESS,onRepairSuccess);
-			SocketConnection.addCmdListener(ShopModuleMessages.S2C_REPAIR_GOODS_ALL_SUCCESS,onRepairAllSuccess);
+			SocketConnection_protoBuffer.addCmdListener(ShopModuleMessages.S2C_REPAIR_GOODS_SUCCESS,onRepairSuccess);
+			SocketConnection_protoBuffer.addCmdListener(ShopModuleMessages.S2C_REPAIR_GOODS_ALL_SUCCESS,onRepairAllSuccess);
 			
 			finish();
 		}	

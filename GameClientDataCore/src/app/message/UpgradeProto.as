@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GOODS_INFO:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.UpgradeProto.goods_info", "goodsInfo", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.UpgradeProto.UpgradeGoodsInfoProto; });
+		public static const GOODS_INFO:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.UpgradeProto.goods_info", "goodsInfo", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.UpgradeProto.UpgradeGoodsInfoProto; });
 
 		[ArrayElementType("app.message.UpgradeProto.UpgradeGoodsInfoProto")]
 		public var goodsInfo:Array = [];
@@ -24,7 +24,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const AMOUNT_COST:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.UpgradeProto.amount_cost", "amountCost", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AmountValue; });
+		public static const AMOUNT_COST:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.UpgradeProto.amount_cost", "amountCost", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AmountValue; });
 
 		[ArrayElementType("app.message.AmountValue")]
 		public var amountCost:Array = [];
@@ -32,7 +32,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BLESS_MAX_AMOUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.UpgradeProto.bless_max_amount", "blessMaxAmount", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BLESS_MAX_AMOUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.UpgradeProto.bless_max_amount", "blessMaxAmount", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var bless_max_amount$field:int;
 
@@ -59,7 +59,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RATE_DESC:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.UpgradeProto.rate_desc", "rateDesc", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const RATE_DESC:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.UpgradeProto.rate_desc", "rateDesc", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var rate_desc$field:String;
 
@@ -82,7 +82,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RATE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.UpgradeProto.rate", "rate", (12 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RATE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.UpgradeProto.rate", "rate", (12 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var rate$field:int;
 
@@ -110,23 +110,23 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			for (var goodsInfo$index:uint = 0; goodsInfo$index < this.goodsInfo.length; ++goodsInfo$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.goodsInfo[goodsInfo$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.goodsInfo[goodsInfo$index]);
 			}
 			for (var amountCost$index:uint = 0; amountCost$index < this.amountCost.length; ++amountCost$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.amountCost[amountCost$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.amountCost[amountCost$index]);
 			}
 			if (hasBlessMaxAmount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, bless_max_amount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, bless_max_amount$field);
 			}
 			if (hasRateDesc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, rate_desc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, rate_desc$field);
 			}
 			if (hasRate) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, rate$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, rate$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -141,34 +141,34 @@ package app.message {
 			var rate_desc$count:uint = 0;
 			var rate$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
-					this.goodsInfo.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.UpgradeProto.UpgradeGoodsInfoProto()));
+					this.goodsInfo.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.UpgradeProto.UpgradeGoodsInfoProto()));
 					break;
 				case 2:
-					this.amountCost.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.AmountValue()));
+					this.amountCost.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.AmountValue()));
 					break;
 				case 10:
 					if (bless_max_amount$count != 0) {
 						throw new flash.errors.IOError('Bad data format: UpgradeProto.blessMaxAmount cannot be set twice.');
 					}
 					++bless_max_amount$count;
-					this.blessMaxAmount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.blessMaxAmount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 11:
 					if (rate_desc$count != 0) {
 						throw new flash.errors.IOError('Bad data format: UpgradeProto.rateDesc cannot be set twice.');
 					}
 					++rate_desc$count;
-					this.rateDesc = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.rateDesc = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 12:
 					if (rate$count != 0) {
 						throw new flash.errors.IOError('Bad data format: UpgradeProto.rate cannot be set twice.');
 					}
 					++rate$count;
-					this.rate = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.rate = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

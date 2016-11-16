@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AreaDataProto.id", "id", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AreaDataProto.id", "id", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var id$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SCENE_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AreaDataProto.scene_id", "sceneId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SCENE_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AreaDataProto.scene_id", "sceneId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var scene_id$field:int;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const POS:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.AreaDataProto.pos", "pos", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const POS:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.AreaDataProto.pos", "pos", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var pos:Array = [];
@@ -74,7 +74,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const AREA_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.AreaDataProto.area_name", "areaName", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const AREA_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.AreaDataProto.area_name", "areaName", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var area_name$field:String;
 
@@ -97,7 +97,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CENTER_X:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AreaDataProto.center_x", "centerX", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CENTER_X:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AreaDataProto.center_x", "centerX", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var center_x$field:int;
 
@@ -122,7 +122,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CENTER_Y:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AreaDataProto.center_y", "centerY", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CENTER_Y:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AreaDataProto.center_y", "centerY", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var center_y$field:int;
 
@@ -150,27 +150,27 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, id$field);
 			}
 			if (hasSceneId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, scene_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, scene_id$field);
 			}
 			for (var pos$index:uint = 0; pos$index < this.pos.length; ++pos$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.pos[pos$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.pos[pos$index]);
 			}
 			if (hasAreaName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, area_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, area_name$field);
 			}
 			if (hasCenterX) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, center_x$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, center_x$field);
 			}
 			if (hasCenterY) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, center_y$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, center_y$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -187,49 +187,49 @@ package app.message {
 			var center_x$count:uint = 0;
 			var center_y$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 6:
 					if (id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AreaDataProto.id cannot be set twice.');
 					}
 					++id$count;
-					this.id = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.id = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 1:
 					if (scene_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AreaDataProto.sceneId cannot be set twice.');
 					}
 					++scene_id$count;
-					this.sceneId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.sceneId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.pos);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.pos);
 						break;
 					}
-					this.pos.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.pos.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				case 3:
 					if (area_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AreaDataProto.areaName cannot be set twice.');
 					}
 					++area_name$count;
-					this.areaName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.areaName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 4:
 					if (center_x$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AreaDataProto.centerX cannot be set twice.');
 					}
 					++center_x$count;
-					this.centerX = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.centerX = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (center_y$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AreaDataProto.centerY cannot be set twice.');
 					}
 					++center_y$count;
-					this.centerY = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.centerY = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

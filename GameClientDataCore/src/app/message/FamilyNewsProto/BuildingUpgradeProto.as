@@ -15,7 +15,7 @@ package app.message.FamilyNewsProto {
 		/**
 		 *  @private
 		 */
-		public static const BUILDING_TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.FamilyNewsProto.BuildingUpgradeProto.building_type", "buildingType", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.FamilyBuildingType);
+		public static const BUILDING_TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.FamilyNewsProto.BuildingUpgradeProto.building_type", "buildingType", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.FamilyBuildingType);
 
 		private var building_type$field:int;
 
@@ -42,7 +42,7 @@ package app.message.FamilyNewsProto {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FamilyNewsProto.BuildingUpgradeProto.level", "level", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FamilyNewsProto.BuildingUpgradeProto.level", "level", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level$field:int;
 
@@ -70,11 +70,11 @@ package app.message.FamilyNewsProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasBuildingType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, building_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, building_type$field);
 			}
 			if (hasLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -88,21 +88,21 @@ package app.message.FamilyNewsProto {
 			var building_type$count:uint = 0;
 			var level$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (building_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BuildingUpgradeProto.buildingType cannot be set twice.');
 					}
 					++building_type$count;
-					this.buildingType = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.buildingType = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 2:
 					if (level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BuildingUpgradeProto.level cannot be set twice.');
 					}
 					++level$count;
-					this.level = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.level = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

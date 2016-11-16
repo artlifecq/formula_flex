@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.utils
+﻿package org.client.mainCore.utils
 {
     import flash.utils.ByteArray;
 
@@ -238,8 +237,8 @@ package org.client.mainCore.utils
                     _stream.readBytes(args[0], args[1], args[2]);
                     return (args[2]);
                 default:
-                    throw (new ArgumentError(("Argument Error at ImageInfo.read(). Expected 0, 1, or 3. Received " + args.length)));
-                    return; //dead code
+                    throw new ArgumentError("Argument Error at ImageInfo.read(). Expected 0, 1, or 3. Received " + args.length);
+                    return 0; //dead code
             };
         }
 
@@ -302,7 +301,5 @@ package org.client.mainCore.utils
         {
             return (_physicalHeight);
         }
-
-
     }
-}//package org.client.mainCore.utils
+}

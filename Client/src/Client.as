@@ -15,6 +15,7 @@ package
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.process.ProcessGroup;
 	import com.game.engine3D.process.ProcessStateMachine;
+	import com.gameClient.alert.AlertPanel;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.log.GameLogView;
 	import com.gameClient.utils.VersionUtils;
@@ -30,7 +31,7 @@ package
 	
 	import away3d.loaders.parsers.Parsers;
 	
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 	
 	/**
 	 *
@@ -93,7 +94,8 @@ package
 			ClientGlobal.isStable = isStable;
 			ClientGlobal.GlobalBridge = GlobalBridge;
 			
-			GameLogView.init(this.stage, [188, 190, 191]);
+			GameLogView.init(this.stage, [188, 190, 191]);//-_	189  .>	190  /?	191
+			AlertPanel.initStage(this.stage);
 			//
 			getWebParams();
 			GameLog.addShow("版本号：" + version);

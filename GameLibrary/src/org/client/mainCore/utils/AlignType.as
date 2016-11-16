@@ -1,9 +1,7 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.utils
+﻿package org.client.mainCore.utils
 {
     public class AlignType 
     {
-
         public static const TOP_LEFT:int = 0;
         public static const TOP_CENTER:int = 1;
         public static const TOP_RIGHT:int = 2;
@@ -13,7 +11,5 @@ package org.client.mainCore.utils
         public static const BOTTOM_LEFT:int = 6;
         public static const BOTTOM_CENTER:int = 7;
         public static const BOTTOM_RIGHT:int = 8;
-
-
     }
-}//package org.client.mainCore.utils
+}

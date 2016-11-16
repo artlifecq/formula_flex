@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TRANSPORT_TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.TransportationDataProto.transport_type", "transportType", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.TransportationDataProto.TransportGoodsType);
+		public static const TRANSPORT_TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.TransportationDataProto.transport_type", "transportType", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.TransportationDataProto.TransportGoodsType);
 
 		private var transport_type$field:int;
 
@@ -45,7 +45,7 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasTransportType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, transport_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, transport_type$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -58,14 +58,14 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var transport_type$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (transport_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TransportationDataProto.transportType cannot be set twice.');
 					}
 					++transport_type$count;
-					this.transportType = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.transportType = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

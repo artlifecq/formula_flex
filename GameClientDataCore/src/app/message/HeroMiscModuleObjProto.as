@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const JINZI:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.HeroMiscModuleObjProto.jinzi", "jinzi", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const JINZI:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.HeroMiscModuleObjProto.jinzi", "jinzi", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var jinzi$field:Int64;
 
@@ -38,7 +38,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BAND_JINZI:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.HeroMiscModuleObjProto.band_jinzi", "bandJinzi", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BAND_JINZI:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.HeroMiscModuleObjProto.band_jinzi", "bandJinzi", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var band_jinzi$field:Int64;
 
@@ -61,7 +61,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MONEY:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.HeroMiscModuleObjProto.money", "money", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MONEY:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.HeroMiscModuleObjProto.money", "money", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var money$field:Int64;
 
@@ -84,7 +84,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BAND_MONEY:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.HeroMiscModuleObjProto.band_money", "bandMoney", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BAND_MONEY:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.HeroMiscModuleObjProto.band_money", "bandMoney", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var band_money$field:Int64;
 
@@ -107,7 +107,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HONOR:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.HeroMiscModuleObjProto.honor", "honor", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const HONOR:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.HeroMiscModuleObjProto.honor", "honor", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var honor$field:Int64;
 
@@ -130,7 +130,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GONG_XUN:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.HeroMiscModuleObjProto.gong_xun", "gongXun", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const GONG_XUN:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.HeroMiscModuleObjProto.gong_xun", "gongXun", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var gong_xun$field:Int64;
 
@@ -153,7 +153,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CLIENT_CONFIGS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroMiscModuleObjProto.client_configs", "clientConfigs", (200 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ClientConfigsProto; });
+		public static const CLIENT_CONFIGS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroMiscModuleObjProto.client_configs", "clientConfigs", (200 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ClientConfigsProto; });
 
 		private var client_configs$field:app.message.ClientConfigsProto;
 
@@ -176,7 +176,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FUNC_BITS:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.HeroMiscModuleObjProto.func_bits", "funcBits", (20 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FUNC_BITS:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.HeroMiscModuleObjProto.func_bits", "funcBits", (20 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var func_bits$field:Int64;
 
@@ -199,7 +199,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CLIENT_FUNC_BITS:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.HeroMiscModuleObjProto.client_func_bits", "clientFuncBits", (21 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CLIENT_FUNC_BITS:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.HeroMiscModuleObjProto.client_func_bits", "clientFuncBits", (21 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var client_func_bits$field:int;
 
@@ -226,7 +226,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NEXT_CAN_CHANGE_NAME_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.HeroMiscModuleObjProto.next_can_change_name_time", "nextCanChangeNameTime", (35 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const NEXT_CAN_CHANGE_NAME_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.HeroMiscModuleObjProto.next_can_change_name_time", "nextCanChangeNameTime", (35 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var next_can_change_name_time$field:Int64;
 
@@ -249,7 +249,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LOGIN_DAY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.HeroMiscModuleObjProto.login_day", "loginDay", (25 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LOGIN_DAY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.HeroMiscModuleObjProto.login_day", "loginDay", (25 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var login_day$field:int;
 
@@ -274,7 +274,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LAST_LOGOUT_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.HeroMiscModuleObjProto.last_logout_time", "lastLogoutTime", (26 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LAST_LOGOUT_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.HeroMiscModuleObjProto.last_logout_time", "lastLogoutTime", (26 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var last_logout_time$field:Int64;
 
@@ -297,7 +297,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_ONLINE_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.HeroMiscModuleObjProto.total_online_time", "totalOnlineTime", (27 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOTAL_ONLINE_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.HeroMiscModuleObjProto.total_online_time", "totalOnlineTime", (27 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var total_online_time$field:Int64;
 
@@ -320,7 +320,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DAILY_ONLINE_ACC_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.HeroMiscModuleObjProto.daily_online_acc_time", "dailyOnlineAccTime", (28 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DAILY_ONLINE_ACC_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.HeroMiscModuleObjProto.daily_online_acc_time", "dailyOnlineAccTime", (28 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var daily_online_acc_time$field:Int64;
 
@@ -343,7 +343,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ACCUMULATED_OFFLINE_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.HeroMiscModuleObjProto.accumulated_offline_time", "accumulatedOfflineTime", (29 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ACCUMULATED_OFFLINE_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.HeroMiscModuleObjProto.accumulated_offline_time", "accumulatedOfflineTime", (29 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var accumulated_offline_time$field:Int64;
 
@@ -366,7 +366,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_RECHARGE_JINZI:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.HeroMiscModuleObjProto.total_recharge_jinzi", "totalRechargeJinzi", (30 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOTAL_RECHARGE_JINZI:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.HeroMiscModuleObjProto.total_recharge_jinzi", "totalRechargeJinzi", (30 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var total_recharge_jinzi$field:Int64;
 
@@ -389,7 +389,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HAS_RECHARGE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.HeroMiscModuleObjProto.has_recharge", "hasRecharge", (31 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const HAS_RECHARGE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.HeroMiscModuleObjProto.has_recharge", "hasRecharge", (31 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var has_recharge$field:Boolean;
 
@@ -414,7 +414,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_CM:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.HeroMiscModuleObjProto.is_cm", "isCm", (36 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_CM:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.HeroMiscModuleObjProto.is_cm", "isCm", (36 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_cm$field:Boolean;
 
@@ -442,75 +442,75 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasJinzi) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, jinzi$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, jinzi$field);
 			}
 			if (hasBandJinzi) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, band_jinzi$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, band_jinzi$field);
 			}
 			if (hasMoney) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, money$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, money$field);
 			}
 			if (hasBandMoney) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, band_money$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, band_money$field);
 			}
 			if (hasHonor) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, honor$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, honor$field);
 			}
 			if (hasGongXun) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, gong_xun$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, gong_xun$field);
 			}
 			if (hasClientConfigs) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 200);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, client_configs$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, client_configs$field);
 			}
 			if (hasFuncBits) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 20);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, func_bits$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, func_bits$field);
 			}
 			if (hasClientFuncBits) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 21);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, client_func_bits$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, client_func_bits$field);
 			}
 			if (hasNextCanChangeNameTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 35);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, next_can_change_name_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, next_can_change_name_time$field);
 			}
 			if (hasLoginDay) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 25);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, login_day$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, login_day$field);
 			}
 			if (hasLastLogoutTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 26);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, last_logout_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, last_logout_time$field);
 			}
 			if (hasTotalOnlineTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 27);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, total_online_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, total_online_time$field);
 			}
 			if (hasDailyOnlineAccTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 28);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, daily_online_acc_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, daily_online_acc_time$field);
 			}
 			if (hasAccumulatedOfflineTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 29);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, accumulated_offline_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, accumulated_offline_time$field);
 			}
 			if (hasTotalRechargeJinzi) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 30);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, total_recharge_jinzi$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, total_recharge_jinzi$field);
 			}
 			if (hasHasRecharge) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 31);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, has_recharge$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, has_recharge$field);
 			}
 			if (hasIsCm) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 36);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_cm$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_cm$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -540,49 +540,49 @@ package app.message {
 			var has_recharge$count:uint = 0;
 			var is_cm$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (jinzi$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroMiscModuleObjProto.jinzi cannot be set twice.');
 					}
 					++jinzi$count;
-					this.jinzi = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.jinzi = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (band_jinzi$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroMiscModuleObjProto.bandJinzi cannot be set twice.');
 					}
 					++band_jinzi$count;
-					this.bandJinzi = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.bandJinzi = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 3:
 					if (money$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroMiscModuleObjProto.money cannot be set twice.');
 					}
 					++money$count;
-					this.money = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.money = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 4:
 					if (band_money$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroMiscModuleObjProto.bandMoney cannot be set twice.');
 					}
 					++band_money$count;
-					this.bandMoney = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.bandMoney = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 5:
 					if (honor$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroMiscModuleObjProto.honor cannot be set twice.');
 					}
 					++honor$count;
-					this.honor = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.honor = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 6:
 					if (gong_xun$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroMiscModuleObjProto.gongXun cannot be set twice.');
 					}
 					++gong_xun$count;
-					this.gongXun = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.gongXun = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 200:
 					if (client_configs$count != 0) {
@@ -590,84 +590,84 @@ package app.message {
 					}
 					++client_configs$count;
 					this.clientConfigs = new app.message.ClientConfigsProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.clientConfigs);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.clientConfigs);
 					break;
 				case 20:
 					if (func_bits$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroMiscModuleObjProto.funcBits cannot be set twice.');
 					}
 					++func_bits$count;
-					this.funcBits = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.funcBits = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 21:
 					if (client_func_bits$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroMiscModuleObjProto.clientFuncBits cannot be set twice.');
 					}
 					++client_func_bits$count;
-					this.clientFuncBits = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.clientFuncBits = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 35:
 					if (next_can_change_name_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroMiscModuleObjProto.nextCanChangeNameTime cannot be set twice.');
 					}
 					++next_can_change_name_time$count;
-					this.nextCanChangeNameTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.nextCanChangeNameTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 25:
 					if (login_day$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroMiscModuleObjProto.loginDay cannot be set twice.');
 					}
 					++login_day$count;
-					this.loginDay = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.loginDay = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 26:
 					if (last_logout_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroMiscModuleObjProto.lastLogoutTime cannot be set twice.');
 					}
 					++last_logout_time$count;
-					this.lastLogoutTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.lastLogoutTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 27:
 					if (total_online_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroMiscModuleObjProto.totalOnlineTime cannot be set twice.');
 					}
 					++total_online_time$count;
-					this.totalOnlineTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.totalOnlineTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 28:
 					if (daily_online_acc_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroMiscModuleObjProto.dailyOnlineAccTime cannot be set twice.');
 					}
 					++daily_online_acc_time$count;
-					this.dailyOnlineAccTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.dailyOnlineAccTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 29:
 					if (accumulated_offline_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroMiscModuleObjProto.accumulatedOfflineTime cannot be set twice.');
 					}
 					++accumulated_offline_time$count;
-					this.accumulatedOfflineTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.accumulatedOfflineTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 30:
 					if (total_recharge_jinzi$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroMiscModuleObjProto.totalRechargeJinzi cannot be set twice.');
 					}
 					++total_recharge_jinzi$count;
-					this.totalRechargeJinzi = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.totalRechargeJinzi = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 31:
 					if (has_recharge$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroMiscModuleObjProto.hasRecharge cannot be set twice.');
 					}
 					++has_recharge$count;
-					this.hasRecharge = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.hasRecharge = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 36:
 					if (is_cm$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroMiscModuleObjProto.isCm cannot be set twice.');
 					}
 					++is_cm$count;
-					this.isCm = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isCm = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

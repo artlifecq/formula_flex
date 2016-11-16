@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TITLE:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.NpcProto.title", "title", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const TITLE:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.NpcProto.title", "title", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var title$field:flash.utils.ByteArray;
 
@@ -39,7 +39,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_BE_ATTACKED:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.NpcProto.can_be_attacked", "canBeAttacked", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_BE_ATTACKED:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.NpcProto.can_be_attacked", "canBeAttacked", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_be_attacked$field:Boolean;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DIALOG_TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.NpcProto.dialog_type", "dialogType", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DIALOG_TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.NpcProto.dialog_type", "dialogType", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var dialog_type$field:int;
 
@@ -91,7 +91,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DIALOG:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.NpcProto.dialog", "dialog", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const DIALOG:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.NpcProto.dialog", "dialog", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var dialog$field:flash.utils.ByteArray;
 
@@ -114,7 +114,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DIALOGS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.NpcProto.dialogs", "dialogs", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NpcDialogProto; });
+		public static const DIALOGS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.NpcProto.dialogs", "dialogs", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NpcDialogProto; });
 
 		[ArrayElementType("app.message.NpcDialogProto")]
 		public var dialogs:Array = [];
@@ -122,7 +122,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FAR_DISTANCE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.NpcProto.far_distance", "farDistance", (16 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FAR_DISTANCE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.NpcProto.far_distance", "farDistance", (16 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var far_distance$field:int;
 
@@ -147,7 +147,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DISPLAY_RES:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.NpcProto.display_res", "displayRes", (17 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const DISPLAY_RES:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.NpcProto.display_res", "displayRes", (17 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var display_res$field:String;
 
@@ -170,7 +170,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAP_MARK:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.NpcProto.map_mark", "mapMark", (18 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const MAP_MARK:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.NpcProto.map_mark", "mapMark", (18 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var map_mark$field:String;
 
@@ -196,35 +196,35 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasTitle) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, title$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, title$field);
 			}
 			if (hasCanBeAttacked) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_be_attacked$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_be_attacked$field);
 			}
 			if (hasDialogType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, dialog_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, dialog_type$field);
 			}
 			if (hasDialog) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, dialog$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, dialog$field);
 			}
 			for (var dialogs$index:uint = 0; dialogs$index < this.dialogs.length; ++dialogs$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.dialogs[dialogs$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.dialogs[dialogs$index]);
 			}
 			if (hasFarDistance) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 16);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, far_distance$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, far_distance$field);
 			}
 			if (hasDisplayRes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 17);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, display_res$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, display_res$field);
 			}
 			if (hasMapMark) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 18);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, map_mark$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, map_mark$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -243,59 +243,59 @@ package app.message {
 			var display_res$count:uint = 0;
 			var map_mark$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (title$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NpcProto.title cannot be set twice.');
 					}
 					++title$count;
-					this.title = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.title = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 2:
 					if (can_be_attacked$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NpcProto.canBeAttacked cannot be set twice.');
 					}
 					++can_be_attacked$count;
-					this.canBeAttacked = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canBeAttacked = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 10:
 					if (dialog_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NpcProto.dialogType cannot be set twice.');
 					}
 					++dialog_type$count;
-					this.dialogType = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.dialogType = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 11:
 					if (dialog$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NpcProto.dialog cannot be set twice.');
 					}
 					++dialog$count;
-					this.dialog = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.dialog = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 12:
-					this.dialogs.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.NpcDialogProto()));
+					this.dialogs.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.NpcDialogProto()));
 					break;
 				case 16:
 					if (far_distance$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NpcProto.farDistance cannot be set twice.');
 					}
 					++far_distance$count;
-					this.farDistance = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.farDistance = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 17:
 					if (display_res$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NpcProto.displayRes cannot be set twice.');
 					}
 					++display_res$count;
-					this.displayRes = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.displayRes = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 18:
 					if (map_mark$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NpcProto.mapMark cannot be set twice.');
 					}
 					++map_mark$count;
-					this.mapMark = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.mapMark = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

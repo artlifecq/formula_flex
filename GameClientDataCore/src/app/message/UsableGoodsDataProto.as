@@ -20,7 +20,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CD_TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.UsableGoodsDataProto.cd_type", "cdType", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CD_TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.UsableGoodsDataProto.cd_type", "cdType", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var cd_type$field:int;
 
@@ -47,7 +47,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CD:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.UsableGoodsDataProto.cd", "cd", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CD:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.UsableGoodsDataProto.cd", "cd", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var cd$field:int;
 
@@ -72,7 +72,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BULK_USEABLE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.UsableGoodsDataProto.bulk_useable", "bulkUseable", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BULK_USEABLE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.UsableGoodsDataProto.bulk_useable", "bulkUseable", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var bulk_useable$field:Boolean;
 
@@ -97,7 +97,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_SET_SHORTCUT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.UsableGoodsDataProto.can_set_shortcut", "canSetShortcut", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_SET_SHORTCUT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.UsableGoodsDataProto.can_set_shortcut", "canSetShortcut", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_set_shortcut$field:Boolean;
 
@@ -122,7 +122,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_SUGGESTION:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.UsableGoodsDataProto.is_suggestion", "isSuggestion", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_SUGGESTION:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.UsableGoodsDataProto.is_suggestion", "isSuggestion", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_suggestion$field:Boolean;
 
@@ -147,7 +147,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NORMAL:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.UsableGoodsDataProto.normal", "normal", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NormalUsableDataProto; });
+		public static const NORMAL:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.UsableGoodsDataProto.normal", "normal", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NormalUsableDataProto; });
 
 		private var normal$field:app.message.NormalUsableDataProto;
 
@@ -170,7 +170,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TRANSPORTATION:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.UsableGoodsDataProto.transportation", "transportation", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TransportationDataProto; });
+		public static const TRANSPORTATION:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.UsableGoodsDataProto.transportation", "transportation", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TransportationDataProto; });
 
 		private var transportation$field:app.message.TransportationDataProto;
 
@@ -193,7 +193,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const JINZI_PACKAGE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.UsableGoodsDataProto.jinzi_package", "jinziPackage", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.JinziPackageDataProto; });
+		public static const JINZI_PACKAGE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.UsableGoodsDataProto.jinzi_package", "jinziPackage", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.JinziPackageDataProto; });
 
 		private var jinzi_package$field:app.message.JinziPackageDataProto;
 
@@ -216,7 +216,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const REFINE_GOODS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.UsableGoodsDataProto.refine_goods", "refineGoods", (13 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.RefinedStatGoodsDataProto; });
+		public static const REFINE_GOODS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.UsableGoodsDataProto.refine_goods", "refineGoods", (13 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.RefinedStatGoodsDataProto; });
 
 		private var refine_goods$field:app.message.RefinedStatGoodsDataProto;
 
@@ -239,7 +239,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SUMMON_TOKEN:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.UsableGoodsDataProto.summon_token", "summonToken", (14 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SummonTokenGoodsDataProto; });
+		public static const SUMMON_TOKEN:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.UsableGoodsDataProto.summon_token", "summonToken", (14 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SummonTokenGoodsDataProto; });
 
 		private var summon_token$field:app.message.SummonTokenGoodsDataProto;
 
@@ -262,7 +262,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PACKAGE_GOODS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.UsableGoodsDataProto.package_goods", "packageGoods", (15 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PackageGoodsDataProto; });
+		public static const PACKAGE_GOODS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.UsableGoodsDataProto.package_goods", "packageGoods", (15 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PackageGoodsDataProto; });
 
 		private var package_goods$field:app.message.PackageGoodsDataProto;
 
@@ -288,47 +288,47 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasCdType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, cd_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, cd_type$field);
 			}
 			if (hasCd) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, cd$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, cd$field);
 			}
 			if (hasBulkUseable) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, bulk_useable$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, bulk_useable$field);
 			}
 			if (hasCanSetShortcut) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_set_shortcut$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_set_shortcut$field);
 			}
 			if (hasIsSuggestion) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_suggestion$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_suggestion$field);
 			}
 			if (hasNormal) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, normal$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, normal$field);
 			}
 			if (hasTransportation) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, transportation$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, transportation$field);
 			}
 			if (hasJinziPackage) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, jinzi_package$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, jinzi_package$field);
 			}
 			if (hasRefineGoods) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, refine_goods$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, refine_goods$field);
 			}
 			if (hasSummonToken) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 14);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, summon_token$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, summon_token$field);
 			}
 			if (hasPackageGoods) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 15);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, package_goods$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, package_goods$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -351,42 +351,42 @@ package app.message {
 			var summon_token$count:uint = 0;
 			var package_goods$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (cd_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: UsableGoodsDataProto.cdType cannot be set twice.');
 					}
 					++cd_type$count;
-					this.cdType = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.cdType = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (cd$count != 0) {
 						throw new flash.errors.IOError('Bad data format: UsableGoodsDataProto.cd cannot be set twice.');
 					}
 					++cd$count;
-					this.cd = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.cd = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (bulk_useable$count != 0) {
 						throw new flash.errors.IOError('Bad data format: UsableGoodsDataProto.bulkUseable cannot be set twice.');
 					}
 					++bulk_useable$count;
-					this.bulkUseable = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.bulkUseable = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 4:
 					if (can_set_shortcut$count != 0) {
 						throw new flash.errors.IOError('Bad data format: UsableGoodsDataProto.canSetShortcut cannot be set twice.');
 					}
 					++can_set_shortcut$count;
-					this.canSetShortcut = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canSetShortcut = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 5:
 					if (is_suggestion$count != 0) {
 						throw new flash.errors.IOError('Bad data format: UsableGoodsDataProto.isSuggestion cannot be set twice.');
 					}
 					++is_suggestion$count;
-					this.isSuggestion = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isSuggestion = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 10:
 					if (normal$count != 0) {
@@ -394,7 +394,7 @@ package app.message {
 					}
 					++normal$count;
 					this.normal = new app.message.NormalUsableDataProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.normal);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.normal);
 					break;
 				case 11:
 					if (transportation$count != 0) {
@@ -402,7 +402,7 @@ package app.message {
 					}
 					++transportation$count;
 					this.transportation = new app.message.TransportationDataProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.transportation);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.transportation);
 					break;
 				case 12:
 					if (jinzi_package$count != 0) {
@@ -410,7 +410,7 @@ package app.message {
 					}
 					++jinzi_package$count;
 					this.jinziPackage = new app.message.JinziPackageDataProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.jinziPackage);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.jinziPackage);
 					break;
 				case 13:
 					if (refine_goods$count != 0) {
@@ -418,7 +418,7 @@ package app.message {
 					}
 					++refine_goods$count;
 					this.refineGoods = new app.message.RefinedStatGoodsDataProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.refineGoods);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.refineGoods);
 					break;
 				case 14:
 					if (summon_token$count != 0) {
@@ -426,7 +426,7 @@ package app.message {
 					}
 					++summon_token$count;
 					this.summonToken = new app.message.SummonTokenGoodsDataProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.summonToken);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.summonToken);
 					break;
 				case 15:
 					if (package_goods$count != 0) {
@@ -434,7 +434,7 @@ package app.message {
 					}
 					++package_goods$count;
 					this.packageGoods = new app.message.PackageGoodsDataProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.packageGoods);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.packageGoods);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -2,9 +2,9 @@ package com.client.sender
 {
 	import com.client.ClientCmdID;
 	import com.gameClient.log.GameLog;
-
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
@@ -26,9 +26,9 @@ package com.client.sender
 			var signBy : ByteBuffer = new ByteBuffer();
 			signBy.writeUTFBytes(loginKey);
 			data.writeBytes(signBy);
-			SocketConnection.send(ClientCmdID.C2S_WEB_LOGIN, data);
+			SocketConnection_protoBuffer.send(ClientCmdID.C2S_WEB_LOGIN, data);
 			//
-			SocketConnection.mainSocket.easyProtocolOffset = signBy[0];
+			SocketConnection_protoBuffer.mainSocket.easyProtocolOffset = signBy[0];
 			GameLog.addShow("easyProtocolOffset : ", signBy[0]);
 		}
 
@@ -43,7 +43,7 @@ package com.client.sender
 			buf.writeVarint32(body);
 			buf.writeUTF(nickName);
 			buf.writeVarint32(countryID);
-			SocketConnection.send(ClientCmdID.C2S_CREATE_HERO, buf);
+			SocketConnection_protoBuffer.send(ClientCmdID.C2S_CREATE_HERO, buf);
 			//
 			GameLog.addShow("发送创建角色：", nickName);
 		}

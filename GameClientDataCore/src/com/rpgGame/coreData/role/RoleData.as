@@ -5,7 +5,7 @@
 	import com.rpgGame.coreData.info.buff.BuffInfo;
 	import com.rpgGame.coreData.info.fight.skill.ActiveSpellList;
 
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *

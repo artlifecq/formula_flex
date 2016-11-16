@@ -14,7 +14,7 @@ package app.message.CountryHistoryRecordProto {
 		/**
 		 *  @private
 		 */
-		public static const KING_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.CountryHistoryRecordProto.CountryJingShuRecordProto.king_name", "kingName", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const KING_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.CountryHistoryRecordProto.CountryJingShuRecordProto.king_name", "kingName", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var king_name$field:String;
 
@@ -37,7 +37,7 @@ package app.message.CountryHistoryRecordProto {
 		/**
 		 *  @private
 		 */
-		public static const CUR_JING_SHU_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryHistoryRecordProto.CountryJingShuRecordProto.cur_jing_shu_count", "curJingShuCount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CUR_JING_SHU_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryHistoryRecordProto.CountryJingShuRecordProto.cur_jing_shu_count", "curJingShuCount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var cur_jing_shu_count$field:int;
 
@@ -64,7 +64,7 @@ package app.message.CountryHistoryRecordProto {
 		/**
 		 *  @private
 		 */
-		public static const TODAY_ROB_JING_SHU_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryHistoryRecordProto.CountryJingShuRecordProto.today_rob_jing_shu_count", "todayRobJingShuCount", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TODAY_ROB_JING_SHU_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryHistoryRecordProto.CountryJingShuRecordProto.today_rob_jing_shu_count", "todayRobJingShuCount", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var today_rob_jing_shu_count$field:int;
 
@@ -89,7 +89,7 @@ package app.message.CountryHistoryRecordProto {
 		/**
 		 *  @private
 		 */
-		public static const TODAY_BEEN_ROB_JING_SHU_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryHistoryRecordProto.CountryJingShuRecordProto.today_been_rob_jing_shu_count", "todayBeenRobJingShuCount", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TODAY_BEEN_ROB_JING_SHU_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryHistoryRecordProto.CountryJingShuRecordProto.today_been_rob_jing_shu_count", "todayBeenRobJingShuCount", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var today_been_rob_jing_shu_count$field:int;
 
@@ -117,19 +117,19 @@ package app.message.CountryHistoryRecordProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasKingName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, king_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, king_name$field);
 			}
 			if (hasCurJingShuCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, cur_jing_shu_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, cur_jing_shu_count$field);
 			}
 			if (hasTodayRobJingShuCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, today_rob_jing_shu_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, today_rob_jing_shu_count$field);
 			}
 			if (hasTodayBeenRobJingShuCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, today_been_rob_jing_shu_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, today_been_rob_jing_shu_count$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -145,35 +145,35 @@ package app.message.CountryHistoryRecordProto {
 			var today_rob_jing_shu_count$count:uint = 0;
 			var today_been_rob_jing_shu_count$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (king_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryJingShuRecordProto.kingName cannot be set twice.');
 					}
 					++king_name$count;
-					this.kingName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.kingName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 2:
 					if (cur_jing_shu_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryJingShuRecordProto.curJingShuCount cannot be set twice.');
 					}
 					++cur_jing_shu_count$count;
-					this.curJingShuCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.curJingShuCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (today_rob_jing_shu_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryJingShuRecordProto.todayRobJingShuCount cannot be set twice.');
 					}
 					++today_rob_jing_shu_count$count;
-					this.todayRobJingShuCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.todayRobJingShuCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (today_been_rob_jing_shu_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryJingShuRecordProto.todayBeenRobJingShuCount cannot be set twice.');
 					}
 					++today_been_rob_jing_shu_count$count;
-					this.todayBeenRobJingShuCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.todayBeenRobJingShuCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

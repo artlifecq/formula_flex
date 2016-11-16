@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.type.item
 {
-	import flash.utils.Dictionary;
+	
 
 	public class EquipmentPos
 	{

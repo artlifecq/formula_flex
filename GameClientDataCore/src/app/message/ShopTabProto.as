@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const INDEX:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ShopTabProto.index", "index", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const INDEX:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ShopTabProto.index", "index", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var index$field:int;
 
@@ -43,7 +43,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.ShopTabProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.ShopTabProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var name$field:flash.utils.ByteArray;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GOODS_LIST:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.ShopTabProto.goods_list", "goodsList", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ShopGoodsProto; });
+		public static const GOODS_LIST:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.ShopTabProto.goods_list", "goodsList", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ShopGoodsProto; });
 
 		[ArrayElementType("app.message.ShopGoodsProto")]
 		public var goodsList:Array = [];
@@ -77,15 +77,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasIndex) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, index$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, index$field);
 			}
 			if (hasName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, name$field);
 			}
 			for (var goodsList$index:uint = 0; goodsList$index < this.goodsList.length; ++goodsList$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.goodsList[goodsList$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.goodsList[goodsList$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -99,24 +99,24 @@ package app.message {
 			var index$count:uint = 0;
 			var name$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (index$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ShopTabProto.index cannot be set twice.');
 					}
 					++index$count;
-					this.index = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.index = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ShopTabProto.name cannot be set twice.');
 					}
 					++name$count;
-					this.name = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.name = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 3:
-					this.goodsList.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.ShopGoodsProto()));
+					this.goodsList.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.ShopGoodsProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

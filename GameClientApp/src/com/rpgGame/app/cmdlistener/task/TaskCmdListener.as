@@ -39,8 +39,8 @@ package com.rpgGame.app.cmdlistener.task
 
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	import utils.TimerServer;
 
@@ -59,25 +59,25 @@ package com.rpgGame.app.cmdlistener.task
 
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_REQUEST_COMPLETED_CHAPTER_TASK, onRecTaskRequestCompletedChapter);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_REQUEST_COMPLETED_CHAPTER_TASK_FAIL, onRecTaskRequestCompletedChapterFail);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_NEW_CHAPTER_TASK, onRecTaskNewChapter);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_COMPLETE_TASK, onRecTaskComplete);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TASK_REQUEST_COMPLETED_CHAPTER_TASK, onRecTaskRequestCompletedChapter);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TASK_REQUEST_COMPLETED_CHAPTER_TASK_FAIL, onRecTaskRequestCompletedChapterFail);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TASK_NEW_CHAPTER_TASK, onRecTaskNewChapter);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TASK_COMPLETE_TASK, onRecTaskComplete);
 //			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_NEW_CHANGE_TASK, onRecTaskNewChange);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_SWALLOW_TASK, onRecChanceTaskSwallowSuccess);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_SWALLOW_TASK_FAIL, onRecChanceTaskSwallowFail);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_AUTO_COMPLETE_CHANCE_TASK, onRecChanceTaskAutoCompleteSuccess);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_AUTO_COMPLETE_CHANCE_TASK_FAIL, onRecChanceTaskAutoCompleteFail);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_REDUCE_DIFFI_STAR, onRecReduceEveryDayDiffiStar);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_REDUCE_DIFFI_STAR_FAIL, onRecReduceEveryDayDiffiStarFail);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_ADD_PRIZE_STAR, onRecEveryDayTaskAddPrizeStar);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_ADD_PRIZE_STAR_FAIL, onRecEveryDayTaskAddPrizeStarFail);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_NEW_DAILY_TASK, onRecNewEveryDayTask);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_AUTO_COMPLETE_ALL_DAILY_TASK, onRecAutoCompleteAllEveryDayTask);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_AUTO_COMPLETE_ALL_DAILY_TASK_FAIL, onRecAutoCompleteAllEveryDayTaskFail);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_UPDATE_PROGRESS, onRecTaskUpdateProgress);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_REPLY_NPC_TASK, onRecTaskCompleteReplyNpc);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_COLLECT_GOODS_FAIL, onRecTaskCollectGoodsFail);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TASK_SWALLOW_TASK, onRecChanceTaskSwallowSuccess);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TASK_SWALLOW_TASK_FAIL, onRecChanceTaskSwallowFail);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TASK_AUTO_COMPLETE_CHANCE_TASK, onRecChanceTaskAutoCompleteSuccess);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TASK_AUTO_COMPLETE_CHANCE_TASK_FAIL, onRecChanceTaskAutoCompleteFail);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TASK_REDUCE_DIFFI_STAR, onRecReduceEveryDayDiffiStar);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TASK_REDUCE_DIFFI_STAR_FAIL, onRecReduceEveryDayDiffiStarFail);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TASK_ADD_PRIZE_STAR, onRecEveryDayTaskAddPrizeStar);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TASK_ADD_PRIZE_STAR_FAIL, onRecEveryDayTaskAddPrizeStarFail);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TASK_NEW_DAILY_TASK, onRecNewEveryDayTask);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TASK_AUTO_COMPLETE_ALL_DAILY_TASK, onRecAutoCompleteAllEveryDayTask);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TASK_AUTO_COMPLETE_ALL_DAILY_TASK_FAIL, onRecAutoCompleteAllEveryDayTaskFail);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TASK_UPDATE_PROGRESS, onRecTaskUpdateProgress);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TASK_REPLY_NPC_TASK, onRecTaskCompleteReplyNpc);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TASK_COLLECT_GOODS_FAIL, onRecTaskCollectGoodsFail);
 //			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_GOODS_LIST, onRecTaskInventedGoodsList);
 //			SocketConnection.addCmdListener(TaskModuleMessages.S2C_COLLECT_TASK_GOODS_LIST_FAIL, onRecTaskInventedGoodsListFail);
 //			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_NEW_GUILD_TASK, onRecNewGuildTask);
@@ -85,17 +85,17 @@ package com.rpgGame.app.cmdlistener.task
 //			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_AUTO_COMPLETE_ALL_GUILD_TASK, onRecAutoCompleteAllGuildTask);
 //			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_AUTO_COMPLETE_ALL_GUILD_TASK_FAIL, onRecAutoCompleteGuildTaskFail);
 //			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_REMOVE_GUILD_TASK, onRecRemoveGuildTask);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_SCENE_TASK_TRANSPORT, onRecSceneTaskTransport);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_TRANSPORT_FAIL, onRecTaskTransportFail);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_SCENE_TASK_TRANSPORT, onRecSceneTaskTransport);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TASK_TRANSPORT_FAIL, onRecTaskTransportFail);
 //			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_NEW_FUNCTION, onRecTaskNewFunction);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_ACCEPT_SENT_NPC, onRecAcceptSentNpc);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_ACCEPT_SENT_NPC_FAIL, onRecAcceptSentNpcFail);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_SENT_NPC_DEAD, onRecSentNpcDead);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_SENT_NPC_DISAPPEAR, onRecSentNpcDisappear);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_COMPLETE_SENT_NPC_FAIL, onRecCompleteSentNpcFail);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_COMPLETE_AREA_SEARCH_FAIL, onRecCompleteAreaSearchFail);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TASK_NEW_STORY_TASK, onRecTaskNewStoryTask);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_COMPLETE_CLIENT_TASK_FAIL, onRecCompleteClientTaskFail);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_ACCEPT_SENT_NPC, onRecAcceptSentNpc);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_ACCEPT_SENT_NPC_FAIL, onRecAcceptSentNpcFail);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_SENT_NPC_DEAD, onRecSentNpcDead);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_SENT_NPC_DISAPPEAR, onRecSentNpcDisappear);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_COMPLETE_SENT_NPC_FAIL, onRecCompleteSentNpcFail);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_COMPLETE_AREA_SEARCH_FAIL, onRecCompleteAreaSearchFail);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TASK_NEW_STORY_TASK, onRecTaskNewStoryTask);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_COMPLETE_CLIENT_TASK_FAIL, onRecCompleteClientTaskFail);
 
 			finish();
 		}

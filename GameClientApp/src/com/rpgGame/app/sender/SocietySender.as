@@ -7,8 +7,8 @@ package com.rpgGame.app.sender
 
 	import app.cmd.FamilyModuleMessages;
 
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 	import com.game.engine3D.vo.SenderReferenceSet;
 
 
@@ -42,7 +42,7 @@ package com.rpgGame.app.sender
 			_bytes.writeBoolean(autoAgree);
 			_bytes.writeVarint32(goodsPos);
 			_bytes.writeUTF(name);
-			SocketConnection.send(FamilyModuleMessages.C2S_CREATE_FAMILY, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_CREATE_FAMILY, _bytes);
 		}
 
 		/**
@@ -58,7 +58,7 @@ package com.rpgGame.app.sender
 			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_GET_SELF_FAMILY_LIST, 30000);
 
 			_bytes.clear();
-			SocketConnection.send(FamilyModuleMessages.C2S_GET_SELF_FAMILY_LIST, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_GET_SELF_FAMILY_LIST, _bytes);
 		}
 
 		/**
@@ -74,7 +74,7 @@ package com.rpgGame.app.sender
 			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_GET_OTHER_FAMILY_LIST, 30000);
 
 			_bytes.clear();
-			SocketConnection.send(FamilyModuleMessages.C2S_GET_OTHER_FAMILY_LIST, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_GET_OTHER_FAMILY_LIST, _bytes);
 		}
 
 		private static const REQ_GET_SELF_FAMILY_INFO_DELAY_TIME : int = 10000;
@@ -122,7 +122,7 @@ package com.rpgGame.app.sender
 			if (SocietyManager.hasSociecy())
 			{
 				_bytes.clear();
-				SocketConnection.send(FamilyModuleMessages.C2S_GET_SELF_FAMILY_INFO, _bytes);
+				SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_GET_SELF_FAMILY_INFO, _bytes);
 				_reqGetSelfFamilyInfoReferenceSet.lock();
 			}
 		}
@@ -144,7 +144,7 @@ package com.rpgGame.app.sender
 
 			_bytes.clear();
 			_bytes.writeVarint64(heroId);
-			SocketConnection.send(FamilyModuleMessages.C2S_KICK_MEMBER, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_KICK_MEMBER, _bytes);
 		}
 
 		/**
@@ -157,7 +157,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeBoolean(autoAgree);
-			SocketConnection.send(FamilyModuleMessages.C2S_SET_AUTO_ACCEPT_INVITE, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_SET_AUTO_ACCEPT_INVITE, _bytes);
 		}
 
 		/**
@@ -170,7 +170,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeBoolean(forbid);
-			SocketConnection.send(FamilyModuleMessages.C2S_SET_FORBID_OTHER_INVITE_ME_JOIN_FAMILY, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_SET_FORBID_OTHER_INVITE_ME_JOIN_FAMILY, _bytes);
 		}
 
 		/**
@@ -190,7 +190,7 @@ package com.rpgGame.app.sender
 
 			_bytes.clear();
 			_bytes.writeBoolean(isYes);
-			SocketConnection.send(FamilyModuleMessages.C2S_SET_FAMILY_AUTO_ACCEPT_JOIN_REQUEST, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_SET_FAMILY_AUTO_ACCEPT_JOIN_REQUEST, _bytes);
 		}
 
 		/**
@@ -213,7 +213,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint32(pos);
 			_bytes.writeVarint64(heroId);
 			_bytes.writeBoolean(isJob);
-			SocketConnection.send(FamilyModuleMessages.C2S_SET_POSITION, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_SET_POSITION, _bytes);
 		}
 
 		/**
@@ -236,7 +236,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeBoolean(doApply);
 			_bytes.writeUTFBytes(familyName);
-			SocketConnection.send(FamilyModuleMessages.C2S_REQUEST_JOIN, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_REQUEST_JOIN, _bytes);
 		}
 
 		/**
@@ -257,7 +257,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint64(heroId);
 			_bytes.writeBoolean(isYes);
-			SocketConnection.send(FamilyModuleMessages.C2S_REPLY_JOIN_REQUEST, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_REPLY_JOIN_REQUEST, _bytes);
 		}
 
 		/**
@@ -276,7 +276,7 @@ package com.rpgGame.app.sender
 
 			_bytes.clear();
 			_bytes.writeVarint64(heroId);
-			SocketConnection.send(FamilyModuleMessages.C2S_INVITE_JOIN, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_INVITE_JOIN, _bytes);
 		}
 
 		/**
@@ -294,7 +294,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeBoolean(isYes);
 			_bytes.writeUTFBytes(familyName);
-			SocketConnection.send(FamilyModuleMessages.C2S_REPLY_JOIN_INVITE, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_REPLY_JOIN_INVITE, _bytes);
 		}
 
 		/**
@@ -307,7 +307,7 @@ package com.rpgGame.app.sender
 			SocietyManager.deleteAllInvitateMe();
 
 			_bytes.clear();
-			SocketConnection.send(FamilyModuleMessages.C2S_REJECT_ALL_JOIN_INVITE, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_REJECT_ALL_JOIN_INVITE, _bytes);
 		}
 
 		/**
@@ -340,7 +340,7 @@ package com.rpgGame.app.sender
 				_bytes.writeVarint32(goodsCount);
 				_bytes.writeBytes(goodsBytes);
 			}
-			SocketConnection.send(FamilyModuleMessages.C2S_DO_DONATE, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_DO_DONATE, _bytes);
 		}
 
 		/**
@@ -352,7 +352,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(buildType);
-			SocketConnection.send(FamilyModuleMessages.C2S_FAMILY_UPGRADE_BUILDING, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_FAMILY_UPGRADE_BUILDING, _bytes);
 		}
 
 		/**
@@ -363,7 +363,7 @@ package com.rpgGame.app.sender
 		public static function reqImpeachFamilyLeader() : void
 		{
 			_bytes.clear();
-			SocketConnection.send(FamilyModuleMessages.C2S_IMPEACH_FAMILY_LEADER, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_IMPEACH_FAMILY_LEADER, _bytes);
 		}
 
 		/**
@@ -382,7 +382,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint32(spellIndex);
 			_bytes.writeBytes(upgradeBytes);
-			SocketConnection.send(FamilyModuleMessages.C2S_LEARN_FAMILY_COLLAGE_SPELL, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_LEARN_FAMILY_COLLAGE_SPELL, _bytes);
 		}
 
 		private static const REQ_GET_NEWS_DELAY_TIME : int = 30000;
@@ -413,7 +413,7 @@ package com.rpgGame.app.sender
 		private static function reqGetNews() : void
 		{
 			_bytes.clear();
-			SocketConnection.send(FamilyModuleMessages.C2S_GET_NEWS, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_GET_NEWS, _bytes);
 		}
 
 		private static const REQ_GET_REQUEST_JOIN_DETAIL_TIME : int = 30000;
@@ -447,7 +447,7 @@ package com.rpgGame.app.sender
 		private static function reqGetRequestJoinDetail() : void
 		{
 			_bytes.clear();
-			SocketConnection.send(FamilyModuleMessages.C2S_GET_REQUEST_JOIN_DETAIL, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_GET_REQUEST_JOIN_DETAIL, _bytes);
 		}
 
 		/**
@@ -460,7 +460,7 @@ package com.rpgGame.app.sender
 			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_LEAVE_FAMILY, 5 * 1000);
 
 			_bytes.clear();
-			SocketConnection.send(FamilyModuleMessages.C2S_LEAVE_FAMILY, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_LEAVE_FAMILY, _bytes);
 		}
 
 		/**
@@ -475,7 +475,7 @@ package com.rpgGame.app.sender
 			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_DISMISS_FAMILY, 5 * 1000);
 
 			_bytes.clear();
-			SocketConnection.send(FamilyModuleMessages.C2S_DISMISS_FAMILY, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_DISMISS_FAMILY, _bytes);
 		}
 
 		/**
@@ -502,7 +502,7 @@ package com.rpgGame.app.sender
 			SocietyManager.cacheAnnouncement(info);
 			_bytes.clear();
 			_bytes.writeUTF(info);
-			SocketConnection.send(FamilyModuleMessages.C2S_CHANGE_ANNOUNCEMENT, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_CHANGE_ANNOUNCEMENT, _bytes);
 		}
 
 		/**
@@ -511,7 +511,7 @@ package com.rpgGame.app.sender
 		public static function reqOpenFamilyAnimalDungeon() : void
 		{
 			_bytes.clear();
-			SocketConnection.send(FamilyModuleMessages.C2S_OPEN_FAMILY_ANIMAL_DUNGEON, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_OPEN_FAMILY_ANIMAL_DUNGEON, _bytes);
 		}
 
 		/**
@@ -520,7 +520,7 @@ package com.rpgGame.app.sender
 		public static function reqTryEnterFamilyAnimalDungeon() : void
 		{
 			_bytes.clear();
-			SocketConnection.send(FamilyModuleMessages.C2S_TRY_ENTER_FAMILY_ANIMAL_DUNGOEN, _bytes);
+			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_TRY_ENTER_FAMILY_ANIMAL_DUNGOEN, _bytes);
 		}
 	}
 }

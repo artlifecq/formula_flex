@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PRICE_TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.ShopGoodsProto.price_type", "priceType", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.AmountType);
+		public static const PRICE_TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.ShopGoodsProto.price_type", "priceType", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.AmountType);
 
 		private var price_type$field:int;
 
@@ -43,7 +43,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PRICE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ShopGoodsProto.price", "price", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PRICE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ShopGoodsProto.price", "price", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var price$field:int;
 
@@ -68,7 +68,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const START_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.ShopGoodsProto.start_time", "startTime", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const START_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.ShopGoodsProto.start_time", "startTime", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var start_time$field:Int64;
 
@@ -91,7 +91,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const END_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.ShopGoodsProto.end_time", "endTime", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const END_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.ShopGoodsProto.end_time", "endTime", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var end_time$field:Int64;
 
@@ -114,7 +114,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PROMOTION:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ShopGoodsProto.promotion", "promotion", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PROMOTION:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ShopGoodsProto.promotion", "promotion", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var promotion$field:int;
 
@@ -139,7 +139,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SHOW_PRICE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ShopGoodsProto.show_price", "showPrice", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SHOW_PRICE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ShopGoodsProto.show_price", "showPrice", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var show_price$field:int;
 
@@ -164,7 +164,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GOODS_WRAPPER:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.ShopGoodsProto.goods_wrapper", "goodsWrapper", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
+		public static const GOODS_WRAPPER:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.ShopGoodsProto.goods_wrapper", "goodsWrapper", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
 
 		private var goods_wrapper$field:app.message.GoodsWrapperProto;
 
@@ -187,7 +187,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DESC:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.ShopGoodsProto.desc", "desc", (8 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const DESC:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.ShopGoodsProto.desc", "desc", (8 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var desc$field:String;
 
@@ -213,35 +213,35 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasPriceType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, price_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, price_type$field);
 			}
 			if (hasPrice) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, price$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, price$field);
 			}
 			if (hasStartTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, start_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, start_time$field);
 			}
 			if (hasEndTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, end_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, end_time$field);
 			}
 			if (hasPromotion) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, promotion$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, promotion$field);
 			}
 			if (hasShowPrice) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, show_price$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, show_price$field);
 			}
 			if (hasGoodsWrapper) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, goods_wrapper$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, goods_wrapper$field);
 			}
 			if (hasDesc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, desc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, desc$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -261,49 +261,49 @@ package app.message {
 			var goods_wrapper$count:uint = 0;
 			var desc$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (price_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ShopGoodsProto.priceType cannot be set twice.');
 					}
 					++price_type$count;
-					this.priceType = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.priceType = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 2:
 					if (price$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ShopGoodsProto.price cannot be set twice.');
 					}
 					++price$count;
-					this.price = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.price = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (start_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ShopGoodsProto.startTime cannot be set twice.');
 					}
 					++start_time$count;
-					this.startTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.startTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 4:
 					if (end_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ShopGoodsProto.endTime cannot be set twice.');
 					}
 					++end_time$count;
-					this.endTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.endTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 5:
 					if (promotion$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ShopGoodsProto.promotion cannot be set twice.');
 					}
 					++promotion$count;
-					this.promotion = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.promotion = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (show_price$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ShopGoodsProto.showPrice cannot be set twice.');
 					}
 					++show_price$count;
-					this.showPrice = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.showPrice = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (goods_wrapper$count != 0) {
@@ -311,14 +311,14 @@ package app.message {
 					}
 					++goods_wrapper$count;
 					this.goodsWrapper = new app.message.GoodsWrapperProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.goodsWrapper);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.goodsWrapper);
 					break;
 				case 8:
 					if (desc$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ShopGoodsProto.desc cannot be set twice.');
 					}
 					++desc$count;
-					this.desc = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.desc = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

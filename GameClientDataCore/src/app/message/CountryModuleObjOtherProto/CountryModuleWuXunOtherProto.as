@@ -14,7 +14,7 @@ package app.message.CountryModuleObjOtherProto {
 		/**
 		 *  @private
 		 */
-		public static const WU_XUN:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryModuleObjOtherProto.CountryModuleWuXunOtherProto.wu_xun", "wuXun", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const WU_XUN:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryModuleObjOtherProto.CountryModuleWuXunOtherProto.wu_xun", "wuXun", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var wu_xun$field:Int64;
 
@@ -40,7 +40,7 @@ package app.message.CountryModuleObjOtherProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasWuXun) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, wu_xun$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, wu_xun$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -53,14 +53,14 @@ package app.message.CountryModuleObjOtherProto {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var wu_xun$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (wu_xun$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryModuleWuXunOtherProto.wuXun cannot be set twice.');
 					}
 					++wu_xun$count;
-					this.wuXun = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.wuXun = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

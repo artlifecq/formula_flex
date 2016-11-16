@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var id$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ATTACK_MOTION_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.attack_motion_id", "attackMotionId", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ATTACK_MOTION_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.attack_motion_id", "attackMotionId", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var attack_motion_id$field:int;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ATTACK_MOTION_SPEED:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.attack_motion_speed", "attackMotionSpeed", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ATTACK_MOTION_SPEED:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.attack_motion_speed", "attackMotionSpeed", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var attack_motion_speed$field:int;
 
@@ -91,7 +91,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HURT_DELAY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.hurt_delay", "hurtDelay", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const HURT_DELAY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.hurt_delay", "hurtDelay", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var hurt_delay$field:int;
 
@@ -116,7 +116,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAST_TIME:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.cast_time", "castTime", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAST_TIME:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.cast_time", "castTime", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var cast_time$field:int;
 
@@ -141,7 +141,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DELAY_TIME:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.delay_time", "delayTime", (12 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DELAY_TIME:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.delay_time", "delayTime", (12 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var delay_time$field:int;
 
@@ -166,7 +166,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAST_ANIMATION:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.cast_animation", "castAnimation", (15 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAST_ANIMATION:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.cast_animation", "castAnimation", (15 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var cast_animation$field:int;
 
@@ -191,7 +191,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SELF_DEST_ANIMATION:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.self_dest_animation", "selfDestAnimation", (16 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SELF_DEST_ANIMATION:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.self_dest_animation", "selfDestAnimation", (16 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var self_dest_animation$field:int;
 
@@ -216,7 +216,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HURT_ANIMATION:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.hurt_animation", "hurtAnimation", (17 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const HURT_ANIMATION:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.hurt_animation", "hurtAnimation", (17 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var hurt_animation$field:int;
 
@@ -241,7 +241,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEST_ANIMATION:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.dest_animation", "destAnimation", (18 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEST_ANIMATION:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.dest_animation", "destAnimation", (18 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var dest_animation$field:int;
 
@@ -266,7 +266,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SPUTTERING_HURT_ANIMATION:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.sputtering_hurt_animation", "sputteringHurtAnimation", (33 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SPUTTERING_HURT_ANIMATION:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.sputtering_hurt_animation", "sputteringHurtAnimation", (33 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var sputtering_hurt_animation$field:int;
 
@@ -291,7 +291,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FLY_ANIMATION:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.fly_animation", "flyAnimation", (19 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FLY_ANIMATION:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.fly_animation", "flyAnimation", (19 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var fly_animation$field:int;
 
@@ -316,7 +316,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FLY_SPEED:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.fly_speed", "flySpeed", (20 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FLY_SPEED:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.fly_speed", "flySpeed", (20 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var fly_speed$field:int;
 
@@ -341,7 +341,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FLY_TIME:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.fly_time", "flyTime", (21 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FLY_TIME:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.fly_time", "flyTime", (21 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var fly_time$field:int;
 
@@ -366,7 +366,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_FLY_CROSS:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.SpellEffectProto.is_fly_cross", "isFlyCross", (22 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_FLY_CROSS:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.SpellEffectProto.is_fly_cross", "isFlyCross", (22 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_fly_cross$field:Boolean;
 
@@ -391,7 +391,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_TRACK_TARGET:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.SpellEffectProto.is_track_target", "isTrackTarget", (23 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_TRACK_TARGET:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.SpellEffectProto.is_track_target", "isTrackTarget", (23 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_track_target$field:Boolean;
 
@@ -416,7 +416,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BLINK_TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.blink_type", "blinkType", (24 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BLINK_TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.blink_type", "blinkType", (24 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var blink_type$field:int;
 
@@ -441,7 +441,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BLINK_SPEED:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.blink_speed", "blinkSpeed", (25 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BLINK_SPEED:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.blink_speed", "blinkSpeed", (25 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var blink_speed$field:int;
 
@@ -466,7 +466,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BLINK_HEIGHT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.blink_height", "blinkHeight", (26 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BLINK_HEIGHT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.blink_height", "blinkHeight", (26 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var blink_height$field:int;
 
@@ -491,7 +491,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BEAT_BACK_SPEED:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.beat_back_speed", "beatBackSpeed", (27 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BEAT_BACK_SPEED:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.beat_back_speed", "beatBackSpeed", (27 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var beat_back_speed$field:int;
 
@@ -516,7 +516,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_WALK_RELEASE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.SpellEffectProto.can_walk_release", "canWalkRelease", (28 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_WALK_RELEASE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.SpellEffectProto.can_walk_release", "canWalkRelease", (28 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_walk_release$field:Boolean;
 
@@ -541,7 +541,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const REPEAT_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.repeat_times", "repeatTimes", (29 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const REPEAT_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.repeat_times", "repeatTimes", (29 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var repeat_times$field:int;
 
@@ -566,7 +566,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const REPEAT_INTERVAL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.repeat_interval", "repeatInterval", (30 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const REPEAT_INTERVAL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.repeat_interval", "repeatInterval", (30 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var repeat_interval$field:int;
 
@@ -591,7 +591,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAX_HURT_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.max_hurt_times", "maxHurtTimes", (31 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MAX_HURT_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.max_hurt_times", "maxHurtTimes", (31 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var max_hurt_times$field:int;
 
@@ -616,7 +616,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_TRAP_SPELL:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.SpellEffectProto.is_trap_spell", "isTrapSpell", (32 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_TRAP_SPELL:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.SpellEffectProto.is_trap_spell", "isTrapSpell", (32 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_trap_spell$field:Boolean;
 
@@ -641,7 +641,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAROM_START_FRAME_TIME:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.carom_start_frame_time", "caromStartFrameTime", (50 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAROM_START_FRAME_TIME:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.carom_start_frame_time", "caromStartFrameTime", (50 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var carom_start_frame_time$field:int;
 
@@ -666,7 +666,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HIT_FRAME_TIME:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.hit_frame_time", "hitFrameTime", (51 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const HIT_FRAME_TIME:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.hit_frame_time", "hitFrameTime", (51 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var hit_frame_time$field:int;
 
@@ -691,7 +691,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BREAK_FRAME_TIME:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.break_frame_time", "breakFrameTime", (52 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BREAK_FRAME_TIME:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.break_frame_time", "breakFrameTime", (52 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var break_frame_time$field:int;
 
@@ -716,7 +716,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SOAR_FRAME_TIME:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.soar_frame_time", "soarFrameTime", (53 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SOAR_FRAME_TIME:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.soar_frame_time", "soarFrameTime", (53 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var soar_frame_time$field:int;
 
@@ -741,7 +741,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const THROW_DELAY_TIME:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.throw_delay_time", "throwDelayTime", (54 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const THROW_DELAY_TIME:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.throw_delay_time", "throwDelayTime", (54 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var throw_delay_time$field:int;
 
@@ -766,7 +766,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GHOST_EFFECT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.SpellEffectProto.ghost_effect", "ghostEffect", (55 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const GHOST_EFFECT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.SpellEffectProto.ghost_effect", "ghostEffect", (55 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var ghost_effect$field:Boolean;
 
@@ -791,7 +791,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MATCH_TERRAIN:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.SpellEffectProto.match_terrain", "matchTerrain", (56 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MATCH_TERRAIN:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.SpellEffectProto.match_terrain", "matchTerrain", (56 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var match_terrain$field:Boolean;
 
@@ -816,7 +816,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const KEEP_SPACING:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.keep_spacing", "keepSpacing", (57 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const KEEP_SPACING:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.keep_spacing", "keepSpacing", (57 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var keep_spacing$field:int;
 
@@ -843,7 +843,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEAD_LAUNCH_HEIGHT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.dead_launch_height", "deadLaunchHeight", (58 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEAD_LAUNCH_HEIGHT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.dead_launch_height", "deadLaunchHeight", (58 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var dead_launch_height$field:int;
 
@@ -868,7 +868,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEAD_BEAT_DISTANCE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.dead_beat_distance", "deadBeatDistance", (59 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEAD_BEAT_DISTANCE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.dead_beat_distance", "deadBeatDistance", (59 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var dead_beat_distance$field:int;
 
@@ -893,7 +893,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEAD_BEAT_SPEED:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.dead_beat_speed", "deadBeatSpeed", (60 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEAD_BEAT_SPEED:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.dead_beat_speed", "deadBeatSpeed", (60 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var dead_beat_speed$field:int;
 
@@ -918,7 +918,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEAD_BEAT_PROBABILITY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.dead_beat_probability", "deadBeatProbability", (61 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEAD_BEAT_PROBABILITY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.dead_beat_probability", "deadBeatProbability", (61 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var dead_beat_probability$field:int;
 
@@ -943,7 +943,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEAD_LAUNCH_PROBABILITY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.dead_launch_probability", "deadLaunchProbability", (62 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEAD_LAUNCH_PROBABILITY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.dead_launch_probability", "deadLaunchProbability", (62 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var dead_launch_probability$field:int;
 
@@ -968,7 +968,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEAD_LAUNCH_DISTANCE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.dead_launch_distance", "deadLaunchDistance", (63 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEAD_LAUNCH_DISTANCE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.dead_launch_distance", "deadLaunchDistance", (63 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var dead_launch_distance$field:int;
 
@@ -993,7 +993,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEAD_LAUNCH_SPEED:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.dead_launch_speed", "deadLaunchSpeed", (64 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEAD_LAUNCH_SPEED:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.dead_launch_speed", "deadLaunchSpeed", (64 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var dead_launch_speed$field:int;
 
@@ -1018,7 +1018,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_ADAPTIVE_TARGET_HEIGHT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.SpellEffectProto.is_adaptive_target_height", "isAdaptiveTargetHeight", (65 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_ADAPTIVE_TARGET_HEIGHT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.SpellEffectProto.is_adaptive_target_height", "isAdaptiveTargetHeight", (65 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_adaptive_target_height$field:Boolean;
 
@@ -1043,7 +1043,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const THROW_HEIGHT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.throw_height", "throwHeight", (66 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const THROW_HEIGHT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.throw_height", "throwHeight", (66 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var throw_height$field:int;
 
@@ -1068,7 +1068,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const THROW_WEIGHT_RATIO:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellEffectProto.throw_weight_ratio", "throwWeightRatio", (67 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const THROW_WEIGHT_RATIO:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellEffectProto.throw_weight_ratio", "throwWeightRatio", (67 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var throw_weight_ratio$field:int;
 
@@ -1096,175 +1096,175 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, id$field);
 			}
 			if (hasAttackMotionId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, attack_motion_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, attack_motion_id$field);
 			}
 			if (hasAttackMotionSpeed) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, attack_motion_speed$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, attack_motion_speed$field);
 			}
 			if (hasHurtDelay) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, hurt_delay$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, hurt_delay$field);
 			}
 			if (hasCastTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, cast_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, cast_time$field);
 			}
 			if (hasDelayTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, delay_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, delay_time$field);
 			}
 			if (hasCastAnimation) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 15);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, cast_animation$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, cast_animation$field);
 			}
 			if (hasSelfDestAnimation) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 16);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, self_dest_animation$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, self_dest_animation$field);
 			}
 			if (hasHurtAnimation) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 17);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, hurt_animation$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, hurt_animation$field);
 			}
 			if (hasDestAnimation) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 18);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, dest_animation$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, dest_animation$field);
 			}
 			if (hasSputteringHurtAnimation) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 33);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, sputtering_hurt_animation$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, sputtering_hurt_animation$field);
 			}
 			if (hasFlyAnimation) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 19);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, fly_animation$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, fly_animation$field);
 			}
 			if (hasFlySpeed) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 20);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, fly_speed$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, fly_speed$field);
 			}
 			if (hasFlyTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 21);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, fly_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, fly_time$field);
 			}
 			if (hasIsFlyCross) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 22);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_fly_cross$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_fly_cross$field);
 			}
 			if (hasIsTrackTarget) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 23);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_track_target$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_track_target$field);
 			}
 			if (hasBlinkType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 24);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, blink_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, blink_type$field);
 			}
 			if (hasBlinkSpeed) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 25);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, blink_speed$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, blink_speed$field);
 			}
 			if (hasBlinkHeight) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 26);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, blink_height$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, blink_height$field);
 			}
 			if (hasBeatBackSpeed) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 27);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, beat_back_speed$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, beat_back_speed$field);
 			}
 			if (hasCanWalkRelease) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 28);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_walk_release$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_walk_release$field);
 			}
 			if (hasRepeatTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 29);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, repeat_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, repeat_times$field);
 			}
 			if (hasRepeatInterval) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 30);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, repeat_interval$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, repeat_interval$field);
 			}
 			if (hasMaxHurtTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 31);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, max_hurt_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, max_hurt_times$field);
 			}
 			if (hasIsTrapSpell) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 32);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_trap_spell$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_trap_spell$field);
 			}
 			if (hasCaromStartFrameTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 50);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, carom_start_frame_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, carom_start_frame_time$field);
 			}
 			if (hasHitFrameTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 51);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, hit_frame_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, hit_frame_time$field);
 			}
 			if (hasBreakFrameTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 52);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, break_frame_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, break_frame_time$field);
 			}
 			if (hasSoarFrameTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 53);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, soar_frame_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, soar_frame_time$field);
 			}
 			if (hasThrowDelayTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 54);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, throw_delay_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, throw_delay_time$field);
 			}
 			if (hasGhostEffect) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 55);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, ghost_effect$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, ghost_effect$field);
 			}
 			if (hasMatchTerrain) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 56);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, match_terrain$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, match_terrain$field);
 			}
 			if (hasKeepSpacing) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 57);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, keep_spacing$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, keep_spacing$field);
 			}
 			if (hasDeadLaunchHeight) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 58);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, dead_launch_height$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, dead_launch_height$field);
 			}
 			if (hasDeadBeatDistance) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 59);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, dead_beat_distance$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, dead_beat_distance$field);
 			}
 			if (hasDeadBeatSpeed) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 60);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, dead_beat_speed$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, dead_beat_speed$field);
 			}
 			if (hasDeadBeatProbability) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 61);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, dead_beat_probability$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, dead_beat_probability$field);
 			}
 			if (hasDeadLaunchProbability) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 62);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, dead_launch_probability$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, dead_launch_probability$field);
 			}
 			if (hasDeadLaunchDistance) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 63);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, dead_launch_distance$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, dead_launch_distance$field);
 			}
 			if (hasDeadLaunchSpeed) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 64);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, dead_launch_speed$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, dead_launch_speed$field);
 			}
 			if (hasIsAdaptiveTargetHeight) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 65);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_adaptive_target_height$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_adaptive_target_height$field);
 			}
 			if (hasThrowHeight) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 66);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, throw_height$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, throw_height$field);
 			}
 			if (hasThrowWeightRatio) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 67);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, throw_weight_ratio$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, throw_weight_ratio$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -1319,308 +1319,308 @@ package app.message {
 			var throw_height$count:uint = 0;
 			var throw_weight_ratio$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.id cannot be set twice.');
 					}
 					++id$count;
-					this.id = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.id = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (attack_motion_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.attackMotionId cannot be set twice.');
 					}
 					++attack_motion_id$count;
-					this.attackMotionId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.attackMotionId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (attack_motion_speed$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.attackMotionSpeed cannot be set twice.');
 					}
 					++attack_motion_speed$count;
-					this.attackMotionSpeed = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.attackMotionSpeed = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 10:
 					if (hurt_delay$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.hurtDelay cannot be set twice.');
 					}
 					++hurt_delay$count;
-					this.hurtDelay = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.hurtDelay = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 11:
 					if (cast_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.castTime cannot be set twice.');
 					}
 					++cast_time$count;
-					this.castTime = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.castTime = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 12:
 					if (delay_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.delayTime cannot be set twice.');
 					}
 					++delay_time$count;
-					this.delayTime = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.delayTime = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 15:
 					if (cast_animation$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.castAnimation cannot be set twice.');
 					}
 					++cast_animation$count;
-					this.castAnimation = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.castAnimation = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 16:
 					if (self_dest_animation$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.selfDestAnimation cannot be set twice.');
 					}
 					++self_dest_animation$count;
-					this.selfDestAnimation = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.selfDestAnimation = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 17:
 					if (hurt_animation$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.hurtAnimation cannot be set twice.');
 					}
 					++hurt_animation$count;
-					this.hurtAnimation = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.hurtAnimation = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 18:
 					if (dest_animation$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.destAnimation cannot be set twice.');
 					}
 					++dest_animation$count;
-					this.destAnimation = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.destAnimation = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 33:
 					if (sputtering_hurt_animation$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.sputteringHurtAnimation cannot be set twice.');
 					}
 					++sputtering_hurt_animation$count;
-					this.sputteringHurtAnimation = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.sputteringHurtAnimation = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 19:
 					if (fly_animation$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.flyAnimation cannot be set twice.');
 					}
 					++fly_animation$count;
-					this.flyAnimation = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.flyAnimation = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 20:
 					if (fly_speed$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.flySpeed cannot be set twice.');
 					}
 					++fly_speed$count;
-					this.flySpeed = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.flySpeed = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 21:
 					if (fly_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.flyTime cannot be set twice.');
 					}
 					++fly_time$count;
-					this.flyTime = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.flyTime = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 22:
 					if (is_fly_cross$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.isFlyCross cannot be set twice.');
 					}
 					++is_fly_cross$count;
-					this.isFlyCross = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isFlyCross = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 23:
 					if (is_track_target$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.isTrackTarget cannot be set twice.');
 					}
 					++is_track_target$count;
-					this.isTrackTarget = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isTrackTarget = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 24:
 					if (blink_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.blinkType cannot be set twice.');
 					}
 					++blink_type$count;
-					this.blinkType = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.blinkType = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 25:
 					if (blink_speed$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.blinkSpeed cannot be set twice.');
 					}
 					++blink_speed$count;
-					this.blinkSpeed = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.blinkSpeed = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 26:
 					if (blink_height$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.blinkHeight cannot be set twice.');
 					}
 					++blink_height$count;
-					this.blinkHeight = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.blinkHeight = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 27:
 					if (beat_back_speed$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.beatBackSpeed cannot be set twice.');
 					}
 					++beat_back_speed$count;
-					this.beatBackSpeed = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.beatBackSpeed = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 28:
 					if (can_walk_release$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.canWalkRelease cannot be set twice.');
 					}
 					++can_walk_release$count;
-					this.canWalkRelease = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canWalkRelease = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 29:
 					if (repeat_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.repeatTimes cannot be set twice.');
 					}
 					++repeat_times$count;
-					this.repeatTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.repeatTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 30:
 					if (repeat_interval$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.repeatInterval cannot be set twice.');
 					}
 					++repeat_interval$count;
-					this.repeatInterval = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.repeatInterval = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 31:
 					if (max_hurt_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.maxHurtTimes cannot be set twice.');
 					}
 					++max_hurt_times$count;
-					this.maxHurtTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.maxHurtTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 32:
 					if (is_trap_spell$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.isTrapSpell cannot be set twice.');
 					}
 					++is_trap_spell$count;
-					this.isTrapSpell = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isTrapSpell = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 50:
 					if (carom_start_frame_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.caromStartFrameTime cannot be set twice.');
 					}
 					++carom_start_frame_time$count;
-					this.caromStartFrameTime = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.caromStartFrameTime = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 51:
 					if (hit_frame_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.hitFrameTime cannot be set twice.');
 					}
 					++hit_frame_time$count;
-					this.hitFrameTime = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.hitFrameTime = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 52:
 					if (break_frame_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.breakFrameTime cannot be set twice.');
 					}
 					++break_frame_time$count;
-					this.breakFrameTime = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.breakFrameTime = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 53:
 					if (soar_frame_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.soarFrameTime cannot be set twice.');
 					}
 					++soar_frame_time$count;
-					this.soarFrameTime = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.soarFrameTime = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 54:
 					if (throw_delay_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.throwDelayTime cannot be set twice.');
 					}
 					++throw_delay_time$count;
-					this.throwDelayTime = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.throwDelayTime = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 55:
 					if (ghost_effect$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.ghostEffect cannot be set twice.');
 					}
 					++ghost_effect$count;
-					this.ghostEffect = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.ghostEffect = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 56:
 					if (match_terrain$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.matchTerrain cannot be set twice.');
 					}
 					++match_terrain$count;
-					this.matchTerrain = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.matchTerrain = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 57:
 					if (keep_spacing$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.keepSpacing cannot be set twice.');
 					}
 					++keep_spacing$count;
-					this.keepSpacing = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.keepSpacing = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 58:
 					if (dead_launch_height$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.deadLaunchHeight cannot be set twice.');
 					}
 					++dead_launch_height$count;
-					this.deadLaunchHeight = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.deadLaunchHeight = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 59:
 					if (dead_beat_distance$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.deadBeatDistance cannot be set twice.');
 					}
 					++dead_beat_distance$count;
-					this.deadBeatDistance = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.deadBeatDistance = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 60:
 					if (dead_beat_speed$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.deadBeatSpeed cannot be set twice.');
 					}
 					++dead_beat_speed$count;
-					this.deadBeatSpeed = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.deadBeatSpeed = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 61:
 					if (dead_beat_probability$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.deadBeatProbability cannot be set twice.');
 					}
 					++dead_beat_probability$count;
-					this.deadBeatProbability = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.deadBeatProbability = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 62:
 					if (dead_launch_probability$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.deadLaunchProbability cannot be set twice.');
 					}
 					++dead_launch_probability$count;
-					this.deadLaunchProbability = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.deadLaunchProbability = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 63:
 					if (dead_launch_distance$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.deadLaunchDistance cannot be set twice.');
 					}
 					++dead_launch_distance$count;
-					this.deadLaunchDistance = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.deadLaunchDistance = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 64:
 					if (dead_launch_speed$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.deadLaunchSpeed cannot be set twice.');
 					}
 					++dead_launch_speed$count;
-					this.deadLaunchSpeed = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.deadLaunchSpeed = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 65:
 					if (is_adaptive_target_height$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.isAdaptiveTargetHeight cannot be set twice.');
 					}
 					++is_adaptive_target_height$count;
-					this.isAdaptiveTargetHeight = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isAdaptiveTargetHeight = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 66:
 					if (throw_height$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.throwHeight cannot be set twice.');
 					}
 					++throw_height$count;
-					this.throwHeight = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.throwHeight = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 67:
 					if (throw_weight_ratio$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellEffectProto.throwWeightRatio cannot be set twice.');
 					}
 					++throw_weight_ratio$count;
-					this.throwWeightRatio = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.throwWeightRatio = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

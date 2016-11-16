@@ -11,8 +11,8 @@ package com.rpgGame.app.cmdlistener.yuMaQiShou
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 	
 	/**
 	 * 御马场/奇兽苑 消息侦听 
@@ -23,11 +23,11 @@ package com.rpgGame.app.cmdlistener.yuMaQiShou
 	{
 		override public function start():void
 		{
-			SocketConnection.addCmdListener( YuMaQiShouModuleMessages.S2C_BI_MA_WEN_ACTIVITY_BEGIN, onBiMaWenActivityBegin );
-			SocketConnection.addCmdListener( YuMaQiShouModuleMessages.S2C_GET_BI_MA_WEN_POS, onGetBiMaWenPos );
-			SocketConnection.addCmdListener( YuMaQiShouModuleMessages.S2C_GET_BI_MA_WEN_POS_FAIL, onGetBiMaWenPosFail );
-			SocketConnection.addCmdListener( YuMaQiShouModuleMessages.S2C_BI_MA_WEN_ACTIVITY_END, onBiMaWenActivityEnd );
-			SocketConnection.addCmdListener( YuMaQiShouModuleMessages.S2C_BI_MA_WEN_ACTIVITY_IS_UNDERWAY, onBiMaWenActivityIsUnderway );
+			SocketConnection_protoBuffer.addCmdListener( YuMaQiShouModuleMessages.S2C_BI_MA_WEN_ACTIVITY_BEGIN, onBiMaWenActivityBegin );
+			SocketConnection_protoBuffer.addCmdListener( YuMaQiShouModuleMessages.S2C_GET_BI_MA_WEN_POS, onGetBiMaWenPos );
+			SocketConnection_protoBuffer.addCmdListener( YuMaQiShouModuleMessages.S2C_GET_BI_MA_WEN_POS_FAIL, onGetBiMaWenPosFail );
+			SocketConnection_protoBuffer.addCmdListener( YuMaQiShouModuleMessages.S2C_BI_MA_WEN_ACTIVITY_END, onBiMaWenActivityEnd );
+			SocketConnection_protoBuffer.addCmdListener( YuMaQiShouModuleMessages.S2C_BI_MA_WEN_ACTIVITY_IS_UNDERWAY, onBiMaWenActivityIsUnderway );
 			
 			super.finish();
 		}

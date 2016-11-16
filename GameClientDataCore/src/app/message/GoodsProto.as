@@ -18,7 +18,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GoodsProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GoodsProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var id$field:int;
 
@@ -45,7 +45,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GoodsProto.count", "count", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GoodsProto.count", "count", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var count$field:int;
 
@@ -70,7 +70,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BINDED:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.GoodsProto.binded", "binded", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BINDED:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.GoodsProto.binded", "binded", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var binded$field:Boolean;
 
@@ -95,7 +95,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EXPIRE_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.GoodsProto.expire_time", "expireTime", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const EXPIRE_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.GoodsProto.expire_time", "expireTime", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var expire_time$field:Int64;
 
@@ -118,7 +118,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NORMAL:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GoodsProto.normal", "normal", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NormalGoodsProto; });
+		public static const NORMAL:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GoodsProto.normal", "normal", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NormalGoodsProto; });
 
 		private var normal$field:app.message.NormalGoodsProto;
 
@@ -141,7 +141,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EQUIPMENT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GoodsProto.equipment", "equipment", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentProto; });
+		public static const EQUIPMENT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GoodsProto.equipment", "equipment", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentProto; });
 
 		private var equipment$field:app.message.EquipmentProto;
 
@@ -164,7 +164,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MOUNT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GoodsProto.mount", "mount", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MountProto; });
+		public static const MOUNT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GoodsProto.mount", "mount", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MountProto; });
 
 		private var mount$field:app.message.MountProto;
 
@@ -187,7 +187,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PACKAGE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GoodsProto.package", "__package", (13 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PackageProto; });
+		public static const PACKAGE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GoodsProto.package", "__package", (13 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PackageProto; });
 
 		private var package$field:app.message.PackageProto;
 
@@ -213,35 +213,35 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, id$field);
 			}
 			if (hasCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, count$field);
 			}
 			if (hasBinded) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, binded$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, binded$field);
 			}
 			if (hasExpireTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, expire_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, expire_time$field);
 			}
 			if (hasNormal) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, normal$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, normal$field);
 			}
 			if (hasEquipment) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, equipment$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, equipment$field);
 			}
 			if (hasMount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, mount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, mount$field);
 			}
 			if (hasPackage) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, package$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, package$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -261,35 +261,35 @@ package app.message {
 			var mount$count:uint = 0;
 			var package$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GoodsProto.id cannot be set twice.');
 					}
 					++id$count;
-					this.id = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.id = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GoodsProto.count cannot be set twice.');
 					}
 					++count$count;
-					this.count = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.count = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (binded$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GoodsProto.binded cannot be set twice.');
 					}
 					++binded$count;
-					this.binded = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.binded = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 4:
 					if (expire_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GoodsProto.expireTime cannot be set twice.');
 					}
 					++expire_time$count;
-					this.expireTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.expireTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 10:
 					if (normal$count != 0) {
@@ -297,7 +297,7 @@ package app.message {
 					}
 					++normal$count;
 					this.normal = new app.message.NormalGoodsProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.normal);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.normal);
 					break;
 				case 11:
 					if (equipment$count != 0) {
@@ -305,7 +305,7 @@ package app.message {
 					}
 					++equipment$count;
 					this.equipment = new app.message.EquipmentProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.equipment);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.equipment);
 					break;
 				case 12:
 					if (mount$count != 0) {
@@ -313,7 +313,7 @@ package app.message {
 					}
 					++mount$count;
 					this.mount = new app.message.MountProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.mount);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.mount);
 					break;
 				case 13:
 					if (package$count != 0) {
@@ -321,7 +321,7 @@ package app.message {
 					}
 					++package$count;
 					this.__package = new app.message.PackageProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.__package);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.__package);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -1,15 +1,15 @@
 package com.rpgGame.coreData.info.society
 {
 	import com.netease.protobuf.Int64;
-
+	
 	import flash.utils.Dictionary;
-
+	
 	import app.message.FamilyMemberProto;
 	import app.message.FamilyOfficerPos;
 	import app.message.FamilySharedProto;
 	import app.message.FamilyOfficeProto.FamilyPosOfficersProto;
-
-	import org.game.netCore.net.BytesUtil;
+	
+	import org.game.netCore.net_protobuff.BytesUtil;
 
 	/**
 	 *

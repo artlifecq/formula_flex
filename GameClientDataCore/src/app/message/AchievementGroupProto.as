@@ -1,13 +1,21 @@
 package app.message {
-	import com.netease.protobuf.*;
-	use namespace com.netease.protobuf.used_by_generated_code;
-	import com.netease.protobuf.fieldDescriptors.*;
-	import flash.utils.Endian;
-	import flash.utils.IDataInput;
-	import flash.utils.IDataOutput;
-	import flash.utils.IExternalizable;
+	import com.netease.protobuf.Message;
+	import com.netease.protobuf.ReadUtils;
+	import com.netease.protobuf.WireType;
+	import com.netease.protobuf.WriteUtils;
+	import com.netease.protobuf.WritingBuffer;
+	import com.netease.protobuf.used_by_generated_code;
+	import com.netease.protobuf.fieldDescriptors.FieldDescriptor_TYPE_BOOL;
+	import com.netease.protobuf.fieldDescriptors.FieldDescriptor_TYPE_INT32;
+	import com.netease.protobuf.fieldDescriptors.FieldDescriptor_TYPE_STRING;
+	import com.netease.protobuf.fieldDescriptors.RepeatedFieldDescriptor_TYPE_MESSAGE;
+	
 	import flash.errors.IOError;
+	import flash.utils.IDataInput;
+	
 	import app.message.AchievementGroupProto.AchievementDataProto;
+
+	use namespace com.netease.protobuf.used_by_generated_code;
 	// @@protoc_insertion_point(imports)
 
 	// @@protoc_insertion_point(class_metadata)
@@ -15,7 +23,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AchievementGroupProto.type", "type", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AchievementGroupProto.type", "type", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var type$field:int;
 
@@ -42,7 +50,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FIRST_TITLE_RES:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.AchievementGroupProto.first_title_res", "firstTitleRes", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const FIRST_TITLE_RES:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.AchievementGroupProto.first_title_res", "firstTitleRes", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var first_title_res$field:String;
 
@@ -65,7 +73,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FIRST_TITLE:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.AchievementGroupProto.first_title", "firstTitle", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const FIRST_TITLE:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.AchievementGroupProto.first_title", "firstTitle", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var first_title$field:String;
 
@@ -88,7 +96,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SECOND_TITLE:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.AchievementGroupProto.second_title", "secondTitle", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const SECOND_TITLE:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.AchievementGroupProto.second_title", "secondTitle", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var second_title$field:String;
 
@@ -111,7 +119,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_DAILY_RESET:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.AchievementGroupProto.is_daily_reset", "isDailyReset", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_DAILY_RESET:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.AchievementGroupProto.is_daily_reset", "isDailyReset", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_daily_reset$field:Boolean;
 
@@ -136,7 +144,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ACHIEVEMENTS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.AchievementGroupProto.achievements", "achievements", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AchievementGroupProto.AchievementDataProto; });
+		public static const ACHIEVEMENTS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.AchievementGroupProto.achievements", "achievements", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AchievementGroupProto.AchievementDataProto; });
 
 		[ArrayElementType("app.message.AchievementGroupProto.AchievementDataProto")]
 		public var achievements:Array = [];
@@ -147,27 +155,27 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, type$field);
 			}
 			if (hasFirstTitleRes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, first_title_res$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, first_title_res$field);
 			}
 			if (hasFirstTitle) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, first_title$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, first_title$field);
 			}
 			if (hasSecondTitle) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, second_title$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, second_title$field);
 			}
 			if (hasIsDailyReset) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_daily_reset$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_daily_reset$field);
 			}
 			for (var achievements$index:uint = 0; achievements$index < this.achievements.length; ++achievements$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.achievements[achievements$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.achievements[achievements$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -184,45 +192,45 @@ package app.message {
 			var second_title$count:uint = 0;
 			var is_daily_reset$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AchievementGroupProto.type cannot be set twice.');
 					}
 					++type$count;
-					this.type = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.type = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (first_title_res$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AchievementGroupProto.firstTitleRes cannot be set twice.');
 					}
 					++first_title_res$count;
-					this.firstTitleRes = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.firstTitleRes = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (first_title$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AchievementGroupProto.firstTitle cannot be set twice.');
 					}
 					++first_title$count;
-					this.firstTitle = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.firstTitle = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 4:
 					if (second_title$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AchievementGroupProto.secondTitle cannot be set twice.');
 					}
 					++second_title$count;
-					this.secondTitle = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.secondTitle = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 5:
 					if (is_daily_reset$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AchievementGroupProto.isDailyReset cannot be set twice.');
 					}
 					++is_daily_reset$count;
-					this.isDailyReset = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isDailyReset = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 6:
-					this.achievements.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.AchievementGroupProto.AchievementDataProto()));
+					this.achievements.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.AchievementGroupProto.AchievementDataProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

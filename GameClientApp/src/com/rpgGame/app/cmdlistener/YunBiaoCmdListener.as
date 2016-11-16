@@ -28,9 +28,9 @@ package com.rpgGame.app.cmdlistener
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
-	import org.game.netCore.net.BytesUtil;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
+	import org.game.netCore.net_protobuff.BytesUtil;
 	
 	/**
 	 * 运镖消息监听 
@@ -41,35 +41,35 @@ package com.rpgGame.app.cmdlistener
 	{
 		override public function start():void
 		{
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_BIAO_STATUS_WHEN_ONLINE, onYunBiaoProtoOnlogin);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_BIAO_DESTROY_TIMES, onBiaoCheDestroyTime);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_REQUEST_PERSONAL_BIAO, onRequestYunbiaoSucceed);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_REQUEST_PERSONAL_BIAO_FAIL, onRequestYunbiaoFail);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_BIAO_STOP, onBiaoCheStop);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_BIAO_FOLLOW, onBiaoCheFollow);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_BIAO_DISAPPEAR, onBiaoCheDisappear);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_BIAO_BEEN_HURT, onBiaoCheLifeUpdate);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_BIAO_DEAD, onBiaoCheDead);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_BIAO_BROKEN, onBiaoCheBroken);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_REFRESH_BIAO, onRefreshBiaoCheSucceed);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_REFRESH_BIAO_FAIL, onRefreshBiaoCheFail);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_CHANGE_QUALITY, onBiaoCheQualityChang);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_COMPLETE_BIAO, onSubmitYunBiaoSucceed);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_COMPLETE_BIAO_FAIL, onSubmitYunBiaoFail);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_ADD_BIAO, onAddBiaoChe);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_TRANSPORT_TO_BIAO, onTransportToBiao);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_GIVE_UP_PERSONAL_BIAO, onGiveUpYunbiaoSucceed);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_GIVE_UP_PERSONAL_BIAO_FAIL, onGiveUpYunbiaoFail);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_GOT_ADD_BIAO_GOODS, onGotAddBiaoGoods);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_TRANSPORT_TO_SELF_BIAO, onTransportToSelfBiao);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_TRANSPORT_TO_SELF_BIAO_FAIL, onTransportToSelfBiaoFail);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_UP_OR_DOWN_FROM_BIAO, onUpOrDownFromBiao);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_UP_OR_DOWN_FROM_BIAO_FAIL, onUpOrDownFromBiaoFail);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_UP_OR_DOWN_FROM_BIAO_BROADCAST, onUpOrDownFromBiaoBroadcast);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_CHECK_BIAO, onCheckBiao);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_CHECK_BIAO_FAIL, onCheckBiaoFail);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_INVICINBLE_BIAO_RECOVERY_LIFE, onInvicinbleBiaoRecoveryLife);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_MAX_QUALITY_BIAO_BROADCAST, onMaxQualityYunBiaoBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_BIAO_STATUS_WHEN_ONLINE, onYunBiaoProtoOnlogin);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_BIAO_DESTROY_TIMES, onBiaoCheDestroyTime);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_REQUEST_PERSONAL_BIAO, onRequestYunbiaoSucceed);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_REQUEST_PERSONAL_BIAO_FAIL, onRequestYunbiaoFail);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_BIAO_STOP, onBiaoCheStop);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_BIAO_FOLLOW, onBiaoCheFollow);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_BIAO_DISAPPEAR, onBiaoCheDisappear);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_BIAO_BEEN_HURT, onBiaoCheLifeUpdate);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_BIAO_DEAD, onBiaoCheDead);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_BIAO_BROKEN, onBiaoCheBroken);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_REFRESH_BIAO, onRefreshBiaoCheSucceed);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_REFRESH_BIAO_FAIL, onRefreshBiaoCheFail);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_CHANGE_QUALITY, onBiaoCheQualityChang);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_COMPLETE_BIAO, onSubmitYunBiaoSucceed);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_COMPLETE_BIAO_FAIL, onSubmitYunBiaoFail);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_ADD_BIAO, onAddBiaoChe);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_TRANSPORT_TO_BIAO, onTransportToBiao);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_GIVE_UP_PERSONAL_BIAO, onGiveUpYunbiaoSucceed);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_GIVE_UP_PERSONAL_BIAO_FAIL, onGiveUpYunbiaoFail);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_GOT_ADD_BIAO_GOODS, onGotAddBiaoGoods);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_TRANSPORT_TO_SELF_BIAO, onTransportToSelfBiao);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_TRANSPORT_TO_SELF_BIAO_FAIL, onTransportToSelfBiaoFail);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_UP_OR_DOWN_FROM_BIAO, onUpOrDownFromBiao);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_UP_OR_DOWN_FROM_BIAO_FAIL, onUpOrDownFromBiaoFail);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_UP_OR_DOWN_FROM_BIAO_BROADCAST, onUpOrDownFromBiaoBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_CHECK_BIAO, onCheckBiao);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_CHECK_BIAO_FAIL, onCheckBiaoFail);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_INVICINBLE_BIAO_RECOVERY_LIFE, onInvicinbleBiaoRecoveryLife);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_MAX_QUALITY_BIAO_BROADCAST, onMaxQualityYunBiaoBroadcast);
 			super.finish();
 		}
 		

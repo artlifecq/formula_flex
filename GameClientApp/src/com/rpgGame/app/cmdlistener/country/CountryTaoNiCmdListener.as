@@ -15,15 +15,15 @@ package com.rpgGame.app.cmdlistener.country
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.type.SceneCharType;
-
+	
 	import app.cmd.TaoNiModuleMessages;
 	import app.message.MonsterDataProto;
 	import app.message.MonsterDataProto.MonsterType;
-
+	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
@@ -40,17 +40,17 @@ package com.rpgGame.app.cmdlistener.country
 
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(TaoNiModuleMessages.S2C_TAO_NI_START, onTaoNiStart);
-			SocketConnection.addCmdListener(TaoNiModuleMessages.S2C_TAO_NI_STATUS, onTaoNiStatus);
-			SocketConnection.addCmdListener(TaoNiModuleMessages.S2C_TAO_NI_END, onTaoNiEnd);
-			SocketConnection.addCmdListener(TaoNiModuleMessages.S2C_ENTER_DUNGEON, onTaoNiEnter);
-			SocketConnection.addCmdListener(TaoNiModuleMessages.S2C_ENTER_DUNGEON_FAIL, onTaoNiEnterFail);
-			SocketConnection.addCmdListener(TaoNiModuleMessages.S2C_DUNGEON_INFO, onTaoNiInfo);
-			SocketConnection.addCmdListener(TaoNiModuleMessages.S2C_STAGE_CHANGED, onStageChanged);
-			SocketConnection.addCmdListener(TaoNiModuleMessages.S2C_NEW_WAVE, onNewWave);
-			SocketConnection.addCmdListener(TaoNiModuleMessages.S2C_KILL_MONSTER_CHANGED, onKillMonsterChanged);
-			SocketConnection.addCmdListener(TaoNiModuleMessages.S2C_FINISH, onFinish);
-			SocketConnection.addCmdListener(TaoNiModuleMessages.S2C_ADD_LIANG_CANG, addLiangCang);
+			SocketConnection_protoBuffer.addCmdListener(TaoNiModuleMessages.S2C_TAO_NI_START, onTaoNiStart);
+			SocketConnection_protoBuffer.addCmdListener(TaoNiModuleMessages.S2C_TAO_NI_STATUS, onTaoNiStatus);
+			SocketConnection_protoBuffer.addCmdListener(TaoNiModuleMessages.S2C_TAO_NI_END, onTaoNiEnd);
+			SocketConnection_protoBuffer.addCmdListener(TaoNiModuleMessages.S2C_ENTER_DUNGEON, onTaoNiEnter);
+			SocketConnection_protoBuffer.addCmdListener(TaoNiModuleMessages.S2C_ENTER_DUNGEON_FAIL, onTaoNiEnterFail);
+			SocketConnection_protoBuffer.addCmdListener(TaoNiModuleMessages.S2C_DUNGEON_INFO, onTaoNiInfo);
+			SocketConnection_protoBuffer.addCmdListener(TaoNiModuleMessages.S2C_STAGE_CHANGED, onStageChanged);
+			SocketConnection_protoBuffer.addCmdListener(TaoNiModuleMessages.S2C_NEW_WAVE, onNewWave);
+			SocketConnection_protoBuffer.addCmdListener(TaoNiModuleMessages.S2C_KILL_MONSTER_CHANGED, onKillMonsterChanged);
+			SocketConnection_protoBuffer.addCmdListener(TaoNiModuleMessages.S2C_FINISH, onFinish);
+			SocketConnection_protoBuffer.addCmdListener(TaoNiModuleMessages.S2C_ADD_LIANG_CANG, addLiangCang);
 
 			finish();
 		}

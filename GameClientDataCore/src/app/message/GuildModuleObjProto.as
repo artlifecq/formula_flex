@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_COLLECT_GUILD_PRIZE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.GuildModuleObjProto.is_collect_guild_prize", "isCollectGuildPrize", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_COLLECT_GUILD_PRIZE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.GuildModuleObjProto.is_collect_guild_prize", "isCollectGuildPrize", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_collect_guild_prize$field:Boolean;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_COLLECT_KING_GUILD_PRIZE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.GuildModuleObjProto.is_collect_king_guild_prize", "isCollectKingGuildPrize", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_COLLECT_KING_GUILD_PRIZE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.GuildModuleObjProto.is_collect_king_guild_prize", "isCollectKingGuildPrize", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_collect_king_guild_prize$field:Boolean;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GUILD_CONTRIBUTION_POINT:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.GuildModuleObjProto.guild_contribution_point", "guildContributionPoint", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const GUILD_CONTRIBUTION_POINT:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.GuildModuleObjProto.guild_contribution_point", "guildContributionPoint", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var guild_contribution_point$field:Int64;
 
@@ -92,15 +92,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasIsCollectGuildPrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_collect_guild_prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_collect_guild_prize$field);
 			}
 			if (hasIsCollectKingGuildPrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_collect_king_guild_prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_collect_king_guild_prize$field);
 			}
 			if (hasGuildContributionPoint) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, guild_contribution_point$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, guild_contribution_point$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -115,28 +115,28 @@ package app.message {
 			var is_collect_king_guild_prize$count:uint = 0;
 			var guild_contribution_point$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (is_collect_guild_prize$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildModuleObjProto.isCollectGuildPrize cannot be set twice.');
 					}
 					++is_collect_guild_prize$count;
-					this.isCollectGuildPrize = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isCollectGuildPrize = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 2:
 					if (is_collect_king_guild_prize$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildModuleObjProto.isCollectKingGuildPrize cannot be set twice.');
 					}
 					++is_collect_king_guild_prize$count;
-					this.isCollectKingGuildPrize = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isCollectKingGuildPrize = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 3:
 					if (guild_contribution_point$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildModuleObjProto.guildContributionPoint cannot be set twice.');
 					}
 					++guild_contribution_point$count;
-					this.guildContributionPoint = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.guildContributionPoint = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AnimationProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AnimationProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var id$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SCENE_RES:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.AnimationProto.scene_res", "sceneRes", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const SCENE_RES:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.AnimationProto.scene_res", "sceneRes", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var scene_res$field:String;
 
@@ -64,7 +64,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DELAY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AnimationProto.delay", "delay", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DELAY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AnimationProto.delay", "delay", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var delay$field:int;
 
@@ -89,7 +89,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LOOP_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AnimationProto.loop_count", "loopCount", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LOOP_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AnimationProto.loop_count", "loopCount", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var loop_count$field:int;
 
@@ -114,7 +114,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_ON_ROLE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.AnimationProto.is_on_role", "isOnRole", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_ON_ROLE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.AnimationProto.is_on_role", "isOnRole", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_on_role$field:Boolean;
 
@@ -139,7 +139,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SOUND_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.AnimationProto.sound_name", "soundName", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const SOUND_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.AnimationProto.sound_name", "soundName", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var sound_name$field:String;
 
@@ -162,7 +162,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NEED_ROTATION:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.AnimationProto.need_rotation", "needRotation", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const NEED_ROTATION:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.AnimationProto.need_rotation", "needRotation", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var need_rotation$field:Boolean;
 
@@ -187,7 +187,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RANDOM_RANGE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AnimationProto.random_range", "randomRange", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RANDOM_RANGE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AnimationProto.random_range", "randomRange", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var random_range$field:int;
 
@@ -212,7 +212,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ROLE_RES:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.AnimationProto.role_res", "roleRes", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const ROLE_RES:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.AnimationProto.role_res", "roleRes", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var role_res$field:String;
 
@@ -235,7 +235,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SPECIAL_EFFECT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AnimationProto.special_effect", "specialEffect", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SPECIAL_EFFECT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AnimationProto.special_effect", "specialEffect", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var special_effect$field:int;
 
@@ -260,7 +260,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const OFFSET_X:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AnimationProto.offset_x", "offsetX", (12 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const OFFSET_X:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AnimationProto.offset_x", "offsetX", (12 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var offset_x$field:int;
 
@@ -285,7 +285,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const OFFSET_Y:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AnimationProto.offset_y", "offsetY", (13 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const OFFSET_Y:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AnimationProto.offset_y", "offsetY", (13 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var offset_y$field:int;
 
@@ -310,7 +310,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_MULTI_DIRECTION:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.AnimationProto.is_multi_direction", "isMultiDirection", (14 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_MULTI_DIRECTION:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.AnimationProto.is_multi_direction", "isMultiDirection", (14 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_multi_direction$field:Boolean;
 
@@ -335,7 +335,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const WEAPON_RES:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.AnimationProto.weapon_res", "weaponRes", (15 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const WEAPON_RES:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.AnimationProto.weapon_res", "weaponRes", (15 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var weapon_res$field:String;
 
@@ -358,7 +358,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BIND_BONE:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.AnimationProto.bind_bone", "bindBone", (16 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const BIND_BONE:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.AnimationProto.bind_bone", "bindBone", (16 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var bind_bone$field:String;
 
@@ -384,63 +384,63 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, id$field);
 			}
 			if (hasSceneRes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, scene_res$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, scene_res$field);
 			}
 			if (hasDelay) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, delay$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, delay$field);
 			}
 			if (hasLoopCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, loop_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, loop_count$field);
 			}
 			if (hasIsOnRole) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_on_role$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_on_role$field);
 			}
 			if (hasSoundName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, sound_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, sound_name$field);
 			}
 			if (hasNeedRotation) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, need_rotation$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, need_rotation$field);
 			}
 			if (hasRandomRange) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, random_range$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, random_range$field);
 			}
 			if (hasRoleRes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, role_res$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, role_res$field);
 			}
 			if (hasSpecialEffect) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, special_effect$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, special_effect$field);
 			}
 			if (hasOffsetX) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, offset_x$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, offset_x$field);
 			}
 			if (hasOffsetY) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, offset_y$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, offset_y$field);
 			}
 			if (hasIsMultiDirection) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 14);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_multi_direction$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_multi_direction$field);
 			}
 			if (hasWeaponRes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 15);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, weapon_res$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, weapon_res$field);
 			}
 			if (hasBindBone) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 16);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, bind_bone$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, bind_bone$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -467,112 +467,112 @@ package app.message {
 			var weapon_res$count:uint = 0;
 			var bind_bone$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AnimationProto.id cannot be set twice.');
 					}
 					++id$count;
-					this.id = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.id = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (scene_res$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AnimationProto.sceneRes cannot be set twice.');
 					}
 					++scene_res$count;
-					this.sceneRes = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.sceneRes = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (delay$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AnimationProto.delay cannot be set twice.');
 					}
 					++delay$count;
-					this.delay = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.delay = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (loop_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AnimationProto.loopCount cannot be set twice.');
 					}
 					++loop_count$count;
-					this.loopCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.loopCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (is_on_role$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AnimationProto.isOnRole cannot be set twice.');
 					}
 					++is_on_role$count;
-					this.isOnRole = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isOnRole = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 7:
 					if (sound_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AnimationProto.soundName cannot be set twice.');
 					}
 					++sound_name$count;
-					this.soundName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.soundName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 8:
 					if (need_rotation$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AnimationProto.needRotation cannot be set twice.');
 					}
 					++need_rotation$count;
-					this.needRotation = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.needRotation = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 9:
 					if (random_range$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AnimationProto.randomRange cannot be set twice.');
 					}
 					++random_range$count;
-					this.randomRange = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.randomRange = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 10:
 					if (role_res$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AnimationProto.roleRes cannot be set twice.');
 					}
 					++role_res$count;
-					this.roleRes = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.roleRes = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 11:
 					if (special_effect$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AnimationProto.specialEffect cannot be set twice.');
 					}
 					++special_effect$count;
-					this.specialEffect = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.specialEffect = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 12:
 					if (offset_x$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AnimationProto.offsetX cannot be set twice.');
 					}
 					++offset_x$count;
-					this.offsetX = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.offsetX = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 13:
 					if (offset_y$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AnimationProto.offsetY cannot be set twice.');
 					}
 					++offset_y$count;
-					this.offsetY = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.offsetY = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 14:
 					if (is_multi_direction$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AnimationProto.isMultiDirection cannot be set twice.');
 					}
 					++is_multi_direction$count;
-					this.isMultiDirection = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isMultiDirection = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 15:
 					if (weapon_res$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AnimationProto.weaponRes cannot be set twice.');
 					}
 					++weapon_res$count;
-					this.weaponRes = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.weaponRes = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 16:
 					if (bind_bone$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AnimationProto.bindBone cannot be set twice.');
 					}
 					++bind_bone$count;
-					this.bindBone = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.bindBone = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

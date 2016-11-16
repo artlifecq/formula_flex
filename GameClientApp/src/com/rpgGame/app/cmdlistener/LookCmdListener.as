@@ -16,9 +16,9 @@ package com.rpgGame.app.cmdlistener
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
-	import org.game.netCore.net.BytesUtil;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
+	import org.game.netCore.net_protobuff.BytesUtil;
 	
 	import utils.TimerServer;
 	
@@ -37,10 +37,10 @@ package com.rpgGame.app.cmdlistener
 		
 		override public function start():void
 		{
-			SocketConnection.addCmdListener(ViewOtherHeroModuleMessages.S2C_VIEW_OTHER_HERO_ONLINE,onLookRoleOnline);
-			SocketConnection.addCmdListener(ViewOtherHeroModuleMessages.S2C_VIEW_OTHER_HERO_OFFLINE,onLookRoleOffline);
-			SocketConnection.addCmdListener(ViewOtherHeroModuleMessages.S2C_VIEW_OTHER_HERO_FAIL,onLookFail);
-			SocketConnection.addCmdListener(ViewOtherHeroModuleMessages.S2C_BEEN_VIEWED,onBeenViewed);
+			SocketConnection_protoBuffer.addCmdListener(ViewOtherHeroModuleMessages.S2C_VIEW_OTHER_HERO_ONLINE,onLookRoleOnline);
+			SocketConnection_protoBuffer.addCmdListener(ViewOtherHeroModuleMessages.S2C_VIEW_OTHER_HERO_OFFLINE,onLookRoleOffline);
+			SocketConnection_protoBuffer.addCmdListener(ViewOtherHeroModuleMessages.S2C_VIEW_OTHER_HERO_FAIL,onLookFail);
+			SocketConnection_protoBuffer.addCmdListener(ViewOtherHeroModuleMessages.S2C_BEEN_VIEWED,onBeenViewed);
 			finish();
 		}
 		

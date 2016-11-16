@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.load.loader.resManager
+﻿package org.client.load.loader.resManager
 {
     import flash.display.BitmapData;
     import flash.display.Bitmap;
@@ -63,10 +62,10 @@ package org.client.load.loader.resManager
             };
             var isHas:Boolean = _dataList.some(function (item:ResInfo, index:int, array:Array):Boolean
             {
-                if ((_arg1.url == url))
+                if ((item.url == url))
                 {
-                    _arg1.eventList.push(event);
-                    _arg1.progressEvtList.push(progressEvent);
+					item.eventList.push(event);
+					item.progressEvtList.push(progressEvent);
                     return (true);
                 };
                 return (false);
@@ -451,9 +450,9 @@ package org.client.load.loader.resManager
                             var hasURL:Boolean = _cacheMultiList.some(function (item:Object, index:int, array:Array):Boolean
                             {
                                 var cmap = null;
-                                if ((_arg1.url == resInfo.url))
+                                if ((item.url == resInfo.url))
                                 {
-                                    cmap = _arg1.map;
+                                    cmap = item.map;
                                     for (var i in cacheMap)
                                     {
                                         cmap[i] = cacheMap[i];

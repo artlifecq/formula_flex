@@ -15,7 +15,7 @@ package app.message.P3366LevelDailyGiftInfoProto {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL_MIN:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.P3366LevelDailyGiftInfoProto.P3366LevelDailyGiftDataProto.level_min", "levelMin", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL_MIN:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.P3366LevelDailyGiftInfoProto.P3366LevelDailyGiftDataProto.level_min", "levelMin", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level_min$field:int;
 
@@ -42,7 +42,7 @@ package app.message.P3366LevelDailyGiftInfoProto {
 		/**
 		 *  @private
 		 */
-		public static const PRIZE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.P3366LevelDailyGiftInfoProto.P3366LevelDailyGiftDataProto.prize", "prize", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
+		public static const PRIZE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.P3366LevelDailyGiftInfoProto.P3366LevelDailyGiftDataProto.prize", "prize", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
 
 		private var prize$field:app.message.PrizeProto;
 
@@ -68,11 +68,11 @@ package app.message.P3366LevelDailyGiftInfoProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasLevelMin) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level_min$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level_min$field);
 			}
 			if (hasPrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, prize$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -86,14 +86,14 @@ package app.message.P3366LevelDailyGiftInfoProto {
 			var level_min$count:uint = 0;
 			var prize$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (level_min$count != 0) {
 						throw new flash.errors.IOError('Bad data format: P3366LevelDailyGiftDataProto.levelMin cannot be set twice.');
 					}
 					++level_min$count;
-					this.levelMin = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.levelMin = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (prize$count != 0) {
@@ -101,7 +101,7 @@ package app.message.P3366LevelDailyGiftInfoProto {
 					}
 					++prize$count;
 					this.prize = new app.message.PrizeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.prize);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.prize);
 					break;
 				default:
 					super.readUnknown(input, tag);

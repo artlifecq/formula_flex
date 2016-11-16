@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TEAM_MEMBER_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TeamConfig.team_member_count", "teamMemberCount", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TEAM_MEMBER_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TeamConfig.team_member_count", "teamMemberCount", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var team_member_count$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TEAM_INVITE_REQUEST_EXPIRE_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.TeamConfig.team_invite_request_expire_time", "teamInviteRequestExpireTime", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TEAM_INVITE_REQUEST_EXPIRE_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.TeamConfig.team_invite_request_expire_time", "teamInviteRequestExpireTime", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var team_invite_request_expire_time$field:Int64;
 
@@ -67,11 +67,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasTeamMemberCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, team_member_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, team_member_count$field);
 			}
 			if (hasTeamInviteRequestExpireTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, team_invite_request_expire_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, team_invite_request_expire_time$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -85,21 +85,21 @@ package app.message {
 			var team_member_count$count:uint = 0;
 			var team_invite_request_expire_time$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (team_member_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TeamConfig.teamMemberCount cannot be set twice.');
 					}
 					++team_member_count$count;
-					this.teamMemberCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.teamMemberCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (team_invite_request_expire_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TeamConfig.teamInviteRequestExpireTime cannot be set twice.');
 					}
 					++team_invite_request_expire_time$count;
-					this.teamInviteRequestExpireTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.teamInviteRequestExpireTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

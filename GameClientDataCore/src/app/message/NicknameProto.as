@@ -1,13 +1,20 @@
 package app.message {
-	import com.netease.protobuf.*;
-	use namespace com.netease.protobuf.used_by_generated_code;
-	import com.netease.protobuf.fieldDescriptors.*;
-	import flash.utils.Endian;
-	import flash.utils.IDataInput;
-	import flash.utils.IDataOutput;
-	import flash.utils.IExternalizable;
+	import com.netease.protobuf.Message;
+	import com.netease.protobuf.ReadUtils;
+	import com.netease.protobuf.WireType;
+	import com.netease.protobuf.WriteUtils;
+	import com.netease.protobuf.WritingBuffer;
+	import com.netease.protobuf.used_by_generated_code;
+	import com.netease.protobuf.fieldDescriptors.FieldDescriptor_TYPE_BOOL;
+	import com.netease.protobuf.fieldDescriptors.FieldDescriptor_TYPE_INT32;
+	import com.netease.protobuf.fieldDescriptors.FieldDescriptor_TYPE_MESSAGE;
+	import com.netease.protobuf.fieldDescriptors.FieldDescriptor_TYPE_STRING;
+	import com.netease.protobuf.fieldDescriptors.RepeatedFieldDescriptor_TYPE_INT32;
+	
 	import flash.errors.IOError;
-	import app.message.SpriteStatProto;
+	import flash.utils.IDataInput;
+
+	use namespace com.netease.protobuf.used_by_generated_code;
 	// @@protoc_insertion_point(imports)
 
 	// @@protoc_insertion_point(class_metadata)
@@ -15,7 +22,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.NicknameProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.NicknameProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var id$field:int;
 
@@ -42,7 +49,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.NicknameProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.NicknameProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var name$field:String;
 
@@ -65,7 +72,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DESC:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.NicknameProto.desc", "desc", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const DESC:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.NicknameProto.desc", "desc", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var desc$field:String;
 
@@ -88,7 +95,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RES:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.NicknameProto.res", "res", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const RES:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.NicknameProto.res", "res", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var res$field:String;
 
@@ -111,7 +118,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STAT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.NicknameProto.stat", "stat", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
+		public static const STAT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.NicknameProto.stat", "stat", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
 
 		private var stat$field:app.message.SpriteStatProto;
 
@@ -134,7 +141,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_SPECIAL:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.NicknameProto.is_special", "isSpecial", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_SPECIAL:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.NicknameProto.is_special", "isSpecial", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_special$field:Boolean;
 
@@ -159,7 +166,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const OPERATOR:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.NicknameProto.operator", "operator", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const OPERATOR:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.NicknameProto.operator", "operator", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var operator$field:int;
 
@@ -184,7 +191,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COND_DESC:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.NicknameProto.cond_desc", "condDesc", (8 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const COND_DESC:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.NicknameProto.cond_desc", "condDesc", (8 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var cond_desc$field:String;
 
@@ -207,7 +214,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ACHIEVEMENT_ID:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.NicknameProto.achievement_id", "achievementId", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ACHIEVEMENT_ID:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.NicknameProto.achievement_id", "achievementId", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var achievementId:Array = [];
@@ -215,7 +222,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GROUP:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.NicknameProto.group", "group", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const GROUP:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.NicknameProto.group", "group", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var group$field:String;
 
@@ -241,43 +248,43 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, id$field);
 			}
 			if (hasName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, name$field);
 			}
 			if (hasDesc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, desc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, desc$field);
 			}
 			if (hasRes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, res$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, res$field);
 			}
 			if (hasStat) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, stat$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, stat$field);
 			}
 			if (hasIsSpecial) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_special$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_special$field);
 			}
 			if (hasOperator) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, operator$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, operator$field);
 			}
 			if (hasCondDesc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, cond_desc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, cond_desc$field);
 			}
 			for (var achievementId$index:uint = 0; achievementId$index < this.achievementId.length; ++achievementId$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.achievementId[achievementId$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.achievementId[achievementId$index]);
 			}
 			if (hasGroup) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, group$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, group$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -298,35 +305,35 @@ package app.message {
 			var cond_desc$count:uint = 0;
 			var group$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NicknameProto.id cannot be set twice.');
 					}
 					++id$count;
-					this.id = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.id = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NicknameProto.name cannot be set twice.');
 					}
 					++name$count;
-					this.name = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.name = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (desc$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NicknameProto.desc cannot be set twice.');
 					}
 					++desc$count;
-					this.desc = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.desc = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 4:
 					if (res$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NicknameProto.res cannot be set twice.');
 					}
 					++res$count;
-					this.res = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.res = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 5:
 					if (stat$count != 0) {
@@ -334,42 +341,42 @@ package app.message {
 					}
 					++stat$count;
 					this.stat = new app.message.SpriteStatProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.stat);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.stat);
 					break;
 				case 6:
 					if (is_special$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NicknameProto.isSpecial cannot be set twice.');
 					}
 					++is_special$count;
-					this.isSpecial = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isSpecial = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 7:
 					if (operator$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NicknameProto.operator cannot be set twice.');
 					}
 					++operator$count;
-					this.operator = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.operator = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 8:
 					if (cond_desc$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NicknameProto.condDesc cannot be set twice.');
 					}
 					++cond_desc$count;
-					this.condDesc = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.condDesc = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 9:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.achievementId);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.achievementId);
 						break;
 					}
-					this.achievementId.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.achievementId.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				case 10:
 					if (group$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NicknameProto.group cannot be set twice.');
 					}
 					++group$count;
-					this.group = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.group = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

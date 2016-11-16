@@ -8,8 +8,8 @@ package com.rpgGame.app.cmdlistener.scene
 	import app.cmd.StoryModuleMessages;
 
 	import org.client.mainCore.bean.BaseBean;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
@@ -27,10 +27,10 @@ package com.rpgGame.app.cmdlistener.scene
 
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(StoryModuleMessages.S2C_STORY_FAIL_MSG, onStoryFailMsg);
-			SocketConnection.addCmdListener(StoryModuleMessages.S2C_TRY_ENTER_STORY_DUNGEON, onTryEnterStoryDungeon);
-			SocketConnection.addCmdListener(StoryModuleMessages.S2C_FROZEN_DUNGEON, onFrozenDungeon);
-			SocketConnection.addCmdListener(StoryModuleMessages.S2C_DUNGEON_END, onDungeonEnd);
+			SocketConnection_protoBuffer.addCmdListener(StoryModuleMessages.S2C_STORY_FAIL_MSG, onStoryFailMsg);
+			SocketConnection_protoBuffer.addCmdListener(StoryModuleMessages.S2C_TRY_ENTER_STORY_DUNGEON, onTryEnterStoryDungeon);
+			SocketConnection_protoBuffer.addCmdListener(StoryModuleMessages.S2C_FROZEN_DUNGEON, onFrozenDungeon);
+			SocketConnection_protoBuffer.addCmdListener(StoryModuleMessages.S2C_DUNGEON_END, onDungeonEnd);
 			//
 			finish();
 		}

@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PER:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ExpPrizeProto.per", "per", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PER:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ExpPrizeProto.per", "per", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var per$field:int;
 
@@ -44,7 +44,7 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasPer) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, per$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, per$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -57,14 +57,14 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var per$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (per$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ExpPrizeProto.per cannot be set twice.');
 					}
 					++per$count;
-					this.per = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.per = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const START_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.FestivalLotteryRuleConfigProto.start_time", "startTime", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const START_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.FestivalLotteryRuleConfigProto.start_time", "startTime", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var start_time$field:Int64;
 
@@ -38,7 +38,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const END_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.FestivalLotteryRuleConfigProto.end_time", "endTime", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const END_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.FestivalLotteryRuleConfigProto.end_time", "endTime", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var end_time$field:Int64;
 
@@ -61,7 +61,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FestivalLotteryRuleConfigProto.type", "type", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FestivalLotteryRuleConfigProto.type", "type", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var type$field:int;
 
@@ -88,7 +88,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RULE_LIST:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.FestivalLotteryRuleConfigProto.rule_list", "ruleList", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FestivalLotteryRuleConfigProto.FestivalLotteryRuleProto; });
+		public static const RULE_LIST:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.FestivalLotteryRuleConfigProto.rule_list", "ruleList", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FestivalLotteryRuleConfigProto.FestivalLotteryRuleProto; });
 
 		[ArrayElementType("app.message.FestivalLotteryRuleConfigProto.FestivalLotteryRuleProto")]
 		public var ruleList:Array = [];
@@ -99,19 +99,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasStartTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, start_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, start_time$field);
 			}
 			if (hasEndTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, end_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, end_time$field);
 			}
 			if (hasType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, type$field);
 			}
 			for (var ruleList$index:uint = 0; ruleList$index < this.ruleList.length; ++ruleList$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.ruleList[ruleList$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.ruleList[ruleList$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -126,31 +126,31 @@ package app.message {
 			var end_time$count:uint = 0;
 			var type$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (start_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FestivalLotteryRuleConfigProto.startTime cannot be set twice.');
 					}
 					++start_time$count;
-					this.startTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.startTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (end_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FestivalLotteryRuleConfigProto.endTime cannot be set twice.');
 					}
 					++end_time$count;
-					this.endTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.endTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 3:
 					if (type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FestivalLotteryRuleConfigProto.type cannot be set twice.');
 					}
 					++type$count;
-					this.type = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.type = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
-					this.ruleList.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.FestivalLotteryRuleConfigProto.FestivalLotteryRuleProto()));
+					this.ruleList.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.FestivalLotteryRuleConfigProto.FestivalLotteryRuleProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

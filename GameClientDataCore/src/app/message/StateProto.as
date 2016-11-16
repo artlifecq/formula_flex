@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.StateProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.StateProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var id$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.StateProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.StateProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var name$field:String;
 
@@ -64,7 +64,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_BUFF:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.StateProto.is_buff", "isBuff", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_BUFF:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.StateProto.is_buff", "isBuff", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_buff$field:Boolean;
 
@@ -89,7 +89,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GROUP:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.StateProto.group", "group", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const GROUP:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.StateProto.group", "group", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var group$field:int;
 
@@ -114,7 +114,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STACK_TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.StateProto.stack_type", "stackType", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const STACK_TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.StateProto.stack_type", "stackType", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var stack_type$field:int;
 
@@ -139,7 +139,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ICON:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.StateProto.icon", "icon", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const ICON:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.StateProto.icon", "icon", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var icon$field:String;
 
@@ -162,7 +162,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DESCRIPTION:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.StateProto.description", "description", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const DESCRIPTION:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.StateProto.description", "description", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var description$field:String;
 
@@ -185,7 +185,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NOTICE_ON_ADD:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.StateProto.notice_on_add", "noticeOnAdd", (13 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NOTICE_ON_ADD:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.StateProto.notice_on_add", "noticeOnAdd", (13 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var notice_on_add$field:String;
 
@@ -208,7 +208,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.StateProto.total_time", "totalTime", (14 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOTAL_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.StateProto.total_time", "totalTime", (14 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var total_time$field:Int64;
 
@@ -231,7 +231,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_HIDDEN:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.StateProto.is_hidden", "isHidden", (15 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_HIDDEN:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.StateProto.is_hidden", "isHidden", (15 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_hidden$field:Boolean;
 
@@ -256,7 +256,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const INIT_ANIMATION:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.StateProto.init_animation", "initAnimation", (20 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const INIT_ANIMATION:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.StateProto.init_animation", "initAnimation", (20 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var initAnimation:Array = [];
@@ -264,7 +264,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ANIMATION:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.StateProto.animation", "animation", (21 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ANIMATION:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.StateProto.animation", "animation", (21 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var animation:Array = [];
@@ -272,7 +272,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DISAPPEAR_ANIMATION:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.StateProto.disappear_animation", "disappearAnimation", (22 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DISAPPEAR_ANIMATION:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.StateProto.disappear_animation", "disappearAnimation", (22 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var disappearAnimation:Array = [];
@@ -280,7 +280,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BEEN_HURT_ANIMATION:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.StateProto.been_hurt_animation", "beenHurtAnimation", (23 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BEEN_HURT_ANIMATION:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.StateProto.been_hurt_animation", "beenHurtAnimation", (23 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var beenHurtAnimation:Array = [];
@@ -288,7 +288,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_STUN:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.StateProto.is_stun", "isStun", (30 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_STUN:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.StateProto.is_stun", "isStun", (30 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_stun$field:Boolean;
 
@@ -313,7 +313,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_UNMOVABLE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.StateProto.is_unmovable", "isUnmovable", (31 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_UNMOVABLE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.StateProto.is_unmovable", "isUnmovable", (31 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_unmovable$field:Boolean;
 
@@ -338,7 +338,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_HUSH:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.StateProto.is_hush", "isHush", (32 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_HUSH:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.StateProto.is_hush", "isHush", (32 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_hush$field:Boolean;
 
@@ -363,7 +363,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_INVISIBLE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.StateProto.is_invisible", "isInvisible", (34 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_INVISIBLE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.StateProto.is_invisible", "isInvisible", (34 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_invisible$field:Boolean;
 
@@ -388,7 +388,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_TRUE_SIGHT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.StateProto.is_true_sight", "isTrueSight", (35 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_TRUE_SIGHT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.StateProto.is_true_sight", "isTrueSight", (35 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_true_sight$field:Boolean;
 
@@ -413,7 +413,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_INVICIBLE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.StateProto.is_invicible", "isInvicible", (36 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_INVICIBLE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.StateProto.is_invicible", "isInvicible", (36 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_invicible$field:Boolean;
 
@@ -438,7 +438,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_HUN_LUAN:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.StateProto.is_hun_luan", "isHunLuan", (37 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_HUN_LUAN:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.StateProto.is_hun_luan", "isHunLuan", (37 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_hun_luan$field:Boolean;
 
@@ -466,87 +466,87 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, id$field);
 			}
 			if (hasName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, name$field);
 			}
 			if (hasIsBuff) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_buff$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_buff$field);
 			}
 			if (hasGroup) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, group$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, group$field);
 			}
 			if (hasStackType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, stack_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, stack_type$field);
 			}
 			if (hasIcon) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, icon$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, icon$field);
 			}
 			if (hasDescription) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, description$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, description$field);
 			}
 			if (hasNoticeOnAdd) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, notice_on_add$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, notice_on_add$field);
 			}
 			if (hasTotalTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 14);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, total_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, total_time$field);
 			}
 			if (hasIsHidden) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 15);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_hidden$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_hidden$field);
 			}
 			for (var initAnimation$index:uint = 0; initAnimation$index < this.initAnimation.length; ++initAnimation$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 20);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.initAnimation[initAnimation$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.initAnimation[initAnimation$index]);
 			}
 			for (var animation$index:uint = 0; animation$index < this.animation.length; ++animation$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 21);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.animation[animation$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.animation[animation$index]);
 			}
 			for (var disappearAnimation$index:uint = 0; disappearAnimation$index < this.disappearAnimation.length; ++disappearAnimation$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 22);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.disappearAnimation[disappearAnimation$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.disappearAnimation[disappearAnimation$index]);
 			}
 			for (var beenHurtAnimation$index:uint = 0; beenHurtAnimation$index < this.beenHurtAnimation.length; ++beenHurtAnimation$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 23);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.beenHurtAnimation[beenHurtAnimation$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.beenHurtAnimation[beenHurtAnimation$index]);
 			}
 			if (hasIsStun) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 30);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_stun$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_stun$field);
 			}
 			if (hasIsUnmovable) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 31);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_unmovable$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_unmovable$field);
 			}
 			if (hasIsHush) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 32);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_hush$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_hush$field);
 			}
 			if (hasIsInvisible) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 34);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_invisible$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_invisible$field);
 			}
 			if (hasIsTrueSight) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 35);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_true_sight$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_true_sight$field);
 			}
 			if (hasIsInvicible) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 36);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_invicible$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_invicible$field);
 			}
 			if (hasIsHunLuan) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 37);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_hun_luan$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_hun_luan$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -575,154 +575,154 @@ package app.message {
 			var is_invicible$count:uint = 0;
 			var is_hun_luan$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StateProto.id cannot be set twice.');
 					}
 					++id$count;
-					this.id = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.id = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StateProto.name cannot be set twice.');
 					}
 					++name$count;
-					this.name = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.name = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (is_buff$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StateProto.isBuff cannot be set twice.');
 					}
 					++is_buff$count;
-					this.isBuff = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isBuff = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 4:
 					if (group$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StateProto.group cannot be set twice.');
 					}
 					++group$count;
-					this.group = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.group = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 10:
 					if (stack_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StateProto.stackType cannot be set twice.');
 					}
 					++stack_type$count;
-					this.stackType = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.stackType = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 11:
 					if (icon$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StateProto.icon cannot be set twice.');
 					}
 					++icon$count;
-					this.icon = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.icon = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 12:
 					if (description$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StateProto.description cannot be set twice.');
 					}
 					++description$count;
-					this.description = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.description = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 13:
 					if (notice_on_add$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StateProto.noticeOnAdd cannot be set twice.');
 					}
 					++notice_on_add$count;
-					this.noticeOnAdd = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.noticeOnAdd = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 14:
 					if (total_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StateProto.totalTime cannot be set twice.');
 					}
 					++total_time$count;
-					this.totalTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.totalTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 15:
 					if (is_hidden$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StateProto.isHidden cannot be set twice.');
 					}
 					++is_hidden$count;
-					this.isHidden = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isHidden = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 20:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.initAnimation);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.initAnimation);
 						break;
 					}
-					this.initAnimation.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.initAnimation.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				case 21:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.animation);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.animation);
 						break;
 					}
-					this.animation.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.animation.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				case 22:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.disappearAnimation);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.disappearAnimation);
 						break;
 					}
-					this.disappearAnimation.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.disappearAnimation.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				case 23:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.beenHurtAnimation);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.beenHurtAnimation);
 						break;
 					}
-					this.beenHurtAnimation.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.beenHurtAnimation.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				case 30:
 					if (is_stun$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StateProto.isStun cannot be set twice.');
 					}
 					++is_stun$count;
-					this.isStun = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isStun = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 31:
 					if (is_unmovable$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StateProto.isUnmovable cannot be set twice.');
 					}
 					++is_unmovable$count;
-					this.isUnmovable = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isUnmovable = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 32:
 					if (is_hush$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StateProto.isHush cannot be set twice.');
 					}
 					++is_hush$count;
-					this.isHush = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isHush = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 34:
 					if (is_invisible$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StateProto.isInvisible cannot be set twice.');
 					}
 					++is_invisible$count;
-					this.isInvisible = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isInvisible = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 35:
 					if (is_true_sight$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StateProto.isTrueSight cannot be set twice.');
 					}
 					++is_true_sight$count;
-					this.isTrueSight = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isTrueSight = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 36:
 					if (is_invicible$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StateProto.isInvicible cannot be set twice.');
 					}
 					++is_invicible$count;
-					this.isInvicible = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isInvicible = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 37:
 					if (is_hun_luan$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StateProto.isHunLuan cannot be set twice.');
 					}
 					++is_hun_luan$count;
-					this.isHunLuan = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isHunLuan = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

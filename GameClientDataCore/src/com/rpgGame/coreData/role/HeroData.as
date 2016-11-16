@@ -1,32 +1,27 @@
 package com.rpgGame.coreData.role
 {
-	import com.rpgGame.coreData.cfg.AnimationDataManager;
-	import com.rpgGame.coreData.cfg.SpellEffectDataManager;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.crown.CountryModuleData;
 	import com.rpgGame.coreData.info.fight.skill.ActiveSpellList;
 	import com.rpgGame.coreData.info.mount.MountModuleObjClientData;
 	import com.rpgGame.coreData.info.team.TeamUnit;
 	import com.rpgGame.coreData.info.upgrade.AmountInfo;
-	import com.rpgGame.coreData.type.SpellBlinkType;
 	import com.rpgGame.coreData.type.SpellTargetType;
 	
 	import flash.utils.ByteArray;
 	
 	import app.message.ActiveSpellProto;
 	import app.message.AmountType;
-	import app.message.AnimationProto;
 	import app.message.BiaoModuleObjProto;
 	import app.message.CountryModuleObjProto;
 	import app.message.HeroProto;
 	import app.message.ModelProto;
 	import app.message.MountModuleObjClientProto;
 	import app.message.OtherHeroProto;
-	import app.message.SpellEffectProto;
 	import app.message.SpellProto;
 	
-	import org.game.netCore.net.ByteBuffer;
-	import org.game.netCore.net.BytesUtil;
+	import org.game.netCore.net_protobuff.ByteBuffer;
+	import org.game.netCore.net_protobuff.BytesUtil;
 	
 	/**
 	 *

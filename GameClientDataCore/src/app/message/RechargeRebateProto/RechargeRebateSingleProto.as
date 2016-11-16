@@ -15,7 +15,7 @@ package app.message.RechargeRebateProto {
 		/**
 		 *  @private
 		 */
-		public static const JINZI:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.RechargeRebateProto.RechargeRebateSingleProto.jinzi", "jinzi", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const JINZI:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.RechargeRebateProto.RechargeRebateSingleProto.jinzi", "jinzi", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var jinzi$field:int;
 
@@ -42,7 +42,7 @@ package app.message.RechargeRebateProto {
 		/**
 		 *  @private
 		 */
-		public static const LIMIT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.RechargeRebateProto.RechargeRebateSingleProto.limit", "limit", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LIMIT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.RechargeRebateProto.RechargeRebateSingleProto.limit", "limit", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var limit$field:int;
 
@@ -67,7 +67,7 @@ package app.message.RechargeRebateProto {
 		/**
 		 *  @private
 		 */
-		public static const PRIZE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.RechargeRebateProto.RechargeRebateSingleProto.prize", "prize", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
+		public static const PRIZE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.RechargeRebateProto.RechargeRebateSingleProto.prize", "prize", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
 
 		private var prize$field:app.message.PrizeProto;
 
@@ -93,15 +93,15 @@ package app.message.RechargeRebateProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasJinzi) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, jinzi$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, jinzi$field);
 			}
 			if (hasLimit) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, limit$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, limit$field);
 			}
 			if (hasPrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, prize$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -116,21 +116,21 @@ package app.message.RechargeRebateProto {
 			var limit$count:uint = 0;
 			var prize$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (jinzi$count != 0) {
 						throw new flash.errors.IOError('Bad data format: RechargeRebateSingleProto.jinzi cannot be set twice.');
 					}
 					++jinzi$count;
-					this.jinzi = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.jinzi = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (limit$count != 0) {
 						throw new flash.errors.IOError('Bad data format: RechargeRebateSingleProto.limit cannot be set twice.');
 					}
 					++limit$count;
-					this.limit = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.limit = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (prize$count != 0) {
@@ -138,7 +138,7 @@ package app.message.RechargeRebateProto {
 					}
 					++prize$count;
 					this.prize = new app.message.PrizeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.prize);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.prize);
 					break;
 				default:
 					super.readUnknown(input, tag);

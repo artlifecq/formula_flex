@@ -15,7 +15,7 @@ package app.message.TaskTargetProto {
 		/**
 		 *  @private
 		 */
-		public static const NPC_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TaskTargetProto.ReplyNpcTargetProto.npc_id", "npcId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const NPC_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TaskTargetProto.ReplyNpcTargetProto.npc_id", "npcId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var npc_id$field:int;
 
@@ -42,7 +42,7 @@ package app.message.TaskTargetProto {
 		/**
 		 *  @private
 		 */
-		public static const NPC_DIALOG:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.TaskTargetProto.ReplyNpcTargetProto.npc_dialog", "npcDialog", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NPC_DIALOG:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.TaskTargetProto.ReplyNpcTargetProto.npc_dialog", "npcDialog", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var npc_dialog$field:flash.utils.ByteArray;
 
@@ -65,7 +65,7 @@ package app.message.TaskTargetProto {
 		/**
 		 *  @private
 		 */
-		public static const NPC_EXAM_QUESTION:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.TaskTargetProto.ReplyNpcTargetProto.npc_exam_question", "npcExamQuestion", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NPC_EXAM_QUESTION:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.TaskTargetProto.ReplyNpcTargetProto.npc_exam_question", "npcExamQuestion", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var npc_exam_question$field:String;
 
@@ -88,7 +88,7 @@ package app.message.TaskTargetProto {
 		/**
 		 *  @private
 		 */
-		public static const NPC_EXAM_SELECTIONS:RepeatedFieldDescriptor$TYPE_STRING = new RepeatedFieldDescriptor$TYPE_STRING("app.message.TaskTargetProto.ReplyNpcTargetProto.npc_exam_selections", "npcExamSelections", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NPC_EXAM_SELECTIONS:RepeatedFieldDescriptor_TYPE_STRING = new RepeatedFieldDescriptor_TYPE_STRING("app.message.TaskTargetProto.ReplyNpcTargetProto.npc_exam_selections", "npcExamSelections", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		[ArrayElementType("String")]
 		public var npcExamSelections:Array = [];
@@ -96,7 +96,7 @@ package app.message.TaskTargetProto {
 		/**
 		 *  @private
 		 */
-		public static const NPC_EXAM_ANSWER:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TaskTargetProto.ReplyNpcTargetProto.npc_exam_answer", "npcExamAnswer", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const NPC_EXAM_ANSWER:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TaskTargetProto.ReplyNpcTargetProto.npc_exam_answer", "npcExamAnswer", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var npc_exam_answer$field:int;
 
@@ -124,23 +124,23 @@ package app.message.TaskTargetProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasNpcId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, npc_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, npc_id$field);
 			}
 			if (hasNpcDialog) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, npc_dialog$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, npc_dialog$field);
 			}
 			if (hasNpcExamQuestion) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, npc_exam_question$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, npc_exam_question$field);
 			}
 			for (var npcExamSelections$index:uint = 0; npcExamSelections$index < this.npcExamSelections.length; ++npcExamSelections$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, this.npcExamSelections[npcExamSelections$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, this.npcExamSelections[npcExamSelections$index]);
 			}
 			if (hasNpcExamAnswer) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, npc_exam_answer$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, npc_exam_answer$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -156,38 +156,38 @@ package app.message.TaskTargetProto {
 			var npc_exam_question$count:uint = 0;
 			var npc_exam_answer$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (npc_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ReplyNpcTargetProto.npcId cannot be set twice.');
 					}
 					++npc_id$count;
-					this.npcId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.npcId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (npc_dialog$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ReplyNpcTargetProto.npcDialog cannot be set twice.');
 					}
 					++npc_dialog$count;
-					this.npcDialog = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.npcDialog = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 3:
 					if (npc_exam_question$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ReplyNpcTargetProto.npcExamQuestion cannot be set twice.');
 					}
 					++npc_exam_question$count;
-					this.npcExamQuestion = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.npcExamQuestion = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 4:
-					this.npcExamSelections.push(com.netease.protobuf.ReadUtils.read$TYPE_STRING(input));
+					this.npcExamSelections.push(com.netease.protobuf.ReadUtils.read_TYPE_STRING(input));
 					break;
 				case 5:
 					if (npc_exam_answer$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ReplyNpcTargetProto.npcExamAnswer cannot be set twice.');
 					}
 					++npc_exam_answer$count;
-					this.npcExamAnswer = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.npcExamAnswer = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

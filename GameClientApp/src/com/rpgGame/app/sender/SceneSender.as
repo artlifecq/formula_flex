@@ -14,8 +14,8 @@ package com.rpgGame.app.sender
 	import app.cmd.SceneModuleMessages;
 	import app.cmd.SimpleDungeonModuleMessages;
 
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 * 场景消息
@@ -33,7 +33,7 @@ package com.rpgGame.app.sender
 			GameLog.add("3_9：准备换场景");
 			var by : ByteBuffer = new ByteBuffer();
 			by.writeVarint32(transId);
-			SocketConnection.send(SceneModuleMessages.C2S_SCENE_REQUEST_TRANSPORT, by);
+			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_REQUEST_TRANSPORT, by);
 		}
 
 		/**
@@ -44,7 +44,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(viewRange);
-			SocketConnection.send(SceneModuleMessages.C2S_SCENE_LOADED, _bytes);
+			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_LOADED, _bytes);
 		}
 
 		/**
@@ -54,7 +54,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(viewRange);
-			SocketConnection.send(SceneModuleMessages.C2S_SCENE_CHANGE_VIEW_RANGE, _bytes);
+			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_CHANGE_VIEW_RANGE, _bytes);
 		}
 
 		/**
@@ -76,7 +76,7 @@ package com.rpgGame.app.sender
 				_bytes.writeVarint32(pos3D.x);
 				_bytes.writeVarint32(pos3D.z);
 			}
-			SocketConnection.send(SceneModuleMessages.C2S_SCENE_HERO_MOVE, _bytes);
+			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_HERO_MOVE, _bytes);
 		}
 
 		public static function cancelWalk() : void
@@ -125,7 +125,7 @@ package com.rpgGame.app.sender
 				}
 			}
 
-			SocketConnection.send(SceneModuleMessages.C2S_SCENE_MAP_TRANSPORT, _bytes);
+			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_MAP_TRANSPORT, _bytes);
 		}
 
 		/**
@@ -142,7 +142,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(jumpAction);
-			SocketConnection.send(SceneModuleMessages.C2S_SCENE_HERO_JUMP, _bytes);
+			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_HERO_JUMP, _bytes);
 		}
 
 		/**

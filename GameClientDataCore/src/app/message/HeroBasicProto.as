@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ID:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.HeroBasicProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ID:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.HeroBasicProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var id$field:Int64;
 
@@ -38,7 +38,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.HeroBasicProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.HeroBasicProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var name$field:String;
 
@@ -61,7 +61,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.HeroBasicProto.country", "country", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COUNTRY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.HeroBasicProto.country", "country", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var country$field:int;
 
@@ -88,7 +88,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_MALE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.HeroBasicProto.is_male", "isMale", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_MALE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.HeroBasicProto.is_male", "isMale", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_male$field:Boolean;
 
@@ -113,7 +113,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HEAD:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.HeroBasicProto.head", "head", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const HEAD:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.HeroBasicProto.head", "head", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var head$field:int;
 
@@ -138,7 +138,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CREATE_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.HeroBasicProto.create_time", "createTime", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CREATE_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.HeroBasicProto.create_time", "createTime", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var create_time$field:Int64;
 
@@ -161,7 +161,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MODEL:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroBasicProto.model", "model", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ModelProto; });
+		public static const MODEL:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroBasicProto.model", "model", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ModelProto; });
 
 		private var model$field:app.message.ModelProto;
 
@@ -187,31 +187,31 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, id$field);
 			}
 			if (hasName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, name$field);
 			}
 			if (hasCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, country$field);
 			}
 			if (hasIsMale) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_male$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_male$field);
 			}
 			if (hasHead) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, head$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, head$field);
 			}
 			if (hasCreateTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, create_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, create_time$field);
 			}
 			if (hasModel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, model$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, model$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -230,49 +230,49 @@ package app.message {
 			var create_time$count:uint = 0;
 			var model$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroBasicProto.id cannot be set twice.');
 					}
 					++id$count;
-					this.id = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.id = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroBasicProto.name cannot be set twice.');
 					}
 					++name$count;
-					this.name = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.name = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (country$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroBasicProto.country cannot be set twice.');
 					}
 					++country$count;
-					this.country = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.country = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (is_male$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroBasicProto.isMale cannot be set twice.');
 					}
 					++is_male$count;
-					this.isMale = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isMale = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 5:
 					if (head$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroBasicProto.head cannot be set twice.');
 					}
 					++head$count;
-					this.head = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.head = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (create_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroBasicProto.createTime cannot be set twice.');
 					}
 					++create_time$count;
-					this.createTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.createTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 7:
 					if (model$count != 0) {
@@ -280,7 +280,7 @@ package app.message {
 					}
 					++model$count;
 					this.model = new app.message.ModelProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.model);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.model);
 					break;
 				default:
 					super.readUnknown(input, tag);

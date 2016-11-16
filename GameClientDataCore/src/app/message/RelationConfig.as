@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FRIEND_COUNT_LIMIT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.RelationConfig.friend_count_limit", "friendCountLimit", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FRIEND_COUNT_LIMIT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.RelationConfig.friend_count_limit", "friendCountLimit", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var friend_count_limit$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BLACK_COUNT_LIMIT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.RelationConfig.black_count_limit", "blackCountLimit", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BLACK_COUNT_LIMIT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.RelationConfig.black_count_limit", "blackCountLimit", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var black_count_limit$field:int;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ENEMY_COUNT_LIMIT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.RelationConfig.enemy_count_limit", "enemyCountLimit", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ENEMY_COUNT_LIMIT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.RelationConfig.enemy_count_limit", "enemyCountLimit", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var enemy_count_limit$field:int;
 
@@ -91,7 +91,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEGREE_TITLE:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.RelationConfig.degree_title", "degreeTitle", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const DEGREE_TITLE:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.RelationConfig.degree_title", "degreeTitle", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var degree_title$field:String;
 
@@ -117,19 +117,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasFriendCountLimit) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, friend_count_limit$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, friend_count_limit$field);
 			}
 			if (hasBlackCountLimit) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, black_count_limit$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, black_count_limit$field);
 			}
 			if (hasEnemyCountLimit) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, enemy_count_limit$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, enemy_count_limit$field);
 			}
 			if (hasDegreeTitle) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, degree_title$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, degree_title$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -145,35 +145,35 @@ package app.message {
 			var enemy_count_limit$count:uint = 0;
 			var degree_title$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (friend_count_limit$count != 0) {
 						throw new flash.errors.IOError('Bad data format: RelationConfig.friendCountLimit cannot be set twice.');
 					}
 					++friend_count_limit$count;
-					this.friendCountLimit = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.friendCountLimit = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (black_count_limit$count != 0) {
 						throw new flash.errors.IOError('Bad data format: RelationConfig.blackCountLimit cannot be set twice.');
 					}
 					++black_count_limit$count;
-					this.blackCountLimit = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.blackCountLimit = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (enemy_count_limit$count != 0) {
 						throw new flash.errors.IOError('Bad data format: RelationConfig.enemyCountLimit cannot be set twice.');
 					}
 					++enemy_count_limit$count;
-					this.enemyCountLimit = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.enemyCountLimit = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (degree_title$count != 0) {
 						throw new flash.errors.IOError('Bad data format: RelationConfig.degreeTitle cannot be set twice.');
 					}
 					++degree_title$count;
-					this.degreeTitle = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.degreeTitle = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

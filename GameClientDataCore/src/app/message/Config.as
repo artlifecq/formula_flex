@@ -50,7 +50,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SCENE_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.scene_config", "sceneConfig", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SceneConfig; });
+		public static const SCENE_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.scene_config", "sceneConfig", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SceneConfig; });
 
 		private var scene_config$field:app.message.SceneConfig;
 
@@ -73,7 +73,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GOODS_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.goods_config", "goodsConfig", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsConfig; });
+		public static const GOODS_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.goods_config", "goodsConfig", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsConfig; });
 
 		private var goods_config$field:app.message.GoodsConfig;
 
@@ -96,7 +96,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SPELL_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.spell_config", "spellConfig", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpellConfig; });
+		public static const SPELL_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.spell_config", "spellConfig", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpellConfig; });
 
 		private var spell_config$field:app.message.SpellConfig;
 
@@ -119,7 +119,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ACHIEVEMENT_NICKNAME_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.achievement_nickname_config", "achievementNicknameConfig", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AchievementAndNickNameConfig; });
+		public static const ACHIEVEMENT_NICKNAME_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.achievement_nickname_config", "achievementNicknameConfig", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AchievementAndNickNameConfig; });
 
 		private var achievement_nickname_config$field:app.message.AchievementAndNickNameConfig;
 
@@ -142,7 +142,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RACE_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.race_config", "raceConfig", (14 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.RaceConfig; });
+		public static const RACE_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.race_config", "raceConfig", (14 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.RaceConfig; });
 
 		private var race_config$field:app.message.RaceConfig;
 
@@ -165,7 +165,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SHOP_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.shop_config", "shopConfig", (20 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ShopConfig; });
+		public static const SHOP_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.shop_config", "shopConfig", (20 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ShopConfig; });
 
 		private var shop_config$field:app.message.ShopConfig;
 
@@ -188,7 +188,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TASK_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.task_config", "taskConfig", (25 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TaskConfig; });
+		public static const TASK_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.task_config", "taskConfig", (25 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TaskConfig; });
 
 		private var task_config$field:app.message.TaskConfig;
 
@@ -211,7 +211,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MONSTER_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.monster_config", "monsterConfig", (30 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MonsterConfig; });
+		public static const MONSTER_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.monster_config", "monsterConfig", (30 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MonsterConfig; });
 
 		private var monster_config$field:app.message.MonsterConfig;
 
@@ -234,7 +234,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COLLEC_OBJECT_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.collec_object_config", "collecObjectConfig", (35 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CollectObjectConfig; });
+		public static const COLLEC_OBJECT_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.collec_object_config", "collecObjectConfig", (35 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CollectObjectConfig; });
 
 		private var collec_object_config$field:app.message.CollectObjectConfig;
 
@@ -257,7 +257,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FAMILY:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.family", "family", (40 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyConfig; });
+		public static const FAMILY:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.family", "family", (40 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyConfig; });
 
 		private var family$field:app.message.FamilyConfig;
 
@@ -280,7 +280,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const VIPS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.vips", "vips", (45 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.VipsProto; });
+		public static const VIPS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.vips", "vips", (45 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.VipsProto; });
 
 		private var vips$field:app.message.VipsProto;
 
@@ -303,7 +303,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MOUNT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.mount", "mount", (50 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MountConfig; });
+		public static const MOUNT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.mount", "mount", (50 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MountConfig; });
 
 		private var mount$field:app.message.MountConfig;
 
@@ -326,7 +326,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EXAM:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.exam", "exam", (55 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ExamConfig; });
+		public static const EXAM:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.exam", "exam", (55 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ExamConfig; });
 
 		private var exam$field:app.message.ExamConfig;
 
@@ -349,7 +349,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const WELFARE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.welfare", "welfare", (60 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.WelfareConfig; });
+		public static const WELFARE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.welfare", "welfare", (60 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.WelfareConfig; });
 
 		private var welfare$field:app.message.WelfareConfig;
 
@@ -372,7 +372,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CHAT_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.chat_config", "chatConfig", (80 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ChatConfig; });
+		public static const CHAT_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.chat_config", "chatConfig", (80 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ChatConfig; });
 
 		private var chat_config$field:app.message.ChatConfig;
 
@@ -395,7 +395,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.country_config", "countryConfig", (100 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryConfig; });
+		public static const COUNTRY_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.country_config", "countryConfig", (100 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryConfig; });
 
 		private var country_config$field:app.message.CountryConfig;
 
@@ -418,7 +418,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY_WAR_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.country_war_config", "countryWarConfig", (101 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryWarConfig; });
+		public static const COUNTRY_WAR_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.country_war_config", "countryWarConfig", (101 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryWarConfig; });
 
 		private var country_war_config$field:app.message.CountryWarConfig;
 
@@ -441,7 +441,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.level_config", "levelConfig", (85 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.LevelConfig; });
+		public static const LEVEL_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.level_config", "levelConfig", (85 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.LevelConfig; });
 
 		private var level_config$field:app.message.LevelConfig;
 
@@ -464,7 +464,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SCENE_TRANPORTS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.scene_tranports", "sceneTranports", (103 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SceneTransportsProto; });
+		public static const SCENE_TRANPORTS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.scene_tranports", "sceneTranports", (103 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SceneTransportsProto; });
 
 		private var scene_tranports$field:app.message.SceneTransportsProto;
 
@@ -487,7 +487,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ALL_UNLOCK_DATA:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.all_unlock_data", "allUnlockData", (104 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.Config.AllGoodsContainerUnlockProto; });
+		public static const ALL_UNLOCK_DATA:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.all_unlock_data", "allUnlockData", (104 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.Config.AllGoodsContainerUnlockProto; });
 
 		private var all_unlock_data$field:app.message.Config.AllGoodsContainerUnlockProto;
 
@@ -510,7 +510,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAIL_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.mail_config", "mailConfig", (210 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MailConfig; });
+		public static const MAIL_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.mail_config", "mailConfig", (210 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MailConfig; });
 
 		private var mail_config$field:app.message.MailConfig;
 
@@ -533,7 +533,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ADD_SPRITE_STAT_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.add_sprite_stat_config", "addSpriteStatConfig", (211 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AddSpriteStatConfig; });
+		public static const ADD_SPRITE_STAT_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.add_sprite_stat_config", "addSpriteStatConfig", (211 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AddSpriteStatConfig; });
 
 		private var add_sprite_stat_config$field:app.message.AddSpriteStatConfig;
 
@@ -556,7 +556,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TEAM_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.team_config", "teamConfig", (212 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TeamConfig; });
+		public static const TEAM_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.team_config", "teamConfig", (212 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TeamConfig; });
 
 		private var team_config$field:app.message.TeamConfig;
 
@@ -579,7 +579,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RELATION_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.relation_config", "relationConfig", (213 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.RelationConfig; });
+		public static const RELATION_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.relation_config", "relationConfig", (213 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.RelationConfig; });
 
 		private var relation_config$field:app.message.RelationConfig;
 
@@ -602,7 +602,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EQUIPMENT_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.equipment_config", "equipmentConfig", (214 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentConfig; });
+		public static const EQUIPMENT_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.equipment_config", "equipmentConfig", (214 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentConfig; });
 
 		private var equipment_config$field:app.message.EquipmentConfig;
 
@@ -625,7 +625,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const KING_WAR_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.king_war_config", "kingWarConfig", (215 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.KingWarConfig; });
+		public static const KING_WAR_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.king_war_config", "kingWarConfig", (215 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.KingWarConfig; });
 
 		private var king_war_config$field:app.message.KingWarConfig;
 
@@ -648,7 +648,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MISC_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.misc_config", "miscConfig", (250 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MiscConfig; });
+		public static const MISC_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.misc_config", "miscConfig", (250 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MiscConfig; });
 
 		private var misc_config$field:app.message.MiscConfig;
 
@@ -671,7 +671,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BIAO_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.biao_config", "biaoConfig", (251 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BiaoConfig; });
+		public static const BIAO_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.biao_config", "biaoConfig", (251 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BiaoConfig; });
 
 		private var biao_config$field:app.message.BiaoConfig;
 
@@ -694,7 +694,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TRADE_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.trade_config", "tradeConfig", (252 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TradeConfig; });
+		public static const TRADE_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.trade_config", "tradeConfig", (252 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TradeConfig; });
 
 		private var trade_config$field:app.message.TradeConfig;
 
@@ -717,7 +717,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TAO_NI_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.tao_ni_config", "taoNiConfig", (253 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TaoNiConfig; });
+		public static const TAO_NI_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.tao_ni_config", "taoNiConfig", (253 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TaoNiConfig; });
 
 		private var tao_ni_config$field:app.message.TaoNiConfig;
 
@@ -740,7 +740,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RELIVE_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.relive_config", "reliveConfig", (254 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ReliveConfig; });
+		public static const RELIVE_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.relive_config", "reliveConfig", (254 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ReliveConfig; });
 
 		private var relive_config$field:app.message.ReliveConfig;
 
@@ -763,7 +763,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PK_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.pk_config", "pkConfig", (255 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PkConfig; });
+		public static const PK_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.pk_config", "pkConfig", (255 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PkConfig; });
 
 		private var pk_config$field:app.message.PkConfig;
 
@@ -786,7 +786,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GUILD_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.guild_config", "guildConfig", (256 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildConfig; });
+		public static const GUILD_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.guild_config", "guildConfig", (256 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildConfig; });
 
 		private var guild_config$field:app.message.GuildConfig;
 
@@ -809,7 +809,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAZE_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.maze_config", "mazeConfig", (258 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MazeConfig; });
+		public static const MAZE_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.maze_config", "mazeConfig", (258 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MazeConfig; });
 
 		private var maze_config$field:app.message.MazeConfig;
 
@@ -832,7 +832,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ALL_TAX_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.all_tax_config", "allTaxConfig", (260 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AllTaxConfigProto; });
+		public static const ALL_TAX_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.all_tax_config", "allTaxConfig", (260 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AllTaxConfigProto; });
 
 		private var all_tax_config$field:app.message.AllTaxConfigProto;
 
@@ -855,7 +855,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STALL_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Config.stall_config", "stallConfig", (261 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.StallConfig; });
+		public static const STALL_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Config.stall_config", "stallConfig", (261 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.StallConfig; });
 
 		private var stall_config$field:app.message.StallConfig;
 
@@ -881,147 +881,147 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasSceneConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, scene_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, scene_config$field);
 			}
 			if (hasGoodsConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, goods_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, goods_config$field);
 			}
 			if (hasSpellConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, spell_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, spell_config$field);
 			}
 			if (hasAchievementNicknameConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, achievement_nickname_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, achievement_nickname_config$field);
 			}
 			if (hasRaceConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 14);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, race_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, race_config$field);
 			}
 			if (hasShopConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 20);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, shop_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, shop_config$field);
 			}
 			if (hasTaskConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 25);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, task_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, task_config$field);
 			}
 			if (hasMonsterConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 30);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, monster_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, monster_config$field);
 			}
 			if (hasCollecObjectConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 35);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, collec_object_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, collec_object_config$field);
 			}
 			if (hasFamily) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 40);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, family$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, family$field);
 			}
 			if (hasVips) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 45);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, vips$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, vips$field);
 			}
 			if (hasMount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 50);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, mount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, mount$field);
 			}
 			if (hasExam) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 55);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, exam$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, exam$field);
 			}
 			if (hasWelfare) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 60);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, welfare$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, welfare$field);
 			}
 			if (hasChatConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 80);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, chat_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, chat_config$field);
 			}
 			if (hasCountryConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 100);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, country_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, country_config$field);
 			}
 			if (hasCountryWarConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 101);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, country_war_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, country_war_config$field);
 			}
 			if (hasLevelConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 85);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, level_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, level_config$field);
 			}
 			if (hasSceneTranports) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 103);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, scene_tranports$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, scene_tranports$field);
 			}
 			if (hasAllUnlockData) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 104);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, all_unlock_data$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, all_unlock_data$field);
 			}
 			if (hasMailConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 210);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, mail_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, mail_config$field);
 			}
 			if (hasAddSpriteStatConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 211);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, add_sprite_stat_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, add_sprite_stat_config$field);
 			}
 			if (hasTeamConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 212);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, team_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, team_config$field);
 			}
 			if (hasRelationConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 213);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, relation_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, relation_config$field);
 			}
 			if (hasEquipmentConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 214);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, equipment_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, equipment_config$field);
 			}
 			if (hasKingWarConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 215);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, king_war_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, king_war_config$field);
 			}
 			if (hasMiscConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 250);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, misc_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, misc_config$field);
 			}
 			if (hasBiaoConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 251);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, biao_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, biao_config$field);
 			}
 			if (hasTradeConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 252);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, trade_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, trade_config$field);
 			}
 			if (hasTaoNiConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 253);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, tao_ni_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, tao_ni_config$field);
 			}
 			if (hasReliveConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 254);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, relive_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, relive_config$field);
 			}
 			if (hasPkConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 255);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, pk_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, pk_config$field);
 			}
 			if (hasGuildConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 256);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, guild_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, guild_config$field);
 			}
 			if (hasMazeConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 258);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, maze_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, maze_config$field);
 			}
 			if (hasAllTaxConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 260);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, all_tax_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, all_tax_config$field);
 			}
 			if (hasStallConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 261);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, stall_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, stall_config$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -1069,7 +1069,7 @@ package app.message {
 			var all_tax_config$count:uint = 0;
 			var stall_config$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (scene_config$count != 0) {
@@ -1077,7 +1077,7 @@ package app.message {
 					}
 					++scene_config$count;
 					this.sceneConfig = new app.message.SceneConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.sceneConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.sceneConfig);
 					break;
 				case 2:
 					if (goods_config$count != 0) {
@@ -1085,7 +1085,7 @@ package app.message {
 					}
 					++goods_config$count;
 					this.goodsConfig = new app.message.GoodsConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.goodsConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.goodsConfig);
 					break;
 				case 3:
 					if (spell_config$count != 0) {
@@ -1093,7 +1093,7 @@ package app.message {
 					}
 					++spell_config$count;
 					this.spellConfig = new app.message.SpellConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.spellConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.spellConfig);
 					break;
 				case 4:
 					if (achievement_nickname_config$count != 0) {
@@ -1101,7 +1101,7 @@ package app.message {
 					}
 					++achievement_nickname_config$count;
 					this.achievementNicknameConfig = new app.message.AchievementAndNickNameConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.achievementNicknameConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.achievementNicknameConfig);
 					break;
 				case 14:
 					if (race_config$count != 0) {
@@ -1109,7 +1109,7 @@ package app.message {
 					}
 					++race_config$count;
 					this.raceConfig = new app.message.RaceConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.raceConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.raceConfig);
 					break;
 				case 20:
 					if (shop_config$count != 0) {
@@ -1117,7 +1117,7 @@ package app.message {
 					}
 					++shop_config$count;
 					this.shopConfig = new app.message.ShopConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.shopConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.shopConfig);
 					break;
 				case 25:
 					if (task_config$count != 0) {
@@ -1125,7 +1125,7 @@ package app.message {
 					}
 					++task_config$count;
 					this.taskConfig = new app.message.TaskConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.taskConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.taskConfig);
 					break;
 				case 30:
 					if (monster_config$count != 0) {
@@ -1133,7 +1133,7 @@ package app.message {
 					}
 					++monster_config$count;
 					this.monsterConfig = new app.message.MonsterConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.monsterConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.monsterConfig);
 					break;
 				case 35:
 					if (collec_object_config$count != 0) {
@@ -1141,7 +1141,7 @@ package app.message {
 					}
 					++collec_object_config$count;
 					this.collecObjectConfig = new app.message.CollectObjectConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.collecObjectConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.collecObjectConfig);
 					break;
 				case 40:
 					if (family$count != 0) {
@@ -1149,7 +1149,7 @@ package app.message {
 					}
 					++family$count;
 					this.family = new app.message.FamilyConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.family);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.family);
 					break;
 				case 45:
 					if (vips$count != 0) {
@@ -1157,7 +1157,7 @@ package app.message {
 					}
 					++vips$count;
 					this.vips = new app.message.VipsProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.vips);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.vips);
 					break;
 				case 50:
 					if (mount$count != 0) {
@@ -1165,7 +1165,7 @@ package app.message {
 					}
 					++mount$count;
 					this.mount = new app.message.MountConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.mount);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.mount);
 					break;
 				case 55:
 					if (exam$count != 0) {
@@ -1173,7 +1173,7 @@ package app.message {
 					}
 					++exam$count;
 					this.exam = new app.message.ExamConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.exam);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.exam);
 					break;
 				case 60:
 					if (welfare$count != 0) {
@@ -1181,7 +1181,7 @@ package app.message {
 					}
 					++welfare$count;
 					this.welfare = new app.message.WelfareConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.welfare);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.welfare);
 					break;
 				case 80:
 					if (chat_config$count != 0) {
@@ -1189,7 +1189,7 @@ package app.message {
 					}
 					++chat_config$count;
 					this.chatConfig = new app.message.ChatConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.chatConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.chatConfig);
 					break;
 				case 100:
 					if (country_config$count != 0) {
@@ -1197,7 +1197,7 @@ package app.message {
 					}
 					++country_config$count;
 					this.countryConfig = new app.message.CountryConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.countryConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.countryConfig);
 					break;
 				case 101:
 					if (country_war_config$count != 0) {
@@ -1205,7 +1205,7 @@ package app.message {
 					}
 					++country_war_config$count;
 					this.countryWarConfig = new app.message.CountryWarConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.countryWarConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.countryWarConfig);
 					break;
 				case 85:
 					if (level_config$count != 0) {
@@ -1213,7 +1213,7 @@ package app.message {
 					}
 					++level_config$count;
 					this.levelConfig = new app.message.LevelConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.levelConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.levelConfig);
 					break;
 				case 103:
 					if (scene_tranports$count != 0) {
@@ -1221,7 +1221,7 @@ package app.message {
 					}
 					++scene_tranports$count;
 					this.sceneTranports = new app.message.SceneTransportsProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.sceneTranports);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.sceneTranports);
 					break;
 				case 104:
 					if (all_unlock_data$count != 0) {
@@ -1229,7 +1229,7 @@ package app.message {
 					}
 					++all_unlock_data$count;
 					this.allUnlockData = new app.message.Config.AllGoodsContainerUnlockProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.allUnlockData);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.allUnlockData);
 					break;
 				case 210:
 					if (mail_config$count != 0) {
@@ -1237,7 +1237,7 @@ package app.message {
 					}
 					++mail_config$count;
 					this.mailConfig = new app.message.MailConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.mailConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.mailConfig);
 					break;
 				case 211:
 					if (add_sprite_stat_config$count != 0) {
@@ -1245,7 +1245,7 @@ package app.message {
 					}
 					++add_sprite_stat_config$count;
 					this.addSpriteStatConfig = new app.message.AddSpriteStatConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.addSpriteStatConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.addSpriteStatConfig);
 					break;
 				case 212:
 					if (team_config$count != 0) {
@@ -1253,7 +1253,7 @@ package app.message {
 					}
 					++team_config$count;
 					this.teamConfig = new app.message.TeamConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.teamConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.teamConfig);
 					break;
 				case 213:
 					if (relation_config$count != 0) {
@@ -1261,7 +1261,7 @@ package app.message {
 					}
 					++relation_config$count;
 					this.relationConfig = new app.message.RelationConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.relationConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.relationConfig);
 					break;
 				case 214:
 					if (equipment_config$count != 0) {
@@ -1269,7 +1269,7 @@ package app.message {
 					}
 					++equipment_config$count;
 					this.equipmentConfig = new app.message.EquipmentConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.equipmentConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.equipmentConfig);
 					break;
 				case 215:
 					if (king_war_config$count != 0) {
@@ -1277,7 +1277,7 @@ package app.message {
 					}
 					++king_war_config$count;
 					this.kingWarConfig = new app.message.KingWarConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.kingWarConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.kingWarConfig);
 					break;
 				case 250:
 					if (misc_config$count != 0) {
@@ -1285,7 +1285,7 @@ package app.message {
 					}
 					++misc_config$count;
 					this.miscConfig = new app.message.MiscConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.miscConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.miscConfig);
 					break;
 				case 251:
 					if (biao_config$count != 0) {
@@ -1293,7 +1293,7 @@ package app.message {
 					}
 					++biao_config$count;
 					this.biaoConfig = new app.message.BiaoConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.biaoConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.biaoConfig);
 					break;
 				case 252:
 					if (trade_config$count != 0) {
@@ -1301,7 +1301,7 @@ package app.message {
 					}
 					++trade_config$count;
 					this.tradeConfig = new app.message.TradeConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.tradeConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.tradeConfig);
 					break;
 				case 253:
 					if (tao_ni_config$count != 0) {
@@ -1309,7 +1309,7 @@ package app.message {
 					}
 					++tao_ni_config$count;
 					this.taoNiConfig = new app.message.TaoNiConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.taoNiConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.taoNiConfig);
 					break;
 				case 254:
 					if (relive_config$count != 0) {
@@ -1317,7 +1317,7 @@ package app.message {
 					}
 					++relive_config$count;
 					this.reliveConfig = new app.message.ReliveConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.reliveConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.reliveConfig);
 					break;
 				case 255:
 					if (pk_config$count != 0) {
@@ -1325,7 +1325,7 @@ package app.message {
 					}
 					++pk_config$count;
 					this.pkConfig = new app.message.PkConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.pkConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.pkConfig);
 					break;
 				case 256:
 					if (guild_config$count != 0) {
@@ -1333,7 +1333,7 @@ package app.message {
 					}
 					++guild_config$count;
 					this.guildConfig = new app.message.GuildConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.guildConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.guildConfig);
 					break;
 				case 258:
 					if (maze_config$count != 0) {
@@ -1341,7 +1341,7 @@ package app.message {
 					}
 					++maze_config$count;
 					this.mazeConfig = new app.message.MazeConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.mazeConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.mazeConfig);
 					break;
 				case 260:
 					if (all_tax_config$count != 0) {
@@ -1349,7 +1349,7 @@ package app.message {
 					}
 					++all_tax_config$count;
 					this.allTaxConfig = new app.message.AllTaxConfigProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.allTaxConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.allTaxConfig);
 					break;
 				case 261:
 					if (stall_config$count != 0) {
@@ -1357,7 +1357,7 @@ package app.message {
 					}
 					++stall_config$count;
 					this.stallConfig = new app.message.StallConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.stallConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.stallConfig);
 					break;
 				default:
 					super.readUnknown(input, tag);

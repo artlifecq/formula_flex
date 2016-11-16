@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SceneTransportProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SceneTransportProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var id$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_TRANSPORT_COUNTRY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SceneTransportProto.can_transport_country", "canTransportCountry", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_TRANSPORT_COUNTRY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SceneTransportProto.can_transport_country", "canTransportCountry", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_transport_country$field:int;
 
@@ -67,7 +67,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SOURCE_COUNTRY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SceneTransportProto.source_country", "sourceCountry", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SOURCE_COUNTRY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SceneTransportProto.source_country", "sourceCountry", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var source_country$field:int;
 
@@ -92,7 +92,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SOURCE_AREA_DATA:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SceneTransportProto.source_area_data", "sourceAreaData", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AreaDataProto; });
+		public static const SOURCE_AREA_DATA:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SceneTransportProto.source_area_data", "sourceAreaData", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AreaDataProto; });
 
 		private var source_area_data$field:app.message.AreaDataProto;
 
@@ -115,7 +115,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEST_COUNTRY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SceneTransportProto.dest_country", "destCountry", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEST_COUNTRY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SceneTransportProto.dest_country", "destCountry", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var dest_country$field:int;
 
@@ -140,7 +140,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEST_SCENE_DATA_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SceneTransportProto.dest_scene_data_id", "destSceneDataId", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEST_SCENE_DATA_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SceneTransportProto.dest_scene_data_id", "destSceneDataId", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var dest_scene_data_id$field:int;
 
@@ -165,7 +165,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RES:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.SceneTransportProto.res", "res", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const RES:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.SceneTransportProto.res", "res", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var res$field:String;
 
@@ -188,7 +188,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RES_DIRECTION:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SceneTransportProto.res_direction", "resDirection", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RES_DIRECTION:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SceneTransportProto.res_direction", "resDirection", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var res_direction$field:int;
 
@@ -213,7 +213,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RES_X:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SceneTransportProto.res_x", "resX", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RES_X:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SceneTransportProto.res_x", "resX", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var res_x$field:int;
 
@@ -238,7 +238,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RES_Y:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SceneTransportProto.res_y", "resY", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RES_Y:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SceneTransportProto.res_y", "resY", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var res_y$field:int;
 
@@ -263,7 +263,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SHOW_IN_SMALL_MAP_TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SceneTransportProto.show_in_small_map_type", "showInSmallMapType", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SHOW_IN_SMALL_MAP_TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SceneTransportProto.show_in_small_map_type", "showInSmallMapType", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var show_in_small_map_type$field:int;
 
@@ -288,7 +288,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RES_OFFSET_UP:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SceneTransportProto.res_offset_up", "resOffsetUp", (12 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RES_OFFSET_UP:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SceneTransportProto.res_offset_up", "resOffsetUp", (12 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var res_offset_up$field:int;
 
@@ -313,7 +313,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SCALE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SceneTransportProto.scale", "scale", (13 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SCALE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SceneTransportProto.scale", "scale", (13 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var scale$field:int;
 
@@ -341,55 +341,55 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, id$field);
 			}
 			if (hasCanTransportCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, can_transport_country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, can_transport_country$field);
 			}
 			if (hasSourceCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, source_country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, source_country$field);
 			}
 			if (hasSourceAreaData) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, source_area_data$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, source_area_data$field);
 			}
 			if (hasDestCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, dest_country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, dest_country$field);
 			}
 			if (hasDestSceneDataId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, dest_scene_data_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, dest_scene_data_id$field);
 			}
 			if (hasRes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, res$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, res$field);
 			}
 			if (hasResDirection) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, res_direction$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, res_direction$field);
 			}
 			if (hasResX) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, res_x$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, res_x$field);
 			}
 			if (hasResY) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, res_y$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, res_y$field);
 			}
 			if (hasShowInSmallMapType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, show_in_small_map_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, show_in_small_map_type$field);
 			}
 			if (hasResOffsetUp) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, res_offset_up$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, res_offset_up$field);
 			}
 			if (hasScale) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, scale$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, scale$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -414,28 +414,28 @@ package app.message {
 			var res_offset_up$count:uint = 0;
 			var scale$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneTransportProto.id cannot be set twice.');
 					}
 					++id$count;
-					this.id = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.id = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 10:
 					if (can_transport_country$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneTransportProto.canTransportCountry cannot be set twice.');
 					}
 					++can_transport_country$count;
-					this.canTransportCountry = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.canTransportCountry = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (source_country$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneTransportProto.sourceCountry cannot be set twice.');
 					}
 					++source_country$count;
-					this.sourceCountry = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.sourceCountry = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (source_area_data$count != 0) {
@@ -443,70 +443,70 @@ package app.message {
 					}
 					++source_area_data$count;
 					this.sourceAreaData = new app.message.AreaDataProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.sourceAreaData);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.sourceAreaData);
 					break;
 				case 4:
 					if (dest_country$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneTransportProto.destCountry cannot be set twice.');
 					}
 					++dest_country$count;
-					this.destCountry = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.destCountry = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (dest_scene_data_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneTransportProto.destSceneDataId cannot be set twice.');
 					}
 					++dest_scene_data_id$count;
-					this.destSceneDataId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.destSceneDataId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (res$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneTransportProto.res cannot be set twice.');
 					}
 					++res$count;
-					this.res = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.res = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 7:
 					if (res_direction$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneTransportProto.resDirection cannot be set twice.');
 					}
 					++res_direction$count;
-					this.resDirection = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.resDirection = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 8:
 					if (res_x$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneTransportProto.resX cannot be set twice.');
 					}
 					++res_x$count;
-					this.resX = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.resX = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 9:
 					if (res_y$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneTransportProto.resY cannot be set twice.');
 					}
 					++res_y$count;
-					this.resY = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.resY = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 11:
 					if (show_in_small_map_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneTransportProto.showInSmallMapType cannot be set twice.');
 					}
 					++show_in_small_map_type$count;
-					this.showInSmallMapType = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.showInSmallMapType = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 12:
 					if (res_offset_up$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneTransportProto.resOffsetUp cannot be set twice.');
 					}
 					++res_offset_up$count;
-					this.resOffsetUp = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.resOffsetUp = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 13:
 					if (scale$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneTransportProto.scale cannot be set twice.');
 					}
 					++scale$count;
-					this.scale = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.scale = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

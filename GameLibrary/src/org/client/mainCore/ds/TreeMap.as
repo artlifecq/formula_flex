@@ -1,14 +1,13 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.ds
+﻿package org.client.mainCore.ds
 {
     public class TreeMap implements ITree 
     {
 
         private var _root:TreeMap;
         private var _parent:TreeMap;
-        private var _key;
+        private var _key:*;
         private var _children:HashMap;
-        private var _data;
+        private var _data:*;
 
         public function TreeMap(key:*, data:*=null, parent:TreeMap=null)
         {
@@ -18,9 +17,9 @@ package org.client.mainCore.ds
             this.parent = parent;
         }
 
-        public function get data()
+        public function get data():*
         {
-            return (_data);
+            return _data;
         }
 
         public function set data(d:*):void
@@ -34,63 +33,63 @@ package org.client.mainCore.ds
             var node:TreeMap = _parent;
             while (node)
             {
-                c = (c + node.numChildren);
+                c = c + node.numChildren;
                 node = node.parent;
-                if ((node == this))
+                if (node == this)
                 {
-                    throw (new Error("TreeMap Infinite Loop"));
-                };
-            };
-            return (c);
+                    throw new Error("TreeMap Infinite Loop");
+                }
+            }
+            return c;
         }
 
         public function get isRoot():Boolean
         {
-            return ((_root == this));
+            return _root == this;
         }
 
         public function get isLeaf():Boolean
         {
-            return ((_children.length == 0));
+            return _children.length == 0;
         }
 
         public function get depth():int
         {
-            if ((_parent == null))
+            if (_parent == null)
             {
-                return (0);
-            };
+                return 0;
+            }
             var node:TreeMap = _parent;
             var c:int;
             while (node)
             {
                 c++;
                 node = node.parent;
-                if ((node == this))
+                if (node == this)
                 {
-                    throw (new Error("TreeMap Infinite Loop"));
-                };
-            };
-            return (c);
+                    throw new Error("TreeMap Infinite Loop");
+                }
+            }
+            return c;
         }
 
         public function get numChildren():int
         {
-            return (_children.length);
+            return _children.length;
         }
 
         public function get numSiblings():int
         {
             if (_parent)
             {
-                return (_parent.numChildren);
-            };
-            return (0);
+                return _parent.numChildren;
+            }
+            return 0;
         }
 
         public function get root():TreeMap
         {
-            return (_root);
+            return _root;
         }
 
         public function set parent(parent:TreeMap):void
@@ -98,27 +97,27 @@ package org.client.mainCore.ds
             if (_parent)
             {
                 _parent.children.remove(_key);
-            };
-            if ((parent == this))
+            }
+            if (parent == this)
             {
                 return;
-            };
+            }
             _parent = parent;
             if (_parent)
             {
                 _parent.children.add(_key, this);
-            };
+            }
             setRoot();
         }
 
         public function get parent():TreeMap
         {
-            return (_parent);
+            return _parent;
         }
 
         public function get children():HashMap
         {
-            return (_children);
+            return _children;
         }
 
         public function set key(k:*):void
@@ -127,24 +126,24 @@ package org.client.mainCore.ds
             {
                 _parent.children.remove(_key);
                 _parent.children.add(k, this);
-            };
+            }
             _key = k;
         }
 
-        public function get key()
+        public function get key():*
         {
-            return (_key);
+            return _key;
         }
 
         public function remove():void
         {
-            if ((_parent == null))
+            if (_parent == null)
             {
                 return;
-            };
+            }
             _children.eachValue(function (child:TreeMap):void
             {
-                _arg1.parent = _parent;
+				child.parent = _parent;
             });
         }
 
@@ -155,27 +154,25 @@ package org.client.mainCore.ds
 
         private function setRoot():void
         {
-            if ((_parent == null))
+            if (_parent == null)
             {
                 _root = this;
                 return;
-            };
+            }
             var node:TreeMap = _parent;
             while (node)
             {
-                if ((node.parent == null))
+                if (node.parent == null)
                 {
                     _root = node;
                     return;
-                };
+                }
                 node = node.parent;
-                if ((node == this))
+                if (node == this)
                 {
-                    throw (new Error("TreeMap Infinite Loop"));
-                };
-            };
+                    throw new Error("TreeMap Infinite Loop");
+                }
+            }
         }
-
-
     }
-}//package org.client.mainCore.ds
+}

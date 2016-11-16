@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const REFINE_TAOZ_DATAS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentTaozDatasProto.refine_taoz_datas", "refineTaozDatas", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentRefineTaozDatasProto; });
+		public static const REFINE_TAOZ_DATAS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentTaozDatasProto.refine_taoz_datas", "refineTaozDatas", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentRefineTaozDatasProto; });
 
 		private var refine_taoz_datas$field:app.message.EquipmentRefineTaozDatasProto;
 
@@ -39,7 +39,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const QUALITY_TAOZ_DATAS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentTaozDatasProto.quality_taoz_datas", "qualityTaozDatas", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentQualityTaozDatasProto; });
+		public static const QUALITY_TAOZ_DATAS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentTaozDatasProto.quality_taoz_datas", "qualityTaozDatas", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentQualityTaozDatasProto; });
 
 		private var quality_taoz_datas$field:app.message.EquipmentQualityTaozDatasProto;
 
@@ -65,11 +65,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasRefineTaozDatas) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, refine_taoz_datas$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, refine_taoz_datas$field);
 			}
 			if (hasQualityTaozDatas) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, quality_taoz_datas$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, quality_taoz_datas$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -83,7 +83,7 @@ package app.message {
 			var refine_taoz_datas$count:uint = 0;
 			var quality_taoz_datas$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (refine_taoz_datas$count != 0) {
@@ -91,7 +91,7 @@ package app.message {
 					}
 					++refine_taoz_datas$count;
 					this.refineTaozDatas = new app.message.EquipmentRefineTaozDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.refineTaozDatas);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.refineTaozDatas);
 					break;
 				case 2:
 					if (quality_taoz_datas$count != 0) {
@@ -99,7 +99,7 @@ package app.message {
 					}
 					++quality_taoz_datas$count;
 					this.qualityTaozDatas = new app.message.EquipmentQualityTaozDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.qualityTaozDatas);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.qualityTaozDatas);
 					break;
 				default:
 					super.readUnknown(input, tag);

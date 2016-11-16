@@ -18,7 +18,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SCENE_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SceneModuleObjClientProto.scene_id", "sceneId", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SCENE_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SceneModuleObjClientProto.scene_id", "sceneId", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var scene_id$field:int;
 
@@ -45,7 +45,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HERO_RELIVE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SceneModuleObjClientProto.hero_relive", "heroRelive", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.HeroReliveClientProto; });
+		public static const HERO_RELIVE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SceneModuleObjClientProto.hero_relive", "heroRelive", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.HeroReliveClientProto; });
 
 		private var hero_relive$field:app.message.HeroReliveClientProto;
 
@@ -68,7 +68,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_STAT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SceneModuleObjClientProto.total_stat", "totalStat", (15 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
+		public static const TOTAL_STAT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SceneModuleObjClientProto.total_stat", "totalStat", (15 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
 
 		private var total_stat$field:app.message.SpriteStatProto;
 
@@ -91,7 +91,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PK_STATUS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SceneModuleObjClientProto.pk_status", "pkStatus", (45 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SceneModuleObjClientProto.HeroPKStatusProto; });
+		public static const PK_STATUS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SceneModuleObjClientProto.pk_status", "pkStatus", (45 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SceneModuleObjClientProto.HeroPKStatusProto; });
 
 		private var pk_status$field:app.message.SceneModuleObjClientProto.HeroPKStatusProto;
 
@@ -114,7 +114,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HERO_LEVEL:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SceneModuleObjClientProto.hero_level", "heroLevel", (46 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.HeroLevelProto; });
+		public static const HERO_LEVEL:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SceneModuleObjClientProto.hero_level", "heroLevel", (46 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.HeroLevelProto; });
 
 		private var hero_level$field:app.message.HeroLevelProto;
 
@@ -137,7 +137,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FIGHTING_AMOUNT:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.SceneModuleObjClientProto.fighting_amount", "fightingAmount", (16 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FIGHTING_AMOUNT:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.SceneModuleObjClientProto.fighting_amount", "fightingAmount", (16 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var fighting_amount$field:Int64;
 
@@ -163,27 +163,27 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasSceneId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, scene_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, scene_id$field);
 			}
 			if (hasHeroRelive) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, hero_relive$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, hero_relive$field);
 			}
 			if (hasTotalStat) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 15);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, total_stat$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, total_stat$field);
 			}
 			if (hasPkStatus) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 45);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, pk_status$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, pk_status$field);
 			}
 			if (hasHeroLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 46);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, hero_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, hero_level$field);
 			}
 			if (hasFightingAmount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 16);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, fighting_amount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, fighting_amount$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -201,14 +201,14 @@ package app.message {
 			var hero_level$count:uint = 0;
 			var fighting_amount$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 2:
 					if (scene_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneModuleObjClientProto.sceneId cannot be set twice.');
 					}
 					++scene_id$count;
-					this.sceneId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.sceneId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 1:
 					if (hero_relive$count != 0) {
@@ -216,7 +216,7 @@ package app.message {
 					}
 					++hero_relive$count;
 					this.heroRelive = new app.message.HeroReliveClientProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.heroRelive);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.heroRelive);
 					break;
 				case 15:
 					if (total_stat$count != 0) {
@@ -224,7 +224,7 @@ package app.message {
 					}
 					++total_stat$count;
 					this.totalStat = new app.message.SpriteStatProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.totalStat);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.totalStat);
 					break;
 				case 45:
 					if (pk_status$count != 0) {
@@ -232,7 +232,7 @@ package app.message {
 					}
 					++pk_status$count;
 					this.pkStatus = new app.message.SceneModuleObjClientProto.HeroPKStatusProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.pkStatus);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.pkStatus);
 					break;
 				case 46:
 					if (hero_level$count != 0) {
@@ -240,14 +240,14 @@ package app.message {
 					}
 					++hero_level$count;
 					this.heroLevel = new app.message.HeroLevelProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.heroLevel);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.heroLevel);
 					break;
 				case 16:
 					if (fighting_amount$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneModuleObjClientProto.fightingAmount cannot be set twice.');
 					}
 					++fighting_amount$count;
-					this.fightingAmount = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.fightingAmount = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

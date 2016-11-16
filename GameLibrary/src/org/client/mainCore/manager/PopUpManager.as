@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.manager
+﻿package org.client.mainCore.manager
 {
     import flash.display.DisplayObjectContainer;
     import flash.geom.Point;
@@ -32,7 +31,7 @@ package org.client.mainCore.manager
             else
             {
                 p = forObj.localToGlobal(new Point());
-            };
+            }
             switch (align)
             {
                 case 0:
@@ -47,7 +46,7 @@ package org.client.mainCore.manager
                     else
                     {
                         obj.x = p.x;
-                    };
+                    }
                     obj.y = (p.y - obj.height);
                     break;
                 case 2:
@@ -59,7 +58,7 @@ package org.client.mainCore.manager
                     else
                     {
                         obj.y = p.y;
-                    };
+                    }
                     break;
                 case 3:
                     if (isForObjRange)
@@ -69,7 +68,7 @@ package org.client.mainCore.manager
                     else
                     {
                         obj.x = p.x;
-                    };
+                    }
                     if (isForObjRange)
                     {
                         obj.y = (p.y + forObj.height);
@@ -77,17 +76,17 @@ package org.client.mainCore.manager
                     else
                     {
                         obj.y = p.y;
-                    };
+                    }
                 default:
-            };
+            }
             container.addChild(obj);
             container.stage.addEventListener("mouseDown", function (e:MouseEvent):void
             {
-                if (((!(obj.hitTestPoint(_arg1.stageX, _arg1.stageY))) && (!(forObj.hitTestPoint(_arg1.stageX, _arg1.stageY)))))
+                if (((!(obj.hitTestPoint(e.stageX, e.stageY))) && (!(forObj.hitTestPoint(e.stageX, e.stageY)))))
                 {
                     container.stage.removeEventListener("mouseDown", arguments.callee);
                     DisplayUtil.removeForParent(obj);
-                };
+                }
             });
         }
 
@@ -108,7 +107,7 @@ package org.client.mainCore.manager
                     else
                     {
                         obj.x = p.x;
-                    };
+                    }
                     if ((p.y > obj.height))
                     {
                         obj.y = (p.y - obj.height);
@@ -116,7 +115,7 @@ package org.client.mainCore.manager
                     else
                     {
                         obj.y = p.y;
-                    };
+                    }
                     break;
                 case 1:
                     if (((p.x + obj.width) > ProjectManager.stage.stageWidth))
@@ -126,7 +125,7 @@ package org.client.mainCore.manager
                     else
                     {
                         obj.x = p.x;
-                    };
+                    }
                     if ((p.y > obj.height))
                     {
                         obj.y = (p.y - obj.height);
@@ -134,7 +133,7 @@ package org.client.mainCore.manager
                     else
                     {
                         obj.y = p.y;
-                    };
+                    }
                     break;
                 case 2:
                     if ((p.x > obj.width))
@@ -144,7 +143,7 @@ package org.client.mainCore.manager
                     else
                     {
                         obj.x = p.x;
-                    };
+                    }
                     if (((p.y + obj.height) > ProjectManager.stageHeight))
                     {
                         obj.y = (p.y - obj.height);
@@ -152,7 +151,7 @@ package org.client.mainCore.manager
                     else
                     {
                         obj.y = p.y;
-                    };
+                    }
                     break;
                 case 3:
                     if (((p.x + obj.width) > ProjectManager.stageWidth))
@@ -162,7 +161,7 @@ package org.client.mainCore.manager
                     else
                     {
                         obj.x = p.x;
-                    };
+                    }
                     if (((p.y + obj.height) > ProjectManager.stageHeight))
                     {
                         obj.y = (p.y - obj.height);
@@ -170,20 +169,18 @@ package org.client.mainCore.manager
                     else
                     {
                         obj.y = p.y;
-                    };
+                    }
                 default:
-            };
+            }
             container.addChild(obj);
             container.stage.addEventListener("mouseDown", function (e:MouseEvent):void
             {
-                if (!(obj.hitTestPoint(_arg1.stageX, _arg1.stageY)))
+                if (!(obj.hitTestPoint(e.stageX, e.stageY)))
                 {
                     container.stage.removeEventListener("mouseDown", arguments.callee);
                     DisplayUtil.removeForParent(obj);
-                };
+                }
             });
         }
-
-
     }
-}//package org.client.mainCore.manager
+}

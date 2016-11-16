@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.info.familyWar
 {
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 	/**
 	 * 王城战竞标数据 
 	 * @author Mandragora

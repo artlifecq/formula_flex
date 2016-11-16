@@ -29,8 +29,7 @@ package com.client.process
 	
 	import feathers.themes.ThemeLoader;
 	
-	import org.client.load.loader.multi.vo.LoadData;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *

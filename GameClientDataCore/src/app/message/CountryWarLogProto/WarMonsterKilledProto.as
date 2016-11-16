@@ -14,7 +14,7 @@ package app.message.CountryWarLogProto {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryWarLogProto.WarMonsterKilledProto.country", "country", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COUNTRY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryWarLogProto.WarMonsterKilledProto.country", "country", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var country$field:int;
 
@@ -41,7 +41,7 @@ package app.message.CountryWarLogProto {
 		/**
 		 *  @private
 		 */
-		public static const MONSTER_CONFIG_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryWarLogProto.WarMonsterKilledProto.monster_config_id", "monsterConfigId", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MONSTER_CONFIG_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryWarLogProto.WarMonsterKilledProto.monster_config_id", "monsterConfigId", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var monster_config_id$field:int;
 
@@ -66,7 +66,7 @@ package app.message.CountryWarLogProto {
 		/**
 		 *  @private
 		 */
-		public static const KILLER_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.CountryWarLogProto.WarMonsterKilledProto.killer_name", "killerName", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const KILLER_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.CountryWarLogProto.WarMonsterKilledProto.killer_name", "killerName", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var killer_name$field:String;
 
@@ -92,15 +92,15 @@ package app.message.CountryWarLogProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, country$field);
 			}
 			if (hasMonsterConfigId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, monster_config_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, monster_config_id$field);
 			}
 			if (hasKillerName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, killer_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, killer_name$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -115,28 +115,28 @@ package app.message.CountryWarLogProto {
 			var monster_config_id$count:uint = 0;
 			var killer_name$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (country$count != 0) {
 						throw new flash.errors.IOError('Bad data format: WarMonsterKilledProto.country cannot be set twice.');
 					}
 					++country$count;
-					this.country = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.country = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (monster_config_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: WarMonsterKilledProto.monsterConfigId cannot be set twice.');
 					}
 					++monster_config_id$count;
-					this.monsterConfigId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.monsterConfigId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (killer_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: WarMonsterKilledProto.killerName cannot be set twice.');
 					}
 					++killer_name$count;
-					this.killerName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.killerName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

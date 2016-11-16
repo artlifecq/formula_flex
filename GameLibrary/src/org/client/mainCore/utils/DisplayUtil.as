@@ -1,19 +1,20 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.utils
+﻿package org.client.mainCore.utils
 {
-    import flash.display.MovieClip;
-    import flash.display.DisplayObjectContainer;
     import flash.display.Bitmap;
+    import flash.display.BitmapData;
     import flash.display.DisplayObject;
-    import flash.text.TextField;
+    import flash.display.DisplayObjectContainer;
+    import flash.display.InteractiveObject;
+    import flash.display.MovieClip;
+    import flash.geom.ColorTransform;
+    import flash.geom.Matrix;
     import flash.geom.Point;
     import flash.geom.Rectangle;
-    import org.client.mainCore.manager.ProjectManager;
+    import flash.text.TextField;
+    
     import __AS3__.vec.Vector;
-    import flash.geom.ColorTransform;
-    import flash.display.BitmapData;
-    import flash.geom.Matrix;
-    import flash.display.InteractiveObject;
+    
+    import org.client.mainCore.manager.ProjectManager;
 
     public class DisplayUtil 
     {
@@ -255,40 +256,40 @@ package org.client.mainCore.utils
             align = align;
             multiAlign = multiAlign;
             offset = offset;
-            onCompareWidth = function (disA:DisplayObject, disB:DisplayObject):int
+            function onCompareWidth(disA:DisplayObject, disB:DisplayObject):int
             {
-                if ((_arg1.width > _arg2.width))
+                if ((disA.width > disB.width))
                 {
                     return (-1);
                 };
                 return (1);
             };
-            onCompareHeight = function (disA:DisplayObject, disB:DisplayObject):int
+            function onCompareHeight(disA:DisplayObject, disB:DisplayObject):int
             {
-                if ((_arg1.height > _arg2.height))
+                if ((disA.height > disB.height))
                 {
                     return (-1);
                 };
                 return (1);
             };
-            showDisList = function (offsetX:Number, offsetY:Number):void
+            function showDisList(offsetX:Number, offsetY:Number):void
             {
                 switch (multiAlign)
                 {
                     case 0:
-                        for each (tDis in disList)
+                        for each (var tDis:DisplayObject in disList)
                         {
-                            tDis.x = ((bounds.x + curtShowWidth) + _arg1);
-                            tDis.y = (bounds.y + _arg2);
+                            tDis.x = ((bounds.x + curtShowWidth) + offsetX);
+                            tDis.y = (bounds.y + offsetY);
                             curtShowWidth = (curtShowWidth + tDis.width);
                             curtShowHeight = (curtShowHeight + tDis.height);
                         };
                         return;
                     case 1:
-                        for each (tDis in disList)
+                        for each (var tDis:DisplayObject in disList)
                         {
-                            tDis.x = (bounds.x + _arg1);
-                            tDis.y = ((bounds.y + curtShowHeight) + _arg2);
+                            tDis.x = (bounds.x + offsetX);
+                            tDis.y = ((bounds.y + curtShowHeight) + offsetY);
                             curtShowWidth = (curtShowWidth + tDis.width);
                             curtShowHeight = (curtShowHeight + tDis.height);
                         };
@@ -436,7 +437,7 @@ package org.client.mainCore.utils
             };
             var b:Boolean = MOUSE_EVENT_LIST.some(function (item:String, index:int, array:Array):Boolean
             {
-                if (target.hasEventListener(_arg1))
+                if (target.hasEventListener(item))
                 {
                     return (true);
                 };
@@ -481,7 +482,5 @@ package org.client.mainCore.utils
             transform.matrix = currentMatrix;
             return (bounds);
         }
-
-
     }
-}//package org.client.mainCore.utils
+}

@@ -20,9 +20,9 @@ package com.rpgGame.app.cmdlistener
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
-	import org.game.netCore.net.BytesUtil;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
+	import org.game.netCore.net_protobuff.BytesUtil;
 	
 	/**
 	 * 邮件收到server端协议处理
@@ -38,30 +38,30 @@ package com.rpgGame.app.cmdlistener
 		
 		override public function start():void
 		{
-			SocketConnection.addCmdListener(MailModuleMessages.S2C_NEW_MAIL,onNewMail);
+			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_NEW_MAIL,onNewMail);
 			
-			SocketConnection.addCmdListener(MailModuleMessages.S2C_SET_MAIL_READED_FAIL, onSetMailReadedFail );
-			SocketConnection.addCmdListener(MailModuleMessages.S2C_SET_MAIL_READED, onSetMailReaded );
+			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_SET_MAIL_READED_FAIL, onSetMailReadedFail );
+			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_SET_MAIL_READED, onSetMailReaded );
 			
-			SocketConnection.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL_MONEY_FAIL,onCollectMailMoneyFail );
-			SocketConnection.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL_MONEY,onCollectMailMoney );
+			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL_MONEY_FAIL,onCollectMailMoneyFail );
+			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL_MONEY,onCollectMailMoney );
 			
-			SocketConnection.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL_GOODS_FAIL,onCollectMailGoodsFail);
-			SocketConnection.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL_GOODS,onCollectMailGoods);
+			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL_GOODS_FAIL,onCollectMailGoodsFail);
+			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL_GOODS,onCollectMailGoods);
 			
-			SocketConnection.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL_FAIL,onCollectMailFail);
-			SocketConnection.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL, onCollectMail);
+			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL_FAIL,onCollectMailFail);
+			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL, onCollectMail);
 			
-			SocketConnection.addCmdListener(MailModuleMessages.S2C_COLLECT_ALL_MAIL_FAIL, onCollectALlMailFail);
-			SocketConnection.addCmdListener(MailModuleMessages.S2C_COLLECT_ALL_MAIL, onCollectALlMail);
+			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_ALL_MAIL_FAIL, onCollectALlMailFail);
+			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_ALL_MAIL, onCollectALlMail);
 			
-			SocketConnection.addCmdListener(MailModuleMessages.S2C_DELETE_MAIL_FAIL, onDeleteMailFail );
-			SocketConnection.addCmdListener(MailModuleMessages.S2C_DELETE_MAIL_SUCCESS, onDeleteMailSuccess);
+			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_DELETE_MAIL_FAIL, onDeleteMailFail );
+			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_DELETE_MAIL_SUCCESS, onDeleteMailSuccess);
 			
-			SocketConnection.addCmdListener(MailModuleMessages.S2C_SEND_MAIL_FAIL, onSendMailFail );
-			SocketConnection.addCmdListener(MailModuleMessages.S2C_SEND_MAIL, onSendMail );
+			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_SEND_MAIL_FAIL, onSendMailFail );
+			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_SEND_MAIL, onSendMail );
 			
-			SocketConnection.addCmdListener(MailModuleMessages.S2C_SET_REFUSE_RECEIVE_MAIL, onSetRefuseReceiveMail );
+			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_SET_REFUSE_RECEIVE_MAIL, onSetRefuseReceiveMail );
 			
 			finish();
 		}
