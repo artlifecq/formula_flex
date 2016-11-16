@@ -13,6 +13,7 @@ package com.game.engine2D
 	import com.game.engine2D.scene.layers.SceneInteractiveLayer;
 	import com.game.engine2D.scene.layers.SceneRenderLayer;
 	import com.game.engine2D.scene.layers.SceneZoneMapLayer;
+	import com.game.engine2D.scene.layers.SceneZoneMapLayer2;
 	import com.game.engine2D.scene.map.vo.MapTile;
 	import com.game.engine2D.scene.render.RenderSet;
 	import com.game.engine2D.scene.render.RenderUnit;
@@ -60,7 +61,7 @@ package com.game.engine2D
 		public var sceneCamera:SceneCamera;
 		public var sceneRender:SceneRender;
 		public var sceneSmallMapLayer:SceneSmallLayer;
-		public var sceneZoneMapLayer:SceneZoneMapLayer;
+		public var sceneZoneMapLayer:SceneZoneMapLayer2;
 		public var sceneInteractiveLayer:SceneInteractiveLayer;
 		public var sceneRenderLayer:SceneRenderLayer;
 		public var sceneStarlingLayer:starling.display.Sprite;
@@ -100,7 +101,7 @@ package com.game.engine2D
 			sceneCamera = new SceneCamera(this,len2d);
 			sceneRender = new SceneRender(this);
 			
-			sceneZoneMapLayer = new SceneZoneMapLayer(this);
+			sceneZoneMapLayer = new SceneZoneMapLayer2(this);
 			addChild(sceneZoneMapLayer);
 			
 			sceneInteractiveLayer = new SceneInteractiveLayer(this);
