@@ -2,9 +2,9 @@ package org.game.netCore.connection
 {
 	import flash.events.Event;
 	
+	import org.game.netCore.net.GameSocketDispatcher;
 	import org.game.netCore.net.Message;
 	import org.game.netCore.net.MessageMgr;
-	import org.game.netCore.net_protobuff.GameSocketDispatcher;
 
 	public class SocketConnection
 	{
@@ -19,27 +19,27 @@ package org.game.netCore.connection
 			return _messageMgr;
 		}
 		
-		public static function addCmdListener(id:String, listener:Function):void
+		public static function addCmdListener(id:int, listener:Function):void
 		{
 			GameSocketDispatcher.addListener(id, listener);
 		}
 		
-		public static function removeCmdListener(id:String, listener:Function):void
+		public static function removeCmdListener(id:int, listener:Function):void
 		{
 			GameSocketDispatcher.removeListener(id, listener);
 		}
 		
-		public static function dispatchCmd(type:String, event:Event):void
+		public static function dispatchCmd(type:int, event:Event):void
 		{
 			GameSocketDispatcher.excute(type, event);
 		}
 		
-		public static function hasCmdListener(id:String):Boolean
+		public static function hasCmdListener(id:int):Boolean
 		{
 			return GameSocketDispatcher.hasListener(id);
 		}
 		
-		public static function willTriggerCmd(id:String, listener:Function):Boolean
+		public static function willTriggerCmd(id:int, listener:Function):Boolean
 		{
 			return GameSocketDispatcher.willTrigger(id, listener);
 		}
