@@ -32,9 +32,9 @@ package com.rpgGame.app.cmdlistener.mount
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
-	import org.game.netCore.net.BytesUtil;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
+	import org.game.netCore.net_protobuff.BytesUtil;
 	
 	/**
 	 * 坐骑消息监侦听
@@ -45,56 +45,56 @@ package com.rpgGame.app.cmdlistener.mount
 	{
 		override public function start():void
 		{
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_STATUS_WHEN_ONLINE, onMountBreedStatusWhenOnline );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_IDENTIFY, onMountIdentify );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_IDENTIFY_FAIL, onMountIdentifyFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_TRANS, onMountTrans );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_TRANS_FAIL, onMountTransFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_SLOT_CHANGED, onMountSlotChanged );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_STATUS, onMountStatus );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_STATUS_FAIL, onMountStatusFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_STATUS_WHEN_ONLINE, onMountBreedStatusWhenOnline );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_IDENTIFY, onMountIdentify );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_IDENTIFY_FAIL, onMountIdentifyFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_TRANS, onMountTrans );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_TRANS_FAIL, onMountTransFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_SLOT_CHANGED, onMountSlotChanged );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_STATUS, onMountStatus );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_STATUS_FAIL, onMountStatusFail );
 			
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_RIDE, onMountRide );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_RIDE_FAIL, onMountRideFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_RELEASE, onMountRelease );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_RELEASE_FAIL, onMountReleaseFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_FEED, onMountFeed );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_FEED_FAIL, onMountFeedFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_HUNGER_DEGREE_CHANGED, onMountHungerDegreeChanged );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_REFINE, onMountRefine );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_REFINE_FAIL, onMountRefineFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_RIDE, onMountRide );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_RIDE_FAIL, onMountRideFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_RELEASE, onMountRelease );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_RELEASE_FAIL, onMountReleaseFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_FEED, onMountFeed );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_FEED_FAIL, onMountFeedFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_HUNGER_DEGREE_CHANGED, onMountHungerDegreeChanged );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_REFINE, onMountRefine );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_REFINE_FAIL, onMountRefineFail );
 			
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_LEARN_SPELL, onMountLearnSpell );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_LEARN_SPELL_FAIL, onMountLearnSpellFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_TO_NPC, onMountBreedToNpc );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_TO_NPC_FAIL, onMountBreedToNpcFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_SEND_MOUNT_BREED_TO_NPC_TO_TARGET, onSenderMountBreedToNpcToTarget );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_INVITE_OTHER_BREED, onMountInviteOtherBreed );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_INVITE_OTHER_BREED_FAIL, onMountInviteOtherBreedFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_OTHER_INVITE_YOU, onMountOtherInviteYou );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_REFUSE_OTHER_INVITE_YOU, onMountRefuseOtherInviteYou );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_REFUSE_OTHER_INVITE_YOU_FAIL, onMountRefuseOtherInviteYouFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_TARGET_REFUSE_YOU, onMountTargetRefuseYou );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_LEARN_SPELL, onMountLearnSpell );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_LEARN_SPELL_FAIL, onMountLearnSpellFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_TO_NPC, onMountBreedToNpc );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_TO_NPC_FAIL, onMountBreedToNpcFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_SEND_MOUNT_BREED_TO_NPC_TO_TARGET, onSenderMountBreedToNpcToTarget );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_INVITE_OTHER_BREED, onMountInviteOtherBreed );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_INVITE_OTHER_BREED_FAIL, onMountInviteOtherBreedFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_OTHER_INVITE_YOU, onMountOtherInviteYou );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_REFUSE_OTHER_INVITE_YOU, onMountRefuseOtherInviteYou );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_REFUSE_OTHER_INVITE_YOU_FAIL, onMountRefuseOtherInviteYouFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_TARGET_REFUSE_YOU, onMountTargetRefuseYou );
 			
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_LOCK, onMountBreedLock );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_LOCK_FAIL, onMountBreedLockFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_MAKE_LOVE, onMountBreedMakeLove );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_GET_BREED_BABY_MOUNT, onMountGetBreedBabyMount );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_GET_BREED_BABY_MOUNT_FAIL, onMountGetBreedBabyMountFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_CANCEL, onMountGetBreedCancel );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_CANCEL_FAIL, onMountGetBreedCancelFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_OTHER_BREED_CANCEL, onMountOtherBreedCancel );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_LOCK, onMountBreedLock );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_LOCK_FAIL, onMountBreedLockFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_MAKE_LOVE, onMountBreedMakeLove );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_GET_BREED_BABY_MOUNT, onMountGetBreedBabyMount );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_GET_BREED_BABY_MOUNT_FAIL, onMountGetBreedBabyMountFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_CANCEL, onMountGetBreedCancel );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_CANCEL_FAIL, onMountGetBreedCancelFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_OTHER_BREED_CANCEL, onMountOtherBreedCancel );
 			
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_COLLECT_BABY_MOUNT, onCollectBabyMount );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_COLLECT_BABY_MOUNT_FAIL, onCollectBabyMountFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_ADD_EXP, onMountAddExp );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_DROP_MOUNT_COLLECT_OBJ, onDropMountCollectObj );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_SEE_MOUNT_COLLECT_OBJ, onSeeMountCollectObj );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_COLLECT_MOUNT_COLLECT_OBJ, onCollectMountCollectObj );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_COLLECT_MOUNT_COLLECT_OBJ_FAIL, onCollectMountCollectObjFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_COLLECT_BABY_MOUNT, onCollectBabyMount );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_COLLECT_BABY_MOUNT_FAIL, onCollectBabyMountFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_ADD_EXP, onMountAddExp );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_DROP_MOUNT_COLLECT_OBJ, onDropMountCollectObj );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_SEE_MOUNT_COLLECT_OBJ, onSeeMountCollectObj );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_COLLECT_MOUNT_COLLECT_OBJ, onCollectMountCollectObj );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_COLLECT_MOUNT_COLLECT_OBJ_FAIL, onCollectMountCollectObjFail );
 			
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_INHERIT, onMountInherit );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_INHERIT_FAIL, onMountInheritFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_INHERIT, onMountInherit );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_INHERIT_FAIL, onMountInheritFail );
 			
 			super.finish();
 		}

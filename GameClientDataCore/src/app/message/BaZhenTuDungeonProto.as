@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EXP_MULTIPLE_START_IN_TODAY:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.BaZhenTuDungeonProto.exp_multiple_start_in_today", "expMultipleStartInToday", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const EXP_MULTIPLE_START_IN_TODAY:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.BaZhenTuDungeonProto.exp_multiple_start_in_today", "expMultipleStartInToday", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var exp_multiple_start_in_today$field:Int64;
 
@@ -38,7 +38,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EXP_MULTIPLE_END_IN_TODAY:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.BaZhenTuDungeonProto.exp_multiple_end_in_today", "expMultipleEndInToday", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const EXP_MULTIPLE_END_IN_TODAY:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.BaZhenTuDungeonProto.exp_multiple_end_in_today", "expMultipleEndInToday", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var exp_multiple_end_in_today$field:Int64;
 
@@ -61,7 +61,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EXP_MULTIPLE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.BaZhenTuDungeonProto.exp_multiple", "expMultiple", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const EXP_MULTIPLE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.BaZhenTuDungeonProto.exp_multiple", "expMultiple", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var exp_multiple$field:int;
 
@@ -88,7 +88,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAX_WAVE_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.BaZhenTuDungeonProto.max_wave_count", "maxWaveCount", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MAX_WAVE_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.BaZhenTuDungeonProto.max_wave_count", "maxWaveCount", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var max_wave_count$field:int;
 
@@ -113,7 +113,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_ENTER_TIMES_PER_DAY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.BaZhenTuDungeonProto.can_enter_times_per_day", "canEnterTimesPerDay", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_ENTER_TIMES_PER_DAY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.BaZhenTuDungeonProto.can_enter_times_per_day", "canEnterTimesPerDay", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_enter_times_per_day$field:int;
 
@@ -138,7 +138,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const WAVE_MONSTER_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.BaZhenTuDungeonProto.wave_monster_count", "waveMonsterCount", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const WAVE_MONSTER_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.BaZhenTuDungeonProto.wave_monster_count", "waveMonsterCount", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var wave_monster_count$field:int;
 
@@ -163,7 +163,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MONSTER_SPELLS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.BaZhenTuDungeonProto.monster_spells", "monsterSpells", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BaZhenTuDungeonProto.BaZhenTuMonsterSpellProto; });
+		public static const MONSTER_SPELLS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.BaZhenTuDungeonProto.monster_spells", "monsterSpells", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BaZhenTuDungeonProto.BaZhenTuMonsterSpellProto; });
 
 		[ArrayElementType("app.message.BaZhenTuDungeonProto.BaZhenTuMonsterSpellProto")]
 		public var monsterSpells:Array = [];
@@ -174,31 +174,31 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasExpMultipleStartInToday) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, exp_multiple_start_in_today$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, exp_multiple_start_in_today$field);
 			}
 			if (hasExpMultipleEndInToday) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, exp_multiple_end_in_today$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, exp_multiple_end_in_today$field);
 			}
 			if (hasExpMultiple) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, exp_multiple$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, exp_multiple$field);
 			}
 			if (hasMaxWaveCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, max_wave_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, max_wave_count$field);
 			}
 			if (hasCanEnterTimesPerDay) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, can_enter_times_per_day$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, can_enter_times_per_day$field);
 			}
 			if (hasWaveMonsterCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, wave_monster_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, wave_monster_count$field);
 			}
 			for (var monsterSpells$index:uint = 0; monsterSpells$index < this.monsterSpells.length; ++monsterSpells$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.monsterSpells[monsterSpells$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.monsterSpells[monsterSpells$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -216,52 +216,52 @@ package app.message {
 			var can_enter_times_per_day$count:uint = 0;
 			var wave_monster_count$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (exp_multiple_start_in_today$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BaZhenTuDungeonProto.expMultipleStartInToday cannot be set twice.');
 					}
 					++exp_multiple_start_in_today$count;
-					this.expMultipleStartInToday = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.expMultipleStartInToday = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (exp_multiple_end_in_today$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BaZhenTuDungeonProto.expMultipleEndInToday cannot be set twice.');
 					}
 					++exp_multiple_end_in_today$count;
-					this.expMultipleEndInToday = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.expMultipleEndInToday = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 3:
 					if (exp_multiple$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BaZhenTuDungeonProto.expMultiple cannot be set twice.');
 					}
 					++exp_multiple$count;
-					this.expMultiple = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.expMultiple = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (max_wave_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BaZhenTuDungeonProto.maxWaveCount cannot be set twice.');
 					}
 					++max_wave_count$count;
-					this.maxWaveCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.maxWaveCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (can_enter_times_per_day$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BaZhenTuDungeonProto.canEnterTimesPerDay cannot be set twice.');
 					}
 					++can_enter_times_per_day$count;
-					this.canEnterTimesPerDay = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.canEnterTimesPerDay = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (wave_monster_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BaZhenTuDungeonProto.waveMonsterCount cannot be set twice.');
 					}
 					++wave_monster_count$count;
-					this.waveMonsterCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.waveMonsterCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
-					this.monsterSpells.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.BaZhenTuDungeonProto.BaZhenTuMonsterSpellProto()));
+					this.monsterSpells.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.BaZhenTuDungeonProto.BaZhenTuMonsterSpellProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

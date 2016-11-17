@@ -16,7 +16,7 @@ package app.message.FamilyNewsProto {
 		/**
 		 *  @private
 		 */
-		public static const CHANGE_POS_MEMBER:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.ChangePosProto.change_pos_member", "changePosMember", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberIdAndNameProto; });
+		public static const CHANGE_POS_MEMBER:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.ChangePosProto.change_pos_member", "changePosMember", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberIdAndNameProto; });
 
 		private var change_pos_member$field:app.message.FamilyNewsProto.MemberIdAndNameProto;
 
@@ -39,7 +39,7 @@ package app.message.FamilyNewsProto {
 		/**
 		 *  @private
 		 */
-		public static const POS:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.FamilyNewsProto.ChangePosProto.pos", "pos", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.FamilyOfficerPos);
+		public static const POS:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.FamilyNewsProto.ChangePosProto.pos", "pos", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.FamilyOfficerPos);
 
 		private var pos$field:int;
 
@@ -69,11 +69,11 @@ package app.message.FamilyNewsProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasChangePosMember) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, change_pos_member$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, change_pos_member$field);
 			}
 			if (hasPos) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, pos$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, pos$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -87,7 +87,7 @@ package app.message.FamilyNewsProto {
 			var change_pos_member$count:uint = 0;
 			var pos$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 2:
 					if (change_pos_member$count != 0) {
@@ -95,14 +95,14 @@ package app.message.FamilyNewsProto {
 					}
 					++change_pos_member$count;
 					this.changePosMember = new app.message.FamilyNewsProto.MemberIdAndNameProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.changePosMember);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.changePosMember);
 					break;
 				case 1:
 					if (pos$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChangePosProto.pos cannot be set twice.');
 					}
 					++pos$count;
-					this.pos = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.pos = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

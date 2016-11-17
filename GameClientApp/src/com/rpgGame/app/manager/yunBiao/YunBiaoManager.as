@@ -50,7 +50,7 @@ package com.rpgGame.app.manager.yunBiao
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 * 运镖管理器 

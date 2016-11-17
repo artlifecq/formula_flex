@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STORES:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.DiscountStoreServerConfig.stores", "stores", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.DiscountStoreServerProto; });
+		public static const STORES:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.DiscountStoreServerConfig.stores", "stores", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.DiscountStoreServerProto; });
 
 		[ArrayElementType("app.message.DiscountStoreServerProto")]
 		public var stores:Array = [];
@@ -26,7 +26,7 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			for (var stores$index:uint = 0; stores$index < this.stores.length; ++stores$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.stores[stores$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.stores[stores$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -38,10 +38,10 @@ package app.message {
 		 */
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
-					this.stores.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.DiscountStoreServerProto()));
+					this.stores.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.DiscountStoreServerProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

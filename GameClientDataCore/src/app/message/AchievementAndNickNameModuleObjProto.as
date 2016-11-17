@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ACHIEVED:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.AchievementAndNickNameModuleObjProto.achieved", "achieved", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AchievementProto; });
+		public static const ACHIEVED:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.AchievementAndNickNameModuleObjProto.achieved", "achieved", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AchievementProto; });
 
 		[ArrayElementType("app.message.AchievementProto")]
 		public var achieved:Array = [];
@@ -23,7 +23,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ACHIEVEMENT_POINTS:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AchievementAndNickNameModuleObjProto.achievement_points", "achievementPoints", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ACHIEVEMENT_POINTS:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AchievementAndNickNameModuleObjProto.achievement_points", "achievementPoints", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var achievement_points$field:int;
 
@@ -50,7 +50,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NICKNAME_ID:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.AchievementAndNickNameModuleObjProto.nickname_id", "nicknameId", (21 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const NICKNAME_ID:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.AchievementAndNickNameModuleObjProto.nickname_id", "nicknameId", (21 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var nicknameId:Array = [];
@@ -58,7 +58,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const USING_NICKNAME:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AchievementAndNickNameModuleObjProto.using_nickname", "usingNickname", (22 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const USING_NICKNAME:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AchievementAndNickNameModuleObjProto.using_nickname", "usingNickname", (22 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var using_nickname$field:int;
 
@@ -86,19 +86,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			for (var achieved$index:uint = 0; achieved$index < this.achieved.length; ++achieved$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.achieved[achieved$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.achieved[achieved$index]);
 			}
 			if (hasAchievementPoints) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, achievement_points$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, achievement_points$field);
 			}
 			for (var nicknameId$index:uint = 0; nicknameId$index < this.nicknameId.length; ++nicknameId$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 21);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.nicknameId[nicknameId$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.nicknameId[nicknameId$index]);
 			}
 			if (hasUsingNickname) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 22);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, using_nickname$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, using_nickname$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -112,31 +112,31 @@ package app.message {
 			var achievement_points$count:uint = 0;
 			var using_nickname$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
-					this.achieved.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.AchievementProto()));
+					this.achieved.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.AchievementProto()));
 					break;
 				case 2:
 					if (achievement_points$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AchievementAndNickNameModuleObjProto.achievementPoints cannot be set twice.');
 					}
 					++achievement_points$count;
-					this.achievementPoints = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.achievementPoints = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 21:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.nicknameId);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.nicknameId);
 						break;
 					}
-					this.nicknameId.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.nicknameId.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				case 22:
 					if (using_nickname$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AchievementAndNickNameModuleObjProto.usingNickname cannot be set twice.');
 					}
 					++using_nickname$count;
-					this.usingNickname = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.usingNickname = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

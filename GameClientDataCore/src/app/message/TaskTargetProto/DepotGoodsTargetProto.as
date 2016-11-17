@@ -14,7 +14,7 @@ package app.message.TaskTargetProto {
 		/**
 		 *  @private
 		 */
-		public static const DEPOT_GOODS_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TaskTargetProto.DepotGoodsTargetProto.depot_goods_id", "depotGoodsId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEPOT_GOODS_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TaskTargetProto.DepotGoodsTargetProto.depot_goods_id", "depotGoodsId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var depot_goods_id$field:int;
 
@@ -41,7 +41,7 @@ package app.message.TaskTargetProto {
 		/**
 		 *  @private
 		 */
-		public static const DEPOT_GOODS_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TaskTargetProto.DepotGoodsTargetProto.depot_goods_count", "depotGoodsCount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEPOT_GOODS_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TaskTargetProto.DepotGoodsTargetProto.depot_goods_count", "depotGoodsCount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var depot_goods_count$field:int;
 
@@ -69,11 +69,11 @@ package app.message.TaskTargetProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasDepotGoodsId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, depot_goods_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, depot_goods_id$field);
 			}
 			if (hasDepotGoodsCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, depot_goods_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, depot_goods_count$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -87,21 +87,21 @@ package app.message.TaskTargetProto {
 			var depot_goods_id$count:uint = 0;
 			var depot_goods_count$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (depot_goods_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: DepotGoodsTargetProto.depotGoodsId cannot be set twice.');
 					}
 					++depot_goods_id$count;
-					this.depotGoodsId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.depotGoodsId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (depot_goods_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: DepotGoodsTargetProto.depotGoodsCount cannot be set twice.');
 					}
 					++depot_goods_count$count;
-					this.depotGoodsCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.depotGoodsCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

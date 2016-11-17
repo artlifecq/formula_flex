@@ -4,7 +4,7 @@ package com.rpgGame.app.sender
 	
 	import app.cmd.HeroMiscModuleMessages;
 	
-	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
 
 	/**
 	 *  
@@ -25,7 +25,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(pkMode);
-			SocketConnection.send(HeroMiscModuleMessages.C2S_CHANGE_PK_MODE,_bytes);
+			SocketConnection_protoBuffer.send(HeroMiscModuleMessages.C2S_CHANGE_PK_MODE,_bytes);
 		}
 		
 		public static function autoChgPkMode():void
@@ -78,7 +78,7 @@ package com.rpgGame.app.sender
 		public static function reqHookMonsterID():void
 		{
 			_bytes.clear();
-			SocketConnection.send(HeroMiscModuleMessages.C2S_RECOMMEND_AUTO_MONSTER ,_bytes);
+			SocketConnection_protoBuffer.send(HeroMiscModuleMessages.C2S_RECOMMEND_AUTO_MONSTER ,_bytes);
 		}
 	}
 }

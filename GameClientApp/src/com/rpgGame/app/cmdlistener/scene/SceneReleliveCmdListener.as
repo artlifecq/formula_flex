@@ -22,8 +22,8 @@ package com.rpgGame.app.cmdlistener.scene
 	import app.cmd.SceneModuleMessages;
 	
 	import org.client.mainCore.bean.BaseBean;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 
 	/**
@@ -40,17 +40,17 @@ package com.rpgGame.app.cmdlistener.scene
 
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SCENE_YOU_ARE_DEAD, sceneYouAreDead);
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_RELIVE_FAIL, heroReliveFail);
+			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_YOU_ARE_DEAD, sceneYouAreDead);
+			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_RELIVE_FAIL, heroReliveFail);
 //			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SCENE_HERO_PERFECT_RELIVE_BROADCAST, perfectReliveBroadcast);
 			//折扣相关的
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_ORIGIN_RELIVE_DISCOUNT_TIME_CHANGED, originReliveDiscountTimeChange);
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_ORIGIN_PERFECT_RELIVE_DISCOUNT_TIME_CHANGED, prefectReliveDiscountTimeChange);
+			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_ORIGIN_RELIVE_DISCOUNT_TIME_CHANGED, originReliveDiscountTimeChange);
+			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_ORIGIN_PERFECT_RELIVE_DISCOUNT_TIME_CHANGED, prefectReliveDiscountTimeChange);
 			
 			//复活之后相关的
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SCENE_HERO_RELIVE_IN_SAME_SCENE, townReliveAndSameScene);
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SCENE_HERO_RELIVED_BROADCAST, heroReliveBroadcast);
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_HERO_RELIVE, heroRelive);
+			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_HERO_RELIVE_IN_SAME_SCENE, townReliveAndSameScene);
+			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_HERO_RELIVED_BROADCAST, heroReliveBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_HERO_RELIVE, heroRelive);
 			ReliveManager.init();
 			finish();
 		}

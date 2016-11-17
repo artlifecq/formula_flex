@@ -26,7 +26,6 @@ package com.rpgGame.app.ui.main.head
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.type.item.GridBGType;
-	import com.rpgGame.coreData.utils.FilterUtil;
 	
 	import flash.geom.Point;
 	
@@ -39,7 +38,6 @@ package com.rpgGame.app.ui.main.head
 	import org.mokylin.skin.mainui.head.MonsterBossHeadBarSkin;
 	import org.mokylin.skin.mainui.head.MonsterMiddleHeadBarSkin;
 	import org.mokylin.skin.mainui.head.MonsterSmallHeadBarSkin;
-	import org.mokylin.skin.mainui.head.SelectRoleHeadBarSkin;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;

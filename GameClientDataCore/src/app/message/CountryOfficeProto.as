@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const OFFICERS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.CountryOfficeProto.officers", "officers", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryPosOfficersProto; });
+		public static const OFFICERS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.CountryOfficeProto.officers", "officers", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryPosOfficersProto; });
 
 		[ArrayElementType("app.message.CountryPosOfficersProto")]
 		public var officers:Array = [];
@@ -23,7 +23,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TONG_ZHI_LI:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryOfficeProto.tong_zhi_li", "tongZhiLi", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TONG_ZHI_LI:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryOfficeProto.tong_zhi_li", "tongZhiLi", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var tong_zhi_li$field:int;
 
@@ -50,7 +50,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY_ANNOUNCEMENT:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.CountryOfficeProto.country_announcement", "countryAnnouncement", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const COUNTRY_ANNOUNCEMENT:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.CountryOfficeProto.country_announcement", "countryAnnouncement", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var country_announcement$field:String;
 
@@ -73,7 +73,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const JIN_WEI_ANNOUNCEMENT:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.CountryOfficeProto.jin_wei_announcement", "jinWeiAnnouncement", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const JIN_WEI_ANNOUNCEMENT:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.CountryOfficeProto.jin_wei_announcement", "jinWeiAnnouncement", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var jin_wei_announcement$field:String;
 
@@ -99,19 +99,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			for (var officers$index:uint = 0; officers$index < this.officers.length; ++officers$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.officers[officers$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.officers[officers$index]);
 			}
 			if (hasTongZhiLi) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, tong_zhi_li$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, tong_zhi_li$field);
 			}
 			if (hasCountryAnnouncement) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, country_announcement$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, country_announcement$field);
 			}
 			if (hasJinWeiAnnouncement) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, jin_wei_announcement$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, jin_wei_announcement$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -126,31 +126,31 @@ package app.message {
 			var country_announcement$count:uint = 0;
 			var jin_wei_announcement$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
-					this.officers.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.CountryPosOfficersProto()));
+					this.officers.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.CountryPosOfficersProto()));
 					break;
 				case 2:
 					if (tong_zhi_li$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficeProto.tongZhiLi cannot be set twice.');
 					}
 					++tong_zhi_li$count;
-					this.tongZhiLi = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.tongZhiLi = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (country_announcement$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficeProto.countryAnnouncement cannot be set twice.');
 					}
 					++country_announcement$count;
-					this.countryAnnouncement = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.countryAnnouncement = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 4:
 					if (jin_wei_announcement$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryOfficeProto.jinWeiAnnouncement cannot be set twice.');
 					}
 					++jin_wei_announcement$count;
-					this.jinWeiAnnouncement = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.jinWeiAnnouncement = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

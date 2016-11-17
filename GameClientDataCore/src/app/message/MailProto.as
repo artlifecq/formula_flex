@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SEND_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.MailProto.send_time", "sendTime", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SEND_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.MailProto.send_time", "sendTime", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var send_time$field:Int64;
 
@@ -39,7 +39,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TITLE:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.MailProto.title", "title", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const TITLE:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.MailProto.title", "title", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var title$field:flash.utils.ByteArray;
 
@@ -62,7 +62,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CONTENT:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.MailProto.content", "content", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const CONTENT:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.MailProto.content", "content", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var content$field:flash.utils.ByteArray;
 
@@ -85,7 +85,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SENDER_ID:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.MailProto.sender_id", "senderId", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SENDER_ID:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.MailProto.sender_id", "senderId", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var sender_id$field:Int64;
 
@@ -108,7 +108,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SENDER_NAME:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.MailProto.sender_name", "senderName", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const SENDER_NAME:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.MailProto.sender_name", "senderName", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var sender_name$field:flash.utils.ByteArray;
 
@@ -131,7 +131,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const AMOUNT_VALUE:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.MailProto.amount_value", "amountValue", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const AMOUNT_VALUE:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.MailProto.amount_value", "amountValue", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var amountValue:Array = [];
@@ -139,7 +139,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GOODS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.MailProto.goods", "goods", (20 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MailProto.MailGoodsProto; });
+		public static const GOODS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.MailProto.goods", "goods", (20 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MailProto.MailGoodsProto; });
 
 		[ArrayElementType("app.message.MailProto.MailGoodsProto")]
 		public var goods:Array = [];
@@ -150,31 +150,31 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasSendTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, send_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, send_time$field);
 			}
 			if (hasTitle) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, title$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, title$field);
 			}
 			if (hasContent) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, content$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, content$field);
 			}
 			if (hasSenderId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, sender_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, sender_id$field);
 			}
 			if (hasSenderName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, sender_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, sender_name$field);
 			}
 			for (var amountValue$index:uint = 0; amountValue$index < this.amountValue.length; ++amountValue$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.amountValue[amountValue$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.amountValue[amountValue$index]);
 			}
 			for (var goods$index:uint = 0; goods$index < this.goods.length; ++goods$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 20);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.goods[goods$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.goods[goods$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -191,52 +191,52 @@ package app.message {
 			var sender_id$count:uint = 0;
 			var sender_name$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (send_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MailProto.sendTime cannot be set twice.');
 					}
 					++send_time$count;
-					this.sendTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.sendTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (title$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MailProto.title cannot be set twice.');
 					}
 					++title$count;
-					this.title = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.title = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 3:
 					if (content$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MailProto.content cannot be set twice.');
 					}
 					++content$count;
-					this.content = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.content = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 4:
 					if (sender_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MailProto.senderId cannot be set twice.');
 					}
 					++sender_id$count;
-					this.senderId = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.senderId = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 5:
 					if (sender_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MailProto.senderName cannot be set twice.');
 					}
 					++sender_name$count;
-					this.senderName = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.senderName = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 10:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.amountValue);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.amountValue);
 						break;
 					}
-					this.amountValue.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.amountValue.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				case 20:
-					this.goods.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.MailProto.MailGoodsProto()));
+					this.goods.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.MailProto.MailGoodsProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

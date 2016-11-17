@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RANK_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MonsterRankProto.rank_count", "rankCount", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RANK_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MonsterRankProto.rank_count", "rankCount", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var rank_count$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RANK_START_POS:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.MonsterRankProto.rank_start_pos", "rankStartPos", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RANK_START_POS:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.MonsterRankProto.rank_start_pos", "rankStartPos", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var rankStartPos:Array = [];
@@ -50,7 +50,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RANK_END_POS:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.MonsterRankProto.rank_end_pos", "rankEndPos", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RANK_END_POS:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.MonsterRankProto.rank_end_pos", "rankEndPos", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var rankEndPos:Array = [];
@@ -58,7 +58,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RANK_GOODS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.MonsterRankProto.rank_goods", "rankGoods", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
+		public static const RANK_GOODS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.MonsterRankProto.rank_goods", "rankGoods", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
 
 		[ArrayElementType("app.message.GoodsWrapperProto")]
 		public var rankGoods:Array = [];
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RANK_TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MonsterRankProto.rank_type", "rankType", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RANK_TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MonsterRankProto.rank_type", "rankType", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var rank_type$field:int;
 
@@ -94,23 +94,23 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasRankCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, rank_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, rank_count$field);
 			}
 			for (var rankStartPos$index:uint = 0; rankStartPos$index < this.rankStartPos.length; ++rankStartPos$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.rankStartPos[rankStartPos$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.rankStartPos[rankStartPos$index]);
 			}
 			for (var rankEndPos$index:uint = 0; rankEndPos$index < this.rankEndPos.length; ++rankEndPos$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.rankEndPos[rankEndPos$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.rankEndPos[rankEndPos$index]);
 			}
 			for (var rankGoods$index:uint = 0; rankGoods$index < this.rankGoods.length; ++rankGoods$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.rankGoods[rankGoods$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.rankGoods[rankGoods$index]);
 			}
 			if (hasRankType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, rank_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, rank_type$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -124,38 +124,38 @@ package app.message {
 			var rank_count$count:uint = 0;
 			var rank_type$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (rank_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterRankProto.rankCount cannot be set twice.');
 					}
 					++rank_count$count;
-					this.rankCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.rankCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.rankStartPos);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.rankStartPos);
 						break;
 					}
-					this.rankStartPos.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.rankStartPos.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				case 3:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.rankEndPos);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.rankEndPos);
 						break;
 					}
-					this.rankEndPos.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.rankEndPos.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				case 4:
-					this.rankGoods.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.GoodsWrapperProto()));
+					this.rankGoods.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.GoodsWrapperProto()));
 					break;
 				case 5:
 					if (rank_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterRankProto.rankType cannot be set twice.');
 					}
 					++rank_type$count;
-					this.rankType = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.rankType = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

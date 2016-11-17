@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SINGLE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SpriteStatProto.single", "single", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SingleStatsProto; });
+		public static const SINGLE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SpriteStatProto.single", "single", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SingleStatsProto; });
 
 		private var single$field:app.message.SingleStatsProto;
 
@@ -39,7 +39,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SpriteStatProto.total", "total", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TotalStatProto; });
+		public static const TOTAL:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SpriteStatProto.total", "total", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TotalStatProto; });
 
 		private var total$field:app.message.TotalStatProto;
 
@@ -65,11 +65,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasSingle) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, single$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, single$field);
 			}
 			if (hasTotal) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, total$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, total$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -83,7 +83,7 @@ package app.message {
 			var single$count:uint = 0;
 			var total$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (single$count != 0) {
@@ -91,7 +91,7 @@ package app.message {
 					}
 					++single$count;
 					this.single = new app.message.SingleStatsProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.single);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.single);
 					break;
 				case 2:
 					if (total$count != 0) {
@@ -99,7 +99,7 @@ package app.message {
 					}
 					++total$count;
 					this.total = new app.message.TotalStatProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.total);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.total);
 					break;
 				default:
 					super.readUnknown(input, tag);

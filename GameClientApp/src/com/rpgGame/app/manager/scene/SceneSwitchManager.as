@@ -54,7 +54,7 @@ package com.rpgGame.app.manager.scene
 	import app.message.SceneProto;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
 
 	/**
 	 *
@@ -450,7 +450,7 @@ package com.rpgGame.app.manager.scene
 			MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
 			var mapID : int = MainRoleManager.actorInfo.mapID;
 			_isChangeSceneComplete = false;
-			SocketConnection.excuteAll();
+			SocketConnection_protoBuffer.excuteAll();
 			InputManger.getInstance().closeOperate(); //关闭用户输入
 			SceneManager.getScene().clearAreaMap(1);
 			SceneManager.getScene().removeAllSceneObj();

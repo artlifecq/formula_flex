@@ -15,7 +15,7 @@ package app.message.CountryModuleObjProto {
 		/**
 		 *  @private
 		 */
-		public static const WU_XUN:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryModuleObjProto.CountryModuleWuXunProto.wu_xun", "wuXun", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const WU_XUN:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryModuleObjProto.CountryModuleWuXunProto.wu_xun", "wuXun", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var wu_xun$field:Int64;
 
@@ -38,7 +38,7 @@ package app.message.CountryModuleObjProto {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_WU_XUN:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryModuleObjProto.CountryModuleWuXunProto.total_wu_xun", "totalWuXun", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOTAL_WU_XUN:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryModuleObjProto.CountryModuleWuXunProto.total_wu_xun", "totalWuXun", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var total_wu_xun$field:Int64;
 
@@ -61,7 +61,7 @@ package app.message.CountryModuleObjProto {
 		/**
 		 *  @private
 		 */
-		public static const TODAY_KILL_ADD_WU_XUN:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryModuleObjProto.CountryModuleWuXunProto.today_kill_add_wu_xun", "todayKillAddWuXun", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TODAY_KILL_ADD_WU_XUN:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryModuleObjProto.CountryModuleWuXunProto.today_kill_add_wu_xun", "todayKillAddWuXun", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var today_kill_add_wu_xun$field:Int64;
 
@@ -84,7 +84,7 @@ package app.message.CountryModuleObjProto {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_KILL_ADD_WU_XUN:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryModuleObjProto.CountryModuleWuXunProto.total_kill_add_wu_xun", "totalKillAddWuXun", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOTAL_KILL_ADD_WU_XUN:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryModuleObjProto.CountryModuleWuXunProto.total_kill_add_wu_xun", "totalKillAddWuXun", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var total_kill_add_wu_xun$field:Int64;
 
@@ -107,7 +107,7 @@ package app.message.CountryModuleObjProto {
 		/**
 		 *  @private
 		 */
-		public static const TODAY_OTHER_ADD_WU_XUN:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryModuleObjProto.CountryModuleWuXunProto.today_other_add_wu_xun", "todayOtherAddWuXun", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TODAY_OTHER_ADD_WU_XUN:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryModuleObjProto.CountryModuleWuXunProto.today_other_add_wu_xun", "todayOtherAddWuXun", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var today_other_add_wu_xun$field:Int64;
 
@@ -130,7 +130,7 @@ package app.message.CountryModuleObjProto {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_OTHER_ADD_WU_XUN:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryModuleObjProto.CountryModuleWuXunProto.total_other_add_wu_xun", "totalOtherAddWuXun", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOTAL_OTHER_ADD_WU_XUN:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryModuleObjProto.CountryModuleWuXunProto.total_other_add_wu_xun", "totalOtherAddWuXun", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var total_other_add_wu_xun$field:Int64;
 
@@ -153,7 +153,7 @@ package app.message.CountryModuleObjProto {
 		/**
 		 *  @private
 		 */
-		public static const RECORDS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.CountryModuleObjProto.CountryModuleWuXunProto.records", "records", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryModuleObjProto.CountryModuleWuXunProto.AddWuXunRecordProto; });
+		public static const RECORDS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.CountryModuleObjProto.CountryModuleWuXunProto.records", "records", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryModuleObjProto.CountryModuleWuXunProto.AddWuXunRecordProto; });
 
 		[ArrayElementType("app.message.CountryModuleObjProto.CountryModuleWuXunProto.AddWuXunRecordProto")]
 		public var records:Array = [];
@@ -164,31 +164,31 @@ package app.message.CountryModuleObjProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasWuXun) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, wu_xun$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, wu_xun$field);
 			}
 			if (hasTotalWuXun) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, total_wu_xun$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, total_wu_xun$field);
 			}
 			if (hasTodayKillAddWuXun) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, today_kill_add_wu_xun$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, today_kill_add_wu_xun$field);
 			}
 			if (hasTotalKillAddWuXun) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, total_kill_add_wu_xun$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, total_kill_add_wu_xun$field);
 			}
 			if (hasTodayOtherAddWuXun) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, today_other_add_wu_xun$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, today_other_add_wu_xun$field);
 			}
 			if (hasTotalOtherAddWuXun) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, total_other_add_wu_xun$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, total_other_add_wu_xun$field);
 			}
 			for (var records$index:uint = 0; records$index < this.records.length; ++records$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.records[records$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.records[records$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -206,52 +206,52 @@ package app.message.CountryModuleObjProto {
 			var today_other_add_wu_xun$count:uint = 0;
 			var total_other_add_wu_xun$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (wu_xun$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryModuleWuXunProto.wuXun cannot be set twice.');
 					}
 					++wu_xun$count;
-					this.wuXun = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.wuXun = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (total_wu_xun$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryModuleWuXunProto.totalWuXun cannot be set twice.');
 					}
 					++total_wu_xun$count;
-					this.totalWuXun = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.totalWuXun = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 3:
 					if (today_kill_add_wu_xun$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryModuleWuXunProto.todayKillAddWuXun cannot be set twice.');
 					}
 					++today_kill_add_wu_xun$count;
-					this.todayKillAddWuXun = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.todayKillAddWuXun = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 4:
 					if (total_kill_add_wu_xun$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryModuleWuXunProto.totalKillAddWuXun cannot be set twice.');
 					}
 					++total_kill_add_wu_xun$count;
-					this.totalKillAddWuXun = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.totalKillAddWuXun = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 5:
 					if (today_other_add_wu_xun$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryModuleWuXunProto.todayOtherAddWuXun cannot be set twice.');
 					}
 					++today_other_add_wu_xun$count;
-					this.todayOtherAddWuXun = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.todayOtherAddWuXun = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 6:
 					if (total_other_add_wu_xun$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryModuleWuXunProto.totalOtherAddWuXun cannot be set twice.');
 					}
 					++total_other_add_wu_xun$count;
-					this.totalOtherAddWuXun = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.totalOtherAddWuXun = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 7:
-					this.records.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.CountryModuleObjProto.CountryModuleWuXunProto.AddWuXunRecordProto()));
+					this.records.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.CountryModuleObjProto.CountryModuleWuXunProto.AddWuXunRecordProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

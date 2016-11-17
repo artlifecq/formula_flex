@@ -1,13 +1,19 @@
 package app.message {
-	import com.netease.protobuf.*;
-	use namespace com.netease.protobuf.used_by_generated_code;
-	import com.netease.protobuf.fieldDescriptors.*;
-	import flash.utils.Endian;
-	import flash.utils.IDataInput;
-	import flash.utils.IDataOutput;
-	import flash.utils.IExternalizable;
+	import com.netease.protobuf.Message;
+	import com.netease.protobuf.ReadUtils;
+	import com.netease.protobuf.WireType;
+	import com.netease.protobuf.WriteUtils;
+	import com.netease.protobuf.WritingBuffer;
+	import com.netease.protobuf.used_by_generated_code;
+	import com.netease.protobuf.fieldDescriptors.FieldDescriptor_TYPE_BOOL;
+	import com.netease.protobuf.fieldDescriptors.FieldDescriptor_TYPE_BYTES;
+	import com.netease.protobuf.fieldDescriptors.FieldDescriptor_TYPE_INT32;
+	
 	import flash.errors.IOError;
 	import flash.utils.ByteArray;
+	import flash.utils.IDataInput;
+
+	use namespace com.netease.protobuf.used_by_generated_code;
 	// @@protoc_insertion_point(imports)
 
 	// @@protoc_insertion_point(class_metadata)
@@ -15,7 +21,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_ENTER_LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.NormalSceneProto.can_enter_level", "canEnterLevel", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_ENTER_LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.NormalSceneProto.can_enter_level", "canEnterLevel", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_enter_level$field:int;
 
@@ -42,7 +48,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RECOMMEND_LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.NormalSceneProto.recommend_level", "recommendLevel", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RECOMMEND_LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.NormalSceneProto.recommend_level", "recommendLevel", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var recommend_level$field:int;
 
@@ -67,7 +73,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_NORMAL_SCENE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.NormalSceneProto.is_normal_scene", "isNormalScene", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_NORMAL_SCENE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.NormalSceneProto.is_normal_scene", "isNormalScene", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_normal_scene$field:Boolean;
 
@@ -92,7 +98,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SELF_COUNTRY_DEATH_RETURN_SCENE_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.NormalSceneProto.self_country_death_return_scene_id", "selfCountryDeathReturnSceneId", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SELF_COUNTRY_DEATH_RETURN_SCENE_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.NormalSceneProto.self_country_death_return_scene_id", "selfCountryDeathReturnSceneId", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var self_country_death_return_scene_id$field:int;
 
@@ -117,7 +123,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const OTHER_COUNTRY_DEATH_RETURN_SCENE_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.NormalSceneProto.other_country_death_return_scene_id", "otherCountryDeathReturnSceneId", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const OTHER_COUNTRY_DEATH_RETURN_SCENE_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.NormalSceneProto.other_country_death_return_scene_id", "otherCountryDeathReturnSceneId", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var other_country_death_return_scene_id$field:int;
 
@@ -142,7 +148,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const POET:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.NormalSceneProto.poet", "poet", (8 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const POET:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.NormalSceneProto.poet", "poet", (8 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var poet$field:flash.utils.ByteArray;
 
@@ -165,7 +171,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_HIDE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.NormalSceneProto.is_hide", "isHide", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_HIDE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.NormalSceneProto.is_hide", "isHide", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_hide$field:Boolean;
 
@@ -190,7 +196,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_CLUSTERED:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.NormalSceneProto.is_clustered", "isClustered", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_CLUSTERED:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.NormalSceneProto.is_clustered", "isClustered", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_clustered$field:Boolean;
 
@@ -215,7 +221,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_COUNTRY_WAR_MAP:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.NormalSceneProto.is_country_war_map", "isCountryWarMap", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_COUNTRY_WAR_MAP:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.NormalSceneProto.is_country_war_map", "isCountryWarMap", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_country_war_map$field:Boolean;
 
@@ -240,7 +246,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_COUNTRY_MILITARY_SUBSIBY_MAP:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.NormalSceneProto.is_country_military_subsiby_map", "isCountryMilitarySubsibyMap", (12 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_COUNTRY_MILITARY_SUBSIBY_MAP:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.NormalSceneProto.is_country_military_subsiby_map", "isCountryMilitarySubsibyMap", (12 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_country_military_subsiby_map$field:Boolean;
 
@@ -265,7 +271,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_LIMIT_ZHAN_CHE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.NormalSceneProto.is_limit_zhan_che", "isLimitZhanChe", (13 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_LIMIT_ZHAN_CHE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.NormalSceneProto.is_limit_zhan_che", "isLimitZhanChe", (13 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_limit_zhan_che$field:Boolean;
 
@@ -293,47 +299,47 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasCanEnterLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, can_enter_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, can_enter_level$field);
 			}
 			if (hasRecommendLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, recommend_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, recommend_level$field);
 			}
 			if (hasIsNormalScene) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_normal_scene$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_normal_scene$field);
 			}
 			if (hasSelfCountryDeathReturnSceneId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, self_country_death_return_scene_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, self_country_death_return_scene_id$field);
 			}
 			if (hasOtherCountryDeathReturnSceneId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, other_country_death_return_scene_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, other_country_death_return_scene_id$field);
 			}
 			if (hasPoet) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, poet$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, poet$field);
 			}
 			if (hasIsHide) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_hide$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_hide$field);
 			}
 			if (hasIsClustered) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_clustered$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_clustered$field);
 			}
 			if (hasIsCountryWarMap) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_country_war_map$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_country_war_map$field);
 			}
 			if (hasIsCountryMilitarySubsibyMap) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_country_military_subsiby_map$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_country_military_subsiby_map$field);
 			}
 			if (hasIsLimitZhanChe) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_limit_zhan_che$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_limit_zhan_che$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -356,84 +362,84 @@ package app.message {
 			var is_country_military_subsiby_map$count:uint = 0;
 			var is_limit_zhan_che$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 3:
 					if (can_enter_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NormalSceneProto.canEnterLevel cannot be set twice.');
 					}
 					++can_enter_level$count;
-					this.canEnterLevel = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.canEnterLevel = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (recommend_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NormalSceneProto.recommendLevel cannot be set twice.');
 					}
 					++recommend_level$count;
-					this.recommendLevel = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.recommendLevel = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (is_normal_scene$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NormalSceneProto.isNormalScene cannot be set twice.');
 					}
 					++is_normal_scene$count;
-					this.isNormalScene = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isNormalScene = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 6:
 					if (self_country_death_return_scene_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NormalSceneProto.selfCountryDeathReturnSceneId cannot be set twice.');
 					}
 					++self_country_death_return_scene_id$count;
-					this.selfCountryDeathReturnSceneId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.selfCountryDeathReturnSceneId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (other_country_death_return_scene_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NormalSceneProto.otherCountryDeathReturnSceneId cannot be set twice.');
 					}
 					++other_country_death_return_scene_id$count;
-					this.otherCountryDeathReturnSceneId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.otherCountryDeathReturnSceneId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 8:
 					if (poet$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NormalSceneProto.poet cannot be set twice.');
 					}
 					++poet$count;
-					this.poet = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.poet = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 9:
 					if (is_hide$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NormalSceneProto.isHide cannot be set twice.');
 					}
 					++is_hide$count;
-					this.isHide = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isHide = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 10:
 					if (is_clustered$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NormalSceneProto.isClustered cannot be set twice.');
 					}
 					++is_clustered$count;
-					this.isClustered = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isClustered = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 11:
 					if (is_country_war_map$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NormalSceneProto.isCountryWarMap cannot be set twice.');
 					}
 					++is_country_war_map$count;
-					this.isCountryWarMap = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isCountryWarMap = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 12:
 					if (is_country_military_subsiby_map$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NormalSceneProto.isCountryMilitarySubsibyMap cannot be set twice.');
 					}
 					++is_country_military_subsiby_map$count;
-					this.isCountryMilitarySubsibyMap = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isCountryMilitarySubsibyMap = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 13:
 					if (is_limit_zhan_che$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NormalSceneProto.isLimitZhanChe cannot be set twice.');
 					}
 					++is_limit_zhan_che$count;
-					this.isLimitZhanChe = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isLimitZhanChe = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

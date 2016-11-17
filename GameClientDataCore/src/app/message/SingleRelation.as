@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ID:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.SingleRelation.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ID:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.SingleRelation.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var id$field:Int64;
 
@@ -37,7 +37,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.SingleRelation.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.SingleRelation.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var name$field:String;
 
@@ -60,7 +60,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SingleRelation.level", "level", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SingleRelation.level", "level", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level$field:int;
 
@@ -87,7 +87,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SingleRelation.country", "country", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COUNTRY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SingleRelation.country", "country", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var country$field:int;
 
@@ -112,7 +112,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_MALE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.SingleRelation.is_male", "isMale", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_MALE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.SingleRelation.is_male", "isMale", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_male$field:Boolean;
 
@@ -137,7 +137,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HEAD:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SingleRelation.head", "head", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const HEAD:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SingleRelation.head", "head", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var head$field:int;
 
@@ -162,7 +162,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MOOD:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.SingleRelation.mood", "mood", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const MOOD:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.SingleRelation.mood", "mood", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var mood$field:String;
 
@@ -188,31 +188,31 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, id$field);
 			}
 			if (hasName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, name$field);
 			}
 			if (hasLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level$field);
 			}
 			if (hasCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, country$field);
 			}
 			if (hasIsMale) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_male$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_male$field);
 			}
 			if (hasHead) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, head$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, head$field);
 			}
 			if (hasMood) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, mood$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, mood$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -231,56 +231,56 @@ package app.message {
 			var head$count:uint = 0;
 			var mood$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SingleRelation.id cannot be set twice.');
 					}
 					++id$count;
-					this.id = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.id = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SingleRelation.name cannot be set twice.');
 					}
 					++name$count;
-					this.name = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.name = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SingleRelation.level cannot be set twice.');
 					}
 					++level$count;
-					this.level = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.level = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (country$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SingleRelation.country cannot be set twice.');
 					}
 					++country$count;
-					this.country = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.country = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (is_male$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SingleRelation.isMale cannot be set twice.');
 					}
 					++is_male$count;
-					this.isMale = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isMale = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 7:
 					if (head$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SingleRelation.head cannot be set twice.');
 					}
 					++head$count;
-					this.head = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.head = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 10:
 					if (mood$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SingleRelation.mood cannot be set twice.');
 					}
 					++mood$count;
-					this.mood = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.mood = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

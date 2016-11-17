@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.FamilyInListProto.name", "name", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.FamilyInListProto.name", "name", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var name$field:flash.utils.ByteArray;
 
@@ -38,7 +38,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FamilyInListProto.country", "country", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COUNTRY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FamilyInListProto.country", "country", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var country$field:int;
 
@@ -65,7 +65,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FamilyInListProto.level", "level", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FamilyInListProto.level", "level", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level$field:int;
 
@@ -90,7 +90,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HERO_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FamilyInListProto.hero_count", "heroCount", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const HERO_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FamilyInListProto.hero_count", "heroCount", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var hero_count$field:int;
 
@@ -115,7 +115,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAX_HERO_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FamilyInListProto.max_hero_count", "maxHeroCount", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MAX_HERO_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FamilyInListProto.max_hero_count", "maxHeroCount", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var max_hero_count$field:int;
 
@@ -140,7 +140,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_AUTO_ACCEPT_JOIN_REQUEST:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.FamilyInListProto.is_auto_accept_join_request", "isAutoAcceptJoinRequest", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_AUTO_ACCEPT_JOIN_REQUEST:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.FamilyInListProto.is_auto_accept_join_request", "isAutoAcceptJoinRequest", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_auto_accept_join_request$field:Boolean;
 
@@ -165,7 +165,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_ANY_LEADER_ONLINE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.FamilyInListProto.is_any_leader_online", "isAnyLeaderOnline", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_ANY_LEADER_ONLINE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.FamilyInListProto.is_any_leader_online", "isAnyLeaderOnline", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_any_leader_online$field:Boolean;
 
@@ -190,7 +190,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEADER_ID:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.FamilyInListProto.leader_id", "leaderId", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEADER_ID:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.FamilyInListProto.leader_id", "leaderId", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var leader_id$field:Int64;
 
@@ -213,7 +213,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEADER_NAME:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.FamilyInListProto.leader_name", "leaderName", (9 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const LEADER_NAME:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.FamilyInListProto.leader_name", "leaderName", (9 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var leader_name$field:flash.utils.ByteArray;
 
@@ -236,7 +236,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ONLINE_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FamilyInListProto.online_count", "onlineCount", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ONLINE_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FamilyInListProto.online_count", "onlineCount", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var online_count$field:int;
 
@@ -261,7 +261,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CREATE_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.FamilyInListProto.create_time", "createTime", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CREATE_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.FamilyInListProto.create_time", "createTime", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var create_time$field:Int64;
 
@@ -284,7 +284,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GUILD_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.FamilyInListProto.guild_name", "guildName", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const GUILD_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.FamilyInListProto.guild_name", "guildName", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var guild_name$field:String;
 
@@ -310,51 +310,51 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, name$field);
 			}
 			if (hasCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, country$field);
 			}
 			if (hasLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level$field);
 			}
 			if (hasHeroCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, hero_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, hero_count$field);
 			}
 			if (hasMaxHeroCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, max_hero_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, max_hero_count$field);
 			}
 			if (hasIsAutoAcceptJoinRequest) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_auto_accept_join_request$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_auto_accept_join_request$field);
 			}
 			if (hasIsAnyLeaderOnline) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_any_leader_online$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_any_leader_online$field);
 			}
 			if (hasLeaderId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, leader_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, leader_id$field);
 			}
 			if (hasLeaderName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, leader_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, leader_name$field);
 			}
 			if (hasOnlineCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, online_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, online_count$field);
 			}
 			if (hasCreateTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, create_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, create_time$field);
 			}
 			if (hasGuildName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, guild_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, guild_name$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -378,91 +378,91 @@ package app.message {
 			var create_time$count:uint = 0;
 			var guild_name$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyInListProto.name cannot be set twice.');
 					}
 					++name$count;
-					this.name = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.name = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 2:
 					if (country$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyInListProto.country cannot be set twice.');
 					}
 					++country$count;
-					this.country = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.country = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyInListProto.level cannot be set twice.');
 					}
 					++level$count;
-					this.level = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.level = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (hero_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyInListProto.heroCount cannot be set twice.');
 					}
 					++hero_count$count;
-					this.heroCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.heroCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (max_hero_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyInListProto.maxHeroCount cannot be set twice.');
 					}
 					++max_hero_count$count;
-					this.maxHeroCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.maxHeroCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (is_auto_accept_join_request$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyInListProto.isAutoAcceptJoinRequest cannot be set twice.');
 					}
 					++is_auto_accept_join_request$count;
-					this.isAutoAcceptJoinRequest = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isAutoAcceptJoinRequest = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 7:
 					if (is_any_leader_online$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyInListProto.isAnyLeaderOnline cannot be set twice.');
 					}
 					++is_any_leader_online$count;
-					this.isAnyLeaderOnline = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isAnyLeaderOnline = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 8:
 					if (leader_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyInListProto.leaderId cannot be set twice.');
 					}
 					++leader_id$count;
-					this.leaderId = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.leaderId = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 9:
 					if (leader_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyInListProto.leaderName cannot be set twice.');
 					}
 					++leader_name$count;
-					this.leaderName = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.leaderName = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 10:
 					if (online_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyInListProto.onlineCount cannot be set twice.');
 					}
 					++online_count$count;
-					this.onlineCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.onlineCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 11:
 					if (create_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyInListProto.createTime cannot be set twice.');
 					}
 					++create_time$count;
-					this.createTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.createTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 12:
 					if (guild_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyInListProto.guildName cannot be set twice.');
 					}
 					++guild_name$count;
-					this.guildName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.guildName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

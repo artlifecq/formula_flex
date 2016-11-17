@@ -20,7 +20,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const POWER_TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.CountryDataProto.power_type", "powerType", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.CountryPowerType);
+		public static const POWER_TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.CountryDataProto.power_type", "powerType", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.CountryPowerType);
 
 		private var power_type$field:int;
 
@@ -47,7 +47,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY_POWER:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryDataProto.country_power", "countryPower", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COUNTRY_POWER:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryDataProto.country_power", "countryPower", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var country_power$field:Int64;
 
@@ -70,7 +70,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const JING_SHU:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryDataProto.jing_shu", "jingShu", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryJingShuProto; });
+		public static const JING_SHU:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryDataProto.jing_shu", "jingShu", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryJingShuProto; });
 
 		private var jing_shu$field:app.message.CountryJingShuProto;
 
@@ -93,7 +93,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const UNION_STATUS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryDataProto.union_status", "unionStatus", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryUnionStatusProto; });
+		public static const UNION_STATUS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryDataProto.union_status", "unionStatus", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryUnionStatusProto; });
 
 		private var union_status$field:app.message.CountryUnionStatusProto;
 
@@ -116,7 +116,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const WAR_STATUS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryDataProto.war_status", "warStatus", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryWarStatusProto; });
+		public static const WAR_STATUS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryDataProto.war_status", "warStatus", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryWarStatusProto; });
 
 		private var war_status$field:app.message.CountryWarStatusProto;
 
@@ -139,7 +139,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EXCHEQUER:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryDataProto.exchequer", "exchequer", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryExchequerProto; });
+		public static const EXCHEQUER:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryDataProto.exchequer", "exchequer", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryExchequerProto; });
 
 		private var exchequer$field:app.message.CountryExchequerProto;
 
@@ -162,7 +162,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STRATEGY:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryDataProto.strategy", "strategy", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryStrategyProto; });
+		public static const STRATEGY:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryDataProto.strategy", "strategy", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryStrategyProto; });
 
 		private var strategy$field:app.message.CountryStrategyProto;
 
@@ -185,7 +185,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const YESTERDAY_GOOD_COMMENTS:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryDataProto.yesterday_good_comments", "yesterdayGoodComments", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const YESTERDAY_GOOD_COMMENTS:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryDataProto.yesterday_good_comments", "yesterdayGoodComments", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var yesterday_good_comments$field:int;
 
@@ -210,7 +210,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const YESTERDAY_BAD_COMMENTS:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryDataProto.yesterday_bad_comments", "yesterdayBadComments", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const YESTERDAY_BAD_COMMENTS:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryDataProto.yesterday_bad_comments", "yesterdayBadComments", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var yesterday_bad_comments$field:int;
 
@@ -238,39 +238,39 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasPowerType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, power_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, power_type$field);
 			}
 			if (hasCountryPower) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, country_power$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, country_power$field);
 			}
 			if (hasJingShu) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, jing_shu$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, jing_shu$field);
 			}
 			if (hasUnionStatus) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, union_status$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, union_status$field);
 			}
 			if (hasWarStatus) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, war_status$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, war_status$field);
 			}
 			if (hasExchequer) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, exchequer$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, exchequer$field);
 			}
 			if (hasStrategy) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, strategy$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, strategy$field);
 			}
 			if (hasYesterdayGoodComments) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, yesterday_good_comments$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, yesterday_good_comments$field);
 			}
 			if (hasYesterdayBadComments) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, yesterday_bad_comments$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, yesterday_bad_comments$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -291,21 +291,21 @@ package app.message {
 			var yesterday_good_comments$count:uint = 0;
 			var yesterday_bad_comments$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (power_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryDataProto.powerType cannot be set twice.');
 					}
 					++power_type$count;
-					this.powerType = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.powerType = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 2:
 					if (country_power$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryDataProto.countryPower cannot be set twice.');
 					}
 					++country_power$count;
-					this.countryPower = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.countryPower = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 3:
 					if (jing_shu$count != 0) {
@@ -313,7 +313,7 @@ package app.message {
 					}
 					++jing_shu$count;
 					this.jingShu = new app.message.CountryJingShuProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.jingShu);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.jingShu);
 					break;
 				case 4:
 					if (union_status$count != 0) {
@@ -321,7 +321,7 @@ package app.message {
 					}
 					++union_status$count;
 					this.unionStatus = new app.message.CountryUnionStatusProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.unionStatus);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.unionStatus);
 					break;
 				case 5:
 					if (war_status$count != 0) {
@@ -329,7 +329,7 @@ package app.message {
 					}
 					++war_status$count;
 					this.warStatus = new app.message.CountryWarStatusProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.warStatus);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.warStatus);
 					break;
 				case 6:
 					if (exchequer$count != 0) {
@@ -337,7 +337,7 @@ package app.message {
 					}
 					++exchequer$count;
 					this.exchequer = new app.message.CountryExchequerProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.exchequer);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.exchequer);
 					break;
 				case 7:
 					if (strategy$count != 0) {
@@ -345,21 +345,21 @@ package app.message {
 					}
 					++strategy$count;
 					this.strategy = new app.message.CountryStrategyProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.strategy);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.strategy);
 					break;
 				case 8:
 					if (yesterday_good_comments$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryDataProto.yesterdayGoodComments cannot be set twice.');
 					}
 					++yesterday_good_comments$count;
-					this.yesterdayGoodComments = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.yesterdayGoodComments = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 9:
 					if (yesterday_bad_comments$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryDataProto.yesterdayBadComments cannot be set twice.');
 					}
 					++yesterday_bad_comments$count;
-					this.yesterdayBadComments = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.yesterdayBadComments = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

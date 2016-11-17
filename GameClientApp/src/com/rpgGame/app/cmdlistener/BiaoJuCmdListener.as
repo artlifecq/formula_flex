@@ -13,8 +13,8 @@ package com.rpgGame.app.cmdlistener
 	import app.message.BiaoJuProto;
 	
 	import org.client.mainCore.bean.BaseBean;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 	
 	public class BiaoJuCmdListener extends BaseBean
 	{
@@ -25,21 +25,21 @@ package com.rpgGame.app.cmdlistener
 		
 		override public function start():void
 		{
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_GET_BIAO_JU_DATA,getBiaoJuData);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_GET_BIAO_JU_DATA_FAIL,getBiaoJuDataFail);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_RECHARGE_BIAO_JU_MONEY,rechargeBiaoJuMoney);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_RECHARGE_BIAO_JU_MONEY_FAIL,rechargeBiaoJuMoneyFail);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_OPEN_BIAO_JU_FAIL,openBiaoJuFail);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_OPEN_BIAO_JU_BROADCAST,openBiaoJuBroadcast);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_BIAO_JU_RESET_DAILY,biaoJuResetDaily);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_BIAO_JU_LOG,biaoJuLog);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_BIAO_JU_LOG_FAIL,biaoJuLogFail);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_BIAO_JU_OPEN_INFO,onBiaoJuOpenInfo);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_TOU_BAO,onTouBao);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_TOU_BAO_FAIL,onTouBaoFail);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_BIAO_TOU_BAO,onBiaoTouBao);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_ALLOCATE_SALARY,allocateSalary);
-			SocketConnection.addCmdListener(BiaoModuleMessages.S2C_ALLOCATE_SALARY_FAIL,allocateSalaryFail);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_GET_BIAO_JU_DATA,getBiaoJuData);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_GET_BIAO_JU_DATA_FAIL,getBiaoJuDataFail);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_RECHARGE_BIAO_JU_MONEY,rechargeBiaoJuMoney);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_RECHARGE_BIAO_JU_MONEY_FAIL,rechargeBiaoJuMoneyFail);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_OPEN_BIAO_JU_FAIL,openBiaoJuFail);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_OPEN_BIAO_JU_BROADCAST,openBiaoJuBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_BIAO_JU_RESET_DAILY,biaoJuResetDaily);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_BIAO_JU_LOG,biaoJuLog);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_BIAO_JU_LOG_FAIL,biaoJuLogFail);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_BIAO_JU_OPEN_INFO,onBiaoJuOpenInfo);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_TOU_BAO,onTouBao);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_TOU_BAO_FAIL,onTouBaoFail);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_BIAO_TOU_BAO,onBiaoTouBao);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_ALLOCATE_SALARY,allocateSalary);
+			SocketConnection_protoBuffer.addCmdListener(BiaoModuleMessages.S2C_ALLOCATE_SALARY_FAIL,allocateSalaryFail);
 			finish();
 		}
 		/**

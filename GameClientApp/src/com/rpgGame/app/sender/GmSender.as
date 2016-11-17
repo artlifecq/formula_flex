@@ -2,7 +2,7 @@ package com.rpgGame.app.sender
 {
 	import app.cmd.GMModuleMessages;
 	
-	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
 
 	/**
 	 * GM命令面板
@@ -23,7 +23,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeUTF(pm);
 
-			SocketConnection.send(GMModuleMessages.C2S_GM_QUERY, _bytes);
+			SocketConnection_protoBuffer.send(GMModuleMessages.C2S_GM_QUERY, _bytes);
 		}
 	}
 }

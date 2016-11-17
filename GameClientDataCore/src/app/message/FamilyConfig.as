@@ -20,7 +20,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FAMILY_MISC:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyConfig.family_misc", "familyMisc", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyMiscProto; });
+		public static const FAMILY_MISC:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyConfig.family_misc", "familyMisc", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyMiscProto; });
 
 		private var family_misc$field:app.message.FamilyMiscProto;
 
@@ -43,7 +43,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FAMILY_HALL:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyConfig.family_hall", "familyHall", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AllFamilyHallDatasProto; });
+		public static const FAMILY_HALL:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyConfig.family_hall", "familyHall", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AllFamilyHallDatasProto; });
 
 		private var family_hall$field:app.message.AllFamilyHallDatasProto;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FAMILY_COLLAGE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyConfig.family_collage", "familyCollage", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AllFamilyCollageDatasProto; });
+		public static const FAMILY_COLLAGE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyConfig.family_collage", "familyCollage", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AllFamilyCollageDatasProto; });
 
 		private var family_collage$field:app.message.AllFamilyCollageDatasProto;
 
@@ -89,7 +89,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FAMILY_BIAO:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyConfig.family_biao", "familyBiao", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AllFamilyBiaoDatasProto; });
+		public static const FAMILY_BIAO:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyConfig.family_biao", "familyBiao", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AllFamilyBiaoDatasProto; });
 
 		private var family_biao$field:app.message.AllFamilyBiaoDatasProto;
 
@@ -112,7 +112,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FAMILY_ANIMAL_BAR:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyConfig.family_animal_bar", "familyAnimalBar", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AllFamilyAnimalBarDatasProto; });
+		public static const FAMILY_ANIMAL_BAR:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyConfig.family_animal_bar", "familyAnimalBar", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AllFamilyAnimalBarDatasProto; });
 
 		private var family_animal_bar$field:app.message.AllFamilyAnimalBarDatasProto;
 
@@ -135,7 +135,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FAMILY_OFFICERS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyConfig.family_officers", "familyOfficers", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AllFamilyOfficerDatasProto; });
+		public static const FAMILY_OFFICERS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyConfig.family_officers", "familyOfficers", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AllFamilyOfficerDatasProto; });
 
 		private var family_officers$field:app.message.AllFamilyOfficerDatasProto;
 
@@ -161,27 +161,27 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasFamilyMisc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, family_misc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, family_misc$field);
 			}
 			if (hasFamilyHall) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, family_hall$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, family_hall$field);
 			}
 			if (hasFamilyCollage) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, family_collage$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, family_collage$field);
 			}
 			if (hasFamilyBiao) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, family_biao$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, family_biao$field);
 			}
 			if (hasFamilyAnimalBar) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, family_animal_bar$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, family_animal_bar$field);
 			}
 			if (hasFamilyOfficers) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, family_officers$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, family_officers$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -199,7 +199,7 @@ package app.message {
 			var family_animal_bar$count:uint = 0;
 			var family_officers$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (family_misc$count != 0) {
@@ -207,7 +207,7 @@ package app.message {
 					}
 					++family_misc$count;
 					this.familyMisc = new app.message.FamilyMiscProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.familyMisc);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.familyMisc);
 					break;
 				case 2:
 					if (family_hall$count != 0) {
@@ -215,7 +215,7 @@ package app.message {
 					}
 					++family_hall$count;
 					this.familyHall = new app.message.AllFamilyHallDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.familyHall);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.familyHall);
 					break;
 				case 3:
 					if (family_collage$count != 0) {
@@ -223,7 +223,7 @@ package app.message {
 					}
 					++family_collage$count;
 					this.familyCollage = new app.message.AllFamilyCollageDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.familyCollage);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.familyCollage);
 					break;
 				case 4:
 					if (family_biao$count != 0) {
@@ -231,7 +231,7 @@ package app.message {
 					}
 					++family_biao$count;
 					this.familyBiao = new app.message.AllFamilyBiaoDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.familyBiao);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.familyBiao);
 					break;
 				case 5:
 					if (family_animal_bar$count != 0) {
@@ -239,7 +239,7 @@ package app.message {
 					}
 					++family_animal_bar$count;
 					this.familyAnimalBar = new app.message.AllFamilyAnimalBarDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.familyAnimalBar);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.familyAnimalBar);
 					break;
 				case 6:
 					if (family_officers$count != 0) {
@@ -247,7 +247,7 @@ package app.message {
 					}
 					++family_officers$count;
 					this.familyOfficers = new app.message.AllFamilyOfficerDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.familyOfficers);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.familyOfficers);
 					break;
 				default:
 					super.readUnknown(input, tag);

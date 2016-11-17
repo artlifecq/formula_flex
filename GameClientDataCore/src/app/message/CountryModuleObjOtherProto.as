@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const WU_XUN:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryModuleObjOtherProto.wu_xun", "wuXun", (8 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryModuleObjOtherProto.CountryModuleWuXunOtherProto; });
+		public static const WU_XUN:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryModuleObjOtherProto.wu_xun", "wuXun", (8 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryModuleObjOtherProto.CountryModuleWuXunOtherProto; });
 
 		private var wu_xun$field:app.message.CountryModuleObjOtherProto.CountryModuleWuXunOtherProto;
 
@@ -41,7 +41,7 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasWuXun) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, wu_xun$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, wu_xun$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -54,7 +54,7 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var wu_xun$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 8:
 					if (wu_xun$count != 0) {
@@ -62,7 +62,7 @@ package app.message {
 					}
 					++wu_xun$count;
 					this.wuXun = new app.message.CountryModuleObjOtherProto.CountryModuleWuXunOtherProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.wuXun);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.wuXun);
 					break;
 				default:
 					super.readUnknown(input, tag);

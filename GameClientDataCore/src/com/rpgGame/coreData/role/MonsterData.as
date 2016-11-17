@@ -5,7 +5,7 @@ package com.rpgGame.coreData.role
 	import app.message.MonsterDataProto;
 	import app.message.MonsterDataProto.MonsterType;
 	
-	import org.game.netCore.net.BytesUtil;
+	import org.game.netCore.net_protobuff.BytesUtil;
 
 	/**
 	 *

@@ -12,8 +12,8 @@ package com.rpgGame.app.cmdlistener
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	
 	/**
@@ -31,14 +31,14 @@ package com.rpgGame.app.cmdlistener
 		
 		override public function start():void
 		{
-			SocketConnection.addCmdListener(AddSpriteStatModuleMessages.S2C_ADD_SPRITE_STAT_FAIL, onAddSpriteStatFail);
-			SocketConnection.addCmdListener(AddSpriteStatModuleMessages.S2C_ADD_SPRITE_STAT, onAddSpriteStat);
+			SocketConnection_protoBuffer.addCmdListener(AddSpriteStatModuleMessages.S2C_ADD_SPRITE_STAT_FAIL, onAddSpriteStatFail);
+			SocketConnection_protoBuffer.addCmdListener(AddSpriteStatModuleMessages.S2C_ADD_SPRITE_STAT, onAddSpriteStat);
 			
-			SocketConnection.addCmdListener(AddSpriteStatModuleMessages.S2C_AUTO_ADD_SPRITE_STAT_FAIL, onAutoAddSpriteStatFail);
-			SocketConnection.addCmdListener(AddSpriteStatModuleMessages.S2C_AUTO_ADD_SPRITE_STAT, onAutoAddSpriteStat);
+			SocketConnection_protoBuffer.addCmdListener(AddSpriteStatModuleMessages.S2C_AUTO_ADD_SPRITE_STAT_FAIL, onAutoAddSpriteStatFail);
+			SocketConnection_protoBuffer.addCmdListener(AddSpriteStatModuleMessages.S2C_AUTO_ADD_SPRITE_STAT, onAutoAddSpriteStat);
 			
-			SocketConnection.addCmdListener(AddSpriteStatModuleMessages.S2C_CLEAR_SPRITE_STAT_FAIL, onClearSpriteStatFail);
-			SocketConnection.addCmdListener(AddSpriteStatModuleMessages.S2C_CLEAR_SPRITE_STAT, onClearSpriteStat);
+			SocketConnection_protoBuffer.addCmdListener(AddSpriteStatModuleMessages.S2C_CLEAR_SPRITE_STAT_FAIL, onClearSpriteStatFail);
+			SocketConnection_protoBuffer.addCmdListener(AddSpriteStatModuleMessages.S2C_CLEAR_SPRITE_STAT, onClearSpriteStat);
 			
 			finish();
 		}

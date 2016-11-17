@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.VipProto.level", "level", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.VipProto.level", "level", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DESC:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.VipProto.desc", "desc", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const DESC:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.VipProto.desc", "desc", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var desc$field:String;
 
@@ -65,7 +65,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_BROWSE:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.VipProto.total_browse", "totalBrowse", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const TOTAL_BROWSE:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.VipProto.total_browse", "totalBrowse", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var total_browse$field:String;
 
@@ -88,7 +88,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TITLE:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.VipProto.title", "title", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const TITLE:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.VipProto.title", "title", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var title$field:String;
 
@@ -111,7 +111,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ICON_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.VipProto.icon_name", "iconName", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const ICON_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.VipProto.icon_name", "iconName", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var icon_name$field:String;
 
@@ -134,7 +134,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CHAT_ICON_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.VipProto.chat_icon_name", "chatIconName", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const CHAT_ICON_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.VipProto.chat_icon_name", "chatIconName", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var chat_icon_name$field:String;
 
@@ -157,7 +157,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EXP:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.VipProto.exp", "exp", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const EXP:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.VipProto.exp", "exp", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var exp$field:int;
 
@@ -182,7 +182,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_AUTO_FINISH_DUNGEON:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.VipProto.can_auto_finish_dungeon", "canAutoFinishDungeon", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_AUTO_FINISH_DUNGEON:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.VipProto.can_auto_finish_dungeon", "canAutoFinishDungeon", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_auto_finish_dungeon$field:Boolean;
 
@@ -207,7 +207,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_AUTO_FINISH_DUNGEON_MORE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.VipProto.can_auto_finish_dungeon_more", "canAutoFinishDungeonMore", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_AUTO_FINISH_DUNGEON_MORE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.VipProto.can_auto_finish_dungeon_more", "canAutoFinishDungeonMore", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_auto_finish_dungeon_more$field:Boolean;
 
@@ -232,7 +232,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_MAP_TRANSPORT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.VipProto.can_map_transport", "canMapTransport", (15 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_MAP_TRANSPORT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.VipProto.can_map_transport", "canMapTransport", (15 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_map_transport$field:Boolean;
 
@@ -257,7 +257,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_FREE_CHAT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.VipProto.can_free_chat", "canFreeChat", (16 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_FREE_CHAT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.VipProto.can_free_chat", "canFreeChat", (16 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_free_chat$field:Boolean;
 
@@ -282,7 +282,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const VIP_PRIZE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.VipProto.vip_prize", "vipPrize", (24 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
+		public static const VIP_PRIZE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.VipProto.vip_prize", "vipPrize", (24 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
 
 		private var vip_prize$field:app.message.PrizeProto;
 
@@ -305,7 +305,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const VIP_PRIZE_DAILY:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.VipProto.vip_prize_daily", "vipPrizeDaily", (25 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
+		public static const VIP_PRIZE_DAILY:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.VipProto.vip_prize_daily", "vipPrizeDaily", (25 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
 
 		[ArrayElementType("app.message.PrizeProto")]
 		public var vipPrizeDaily:Array = [];
@@ -313,7 +313,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const REPLENISH_SIGN_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.VipProto.replenish_sign_times", "replenishSignTimes", (30 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const REPLENISH_SIGN_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.VipProto.replenish_sign_times", "replenishSignTimes", (30 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var replenish_sign_times$field:int;
 
@@ -338,7 +338,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EXP_EXTRA_INT_MULTIPLE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.VipProto.exp_extra_int_multiple", "expExtraIntMultiple", (31 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const EXP_EXTRA_INT_MULTIPLE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.VipProto.exp_extra_int_multiple", "expExtraIntMultiple", (31 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var exp_extra_int_multiple$field:int;
 
@@ -366,63 +366,63 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level$field);
 			}
 			if (hasDesc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, desc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, desc$field);
 			}
 			if (hasTotalBrowse) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, total_browse$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, total_browse$field);
 			}
 			if (hasTitle) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, title$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, title$field);
 			}
 			if (hasIconName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, icon_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, icon_name$field);
 			}
 			if (hasChatIconName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, chat_icon_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, chat_icon_name$field);
 			}
 			if (hasExp) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, exp$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, exp$field);
 			}
 			if (hasCanAutoFinishDungeon) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_auto_finish_dungeon$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_auto_finish_dungeon$field);
 			}
 			if (hasCanAutoFinishDungeonMore) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_auto_finish_dungeon_more$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_auto_finish_dungeon_more$field);
 			}
 			if (hasCanMapTransport) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 15);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_map_transport$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_map_transport$field);
 			}
 			if (hasCanFreeChat) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 16);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_free_chat$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_free_chat$field);
 			}
 			if (hasVipPrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 24);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, vip_prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, vip_prize$field);
 			}
 			for (var vipPrizeDaily$index:uint = 0; vipPrizeDaily$index < this.vipPrizeDaily.length; ++vipPrizeDaily$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 25);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.vipPrizeDaily[vipPrizeDaily$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.vipPrizeDaily[vipPrizeDaily$index]);
 			}
 			if (hasReplenishSignTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 30);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, replenish_sign_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, replenish_sign_times$field);
 			}
 			if (hasExpExtraIntMultiple) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 31);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, exp_extra_int_multiple$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, exp_extra_int_multiple$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -448,84 +448,84 @@ package app.message {
 			var replenish_sign_times$count:uint = 0;
 			var exp_extra_int_multiple$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VipProto.level cannot be set twice.');
 					}
 					++level$count;
-					this.level = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.level = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (desc$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VipProto.desc cannot be set twice.');
 					}
 					++desc$count;
-					this.desc = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.desc = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (total_browse$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VipProto.totalBrowse cannot be set twice.');
 					}
 					++total_browse$count;
-					this.totalBrowse = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.totalBrowse = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 4:
 					if (title$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VipProto.title cannot be set twice.');
 					}
 					++title$count;
-					this.title = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.title = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 5:
 					if (icon_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VipProto.iconName cannot be set twice.');
 					}
 					++icon_name$count;
-					this.iconName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.iconName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 6:
 					if (chat_icon_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VipProto.chatIconName cannot be set twice.');
 					}
 					++chat_icon_name$count;
-					this.chatIconName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.chatIconName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 7:
 					if (exp$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VipProto.exp cannot be set twice.');
 					}
 					++exp$count;
-					this.exp = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.exp = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 8:
 					if (can_auto_finish_dungeon$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VipProto.canAutoFinishDungeon cannot be set twice.');
 					}
 					++can_auto_finish_dungeon$count;
-					this.canAutoFinishDungeon = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canAutoFinishDungeon = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 9:
 					if (can_auto_finish_dungeon_more$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VipProto.canAutoFinishDungeonMore cannot be set twice.');
 					}
 					++can_auto_finish_dungeon_more$count;
-					this.canAutoFinishDungeonMore = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canAutoFinishDungeonMore = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 15:
 					if (can_map_transport$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VipProto.canMapTransport cannot be set twice.');
 					}
 					++can_map_transport$count;
-					this.canMapTransport = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canMapTransport = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 16:
 					if (can_free_chat$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VipProto.canFreeChat cannot be set twice.');
 					}
 					++can_free_chat$count;
-					this.canFreeChat = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canFreeChat = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 24:
 					if (vip_prize$count != 0) {
@@ -533,24 +533,24 @@ package app.message {
 					}
 					++vip_prize$count;
 					this.vipPrize = new app.message.PrizeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.vipPrize);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.vipPrize);
 					break;
 				case 25:
-					this.vipPrizeDaily.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.PrizeProto()));
+					this.vipPrizeDaily.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.PrizeProto()));
 					break;
 				case 30:
 					if (replenish_sign_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VipProto.replenishSignTimes cannot be set twice.');
 					}
 					++replenish_sign_times$count;
-					this.replenishSignTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.replenishSignTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 31:
 					if (exp_extra_int_multiple$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VipProto.expExtraIntMultiple cannot be set twice.');
 					}
 					++exp_extra_int_multiple$count;
-					this.expExtraIntMultiple = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.expExtraIntMultiple = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

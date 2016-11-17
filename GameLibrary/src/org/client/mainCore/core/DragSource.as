@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.core
+﻿package org.client.mainCore.core
 {
     public class DragSource 
     {
@@ -53,7 +52,7 @@ package org.client.mainCore.core
             var format:* = $format;
             var b:* = this._formats.some(function (item:String, index:int, array:Array):Boolean
             {
-                if ((_arg1 == format))
+                if ((item == format))
                 {
                     return (true);
                 };

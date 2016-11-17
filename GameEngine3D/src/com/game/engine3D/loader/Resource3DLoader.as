@@ -118,7 +118,14 @@ package com.game.engine3D.loader
 						var mesh : Mesh = e.asset as Mesh; //CompositeMesh,SparticleMesh//
 						if (mesh)
 						{
-							if (mesh is CompositeMesh)
+							if (!(mesh is CompositeMesh))
+							{
+								if (!(mesh is SparticleMesh))
+								{
+									_meshByName[mesh.name] = mesh;
+								}
+							}
+							/*if (mesh is CompositeMesh)
 							{
 							}
 							else if (mesh is SparticleMesh)
@@ -127,7 +134,7 @@ package com.game.engine3D.loader
 							else
 							{
 								_meshByName[mesh.name] = mesh;
-							}
+							}*/
 							if (!mesh.parent)
 							{
 								_elements.push(mesh);

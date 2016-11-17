@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MIN_HERO_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GroupDungeonProto.min_hero_count", "minHeroCount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MIN_HERO_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GroupDungeonProto.min_hero_count", "minHeroCount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var min_hero_count$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAX_HERO_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GroupDungeonProto.max_hero_count", "maxHeroCount", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MAX_HERO_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GroupDungeonProto.max_hero_count", "maxHeroCount", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var max_hero_count$field:int;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RECOMMENDED_FIGHT_AMOUNT:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.GroupDungeonProto.recommended_fight_amount", "recommendedFightAmount", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RECOMMENDED_FIGHT_AMOUNT:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.GroupDungeonProto.recommended_fight_amount", "recommendedFightAmount", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var recommended_fight_amount$field:Int64;
 
@@ -89,7 +89,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const REQUIRED_LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GroupDungeonProto.required_level", "requiredLevel", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const REQUIRED_LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GroupDungeonProto.required_level", "requiredLevel", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var required_level$field:int;
 
@@ -114,7 +114,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DAILY_ENTER_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GroupDungeonProto.daily_enter_times", "dailyEnterTimes", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DAILY_ENTER_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GroupDungeonProto.daily_enter_times", "dailyEnterTimes", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var daily_enter_times$field:int;
 
@@ -142,23 +142,23 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasMinHeroCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, min_hero_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, min_hero_count$field);
 			}
 			if (hasMaxHeroCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, max_hero_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, max_hero_count$field);
 			}
 			if (hasRecommendedFightAmount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, recommended_fight_amount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, recommended_fight_amount$field);
 			}
 			if (hasRequiredLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, required_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, required_level$field);
 			}
 			if (hasDailyEnterTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, daily_enter_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, daily_enter_times$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -175,42 +175,42 @@ package app.message {
 			var required_level$count:uint = 0;
 			var daily_enter_times$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 2:
 					if (min_hero_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GroupDungeonProto.minHeroCount cannot be set twice.');
 					}
 					++min_hero_count$count;
-					this.minHeroCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.minHeroCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (max_hero_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GroupDungeonProto.maxHeroCount cannot be set twice.');
 					}
 					++max_hero_count$count;
-					this.maxHeroCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.maxHeroCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (recommended_fight_amount$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GroupDungeonProto.recommendedFightAmount cannot be set twice.');
 					}
 					++recommended_fight_amount$count;
-					this.recommendedFightAmount = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.recommendedFightAmount = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 5:
 					if (required_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GroupDungeonProto.requiredLevel cannot be set twice.');
 					}
 					++required_level$count;
-					this.requiredLevel = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.requiredLevel = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (daily_enter_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GroupDungeonProto.dailyEnterTimes cannot be set twice.');
 					}
 					++daily_enter_times$count;
-					this.dailyEnterTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.dailyEnterTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

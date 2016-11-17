@@ -2,11 +2,11 @@ package com.client.sender
 {
 	import com.client.ClientCmdID;
 	import com.game.engine3D.vo.SenderReferenceSet;
-
+	
 	import flash.utils.getTimer;
-
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
@@ -41,7 +41,7 @@ package com.client.sender
 			_bytes.clear();
 			var millisecond : Number = getTimer();
 			_bytes.writeVarint64(millisecond);
-			SocketConnection.send(ClientCmdID.C2S_HEART_BEAT, _bytes);
+			SocketConnection_protoBuffer.send(ClientCmdID.C2S_HEART_BEAT, _bytes);
 		}
 	}
 }

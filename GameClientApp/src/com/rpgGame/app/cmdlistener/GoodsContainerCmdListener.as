@@ -30,8 +30,8 @@ package com.rpgGame.app.cmdlistener
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 	
 	import utils.UIStateSetHelper;
 	
@@ -45,39 +45,39 @@ package com.rpgGame.app.cmdlistener
 	{
 		override public function start():void
 		{
-			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_MOVE_GOODS,onMoveGoods);
-			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_MOVE_GOODS_FAIL,onMoveGoodsFail);
+			SocketConnection_protoBuffer.addCmdListener(GoodsContainerModuleMessages.S2C_MOVE_GOODS,onMoveGoods);
+			SocketConnection_protoBuffer.addCmdListener(GoodsContainerModuleMessages.S2C_MOVE_GOODS_FAIL,onMoveGoodsFail);
 			
-			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_SPLIT_GOODS,onSplitGoods);
-			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_SPLIT_GOODS_FAIL,onSplitGoodsFail);
+			SocketConnection_protoBuffer.addCmdListener(GoodsContainerModuleMessages.S2C_SPLIT_GOODS,onSplitGoods);
+			SocketConnection_protoBuffer.addCmdListener(GoodsContainerModuleMessages.S2C_SPLIT_GOODS_FAIL,onSplitGoodsFail);
 			
-			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_ADD_GOODS,onAddGoods);
-			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_SET_GOODS_COUNT,onSetGoodsCount);
-			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_REMOVE_GOODS,onRemoveGoods);
+			SocketConnection_protoBuffer.addCmdListener(GoodsContainerModuleMessages.S2C_ADD_GOODS,onAddGoods);
+			SocketConnection_protoBuffer.addCmdListener(GoodsContainerModuleMessages.S2C_SET_GOODS_COUNT,onSetGoodsCount);
+			SocketConnection_protoBuffer.addCmdListener(GoodsContainerModuleMessages.S2C_REMOVE_GOODS,onRemoveGoods);
 			
-			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_DROP_GOODS, onDropGoods);
-			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_DROP_GOODS_FAIL,onDropGoodsFail);
+			SocketConnection_protoBuffer.addCmdListener(GoodsContainerModuleMessages.S2C_DROP_GOODS, onDropGoods);
+			SocketConnection_protoBuffer.addCmdListener(GoodsContainerModuleMessages.S2C_DROP_GOODS_FAIL,onDropGoodsFail);
 			
-			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_CLEAN_SUCCESS, onClean);
-			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_CLEAN_FAIL, onCleanFail);
+			SocketConnection_protoBuffer.addCmdListener(GoodsContainerModuleMessages.S2C_CLEAN_SUCCESS, onClean);
+			SocketConnection_protoBuffer.addCmdListener(GoodsContainerModuleMessages.S2C_CLEAN_FAIL, onCleanFail);
 			
-			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_USE_GOODS,onUsePackageGoods);
-			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_USE_GOODS_FAIL,onUseGoodsFail);
+			SocketConnection_protoBuffer.addCmdListener(GoodsContainerModuleMessages.S2C_USE_GOODS,onUsePackageGoods);
+			SocketConnection_protoBuffer.addCmdListener(GoodsContainerModuleMessages.S2C_USE_GOODS_FAIL,onUseGoodsFail);
 			
-			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_GOODS_COOLDOWN,onGoodsCoolDown);
-			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_GOODS_TYPE_COOLDOWN,onGoodsTypeCoolDown);
+			SocketConnection_protoBuffer.addCmdListener(GoodsContainerModuleMessages.S2C_GOODS_COOLDOWN,onGoodsCoolDown);
+			SocketConnection_protoBuffer.addCmdListener(GoodsContainerModuleMessages.S2C_GOODS_TYPE_COOLDOWN,onGoodsTypeCoolDown);
 			
-			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_DEPOT_STORAGE_GET_DATA,onStorage);
+			SocketConnection_protoBuffer.addCmdListener(GoodsContainerModuleMessages.S2C_DEPOT_STORAGE_GET_DATA,onStorage);
 //			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_STORAGE_NOT_OPEN,onStorageNotOpen);
 			
-			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_UNLOCK_DEPOT_GRID,onBackPackGridOpen);
+			SocketConnection_protoBuffer.addCmdListener(GoodsContainerModuleMessages.S2C_UNLOCK_DEPOT_GRID,onBackPackGridOpen);
 			
-			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_OPEN_STORAGE,onStorageOpen);
+			SocketConnection_protoBuffer.addCmdListener(GoodsContainerModuleMessages.S2C_OPEN_STORAGE,onStorageOpen);
 //			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_DEPOT_STORAGE_OPEN_SLOT,onGridOpen);
 //			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_DEPOT_STORAGE_OPEN_SLOT_FAIL,onGridOpenFail);
 			
-			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_STORAGE_OPEN_PAGE_FAIL,onStorageOpenPageFail);
-			SocketConnection.addCmdListener(GoodsContainerModuleMessages.S2C_STORAGE_OPEN_PAGE,onStorageOpenPage);
+			SocketConnection_protoBuffer.addCmdListener(GoodsContainerModuleMessages.S2C_STORAGE_OPEN_PAGE_FAIL,onStorageOpenPageFail);
+			SocketConnection_protoBuffer.addCmdListener(GoodsContainerModuleMessages.S2C_STORAGE_OPEN_PAGE,onStorageOpenPage);
 			
 			finish();
 		}

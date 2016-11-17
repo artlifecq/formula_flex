@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.KingWarBroadcastProto.time", "time", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.KingWarBroadcastProto.time", "time", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var time$field:Int64;
 
@@ -39,7 +39,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CONTINUE_KILLING:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.KingWarBroadcastProto.continue_killing", "continueKilling", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.KingWarBroadcastProto.ContinueKillingProto; });
+		public static const CONTINUE_KILLING:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.KingWarBroadcastProto.continue_killing", "continueKilling", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.KingWarBroadcastProto.ContinueKillingProto; });
 
 		private var continue_killing$field:app.message.KingWarBroadcastProto.ContinueKillingProto;
 
@@ -62,7 +62,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SEIZE_CRYSTAL:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.KingWarBroadcastProto.seize_crystal", "seizeCrystal", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.KingWarBroadcastProto.SeizeCrystalProto; });
+		public static const SEIZE_CRYSTAL:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.KingWarBroadcastProto.seize_crystal", "seizeCrystal", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.KingWarBroadcastProto.SeizeCrystalProto; });
 
 		private var seize_crystal$field:app.message.KingWarBroadcastProto.SeizeCrystalProto;
 
@@ -88,15 +88,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, time$field);
 			}
 			if (hasContinueKilling) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, continue_killing$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, continue_killing$field);
 			}
 			if (hasSeizeCrystal) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, seize_crystal$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, seize_crystal$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -111,14 +111,14 @@ package app.message {
 			var continue_killing$count:uint = 0;
 			var seize_crystal$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: KingWarBroadcastProto.time cannot be set twice.');
 					}
 					++time$count;
-					this.time = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.time = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 10:
 					if (continue_killing$count != 0) {
@@ -126,7 +126,7 @@ package app.message {
 					}
 					++continue_killing$count;
 					this.continueKilling = new app.message.KingWarBroadcastProto.ContinueKillingProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.continueKilling);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.continueKilling);
 					break;
 				case 11:
 					if (seize_crystal$count != 0) {
@@ -134,7 +134,7 @@ package app.message {
 					}
 					++seize_crystal$count;
 					this.seizeCrystal = new app.message.KingWarBroadcastProto.SeizeCrystalProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.seizeCrystal);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.seizeCrystal);
 					break;
 				default:
 					super.readUnknown(input, tag);

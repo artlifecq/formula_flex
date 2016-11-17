@@ -14,7 +14,7 @@ package app.message.CountryHistoryRecordProto {
 		/**
 		 *  @private
 		 */
-		public static const ATTACK_KING_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.CountryHistoryRecordProto.CountryWarAttackWinProto.attack_king_name", "attackKingName", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const ATTACK_KING_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.CountryHistoryRecordProto.CountryWarAttackWinProto.attack_king_name", "attackKingName", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var attack_king_name$field:String;
 
@@ -37,7 +37,7 @@ package app.message.CountryHistoryRecordProto {
 		/**
 		 *  @private
 		 */
-		public static const DEFENCE_COUNTRY_TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryHistoryRecordProto.CountryWarAttackWinProto.defence_country_type", "defenceCountryType", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEFENCE_COUNTRY_TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryHistoryRecordProto.CountryWarAttackWinProto.defence_country_type", "defenceCountryType", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var defence_country_type$field:int;
 
@@ -64,7 +64,7 @@ package app.message.CountryHistoryRecordProto {
 		/**
 		 *  @private
 		 */
-		public static const WAR_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryHistoryRecordProto.CountryWarAttackWinProto.war_time", "warTime", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const WAR_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryHistoryRecordProto.CountryWarAttackWinProto.war_time", "warTime", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var war_time$field:Int64;
 
@@ -87,7 +87,7 @@ package app.message.CountryHistoryRecordProto {
 		/**
 		 *  @private
 		 */
-		public static const KILL_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryHistoryRecordProto.CountryWarAttackWinProto.kill_count", "killCount", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const KILL_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryHistoryRecordProto.CountryWarAttackWinProto.kill_count", "killCount", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var kill_count$field:int;
 
@@ -115,19 +115,19 @@ package app.message.CountryHistoryRecordProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasAttackKingName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, attack_king_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, attack_king_name$field);
 			}
 			if (hasDefenceCountryType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, defence_country_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, defence_country_type$field);
 			}
 			if (hasWarTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, war_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, war_time$field);
 			}
 			if (hasKillCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, kill_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, kill_count$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -143,35 +143,35 @@ package app.message.CountryHistoryRecordProto {
 			var war_time$count:uint = 0;
 			var kill_count$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (attack_king_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryWarAttackWinProto.attackKingName cannot be set twice.');
 					}
 					++attack_king_name$count;
-					this.attackKingName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.attackKingName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 2:
 					if (defence_country_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryWarAttackWinProto.defenceCountryType cannot be set twice.');
 					}
 					++defence_country_type$count;
-					this.defenceCountryType = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.defenceCountryType = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (war_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryWarAttackWinProto.warTime cannot be set twice.');
 					}
 					++war_time$count;
-					this.warTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.warTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 4:
 					if (kill_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryWarAttackWinProto.killCount cannot be set twice.');
 					}
 					++kill_count$count;
-					this.killCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.killCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

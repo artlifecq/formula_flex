@@ -16,7 +16,7 @@ package app.message.FamilyNewsProto {
 		/**
 		 *  @private
 		 */
-		public static const KICKER_POS:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.FamilyNewsProto.KickMemberProto.kicker_pos", "kickerPos", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.FamilyOfficerPos);
+		public static const KICKER_POS:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.FamilyNewsProto.KickMemberProto.kicker_pos", "kickerPos", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.FamilyOfficerPos);
 
 		private var kicker_pos$field:int;
 
@@ -43,7 +43,7 @@ package app.message.FamilyNewsProto {
 		/**
 		 *  @private
 		 */
-		public static const KICKER:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.KickMemberProto.kicker", "kicker", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberIdAndNameProto; });
+		public static const KICKER:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.KickMemberProto.kicker", "kicker", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberIdAndNameProto; });
 
 		private var kicker$field:app.message.FamilyNewsProto.MemberIdAndNameProto;
 
@@ -66,7 +66,7 @@ package app.message.FamilyNewsProto {
 		/**
 		 *  @private
 		 */
-		public static const BEEN_KICK:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.KickMemberProto.been_kick", "beenKick", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberIdAndNameProto; });
+		public static const BEEN_KICK:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.KickMemberProto.been_kick", "beenKick", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberIdAndNameProto; });
 
 		private var been_kick$field:app.message.FamilyNewsProto.MemberIdAndNameProto;
 
@@ -92,15 +92,15 @@ package app.message.FamilyNewsProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasKickerPos) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, kicker_pos$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, kicker_pos$field);
 			}
 			if (hasKicker) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, kicker$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, kicker$field);
 			}
 			if (hasBeenKick) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, been_kick$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, been_kick$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -115,14 +115,14 @@ package app.message.FamilyNewsProto {
 			var kicker$count:uint = 0;
 			var been_kick$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (kicker_pos$count != 0) {
 						throw new flash.errors.IOError('Bad data format: KickMemberProto.kickerPos cannot be set twice.');
 					}
 					++kicker_pos$count;
-					this.kickerPos = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.kickerPos = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 2:
 					if (kicker$count != 0) {
@@ -130,7 +130,7 @@ package app.message.FamilyNewsProto {
 					}
 					++kicker$count;
 					this.kicker = new app.message.FamilyNewsProto.MemberIdAndNameProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.kicker);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.kicker);
 					break;
 				case 3:
 					if (been_kick$count != 0) {
@@ -138,7 +138,7 @@ package app.message.FamilyNewsProto {
 					}
 					++been_kick$count;
 					this.beenKick = new app.message.FamilyNewsProto.MemberIdAndNameProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.beenKick);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.beenKick);
 					break;
 				default:
 					super.readUnknown(input, tag);

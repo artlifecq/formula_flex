@@ -15,7 +15,7 @@ package app.message.TaoNiDungeonProto {
 		/**
 		 *  @private
 		 */
-		public static const STAGE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TaoNiDungeonProto.TaoNiStageProto.stage", "stage", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const STAGE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TaoNiDungeonProto.TaoNiStageProto.stage", "stage", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var stage$field:int;
 
@@ -42,7 +42,7 @@ package app.message.TaoNiDungeonProto {
 		/**
 		 *  @private
 		 */
-		public static const STAGE_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.TaoNiDungeonProto.TaoNiStageProto.stage_name", "stageName", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const STAGE_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.TaoNiDungeonProto.TaoNiStageProto.stage_name", "stageName", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var stage_name$field:String;
 
@@ -65,7 +65,7 @@ package app.message.TaoNiDungeonProto {
 		/**
 		 *  @private
 		 */
-		public static const DURATION:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.TaoNiDungeonProto.TaoNiStageProto.duration", "duration", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DURATION:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.TaoNiDungeonProto.TaoNiStageProto.duration", "duration", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var duration$field:Int64;
 
@@ -88,7 +88,7 @@ package app.message.TaoNiDungeonProto {
 		/**
 		 *  @private
 		 */
-		public static const MONSTER_ID_COUNT:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.TaoNiDungeonProto.TaoNiStageProto.monster_id_count", "monsterIdCount", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.Int32PairProto; });
+		public static const MONSTER_ID_COUNT:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.TaoNiDungeonProto.TaoNiStageProto.monster_id_count", "monsterIdCount", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.Int32PairProto; });
 
 		[ArrayElementType("app.message.Int32PairProto")]
 		public var monsterIdCount:Array = [];
@@ -99,19 +99,19 @@ package app.message.TaoNiDungeonProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasStage) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, stage$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, stage$field);
 			}
 			if (hasStageName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, stage_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, stage_name$field);
 			}
 			if (hasDuration) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, duration$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, duration$field);
 			}
 			for (var monsterIdCount$index:uint = 0; monsterIdCount$index < this.monsterIdCount.length; ++monsterIdCount$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.monsterIdCount[monsterIdCount$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.monsterIdCount[monsterIdCount$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -126,31 +126,31 @@ package app.message.TaoNiDungeonProto {
 			var stage_name$count:uint = 0;
 			var duration$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (stage$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TaoNiStageProto.stage cannot be set twice.');
 					}
 					++stage$count;
-					this.stage = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.stage = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (stage_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TaoNiStageProto.stageName cannot be set twice.');
 					}
 					++stage_name$count;
-					this.stageName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.stageName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 2:
 					if (duration$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TaoNiStageProto.duration cannot be set twice.');
 					}
 					++duration$count;
-					this.duration = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.duration = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 3:
-					this.monsterIdCount.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.Int32PairProto()));
+					this.monsterIdCount.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.Int32PairProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -14,7 +14,7 @@ package app.message.KingWarBroadcastProto {
 		/**
 		 *  @private
 		 */
-		public static const GUILD_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.KingWarBroadcastProto.ContinueKillingProto.guild_name", "guildName", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const GUILD_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.KingWarBroadcastProto.ContinueKillingProto.guild_name", "guildName", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var guild_name$field:String;
 
@@ -37,7 +37,7 @@ package app.message.KingWarBroadcastProto {
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.KingWarBroadcastProto.ContinueKillingProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.KingWarBroadcastProto.ContinueKillingProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var name$field:String;
 
@@ -60,7 +60,7 @@ package app.message.KingWarBroadcastProto {
 		/**
 		 *  @private
 		 */
-		public static const TARGET_GUILD_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.KingWarBroadcastProto.ContinueKillingProto.target_guild_name", "targetGuildName", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const TARGET_GUILD_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.KingWarBroadcastProto.ContinueKillingProto.target_guild_name", "targetGuildName", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var target_guild_name$field:String;
 
@@ -83,7 +83,7 @@ package app.message.KingWarBroadcastProto {
 		/**
 		 *  @private
 		 */
-		public static const TARGET_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.KingWarBroadcastProto.ContinueKillingProto.target_name", "targetName", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const TARGET_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.KingWarBroadcastProto.ContinueKillingProto.target_name", "targetName", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var target_name$field:String;
 
@@ -109,19 +109,19 @@ package app.message.KingWarBroadcastProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasGuildName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, guild_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, guild_name$field);
 			}
 			if (hasName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, name$field);
 			}
 			if (hasTargetGuildName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, target_guild_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, target_guild_name$field);
 			}
 			if (hasTargetName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, target_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, target_name$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -137,35 +137,35 @@ package app.message.KingWarBroadcastProto {
 			var target_guild_name$count:uint = 0;
 			var target_name$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (guild_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ContinueKillingProto.guildName cannot be set twice.');
 					}
 					++guild_name$count;
-					this.guildName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.guildName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 2:
 					if (name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ContinueKillingProto.name cannot be set twice.');
 					}
 					++name$count;
-					this.name = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.name = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (target_guild_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ContinueKillingProto.targetGuildName cannot be set twice.');
 					}
 					++target_guild_name$count;
-					this.targetGuildName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.targetGuildName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 4:
 					if (target_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ContinueKillingProto.targetName cannot be set twice.');
 					}
 					++target_name$count;
-					this.targetName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.targetName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

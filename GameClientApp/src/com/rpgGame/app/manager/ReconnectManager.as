@@ -8,7 +8,7 @@ package com.rpgGame.app.manager
 	import flash.external.ExternalInterface;
 	import flash.utils.Timer;
 	
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *

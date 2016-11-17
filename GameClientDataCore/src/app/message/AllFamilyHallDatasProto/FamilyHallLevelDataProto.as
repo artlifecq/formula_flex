@@ -15,7 +15,7 @@ package app.message.AllFamilyHallDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const BASE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.AllFamilyHallDatasProto.FamilyHallLevelDataProto.base", "base", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyBuildingBaseDataLevelProto; });
+		public static const BASE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.AllFamilyHallDatasProto.FamilyHallLevelDataProto.base", "base", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyBuildingBaseDataLevelProto; });
 
 		private var base$field:app.message.FamilyBuildingBaseDataLevelProto;
 
@@ -38,7 +38,7 @@ package app.message.AllFamilyHallDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAPACITY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AllFamilyHallDatasProto.FamilyHallLevelDataProto.capacity", "capacity", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAPACITY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AllFamilyHallDatasProto.FamilyHallLevelDataProto.capacity", "capacity", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var capacity$field:int;
 
@@ -65,7 +65,7 @@ package app.message.AllFamilyHallDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const VICE_LEADER_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AllFamilyHallDatasProto.FamilyHallLevelDataProto.vice_leader_count", "viceLeaderCount", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const VICE_LEADER_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AllFamilyHallDatasProto.FamilyHallLevelDataProto.vice_leader_count", "viceLeaderCount", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var vice_leader_count$field:int;
 
@@ -93,15 +93,15 @@ package app.message.AllFamilyHallDatasProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasBase) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, base$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, base$field);
 			}
 			if (hasCapacity) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, capacity$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, capacity$field);
 			}
 			if (hasViceLeaderCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, vice_leader_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, vice_leader_count$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -116,7 +116,7 @@ package app.message.AllFamilyHallDatasProto {
 			var capacity$count:uint = 0;
 			var vice_leader_count$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (base$count != 0) {
@@ -124,21 +124,21 @@ package app.message.AllFamilyHallDatasProto {
 					}
 					++base$count;
 					this.base = new app.message.FamilyBuildingBaseDataLevelProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.base);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.base);
 					break;
 				case 2:
 					if (capacity$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyHallLevelDataProto.capacity cannot be set twice.');
 					}
 					++capacity$count;
-					this.capacity = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.capacity = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (vice_leader_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyHallLevelDataProto.viceLeaderCount cannot be set twice.');
 					}
 					++vice_leader_count$count;
-					this.viceLeaderCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.viceLeaderCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

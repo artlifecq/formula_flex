@@ -15,7 +15,7 @@ package app.message.GuildOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const POS:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.GuildOfficerDatasProto.GuildOfficerDataProto.pos", "pos", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.GuildOfficerPos);
+		public static const POS:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.GuildOfficerDatasProto.GuildOfficerDataProto.pos", "pos", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.GuildOfficerPos);
 
 		private var pos$field:int;
 
@@ -42,7 +42,7 @@ package app.message.GuildOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const POS_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.GuildOfficerDatasProto.GuildOfficerDataProto.pos_name", "posName", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const POS_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.GuildOfficerDatasProto.GuildOfficerDataProto.pos_name", "posName", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var pos_name$field:String;
 
@@ -65,7 +65,7 @@ package app.message.GuildOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAN_NOT_KICK_OTHER_OFFICER_POS:RepeatedFieldDescriptor$TYPE_ENUM = new RepeatedFieldDescriptor$TYPE_ENUM("app.message.GuildOfficerDatasProto.GuildOfficerDataProto.can_not_kick_other_officer_pos", "canNotKickOtherOfficerPos", (3 << 3) | com.netease.protobuf.WireType.VARINT, app.message.GuildOfficerPos);
+		public static const CAN_NOT_KICK_OTHER_OFFICER_POS:RepeatedFieldDescriptor_TYPE_ENUM = new RepeatedFieldDescriptor_TYPE_ENUM("app.message.GuildOfficerDatasProto.GuildOfficerDataProto.can_not_kick_other_officer_pos", "canNotKickOtherOfficerPos", (3 << 3) | com.netease.protobuf.WireType.VARINT, app.message.GuildOfficerPos);
 
 		[ArrayElementType("int")]
 		public var canNotKickOtherOfficerPos:Array = [];
@@ -73,7 +73,7 @@ package app.message.GuildOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAN_SET_OFFICER_POS:RepeatedFieldDescriptor$TYPE_ENUM = new RepeatedFieldDescriptor$TYPE_ENUM("app.message.GuildOfficerDatasProto.GuildOfficerDataProto.can_set_officer_pos", "canSetOfficerPos", (4 << 3) | com.netease.protobuf.WireType.VARINT, app.message.GuildOfficerPos);
+		public static const CAN_SET_OFFICER_POS:RepeatedFieldDescriptor_TYPE_ENUM = new RepeatedFieldDescriptor_TYPE_ENUM("app.message.GuildOfficerDatasProto.GuildOfficerDataProto.can_set_officer_pos", "canSetOfficerPos", (4 << 3) | com.netease.protobuf.WireType.VARINT, app.message.GuildOfficerPos);
 
 		[ArrayElementType("int")]
 		public var canSetOfficerPos:Array = [];
@@ -81,7 +81,7 @@ package app.message.GuildOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAN_INVITE_OTHER_FAMILY:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.GuildOfficerDatasProto.GuildOfficerDataProto.can_invite_other_family", "canInviteOtherFamily", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_INVITE_OTHER_FAMILY:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.GuildOfficerDatasProto.GuildOfficerDataProto.can_invite_other_family", "canInviteOtherFamily", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_invite_other_family$field:Boolean;
 
@@ -106,7 +106,7 @@ package app.message.GuildOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAN_SET_ANNOUCEMENT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.GuildOfficerDatasProto.GuildOfficerDataProto.can_set_annoucement", "canSetAnnoucement", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_SET_ANNOUCEMENT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.GuildOfficerDatasProto.GuildOfficerDataProto.can_set_annoucement", "canSetAnnoucement", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_set_annoucement$field:Boolean;
 
@@ -131,7 +131,7 @@ package app.message.GuildOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAN_UPGRADE_GUILD_LEVEL:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.GuildOfficerDatasProto.GuildOfficerDataProto.can_upgrade_guild_level", "canUpgradeGuildLevel", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_UPGRADE_GUILD_LEVEL:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.GuildOfficerDatasProto.GuildOfficerDataProto.can_upgrade_guild_level", "canUpgradeGuildLevel", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_upgrade_guild_level$field:Boolean;
 
@@ -156,7 +156,7 @@ package app.message.GuildOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAN_KING_WAR_BID:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.GuildOfficerDatasProto.GuildOfficerDataProto.can_king_war_bid", "canKingWarBid", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_KING_WAR_BID:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.GuildOfficerDatasProto.GuildOfficerDataProto.can_king_war_bid", "canKingWarBid", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_king_war_bid$field:Boolean;
 
@@ -184,35 +184,35 @@ package app.message.GuildOfficerDatasProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasPos) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, pos$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, pos$field);
 			}
 			if (hasPosName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, pos_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, pos_name$field);
 			}
 			for (var canNotKickOtherOfficerPos$index:uint = 0; canNotKickOtherOfficerPos$index < this.canNotKickOtherOfficerPos.length; ++canNotKickOtherOfficerPos$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, this.canNotKickOtherOfficerPos[canNotKickOtherOfficerPos$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, this.canNotKickOtherOfficerPos[canNotKickOtherOfficerPos$index]);
 			}
 			for (var canSetOfficerPos$index:uint = 0; canSetOfficerPos$index < this.canSetOfficerPos.length; ++canSetOfficerPos$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, this.canSetOfficerPos[canSetOfficerPos$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, this.canSetOfficerPos[canSetOfficerPos$index]);
 			}
 			if (hasCanInviteOtherFamily) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_invite_other_family$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_invite_other_family$field);
 			}
 			if (hasCanSetAnnoucement) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_set_annoucement$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_set_annoucement$field);
 			}
 			if (hasCanUpgradeGuildLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_upgrade_guild_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_upgrade_guild_level$field);
 			}
 			if (hasCanKingWarBid) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_king_war_bid$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_king_war_bid$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -230,63 +230,63 @@ package app.message.GuildOfficerDatasProto {
 			var can_upgrade_guild_level$count:uint = 0;
 			var can_king_war_bid$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (pos$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildOfficerDataProto.pos cannot be set twice.');
 					}
 					++pos$count;
-					this.pos = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.pos = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 2:
 					if (pos_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildOfficerDataProto.posName cannot be set twice.');
 					}
 					++pos_name$count;
-					this.posName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.posName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_ENUM, this.canNotKickOtherOfficerPos);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_ENUM, this.canNotKickOtherOfficerPos);
 						break;
 					}
-					this.canNotKickOtherOfficerPos.push(com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input));
+					this.canNotKickOtherOfficerPos.push(com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input));
 					break;
 				case 4:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_ENUM, this.canSetOfficerPos);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_ENUM, this.canSetOfficerPos);
 						break;
 					}
-					this.canSetOfficerPos.push(com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input));
+					this.canSetOfficerPos.push(com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input));
 					break;
 				case 5:
 					if (can_invite_other_family$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildOfficerDataProto.canInviteOtherFamily cannot be set twice.');
 					}
 					++can_invite_other_family$count;
-					this.canInviteOtherFamily = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canInviteOtherFamily = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 6:
 					if (can_set_annoucement$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildOfficerDataProto.canSetAnnoucement cannot be set twice.');
 					}
 					++can_set_annoucement$count;
-					this.canSetAnnoucement = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canSetAnnoucement = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 7:
 					if (can_upgrade_guild_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildOfficerDataProto.canUpgradeGuildLevel cannot be set twice.');
 					}
 					++can_upgrade_guild_level$count;
-					this.canUpgradeGuildLevel = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canUpgradeGuildLevel = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 8:
 					if (can_king_war_bid$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildOfficerDataProto.canKingWarBid cannot be set twice.');
 					}
 					++can_king_war_bid$count;
-					this.canKingWarBid = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canKingWarBid = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

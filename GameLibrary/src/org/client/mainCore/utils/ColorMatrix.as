@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.utils
+﻿package org.client.mainCore.utils
 {
     public dynamic class ColorMatrix extends Array 
     {
@@ -198,7 +197,5 @@ package org.client.mainCore.utils
             };
             return (p_matrix);
         }
-
-
     }
-}//package org.client.mainCore.utils
+}

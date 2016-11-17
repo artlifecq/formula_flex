@@ -21,7 +21,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EQUIP_BUILD:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentConfig.equip_build", "equipBuild", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentBuildProto; });
+		public static const EQUIP_BUILD:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentConfig.equip_build", "equipBuild", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentBuildProto; });
 
 		private var equip_build$field:app.message.EquipmentBuildProto;
 
@@ -44,7 +44,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COMBINE_EQUIP_DATAS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentConfig.combine_equip_datas", "combineEquipDatas", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentCombineDatasProto; });
+		public static const COMBINE_EQUIP_DATAS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentConfig.combine_equip_datas", "combineEquipDatas", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentCombineDatasProto; });
 
 		private var combine_equip_datas$field:app.message.EquipmentCombineDatasProto;
 
@@ -67,7 +67,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const REFINE_DATAS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentConfig.refine_datas", "refineDatas", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentRefineDatasProto; });
+		public static const REFINE_DATAS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentConfig.refine_datas", "refineDatas", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentRefineDatasProto; });
 
 		private var refine_datas$field:app.message.EquipmentRefineDatasProto;
 
@@ -90,7 +90,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COMBINE_DATAS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentConfig.combine_datas", "combineDatas", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CombineDatasProto; });
+		public static const COMBINE_DATAS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentConfig.combine_datas", "combineDatas", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CombineDatasProto; });
 
 		private var combine_datas$field:app.message.CombineDatasProto;
 
@@ -113,7 +113,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DESTROY_DATAS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentConfig.destroy_datas", "destroyDatas", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentDestroyDatasProto; });
+		public static const DESTROY_DATAS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentConfig.destroy_datas", "destroyDatas", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentDestroyDatasProto; });
 
 		private var destroy_datas$field:app.message.EquipmentDestroyDatasProto;
 
@@ -136,7 +136,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TAOZ_DATAS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentConfig.taoz_datas", "taozDatas", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentTaozDatasProto; });
+		public static const TAOZ_DATAS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentConfig.taoz_datas", "taozDatas", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentTaozDatasProto; });
 
 		private var taoz_datas$field:app.message.EquipmentTaozDatasProto;
 
@@ -159,7 +159,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GENERAL_DATAS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentConfig.general_datas", "generalDatas", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentGeneralDatasProto; });
+		public static const GENERAL_DATAS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentConfig.general_datas", "generalDatas", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentGeneralDatasProto; });
 
 		private var general_datas$field:app.message.EquipmentGeneralDatasProto;
 
@@ -185,31 +185,31 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasEquipBuild) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, equip_build$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, equip_build$field);
 			}
 			if (hasCombineEquipDatas) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, combine_equip_datas$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, combine_equip_datas$field);
 			}
 			if (hasRefineDatas) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, refine_datas$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, refine_datas$field);
 			}
 			if (hasCombineDatas) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, combine_datas$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, combine_datas$field);
 			}
 			if (hasDestroyDatas) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, destroy_datas$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, destroy_datas$field);
 			}
 			if (hasTaozDatas) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, taoz_datas$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, taoz_datas$field);
 			}
 			if (hasGeneralDatas) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, general_datas$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, general_datas$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -228,7 +228,7 @@ package app.message {
 			var taoz_datas$count:uint = 0;
 			var general_datas$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (equip_build$count != 0) {
@@ -236,7 +236,7 @@ package app.message {
 					}
 					++equip_build$count;
 					this.equipBuild = new app.message.EquipmentBuildProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.equipBuild);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.equipBuild);
 					break;
 				case 2:
 					if (combine_equip_datas$count != 0) {
@@ -244,7 +244,7 @@ package app.message {
 					}
 					++combine_equip_datas$count;
 					this.combineEquipDatas = new app.message.EquipmentCombineDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.combineEquipDatas);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.combineEquipDatas);
 					break;
 				case 3:
 					if (refine_datas$count != 0) {
@@ -252,7 +252,7 @@ package app.message {
 					}
 					++refine_datas$count;
 					this.refineDatas = new app.message.EquipmentRefineDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.refineDatas);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.refineDatas);
 					break;
 				case 4:
 					if (combine_datas$count != 0) {
@@ -260,7 +260,7 @@ package app.message {
 					}
 					++combine_datas$count;
 					this.combineDatas = new app.message.CombineDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.combineDatas);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.combineDatas);
 					break;
 				case 5:
 					if (destroy_datas$count != 0) {
@@ -268,7 +268,7 @@ package app.message {
 					}
 					++destroy_datas$count;
 					this.destroyDatas = new app.message.EquipmentDestroyDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.destroyDatas);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.destroyDatas);
 					break;
 				case 6:
 					if (taoz_datas$count != 0) {
@@ -276,7 +276,7 @@ package app.message {
 					}
 					++taoz_datas$count;
 					this.taozDatas = new app.message.EquipmentTaozDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.taozDatas);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.taozDatas);
 					break;
 				case 7:
 					if (general_datas$count != 0) {
@@ -284,7 +284,7 @@ package app.message {
 					}
 					++general_datas$count;
 					this.generalDatas = new app.message.EquipmentGeneralDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.generalDatas);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.generalDatas);
 					break;
 				default:
 					super.readUnknown(input, tag);

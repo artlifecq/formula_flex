@@ -30,7 +30,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.FamilyNewsProto.time", "time", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.FamilyNewsProto.time", "time", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var time$field:Int64;
 
@@ -53,7 +53,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ADD_MEMBER:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.add_member", "addMember", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.AddMemberProto; });
+		public static const ADD_MEMBER:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.add_member", "addMember", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.AddMemberProto; });
 
 		private var add_member$field:app.message.FamilyNewsProto.AddMemberProto;
 
@@ -76,7 +76,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const KICK_MEMBER:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.kick_member", "kickMember", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.KickMemberProto; });
+		public static const KICK_MEMBER:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.kick_member", "kickMember", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.KickMemberProto; });
 
 		private var kick_member$field:app.message.FamilyNewsProto.KickMemberProto;
 
@@ -99,7 +99,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEAVE_FAMILY:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.leave_family", "leaveFamily", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.LeaveFamilyProto; });
+		public static const LEAVE_FAMILY:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.leave_family", "leaveFamily", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.LeaveFamilyProto; });
 
 		private var leave_family$field:app.message.FamilyNewsProto.LeaveFamilyProto;
 
@@ -122,7 +122,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CHANGE_POS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.change_pos", "changePos", (13 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.ChangePosProto; });
+		public static const CHANGE_POS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.change_pos", "changePos", (13 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.ChangePosProto; });
 
 		private var change_pos$field:app.message.FamilyNewsProto.ChangePosProto;
 
@@ -145,7 +145,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BEEN_KILLED:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.been_killed", "beenKilled", (14 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberBeenKilledProto; });
+		public static const BEEN_KILLED:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.been_killed", "beenKilled", (14 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberBeenKilledProto; });
 
 		private var been_killed$field:app.message.FamilyNewsProto.MemberBeenKilledProto;
 
@@ -168,7 +168,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const KILL_OTHER:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.kill_other", "killOther", (15 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberKillOtherProto; });
+		public static const KILL_OTHER:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.kill_other", "killOther", (15 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberKillOtherProto; });
 
 		private var kill_other$field:app.message.FamilyNewsProto.MemberKillOtherProto;
 
@@ -191,7 +191,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const KILL_BOSS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.kill_boss", "killBoss", (16 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberKillBossProto; });
+		public static const KILL_BOSS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.kill_boss", "killBoss", (16 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberKillBossProto; });
 
 		private var kill_boss$field:app.message.FamilyNewsProto.MemberKillBossProto;
 
@@ -214,7 +214,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BEEN_KILLED_BY_BOSS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.been_killed_by_boss", "beenKilledByBoss", (17 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberBeenKilledByBossProto; });
+		public static const BEEN_KILLED_BY_BOSS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.been_killed_by_boss", "beenKilledByBoss", (17 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberBeenKilledByBossProto; });
 
 		private var been_killed_by_boss$field:app.message.FamilyNewsProto.MemberBeenKilledByBossProto;
 
@@ -237,7 +237,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BUILDING_UPGRADE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.building_upgrade", "buildingUpgrade", (18 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.BuildingUpgradeProto; });
+		public static const BUILDING_UPGRADE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.building_upgrade", "buildingUpgrade", (18 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.BuildingUpgradeProto; });
 
 		private var building_upgrade$field:app.message.FamilyNewsProto.BuildingUpgradeProto;
 
@@ -260,7 +260,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DONATE_BUILD_TOKEN:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.donate_build_token", "donateBuildToken", (19 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.DonateFamilyBuildTokenProto; });
+		public static const DONATE_BUILD_TOKEN:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.donate_build_token", "donateBuildToken", (19 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.DonateFamilyBuildTokenProto; });
 
 		private var donate_build_token$field:app.message.FamilyNewsProto.DonateFamilyBuildTokenProto;
 
@@ -283,7 +283,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DONATE_MONEY:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.donate_money", "donateMoney", (20 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.DonateMoneyProto; });
+		public static const DONATE_MONEY:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.donate_money", "donateMoney", (20 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.DonateMoneyProto; });
 
 		private var donate_money$field:app.message.FamilyNewsProto.DonateMoneyProto;
 
@@ -306,7 +306,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ANIMAL_BAR_START:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.animal_bar_start", "animalBarStart", (21 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.FamilyAnimalBarStart; });
+		public static const ANIMAL_BAR_START:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.animal_bar_start", "animalBarStart", (21 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.FamilyAnimalBarStart; });
 
 		private var animal_bar_start$field:app.message.FamilyNewsProto.FamilyAnimalBarStart;
 
@@ -329,7 +329,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const KILL_FAMILY_ANIMAL_BAR_BOSS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.kill_family_animal_bar_boss", "killFamilyAnimalBarBoss", (22 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.KillFamilyAnimalBarBoss; });
+		public static const KILL_FAMILY_ANIMAL_BAR_BOSS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.kill_family_animal_bar_boss", "killFamilyAnimalBarBoss", (22 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.KillFamilyAnimalBarBoss; });
 
 		private var kill_family_animal_bar_boss$field:app.message.FamilyNewsProto.KillFamilyAnimalBarBoss;
 
@@ -352,7 +352,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FAMILY_BIAO_NEWS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.family_biao_news", "familyBiaoNews", (23 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.FamilyBiaoNewsProto; });
+		public static const FAMILY_BIAO_NEWS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.family_biao_news", "familyBiaoNews", (23 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.FamilyBiaoNewsProto; });
 
 		private var family_biao_news$field:app.message.FamilyNewsProto.FamilyBiaoNewsProto;
 
@@ -375,7 +375,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IMPEACH_LEADER:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.impeach_leader", "impeachLeader", (24 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.ImpeachFamilyLeaderProto; });
+		public static const IMPEACH_LEADER:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.impeach_leader", "impeachLeader", (24 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.ImpeachFamilyLeaderProto; });
 
 		private var impeach_leader$field:app.message.FamilyNewsProto.ImpeachFamilyLeaderProto;
 
@@ -398,7 +398,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CREATE_FAMILY:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.create_family", "createFamily", (25 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.CreateFamilyProto; });
+		public static const CREATE_FAMILY:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.create_family", "createFamily", (25 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.CreateFamilyProto; });
 
 		private var create_family$field:app.message.FamilyNewsProto.CreateFamilyProto;
 
@@ -424,71 +424,71 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, time$field);
 			}
 			if (hasAddMember) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, add_member$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, add_member$field);
 			}
 			if (hasKickMember) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, kick_member$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, kick_member$field);
 			}
 			if (hasLeaveFamily) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, leave_family$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, leave_family$field);
 			}
 			if (hasChangePos) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, change_pos$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, change_pos$field);
 			}
 			if (hasBeenKilled) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 14);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, been_killed$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, been_killed$field);
 			}
 			if (hasKillOther) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 15);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, kill_other$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, kill_other$field);
 			}
 			if (hasKillBoss) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 16);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, kill_boss$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, kill_boss$field);
 			}
 			if (hasBeenKilledByBoss) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 17);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, been_killed_by_boss$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, been_killed_by_boss$field);
 			}
 			if (hasBuildingUpgrade) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 18);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, building_upgrade$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, building_upgrade$field);
 			}
 			if (hasDonateBuildToken) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 19);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, donate_build_token$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, donate_build_token$field);
 			}
 			if (hasDonateMoney) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 20);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, donate_money$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, donate_money$field);
 			}
 			if (hasAnimalBarStart) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 21);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, animal_bar_start$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, animal_bar_start$field);
 			}
 			if (hasKillFamilyAnimalBarBoss) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 22);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, kill_family_animal_bar_boss$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, kill_family_animal_bar_boss$field);
 			}
 			if (hasFamilyBiaoNews) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 23);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, family_biao_news$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, family_biao_news$field);
 			}
 			if (hasImpeachLeader) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 24);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, impeach_leader$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, impeach_leader$field);
 			}
 			if (hasCreateFamily) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 25);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, create_family$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, create_family$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -517,14 +517,14 @@ package app.message {
 			var impeach_leader$count:uint = 0;
 			var create_family$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyNewsProto.time cannot be set twice.');
 					}
 					++time$count;
-					this.time = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.time = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 10:
 					if (add_member$count != 0) {
@@ -532,7 +532,7 @@ package app.message {
 					}
 					++add_member$count;
 					this.addMember = new app.message.FamilyNewsProto.AddMemberProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.addMember);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.addMember);
 					break;
 				case 11:
 					if (kick_member$count != 0) {
@@ -540,7 +540,7 @@ package app.message {
 					}
 					++kick_member$count;
 					this.kickMember = new app.message.FamilyNewsProto.KickMemberProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.kickMember);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.kickMember);
 					break;
 				case 12:
 					if (leave_family$count != 0) {
@@ -548,7 +548,7 @@ package app.message {
 					}
 					++leave_family$count;
 					this.leaveFamily = new app.message.FamilyNewsProto.LeaveFamilyProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.leaveFamily);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.leaveFamily);
 					break;
 				case 13:
 					if (change_pos$count != 0) {
@@ -556,7 +556,7 @@ package app.message {
 					}
 					++change_pos$count;
 					this.changePos = new app.message.FamilyNewsProto.ChangePosProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.changePos);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.changePos);
 					break;
 				case 14:
 					if (been_killed$count != 0) {
@@ -564,7 +564,7 @@ package app.message {
 					}
 					++been_killed$count;
 					this.beenKilled = new app.message.FamilyNewsProto.MemberBeenKilledProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.beenKilled);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.beenKilled);
 					break;
 				case 15:
 					if (kill_other$count != 0) {
@@ -572,7 +572,7 @@ package app.message {
 					}
 					++kill_other$count;
 					this.killOther = new app.message.FamilyNewsProto.MemberKillOtherProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.killOther);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.killOther);
 					break;
 				case 16:
 					if (kill_boss$count != 0) {
@@ -580,7 +580,7 @@ package app.message {
 					}
 					++kill_boss$count;
 					this.killBoss = new app.message.FamilyNewsProto.MemberKillBossProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.killBoss);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.killBoss);
 					break;
 				case 17:
 					if (been_killed_by_boss$count != 0) {
@@ -588,7 +588,7 @@ package app.message {
 					}
 					++been_killed_by_boss$count;
 					this.beenKilledByBoss = new app.message.FamilyNewsProto.MemberBeenKilledByBossProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.beenKilledByBoss);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.beenKilledByBoss);
 					break;
 				case 18:
 					if (building_upgrade$count != 0) {
@@ -596,7 +596,7 @@ package app.message {
 					}
 					++building_upgrade$count;
 					this.buildingUpgrade = new app.message.FamilyNewsProto.BuildingUpgradeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.buildingUpgrade);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.buildingUpgrade);
 					break;
 				case 19:
 					if (donate_build_token$count != 0) {
@@ -604,7 +604,7 @@ package app.message {
 					}
 					++donate_build_token$count;
 					this.donateBuildToken = new app.message.FamilyNewsProto.DonateFamilyBuildTokenProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.donateBuildToken);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.donateBuildToken);
 					break;
 				case 20:
 					if (donate_money$count != 0) {
@@ -612,7 +612,7 @@ package app.message {
 					}
 					++donate_money$count;
 					this.donateMoney = new app.message.FamilyNewsProto.DonateMoneyProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.donateMoney);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.donateMoney);
 					break;
 				case 21:
 					if (animal_bar_start$count != 0) {
@@ -620,7 +620,7 @@ package app.message {
 					}
 					++animal_bar_start$count;
 					this.animalBarStart = new app.message.FamilyNewsProto.FamilyAnimalBarStart();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.animalBarStart);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.animalBarStart);
 					break;
 				case 22:
 					if (kill_family_animal_bar_boss$count != 0) {
@@ -628,7 +628,7 @@ package app.message {
 					}
 					++kill_family_animal_bar_boss$count;
 					this.killFamilyAnimalBarBoss = new app.message.FamilyNewsProto.KillFamilyAnimalBarBoss();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.killFamilyAnimalBarBoss);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.killFamilyAnimalBarBoss);
 					break;
 				case 23:
 					if (family_biao_news$count != 0) {
@@ -636,7 +636,7 @@ package app.message {
 					}
 					++family_biao_news$count;
 					this.familyBiaoNews = new app.message.FamilyNewsProto.FamilyBiaoNewsProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.familyBiaoNews);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.familyBiaoNews);
 					break;
 				case 24:
 					if (impeach_leader$count != 0) {
@@ -644,7 +644,7 @@ package app.message {
 					}
 					++impeach_leader$count;
 					this.impeachLeader = new app.message.FamilyNewsProto.ImpeachFamilyLeaderProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.impeachLeader);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.impeachLeader);
 					break;
 				case 25:
 					if (create_family$count != 0) {
@@ -652,7 +652,7 @@ package app.message {
 					}
 					++create_family$count;
 					this.createFamily = new app.message.FamilyNewsProto.CreateFamilyProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.createFamily);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.createFamily);
 					break;
 				default:
 					super.readUnknown(input, tag);

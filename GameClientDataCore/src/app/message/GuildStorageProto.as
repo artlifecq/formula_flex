@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FAN_RONG_DU:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.GuildStorageProto.fan_rong_du", "fanRongDu", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FAN_RONG_DU:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.GuildStorageProto.fan_rong_du", "fanRongDu", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var fan_rong_du$field:Int64;
 
@@ -37,7 +37,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MONEY:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.GuildStorageProto.money", "money", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MONEY:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.GuildStorageProto.money", "money", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var money$field:Int64;
 
@@ -63,11 +63,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasFanRongDu) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, fan_rong_du$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, fan_rong_du$field);
 			}
 			if (hasMoney) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, money$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, money$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -81,21 +81,21 @@ package app.message {
 			var fan_rong_du$count:uint = 0;
 			var money$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (fan_rong_du$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildStorageProto.fanRongDu cannot be set twice.');
 					}
 					++fan_rong_du$count;
-					this.fanRongDu = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.fanRongDu = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (money$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildStorageProto.money cannot be set twice.');
 					}
 					++money$count;
-					this.money = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.money = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

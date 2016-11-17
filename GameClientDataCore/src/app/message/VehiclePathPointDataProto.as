@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const X:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.VehiclePathPointDataProto.x", "x", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const X:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.VehiclePathPointDataProto.x", "x", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var x$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const Y:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.VehiclePathPointDataProto.y", "y", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const Y:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.VehiclePathPointDataProto.y", "y", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var y$field:int;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const Z:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.VehiclePathPointDataProto.z", "z", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const Z:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.VehiclePathPointDataProto.z", "z", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var z$field:int;
 
@@ -91,7 +91,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SPEED:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.VehiclePathPointDataProto.speed", "speed", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SPEED:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.VehiclePathPointDataProto.speed", "speed", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var speed$field:int;
 
@@ -116,7 +116,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TILT_ANGLE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.VehiclePathPointDataProto.tilt_angle", "tiltAngle", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TILT_ANGLE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.VehiclePathPointDataProto.tilt_angle", "tiltAngle", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var tilt_angle$field:int;
 
@@ -141,7 +141,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BASE_ACTION_SPEED:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.VehiclePathPointDataProto.base_action_speed", "baseActionSpeed", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BASE_ACTION_SPEED:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.VehiclePathPointDataProto.base_action_speed", "baseActionSpeed", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var base_action_speed$field:int;
 
@@ -166,7 +166,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STATUS_TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.VehiclePathPointDataProto.status_type", "statusType", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const STATUS_TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.VehiclePathPointDataProto.status_type", "statusType", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var status_type$field:int;
 
@@ -194,31 +194,31 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasX) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, x$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, x$field);
 			}
 			if (hasY) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, y$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, y$field);
 			}
 			if (hasZ) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, z$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, z$field);
 			}
 			if (hasSpeed) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, speed$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, speed$field);
 			}
 			if (hasTiltAngle) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, tilt_angle$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, tilt_angle$field);
 			}
 			if (hasBaseActionSpeed) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, base_action_speed$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, base_action_speed$field);
 			}
 			if (hasStatusType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, status_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, status_type$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -237,56 +237,56 @@ package app.message {
 			var base_action_speed$count:uint = 0;
 			var status_type$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (x$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VehiclePathPointDataProto.x cannot be set twice.');
 					}
 					++x$count;
-					this.x = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.x = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (y$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VehiclePathPointDataProto.y cannot be set twice.');
 					}
 					++y$count;
-					this.y = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.y = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (z$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VehiclePathPointDataProto.z cannot be set twice.');
 					}
 					++z$count;
-					this.z = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.z = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (speed$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VehiclePathPointDataProto.speed cannot be set twice.');
 					}
 					++speed$count;
-					this.speed = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.speed = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (tilt_angle$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VehiclePathPointDataProto.tiltAngle cannot be set twice.');
 					}
 					++tilt_angle$count;
-					this.tiltAngle = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.tiltAngle = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (base_action_speed$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VehiclePathPointDataProto.baseActionSpeed cannot be set twice.');
 					}
 					++base_action_speed$count;
-					this.baseActionSpeed = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.baseActionSpeed = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (status_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VehiclePathPointDataProto.statusType cannot be set twice.');
 					}
 					++status_type$count;
-					this.statusType = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.statusType = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -1,15 +1,15 @@
 ﻿package com.game.mainCore.libCore.log
 {
-    import flash.display.Sprite;
-    import flash.text.TextField;
-    import flash.text.StyleSheet;
     import flash.display.Bitmap;
-    import flash.geom.Rectangle;
     import flash.display.BitmapData;
+    import flash.display.Sprite;
     import flash.events.Event;
-    import flash.utils.getTimer;
-    import flash.system.System;
     import flash.events.MouseEvent;
+    import flash.geom.Rectangle;
+    import flash.system.System;
+    import flash.text.StyleSheet;
+    import flash.text.TextField;
+    import flash.utils.getTimer;
 
     public class Debug extends Sprite 
     {
@@ -120,11 +120,11 @@
         private function update(e:Event):void
         {
             timer = getTimer();
-            if (((timer - 1000) > ms_prev))
+            if ((timer - 1000) > ms_prev)
             {
                 ms_prev = timer;
-                mem = (System.totalMemory * 9.54E-7).toFixed(3);
-                mem_max = (((mem_max)>mem) ? mem_max : mem);
+				mem = Number((System.totalMemory * 9.54e-7).toFixed(3));
+                mem_max = (mem_max)>mem ? mem_max : mem;
                 fps_graph = Math.min(graph.height, ((fps / stage.frameRate) * graph.height));
                 mem_graph = (Math.min(graph.height, Math.sqrt(Math.sqrt((mem * 5000)))) - 2);
                 mem_max_graph = (Math.min(graph.height, Math.sqrt(Math.sqrt((mem_max * 5000)))) - 2);
@@ -134,29 +134,27 @@
                 graph.bitmapData.setPixel((graph.width - 1), (graph.height - ((timer - ms) >> 1)), theme.ms);
                 graph.bitmapData.setPixel((graph.width - 1), (graph.height - mem_graph), theme.mem);
                 graph.bitmapData.setPixel((graph.width - 1), (graph.height - mem_max_graph), theme.memmax);
-                xml.fps = ((("FPS: " + fps) + " / ") + stage.frameRate);
-                xml.mem = ("MEM: " + mem);
-                xml.memMax = ("MAX: " + mem_max);
+                xml.fps = "FPS: " + fps + " / " + stage.frameRate;
+                xml.mem = "MEM: " + mem;
+                xml.memMax = "MAX: " + mem_max;
                 fps = 0;
-            };
+            }
             fps++;
-            xml.ms = ("MS: " + (timer - ms));
+            xml.ms = "MS: " + (timer - ms);
             ms = timer;
             text.htmlText = xml;
         }
 
         private function onClick(e:MouseEvent):void
         {
-            ((((mouseY / height))>0.5) ? stage.frameRate-- : stage.frameRate++);
-            xml.fps = ((("FPS: " + fps) + " / ") + stage.frameRate);
+            (mouseY / height)>0.5 ? stage.frameRate-- : stage.frameRate++;
+            xml.fps = "FPS: " + fps + " / " + stage.frameRate;
             text.htmlText = xml;
         }
 
         private function hex2css(color:int):String
         {
-            return (("#" + color.toString(16)));
+            return "#" + color.toString(16);
         }
-
-
     }
-}//package com.game.mainCore.libCore.log
+}

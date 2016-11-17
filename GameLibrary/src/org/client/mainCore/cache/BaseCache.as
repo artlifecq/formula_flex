@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.cache
+﻿package org.client.mainCore.cache
 {
     import flash.events.EventDispatcher;
     import org.client.mainCore.cache.interfaces.ICachePool;
@@ -78,4 +77,4 @@ package org.client.mainCore.cache
 
 
     }
-}//package org.client.mainCore.cache
+}

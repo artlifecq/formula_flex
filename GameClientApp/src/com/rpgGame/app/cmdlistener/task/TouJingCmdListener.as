@@ -24,9 +24,9 @@ package com.rpgGame.app.cmdlistener.task
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
-	import org.game.netCore.net.BytesUtil;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
+	import org.game.netCore.net_protobuff.BytesUtil;
 
 	/**
 	 * 夺经事件侦听器 
@@ -42,21 +42,21 @@ package com.rpgGame.app.cmdlistener.task
 
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_ACCEPT_TOU_JING, onAcceptTouJing);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_ACCEPT_TOU_JING_FAIL, onAcceptTouJingFail);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_START_TOU_JING_FAIL, onRecStartTouJingFail);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TOU_JING_PROGRESS, onRecTouJingProgress);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_DO_TOU_JING_FAIL, onRecDoTouJingFail);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_DO_TOU_JING, onRecDoTouJing);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TOU_JING_STATUS, onRecTouJingStatus);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_COMPLETE_TOU_JING_TASK_FAIL, onRecCompleteTouJingTaskFail);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_COMPLETE_TOU_JING_TASK, onRecCompleteTouJingTask);
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_MAX_QUALITY_JING_SHU_BROADCAST, onMaxQualityJingShuBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_ACCEPT_TOU_JING, onAcceptTouJing);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_ACCEPT_TOU_JING_FAIL, onAcceptTouJingFail);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_START_TOU_JING_FAIL, onRecStartTouJingFail);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TOU_JING_PROGRESS, onRecTouJingProgress);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_DO_TOU_JING_FAIL, onRecDoTouJingFail);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_DO_TOU_JING, onRecDoTouJing);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TOU_JING_STATUS, onRecTouJingStatus);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_COMPLETE_TOU_JING_TASK_FAIL, onRecCompleteTouJingTaskFail);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_COMPLETE_TOU_JING_TASK, onRecCompleteTouJingTask);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_MAX_QUALITY_JING_SHU_BROADCAST, onMaxQualityJingShuBroadcast);
 			
 			//开启国家夺经
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_START_DUO_JING, onStartDuoJing);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_START_DUO_JING_FAIL, onStartDuoJingFail);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_START_DUO_JING_BROADCAST, onStartDuoJingBroadCast);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_START_DUO_JING, onStartDuoJing);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_START_DUO_JING_FAIL, onStartDuoJingFail);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_START_DUO_JING_BROADCAST, onStartDuoJingBroadCast);
 
 			finish();
 		}

@@ -13,8 +13,8 @@ package com.rpgGame.app.cmdlistener.familyWar
 	import app.message.KingWarBroadcastProto;
 	
 	import org.client.mainCore.bean.BaseBean;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 * 王城战 
@@ -29,27 +29,27 @@ package com.rpgGame.app.cmdlistener.familyWar
 		
 		override public function start():void
 		{
-			SocketConnection.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_BID,onFamilyWarBid);
-			SocketConnection.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_STATUS,onFamilyWarStatus);
-			SocketConnection.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_BID_FAIL,onFamilyWarBidFail);
-			SocketConnection.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_BID_END_TIME_CHANGED_BROADCAST,onFamilyWarEndTimeChange);
-			SocketConnection.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_BID_END_BROADCAST,onFamilyWarBroadcast);
-			SocketConnection.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_BID_RANK,onFamilyWarBidRank);
+			SocketConnection_protoBuffer.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_BID,onFamilyWarBid);
+			SocketConnection_protoBuffer.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_STATUS,onFamilyWarStatus);
+			SocketConnection_protoBuffer.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_BID_FAIL,onFamilyWarBidFail);
+			SocketConnection_protoBuffer.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_BID_END_TIME_CHANGED_BROADCAST,onFamilyWarEndTimeChange);
+			SocketConnection_protoBuffer.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_BID_END_BROADCAST,onFamilyWarBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_BID_RANK,onFamilyWarBidRank);
 //			SocketConnection.addCmdListener(FamilyWarModuleMessages.S2C_KING_CHANGED,onKingChange);
-			SocketConnection.addCmdListener(KingWarModuleMessages.S2C_TRY_ENTER_KING_WAR_DUNGEON,onEnterFamilyWarDungeon);
-			SocketConnection.addCmdListener(KingWarModuleMessages.S2C_TRY_ENTER_KING_WAR_DUNGEON_FAIL,onEnterFamilyWarDungeonFail);
-			SocketConnection.addCmdListener(KingWarModuleMessages.S2C_DUNGEON_INFO,onFamilyWarDungeonInfo);
-			SocketConnection.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_DUNGEON_RANK,onFamilyWarDungeonRank);
-			SocketConnection.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_DUNGEON_RANK_FAIL,onFamilyWarDungeonRankFail);
-			SocketConnection.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_DUNGEON_STATUS,onFamilyWarDungeonStatus);
-			SocketConnection.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_SCENE,onFamilyWarSceneBroadcast);
-			SocketConnection.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_SCENE_BROADCAST,onFamilyWarSceneoneBroadcast);
-			SocketConnection.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_WORLD_BROADCAST,onFamilyWarWordBroadcast);
-			SocketConnection.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_BROADCAST_FAIL,onFamilyWarSceneBroadcastFail);
-			SocketConnection.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_DUNGEON_END,onFamilyWarDungeonEnd);
-			SocketConnection.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_CAN_RELIVE_TIME_CHANGED,onFamilyWarCanReliveTimeChange);
-			SocketConnection.addCmdListener(KingWarModuleMessages.S2C_COLLECT_COUNTRY_KING_GUILD_PRIZE,onGetKingFamilyPrize);
-			SocketConnection.addCmdListener(KingWarModuleMessages.S2C_COLLECT_COUNTRY_KING_GUILD_PRIZE_FAIL,onGetKingFamilyPrizeFail);
+			SocketConnection_protoBuffer.addCmdListener(KingWarModuleMessages.S2C_TRY_ENTER_KING_WAR_DUNGEON,onEnterFamilyWarDungeon);
+			SocketConnection_protoBuffer.addCmdListener(KingWarModuleMessages.S2C_TRY_ENTER_KING_WAR_DUNGEON_FAIL,onEnterFamilyWarDungeonFail);
+			SocketConnection_protoBuffer.addCmdListener(KingWarModuleMessages.S2C_DUNGEON_INFO,onFamilyWarDungeonInfo);
+			SocketConnection_protoBuffer.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_DUNGEON_RANK,onFamilyWarDungeonRank);
+			SocketConnection_protoBuffer.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_DUNGEON_RANK_FAIL,onFamilyWarDungeonRankFail);
+			SocketConnection_protoBuffer.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_DUNGEON_STATUS,onFamilyWarDungeonStatus);
+			SocketConnection_protoBuffer.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_SCENE,onFamilyWarSceneBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_SCENE_BROADCAST,onFamilyWarSceneoneBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_WORLD_BROADCAST,onFamilyWarWordBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_BROADCAST_FAIL,onFamilyWarSceneBroadcastFail);
+			SocketConnection_protoBuffer.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_DUNGEON_END,onFamilyWarDungeonEnd);
+			SocketConnection_protoBuffer.addCmdListener(KingWarModuleMessages.S2C_KING_WAR_CAN_RELIVE_TIME_CHANGED,onFamilyWarCanReliveTimeChange);
+			SocketConnection_protoBuffer.addCmdListener(KingWarModuleMessages.S2C_COLLECT_COUNTRY_KING_GUILD_PRIZE,onGetKingFamilyPrize);
+			SocketConnection_protoBuffer.addCmdListener(KingWarModuleMessages.S2C_COLLECT_COUNTRY_KING_GUILD_PRIZE_FAIL,onGetKingFamilyPrizeFail);
 			
 			finish();
 		}

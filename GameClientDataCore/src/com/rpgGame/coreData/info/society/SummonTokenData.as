@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.info.society
 {
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *

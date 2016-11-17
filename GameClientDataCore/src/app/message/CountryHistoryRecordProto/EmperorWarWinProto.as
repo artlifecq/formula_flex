@@ -14,7 +14,7 @@ package app.message.CountryHistoryRecordProto {
 		/**
 		 *  @private
 		 */
-		public static const KING_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.CountryHistoryRecordProto.EmperorWarWinProto.king_name", "kingName", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const KING_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.CountryHistoryRecordProto.EmperorWarWinProto.king_name", "kingName", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var king_name$field:String;
 
@@ -40,7 +40,7 @@ package app.message.CountryHistoryRecordProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasKingName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, king_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, king_name$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -53,14 +53,14 @@ package app.message.CountryHistoryRecordProto {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var king_name$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (king_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EmperorWarWinProto.kingName cannot be set twice.');
 					}
 					++king_name$count;
-					this.kingName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.kingName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

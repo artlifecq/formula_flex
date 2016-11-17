@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RELIVE_TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ReliveTypeDataProto.relive_type", "reliveType", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RELIVE_TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ReliveTypeDataProto.relive_type", "reliveType", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var relive_type$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FREE_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ReliveTypeDataProto.free_times", "freeTimes", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FREE_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ReliveTypeDataProto.free_times", "freeTimes", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var free_times$field:int;
 
@@ -67,7 +67,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LIFE_PERCENT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ReliveTypeDataProto.life_percent", "lifePercent", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LIFE_PERCENT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ReliveTypeDataProto.life_percent", "lifePercent", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var life_percent$field:int;
 
@@ -92,7 +92,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MANA_PERCENT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ReliveTypeDataProto.mana_percent", "manaPercent", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MANA_PERCENT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ReliveTypeDataProto.mana_percent", "manaPercent", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var mana_percent$field:int;
 
@@ -117,7 +117,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ALL_RELIVE_COST:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.ReliveTypeDataProto.all_relive_cost", "allReliveCost", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ReliveCostProto; });
+		public static const ALL_RELIVE_COST:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.ReliveTypeDataProto.all_relive_cost", "allReliveCost", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ReliveCostProto; });
 
 		[ArrayElementType("app.message.ReliveCostProto")]
 		public var allReliveCost:Array = [];
@@ -128,23 +128,23 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasReliveType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, relive_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, relive_type$field);
 			}
 			if (hasFreeTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, free_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, free_times$field);
 			}
 			if (hasLifePercent) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, life_percent$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, life_percent$field);
 			}
 			if (hasManaPercent) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, mana_percent$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, mana_percent$field);
 			}
 			for (var allReliveCost$index:uint = 0; allReliveCost$index < this.allReliveCost.length; ++allReliveCost$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.allReliveCost[allReliveCost$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.allReliveCost[allReliveCost$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -160,38 +160,38 @@ package app.message {
 			var life_percent$count:uint = 0;
 			var mana_percent$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (relive_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ReliveTypeDataProto.reliveType cannot be set twice.');
 					}
 					++relive_type$count;
-					this.reliveType = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.reliveType = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (free_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ReliveTypeDataProto.freeTimes cannot be set twice.');
 					}
 					++free_times$count;
-					this.freeTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.freeTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (life_percent$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ReliveTypeDataProto.lifePercent cannot be set twice.');
 					}
 					++life_percent$count;
-					this.lifePercent = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.lifePercent = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (mana_percent$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ReliveTypeDataProto.manaPercent cannot be set twice.');
 					}
 					++mana_percent$count;
-					this.manaPercent = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.manaPercent = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
-					this.allReliveCost.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.ReliveCostProto()));
+					this.allReliveCost.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.ReliveCostProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

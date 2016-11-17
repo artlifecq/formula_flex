@@ -9,8 +9,8 @@ package com.rpgGame.app.cmdlistener
 	import app.message.SpellProto;
 	
 	import org.client.mainCore.bean.BaseBean;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 * 技能学习与升级
@@ -21,13 +21,13 @@ package com.rpgGame.app.cmdlistener
 	{
 		override public function start():void
 		{
-			SocketConnection.addCmdListener(SpellModuleMessages.S2C_LEARNED_OR_UPGRADED_ACTIVE_SPELL,onLearnedOrUpgradedActiveSpell);
-			SocketConnection.addCmdListener(SpellModuleMessages.S2C_LEARN_OR_UPGRADE_SPELL_FAIL,onLearnedOrUpgradeActiveSpellFail);
+			SocketConnection_protoBuffer.addCmdListener(SpellModuleMessages.S2C_LEARNED_OR_UPGRADED_ACTIVE_SPELL,onLearnedOrUpgradedActiveSpell);
+			SocketConnection_protoBuffer.addCmdListener(SpellModuleMessages.S2C_LEARN_OR_UPGRADE_SPELL_FAIL,onLearnedOrUpgradeActiveSpellFail);
 			
-			SocketConnection.addCmdListener(SpellModuleMessages.S2C_CLEAR_SPELLS_FAILURE,onClearSpellsFailure);
-			SocketConnection.addCmdListener(SpellModuleMessages.S2C_CLEAR_SPELLS_SUCCESS,onClearSpellsSuccess);
+			SocketConnection_protoBuffer.addCmdListener(SpellModuleMessages.S2C_CLEAR_SPELLS_FAILURE,onClearSpellsFailure);
+			SocketConnection_protoBuffer.addCmdListener(SpellModuleMessages.S2C_CLEAR_SPELLS_SUCCESS,onClearSpellsSuccess);
 			
-			SocketConnection.addCmdListener(SpellModuleMessages.S2C_OBTAIN_SPELL_POINT,onObtainSpellPoint);
+			SocketConnection_protoBuffer.addCmdListener(SpellModuleMessages.S2C_OBTAIN_SPELL_POINT,onObtainSpellPoint);
 			
 			finish();
 		}	

@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ID:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.PerHeroDailyConsumeInfoProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ID:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.PerHeroDailyConsumeInfoProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var id$field:Int64;
 
@@ -37,7 +37,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CONSUME_AMOUNT:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.PerHeroDailyConsumeInfoProto.consume_amount", "consumeAmount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CONSUME_AMOUNT:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.PerHeroDailyConsumeInfoProto.consume_amount", "consumeAmount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var consume_amount$field:Int64;
 
@@ -60,7 +60,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COLLECTED_TIME:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.PerHeroDailyConsumeInfoProto.collected_time", "collectedTime", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COLLECTED_TIME:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.PerHeroDailyConsumeInfoProto.collected_time", "collectedTime", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var collectedTime:Array = [];
@@ -71,15 +71,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, id$field);
 			}
 			if (hasConsumeAmount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, consume_amount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, consume_amount$field);
 			}
 			for (var collectedTime$index:uint = 0; collectedTime$index < this.collectedTime.length; ++collectedTime$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.collectedTime[collectedTime$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.collectedTime[collectedTime$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -93,28 +93,28 @@ package app.message {
 			var id$count:uint = 0;
 			var consume_amount$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: PerHeroDailyConsumeInfoProto.id cannot be set twice.');
 					}
 					++id$count;
-					this.id = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.id = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (consume_amount$count != 0) {
 						throw new flash.errors.IOError('Bad data format: PerHeroDailyConsumeInfoProto.consumeAmount cannot be set twice.');
 					}
 					++consume_amount$count;
-					this.consumeAmount = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.consumeAmount = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 3:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.collectedTime);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.collectedTime);
 						break;
 					}
-					this.collectedTime.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.collectedTime.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				default:
 					super.readUnknown(input, tag);

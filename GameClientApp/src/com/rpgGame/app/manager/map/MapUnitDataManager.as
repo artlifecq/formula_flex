@@ -23,8 +23,8 @@ package com.rpgGame.app.manager.map
 	import app.cmd.SceneModuleMessages;
 
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 * 地图活动对象数据管理器
@@ -510,7 +510,7 @@ package com.rpgGame.app.manager.map
 			_emptyBy.clear();
 			data = data || _emptyBy;
 
-			SocketConnection.send(cmdID, data);
+			SocketConnection_protoBuffer.send(cmdID, data);
 		}
 	}
 }

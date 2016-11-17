@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const X:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SquareAreaProto.x", "x", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const X:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SquareAreaProto.x", "x", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var x$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const Y:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SquareAreaProto.y", "y", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const Y:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SquareAreaProto.y", "y", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var y$field:int;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RADIUS:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SquareAreaProto.radius", "radius", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RADIUS:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SquareAreaProto.radius", "radius", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var radius$field:int;
 
@@ -91,7 +91,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SCENE_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SquareAreaProto.scene_id", "sceneId", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SCENE_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SquareAreaProto.scene_id", "sceneId", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var scene_id$field:int;
 
@@ -119,19 +119,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasX) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, x$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, x$field);
 			}
 			if (hasY) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, y$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, y$field);
 			}
 			if (hasRadius) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, radius$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, radius$field);
 			}
 			if (hasSceneId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, scene_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, scene_id$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -147,35 +147,35 @@ package app.message {
 			var radius$count:uint = 0;
 			var scene_id$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (x$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SquareAreaProto.x cannot be set twice.');
 					}
 					++x$count;
-					this.x = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.x = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (y$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SquareAreaProto.y cannot be set twice.');
 					}
 					++y$count;
-					this.y = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.y = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (radius$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SquareAreaProto.radius cannot be set twice.');
 					}
 					++radius$count;
-					this.radius = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.radius = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (scene_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SquareAreaProto.sceneId cannot be set twice.');
 					}
 					++scene_id$count;
-					this.sceneId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.sceneId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

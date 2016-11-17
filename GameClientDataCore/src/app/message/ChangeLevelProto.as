@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NEW_LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChangeLevelProto.new_level", "newLevel", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const NEW_LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChangeLevelProto.new_level", "newLevel", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var new_level$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EXP:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.ChangeLevelProto.exp", "exp", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const EXP:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.ChangeLevelProto.exp", "exp", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var exp$field:Int64;
 
@@ -64,7 +64,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_STORAGE_EXP:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.ChangeLevelProto.can_storage_exp", "canStorageExp", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_STORAGE_EXP:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.ChangeLevelProto.can_storage_exp", "canStorageExp", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_storage_exp$field:Int64;
 
@@ -87,7 +87,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_ADD_SPELL_POINT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChangeLevelProto.total_add_spell_point", "totalAddSpellPoint", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOTAL_ADD_SPELL_POINT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChangeLevelProto.total_add_spell_point", "totalAddSpellPoint", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var total_add_spell_point$field:int;
 
@@ -112,7 +112,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_ADD_SPRITE_STAT_POINT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChangeLevelProto.total_add_sprite_stat_point", "totalAddSpriteStatPoint", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOTAL_ADD_SPRITE_STAT_POINT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChangeLevelProto.total_add_sprite_stat_point", "totalAddSpriteStatPoint", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var total_add_sprite_stat_point$field:int;
 
@@ -137,7 +137,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PHOENIX_REFINE_MONEY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChangeLevelProto.phoenix_refine_money", "phoenixRefineMoney", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PHOENIX_REFINE_MONEY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChangeLevelProto.phoenix_refine_money", "phoenixRefineMoney", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var phoenix_refine_money$field:int;
 
@@ -162,7 +162,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PHOENIX_REFINE_EXP:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChangeLevelProto.phoenix_refine_exp", "phoenixRefineExp", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PHOENIX_REFINE_EXP:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChangeLevelProto.phoenix_refine_exp", "phoenixRefineExp", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var phoenix_refine_exp$field:int;
 
@@ -187,7 +187,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MOUNT_SLOT_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChangeLevelProto.mount_slot_count", "mountSlotCount", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MOUNT_SLOT_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChangeLevelProto.mount_slot_count", "mountSlotCount", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var mount_slot_count$field:int;
 
@@ -212,7 +212,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RELIVE_COEFF:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChangeLevelProto.relive_coeff", "reliveCoeff", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RELIVE_COEFF:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChangeLevelProto.relive_coeff", "reliveCoeff", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var relive_coeff$field:int;
 
@@ -240,39 +240,39 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasNewLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, new_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, new_level$field);
 			}
 			if (hasExp) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, exp$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, exp$field);
 			}
 			if (hasCanStorageExp) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, can_storage_exp$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, can_storage_exp$field);
 			}
 			if (hasTotalAddSpellPoint) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, total_add_spell_point$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, total_add_spell_point$field);
 			}
 			if (hasTotalAddSpriteStatPoint) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, total_add_sprite_stat_point$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, total_add_sprite_stat_point$field);
 			}
 			if (hasPhoenixRefineMoney) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, phoenix_refine_money$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, phoenix_refine_money$field);
 			}
 			if (hasPhoenixRefineExp) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, phoenix_refine_exp$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, phoenix_refine_exp$field);
 			}
 			if (hasMountSlotCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, mount_slot_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, mount_slot_count$field);
 			}
 			if (hasReliveCoeff) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, relive_coeff$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, relive_coeff$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -293,70 +293,70 @@ package app.message {
 			var mount_slot_count$count:uint = 0;
 			var relive_coeff$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (new_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChangeLevelProto.newLevel cannot be set twice.');
 					}
 					++new_level$count;
-					this.newLevel = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.newLevel = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (exp$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChangeLevelProto.exp cannot be set twice.');
 					}
 					++exp$count;
-					this.exp = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.exp = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 3:
 					if (can_storage_exp$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChangeLevelProto.canStorageExp cannot be set twice.');
 					}
 					++can_storage_exp$count;
-					this.canStorageExp = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.canStorageExp = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 4:
 					if (total_add_spell_point$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChangeLevelProto.totalAddSpellPoint cannot be set twice.');
 					}
 					++total_add_spell_point$count;
-					this.totalAddSpellPoint = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.totalAddSpellPoint = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (total_add_sprite_stat_point$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChangeLevelProto.totalAddSpriteStatPoint cannot be set twice.');
 					}
 					++total_add_sprite_stat_point$count;
-					this.totalAddSpriteStatPoint = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.totalAddSpriteStatPoint = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (phoenix_refine_money$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChangeLevelProto.phoenixRefineMoney cannot be set twice.');
 					}
 					++phoenix_refine_money$count;
-					this.phoenixRefineMoney = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.phoenixRefineMoney = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (phoenix_refine_exp$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChangeLevelProto.phoenixRefineExp cannot be set twice.');
 					}
 					++phoenix_refine_exp$count;
-					this.phoenixRefineExp = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.phoenixRefineExp = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 8:
 					if (mount_slot_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChangeLevelProto.mountSlotCount cannot be set twice.');
 					}
 					++mount_slot_count$count;
-					this.mountSlotCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.mountSlotCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 9:
 					if (relive_coeff$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChangeLevelProto.reliveCoeff cannot be set twice.');
 					}
 					++relive_coeff$count;
-					this.reliveCoeff = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.reliveCoeff = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

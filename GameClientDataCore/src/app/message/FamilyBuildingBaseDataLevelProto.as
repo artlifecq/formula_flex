@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FamilyBuildingBaseDataLevelProto.level", "level", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FamilyBuildingBaseDataLevelProto.level", "level", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const UPGRADE_MONEY:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.FamilyBuildingBaseDataLevelProto.upgrade_money", "upgradeMoney", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const UPGRADE_MONEY:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.FamilyBuildingBaseDataLevelProto.upgrade_money", "upgradeMoney", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var upgrade_money$field:Int64;
 
@@ -64,7 +64,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const UPGRADE_BUILD_TOKEN:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.FamilyBuildingBaseDataLevelProto.upgrade_build_token", "upgradeBuildToken", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const UPGRADE_BUILD_TOKEN:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.FamilyBuildingBaseDataLevelProto.upgrade_build_token", "upgradeBuildToken", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var upgrade_build_token$field:Int64;
 
@@ -87,7 +87,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BUILDING_DESC:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.FamilyBuildingBaseDataLevelProto.building_desc", "buildingDesc", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const BUILDING_DESC:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.FamilyBuildingBaseDataLevelProto.building_desc", "buildingDesc", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var building_desc$field:String;
 
@@ -113,19 +113,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level$field);
 			}
 			if (hasUpgradeMoney) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, upgrade_money$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, upgrade_money$field);
 			}
 			if (hasUpgradeBuildToken) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, upgrade_build_token$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, upgrade_build_token$field);
 			}
 			if (hasBuildingDesc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, building_desc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, building_desc$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -141,35 +141,35 @@ package app.message {
 			var upgrade_build_token$count:uint = 0;
 			var building_desc$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyBuildingBaseDataLevelProto.level cannot be set twice.');
 					}
 					++level$count;
-					this.level = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.level = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (upgrade_money$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyBuildingBaseDataLevelProto.upgradeMoney cannot be set twice.');
 					}
 					++upgrade_money$count;
-					this.upgradeMoney = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.upgradeMoney = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 3:
 					if (upgrade_build_token$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyBuildingBaseDataLevelProto.upgradeBuildToken cannot be set twice.');
 					}
 					++upgrade_build_token$count;
-					this.upgradeBuildToken = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.upgradeBuildToken = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 4:
 					if (building_desc$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyBuildingBaseDataLevelProto.buildingDesc cannot be set twice.');
 					}
 					++building_desc$count;
-					this.buildingDesc = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.buildingDesc = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

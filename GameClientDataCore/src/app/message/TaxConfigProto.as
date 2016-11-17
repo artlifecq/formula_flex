@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_OPEN:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.TaxConfigProto.is_open", "isOpen", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_OPEN:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.TaxConfigProto.is_open", "isOpen", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_open$field:Boolean;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_INCOME_COUNTRY:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.TaxConfigProto.is_income_country", "isIncomeCountry", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_INCOME_COUNTRY:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.TaxConfigProto.is_income_country", "isIncomeCountry", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_income_country$field:Boolean;
 
@@ -67,7 +67,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FIXED_TAX:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TaxConfigProto.fixed_tax", "fixedTax", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FIXED_TAX:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TaxConfigProto.fixed_tax", "fixedTax", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var fixed_tax$field:int;
 
@@ -92,7 +92,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TAX_TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.TaxConfigProto.tax_type", "taxType", (4 << 3) | com.netease.protobuf.WireType.VARINT, app.message.TaxType);
+		public static const TAX_TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.TaxConfigProto.tax_type", "taxType", (4 << 3) | com.netease.protobuf.WireType.VARINT, app.message.TaxType);
 
 		private var tax_type$field:int;
 
@@ -120,19 +120,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasIsOpen) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_open$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_open$field);
 			}
 			if (hasIsIncomeCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_income_country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_income_country$field);
 			}
 			if (hasFixedTax) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, fixed_tax$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, fixed_tax$field);
 			}
 			if (hasTaxType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, tax_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, tax_type$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -148,35 +148,35 @@ package app.message {
 			var fixed_tax$count:uint = 0;
 			var tax_type$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (is_open$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TaxConfigProto.isOpen cannot be set twice.');
 					}
 					++is_open$count;
-					this.isOpen = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isOpen = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 2:
 					if (is_income_country$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TaxConfigProto.isIncomeCountry cannot be set twice.');
 					}
 					++is_income_country$count;
-					this.isIncomeCountry = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isIncomeCountry = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 3:
 					if (fixed_tax$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TaxConfigProto.fixedTax cannot be set twice.');
 					}
 					++fixed_tax$count;
-					this.fixedTax = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.fixedTax = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (tax_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TaxConfigProto.taxType cannot be set twice.');
 					}
 					++tax_type$count;
-					this.taxType = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.taxType = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

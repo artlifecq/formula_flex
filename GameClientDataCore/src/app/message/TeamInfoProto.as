@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TEAM_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TeamInfoProto.team_id", "teamId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TEAM_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TeamInfoProto.team_id", "teamId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var team_id$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HERO_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TeamInfoProto.hero_count", "heroCount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const HERO_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TeamInfoProto.hero_count", "heroCount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var hero_count$field:int;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEADER_ID:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.TeamInfoProto.leader_id", "leaderId", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEADER_ID:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.TeamInfoProto.leader_id", "leaderId", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var leader_id$field:Int64;
 
@@ -89,7 +89,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEADER_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.TeamInfoProto.leader_name", "leaderName", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const LEADER_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.TeamInfoProto.leader_name", "leaderName", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var leader_name$field:String;
 
@@ -112,7 +112,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEADER_LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TeamInfoProto.leader_level", "leaderLevel", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEADER_LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TeamInfoProto.leader_level", "leaderLevel", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var leader_level$field:int;
 
@@ -137,7 +137,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FIGHT_AMOUNT_THRESHOLD:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.TeamInfoProto.fight_amount_threshold", "fightAmountThreshold", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FIGHT_AMOUNT_THRESHOLD:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.TeamInfoProto.fight_amount_threshold", "fightAmountThreshold", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var fight_amount_threshold$field:Int64;
 
@@ -160,7 +160,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_AUTO_START:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.TeamInfoProto.is_auto_start", "isAutoStart", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_AUTO_START:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.TeamInfoProto.is_auto_start", "isAutoStart", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_auto_start$field:Boolean;
 
@@ -185,7 +185,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HAS_PWD:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.TeamInfoProto.has_pwd", "hasPwd", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const HAS_PWD:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.TeamInfoProto.has_pwd", "hasPwd", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var has_pwd$field:Boolean;
 
@@ -213,35 +213,35 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasTeamId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, team_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, team_id$field);
 			}
 			if (hasHeroCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, hero_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, hero_count$field);
 			}
 			if (hasLeaderId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, leader_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, leader_id$field);
 			}
 			if (hasLeaderName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, leader_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, leader_name$field);
 			}
 			if (hasLeaderLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, leader_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, leader_level$field);
 			}
 			if (hasFightAmountThreshold) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, fight_amount_threshold$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, fight_amount_threshold$field);
 			}
 			if (hasIsAutoStart) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_auto_start$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_auto_start$field);
 			}
 			if (hasHasPwd) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, has_pwd$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, has_pwd$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -261,63 +261,63 @@ package app.message {
 			var is_auto_start$count:uint = 0;
 			var has_pwd$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (team_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TeamInfoProto.teamId cannot be set twice.');
 					}
 					++team_id$count;
-					this.teamId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.teamId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (hero_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TeamInfoProto.heroCount cannot be set twice.');
 					}
 					++hero_count$count;
-					this.heroCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.heroCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (leader_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TeamInfoProto.leaderId cannot be set twice.');
 					}
 					++leader_id$count;
-					this.leaderId = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.leaderId = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 4:
 					if (leader_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TeamInfoProto.leaderName cannot be set twice.');
 					}
 					++leader_name$count;
-					this.leaderName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.leaderName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 8:
 					if (leader_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TeamInfoProto.leaderLevel cannot be set twice.');
 					}
 					++leader_level$count;
-					this.leaderLevel = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.leaderLevel = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (fight_amount_threshold$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TeamInfoProto.fightAmountThreshold cannot be set twice.');
 					}
 					++fight_amount_threshold$count;
-					this.fightAmountThreshold = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.fightAmountThreshold = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 6:
 					if (is_auto_start$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TeamInfoProto.isAutoStart cannot be set twice.');
 					}
 					++is_auto_start$count;
-					this.isAutoStart = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isAutoStart = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 7:
 					if (has_pwd$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TeamInfoProto.hasPwd cannot be set twice.');
 					}
 					++has_pwd$count;
-					this.hasPwd = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.hasPwd = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

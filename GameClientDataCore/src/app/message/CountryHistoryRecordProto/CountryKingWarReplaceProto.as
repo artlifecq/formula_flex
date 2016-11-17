@@ -14,7 +14,7 @@ package app.message.CountryHistoryRecordProto {
 		/**
 		 *  @private
 		 */
-		public static const ATTACK_GUILD_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.CountryHistoryRecordProto.CountryKingWarReplaceProto.attack_guild_name", "attackGuildName", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const ATTACK_GUILD_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.CountryHistoryRecordProto.CountryKingWarReplaceProto.attack_guild_name", "attackGuildName", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var attack_guild_name$field:String;
 
@@ -37,7 +37,7 @@ package app.message.CountryHistoryRecordProto {
 		/**
 		 *  @private
 		 */
-		public static const DEFENCE_GUILD_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.CountryHistoryRecordProto.CountryKingWarReplaceProto.defence_guild_name", "defenceGuildName", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const DEFENCE_GUILD_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.CountryHistoryRecordProto.CountryKingWarReplaceProto.defence_guild_name", "defenceGuildName", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var defence_guild_name$field:String;
 
@@ -60,7 +60,7 @@ package app.message.CountryHistoryRecordProto {
 		/**
 		 *  @private
 		 */
-		public static const ATTACK_GUILD_LEADER_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.CountryHistoryRecordProto.CountryKingWarReplaceProto.attack_guild_leader_name", "attackGuildLeaderName", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const ATTACK_GUILD_LEADER_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.CountryHistoryRecordProto.CountryKingWarReplaceProto.attack_guild_leader_name", "attackGuildLeaderName", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var attack_guild_leader_name$field:String;
 
@@ -86,15 +86,15 @@ package app.message.CountryHistoryRecordProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasAttackGuildName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, attack_guild_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, attack_guild_name$field);
 			}
 			if (hasDefenceGuildName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, defence_guild_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, defence_guild_name$field);
 			}
 			if (hasAttackGuildLeaderName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, attack_guild_leader_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, attack_guild_leader_name$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -109,28 +109,28 @@ package app.message.CountryHistoryRecordProto {
 			var defence_guild_name$count:uint = 0;
 			var attack_guild_leader_name$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (attack_guild_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryKingWarReplaceProto.attackGuildName cannot be set twice.');
 					}
 					++attack_guild_name$count;
-					this.attackGuildName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.attackGuildName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 2:
 					if (defence_guild_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryKingWarReplaceProto.defenceGuildName cannot be set twice.');
 					}
 					++defence_guild_name$count;
-					this.defenceGuildName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.defenceGuildName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (attack_guild_leader_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryKingWarReplaceProto.attackGuildLeaderName cannot be set twice.');
 					}
 					++attack_guild_leader_name$count;
-					this.attackGuildLeaderName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.attackGuildLeaderName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -25,7 +25,7 @@ package com.client.process
 	import gs.TweenLite;
 
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
 
 	/**
 	 *
@@ -107,11 +107,11 @@ package com.client.process
 
 		private function onConnect() : void
 		{
-			SocketConnection.mainSocket.addEventListener(Event.CONNECT, onMainSocketConnect);
-			SocketConnection.mainSocket.addEventListener(IOErrorEvent.IO_ERROR, onConnectError);
-			SocketConnection.mainSocket.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onConnectError);
-			SocketConnection.mainSocket.addEventListener(Event.CLOSE, onSocketClose);
-			SocketConnection.mainSocket.connect(ClientGlobal.loginIP, ClientGlobal.loginPort);
+			SocketConnection_protoBuffer.mainSocket.addEventListener(Event.CONNECT, onMainSocketConnect);
+			SocketConnection_protoBuffer.mainSocket.addEventListener(IOErrorEvent.IO_ERROR, onConnectError);
+			SocketConnection_protoBuffer.mainSocket.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onConnectError);
+			SocketConnection_protoBuffer.mainSocket.addEventListener(Event.CLOSE, onSocketClose);
+			SocketConnection_protoBuffer.mainSocket.connect(ClientGlobal.loginIP, ClientGlobal.loginPort);
 			//
 			_retryConnectCnt = 0;
 			if (!_retryTimer)
@@ -142,9 +142,9 @@ package com.client.process
 			_allowReconnect = true;
 			_errMsg = "";
 			GameAlert.hide();
-			SocketConnection.mainSocket.removeEventListener(Event.CONNECT, onMainSocketConnect);
-			SocketConnection.mainSocket.removeEventListener(IOErrorEvent.IO_ERROR, onConnectError);
-			SocketConnection.mainSocket.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onConnectError);
+			SocketConnection_protoBuffer.mainSocket.removeEventListener(Event.CONNECT, onMainSocketConnect);
+			SocketConnection_protoBuffer.mainSocket.removeEventListener(IOErrorEvent.IO_ERROR, onConnectError);
+			SocketConnection_protoBuffer.mainSocket.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onConnectError);
 			//
 			if (_retryTimer)
 			{
@@ -179,9 +179,9 @@ package com.client.process
 		{
 			_connectDelay = deley;
 			GameLog.addShow("服务器连接" + msg);
-			SocketConnection.mainSocket.removeEventListener(Event.CLOSE, onSocketClose);
+			SocketConnection_protoBuffer.mainSocket.removeEventListener(Event.CLOSE, onSocketClose);
 			SenderReferenceSet.stop();
-			SocketConnection.mainSocket.close(); //关闭原来的socket
+			SocketConnection_protoBuffer.mainSocket.close(); //关闭原来的socket
 			//
 			if (_retryTimer)
 			{
@@ -270,7 +270,7 @@ package com.client.process
 			{
 				trace(ClientGlobal.loginName);
 				ret.writeUTF(ClientGlobal.loginName);
-				SocketConnection.send(ClientCmdID.C2S_CREATE_OR_LOGIN_BY_NAME, ret);
+				SocketConnection_protoBuffer.send(ClientCmdID.C2S_CREATE_OR_LOGIN_BY_NAME, ret);
 			}
 			else
 			{
@@ -293,9 +293,9 @@ package com.client.process
 			var by : ByteArray = new ByteArray();
 			by.writeUTFBytes(sign);
 			//
-			SocketConnection.mainSocket.easyProtocolOffset = 0;
-			SocketConnection.send(ClientCmdID.C2S_RECONNECTED, signBy);
-			SocketConnection.mainSocket.easyProtocolOffset = by[0];
+			SocketConnection_protoBuffer.mainSocket.easyProtocolOffset = 0;
+			SocketConnection_protoBuffer.send(ClientCmdID.C2S_RECONNECTED, signBy);
+			SocketConnection_protoBuffer.mainSocket.easyProtocolOffset = by[0];
 		}
 
 		/**
@@ -313,8 +313,8 @@ package com.client.process
 			GameLog.addShow(str);
 			GameLog.addShow("===========================TGW=================== ");
 			GameLog.addShow("data.length:" + data.length);
-			SocketConnection.mainSocket.writeBytes(data);
-			SocketConnection.mainSocket.flush();
+			SocketConnection_protoBuffer.mainSocket.writeBytes(data);
+			SocketConnection_protoBuffer.mainSocket.flush();
 		}
 
 		private function showErrorMessage(msg : String) : void
@@ -336,7 +336,7 @@ package com.client.process
 			_retryConnectCnt++;
 			GameLog.addShow("连接Socket，第" + _retryConnectCnt + "次尝试: ", ClientGlobal.loginIP, ClientGlobal.loginPort);
 			//
-			SocketConnection.mainSocket.connect(ClientGlobal.loginIP, ClientGlobal.loginPort);
+			SocketConnection_protoBuffer.mainSocket.connect(ClientGlobal.loginIP, ClientGlobal.loginPort);
 			if (_retryConnectCnt > 60)
 			{
 				showErrorMessage("服务器连接不上，继续尝试重新连接中，请检查您的网络环境！");

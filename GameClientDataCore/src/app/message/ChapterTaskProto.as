@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CHAPTER:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChapterTaskProto.chapter", "chapter", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CHAPTER:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChapterTaskProto.chapter", "chapter", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var chapter$field:int;
 
@@ -43,7 +43,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COMPLETED_TASK:RepeatedFieldDescriptor$TYPE_BYTES = new RepeatedFieldDescriptor$TYPE_BYTES("app.message.ChapterTaskProto.completed_task", "completedTask", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const COMPLETED_TASK:RepeatedFieldDescriptor_TYPE_BYTES = new RepeatedFieldDescriptor_TYPE_BYTES("app.message.ChapterTaskProto.completed_task", "completedTask", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		[ArrayElementType("flash.utils.ByteArray")]
 		public var completedTask:Array = [];
@@ -51,7 +51,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BASE_TASK:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.ChapterTaskProto.base_task", "baseTask", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TaskProto; });
+		public static const BASE_TASK:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.ChapterTaskProto.base_task", "baseTask", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TaskProto; });
 
 		private var base_task$field:app.message.TaskProto;
 
@@ -74,7 +74,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COMPLTE_CHAPTER_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChapterTaskProto.complte_chapter_count", "complteChapterCount", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COMPLTE_CHAPTER_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChapterTaskProto.complte_chapter_count", "complteChapterCount", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var complte_chapter_count$field:int;
 
@@ -102,19 +102,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasChapter) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, chapter$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, chapter$field);
 			}
 			for (var completedTask$index:uint = 0; completedTask$index < this.completedTask.length; ++completedTask$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, this.completedTask[completedTask$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, this.completedTask[completedTask$index]);
 			}
 			if (hasBaseTask) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, base_task$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, base_task$field);
 			}
 			if (hasComplteChapterCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, complte_chapter_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, complte_chapter_count$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -129,17 +129,17 @@ package app.message {
 			var base_task$count:uint = 0;
 			var complte_chapter_count$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (chapter$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChapterTaskProto.chapter cannot be set twice.');
 					}
 					++chapter$count;
-					this.chapter = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.chapter = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
-					this.completedTask.push(com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input));
+					this.completedTask.push(com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input));
 					break;
 				case 3:
 					if (base_task$count != 0) {
@@ -147,14 +147,14 @@ package app.message {
 					}
 					++base_task$count;
 					this.baseTask = new app.message.TaskProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.baseTask);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.baseTask);
 					break;
 				case 4:
 					if (complte_chapter_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChapterTaskProto.complteChapterCount cannot be set twice.');
 					}
 					++complte_chapter_count$count;
-					this.complteChapterCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.complteChapterCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

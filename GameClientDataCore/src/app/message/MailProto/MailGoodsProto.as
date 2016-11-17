@@ -15,7 +15,7 @@ package app.message.MailProto {
 		/**
 		 *  @private
 		 */
-		public static const POS:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MailProto.MailGoodsProto.pos", "pos", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const POS:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MailProto.MailGoodsProto.pos", "pos", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var pos$field:int;
 
@@ -42,7 +42,7 @@ package app.message.MailProto {
 		/**
 		 *  @private
 		 */
-		public static const GOODS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.MailProto.MailGoodsProto.goods", "goods", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsProto; });
+		public static const GOODS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.MailProto.MailGoodsProto.goods", "goods", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsProto; });
 
 		private var goods$field:app.message.GoodsProto;
 
@@ -68,11 +68,11 @@ package app.message.MailProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasPos) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, pos$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, pos$field);
 			}
 			if (hasGoods) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, goods$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, goods$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -86,14 +86,14 @@ package app.message.MailProto {
 			var pos$count:uint = 0;
 			var goods$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (pos$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MailGoodsProto.pos cannot be set twice.');
 					}
 					++pos$count;
-					this.pos = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.pos = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (goods$count != 0) {
@@ -101,7 +101,7 @@ package app.message.MailProto {
 					}
 					++goods$count;
 					this.goods = new app.message.GoodsProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.goods);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.goods);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -14,8 +14,8 @@ package com.rpgGame.app.cmdlistener.task
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 * 偷猪
@@ -31,22 +31,22 @@ package com.rpgGame.app.cmdlistener.task
 		
 		override public function start():void
 		{
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_ACCEPT_TOU_ZHU_TASK_FAIL, onRecAcceptTouZhuTaskFail );
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_ACCEPT_TOU_ZHU_TASK, onRecAcceptTouZhuTask );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_ACCEPT_TOU_ZHU_TASK_FAIL, onRecAcceptTouZhuTaskFail );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_ACCEPT_TOU_ZHU_TASK, onRecAcceptTouZhuTask );
 			
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TOU_ZHU_BIAN_SHEN, onRecTouZhuBianShen );
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TOU_ZHU_BIAN_SHEN_DISAPPEAR, onRecTouZhuBianShenDisappear );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TOU_ZHU_BIAN_SHEN, onRecTouZhuBianShen );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TOU_ZHU_BIAN_SHEN_DISAPPEAR, onRecTouZhuBianShenDisappear );
 			
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_TOU_ZHU_TASK_DISAPPER, onRecTouZhuTaskDisapper );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_TOU_ZHU_TASK_DISAPPER, onRecTouZhuTaskDisapper );
 			
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_STRAT_TOU_ZHU_FAIL, onRecStratTouZhuFail );
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_STRAT_TOU_ZHU, onRecStratTouZhu );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_STRAT_TOU_ZHU_FAIL, onRecStratTouZhuFail );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_STRAT_TOU_ZHU, onRecStratTouZhu );
 			
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_DO_TOU_ZHU_FAIL, onRecDoTouZhuFail );
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_DO_TOU_ZHU, onRecDoTouZhu );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_DO_TOU_ZHU_FAIL, onRecDoTouZhuFail );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_DO_TOU_ZHU, onRecDoTouZhu );
 			
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_COMPLETE_TOU_ZHU_TASK_FAIL, onRecCompleteTouZhuTaskFail );
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_COMPLETE_TOU_ZHU_TASK, onRecCompleteTouZhuTask );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_COMPLETE_TOU_ZHU_TASK_FAIL, onRecCompleteTouZhuTaskFail );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_COMPLETE_TOU_ZHU_TASK, onRecCompleteTouZhuTask );
 			
 			finish();
 		}

@@ -14,7 +14,7 @@ package app.message.CountryWarTopRankProto {
 		/**
 		 *  @private
 		 */
-		public static const KILL_HERO_TIMES:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryWarTopRankProto.TopKillHeroTimesProto.kill_hero_times", "killHeroTimes", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const KILL_HERO_TIMES:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryWarTopRankProto.TopKillHeroTimesProto.kill_hero_times", "killHeroTimes", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var kill_hero_times$field:Int64;
 
@@ -40,7 +40,7 @@ package app.message.CountryWarTopRankProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasKillHeroTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, kill_hero_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, kill_hero_times$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -53,14 +53,14 @@ package app.message.CountryWarTopRankProto {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var kill_hero_times$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (kill_hero_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TopKillHeroTimesProto.killHeroTimes cannot be set twice.');
 					}
 					++kill_hero_times$count;
-					this.killHeroTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.killHeroTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

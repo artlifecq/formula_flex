@@ -15,7 +15,7 @@ package app.message.FamilyNewsProto {
 		/**
 		 *  @private
 		 */
-		public static const IMPEACH_MEMBER:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.ImpeachFamilyLeaderProto.impeach_member", "impeachMember", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberIdAndNameProto; });
+		public static const IMPEACH_MEMBER:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.ImpeachFamilyLeaderProto.impeach_member", "impeachMember", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberIdAndNameProto; });
 
 		private var impeach_member$field:app.message.FamilyNewsProto.MemberIdAndNameProto;
 
@@ -38,7 +38,7 @@ package app.message.FamilyNewsProto {
 		/**
 		 *  @private
 		 */
-		public static const BEEN_IMPEACH_MEMBER:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.ImpeachFamilyLeaderProto.been_impeach_member", "beenImpeachMember", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberIdAndNameProto; });
+		public static const BEEN_IMPEACH_MEMBER:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.ImpeachFamilyLeaderProto.been_impeach_member", "beenImpeachMember", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberIdAndNameProto; });
 
 		private var been_impeach_member$field:app.message.FamilyNewsProto.MemberIdAndNameProto;
 
@@ -64,11 +64,11 @@ package app.message.FamilyNewsProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasImpeachMember) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, impeach_member$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, impeach_member$field);
 			}
 			if (hasBeenImpeachMember) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, been_impeach_member$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, been_impeach_member$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -82,7 +82,7 @@ package app.message.FamilyNewsProto {
 			var impeach_member$count:uint = 0;
 			var been_impeach_member$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (impeach_member$count != 0) {
@@ -90,7 +90,7 @@ package app.message.FamilyNewsProto {
 					}
 					++impeach_member$count;
 					this.impeachMember = new app.message.FamilyNewsProto.MemberIdAndNameProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.impeachMember);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.impeachMember);
 					break;
 				case 2:
 					if (been_impeach_member$count != 0) {
@@ -98,7 +98,7 @@ package app.message.FamilyNewsProto {
 					}
 					++been_impeach_member$count;
 					this.beenImpeachMember = new app.message.FamilyNewsProto.MemberIdAndNameProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.beenImpeachMember);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.beenImpeachMember);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.libCore.observer
+﻿package com.game.mainCore.libCore.observer
 {
     public class ObserverThread 
     {
@@ -19,7 +18,7 @@ package com.game.mainCore.libCore.observer
 
         public function registerObserver($notificationName:*, $observer:Observer):void
         {
-            if (!((_observerMap[$notificationName] == null)))
+            if (_observerMap[$notificationName] != null)
             {
                 _observerMap[$notificationName].push($observer);
             }
@@ -32,7 +31,7 @@ package com.game.mainCore.libCore.observer
         public function removeObserver($notificationName:*, $notifyContext:*):void
         {
             var i:int;
-            var observers:Array = (_observerMap[$notificationName] as Array);
+            var observers:Array = _observerMap[$notificationName] as Array;
             i = (observers.length - 1);
             while (i >= 0)
             {
@@ -40,13 +39,13 @@ package com.game.mainCore.libCore.observer
                 {
                     observers.splice(i, 1);
                     break;
-                };
+                }
                 i--;
-            };
+            }
             if (observers.length == 0)
             {
                 delete _observerMap[$notificationName];
-            };
+            }
         }
 
         public function removeObserverByNotificationName($notificationName:*):void
@@ -55,23 +54,23 @@ package com.game.mainCore.libCore.observer
             {
                 _observerMap[$notificationName] = null;
                 delete _observerMap[$notificationName];
-            };
+            }
         }
 
         public function removeObserverByNotifyContext($notifyContext:*):void
         {
-            for (var notificationName in _observerMap)
+            for (var notificationName:* in _observerMap)
             {
                 removeObserver(notificationName, $notifyContext);
-            };
+            }
         }
 
         public function notifyObservers($notification:Notification):void
         {
-            var observers = null;
-            var observer = null;
+            var observers:Array = null;
+            var observer:Observer = null;
             var i:int;
-            var observers_ref:Array = (_observerMap[$notification.name] as Array);
+            var observers_ref:Array = _observerMap[$notification.name] as Array;
             if (observers_ref != null)
             {
                 observers = [];
@@ -81,17 +80,15 @@ package com.game.mainCore.libCore.observer
                     observer = observers_ref[i];
                     observers.push(observer);
                     i++;
-                };
+                }
                 i = 0;
                 while (i < observers.length)
                 {
                     observer = (observers[i] as Observer);
                     observer.notifyObserver($notification);
                     i++;
-                };
-            };
+                }
+            }
         }
-
-
     }
-}//package com.game.mainCore.libCore.observer
+}

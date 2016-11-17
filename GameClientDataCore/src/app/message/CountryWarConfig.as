@@ -17,7 +17,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MISC_DATA:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryWarConfig.misc_data", "miscData", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryWarMiscDataProto; });
+		public static const MISC_DATA:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryWarConfig.misc_data", "miscData", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryWarMiscDataProto; });
 
 		private var misc_data$field:app.message.CountryWarMiscDataProto;
 
@@ -40,7 +40,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RELIVE_MON_DATAS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryWarConfig.relive_mon_datas", "reliveMonDatas", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryWarReliveMonDatasProto; });
+		public static const RELIVE_MON_DATAS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryWarConfig.relive_mon_datas", "reliveMonDatas", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryWarReliveMonDatasProto; });
 
 		private var relive_mon_datas$field:app.message.CountryWarReliveMonDatasProto;
 
@@ -63,7 +63,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ZHAN_CHE_MONSTER_DATAS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryWarConfig.zhan_che_monster_datas", "zhanCheMonsterDatas", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ZhanCheMonsterDatasProto; });
+		public static const ZHAN_CHE_MONSTER_DATAS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryWarConfig.zhan_che_monster_datas", "zhanCheMonsterDatas", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ZhanCheMonsterDatasProto; });
 
 		private var zhan_che_monster_datas$field:app.message.ZhanCheMonsterDatasProto;
 
@@ -89,15 +89,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasMiscData) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, misc_data$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, misc_data$field);
 			}
 			if (hasReliveMonDatas) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, relive_mon_datas$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, relive_mon_datas$field);
 			}
 			if (hasZhanCheMonsterDatas) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, zhan_che_monster_datas$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, zhan_che_monster_datas$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -112,7 +112,7 @@ package app.message {
 			var relive_mon_datas$count:uint = 0;
 			var zhan_che_monster_datas$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (misc_data$count != 0) {
@@ -120,7 +120,7 @@ package app.message {
 					}
 					++misc_data$count;
 					this.miscData = new app.message.CountryWarMiscDataProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.miscData);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.miscData);
 					break;
 				case 2:
 					if (relive_mon_datas$count != 0) {
@@ -128,7 +128,7 @@ package app.message {
 					}
 					++relive_mon_datas$count;
 					this.reliveMonDatas = new app.message.CountryWarReliveMonDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.reliveMonDatas);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.reliveMonDatas);
 					break;
 				case 3:
 					if (zhan_che_monster_datas$count != 0) {
@@ -136,7 +136,7 @@ package app.message {
 					}
 					++zhan_che_monster_datas$count;
 					this.zhanCheMonsterDatas = new app.message.ZhanCheMonsterDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.zhanCheMonsterDatas);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.zhanCheMonsterDatas);
 					break;
 				default:
 					super.readUnknown(input, tag);

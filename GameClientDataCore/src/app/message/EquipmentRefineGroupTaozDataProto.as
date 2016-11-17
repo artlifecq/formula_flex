@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.EquipmentRefineGroupTaozDataProto.name", "name", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.EquipmentRefineGroupTaozDataProto.name", "name", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var name$field:String;
 
@@ -38,7 +38,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ICON:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.EquipmentRefineGroupTaozDataProto.icon", "icon", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const ICON:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.EquipmentRefineGroupTaozDataProto.icon", "icon", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var icon$field:String;
 
@@ -61,7 +61,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL_STAGE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentRefineGroupTaozDataProto.level_stage", "levelStage", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL_STAGE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentRefineGroupTaozDataProto.level_stage", "levelStage", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level_stage$field:int;
 
@@ -88,7 +88,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const REFINE_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentRefineGroupTaozDataProto.refine_times", "refineTimes", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const REFINE_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentRefineGroupTaozDataProto.refine_times", "refineTimes", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var refine_times$field:int;
 
@@ -113,7 +113,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DATAS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.EquipmentRefineGroupTaozDataProto.datas", "datas", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentRefineTaozDataProto; });
+		public static const DATAS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.EquipmentRefineGroupTaozDataProto.datas", "datas", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentRefineTaozDataProto; });
 
 		[ArrayElementType("app.message.EquipmentRefineTaozDataProto")]
 		public var datas:Array = [];
@@ -124,23 +124,23 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, name$field);
 			}
 			if (hasIcon) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, icon$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, icon$field);
 			}
 			if (hasLevelStage) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level_stage$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level_stage$field);
 			}
 			if (hasRefineTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, refine_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, refine_times$field);
 			}
 			for (var datas$index:uint = 0; datas$index < this.datas.length; ++datas$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.datas[datas$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.datas[datas$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -156,38 +156,38 @@ package app.message {
 			var level_stage$count:uint = 0;
 			var refine_times$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentRefineGroupTaozDataProto.name cannot be set twice.');
 					}
 					++name$count;
-					this.name = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.name = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 2:
 					if (icon$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentRefineGroupTaozDataProto.icon cannot be set twice.');
 					}
 					++icon$count;
-					this.icon = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.icon = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (level_stage$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentRefineGroupTaozDataProto.levelStage cannot be set twice.');
 					}
 					++level_stage$count;
-					this.levelStage = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.levelStage = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (refine_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentRefineGroupTaozDataProto.refineTimes cannot be set twice.');
 					}
 					++refine_times$count;
-					this.refineTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.refineTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
-					this.datas.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.EquipmentRefineTaozDataProto()));
+					this.datas.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.EquipmentRefineTaozDataProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

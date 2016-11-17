@@ -18,7 +18,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MISC_DATA:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.BiaoConfig.misc_data", "miscData", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BiaoMiscDataProto; });
+		public static const MISC_DATA:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.BiaoConfig.misc_data", "miscData", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BiaoMiscDataProto; });
 
 		private var misc_data$field:app.message.BiaoMiscDataProto;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PERSONAL_MISC:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.BiaoConfig.personal_misc", "personalMisc", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PersonalBiaoMiscDataProto; });
+		public static const PERSONAL_MISC:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.BiaoConfig.personal_misc", "personalMisc", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PersonalBiaoMiscDataProto; });
 
 		private var personal_misc$field:app.message.PersonalBiaoMiscDataProto;
 
@@ -64,7 +64,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PERSONAL_DATAS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.BiaoConfig.personal_datas", "personalDatas", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AllPersonalDatasProto; });
+		public static const PERSONAL_DATAS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.BiaoConfig.personal_datas", "personalDatas", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AllPersonalDatasProto; });
 
 		private var personal_datas$field:app.message.AllPersonalDatasProto;
 
@@ -87,7 +87,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BIAO_JU_MISC:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.BiaoConfig.biao_ju_misc", "biaoJuMisc", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BiaoJuMiscDataProto; });
+		public static const BIAO_JU_MISC:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.BiaoConfig.biao_ju_misc", "biaoJuMisc", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BiaoJuMiscDataProto; });
 
 		private var biao_ju_misc$field:app.message.BiaoJuMiscDataProto;
 
@@ -113,19 +113,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasMiscData) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, misc_data$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, misc_data$field);
 			}
 			if (hasPersonalMisc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, personal_misc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, personal_misc$field);
 			}
 			if (hasPersonalDatas) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, personal_datas$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, personal_datas$field);
 			}
 			if (hasBiaoJuMisc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, biao_ju_misc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, biao_ju_misc$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -141,7 +141,7 @@ package app.message {
 			var personal_datas$count:uint = 0;
 			var biao_ju_misc$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 4:
 					if (misc_data$count != 0) {
@@ -149,7 +149,7 @@ package app.message {
 					}
 					++misc_data$count;
 					this.miscData = new app.message.BiaoMiscDataProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.miscData);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.miscData);
 					break;
 				case 1:
 					if (personal_misc$count != 0) {
@@ -157,7 +157,7 @@ package app.message {
 					}
 					++personal_misc$count;
 					this.personalMisc = new app.message.PersonalBiaoMiscDataProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.personalMisc);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.personalMisc);
 					break;
 				case 2:
 					if (personal_datas$count != 0) {
@@ -165,7 +165,7 @@ package app.message {
 					}
 					++personal_datas$count;
 					this.personalDatas = new app.message.AllPersonalDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.personalDatas);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.personalDatas);
 					break;
 				case 3:
 					if (biao_ju_misc$count != 0) {
@@ -173,7 +173,7 @@ package app.message {
 					}
 					++biao_ju_misc$count;
 					this.biaoJuMisc = new app.message.BiaoJuMiscDataProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.biaoJuMisc);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.biaoJuMisc);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const AMOUNTS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.PrizeProto.amounts", "amounts", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AmountValue; });
+		public static const AMOUNTS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.PrizeProto.amounts", "amounts", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AmountValue; });
 
 		[ArrayElementType("app.message.AmountValue")]
 		public var amounts:Array = [];
@@ -24,7 +24,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GOODS_WRAPPER:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.PrizeProto.goods_wrapper", "goodsWrapper", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
+		public static const GOODS_WRAPPER:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.PrizeProto.goods_wrapper", "goodsWrapper", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
 
 		[ArrayElementType("app.message.GoodsWrapperProto")]
 		public var goodsWrapper:Array = [];
@@ -35,11 +35,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			for (var amounts$index:uint = 0; amounts$index < this.amounts.length; ++amounts$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.amounts[amounts$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.amounts[amounts$index]);
 			}
 			for (var goodsWrapper$index:uint = 0; goodsWrapper$index < this.goodsWrapper.length; ++goodsWrapper$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.goodsWrapper[goodsWrapper$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.goodsWrapper[goodsWrapper$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -51,13 +51,13 @@ package app.message {
 		 */
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
-					this.amounts.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.AmountValue()));
+					this.amounts.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.AmountValue()));
 					break;
 				case 10:
-					this.goodsWrapper.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.GoodsWrapperProto()));
+					this.goodsWrapper.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.GoodsWrapperProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.manager
+﻿package org.client.mainCore.manager
 {
     import flash.display.DisplayObjectContainer;
     import flash.display.Stage;
@@ -38,7 +37,5 @@ package org.client.mainCore.manager
         {
             _stage = s;
         }
-
-
     }
-}//package org.client.mainCore.manager
+}

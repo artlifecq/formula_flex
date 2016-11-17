@@ -14,7 +14,7 @@ package app.message.TaskTargetProto {
 		/**
 		 *  @private
 		 */
-		public static const CLIENT_TASK_TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TaskTargetProto.ClientTaskTargetProto.client_task_type", "clientTaskType", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CLIENT_TASK_TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TaskTargetProto.ClientTaskTargetProto.client_task_type", "clientTaskType", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var client_task_type$field:int;
 
@@ -41,7 +41,7 @@ package app.message.TaskTargetProto {
 		/**
 		 *  @private
 		 */
-		public static const CLIENT_TASK:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.TaskTargetProto.ClientTaskTargetProto.client_task", "clientTask", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const CLIENT_TASK:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.TaskTargetProto.ClientTaskTargetProto.client_task", "clientTask", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var client_task$field:String;
 
@@ -64,7 +64,7 @@ package app.message.TaskTargetProto {
 		/**
 		 *  @private
 		 */
-		public static const COMPLETE_CLIENT_TASK_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TaskTargetProto.ClientTaskTargetProto.complete_client_task_times", "completeClientTaskTimes", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COMPLETE_CLIENT_TASK_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TaskTargetProto.ClientTaskTargetProto.complete_client_task_times", "completeClientTaskTimes", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var complete_client_task_times$field:int;
 
@@ -92,15 +92,15 @@ package app.message.TaskTargetProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasClientTaskType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, client_task_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, client_task_type$field);
 			}
 			if (hasClientTask) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, client_task$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, client_task$field);
 			}
 			if (hasCompleteClientTaskTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, complete_client_task_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, complete_client_task_times$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -115,28 +115,28 @@ package app.message.TaskTargetProto {
 			var client_task$count:uint = 0;
 			var complete_client_task_times$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (client_task_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ClientTaskTargetProto.clientTaskType cannot be set twice.');
 					}
 					++client_task_type$count;
-					this.clientTaskType = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.clientTaskType = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (client_task$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ClientTaskTargetProto.clientTask cannot be set twice.');
 					}
 					++client_task$count;
-					this.clientTask = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.clientTask = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (complete_client_task_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ClientTaskTargetProto.completeClientTaskTimes cannot be set twice.');
 					}
 					++complete_client_task_times$count;
-					this.completeClientTaskTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.completeClientTaskTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

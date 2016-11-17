@@ -14,7 +14,7 @@ package app.message.UpgradeProto {
 		/**
 		 *  @private
 		 */
-		public static const UPGRADE_GOODS:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.UpgradeProto.UpgradeGoodsInfoProto.upgrade_goods", "upgradeGoods", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const UPGRADE_GOODS:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.UpgradeProto.UpgradeGoodsInfoProto.upgrade_goods", "upgradeGoods", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var upgrade_goods$field:int;
 
@@ -41,7 +41,7 @@ package app.message.UpgradeProto {
 		/**
 		 *  @private
 		 */
-		public static const SUBSTITUTE_GOODS:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.UpgradeProto.UpgradeGoodsInfoProto.substitute_goods", "substituteGoods", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SUBSTITUTE_GOODS:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.UpgradeProto.UpgradeGoodsInfoProto.substitute_goods", "substituteGoods", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var substituteGoods:Array = [];
@@ -49,7 +49,7 @@ package app.message.UpgradeProto {
 		/**
 		 *  @private
 		 */
-		public static const UPGRADE_GOODS_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.UpgradeProto.UpgradeGoodsInfoProto.upgrade_goods_count", "upgradeGoodsCount", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const UPGRADE_GOODS_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.UpgradeProto.UpgradeGoodsInfoProto.upgrade_goods_count", "upgradeGoodsCount", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var upgrade_goods_count$field:int;
 
@@ -74,7 +74,7 @@ package app.message.UpgradeProto {
 		/**
 		 *  @private
 		 */
-		public static const BAND_JINZI_PRICE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.UpgradeProto.UpgradeGoodsInfoProto.band_jinzi_price", "bandJinziPrice", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BAND_JINZI_PRICE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.UpgradeProto.UpgradeGoodsInfoProto.band_jinzi_price", "bandJinziPrice", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var band_jinzi_price$field:int;
 
@@ -99,7 +99,7 @@ package app.message.UpgradeProto {
 		/**
 		 *  @private
 		 */
-		public static const JINZI_PRICE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.UpgradeProto.UpgradeGoodsInfoProto.jinzi_price", "jinziPrice", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const JINZI_PRICE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.UpgradeProto.UpgradeGoodsInfoProto.jinzi_price", "jinziPrice", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var jinzi_price$field:int;
 
@@ -127,23 +127,23 @@ package app.message.UpgradeProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasUpgradeGoods) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, upgrade_goods$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, upgrade_goods$field);
 			}
 			for (var substituteGoods$index:uint = 0; substituteGoods$index < this.substituteGoods.length; ++substituteGoods$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.substituteGoods[substituteGoods$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.substituteGoods[substituteGoods$index]);
 			}
 			if (hasUpgradeGoodsCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, upgrade_goods_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, upgrade_goods_count$field);
 			}
 			if (hasBandJinziPrice) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, band_jinzi_price$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, band_jinzi_price$field);
 			}
 			if (hasJinziPrice) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, jinzi_price$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, jinzi_price$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -159,42 +159,42 @@ package app.message.UpgradeProto {
 			var band_jinzi_price$count:uint = 0;
 			var jinzi_price$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (upgrade_goods$count != 0) {
 						throw new flash.errors.IOError('Bad data format: UpgradeGoodsInfoProto.upgradeGoods cannot be set twice.');
 					}
 					++upgrade_goods$count;
-					this.upgradeGoods = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.upgradeGoods = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.substituteGoods);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.substituteGoods);
 						break;
 					}
-					this.substituteGoods.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.substituteGoods.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				case 3:
 					if (upgrade_goods_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: UpgradeGoodsInfoProto.upgradeGoodsCount cannot be set twice.');
 					}
 					++upgrade_goods_count$count;
-					this.upgradeGoodsCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.upgradeGoodsCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 10:
 					if (band_jinzi_price$count != 0) {
 						throw new flash.errors.IOError('Bad data format: UpgradeGoodsInfoProto.bandJinziPrice cannot be set twice.');
 					}
 					++band_jinzi_price$count;
-					this.bandJinziPrice = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.bandJinziPrice = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 11:
 					if (jinzi_price$count != 0) {
 						throw new flash.errors.IOError('Bad data format: UpgradeGoodsInfoProto.jinziPrice cannot be set twice.');
 					}
 					++jinzi_price$count;
-					this.jinziPrice = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.jinziPrice = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

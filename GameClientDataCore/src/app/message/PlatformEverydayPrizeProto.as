@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ICON:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.PlatformEverydayPrizeProto.icon", "icon", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const ICON:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.PlatformEverydayPrizeProto.icon", "icon", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var icon$field:String;
 
@@ -39,7 +39,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DESC:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.PlatformEverydayPrizeProto.desc", "desc", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const DESC:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.PlatformEverydayPrizeProto.desc", "desc", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var desc$field:flash.utils.ByteArray;
 
@@ -62,7 +62,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PRIZE:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.PlatformEverydayPrizeProto.prize", "prize", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
+		public static const PRIZE:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.PlatformEverydayPrizeProto.prize", "prize", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
 
 		[ArrayElementType("app.message.GoodsWrapperProto")]
 		public var prize:Array = [];
@@ -73,15 +73,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasIcon) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, icon$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, icon$field);
 			}
 			if (hasDesc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, desc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, desc$field);
 			}
 			for (var prize$index:uint = 0; prize$index < this.prize.length; ++prize$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.prize[prize$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.prize[prize$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -95,24 +95,24 @@ package app.message {
 			var icon$count:uint = 0;
 			var desc$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (icon$count != 0) {
 						throw new flash.errors.IOError('Bad data format: PlatformEverydayPrizeProto.icon cannot be set twice.');
 					}
 					++icon$count;
-					this.icon = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.icon = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 2:
 					if (desc$count != 0) {
 						throw new flash.errors.IOError('Bad data format: PlatformEverydayPrizeProto.desc cannot be set twice.');
 					}
 					++desc$count;
-					this.desc = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.desc = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 3:
-					this.prize.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.GoodsWrapperProto()));
+					this.prize.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.GoodsWrapperProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

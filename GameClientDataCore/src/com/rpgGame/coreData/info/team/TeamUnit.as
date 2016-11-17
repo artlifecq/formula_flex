@@ -4,7 +4,7 @@ package com.rpgGame.coreData.info.team
 	
 	import app.message.ModelProto;
 	
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 
 	/**

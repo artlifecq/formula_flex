@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_TIME:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GroupDungeonFinishStatProto.total_time", "totalTime", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOTAL_TIME:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GroupDungeonFinishStatProto.total_time", "totalTime", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var total_time$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEAD_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GroupDungeonFinishStatProto.dead_count", "deadCount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEAD_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GroupDungeonFinishStatProto.dead_count", "deadCount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var dead_count$field:int;
 
@@ -67,7 +67,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MONSTER_EXP:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GroupDungeonFinishStatProto.monster_exp", "monsterExp", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MONSTER_EXP:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GroupDungeonFinishStatProto.monster_exp", "monsterExp", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var monster_exp$field:int;
 
@@ -92,7 +92,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SCORE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GroupDungeonFinishStatProto.score", "score", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SCORE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GroupDungeonFinishStatProto.score", "score", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var score$field:int;
 
@@ -117,7 +117,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SCORE_S_PRIZE:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.GroupDungeonFinishStatProto.score_s_prize", "scoreSPrize", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
+		public static const SCORE_S_PRIZE:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.GroupDungeonFinishStatProto.score_s_prize", "scoreSPrize", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
 
 		[ArrayElementType("app.message.GoodsWrapperProto")]
 		public var scoreSPrize:Array = [];
@@ -125,7 +125,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const VIP_PRIZE:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.GroupDungeonFinishStatProto.vip_prize", "vipPrize", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
+		public static const VIP_PRIZE:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.GroupDungeonFinishStatProto.vip_prize", "vipPrize", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
 
 		[ArrayElementType("app.message.GoodsWrapperProto")]
 		public var vipPrize:Array = [];
@@ -136,27 +136,27 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasTotalTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, total_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, total_time$field);
 			}
 			if (hasDeadCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, dead_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, dead_count$field);
 			}
 			if (hasMonsterExp) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, monster_exp$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, monster_exp$field);
 			}
 			if (hasScore) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, score$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, score$field);
 			}
 			for (var scoreSPrize$index:uint = 0; scoreSPrize$index < this.scoreSPrize.length; ++scoreSPrize$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.scoreSPrize[scoreSPrize$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.scoreSPrize[scoreSPrize$index]);
 			}
 			for (var vipPrize$index:uint = 0; vipPrize$index < this.vipPrize.length; ++vipPrize$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.vipPrize[vipPrize$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.vipPrize[vipPrize$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -172,41 +172,41 @@ package app.message {
 			var monster_exp$count:uint = 0;
 			var score$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (total_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GroupDungeonFinishStatProto.totalTime cannot be set twice.');
 					}
 					++total_time$count;
-					this.totalTime = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.totalTime = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (dead_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GroupDungeonFinishStatProto.deadCount cannot be set twice.');
 					}
 					++dead_count$count;
-					this.deadCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.deadCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (monster_exp$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GroupDungeonFinishStatProto.monsterExp cannot be set twice.');
 					}
 					++monster_exp$count;
-					this.monsterExp = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.monsterExp = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (score$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GroupDungeonFinishStatProto.score cannot be set twice.');
 					}
 					++score$count;
-					this.score = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.score = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
-					this.scoreSPrize.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.GoodsWrapperProto()));
+					this.scoreSPrize.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.GoodsWrapperProto()));
 					break;
 				case 6:
-					this.vipPrize.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.GoodsWrapperProto()));
+					this.vipPrize.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.GoodsWrapperProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

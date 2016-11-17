@@ -323,10 +323,10 @@ package com.game.engine3D.scene.layers
 						{
 							addMapObject(obj as ObjectContainer3D);
 						}
-						if (_view3DAsset && _view3DAsset.cameraMode2D && GlobalConfig.transformPlanarRotation)
+						/*if (_view3DAsset && _view3DAsset.cameraMode2D && GlobalConfig.transformPlanarRotation)
 						{
 							(obj as ObjectContainer3D).z = PlanarContainer3D.transformPlanarRotation((obj as ObjectContainer3D).y);
-						}
+						}*/
 						break;
 					case AssetType.SKYBOX:
 						_skyBox = SkyBox(obj);

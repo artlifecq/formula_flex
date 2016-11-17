@@ -14,7 +14,7 @@ package app.message.SVIPInfosProto {
 		/**
 		 *  @private
 		 */
-		public static const QQ:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.SVIPInfosProto.SVIPInfoProto.qq", "qq", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const QQ:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.SVIPInfosProto.SVIPInfoProto.qq", "qq", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var qq$field:String;
 
@@ -37,7 +37,7 @@ package app.message.SVIPInfosProto {
 		/**
 		 *  @private
 		 */
-		public static const URL:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.SVIPInfosProto.SVIPInfoProto.url", "url", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const URL:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.SVIPInfosProto.SVIPInfoProto.url", "url", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var url$field:String;
 
@@ -60,7 +60,7 @@ package app.message.SVIPInfosProto {
 		/**
 		 *  @private
 		 */
-		public static const PICID:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.SVIPInfosProto.SVIPInfoProto.picId", "picId", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const PICID:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.SVIPInfosProto.SVIPInfoProto.picId", "picId", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var picId$field:String;
 
@@ -83,7 +83,7 @@ package app.message.SVIPInfosProto {
 		/**
 		 *  @private
 		 */
-		public static const RECHARGE_REQUEST:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SVIPInfosProto.SVIPInfoProto.recharge_request", "rechargeRequest", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RECHARGE_REQUEST:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SVIPInfosProto.SVIPInfoProto.recharge_request", "rechargeRequest", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var recharge_request$field:int;
 
@@ -110,7 +110,7 @@ package app.message.SVIPInfosProto {
 		/**
 		 *  @private
 		 */
-		public static const COMBINE_OPERATOR_AND_SERVERID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SVIPInfosProto.SVIPInfoProto.combine_operator_and_serverid", "combineOperatorAndServerid", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COMBINE_OPERATOR_AND_SERVERID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SVIPInfosProto.SVIPInfoProto.combine_operator_and_serverid", "combineOperatorAndServerid", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var combine_operator_and_serverid$field:int;
 
@@ -138,23 +138,23 @@ package app.message.SVIPInfosProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasQq) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, qq$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, qq$field);
 			}
 			if (hasUrl) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, url$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, url$field);
 			}
 			if (hasPicId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, picId$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, picId$field);
 			}
 			if (hasRechargeRequest) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, recharge_request$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, recharge_request$field);
 			}
 			if (hasCombineOperatorAndServerid) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, combine_operator_and_serverid$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, combine_operator_and_serverid$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -171,42 +171,42 @@ package app.message.SVIPInfosProto {
 			var recharge_request$count:uint = 0;
 			var combine_operator_and_serverid$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (qq$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SVIPInfoProto.qq cannot be set twice.');
 					}
 					++qq$count;
-					this.qq = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.qq = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 2:
 					if (url$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SVIPInfoProto.url cannot be set twice.');
 					}
 					++url$count;
-					this.url = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.url = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (picId$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SVIPInfoProto.picId cannot be set twice.');
 					}
 					++picId$count;
-					this.picId = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.picId = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 4:
 					if (recharge_request$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SVIPInfoProto.rechargeRequest cannot be set twice.');
 					}
 					++recharge_request$count;
-					this.rechargeRequest = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.rechargeRequest = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (combine_operator_and_serverid$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SVIPInfoProto.combineOperatorAndServerid cannot be set twice.');
 					}
 					++combine_operator_and_serverid$count;
-					this.combineOperatorAndServerid = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.combineOperatorAndServerid = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

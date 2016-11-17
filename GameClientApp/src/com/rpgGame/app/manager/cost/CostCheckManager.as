@@ -14,7 +14,7 @@ package com.rpgGame.app.manager.cost
 	import app.message.AmountType;
 
 	import org.client.mainCore.ds.HashMap;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 * 消耗检测的工具</br>

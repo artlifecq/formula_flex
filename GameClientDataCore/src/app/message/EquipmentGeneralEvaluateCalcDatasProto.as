@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const QUALITY_POINTS:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.EquipmentGeneralEvaluateCalcDatasProto.quality_points", "qualityPoints", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const QUALITY_POINTS:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.EquipmentGeneralEvaluateCalcDatasProto.quality_points", "qualityPoints", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var qualityPoints:Array = [];
@@ -22,7 +22,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EVALUATE_NEED_POINTS:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.EquipmentGeneralEvaluateCalcDatasProto.evaluate_need_points", "evaluateNeedPoints", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const EVALUATE_NEED_POINTS:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.EquipmentGeneralEvaluateCalcDatasProto.evaluate_need_points", "evaluateNeedPoints", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var evaluateNeedPoints:Array = [];
@@ -33,11 +33,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			for (var qualityPoints$index:uint = 0; qualityPoints$index < this.qualityPoints.length; ++qualityPoints$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.qualityPoints[qualityPoints$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.qualityPoints[qualityPoints$index]);
 			}
 			for (var evaluateNeedPoints$index:uint = 0; evaluateNeedPoints$index < this.evaluateNeedPoints.length; ++evaluateNeedPoints$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.evaluateNeedPoints[evaluateNeedPoints$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.evaluateNeedPoints[evaluateNeedPoints$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -49,21 +49,21 @@ package app.message {
 		 */
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.qualityPoints);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.qualityPoints);
 						break;
 					}
-					this.qualityPoints.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.qualityPoints.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				case 2:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.evaluateNeedPoints);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.evaluateNeedPoints);
 						break;
 					}
-					this.evaluateNeedPoints.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.evaluateNeedPoints.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ACHIEVED_TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AchievementProto.achieved_type", "achievedType", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ACHIEVED_TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AchievementProto.achieved_type", "achievedType", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var achieved_type$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ACHIEVED_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AchievementProto.achieved_id", "achievedId", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ACHIEVED_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AchievementProto.achieved_id", "achievedId", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var achieved_id$field:int;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PROGRESS:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.AchievementProto.progress", "progress", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PROGRESS:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.AchievementProto.progress", "progress", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var progress$field:Int64;
 
@@ -92,15 +92,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasAchievedType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, achieved_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, achieved_type$field);
 			}
 			if (hasAchievedId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, achieved_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, achieved_id$field);
 			}
 			if (hasProgress) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, progress$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, progress$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -115,28 +115,28 @@ package app.message {
 			var achieved_id$count:uint = 0;
 			var progress$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (achieved_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AchievementProto.achievedType cannot be set twice.');
 					}
 					++achieved_type$count;
-					this.achievedType = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.achievedType = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (achieved_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AchievementProto.achievedId cannot be set twice.');
 					}
 					++achieved_id$count;
-					this.achievedId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.achievedId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (progress$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AchievementProto.progress cannot be set twice.');
 					}
 					++progress$count;
-					this.progress = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.progress = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

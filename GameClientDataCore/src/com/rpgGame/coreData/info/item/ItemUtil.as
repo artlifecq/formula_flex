@@ -19,7 +19,7 @@ package com.rpgGame.coreData.info.item
 	import app.message.Quality;
 	import app.message.ContainerProto.ContainerType;
 	
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 * 物品栏对象

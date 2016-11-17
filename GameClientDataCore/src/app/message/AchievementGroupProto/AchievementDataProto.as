@@ -14,7 +14,7 @@ package app.message.AchievementGroupProto {
 		/**
 		 *  @private
 		 */
-		public static const ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AchievementGroupProto.AchievementDataProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AchievementGroupProto.AchievementDataProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var id$field:int;
 
@@ -41,7 +41,7 @@ package app.message.AchievementGroupProto {
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.AchievementGroupProto.AchievementDataProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.AchievementGroupProto.AchievementDataProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var name$field:String;
 
@@ -64,7 +64,7 @@ package app.message.AchievementGroupProto {
 		/**
 		 *  @private
 		 */
-		public static const DESC:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.AchievementGroupProto.AchievementDataProto.desc", "desc", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const DESC:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.AchievementGroupProto.AchievementDataProto.desc", "desc", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var desc$field:String;
 
@@ -87,7 +87,7 @@ package app.message.AchievementGroupProto {
 		/**
 		 *  @private
 		 */
-		public static const COND_DESC:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.AchievementGroupProto.AchievementDataProto.cond_desc", "condDesc", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const COND_DESC:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.AchievementGroupProto.AchievementDataProto.cond_desc", "condDesc", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var cond_desc$field:String;
 
@@ -110,7 +110,7 @@ package app.message.AchievementGroupProto {
 		/**
 		 *  @private
 		 */
-		public static const ICON:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.AchievementGroupProto.AchievementDataProto.icon", "icon", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const ICON:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.AchievementGroupProto.AchievementDataProto.icon", "icon", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var icon$field:String;
 
@@ -133,7 +133,7 @@ package app.message.AchievementGroupProto {
 		/**
 		 *  @private
 		 */
-		public static const POINT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AchievementGroupProto.AchievementDataProto.point", "point", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const POINT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AchievementGroupProto.AchievementDataProto.point", "point", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var point$field:int;
 
@@ -158,7 +158,7 @@ package app.message.AchievementGroupProto {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_PROGRESS:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.AchievementGroupProto.AchievementDataProto.total_progress", "totalProgress", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOTAL_PROGRESS:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.AchievementGroupProto.AchievementDataProto.total_progress", "totalProgress", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var total_progress$field:int;
 
@@ -186,31 +186,31 @@ package app.message.AchievementGroupProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, id$field);
 			}
 			if (hasName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, name$field);
 			}
 			if (hasDesc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, desc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, desc$field);
 			}
 			if (hasCondDesc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, cond_desc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, cond_desc$field);
 			}
 			if (hasIcon) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, icon$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, icon$field);
 			}
 			if (hasPoint) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, point$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, point$field);
 			}
 			if (hasTotalProgress) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, total_progress$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, total_progress$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -229,56 +229,56 @@ package app.message.AchievementGroupProto {
 			var point$count:uint = 0;
 			var total_progress$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AchievementDataProto.id cannot be set twice.');
 					}
 					++id$count;
-					this.id = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.id = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AchievementDataProto.name cannot be set twice.');
 					}
 					++name$count;
-					this.name = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.name = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (desc$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AchievementDataProto.desc cannot be set twice.');
 					}
 					++desc$count;
-					this.desc = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.desc = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 4:
 					if (cond_desc$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AchievementDataProto.condDesc cannot be set twice.');
 					}
 					++cond_desc$count;
-					this.condDesc = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.condDesc = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 5:
 					if (icon$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AchievementDataProto.icon cannot be set twice.');
 					}
 					++icon$count;
-					this.icon = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.icon = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 6:
 					if (point$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AchievementDataProto.point cannot be set twice.');
 					}
 					++point$count;
-					this.point = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.point = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (total_progress$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AchievementDataProto.totalProgress cannot be set twice.');
 					}
 					++total_progress$count;
-					this.totalProgress = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.totalProgress = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

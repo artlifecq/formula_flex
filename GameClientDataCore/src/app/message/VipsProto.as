@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DATA:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.VipsProto.data", "data", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.VipProto; });
+		public static const DATA:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.VipsProto.data", "data", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.VipProto; });
 
 		[ArrayElementType("app.message.VipProto")]
 		public var data:Array = [];
@@ -23,7 +23,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ADD_VIP_EXP_PER_RECHARGED_GOLD:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.VipsProto.add_vip_exp_per_recharged_gold", "addVipExpPerRechargedGold", (400 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ADD_VIP_EXP_PER_RECHARGED_GOLD:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.VipsProto.add_vip_exp_per_recharged_gold", "addVipExpPerRechargedGold", (400 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var add_vip_exp_per_recharged_gold$field:int;
 
@@ -53,11 +53,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			for (var data$index:uint = 0; data$index < this.data.length; ++data$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.data[data$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.data[data$index]);
 			}
 			if (hasAddVipExpPerRechargedGold) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 400);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, add_vip_exp_per_recharged_gold$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, add_vip_exp_per_recharged_gold$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -70,17 +70,17 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var add_vip_exp_per_recharged_gold$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
-					this.data.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.VipProto()));
+					this.data.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.VipProto()));
 					break;
 				case 400:
 					if (add_vip_exp_per_recharged_gold$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VipsProto.addVipExpPerRechargedGold cannot be set twice.');
 					}
 					++add_vip_exp_per_recharged_gold$count;
-					this.addVipExpPerRechargedGold = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.addVipExpPerRechargedGold = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const VALUE:RepeatedFieldDescriptor$TYPE_INT64 = new RepeatedFieldDescriptor$TYPE_INT64("app.message.TotalStatProto.value", "value", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const VALUE:RepeatedFieldDescriptor_TYPE_INT64 = new RepeatedFieldDescriptor_TYPE_INT64("app.message.TotalStatProto.value", "value", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("Int64")]
 		public var value:Array = [];
@@ -22,7 +22,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PERCENT:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.TotalStatProto.percent", "percent", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PERCENT:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.TotalStatProto.percent", "percent", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var percent:Array = [];
@@ -33,11 +33,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			for (var value$index:uint = 0; value$index < this.value.length; ++value$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, this.value[value$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, this.value[value$index]);
 			}
 			for (var percent$index:uint = 0; percent$index < this.percent.length; ++percent$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.percent[percent$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.percent[percent$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -49,21 +49,21 @@ package app.message {
 		 */
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT64, this.value);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT64, this.value);
 						break;
 					}
-					this.value.push(com.netease.protobuf.ReadUtils.read$TYPE_INT64(input));
+					this.value.push(com.netease.protobuf.ReadUtils.read_TYPE_INT64(input));
 					break;
 				case 2:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.percent);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.percent);
 						break;
 					}
-					this.percent.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.percent.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				default:
 					super.readUnknown(input, tag);

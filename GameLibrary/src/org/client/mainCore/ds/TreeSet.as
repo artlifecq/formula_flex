@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.ds
+﻿package org.client.mainCore.ds
 {
     public class TreeSet implements ITree 
     {
@@ -7,7 +6,7 @@ package org.client.mainCore.ds
         private var _root:TreeSet;
         private var _parent:TreeSet;
         private var _children:HashSet;
-        private var _data;
+        private var _data:*;
 
         public function TreeSet(data:*=null, parent:TreeSet=null)
         {
@@ -16,9 +15,9 @@ package org.client.mainCore.ds
             this.parent = parent;
         }
 
-        public function get data()
+        public function get data():*
         {
-            return (_data);
+            return _data;
         }
 
         public function set data(d:*):void
@@ -34,61 +33,61 @@ package org.client.mainCore.ds
             {
                 c = (c + node.numChildren);
                 node = node.parent;
-                if ((node == this))
+                if (node == this)
                 {
-                    throw (new Error("TreeSet Infinite Loop"));
-                };
-            };
-            return (c);
+                    throw new Error("TreeSet Infinite Loop");
+                }
+            }
+            return c;
         }
 
         public function get isRoot():Boolean
         {
-            return ((_root == this));
+            return _root == this;
         }
 
         public function get isLeaf():Boolean
         {
-            return ((_children.length == 0));
+            return _children.length == 0;
         }
 
         public function get depth():int
         {
-            if (!(_parent))
+            if (!_parent)
             {
-                return (0);
-            };
+                return 0;
+            }
             var node:TreeSet = _parent;
             var c:int;
             while (node)
             {
                 c++;
                 node = node.parent;
-                if ((node == this))
+                if (node == this)
                 {
-                    throw (new Error("TreeSet Infinite Loop"));
-                };
-            };
-            return (c);
+                    throw new Error("TreeSet Infinite Loop");
+                }
+            }
+            return c;
         }
 
         public function get numChildren():int
         {
-            return (_children.length);
+            return _children.length;
         }
 
         public function get numSiblings():int
         {
             if (_parent)
             {
-                return (_parent.numChildren);
-            };
-            return (0);
+                return _parent.numChildren;
+            }
+            return 0;
         }
 
         public function get root():TreeSet
         {
-            return (_root);
+            return _root;
         }
 
         public function set parent(parent:TreeSet):void
@@ -96,38 +95,38 @@ package org.client.mainCore.ds
             if (_parent)
             {
                 _parent.children.remove(this);
-            };
-            if ((parent == this))
+            }
+            if (parent == this)
             {
                 return;
-            };
+            }
             _parent = parent;
             if (_parent)
             {
                 _parent.children.add(this);
-            };
+            }
             setRoot();
         }
 
         public function get parent():TreeSet
         {
-            return (_parent);
+            return _parent;
         }
 
         public function get children():HashSet
         {
-            return (_children);
+            return _children;
         }
 
         public function remove():void
         {
-            if ((_parent == null))
+            if (_parent == null)
             {
                 return;
-            };
+            }
             _children.forEach(function (child:TreeSet):void
             {
-                _arg1.parent = _parent;
+				child.parent = _parent;
             });
         }
 
@@ -138,27 +137,25 @@ package org.client.mainCore.ds
 
         private function setRoot():void
         {
-            if ((_parent == null))
+            if (_parent == null)
             {
                 _root = this;
                 return;
-            };
+            }
             var node:TreeSet = _parent;
             while (node)
             {
-                if ((node.parent == null))
+                if (node.parent == null)
                 {
                     _root = node;
                     return;
-                };
+                }
                 node = node.parent;
-                if ((node == this))
+                if (node == this)
                 {
-                    throw (new Error("TreeSet Infinite Loop"));
-                };
-            };
+                    throw new Error("TreeSet Infinite Loop");
+                }
+            }
         }
-
-
     }
-}//package org.client.mainCore.ds
+}

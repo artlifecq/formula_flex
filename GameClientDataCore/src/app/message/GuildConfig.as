@@ -17,7 +17,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MISC_DATA:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GuildConfig.misc_data", "miscData", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildMiscDataProto; });
+		public static const MISC_DATA:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GuildConfig.misc_data", "miscData", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildMiscDataProto; });
 
 		private var misc_data$field:app.message.GuildMiscDataProto;
 
@@ -40,7 +40,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL_DATAS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GuildConfig.level_datas", "levelDatas", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildLevelDatasProto; });
+		public static const LEVEL_DATAS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GuildConfig.level_datas", "levelDatas", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildLevelDatasProto; });
 
 		private var level_datas$field:app.message.GuildLevelDatasProto;
 
@@ -63,7 +63,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const OFFICER_DATAS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GuildConfig.officer_datas", "officerDatas", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildOfficerDatasProto; });
+		public static const OFFICER_DATAS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GuildConfig.officer_datas", "officerDatas", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildOfficerDatasProto; });
 
 		private var officer_datas$field:app.message.GuildOfficerDatasProto;
 
@@ -89,15 +89,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasMiscData) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, misc_data$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, misc_data$field);
 			}
 			if (hasLevelDatas) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, level_datas$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, level_datas$field);
 			}
 			if (hasOfficerDatas) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, officer_datas$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, officer_datas$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -112,7 +112,7 @@ package app.message {
 			var level_datas$count:uint = 0;
 			var officer_datas$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (misc_data$count != 0) {
@@ -120,7 +120,7 @@ package app.message {
 					}
 					++misc_data$count;
 					this.miscData = new app.message.GuildMiscDataProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.miscData);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.miscData);
 					break;
 				case 2:
 					if (level_datas$count != 0) {
@@ -128,7 +128,7 @@ package app.message {
 					}
 					++level_datas$count;
 					this.levelDatas = new app.message.GuildLevelDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.levelDatas);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.levelDatas);
 					break;
 				case 3:
 					if (officer_datas$count != 0) {
@@ -136,7 +136,7 @@ package app.message {
 					}
 					++officer_datas$count;
 					this.officerDatas = new app.message.GuildOfficerDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.officerDatas);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.officerDatas);
 					break;
 				default:
 					super.readUnknown(input, tag);

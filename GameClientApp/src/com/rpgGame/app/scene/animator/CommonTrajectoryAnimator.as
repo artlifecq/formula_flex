@@ -81,7 +81,10 @@ package com.rpgGame.app.scene.animator
 		protected var _endRotationX : Number;
 		private var _offsetDest : Vector3D;
 		
-		public function CommonTrajectoryAnimator(spellInfo : ReleaseSpellInfo, targetPos : Vector3D, targetRole : SceneRole, totalTime : int, speed : int, isTrackTarget : Boolean, matchTerrain : Boolean, isFlyCross : Boolean, isAdaptiveTargetHeight : Boolean, moveDelay : int, playDelay : int, releaseDelayTime : int, throwHeight : int, throwWeightRatio : int)
+		public function CommonTrajectoryAnimator(spellInfo : ReleaseSpellInfo, targetPos : Vector3D, targetRole : SceneRole, 
+												 totalTime : int, speed : int, isTrackTarget : Boolean, matchTerrain : Boolean, 
+												 isFlyCross : Boolean, isAdaptiveTargetHeight : Boolean, moveDelay : int, 
+												 playDelay : int, releaseDelayTime : int, throwHeight : int, throwWeightRatio : int)
 		{
 			_spellInfo = spellInfo;
 			_targetPos = targetPos;

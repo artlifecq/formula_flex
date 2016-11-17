@@ -17,7 +17,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryWarLogProto.time", "time", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryWarLogProto.time", "time", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var time$field:Int64;
 
@@ -40,7 +40,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const WAR_START:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryWarLogProto.war_start", "warStart", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryWarLogProto.WarStartProto; });
+		public static const WAR_START:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryWarLogProto.war_start", "warStart", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryWarLogProto.WarStartProto; });
 
 		private var war_start$field:app.message.CountryWarLogProto.WarStartProto;
 
@@ -63,7 +63,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const WAR_END:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryWarLogProto.war_end", "warEnd", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryWarLogProto.WarEndProto; });
+		public static const WAR_END:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryWarLogProto.war_end", "warEnd", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryWarLogProto.WarEndProto; });
 
 		private var war_end$field:app.message.CountryWarLogProto.WarEndProto;
 
@@ -86,7 +86,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const WAR_MONSTER_KILLED:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryWarLogProto.war_monster_killed", "warMonsterKilled", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryWarLogProto.WarMonsterKilledProto; });
+		public static const WAR_MONSTER_KILLED:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryWarLogProto.war_monster_killed", "warMonsterKilled", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryWarLogProto.WarMonsterKilledProto; });
 
 		private var war_monster_killed$field:app.message.CountryWarLogProto.WarMonsterKilledProto;
 
@@ -112,19 +112,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, time$field);
 			}
 			if (hasWarStart) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, war_start$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, war_start$field);
 			}
 			if (hasWarEnd) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, war_end$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, war_end$field);
 			}
 			if (hasWarMonsterKilled) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, war_monster_killed$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, war_monster_killed$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -140,14 +140,14 @@ package app.message {
 			var war_end$count:uint = 0;
 			var war_monster_killed$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryWarLogProto.time cannot be set twice.');
 					}
 					++time$count;
-					this.time = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.time = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 10:
 					if (war_start$count != 0) {
@@ -155,7 +155,7 @@ package app.message {
 					}
 					++war_start$count;
 					this.warStart = new app.message.CountryWarLogProto.WarStartProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.warStart);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.warStart);
 					break;
 				case 11:
 					if (war_end$count != 0) {
@@ -163,7 +163,7 @@ package app.message {
 					}
 					++war_end$count;
 					this.warEnd = new app.message.CountryWarLogProto.WarEndProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.warEnd);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.warEnd);
 					break;
 				case 12:
 					if (war_monster_killed$count != 0) {
@@ -171,7 +171,7 @@ package app.message {
 					}
 					++war_monster_killed$count;
 					this.warMonsterKilled = new app.message.CountryWarLogProto.WarMonsterKilledProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.warMonsterKilled);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.warMonsterKilled);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TEAM_AUTO_ACCEPT_INVITE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.TeamModuleObjProto.team_auto_accept_invite", "teamAutoAcceptInvite", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TEAM_AUTO_ACCEPT_INVITE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.TeamModuleObjProto.team_auto_accept_invite", "teamAutoAcceptInvite", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var team_auto_accept_invite$field:Boolean;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TEAM_AUTO_ACCEPT_REQUEST:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.TeamModuleObjProto.team_auto_accept_request", "teamAutoAcceptRequest", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TEAM_AUTO_ACCEPT_REQUEST:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.TeamModuleObjProto.team_auto_accept_request", "teamAutoAcceptRequest", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var team_auto_accept_request$field:Boolean;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TEAM_FORBID_OTHER_INVITE_ME_JOIN:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.TeamModuleObjProto.team_forbid_other_invite_me_join", "teamForbidOtherInviteMeJoin", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TEAM_FORBID_OTHER_INVITE_ME_JOIN:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.TeamModuleObjProto.team_forbid_other_invite_me_join", "teamForbidOtherInviteMeJoin", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var team_forbid_other_invite_me_join$field:Boolean;
 
@@ -94,15 +94,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasTeamAutoAcceptInvite) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, team_auto_accept_invite$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, team_auto_accept_invite$field);
 			}
 			if (hasTeamAutoAcceptRequest) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, team_auto_accept_request$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, team_auto_accept_request$field);
 			}
 			if (hasTeamForbidOtherInviteMeJoin) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, team_forbid_other_invite_me_join$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, team_forbid_other_invite_me_join$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -117,28 +117,28 @@ package app.message {
 			var team_auto_accept_request$count:uint = 0;
 			var team_forbid_other_invite_me_join$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (team_auto_accept_invite$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TeamModuleObjProto.teamAutoAcceptInvite cannot be set twice.');
 					}
 					++team_auto_accept_invite$count;
-					this.teamAutoAcceptInvite = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.teamAutoAcceptInvite = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 2:
 					if (team_auto_accept_request$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TeamModuleObjProto.teamAutoAcceptRequest cannot be set twice.');
 					}
 					++team_auto_accept_request$count;
-					this.teamAutoAcceptRequest = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.teamAutoAcceptRequest = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 3:
 					if (team_forbid_other_invite_me_join$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TeamModuleObjProto.teamForbidOtherInviteMeJoin cannot be set twice.');
 					}
 					++team_forbid_other_invite_me_join$count;
-					this.teamForbidOtherInviteMeJoin = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.teamForbidOtherInviteMeJoin = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

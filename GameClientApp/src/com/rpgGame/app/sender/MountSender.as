@@ -2,7 +2,7 @@ package com.rpgGame.app.sender
 {
 	import app.cmd.MountModuleMessages;
 	
-	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
 
 	/**
 	 * 发送消息 
@@ -22,7 +22,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint32(index);
 			_bytes.writeVarint32(status);
-			SocketConnection.send(MountModuleMessages.C2S_MOUNT_STATUS, _bytes);
+			SocketConnection_protoBuffer.send(MountModuleMessages.C2S_MOUNT_STATUS, _bytes);
 		}
 		
 		/**
@@ -34,7 +34,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeBoolean(isRide);
-			SocketConnection.send(MountModuleMessages.C2S_MOUNT_RIDE, _bytes);
+			SocketConnection_protoBuffer.send(MountModuleMessages.C2S_MOUNT_RIDE, _bytes);
 		}
 		
 		/**
@@ -46,7 +46,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(index);
-			SocketConnection.send(MountModuleMessages.C2S_MOUNT_RELEASE, _bytes);
+			SocketConnection_protoBuffer.send(MountModuleMessages.C2S_MOUNT_RELEASE, _bytes);
 		}
 		
 		/**
@@ -65,7 +65,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint32(backpackIndex);
 			_bytes.writeVarint32(num);
 			_bytes.writeVarint32(itemID);
-			SocketConnection.send(MountModuleMessages.C2S_MOUNT_FEED, _bytes);
+			SocketConnection_protoBuffer.send(MountModuleMessages.C2S_MOUNT_FEED, _bytes);
 		}
 		
 		/**
@@ -85,7 +85,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint32(idx);
 			_bytes.writeBoolean(isUse);
 			_bytes.writeVarint32(indexOrMountIdx);
-			SocketConnection.send(MountModuleMessages.C2S_MOUNT_REFINE, _bytes);
+			SocketConnection_protoBuffer.send(MountModuleMessages.C2S_MOUNT_REFINE, _bytes);
 		}
 		
 		/**
@@ -100,7 +100,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint32(idx);
 			_bytes.writeVarint32(backpackIndex);
-			SocketConnection.send(MountModuleMessages.C2S_MOUNT_LEARN_SPELL, _bytes);
+			SocketConnection_protoBuffer.send(MountModuleMessages.C2S_MOUNT_LEARN_SPELL, _bytes);
 		}
 		
 		/**
@@ -112,7 +112,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint64(id);
-			SocketConnection.send(MountModuleMessages.C2S_MOUNT_INVITE_OTHER_BREED, _bytes);
+			SocketConnection_protoBuffer.send(MountModuleMessages.C2S_MOUNT_INVITE_OTHER_BREED, _bytes);
 		}
 		
 		/**
@@ -124,7 +124,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint64(id);
-			SocketConnection.send(MountModuleMessages.C2S_MOUNT_REFUSE_OTHER_INVITE_YOU, _bytes);
+			SocketConnection_protoBuffer.send(MountModuleMessages.C2S_MOUNT_REFUSE_OTHER_INVITE_YOU, _bytes);
 		}
 		
 		/**
@@ -133,7 +133,7 @@ package com.rpgGame.app.sender
 		public static function requestMountBreedLock():void
 		{
 			_bytes.clear();
-			SocketConnection.send(MountModuleMessages.C2S_MOUNT_BREED_LOCK, _bytes);
+			SocketConnection_protoBuffer.send(MountModuleMessages.C2S_MOUNT_BREED_LOCK, _bytes);
 		}
 		
 		/**
@@ -142,7 +142,7 @@ package com.rpgGame.app.sender
 		public static function requestMountGetBreedBabyMount():void
 		{
 			_bytes.clear();
-			SocketConnection.send(MountModuleMessages.C2S_MOUNT_GET_BREED_BABY_MOUNT, _bytes);
+			SocketConnection_protoBuffer.send(MountModuleMessages.C2S_MOUNT_GET_BREED_BABY_MOUNT, _bytes);
 		}
 		
 		/**
@@ -154,7 +154,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(idx);
-			SocketConnection.send(MountModuleMessages.C2S_MOUNT_BREED_CANCEL, _bytes);
+			SocketConnection_protoBuffer.send(MountModuleMessages.C2S_MOUNT_BREED_CANCEL, _bytes);
 		}
 		
 		/**
@@ -168,7 +168,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint32(breedIndex);
 			_bytes.writeVarint32(babyIndex);
-			SocketConnection.send(MountModuleMessages.C2S_COLLECT_BABY_MOUNT, _bytes);
+			SocketConnection_protoBuffer.send(MountModuleMessages.C2S_COLLECT_BABY_MOUNT, _bytes);
 		}
 		
 		/**
@@ -181,7 +181,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint64(id);
-			SocketConnection.send(MountModuleMessages.C2S_COLLECT_MOUNT_COLLECT_OBJ, _bytes);
+			SocketConnection_protoBuffer.send(MountModuleMessages.C2S_COLLECT_MOUNT_COLLECT_OBJ, _bytes);
 		}
 		
 	}

@@ -1,11 +1,10 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.libCore.observer
+﻿package com.game.mainCore.libCore.observer
 {
     public class Observer 
     {
 
         public var notifyMethod:Function;
-        public var notifyContext;
+        public var notifyContext:*;
 
         public function Observer($notifyMethod:Function, $notifyContext:*)
         {
@@ -20,9 +19,7 @@ package com.game.mainCore.libCore.observer
 
         public function compareNotifyContext($notifyContext:*):Boolean
         {
-            return (($notifyContext === notifyContext));
+            return $notifyContext === notifyContext;
         }
-
-
     }
-}//package com.game.mainCore.libCore.observer
+}

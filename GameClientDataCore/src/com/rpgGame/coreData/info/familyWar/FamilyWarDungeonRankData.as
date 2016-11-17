@@ -2,7 +2,7 @@ package com.rpgGame.coreData.info.familyWar
 {
 	import app.message.KingWarBroadcastProto;
 	
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 * 王成战副本数据 

@@ -1,14 +1,15 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.libCore.timer
+﻿package com.game.mainCore.libCore.timer
 {
-    import org.client.mainCore.ds.HashMap;
-    import flash.events.Event;
     import com.game.mainCore.libCore.handle.HandleThread;
+    import com.greensock.TweenLite;
+    import com.greensock.easing.Linear;
+    
+    import flash.events.Event;
     import flash.events.TimerEvent;
     import flash.utils.Timer;
-    import gs.TweenLite;
-    import gs.easing.Linear;
     import flash.utils.getTimer;
+    
+    import org.client.mainCore.ds.HashMap;
     import org.client.mainCore.utils.Tick;
 
     public class TimerHelper 
@@ -30,16 +31,16 @@ package com.game.mainCore.libCore.timer
             $timerCompleteHandler = $timerCompleteHandler;
             $timerCompleteHandlerParameters = $timerCompleteHandlerParameters;
             $autoStart = $autoStart;
-            timerHandler = function (e:TimerEvent):void
+            function timerHandler(e:TimerEvent):void
             {
                 HandleThread.execute($timerHandler, $timerHandlerParameters);
-            };
-            timerCompleteHandler = function (e:TimerEvent):void
+            }
+            function timerCompleteHandler(e:TimerEvent):void
             {
-                (destroy());
+                destroy();
                 HandleThread.execute($timerCompleteHandler, $timerCompleteHandlerParameters);
-            };
-            destroy = function ():void
+            }
+            function destroy():void
             {
                 if (timer)
                 {
@@ -47,22 +48,22 @@ package com.game.mainCore.libCore.timer
                     timer.removeEventListener("timer", timerHandler);
                     timer.removeEventListener("timerComplete", timerCompleteHandler);
                     timer = null;
-                };
-            };
+                }
+            }
             var timer:Timer = new Timer($delay, $repeat);
-            if (!(($timerHandler == null)))
+            if ($timerHandler != null)
             {
                 timer.addEventListener("timer", timerHandler);
-            };
-            if (!(($timerCompleteHandler == null)))
+            }
+            if ($timerCompleteHandler != null)
             {
                 timer.addEventListener("timerComplete", timerCompleteHandler);
-            };
+            }
             if ($autoStart)
             {
                 timer.start();
-            };
-            return (new TimerData(timer, destroy));
+            }
+            return new TimerData(timer, destroy);
         }
 
         public static function createExactTimer($duration:int, $from:Number, $to:Number, $onUpdate:Function=null, $onComplete:Function=null, $updateStep:Number=0):TimerData
@@ -73,7 +74,7 @@ package com.game.mainCore.libCore.timer
             $onUpdate = $onUpdate;
             $onComplete = $onComplete;
             $updateStep = $updateStep;
-            onUpdate1 = function ():void
+            function onUpdate1():void
             {
                 if ((Math.abs((obj.i - i)) >= absUpdateStep))
                 {
@@ -81,31 +82,31 @@ package com.game.mainCore.libCore.timer
                     if (!(($onUpdate == null)))
                     {
                         ($onUpdate(obj.i));
-                    };
-                };
-            };
-            onUpdate2 = function ():void
+                    }
+                }
+            }
+            function onUpdate2():void
             {
                 if (!(($onUpdate == null)))
                 {
                     ($onUpdate(obj.i));
-                };
-            };
-            onComplete = function ():void
+                }
+            }
+            function onComplete():void
             {
                 if (!(($onUpdate == null)))
                 {
                     ($onUpdate(obj.i));
-                };
+                }
                 if (!(($onComplete == null)))
                 {
                     ($onComplete());
-                };
-            };
-            destroy = function ():void
+                }
+            }
+            function destroy():void
             {
                 TweenLite.killTweensOf(obj);
-            };
+            }
             var obj:Object = {"i":$from};
             var onUpdate:Function = ((($updateStep)!=0) ? onUpdate1 : onUpdate2);
             TweenLite.to(obj, ($duration / 1000), {
@@ -121,34 +122,34 @@ package com.game.mainCore.libCore.timer
 
         public static function addDelayCallBack($delay:Number, $callBack:Function):void
         {
-            if (($delay <= 0))
+            if ($delay <= 0)
             {
-                ($callBack());
+                $callBack();
                 return;
-            };
+            }
             var delayData:Array = [$delay, $callBack, getTimer()];
             delayCallBackMap.add($callBack, delayData);
-            if ((delayCallBackMap.length == 1))
+            if (delayCallBackMap.length == 1)
             {
                 Tick.addCallback(updateDelayCallBack);
-            };
+            }
         }
 
         public static function removeDelayCallBack($callBack:Function):void
         {
             delayCallBackMap.remove($callBack);
-            if ((delayCallBackMap.length == 0))
+            if (delayCallBackMap.length == 0)
             {
                 Tick.removeCallback(updateDelayCallBack);
-            };
+            }
         }
 
         private static function updateDelayCallBack(gapTm:uint):void
         {
             var i:int;
-            var delayData = null;
+            var delayData:Array = null;
             var delay:int;
-            var callBack = null;
+            var callBack:Function = null;
             var addTime:int;
             var nowTime:int = getTimer();
             var arr:Array = delayCallBackMap.getValues();
@@ -159,15 +160,13 @@ package com.game.mainCore.libCore.timer
                 delay = delayData[0];
                 callBack = delayData[1];
                 addTime = delayData[2];
-                if (((nowTime - addTime) >= delay))
+                if ((nowTime - addTime) >= delay)
                 {
                     removeDelayCallBack(callBack);
-                    (callBack());
-                };
+                    callBack();
+                }
                 i++;
-            };
+            }
         }
-
-
     }
-}//package com.game.mainCore.libCore.timer
+}

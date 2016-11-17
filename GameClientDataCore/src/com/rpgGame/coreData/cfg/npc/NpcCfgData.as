@@ -15,7 +15,7 @@ package com.rpgGame.coreData.cfg.npc
 	import app.message.NpcDialogProto.NpcType;
 	
 	import org.client.mainCore.ds.HashMap;
-	import org.game.netCore.net.BytesUtil;
+	import org.game.netCore.net_protobuff.BytesUtil;
 
 	/**
 	 *

@@ -37,8 +37,8 @@ package com.rpgGame.app.cmdlistener
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
@@ -58,29 +58,29 @@ package com.rpgGame.app.cmdlistener
 
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_STAT, onChangeStat);
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_AMOUNT, onRecChangeAmount);
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_LEVEL, onRecChangeLevel);
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_INIT_LEVEL_INFO, onRecInitChangeLevel);
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_LEVEL_TO_OTHERS, onChangeLevelToOthers);
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_HERO_DAILY_CLEARED, onHeroDailyCleared);
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_PK_MODE, onChangePkMode);
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_PK_MODE_FAIL, onChangePkModeFail);
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_SELF_PK_AMOUNT_CHANGED, onPkAmountChanged);
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_HERO_FIGHTING_AMOUNT, onFightingAmountChanged);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_STAT, onChangeStat);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_AMOUNT, onRecChangeAmount);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_LEVEL, onRecChangeLevel);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_INIT_LEVEL_INFO, onRecInitChangeLevel);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_LEVEL_TO_OTHERS, onChangeLevelToOthers);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_HERO_DAILY_CLEARED, onHeroDailyCleared);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_PK_MODE, onChangePkMode);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_PK_MODE_FAIL, onChangePkModeFail);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_SELF_PK_AMOUNT_CHANGED, onPkAmountChanged);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_HERO_FIGHTING_AMOUNT, onFightingAmountChanged);
 			//装备相关
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_EQUIPMENT_RESOURCES_CHANGED, onEquipmentResChanged);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_EQUIPMENT_RESOURCES_CHANGED, onEquipmentResChanged);
 			//防沉迷
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_1_HOUR, onRecFangChenMi1Hour);
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_2_HOUR, onRecFangChenMi2Hour);
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_3_HOUR, onRecFangChenMi3Hour);
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_3_5_HOUR, onRecFangChenMi3_5Hour);
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_4_HOUR, onRecFangChenMi4Hour);
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_4_5_HOUR, onRecFangChenMi4_5Hour);
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_5_HOUR, onRecFangChenMi5Hour);
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_ONLINE_OK, onRecFangChenMiOnlineOk);
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_ONLINE_WEAK, onRecFangChenMiOnelineWeak);
-			SocketConnection.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_ONLINE_STRONG, onRecFangChenMiOnelineStrong);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_1_HOUR, onRecFangChenMi1Hour);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_2_HOUR, onRecFangChenMi2Hour);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_3_HOUR, onRecFangChenMi3Hour);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_3_5_HOUR, onRecFangChenMi3_5Hour);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_4_HOUR, onRecFangChenMi4Hour);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_4_5_HOUR, onRecFangChenMi4_5Hour);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_5_HOUR, onRecFangChenMi5Hour);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_ONLINE_OK, onRecFangChenMiOnlineOk);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_ONLINE_WEAK, onRecFangChenMiOnelineWeak);
+			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_ONLINE_STRONG, onRecFangChenMiOnelineStrong);
 
 			finish();
 		}

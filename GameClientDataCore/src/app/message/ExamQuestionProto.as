@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const INDEX:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ExamQuestionProto.index", "index", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const INDEX:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ExamQuestionProto.index", "index", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var index$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const QUESTION:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.ExamQuestionProto.question", "question", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const QUESTION:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.ExamQuestionProto.question", "question", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var question$field:String;
 
@@ -64,7 +64,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CORRECT_ANSWER:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.ExamQuestionProto.correct_answer", "correctAnswer", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const CORRECT_ANSWER:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.ExamQuestionProto.correct_answer", "correctAnswer", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var correct_answer$field:String;
 
@@ -87,7 +87,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const WRONG_ANSWERS:RepeatedFieldDescriptor$TYPE_STRING = new RepeatedFieldDescriptor$TYPE_STRING("app.message.ExamQuestionProto.wrong_answers", "wrongAnswers", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const WRONG_ANSWERS:RepeatedFieldDescriptor_TYPE_STRING = new RepeatedFieldDescriptor_TYPE_STRING("app.message.ExamQuestionProto.wrong_answers", "wrongAnswers", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		[ArrayElementType("String")]
 		public var wrongAnswers:Array = [];
@@ -95,7 +95,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CORRECT_ANSWER_INDEX:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ExamQuestionProto.correct_answer_index", "correctAnswerIndex", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CORRECT_ANSWER_INDEX:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ExamQuestionProto.correct_answer_index", "correctAnswerIndex", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var correct_answer_index$field:int;
 
@@ -120,7 +120,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const START_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.ExamQuestionProto.start_time", "startTime", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const START_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.ExamQuestionProto.start_time", "startTime", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var start_time$field:Int64;
 
@@ -143,7 +143,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOP_HERO_ID:RepeatedFieldDescriptor$TYPE_INT64 = new RepeatedFieldDescriptor$TYPE_INT64("app.message.ExamQuestionProto.top_hero_id", "topHeroId", (21 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOP_HERO_ID:RepeatedFieldDescriptor_TYPE_INT64 = new RepeatedFieldDescriptor_TYPE_INT64("app.message.ExamQuestionProto.top_hero_id", "topHeroId", (21 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("Int64")]
 		public var topHeroId:Array = [];
@@ -151,7 +151,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOP_HERO_NAME:RepeatedFieldDescriptor$TYPE_STRING = new RepeatedFieldDescriptor$TYPE_STRING("app.message.ExamQuestionProto.top_hero_name", "topHeroName", (22 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const TOP_HERO_NAME:RepeatedFieldDescriptor_TYPE_STRING = new RepeatedFieldDescriptor_TYPE_STRING("app.message.ExamQuestionProto.top_hero_name", "topHeroName", (22 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		[ArrayElementType("String")]
 		public var topHeroName:Array = [];
@@ -159,7 +159,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOP_HERO_SCORE:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.ExamQuestionProto.top_hero_score", "topHeroScore", (23 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOP_HERO_SCORE:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.ExamQuestionProto.top_hero_score", "topHeroScore", (23 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var topHeroScore:Array = [];
@@ -167,7 +167,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.ExamQuestionProto.country", "country", (24 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COUNTRY:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.ExamQuestionProto.country", "country", (24 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var country:Array = [];
@@ -178,43 +178,43 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasIndex) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, index$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, index$field);
 			}
 			if (hasQuestion) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, question$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, question$field);
 			}
 			if (hasCorrectAnswer) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, correct_answer$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, correct_answer$field);
 			}
 			for (var wrongAnswers$index:uint = 0; wrongAnswers$index < this.wrongAnswers.length; ++wrongAnswers$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, this.wrongAnswers[wrongAnswers$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, this.wrongAnswers[wrongAnswers$index]);
 			}
 			if (hasCorrectAnswerIndex) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, correct_answer_index$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, correct_answer_index$field);
 			}
 			if (hasStartTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, start_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, start_time$field);
 			}
 			for (var topHeroId$index:uint = 0; topHeroId$index < this.topHeroId.length; ++topHeroId$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 21);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, this.topHeroId[topHeroId$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, this.topHeroId[topHeroId$index]);
 			}
 			for (var topHeroName$index:uint = 0; topHeroName$index < this.topHeroName.length; ++topHeroName$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 22);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, this.topHeroName[topHeroName$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, this.topHeroName[topHeroName$index]);
 			}
 			for (var topHeroScore$index:uint = 0; topHeroScore$index < this.topHeroScore.length; ++topHeroScore$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 23);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.topHeroScore[topHeroScore$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.topHeroScore[topHeroScore$index]);
 			}
 			for (var country$index:uint = 0; country$index < this.country.length; ++country$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 24);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.country[country$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.country[country$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -231,69 +231,69 @@ package app.message {
 			var correct_answer_index$count:uint = 0;
 			var start_time$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (index$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ExamQuestionProto.index cannot be set twice.');
 					}
 					++index$count;
-					this.index = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.index = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (question$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ExamQuestionProto.question cannot be set twice.');
 					}
 					++question$count;
-					this.question = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.question = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (correct_answer$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ExamQuestionProto.correctAnswer cannot be set twice.');
 					}
 					++correct_answer$count;
-					this.correctAnswer = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.correctAnswer = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 4:
-					this.wrongAnswers.push(com.netease.protobuf.ReadUtils.read$TYPE_STRING(input));
+					this.wrongAnswers.push(com.netease.protobuf.ReadUtils.read_TYPE_STRING(input));
 					break;
 				case 5:
 					if (correct_answer_index$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ExamQuestionProto.correctAnswerIndex cannot be set twice.');
 					}
 					++correct_answer_index$count;
-					this.correctAnswerIndex = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.correctAnswerIndex = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (start_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ExamQuestionProto.startTime cannot be set twice.');
 					}
 					++start_time$count;
-					this.startTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.startTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 21:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT64, this.topHeroId);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT64, this.topHeroId);
 						break;
 					}
-					this.topHeroId.push(com.netease.protobuf.ReadUtils.read$TYPE_INT64(input));
+					this.topHeroId.push(com.netease.protobuf.ReadUtils.read_TYPE_INT64(input));
 					break;
 				case 22:
-					this.topHeroName.push(com.netease.protobuf.ReadUtils.read$TYPE_STRING(input));
+					this.topHeroName.push(com.netease.protobuf.ReadUtils.read_TYPE_STRING(input));
 					break;
 				case 23:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.topHeroScore);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.topHeroScore);
 						break;
 					}
-					this.topHeroScore.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.topHeroScore.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				case 24:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.country);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.country);
 						break;
 					}
-					this.country.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.country.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.manager
+﻿package org.client.mainCore.manager
 {
     import flash.utils.Dictionary;
     import flash.display.DisplayObjectContainer;
@@ -19,22 +18,22 @@ package org.client.mainCore.manager
 
         public static function getManager(container:DisplayObjectContainer):DepthManager
         {
-            if (!(managers))
+            if (!managers)
             {
                 managers = new Dictionary(true);
-            };
+            }
             var m:DepthManager = managers[container];
-            if (!(m))
+            if (!m)
             {
                 m = new (DepthManager)();
                 managers[container] = m;
-            };
-            return (m);
+            }
+            return m;
         }
 
         public static function swapDepth(child:DisplayObject, depth:Number):int
         {
-            return (getManager(child.parent).swapChildDepth(child, depth));
+            return getManager(child.parent).swapChildDepth(child, depth);
         }
 
         public static function swapDepthAll(doc:DisplayObjectContainer):void
@@ -49,12 +48,12 @@ package org.client.mainCore.manager
                 var child:DisplayObject = doc.getChildAt(i);
                 arr.push(child);
                 i++;
-            };
+            }
             arr.sortOn("y", 16);
             arr.forEach(function (item:DisplayObject, index:int, array:Array):void
             {
-                doc.setChildIndex(_arg1, _arg2);
-                dm.setDepth(_arg1, _arg1.y);
+                doc.setChildIndex(item, index);
+                dm.setDepth(item, item.y);
             });
             arr = null;
         }
@@ -72,47 +71,47 @@ package org.client.mainCore.manager
         public static function bringToBottom(mc:DisplayObject):void
         {
             var parent:DisplayObjectContainer = mc.parent;
-            if ((parent == null))
+            if (parent == null)
             {
                 return;
-            };
-            if (!((parent.getChildIndex(mc) == 0)))
+            }
+            if (parent.getChildIndex(mc) != 0)
             {
                 parent.setChildIndex(mc, 0);
-            };
+            }
         }
 
         public static function bringToTop(mc:DisplayObject):void
         {
             var parent:DisplayObjectContainer = mc.parent;
-            if ((parent == null))
+            if (parent == null)
             {
                 return;
-            };
+            }
             parent.addChild(mc);
         }
 
 
         public function getDepth(child:DisplayObject):Number
         {
-            if ((depths[child] == null))
+            if (depths[child] == null)
             {
-                return (countDepth(child, child.parent.getChildIndex(child), 0));
-            };
-            return (depths[child]);
+                return countDepth(child, child.parent.getChildIndex(child), 0);
+            }
+            return depths[child];
         }
 
         private function countDepth(child:DisplayObject, index:int, n:Number=0):Number
         {
-            if ((depths[child] == null))
+            if (depths[child] == null)
             {
-                if ((index == 0))
+                if (index == 0)
                 {
-                    return (0);
-                };
-                return (countDepth(child.parent.getChildAt((index - 1)), (index - 1), (n + 1)));
-            };
-            return ((depths[child] + n));
+                    return 0;
+                }
+                return countDepth(child.parent.getChildAt(index - 1), index - 1, n + 1);
+            }
+            return depths[child] + n;
         }
 
         public function setDepth(child:DisplayObject, d:Number):void
@@ -125,38 +124,38 @@ package org.client.mainCore.manager
             var mid:int;
             var midDepth:Number;
             var container:DisplayObjectContainer = child.parent;
-            if ((container == null))
+            if (container == null)
             {
                 throw (new Error("child is not in a container!!"));
-            };
+            }
             var index:int = container.getChildIndex(child);
             var oldDepth:Number = getDepth(child);
-            if ((depth == oldDepth))
+            if (depth == oldDepth)
             {
                 setDepth(child, depth);
-                return (index);
-            };
+                return index;
+            }
             var n:int = container.numChildren;
-            if ((n < 2))
+            if (n < 2)
             {
                 setDepth(child, depth);
-                return (index);
-            };
+                return index;
+            }
             if ((depth < getDepth(container.getChildAt(0))))
             {
                 container.setChildIndex(child, 0);
                 setDepth(child, depth);
-                return (0);
-            };
+                return 0;
+            }
             if (depth >= getDepth(container.getChildAt((n - 1))))
             {
                 container.setChildIndex(child, (n - 1));
                 setDepth(child, depth);
-                return ((n - 1));
-            };
+                return n - 1;
+            }
             var left:int;
             var right:int = (n - 1);
-            if ((depth > oldDepth))
+            if (depth > oldDepth)
             {
                 left = index;
                 right = (n - 1);
@@ -165,7 +164,7 @@ package org.client.mainCore.manager
             {
                 left = 0;
                 right = index;
-            };
+            }
             while (right > (left + 1))
             {
                 mid = (left + ((right - left) / 2));
@@ -174,20 +173,17 @@ package org.client.mainCore.manager
                 {
                     right = mid;
                 }
-                else
-                {
-                    if (midDepth < depth)
-                    {
-                        left = mid;
-                    }
-                    else
-                    {
-                        container.setChildIndex(child, mid);
-                        setDepth(child, depth);
-                        return (mid);
-                    };
-                };
-            };
+                else if (midDepth < depth)
+				{
+					left = mid;
+				}
+				else
+				{
+					container.setChildIndex(child, mid);
+					setDepth(child, depth);
+					return (mid);
+				}
+            }
             var leftDepth:Number = getDepth(container.getChildAt(left));
             var rightDepth:Number = getDepth(container.getChildAt(right));
             var destIndex:int;
@@ -200,7 +196,7 @@ package org.client.mainCore.manager
                 else
                 {
                     destIndex = Math.min((right + 1), (n - 1));
-                };
+                }
             }
             else
             {
@@ -213,7 +209,7 @@ package org.client.mainCore.manager
                     else
                     {
                         destIndex = left;
-                    };
+                    }
                 }
                 else
                 {
@@ -224,14 +220,12 @@ package org.client.mainCore.manager
                     else
                     {
                         destIndex = Math.min((left + 1), (n - 1));
-                    };
-                };
-            };
+                    }
+                }
+            }
             container.setChildIndex(child, destIndex);
             setDepth(child, depth);
-            return (destIndex);
+            return destIndex;
         }
-
-
     }
-}//package org.client.mainCore.manager
+}

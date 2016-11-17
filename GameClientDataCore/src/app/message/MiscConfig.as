@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PAID_CHAT_GOODS_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MiscConfig.paid_chat_goods_id", "paidChatGoodsId", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PAID_CHAT_GOODS_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MiscConfig.paid_chat_goods_id", "paidChatGoodsId", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var paid_chat_goods_id$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const OFFLINE_EXP_3_JINZI:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MiscConfig.offline_exp_3_jinzi", "offlineExp_3Jinzi", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const OFFLINE_EXP_3_JINZI:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MiscConfig.offline_exp_3_jinzi", "offlineExp_3Jinzi", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var offline_exp_3_jinzi$field:int;
 
@@ -67,7 +67,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TIME_OFFSET:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.MiscConfig.time_offset", "timeOffset", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TIME_OFFSET:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.MiscConfig.time_offset", "timeOffset", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var time_offset$field:Int64;
 
@@ -90,7 +90,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RANK_PER_PAGE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MiscConfig.rank_per_page", "rankPerPage", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RANK_PER_PAGE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MiscConfig.rank_per_page", "rankPerPage", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var rank_per_page$field:int;
 
@@ -115,7 +115,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RANK_ADMIRE_MAX_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MiscConfig.rank_admire_max_times", "rankAdmireMaxTimes", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RANK_ADMIRE_MAX_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MiscConfig.rank_admire_max_times", "rankAdmireMaxTimes", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var rank_admire_max_times$field:int;
 
@@ -140,7 +140,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RANK_SEARCH_INTERVAL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MiscConfig.rank_search_interval", "rankSearchInterval", (12 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RANK_SEARCH_INTERVAL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MiscConfig.rank_search_interval", "rankSearchInterval", (12 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var rank_search_interval$field:int;
 
@@ -165,7 +165,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TRANSPORT_COST:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.MiscConfig.transport_cost", "transportCost", (20 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.UpgradeProto; });
+		public static const TRANSPORT_COST:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.MiscConfig.transport_cost", "transportCost", (20 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.UpgradeProto; });
 
 		private var transport_cost$field:app.message.UpgradeProto;
 
@@ -188,7 +188,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CHANGE_NAME_UPGRADE_PROTO:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.MiscConfig.change_name_upgrade_proto", "changeNameUpgradeProto", (25 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.UpgradeProto; });
+		public static const CHANGE_NAME_UPGRADE_PROTO:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.MiscConfig.change_name_upgrade_proto", "changeNameUpgradeProto", (25 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.UpgradeProto; });
 
 		private var change_name_upgrade_proto$field:app.message.UpgradeProto;
 
@@ -211,7 +211,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CHANGE_COUNTRY_UPGRADE_PROTO:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.MiscConfig.change_country_upgrade_proto", "changeCountryUpgradeProto", (26 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.UpgradeProto; });
+		public static const CHANGE_COUNTRY_UPGRADE_PROTO:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.MiscConfig.change_country_upgrade_proto", "changeCountryUpgradeProto", (26 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.UpgradeProto; });
 
 		private var change_country_upgrade_proto$field:app.message.UpgradeProto;
 
@@ -234,7 +234,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NIGHT_AUTO_COMBAT_PREPARE_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.MiscConfig.night_auto_combat_prepare_time", "nightAutoCombatPrepareTime", (201 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const NIGHT_AUTO_COMBAT_PREPARE_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.MiscConfig.night_auto_combat_prepare_time", "nightAutoCombatPrepareTime", (201 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var night_auto_combat_prepare_time$field:Int64;
 
@@ -260,43 +260,43 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasPaidChatGoodsId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, paid_chat_goods_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, paid_chat_goods_id$field);
 			}
 			if (hasOfflineExp_3Jinzi) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, offline_exp_3_jinzi$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, offline_exp_3_jinzi$field);
 			}
 			if (hasTimeOffset) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, time_offset$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, time_offset$field);
 			}
 			if (hasRankPerPage) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, rank_per_page$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, rank_per_page$field);
 			}
 			if (hasRankAdmireMaxTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, rank_admire_max_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, rank_admire_max_times$field);
 			}
 			if (hasRankSearchInterval) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, rank_search_interval$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, rank_search_interval$field);
 			}
 			if (hasTransportCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 20);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, transport_cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, transport_cost$field);
 			}
 			if (hasChangeNameUpgradeProto) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 25);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, change_name_upgrade_proto$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, change_name_upgrade_proto$field);
 			}
 			if (hasChangeCountryUpgradeProto) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 26);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, change_country_upgrade_proto$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, change_country_upgrade_proto$field);
 			}
 			if (hasNightAutoCombatPrepareTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 201);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, night_auto_combat_prepare_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, night_auto_combat_prepare_time$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -318,49 +318,49 @@ package app.message {
 			var change_country_upgrade_proto$count:uint = 0;
 			var night_auto_combat_prepare_time$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 2:
 					if (paid_chat_goods_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MiscConfig.paidChatGoodsId cannot be set twice.');
 					}
 					++paid_chat_goods_id$count;
-					this.paidChatGoodsId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.paidChatGoodsId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (offline_exp_3_jinzi$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MiscConfig.offlineExp_3Jinzi cannot be set twice.');
 					}
 					++offline_exp_3_jinzi$count;
-					this.offlineExp_3Jinzi = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.offlineExp_3Jinzi = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (time_offset$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MiscConfig.timeOffset cannot be set twice.');
 					}
 					++time_offset$count;
-					this.timeOffset = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.timeOffset = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 10:
 					if (rank_per_page$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MiscConfig.rankPerPage cannot be set twice.');
 					}
 					++rank_per_page$count;
-					this.rankPerPage = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.rankPerPage = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 11:
 					if (rank_admire_max_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MiscConfig.rankAdmireMaxTimes cannot be set twice.');
 					}
 					++rank_admire_max_times$count;
-					this.rankAdmireMaxTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.rankAdmireMaxTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 12:
 					if (rank_search_interval$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MiscConfig.rankSearchInterval cannot be set twice.');
 					}
 					++rank_search_interval$count;
-					this.rankSearchInterval = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.rankSearchInterval = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 20:
 					if (transport_cost$count != 0) {
@@ -368,7 +368,7 @@ package app.message {
 					}
 					++transport_cost$count;
 					this.transportCost = new app.message.UpgradeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.transportCost);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.transportCost);
 					break;
 				case 25:
 					if (change_name_upgrade_proto$count != 0) {
@@ -376,7 +376,7 @@ package app.message {
 					}
 					++change_name_upgrade_proto$count;
 					this.changeNameUpgradeProto = new app.message.UpgradeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.changeNameUpgradeProto);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.changeNameUpgradeProto);
 					break;
 				case 26:
 					if (change_country_upgrade_proto$count != 0) {
@@ -384,14 +384,14 @@ package app.message {
 					}
 					++change_country_upgrade_proto$count;
 					this.changeCountryUpgradeProto = new app.message.UpgradeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.changeCountryUpgradeProto);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.changeCountryUpgradeProto);
 					break;
 				case 201:
 					if (night_auto_combat_prepare_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MiscConfig.nightAutoCombatPrepareTime cannot be set twice.');
 					}
 					++night_auto_combat_prepare_time$count;
-					this.nightAutoCombatPrepareTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.nightAutoCombatPrepareTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

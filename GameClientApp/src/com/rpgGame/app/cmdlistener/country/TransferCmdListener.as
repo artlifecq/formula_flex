@@ -7,8 +7,8 @@ package com.rpgGame.app.cmdlistener.country
 	import app.cmd.TransferModuleMessages;
 	
 	import org.client.mainCore.bean.BaseBean;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
@@ -25,8 +25,8 @@ package com.rpgGame.app.cmdlistener.country
 
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(TransferModuleMessages.S2C_CHANGE_COUNTRY_FAIL, onChangeCountryFail);
-			SocketConnection.addCmdListener(TransferModuleMessages.S2C_CHANGE_COUNTRY_BROADCAST, onChangeCountryBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(TransferModuleMessages.S2C_CHANGE_COUNTRY_FAIL, onChangeCountryFail);
+			SocketConnection_protoBuffer.addCmdListener(TransferModuleMessages.S2C_CHANGE_COUNTRY_BROADCAST, onChangeCountryBroadcast);
 
 			finish();
 		}

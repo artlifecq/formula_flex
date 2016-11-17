@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.manager
+﻿package org.client.mainCore.manager
 {
     import org.client.mainCore.ds.HashMap;
     import __AS3__.vec.Vector;

@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MOUNT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipedMountProto.mount", "mount", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MountProto; });
+		public static const MOUNT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipedMountProto.mount", "mount", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MountProto; });
 
 		private var mount$field:app.message.MountProto;
 
@@ -39,7 +39,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MOUNT_EQUIPMENTS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipedMountProto.mount_equipments", "mountEquipments", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentListProto; });
+		public static const MOUNT_EQUIPMENTS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipedMountProto.mount_equipments", "mountEquipments", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentListProto; });
 
 		private var mount_equipments$field:app.message.EquipmentListProto;
 
@@ -65,11 +65,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasMount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, mount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, mount$field);
 			}
 			if (hasMountEquipments) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, mount_equipments$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, mount_equipments$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -83,7 +83,7 @@ package app.message {
 			var mount$count:uint = 0;
 			var mount_equipments$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (mount$count != 0) {
@@ -91,7 +91,7 @@ package app.message {
 					}
 					++mount$count;
 					this.mount = new app.message.MountProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.mount);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.mount);
 					break;
 				case 2:
 					if (mount_equipments$count != 0) {
@@ -99,7 +99,7 @@ package app.message {
 					}
 					++mount_equipments$count;
 					this.mountEquipments = new app.message.EquipmentListProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.mountEquipments);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.mountEquipments);
 					break;
 				default:
 					super.readUnknown(input, tag);

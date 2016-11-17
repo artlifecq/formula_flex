@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEPOT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GoodsContainerModuleObjProto.depot", "depot", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsContainerProto; });
+		public static const DEPOT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GoodsContainerModuleObjProto.depot", "depot", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsContainerProto; });
 
 		private var depot$field:app.message.GoodsContainerProto;
 
@@ -39,7 +39,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HERO_EQUIPMENT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GoodsContainerModuleObjProto.hero_equipment", "heroEquipment", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.HeroEquipmentListProto; });
+		public static const HERO_EQUIPMENT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GoodsContainerModuleObjProto.hero_equipment", "heroEquipment", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.HeroEquipmentListProto; });
 
 		private var hero_equipment$field:app.message.HeroEquipmentListProto;
 
@@ -65,11 +65,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasDepot) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, depot$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, depot$field);
 			}
 			if (hasHeroEquipment) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, hero_equipment$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, hero_equipment$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -83,7 +83,7 @@ package app.message {
 			var depot$count:uint = 0;
 			var hero_equipment$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (depot$count != 0) {
@@ -91,7 +91,7 @@ package app.message {
 					}
 					++depot$count;
 					this.depot = new app.message.GoodsContainerProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.depot);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.depot);
 					break;
 				case 2:
 					if (hero_equipment$count != 0) {
@@ -99,7 +99,7 @@ package app.message {
 					}
 					++hero_equipment$count;
 					this.heroEquipment = new app.message.HeroEquipmentListProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.heroEquipment);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.heroEquipment);
 					break;
 				default:
 					super.readUnknown(input, tag);

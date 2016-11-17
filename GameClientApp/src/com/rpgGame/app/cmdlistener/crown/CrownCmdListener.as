@@ -13,8 +13,8 @@ package com.rpgGame.app.cmdlistener.crown
 	import app.cmd.SummonModuleMessages;
 	
 	import org.client.mainCore.bean.BaseBean;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	public class CrownCmdListener extends BaseBean
 	{
@@ -25,59 +25,59 @@ package com.rpgGame.app.cmdlistener.crown
 
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_SET_COUNTRY_ANNOUNCEMENT, onSetCountryAnnouncement);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_SET_COUNTRY_ANNOUNCEMENT_FAIL, onSetCountryAnnouncementFail);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_SET_COUNTRY_ANNOUNCEMENT_CHANGED_BROADCAST, onSetCountryAnnouncementChangeBroadcast);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_GET_COUNTRY_ANNOUNCEMENT, onGetCountryAnnouncement);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_COLLECT_SALARY, onCollectSalary);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_COLLECT_SALARY_FAIL, onCollectSalaryFail);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_SET_COUNTRY_ANNOUNCEMENT, onSetCountryAnnouncement);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_SET_COUNTRY_ANNOUNCEMENT_FAIL, onSetCountryAnnouncementFail);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_SET_COUNTRY_ANNOUNCEMENT_CHANGED_BROADCAST, onSetCountryAnnouncementChangeBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_GET_COUNTRY_ANNOUNCEMENT, onGetCountryAnnouncement);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_COLLECT_SALARY, onCollectSalary);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_COLLECT_SALARY_FAIL, onCollectSalaryFail);
 
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_SET_JIN_WEI_ANNOUNCEMENT, onSetJinWeiAnnouncement);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_SET_JIN_WEI_ANNOUNCEMENT_FAIL, onSetJinWeiAnnouncementFail);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_SET_JIN_WEI_ANNOUNCEMENT_CHANGED_BROADCAST, onSetJinWeiAnnouncementChangeBroadcast);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_GET_JIN_WEI_ANNOUNCEMENT, onGetJinWeiAnnouncement);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_SET_JIN_WEI_ANNOUNCEMENT, onSetJinWeiAnnouncement);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_SET_JIN_WEI_ANNOUNCEMENT_FAIL, onSetJinWeiAnnouncementFail);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_SET_JIN_WEI_ANNOUNCEMENT_CHANGED_BROADCAST, onSetJinWeiAnnouncementChangeBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_GET_JIN_WEI_ANNOUNCEMENT, onGetJinWeiAnnouncement);
 			//////////////////////募捐///////////////////////
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_COUNTRY_DONATE, onCountryDonate);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_COUNTRY_DONATE_FAIL, onCountryDonateFail);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_COUNTRY_DONATE_BROADCAST, onCountryDonateBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_COUNTRY_DONATE, onCountryDonate);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_COUNTRY_DONATE_FAIL, onCountryDonateFail);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_COUNTRY_DONATE_BROADCAST, onCountryDonateBroadcast);
 			//////////////////////募捐///////////////////////
 			/////////////////////捐款///////////////////////
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_DO_DONATE, onDoDonate);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_DO_DONATE_FAIL, onDoDonateFail);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_LARGE_DONATE_BROADCAST, onLargeDonateBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_DO_DONATE, onDoDonate);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_DO_DONATE_FAIL, onDoDonateFail);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_LARGE_DONATE_BROADCAST, onLargeDonateBroadcast);
 			/////////////////////捐款///////////////////////
 
 			/////////////////////禁言//////////////////////
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_SET_DONT_TALK, onSetDontTalk);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_SET_DONT_TALK_FAIL, onSetDontTalkFail);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_BEEN_SET_DONT_TALK, onBeenSetDontTalk);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_SET_DONT_TALK, onSetDontTalk);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_SET_DONT_TALK_FAIL, onSetDontTalkFail);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_BEEN_SET_DONT_TALK, onBeenSetDontTalk);
 			/////////////////////禁言//////////////////////
 
 			////////////////////囚禁///////////////////////
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_CAPTIVITY, onSetCaptivity);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_CAPTIVITY_FAIL, onSetCaptivityFail);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_BEEN_CAPTIVITY, onBeenSetCaptivity);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_CAPTIVITY, onSetCaptivity);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_CAPTIVITY_FAIL, onSetCaptivityFail);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_BEEN_CAPTIVITY, onBeenSetCaptivity);
 			////////////////////囚禁///////////////////////
 			//////////////////国运///////////////////////////
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_START_GUO_YUN, onStartGuoYun);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_START_GUO_YUN_FAIL, onStartGuoYunFail);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_START_GUO_YUN, onStartGuoYun);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_START_GUO_YUN_FAIL, onStartGuoYunFail);
 			//////////////////国运///////////////////////////
 			
 
 			/////////////////////官员//////////////////////
-			SocketConnection.addCmdListener(SummonModuleMessages.S2C_OFFICER_SUMMON, onOfficerSummon);
-			SocketConnection.addCmdListener(SummonModuleMessages.S2C_COUNTRY_OFFICER_SUMMON, onCountryOfficerSummon);
-			SocketConnection.addCmdListener(SummonModuleMessages.S2C_COUNTRY_OFFICER_SUMMON_FAIL, onCountryOfficerSummonFail);
+			SocketConnection_protoBuffer.addCmdListener(SummonModuleMessages.S2C_OFFICER_SUMMON, onOfficerSummon);
+			SocketConnection_protoBuffer.addCmdListener(SummonModuleMessages.S2C_COUNTRY_OFFICER_SUMMON, onCountryOfficerSummon);
+			SocketConnection_protoBuffer.addCmdListener(SummonModuleMessages.S2C_COUNTRY_OFFICER_SUMMON_FAIL, onCountryOfficerSummonFail);
 			/////////////////////官员//////////////////////
 
 			/////////////////////评价/////////////////////
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_COUNTRY_VOTE, onVoteComplete);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_COUNTRY_VOTE_FAIL, onVoteFail);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_COUNTRY_VOTE_CHANGED, onVoteChange);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_COUNTRY_VOTE, onVoteComplete);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_COUNTRY_VOTE_FAIL, onVoteFail);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_COUNTRY_VOTE_CHANGED, onVoteChange);
 			//////////////////////战报//////////////////////
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_COUNTRY_MEMBER_BEEN_KILLED, onMemberBeenKilled);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_COUNTRY_OFFICER_BEEN_KILLED, onOfficerBeenKilled);
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_BIAO_CHE_BEEN_DESTROY, onBiaoCheBeenDestory);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_COUNTRY_MEMBER_BEEN_KILLED, onMemberBeenKilled);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_COUNTRY_OFFICER_BEEN_KILLED, onOfficerBeenKilled);
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_BIAO_CHE_BEEN_DESTROY, onBiaoCheBeenDestory);
 			finish();
 		}
 		/**

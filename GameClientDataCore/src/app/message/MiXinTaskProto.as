@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MiXinTaskProto.level", "level", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MiXinTaskProto.level", "level", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ACCEPT_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MiXinTaskProto.accept_times", "acceptTimes", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ACCEPT_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MiXinTaskProto.accept_times", "acceptTimes", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var accept_times$field:int;
 
@@ -67,7 +67,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const QUALITY:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.MiXinTaskProto.quality", "quality", (3 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Quality);
+		public static const QUALITY:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.MiXinTaskProto.quality", "quality", (3 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Quality);
 
 		private var quality$field:int;
 
@@ -92,7 +92,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NEXT_RANDOM_MI_XIN_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.MiXinTaskProto.next_random_mi_xin_time", "nextRandomMiXinTime", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const NEXT_RANDOM_MI_XIN_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.MiXinTaskProto.next_random_mi_xin_time", "nextRandomMiXinTime", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var next_random_mi_xin_time$field:Int64;
 
@@ -115,7 +115,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_IN_MI_XIN:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.MiXinTaskProto.is_in_mi_xin", "isInMiXin", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_IN_MI_XIN:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.MiXinTaskProto.is_in_mi_xin", "isInMiXin", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_in_mi_xin$field:Boolean;
 
@@ -143,23 +143,23 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level$field);
 			}
 			if (hasAcceptTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, accept_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, accept_times$field);
 			}
 			if (hasQuality) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, quality$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, quality$field);
 			}
 			if (hasNextRandomMiXinTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, next_random_mi_xin_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, next_random_mi_xin_time$field);
 			}
 			if (hasIsInMiXin) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_in_mi_xin$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_in_mi_xin$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -176,42 +176,42 @@ package app.message {
 			var next_random_mi_xin_time$count:uint = 0;
 			var is_in_mi_xin$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MiXinTaskProto.level cannot be set twice.');
 					}
 					++level$count;
-					this.level = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.level = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (accept_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MiXinTaskProto.acceptTimes cannot be set twice.');
 					}
 					++accept_times$count;
-					this.acceptTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.acceptTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (quality$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MiXinTaskProto.quality cannot be set twice.');
 					}
 					++quality$count;
-					this.quality = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.quality = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 4:
 					if (next_random_mi_xin_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MiXinTaskProto.nextRandomMiXinTime cannot be set twice.');
 					}
 					++next_random_mi_xin_time$count;
-					this.nextRandomMiXinTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.nextRandomMiXinTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 5:
 					if (is_in_mi_xin$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MiXinTaskProto.isInMiXin cannot be set twice.');
 					}
 					++is_in_mi_xin$count;
-					this.isInMiXin = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isInMiXin = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

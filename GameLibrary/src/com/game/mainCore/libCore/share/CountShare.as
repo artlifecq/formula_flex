@@ -7,6 +7,11 @@
     
     import org.client.mainCore.utils.Tick;
 
+	/**
+	 * 计数数据类型 
+	 * @author NEIL
+	 * 
+	 */	
     public class CountShare 
     {
 

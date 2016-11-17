@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TYPE_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TriggerAnimationType.type_id", "typeId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TYPE_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TriggerAnimationType.type_id", "typeId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var type_id$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RESET_CONDITION:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TriggerAnimationType.reset_condition", "resetCondition", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RESET_CONDITION:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TriggerAnimationType.reset_condition", "resetCondition", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var reset_condition$field:int;
 
@@ -67,7 +67,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SUB_TYPE:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.TriggerAnimationType.sub_type", "subType", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TriggerAnimationSubType; });
+		public static const SUB_TYPE:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.TriggerAnimationType.sub_type", "subType", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TriggerAnimationSubType; });
 
 		[ArrayElementType("app.message.TriggerAnimationSubType")]
 		public var subType:Array = [];
@@ -75,7 +75,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FILE:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.TriggerAnimationType.file", "file", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const FILE:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.TriggerAnimationType.file", "file", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var file$field:String;
 
@@ -101,19 +101,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasTypeId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, type_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, type_id$field);
 			}
 			if (hasResetCondition) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, reset_condition$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, reset_condition$field);
 			}
 			for (var subType$index:uint = 0; subType$index < this.subType.length; ++subType$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.subType[subType$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.subType[subType$index]);
 			}
 			if (hasFile) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, file$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, file$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -128,31 +128,31 @@ package app.message {
 			var reset_condition$count:uint = 0;
 			var file$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (type_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TriggerAnimationType.typeId cannot be set twice.');
 					}
 					++type_id$count;
-					this.typeId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.typeId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (reset_condition$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TriggerAnimationType.resetCondition cannot be set twice.');
 					}
 					++reset_condition$count;
-					this.resetCondition = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.resetCondition = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
-					this.subType.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.TriggerAnimationSubType()));
+					this.subType.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.TriggerAnimationSubType()));
 					break;
 				case 4:
 					if (file$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TriggerAnimationType.file cannot be set twice.');
 					}
 					++file$count;
-					this.file = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.file = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

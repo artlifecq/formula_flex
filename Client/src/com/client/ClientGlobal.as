@@ -1,7 +1,7 @@
 package com.client
 {
 	import com.gameClient.utils.VersionUtils;
-
+	
 	import flash.display.Sprite;
 	import flash.display.Stage;
 	import flash.display.StageAlign;
@@ -11,8 +11,8 @@ package com.client
 	import flash.system.IME;
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
-
-	import org.game.netCore.net.ByteBuffer;
+	
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *

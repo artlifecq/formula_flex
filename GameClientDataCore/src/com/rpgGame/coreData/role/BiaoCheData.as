@@ -6,7 +6,7 @@ package com.rpgGame.coreData.role
 	import app.message.BiaoResProto;
 	import app.message.BiaoType;
 	
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	public class BiaoCheData extends RoleData
 	{

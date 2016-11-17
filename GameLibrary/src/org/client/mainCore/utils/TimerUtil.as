@@ -1,12 +1,11 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.utils
+﻿package org.client.mainCore.utils
 {
-    import flash.utils.setTimeout;
+    import flash.events.TimerEvent;
+    import flash.utils.Timer;
+    import flash.utils.clearInterval;
     import flash.utils.clearTimeout;
     import flash.utils.setInterval;
-    import flash.utils.clearInterval;
-    import flash.utils.Timer;
-    import flash.events.TimerEvent;
+    import flash.utils.setTimeout;
 
     public class TimerUtil 
     {
@@ -28,9 +27,9 @@ package org.client.mainCore.utils
                 var i:uint = 1;
                 while (i <= timeoutNum)
                 {
-                    (clearTimeout(i));
+                    clearTimeout(i);
                     i++;
-                };
+                }
             }, 0);
         }
 
@@ -44,15 +43,15 @@ package org.client.mainCore.utils
                 var i:uint = 1;
                 while (i <= timeoutNum)
                 {
-                    (clearInterval(i));
+                    clearInterval(i);
                     i++;
-                };
+                }
             }, 0);
         }
 
         public static function setGTimeout(closure:Function, delay:Number, ... vars):Timer
         {
-            return (getTimerInstance(closure, delay, 1, vars));
+            return getTimerInstance(closure, delay, 1, vars);
         }
 
         public static function clearGTimeout(timer:Timer):void
@@ -61,14 +60,14 @@ package org.client.mainCore.utils
             {
                 timer.stop();
                 timer = null;
-            };
+            }
         }
 
         public static function setGInterval(closure:Function, delay:*, ... vars):Timer
         {
             var num:int;
-            var ta = null;
-            if ((((delay as String)) && ((delay.indexOf(":") > -1))))
+            var ta:Array = null;
+            if (delay as String && delay.indexOf(":") > -1)
             {
                 ta = delay.split(":");
                 num = ta[1];
@@ -77,8 +76,8 @@ package org.client.mainCore.utils
             else
             {
                 num = 0;
-            };
-            return (getTimerInstance(closure, delay, num, vars));
+            }
+            return getTimerInstance(closure, delay, num, vars);
         }
 
         public static function clearGInterval(timer:Timer):void
@@ -87,7 +86,7 @@ package org.client.mainCore.utils
             {
                 timer.stop();
                 timer = null;
-            };
+            }
         }
 
         private static function getTimerInstance(closure:Function, delay:Number, num:uint, vars:*):Timer
@@ -99,24 +98,22 @@ package org.client.mainCore.utils
             var tempTimer:Timer = new Timer(delay, num);
             tempTimer.addEventListener("timer", function (E:TimerEvent):void
             {
-                if ((_arg1.currentTarget.currentCount == _arg1.currentTarget.repeatCount))
+                if (E.currentTarget.currentCount == E.currentTarget.repeatCount)
                 {
                     tempTimer.removeEventListener("timerComplete", arguments.callee);
                     clearGTimeout(tempTimer);
-                };
-                if ((vars.length > 0))
+                }
+                if (vars.length > 0)
                 {
                     closure.apply(this, vars);
                 }
                 else
                 {
-                    (closure());
-                };
+                    closure();
+                }
             });
             tempTimer.start();
-            return (tempTimer);
+            return tempTimer;
         }
-
-
     }
-}//package org.client.mainCore.utils
+}

@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const UNION_CD:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryUnionStatusProto.union_cd", "unionCd", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const UNION_CD:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryUnionStatusProto.union_cd", "unionCd", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var union_cd$field:Int64;
 
@@ -37,7 +37,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LAST_UNION_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryUnionStatusProto.last_union_time", "lastUnionTime", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LAST_UNION_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryUnionStatusProto.last_union_time", "lastUnionTime", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var last_union_time$field:Int64;
 
@@ -60,7 +60,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LAST_UNION_COUNTRY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryUnionStatusProto.last_union_country", "lastUnionCountry", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LAST_UNION_COUNTRY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryUnionStatusProto.last_union_country", "lastUnionCountry", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var last_union_country$field:int;
 
@@ -90,15 +90,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasUnionCd) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, union_cd$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, union_cd$field);
 			}
 			if (hasLastUnionTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, last_union_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, last_union_time$field);
 			}
 			if (hasLastUnionCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, last_union_country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, last_union_country$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -113,28 +113,28 @@ package app.message {
 			var last_union_time$count:uint = 0;
 			var last_union_country$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (union_cd$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryUnionStatusProto.unionCd cannot be set twice.');
 					}
 					++union_cd$count;
-					this.unionCd = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.unionCd = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (last_union_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryUnionStatusProto.lastUnionTime cannot be set twice.');
 					}
 					++last_union_time$count;
-					this.lastUnionTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.lastUnionTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 3:
 					if (last_union_country$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryUnionStatusProto.lastUnionCountry cannot be set twice.');
 					}
 					++last_union_country$count;
-					this.lastUnionCountry = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.lastUnionCountry = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

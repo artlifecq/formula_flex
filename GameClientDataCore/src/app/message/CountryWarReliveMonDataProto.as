@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MON_CONFIG_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryWarReliveMonDataProto.mon_config_id", "monConfigId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MON_CONFIG_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryWarReliveMonDataProto.mon_config_id", "monConfigId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var mon_config_id$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RELIVE_POS_PRIORITY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryWarReliveMonDataProto.relive_pos_priority", "relivePosPriority", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RELIVE_POS_PRIORITY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryWarReliveMonDataProto.relive_pos_priority", "relivePosPriority", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var relive_pos_priority$field:int;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEFENCER_RELIVE_SCENE_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryWarReliveMonDataProto.defencer_relive_scene_id", "defencerReliveSceneId", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEFENCER_RELIVE_SCENE_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryWarReliveMonDataProto.defencer_relive_scene_id", "defencerReliveSceneId", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var defencer_relive_scene_id$field:int;
 
@@ -91,7 +91,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ATTACKER_RELIVE_SCENE_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryWarReliveMonDataProto.attacker_relive_scene_id", "attackerReliveSceneId", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ATTACKER_RELIVE_SCENE_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryWarReliveMonDataProto.attacker_relive_scene_id", "attackerReliveSceneId", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var attacker_relive_scene_id$field:int;
 
@@ -116,7 +116,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEAD_UNLOCK_AREA_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryWarReliveMonDataProto.dead_unlock_area_id", "deadUnlockAreaId", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEAD_UNLOCK_AREA_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryWarReliveMonDataProto.dead_unlock_area_id", "deadUnlockAreaId", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var dead_unlock_area_id$field:int;
 
@@ -141,7 +141,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_ACCPET_ZHAN_CHE_WHEN_DEAD:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.CountryWarReliveMonDataProto.can_accpet_zhan_che_when_dead", "canAccpetZhanCheWhenDead", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_ACCPET_ZHAN_CHE_WHEN_DEAD:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.CountryWarReliveMonDataProto.can_accpet_zhan_che_when_dead", "canAccpetZhanCheWhenDead", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_accpet_zhan_che_when_dead$field:Boolean;
 
@@ -169,27 +169,27 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasMonConfigId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, mon_config_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, mon_config_id$field);
 			}
 			if (hasRelivePosPriority) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, relive_pos_priority$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, relive_pos_priority$field);
 			}
 			if (hasDefencerReliveSceneId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, defencer_relive_scene_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, defencer_relive_scene_id$field);
 			}
 			if (hasAttackerReliveSceneId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, attacker_relive_scene_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, attacker_relive_scene_id$field);
 			}
 			if (hasDeadUnlockAreaId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, dead_unlock_area_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, dead_unlock_area_id$field);
 			}
 			if (hasCanAccpetZhanCheWhenDead) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_accpet_zhan_che_when_dead$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_accpet_zhan_che_when_dead$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -207,49 +207,49 @@ package app.message {
 			var dead_unlock_area_id$count:uint = 0;
 			var can_accpet_zhan_che_when_dead$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (mon_config_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryWarReliveMonDataProto.monConfigId cannot be set twice.');
 					}
 					++mon_config_id$count;
-					this.monConfigId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.monConfigId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (relive_pos_priority$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryWarReliveMonDataProto.relivePosPriority cannot be set twice.');
 					}
 					++relive_pos_priority$count;
-					this.relivePosPriority = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.relivePosPriority = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (defencer_relive_scene_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryWarReliveMonDataProto.defencerReliveSceneId cannot be set twice.');
 					}
 					++defencer_relive_scene_id$count;
-					this.defencerReliveSceneId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.defencerReliveSceneId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (attacker_relive_scene_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryWarReliveMonDataProto.attackerReliveSceneId cannot be set twice.');
 					}
 					++attacker_relive_scene_id$count;
-					this.attackerReliveSceneId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.attackerReliveSceneId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (dead_unlock_area_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryWarReliveMonDataProto.deadUnlockAreaId cannot be set twice.');
 					}
 					++dead_unlock_area_id$count;
-					this.deadUnlockAreaId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.deadUnlockAreaId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 8:
 					if (can_accpet_zhan_che_when_dead$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryWarReliveMonDataProto.canAccpetZhanCheWhenDead cannot be set twice.');
 					}
 					++can_accpet_zhan_che_when_dead$count;
-					this.canAccpetZhanCheWhenDead = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canAccpetZhanCheWhenDead = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

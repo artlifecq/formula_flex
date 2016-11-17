@@ -17,8 +17,8 @@ package com.rpgGame.app.cmdlistener
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 	
 	public class DaTiCmdListener extends BaseBean
 	{
@@ -29,21 +29,21 @@ package com.rpgGame.app.cmdlistener
 		
 		override public function start():void
 		{
-			SocketConnection.addCmdListener(ExamModuleMessages.S2C_EXAM_QUESTION_UPDATE,onExamQuestionUpdate);
-			SocketConnection.addCmdListener(ExamModuleMessages.S2C_EXAM_GET_QUESTION,onExamGetQuestion);
-			SocketConnection.addCmdListener(ExamModuleMessages.S2C_EXAM_GET_QUESTION_FAIL,onExamGetQuestionFail);
-			SocketConnection.addCmdListener(ExamModuleMessages.S2C_EXAM_ANSWER_QUESTION,onExamAnswerQuestion);
-			SocketConnection.addCmdListener(ExamModuleMessages.S2C_EXAM_ANSWER_QUESTION_FAIL,onExamAnswerQuestionFail);
-			SocketConnection.addCmdListener(ExamModuleMessages.S2C_EXAM_USE_GOOD_ANSWER_SUCCESS,onExamUseGoodAnswer);
-			SocketConnection.addCmdListener(ExamModuleMessages.S2C_EXAM_USE_GOOD_FAIL,onExamUseGoodAnswerFail);
-			SocketConnection.addCmdListener(ExamModuleMessages.S2C_EXAM_SELF_DATA,onExamSelfData);
-			SocketConnection.addCmdListener(ExamModuleMessages.S2C_EXAM_SELF_DATA_FAIL,onExamSelfDataFail);
-			SocketConnection.addCmdListener(ExamModuleMessages.S2C_EXAM_FINISH_BROADCAST,onExamFinishBroadcast);
-			SocketConnection.addCmdListener(ExamModuleMessages.S2C_EXAM_FINISH_MSG,onExamFinishMsg);
-			SocketConnection.addCmdListener(ExamModuleMessages.S2C_EXAM_FINISH_RANK_MSG,onExamFinishRankMsg);
-			SocketConnection.addCmdListener(ExamModuleMessages.S2C_EXAM_FOLLOW_MSG,onExamFollowMsg);
-			SocketConnection.addCmdListener(ExamModuleMessages.S2C_EXAM_FOLLOW_FAIL,onExamFollowMsgFail);
-			SocketConnection.addCmdListener(ExamModuleMessages.S2C_UPDATE_RANK,onExamUpdateRank);
+			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_QUESTION_UPDATE,onExamQuestionUpdate);
+			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_GET_QUESTION,onExamGetQuestion);
+			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_GET_QUESTION_FAIL,onExamGetQuestionFail);
+			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_ANSWER_QUESTION,onExamAnswerQuestion);
+			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_ANSWER_QUESTION_FAIL,onExamAnswerQuestionFail);
+			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_USE_GOOD_ANSWER_SUCCESS,onExamUseGoodAnswer);
+			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_USE_GOOD_FAIL,onExamUseGoodAnswerFail);
+			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_SELF_DATA,onExamSelfData);
+			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_SELF_DATA_FAIL,onExamSelfDataFail);
+			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_FINISH_BROADCAST,onExamFinishBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_FINISH_MSG,onExamFinishMsg);
+			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_FINISH_RANK_MSG,onExamFinishRankMsg);
+			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_FOLLOW_MSG,onExamFollowMsg);
+			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_EXAM_FOLLOW_FAIL,onExamFollowMsgFail);
+			SocketConnection_protoBuffer.addCmdListener(ExamModuleMessages.S2C_UPDATE_RANK,onExamUpdateRank);
 			finish();
 		}
 		

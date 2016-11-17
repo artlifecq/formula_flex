@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RACE_DIFF:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.PackageGoodsDataProto.race_diff", "raceDiff", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RACE_DIFF:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.PackageGoodsDataProto.race_diff", "raceDiff", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var race_diff$field:Boolean;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const OPEN_COST:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.PackageGoodsDataProto.open_cost", "openCost", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.UpgradeProto; });
+		public static const OPEN_COST:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.PackageGoodsDataProto.open_cost", "openCost", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.UpgradeProto; });
 
 		private var open_cost$field:app.message.UpgradeProto;
 
@@ -68,11 +68,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasRaceDiff) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, race_diff$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, race_diff$field);
 			}
 			if (hasOpenCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, open_cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, open_cost$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -86,14 +86,14 @@ package app.message {
 			var race_diff$count:uint = 0;
 			var open_cost$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (race_diff$count != 0) {
 						throw new flash.errors.IOError('Bad data format: PackageGoodsDataProto.raceDiff cannot be set twice.');
 					}
 					++race_diff$count;
-					this.raceDiff = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.raceDiff = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 2:
 					if (open_cost$count != 0) {
@@ -101,7 +101,7 @@ package app.message {
 					}
 					++open_cost$count;
 					this.openCost = new app.message.UpgradeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.openCost);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.openCost);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.ds
+﻿package org.client.mainCore.ds
 {
     import flash.utils.Dictionary;
 
@@ -132,7 +131,5 @@ package org.client.mainCore.ds
             };
             return (csd);
         }
-
-
     }
-}//package org.client.mainCore.ds
+}

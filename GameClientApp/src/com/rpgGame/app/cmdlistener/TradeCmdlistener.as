@@ -14,9 +14,9 @@ package com.rpgGame.app.cmdlistener
 	import app.message.GoodsProto;
 	
 	import org.client.mainCore.bean.BaseBean;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
-	import org.game.netCore.net.BytesUtil;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
+	import org.game.netCore.net_protobuff.BytesUtil;
 	
 	public class TradeCmdlistener extends BaseBean
 	{
@@ -27,32 +27,32 @@ package com.rpgGame.app.cmdlistener
 		
 		override public function start():void
 		{
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_SEND_TRADE_INVITE_FAIL,tradeInviteFail);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_RECEIVE_TRADE_INVITE,receiveTradeInvite);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_SEND_TRADE_INVITE_SUCCESS,tradeInviteSuccess);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_ACCEPT_TRADE_FAIL,acceptTradeFail);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_ACCEPT_TRADE_SUCCESS,acceptTradeSuccess);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_START_TRADING,startTrading);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_OTHER_REJECTED_TRADE,otherRejectedTrade);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_OTHER_ACCEPTED_BUT_YOU_ARE_IN_TRADE,otherAcceptedButYouAreInTrade);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_SET_GOODS_FAIL,setGoodsFail);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_SET_GOODS_SUCCESS,setGoodsSuccess);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_OTHER_SET_GOODS,otherSetGoods);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_REMOVE_GOODS_FAIL,removeGoodsFail);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_REMOVE_GOODS_SUCCESS,removeGoodsSuccess);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_OTHER_REMOVE_GOODS,targetRemoveGoods);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_LOCK_FAIL,lockFail);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_LOCK_SUCCESS,lockSuccess);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_OTHER_LOCKED,targetLock);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_CONFIRM_FAIL,sureFail);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_CONFIRM_SUCCESS,sureSuccess);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_OTHER_CONFIRM,targetSure);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_CANCEL_TRADE,cancelTrade);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_CANCEL_FAIL,cancelFail);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_TRADE_SUCCESS,tradeSuccess);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_SET_MONEY_FAIL,setMoneyFail);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_SET_MONEY_SUCCESS,setMoneySuccess);
-			SocketConnection.addCmdListener(TradeModuleMessages.S2C_OTHER_SET_MONEY,targetSetMoney);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_SEND_TRADE_INVITE_FAIL,tradeInviteFail);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_RECEIVE_TRADE_INVITE,receiveTradeInvite);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_SEND_TRADE_INVITE_SUCCESS,tradeInviteSuccess);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_ACCEPT_TRADE_FAIL,acceptTradeFail);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_ACCEPT_TRADE_SUCCESS,acceptTradeSuccess);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_START_TRADING,startTrading);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_OTHER_REJECTED_TRADE,otherRejectedTrade);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_OTHER_ACCEPTED_BUT_YOU_ARE_IN_TRADE,otherAcceptedButYouAreInTrade);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_SET_GOODS_FAIL,setGoodsFail);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_SET_GOODS_SUCCESS,setGoodsSuccess);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_OTHER_SET_GOODS,otherSetGoods);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_REMOVE_GOODS_FAIL,removeGoodsFail);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_REMOVE_GOODS_SUCCESS,removeGoodsSuccess);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_OTHER_REMOVE_GOODS,targetRemoveGoods);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_LOCK_FAIL,lockFail);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_LOCK_SUCCESS,lockSuccess);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_OTHER_LOCKED,targetLock);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_CONFIRM_FAIL,sureFail);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_CONFIRM_SUCCESS,sureSuccess);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_OTHER_CONFIRM,targetSure);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_CANCEL_TRADE,cancelTrade);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_CANCEL_FAIL,cancelFail);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_TRADE_SUCCESS,tradeSuccess);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_SET_MONEY_FAIL,setMoneyFail);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_SET_MONEY_SUCCESS,setMoneySuccess);
+			SocketConnection_protoBuffer.addCmdListener(TradeModuleMessages.S2C_OTHER_SET_MONEY,targetSetMoney);
 			finish();
 		}
 		/**

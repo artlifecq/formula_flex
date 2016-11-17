@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_TRANING_MOUNT_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountMiscDataProto.can_traning_mount_count", "canTraningMountCount", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_TRANING_MOUNT_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountMiscDataProto.can_traning_mount_count", "canTraningMountCount", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_traning_mount_count$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const UP_OR_DOWN_CD:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountMiscDataProto.up_or_down_cd", "upOrDownCd", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const UP_OR_DOWN_CD:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountMiscDataProto.up_or_down_cd", "upOrDownCd", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var up_or_down_cd$field:int;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MOUNT_LEVEL_CAP_THAN_MASTER:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountMiscDataProto.mount_level_cap_than_master", "mountLevelCapThanMaster", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MOUNT_LEVEL_CAP_THAN_MASTER:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountMiscDataProto.mount_level_cap_than_master", "mountLevelCapThanMaster", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var mount_level_cap_than_master$field:int;
 
@@ -91,7 +91,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAX_HUNGER_DEGREE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountMiscDataProto.max_hunger_degree", "maxHungerDegree", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MAX_HUNGER_DEGREE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountMiscDataProto.max_hunger_degree", "maxHungerDegree", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var max_hunger_degree$field:int;
 
@@ -116,7 +116,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_BREED_LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountMiscDataProto.can_breed_level", "canBreedLevel", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_BREED_LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountMiscDataProto.can_breed_level", "canBreedLevel", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_breed_level$field:int;
 
@@ -141,7 +141,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_BREED_MAX_HUNGRE_DEGREE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountMiscDataProto.can_breed_max_hungre_degree", "canBreedMaxHungreDegree", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_BREED_MAX_HUNGRE_DEGREE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountMiscDataProto.can_breed_max_hungre_degree", "canBreedMaxHungreDegree", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_breed_max_hungre_degree$field:int;
 
@@ -166,7 +166,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const AUTO_DOWN_FROM_MOUNT_HUNGER_DEGREE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountMiscDataProto.auto_down_from_mount_hunger_degree", "autoDownFromMountHungerDegree", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const AUTO_DOWN_FROM_MOUNT_HUNGER_DEGREE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountMiscDataProto.auto_down_from_mount_hunger_degree", "autoDownFromMountHungerDegree", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var auto_down_from_mount_hunger_degree$field:int;
 
@@ -191,7 +191,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const REFINE_COST_BAND_MONEY_BASE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountMiscDataProto.refine_cost_band_money_base", "refineCostBandMoneyBase", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const REFINE_COST_BAND_MONEY_BASE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountMiscDataProto.refine_cost_band_money_base", "refineCostBandMoneyBase", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var refine_cost_band_money_base$field:int;
 
@@ -216,7 +216,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const REFINE_COST_VITALITY_BASE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountMiscDataProto.refine_cost_vitality_base", "refineCostVitalityBase", (12 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const REFINE_COST_VITALITY_BASE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountMiscDataProto.refine_cost_vitality_base", "refineCostVitalityBase", (12 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var refine_cost_vitality_base$field:int;
 
@@ -241,7 +241,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const INHERIT_PER_SPELL_COST_BAND_MONEY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountMiscDataProto.inherit_per_spell_cost_band_money", "inheritPerSpellCostBandMoney", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const INHERIT_PER_SPELL_COST_BAND_MONEY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountMiscDataProto.inherit_per_spell_cost_band_money", "inheritPerSpellCostBandMoney", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var inherit_per_spell_cost_band_money$field:int;
 
@@ -269,43 +269,43 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasCanTraningMountCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, can_traning_mount_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, can_traning_mount_count$field);
 			}
 			if (hasUpOrDownCd) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, up_or_down_cd$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, up_or_down_cd$field);
 			}
 			if (hasMountLevelCapThanMaster) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, mount_level_cap_than_master$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, mount_level_cap_than_master$field);
 			}
 			if (hasMaxHungerDegree) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, max_hunger_degree$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, max_hunger_degree$field);
 			}
 			if (hasCanBreedLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, can_breed_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, can_breed_level$field);
 			}
 			if (hasCanBreedMaxHungreDegree) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, can_breed_max_hungre_degree$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, can_breed_max_hungre_degree$field);
 			}
 			if (hasAutoDownFromMountHungerDegree) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, auto_down_from_mount_hunger_degree$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, auto_down_from_mount_hunger_degree$field);
 			}
 			if (hasRefineCostBandMoneyBase) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, refine_cost_band_money_base$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, refine_cost_band_money_base$field);
 			}
 			if (hasRefineCostVitalityBase) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, refine_cost_vitality_base$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, refine_cost_vitality_base$field);
 			}
 			if (hasInheritPerSpellCostBandMoney) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, inherit_per_spell_cost_band_money$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, inherit_per_spell_cost_band_money$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -327,77 +327,77 @@ package app.message {
 			var refine_cost_vitality_base$count:uint = 0;
 			var inherit_per_spell_cost_band_money$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (can_traning_mount_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountMiscDataProto.canTraningMountCount cannot be set twice.');
 					}
 					++can_traning_mount_count$count;
-					this.canTraningMountCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.canTraningMountCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (up_or_down_cd$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountMiscDataProto.upOrDownCd cannot be set twice.');
 					}
 					++up_or_down_cd$count;
-					this.upOrDownCd = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.upOrDownCd = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (mount_level_cap_than_master$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountMiscDataProto.mountLevelCapThanMaster cannot be set twice.');
 					}
 					++mount_level_cap_than_master$count;
-					this.mountLevelCapThanMaster = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.mountLevelCapThanMaster = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (max_hunger_degree$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountMiscDataProto.maxHungerDegree cannot be set twice.');
 					}
 					++max_hunger_degree$count;
-					this.maxHungerDegree = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.maxHungerDegree = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (can_breed_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountMiscDataProto.canBreedLevel cannot be set twice.');
 					}
 					++can_breed_level$count;
-					this.canBreedLevel = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.canBreedLevel = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 8:
 					if (can_breed_max_hungre_degree$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountMiscDataProto.canBreedMaxHungreDegree cannot be set twice.');
 					}
 					++can_breed_max_hungre_degree$count;
-					this.canBreedMaxHungreDegree = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.canBreedMaxHungreDegree = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 9:
 					if (auto_down_from_mount_hunger_degree$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountMiscDataProto.autoDownFromMountHungerDegree cannot be set twice.');
 					}
 					++auto_down_from_mount_hunger_degree$count;
-					this.autoDownFromMountHungerDegree = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.autoDownFromMountHungerDegree = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 10:
 					if (refine_cost_band_money_base$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountMiscDataProto.refineCostBandMoneyBase cannot be set twice.');
 					}
 					++refine_cost_band_money_base$count;
-					this.refineCostBandMoneyBase = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.refineCostBandMoneyBase = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 12:
 					if (refine_cost_vitality_base$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountMiscDataProto.refineCostVitalityBase cannot be set twice.');
 					}
 					++refine_cost_vitality_base$count;
-					this.refineCostVitalityBase = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.refineCostVitalityBase = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 11:
 					if (inherit_per_spell_cost_band_money$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountMiscDataProto.inheritPerSpellCostBandMoney cannot be set twice.');
 					}
 					++inherit_per_spell_cost_band_money$count;
-					this.inheritPerSpellCostBandMoney = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.inheritPerSpellCostBandMoney = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ORIGIN_RELIVE_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.HeroReliveClientProto.origin_relive_times", "originReliveTimes", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ORIGIN_RELIVE_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.HeroReliveClientProto.origin_relive_times", "originReliveTimes", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var origin_relive_times$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_ORIGIN_RELIVE_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.HeroReliveClientProto.total_origin_relive_times", "totalOriginReliveTimes", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOTAL_ORIGIN_RELIVE_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.HeroReliveClientProto.total_origin_relive_times", "totalOriginReliveTimes", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var total_origin_relive_times$field:int;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ORIGIN_PERFECT_RELIVE_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.HeroReliveClientProto.origin_perfect_relive_times", "originPerfectReliveTimes", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ORIGIN_PERFECT_RELIVE_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.HeroReliveClientProto.origin_perfect_relive_times", "originPerfectReliveTimes", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var origin_perfect_relive_times$field:int;
 
@@ -91,7 +91,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_ORIGIN_PERFECT_RELIVE_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.HeroReliveClientProto.total_origin_perfect_relive_times", "totalOriginPerfectReliveTimes", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOTAL_ORIGIN_PERFECT_RELIVE_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.HeroReliveClientProto.total_origin_perfect_relive_times", "totalOriginPerfectReliveTimes", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var total_origin_perfect_relive_times$field:int;
 
@@ -116,7 +116,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const AUTO_TOWN_RELIVE_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.HeroReliveClientProto.auto_town_relive_time", "autoTownReliveTime", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const AUTO_TOWN_RELIVE_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.HeroReliveClientProto.auto_town_relive_time", "autoTownReliveTime", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var auto_town_relive_time$field:Int64;
 
@@ -139,7 +139,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_XIN_CHUN_GE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.HeroReliveClientProto.can_xin_chun_ge", "canXinChunGe", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_XIN_CHUN_GE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.HeroReliveClientProto.can_xin_chun_ge", "canXinChunGe", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_xin_chun_ge$field:Boolean;
 
@@ -164,7 +164,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_SHANG_BU_QI:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.HeroReliveClientProto.can_shang_bu_qi", "canShangBuQi", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_SHANG_BU_QI:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.HeroReliveClientProto.can_shang_bu_qi", "canShangBuQi", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_shang_bu_qi$field:Boolean;
 
@@ -189,7 +189,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_PAO_DE_KUAI:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.HeroReliveClientProto.can_pao_de_kuai", "canPaoDeKuai", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_PAO_DE_KUAI:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.HeroReliveClientProto.can_pao_de_kuai", "canPaoDeKuai", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_pao_de_kuai$field:Boolean;
 
@@ -214,7 +214,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ORIGIN_RELIVE_DISCOUNT_END_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.HeroReliveClientProto.origin_relive_discount_end_time", "originReliveDiscountEndTime", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ORIGIN_RELIVE_DISCOUNT_END_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.HeroReliveClientProto.origin_relive_discount_end_time", "originReliveDiscountEndTime", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var origin_relive_discount_end_time$field:Int64;
 
@@ -237,7 +237,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ORIGIN_RELIVE_DISCOUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.HeroReliveClientProto.origin_relive_discount", "originReliveDiscount", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ORIGIN_RELIVE_DISCOUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.HeroReliveClientProto.origin_relive_discount", "originReliveDiscount", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var origin_relive_discount$field:int;
 
@@ -262,7 +262,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ORIGIN_PERFECT_RELIVE_DISCOUNT_END_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.HeroReliveClientProto.origin_perfect_relive_discount_end_time", "originPerfectReliveDiscountEndTime", (12 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ORIGIN_PERFECT_RELIVE_DISCOUNT_END_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.HeroReliveClientProto.origin_perfect_relive_discount_end_time", "originPerfectReliveDiscountEndTime", (12 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var origin_perfect_relive_discount_end_time$field:Int64;
 
@@ -285,7 +285,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ORIGIN_PERFECT_RELIVE_DISCOUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.HeroReliveClientProto.origin_perfect_relive_discount", "originPerfectReliveDiscount", (13 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ORIGIN_PERFECT_RELIVE_DISCOUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.HeroReliveClientProto.origin_perfect_relive_discount", "originPerfectReliveDiscount", (13 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var origin_perfect_relive_discount$field:int;
 
@@ -313,51 +313,51 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasOriginReliveTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, origin_relive_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, origin_relive_times$field);
 			}
 			if (hasTotalOriginReliveTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, total_origin_relive_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, total_origin_relive_times$field);
 			}
 			if (hasOriginPerfectReliveTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, origin_perfect_relive_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, origin_perfect_relive_times$field);
 			}
 			if (hasTotalOriginPerfectReliveTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, total_origin_perfect_relive_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, total_origin_perfect_relive_times$field);
 			}
 			if (hasAutoTownReliveTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, auto_town_relive_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, auto_town_relive_time$field);
 			}
 			if (hasCanXinChunGe) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_xin_chun_ge$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_xin_chun_ge$field);
 			}
 			if (hasCanShangBuQi) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_shang_bu_qi$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_shang_bu_qi$field);
 			}
 			if (hasCanPaoDeKuai) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_pao_de_kuai$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_pao_de_kuai$field);
 			}
 			if (hasOriginReliveDiscountEndTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, origin_relive_discount_end_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, origin_relive_discount_end_time$field);
 			}
 			if (hasOriginReliveDiscount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, origin_relive_discount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, origin_relive_discount$field);
 			}
 			if (hasOriginPerfectReliveDiscountEndTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, origin_perfect_relive_discount_end_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, origin_perfect_relive_discount_end_time$field);
 			}
 			if (hasOriginPerfectReliveDiscount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, origin_perfect_relive_discount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, origin_perfect_relive_discount$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -381,91 +381,91 @@ package app.message {
 			var origin_perfect_relive_discount_end_time$count:uint = 0;
 			var origin_perfect_relive_discount$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (origin_relive_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroReliveClientProto.originReliveTimes cannot be set twice.');
 					}
 					++origin_relive_times$count;
-					this.originReliveTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.originReliveTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (total_origin_relive_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroReliveClientProto.totalOriginReliveTimes cannot be set twice.');
 					}
 					++total_origin_relive_times$count;
-					this.totalOriginReliveTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.totalOriginReliveTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (origin_perfect_relive_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroReliveClientProto.originPerfectReliveTimes cannot be set twice.');
 					}
 					++origin_perfect_relive_times$count;
-					this.originPerfectReliveTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.originPerfectReliveTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (total_origin_perfect_relive_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroReliveClientProto.totalOriginPerfectReliveTimes cannot be set twice.');
 					}
 					++total_origin_perfect_relive_times$count;
-					this.totalOriginPerfectReliveTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.totalOriginPerfectReliveTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (auto_town_relive_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroReliveClientProto.autoTownReliveTime cannot be set twice.');
 					}
 					++auto_town_relive_time$count;
-					this.autoTownReliveTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.autoTownReliveTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 7:
 					if (can_xin_chun_ge$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroReliveClientProto.canXinChunGe cannot be set twice.');
 					}
 					++can_xin_chun_ge$count;
-					this.canXinChunGe = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canXinChunGe = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 8:
 					if (can_shang_bu_qi$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroReliveClientProto.canShangBuQi cannot be set twice.');
 					}
 					++can_shang_bu_qi$count;
-					this.canShangBuQi = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canShangBuQi = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 9:
 					if (can_pao_de_kuai$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroReliveClientProto.canPaoDeKuai cannot be set twice.');
 					}
 					++can_pao_de_kuai$count;
-					this.canPaoDeKuai = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canPaoDeKuai = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 10:
 					if (origin_relive_discount_end_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroReliveClientProto.originReliveDiscountEndTime cannot be set twice.');
 					}
 					++origin_relive_discount_end_time$count;
-					this.originReliveDiscountEndTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.originReliveDiscountEndTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 11:
 					if (origin_relive_discount$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroReliveClientProto.originReliveDiscount cannot be set twice.');
 					}
 					++origin_relive_discount$count;
-					this.originReliveDiscount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.originReliveDiscount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 12:
 					if (origin_perfect_relive_discount_end_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroReliveClientProto.originPerfectReliveDiscountEndTime cannot be set twice.');
 					}
 					++origin_perfect_relive_discount_end_time$count;
-					this.originPerfectReliveDiscountEndTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.originPerfectReliveDiscountEndTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 13:
 					if (origin_perfect_relive_discount$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroReliveClientProto.originPerfectReliveDiscount cannot be set twice.');
 					}
 					++origin_perfect_relive_discount$count;
-					this.originPerfectReliveDiscount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.originPerfectReliveDiscount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

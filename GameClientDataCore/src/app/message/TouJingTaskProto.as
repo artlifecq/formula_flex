@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TouJingTaskProto.level", "level", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TouJingTaskProto.level", "level", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const QUALITY:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.TouJingTaskProto.quality", "quality", (2 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Quality);
+		public static const QUALITY:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.TouJingTaskProto.quality", "quality", (2 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Quality);
 
 		private var quality$field:int;
 
@@ -67,7 +67,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_TOU_SUCCESS:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.TouJingTaskProto.is_tou_success", "isTouSuccess", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_TOU_SUCCESS:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.TouJingTaskProto.is_tou_success", "isTouSuccess", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_tou_success$field:Boolean;
 
@@ -92,7 +92,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY_SEQUENCE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TouJingTaskProto.country_sequence", "countrySequence", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COUNTRY_SEQUENCE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TouJingTaskProto.country_sequence", "countrySequence", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var country_sequence$field:int;
 
@@ -117,7 +117,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_IN_TOU_JING:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.TouJingTaskProto.is_in_tou_jing", "isInTouJing", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_IN_TOU_JING:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.TouJingTaskProto.is_in_tou_jing", "isInTouJing", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_in_tou_jing$field:Boolean;
 
@@ -145,23 +145,23 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level$field);
 			}
 			if (hasQuality) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, quality$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, quality$field);
 			}
 			if (hasIsTouSuccess) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_tou_success$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_tou_success$field);
 			}
 			if (hasCountrySequence) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, country_sequence$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, country_sequence$field);
 			}
 			if (hasIsInTouJing) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_in_tou_jing$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_in_tou_jing$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -178,42 +178,42 @@ package app.message {
 			var country_sequence$count:uint = 0;
 			var is_in_tou_jing$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TouJingTaskProto.level cannot be set twice.');
 					}
 					++level$count;
-					this.level = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.level = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (quality$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TouJingTaskProto.quality cannot be set twice.');
 					}
 					++quality$count;
-					this.quality = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.quality = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 3:
 					if (is_tou_success$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TouJingTaskProto.isTouSuccess cannot be set twice.');
 					}
 					++is_tou_success$count;
-					this.isTouSuccess = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isTouSuccess = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 4:
 					if (country_sequence$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TouJingTaskProto.countrySequence cannot be set twice.');
 					}
 					++country_sequence$count;
-					this.countrySequence = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.countrySequence = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (is_in_tou_jing$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TouJingTaskProto.isInTouJing cannot be set twice.');
 					}
 					++is_in_tou_jing$count;
-					this.isInTouJing = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isInTouJing = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

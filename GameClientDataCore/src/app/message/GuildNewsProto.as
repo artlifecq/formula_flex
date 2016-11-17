@@ -22,7 +22,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.GuildNewsProto.time", "time", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.GuildNewsProto.time", "time", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var time$field:Int64;
 
@@ -45,7 +45,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SET_POS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GuildNewsProto.set_pos", "setPos", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildNewsProto.SetPosProto; });
+		public static const SET_POS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GuildNewsProto.set_pos", "setPos", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildNewsProto.SetPosProto; });
 
 		private var set_pos$field:app.message.GuildNewsProto.SetPosProto;
 
@@ -68,7 +68,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const JOIN_GUILD:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GuildNewsProto.join_guild", "joinGuild", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildNewsProto.JoinGuildProto; });
+		public static const JOIN_GUILD:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GuildNewsProto.join_guild", "joinGuild", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildNewsProto.JoinGuildProto; });
 
 		private var join_guild$field:app.message.GuildNewsProto.JoinGuildProto;
 
@@ -91,7 +91,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEAVE_GUILD:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GuildNewsProto.leave_guild", "leaveGuild", (13 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildNewsProto.LeaveGuildProto; });
+		public static const LEAVE_GUILD:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GuildNewsProto.leave_guild", "leaveGuild", (13 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildNewsProto.LeaveGuildProto; });
 
 		private var leave_guild$field:app.message.GuildNewsProto.LeaveGuildProto;
 
@@ -114,7 +114,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DONATE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GuildNewsProto.donate", "donate", (14 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildNewsProto.DonateProto; });
+		public static const DONATE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GuildNewsProto.donate", "donate", (14 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildNewsProto.DonateProto; });
 
 		private var donate$field:app.message.GuildNewsProto.DonateProto;
 
@@ -137,7 +137,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CREATE_GUILD:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GuildNewsProto.create_guild", "createGuild", (15 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildNewsProto.CreateGuildProto; });
+		public static const CREATE_GUILD:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GuildNewsProto.create_guild", "createGuild", (15 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildNewsProto.CreateGuildProto; });
 
 		private var create_guild$field:app.message.GuildNewsProto.CreateGuildProto;
 
@@ -160,7 +160,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const UPGRADE_LEVEL:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GuildNewsProto.upgrade_level", "upgradeLevel", (16 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildNewsProto.UpgradeLevelProto; });
+		public static const UPGRADE_LEVEL:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GuildNewsProto.upgrade_level", "upgradeLevel", (16 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildNewsProto.UpgradeLevelProto; });
 
 		private var upgrade_level$field:app.message.GuildNewsProto.UpgradeLevelProto;
 
@@ -183,7 +183,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEMOTE_LEVEL:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GuildNewsProto.demote_level", "demoteLevel", (17 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildNewsProto.DemoteLevelProto; });
+		public static const DEMOTE_LEVEL:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GuildNewsProto.demote_level", "demoteLevel", (17 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildNewsProto.DemoteLevelProto; });
 
 		private var demote_level$field:app.message.GuildNewsProto.DemoteLevelProto;
 
@@ -206,7 +206,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAINTAIN:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GuildNewsProto.maintain", "maintain", (18 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildNewsProto.MaintainProto; });
+		public static const MAINTAIN:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GuildNewsProto.maintain", "maintain", (18 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildNewsProto.MaintainProto; });
 
 		private var maintain$field:app.message.GuildNewsProto.MaintainProto;
 
@@ -232,39 +232,39 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, time$field);
 			}
 			if (hasSetPos) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, set_pos$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, set_pos$field);
 			}
 			if (hasJoinGuild) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, join_guild$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, join_guild$field);
 			}
 			if (hasLeaveGuild) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, leave_guild$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, leave_guild$field);
 			}
 			if (hasDonate) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 14);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, donate$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, donate$field);
 			}
 			if (hasCreateGuild) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 15);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, create_guild$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, create_guild$field);
 			}
 			if (hasUpgradeLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 16);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, upgrade_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, upgrade_level$field);
 			}
 			if (hasDemoteLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 17);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, demote_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, demote_level$field);
 			}
 			if (hasMaintain) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 18);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, maintain$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, maintain$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -285,14 +285,14 @@ package app.message {
 			var demote_level$count:uint = 0;
 			var maintain$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildNewsProto.time cannot be set twice.');
 					}
 					++time$count;
-					this.time = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.time = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 10:
 					if (set_pos$count != 0) {
@@ -300,7 +300,7 @@ package app.message {
 					}
 					++set_pos$count;
 					this.setPos = new app.message.GuildNewsProto.SetPosProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.setPos);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.setPos);
 					break;
 				case 12:
 					if (join_guild$count != 0) {
@@ -308,7 +308,7 @@ package app.message {
 					}
 					++join_guild$count;
 					this.joinGuild = new app.message.GuildNewsProto.JoinGuildProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.joinGuild);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.joinGuild);
 					break;
 				case 13:
 					if (leave_guild$count != 0) {
@@ -316,7 +316,7 @@ package app.message {
 					}
 					++leave_guild$count;
 					this.leaveGuild = new app.message.GuildNewsProto.LeaveGuildProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.leaveGuild);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.leaveGuild);
 					break;
 				case 14:
 					if (donate$count != 0) {
@@ -324,7 +324,7 @@ package app.message {
 					}
 					++donate$count;
 					this.donate = new app.message.GuildNewsProto.DonateProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.donate);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.donate);
 					break;
 				case 15:
 					if (create_guild$count != 0) {
@@ -332,7 +332,7 @@ package app.message {
 					}
 					++create_guild$count;
 					this.createGuild = new app.message.GuildNewsProto.CreateGuildProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.createGuild);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.createGuild);
 					break;
 				case 16:
 					if (upgrade_level$count != 0) {
@@ -340,7 +340,7 @@ package app.message {
 					}
 					++upgrade_level$count;
 					this.upgradeLevel = new app.message.GuildNewsProto.UpgradeLevelProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.upgradeLevel);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.upgradeLevel);
 					break;
 				case 17:
 					if (demote_level$count != 0) {
@@ -348,7 +348,7 @@ package app.message {
 					}
 					++demote_level$count;
 					this.demoteLevel = new app.message.GuildNewsProto.DemoteLevelProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.demoteLevel);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.demoteLevel);
 					break;
 				case 18:
 					if (maintain$count != 0) {
@@ -356,7 +356,7 @@ package app.message {
 					}
 					++maintain$count;
 					this.maintain = new app.message.GuildNewsProto.MaintainProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.maintain);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.maintain);
 					break;
 				default:
 					super.readUnknown(input, tag);

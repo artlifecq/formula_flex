@@ -56,7 +56,7 @@ package com.rpgGame.app.manager.familyWar
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 	
 	import utils.TimerServer;
 

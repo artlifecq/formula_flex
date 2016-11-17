@@ -81,7 +81,7 @@ package com.rpgGame.app.data
 	import app.message.Config;
 	import app.message.ServiceConfig;
 	
-	import org.game.netCore.net.BytesUtil;
+	import org.game.netCore.net_protobuff.BytesUtil;
 
 	/**
 	 * 配置数据解析模块，这个模块只提供数据的解析，不提供数据的存储，具体的数据存储到各自模块中

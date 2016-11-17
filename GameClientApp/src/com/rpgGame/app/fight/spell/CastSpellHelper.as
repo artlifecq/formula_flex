@@ -42,7 +42,7 @@ package com.rpgGame.app.fight.spell
 	import away3d.pathFinding.DistrictWithPath;
 
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
@@ -53,10 +53,21 @@ package com.rpgGame.app.fight.spell
 	 */
 	public class CastSpellHelper
 	{
+		/**
+		 *  投放技能失败
+		 */		
 		private static const CASE_STATE_FAIL : int = 0;
+		/**
+		 * 投放技能不在释放范围
+		 */		
 		private static const CASE_STATE_NOT_IN_RELEASE_RANGE : int = 1;
+		/**
+		 * 投放技能成功
+		 */		
 		private static const CASE_STATE_SUCCEED : int = 2;
-
+		/**
+		 * 偏差；误差；背离 范围 
+		 */
 		private static const DEVIATION_RANGE : int = 50;
 
 		private static var _caseSpell : SpellProto = null;

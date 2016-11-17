@@ -13,8 +13,8 @@ package com.rpgGame.app.cmdlistener
 	import app.message.VehiclePathDataProto;
 
 	import org.client.mainCore.bean.BaseBean;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
@@ -32,10 +32,10 @@ package com.rpgGame.app.cmdlistener
 
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(NpcModuleMessages.S2C_ON_CLICK_NPC, onClickNpc);
-			SocketConnection.addCmdListener(NpcModuleMessages.S2C_ON_CLICK_NPC_FAIL, onClickNpcFail);
-			SocketConnection.addCmdListener(NpcModuleMessages.S2C_VEHICLE_PLAYER, onVehiclePlayer);
-			SocketConnection.addCmdListener(NpcModuleMessages.S2C_VEHICLE_PLAYER_FAIL, onVehiclePlayerFail);
+			SocketConnection_protoBuffer.addCmdListener(NpcModuleMessages.S2C_ON_CLICK_NPC, onClickNpc);
+			SocketConnection_protoBuffer.addCmdListener(NpcModuleMessages.S2C_ON_CLICK_NPC_FAIL, onClickNpcFail);
+			SocketConnection_protoBuffer.addCmdListener(NpcModuleMessages.S2C_VEHICLE_PLAYER, onVehiclePlayer);
+			SocketConnection_protoBuffer.addCmdListener(NpcModuleMessages.S2C_VEHICLE_PLAYER_FAIL, onVehiclePlayerFail);
 
 			finish();
 		}

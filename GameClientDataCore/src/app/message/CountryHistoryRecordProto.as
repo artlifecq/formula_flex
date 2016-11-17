@@ -25,7 +25,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryHistoryRecordProto.time", "time", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryHistoryRecordProto.time", "time", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var time$field:Int64;
 
@@ -48,7 +48,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.CountryHistoryRecordProto.type", "type", (2 << 3) | com.netease.protobuf.WireType.VARINT, app.message.CountryHistoryType);
+		public static const TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.CountryHistoryRecordProto.type", "type", (2 << 3) | com.netease.protobuf.WireType.VARINT, app.message.CountryHistoryType);
 
 		private var type$field:int;
 
@@ -75,7 +75,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY_WAR_FIRST:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryHistoryRecordProto.country_war_first", "countryWarFirst", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryHistoryRecordProto.PersonalCountryWarFirstProto; });
+		public static const COUNTRY_WAR_FIRST:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryHistoryRecordProto.country_war_first", "countryWarFirst", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryHistoryRecordProto.PersonalCountryWarFirstProto; });
 
 		private var country_war_first$field:app.message.CountryHistoryRecordProto.PersonalCountryWarFirstProto;
 
@@ -98,7 +98,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GUILD_TOP_RANK:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryHistoryRecordProto.guild_top_rank", "guildTopRank", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryHistoryRecordProto.GuildTopRankProto; });
+		public static const GUILD_TOP_RANK:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryHistoryRecordProto.guild_top_rank", "guildTopRank", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryHistoryRecordProto.GuildTopRankProto; });
 
 		private var guild_top_rank$field:app.message.CountryHistoryRecordProto.GuildTopRankProto;
 
@@ -121,7 +121,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY_JING_SHU:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryHistoryRecordProto.country_jing_shu", "countryJingShu", (13 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryHistoryRecordProto.CountryJingShuRecordProto; });
+		public static const COUNTRY_JING_SHU:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryHistoryRecordProto.country_jing_shu", "countryJingShu", (13 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryHistoryRecordProto.CountryJingShuRecordProto; });
 
 		private var country_jing_shu$field:app.message.CountryHistoryRecordProto.CountryJingShuRecordProto;
 
@@ -144,7 +144,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY_KING_WAR_FIRST:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryHistoryRecordProto.country_king_war_first", "countryKingWarFirst", (14 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryHistoryRecordProto.CountryKingWarFirstProto; });
+		public static const COUNTRY_KING_WAR_FIRST:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryHistoryRecordProto.country_king_war_first", "countryKingWarFirst", (14 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryHistoryRecordProto.CountryKingWarFirstProto; });
 
 		private var country_king_war_first$field:app.message.CountryHistoryRecordProto.CountryKingWarFirstProto;
 
@@ -167,7 +167,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY_KING_WAR_REPLACE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryHistoryRecordProto.country_king_war_replace", "countryKingWarReplace", (15 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryHistoryRecordProto.CountryKingWarReplaceProto; });
+		public static const COUNTRY_KING_WAR_REPLACE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryHistoryRecordProto.country_king_war_replace", "countryKingWarReplace", (15 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryHistoryRecordProto.CountryKingWarReplaceProto; });
 
 		private var country_king_war_replace$field:app.message.CountryHistoryRecordProto.CountryKingWarReplaceProto;
 
@@ -190,7 +190,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY_WAR_ATTACK_WIN:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryHistoryRecordProto.country_war_attack_win", "countryWarAttackWin", (16 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryHistoryRecordProto.CountryWarAttackWinProto; });
+		public static const COUNTRY_WAR_ATTACK_WIN:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryHistoryRecordProto.country_war_attack_win", "countryWarAttackWin", (16 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryHistoryRecordProto.CountryWarAttackWinProto; });
 
 		private var country_war_attack_win$field:app.message.CountryHistoryRecordProto.CountryWarAttackWinProto;
 
@@ -213,7 +213,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY_WAR_ATTACK_FAIL:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryHistoryRecordProto.country_war_attack_fail", "countryWarAttackFail", (17 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryHistoryRecordProto.CountryWarAttackFailProto; });
+		public static const COUNTRY_WAR_ATTACK_FAIL:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryHistoryRecordProto.country_war_attack_fail", "countryWarAttackFail", (17 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryHistoryRecordProto.CountryWarAttackFailProto; });
 
 		private var country_war_attack_fail$field:app.message.CountryHistoryRecordProto.CountryWarAttackFailProto;
 
@@ -236,7 +236,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY_WAR_DEFENCE_WIN:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryHistoryRecordProto.country_war_defence_win", "countryWarDefenceWin", (18 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryHistoryRecordProto.CountryWarDefenceWinProto; });
+		public static const COUNTRY_WAR_DEFENCE_WIN:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryHistoryRecordProto.country_war_defence_win", "countryWarDefenceWin", (18 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryHistoryRecordProto.CountryWarDefenceWinProto; });
 
 		private var country_war_defence_win$field:app.message.CountryHistoryRecordProto.CountryWarDefenceWinProto;
 
@@ -259,7 +259,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY_WAR_DEFENCE_FAIL:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryHistoryRecordProto.country_war_defence_fail", "countryWarDefenceFail", (19 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryHistoryRecordProto.CountryWarDefenceFailProto; });
+		public static const COUNTRY_WAR_DEFENCE_FAIL:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryHistoryRecordProto.country_war_defence_fail", "countryWarDefenceFail", (19 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryHistoryRecordProto.CountryWarDefenceFailProto; });
 
 		private var country_war_defence_fail$field:app.message.CountryHistoryRecordProto.CountryWarDefenceFailProto;
 
@@ -282,7 +282,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EMPEROR_WAR_WIN:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryHistoryRecordProto.emperor_war_win", "emperorWarWin", (20 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryHistoryRecordProto.EmperorWarWinProto; });
+		public static const EMPEROR_WAR_WIN:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryHistoryRecordProto.emperor_war_win", "emperorWarWin", (20 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryHistoryRecordProto.EmperorWarWinProto; });
 
 		private var emperor_war_win$field:app.message.CountryHistoryRecordProto.EmperorWarWinProto;
 
@@ -308,51 +308,51 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, time$field);
 			}
 			if (hasType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, type$field);
 			}
 			if (hasCountryWarFirst) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, country_war_first$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, country_war_first$field);
 			}
 			if (hasGuildTopRank) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, guild_top_rank$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, guild_top_rank$field);
 			}
 			if (hasCountryJingShu) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, country_jing_shu$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, country_jing_shu$field);
 			}
 			if (hasCountryKingWarFirst) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 14);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, country_king_war_first$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, country_king_war_first$field);
 			}
 			if (hasCountryKingWarReplace) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 15);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, country_king_war_replace$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, country_king_war_replace$field);
 			}
 			if (hasCountryWarAttackWin) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 16);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, country_war_attack_win$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, country_war_attack_win$field);
 			}
 			if (hasCountryWarAttackFail) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 17);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, country_war_attack_fail$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, country_war_attack_fail$field);
 			}
 			if (hasCountryWarDefenceWin) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 18);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, country_war_defence_win$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, country_war_defence_win$field);
 			}
 			if (hasCountryWarDefenceFail) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 19);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, country_war_defence_fail$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, country_war_defence_fail$field);
 			}
 			if (hasEmperorWarWin) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 20);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, emperor_war_win$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, emperor_war_win$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -376,21 +376,21 @@ package app.message {
 			var country_war_defence_fail$count:uint = 0;
 			var emperor_war_win$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryHistoryRecordProto.time cannot be set twice.');
 					}
 					++time$count;
-					this.time = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.time = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryHistoryRecordProto.type cannot be set twice.');
 					}
 					++type$count;
-					this.type = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.type = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 11:
 					if (country_war_first$count != 0) {
@@ -398,7 +398,7 @@ package app.message {
 					}
 					++country_war_first$count;
 					this.countryWarFirst = new app.message.CountryHistoryRecordProto.PersonalCountryWarFirstProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.countryWarFirst);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.countryWarFirst);
 					break;
 				case 12:
 					if (guild_top_rank$count != 0) {
@@ -406,7 +406,7 @@ package app.message {
 					}
 					++guild_top_rank$count;
 					this.guildTopRank = new app.message.CountryHistoryRecordProto.GuildTopRankProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.guildTopRank);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.guildTopRank);
 					break;
 				case 13:
 					if (country_jing_shu$count != 0) {
@@ -414,7 +414,7 @@ package app.message {
 					}
 					++country_jing_shu$count;
 					this.countryJingShu = new app.message.CountryHistoryRecordProto.CountryJingShuRecordProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.countryJingShu);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.countryJingShu);
 					break;
 				case 14:
 					if (country_king_war_first$count != 0) {
@@ -422,7 +422,7 @@ package app.message {
 					}
 					++country_king_war_first$count;
 					this.countryKingWarFirst = new app.message.CountryHistoryRecordProto.CountryKingWarFirstProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.countryKingWarFirst);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.countryKingWarFirst);
 					break;
 				case 15:
 					if (country_king_war_replace$count != 0) {
@@ -430,7 +430,7 @@ package app.message {
 					}
 					++country_king_war_replace$count;
 					this.countryKingWarReplace = new app.message.CountryHistoryRecordProto.CountryKingWarReplaceProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.countryKingWarReplace);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.countryKingWarReplace);
 					break;
 				case 16:
 					if (country_war_attack_win$count != 0) {
@@ -438,7 +438,7 @@ package app.message {
 					}
 					++country_war_attack_win$count;
 					this.countryWarAttackWin = new app.message.CountryHistoryRecordProto.CountryWarAttackWinProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.countryWarAttackWin);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.countryWarAttackWin);
 					break;
 				case 17:
 					if (country_war_attack_fail$count != 0) {
@@ -446,7 +446,7 @@ package app.message {
 					}
 					++country_war_attack_fail$count;
 					this.countryWarAttackFail = new app.message.CountryHistoryRecordProto.CountryWarAttackFailProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.countryWarAttackFail);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.countryWarAttackFail);
 					break;
 				case 18:
 					if (country_war_defence_win$count != 0) {
@@ -454,7 +454,7 @@ package app.message {
 					}
 					++country_war_defence_win$count;
 					this.countryWarDefenceWin = new app.message.CountryHistoryRecordProto.CountryWarDefenceWinProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.countryWarDefenceWin);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.countryWarDefenceWin);
 					break;
 				case 19:
 					if (country_war_defence_fail$count != 0) {
@@ -462,7 +462,7 @@ package app.message {
 					}
 					++country_war_defence_fail$count;
 					this.countryWarDefenceFail = new app.message.CountryHistoryRecordProto.CountryWarDefenceFailProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.countryWarDefenceFail);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.countryWarDefenceFail);
 					break;
 				case 20:
 					if (emperor_war_win$count != 0) {
@@ -470,7 +470,7 @@ package app.message {
 					}
 					++emperor_war_win$count;
 					this.emperorWarWin = new app.message.CountryHistoryRecordProto.EmperorWarWinProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.emperorWarWin);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.emperorWarWin);
 					break;
 				default:
 					super.readUnknown(input, tag);

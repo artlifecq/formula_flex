@@ -17,9 +17,9 @@ package com.rpgGame.app.cmdlistener
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
-	import org.game.netCore.net.BytesUtil;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
+	import org.game.netCore.net_protobuff.BytesUtil;
 
 	/**
 	 *
@@ -37,19 +37,19 @@ package com.rpgGame.app.cmdlistener
 
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(EquipmentModuleMessages.S2C_BUILD_EQUIPMENT,onBuildEquipMent);
-			SocketConnection.addCmdListener(EquipmentModuleMessages.S2C_BUILD_EQUIPMENT_FAIL,onBuildEquipFail);
-			SocketConnection.addCmdListener(EquipmentModuleMessages.S2C_BUILD_EQUIPMENT_BROADCAST,onBuildEquipBroadcast);
-			SocketConnection.addCmdListener(EquipmentModuleMessages.S2C_COMBINE_MATERIAL,onCombineMaterial);
-			SocketConnection.addCmdListener(EquipmentModuleMessages.S2C_COMBINE_MATERIAL_FAIL,onCombineMaterialFail);
-			SocketConnection.addCmdListener(EquipmentModuleMessages.S2C_COMBINE_EQUIPMENT,onCombineEquipment);
-			SocketConnection.addCmdListener(EquipmentModuleMessages.S2C_COMBINE_EQUIPMENT_FAIL,onCombineEquipmentFail);
-			SocketConnection.addCmdListener(EquipmentModuleMessages.S2C_DESTROY_EQUIPMENT,onDestoryEquipment);
-			SocketConnection.addCmdListener(EquipmentModuleMessages.S2C_DESTROY_EQUIPMENT_FAIL,onDestoryEquipmentFail);
-			SocketConnection.addCmdListener(EquipmentModuleMessages.S2C_CHANGE_EQUIPMENT_GENERAL,onChangeEquipmentGeneral);
-			SocketConnection.addCmdListener(EquipmentModuleMessages.S2C_CHANGE_EQUIPMENT_GENERAL_FAIl,onChangeEquipmentGeneralFail);
-			SocketConnection.addCmdListener(EquipmentModuleMessages.S2C_REFINE_EQUIPMENT,onEquipmentRefine);
-			SocketConnection.addCmdListener(EquipmentModuleMessages.S2C_REFINE_EQUIPMENT_FAIL,onEquipmentRefineFail);
+			SocketConnection_protoBuffer.addCmdListener(EquipmentModuleMessages.S2C_BUILD_EQUIPMENT,onBuildEquipMent);
+			SocketConnection_protoBuffer.addCmdListener(EquipmentModuleMessages.S2C_BUILD_EQUIPMENT_FAIL,onBuildEquipFail);
+			SocketConnection_protoBuffer.addCmdListener(EquipmentModuleMessages.S2C_BUILD_EQUIPMENT_BROADCAST,onBuildEquipBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(EquipmentModuleMessages.S2C_COMBINE_MATERIAL,onCombineMaterial);
+			SocketConnection_protoBuffer.addCmdListener(EquipmentModuleMessages.S2C_COMBINE_MATERIAL_FAIL,onCombineMaterialFail);
+			SocketConnection_protoBuffer.addCmdListener(EquipmentModuleMessages.S2C_COMBINE_EQUIPMENT,onCombineEquipment);
+			SocketConnection_protoBuffer.addCmdListener(EquipmentModuleMessages.S2C_COMBINE_EQUIPMENT_FAIL,onCombineEquipmentFail);
+			SocketConnection_protoBuffer.addCmdListener(EquipmentModuleMessages.S2C_DESTROY_EQUIPMENT,onDestoryEquipment);
+			SocketConnection_protoBuffer.addCmdListener(EquipmentModuleMessages.S2C_DESTROY_EQUIPMENT_FAIL,onDestoryEquipmentFail);
+			SocketConnection_protoBuffer.addCmdListener(EquipmentModuleMessages.S2C_CHANGE_EQUIPMENT_GENERAL,onChangeEquipmentGeneral);
+			SocketConnection_protoBuffer.addCmdListener(EquipmentModuleMessages.S2C_CHANGE_EQUIPMENT_GENERAL_FAIl,onChangeEquipmentGeneralFail);
+			SocketConnection_protoBuffer.addCmdListener(EquipmentModuleMessages.S2C_REFINE_EQUIPMENT,onEquipmentRefine);
+			SocketConnection_protoBuffer.addCmdListener(EquipmentModuleMessages.S2C_REFINE_EQUIPMENT_FAIL,onEquipmentRefineFail);
 			
 			finish();
 		}

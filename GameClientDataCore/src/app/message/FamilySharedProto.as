@@ -20,7 +20,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FAMILY_NAME:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.FamilySharedProto.family_name", "familyName", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const FAMILY_NAME:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.FamilySharedProto.family_name", "familyName", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var family_name$field:flash.utils.ByteArray;
 
@@ -43,7 +43,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FamilySharedProto.country", "country", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COUNTRY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FamilySharedProto.country", "country", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var country$field:int;
 
@@ -70,7 +70,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HALL_LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FamilySharedProto.hall_level", "hallLevel", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const HALL_LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FamilySharedProto.hall_level", "hallLevel", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var hall_level$field:int;
 
@@ -95,7 +95,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COLLAGE_LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FamilySharedProto.collage_level", "collageLevel", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COLLAGE_LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FamilySharedProto.collage_level", "collageLevel", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var collage_level$field:int;
 
@@ -120,7 +120,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BIAO_LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FamilySharedProto.biao_level", "biaoLevel", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BIAO_LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FamilySharedProto.biao_level", "biaoLevel", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var biao_level$field:int;
 
@@ -145,7 +145,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ANIMAL_BAR_LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FamilySharedProto.animal_bar_level", "animalBarLevel", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ANIMAL_BAR_LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FamilySharedProto.animal_bar_level", "animalBarLevel", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var animal_bar_level$field:int;
 
@@ -170,7 +170,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ANIMAL_BAR_STAT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilySharedProto.animal_bar_stat", "animalBarStat", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyAnimalBarStatProto; });
+		public static const ANIMAL_BAR_STAT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilySharedProto.animal_bar_stat", "animalBarStat", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyAnimalBarStatProto; });
 
 		private var animal_bar_stat$field:app.message.FamilyAnimalBarStatProto;
 
@@ -193,7 +193,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STORAGE_STAT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilySharedProto.storage_stat", "storageStat", (8 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyStorageStatProto; });
+		public static const STORAGE_STAT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilySharedProto.storage_stat", "storageStat", (8 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyStorageStatProto; });
 
 		private var storage_stat$field:app.message.FamilyStorageStatProto;
 
@@ -216,7 +216,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_AUTO_ACCEPT_JOIN_REQUEST:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.FamilySharedProto.is_auto_accept_join_request", "isAutoAcceptJoinRequest", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_AUTO_ACCEPT_JOIN_REQUEST:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.FamilySharedProto.is_auto_accept_join_request", "isAutoAcceptJoinRequest", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_auto_accept_join_request$field:Boolean;
 
@@ -241,7 +241,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MEMBERS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.FamilySharedProto.members", "members", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyMemberProto; });
+		public static const MEMBERS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.FamilySharedProto.members", "members", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyMemberProto; });
 
 		[ArrayElementType("app.message.FamilyMemberProto")]
 		public var members:Array = [];
@@ -249,7 +249,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const OFFICE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilySharedProto.office", "office", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyOfficeProto; });
+		public static const OFFICE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilySharedProto.office", "office", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyOfficeProto; });
 
 		private var office$field:app.message.FamilyOfficeProto;
 
@@ -272,7 +272,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CREATE_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.FamilySharedProto.create_time", "createTime", (12 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CREATE_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.FamilySharedProto.create_time", "createTime", (12 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var create_time$field:Int64;
 
@@ -295,7 +295,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ANNOUNCEMENT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilySharedProto.announcement", "announcement", (13 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyAnnoucementProto; });
+		public static const ANNOUNCEMENT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilySharedProto.announcement", "announcement", (13 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyAnnoucementProto; });
 
 		private var announcement$field:app.message.FamilyAnnoucementProto;
 
@@ -318,7 +318,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GUILD_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.FamilySharedProto.guild_name", "guildName", (14 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const GUILD_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.FamilySharedProto.guild_name", "guildName", (14 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var guild_name$field:String;
 
@@ -344,59 +344,59 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasFamilyName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, family_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, family_name$field);
 			}
 			if (hasCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, country$field);
 			}
 			if (hasHallLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, hall_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, hall_level$field);
 			}
 			if (hasCollageLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, collage_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, collage_level$field);
 			}
 			if (hasBiaoLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, biao_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, biao_level$field);
 			}
 			if (hasAnimalBarLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, animal_bar_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, animal_bar_level$field);
 			}
 			if (hasAnimalBarStat) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, animal_bar_stat$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, animal_bar_stat$field);
 			}
 			if (hasStorageStat) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, storage_stat$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, storage_stat$field);
 			}
 			if (hasIsAutoAcceptJoinRequest) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_auto_accept_join_request$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_auto_accept_join_request$field);
 			}
 			for (var members$index:uint = 0; members$index < this.members.length; ++members$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.members[members$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.members[members$index]);
 			}
 			if (hasOffice) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, office$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, office$field);
 			}
 			if (hasCreateTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, create_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, create_time$field);
 			}
 			if (hasAnnouncement) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, announcement$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, announcement$field);
 			}
 			if (hasGuildName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 14);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, guild_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, guild_name$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -421,49 +421,49 @@ package app.message {
 			var announcement$count:uint = 0;
 			var guild_name$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (family_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilySharedProto.familyName cannot be set twice.');
 					}
 					++family_name$count;
-					this.familyName = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.familyName = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 2:
 					if (country$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilySharedProto.country cannot be set twice.');
 					}
 					++country$count;
-					this.country = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.country = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (hall_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilySharedProto.hallLevel cannot be set twice.');
 					}
 					++hall_level$count;
-					this.hallLevel = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.hallLevel = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (collage_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilySharedProto.collageLevel cannot be set twice.');
 					}
 					++collage_level$count;
-					this.collageLevel = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.collageLevel = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (biao_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilySharedProto.biaoLevel cannot be set twice.');
 					}
 					++biao_level$count;
-					this.biaoLevel = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.biaoLevel = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (animal_bar_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilySharedProto.animalBarLevel cannot be set twice.');
 					}
 					++animal_bar_level$count;
-					this.animalBarLevel = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.animalBarLevel = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (animal_bar_stat$count != 0) {
@@ -471,7 +471,7 @@ package app.message {
 					}
 					++animal_bar_stat$count;
 					this.animalBarStat = new app.message.FamilyAnimalBarStatProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.animalBarStat);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.animalBarStat);
 					break;
 				case 8:
 					if (storage_stat$count != 0) {
@@ -479,17 +479,17 @@ package app.message {
 					}
 					++storage_stat$count;
 					this.storageStat = new app.message.FamilyStorageStatProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.storageStat);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.storageStat);
 					break;
 				case 9:
 					if (is_auto_accept_join_request$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilySharedProto.isAutoAcceptJoinRequest cannot be set twice.');
 					}
 					++is_auto_accept_join_request$count;
-					this.isAutoAcceptJoinRequest = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isAutoAcceptJoinRequest = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 10:
-					this.members.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.FamilyMemberProto()));
+					this.members.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.FamilyMemberProto()));
 					break;
 				case 11:
 					if (office$count != 0) {
@@ -497,14 +497,14 @@ package app.message {
 					}
 					++office$count;
 					this.office = new app.message.FamilyOfficeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.office);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.office);
 					break;
 				case 12:
 					if (create_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilySharedProto.createTime cannot be set twice.');
 					}
 					++create_time$count;
-					this.createTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.createTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 13:
 					if (announcement$count != 0) {
@@ -512,14 +512,14 @@ package app.message {
 					}
 					++announcement$count;
 					this.announcement = new app.message.FamilyAnnoucementProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.announcement);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.announcement);
 					break;
 				case 14:
 					if (guild_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilySharedProto.guildName cannot be set twice.');
 					}
 					++guild_name$count;
-					this.guildName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.guildName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

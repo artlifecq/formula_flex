@@ -765,7 +765,9 @@ package com.game.engine3D.scene.render.vo
 			{
 				material.copyFrom(orgMaterial);
 				if (GlobalConfig.use25DMap)
+				{
 					material.blendMode = BlendMode.LAYER;
+				}
 				material.colorTransform = _independentColorTransform;
 				material.diffuseAcc = orgMaterial.diffuseAcc;
 				material.lightPicker = orgMaterial.lightPicker ? _lightPicker : null;

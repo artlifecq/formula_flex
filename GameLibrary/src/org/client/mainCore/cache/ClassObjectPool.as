@@ -1,15 +1,16 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.cache
+﻿package org.client.mainCore.cache
 {
-    import __AS3__.vec.Vector;
-    import org.client.mainCore.cache.interfaces.ICacheInfo;
-    import flash.utils.Timer;
-    import org.client.mainCore.cache.interfaces.IRecycle;
-    import flash.utils.getTimer;
     import flash.display.BitmapData;
-    import flash.utils.getQualifiedClassName;
-    import org.client.mainCore.cache.interfaces.IReset;
     import flash.events.TimerEvent;
+    import flash.utils.Timer;
+    import flash.utils.getQualifiedClassName;
+    import flash.utils.getTimer;
+    
+    import __AS3__.vec.Vector;
+    
+    import org.client.mainCore.cache.interfaces.ICacheInfo;
+    import org.client.mainCore.cache.interfaces.IRecycle;
+    import org.client.mainCore.cache.interfaces.IReset;
 
     public class ClassObjectPool 
     {
@@ -40,38 +41,38 @@ package org.client.mainCore.cache
 
         public function putInPool(obj:Object, key:String=null):void
         {
-            var clsName = null;
-            if ((obj == null))
+            var clsName:String = null;
+            if (obj == null)
             {
                 return;
-            };
-            if ((obj is Class))
+            }
+            if (obj is Class)
             {
-                throw (new Error("只能放入class创建出来的实例对象,不能放入class"));
-            };
-            if ((objLs.indexOf(obj) >= 0))
+                throw new Error("只能放入class创建出来的实例对象,不能放入class");
+            }
+            if (objLs.indexOf(obj) >= 0)
             {
                 return;
-            };
-            if (((key) && (key.length)))
+            }
+            if (key && key.length)
             {
                 clsName = key;
             }
             else
             {
                 clsName = changeClassName(obj);
-            };
+            }
             var arr:Array = cacheMap[clsName];
-            if (!(arr))
+            if (!arr)
             {
-                var _local6 = [];
+                var _local6:Array = [];
                 cacheMap[clsName] = _local6;
                 arr = _local6;
-            };
-            if ((obj is IRecycle))
+            }
+            if (obj is IRecycle)
             {
                 (obj as IRecycle).dispose();
-            };
+            }
             var poolInf:ICacheInfo = newPoolInf(clsName, obj);
             arr.push(poolInf);
             cacheLink.push(poolInf);
@@ -87,21 +88,21 @@ package org.client.mainCore.cache
             poolInf.setExpired(expired);
             poolInf.setUpdateTime(getTimer());
             poolInf.setCount(0);
-            return (poolInf);
+            return poolInf;
         }
 
         protected function lruRemoveCache():void
         {
-            var resObj = null;
+            var resObj:ICacheInfo = null;
             while (cacheLink.length > capacity)
             {
                 resObj = cacheLink[(cacheLink.length - 1)];
-                if ((((resObj.getBody() is BitmapData)) && (diposeBitmapDate)))
+                if (resObj.getBody() is BitmapData && diposeBitmapDate)
                 {
                     (resObj.getBody() as BitmapData).dispose();
-                };
+                }
                 removePoolInf(resObj);
-            };
+            }
         }
 
         private function removePoolInf(resObj:ICacheInfo):void
@@ -110,67 +111,67 @@ package org.client.mainCore.cache
             var clsName:String = resObj.getKeyName();
             resObj.dispose();
             var arr:Array = cacheMap[clsName];
-            if (((!(arr)) && ((arr.length == 0))))
+            if (!arr && arr.length == 0)
             {
-                (trace("无此缓存，删除失败"));
+                trace("无此缓存，删除失败");
                 return;
-            };
+            }
             arr.splice(arr.indexOf(resObj), 1)[0];
             objLs.splice(objLs.indexOf(resObj.getBody()), 1)[0];
             var linkId:int = cacheLink.indexOf(resObj);
             cacheLink.splice(linkId, 1)[0];
-            if ((arr.length == 0))
+            if (arr.length == 0)
             {
                 cacheMap[clsName] = null;
                 delete cacheMap[clsName];
-            };
+            }
         }
 
         private function changeClassName(classKey:Object):String
         {
-            if ((((classKey is String)) || ((classKey is Number))))
+            if (classKey is String || classKey is Number)
             {
-                return (classKey);
-            };
-            return (getQualifiedClassName(classKey));
+                return String(classKey);
+            }
+            return getQualifiedClassName(classKey);
         }
 
         public function getObj(claKey:Object, key:String=null)
         {
-            var clsName = null;
+            var clsName:String = null;
             var resObj = null;
             var res:*;
-            if ((key == null))
+            if (key == null)
             {
                 clsName = changeClassName(claKey);
             }
             else
             {
                 clsName = key;
-            };
+            }
             var arr:Array = cacheMap[clsName];
-            if (((arr) && ((arr.length > 0))))
+            if (arr && arr.length > 0)
             {
                 resObj = arr[0];
                 res = resObj.getBody();
                 removePoolInf(resObj);
-                return (res);
-            };
-            return (null);
+                return res;
+            }
+            return null;
         }
 
-        public function getAndCreateObj(claKey:Class, params:Array=null)
+        public function getAndCreateObj(claKey:Class, params:Array=null):*
         {
-            var res = getObj(claKey);
-            if (!(res))
+            var res:* = getObj(claKey);
+            if (!res)
             {
-                return (construct(claKey, params));
-            };
-            if ((res is IReset))
+                return construct(claKey, params);
+            }
+            if (res is IReset)
             {
                 (res as IReset).reset();
-            };
-            return (res);
+            }
+            return res;
         }
 
         public function clearExpired():void
@@ -303,7 +304,5 @@ package org.client.mainCore.cache
         {
             clearExpired();
         }
-
-
     }
-}//package org.client.mainCore.cache
+}

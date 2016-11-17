@@ -2,7 +2,7 @@ package com.rpgGame.coreData.role
 {
 	import com.rpgGame.coreData.type.AvatarUrl;
 	
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *

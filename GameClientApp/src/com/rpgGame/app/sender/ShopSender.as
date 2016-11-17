@@ -4,7 +4,7 @@ package com.rpgGame.app.sender
 	
 	import app.cmd.ShopModuleMessages;
 	
-	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	
 	import utils.TimerServer;
 
@@ -34,7 +34,7 @@ package com.rpgGame.app.sender
 			
 			_bytes.clear();
 			_bytes.writeVarint32(shopId);
-			SocketConnection.send(ShopModuleMessages.C2S_OPEN_NPC_SHOP,_bytes);
+			SocketConnection_protoBuffer.send(ShopModuleMessages.C2S_OPEN_NPC_SHOP,_bytes);
 		}
 		
 		/**
@@ -52,7 +52,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint32(buyBackId);
 			_bytes.writeVarint32(gridId);
-			SocketConnection.send(ShopModuleMessages.C2S_BUY_BACK_GOODS,_bytes);
+			SocketConnection_protoBuffer.send(ShopModuleMessages.C2S_BUY_BACK_GOODS,_bytes);
 		}
 		
 		/**
@@ -63,7 +63,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeByte(gridid);
-			SocketConnection.send(ShopModuleMessages.C2S_SELL_GOODS, _bytes);
+			SocketConnection_protoBuffer.send(ShopModuleMessages.C2S_SELL_GOODS, _bytes);
 		}
 		
 		/**
@@ -90,7 +90,7 @@ package com.rpgGame.app.sender
 			{
 				_bytes.writeVarint64(npcId);
 			}
-			SocketConnection.send(ShopModuleMessages.C2S_BUY_SHOP_GOODS, _bytes);
+			SocketConnection_protoBuffer.send(ShopModuleMessages.C2S_BUY_SHOP_GOODS, _bytes);
 		}
 		
 		
@@ -110,7 +110,7 @@ package com.rpgGame.app.sender
 			_bytes.writeByte(type);
 			_bytes.writeVarint32(goodsId);
 			_bytes.writeVarint32(count);
-			SocketConnection.send(ShopModuleMessages.C2S_BUY_JINZI_SHOP_GOODS, _bytes);
+			SocketConnection_protoBuffer.send(ShopModuleMessages.C2S_BUY_JINZI_SHOP_GOODS, _bytes);
 		}
 		
 		/**
@@ -127,7 +127,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint32(index);
 			_bytes.writeVarint32(goodsId);
 			_bytes.writeBoolean(usebind);
-			SocketConnection.send(ShopModuleMessages.C2S_REPAIR_GOODS, _bytes);
+			SocketConnection_protoBuffer.send(ShopModuleMessages.C2S_REPAIR_GOODS, _bytes);
 		}
 		
 		/**
@@ -144,7 +144,7 @@ package com.rpgGame.app.sender
 			}
 			_bytes.clear();
 			_bytes.writeBoolean(usebind);
-			SocketConnection.send(ShopModuleMessages.C2S_REPAIR_GOODS_ALL, _bytes);
+			SocketConnection_protoBuffer.send(ShopModuleMessages.C2S_REPAIR_GOODS_ALL, _bytes);
 		}
 	}
 }

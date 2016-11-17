@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.cache.interfaces
+﻿package org.client.mainCore.cache.interfaces
 {
     public /*dynamic*/ interface ICachePool extends IRecycle 
     {
@@ -17,4 +16,4 @@ package org.client.mainCore.cache.interfaces
         function get size():int;
 
     }
-}//package org.client.mainCore.cache.interfaces
+}

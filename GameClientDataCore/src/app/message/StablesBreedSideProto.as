@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HERO_ID:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.StablesBreedSideProto.hero_id", "heroId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const HERO_ID:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.StablesBreedSideProto.hero_id", "heroId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var hero_id$field:Int64;
 
@@ -38,7 +38,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EQUIPED_MOUNT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.StablesBreedSideProto.equiped_mount", "equipedMount", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipedMountProto; });
+		public static const EQUIPED_MOUNT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.StablesBreedSideProto.equiped_mount", "equipedMount", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipedMountProto; });
 
 		private var equiped_mount$field:app.message.EquipedMountProto;
 
@@ -61,7 +61,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_LOCKED:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.StablesBreedSideProto.is_locked", "isLocked", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_LOCKED:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.StablesBreedSideProto.is_locked", "isLocked", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_locked$field:Boolean;
 
@@ -91,15 +91,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasHeroId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, hero_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, hero_id$field);
 			}
 			if (hasEquipedMount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, equiped_mount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, equiped_mount$field);
 			}
 			if (hasIsLocked) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_locked$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_locked$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -114,14 +114,14 @@ package app.message {
 			var equiped_mount$count:uint = 0;
 			var is_locked$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (hero_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StablesBreedSideProto.heroId cannot be set twice.');
 					}
 					++hero_id$count;
-					this.heroId = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.heroId = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (equiped_mount$count != 0) {
@@ -129,14 +129,14 @@ package app.message {
 					}
 					++equiped_mount$count;
 					this.equipedMount = new app.message.EquipedMountProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.equipedMount);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.equipedMount);
 					break;
 				case 3:
 					if (is_locked$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StablesBreedSideProto.isLocked cannot be set twice.');
 					}
 					++is_locked$count;
-					this.isLocked = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isLocked = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const VIP_EXP:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.VipModuleObjProto.vip_exp", "vipExp", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const VIP_EXP:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.VipModuleObjProto.vip_exp", "vipExp", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var vip_exp$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COLLECTED_VIP_PRIZE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.VipModuleObjProto.collected_vip_prize", "collectedVipPrize", (30 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COLLECTED_VIP_PRIZE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.VipModuleObjProto.collected_vip_prize", "collectedVipPrize", (30 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var collected_vip_prize$field:int;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NEXT_COLLECT_VIP_WEEKLY_PRIZE_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.VipModuleObjProto.next_collect_vip_weekly_prize_time", "nextCollectVipWeeklyPrizeTime", (31 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const NEXT_COLLECT_VIP_WEEKLY_PRIZE_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.VipModuleObjProto.next_collect_vip_weekly_prize_time", "nextCollectVipWeeklyPrizeTime", (31 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var next_collect_vip_weekly_prize_time$field:Int64;
 
@@ -92,15 +92,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasVipExp) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, vip_exp$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, vip_exp$field);
 			}
 			if (hasCollectedVipPrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 30);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, collected_vip_prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, collected_vip_prize$field);
 			}
 			if (hasNextCollectVipWeeklyPrizeTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 31);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, next_collect_vip_weekly_prize_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, next_collect_vip_weekly_prize_time$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -115,28 +115,28 @@ package app.message {
 			var collected_vip_prize$count:uint = 0;
 			var next_collect_vip_weekly_prize_time$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (vip_exp$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VipModuleObjProto.vipExp cannot be set twice.');
 					}
 					++vip_exp$count;
-					this.vipExp = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.vipExp = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 30:
 					if (collected_vip_prize$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VipModuleObjProto.collectedVipPrize cannot be set twice.');
 					}
 					++collected_vip_prize$count;
-					this.collectedVipPrize = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.collectedVipPrize = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 31:
 					if (next_collect_vip_weekly_prize_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: VipModuleObjProto.nextCollectVipWeeklyPrizeTime cannot be set twice.');
 					}
 					++next_collect_vip_weekly_prize_time$count;
-					this.nextCollectVipWeeklyPrizeTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.nextCollectVipWeeklyPrizeTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

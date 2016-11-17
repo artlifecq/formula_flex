@@ -22,8 +22,8 @@ package com.rpgGame.app.cmdlistener
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
@@ -36,31 +36,31 @@ package com.rpgGame.app.cmdlistener
 	{
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_BASIC_RELATION, onBasicRelation);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_REPLY_RELATION_DETAIL, onRelationDetail);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_REPLY_RELATIONS_ERROR, onRelationFail);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_SEND_ADD_FRIEND_SUCCESS, onAddFriendSuccess);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_FRIEND_ADD_FAIL, onRecFriendAddFail);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_ADD_FRIEND_WAIT_REPLY, onRecOtherAddedYouAsFriend);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_REPLY_ADD_FRIEND_FAIL, onRecReplyAddFriendFail);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_REFUSE_ADD_FRIEND_SUCCESS, onRefuseAddFriend);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_OTHER_REFUSE_ADD_FRIEND, onOtherRefuseAddFriend);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_AGREE_ADD_FRIEND_SUCCESS, onAgreeAddFriend);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_OTHER_AGREE_ADD_FRIEND, onOtherAgreeAddFriend);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_FRIEND_REMOVED, onRecFriendRemoved);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_OTHER_REMOVED_YOU_AS_FRIEND, onRecOtherRemovedYouAsFriend);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_FRIEND_REMOVE_FAIL, onRecFriendRemoveFail);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_BLACK_ADDED, onRecBlackAdded);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_BLACK_ADD_FAIL, onRecBlackAddFail);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_BLACK_REMOVED, onRecBlackRemoved);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_BLACK_REMOVE_FAIL, onRecBlackRemoveFail);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_RELATION_DETAIL_CHANGED, onRecRelationDetailChanged);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_RELATION_OFFLINE, onRecRelationOffLine);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_ENEMY_REMOVED, onEnemyRemoved);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_ENEMY_ADD, onEnemyAdd);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_ENEMY_UPDATE, onEnemyUpdate);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_EDITOR_MOOD, editorMood);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_EDITOR_MOOD_FAIL, editorMoodFail);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_BASIC_RELATION, onBasicRelation);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_REPLY_RELATION_DETAIL, onRelationDetail);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_REPLY_RELATIONS_ERROR, onRelationFail);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_SEND_ADD_FRIEND_SUCCESS, onAddFriendSuccess);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_FRIEND_ADD_FAIL, onRecFriendAddFail);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_ADD_FRIEND_WAIT_REPLY, onRecOtherAddedYouAsFriend);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_REPLY_ADD_FRIEND_FAIL, onRecReplyAddFriendFail);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_REFUSE_ADD_FRIEND_SUCCESS, onRefuseAddFriend);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_OTHER_REFUSE_ADD_FRIEND, onOtherRefuseAddFriend);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_AGREE_ADD_FRIEND_SUCCESS, onAgreeAddFriend);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_OTHER_AGREE_ADD_FRIEND, onOtherAgreeAddFriend);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_FRIEND_REMOVED, onRecFriendRemoved);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_OTHER_REMOVED_YOU_AS_FRIEND, onRecOtherRemovedYouAsFriend);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_FRIEND_REMOVE_FAIL, onRecFriendRemoveFail);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_BLACK_ADDED, onRecBlackAdded);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_BLACK_ADD_FAIL, onRecBlackAddFail);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_BLACK_REMOVED, onRecBlackRemoved);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_BLACK_REMOVE_FAIL, onRecBlackRemoveFail);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_RELATION_DETAIL_CHANGED, onRecRelationDetailChanged);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_RELATION_OFFLINE, onRecRelationOffLine);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_ENEMY_REMOVED, onEnemyRemoved);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_ENEMY_ADD, onEnemyAdd);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_ENEMY_UPDATE, onEnemyUpdate);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_EDITOR_MOOD, editorMood);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_EDITOR_MOOD_FAIL, editorMoodFail);
 
 			finish();
 		}

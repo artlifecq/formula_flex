@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BATCH_NUMBER:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.DungeonBatchInfoProto.batch_number", "batchNumber", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BATCH_NUMBER:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.DungeonBatchInfoProto.batch_number", "batchNumber", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var batch_number$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CURRENT_MONSTER_TYPE_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.DungeonBatchInfoProto.current_monster_type_id", "currentMonsterTypeId", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CURRENT_MONSTER_TYPE_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.DungeonBatchInfoProto.current_monster_type_id", "currentMonsterTypeId", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var current_monster_type_id$field:int;
 
@@ -67,7 +67,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NEXT_MONSTER_TYPE_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.DungeonBatchInfoProto.next_monster_type_id", "nextMonsterTypeId", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const NEXT_MONSTER_TYPE_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.DungeonBatchInfoProto.next_monster_type_id", "nextMonsterTypeId", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var next_monster_type_id$field:int;
 
@@ -92,7 +92,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CURRENT_BATCH_PRIZE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.DungeonBatchInfoProto.current_batch_prize", "currentBatchPrize", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
+		public static const CURRENT_BATCH_PRIZE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.DungeonBatchInfoProto.current_batch_prize", "currentBatchPrize", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
 
 		private var current_batch_prize$field:app.message.PrizeProto;
 
@@ -115,7 +115,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EXPIRE_DURATION:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.DungeonBatchInfoProto.expire_duration", "expireDuration", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const EXPIRE_DURATION:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.DungeonBatchInfoProto.expire_duration", "expireDuration", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var expire_duration$field:Int64;
 
@@ -141,23 +141,23 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasBatchNumber) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, batch_number$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, batch_number$field);
 			}
 			if (hasCurrentMonsterTypeId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, current_monster_type_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, current_monster_type_id$field);
 			}
 			if (hasNextMonsterTypeId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, next_monster_type_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, next_monster_type_id$field);
 			}
 			if (hasCurrentBatchPrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, current_batch_prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, current_batch_prize$field);
 			}
 			if (hasExpireDuration) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, expire_duration$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, expire_duration$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -174,28 +174,28 @@ package app.message {
 			var current_batch_prize$count:uint = 0;
 			var expire_duration$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (batch_number$count != 0) {
 						throw new flash.errors.IOError('Bad data format: DungeonBatchInfoProto.batchNumber cannot be set twice.');
 					}
 					++batch_number$count;
-					this.batchNumber = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.batchNumber = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (current_monster_type_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: DungeonBatchInfoProto.currentMonsterTypeId cannot be set twice.');
 					}
 					++current_monster_type_id$count;
-					this.currentMonsterTypeId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.currentMonsterTypeId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (next_monster_type_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: DungeonBatchInfoProto.nextMonsterTypeId cannot be set twice.');
 					}
 					++next_monster_type_id$count;
-					this.nextMonsterTypeId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.nextMonsterTypeId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (current_batch_prize$count != 0) {
@@ -203,14 +203,14 @@ package app.message {
 					}
 					++current_batch_prize$count;
 					this.currentBatchPrize = new app.message.PrizeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.currentBatchPrize);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.currentBatchPrize);
 					break;
 				case 5:
 					if (expire_duration$count != 0) {
 						throw new flash.errors.IOError('Bad data format: DungeonBatchInfoProto.expireDuration cannot be set twice.');
 					}
 					++expire_duration$count;
-					this.expireDuration = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.expireDuration = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

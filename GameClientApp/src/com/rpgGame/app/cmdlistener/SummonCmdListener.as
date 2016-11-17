@@ -9,8 +9,8 @@ package com.rpgGame.app.cmdlistener
 	import app.message.SummonTokenGoodsDataProto.TokenType;
 	
 	import org.client.mainCore.bean.BaseBean;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
@@ -28,9 +28,9 @@ package com.rpgGame.app.cmdlistener
 		
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(SummonModuleMessages.S2C_FAMILY_LEADER_SUMMON, onFamilyLeaderSummon);
-			SocketConnection.addCmdListener(SummonModuleMessages.S2C_COUNTRY_OFFICER_SUMMON, onCountryOfficerSummon);
-			SocketConnection.addCmdListener(SummonModuleMessages.S2C_COUNTRY_OFFICER_SUMMON_FAIL, onCountryOfficerSummonFail);
+			SocketConnection_protoBuffer.addCmdListener(SummonModuleMessages.S2C_FAMILY_LEADER_SUMMON, onFamilyLeaderSummon);
+			SocketConnection_protoBuffer.addCmdListener(SummonModuleMessages.S2C_COUNTRY_OFFICER_SUMMON, onCountryOfficerSummon);
+			SocketConnection_protoBuffer.addCmdListener(SummonModuleMessages.S2C_COUNTRY_OFFICER_SUMMON_FAIL, onCountryOfficerSummonFail);
 
 			finish();
 		}

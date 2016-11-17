@@ -55,8 +55,8 @@ package com.rpgGame.app.cmdlistener.country
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 * 国战协议处理
@@ -71,53 +71,53 @@ package com.rpgGame.app.cmdlistener.country
 
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_COUNTRY_WAR_INFO, onRecCountryWarInfo);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_COUNTRY_WAR_FAIL, onRecCountryWarFail);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_COUNTRY_WAR_DECLARE_WAR, onRecCountryWarDeclareWar);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_COUNTRY_WAR_DECLARE_WAR_BROADCAST, onRecCountryWarDeclareWarBroadcast);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_COUNTRY_WAR_START, onCountryWarStart);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_COUNTRY_WAR_END, onRecCountryWarEnd);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_OTHER_COUNTRY_WAR_END, onRecOtherCountryWarEnd);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_COUNTRY_WAR_STAUS, onRecCountryWarStatus);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_COUNTRY_WAR_RANK_LIST, onRecCountryWarRankList);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_RESPONSE_COUNTRY_WAR_SELF_RANK, onRecCountryWarSelfRank);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_ADD_COUNTRY_WAR_MONSTER, onRecAddCountryWarMonster);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_COUNTRY_WAR_MONSTER_DEAD, onRecMonsterDead);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_GET_COUNTRY_WAR_DETAIL, onCountryWarDetail);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_JOIN_COUNTRY_WAR, onJoinCountryWar);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_ENTER_ADMIRE_AREA, onEndterAdmireArea);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_ADMIRE_COUNTRY_KING, onAdmireCountryKing);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_FAIL_COUNTRY_OFFICE_ADMIRE, onFailCountryOfficeAdmire);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_FAIL_COUNTRY_MEMBER_ADMIRE, onFailCountryMemberAdmire);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_SELF_WAR_INFO, onSelfWarInfo);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_CONTINUE_KILL_HERO, onContinueKillHero);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_INTERRUPT_CONTINUE_KILL_HERO, onInterruptContinueKillHero);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_CONTINUE_BEEN_KILLED_WHEN_NOT_KILL_OTHER, onContinueBeenKilledWhenNotKillOther);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_COUNTRY_OFFICER_BEEN_KILLED, onCountryOfficerBeenKilled);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_ADD_ZHAN_CHE, onAddZhanChe);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_ACCEPT_ZHAN_CHE, onAcceptZhanChe);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_UP_OR_DOWN_FROM_ZHAN_CHE_BROADCAST, onUpOrDownFromZhanCheBroadcast);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_DOWN_FROM_ZHAN_CHE, onDownFromZhanChe);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_OLD_DRIVER_TAKE_ME, onOldDriverTakeMe);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_OLD_DRIVER_BYE, onOldDriverBye);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_TAKE_ZHAN_CHE, onTakeZhanChe);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_GET_OFF_ZHAN_CHE, onGetOffZhanChe);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_ZHAN_CHE_CHANGE_SCENE, onZhanCheChangeScene);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_ZHAN_CHE_SCENE_LOADED, onZhanCheSceneLoaded);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_ZHAN_CHE_MEMBER_CHANGED, onZhanCheMemberChanged);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_SUPPORT, onSupport);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_POINT_CHANGED, onPointChanged);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_ENTER_WATCH_MODE, onEnterWatchMode);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_ENTER_WATCH_SCENE, onEnterWatchScene);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_ENTER_WATCH_SCENE_FAIL_AND_RETURN_TARGET_INFO, onEnterWatchSceneFailAndReturnTargetInfo);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_ENTER_WATCH_SCENE_FAIL, onEnterWatchSceneFail);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_LEAVE_WATCH_SCENE, onLeaveWatchScene);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_CHANGE_WATCH_POS, onChangeWatchPos);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_GET_HERO_POSITION, onGetHeroPosition);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_TRY_OPEN_OR_CLOSE_DAN_MU, onTryOpenOrCloseDanMu);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_SEND_DAN_MU, onSendDanMu);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_SEND_DAN_MU_BROADCAST, onSendDanMuBroadcast);
-			SocketConnection.addCmdListener(CountryWarModuleMessages.S2C_HAS_ADMIRE, onHasAdmire);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_COUNTRY_WAR_INFO, onRecCountryWarInfo);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_COUNTRY_WAR_FAIL, onRecCountryWarFail);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_COUNTRY_WAR_DECLARE_WAR, onRecCountryWarDeclareWar);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_COUNTRY_WAR_DECLARE_WAR_BROADCAST, onRecCountryWarDeclareWarBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_COUNTRY_WAR_START, onCountryWarStart);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_COUNTRY_WAR_END, onRecCountryWarEnd);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_OTHER_COUNTRY_WAR_END, onRecOtherCountryWarEnd);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_COUNTRY_WAR_STAUS, onRecCountryWarStatus);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_COUNTRY_WAR_RANK_LIST, onRecCountryWarRankList);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_RESPONSE_COUNTRY_WAR_SELF_RANK, onRecCountryWarSelfRank);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_ADD_COUNTRY_WAR_MONSTER, onRecAddCountryWarMonster);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_COUNTRY_WAR_MONSTER_DEAD, onRecMonsterDead);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_GET_COUNTRY_WAR_DETAIL, onCountryWarDetail);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_JOIN_COUNTRY_WAR, onJoinCountryWar);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_ENTER_ADMIRE_AREA, onEndterAdmireArea);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_ADMIRE_COUNTRY_KING, onAdmireCountryKing);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_FAIL_COUNTRY_OFFICE_ADMIRE, onFailCountryOfficeAdmire);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_FAIL_COUNTRY_MEMBER_ADMIRE, onFailCountryMemberAdmire);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_SELF_WAR_INFO, onSelfWarInfo);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_CONTINUE_KILL_HERO, onContinueKillHero);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_INTERRUPT_CONTINUE_KILL_HERO, onInterruptContinueKillHero);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_CONTINUE_BEEN_KILLED_WHEN_NOT_KILL_OTHER, onContinueBeenKilledWhenNotKillOther);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_COUNTRY_OFFICER_BEEN_KILLED, onCountryOfficerBeenKilled);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_ADD_ZHAN_CHE, onAddZhanChe);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_ACCEPT_ZHAN_CHE, onAcceptZhanChe);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_UP_OR_DOWN_FROM_ZHAN_CHE_BROADCAST, onUpOrDownFromZhanCheBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_DOWN_FROM_ZHAN_CHE, onDownFromZhanChe);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_OLD_DRIVER_TAKE_ME, onOldDriverTakeMe);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_OLD_DRIVER_BYE, onOldDriverBye);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_TAKE_ZHAN_CHE, onTakeZhanChe);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_GET_OFF_ZHAN_CHE, onGetOffZhanChe);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_ZHAN_CHE_CHANGE_SCENE, onZhanCheChangeScene);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_ZHAN_CHE_SCENE_LOADED, onZhanCheSceneLoaded);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_ZHAN_CHE_MEMBER_CHANGED, onZhanCheMemberChanged);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_SUPPORT, onSupport);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_POINT_CHANGED, onPointChanged);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_ENTER_WATCH_MODE, onEnterWatchMode);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_ENTER_WATCH_SCENE, onEnterWatchScene);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_ENTER_WATCH_SCENE_FAIL_AND_RETURN_TARGET_INFO, onEnterWatchSceneFailAndReturnTargetInfo);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_ENTER_WATCH_SCENE_FAIL, onEnterWatchSceneFail);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_LEAVE_WATCH_SCENE, onLeaveWatchScene);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_CHANGE_WATCH_POS, onChangeWatchPos);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_GET_HERO_POSITION, onGetHeroPosition);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_TRY_OPEN_OR_CLOSE_DAN_MU, onTryOpenOrCloseDanMu);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_SEND_DAN_MU, onSendDanMu);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_SEND_DAN_MU_BROADCAST, onSendDanMuBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(CountryWarModuleMessages.S2C_HAS_ADMIRE, onHasAdmire);
 
 			finish();
 		}

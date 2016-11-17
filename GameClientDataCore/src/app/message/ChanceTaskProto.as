@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BASE_TASK:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.ChanceTaskProto.base_task", "baseTask", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TaskProto; });
+		public static const BASE_TASK:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.ChanceTaskProto.base_task", "baseTask", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TaskProto; });
 
 		private var base_task$field:app.message.TaskProto;
 
@@ -38,7 +38,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SWALLOW_PERCENT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChanceTaskProto.swallow_percent", "swallowPercent", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SWALLOW_PERCENT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChanceTaskProto.swallow_percent", "swallowPercent", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var swallow_percent$field:int;
 
@@ -65,7 +65,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const QUALITY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChanceTaskProto.quality", "quality", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const QUALITY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChanceTaskProto.quality", "quality", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var quality$field:int;
 
@@ -90,7 +90,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HEAD_IMAGE:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.ChanceTaskProto.head_image", "headImage", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const HEAD_IMAGE:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.ChanceTaskProto.head_image", "headImage", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var head_image$field:String;
 
@@ -116,19 +116,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasBaseTask) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, base_task$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, base_task$field);
 			}
 			if (hasSwallowPercent) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, swallow_percent$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, swallow_percent$field);
 			}
 			if (hasQuality) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, quality$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, quality$field);
 			}
 			if (hasHeadImage) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, head_image$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, head_image$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -144,7 +144,7 @@ package app.message {
 			var quality$count:uint = 0;
 			var head_image$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (base_task$count != 0) {
@@ -152,28 +152,28 @@ package app.message {
 					}
 					++base_task$count;
 					this.baseTask = new app.message.TaskProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.baseTask);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.baseTask);
 					break;
 				case 2:
 					if (swallow_percent$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChanceTaskProto.swallowPercent cannot be set twice.');
 					}
 					++swallow_percent$count;
-					this.swallowPercent = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.swallowPercent = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (quality$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChanceTaskProto.quality cannot be set twice.');
 					}
 					++quality$count;
-					this.quality = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.quality = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (head_image$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ChanceTaskProto.headImage cannot be set twice.');
 					}
 					++head_image$count;
-					this.headImage = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.headImage = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

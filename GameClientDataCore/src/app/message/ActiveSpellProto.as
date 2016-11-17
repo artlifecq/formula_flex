@@ -1,13 +1,18 @@
 package app.message {
-	import com.netease.protobuf.*;
-	use namespace com.netease.protobuf.used_by_generated_code;
-	import com.netease.protobuf.fieldDescriptors.*;
-	import flash.utils.Endian;
-	import flash.utils.IDataInput;
-	import flash.utils.IDataOutput;
-	import flash.utils.IExternalizable;
+	import com.netease.protobuf.Message;
+	import com.netease.protobuf.ReadUtils;
+	import com.netease.protobuf.WireType;
+	import com.netease.protobuf.WriteUtils;
+	import com.netease.protobuf.WritingBuffer;
+	import com.netease.protobuf.used_by_generated_code;
+	import com.netease.protobuf.fieldDescriptors.FieldDescriptor_TYPE_BOOL;
+	import com.netease.protobuf.fieldDescriptors.FieldDescriptor_TYPE_INT32;
+	import com.netease.protobuf.fieldDescriptors.RepeatedFieldDescriptor_TYPE_MESSAGE;
+	
 	import flash.errors.IOError;
-	import app.message.SpellProto;
+	import flash.utils.IDataInput;
+
+	use namespace com.netease.protobuf.used_by_generated_code;
 	// @@protoc_insertion_point(imports)
 
 	// @@protoc_insertion_point(class_metadata)
@@ -15,7 +20,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SPELL_EFFECT_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ActiveSpellProto.spell_effect_id", "spellEffectId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SPELL_EFFECT_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ActiveSpellProto.spell_effect_id", "spellEffectId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var spell_effect_id$field:int;
 
@@ -42,7 +47,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CD:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ActiveSpellProto.cd", "cd", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CD:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ActiveSpellProto.cd", "cd", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var cd$field:int;
 
@@ -67,7 +72,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GCD_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ActiveSpellProto.gcd_id", "gcdId", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const GCD_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ActiveSpellProto.gcd_id", "gcdId", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var gcd_id$field:int;
 
@@ -92,7 +97,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAST_TIME:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ActiveSpellProto.cast_time", "castTime", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAST_TIME:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ActiveSpellProto.cast_time", "castTime", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var cast_time$field:int;
 
@@ -117,7 +122,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MANA_COST:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ActiveSpellProto.mana_cost", "manaCost", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MANA_COST:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ActiveSpellProto.mana_cost", "manaCost", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var mana_cost$field:int;
 
@@ -142,7 +147,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TARGET_TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ActiveSpellProto.target_type", "targetType", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TARGET_TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ActiveSpellProto.target_type", "targetType", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var target_type$field:int;
 
@@ -167,7 +172,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SPELL_SHAPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ActiveSpellProto.spell_shape", "spellShape", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SPELL_SHAPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ActiveSpellProto.spell_shape", "spellShape", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var spell_shape$field:int;
 
@@ -192,7 +197,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RELEASE_RANGE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ActiveSpellProto.release_range", "releaseRange", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RELEASE_RANGE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ActiveSpellProto.release_range", "releaseRange", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var release_range$field:int;
 
@@ -217,7 +222,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HURT_RANGE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ActiveSpellProto.hurt_range", "hurtRange", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const HURT_RANGE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ActiveSpellProto.hurt_range", "hurtRange", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var hurt_range$field:int;
 
@@ -242,7 +247,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ANGLE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ActiveSpellProto.angle", "angle", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ANGLE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ActiveSpellProto.angle", "angle", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var angle$field:int;
 
@@ -267,7 +272,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RELATE_SPELLS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.ActiveSpellProto.relate_spells", "relateSpells", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpellProto; });
+		public static const RELATE_SPELLS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.ActiveSpellProto.relate_spells", "relateSpells", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpellProto; });
 
 		[ArrayElementType("app.message.SpellProto")]
 		public var relateSpells:Array = [];
@@ -275,7 +280,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_LOCKING_SPELL:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.ActiveSpellProto.is_locking_spell", "isLockingSpell", (13 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_LOCKING_SPELL:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.ActiveSpellProto.is_locking_spell", "isLockingSpell", (13 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_locking_spell$field:Boolean;
 
@@ -300,7 +305,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_ALLOW_AUTO_COMBAT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.ActiveSpellProto.is_allow_auto_combat", "isAllowAutoCombat", (14 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_ALLOW_AUTO_COMBAT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.ActiveSpellProto.is_allow_auto_combat", "isAllowAutoCombat", (14 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_allow_auto_combat$field:Boolean;
 
@@ -325,7 +330,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_RELEASE_AT_MOUSE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.ActiveSpellProto.is_release_at_mouse", "isReleaseAtMouse", (15 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_RELEASE_AT_MOUSE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.ActiveSpellProto.is_release_at_mouse", "isReleaseAtMouse", (15 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_release_at_mouse$field:Boolean;
 
@@ -350,7 +355,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_RELEASE_ONLY_UP_MOUNT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.ActiveSpellProto.is_release_only_up_mount", "isReleaseOnlyUpMount", (16 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_RELEASE_ONLY_UP_MOUNT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.ActiveSpellProto.is_release_only_up_mount", "isReleaseOnlyUpMount", (16 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_release_only_up_mount$field:Boolean;
 
@@ -378,63 +383,63 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasSpellEffectId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, spell_effect_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, spell_effect_id$field);
 			}
 			if (hasCd) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, cd$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, cd$field);
 			}
 			if (hasGcdId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, gcd_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, gcd_id$field);
 			}
 			if (hasCastTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, cast_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, cast_time$field);
 			}
 			if (hasManaCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, mana_cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, mana_cost$field);
 			}
 			if (hasTargetType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, target_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, target_type$field);
 			}
 			if (hasSpellShape) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, spell_shape$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, spell_shape$field);
 			}
 			if (hasReleaseRange) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, release_range$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, release_range$field);
 			}
 			if (hasHurtRange) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, hurt_range$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, hurt_range$field);
 			}
 			if (hasAngle) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, angle$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, angle$field);
 			}
 			for (var relateSpells$index:uint = 0; relateSpells$index < this.relateSpells.length; ++relateSpells$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.relateSpells[relateSpells$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.relateSpells[relateSpells$index]);
 			}
 			if (hasIsLockingSpell) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_locking_spell$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_locking_spell$field);
 			}
 			if (hasIsAllowAutoCombat) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 14);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_allow_auto_combat$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_allow_auto_combat$field);
 			}
 			if (hasIsReleaseAtMouse) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 15);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_release_at_mouse$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_release_at_mouse$field);
 			}
 			if (hasIsReleaseOnlyUpMount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 16);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_release_only_up_mount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_release_only_up_mount$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -460,108 +465,108 @@ package app.message {
 			var is_release_at_mouse$count:uint = 0;
 			var is_release_only_up_mount$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (spell_effect_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ActiveSpellProto.spellEffectId cannot be set twice.');
 					}
 					++spell_effect_id$count;
-					this.spellEffectId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.spellEffectId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (cd$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ActiveSpellProto.cd cannot be set twice.');
 					}
 					++cd$count;
-					this.cd = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.cd = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (gcd_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ActiveSpellProto.gcdId cannot be set twice.');
 					}
 					++gcd_id$count;
-					this.gcdId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.gcdId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (cast_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ActiveSpellProto.castTime cannot be set twice.');
 					}
 					++cast_time$count;
-					this.castTime = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.castTime = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (mana_cost$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ActiveSpellProto.manaCost cannot be set twice.');
 					}
 					++mana_cost$count;
-					this.manaCost = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.manaCost = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (target_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ActiveSpellProto.targetType cannot be set twice.');
 					}
 					++target_type$count;
-					this.targetType = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.targetType = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (spell_shape$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ActiveSpellProto.spellShape cannot be set twice.');
 					}
 					++spell_shape$count;
-					this.spellShape = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.spellShape = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 8:
 					if (release_range$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ActiveSpellProto.releaseRange cannot be set twice.');
 					}
 					++release_range$count;
-					this.releaseRange = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.releaseRange = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 9:
 					if (hurt_range$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ActiveSpellProto.hurtRange cannot be set twice.');
 					}
 					++hurt_range$count;
-					this.hurtRange = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.hurtRange = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 10:
 					if (angle$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ActiveSpellProto.angle cannot be set twice.');
 					}
 					++angle$count;
-					this.angle = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.angle = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 11:
-					this.relateSpells.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.SpellProto()));
+					this.relateSpells.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.SpellProto()));
 					break;
 				case 13:
 					if (is_locking_spell$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ActiveSpellProto.isLockingSpell cannot be set twice.');
 					}
 					++is_locking_spell$count;
-					this.isLockingSpell = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isLockingSpell = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 14:
 					if (is_allow_auto_combat$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ActiveSpellProto.isAllowAutoCombat cannot be set twice.');
 					}
 					++is_allow_auto_combat$count;
-					this.isAllowAutoCombat = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isAllowAutoCombat = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 15:
 					if (is_release_at_mouse$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ActiveSpellProto.isReleaseAtMouse cannot be set twice.');
 					}
 					++is_release_at_mouse$count;
-					this.isReleaseAtMouse = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isReleaseAtMouse = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 16:
 					if (is_release_only_up_mount$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ActiveSpellProto.isReleaseOnlyUpMount cannot be set twice.');
 					}
 					++is_release_only_up_mount$count;
-					this.isReleaseOnlyUpMount = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isReleaseOnlyUpMount = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

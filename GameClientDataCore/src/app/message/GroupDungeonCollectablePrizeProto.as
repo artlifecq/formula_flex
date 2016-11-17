@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DUNGEON_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GroupDungeonCollectablePrizeProto.dungeon_id", "dungeonId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DUNGEON_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GroupDungeonCollectablePrizeProto.dungeon_id", "dungeonId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var dungeon_id$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NO_SCORE_S_PRIZE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.GroupDungeonCollectablePrizeProto.no_score_s_prize", "noScoreSPrize", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const NO_SCORE_S_PRIZE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.GroupDungeonCollectablePrizeProto.no_score_s_prize", "noScoreSPrize", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var no_score_s_prize$field:Boolean;
 
@@ -67,7 +67,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EXPIRE_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.GroupDungeonCollectablePrizeProto.expire_time", "expireTime", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const EXPIRE_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.GroupDungeonCollectablePrizeProto.expire_time", "expireTime", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var expire_time$field:Int64;
 
@@ -90,7 +90,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RANDOMED_S_PRIZE:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.GroupDungeonCollectablePrizeProto.randomed_s_prize", "randomedSPrize", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const RANDOMED_S_PRIZE:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.GroupDungeonCollectablePrizeProto.randomed_s_prize", "randomedSPrize", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var randomed_s_prize$field:flash.utils.ByteArray;
 
@@ -113,7 +113,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RANDOMED_VIP_PRIZE:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.GroupDungeonCollectablePrizeProto.randomed_vip_prize", "randomedVipPrize", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const RANDOMED_VIP_PRIZE:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.GroupDungeonCollectablePrizeProto.randomed_vip_prize", "randomedVipPrize", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var randomed_vip_prize$field:flash.utils.ByteArray;
 
@@ -139,23 +139,23 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasDungeonId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, dungeon_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, dungeon_id$field);
 			}
 			if (hasNoScoreSPrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, no_score_s_prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, no_score_s_prize$field);
 			}
 			if (hasExpireTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, expire_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, expire_time$field);
 			}
 			if (hasRandomedSPrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, randomed_s_prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, randomed_s_prize$field);
 			}
 			if (hasRandomedVipPrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, randomed_vip_prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, randomed_vip_prize$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -172,42 +172,42 @@ package app.message {
 			var randomed_s_prize$count:uint = 0;
 			var randomed_vip_prize$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (dungeon_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GroupDungeonCollectablePrizeProto.dungeonId cannot be set twice.');
 					}
 					++dungeon_id$count;
-					this.dungeonId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.dungeonId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (no_score_s_prize$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GroupDungeonCollectablePrizeProto.noScoreSPrize cannot be set twice.');
 					}
 					++no_score_s_prize$count;
-					this.noScoreSPrize = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.noScoreSPrize = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 4:
 					if (expire_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GroupDungeonCollectablePrizeProto.expireTime cannot be set twice.');
 					}
 					++expire_time$count;
-					this.expireTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.expireTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 5:
 					if (randomed_s_prize$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GroupDungeonCollectablePrizeProto.randomedSPrize cannot be set twice.');
 					}
 					++randomed_s_prize$count;
-					this.randomedSPrize = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.randomedSPrize = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 6:
 					if (randomed_vip_prize$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GroupDungeonCollectablePrizeProto.randomedVipPrize cannot be set twice.');
 					}
 					++randomed_vip_prize$count;
-					this.randomedVipPrize = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.randomedVipPrize = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

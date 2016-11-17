@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TAX_RATE_LOWER:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryMiscProto.tax_rate_lower", "taxRateLower", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TAX_RATE_LOWER:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryMiscProto.tax_rate_lower", "taxRateLower", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var tax_rate_lower$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TAX_RATE_UPPER:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryMiscProto.tax_rate_upper", "taxRateUpper", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TAX_RATE_UPPER:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryMiscProto.tax_rate_upper", "taxRateUpper", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var tax_rate_upper$field:int;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MILITARY_SUBSIDY_LOWER:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryMiscProto.military_subsidy_lower", "militarySubsidyLower", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MILITARY_SUBSIDY_LOWER:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryMiscProto.military_subsidy_lower", "militarySubsidyLower", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var military_subsidy_lower$field:Int64;
 
@@ -89,7 +89,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MILITARY_SUBSIDY_PER_IN_TOTAL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryMiscProto.military_subsidy_per_in_total", "militarySubsidyPerInTotal", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MILITARY_SUBSIDY_PER_IN_TOTAL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryMiscProto.military_subsidy_per_in_total", "militarySubsidyPerInTotal", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var military_subsidy_per_in_total$field:int;
 
@@ -114,7 +114,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MILITARY_SUBSIDY_PER_LOWER:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryMiscProto.military_subsidy_per_lower", "militarySubsidyPerLower", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MILITARY_SUBSIDY_PER_LOWER:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryMiscProto.military_subsidy_per_lower", "militarySubsidyPerLower", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var military_subsidy_per_lower$field:int;
 
@@ -139,7 +139,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MILITARY_SUBSIDY_PER_UPPER:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryMiscProto.military_subsidy_per_upper", "militarySubsidyPerUpper", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MILITARY_SUBSIDY_PER_UPPER:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryMiscProto.military_subsidy_per_upper", "militarySubsidyPerUpper", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var military_subsidy_per_upper$field:int;
 
@@ -164,7 +164,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MILITARY_SUBSIDY_UPPER_PER_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryMiscProto.military_subsidy_upper_per_times", "militarySubsidyUpperPerTimes", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MILITARY_SUBSIDY_UPPER_PER_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryMiscProto.military_subsidy_upper_per_times", "militarySubsidyUpperPerTimes", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var military_subsidy_upper_per_times$field:int;
 
@@ -189,7 +189,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STRONG_MAINTAIN_FEE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryMiscProto.strong_maintain_fee", "strongMaintainFee", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const STRONG_MAINTAIN_FEE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryMiscProto.strong_maintain_fee", "strongMaintainFee", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var strong_maintain_fee$field:int;
 
@@ -214,7 +214,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NORMAL_MAINTAIN_FEE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryMiscProto.normal_maintain_fee", "normalMaintainFee", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const NORMAL_MAINTAIN_FEE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryMiscProto.normal_maintain_fee", "normalMaintainFee", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var normal_maintain_fee$field:int;
 
@@ -239,7 +239,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const WEAK_MAINTAIN_FEE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryMiscProto.weak_maintain_fee", "weakMaintainFee", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const WEAK_MAINTAIN_FEE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryMiscProto.weak_maintain_fee", "weakMaintainFee", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var weak_maintain_fee$field:int;
 
@@ -264,7 +264,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STRONG_RELIVE_COST_PERCENT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryMiscProto.strong_relive_cost_percent", "strongReliveCostPercent", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const STRONG_RELIVE_COST_PERCENT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryMiscProto.strong_relive_cost_percent", "strongReliveCostPercent", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var strong_relive_cost_percent$field:int;
 
@@ -289,7 +289,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NORMAL_RELIVE_COST_PERCENT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryMiscProto.normal_relive_cost_percent", "normalReliveCostPercent", (12 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const NORMAL_RELIVE_COST_PERCENT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryMiscProto.normal_relive_cost_percent", "normalReliveCostPercent", (12 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var normal_relive_cost_percent$field:int;
 
@@ -314,7 +314,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const WEAK_RELIVE_COST_PERCENT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryMiscProto.weak_relive_cost_percent", "weakReliveCostPercent", (13 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const WEAK_RELIVE_COST_PERCENT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryMiscProto.weak_relive_cost_percent", "weakReliveCostPercent", (13 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var weak_relive_cost_percent$field:int;
 
@@ -339,7 +339,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const UNION_NEED_MONEY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryMiscProto.union_need_money", "unionNeedMoney", (14 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const UNION_NEED_MONEY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryMiscProto.union_need_money", "unionNeedMoney", (14 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var union_need_money$field:int;
 
@@ -364,7 +364,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const JIN_WEI_APPLICANT_UPPER:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryMiscProto.jin_wei_applicant_upper", "jinWeiApplicantUpper", (15 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const JIN_WEI_APPLICANT_UPPER:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryMiscProto.jin_wei_applicant_upper", "jinWeiApplicantUpper", (15 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var jin_wei_applicant_upper$field:int;
 
@@ -389,7 +389,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const WAIT_UNION_REPLY_CD:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryMiscProto.wait_union_reply_cd", "waitUnionReplyCd", (16 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const WAIT_UNION_REPLY_CD:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryMiscProto.wait_union_reply_cd", "waitUnionReplyCd", (16 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var wait_union_reply_cd$field:Int64;
 
@@ -412,7 +412,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const AUTO_REDUCE_UNION_AMOUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryMiscProto.auto_reduce_union_amount", "autoReduceUnionAmount", (17 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const AUTO_REDUCE_UNION_AMOUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryMiscProto.auto_reduce_union_amount", "autoReduceUnionAmount", (17 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var auto_reduce_union_amount$field:int;
 
@@ -437,7 +437,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LIFT_UNION_CD:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryMiscProto.lift_union_cd", "liftUnionCd", (18 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LIFT_UNION_CD:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryMiscProto.lift_union_cd", "liftUnionCd", (18 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var lift_union_cd$field:Int64;
 
@@ -460,7 +460,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const UNTALK_TIME_DURATION:RepeatedFieldDescriptor$TYPE_INT64 = new RepeatedFieldDescriptor$TYPE_INT64("app.message.CountryMiscProto.untalk_time_duration", "untalkTimeDuration", (19 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const UNTALK_TIME_DURATION:RepeatedFieldDescriptor_TYPE_INT64 = new RepeatedFieldDescriptor_TYPE_INT64("app.message.CountryMiscProto.untalk_time_duration", "untalkTimeDuration", (19 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("Int64")]
 		public var untalkTimeDuration:Array = [];
@@ -468,7 +468,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAPTIVITY_DURATION:RepeatedFieldDescriptor$TYPE_INT64 = new RepeatedFieldDescriptor$TYPE_INT64("app.message.CountryMiscProto.captivity_duration", "captivityDuration", (20 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAPTIVITY_DURATION:RepeatedFieldDescriptor_TYPE_INT64 = new RepeatedFieldDescriptor_TYPE_INT64("app.message.CountryMiscProto.captivity_duration", "captivityDuration", (20 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("Int64")]
 		public var captivityDuration:Array = [];
@@ -476,7 +476,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const VOTE_TIME_DATA:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.CountryMiscProto.vote_time_data", "voteTimeData", (21 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const VOTE_TIME_DATA:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.CountryMiscProto.vote_time_data", "voteTimeData", (21 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var vote_time_data$field:String;
 
@@ -499,7 +499,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const VOTE_DURATION:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryMiscProto.vote_duration", "voteDuration", (22 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const VOTE_DURATION:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryMiscProto.vote_duration", "voteDuration", (22 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var vote_duration$field:Int64;
 
@@ -522,7 +522,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const VOTE_EXP:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryMiscProto.vote_exp", "voteExp", (23 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const VOTE_EXP:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryMiscProto.vote_exp", "voteExp", (23 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var vote_exp$field:int;
 
@@ -550,95 +550,95 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasTaxRateLower) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, tax_rate_lower$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, tax_rate_lower$field);
 			}
 			if (hasTaxRateUpper) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, tax_rate_upper$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, tax_rate_upper$field);
 			}
 			if (hasMilitarySubsidyLower) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, military_subsidy_lower$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, military_subsidy_lower$field);
 			}
 			if (hasMilitarySubsidyPerInTotal) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, military_subsidy_per_in_total$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, military_subsidy_per_in_total$field);
 			}
 			if (hasMilitarySubsidyPerLower) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, military_subsidy_per_lower$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, military_subsidy_per_lower$field);
 			}
 			if (hasMilitarySubsidyPerUpper) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, military_subsidy_per_upper$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, military_subsidy_per_upper$field);
 			}
 			if (hasMilitarySubsidyUpperPerTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, military_subsidy_upper_per_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, military_subsidy_upper_per_times$field);
 			}
 			if (hasStrongMaintainFee) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, strong_maintain_fee$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, strong_maintain_fee$field);
 			}
 			if (hasNormalMaintainFee) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, normal_maintain_fee$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, normal_maintain_fee$field);
 			}
 			if (hasWeakMaintainFee) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, weak_maintain_fee$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, weak_maintain_fee$field);
 			}
 			if (hasStrongReliveCostPercent) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, strong_relive_cost_percent$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, strong_relive_cost_percent$field);
 			}
 			if (hasNormalReliveCostPercent) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, normal_relive_cost_percent$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, normal_relive_cost_percent$field);
 			}
 			if (hasWeakReliveCostPercent) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, weak_relive_cost_percent$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, weak_relive_cost_percent$field);
 			}
 			if (hasUnionNeedMoney) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 14);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, union_need_money$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, union_need_money$field);
 			}
 			if (hasJinWeiApplicantUpper) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 15);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, jin_wei_applicant_upper$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, jin_wei_applicant_upper$field);
 			}
 			if (hasWaitUnionReplyCd) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 16);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, wait_union_reply_cd$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, wait_union_reply_cd$field);
 			}
 			if (hasAutoReduceUnionAmount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 17);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, auto_reduce_union_amount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, auto_reduce_union_amount$field);
 			}
 			if (hasLiftUnionCd) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 18);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, lift_union_cd$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, lift_union_cd$field);
 			}
 			for (var untalkTimeDuration$index:uint = 0; untalkTimeDuration$index < this.untalkTimeDuration.length; ++untalkTimeDuration$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 19);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, this.untalkTimeDuration[untalkTimeDuration$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, this.untalkTimeDuration[untalkTimeDuration$index]);
 			}
 			for (var captivityDuration$index:uint = 0; captivityDuration$index < this.captivityDuration.length; ++captivityDuration$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 20);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, this.captivityDuration[captivityDuration$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, this.captivityDuration[captivityDuration$index]);
 			}
 			if (hasVoteTimeData) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 21);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, vote_time_data$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, vote_time_data$field);
 			}
 			if (hasVoteDuration) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 22);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, vote_duration$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, vote_duration$field);
 			}
 			if (hasVoteExp) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 23);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, vote_exp$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, vote_exp$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -671,168 +671,168 @@ package app.message {
 			var vote_duration$count:uint = 0;
 			var vote_exp$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (tax_rate_lower$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.taxRateLower cannot be set twice.');
 					}
 					++tax_rate_lower$count;
-					this.taxRateLower = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.taxRateLower = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (tax_rate_upper$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.taxRateUpper cannot be set twice.');
 					}
 					++tax_rate_upper$count;
-					this.taxRateUpper = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.taxRateUpper = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (military_subsidy_lower$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.militarySubsidyLower cannot be set twice.');
 					}
 					++military_subsidy_lower$count;
-					this.militarySubsidyLower = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.militarySubsidyLower = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 4:
 					if (military_subsidy_per_in_total$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.militarySubsidyPerInTotal cannot be set twice.');
 					}
 					++military_subsidy_per_in_total$count;
-					this.militarySubsidyPerInTotal = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.militarySubsidyPerInTotal = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (military_subsidy_per_lower$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.militarySubsidyPerLower cannot be set twice.');
 					}
 					++military_subsidy_per_lower$count;
-					this.militarySubsidyPerLower = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.militarySubsidyPerLower = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (military_subsidy_per_upper$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.militarySubsidyPerUpper cannot be set twice.');
 					}
 					++military_subsidy_per_upper$count;
-					this.militarySubsidyPerUpper = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.militarySubsidyPerUpper = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (military_subsidy_upper_per_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.militarySubsidyUpperPerTimes cannot be set twice.');
 					}
 					++military_subsidy_upper_per_times$count;
-					this.militarySubsidyUpperPerTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.militarySubsidyUpperPerTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 8:
 					if (strong_maintain_fee$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.strongMaintainFee cannot be set twice.');
 					}
 					++strong_maintain_fee$count;
-					this.strongMaintainFee = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.strongMaintainFee = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 9:
 					if (normal_maintain_fee$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.normalMaintainFee cannot be set twice.');
 					}
 					++normal_maintain_fee$count;
-					this.normalMaintainFee = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.normalMaintainFee = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 10:
 					if (weak_maintain_fee$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.weakMaintainFee cannot be set twice.');
 					}
 					++weak_maintain_fee$count;
-					this.weakMaintainFee = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.weakMaintainFee = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 11:
 					if (strong_relive_cost_percent$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.strongReliveCostPercent cannot be set twice.');
 					}
 					++strong_relive_cost_percent$count;
-					this.strongReliveCostPercent = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.strongReliveCostPercent = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 12:
 					if (normal_relive_cost_percent$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.normalReliveCostPercent cannot be set twice.');
 					}
 					++normal_relive_cost_percent$count;
-					this.normalReliveCostPercent = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.normalReliveCostPercent = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 13:
 					if (weak_relive_cost_percent$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.weakReliveCostPercent cannot be set twice.');
 					}
 					++weak_relive_cost_percent$count;
-					this.weakReliveCostPercent = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.weakReliveCostPercent = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 14:
 					if (union_need_money$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.unionNeedMoney cannot be set twice.');
 					}
 					++union_need_money$count;
-					this.unionNeedMoney = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.unionNeedMoney = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 15:
 					if (jin_wei_applicant_upper$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.jinWeiApplicantUpper cannot be set twice.');
 					}
 					++jin_wei_applicant_upper$count;
-					this.jinWeiApplicantUpper = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.jinWeiApplicantUpper = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 16:
 					if (wait_union_reply_cd$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.waitUnionReplyCd cannot be set twice.');
 					}
 					++wait_union_reply_cd$count;
-					this.waitUnionReplyCd = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.waitUnionReplyCd = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 17:
 					if (auto_reduce_union_amount$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.autoReduceUnionAmount cannot be set twice.');
 					}
 					++auto_reduce_union_amount$count;
-					this.autoReduceUnionAmount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.autoReduceUnionAmount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 18:
 					if (lift_union_cd$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.liftUnionCd cannot be set twice.');
 					}
 					++lift_union_cd$count;
-					this.liftUnionCd = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.liftUnionCd = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 19:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT64, this.untalkTimeDuration);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT64, this.untalkTimeDuration);
 						break;
 					}
-					this.untalkTimeDuration.push(com.netease.protobuf.ReadUtils.read$TYPE_INT64(input));
+					this.untalkTimeDuration.push(com.netease.protobuf.ReadUtils.read_TYPE_INT64(input));
 					break;
 				case 20:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT64, this.captivityDuration);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT64, this.captivityDuration);
 						break;
 					}
-					this.captivityDuration.push(com.netease.protobuf.ReadUtils.read$TYPE_INT64(input));
+					this.captivityDuration.push(com.netease.protobuf.ReadUtils.read_TYPE_INT64(input));
 					break;
 				case 21:
 					if (vote_time_data$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.voteTimeData cannot be set twice.');
 					}
 					++vote_time_data$count;
-					this.voteTimeData = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.voteTimeData = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 22:
 					if (vote_duration$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.voteDuration cannot be set twice.');
 					}
 					++vote_duration$count;
-					this.voteDuration = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.voteDuration = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 23:
 					if (vote_exp$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryMiscProto.voteExp cannot be set twice.');
 					}
 					++vote_exp$count;
-					this.voteExp = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.voteExp = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

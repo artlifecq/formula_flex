@@ -18,7 +18,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EQUIP_TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.EquipmentDataProto.equip_type", "equipType", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.EquipType);
+		public static const EQUIP_TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.EquipmentDataProto.equip_type", "equipType", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.EquipType);
 
 		private var equip_type$field:int;
 
@@ -45,7 +45,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SECOND_WEAPON_TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.EquipmentDataProto.second_weapon_type", "secondWeaponType", (2 << 3) | com.netease.protobuf.WireType.VARINT, app.message.SecondWeaponType);
+		public static const SECOND_WEAPON_TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.EquipmentDataProto.second_weapon_type", "secondWeaponType", (2 << 3) | com.netease.protobuf.WireType.VARINT, app.message.SecondWeaponType);
 
 		private var second_weapon_type$field:int;
 
@@ -70,7 +70,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RACE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.EquipmentDataProto.race", "race", (3 << 3) | com.netease.protobuf.WireType.VARINT, app.message.RaceId);
+		public static const RACE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.EquipmentDataProto.race", "race", (3 << 3) | com.netease.protobuf.WireType.VARINT, app.message.RaceId);
 
 		private var race$field:int;
 
@@ -95,7 +95,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SEX:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.EquipmentDataProto.sex", "sex", (4 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Sex);
+		public static const SEX:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.EquipmentDataProto.sex", "sex", (4 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Sex);
 
 		private var sex$field:int;
 
@@ -120,7 +120,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_EQUIP_BIND:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.EquipmentDataProto.is_equip_bind", "isEquipBind", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_EQUIP_BIND:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.EquipmentDataProto.is_equip_bind", "isEquipBind", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_equip_bind$field:Boolean;
 
@@ -145,7 +145,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL_STAGE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentDataProto.level_stage", "levelStage", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL_STAGE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentDataProto.level_stage", "levelStage", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level_stage$field:int;
 
@@ -170,7 +170,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const REFINE_MAIN_STAT_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentDataProto.refine_main_stat_id", "refineMainStatId", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const REFINE_MAIN_STAT_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentDataProto.refine_main_stat_id", "refineMainStatId", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var refine_main_stat_id$field:int;
 
@@ -198,31 +198,31 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasEquipType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, equip_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, equip_type$field);
 			}
 			if (hasSecondWeaponType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, second_weapon_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, second_weapon_type$field);
 			}
 			if (hasRace) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, race$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, race$field);
 			}
 			if (hasSex) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, sex$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, sex$field);
 			}
 			if (hasIsEquipBind) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_equip_bind$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_equip_bind$field);
 			}
 			if (hasLevelStage) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level_stage$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level_stage$field);
 			}
 			if (hasRefineMainStatId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, refine_main_stat_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, refine_main_stat_id$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -241,56 +241,56 @@ package app.message {
 			var level_stage$count:uint = 0;
 			var refine_main_stat_id$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (equip_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentDataProto.equipType cannot be set twice.');
 					}
 					++equip_type$count;
-					this.equipType = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.equipType = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 2:
 					if (second_weapon_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentDataProto.secondWeaponType cannot be set twice.');
 					}
 					++second_weapon_type$count;
-					this.secondWeaponType = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.secondWeaponType = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 3:
 					if (race$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentDataProto.race cannot be set twice.');
 					}
 					++race$count;
-					this.race = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.race = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 4:
 					if (sex$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentDataProto.sex cannot be set twice.');
 					}
 					++sex$count;
-					this.sex = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.sex = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 6:
 					if (is_equip_bind$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentDataProto.isEquipBind cannot be set twice.');
 					}
 					++is_equip_bind$count;
-					this.isEquipBind = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isEquipBind = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 7:
 					if (level_stage$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentDataProto.levelStage cannot be set twice.');
 					}
 					++level_stage$count;
-					this.levelStage = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.levelStage = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 8:
 					if (refine_main_stat_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentDataProto.refineMainStatId cannot be set twice.');
 					}
 					++refine_main_stat_id$count;
-					this.refineMainStatId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.refineMainStatId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

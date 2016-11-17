@@ -1,20 +1,26 @@
 package app.message {
-	import com.netease.protobuf.*;
-	use namespace com.netease.protobuf.used_by_generated_code;
-	import com.netease.protobuf.fieldDescriptors.*;
-	import flash.utils.Endian;
-	import flash.utils.IDataInput;
-	import flash.utils.IDataOutput;
-	import flash.utils.IExternalizable;
+	import com.netease.protobuf.Message;
+	import com.netease.protobuf.ReadUtils;
+	import com.netease.protobuf.WireType;
+	import com.netease.protobuf.WriteUtils;
+	import com.netease.protobuf.WritingBuffer;
+	import com.netease.protobuf.used_by_generated_code;
+	import com.netease.protobuf.fieldDescriptors.FieldDescriptor_TYPE_BOOL;
+	import com.netease.protobuf.fieldDescriptors.FieldDescriptor_TYPE_ENUM;
+	import com.netease.protobuf.fieldDescriptors.FieldDescriptor_TYPE_INT32;
+	import com.netease.protobuf.fieldDescriptors.FieldDescriptor_TYPE_MESSAGE;
+	import com.netease.protobuf.fieldDescriptors.FieldDescriptor_TYPE_STRING;
+	import com.netease.protobuf.fieldDescriptors.RepeatedFieldDescriptor_TYPE_BYTES;
+	import com.netease.protobuf.fieldDescriptors.RepeatedFieldDescriptor_TYPE_INT64;
+	import com.netease.protobuf.fieldDescriptors.RepeatedFieldDescriptor_TYPE_MESSAGE;
+	
 	import flash.errors.IOError;
-	import app.message.NpcProto;
-	import app.message.SpriteStatProto;
 	import flash.utils.ByteArray;
+	import flash.utils.IDataInput;
+	
 	import app.message.MonsterDataProto.MonsterType;
-	import app.message.LiangCangProto;
-	import app.message.GoodsWrapperProto;
-	import app.message.MonsterRankProto;
-	import app.message.NormalMonsterProto;
+
+	use namespace com.netease.protobuf.used_by_generated_code;
 	// @@protoc_insertion_point(imports)
 
 	// @@protoc_insertion_point(class_metadata)
@@ -22,7 +28,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MonsterDataProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MonsterDataProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var id$field:int;
 
@@ -49,7 +55,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.MonsterDataProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.MonsterDataProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var name$field:String;
 
@@ -72,7 +78,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MonsterDataProto.level", "level", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MonsterDataProto.level", "level", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level$field:int;
 
@@ -97,7 +103,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BODY_RES:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.MonsterDataProto.body_res", "bodyRes", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const BODY_RES:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.MonsterDataProto.body_res", "bodyRes", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var body_res$field:String;
 
@@ -120,7 +126,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MOUNT_RES:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.MonsterDataProto.mount_res", "mountRes", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const MOUNT_RES:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.MonsterDataProto.mount_res", "mountRes", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var mount_res$field:String;
 
@@ -143,7 +149,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HEAD:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.MonsterDataProto.head", "head", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const HEAD:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.MonsterDataProto.head", "head", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var head$field:String;
 
@@ -166,7 +172,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STAT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.MonsterDataProto.stat", "stat", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
+		public static const STAT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.MonsterDataProto.stat", "stat", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
 
 		private var stat$field:app.message.SpriteStatProto;
 
@@ -189,7 +195,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MONSTER_TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.MonsterDataProto.monster_type", "monsterType", (8 << 3) | com.netease.protobuf.WireType.VARINT, app.message.MonsterDataProto.MonsterType);
+		public static const MONSTER_TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.MonsterDataProto.monster_type", "monsterType", (8 << 3) | com.netease.protobuf.WireType.VARINT,MonsterType);
 
 		private var monster_type$field:int;
 
@@ -214,7 +220,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SCENE_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MonsterDataProto.scene_id", "sceneId", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SCENE_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MonsterDataProto.scene_id", "sceneId", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var scene_id$field:int;
 
@@ -239,7 +245,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const POS:RepeatedFieldDescriptor$TYPE_INT64 = new RepeatedFieldDescriptor$TYPE_INT64("app.message.MonsterDataProto.pos", "pos", (12 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const POS:RepeatedFieldDescriptor_TYPE_INT64 = new RepeatedFieldDescriptor_TYPE_INT64("app.message.MonsterDataProto.pos", "pos", (12 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("Int64")]
 		public var pos:Array = [];
@@ -247,7 +253,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_PHYSICAL_IMMUNE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.MonsterDataProto.is_physical_immune", "isPhysicalImmune", (16 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_PHYSICAL_IMMUNE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.MonsterDataProto.is_physical_immune", "isPhysicalImmune", (16 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_physical_immune$field:Boolean;
 
@@ -272,7 +278,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_MAGICAL_IMMUNE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.MonsterDataProto.is_magical_immune", "isMagicalImmune", (17 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_MAGICAL_IMMUNE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.MonsterDataProto.is_magical_immune", "isMagicalImmune", (17 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_magical_immune$field:Boolean;
 
@@ -297,7 +303,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BODY_RADIUS:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MonsterDataProto.body_radius", "bodyRadius", (18 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BODY_RADIUS:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MonsterDataProto.body_radius", "bodyRadius", (18 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var body_radius$field:int;
 
@@ -322,7 +328,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FIX_DIRECTION:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.MonsterDataProto.fix_direction", "fixDirection", (19 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FIX_DIRECTION:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.MonsterDataProto.fix_direction", "fixDirection", (19 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var fix_direction$field:Boolean;
 
@@ -347,7 +353,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RANK_INFO:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.MonsterDataProto.rank_info", "rankInfo", (30 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MonsterRankProto; });
+		public static const RANK_INFO:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.MonsterDataProto.rank_info", "rankInfo", (30 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MonsterRankProto; });
 
 		private var rank_info$field:app.message.MonsterRankProto;
 
@@ -370,7 +376,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CHAT_INTERVAL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MonsterDataProto.chat_interval", "chatInterval", (40 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CHAT_INTERVAL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MonsterDataProto.chat_interval", "chatInterval", (40 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var chat_interval$field:int;
 
@@ -395,7 +401,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CHAT:RepeatedFieldDescriptor$TYPE_BYTES = new RepeatedFieldDescriptor$TYPE_BYTES("app.message.MonsterDataProto.chat", "chat", (41 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const CHAT:RepeatedFieldDescriptor_TYPE_BYTES = new RepeatedFieldDescriptor_TYPE_BYTES("app.message.MonsterDataProto.chat", "chat", (41 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		[ArrayElementType("flash.utils.ByteArray")]
 		public var chat:Array = [];
@@ -403,7 +409,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PLUNDER_TIPS:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.MonsterDataProto.plunder_tips", "plunderTips", (42 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const PLUNDER_TIPS:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.MonsterDataProto.plunder_tips", "plunderTips", (42 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var plunder_tips$field:String;
 
@@ -426,7 +432,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PLUNDER_GOODS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.MonsterDataProto.plunder_goods", "plunderGoods", (43 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
+		public static const PLUNDER_GOODS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.MonsterDataProto.plunder_goods", "plunderGoods", (43 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
 
 		[ArrayElementType("app.message.GoodsWrapperProto")]
 		public var plunderGoods:Array = [];
@@ -434,7 +440,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LIFE_BAR_OFFSET:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MonsterDataProto.life_bar_offset", "lifeBarOffset", (44 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LIFE_BAR_OFFSET:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MonsterDataProto.life_bar_offset", "lifeBarOffset", (44 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var life_bar_offset$field:int;
 
@@ -459,7 +465,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ANIMATION:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.MonsterDataProto.animation", "animation", (45 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const ANIMATION:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.MonsterDataProto.animation", "animation", (45 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var animation$field:String;
 
@@ -482,7 +488,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IMMUNE_DEAD_BEAT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.MonsterDataProto.immune_dead_beat", "immuneDeadBeat", (46 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IMMUNE_DEAD_BEAT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.MonsterDataProto.immune_dead_beat", "immuneDeadBeat", (46 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var immune_dead_beat$field:Boolean;
 
@@ -507,7 +513,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DIRECTION:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MonsterDataProto.direction", "direction", (47 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DIRECTION:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MonsterDataProto.direction", "direction", (47 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var direction$field:int;
 
@@ -532,7 +538,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SOUND:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.MonsterDataProto.sound", "sound", (48 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const SOUND:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.MonsterDataProto.sound", "sound", (48 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var sound$field:String;
 
@@ -555,7 +561,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BEEN_HURT_ANIMATION:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.MonsterDataProto.been_hurt_animation", "beenHurtAnimation", (49 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const BEEN_HURT_ANIMATION:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.MonsterDataProto.been_hurt_animation", "beenHurtAnimation", (49 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var been_hurt_animation$field:String;
 
@@ -578,7 +584,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SCALE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MonsterDataProto.scale", "scale", (50 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SCALE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MonsterDataProto.scale", "scale", (50 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var scale$field:int;
 
@@ -603,7 +609,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SHOW_IN_SMALL_MAP_TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MonsterDataProto.show_in_small_map_type", "showInSmallMapType", (51 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SHOW_IN_SMALL_MAP_TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MonsterDataProto.show_in_small_map_type", "showInSmallMapType", (51 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var show_in_small_map_type$field:int;
 
@@ -628,7 +634,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SMALL_MAP_ICON:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.MonsterDataProto.small_map_icon", "smallMapIcon", (52 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const SMALL_MAP_ICON:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.MonsterDataProto.small_map_icon", "smallMapIcon", (52 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var small_map_icon$field:String;
 
@@ -651,7 +657,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NOMAL_MONSTER:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.MonsterDataProto.nomal_monster", "nomalMonster", (100 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NormalMonsterProto; });
+		public static const NOMAL_MONSTER:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.MonsterDataProto.nomal_monster", "nomalMonster", (100 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NormalMonsterProto; });
 
 		private var nomal_monster$field:app.message.NormalMonsterProto;
 
@@ -674,7 +680,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NPC:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.MonsterDataProto.npc", "npc", (101 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NpcProto; });
+		public static const NPC:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.MonsterDataProto.npc", "npc", (101 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NpcProto; });
 
 		private var npc$field:app.message.NpcProto;
 
@@ -697,7 +703,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LIANG_CANG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.MonsterDataProto.liang_cang", "liangCang", (102 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.LiangCangProto; });
+		public static const LIANG_CANG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.MonsterDataProto.liang_cang", "liangCang", (102 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.LiangCangProto; });
 
 		private var liang_cang$field:app.message.LiangCangProto;
 
@@ -723,127 +729,127 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, id$field);
 			}
 			if (hasName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, name$field);
 			}
 			if (hasLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level$field);
 			}
 			if (hasBodyRes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, body_res$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, body_res$field);
 			}
 			if (hasMountRes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, mount_res$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, mount_res$field);
 			}
 			if (hasHead) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, head$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, head$field);
 			}
 			if (hasStat) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, stat$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, stat$field);
 			}
 			if (hasMonsterType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, monster_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, monster_type$field);
 			}
 			if (hasSceneId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, scene_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, scene_id$field);
 			}
 			for (var pos$index:uint = 0; pos$index < this.pos.length; ++pos$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, this.pos[pos$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, this.pos[pos$index]);
 			}
 			if (hasIsPhysicalImmune) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 16);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_physical_immune$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_physical_immune$field);
 			}
 			if (hasIsMagicalImmune) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 17);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_magical_immune$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_magical_immune$field);
 			}
 			if (hasBodyRadius) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 18);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, body_radius$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, body_radius$field);
 			}
 			if (hasFixDirection) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 19);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, fix_direction$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, fix_direction$field);
 			}
 			if (hasRankInfo) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 30);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, rank_info$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, rank_info$field);
 			}
 			if (hasChatInterval) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 40);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, chat_interval$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, chat_interval$field);
 			}
 			for (var chat$index:uint = 0; chat$index < this.chat.length; ++chat$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 41);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, this.chat[chat$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, this.chat[chat$index]);
 			}
 			if (hasPlunderTips) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 42);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, plunder_tips$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, plunder_tips$field);
 			}
 			for (var plunderGoods$index:uint = 0; plunderGoods$index < this.plunderGoods.length; ++plunderGoods$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 43);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.plunderGoods[plunderGoods$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.plunderGoods[plunderGoods$index]);
 			}
 			if (hasLifeBarOffset) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 44);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, life_bar_offset$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, life_bar_offset$field);
 			}
 			if (hasAnimation) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 45);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, animation$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, animation$field);
 			}
 			if (hasImmuneDeadBeat) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 46);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, immune_dead_beat$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, immune_dead_beat$field);
 			}
 			if (hasDirection) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 47);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, direction$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, direction$field);
 			}
 			if (hasSound) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 48);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, sound$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, sound$field);
 			}
 			if (hasBeenHurtAnimation) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 49);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, been_hurt_animation$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, been_hurt_animation$field);
 			}
 			if (hasScale) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 50);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, scale$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, scale$field);
 			}
 			if (hasShowInSmallMapType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 51);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, show_in_small_map_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, show_in_small_map_type$field);
 			}
 			if (hasSmallMapIcon) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 52);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, small_map_icon$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, small_map_icon$field);
 			}
 			if (hasNomalMonster) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 100);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, nomal_monster$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, nomal_monster$field);
 			}
 			if (hasNpc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 101);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, npc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, npc$field);
 			}
 			if (hasLiangCang) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 102);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, liang_cang$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, liang_cang$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -883,49 +889,49 @@ package app.message {
 			var npc$count:uint = 0;
 			var liang_cang$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.id cannot be set twice.');
 					}
 					++id$count;
-					this.id = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.id = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.name cannot be set twice.');
 					}
 					++name$count;
-					this.name = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.name = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.level cannot be set twice.');
 					}
 					++level$count;
-					this.level = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.level = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (body_res$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.bodyRes cannot be set twice.');
 					}
 					++body_res$count;
-					this.bodyRes = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.bodyRes = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 5:
 					if (mount_res$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.mountRes cannot be set twice.');
 					}
 					++mount_res$count;
-					this.mountRes = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.mountRes = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 6:
 					if (head$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.head cannot be set twice.');
 					}
 					++head$count;
-					this.head = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.head = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 7:
 					if (stat$count != 0) {
@@ -933,56 +939,56 @@ package app.message {
 					}
 					++stat$count;
 					this.stat = new app.message.SpriteStatProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.stat);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.stat);
 					break;
 				case 8:
 					if (monster_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.monsterType cannot be set twice.');
 					}
 					++monster_type$count;
-					this.monsterType = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.monsterType = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 11:
 					if (scene_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.sceneId cannot be set twice.');
 					}
 					++scene_id$count;
-					this.sceneId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.sceneId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 12:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT64, this.pos);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT64, this.pos);
 						break;
 					}
-					this.pos.push(com.netease.protobuf.ReadUtils.read$TYPE_INT64(input));
+					this.pos.push(com.netease.protobuf.ReadUtils.read_TYPE_INT64(input));
 					break;
 				case 16:
 					if (is_physical_immune$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.isPhysicalImmune cannot be set twice.');
 					}
 					++is_physical_immune$count;
-					this.isPhysicalImmune = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isPhysicalImmune = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 17:
 					if (is_magical_immune$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.isMagicalImmune cannot be set twice.');
 					}
 					++is_magical_immune$count;
-					this.isMagicalImmune = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isMagicalImmune = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 18:
 					if (body_radius$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.bodyRadius cannot be set twice.');
 					}
 					++body_radius$count;
-					this.bodyRadius = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.bodyRadius = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 19:
 					if (fix_direction$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.fixDirection cannot be set twice.');
 					}
 					++fix_direction$count;
-					this.fixDirection = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.fixDirection = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 30:
 					if (rank_info$count != 0) {
@@ -990,90 +996,90 @@ package app.message {
 					}
 					++rank_info$count;
 					this.rankInfo = new app.message.MonsterRankProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.rankInfo);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.rankInfo);
 					break;
 				case 40:
 					if (chat_interval$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.chatInterval cannot be set twice.');
 					}
 					++chat_interval$count;
-					this.chatInterval = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.chatInterval = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 41:
-					this.chat.push(com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input));
+					this.chat.push(com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input));
 					break;
 				case 42:
 					if (plunder_tips$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.plunderTips cannot be set twice.');
 					}
 					++plunder_tips$count;
-					this.plunderTips = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.plunderTips = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 43:
-					this.plunderGoods.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.GoodsWrapperProto()));
+					this.plunderGoods.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.GoodsWrapperProto()));
 					break;
 				case 44:
 					if (life_bar_offset$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.lifeBarOffset cannot be set twice.');
 					}
 					++life_bar_offset$count;
-					this.lifeBarOffset = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.lifeBarOffset = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 45:
 					if (animation$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.animation cannot be set twice.');
 					}
 					++animation$count;
-					this.animation = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.animation = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 46:
 					if (immune_dead_beat$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.immuneDeadBeat cannot be set twice.');
 					}
 					++immune_dead_beat$count;
-					this.immuneDeadBeat = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.immuneDeadBeat = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 47:
 					if (direction$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.direction cannot be set twice.');
 					}
 					++direction$count;
-					this.direction = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.direction = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 48:
 					if (sound$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.sound cannot be set twice.');
 					}
 					++sound$count;
-					this.sound = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.sound = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 49:
 					if (been_hurt_animation$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.beenHurtAnimation cannot be set twice.');
 					}
 					++been_hurt_animation$count;
-					this.beenHurtAnimation = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.beenHurtAnimation = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 50:
 					if (scale$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.scale cannot be set twice.');
 					}
 					++scale$count;
-					this.scale = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.scale = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 51:
 					if (show_in_small_map_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.showInSmallMapType cannot be set twice.');
 					}
 					++show_in_small_map_type$count;
-					this.showInSmallMapType = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.showInSmallMapType = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 52:
 					if (small_map_icon$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MonsterDataProto.smallMapIcon cannot be set twice.');
 					}
 					++small_map_icon$count;
-					this.smallMapIcon = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.smallMapIcon = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 100:
 					if (nomal_monster$count != 0) {
@@ -1081,7 +1087,7 @@ package app.message {
 					}
 					++nomal_monster$count;
 					this.nomalMonster = new app.message.NormalMonsterProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.nomalMonster);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.nomalMonster);
 					break;
 				case 101:
 					if (npc$count != 0) {
@@ -1089,7 +1095,7 @@ package app.message {
 					}
 					++npc$count;
 					this.npc = new app.message.NpcProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.npc);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.npc);
 					break;
 				case 102:
 					if (liang_cang$count != 0) {
@@ -1097,7 +1103,7 @@ package app.message {
 					}
 					++liang_cang$count;
 					this.liangCang = new app.message.LiangCangProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.liangCang);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.liangCang);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const AMOUNT:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.MilitarySubsidyProto.amount", "amount", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const AMOUNT:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.MilitarySubsidyProto.amount", "amount", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var amount$field:Int64;
 
@@ -37,7 +37,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEFT_AMOUNT:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.MilitarySubsidyProto.left_amount", "leftAmount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEFT_AMOUNT:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.MilitarySubsidyProto.left_amount", "leftAmount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var left_amount$field:Int64;
 
@@ -60,7 +60,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SUBSIDY_PER:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MilitarySubsidyProto.subsidy_per", "subsidyPer", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SUBSIDY_PER:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MilitarySubsidyProto.subsidy_per", "subsidyPer", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var subsidy_per$field:int;
 
@@ -87,7 +87,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SUBSIDY_UPPER:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MilitarySubsidyProto.subsidy_upper", "subsidyUpper", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SUBSIDY_UPPER:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MilitarySubsidyProto.subsidy_upper", "subsidyUpper", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var subsidy_upper$field:int;
 
@@ -115,19 +115,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasAmount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, amount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, amount$field);
 			}
 			if (hasLeftAmount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, left_amount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, left_amount$field);
 			}
 			if (hasSubsidyPer) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, subsidy_per$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, subsidy_per$field);
 			}
 			if (hasSubsidyUpper) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, subsidy_upper$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, subsidy_upper$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -143,35 +143,35 @@ package app.message {
 			var subsidy_per$count:uint = 0;
 			var subsidy_upper$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (amount$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MilitarySubsidyProto.amount cannot be set twice.');
 					}
 					++amount$count;
-					this.amount = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.amount = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (left_amount$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MilitarySubsidyProto.leftAmount cannot be set twice.');
 					}
 					++left_amount$count;
-					this.leftAmount = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.leftAmount = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 3:
 					if (subsidy_per$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MilitarySubsidyProto.subsidyPer cannot be set twice.');
 					}
 					++subsidy_per$count;
-					this.subsidyPer = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.subsidyPer = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (subsidy_upper$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MilitarySubsidyProto.subsidyUpper cannot be set twice.');
 					}
 					++subsidy_upper$count;
-					this.subsidyUpper = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.subsidyUpper = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

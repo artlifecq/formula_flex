@@ -26,9 +26,9 @@ package com.rpgGame.app.cmdlistener.task
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
-	import org.game.netCore.net.BytesUtil;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
+	import org.game.netCore.net_protobuff.BytesUtil;
 
 	/**
 	 * 鸡毛信事件侦听器 
@@ -44,27 +44,27 @@ package com.rpgGame.app.cmdlistener.task
 		
 		override public function start():void
 		{
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_ACCEPT_MIXIN_FAIL, onRecAcceptMixinFail );
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_ACCEPT_MIXIN_SUCCEED, onRecAcceptMixinSucceed );
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_GIVE_UP_MI_XIN, onGiveupMixinSucceed );
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_GIVE_UP_MI_XIN_FAIL, onGiveupMixinFail );
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_REFRESH_MIXIN_FAIL, onRecRefreshMixinFail );
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_REFRESH_MIXIN_SUCCEED, onRecRefreshMixinSucceed );
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_COMPLETE_MIXIN_FAIL, onRecCompleteMixinFail );
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_COMPLETE_MIXIN_SUCCEED, onCompleteMixinSucceed );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_ACCEPT_MIXIN_FAIL, onRecAcceptMixinFail );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_ACCEPT_MIXIN_SUCCEED, onRecAcceptMixinSucceed );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_GIVE_UP_MI_XIN, onGiveupMixinSucceed );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_GIVE_UP_MI_XIN_FAIL, onGiveupMixinFail );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_REFRESH_MIXIN_FAIL, onRecRefreshMixinFail );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_REFRESH_MIXIN_SUCCEED, onRecRefreshMixinSucceed );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_COMPLETE_MIXIN_FAIL, onRecCompleteMixinFail );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_COMPLETE_MIXIN_SUCCEED, onCompleteMixinSucceed );
 			
 			//开启刺探
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_START_MI_XIN, onStartMiXin );
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_START_MI_XIN_FAIL, onStartMiXinFail );
-			SocketConnection.addCmdListener(CountryModuleMessages.S2C_START_MI_XIN_BROADCAST, onMiXinStart );
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_START_MI_XIN, onStartMiXin );
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_START_MI_XIN_FAIL, onStartMiXinFail );
+			SocketConnection_protoBuffer.addCmdListener(CountryModuleMessages.S2C_START_MI_XIN_BROADCAST, onMiXinStart );
 			
 			//开启抽奖
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_ROULETTE, onRoulette );
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_COLLECT_ROULETTE_PRIZE, onCollectRoulettePrize );
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_COLLECT_ROULETTE_PRIZE_FAIL, onCollectRoulettePrizeFail );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_ROULETTE, onRoulette );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_COLLECT_ROULETTE_PRIZE, onCollectRoulettePrize );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_COLLECT_ROULETTE_PRIZE_FAIL, onCollectRoulettePrizeFail );
 			
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_MAX_QUALITY_MIXIN_BROADCAST, onMaxQualityMiXinBroadcast );
-			SocketConnection.addCmdListener(TaskModuleMessages.S2C_MIXIN_STATUS, onRecMiXinStatus);
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_MAX_QUALITY_MIXIN_BROADCAST, onMaxQualityMiXinBroadcast );
+			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_MIXIN_STATUS, onRecMiXinStatus);
 			
 			finish();
 		}

@@ -14,7 +14,7 @@ package app.message.TaskTargetProto {
 		/**
 		 *  @private
 		 */
-		public static const KILL_MONSTER_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TaskTargetProto.KillMonsterTargetProto.kill_monster_id", "killMonsterId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const KILL_MONSTER_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TaskTargetProto.KillMonsterTargetProto.kill_monster_id", "killMonsterId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var kill_monster_id$field:int;
 
@@ -41,7 +41,7 @@ package app.message.TaskTargetProto {
 		/**
 		 *  @private
 		 */
-		public static const KILL_MONSTER_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TaskTargetProto.KillMonsterTargetProto.kill_monster_count", "killMonsterCount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const KILL_MONSTER_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TaskTargetProto.KillMonsterTargetProto.kill_monster_count", "killMonsterCount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var kill_monster_count$field:int;
 
@@ -69,11 +69,11 @@ package app.message.TaskTargetProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasKillMonsterId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, kill_monster_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, kill_monster_id$field);
 			}
 			if (hasKillMonsterCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, kill_monster_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, kill_monster_count$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -87,21 +87,21 @@ package app.message.TaskTargetProto {
 			var kill_monster_id$count:uint = 0;
 			var kill_monster_count$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (kill_monster_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: KillMonsterTargetProto.killMonsterId cannot be set twice.');
 					}
 					++kill_monster_id$count;
-					this.killMonsterId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.killMonsterId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (kill_monster_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: KillMonsterTargetProto.killMonsterCount cannot be set twice.');
 					}
 					++kill_monster_count$count;
-					this.killMonsterCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.killMonsterCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

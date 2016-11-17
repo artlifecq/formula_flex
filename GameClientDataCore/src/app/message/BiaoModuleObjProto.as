@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TODAY_ACESS_PERSONAL_BIAO_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.BiaoModuleObjProto.today_acess_personal_biao_times", "todayAcessPersonalBiaoTimes", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TODAY_ACESS_PERSONAL_BIAO_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.BiaoModuleObjProto.today_acess_personal_biao_times", "todayAcessPersonalBiaoTimes", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var today_acess_personal_biao_times$field:int;
 
@@ -44,7 +44,7 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasTodayAcessPersonalBiaoTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, today_acess_personal_biao_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, today_acess_personal_biao_times$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -57,14 +57,14 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var today_acess_personal_biao_times$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (today_acess_personal_biao_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BiaoModuleObjProto.todayAcessPersonalBiaoTimes cannot be set twice.');
 					}
 					++today_acess_personal_biao_times$count;
-					this.todayAcessPersonalBiaoTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.todayAcessPersonalBiaoTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

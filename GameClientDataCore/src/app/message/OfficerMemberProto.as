@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DATA:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.OfficerMemberProto.data", "data", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryMemberProto; });
+		public static const DATA:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.OfficerMemberProto.data", "data", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryMemberProto; });
 
 		private var data$field:app.message.CountryMemberProto;
 
@@ -38,7 +38,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MEM_IDX:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.OfficerMemberProto.mem_idx", "memIdx", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MEM_IDX:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.OfficerMemberProto.mem_idx", "memIdx", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var mem_idx$field:int;
 
@@ -65,7 +65,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TAKE_OFFICE_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.OfficerMemberProto.take_office_time", "takeOfficeTime", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TAKE_OFFICE_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.OfficerMemberProto.take_office_time", "takeOfficeTime", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var take_office_time$field:Int64;
 
@@ -91,15 +91,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasData) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, data$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, data$field);
 			}
 			if (hasMemIdx) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, mem_idx$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, mem_idx$field);
 			}
 			if (hasTakeOfficeTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, take_office_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, take_office_time$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -114,7 +114,7 @@ package app.message {
 			var mem_idx$count:uint = 0;
 			var take_office_time$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (data$count != 0) {
@@ -122,21 +122,21 @@ package app.message {
 					}
 					++data$count;
 					this.data = new app.message.CountryMemberProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.data);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.data);
 					break;
 				case 2:
 					if (mem_idx$count != 0) {
 						throw new flash.errors.IOError('Bad data format: OfficerMemberProto.memIdx cannot be set twice.');
 					}
 					++mem_idx$count;
-					this.memIdx = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.memIdx = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (take_office_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: OfficerMemberProto.takeOfficeTime cannot be set twice.');
 					}
 					++take_office_time$count;
-					this.takeOfficeTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.takeOfficeTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

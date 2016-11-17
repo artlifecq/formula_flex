@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ENEMY_ID:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.EnemyProto.enemy_id", "enemyId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ENEMY_ID:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.EnemyProto.enemy_id", "enemyId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var enemy_id$field:Int64;
 
@@ -37,7 +37,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const WIN_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EnemyProto.win_times", "winTimes", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const WIN_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EnemyProto.win_times", "winTimes", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var win_times$field:int;
 
@@ -64,7 +64,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FAIL_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EnemyProto.fail_times", "failTimes", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FAIL_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EnemyProto.fail_times", "failTimes", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var fail_times$field:int;
 
@@ -92,15 +92,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasEnemyId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, enemy_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, enemy_id$field);
 			}
 			if (hasWinTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, win_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, win_times$field);
 			}
 			if (hasFailTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, fail_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, fail_times$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -115,28 +115,28 @@ package app.message {
 			var win_times$count:uint = 0;
 			var fail_times$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (enemy_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EnemyProto.enemyId cannot be set twice.');
 					}
 					++enemy_id$count;
-					this.enemyId = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.enemyId = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (win_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EnemyProto.winTimes cannot be set twice.');
 					}
 					++win_times$count;
-					this.winTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.winTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (fail_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EnemyProto.failTimes cannot be set twice.');
 					}
 					++fail_times$count;
-					this.failTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.failTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);
