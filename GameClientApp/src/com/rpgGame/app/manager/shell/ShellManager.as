@@ -1,6 +1,10 @@
 package com.rpgGame.app.manager.shell
 {
+    import com.game.engine3D.manager.Stage3DLayerManager;
+    import com.game.engine3D.utils.StatsUtil;
     import com.game.engine2D.Scene;
+    import gameEngine2D.NetDebug;
+    import com.game.mainCore.core.manager.LayerManager;
     import com.gameClient.log.GameLog;
     import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
     import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
@@ -9,6 +13,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.manager.scene.SceneManager;
     import com.rpgGame.app.manager.scene.SceneSwitchManager;
     import com.rpgGame.app.scene.SceneRole;
+    import com.rpgGame.core.utils.ConsoleDesk;
     import com.rpgGame.coreData.info.buff.BuffInfo;
     import com.rpgGame.coreData.role.MonsterData;
     import com.rpgGame.coreData.role.RoleType;
@@ -21,9 +26,9 @@ package com.rpgGame.app.manager.shell
     
     import org.game.netCore.net.ByteBuffer;
 
-    /*********************************************************************************************************
+    /**************************************************************************
      * 单机版 指令管理
-     ********************************************************************************************************/
+     *************************************************************************/
     public class ShellManager {
         private static var _instance : ShellManager = new ShellManager();
         
@@ -40,6 +45,8 @@ package com.rpgGame.app.manager.shell
             this._funcs["camera".toLowerCase()] = this.camera;
             this._funcs["show".toLowerCase()] = this.show;
             this._funcs["hide".toLowerCase()] = this.hide;
+            this._funcs["status".toLowerCase()] = this.status;
+            this._funcs["addLog".toLowerCase()] = this.addLog;
         }
         
         private function help() : void {
@@ -98,6 +105,19 @@ package com.rpgGame.app.manager.shell
         
         private function hide() : void {
             RotateGizmo3D.instance().hide();
+        }
+
+        private function status() : void {
+            StatsUtil.showOrHideAwayStats(Stage3DLayerManager.stage,
+                                          Stage3DLayerManager.stage3DProxy);
+            LayerManager.showOrHideMM();
+            ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
+        }
+
+        private function addLog(...args) : void {
+            CONFIG::netDebug {
+                NetDebug.LOG.apply(null, args);
+            }
         }
         
         private function handler(command : String, ...params) : void {
