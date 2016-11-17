@@ -15,6 +15,7 @@ package org.game.netCore.net
 	import flash.system.Security;
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
+	import flash.utils.getDefinitionByName;
 	import flash.utils.getTimer;
 	
 	import avmplus.getQualifiedClassName;
@@ -27,14 +28,14 @@ package org.game.netCore.net
 	 * 2013-03-04
 	 */
 	public class MessageMgr extends EventDispatcher 
-    {
+	{
 		/** 客户端成功连接服务器 **/
 		public static const CLIENT_CONNECT_TO_SERVER:String = "client_connect_to_server";
 		/** 客户端连接服务器失败 **/
 		public static const CLIENT_FAILD_TO_SERVER:String = "client_faild_to_server";
 		
 		/** 单例对象 **/
-        private static var _inst:MessageMgr;
+		private static var _inst:MessageMgr;
 		/** 消息流缓存 **/
 		private static var _msgBuff:ByteArray;
 		/** 跨服消息流缓存 **/
@@ -102,7 +103,9 @@ package org.game.netCore.net
 		public static function get Ins():MessageMgr
 		{
 			if ( _inst == null )
+			{
 				_inst = new MessageMgr();
+			}
 			return _inst;
 		}
 		
@@ -119,7 +122,7 @@ package org.game.netCore.net
 			_lastMessageName = "";
 			
 			_msgTypeMap = new Dictionary();
-//			_msgObjPool = new MessagePool();
+			//			_msgObjPool = new MessagePool();
 			
 			_isConnected = false;
 			_isReconnect = false;
@@ -132,7 +135,7 @@ package org.game.netCore.net
 			
 			initCrossHash();
 		}
-
+		
 		/**  消息序号  **/
 		public function get orgSendMsgNum():int
 		{
@@ -146,7 +149,7 @@ package org.game.netCore.net
 		{
 			return _isReplace;
 		}
-
+		
 		/**
 		 * 是否是顶号 
 		 */		
@@ -154,7 +157,7 @@ package org.game.netCore.net
 		{
 			_isReplace = value;
 		}
-
+		
 		/**
 		 * 是否重连 
 		 */
@@ -162,7 +165,7 @@ package org.game.netCore.net
 		{
 			_isReconnect = value;
 		}
-
+		
 		/**
 		 * 是否重连 
 		 */
@@ -170,7 +173,7 @@ package org.game.netCore.net
 		{
 			return _isReconnect;
 		}
-
+		
 		/**
 		 * 消息池 
 		 */
@@ -251,7 +254,7 @@ package org.game.netCore.net
 			_connectTime = getTimer();
 		}
 		
-
+		
 		/**
 		 * 开始连接
 		 */
@@ -263,31 +266,31 @@ package org.game.netCore.net
 			port = $port;
 			
 			_phpPortErrKey = "phpsandboxerror";
-//			_phpPortErrKey += Mgr.stageMgr.STAGE.loaderInfo.parameters[ "agent" ];
-//			_phpPortErrKey += Mgr.stageMgr.STAGE.loaderInfo.parameters[ "account" ];
-//			_phpPortErrKey += Mgr.stageMgr.STAGE.loaderInfo.parameters[ "zoneid" ];
-
-//			if ( Mgr.stageMgr.STAGE.loaderInfo.parameters[ "svrsport" ] != null && Mgr.stageMgr.STAGE.loaderInfo.parameters[ "svrsport" ] != "" )
-//			{
-//				try
-//				{
-//					if (Mgr.cacheMgr.GetValue(_phpPortErrKey) == "1")
-//					{
-//						Mgr.cacheMgr.SetValue(_phpPortErrKey, "0");
-//					}
-//					else
-//					{
-//						_phpPort = parseInt( Mgr.stageMgr.STAGE.loaderInfo.parameters[ "svrsport" ] );
-//						if ( _phpPort >= 0 )
-//							GameConfig.SANDBOX_PORT = _phpPort;
-//					}
-//	
-//				}
-//				catch ( err:Error )
-//				{
-//					trace( "svrsport error" );
-//				}
-//			}
+			//			_phpPortErrKey += Mgr.stageMgr.STAGE.loaderInfo.parameters[ "agent" ];
+			//			_phpPortErrKey += Mgr.stageMgr.STAGE.loaderInfo.parameters[ "account" ];
+			//			_phpPortErrKey += Mgr.stageMgr.STAGE.loaderInfo.parameters[ "zoneid" ];
+			
+			//			if ( Mgr.stageMgr.STAGE.loaderInfo.parameters[ "svrsport" ] != null && Mgr.stageMgr.STAGE.loaderInfo.parameters[ "svrsport" ] != "" )
+			//			{
+			//				try
+			//				{
+			//					if (Mgr.cacheMgr.GetValue(_phpPortErrKey) == "1")
+			//					{
+			//						Mgr.cacheMgr.SetValue(_phpPortErrKey, "0");
+			//					}
+			//					else
+			//					{
+			//						_phpPort = parseInt( Mgr.stageMgr.STAGE.loaderInfo.parameters[ "svrsport" ] );
+			//						if ( _phpPort >= 0 )
+			//							GameConfig.SANDBOX_PORT = _phpPort;
+			//					}
+			//	
+			//				}
+			//				catch ( err:Error )
+			//				{
+			//					trace( "svrsport error" );
+			//				}
+			//			}
 			
 			trace( "GAME_SERVER_IP:" + this.ip + ":" + this.port + " " + SANDBOX_PORT + "     GameConfig.gameline " + GAME_LINE );
 			
@@ -295,10 +298,10 @@ package org.game.netCore.net
 			Security.loadPolicyFile( policyPath );
 			createSocketAndConnect();
 			
-//			var portchecker:PortChecker = new PortChecker();
-//			portchecker.startTest( this.port_ARR );
-//			portchecker.addEventListener( NetEvent.GAME_CHANGE_IP, changeIPConnectHandler );
-//			portchecker.addEventListener( Event.COMPLETE, portCheckerOKHandler );
+			//			var portchecker:PortChecker = new PortChecker();
+			//			portchecker.startTest( this.port_ARR );
+			//			portchecker.addEventListener( NetEvent.GAME_CHANGE_IP, changeIPConnectHandler );
+			//			portchecker.addEventListener( Event.COMPLETE, portCheckerOKHandler );
 		}
 		
 		protected function portCheckerOKHandler(event:Event):void
@@ -316,7 +319,7 @@ package org.game.netCore.net
 				var vect:PortChecker = event.currentTarget as PortChecker;
 				//" 与服务器["+ PlatformUtil.platformName + GameConfig.GAME_LINE +"区:" +this.port_ARR+"]deactivate 连接断开！尝试连接"+obj.newIP+"的地址?"
 				AlertPanel.showMsg( "与服务器断开连接", null, false,vect.start);
-//				GameLog.addError("与服务器断开连接");
+				//				GameLog.addError("与服务器断开连接");
 				//				AlertPanel.showMsg(" 与服务器["+obj.oldIP+":"+this.port_ARR+"]deactivate 连接断开！尝试连接"+obj.newIP+"的地址?", Mgr.layerMgr.alertLayer, false,vect.start);
 			}
 			else
@@ -432,27 +435,27 @@ package org.game.netCore.net
 		private function checkUseCrossServer( msg:Message ):int
 		{
 			var isCross:int = 0;
-//			if( isCrossSocket )
-//			{
-//				var msgId:int = msg.getId();
-//				if( sendCrossHash.get( msgId ) )
-//					isCross = sendCrossHash.get( msgId );
-//				if( msgId == 112201 )
-//				{
-//					var type:int = (msg as ReqChatMessage).type;
-//					if( type == EnumChatChannelType.PRIVATE )
-//						isCross = 2;
-//					else if( type == EnumChatChannelType.NORMAL )
-//						isCross = 1;
-//				}
-//				else if( msgId == 108203 )
-//				{
-//					var item:Item = Mgr.backpackMgr.getItemById( (msg as ReqUseItemMessage).itemId );
-//					var q_item:Q_item = Mgr.gameDataMgr.getItemModel( item.itemModelId );
-//					if( ItemUtil.isMedical( q_item.q_type ) || q_item.q_type == EnumItemType.ADDBUFF )
-//						isCross = 1;
-//				}
-//			}
+			//			if( isCrossSocket )
+			//			{
+			//				var msgId:int = msg.getId();
+			//				if( sendCrossHash.get( msgId ) )
+			//					isCross = sendCrossHash.get( msgId );
+			//				if( msgId == 112201 )
+			//				{
+			//					var type:int = (msg as ReqChatMessage).type;
+			//					if( type == EnumChatChannelType.PRIVATE )
+			//						isCross = 2;
+			//					else if( type == EnumChatChannelType.NORMAL )
+			//						isCross = 1;
+			//				}
+			//				else if( msgId == 108203 )
+			//				{
+			//					var item:Item = Mgr.backpackMgr.getItemById( (msg as ReqUseItemMessage).itemId );
+			//					var q_item:Q_item = Mgr.gameDataMgr.getItemModel( item.itemModelId );
+			//					if( ItemUtil.isMedical( q_item.q_type ) || q_item.q_type == EnumItemType.ADDBUFF )
+			//						isCross = 1;
+			//				}
+			//			}
 			return isCross;
 		}
 		
@@ -461,8 +464,8 @@ package org.game.netCore.net
 		 */		
 		public function send( msg:Message ):Boolean 
 		{
-//			if ( StoryMgr.Ins.isStoryType(StoryUtil.STORY_CREATE) )//哎呀呀，这里加return真蛋疼，除了这个不能再加了,目前仅创角动画return
-//				return false;
+			//			if ( StoryMgr.Ins.isStoryType(StoryUtil.STORY_CREATE) )//哎呀呀，这里加return真蛋疼，除了这个不能再加了,目前仅创角动画return
+			//				return false;
 			
 			if ( !_isConnected )
 				return false;
@@ -490,18 +493,18 @@ package org.game.netCore.net
 					{
 						var count:int = int( _msgTypeMap[key] );
 						strLog += ( "每秒消息量过大 id:" + key + " count:" + count );
-                        if (count > _maxMsgCnt)
-                        {
-                            _maxMsgCnt = count;
-                            _maxCntMsgType = key;
-                        }
+						if (count > _maxMsgCnt)
+						{
+							_maxMsgCnt = count;
+							_maxCntMsgType = key;
+						}
 					}
-                    if (_maxCntMsgType != 0)
-                    {
-					    GameLog.add( "每秒消息量过大 第一名：" + _maxCntMsgType.toString() + "数量:" + _maxMsgCnt.toString());
-                        _maxCntMsgType = 0;
-                        _maxMsgCnt = 0;
-                    }
+					if (_maxCntMsgType != 0)
+					{
+						GameLog.add( "每秒消息量过大 第一名：" + _maxCntMsgType.toString() + "数量:" + _maxMsgCnt.toString());
+						_maxCntMsgType = 0;
+						_maxMsgCnt = 0;
+					}
 					GameLog.add( strLog );
 				}
 				
@@ -510,10 +513,10 @@ package org.game.netCore.net
 			}
 			
 			if ( _sendMsgCnt >= 20 )
-            {
+			{
 				GameLog.add( "每秒消息量过大 抛弃消息发送:" + getQualifiedClassName(msg));
 				return false;
-            }
+			}
 			
 			sendMsg( msg, isCross == 1 );
 			//私聊双向发送
@@ -537,7 +540,7 @@ package org.game.netCore.net
 			{
 				/*if( ( !Mgr.loginMgr.isLoginSuccess || orgSendMsgNum == 0 ) && !isLoginMsg( msg.getId() ) )
 				{
-					return;
+				return;
 				}*/
 				sendMsgNum = orgSendMsgNum;
 			}
@@ -596,7 +599,7 @@ package org.game.netCore.net
 				_socket.removeEventListener( Event.CONNECT, connectHandler );
 			clearCorssSocket();
 			_isConnected = true;
-			//Mgr.logMgr.addClientLog( "连接成功" );
+			//GameLog.add( "连接成功" );
 			_orgSendMsgNum = 0;
 			//Mgr.mainApp.resetServerTimeCheck();
 			dispatchEvent( new NetEvent( CLIENT_CONNECT_TO_SERVER ) );
@@ -620,7 +623,7 @@ package org.game.netCore.net
 				
 				
 				dispatchEvent( new NetEvent( CLIENT_FAILD_TO_SERVER, event.text ) );
-
+				
 			}
 		}
 		
@@ -630,15 +633,15 @@ package org.game.netCore.net
 		protected function closeHandler( event:Event ):void
 		{
 			clearOrgSocket();
-//			if ( Mgr.pubLoginMgr.isCrossState )
-//			{
-//				DebugFunction.traceCheckDbg("完成跨服连接。。。");
-//			}
-//			else
+			//			if ( Mgr.pubLoginMgr.isCrossState )
+			//			{
+			//				DebugFunction.traceCheckDbg("完成跨服连接。。。");
+			//			}
+			//			else
 			{
-//				Mgr.mainApp.cacheAsBitmap = true;
-//				Mgr.sceneMgr.removeEvent();
-//				Mgr.mainApp.filters = [ FilterUtil.getGrayFilter() ];
+				//				Mgr.mainApp.cacheAsBitmap = true;
+				//				Mgr.sceneMgr.removeEvent();
+				//				Mgr.mainApp.filters = [ FilterUtil.getGrayFilter() ];
 				
 				_isConnected = false;
 				dispatchEvent( new NetEvent( CLIENT_FAILD_TO_SERVER, event.toString() ) );
@@ -652,14 +655,14 @@ package org.game.netCore.net
 					}
 					else
 					{
-//						AlertPanel.showMsg( TextUtil.changeDateToDateStr( new Date() ) 
-//							+ "您的账号在IP:[" 
-//							+ _replaceIP 
-//							+ "]处登录上线了", 
-//							Mgr.layerMgr.alertLayer, 
-//							false, 
-//							flushPage 
-//						);
+						//						AlertPanel.showMsg( TextUtil.changeDateToDateStr( new Date() ) 
+						//							+ "您的账号在IP:[" 
+						//							+ _replaceIP 
+						//							+ "]处登录上线了", 
+						//							Mgr.layerMgr.alertLayer, 
+						//							false, 
+						//							flushPage 
+						//						);
 					}
 				}
 			}
@@ -702,7 +705,7 @@ package org.game.netCore.net
 		{
 			createSocketAndConnect();
 		}
-
+		
 		/**
 		 * 接收消息 
 		 */		
@@ -737,7 +740,7 @@ package org.game.netCore.net
 		private function recvBytes( bytes:ByteArray ):void
 		{
 			var remainBytes:ByteArray = null;
-			var actionArray:Vector.< Handler > = new Vector.< Handler >();
+			//			var actionArray:Vector.< Handler > = new Vector.< Handler >();
 			
 			_msgBuff.position = _remainBytesCnt;
 			_msgBuff.writeBytes( bytes );
@@ -745,9 +748,9 @@ package org.game.netCore.net
 			_remainBytesCnt = _msgBuff.bytesAvailable;
 			
 			while ( true ) 
-            {
+			{
 				if ( _remainBytesCnt >= 4 ) 
-                {
+				{
 					// 读取信息长度
 					var length:int = _msgBuff.readInt();
 					
@@ -757,10 +760,10 @@ package org.game.netCore.net
 					length = ( length & 0x00ffffff );
 					
 					// 用来防止客户端服务器消息名字匹配，但消息长度不匹配 
-                    if ( length > 10000 )
-                    {
+					if ( length > 10000 )
+					{
 						// 异常情况
-                    }
+					}
 					
 					if ( _remainBytesCnt >= length + 4 )
 					{
@@ -769,42 +772,42 @@ package org.game.netCore.net
 						var message:Message = msgObjPool.getMessage( id );
 						var isPass:Boolean = false;
 						
-                        if ( message == null )
-                        {
+						if ( message == null )
+						{
 							GameLog.addError( "客户端缺少消息 " + id + "上一个消息:" + _lastMsgID );
-                            isPass = true;
-                        }
-                        else
-                        {
-                            _lastMessageName = DebugUtil.getObjectNameStr( message );
-							//ToolBase.LogError( "客户端处理消息 " + id + " : " + _lastMessageName );
-                        }
+							isPass = true;
+						}
+						else
+						{
+							_lastMessageName = DebugUtil.getObjectNameStr( message );
+							//							GameLog.add("客户端处理消息 " + id + " : " + _lastMessageName);
+						}
 						
 						_lastMsgID = id;
-                        
-                        if ( isPass )
-                        {
-                            var bytespass: ByteArray = new ByteArray();
+						
+						if ( isPass )
+						{
+							var bytespass: ByteArray = new ByteArray();
 							var readLen:int = length - 4; 
 							if ( readLen > 0 )
-                            	_msgBuff.readBytes( bytespass, 0, readLen );
-
-                            // 缓存为空
+								_msgBuff.readBytes( bytespass, 0, readLen );
+							
+							// 缓存为空
 							_remainBytesCnt = _msgBuff.bytesAvailable;
-                            if ( _remainBytesCnt == 0 ) 
+							if ( _remainBytesCnt == 0 ) 
 							{
-                                _msgBuff.clear();
-                                break;
-                            }
+								_msgBuff.clear();
+								break;
+							}
 							else
 							{
-                                continue;
-                            }
-                        }
-
+								continue;
+							}
+						}
+						
 						// 反序列化消息
 						try 
-                        {
+						{
 							var bytesMsg:ByteArray = new ByteArray();
 							var readMsgLen:int = length - 4; 
 							if ( readMsgLen > 0 )
@@ -813,14 +816,16 @@ package org.game.netCore.net
 								
 								// 如果存在压缩则解压
 								if ( flag == 1 )
+								{
 									bytesMsg.uncompress();
+								}
 							}
 							
 							message.read( bytesMsg );
-
+							
 							if ( bytesMsg.bytesAvailable > 0 )
 							{
-//								AlertPanel.showMsg( "客户端与服务器不匹配！！！");
+								//								AlertPanel.showMsg( "客户端与服务器不匹配！！！");
 								var msginfo:String = "消息错误信息：" + " length:" + length + "  remain: " + _remainBytesCnt + " buf.length:" + _msgBuff.length + " id:" + message.getId();
 								AlertPanel.showMsg(msginfo, null );
 								GameLog.addError(msginfo);
@@ -833,30 +838,36 @@ package org.game.netCore.net
 								continue;
 							}
 						} 
-                        catch ( error:Error )
-                        {
+						catch ( error:Error )
+						{
 							var loginfo:String = "客户端与服务器不匹配！！！"+"消息错误信息：" + " length:" + length + "  remain: " + _remainBytesCnt + " buf.length:" + _msgBuff.length + " id:" + _lastMsgID;
-//                            if ( DebugUtil.IS_MESSAGE_SHOW && Mgr.chatMgr != null )
-//                            {
-//                                Mgr.chatMgr.addAllHtmlChat( TextUtil.getHtmlStr( loginfo, TextUtil.SYS_RED ) );
-//                            }
+							
 							GameLog.addError(loginfo);
 							
 							AlertPanel.showMsg( loginfo, null );
 							
 							_remainBytesCnt = _msgBuff.bytesAvailable;
 							continue;
-//							if( _socket != null )
-//								_socket.close();
-//							return;
+							//							if( _socket != null )
+							//								_socket.close();
+							//							return;
 						}
-
+						
 						//DebugUtil.addMessageInfo( message );
-
-						// 获取处理handler
-						var handler:Handler = msgObjPool.getHandler( id );
-						handler.message = message;
-						actionArray.push( handler );
+						
+						//						// 获取处理handler
+						//						var handler:Handler = msgObjPool.getHandler( id );
+						//						handler.message = message;
+						//						actionArray.push( handler );
+						
+						//传入数据到对应的监听函数去
+						var beginTime:int = getTimer();
+						GameSocketDispatcher.excute(id, message);
+						var delta:int = getTimer() - beginTime;
+						if ( delta > 100 )
+						{
+							GameLog.add("[消息处理 Time]  跨服：单个函数超时    "  + id + "  " + delta.toString());
+						}
 						
 						_remainBytesCnt = _msgBuff.bytesAvailable;
 					}
@@ -884,52 +895,6 @@ package org.game.netCore.net
 					break;
 				}
 			}
-			
-			// 统计每秒消息数
-			if ( getTimer() - _msgPerSecondTime > 1000 )
-			{
-				_msgPerSceCount = 0;
-				_msgPerSecondTime = getTimer();
-			}
-			
-			_msgPerSceCount += actionArray.length;
-			
-			for each ( var handlerMsg:Handler in actionArray )
-			{
-            	/*if ( Mgr.mainPlayer == null )
-				{
-					var msgId:int = handlerMsg.message.getId();
-					if ( int( msgId / 1000 ) != 100 && msgId != 103101 && msgId != 200101 )
-					{
-						GameLog.addError( "玩家未初始化，忽略消息:" +  msgId + ":" + DebugUtil.getObjectNameStr( handlerMsg.message ) );
-						continue;
-					}
-				}*/
-				
-                var beginTime:int = getTimer();
-				
-				try
-				{
-					handlerMsg.action();
-				}
-				catch( e:Error )
-				{
-//					ToolBase.LogError(e.getStackTrace());
-					GameLog.addError(e.getStackTrace());
-					//DebugFunction.traceCheckDbg( e.getStackTrace() );
-					//Mgr.logMgr.addClientLog( e.getStackTrace() );
-				}
-                var delta:int = getTimer() - beginTime;
-				
-                if ( delta > 100 )
-                {
-					var msgName:String = null;
-                    if ( msgName == null && handlerMsg != null )
-                        msgName = getQualifiedClassName( handlerMsg );
-					
-                   // Mgr.logMgr.addClientLog( "[消息处理 Time]  单个函数超时"  + msgName + "  " + delta.toString() + "当前长度" + actionArray.length );
-                }
-			}
 		}
 		
 		/**
@@ -938,7 +903,7 @@ package org.game.netCore.net
 		private function recvCrossBytes( bytes:ByteArray ):void
 		{
 			var remainBytes:ByteArray = null;
-			var actionArray:Vector.< Handler > = new Vector.< Handler >();
+			//			var actionArray:Vector.< Handler > = new Vector.< Handler >();
 			
 			_msgCrossBuff.position = _remainCrossBytesCnt;
 			_msgCrossBuff.writeBytes( bytes );
@@ -1043,10 +1008,19 @@ package org.game.netCore.net
 						
 						//DebugUtil.addMessageInfo( message );
 						
-						// 获取处理handler
-						var handler:Handler = msgObjPool.getHandler( id );
-						handler.message = message;
-						actionArray.push( handler );
+						//						// 获取处理handler
+						//						var handler:Handler = msgObjPool.getHandler( id );
+						//						handler.message = message;
+						//						actionArray.push( handler );
+						
+						//传入数据到对应的监听函数去
+						var beginTime:int = getTimer();
+						GameSocketDispatcher.excute(id, message);
+						var delta:int = getTimer() - beginTime;
+						if ( delta > 100 )
+						{
+							GameLog.add("[消息处理 Time]  跨服：单个函数超时    "  + id + "  " + delta.toString());
+						}
 						
 						_remainCrossBytesCnt = _msgCrossBuff.bytesAvailable;
 					}
@@ -1074,50 +1048,6 @@ package org.game.netCore.net
 					break;
 				}
 			}
-			
-			// 统计每秒消息数
-			if ( getTimer() - _msgPerSecondTime > 1000 )
-			{
-				_msgPerSceCount = 0;
-				_msgPerSecondTime = getTimer();
-			}
-			
-			_msgPerSceCount += actionArray.length;
-			
-			for each ( var handlerMsg:Handler in actionArray )
-			{
-				/*if ( Mgr.mainPlayer == null )
-				{
-					var msgId:int = handlerMsg.message.getId();
-					if ( int( msgId / 1000 ) != 100 && msgId != 103101 && msgId != 200101 )
-					{
-						//Trace.tjl( "跨服：玩家未初始化，忽略消息:" +  msgId + ":" + DebugUtil.getObjectNameStr( handlerMsg.message ) );
-						continue;
-					}
-				}*/
-				
-				var beginTime:int = getTimer();
-				
-				try
-				{
-					handlerMsg.action();
-				}
-				catch( e:Error )
-				{
-					//DebugFunction.traceCheckDbg( e.getStackTrace() );
-					//Mgr.logMgr.addClientLog( e.getStackTrace() );
-				}
-				var delta:int = getTimer() - beginTime;
-				
-				if ( delta > 100 )
-				{
-					var msgName:String = null;
-					if ( msgName == null && handlerMsg != null )
-						msgName = getQualifiedClassName( handlerMsg );
-					
-					//Mgr.logMgr.addClientLog( "[消息处理 Time]  跨服：单个函数超时"  + msgName + "  " + delta.toString() + "当前长度" + actionArray.length );
-				}
-			}
 		}
 		
 		/**
@@ -1128,16 +1058,16 @@ package org.game.netCore.net
 		{
 			if (crossSocket == null)
 			{
-//				var policyPath:String = "xmlsocket://" + Mgr.crossMgr.crossIP + ":" +  Mgr.crossMgr.crossSSLPort;
-//				Security.loadPolicyFile( policyPath );
-//				Mgr.logMgr.addClientLog("连接跨服服务器:" + Mgr.crossMgr.crossIP + ":" +  Mgr.crossMgr.crossPort );
-//				crossSocket = new Socket();
-//				crossSocket.timeout = 10000;
-//				crossSocket.addEventListener(Event.CONNECT, corssconnectHandler);
-//				crossSocket.addEventListener(IOErrorEvent.IO_ERROR, corssioErrorHandler);
-//				crossSocket.addEventListener(SecurityErrorEvent.SECURITY_ERROR, corsssecurityErrorHandler);
-//				crossSocket.addEventListener(Event.CLOSE, corsscloseHandler, false, 0, true );
-//				crossSocket.addEventListener(ProgressEvent.SOCKET_DATA, recvCross);
+				//				var policyPath:String = "xmlsocket://" + Mgr.crossMgr.crossIP + ":" +  Mgr.crossMgr.crossSSLPort;
+				//				Security.loadPolicyFile( policyPath );
+				//				Mgr.logMgr.addClientLog("连接跨服服务器:" + Mgr.crossMgr.crossIP + ":" +  Mgr.crossMgr.crossPort );
+				//				crossSocket = new Socket();
+				//				crossSocket.timeout = 10000;
+				//				crossSocket.addEventListener(Event.CONNECT, corssconnectHandler);
+				//				crossSocket.addEventListener(IOErrorEvent.IO_ERROR, corssioErrorHandler);
+				//				crossSocket.addEventListener(SecurityErrorEvent.SECURITY_ERROR, corsssecurityErrorHandler);
+				//				crossSocket.addEventListener(Event.CLOSE, corsscloseHandler, false, 0, true );
+				//				crossSocket.addEventListener(ProgressEvent.SOCKET_DATA, recvCross);
 			}
 			
 			//crossSocket.connect( Mgr.crossMgr.crossIP, Mgr.crossMgr.crossPort);
@@ -1146,82 +1076,82 @@ package org.game.netCore.net
 		protected function corsscloseHandler(event:Event):void
 		{
 			clearCorssSocket();
-//			dispatchEvent(new Event(PubLoginMgr.CROSS_CONNECT_ERROR));
-//			
-//			if( !Mgr.pubLoginMgr.isCrossState )
+			//			dispatchEvent(new Event(PubLoginMgr.CROSS_CONNECT_ERROR));
+			//			
+			//			if( !Mgr.pubLoginMgr.isCrossState )
 			{
-//				Mgr.mainApp.cacheAsBitmap = true;
-//				Mgr.sceneMgr.removeEvent();
-//				Mgr.mainApp.filters = [ FilterUtil.getGrayFilter() ];
-//				
-//				dispatchEvent( new NetEvent( CLIENT_FAILD_TO_SERVER, event.toString() ) );
-//				if ( !_isReconnect )
-//				{
-//					if ( !Mgr.messageMgr.isReplace )
-//					{
-////						ReconnectPanexlExt.singleton.showPanel(30, "【连接close】");
-//					}
-//					else
-//					{
-//						AlertPanel.showMsg( TextUtil.changeDateToDateStr( new Date() ) 
-//							+ "您的账号在IP:[" 
-//							+ _replaceIP 
-//							+ "]处登录上线了", 
-//							Mgr.layerMgr.alertLayer, 
-//							false, 
-//							flushPage 
-//						);
-//					}
-//				}
+				//				Mgr.mainApp.cacheAsBitmap = true;
+				//				Mgr.sceneMgr.removeEvent();
+				//				Mgr.mainApp.filters = [ FilterUtil.getGrayFilter() ];
+				//				
+				//				dispatchEvent( new NetEvent( CLIENT_FAILD_TO_SERVER, event.toString() ) );
+				//				if ( !_isReconnect )
+				//				{
+				//					if ( !Mgr.messageMgr.isReplace )
+				//					{
+				////						ReconnectPanexlExt.singleton.showPanel(30, "【连接close】");
+				//					}
+				//					else
+				//					{
+				//						AlertPanel.showMsg( TextUtil.changeDateToDateStr( new Date() ) 
+				//							+ "您的账号在IP:[" 
+				//							+ _replaceIP 
+				//							+ "]处登录上线了", 
+				//							Mgr.layerMgr.alertLayer, 
+				//							false, 
+				//							flushPage 
+				//						);
+				//					}
+				//				}
 			}
 		}
 		
 		protected function corsssecurityErrorHandler(event:SecurityErrorEvent):void
 		{
-//			Mgr.logMgr.addClientLog("安全错误 跨服断开" );
-////			AlertPanel.showMsg( event.text );
-//			clearCorssSocket();
-//			if( Mgr.crossMgr.crossTimes > 0 )
-//			{
-//				Mgr.logMgr.addClientLog("跨服连接失败次数倒数:" + Mgr.crossMgr.crossTimes + '   ' + event.text);
-//				Mgr.crossMgr.crossTimes--;
-//				connectCrossServer();
-//			}
-//			else
-//			{
-//				var str:String = "【SecurityError】";
-//				str += "\n端口：" + Mgr.crossMgr.crossPort;
-//				str += "\n安全端口：" + Mgr.crossMgr.crossSSLPort;
-//				str += "\nIP：" +Mgr.crossMgr.crossIP;
-//				AlertPanel.showMsg( str );
-//				dispatchEvent(new Event(CrossMgr.CROSS_CONNECT_ERROR));
-//			}
+			//			Mgr.logMgr.addClientLog("安全错误 跨服断开" );
+			////			AlertPanel.showMsg( event.text );
+			//			clearCorssSocket();
+			//			if( Mgr.crossMgr.crossTimes > 0 )
+			//			{
+			//				Mgr.logMgr.addClientLog("跨服连接失败次数倒数:" + Mgr.crossMgr.crossTimes + '   ' + event.text);
+			//				Mgr.crossMgr.crossTimes--;
+			//				connectCrossServer();
+			//			}
+			//			else
+			//			{
+			//				var str:String = "【SecurityError】";
+			//				str += "\n端口：" + Mgr.crossMgr.crossPort;
+			//				str += "\n安全端口：" + Mgr.crossMgr.crossSSLPort;
+			//				str += "\nIP：" +Mgr.crossMgr.crossIP;
+			//				AlertPanel.showMsg( str );
+			//				dispatchEvent(new Event(CrossMgr.CROSS_CONNECT_ERROR));
+			//			}
 		}
 		
 		protected function corssioErrorHandler(event:IOErrorEvent):void
 		{
-//			Mgr.logMgr.addClientLog("io错误 跨服断开"); 
-//			clearCorssSocket();
-//			if( Mgr.crossMgr.crossTimes > 0 )
-//			{
-//				Mgr.logMgr.addClientLog("跨服连接失败次数倒数:" + Mgr.crossMgr.crossTimes + '   ' + event.text);
-//				Mgr.crossMgr.crossTimes--;
-//				connectCrossServer();
-//			}
-//			else
-//			{
-//				dispatchEvent(new Event(CrossMgr.CROSS_CONNECT_ERROR));
-//			}
+			//			Mgr.logMgr.addClientLog("io错误 跨服断开"); 
+			//			clearCorssSocket();
+			//			if( Mgr.crossMgr.crossTimes > 0 )
+			//			{
+			//				Mgr.logMgr.addClientLog("跨服连接失败次数倒数:" + Mgr.crossMgr.crossTimes + '   ' + event.text);
+			//				Mgr.crossMgr.crossTimes--;
+			//				connectCrossServer();
+			//			}
+			//			else
+			//			{
+			//				dispatchEvent(new Event(CrossMgr.CROSS_CONNECT_ERROR));
+			//			}
 		}
 		
 		protected function corssconnectHandler(event:Event):void
 		{
-//			Mgr.logMgr.addClientLog("连接跨服服务器成功" );
-//			isCrossSocket = true;
-//			_crossMsgNum = 0;
-//			Mgr.mainApp.resetServerTimeCheck();
-//			Mgr.mainApp.filters = null;
-//			dispatchEvent(new Event(CrossMgr.CROSS_CONNECT_OK));
+			//			Mgr.logMgr.addClientLog("连接跨服服务器成功" );
+			//			isCrossSocket = true;
+			//			_crossMsgNum = 0;
+			//			Mgr.mainApp.resetServerTimeCheck();
+			//			Mgr.mainApp.filters = null;
+			//			dispatchEvent(new Event(CrossMgr.CROSS_CONNECT_OK));
 		}		
 		
 		public function clearOrgSocket():void
@@ -1257,12 +1187,11 @@ package org.game.netCore.net
 			}
 			//Mgr.loginMgr.isCrossSuccess = false;
 		}
-
+		
 		/** 发送的消息数量 **/
 		public function get sendMsgCnt():int
 		{
 			return _sendMsgCnt;
 		}
-
 	}
 }
