@@ -39,7 +39,7 @@ package
 	 *
 	 */
 	[SWF(width = "1600", height = "900", backgroundColor = "0x000000", frameRate = "60", quality = "LOW")]
-	public class GameDemo extends Sprite
+	public class GameClientAIR extends Sprite
 	{
 		public var versionMap : Object = null;
 		public var versionInfo : String = "V1.5.39";
@@ -66,7 +66,7 @@ package
 		 */
 		public var isStable : Boolean = false;
 		
-		public function GameDemo()
+		public function GameClientAIR()
 		{
 			addEventListener(Event.ADDED_TO_STAGE, onAddToStg);
 		}
