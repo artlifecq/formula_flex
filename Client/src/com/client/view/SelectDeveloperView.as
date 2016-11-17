@@ -24,10 +24,8 @@ package com.client.view
 	{
 		private var _xml : XML = <ipList>
 				<item ip="0.0.0.0" port="0" name="单机版本"/>
-				<item ip="localhost" port="9999" name="本地服"/>
-				<item ip="168.168.44.130" port="9850" name="稳定服"/>
-				<item ip="218.17.158.85" port="19001" name="版署服"/>
-				<item ip="lml.ylzt.work" port="9999" name="明亮服"/>
+				<item ip="192.168.4.139" port="8001" name="阿杜服"/>
+				<item ip="192.168.4.112" port="8001" name="樊科服"/>
 			</ipList>;
 
 		private var _clickFun : Function;
