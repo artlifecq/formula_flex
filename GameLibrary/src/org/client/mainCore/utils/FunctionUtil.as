@@ -1,28 +1,26 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.utils
+﻿package org.client.mainCore.utils
 {
     import flash.display.Sprite;
 
     public class FunctionUtil 
     {
-
-
-        public static function getFunctionName(fun:Function):String
-        {
-            var k = null;
-            var fn = null;
-            try
-            {
-                k = Sprite(fun);
-            }
-            catch(err:Error)
-            {
-                fn = err.message.replace(/.+::(\w+\/\w+)\(\)\}\@.+/, "$1");
-                return ((((fn)==err.message) ? err.message.replace(/.+ (function\-\d+) .+/i, "$1") : fn));
-            };
-            return (null);
-        }
-
-
+		/**
+		 * 获取函数名。
+		 * @param func 要获取名称的函数。
+		 * @return 函数名。
+		 */		
+		public static function getFunctionName(func:Function):String
+		{
+			try
+			{
+				Sprite(func);
+			}
+			catch (e:Error)
+			{
+				return e.message.replace(/.+\/(\w+)\(\)\}\@.+/, "$1");
+			}
+			
+			return null;
+		}
     }
-}//package org.client.mainCore.utils
+}

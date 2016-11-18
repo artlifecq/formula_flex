@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.utils
+﻿package org.client.mainCore.utils
 {
     import __AS3__.vec.Vector;
     import flash.utils.getTimer;
@@ -45,19 +44,19 @@ package org.client.mainCore.utils
         public static function get runningTimerUpdateList():Vector.<Function>
         {
             _isCountUpdate = true;
-            return (_timerUpdateList);
+            return _timerUpdateList;
         }
 
         public static function get runningTimerCmpList():Vector.<Function>
         {
             _isCountCmp = true;
-            return (_timerCmpList);
+            return _timerCmpList;
         }
 
 
         public function get delay():Number
         {
-            return (_delay);
+            return _delay;
         }
 
         public function set delay(value:Number):void
@@ -67,7 +66,7 @@ package org.client.mainCore.utils
 
         public function get currentCount():uint
         {
-            return (_repeatCnt);
+            return _repeatCnt;
         }
 
         public function set repeatCount(value:uint):void
@@ -77,28 +76,28 @@ package org.client.mainCore.utils
 
         public function get repeatCount():uint
         {
-            return (_repeat);
+            return _repeat;
         }
 
         public function get duration():Number
         {
-            return (_duration);
+            return _duration;
         }
 
         public function set duration(value:Number):void
         {
             _duration = value;
-            if ((_delay > 0))
+            if (_delay > 0)
             {
-                _repeat = (_duration / _delay);
+                _repeat = _duration / _delay;
             }
             else
             {
                 if (_repeat > 0)
                 {
-                    _delay = (_duration / _repeat);
-                };
-            };
+                    _delay = _duration / _repeat;
+                }
+            }
         }
 
         public function set onUpdate(value:Function):void
@@ -122,19 +121,19 @@ package org.client.mainCore.utils
             if (_isCountUpdate)
             {
                 index = _timerUpdateList.indexOf(_onUpdate);
-                if ((((index == -1)) && (!((_onUpdate == null)))))
+                if (index == -1 && _onUpdate != null)
                 {
                     _timerUpdateList.push(_onUpdate);
-                };
-            };
+                }
+            }
             if (_isCountCmp)
             {
                 index = _timerCmpList.indexOf(_onComplete);
-                if ((((index == -1)) && (!((_onComplete == null)))))
+                if (index == -1 && _onComplete != null)
                 {
                     _timerCmpList.push(_onComplete);
-                };
-            };
+                }
+            }
         }
 
         public function stop():void
@@ -142,15 +141,15 @@ package org.client.mainCore.utils
             _running = false;
             Tick.removeCallback(onTimerTick);
             var index:int = _timerUpdateList.indexOf(_onUpdate);
-            if (!((index == -1)))
+            if (index != -1)
             {
                 _timerUpdateList.splice(index, 1);
-            };
+            }
             index = _timerCmpList.indexOf(_onComplete);
-            if (!((index == -1)))
+            if (index != -1)
             {
                 _timerCmpList.splice(index, 1);
-            };
+            }
         }
 
         public function reset():void
@@ -164,7 +163,7 @@ package org.client.mainCore.utils
 
         public function get running():Boolean
         {
-            return (_running);
+            return _running;
         }
 
         public function destroy():void
@@ -185,57 +184,55 @@ package org.client.mainCore.utils
         {
             var i:int;
             var funTm:int;
-            if ((gapTm > 10))
+            if (gapTm > 10)
             {
-            };
+            }
             _time = getTimer();
-            _passTm = (_time - _startTm);
-            var cnt:int = ((_passTm - (delay * _timeCnt)) / delay);
+            _passTm = _time - _startTm;
+            var cnt:int = (_passTm - (delay * _timeCnt)) / delay;
             i = 0;
             while (i < cnt)
             {
                 funTm = getTimer();
                 _repeatCnt++;
                 _timeCnt++;
-                if (!((_onUpdate == null)))
+                if (_onUpdate != null)
                 {
-                    if (((_onUpdateParams) && (_onUpdateParams.length)))
+                    if (_onUpdateParams && _onUpdateParams.length)
                     {
                         _onUpdate.apply(null, _onUpdateParams);
                     }
                     else
                     {
-                        (_onUpdate());
-                    };
+                        _onUpdate();
+                    }
                     if (isPrint)
                     {
-                        (trace("计时器函数执行耗时 : ", FunctionUtil.getFunctionName(_onUpdate), (getTimer() - funTm)));
-                    };
-                };
-                if ((_repeatCnt == _repeat))
+                        trace("计时器函数执行耗时 : ", FunctionUtil.getFunctionName(_onUpdate), getTimer() - funTm);
+                    }
+                }
+                if (_repeatCnt == _repeat)
                 {
                     stop();
-                    if (!((_onComplete == null)))
+                    if (_onComplete != null)
                     {
-                        if (((_onCompleteParams) && (_onCompleteParams.length)))
+                        if (_onCompleteParams && _onCompleteParams.length)
                         {
                             _onComplete.apply(null, _onCompleteParams);
                         }
                         else
                         {
-                            (_onComplete());
-                        };
-                    };
+                            _onComplete();
+                        }
+                    }
                     if (_isCmpDestroy)
                     {
                         destroy();
-                    };
+                    }
                     return;
-                };
+                }
                 i++;
-            };
+            }
         }
-
-
     }
-}//package org.client.mainCore.utils
+}

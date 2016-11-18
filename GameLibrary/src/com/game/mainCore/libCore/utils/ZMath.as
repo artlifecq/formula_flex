@@ -1,8 +1,8 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.libCore.utils
+﻿package com.game.mainCore.libCore.utils
 {
-    import __AS3__.vec.Vector;
     import flash.geom.Point;
+    
+    import __AS3__.vec.Vector;
 
     public class ZMath 
     {
@@ -24,7 +24,7 @@ package com.game.mainCore.libCore.utils
 
         public static function randomInt($min:int, $max:int):int
         {
-            return (Math.round(($min + (Math.random() * ($max - $min)))));
+            return Math.round(($min + (Math.random() * ($max - $min))));
         }
 
         public static function getDisSquare($x1:Number, $y1:Number, $x2:Number, $y2:Number):Number
@@ -43,12 +43,12 @@ package com.game.mainCore.libCore.utils
 
         public static function getTowPointsAngle($p0:Point, $p1:Point):Number
         {
-            var angle:Number = Math.atan2(($p1.y - $p0.y), ($p1.x - $p0.x));
+            var angle:Number = Math.atan2($p1.y - $p0.y, $p1.x - $p0.x);
             if (angle < 0)
             {
-                angle = (angle + (2 * 3.14159265358979));
-            };
-            return (((angle * 180) / 3.14159265358979));
+                angle = angle + (2 * 3.14159265358979);
+            }
+            return (angle * 180) / 3.14159265358979;
         }
 
         public static function getNearAngel($angle:Number, $average:int=8):int
@@ -95,17 +95,15 @@ package com.game.mainCore.libCore.utils
             var i:int;
             var angle:Number;
             var index:int;
-            var length = 5760;
+            var length:Number = 5760;
             i = 0;
             while (i < length)
             {
-                angle = (((3.14159265358979 * 2) * i) / length);
+                angle = ((3.14159265358979 * 2) * i) / length;
                 mathSinArray.push(Math.sin(angle));
                 mathCosArray.push(Math.cos(angle));
                 i++;
-            };
+            }
         }
-
-
     }
-}//package com.game.mainCore.libCore.utils
+}

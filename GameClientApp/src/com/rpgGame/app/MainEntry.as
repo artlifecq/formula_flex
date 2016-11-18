@@ -127,6 +127,10 @@ package com.rpgGame.app
 			ProcessStateMachine.getInstance().run();
 		}
 
+		/**
+		 * 被client调用，连上服务器的时候 
+		 * 
+		 */		
 		public function reEnterGame() : void
 		{
 			GameLog.addShow("重新进入游戏...");

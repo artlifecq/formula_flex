@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.core.timer
+﻿package com.game.mainCore.core.timer
 {
     import org.client.mainCore.utils.ExactTimer;
     import flash.utils.Dictionary;
@@ -13,16 +12,17 @@ package com.game.mainCore.core.timer
 
         private var _name:String;
 
-        public function GameTimer(name:String, delay:Number=1000, repeat:uint=0, onUpdate:Function=null, onComplete:Function=null, isCmpDestroy:Boolean=false, onUpdateParams:Array=null, onCompleteParams:Array=null)
+        public function GameTimer(name:String, delay:Number=1000, repeat:uint=0, onUpdate:Function=null, onComplete:Function=null, isCmpDestroy:Boolean=false, 
+								  onUpdateParams:Array=null, onCompleteParams:Array=null)
         {
             super(delay, repeat, onUpdate, onComplete, isCmpDestroy, onUpdateParams, onCompleteParams);
             _name = name;
             if (_timerMap.hasOwnProperty(name))
             {
-                (trace((("-----------------------------------------------已经有注册过的同一计时器【" + name) + "】了,赶紧查查吧!----------------------------------------")));
-                (trace((("-----------------------------------------------" + FunctionUtil.getFunctionName(onUpdate)) + "----------------------------------------")));
-                (trace((("-----------------------------------------------" + FunctionUtil.getFunctionName(onComplete)) + "----------------------------------------")));
-            };
+                trace("-----------------------------------------------已经有注册过的同一计时器【" + name + "】了,赶紧查查吧!----------------------------------------");
+                trace("-----------------------------------------------" + FunctionUtil.getFunctionName(onUpdate) + "----------------------------------------");
+                trace("-----------------------------------------------" + FunctionUtil.getFunctionName(onComplete) + "----------------------------------------");
+            }
             _timerMap[name] = true;
         }
 
@@ -32,22 +32,19 @@ package com.game.mainCore.core.timer
             for (var key:String in _timerMap)
             {
                 arr.push(key);
-            };
-            return (arr);
+            }
+            return arr;
         }
 
         public static function get timerCnt():uint
         {
-            return (timerList.length);
+            return timerList.length;
         }
-
 
         override public function destroy():void
         {
             super.destroy();
-            delete _timerMap[_name]; //not popped
+            delete _timerMap[_name]; 
         }
-
-
     }
-}//package com.game.mainCore.core.timer
+}

@@ -1,8 +1,11 @@
 package com.client.sender
 {
 	import com.client.ClientCmdID;
+	import com.client.ClientGlobal;
+	import com.game.login.message.ReqLoginMessage;
 	import com.gameClient.log.GameLog;
 	
+	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
@@ -46,6 +49,18 @@ package com.client.sender
 			SocketConnection_protoBuffer.send(ClientCmdID.C2S_CREATE_HERO, buf);
 			//
 			GameLog.addShow("发送创建角色：", nickName);
+		}
+		
+		public static function SendLoginMessage():void
+		{
+			var msg:ReqLoginMessage = new ReqLoginMessage();
+			msg.name = ClientGlobal.loginName;
+			msg.serverId = 1;
+			msg.password = ClientGlobal.loginKey;
+			msg.agent = "37";
+			msg.win_width = ClientGlobal.stage.width;
+			msg.win_high = ClientGlobal.stage.height;
+			SocketConnection.send(msg);
 		}
 	}
 }

@@ -1,4 +1,5 @@
-package com.rpgGame.netData.login.message{
+package com.game.login.message
+{
 	import org.game.netCore.net.Message;
 	
 	/** 

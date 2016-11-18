@@ -260,7 +260,7 @@ package org.game.netCore.net
 		 */
 		public function Connect($host:String, $port:int):void 
 		{
-			Security.allowDomain( "*" );
+//			Security.allowDomain( "*" );
 			
 			ip = $host;
 			port = $port;
@@ -294,8 +294,8 @@ package org.game.netCore.net
 			
 			trace( "GAME_SERVER_IP:" + this.ip + ":" + this.port + " " + SANDBOX_PORT + "     GameConfig.gameline " + GAME_LINE );
 			
-			var policyPath:String = "xmlsocket://" + this.ip + ":" + SANDBOX_PORT;
-			Security.loadPolicyFile( policyPath );
+//			var policyPath:String = "xmlsocket://" + this.ip + ":" + SANDBOX_PORT;
+//			Security.loadPolicyFile( policyPath );
 			createSocketAndConnect();
 			
 			//			var portchecker:PortChecker = new PortChecker();

@@ -92,7 +92,7 @@ package
 			ClientGlobal.isStable = isStable;
 			ClientGlobal.GlobalBridge = GlobalBridge;
 			
-			GameLogView.init(this.stage, [188, 190, 191]);//-_	189  .>	190  /?	191
+			GameLogView.init(this.stage, [189, 190, 191]);//-_	189  .>	190  /?	191
 			AlertPanel.initStage(this.stage);
 			//
 			getWebParams();
@@ -191,7 +191,7 @@ package
 			
 			if (!ClientGlobal.isRelease)
 			{
-				//				MonsterDebugger.initialize(stage);
+//				MonsterDebugger.initialize(stage);
 			}
 		}
 		
