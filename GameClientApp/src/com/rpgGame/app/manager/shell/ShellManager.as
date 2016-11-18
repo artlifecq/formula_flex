@@ -1,7 +1,11 @@
 package com.rpgGame.app.manager.shell
 {
+    import com.game.engine3D.manager.Stage3DLayerManager;
+    import com.game.engine3D.utils.StatsUtil;
     import com.game.engine2D.Scene;
     import com.gameClient.log.GameLog;
+    import com.game.mainCore.core.manager.LayerManager;
+    import gameEngine2D.NetDebug;
     import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
     import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
     import com.rpgGame.app.manager.role.MainRoleManager;
@@ -13,6 +17,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.role.MonsterData;
     import com.rpgGame.coreData.role.RoleType;
     import com.rpgGame.coreData.type.SceneCharType;
+    import com.rpgGame.core.utils.ConsoleDesk;
     
     import flash.utils.Dictionary;
     
