@@ -173,7 +173,6 @@ package
 		private function runProcess() : void
 		{
 			GameLog.addShow(ClientGlobal.loginIP, ClientGlobal.loginPort, ClientGlobal.loginName, ClientGlobal.loginKey, ClientGlobal.isRelease);
-			//
 			if (!ClientGlobal.loginIP)
 			{
 				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_SELECT_DEVELOPER);

@@ -50,9 +50,9 @@ package com.rpgGame.app.process
             var _1MonsterData : MonsterDataProto = new MonsterDataProto();
             _1MonsterData.id = 1;
             _1MonsterData.level = 1;
-            _1MonsterData.scale = 10;
+            //_1MonsterData.scale = 10;
             _1MonsterData.name = "普怪-奴5";
-            _1MonsterData.bodyRes = "monster/1/m_ly05";
+            _1MonsterData.bodyRes = "monster/1/m_ly_05";
             monsterConfig.monsters.push(_1MonsterData);
             var _2MonsterData : MonsterDataProto = new MonsterDataProto();
             _2MonsterData.id = 2;

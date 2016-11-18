@@ -70,7 +70,7 @@ package com.rpgGame.app.manager
 			//穿“主体”
 			updateBody(role);
 			//穿“头发”
-			//updateHair(role);
+			updateHair(role);
 			//穿“武器”
 			updateWeapon(role);
 			//穿“副武器”
@@ -407,14 +407,10 @@ package com.rpgGame.app.manager
 			var roleData : HeroData = role.data as HeroData;
 			var animatResID : String = "pc/man/body/binjia_animat";
 			var bodyResID : String = "pc/man/body/binjia_skin";
-//			var bodyResID : String = "role/15/male_zhanshi_animation";//"pc/woman/body/knife_an_suit_p2_006";//"pc/woman/body/an_suit_s2006_skin";
-			var hairResID : String = null;//"pc/woman/hair/fan_an_hair2_004";
+			var hairResID : String = "pc/man/hair/bingjia-toufa-skin";
 			var mountResID : String = null;
-//			var mountResID : String = "pc/mount/knife_an_zq_001";
-//			var mountResID : String = "pc/mount/an_mount_zhanma_002";
 			var mountAnimatResID : String = null;//"pc/mount/an_mount_zhanma_empty_animat";
 			var weaponResID : String = "pc/weapon/binjia_wq_changqiang_001";
-//			var weaponResID : String = "role/15/male_zhanshi_weapon";
 			var weaponEffectResID : String = "";//"tx_wq_staff_006";
 			var weaponEffectScale : int = 0;
 			var weaponEffectOffset : Vector3D = null;
