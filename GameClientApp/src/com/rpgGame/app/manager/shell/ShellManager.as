@@ -1,7 +1,11 @@
 package com.rpgGame.app.manager.shell
 {
+    import com.game.engine3D.manager.Stage3DLayerManager;
+    import com.game.engine3D.utils.StatsUtil;
     import com.game.engine2D.Scene;
     import com.gameClient.log.GameLog;
+    import com.game.mainCore.core.manager.LayerManager;
+    import gameEngine2D.NetDebug;
     import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
     import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
     import com.rpgGame.app.manager.role.MainRoleManager;
@@ -13,6 +17,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.role.MonsterData;
     import com.rpgGame.coreData.role.RoleType;
     import com.rpgGame.coreData.type.SceneCharType;
+    import com.rpgGame.core.utils.ConsoleDesk;
     
     import flash.utils.Dictionary;
     
@@ -40,6 +45,8 @@ package com.rpgGame.app.manager.shell
             this._funcs["camera".toLowerCase()] = this.camera;
             this._funcs["show".toLowerCase()] = this.show;
             this._funcs["hide".toLowerCase()] = this.hide;
+            this._funcs["status".toLowerCase()] = this.status;
+            this._funcs["addLog".toLowerCase()] = this.addLog;
         }
         
         private function help() : void {
@@ -99,7 +106,20 @@ package com.rpgGame.app.manager.shell
         private function hide() : void {
             RotateGizmo3D.instance().hide();
         }
-        
+
+        private function status() : void {
+            StatsUtil.showOrHideAwayStats(Stage3DLayerManager.stage,
+                                          Stage3DLayerManager.stage3DProxy);
+            LayerManager.showOrHideMM();
+            ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
+        }
+
+        private function addLog(...args) : void {
+            CONFIG::netDebug {
+                NetDebug.LOG.apply(null, args);
+            }
+        }
+       
         private function handler(command : String, ...params) : void {
             var func : Function = this._funcs[command.toLowerCase()];
             if (null == func) {

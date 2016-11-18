@@ -173,11 +173,10 @@ package
 		private function runProcess() : void
 		{
 			GameLog.addShow(ClientGlobal.loginIP, ClientGlobal.loginPort, ClientGlobal.loginName, ClientGlobal.loginKey, ClientGlobal.isRelease);
-			//
-			/*if (!ClientGlobal.loginIP)
+			if (!ClientGlobal.loginIP)
 			{
 				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_SELECT_DEVELOPER);
-			}*/
+			}
 			ClientGlobal.loginData = new ByteBuffer();
 			ClientGlobal.loginData.writeUTF("测试");
 			ClientGlobal.loginData.position = 0;
@@ -186,9 +185,9 @@ package
 				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOGIN_INPUT);
 			}
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_MASK_WORLD, 0, 0.1);
-			//ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_SERVER_CONNECT, 0.1, 0.2);
+			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_SERVER_CONNECT, 0.1, 0.2);
 			var pg : ProcessGroup = new ProcessGroup();
-			//pg.addPreProcess(ProcessState.STATE_CREATE_CHAR, 0.2);
+			pg.addPreProcess(ProcessState.STATE_CREATE_CHAR, 0.2);
 			pg.addPreProcess(ProcessState.STATE_LOAD_DLL, 0.2, 0.3);
 			ProcessStateMachine.getInstance().addPreGroup(pg);
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_ENTER_GAME);
