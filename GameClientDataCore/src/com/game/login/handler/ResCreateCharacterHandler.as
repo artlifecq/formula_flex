@@ -1,6 +1,6 @@
-package com.rpgGame.netData.login.handler{
+package com.game.login.handler{
 
-	import com.rpgGame.netData.login.message.ResCreateCharacterMessage;
+	import com.game.login.message.ResCreateCharacterMessage;
 	
 	import org.game.netCore.net.Handler;
 

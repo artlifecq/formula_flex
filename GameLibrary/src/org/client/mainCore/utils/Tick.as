@@ -1,11 +1,12 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package org.client.mainCore.utils
+﻿package org.client.mainCore.utils
 {
-    import __AS3__.vec.Vector;
+    import flash.events.Event;
+    import flash.events.TimerEvent;
     import flash.utils.Dictionary;
     import flash.utils.Timer;
     import flash.utils.getTimer;
-    import flash.events.Event;
+    
+    import __AS3__.vec.Vector;
 
     public class Tick 
     {
@@ -22,7 +23,7 @@ package org.client.mainCore.utils
 
         private static function setup():void
         {
-            _timer.addEventListener("timer", onTick, false, 0, true);
+            _timer.addEventListener(TimerEvent.TIMER, onTick, false, 0, true);
         }
 
         public static function destroy():void
@@ -34,16 +35,16 @@ package org.client.mainCore.utils
 
         public static function get running():Boolean
         {
-            return (_running);
+            return _running;
         }
 
         public static function start():void
         {
-            if (!(_running))
+            if (!_running)
             {
                 _timer.start();
                 _running = true;
-            };
+            }
         }
 
         public static function stop():void
@@ -52,7 +53,7 @@ package org.client.mainCore.utils
             {
                 _running = false;
                 _timer.stop();
-            };
+            }
         }
 
         public static function addCallback(fun:Function, ... arg):void
@@ -60,56 +61,56 @@ package org.client.mainCore.utils
             if (arg.length)
             {
                 _funArgsDic[fun] = arg;
-            };
-            if (!(hasCallback(fun)))
+            }
+            if (!hasCallback(fun))
             {
                 _funList.push(fun);
                 start();
-            };
+            }
         }
 
         public static function removeCallback(fun:Function):void
         {
             var index:int = _funList.indexOf(fun);
-            if (!((index == -1)))
+            if (index != -1)
             {
                 _funList.splice(index, 1);
-            };
+            }
             delete _funArgsDic[fun];
-            if ((cnt == 0))
+            if (cnt == 0)
             {
                 stop();
-            };
+            }
         }
 
         public static function hasCallback(fun:Function):Boolean
         {
             var index:int = _funList.indexOf(fun);
-            return (!((index == -1)));
+            return index != -1;
         }
 
         public static function get allCallBack():Vector.<Function>
         {
-            return (_funList);
+            return _funList;
         }
 
         public static function get cnt():uint
         {
-            return (_funList.length);
+            return _funList.length;
         }
 
         [Inline]
         private static function onTick(e:Event):void
         {
-            var fun = null;
-            var args = null;
+            var fun:Function = null;
+            var args:* = null;
             var i:uint;
             var tm:uint = getTimer();
             var gapTm:uint;
             i = 0;
             while (i < _funList.length)
             {
-                gapTm = (getTimer() - tm);
+                gapTm = getTimer() - tm;
                 fun = _funList[i];
                 args = _funArgsDic[fun];
                 if (args)
@@ -118,12 +119,10 @@ package org.client.mainCore.utils
                 }
                 else
                 {
-                    (fun(gapTm));
-                };
+                    fun(gapTm);
+                }
                 i++;
-            };
+            }
         }
-
-
     }
-}//package org.client.mainCore.utils
+}

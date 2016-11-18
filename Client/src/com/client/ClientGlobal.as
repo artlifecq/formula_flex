@@ -27,7 +27,7 @@ package com.client
 		public static var urlParmar : Object;
 		public static var loginIP : String;
 		public static var loginPort : uint = 0;
-		public static var policyPort : uint = 48889; //9374;
+		public static var policyPort : uint = 8002; //9374;
 
 		/**
 		 * 是否是发布版本

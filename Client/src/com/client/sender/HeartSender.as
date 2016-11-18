@@ -1,12 +1,8 @@
 package com.client.sender
 {
-	import com.client.ClientCmdID;
 	import com.game.engine3D.vo.SenderReferenceSet;
-	
-	import flash.utils.getTimer;
-	
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
-	import org.game.netCore.net_protobuff.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection;
+	import com.game.login.message.ReqHeartMessage;
 
 	/**
 	 *
@@ -19,8 +15,10 @@ package com.client.sender
 	{
 		private static const REQ_HEART_DELAY_TIME : int = 10000;
 		private static var _reqReferenceSet : SenderReferenceSet = new SenderReferenceSet("HeartSender", onSendHeart, REQ_HEART_DELAY_TIME);
-		private static var _bytes : ByteBuffer = new ByteBuffer();
 
+		public static var serverTimeCheck:int = 0;
+		public static var clientTimeCheck:int = 0;
+		
 		public function HeartSender()
 		{
 		}
@@ -38,10 +36,15 @@ package com.client.sender
 		 */
 		private static function onSendHeart() : void
 		{
-			_bytes.clear();
+			/*_bytes.clear();
 			var millisecond : Number = getTimer();
 			_bytes.writeVarint64(millisecond);
-			SocketConnection_protoBuffer.send(ClientCmdID.C2S_HEART_BEAT, _bytes);
+			SocketConnection_protoBuffer.send(ClientCmdID.C2S_HEART_BEAT, _bytes);*/
+			var msg:ReqHeartMessage = new ReqHeartMessage();
+			/*if (_serverTimeCheck != 0)
+				msg.time = _serverTimeCheck + _clientTimeCheck;*/
+			
+			SocketConnection.send(msg);
 		}
 	}
 }

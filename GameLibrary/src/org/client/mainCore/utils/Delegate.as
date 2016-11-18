@@ -9,14 +9,12 @@
 
         private static function createWithArgs(func:Function, args:Array):Function
         {
-            func = func;
-            args = args;
-            function f()
+            function f():*
             {
                 var func:Function = arguments.callee.func;
                 var pat:Array = arguments.concat(args);
                 return func.apply(null, pat);
-            };
+            }
             f["func"] = func;
             return f;
         }
