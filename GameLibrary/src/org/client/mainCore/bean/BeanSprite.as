@@ -4,6 +4,8 @@
 
     public class BeanSprite extends Sprite 
     {
+
+
         public function start():void
         {
         }

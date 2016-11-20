@@ -23,7 +23,7 @@
             var xmllist:XMLList = xml.elements();
             for each (var node:XML in xmllist)
             {
-                add(node.attribute("id").toString(), getDefinitionByName(node.attribute("class").toString()) as Class);
+                add(node.attribute("id").toString(), (getDefinitionByName(node.attribute("class").toString()) as Class));
             }
         }
 
@@ -53,7 +53,7 @@
         public static function start():void
         {
             _beanMap = new Dictionary(true);
-            dispatchEvent(new BeanEvent("open", _current, _total));
+            dispatchEvent(new BeanEvent(BeanEvent.OPEN, _current, _total));
             initClasses();
         }
 
@@ -74,13 +74,13 @@
                 instance = new cls();
                 _beanMap[info.id] = instance;
                 trace(instance, "实例化完成");
-                dispatchEvent(new BeanEvent("progress", _current, _total));
+                dispatchEvent(new BeanEvent(BeanEvent.PROGRESS, _current, _total));
                 _current++;
                 instance.start();
             }
             else
             {
-                dispatchEvent(new BeanEvent("complete", _current, _total));
+                dispatchEvent(new BeanEvent(BeanEvent.COMPLETE, _current, _total));
             }
         }
 
