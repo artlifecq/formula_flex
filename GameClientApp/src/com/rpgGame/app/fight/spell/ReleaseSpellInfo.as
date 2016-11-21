@@ -190,7 +190,7 @@ package com.rpgGame.app.fight.spell
 			if (_spellEffectData)
 			{
 				//动作.
-				_atkMotion = String(_spellEffectData.attackMotionId);
+				_atkMotion = "attack";//String(_spellEffectData.attackMotionId);
 				_fromSingleAni = AnimationDataManager.getData(_spellEffectData.castAnimation);
 				_selfAni = AnimationDataManager.getData(_spellEffectData.selfDestAnimation);
 				_hurtAnimation = AnimationDataManager.getData(_spellEffectData.hurtAnimation);
