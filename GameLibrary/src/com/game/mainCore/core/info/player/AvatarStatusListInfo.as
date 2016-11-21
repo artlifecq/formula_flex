@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.core.info.player
+﻿package com.game.mainCore.core.info.player
 {
     public class AvatarStatusListInfo 
     {
@@ -13,7 +12,5 @@ package com.game.mainCore.core.info.player
         public function dispose():void
         {
         }
-
-
     }
-}//package com.game.mainCore.core.info.player
+}

@@ -2,6 +2,7 @@ package com.client.sender
 {
 	import com.client.ClientCmdID;
 	import com.client.ClientGlobal;
+	import com.game.login.message.ReqCreateCharacterMessage;
 	import com.game.login.message.ReqLoginMessage;
 	import com.gameClient.log.GameLog;
 	
@@ -40,13 +41,21 @@ package com.client.sender
 		 */
 		public static function register(sex : Boolean, headFace : int, body : int, nickName : String, countryID : int) : void
 		{
-			var buf : ByteBuffer = new ByteBuffer();
+			/*var buf : ByteBuffer = new ByteBuffer();
 			buf.writeBoolean(sex);
 			buf.writeVarint32(headFace);
 			buf.writeVarint32(body);
 			buf.writeUTF(nickName);
 			buf.writeVarint32(countryID);
-			SocketConnection_protoBuffer.send(ClientCmdID.C2S_CREATE_HERO, buf);
+			SocketConnection_protoBuffer.send(ClientCmdID.C2S_CREATE_HERO, buf);*/
+			var msg:ReqCreateCharacterMessage = new ReqCreateCharacterMessage();
+			msg.name=nickName;
+			msg.job=1;
+			msg.sex=sex?1:2;
+			msg.auto=0;
+			msg.win_high = ClientGlobal.stage.height;
+			msg.win_width = ClientGlobal.stage.width;
+			SocketConnection.send(msg);
 			//
 			GameLog.addShow("发送创建角色：", nickName);
 		}

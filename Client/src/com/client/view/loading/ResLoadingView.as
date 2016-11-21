@@ -26,9 +26,9 @@ package com.client.view.loading
 
 	/**
 	 *
-	 * 资源加载视图
-	 * @author L.L.M.Sunny
-	 * 创建时间：2015-4-7 下午5:30:13
+	 * 资源加载界面
+	 * @author NEIL
+	 * 创建时间：2016-11-17 下午5:30:13
 	 *
 	 */
 	public class ResLoadingView

@@ -65,6 +65,7 @@ package com.client.cmdlistener
 			// 这里启动心跳吧
 			StartHeart();*/
 			ClientGlobal.hasHero = true;
+			ClientGlobal.loginData = data;
 			if (onLoginSuccessHandler != null)
 			{
 				onLoginSuccessHandler();

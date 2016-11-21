@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.core.info.player
+﻿package com.game.mainCore.core.info.player
 {
     import org.client.mainCore.ds.HashMap;
     import __AS3__.vec.Vector;
@@ -12,19 +11,19 @@ package com.game.mainCore.core.info.player
 
         public static function addStatusAngleInfo(status:String, angle:uint, info:SpngInfo):void
         {
-            var key:String = ((status + "_") + angle);
+            var key:String = status + "_" + angle;
             _map.add(key, info);
         }
 
         public static function getStatusInfoList(status:String):Vector.<SpngInfo>
         {
-            return (null);
+            return null;
         }
 
         public static function getStatusAngleInfoList(status:String, angle:uint):SpngInfo
         {
-            var key:String = ((status + "_") + angle);
-            return (_map.getValue(key));
+            var key:String = status + "_" + angle;
+            return _map.getValue(key);
         }
 
         public static function clear(url:String):void
@@ -34,7 +33,5 @@ package com.game.mainCore.core.info.player
         public static function destroy():void
         {
         }
-
-
     }
-}//package com.game.mainCore.core.info.player
+}

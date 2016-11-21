@@ -86,9 +86,9 @@ package com.rpgGame.app
 			GameLog.enableTrace = true;
 			ZLog.enableLog = false;
 			ZLog.enableTrace = false;
-			SocketConnection_protoBuffer.print = false;
-			GameSocketDispatcher.isPrint = true;
-			KeyController.isPrint = false;
+//			SocketConnection_protoBuffer.print = false;
+//			GameSocketDispatcher.isPrint = true;
+			KeyController.isPrint = true;
 			StarlingLayerManager.setup();
 			GameClientUI.setup();
 			//

@@ -12,10 +12,8 @@ package org.game.netCore.net
 	import flash.events.SecurityErrorEvent;
 	import flash.external.ExternalInterface;
 	import flash.net.Socket;
-	import flash.system.Security;
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
-	import flash.utils.getDefinitionByName;
 	import flash.utils.getTimer;
 	
 	import avmplus.getQualifiedClassName;

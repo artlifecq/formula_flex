@@ -1,10 +1,10 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.core.controller
+﻿package com.game.mainCore.core.controller
 {
-    import flash.events.EventDispatcher;
     import com.game.mainCore.core.manager.LayerManager;
+    
     import flash.display.InteractiveObject;
     import flash.events.Event;
+    import flash.events.EventDispatcher;
     import flash.events.KeyboardEvent;
 
     public class FocusKeyController extends EventDispatcher 
@@ -17,11 +17,11 @@ package com.game.mainCore.core.controller
 
         public static function get instance():FocusKeyController
         {
-            if ((_instance == null))
+            if (_instance == null)
             {
-                _instance = new (FocusKeyController)();
-            };
-            return (_instance);
+                _instance = new FocusKeyController();
+            }
+            return _instance;
         }
 
         public static function destroy():void
@@ -30,17 +30,17 @@ package com.game.mainCore.core.controller
             {
                 _instance.destroy();
                 _instance = null;
-            };
+            }
         }
 
         public static function addFocusKeyListener(keyCode:uint, listener:Function):void
         {
-            instance.addEventListener((instance._target + keyCode.toString()), listener);
+            instance.addEventListener(instance._target + keyCode.toString(), listener);
         }
 
         public static function removeFocusKeyListener(keyCode:uint, listener:Function):void
         {
-            instance.removeEventListener((instance._target + keyCode.toString()), listener);
+            instance.removeEventListener(instance._target + keyCode.toString(), listener);
         }
 
         public static function addKeyListener(keyCode:uint, listener:Function):void
@@ -56,12 +56,12 @@ package com.game.mainCore.core.controller
 
         public function init():void
         {
-            LayerManager.stage.addEventListener("keyDown", onKeyDown);
+            LayerManager.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
         }
 
         public function clear():void
         {
-            LayerManager.stage.removeEventListener("keyDown", onKeyDown);
+            LayerManager.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
         }
 
         public function destroy():void
@@ -81,9 +81,7 @@ package com.game.mainCore.core.controller
 
         private function onKeyDown(e:KeyboardEvent):void
         {
-            dispatchEvent(new Event((_target + e.keyCode.toString())));
+            dispatchEvent(new Event(_target + e.keyCode.toString()));
         }
-
-
     }
-}//package com.game.mainCore.core.controller
+}

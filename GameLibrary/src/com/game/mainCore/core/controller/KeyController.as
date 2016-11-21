@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.core.controller
+﻿package com.game.mainCore.core.controller
 {
     import flash.display.DisplayObjectContainer;
     import flash.display.DisplayObject;
@@ -35,11 +34,11 @@ package com.game.mainCore.core.controller
 
         public static function get instance():KeyController
         {
-            if ((_instance == null))
+            if (_instance == null)
             {
-                _instance = new (KeyController)();
-            };
-            return (_instance);
+                _instance = new KeyController();
+            }
+            return _instance;
         }
 
         public static function destroy():void
@@ -48,7 +47,7 @@ package com.game.mainCore.core.controller
             {
                 _instance.destroy();
                 _instance = null;
-            };
+            }
         }
 
         private static function setup():void
@@ -57,22 +56,21 @@ package com.game.mainCore.core.controller
 
         public static function isParentChild($parent:DisplayObjectContainer, $child:DisplayObject):Boolean
         {
-            if (((((($child == null)) || (($parent == null)))) || (($child.parent == null))))
+            if ($child == null || $parent == null || $child.parent == null)
             {
-                return (false);
-            };
+                return false;
+            }
             if ($child.parent == $parent)
             {
-                return (true);
-            };
-            return (isParentChild($parent, $child.parent));
-            return (false); //dead code
+                return true;
+            }
+            return isParentChild($parent, $child.parent);
         }
 
 
         public function get isTextFieldFocus():Boolean
         {
-            return (_isTextFieldFocus);
+            return _isTextFieldFocus;
         }
 
         public function set isTextFieldFocus(value:Boolean):void
@@ -82,15 +80,15 @@ package com.game.mainCore.core.controller
 
         public function isKeyDown(key:uint):Boolean
         {
-            return ((_downKeyCode == key));
+            return _downKeyCode == key;
         }
 
         public function init():void
         {
-            LayerManager.stage.addEventListener("keyDown", onKeyDown, false, 2147483647);
-            LayerManager.stage.addEventListener("keyUp", onKeyUp, false, 2147483647);
-            LayerManager.stage.addEventListener("deactivate", onDeactivate, false, 2147483647);
-            LayerManager.stage.addEventListener("removed", onRemove, false, 2147483647);
+            LayerManager.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown, false, 2147483647);
+            LayerManager.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp, false, 2147483647);
+            LayerManager.stage.addEventListener(Event.DEACTIVATE, onDeactivate, false, 2147483647);
+            LayerManager.stage.addEventListener(Event.REMOVED, onRemove, false, 2147483647);
             IME.enabled = false;
         }
 
@@ -99,10 +97,10 @@ package com.game.mainCore.core.controller
             EventManager.dispatchEvent("KeyCodeEvent.keys_clear");
             shift_down = false;
             ctrl_down = false;
-            LayerManager.stage.removeEventListener("keyDown", onKeyDown);
-            LayerManager.stage.removeEventListener("keyUp", onKeyUp);
-            LayerManager.stage.removeEventListener("deactivate", onDeactivate);
-            LayerManager.stage.removeEventListener("removed", onRemove);
+            LayerManager.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+            LayerManager.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyUp);
+            LayerManager.stage.removeEventListener(Event.DEACTIVATE, onDeactivate);
+            LayerManager.stage.removeEventListener(Event.REMOVED, onRemove);
         }
 
         public function destroy():void
@@ -117,12 +115,12 @@ package com.game.mainCore.core.controller
             info.time = getTimer();
             if (isPrint)
             {
-                (trace(("keyDown : " + _downKeyCode)));
-                if (!((printFun == null)))
+                trace("keyDown : " + _downKeyCode);
+                if (printFun != null)
                 {
-                    (printFun(("keyDown : " + _downKeyCode)));
-                };
-            };
+                    printFun("keyDown : " + _downKeyCode);
+                }
+            }
             EventManager.dispatchEvent("KeyCodeEvent.keys_down", info);
         }
 
@@ -133,12 +131,12 @@ package com.game.mainCore.core.controller
             info.time = getTimer();
             if (isPrint)
             {
-                (trace(("keyUp : " + _upKeyCode)));
-                if (!((printFun == null)))
+                trace("keyUp : " + _upKeyCode);
+                if (printFun != null)
                 {
-                    (printFun(("keyUp : " + _upKeyCode)));
-                };
-            };
+                    printFun("keyUp : " + _upKeyCode);
+                }
+            }
             EventManager.dispatchEvent("KeyCodeEvent.keys_up", info);
         }
 
@@ -154,10 +152,10 @@ package com.game.mainCore.core.controller
         {
             var dis:DisplayObjectContainer = (e.target as DisplayObjectContainer);
             var child:DisplayObject = LayerManager.stage.focus;
-            if ((((e.target == LayerManager.stage.focus)) || (isParentChild(dis, LayerManager.stage.focus))))
+            if (e.target == LayerManager.stage.focus || isParentChild(dis, LayerManager.stage.focus))
             {
                 LayerManager.stage.focus = null;
-            };
+            }
         }
 
         private function onKeyDown(e:KeyboardEvent):void
@@ -165,14 +163,14 @@ package com.game.mainCore.core.controller
             shift_down = e.shiftKey;
             ctrl_down = e.ctrlKey;
             _downKeyCode = e.keyCode;
-            if ((_downKeyCode == _upKeyCode))
+            if (_downKeyCode == _upKeyCode)
             {
                 _upKeyCode = 0;
-            };
+            }
             if (checkIsInputTxt())
             {
                 return;
-            };
+            }
             excuteDownKey();
         }
 
@@ -181,25 +179,25 @@ package com.game.mainCore.core.controller
             shift_down = e.shiftKey;
             ctrl_down = e.ctrlKey;
             _upKeyCode = e.keyCode;
-            if ((_downKeyCode == _upKeyCode))
+            if (_downKeyCode == _upKeyCode)
             {
                 _downKeyCode = 0;
-            };
+            }
             if (checkIsInputTxt())
             {
                 return;
-            };
+            }
             excuteUpKey();
         }
 
         private function onFocusIn(e:FocusEvent):void
         {
-            checkInputTxtFocus((e.target as InteractiveObject));
+            checkInputTxtFocus(e.target as InteractiveObject);
         }
 
         private function onFocusOut(e:FocusEvent):void
         {
-            checkInputTxtFocus((e.target as InteractiveObject));
+            checkInputTxtFocus(e.target as InteractiveObject);
         }
 
         private function onFocusChange(e:FocusEvent):void
@@ -211,25 +209,23 @@ package com.game.mainCore.core.controller
         private function checkIsInputTxt():Boolean
         {
             var inObj:InteractiveObject = LayerManager.stage.focus;
-            if ((((inObj is TextField)) && (((inObj as TextField).type == "input"))))
+            if (inObj is TextField && (inObj as TextField).type == "input")
             {
-                return (true);
-            };
-            return (false);
+                return true;
+            }
+            return false;
         }
 
         private function checkInputTxtFocus(inObj:InteractiveObject):void
         {
-            if ((((inObj is TextField)) && (((inObj as TextField).type == "input"))))
+            if (inObj is TextField && (inObj as TextField).type == "input")
             {
                 _isTextFieldFocus = true;
             }
             else
             {
                 _isTextFieldFocus = false;
-            };
+            }
         }
-
-
     }
-}//package com.game.mainCore.core.controller
+}

@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.core.info.event
+﻿package com.game.mainCore.core.info.event
 {
     import flash.events.EventDispatcher;
 
@@ -25,39 +24,37 @@ package com.game.mainCore.core.info.event
 
         public function get type():String
         {
-            return (_type);
+            return _type;
         }
 
         public function get listener():Function
         {
-            return (_listener);
+            return _listener;
         }
 
         public function get dispatcher():EventDispatcher
         {
-            return (_dispatcher);
+            return _dispatcher;
         }
 
         public function get useCapture():Boolean
         {
-            return (_useCapture);
+            return _useCapture;
         }
 
         public function get priority():int
         {
-            return (_priority);
+            return _priority;
         }
 
         public function get useWeakReference():Boolean
         {
-            return (_useWeakReference);
+            return _useWeakReference;
         }
 
         public function equals($type:String, $listener:Function, $dispatcher:EventDispatcher=null, $useCapture:Boolean=false, $priority:int=0, $useWeakReference:Boolean=false):Boolean
         {
-            return ((((((((((((_type == $type)) && ((_listener == $listener)))) && ((_dispatcher == $dispatcher)))) && ((_useCapture == $useCapture)))) && ((_priority == $priority)))) && ((_useWeakReference == $useWeakReference))));
+            return _type == $type && _listener == $listener && _dispatcher == $dispatcher && _useCapture == $useCapture && _priority == $priority && _useWeakReference == $useWeakReference;
         }
-
-
     }
-}//package com.game.mainCore.core.info.event
+}
