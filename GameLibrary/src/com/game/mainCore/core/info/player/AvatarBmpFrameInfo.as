@@ -1,9 +1,7 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.core.info.player
+﻿package com.game.mainCore.core.info.player
 {
     public class AvatarBmpFrameInfo 
     {
-
         public var status:String;
         public var interval:uint;
         public var angle:uint;
@@ -16,7 +14,5 @@ package com.game.mainCore.core.info.player
         public var ty:Number;
         public var ox:Number;
         public var oy:Number;
-
-
     }
-}//package com.game.mainCore.core.info.player
+}

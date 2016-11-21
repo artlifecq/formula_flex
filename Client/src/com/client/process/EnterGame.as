@@ -52,7 +52,7 @@ package com.client.process
 
 			if (!ClientGlobal.isRelease)
 			{
-				tryShowDebugInfo();
+//				tryShowDebugInfo(); 暂时屏蔽掉这个弹框，等需要的时候再打开
 			}
 		}
 

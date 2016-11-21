@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.core.interfaces
+﻿package com.game.mainCore.core.interfaces
 {
     import flash.geom.Point;
     import flash.display.DisplayObject;
@@ -45,4 +44,4 @@ package com.game.mainCore.core.interfaces
         function destroy():void;
 
     }
-}//package com.game.mainCore.core.interfaces
+}

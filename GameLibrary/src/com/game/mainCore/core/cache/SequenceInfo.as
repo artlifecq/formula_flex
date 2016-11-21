@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.core.cache
+﻿package com.game.mainCore.core.cache
 {
     public class SequenceInfo 
     {
@@ -25,9 +24,7 @@ package com.game.mainCore.core.cache
             info.cutWidth = cutWidth;
             info.cutHeight = cutHeight;
             info.valids = valids;
-            return (info);
+            return info;
         }
-
-
     }
-}//package com.game.mainCore.core.cache
+}

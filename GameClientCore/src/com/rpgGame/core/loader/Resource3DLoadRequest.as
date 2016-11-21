@@ -1,6 +1,6 @@
 package com.rpgGame.core.loader
 {
-	import flash.system.ApplicationDomain;
+	
 	
 	public class Resource3DLoadRequest
 	{
