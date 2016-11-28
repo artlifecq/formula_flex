@@ -1,11 +1,9 @@
 package com.rpgGame.app.manager.fight
 {
 	import com.rpgGame.app.manager.TeamManager;
-	import com.rpgGame.app.manager.country.CountryManager;
 	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.coreData.role.BiaoCheData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
@@ -71,10 +69,10 @@ package com.rpgGame.app.manager.fight
 				}
 				else if (MainRoleManager.actorInfo.pkMode == PKModeType.ALLIANCE)
 				{
-					if (MainRoleManager.actorInfo.countryId != (role.data as RoleData).countryId && CountryManager.unionCountry != (role.data as RoleData).countryId) //国家模式不是盟国可以攻击
-					{
-						modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
-					}
+//					if (MainRoleManager.actorInfo.countryId != (role.data as RoleData).countryId && CountryManager.unionCountry != (role.data as RoleData).countryId) //国家模式不是盟国可以攻击
+//					{
+//						modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
+//					}
 				}
 				else if (MainRoleManager.actorInfo.pkMode == PKModeType.FAMILY)
 				{
@@ -169,10 +167,10 @@ package com.rpgGame.app.manager.fight
 			else if (role.type == SceneCharType.BIAO_CHE)
 			{
 				//本国的镖车不能够攻击
-				if ((role.data as BiaoCheData).ownerID != MainRoleManager.actorID && !CountryManager.isAtMyCountry() )
-				{
-					modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
-				}
+//				if ((role.data as BiaoCheData).ownerID != MainRoleManager.actorID && !CountryManager.isAtMyCountry() )
+//				{
+//					modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
+//				}
 				if (modeState == FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY && spellData != null && (spellData.affectType & 32) != 0) //不影响镖车
 				{
 					modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
@@ -186,10 +184,10 @@ package com.rpgGame.app.manager.fight
 				{
 					if(MainRoleManager.isDriveZhanChe)
 					{
-						if(CountryManager.isMyEnemyCountry(zhancheData.ownerCountry))
-						{
-							modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
-						}
+//						if(CountryManager.isMyEnemyCountry(zhancheData.ownerCountry))
+//						{
+//							modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
+//						}
 					}
 				}
 			}

@@ -19,21 +19,29 @@ package com.rpgGame.coreData
 		private var _bodyResID : String = null;
 		private var _bodyAnimatResID : String = null;
 		private var _rpd_body : RenderParamData;
+		
 		private var _hairResID : String = null;
 		private var _rpd_hair : RenderParamData;
+		
 		private var _weaponResID : String = null;
-		private var _bodyEffectID : String = null;
+		private var _rpd_weapon : RenderParamData;
+		
 		private var _weaponEffectID : String = null;
 		private var _weaponEffectScale : int = 0;
 		private var _weaponEffectOffset : Vector3D = null;
-		private var _rpd_weapon : RenderParamData;
-		private var _rpd_body_effect : RenderParamData;
 		private var _rpd_weapon_effect : RenderParamData;
+		
+		private var _bodyEffectID : String = null;
+		private var _rpd_body_effect : RenderParamData;
+		
+		
 		private var _deputyWeaponResID : String = null;
 		private var _rpd_deputy_weapon : RenderParamData;
+		
 		private var _mountResID : String = null;
 		private var _mountAnimatResID : String = null;
 		private var _rpd_mount : RenderParamData;
+		
 		private var _effectResID : String = null;
 		private var _rpd_effect : RenderParamData;
 

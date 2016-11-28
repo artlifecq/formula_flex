@@ -20,15 +20,13 @@ package com.rpgGame.app
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.clientConfig.ConfigClassRegister;
+	import com.rpgGame.netData.player.bean.MyPlayerInfo;
 	
 	import flash.display.Sprite;
 	import flash.external.ExternalInterface;
 	
 	import org.client.mainCore.manager.PopUpManager;
 	import org.client.mainCore.manager.ProjectManager;
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
-	import org.game.netCore.net_protobuff.ByteBuffer;
-	import org.game.netCore.net_protobuff.GameSocketDispatcher;
 
 	/**
 	 * 社区资源都加载完成后程序运行的主入口。
@@ -65,11 +63,15 @@ package com.rpgGame.app
 			ProjectManager.setup(_root, _root.stage);
 			PopUpManager.container = LayerManager.topLevel;
 
-			var loginData : ByteBuffer = clientGlobal.loginData;
+			var loginData : MyPlayerInfo = clientGlobal.loginData;
 			if (ClientConfig.isSingle)
+			{
 				MainRoleManager.initSingleData(loginData);
+			}
 			else
+			{
 				MainRoleManager.setLoginData(loginData);
+			}
 			//
 			ResLoadingView.instance.setActual(loadingActual);
 
@@ -107,7 +109,8 @@ package com.rpgGame.app
 			ProcessStateMachine.getInstance().pushProcess(new LoadPngxUIAssets());
 			ProcessStateMachine.getInstance().pushProcess(new LoadEmbedFonts());
 			ProcessStateMachine.getInstance().pushProcess(new LoadConfigData());
-            if (ClientConfig.isSingle) {
+            if (ClientConfig.isSingle) 
+			{
                 // 如果是单机 则造假数据
                 ProcessStateMachine.getInstance().pushProcess(new LocalConfigData());
             }
@@ -122,8 +125,11 @@ package com.rpgGame.app
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_PNGX_UI_ASSETS, 0.35, 0.4)
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_FONTS, 0.4, 0.45);
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_CONFIG_DATA, 0.45, 0.5);
-			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOCAL_CONFIG_DATA, 0.5, 0.55);
-			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_START_GAME, 0.55);
+			if (ClientConfig.isSingle) 
+			{
+				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOCAL_CONFIG_DATA, 0.5, 0.5);
+			}
+			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_START_GAME, 0.5);
 			ProcessStateMachine.getInstance().run();
 		}
 

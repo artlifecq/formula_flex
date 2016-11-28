@@ -1,13 +1,9 @@
 package com.rpgGame.app.ui.main.activityBar
 {
-	import com.rpgGame.app.manager.country.CountryManager;
-	import com.rpgGame.app.manager.countryWar.CountryWarWorshipManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
-	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
@@ -73,24 +69,24 @@ package com.rpgGame.app.ui.main.activityBar
 		
 		private function tick(...args):void
 		{
-			var remainStarTime:Number = CountryWarWorshipManager.endTime - SystemTimeManager.curtTm;
-			if(remainStarTime > 0)
-			{
-				_customSkin.lbDesc.text = TimeUtil.formatTimeToTimeString(remainStarTime/1000);
-			}
-			else
-			{
-				CountryWarWorshipManager.hideIcon();
-			}
+//			var remainStarTime:Number = CountryWarWorshipManager.endTime - SystemTimeManager.curtTm;
+//			if(remainStarTime > 0)
+//			{
+//				_customSkin.lbDesc.text = TimeUtil.formatTimeToTimeString(remainStarTime/1000);
+//			}
+//			else
+//			{
+//				CountryWarWorshipManager.hideIcon();
+//			}
 		}
 		
 		private function walkToNpc():void
 		{
 			var npcId:int = NpcCfgData.enterWorshipNPCID;
-			if(!CountryManager.isAtMyCountry())
-			{
-				npcId = NpcCfgData.countryTransNPCId;
-			}
+//			if(!CountryManager.isAtMyCountry())
+//			{
+//				npcId = NpcCfgData.countryTransNPCId;
+//			}
 			var npcData : MonsterDataProto = MonsterDataManager.getData(npcId);
 			if (npcData)
 			{

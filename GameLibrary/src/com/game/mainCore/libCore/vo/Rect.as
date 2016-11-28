@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.libCore.vo
+﻿package com.game.mainCore.libCore.vo
 {
     import flash.geom.Rectangle;
 
@@ -13,14 +12,12 @@ package com.game.mainCore.libCore.vo
 
         public function get area():int
         {
-            return ((width * height));
+            return width * height;
         }
 
         override public function clone():Rectangle
         {
-            return (new Rect(x, y, width, height));
+            return new Rect(x, y, width, height);
         }
-
-
     }
-}//package com.game.mainCore.libCore.vo
+}

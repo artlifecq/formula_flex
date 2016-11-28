@@ -1,8 +1,9 @@
 package com.client.sender
 {
 	import com.game.engine3D.vo.SenderReferenceSet;
+	import com.rpgGame.netData.login.message.ReqHeartMessage;
+	
 	import org.game.netCore.connection.SocketConnection;
-	import com.game.login.message.ReqHeartMessage;
 
 	/**
 	 *

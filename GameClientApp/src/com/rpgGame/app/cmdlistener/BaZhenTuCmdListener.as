@@ -364,15 +364,15 @@ package com.rpgGame.app.cmdlistener
 		private function onAddMonster(buffer : ByteBuffer) : void
 		{
 //			var type:int = 
-			var data : MonsterData = new MonsterData(RoleType.TYPE_MONSTER);
-			data.baGuaType = buffer.readVarint32();
-			data.spellId = buffer.readVarint32();
-			data.id = buffer.readVarint64();
-			data.modelID = buffer.readVarint32();
-			RoleData.readGeneric(data, buffer);
-			SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
-			BaZhenTuManager.setSkillData(data);
-			EventManager.dispatchEvent(BaZhenTuEvent.MONSTER_ENTER_SCENE, data.baGuaType, data.spellId);
+//			var data : MonsterData = new MonsterData(RoleType.TYPE_MONSTER);
+//			data.baGuaType = buffer.readVarint32();
+//			data.spellId = buffer.readVarint32();
+//			data.id = buffer.readVarint64();
+//			data.modelID = buffer.readVarint32();
+//			RoleData.readGeneric(data, buffer);
+//			SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
+//			BaZhenTuManager.setSkillData(data);
+//			EventManager.dispatchEvent(BaZhenTuEvent.MONSTER_ENTER_SCENE, data.baGuaType, data.spellId);
 
 		}
 
@@ -403,15 +403,15 @@ package com.rpgGame.app.cmdlistener
 		private function onAddSteleMonster(buffer : ByteBuffer) : void
 		{
 
-			var data : MonsterData = new MonsterData(RoleType.TYPE_MONSTER);
-			data.baGuaType = buffer.readVarint32();
-			data.isJihuo = buffer.readBoolean();
-			data.id = buffer.readVarint64();
-			data.modelID = buffer.readVarint32();
-			RoleData.readGeneric(data, buffer);
-			SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
-			BaZhenTuManager.setShiBeiData(data);
-			EventManager.dispatchEvent(BaZhenTuEvent.SHIBEI_ENTER_SCENE, data.baGuaType, data.isJihuo);
+//			var data : MonsterData = new MonsterData(RoleType.TYPE_MONSTER);
+//			data.baGuaType = buffer.readVarint32();
+//			data.isJihuo = buffer.readBoolean();
+//			data.id = buffer.readVarint64();
+//			data.modelID = buffer.readVarint32();
+//			RoleData.readGeneric(data, buffer);
+//			SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
+//			BaZhenTuManager.setShiBeiData(data);
+//			EventManager.dispatchEvent(BaZhenTuEvent.SHIBEI_ENTER_SCENE, data.baGuaType, data.isJihuo);
 		}
 	}
 }

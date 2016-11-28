@@ -246,7 +246,7 @@ package com.rpgGame.app.manager.goods
 		public static function isSuitRace(race:int):Boolean
 		{
 			if(race == 0 || instance.getItemInfoByIndex(EquipmentPos.POS_SECOND_WEAPON) == null)return true;
-			return race == MainRoleManager.actorInfo.weaponRace;
+			return race == MainRoleManager.actorInfo.race;
 		}
 	}	
 }

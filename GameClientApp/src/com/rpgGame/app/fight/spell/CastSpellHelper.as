@@ -8,8 +8,6 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.country.CountryManager;
-	import com.rpgGame.app.manager.countryWar.CountryWarZhanCheManager;
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
@@ -32,15 +30,15 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.type.SpellTargetType;
 	import com.rpgGame.coreData.type.item.EquipmentPos;
-
+	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
-
+	
 	import app.message.SpellEffectProto;
 	import app.message.SpellProto;
-
+	
 	import away3d.pathFinding.DistrictWithPath;
-
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
@@ -369,7 +367,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (MainRoleManager.isDriveZhanChe)
 				{
-					targetID = CountryWarZhanCheManager.getZhanCheID(MainRoleManager.actorID);
+//					targetID = CountryWarZhanCheManager.getZhanCheID(MainRoleManager.actorID);
 				}
 				else
 				{
@@ -448,8 +446,8 @@ package com.rpgGame.app.fight.spell
 						{
 							if (selectedRole.type == SceneCharType.BIAO_CHE) //镖车
 							{
-								if (CountryManager.isAtMyCountry())
-									NoticeManager.showNotify(LangNoticeInfo.SpellSelectedOnlyOtherCountryBiao); //"攻击本国镖车无效"
+//								if (CountryManager.isAtMyCountry())
+//									NoticeManager.showNotify(LangNoticeInfo.SpellSelectedOnlyOtherCountryBiao); //"攻击本国镖车无效"
 							}
 							targetRole = selectedRole;
 						}
@@ -481,11 +479,11 @@ package com.rpgGame.app.fight.spell
 							}
 							else if (selectedRole.type == SceneCharType.BIAO_CHE) //镖车
 							{
-								if (CountryManager.isAtMyCountry())
-								{
-									NoticeManager.showNotify(LangNoticeInfo.SpellSelectedOnlyOtherCountryBiao); //"攻击本国镖车无效"
-									return CASE_STATE_FAIL;
-								}
+//								if (CountryManager.isAtMyCountry())
+//								{
+//									NoticeManager.showNotify(LangNoticeInfo.SpellSelectedOnlyOtherCountryBiao); //"攻击本国镖车无效"
+//									return CASE_STATE_FAIL;
+//								}
 							}
 							NoticeManager.showNotify(LangNoticeInfo.SpellSelectedUnAttackable); //"当前选择的目标不可攻击"
 							return CASE_STATE_FAIL;

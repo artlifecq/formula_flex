@@ -3,18 +3,27 @@ package com.rpgGame.app.sender
 	import com.game.engine3D.utils.PathFinderUtil;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.scene.FirstEnterSceneManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
 	import com.rpgGame.coreData.type.CostItemType;
-
+	import com.rpgGame.netData.login.message.ReqLoadFinishMessage;
+	import com.rpgGame.netData.map.message.ReqLoadFinishForChangeMapMessage;
+	import com.rpgGame.netData.map.message.ReqNewRunningMessage;
+	import com.rpgGame.netData.map.message.ReqPlayerStopMessage;
+	import com.rpgGame.netData.structs.Position;
+	
+	import flash.geom.Point;
 	import flash.geom.Vector3D;
-
+	
 	import app.cmd.SceneModuleMessages;
 	import app.cmd.SimpleDungeonModuleMessages;
-
+	
+	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net.Message;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
@@ -23,67 +32,148 @@ package com.rpgGame.app.sender
 	 */
 	public class SceneSender extends BaseSender
 	{
-		public static function transportChgMap(transId : uint) : void
+		public static function SendLoadFinishMessage():void
+		{
+			var msg:Message;
+			if(!FirstEnterSceneManager.isEnterScene)
+			{
+				msg = new ReqLoadFinishMessage();
+			}
+			else
+			{
+				msg = new ReqLoadFinishForChangeMapMessage();
+				(msg as ReqLoadFinishForChangeMapMessage).width = SceneManager.scene.sceneConfig.width;
+				(msg as ReqLoadFinishForChangeMapMessage).height = SceneManager.scene.sceneConfig.width;
+			}
+			SocketConnection.send(msg);
+		}
+		
+		public static function SendNewRunningMessage(path : Vector.<Vector3D>):void
+		{
+			GameLog.add("send SendNewRunningMessage :" + path.join(","));
+			var msg:ReqNewRunningMessage = new ReqNewRunningMessage();
+			
+			var vec:Vector.<Position> = new Vector.<Position>();
+			var len:int = path.length;
+			
+			var pos3D : Vector3D;
+			for (var i:int = 0; i < len; ++i)
+			{
+				pos3D = path[i];
+				
+				vec.push(Position.FromPoint(new Point(pos3D.x,-pos3D.z)));
+			}
+			
+			msg.positions = vec;
+			SocketConnection.send(msg);
+		}
+		
+		public static function SendPlayerStopMessage():void
+		{
+			var msg:ReqPlayerStopMessage = new ReqPlayerStopMessage();
+			SocketConnection.send(msg);
+		}
+		
+		public static function SendChangeViewRange(width : int,height : int) : void
+		{
+			
+		}
+		
+		public static function transportChgMap(transId : uint):void
 		{
 			if (ReqLockUtil.isReqLocked(SceneModuleMessages.C2S_SCENE_REQUEST_TRANSPORT))
 				return;
 			ReqLockUtil.lockReq(SceneModuleMessages.C2S_SCENE_REQUEST_TRANSPORT, 5000);
-
+			
 			//切换场景
 			GameLog.add("3_9：准备换场景");
 			var by : ByteBuffer = new ByteBuffer();
 			by.writeVarint32(transId);
 			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_REQUEST_TRANSPORT, by);
 		}
+		
+		/**
+		 * 客户端请求跳跃. 不管是一段跳还是二段跳, 都只发跳跃的目标点(鼠标所指的点, 不管当前点是否可走以及距离,
+		 * 这些全服务器根据当时服务器上角色的坐标来计算)
+		 *
+		 * 死亡/晕眩/地图不准跳跃/体力不足/冷却中/正在施法时, 不发送
+		 *
+		 * 若当前正在移动, 发送跳跃请求后并不打断移动
+		 *
+		 * varint32 跳跃动作
+		 */
+		public static function sceneHeroJump(jumpAction : int) : void
+		{
+			_bytes.clear();
+			_bytes.writeVarint32(jumpAction);
+			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_HERO_JUMP, _bytes);
+		}
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//
+		//  以下代码为参照代码，是深圳那边后台对应的
+		//
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//		public static function transportChgMap(transId : uint) : void
+//		{
+//			if (ReqLockUtil.isReqLocked(SceneModuleMessages.C2S_SCENE_REQUEST_TRANSPORT))
+//				return;
+//			ReqLockUtil.lockReq(SceneModuleMessages.C2S_SCENE_REQUEST_TRANSPORT, 5000);
+//
+//			//切换场景
+//			GameLog.add("3_9：准备换场景");
+//			var by : ByteBuffer = new ByteBuffer();
+//			by.writeVarint32(transId);
+//			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_REQUEST_TRANSPORT, by);
+//		}
 
 		/**
 		 * 客户端加载完场景数据，可进入场景时发送，发送完等待服务器消息
 		 * @param viewRange
 		 */
-		public static function sceneLoaded(viewRange : int) : void
-		{
-			_bytes.clear();
-			_bytes.writeVarint32(viewRange);
-			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_LOADED, _bytes);
-		}
+//		public static function sceneLoaded(viewRange : int) : void
+//		{
+//			_bytes.clear();
+//			_bytes.writeVarint32(viewRange);
+//			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_LOADED, _bytes);
+//		}
 
 		/**
 		 * 改变可视范围大小. 只有已经进入场景才能发送(每次场景加载完都会附带个视野范围的)
 		 */
-		public static function sceneChangeViewRange(viewRange : int) : void
-		{
-			_bytes.clear();
-			_bytes.writeVarint32(viewRange);
-			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_CHANGE_VIEW_RANGE, _bytes);
-		}
+//		public static function sceneChangeViewRange(viewRange : int) : void
+//		{
+//			_bytes.clear();
+//			_bytes.writeVarint32(viewRange);
+//			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_CHANGE_VIEW_RANGE, _bytes);
+//		}
 
 		/**
 		 * 角色移动
 		 * @param path
 		 *
 		 */
-		public static function mainCharWalk(path : Vector.<Vector3D>) : void
-		{
-			var len : uint = path.length;
-
-			_bytes.clear();
-			_bytes.writeVarint32(len); //总共的节点数
-
-			var pos3D : Vector3D;
-			for (var i : int = 0; i < len; i++)
-			{
-				pos3D = path[i];
-				_bytes.writeVarint32(pos3D.x);
-				_bytes.writeVarint32(pos3D.z);
-			}
-			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_HERO_MOVE, _bytes);
-		}
-
-		public static function cancelWalk() : void
-		{
-			_bytes.clear();
-			send(SceneModuleMessages.C2S_SCENE_STOP_MOVE, _bytes);
-		}
+//		public static function mainCharWalk(path : Vector.<Vector3D>) : void
+//		{
+//			var len : uint = path.length;
+//
+//			_bytes.clear();
+//			_bytes.writeVarint32(len); //总共的节点数
+//
+//			var pos3D : Vector3D;
+//			for (var i : int = 0; i < len; i++)
+//			{
+//				pos3D = path[i];
+//				_bytes.writeVarint32(pos3D.x);
+//				_bytes.writeVarint32(pos3D.z);
+//			}
+//			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_HERO_MOVE, _bytes);
+//		}
+//
+//		public static function cancelWalk() : void
+//		{
+//			_bytes.clear();
+//			send(SceneModuleMessages.C2S_SCENE_STOP_MOVE, _bytes);
+//		}
 
 		/**
 		 * 地图传送
@@ -138,12 +228,12 @@ package com.rpgGame.app.sender
 		 *
 		 * varint32 跳跃动作
 		 */
-		public static function sceneHeroJump(jumpAction : int) : void
-		{
-			_bytes.clear();
-			_bytes.writeVarint32(jumpAction);
-			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_HERO_JUMP, _bytes);
-		}
+//		public static function sceneHeroJump(jumpAction : int) : void
+//		{
+//			_bytes.clear();
+//			_bytes.writeVarint32(jumpAction);
+//			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_HERO_JUMP, _bytes);
+//		}
 
 		/**
 		 * 在副本中要求离开副本, 回到进入副本前的场景/坐标.

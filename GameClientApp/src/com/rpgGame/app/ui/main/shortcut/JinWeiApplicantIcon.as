@@ -1,9 +1,7 @@
 package com.rpgGame.app.ui.main.shortcut
 {
-	import com.rpgGame.app.manager.country.CountryManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
-	import com.rpgGame.coreData.info.country.CountryGovernmentPostData;
 	
 	import org.mokylin.skin.mainui.shortcut.MessageJinWeiApplicantIconSkin;
 
@@ -17,7 +15,7 @@ package com.rpgGame.app.ui.main.shortcut
 	public class JinWeiApplicantIcon extends MessageIconBase
 	{
 		private var _skin : MessageJinWeiApplicantIconSkin;
-		private var _applicantData : CountryGovernmentPostData;
+//		private var _applicantData : CountryGovernmentPostData;
 
 		public function JinWeiApplicantIcon()
 		{
@@ -38,20 +36,20 @@ package com.rpgGame.app.ui.main.shortcut
 			
 		}
 
-		private function joinSureCallback() : void
-		{
-			if (!_applicantData)
-				return;
-			CountryManager.sendJinWeireply(_applicantData.id, true);
-			_applicantData = null;
-		}
-
-		private function joinCancelCallback() : void
-		{
-			if (!_applicantData)
-				return;
-			CountryManager.sendJinWeireply(_applicantData.id, false);
-			_applicantData = null;
-		}
+//		private function joinSureCallback() : void
+//		{
+//			if (!_applicantData)
+//				return;
+//			CountryManager.sendJinWeireply(_applicantData.id, true);
+//			_applicantData = null;
+//		}
+//
+//		private function joinCancelCallback() : void
+//		{
+//			if (!_applicantData)
+//				return;
+//			CountryManager.sendJinWeireply(_applicantData.id, false);
+//			_applicantData = null;
+//		}
 	}
 }

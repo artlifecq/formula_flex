@@ -106,11 +106,15 @@ package com.game.engine3D.scene.render
 		protected var _renderParamData : RenderParamData;
 		protected var _renderResourceData : RenderResourceData;
 		protected var _renderUnitData : RenderUnitData = null;
-		protected var _drawElements : Vector.<ObjectContainer3D>;
-		protected var _animatorElements : Vector.<CompositeMesh>;
-		private var _visibleNeedAsyncLoaded : Boolean;
+		
 		private var _nextRenderParamData : RenderParamData;
 		private var _nextRenderResourceData : RenderResourceData;
+		
+		protected var _drawElements : Vector.<ObjectContainer3D>;
+		protected var _animatorElements : Vector.<CompositeMesh>;
+		
+		private var _visibleNeedAsyncLoaded : Boolean;
+		
 		private var _invisibleList : Array;
 		private var _isElementStatus : Boolean;
 		private var _hasSkeletonAnimator : Boolean;

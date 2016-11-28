@@ -2,6 +2,7 @@ package com.rpgGame.app.manager
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.app.state.role.RoleStateUtil;
@@ -32,11 +33,9 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
-
+	
 	import flash.geom.Vector3D;
-
-	import app.message.RaceId;
-
+	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -66,7 +65,7 @@ package com.rpgGame.app.manager
 				role.headFace.addTemporaryBar();
 
 			//上“坐骑”
-			updateMount(role);
+			updateMount(role); 
 			//穿“主体”
 			updateBody(role);
 			//穿“头发”
@@ -116,7 +115,7 @@ package com.rpgGame.app.manager
 					{
 						ru.addUnitAtComposite(ru);
 					}
-					ru.defalutStatus = RoleActionType.IDLE;
+					ru.defalutStatus = RoleActionType.STAND;
 					ru.setAddedCallBack(partAddedCallBack, role);
 					if (role.isMainChar)
 						ru.entityGlass = true;
@@ -193,7 +192,7 @@ package com.rpgGame.app.manager
 				}
 				if (ru)
 				{
-					ru.defalutStatus = RoleActionType.IDLE;
+					ru.defalutStatus = RoleActionType.STAND;
 					ru.setAddedCallBack(partAddedCallBack, role);
 					if (role.isMainChar)
 						ru.entityGlass = true;
@@ -232,7 +231,7 @@ package com.rpgGame.app.manager
 				}
 				if (ru)
 				{
-					ru.defalutStatus = RoleActionType.IDLE;
+					ru.defalutStatus = RoleActionType.STAND;
 					ru.setAddedCallBack(partAddedCallBack, role);
 					if (role.isMainChar)
 						ru.entityGlass = true;
@@ -302,7 +301,7 @@ package com.rpgGame.app.manager
 				}
 				if (ru)
 				{
-					ru.defalutStatus = RoleActionType.IDLE;
+					ru.defalutStatus = RoleActionType.STAND;
 					ru.setAddedCallBack(partAddedCallBack, role);
 					if (role.isMainChar)
 						ru.entityGlass = true;
@@ -352,7 +351,7 @@ package com.rpgGame.app.manager
 				{
 //					ru.addUnitAtComposite(ru);
 				}
-				ru.defalutStatus = RoleActionType.IDLE;
+				ru.defalutStatus = RoleActionType.STAND;
 				ru.setAddedCallBack(partAddedCallBack, role);
 				if (role.isMainChar)
 					ru.entityGlass = true;
@@ -400,143 +399,87 @@ package com.rpgGame.app.manager
 			}
 		}
 
+		/**
+		 *  等以后确定了，这里的逻辑还是要改的，目前能知道的是，每个角色的不同形态可以用自己的一套骨骼。坐骑的话，还不确定。
+		 * 但是可以确定的是不分男女
+		 * @param role
+		 * 
+		 */		
 		public static function callEquipmentChange(role : SceneRole) : void
 		{
 			if (!role || !role.usable)
 				return;
 			var roleData : HeroData = role.data as HeroData;
-			var animatResID : String = "pc/man/body/binjia_animat";
-			var bodyResID : String = "pc/man/body/binjia_skin";
-			var hairResID : String = "pc/man/hair/bingjia-toufa-skin";
+			var animatResID : String = null;
+			var bodyResID : String = null;
+			var hairResID : String = null;
 			var mountResID : String = null;
-			var mountAnimatResID : String = null;//"pc/mount/an_mount_zhanma_empty_animat";
-			var weaponResID : String = "pc/weapon/binjia_wq_changqiang_001";
-			var weaponEffectResID : String = "";//"tx_wq_staff_006";
+			var mountAnimatResID : String = null;
+			var weaponResID : String = null;
+			var weaponEffectResID : String = "";
 			var weaponEffectScale : int = 0;
 			var weaponEffectOffset : Vector3D = null;
-			var deputyWeaponResID : String = null;//"pc/weapon/an_wq_staff_006";
+			var deputyWeaponResID : String = null;
 			var bodyEffectResID : String = null;
-			/*var heroModel : HeroModel = null;
+			var heroModel : HeroModel = HeroModelCfgData.getInfo(roleData.body);
 			var mountModel : MountModel = MountModelCfgData.getInfo(1);
-			switch (roleData.body)
-			{
-				case 1:
-					heroModel = HeroModelCfgData.getInfo(1);
-				case 0:
-					heroModel = HeroModelCfgData.getInfo(2);
-			}
-			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(roleData.clothes);
+			
+			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(roleData.cloths);
 			if (!clothesRes)
 			{
-				if (heroModel)
-					clothesRes = AvatarClothesResCfgData.getInfo(heroModel.clothesResId);
+				GameLog.addShow("角色缺少衣服哦！可能就没有模型出来了！");
+				/*if (heroModel)
+					clothesRes = AvatarClothesResCfgData.getInfo(heroModel.clothesResId);*/
 			}
 			if (clothesRes)
 			{
-				if (roleData.sex)
-				{
-					bodyResID = clothesRes.bodyRes_man;
-					bodyEffectResID = clothesRes.effectRes_man;
-				}
-				else
-				{
-					bodyResID = clothesRes.bodyRes_woman;
-					bodyEffectResID = clothesRes.effectRes_woman;
-				}
+				bodyResID = clothesRes.bodyRes;
+				bodyEffectResID = clothesRes.effectRes;
+
 				var hairRes : AvatarHairRes = AvatarHairResCfgData.getInfo(clothesRes.hairResId);
 				if (hairRes)
 				{
-					if (roleData.sex)
-						hairResID = hairRes.hairRes_man;
-					else
-						hairResID = hairRes.hairRes_woman;
+					hairResID = hairRes.hairRes;
+//					if (roleData.sex)
+//						hairResID = hairRes.hairRes_man;
+//					else
+//						hairResID = hairRes.hairRes_woman;
 				}
 				var mountRes : AvatarMountRes = AvatarMountResCfgData.getInfo(roleData.mount);
 				if (mountRes)
 				{
 					mountResID = mountRes.mountRes;
 				}
-				switch (roleData.weaponRace)
+				switch (roleData.race)
 				{
-					case RaceId.ZHONG_JIAN:
-						if (roleData.sex)
-							animatResID = heroModel.animatRes_zhongJian_man;
-						else
-							animatResID = heroModel.animatRes_zhongJian_woman;
+					case 0:
+						animatResID = heroModel.animatRes_bingjia;
 						if (mountModel)
 						{
-							mountAnimatResID = mountModel.animatRes_zhongJian;
+							mountAnimatResID = mountModel.animatRes;
 						}
 						break;
-					case RaceId.BA_DAO:
-						if (roleData.sex)
-							animatResID = heroModel.animatRes_baDao_man;
+					case 1:
+						if(roleData.sex)
+						{
+							animatResID = heroModel.animatRes_mojia_man;
+						}
 						else
-							animatResID = heroModel.animatRes_baDao_woman;
+						{
+							animatResID = heroModel.animatRes_mojia_woman;
+						}
 						if (mountModel)
 						{
-							mountAnimatResID = mountModel.animatRes_baDao;
+							mountAnimatResID = mountModel.animatRes;
 						}
 						break;
-					case RaceId.YIN_QIANG:
-						if (roleData.sex)
-							animatResID = heroModel.animatRes_yinQiang_man;
-						else
-							animatResID = heroModel.animatRes_yinQiang_woman;
+					case 2:
+						animatResID = heroModel.animatRes_yijia;
 						if (mountModel)
 						{
-							mountAnimatResID = mountModel.animatRes_yinQiang;
+							mountAnimatResID = mountModel.animatRes;
 						}
 						break;
-					case RaceId.YU_SHAN:
-						if (roleData.sex)
-							animatResID = heroModel.animatRes_yuShan_man;
-						else
-							animatResID = heroModel.animatRes_yuShan_woman;
-						if (mountModel)
-						{
-							mountAnimatResID = mountModel.animatRes_yuShan;
-						}
-						break;
-					case RaceId.FA_ZHANG:
-						if (roleData.sex)
-							animatResID = heroModel.animatRes_faZhang_man;
-						else
-							animatResID = heroModel.animatRes_faZhang_woman;
-						if (mountModel)
-						{
-							mountAnimatResID = mountModel.animatRes_faZhang;
-						}
-						break;
-					case RaceId.SHEN_GONG:
-						if (roleData.sex)
-							animatResID = heroModel.animatRes_shenGong_man;
-						else
-							animatResID = heroModel.animatRes_shenGong_woman;
-						if (mountModel)
-						{
-							mountAnimatResID = mountModel.animatRes_shenGong;
-						}
-						break;
-					case RaceId.KUANG_FU:
-						if (roleData.sex)
-							animatResID = heroModel.animatRes_kuangFu_man;
-						else
-							animatResID = heroModel.animatRes_kuangFu_woman;
-						if (mountModel)
-						{
-							mountAnimatResID = mountModel.animatRes_kuangFu;
-						}
-						break;
-					default:
-						if (roleData.sex)
-							animatResID = heroModel.animatRes_unarmed_man;
-						else
-							animatResID = heroModel.animatRes_unarmed_woman;
-						if (mountModel)
-						{
-							mountAnimatResID = mountModel.animatRes_unarmed;
-						}
 				}
 			}
 
@@ -563,7 +506,7 @@ package com.rpgGame.app.manager
 			{
 				mountResID = roleData.trailMount;
 				mountAnimatResID = roleData.trailMountAnimat;
-			}*/
+			}
 			roleData.avatarInfo.setBodyResID(bodyResID, animatResID);
 			roleData.avatarInfo.hairResID = hairResID;
 			roleData.avatarInfo.setMountResID(mountResID, mountAnimatResID);

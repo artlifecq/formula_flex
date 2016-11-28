@@ -3,7 +3,6 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.country.CountryManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -33,11 +32,11 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.type.TaskTargetType;
-
+	
 	import flash.utils.Dictionary;
-
+	
 	import gs.TweenLite;
-
+	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -74,12 +73,12 @@ package com.rpgGame.app.manager
 
 		private static function onSwitchCmp() : void
 		{
-			if (CountryManager.isAtMyCountry())
-			{
-				triggerCreateSceneEffect(_createEffectTrigger);
-				triggerCreateSceneCollect(_createCollectTrigger);
-				triggerPlotDialog(_plotDialogTrigger);
-			}
+//			if (CountryManager.isAtMyCountry())
+//			{
+//				triggerCreateSceneEffect(_createEffectTrigger);
+//				triggerCreateSceneCollect(_createCollectTrigger);
+//				triggerPlotDialog(_plotDialogTrigger);
+//			}
 		}
 
 		public static function triggerById(triggerId : int, roleId : Number = 0) : Boolean

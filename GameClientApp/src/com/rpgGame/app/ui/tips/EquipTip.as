@@ -1,27 +1,15 @@
 package com.rpgGame.app.ui.tips
 {
-	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.core.utils.SpriteStatLineUtil;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.SpriteStat;
-	import com.rpgGame.coreData.cfg.LanguageConfig;
-	import com.rpgGame.coreData.cfg.RaceCfgData;
 	import com.rpgGame.coreData.cfg.StatNameCfgData;
-	import com.rpgGame.coreData.cfg.StaticValue;
-	import com.rpgGame.coreData.cfg.equip.EquipTypeNameCfgData;
-	import com.rpgGame.coreData.cfg.equip.EquipmentGeneralCfgData;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.stat.StatData;
-	import com.rpgGame.coreData.lang.LangEquip;
-	import com.rpgGame.coreData.type.SexType;
 	import com.rpgGame.coreData.type.item.GridBGType;
-	import com.rpgGame.coreData.type.item.ItemQualityType;
-	import com.rpgGame.coreData.utils.MoneyUtil;
 	
-	import app.message.EquipmentGeneralTaozDataProto;
 	import app.message.Quality;
 	import app.message.SpriteStatProto;
 	
@@ -132,105 +120,105 @@ package com.rpgGame.app.ui.tips
 		 */		
 		public function setTipData(data:*):void
 		{
-			_itemInfo=data as EquipInfo;
-
-			if (_itemInfo == null)
-				return;
-
-			var statline:StatLine;
-			while (spriteStatLines.length)
-			{
-				statline=spriteStatLines.shift();
-				if (statline && statline.parent)
-					statline.parent.removeChild(statline);
-				statPool.push(statline);
-			}
-			equipRefineTimes.setRefineTimes(_itemInfo.refined_times);
-
-			//清楚数据,基础属性、随机属性、名将属性、XXX的武器、套装
-			baseGroup.removeChild(_itemTip.baseStatTitle);
-			baseGroup.removeChild(_itemTip.randomStatTitile);
-			baseGroup.removeChild(_itemTip.generalStatTitle);
-			baseGroup.removeChild(_itemTip.generalName);
-			baseGroup.removeChild(_itemTip.generalTaozName);
-
-			spriteStatLines.length=0;
-
-			//设置装备格子信息
-			FaceUtil.SetItemGrid(_iconFace, _itemInfo, false);
-			//装备名字
-			_itemTip.labName.htmlText=ItemQualityType.getHtmlEquipQualityEvaluteName(_itemInfo.refined_times, _itemInfo.quality, _itemInfo.name, _itemInfo.evaluate);
-			//装备品质
-			setQualityVisable(_itemInfo.quality);
-			//绑定还是非绑定
-//			_itemTip.isBind.visible = _itemInfo.isEquipBind;
-			var sex : String = _itemInfo.sex?"("+SexType.getName(_itemInfo.sex)+")":"";
-			//装备类型
-			_itemTip.equipType.text=_itemInfo.race?RaceCfgData.getRaceName(_itemInfo.race):EquipTypeNameCfgData.getTypeName(_itemInfo.equipType)+sex;
-			//装备位置
-			_itemTip.equipType0.text=EquipTypeNameCfgData.getTypeName(_itemInfo.equipType);
-			//装备等级
-			_itemTip.equipLvl.text=_itemInfo.level + "";
-			//耐久度
-			_itemTip.equipNaijiu.text=(_itemInfo.durability - _itemInfo.used_durability) + "/" + _itemInfo.durability;
-
-			childIndex=-1;
-			
-			//获取基础属性
-			if (_itemInfo.baseSpriteStat.getStatValues().length > 0)
-			{
-				baseGroupAddchild(_itemTip.baseStatTitle);
-				SpriteStatLineUtil.createSpriteStatLine(StatLine,baseGroupAddchild,_itemInfo.baseSpriteStat,true,_itemInfo.refinedStat);
-			}
-
-			//获取随机属性
-			if (_itemInfo.randomSpriteStat.getStatValues().length > 0)
-			{
-				baseGroupAddchild(_itemTip.randomStatTitile);
-				SpriteStatLineUtil.createSpriteStatLine(StatLine,baseGroupAddchild,_itemInfo.randomSpriteStat);
-			}
-			
-			//获取套装属性
-			var equipGeneralTaoz:EquipmentGeneralTaozDataProto=EquipmentGeneralCfgData.getGeneralTaozData(_itemInfo.general_taoz_id);
-			if (equipGeneralTaoz)
-			{
-				baseGroupAddchild(_itemTip.generalStatTitle);
-				baseGroupAddchild(_itemTip.generalName);
-				baseGroupAddchild(_itemTip.generalTaozName);
-				_itemTip.generalName.text=equipGeneralTaoz.name + "的" + EquipTypeNameCfgData.getTypeName(_itemInfo.type);
-				_itemTip.generalTaozName.htmlText=LanguageConfig.getText(LangEquip.GENERAL_TAOZ_NAME, equipGeneralTaoz.name, EquipmentGeneralCfgData.getGeneralTaozAddSpriteStatsLenght(equipGeneralTaoz));
-				var spritestatMap:HashMap=EquipmentGeneralCfgData.getGeneralTaozAddSpriteStats(equipGeneralTaoz);
-				if (spritestatMap.length > 0)
-					updateSpriteStateLabel(spritestatMap);
-			}
-
-			//描述
-			_itemTip.labDecTitle.text=_itemInfo.desc ? _itemInfo.desc : "没有填写描述";
-			_itemTip.labDecTitle.height = _itemTip.labDecTitle.bounds.height;
-			//评分
-			_itemTip.pingfen.text=_itemInfo.fighting_amount + "";
-			//出售价格
-			_itemTip.sell.htmlText=MoneyUtil.getHtmlMoneyString( _itemInfo.sellPrize, true, StaticValue.COLOR_CODE_1, StaticValue.COLOR_CODE_1, StaticValue.COLOR_CODE_1, StaticValue.COLOR_CODE_26, StaticValue.COLOR_CODE_16, StaticValue.COLOR_CODE_14 );
-			var display:DisplayObject;
-			var height:int=0;
-			var index:int=0;
-			
-			//计算baseGroup的高度
-			for (; index < baseGroup.numChildren; index++)
-			{
-				display=baseGroup.getChildAt(index);
-				if ( display )
-				{
-					if( display is Label )//重新计算lab的真实高度 2016-06-21 陈鹉光 改
-					{
-						display.height = (display as Label).textBounds.height;
-					}
-					height+=display.height;
-				}
-			}
-			
-			//装备tips背景高度
-			_itemTip.imgBG.height=baseGroup.y + height + lineHeight;
+//			_itemInfo=data as EquipInfo;
+//
+//			if (_itemInfo == null)
+//				return;
+//
+//			var statline:StatLine;
+//			while (spriteStatLines.length)
+//			{
+//				statline=spriteStatLines.shift();
+//				if (statline && statline.parent)
+//					statline.parent.removeChild(statline);
+//				statPool.push(statline);
+//			}
+//			equipRefineTimes.setRefineTimes(_itemInfo.refined_times);
+//
+//			//清楚数据,基础属性、随机属性、名将属性、XXX的武器、套装
+//			baseGroup.removeChild(_itemTip.baseStatTitle);
+//			baseGroup.removeChild(_itemTip.randomStatTitile);
+//			baseGroup.removeChild(_itemTip.generalStatTitle);
+//			baseGroup.removeChild(_itemTip.generalName);
+//			baseGroup.removeChild(_itemTip.generalTaozName);
+//
+//			spriteStatLines.length=0;
+//
+//			//设置装备格子信息
+//			FaceUtil.SetItemGrid(_iconFace, _itemInfo, false);
+//			//装备名字
+//			_itemTip.labName.htmlText=ItemQualityType.getHtmlEquipQualityEvaluteName(_itemInfo.refined_times, _itemInfo.quality, _itemInfo.name, _itemInfo.evaluate);
+//			//装备品质
+//			setQualityVisable(_itemInfo.quality);
+//			//绑定还是非绑定
+////			_itemTip.isBind.visible = _itemInfo.isEquipBind;
+//			var sex : String = _itemInfo.sex?"("+SexType.getName(_itemInfo.sex)+")":"";
+//			//装备类型
+////			_itemTip.equipType.text=_itemInfo.race?RaceCfgData.getRaceName(_itemInfo.race):EquipTypeNameCfgData.getTypeName(_itemInfo.equipType)+sex;
+//			//装备位置
+////			_itemTip.equipType0.text=EquipTypeNameCfgData.getTypeName(_itemInfo.equipType);
+//			//装备等级
+//			_itemTip.equipLvl.text=_itemInfo.level + "";
+//			//耐久度
+//			_itemTip.equipNaijiu.text=(_itemInfo.durability - _itemInfo.used_durability) + "/" + _itemInfo.durability;
+//
+//			childIndex=-1;
+//			
+//			//获取基础属性
+//			if (_itemInfo.baseSpriteStat.getStatValues().length > 0)
+//			{
+//				baseGroupAddchild(_itemTip.baseStatTitle);
+//				SpriteStatLineUtil.createSpriteStatLine(StatLine,baseGroupAddchild,_itemInfo.baseSpriteStat,true,_itemInfo.refinedStat);
+//			}
+//
+//			//获取随机属性
+//			if (_itemInfo.randomSpriteStat.getStatValues().length > 0)
+//			{
+//				baseGroupAddchild(_itemTip.randomStatTitile);
+//				SpriteStatLineUtil.createSpriteStatLine(StatLine,baseGroupAddchild,_itemInfo.randomSpriteStat);
+//			}
+//			
+//			//获取套装属性
+////			var equipGeneralTaoz:EquipmentGeneralTaozDataProto=EquipmentGeneralCfgData.getGeneralTaozData(_itemInfo.general_taoz_id);
+////			if (equipGeneralTaoz)
+////			{
+////				baseGroupAddchild(_itemTip.generalStatTitle);
+////				baseGroupAddchild(_itemTip.generalName);
+////				baseGroupAddchild(_itemTip.generalTaozName);
+////				_itemTip.generalName.text=equipGeneralTaoz.name + "的" + EquipTypeNameCfgData.getTypeName(_itemInfo.type);
+////				_itemTip.generalTaozName.htmlText=LanguageConfig.getText(LangEquip.GENERAL_TAOZ_NAME, equipGeneralTaoz.name, EquipmentGeneralCfgData.getGeneralTaozAddSpriteStatsLenght(equipGeneralTaoz));
+////				var spritestatMap:HashMap=EquipmentGeneralCfgData.getGeneralTaozAddSpriteStats(equipGeneralTaoz);
+////				if (spritestatMap.length > 0)
+////					updateSpriteStateLabel(spritestatMap);
+//			}
+//
+//			//描述
+//			_itemTip.labDecTitle.text=_itemInfo.desc ? _itemInfo.desc : "没有填写描述";
+//			_itemTip.labDecTitle.height = _itemTip.labDecTitle.bounds.height;
+//			//评分
+//			_itemTip.pingfen.text=_itemInfo.fighting_amount + "";
+//			//出售价格
+//			_itemTip.sell.htmlText=MoneyUtil.getHtmlMoneyString( _itemInfo.sellPrize, true, StaticValue.COLOR_CODE_1, StaticValue.COLOR_CODE_1, StaticValue.COLOR_CODE_1, StaticValue.COLOR_CODE_26, StaticValue.COLOR_CODE_16, StaticValue.COLOR_CODE_14 );
+//			var display:DisplayObject;
+//			var height:int=0;
+//			var index:int=0;
+//			
+//			//计算baseGroup的高度
+//			for (; index < baseGroup.numChildren; index++)
+//			{
+//				display=baseGroup.getChildAt(index);
+//				if ( display )
+//				{
+//					if( display is Label )//重新计算lab的真实高度 2016-06-21 陈鹉光 改
+//					{
+//						display.height = (display as Label).textBounds.height;
+//					}
+//					height+=display.height;
+//				}
+//			}
+//			
+//			//装备tips背景高度
+//			_itemTip.imgBG.height=baseGroup.y + height + lineHeight;
 		}
 
 		/**
@@ -324,11 +312,8 @@ package com.rpgGame.app.ui.tips
 }
 import com.rpgGame.core.ui.SpriteStatLine;
 import com.rpgGame.coreData.cfg.LanguageConfig;
-import com.rpgGame.coreData.cfg.equip.EquipRefineTimesCfgData;
-import com.rpgGame.coreData.clientConfig.EquipRefineTimesInfo;
 import com.rpgGame.coreData.info.stat.StatData;
 import com.rpgGame.coreData.lang.LangEquip;
-import com.rpgGame.coreData.type.AssetUrl;
 
 import feathers.controls.UIAsset;
 
@@ -416,20 +401,20 @@ class EquipRefineTimesBar extends Sprite
 	 */	
 	public function setRefineTimes(refine:int):void
 	{
-		var refineTimes : EquipRefineTimesInfo = EquipRefineTimesCfgData.getInfoByRefineTimes(refine);
-		if(!refineTimes)
-		{
-			clearAllAsset();
-			return;
-		}
-		index = 0;
-		addAsset(refineTimes.taiyang,AssetUrl.EQUIP_REFINT_TIMES_TAI_YANG);
-		addAsset(refineTimes.yueliang,AssetUrl.EQUIP_REFINE_TIMES_YUE_LIANG);
-		addAsset(refineTimes.xing,AssetUrl.EQUIP_REFINE_TIMES_XING);
-		for(index;index<_assetMap.length;index++)
-		{
-			clearAssetByIndex(index);
-		}
+//		var refineTimes : EquipRefineTimesInfo = EquipRefineTimesCfgData.getInfoByRefineTimes(refine);
+//		if(!refineTimes)
+//		{
+//			clearAllAsset();
+//			return;
+//		}
+//		index = 0;
+//		addAsset(refineTimes.taiyang,AssetUrl.EQUIP_REFINT_TIMES_TAI_YANG);
+//		addAsset(refineTimes.yueliang,AssetUrl.EQUIP_REFINE_TIMES_YUE_LIANG);
+//		addAsset(refineTimes.xing,AssetUrl.EQUIP_REFINE_TIMES_XING);
+//		for(index;index<_assetMap.length;index++)
+//		{
+//			clearAssetByIndex(index);
+//		}
 	}
 	
 	/**

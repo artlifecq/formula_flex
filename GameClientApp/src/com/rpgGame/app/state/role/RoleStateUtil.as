@@ -6,7 +6,6 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.countryWar.CountryWarWatchManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneCursorHelper;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -27,11 +26,11 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SpellBlinkType;
-
+	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	import flash.utils.getTimer;
-
+	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -74,7 +73,8 @@ package com.rpgGame.app.state.role
 		 * @param posy
 		 *
 		 */
-		public static function walk(role : SceneRole, posx : Number, posy : Number, spacing : int = 0, data : Object = null, onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : void
+		public static function walk(role : SceneRole, posx : Number, posy : Number, spacing : int = 0, data : Object = null, 
+									onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : void
 		{
 			if (!role || !role.usable)
 				return;
@@ -120,7 +120,8 @@ package com.rpgGame.app.state.role
 		 * @param onArrive
 		 *
 		 */
-		public static function walkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : void
+		public static function walkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
+										 onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : void
 		{
 			if (!role || !role.usable)
 				return;
@@ -136,7 +137,8 @@ package com.rpgGame.app.state.role
 			doWalkToPos(role, pos, spacing, data, onArrive, onThrough, onUpdate);
 		}
 
-		public static function doWalkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : Boolean
+		public static function doWalkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
+										   onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : Boolean
 		{
 			if (!role || !role.usable)
 				return false;
@@ -244,7 +246,7 @@ package com.rpgGame.app.state.role
 			if ((ref.owner as SceneRole).isMainChar || (ref.owner as SceneRole).isMainCamouflage)
 			{
 				if (!ref.isServerStop)
-					SceneSender.cancelWalk(); //告诉服务器，停止移动。
+					SceneSender.SendPlayerStopMessage(); //告诉服务器，停止移动。
 			}
 		}
 
@@ -260,16 +262,16 @@ package com.rpgGame.app.state.role
 
 		private static function onWalkSync(ref : WalkMoveStateReference) : void
 		{
-			if (CountryWarWatchManager.isWatching)
-			{
-				return;
-			}
+//			if (CountryWarWatchManager.isWatching)
+//			{
+//				return;
+//			}
 
 			if ((ref.owner as SceneRole).isMainChar || (ref.owner as SceneRole).isMainCamouflage)
 			{
 				if (ref.path.length > 1)
 				{
-					SceneSender.mainCharWalk(ref.path);
+					SceneSender.SendNewRunningMessage(ref.path);
 				}
 			}
 		}

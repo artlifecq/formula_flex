@@ -1,0 +1,62 @@
+package com.rpgGame.netData.moonbox.message{
+	import org.game.netCore.data.long;
+	import org.game.netCore.net.Message;
+	
+	/** 
+	 * @author Commuication Auto Maker
+	 * 
+	 * @version 1.0.0
+	 * 
+	 * @since 2011-5-8
+	 * 
+	 * 月光宝盒仓库物品删除
+	 */
+	public class ResMoonBoxItemRemoveMessage extends Message {
+	
+		//物品Id
+		private var _itemId: long;
+		
+		
+		/**
+		 * 写入字节缓存
+		 */
+		override protected function writing(): Boolean{
+			//物品Id
+			writeLong(_itemId);
+			return true;
+		}
+		
+		/**
+		 * 读取字节缓存
+		 */
+		override protected function reading(): Boolean{
+			//物品Id
+			_itemId = readLong();
+			return true;
+		}
+		
+		/**
+		 * get id
+		 * @return 
+		 */
+		override public function getId(): int {
+			return 217103;
+		}
+		
+		/**
+		 * get 物品Id
+		 * @return 
+		 */
+		public function get itemId(): long{
+			return _itemId;
+		}
+		
+		/**
+		 * set 物品Id
+		 */
+		public function set itemId(value: long): void{
+			this._itemId = value;
+		}
+		
+	}
+}

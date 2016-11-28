@@ -9,8 +9,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.ReliveManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.countryWar.CountryWarChengMenManager;
-	import com.rpgGame.app.manager.countryWar.CountryWarZhanCheManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -20,7 +18,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.task.TaskManager;
 	import com.rpgGame.app.manager.task.TouJingManager;
-	import com.rpgGame.app.manager.yunBiao.YunBiaoManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.action.JumpStateReference;
@@ -30,9 +27,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
-	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
-	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
@@ -44,14 +39,14 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
-	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
 	import com.rpgGame.coreData.role.SceneDropGoodsItem;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.EnumHurtType;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
-	import com.rpgGame.coreData.type.SceneCharType;
+	import com.rpgGame.netData.map.message.ResEnterMapMessage;
+	import com.rpgGame.netData.map.message.ResPlayerStopMessage;
 	
 	import flash.geom.Vector3D;
 	import flash.utils.ByteArray;
@@ -66,6 +61,7 @@ package com.rpgGame.app.cmdlistener.scene
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
@@ -85,6 +81,14 @@ package com.rpgGame.app.cmdlistener.scene
 
 		override public function start() : void
 		{
+			SocketConnection.addCmdListener(101120, RecvEnterMapMessage);
+			SocketConnection.addCmdListener(101116, RecvPlayerStopMessage);
+			
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			//////
+			////// 以下为参考代码，是深圳那边的后台协议，不适用
+			//////
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_ENTER, onSceneEnter);
 			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_CHANGE_SCENE, onChangeScene);
 			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_ADD_HERO, onAddHero);
@@ -136,8 +140,89 @@ package com.rpgGame.app.cmdlistener.scene
 
 			finish();
 		}
+		
+		public function RecvEnterMapMessage(msg:ResEnterMapMessage):void
+		{
+			GameLog.addShow("收到成功进入地图消息");
+			
+//			var infoID : uint = buffer.readVarint32();
+//			var pkMode : uint = infoID & 15;
+			var line : uint = msg.line;
+//			var sceneSequence : uint = (infoID >>> 12);
+			
+			var playerData : HeroData = MainRoleManager.actorInfo;
+			if (playerData == null)
+				return;
+			RoleData.readGeneric(playerData, msg);
+			
+//			playerData.pkMode = pkMode;
+			playerData.line = line;
+			playerData.sceneSequence = 0;
+			
+			EventManager.dispatchEvent(MapEvent.MAP_SWITCH_COMPLETE);
+			
+			//			CountryWarChengMenManager.checkChengMenStatus();
+			
+			if (playerData.hp > 0)
+				ReliveManager.hideRelivePanel();
+			
+//			if (pkMode > 0)
+//				EventManager.dispatchEvent(MainPlayerEvent.PK_MODE_CHANGE);
+		}
+		
+		/**
+		 * 对象的位置修正消息，服务器一般在需要对象停止的时候发送，但跳跃等移动状态不匹配也会发送，需要针对性修正 
+		 * @param msg
+		 */		
+		public function RecvPlayerStopMessage(msg:ResPlayerStopMessage):void
+		{
+			
+			var objId : Number = msg.personId.ToGID();
+//			var speed : int = buffer.readVarint32();
+			var posX : int = msg.position.x;
+			var posY : int = -msg.position.y;
+			GameLog.addShow("%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 收到对象停止消息 :   " + posX + "   " + posY);
+			
+			var role : SceneRole = SceneManager.getSceneObjByID(objId) as SceneRole;
+			if (role && role.usable)
+			{
+				var walkMoveRef : WalkMoveStateReference;
+				var stopWalkRef : StopWalkMoveStateReference;
+				
+				/////////////////伪装者停止移动
+				var camouflageEntity : SceneRole = SceneRole(role.getCamouflageEntity());
+				if (camouflageEntity)
+				{
+					walkMoveRef = camouflageEntity.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+					walkMoveRef.isServerStop = true;
+					stopWalkRef = camouflageEntity.stateMachine.getReference(StopWalkMoveStateReference) as StopWalkMoveStateReference;
+					stopWalkRef.setParams(posX, posY);
+					camouflageEntity.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, stopWalkRef);
+					if (camouflageEntity.stateMachine.isPrewarWaiting)
+						camouflageEntity.stateMachine.transition(RoleStateType.ACTION_PREWAR);
+					else
+						camouflageEntity.stateMachine.transition(RoleStateType.ACTION_IDLE);
+				}
+				else
+				{
+					walkMoveRef = role.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+					walkMoveRef.isServerStop = true;
+					stopWalkRef = role.stateMachine.getReference(StopWalkMoveStateReference) as StopWalkMoveStateReference;
+					stopWalkRef.setParams(posX, posY);
+					role.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, stopWalkRef);
+					if (role.stateMachine.isPrewarWaiting)
+						role.stateMachine.transition(RoleStateType.ACTION_PREWAR);
+					else
+						role.stateMachine.transition(RoleStateType.ACTION_IDLE);
+				}
+			}
+		}
 
-
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//////
+		////// 以下为参考代码，是深圳那边的后台协议，不适用
+		//////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/**
 		 * 服务器已经把客户端添加到场景，客户端可以进入场景
 		 * @param buffer
@@ -145,29 +230,29 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onSceneEnter(buffer : ByteBuffer) : void
 		{
-			var infoID : uint = buffer.readVarint32();
-			var pkMode : uint = infoID & 15;
-			var line : uint = infoID >>> 4 & 255;
-			var sceneSequence : uint = (infoID >>> 12);
-
-			var playerData : HeroData = MainRoleManager.actorInfo;
-			if (playerData == null)
-				return;
-			RoleData.readGeneric(playerData, buffer);
-
-			playerData.pkMode = pkMode;
-			playerData.line = line;
-			playerData.sceneSequence = sceneSequence;
-
-			EventManager.dispatchEvent(MapEvent.MAP_SWITCH_COMPLETE);
-
-			CountryWarChengMenManager.checkChengMenStatus();
-
-			if (playerData.hp > 0)
-				ReliveManager.hideRelivePanel();
-
-			if (pkMode > 0)
-				EventManager.dispatchEvent(MainPlayerEvent.PK_MODE_CHANGE);
+//			var infoID : uint = buffer.readVarint32();
+//			var pkMode : uint = infoID & 15;
+//			var line : uint = infoID >>> 4 & 255;
+//			var sceneSequence : uint = (infoID >>> 12);
+//
+//			var playerData : HeroData = MainRoleManager.actorInfo;
+//			if (playerData == null)
+//				return;
+//			RoleData.readGeneric(playerData, buffer);
+//
+//			playerData.pkMode = pkMode;
+//			playerData.line = line;
+//			playerData.sceneSequence = sceneSequence;
+//
+//			EventManager.dispatchEvent(MapEvent.MAP_SWITCH_COMPLETE);
+//
+////			CountryWarChengMenManager.checkChengMenStatus();
+//
+//			if (playerData.hp > 0)
+//				ReliveManager.hideRelivePanel();
+//
+//			if (pkMode > 0)
+//				EventManager.dispatchEvent(MainPlayerEvent.PK_MODE_CHANGE);
 		}
 
 		/**
@@ -219,7 +304,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var data : HeroData = new HeroData();
 			HeroData.setEnterEyeUserInfo(data, buffer);
 			var sceneRole : SceneRole = SceneRoleManager.getInstance().createHero(data);
-			if (data.zhanCheOwnerID > 0)
+			/*if (data.zhanCheOwnerID > 0)
 			{
 				CountryWarZhanCheManager.addPassengerID(data.zhanCheOwnerID, data.id);
 				var zhanCheID : Number = CountryWarZhanCheManager.getZhanCheID(data.zhanCheOwnerID);
@@ -232,7 +317,7 @@ package com.rpgGame.app.cmdlistener.scene
 			else if (data.isInBiao)
 			{
 				YunBiaoManager.setCamouflageEntity(sceneRole, false, data.isInBiao);
-			}
+			}*/
 		}
 
 		private function onHeroTp(buffer : ByteBuffer) : void
@@ -298,11 +383,11 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function addMonster(buffer : ByteBuffer) : void
 		{
-			var data : MonsterData = new MonsterData(RoleType.TYPE_MONSTER);
-			data.id = buffer.readVarint64();
-			data.modelID = buffer.readVarint32();
-			RoleData.readGeneric(data, buffer);
-			SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
+//			var data : MonsterData = new MonsterData(RoleType.TYPE_MONSTER);
+//			data.id = buffer.readVarint64();
+//			data.modelID = buffer.readVarint32();
+//			RoleData.readGeneric(data, buffer);
+//			SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
 		}
 
 		/**
@@ -312,11 +397,11 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onAddStoryProtectMonster(buffer : ByteBuffer) : void
 		{
-			var data : MonsterData = new MonsterData(RoleType.TYPE_PROTECT_NPC);
-			data.id = buffer.readVarint64();
-			data.modelID = buffer.readVarint32();
-			RoleData.readGeneric(data, buffer);
-			SceneRoleManager.getInstance().createMonster(data, SceneCharType.PROTECT_NPC);
+//			var data : MonsterData = new MonsterData(RoleType.TYPE_PROTECT_NPC);
+//			data.id = buffer.readVarint64();
+//			data.modelID = buffer.readVarint32();
+//			RoleData.readGeneric(data, buffer);
+//			SceneRoleManager.getInstance().createMonster(data, SceneCharType.PROTECT_NPC);
 		}
 
 		/**
@@ -326,18 +411,18 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function addNpc(buffer : ByteBuffer) : void
 		{
-			var data : MonsterData = new MonsterData(RoleType.TYPE_NPC);
-			data.id = buffer.readVarint64();
-			data.modelID = buffer.readVarint32();
-			RoleData.readGeneric(data, buffer);
-			var sceneRole : SceneRole = SceneRoleManager.getInstance().createMonster(data, SceneCharType.NPC);
-			TouJingManager.setHuGuoSiEffect(data.modelID, sceneRole, true);
-			var sceneClientRole:SceneRole = SceneManager.getSceneClientNpcByModelId( data.modelID );
-			if( sceneClientRole != null )
-			{
-				sceneClientRole.visible = false;
-				TouJingManager.setHuGuoSiEffect(data.modelID, sceneClientRole, false);
-			}
+//			var data : MonsterData = new MonsterData(RoleType.TYPE_NPC);
+//			data.id = buffer.readVarint64();
+//			data.modelID = buffer.readVarint32();
+//			RoleData.readGeneric(data, buffer);
+//			var sceneRole : SceneRole = SceneRoleManager.getInstance().createMonster(data, SceneCharType.NPC);
+//			TouJingManager.setHuGuoSiEffect(data.modelID, sceneRole, true);
+//			var sceneClientRole:SceneRole = SceneManager.getSceneClientNpcByModelId( data.modelID );
+//			if( sceneClientRole != null )
+//			{
+//				sceneClientRole.visible = false;
+//				TouJingManager.setHuGuoSiEffect(data.modelID, sceneClientRole, false);
+//			}
 		}
 
 		/**
@@ -347,21 +432,21 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function addSentNpc(buffer : ByteBuffer) : void
 		{
-			var ownerId : Number = buffer.readVarint64();
-			var ownerName : String = buffer.readUTF();
-			var data : MonsterData = new MonsterData(RoleType.TYPE_NPC);
-			data.id = buffer.readVarint64();
-			data.modelID = buffer.readVarint32();
-			data.ownerId = ownerId;
-			data.ownerName = ownerName;
-			RoleData.readGeneric(data, buffer);
-			SceneRoleManager.getInstance().createMonster(data, SceneCharType.NPC);
-			var escortInfo : TaskFollowEscortInfo = TaskInfoDecoder.currentEscortInfo;
-			if (escortInfo && ownerId == MainRoleManager.actorID)
-			{
-				escortInfo.roleId = data.id;
-				EventManager.dispatchEvent(TaskEvent.TASK_TARGET_PROGRESS_UPDATED, [TaskManager.currentMainTaskInfo ? TaskManager.currentMainTaskInfo.id : 0, 0]);
-			}
+//			var ownerId : Number = buffer.readVarint64();
+//			var ownerName : String = buffer.readUTF();
+//			var data : MonsterData = new MonsterData(RoleType.TYPE_NPC);
+//			data.id = buffer.readVarint64();
+//			data.modelID = buffer.readVarint32();
+//			data.ownerId = ownerId;
+//			data.ownerName = ownerName;
+//			RoleData.readGeneric(data, buffer);
+//			SceneRoleManager.getInstance().createMonster(data, SceneCharType.NPC);
+//			var escortInfo : TaskFollowEscortInfo = TaskInfoDecoder.currentEscortInfo;
+//			if (escortInfo && ownerId == MainRoleManager.actorID)
+//			{
+//				escortInfo.roleId = data.id;
+//				EventManager.dispatchEvent(TaskEvent.TASK_TARGET_PROGRESS_UPDATED, [TaskManager.currentMainTaskInfo ? TaskManager.currentMainTaskInfo.id : 0, 0]);
+//			}
 		}
 
 		/**

@@ -1,12 +1,9 @@
 package com.rpgGame.app.ui.main.task
 {
+	import com.rpgGame.app.cmdlistener.enum.EmEvenTrackType;
 	import com.rpgGame.app.manager.task.MiXinManager;
 	import com.rpgGame.app.manager.task.TouJingManager;
 	import com.rpgGame.app.manager.yunBiao.YunBiaoManager;
-	import com.rpgGame.app.ui.main.task.eventTrackItem.CiTanEventTrackPanel;
-	import com.rpgGame.app.cmdlistener.enum.EmEvenTrackType;
-	import com.rpgGame.app.ui.main.task.eventTrackItem.ToujingEvenTrackPanel;
-	import com.rpgGame.app.ui.main.task.eventTrackItem.YunBiaoEventTrackPanel;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.events.YunBiaoEvent;
 	import com.rpgGame.core.events.toujing.TouJingEvent;
@@ -30,12 +27,12 @@ package com.rpgGame.app.ui.main.task
 	{
 		/** 夺经、刺探、运镖 追踪栏子面板 **/
 		private var _skin:TouJingTrackSkin;
-		/** 偷经标签页 **/
-		private var _skinTouJing:ToujingEvenTrackPanel;
-		/** 运镖标签页 **/
-		private var _skinYunBiao:YunBiaoEventTrackPanel;
-		/** 刺探标签页 **/
-		private var _skinCiTan:CiTanEventTrackPanel;
+//		/** 偷经标签页 **/
+//		private var _skinTouJing:ToujingEvenTrackPanel;
+//		/** 运镖标签页 **/
+//		private var _skinYunBiao:YunBiaoEventTrackPanel;
+//		/** 刺探标签页 **/
+//		private var _skinCiTan:CiTanEventTrackPanel;
 		/** 追踪栏的标签所有的数据 **/
 		private var _tabTitleArr:Array = [];
 		/** 标签数据 **/
@@ -111,20 +108,20 @@ package com.rpgGame.app.ui.main.task
 		
 		private function initPanel():void
 		{
-			_skinTouJing = new ToujingEvenTrackPanel();
-			addChild( _skinTouJing );
-			_skinTouJing.onHide();
-			
-			_skinYunBiao = new YunBiaoEventTrackPanel();
-			addChild( _skinYunBiao );
-			_skinYunBiao.onHide();
-			
-			_skinCiTan = new CiTanEventTrackPanel();
-			addChild( _skinCiTan );
-			_skinCiTan.onHide();
-			
-			_skinTouJing.x = _skinYunBiao.x = _skinCiTan.x = _skin.tabBar.x - 4;
-			_skinTouJing.y = _skinYunBiao.y = _skinCiTan.y = _skin.tabBar.y - 3;
+//			_skinTouJing = new ToujingEvenTrackPanel();
+//			addChild( _skinTouJing );
+//			_skinTouJing.onHide();
+//			
+//			_skinYunBiao = new YunBiaoEventTrackPanel();
+//			addChild( _skinYunBiao );
+//			_skinYunBiao.onHide();
+//			
+//			_skinCiTan = new CiTanEventTrackPanel();
+//			addChild( _skinCiTan );
+//			_skinCiTan.onHide();
+//			
+//			_skinTouJing.x = _skinYunBiao.x = _skinCiTan.x = _skin.tabBar.x - 4;
+//			_skinTouJing.y = _skinYunBiao.y = _skinCiTan.y = _skin.tabBar.y - 3;
 			
 			setChildIndex( _skin.tabBar, 3 );
 		}
@@ -328,29 +325,29 @@ package com.rpgGame.app.ui.main.task
 		 */		
 		private function onShowTabIndex( index:int ):void
 		{
-			switch( index )
-			{
-				case EmEvenTrackType.TOU_JING:
-					_skinTouJing.onShow();
-					_skinCiTan.onHide();
-					_skinYunBiao.onHide();
-					break;
-				case EmEvenTrackType.SECRET_MESSAGE:
-					_skinTouJing.onHide();
-					_skinCiTan.onShow();
-					_skinYunBiao.onHide();
-					break;
-				case EmEvenTrackType.YUN_BIAO:
-					_skinTouJing.onHide();
-					_skinCiTan.onHide();
-					_skinYunBiao.onShow();
-					break;
-				default:
-					_skinTouJing.onHide();
-					_skinCiTan.onHide();
-					_skinYunBiao.onHide();
-					break;
-			}
+//			switch( index )
+//			{
+//				case EmEvenTrackType.TOU_JING:
+//					_skinTouJing.onShow();
+//					_skinCiTan.onHide();
+//					_skinYunBiao.onHide();
+//					break;
+//				case EmEvenTrackType.SECRET_MESSAGE:
+//					_skinTouJing.onHide();
+//					_skinCiTan.onShow();
+//					_skinYunBiao.onHide();
+//					break;
+//				case EmEvenTrackType.YUN_BIAO:
+//					_skinTouJing.onHide();
+//					_skinCiTan.onHide();
+//					_skinYunBiao.onShow();
+//					break;
+//				default:
+//					_skinTouJing.onHide();
+//					_skinCiTan.onHide();
+//					_skinYunBiao.onHide();
+//					break;
+//			}
 		}	
 	}
 }

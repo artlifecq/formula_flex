@@ -1,58 +1,56 @@
 package com.rpgGame.app.process
 {
+    import com.game.engine3D.core.poolObject.PoolContainer3D;
     import com.game.engine3D.manager.Stage3DLayerManager;
+    import com.game.engine3D.process.BaseProcess;
+    import com.game.engine3D.scene.render.RenderSet3D;
+    import com.game.engine3D.scene.render.RenderUnit3D;
     import com.game.engine3D.utils.StatsUtil;
-	import com.game.engine3D.core.poolObject.PoolContainer3D;
-	import com.game.engine3D.process.BaseProcess;
-	import com.game.engine3D.scene.render.RenderSet3D;
-	import com.game.engine3D.scene.render.RenderUnit3D;
-    import gameEngine2D.NetDebug;
-	import com.game.mainCore.core.manager.LayerManager;
-	import com.game.mainCore.core.timer.GameTimer;
-	import com.gameClient.log.GameLog;
-	import com.rpgGame.app.SingleClientTest;
-	import com.rpgGame.app.manager.BeanRegisterManager;
-	import com.rpgGame.app.manager.ClientTriggerManager;
-	import com.rpgGame.app.manager.GlobalSettingManager;
-	import com.rpgGame.app.manager.SceneCameraLensEffectManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.scene.FirstEnterSceneManager;
-	import com.rpgGame.app.manager.scene.SceneManager;
-	import com.rpgGame.app.manager.scene.SceneSwitchManager;
-	import com.rpgGame.app.manager.time.SystemTimeManager;
-	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.sender.ClientConfigSender;
-	import com.rpgGame.app.ui.ResLoadingView;
-	import com.rpgGame.app.ui.tips.BuffTip;
-	import com.rpgGame.app.ui.tips.EquipTip;
-	import com.rpgGame.app.ui.tips.FriendHeroTips;
-	import com.rpgGame.app.ui.tips.ItemTip;
-	import com.rpgGame.app.ui.tips.MapAreaTip;
-	import com.rpgGame.app.ui.tips.MountBeastCardTip;
-	import com.rpgGame.app.ui.tips.MountSpellTips;
-	import com.rpgGame.app.ui.tips.MountTip;
-	import com.rpgGame.app.ui.tips.OpenGridTip;
-	import com.rpgGame.app.ui.tips.PKModeTip;
-	import com.rpgGame.app.ui.tips.SocietyBuildItemTip;
-	import com.rpgGame.app.ui.tips.SocietySpellTotalTip;
-	import com.rpgGame.app.ui.tips.SpellTip;
-	import com.rpgGame.app.ui.tips.TxtTip;
-	import com.rpgGame.core.events.BuffEvent;
-	import com.rpgGame.core.events.MapEvent;
-	import com.rpgGame.core.events.MiscEvent;
-	import com.rpgGame.core.manager.tips.TipManager;
-	import com.rpgGame.core.manager.tips.TipTargetManager;
+    import com.game.mainCore.core.manager.LayerManager;
+    import com.game.mainCore.core.timer.GameTimer;
+    import com.gameClient.log.GameLog;
+    import com.rpgGame.app.SingleClientTest;
+    import com.rpgGame.app.manager.BeanRegisterManager;
+    import com.rpgGame.app.manager.ClientTriggerManager;
+    import com.rpgGame.app.manager.GlobalSettingManager;
+    import com.rpgGame.app.manager.SceneCameraLensEffectManager;
+    import com.rpgGame.app.manager.role.MainRoleManager;
+    import com.rpgGame.app.manager.scene.FirstEnterSceneManager;
+    import com.rpgGame.app.manager.scene.SceneManager;
+    import com.rpgGame.app.manager.scene.SceneSwitchManager;
+    import com.rpgGame.app.manager.time.SystemTimeManager;
+    import com.rpgGame.app.scene.SceneRole;
+    import com.rpgGame.app.ui.ResLoadingView;
+    import com.rpgGame.app.ui.tips.BuffTip;
+    import com.rpgGame.app.ui.tips.FriendHeroTips;
+    import com.rpgGame.app.ui.tips.ItemTip;
+    import com.rpgGame.app.ui.tips.MapAreaTip;
+    import com.rpgGame.app.ui.tips.MountBeastCardTip;
+    import com.rpgGame.app.ui.tips.MountSpellTips;
+    import com.rpgGame.app.ui.tips.MountTip;
+    import com.rpgGame.app.ui.tips.OpenGridTip;
+    import com.rpgGame.app.ui.tips.PKModeTip;
+    import com.rpgGame.app.ui.tips.SocietyBuildItemTip;
+    import com.rpgGame.app.ui.tips.SocietySpellTotalTip;
+    import com.rpgGame.app.ui.tips.SpellTip;
+    import com.rpgGame.app.ui.tips.TxtTip;
+    import com.rpgGame.core.events.BuffEvent;
+    import com.rpgGame.core.events.MapEvent;
+    import com.rpgGame.core.manager.tips.TipManager;
+    import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.utils.ConsoleDesk;
-	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.info.buff.BuffInfo;
-	import com.rpgGame.coreData.type.TipType;
-	
-	import flash.events.Event;
-	
-	import org.client.mainCore.bean.BeanEvent;
-	import org.client.mainCore.bean.BeanManager;
-	import org.client.mainCore.manager.EventManager;
-	import org.client.mainCore.utils.Tick;
+    import com.rpgGame.coreData.cfg.ClientConfig;
+    import com.rpgGame.coreData.info.buff.BuffInfo;
+    import com.rpgGame.coreData.type.TipType;
+    
+    import flash.events.Event;
+    
+    import gameEngine2D.NetDebug;
+    
+    import org.client.mainCore.bean.BeanEvent;
+    import org.client.mainCore.bean.BeanManager;
+    import org.client.mainCore.manager.EventManager;
+    import org.client.mainCore.utils.Tick;
 
 	/**
 	 *
@@ -113,10 +111,12 @@ package com.rpgGame.app.process
 
 		private function getConfig() : void
 		{
-			SystemTimeManager.reqServerTime();
+//			SystemTimeManager.reqServerTime();
 			//
-			EventManager.addEvent(MiscEvent.CONGFIG_ALL_CMP, startGame);
-			ClientConfigSender.reqConfig();
+//			EventManager.addEvent(MiscEvent.CONGFIG_ALL_CMP, startGame);
+//			ClientConfigSender.reqConfig();
+			
+			startGame();//上面的代码，暂时注释掉，应该还没有加这些协议，这个代码临时加上的，弥补流程
 		}
 
 		private function startGame() : void
@@ -162,7 +162,7 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.SPELL_TIP, SpellTip);
 			TipManager.registerTipsParserClass(TipType.OPEN_GRID_TIP, OpenGridTip);
 			TipManager.registerTipsParserClass(TipType.FRIEND_HERO_TIP, FriendHeroTips);
-			TipManager.registerTipsParserClass(TipType.EQUIP_TIP, EquipTip);
+//			TipManager.registerTipsParserClass(TipType.EQUIP_TIP, EquipTip);
 			TipManager.registerTipsParserClass(TipType.BUFF_TIP, BuffTip);
 			TipManager.registerTipsParserClass(TipType.SOCIETY_SPELL_TOTAL_TIP, SocietySpellTotalTip);
 			TipManager.registerTipsParserClass(TipType.MAP_AREA_TIP, MapAreaTip);
@@ -182,19 +182,19 @@ package com.rpgGame.app.process
             CONFIG::netDebug {
                 NetDebug.init("192.168.56.101", 10000);
             }
+				
 			//buff测试，过段时间删除 
-
-			MainRoleManager.actorInfo.buffList = new Vector.<BuffInfo>();
-			for (var i : int = 1; i < 30; i++)
-			{
-				var buff : BuffInfo = new BuffInfo(MainRoleManager.actorID);
-				buff.curtStackCount = 2;
-				buff.cfgId = i;
-				buff.disappearTime = SystemTimeManager.curtTm + buff.totalTime;
-				//EventManager.dispatchEvent(BuffEvent.ADD_BUFF, buff);
-				MainRoleManager.actorInfo.buffList.push(buff);
-			}
-			EventManager.dispatchEvent(BuffEvent.UPDATE_BUFF, MainRoleManager.actorID);
+//			MainRoleManager.actorInfo.buffList = new Vector.<BuffInfo>();
+//			for (var i : int = 1; i < 30; i++)
+//			{
+//				var buff : BuffInfo = new BuffInfo(MainRoleManager.actorID);
+//				buff.curtStackCount = 2;
+//				buff.cfgId = i;
+//				buff.disappearTime = SystemTimeManager.curtTm + buff.totalTime;
+//				//EventManager.dispatchEvent(BuffEvent.ADD_BUFF, buff);
+//				MainRoleManager.actorInfo.buffList.push(buff);
+//			}
+//			EventManager.dispatchEvent(BuffEvent.UPDATE_BUFF, MainRoleManager.actorID);
 		}
 
 		private function initMM() : void

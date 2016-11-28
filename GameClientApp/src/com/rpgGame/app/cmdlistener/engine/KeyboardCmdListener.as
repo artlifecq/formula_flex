@@ -1,14 +1,14 @@
 package com.rpgGame.app.cmdlistener.engine
 {
 	import com.game.engine3D.manager.Stage3DLayerManager;
+	import com.game.engine3D.utils.PathFinderUtil;
 	import com.game.mainCore.core.events.KeyCodeEvent;
 	import com.game.mainCore.core.info.key.KeysCodeInfo;
 	import com.rpgGame.app.controller.keyboard.KeyFuncProcess;
 	import com.rpgGame.app.controller.keyboard.KeyNormalProcess;
 	import com.rpgGame.app.controller.keyboard.KeySpellProcess;
 	import com.rpgGame.app.manager.input.KeyMoveManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.scene.SceneSwitchManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.core.manager.input.KeyManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.info.key.KeyCodeType;
@@ -16,6 +16,7 @@ package com.rpgGame.app.cmdlistener.engine
 	import com.rpgGame.coreData.info.key.MulitKeyInfo;
 	
 	import flash.events.Event;
+	import flash.geom.Vector3D;
 	import flash.ui.Keyboard;
 	
 	import feathers.controls.TextInput;
@@ -70,12 +71,14 @@ package com.rpgGame.app.cmdlistener.engine
 //测试代码，主要用来作场景处理的，临时的，当按回车键时，会执行换场景
 			if (info.code == Keyboard.TAB)
 			{
-				trace("点击了TAB键了！！！要换场景了");
+				/*trace("点击了TAB键了！！！要换场景了");
 				if(MainRoleManager.actorInfo.mapID == 6)
 					MainRoleManager.actorInfo.mapID = 8;
 				else
 					MainRoleManager.actorInfo.mapID = 6;
-				SceneSwitchManager.changeMap();
+				SceneSwitchManager.changeMap();*/
+				var b:Boolean = PathFinderUtil.isSolid(SceneManager.getDistrict(), new Vector3D(3697, -1165));
+				trace(b);
 				return;
 			}
 /////////////////////////////////////////////////////

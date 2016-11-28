@@ -1,19 +1,20 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.core.manager
+﻿package com.game.mainCore.core.manager
 {
+    import com.game.mainCore.core.loader.loading.BaseLoading;
+    import com.game.mainCore.core.loader.loading.EmptyLoading;
+    import com.game.mainCore.core.loader.loading.ILoading;
+    import com.game.mainCore.core.loader.loading.MainLoading;
+    import com.game.mainCore.core.loader.loading.SwitchSceneLoading;
+    import com.game.mainCore.core.loader.loading.TitleOnlyLoading;
+    import com.game.mainCore.core.loader.loading.TitlePercentLoading;
+    
+    import flash.display.Bitmap;
+    import flash.display.DisplayObjectContainer;
     import flash.display.Loader;
-    import org.client.mainCore.utils.Utils;
     import flash.display.MovieClip;
     import flash.display.Sprite;
-    import flash.display.Bitmap;
-    import com.game.mainCore.core.loader.loading.EmptyLoading;
-    import com.game.mainCore.core.loader.loading.MainLoading;
-    import com.game.mainCore.core.loader.loading.TitlePercentLoading;
-    import com.game.mainCore.core.loader.loading.TitleOnlyLoading;
-    import com.game.mainCore.core.loader.loading.BaseLoading;
-    import com.game.mainCore.core.loader.loading.SwitchSceneLoading;
-    import flash.display.DisplayObjectContainer;
-    import com.game.mainCore.core.loader.loading.ILoading;
+    
+    import org.client.mainCore.utils.Utils;
 
     public class LoadingManager 
     {
@@ -28,27 +29,27 @@ package com.game.mainCore.core.manager
 
         public static function get loader():Loader
         {
-            return (_loader);
+            return _loader;
         }
 
         public static function getMovieClip(str:String):MovieClip
         {
-            return (Utils.getMovieClipFromLoader(str, _loader));
+            return Utils.getMovieClipFromLoader(str, _loader);
         }
 
         public static function getSprite(str:String):Sprite
         {
-            return (Utils.getSpriteFromLoader(str, _loader));
+            return Utils.getSpriteFromLoader(str, _loader);
         }
 
         public static function getBitmap(str:String):Bitmap
         {
-            return (new Bitmap(Utils.getBitmapDataFromLoader(str, _loader, true)));
+            return new Bitmap(Utils.getBitmapDataFromLoader(str, _loader, true));
         }
 
         public static function getLoading(type:int, parent:DisplayObjectContainer, title:String="Loading...", closeEnabled:Boolean=false):ILoading
         {
-            var _loading = null;
+            var _loading:ILoading = null;
             switch (type)
             {
                 case -1:
@@ -69,10 +70,8 @@ package com.game.mainCore.core.manager
                 case 4:
                     _loading = new SwitchSceneLoading(parent, title, closeEnabled);
                 default:
-            };
-            return (_loading);
+            }
+            return _loading;
         }
-
-
     }
-}//package com.game.mainCore.core.manager
+}

@@ -6,12 +6,12 @@ package com.client.process
 	import com.client.sender.LoginSender;
 	import com.client.ui.alert.GameAlert;
 	import com.client.view.loading.ResLoadingView;
-	import com.game.MessagePool;
 	import com.game.engine3D.process.BaseProcess;
 	import com.game.engine3D.process.ProcessStateMachine;
 	import com.game.engine3D.vo.SenderReferenceSet;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.adobe.Base64;
+	import com.rpgGame.netData.MessagePool;
 	
 	import flash.events.Event;
 	import flash.events.TimerEvent;
@@ -178,12 +178,14 @@ package com.client.process
 
 		private function onLoginSuccessHandler() : void
 		{
-			SenderReferenceSet.start();
+			/*SenderReferenceSet.start();
 			completeProcess();
 			if (ClientGlobal.mainEntry)
 			{
 				ClientGlobal.mainEntry.reEnterGame();
-			}
+			}*/
+			GameLog.addShow("登录成功了...",this);
+			completeProcess();
 		}
 
 		private function closeSocket(deley : int, msg : String) : void

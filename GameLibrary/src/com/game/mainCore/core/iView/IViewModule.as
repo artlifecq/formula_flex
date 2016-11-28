@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.core.iView
+﻿package com.game.mainCore.core.iView
 {
     import org.client.mainCore.module.IDisplayModule;
 
@@ -11,4 +10,4 @@ package com.game.mainCore.core.iView
         function excuteEsc():void;
 
     }
-}//package com.game.mainCore.core.iView
+}

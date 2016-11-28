@@ -11,16 +11,12 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.sender.SpellSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.SystemTimeEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
-	import com.rpgGame.coreData.cfg.demo.GmLevelAddSpellPointData;
-	import com.rpgGame.coreData.clientConfig.GmLevelAddSpellPoint;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
-	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
 	import com.rpgGame.coreData.lang.LangText;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.EffectUrl;
@@ -182,9 +178,9 @@ package com.rpgGame.app.cmdlistener
 
 
 			//Demo版本的自动学习技能逻辑
-			var info : GmLevelAddSpellPoint = GmLevelAddSpellPointData.getInfo(roleData.level);
-			if (info)
-				SpellSender.learnOrUpgradeActiveSpell(info.spellID, new UpgradeItemListVo());
+//			var info : GmLevelAddSpellPoint = GmLevelAddSpellPointData.getInfo(roleData.level);
+//			if (info)
+//				SpellSender.learnOrUpgradeActiveSpell(info.spellID, new UpgradeItemListVo());
 		}
 
 		/**

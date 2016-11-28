@@ -1,9 +1,10 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.core.manager
+﻿package com.game.mainCore.core.manager
 {
     import com.game.mainCore.core.iView.IQueueView;
-    import __AS3__.vec.Vector;
+    
     import flash.events.Event;
+    
+    import __AS3__.vec.Vector;
 
     public class QueueViewShowManager 
     {
@@ -16,49 +17,47 @@ package com.game.mainCore.core.manager
         {
             _queueList.push(view);
             _curtView = _queueList[0];
-            if (!((_curtView) && (_curtView.view.parent)))
+            if (!(_curtView && _curtView.view.parent))
             {
                 _curtView.excuteShow();
-            };
-            if (((_curtView) && (_curtView.view)))
+            }
+            if (_curtView && _curtView.view)
             {
-                _curtView.view.addEventListener("removedFromStage", onRemoveFromStg);
-            };
+                _curtView.view.addEventListener(Event.REMOVED_FROM_STAGE, onRemoveFromStg);
+            }
         }
 
         public static function removeView(view:IQueueView):void
         {
-            var qView = null;
+            var qView:IQueueView = null;
             var index:int = _queueList.indexOf(view);
-            if (!((index == -1)))
+            if (index != -1)
             {
                 qView = _queueList[index];
-                if (((qView) && (qView.view)))
+                if (qView && qView.view)
                 {
-                    qView.view.removeEventListener("removedFromStage", onRemoveFromStg);
-                };
+                    qView.view.removeEventListener(Event.REMOVED_FROM_STAGE, onRemoveFromStg);
+                }
                 _queueList.splice(index, 1);
-            };
+            }
         }
 
         private static function onRemoveFromStg(e:Event):void
         {
             var qView:IQueueView = _queueList.shift();
-            if (((qView) && (qView.view)))
+            if (qView && qView.view)
             {
-                qView.view.removeEventListener("removedFromStage", onRemoveFromStg);
-            };
+                qView.view.removeEventListener(Event.REMOVED_FROM_STAGE, onRemoveFromStg);
+            }
             if (_queueList.length)
             {
                 _curtView = _queueList[0];
                 _curtView.excuteShow();
-                if (((_curtView) && (_curtView.view)))
+                if (_curtView && _curtView.view)
                 {
-                    _curtView.view.addEventListener("removedFromStage", onRemoveFromStg);
-                };
-            };
+                    _curtView.view.addEventListener(Event.REMOVED_FROM_STAGE, onRemoveFromStg);
+                }
+            }
         }
-
-
     }
-}//package com.game.mainCore.core.manager
+}

@@ -1,15 +1,16 @@
 package com.client.process
 {
 	import com.client.ClientGlobal;
+	import com.client.cmdlistener.LoginCmdListener;
 	import com.client.ui.alert.GameAlert;
 	import com.client.view.loading.ResLoadingView;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.process.BaseProcess;
 	import com.gameClient.log.GameLog;
-
+	
 	import flash.system.Capabilities;
 	import flash.utils.getDefinitionByName;
-
+	
 	import gs.TweenLite;
 
 	/**
@@ -36,8 +37,28 @@ package com.client.process
 		override public function startProcess() : void
 		{
 			super.startProcess();
-			completeProcess();
-			initEntry();
+			if(ClientGlobal.loginData)
+			{
+				GameLog.addShow("已有角色的数据了，可以进入游戏了");
+				completeProcess();
+				initEntry();
+			}
+			else
+			{
+				GameLog.addShow("重新再设置下回调，因为协议可能来的慢些，所以等来了，再回调 ");
+
+				LoginCmdListener.onGetMyPlayerInfoHandler = onGetMyPlayerInfoHandler;
+			}
+		}
+		
+		private function  onGetMyPlayerInfoHandler():void
+		{
+			if(ClientGlobal.loginData)
+			{
+				GameLog.addShow("已有角色的数据了，可以进入游戏了");
+				completeProcess();
+				initEntry();
+			}
 		}
 
 		private function initEntry() : void
@@ -52,17 +73,18 @@ package com.client.process
 
 			if (!ClientGlobal.isRelease)
 			{
-//				tryShowDebugInfo(); 暂时屏蔽掉这个弹框，等需要的时候再打开
+				tryShowDebugInfo(); 
 			}
 		}
 
 		private function tryShowDebugInfo() : void
 		{
 			var isShow : Boolean = tryShowDebugPlayerInfo();
-			if (!isShow)
+			///暂时屏蔽掉这个弹框，等需要的时候再打开
+			/*if (!isShow)
 			{
 				tryShowDriverInfo();
-			}
+			}*/
 		}
 
 		private function tryShowDebugPlayerInfo() : Boolean

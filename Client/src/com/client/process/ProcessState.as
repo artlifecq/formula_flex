@@ -35,6 +35,10 @@ package com.client.process
 		 */
 		public static const STATE_LOAD_DLL : String = "STATE_LOAD_DLL";
 		/**
+		 * 得到主角的相关信息 
+		 */		
+		public static const GET_MAINPLAYER_INFO:String = "GET_MAINPLAYER_INFO";
+		/**
 		 * 进入游戏
 		 */
 		public static const STATE_ENTER_GAME : String = "STATE_ENTER_GAME";
