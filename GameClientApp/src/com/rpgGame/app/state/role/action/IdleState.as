@@ -53,7 +53,7 @@ package com.rpgGame.app.state.role.action
 		{
 			super.playAnimation(role, render, isFreeze, time, speedRatio);
 
-			var statusType : String = RoleActionType.getActionType(RoleActionType.IDLE, (_machine as RoleStateMachine).isRiding);
+			var statusType : String = RoleActionType.getActionType(RoleActionType.STAND, (_machine as RoleStateMachine).isRiding);
 			switch (render.type)
 			{
 				case RenderUnitType.BODY:
@@ -69,14 +69,14 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.MOUNT:
 					render.visible = true;
 					render.repeat = 0;
-					render.setStatus(RoleActionType.IDLE, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
+					render.setStatus(RoleActionType.STAND, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
 					if (isFreeze)
 						render.stop(time);
 					break;
 				case RenderUnitType.EFFECT:
 					render.visible = true;
 					render.repeat = 0;
-					render.setStatus(RoleActionType.IDLE, null, time);
+					render.setStatus(RoleActionType.STAND, null, time);
 					break;
 				case RenderUnitType.WEAPON_EFFECT:
 					render.visible = true;

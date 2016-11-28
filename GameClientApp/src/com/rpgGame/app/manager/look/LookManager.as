@@ -1,6 +1,5 @@
 package com.rpgGame.app.manager.look
 {
-	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
 	import com.rpgGame.coreData.role.HeroData;
 	
 	import app.message.OtherHeroProto;

@@ -2,14 +2,14 @@ package com.client.cmdlistener
 {
 	import com.client.ClientGlobal;
 	import com.client.ui.alert.GameAlert;
-	import com.game.login.message.ResCreateCharacterMessage;
-	import com.game.login.message.ResErrorMessage;
-	import com.game.login.message.ResHeartMessage;
-	import com.game.login.message.ResLoginSuccessMessage;
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.netData.login.message.ResCreateCharacterMessage;
+	import com.rpgGame.netData.login.message.ResErrorMessage;
+	import com.rpgGame.netData.login.message.ResHeartMessage;
+	import com.rpgGame.netData.login.message.ResLoginSuccessMessage;
+	import com.rpgGame.netData.player.message.ResMyPlayerInfoMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
@@ -23,6 +23,8 @@ package com.client.cmdlistener
 		public static var onLoginSuccessHandler : Function;
 		public static var onCreateCharSuccessHandler : Function;
 		public static var onCreateCharFailHandler : Function;
+		
+		public static var onGetMyPlayerInfoHandler:Function;
 
 		public function LoginCmdListener()
 		{
@@ -45,10 +47,29 @@ package com.client.cmdlistener
 
 		public static function start() : void
 		{
-			SocketConnection.addCmdListener(100102,RecvLoginSuccessMessage);
+			SocketConnection.addCmdListener(100102, RecvLoginSuccessMessage);
 			SocketConnection.addCmdListener(100101, RecvCreateCharacterMessage);
 			SocketConnection.addCmdListener(100104, RecvErrorMessage);
 			SocketConnection.addCmdListener(100106, RecvHeartMessage);
+			SocketConnection.addCmdListener(103101, RecvMyPlayerInfoMessage);
+		}
+		
+		public static function RecvMyPlayerInfoMessage(msg:ResMyPlayerInfoMessage):void
+		{
+			GameLog.addShow("收到主玩家消息");
+			
+			ClientGlobal.loginData = msg.myPlayerInfo;
+			if (onLoginSuccessHandler != null)
+			{
+				onLoginSuccessHandler();
+				onLoginSuccessHandler = null;
+			}
+			
+			if(onGetMyPlayerInfoHandler)
+			{
+				onGetMyPlayerInfoHandler();
+				onGetMyPlayerInfoHandler = null;
+			}
 		}
 		
 		public static function RecvLoginSuccessMessage(msg:ResLoginSuccessMessage):void
@@ -64,13 +85,9 @@ package com.client.cmdlistener
 			prepareFilterWords();
 			// 这里启动心跳吧
 			StartHeart();*/
+			GameLog.addShow("收到登录成功消息 ");
 			ClientGlobal.hasHero = true;
-			ClientGlobal.loginData = data;
-			if (onLoginSuccessHandler != null)
-			{
-				onLoginSuccessHandler();
-				onLoginSuccessHandler = null;
-			}
+			onCreateHeroSuccess();
 		}
 		
 		public static function RecvErrorMessage(msg:ResErrorMessage):void
@@ -110,7 +127,7 @@ package com.client.cmdlistener
 		
 		public static function RecvCreateCharacterMessage(msg:ResCreateCharacterMessage):void
 		{
-			GameLog.addShow("收到需要创建角色消息 ");
+			GameLog.addShow("收到需要创建角色消息,没有角色，需要创建！完成选服的流程，进入创角的流程 ");
 			ClientGlobal.hasHero = false;
 			if (onLoginSuccessHandler != null)
 			{
@@ -119,10 +136,8 @@ package com.client.cmdlistener
 			}
 		}
 
-		private static function onCreateHeroSuccess(data : ByteBuffer) : void
+		private static function onCreateHeroSuccess() : void
 		{
-			ClientGlobal.loginData = data;
-
 			if (onCreateCharSuccessHandler != null)
 			{
 				onCreateCharSuccessHandler();

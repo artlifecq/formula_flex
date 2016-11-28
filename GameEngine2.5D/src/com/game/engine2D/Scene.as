@@ -284,7 +284,9 @@ package com.game.engine2D
 			updateCameraNow();
 			//强制刷新地图
 			if (sceneZoneMapLayer)
+			{
 				sceneZoneMapLayer.strongLoadMap = true;
+			}
 		}
 
 		/**

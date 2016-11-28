@@ -1,27 +1,25 @@
 package com.rpgGame.coreData.role
 {
 	import com.rpgGame.coreData.enum.JobEnum;
-	import com.rpgGame.coreData.info.crown.CountryModuleData;
 	import com.rpgGame.coreData.info.fight.skill.ActiveSpellList;
 	import com.rpgGame.coreData.info.mount.MountModuleObjClientData;
 	import com.rpgGame.coreData.info.team.TeamUnit;
 	import com.rpgGame.coreData.info.upgrade.AmountInfo;
 	import com.rpgGame.coreData.type.SpellTargetType;
+	import com.rpgGame.netData.map.message.ResEnterMapMessage;
+	import com.rpgGame.netData.player.bean.MyPlayerInfo;
 	
 	import flash.utils.ByteArray;
 	
 	import app.message.ActiveSpellProto;
-	import app.message.AmountType;
 	import app.message.BiaoModuleObjProto;
 	import app.message.CountryModuleObjProto;
-	import app.message.HeroProto;
 	import app.message.ModelProto;
 	import app.message.MountModuleObjClientProto;
 	import app.message.OtherHeroProto;
 	import app.message.SpellProto;
 	
 	import org.game.netCore.net_protobuff.ByteBuffer;
-	import org.game.netCore.net_protobuff.BytesUtil;
 	
 	/**
 	 *
@@ -37,7 +35,7 @@ package com.rpgGame.coreData.role
 		{
 			info.id = 2;
 			info.name = nick;
-			info.mapID = 6;
+			info.mapID = 1;
 			info.level = 100;
 			info.hp = 1000;
 			info.totalStat.life = 10000;
@@ -93,60 +91,75 @@ package com.rpgGame.coreData.role
 		 * @param nick
 		 *
 		 */
-		public static function setUserLoginInfo(info : HeroData, heroProto : HeroProto) : void
+		public static function setUserLoginInfo(info : HeroData, heroInfo : MyPlayerInfo) : void
 		{
-			if (heroProto.heroBasic)
-			{
-				info.id = heroProto.heroBasic.id.toNumber();
-				info.name = heroProto.heroBasic.name;
-				info._resources = heroProto.heroBasic.model.resources;
-				info.countryId = heroProto.heroBasic.country;
-			}
-			
-			if (heroProto.addSpriteStatModuleObj)
-			{
-				info.spriteStat.setData(heroProto.addSpriteStatModuleObj.addStat);
-				info.obtainSpriteStatPoint = heroProto.addSpriteStatModuleObj.obtainSpriteStatPoint;
-				info.usedSpriteStatPoint = heroProto.addSpriteStatModuleObj.usedSpriteStatPoint;
-			}
-			//			info.totalStat.setData(heroProto.totalStat);
-			//			info.spriteStat.setData(heroProto.heroSpriteStat.addStat);
-			
-			if (heroProto.sceneModuleObj)
-			{
-				info.totalStat.setData(heroProto.sceneModuleObj.totalStat);
-				info.mapID = heroProto.sceneModuleObj.sceneId;
-				if (heroProto.sceneModuleObj.heroLevel)
-				{
-					info.level = heroProto.sceneModuleObj.heroLevel.level;
-					info.curExp = heroProto.sceneModuleObj.heroLevel.exp ? heroProto.sceneModuleObj.heroLevel.exp.toNumber() : 0;
-					info.upgradeExp = heroProto.sceneModuleObj.heroLevel.upgradeExp.toNumber();
-				}
-				info.pkAmount = heroProto.sceneModuleObj.pkStatus.pkAmount;
-				info.pkAmountLeftTime = heroProto.sceneModuleObj.pkStatus.nextReducePkAmountTime.toNumber();
-			}
-			
-			if (heroProto.heroMiscModuleObj)
-			{
-				info.amountInfo.setSomeType(AmountType.JINZI, heroProto.heroMiscModuleObj.jinzi ? heroProto.heroMiscModuleObj.jinzi.toNumber() : 0);
-				info.amountInfo.setSomeType(AmountType.BAND_JINZI, heroProto.heroMiscModuleObj.bandJinzi ? heroProto.heroMiscModuleObj.bandJinzi.toNumber() : 0);
-				info.amountInfo.setSomeType(AmountType.MONEY, heroProto.heroMiscModuleObj.money ? heroProto.heroMiscModuleObj.money.toNumber() : 0);
-				info.amountInfo.setSomeType(AmountType.BAND_MONEY, heroProto.heroMiscModuleObj.bandMoney ? heroProto.heroMiscModuleObj.bandMoney.toNumber() : 0);
-				info.amountInfo.setSomeType(AmountType.HONOR, heroProto.heroMiscModuleObj.honor ? heroProto.heroMiscModuleObj.honor.toNumber() : 0);
-				info.amountInfo.setSomeType(AmountType.GONGXUN, heroProto.heroMiscModuleObj.gongXun ? heroProto.heroMiscModuleObj.gongXun.toNumber() : 0);
-				info.amountInfo.setSomeType(AmountType.FAMILY_LILIAN, heroProto.familyModuleObj.familyLiLian ? heroProto.familyModuleObj.familyLiLian.toNumber() : 0);
-			}
-			info.equipInfo.setEquipsProto(heroProto.goodsContainerModuleObj.heroEquipment);
-			info.setCountryModuleData(heroProto.countryModuleObj);
-			info.setBiaoModuleObjProto(heroProto.biaoModuleObj);
-			info.setMountData(heroProto.mountModuleObj);
-			if (heroProto.achievementAndNicknameModuleObj)
-			{
-				//				info.setAchievementData(heroProto.achievementAndNicknameModuleObj.nicknameId);
-			}
-			if (heroProto.relationModuleObj)
-				info.mood = heroProto.relationModuleObj.hasMood ? BytesUtil.bytes2UTF(heroProto.relationModuleObj.mood) : "";
-			info.spellList.setHeroData(heroProto.spellModuleObj.learnRaceSpells);
+			info.id = heroInfo.personId.ToGID();
+			info.name = heroInfo.name;
+			info.mapID = heroInfo.mapModelId;
+			info.body = heroInfo.body;
+			info.cloths = heroInfo.cloths;
+			info.mount = heroInfo.mount;
+			info.pkType = heroInfo.pkType;
+			info.weapon = heroInfo.weapon;
+			info.deputyWeapon = heroInfo.second_weapon;
+			info.sex = heroInfo.sex;
+			info.hp = 1000;
+			info.totalStat.life = 10000;
+			info.totalStat.moveSpeed = 800;
+			info.x = heroInfo.x;
+			info.y = -heroInfo.y;
+//			if (heroProto.heroBasic)
+//			{
+//				info.id = heroProto.heroBasic.id.toNumber();
+//				info.name = heroProto.heroBasic.name;
+//				info._resources = heroProto.heroBasic.model.resources;
+//				info.countryId = heroProto.heroBasic.country;
+//			}
+//			
+//			if (heroProto.addSpriteStatModuleObj)
+//			{
+//				info.spriteStat.setData(heroProto.addSpriteStatModuleObj.addStat);
+//				info.obtainSpriteStatPoint = heroProto.addSpriteStatModuleObj.obtainSpriteStatPoint;
+//				info.usedSpriteStatPoint = heroProto.addSpriteStatModuleObj.usedSpriteStatPoint;
+//			}
+//			//			info.totalStat.setData(heroProto.totalStat);
+//			//			info.spriteStat.setData(heroProto.heroSpriteStat.addStat);
+//			
+//			if (heroProto.sceneModuleObj)
+//			{
+//				info.totalStat.setData(heroProto.sceneModuleObj.totalStat);
+//				info.mapID = heroProto.sceneModuleObj.sceneId;
+//				if (heroProto.sceneModuleObj.heroLevel)
+//				{
+//					info.level = heroProto.sceneModuleObj.heroLevel.level;
+//					info.curExp = heroProto.sceneModuleObj.heroLevel.exp ? heroProto.sceneModuleObj.heroLevel.exp.toNumber() : 0;
+//					info.upgradeExp = heroProto.sceneModuleObj.heroLevel.upgradeExp.toNumber();
+//				}
+//				info.pkAmount = heroProto.sceneModuleObj.pkStatus.pkAmount;
+//				info.pkAmountLeftTime = heroProto.sceneModuleObj.pkStatus.nextReducePkAmountTime.toNumber();
+//			}
+//			
+//			if (heroProto.heroMiscModuleObj)
+//			{
+//				info.amountInfo.setSomeType(AmountType.JINZI, heroProto.heroMiscModuleObj.jinzi ? heroProto.heroMiscModuleObj.jinzi.toNumber() : 0);
+//				info.amountInfo.setSomeType(AmountType.BAND_JINZI, heroProto.heroMiscModuleObj.bandJinzi ? heroProto.heroMiscModuleObj.bandJinzi.toNumber() : 0);
+//				info.amountInfo.setSomeType(AmountType.MONEY, heroProto.heroMiscModuleObj.money ? heroProto.heroMiscModuleObj.money.toNumber() : 0);
+//				info.amountInfo.setSomeType(AmountType.BAND_MONEY, heroProto.heroMiscModuleObj.bandMoney ? heroProto.heroMiscModuleObj.bandMoney.toNumber() : 0);
+//				info.amountInfo.setSomeType(AmountType.HONOR, heroProto.heroMiscModuleObj.honor ? heroProto.heroMiscModuleObj.honor.toNumber() : 0);
+//				info.amountInfo.setSomeType(AmountType.GONGXUN, heroProto.heroMiscModuleObj.gongXun ? heroProto.heroMiscModuleObj.gongXun.toNumber() : 0);
+//				info.amountInfo.setSomeType(AmountType.FAMILY_LILIAN, heroProto.familyModuleObj.familyLiLian ? heroProto.familyModuleObj.familyLiLian.toNumber() : 0);
+//			}
+//			info.equipInfo.setEquipsProto(heroProto.goodsContainerModuleObj.heroEquipment);
+//			info.setCountryModuleData(heroProto.countryModuleObj);
+//			info.setBiaoModuleObjProto(heroProto.biaoModuleObj);
+//			info.setMountData(heroProto.mountModuleObj);
+//			if (heroProto.achievementAndNicknameModuleObj)
+//			{
+//				//				info.setAchievementData(heroProto.achievementAndNicknameModuleObj.nicknameId);
+//			}
+//			if (heroProto.relationModuleObj)
+//				info.mood = heroProto.relationModuleObj.hasMood ? BytesUtil.bytes2UTF(heroProto.relationModuleObj.mood) : "";
+//			info.spellList.setHeroData(heroProto.spellModuleObj.learnRaceSpells);
 		}
 		
 		/**
@@ -155,34 +168,34 @@ package com.rpgGame.coreData.role
 		 * @param by
 		 *
 		 */
-		public static function setEnterEyeUserInfo(info : HeroData, buffer : ByteBuffer) : void
+		public static function setEnterEyeUserInfo(info : HeroData, msg : *) : void
 		{
-			info.id = buffer.readVarint64();
-			info.countryId = buffer.readVarint32();
-			info.name = buffer.readUTF();
-			info.societyName = buffer.readUTF();
-			//---------------------
-			//获取到帮会名称后面的那个varint32，原来是表示职业和vip的，限制加上哈哈
-			var result : uint = buffer.readVarint32();
-			info.job = result & 7; // 职业，按照原来的就可以了
-			//			var manager : int = (result >> 8) & 31;
-			//			var countryPos : int = getCountryPos(manager); //得到官员的职位
-			//			info.countryPos = countryPos;
-			//			info.isGuildLeader = Boolean((manager & (1 << 2)) > 0); //是否是帮主
-			//			var vipType : int = (result >> 13); // 平台vip类型
-			//			//TODO: 这里可以读取到vip等级 by 康露 2014年12月9日
-			//			info.isVip = ((result >>> 3) & 31) != 0; // true表示vip，按照原来的就可以了
-			//			var cityMasterResult : uint = result >>> 8;
-			info.vipLv = (result >> 3) & 31; // vip等级
-			//			info.isWangCity = (cityMasterResult & 1) == 1; // true表示占领王城
-			//			info.isHuangCity = ((cityMasterResult >>> 1) & 1) == 1; // true表示占领皇城
-			//---------------------
-			//info.setResources
-			setResources(info, buffer);
-			//info.curNickTitle = 
-			buffer.readVarint32(); //当前使用称号
-			info.level = buffer.readVarint32();
-			RoleData.readGeneric(info, buffer);
+//			info.id = buffer.readVarint64();
+//			info.countryId = buffer.readVarint32();
+//			info.name = buffer.readUTF();
+//			info.societyName = buffer.readUTF();
+//			//---------------------
+//			//获取到帮会名称后面的那个varint32，原来是表示职业和vip的，限制加上哈哈
+//			var result : uint = buffer.readVarint32();
+//			info.job = result & 7; // 职业，按照原来的就可以了
+//			//			var manager : int = (result >> 8) & 31;
+//			//			var countryPos : int = getCountryPos(manager); //得到官员的职位
+//			//			info.countryPos = countryPos;
+//			//			info.isGuildLeader = Boolean((manager & (1 << 2)) > 0); //是否是帮主
+//			//			var vipType : int = (result >> 13); // 平台vip类型
+//			//			//TODO: 这里可以读取到vip等级 by 康露 2014年12月9日
+//			//			info.isVip = ((result >>> 3) & 31) != 0; // true表示vip，按照原来的就可以了
+//			//			var cityMasterResult : uint = result >>> 8;
+//			info.vipLv = (result >> 3) & 31; // vip等级
+//			//			info.isWangCity = (cityMasterResult & 1) == 1; // true表示占领王城
+//			//			info.isHuangCity = ((cityMasterResult >>> 1) & 1) == 1; // true表示占领皇城
+//			//---------------------
+//			//info.setResources
+//			setResources(info, buffer);
+//			//info.curNickTitle = 
+//			buffer.readVarint32(); //当前使用称号
+//			info.level = buffer.readVarint32();
+//			RoleData.readGeneric(info, buffer);
 			
 			//			info.atkSpeed = 1; //100 / (100 + buffer.readVarint32());
 			
@@ -299,7 +312,7 @@ package com.rpgGame.coreData.role
 		/**帮派**/
 		public var societyName : String = "";
 		/** 英雄国家模块数据 **/
-		public var countryModuleData : CountryModuleData;
+//		public var countryModuleData : CountryModuleData;
 		/**镖车**/
 		public var biaoCheData : BiaoCheData;
 		/** 英雄坐骑模块数据 **/
@@ -314,6 +327,20 @@ package com.rpgGame.coreData.role
 		public var guildName : String = "";
 		/**今天接了几次镖车任务**/
 		public var biaoTimes : int;
+		
+		public var body:int;
+		
+		public var cloths:int;
+		
+		public var mount:int;
+		
+		public var pkType:int;
+		
+		public var weapon:int;
+		
+		public var deputyWeapon:int;
+		
+		public var sex:int;
 		
 		private var _resources : Array;
 		
@@ -336,12 +363,12 @@ package com.rpgGame.coreData.role
 		/** 副武器，使用8个bit，前置换装是性别，即使用字节数为[20-27] **/
 		private var _second_weaponType : ModelType = new ModelType(_weaponType, 8);
 		/** 衣服，使用8个bit，前置换装是性别，即使用字节数为[28-35] **/
-		private var _armorType : ModelType = new ModelType(_second_weaponType, 8);
+		private var _clothsType : ModelType = new ModelType(_second_weaponType, 8);
 		/** 披风，使用8个bit，前置换装是性别，即使用字节数为[36-43] **/
-		private var _cloakType : ModelType = new ModelType(_armorType, 8);
-		/** pk的名字，黄名、红名、灰名、绿名，使用3个bit，前置换装是性别，即使用字节数为[44-46] 0: 白名，1: 绿名，2: 黄名，3: 灰名，4: 红名 **/
+		private var _cloakType : ModelType = new ModelType(_clothsType, 8);
+		/** pk的名字，黄名、红名、灰名、绿名，使用3个bit，前置换装是披风，即使用字节数为[44-46] 0: 白名，1: 绿名，2: 黄名，3: 灰名，4: 红名 **/
 		private var _pk_nameType : ModelType = new ModelType(_cloakType, 3);
-		/** 坐骑，使用8个bit，前置换装是性别，即使用字节数为[47-55] **/
+		/** 坐骑，使用8个bit，前置换装是pk的名字，即使用字节数为[47-55] **/
 		private var _mountType : ModelType = new ModelType(_pk_nameType, 8);
 		
 		private var _customMount : int = 0;
@@ -373,8 +400,8 @@ package com.rpgGame.coreData.role
 		
 		private function setCountryModuleData(countryModuleObj : CountryModuleObjProto) : void
 		{
-			countryModuleData = new CountryModuleData();
-			countryModuleData.setup(countryModuleObj);
+//			countryModuleData = new CountryModuleData();
+//			countryModuleData.setup(countryModuleObj);
 		}
 		
 		/**
@@ -424,7 +451,7 @@ package com.rpgGame.coreData.role
 		 * 1:霸刀
 		 * 2:其他
 		 */
-		public function get weaponRace() : int
+		public function get race() : int
 		{
 			return _raceType.getValue(_resources);
 		}
@@ -435,42 +462,47 @@ package com.rpgGame.coreData.role
 		 * @return
 		 *
 		 */
-		public function get sex() : Boolean
-		{
-			return _sexType.getValue(_resources);
-		}
+//		public function get sex() : Boolean
+//		{
+//			return _sexType.getValue(_resources);
+//		}
 		
 		public function get headFace() : int
 		{
 			return _headType.getValue(_resources);
 		}
 		
-		public function get body() : int
-		{
-			return _bodyType.getValue(_resources);
-		}
+		/**
+		 * 角色阶段---每个阶段对应的骨骼不一样，动作有所升级 
+		 * @return 
+		 * 
+		 */		
+//		public function get body() : int
+//		{
+//			return _bodyType.getValue(_resources);
+//		}
 		
-		public function get weapon() : int
-		{
-			return _weaponType.getValue(_resources);
-		}
-		
-		public function get deputyWeapon() : int
-		{
-			return _second_weaponType.getValue(_resources);
-		}
-		
-		public function get clothes() : int
-		{
-			return _armorType.getValue(_resources);
-		}
-		
-		public function get mount() : int
-		{
-			if (_customMount > 0)
-				return _customMount;
-			return _mountType.getValue(_resources);
-		}
+//		public function get weapon() : int
+//		{
+//			return _weaponType.getValue(_resources);
+//		}
+//		
+//		public function get deputyWeapon() : int
+//		{
+//			return _second_weaponType.getValue(_resources);
+//		}
+//		
+//		public function get clothes() : int
+//		{
+//			return _clothsType.getValue(_resources);
+//		}
+//		
+//		public function get mount() : int
+//		{
+//			if (_customMount > 0)
+//				return _customMount;
+//			return _mountType.getValue(_resources);
+//		}
 		
 		/**
 		 * 0: 白名
@@ -507,7 +539,5 @@ package com.rpgGame.coreData.role
 		{
 			_customMount = value;
 		}
-		
-		
 	}
 }

@@ -9,7 +9,6 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
-	import com.rpgGame.app.manager.country.CountryManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.yunBiao.YunBiaoManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -41,10 +40,10 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
-
+	
 	import app.message.MonsterDataProto;
 	import app.message.StallTypeDataProto;
-
+	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -315,16 +314,16 @@ package com.rpgGame.app.manager.role
 			role.setGroundXY(data.x, data.y);
 			role.rotationY = data.direction;
 			SceneManager.addSceneObjToScene(role, true, true, true);
-			if (CountryManager.isMyEnemyCountry(data.ownerCountry))
-			{
-				if (role.headFace)
-					(role.headFace as HeadFace).bloodState = HeadBloodStateType.MONSTER;
-			}
-			else
-			{
+//			if (CountryManager.isMyEnemyCountry(data.ownerCountry))
+//			{
+//				if (role.headFace)
+//					(role.headFace as HeadFace).bloodState = HeadBloodStateType.MONSTER;
+//			}
+//			else
+//			{
 				if (role.headFace)
 					(role.headFace as HeadFace).bloodState = HeadBloodStateType.MAIN_CHAR;
-			}
+//			}
 			EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
 			return role;
 		}
@@ -439,7 +438,7 @@ package com.rpgGame.app.manager.role
 			//执行主换装更新
 			AvatarManager.updateAvatar(role);
 			var ref : PlayActionStateReference = role.stateMachine.getReference(PlayActionStateReference) as PlayActionStateReference;
-			ref.setParams(RoleActionType.IDLE, 1, data.isDroped ? int.MAX_VALUE : 0);
+			ref.setParams(RoleActionType.STAND, 1, data.isDroped ? int.MAX_VALUE : 0);
 			role.stateMachine.transition(RoleStateType.ACTION_PLAY_ACTION, ref, true); //切换到“播放状态”
 
 			role.setScale(data.sizeScale);

@@ -127,6 +127,7 @@ package com.rpgGame.app.manager.task
 		 */
 		public static function set currentMainTaskInfo(value : TaskInfo) : void
 		{
+			if(value == null)return;
 			if (_currentMainTaskInfo)
 			{
 				if (value == null || _currentMainTaskInfo.id != value.id)

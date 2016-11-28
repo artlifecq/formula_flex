@@ -4,8 +4,7 @@
 	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.info.buff.BuffInfo;
 	import com.rpgGame.coreData.info.fight.skill.ActiveSpellList;
-
-	import org.game.netCore.net_protobuff.ByteBuffer;
+	import com.rpgGame.netData.map.message.ResEnterMapMessage;
 
 	/**
 	 *
@@ -134,50 +133,24 @@
 			return spellList.getSpellList();
 		}
 
-		public static function readGeneric(data : RoleData, buffer : ByteBuffer) : void
+		public static function readGeneric(data : RoleData, msg:ResEnterMapMessage) : void
 		{
-			data.x = buffer.readVarint32();
-			data.y = buffer.readVarint32();
-			data.hp = buffer.readVarint64();
-			data.totalStat.life = buffer.readVarint64();
-			data.mp = buffer.readVarint64();
-			data.totalStat.mana = buffer.readVarint64();
+			data.x = msg.pos.x;
+			data.y = -msg.pos.y;
+//			data.hp = msg.hp;
+//			data.totalStat.life = msg.totalStat.life;
+//			data.mp = msg.mp;
+//			data.totalStat.mana = msg.totalStat.mana;
 
 			data.buffList = new Vector.<BuffInfo>();
-			while (buffer.bytesAvailable > 0)
+			/*while (msg.buff > 0)
 			{
 				var buffInfo : BuffInfo = new BuffInfo(data.id);
 				buffInfo.cfgId = buffer.readVarint32();
 				buffInfo.curtStackCount = buffer.readVarint32();
 				buffInfo.disappearTime = buffer.readVarint64();
 				data.buffList.push(buffInfo);
-			}
+			}*/
 		}
-
-//		/**
-//		 * 全部属性=基础属性+可被洗属性
-//		 */
-//		public var totalStat : SpriteStat;
-//		/**
-//		 * 被分配属性,可以被洗掉
-//		 */
-//		public var spriteStat : SpriteStat;
-//		
-//		/**总共获得的属性点 */
-//		public var totalAddSpriteStatPoint : int;
-//		
-//		/**
-//		 * 额外获得的属性点(不包含升级涨的属性点)
-//		 */
-//		public var obtainSpriteStatPoint : int;
-//		
-//		/** 被使用的属性点 (未使用的属性点＝升级获得的属性点+额外获得的属性点-被使用的属性点) */
-//		public var usedSpriteStatPoint : int;
-//
-//		public function setAddSpriteStateModelObj(proto:AddSpriteStatModuleObjProto):void
-//		{
-//			
-//		}
-
 	}
 }

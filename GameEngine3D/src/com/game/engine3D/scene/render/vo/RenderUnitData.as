@@ -46,25 +46,37 @@ package com.game.engine3D.scene.render.vo
 	{
 		private var _type : String;
 		private var _id : Number;
+		
 		private var _meshElements : Vector.<ObjectContainer3D>;
 		private var _animatorElements : Vector.<CompositeMesh>;
+		
 		private var _meshes : Vector.<Mesh>;
-		private var _effectMethods : Vector.<EffectMethodBase>;
-		private var _sparticleMeshes : Vector.<SparticleMesh>;
-		private var _rootObj3ds : Vector.<ObjectContainer3D>;
-		private var _childObj3ds : Vector.<ObjectContainer3D>;
-		private var _compositeUnitDatas : Vector.<RenderUnitData>;
 		private var _meshByName : Dictionary;
+		private var _sparticleMeshes : Vector.<SparticleMesh>;
 		private var _sparticleMeshByName : Dictionary;
-		private var _objByName : Dictionary;
-		private var _compositeAnimatorGroupByName : Dictionary;
+		
 		private var _layerTypeByName : Dictionary;
 		private var _visibleByName : Dictionary;
+		
+		private var _effectMethods : Vector.<EffectMethodBase>;
+		
+		private var _rootObj3ds : Vector.<ObjectContainer3D>;
+		private var _childObj3ds : Vector.<ObjectContainer3D>;
+		
+		private var _compositeUnitDatas : Vector.<RenderUnitData>;
+		
+		
+		private var _objByName : Dictionary;
+		private var _compositeAnimatorGroupByName : Dictionary;
+		
 		private var _childrenWithAnimatByRoot : Dictionary;
+		
 		private var _materialMap : Dictionary;
 		private var _materialLightPickerMap : Dictionary;
 		private var _targetMeterialMap : Dictionary;
+		
 		private var _camera3DAnimators : Vector.<iCamera3DAnimator>;
+		
 		private var _independentMaterialMap : Dictionary;
 		private var _independentColorTransform : ColorTransform;
 		//private var _overrideMaterialProps : OverrideMaterialProps;
@@ -465,11 +477,11 @@ package com.game.engine3D.scene.render.vo
 			for each (var mesh : Mesh in _meshes)
 			{
 				var animator : IAnimator = null;
-				if (mesh is IAnimatorOwner)
+				if (mesh is IAnimatorOwner)//必须是动画
 				{
 					animator = (mesh as IAnimatorOwner).animator;
 				}
-				if (animator is SkeletonAnimator)
+				if (animator is SkeletonAnimator)//必须是骨骼动画
 				{
 					var index : int = mesh.getBoneIndex(name);
 					if (index >= 0)
@@ -764,10 +776,10 @@ package com.game.engine3D.scene.render.vo
 			if (material)
 			{
 				material.copyFrom(orgMaterial);
-				if (GlobalConfig.use25DMap)
+				/*if (GlobalConfig.use25DMap)
 				{
 					material.blendMode = BlendMode.LAYER;
-				}
+				}*/
 				material.colorTransform = _independentColorTransform;
 				material.diffuseAcc = orgMaterial.diffuseAcc;
 				material.lightPicker = orgMaterial.lightPicker ? _lightPicker : null;

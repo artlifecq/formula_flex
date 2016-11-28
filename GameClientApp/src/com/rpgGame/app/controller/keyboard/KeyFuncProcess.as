@@ -1,7 +1,6 @@
 package com.rpgGame.app.controller.keyboard
 {
 	import com.rpgGame.app.manager.TrusteeshipManager;
-	import com.rpgGame.app.manager.countryWar.CountryWarChengMenManager;
 	import com.rpgGame.app.manager.mount.MountManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -80,13 +79,13 @@ package com.rpgGame.app.controller.keyboard
 						AppManager.showApp(AppConstant.EQUIP_CHANGE);
 					break;
 				case "14": //E
-					CountryWarChengMenManager.testAddChengMen();
+//					CountryWarChengMenManager.testAddChengMen();
 					break;
 				case "17": //H
 					
 					break;
 				case "18": //I
-					CountryWarChengMenManager.testRemoveChengMen();
+//					CountryWarChengMenManager.testRemoveChengMen();
 					break;
 				case "27": //R 聊天框缩放
 					//resizeChatPanel();

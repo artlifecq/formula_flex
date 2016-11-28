@@ -11,42 +11,51 @@ package com.rpgGame.coreData.type
 	public class RoleActionType
 	{
 		/** 待机状态 **/
-		public static const IDLE : String = "stand";//"100";
+		public static const STAND : String = "stand";
 		/** 个性待机状态 **/
-		public static const SPECIFIC_IDLE : String = "110";
+		public static const SPECIFIC_IDLE : String = "specificidle";
 		/** 行走 **/
-		public static const WALK : String = "walk";//"120";
+		public static const WALK : String = "walk";
 		/** 跑步 **/
-		public static const RUN : String = "run";//"130";
+		public static const RUN : String = "run";
 		/** 跳跃 **/
-		public static const JUMP : String = "140";
+		public static const JUMP : String = "jump";
 		/** 二级跳跃 **/
-		public static const SECOND_JUMP : String = "150";
+		public static const SECOND_JUMP : String = "jump2";
 		/** 采集开始 **/
-		public static const COLLECT_START : String = "160";
+		public static const COLLECT_START : String = "colletstart";
 		/** 采集中 **/
-		public static const COLLECT : String = "170";
+		public static const COLLECT : String = "collect";
 		/** 采集结束 **/
-		public static const COLLECT_END : String = "180";
+		public static const COLLECT_END : String = "collectend";
 		/** 战斗待机 **/
-		public static const PREWAR : String = "200";
+		public static const PREWAR : String = "prewar";
 		/** 冲锋 **/
-		public static const BLINK : String = "220";
+		public static const BLINK : String = "blink";
 		/** 死亡 **/
-		public static const DIE : String = "death";//"500";
+		public static const DIE : String = "die";
 		/** 受击 **/
-		public static const HIT : String = "injured";//"400";
+		public static const HIT : String = "hit";
 		/** 击倒 **/
-		public static const FALL : String = "410";
+		public static const FALL : String = "fall";
 		/** 起身 **/
-		public static const GETUP : String = "420";
+		public static const GETUP : String = "getup";
 
 		public static function getActionType(type : String, onMount : Boolean = false) : String
 		{
 			if (!type)
+			{
 				return null;
-			var actionHead : String = type.substr(0, type.length - 1);
-			return onMount ? (actionHead + "5") : type;//(actionHead + "0");
+			}
+			if(onMount)
+			{
+				return type;
+			}
+			else
+			{
+				return type + "_on_mount";
+			}
+			return null;
 		}
 	}
 }

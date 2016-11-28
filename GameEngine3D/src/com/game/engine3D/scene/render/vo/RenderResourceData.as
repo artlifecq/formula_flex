@@ -20,30 +20,38 @@ package com.game.engine3D.scene.render.vo
 	/**
 	 *
 	 * 渲染资源数据
-	 * @author L.L.M.Sunny
-	 * 创建时间：2015-6-4 下午1:26:38
+	 * 主要是用来加载模型及模型动画的数据
+	 * @author neil
+	 * 创建时间
 	 *
 	 */
 	public class RenderResourceData extends CountShareData
 	{
 		private var _meshElements : Vector.<ObjectContainer3D>;
 		private var _animatorElements : Vector.<CompositeMesh>;
+		
 		private var _layerTypeByName : Dictionary;
 		private var _visibleByName : Dictionary;
 		private var _soundBox : SoundBox;
+		
 		private var _materialMap : Dictionary;
 		private var _materialLightPickerMap : Dictionary;
+		
 		private var _meshSourcePath : String;
 		private var _animatorSourcePath : String;
+		
 		private var _renderMeshLoader : RenderUnitLoader;
 		private var _renderAnimatorLoader : RenderUnitLoader;
+		
 		private var _isOnlyInstance : Boolean;
 		private var _lightPickerMap : HashMap;
 		private var _lights : Vector.<LightBase>;
 		private var _methods : Vector.<EffectMethodBase>;
+		
 		private var _resCompleteCallBackList : Vector.<CallBackData>;
 		private var _asyncResCompleteCallBackList : Vector.<CallBackData>;
 		private var _resErrorCallBackList : Vector.<CallBackData>;
+		
 		private var _isSkinMesh : Boolean;
 
 		public function get isSkinMesh() : Boolean

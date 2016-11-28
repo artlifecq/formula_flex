@@ -188,7 +188,7 @@ package com.rpgGame.app.manager
 			memData.line = mainPlayer.line;
 			memData.mapCountryId = mainPlayer.sceneSequence;
 			memData.level = mainPlayer.level;
-			memData.raceId = mainPlayer.weaponRace;
+			memData.raceId = mainPlayer.race;
 			memData.isOnline = true;
 			memData.isInCopy = (MapDataManager.getMapType(memData.sceneId) != EnumMapType.MAP_TYPE_NORMAL);
 			return memData;

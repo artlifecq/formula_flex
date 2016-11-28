@@ -2,9 +2,9 @@ package com.client.sender
 {
 	import com.client.ClientCmdID;
 	import com.client.ClientGlobal;
-	import com.game.login.message.ReqCreateCharacterMessage;
-	import com.game.login.message.ReqLoginMessage;
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.netData.login.message.ReqCreateCharacterMessage;
+	import com.rpgGame.netData.login.message.ReqLoginMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;

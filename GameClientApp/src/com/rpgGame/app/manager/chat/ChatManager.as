@@ -1,10 +1,8 @@
 package com.rpgGame.app.manager.chat
 {
 	import com.gameClient.utils.StringFilter;
-	import com.rpgGame.app.manager.crown.CrownManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.shell.ShellManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.richText.RichTextCustomLinkType;
 	import com.rpgGame.app.richText.RichTextCustomUtil;
@@ -15,7 +13,6 @@ package com.rpgGame.app.manager.chat
 	import com.rpgGame.app.ui.main.chat.ChatUtil;
 	import com.rpgGame.core.events.ChatEvent;
 	import com.rpgGame.coreData.cfg.ChatCfgData;
-	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemCfgData;
@@ -23,6 +20,7 @@ package com.rpgGame.app.manager.chat
 	import com.rpgGame.coreData.info.chat.ChatInfo;
 	import com.rpgGame.coreData.info.item.GetShowItemVo;
 	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.coreData.type.chat.EnumChatTabsType;
 	
@@ -315,6 +313,11 @@ package com.rpgGame.app.manager.chat
 						chatInfo.realShowName = senderNameStr + "悄悄对你说:";
 					}
 					break;
+				case EnumChatChannelType.CHAT_CHANNEL_FAMILY:
+				case EnumChatChannelType.CHAT_CHANNEL_PARTY:
+				case EnumChatChannelType.CHAT_CHANNEL_COUNTRY:
+					chatInfo.realShowName = senderNameStr + ":";
+					break;
 				default:
 					chatInfo.realShowName = countryName + senderNameStr + ":";
 			}
@@ -332,8 +335,9 @@ package com.rpgGame.app.manager.chat
 					chatGoods = chatInfo.chatGoods[i];
 					itemVo = new GetShowItemVo();
 					itemVo.decode(chatGoods);
-
-					itemCode = RichTextCustomUtil.getItemCode(chatGoods.id, ItemCfgData.getItemName(chatGoods.id), ItemCfgData.getItemQuality(chatGoods.id));
+					var itemInfo:ItemInfo = ItemUtil.convertGoodsProtoToItemInfo(chatGoods);
+					var key:String = ChatGoodsManager.addItemInfo(itemInfo);
+					itemCode = RichTextCustomUtil.getItemCode(key, ItemCfgData.getItemName(chatGoods.id), ItemCfgData.getItemQuality(chatGoods.id));
 					itemArr.push(itemCode);
 				}
 
@@ -384,7 +388,7 @@ package com.rpgGame.app.manager.chat
 				var cd:int = ChatCfgData.getChatCDTime(channel);
 				if (ctime - chatTimeVec[0] < cd)
 				{
-					NoticeManager.showHint(EnumHintInfo.CHAT_WORLD_CHAT_FAIL2);
+					NoticeManager.showHint("发送太频繁");
 					return false;
 				}
 			}
@@ -433,11 +437,11 @@ package com.rpgGame.app.manager.chat
 				NoticeManager.mouseFollowNotify("请先输入你想说的话再发送");
 				return;
 			}
-			if (CrownManager.getDontTalk() && channel == EnumChatChannelType.CHAT_CHANNEL_COUNTRY)
-			{
-				NoticeManager.showNotify("禁言中");
-				return;
-			}
+//			if (CrownManager.getDontTalk() && channel == EnumChatChannelType.CHAT_CHANNEL_COUNTRY)
+//			{
+//				NoticeManager.showNotify("禁言中");
+//				return;
+//			}
 
 			if (channel == EnumChatChannelType.CHAT_CHANNEL_LABA)
 			{
@@ -480,11 +484,6 @@ package com.rpgGame.app.manager.chat
 		 */
 		public static function sendGMMsg(msg : String) : Boolean
 		{
-            if (ClientConfig.isSingle) {
-                // todo: 单机版指令
-                ShellManager.parse(msg);
-                return true;
-            }
 			//验证gm命令
 			var isGm : Boolean = isGmMsg(msg);
 			if (isGm)
@@ -536,7 +535,7 @@ package com.rpgGame.app.manager.chat
 				if (unitData.linkType == RichTextCustomLinkType.ITEM_SHOW_TYPE)
 				{
 					data[i] = MSG_GOODS_CODE;
-					_showGoodsList.push(getShowItem(unitData));
+					_showGoodsList.push(getShowItemProto(unitData));
 				}
 
 				if (unitData.linkType == RichTextCustomLinkType.POSITION_FLY_TYPE)
@@ -581,13 +580,24 @@ package com.rpgGame.app.manager.chat
 		 * @return
 		 *
 		 */
-		private static function getShowItem(specialMsg:RichTextUnitData) : GoodsProto
+		public static function getShowItemInfo(specialMsg:RichTextUnitData) : ItemInfo
 		{
-			var chatGoodsPro : GoodsProto = new GoodsProto();
 			var arr:Array = specialMsg.linkData.split(",");
-			chatGoodsPro.id = arr[0];
-
-			return chatGoodsPro;
+			var key:String = arr[0];
+			var itemInfo:ItemInfo  = ChatGoodsManager.getItemInfo(key);
+			return itemInfo;
+		}
+		/**
+		 * 得到要发给服务器的物品数据
+		 * @param itemid
+		 * @return
+		 *
+		 */
+		private static function getShowItemProto(specialMsg:RichTextUnitData) : GoodsProto
+		{
+//			var itemInfo:ItemInfo  = getShowItemInfo(specialMsg);
+//			return itemInfo.proto;
+			return null;
 		}
 
 

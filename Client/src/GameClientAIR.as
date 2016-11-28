@@ -5,6 +5,7 @@ package
 	import com.client.manager.BGMManager;
 	import com.client.process.CreateChar;
 	import com.client.process.EnterGame;
+//	import com.client.process.GetMainPlayerInfo;
 	import com.client.process.LoadDll;
 	import com.client.process.LoadMaskWorld;
 	import com.client.process.LoginInput;
@@ -140,6 +141,7 @@ package
 			ProcessStateMachine.getInstance().pushProcess(new ServerConnect());
 			ProcessStateMachine.getInstance().pushProcess(new CreateChar());
 			ProcessStateMachine.getInstance().pushProcess(new LoadDll());
+//			ProcessStateMachine.getInstance().pushProcess(new GetMainPlayerInfo());
 			ProcessStateMachine.getInstance().pushProcess(new EnterGame());
 		}
 		
@@ -186,6 +188,7 @@ package
 			pg.addPreProcess(ProcessState.STATE_CREATE_CHAR, 0.2);
 			pg.addPreProcess(ProcessState.STATE_LOAD_DLL, 0.2, 0.3);
 			ProcessStateMachine.getInstance().addPreGroup(pg);
+//			ProcessStateMachine.getInstance().addPreProcess(ProcessState.GET_MAINPLAYER_INFO, 0.8, 0.9);
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_ENTER_GAME);
 			ProcessStateMachine.getInstance().run();
 			

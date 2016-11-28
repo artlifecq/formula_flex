@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.libCore.sound
+﻿package com.game.mainCore.libCore.sound
 {
     import com.game.mainCore.libCore.cache.Cache;
     import __AS3__.vec.Vector;
@@ -260,7 +259,5 @@ package com.game.mainCore.libCore.sound
                 };
             };
         }
-
-
     }
-}//package com.game.mainCore.libCore.sound
+}

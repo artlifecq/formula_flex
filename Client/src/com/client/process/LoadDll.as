@@ -47,7 +47,7 @@ package com.client.process
 		private function loadDLL() : void
 		{
 			var urlList : Vector.<String> = new Vector.<String>;
-			var url : String = "entry1/GameClientDll.swf";
+			var url : String = "entry/GameClientDll.swf";
 			if (ClientGlobal.isRelease && ClientGlobal.decodeFun != null)
 				url = url.replace(".swf", ".ml");
 			if (ClientGlobal.useVersion)

@@ -36,14 +36,14 @@ package com.rpgGame.app.process
             var tmp : ByteArray = new ByteArray();
             tmp.writeUTFBytes("测试地图")
             _6SceneData.name = tmp;
-            MapDataManager.addMapInfo(_6SceneData);
+//            MapDataManager.addMapInfo(_6SceneData);
             var _8SceneData : SceneProto = new SceneProto();
             _8SceneData.sceneId = 8;
             _8SceneData.map = "yl_scene01_wc";
             tmp = new ByteArray();
             tmp.writeUTFBytes("测试地图")
             _8SceneData.name = tmp;
-            MapDataManager.addMapInfo(_8SceneData);
+//            MapDataManager.addMapInfo(_8SceneData);
             GameLog.addShow("制造怪物数据");
             var monsterConfig : MonsterConfig = new MonsterConfig();
             monsterConfig.monsters = [];

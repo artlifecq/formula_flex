@@ -21,7 +21,7 @@ package com.rpgGame.coreData.cfg
 			var arr : Array = data.readObject();
 			for each (var info : ClientScene in arr)
 			{
-				_dataDic[info.id] = info;
+				_dataDic[info.q_map_id] = info;
 			}
 		}
 

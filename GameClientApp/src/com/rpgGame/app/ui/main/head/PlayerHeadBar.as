@@ -6,7 +6,6 @@ package com.rpgGame.app.ui.main.head
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.TeamManager;
-	import com.rpgGame.app.manager.country.CountryManager;
 	import com.rpgGame.app.manager.mount.MountManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -37,16 +36,16 @@ package com.rpgGame.app.ui.main.head
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.GridBGType;
-
+	
 	import flash.geom.Point;
 	import flash.text.TextFormat;
-
+	
 	import feathers.controls.UIAsset;
 	import feathers.controls.text.TextFieldTextRenderer;
-
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.head.PlayerHeadBarSkin;
-
+	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.Shape;
@@ -365,7 +364,7 @@ package com.rpgGame.app.ui.main.head
 
 		private function updateName() : void
 		{
-			var ctrName : String = CountryManager.getCountryName(MainRoleManager.actorInfo.countryId);
+			var ctrName : String = "xqj";// CountryManager.getCountryName(MainRoleManager.actorInfo.countryId);
 			if (!ctrName)
 				ctrName = "";
 			playerHeadSkin.labName.text = MainRoleManager.actorInfo.name + "【" + ctrName + "】";

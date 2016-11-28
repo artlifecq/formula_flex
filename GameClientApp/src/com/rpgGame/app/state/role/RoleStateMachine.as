@@ -55,7 +55,7 @@ package com.rpgGame.app.state.role
 	 */
 	public class RoleStateMachine extends StateMachine
 	{
-		private static var machinePool : Pool = new Pool("RoleStateMachine", 300);
+		private static var machinePool : Pool = new Pool("RoleStateMachine", 500);
 
 		/**
 		 * 生成一个RoleStateMachine

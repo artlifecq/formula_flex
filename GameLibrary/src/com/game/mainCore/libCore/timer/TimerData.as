@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.libCore.timer
+﻿package com.game.mainCore.libCore.timer
 {
     import flash.utils.Timer;
 
@@ -17,14 +16,12 @@ package com.game.mainCore.libCore.timer
 
         public function get timer():Timer
         {
-            return (_timer);
+            return _timer;
         }
 
         public function get destroy():Function
         {
-            return (_destroy);
+            return _destroy;
         }
-
-
     }
-}//package com.game.mainCore.libCore.timer
+}

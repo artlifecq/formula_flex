@@ -37,10 +37,14 @@ package com.rpgGame.app.ui.main.chat
 
 		public function show(message : String) : void
 		{
+			if (!_richText)
+			{
+				return;
+			}
 			_richText.text = "";
 			_richText.appendRichText(message);
 			_customSkin.bg.width = _richText.textWidth + PAD * 2 + 6;
-			_customSkin.bg.height = _richText.textHeight + PAD * 2 - 2;
+			_customSkin.bg.height = _richText.textHeight + PAD * 2 + (_richText.textHeight > 30 ? 4 : -2);
 			_customSkin.arrow.x = (_customSkin.bg.width - _customSkin.arrow.width) / 2;
 			_customSkin.arrow.y = _customSkin.bg.height - 1;
 		}

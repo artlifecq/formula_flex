@@ -1,11 +1,6 @@
 package com.rpgGame.app.manager.goods
 {
 	import com.gameClient.log.GameLog;
-	import com.rpgGame.app.manager.equip.EquipCombineManager;
-	import com.rpgGame.app.manager.equip.EquipDestoryManager;
-	import com.rpgGame.app.manager.equip.EquipGeneralChangeManager;
-	import com.rpgGame.app.manager.equip.EquipMakeManager;
-	import com.rpgGame.app.manager.equip.EquipRefineManager;
 	import com.rpgGame.app.manager.mount.MountEquipManager;
 	import com.rpgGame.app.manager.mount.MountEquipmentManager;
 	import com.rpgGame.app.manager.mount.MountFeedManager;
@@ -1059,16 +1054,16 @@ package com.rpgGame.app.manager.goods
 					return StorageManager.instance;
 				case ItemContainerID.Role:
 					return RoleEquipmentManager.instance;
-				case ItemContainerID.EQUIP_MAKE:
-					return EquipMakeManager.instance;
-				case ItemContainerID.EQUIP_COMBINE:
-					return EquipCombineManager.instance;
-				case ItemContainerID.EQUIP_DESTORY:
-					return EquipDestoryManager.instance;
-				case ItemContainerID.EQUIP_REFINE:
-					return EquipRefineManager.instance;
-				case ItemContainerID.EQUIP_GENERAL:
-					return EquipGeneralChangeManager.instance;
+//				case ItemContainerID.EQUIP_MAKE:
+//					return EquipMakeManager.instance;
+//				case ItemContainerID.EQUIP_COMBINE:
+//					return EquipCombineManager.instance;
+//				case ItemContainerID.EQUIP_DESTORY:
+//					return EquipDestoryManager.instance;
+//				case ItemContainerID.EQUIP_REFINE:
+//					return EquipRefineManager.instance;
+//				case ItemContainerID.EQUIP_GENERAL:
+//					return EquipGeneralChangeManager.instance;
 				case ItemContainerID.Mount:
 					return MountEquipmentManager.instance;
 				case ItemContainerID.MOUNT_EQUIP:

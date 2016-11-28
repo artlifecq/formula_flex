@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.libCore.cache
+﻿package com.game.mainCore.libCore.cache
 {
     import com.game.mainCore.libCore.vo.LNode;
     import flash.display.BitmapData;
@@ -19,30 +18,25 @@ package com.game.mainCore.libCore.cache
 
         public function dispose():void
         {
-            if ((data is BitmapData))
+            if (data is BitmapData)
             {
                 (data as BitmapData).dispose();
             }
-            else
-            {
-                if ((data is DisplayObject))
-                {
-                    if (((data.parent) && (!((data.parent is Loader)))))
-                    {
-                        data.parent.removeChild(data);
-                    };
-                    Fun.clearChildren((data as DisplayObject), true);
-                    if ((data is Bitmap))
-                    {
-                        (data as Bitmap).bitmapData.dispose();
-                    };
-                };
-            };
+            else if (data is DisplayObject)
+			{
+				if (data.parent && !(data.parent is Loader))
+				{
+					data.parent.removeChild(data);
+				}
+				Fun.clearChildren((data as DisplayObject), true);
+				if (data is Bitmap)
+				{
+					(data as Bitmap).bitmapData.dispose();
+				}
+			}
             data = null;
             pre = null;
             next = null;
         }
-
-
     }
-}//package com.game.mainCore.libCore.cache
+}

@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.core.loader.loading
+﻿package com.game.mainCore.core.loader.loading
 {
     import flash.events.EventDispatcher;
     import flash.display.DisplayObjectContainer;
@@ -39,19 +38,17 @@ package com.game.mainCore.core.loader.loading
 
         public function get parent():DisplayObjectContainer
         {
-            return (null);
+            return null;
         }
 
         public function get loadingBar():DisplayObject
         {
-            return (null);
+            return null;
         }
 
         public function get key():String
         {
-            return ("");
+            return "";
         }
-
-
     }
-}//package com.game.mainCore.core.loader.loading
+}

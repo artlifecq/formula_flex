@@ -102,7 +102,11 @@ package com.rpgGame.app.ui.main.chat
 		
 		override public function get height():Number
 		{
-			return _chatBg.y + _chatBg.height;
+			if(_chatBg)
+			{
+				return _chatBg.y + _chatBg.height;
+			}
+			return super.height;
 		}
 	}
 }

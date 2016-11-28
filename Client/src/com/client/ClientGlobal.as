@@ -1,6 +1,7 @@
 package com.client
 {
 	import com.gameClient.utils.VersionUtils;
+	import com.rpgGame.netData.player.bean.MyPlayerInfo;
 	
 	import flash.display.Sprite;
 	import flash.display.Stage;
@@ -11,8 +12,6 @@ package com.client
 	import flash.system.IME;
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
-	
-	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
@@ -62,7 +61,7 @@ package com.client
 		public static var useWorker : Boolean = true;
 
 		public static var maskWorldDic : Dictionary;
-		public static var loginData : ByteBuffer;
+		public static var loginData : MyPlayerInfo;
 		/** 资源根目录*/
 		public static var baseDir : String = "../";
 		public static var resURL : String = "res/";

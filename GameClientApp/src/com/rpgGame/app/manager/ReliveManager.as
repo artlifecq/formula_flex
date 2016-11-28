@@ -2,7 +2,6 @@ package com.rpgGame.app.manager
 {
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.countryWar.CountryWarStatusManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -130,10 +129,10 @@ package com.rpgGame.app.manager
 		{
 			var mycountry:int = MainRoleManager.actorInfo.countryId;
 			var sceneSequence:int = MainRoleManager.actorInfo.sceneSequence;
-			if(MainRoleManager.isInCountryWar)//国战
-			{
-				return CountryWarStatusManager.getCurrentReliveSceneName();
-			}
+//			if(MainRoleManager.isInCountryWar)//国战
+//			{
+//				return CountryWarStatusManager.getCurrentReliveSceneName();
+//			}
 			if( mycountry == sceneSequence )//死在自己国家
 				return MapDataManager.getMapName( normal.selfCountryDeathReturnSceneId );
 			

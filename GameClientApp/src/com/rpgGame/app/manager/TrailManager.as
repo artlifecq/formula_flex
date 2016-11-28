@@ -51,32 +51,33 @@ package com.rpgGame.app.manager
 			var mountAnimatRes : String = null;
 			if (mountModel)
 			{
-				switch (roleData.weaponRace)
-				{
-					case RaceId.ZHONG_JIAN:
-						mountAnimatRes = mountModel.animatRes_zhongJian;
-						break;
-					case RaceId.BA_DAO:
-						mountAnimatRes = mountModel.animatRes_baDao;
-						break;
-					case RaceId.YIN_QIANG:
-						mountAnimatRes = mountModel.animatRes_yinQiang;
-						break;
-					case RaceId.YU_SHAN:
-						mountAnimatRes = mountModel.animatRes_yuShan;
-						break;
-					case RaceId.FA_ZHANG:
-						mountAnimatRes = mountModel.animatRes_faZhang;
-						break;
-					case RaceId.SHEN_GONG:
-						mountAnimatRes = mountModel.animatRes_shenGong;
-						break;
-					case RaceId.KUANG_FU:
-						mountAnimatRes = mountModel.animatRes_kuangFu;
-						break;
-					default:
-						mountAnimatRes = mountModel.animatRes_unarmed;
-				}
+				mountAnimatRes = mountModel.animatRes;
+//				switch (roleData.weaponRace)
+//				{
+//					case RaceId.ZHONG_JIAN:
+//						mountAnimatRes = mountModel.animatRes_zhongJian;
+//						break;
+//					case RaceId.BA_DAO:
+//						mountAnimatRes = mountModel.animatRes_baDao;
+//						break;
+//					case RaceId.YIN_QIANG:
+//						mountAnimatRes = mountModel.animatRes_yinQiang;
+//						break;
+//					case RaceId.YU_SHAN:
+//						mountAnimatRes = mountModel.animatRes_yuShan;
+//						break;
+//					case RaceId.FA_ZHANG:
+//						mountAnimatRes = mountModel.animatRes_faZhang;
+//						break;
+//					case RaceId.SHEN_GONG:
+//						mountAnimatRes = mountModel.animatRes_shenGong;
+//						break;
+//					case RaceId.KUANG_FU:
+//						mountAnimatRes = mountModel.animatRes_kuangFu;
+//						break;
+//					default:
+//						mountAnimatRes = mountModel.animatRes_unarmed;
+//				}
 			}
 
 			if (isClingGround)
