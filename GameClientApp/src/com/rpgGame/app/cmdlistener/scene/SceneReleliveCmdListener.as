@@ -18,6 +18,9 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.type.EnumHurtType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
+	import com.rpgGame.netData.map.bean.PlayerInfo;
+	
+	import flash.utils.ByteArray;
 	
 	import app.cmd.SceneModuleMessages;
 	
@@ -207,10 +210,14 @@ package com.rpgGame.app.cmdlistener.scene
 		 * 附带添加英雄消息 S2C_ADD_HERO 消息后面的内容
 		 *
 		 */
-		private function heroReliveBroadcast(buffer : ByteBuffer) : void
+		private function heroReliveBroadcast(buffer : ByteArray) : void
 		{
 			var data : HeroData = new HeroData();
-			HeroData.setEnterEyeUserInfo(data, buffer);
+			
+			var info : PlayerInfo = new PlayerInfo();
+			info.read(buffer);
+			
+			HeroData.setEnterEyeUserInfo(data, info);
 			var role : SceneRole = SceneRoleManager.getInstance().createHero(data);
 			//to do 给这个人播放一个复活特效 
 			SpellAnimationHelper.addTargetEffect(role, 

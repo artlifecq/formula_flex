@@ -23,10 +23,6 @@ package com.rpgGame.coreData.role
 		 */
 		public var countryId : int;
 
-		public function BaseEntityData()
-		{
-		}
-
 		/** 坐标y */
 		public function get y():Number
 		{
@@ -71,6 +67,10 @@ package com.rpgGame.coreData.role
 		public function set id(value : int) : void
 		{
 			_id = value;
+		}
+		
+		public function BaseEntityData()
+		{
 		}
 	}
 }

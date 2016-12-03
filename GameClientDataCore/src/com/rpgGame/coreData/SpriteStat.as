@@ -1,25 +1,19 @@
 package com.rpgGame.coreData
 {
 	import com.rpgGame.coreData.info.stat.StatData;
-	
-	import app.message.SingleStatProto;
-	import app.message.SingleStatsProto;
-	import app.message.SpriteStatProto;
-	import app.message.StatType;
-	import app.message.TotalStatProto;
+	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.netData.player.bean.AttributeItem;
 	
 	import org.client.mainCore.ds.HashMap;
 	
 	/**
-	 *
-	 * 属性数据
-	 * @author L.L.M.Sunny
-	 * 创建时间：2015-4-27 下午8:01:22
-	 *
-	 */
+	 * 存储角色相关的所有属性 
+	 * @author NEIL
+	 * 
+	 */	
 	public class SpriteStat
 	{
-		public var statProto:SpriteStatProto;
+		public var statArr : Vector.<AttributeItem>;
 		
 		private var statMap:HashMap;
 		
@@ -34,42 +28,31 @@ package com.rpgGame.coreData
 		 * @author L.L.M.Sunny
 		 *
 		 */
-		public function setData(data : SpriteStatProto) : void
+		public function setData( arr:Vector.<AttributeItem> ):void
 		{
-			statProto = data;
-			if ( data == null )
+			statArr = arr;
+			if ( arr == null )
 				return;
 			
-			var len:int;
-			var i:int;
 			var statData:StatData;
 			statMap.clear();
-			if( data.total != null )
+			
+			if ( arr != null)
 			{
-				len = data.total.value.length;
-				for( i = 0; i< len; i++ )
+				for ( var j:int = 0; j < arr.length; j++ )
 				{
 					statData = new StatData();
-					statData.type = i;
-					statData.value = data.total.value[i];
-					statData.percent = data.total.percent[i];
-					if(statData.value < 0)
-					{
-						trace("setData,statType", i);
-					}
-					statMap.add( i, statData );
-				}
-			}
-			else if( data.single != null )
-			{
-				len = data.single.stats.length;
-				var single:SingleStatProto;
-				for( i = 0; i< len; i++ )
-				{
-					single = data.single.stats[i];
-					statData = new StatData();
-					statData.setSingle( single );
-					
+					statData.type = arr[j].type;
+					statData.value = arr[j].value;
+//					if ( j < data.value.length )
+//					{
+//						statData.value = data.value[ j ];
+//					}
+//					else
+//					{
+//						statData.value = 0;
+//					}
+//					statData.percent = data.percent[ j ];
 					statMap.add( statData.type, statData );
 				}
 			}
@@ -78,45 +61,47 @@ package com.rpgGame.coreData
 		//-----------------------------------------
 		/**
 		 * 得到属性
-		 * @return 
-		 * 
-		 */		
+		 * @return
+		 *
+		 */
 		public function getCloneMap():HashMap
 		{
 			return statMap.clone();
 		}
+		
 		//-----------------------------------------
 		
 		/**
 		 * 得到某类型的值
 		 * @param type
-		 * @return 
-		 * 
-		 */	
+		 * @return
+		 *
+		 */
 		public function getStatValue( type:int ):int
 		{
-			if( statMap.getValue( type ) == null )
+			if ( statMap.getValue( type ) == null )
 				return 0;
 			
 			var statData:StatData = statMap.getValue( type );
 			return statData.value;
 		}
+		
 		/**
-		 * 获取所有非0的属性 
-		 * @return 
-		 * 
-		 */		
+		 * 获取所有非0的属性
+		 * @return
+		 *
+		 */
 		public function getStatValues():Array
 		{
-			var result : Array = [];
-			var statData : StatData;
-			var statDatas : Array = statMap.getValues();
-			for each(statData in statDatas)
+			var result:Array = [];
+			var statData:StatData;
+			var statDatas:Array = statMap.getValues();
+			for each ( statData in statDatas )
 			{
-				if(!statData || statData.type==-1)
+				if ( !statData || statData.type == -1 )
 					continue;
-				if(statData.value || statData.percent)
-					result.push(statData);
+				if ( statData.value || statData.percent )
+					result.push( statData );
 			}
 			return result;
 		}
@@ -124,9 +109,9 @@ package com.rpgGame.coreData
 		/**
 		 * 得到某类型的值
 		 * @param type
-		 * @return 
-		 * 
-		 */	
+		 * @return
+		 *
+		 */
 		public function getStatValueString( type:int ):String
 		{
 			return getStatValue( type ).toString();
@@ -135,12 +120,12 @@ package com.rpgGame.coreData
 		/**
 		 * 得到某类型的百分比
 		 * @param type
-		 * @return 
-		 * 
-		 */		
+		 * @return
+		 *
+		 */
 		public function getStatPercent( type:int ):int
 		{
-			if( statMap.getValue( type ) == null )
+			if ( statMap.getValue( type ) == null )
 				return 0;
 			
 			var statData:StatData = statMap.getValue( type );
@@ -150,9 +135,9 @@ package com.rpgGame.coreData
 		/**
 		 * 得到某类型的数据
 		 * @param type
-		 * @return 
-		 * 
-		 */		
+		 * @return
+		 *
+		 */
 		public function getStatData( type:int ):StatData
 		{
 			return statMap.getValue( type );
@@ -162,23 +147,23 @@ package com.rpgGame.coreData
 		 * 增加某类型的值
 		 * @param type
 		 * @param value
-		 * 
-		 */		
+		 *
+		 */
 		public function addStatValue( type:int, value:int ):void
 		{
-			setStatValue(type, getStatValue(type)+value);
+			setStatValue( type, getStatValue( type ) + value );
 		}
 		
 		/**
 		 * 设置某类型的值
 		 * @param type
 		 * @param value
-		 * 
-		 */		
+		 *
+		 */
 		public function setStatValue( type:int, value:int ):void
 		{
 			var statData:StatData = statMap.getValue( type );
-			if( statData == null )
+			if ( statData == null )
 			{
 				statData = new StatData();
 				statData.type = type;
@@ -192,12 +177,12 @@ package com.rpgGame.coreData
 		 * 设置某类型的百分比
 		 * @param type
 		 * @param percent
-		 * 
-		 */		
+		 *
+		 */
 		public function setStatPercent( type:int, percent:int ):void
 		{
 			var statData:StatData = statMap.getValue( type );
-			if( statData == null )
+			if ( statData == null )
 			{
 				statData = new StatData();
 				statMap.add( type, statData )
@@ -209,7 +194,7 @@ package com.rpgGame.coreData
 		 * 清空属性点并返回总共清空的点数
 		 * @param type
 		 * @param percent
-		 * 
+		 *
 		 */
 		public function clearStatValue():int
 		{
@@ -218,23 +203,24 @@ package com.rpgGame.coreData
 			return clearTotal;
 		}
 		
-		private function _totalClearStatValue(statData:StatData):void
+		private function _totalClearStatValue( statData:StatData ):void
 		{
-			if( statData != null )
+			if ( statData != null )
 			{
-				clearTotal += int(statData.value);
+				clearTotal += int( statData.value );
 			}
 		}
 		
 		/**
 		 * 获取属性点总和
-		 * 
+		 *
 		 */
 		private var clearTotal:int;
+		
 		public function getStatValueTotal():int
 		{
 			clearTotal = 0;
-			statMap.eachValue(_totalClearStatValue);
+			statMap.eachValue( _totalClearStatValue );
 			return clearTotal;
 		}
 		
@@ -244,15 +230,15 @@ package com.rpgGame.coreData
 		 * @return
 		 *
 		 */
-		public function get attackSpeed() : int
+		public function get attackSpeed():int
 		{
-//			return getStatValue( StatType.ATTACK_SPEED );
-			return 0;//据后端说无这个属性了，暂时保留 by luguozheng 2015.10.15
+			//			return getStatValue( StatType.ATTACK_SPEED );
+			return 0; //据后端说无这个属性了，暂时保留 by luguozheng 2015.10.15
 		}
 		
-		public function set attackSpeed(value : int) : void
+		public function set attackSpeed( value:int ):void
 		{
-//			setStatValue( StatType.ATTACK_SPEED, value );
+			//			setStatValue( StatType.ATTACK_SPEED, value );
 		}
 		
 		/**
@@ -260,14 +246,14 @@ package com.rpgGame.coreData
 		 * @return
 		 *
 		 */
-		public function get life() : int
+		public function get life():int
 		{
-			return getStatValue( StatType.MAX_LIFE );
+			return getStatValue( CharAttributeType.MAX_HP );
 		}
 		
-		public function set life(value : int) : void
+		public function set life( value:int ):void
 		{
-			setStatValue( StatType.MAX_LIFE, value );
+			setStatValue( CharAttributeType.MAX_HP, value );
 		}
 		
 		/**
@@ -275,14 +261,24 @@ package com.rpgGame.coreData
 		 * @return
 		 *
 		 */
-		public function get mana() : int
+		public function get mana():int
 		{
-			return getStatValue( StatType.MAX_MANA );
+			return getStatValue( CharAttributeType.MAX_MP );
 		}
 		
-		public function set mana(value : int) : void
+		public function set mana( value:int ):void
 		{
-			setStatValue( StatType.MAX_MANA, value );
+			setStatValue( CharAttributeType.MAX_MP, value );
+		}
+		
+		/**
+		 * 马上移动速度
+		 * @return
+		 *
+		 */
+		public function get upMoveSpeed() : int
+		{
+			return getStatValue( CharAttributeType.SPEED );
 		}
 		
 		/**
@@ -290,14 +286,14 @@ package com.rpgGame.coreData
 		 * @return
 		 *
 		 */
-		public function get moveSpeed() : int
+		public function get moveSpeed():int
 		{
-			return getStatValue( StatType.MOVE_SPEED );
+			return getStatValue( CharAttributeType.SPEED );
 		}
 		
-		public function set moveSpeed(value : int) : void
+		public function set moveSpeed( value:int ):void
 		{
-			setStatValue( StatType.MOVE_SPEED, value );
+			setStatValue( CharAttributeType.SPEED, value );
 		}
 		
 	}

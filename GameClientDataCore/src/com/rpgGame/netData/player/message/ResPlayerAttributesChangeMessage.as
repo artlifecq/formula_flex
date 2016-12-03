@@ -1,5 +1,5 @@
 package com.rpgGame.netData.player.message{
-	import com.rpgGame.netData.player.bean.PlayerAttributeItem;
+	import com.rpgGame.netData.player.bean.AttributeItem;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -20,7 +20,7 @@ package com.rpgGame.netData.player.message{
 		private var _modelId: int;
 		
 		//变化的属性列表
-		private var _attributeChangeList: Vector.<PlayerAttributeItem> = new Vector.<PlayerAttributeItem>();
+		private var _attributeChangeList: Vector.<AttributeItem> = new Vector.<AttributeItem>();
 		
 		/**
 		 * 写入字节缓存
@@ -51,7 +51,7 @@ package com.rpgGame.netData.player.message{
 			//变化的属性列表
 			var attributeChangeList_length : int = readShort();
 			for (i = 0; i < attributeChangeList_length; i++) {
-				_attributeChangeList[i] = readBean(PlayerAttributeItem) as PlayerAttributeItem;
+				_attributeChangeList[i] = readBean(AttributeItem) as AttributeItem;
 			}
 			return true;
 		}
@@ -98,14 +98,14 @@ package com.rpgGame.netData.player.message{
 		 * get 变化的属性列表
 		 * @return 
 		 */
-		public function get attributeChangeList(): Vector.<PlayerAttributeItem>{
+		public function get attributeChangeList(): Vector.<AttributeItem>{
 			return _attributeChangeList;
 		}
 		
 		/**
 		 * set 变化的属性列表
 		 */
-		public function set attributeChangeList(value: Vector.<PlayerAttributeItem>): void{
+		public function set attributeChangeList(value: Vector.<AttributeItem>): void{
 			this._attributeChangeList = value;
 		}
 		

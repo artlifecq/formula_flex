@@ -180,7 +180,7 @@ package com.rpgGame.app.state.role
 				RoleStateUtil.lastWalkTime = nowTime;
 			}
 			var moveSpeed : int = (walkRole.data as RoleData).totalStat.moveSpeed;
-			if (moveSpeed > MAX_WALK_SPEED)
+			if (moveSpeed > MAX_WALK_SPEED || moveSpeed == 0)
 				moveSpeed = MAX_WALK_SPEED;
 			var ref : WalkMoveStateReference = walkRole.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
 			ref.setParams(moveSpeed, spacing, pos);

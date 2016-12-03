@@ -243,10 +243,10 @@ package com.rpgGame.app.manager.goods
 			return equipSex == sex;
 		}
 		
-		public static function isSuitRace(race:int):Boolean
+		public static function isSuitRace(job:int):Boolean
 		{
-			if(race == 0 || instance.getItemInfoByIndex(EquipmentPos.POS_SECOND_WEAPON) == null)return true;
-			return race == MainRoleManager.actorInfo.race;
+			if(job == 0 || instance.getItemInfoByIndex(EquipmentPos.POS_SECOND_WEAPON) == null)return true;
+			return job == MainRoleManager.actorInfo.job;
 		}
 	}	
 }

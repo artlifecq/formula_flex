@@ -21,9 +21,9 @@ package com.rpgGame.coreData.type
 		/** 怪物  2 **/
 		public static const MONSTER : String = rEnum.next.toString();
 		/** 坐骑  3 **/
-		public static const MOUNT : String = rEnum.next.toString();
-		/** NPC 4 **/
 		public static const NPC : String = rEnum.next.toString();
+		/** NPC 4 **/
+		public static const MOUNT : String = rEnum.next.toString();
 		/** 保护NPC 5 **/
 		public static const PROTECT_NPC : String = rEnum.next.toString();
 		/** 传送门 6 **/

@@ -1,5 +1,5 @@
 package com.rpgGame.netData.player.message{
-	import com.rpgGame.netData.player.bean.PlayerAttributeItem;
+	import com.rpgGame.netData.player.bean.AttributeItem;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,7 +14,7 @@ package com.rpgGame.netData.player.message{
 	public class ResPlayerAttributeMessage extends Message {
 	
 		//属性
-		private var _attribute: PlayerAttributeItem;
+		private var _attribute: AttributeItem;
 		
 		//扩展参数
 		private var _ext_param: int;
@@ -36,7 +36,7 @@ package com.rpgGame.netData.player.message{
 		 */
 		override protected function reading(): Boolean{
 			//属性
-			_attribute = readBean(PlayerAttributeItem) as PlayerAttributeItem;
+			_attribute = readBean(AttributeItem) as AttributeItem;
 			//扩展参数
 			_ext_param = readInt();
 			return true;
@@ -54,14 +54,14 @@ package com.rpgGame.netData.player.message{
 		 * get 属性
 		 * @return 
 		 */
-		public function get attribute(): PlayerAttributeItem{
+		public function get attribute(): AttributeItem{
 			return _attribute;
 		}
 		
 		/**
 		 * set 属性
 		 */
-		public function set attribute(value: PlayerAttributeItem): void{
+		public function set attribute(value: AttributeItem): void{
 			this._attribute = value;
 		}
 		

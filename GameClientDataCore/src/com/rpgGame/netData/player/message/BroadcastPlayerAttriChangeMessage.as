@@ -1,5 +1,5 @@
 package com.rpgGame.netData.player.message{
-	import com.rpgGame.netData.player.bean.PlayerAttributeItem;
+	import com.rpgGame.netData.player.bean.AttributeItem;
 	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
@@ -18,7 +18,7 @@ package com.rpgGame.netData.player.message{
 		private var _playerid: long;
 		
 		//变更的属性
-		private var _attributeChange: PlayerAttributeItem;
+		private var _attributeChange: AttributeItem;
 		
 		
 		/**
@@ -39,7 +39,7 @@ package com.rpgGame.netData.player.message{
 			//玩家id
 			_playerid = readLong();
 			//变更的属性
-			_attributeChange = readBean(PlayerAttributeItem) as PlayerAttributeItem;
+			_attributeChange = readBean(AttributeItem) as AttributeItem;
 			return true;
 		}
 		
@@ -70,14 +70,14 @@ package com.rpgGame.netData.player.message{
 		 * get 变更的属性
 		 * @return 
 		 */
-		public function get attributeChange(): PlayerAttributeItem{
+		public function get attributeChange(): AttributeItem{
 			return _attributeChange;
 		}
 		
 		/**
 		 * set 变更的属性
 		 */
-		public function set attributeChange(value: PlayerAttributeItem): void{
+		public function set attributeChange(value: AttributeItem): void{
 			this._attributeChange = value;
 		}
 		

@@ -1,8 +1,8 @@
 package com.rpgGame.coreData.cfg.mount
 {
 	import com.rpgGame.coreData.SpriteStat;
+	import com.rpgGame.netData.player.bean.AttributeItem;
 	
-	import app.message.SpriteStatProto;
 	import app.message.MountVitalityDatasProto.MountVitalityDataProto;
 
 	/**
@@ -17,7 +17,7 @@ package com.rpgGame.coreData.cfg.mount
 		/** 基础属性Proto **/
 		private var _stat:SpriteStat;
 		/** 基础属性 **/
-		private var baseSpriteStat:SpriteStatProto;
+		private var baseSpriteStat:Vector.<AttributeItem>;
 		
 		public function MountVitalityData()
 		{
@@ -35,7 +35,7 @@ package com.rpgGame.coreData.cfg.mount
 				return;
 			
 			vitality = data.vitality;
-			baseSpriteStat = data.stat;
+//			baseSpriteStat = data.stat;
 			_stat.setData( baseSpriteStat );
 		}
 

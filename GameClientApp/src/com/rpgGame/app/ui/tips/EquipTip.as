@@ -9,9 +9,9 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.stat.StatData;
 	import com.rpgGame.coreData.type.item.GridBGType;
+	import com.rpgGame.netData.player.bean.AttributeItem;
 	
 	import app.message.Quality;
-	import app.message.SpriteStatProto;
 	
 	import feathers.controls.Group;
 	import feathers.controls.Label;
@@ -250,7 +250,7 @@ package com.rpgGame.app.ui.tips
 			var len:int;
 			var label:StatLine;
 			var index:int;
-			var spriteState:SpriteStatProto;
+			var spriteState:Vector.<AttributeItem>;
 			if (!spriteStateMap)
 				return;
 			var spriteStates:Array=spriteStateMap.getValues();

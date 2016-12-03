@@ -1,23 +1,17 @@
 package com.rpgGame.app.cmdlistener
 {
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	
-	import flash.utils.ByteArray;
-	
 	import app.cmd.AddSpriteStatModuleMessages;
-	import app.message.SpriteStatProto;
 	
 	import org.client.mainCore.bean.BaseBean;
-	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	
 	/**
-	 * 
+	 * 洗点相关的，以后可能不用了，我们这个游戏不做这个功能
 	 * 人物属性加点消息处理  ModuleID==105
 	 * @author wewell
 	 *
@@ -45,11 +39,11 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onAddSpriteStat(buffer:ByteBuffer):void
 		{
-			var type:int = buffer.readVarint32();
-			var value:int = buffer.readVarint32();
-			MainRoleManager.actorInfo.spriteStat.addStatValue(type, value);
-			MainRoleManager.actorInfo.usedSpriteStatPoint += value;
-			EventManager.dispatchEvent(MainPlayerEvent.STAT_CHANGE);
+//			var type:int = buffer.readVarint32();
+//			var value:int = buffer.readVarint32();
+//			MainRoleManager.actorInfo.spriteStat.addStatValue(type, value);
+//			MainRoleManager.actorInfo.usedSpriteStatPoint += value;
+//			EventManager.dispatchEvent(MainPlayerEvent.STAT_CHANGE);
 		}
 		
 		private function onAddSpriteStatFail(buffer:ByteBuffer):void
@@ -91,14 +85,14 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onAutoAddSpriteStat(buffer:ByteBuffer):void
 		{
-			var used:int = buffer.readVarint32();
-			var ssp:SpriteStatProto = new SpriteStatProto();
-			var bytes:ByteArray = new ByteArray();
-			buffer.readBytes(bytes);
-			ssp.mergeFrom(bytes);
-			MainRoleManager.actorInfo.usedSpriteStatPoint += used;
-			MainRoleManager.actorInfo.spriteStat.setData(ssp);
-			EventManager.dispatchEvent(MainPlayerEvent.STAT_CHANGE);
+//			var used:int = buffer.readVarint32();
+//			var ssp:SpriteStatProto = new SpriteStatProto();
+//			var bytes:ByteArray = new ByteArray();
+//			buffer.readBytes(bytes);
+//			ssp.mergeFrom(bytes);
+//			MainRoleManager.actorInfo.usedSpriteStatPoint += used;
+//			MainRoleManager.actorInfo.spriteStat.setData(ssp);
+//			EventManager.dispatchEvent(MainPlayerEvent.STAT_CHANGE);
 		}
 		
 		private function onClearSpriteStatFail(buffer:ByteBuffer):void
@@ -120,9 +114,9 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onClearSpriteStat(buffer:ByteBuffer):void
 		{
-			MainRoleManager.actorInfo.spriteStat.clearStatValue();
-			MainRoleManager.actorInfo.usedSpriteStatPoint = 0;
-			EventManager.dispatchEvent(MainPlayerEvent.STAT_CHANGE);
+//			MainRoleManager.actorInfo.spriteStat.clearStatValue();
+//			MainRoleManager.actorInfo.usedSpriteStatPoint = 0;
+//			EventManager.dispatchEvent(MainPlayerEvent.STAT_CHANGE);
 		}
 		
 	}

@@ -1,6 +1,7 @@
 package com.rpgGame.coreData.info.mount
 {
 	import com.rpgGame.coreData.SpriteStat;
+	import com.rpgGame.netData.player.bean.AttributeItem;
 	
 	import app.message.EquipmentListProto;
 	import app.message.MountProto;
@@ -10,18 +11,18 @@ package com.rpgGame.coreData.info.mount
 	import org.client.mainCore.ds.HashMap;
 
 	/**
-	 * 坐骑infoData
-	 * @author 陈鹉光
+	 * 坐骑数据
+	 * @author neil
 	 * 
 	 */	
 	public class MountInfoData
 	{
 		/** 基础属性，显示的时候，所有属性都要除以100，如303点力量，则显示为3.03 **/
-		public var bornStat:SpriteStatProto;
+		public var bornStat:Vector.<AttributeItem>;
 		/** 成长属性，显示的时候，所有属性都要除以100，如303点力量，则显示为3.03 **/
-		public var growthStat:SpriteStatProto;
+		public var growthStat:Vector.<AttributeItem>;
 		/** 转化率属性Proto **/
-		public var growthTransStat:SpriteStatProto;
+		public var growthTransStat:Vector.<AttributeItem>;
 		/** 基础属性 **/
 		private var _mountBornStat:SpriteStat;
 		/** 成长属性 **/
@@ -87,13 +88,13 @@ package com.rpgGame.coreData.info.mount
 				return;
 				
 			//基础属性
-			bornStat = data.bornStat;
+//			bornStat = data.bornStat;
 			_mountBornStat.setData( bornStat );
 			//成长属性
-			growthStat = data.growthStat;
+//			growthStat = data.growthStat;
 			_mountGrowthStat.setData( growthStat );
 			//转化率属性
-			growthTransStat = data.growthTransStat;
+//			growthTransStat = data.growthTransStat;
 			_mountGrowthTransStat.setData( growthTransStat );
 			
 			spells = data.mountSpells;

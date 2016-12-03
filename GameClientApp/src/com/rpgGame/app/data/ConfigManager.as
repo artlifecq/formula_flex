@@ -125,15 +125,19 @@ package com.rpgGame.app.data
 			GlobalSettingCfgData.setup(dic[ConfigClassRegister.GlobalSetting]);
 			HintConfig.setup(dic[ConfigClassRegister.HintInfo]);
 			GameSoundCfgData.setup(dic[ConfigClassRegister.GameSoundInfo]);
+			
 			HeroModelCfgData.setup(dic[ConfigClassRegister.HeroModel]);
 			MountModelCfgData.setup(dic[ConfigClassRegister.MountModel]);
 			AvatarMountResCfgData.setup(dic[ConfigClassRegister.AvatarMountRes]);
 			AvatarWeapontResCfgData.setup(dic[ConfigClassRegister.AvatarWeaponRes]);
 			AvatarDeputyWeaponResCfgData.setup(dic[ConfigClassRegister.AvatarDeputyWeaponRes]);
 			AvatarClothesResCfgData.setup(dic[ConfigClassRegister.AvatarClothesRes]);
-			BaZhenTuResCfgData.setup(dic[ConfigClassRegister.BaZhenTuRes]);
 			AvatarHairResCfgData.setup(dic[ConfigClassRegister.AvatarHairRes]);
 			AvatarResConfigSetData.setup(dic[ConfigClassRegister.AvatarResConfig]);
+			
+			BaZhenTuResCfgData.setup(dic[ConfigClassRegister.BaZhenTuRes]);
+			
+			
 			EffectAnimationCfgData.setup(dic[ConfigClassRegister.EffectAnimation]);
 			FaceCfgData.setup(dic[ConfigClassRegister.FaceInfo]);
 //			GmLevelAddSpellPointData.setup(dic[ConfigClassRegister.GmLevelAddSpellPoint]);
@@ -155,6 +159,7 @@ package com.rpgGame.app.data
 			//
 			///////////////////////////////////////////////////////////////////////
 			MapDataManager.setSceneConfig(dic[ConfigClassRegister.ClientScene]);
+//			MonsterDataManager.setConfig(dic[ConfigClassRegister]); //怪物//NPC
 		}
 
 		/**
@@ -203,10 +208,10 @@ package com.rpgGame.app.data
 				//公共CD配置
 				GCDCfgData.setConfig(config.spellConfig.gcdGroupsConfig);
 			}
-			if (config.hasMonsterConfig)
-			{
-				MonsterDataManager.setConfig(config.monsterConfig); //怪物//NPC
-			}
+//			if (config.hasMonsterConfig)
+//			{
+//				MonsterDataManager.setConfig(config.monsterConfig); //怪物//NPC
+//			}
 
 			if (config.hasGuildConfig)
 			{
