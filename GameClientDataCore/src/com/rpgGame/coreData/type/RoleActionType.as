@@ -49,11 +49,11 @@ package com.rpgGame.coreData.type
 			}
 			if(onMount)
 			{
-				return type;
+				return type + "_on_mount";
 			}
 			else
 			{
-				return type + "_on_mount";
+				return type;
 			}
 			return null;
 		}

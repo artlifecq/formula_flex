@@ -1103,12 +1103,12 @@ package com.game.engine3D.scene.render
 										if (_repeat != 0)
 										{
 											if (currAnimator.looping)
-												trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "_应当设置为不循环[no loop]！");
+												trace(GlobalConfig.DEBUG_HEAD + "   " + currAnimator.name + "   " + _renderParamData.sourcePath + "_应当设置为不循环[no loop]！");
 										}
 										else
 										{
 											if (!currAnimator.looping)
-												trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "_应当设置为循环[loop]！");
+												trace(GlobalConfig.DEBUG_HEAD + " "+ currAnimator.name + "   " + _renderParamData.sourcePath + "_应当设置为循环[loop]！");
 										}
 									}
 								}
@@ -1239,12 +1239,12 @@ package com.game.engine3D.scene.render
 												if (_repeat != 0)
 												{
 													if (currAnimator.looping)
-														trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "_应当设置为不循环[no loop]！");
+														trace(GlobalConfig.DEBUG_HEAD + " "+ currAnimator.name + "   " + _renderParamData.sourcePath + "_应当设置为不循环[no loop]！");
 												}
 												else
 												{
 													if (!currAnimator.looping)
-														trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "_应当设置为循环[loop]！");
+														trace(GlobalConfig.DEBUG_HEAD + " "+ currAnimator.name + "   " + _renderParamData.sourcePath + "_应当设置为循环[loop]！");
 												}
 											}
 										}
@@ -1337,12 +1337,12 @@ package com.game.engine3D.scene.render
 										if (_repeat != 0)
 										{
 											if (currAnimator.looping)
-												trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.animatorSourchPath + "_应当设置为不循环[no loop]！");
+												trace(GlobalConfig.DEBUG_HEAD + " "+ currAnimator.name + "   " + _renderParamData.animatorSourchPath + "_应当设置为不循环[no loop]！");
 										}
 										else
 										{
 											if (!currAnimator.looping)
-												trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.animatorSourchPath + "_应当设置为循环[loop]！");
+												trace(GlobalConfig.DEBUG_HEAD + " "+ currAnimator.name + "   " + _renderParamData.animatorSourchPath + "_应当设置为循环[loop]！");
 										}
 									}
 								}

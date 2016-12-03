@@ -238,7 +238,7 @@ package com.rpgGame.app.ui.main.team
 			else
 				GrayFilter.unGray(_skin.group);
 			
-			_skin.imgIcon.styleName = TeamManager.updateJobIcon( _roleData.race );
+			_skin.imgIcon.styleName = TeamManager.updateJobIcon( _roleData.job );
 		}
 
 		/**
@@ -323,7 +323,7 @@ package com.rpgGame.app.ui.main.team
 			
 			//职业
 			var raceStr:String = "";
-			var raceName:String = RaceCfgData.getRaceName( roleData.race );
+			var raceName:String = RaceCfgData.getRaceName( roleData.job );
 			if (!raceName)
 				raceName = "无";
 			

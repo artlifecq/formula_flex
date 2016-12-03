@@ -57,6 +57,18 @@ package com.rpgGame.netData.player.bean{
 		//PK类型
 		private var _pkType: int;
 		
+		//血量
+		private var _hp: int;
+		
+		//最大血量
+		private var _maxHp: int;
+		
+		//魔法
+		private var _mp: int;
+		
+		//最大魔法
+		private var _maxMp: int;
+		
 		/**
 		 * 写入字节缓存
 		 */
@@ -89,6 +101,14 @@ package com.rpgGame.netData.player.bean{
 			writeInt(_mount);
 			//PK类型
 			writeInt(_pkType);
+			//血量
+			writeInt(_hp);
+			//最大血量
+			writeInt(_maxHp);
+			//魔法
+			writeInt(_mp);
+			//最大魔法
+			writeInt(_maxMp);
 			return true;
 		}
 		
@@ -124,6 +144,14 @@ package com.rpgGame.netData.player.bean{
 			_mount = readInt();
 			//PK类型
 			_pkType = readInt();
+			//血量
+			_hp = readInt();
+			//最大血量
+			_maxHp = readInt();
+			//魔法
+			_mp = readInt();
+			//最大魔法
+			_maxMp = readInt();
 			return true;
 		}
 		
@@ -335,6 +363,66 @@ package com.rpgGame.netData.player.bean{
 		 */
 		public function set pkType(value: int): void{
 			this._pkType = value;
+		}
+		
+		/**
+		 * get 血量
+		 * @return 
+		 */
+		public function get hp(): int{
+			return _hp;
+		}
+		
+		/**
+		 * set 血量
+		 */
+		public function set hp(value: int): void{
+			this._hp = value;
+		}
+		
+		/**
+		 * get 最大血量
+		 * @return 
+		 */
+		public function get maxHp(): int{
+			return _maxHp;
+		}
+		
+		/**
+		 * set 最大血量
+		 */
+		public function set maxHp(value: int): void{
+			this._maxHp = value;
+		}
+		
+		/**
+		 * get 魔法
+		 * @return 
+		 */
+		public function get mp(): int{
+			return _mp;
+		}
+		
+		/**
+		 * set 魔法
+		 */
+		public function set mp(value: int): void{
+			this._mp = value;
+		}
+		
+		/**
+		 * get 最大魔法
+		 * @return 
+		 */
+		public function get maxMp(): int{
+			return _maxMp;
+		}
+		
+		/**
+		 * set 最大魔法
+		 */
+		public function set maxMp(value: int): void{
+			this._maxMp = value;
 		}
 		
 	}

@@ -5,6 +5,7 @@ package
 	import com.client.manager.BGMManager;
 	import com.client.process.CreateChar;
 	import com.client.process.EnterGame;
+	//	import com.client.process.GetMainPlayerInfo;
 	import com.client.process.LoadDll;
 	import com.client.process.LoadMaskWorld;
 	import com.client.process.LoginInput;
@@ -30,8 +31,6 @@ package
 	import flash.ui.ContextMenuItem;
 	
 	import away3d.loaders.parsers.Parsers;
-	
-	import org.game.netCore.net_protobuff.ByteBuffer;
 	
 	/**
 	 *
@@ -94,7 +93,7 @@ package
 			ClientGlobal.isStable = isStable;
 			ClientGlobal.GlobalBridge = GlobalBridge;
 			
-			GameLogView.init(this.stage, [188, 190, 191]);//-_	189  .>	190  /?	191
+			GameLogView.init(this.stage, [189, 190, 191]);//-_	189  .>	190  /?	191
 			AlertPanel.initStage(this.stage);
 			//
 			getWebParams();
@@ -107,9 +106,9 @@ package
 			GameLog.addShow("UI是否压缩：" + ClientGlobal.uiCompressed);
 			//
 			ClientGlobal.setup(this);
-			ClientGlobal.isSingle = true;
 			ClientUrlManager.setup(ClientGlobal.baseDir, version, ClientGlobal.decodeFun);
 			VersionUtils.setup(versionMap, baseDir, (version && version.length > 0) ? version : Math.random().toFixed(5), ClientGlobal.useVersion);
+			
 			initProcess();
 			//initMenu();
 			BGMManager.setup();
@@ -142,6 +141,7 @@ package
 			ProcessStateMachine.getInstance().pushProcess(new ServerConnect());
 			ProcessStateMachine.getInstance().pushProcess(new CreateChar());
 			ProcessStateMachine.getInstance().pushProcess(new LoadDll());
+			//			ProcessStateMachine.getInstance().pushProcess(new GetMainPlayerInfo());
 			ProcessStateMachine.getInstance().pushProcess(new EnterGame());
 		}
 		
@@ -196,26 +196,6 @@ package
 			{
 				//				MonsterDebugger.initialize(stage);
 			}
-//			GameLog.addShow(ClientGlobal.loginIP, ClientGlobal.loginPort, ClientGlobal.loginName, ClientGlobal.loginKey, ClientGlobal.isRelease);
-//			if (!ClientGlobal.loginIP)
-//			{
-//				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_SELECT_DEVELOPER);
-//			}
-//			ClientGlobal.loginData = new ByteBuffer();
-//			ClientGlobal.loginData.writeUTF("测试");
-//			ClientGlobal.loginData.position = 0;
-//			if (!ClientGlobal.loginName)
-//			{
-//				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOGIN_INPUT);
-//			}
-//			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_MASK_WORLD, 0, 0.1);
-//			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_SERVER_CONNECT, 0.1, 0.2);
-//			var pg : ProcessGroup = new ProcessGroup();
-//			pg.addPreProcess(ProcessState.STATE_CREATE_CHAR, 0.2);
-//			pg.addPreProcess(ProcessState.STATE_LOAD_DLL, 0.2, 0.3);
-//			ProcessStateMachine.getInstance().addPreGroup(pg);
-//			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_ENTER_GAME);
-//			ProcessStateMachine.getInstance().run();
 		}
 		
 		private function onSelectClearHc(e : Event) : void

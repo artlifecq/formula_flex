@@ -1,14 +1,18 @@
 package app.message {
-	import com.netease.protobuf.*;
-	use namespace com.netease.protobuf.used_by_generated_code;
-	import com.netease.protobuf.fieldDescriptors.*;
-	import flash.utils.Endian;
-	import flash.utils.IDataInput;
-	import flash.utils.IDataOutput;
-	import flash.utils.IExternalizable;
+	import com.netease.protobuf.Message;
+	import com.netease.protobuf.ReadUtils;
+	import com.netease.protobuf.WireType;
+	import com.netease.protobuf.WriteUtils;
+	import com.netease.protobuf.WritingBuffer;
+	import com.netease.protobuf.used_by_generated_code;
+	import com.netease.protobuf.fieldDescriptors.FieldDescriptor_TYPE_INT32;
+	import com.netease.protobuf.fieldDescriptors.FieldDescriptor_TYPE_MESSAGE;
+	import com.netease.protobuf.fieldDescriptors.RepeatedFieldDescriptor_TYPE_ENUM;
+	
 	import flash.errors.IOError;
-	import app.message.UpgradeProto;
-	import app.message.StatType;
+	import flash.utils.IDataInput;
+
+	use namespace com.netease.protobuf.used_by_generated_code;
 	// @@protoc_insertion_point(imports)
 
 	// @@protoc_insertion_point(class_metadata)
@@ -66,7 +70,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_USE_SPRITE_STAT_POINT_TYPE:RepeatedFieldDescriptor_TYPE_ENUM = new RepeatedFieldDescriptor_TYPE_ENUM("app.message.AddSpriteStatConfig.can_use_sprite_stat_point_type", "canUseSpriteStatPointType", (3 << 3) | com.netease.protobuf.WireType.VARINT, app.message.StatType);
+		public static const CAN_USE_SPRITE_STAT_POINT_TYPE:RepeatedFieldDescriptor_TYPE_ENUM = new RepeatedFieldDescriptor_TYPE_ENUM("app.message.AddSpriteStatConfig.can_use_sprite_stat_point_type", "canUseSpriteStatPointType", (3 << 3) | com.netease.protobuf.WireType.VARINT,Object);
 
 		[ArrayElementType("int")]
 		public var canUseSpriteStatPointType:Array = [];

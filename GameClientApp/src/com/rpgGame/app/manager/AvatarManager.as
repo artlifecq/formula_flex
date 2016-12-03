@@ -65,7 +65,7 @@ package com.rpgGame.app.manager
 				role.headFace.addTemporaryBar();
 
 			//上“坐骑”
-			updateMount(role); 
+			updateMount(role); //暂时先不搞坐骑。动作有问题
 			//穿“主体”
 			updateBody(role);
 			//穿“头发”
@@ -422,7 +422,7 @@ package com.rpgGame.app.manager
 			var deputyWeaponResID : String = null;
 			var bodyEffectResID : String = null;
 			var heroModel : HeroModel = HeroModelCfgData.getInfo(roleData.body);
-			var mountModel : MountModel = MountModelCfgData.getInfo(1);
+			var mountModel : MountModel = MountModelCfgData.getInfo(0);
 			
 			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(roleData.cloths);
 			if (!clothesRes)
@@ -450,7 +450,7 @@ package com.rpgGame.app.manager
 				{
 					mountResID = mountRes.mountRes;
 				}
-				switch (roleData.race)
+				switch (roleData.job)
 				{
 					case 0:
 						animatResID = heroModel.animatRes_bingjia;

@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STAT_TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.SingleStatProto.stat_type", "statType", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.StatType);
+		public static const STAT_TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.SingleStatProto.stat_type", "statType", (1 << 3) | com.netease.protobuf.WireType.VARINT, Object);
 
 		private var stat_type$field:int;
 

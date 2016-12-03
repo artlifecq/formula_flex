@@ -45,7 +45,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAIN_STAT:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.RaceDataProto.main_stat", "mainStat", (2 << 3) | com.netease.protobuf.WireType.VARINT, app.message.StatType);
+		public static const MAIN_STAT:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.RaceDataProto.main_stat", "mainStat", (2 << 3) | com.netease.protobuf.WireType.VARINT, Object);
 
 		private var main_stat$field:int;
 
@@ -70,7 +70,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SECOND_STAT:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.RaceDataProto.second_stat", "secondStat", (3 << 3) | com.netease.protobuf.WireType.VARINT, app.message.StatType);
+		public static const SECOND_STAT:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.RaceDataProto.second_stat", "secondStat", (3 << 3) | com.netease.protobuf.WireType.VARINT, Object);
 
 		private var second_stat$field:int;
 

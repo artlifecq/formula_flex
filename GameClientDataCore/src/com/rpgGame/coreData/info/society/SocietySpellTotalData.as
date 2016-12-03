@@ -95,7 +95,7 @@ package com.rpgGame.coreData.info.society
 						if (collageSpellDataProto.spell.passiveSpell)
 						{
 							spellData.spriteStat = new SpriteStat();
-							spellData.spriteStat.setData(collageSpellDataProto.spell.passiveSpell.spriteStat);
+//							spellData.spriteStat.setData(collageSpellDataProto.spell.passiveSpell.spriteStat);
 						}
 						else
 						{

@@ -4,11 +4,9 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.netData.player.bean.AttributeItem;
 	
 	import flash.geom.Point;
-	
-	import app.message.SpriteStatProto;
-	import app.message.StatType;
 	
 	import org.client.mainCore.ds.HashMap;
 	
@@ -18,7 +16,7 @@ package com.rpgGame.app.manager
 	 */
 	public class PlayerAttributeManager
 	{
-		public static function showSpriteStatChg( oldTotalStat:SpriteStatProto, newTotalStat:SpriteStatProto ):void
+		public static function showSpriteStatChg( oldTotalStat:Vector.<AttributeItem>, newTotalStat:Vector.<AttributeItem> ):void
 		{
 			//因为属性图片缺少所以先不飘字了
 //			return;
@@ -34,17 +32,17 @@ package com.rpgGame.app.manager
 			var oldMap:HashMap = oldStat.getCloneMap();
 			var newMap:HashMap = oldStat.getCloneMap();
 			
-			showChangeAttribute( StatType.MAX_LIFE, oldMap, newMap );
-			showChangeAttribute( StatType.MAX_MANA, oldMap, newMap );
-			showChangeAttribute( StatType.PHYSICAL_ATTACK_LOWER, oldMap, newMap );
-			showChangeAttribute( StatType.PHYSICAL_ATTACK_UPPER, oldMap, newMap );
-			showChangeAttribute( StatType.PHYSICAL_DEFENCE, oldMap, newMap );
-			showChangeAttribute( StatType.MAGICAL_ATTACK_LOWER, oldMap, newMap );
-			showChangeAttribute( StatType.MAGICAL_ATTACK_UPPER, oldMap, newMap );
-			showChangeAttribute( StatType.MAGICAL_DEFENCE, oldMap, newMap );
-			showChangeAttribute( StatType.HIT, oldMap, newMap );
-			showChangeAttribute( StatType.CRIT, oldMap, newMap );
-			showChangeAttribute( StatType.MOVE_SPEED, oldMap, newMap );
+			showChangeAttribute( CharAttributeType.MAX_HP, oldMap, newMap );
+			showChangeAttribute( CharAttributeType.MAX_MP, oldMap, newMap );
+//			showChangeAttribute( CharAttributeType.PHYSICAL_ATTACK_LOWER, oldMap, newMap );
+			showChangeAttribute( CharAttributeType.WAI_GONG, oldMap, newMap );
+			showChangeAttribute( CharAttributeType.PHYSICAL_DEFENCE, oldMap, newMap );
+//			showChangeAttribute( CharAttributeType.MAGICAL_ATTACK_LOWER, oldMap, newMap );
+			showChangeAttribute( CharAttributeType.NEI_GONG, oldMap, newMap );
+			showChangeAttribute( CharAttributeType.MAGICAL_DEFENCE, oldMap, newMap );
+			showChangeAttribute( CharAttributeType.HIT, oldMap, newMap );
+			showChangeAttribute( CharAttributeType.CRIT, oldMap, newMap );
+			showChangeAttribute( CharAttributeType.SPEED, oldMap, newMap );
 		}
 		
 		private static function showChangeAttribute( spType:int, oldMap:HashMap, newMap:HashMap ):void
@@ -75,7 +73,8 @@ package com.rpgGame.app.manager
 				endPoint = new Point(120, -180);
 				
 				numberType = FightFaceHelper.NUMBER_BULE;
-			}else
+			}
+			else
 			{
 				fromPoint = new Point(40, -100);
 				endPoint = new Point(120, 0);
@@ -183,7 +182,7 @@ package com.rpgGame.app.manager
 			return str;
 		}	*/	
 		
-		private static function getSpriteStatChange(type:int,nextStat:SpriteStatProto,curStat:SpriteStatProto,str:String):String
+		private static function getSpriteStatChange(type:int,nextStat:Vector.<AttributeItem>,curStat:Vector.<AttributeItem>,str:String):String
 		{
 			var attrCNNmae:String = CharAttributeType.getCNName(type);
 			var attrENName:String = CharAttributeType.getAttrName(type);

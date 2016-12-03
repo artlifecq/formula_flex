@@ -12,6 +12,7 @@ package com.rpgGame.netData.map.message{
 	 * 玩家跑步信息(新)
 	 */
 	public class ReqNewRunningMessage extends Message {
+	
 		//跑步坐标集合
 		private var _positions: Vector.<com.rpgGame.netData.structs.Position> = new Vector.<com.rpgGame.netData.structs.Position>();
 		
