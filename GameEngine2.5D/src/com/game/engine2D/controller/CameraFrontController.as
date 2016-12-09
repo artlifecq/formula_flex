@@ -1,5 +1,6 @@
 package com.game.engine2D.controller
 {
+	import com.game.engine2D.Scene;
 	import com.game.engine2D.scene.SceneCamera;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	

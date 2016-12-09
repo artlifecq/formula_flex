@@ -133,6 +133,8 @@ package com.game.engine3D.scene.layers
 		private var _view3DAsset : View3DAsset;
 
 		private var _quadTree : QuadTreePartition3D;
+        
+        private var _xyzMode : int = HeightMapHelper.MODE_XZ;
 
 		public function SceneMapLayer(scene : GameScene3D)
 		{
@@ -971,6 +973,10 @@ package com.game.engine3D.scene.layers
 		{
 			return _showDistrictWireframe;
 		}
+        
+        public function set xyzMode(value : int) : void {
+            this._xyzMode = value;
+        }
 
 		public function get cameraNear() : int
 		{
@@ -988,12 +994,12 @@ package com.game.engine3D.scene.layers
 				return;
 			if (_heightMapHelper && _district)
 			{
-				_heightMapHelper.traslateVector3Ds(_district.boundPointsSet.points);
+				_heightMapHelper.traslateVector3Ds(_district.boundPointsSet.points, this._xyzMode);
 				_district.boundPointsSet.updateWireFrame();
 				for (var j : int = 0; j < _district.internalPointsSets.length; j++)
 				{
 					var ps : PointsSet = _district.internalPointsSets[j];
-					_heightMapHelper.traslateVector3Ds(ps.points);
+					_heightMapHelper.traslateVector3Ds(ps.points, this._xyzMode);
 					ps.updateWireFrame();
 				}
 			}

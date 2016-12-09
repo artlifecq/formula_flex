@@ -50,7 +50,7 @@ package com.game.engine2D.scene
 		{
 			if (_smallMap == null)
 			{
-				_smallMap = GlobalConfig2D.MapZoneClass.create(null);
+				_smallMap = GlobalConfig2D.MapZoneClass["create"](null);
 				_smallMap.depth = -400;//最下面
 				_smallMap.z = -500;
 				addChild(_smallMap as Mesh);
