@@ -2,7 +2,6 @@ package com.rpgGame.app.manager.task
 {
 	import com.rpgGame.app.cmdlistener.enum.EmQuality;
 	import com.rpgGame.app.graphics.HeadFace;
-	import com.rpgGame.app.manager.country.CountryManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
@@ -19,7 +18,6 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.coreData.cfg.npc.NpcCfgData;
 	import com.rpgGame.coreData.cfg.task.MiXinCfgData;
 	import com.rpgGame.coreData.info.SearchRoleData;
-	import com.rpgGame.coreData.info.country.country.CountryData;
 	import com.rpgGame.coreData.info.roulette.RouletteInfo;
 	import com.rpgGame.coreData.info.task.MiXinPrizeInfo;
 	import com.rpgGame.coreData.info.task.daily.MiXinTaskData;
@@ -185,11 +183,11 @@ package com.rpgGame.app.manager.task
 		 */
 		public static function isMiXinTargetCountry() : Boolean
 		{
-			var countryData : CountryData = CountryManager.selfCountryData;
-			if (countryData == null)
-				return false;
-
-			return MainRoleManager.actorInfo.sceneSequence == countryData.strategy.miXinTargetCountry;
+//			var countryData : CountryData = CountryManager.selfCountryData;
+//			if (countryData == null)
+//				return false;
+return false;
+//			return MainRoleManager.actorInfo.sceneSequence == countryData.strategy.miXinTargetCountry;
 		}
 
 		/**
@@ -200,61 +198,61 @@ package com.rpgGame.app.manager.task
 		public static function gotoMiXin() : void
 		{
 			var npcData : MonsterDataProto;
-			var isAtEnemyCountry : Boolean = CountryManager.isAtEnemyCountry();
+//			var isAtEnemyCountry : Boolean = CountryManager.isAtEnemyCountry();
 			var isMixComplete : Boolean = isSubmitMiXinTask();
 
 			if (mixinTask == null)
 			{
-				if (CountryManager.isAtMyCountry())
-				{
-					//在本国就去接任务
-					npcData = MonsterDataManager.getData(MiXinCfgData.acceptNpc);
-				}
-				else
-				{
-					//非本国就去边境，然后回国
-					npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
-				}
+//				if (CountryManager.isAtMyCountry())
+//				{
+//					//在本国就去接任务
+//					npcData = MonsterDataManager.getData(MiXinCfgData.acceptNpc);
+//				}
+//				else
+//				{
+//					//非本国就去边境，然后回国
+//					npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
+//				}
 			}
 			else
 			{
-				if (isAtEnemyCountry) //在别国的国家这时可以去找
-				{
-					//在敌国时
-					if (isMixComplete)
-					{
-						//已经完成就去边境，然后回国完成
-						npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
-					}
-					else
-					{
-						//信还没有交，那么先去敌国交任务
-						npcData = MonsterDataManager.getData(MiXinCfgData.submitNpc);
-					}
-				}
-				else
-				{
-					//在本国的、盟国的
-					if (isMixComplete)
-					{
-						//在本国
-						if (CountryManager.isAtMyCountry())
-						{
-							//完成的去交任务、到自己国家
-							npcData = MonsterDataManager.getData(MiXinCfgData.completeNpc);
-						}
-						else
-						{
-							//在盟国的
-							npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
-						}
-					}
-					else
-					{
-						//还没交的，去边境出国
-						npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
-					}
-				}
+//				if (isAtEnemyCountry) //在别国的国家这时可以去找
+//				{
+//					//在敌国时
+//					if (isMixComplete)
+//					{
+//						//已经完成就去边境，然后回国完成
+//						npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
+//					}
+//					else
+//					{
+//						//信还没有交，那么先去敌国交任务
+//						npcData = MonsterDataManager.getData(MiXinCfgData.submitNpc);
+//					}
+//				}
+//				else
+//				{
+//					//在本国的、盟国的
+//					if (isMixComplete)
+//					{
+//						//在本国
+//						if (CountryManager.isAtMyCountry())
+//						{
+//							//完成的去交任务、到自己国家
+//							npcData = MonsterDataManager.getData(MiXinCfgData.completeNpc);
+//						}
+//						else
+//						{
+//							//在盟国的
+//							npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
+//						}
+//					}
+//					else
+//					{
+//						//还没交的，去边境出国
+//						npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
+//					}
+//				}
 			}
 
 			if (npcData == null)

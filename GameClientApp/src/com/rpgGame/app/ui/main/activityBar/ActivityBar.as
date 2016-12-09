@@ -1,6 +1,5 @@
 package com.rpgGame.app.ui.main.activityBar
 {
-	import com.rpgGame.app.manager.country.CountryTaoNiManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -11,13 +10,13 @@ package com.rpgGame.app.ui.main.activityBar
 	import com.rpgGame.coreData.cfg.country.CountryTaoNiCfgData;
 	import com.rpgGame.coreData.type.activity.ActivityOpenStateType;
 	import com.rpgGame.coreData.type.activity.ActivityType;
-
+	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.activityBar.ActivityBarSkin;
-
+	
 	import starling.display.DisplayObject;
-
+	
 	import utils.TimerServer;
 
 	/**
@@ -77,7 +76,7 @@ package com.rpgGame.app.ui.main.activityBar
 		{
 			if (btnGroup.activityType == ActivityType.TAO_NI)
 			{
-				CountryTaoNiManager.walkToActivityScene();
+//				CountryTaoNiManager.walkToActivityScene();
 			}
 		}
 
@@ -134,7 +133,7 @@ package com.rpgGame.app.ui.main.activityBar
 
 		private function onTaoNiStatusChange() : void
 		{
-			_activityBar.taoniSurplusNpcTxt.text = CountryTaoNiManager.surplusNpcCount + "";
+//			_activityBar.taoniSurplusNpcTxt.text = CountryTaoNiManager.surplusNpcCount + "";
 		}
 
 		private function onTimeTick() : void

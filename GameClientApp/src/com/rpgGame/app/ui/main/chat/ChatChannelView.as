@@ -17,6 +17,7 @@ package com.rpgGame.app.ui.main.chat
 			EnumChatChannelType.CHAT_CHANNEL_NORMAL,
 			EnumChatChannelType.CHAT_CHANNEL_TEAM,
 			EnumChatChannelType.CHAT_CHANNEL_FAMILY,
+			EnumChatChannelType.CHAT_CHANNEL_PARTY,
 			EnumChatChannelType.CHAT_CHANNEL_COUNTRY,
 			EnumChatChannelType.CHAT_CHANNEL_MENG_GUO,
 			EnumChatChannelType.CHAT_CHANNEL_WORLD,

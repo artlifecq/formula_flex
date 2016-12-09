@@ -1,10 +1,8 @@
 package com.rpgGame.app.manager.task
 {
 	import com.rpgGame.app.cmdlistener.enum.EmQuality;
-	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.country.CountryManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.goods.ItemUseManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -19,14 +17,12 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.core.events.toujing.TouJingEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
-	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.npc.NpcCfgData;
 	import com.rpgGame.coreData.cfg.task.TouJingCfgData;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.SearchRoleData;
-	import com.rpgGame.coreData.info.toujing.TouJingBookStateData;
 	import com.rpgGame.coreData.info.toujing.TouJingPrizeInfo;
 	import com.rpgGame.coreData.info.toujing.TouJingTaskData;
 	import com.rpgGame.coreData.lang.LangTouJing;
@@ -340,43 +336,43 @@ package com.rpgGame.app.manager.task
 		 */
 		public static function getColorByCountryId(countryId : uint) : uint
 		{
-			var arr:Array = CountryManager.countryJingShuArr;
-			if( arr == null || arr.length <= 0 )
-				return null;
-			
-			var inEmptyRate:Number = int( LanguageConfig.getText( LangTouJing.TOU_JING_RATE_1 ) ) / 100;
-			var outEmptyRate:Number = int( LanguageConfig.getText( LangTouJing.TOU_JING_RATE_2 ) ) / 100;
-			var inParamarthaRate:Number = int( LanguageConfig.getText( LangTouJing.TOU_JING_RATE_3 ) ) / 100;
-			var outParamarthaRate:Number = int( LanguageConfig.getText( LangTouJing.TOU_JING_RATE_4 ) ) / 100;
-			
-			for (var idx : int = 0; idx < arr.length; idx++)
-			{
-				var data : TouJingBookStateData = arr[idx];
-				if (countryId == data.countryId)
-				{
-					if( data.countryJingShu < (CountryManager.jingShuNum * inEmptyRate) )//劫空
-					{
-						return StaticValue.COLOR_CODE_23;
-					}
-					else if( data.countryJingShu > (CountryManager.jingShuNum * outEmptyRate) && data.countryJingShu < (CountryManager.jingShuNum * inParamarthaRate) )//普通
-					{
-						return StaticValue.COLOR_CODE_1;
-					}
-					else if( data.countryJingShu >= (CountryManager.jingShuNum * inParamarthaRate) )//真谛
-					{
-						return StaticValue.Q_YELLOW;
-					}
-					else if( data.countryJingShu < (CountryManager.jingShuNum * outParamarthaRate) && data.countryJingShu > (CountryManager.jingShuNum * outEmptyRate) )//普通
-					{
-						return StaticValue.COLOR_CODE_1;
-					}
-					else
-					{
-						//不在“劫空”/“真谛”状态  普通
-						return StaticValue.COLOR_CODE_1;
-					}
-				}
-			}
+//			var arr:Array = CountryManager.countryJingShuArr;
+//			if( arr == null || arr.length <= 0 )
+//				return null;
+//			
+//			var inEmptyRate:Number = int( LanguageConfig.getText( LangTouJing.TOU_JING_RATE_1 ) ) / 100;
+//			var outEmptyRate:Number = int( LanguageConfig.getText( LangTouJing.TOU_JING_RATE_2 ) ) / 100;
+//			var inParamarthaRate:Number = int( LanguageConfig.getText( LangTouJing.TOU_JING_RATE_3 ) ) / 100;
+//			var outParamarthaRate:Number = int( LanguageConfig.getText( LangTouJing.TOU_JING_RATE_4 ) ) / 100;
+//			
+//			for (var idx : int = 0; idx < arr.length; idx++)
+//			{
+//				var data : TouJingBookStateData = arr[idx];
+//				if (countryId == data.countryId)
+//				{
+//					if( data.countryJingShu < (CountryManager.jingShuNum * inEmptyRate) )//劫空
+//					{
+//						return StaticValue.COLOR_CODE_23;
+//					}
+//					else if( data.countryJingShu > (CountryManager.jingShuNum * outEmptyRate) && data.countryJingShu < (CountryManager.jingShuNum * inParamarthaRate) )//普通
+//					{
+//						return StaticValue.COLOR_CODE_1;
+//					}
+//					else if( data.countryJingShu >= (CountryManager.jingShuNum * inParamarthaRate) )//真谛
+//					{
+//						return StaticValue.Q_YELLOW;
+//					}
+//					else if( data.countryJingShu < (CountryManager.jingShuNum * outParamarthaRate) && data.countryJingShu > (CountryManager.jingShuNum * outEmptyRate) )//普通
+//					{
+//						return StaticValue.COLOR_CODE_1;
+//					}
+//					else
+//					{
+//						//不在“劫空”/“真谛”状态  普通
+//						return StaticValue.COLOR_CODE_1;
+//					}
+//				}
+//			}
 			return null;
 		}
 
@@ -393,59 +389,59 @@ package com.rpgGame.app.manager.task
 				return;
 			}
 
-			if (touJingData == null)
-			{
-				if (CountryManager.isAtMyCountry())
-				{
-					//在本国就去接任务
-					npcData = MonsterDataManager.getData(TouJingCfgData.acceptNpcID);
-				}
-				else
-				{
-					//非本国就去边境，然后回国
-					npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
-				}
-			}
-			else
-			{
-				if (CountryManager.isAtEnemyCountry()) //在别国的国家这时可以去找
-				{
-					//在敌国时
-					if (isCompleteTouJing())
-					{
-						//已经完成就去边境，然后回国完成
-						npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
-					}
-					else
-					{
-						//经书任务还没做，那么先去敌国做任务
-						npcData = MonsterDataManager.getData(TouJingCfgData.submitNpcID);
-					}
-				}
-				else
-				{
-					//在本国的、盟国的
-					if (isCompleteTouJing())
-					{
-						//在本国
-						if (CountryManager.isAtMyCountry())
-						{
-							//完成的去交任务、到自己国家
-							npcData = MonsterDataManager.getData(TouJingCfgData.completeNpcID);
-						}
-						else
-						{
-							//在盟国的
-							npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
-						}
-					}
-					else
-					{
-						//还没交的，去边境出国
-						npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
-					}
-				}
-			}
+//			if (touJingData == null)
+//			{
+//				if (CountryManager.isAtMyCountry())
+//				{
+//					//在本国就去接任务
+//					npcData = MonsterDataManager.getData(TouJingCfgData.acceptNpcID);
+//				}
+//				else
+//				{
+//					//非本国就去边境，然后回国
+//					npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
+//				}
+//			}
+//			else
+//			{
+//				if (CountryManager.isAtEnemyCountry()) //在别国的国家这时可以去找
+//				{
+//					//在敌国时
+//					if (isCompleteTouJing())
+//					{
+//						//已经完成就去边境，然后回国完成
+//						npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
+//					}
+//					else
+//					{
+//						//经书任务还没做，那么先去敌国做任务
+//						npcData = MonsterDataManager.getData(TouJingCfgData.submitNpcID);
+//					}
+//				}
+//				else
+//				{
+//					//在本国的、盟国的
+//					if (isCompleteTouJing())
+//					{
+//						//在本国
+//						if (CountryManager.isAtMyCountry())
+//						{
+//							//完成的去交任务、到自己国家
+//							npcData = MonsterDataManager.getData(TouJingCfgData.completeNpcID);
+//						}
+//						else
+//						{
+//							//在盟国的
+//							npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
+//						}
+//					}
+//					else
+//					{
+//						//还没交的，去边境出国
+//						npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
+//					}
+//				}
+//			}
 
 			if (npcData == null)
 				return;
@@ -485,8 +481,8 @@ package com.rpgGame.app.manager.task
 				var normalExpRate:Number = normalExpArr[ i ];
 				var rate:Number = Number( normalExpRate.toFixed(1) );
 				var expValue:int = baseExp * rate;
-				if( CountryManager.isInGuoYun )//是否在国运期间
-					baseExp = baseExp * BiaoCfgData.miscData.guo_yun_exp_additional;
+//				if( CountryManager.isInGuoYun )//是否在国运期间
+//					baseExp = baseExp * BiaoCfgData.miscData.guo_yun_exp_additional;
 				switch(i)
 				{
 					case EmQuality.QUALITY_WHITE://白
@@ -531,65 +527,65 @@ package com.rpgGame.app.manager.task
 			if( !TouJingManager.isTouJingNpc( roleID ) )
 				return;
 			
-			var arr:Array = CountryManager.countryJingShuArr;
-			if( arr == null || arr.length <= 0 )
-				return;
-			sceneRole.avatar.removeRenderUnitsByType( RenderUnitType.SCRIPTURES );
-			var monsterData:MonsterData = sceneRole.data as MonsterData;
-			var inEmptyRate:Number = int( LanguageConfig.getText( LangTouJing.TOU_JING_RATE_1 ) ) / 100;
-			var outEmptyRate:Number = int( LanguageConfig.getText( LangTouJing.TOU_JING_RATE_2 ) ) / 100;
-			var inParamarthaRate:Number = int( LanguageConfig.getText( LangTouJing.TOU_JING_RATE_3 ) ) / 100;
-			var outParamarthaRate:Number = int( LanguageConfig.getText( LangTouJing.TOU_JING_RATE_4 ) ) / 100;
-			var countryId:int = MainRoleManager.actorInfo.sceneSequence;
-			
-			for (var idx : int = 0; idx < arr.length; idx++)
-			{
-				var data : TouJingBookStateData = arr[idx];
-				if (countryId == data.countryId)
-				{
-					if( data.countryJingShu < (CountryManager.jingShuNum * inEmptyRate) )//劫空
-					{
-						if( isInHorizon )
-							SpellAnimationHelper.addTargetEffect( sceneRole, RenderUnitID.HU_GUO_SI_EMPTY, RenderUnitType.SCRIPTURES, EffectUrl.HU_GUO_SI_EMPTY_EFFECT, null, 0 );
-						else
-							sceneRole.avatar.removeRenderUnitsByType( RenderUnitType.SCRIPTURES );
-						break;
-					}
-					else if( data.countryJingShu > (CountryManager.jingShuNum * outEmptyRate) && data.countryJingShu < (CountryManager.jingShuNum * inParamarthaRate) )//普通
-					{
-						if( isInHorizon )
-							SpellAnimationHelper.addTargetEffect( sceneRole, RenderUnitID.HU_GUO_SI_GENERAL, RenderUnitType.SCRIPTURES, EffectUrl.HU_GUO_SI_GENERAL_EFFECT, null, 0 );
-						else
-							sceneRole.avatar.removeRenderUnitsByType( RenderUnitType.SCRIPTURES );
-						break;
-					}
-					else if( data.countryJingShu >= (CountryManager.jingShuNum * inParamarthaRate) )//真谛
-					{
-						if( isInHorizon )
-							SpellAnimationHelper.addTargetEffect( sceneRole, RenderUnitID.HU_GUO_SI_PARAMARTHA, RenderUnitType.SCRIPTURES, EffectUrl.HU_GUO_SI_PARAMARTHA_EFFECT, null, 0 );
-						else
-							sceneRole.avatar.removeRenderUnitsByType( RenderUnitType.SCRIPTURES );
-						break;
-					}
-					else if( data.countryJingShu < (CountryManager.jingShuNum * outParamarthaRate) && data.countryJingShu > (CountryManager.jingShuNum * outEmptyRate) )//普通
-					{
-						if( isInHorizon )
-							SpellAnimationHelper.addTargetEffect( sceneRole, RenderUnitID.HU_GUO_SI_GENERAL, RenderUnitType.SCRIPTURES, EffectUrl.HU_GUO_SI_GENERAL_EFFECT, null, 0 );
-						else
-							sceneRole.avatar.removeRenderUnitsByType( RenderUnitType.SCRIPTURES );
-						break;
-					}
-					else
-					{
-						//不在“劫空”/“真谛”状态  普通
-						if( isInHorizon )
-							SpellAnimationHelper.addTargetEffect( sceneRole, RenderUnitID.HU_GUO_SI_GENERAL, RenderUnitType.SCRIPTURES, EffectUrl.HU_GUO_SI_GENERAL_EFFECT, null, 0 );
-						else
-							sceneRole.avatar.removeRenderUnitsByType( RenderUnitType.SCRIPTURES );
-						break;
-					}
-				}
-			}
+//			var arr:Array = CountryManager.countryJingShuArr;
+//			if( arr == null || arr.length <= 0 )
+//				return;
+//			sceneRole.avatar.removeRenderUnitsByType( RenderUnitType.SCRIPTURES );
+//			var monsterData:MonsterData = sceneRole.data as MonsterData;
+//			var inEmptyRate:Number = int( LanguageConfig.getText( LangTouJing.TOU_JING_RATE_1 ) ) / 100;
+//			var outEmptyRate:Number = int( LanguageConfig.getText( LangTouJing.TOU_JING_RATE_2 ) ) / 100;
+//			var inParamarthaRate:Number = int( LanguageConfig.getText( LangTouJing.TOU_JING_RATE_3 ) ) / 100;
+//			var outParamarthaRate:Number = int( LanguageConfig.getText( LangTouJing.TOU_JING_RATE_4 ) ) / 100;
+//			var countryId:int = MainRoleManager.actorInfo.sceneSequence;
+//			
+//			for (var idx : int = 0; idx < arr.length; idx++)
+//			{
+//				var data : TouJingBookStateData = arr[idx];
+//				if (countryId == data.countryId)
+//				{
+//					if( data.countryJingShu < (CountryManager.jingShuNum * inEmptyRate) )//劫空
+//					{
+//						if( isInHorizon )
+//							SpellAnimationHelper.addTargetEffect( sceneRole, RenderUnitID.HU_GUO_SI_EMPTY, RenderUnitType.SCRIPTURES, EffectUrl.HU_GUO_SI_EMPTY_EFFECT, null, 0 );
+//						else
+//							sceneRole.avatar.removeRenderUnitsByType( RenderUnitType.SCRIPTURES );
+//						break;
+//					}
+//					else if( data.countryJingShu > (CountryManager.jingShuNum * outEmptyRate) && data.countryJingShu < (CountryManager.jingShuNum * inParamarthaRate) )//普通
+//					{
+//						if( isInHorizon )
+//							SpellAnimationHelper.addTargetEffect( sceneRole, RenderUnitID.HU_GUO_SI_GENERAL, RenderUnitType.SCRIPTURES, EffectUrl.HU_GUO_SI_GENERAL_EFFECT, null, 0 );
+//						else
+//							sceneRole.avatar.removeRenderUnitsByType( RenderUnitType.SCRIPTURES );
+//						break;
+//					}
+//					else if( data.countryJingShu >= (CountryManager.jingShuNum * inParamarthaRate) )//真谛
+//					{
+//						if( isInHorizon )
+//							SpellAnimationHelper.addTargetEffect( sceneRole, RenderUnitID.HU_GUO_SI_PARAMARTHA, RenderUnitType.SCRIPTURES, EffectUrl.HU_GUO_SI_PARAMARTHA_EFFECT, null, 0 );
+//						else
+//							sceneRole.avatar.removeRenderUnitsByType( RenderUnitType.SCRIPTURES );
+//						break;
+//					}
+//					else if( data.countryJingShu < (CountryManager.jingShuNum * outParamarthaRate) && data.countryJingShu > (CountryManager.jingShuNum * outEmptyRate) )//普通
+//					{
+//						if( isInHorizon )
+//							SpellAnimationHelper.addTargetEffect( sceneRole, RenderUnitID.HU_GUO_SI_GENERAL, RenderUnitType.SCRIPTURES, EffectUrl.HU_GUO_SI_GENERAL_EFFECT, null, 0 );
+//						else
+//							sceneRole.avatar.removeRenderUnitsByType( RenderUnitType.SCRIPTURES );
+//						break;
+//					}
+//					else
+//					{
+//						//不在“劫空”/“真谛”状态  普通
+//						if( isInHorizon )
+//							SpellAnimationHelper.addTargetEffect( sceneRole, RenderUnitID.HU_GUO_SI_GENERAL, RenderUnitType.SCRIPTURES, EffectUrl.HU_GUO_SI_GENERAL_EFFECT, null, 0 );
+//						else
+//							sceneRole.avatar.removeRenderUnitsByType( RenderUnitType.SCRIPTURES );
+//						break;
+//					}
+//				}
+//			}
 		}
 		
 		/**

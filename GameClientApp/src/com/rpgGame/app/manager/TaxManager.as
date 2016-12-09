@@ -1,8 +1,7 @@
 package com.rpgGame.app.manager
 {
-	import com.rpgGame.app.manager.country.CountryManager;
 	import com.rpgGame.coreData.cfg.TaxCfgData;
-
+	
 	import app.message.TaxConfigProto;
 
 	/**
@@ -37,10 +36,10 @@ package com.rpgGame.app.manager
 					}
 					else
 					{
-						if (CountryManager.selfCountryData && CountryManager.selfCountryData.exchequer)
-						{
-							return CountryManager.selfCountryData.exchequer.taxRate;
-						}
+//						if (CountryManager.selfCountryData && CountryManager.selfCountryData.exchequer)
+//						{
+//							return CountryManager.selfCountryData.exchequer.taxRate;
+//						}
 					}
 				}
 			}

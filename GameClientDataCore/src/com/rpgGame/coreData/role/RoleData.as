@@ -4,8 +4,10 @@
 	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.info.buff.BuffInfo;
 	import com.rpgGame.coreData.info.fight.skill.ActiveSpellList;
-
-	import org.game.netCore.net_protobuff.ByteBuffer;
+	import com.rpgGame.netData.map.bean.MonsterInfo;
+	import com.rpgGame.netData.map.bean.NpcInfo;
+	
+	import flash.geom.Point;
 
 	/**
 	 *
@@ -36,15 +38,15 @@
 		public var spriteStat : SpriteStat;
 
 		/**总共获得的属性点 */
-		public var totalAddSpriteStatPoint : int;
+//		public var totalAddSpriteStatPoint : int;
 
 		/**
 		 * 额外获得的属性点(不包含升级涨的属性点)
 		 */
-		public var obtainSpriteStatPoint : int;
+//		public var obtainSpriteStatPoint : int;
 
 		/** 被使用的属性点 (未使用的属性点＝升级获得的属性点+额外获得的属性点-被使用的属性点) */
-		public var usedSpriteStatPoint : int;
+//		public var usedSpriteStatPoint : int;
 
 		/**
 		 * 当前血量
@@ -64,6 +66,9 @@
 		/** 乘坐的战车的拥有者的人的id,0表示没有乘车 **/
 		public var zhanCheOwnerID : Number = 0;
 
+		/**
+		 * 角色半径 
+		 */		
 		public var bodyRadius : int = 0;
 		/**
 		 * 战斗力
@@ -82,6 +87,9 @@
 		 * 方向
 		 */
 		public var direction : int = 0;
+		/**
+		 *  
+		 */		
 		private var _fixDirection : Boolean;
 		/**
 		 * 拥有者ID
@@ -133,51 +141,42 @@
 		{
 			return spellList.getSpellList();
 		}
-
-		public static function readGeneric(data : RoleData, buffer : ByteBuffer) : void
+		/**
+		 * 一般通用的属性 
+		 * @param data
+		 * @param pos
+		 * 
+		 */
+		public static function readGeneric(data : RoleData, pos:Point) : void
 		{
-			data.x = buffer.readVarint32();
-			data.y = buffer.readVarint32();
-			data.hp = buffer.readVarint64();
-			data.totalStat.life = buffer.readVarint64();
-			data.mp = buffer.readVarint64();
-			data.totalStat.mana = buffer.readVarint64();
-
-			data.buffList = new Vector.<BuffInfo>();
-			while (buffer.bytesAvailable > 0)
-			{
-				var buffInfo : BuffInfo = new BuffInfo(data.id);
-				buffInfo.cfgId = buffer.readVarint32();
-				buffInfo.curtStackCount = buffer.readVarint32();
-				buffInfo.disappearTime = buffer.readVarint64();
-				data.buffList.push(buffInfo);
-			}
+			data.x = pos.x;
+			data.y = -pos.y;
 		}
-
-//		/**
-//		 * 全部属性=基础属性+可被洗属性
-//		 */
-//		public var totalStat : SpriteStat;
-//		/**
-//		 * 被分配属性,可以被洗掉
-//		 */
-//		public var spriteStat : SpriteStat;
-//		
-//		/**总共获得的属性点 */
-//		public var totalAddSpriteStatPoint : int;
-//		
-//		/**
-//		 * 额外获得的属性点(不包含升级涨的属性点)
-//		 */
-//		public var obtainSpriteStatPoint : int;
-//		
-//		/** 被使用的属性点 (未使用的属性点＝升级获得的属性点+额外获得的属性点-被使用的属性点) */
-//		public var usedSpriteStatPoint : int;
-//
-//		public function setAddSpriteStateModelObj(proto:AddSpriteStatModuleObjProto):void
-//		{
-//			
-//		}
-
+		
+		public static function readMonster(data : RoleData, info : MonsterInfo):void
+		{
+			data.level = info.level;
+			
+			data.hp = info.hp;
+			data.totalStat.life = info.maxHp;
+//			data.mp = info;
+//			data.totalStat.mana = ;
+			
+//			data.buffList = info.buffs;
+			readGeneric(data,new Point(info.x,info.y));
+		}
+		
+		public static function readNpc(data : RoleData, info : NpcInfo):void
+		{
+//			data.level = info.level;
+			
+//			data.hp = info.hp;
+			//			data.totalStat.life = info.;
+			//			data.mp = info.;
+			//			data.totalStat.mana = ;
+			
+//			data.buffList = info.buffs;
+			readGeneric(data,new Point(info.x,info.y));
+		}
 	}
 }

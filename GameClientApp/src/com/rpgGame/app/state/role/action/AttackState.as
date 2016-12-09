@@ -120,7 +120,7 @@ package com.rpgGame.app.state.role.action
 		{
 			super.playAnimation(role, render, isFreeze, time, speedRatio);
 
-			var status : String = _statusType ? _statusType : RoleActionType.IDLE;
+			var status : String = _statusType ? _statusType : RoleActionType.STAND;
 			var matchStatus : String = RoleActionType.getActionType(status, (_machine as RoleStateMachine).isRiding);
 			switch (render.type)
 			{

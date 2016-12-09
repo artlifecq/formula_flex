@@ -1,6 +1,5 @@
 package com.rpgGame.coreData.cfg
 {
-	import com.rpgGame.coreData.clientConfig.EquipTypeNameInfo;
 	import com.rpgGame.coreData.clientConfig.RaceNameInfo;
 	
 	import flash.utils.ByteArray;

@@ -1,7 +1,5 @@
 package com.rpgGame.app.sender
 {
-	import com.rpgGame.coreData.info.biaoju.BiaoJuOfficeData;
-	
 	import app.cmd.BiaoModuleMessages;
 
 	public class BiaoJuSender extends BaseSender
@@ -58,16 +56,16 @@ package com.rpgGame.app.sender
 		 */
 		public static function fenPeiSilver(array:Array):void
 		{
-			_bytes.clear();
-			for each(var biaojuOffice : BiaoJuOfficeData in array)
-			{
-				if(biaojuOffice.silver>0)
-				{
-					_bytes.writeVarint64(biaojuOffice.id);
-					_bytes.writeVarint32(biaojuOffice.silver);
-				}
-			}
-			send(BiaoModuleMessages.C2S_ALLOCATE_SALARY,_bytes);
+//			_bytes.clear();
+//			for each(var biaojuOffice : BiaoJuOfficeData in array)
+//			{
+//				if(biaojuOffice.silver>0)
+//				{
+//					_bytes.writeVarint64(biaojuOffice.id);
+//					_bytes.writeVarint32(biaojuOffice.silver);
+//				}
+//			}
+//			send(BiaoModuleMessages.C2S_ALLOCATE_SALARY,_bytes);
 		}
 	}
 }

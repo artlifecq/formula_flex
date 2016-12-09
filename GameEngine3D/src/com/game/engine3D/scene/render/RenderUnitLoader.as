@@ -27,13 +27,18 @@ package com.game.engine3D.scene.render
 	public class RenderUnitLoader extends CountShareData
 	{
 		private var _fullSourchPath : String;
+		
 		private var _isLoaded : Boolean;
 		private var _isLoading : Boolean;
+		
 		private var _isAsyncLoaded : Boolean;
+		
 		private var _isUnloaded : Boolean;
+		
 		private var _resCompleteCallBackList : Vector.<CallBackData>;
 		private var _asyncResCompleteCallBackList : Vector.<CallBackData>;
 		private var _resErrorCallBackList : Vector.<CallBackData>;
+		
 		private var _loader : Resource3DLoader;
 
 		public function RenderUnitLoader()

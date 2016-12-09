@@ -3,6 +3,7 @@ package com.rpgGame.app.ui.main.chat
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.TeamManager;
 	import com.rpgGame.app.manager.chat.ChatDataManager;
+	import com.rpgGame.app.manager.chat.ChatGoodsManager;
 	import com.rpgGame.app.manager.chat.ChatInputManager;
 	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.chat.ChatSpeakHistoryManager;
@@ -256,7 +257,8 @@ package com.rpgGame.app.ui.main.chat
 			{
 				_inputText.text = "";
 			}
-			var goodsCode:String = RichTextCustomUtil.getItemCode(item.cfgId,item.name,item.quality);
+			var key:String = ChatGoodsManager.addItemInfo(item);
+			var goodsCode:String = RichTextCustomUtil.getItemCode(key,item.name,item.quality);
 			_inputText.appendRichText(goodsCode);
 			setTimeout(showInputText,10);
 		}

@@ -1,5 +1,7 @@
 package com.rpgGame.coreData.role
 {
+	
+
 	/**
 	 *
 	 * 基础实体数据
@@ -9,7 +11,7 @@ package com.rpgGame.coreData.role
 	 */
 	public class BaseEntityData
 	{
-		private var _id : Number = 0;
+		private var _id : int = 0;
 		/** 名字 */
 		public var name : String = "";
 
@@ -20,10 +22,6 @@ package com.rpgGame.coreData.role
 		 * 所属国家，怪物也有，如国战的圣兽
 		 */
 		public var countryId : int;
-
-		public function BaseEntityData()
-		{
-		}
 
 		/** 坐标y */
 		public function get y():Number
@@ -58,7 +56,7 @@ package com.rpgGame.coreData.role
 		 * @return
 		 *
 		 */
-		public function get id() : Number
+		public function get id() : int
 		{
 			return _id;
 		}
@@ -66,9 +64,13 @@ package com.rpgGame.coreData.role
 		/**
 		 * @private
 		 */
-		public function set id(value : Number) : void
+		public function set id(value : int) : void
 		{
 			_id = value;
+		}
+		
+		public function BaseEntityData()
+		{
 		}
 	}
 }

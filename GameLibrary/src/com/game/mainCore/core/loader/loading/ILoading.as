@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.core.loader.loading
+﻿package com.game.mainCore.core.loader.loading
 {
     import flash.events.IEventDispatcher;
     import flash.display.DisplayObjectContainer;
@@ -20,4 +19,4 @@ package com.game.mainCore.core.loader.loading
         function get key():String;
 
     }
-}//package com.game.mainCore.core.loader.loading
+}

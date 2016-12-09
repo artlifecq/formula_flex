@@ -11,22 +11,20 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.sender.SpellSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.SystemTimeEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
-	import com.rpgGame.coreData.cfg.demo.GmLevelAddSpellPointData;
-	import com.rpgGame.coreData.clientConfig.GmLevelAddSpellPoint;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
-	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
 	import com.rpgGame.coreData.lang.LangText;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.EnumHurtType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
+	import com.rpgGame.netData.player.bean.PlayerAttributeItem;
+	import com.rpgGame.netData.player.message.ResPlayerAttributesChangeMessage;
 	
 	import flash.utils.ByteArray;
 	
@@ -37,6 +35,7 @@ package com.rpgGame.app.cmdlistener
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
@@ -58,7 +57,12 @@ package com.rpgGame.app.cmdlistener
 
 		override public function start() : void
 		{
-			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_STAT, onChangeStat);
+			SocketConnection.addCmdListener(103106,RecvPlayerAttributesChangeMessage);
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			//////
+			////// 以下为参考代码，是深圳那边的后台协议，不适用
+			//////
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_AMOUNT, onRecChangeAmount);
 			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_LEVEL, onRecChangeLevel);
 			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_INIT_LEVEL_INFO, onRecInitChangeLevel);
@@ -84,6 +88,36 @@ package com.rpgGame.app.cmdlistener
 
 			finish();
 		}
+		
+		private function RecvPlayerAttributesChangeMessage(msg:ResPlayerAttributesChangeMessage):void
+		{
+			var reason:int = msg.attributeChangeReason & 0x0ffffff;
+			var calcFightPower:Boolean = (((msg.attributeChangeReason & 0xff000000) >> 24) == 1);// 这个是早于战斗力更新，也确实得这样
+			// 装备觉醒期间，由于装备改动属性延迟执行
+//			if ( reason == 52 && Mgr.equipForgeMgr.delayDoTool.lock )
+//			{
+//				Mgr.equipForgeMgr.delayDoTool.Push( RecvPlayerAttributesChangeMessage, msg );
+//				return;
+//			}
+			
+			// 穿戴装备属性改变显示
+			if (reason == 52 )
+			{
+				
+			}
+						
+			//
+			PlayerAttributeManager.showSpriteStatChg(MainRoleManager.actorInfo.totalStat.statArr, msg.attributeChangeList);
+			//
+			MainRoleManager.actorInfo.totalStat.setData(msg.attributeChangeList);
+			//MainManager.actorInfo.atkSpeed = 1;//100 / (100 + spriteStatProto.attackSpeed);
+			//EventManager.dispatchEvent(UserEvent.USER_MAIN_FIGHT_ATTRIBUTE_CHANGE);
+			EventManager.dispatchEvent(MainPlayerEvent.STAT_CHANGE);
+			
+			//如果这个协议，改变的属性，包括hp，mp，maxhp，maxmp的话，就要在下面还要写一段逻辑，来更新角色的血条。因为现在还不确定，是不是这样的，所以，暂时先不写。等以后，真正
+			//用上的时候，检查下这里，再补上代码吧！
+			// code!!!
+		}
 
 		/**
 		 * 装备资源改变
@@ -96,7 +130,7 @@ package com.rpgGame.app.cmdlistener
 			var role : SceneRole = SceneManager.getSceneObjByID(heroId) as SceneRole;
 			if (role && role.usable)
 			{
-				HeroData.setResources(role.data as HeroData, buffer);
+//				HeroData.setResources(role.data as HeroData, buffer);
 				AvatarManager.callEquipmentChange(role);
 				if (SceneRoleSelectManager.selectedRole == role)
 					SceneRoleSelectManager.updateSelectRole();
@@ -170,7 +204,7 @@ package com.rpgGame.app.cmdlistener
 			roleData.upgradeExp = client.exp.toNumber();
 			roleData.canStorageExp = client.canStorageExp ? client.canStorageExp.toNumber() : 0;
 			roleData.spellList.totalAddSpellPoint = client.totalAddSpellPoint;
-			roleData.totalAddSpriteStatPoint = client.totalAddSpriteStatPoint;
+//			roleData.totalAddSpriteStatPoint = client.totalAddSpriteStatPoint;
 			roleData.relive_coeff = client.reliveCoeff;
 			roleData.mountSlotCount = client.mountSlotCount;
 //			MainRoleManager.actor.headFace.addAndUpdateLevel();
@@ -182,9 +216,9 @@ package com.rpgGame.app.cmdlistener
 
 
 			//Demo版本的自动学习技能逻辑
-			var info : GmLevelAddSpellPoint = GmLevelAddSpellPointData.getInfo(roleData.level);
-			if (info)
-				SpellSender.learnOrUpgradeActiveSpell(info.spellID, new UpgradeItemListVo());
+//			var info : GmLevelAddSpellPoint = GmLevelAddSpellPointData.getInfo(roleData.level);
+//			if (info)
+//				SpellSender.learnOrUpgradeActiveSpell(info.spellID, new UpgradeItemListVo());
 		}
 
 		/**
@@ -207,7 +241,7 @@ package com.rpgGame.app.cmdlistener
 			roleData.level = client.newLevel;
 			roleData.upgradeExp = client.exp.toNumber();
 			roleData.spellList.totalAddSpellPoint = client.totalAddSpellPoint;
-			roleData.totalAddSpriteStatPoint = client.totalAddSpriteStatPoint;
+//			roleData.totalAddSpriteStatPoint = client.totalAddSpriteStatPoint;
 			roleData.relive_coeff = client.reliveCoeff;
 			roleData.mountSlotCount = client.mountSlotCount;
 			//			MainRoleManager.actor.headFace.addAndUpdateLevel();
@@ -286,21 +320,6 @@ package com.rpgGame.app.cmdlistener
 		private function onHeroDailyCleared(buffer : ByteBuffer) : void
 		{
 			EventManager.dispatchEvent(SystemTimeEvent.DAILY_CLEARED);
-		}
-
-		private function onChangeStat(buffer : ByteBuffer) : void
-		{
-			var tempBytes : ByteArray = new ByteArray();
-			buffer.readBytes(tempBytes, 0, buffer.bytesAvailable);
-			var spriteStatProto : SpriteStatProto = new SpriteStatProto();
-			spriteStatProto.mergeFrom(tempBytes);
-			//
-			PlayerAttributeManager.showSpriteStatChg(MainRoleManager.actorInfo.totalStat.statProto, spriteStatProto);
-			//
-			MainRoleManager.actorInfo.totalStat.setData(spriteStatProto);
-			//MainManager.actorInfo.atkSpeed = 1;//100 / (100 + spriteStatProto.attackSpeed);
-			//EventManager.dispatchEvent(UserEvent.USER_MAIN_FIGHT_ATTRIBUTE_CHANGE);
-			EventManager.dispatchEvent(MainPlayerEvent.STAT_CHANGE);
 		}
 
 		private function onRecFangChenMi1Hour(buffer : ByteBuffer) : void

@@ -11,6 +11,7 @@ package com.client.process
 	import com.game.engine3D.process.BaseProcess;
 	import com.game.engine3D.process.ProcessStateMachine;
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.netData.player.bean.MyPlayerInfo;
 	
 	import flash.display.Loader;
 	import flash.events.Event;
@@ -28,8 +29,6 @@ package com.client.process
 	import away3d.loaders.multi.MultiLoadData;
 	
 	import feathers.themes.ThemeLoader;
-	
-	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
@@ -196,9 +195,8 @@ package com.client.process
 			LoginCmdListener.onCreateCharFailHandler = onCreateCharFailHandler;
 			if (ClientGlobal.isSingle)
 			{
-				ClientGlobal.loginData = new ByteBuffer();
-				ClientGlobal.loginData.writeUTF(_nickName);
-				ClientGlobal.loginData.position = 0;
+				ClientGlobal.loginData = new MyPlayerInfo();
+				ClientGlobal.loginData.name = _nickName;
 				onCreateCharSuccessHandler();
 				return;
 			}

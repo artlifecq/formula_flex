@@ -8,8 +8,6 @@ package com.rpgGame.core.app
 	import flash.events.ProgressEvent;
 	import flash.utils.Dictionary;
 	
-	import org.client.mainCore.manager.EventManager;
-	
 	/**
 	 *
 	 * app模块加载管理

@@ -2,7 +2,6 @@ package com.rpgGame.app.manager
 {
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.countryWar.CountryWarStatusManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -45,7 +44,7 @@ package com.rpgGame.app.manager
 	{
 		private static var _curDieInfo:DieInfo;
 		
-//		private static var _gTime:GameTimer;
+		//		private static var _gTime:GameTimer;
 		/**当前原地复活次数**/
 		private static var _originReliveTimes:int = 0;
 		/**今天总共原地复活的次数**/
@@ -89,8 +88,8 @@ package com.rpgGame.app.manager
 		
 		public static function init():void
 		{
-//			_gTime = new GameTimer("ReliveManager", 1000, 1);
-//			_gTime.onComplete = timeComplete;
+			//			_gTime = new GameTimer("ReliveManager", 1000, 1);
+			//			_gTime.onComplete = timeComplete;
 		}
 		
 		public static function resetDaily():void
@@ -132,14 +131,14 @@ package com.rpgGame.app.manager
 			var sceneSequence:int = MainRoleManager.actorInfo.sceneSequence;
 			if(MainRoleManager.isInCountryWar)//国战
 			{
-				return CountryWarStatusManager.getCurrentReliveSceneName();
+//				return CountryWarStatusManager.getCurrentReliveSceneName();
 			}
 			if( mycountry == sceneSequence )//死在自己国家
 				return MapDataManager.getMapName( normal.selfCountryDeathReturnSceneId );
 			
 			if( sceneSequence <= 0 )
 				return "未知";
-
+			
 			//死在别人的国家
 			return MapDataManager.getMapName( normal.otherCountryDeathReturnSceneId );
 		}
@@ -232,10 +231,10 @@ package com.rpgGame.app.manager
 		 */		
 		private static function timeComplete():void
 		{
-//			_gTime.reset();
-//			_gTime.stop();
+			//			_gTime.reset();
+			//			_gTime.stop();
 			
-//			showRelivePanel();
+			//			showRelivePanel();
 			var mapdata : SceneData =  MapDataManager.getMapInfo(SceneSwitchManager.currentMapId);
 			if(mapdata)
 			{
@@ -386,7 +385,7 @@ package com.rpgGame.app.manager
 			if( _curDieInfo == null )
 				return;
 			reliveUiChange();
-//			_gTime.start();
+			//			_gTime.start();
 			timeComplete();
 		}
 		
@@ -460,6 +459,15 @@ package com.rpgGame.app.manager
 			return _originReliveTimes;
 		}
 		
+		public static function autoHideRelive():void
+		{
+			if(MainRoleManager.actorInfo.hp > 0)
+			{
+				hideRelivePanel();
+				EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_HIDE_TYPE,EnumFunctionMessageBarIcoType.RELIVE_TYPE);
+			}
+		}
+		
 		/**今天总共原地复活的次数**/
 		public static function get totalOriginReliveTimes():int
 		{
@@ -477,31 +485,29 @@ package com.rpgGame.app.manager
 		{
 			return _totalOriginPerfectReliveTimes;
 		}
-
+		
 		/**原地复活折扣到期时间**/
 		public static function get originReliveDiscountTime():Number
 		{
 			return _originReliveDiscountTime;
 		}
-
+		
 		/**原地复活折扣**/
 		public static function get originReliveDiscount():int
 		{
 			return _originReliveDiscount;
 		}
-
+		
 		/**完美原地复活折扣到期时间**/
 		public static function get prefectReliveDiscountTime():Number
 		{
 			return _prefectReliveDiscountTime;
 		}
-
+		
 		/**完美原地复活折扣到期时间**/
 		public static function get prefectReliveDiscount():int
 		{
 			return _prefectReliveDiscount;
 		}
-		
-		
 	}
 }

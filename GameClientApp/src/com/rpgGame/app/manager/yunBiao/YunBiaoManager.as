@@ -4,20 +4,17 @@ package com.rpgGame.app.manager.yunBiao
 	import com.rpgGame.app.cmdlistener.enum.EmQuality;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.country.CountryManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.sender.CountrySender;
 	import com.rpgGame.app.sender.YunBiaoSender;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.core.events.YunBiaoEvent;
-	import com.rpgGame.core.events.country.CrownEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
@@ -25,7 +22,6 @@ package com.rpgGame.app.manager.yunBiao
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.npc.NpcCfgData;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
-	import com.rpgGame.coreData.info.country.country.CountryData;
 	import com.rpgGame.coreData.info.task.PrizeInfo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangYunBiao;
@@ -336,15 +332,15 @@ package com.rpgGame.app.manager.yunBiao
 		 */		
 		public static function openCountryYunBiao():void
 		{
-			var country : CountryData = CountryManager.selfCountryData;
-			if(!country)
-				return;
-			if(country.strategy.isTodayStartGuoYun)
-			{
-				NoticeManager.showNotify("已经开启了国家运镖");
-				return;
-			}
-			CountrySender.onStartGuoYun();
+//			var country : CountryData = CountryManager.selfCountryData;
+//			if(!country)
+//				return;
+//			if(country.strategy.isTodayStartGuoYun)
+//			{
+//				NoticeManager.showNotify("已经开启了国家运镖");
+//				return;
+//			}
+//			CountrySender.onStartGuoYun();
 		}
 		
 		/**
@@ -354,18 +350,18 @@ package com.rpgGame.app.manager.yunBiao
 		 */		
 		public static function openCountryYunBiaoComplete(countryId : int):void
 		{
-			var country : CountryData = CountryManager.selfCountryData;
-			if(!country)
-				return;
-			country.strategy.isTodayStartGuoYun = true;
-			country.strategy.guoYunEndTime = SystemTimeManager.curtTm + BiaoCfgData.miscData.guo_yun_duration;
-			EventManager.dispatchEvent(CrownEvent.NEI_ZHEN_CHANGE);
-			NoticeManager.systemSwitchNotify(CountryManager.getCountryName(countryId)+"开启了王帮托运");
-			if(countryId == MainRoleManager.actorInfo.countryId)
-			{
-				var alertSet : AlertSetInfo = new AlertSetInfo(LangAlertInfo.openCountryYunBiaoComplete);
-				GameAlert.showAlert(alertSet,clickCallBack);
-			}
+//			var country : CountryData = CountryManager.selfCountryData;
+//			if(!country)
+//				return;
+//			country.strategy.isTodayStartGuoYun = true;
+//			country.strategy.guoYunEndTime = SystemTimeManager.curtTm + BiaoCfgData.miscData.guo_yun_duration;
+//			EventManager.dispatchEvent(CrownEvent.NEI_ZHEN_CHANGE);
+//			NoticeManager.systemSwitchNotify(CountryManager.getCountryName(countryId)+"开启了王帮托运");
+//			if(countryId == MainRoleManager.actorInfo.countryId)
+//			{
+//				var alertSet : AlertSetInfo = new AlertSetInfo(LangAlertInfo.openCountryYunBiaoComplete);
+//				GameAlert.showAlert(alertSet,clickCallBack);
+//			}
 		}
 		
 		private static function clickCallBack(gameAlert:GameAlert):void
@@ -382,13 +378,13 @@ package com.rpgGame.app.manager.yunBiao
 			if(!_isFirstEnterScene)
 				return;
 			_isFirstEnterScene = false;
-			var country : CountryData = CountryManager.selfCountryData;
-			if(!country)
-				return;
-			if(!country.strategy.isTodayStartGuoYun)
-				return;
-			if(country.strategy.guoYunEndTime > SystemTimeManager.curtTm)
-				openCountryYunBiaoComplete(MainRoleManager.actorInfo.countryId);
+//			var country : CountryData = CountryManager.selfCountryData;
+//			if(!country)
+//				return;
+//			if(!country.strategy.isTodayStartGuoYun)
+//				return;
+//			if(country.strategy.guoYunEndTime > SystemTimeManager.curtTm)
+//				openCountryYunBiaoComplete(MainRoleManager.actorInfo.countryId);
 		}
 		
 		/**
@@ -541,8 +537,8 @@ package com.rpgGame.app.manager.yunBiao
 				prizeInfo = prizeVect[i];
 				
 				expValue = prizeInfo.moneyAmount.getAmountByType(AmountType.EXP);
-				if( CountryManager.isInGuoYun )
-					prizeInfo.moneyAmount.setSomeType(AmountType.EXP,expValue * BiaoCfgData.miscData.guo_yun_exp_additional);
+//				if( CountryManager.isInGuoYun )
+//					prizeInfo.moneyAmount.setSomeType(AmountType.EXP,expValue * BiaoCfgData.miscData.guo_yun_exp_additional);
 				switch(i)
 				{
 					case EmQuality.QUALITY_WHITE://白
@@ -708,20 +704,20 @@ package com.rpgGame.app.manager.yunBiao
 				
 				//自己的数据
 				var selfData : HeroData = MainRoleManager.actorInfo;
-				if (!CountryManager.isAtEnemyCountry()) //本国镖车
-				{
-					if (biaoData.ownerID == selfData.id) //镖车归属者的名字，自己的镖车名字是蓝色，别人的是绿色
-						ownerNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_17, biaoData.ownerName + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_9) + "<br/>");
-					else
-						ownerNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_16, biaoData.ownerName + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_9) + "<br/>");
-					color = StaticValue.COLOR_CODE_1;
-				}
-				else
-				{
-					//敌国镖车
-					ownerNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_13, biaoData.ownerName + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_9) + "<br/>");
-					color = StaticValue.COLOR_CODE_13;
-				}
+//				if (!CountryManager.isAtEnemyCountry()) //本国镖车
+//				{
+//					if (biaoData.ownerID == selfData.id) //镖车归属者的名字，自己的镖车名字是蓝色，别人的是绿色
+//						ownerNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_17, biaoData.ownerName + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_9) + "<br/>");
+//					else
+//						ownerNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_16, biaoData.ownerName + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_9) + "<br/>");
+//					color = StaticValue.COLOR_CODE_1;
+//				}
+//				else
+//				{
+//					//敌国镖车
+//					ownerNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_13, biaoData.ownerName + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_9) + "<br/>");
+//					color = StaticValue.COLOR_CODE_13;
+//				}
 				
 				
 				//策划说镖车头顶的名字不根据镖车的品质走

@@ -1,9 +1,9 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.core.manager
+﻿package com.game.mainCore.core.manager
 {
-    import flash.events.Event;
-    import com.game.mainCore.libCore.timer.TimerHelper;
     import com.game.mainCore.libCore.timer.TimerData;
+    import com.game.mainCore.libCore.timer.TimerHelper;
+    
+    import flash.events.Event;
 
     public class TimerManager 
     {
@@ -12,12 +12,12 @@ package com.game.mainCore.core.manager
 
         public function TimerManager()
         {
-            throw (new Event("静态类"));
+            throw new Event("静态类");
         }
 
         public static function getTimersNum():int
         {
-            return (_timerArr.length);
+            return _timerArr.length;
         }
 
         public static function createOneOffTimer($delay:Number, $repeat:Number, $timerHandler:Function, $timerHandlerParameters:Array=null, $timerCompleteHandler:Function=null, $timerCompleteHandlerParameters:Array=null, $autoStart:Boolean=true):void
@@ -29,7 +29,7 @@ package com.game.mainCore.core.manager
         {
             var timerData:TimerData = TimerHelper.createTimer($delay, $repeat, $timerHandler, $timerHandlerParameters, $timerCompleteHandler, $timerCompleteHandlerParameters, $autoStart);
             _timerArr[_timerArr.length] = timerData;
-            return (timerData);
+            return timerData;
         }
 
         public static function createOneOffExactTimer($duration:Number, $from:Number, $to:Number, $onUpdate:Function=null, $onComplete:Function=null, $updateStep:Number=0):void
@@ -41,35 +41,35 @@ package com.game.mainCore.core.manager
         {
             var timerData:TimerData = TimerHelper.createExactTimer($duration, $from, $to, $onUpdate, $onComplete, $updateStep);
             _timerArr[_timerArr.length] = timerData;
-            return (timerData);
+            return timerData;
         }
 
         public static function deleteTimer($timerData:TimerData):void
         {
-            var timerData = null;
+            var timerData:TimerData = null;
             var index:int;
             for each (timerData in _timerArr)
             {
-                if ((timerData == $timerData))
+                if (timerData == $timerData)
                 {
                     index = _timerArr.indexOf(timerData);
-                    if (!((index == -1)))
+                    if (index != -1)
                     {
                         _timerArr.splice(index, 1);
-                    };
+                    }
                     timerData.destroy();
                     return;
-                };
-            };
+                }
+            }
         }
 
         public static function deleteAllTimers():void
         {
-            var timerData = null;
+            var timerData:TimerData = null;
             for each (timerData in _timerArr)
             {
                 timerData.destroy();
-            };
+            }
             _timerArr = [];
         }
 
@@ -82,7 +82,5 @@ package com.game.mainCore.core.manager
         {
             TimerHelper.removeDelayCallBack($callBack);
         }
-
-
     }
-}//package com.game.mainCore.core.manager
+}

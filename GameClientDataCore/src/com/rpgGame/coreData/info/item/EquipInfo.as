@@ -2,10 +2,8 @@ package com.rpgGame.coreData.info.item
 {
 	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.netData.player.bean.AttributeItem;
 	
-	import app.message.EquipmentProto;
-	import app.message.SpriteStatProto;
-
 	/**
 	 * 装备信息
 	 * @author wewell@163.com
@@ -16,9 +14,9 @@ package com.rpgGame.coreData.info.item
 		/** 评价 **/
 		public var evaluate:int;
 		/** 基础属性Proto **/
-		public var base_stat:SpriteStatProto;
+		public var base_stat:Vector.<AttributeItem>;
 		/** 随机属性Proto **/
-		public var random_stat:SpriteStatProto;
+		public var random_stat:Vector.<AttributeItem>;
 		/** 耐久度 **/
 		public var durability:int;
 		/** 已经使用的耐久度 **/
@@ -26,7 +24,7 @@ package com.rpgGame.coreData.info.item
 		/** 强化等级， 0表示没有强化 **/
 		public var refined_times:int;
 		/** 强化属性Proto，强化等级>0才会提供这个值 **/
-		public var refined_stat:SpriteStatProto;
+		public var refined_stat:Vector.<AttributeItem>;
 		/** 打造者的名字，为空表示没有打造着 **/
 		public var build_signature:String;
 		/** 战斗力 **/

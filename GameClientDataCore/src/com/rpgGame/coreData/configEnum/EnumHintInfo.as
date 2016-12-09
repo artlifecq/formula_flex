@@ -7,29 +7,11 @@ package com.rpgGame.coreData.configEnum
 	* 【**不可手动修改此类**】，
 	*	
 	* 【任何修改都将被生成工具覆盖，如需修改请直接修改具体的config文件】
-	* @author fly.AutoUICreater
-	* @modifier L.L.M.Sunny
-	* 修改时间：2015-7-2 上午10:05:12
+	* @author NEIL
 	* 
 	*/
 	public class EnumHintInfo
 	{
-		 /**  $一二三四<font color='0xff0000' size='20'>五六七八九十一</font>二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十 */
-		public static const GM_TEST1:String = "GM_TEST1";
-		 /**  $一二三四<font color='0xff0000' size='20'>五六七八九十一</font>二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十 */
-		public static const GM_TEST2:String = "GM_TEST2";
-		 /**  $一二三四<font color='0xff0000' size='20'>五六七八九十一</font>二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十 */
-		public static const GM_TEST3:String = "GM_TEST3";
-		 /**  $一二三四<font color='0xff0000' size='20'>五六七八九十一</font>二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十 */
-		public static const GM_TEST4:String = "GM_TEST4";
-		 /**  $就是一条测试的数据 */
-		public static const GM_TEST5:String = "GM_TEST5";
-		 /**  $一二三四<font color='0xff0000' size='20'>五六七八九十一</font>二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十 */
-		public static const GM_TEST6:String = "GM_TEST6";
-		 /**  $一二三四<font color='0xff0000' size='20'>五六七八九十一</font>二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十 */
-		public static const GM_TEST7:String = "GM_TEST7";
-		 /**  $一二三四<font color='0xff0000' size='20'>五六七八九十一</font>二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十 */
-		public static const GM_TEST8:String = "GM_TEST8";
 		 /**  您背包中$不足 */
 		public static const UPGRADE_ITEM_FAIL1:String = "UPGRADE_ITEM_FAIL1";
 		 /**  您的银两不足 */
@@ -53,125 +35,125 @@ package com.rpgGame.coreData.configEnum
 		 /**  您的金钱已满 */
 		public static const MONEY_FULL:String = "MONEY_FULL";
 		 /**  权限不够，无法宣战 */
-		public static const COUNRY_WAR_FAIL1:String = "COUNRY_WAR_FAIL1";
+		public static const COUNTRY_WAR_FAIL1:String = "COUNTRY_WAR_FAIL1";
 		 /**  已经有国战了，无法宣战 */
-		public static const COUNRY_WAR_FAIL2:String = "COUNRY_WAR_FAIL2";
-		 /**  无法对盟国宣战 */
-		public static const COUNRY_WAR_FAIL3:String = "COUNRY_WAR_FAIL3";
-		 /**  目标已经被宣战了 */
-		public static const COUNRY_WAR_FAIL4:String = "COUNRY_WAR_FAIL4";
-		 /**  钱不够，无法国战 */
-		public static const COUNRY_WAR_FAIL5:String = "COUNRY_WAR_FAIL5";
-		 /**  你正处于国战状态，无法宣战 */
-		public static const COUNRY_WAR_FAIL6:String = "COUNRY_WAR_FAIL6";
+		public static const COUNTRY_WAR_FAIL2:String = "COUNTRY_WAR_FAIL2";
 		 /**  宣战的国家非法，无法宣战 */
-		public static const COUNRY_WAR_FAIL7:String = "COUNRY_WAR_FAIL7";
-		 /**  国战保护期，无法国战 */
-		public static const COUNRY_WAR_FAIL8:String = "COUNRY_WAR_FAIL8";
-		 /**  目标在国战保护期，无法国战 */
-		public static const COUNRY_WAR_FAIL9:String = "COUNRY_WAR_FAIL9";
+		public static const COUNTRY_WAR_FAIL3:String = "COUNTRY_WAR_FAIL3";
+		 /**  无法对盟国宣战 */
+		public static const COUNTRY_WAR_FAIL4:String = "COUNTRY_WAR_FAIL4";
+		 /**  目标已经被宣战了 */
+		public static const COUNTRY_WAR_FAIL5:String = "COUNTRY_WAR_FAIL5";
+		 /**  银两不够 */
+		public static const COUNTRY_WAR_FAIL6:String = "COUNTRY_WAR_FAIL6";
+		 /**  国战CD中，无法国战 */
+		public static const COUNTRY_WAR_FAIL7:String = "COUNTRY_WAR_FAIL7";
+		 /**  目标在国战CD中，无法国战 */
+		public static const COUNTRY_WAR_FAIL8:String = "COUNTRY_WAR_FAIL8";
+		 /**  当前未开启国战功能 */
+		public static const COUNTRY_WAR_FAIL9:String = "COUNTRY_WAR_FAIL9";
 		 /**  当前时间不可以宣战 */
-		public static const COUNRY_WAR_FAIL10:String = "COUNRY_WAR_FAIL10";
+		public static const COUNTRY_WAR_FAIL10:String = "COUNTRY_WAR_FAIL10";
 		 /**  不是国战双方 */
-		public static const COUNRY_WAR_FAIL11:String = "COUNRY_WAR_FAIL11";
+		public static const COUNTRY_WAR_FAIL11:String = "COUNTRY_WAR_FAIL11";
 		 /**  当前没有国战 */
-		public static const COUNRY_WAR_FAIL12:String = "COUNRY_WAR_FAIL12";
+		public static const COUNTRY_WAR_FAIL12:String = "COUNTRY_WAR_FAIL12";
 		 /**  国战没开始 */
-		public static const COUNRY_WAR_FAIL13:String = "COUNRY_WAR_FAIL13";
+		public static const COUNTRY_WAR_FAIL13:String = "COUNTRY_WAR_FAIL13";
 		 /**  待定 */
-		public static const COUNRY_WAR_FAIL14:String = "COUNRY_WAR_FAIL14";
+		public static const COUNTRY_WAR_FAIL14:String = "COUNTRY_WAR_FAIL14";
 		 /**  绑银不够 */
-		public static const COUNRY_WAR_FAIL15:String = "COUNRY_WAR_FAIL15";
+		public static const COUNTRY_WAR_FAIL15:String = "COUNTRY_WAR_FAIL15";
 		 /**  物品不够 */
-		public static const COUNRY_WAR_FAIL16:String = "COUNRY_WAR_FAIL16";
+		public static const COUNTRY_WAR_FAIL16:String = "COUNTRY_WAR_FAIL16";
 		 /**  当前时间,无法参拜 */
-		public static const COUNRY_WAR_FAIL17:String = "COUNRY_WAR_FAIL17";
+		public static const COUNTRY_WAR_FAIL17:String = "COUNTRY_WAR_FAIL17";
 		 /**  不在参拜区域内 */
-		public static const COUNRY_WAR_FAIL18:String = "COUNRY_WAR_FAIL18";
+		public static const COUNTRY_WAR_FAIL18:String = "COUNTRY_WAR_FAIL18";
 		 /**  当前没有国家可以参拜 */
-		public static const COUNRY_WAR_FAIL19:String = "COUNRY_WAR_FAIL19";
+		public static const COUNTRY_WAR_FAIL19:String = "COUNTRY_WAR_FAIL19";
 		 /**  参拜要去上次失败的国家才能够参拜 */
-		public static const COUNRY_WAR_FAIL20:String = "COUNRY_WAR_FAIL20";
+		public static const COUNTRY_WAR_FAIL20:String = "COUNTRY_WAR_FAIL20";
 		 /**  当前没有奖励可以领取,无法参拜 */
-		public static const COUNRY_WAR_FAIL21:String = "COUNRY_WAR_FAIL21";
+		public static const COUNTRY_WAR_FAIL21:String = "COUNTRY_WAR_FAIL21";
 		 /**  背包已满 */
-		public static const COUNRY_WAR_FAIL22:String = "COUNRY_WAR_FAIL22";
+		public static const COUNTRY_WAR_FAIL22:String = "COUNTRY_WAR_FAIL22";
 		 /**  当前时间,无法进入国战参拜区域 */
-		public static const COUNRY_WAR_FAIL23:String = "COUNRY_WAR_FAIL23";
+		public static const COUNTRY_WAR_FAIL23:String = "COUNTRY_WAR_FAIL23";
 		 /**  没在本国,无法进入国战参拜区域 */
-		public static const COUNRY_WAR_FAIL24:String = "COUNRY_WAR_FAIL24";
+		public static const COUNTRY_WAR_FAIL24:String = "COUNTRY_WAR_FAIL24";
 		 /**  当前没在观战中 */
-		public static const COUNRY_WAR_FAIL25:String = "COUNRY_WAR_FAIL25";
+		public static const COUNTRY_WAR_FAIL25:String = "COUNTRY_WAR_FAIL25";
 		 /**  弹幕长度非法 */
-		public static const COUNRY_WAR_FAIL26:String = "COUNRY_WAR_FAIL26";
+		public static const COUNTRY_WAR_FAIL26:String = "COUNTRY_WAR_FAIL26";
 		 /**  弹幕CD中 */
-		public static const COUNRY_WAR_FAIL27:String = "COUNRY_WAR_FAIL27";
+		public static const COUNTRY_WAR_FAIL27:String = "COUNTRY_WAR_FAIL27";
 		 /**  已经支持过了 */
-		public static const COUNRY_WAR_FAIL28:String = "COUNRY_WAR_FAIL28";
+		public static const COUNTRY_WAR_FAIL28:String = "COUNTRY_WAR_FAIL28";
 		 /**  未知的要支持的国家 */
-		public static const COUNRY_WAR_FAIL29:String = "COUNRY_WAR_FAIL29";
+		public static const COUNTRY_WAR_FAIL29:String = "COUNTRY_WAR_FAIL29";
 		 /**  要支持的国家,当前没有国战 */
-		public static const COUNRY_WAR_FAIL30:String = "COUNRY_WAR_FAIL30";
+		public static const COUNTRY_WAR_FAIL30:String = "COUNTRY_WAR_FAIL30";
 		 /**  当前所在场景不是国战场景 */
-		public static const COUNRY_WAR_FAIL31:String = "COUNRY_WAR_FAIL31";
+		public static const COUNTRY_WAR_FAIL31:String = "COUNTRY_WAR_FAIL31";
 		 /**  当前场景限制战车通行 */
-		public static const COUNRY_WAR_FAIL32:String = "COUNRY_WAR_FAIL32";
+		public static const COUNTRY_WAR_FAIL32:String = "COUNTRY_WAR_FAIL32";
 		 /**  玩家已经死亡 */
-		public static const COUNRY_WAR_FAIL33:String = "COUNRY_WAR_FAIL33";
+		public static const COUNTRY_WAR_FAIL33:String = "COUNTRY_WAR_FAIL33";
 		 /**  当前在击晕状态中 */
-		public static const COUNRY_WAR_FAIL34:String = "COUNRY_WAR_FAIL34";
+		public static const COUNTRY_WAR_FAIL34:String = "COUNTRY_WAR_FAIL34";
 		 /**  非国战双方以及其盟国 */
-		public static const COUNRY_WAR_FAIL35:String = "COUNRY_WAR_FAIL35";
+		public static const COUNTRY_WAR_FAIL35:String = "COUNTRY_WAR_FAIL35";
 		 /**  当前状态无法执行该操作 */
-		public static const COUNRY_WAR_FAIL36:String = "COUNRY_WAR_FAIL36";
+		public static const COUNTRY_WAR_FAIL36:String = "COUNTRY_WAR_FAIL36";
 		 /**  当前没有在战车上 */
-		public static const COUNRY_WAR_FAIL37:String = "COUNRY_WAR_FAIL37";
+		public static const COUNTRY_WAR_FAIL37:String = "COUNTRY_WAR_FAIL37";
 		 /**  没有进入游戏场景,无法下车 */
-		public static const COUNRY_WAR_FAIL38:String = "COUNRY_WAR_FAIL38";
+		public static const COUNTRY_WAR_FAIL38:String = "COUNTRY_WAR_FAIL38";
 		 /**  当前已经在车上了 */
-		public static const COUNRY_WAR_FAIL39:String = "COUNRY_WAR_FAIL39";
+		public static const COUNTRY_WAR_FAIL39:String = "COUNTRY_WAR_FAIL39";
 		 /**  距离战车过远,无法上车 */
-		public static const COUNRY_WAR_FAIL40:String = "COUNRY_WAR_FAIL40";
+		public static const COUNTRY_WAR_FAIL40:String = "COUNTRY_WAR_FAIL40";
 		 /**  没有找到目标司机 */
-		public static const COUNRY_WAR_FAIL41:String = "COUNRY_WAR_FAIL41";
+		public static const COUNTRY_WAR_FAIL41:String = "COUNTRY_WAR_FAIL41";
 		 /**  目标已经死亡,无法上车 */
-		public static const COUNRY_WAR_FAIL42:String = "COUNRY_WAR_FAIL42";
+		public static const COUNTRY_WAR_FAIL42:String = "COUNTRY_WAR_FAIL42";
 		 /**  没有找到战车 */
-		public static const COUNRY_WAR_FAIL43:String = "COUNRY_WAR_FAIL43";
+		public static const COUNTRY_WAR_FAIL43:String = "COUNTRY_WAR_FAIL43";
 		 /**  战车已经被摧毁了,无法上车 */
-		public static const COUNRY_WAR_FAIL44:String = "COUNRY_WAR_FAIL44";
+		public static const COUNTRY_WAR_FAIL44:String = "COUNTRY_WAR_FAIL44";
 		 /**  跟目标不是盟友,无法上车 */
-		public static const COUNRY_WAR_FAIL45:String = "COUNRY_WAR_FAIL45";
+		public static const COUNTRY_WAR_FAIL45:String = "COUNTRY_WAR_FAIL45";
 		 /**  目标战车没有空位了,无法上车 */
-		public static const COUNRY_WAR_FAIL46:String = "COUNRY_WAR_FAIL46";
+		public static const COUNTRY_WAR_FAIL46:String = "COUNTRY_WAR_FAIL46";
 		 /**  当前没有乘车,无法下车 */
-		public static const COUNRY_WAR_FAIL47:String = "COUNRY_WAR_FAIL47";
+		public static const COUNTRY_WAR_FAIL47:String = "COUNTRY_WAR_FAIL47";
 		 /**  没在本国场景 */
-		public static const COUNRY_WAR_FAIL48:String = "COUNRY_WAR_FAIL48";
+		public static const COUNTRY_WAR_FAIL48:String = "COUNTRY_WAR_FAIL48";
 		 /**  当前没有可以观战的国战 */
-		public static const COUNRY_WAR_FAIL49:String = "COUNRY_WAR_FAIL49";
+		public static const COUNTRY_WAR_FAIL49:String = "COUNTRY_WAR_FAIL49";
 		 /**  当前没有进入观战场景 */
-		public static const COUNRY_WAR_FAIL50:String = "COUNRY_WAR_FAIL50";
+		public static const COUNTRY_WAR_FAIL50:String = "COUNTRY_WAR_FAIL50";
 		 /**  切换观战位置太频繁了 */
-		public static const COUNRY_WAR_FAIL51:String = "COUNRY_WAR_FAIL51";
+		public static const COUNTRY_WAR_FAIL51:String = "COUNTRY_WAR_FAIL51";
 		 /**  目标没有找到 */
-		public static const COUNRY_WAR_FAIL52:String = "COUNRY_WAR_FAIL52";
+		public static const COUNTRY_WAR_FAIL52:String = "COUNTRY_WAR_FAIL52";
 		 /**  目标没有进入场景 */
-		public static const COUNRY_WAR_FAIL53:String = "COUNRY_WAR_FAIL53";
+		public static const COUNTRY_WAR_FAIL53:String = "COUNTRY_WAR_FAIL53";
 		 /**  目标不是官员 */
-		public static const COUNRY_WAR_FAIL54:String = "COUNRY_WAR_FAIL54";
+		public static const COUNTRY_WAR_FAIL54:String = "COUNTRY_WAR_FAIL54";
 		 /**  目标不是国战双方 */
-		public static const COUNRY_WAR_FAIL55:String = "COUNRY_WAR_FAIL55";
+		public static const COUNTRY_WAR_FAIL55:String = "COUNTRY_WAR_FAIL55";
 		 /**  目标点不可以行走 */
-		public static const COUNRY_WAR_FAIL56:String = "COUNRY_WAR_FAIL56";
+		public static const COUNTRY_WAR_FAIL56:String = "COUNTRY_WAR_FAIL56";
 		 /**  移动位置非法 */
-		public static const COUNRY_WAR_FAIL57:String = "COUNRY_WAR_FAIL57";
+		public static const COUNTRY_WAR_FAIL57:String = "COUNTRY_WAR_FAIL57";
 		 /**  当前不可以领取战车 */
-		public static const COUNRY_WAR_FAIL58:String = "COUNRY_WAR_FAIL58";
+		public static const COUNTRY_WAR_FAIL58:String = "COUNTRY_WAR_FAIL58";
 		 /**  当前无法请求国战官员信息 */
-		public static const COUNRY_WAR_FAIL59:String = "COUNRY_WAR_FAIL59";
+		public static const COUNTRY_WAR_FAIL59:String = "COUNTRY_WAR_FAIL59";
 		 /**  服务器bug */
-		public static const COUNRY_WAR_FAIL100:String = "COUNRY_WAR_FAIL100";
+		public static const COUNTRY_WAR_FAIL100:String = "COUNTRY_WAR_FAIL100";
 		 /**  当前没在观战模式 */
 		public static const COUNTRY_WAR_WATCH_SCENE_FAIL_1:String = "COUNTRY_WAR_WATCH_SCENE_FAIL_1";
 		 /**  要进入的目标场景没有找到 */
@@ -189,7 +171,9 @@ package com.rpgGame.coreData.configEnum
 		 /**  服务器bug */
 		public static const COUNTRY_WAR_WATCH_SCENE_FAIL_100:String = "COUNTRY_WAR_WATCH_SCENE_FAIL_100";
 		 /**  参拜成功 */
-		public static const COUNRY_WAR_SUCCESS_1:String = "COUNRY_WAR_SUCCESS_1";
+		public static const COUNTRY_WAR_SUCCESS_1:String = "COUNTRY_WAR_SUCCESS_1";
+		 /**  点赞成功 */
+		public static const COUNTRY_WAR_SUCCESS_2:String = "COUNTRY_WAR_SUCCESS_2";
 		 /**  <font color='#ff312e'>$</font>势如猛兽出山，勇士<font color='#ff312e'>$</font>给了<font color='#ff312e'>$</font>最后一击，成功占领边境复活点！ */
 		public static const COUNTRY_WAR_NOTICE_1:String = "COUNTRY_WAR_NOTICE_1";
 		 /**  <font color='#ff312e'>$</font>所向披靡，勇士<font color='#ff312e'>$</font>给了<font color='#ff312e'>$</font>最后一击，成功占领阳平关境复活点！ */
@@ -856,7 +840,7 @@ package com.rpgGame.coreData.configEnum
 		public static const BUY_SHOP_GOODS_FAIL2:String = "BUY_SHOP_GOODS_FAIL2";
 		 /**  客户端发送的购买数量无效 */
 		public static const BUY_SHOP_GOODS_FAIL3:String = "BUY_SHOP_GOODS_FAIL3";
-		 /**  商品已过期 */
+		 /**  物品已超过回购时间，购买失败！ */
 		public static const BUY_SHOP_GOODS_FAIL4:String = "BUY_SHOP_GOODS_FAIL4";
 		 /**  背包空间不足 */
 		public static const BUY_SHOP_GOODS_FAIL5:String = "BUY_SHOP_GOODS_FAIL5";

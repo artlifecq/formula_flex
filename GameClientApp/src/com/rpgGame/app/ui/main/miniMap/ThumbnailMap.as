@@ -7,7 +7,6 @@ package com.rpgGame.app.ui.main.miniMap
 	import com.game.engine3D.vo.map.ClientMapData;
 	import com.game.mainCore.core.controller.KeyController;
 	import com.game.mainCore.core.timer.GameTimer;
-	import com.rpgGame.app.manager.country.CountryManager;
 	import com.rpgGame.app.manager.input.KeyMoveManager;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -1227,20 +1226,20 @@ package com.rpgGame.app.ui.main.miniMap
 					}
 					else if (sceneRole.type == SceneCharType.PLAYER)
 					{
-						if (CountryManager.isMyEnemyCountry((sceneRole.data as RoleData).countryId))
-						{
-							playerSpr.addChild(ico);
-							ico.setData(MapIconType.SCENE_PLAYER_ENEMY_COUNTRY, sceneRole.data as RoleData, sceneRole.x, sceneRole.z);
-							_scenePlayerEnemyCountryVect.push(ico);
-							ico.visible = _scenePlayerEnemyCountryShow;
-						}
-						else
-						{
+//						if (CountryManager.isMyEnemyCountry((sceneRole.data as RoleData).countryId))
+//						{
+//							playerSpr.addChild(ico);
+//							ico.setData(MapIconType.SCENE_PLAYER_ENEMY_COUNTRY, sceneRole.data as RoleData, sceneRole.x, sceneRole.z);
+//							_scenePlayerEnemyCountryVect.push(ico);
+//							ico.visible = _scenePlayerEnemyCountryShow;
+//						}
+//						else
+//						{
 							playerSpr.addChild(ico);
 							ico.setData(MapIconType.SCENE_PLAYER_MY_COUNTRY, sceneRole.data as RoleData, sceneRole.x, sceneRole.z);
 							_scenePlayerMyCountryVect.push(ico);
 							ico.visible = _scenePlayerMyCountryShow;
-						}
+//						}
 					}
 				}
 				ico.updatePos(getChangeSceneToMap(sceneRole.position));

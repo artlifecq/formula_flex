@@ -2,45 +2,25 @@ package com.rpgGame.app.manager.role
 {
 	import com.game.engine3D.config.GlobalConfig;
 	import com.rpgGame.app.manager.AreaMapManager;
-	import com.rpgGame.app.manager.BaZhenTuManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
-	import com.rpgGame.app.manager.ClientSettingManager;
 	import com.rpgGame.app.manager.GameCameraManager;
-	import com.rpgGame.app.manager.MailManager;
-	import com.rpgGame.app.manager.ReliveManager;
 	import com.rpgGame.app.manager.ShortcutsManger;
-	import com.rpgGame.app.manager.SkillCDManager;
-	import com.rpgGame.app.manager.SmallShopItemManager;
-	import com.rpgGame.app.manager.TeamManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
-	import com.rpgGame.app.manager.country.CountryManager;
-	import com.rpgGame.app.manager.countryWar.CountryWarManager;
-	import com.rpgGame.app.manager.goods.BackPackManager;
-	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
-	import com.rpgGame.app.manager.society.SocietyManager;
-	import com.rpgGame.app.manager.stall.StallManager;
 	import com.rpgGame.app.manager.task.MiXinManager;
-	import com.rpgGame.app.manager.task.TaskManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
-	import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
-	import com.rpgGame.coreData.info.MapDataManager;
-	import com.rpgGame.coreData.info.country.countryWar.CountryWarInfoData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
+	import com.rpgGame.netData.player.bean.MyPlayerInfo;
 	
 	import flash.geom.Vector3D;
-	import flash.utils.ByteArray;
-	
-	import app.message.HeroProto;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
@@ -91,69 +71,64 @@ package com.rpgGame.app.manager.role
 			return _actor;
 		}
 
-		public static function initSingleData(data : ByteBuffer) : void
+		public static function initSingleData(heroInfo : MyPlayerInfo) : void
 		{
-			var heroName : String = data.readUTF();
+			var heroName : String = heroInfo.name;
 			//角色信息
 			HeroData.setUserSingleInfo(actorInfo, heroName);
 		
 			ShortcutsManger.getInstance().replaceToTempSpells(HeroData.spellArrs);
 		}
 
-		public static function setLoginData(data : ByteBuffer) : void
+		public static function setLoginData(heroInfo : MyPlayerInfo) : void
 		{
-			var bytes : ByteArray = new ByteArray();
-			data.readBytes(bytes);
-			var heroProto : HeroProto = new HeroProto();
-			heroProto.mergeFrom(bytes);
-
 			//角色信息
-			HeroData.setUserLoginInfo(actorInfo, heroProto);
+			HeroData.setUserLoginInfo(actorInfo, heroInfo);
 
-			if(heroProto.goodsContainerModuleObj)
-			{
-				//背包信息
-				BackPackManager.instance.setGoodsInfo(heroProto.goodsContainerModuleObj.depot);
-			}
+//			if(heroProto.goodsContainerModuleObj)
+//			{
+//				//背包信息
+//				BackPackManager.instance.setGoodsInfo(heroProto.goodsContainerModuleObj.depot);
+//			}
 
 			//仓库信息
 //			var hasStorage : Boolean = heroProto.hasStorage;
 //			StorageManager.instance.setHasStorage(heroProto.hasStorage);
 
 			//技能CD
-			SkillCDManager.getInstance().setHeroCd(heroProto.spellModuleObj);
-			if(heroProto.heroMiscModuleObj)
-			{
-				//系统设置相关
-				ClientSettingManager.setup(heroProto.heroMiscModuleObj.clientConfigs);
-				// 系统设置相关设置后   快捷栏初始化 才能初始化
-				ShortcutsManger.getInstance().setup();
-			}
+//			SkillCDManager.getInstance().setHeroCd(heroProto.spellModuleObj);
+//			if(heroProto.heroMiscModuleObj)
+//			{
+//				//系统设置相关
+//				ClientSettingManager.setup(heroProto.heroMiscModuleObj.clientConfigs);
+//				// 系统设置相关设置后   快捷栏初始化 才能初始化
+//				ShortcutsManger.getInstance().setup();
+//			}
 			
-			if(heroProto.familyModuleObj)
-			{
-				//家族
-				SocietyManager.setHero(heroProto.familyModuleObj);
-			}
-			//任务信息
-			TaskManager.setTaskProto(heroProto.taskModuleObj);
-			//组队数据
-			TeamManager.setHeroTeam(heroProto.teamModuleObj);
-			//复活数据
-			if (heroProto.sceneModuleObj)
-				ReliveManager.setHeroData(heroProto.sceneModuleObj.heroRelive);
-			//回购物品
-			SmallShopItemManager.setBackBuyData(heroProto.shopModuleObj.buyBackGoods);
-
-			GuildManager.setupModuleObj(heroProto.guildModuleObj);
-			//摆摊
-			StallManager.setupStallModuleObj(heroProto.stallModuleObj);
-			//邮件
-			MailManager.setLoginData(heroProto.mailModuleObj);
-			if (heroProto.baZhenTuModuleObj)
-			{
-				BaZhenTuManager.todayEnterTimes = heroProto.baZhenTuModuleObj.todayEnterTimes;
-			}
+//			if(heroProto.familyModuleObj)
+//			{
+//				//家族
+//				SocietyManager.setHero(heroProto.familyModuleObj);
+//			}
+//			//任务信息
+//			TaskManager.setTaskProto(heroProto.taskModuleObj);
+//			//组队数据
+//			TeamManager.setHeroTeam(heroProto.teamModuleObj);
+//			//复活数据
+//			if (heroProto.sceneModuleObj)
+//				ReliveManager.setHeroData(heroProto.sceneModuleObj.heroRelive);
+//			//回购物品
+//			SmallShopItemManager.setBackBuyData(heroProto.shopModuleObj.buyBackGoods);
+//
+//			GuildManager.setupModuleObj(heroProto.guildModuleObj);
+//			//摆摊
+//			StallManager.setupStallModuleObj(heroProto.stallModuleObj);
+//			//邮件
+//			MailManager.setLoginData(heroProto.mailModuleObj);
+//			if (heroProto.baZhenTuModuleObj)
+//			{
+//				BaZhenTuManager.todayEnterTimes = heroProto.baZhenTuModuleObj.todayEnterTimes;
+//			}
 		}
 
 		public static function initActor() : void
@@ -259,17 +234,17 @@ package com.rpgGame.app.manager.role
 		 */
 		public static function get isInCountryWar():Boolean
 		{
-			var currentWarInfo:CountryWarInfoData = CountryWarManager.getCurrentWarInfo();
-			if(currentWarInfo)
-			{
-				if(!CountryManager.isMyEnemyCountry(currentWarInfo.attackCountry) || !CountryManager.isMyEnemyCountry(currentWarInfo.defenceCountry))
-				{
-					if(MapDataManager.currentScene.isCountryWarMap && actorInfo.sceneSequence == currentWarInfo.defenceCountry)
-					{
-						return true;
-					}
-				}
-			}
+//			var currentWarInfo:CountryWarInfoData = CountryWarManager.getCurrentWarInfo();
+//			if(currentWarInfo)
+//			{
+//				if(!CountryManager.isMyEnemyCountry(currentWarInfo.attackCountry) || !CountryManager.isMyEnemyCountry(currentWarInfo.defenceCountry))
+//				{
+//					if(MapDataManager.currentScene.isCountryWarMap && actorInfo.sceneSequence == currentWarInfo.defenceCountry)
+//					{
+//						return true;
+//					}
+//				}
+//			}
 			return false;
 		}
 		

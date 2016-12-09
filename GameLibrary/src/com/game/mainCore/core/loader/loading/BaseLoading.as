@@ -1,5 +1,4 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.core.loader.loading
+﻿package com.game.mainCore.core.loader.loading
 {
     import flash.events.EventDispatcher;
     import flash.display.MovieClip;
@@ -162,7 +161,5 @@ package com.game.mainCore.core.loader.loading
                     return;
             };
         }
-
-
     }
-}//package com.game.mainCore.core.loader.loading
+}

@@ -93,12 +93,12 @@ package com.rpgGame.coreData.info.item
 			equipInfo.expireTime = data.expireTime ? data.expireTime.toNumber() : 0;
 			equipInfo.evaluate = equipment.evaluate;
 			equipInfo.quality = equipment.quality;
-			equipInfo.base_stat = equipment.baseStat;
-			equipInfo.random_stat = equipment.randomStat;
+//			equipInfo.base_stat = equipment.baseStat;
+//			equipInfo.random_stat = equipment.randomStat;
 			equipInfo.durability = equipment.durability;
 			equipInfo.used_durability = equipment.usedDurability;
 			equipInfo.refined_times = equipment.refinedTimes;
-			equipInfo.refined_stat = equipment.refinedStat;
+//			equipInfo.refined_stat = equipment.refinedStat;
 			equipInfo.build_signature = equipment.buildSignature;
 			equipInfo.fighting_amount = equipment.fightingAmount.toNumber();
 			equipInfo.general_taoz_id = equipment.generalTaozId;

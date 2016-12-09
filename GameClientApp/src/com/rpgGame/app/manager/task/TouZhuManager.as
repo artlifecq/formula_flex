@@ -3,7 +3,6 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.collect.CollectManager;
-	import com.rpgGame.app.manager.country.CountryManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -12,19 +11,18 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.core.events.TouZhuEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
-	import com.rpgGame.coreData.cfg.npc.NpcCfgData;
 	import com.rpgGame.coreData.cfg.task.TouZhuCfgData;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.info.task.PrizeInfo;
 	import com.rpgGame.coreData.info.task.daily.TouZhuTaskData;
 	import com.rpgGame.coreData.lang.LangTask;
 	import com.rpgGame.coreData.role.HeroData;
-
+	
 	import flash.geom.Point;
-
+	
 	import app.message.MonsterDataProto;
 	import app.message.TouZhuTaskProto;
-
+	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -129,71 +127,71 @@ package com.rpgGame.app.manager.task
 		public static function gotoTouZhu() : void
 		{
 			var npcData : MonsterDataProto;
-			var isAtEnemyCountry : Boolean = CountryManager.isAtEnemyCountry();
-			var isMixComplete : Boolean = isCompleteTouZhu();
-
-			if (touZhuTask == null)
-			{
-				if (CountryManager.isAtMyCountry())
-				{
-					//在本国就去接任务
-					npcData = MonsterDataManager.getData(TouZhuCfgData.acceptNpc);
-				}
-				else
-				{
-					//非本国就去边境，然后回国
-					npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
-				}
-			}
-			else
-			{
-				if (isAtEnemyCountry) //在别国的国家这时可以去找
-				{
-					//在敌国时
-					if (isMixComplete)
-					{
-						//已经完成就去边境，然后回国完成
-						npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
-					}
-					else
-					{
-						//猪还没偷到，就去偷
-						var monsterID : int = TouZhuCfgData.getTouZhuId();
-						npcData = MonsterDataManager.getData(monsterID);
-						var position : Point = MonsterDataManager.getMonsterPosition(npcData);
-						if (position == null)
-							return;
-
-						var sceneId : int = MonsterDataManager.getMonsterSceneId(monsterID);
-
-						MainRoleSearchPathManager.walkToScene(sceneId, position.x, position.y, null, 200);
-						return;
-					}
-				}
-				else
-				{
-					//本国的
-					if (isMixComplete)
-					{
-						//本国
-						if (CountryManager.isAtMyCountry())
-						{
-							//完成的去交任务、到自己国家
-							npcData = MonsterDataManager.getData(TouZhuCfgData.completeNpc);
-						}
-						else
-						{
-							//在盟国，要回国
-							npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
-						}
-					}
-					else
-					{
-						//还没交的，去边境出国
-						npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
-					}
-				}
-			}
+//			var isAtEnemyCountry : Boolean = CountryManager.isAtEnemyCountry();
+//			var isMixComplete : Boolean = isCompleteTouZhu();
+//
+//			if (touZhuTask == null)
+//			{
+//				if (CountryManager.isAtMyCountry())
+//				{
+//					//在本国就去接任务
+//					npcData = MonsterDataManager.getData(TouZhuCfgData.acceptNpc);
+//				}
+//				else
+//				{
+//					//非本国就去边境，然后回国
+//					npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
+//				}
+//			}
+//			else
+//			{
+//				if (isAtEnemyCountry) //在别国的国家这时可以去找
+//				{
+//					//在敌国时
+//					if (isMixComplete)
+//					{
+//						//已经完成就去边境，然后回国完成
+//						npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
+//					}
+//					else
+//					{
+//						//猪还没偷到，就去偷
+//						var monsterID : int = TouZhuCfgData.getTouZhuId();
+//						npcData = MonsterDataManager.getData(monsterID);
+//						var position : Point = MonsterDataManager.getMonsterPosition(npcData);
+//						if (position == null)
+//							return;
+//
+//						var sceneId : int = MonsterDataManager.getMonsterSceneId(monsterID);
+//
+//						MainRoleSearchPathManager.walkToScene(sceneId, position.x, position.y, null, 200);
+//						return;
+//					}
+//				}
+//				else
+//				{
+//					//本国的
+//					if (isMixComplete)
+//					{
+//						//本国
+//						if (CountryManager.isAtMyCountry())
+//						{
+//							//完成的去交任务、到自己国家
+//							npcData = MonsterDataManager.getData(TouZhuCfgData.completeNpc);
+//						}
+//						else
+//						{
+//							//在盟国，要回国
+//							npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
+//						}
+//					}
+//					else
+//					{
+//						//还没交的，去边境出国
+//						npcData = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
+//					}
+//				}
+//			}
 
 			if (npcData == null)
 				return;

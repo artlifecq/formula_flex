@@ -1,9 +1,7 @@
-﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.game.mainCore.libCore.vo
+﻿package com.game.mainCore.libCore.vo
 {
     public class LNode 
     {
-
         private var _id:String;
         private var _data:Object;
         private var _pre:LNode;
@@ -19,7 +17,7 @@ package com.game.mainCore.libCore.vo
 
         public function get pre():LNode
         {
-            return (_pre);
+            return _pre;
         }
 
         public function set pre($ln:LNode):void
@@ -29,7 +27,7 @@ package com.game.mainCore.libCore.vo
 
         public function get next():LNode
         {
-            return (_next);
+            return _next;
         }
 
         public function set next($ln:LNode):void
@@ -39,7 +37,7 @@ package com.game.mainCore.libCore.vo
 
         public function get data():Object
         {
-            return (_data);
+            return _data;
         }
 
         public function set data($value:Object):void
@@ -49,9 +47,7 @@ package com.game.mainCore.libCore.vo
 
         public function get id():String
         {
-            return (_id);
+            return _id;
         }
-
-
     }
-}//package com.game.mainCore.libCore.vo
+}

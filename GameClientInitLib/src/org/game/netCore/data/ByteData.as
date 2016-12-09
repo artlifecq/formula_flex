@@ -83,6 +83,12 @@ package org.game.netCore.data
             _buf.writeByte(value);
         }
 		
+		protected function writeBytes(by:ByteArray):void
+		{
+			by.position = 0;
+			_buf.writeBytes(by);
+		}
+		
 		protected function writeBoolean(value:Boolean):void 
 		{
 			_buf.writeByte(value?1:0);
@@ -140,7 +146,7 @@ package org.game.netCore.data
 		
         protected function readBytes():ByteArray 
 		{
-            var length:int = _buf.readInt();
+            var length:int = _buf.readShort();
             var bytes:ByteArray = new ByteArray();
             _buf.readBytes(bytes, 0, length);
             return bytes;

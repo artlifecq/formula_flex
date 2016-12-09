@@ -134,7 +134,7 @@ package com.gameClient.log
 			
 			if(enableTrace)
 			{
-				trace(arg,new Date().toString());
+				trace(arg/*,new Date().toString()*/);
 			}
 			
 			for each(var fun:Function in _callBackList)

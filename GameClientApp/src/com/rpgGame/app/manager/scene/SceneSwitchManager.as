@@ -17,8 +17,6 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.manager.SceneCameraLensEffectManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.countryWar.CountryWarWatchManager;
-	import com.rpgGame.app.manager.countryWar.CountryWarZhanCheManager;
 	import com.rpgGame.app.manager.input.InputManger;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -33,16 +31,8 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.coreData.cfg.ClientSceneCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
 	import com.rpgGame.coreData.clientConfig.ClientScene;
-	import com.rpgGame.coreData.info.Map2dDataManager;
 	import com.rpgGame.coreData.info.MapDataManager;
-	import com.rpgGame.coreData.info.map.EnumMapType;
 	import com.rpgGame.coreData.info.map.SceneData;
-	import com.rpgGame.coreData.info.map.map2d.EnterSceneInfo;
-	import com.rpgGame.coreData.info.map.map2d.MapDataInfo;
-	import com.rpgGame.coreData.info.map.map2d.MapInfo;
-	import com.rpgGame.coreData.info.map.map2d.SceneInfo;
-	import com.rpgGame.coreData.info.map.map2d.staticMapData.IMapData;
-	import com.rpgGame.coreData.info.map.map2d.staticMapData.NormalSceneData;
 	import com.rpgGame.coreData.lang.LangStoryDungeon;
 	import com.rpgGame.coreData.lang.LangText;
 	import com.rpgGame.coreData.type.EffectUrl;
@@ -99,13 +89,11 @@ package com.rpgGame.app.manager.scene
 		/**当前地图ID*/
 		private static var _curtMapID:uint = 0;
 		/**上一地图资源*/
-		private static var _lastMapInfo:MapInfo;
+		private static var _lastMapInfo:SceneData;
 		/**当前地图资源*/
-		private static var _curtMapInfo:MapInfo;
+		private static var _curtMapInfo:SceneData;
 		
-		private static var _isChgLine:Boolean = false;
 		private static var _isSameResMap:Boolean = false;
-		private static var _currMapType:int;
 		
 		private static var _isReconnect:Boolean = false;
 		/**
@@ -115,23 +103,16 @@ package com.rpgGame.app.manager.scene
 		public static function change2dMap($isReconnect:Boolean=false):void
 		{
 			_isReconnect = $isReconnect;
-			var tips:String = "场景切换中...";
 			if($isReconnect)
 			{
-				tips = "掉线重连中..."
 				setLastMapID(curtMapID);
 				setCurtMapInfoByID(MainRoleManager.actorInfo.mapID);
 				checkIsSameResMap();
 			}
 			
-			///此行是测试代码，临时加上去的，也不知道服务器跟客户端是怎么通讯的，先暂时这么写a
-			Map2dDataManager.setSceneConfig(new SceneInfo());
+			setCurtMapInfoByID(MainRoleManager.actorInfo.mapID);
 			
-			setCurtMapInfoByID(MainRoleManager.actorInfo.mapID);//初次登录，mapID来自登录协议
-			
-			Map2dDataManager.getMapConfigData(curtMapInfo.id,onConfigLoaded);//获取地图配置数据
-			
-//			EventManager.dispatchEvent(MapEvent.MAP_SWITCH_OPEN,curtMapInfo);//广播开始切场景消息
+			MapDataManager.getMapConfigData(curtMapInfo.sceneId,onConfigLoaded);//获取地图配置数据
 		}
 		
 		/**
@@ -139,51 +120,22 @@ package com.rpgGame.app.manager.scene
 		 * @param mapConfig
 		 * 
 		 */
-		private static function onConfigLoaded(mapConfig:MapConfig,mapDataInfo:MapDataInfo):void
+		private static function onConfigLoaded(mapConfig:MapConfig):void
 		{
 			curtMapInfo.mapConfig = mapConfig;
-			curtMapInfo.mapDataInfo = mapDataInfo;
-			mapConfig.mapID = curtMapInfo.id;
-			var bmpData:AsyncMapTexture = Map2dDataManager.getCacheMiniMapBmpData(curtMapInfo.id);
+			mapConfig.mapID = curtMapInfo.sceneId;
+			var bmpData:AsyncMapTexture = MapDataManager.getCacheMiniMapBmpData(curtMapInfo.sceneId);
 			
 			curtMapInfo.mapConfig.smallMapTexture = bmpData;
-//			EventManager.dispatchEvent(MapEvent.LOAD_CONFIG_COMPLETE,curtMapInfo);
 
-			//			SocketConnection.addCmdListener(Mod003_SceneMessages.S2C_SCENE_ENTER,onEnterScene);
-			//			SceneSender.enterScene();
-			
-			//测试代码
 			onEnterScene();
 		}
 		
-		private static function onEnterScene(/*buffer:ByteBuffer*/):void
-		{
-			
-			//			SocketConnection.removeCmdListener(Mod003_SceneMessages.S2C_SCENE_ENTER,onEnterScene);
-			var info:EnterSceneInfo = new EnterSceneInfo(/*buffer,MainManager.actorID*/);//解析场景信息
-			dealWithLastMap(info);//处理上张场景的逻辑。
-			//
-			/*var bodyAp:RenderUnit = MainManager.actor.getBodyAp(false);
-			if(bodyAp)
-			{
-			var colorTF:ColorTransform = MapDataManager.getColorTransform(MapManager.curtMapID);
-			if(colorTF)
-			{
-			bodyAp.addColorTransform(colorTF);//根据地图叠加环境颜色
-			}
-			else
-			{
-			bodyAp.removeColorTransform();
-			}
-			}*/
-			
+		private static function onEnterScene():void
+		{	
 			if(_isSameResMap)
 			{
-				if(_isChgLine)
-				{
-//					EventManager.dispatchEvent(MapEvent.LINE_CHANGE);
-				}
-				onCfgCmp(info);
+				onCfgCmp();
 			}
 			else
 			{
@@ -192,27 +144,19 @@ package com.rpgGame.app.manager.scene
 				var mapDataName : String = ClientConfig.getMapDataName();
 
 				Scene.scene.switchScene(
-					curtMapInfo.id,
+					curtMapInfo.sceneId,
 					curtMapInfo.mapConfig,
-					ClientConfig.getMapZoneDir(curtMapInfo.mapData.mapPackName),
+					ClientConfig.getMapZoneDir(curtMapInfo.mapNameResource),
 					mapUrl + "/" +mapName,
 					onCfgCmp,
-					enterSceneSuccessed,false,[info]);
+					enterSceneSuccessed,false);
 				Scene.scene.gameScene3d.loadMapData(mapName, mapUrl + "/" +mapDataName,onMapDataComplete);
 			}
 		}
 		
-		private static function dealWithLastMap($info:EnterSceneInfo):void
+		private static function dealWithLastMap():void
 		{
-			
-//			Scene_CursorCharHelper.hideCursor();
-			//
-			/*if(curtMapInfo.lineID != $info.lineID &&  _lastMapID == _curtMapID)//线路不一样，同时场景ID一样，才算换线。
-			{
-			_isChgLine = true;
-			}
-			curtMapInfo.lineID = $info.lineID;*/
-			var isDesMap:Boolean = !_isChgLine;
+			var isDesMap:Boolean = false;
 			if(_isReconnect)
 			{
 				isDesMap = !_isSameResMap;
@@ -225,11 +169,7 @@ package com.rpgGame.app.manager.scene
 			{
 				
 			}
-			//如果不是普通地图，清空自动寻路
-			if(curtMapInfo.mapData.mapType != EnumMapType.MAP_TYPE_NORMAL)
-			{
-//				EventManager.dispatchEvent(MapEvent.CLEAR_SEARCH_PATH);
-			}
+			
 			onMapProcess();
 		}
 		
@@ -237,25 +177,24 @@ package com.rpgGame.app.manager.scene
 		{
 			try
 			{
-				var cls:Class = getDefinitionByName(CLS_PATH + curtMapInfo.id) as Class;
+				var cls:Class = getDefinitionByName(CLS_PATH + curtMapInfo.sceneId) as Class;
 				if(cls)
 				{
 					_mapPros = new cls();
 					_mapPros.setup();
-//					EventManager.dispatchEvent(MapEvent.MAP_INIT,curtMapInfo);
 				}
 			}
 			catch(e:Error)
 			{
 				_mapPros = new BaseMapProcess();
 				_mapPros.setup();
-				GameLog.add("##----------------没有找到对应的地图功能类----------" + curtMapInfo.id);
+				GameLog.add("##----------------没有找到对应的地图功能类----------" + curtMapInfo.sceneId);
 			}
 		}
 		
-		private static function onCfgCmp(info:EnterSceneInfo):void
+		private static function onCfgCmp():void
 		{
-			var isResetData:Boolean = !_isChgLine;
+			var isResetData:Boolean = false;
 			if(_isReconnect)
 			{
 				isResetData = !_isSameResMap;
@@ -268,12 +207,7 @@ package com.rpgGame.app.manager.scene
 				Scene.scene.sceneZoneMapLayer.strongLoadMap = true;
 				
 				Scene.scene.sceneRender.startRender(true);
-				
-				/*if(_blockerSP)
-				{
-					_blockerSP.graphics.clear();
-				}
-				_isDarwBlocker = false;*/
+
 			}
 			//前面有上张地图的死亡状态判断，所以复活要在这里处理
 			mapSwitchComplete();//地图切换结束
@@ -284,33 +218,13 @@ package com.rpgGame.app.manager.scene
 		/**地图切换结束*/
 		private static function mapSwitchComplete():void
 		{
-			/*if(!_isChgLine && !_isReconnect)
-			{
-			MapLoadManager.initAfterMapSwitchComplete();
-			SceneCharPatrolManager.init();
-			}
-			_isMapSwitchComplete = true;
-			if (MapDataManager.isNormalScene(MapManager.curtMapInfo.id))
-			{
-			if (!isInLayerStory) 
-			{
-			SceneSender.reqSceneLineInfo();
-			}
-			}*/
-			
 			//加载马赛克小地图
-			Map2dDataManager.getMiniMapBmpData(curtMapInfo.id,onMiniMapCmp);
+			MapDataManager.getMiniMapBmpData(curtMapInfo.sceneId,onMiniMapCmp);
 		}
 		
 		private static function onMiniMapCmp(bmpData:AsyncMapTexture,mapID:uint):void
 		{
-			var mapdata:IMapData;
-			if(curtMapInfo.mapData is NormalSceneData)
-				mapdata = curtMapInfo.mapData as NormalSceneData;
-			else
-				mapdata = curtMapInfo.mapData;
-			
-			Scene.scene.mapConfig.smallMapUrl = ClientConfig.getSmallMap(mapdata.mapPackName);
+			Scene.scene.mapConfig.smallMapUrl = ClientConfig.getSmallMap(curtMapInfo.mapNameResource);
 			Scene.scene.mapConfig.smallMapTexture = bmpData;
 			Scene.scene.drawSmallMap();
 			onSmallMapCmp(bmpData);
@@ -319,30 +233,19 @@ package com.rpgGame.app.manager.scene
 		/**小地图加载完成*/
 		private static function onSmallMapCmp(bmpData:AsyncMapTexture):void
 		{
-			//客户端加载地图XML成功
 //			EventManager.dispatchEvent(MapEvent.LOAD_SMALL_MAP_COMPLETE,{mapID:curtMapInfo.id,mapBG:bmpData});
 		}
 		
 		private static function destroy():void
 		{
-			//			MapLoadManager.clear();
-			//			SceneCharPatrolManager.clear();
 			if(_mapPros)
 			{
 				_mapPros.destroy();
 				_mapPros = null;
 			}
 			//
-//			Scene_CursorCharHelper.hideCursor();
 			//关闭用户操作
 			KeyController.instance.clear();
-			//停掉所有音乐
-			/*if(_resetBgSound)
-			{
-			TSoundManager.stopAllSound();
-			}*/
-			//
-//			Scene.scene.sceneRender.stopRender();
 		}
 		
 		//判断当前场景地图ID是否与上一场景地图ID相同，相同为换线。
@@ -359,7 +262,7 @@ package com.rpgGame.app.manager.scene
 			{
 				if(lastMapID)
 				{
-					if(lastMapInfo.mapData.map == curtMapInfo.mapData.map)
+					if(lastMapInfo.map == curtMapInfo.map)
 					{
 						_isSameResMap = true;
 					}
@@ -375,17 +278,13 @@ package com.rpgGame.app.manager.scene
 		private static function setLastMapID(lastMapID:uint):void
 		{
 			_lastMapID = lastMapID;
-			_lastMapInfo = Map2dDataManager.getMapInfo(lastMapID);
+			_lastMapInfo = MapDataManager.getMapInfo(lastMapID);
 		}
 		
 		public static function get curtMapID():uint
 		{
 			return _curtMapID;
 		}
-		public static function get currMapType():int
-		{
-			return _currMapType;	
-		} 
 		
 		public static function get currMapName():String
 		{
@@ -397,25 +296,23 @@ package com.rpgGame.app.manager.scene
 			var preMapPackName:String;
 			if (_curtMapInfo) 
 			{
-				preMapPackName = _curtMapInfo.mapData.mapPackName;
+				preMapPackName = _curtMapInfo.mapNameResource;
 			}
 			_curtMapID = mapID;
-			_currMapType = Map2dDataManager.getMapType(_curtMapID);
-			_curtMapInfo = Map2dDataManager.getMapInfo(mapID);
-//			MapAreaManager.currCheckMapId = _curtMapID;
-//			MapAreaManager.checkAreaEvent();
+			_curtMapInfo = MapDataManager.getMapInfo(mapID);
+
 			if (preMapPackName) 
 			{
-				Map2dDataManager.checkDelayDisposeMap(preMapPackName);
+				MapDataManager.checkDelayDisposeMap(preMapPackName);
 			}
 		}
 		
-		public static function get lastMapInfo():MapInfo
+		public static function get lastMapInfo():SceneData
 		{
 			return _lastMapInfo;
 		}
 		
-		public static function get curtMapInfo():MapInfo
+		public static function get curtMapInfo():SceneData
 		{
 			return _curtMapInfo;
 		}
@@ -455,6 +352,7 @@ package com.rpgGame.app.manager.scene
 			SceneManager.getScene().clearAreaMap(1);
 			SceneManager.getScene().removeAllSceneObj();
 			TrusteeshipManager.getInstance().stopAll();
+			
 			var currMapInfo : SceneData = MapDataManager.getMapInfo(currentMapId); //获取地图配置数据
 			var mapInfo : SceneData = MapDataManager.getMapInfo(mapID); //获取地图配置数据
 			MapDataManager.currentScene = mapInfo;
@@ -474,9 +372,9 @@ package com.rpgGame.app.manager.scene
 					var cfg : ClientScene = ClientSceneCfgData.getSceneInfo(mapID);
 					if (cfg)
 					{
-						MainRoleManager.actorInfo.x = 1000;//2700;//cfg.enter_x;
-						MainRoleManager.actorInfo.y = -1000;//-1400;//cfg.enter_y;
-						_mapRes = cfg.map_name_resource;
+						MainRoleManager.actorInfo.x = 2700;
+						MainRoleManager.actorInfo.y = 1400;
+						_mapRes = cfg.q_mapres;
 					}
 				}
 				else
@@ -526,7 +424,7 @@ package com.rpgGame.app.manager.scene
 				BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
 			}
 			MainRoleManager.actor.avatar.lightPicker = SceneManager.getScene().entityLightPicker;
-			var speed:int = MainRoleManager.actorInfo.spriteStat.moveSpeed;
+//			var speed:int = MainRoleManager.actorInfo.spriteStat.moveSpeed;
 			MainRoleManager.actorInfo.spriteStat.moveSpeed = 200;
 			sendSceneLoaded();
 		}
@@ -560,21 +458,22 @@ package com.rpgGame.app.manager.scene
 			{
 				EventManager.dispatchEvent(MapEvent.MAP_SWITCH_COMPLETE);
 			}
-			else if (MainRoleManager.isTakeZhanChe)
-			{
-				if (CountryWarZhanCheManager.zhanCheSceneLoaded)
-				{
-					SceneSender.sceneLoaded(SceneManager.viewDistance);
-				}
-				CountryWarZhanCheManager.sceneLoadedWhenTakeZhanChe = true;
-			}
-			else if(CountryWarWatchManager.isWatching)
-			{
-				CountryWarWatchManager.reqEnterWatchSceneToServer();
-			}
+//			else if (MainRoleManager.isTakeZhanChe)
+//			{
+//				if (CountryWarZhanCheManager.zhanCheSceneLoaded)
+//				{
+//					SceneSender.sceneLoaded(SceneManager.viewDistance);
+//				}
+//				CountryWarZhanCheManager.sceneLoadedWhenTakeZhanChe = true;
+//			}
+//			else if(CountryWarWatchManager.isWatching)
+//			{
+//				CountryWarWatchManager.reqEnterWatchSceneToServer();
+//			}
 			else
 			{
-				SceneSender.sceneLoaded(SceneManager.viewDistance);
+//				SceneSender.sceneLoaded(SceneManager.viewDistance);老的代码
+				SceneSender.SendLoadFinishMessage();
 			}
 		}
 

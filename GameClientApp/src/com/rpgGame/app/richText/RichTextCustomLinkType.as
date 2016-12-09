@@ -1,6 +1,6 @@
 package com.rpgGame.app.richText
 {
-	
+
 	/**
 	 * 富文本中单元的链接类型
 	 * @author GuoDong.Zhang
@@ -33,6 +33,8 @@ package com.rpgGame.app.richText
 		/** 走到某个场景的某个点	    需要参数：data:sceneId,posX,posY */
 		public static const WALK_TO_SCENE_POS_TYPE : String = "107";
 		/** 任务，对话npc  	需要参数：data:npcId 	*/
-		public static const TASK_TO_NPC_DIAILOG_TYPE:String = "108";
+		public static const TASK_TO_NPC_DIAILOG_TYPE : String = "108";
+		/** 任务，走向怪物 需要参数：data:npcId */
+		public static const WALK_TO_SCENE_MONSTER_TYPE : String = "109";
 	}
 }

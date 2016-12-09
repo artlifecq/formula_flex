@@ -3,7 +3,6 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.app.manager.SmallShopItemManager;
 	import com.rpgGame.app.manager.SpellManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.crown.CrownManager;
 	import com.rpgGame.app.manager.mount.MountEquipmentManager;
 	import com.rpgGame.app.manager.mount.MountManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -314,7 +313,7 @@ package com.rpgGame.app.manager.goods
 				}
 				case GoodsType.SEAL:
 				{
-					CrownManager.openCrownPanel();
+//					CrownManager.openCrownPanel();
 					return;
 				}
 				case GoodsType.MEDICINE:
