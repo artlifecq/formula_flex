@@ -21,7 +21,7 @@ package com.game.engine2D.core
 	public class BPGByteTexture extends Texture2DBase
 	{
 		private var _isReady:Boolean = false;
-		private var _texture:TextureBase;
+		private var _bpgTexture:TextureBase;
 		/** 紧释放显存，可能还会在使用 */
 		private var _isDisposeTexture:Boolean = false;
 		/** 释放显存及销毁，不会在使用 */
@@ -133,18 +133,18 @@ package com.game.engine2D.core
 			_isDisposeTexture = false;
 			if (isAsync)
 			{
-				_texture = super.createTexture(stage3DProxy);
-				_texture.addEventListener(Event.TEXTURE_READY, onTextureReady);
-				return _texture;
+				_bpgTexture = super.createTexture(stage3DProxy);
+				_bpgTexture.addEventListener(Event.TEXTURE_READY, onTextureReady);
+				return _bpgTexture;
 			}
 			return super.createTexture(stage3DProxy);
 		}
 		
 		protected function onTextureReady(event:Event):void
 		{
-			if (_texture)
+			if (_bpgTexture)
 			{
-				_texture.removeEventListener(Event.TEXTURE_READY, onTextureReady);
+				_bpgTexture.removeEventListener(Event.TEXTURE_READY, onTextureReady);
 				_isReady = true;
 				if (_isDispose)
 				{
@@ -153,7 +153,7 @@ package com.game.engine2D.core
 				else if (_isDisposeTexture)//仅释放显存
 				{
 					super.invalidateContent();
-					_texture = null;
+					_bpgTexture = null;
 				}
 			}
 		}
@@ -167,19 +167,19 @@ package com.game.engine2D.core
 		/** 仅释放显存 */
 		override public function invalidateContent():void
 		{
-			if (_texture && isAsync) 
+			if (_bpgTexture && isAsync) 
 			{
 				_isDisposeTexture = !_isReady;
 				if (_isReady)
 				{
 					super.invalidateContent();
-					_texture = null;
+					_bpgTexture = null;
 				}
 			}
 			else
 			{
 				super.invalidateContent();
-				_texture = null;
+				_bpgTexture = null;
 			}
 		}
 
@@ -196,7 +196,7 @@ package com.game.engine2D.core
 			if (_bgraData)_bgraData.dispose();
 			_bgraData = null;
 			_bpgData = null;
-			_texture = null;
+			_bpgTexture = null;
 			super.dispose();
 		}
 

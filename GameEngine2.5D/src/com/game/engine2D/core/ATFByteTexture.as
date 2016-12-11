@@ -16,7 +16,7 @@ package com.game.engine2D.core
 	public class ATFByteTexture extends Texture2DBase
 	{
 		private var _isReady:Boolean = false;
-		private var _texture:TextureBase;
+		private var _atfTexture:TextureBase;
 		private var _isDispose:Boolean = false;
 		private var _isDisposeTexture:Boolean = false;
 		private var _atfData:ATFData;
@@ -54,28 +54,28 @@ package com.game.engine2D.core
 		{
 			if (isAsync)
 			{
-				_texture = super.createTexture(stage3DProxy);
-				_texture.addEventListener(Event.TEXTURE_READY, onTextureReady);
-				return _texture;
+				_atfTexture = super.createTexture(stage3DProxy);
+				_atfTexture.addEventListener(Event.TEXTURE_READY, onTextureReady);
+				return _atfTexture;
 			}
 			return super.createTexture(stage3DProxy);
 		}
 		
 		protected function onTextureReady(event:Event):void
 		{
-			if (_texture)
+			if (_atfTexture)
 			{
-				_texture.removeEventListener(Event.TEXTURE_READY, onTextureReady);
+				_atfTexture.removeEventListener(Event.TEXTURE_READY, onTextureReady);
 				_isReady = true;
 				if (_isDispose)
 				{
 					super.dispose();
-					_texture = null;
+					_atfTexture = null;
 				}
 				else if (_isDisposeTexture)
 				{
 					super.invalidateContent();
-					_texture = null;
+					_atfTexture = null;
 				}
 			}
 		}
@@ -88,19 +88,19 @@ package com.game.engine2D.core
 		
 		override public function invalidateContent():void
 		{
-			if (_texture && isAsync) 
+			if (_atfTexture && isAsync) 
 			{
 				_isDisposeTexture = !_isReady;
 				if (_isReady)
 				{
 					super.invalidateContent();
-					_texture = null;
+					_atfTexture = null;
 				}
 			}
 			else
 			{
 				super.invalidateContent();
-				_texture = null;
+				_atfTexture = null;
 			}
 		}
 		
@@ -109,7 +109,7 @@ package com.game.engine2D.core
 			_isDispose = true;
 			if (_isReady){
 				super.dispose();
-				_texture = null;
+				_atfTexture = null;
 			}
 			_atfData = null;
 		}

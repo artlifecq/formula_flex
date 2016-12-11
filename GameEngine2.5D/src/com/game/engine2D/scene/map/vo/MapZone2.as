@@ -69,7 +69,7 @@ package com.game.engine2D.scene.map.vo
         
         public function setContainer(container : ObjectContainer3D, x : int, y : int) : void {
             if (null == this._mesh) {
-                this._mesh = GlobalConfig2D.MapZoneClass.create(null);
+                this._mesh = GlobalConfig2D.MapZoneClass["create"](null);
                 this._mesh.width = SceneConfig.ZONE_WIDTH;
                 this._mesh.height = SceneConfig.ZONE_HEIGHT;
                 this._key = getKey(this._titleX, this._titleY);
@@ -141,7 +141,7 @@ package com.game.engine2D.scene.map.vo
                 }
             }
             if (this._mesh) {
-                GlobalConfig2D.MapZoneClass.recycle(this._mesh);
+                GlobalConfig2D.MapZoneClass["recycle"](this._mesh);
                 this._mesh = null;
             }
             if (this._texture) {

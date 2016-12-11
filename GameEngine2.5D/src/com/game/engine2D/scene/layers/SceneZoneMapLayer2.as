@@ -26,7 +26,7 @@ package com.game.engine2D.scene.layers {
         
         private var _isStrongLoadMap : Boolean = false;         // 是否强制加载地图
         private var _isNeedSortMapZone : Boolean = true;        // 是否需要排序
-        private var _scene : Scene;                             // 场景
+        private var _gameScene : Scene;                             // 场景
         private var _camera : SceneCamera;                      // 场景摄像机
         private var _oldCameraPos : Point;                      // 旧的摄像机位置
         
@@ -50,17 +50,17 @@ package com.game.engine2D.scene.layers {
         
         public function SceneZoneMapLayer2(scene : Scene) {
             this._oldCameraPos = new Point(int.MAX_VALUE, int.MAX_VALUE);
-            this._scene = scene;
+            this._gameScene = scene;
             this._camera = scene.sceneCamera;
             
-            this._mapZoneCache = new LRUCache(200);
+            this._mapZoneCache = new LRUCache(1000);
             this._mapZoneWaitLoad = new Dictionary();
             this._mapZoneLoadList = new Dictionary();
             this._mapZoneDraw = new Dictionary();
         }
         
         public function run() : void {
-            if (!this._scene.mapConfig) {
+            if (!this._gameScene.mapConfig) {
                 this._isNeedSortMapZone = true;
                 return;
             }
@@ -137,7 +137,7 @@ package com.game.engine2D.scene.layers {
             var filePath : String;
             for (key in this._mapZoneWaitLoad) {
                 this._mapZoneLoadList[key] = this._mapZoneWaitLoad[key];
-                filePath = this._scene.mapConfig.zoneMapUrl.replace("#", key);
+                filePath = this._gameScene.mapConfig.zoneMapUrl.replace("#", key);
                 if (null != GlobalConfig2D.version) {
                     filePath = GlobalConfig2D.version(filePath);
                 }
@@ -208,8 +208,8 @@ package com.game.engine2D.scene.layers {
                                                               this._curMapZone.titleY,
                                                               cameraZoneRangeX,
                                                               cameraZoneRangeY);
-                var zoneMaxX : int = Math.ceil(this._scene.mapConfig.gridH / SceneConfig.ZONE_SCALE_WIDTH);
-                var zoneMaxY : int = Math.ceil(this._scene.mapConfig.gridV / SceneConfig.ZONE_SCALE_HEIGHT);
+                var zoneMaxX : int = Math.ceil(this._gameScene.mapConfig.gridH / SceneConfig.ZONE_SCALE_WIDTH);
+                var zoneMaxY : int = Math.ceil(this._gameScene.mapConfig.gridV / SceneConfig.ZONE_SCALE_HEIGHT);
                 var key : String = null;
                 var tempMapZone : MapZone2;
                 var minX : int = pa[0].x - 2;
@@ -285,8 +285,8 @@ package com.game.engine2D.scene.layers {
         }
         
         private function getMapZone(zoneX : int, zoneY : int, mapZone : MapZone2 = null) : MapZone2 {
-            var h : int = Math.ceil(this._scene.mapConfig.gridH / SceneConfig.ZONE_SCALE_WIDTH);
-            var v : int = Math.ceil(this._scene.mapConfig.gridV / SceneConfig.ZONE_SCALE_HEIGHT);
+            var h : int = Math.ceil(this._gameScene.mapConfig.gridH / SceneConfig.ZONE_SCALE_WIDTH);
+            var v : int = Math.ceil(this._gameScene.mapConfig.gridV / SceneConfig.ZONE_SCALE_HEIGHT);
             if (zoneX < 0 || zoneY < 0 || zoneX >= h || zoneY >= v) {
                 if (null != mapZone) {
                     mapZone.state = MapZone2.STATE_INVALID;

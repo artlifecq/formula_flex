@@ -17,7 +17,7 @@ package com.game.engine2D.vo
 	{
 		private static const poolSize:int = 1000;
 		private static var _pool:Pool = new Pool("PoolContainer3D_pool", poolSize);
-		private var _pos:Vector3D = new Vector3D();
+		private var _pcPos:Vector3D = new Vector3D();
 		
 		public function PoolContainer()
 		{
@@ -26,17 +26,17 @@ package com.game.engine2D.vo
 		
 		override public function get x():Number
 		{
-			return _pos.x;
+			return _pcPos.x;
 		}
 		
 		override public function get y():Number
 		{
-			return _pos.y;
+			return _pcPos.y;
 		}
 		
 		override public function get z():Number
 		{
-			return _pos.z;
+			return _pcPos.z;
 		}
 		
 		override public function get scaleY():Number
@@ -51,27 +51,27 @@ package com.game.engine2D.vo
 		
 		override public function set x(val:Number):void
 		{
-			_pos.x = val >> 0;
-			super.x = _pos.x;
+			_pcPos.x = val >> 0;
+			super.x = _pcPos.x;
 		}
 		
 		override public function set y(val:Number):void
 		{
-			_pos.y = val >> 0;
-			super.z = GlobalConfig.transformCoord_2d_3d(-_pos.y);
+			_pcPos.y = val >> 0;
+			super.z = GlobalConfig.transformCoord_2d_3d(-_pcPos.y);
 		}
 
 		override public function set z(val:Number):void
 		{
-			_pos.z = val >> 0;
-			super.y = _pos.z;
+			_pcPos.z = val >> 0;
+			super.y = _pcPos.z;
 		}
 		
 		public function reSet($parameters:Array):void
 		{
 			scaleX = scaleY = scaleZ = 1.0;
 			rotationX = rotationY = rotationZ = 0.0;
-			_pos.setTo(0, 0, 0);
+			_pcPos.setTo(0, 0, 0);
 		}
 		
 		override public function dispose():void

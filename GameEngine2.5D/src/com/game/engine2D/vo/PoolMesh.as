@@ -43,8 +43,8 @@ package com.game.engine2D.vo
 		private var _depth:int = 0;
 		private var _parentBaseObj:BaseObj = null;
 		private var _uvDirty:Boolean = true;
-		private var _positionDirty:Boolean = true;
-		private var _pos:Vector3D = new Vector3D();//上层用的x,y值
+		private var _pmPositionDirty:Boolean = true;
+		private var _pmPos:Vector3D = new Vector3D();//上层用的x,y值
 		private var _posValue:Vector3D = new Vector3D();//实际用的x,y值
 		private var _posScale:Point = new Point(1,1);//实际用的scaleX,scaleY值
 		private var _posGeometryScale:Point = new Point(1,1);//PlaneFrameGeometry scaleX,scaleY值
@@ -68,17 +68,17 @@ package com.game.engine2D.vo
 		
 		override public function get y():Number	
 		{
-			return _pos.y;
+			return _pmPos.y;
 		}
 		
 		override public function get x():Number
 		{
-			return _pos.x;
+			return _pmPos.x;
 		}
 		
 		override public function get z():Number
 		{
-			return _pos.z;
+			return _pmPos.z;
 		}
 		
 		public function get colorTransform():ColorTransform
@@ -130,31 +130,31 @@ package com.game.engine2D.vo
 		
 		override public function set z(val:Number):void
 		{
-			if (_pos.z != val)
+			if (_pmPos.z != val)
 			{
-				_pos.z = val;
+				_pmPos.z = val;
 				_posValue.z = val;
-				_positionDirty = true;
+				_pmPositionDirty = true;
 			}
 		}
 		
 		override public function set y(val:Number):void
 		{
-			if (_pos.y != val)
+			if (_pmPos.y != val)
 			{
-				_pos.y = val;
+				_pmPos.y = val;
 				_posValue.y = -val;
-				_positionDirty = true;
+				_pmPositionDirty = true;
 			}
 		}
 		
 		override public function set x(val:Number):void
 		{
-			if (_pos.x != val)
+			if (_pmPos.x != val)
 			{
-				_pos.x = val;
+				_pmPos.x = val;
 				_posValue.x = val;
-				_positionDirty = true;
+				_pmPositionDirty = true;
 			}
 		}
 		
@@ -317,12 +317,12 @@ package com.game.engine2D.vo
 			blendMode = BlendMode.NORMAL;
 			_alpha = 1.0;
 			depth = _width = _height = 0;
-			_pos.setTo(0,0,0);
+			_pmPos.setTo(0,0,0);
 			_posValue.setTo(0,0,0);
 			_posGeometry.setTo(0,0);
 			_posScale.setTo(1.0,1.0);
 			_atfSubTexture = null;
-			_uvDirty = _positionDirty = true;
+			_uvDirty = _pmPositionDirty = true;
 			_colorTransform = null;
 			_uvTransform.identity();
 			this.layerType = EntityLayerType.DEFAULT;
@@ -340,9 +340,9 @@ package com.game.engine2D.vo
 		
 		public function setPosition():void
 		{
-			if (_positionDirty)
+			if (_pmPositionDirty)
 			{
-				_positionDirty = false;
+				_pmPositionDirty = false;
 				_positionHelp.setTo(int(_posValue.x),
 					_posValue.z,
 					GlobalConfig.transformCoord_2d_3d(_posValue.y)
@@ -357,14 +357,14 @@ package com.game.engine2D.vo
 			{
 				_uvDirty = true;
 				_posGeometry.setTo(_width, _height);
-				_positionDirty = true;
+				_pmPositionDirty = true;
 				_posGeometryScale.setTo(_width/_geometrySize, 
 					GlobalConfig.transformCoord_2d_3d(_height)/_geometrySize
 				);
 				if (this.castsShadows)
 				{
 					this.planarShadowPivotPoint ||= new Vector3D();
-					this.planarShadowPivotPoint.setTo(_width/2, 0, _pos.y < _height ? _pos.y : -_height);
+					this.planarShadowPivotPoint.setTo(_width/2, 0, _pmPos.y < _height ? _pmPos.y : -_height);
 				}
 			}
 			super.scaleX = _posGeometryScale.x*_posScale.x;
