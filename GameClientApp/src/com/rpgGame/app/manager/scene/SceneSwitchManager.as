@@ -423,9 +423,9 @@ package com.rpgGame.app.manager.scene
 
 				BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
 			}
-			MainRoleManager.actor.avatar.lightPicker = SceneManager.getScene().entityLightPicker;
+//			MainRoleManager.actor.avatar.lightPicker = SceneManager.getScene().entityLightPicker;
 //			var speed:int = MainRoleManager.actorInfo.spriteStat.moveSpeed;
-			MainRoleManager.actorInfo.totalStat.moveSpeed = 200;
+//			MainRoleManager.actorInfo.totalStat.moveSpeed = 200;
 			sendSceneLoaded();
 		}
 
