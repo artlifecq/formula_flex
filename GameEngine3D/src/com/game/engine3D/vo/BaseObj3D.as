@@ -12,6 +12,7 @@ package com.game.engine3D.vo
 	import com.game.engine3D.utils.Matrix3DUtil;
 	import com.game.mainCore.libCore.pool.IPoolClass;
 	
+	import flash.display.BlendMode;
 	import flash.geom.Matrix3D;
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
@@ -210,6 +211,17 @@ package com.game.engine3D.vo
 		public function set alpha(value:Number):void
 		{
 			_alpha = value;
+		}
+		
+		protected var _blendMode:String = BlendMode.LAYER;
+		
+		public function get blendMode():String
+		{
+			return _blendMode;
+		}
+		public function set blendMode(value:String):void
+		{
+			_blendMode = value;
 		}
 		
 		/**显示位置X*/

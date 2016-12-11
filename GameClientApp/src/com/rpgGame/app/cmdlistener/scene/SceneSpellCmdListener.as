@@ -3,6 +3,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
+	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.SkillCDManager;
@@ -10,15 +11,22 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.coreData.cfg.AnimationDataManager;
+	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.lang.LangNoticeInfo;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
+	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
+	import com.rpgGame.netData.fight.message.ResFightFailedBroadcastMessage;
 	
 	import app.cmd.SceneModuleMessages;
-	import app.message.SpellProto;
 	
 	import org.client.mainCore.bean.BaseBean;
+	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
@@ -38,55 +46,57 @@ package com.rpgGame.app.cmdlistener.scene
 
 		override public function start() : void
 		{
+			SocketConnection.addCmdListener(102105,onResFightFailedBroadcastMessage);
+			SocketConnection.addCmdListener(102101,onResFightBroadcastMessage);
+			SocketConnection.addCmdListener(102102,onResAttackResultMessage);
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			///////////////////////////
+			///////////////////////////  参考协议------
+			///////////////////////////
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			//技能相关
 			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_YOUR_SPELL_RELEASED, onYouSpellRelease);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SPELL_RELEASE_FAIL, onSpellReleaseFail);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_SPELL_RELEASED, onSpellReleased);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_SPELL_EFFECTED, onSpellEffected);
 			//
 			finish();
 		}
-
 		/**
-		 * 做技能冷却用
-		 * @param buffer
+		 * 施法失败, 附带varint32 失败原因
 		 *
+		 * 1. 已死亡
+		 * 2. 晕眩
+		 * 3. 沉默
+		 * 4. gcd 没到
+		 * 5. 跳跃中
+		 * 6. 这技能你不会 (不管是不是存在于这世上)
+		 * 7. cd 没到
+		 * 8. 魔法不够
+		 * 9. 技能目标没找到
+		 * 10. 技能目标已死亡
+		 * 11. 距离过远
+		 * 12. 伤害技能不能打自己人 或 不是伤害技能不能打坏人 攻击技能不能打英雄的原因有
+		 * 13. 法术值不足
+		 * 14. 施法中
+		 * 15. 前置技能没有释放
+		 * 16. 定身中，无法释放位移技能
+		 * 17. 当前场景，无法使用技能
+		 * 18. 发送过来的角度非法，必须在(0-360]之间
+		 * 19. 当前没有武器
+		 * 20. 当前副武器无法释放该技能
+		 * 21. 服务器bug
+		 * 22. 该技能必须在马上才能够释放
+		 * 23. 飞行中，无法释放技能
+		 * 24. 当前坐骑无法骑战
+		 * 25. 在镖车上
+		 * 26. 摆摊中,无法放技能
+		 * 27. 目标没有死亡，无法释放复活技能
+		 * 28. 目标正在被他人复活中
+		 * 29. 目标无法被复活
+		 * 30. 禁技
 		 */
-		private function onYouSpellRelease(buffer : ByteBuffer) : void
-		{
-			var spellType : int = buffer.readVarint32();
-			//添加单技能CD
-			var spellData : SpellProto = CastSpellHelper.getSpellData(spellType);
-			if (!spellData)
-			{
-				var defaultSpell : SpellProto = CastSpellHelper.getDefaultSpell();
-				if (defaultSpell)
-				{
-					if (spellType == defaultSpell.spellType)
-					{
-						spellData = defaultSpell;
-					}
-					else
-					{
-						var relateSpells : Array = defaultSpell.activeSpell.relateSpells;
-						for each (var tmpData : SpellProto in relateSpells)
-						{
-							if (spellType == tmpData.spellType)
-							{
-								spellData = tmpData;
-								break;
-							}
-						}
-					}
-				}
-			}
-			SkillCDManager.getInstance().addSkillCDTime(spellData);
-		}
-
-		private function onSpellReleaseFail(buffer : ByteBuffer) : void
+		private function onResFightFailedBroadcastMessage(msg:ResFightFailedBroadcastMessage):void
 		{
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
-			var failID : int = buffer.readVarint32();
+			var failID : int = 0;
 			var failReason : String;
 			switch (failID)
 			{
@@ -169,32 +179,30 @@ package com.rpgGame.app.cmdlistener.scene
 					failReason = LangNoticeInfo.ErrorMsgNoticeManager_25;
 					break;
 			}
-
+			
 			NoticeManager.showNotify(failReason, failID);
 		}
-
+		
 		/**
 		 * 位移技能、普通攻击的起手广播(包括自己)
 		 * @param buffer
 		 *
 		 */
-		private function onSpellReleased(buffer : ByteBuffer) : void
+		private function onResFightBroadcastMessage(msg:ResFightBroadcastMessage):void
 		{
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
-			var flySceneObjID : int = buffer.readVarint32();
-			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(flySceneObjID, buffer, true);
+			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg.skillModelId, msg, true);
 			ReleaseSpellHelper.releaseSpell(info);
-			effectCharsHp(info);
-
-//			if (info.atkor && info.atkor.isMainChar)
-//			{
-//				GameLog.addShow("释放技能" + info.flySceneObjID + "效果：" + info.spellEffectID);
-//			}
-//
-//			for each (var bInfo : BuffInfo in info.stateList)
-//			{
-//				BuffManager.addBuf(bInfo);
-//			}
+			effectCharAttribute(info);
+			//			if (info.atkor && info.atkor.isMainChar)
+			//			{
+			//				GameLog.addShow("释放技能" + info.flySceneObjID + "效果：" + info.spellEffectID);
+			//			}
+			//
+			//			for each (var bInfo : BuffInfo in info.stateList)
+			//			{
+			//				BuffManager.addBuf(bInfo);
+			//			}			
 		}
 
 		/**
@@ -202,35 +210,96 @@ package com.rpgGame.app.cmdlistener.scene
 		 * @param buffer
 		 *
 		 */
-		private function onSpellEffected(buffer : ByteBuffer) : void
+		private function onResAttackResultMessage(msg:ResAttackResultMessage):void
 		{
-			var flySceneObjID : int = buffer.readVarint32();
-			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(flySceneObjID, buffer);
+			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg.state.skillId, msg);
 			SpellHitHelper.serverSpellHitEffect(info);
-			effectCharsHp(info);
-
-//			if (info.atkor && info.atkor.isMainChar)
-//			{
-//				GameLog.addShow("技能伤害" + info.flySceneObjID + "效果：" + (info.hurtList.length > 0 ? "伤害" + info.hurtList[0].hurtAmount : "无"));
-//			}
-
-//			SpellAnimationManager.addPosEffectAnimaton(info);
-//			//
-//			for each (var bInfo : BuffInfo in info.stateList)
-//			{
-//				BuffManager.addBuf(bInfo);
-//			}
+			effectCharAttribute(info);
+			
+			//			if (info.atkor && info.atkor.isMainChar)
+			//			{
+			//				GameLog.addShow("技能伤害" + info.flySceneObjID + "效果：" + (info.hurtList.length > 0 ? "伤害" + info.hurtList[0].hurtAmount : "无"));
+			//			}
+			
+			//			SpellAnimationManager.addPosEffectAnimaton(info);
+			//			//
+			//			for each (var bInfo : BuffInfo in info.stateList)
+			//			{
+			//				BuffManager.addBuf(bInfo);
+			//			}
 		}
 		
-		private function effectCharsHp(info : ReleaseSpellInfo):void
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		///////////////////////////
+		///////////////////////////  参考协议------
+		///////////////////////////
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		/**
+		 * 做技能冷却用
+		 * @param buffer
+		 *
+		 */
+		private function onYouSpellRelease(buffer : ByteBuffer) : void
 		{
-			var hurtList:Vector.<FightHurtResult> = info.hurtList;
-			for each (var hurtResult:FightHurtResult in hurtList) 
+			var spellID : int = buffer.readVarint32();
+			//添加单技能CD
+			var spellData : Q_skill_model = CastSpellHelper.getSpellData(spellID);
+			if (!spellData)
 			{
-				var role:SceneRole = SceneManager.getSceneObjByID(hurtResult.roleID) as SceneRole;
-				if(role && role.usable)
+				var defaultSpell : Q_skill_model = CastSpellHelper.getDefaultSpell();
+				if (defaultSpell)
+				{
+					if (spellID == defaultSpell.q_skillID)
+					{
+						spellData = defaultSpell;
+					}
+					else
+					{
+						//连招
+						var relateSpells : Vector.<Q_skill_model> = SpellDataManager.getRelateSpells(defaultSpell.q_relate_spells);
+						for each (var tmpData : Q_skill_model in relateSpells)
+						{
+							if (spellID == tmpData.q_skillID)
+							{
+								spellData = tmpData;
+								break;
+							}
+						}
+					}
+				}
+			}
+			SkillCDManager.getInstance().addSkillCDTime(spellData);
+		}
+		
+		private function effectCharAttribute(info : ReleaseSpellInfo) : void
+		{
+			var hurtList : Vector.<FightHurtResult> = info.hurtList;
+			for each (var hurtResult : FightHurtResult in hurtList)
+			{
+				var role : SceneRole = SceneManager.getSceneObjByID(hurtResult.roleID) as SceneRole;
+				if (role && role.usable)
 				{
 					CharAttributeManager.setCharHp(role.data as RoleData, hurtResult.curLife);
+					CharAttributeManager.setCharMp(role.data as RoleData, hurtResult.curMana);
+				}
+			}
+		}
+		
+		/**
+		 * 触发被动技能，附带varint32类型的技能类型
+		 *
+		 */
+		private function onTriggerHanGuangDunSpell(buffer : ByteBuffer) : void
+		{
+			var roleId : Number = buffer.readVarint64();
+			var animationId : int = buffer.readVarint32();
+			var role : SceneRole = SceneManager.getSceneObjByID(roleId) as SceneRole;
+			if (role)
+			{
+				var animationData : Q_SpellAnimation = AnimationDataManager.getData(animationId);
+				if (animationData)
+				{
+					SpellAnimationHelper.addSelfDestEffect(role, animationData);
 				}
 			}
 		}

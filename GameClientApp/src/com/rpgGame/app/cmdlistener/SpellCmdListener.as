@@ -3,10 +3,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.SpellManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	
-	import flash.utils.ByteArray;
-	
 	import app.cmd.SpellModuleMessages;
-	import app.message.SpellProto;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
@@ -89,12 +86,12 @@ package com.rpgGame.app.cmdlistener
 		 */
 		private function onLearnedOrUpgradedActiveSpell(buffer:ByteBuffer):void
 		{
-			var bytes:ByteArray = new ByteArray();
-			buffer.readBytes(bytes);
-			var spellProto:SpellProto = new SpellProto();
-			spellProto.mergeFrom(bytes);
-			
-			SpellManager.onLearnedOrUpgradedActiveSpell( spellProto );
+//			var bytes:ByteArray = new ByteArray();
+//			buffer.readBytes(bytes);
+//			var spellProto:q_sk = new SpellProto();
+//			spellProto.mergeFrom(bytes);
+//			
+//			SpellManager.onLearnedOrUpgradedActiveSpell( spellProto );
 		}
 	}
 }

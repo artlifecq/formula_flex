@@ -330,7 +330,7 @@ package com.rpgGame.app.ui.main.team
 			raceStr = HtmlTextUtil.getTextColor( StaticValue.WHITE_PURE_COLOR, LanguageConfig.getText( LangTeam.TEAM_TIP_11 ) + raceName );
 			
 			//等级
-			var levelStr:String = HtmlTextUtil.getTextColor( StaticValue.WHITE_PURE_COLOR, LanguageConfig.getText( LangTeam.TEAM_TIP_12 ) + actor.level );
+			var levelStr:String = HtmlTextUtil.getTextColor( StaticValue.WHITE_PURE_COLOR, LanguageConfig.getText( LangTeam.TEAM_TIP_12 ) + actor.totalStat.level );
 			//位置
 			var pos:String = "";
 			var countryName:String = CountryNameCfgData.getCountryNameById( unitData.mapCountryId );
@@ -369,8 +369,8 @@ package com.rpgGame.app.ui.main.team
 			var tipsStr:String = "";
 			var hpMax:Number = roleData.totalStat.life;
 			var mpMax:Number = roleData.totalStat.mana;
-			var hpStr:String = LanguageConfig.getText( LangTeam.TEAM_TIP_14 ) + roleData.hp + "/" + hpMax;
-			var mpStr:String = LanguageConfig.getText( LangTeam.TEAM_TIP_15 ) + roleData.mp + "/" + mpMax;
+			var hpStr:String = LanguageConfig.getText( LangTeam.TEAM_TIP_14 ) + roleData.totalStat.hp + "/" + hpMax;
+			var mpStr:String = LanguageConfig.getText( LangTeam.TEAM_TIP_15 ) + roleData.totalStat.mp + "/" + mpMax;
 			
 			tipsStr = HtmlTextUtil.getTextColor( StaticValue.COLOR_CODE_1, hpStr + "<br/>" + mpStr );
 			if( TipTargetManager.hasTipsEventListener( _shape ) )
@@ -392,7 +392,7 @@ package com.rpgGame.app.ui.main.team
 			if (actorData == null)
 				return;
 
-			_skin.labLevel.number = actorData.level;
+			_skin.labLevel.number = actorData.totalStat.level;
 		}
 
 		/**
@@ -409,14 +409,14 @@ package com.rpgGame.app.ui.main.team
 				return;
 
 			var actorData : HeroData = actor.data as HeroData;
-			var value : Number = actorData.hp / actorData.totalStat.life;
+			var value : Number = actorData.totalStat.hp / actorData.totalStat.life;
 			if (value > 1)
 				value = 1;
 
 			_imgHpMask.width = _imgHpWidth * value;
 			updateHPOrMPTips( actorData );
 			
-			if ( actorData.hp <= 0 )//远离、死亡、离线，都变灰色
+			if ( actorData.totalStat.hp <= 0 )//远离、死亡、离线，都变灰色
 				GrayFilter.gray(_skin.group);
 			else
 				GrayFilter.unGray(_skin.group);
@@ -436,7 +436,7 @@ package com.rpgGame.app.ui.main.team
 				return;
 
 			var actorData : HeroData = actor.data as HeroData;
-			var value : Number = actorData.mp / actorData.totalStat.mana;
+			var value : Number = actorData.totalStat.mp / actorData.totalStat.mana;
 			if (value > 1)
 				value = 1;
 

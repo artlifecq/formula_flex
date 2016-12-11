@@ -55,6 +55,18 @@ package com.game.engine3D.scene.render.vo
 				obj.alpha = value;
 			}
 		}
+		
+		override public function set blendMode(value:String):void
+		{
+			super.blendMode = value;
+			_renderSet.blendMode = value;
+			var len : int = _baseObjList.length;
+			while (len-- > 0)
+			{
+				var obj : BaseObj3D = _baseObjList[len].baseObj;
+				obj.blendMode = value;
+			}
+		}
 
 		private function setBaseObjState(baseObj : BaseObj3D) : void
 		{

@@ -4,19 +4,22 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
+	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.SpellEffectDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
+	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
 	import com.rpgGame.coreData.info.buff.BuffInfo;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.info.fight.FightSingleHurt;
 	import com.rpgGame.coreData.role.HeroData;
-
+	import com.rpgGame.netData.fight.bean.AttackResultInfo;
+	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
+	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
+	
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
-
-	import app.message.AnimationProto;
-	import app.message.SpellEffectProto;
-
-	import org.game.netCore.net_protobuff.ByteBuffer;
+	
+	import org.game.netCore.net.Message;
 
 	/**
 	 *
@@ -29,15 +32,30 @@ package com.rpgGame.app.fight.spell
 	{
 		private static var _releaseInfoById : Dictionary = new Dictionary();
 
-		public static function setReleaseInfo(flySceneObjID : int, buffer : ByteBuffer, waitCache : Boolean = false) : ReleaseSpellInfo
+		/**
+		 *  
+		 * @param flySceneObjID 暂时把这个id，以技能的id来处理，后面看后端要不要有其他处理
+		 * @param msg
+		 * @param waitCache
+		 * @return 
+		 * 
+		 */		
+		public static function setReleaseInfo(flySceneObjID : int, msg : Message, waitCache : Boolean = false) : ReleaseSpellInfo
 		{
 			var info : ReleaseSpellInfo = _releaseInfoById[flySceneObjID];
 			if (!info)
 			{
 				info = new ReleaseSpellInfo();
 			}
-			info.readFrom(flySceneObjID, buffer);
-			createResults(info, buffer);
+			if(msg is ResFightBroadcastMessage)
+			{
+				info.readFrom(flySceneObjID, msg as ResFightBroadcastMessage);
+			}
+			else if(msg is ResAttackResultMessage)
+			{
+				createResults(info, msg as ResAttackResultMessage);
+			}
+			
 			if (waitCache)
 			{
 				_releaseInfoById[flySceneObjID] = info;
@@ -80,14 +98,14 @@ package com.rpgGame.app.fight.spell
 		private var _spellEffectID : int = 0; //技能表现形式ID
 		private var _releaseAngle : int = 0;
 		private var _attackSpeed : int = 0;
-		private var _spellEffectData : SpellEffectProto;
+		private var _spellEffectData : Q_SpellEffect;
 		private var _atkMotion : String; //对动作
-		private var _fromSingleAni : AnimationProto; //施法动画
-		private var _selfAni : AnimationProto; //自身动画
-		private var _hurtAnimation : AnimationProto; //被击动画
-		private var _sputteringHurtAnimation : AnimationProto; //溅射被击动画
-		private var _posSingleAni : AnimationProto; //对地动画
-		private var _passSingleAni : AnimationProto; //弹道动画
+		private var _fromSingleAni : Q_SpellAnimation; //施法动画
+		private var _selfAni : Q_SpellAnimation; //自身动画
+		private var _hurtAnimation : Q_SpellAnimation; //被击动画
+		private var _sputteringHurtAnimation : Q_SpellAnimation; //溅射被击动画
+		private var _posSingleAni : Q_SpellAnimation; //对地动画
+		private var _passSingleAni : Q_SpellAnimation; //弹道动画
 
 		/**
 		 * 动作完成
@@ -170,77 +188,107 @@ package com.rpgGame.app.fight.spell
 		{
 		}
 
-		public function readFrom(flySceneObjID : int, buffer : ByteBuffer) : void
+		/**
+		 * 初始化一些技能特效的信息 
+		 * @param flySceneObjID
+		 * @param msg
+		 * 
+		 */		
+		public function readFrom(flySceneObjID : int, msg : ResFightBroadcastMessage) : void
 		{
-			_flySceneObjID = flySceneObjID; //buffer.readVarint32();
-			_spellEffectID = buffer.readVarint32();
-			_releaseAngle = buffer.readVarint32();
+			_flySceneObjID = flySceneObjID;//
+			
+			_spellEffectID = SpellDataManager.getSpellEffectID(flySceneObjID);
+			_releaseAngle = msg.fightDirection;
 			_releaseAngle = (_releaseAngle + 270) % 360;
+			
+			_atkorID = msg.personId.ToGID();
+			if (_atkorID > 0)
+			{
+				_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
+				if (_atkor && !_atkor.usable)
+					_atkor = null;
+			}
+			
+			_targetID = msg.fightTarget.ToGID();
+			if (_targetID > 0)
+			{
+				_targetRole = SceneManager.getSceneObjByID(_targetID) as SceneRole;
+				if (_targetRole && !_targetRole.usable)
+					_targetRole = null;
+			}
+			
+			_atkorPos = new Point(_atkor.x, _atkor.y);
+//			_targetPos = new Point(targetX, targetY); 不知道怎么定
+			
+//			_spellEffectID = buffer.readVarint32();
+//			_releaseAngle = buffer.readVarint32();
+//			_releaseAngle = (_releaseAngle + 270) % 360;
 			//_attackSpeed = buffer.readVarint64();
-			_atkorID = buffer.readVarint64();
-			var atkorX : int = buffer.readVarint32();
-			var atkorY : int = buffer.readVarint32();
-			_targetID = buffer.readVarint64();
-			var targetX : int = buffer.readVarint32();
-			var targetY : int = buffer.readVarint32();
-			_atkorPos = new Point(atkorX, atkorY);
-			_targetPos = new Point(targetX, targetY);
+//			_atkorID = buffer.readVarint64();
+//			var atkorX : int = buffer.readVarint32();
+//			var atkorY : int = buffer.readVarint32();
+//			_targetID = buffer.readVarint64();
+//			var targetX : int = buffer.readVarint32();
+//			var targetY : int = buffer.readVarint32();
+//			_atkorPos = new Point(atkorX, atkorY);
+//			_targetPos = new Point(targetX, targetY);
+			
+//			if (_atkorID > 0)
+//			{
+//				_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
+//				if (_atkor && !_atkor.usable)
+//					_atkor = null;
+//			}
+//			if (_targetID > 0)
+//			{
+//				_targetRole = SceneManager.getSceneObjByID(_targetID) as SceneRole;
+//				if (_targetRole && !_targetRole.usable)
+//					_targetRole = null;
+//			}
 
 			_spellEffectData = SpellEffectDataManager.getData(_spellEffectID);
 			if (_spellEffectData)
 			{
 				//动作.
-				_atkMotion = "attack";//String(_spellEffectData.attackMotionId);
-				_fromSingleAni = AnimationDataManager.getData(_spellEffectData.castAnimation);
-				_selfAni = AnimationDataManager.getData(_spellEffectData.selfDestAnimation);
-				_hurtAnimation = AnimationDataManager.getData(_spellEffectData.hurtAnimation);
-				_sputteringHurtAnimation = AnimationDataManager.getData(_spellEffectData.sputteringHurtAnimation);
-				_posSingleAni = AnimationDataManager.getData(_spellEffectData.destAnimation);
-				_passSingleAni = AnimationDataManager.getData(_spellEffectData.flyAnimation);
+				_atkMotion = _spellEffectData.attack_motion;
+				_fromSingleAni = AnimationDataManager.getData(_spellEffectData.cast_animation);
+				_selfAni = AnimationDataManager.getData(_spellEffectData.self_dest_animation);
+				_hurtAnimation = AnimationDataManager.getData(_spellEffectData.hurt_animation);
+				_sputteringHurtAnimation = AnimationDataManager.getData(_spellEffectData.sputtering_hurt_animation);
+				_posSingleAni = AnimationDataManager.getData(_spellEffectData.dest_animation);
+				_passSingleAni = AnimationDataManager.getData(_spellEffectData.fly_animation);
 
-				_caromStartFrameTime = _spellEffectData.caromStartFrameTime;
-				_breakFrameTime = _spellEffectData.breakFrameTime;
-				_hitFrameTime = _spellEffectData.hitFrameTime;
-				_delayTime = _spellEffectData.delayTime;
-				_hurtDelay = _spellEffectData.hurtDelay;
-				_soarFrameTime = _spellEffectData.soarFrameTime;
-				_throwDelayTime = _spellEffectData.throwDelayTime;
+				_caromStartFrameTime = _spellEffectData.carom_start_frame_time;
+				_breakFrameTime = _spellEffectData.break_frame_time;
+				_hitFrameTime = _spellEffectData.hit_frame_time;
+				_delayTime = _spellEffectData.delay_time;
+				_hurtDelay = _spellEffectData.hurt_delay;
+				_soarFrameTime = _spellEffectData.soar_frame_time;
+				_throwDelayTime = _spellEffectData.throw_delay_time;
 
-				_castTime = _spellEffectData.castTime;
-				_blinkType = _spellEffectData.blinkType;
-				_blinkSpeed = _spellEffectData.blinkSpeed;
-				_blinkHeight = _spellEffectData.blinkHeight;
-				_beatBackSpeed = _spellEffectData.beatBackSpeed;
-				_ghostEffect = _spellEffectData.ghostEffect;
+				_castTime = _spellEffectData.cast_time;
+				_blinkType = _spellEffectData.blink_type;
+				_blinkSpeed = _spellEffectData.blink_speed;
+				_blinkHeight = _spellEffectData.blink_height;
+				_beatBackSpeed = _spellEffectData.beat_back_speed;
+				_ghostEffect = _spellEffectData.ghost_effect;
 				_matchTerrain = false;
-				_canWalkRelease = _spellEffectData.canWalkRelease;
-				_deadLaunchHeight = _spellEffectData.deadLaunchHeight;
-				_deadLaunchDistance = _spellEffectData.deadLaunchDistance;
-				_deadLaunchSpeed = _spellEffectData.deadLaunchSpeed;
-				_deadBeatDistance = _spellEffectData.deadBeatDistance;
-				_deadBeatSpeed = _spellEffectData.deadBeatSpeed;
-				_deadBeatProbability = _spellEffectData.deadBeatProbability;
-				_deadLaunchProbability = _spellEffectData.deadLaunchProbability;
-				_isTrackTarget = _spellEffectData.isTrackTarget;
-				_isTrapSpell = _spellEffectData.isTrapSpell;
-				_repeatTimes = _spellEffectData.repeatTimes;
-				_repeatInterval = _spellEffectData.repeatInterval;
-				_maxHurtTimes = _spellEffectData.maxHurtTimes;
-				_throwHeight = _spellEffectData.throwHeight;
-				_throwWeightRatio = _spellEffectData.throwWeightRatio;
-
-				if (_atkorID > 0)
-				{
-					_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
-					if (_atkor && !_atkor.usable)
-						_atkor = null;
-				}
-				if (_targetID > 0)
-				{
-					_targetRole = SceneManager.getSceneObjByID(_targetID) as SceneRole;
-					if (_targetRole && !_targetRole.usable)
-						_targetRole = null;
-				}
+				_canWalkRelease = _spellEffectData.can_walk_release;
+				_deadLaunchHeight = _spellEffectData.dead_launch_height;
+				_deadLaunchDistance = _spellEffectData.dead_launch_distance;
+				_deadLaunchSpeed = _spellEffectData.dead_launch_speed;
+				_deadBeatDistance = _spellEffectData.dead_beat_distance;
+				_deadBeatSpeed = _spellEffectData.dead_beat_speed;
+				_deadBeatProbability = _spellEffectData.dead_beat_probability;
+				_deadLaunchProbability = _spellEffectData.dead_launch_probability;
+				_isTrackTarget = _spellEffectData.is_track_target;
+				_isTrapSpell = _spellEffectData.is_trap_spell;
+				_repeatTimes = _spellEffectData.repeat_times;
+				_repeatInterval = _spellEffectData.repeat_interval;
+				_maxHurtTimes = _spellEffectData.max_hurt_times;
+				_throwHeight = _spellEffectData.throw_height;
+				_throwWeightRatio = _spellEffectData.throw_weight_ratio;
 			}
 		}
 
@@ -255,7 +303,7 @@ package com.rpgGame.app.fight.spell
 		 * @param buffer
 		 *
 		 */
-		private static function createResults(info : ReleaseSpellInfo, buffer : ByteBuffer) : void
+		private static function createResults(info : ReleaseSpellInfo, msg : ResAttackResultMessage) : void
 		{
 			//类型和血量
 			var stateList : Vector.<BuffInfo> = new Vector.<BuffInfo>;
@@ -263,68 +311,71 @@ package com.rpgGame.app.fight.spell
 			var hurtCharList : Vector.<SceneRole> = new Vector.<SceneRole>;
 			var isHited : Boolean = false;
 			var roleID : Number = 0;
-			while (buffer.bytesAvailable)
+			
+			var state:AttackResultInfo = msg.state;
+			
+//			var type : int = buffer.readVarint32();
+//			var isState : Boolean = Boolean(type & IS_STATE);
+			var isState : Boolean = false;//现在还没有技能触发buff的功能，暂时不走这里面的逻辑
+			if (isState) //是否状态效果（buff/debuff）
 			{
-				var type : int = buffer.readVarint32();
-				var isState : Boolean = Boolean(type & IS_STATE);
-				if (isState) //是否状态效果（buff/debuff）
+//				roleID = buffer.readVarint64();
+//				var buffInfo : BuffInfo = new BuffInfo(roleID);
+//				buffInfo.cfgId = buffer.readVarint32();
+//				buffInfo.curtStackCount = buffer.readVarint32();
+//				buffInfo.disappearTime = buffer.readVarint64();
+//				stateList.push(buffInfo);
+			}
+			else
+			{
+				roleID = state.targetId.ToGID();
+				var hurtResultVO : FightHurtResult = new FightHurtResult(roleID);
+				hurtResultVO.curLife = state.damage;
+				
+//				hurtResultVO.hasPositionChange = Boolean(type & HAS_POSITION_CHANGE);
+//				if (hurtResultVO.hasPositionChange)
+//				{
+//					hurtResultVO.newPosition = new Point(buffer.readVarint32(), buffer.readVarint32());
+//				}
+				
+//				var hasAttckerId : Boolean = Boolean(type & HAS_ATTACKER_ID);
+//				if (hasAttckerId)
+//				{
+					hurtResultVO.attackerId = state.attackerId.ToGID();
+//				}
+//				var hasStiffTime : Boolean = Boolean(type & HAS_STIFFTIME);
+//				if (hasStiffTime)
+//				{
+//					hurtResultVO.stiffTime = buffer.readVarint64();
+//				}
+				
+//				var hurtTimes : int = type >>> 4; //伤害次数
+//				for (var hurtTimeI : int = 0; hurtTimeI < hurtTimes; hurtTimeI++) //hp - 3*50 = curLife
+//				{
+//					var hurtTypeAmount : int = state.damage;
+					var hurtType : int = state.fightResult
+					var hurtAmount : int = state.damage; //本次
+					var sVo : FightSingleHurt = new FightSingleHurt(hurtType, hurtAmount, roleID);
+					hurtResultVO.addHurt(sVo);
+//				}
+				hurtList.push(hurtResultVO);
+				//
+				var role : SceneRole = SceneManager.getSceneObjByID(roleID) as SceneRole;
+				if (role)
 				{
-					roleID = buffer.readVarint64();
-					var buffInfo : BuffInfo = new BuffInfo(roleID);
-					buffInfo.cfgId = buffer.readVarint32();
-					buffInfo.curtStackCount = buffer.readVarint32();
-					buffInfo.disappearTime = buffer.readVarint64();
-					stateList.push(buffInfo);
+					//role.isServerLiving = hurtResultVO.curLife > 0;
+					hurtCharList.push(role);
 				}
-				else
+				//
+				if (roleID == MainRoleManager.actorID) //判定主角是否被攻击
 				{
-					roleID = buffer.readVarint64();
-					var hurtResultVO : FightHurtResult = new FightHurtResult(roleID);
-					hurtResultVO.curLife = buffer.readVarint32();
-
-					hurtResultVO.hasPositionChange = Boolean(type & HAS_POSITION_CHANGE);
-					if (hurtResultVO.hasPositionChange)
+					if (info.atkor && info.atkor.data is HeroData) //是玩家才自动反击
 					{
-						hurtResultVO.newPosition = new Point(buffer.readVarint32(), buffer.readVarint32());
-					}
-					var hasAttckerId : Boolean = Boolean(type & HAS_ATTACKER_ID);
-					if (hasAttckerId)
-					{
-						hurtResultVO.attackerId = buffer.readVarint64();
-					}
-					var hasStiffTime : Boolean = Boolean(type & HAS_STIFFTIME);
-					if (hasStiffTime)
-					{
-						hurtResultVO.stiffTime = buffer.readVarint64();
-					}
-
-					var hurtTimes : int = type >>> 4; //伤害次数
-					for (var hurtTimeI : int = 0; hurtTimeI < hurtTimes; hurtTimeI++) //hp - 3*50 = curLife
-					{
-						var hurtTypeAmount : int = buffer.readVarint32();
-						var hurtType : int = hurtTypeAmount & 15;
-						var hurtAmount : int = hurtTypeAmount >>> 4; //本次
-						var sVo : FightSingleHurt = new FightSingleHurt(hurtType, hurtAmount, roleID);
-						hurtResultVO.addHurt(sVo);
-					}
-					hurtList.push(hurtResultVO);
-					//
-					var role : SceneRole = SceneManager.getSceneObjByID(roleID) as SceneRole;
-					if (role)
-					{
-						//role.isServerLiving = hurtResultVO.curLife > 0;
-						hurtCharList.push(role);
-					}
-					//
-					if (roleID == MainRoleManager.actorID) //判定主角是否被攻击
-					{
-						if (info.atkor && info.atkor.data is HeroData) //是玩家才自动反击
-						{
-							isHited = true;
-						}
+						isHited = true;
 					}
 				}
 			}
+			
 			info.hurtList = hurtList;
 			info.stateList = stateList;
 			info.isMainCharHited = isHited;
@@ -338,14 +389,14 @@ package com.rpgGame.app.fight.spell
 		public function get isFlyCross() : Boolean
 		{
 			if (_spellEffectData)
-				return _spellEffectData.isFlyCross;
+				return _spellEffectData.is_fly_cross;
 			return false;
 		}
 
 		public function get isAdaptiveTargetHeight() : Boolean
 		{
 			if (_spellEffectData)
-				return _spellEffectData.isAdaptiveTargetHeight;
+				return _spellEffectData.is_adaptive_target_height;
 			return false;
 		}
 
@@ -357,7 +408,7 @@ package com.rpgGame.app.fight.spell
 		public function get flyTm() : int
 		{
 			if (_spellEffectData)
-				return _spellEffectData.flyTime;
+				return _spellEffectData.fly_time;
 			return 0;
 		}
 
@@ -369,7 +420,7 @@ package com.rpgGame.app.fight.spell
 		public function get flySpeed() : int
 		{
 			if (_spellEffectData)
-				return _spellEffectData.flySpeed;
+				return _spellEffectData.fly_speed;
 			return 0;
 		}
 
@@ -653,27 +704,27 @@ package com.rpgGame.app.fight.spell
 			return _atkMotion;
 		}
 
-		public function get selfAni() : AnimationProto
+		public function get selfAni() : Q_SpellAnimation
 		{
 			return _selfAni;
 		}
 
-		public function get fromAni() : AnimationProto
+		public function get fromAni() : Q_SpellAnimation
 		{
 			return _fromSingleAni;
 		}
 
-		public function get passAni() : AnimationProto
+		public function get passAni() : Q_SpellAnimation
 		{
 			return _passSingleAni;
 		}
 
-		public function get hurtAnimation() : AnimationProto
+		public function get hurtAnimation() : Q_SpellAnimation
 		{
 			return _hurtAnimation;
 		}
 
-		public function get sputteringHurtAnimation() : AnimationProto
+		public function get sputteringHurtAnimation() : Q_SpellAnimation
 		{
 			return _sputteringHurtAnimation;
 		}
@@ -683,7 +734,7 @@ package com.rpgGame.app.fight.spell
 			return _beatBackSpeed;
 		}
 
-		public function get posAni() : AnimationProto
+		public function get posAni() : Q_SpellAnimation
 		{
 			return _posSingleAni;
 		}

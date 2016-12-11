@@ -51,7 +51,7 @@ package com.rpgGame.app.sender
 		public static function clearSpriteStat(itemListVo:UpgradeItemListVo=null):void
 		{
 			var by:ByteBuffer = new ByteBuffer();
-			if(MainRoleManager.actorInfo.level >= AddSpriteStatCfgData.freeClearSpriteStatPointLevel && itemListVo != null)
+			if(MainRoleManager.actorInfo.totalStat.level >= AddSpriteStatCfgData.freeClearSpriteStatPointLevel && itemListVo != null)
 			{
 				by.writeBytes(itemListVo.getByte());
 			}

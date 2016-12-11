@@ -1,6 +1,5 @@
 package com.rpgGame.app.fight.spell
 {
-	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.RoleHpStatusManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
@@ -20,6 +19,8 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.state.role.control.UnmovableStateReference;
 	import com.rpgGame.core.events.SceneCharacterEvent;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
+	import com.rpgGame.coreData.clientConfig.Q_buff;
 	import com.rpgGame.coreData.info.buff.BuffInfo;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.role.MonsterData;
@@ -29,7 +30,6 @@ package com.rpgGame.app.fight.spell
 	
 	import flash.geom.Point;
 	
-	import app.message.AnimationProto;
 	import app.message.StateProto;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -70,8 +70,8 @@ package com.rpgGame.app.fight.spell
 			var role : SceneRole;
 			if (info.hurtList && info.hurtList.length > 0)
 			{
-				var hurtAnimation : AnimationProto = info.hurtAnimation;
-				var sputteringHurtAnimation : AnimationProto = info.sputteringHurtAnimation;
+				var hurtAnimation : Q_SpellAnimation = info.hurtAnimation;
+				var sputteringHurtAnimation : Q_SpellAnimation = info.sputteringHurtAnimation;
 				if (!sputteringHurtAnimation)
 					sputteringHurtAnimation = hurtAnimation;
 
@@ -132,29 +132,29 @@ package com.rpgGame.app.fight.spell
 					role = SceneManager.getSceneObjByID(buffInfo.roleId) as SceneRole;
 					if (role)
 					{
-						var state : StateProto = BuffStateDataManager.getData(buffInfo.cfgId);
+						var state : Q_buff = BuffStateDataManager.getData(buffInfo.cfgId);
 						if (state)
 						{
 							var buffRef : BuffStateReference;
-							if (state.isStun) //眩晕
+							if (state.is_stun) //眩晕
 							{
 								buffRef = role.stateMachine.getReference(StunStateReference) as StunStateReference;
 								buffRef.setParams(buffInfo.disappearTime);
 								role.stateMachine.transition(RoleStateType.CONTROL_STUN, buffRef);
 							}
-							else if (state.isUnmovable) //不能移动
+							else if (state.is_unmovable) //不能移动
 							{
 								buffRef = role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
 								buffRef.setParams(buffInfo.disappearTime);
 								role.stateMachine.transition(RoleStateType.CONTROL_UNMOVABLE, buffRef);
 							}
-							else if (state.isHush) //沉默
+							else if (state.is_hush) //沉默
 							{
 								buffRef = role.stateMachine.getReference(HushStateReference) as HushStateReference;
 								buffRef.setParams(buffInfo.disappearTime);
 								role.stateMachine.transition(RoleStateType.CONTROL_HUSH, buffRef);
 							}
-							else if (state.isHunLuan) //混乱
+							else if (state.is_hun_luan) //混乱
 							{
 								buffRef = role.stateMachine.getReference(HunLuanStateReference) as HunLuanStateReference;
 								buffRef.setParams(buffInfo.disappearTime);
@@ -200,13 +200,13 @@ package com.rpgGame.app.fight.spell
 			{
 				return;
 			}
-			if (roleData.hp > 0)
+			if (roleData.totalStat.hp > 0)
 			{
 				showHurtText(info.atkor, attackerId, role, hurtType, hurtAmount);
 				YunBiaoManager.showInvivcibleBiaoEffect(info.atkor, attackerId, role, hurtType, hurtAmount);
 			}
 
-			if (roleData.hp <= 0)
+			if (roleData.totalStat.hp <= 0)
 			{
 				dealCharDeath(info, role);
 			}

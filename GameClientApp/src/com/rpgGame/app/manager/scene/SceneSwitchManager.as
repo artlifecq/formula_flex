@@ -30,7 +30,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.ClientSceneCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
-	import com.rpgGame.coreData.clientConfig.ClientScene;
+	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.lang.LangStoryDungeon;
@@ -369,7 +369,7 @@ package com.rpgGame.app.manager.scene
 				EventManager.dispatchEvent(MapEvent.MAP_SWITCH_START);
 				if (ClientConfig.isSingle)
 				{
-					var cfg : ClientScene = ClientSceneCfgData.getSceneInfo(mapID);
+					var cfg : Q_map = ClientSceneCfgData.getSceneInfo(mapID);
 					if (cfg)
 					{
 						MainRoleManager.actorInfo.x = 2700;
@@ -425,7 +425,7 @@ package com.rpgGame.app.manager.scene
 			}
 			MainRoleManager.actor.avatar.lightPicker = SceneManager.getScene().entityLightPicker;
 //			var speed:int = MainRoleManager.actorInfo.spriteStat.moveSpeed;
-			MainRoleManager.actorInfo.spriteStat.moveSpeed = 200;
+			MainRoleManager.actorInfo.totalStat.moveSpeed = 200;
 			sendSceneLoaded();
 		}
 

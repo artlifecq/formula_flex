@@ -15,8 +15,8 @@ package com.rpgGame.app.cmdlistener.clientConfig
 	/**
 	 *
 	 * 客户端配置命令侦听器
-	 * @author L.L.M.Sunny
-	 * 创建时间：2015-6-1 下午3:05:12
+	 * --这个协议，目前可能没有用了，因为现在的配置都是客户端自己都。
+	 * @author NEIL
 	 *
 	 */
 	public class ClientConfigCmdListener extends BaseBean

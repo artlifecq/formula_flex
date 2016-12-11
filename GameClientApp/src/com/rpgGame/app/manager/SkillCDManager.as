@@ -3,12 +3,17 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
 	import com.rpgGame.coreData.cfg.GCDCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.face.FaceTypeEnum;
 	
 	import app.message.SpellCoolDownProto;
 	import app.message.SpellModuleObjProto;
-	import app.message.SpellProto;
 
+	/**
+	 * 技能cd管理器 
+	 * @author NEIL
+	 * 
+	 */	
 	public class SkillCDManager
 	{
 		/** 全局技能CD KEY **/
@@ -56,9 +61,9 @@ package com.rpgGame.app.manager
 		 * @return
 		 *
 		 */
-		public static function getSkillKey(spellType : int) : String
+		public static function getSkillKey(spellID : int) : String
 		{
-			return FaceTypeEnum.SKILL + "_" + spellType;
+			return FaceTypeEnum.SKILL + "_" + spellID;
 		}
 
 		//-----------------------------
@@ -68,16 +73,16 @@ package com.rpgGame.app.manager
 		 * @return
 		 *
 		 */
-		public function getSkillCDLastTime(spellProto : SpellProto) : uint
+		public function getSkillCDLastTime(spellProto : Q_skill_model) : uint
 		{
 			var isGlobal : Boolean = getSkillHasGlobal(spellProto);
 			if (isGlobal)
 			{
-				var lastTime : uint = Math.max(CDDataManager.getCdLostTm(GLOBAL_SKILL_KEY), CDDataManager.getCdLostTm(getSkillKey(spellProto.spellType)));
+				var lastTime : uint = Math.max(CDDataManager.getCdLostTm(GLOBAL_SKILL_KEY), CDDataManager.getCdLostTm(getSkillKey(spellProto.q_skillID)));
 				return lastTime;
 			}
 
-			return CDDataManager.getCdLostTm(getSkillKey(spellProto.spellType));
+			return CDDataManager.getCdLostTm(getSkillKey(spellProto.q_skillID));
 		}
 
 		/**
@@ -86,7 +91,7 @@ package com.rpgGame.app.manager
 		 * @return
 		 *
 		 */
-		public function getSkillHasCDTime(spellProto : SpellProto) : Boolean
+		public function getSkillHasCDTime(spellProto : Q_skill_model) : Boolean
 		{
 			return getSkillCDLastTime(spellProto) > 0;
 		}
@@ -97,11 +102,11 @@ package com.rpgGame.app.manager
 		 * @return
 		 *
 		 */
-		private function getSkillHasGlobal(spellProto : SpellProto) : Boolean
+		private function getSkillHasGlobal(spellProto : Q_skill_model) : Boolean
 		{
-			if (!spellProto || !spellProto.activeSpell)
+			if (!spellProto)
 				return false;
-			var curGcd : int = GCDCfgData.getGcd(spellProto.activeSpell.gcdId);
+			var curGcd : int = GCDCfgData.getGcd(spellProto.q_public_cd);
 			return curGcd > 0;
 		}
 
@@ -112,13 +117,13 @@ package com.rpgGame.app.manager
 		 * @param skillID
 		 *
 		 */
-		public function addSkillCDTime(spellData : SpellProto) : void
+		public function addSkillCDTime(spellData : Q_skill_model) : void
 		{
 			if (spellData == null)
 			{
 				return;
 			}
-			var curGcd : int = GCDCfgData.getGcd(spellData.activeSpell.gcdId);
+			var curGcd : int = GCDCfgData.getGcd(spellData.q_public_cd);
 			var isGlobal : Boolean = curGcd > 0;
 			if (isGlobal) //是否添加全局CD
 			{
@@ -127,8 +132,8 @@ package com.rpgGame.app.manager
 			}
 
 			var cdTime : int = 0; //已经经过的时间
-			var configCDTime : int = spellData.activeSpell.cd; //配置的CD时间
-			CDDataManager.playCD(getSkillKey(spellData.spellType), configCDTime, cdTime);
+			var configCDTime : int = spellData.q_cd; //配置的CD时间
+			CDDataManager.playCD(getSkillKey(spellData.q_skillID), configCDTime, cdTime);
 
 			if (!isGlobal)
 				return;
@@ -139,14 +144,12 @@ package com.rpgGame.app.manager
 			for (var i : int = 0; i < len; i++)
 			{
 				spellData = spellList[i];
-				skillLastCd = CDDataManager.getCdLostTm(getSkillKey(spellData.spellType));
+				skillLastCd = CDDataManager.getCdLostTm(getSkillKey(spellData.q_skillID));
 				if (skillLastCd < curGcd)
 				{
-					CDDataManager.playCD(getSkillKey(spellData.spellType), curGcd, 0);
+					CDDataManager.playCD(getSkillKey(spellData.q_skillID), curGcd, 0);
 				}
 			}
 		}
-
-
 	}
 }

@@ -236,6 +236,17 @@ package com.game.engine3D.scene.render
 				_renderUnitData.setIndependentColorTransform(_independentColorTransform);
 			}
 		}
+		
+		override public function set blendMode(value:String):void
+		{
+			if (this.blendMode == value)return;
+			super.blendMode = value;
+			if (_renderUnitData)
+			{
+				_renderUnitData.blendMode = value;
+			}
+		}
+		
 		/**
 		 * 获取状态
 		 *

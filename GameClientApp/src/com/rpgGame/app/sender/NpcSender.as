@@ -90,14 +90,14 @@ package com.rpgGame.app.sender
 				case NpcType.ACCEPT_BIAO://镖车
 				{
 					_bytes.writeBoolean(useAcess);
-					upgradeProtoInfo = BiaoCfgData.getUpgradeInfo(MainRoleManager.actorInfo.level, useAcess)
+					upgradeProtoInfo = BiaoCfgData.getUpgradeInfo(MainRoleManager.actorInfo.totalStat.level, useAcess)
 					itemListVo = UpgradeUtil.getUpgradeItemListVo( upgradeProtoInfo);
 					_bytes.writeBytes(itemListVo.getByte());
 					break;
 				}
 				case NpcType.ACCEPT_INVINCIBLE_BIAO://无敌镖车
 				{
-					upgradeProtoInfo = BiaoCfgData.getUpgradeInfo(MainRoleManager.actorInfo.level, false, true)
+					upgradeProtoInfo = BiaoCfgData.getUpgradeInfo(MainRoleManager.actorInfo.totalStat.level, false, true)
 					itemListVo = UpgradeUtil.getUpgradeItemListVo( upgradeProtoInfo);
 					_bytes.writeBytes(itemListVo.getByte());
 					break;

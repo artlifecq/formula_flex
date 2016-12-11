@@ -183,9 +183,9 @@ package com.rpgGame.app.cmdlistener.scene
 
 			playerData.x = tX;
 			playerData.y = tY;
-			playerData.hp = hp;
+			playerData.totalStat.hp = hp;
 			playerData.totalStat.life = maxHp;
-			playerData.mp = mp;
+			playerData.totalStat.mp = mp;
 			playerData.totalStat.mana = mana;
 			
 			FightFaceHelper.showAttChange(EnumHurtType.ADDHP, hp);
@@ -194,7 +194,7 @@ package com.rpgGame.app.cmdlistener.scene
 //			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_NORMAL,+mp);
 //			TrusteeshipManager.getInstance().stopAll();
 			MainRoleManager.updateActorStatus();
-			CharAttributeManager.setCharMp(MainRoleManager.actorInfo, MainRoleManager.actorInfo.mp);
+			CharAttributeManager.setCharMp(MainRoleManager.actorInfo, MainRoleManager.actorInfo.totalStat.mp);
 			GameCameraManager.tryUseCameraProperty();
 			//to do 给自己播放一个复活特效 
 			SpellAnimationHelper.addTargetEffect(MainRoleManager.actor, 

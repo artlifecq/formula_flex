@@ -1019,6 +1019,15 @@ package com.game.engine3D.scene.render
 			}
 		}
 		
+		override public function set blendMode(value:String):void
+		{
+			super.blendMode = value;
+			for each (var ru : RenderUnit3D in _renderUnitMap)
+			{
+				ru.blendMode = value;
+			}
+		}
+		
 		
 		override public function reSet($parameters : Array) : void
 		{

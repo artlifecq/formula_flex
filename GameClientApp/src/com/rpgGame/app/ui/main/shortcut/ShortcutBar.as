@@ -222,7 +222,7 @@ package com.rpgGame.app.ui.main.shortcut
 					break;
 				case skin.btnMount:
 					var lv : int = int(LanguageConfig.getText(LangMount.MOUNT_TIP_95));
-					if (MainRoleManager.actorInfo.level < lv)
+					if (MainRoleManager.actorInfo.totalStat.level < lv)
 					{
 						NoticeManager.showNotify(LangMount.MOUNT_CMDLISTENER_FAILD_120);
 						return;

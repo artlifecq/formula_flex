@@ -26,7 +26,6 @@
 	import com.rpgGame.app.cmdlistener.clientConfig.ClientConfigCmdListener;
 	import com.rpgGame.app.cmdlistener.engine.InteractiveCmdListener;
 	import com.rpgGame.app.cmdlistener.engine.KeyboardCmdListener;
-	import com.rpgGame.app.cmdlistener.login.LoginCmdListener;
 	import com.rpgGame.app.cmdlistener.mount.MountCmdListener;
 	import com.rpgGame.app.cmdlistener.scene.SceneCmdListener;
 	import com.rpgGame.app.cmdlistener.scene.SceneReleliveCmdListener;
@@ -35,7 +34,6 @@
 	import com.rpgGame.app.cmdlistener.scene.SceneUICmdListener;
 	import com.rpgGame.app.cmdlistener.scene.StoryDungeonCmdListener;
 	import com.rpgGame.app.cmdlistener.society.SocietyCmdListener;
-	import com.rpgGame.app.cmdlistener.yuMaQiShou.YuMaQiShouCmdListener;
 	
 	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
@@ -85,7 +83,7 @@
 			register("ClientConfigCmdListener", ClientConfigCmdListener);
 			register("MiscCmdListener", MiscCmdListener);
 			register("HeroMiscCmdListener", HeroMiscCmdListener);
-			register("LoginCmdListener", LoginCmdListener);
+//			register("LoginCmdListener", LoginCmdListener);
 			register("SceneCmdListener", SceneCmdListener);
 			register("StoryDungeonCmdListener", StoryDungeonCmdListener);
 			register("SceneSpellCmdListener", SceneSpellCmdListener);
@@ -127,7 +125,7 @@
 //			register("BiaoJuCmdListener", BiaoJuCmdListener); //镖局
 //			register("MazeCmdListener", MazeCmdListener); //迷宫
 			register("StallCmdListener",StallCmdListener);//摆摊
-			register("YuMaQiShouCmdListener", YuMaQiShouCmdListener); //御马场、奇兽苑
+//			register("YuMaQiShouCmdListener", YuMaQiShouCmdListener); //御马场、奇兽苑
 		}
 	}
 }

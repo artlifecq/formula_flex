@@ -55,7 +55,7 @@ package com.rpgGame.app.manager.trade
 			_tradeTarget.playerName = playerName;
 			
 			_tradeMine = new TradeTargetData();
-			_tradeMine.level = MainRoleManager.actorInfo.level;
+			_tradeMine.level = MainRoleManager.actorInfo.totalStat.level;
 			_tradeMine.playerId = MainRoleManager.actorID;
 			_tradeMine.playerName = MainRoleManager.actorInfo.name;
 			//预留打开交易面板的操作

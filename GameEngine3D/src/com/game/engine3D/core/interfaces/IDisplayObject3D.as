@@ -2,7 +2,7 @@ package com.game.engine3D.core.interfaces
 {
 	import flash.geom.Matrix3D;
 	import flash.geom.Vector3D;
-
+	
 	import away3d.containers.ObjectContainer3D;
 
 	/**
@@ -14,6 +14,10 @@ package com.game.engine3D.core.interfaces
 	 */
 	public interface IDisplayObject3D
 	{
+		function get alpha():Number;
+		function set alpha(value:Number):void;
+		function get blendMode():String;
+		function set blendMode(value:String):void;
 		function get graphicDis() : ObjectContainer3D;
 		function set graphicDis(value : ObjectContainer3D) : void;
 		function get parent() : ObjectContainer3D;

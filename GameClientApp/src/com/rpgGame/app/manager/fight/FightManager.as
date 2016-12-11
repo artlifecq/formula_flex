@@ -4,6 +4,7 @@ package com.rpgGame.app.manager.fight
 	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
@@ -12,8 +13,6 @@ package com.rpgGame.app.manager.fight
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.type.SpellTargetType;
 	
-	import app.message.SpellProto;
-
 	/**
 	 *
 	 * 战斗管理器
@@ -46,7 +45,7 @@ package com.rpgGame.app.manager.fight
 		 * @return
 		 *
 		 */
-		public static function getFightRoleState(role : SceneRole, spellData : SpellProto = null) : int
+		public static function getFightRoleState(role : SceneRole, spellData : Q_skill_model = null) : int
 		{
 			var modeState : int = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
 			var heroData:HeroData = MainRoleManager.actorInfo;
@@ -93,7 +92,7 @@ package com.rpgGame.app.manager.fight
 				}
 				if (modeState == FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY && spellData)
 				{
-					switch (spellData.activeSpell.targetType)
+					switch (spellData.q_target)
 					{
 						case SpellTargetType.FRIEND:
 							//todo好友系统要判断是否好友
@@ -106,10 +105,10 @@ package com.rpgGame.app.manager.fight
 								modeState = FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND;
 							break;
 					}
-					if ((modeState == FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY || modeState == FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND) && (spellData.affectType & 1) != 0) //不影响玩家
-					{
-						modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
-					}
+//					if ((modeState == FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY || modeState == FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND) && (spellData.affect_target & 1) != 0) //不影响玩家
+//					{
+//						modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
+//					}
 				}
 				return modeState;
 			}
@@ -125,7 +124,7 @@ package com.rpgGame.app.manager.fight
 				}
 				if (modeState == FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY && spellData)
 				{
-					switch (spellData.activeSpell.targetType)
+					switch (spellData.q_target)
 					{
 						case SpellTargetType.ENEMY:
 							modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
@@ -136,18 +135,19 @@ package com.rpgGame.app.manager.fight
 					}
 					if (modeState == FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY)
 					{
-						if ((role.data as MonsterData).isNormal && (spellData.affectType & 2) != 0) //不影响普通怪
-						{
-							modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
-						}
-						else if ((role.data as MonsterData).isElite && (spellData.affectType & 4) != 0) //不影响精英怪
-						{
-							modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
-						}
-						else if ((role.data as MonsterData).isBoss && (spellData.affectType & 8) != 0) //不影响Boss怪
-						{
-							modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
-						}
+						//暂时没有这个属性，后面可以考虑开启
+//						if ((role.data as MonsterData).isNormal && (spellData.affect_target & 2) != 0) //不影响普通怪
+//						{
+//							modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
+//						}
+//						else if ((role.data as MonsterData).isElite && (spellData.affect_target & 4) != 0) //不影响精英怪
+//						{
+//							modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
+//						}
+//						else if ((role.data as MonsterData).isBoss && (spellData.affect_target & 8) != 0) //不影响Boss怪
+//						{
+//							modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
+//						}
 					}
 				}
 				return modeState;
@@ -171,11 +171,11 @@ package com.rpgGame.app.manager.fight
 //				{
 //					modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
 //				}
-				if (modeState == FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY && spellData != null && (spellData.affectType & 32) != 0) //不影响镖车
-				{
-					modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
-				}
-				return modeState;
+//				if (modeState == FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY && spellData != null && (spellData.affect_target & 32) != 0) //不影响镖车
+//				{
+//					modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
+//				}
+//				return modeState;
 			}
 			else if(role.type == SceneCharType.ZHAN_CHE)
 			{

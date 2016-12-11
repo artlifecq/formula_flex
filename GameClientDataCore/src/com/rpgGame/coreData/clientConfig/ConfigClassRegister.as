@@ -22,8 +22,6 @@ package com.rpgGame.coreData.clientConfig
 		public static const ClientBuff:String = "data.ClientBuff";
 		/**  客户端对话数据									 */
 		public static const ClientDialog:String = "data.ClientDialog";
-		/**  客户端的场景																																																		 */
-		public static const ClientScene:String = "data.ClientScene";
 		/**  客户端在场景中的特效						 */
 		public static const ClientSceneEffect:String = "data.ClientSceneEffect";
 		/**  客户端在场景中的NPC									 */
@@ -44,6 +42,14 @@ package com.rpgGame.coreData.clientConfig
 		public static const HintInfo:String = "data.HintInfo";
 		/**  每一种提示类型的配置				宽度	高度	最大宽度	项目宽度	位置X	位置Y																				 */
 		public static const HintTypeSetInfo:String = "data.HintTypeSetInfo";
+		/**  							本列取消，安全区改为刷格方式				本列取消																																									 */
+		public static const Q_map:String = "data.map.Q_map";
+		/**  地图传送点数据库												 */
+		public static const Q_map_transfer:String = "data.map.Q_map_transfer";
+		/**  场景音效配置信息					 */
+		public static const SceneSoundInfo:String = "data.map.SceneSoundInfo";
+		/**  场景触发器配置表								 */
+		public static const SceneTriggerInfo:String = "data.map.SceneTriggerInfo";
 		/**  换装衣服特效资源配置							 */
 		public static const AvatarClothesEffectRes:String = "data.model.AvatarClothesEffectRes";
 		/**  换装衣服资源配置，ID只能填1-255，第一套不用填，从第二套开始		头发资源ID	身体资源名称	 */
@@ -64,6 +70,12 @@ package com.rpgGame.coreData.clientConfig
 		public static const HeroModel:String = "data.model.HeroModel";
 		/**  坐骑模型表	功能名称	动画资源名称 */
 		public static const MountModel:String = "data.model.MountModel";
+		/**  怪物列表																																																																				 */
+		public static const Q_monster:String = "data.monster.Q_monster";
+		/**  定点刷怪数据库 -- 编辑器录入									 */
+		public static const Q_scene_monster:String = "data.monster.Q_scene_monster";
+		/**  区域刷怪数据库 -- 编辑器录入											 */
+		public static const Q_scene_monster_area:String = "data.monster.Q_scene_monster_area";
 		/**  职业对应的名字		 */
 		public static const RaceNameInfo:String = "data.RaceNameInfo";
 		/**  赛马模型等配置信息								 */
@@ -74,12 +86,18 @@ package com.rpgGame.coreData.clientConfig
 		public static const AvatarResConfig:String = "data.res.AvatarResConfig";
 		/**  在场景中巡逻的NPC，角色，怪物等，信息配置	在场景中巡逻的NPC，角色，怪物等，信息配置									 */
 		public static const SceneCharPatrolInfo:String = "data.SceneCharPatrolInfo";
-		/**  场景音效配置信息				 */
-		public static const SceneSoundInfo:String = "data.SceneSoundInfo";
-		/**  场景触发器配置表								 */
-		public static const SceneTriggerInfo:String = "data.SceneTriggerInfo";
 		/**  socket返回错误码提示			 */
 		public static const SocketErrorNoteInfo:String = "data.SocketErrorNoteInfo";
+		/**  Buff表																																																											 */
+		public static const Q_buff:String = "data.spell.Q_buff";
+		/**  技能基本信息配置数据表									1.0																																																																																			 */
+		public static const Q_skill_model:String = "data.spell.Q_skill_model";
+		/**  技能效果配置表																			 */
+		public static const Q_SpellAnimation:String = "data.spell.Q_SpellAnimation";
+		/**  单个技能效果的数据配置																																																 */
+		public static const Q_SpellEffect:String = "data.spell.Q_SpellEffect";
+		/**  召唤物表												 */
+		public static const Q_summon:String = "data.spell.Q_summon";
 		/**  属性的名字（针对不同的地方可以有不同的配置）	 */
 		public static const SpriteStatNameInfo:String = "data.SpriteStatNameInfo";
 
@@ -89,7 +107,6 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.ClientArea", com.rpgGame.coreData.clientConfig.ClientArea);
 			regClass("data.ClientBuff", com.rpgGame.coreData.clientConfig.ClientBuff);
 			regClass("data.ClientDialog", com.rpgGame.coreData.clientConfig.ClientDialog);
-			regClass("data.ClientScene", com.rpgGame.coreData.clientConfig.ClientScene);
 			regClass("data.ClientSceneEffect", com.rpgGame.coreData.clientConfig.ClientSceneEffect);
 			regClass("data.ClientSceneNPC", com.rpgGame.coreData.clientConfig.ClientSceneNPC);
 			regClass("data.ClientSceneRole", com.rpgGame.coreData.clientConfig.ClientSceneRole);
@@ -100,6 +117,10 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.GmInfo", com.rpgGame.coreData.clientConfig.GmInfo);
 			regClass("data.HintInfo", com.rpgGame.coreData.clientConfig.HintInfo);
 			regClass("data.HintTypeSetInfo", com.rpgGame.coreData.clientConfig.HintTypeSetInfo);
+			regClass("data.map.Q_map", com.rpgGame.coreData.clientConfig.Q_map);
+			regClass("data.map.Q_map_transfer", com.rpgGame.coreData.clientConfig.Q_map_transfer);
+			regClass("data.map.SceneSoundInfo", com.rpgGame.coreData.clientConfig.SceneSoundInfo);
+			regClass("data.map.SceneTriggerInfo", com.rpgGame.coreData.clientConfig.SceneTriggerInfo);
 			regClass("data.model.AvatarClothesEffectRes", com.rpgGame.coreData.clientConfig.AvatarClothesEffectRes);
 			regClass("data.model.AvatarClothesRes", com.rpgGame.coreData.clientConfig.AvatarClothesRes);
 			regClass("data.model.AvatarDeputyWeaponRes", com.rpgGame.coreData.clientConfig.AvatarDeputyWeaponRes);
@@ -110,14 +131,20 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.model.BaZhenTuRes", com.rpgGame.coreData.clientConfig.BaZhenTuRes);
 			regClass("data.model.HeroModel", com.rpgGame.coreData.clientConfig.HeroModel);
 			regClass("data.model.MountModel", com.rpgGame.coreData.clientConfig.MountModel);
+			regClass("data.monster.Q_monster", com.rpgGame.coreData.clientConfig.Q_monster);
+			regClass("data.monster.Q_scene_monster", com.rpgGame.coreData.clientConfig.Q_scene_monster);
+			regClass("data.monster.Q_scene_monster_area", com.rpgGame.coreData.clientConfig.Q_scene_monster_area);
 			regClass("data.RaceNameInfo", com.rpgGame.coreData.clientConfig.RaceNameInfo);
 			regClass("data.RacingInfo", com.rpgGame.coreData.clientConfig.RacingInfo);
 			regClass("data.RacingQuestion", com.rpgGame.coreData.clientConfig.RacingQuestion);
 			regClass("data.res.AvatarResConfig", com.rpgGame.coreData.clientConfig.AvatarResConfig);
 			regClass("data.SceneCharPatrolInfo", com.rpgGame.coreData.clientConfig.SceneCharPatrolInfo);
-			regClass("data.SceneSoundInfo", com.rpgGame.coreData.clientConfig.SceneSoundInfo);
-			regClass("data.SceneTriggerInfo", com.rpgGame.coreData.clientConfig.SceneTriggerInfo);
 			regClass("data.SocketErrorNoteInfo", com.rpgGame.coreData.clientConfig.SocketErrorNoteInfo);
+			regClass("data.spell.Q_buff", com.rpgGame.coreData.clientConfig.Q_buff);
+			regClass("data.spell.Q_skill_model", com.rpgGame.coreData.clientConfig.Q_skill_model);
+			regClass("data.spell.Q_SpellAnimation", com.rpgGame.coreData.clientConfig.Q_SpellAnimation);
+			regClass("data.spell.Q_SpellEffect", com.rpgGame.coreData.clientConfig.Q_SpellEffect);
+			regClass("data.spell.Q_summon", com.rpgGame.coreData.clientConfig.Q_summon);
 			regClass("data.SpriteStatNameInfo", com.rpgGame.coreData.clientConfig.SpriteStatNameInfo);
 
 		}

@@ -461,7 +461,7 @@ package com.rpgGame.app.manager
 		
 		public static function autoHideRelive():void
 		{
-			if(MainRoleManager.actorInfo.hp > 0)
+			if(MainRoleManager.actorInfo.totalStat.hp > 0)
 			{
 				hideRelivePanel();
 				EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_HIDE_TYPE,EnumFunctionMessageBarIcoType.RELIVE_TYPE);

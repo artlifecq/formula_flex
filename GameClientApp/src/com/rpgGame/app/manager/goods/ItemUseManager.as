@@ -436,7 +436,7 @@ package com.rpgGame.app.manager.goods
 		{
 			var userInfo : HeroData = MainRoleManager.actorInfo;
 			var requireLevel : int = ItemCfgData.getItemRequireLevel(item.cfgId);
-			var roleLvl : int = MainRoleManager.actorInfo.level;
+			var roleLvl : int = MainRoleManager.actorInfo.totalStat.level;
 			if (roleLvl < requireLevel)
 			{
 				NoticeManager.showHint(EnumHintInfo.CHAT_WORLD_CHAT_FAIL1);

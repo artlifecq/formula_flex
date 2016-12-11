@@ -132,7 +132,7 @@ package com.rpgGame.app.ui.tips
 			var mountStatus:String = LanguageConfig.getText( LangMount.MOUNT_TIPS_5, MountManager.getMountBeastCardStatue( data ) );
 			//携带等级
 			var requiredLevelColor:uint;
-			if( MainRoleManager.actorInfo.level < mountSpeciesData.requiredLevel )
+			if( MainRoleManager.actorInfo.totalStat.level < mountSpeciesData.requiredLevel )
 				requiredLevelColor = StaticValue.COLOR_CODE_13;
 			else
 				requiredLevelColor = StaticValue.COLOR_CODE_15;

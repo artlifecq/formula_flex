@@ -1,6 +1,7 @@
 package com.rpgGame.app.manager.task
 {
 	import com.game.engine3D.utils.MathUtil;
+	import com.rpgGame.app.cmdlistener.enum.EmEvenTrackType;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.collect.CollectManager;
@@ -11,7 +12,6 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.task.TaskInfoDecoder;
-	import com.rpgGame.app.cmdlistener.enum.EmEvenTrackType;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.TaskEvent;
@@ -20,6 +20,7 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.npc.NpcCfgData;
 	import com.rpgGame.coreData.cfg.task.TaskCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.collect.CollectObjcetInfo;
@@ -653,16 +654,16 @@ package com.rpgGame.app.manager.task
 		 *
 		 */
 		private static function isLeaveNpc(npc : int) : Boolean
-		{
-			var npcData : MonsterDataProto = MonsterDataManager.getData(npc);
-			if (npcData == null)
-				return true;
-
-			var pos : Point = MonsterDataManager.getMonsterPosition(npcData);
-			var distance : Number = MathUtil.getDistanceNoSqrt(pos.x, pos.y, MainRoleManager.actor.position.x, MainRoleManager.actor.position.z)
-			var farDistance : int = npcData.npc.farDistance;
-			if (distance > farDistance * farDistance || npcData.sceneId != SceneSwitchManager.currentMapId)
-				return true;
+		{//等高npc的时候，再来具体搞吧，现在也没时间去整理
+//			var npcData : Q_scene_monster_area = MonsterDataManager.getSceneData(npc);
+//			if (npcData == null)
+//				return true;
+//
+//			var pos : Point = MonsterDataManager.getMonsterPosition(npcData);
+//			var distance : Number = MathUtil.getDistanceNoSqrt(pos.x, pos.y, MainRoleManager.actor.position.x, MainRoleManager.actor.position.z)
+//			var farDistance : int = npcData.npc.farDistance;
+//			if (distance > farDistance * farDistance || npcData.q_mapid != SceneSwitchManager.currentMapId)
+//				return true;
 
 			return false;
 		}

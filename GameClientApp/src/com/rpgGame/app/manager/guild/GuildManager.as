@@ -23,6 +23,8 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.item.ItemCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_monster;
+	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.guild.GuildEventType;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
@@ -49,7 +51,6 @@ package com.rpgGame.app.manager.guild
 	import app.message.GuildOfficerPos;
 	import app.message.GuildPosOfficersProto;
 	import app.message.GuildProto;
-	import app.message.MonsterDataProto;
 	import app.message.GuildLevelDatasProto.GuildLevelDataProto;
 	import app.message.GuildOfficerDatasProto.GuildOfficerDataProto;
 	
@@ -876,7 +877,7 @@ package com.rpgGame.app.manager.guild
 				GameAlert.showAlertUtil(LangAlertInfo.createGuildError_2);
 				return;
 			}
-			if(MainRoleManager.actorInfo.level < MIN_CREATE_LEVEL)
+			if(MainRoleManager.actorInfo.totalStat.level < MIN_CREATE_LEVEL)
 			{
 				GameAlert.showAlertUtil(LangAlertInfo.createGuildError_5,null,MIN_CREATE_LEVEL);
 				return;
@@ -899,12 +900,14 @@ package com.rpgGame.app.manager.guild
 		/**前去创建**/
 		public static function gotoCreate():void
 		{
-			var monsterdata:MonsterDataProto=MonsterDataManager.getData(GuildCfgData.createGuildNpc);
-			var pos : Point = MonsterDataManager.getMonsterPosition(monsterdata);
+			var monsterdata:Q_monster = MonsterDataManager.getData(GuildCfgData.createGuildNpc);
+			var sceneMonsterdata:Q_scene_monster_area=MonsterDataManager.getSceneData(GuildCfgData.createGuildNpc);
+			
+			var pos : Point = MonsterDataManager.getMonsterPosition(sceneMonsterdata);
 			var monsterData : MonsterBornData = new MonsterBornData();
 			monsterData.setProtocData(monsterdata);
-			MainRoleSearchPathManager.gotoTargetData.setData(monsterdata.sceneId,pos.x,pos.y,monsterData);
-			MainRoleSearchPathManager.walkToScene(monsterdata.sceneId,pos.x,pos.y);
+			MainRoleSearchPathManager.gotoTargetData.setData(sceneMonsterdata.q_mapid,pos.x,pos.y,monsterData);
+			MainRoleSearchPathManager.walkToScene(sceneMonsterdata.q_mapid,pos.x,pos.y);
 		}
 		//------------------------------杂项
 		/**获取自己是不是帮主**/

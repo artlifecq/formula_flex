@@ -3,11 +3,10 @@ package com.rpgGame.coreData.info.buff
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ClientBuffCfgData;
 	import com.rpgGame.coreData.clientConfig.ClientBuff;
+	import com.rpgGame.coreData.clientConfig.Q_buff;
 	import com.rpgGame.coreData.enum.face.FaceTypeEnum;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
 	
-	import app.message.StateProto;
-
 	/**
 	 *
 	 * Buff数据
@@ -22,7 +21,7 @@ package com.rpgGame.coreData.info.buff
 		/** buff结束时间 */
 		public var disappearTime : Number = 0;
 		private var _roleId : Number = 0;
-		private var _stateProto : StateProto = null;
+		private var _stateProto : Q_buff = null;
 		private var _isBuff : Object = null;
 		private var _specialData : Object = null;
 		private var _description : String = "";
@@ -33,7 +32,7 @@ package com.rpgGame.coreData.info.buff
 			super(0, 0, FaceTypeEnum.BUFF + "_" + _roleId);
 		}
 
-		public function get stateProto() : StateProto
+		public function get stateProto() : Q_buff
 		{
 			if (cfgId > 0 && !_stateProto && !_specialData)
 				_stateProto = BuffStateDataManager.getData(cfgId);
@@ -68,21 +67,21 @@ package com.rpgGame.coreData.info.buff
 			if (_isBuff != null)
 				return _isBuff;
 			if (stateProto)
-				return stateProto.isBuff;
+				return stateProto.is_buff;
 			return false;
 		}
 
 		public function get totalTime() : Number
 		{
-			if (stateProto)
-				return stateProto.totalTime.toNumber();
+//			if (stateProto)
+//				return stateProto.totalTime.toNumber();
 			return 0;
 		}
 
 		public function get isHidden() : Boolean
 		{
-			if (stateProto)
-				return stateProto.isHidden;
+//			if (stateProto)
+//				return stateProto.isHidden;
 			return false;
 		}
 

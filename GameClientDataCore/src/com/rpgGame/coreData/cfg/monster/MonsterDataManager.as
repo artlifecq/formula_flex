@@ -1,15 +1,14 @@
 package com.rpgGame.coreData.cfg.monster
 {
 	import com.game.engine3D.utils.TemplateUtil;
-	import com.netease.protobuf.Int64;
-	import com.rpgGame.coreData.cfg.npc.NpcCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_monster;
+	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.role.MonsterBornData;
 	
 	import flash.geom.Point;
+	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	
-	import app.message.MonsterConfig;
-	import app.message.MonsterDataProto;
 	import app.message.MonsterDataProto.MonsterType;
 	
 	import org.client.mainCore.ds.HashMap;
@@ -23,51 +22,83 @@ package com.rpgGame.coreData.cfg.monster
 	 */
 	public class MonsterDataManager
 	{
-		private static var _map : HashMap = new HashMap();
+		private static var _monsterMap : HashMap = new HashMap();
 		private static var _monsterPosMap : HashMap = new HashMap();
-		private static var INDEX_SCENEID : String = "sceneId"
-		private static var INDEX_ID : String = "id"
-		private static var INDEX_ARR : Array = [INDEX_SCENEID];
+		private static var INDEX_SCENEID : String = "q_mapid"
+		private static var INDEX_ID : String = "q_id"
+		private static var INDEX_ARR : Array = [INDEX_ID];
 		private static var UNIQ_INDEX : Array = [INDEX_SCENEID, INDEX_ID];
 		private static var INDEX_DIC : Dictionary;
 		private static var SCENE_ID_UNIQ_INDEX : Array = [INDEX_SCENEID, INDEX_ID];
 		private static var SCENE_ID_UNIQ_DIC : Dictionary;
 
-		public static function setConfig(cfg : MonsterConfig) : void
+		public static function setMonsterConfig(data : ByteArray) : void
 		{
-			for each (var dataProto : MonsterDataProto in cfg.monsters)
+			var arr : Array = data.readObject();
+			if (arr)
 			{
-				parseMonster(dataProto);
-				if (dataProto.npc)
+				for each (var monsterData : Q_monster in arr)
 				{
-					NpcCfgData.parseNpcData(dataProto);
+					if (monsterData.q_monster_type == 4)//暂时定义4为npc，因为还没定，暂时这么写,也有可能npc跟怪物表示分开的，后面再定
+					{
+//						NpcCfgData.parseNpcData(monsterData);
+					}
+					_monsterMap.add(monsterData.q_id, monsterData);
 				}
-				_map.add(dataProto.id, dataProto);
 			}
-			INDEX_DIC = TemplateUtil.createIndexFromArr(cfg.monsters, INDEX_ARR);
-			SCENE_ID_UNIQ_DIC = TemplateUtil.createUniqIndexFromArr(cfg.monsters, SCENE_ID_UNIQ_INDEX);
-		}
-
-		private static function parseMonster(dataProto : MonsterDataProto) : void
-		{
-			var posLen : int = dataProto.pos.length;
-			var pos : Number;
-			var pt : Point;
-			var ptList : Array = [];
-			for (var k : int = 0; k < posLen; k++)
+			else
 			{
-				pos = dataProto.pos[k];
-				pt = new Point();
-				pt.x = pos >>> 16;
-				pt.y = pos & 0xffff;
-				ptList.push(pt);
+				trace("没有怪物数据！！！");
 			}
-			_monsterPosMap.add(dataProto.id, ptList);
+			
+			INDEX_DIC = TemplateUtil.createIndexFromArr(arr, INDEX_ARR);
+//			
+		}
+		
+		public static function setSceneAreaMonsterConfig(data : ByteArray):void
+		{
+			var arr : Array = data.readObject();
+			if (arr) 
+			{
+				for each(var sceneMonsterData : Q_scene_monster_area in arr)
+				{
+					parseMonster(sceneMonsterData);
+				}
+			}
+			else
+			{
+				trace("没有怪物刷新相关信息！！！");
+			}
+			SCENE_ID_UNIQ_DIC = TemplateUtil.createUniqIndexFromArr(arr, SCENE_ID_UNIQ_INDEX);
 		}
 
-		public static function get map() : HashMap
+		private static function parseMonster(monsterData : Q_scene_monster_area) : void
 		{
-			return _map;
+//			var posLen : int = monsterData.pos.length;
+//			var pos : Number;
+//			var pt : Point;
+//			var ptList : Array = [];
+//			for (var k : int = 0; k < posLen; k++)
+//			{
+//				pos = dataProto.pos[k];
+//				pt = new Point();
+//				pt.x = pos >>> 16;
+//				pt.y = pos & 0xffff;
+//				ptList.push(pt);
+//			}
+			
+			_monsterPosMap.add(monsterData.q_monster_model, new Point(monsterData.q_center_x,monsterData.q_center_y));
+		}
+
+		public static function get monsterMap() : HashMap
+		{
+			return _monsterMap;
+		}
+		
+		public static function getSceneData(id:uint):Q_scene_monster_area
+		{
+			var sceneData:Q_scene_monster_area = _monsterPosMap.getValue(id);
+			return sceneData;
 		}
 
 		/**
@@ -78,28 +109,28 @@ package com.rpgGame.coreData.cfg.monster
 		 * @param id
 		 * @return
 		 */
-		public static function getData(id : uint) : MonsterDataProto
+		public static function getData(id : uint) : Q_monster
 		{
-			var data : MonsterDataProto = _map.getValue(id);
+			var data : Q_monster = _monsterMap.getValue(id);
 			return data;
 		}
 
 		public static function getMonsterName(id : uint) : String
 		{
-			var data : MonsterDataProto = getData(id);
+			var data : Q_monster = getData(id);
 			if (data)
 			{
-				return data.name.toString();
+				return data.q_name.toString();
 			}
 			return "未知怪物";
 		}
 
 		public static function getMonsterType(id : uint) : int
 		{
-			var data : MonsterDataProto = getData(id);
+			var data : Q_monster = getData(id);
 			if (data)
 			{
-				return data.monsterType;
+				return data.q_monster_type;
 			}
 			return MonsterType.NORMAL;
 		}
@@ -126,12 +157,12 @@ package com.rpgGame.coreData.cfg.monster
 				arr = INDEX_DIC[INDEX_SCENEID][sceneID];
 			}
 			arr = arr == null ? [] : arr;
-			var vo : MonsterDataProto;
+			var vo : Q_monster;
 			var monsters : Array = [];
 			for (var i : int = 0; i < arr.length; i++)
 			{
 				vo = arr[i];
-				if (vo.npc == null)
+				if (vo.q_monster_type != 4)
 				{
 					monsters.push(vo);
 				}
@@ -147,12 +178,12 @@ package com.rpgGame.coreData.cfg.monster
 				arr = INDEX_DIC[INDEX_SCENEID][sceneID];
 			}
 			arr = arr == null ? [] : arr;
-			var vo : MonsterDataProto;
+			var vo : Q_monster;
 			var monsters : Array = [];
 			for (var i : int = 0; i < arr.length; i++)
 			{
 				vo = arr[i];
-				if (vo.npc == null)
+				if (vo.q_monster_type != 4)
 				{
 					var monsterData : MonsterBornData = new MonsterBornData();
 					monsterData.setProtocData(vo);
@@ -165,27 +196,22 @@ package com.rpgGame.coreData.cfg.monster
 		/**根据怪物配置ID取怪物刷新点*/
 		public static function getMonsterPositionByCfgID(id:int) : Point
 		{
-			var monsterDataProto : MonsterDataProto = getData(id);
-			if(monsterDataProto)
+			var monsterData : Q_scene_monster_area = getSceneData(id);
+			if(monsterData)
 			{
-				return getMonsterPosition(monsterDataProto);
+				return getMonsterPosition(monsterData);
 			}
 			return null;
 		}
 		
 		/**取怪物刷新点*/
-		public static function getMonsterPosition(monsterDataProto : MonsterDataProto) : Point
+		public static function getMonsterPosition(monsterData : Q_scene_monster_area) : Point
 		{
 			var pt : Point = new Point();
-			if (monsterDataProto)
+			if (monsterData)
 			{
-				var pos : Int64;
-				pos = monsterDataProto.pos[0];
-				if (pos)
-				{
-					pt.x = pos.high;
-					pt.y = pos.low;
-				}
+				pt.x = monsterData.q_center_x;
+				pt.y = monsterData.q_center_y;
 			}
 			return pt;
 		}
@@ -195,8 +221,8 @@ package com.rpgGame.coreData.cfg.monster
 		 */
 		public static function getMonsterSceneId(monsterId : int) : int
 		{
-			var monsterDataProto : MonsterDataProto = getData(monsterId);
-			return monsterDataProto.sceneId;
+			var monsterData : Q_scene_monster_area = getSceneData(monsterId);
+			return monsterData.q_mapid;
 		}
 	}
 }

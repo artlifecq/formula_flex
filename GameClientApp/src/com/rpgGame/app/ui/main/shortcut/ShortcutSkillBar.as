@@ -7,14 +7,13 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.info.item.ItemInfo;
 	import com.rpgGame.coreData.info.shortcuts.ShortcutsData;
 	import com.rpgGame.coreData.type.item.GridBGType;
-	
-	import app.message.SpellProto;
 	
 	import org.client.mainCore.manager.EventManager;
 	
@@ -142,7 +141,7 @@ package com.rpgGame.app.ui.main.shortcut
 			switch (shortcutData.type)
 			{
 				case ShortcutsTypeEnum.SKILL_TYPE: //如果是技能那么把这个技能设置成或自动释放的状态
-					var spellProto : SpellProto = MainRoleManager.actorInfo.spellList.getSpell(shortcutData.id);
+					var spellProto : Q_skill_model = MainRoleManager.actorInfo.spellList.getSpell(shortcutData.id);
 					if (spellProto == null)
 						return;
 
@@ -151,7 +150,7 @@ package com.rpgGame.app.ui.main.shortcut
 						//已经设置了那么就取消
 						MainRoleManager.actorInfo.spellList.removeAutoSpell(shortcutData.id);
 
-						if (spellProto.activeSpell && spellProto.activeSpell.isAllowAutoCombat)
+						if (spellProto && spellProto.is_allow_auto_combat)
 							cd.showAutoImg(true);
 						else
 							cd.showAutoImg(false);
@@ -159,7 +158,7 @@ package com.rpgGame.app.ui.main.shortcut
 						return;
 					}
 
-					if (spellProto.activeSpell && spellProto.activeSpell.isAllowAutoCombat) //如果这个技能可以设置成自动释放技能就设置它
+					if (spellProto && spellProto.is_allow_auto_combat) //如果这个技能可以设置成自动释放技能就设置它
 					{
 						var reqSetted : Boolean = MainRoleManager.actorInfo.spellList.reqAutoSpellMsg(shortcutData.id);
 						if (reqSetted)
@@ -199,7 +198,7 @@ package com.rpgGame.app.ui.main.shortcut
 			switch (shortData.type)
 			{
 				case ShortcutsTypeEnum.SKILL_TYPE:
-					var skillData : SpellProto = ShortcutsManger.getInstance().getTempSellProto(shortData.id);
+					var skillData : Q_skill_model = ShortcutsManger.getInstance().getTempSellProto(shortData.id);
 					if(skillData == null)
 					{
 						skillData = MainRoleManager.actorInfo.spellList.getSpell(shortData.id);
@@ -212,7 +211,7 @@ package com.rpgGame.app.ui.main.shortcut
 
 					FaceUtil.SetSkillGrid(grid, FaceUtil.chanceSpellToFaceInfo(skillData), true);
 
-					var isAutoSpell : Boolean = MainRoleManager.actorInfo.spellList.isAutoSpellId(skillData.spellType);
+					var isAutoSpell : Boolean = MainRoleManager.actorInfo.spellList.isAutoSpellId(skillData.q_skillID);
 					if (isAutoSpell)
 					{
 						grid.showAutoImg(false);
@@ -220,7 +219,7 @@ package com.rpgGame.app.ui.main.shortcut
 					}
 					else
 					{
-						if (skillData.activeSpell && skillData.activeSpell.isAllowAutoCombat)
+						if (skillData.is_allow_auto_combat)
 							grid.showAutoImg(true);
 						else
 							grid.showAutoImg(false);

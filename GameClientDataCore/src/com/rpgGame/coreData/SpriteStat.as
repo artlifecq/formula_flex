@@ -296,5 +296,34 @@ package com.rpgGame.coreData
 			setStatValue( CharAttributeType.SPEED, value );
 		}
 		
+		public function get hp():int
+		{
+			return getStatValue( CharAttributeType.HP );
+		}
+		
+		public function set hp( value:int ):void
+		{
+			setStatValue( CharAttributeType.HP, value );
+		}
+		
+		public function get mp():int
+		{
+			return getStatValue( CharAttributeType.MP );
+		}
+		
+		public function set mp( value:int ):void
+		{
+			setStatValue( CharAttributeType.MP, value );
+		}
+		
+		public function get level():int
+		{
+			return getStatValue( CharAttributeType.LV );
+		}
+		
+		public function set level( value:int ):void
+		{
+			setStatValue( CharAttributeType.LV, value );
+		}
 	}
 }

@@ -21,6 +21,7 @@ package com.rpgGame.app.manager.yunBiao
 	import com.rpgGame.coreData.cfg.biao.BiaoPersonData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.npc.NpcCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
 	import com.rpgGame.coreData.info.task.PrizeInfo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
@@ -393,7 +394,7 @@ package com.rpgGame.app.manager.yunBiao
 		 */		
 		private static function onTransNpc():void
 		{
-			var monsterdata:MonsterDataProto=MonsterDataManager.getData(BiaoCfgData.countryTuoYunNpc);
+			var monsterdata:Q_scene_monster_area=MonsterDataManager.getSceneData(BiaoCfgData.countryTuoYunNpc);
 			var pos : Point = MonsterDataManager.getMonsterPosition(monsterdata);
 			MainRoleSearchPathManager.walkToScene(MonsterDataManager.getMonsterSceneId(BiaoCfgData.countryTuoYunNpc), pos.x, pos.y, null, 200);
 		}
@@ -429,7 +430,7 @@ package com.rpgGame.app.manager.yunBiao
 				if( roleData != null )
 				{
 					roleData.quality = quality;
-					var data:BiaoPersonData = BiaoCfgData.getPersonalDataAtLevel( roleData.level );
+					var data:BiaoPersonData = BiaoCfgData.getPersonalDataAtLevel( roleData.totalStat.level );
 					if( data != null )
 					{
 						var biaoRes:BiaoResProto = roleData.isBroken ? data.broken_biao_res : data.normal_biao_res;
@@ -724,19 +725,19 @@ package com.rpgGame.app.manager.yunBiao
 				switch (biaoData.quality)
 				{
 					case EmQuality.QUALITY_WHITE: //白色
-						biaoNameColor = HtmlTextUtil.getTextColor(color, biaoData.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_1));
+						biaoNameColor = HtmlTextUtil.getTextColor(color, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_1));
 						break;
 					case EmQuality.QUALITY_GREEN: //绿色
-						biaoNameColor = HtmlTextUtil.getTextColor(color, biaoData.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_2));
+						biaoNameColor = HtmlTextUtil.getTextColor(color, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_2));
 						break;
 					case EmQuality.QUALITY_BLUE: //蓝色
-						biaoNameColor = HtmlTextUtil.getTextColor(color, biaoData.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_3));
+						biaoNameColor = HtmlTextUtil.getTextColor(color, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_3));
 						break;
 					case EmQuality.QUALITY_PURPLE: //紫色
-						biaoNameColor = HtmlTextUtil.getTextColor(color, biaoData.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_4));
+						biaoNameColor = HtmlTextUtil.getTextColor(color, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_4));
 						break;
 					case EmQuality.QUALITY_ORANGE: //橙色
-						biaoNameColor = HtmlTextUtil.getTextColor(color, biaoData.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_5));
+						biaoNameColor = HtmlTextUtil.getTextColor(color, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_5));
 						break;
 				}
 			}
@@ -747,19 +748,19 @@ package com.rpgGame.app.manager.yunBiao
 				switch (biaoData.quality)
 				{
 					case EmQuality.QUALITY_WHITE: //白色
-						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_1_1));
+						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_1_1));
 						break;
 					case EmQuality.QUALITY_GREEN: //绿色
-						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_2_1));
+						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_2_1));
 						break;
 					case EmQuality.QUALITY_BLUE: //蓝色
-						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_3_1));
+						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_3_1));
 						break;
 					case EmQuality.QUALITY_PURPLE: //紫色
-						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_4_1));
+						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_4_1));
 						break;
 					case EmQuality.QUALITY_ORANGE: //橙色
-						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_5_1));
+						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_5_1));
 						break;
 				}
 			}
@@ -1505,10 +1506,10 @@ package com.rpgGame.app.manager.yunBiao
 		
 		private static function onGuoYunOk() : void
 		{
-			var getNpcId:int = getGetNpcId(YunBiaoManager.GE_REN_YUN_BIAO);
-			var npc:MonsterDataProto = MonsterDataManager.getData(getNpcId);
-			if (null == npc)
-				return;
+//			var getNpcId:int = getGetNpcId(YunBiaoManager.GE_REN_YUN_BIAO);
+//			var npc:MonsterDataProto = MonsterDataManager.getData(getNpcId);
+//			if (null == npc)
+//				return;
 //			EventManager.dispatchEvent(MapEvent.NPC_MAP_TRANS_TO,getNpcId);
 		}
 

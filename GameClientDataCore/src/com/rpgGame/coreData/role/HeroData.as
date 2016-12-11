@@ -109,8 +109,8 @@ package com.rpgGame.coreData.role
 			info.id = 2;
 			info.name = nick;
 			info.mapID = 1;
-			info.level = 100;
-			info.hp = 1000;
+			info.totalStat.level = 100;
+			info.totalStat.hp = 1000;
 			info.totalStat.life = 10000;
 			info.totalStat.moveSpeed = 800;
 			info.x = 100;
@@ -149,9 +149,9 @@ package com.rpgGame.coreData.role
 			spell3.spellType = 3;
 			spell3.activeSpell = activeSpell3;
 			
-			info.spellList.addSpell(spell1);
-			info.spellList.addSpell(spell2);
-			info.spellList.addSpell(spell3);
+//			info.spellList.addSpell(spell1);
+//			info.spellList.addSpell(spell2);
+//			info.spellList.addSpell(spell3);
 			spellArrs.push(spell1);
 			spellArrs.push(spell2);
 			spellArrs.push(spell3);
@@ -166,6 +166,8 @@ package com.rpgGame.coreData.role
 		 */
 		public static function setUserLoginInfo(data : HeroData, heroInfo : MyPlayerInfo) : void
 		{
+			///角色基本信息
+			data.serverID = heroInfo.personId;
 			data.id = heroInfo.personId.ToGID();
 			data.name = heroInfo.name;
 			data.mapID = heroInfo.mapModelId;
@@ -176,12 +178,8 @@ package com.rpgGame.coreData.role
 			data.weapon = heroInfo.weapon;
 			data.deputyWeapon = heroInfo.second_weapon;
 			data.sex = heroInfo.sex;
-			
-			//			data.totalStat.moveSpeed = 800;
-			data.hp = heroInfo.hp;
-			data.totalStat.life = heroInfo.maxHp;
-			data.mp = heroInfo.mp;
-			data.totalStat.mana = heroInfo.maxMp;
+			///角色属性信息
+			data.totalStat.setData(heroInfo.attributes);
 			
 			//			data.buffList = new Vector.<BuffInfo>();
 			/*while (msg.buff > 0)
@@ -192,39 +190,10 @@ package com.rpgGame.coreData.role
 			buffInfo.disappearTime = buffer.readVarint64();
 			data.buffList.push(buffInfo);
 			}*/
-			
+			///角色位置信息
 			RoleData.readGeneric(data, new Point(heroInfo.x,heroInfo.y));
-			//			if (heroProto.heroBasic)
-			//			{
-			//				info.id = heroProto.heroBasic.id.toNumber();
-			//				info.name = heroProto.heroBasic.name;
-			//				info._resources = heroProto.heroBasic.model.resources;
-			//				info.countryId = heroProto.heroBasic.country;
-			//			}
-			//			
-			//			if (heroProto.addSpriteStatModuleObj)
-			//			{
-			//				info.spriteStat.setData(heroProto.addSpriteStatModuleObj.addStat);
-			//				info.obtainSpriteStatPoint = heroProto.addSpriteStatModuleObj.obtainSpriteStatPoint;
-			//				info.usedSpriteStatPoint = heroProto.addSpriteStatModuleObj.usedSpriteStatPoint;
-			//			}
-			//			//			info.totalStat.setData(heroProto.totalStat);
-			//			//			info.spriteStat.setData(heroProto.heroSpriteStat.addStat);
-			//			
-			//			if (heroProto.sceneModuleObj)
-			//			{
-			//				data.totalStat.setData(heroProto.sceneModuleObj.totalStat);
-			//				info.mapID = heroProto.sceneModuleObj.sceneId;
-			//				if (heroProto.sceneModuleObj.heroLevel)
-			//				{
-			//					info.level = heroProto.sceneModuleObj.heroLevel.level;
-			//					info.curExp = heroProto.sceneModuleObj.heroLevel.exp ? heroProto.sceneModuleObj.heroLevel.exp.toNumber() : 0;
-			//					info.upgradeExp = heroProto.sceneModuleObj.heroLevel.upgradeExp.toNumber();
-			//				}
-			//				info.pkAmount = heroProto.sceneModuleObj.pkStatus.pkAmount;
-			//				info.pkAmountLeftTime = heroProto.sceneModuleObj.pkStatus.nextReducePkAmountTime.toNumber();
-			//			}
-			//			
+		
+		
 			//			if (heroProto.heroMiscModuleObj)
 			//			{
 			//				info.amountInfo.setSomeType(AmountType.JINZI, heroProto.heroMiscModuleObj.jinzi ? heroProto.heroMiscModuleObj.jinzi.toNumber() : 0);
@@ -256,6 +225,7 @@ package com.rpgGame.coreData.role
 		 */
 		public static function setEnterEyeUserInfo(data : HeroData, info : PlayerInfo) : void
 		{
+			data.serverID = info.personId;
 			data.id = info.personId.ToGID();
 			data.name = info.name;
 			
@@ -278,7 +248,7 @@ package com.rpgGame.coreData.role
 			data.weapon = info.weapon;
 			data.deputyWeapon = info.second_weapon;
 			
-			data.level = info.level;
+			data.totalStat.setData(info.attributes);
 			
 //			data.hp = info.hp;
 //			data.totalStat.life = info.maxHp;
@@ -308,7 +278,7 @@ package com.rpgGame.coreData.role
 		{
 			teamRoleData.id = teamUint.id;
 			teamRoleData.name = teamUint.name;
-			teamRoleData.level = teamUint.level;
+			teamRoleData.totalStat.level = teamUint.level;
 			teamRoleData.societyName = teamUint.guildName;
 			teamRoleData.mapID = teamUint.sceneId;
 			teamRoleData.countryId = teamUint.countryId;
@@ -325,37 +295,37 @@ package com.rpgGame.coreData.role
 		 */
 		public static function setOtherRoleData(heroData : HeroData, roleInfo : OtherHeroProto) : void
 		{
-			if (roleInfo.hasHeroBasic)
-			{
-				heroData.id = roleInfo.heroBasic.id.toNumber();
-				heroData.countryId = roleInfo.heroBasic.country;
-				heroData.name = roleInfo.heroBasic.name;
+//			if (roleInfo.hasHeroBasic)
+//			{
+//				heroData.id = roleInfo.heroBasic.id.toNumber();
+//				heroData.countryId = roleInfo.heroBasic.country;
+//				heroData.name = roleInfo.heroBasic.name;
 //				heroData._resources = roleInfo.heroBasic.model.resources;
-			}
-			
-			if (roleInfo.hasFamilyModuleObj)
-			{
-				heroData.societyName = roleInfo.familyModuleObj.familyName;
-				heroData.guildName = roleInfo.familyModuleObj.guildName;
-			}
-			if (roleInfo.hasSceneModuleObj)
-			{
-				if (roleInfo.sceneModuleObj.pkStatus && roleInfo.sceneModuleObj.pkStatus.pkAmount)
-					heroData.pkAmount = roleInfo.sceneModuleObj.pkStatus.pkAmount;
-				heroData.hp = roleInfo.sceneModuleObj.life ? roleInfo.sceneModuleObj.life.toNumber() : 0;
-				heroData.mp = roleInfo.sceneModuleObj.mana ? roleInfo.sceneModuleObj.mana.toNumber() : 0;
-				if (roleInfo.sceneModuleObj.heroLevel)
-				{
-					heroData.level = roleInfo.sceneModuleObj.heroLevel.level;
-					heroData.curExp = roleInfo.sceneModuleObj.heroLevel.exp ? roleInfo.sceneModuleObj.heroLevel.exp.toNumber() : 0;
-					heroData.upgradeExp = roleInfo.sceneModuleObj.heroLevel.upgradeExp ? roleInfo.sceneModuleObj.heroLevel.upgradeExp.toNumber() : 0;
-				}
-				heroData.fightingAmount = roleInfo.sceneModuleObj.fightingAmount.toNumber();
-			}
-			
+//			}
+//			
+//			if (roleInfo.hasFamilyModuleObj)
+//			{
+//				heroData.societyName = roleInfo.familyModuleObj.familyName;
+//				heroData.guildName = roleInfo.familyModuleObj.guildName;
+//			}
+//			if (roleInfo.hasSceneModuleObj)
+//			{
+//				if (roleInfo.sceneModuleObj.pkStatus && roleInfo.sceneModuleObj.pkStatus.pkAmount)
+//					heroData.pkAmount = roleInfo.sceneModuleObj.pkStatus.pkAmount;
+//				heroData.hp = roleInfo.sceneModuleObj.life ? roleInfo.sceneModuleObj.life.toNumber() : 0;
+//				heroData.mp = roleInfo.sceneModuleObj.mana ? roleInfo.sceneModuleObj.mana.toNumber() : 0;
+//				if (roleInfo.sceneModuleObj.heroLevel)
+//				{
+//					heroData.level = roleInfo.sceneModuleObj.heroLevel.level;
+//					heroData.curExp = roleInfo.sceneModuleObj.heroLevel.exp ? roleInfo.sceneModuleObj.heroLevel.exp.toNumber() : 0;
+//					heroData.upgradeExp = roleInfo.sceneModuleObj.heroLevel.upgradeExp ? roleInfo.sceneModuleObj.heroLevel.upgradeExp.toNumber() : 0;
+//				}
+//				heroData.fightingAmount = roleInfo.sceneModuleObj.fightingAmount.toNumber();
+//			}
+//			
 //			heroData.totalStat.setData(roleInfo.sceneModuleObj.totalStat);
-			heroData.equipInfo.setEquipsProto(roleInfo.goodsContainerModuleObj.heroEquipment);
-			heroData.mounModuletData.setConfig(roleInfo.mountModuleObj);
+//			heroData.equipInfo.setEquipsProto(roleInfo.goodsContainerModuleObj.heroEquipment);
+//			heroData.mounModuletData.setConfig(roleInfo.mountModuleObj);
 		}
 		
 		public function get jobName() : String

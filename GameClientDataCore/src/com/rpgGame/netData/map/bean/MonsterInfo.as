@@ -1,6 +1,6 @@
 package com.rpgGame.netData.map.bean{
 	import com.rpgGame.netData.buff.bean.BuffInfo;
-	import com.rpgGame.netData.map.bean.BossAIInfo;
+	import com.rpgGame.netData.structs.Position;
 	
 	import org.game.netCore.data.long;
 	
@@ -20,11 +20,8 @@ package com.rpgGame.netData.map.bean{
 		//怪物Id
 		private var _monsterId: long;
 		
-		//攻击目标Id
-		private var _targetId: long;
-		
 		//怪物模板Id
-		private var _monsterModelId: int;
+		private var _modelId: int;
 		
 		//怪物名字
 		private var _monsterName: String;
@@ -38,20 +35,14 @@ package com.rpgGame.netData.map.bean{
 		//怪物敌对类型 0-全体玩家敌对， 1-全体玩家友好， 2-帮派敌对
 		private var _friend: int;
 		
-		//怪物敌对参数
-		private var _friendPara: String;
-		
 		//怪物等级
 		private var _level: int;
 		
 		//怪物所在地图
-		private var _mapId: int;
+		private var _mapModelId: int;
 		
-		//怪物所在X
-		private var _x: int;
-		
-		//怪物所在Y
-		private var _y: int;
+		//怪物所在坐标
+		private var _position: com.rpgGame.netData.structs.Position;
 		
 		//怪物HP
 		private var _hp: int;
@@ -66,25 +57,17 @@ package com.rpgGame.netData.map.bean{
 		private var _dir: int;
 		
 		//跑步坐标集合
-		private var _positions: Vector.<int> = new Vector.<int>();
-		//血量倍率
-		private var _hprate: int;
-		
+		private var _positions: Vector.<com.rpgGame.netData.structs.Position> = new Vector.<com.rpgGame.netData.structs.Position>();
 		//buff集合
 		private var _buffs: Vector.<com.rpgGame.netData.buff.bean.BuffInfo> = new Vector.<com.rpgGame.netData.buff.bean.BuffInfo>();
-		//AI数据
-		private var _bossaiinfo: BossAIInfo;
-		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
 			//怪物Id
 			writeLong(_monsterId);
-			//攻击目标Id
-			writeLong(_targetId);
 			//怪物模板Id
-			writeInt(_monsterModelId);
+			writeInt(_modelId);
 			//怪物名字
 			writeString(_monsterName);
 			//怪物资源造型
@@ -93,16 +76,12 @@ package com.rpgGame.netData.map.bean{
 			writeInt(_monsterIcon);
 			//怪物敌对类型 0-全体玩家敌对， 1-全体玩家友好， 2-帮派敌对
 			writeByte(_friend);
-			//怪物敌对参数
-			writeString(_friendPara);
 			//怪物等级
 			writeShort(_level);
 			//怪物所在地图
-			writeInt(_mapId);
-			//怪物所在X
-			writeShort(_x);
-			//怪物所在Y
-			writeShort(_y);
+			writeInt(_mapModelId);
+			//怪物所在坐标
+			writeBean(_position);
 			//怪物HP
 			writeInt(_hp);
 			//怪物最大HP
@@ -114,17 +93,13 @@ package com.rpgGame.netData.map.bean{
 			//跑步坐标集合
 			writeShort(_positions.length);
 			for (var i: int = 0; i < _positions.length; i++) {
-				writeByte(_positions[i]);
+				writeBean(_positions[i]);
 			}
-			//血量倍率
-			writeByte(_hprate);
 			//buff集合
 			writeShort(_buffs.length);
 			for (var i: int = 0; i < _buffs.length; i++) {
 				writeBean(_buffs[i]);
 			}
-			//AI数据
-			writeBean(_bossaiinfo);
 			return true;
 		}
 		
@@ -134,10 +109,8 @@ package com.rpgGame.netData.map.bean{
 		override protected function reading(): Boolean{
 			//怪物Id
 			_monsterId = readLong();
-			//攻击目标Id
-			_targetId = readLong();
 			//怪物模板Id
-			_monsterModelId = readInt();
+			_modelId = readInt();
 			//怪物名字
 			_monsterName = readString();
 			//怪物资源造型
@@ -146,16 +119,12 @@ package com.rpgGame.netData.map.bean{
 			_monsterIcon = readInt();
 			//怪物敌对类型 0-全体玩家敌对， 1-全体玩家友好， 2-帮派敌对
 			_friend = readByte();
-			//怪物敌对参数
-			_friendPara = readString();
 			//怪物等级
 			_level = readShort();
 			//怪物所在地图
-			_mapId = readInt();
-			//怪物所在X
-			_x = readShort();
-			//怪物所在Y
-			_y = readShort();
+			_mapModelId = readInt();
+			//怪物所在坐标
+			_position = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
 			//怪物HP
 			_hp = readInt();
 			//怪物最大HP
@@ -167,17 +136,13 @@ package com.rpgGame.netData.map.bean{
 			//跑步坐标集合
 			var positions_length : int = readShort();
 			for (var i: int = 0; i < positions_length; i++) {
-				_positions[i] = readByte();
+				_positions[i] = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
 			}
-			//血量倍率
-			_hprate = readByte();
 			//buff集合
 			var buffs_length : int = readShort();
 			for (var i: int = 0; i < buffs_length; i++) {
 				_buffs[i] = readBean(com.rpgGame.netData.buff.bean.BuffInfo) as com.rpgGame.netData.buff.bean.BuffInfo;
 			}
-			//AI数据
-			_bossaiinfo = readBean(BossAIInfo) as BossAIInfo;
 			return true;
 		}
 		
@@ -197,33 +162,18 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * get 攻击目标Id
-		 * @return 
-		 */
-		public function get targetId(): long{
-			return _targetId;
-		}
-		
-		/**
-		 * set 攻击目标Id
-		 */
-		public function set targetId(value: long): void{
-			this._targetId = value;
-		}
-		
-		/**
 		 * get 怪物模板Id
 		 * @return 
 		 */
-		public function get monsterModelId(): int{
-			return _monsterModelId;
+		public function get modelId(): int{
+			return _modelId;
 		}
 		
 		/**
 		 * set 怪物模板Id
 		 */
-		public function set monsterModelId(value: int): void{
-			this._monsterModelId = value;
+		public function set modelId(value: int): void{
+			this._modelId = value;
 		}
 		
 		/**
@@ -287,21 +237,6 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * get 怪物敌对参数
-		 * @return 
-		 */
-		public function get friendPara(): String{
-			return _friendPara;
-		}
-		
-		/**
-		 * set 怪物敌对参数
-		 */
-		public function set friendPara(value: String): void{
-			this._friendPara = value;
-		}
-		
-		/**
 		 * get 怪物等级
 		 * @return 
 		 */
@@ -320,45 +255,30 @@ package com.rpgGame.netData.map.bean{
 		 * get 怪物所在地图
 		 * @return 
 		 */
-		public function get mapId(): int{
-			return _mapId;
+		public function get mapModelId(): int{
+			return _mapModelId;
 		}
 		
 		/**
 		 * set 怪物所在地图
 		 */
-		public function set mapId(value: int): void{
-			this._mapId = value;
+		public function set mapModelId(value: int): void{
+			this._mapModelId = value;
 		}
 		
 		/**
-		 * get 怪物所在X
+		 * get 怪物所在坐标
 		 * @return 
 		 */
-		public function get x(): int{
-			return _x;
+		public function get position(): com.rpgGame.netData.structs.Position{
+			return _position;
 		}
 		
 		/**
-		 * set 怪物所在X
+		 * set 怪物所在坐标
 		 */
-		public function set x(value: int): void{
-			this._x = value;
-		}
-		
-		/**
-		 * get 怪物所在Y
-		 * @return 
-		 */
-		public function get y(): int{
-			return _y;
-		}
-		
-		/**
-		 * set 怪物所在Y
-		 */
-		public function set y(value: int): void{
-			this._y = value;
+		public function set position(value: com.rpgGame.netData.structs.Position): void{
+			this._position = value;
 		}
 		
 		/**
@@ -425,30 +345,15 @@ package com.rpgGame.netData.map.bean{
 		 * get 跑步坐标集合
 		 * @return 
 		 */
-		public function get positions(): Vector.<int>{
+		public function get positions(): Vector.<com.rpgGame.netData.structs.Position>{
 			return _positions;
 		}
 		
 		/**
 		 * set 跑步坐标集合
 		 */
-		public function set positions(value: Vector.<int>): void{
+		public function set positions(value: Vector.<com.rpgGame.netData.structs.Position>): void{
 			this._positions = value;
-		}
-		
-		/**
-		 * get 血量倍率
-		 * @return 
-		 */
-		public function get hprate(): int{
-			return _hprate;
-		}
-		
-		/**
-		 * set 血量倍率
-		 */
-		public function set hprate(value: int): void{
-			this._hprate = value;
 		}
 		
 		/**
@@ -464,21 +369,6 @@ package com.rpgGame.netData.map.bean{
 		 */
 		public function set buffs(value: Vector.<com.rpgGame.netData.buff.bean.BuffInfo>): void{
 			this._buffs = value;
-		}
-		
-		/**
-		 * get AI数据
-		 * @return 
-		 */
-		public function get bossaiinfo(): BossAIInfo{
-			return _bossaiinfo;
-		}
-		
-		/**
-		 * set AI数据
-		 */
-		public function set bossaiinfo(value: BossAIInfo): void{
-			this._bossaiinfo = value;
 		}
 		
 	}
