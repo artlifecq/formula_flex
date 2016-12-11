@@ -848,7 +848,7 @@ package com.rpgGame.app.manager.goods
 					var requireLevel1:int;
 					var quality1:int;
 					
-					if(ItemCfgData.isAddHpItem(cfgId) && MainRoleManager.actorInfo.level >= requireLevel)
+					if(ItemCfgData.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel)
 					{
 						if( returnItem )
 						{
@@ -882,7 +882,7 @@ package com.rpgGame.app.manager.goods
 					cfgId = item.cfgId;
 					requireLevel = ItemCfgData.getItemRequireLevel( cfgId ) ;
 					
-					if(ItemCfgData.isAddHpItem(cfgId) && MainRoleManager.actorInfo.level >= requireLevel)
+					if(ItemCfgData.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel)
 					{
 						quality = ItemCfgData.getItemQuality( cfgId );
 						if( returnItem )

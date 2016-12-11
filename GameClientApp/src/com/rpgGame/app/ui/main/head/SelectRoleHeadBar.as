@@ -576,8 +576,8 @@ package com.rpgGame.app.ui.main.head
 //					return;
 				case SceneCharType.BIAO_CHE: //镖车名字特殊处理，策划需求  运镖list3.0优化里面的，2016-05-18
 					var biaoCheData : BiaoCheData = data as BiaoCheData;
-					updateLife(biaoCheData.hp, biaoCheData.totalStat.life);
-					updateLevel(biaoCheData.level);
+					updateLife(biaoCheData.totalStat.hp, biaoCheData.totalStat.life);
+					updateLevel(biaoCheData.totalStat.level);
 					
 					var stateString:String = "";
 					if( biaoCheData.isBroken )//破损的镖车
@@ -589,8 +589,8 @@ package com.rpgGame.app.ui.main.head
 					_buffListBar.updateOwnerRole(_role);
 					break;
 				default:
-					updateLife(roleData.hp, roleData.totalStat.life);
-					updateLevel(roleData.level);
+					updateLife(roleData.totalStat.hp, roleData.totalStat.life);
+					updateLevel(roleData.totalStat.level);
 					updateName(_role.name);
 					_buffListBar.updateOwnerRole(_role);
 					break;

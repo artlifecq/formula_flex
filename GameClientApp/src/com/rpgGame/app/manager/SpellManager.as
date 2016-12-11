@@ -7,6 +7,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
 	import com.rpgGame.coreData.info.upgrade.UpgradeProtoInfo;
@@ -49,10 +50,10 @@ package com.rpgGame.app.manager
 		 * @return 
 		 * 
 		 */		
-		public static function getRaceSpellPoint():int
-		{
-			return MainRoleManager.actorInfo.spellList.getCurRaceSpellAllLevel( MainRoleManager.actorInfo.spellList.race );
-		}
+//		public static function getRaceSpellPoint():int
+//		{
+//			return MainRoleManager.actorInfo.spellList.getCurRaceSpellAllLevel( MainRoleManager.actorInfo.spellList.race );
+//		}
 		
 		/**
 		 * 是否还有技能点没用
@@ -70,9 +71,10 @@ package com.rpgGame.app.manager
 		 * @return 
 		 * 
 		 */		
-		public static function canUpdateByType(spellType:int):Boolean
+		public static function canUpdateByType(spellID:int):Boolean
 		{
-			return canUpdate( SpellDataManager.getSpellLearnData(spellType) );
+//			return canUpdate( SpellDataManager.getSpellLearnData(spellID) );
+			return false;
 		}
 		
 		/**
@@ -110,30 +112,30 @@ package com.rpgGame.app.manager
 			}
 			
 			//学过别的系就不能学这个系的了
-			if( MainRoleManager.actorInfo.spellList.race != -1 && spellLearnProto.spell.race != 0 && spellLearnProto.spell.race != MainRoleManager.actorInfo.spellList.race )
-			{
-				if(hintOnFail)NoticeManager.showHint(EnumHintInfo.SPELL_LEARN_UPGRADE_FAIL12);
-				return false;
-			}
+//			if( MainRoleManager.actorInfo.spellList.race != -1 && spellLearnProto.spell.race != 0 && spellLearnProto.spell.race != MainRoleManager.actorInfo.spellList.race )
+//			{
+//				if(hintOnFail)NoticeManager.showHint(EnumHintInfo.SPELL_LEARN_UPGRADE_FAIL12);
+//				return false;
+//			}
 			//------------------------------
-			var spellProto:SpellProto = MainRoleManager.actorInfo.spellList.getSpell( spellLearnProto.spell.spellType );
-			if( spellProto == null )
-			{
-				//如果为空说明这个技能没有学习过，那么就用配置的数据，就是一级数据
-				spellProto = spellLearnProto.spell;
-			}
-			//满级
-			if( spellProto.nextSpell == null)
-			{
-				if(hintOnFail)NoticeManager.showHint(EnumHintInfo.SPELL_LEARN_UPGRADE_FAIL2);
-				return false;
-			}
-			//还没达到下一级的标准时
-			if(spellProto.nextSpell.canLearnLevel > MainRoleManager.actorInfo.level )
-			{
-				if(hintOnFail)NoticeManager.showHint(EnumHintInfo.SPELL_LEARN_UPGRADE_FAIL3);
-				return false;
-			}
+//			var spellProto:Q_skill_model = MainRoleManager.actorInfo.spellList.getSpell( spellLearnProto.spell.spellType );
+//			if( spellProto == null )
+//			{
+//				//如果为空说明这个技能没有学习过，那么就用配置的数据，就是一级数据
+//				spellProto = spellLearnProto.spell;
+//			}
+//			//满级
+//			if( spellProto.nextSpell == null)
+//			{
+//				if(hintOnFail)NoticeManager.showHint(EnumHintInfo.SPELL_LEARN_UPGRADE_FAIL2);
+//				return false;
+//			}
+//			//还没达到下一级的标准时
+//			if(spellProto.nextSpell.canLearnLevel > MainRoleManager.actorInfo.totalStat.level )
+//			{
+//				if(hintOnFail)NoticeManager.showHint(EnumHintInfo.SPELL_LEARN_UPGRADE_FAIL3);
+//				return false;
+//			}
 			//------------------------------
 			
 			if( !isCanLearnMutex( spellLearnProto.spell.spellType ) )
@@ -151,25 +153,25 @@ package com.rpgGame.app.manager
 		 */		
 		public static function isCanLearnMutex( spellType:int ):Boolean
 		{
-			var index:int;
-			var mutex:int
-			var mutexArr:Array = SpellDataManager.getSpellMutexIndex( spellType );
-			index = mutexArr[1];
-			mutex = mutexArr[0];
-			var spells:Array = MainRoleManager.actorInfo.spellList.getSpellList();
-			var len:int = spells.length;
-			var spellProto:SpellProto
-			for( var i:int = 0; i < len; i++ )
-			{
-				spellProto = spells[i];
-				mutexArr = SpellDataManager.getSpellMutexIndex(spellProto.spellType);
-				
-				if( mutexArr[1] == -1 )
-					continue;
-				//学习过的技能里有同系且索引不同的，是不能学习
-				if( mutexArr[ 0 ] == mutex && index != mutexArr[1] )
-					return false;
-			}
+//			var index:int;
+//			var mutex:int
+//			var mutexArr:Array = SpellDataManager.getSpellMutexIndex( spellType );
+//			index = mutexArr[1];
+//			mutex = mutexArr[0];
+//			var spells:Array = MainRoleManager.actorInfo.spellList.getSpellList();
+//			var len:int = spells.length;
+//			var spellProto:SpellProto
+//			for( var i:int = 0; i < len; i++ )
+//			{
+//				spellProto = spells[i];
+//				mutexArr = SpellDataManager.getSpellMutexIndex(spellProto.spellType);
+//				
+//				if( mutexArr[1] == -1 )
+//					continue;
+//				//学习过的技能里有同系且索引不同的，是不能学习
+//				if( mutexArr[ 0 ] == mutex && index != mutexArr[1] )
+//					return false;
+//			}
 			
 			return true;
 		}
@@ -182,7 +184,7 @@ package com.rpgGame.app.manager
 		 */		 
 		public static function learnOrUpdateSpellByType(spellType:int, hintOnFail:Boolean = false):void
 		{
-			learnOrUpdateSpell(SpellDataManager.getSpellLearnData(spellType), hintOnFail)
+//			learnOrUpdateSpell(SpellDataManager.getSpellLearnData(spellType), hintOnFail)
 		}
 		
 		/**
@@ -209,26 +211,26 @@ package com.rpgGame.app.manager
 		 */		
 		public static function getIndexLearnAllPoint( spellType:int ):int
 		{
-			var index:int;
-			var mutexArr:Array = SpellDataManager.getSpellMutexIndex( spellType );
-			index = mutexArr[1];
-			var spells:Array = MainRoleManager.actorInfo.spellList.getSpellList();
-			var len:int = spells.length;
-			var spellProto:SpellProto;
-			var allLevel:int = 0;
-			for( var i:int = 0; i < len; i++ )
-			{
-				spellProto = spells[i];
-				mutexArr = SpellDataManager.getSpellMutexIndex(spellProto.spellType);
-				
-				if( mutexArr[1] == index )
-				{
-					allLevel += spellProto.spellLevel;
-				}
-			}
-			
-			return allLevel;
-		
+//			var index:int;
+//			var mutexArr:Array = SpellDataManager.getSpellMutexIndex( spellType );
+//			index = mutexArr[1];
+//			var spells:Array = MainRoleManager.actorInfo.spellList.getSpellList();
+//			var len:int = spells.length;
+//			var spellProto:SpellProto;
+//			var allLevel:int = 0;
+//			for( var i:int = 0; i < len; i++ )
+//			{
+//				spellProto = spells[i];
+//				mutexArr = SpellDataManager.getSpellMutexIndex(spellProto.spellType);
+//				
+//				if( mutexArr[1] == index )
+//				{
+//					allLevel += spellProto.spellLevel;
+//				}
+//			}
+//			
+//			return allLevel;
+			return 0;
 		}
 		
 		/**
@@ -236,15 +238,15 @@ package com.rpgGame.app.manager
 		 * @param spellProto
 		 * 
 		 */		
-		public static function onLearnedOrUpgradedActiveSpell( spellProto:SpellProto ):void
+		public static function onLearnedOrUpgradedActiveSpell( spellProto:Q_skill_model ):void
 		{
-			if( MainRoleManager.actorInfo.spellList.race == -1 )
-			{
-				if( spellProto.race != 0 )
-				{
-					MainRoleManager.actorInfo.spellList.race = spellProto.race;
-				}
-			}
+//			if( MainRoleManager.actorInfo.spellList.race == -1 )
+//			{
+//				if( spellProto.race != 0 )
+//				{
+//					MainRoleManager.actorInfo.spellList.race = spellProto.race;
+//				}
+//			}
 			
 //			trace("升级成功")
 			MainRoleManager.actorInfo.spellList.addSpell( spellProto );

@@ -2,16 +2,12 @@ package com.rpgGame.app.cmdlistener
 {
 	import com.rpgGame.app.manager.BaZhenTuManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.core.events.BaZhenTuEvent;
 	import com.rpgGame.coreData.cfg.BaZhenTuCfgData;
 	import com.rpgGame.coreData.lang.LangBaZhenTu;
-	import com.rpgGame.coreData.lang.LangBackPack;
 	import com.rpgGame.coreData.role.MonsterData;
-	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.role.RoleType;
-	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import app.cmd.BaZhenTuModuleMessages;
 	

@@ -3,6 +3,7 @@ package com.rpgGame.app.manager.chat
 	import com.gameClient.utils.StringFilter;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.shell.ShellManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.richText.RichTextCustomLinkType;
 	import com.rpgGame.app.richText.RichTextCustomUtil;
@@ -484,6 +485,7 @@ package com.rpgGame.app.manager.chat
 		 */
 		public static function sendGMMsg(msg : String) : Boolean
 		{
+			ShellManager.parse(msg);return false;
 			//验证gm命令
 			var isGm : Boolean = isGmMsg(msg);
 			if (isGm)
@@ -610,7 +612,7 @@ package com.rpgGame.app.manager.chat
 		private static function checkChatLevelEnable(channel : int) : Boolean
 		{
 			var minLevel:int = ChatCfgData.getChatLevel(channel);
-			if (MainRoleManager.actorInfo.level < minLevel)
+			if (MainRoleManager.actorInfo.totalStat.level < minLevel)
 			{
 				NoticeManager.showHint(EnumHintInfo.CHAT_CHANNEL_LEVEL_FAIL, [minLevel]);
 				return false;

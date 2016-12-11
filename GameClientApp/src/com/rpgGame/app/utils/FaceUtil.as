@@ -12,6 +12,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.mount.MountConfigData;
 	import com.rpgGame.coreData.cfg.mount.MountUnitData;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.face.FaceTypeEnum;
 	import com.rpgGame.coreData.info.buff.BuffInfo;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
@@ -27,7 +28,6 @@ package com.rpgGame.app.utils
 	import flash.geom.Point;
 	
 	import app.message.GoodsType;
-	import app.message.SpellProto;
 	
 	import feathers.controls.UIAsset;
 	
@@ -84,11 +84,11 @@ package com.rpgGame.app.utils
 		 * @return 
 		 * 
 		 */		
-		public static function chanceSpellToFaceInfo( skillData:SpellProto ):BaseFaceInfo
+		public static function chanceSpellToFaceInfo( skillData:Q_skill_model ):BaseFaceInfo
 		{
-			var info:BaseFaceInfo = new BaseFaceInfo( skillData.spellType,skillData.spellType, FaceTypeEnum.SKILL );
-			info.icoName = skillData.icon;
-			info.name = skillData.name;
+			var info:BaseFaceInfo = new BaseFaceInfo( skillData.q_skillID,skillData.q_skillID, FaceTypeEnum.SKILL );
+			info.icoName = skillData.q_icon;
+			info.name = skillData.q_skillName;
 			info.data = skillData;
 			return info;
 		}

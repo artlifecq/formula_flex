@@ -1,7 +1,7 @@
 package com.rpgGame.netData.player.bean{
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
+	import com.rpgGame.netData.player.bean.AttributeItem;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
-	import com.rpgGame.netData.player.bean.PlayerAttributeItem;
 	
 	import org.game.netCore.data.long;
 	
@@ -28,7 +28,7 @@ package com.rpgGame.netData.player.bean{
 		private var _level: int;
 		
 		//角色属性信息
-		private var _attributeList: Vector.<PlayerAttributeItem> = new Vector.<PlayerAttributeItem>();
+		private var _attributeList: Vector.<AttributeItem> = new Vector.<AttributeItem>();
 		//骑兵造型ID
 		private var _knightWepId: int;
 		
@@ -143,7 +143,7 @@ package com.rpgGame.netData.player.bean{
 			//角色属性信息
 			var attributeList_length : int = readShort();
 			for (var i: int = 0; i < attributeList_length; i++) {
-				_attributeList[i] = readBean(PlayerAttributeItem) as PlayerAttributeItem;
+				_attributeList[i] = readBean(AttributeItem) as AttributeItem;
 			}
 			//骑兵造型ID
 			_knightWepId = readByte();
@@ -239,14 +239,14 @@ package com.rpgGame.netData.player.bean{
 		 * get 角色属性信息
 		 * @return 
 		 */
-		public function get attributeList(): Vector.<PlayerAttributeItem>{
+		public function get attributeList(): Vector.<AttributeItem>{
 			return _attributeList;
 		}
 		
 		/**
 		 * set 角色属性信息
 		 */
-		public function set attributeList(value: Vector.<PlayerAttributeItem>): void{
+		public function set attributeList(value: Vector.<AttributeItem>): void{
 			this._attributeList = value;
 		}
 		

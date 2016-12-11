@@ -1,7 +1,7 @@
 package com.rpgGame.coreData.cfg
 {
-	import com.rpgGame.coreData.clientConfig.ClientScene;
-
+	import com.rpgGame.coreData.clientConfig.Q_map;
+	
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 
@@ -19,13 +19,13 @@ package com.rpgGame.coreData.cfg
 		public static function setup(data : ByteArray) : void
 		{
 			var arr : Array = data.readObject();
-			for each (var info : ClientScene in arr)
+			for each (var info : Q_map in arr)
 			{
 				_dataDic[info.q_map_id] = info;
 			}
 		}
 
-		public static function getSceneInfo(sceneID : uint) : ClientScene
+		public static function getSceneInfo(sceneID : uint) : Q_map
 		{
 			return _dataDic[sceneID];
 		}

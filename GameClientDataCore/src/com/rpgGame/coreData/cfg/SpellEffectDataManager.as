@@ -1,5 +1,10 @@
 package com.rpgGame.coreData.cfg
 {
+	import com.netease.protobuf.ReadUtils;
+	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
+	
+	import flash.utils.ByteArray;
+	
 	import app.message.SpellEffectConfig;
 	import app.message.SpellEffectProto;
 	
@@ -20,22 +25,23 @@ package com.rpgGame.coreData.cfg
 
 		private static var _map : HashMap = new HashMap();
 
-		public static function setConfig(cfg : SpellEffectConfig) : void
+		public static function setConfig(data : ByteArray) : void
 		{
-			if(!cfg)
+			var arr:Array = data.readObject();
+			if(!arr)
 				return;
-			for each (var dataProto : SpellEffectProto in cfg.spellEffects)
+			for each (var dataProto : Q_SpellEffect in arr)
 			{
 				addData(dataProto);
 			}
 		}
 
-		public static function addData(dataProto : SpellEffectProto) : void
+		public static function addData(dataProto : Q_SpellEffect) : void
 		{
 			_map.add(dataProto.id, dataProto);
 		}
 
-		public static function getData(id : uint) : SpellEffectProto
+		public static function getData(id : uint) : Q_SpellEffect
 		{
 			return _map.getValue(id);
 		}

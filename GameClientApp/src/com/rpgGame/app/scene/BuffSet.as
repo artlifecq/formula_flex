@@ -6,15 +6,16 @@ package com.rpgGame.app.scene
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
+	import com.rpgGame.coreData.clientConfig.Q_buff;
 	import com.rpgGame.coreData.info.buff.BuffInfo;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RenderUnitType;
-
-	import app.message.AnimationProto;
+	
 	import app.message.StateProto;
-
+	
 	import gs.TweenLite;
-
+	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
 
@@ -93,19 +94,19 @@ package com.rpgGame.app.scene
 			if (!_role)
 				return;
 			removeBuffEffect(buffInfo.cfgId);
-			var stateProto : StateProto = buffInfo.stateProto;
+			var stateProto : Q_buff = buffInfo.stateProto;
 			if (stateProto && stateProto.animation)
 			{
-				var len : int = stateProto.animation.length;
-				for (var i : int = 0; i < len; i++)
-				{
-					var animation : int = stateProto.animation[i];
-					var animatData : AnimationProto = animation > 0 ? AnimationDataManager.getData(animation) : null;
-					if (animatData)
-					{
-						SpellAnimationHelper.addBuffEffect(_role, i, RenderUnitType.BUFF + buffInfo.cfgId, animatData.roleRes, animatData.bindBone, 0);
-					}
-				}
+//				var len : int = stateProto.animation.length;
+//				for (var i : int = 0; i < len; i++)
+//				{
+//					var animation : int = stateProto.animation[i];
+//					var animatData : Q_SpellAnimation = animation > 0 ? AnimationDataManager.getData(animation) : null;
+//					if (animatData)
+//					{
+//						SpellAnimationHelper.addBuffEffect(_role, i, RenderUnitType.BUFF + buffInfo.cfgId, animatData.role_res, animatData.bind_bone, 0);
+//					}
+//				}
 			}
 			var duration : Number = buffInfo.disappearTime - SystemTimeManager.curtTm;
 			var tween : TweenLite = TweenLite.delayedCall(duration * 0.001, onRemoveBuff, [buffInfo.cfgId]);

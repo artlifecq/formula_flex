@@ -95,16 +95,6 @@ package com.rpgGame.app.manager.role
 //			var hasStorage : Boolean = heroProto.hasStorage;
 //			StorageManager.instance.setHasStorage(heroProto.hasStorage);
 
-			//技能CD
-//			SkillCDManager.getInstance().setHeroCd(heroProto.spellModuleObj);
-//			if(heroProto.heroMiscModuleObj)
-//			{
-//				//系统设置相关
-//				ClientSettingManager.setup(heroProto.heroMiscModuleObj.clientConfigs);
-//				// 系统设置相关设置后   快捷栏初始化 才能初始化
-//				ShortcutsManger.getInstance().setup();
-//			}
-			
 //			if(heroProto.familyModuleObj)
 //			{
 //				//家族
@@ -183,11 +173,11 @@ package com.rpgGame.app.manager.role
 		 */
 		public static function updateActorStatus() : void
 		{
-			CharAttributeManager.setCharHp(MainRoleManager.actorInfo, MainRoleManager.actorInfo.hp);
+			CharAttributeManager.setCharHp(MainRoleManager.actorInfo, MainRoleManager.actorInfo.totalStat.hp);
 			MainRoleManager.actor.mapAreaType = 0;
 			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
 			MainRoleManager.actor.setGroundXY(MainRoleManager.actorInfo.x, MainRoleManager.actorInfo.y);
-			if (MainRoleManager.actorInfo.hp <= 0)
+			if (MainRoleManager.actorInfo.totalStat.hp <= 0)
 			{
 				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_DEATH, null, true);
 			}

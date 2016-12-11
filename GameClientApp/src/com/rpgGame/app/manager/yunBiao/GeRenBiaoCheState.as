@@ -376,10 +376,10 @@ package com.rpgGame.app.manager.yunBiao
 		
 		private function onGuoYunOk() : void
 		{
-			var getNpcId:int = getNpcId;
-			var npc:MonsterDataProto = MonsterDataManager.getData(getNpcId);
-			if (null == npc)
-				return;
+//			var getNpcId:int = getNpcId;
+//			var npc:MonsterDataProto = MonsterDataManager.getData(getNpcId);
+//			if (null == npc)
+//				return;
 //			EventManager.dispatchEvent(MapEvent.NPC_MAP_TRANS_TO,getNpcId);
 		}
 

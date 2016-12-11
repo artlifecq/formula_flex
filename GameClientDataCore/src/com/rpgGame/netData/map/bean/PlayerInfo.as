@@ -1,4 +1,6 @@
 package com.rpgGame.netData.map.bean{
+	import com.rpgGame.netData.player.bean.AttributeItem;
+	import com.rpgGame.netData.structs.Position;
 	
 	import org.game.netCore.data.long;
 	
@@ -20,9 +22,6 @@ package com.rpgGame.netData.map.bean{
 		
 		//角色名字
 		private var _name: String;
-		
-		//角色等级
-		private var _level: int;
 		
 		//角色所在X
 		private var _x: int;
@@ -57,6 +56,10 @@ package com.rpgGame.netData.map.bean{
 		//PK类型
 		private var _pkType: int;
 		
+		//角色属性信息
+		private var _attributes: Vector.<com.rpgGame.netData.player.bean.AttributeItem> = new Vector.<com.rpgGame.netData.player.bean.AttributeItem>();
+		//跑步坐标集合
+		private var _positions: Vector.<com.rpgGame.netData.structs.Position> = new Vector.<com.rpgGame.netData.structs.Position>();
 		/**
 		 * 写入字节缓存
 		 */
@@ -65,8 +68,6 @@ package com.rpgGame.netData.map.bean{
 			writeLong(_personId);
 			//角色名字
 			writeString(_name);
-			//角色等级
-			writeShort(_level);
 			//角色所在X
 			writeShort(_x);
 			//角色所在Y
@@ -89,6 +90,16 @@ package com.rpgGame.netData.map.bean{
 			writeInt(_mount);
 			//PK类型
 			writeInt(_pkType);
+			//角色属性信息
+			writeShort(_attributes.length);
+			for (var i: int = 0; i < _attributes.length; i++) {
+				writeBean(_attributes[i]);
+			}
+			//跑步坐标集合
+			writeShort(_positions.length);
+			for (var i: int = 0; i < _positions.length; i++) {
+				writeBean(_positions[i]);
+			}
 			return true;
 		}
 		
@@ -100,8 +111,6 @@ package com.rpgGame.netData.map.bean{
 			_personId = readLong();
 			//角色名字
 			_name = readString();
-			//角色等级
-			_level = readShort();
 			//角色所在X
 			_x = readShort();
 			//角色所在Y
@@ -124,6 +133,16 @@ package com.rpgGame.netData.map.bean{
 			_mount = readInt();
 			//PK类型
 			_pkType = readInt();
+			//角色属性信息
+			var attributes_length : int = readShort();
+			for (var i: int = 0; i < attributes_length; i++) {
+				_attributes[i] = readBean(com.rpgGame.netData.player.bean.AttributeItem) as com.rpgGame.netData.player.bean.AttributeItem;
+			}
+			//跑步坐标集合
+			var positions_length : int = readShort();
+			for (var i: int = 0; i < positions_length; i++) {
+				_positions[i] = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
+			}
 			return true;
 		}
 		
@@ -155,21 +174,6 @@ package com.rpgGame.netData.map.bean{
 		 */
 		public function set name(value: String): void{
 			this._name = value;
-		}
-		
-		/**
-		 * get 角色等级
-		 * @return 
-		 */
-		public function get level(): int{
-			return _level;
-		}
-		
-		/**
-		 * set 角色等级
-		 */
-		public function set level(value: int): void{
-			this._level = value;
 		}
 		
 		/**
@@ -335,6 +339,36 @@ package com.rpgGame.netData.map.bean{
 		 */
 		public function set pkType(value: int): void{
 			this._pkType = value;
+		}
+		
+		/**
+		 * get 角色属性信息
+		 * @return 
+		 */
+		public function get attributes(): Vector.<com.rpgGame.netData.player.bean.AttributeItem>{
+			return _attributes;
+		}
+		
+		/**
+		 * set 角色属性信息
+		 */
+		public function set attributes(value: Vector.<com.rpgGame.netData.player.bean.AttributeItem>): void{
+			this._attributes = value;
+		}
+		
+		/**
+		 * get 跑步坐标集合
+		 * @return 
+		 */
+		public function get positions(): Vector.<com.rpgGame.netData.structs.Position>{
+			return _positions;
+		}
+		
+		/**
+		 * set 跑步坐标集合
+		 */
+		public function set positions(value: Vector.<com.rpgGame.netData.structs.Position>): void{
+			this._positions = value;
 		}
 		
 	}

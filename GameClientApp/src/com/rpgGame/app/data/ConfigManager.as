@@ -10,7 +10,6 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.ClientAreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientBuffCfgData;
 	import com.rpgGame.coreData.cfg.ClientDialogCfgData;
-	import com.rpgGame.coreData.cfg.ClientSceneCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneEffectCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneNpcCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneRoleCfgData;
@@ -18,7 +17,6 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.DaTiCfgData;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.cfg.FriendCfgData;
-	import com.rpgGame.coreData.cfg.GCDCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSettingCfgData;
 	import com.rpgGame.coreData.cfg.GmConfig;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
@@ -158,8 +156,19 @@ package com.rpgGame.app.data
 			//   以下为服务器，客户端公用表
 			//
 			///////////////////////////////////////////////////////////////////////
-			MapDataManager.setSceneConfig(dic[ConfigClassRegister.ClientScene]);
-//			MonsterDataManager.setConfig(dic[ConfigClassRegister]); //怪物//NPC
+			//场景相关
+			MapDataManager.setSceneConfig(dic[ConfigClassRegister.Q_map]);
+			//怪物//NPC
+			MonsterDataManager.setMonsterConfig(dic[ConfigClassRegister.Q_monster]);//怪物总表
+			MonsterDataManager.setSceneAreaMonsterConfig(dic[ConfigClassRegister.Q_scene_monster_area]);//怪物刷新表
+			
+			//技能相关
+			SpellDataManager.setConfig(dic[ConfigClassRegister.Q_skill_model]);//技能总表
+			SpellEffectDataManager.setConfig(dic[ConfigClassRegister.Q_SpellEffect]);//每个技能效果，具体参数配置表
+			AnimationDataManager.setConfig(dic[ConfigClassRegister.Q_SpellAnimation]);///技能特效配置表
+			
+			//状态数据buff相关
+			BuffStateDataManager.setConfig(dic[ConfigClassRegister.Q_buff]);
 		}
 
 		/**
@@ -198,16 +207,16 @@ package com.rpgGame.app.data
 //				MapDataManager.setSceneConfig(config.sceneConfig);
 //			}
 
-			if (config.hasSpellConfig)
-			{
-				SpellDataManager.setConfig(config.spellConfig.spellLearnConfig);
-				//状态数据buff相关
-				BuffStateDataManager.setConfig(config.spellConfig.stateConfig);
-				SpellEffectDataManager.setConfig(config.spellConfig.spellEffectConfig);
-				AnimationDataManager.setConfig(config.spellConfig.animationConfig);
-				//公共CD配置
-				GCDCfgData.setConfig(config.spellConfig.gcdGroupsConfig);
-			}
+//			if (config.hasSpellConfig)
+//			{
+//				SpellDataManager.setConfig(config.spellConfig.spellLearnConfig);
+//				//状态数据buff相关
+//				BuffStateDataManager.setConfig(config.spellConfig.stateConfig);
+//				SpellEffectDataManager.setConfig(config.spellConfig.spellEffectConfig);
+//				AnimationDataManager.setConfig(config.spellConfig.animationConfig);
+//				//公共CD配置
+//				GCDCfgData.setConfig(config.spellConfig.gcdGroupsConfig);
+//			}
 //			if (config.hasMonsterConfig)
 //			{
 //				MonsterDataManager.setConfig(config.monsterConfig); //怪物//NPC

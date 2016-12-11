@@ -174,7 +174,7 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			//			CountryWarChengMenManager.checkChengMenStatus();
 			
-			if (playerData.hp > 0)
+			if (playerData.totalStat.hp > 0)
 				ReliveManager.hideRelivePanel();
 			
 			//			if (pkMode > 0)
@@ -411,8 +411,9 @@ package com.rpgGame.app.cmdlistener.scene
 			var info : MonsterInfo = new MonsterInfo();
 			info.read(buffer);
 			
+			data.serverID = info.monsterId;
 			data.id = info.monsterId.ToGID();
-			data.modelID = info.monsterModelId;
+			data.modelID = info.modelId;
 			
 			RoleData.readMonster(data,info);
 			SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
@@ -442,6 +443,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var data : MonsterData = new MonsterData(RoleType.TYPE_NPC);
 			
 			var info : NpcInfo = new NpcInfo();
+			data.serverID = info.npcId;
 			data.id = info.npcId.ToGID();
 			data.modelID = info.npcModelId;
 			RoleData.readNpc(data, info);
@@ -495,7 +497,7 @@ package com.rpgGame.app.cmdlistener.scene
 			CharAttributeManager.setAttributeValue(roleData,msg.attributeChange.type, msg.attributeChange.value);
 			
 			
-			if (roleData.hp <= 0)
+			if (roleData.totalStat.hp <= 0)
 			{
 				role.stateMachine.transition(RoleStateType.ACTION_DEATH, null, true);
 			}
@@ -542,10 +544,10 @@ package com.rpgGame.app.cmdlistener.scene
 			if (playerData == null)
 				return;
 			
-			playerData.x = tX;
-			playerData.y = tY;
-			playerData.hp = hp;
-			playerData.totalStat.life = maxHp;
+//			playerData.x = tX;
+//			playerData.y = tY;
+//			playerData.hp = hp;
+//			playerData.totalStat.life = maxHp;
 			
 			TrusteeshipManager.getInstance().stopAll();
 			MainRoleManager.updateActorStatus();

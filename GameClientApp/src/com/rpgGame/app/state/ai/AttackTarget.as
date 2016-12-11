@@ -8,9 +8,11 @@ package com.rpgGame.app.state.ai
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.fight.spell.CastSpellInfo;
 	import com.rpgGame.core.state.ai.AIState;
+	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.coreData.type.RoleStateType;
-
+	
 	import app.message.SpellProto;
 
 	/**
@@ -33,9 +35,9 @@ package com.rpgGame.app.state.ai
 			releaseSpell();
 		}
 
-		private function findUseableSpell() : SpellProto
+		private function findUseableSpell() : Q_skill_model
 		{
-			var castSpell : SpellProto = CastSpellHelper.getNextCastSpell();
+			var castSpell : Q_skill_model = CastSpellHelper.getNextCastSpell();
 			/*var nextSpell : SpellProto = TrusteeshipManager.getInstance().nextSpell;
 			if (nextSpell && !SkillCDManager.getInstance().getSkillHasCDTime(nextSpell))
 				castSpell = nextSpell;*/
@@ -44,11 +46,11 @@ package com.rpgGame.app.state.ai
 			{
 				if (!castSpell)
 				{
-					var randomSpells : Vector.<SpellProto> = TrusteeshipManager.getInstance().getActiveSpellList();
+					var randomSpells : Vector.<Q_skill_model> = TrusteeshipManager.getInstance().getActiveSpellList();
 
 					if (false) //随机需求放开这里，@L.L.M.Sunny 
 					{
-						var tmpSpell : SpellProto = null;
+						var tmpSpell : Q_skill_model = null;
 						var randomId : int = 0;
 						var spellLen : int = randomSpells.length;
 						for (var i : int = 0; i < spellLen; i++)
@@ -60,7 +62,7 @@ package com.rpgGame.app.state.ai
 						}
 						randomSpells.sort(onSortSpell);
 					}
-					for each (var spellData : SpellProto in randomSpells)
+					for each (var spellData : Q_skill_model in randomSpells)
 					{
 						if (!SkillCDManager.getInstance().getSkillHasCDTime(spellData))
 						{
@@ -72,7 +74,7 @@ package com.rpgGame.app.state.ai
 
 				if (!castSpell) //武器默认技能
 				{
-					var defaultSpell : SpellProto = CastSpellHelper.getDefaultSpell();
+					var defaultSpell : Q_skill_model = CastSpellHelper.getDefaultSpell();
 					if (defaultSpell)
 					{
 						if (!SkillCDManager.getInstance().getSkillHasCDTime(defaultSpell))
@@ -81,8 +83,9 @@ package com.rpgGame.app.state.ai
 						}
 						else
 						{
-							var relateSpells : Array = defaultSpell.activeSpell.relateSpells;
-							for each (var tmpData : SpellProto in relateSpells)
+							var relateSpells : Vector.<Q_skill_model> = SpellDataManager.getRelateSpells(defaultSpell.q_relate_spells);
+//							var relateSpells : Array = defaultSpell.q_relate_spells.split(",");
+							for each (var tmpData : Q_skill_model in relateSpells)
 							{
 								if (!SkillCDManager.getInstance().getSkillHasCDTime(tmpData))
 								{
@@ -99,7 +102,7 @@ package com.rpgGame.app.state.ai
 
 		private function releaseSpell() : void
 		{
-			var spellData : SpellProto = findUseableSpell();
+			var spellData : Q_skill_model = findUseableSpell();
 			if (spellData)
 			{
 				var roleList : Vector.<SceneRole> = TrusteeshipManager.getInstance().getRoleList();

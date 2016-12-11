@@ -1,8 +1,7 @@
 package com.rpgGame.app.state.role.control
 {
 	import com.game.engine3D.state.role.RoleStateReference;
-
-	import app.message.SpellEffectProto;
+	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
 
 	/**
 	 *
@@ -13,19 +12,19 @@ package com.rpgGame.app.state.role.control
 	 */
 	public class CastSpellLockStateReference extends RoleStateReference
 	{
-		private var _spellEffectData : SpellEffectProto;
+		private var _spellEffectData : Q_SpellEffect;
 
 		public function CastSpellLockStateReference()
 		{
 			super();
 		}
 
-		public function setParams(spellEffectData : SpellEffectProto) : void
+		public function setParams(spellEffectData : Q_SpellEffect) : void
 		{
 			_spellEffectData = spellEffectData;
 		}
 
-		public function get spellEffectData() : SpellEffectProto
+		public function get spellEffectData() : Q_SpellEffect
 		{
 			return _spellEffectData;
 		}

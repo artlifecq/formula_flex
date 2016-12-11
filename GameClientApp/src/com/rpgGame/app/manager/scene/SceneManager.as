@@ -24,6 +24,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.ClientSceneNPC;
+	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.info.collect.CollectObjcetInfo;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleType;
@@ -36,7 +37,6 @@ package com.rpgGame.app.manager.scene
 	import flash.events.Event;
 	import flash.geom.Point;
 	
-	import app.message.MonsterDataProto;
 	import app.message.SceneTransportProto;
 	
 	import away3d.pathFinding.DistrictWithPath;
@@ -501,10 +501,10 @@ package com.rpgGame.app.manager.scene
 				var roleData : MonsterData = role.data as MonsterData;
 				if (roleData)
 				{
-					var monsterData : MonsterDataProto = MonsterDataManager.getData(roleData.modelID);
+					var monsterData : Q_monster = MonsterDataManager.getData(roleData.modelID);
 					if (monsterData)
 					{
-						return monsterData.id;
+						return monsterData.q_id;
 					}
 				}
 			}

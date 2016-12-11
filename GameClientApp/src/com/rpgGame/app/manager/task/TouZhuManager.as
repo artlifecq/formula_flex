@@ -12,6 +12,7 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.task.TouZhuCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.info.task.PrizeInfo;
 	import com.rpgGame.coreData.info.task.daily.TouZhuTaskData;
@@ -126,7 +127,7 @@ package com.rpgGame.app.manager.task
 		 */
 		public static function gotoTouZhu() : void
 		{
-			var npcData : MonsterDataProto;
+			var npcData : Q_scene_monster_area;
 //			var isAtEnemyCountry : Boolean = CountryManager.isAtEnemyCountry();
 //			var isMixComplete : Boolean = isCompleteTouZhu();
 //
@@ -197,7 +198,7 @@ package com.rpgGame.app.manager.task
 				return;
 
 			var pos : Point = MonsterDataManager.getMonsterPosition(npcData);
-			MainRoleSearchPathManager.walkToScene(npcData.sceneId, pos.x, pos.y, null, 200);
+			MainRoleSearchPathManager.walkToScene(npcData.q_mapid, pos.x, pos.y, null, 200);
 		}
 
 		public static function getTouZhuTime() : Date

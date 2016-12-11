@@ -7,15 +7,13 @@ package com.rpgGame.coreData.cfg.npc
 	import com.rpgGame.coreData.cfg.task.MiXinCfgData;
 	import com.rpgGame.coreData.cfg.task.TouJingCfgData;
 	import com.rpgGame.coreData.cfg.task.TouZhuCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.role.MonsterBornData;
 	
-	import app.message.MonsterDataProto;
 	import app.message.NpcDialogProto;
-	import app.message.NpcProto;
 	import app.message.NpcDialogProto.NpcType;
 	
 	import org.client.mainCore.ds.HashMap;
-	import org.game.netCore.net_protobuff.BytesUtil;
 
 	/**
 	 *
@@ -33,23 +31,23 @@ package com.rpgGame.coreData.cfg.npc
 		/**参拜国王NPCID*/
 		public static var worshipKingNPCID:int;
 
-		public static function parseNpcData(dataProto : MonsterDataProto) : void
+		public static function parseNpcData(dataProto : Q_monster) : void
 		{
-			var npcId : int = dataProto.id;
-			var npcData : NpcProto = dataProto.npc;
-			if (!npcData)
-				return;
+			var npcId : int = dataProto.q_id;
+//			var npcData : NpcProto = dataProto.npc;
+//			if (!npcData)
+//				return;
 
 			//分析npc类型
-			for each (var dialog : NpcDialogProto in npcData.dialogs)
-			{
-				if(dialog.hasVehiclePath)
-				{
-					//载具路径数据
-					VehiclePathCfgData.setConfig(dialog.vehiclePath.vehicle);
-				}
-				setNpcId(dialog.npcType, npcId);
-			}
+//			for each (var dialog : NpcDialogProto in npcData.dialogs)
+//			{
+//				if(dialog.hasVehiclePath)
+//				{
+//					//载具路径数据
+//					VehiclePathCfgData.setConfig(dialog.vehiclePath.vehicle);
+//				}
+//				setNpcId(dialog.npcType, npcId);
+//			}
 		}
 
 		/**
@@ -137,11 +135,11 @@ package com.rpgGame.coreData.cfg.npc
 		 * @return
 		 *
 		 */
-		public static function getData(id : uint) : MonsterDataProto
+		public static function getData(id : uint) : Q_monster
 		{
-			var monsterData : MonsterDataProto = MonsterDataManager.getData(id);
-			if (!monsterData || !monsterData.npc)
-				return null;
+			var monsterData : Q_monster = MonsterDataManager.getData(id);
+//			if (!monsterData || !monsterData.npc)
+//				return null;
 			return monsterData;
 		}
 
@@ -151,35 +149,35 @@ package com.rpgGame.coreData.cfg.npc
 		 * @return
 		 *
 		 */
-		public static function getSceneNpcProtos(sceneID : uint) : Vector.<MonsterDataProto>
+		public static function getSceneNpcProtos(sceneID : uint) : Vector.<Q_monster>
 		{
-			var map : HashMap = MonsterDataManager.map;
-			var list : Vector.<MonsterDataProto> = new Vector.<MonsterDataProto>;
-			var dataList : Array = map.getValues();
-			for each (var data : MonsterDataProto in dataList)
-			{
-				if (data.npc && (data.sceneId == sceneID))
-				{
-					list.push(data);
-				}
-			}
+			var map : HashMap = MonsterDataManager.monsterMap;
+			var list : Vector.<Q_monster> = new Vector.<Q_monster>;
+//			var dataList : Array = map.getValues();
+//			for each (var data : Q_monster in dataList)
+//			{
+//				if (data.npc && (data.sceneId == sceneID))
+//				{
+//					list.push(data);
+//				}
+//			}
 			return list;
 		}
 
 		public static function getSceneNpcDatas(sceneID : uint) : Vector.<MonsterBornData>
 		{
-			var map : HashMap = MonsterDataManager.map;
+			var map : HashMap = MonsterDataManager.monsterMap;
 			var list : Vector.<MonsterBornData> = new Vector.<MonsterBornData>;
-			var dataList : Array = map.getValues();
-			for each (var data : MonsterDataProto in dataList)
-			{
-				if (data.npc && (data.sceneId == sceneID))
-				{
-					var monsterData : MonsterBornData = new MonsterBornData();
-					monsterData.setProtocData(data);
-					list.push(monsterData);
-				}
-			}
+//			var dataList : Array = map.getValues();
+//			for each (var data : Q_monster in dataList)
+//			{
+//				if (data.npc && (data.sceneId == sceneID))
+//				{
+//					var monsterData : MonsterBornData = new MonsterBornData();
+//					monsterData.setProtocData(data);
+//					list.push(monsterData);
+//				}
+//			}
 			return list;
 		}
 
@@ -191,16 +189,16 @@ package com.rpgGame.coreData.cfg.npc
 		 */
 		public static function getSceneNpcArr(sceneID : uint) : Array
 		{
-			var map : HashMap = MonsterDataManager.map;
+			var map : HashMap = MonsterDataManager.monsterMap;
 			var arr : Array = new Array();
 			var dataList : Array = map.getValues();
-			for each (var data : MonsterDataProto in dataList)
-			{
-				if (data.npc && (data.sceneId == sceneID))
-				{
-					arr.push(data);
-				}
-			}
+//			for each (var data : Q_monster in dataList)
+//			{
+//				if (data.npc && (data.sceneId == sceneID))
+//				{
+//					arr.push(data);
+//				}
+//			}
 			return arr;
 		}
 
@@ -217,17 +215,17 @@ package com.rpgGame.coreData.cfg.npc
 
 		public static function isFunctionType(npcId : int, npcType : int) : Boolean
 		{
-			var monsterData : MonsterDataProto = MonsterDataManager.getData(npcId);
-			if (!monsterData || !monsterData.npc)
-				return false;
-
-			for each (var dialogData : NpcDialogProto in monsterData.npc.dialogs)
-			{
-				if (dialogData.npcType == npcType)
-				{
-					return true;
-				}
-			}
+			var monsterData : Q_monster = MonsterDataManager.getData(npcId);
+//			if (!monsterData || !monsterData.npc)
+//				return false;
+//
+//			for each (var dialogData : NpcDialogProto in monsterData.npc.dialogs)
+//			{
+//				if (dialogData.npcType == npcType)
+//				{
+//					return true;
+//				}
+//			}
 			return false;
 		}
 
@@ -239,8 +237,9 @@ package com.rpgGame.coreData.cfg.npc
 		 */
 		public static function getDialogType(npcId : int) : int
 		{
-			var monsterData : MonsterDataProto = MonsterDataManager.getData(npcId);
-			return (monsterData && monsterData.npc) ? monsterData.npc.dialogType : 0;
+//			var monsterData : Q_monster = MonsterDataManager.getData(npcId);
+//			return (monsterData && monsterData.npc) ? monsterData.npc.dialogType : 0;
+			return 0;
 		}
 
 		/**
@@ -251,8 +250,9 @@ package com.rpgGame.coreData.cfg.npc
 		 */
 		public static function getNpcName(id : int) : String
 		{
-			var monsterData : MonsterDataProto = MonsterDataManager.getData(id);
-			return (monsterData && monsterData.npc) ? monsterData.name : "";
+//			var monsterData : Q_monster = MonsterDataManager.getData(id);
+//			return (monsterData && monsterData.npc) ? monsterData.name : "";
+			return "";
 		}
 
 		/**
@@ -263,8 +263,9 @@ package com.rpgGame.coreData.cfg.npc
 		 */
 		public static function getHead(npcId : int) : String
 		{
-			var monsterData : MonsterDataProto = MonsterDataManager.getData(npcId);
-			return (monsterData && monsterData.npc) ? monsterData.head : "";
+//			var monsterData : Q_monster = MonsterDataManager.getData(npcId);
+//			return (monsterData && monsterData.npc) ? monsterData.head : "";
+			return "";
 		}
 
 		/**
@@ -274,8 +275,9 @@ package com.rpgGame.coreData.cfg.npc
 		 */
 		public static function getNpcDialoguDesc(npcID : int) : String
 		{
-			var monsterData : MonsterDataProto = MonsterDataManager.getData(npcID);
-			return (monsterData && monsterData.npc) ? BytesUtil.bytes2UTF(monsterData.npc.dialog) : "";
+//			var monsterData : Q_monster = MonsterDataManager.getData(npcID);
+//			return (monsterData && monsterData.npc) ? BytesUtil.bytes2UTF(monsterData.npc.dialog) : "";
+			return "";
 		}
 
 
@@ -287,17 +289,17 @@ package com.rpgGame.coreData.cfg.npc
 		 */
 		public static function getNpcTransportList(npcId : int) : Array
 		{
-			var monsterData : MonsterDataProto = MonsterDataManager.getData(npcId);
-			if (!monsterData || !monsterData.npc)
-				return null;
-
-			for each (var dialogData : NpcDialogProto in monsterData.npc.dialogs)
-			{
-				if (dialogData.npcType == NpcType.TRANSPORT && dialogData.hasTransport)
-				{
-					return dialogData.transport.data.transport;
-				}
-			}
+			var monsterData : Q_monster = MonsterDataManager.getData(npcId);
+//			if (!monsterData || !monsterData.npc)
+//				return null;
+//
+//			for each (var dialogData : NpcDialogProto in monsterData.npc.dialogs)
+//			{
+//				if (dialogData.npcType == NpcType.TRANSPORT && dialogData.hasTransport)
+//				{
+//					return dialogData.transport.data.transport;
+//				}
+//			}
 			return null;
 		}
 
@@ -310,17 +312,17 @@ package com.rpgGame.coreData.cfg.npc
 		 */
 		public static function getNpcDialog(npcId : int, npcType : int) : NpcDialogProto
 		{
-			var monsterData : MonsterDataProto = MonsterDataManager.getData(npcId);
-			if (!monsterData || !monsterData.npc)
-				return null;
-
-			for each (var dialogData : NpcDialogProto in monsterData.npc.dialogs)
-			{
-				if (dialogData.npcType == npcType)
-				{
-					return dialogData;
-				}
-			}
+			var monsterData : Q_monster = MonsterDataManager.getData(npcId);
+//			if (!monsterData || !monsterData.npc)
+//				return null;
+//
+//			for each (var dialogData : NpcDialogProto in monsterData.npc.dialogs)
+//			{
+//				if (dialogData.npcType == npcType)
+//				{
+//					return dialogData;
+//				}
+//			}
 			return null;
 		}
 
@@ -332,10 +334,11 @@ package com.rpgGame.coreData.cfg.npc
 		 */
 		public static function getFunctionList(npcId : int) : Array
 		{
-			var monsterData : MonsterDataProto = MonsterDataManager.getData(npcId);
-			if (!monsterData || !monsterData.npc)
-				return null;
-			return monsterData.npc.dialogs;
+			var monsterData : Q_monster = MonsterDataManager.getData(npcId);
+//			if (!monsterData || !monsterData.npc)
+//				return null;
+//			return monsterData.npc.dialogs;
+			return null;
 		}
 	}
 }

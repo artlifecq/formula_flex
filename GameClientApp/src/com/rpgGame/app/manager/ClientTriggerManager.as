@@ -218,7 +218,7 @@ package com.rpgGame.app.manager
 						}
 						else if (target.type == SceneCharType.PROTECT_NPC)
 						{
-							var curHP : Number = (target.data as RoleData).hp;
+							var curHP : Number = (target.data as RoleData).totalStat.hp;
 							var maxHP : Number = (target.data as RoleData).totalStat.life;
 							var rate : Number = curHP / maxHP;
 							if (rate <= 0.5)

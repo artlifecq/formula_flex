@@ -20,6 +20,8 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.npc.NpcCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_monster;
+	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.enum.EnumAreaMapType;
 	import com.rpgGame.coreData.info.SearchRoleData;
@@ -43,9 +45,9 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.type.TaskTargetType;
-
+	
 	import flash.geom.Point;
-
+	
 	import app.message.MonsterDataProto;
 
 	/**
@@ -75,7 +77,7 @@ package com.rpgGame.app.utils
 			var suffix : String = "";
 			var centerInfo : String;
 			var scenePos : String;
-			var npcData : MonsterDataProto;
+			var npcData : Q_monster;
 			switch (_targetInfo.type)
 			{
 				case TaskTargetType.TASK_TARGET_LEVEL_UP:
@@ -92,7 +94,7 @@ package com.rpgGame.app.utils
 					var replyInfo : TaskTargetReplyInfo = _targetInfo as TaskTargetReplyInfo;
 
 					npcData = MonsterDataManager.getData(replyInfo.npcId);
-					content = LanguageConfig.replaceStr("任务回复:$", [RichTextCustomUtil.getTextLinkCode(npcData ? npcData.name : "未知", StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_NPC_NAME_TYPE, replyInfo.npcId + "")]);
+					content = LanguageConfig.replaceStr("任务回复:$", [RichTextCustomUtil.getTextLinkCode(npcData ? npcData.q_name : "未知", StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_NPC_NAME_TYPE, replyInfo.npcId + "")]);
 
 					break;
 
@@ -140,12 +142,12 @@ package com.rpgGame.app.utils
 				case TaskTargetType.TASK_VEHICLE_PLAYER:
 					var vehiclePlayerInfo : TaskVehiclePlayerInfo = _targetInfo as TaskVehiclePlayerInfo;
 					npcData = MonsterDataManager.getData(vehiclePlayerInfo.npcId);
-					content = LanguageConfig.replaceStr("找到$搭乘载具", [RichTextCustomUtil.getTextLinkCode(npcData ? npcData.name : "未知", StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_TO_NPC_DIAILOG_TYPE, vehiclePlayerInfo.npcId + "")]);
+					content = LanguageConfig.replaceStr("找到$搭乘载具", [RichTextCustomUtil.getTextLinkCode(npcData ? npcData.q_name : "未知", StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_TO_NPC_DIAILOG_TYPE, vehiclePlayerInfo.npcId + "")]);
 					break;
 				case TaskTargetType.TASK_FINISH_STORY_DUNGEON:
 					var storyDungeonInfo : TaskStoryDungeonInfo = _targetInfo as TaskStoryDungeonInfo;
 					npcData = MonsterDataManager.getData(storyDungeonInfo.npcId);
-					content = LanguageConfig.replaceStr("找到$通关副本", [RichTextCustomUtil.getTextLinkCode(npcData ? npcData.name : "未知", StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_TO_NPC_DIAILOG_TYPE, storyDungeonInfo.npcId + "")]);
+					content = LanguageConfig.replaceStr("找到$通关副本", [RichTextCustomUtil.getTextLinkCode(npcData ? npcData.q_name : "未知", StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_TO_NPC_DIAILOG_TYPE, storyDungeonInfo.npcId + "")]);
 					break;
 				case TaskTargetType.TASK_CLIENT_TASK:
 					var clientTaskInfo : TaskClientTaskInfo = _targetInfo as TaskClientTaskInfo;
@@ -153,7 +155,7 @@ package com.rpgGame.app.utils
 					switch (clientTaskInfo.clientTaskType)
 					{
 						case ClientTaskType.TASK_DIALOG_LEAVE_DUNGEON: //与$对话离开副本
-							content = LanguageConfig.replaceStr("与$对话离开副本", [RichTextCustomUtil.getTextLinkCode(npcData ? npcData.name : "未知", StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_TO_NPC_DIAILOG_TYPE, clientTaskInfo.npcId + "")]);
+							content = LanguageConfig.replaceStr("与$对话离开副本", [RichTextCustomUtil.getTextLinkCode(npcData ? npcData.q_name : "未知", StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_TO_NPC_DIAILOG_TYPE, clientTaskInfo.npcId + "")]);
 							break;
 					}
 					break;
@@ -256,7 +258,7 @@ package com.rpgGame.app.utils
 		 */
 		public static function replyNpcTask(npcId : int) : void
 		{
-			var npcData : MonsterDataProto = MonsterDataManager.getData(npcId);
+			var npcData : Q_scene_monster_area = MonsterDataManager.getSceneData(npcId);
 			if (npcData)
 			{
 				var sceneRole : SceneRole = SceneManager.getSceneNpcByModelId(npcId);
@@ -268,7 +270,7 @@ package com.rpgGame.app.utils
 				var searchRoleData : SearchRoleData = new SearchRoleData();
 				searchRoleData.searchId = npcId;
 				searchRoleData.targetData = (sceneRole ? sceneRole.data as MonsterData : null);
-				MainRoleSearchPathManager.walkToScene(npcData.sceneId, pos.x, pos.y, function openPanel() : void
+				MainRoleSearchPathManager.walkToScene(npcData.q_mapid, pos.x, pos.y, function openPanel() : void
 				{
 					var targerId : Number = (searchRoleData.targetData ? searchRoleData.targetData.id : 0);
 					var role : SceneRole = SceneManager.getScene().getSceneObjByID(targerId, SceneCharType.NPC) as SceneRole;
@@ -287,10 +289,10 @@ package com.rpgGame.app.utils
 		 */
 		public static function killMonsterTask(monsterId : int) : void
 		{
-			var monsterDataProto : MonsterDataProto = MonsterDataManager.getData(monsterId);
+			var monsterDataProto : Q_scene_monster_area = MonsterDataManager.getSceneData(monsterId);
 			var monsterPos : Point = MonsterDataManager.getMonsterPosition(monsterDataProto);
 			//这里应该是寻路过去然后杀怪
-			MainRoleSearchPathManager.walkToScene(monsterDataProto.sceneId, monsterPos.x, monsterPos.y, function KillMonseter() : void
+			MainRoleSearchPathManager.walkToScene(monsterDataProto.q_mapid, monsterPos.x, monsterPos.y, function KillMonseter() : void
 			{
 				NoticeManager.showNotify("可以开始自己打怪了");
 			}, 200);
@@ -449,14 +451,14 @@ package com.rpgGame.app.utils
 		 */
 		public static function toNpcDiailog(npcId : int) : void
 		{
-			var npcData : MonsterDataProto = MonsterDataManager.getData(npcId);
+			var npcData : Q_scene_monster_area = MonsterDataManager.getSceneData(npcId);
 			if (npcData)
 			{
 				var sceneRole : SceneRole = SceneManager.getSceneNpcByModelId(npcId);
 				var pos : Point = MonsterDataManager.getMonsterPosition(npcData);
 				var posX : Number = pos.x;
 				var posY : Number = pos.y;
-				var sceneId : int = npcData.sceneId;
+				var sceneId : int = npcData.q_mapid;
 				var searchRoleData : SearchRoleData = new SearchRoleData();
 				searchRoleData.searchId = npcId;
 				searchRoleData.targetData = (sceneRole ? sceneRole.data as MonsterData : null);

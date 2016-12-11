@@ -66,9 +66,9 @@ package com.rpgGame.app.manager.shell
             data.id = ++this._monsterID;
             data.x = x;
             data.y = y;
-            data.hp = 1000;
+            data.totalStat.hp = 1000;
             data.totalStat.life = 1000;
-            data.mp = 1000;
+            data.totalStat.mp = 1000;
             data.totalStat.mana = 1000;
             data.buffList = new Vector.<BuffInfo>();
             var m : SceneRole = SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
@@ -87,7 +87,7 @@ package com.rpgGame.app.manager.shell
             buffer.writeVarint32(m.z);
             buffer.position = 0;
             var info : ReleaseSpellInfo = new ReleaseSpellInfo();
-            info.readFrom(1, buffer);
+            info.readFrom(1, null);
             ReleaseSpellHelper.releaseSpell(info);
         }
         

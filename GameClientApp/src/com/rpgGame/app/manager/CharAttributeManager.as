@@ -19,6 +19,8 @@ package com.rpgGame.app.manager
 	import flash.events.EventDispatcher;
 	
 	import org.client.mainCore.manager.EventManager;
+	
+	import starling.core.starling_internal;
 
 	/**
 	 * 场景所有角色属性变更的管理...
@@ -46,9 +48,9 @@ package com.rpgGame.app.manager
 				switch (attributeType)
 				{
 					case CharAttributeType.HP:
-						offset = attributeValue - data.hp;
+						offset = attributeValue - data.totalStat.hp;
 						
-						data.hp = attributeValue;
+//						data.hp = attributeValue;
 						
 						updateBloodBar(data);
 						
@@ -66,9 +68,9 @@ package com.rpgGame.app.manager
 						data.totalStat.life = attributeValue;
 						break;
 					case CharAttributeType.MP:
-						offset = attributeValue - data.mp;
+						offset = attributeValue - data.totalStat.mp;
 						
-						data.mp = attributeValue;
+//						data.mp = attributeValue;
 						
 						updateMpBar(data);
 						EventManager.dispatchEvent(MainPlayerEvent.NOWMP_CHANGE, data);
@@ -87,7 +89,7 @@ package com.rpgGame.app.manager
 //						data.spriteStat.addStatValue();
 						break;
 				}
-				data.spriteStat.setStatValue(attributeType,attributeValue);
+				data.totalStat.setStatValue(attributeType,attributeValue);
 				dispatchEvent(data.id, attributeType, attributeValue);
 			}
 		}
@@ -122,7 +124,7 @@ package com.rpgGame.app.manager
 			if (role)
 			{
 				if (role.headFace is HeadFace)
-					(role.headFace as HeadFace).bloodPercent = (data.hp / data.totalStat.life);
+					(role.headFace as HeadFace).bloodPercent = (data.totalStat.hp / data.totalStat.life);
 				if (role == SceneRoleSelectManager.selectedRole)
 				{
 					EventManager.dispatchEvent(SceneCharacterEvent.SCENE_CHAR_DATA_UPDATE, role);

@@ -3,19 +3,18 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.core.events.SpellEvent;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
 	import com.rpgGame.coreData.info.shortcuts.ShortcutsData;
-	
-	import app.message.SpellProto;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
 
 	/**
-	 * 快捷栏数据
-	 * @author luguozheng
-	 *
-	 */
+	 * 主控面板快捷栏管理器 
+	 * @author NEIL
+	 * 
+	 */	
 	public class ShortcutsManger
 	{
 		public static const SHORTCUTS_LEN : uint = 10;
@@ -43,13 +42,13 @@ package com.rpgGame.app.manager
 		 * @param spellProto
 		 *
 		 */
-		public function updateNewSpell(spellProto : SpellProto, saveToServer:Boolean = true) : void
+		public function updateNewSpell(spellProto : Q_skill_model, saveToServer:Boolean = true) : void
 		{
-			if (!spellProto.activeSpell)
+			if (spellProto.q_trigger_type != 1)
 				return;
-			if (shortcutsHasValue(ShortcutsTypeEnum.SKILL_TYPE, spellProto.spellType))
+			if (shortcutsHasValue(ShortcutsTypeEnum.SKILL_TYPE, spellProto.q_skillID))
 			{
-				trace("快捷栏中已经存在这个技能", spellProto.name);
+				trace("快捷栏中已经存在这个技能", spellProto.q_skillName);
 				return;
 			}
 			var i : int = 0;
@@ -59,7 +58,7 @@ package com.rpgGame.app.manager
 				shortcuts = getShortcutsDataByPos(i);
 				if (!shortcuts)
 				{
-					setShortData(i, ShortcutsTypeEnum.SKILL_TYPE, spellProto.spellType,saveToServer);
+					setShortData(i, ShortcutsTypeEnum.SKILL_TYPE, spellProto.q_skillID,saveToServer);
 					EventManager.dispatchEvent(SpellEvent.SPELL_UPDATE_SHORTCUTS);
 					return;
 				}
@@ -266,12 +265,6 @@ package com.rpgGame.app.manager
 					return true;
 			}
 			
-			/*var spellInfo:ReleaseSpellInfo=new ReleaseSpellInfo();
-			
-			RoleStateUtil.blinkToPos(MainRoleManager.actor,RoleActionType.BLINK,//
-				new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(MainRoleManager.actor.x+200,MainRoleManager.actor.z),//
-			1000,300,0,10,10,spellInfo);*/
-			
 			//没有这个类型
 			return true;
 		}
@@ -308,8 +301,8 @@ package com.rpgGame.app.manager
 				var i:int;
 				for(i = 0; i < len; i++)
 				{
-					var spellProto:SpellProto = spells[i];
-					_tempSpells.add(spellProto.spellType,spellProto);
+					var spellProto:Q_skill_model = spells[i];
+					_tempSpells.add(spellProto.q_skillID,spellProto);
 					updateNewSpell(spellProto,false);
 				}
 			}
@@ -332,11 +325,11 @@ package com.rpgGame.app.manager
 		 * @return 
 		 * 
 		 */
-		public function getTempSellProto(spellType:int):SpellProto
+		public function getTempSellProto(spellID:int):Q_skill_model
 		{
 			if(_tempSpells)
 			{
-				return _tempSpells.getValue(spellType);
+				return _tempSpells.getValue(spellID);
 			}
 			return null;
 		}

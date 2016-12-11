@@ -228,7 +228,7 @@ package com.rpgGame.app.manager.goods
 				return false;
 			}
 			var lv:int = ItemCfgData.getItemRequireLevel(item.cfgId);
-			if(lv > MainRoleManager.actorInfo.level)
+			if(lv > MainRoleManager.actorInfo.totalStat.level)
 			{
 				if(tip)NoticeManager.showHint(EnumHintInfo.EQUIPMENT_ERROR_LEVEL, [ lv ]);
 				return false;

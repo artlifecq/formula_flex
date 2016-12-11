@@ -12,6 +12,8 @@ package com.rpgGame.app.ui.main.activityBar
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.npc.NpcCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_monster;
+	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.info.SearchRoleData;
 	import com.rpgGame.coreData.lang.LangCountryWar;
 	import com.rpgGame.coreData.role.MonsterData;
@@ -87,7 +89,7 @@ package com.rpgGame.app.ui.main.activityBar
 //			{
 //				npcId = NpcCfgData.countryTransNPCId;
 //			}
-			var npcData : MonsterDataProto = MonsterDataManager.getData(npcId);
+			var npcData : Q_scene_monster_area = MonsterDataManager.getSceneData(npcId);
 			if (npcData)
 			{
 				var sceneRole : SceneRole = SceneManager.getSceneNpcByModelId(npcId);
@@ -95,7 +97,7 @@ package com.rpgGame.app.ui.main.activityBar
 				var searchRoleData : SearchRoleData = new SearchRoleData();
 				searchRoleData.searchId = npcId;
 				searchRoleData.targetData = (sceneRole ? sceneRole.data as MonsterData : null);
-				MainRoleSearchPathManager.walkToScene(npcData.sceneId, pos.x, pos.y, function openPanel() : void
+				MainRoleSearchPathManager.walkToScene(npcData.q_mapid, pos.x, pos.y, function openPanel() : void
 				{
 					var targerId : Number = (searchRoleData.targetData ? searchRoleData.targetData.id : 0);
 					var role : SceneRole = SceneManager.getScene().getSceneObjByID(targerId, SceneCharType.NPC) as SceneRole;

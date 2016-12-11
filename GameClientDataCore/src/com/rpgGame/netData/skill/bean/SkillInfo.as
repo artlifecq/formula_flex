@@ -1,6 +1,5 @@
 package com.rpgGame.netData.skill.bean{
 	
-	import org.game.netCore.data.long;
 	
 	import org.game.netCore.net.Bean;
 	
@@ -15,9 +14,6 @@ package com.rpgGame.netData.skill.bean{
 	 */
 	public class SkillInfo extends Bean {
 	
-		//技能唯一Id
-		private var _skillId: long;
-		
 		//技能模板Id
 		private var _skillModelId: int;
 		
@@ -34,8 +30,6 @@ package com.rpgGame.netData.skill.bean{
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//技能唯一Id
-			writeLong(_skillId);
 			//技能模板Id
 			writeInt(_skillModelId);
 			//技能等级
@@ -51,8 +45,6 @@ package com.rpgGame.netData.skill.bean{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//技能唯一Id
-			_skillId = readLong();
 			//技能模板Id
 			_skillModelId = readInt();
 			//技能等级
@@ -62,21 +54,6 @@ package com.rpgGame.netData.skill.bean{
 			//技能经验
 			_skillExp = readInt();
 			return true;
-		}
-		
-		/**
-		 * get 技能唯一Id
-		 * @return 
-		 */
-		public function get skillId(): long{
-			return _skillId;
-		}
-		
-		/**
-		 * set 技能唯一Id
-		 */
-		public function set skillId(value: long): void{
-			this._skillId = value;
 		}
 		
 		/**

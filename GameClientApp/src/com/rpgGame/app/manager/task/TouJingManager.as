@@ -21,6 +21,7 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.npc.NpcCfgData;
 	import com.rpgGame.coreData.cfg.task.TouJingCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.SearchRoleData;
 	import com.rpgGame.coreData.info.toujing.TouJingPrizeInfo;
@@ -382,7 +383,7 @@ package com.rpgGame.app.manager.task
 		 */
 		public static function gotoTouJing() : void
 		{
-			var npcData : MonsterDataProto;
+			var npcData : Q_scene_monster_area;
 			if (isToujingMax())
 			{
 				NoticeManager.showNotify(LangTouJing.TASK_TOUJING_FAIL25);
@@ -445,12 +446,12 @@ package com.rpgGame.app.manager.task
 
 			if (npcData == null)
 				return;
-			var sceneRole : SceneRole = SceneManager.getSceneNpcByModelId(npcData.id);
+			var sceneRole : SceneRole = SceneManager.getSceneNpcByModelId(npcData.q_id);
 			var searchRoleData : SearchRoleData = new SearchRoleData();
-			searchRoleData.searchId = npcData.id;
+			searchRoleData.searchId = npcData.q_id;
 			searchRoleData.targetData = (sceneRole ? sceneRole.data as MonsterData : null);
 			var pos : Point = MonsterDataManager.getMonsterPosition(npcData);
-			MainRoleSearchPathManager.walkToScene(npcData.sceneId, pos.x, pos.y, function openPanel() : void
+			MainRoleSearchPathManager.walkToScene(npcData.q_mapid, pos.x, pos.y, function openPanel() : void
 			{
 				var targerId : Number = (searchRoleData.targetData ? searchRoleData.targetData.id : 0);
 				var role : SceneRole = SceneManager.getScene().getSceneObjByID(targerId, SceneCharType.NPC) as SceneRole;
@@ -466,7 +467,7 @@ package com.rpgGame.app.manager.task
 		public static function getTouJingPrizeInfoTips():String
 		{
 			var str:String = "";
-			var prizeInfo:TouJingPrizeInfo = TouJingCfgData.getTouJingPrizeByLevel( MainRoleManager.actorInfo.level );
+			var prizeInfo:TouJingPrizeInfo = TouJingCfgData.getTouJingPrizeByLevel( MainRoleManager.actorInfo.totalStat.level );
 			if( prizeInfo == null )
 				return str;
 				

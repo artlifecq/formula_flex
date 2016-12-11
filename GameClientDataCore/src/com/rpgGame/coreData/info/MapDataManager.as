@@ -4,7 +4,7 @@ package com.rpgGame.coreData.info
 	import com.game.engine2D.core.AsyncMapTexture;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.clientConfig.ClientScene;
+	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.info.map.map2d.MapData;
 	
@@ -53,7 +53,7 @@ package com.rpgGame.coreData.info
 		{
 			if (arr) //如果是数组,就是多份地图数据
 			{
-				for each (var scene : ClientScene in arr)
+				for each (var scene : Q_map in arr)
 				{
 					addMapInfo(scene);
 				}
@@ -388,7 +388,7 @@ package com.rpgGame.coreData.info
         /*****************************************************************************************************
          * 添加单个场景信息
          ****************************************************************************************************/
-		public static function addMapInfo(scene : ClientScene) : void
+		public static function addMapInfo(scene : Q_map) : void
 		{
 			var sceneData : SceneData = new SceneData();
 			sceneData.setData(scene);

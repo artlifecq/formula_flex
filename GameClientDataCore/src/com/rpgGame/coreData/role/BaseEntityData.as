@@ -1,5 +1,6 @@
 package com.rpgGame.coreData.role
 {
+	import org.game.netCore.data.long;
 	
 
 	/**
@@ -11,6 +12,7 @@ package com.rpgGame.coreData.role
 	 */
 	public class BaseEntityData
 	{
+		private var _serverID:long=null;
 		private var _id : int = 0;
 		/** 名字 */
 		public var name : String = "";
@@ -22,6 +24,16 @@ package com.rpgGame.coreData.role
 		 * 所属国家，怪物也有，如国战的圣兽
 		 */
 		public var countryId : int;
+
+		public function get serverID():long
+		{
+			return _serverID;
+		}
+
+		public function set serverID(value:long):void
+		{
+			_serverID = value;
+		}
 
 		/** 坐标y */
 		public function get y():Number

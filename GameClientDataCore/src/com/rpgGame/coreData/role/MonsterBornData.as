@@ -1,10 +1,9 @@
 package com.rpgGame.coreData.role
 {
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
-
+	import com.rpgGame.coreData.clientConfig.Q_monster;
+	
 	import flash.geom.Point;
-
-	import app.message.MonsterDataProto;
 
 	/**
 	 *
@@ -27,17 +26,17 @@ package com.rpgGame.coreData.role
 		{
 		}
 
-		public function setProtocData(data : MonsterDataProto) : void
+		public function setProtocData(data : Q_monster) : void
 		{
-			this.id = data.id;
-			this.name = data.name;
-			this.monsterType = data.monsterType;
-			this.showInSmallMapType = data.showInSmallMapType;
-			this.level = data.level;
-			var monsterPos : Point = MonsterDataManager.getMonsterPosition(data);
+			this.id = data.q_id;
+			this.name = data.q_name;
+			this.monsterType = data.q_monster_type;
+			this.showInSmallMapType = data.q_isminimap;
+			this.level = data.q_grade;
+			var monsterPos : Point = MonsterDataManager.getMonsterPositionByCfgID(data.q_id);
 			this.x = monsterPos.x;
 			this.y = monsterPos.y;
-			this.smallMapIcon = data.smallMapIcon;
+			this.smallMapIcon = data.q_head;
 		}
 	}
 }

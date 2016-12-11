@@ -13,41 +13,31 @@ package com.rpgGame.netData.fight.message{
 	 */
 	public class ResFightBroadcastMessage extends Message {
 	
-		//是否是攻击虚拟侍宠0不是，1是
-		private var _isAttackPet: int;
-		
 		//角色Id
 		private var _personId: long;
 		
 		//攻击朝向
 		private var _fightDirection: int;
 		
-		//攻击类型
-		private var _fightType: int;
+		//技能编号
+		private var _skillModelId: int;
 		
 		//攻击目标
 		private var _fightTarget: long;
-		
-		//攻击特效(目前只有平砍有)
-		private var _effects: int;
 		
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//是否是攻击虚拟侍宠0不是，1是
-			writeByte(_isAttackPet);
 			//角色Id
 			writeLong(_personId);
 			//攻击朝向
 			writeByte(_fightDirection);
-			//攻击类型
-			writeInt(_fightType);
+			//技能编号
+			writeInt(_skillModelId);
 			//攻击目标
 			writeLong(_fightTarget);
-			//攻击特效(目前只有平砍有)
-			writeByte(_effects);
 			return true;
 		}
 		
@@ -55,18 +45,14 @@ package com.rpgGame.netData.fight.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//是否是攻击虚拟侍宠0不是，1是
-			_isAttackPet = readByte();
 			//角色Id
 			_personId = readLong();
 			//攻击朝向
 			_fightDirection = readByte();
-			//攻击类型
-			_fightType = readInt();
+			//技能编号
+			_skillModelId = readInt();
 			//攻击目标
 			_fightTarget = readLong();
-			//攻击特效(目前只有平砍有)
-			_effects = readByte();
 			return true;
 		}
 		
@@ -76,21 +62,6 @@ package com.rpgGame.netData.fight.message{
 		 */
 		override public function getId(): int {
 			return 102101;
-		}
-		
-		/**
-		 * get 是否是攻击虚拟侍宠0不是，1是
-		 * @return 
-		 */
-		public function get isAttackPet(): int{
-			return _isAttackPet;
-		}
-		
-		/**
-		 * set 是否是攻击虚拟侍宠0不是，1是
-		 */
-		public function set isAttackPet(value: int): void{
-			this._isAttackPet = value;
 		}
 		
 		/**
@@ -124,18 +95,18 @@ package com.rpgGame.netData.fight.message{
 		}
 		
 		/**
-		 * get 攻击类型
+		 * get 技能编号
 		 * @return 
 		 */
-		public function get fightType(): int{
-			return _fightType;
+		public function get skillModelId(): int{
+			return _skillModelId;
 		}
 		
 		/**
-		 * set 攻击类型
+		 * set 技能编号
 		 */
-		public function set fightType(value: int): void{
-			this._fightType = value;
+		public function set skillModelId(value: int): void{
+			this._skillModelId = value;
 		}
 		
 		/**
@@ -151,21 +122,6 @@ package com.rpgGame.netData.fight.message{
 		 */
 		public function set fightTarget(value: long): void{
 			this._fightTarget = value;
-		}
-		
-		/**
-		 * get 攻击特效(目前只有平砍有)
-		 * @return 
-		 */
-		public function get effects(): int{
-			return _effects;
-		}
-		
-		/**
-		 * set 攻击特效(目前只有平砍有)
-		 */
-		public function set effects(value: int): void{
-			this._effects = value;
 		}
 		
 	}

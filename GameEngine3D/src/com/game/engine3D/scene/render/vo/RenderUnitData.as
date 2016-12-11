@@ -99,6 +99,8 @@ package com.game.engine3D.scene.render.vo
 		private var _fadeAlphaMethodData : MethodData;
 		private var _fadeAlphaRect : FadeAlphaRectData;
 		private var _onFadeAlphaValidate : Function;
+		
+		public var blendMode:String;
 
 		public function RenderUnitData(type : String, id : Number)
 		{
@@ -970,6 +972,10 @@ package com.game.engine3D.scene.render.vo
 						for each (var materialData : MaterialData in _independentMaterialMap)
 						{
 							var singlePassMaterial : SinglePassMaterialBase = materialData.material as SinglePassMaterialBase;
+							if(this.blendMode != null && this.blendMode != "")
+							{
+								singlePassMaterial.blendMode = this.blendMode;
+							}
 							if (_lastOneRemoveMethodData)
 							{
 								if (singlePassMaterial.hasMethod(_lastOneRemoveMethodData.method))

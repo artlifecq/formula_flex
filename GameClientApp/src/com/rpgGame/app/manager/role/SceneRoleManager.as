@@ -26,6 +26,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
+	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.info.stall.StallData;
 	import com.rpgGame.coreData.role.BiaoCheData;
 	import com.rpgGame.coreData.role.HeroData;
@@ -41,7 +42,6 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
-	import app.message.MonsterDataProto;
 	import app.message.StallTypeDataProto;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -110,7 +110,7 @@ package com.rpgGame.app.manager.role
 			{
 				renderLimitable = true;
 				role.addAttachLimitable(AttachDisplayType.ROLE_HEAD_NAME);
-				if (data.hp <= 0)
+				if (data.totalStat.hp <= 0)
 				{
 					role.stateMachine.transition(RoleStateType.ACTION_DEATH, null, true);
 				}
@@ -124,7 +124,7 @@ package com.rpgGame.app.manager.role
 			role.setGroundXY(data.x, data.y);
 			SceneManager.addSceneObjToScene(role, true, true, renderLimitable);
 
-			CharAttributeManager.setCharHp(data, data.hp);
+			CharAttributeManager.setCharHp(data, data.totalStat.hp);
 			CharAttributeManager.setCharMaxLife(data, data.totalStat.life); //需要提供初始化方法,优化一下!
 			if (!isMainChar)
 				EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
@@ -142,30 +142,30 @@ package com.rpgGame.app.manager.role
 			//如果场景中存在此类型此ID的角色，则移除之
 			removeSceneRoleByIdAndType(data.id, charType);
 			var role : SceneRole = SceneRole.create(charType, data.id);
-			var bornData : MonsterDataProto = MonsterDataManager.getData(data.modelID);
+			var bornData : Q_monster = MonsterDataManager.getData(data.modelID);
 			//设置VO
 			role.data = data;
 			role.headFace = HeadFace.create(role);
-			var roleNameStr : String = (bornData ? bornData.name.toString() : "未知怪物");
+			var roleNameStr : String = (bornData ? bornData.q_name.toString() : "未知怪物");
 			if (charType == SceneCharType.NPC && data.ownerName)
 			{
 				roleNameStr = roleNameStr + "(" + data.ownerName + ")";
 			}
 			role.name = data.name = roleNameStr;
 			role.ownerIsMainChar = (data.ownerId == MainRoleManager.actorID);
-			data.avatarInfo.setBodyResID(bornData ? bornData.bodyRes : "", null);
-			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(bornData ? bornData.bodyRes : "");
+			data.avatarInfo.setBodyResID(bornData ? bornData.q_body_res : "", null);
+			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(bornData ? bornData.q_body_res : "");
 			if (avatarResConfig)
 			{
 				data.avatarInfo.effectResID = avatarResConfig.idleEffect;
 			}
-			data.sizeScale = (bornData && bornData.scale > 0) ? (bornData.scale * 0.01) : 1;
-			data.level = bornData ? bornData.level : 0;
-			data.bodyRadius = bornData ? bornData.bodyRadius : 0;
-			data.direction = bornData ? bornData.direction : 0;
-			data.immuneDeadBeat = bornData ? bornData.immuneDeadBeat : false;
+			data.sizeScale = (bornData && bornData.q_scale > 0) ? (bornData.q_scale * 0.01) : 1;
+			data.totalStat.level = bornData ? bornData.q_grade : 0;
+			data.bodyRadius = bornData ? bornData.q_body_radius_pixel : 0;
+			data.direction = bornData ? bornData.q_direction : 0;
+			data.immuneDeadBeat = /*bornData ? bornData.immuneDeadBeat :*/ false;
 
-			var mountResID : String = bornData ? bornData.mountRes : "";
+			var mountResID : String = bornData ? bornData.q_mount_res : "";
 			if (mountResID)
 			{
 				var ref : RidingStateReference = role.stateMachine.getReference(RidingStateReference) as RidingStateReference;
@@ -188,7 +188,7 @@ package com.rpgGame.app.manager.role
 			}
 			else
 			{
-				if (data.hp <= 0)
+				if (data.totalStat.hp <= 0)
 				{
 					role.stateMachine.transition(RoleStateType.ACTION_DEATH, null, true);
 				}
@@ -260,7 +260,7 @@ package com.rpgGame.app.manager.role
 			var stallType : StallTypeDataProto = StallCfgData.getStallTypeData(data.stallType);
 			data.avatarInfo.setBodyResID(stallType ? stallType.stallRes : "", null);
 			data.sizeScale = 1;
-			data.level = 0;
+			data.totalStat.level = 0;
 			data.bodyRadius = 0;
 			data.direction = 0;
 			//执行主换装更新
@@ -286,22 +286,22 @@ package com.rpgGame.app.manager.role
 			removeSceneRoleByIdAndType(data.id, SceneCharType.ZHAN_CHE);
 			var role : SceneRole = SceneRole.create(SceneCharType.ZHAN_CHE, data.id);
 			var monsterCfgID : int = CountryWarCfgData.getMonsterCfgIDOfZhanChe(data.modelID);
-			var bornData : MonsterDataProto = MonsterDataManager.getData(monsterCfgID);
+			var bornData : Q_monster = MonsterDataManager.getData(monsterCfgID);
 			//设置VO
 			role.data = data;
 			role.headFace = HeadFace.create(role);
-			var monsterNameStr : String = (bornData ? bornData.name.toString() : "未知怪物");
+			var monsterNameStr : String = (bornData ? bornData.q_name.toString() : "未知怪物");
 			var roleNameStr : String = monsterNameStr + "(" + data.ownerName + ")";
 			role.name = data.name = roleNameStr;
 			role.ownerIsMainChar = (data.ownerId == MainRoleManager.actorID);
-			data.avatarInfo.setBodyResID(bornData ? bornData.bodyRes : "", null);
-			data.sizeScale = (bornData && bornData.scale > 0) ? (bornData.scale * 0.01) : 1;
-			data.level = bornData ? bornData.level : 0;
-			data.bodyRadius = bornData ? bornData.bodyRadius : 0;
-			data.direction = bornData ? bornData.direction : 0;
+			data.avatarInfo.setBodyResID(bornData ? bornData.q_body_res : "", null);
+			data.sizeScale = (bornData && bornData.q_scale > 0) ? (bornData.q_scale * 0.01) : 1;
+			data.totalStat.level = bornData ? bornData.q_grade : 0;
+			data.bodyRadius = bornData ? bornData.q_body_radius_pixel : 0;
+			data.direction = bornData ? bornData.q_direction : 0;
 			AvatarManager.updateAvatar(role);
 
-			if (data.hp <= 0)
+			if (data.totalStat.hp <= 0)
 			{
 				role.stateMachine.transition(RoleStateType.ACTION_DEATH, null, true);
 			}
@@ -368,7 +368,7 @@ package com.rpgGame.app.manager.role
 			//执行主换装更新
 			AvatarManager.updateAvatar(role);
 
-			if (data.hp <= 0)
+			if (data.totalStat.hp <= 0)
 			{
 				role.stateMachine.transition(RoleStateType.ACTION_DEATH, null, true);
 			}

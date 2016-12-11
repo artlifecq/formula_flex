@@ -1,21 +1,21 @@
 package com.rpgGame.coreData.info.fight.skill
 {
-	import app.message.SpellProto;
-	import app.message.SpellModuleObjProto.HeroLearnRaceSpellsProto;
+	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
+	import com.rpgGame.netData.skill.bean.SkillInfo;
+	import com.rpgGame.netData.skill.message.ResSkillInfosMessage;
 	
 	import org.client.mainCore.ds.HashMap;
 
 	/**
-	 *
-	 * 主动技能列表
-	 * @author L.L.M.Sunny
-	 * 创建时间：2015-7-13 上午11:32:15
-	 *
-	 */
+	 * 角色已经拥有的技能，可以放到技能栏中释放的技能 
+	 * @author NEIL
+	 * 
+	 */	
 	public class ActiveSpellList
 	{
 		/**当前职业**/
-		public var race : int = -1;
+//		public var race : int = -1;
 
 		/**升到等级，总共获得的技能点**/
 		public var totalAddSpellPoint : int;
@@ -24,41 +24,80 @@ package com.rpgGame.coreData.info.fight.skill
 
 		private var _spellMap : HashMap;
 		private var _autoSpellMap : Array;
-		private var _autoLastSpellType : int;
+		private var _autoLastSpellID : int;
 
 		public function ActiveSpellList()
 		{
 			_spellMap = new HashMap;
 			_autoSpellMap = [];
-			_autoLastSpellType = 0;
+			_autoLastSpellID = 0;
 		}
 
-		public function setHeroData(learnRaceSpells : HeroLearnRaceSpellsProto) : void
+		public function setHeroData(msg : ResSkillInfosMessage) : void
 		{
-			if (learnRaceSpells.hasRace)
+//			if (learnRaceSpells.hasRace)
+//			{
+//				race = learnRaceSpells.race;
+//			}
+
+//			for each (var spellData : SpellProto in learnRaceSpells.spells)
+//			{
+//				addSpell(spellData);
+//			}
+			for each (var spellInfo : SkillInfo in msg.skills)
 			{
-				race = learnRaceSpells.race;
+				addSpell(SpellDataManager.getSpellData(spellInfo.skillModelId));
 			}
+		}
 
-			for each (var spellData : SpellProto in learnRaceSpells.spells)
+		public function addSpell(spellData : Q_skill_model) : void
+		{
+			_spellMap.add(spellData.q_skillID, spellData);
+		}
+
+		public function hasTypeSpell(spellID : int) : Boolean
+		{
+			return _spellMap.getValue(spellID);
+		}
+
+		public function getSpell(spellID : int) : Q_skill_model
+		{
+			return _spellMap.getValue(spellID);
+		}
+		
+		/**
+		 * 得到默认技能 
+		 * @return 
+		 * 
+		 */		
+		public function getDefaultSpell():Q_skill_model
+		{
+			var spell : Q_skill_model;
+			var spells : Array = _spellMap.getValues();
+			var len : int = spells.length;
+			for (var i : int = 0; i < len; i++)
 			{
-				addSpell(spellData);
+				spell = spells[i];
+				if(spell.q_trigger_type == 1 && isDefaultSpell(spell.q_skillID))
+				{
+					return spell;
+				}
 			}
+			return null;
 		}
-
-		public function addSpell(spellData : SpellProto) : void
+		
+		/**
+		 * 该技能是否为默认技能 
+		 * @param spellID
+		 * @return 
+		 * 
+		 */		
+		public function isDefaultSpell(spellID:int):Boolean
 		{
-			_spellMap.add(spellData.spellType, spellData);
-		}
-
-		public function hasTypeSpell(spellType : int) : Boolean
-		{
-			return _spellMap.getValue(spellType);
-		}
-
-		public function getSpell(spellType : int) : SpellProto
-		{
-			return _spellMap.getValue(spellType);
+			var spell:Q_skill_model = getSpell(spellID);
+			if(spell.q_default_enable)
+				return spell;
+			return false;
 		}
 
 		/**
@@ -76,18 +115,19 @@ package com.rpgGame.coreData.info.fight.skill
 		 * @return
 		 *
 		 */
-		public function getAutoSpellList() : Vector.<SpellProto>
+		public function getAutoSpellList() : Vector.<Q_skill_model>
 		{
-			var spellVect : Vector.<SpellProto> = new Vector.<SpellProto>;
+			var spellVect : Vector.<Q_skill_model> = new Vector.<Q_skill_model>;
 
-			var spell : SpellProto;
+			var spell : Q_skill_model;
 			var spells : Array = _spellMap.getValues();
 			var len : int = spells.length;
 			for (var i : int = 0; i < len; i++)
 			{
 				spell = spells[i];
-				if (spell.activeSpell && isAutoSpellId(spell.spellType))
+				if(spell.q_trigger_type == 1 && isAutoSpellId(spell.q_skillID))
 					spellVect.push(spell);
+//				if (spell.activeSpell && spell.race == race && isAutoSpellId(spell.spellID))
 			}
 
 			return spellVect;
@@ -102,28 +142,29 @@ package com.rpgGame.coreData.info.fight.skill
 		public function getCurRaceSpellAllLevel(race : int = 0) : int
 		{
 			var allLevel : int = 0;
-			var spell : SpellProto;
+			var spell : Q_skill_model;
 			var spells : Array = _spellMap.getValues();
 			var len : int = spells.length;
 			for (var i : int = 0; i < len; i++)
 			{
 				spell = spells[i];
 
-				if (race == spell.race || race == 0)
-					allLevel += spell.spellLevel;
+//				if (race == spell.race || race == 0)
+//					allLevel += spell.spellLevel;
+				allLevel = spell.q_grade;
 			}
 
 			return allLevel;
 		}
-		
+
 		public function getAllSpellPoint() : int
 		{
 			return obtainSpellPoint + totalAddSpellPoint;
 		}
 
-		public function getNextAutoSpellType() : int
+		public function getNextAutoSpellID() : int
 		{
-			var index : int = _autoSpellMap.indexOf(_autoLastSpellType);
+			var index : int = _autoSpellMap.indexOf(_autoLastSpellID);
 			index++;
 			if (index >= _autoSpellMap.length)
 			{
@@ -131,8 +172,8 @@ package com.rpgGame.coreData.info.fight.skill
 			}
 			if (index < _autoSpellMap.length)
 			{
-				_autoLastSpellType = _autoSpellMap[index];
-				return _autoLastSpellType;
+				_autoLastSpellID = _autoSpellMap[index];
+				return _autoLastSpellID;
 			}
 			return 0;
 		}
@@ -143,11 +184,11 @@ package com.rpgGame.coreData.info.fight.skill
 		 */
 		public function clearSpell() : void
 		{
-			race = -1;
+//			race = -1;
 			_spellMap.clear();
 			//----------------------------清空自动使用技能设置
 			_autoSpellMap.length = 0;
-			_autoLastSpellType = 0;
+			_autoLastSpellID = 0;
 		}
 
 		//--------------------------------------------------
@@ -169,22 +210,22 @@ package com.rpgGame.coreData.info.fight.skill
 
 		/**
 		 * 是否是可以自动释放的技能
-		 * @param spellType
+		 * @param spellID
 		 * @return
 		 *
 		 */
-		public function isAutoSpellId(spellType : int) : Boolean
+		public function isAutoSpellId(spellID : int) : Boolean
 		{
-			return _autoSpellMap.indexOf(spellType) > -1;
+			return _autoSpellMap.indexOf(spellID) > -1;
 		}
 
-		public function reqAutoSpellMsg(spellType : int) : Boolean
+		public function reqAutoSpellMsg(spellID : int) : Boolean
 		{
 			if (_autoSpellMap.length < 3)
 			{
-				var index : int = _autoSpellMap.indexOf(spellType);
+				var index : int = _autoSpellMap.indexOf(spellID);
 				if (index < 0)
-					_autoSpellMap.push(spellType);
+					_autoSpellMap.push(spellID);
 				return true;
 			}
 			else
@@ -194,9 +235,9 @@ package com.rpgGame.coreData.info.fight.skill
 			return false;
 		}
 
-		public function removeAutoSpell(spellType : int) : void
+		public function removeAutoSpell(spellID : int) : void
 		{
-			var index : int = _autoSpellMap.indexOf(spellType);
+			var index : int = _autoSpellMap.indexOf(spellID);
 			if (index > -1)
 			{
 				_autoSpellMap.splice(index, 1);

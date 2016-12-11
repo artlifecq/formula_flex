@@ -4,6 +4,7 @@ package com.rpgGame.app.fight.spell
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.utils.PathFinderUtil;
 	import com.game.engine3D.vo.map.MapAreaTypeEnum;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.AreaMapManager;
 	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.manager.SkillCDManager;
@@ -20,26 +21,23 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.core.fight.spell.CastSpellInfo;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.RaceCfgData;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.info.MapDataManager;
-	import com.rpgGame.coreData.info.item.ItemInfo;
 	import com.rpgGame.coreData.lang.LangNoticeInfo;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.type.SpellTargetType;
-	import com.rpgGame.coreData.type.item.EquipmentPos;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	
-	import app.message.SpellEffectProto;
-	import app.message.SpellProto;
-	
 	import away3d.pathFinding.DistrictWithPath;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.data.long;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
@@ -68,8 +66,8 @@ package com.rpgGame.app.fight.spell
 		 */
 		private static const DEVIATION_RANGE : int = 50;
 
-		private static var _caseSpell : SpellProto = null;
-		private static var _lastCaseSpell : SpellProto = null;
+		private static var _caseSpell : Q_skill_model = null;
+		private static var _lastCaseSpell : Q_skill_model = null;
 		private static var _relateSpellIndex : int = -1;
 		private static var tempVector3D : Vector3D = new Vector3D();
 		private static var _roleList : Vector.<SceneRole>;
@@ -79,16 +77,20 @@ package com.rpgGame.app.fight.spell
 		{
 		}
 
-		private static function getNextRelateSpell() : SpellProto
+		private static function getNextRelateSpell() : Q_skill_model
 		{
-			if (!_caseSpell || !_caseSpell.activeSpell)
+			if (!_caseSpell)
 				return null;
+			
+			var relateSpells:Vector.<Q_skill_model> = SpellDataManager.getRelateSpells(_caseSpell.q_relate_spells);
+			
+			
 			if (_relateSpellIndex < 0)
 			{
 				_relateSpellIndex++;
 				return _caseSpell;
 			}
-			else if (_relateSpellIndex >= _caseSpell.activeSpell.relateSpells.length)
+			else if (_relateSpellIndex >= relateSpells.length)
 			{
 				_relateSpellIndex = 0;
 				return _caseSpell;
@@ -97,13 +99,13 @@ package com.rpgGame.app.fight.spell
 			{
 				var currIndex : int = _relateSpellIndex;
 				_relateSpellIndex++;
-				return _caseSpell.activeSpell.relateSpells[currIndex];
+				return relateSpells[currIndex];
 			}
 		}
 
-		public static function shortcutsTryCaseSpell(spellType : int) : void
+		public static function shortcutsTryCaseSpell(spellID : int) : void
 		{
-			var cased : Boolean = tryCaseSpell(new CastSpellInfo(getSpellData(spellType)));
+			var cased : Boolean = tryCaseSpell(new CastSpellInfo(getSpellData(spellID)));
 //			if (!cased)
 //				TrusteeshipManager.getInstance().nextSpell = getSpellData(spellType);
 		}
@@ -113,14 +115,14 @@ package com.rpgGame.app.fight.spell
 			_roleList = roleList;
 			_autoAtkNearRole = autoAtkNearRole;
 			var caseState : int = caseSpell(caseInfo, true);
-			if (!caseInfo.caseSpellData || !caseInfo.caseSpellData.activeSpell)
+			if (!caseInfo.caseSpellData)
 				return false;
 			var targerRole : SceneRole = null;
 			if (caseState == CASE_STATE_SUCCEED)
 			{
 				requestReleaseSpell();
 			}
-			else if (caseState == CASE_STATE_NOT_IN_RELEASE_RANGE)
+			else if (caseState == CASE_STATE_NOT_IN_RELEASE_RANGE)//距离过远
 			{
 				if (caseInfo.targetPos)
 				{
@@ -135,7 +137,7 @@ package com.rpgGame.app.fight.spell
 				if (ClientConfig.isSingle)
 				{
 					var buffer : ByteBuffer = new ByteBuffer();
-					buffer.writeVarint32(caseInfo.caseSpellData.spellType);
+					buffer.writeVarint32(caseInfo.caseSpellData.q_skillID);
 					buffer.writeVarint32(0);
 //					buffer.writeVarint32(caseInfo.caseSpellData.sp);
 					buffer.writeVarint64(MainRoleManager.actorID);
@@ -147,17 +149,17 @@ package com.rpgGame.app.fight.spell
 					buffer.position = 0;
 
 					var info : ReleaseSpellInfo = new ReleaseSpellInfo();
-					info.readFrom(1,buffer);
+					info.readFrom(1,null);
 					ReleaseSpellHelper.releaseSpell(info);
 				}
 				else
 				{
 					var angle : int = (360 - caseInfo.angle) % 360;
 					var ref : CastSpellLockStateReference = MainRoleManager.actor.stateMachine.getReference(CastSpellLockStateReference) as CastSpellLockStateReference;
-					var spellEffectData : SpellEffectProto = caseInfo.spellEffectData;
+					var spellEffectData : Q_SpellEffect = caseInfo.spellEffectData;
 					ref.setParams(spellEffectData);
 					MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_CAST_SPELL_LOCK, ref);
-					SpellSender.releaseSpell(caseInfo.caseSpellData.spellType, caseInfo.releasePos.x, caseInfo.releasePos.y, angle, caseInfo.targetID);
+					SpellSender.releaseSpell(caseInfo.caseSpellData.q_skillID, caseInfo.releasePos.x, caseInfo.releasePos.y, angle, caseInfo.targetServerID);
 				}
 			}
 
@@ -168,10 +170,6 @@ package com.rpgGame.app.fight.spell
 				{
 					requestReleaseSpell();
 				}
-			/*else if (caseState == CASE_STATE_NOT_IN_RELEASE_RANGE)
-			{
-				NoticeManager.showNotify(LangNoticeInfo.SpellNotInReleaseRange); //"不在施法范围内"
-			}*/
 			}
 
 			function onWalkThroughCase(ref : WalkMoveStateReference) : void
@@ -200,6 +198,13 @@ package com.rpgGame.app.fight.spell
 			return true;
 		}
 
+		/**
+		 * 判断技能可以释放及技能相关的信息设置
+		 * @param castInfo  待释放的技能信息
+		 * @param relateSelectable 是否开启连招判断 
+		 * @return 
+		 * 
+		 */		
 		public static function caseSpell(castInfo : CastSpellInfo, relateSelectable : Boolean = false) : int
 		{
 			if (!castInfo.spellData)
@@ -209,27 +214,28 @@ package com.rpgGame.app.fight.spell
 
 			if (!ShortcutsManger.getInstance().isTempSpellBar)
 			{
-				var itemInfo : ItemInfo = MainRoleManager.actorInfo.equipInfo.getItemInfoByPos(EquipmentPos.POS_WEAPON);
-				if (itemInfo)
-				{
-					var race : int = ItemCfgData.getEquipmentRace(itemInfo.cfgId);
-					if (castInfo.spellData.race != race)
-					{
-						if (!_autoAtkNearRole)
-						{
-							NoticeManager.showNotify(LangNoticeInfo.CastSpellNoAccordWithWeapon); //"穿戴的武器不能释放该技能"
-						}
-						return CASE_STATE_FAIL;
-					}
-				}
-				else
-				{
-					if (!_autoAtkNearRole)
-					{
-						NoticeManager.showNotify(LangNoticeInfo.CastSpellHasNoWeapon); //"没有穿戴武器不能释放技能"
-					}
-					return CASE_STATE_FAIL;
-				}
+				//暂时不需要这个功能（没有武器时，不能释放技能）
+//				var itemInfo : ItemInfo = MainRoleManager.actorInfo.equipInfo.getItemInfoByPos(EquipmentPos.POS_WEAPON);
+//				if (itemInfo)
+//				{
+//					var race : int = ItemCfgData.getEquipmentRace(itemInfo.cfgId);
+//					if (castInfo.spellData.race != race)
+//					{
+//						if (!_autoAtkNearRole)
+//						{
+//							NoticeManager.showNotify(LangNoticeInfo.CastSpellNoAccordWithWeapon); //"穿戴的武器不能释放该技能"
+//						}
+//						return CASE_STATE_FAIL;
+//					}
+//				}
+//				else
+//				{
+//					if (!_autoAtkNearRole)
+//					{
+//						NoticeManager.showNotify(LangNoticeInfo.CastSpellHasNoWeapon); //"没有穿戴武器不能释放技能"
+//					}
+//					return CASE_STATE_FAIL;
+//				}
 			}
 
 			if (MainRoleManager.actor.stateMachine.isDeadState)
@@ -294,17 +300,17 @@ package com.rpgGame.app.fight.spell
 			}
 			if (_caseSpell)
 			{
-				if (_caseSpell.spellType != castInfo.spellData.spellType)
+				if (_caseSpell.q_skillID != castInfo.spellData.q_skillID)
 				{
 					_caseSpell = null;
 					_relateSpellIndex = -1;
 				}
 			}
 			_caseSpell = castInfo.spellData;
-			var spellData : SpellProto = relateSelectable ? getNextRelateSpell() : _lastCaseSpell;
+			var spellData : Q_skill_model = relateSelectable ? getNextRelateSpell() : _lastCaseSpell;
 			_lastCaseSpell = spellData;
 			castInfo.caseSpellData = spellData;
-			//trace("将要释放技能：" + spellData.spellType);
+			GameLog.add("========================================将要释放技能：" + spellData.q_skillID);
 			if (!spellData)
 			{
 				return CASE_STATE_FAIL;
@@ -338,13 +344,13 @@ package com.rpgGame.app.fight.spell
 		 */
 		private static function setSpellTarget(castInfo : CastSpellInfo) : int
 		{
-			var spellData : SpellProto = castInfo.caseSpellData;
-			var spellEffectData : SpellEffectProto = castInfo.spellEffectData;
-			if (!spellData.activeSpell)
+			var spellData : Q_skill_model = castInfo.caseSpellData;
+			var spellEffectData : Q_SpellEffect = castInfo.spellEffectData;
+			if (!spellData)
 			{
 				return CASE_STATE_FAIL;
 			}
-			if (AreaMapManager.forbidCastSpellInMapDataArea(MainRoleManager.actor, spellData.spellType))
+			if (AreaMapManager.forbidCastSpellInMapDataArea(MainRoleManager.actor, spellData.q_skillID))
 			{
 				if (!_autoAtkNearRole)
 				{
@@ -352,9 +358,10 @@ package com.rpgGame.app.fight.spell
 				}
 				return CASE_STATE_FAIL;
 			}
-			var releaseRange : int = spellData.activeSpell.releaseRange;
-			var hurtRange : int = spellData.activeSpell.hurtRange;
-			var targetID : Number = 0;
+			var releaseRange : int = spellData.q_range_limit;
+//			var hurtRange : int = spellData.activeSpell.hurtRange;
+			var targetServerID : long = null;
+			var targetID:Number = 0;
 			var targetRole : SceneRole = null;
 			var releaseTargetPos : Point = null;
 			var targetPos : Point = null;
@@ -363,7 +370,7 @@ package com.rpgGame.app.fight.spell
 			var radian : Number = 0;
 			var angle : int = 0;
 			var selfPos : Point = new Point(MainRoleManager.actor.x, MainRoleManager.actor.z);
-			if (spellData.activeSpell.targetType == SpellTargetType.SELF) //对自己施放的技能
+			if (spellData.q_target == SpellTargetType.SELF) //对自己施放的技能
 			{
 				if (MainRoleManager.isDriveZhanChe)
 				{
@@ -371,6 +378,7 @@ package com.rpgGame.app.fight.spell
 				}
 				else
 				{
+					targetServerID = MainRoleManager.actorInfo.serverID;
 					targetID = MainRoleManager.actorID;
 				}
 				angle = 270 - MainRoleManager.actor.rotationY;
@@ -378,7 +386,7 @@ package com.rpgGame.app.fight.spell
 				targetPos = new Point(selfPos.x, selfPos.y);
 				releasePos = new Point(selfPos.x, selfPos.y);
 			}
-			else if (spellData.activeSpell.isLockingSpell) //锁定技或者在挂机时都需要目标
+			else if (spellData.is_locking_spell) //锁定技或者在挂机时都需要目标
 			{
 				var nearCanAtkRole : SceneRole;
 				var selectedRole : SceneRole = SceneRoleSelectManager.selectedRole;
@@ -427,12 +435,12 @@ package com.rpgGame.app.fight.spell
 											protectLevel = 69;
 										}
 										var selectedData : RoleData = selectedRole.data as RoleData;
-										if (MainRoleManager.actorInfo.level <= protectLevel)
+										if (MainRoleManager.actorInfo.totalStat.level <= protectLevel)
 										{
 											NoticeManager.showNotify(LangNoticeInfo.SpellSelfIsProtect); //"70级以下为新手保护期，不能攻击其他玩家"
 											return CASE_STATE_FAIL;
 										}
-										else if (MainRoleManager.actorInfo.level > protectLevel && selectedData.level <= protectLevel)
+										else if (MainRoleManager.actorInfo.totalStat.level > protectLevel && selectedData.totalStat.level <= protectLevel)
 										{
 											NoticeManager.showNotify(LangNoticeInfo.SpellSelectedIsProtect); //"70级以下为新手保护期，对方不能被攻击"
 											return CASE_STATE_FAIL;
@@ -466,12 +474,12 @@ package com.rpgGame.app.fight.spell
 						{
 							if (selectedRole.type == SceneCharType.PLAYER)
 							{
-								if (spellData.activeSpell.targetType == SpellTargetType.FRIEND)
+								if (spellData.q_target == SpellTargetType.FRIEND)
 								{
 									NoticeManager.showNotify(LangNoticeInfo.SpellSelectedOnlyUseToFriend); //"该技能只能对友方释放"
 									return CASE_STATE_FAIL;
 								}
-								else if (spellData.activeSpell.targetType == SpellTargetType.TEAM)
+								else if (spellData.q_target == SpellTargetType.TEAM)
 								{
 									NoticeManager.showNotify(LangNoticeInfo.SpellSelectedOnlyUseToTeam); //"该技能只能对队友释放"
 									return CASE_STATE_FAIL;
@@ -501,7 +509,7 @@ package com.rpgGame.app.fight.spell
 
 				if (!targetRole)
 				{
-					if (spellData.activeSpell.targetType == SpellTargetType.FRIEND || spellData.activeSpell.targetType == SpellTargetType.TEAM) //对友方施放的技能，无目标默认对自己释放。
+					if (spellData.q_target == SpellTargetType.FRIEND || spellData.q_target == SpellTargetType.TEAM) //对友方施放的技能，无目标默认对自己释放。
 					{
 						targetRole = MainRoleManager.actor;
 					}
@@ -510,8 +518,9 @@ package com.rpgGame.app.fight.spell
 				if (targetRole)
 				{
 					var targetRadius : int = (targetRole.data as RoleData).bodyRadius; //处理半径
-					var keepSpacing : int = spellEffectData.keepSpacing;
+					var keepSpacing : int = spellEffectData.keep_spacing;
 
+					targetServerID = targetRole.data.serverID;
 					targetID = targetRole.id;
 					releaseTargetPos = new Point(targetRole.x, targetRole.z);
 					targetPos = new Point(selfPos.x, selfPos.y);
@@ -532,14 +541,14 @@ package com.rpgGame.app.fight.spell
 
 					var releaseRadius : int;
 					var targetRangeSpacing : int;
-					if (spellEffectData.blinkType == 0)
+					if (spellEffectData.blink_type == 0)
 					{
-						releaseRadius = releaseRange + hurtRange;
+						releaseRadius = releaseRange/* + hurtRange*/;
 						targetRangeSpacing = (keepSpacing > 0 && keepSpacing < releaseRadius) ? keepSpacing : releaseRadius;
 					}
 					else
 					{
-						releaseRadius = releaseRange + ((keepSpacing > 0 && keepSpacing < hurtRange) ? keepSpacing : hurtRange);
+						releaseRadius = releaseRange /*+ ((keepSpacing > 0 && keepSpacing < hurtRange) ? keepSpacing : hurtRange)*/;
 						targetRangeSpacing = releaseRadius;
 					}
 					targetRangeSpacing = targetRangeSpacing + targetRadius - DEVIATION_RANGE;
@@ -549,7 +558,7 @@ package com.rpgGame.app.fight.spell
 					targetPos.x = selfPos.x + dist * dx;
 					targetPos.y = selfPos.y + dist * dy;
 
-					var releaseRangeSpacing : int = (keepSpacing > 0 && keepSpacing < hurtRange) ? keepSpacing : hurtRange;
+					var releaseRangeSpacing : int = 0/*(keepSpacing > 0 && keepSpacing < hurtRange) ? keepSpacing : hurtRange*/;
 					releaseRangeSpacing = releaseRangeSpacing + targetRadius - DEVIATION_RANGE;
 					releaseRangeSpacing = releaseRangeSpacing < 0 ? 0 : releaseRangeSpacing;
 					dist = releaseDist - releaseRangeSpacing;
@@ -597,7 +606,7 @@ package com.rpgGame.app.fight.spell
 			}
 			else
 			{
-				if (spellEffectData.blinkType == 0)
+				if (spellEffectData.blink_type == 0)
 				{
 					releaseTargetPos = new Point(selfPos.x, selfPos.y);
 					targetPos = new Point(selfPos.x, selfPos.y);
@@ -620,6 +629,7 @@ package com.rpgGame.app.fight.spell
 			var range : int = Point.distance(targetPos, releaseTargetPos);
 			range = range + DEVIATION_RANGE;
 			angle = (angle + 360) % 360;
+			castInfo.targetServerID = targetServerID;
 			castInfo.targetID = targetID;
 			castInfo.targetPos = releaseTargetPos;
 			castInfo.releasePos = releasePos;
@@ -656,7 +666,7 @@ package com.rpgGame.app.fight.spell
 		 * @return
 		 *
 		 */
-		/*private static function getRangeTargetPos(spellData : SpellProto) : Point
+		/*private static function getRangeTargetPos(spellData : Q_skill_model) : Point
 		{
 			var range : int = getReleaseRangle(spellData);
 			range = range < 0 ? 0 : range;
@@ -668,7 +678,7 @@ package com.rpgGame.app.fight.spell
 			return targetPos;
 		}*/
 
-		private static function getNearestCanAtkRole(spellData : SpellProto) : SceneRole
+		private static function getNearestCanAtkRole(spellData : Q_skill_model) : SceneRole
 		{
 			var list : Vector.<SceneRole> = _roleList ? _roleList : SceneManager.getSceneRoleList();
 			list.sort(onSortNearestRole);
@@ -706,56 +716,64 @@ package com.rpgGame.app.fight.spell
 			return 0;
 		}
 
-		public static function getSpellData(spellType : int) : SpellProto
+		/**
+		 * 获得一个可以释放的技能数据 
+		 * @param spellID
+		 * @return 
+		 * 
+		 */		
+		public static function getSpellData(spellID : int) : Q_skill_model
 		{
-			var spellProto : SpellProto = ShortcutsManger.getInstance().getTempSellProto(spellType);
+			var spellProto : Q_skill_model = ShortcutsManger.getInstance().getTempSellProto(spellID);
 			if (spellProto != null)
 			{
 				return spellProto;
 			}
-			return MainRoleManager.actorInfo.spellList.getSpell(spellType);
+			return MainRoleManager.actorInfo.spellList.getSpell(spellID);
 		}
 
 		public static function hasSpellCanCast() : Boolean
 		{
-			var defaultSpell : SpellProto = getDefaultSpell();
+			var defaultSpell : Q_skill_model = getDefaultSpell();
 			return defaultSpell != null;
 		}
 
-		public static function getDefaultSpell() : SpellProto
+		public static function getDefaultSpell() : Q_skill_model
 		{
-			var defaultSpell : SpellProto = null;
-			var itemInfo : ItemInfo = MainRoleManager.actorInfo.equipInfo.getItemInfoByPos(EquipmentPos.POS_WEAPON);
-			if (itemInfo)
-			{
-				var race : int = ItemCfgData.getEquipmentRace(itemInfo.cfgId);
-				defaultSpell = RaceCfgData.getDefaultSpell(race);
-			}
+			var defaultSpell : Q_skill_model = MainRoleManager.actorInfo.spellList.getDefaultSpell();
+			
+//			var itemInfo : ItemInfo = MainRoleManager.actorInfo.equipInfo.getItemInfoByPos(EquipmentPos.POS_WEAPON);
+//			if (itemInfo)
+//			{
+//				var race : int = ItemCfgData.getEquipmentRace(itemInfo.cfgId);
+//				defaultSpell = RaceCfgData.getDefaultSpell(race);
+//			}
 			return defaultSpell;
 		}
 
-		public static function getNextCastSpell() : SpellProto
+		public static function getNextCastSpell() : Q_skill_model
 		{
-			var race : int = 0;
-			var itemInfo : ItemInfo = MainRoleManager.actorInfo.equipInfo.getItemInfoByPos(EquipmentPos.POS_WEAPON);
-			if (itemInfo)
-			{
-				race = ItemCfgData.getEquipmentRace(itemInfo.cfgId);
-			}
-			else //没有穿戴武器不能释放技能
-			{
-				return null;
-			}
+			//我们没有要求必须拿武器才能放技能
+//			var race : int = 0;
+//			var itemInfo : ItemInfo = MainRoleManager.actorInfo.equipInfo.getItemInfoByPos(EquipmentPos.POS_WEAPON);
+//			if (itemInfo)
+//			{
+//				race = ItemCfgData.getEquipmentRace(itemInfo.cfgId);
+//			}
+//			else //没有穿戴武器不能释放技能
+//			{
+//				return null;
+//			}
 
-			var castSpell : SpellProto = null;
-			var spellData : SpellProto;
+			var castSpell : Q_skill_model = null;
+			var spellData : Q_skill_model;
 			var i : int = 0;
 			var len : int = MainRoleManager.actorInfo.spellList.getAutoSpellLen();
 			while (i++ < len)
 			{
-				var spellType : int = MainRoleManager.actorInfo.spellList.getNextAutoSpellType();
-				spellData = getSpellData(spellType);
-				if (spellData && (spellData.race == race) && !SkillCDManager.getInstance().getSkillHasCDTime(spellData))
+				var spellID : int = MainRoleManager.actorInfo.spellList.getNextAutoSpellID();
+				spellData = getSpellData(spellID);
+				if (spellData && !SkillCDManager.getInstance().getSkillHasCDTime(spellData))
 				{
 					castSpell = spellData;
 					break;
@@ -766,16 +784,16 @@ package com.rpgGame.app.fight.spell
 				spellData = getDefaultSpell();
 				if (spellData)
 				{
-					if ((spellData.race == race) && !SkillCDManager.getInstance().getSkillHasCDTime(spellData))
+					if (!SkillCDManager.getInstance().getSkillHasCDTime(spellData))
 					{
 						castSpell = spellData;
 					}
 					else
 					{
-						var relateSpells : Array = spellData.activeSpell.relateSpells;
-						for each (var tmpData : SpellProto in relateSpells)
+						var relateSpells : Vector.<Q_skill_model> = SpellDataManager.getRelateSpells(spellData.q_relate_spells);
+						for each (var tmpData : Q_skill_model in relateSpells)
 						{
-							if ((spellData.race == race) && !SkillCDManager.getInstance().getSkillHasCDTime(tmpData))
+							if (!SkillCDManager.getInstance().getSkillHasCDTime(tmpData))
 							{
 								castSpell = spellData;
 								break;

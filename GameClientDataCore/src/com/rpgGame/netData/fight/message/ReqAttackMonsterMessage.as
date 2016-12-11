@@ -13,31 +13,26 @@ package com.rpgGame.netData.fight.message{
 	 */
 	public class ReqAttackMonsterMessage extends Message {
 	
-		//攻击类型(技能ID)
-		private var _fightType: int;
+		//技能ID
+		private var _skillId: int;
 		
 		//攻击朝向
 		private var _fightDirection: int;
 		
-		//前端自定义信息(动作,状态) -1:代表玩家模拟侍宠攻击
-		private var _effectsid: int;
-		
 		//攻击目标
-		private var _fightTarget: long;
+		private var _targetId: long;
 		
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//攻击类型(技能ID)
-			writeInt(_fightType);
+			//技能ID
+			writeInt(_skillId);
 			//攻击朝向
 			writeByte(_fightDirection);
-			//前端自定义信息(动作,状态) -1:代表玩家模拟侍宠攻击
-			writeByte(_effectsid);
 			//攻击目标
-			writeLong(_fightTarget);
+			writeLong(_targetId);
 			return true;
 		}
 		
@@ -45,14 +40,12 @@ package com.rpgGame.netData.fight.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//攻击类型(技能ID)
-			_fightType = readInt();
+			//技能ID
+			_skillId = readInt();
 			//攻击朝向
 			_fightDirection = readByte();
-			//前端自定义信息(动作,状态) -1:代表玩家模拟侍宠攻击
-			_effectsid = readByte();
 			//攻击目标
-			_fightTarget = readLong();
+			_targetId = readLong();
 			return true;
 		}
 		
@@ -65,18 +58,18 @@ package com.rpgGame.netData.fight.message{
 		}
 		
 		/**
-		 * get 攻击类型(技能ID)
+		 * get 技能ID
 		 * @return 
 		 */
-		public function get fightType(): int{
-			return _fightType;
+		public function get skillId(): int{
+			return _skillId;
 		}
 		
 		/**
-		 * set 攻击类型(技能ID)
+		 * set 技能ID
 		 */
-		public function set fightType(value: int): void{
-			this._fightType = value;
+		public function set skillId(value: int): void{
+			this._skillId = value;
 		}
 		
 		/**
@@ -95,33 +88,18 @@ package com.rpgGame.netData.fight.message{
 		}
 		
 		/**
-		 * get 前端自定义信息(动作,状态) -1:代表玩家模拟侍宠攻击
-		 * @return 
-		 */
-		public function get effectsid(): int{
-			return _effectsid;
-		}
-		
-		/**
-		 * set 前端自定义信息(动作,状态) -1:代表玩家模拟侍宠攻击
-		 */
-		public function set effectsid(value: int): void{
-			this._effectsid = value;
-		}
-		
-		/**
 		 * get 攻击目标
 		 * @return 
 		 */
-		public function get fightTarget(): long{
-			return _fightTarget;
+		public function get targetId(): long{
+			return _targetId;
 		}
 		
 		/**
 		 * set 攻击目标
 		 */
-		public function set fightTarget(value: long): void{
-			this._fightTarget = value;
+		public function set targetId(value: long): void{
+			this._targetId = value;
 		}
 		
 	}

@@ -35,7 +35,7 @@
 		/**
 		 * 被分配属性,可以被洗掉
 		 */
-		public var spriteStat : SpriteStat;
+//		public var spriteStat : SpriteStat;
 
 		/**总共获得的属性点 */
 //		public var totalAddSpriteStatPoint : int;
@@ -51,15 +51,15 @@
 		/**
 		 * 当前血量
 		 */
-		public var hp : int;
+//		public var hp : int;
 		/**
 		 * 当前魔量
 		 */
-		public var mp : int;
+//		public var mp : int;
 		/**
 		 * 等级
 		 */
-		public var level : int = 1;
+//		public var level : int = 1;
 
 		/** 是否在镖车上 **/
 		public var isInBiao : Boolean;
@@ -114,7 +114,7 @@
 			_fixDirection = false;
 			avatarInfo = new AvatarInfo();
 			totalStat = new SpriteStat();
-			spriteStat = new SpriteStat();
+//			spriteStat = new SpriteStat();
 		}
 
 		/**
@@ -155,15 +155,15 @@
 		
 		public static function readMonster(data : RoleData, info : MonsterInfo):void
 		{
-			data.level = info.level;
+			data.totalStat.level = info.level;
 			
-			data.hp = info.hp;
+			data.totalStat.hp = info.hp;
 			data.totalStat.life = info.maxHp;
 //			data.mp = info;
 //			data.totalStat.mana = ;
 			
 //			data.buffList = info.buffs;
-			readGeneric(data,new Point(info.x,info.y));
+			readGeneric(data,new Point(info.position.x,info.position.y));
 		}
 		
 		public static function readNpc(data : RoleData, info : NpcInfo):void

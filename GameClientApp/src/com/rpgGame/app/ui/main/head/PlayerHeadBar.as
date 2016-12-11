@@ -470,7 +470,7 @@ package com.rpgGame.app.ui.main.head
 		 */
 		private function updateMp(roleData : RoleData = null) : void
 		{
-			var p : Number = MainRoleManager.actorInfo.mp / MainRoleManager.actorInfo.totalStat.mana;
+			var p : Number = MainRoleManager.actorInfo.totalStat.mp / MainRoleManager.actorInfo.totalStat.mana;
 			if (p > 1)
 				p = 1;
 			mpMask.width = _imgMpWidth * p;
@@ -497,11 +497,11 @@ package com.rpgGame.app.ui.main.head
 		 */
 		private function updateLife(roleData : RoleData = null) : void
 		{
-			var p : Number = MainRoleManager.actorInfo.hp / MainRoleManager.actorInfo.totalStat.life;
+			var p : Number = MainRoleManager.actorInfo.totalStat.hp / MainRoleManager.actorInfo.totalStat.life;
 			if (p > 1)
 				p = 1;
 			bloodMask.width = _imgLifeWidth * p;
-			playerHeadSkin.labHP.text = MainRoleManager.actorInfo.hp + "/" + MainRoleManager.actorInfo.totalStat.life;
+			playerHeadSkin.labHP.text = MainRoleManager.actorInfo.totalStat.hp + "/" + MainRoleManager.actorInfo.totalStat.life;
 		}
 
 		/**
@@ -510,7 +510,7 @@ package com.rpgGame.app.ui.main.head
 		 */
 		private function updateLevel() : void
 		{
-			playerHeadSkin.labLevel.number = MainRoleManager.actorInfo.level;
+			playerHeadSkin.labLevel.number = MainRoleManager.actorInfo.totalStat.level;
 		}
 
 		private function get pkModeSetPanel() : PkModeSelectView

@@ -234,7 +234,7 @@ package com.rpgGame.app.manager
 		 * @return
 		 *
 		 */
-		public static function forbidCastSpellInMapDataArea(role : SceneRole, spellType : int) : Boolean
+		public static function forbidCastSpellInMapDataArea(role : SceneRole, spellID : int) : Boolean
 		{
 			var otherAreaMap : AreaMap = SceneManager.getScene().getAreaMap(EnumAreaMapType.OTHER_AREA);
 			var areaMapData : AreaMapData = otherAreaMap.getFlag(role.x, role.z);
@@ -244,8 +244,8 @@ package com.rpgGame.app.manager
 				var areaData : ClientMapAreaData = flagObj as ClientMapAreaData;
 				if (areaData.type == MapAreaTypeEnum.SPELL_FORBID)
 				{
-					var spellTypes : Array = areaData.getForbidSpells();
-					if (spellTypes && spellTypes.indexOf(spellType) > -1)
+					var spellIDs : Array = areaData.getForbidSpells();
+					if (spellIDs && spellIDs.indexOf(spellID) > -1)
 					{
 						return true;
 					}

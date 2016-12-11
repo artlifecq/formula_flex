@@ -22,6 +22,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.npc.NpcCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
@@ -42,7 +43,6 @@ package com.rpgGame.app.manager
 	import flash.geom.Point;
 	
 	import app.cmd.TeamModuleMessages;
-	import app.message.MonsterDataProto;
 	import app.message.RaceId;
 	import app.message.TeamDropAllocateType;
 	import app.message.TeamModuleObjProto;
@@ -187,7 +187,7 @@ package com.rpgGame.app.manager
 			memData.sceneId = mainPlayer.mapID;
 			memData.line = mainPlayer.line;
 			memData.mapCountryId = mainPlayer.sceneSequence;
-			memData.level = mainPlayer.level;
+			memData.level = mainPlayer.totalStat.level;
 			memData.raceId = mainPlayer.job;
 			memData.isOnline = true;
 			memData.isInCopy = (MapDataManager.getMapType(memData.sceneId) != EnumMapType.MAP_TYPE_NORMAL);
@@ -1437,11 +1437,11 @@ package com.rpgGame.app.manager
 
 			if (MainRoleManager.actorInfo.sceneSequence != curTeamUint.mapCountryId) //跟目标对象是否是同一个国家
 			{
-				var npcData : MonsterDataProto = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
+				var npcData : Q_scene_monster_area = MonsterDataManager.getSceneData(NpcCfgData.countryTransNPCId);
 				if (npcData == null)
 					return;
 				var point : Point = MonsterDataManager.getMonsterPosition(npcData);
-				sceneID = npcData.sceneId;
+				sceneID = npcData.q_mapid;
 				posx = point.x;
 				posy = point.y;
 			}

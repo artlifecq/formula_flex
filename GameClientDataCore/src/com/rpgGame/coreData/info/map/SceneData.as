@@ -1,7 +1,7 @@
 package com.rpgGame.coreData.info.map
 {
 	import com.game.engine2D.config.MapConfig;
-	import com.rpgGame.coreData.clientConfig.ClientScene;
+	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.enum.SceneReliveEnum;
 
 
@@ -12,7 +12,7 @@ package com.rpgGame.coreData.info.map
 	 */
 	public class SceneData
 	{
-		private var _data : ClientScene;
+		private var _data : Q_map;
 		/**
 		 * 地图类型(与EnumMapType一致)
 		 */
@@ -132,7 +132,7 @@ package com.rpgGame.coreData.info.map
 			super();
 		}
 
-		public function setData($scene : ClientScene) : void
+		public function setData($scene : Q_map) : void
 		{
 			if ($scene == null)
 				return;

@@ -1,8 +1,8 @@
 package com.rpgGame.netData.player.bean{
 	import com.rpgGame.netData.player.bean.PlayerUseItem;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
+	import com.rpgGame.netData.player.bean.AttributeItem;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
-	import com.rpgGame.netData.player.bean.PlayerAttributeItem;
 	
 	import org.game.netCore.data.long;
 	
@@ -68,7 +68,7 @@ package com.rpgGame.netData.player.bean{
 		//玩家技能
 		private var _playerSkillInfos: Vector.<com.rpgGame.netData.skill.bean.SkillInfo> = new Vector.<com.rpgGame.netData.skill.bean.SkillInfo>();
 		//角色属性信息(可能不全 隐藏属性或者不需要别玩家知道的属性不发)
-		private var _attributeList: Vector.<PlayerAttributeItem> = new Vector.<PlayerAttributeItem>();
+		private var _attributeList: Vector.<AttributeItem> = new Vector.<AttributeItem>();
 		//装备信息列表
 		private var _equips: Vector.<com.rpgGame.netData.backpack.bean.ItemInfo> = new Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>();
 		//玩家使用的加属性类道具
@@ -232,7 +232,7 @@ package com.rpgGame.netData.player.bean{
 			//角色属性信息(可能不全 隐藏属性或者不需要别玩家知道的属性不发)
 			var attributeList_length : int = readShort();
 			for (var i: int = 0; i < attributeList_length; i++) {
-				_attributeList[i] = readBean(PlayerAttributeItem) as PlayerAttributeItem;
+				_attributeList[i] = readBean(AttributeItem) as AttributeItem;
 			}
 			//装备信息列表
 			var equips_length : int = readShort();
@@ -532,14 +532,14 @@ package com.rpgGame.netData.player.bean{
 		 * get 角色属性信息(可能不全 隐藏属性或者不需要别玩家知道的属性不发)
 		 * @return 
 		 */
-		public function get attributeList(): Vector.<PlayerAttributeItem>{
+		public function get attributeList(): Vector.<AttributeItem>{
 			return _attributeList;
 		}
 		
 		/**
 		 * set 角色属性信息(可能不全 隐藏属性或者不需要别玩家知道的属性不发)
 		 */
-		public function set attributeList(value: Vector.<PlayerAttributeItem>): void{
+		public function set attributeList(value: Vector.<AttributeItem>): void{
 			this._attributeList = value;
 		}
 		

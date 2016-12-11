@@ -15,17 +15,14 @@ package com.rpgGame.netData.fight.bean{
 	 */
 	public class AttackResultInfo extends Bean {
 	
-		//实体Id
-		private var _entityId: long;
+		//攻击者Id
+		private var _attackerId: long;
 		
-		//攻击来源Id
-		private var _sourceId: long;
+		//目标Id
+		private var _targetId: long;
 		
 		//连击伤害
 		private var _hit: int;
-		
-		//攻击技能等级
-		private var _skillLevel: int;
 		
 		//攻击结果0-成功 1-MISS 2-跳闪 4-暴击 8-格挡6-跳闪+暴击 12-格挡+暴击
 		private var _fightResult: int;
@@ -39,24 +36,16 @@ package com.rpgGame.netData.fight.bean{
 		//攻击技能模板Id
 		private var _skillId: int;
 		
-		//攻击技能特效ID
-		private var _effectsid: int;
-		
-		//扩展参数 1-攻击ID是否是虚拟侍宠
-		private var _parameter: int;
-		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//实体Id
-			writeLong(_entityId);
-			//攻击来源Id
-			writeLong(_sourceId);
+			//攻击者Id
+			writeLong(_attackerId);
+			//目标Id
+			writeLong(_targetId);
 			//连击伤害
 			writeInt(_hit);
-			//攻击技能等级
-			writeShort(_skillLevel);
 			//攻击结果0-成功 1-MISS 2-跳闪 4-暴击 8-格挡6-跳闪+暴击 12-格挡+暴击
 			writeInt(_fightResult);
 			//伤害
@@ -65,10 +54,6 @@ package com.rpgGame.netData.fight.bean{
 			writeInt(_back);
 			//攻击技能模板Id
 			writeInt(_skillId);
-			//攻击技能特效ID
-			writeByte(_effectsid);
-			//扩展参数 1-攻击ID是否是虚拟侍宠
-			writeByte(_parameter);
 			return true;
 		}
 		
@@ -76,14 +61,12 @@ package com.rpgGame.netData.fight.bean{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//实体Id
-			_entityId = readLong();
-			//攻击来源Id
-			_sourceId = readLong();
+			//攻击者Id
+			_attackerId = readLong();
+			//目标Id
+			_targetId = readLong();
 			//连击伤害
 			_hit = readInt();
-			//攻击技能等级
-			_skillLevel = readShort();
 			//攻击结果0-成功 1-MISS 2-跳闪 4-暴击 8-格挡6-跳闪+暴击 12-格挡+暴击
 			_fightResult = readInt();
 			//伤害
@@ -92,41 +75,37 @@ package com.rpgGame.netData.fight.bean{
 			_back = readInt();
 			//攻击技能模板Id
 			_skillId = readInt();
-			//攻击技能特效ID
-			_effectsid = readByte();
-			//扩展参数 1-攻击ID是否是虚拟侍宠
-			_parameter = readByte();
 			return true;
 		}
 		
 		/**
-		 * get 实体Id
+		 * get 攻击者Id
 		 * @return 
 		 */
-		public function get entityId(): long{
-			return _entityId;
+		public function get attackerId(): long{
+			return _attackerId;
 		}
 		
 		/**
-		 * set 实体Id
+		 * set 攻击者Id
 		 */
-		public function set entityId(value: long): void{
-			this._entityId = value;
+		public function set attackerId(value: long): void{
+			this._attackerId = value;
 		}
 		
 		/**
-		 * get 攻击来源Id
+		 * get 目标Id
 		 * @return 
 		 */
-		public function get sourceId(): long{
-			return _sourceId;
+		public function get targetId(): long{
+			return _targetId;
 		}
 		
 		/**
-		 * set 攻击来源Id
+		 * set 目标Id
 		 */
-		public function set sourceId(value: long): void{
-			this._sourceId = value;
+		public function set targetId(value: long): void{
+			this._targetId = value;
 		}
 		
 		/**
@@ -142,21 +121,6 @@ package com.rpgGame.netData.fight.bean{
 		 */
 		public function set hit(value: int): void{
 			this._hit = value;
-		}
-		
-		/**
-		 * get 攻击技能等级
-		 * @return 
-		 */
-		public function get skillLevel(): int{
-			return _skillLevel;
-		}
-		
-		/**
-		 * set 攻击技能等级
-		 */
-		public function set skillLevel(value: int): void{
-			this._skillLevel = value;
 		}
 		
 		/**
@@ -217,36 +181,6 @@ package com.rpgGame.netData.fight.bean{
 		 */
 		public function set skillId(value: int): void{
 			this._skillId = value;
-		}
-		
-		/**
-		 * get 攻击技能特效ID
-		 * @return 
-		 */
-		public function get effectsid(): int{
-			return _effectsid;
-		}
-		
-		/**
-		 * set 攻击技能特效ID
-		 */
-		public function set effectsid(value: int): void{
-			this._effectsid = value;
-		}
-		
-		/**
-		 * get 扩展参数 1-攻击ID是否是虚拟侍宠
-		 * @return 
-		 */
-		public function get parameter(): int{
-			return _parameter;
-		}
-		
-		/**
-		 * set 扩展参数 1-攻击ID是否是虚拟侍宠
-		 */
-		public function set parameter(value: int): void{
-			this._parameter = value;
 		}
 		
 	}

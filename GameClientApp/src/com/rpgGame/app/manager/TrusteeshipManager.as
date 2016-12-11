@@ -6,12 +6,11 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.ai.AIStateMachine;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.coreData.type.RoleStateType;
-
-	import app.message.SpellProto;
-
+	
 	import gs.TweenLite;
 
 	/**
@@ -157,7 +156,7 @@ package com.rpgGame.app.manager
 			return _isAutoFightRunning;
 		}
 
-		public function getActiveSpellList() : Vector.<SpellProto>
+		public function getActiveSpellList() : Vector.<Q_skill_model>
 		{
 			return ((_stateMachine.owner as SceneRole).data as RoleData).spellList.getAutoSpellList();
 		}
