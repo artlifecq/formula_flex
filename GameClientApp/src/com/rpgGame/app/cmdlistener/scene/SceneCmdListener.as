@@ -316,7 +316,7 @@ package com.rpgGame.app.cmdlistener.scene
 				var k:int=0;
 				var len:int = addArr[j].bytesList.length;
 				
-				switch(sceneCharType)
+				switch(String(sceneCharType))
 				{
 					case SceneCharType.PLAYER:
 						for(k=0;k<len;k++)
