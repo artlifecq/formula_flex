@@ -3,6 +3,8 @@ package com.client.sender
 	import com.game.engine3D.vo.SenderReferenceSet;
 	import com.rpgGame.netData.login.message.ReqHeartMessage;
 	
+	import flash.utils.getTimer;
+	
 	import org.game.netCore.connection.SocketConnection;
 
 	/**
@@ -42,6 +44,7 @@ package com.client.sender
 			_bytes.writeVarint64(millisecond);
 			SocketConnection_protoBuffer.send(ClientCmdID.C2S_HEART_BEAT, _bytes);*/
 			var msg:ReqHeartMessage = new ReqHeartMessage();
+			msg.time = getTimer();
 			/*if (_serverTimeCheck != 0)
 				msg.time = _serverTimeCheck + _clientTimeCheck;*/
 			

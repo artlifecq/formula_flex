@@ -1,14 +1,11 @@
 package com.client.sender
 {
-	import com.client.ClientCmdID;
 	import com.client.ClientGlobal;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.netData.login.message.ReqCreateCharacterMessage;
 	import com.rpgGame.netData.login.message.ReqLoginMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
-	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
@@ -23,18 +20,18 @@ package com.client.sender
 		 * 玩家登录
 		 * @param auth
 		 */
-		public static function login(auth : String, loginKey : String) : void
-		{
-			var data : ByteBuffer = new ByteBuffer();
-			data.writeUTF(auth);
-			var signBy : ByteBuffer = new ByteBuffer();
-			signBy.writeUTFBytes(loginKey);
-			data.writeBytes(signBy);
-			SocketConnection_protoBuffer.send(ClientCmdID.C2S_WEB_LOGIN, data);
-			//
-			SocketConnection_protoBuffer.mainSocket.easyProtocolOffset = signBy[0];
-			GameLog.addShow("easyProtocolOffset : ", signBy[0]);
-		}
+//		public static function login(auth : String, loginKey : String) : void
+//		{
+//			var data : ByteBuffer = new ByteBuffer();
+//			data.writeUTF(auth);
+//			var signBy : ByteBuffer = new ByteBuffer();
+//			signBy.writeUTFBytes(loginKey);
+//			data.writeBytes(signBy);
+//			SocketConnection_protoBuffer.send(ClientCmdID.C2S_WEB_LOGIN, data);
+//			//
+//			SocketConnection_protoBuffer.mainSocket.easyProtocolOffset = signBy[0];
+//			GameLog.addShow("easyProtocolOffset : ", signBy[0]);
+//		}
 
 		/**
 		 * 玩家注册，选择帐号
