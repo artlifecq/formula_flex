@@ -8,9 +8,15 @@
 // as listed at <url: http://www.opensource.org/licenses/bsd-license.php >.
 
 package com.netease.protobuf {
-	import flash.net.*;
-	import flash.utils.*;
-	import flash.events.*;
+	import flash.events.Event;
+	import flash.events.IOErrorEvent;
+	import flash.events.SecurityErrorEvent;
+	import flash.net.URLLoader;
+	import flash.net.URLLoaderDataFormat;
+	import flash.net.URLRequest;
+	import flash.net.URLRequestMethod;
+	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
 	/**
 	 * A simple sample of RPC implementation.
 	 */

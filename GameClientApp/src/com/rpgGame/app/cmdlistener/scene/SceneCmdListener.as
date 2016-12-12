@@ -188,7 +188,7 @@ package com.rpgGame.app.cmdlistener.scene
 		public function RecvPlayerStopMessage(msg:ResPlayerStopMessage):void
 		{
 			
-			var objId : Number = msg.personId.ToGID();
+			var objId : Number = msg.personId.fValue;
 			//			var speed : int = buffer.readVarint32();
 			var posX : int = msg.position.x;
 			var posY : int = -msg.position.y;
@@ -236,7 +236,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function RecvSCSceneObjMoveMessage(msg:SCSceneObjMoveMessage):void
 		{
-			if(msg.objId.ToGID() == MainRoleManager.actorID)
+			if(msg.objId.fValue == MainRoleManager.actorID)
 			{
 				trace("这里不应该有主角自己的呀！主角自己的移动不需要同步到自己吧！！！");
 				return;
@@ -246,7 +246,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var role : SceneRole = SceneManager.getSceneObjByID(mInfo.roleID) as SceneRole;
 			if (role && role.usable && !role.getCamouflageEntity()) //有伪装则跟随伪装，防止服务器发伪装者移动。
 			{
-				var elapseTm : int = SystemTimeManager.curtTm - mInfo.startTm.ToGID();
+				var elapseTm : int = SystemTimeManager.curtTm - mInfo.startTm*1000;
 				trace("寻路开始时间：" + mInfo.startTm, "_差值：" + elapseTm);
 				RoleStateUtil.walkByInfos(mInfo);
 				
@@ -304,7 +304,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var delArr:Vector.<long> = msg.removeObjs;
 			for(var i:int=0;i<delArr.length;i++)
 			{
-				var roleID:uint = delArr[i].ToGID();
+				var roleID:uint = delArr[i].fValue;
 				onSceneRemoveObject(roleID);
 			}
 			
@@ -412,7 +412,7 @@ package com.rpgGame.app.cmdlistener.scene
 			info.read(buffer);
 			
 			data.serverID = info.monsterId;
-			data.id = info.monsterId.ToGID();
+			data.id = info.monsterId.fValue;
 			data.modelID = info.modelId;
 			
 			RoleData.readMonster(data,info);
@@ -444,7 +444,7 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			var info : NpcInfo = new NpcInfo();
 			data.serverID = info.npcId;
-			data.id = info.npcId.ToGID();
+			data.id = info.npcId.fValue;
 			data.modelID = info.npcModelId;
 			RoleData.readNpc(data, info);
 			
@@ -489,7 +489,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function RecvBroadcastPlayerAttriChangeMessage(msg : BroadcastPlayerAttriChangeMessage):void
 		{
-			var role : SceneRole = SceneManager.getSceneObjByID(msg.playerid.ToGID()) as SceneRole;
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.playerid.fValue) as SceneRole;
 			if (!role)
 				return;
 			var roleData : RoleData = role.data as RoleData;

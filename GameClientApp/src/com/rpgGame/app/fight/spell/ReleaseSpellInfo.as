@@ -202,7 +202,7 @@ package com.rpgGame.app.fight.spell
 			_releaseAngle = msg.fightDirection;
 			_releaseAngle = (_releaseAngle + 270) % 360;
 			
-			_atkorID = msg.personId.ToGID();
+			_atkorID = msg.personId.fValue;
 			if (_atkorID > 0)
 			{
 				_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
@@ -210,7 +210,7 @@ package com.rpgGame.app.fight.spell
 					_atkor = null;
 			}
 			
-			_targetID = msg.fightTarget.ToGID();
+			_targetID = msg.fightTarget.fValue;
 			if (_targetID > 0)
 			{
 				_targetRole = SceneManager.getSceneObjByID(_targetID) as SceneRole;
@@ -328,7 +328,7 @@ package com.rpgGame.app.fight.spell
 			}
 			else
 			{
-				roleID = state.targetId.ToGID();
+				roleID = state.targetId.fValue;
 				var hurtResultVO : FightHurtResult = new FightHurtResult(roleID);
 				hurtResultVO.curLife = state.damage;
 				
@@ -341,7 +341,7 @@ package com.rpgGame.app.fight.spell
 //				var hasAttckerId : Boolean = Boolean(type & HAS_ATTACKER_ID);
 //				if (hasAttckerId)
 //				{
-					hurtResultVO.attackerId = state.attackerId.ToGID();
+					hurtResultVO.attackerId = state.attackerId.fValue;
 //				}
 //				var hasStiffTime : Boolean = Boolean(type & HAS_STIFFTIME);
 //				if (hasStiffTime)

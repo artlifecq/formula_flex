@@ -9,8 +9,8 @@
 // as listed at <url: http://www.opensource.org/licenses/bsd-license.php >.
 
 package com.netease.protobuf {
-	import flash.errors.*
-	import flash.utils.*
+	import flash.errors.IOError;
+	import flash.utils.ByteArray;
 	/**
 	 * @private
 	 */

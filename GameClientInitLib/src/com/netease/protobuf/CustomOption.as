@@ -9,10 +9,11 @@
 // as listed at <url: http://www.opensource.org/licenses/bsd-license.php >.
 
 package com.netease.protobuf {
-	import google.protobuf.MethodOptions
-	import google.protobuf.ServiceOptions
-	import flash.errors.*
-	import flash.utils.*
+	import flash.utils.ByteArray;
+	import flash.utils.getDefinitionByName;
+	
+	import google.protobuf.MethodOptions;
+	import google.protobuf.ServiceOptions;
 
 	public final class CustomOption {
 		public static function getMethodOptions(methodFullName:String):MethodOptions {
