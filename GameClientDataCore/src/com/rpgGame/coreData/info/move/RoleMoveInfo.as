@@ -4,8 +4,6 @@ package com.rpgGame.coreData.info.move
 	import com.rpgGame.netData.structs.Position;
 	
 	import flash.geom.Point;
-	
-	import org.game.netCore.data.long;
 
 	/**
 	 *
@@ -18,7 +16,7 @@ package com.rpgGame.coreData.info.move
 	{
 		public var roleID : Number;
 		public var speed : int;
-		public var startTm : long = null;
+		public var startTm : int;
 		public var pathList : Vector.<Point>;
 
 		public function RoleMoveInfo()
@@ -27,7 +25,7 @@ package com.rpgGame.coreData.info.move
 
 		public function setValue(msg : SCSceneObjMoveMessage) : void
 		{
-			roleID = msg.objId.ToGID();
+			roleID = msg.objId.fValue;
 			speed = msg.speed;
 			startTm = msg.startTime;
 			var pathLen : int = msg.positions.length;

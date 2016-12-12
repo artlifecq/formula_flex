@@ -276,7 +276,7 @@ package com.rpgGame.app.state.role.control
 					}
 					else
 					{
-						time = info.startTm.ToGID();
+						time = info.startTm*1000;
 					}
 					lastPathPos = new Vector3D(pos.x, 0, pos.y);
 					path.push(lastPathPos);

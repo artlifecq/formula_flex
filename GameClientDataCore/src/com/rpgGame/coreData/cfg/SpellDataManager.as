@@ -373,10 +373,13 @@ package com.rpgGame.coreData.cfg
 		{
 			var relateSpells:Vector.<Q_skill_model>;
 			
-			var skillIDs:Array = relateSpellStr.split(",");
-			for(var i:int=0;i<skillIDs.length;i++)
+			if(relateSpellStr != "")
 			{
-				relateSpells.push(SpellDataManager.getSpellData(int(skillIDs[i])));
+				var skillIDs:Array = relateSpellStr.split(",");
+				for(var i:int=0;i<skillIDs.length;i++)
+				{
+					relateSpells.push(SpellDataManager.getSpellData(int(skillIDs[i])));
+				}
 			}
 			return relateSpells;
 		}

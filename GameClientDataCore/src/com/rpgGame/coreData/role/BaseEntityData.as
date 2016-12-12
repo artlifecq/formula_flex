@@ -13,7 +13,7 @@ package com.rpgGame.coreData.role
 	public class BaseEntityData
 	{
 		private var _serverID:long=null;
-		private var _id : int = 0;
+		private var _id : Number = 0;
 		/** 名字 */
 		public var name : String = "";
 
@@ -68,7 +68,7 @@ package com.rpgGame.coreData.role
 		 * @return
 		 *
 		 */
-		public function get id() : int
+		public function get id() : Number
 		{
 			return _id;
 		}
@@ -76,7 +76,7 @@ package com.rpgGame.coreData.role
 		/**
 		 * @private
 		 */
-		public function set id(value : int) : void
+		public function set id(value : Number) : void
 		{
 			_id = value;
 		}

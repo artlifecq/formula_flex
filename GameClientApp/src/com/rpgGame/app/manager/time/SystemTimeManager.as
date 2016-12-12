@@ -10,9 +10,11 @@ package com.rpgGame.app.manager.time
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
-
+	
 	public class SystemTimeManager
 	{
+		/**一天的毫秒数*/
+		public static const ONE_DAY_TIME:Number = 1000*60*60*24;
 		private static var _date:Date;
 		
 		/** 开服时间 (毫秒)*/
@@ -32,22 +34,22 @@ package com.rpgGame.app.manager.time
 		private static var _syncCount:uint =0;//同步次数；
 		
 		private static var _lastDispatchTm:Number = 0;
-
-//		private static var txt:TextField;
+		
+		//		private static var txt:TextField;
 		
 		private static var _gTimer:GameTimer;
 		
 		setup();
 		private static function setup():void
 		{
-//			Tick.addCallback(onTmTick);
+			//			Tick.addCallback(onTmTick);
 			//
-//			txt = new TextField();
-//			txt.cacheAsBitmap = true;
-//			LayerManager.stage.addChild(txt);
-//			txt.textColor = 0x00ff00;
-//			txt.x = 20;
-//			txt.y = 10;
+			//			txt = new TextField();
+			//			txt.cacheAsBitmap = true;
+			//			LayerManager.stage.addChild(txt);
+			//			txt.textColor = 0x00ff00;
+			//			txt.x = 20;
+			//			txt.y = 10;
 			
 			if(!_gTimer)
 			{
@@ -58,18 +60,18 @@ package com.rpgGame.app.manager.time
 		
 		private static function onTmTick(/*inv:uint*/):void
 		{
-//			var tm:Number = curtTm;
-//			if(_firstServerTm)
-//			{
-//				var cnt:int = ((curtTm - _firstServerTm)-_repeatCnt*DISPATCH_GAP_TM)/DISPATCH_GAP_TM;
-//				for(var i:uint=0;i<cnt;i++)
-//				{
-//					_repeatCnt++;
-//					_lastDispatchTm = tm;
-//					EventManager.dispatchEvent(SystemEvent.SYS_TIME,curtTm);
-//				}
-//			}
-//			EventManager.dispatchEvent(SystemEvent.SYS_TIME,curtTm);
+			//			var tm:Number = curtTm;
+			//			if(_firstServerTm)
+			//			{
+			//				var cnt:int = ((curtTm - _firstServerTm)-_repeatCnt*DISPATCH_GAP_TM)/DISPATCH_GAP_TM;
+			//				for(var i:uint=0;i<cnt;i++)
+			//				{
+			//					_repeatCnt++;
+			//					_lastDispatchTm = tm;
+			//					EventManager.dispatchEvent(SystemEvent.SYS_TIME,curtTm);
+			//				}
+			//			}
+			//			EventManager.dispatchEvent(SystemEvent.SYS_TIME,curtTm);
 		}
 		
 		public static function get eventsCnt():uint
@@ -92,32 +94,32 @@ package com.rpgGame.app.manager.time
 			return _date;
 		}
 		
-//		/**
-//		 * 处理过后 ,做为当前服务器时间
-//		 * @return 
-//		 * 
-//		 */
-//		public static function get curtTm():Number
-//		{
-//			return _serverTm + getTimer() - _receiveTm;
-//		}
-//		
-//		private static function syncSystemTm():void
-//		{
-//			TweenLite.delayedCall(2,MiscSender.reqServerTime);
-//		}
-//		
-//		/**
-//		 * 仅可被 MiscCmdListener 调用 
-//		 * @param _serverTmime
-//		 */
-//		public static function setServerTime($serverTmime:Number):void
-//		{
-//			_firstServerTm = _firstServerTm || $serverTmime;
-//			_receiveTm = getTimer();
-//			_serverTm = $serverTmime;
-//			syncSystemTm();
-//		}
+		//		/**
+		//		 * 处理过后 ,做为当前服务器时间
+		//		 * @return 
+		//		 * 
+		//		 */
+		//		public static function get curtTm():Number
+		//		{
+		//			return _serverTm + getTimer() - _receiveTm;
+		//		}
+		//		
+		//		private static function syncSystemTm():void
+		//		{
+		//			TweenLite.delayedCall(2,MiscSender.reqServerTime);
+		//		}
+		//		
+		//		/**
+		//		 * 仅可被 MiscCmdListener 调用 
+		//		 * @param _serverTmime
+		//		 */
+		//		public static function setServerTime($serverTmime:Number):void
+		//		{
+		//			_firstServerTm = _firstServerTm || $serverTmime;
+		//			_receiveTm = getTimer();
+		//			_serverTm = $serverTmime;
+		//			syncSystemTm();
+		//		}
 		
 		/**
 		 * 是否已连服
@@ -159,13 +161,13 @@ package com.rpgGame.app.manager.time
 			if(_syncCountI < 9)
 			{
 				//前十次，延迟短时间再次请求，间隔依次增加 
-//				_curTimer = new GameTimer("SystemTimeManager",2*(_syncCountI+1)*1000,1,null,reqServerTime);
+				//				_curTimer = new GameTimer("SystemTimeManager",2*(_syncCountI+1)*1000,1,null,reqServerTime);
 				TweenLite.delayedCall(2*(_syncCountI+1),reqServerTime);
 			}
 			else
 			{
 				//延迟2分钟再次请求
-//				_curTimer = new GameTimer("SystemTimeManager",120*1000,1,null,reqServerTime);
+				//				_curTimer = new GameTimer("SystemTimeManager",120*1000,1,null,reqServerTime);
 				TweenLite.delayedCall(120,reqServerTime);
 			}
 		}
@@ -247,6 +249,19 @@ package com.rpgGame.app.manager.time
 		public static function isOpenSeverFirstDay():Boolean
 		{
 			return TimeUtil.getDay(curtTm) == TimeUtil.getDay(startServiceTm);
+		}
+		
+		/**
+		 * 获取今天的开始时间，自 1970 年 1 月 1 日午夜以来的毫秒
+		 * @return 
+		 * 
+		 */
+		public static function getStartTimeToday():Number
+		{
+			var date:Date = new Date();
+			date.setTime(curtTm);
+			date.setHours(0,0,0,0);
+			return date.time;
 		}
 		
 	}

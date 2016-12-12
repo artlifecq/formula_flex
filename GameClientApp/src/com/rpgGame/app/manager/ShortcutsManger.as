@@ -250,7 +250,11 @@ package com.rpgGame.app.manager
 		{
 			var shortData : ShortcutsData = getShortcutsDataByPos(shortcutPos);
 			if (shortData == null)
+			{
+				//以下是测试代码。。。。。。
+				CastSpellHelper.shortcutsTryCaseSpell(1);
 				return false; //这个快捷键没有设置数据
+			}
 
 			switch (shortData.type)
 			{

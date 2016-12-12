@@ -168,7 +168,7 @@ package com.rpgGame.coreData.role
 		{
 			///角色基本信息
 			data.serverID = heroInfo.personId;
-			data.id = heroInfo.personId.ToGID();
+			data.id = heroInfo.personId.fValue;
 			data.name = heroInfo.name;
 			data.mapID = heroInfo.mapModelId;
 			data.body = heroInfo.body;
@@ -226,7 +226,7 @@ package com.rpgGame.coreData.role
 		public static function setEnterEyeUserInfo(data : HeroData, info : PlayerInfo) : void
 		{
 			data.serverID = info.personId;
-			data.id = info.personId.ToGID();
+			data.id = info.personId.fValue;
 			data.name = info.name;
 			
 			//			data.countryId = buffer.readVarint32();
