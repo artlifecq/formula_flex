@@ -66,12 +66,15 @@ package com.rpgGame.app.manager.goods
 		private var _drugList:Array = [];
 		
 		private var _goodsList:Array;
+		
+		/**用于背包这样当前显示的标签页物品list*/
+		private var _curShowList:Array;
+		
 		/** 物品是否可用[index-->enable] **/
 		private var goodsEnableDict:Dictionary;
 		/** 是否显示绑定物品的锁定图片**/
-		private var isShowBindLock : Boolean = false;
-		/** 额外的需要显示红色锁定的物品的下标**/
-		private var _ShowLockAssetIndex : Array;
+		public var isShowBindLock : Boolean = false;
+		private var _showLockAssetIndex : Array;
 		//---------------用于赛选物品的数据
 		private var _checkGroup : Array;
 		private var _checkType : Array;
@@ -88,15 +91,31 @@ package com.rpgGame.app.manager.goods
 			goodsEnableDict = new Dictionary();
 		}
 		
+		public function set showLockAssetIndex(value:Array):void
+		{
+			_showLockAssetIndex = value;
+		}
+
+		/** 额外的需要显示红色锁定的物品的下标**/
+		public function get showLockAssetIndex():Array
+		{
+			return _showLockAssetIndex;
+		}
+
+		public function get checkType():Array
+		{
+			return _checkType;
+		}
+
 		public function setIsShowBindLock(value:Boolean,lockUseMove:Boolean = true):void
 		{
 			if(value == isShowBindLock)
 				return;
 			isShowBindLock = value;
-			if(!_ShowLockAssetIndex)
-				_ShowLockAssetIndex = [];
+			if(!_showLockAssetIndex)
+				_showLockAssetIndex = [];
 			else
-				_ShowLockAssetIndex.length = 0;
+				_showLockAssetIndex.length = 0;
 			EventManager.dispatchEvent(ItemEvent.ITEM_CONTAINER_REFLESH, containerId);
 		}
 		
@@ -107,11 +126,11 @@ package com.rpgGame.app.manager.goods
 		
 		public function setShowLockAssetIndex(index:int):void
 		{
-			if(!_ShowLockAssetIndex || !isShowBindLock)
+			if(!_showLockAssetIndex || !isShowBindLock)
 				return;
-			if(_ShowLockAssetIndex.indexOf(index) != -1)
+			if(_showLockAssetIndex.indexOf(index) != -1)
 				return;
-			_ShowLockAssetIndex.push(index);
+			_showLockAssetIndex.push(index);
 			EventManager.dispatchEvent(ItemEvent.ITEM_CHANG, getItemInfoByIndex(index));
 		}
 		
@@ -119,24 +138,25 @@ package com.rpgGame.app.manager.goods
 		{
 			if(!isShowBindLock)
 				return false;
-			var item : ItemInfo = getItemInfoByIndex(index);
-			if(item && _ShowLockAssetIndex)
+			if(_showLockAssetIndex && _showLockAssetIndex.indexOf(index) != -1)
 			{
-				if(item.binded)
-					return true;
-				if(_ShowLockAssetIndex.indexOf(index) != -1)
-					return true;
+				return true;
+			}
+			var item : ItemInfo = getItemInfoByIndex(index);
+			if(item && item.binded)
+			{
+				return true;
 			}
 			return false;
 		}
 		
 		public function removeLockAssetByIndex(index:int):void
 		{
-			if(!_ShowLockAssetIndex || !isShowBindLock)
+			if(!_showLockAssetIndex || !isShowBindLock)
 				return;
-			if(_ShowLockAssetIndex.indexOf(index) == -1)
+			if(_showLockAssetIndex.indexOf(index) == -1)
 				return;
-			_ShowLockAssetIndex.splice(_ShowLockAssetIndex.indexOf(index),1);
+			_showLockAssetIndex.splice(_showLockAssetIndex.indexOf(index),1);
 			EventManager.dispatchEvent(ItemEvent.ITEM_CHANG, getItemInfoByIndex(index));
 		}
 		
@@ -255,7 +275,10 @@ package com.rpgGame.app.manager.goods
 			if((!_checkQuality || _checkQuality.length == 0)
 				&& (!_checkGroup || _checkGroup.length == 0) 
 				&& (!_checkType || _checkType.length == 0))
+			{
+				_curShowList = goods;
 				return goods;//并没有赛选
+			}
 			var result : Array = [];
 			for each(var item:ItemInfo in goods)
 			{
@@ -307,6 +330,8 @@ package com.rpgGame.app.manager.goods
 					result.push(item);
 			}
 			result.sort(compareItemInfoSort);
+			
+			_curShowList = result;
 			return result;
 		}
 		
@@ -336,6 +361,15 @@ package com.rpgGame.app.manager.goods
 			}
 			return -1;
 		}
+		/**
+		 * 是不是还有空的格子 
+		 * @return 
+		 * 
+		 */		
+		public function haveEmptyGrid():Boolean
+		{
+			return getFirstEmptyIndex() != -1;
+		}
 		
 		public function getMaxRows():int
 		{
@@ -363,6 +397,11 @@ package com.rpgGame.app.manager.goods
 		public function getItemInfoByIndex(index:int):ItemInfo
 		{
 			return index <_goodsList.length ? _goodsList[index] : null;
+		}
+		
+		public function getCurItemInfoByIndex(index:int):ItemInfo
+		{
+			return index <_curShowList.length ? _curShowList[index] : null;
 		}
 		
 		/** 所有物品 **/
@@ -472,6 +511,20 @@ package com.rpgGame.app.manager.goods
 				}
 			}
 			return countNum;
+		}
+		/**
+		 * 通过物品类型拿到第一个物品的位置 
+		 * 
+		 */		
+		public function getItemIndexByType(type:int):int
+		{
+			var items:Array = [];
+			for each (var itemInfo:ItemInfo in _goodsList) 
+			{
+				if(itemInfo && itemInfo.type == type)
+					return itemInfo.index;
+			}
+			return -1;
 		}
 		
 		/**
@@ -985,6 +1038,12 @@ package com.rpgGame.app.manager.goods
 			_checkType = value;
 			EventManager.dispatchEvent(ItemEvent.ITEM_CONTAINER_REFLESH,containerId);
 		}
+		
+		public function setCheckType(value:Array):void
+		{
+			_checkType = value;
+		}
+				
 
 		/**
 		 * 设置装备类型（区分是坐骑装备还是人物装备） 
@@ -1078,6 +1137,10 @@ package com.rpgGame.app.manager.goods
 					return MountSlotManager.instance;
 				case ItemContainerID.MOUNT_INHERTIT:
 					return MountInheritManager.instance;
+//				case ItemContainerID.MOUNT_AUTHENTICATE:
+//					return MountAuthenticateManager.instance;
+//				case ItemContainerID.MOUNT_BEAST_CARD:
+//					return MountChangeManeger.instance;
 			}
 			return null;
 		}

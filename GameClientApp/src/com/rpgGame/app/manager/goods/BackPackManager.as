@@ -36,6 +36,10 @@ package com.rpgGame.app.manager.goods
 		public var unlockSilver : int;
 		public var unlockBindSilver : int;
 		public var isAlertChangeBind : Boolean = false;
+		/**背包切换其它标签页需要设置格子锁定*/
+		public var isBackpackLock : Boolean = false;
+		/**tabbar当前选中的索引*/
+		public var tabbarIndex : int = 0;
 
 		public function BackPackManager()
 		{
@@ -117,6 +121,42 @@ package com.rpgGame.app.manager.goods
 			}
 			return _ins;
 		}
+		
+		public function setUnusableGrid(isLock:Boolean):void
+		{
+			var curShowNum:int = getAllItem().length;
+//			setIsShowBindLock(isLock);
+			isBackpackLock = isLock;
+			showLockAssetIndex = [];
+			if(isLock)
+			{
+				var useLen:int = useGridLen();
+				var lockNum:int = useLen - curShowNum;//需要锁定的格子个数
+				for (var i:int = 0; i < hasOpenCount; i++) 
+				{
+					if(i+lockNum >= hasOpenCount)
+					{
+						showLockAssetIndex.push(i);
+//						setShowLockAssetIndex(i);
+					}
+				}
+			}
+		}
+		
+		override public function getIsShowLockAsset(index:int):Boolean
+		{
+			if(isBackpackLock && showLockAssetIndex && showLockAssetIndex.indexOf(index) != -1)
+			{
+				return true;
+			}
+			var item : ItemInfo = getCurItemInfoByIndex(index);
+			if(isShowBindLock && item && item.binded)
+			{
+				return true;
+			}
+			return false;
+		}
+		
 
 		/**
 		 * 使用某个物品

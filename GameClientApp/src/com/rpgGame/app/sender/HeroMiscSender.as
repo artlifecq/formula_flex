@@ -1,9 +1,12 @@
 package com.rpgGame.app.sender
 {
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.netData.client.bean.CustomTaginfo;
+	import com.rpgGame.netData.client.message.ReqClientCustomTagSetMessage;
 	
 	import app.cmd.HeroMiscModuleMessages;
 	
+	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 
 	/**
@@ -19,6 +22,22 @@ package com.rpgGame.app.sender
 		public function HeroMiscSender()
 		{
 			super();
+		}
+		
+		/**
+		 * 设置客户端的数据
+		 */
+		
+		public static function reqSetClientCustomTag(key :int, value :String):void
+		{
+			if ( key != 0 )
+			{
+				var msg :ReqClientCustomTagSetMessage = new ReqClientCustomTagSetMessage();
+				msg.customTaginfo = new CustomTaginfo();
+				msg.customTaginfo.key = key.toString();
+				msg.customTaginfo.value = value;
+				SocketConnection.send(msg);
+			}
 		}
 		
 		public static function reqChangePKMode(pkMode:uint):void

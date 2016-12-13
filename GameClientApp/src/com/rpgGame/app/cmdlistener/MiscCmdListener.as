@@ -1,12 +1,10 @@
 package com.rpgGame.app.cmdlistener
 {
 	import com.rpgGame.app.manager.time.SystemTimeManager;
-	
-	import app.cmd.MiscModuleMessages;
+	import com.rpgGame.netData.login.message.ResHeartMessage;
 	
 	import org.client.mainCore.bean.BaseBean;
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
-	import org.game.netCore.net_protobuff.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection;
 
 	/**
 	 *
@@ -24,15 +22,19 @@ package com.rpgGame.app.cmdlistener
 
 		override public function start() : void
 		{
-			SocketConnection_protoBuffer.addCmdListener(MiscModuleMessages.S2C_REPLY_SERVER_TIME, onRecServerTime);
-			
+			SocketConnection.addCmdListener(100106,onResHeartMessage);
 			finish();
 		}
-
-		private function onRecServerTime(buffer : ByteBuffer) : void
+		
+		private function onResHeartMessage(msg:ResHeartMessage):void
 		{
-			var serverTime : Number = buffer.readLong();
-			SystemTimeManager.setServerTime(serverTime);
+			SystemTimeManager.RecvHeartMessage(msg);
 		}
+		
+//		private function onRecServerTime(buffer : ByteBuffer) : void
+//		{
+//			var serverTime : Number = buffer.readLong();
+//			SystemTimeManager.setServerTime(serverTime);
+//		}
 	}
 }

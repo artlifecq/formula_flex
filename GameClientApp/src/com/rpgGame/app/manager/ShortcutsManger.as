@@ -102,31 +102,30 @@ package com.rpgGame.app.manager
 			initShortcutData();
 		}
 
+		/**
+		 *格式如下： 
+		 * {t :vo.type , mid :vo.id , k :vo.shortcutPos}
+		 */		
 		private function initShortcutData() : void
 		{
 			var shortData : ShortcutsData;
-			var shorts : int;
-			var changeData : Array;
+			var shorts : Object;
 			for (var i : int = 0; i < SHORTCUTS_LEN; i++)
 			{
-				shorts = ClientSettingOldManager.getClientOnlyIntConfig(i);
+				shorts = ClientSettingManager.getShortCutDataByKey(i);
 
-				if (shorts <= -1)
+				if (shorts == null)
 					continue;
 				shortData = new ShortcutsData();
-				if (shorts > 0)
-				{
-					changeData = changeConfig(String(shorts));
-
-					shortData.type = changeData[0];
-					shortData.shortcutPos = changeData[1];
-					shortData.id = changeData[2];
-				}
+				
+				shortData.type = shorts.t;
+				shortData.shortcutPos = shorts.k;
+				shortData.id = shorts.mid;
 
 				shortcutsDataMap.add(shortData.shortcutPos, shortData);
 			}
 		}
-
+		
 		//-------------------------------------------------------
 		/**
 		 * 设置新的快捷栏数据
@@ -157,7 +156,7 @@ package com.rpgGame.app.manager
 			shortcutsDataMap.add(shortData.shortcutPos, shortData);
 			if(saveToServer)
 			{
-				sendShortMsg(shortData.shortcutPos, shortData.type, shortData.id);
+				sendShortMsg();
 			}
 		}
 
@@ -181,7 +180,7 @@ package com.rpgGame.app.manager
 		{
 			shortcutsDataMap.remove(shortcutPos);
 
-			ClientSettingOldManager.reqSetClientOnlyIntConfig(shortcutPos, -1);
+			ClientSettingManager.savaClientShortCutsToServer(shortcutsDataMap);
 		}
 
 		/**
@@ -275,16 +274,9 @@ package com.rpgGame.app.manager
 
 		//-------------------------------------------------------
 		//----------------------消息相关
-		private function sendShortMsg(gridIndex : int, type : int, id : int) : void
+		private function sendShortMsg() : void
 		{
-			var gridID : String = gridIndex >= 10 ? gridIndex + "" : "0" + gridIndex;
-
-			ClientSettingOldManager.reqSetClientOnlyIntConfig(gridIndex, int(id + "" + gridID + "" + type));
-		}
-
-		private function changeConfig(shorts : String) : Array
-		{
-			return [shorts.charAt(shorts.length - 1), shorts.substring(shorts.length - 3, shorts.length - 1), shorts.substring(0, shorts.length - 3)];
+			ClientSettingManager.savaClientShortCutsToServer(shortcutsDataMap);
 		}
 
 		/**

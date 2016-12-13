@@ -7,7 +7,6 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.FangChenMiManager;
 	import com.rpgGame.app.manager.PlayerAttributeManager;
 	import com.rpgGame.app.manager.ShortcutsManger;
-	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.guild.GuildManager;
@@ -27,6 +26,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.type.EnumHurtType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
+	import com.rpgGame.netData.client.message.ResClientCustomTagMessage;
 	import com.rpgGame.netData.player.message.ResPlayerAttributesChangeMessage;
 	import com.rpgGame.netData.skill.message.ResSkillInfosMessage;
 	
@@ -62,6 +62,7 @@ package com.rpgGame.app.cmdlistener
 		{
 			SocketConnection.addCmdListener(103106,RecvPlayerAttributesChangeMessage);
 			SocketConnection.addCmdListener(123101,RecvResSkillInfosMessage);
+			SocketConnection.addCmdListener(301102,RecvResClientCustomTagMessage);
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			//////
 			////// 以下为参考代码，是深圳那边的后台协议，不适用
@@ -126,14 +127,13 @@ package com.rpgGame.app.cmdlistener
 			roleData.spellList.setHeroData(msg);
 			
 			//技能CD
-//			SkillCDManager.getInstance().setHeroCd(heroProto.spellModuleObj);
-//			if(heroProto.heroMiscModuleObj)
-//			{
-//				//系统设置相关
-//				ClientSettingManager.setup(heroProto.heroMiscModuleObj.clientConfigs);
-//				//				// 系统设置相关设置后   快捷栏初始化 才能初始化
-//				
-//			}
+			//			SkillCDManager.getInstance().setHeroCd(heroProto.spellModuleObj);
+		}
+		
+		private function RecvResClientCustomTagMessage(msg:ResClientCustomTagMessage):void
+		{
+			ClientSettingManager.setup(msg.CustomTaginfos);
+			
 			ShortcutsManger.getInstance().setup();
 		}
 		

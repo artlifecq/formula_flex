@@ -111,8 +111,8 @@ package com.rpgGame.app.process
 
 		private function getConfig() : void
 		{
-//			SystemTimeManager.reqServerTime();
-			//
+			SystemTimeManager.reqServerTimeAndHeart();
+			//因为这里暂时没有服务器给客户端传入配置数据了，所以暂时不要了
 //			EventManager.addEvent(MiscEvent.CONGFIG_ALL_CMP, startGame);
 //			ClientConfigSender.reqConfig();
 			
@@ -132,13 +132,7 @@ package com.rpgGame.app.process
 				MainRoleManager.initActor();
 				GlobalSettingManager.init();
 				//
-//				if (!ClientConfig.isRelease)
-//				{
-//				StatsUtil.showOrHideAwayStats(Stage3DLayerManager.stage, SceneManager.getScene().view, Stage3DLayerManager.starlingView2D);
-//				LayerManager.showOrHideMM();
-//				ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
-//					initMM();
-//				}
+
                 CONFIG::Debug {
                     StatsUtil.showOrHideAwayStats(Stage3DLayerManager.stage,
                                                   Stage3DLayerManager.stage3DProxy);

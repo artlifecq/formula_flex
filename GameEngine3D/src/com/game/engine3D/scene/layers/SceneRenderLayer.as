@@ -442,8 +442,8 @@ package com.game.engine3D.scene.layers
 					if(baseObj.enableMask && _scene3D.sceneMapLayer.district)
 					{
 						var isInMask:Boolean = _scene3D.sceneMapLayer.district.isPointInMask(baseObj.graphicDis.position);
-						baseObj.blendMode = isInMask ? BlendMode.LAYER : BlendMode.NORMAL;
-						baseObj.alpha =  isInMask ? 0.5 : 1;
+						/*baseObj.blendMode = isInMask ? BlendMode.LAYER : BlendMode.NORMAL;
+						baseObj.alpha =  isInMask ? 0.5 : 1;*/
 					}
 				}
 				else
