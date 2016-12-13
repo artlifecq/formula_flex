@@ -5,9 +5,6 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.GCDCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.face.FaceTypeEnum;
-	
-	import app.message.SpellCoolDownProto;
-	import app.message.SpellModuleObjProto;
 
 	/**
 	 * 技能cd管理器 
@@ -41,18 +38,18 @@ package com.rpgGame.app.manager
 		 * @param spellCoolDownProto
 		 *
 		 */
-		public function setHeroCd(heroSpellListProto : SpellModuleObjProto) : void
+		public function setHeroCd(/*heroSpellListProto : SpellModuleObjProto*/) : void
 		{
-			if (heroSpellListProto == null)
-				return;
-
-			var spellCoolDownProto : SpellCoolDownProto = heroSpellListProto.spellCoolDown;
-			if (spellCoolDownProto == null)
-				return;
-
-			spellCoolDownProto.spellCoolTime;
-
-			trace(spellCoolDownProto.spellCoolTime);
+//			if (heroSpellListProto == null)
+//				return;
+//
+//			var spellCoolDownProto : SpellCoolDownProto = heroSpellListProto.spellCoolDown;
+//			if (spellCoolDownProto == null)
+//				return;
+//
+//			spellCoolDownProto.spellCoolTime;
+//
+//			trace(spellCoolDownProto.spellCoolTime);
 		}
 
 		/**

@@ -16,7 +16,7 @@ package com.rpgGame.coreData.info.move
 	{
 		public var roleID : Number;
 		public var speed : int;
-		public var startTm : int;
+		public var startTm : Number;
 		public var pathList : Vector.<Point>;
 
 		public function RoleMoveInfo()
@@ -27,7 +27,7 @@ package com.rpgGame.coreData.info.move
 		{
 			roleID = msg.objId.fValue;
 			speed = msg.speed;
-			startTm = msg.startTime;
+			startTm = msg.startTime.fValue;
 			var pathLen : int = msg.positions.length;
 			pathList = new Vector.<Point>;
 			for (var i : uint = 0; i < pathLen; i++)

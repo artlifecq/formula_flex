@@ -20,8 +20,8 @@ package com.rpgGame.netData.map.message{
 		//移动速度
 		private var _speed: int;
 		
-		//开始移动时间(秒)
-		private var _startTime: int;
+		//开始移动时间
+		private var _startTime: long;
 		
 		//坐标点
 		private var _positions: Vector.<com.rpgGame.netData.structs.Position> = new Vector.<com.rpgGame.netData.structs.Position>();
@@ -35,8 +35,8 @@ package com.rpgGame.netData.map.message{
 			writeLong(_objId);
 			//移动速度
 			writeShort(_speed);
-			//开始移动时间(秒)
-			writeInt(_startTime);
+			//开始移动时间
+			writeLong(_startTime);
 			//坐标点
 			writeShort(_positions.length);
 			for (i = 0; i < _positions.length; i++) {
@@ -54,8 +54,8 @@ package com.rpgGame.netData.map.message{
 			_objId = readLong();
 			//移动速度
 			_speed = readShort();
-			//开始移动时间(秒)
-			_startTime = readInt();
+			//开始移动时间
+			_startTime = readLong();
 			//坐标点
 			var positions_length : int = readShort();
 			for (i = 0; i < positions_length; i++) {
@@ -103,17 +103,17 @@ package com.rpgGame.netData.map.message{
 		}
 		
 		/**
-		 * get 开始移动时间(秒)
+		 * get 开始移动时间
 		 * @return 
 		 */
-		public function get startTime(): int{
+		public function get startTime(): long{
 			return _startTime;
 		}
 		
 		/**
-		 * set 开始移动时间(秒)
+		 * set 开始移动时间
 		 */
-		public function set startTime(value: int): void{
+		public function set startTime(value: long): void{
 			this._startTime = value;
 		}
 		

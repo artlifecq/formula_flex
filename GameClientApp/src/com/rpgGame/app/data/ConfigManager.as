@@ -17,6 +17,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.DaTiCfgData;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.cfg.FriendCfgData;
+	import com.rpgGame.coreData.cfg.GCDCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSettingCfgData;
 	import com.rpgGame.coreData.cfg.GmConfig;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
@@ -166,7 +167,8 @@ package com.rpgGame.app.data
 			SpellDataManager.setConfig(dic[ConfigClassRegister.Q_skill_model]);//技能总表
 			SpellEffectDataManager.setConfig(dic[ConfigClassRegister.Q_SpellEffect]);//每个技能效果，具体参数配置表
 			AnimationDataManager.setConfig(dic[ConfigClassRegister.Q_SpellAnimation]);///技能特效配置表
-			
+			//公共CD配置
+//			GCDCfgData.setConfig(dic[ConfigClassRegister.Q_GCD]);
 			//状态数据buff相关
 			BuffStateDataManager.setConfig(dic[ConfigClassRegister.Q_buff]);
 		}
