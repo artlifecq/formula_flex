@@ -16,8 +16,6 @@ package com.rpgGame.coreData.clientConfig
 		public var id:int;
 		 /**  功能名称 */
 		public var name:String;
-		 /**  武器资源ID */
-		public var weaponResId:int;
 		 /**  兵家动画资源名称 */
 		public var animatRes_bingjia:String;
 		 /**  墨家男动画资源名称 */

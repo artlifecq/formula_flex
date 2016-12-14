@@ -200,6 +200,8 @@ package com.rpgGame.app.cmdlistener.scene
 				var walkMoveRef : WalkMoveStateReference;
 				var stopWalkRef : StopWalkMoveStateReference;
 				
+				GameLog.addShow("角色深度值为：  ****** " + role.z);
+				
 				/////////////////伪装者停止移动
 				var camouflageEntity : SceneRole = SceneRole(role.getCamouflageEntity());
 				if (camouflageEntity)

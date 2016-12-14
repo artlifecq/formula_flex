@@ -52,9 +52,9 @@ package com.rpgGame.coreData.clientConfig
 		public static const SceneTriggerInfo:String = "data.map.SceneTriggerInfo";
 		/**  换装衣服特效资源配置							 */
 		public static const AvatarClothesEffectRes:String = "data.model.AvatarClothesEffectRes";
-		/**  换装衣服资源配置，ID只能填1-255，第一套不用填，从第二套开始		头发资源ID	身体资源名称	 */
+		/**  换装衣服资源配置，ID只能填1-255，第一套不用填，从第二套开始		武器资源ID	副武器资源ID	头发资源ID	身体资源名称	 */
 		public static const AvatarClothesRes:String = "data.model.AvatarClothesRes";
-		/**  换装副武器资源配置		 */
+		/**  换装副武器资源配置							 */
 		public static const AvatarDeputyWeaponRes:String = "data.model.AvatarDeputyWeaponRes";
 		/**  换装头发资源配置ID		 */
 		public static const AvatarHairRes:String = "data.model.AvatarHairRes";
@@ -66,12 +66,14 @@ package com.rpgGame.coreData.clientConfig
 		public static const AvatarWeaponRes:String = "data.model.AvatarWeaponRes";
 		/**  换装头发资源配置ID		 */
 		public static const BaZhenTuRes:String = "data.model.BaZhenTuRes";
-		/**  角色阶段ID 每个阶段对应的骨骼资源不一样，为以后角色换骨骼做准备	阶段名称	武器资源ID	兵家动画资源名称	墨家男动画资源名称	墨家女动画资源名称	医家动画资源名称 */
+		/**  角色阶段ID 每个阶段对应的骨骼资源不一样，为以后角色换骨骼做准备	阶段名称	兵家动画资源名称	墨家男动画资源名称	墨家女动画资源名称	医家动画资源名称 */
 		public static const HeroModel:String = "data.model.HeroModel";
 		/**  坐骑模型表	功能名称	动画资源名称 */
 		public static const MountModel:String = "data.model.MountModel";
 		/**  怪物列表																																																																				 */
 		public static const Q_monster:String = "data.monster.Q_monster";
+		/**  NPC配置数据库																																																 */
+		public static const Q_npc:String = "data.monster.Q_npc";
 		/**  定点刷怪数据库 -- 编辑器录入									 */
 		public static const Q_scene_monster:String = "data.monster.Q_scene_monster";
 		/**  区域刷怪数据库 -- 编辑器录入											 */
@@ -90,7 +92,9 @@ package com.rpgGame.coreData.clientConfig
 		public static const SocketErrorNoteInfo:String = "data.SocketErrorNoteInfo";
 		/**  Buff表																																																											 */
 		public static const Q_buff:String = "data.spell.Q_buff";
-		/**  技能基本信息配置数据表									1.0																																																																																			 */
+		/**  公共CD表	 */
+		public static const Q_GCD:String = "data.spell.Q_GCD";
+		/**  技能基本信息配置数据表																																																																																												 */
 		public static const Q_skill_model:String = "data.spell.Q_skill_model";
 		/**  技能效果配置表																			 */
 		public static const Q_SpellAnimation:String = "data.spell.Q_SpellAnimation";
@@ -132,6 +136,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.model.HeroModel", com.rpgGame.coreData.clientConfig.HeroModel);
 			regClass("data.model.MountModel", com.rpgGame.coreData.clientConfig.MountModel);
 			regClass("data.monster.Q_monster", com.rpgGame.coreData.clientConfig.Q_monster);
+			regClass("data.monster.Q_npc", com.rpgGame.coreData.clientConfig.Q_npc);
 			regClass("data.monster.Q_scene_monster", com.rpgGame.coreData.clientConfig.Q_scene_monster);
 			regClass("data.monster.Q_scene_monster_area", com.rpgGame.coreData.clientConfig.Q_scene_monster_area);
 			regClass("data.RaceNameInfo", com.rpgGame.coreData.clientConfig.RaceNameInfo);
@@ -141,6 +146,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.SceneCharPatrolInfo", com.rpgGame.coreData.clientConfig.SceneCharPatrolInfo);
 			regClass("data.SocketErrorNoteInfo", com.rpgGame.coreData.clientConfig.SocketErrorNoteInfo);
 			regClass("data.spell.Q_buff", com.rpgGame.coreData.clientConfig.Q_buff);
+			regClass("data.spell.Q_GCD", com.rpgGame.coreData.clientConfig.Q_GCD);
 			regClass("data.spell.Q_skill_model", com.rpgGame.coreData.clientConfig.Q_skill_model);
 			regClass("data.spell.Q_SpellAnimation", com.rpgGame.coreData.clientConfig.Q_SpellAnimation);
 			regClass("data.spell.Q_SpellEffect", com.rpgGame.coreData.clientConfig.Q_SpellEffect);

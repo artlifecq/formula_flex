@@ -18,6 +18,16 @@ package com.rpgGame.coreData.clientConfig
 		public var name:String;
 		 /**  资源路径 */
 		public var res:String;
+		 /**  特效资源路径 */
+		public var effectRes:String;
+		 /**  特效X偏移 */
+		public var effectOffsetX:int;
+		 /**  特效Y偏移 */
+		public var effectOffsetY:int;
+		 /**  特效Z偏移 */
+		public var effectOffsetZ:int;
+		 /**  特效缩放 */
+		public var effectScale:int;
 
 	}
 }
