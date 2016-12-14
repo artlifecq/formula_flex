@@ -36,18 +36,15 @@ package com.client.sender
 		/**
 		 * 玩家注册，选择帐号
 		 */
-		public static function register(sex : Boolean, headFace : int, body : int, nickName : String, countryID : int) : void
+		public static function register(sex : Boolean, headFace : int, body : int, nickName : String, job : int) : void
 		{
-			/*var buf : ByteBuffer = new ByteBuffer();
-			buf.writeBoolean(sex);
-			buf.writeVarint32(headFace);
-			buf.writeVarint32(body);
-			buf.writeUTF(nickName);
-			buf.writeVarint32(countryID);
-			SocketConnection_protoBuffer.send(ClientCmdID.C2S_CREATE_HERO, buf);*/
+		    if(job < 1 || job > 4)
+			{
+				job = int(Math.random() * 3);
+			}
 			var msg:ReqCreateCharacterMessage = new ReqCreateCharacterMessage();
 			msg.name=nickName;
-			msg.job=1;
+			msg.job=job;
 			msg.sex=sex?1:2;
 			msg.auto=0;
 			msg.win_high = ClientGlobal.stage.height;

@@ -16,6 +16,10 @@ package com.rpgGame.coreData.clientConfig
 		public var id:int;
 		 /**  资源名称 */
 		public var name:String;
+		 /**  武器资源ID */
+		public var weaponResId:int;
+		 /**  副武器资源ID */
+		public var deputyWeaponResId:int;
 		 /**  头发资源ID */
 		public var hairResId:int;
 		 /**  身体资源名称 */

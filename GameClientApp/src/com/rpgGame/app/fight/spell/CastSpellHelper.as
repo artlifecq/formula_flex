@@ -84,6 +84,11 @@ package com.rpgGame.app.fight.spell
 			
 			var relateSpells:Vector.<Q_skill_model> = SpellDataManager.getRelateSpells(_caseSpell.q_relate_spells);
 			
+			if(!relateSpells)
+			{
+				GameLog.add("这个技能没有连招哦！！！");
+				return null;
+			}
 			
 			if (_relateSpellIndex < 0)
 			{

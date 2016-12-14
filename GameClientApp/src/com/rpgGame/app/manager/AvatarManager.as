@@ -424,27 +424,29 @@ package com.rpgGame.app.manager
 			var heroModel : HeroModel = HeroModelCfgData.getInfo(roleData.body);
 			var mountModel : MountModel = MountModelCfgData.getInfo(0);
 			
-			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(roleData.cloths);
+			
+			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(/*roleData.cloths*/0);///先临时这么写
 			if (!clothesRes)
 			{
-				GameLog.addShow("角色缺少衣服哦！可能就没有模型出来了！");
-				/*if (heroModel)
-					clothesRes = AvatarClothesResCfgData.getInfo(heroModel.clothesResId);*/
+				clothesRes = AvatarClothesResCfgData.getInfo(roleData.job);
 			}
+			
 			if (clothesRes)
 			{
 				bodyResID = clothesRes.bodyRes;
 				bodyEffectResID = clothesRes.effectRes;
 
-				var hairRes : AvatarHairRes = AvatarHairResCfgData.getInfo(clothesRes.hairResId);
-				if (hairRes)
+				var hairRes : AvatarHairRes = AvatarHairResCfgData.getInfo(/*roleData.hairId*/0);
+				if (!hairRes)
 				{
-					hairResID = hairRes.hairRes;
-//					if (roleData.sex)
-//						hairResID = hairRes.hairRes_man;
-//					else
-//						hairResID = hairRes.hairRes_woman;
+					hairRes = AvatarHairResCfgData.getInfo(clothesRes.hairResId);
 				}
+				hairResID = hairRes.hairRes;
+				//					if (roleData.sex)
+				//						hairResID = hairRes.hairRes_man;
+				//					else
+				//						hairResID = hairRes.hairRes_woman;				
+				
 				var mountRes : AvatarMountRes = AvatarMountResCfgData.getInfo(roleData.mount);
 				if (mountRes)
 				{
@@ -452,14 +454,14 @@ package com.rpgGame.app.manager
 				}
 				switch (roleData.job)
 				{
-					case 0:
+					case 1:
 						animatResID = heroModel.animatRes_bingjia;
 						if (mountModel)
 						{
 							mountAnimatResID = mountModel.animatRes;
 						}
 						break;
-					case 1:
+					case 2:
 						if(roleData.sex)
 						{
 							animatResID = heroModel.animatRes_mojia_man;
@@ -473,7 +475,21 @@ package com.rpgGame.app.manager
 							mountAnimatResID = mountModel.animatRes;
 						}
 						break;
-					case 2:
+					case 3:
+						if(roleData.sex)
+						{
+							animatResID = heroModel.animatRes_mojia_man;
+						}
+						else
+						{
+							animatResID = heroModel.animatRes_mojia_woman;
+						}
+						if (mountModel)
+						{
+							mountAnimatResID = mountModel.animatRes;
+						}
+						break;
+					case 4:
 						animatResID = heroModel.animatRes_yijia;
 						if (mountModel)
 						{
@@ -481,24 +497,24 @@ package com.rpgGame.app.manager
 						}
 						break;
 				}
-			}
-
-			var weaponRes : AvatarWeaponRes = AvatarWeapontResCfgData.getInfo(roleData.weapon);
-			if (!weaponRes)
-			{
-				if (heroModel)
-					weaponRes = AvatarWeapontResCfgData.getInfo(heroModel.weaponResId);
-			}
-			if (weaponRes)
-			{
-				weaponResID = weaponRes.res;
-				weaponEffectResID = weaponRes.effectRes;
-				weaponEffectScale = weaponRes.effectScale;
-				weaponEffectOffset = new Vector3D(weaponRes.effectOffsetX, weaponRes.effectOffsetY, weaponRes.effectOffsetZ);
-			}
-			var deputyWeaponRes : AvatarDeputyWeaponRes = AvatarDeputyWeaponResCfgData.getInfo(roleData.deputyWeapon);
-			if (deputyWeaponRes)
-			{
+				
+				var weaponRes : AvatarWeaponRes = AvatarWeapontResCfgData.getInfo(/*roleData.weapon*/0);
+				if (!weaponRes)
+				{
+					weaponRes = AvatarWeapontResCfgData.getInfo(clothesRes.weaponResId);
+				}
+				if (weaponRes)
+				{
+					weaponResID = weaponRes.res;
+					weaponEffectResID = weaponRes.effectRes;
+					weaponEffectScale = weaponRes.effectScale;
+					weaponEffectOffset = new Vector3D(weaponRes.effectOffsetX, weaponRes.effectOffsetY, weaponRes.effectOffsetZ);
+				}
+				var deputyWeaponRes : AvatarDeputyWeaponRes = AvatarDeputyWeaponResCfgData.getInfo(roleData.deputyWeapon);
+				if (!deputyWeaponRes)
+				{
+					deputyWeaponRes = AvatarDeputyWeaponResCfgData.getInfo(clothesRes.deputyWeaponResId);
+				}
 				deputyWeaponResID = deputyWeaponRes.res;
 			}
 

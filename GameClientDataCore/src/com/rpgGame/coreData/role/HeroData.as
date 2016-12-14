@@ -178,6 +178,7 @@ package com.rpgGame.coreData.role
 			data.weapon = heroInfo.weapon;
 			data.deputyWeapon = heroInfo.second_weapon;
 			data.sex = heroInfo.sex;
+			data.job = heroInfo.job;
 			///角色属性信息
 			data.totalStat.setData(heroInfo.attributes);
 			
