@@ -51,6 +51,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.map.bean.PlayerInfo;
 	import com.rpgGame.netData.map.bean.SceneObjInfo;
 	import com.rpgGame.netData.map.message.ResEnterMapMessage;
+	import com.rpgGame.netData.map.message.ResPlayerRunEndMessage;
 	import com.rpgGame.netData.map.message.ResPlayerStopMessage;
 	import com.rpgGame.netData.map.message.ResRoundObjectsMessage;
 	import com.rpgGame.netData.map.message.SCSceneObjMoveMessage;
@@ -93,6 +94,7 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			SocketConnection.addCmdListener(101120, RecvEnterMapMessage);
 			SocketConnection.addCmdListener(101116, RecvPlayerStopMessage);
+			SocketConnection.addCmdListener(101123, RecvResPlayerRunEndMessage);
 			SocketConnection.addCmdListener(101148, RecvSCSceneObjMoveMessage);
 			SocketConnection.addCmdListener(101125, RecvResRoundObjectsMessage);
 			//场景中有对象血量有变化. 可能是因为状态, 可能是因为吃药
@@ -231,6 +233,40 @@ package com.rpgGame.app.cmdlistener.scene
 			}
 		}
 		
+		private function RecvResPlayerRunEndMessage(msg:ResPlayerRunEndMessage):void
+		{
+			if(msg.personId.fValue != MainRoleManager.actorID)
+			{
+				GameLog.addShow("ResPlayerRunEndMessage这个message根本就不应该来！应该是针对主角的");
+				return;
+			}
+			var posX : uint = msg.position.x;
+			var posY : uint = -msg.position.y;
+			var walkMoveRef : WalkMoveStateReference = MainRoleManager.actor.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+			walkMoveRef.isServerStop = true;
+			var stopWalkRef : StopWalkMoveStateReference = MainRoleManager.actor.stateMachine.getReference(StopWalkMoveStateReference) as StopWalkMoveStateReference;
+			stopWalkRef.setParams(posX, posY);
+			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, stopWalkRef);
+			if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
+				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR);
+			else
+				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE);
+			var camouflageEntity : SceneRole = SceneRole(MainRoleManager.actor.getCamouflageEntity());
+			if (camouflageEntity)
+			{
+				walkMoveRef = camouflageEntity.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+				walkMoveRef.isServerStop = true;
+				stopWalkRef = camouflageEntity.stateMachine.getReference(StopWalkMoveStateReference) as StopWalkMoveStateReference;
+				stopWalkRef.setParams(posX, posY);
+				camouflageEntity.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, stopWalkRef);
+				if (camouflageEntity.stateMachine.isPrewarWaiting)
+					camouflageEntity.stateMachine.transition(RoleStateType.ACTION_PREWAR);
+				else
+					camouflageEntity.stateMachine.transition(RoleStateType.ACTION_IDLE);
+			}
+			NoticeManager.showNotify("英雄移动失败");
+		}
+		
 		/**
 		 * 场景中有英雄/怪物/宠物啥的 移动了, 包含每个节点, 从起始节点出发的时间和速度. 到达每个节点的时间都是可以推算出来的
 		 * @param buffer
@@ -303,6 +339,8 @@ package com.rpgGame.app.cmdlistener.scene
 		
 		private function RecvResRoundObjectsMessage(msg:ResRoundObjectsMessage):void
 		{
+			GameLog.addShow("ResRoundObjectsMessage  通知来了！ 看看通知了什么！ \t 删除对象个数：" + msg.removeObjs.length);
+			GameLog.addShow("ResRoundObjectsMessage  通知来了！ 添加对象个数：" + msg.objInfos.length);
 			var delArr:Vector.<long> = msg.removeObjs;
 			for(var i:int=0;i<delArr.length;i++)
 			{
@@ -349,6 +387,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onSceneRemoveObject(roleID : uint) : void
 		{
+			GameLog.addShow("ResRoundObjectsMessage  通知来了！ 删除对象id：" + roleID);
 			var sceneRole : SceneRole = SceneManager.getSceneObjByID(roleID) as SceneRole;
 			if( sceneRole != null )
 			{
@@ -381,6 +420,8 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			HeroData.setEnterEyeUserInfo(data, info);
 			var sceneRole : SceneRole = SceneRoleManager.getInstance().createHero(data);
+			
+			GameLog.addShow("ResRoundObjectsMessage  通知来了！ 添加角色对象id：" + data.id);
 			//			var otherHeroBiaoMap:HashMap = YunBiaoManager._otherBiaoCheHashMap;
 			//			if( otherHeroBiaoMap.getValue( data.id ) != null )
 			//				data.biaoCheData = otherHeroBiaoMap.getValue( data.id );
@@ -419,6 +460,8 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			RoleData.readMonster(data,info);
 			SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
+			
+			GameLog.addShow("ResRoundObjectsMessage  通知来了！ 添加怪物对象id：" + data.id);
 		}
 		
 		/**
