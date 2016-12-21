@@ -43,7 +43,7 @@ package com.rpgGame.app.sender
 			{
 				msg = new ReqLoadFinishForChangeMapMessage();
 				(msg as ReqLoadFinishForChangeMapMessage).width = SceneManager.scene.sceneConfig.width;
-				(msg as ReqLoadFinishForChangeMapMessage).height = SceneManager.scene.sceneConfig.width;
+				(msg as ReqLoadFinishForChangeMapMessage).height = SceneManager.scene.sceneConfig.height;
 			}
 			SocketConnection.send(msg);
 		}
