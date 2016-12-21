@@ -156,7 +156,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 * @param buffer
 		 *
 		 */
-		public function RecvEnterMapMessage(msg:ResEnterMapMessage):void
+		private function RecvEnterMapMessage(msg:ResEnterMapMessage):void
 		{
 			GameLog.addShow("收到成功进入地图消息");
 			
@@ -194,10 +194,14 @@ package com.rpgGame.app.cmdlistener.scene
 		 * 对象的位置修正消息，服务器一般在需要对象停止的时候发送，但跳跃等移动状态不匹配也会发送，需要针对性修正 
 		 * @param msg
 		 */		
-		public function RecvResPlayerRunEndMessage(msg:ResPlayerRunEndMessage):void
-		{
-			
+		private function RecvResPlayerRunEndMessage(msg:ResPlayerRunEndMessage):void
+		{	
 			var objId : Number = msg.personId.ToGID();
+			if(MainRoleManager.actorID == objId)
+			{
+				trace("主角自己，不用同步了吧！不然，场景会跳一下，体验不好！");
+				return;
+			}
 			//			var speed : int = buffer.readVarint32();
 			var posX : int = msg.position.x;
 			var posY : int = msg.position.y;
