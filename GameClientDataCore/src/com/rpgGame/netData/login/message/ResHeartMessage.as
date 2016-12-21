@@ -1,4 +1,5 @@
 package com.rpgGame.netData.login.message{
+	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -13,7 +14,7 @@ package com.rpgGame.netData.login.message{
 	public class ResHeartMessage extends Message {
 	
 		//当前时间
-		private var _time: int;
+		private var _time: long;
 		
 		//服务器启动时间
 		private var _time2: int;
@@ -27,7 +28,7 @@ package com.rpgGame.netData.login.message{
 		 */
 		override protected function writing(): Boolean{
 			//当前时间
-			writeInt(_time);
+			writeLong(_time);
 			//服务器启动时间
 			writeInt(_time2);
 			//0-无需重置， 1-必须重置
@@ -40,7 +41,7 @@ package com.rpgGame.netData.login.message{
 		 */
 		override protected function reading(): Boolean{
 			//当前时间
-			_time = readInt();
+			_time = readLong();
 			//服务器启动时间
 			_time2 = readInt();
 			//0-无需重置， 1-必须重置
@@ -60,14 +61,14 @@ package com.rpgGame.netData.login.message{
 		 * get 当前时间
 		 * @return 
 		 */
-		public function get time(): int{
+		public function get time(): long{
 			return _time;
 		}
 		
 		/**
 		 * set 当前时间
 		 */
-		public function set time(value: int): void{
+		public function set time(value: long): void{
 			this._time = value;
 		}
 		

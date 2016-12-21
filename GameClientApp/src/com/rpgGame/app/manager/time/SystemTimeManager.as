@@ -55,12 +55,12 @@ package com.rpgGame.app.manager.time
 		
 		public static function RecvHeartMessage(msg:ResHeartMessage):void
 		{
-			_serverTime = msg.time*1000 - getTimer();//服务器当前时间的秒数，从1970年到现在的时间差
+			_serverTime = msg.time.fValue - getTimer();//服务器当前时间的秒数，从1970年到现在的时间差
 			
 			if(todayOverTime == 0)
 			{
-				SetNextDayTime( msg.time * 1000);
-			}else if(msg.time * 1000 >= todayOverTime)
+				SetNextDayTime( msg.time.fValue);
+			}else if(msg.time.fValue >= todayOverTime)
 			{
 				CheckTodayIsOver();
 			}
@@ -85,9 +85,9 @@ package com.rpgGame.app.manager.time
 		
 		private static function CheckTodayIsOver():void
 		{
-			if(_serverTime >= todayOverTime)
+			if(curtTm >= todayOverTime)
 			{
-				SetNextDayTime(_serverTime);
+				SetNextDayTime(curtTm);
 //				dispatchEvent( new LoginEvent( LoginEvent.START_NEW_DAY ));
 			}
 		}
