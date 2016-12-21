@@ -313,7 +313,7 @@ package com.game.engine3D.scene.layers
 						if (_view3DAsset && _view3DAsset.cameraMode2D && GlobalConfig.transformPlanarRotation)
 						{
 							(obj as ObjectContainer3D).z = PlanarContainer3D.transformPlanarRotation((obj as ObjectContainer3D).y);
-							trace(obj.name + "      ******************      "  + (obj as ObjectContainer3D).z);
+//							trace(obj.name + "      ******************      "  + (obj as ObjectContainer3D).z);
 						}
 						break;
 					case AssetType.SPARTICLE_MESH:

@@ -106,7 +106,6 @@ package com.rpgGame.app.cmdlistener.scene
 			//////
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_CHANGE_SCENE, onChangeScene);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_YOU_MOVE_FAIL, onYouMoveFail);
 			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_ADD_SENT_NPC, addSentNpc);
 			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_SYNC_SENT_NPC_POS, onSceneSyncSentNpcPos);
 			SocketConnection_protoBuffer.addCmdListener(StoryModuleMessages.S2C_ADD_STORY_PROTECT_MONSTER, onAddStoryProtectMonster);
@@ -195,7 +194,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var posX : int = msg.position.x;
 			var posY : int = -msg.position.y;
 			GameLog.addShow("%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 收到对象停止消息 :   " + posX + "   " + posY);
-			
+			GameLog.addShow("============================= 收到对象停止消息，对象id为：" + objId);
 			var role : SceneRole = SceneManager.getSceneObjByID(objId) as SceneRole;
 			if (role && role.usable)
 			{
@@ -690,40 +689,6 @@ package com.rpgGame.app.cmdlistener.scene
 					escortInfo.rolePosY = y;
 				}
 			}
-		}
-		
-		/**
-		 * 主角移动失败
-		 * @param buffer
-		 *
-		 */
-		private function onYouMoveFail(buffer : ByteBuffer) : void
-		{
-			var posX : uint = buffer.readVarint32();
-			var posY : uint = buffer.readVarint32();
-			var walkMoveRef : WalkMoveStateReference = MainRoleManager.actor.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
-			walkMoveRef.isServerStop = true;
-			var stopWalkRef : StopWalkMoveStateReference = MainRoleManager.actor.stateMachine.getReference(StopWalkMoveStateReference) as StopWalkMoveStateReference;
-			stopWalkRef.setParams(posX, posY);
-			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, stopWalkRef);
-			if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
-				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR);
-			else
-				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE);
-			var camouflageEntity : SceneRole = SceneRole(MainRoleManager.actor.getCamouflageEntity());
-			if (camouflageEntity)
-			{
-				walkMoveRef = camouflageEntity.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
-				walkMoveRef.isServerStop = true;
-				stopWalkRef = camouflageEntity.stateMachine.getReference(StopWalkMoveStateReference) as StopWalkMoveStateReference;
-				stopWalkRef.setParams(posX, posY);
-				camouflageEntity.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, stopWalkRef);
-				if (camouflageEntity.stateMachine.isPrewarWaiting)
-					camouflageEntity.stateMachine.transition(RoleStateType.ACTION_PREWAR);
-				else
-					camouflageEntity.stateMachine.transition(RoleStateType.ACTION_IDLE);
-			}
-			NoticeManager.showNotify("英雄移动失败");
 		}
 		
 		/**

@@ -12,7 +12,6 @@ package com.game.engine2D
 	import com.game.engine2D.scene.SceneSmallLayer;
 	import com.game.engine2D.scene.layers.SceneInteractiveLayer;
 	import com.game.engine2D.scene.layers.SceneRenderLayer;
-	import com.game.engine2D.scene.layers.SceneZoneMapLayer;
 	import com.game.engine2D.scene.layers.SceneZoneMapLayer2;
 	import com.game.engine2D.scene.map.vo.MapTile;
 	import com.game.engine2D.scene.render.RenderSet;
@@ -79,6 +78,8 @@ package com.game.engine2D
 		private var _direction:DirectionalLight;
 		private var _filter3ds:Vector.<Filter3DBase> = new Vector.<Filter3DBase>();
 		private var _cameraInit:Boolean = false;
+		
+		public var sceneAngle:Number;
 		
 		public function Scene($width:Number, $height:Number, name : String, view : View3D, viewDistance : int=1, areaMapLayer : int=0)
 		{
@@ -393,8 +394,8 @@ package com.game.engine2D
 				_view.camera.lens.far = 100000;
 				GlobalConfig.MAP_2D_CAMERA_ANGLE = 0;
 				GlobalConfig2D.MapZoneClass = PoolFrontMesh;
-				var angle:Number = (_viewAsset.cameraMode2DAngle*Math.PI)/180.0;
-				var plane:Plane3D = new Plane3D(0,Math.cos(angle),-Math.sin(angle));
+				sceneAngle = (_viewAsset.cameraMode2DAngle*Math.PI)/180.0;
+				var plane:Plane3D = new Plane3D(0,Math.cos(sceneAngle),-Math.sin(sceneAngle));
 				_direction.planarShadowPlane = plane;
 			}
 		}

@@ -3,8 +3,9 @@ package com.rpgGame.app.manager.scene
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.SceneCharType;
-
+	
 	import flash.display3D.Context3DCompareMode;
 	import flash.geom.Vector3D;
 
@@ -35,7 +36,7 @@ package com.rpgGame.app.manager.scene
 
 		public function SceneCursorHelper()
 		{
-			_mouseClickEffectUrl = ClientConfig.getEffect("shubiaodianji");
+			_mouseClickEffectUrl = ClientConfig.getEffect(EffectUrl.SHUBIAO_DIANJI);
 		}
 
 		public function showCursor(position : Vector3D) : void
@@ -62,8 +63,9 @@ package com.rpgGame.app.manager.scene
 				_mouseClickEffect.depthCompareMode = Context3DCompareMode.ALWAYS;
 				_mouseClickEffect.repeat = 0;
 				_mouseClickEffect.play(0);
-				_mouseClickEffect.setScale(0.5);
+//				_mouseClickEffect.setScale(1);
 				_mouseClickEffect.canRemoved = false;
+				_mouseClickEffect.rotationX = -40;
 				SceneManager.addSceneObjToScene(_mouseClickEffect, false, false, false);
 			}
 			_mouseClickEffect.visible = true;
