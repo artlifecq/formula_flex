@@ -273,10 +273,15 @@ package com.rpgGame.app.state.role.control
 						lastPos.y = lastPathPos.z;
 						dis = MathUtil.getDistance(pos.x, pos.y, lastPos.x, lastPos.y);
 						time = time + (dis / _stateReference.speed * 1000);
+						
+						trace("===========\t:"+(dis / _stateReference.speed * 1000));
+						trace("客户端计算走到下一个点的时间 + 寻路开始时间\t:" + time);
 					}
 					else
 					{
 						time = info.startTm;
+						
+						trace("寻路开始时间 \t:" + time);
 					}
 					lastPathPos = new Vector3D(pos.x, 0, pos.y);
 					path.push(lastPathPos);
@@ -298,6 +303,7 @@ package com.rpgGame.app.state.role.control
 					path.shift();
 					_lastTimeStamp = timeStamps.shift();
 					//开始行走
+					trace("timestamps   : " + timeStamps[0]);
 					walkByPath(path, timeStamps);
 				}
 			}
@@ -383,14 +389,17 @@ package com.rpgGame.app.state.role.control
 						}
 						nextPosGapTm = time - SystemTimeManager.curtTm;
 						_lastTimeStamp = time;
+						trace("寻路开始时间 + 一个阶段寻路时间   :" +  time  +"   time - SystemTimeManager.curtTm\t" + nextPosGapTm + "\t当前系统时间：\t" + SystemTimeManager.curtTm);
 					}
 					else
 					{
 						var distance : Number = MathUtil.getDistance((_machine.owner as SceneRole).x, (_machine.owner as SceneRole).z, _nextPos.x, _nextPos.z);
 						nextPosGapTm = (distance / _stateReference.speed * 1000);
+						trace("   else   " + nextPosGapTm);
 					}
 					if (nextPosGapTm > 0)
 					{
+						trace(nextPosGapTm + "    =======================真正一步用的时间");
 						(_machine.owner as SceneRole).faceToGround(_nextPos.x, _nextPos.z);
 						startMove(_nextPos, _nextPos, nextPosGapTm);
 						TweenLite.to(_machine.owner as SceneRole, nextPosGapTm * 0.001, {x: _nextPos.x, z: _nextPos.z, onComplete: moveStep, onCompleteParams: [path, timeStamps], onUpdate: onWalkStepUpdate, onUpdateParams: [], ease: Linear.easeNone, overwrite: 0});
