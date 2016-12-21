@@ -1,5 +1,6 @@
 package com.rpgGame.coreData.role
 {
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.fight.skill.ActiveSpellList;
 	import com.rpgGame.coreData.info.mount.MountModuleObjClientData;
@@ -168,7 +169,7 @@ package com.rpgGame.coreData.role
 		{
 			///角色基本信息
 			data.serverID = heroInfo.personId;
-			data.id = heroInfo.personId.fValue;
+			data.id = heroInfo.personId.ToGID();
 			data.name = heroInfo.name;
 			data.mapID = heroInfo.mapModelId;
 			data.body = heroInfo.body;
@@ -192,7 +193,7 @@ package com.rpgGame.coreData.role
 			data.buffList.push(buffInfo);
 			}*/
 			///角色位置信息
-			RoleData.readGeneric(data, new Point(heroInfo.x,heroInfo.y));
+			RoleData.readGeneric(data, new Point(heroInfo.position.x,heroInfo.position.y));
 		
 		
 			//			if (heroProto.heroMiscModuleObj)
@@ -216,6 +217,7 @@ package com.rpgGame.coreData.role
 			//			if (heroProto.relationModuleObj)
 			//				info.mood = heroProto.relationModuleObj.hasMood ? BytesUtil.bytes2UTF(heroProto.relationModuleObj.mood) : "";
 			//			info.spellList.setHeroData(heroProto.spellModuleObj.learnRaceSpells);
+			GameLog.addShow("主角的服务器id为：  " + data.serverID.ToString());
 		}
 		
 		/**
@@ -227,7 +229,7 @@ package com.rpgGame.coreData.role
 		public static function setEnterEyeUserInfo(data : HeroData, info : PlayerInfo) : void
 		{
 			data.serverID = info.personId;
-			data.id = info.personId.fValue;
+			data.id = info.personId.ToGID();
 			data.name = info.name;
 			
 			//			data.countryId = buffer.readVarint32();
@@ -266,7 +268,7 @@ package com.rpgGame.coreData.role
 //				data.buffList.push(buffInfo);
 //			}
 			
-			RoleData.readGeneric(data, new Point(info.x,info.y));
+			RoleData.readGeneric(data, new Point(info.position.x,info.position.y));
 		}
 		
 		/**

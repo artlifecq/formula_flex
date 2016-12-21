@@ -52,6 +52,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.map.bean.SceneObjInfo;
 	import com.rpgGame.netData.map.message.ResEnterMapMessage;
 	import com.rpgGame.netData.map.message.ResPlayerRunEndMessage;
+	import com.rpgGame.netData.map.message.ResPlayerRunFailMessage;
 	import com.rpgGame.netData.map.message.ResPlayerStopMessage;
 	import com.rpgGame.netData.map.message.ResRoundObjectsMessage;
 	import com.rpgGame.netData.map.message.SCSceneObjMoveMessage;
@@ -93,12 +94,14 @@ package com.rpgGame.app.cmdlistener.scene
 		override public function start() : void
 		{
 			SocketConnection.addCmdListener(101120, RecvEnterMapMessage);
-			SocketConnection.addCmdListener(101116, RecvPlayerStopMessage);
+			SocketConnection.addCmdListener(101116, RecvResPlayerStopMessage);
 			SocketConnection.addCmdListener(101123, RecvResPlayerRunEndMessage);
 			SocketConnection.addCmdListener(101148, RecvSCSceneObjMoveMessage);
 			SocketConnection.addCmdListener(101125, RecvResRoundObjectsMessage);
 			//场景中有对象血量有变化. 可能是因为状态, 可能是因为吃药
 			SocketConnection.addCmdListener(103105, RecvBroadcastPlayerAttriChangeMessage);
+			
+			SocketConnection.addCmdListener(101143, RecvResPlayerRunFailMessage);
 			
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			//////
@@ -106,7 +109,6 @@ package com.rpgGame.app.cmdlistener.scene
 			//////
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_CHANGE_SCENE, onChangeScene);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_YOU_MOVE_FAIL, onYouMoveFail);
 			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_ADD_SENT_NPC, addSentNpc);
 			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_SYNC_SENT_NPC_POS, onSceneSyncSentNpcPos);
 			SocketConnection_protoBuffer.addCmdListener(StoryModuleMessages.S2C_ADD_STORY_PROTECT_MONSTER, onAddStoryProtectMonster);
@@ -183,19 +185,24 @@ package com.rpgGame.app.cmdlistener.scene
 			//				EventManager.dispatchEvent(MainPlayerEvent.PK_MODE_CHANGE);
 		}
 		
+		private function RecvResPlayerStopMessage(msg:ResPlayerStopMessage):void
+		{
+			
+		}
+		
 		/**
 		 * 对象的位置修正消息，服务器一般在需要对象停止的时候发送，但跳跃等移动状态不匹配也会发送，需要针对性修正 
 		 * @param msg
 		 */		
-		public function RecvPlayerStopMessage(msg:ResPlayerStopMessage):void
+		public function RecvResPlayerRunEndMessage(msg:ResPlayerRunEndMessage):void
 		{
 			
-			var objId : Number = msg.personId.fValue;
+			var objId : Number = msg.personId.ToGID();
 			//			var speed : int = buffer.readVarint32();
 			var posX : int = msg.position.x;
-			var posY : int = -msg.position.y;
+			var posY : int = msg.position.y;
 			GameLog.addShow("%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 收到对象停止消息 :   " + posX + "   " + posY);
-			
+			GameLog.addShow("============================= 收到对象停止消息，对象id为：" + msg.personId.ToString());
 			var role : SceneRole = SceneManager.getSceneObjByID(objId) as SceneRole;
 			if (role && role.usable)
 			{
@@ -203,6 +210,7 @@ package com.rpgGame.app.cmdlistener.scene
 				var stopWalkRef : StopWalkMoveStateReference;
 				
 				GameLog.addShow("角色深度值为：  ****** " + role.z);
+//				trace(SystemTimeManager.sysDateTimeStr);
 				
 				/////////////////伪装者停止移动
 				var camouflageEntity : SceneRole = SceneRole(role.getCamouflageEntity());
@@ -233,15 +241,15 @@ package com.rpgGame.app.cmdlistener.scene
 			}
 		}
 		
-		private function RecvResPlayerRunEndMessage(msg:ResPlayerRunEndMessage):void
+		private function RecvResPlayerRunFailMessage(msg:ResPlayerRunFailMessage):void
 		{
-			if(msg.personId.fValue != MainRoleManager.actorID)
+			if(msg.personId.ToGID() != MainRoleManager.actorID)
 			{
 				GameLog.addShow("ResPlayerRunEndMessage这个message根本就不应该来！应该是针对主角的");
 				return;
 			}
 			var posX : uint = msg.position.x;
-			var posY : uint = -msg.position.y;
+			var posY : uint = msg.position.y;
 			var walkMoveRef : WalkMoveStateReference = MainRoleManager.actor.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
 			walkMoveRef.isServerStop = true;
 			var stopWalkRef : StopWalkMoveStateReference = MainRoleManager.actor.stateMachine.getReference(StopWalkMoveStateReference) as StopWalkMoveStateReference;
@@ -274,7 +282,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function RecvSCSceneObjMoveMessage(msg:SCSceneObjMoveMessage):void
 		{
-			if(msg.objId.fValue == MainRoleManager.actorID)
+			if(msg.objId.ToGID() == MainRoleManager.actorID)
 			{
 				trace("这里不应该有主角自己的呀！主角自己的移动不需要同步到自己吧！！！");
 				return;
@@ -285,7 +293,7 @@ package com.rpgGame.app.cmdlistener.scene
 			if (role && role.usable && !role.getCamouflageEntity()) //有伪装则跟随伪装，防止服务器发伪装者移动。
 			{
 				var elapseTm : int = SystemTimeManager.curtTm - mInfo.startTm;
-				trace("寻路开始时间：" + mInfo.startTm, "_差值：" + elapseTm);
+				trace("寻路开始时间：" + mInfo.startTm, "_差值：" + elapseTm + "_服务器时间 ：" + SystemTimeManager.curtTm);
 				RoleStateUtil.walkByInfos(mInfo);
 				
 				//调试bug用，可以删除！！！！
@@ -344,7 +352,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var delArr:Vector.<long> = msg.removeObjs;
 			for(var i:int=0;i<delArr.length;i++)
 			{
-				var roleID:uint = delArr[i].fValue;
+				var roleID:uint = delArr[i].ToGID();
 				onSceneRemoveObject(roleID);
 			}
 			
@@ -455,7 +463,7 @@ package com.rpgGame.app.cmdlistener.scene
 			info.read(buffer);
 			
 			data.serverID = info.monsterId;
-			data.id = info.monsterId.fValue;
+			data.id = info.monsterId.ToGID();
 			data.modelID = info.modelId;
 			
 			RoleData.readMonster(data,info);
@@ -489,7 +497,7 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			var info : NpcInfo = new NpcInfo();
 			data.serverID = info.npcId;
-			data.id = info.npcId.fValue;
+			data.id = info.npcId.ToGID();
 			data.modelID = info.npcModelId;
 			RoleData.readNpc(data, info);
 			
@@ -534,7 +542,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function RecvBroadcastPlayerAttriChangeMessage(msg : BroadcastPlayerAttriChangeMessage):void
 		{
-			var role : SceneRole = SceneManager.getSceneObjByID(msg.playerid.fValue) as SceneRole;
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.playerid.ToGID()) as SceneRole;
 			if (!role)
 				return;
 			var roleData : RoleData = role.data as RoleData;
@@ -690,40 +698,6 @@ package com.rpgGame.app.cmdlistener.scene
 					escortInfo.rolePosY = y;
 				}
 			}
-		}
-		
-		/**
-		 * 主角移动失败
-		 * @param buffer
-		 *
-		 */
-		private function onYouMoveFail(buffer : ByteBuffer) : void
-		{
-			var posX : uint = buffer.readVarint32();
-			var posY : uint = buffer.readVarint32();
-			var walkMoveRef : WalkMoveStateReference = MainRoleManager.actor.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
-			walkMoveRef.isServerStop = true;
-			var stopWalkRef : StopWalkMoveStateReference = MainRoleManager.actor.stateMachine.getReference(StopWalkMoveStateReference) as StopWalkMoveStateReference;
-			stopWalkRef.setParams(posX, posY);
-			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, stopWalkRef);
-			if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
-				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR);
-			else
-				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE);
-			var camouflageEntity : SceneRole = SceneRole(MainRoleManager.actor.getCamouflageEntity());
-			if (camouflageEntity)
-			{
-				walkMoveRef = camouflageEntity.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
-				walkMoveRef.isServerStop = true;
-				stopWalkRef = camouflageEntity.stateMachine.getReference(StopWalkMoveStateReference) as StopWalkMoveStateReference;
-				stopWalkRef.setParams(posX, posY);
-				camouflageEntity.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, stopWalkRef);
-				if (camouflageEntity.stateMachine.isPrewarWaiting)
-					camouflageEntity.stateMachine.transition(RoleStateType.ACTION_PREWAR);
-				else
-					camouflageEntity.stateMachine.transition(RoleStateType.ACTION_IDLE);
-			}
-			NoticeManager.showNotify("英雄移动失败");
 		}
 		
 		/**

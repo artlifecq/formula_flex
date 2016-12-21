@@ -31,7 +31,8 @@
             var fun:Function = _funDic[type];
             if (fun != null)
             {
-                fun(data);
+				fun.apply(null, [data]);
+//                fun(data);
             }
         }
 

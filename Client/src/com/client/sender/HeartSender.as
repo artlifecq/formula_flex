@@ -45,9 +45,7 @@ package com.client.sender
 			SocketConnection_protoBuffer.send(ClientCmdID.C2S_HEART_BEAT, _bytes);*/
 			var msg:ReqHeartMessage = new ReqHeartMessage();
 			msg.time = getTimer();
-			/*if (_serverTimeCheck != 0)
-				msg.time = _serverTimeCheck + _clientTimeCheck;*/
-			
+
 			SocketConnection.send(msg);
 		}
 	}

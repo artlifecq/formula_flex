@@ -3,6 +3,7 @@ package com.rpgGame.coreData.type
 
 	public class EffectUrl
 	{
+		public static const SHUBIAO_DIANJI:String = "dianji";
 		/**升级**/
 		public static const SHENG_JI : String = "tx_juese_shengji";
 		/**接受任务**/

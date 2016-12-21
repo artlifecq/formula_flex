@@ -864,7 +864,7 @@ package org.game.netCore.net
 						var delta:int = getTimer() - beginTime;
 						if ( delta > 100 )
 						{
-							GameLog.add("[消息处理 Time]  跨服：单个函数超时    "  + id + "  " + delta.toString());
+							GameLog.add("[消息处理 Time] 单个函数超时    "  + id + "  " + delta.toString());
 						}
 						
 						_remainBytesCnt = _msgBuff.bytesAvailable;

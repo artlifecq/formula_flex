@@ -22,11 +22,11 @@ package com.rpgGame.app.cmdlistener
 
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(100106,onResHeartMessage);
+			SocketConnection.addCmdListener(100106,RecvResHeartMessage);
 			finish();
 		}
 		
-		private function onResHeartMessage(msg:ResHeartMessage):void
+		private function RecvResHeartMessage(msg:ResHeartMessage):void
 		{
 			SystemTimeManager.RecvHeartMessage(msg);
 		}

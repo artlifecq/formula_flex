@@ -7,7 +7,7 @@ package com.rpgGame.netData.map.handler{
 	
 		public override function action(): void{
 			var msg: ResPetRunPositionsMessage = ResPetRunPositionsMessage(this.message);
-			//TODO 娣诲姞娑堟伅澶勭悊
+			//TODO 添加消息处理
 		}
 	}
 }

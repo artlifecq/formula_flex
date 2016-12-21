@@ -150,7 +150,7 @@
 		public static function readGeneric(data : RoleData, pos:Point) : void
 		{
 			data.x = pos.x;
-			data.y = -pos.y;
+			data.y = pos.y;
 		}
 		
 		public static function readMonster(data : RoleData, info : MonsterInfo):void
@@ -176,7 +176,7 @@
 			//			data.totalStat.mana = ;
 			
 //			data.buffList = info.buffs;
-			readGeneric(data,new Point(info.x,info.y));
+			readGeneric(data,new Point(info.position.x,info.position.y));
 		}
 	}
 }

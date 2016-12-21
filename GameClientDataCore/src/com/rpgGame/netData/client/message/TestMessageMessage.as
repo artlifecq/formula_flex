@@ -10,101 +10,101 @@ package com.rpgGame.netData.client.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * æµ‹è¯•æ¶ˆæ¯
+	 * ²âÊÔÏûÏ¢
 	 */
 	public class TestMessageMessage extends Message {
 	
-		//æµ‹è¯•
+		//²âÊÔ
 		private var _testString: String;
 		
-		//æµ‹è¯•
+		//²âÊÔ
 		private var _testshort: int;
 		
-		//æµ‹è¯•
+		//²âÊÔ
 		private var _testlist: Vector.<String> = new Vector.<String>();
-		//æµ‹è¯•
+		//²âÊÔ
 		private var _testlistinfo: Vector.<TestInfo> = new Vector.<TestInfo>();
-		//æµ‹è¯•
+		//²âÊÔ
 		private var _testint: int;
 		
-		//æµ‹è¯•
+		//²âÊÔ
 		private var _testlong: long;
 		
-		//æµ‹è¯•
+		//²âÊÔ
 		private var _testlistint: Vector.<int> = new Vector.<int>();
-		//æµ‹è¯•
+		//²âÊÔ
 		private var _testinfo: TestInfo;
 		
-		//æµ‹è¯•
+		//²âÊÔ
 		private var _testbyte: int;
 		
 		
 		/**
-		 * å†™å…¥å­—èŠ‚ç¼“å­˜
+		 * Ğ´Èë×Ö½Ú»º´æ
 		 */
 		override protected function writing(): Boolean{
 			var i: int = 0;
-			//æµ‹è¯•
+			//²âÊÔ
 			writeString(_testString);
-			//æµ‹è¯•
+			//²âÊÔ
 			writeShort(_testshort);
-			//æµ‹è¯•
+			//²âÊÔ
 			writeShort(_testlist.length);
 			for (i = 0; i < _testlist.length; i++) {
 				writeString(_testlist[i]);
 			}
-			//æµ‹è¯•
+			//²âÊÔ
 			writeShort(_testlistinfo.length);
 			for (i = 0; i < _testlistinfo.length; i++) {
 				writeBean(_testlistinfo[i]);
 			}
-			//æµ‹è¯•
+			//²âÊÔ
 			writeInt(_testint);
-			//æµ‹è¯•
+			//²âÊÔ
 			writeLong(_testlong);
-			//æµ‹è¯•
+			//²âÊÔ
 			writeShort(_testlistint.length);
 			for (i = 0; i < _testlistint.length; i++) {
 				writeInt(_testlistint[i]);
 			}
-			//æµ‹è¯•
+			//²âÊÔ
 			writeBean(_testinfo);
-			//æµ‹è¯•
+			//²âÊÔ
 			writeByte(_testbyte);
 			return true;
 		}
 		
 		/**
-		 * è¯»å–å­—èŠ‚ç¼“å­˜
+		 * ¶ÁÈ¡×Ö½Ú»º´æ
 		 */
 		override protected function reading(): Boolean{
 			var i: int = 0;
-			//æµ‹è¯•
+			//²âÊÔ
 			_testString = readString();
-			//æµ‹è¯•
+			//²âÊÔ
 			_testshort = readShort();
-			//æµ‹è¯•
+			//²âÊÔ
 			var testlist_length : int = readShort();
 			for (i = 0; i < testlist_length; i++) {
 				_testlist[i] = readString();
 			}
-			//æµ‹è¯•
+			//²âÊÔ
 			var testlistinfo_length : int = readShort();
 			for (i = 0; i < testlistinfo_length; i++) {
 				_testlistinfo[i] = readBean(TestInfo) as TestInfo;
 			}
-			//æµ‹è¯•
+			//²âÊÔ
 			_testint = readInt();
-			//æµ‹è¯•
+			//²âÊÔ
 			_testlong = readLong();
-			//æµ‹è¯•
+			//²âÊÔ
 			var testlistint_length : int = readShort();
 			for (i = 0; i < testlistint_length; i++) {
 				_testlistint[i] = readInt();
 			}
-			//æµ‹è¯•
+			//²âÊÔ
 			_testinfo = readBean(TestInfo) as TestInfo;
-			//æµ‹è¯•
+			//²âÊÔ
 			_testbyte = readByte();
 			return true;
 		}
@@ -118,7 +118,7 @@ package com.rpgGame.netData.client.message{
 		}
 		
 		/**
-		 * get æµ‹è¯•
+		 * get ²âÊÔ
 		 * @return 
 		 */
 		public function get testString(): String{
@@ -126,14 +126,14 @@ package com.rpgGame.netData.client.message{
 		}
 		
 		/**
-		 * set æµ‹è¯•
+		 * set ²âÊÔ
 		 */
 		public function set testString(value: String): void{
 			this._testString = value;
 		}
 		
 		/**
-		 * get æµ‹è¯•
+		 * get ²âÊÔ
 		 * @return 
 		 */
 		public function get testshort(): int{
@@ -141,14 +141,14 @@ package com.rpgGame.netData.client.message{
 		}
 		
 		/**
-		 * set æµ‹è¯•
+		 * set ²âÊÔ
 		 */
 		public function set testshort(value: int): void{
 			this._testshort = value;
 		}
 		
 		/**
-		 * get æµ‹è¯•
+		 * get ²âÊÔ
 		 * @return 
 		 */
 		public function get testlist(): Vector.<String>{
@@ -156,14 +156,14 @@ package com.rpgGame.netData.client.message{
 		}
 		
 		/**
-		 * set æµ‹è¯•
+		 * set ²âÊÔ
 		 */
 		public function set testlist(value: Vector.<String>): void{
 			this._testlist = value;
 		}
 		
 		/**
-		 * get æµ‹è¯•
+		 * get ²âÊÔ
 		 * @return 
 		 */
 		public function get testlistinfo(): Vector.<TestInfo>{
@@ -171,14 +171,14 @@ package com.rpgGame.netData.client.message{
 		}
 		
 		/**
-		 * set æµ‹è¯•
+		 * set ²âÊÔ
 		 */
 		public function set testlistinfo(value: Vector.<TestInfo>): void{
 			this._testlistinfo = value;
 		}
 		
 		/**
-		 * get æµ‹è¯•
+		 * get ²âÊÔ
 		 * @return 
 		 */
 		public function get testint(): int{
@@ -186,14 +186,14 @@ package com.rpgGame.netData.client.message{
 		}
 		
 		/**
-		 * set æµ‹è¯•
+		 * set ²âÊÔ
 		 */
 		public function set testint(value: int): void{
 			this._testint = value;
 		}
 		
 		/**
-		 * get æµ‹è¯•
+		 * get ²âÊÔ
 		 * @return 
 		 */
 		public function get testlong(): long{
@@ -201,14 +201,14 @@ package com.rpgGame.netData.client.message{
 		}
 		
 		/**
-		 * set æµ‹è¯•
+		 * set ²âÊÔ
 		 */
 		public function set testlong(value: long): void{
 			this._testlong = value;
 		}
 		
 		/**
-		 * get æµ‹è¯•
+		 * get ²âÊÔ
 		 * @return 
 		 */
 		public function get testlistint(): Vector.<int>{
@@ -216,14 +216,14 @@ package com.rpgGame.netData.client.message{
 		}
 		
 		/**
-		 * set æµ‹è¯•
+		 * set ²âÊÔ
 		 */
 		public function set testlistint(value: Vector.<int>): void{
 			this._testlistint = value;
 		}
 		
 		/**
-		 * get æµ‹è¯•
+		 * get ²âÊÔ
 		 * @return 
 		 */
 		public function get testinfo(): TestInfo{
@@ -231,14 +231,14 @@ package com.rpgGame.netData.client.message{
 		}
 		
 		/**
-		 * set æµ‹è¯•
+		 * set ²âÊÔ
 		 */
 		public function set testinfo(value: TestInfo): void{
 			this._testinfo = value;
 		}
 		
 		/**
-		 * get æµ‹è¯•
+		 * get ²âÊÔ
 		 * @return 
 		 */
 		public function get testbyte(): int{
@@ -246,7 +246,7 @@ package com.rpgGame.netData.client.message{
 		}
 		
 		/**
-		 * set æµ‹è¯•
+		 * set ²âÊÔ
 		 */
 		public function set testbyte(value: int): void{
 			this._testbyte = value;

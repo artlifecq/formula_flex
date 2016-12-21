@@ -1,5 +1,6 @@
 package com.rpgGame.netData.player.bean{
 	import com.rpgGame.netData.player.bean.AttributeItem;
+	import com.rpgGame.netData.structs.Position;
 	
 	import org.game.netCore.data.long;
 	
@@ -25,11 +26,8 @@ package com.rpgGame.netData.player.bean{
 		//角色所在地图模版
 		private var _mapModelId: int;
 		
-		//角色所在X
-		private var _x: int;
-		
-		//角色所在Y
-		private var _y: int;
+		//角色所在位置
+		private var _position: com.rpgGame.netData.structs.Position;
 		
 		//人物面对方向
 		private var _dir: int;
@@ -70,10 +68,8 @@ package com.rpgGame.netData.player.bean{
 			writeString(_name);
 			//角色所在地图模版
 			writeInt(_mapModelId);
-			//角色所在X
-			writeShort(_x);
-			//角色所在Y
-			writeShort(_y);
+			//角色所在位置
+			writeBean(_position);
 			//人物面对方向
 			writeByte(_dir);
 			//玩家性别 1男 2女
@@ -110,10 +106,8 @@ package com.rpgGame.netData.player.bean{
 			_name = readString();
 			//角色所在地图模版
 			_mapModelId = readInt();
-			//角色所在X
-			_x = readShort();
-			//角色所在Y
-			_y = readShort();
+			//角色所在位置
+			_position = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
 			//人物面对方向
 			_dir = readByte();
 			//玩家性别 1男 2女
@@ -186,33 +180,18 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * get 角色所在X
+		 * get 角色所在位置
 		 * @return 
 		 */
-		public function get x(): int{
-			return _x;
+		public function get position(): com.rpgGame.netData.structs.Position{
+			return _position;
 		}
 		
 		/**
-		 * set 角色所在X
+		 * set 角色所在位置
 		 */
-		public function set x(value: int): void{
-			this._x = value;
-		}
-		
-		/**
-		 * get 角色所在Y
-		 * @return 
-		 */
-		public function get y(): int{
-			return _y;
-		}
-		
-		/**
-		 * set 角色所在Y
-		 */
-		public function set y(value: int): void{
-			this._y = value;
+		public function set position(value: com.rpgGame.netData.structs.Position): void{
+			this._position = value;
 		}
 		
 		/**

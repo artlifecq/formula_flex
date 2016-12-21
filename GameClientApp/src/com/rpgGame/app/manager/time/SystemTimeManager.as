@@ -4,17 +4,19 @@ package com.rpgGame.app.manager.time
 	import com.rpgGame.app.sender.MiscSender;
 	import com.rpgGame.netData.login.message.ResHeartMessage;
 	
+	import flash.utils.getTimer;
+	
 	public class SystemTimeManager
 	{
 		
 		//------------------------------------------------------寻秦记服务器系统时间同步方法------------------------------------------------------
 		/** 当日结束时间戳		 */		
-		private static var todayOverTime:int = 0;   //第2天的开始时间
+		private static var todayOverTime:Number = 0;   //第2天的开始时间
 		private static var _serverTimeCheck:int = 0;//上一次服务器的启动时间
 		private static var _clientTimeCheck:int = 0;//从上一次同步服务器时间，到再一次请求同步服务器时间，客户端这里总共过去了多长时间
 		private static var _clientTimePass:Number = 0;//
-		// 服务器时间秒
-		private static var _serverTime:int;
+		// 服务器时间毫秒
+		private static var _serverTime:Number;
 		private static var _gTimer:GameTimer;
 		/**
 		 * 心跳信息 
@@ -29,7 +31,7 @@ package com.rpgGame.app.manager.time
 			{
 				time = _serverTimeCheck + _clientTimeCheck;
 			}*/
-			MiscSender.reqHeartAndServerTime(0);
+			MiscSender.reqHeartAndServerTime(getTimer());
 			
 			if(!_gTimer)
 			{
@@ -53,12 +55,12 @@ package com.rpgGame.app.manager.time
 		
 		public static function RecvHeartMessage(msg:ResHeartMessage):void
 		{
-			_serverTime = msg.time;
+			_serverTime = msg.time*1000 - getTimer();//服务器当前时间的秒数，从1970年到现在的时间差
 			
 			if(todayOverTime == 0)
 			{
-				SetNextDayTime( msg.time );
-			}else if(msg.time >= todayOverTime)
+				SetNextDayTime( msg.time * 1000);
+			}else if(msg.time * 1000 >= todayOverTime)
 			{
 				CheckTodayIsOver();
 			}
@@ -66,7 +68,7 @@ package com.rpgGame.app.manager.time
 			var needReset:Boolean = ( msg.reset == 1 || ( msg.reset == 0 && msg.time2 >= serverTimeCheck ) )
 			if (msg.time2 != 0 && needReset )
 			{
-				_serverTimeCheck = msg.time2;
+				_serverTimeCheck = msg.time2;//当前服务器启动多长时间  --- 毫秒
 				_clientTimeCheck = 1;
 
 				_clientTimePass = ( new Date() ).getTime();
@@ -92,15 +94,15 @@ package com.rpgGame.app.manager.time
 		
 		private static function SetNextDayTime(time:int):void
 		{
-			var date:Date = new Date( time * 1000 );
+			var date:Date = new Date(time);
 			date = new Date( date.fullYear , date.month , date.date + 1 , 0, 0 ,0 ,0);
-			todayOverTime = int(date.time / 1000);
+			todayOverTime = int(date.time);
 		}
 		
 		/** 服务器时间（毫秒）*/
 		public static function get curtTm():Number
 		{
-			return _serverTime * 1000;
+			return _serverTime + getTimer();
 		}
 		
 		public static function get sysDateTimeStr():String

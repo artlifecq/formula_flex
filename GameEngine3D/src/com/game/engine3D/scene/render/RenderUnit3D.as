@@ -2544,10 +2544,6 @@ package com.game.engine3D.scene.render
 			if (!_graphicDis)
 			{
 				_graphicDis = PoolContainer3D.create();
-				/*if (GlobalConfig.use25DMap)
-					_graphicDis = PoolEntityContainer3D.create();
-				else
-					_graphicDis = PoolContainer3D.create();*/
 			}
 			_nextRenderParamData = null;
 			_currentStatus = null;

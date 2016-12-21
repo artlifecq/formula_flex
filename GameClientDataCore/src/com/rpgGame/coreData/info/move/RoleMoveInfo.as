@@ -25,7 +25,7 @@ package com.rpgGame.coreData.info.move
 
 		public function setValue(msg : SCSceneObjMoveMessage) : void
 		{
-			roleID = msg.objId.fValue;
+			roleID = msg.objId.ToGID();
 			speed = msg.speed;
 			startTm = msg.startTime.fValue;
 			var pathLen : int = msg.positions.length;

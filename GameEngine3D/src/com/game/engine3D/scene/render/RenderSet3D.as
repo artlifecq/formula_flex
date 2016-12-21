@@ -1,6 +1,8 @@
 package com.game.engine3D.scene.render
 {
+	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.core.poolObject.PoolContainer3D;
+	import com.game.engine3D.core.poolObject.PoolEntityContainer3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData;
 	import com.game.engine3D.scene.render.vo.RenderUnitSyncInfo;
 	import com.game.engine3D.utils.CallBackUtil;
