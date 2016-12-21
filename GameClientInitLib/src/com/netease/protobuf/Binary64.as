@@ -12,7 +12,7 @@ package com.netease.protobuf {
 		/**
 		 * @private
 		 */
-		internal static const CHAR_CODE_0:uint = '0'.charCodeAt();
+		public static const CHAR_CODE_0:uint = '0'.charCodeAt();
 		/**
 		 * @private
 		 */
@@ -20,7 +20,7 @@ package com.netease.protobuf {
 		/**
 		 * @private
 		 */
-		internal static const CHAR_CODE_A:uint = 'a'.charCodeAt();
+		public static const CHAR_CODE_A:uint = 'a'.charCodeAt();
 		/**
 		 * @private
 		 */
@@ -39,7 +39,7 @@ package com.netease.protobuf {
 		 * @return The remainder after division.
 		 * @private
 		 */
-		internal final function div(n:uint):uint {
+		public final function div(n:uint):uint {
 			const modHigh:uint = internalHigh % n
 			const mod:uint = (low % n + modHigh * 6) % n
 			internalHigh /= n
@@ -60,7 +60,7 @@ package com.netease.protobuf {
 		/**
 		 * @private
 		 */
-		internal final function add(n:uint):void {
+		public final function add(n:uint):void {
 			const newLow:Number = Number(low) + n
 			internalHigh += uint(newLow / 4294967296.0)
 			low = newLow
@@ -68,7 +68,7 @@ package com.netease.protobuf {
 		/**
 		 * @private
 		 */
-		internal final function bitwiseNot():void {
+		public final function bitwiseNot():void {
 			low = ~low
 			internalHigh = ~internalHigh
 		}
