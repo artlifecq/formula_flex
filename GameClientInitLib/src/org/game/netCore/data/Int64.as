@@ -1,5 +1,8 @@
 package org.game.netCore.data
 {
+	import com.netease.protobuf.Binary64;
+	import com.netease.protobuf.UInt64;
+	
 	import flash.utils.ByteArray;
 	
 	/**
@@ -48,8 +51,8 @@ package org.game.netCore.data
 		
 		public function SetRawData(l:int, h:int, s:String):void
 		{
-			_hValue = _hValue;
-			_lValue = _lValue;
+			_hValue = h;
+			_lValue = l;
 			_hexValue = new String(s);
 		}
 		
@@ -99,7 +102,7 @@ package org.game.netCore.data
 		 */
 		public function get fValue():Number
 		{
-			return ((_hValue) * uint.MAX_VALUE) + _lValue;
+			return _hValue * 4294967296.0 + _lValue;
 		}
 		
 		/**
@@ -182,8 +185,63 @@ package org.game.netCore.data
 			intValue = 0;
 		}
 		
-		public function ToString():String
+		public function ToString(radix : uint = 10):String
 		{
+            if (radix < 2 || radix > 36) {
+                throw new ArgumentError
+            }
+            if (16 == radix) {
+                return this._hexValue;
+            }
+            switch (this._hValue) {
+                case 0:
+                {
+                    return this._lValue.toString(radix)
+                }
+                    
+                case -1:
+                {
+                    if ((this._lValue & 0x80000000) == 0)
+                    {
+                        return (int(this._lValue | 0x80000000) - 2147483648.0).toString(radix)
+                    }
+                    else
+                    {
+                        return int(this._lValue).toString(radix)
+                    }
+                }
+                    
+                default:
+                {
+                    break;
+                }
+            }
+            if (this._lValue == 0 && this._hValue == 0) {
+                return "0"
+            }
+            const digitChars:Array = [];
+            const copyOfThis:UInt64 = new UInt64(this._lValue, this._hValue);
+            if (this._hValue < 0) {
+                copyOfThis.bitwiseNot()
+                copyOfThis.add(1)
+            }
+            do {
+                const digit:uint = copyOfThis.div(radix);
+                if (digit < 10) {
+                    digitChars.push(digit + Binary64.CHAR_CODE_0);
+                } else {
+                    digitChars.push(digit - 10 + Binary64.CHAR_CODE_A);
+                }
+            } while (copyOfThis.high != 0)
+            if (this._hValue < 0) {
+                return '-' + copyOfThis.low.toString(radix) +
+                    String.fromCharCode.apply(
+                        String, digitChars.reverse())
+            } else {
+                return copyOfThis.low.toString(radix) +
+                    String.fromCharCode.apply(
+                        String, digitChars.reverse())
+            }
 			return _hexValue;
 		}
 		

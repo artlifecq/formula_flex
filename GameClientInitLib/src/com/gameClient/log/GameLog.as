@@ -1,5 +1,6 @@
 package com.gameClient.log
 {
+    import gameEngine2D.NetDebug;
 	public class GameLog
 	{
 		public static const APPEND_TXT:String = "append_txt";
@@ -63,6 +64,10 @@ package com.gameClient.log
 				}
 				_logList.push(arg);
 			}
+            
+            CONFIG::netDebug {
+                NetDebug.LOG.apply(null, arg);
+            }
 			
 			if(enableTrace)
 			{
@@ -84,6 +89,10 @@ package com.gameClient.log
 		}
 		public static function addError(...arg):void
 		{
+            arg.unshift("[Error]");
+            CONFIG::netDebug {
+                NetDebug.LOG.apply(null, arg);
+            }
 			trace("ERROR: " + arg);
 		}
 		
@@ -132,6 +141,9 @@ package com.gameClient.log
 				str += String(obj) + " ";
 			}
 			
+            CONFIG::netDebug {
+                NetDebug.LOG.apply(null, arg);
+            }
 			if(enableTrace)
 			{
 				trace(arg/*,new Date().toString()*/);
