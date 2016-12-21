@@ -1,7 +1,5 @@
 package com.rpgGame.app.sender
 {
-	import com.rpgGame.netData.client.bean.CustomTaginfo;
-	import com.rpgGame.netData.client.message.ReqClientCustomTagSetMessage;
 	import com.rpgGame.netData.login.message.ReqHeartMessage;
 	
 	import flash.utils.ByteArray;

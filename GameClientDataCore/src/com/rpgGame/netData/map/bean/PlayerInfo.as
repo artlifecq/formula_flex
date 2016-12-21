@@ -23,11 +23,8 @@ package com.rpgGame.netData.map.bean{
 		//角色名字
 		private var _name: String;
 		
-		//角色所在X
-		private var _x: int;
-		
-		//角色所在Y
-		private var _y: int;
+		//玩家所在位置
+		private var _position: com.rpgGame.netData.structs.Position;
 		
 		//人物面对方向
 		private var _dir: int;
@@ -68,10 +65,8 @@ package com.rpgGame.netData.map.bean{
 			writeLong(_personId);
 			//角色名字
 			writeString(_name);
-			//角色所在X
-			writeShort(_x);
-			//角色所在Y
-			writeShort(_y);
+			//玩家所在位置
+			writeBean(_position);
 			//人物面对方向
 			writeByte(_dir);
 			//玩家性别 1男 2女
@@ -111,10 +106,8 @@ package com.rpgGame.netData.map.bean{
 			_personId = readLong();
 			//角色名字
 			_name = readString();
-			//角色所在X
-			_x = readShort();
-			//角色所在Y
-			_y = readShort();
+			//玩家所在位置
+			_position = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
 			//人物面对方向
 			_dir = readByte();
 			//玩家性别 1男 2女
@@ -177,33 +170,18 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * get 角色所在X
+		 * get 玩家所在位置
 		 * @return 
 		 */
-		public function get x(): int{
-			return _x;
+		public function get position(): com.rpgGame.netData.structs.Position{
+			return _position;
 		}
 		
 		/**
-		 * set 角色所在X
+		 * set 玩家所在位置
 		 */
-		public function set x(value: int): void{
-			this._x = value;
-		}
-		
-		/**
-		 * get 角色所在Y
-		 * @return 
-		 */
-		public function get y(): int{
-			return _y;
-		}
-		
-		/**
-		 * set 角色所在Y
-		 */
-		public function set y(value: int): void{
-			this._y = value;
+		public function set position(value: com.rpgGame.netData.structs.Position): void{
+			this._position = value;
 		}
 		
 		/**

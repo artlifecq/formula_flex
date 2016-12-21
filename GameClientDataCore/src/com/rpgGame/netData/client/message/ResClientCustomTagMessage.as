@@ -9,19 +9,19 @@ package com.rpgGame.netData.client.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * å‘é€å®¢æˆ·ç«¯è‡ªå®šä¹‰æ ‡è®°
+	 * ·¢ËÍ¿Í»§¶Ë×Ô¶¨Òå±ê¼Ç
 	 */
 	public class ResClientCustomTagMessage extends Message {
 	
-		//è‡ªå®šä¹‰æ ‡è®°åˆ—è¡¨
+		//×Ô¶¨Òå±ê¼ÇÁĞ±í
 		private var _CustomTaginfos: Vector.<CustomTaginfo> = new Vector.<CustomTaginfo>();
 		
 		/**
-		 * å†™å…¥å­—èŠ‚ç¼“å­˜
+		 * Ğ´Èë×Ö½Ú»º´æ
 		 */
 		override protected function writing(): Boolean{
 			var i: int = 0;
-			//è‡ªå®šä¹‰æ ‡è®°åˆ—è¡¨
+			//×Ô¶¨Òå±ê¼ÇÁĞ±í
 			writeShort(_CustomTaginfos.length);
 			for (i = 0; i < _CustomTaginfos.length; i++) {
 				writeBean(_CustomTaginfos[i]);
@@ -30,11 +30,11 @@ package com.rpgGame.netData.client.message{
 		}
 		
 		/**
-		 * è¯»å–å­—èŠ‚ç¼“å­˜
+		 * ¶ÁÈ¡×Ö½Ú»º´æ
 		 */
 		override protected function reading(): Boolean{
 			var i: int = 0;
-			//è‡ªå®šä¹‰æ ‡è®°åˆ—è¡¨
+			//×Ô¶¨Òå±ê¼ÇÁĞ±í
 			var CustomTaginfos_length : int = readShort();
 			for (i = 0; i < CustomTaginfos_length; i++) {
 				_CustomTaginfos[i] = readBean(CustomTaginfo) as CustomTaginfo;
@@ -51,7 +51,7 @@ package com.rpgGame.netData.client.message{
 		}
 		
 		/**
-		 * get è‡ªå®šä¹‰æ ‡è®°åˆ—è¡¨
+		 * get ×Ô¶¨Òå±ê¼ÇÁĞ±í
 		 * @return 
 		 */
 		public function get CustomTaginfos(): Vector.<CustomTaginfo>{
@@ -59,7 +59,7 @@ package com.rpgGame.netData.client.message{
 		}
 		
 		/**
-		 * set è‡ªå®šä¹‰æ ‡è®°åˆ—è¡¨
+		 * set ×Ô¶¨Òå±ê¼ÇÁĞ±í
 		 */
 		public function set CustomTaginfos(value: Vector.<CustomTaginfo>): void{
 			this._CustomTaginfos = value;

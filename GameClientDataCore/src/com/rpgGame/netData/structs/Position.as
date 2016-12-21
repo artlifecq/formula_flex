@@ -58,9 +58,9 @@ package com.rpgGame.netData.structs{
 		 */
 		override protected function writing(): Boolean{
 			//X
-			writeShort(_x);
+			writeShort(x);
 			//Y
-			writeShort(_y);
+			writeShort(y);
 			return true;
 		}
 		
@@ -69,9 +69,9 @@ package com.rpgGame.netData.structs{
 		 */
 		override protected function reading(): Boolean{
 			//X
-			_x = readShort();
+			x = readShort();
 			//Y
-			_y = readShort();
+			y = readShort();
 			return true;
 		}
 		
@@ -95,7 +95,7 @@ package com.rpgGame.netData.structs{
 		 * @return 
 		 */
 		public function get y(): int{
-			return _y;
+			return -_y;
 		}
 		
 		/**

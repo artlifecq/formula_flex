@@ -8,35 +8,35 @@ package com.rpgGame.netData.client.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 琚涪寮冪殑娑堟伅
+	 * 被丢弃的消息
 	 */
 	public class ResClientMessageMessage extends Message {
 	
-		//娑堟伅id
+		//消息id
 		private var _msgid: int;
 		
-		//娑堟伅鍐呭
+		//消息内容
 		private var _context: String;
 		
 		
 		/**
-		 * 鍐欏叆瀛楄妭缂撳瓨
+		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//娑堟伅id
+			//消息id
 			writeInt(_msgid);
-			//娑堟伅鍐呭
+			//消息内容
 			writeString(_context);
 			return true;
 		}
 		
 		/**
-		 * 璇诲彇瀛楄妭缂撳瓨
+		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//娑堟伅id
+			//消息id
 			_msgid = readInt();
-			//娑堟伅鍐呭
+			//消息内容
 			_context = readString();
 			return true;
 		}
@@ -50,7 +50,7 @@ package com.rpgGame.netData.client.message{
 		}
 		
 		/**
-		 * get 娑堟伅id
+		 * get 消息id
 		 * @return 
 		 */
 		public function get msgid(): int{
@@ -58,14 +58,14 @@ package com.rpgGame.netData.client.message{
 		}
 		
 		/**
-		 * set 娑堟伅id
+		 * set 消息id
 		 */
 		public function set msgid(value: int): void{
 			this._msgid = value;
 		}
 		
 		/**
-		 * get 娑堟伅鍐呭
+		 * get 消息内容
 		 * @return 
 		 */
 		public function get context(): String{
@@ -73,7 +73,7 @@ package com.rpgGame.netData.client.message{
 		}
 		
 		/**
-		 * set 娑堟伅鍐呭
+		 * set 消息内容
 		 */
 		public function set context(value: String): void{
 			this._context = value;

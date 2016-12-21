@@ -50,7 +50,7 @@ package com.client.cmdlistener
 			SocketConnection.addCmdListener(100102, RecvLoginSuccessMessage);
 			SocketConnection.addCmdListener(100101, RecvCreateCharacterMessage);
 			SocketConnection.addCmdListener(100104, RecvErrorMessage);
-			SocketConnection.addCmdListener(100106, RecvHeartMessage);
+//			SocketConnection.addCmdListener(100106, RecvHeartMessage);
 			SocketConnection.addCmdListener(103101, RecvMyPlayerInfoMessage);
 		}
 		

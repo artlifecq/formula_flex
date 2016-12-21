@@ -165,7 +165,7 @@ package com.client.process
 			}
 			else
 			{
-				HeartSender.start();
+//				HeartSender.start();
 				LoginCmdListener.start();
 				sendLogin();
 			}

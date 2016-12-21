@@ -9,28 +9,28 @@ package com.rpgGame.netData.client.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * è¯·æ±‚è®¾ç½®å®¢æˆ·ç«¯è‡ªå®šä¹‰æ ‡è®°
+	 * ÇëÇóÉèÖÃ¿Í»§¶Ë×Ô¶¨Òå±ê¼Ç
 	 */
 	public class ReqClientCustomTagSetMessage extends Message {
 	
-		//å®¢æˆ·ç«¯è®¾å®šå†…å®¹
+		//¿Í»§¶ËÉè¶¨ÄÚÈİ
 		private var _customTaginfo: CustomTaginfo;
 		
 		
 		/**
-		 * å†™å…¥å­—èŠ‚ç¼“å­˜
+		 * Ğ´Èë×Ö½Ú»º´æ
 		 */
 		override protected function writing(): Boolean{
-			//å®¢æˆ·ç«¯è®¾å®šå†…å®¹
+			//¿Í»§¶ËÉè¶¨ÄÚÈİ
 			writeBean(_customTaginfo);
 			return true;
 		}
 		
 		/**
-		 * è¯»å–å­—èŠ‚ç¼“å­˜
+		 * ¶ÁÈ¡×Ö½Ú»º´æ
 		 */
 		override protected function reading(): Boolean{
-			//å®¢æˆ·ç«¯è®¾å®šå†…å®¹
+			//¿Í»§¶ËÉè¶¨ÄÚÈİ
 			_customTaginfo = readBean(CustomTaginfo) as CustomTaginfo;
 			return true;
 		}
@@ -44,7 +44,7 @@ package com.rpgGame.netData.client.message{
 		}
 		
 		/**
-		 * get å®¢æˆ·ç«¯è®¾å®šå†…å®¹
+		 * get ¿Í»§¶ËÉè¶¨ÄÚÈİ
 		 * @return 
 		 */
 		public function get customTaginfo(): CustomTaginfo{
@@ -52,7 +52,7 @@ package com.rpgGame.netData.client.message{
 		}
 		
 		/**
-		 * set å®¢æˆ·ç«¯è®¾å®šå†…å®¹
+		 * set ¿Í»§¶ËÉè¶¨ÄÚÈİ
 		 */
 		public function set customTaginfo(value: CustomTaginfo): void{
 			this._customTaginfo = value;

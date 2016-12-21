@@ -61,7 +61,7 @@ package com.rpgGame.app.sender
 			{
 				pos3D = path[i];
 				
-				vec.push(Position.FromPoint(new Point(pos3D.x,-pos3D.z)));
+				vec.push(Position.FromPoint(new Point(pos3D.x,pos3D.z)));
 			}
 			
 			msg.positions = vec;

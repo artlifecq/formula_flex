@@ -1,4 +1,5 @@
 package com.rpgGame.netData.map.bean{
+	import com.rpgGame.netData.structs.Position;
 	
 	import org.game.netCore.data.long;
 	
@@ -33,11 +34,8 @@ package com.rpgGame.netData.map.bean{
 		//方向
 		private var _dir: int;
 		
-		//坐标X
-		private var _x: int;
-		
-		//坐标Y
-		private var _y: int;
+		//Npc所在位置
+		private var _position: com.rpgGame.netData.structs.Position;
 		
 		//NPC状态
 		private var _state: int;
@@ -58,10 +56,8 @@ package com.rpgGame.netData.map.bean{
 			writeString(_npcIcon);
 			//方向
 			writeByte(_dir);
-			//坐标X
-			writeShort(_x);
-			//坐标Y
-			writeShort(_y);
+			//Npc所在位置
+			writeBean(_position);
 			//NPC状态
 			writeByte(_state);
 			return true;
@@ -83,10 +79,8 @@ package com.rpgGame.netData.map.bean{
 			_npcIcon = readString();
 			//方向
 			_dir = readByte();
-			//坐标X
-			_x = readShort();
-			//坐标Y
-			_y = readShort();
+			//Npc所在位置
+			_position = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
 			//NPC状态
 			_state = readByte();
 			return true;
@@ -183,33 +177,18 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * get 坐标X
+		 * get Npc所在位置
 		 * @return 
 		 */
-		public function get x(): int{
-			return _x;
+		public function get position(): com.rpgGame.netData.structs.Position{
+			return _position;
 		}
 		
 		/**
-		 * set 坐标X
+		 * set Npc所在位置
 		 */
-		public function set x(value: int): void{
-			this._x = value;
-		}
-		
-		/**
-		 * get 坐标Y
-		 * @return 
-		 */
-		public function get y(): int{
-			return _y;
-		}
-		
-		/**
-		 * set 坐标Y
-		 */
-		public function set y(value: int): void{
-			this._y = value;
+		public function set position(value: com.rpgGame.netData.structs.Position): void{
+			this._position = value;
 		}
 		
 		/**
