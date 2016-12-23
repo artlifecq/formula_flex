@@ -10,13 +10,15 @@ package com.rpgGame.coreData.clientConfig
 	* @author NEIL
 	* 
 	*/
-	public class Q_map
+	public class ClientScene
 	{
+		 /**  地图ID */
+		public var q_map_id:uint;
+		 /**  地图中文名 */
+		public var name:String;
 		 /**  地图中文名 */
 		public var q_map_name:String;
-		 /**  地图ID */
-		public var q_map_id:int;
-		 /**  地图资源路径 */
+		 /**  地图名称资源 */
 		public var q_mapres:String;
 		 /**  地图宽度 */
 		public var q_map_width:int;
@@ -26,16 +28,12 @@ package com.rpgGame.coreData.clientConfig
 		public var q_map_min_level:int;
 		 /**  进入等级上限 */
 		public var q_map_max_level:int;
-		 /**  是否安全区(0战斗区域,1安全区域) */
-		public var q_map_safe:int;
 		 /**  是否可打坐(0不可打坐,1可打坐) */
 		public var q_map_sit:int;
 		 /**  是否可跳跃(0不可跳跃,1可跳跃) */
 		public var q_map_jump:int;
 		 /**  是否可骑乘(0不可骑乘,1可骑乘) */
 		public var q_map_ride:int;
-		 /**  是否可展示坐骑(0不允许,1允许) */
-		public var q_map_show:int;
 		 /**  被PK死亡后是否给予和平保护BUFF（0给予，1不给予） */
 		public var q_map_buff:int;
 		 /**  等级差距过大是否可PK（0可PK，1不可PK） */
