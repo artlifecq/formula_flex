@@ -1,28 +1,39 @@
 package com.rpgGame.app.manager.shell
 {
+    import com.game.engine2D.Scene;
+    import com.game.engine3D.core.AreaMap;
     import com.game.engine3D.manager.Stage3DLayerManager;
     import com.game.engine3D.utils.StatsUtil;
-    import com.game.engine2D.Scene;
-    import com.gameClient.log.GameLog;
+    import com.game.engine3D.vo.AreaMapData;
     import com.game.mainCore.core.manager.LayerManager;
-    import gameEngine2D.NetDebug;
+    import com.gameClient.log.GameLog;
     import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
     import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
+    import com.rpgGame.app.manager.AreaMapManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.role.SceneRoleManager;
     import com.rpgGame.app.manager.scene.SceneManager;
     import com.rpgGame.app.manager.scene.SceneSwitchManager;
     import com.rpgGame.app.scene.SceneRole;
+    import com.rpgGame.core.utils.ConsoleDesk;
+    import com.rpgGame.coreData.cfg.AreaCfgData;
+    import com.rpgGame.coreData.cfg.TransCfgData;
+    import com.rpgGame.coreData.clientConfig.Q_map_transfer;
+    import com.rpgGame.coreData.enum.EnumAreaMapType;
     import com.rpgGame.coreData.info.buff.BuffInfo;
     import com.rpgGame.coreData.role.MonsterData;
     import com.rpgGame.coreData.role.RoleType;
+    import com.rpgGame.coreData.role.SceneTranportData;
     import com.rpgGame.coreData.type.SceneCharType;
-    import com.rpgGame.core.utils.ConsoleDesk;
     
+    import flash.display.BitmapData;
+    import flash.geom.Point;
     import flash.utils.Dictionary;
     
     import away3d.containers.PlanarContainer3D;
     import away3d.core.math.Plane3D;
+    
+    import gameEngine2D.NetDebug;
     
     import org.game.netCore.net_protobuff.ByteBuffer;
 
@@ -47,6 +58,9 @@ package com.rpgGame.app.manager.shell
             this._funcs["hide".toLowerCase()] = this.hide;
             this._funcs["status".toLowerCase()] = this.status;
             this._funcs["addLog".toLowerCase()] = this.addLog;
+            this._funcs["showTrans".toLowerCase()] = this.showTrans;
+            this._funcs["addTrans".toLowerCase()] = this.addTrans;
+            this._funcs["showAreaFlag".toLowerCase()] = this.showAreaFlag;
         }
         
         private function help() : void {
@@ -119,22 +133,92 @@ package com.rpgGame.app.manager.shell
                 NetDebug.LOG.apply(null, args);
             }
         }
-       
-        private function handler(command : String, ...params) : void {
-            var func : Function = this._funcs[command.toLowerCase()];
-            if (null == func) {
-                return;
+
+        private function showTrans(sceneID : int) : void {
+            var trans : Vector.<Q_map_transfer> = TransCfgData.getTranBySceneID(sceneID);
+            if (null == trans) {
+                this.addLog("[ShowTrans] SceneID:", sceneID, " Trans is null");
+            } else {
+                for each(var tran : Q_map_transfer in trans) {
+                    var points : Vector.<Point> = AreaCfgData.getAreaPointsByID(tran.q_tran_source_area_id);
+                    var str : String = "[";
+                    for each(var p : Point in points) {
+                        str += "(" + p.x + "," + p.y + "),";
+                    }
+                    str += "]";
+                    this.addLog("[ShowTrans] ID:", sceneID,
+                        "[ID]:", tran.q_tran_id,
+                        "[Name]:", tran.q_name,
+                        "[SourceAreaID]:", tran.q_tran_source_area_id,
+                        "[DestAreaID]:", tran.q_tran_dest_area_id,
+                        "[ResDirection]:", tran.q_tran_res_direction,
+                        "[ResX]:", tran.q_tran_res_x,
+                        "[ResY]:", tran.q_tran_res_y,
+                        "[Point]:", str,
+                        "[SceneID]:", tran.q_map_id);
+                }
             }
-            try {
-                func.apply(this, params);
-            } catch(e) {
-                GameLog.addError(e);
+        }
+
+        private function addTrans(sceneID : int) : void {
+            var trans : Vector.<Q_map_transfer> = TransCfgData.getTranBySceneID(sceneID);
+            if (null == trans) {
+                this.addLog("[ShowTrans] SceneID:", sceneID, " Trans is null");
+            } else {
+                for each(var tran : Q_map_transfer in trans) {
+                    var tranData : SceneTranportData = new SceneTranportData(RoleType.TYPE_TRANPORT_NORMAL);
+                    tranData.id = tran.q_tran_id;
+                    tranData.name = "传送门";
+                    tranData.effectRes = tran.q_tran_res;
+                    tranData.x = tran.q_tran_res_x;
+                    tranData.y = tran.q_tran_res_y;
+                    tranData.offsetUp = 0;
+                    tranData.direction = tran.q_tran_res_direction;
+                    tranData.sizeScale = 1;
+                    //tranData.destScene = tran.q_tran_dest_area_id;
+                    tranData.showInSmallMapType = 0;
+                    tranData.polygon = new Vector.<Point>();
+                    tranData.polygon.push(new Point(tran.q_tran_res_x, tran.q_tran_res_y));
+                    SceneRoleManager.getInstance().createTranport(tranData);
+                }
+                AreaMapManager.updateTransportAreaMap();
             }
         }
         
-        public static function parse(content : String) : void {
+        private function showAreaFlag(x : int, y : int) : void {
+            var area : AreaMap = SceneManager.getScene().getAreaMap(EnumAreaMapType.OTHER_AREA);
+            var temp : AreaMapData = area.getFlag(x, y);
+            var color : uint = area.getColor(x, y);
+            var bitmapData : BitmapData = area.getBitmapData();
+            
+            this.addLog("[ShellManager] [showAreaFlag] areaMapData:" + temp + ", color:" + color);
+            var tt : String = "";
+            for (var i : int = 0, len : int = bitmapData.height; i < len; ++i) {
+                for (var j : int = 0, wlen : int = bitmapData.width; j < wlen; ++j) {
+                    tt += bitmapData.getPixel(i, j) + " ";
+                }
+                this.addLog("[ShellManager] [showAreaFlag] line:" + tt);
+                tt = "";
+            }
+        }
+      
+        private function handler(command : String, ...params) : Boolean {
+            var func : Function = this._funcs[command.toLowerCase()];
+            if (null == func) {
+                return false;
+            }
+            try {
+                func.apply(this, params);
+                return true;
+            } catch(e) {
+                GameLog.addError(e);
+            }
+            return false;
+        }
+        
+        public static function parse(content : String) : Boolean {
             var params : Array = content.split(" ");
-            _instance.handler.apply(_instance, params);
+            return _instance.handler.apply(_instance, params);
         }
     }
 }
