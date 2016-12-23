@@ -31,7 +31,7 @@ package gameEngine2D {
                 }
                 node = new LRUCacheNode();
                 CONFIG::netDebug {
-                    NetDebug.LOG("[LRUCache] [put] add Cache key:", key);
+                    //NetDebug.LOG("[LRUCache] [put] add Cache key:", key);
                 }
             }
             node.key = key;
@@ -50,7 +50,7 @@ package gameEngine2D {
                 return;
             }
             CONFIG::netDebug {
-                NetDebug.LOG("[LRUCache] [rmove] key:", key);
+                //NetDebug.LOG("[LRUCache] [rmove] key:", key);
             }
             node.value.dispose();
             if (null != node.prev) {
@@ -83,7 +83,7 @@ package gameEngine2D {
             if (null != this._tail) {
                 this._tail.value.dispose();
                 CONFIG::netDebug {
-                    NetDebug.LOG("[LRUCache] [rmoveTail] key:", this._tail.key);
+                    //NetDebug.LOG("[LRUCache] [rmoveTail] key:", this._tail.key);
                 }
                 if (null != this._tail.prev) {
                     this._tail.prev.next = null;
