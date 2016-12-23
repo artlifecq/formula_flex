@@ -10,6 +10,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.task.TaskInfoDecoder;
+	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientAreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientTriggerCfgData;
 	import com.rpgGame.coreData.clientConfig.ClientArea;
@@ -20,9 +21,11 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.lang.LangNoticeInfo;
 	import com.rpgGame.coreData.role.SceneTranportData;
 	import com.rpgGame.coreData.type.SceneCharType;
-
+	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
+	
+	import gameEngine2D.NetDebug;
 
 	/**
 	 *
@@ -60,12 +63,23 @@ package com.rpgGame.app.manager
 		{
 			var otherAreaMap : AreaMap = SceneManager.getScene().getAreaMap(EnumAreaMapType.OTHER_AREA);
 			var transportList : Array = SceneManager.getScene().getSceneObjsByType(SceneCharType.TRANS);
+            CONFIG::netDebug {
+                NetDebug.LOG("[AreaMapManager] [updateTransportAreaMap] len:" + transportList.length);
+            }
 			for each (var transRole : SceneRole in transportList)
 			{
 				var info : SceneTranportData = transRole.data as SceneTranportData;
 				var polygon : Vector.<Point> = info.polygon.slice();
 				var areaMapData : AreaMapData = new AreaMapData(polygon, AreaMapTypeEnum.TRANS, info.id, transRole);
-				otherAreaMap.addFlag(areaMapData);
+				var color : String = otherAreaMap.addFlag(areaMapData);
+                CONFIG::netDebug {
+                    var str : String = "[";
+                    for each(var p : Point in polygon) {
+                        str += "(" + p.x + "," + p.y + "),";
+                    }
+                    str += "]";
+                    NetDebug.LOG("[AreaMapManager] [updateTransportAreaMap] polgon:" + str + ", color:" + color);
+                }
 			}
 		}
 

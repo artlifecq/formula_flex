@@ -174,7 +174,7 @@ package com.rpgGame.app.process
 			completeProcess();
 
             CONFIG::netDebug {
-                NetDebug.init("192.168.56.101", 10000);
+                NetDebug.LOG("[StarGame] 开始游戏");
             }
 				
 			//buff测试，过段时间删除 

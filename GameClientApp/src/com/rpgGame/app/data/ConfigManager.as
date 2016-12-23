@@ -10,14 +10,13 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.ClientAreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientBuffCfgData;
 	import com.rpgGame.coreData.cfg.ClientDialogCfgData;
+	import com.rpgGame.coreData.cfg.ClientSceneCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneEffectCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneNpcCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneRoleCfgData;
 	import com.rpgGame.coreData.cfg.ClientTriggerCfgData;
 	import com.rpgGame.coreData.cfg.DaTiCfgData;
-	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.cfg.FriendCfgData;
-	import com.rpgGame.coreData.cfg.GCDCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSettingCfgData;
 	import com.rpgGame.coreData.cfg.GmConfig;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
@@ -34,6 +33,8 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.StatNameCfgData;
 	import com.rpgGame.coreData.cfg.TaxCfgData;
 	import com.rpgGame.coreData.cfg.TranportsDataManager;
+	import com.rpgGame.coreData.cfg.TransCfgData;
+	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
 	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
@@ -113,7 +114,7 @@ package com.rpgGame.app.data
 			//   以下为客户端专用表
 			//
 			///////////////////////////////////////////////////////////////////////
-//			ClientSceneCfgData.setup(dic[ConfigClassRegister.ClientScene]);
+			//ClientSceneCfgData.setup(dic[ConfigClassRegister.Q_map]);
 			ClientSceneNpcCfgData.setup(dic[ConfigClassRegister.ClientSceneNPC]);
 			ClientSceneEffectCfgData.setup(dic[ConfigClassRegister.ClientSceneEffect]);
 			ClientSceneRoleCfgData.setup(dic[ConfigClassRegister.ClientSceneRole]);
@@ -138,7 +139,7 @@ package com.rpgGame.app.data
 			
 			
 			EffectAnimationCfgData.setup(dic[ConfigClassRegister.EffectAnimation]);
-			FaceCfgData.setup(dic[ConfigClassRegister.FaceInfo]);
+//			FaceCfgData.setup(dic[ConfigClassRegister.FaceInfo]);
 //			GmLevelAddSpellPointData.setup(dic[ConfigClassRegister.GmLevelAddSpellPoint]);
 			StatNameCfgData.setup(dic[ConfigClassRegister.SpriteStatNameInfo]);
 //			EquipTypeNameCfgData.setup(dic[ConfigClassRegister.EquipTypeNameInfo]);
@@ -151,6 +152,7 @@ package com.rpgGame.app.data
 //			CrownPanelPagesCfgData.setup(dic[ConfigClassRegister.CrownPageInfo]);
 			ClientBuffCfgData.setUpHintTypeSet(dic[ConfigClassRegister.ClientBuff]);
 //			CountryUnionStatCfgData.setup(null); //待解决
+
 			
 			////////////////////////////////////////////////////////////////////////
 			//
@@ -159,6 +161,10 @@ package com.rpgGame.app.data
 			///////////////////////////////////////////////////////////////////////
 			//场景相关
 			MapDataManager.setSceneConfig(dic[ConfigClassRegister.Q_map]);
+            // 地图区域
+            AreaCfgData.setup(dic[ConfigClassRegister.Q_area]);
+            // 传送门
+            TransCfgData.setup(dic[ConfigClassRegister.Q_map_transfer]);
 			//怪物//NPC
 			MonsterDataManager.setMonsterConfig(dic[ConfigClassRegister.Q_monster]);//怪物总表
 			MonsterDataManager.setSceneAreaMonsterConfig(dic[ConfigClassRegister.Q_scene_monster_area]);//怪物刷新表
