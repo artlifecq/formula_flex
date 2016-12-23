@@ -21,9 +21,11 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.ClientSceneNpcCfgData;
 	import com.rpgGame.coreData.cfg.TranportsDataManager;
+	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.ClientSceneNPC;
+	import com.rpgGame.coreData.clientConfig.Q_map_transfer;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.info.collect.CollectObjcetInfo;
 	import com.rpgGame.coreData.role.MonsterData;
@@ -40,6 +42,8 @@ package com.rpgGame.app.manager.scene
 	import app.message.SceneTransportProto;
 	
 	import away3d.pathFinding.DistrictWithPath;
+	
+	import gameEngine2D.NetDebug;
 	
 	import org.client.mainCore.manager.EventManager;
 
@@ -371,15 +375,33 @@ package com.rpgGame.app.manager.scene
 		public static function generateSceneTransports() : void
 		{
 			var mapID : int = SceneSwitchManager.currentMapId;
-			var sceneCountry : int = MainRoleManager.actorInfo.sceneSequence;
-			var transportList : Vector.<SceneTransportProto> = TranportsDataManager.getSceneTransport(mapID, sceneCountry);
-			GameLog.add("生成传送门", transportList.length);
-			for each (var info : SceneTransportProto in transportList)
-			{
-				var tranportData : SceneTranportData = new SceneTranportData(RoleType.TYPE_TRANPORT_NORMAL);
-				tranportData.setProtocData(info);
-				SceneRoleManager.getInstance().createTranport(tranportData);
-			}
+			//var sceneCountry : int = MainRoleManager.actorInfo.sceneSequence;
+			//var transportList : Vector.<SceneTransportProto> = TranportsDataManager.getSceneTransport(mapID, sceneCountry);
+            var transportList : Vector.<Q_map_transfer> = TransCfgData.getTranBySceneID(mapID);
+			GameLog.add("[SceneManager] [generateSceneTransports]", "MapID:", mapID, ", transSize:", transportList.length);
+            for each(var info : Q_map_transfer in transportList) {
+                CONFIG::netDebug {
+                    NetDebug.LOG("[ShowTrans] ID:", mapID,
+                        "[ID]:", info.q_tran_id,
+                        "[Name]:", info.q_name,
+                        "[Res]:", info.q_tran_res,
+                        "[SourceAreaID]:", info.q_tran_source_area_id,
+                        "[DestAreaID]:", info.q_tran_dest_area_id,
+                        "[ResDirection]:", info.q_tran_res_direction,
+                        "[ResX]:", info.q_tran_res_x,
+                        "[ResY]:", info.q_tran_res_y,
+                        "[SceneID]:", info.q_map_id);
+                }
+                var tranportData : SceneTranportData = new SceneTranportData(RoleType.TYPE_TRANPORT_NORMAL);
+                tranportData.setConfigData(info);
+                SceneRoleManager.getInstance().createTranport(tranportData);
+            }
+			//for each (var info : SceneTransportProto in transportList)
+			//{
+			//	var tranportData : SceneTranportData = new SceneTranportData(RoleType.TYPE_TRANPORT_NORMAL);
+			//	tranportData.setProtocData(info);
+			//	SceneRoleManager.getInstance().createTranport(tranportData);
+			//}
 		}
 
 		/**

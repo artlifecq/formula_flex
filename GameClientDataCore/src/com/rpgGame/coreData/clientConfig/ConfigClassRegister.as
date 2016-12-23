@@ -22,6 +22,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const ClientBuff:String = "data.ClientBuff";
 		/**  客户端对话数据									 */
 		public static const ClientDialog:String = "data.ClientDialog";
+		/**  客户端的场景																																																		 */
+		public static const ClientScene:String = "data.ClientScene";
 		/**  客户端在场景中的特效						 */
 		public static const ClientSceneEffect:String = "data.ClientSceneEffect";
 		/**  客户端在场景中的NPC									 */
@@ -42,9 +44,11 @@ package com.rpgGame.coreData.clientConfig
 		public static const HintInfo:String = "data.HintInfo";
 		/**  每一种提示类型的配置				宽度	高度	最大宽度	项目宽度	位置X	位置Y																				 */
 		public static const HintTypeSetInfo:String = "data.HintTypeSetInfo";
+		/**  区域数据库					 */
+		public static const Q_area:String = "data.map.Q_area";
 		/**  							本列取消，安全区改为刷格方式				本列取消																																									 */
 		public static const Q_map:String = "data.map.Q_map";
-		/**  地图传送点数据库												 */
+		/**  地图传送点数据库											 */
 		public static const Q_map_transfer:String = "data.map.Q_map_transfer";
 		/**  场景音效配置信息					 */
 		public static const SceneSoundInfo:String = "data.map.SceneSoundInfo";
@@ -111,6 +115,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.ClientArea", com.rpgGame.coreData.clientConfig.ClientArea);
 			regClass("data.ClientBuff", com.rpgGame.coreData.clientConfig.ClientBuff);
 			regClass("data.ClientDialog", com.rpgGame.coreData.clientConfig.ClientDialog);
+			regClass("data.ClientScene", com.rpgGame.coreData.clientConfig.ClientScene);
 			regClass("data.ClientSceneEffect", com.rpgGame.coreData.clientConfig.ClientSceneEffect);
 			regClass("data.ClientSceneNPC", com.rpgGame.coreData.clientConfig.ClientSceneNPC);
 			regClass("data.ClientSceneRole", com.rpgGame.coreData.clientConfig.ClientSceneRole);
@@ -121,6 +126,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.GmInfo", com.rpgGame.coreData.clientConfig.GmInfo);
 			regClass("data.HintInfo", com.rpgGame.coreData.clientConfig.HintInfo);
 			regClass("data.HintTypeSetInfo", com.rpgGame.coreData.clientConfig.HintTypeSetInfo);
+			regClass("data.map.Q_area", com.rpgGame.coreData.clientConfig.Q_area);
 			regClass("data.map.Q_map", com.rpgGame.coreData.clientConfig.Q_map);
 			regClass("data.map.Q_map_transfer", com.rpgGame.coreData.clientConfig.Q_map_transfer);
 			regClass("data.map.SceneSoundInfo", com.rpgGame.coreData.clientConfig.SceneSoundInfo);

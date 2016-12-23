@@ -3,6 +3,7 @@ package com.rpgGame.app.cmdlistener
 	import com.game.engine3D.core.AreaMap;
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.AreaMapData;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.AreaMapManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
@@ -30,7 +31,9 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
 	import com.rpgGame.coreData.role.SceneTranportData;
 	import com.rpgGame.coreData.type.SceneCharType;
-
+	
+	import gameEngine2D.NetDebug;
+	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
 
@@ -81,20 +84,33 @@ package com.rpgGame.app.cmdlistener
 
 		private function mainCharMoveThroughHandler() : void
 		{
+            CONFIG::netDebug {
+                NetDebug.LOG("[RoleStateCmdListener] [mainCharMoveThroughHandler]");
+            }
 			var actor : SceneRole = MainRoleManager.actor;
 			if (!_otherAreaMap)
 				_otherAreaMap = SceneManager.getScene().getAreaMap(EnumAreaMapType.OTHER_AREA);
 			var areaMapData : AreaMapData = _otherAreaMap.getFlag(actor.x, actor.z);
 			var flagObj : Object = areaMapData ? areaMapData.data : null;
+            CONFIG::netDebug {
+                NetDebug.LOG("[RoleStateCmdListener] [mainCharMoveThroughHandler]" +
+                    "x:" + actor.x + ", z:" + actor.z + ", flagObj:" + flagObj);
+            }
 			if (flagObj is SceneRole)
 			{
 				if ((flagObj as SceneRole).type == SceneCharType.TRANS)
 				{
+                    CONFIG::netDebug {
+                        NetDebug.LOG("[RoleStateCmdListener] [mainCharMoveThroughHandler] [TRANS]");
+                    }
 					var trans : SceneRole = flagObj as SceneRole;
 					if (!trans.isInViewDistance)
 						return;
 					var tranportData : SceneTranportData = trans.data as SceneTranportData;
-					trace("传送门传送：" + tranportData.id);
+                    CONFIG::netDebug {
+                        NetDebug.LOG("[RoleStateCmdListener] [mainCharMoveThroughHandler] [TRANS] id:" + tranportData.id);
+                    }
+					GameLog.add("[RoleStateCmdListener] [mainCharMoveThroughHandler]" + tranportData.id);
 					switch (tranportData.type)
 					{
 						case RoleType.TYPE_TRANPORT_NORMAL:

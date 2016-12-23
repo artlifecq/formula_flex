@@ -14,24 +14,22 @@ package com.rpgGame.coreData.clientConfig
 	{
 		 /**  传送点编号 */
 		public var q_tran_id:int;
+		 /**  传送点名 */
+		public var q_name:String;
 		 /**  开始传送地图ID */
-		public var q_tran_from_map:int;
-		 /**  传送出发点坐标X */
-		public var q_tran_from_x:int;
-		 /**  传送出发点坐标Y */
-		public var q_tran_from_y:int;
-		 /**  触发范围半径(格子） */
-		public var q_tran_from_range:int;
-		 /**  传送至地图ID */
-		public var q_tran_to_map:int;
-		 /**  传送至坐标点x */
-		public var q_tran_to_x:int;
-		 /**  传送至坐标点y */
-		public var q_tran_to_y:int;
-		 /**  范围半径(格子） */
-		public var q_tran_to_range:int;
+		public var q_map_id:int;
+		 /**  传送源区域 */
+		public var q_tran_source_area_id:int;
+		 /**  传送目的地区域 */
+		public var q_tran_dest_area_id:int;
 		 /**  传送点造型资源编号 */
-		public var q_tran_icon:String;
+		public var q_tran_res:String;
+		 /**  传送点资源X坐标 */
+		public var q_tran_res_x:int;
+		 /**  传送点资源Y坐标 */
+		public var q_tran_res_y:int;
+		 /**  传送点资源方向 */
+		public var q_tran_res_direction:int;
 		 /**  是否隐藏传送点（1是隐藏，0是不隐藏） */
 		public var q_tran_hide:int;
 		 /**  地图名称描述（小地图TIPS，支持xml） */

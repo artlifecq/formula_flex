@@ -37,6 +37,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.coreData.lang.LangText;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RoleStateType;
+    import gameEngine2D.NetDebug;
 	
 	import flash.utils.getDefinitionByName;
 	
@@ -346,6 +347,10 @@ package com.rpgGame.app.manager.scene
 			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
 			MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
 			var mapID : int = MainRoleManager.actorInfo.mapID;
+            if (1 == mapID) {
+                mapID = 1001;
+                MainRoleManager.actorInfo.mapID = 1001;
+            }
 			_isChangeSceneComplete = false;
 			SocketConnection_protoBuffer.excuteAll();
 			InputManger.getInstance().closeOperate(); //关闭用户输入
@@ -353,8 +358,18 @@ package com.rpgGame.app.manager.scene
 			SceneManager.getScene().removeAllSceneObj();
 			TrusteeshipManager.getInstance().stopAll();
 			
+            CONFIG::netDebug {
+                NetDebug.LOG("[SceneSwitchManager] [ChangeMap] sceneID:" + currentMapId + ", mapID:" + mapID);
+            }
 			var currMapInfo : SceneData = MapDataManager.getMapInfo(currentMapId); //获取地图配置数据
 			var mapInfo : SceneData = MapDataManager.getMapInfo(mapID); //获取地图配置数据
+            CONFIG::netDebug {
+                if (null == mapInfo) {
+                    NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " config data not exists");
+                } else {
+                    NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " config data exists");
+                }
+            }
 			MapDataManager.currentScene = mapInfo;
 			if (mapInfo && currMapInfo && (mapInfo.map == currMapInfo.map))
 			{
@@ -370,11 +385,18 @@ package com.rpgGame.app.manager.scene
 				if (ClientConfig.isSingle)
 				{
 					var cfg : Q_map = ClientSceneCfgData.getSceneInfo(mapID);
-					if (cfg)
+                    CONFIG::netDebug {
+                        if (null == cfg) {
+                            NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " client scene config data not exists");
+                        } else {
+                            NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " client scene config data exists");
+                        }
+                    }
+					if (mapInfo)
 					{
 						MainRoleManager.actorInfo.x = 2700;
 						MainRoleManager.actorInfo.y = 1400;
-						_mapRes = cfg.q_mapres;
+						_mapRes = mapInfo.map;
 					}
 				}
 				else
@@ -393,6 +415,9 @@ package com.rpgGame.app.manager.scene
 					var mapUrl : String = ClientConfig.getMap(_mapRes);
 					var mapName : String = ClientConfig.getMapName(_mapRes);
 					var mapDataName : String = ClientConfig.getMapDataName();
+                    CONFIG::netDebug {
+                        NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " mapUrl:" + mapUrl + " mapName:" + mapName + " mapDataName:" + mapDataName);
+                    }
 					
 					if(isReal3D)
 					{
@@ -501,7 +526,7 @@ package com.rpgGame.app.manager.scene
 			SceneManager.generateClientSceneNpcs();
 			//SceneManager.generateSceneNpcs();//不再使用客户端生成，服务器方案已改！
 			SceneManager.generateSceneCollects();
-			//SceneManager.generateSceneTransports();
+			SceneManager.generateSceneTransports();
 			SceneManager.generateEventArea();
 		}
 

@@ -31,6 +31,8 @@ package com.rpgGame.app.state.role
 	import flash.geom.Vector3D;
 	import flash.utils.getTimer;
 	
+	import gameEngine2D.NetDebug;
+	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -140,6 +142,9 @@ package com.rpgGame.app.state.role
 		public static function doWalkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
 										   onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : Boolean
 		{
+            CONFIG::netDebug {
+                NetDebug.LOG("[RoleStateUtil] [doWalkToPos]");
+            }
 			if (!role || !role.usable)
 				return false;
 			var camouflageEntity : SceneRole = SceneRole(role.getCamouflageEntity());
@@ -210,6 +215,9 @@ package com.rpgGame.app.state.role
 
 		private static function onWalkReady(ref : WalkMoveStateReference) : void
 		{
+            CONFIG::netDebug {
+                NetDebug.LOG("[RoleStateUtil] [onWalkReady] MOVE_START");
+            }
 			updateRoleBaseWalkActionSpeed(ref.owner as SceneRole);
 			if ((ref.owner as SceneRole).isMainChar || (ref.owner as SceneRole).isMainCamouflage)
 			{
