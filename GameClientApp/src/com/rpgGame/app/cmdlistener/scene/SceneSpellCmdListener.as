@@ -20,6 +20,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
+	import com.rpgGame.netData.fight.message.ResAttackVentToClientMessage;
 	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
 	import com.rpgGame.netData.fight.message.ResFightFailedBroadcastMessage;
 	
@@ -49,6 +50,7 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(102105,onResFightFailedBroadcastMessage);
 			SocketConnection.addCmdListener(102101,onResFightBroadcastMessage);
 			SocketConnection.addCmdListener(102102,onResAttackResultMessage);
+			SocketConnection.addCmdListener(102107,onResAttackVentToClientMessage);
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			///////////////////////////
 			///////////////////////////  参考协议------
@@ -191,9 +193,10 @@ package com.rpgGame.app.cmdlistener.scene
 		private function onResFightBroadcastMessage(msg:ResFightBroadcastMessage):void
 		{
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
-			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg.skillModelId, msg, true);
+			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg.uid, msg, true);
 			ReleaseSpellHelper.releaseSpell(info);
 			effectCharAttribute(info);
+			
 			//			if (info.atkor && info.atkor.isMainChar)
 			//			{
 			//				GameLog.addShow("释放技能" + info.flySceneObjID + "效果：" + info.spellEffectID);
@@ -203,6 +206,14 @@ package com.rpgGame.app.cmdlistener.scene
 			//			{
 			//				BuffManager.addBuf(bInfo);
 			//			}			
+		}
+		
+		private function onResAttackVentToClientMessage(msg:ResAttackVentToClientMessage):void
+		{
+			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
+			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg.uid, msg, true);
+			ReleaseSpellHelper.releaseSpell(info);
+			effectCharAttribute(info);
 		}
 
 		/**

@@ -1,5 +1,6 @@
 package com.rpgGame.app.fight.spell
 {
+	import com.game.engine2D.config.SceneConfig;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.utils.PathFinderUtil;
@@ -26,6 +27,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.lang.LangNoticeInfo;
+	import com.rpgGame.coreData.role.BaseEntityData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
@@ -87,7 +89,7 @@ package com.rpgGame.app.fight.spell
 			if(!relateSpells)
 			{
 				GameLog.add("这个技能没有连招哦！！！");
-				return null;
+				return _caseSpell;
 			}
 			
 			if (_relateSpellIndex < 0)
@@ -363,7 +365,7 @@ package com.rpgGame.app.fight.spell
 				}
 				return CASE_STATE_FAIL;
 			}
-			var releaseRange : int = spellData.q_range_limit;
+			var releaseRange : int = spellData.q_range_limit * SceneConfig.TILE_HEIGHT;
 //			var hurtRange : int = spellData.activeSpell.hurtRange;
 			var targetServerID : long = null;
 			var targetID:Number = 0;
@@ -525,7 +527,7 @@ package com.rpgGame.app.fight.spell
 					var targetRadius : int = (targetRole.data as RoleData).bodyRadius; //处理半径
 					var keepSpacing : int = spellEffectData.keep_spacing;
 
-					targetServerID = targetRole.data.serverID;
+					targetServerID = (targetRole.data as BaseEntityData).serverID;
 					targetID = targetRole.id;
 					releaseTargetPos = new Point(targetRole.x, targetRole.z);
 					targetPos = new Point(selfPos.x, selfPos.y);

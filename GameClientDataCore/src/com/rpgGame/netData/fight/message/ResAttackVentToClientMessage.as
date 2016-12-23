@@ -1,4 +1,5 @@
 package com.rpgGame.netData.fight.message{
+	import com.rpgGame.netData.structs.Position;
 	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
@@ -22,14 +23,11 @@ package com.rpgGame.netData.fight.message{
 		//攻击朝向
 		private var _fightDirection: int;
 		
-		//攻击坐标x(格子坐标)
-		private var _x: int;
+		//目标点
+		private var _pos: com.rpgGame.netData.structs.Position;
 		
-		//攻击坐标y(格子坐标)
-		private var _y: int;
-		
-		//攻击特效(目前只有平砍有)
-		private var _effects: int;
+		//唯一ID
+		private var _uid: int;
 		
 		
 		/**
@@ -42,12 +40,10 @@ package com.rpgGame.netData.fight.message{
 			writeInt(_fightType);
 			//攻击朝向
 			writeByte(_fightDirection);
-			//攻击坐标x(格子坐标)
-			writeShort(_x);
-			//攻击坐标y(格子坐标)
-			writeShort(_y);
-			//攻击特效(目前只有平砍有)
-			writeByte(_effects);
+			//目标点
+			writeBean(_pos);
+			//唯一ID
+			writeInt(_uid);
 			return true;
 		}
 		
@@ -61,12 +57,10 @@ package com.rpgGame.netData.fight.message{
 			_fightType = readInt();
 			//攻击朝向
 			_fightDirection = readByte();
-			//攻击坐标x(格子坐标)
-			_x = readShort();
-			//攻击坐标y(格子坐标)
-			_y = readShort();
-			//攻击特效(目前只有平砍有)
-			_effects = readByte();
+			//目标点
+			_pos = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
+			//唯一ID
+			_uid = readInt();
 			return true;
 		}
 		
@@ -124,48 +118,33 @@ package com.rpgGame.netData.fight.message{
 		}
 		
 		/**
-		 * get 攻击坐标x(格子坐标)
+		 * get 目标点
 		 * @return 
 		 */
-		public function get x(): int{
-			return _x;
+		public function get pos(): com.rpgGame.netData.structs.Position{
+			return _pos;
 		}
 		
 		/**
-		 * set 攻击坐标x(格子坐标)
+		 * set 目标点
 		 */
-		public function set x(value: int): void{
-			this._x = value;
+		public function set pos(value: com.rpgGame.netData.structs.Position): void{
+			this._pos = value;
 		}
 		
 		/**
-		 * get 攻击坐标y(格子坐标)
+		 * get 唯一ID
 		 * @return 
 		 */
-		public function get y(): int{
-			return _y;
+		public function get uid(): int{
+			return _uid;
 		}
 		
 		/**
-		 * set 攻击坐标y(格子坐标)
+		 * set 唯一ID
 		 */
-		public function set y(value: int): void{
-			this._y = value;
-		}
-		
-		/**
-		 * get 攻击特效(目前只有平砍有)
-		 * @return 
-		 */
-		public function get effects(): int{
-			return _effects;
-		}
-		
-		/**
-		 * set 攻击特效(目前只有平砍有)
-		 */
-		public function set effects(value: int): void{
-			this._effects = value;
+		public function set uid(value: int): void{
+			this._uid = value;
 		}
 		
 	}

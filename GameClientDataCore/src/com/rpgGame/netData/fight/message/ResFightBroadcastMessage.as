@@ -25,6 +25,9 @@ package com.rpgGame.netData.fight.message{
 		//攻击目标
 		private var _fightTarget: long;
 		
+		//唯一ID
+		private var _uid: int;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -38,6 +41,8 @@ package com.rpgGame.netData.fight.message{
 			writeInt(_skillModelId);
 			//攻击目标
 			writeLong(_fightTarget);
+			//唯一ID
+			writeInt(_uid);
 			return true;
 		}
 		
@@ -53,6 +58,8 @@ package com.rpgGame.netData.fight.message{
 			_skillModelId = readInt();
 			//攻击目标
 			_fightTarget = readLong();
+			//唯一ID
+			_uid = readInt();
 			return true;
 		}
 		
@@ -122,6 +129,21 @@ package com.rpgGame.netData.fight.message{
 		 */
 		public function set fightTarget(value: long): void{
 			this._fightTarget = value;
+		}
+		
+		/**
+		 * get 唯一ID
+		 * @return 
+		 */
+		public function get uid(): int{
+			return _uid;
+		}
+		
+		/**
+		 * set 唯一ID
+		 */
+		public function set uid(value: int): void{
+			this._uid = value;
 		}
 		
 	}

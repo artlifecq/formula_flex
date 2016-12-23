@@ -1,10 +1,12 @@
 package com.game.engine3D.scene.layers
 {
 	import com.game.engine3D.core.GameScene3D;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.game.mainCore.libCore.log.ZLog;
 	
+	import flash.display.BlendMode;
 	import flash.utils.Dictionary;
 	
 	import away3d.containers.ObjectContainer3D;
@@ -441,8 +443,15 @@ package com.game.engine3D.scene.layers
 					if(baseObj.enableMask && _scene3D.sceneMapLayer.district)
 					{
 						var isInMask:Boolean = _scene3D.sceneMapLayer.district.isPointInMask(baseObj.graphicDis.position);
-						/*baseObj.blendMode = isInMask ? BlendMode.LAYER : BlendMode.NORMAL;
-						baseObj.alpha =  isInMask ? 0.5 : 1;*/
+						if(isInMask)
+						{
+							baseObj.blendMode = BlendMode.LAYER;
+							
+						}
+						else
+						{
+							baseObj.blendMode = BlendMode.NORMAL;
+						}
 					}
 				}
 				else

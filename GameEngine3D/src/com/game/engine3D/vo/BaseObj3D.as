@@ -213,7 +213,7 @@ package com.game.engine3D.vo
 			_alpha = value;
 		}
 		
-		protected var _blendMode:String = BlendMode.LAYER;
+		protected var _blendMode:String = BlendMode.NORMAL;
 		
 		public function get blendMode():String
 		{

@@ -114,6 +114,7 @@ package com.rpgGame.app.manager.fight
 			}
 			else if (role.type == SceneCharType.MONSTER || role.type == SceneCharType.LIANG_CANG)
 			{
+				modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;//因为我们没有国家，先这么写！！！
 				if (MainRoleManager.actorInfo.countryId != (role.data as MonsterData).countryId) //判断国战敌方己方怪物
 				{
 					modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
