@@ -2,7 +2,7 @@ package com.game.engine3D.core
 {
 	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.vo.AreaMapData;
-
+	
 	import flash.display.BitmapData;
 	import flash.display.Shape;
 	import flash.geom.Matrix;
@@ -41,10 +41,20 @@ package com.game.engine3D.core
 			_min = min;
 			_max = max;
 
-			_scaleX = _bitmapData.width / (_max.x - _min.x);
-			_scaleY = _bitmapData.height / (_max.z - _min.z);
-			_offsetX = _min.x;
-			_offsetY = _min.z;
+			if(GlobalConfig.use25DMap)
+			{
+				_scaleX = _bitmapData.width / (_max.x - _min.x);
+				_scaleY = _bitmapData.height / (_max.y - _min.y);
+				_offsetX = _min.x;
+				_offsetY = _min.y;
+			}
+			else
+			{
+				_scaleX = _bitmapData.width / (_max.x - _min.x);
+				_scaleY = _bitmapData.height / (_max.z - _min.z);
+				_offsetX = _min.x;
+				_offsetY = _min.z;
+			}
 		}
 
 		public function addFlag(areaMapData : AreaMapData) : void
