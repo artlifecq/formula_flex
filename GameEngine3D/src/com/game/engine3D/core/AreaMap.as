@@ -57,11 +57,14 @@ package com.game.engine3D.core
 			}
 		}
 
-		public function addFlag(areaMapData : AreaMapData) : void
+		public function addFlag(areaMapData : AreaMapData) : String
 		{
 			removeFlag(areaMapData.type, areaMapData.id);
 			if (areaMapData.vertexList)
 			{
+                CONFIG::netDebug {
+                    var rs : String = "point:[";
+                }
 				var r : uint = areaMapData.type << 16;
 				var gb : uint = areaMapData.id;
 				var color : uint = r | gb;
@@ -71,6 +74,9 @@ package com.game.engine3D.core
 				for (var i : int = 0; i < len; i++)
 				{
 					var point : Point = areaMapData.vertexList[i];
+                    CONFIG::netDebug {
+                        rs += "(" + point.x + "," + point.y + "),";
+                    }
 					if (i == 0)
 						_shape.graphics.moveTo(point.x - _offsetX, point.y - _offsetY);
 					else
@@ -81,8 +87,14 @@ package com.game.engine3D.core
 				matrix.scale(_scaleX, _scaleY);
 				_bitmapData.draw(_shape, matrix);
 				_dataMap[color] = areaMapData;
-				trace(GlobalConfig.DEBUG_HEAD + " " + "添加区域：" + "type:" + areaMapData.type + ",id:" + areaMapData.id + ",value:" + color);
-			}
+				trace(GlobalConfig.DEBUG_HEAD + " " + "addArea：" + "type:" + areaMapData.type + ",id:" + areaMapData.id + ",value:" + color);
+			    CONFIG::netDebug {
+                    rs += "] color:" + color + ", offX:" + _offsetX + ", offY:" + _offsetY + ", scaleX:" + _scaleX + ", scaleY:" + _scaleY;
+                    return rs;
+                }
+                return "";
+            }
+            return "";
 		}
 
 		public function getFlag(x : int, y : int) : AreaMapData
@@ -90,6 +102,10 @@ package com.game.engine3D.core
 			var color : uint = _bitmapData.getPixel((x - _offsetX) * _scaleX, (y - _offsetY) * _scaleY);
 			return _dataMap[color];
 		}
+        
+        public function getColor(x : int, y : int) : uint {
+            return _bitmapData.getPixel((x - _offsetX) * _scaleX, (y - _offsetY) * _scaleY);
+        }
 
 		public function removeFlag(type : uint, id : uint) : void
 		{
