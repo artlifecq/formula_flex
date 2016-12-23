@@ -94,7 +94,7 @@ package com.game.engine2D.scene.map.vo
                 return false;
             }
             CONFIG::netDebug {
-                NetDebug.LOG("[MapZone] ", "[load] ", "key:", this._key, " state:", STATE_DESC[this._state]);
+                //NetDebug.LOG("[MapZone] ", "[load] ", "key:", this._key, " state:", STATE_DESC[this._state]);
             }
             this._state = STATE_LOADING;
             this._completeHandler = cb;
@@ -117,7 +117,7 @@ package com.game.engine2D.scene.map.vo
                 return;
             }
             CONFIG::netDebug {
-                NetDebug.LOG("[MapZone] ", "[draw] ", "key:", this._key, " state:", STATE_DESC[this._state]);
+                //NetDebug.LOG("[MapZone] ", "[draw] ", "key:", this._key, " state:", STATE_DESC[this._state]);
             }
             this._state = STATE_DRAW;
             if (this._textureMaterial.texture) {
@@ -155,7 +155,7 @@ package com.game.engine2D.scene.map.vo
             }
             this._completeHandler = null;
             CONFIG::netDebug {
-                NetDebug.LOG("[MapZone] ", "[dispose] ", "key:", this._key, " state:", STATE_DESC[this._state]);
+                //NetDebug.LOG("[MapZone] ", "[dispose] ", "key:", this._key, " state:", STATE_DESC[this._state]);
             }
             this._state = STATE_CLEAR;
         }
@@ -172,7 +172,7 @@ package com.game.engine2D.scene.map.vo
                 return;
             }
             CONFIG::netDebug {
-                NetDebug.LOG("[MapZone] ", "[onLoaderComplete] ", "key:", this._key, " state:", STATE_DESC[this._state]);
+                //NetDebug.LOG("[MapZone] ", "[onLoaderComplete] ", "key:", this._key, " state:", STATE_DESC[this._state]);
             }
             this._state = STATE_LOADED;
             this._textureMaterial = MaterialUtils.getMaterialMapZoneByTexture(this._texture);
