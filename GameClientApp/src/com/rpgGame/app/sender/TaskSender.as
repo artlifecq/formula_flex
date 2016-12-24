@@ -54,9 +54,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqTaskCompleteReplyNpc(taskId : int, npcId : Number, prizeIndex : int = 0, answerIndex : int = 0) : void
 		{
-			if (ReqLockUtil.isReqLocked(TaskModuleMessages.C2S_TASK_REPLY_NPC_TASK))
-				return;
-			ReqLockUtil.lockReq(TaskModuleMessages.C2S_TASK_REPLY_NPC_TASK, 5000);
+//			if (ReqLockUtil.isReqLocked(TaskModuleMessages.C2S_TASK_REPLY_NPC_TASK))
+//				return;
+//			ReqLockUtil.lockReq(TaskModuleMessages.C2S_TASK_REPLY_NPC_TASK, 5000);
 
 			_bytes.clear();
 			_bytes.writeVarint32(taskId);
@@ -74,9 +74,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqTaskCompleteSentNpc(taskId : int) : void
 		{
-			if (ReqLockUtil.isReqLocked(TaskModuleMessages.C2S_COMPLETE_SENT_NPC))
-				return;
-			ReqLockUtil.lockReq(TaskModuleMessages.C2S_COMPLETE_SENT_NPC, 5000);
+//			if (ReqLockUtil.isReqLocked(TaskModuleMessages.C2S_COMPLETE_SENT_NPC))
+//				return;
+//			ReqLockUtil.lockReq(TaskModuleMessages.C2S_COMPLETE_SENT_NPC, 5000);
 
 			_bytes.clear();
 			_bytes.writeVarint32(taskId);
@@ -91,9 +91,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqTaskCompleteAreaSearch(taskId : int) : void
 		{
-			if (ReqLockUtil.isReqLocked(TaskModuleMessages.C2S_COMPLETE_AREA_SEARCH))
-				return;
-			ReqLockUtil.lockReq(TaskModuleMessages.C2S_COMPLETE_AREA_SEARCH, 5000);
+//			if (ReqLockUtil.isReqLocked(TaskModuleMessages.C2S_COMPLETE_AREA_SEARCH))
+//				return;
+//			ReqLockUtil.lockReq(TaskModuleMessages.C2S_COMPLETE_AREA_SEARCH, 5000);
 
 			_bytes.clear();
 			_bytes.writeVarint32(taskId);
@@ -109,9 +109,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqTaskCompleteClientTask(taskId : int, clientTaskType : int) : void
 		{
-			if (ReqLockUtil.isReqLocked(TaskModuleMessages.C2S_COMPLETE_CLIENT_TASK))
-				return;
-			ReqLockUtil.lockReq(TaskModuleMessages.C2S_COMPLETE_CLIENT_TASK, 5000);
+//			if (ReqLockUtil.isReqLocked(TaskModuleMessages.C2S_COMPLETE_CLIENT_TASK))
+//				return;
+//			ReqLockUtil.lockReq(TaskModuleMessages.C2S_COMPLETE_CLIENT_TASK, 5000);
 
 			_bytes.clear();
 			_bytes.writeVarint32(taskId);
@@ -250,9 +250,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqAcceptSentNpc(taskId : int, npcId : Number) : void
 		{
-			if (ReqLockUtil.isReqLocked(TaskModuleMessages.C2S_ACCEPT_SENT_NPC))
-				return;
-			ReqLockUtil.lockReq(TaskModuleMessages.C2S_ACCEPT_SENT_NPC, 5000);
+//			if (ReqLockUtil.isReqLocked(TaskModuleMessages.C2S_ACCEPT_SENT_NPC))
+//				return;
+//			ReqLockUtil.lockReq(TaskModuleMessages.C2S_ACCEPT_SENT_NPC, 5000);
 
 			_bytes.clear();
 			_bytes.writeVarint32(taskId);

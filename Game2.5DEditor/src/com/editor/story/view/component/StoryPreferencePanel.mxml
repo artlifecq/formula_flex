@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 width="100%" height="100%" xmlns:ui="com.editor.ui.*">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.cfg.ProjectConfig;
+			
+			import mx.events.FlexEvent;
+			
+			protected function group1_creationCompleteHandler(event : FlexEvent) : void
+			{
+				updateSetUp();
+			}
+			
+			public function updateSetUp() : void
+			{
+				if (storyCfgPathItem)
+					storyCfgPathItem.path = ProjectConfig.storyCfgPath;
+			}
+			
+			public function applyChanged() : void
+			{
+				if (storyCfgPathItem)
+					ProjectConfig.storyCfgPath = storyCfgPathItem.path;
+			}
+		]]>
+	</fx:Script>
+	<s:Group width="100%"
+			 height="100%">
+		<s:layout>
+			<s:VerticalLayout paddingTop="10"
+							  paddingLeft="30"/>
+		</s:layout>
+		<ui:BrowseForOpenItem id="storyCfgPathItem"
+							  title="剧情配置路径(S)："
+							  browseTile="请选择剧情配置文件"
+							  browseDesc="配置(*.txt)"
+							  browseExtension="*.txt;"/>
+	</s:Group>
+</s:Group>

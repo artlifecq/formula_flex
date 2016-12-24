@@ -328,7 +328,7 @@ package com.rpgGame.app.cmdlistener
 			else
 			{
 				NoticeManager.showNotify(LangBaZhenTu.DUNGEON_FAIL);
-				SceneSender.requestLeaveDungeon();
+//				SceneSender.requestLeaveDungeon();
 			}
 		}
 

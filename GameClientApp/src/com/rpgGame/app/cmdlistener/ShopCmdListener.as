@@ -56,7 +56,7 @@ package com.rpgGame.app.cmdlistener
 		 */
 		private function onOpenNpcShopSuccess(buffer:ByteBuffer):void
 		{
-			ReqLockUtil.unlockReq( ShopModuleMessages.C2S_OPEN_NPC_SHOP );
+//			ReqLockUtil.unlockReq( ShopModuleMessages.C2S_OPEN_NPC_SHOP );
 			
 			var bytes:ByteArray = new ByteArray();
 			buffer.readBytes(bytes);
@@ -115,7 +115,7 @@ package com.rpgGame.app.cmdlistener
 			
 			NoticeManager.showHint( EnumHintInfo.BUY_GOODS_SUCCESS, [ itemQualityColorName, shopItemBuyInfo.count, shopItemBuyInfo.cost + ShopType.getMoneyStrByType(shopItemBuyInfo.priceType)] );
 			
-			ReqLockUtil.unlockReq( ShopModuleMessages.C2S_BUY_SHOP_GOODS );
+//			ReqLockUtil.unlockReq( ShopModuleMessages.C2S_BUY_SHOP_GOODS );
 		}
 		
 		/**
@@ -199,7 +199,7 @@ package com.rpgGame.app.cmdlistener
 			
 			EventManager.dispatchEvent(ShopEvent.BUY_BACK_CHANGE );
 			
-			ReqLockUtil.unlockReq( ShopModuleMessages.C2S_BUY_BACK_GOODS );
+//			ReqLockUtil.unlockReq( ShopModuleMessages.C2S_BUY_BACK_GOODS );
 		}
 		
 		/**
@@ -317,7 +317,7 @@ package com.rpgGame.app.cmdlistener
 			
 			NoticeManager.showHint( EnumHintInfo.BUY_GOODS_SUCCESS, [ itemQualityColorName, shopItemBuyInfo.count, shopItemBuyInfo.cost + ShopType.getMoneyStrByType(shopItemBuyInfo.priceType)] );
 			
-			ReqLockUtil.unlockReq( ShopModuleMessages.C2S_BUY_JINZI_SHOP_GOODS );
+//			ReqLockUtil.unlockReq( ShopModuleMessages.C2S_BUY_JINZI_SHOP_GOODS );
 		}
 		
 		/**

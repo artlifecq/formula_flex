@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 次配置面板
+* @author L.L.M.Sunny
+* 创建时间：2015-6-17 上午10:30:12
+*
+-->
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="100%"
+		 height="100%"
+		 initialize="onInitialize()"
+		 creationComplete="onCreationComplete()">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.data.FuncTagInfo;
+			import com.editor.data.InternalTabelName;
+			import com.editor.enum.FeaturesType;
+			import com.editor.events.ConfigPanelEvent;
+			import com.editor.events.ResourcePanelEvent;
+			import com.editor.events.SpellFightEvent;
+			import com.editor.manager.DecorateEntitiesManager;
+			import com.editor.manager.FuncTagManager;
+			import com.editor.manager.TrailManager;
+
+			import mx.events.IndexChangedEvent;
+
+			import spark.components.NavigatorContent;
+
+			import org.client.mainCore.manager.EventManager;
+
+			private var _funcElements : Array;
+			private var _tagInfos : Array;
+			private var _configLists : Array;
+			private var _currStartIndex : int = 0;
+			private var _selectedInfo : FuncTagInfo;
+			private const tabContentStep : int = 5;
+
+			private function onInitialize() : void
+			{
+			}
+
+			private function onCreationComplete() : void
+			{
+				_funcElements = [];
+				_tagInfos = [];
+				_configLists = [];
+				onUpdateFuncTags();
+				EventManager.addEvent(ConfigPanelEvent.SELECTED_FUNC_TAG, onSelectedFuncTag);
+			}
+
+			private function getTagIndex(info : FuncTagInfo) : int
+			{
+				return _tagInfos.indexOf(info);
+			}
+
+			private function onUpdateFuncTags() : void
+			{
+				onSelectedFuncTag(FuncTagManager.getInstance().currSelectedFuncTag);
+			}
+
+			private function selectedTag(info : FuncTagInfo) : void
+			{
+				FuncTagManager.getInstance().currSelectedSubFuncTag = info;
+
+				if (info)
+				{
+					if (info.subFeatureType == FeaturesType.SCENE_TYPE || _selectedInfo.featureType == FeaturesType.SCENE_TYPE)
+					{
+						//SceneAreaManager.getInstance().areaMouseEnabled = true;
+						EventManager.dispatchEvent(ResourcePanelEvent.SELECTED_RESOURCE_TAB, "scene");
+					}
+					else
+					{
+						//SceneAreaManager.getInstance().areaMouseEnabled = false;
+					}
+
+					if (info.subFeatureType == FeaturesType.SPELL_TYPE || _selectedInfo.featureType == FeaturesType.SPELL_TYPE)
+					{
+						EventManager.dispatchEvent(ResourcePanelEvent.SELECTED_RESOURCE_TAB, "effect");
+					}
+					else
+					{
+						EventManager.dispatchEvent(SpellFightEvent.HIDE_ENEMY);
+					}
+
+					if (_selectedInfo.featureType == FeaturesType.DECORATE_TYPE)
+					{
+						DecorateEntitiesManager.getInstance().setMouseEnabledByFuncTag(_selectedInfo);
+
+					}
+					else if (info.subFeatureType == FeaturesType.DECORATE_TYPE)
+					{
+						DecorateEntitiesManager.getInstance().setMouseEnabledByFuncTag(info);
+					}
+					else
+					{
+						DecorateEntitiesManager.getInstance().setMouseEnabledByFuncTag(null);
+					}
+
+					if (_selectedInfo.featureType == FeaturesType.TRAIL_TYPE)
+					{
+						TrailManager.getInstance().setMouseEnabledByFuncTag(_selectedInfo);
+					}
+					else if (info.subFeatureType == FeaturesType.TRAIL_TYPE)
+					{
+						TrailManager.getInstance().setMouseEnabledByFuncTag(info);
+					}
+					else
+					{
+						TrailManager.getInstance().setMouseEnabledByFuncTag(null);
+					}
+				}
+			}
+
+			private function onSelectedFuncTag(selectedInfo : FuncTagInfo) : void
+			{
+				_selectedInfo = selectedInfo;
+				var configList : ConfigList;
+				var nc : NavigatorContent;
+				var info : FuncTagInfo;
+				_funcElements.length = 0;
+				_tagInfos.length = 0;
+				for each (configList in _configLists)
+				{
+					configList.destroy();
+				}
+				_configLists.length = 0;
+				_currStartIndex = 0;
+
+				if (_selectedInfo)
+				{
+					var infos : Array = _selectedInfo.correlationFuncTags;
+					if (_selectedInfo.featureType == FeaturesType.SCENE_TYPE)
+					{
+						info = new FuncTagInfo();
+						info.tabelName = InternalTabelName.MapDataConfigName;
+						info.funcTag = "地图数据";
+						infos = infos.concat(info);
+
+						info = new FuncTagInfo();
+						info.subFeatureType = FeaturesType.DECORATE_TYPE;
+						info.tabelName = InternalTabelName.MapDataAreaConfigName;
+						info.funcTag = "场景区域";
+						infos = infos.concat(info);
+
+						info = new FuncTagInfo();
+						info.tabelName = InternalTabelName.MapTimeOfTheDayConfigName;
+						info.funcTag = "场景天色";
+						infos = infos.concat(info);
+
+						info = new FuncTagInfo();
+						info.tabelName = InternalTabelName.MapCameraPropertyConfigName;
+						info.funcTag = "摄像机";
+						infos = infos.concat(info);
+					}
+					else if (_selectedInfo.featureType == FeaturesType.SPELL_TYPE)
+					{
+						info = new FuncTagInfo();
+						info.tabelName = InternalTabelName.EffectAnimationConfigName;
+						info.funcTag = "特效动画";
+						infos = infos.concat(info);
+					}
+
+					for each (info in infos)
+					{
+						if (!FeaturesType.isFeature(info.featureType))
+						{
+							nc = new NavigatorContent();
+							configList = new ConfigList();
+							configList.funcInfo = info;
+							nc.label = info.funcTag;
+							nc.addElement(configList);
+							_configLists.push(configList);
+							_funcElements.push(nc);
+							_tagInfos.push(info);
+						}
+					}
+				}
+
+				updateTabContents();
+			}
+
+			private function updateTabContents() : void
+			{
+				tabBar.removeAll();
+				var len : int = _currStartIndex + tabContentStep;
+				if (len > _funcElements.length)
+					len = _funcElements.length;
+				for (var i : int = _currStartIndex; i < len; i++)
+				{
+					var nc : NavigatorContent = _funcElements[i];
+					tabBar.addElement(nc);
+				}
+
+				var info : FuncTagInfo = _tagInfos[_currStartIndex];
+				if (info)
+					tabBar.selectedIndex = 0;
+				else
+					tabBar.selectedIndex = -1;
+				selectedTag(info);
+			}
+
+			private function tabnavigator1_changeHandler(event : IndexChangedEvent) : void
+			{
+				var info : FuncTagInfo = _tagInfos[_currStartIndex + tabBar.selectedIndex];
+				selectedTag(info);
+			}
+
+			private function btn_prev_clickHandler(event : MouseEvent) : void
+			{
+				if (_currStartIndex > 0)
+				{
+					_currStartIndex -= tabContentStep;
+					if (_currStartIndex < 0)
+						_currStartIndex = 0;
+					updateTabContents();
+				}
+			}
+
+			private function btn_next_clickHandler(event : MouseEvent) : void
+			{
+				if (_currStartIndex < _funcElements.length - tabContentStep)
+				{
+					_currStartIndex += tabContentStep;
+					if (_currStartIndex >= _funcElements.length)
+						_currStartIndex = _funcElements.length - 1;
+					updateTabContents();
+				}
+			}
+		]]>
+	</fx:Script>
+	<mx:TabNavigator id="tabBar"
+					 width="100%"
+					 height="100%"
+					 left="5"
+					 right="5"
+					 top="5"
+					 bottom="5"
+					 paddingTop="5"
+					 change="tabnavigator1_changeHandler(event)">
+	</mx:TabNavigator>
+	<s:Button x="333"
+			  y="5"
+			  width="30"
+			  height="20"
+			  label="&lt;"
+			  id="btn_prev"
+			  fontSize="14"
+			  fontFamily="SimSun"
+			  click="btn_prev_clickHandler(event)"/>
+	<s:Button x="363"
+			  y="5"
+			  width="30"
+			  height="20"
+			  label="&gt;"
+			  id="btn_next"
+			  fontSize="14"
+			  fontFamily="SimSun"
+			  click="btn_next_clickHandler(event)"/>
+</s:Group>

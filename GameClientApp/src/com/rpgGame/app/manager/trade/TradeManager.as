@@ -406,11 +406,11 @@ package com.rpgGame.app.manager.trade
 		
 		public static function replayInvite(player:Number,isAgree:Boolean):void
 		{
-			if(ReqLockUtil.isReqLocked(TradeModuleMessages.C2S_REPLY_TRADE_INVITE))
-			{
-				trace("刚刚回复了交易请求，必须等待服务器返回");
-				return;
-			}
+//			if(ReqLockUtil.isReqLocked(TradeModuleMessages.C2S_REPLY_TRADE_INVITE))
+//			{
+//				trace("刚刚回复了交易请求，必须等待服务器返回");
+//				return;
+//			}
 			if(!_beenInvites)
 				return;
 			_beenInvites.remove(player);
@@ -424,13 +424,13 @@ package com.rpgGame.app.manager.trade
 					EnumFunctionMessageBarIcoType.TRADE_TYPE
 				);
 			}
-			ReqLockUtil.lockReq(TradeModuleMessages.C2S_REPLY_TRADE_INVITE)
+//			ReqLockUtil.lockReq(TradeModuleMessages.C2S_REPLY_TRADE_INVITE)
 			TradeSender.replyTradeInvite(player,isAgree);
 		}
 		
 		public static function unlockReplayInvite():void
 		{
-			ReqLockUtil.unlockReq(TradeModuleMessages.C2S_REPLY_TRADE_INVITE)
+//			ReqLockUtil.unlockReq(TradeModuleMessages.C2S_REPLY_TRADE_INVITE)
 		}
 		
 		/**是否正在交易中，通过判断是否有目标来判断这个**/

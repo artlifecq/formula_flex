@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 浏览打开项
+* @author L.L.M.Sunny
+* 创建时间：2015-6-17 上午10:30:12
+*
+-->
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="100%"
+		 height="20">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.cfg.EditorConfig;
+			import com.editor.utils.FileUtil;
+			[Bindable]
+			public var title : String = "";
+			[Bindable]
+			public var browseTile : String = "";
+			[Bindable]
+			public var browseDesc : String = "";
+			[Bindable]
+			public var browseExtension : String = "";
+
+			private var _file : File;
+			public var onSelected : Function = null;
+
+			public function get path() : String
+			{
+				return pathText.text;
+			}
+
+			public function set path(value : String) : void
+			{
+				_file = null;
+				pathText.text = value;
+				if (pathText.text)
+				{
+					if (FileUtil.pathValid(pathText.text))
+						_file = new File(pathText.text);
+				}
+				pathText.setStyle("color", "0xcccccc");
+				if (!_file || !_file.exists)
+				{
+					pathText.setStyle("color", "0xff0000");
+					_file = new File(EditorConfig.WORKSPACE_PATH);
+					if (!_file || !_file.exists)
+						_file = File.documentsDirectory;
+				}
+			}
+
+			private function selectedHandler(e : Event) : void
+			{
+				pathText.text = _file.nativePath;
+				pathText.setStyle("color", "0xcccccc");
+				if (onSelected != null)
+					onSelected();
+			}
+
+			protected function button1_clickHandler(event : MouseEvent) : void
+			{
+				if (browseDesc == "dire" && browseExtension == "dire")
+					_file.browseForDirectory(browseTile);
+				else
+					_file.browseForOpen(browseTile, [new FileFilter(browseDesc, browseExtension)]);
+				_file.addEventListener(Event.SELECT, selectedHandler);
+			}
+
+			private function pathTextChangeHandler() : void
+			{
+				_file = null;
+				if (pathText.text)
+				{
+					if (FileUtil.pathValid(pathText.text))
+						_file = new File(pathText.text);
+				}
+				pathText.setStyle("color", "0xcccccc");
+				if (!_file || !_file.exists)
+				{
+					pathText.setStyle("color", "0xff0000");
+					_file = new File(EditorConfig.WORKSPACE_PATH);
+					if (!_file || !_file.exists)
+						_file = File.documentsDirectory;
+				}
+				if (onSelected != null)
+					onSelected();
+			}
+
+			protected function pathText_keyDownHandler(event : KeyboardEvent) : void
+			{
+				if (event.keyCode == 13)
+				{
+					pathTextChangeHandler();
+				}
+			}
+
+			protected function pathText_focusOutHandler(event : FocusEvent) : void
+			{
+				pathTextChangeHandler();
+			}
+
+			public function setInputWidth(width : int) : void
+			{
+				pathText.width = width;
+				btn.x = width + 118;
+			}
+		]]>
+	</fx:Script>
+
+	<s:Label x="0"
+			 y="0"
+			 chromeColor="#FFFFFF"
+			 fontWeight="normal"
+			 fontFamily="SimSun"
+			 text="{title}"/>
+	<s:TextInput id="pathText"
+				 x="110"
+				 y="-5"
+				 width="290"
+				 fontFamily="SimSun"
+				 chromeColor="#FFFFFF"
+				 contentBackgroundColor="#444444"
+				 editable="true"
+				 keyDown="pathText_keyDownHandler(event)"
+				 focusOut="pathText_focusOutHandler(event)"/>
+	<s:Button id="btn"
+			  x="408"
+			  y="-4"
+			  fontFamily="SimSun"
+			  label="浏览(B)..."
+			  click="button1_clickHandler(event)"/>
+</s:Group>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 语言配置列表
+* @author L.L.M.Sunny
+* 创建时间：2015-12-03 下午2:10:12
+*
+-->
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="100%"
+		 height="100%"
+		 initialize="onInitialize()"
+		 creationComplete="onCreationComplete()">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.cfg.ConfigData;
+			import com.editor.cfg.LangConfig;
+			import com.editor.data.ConfigDesc;
+			import com.editor.manager.DataStructuresManager;
+			import com.editor.manager.LangConfigManager;
+			import com.editor.utils.FileUtil;
+
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.DataGridEvent;
+
+			[Bindable]
+			/** 配置数据 **/
+			private var _cfgItems : ArrayCollection;
+			private var _verPos : Number;
+			private var _searchKey : String = "";
+			private var _configDesc : ConfigDesc;
+
+			private function onInitialize() : void
+			{
+			}
+
+			private function onCreationComplete() : void
+			{
+				_verPos = 0;
+				_cfgItems = new ArrayCollection();
+				pullData();
+			}
+
+			public function destroy() : void
+			{
+				_configDesc = null;
+				_cfgItems = null;
+			}
+
+			public function set configDesc(value : ConfigDesc) : void
+			{
+				_configDesc = value;
+				pullData();
+			}
+
+			public function pullData() : void
+			{
+				if (!_cfgItems)
+					return;
+				_verPos = dataGrid.verticalScrollPosition;
+
+				var searchFields : Array = ["key", "value"];
+				var cacheDic : Dictionary = DataStructuresManager.getInstance().getCorrelationCacheDatas(_configDesc, _searchKey, searchFields);
+				var datas : Array = FileUtil.dictToArray(cacheDic);
+				FileUtil.sortDatas(datas);
+
+				_cfgItems.source = datas;
+				dataGrid.dataProvider = _cfgItems;
+
+				dataGrid.selectedItem = _configDesc.selectedData;
+				var index : int = _cfgItems.getItemIndex(_configDesc.selectedData);
+				if (index > -1)
+					callLater(dataGrid.scrollToIndex, [index]);
+
+				//callLater(resetScollPos);
+			}
+
+			private function resetScollPos() : void
+			{
+				if (_verPos > dataGrid.maxVerticalScrollPosition)
+					_verPos = dataGrid.maxVerticalScrollPosition;
+
+				dataGrid.verticalScrollPosition = _verPos;
+			}
+
+			protected function data_selectionChangeHandler(event : MouseEvent) : void
+			{
+				var configData : LangConfig = dataGrid.selectedItem as LangConfig;
+				if (!configData)
+					return;
+				_configDesc.selectedData = configData;
+			}
+
+			private function btn_add_clickHandler(event : MouseEvent) : void
+			{
+				var datas : Array = LangConfigManager.getInstance().getCfgByFieldValue(_configDesc, "key", "UNNAMED");
+				if (datas.length == 0)
+				{
+					var cfg : LangConfig = ConfigData.create(_configDesc, null, null, LangConfig, true) as LangConfig;
+					cfg.mKey = "UNNAMED";
+					_configDesc.selectedData = cfg;
+					pullData();
+				}
+				else
+				{
+					Alert.show("已经存在一条未命名的语言！", "提示");
+				}
+			}
+
+			private function btn_del_clickHandler(event : MouseEvent) : void
+			{
+				var configData : LangConfig = dataGrid.selectedItem as LangConfig;
+				if (!configData)
+					return;
+				ConfigData.remove(_configDesc, configData.id);
+				pullData();
+			}
+
+			protected function button1_clickHandler(event : MouseEvent) : void
+			{
+				_searchKey = searchText.text;
+				pullData();
+			}
+
+			protected function dataGrid_itemEditEndHandler(event : DataGridEvent) : void
+			{
+				if (event.columnIndex == 0) //key
+				{
+					var configData : LangConfig = dataGrid.selectedItem as LangConfig;
+					callLater(updateDataProvider, [configData, configData.mKey]);
+				}
+			}
+
+			private function updateDataProvider(configData : LangConfig, orgKey : String) : void
+			{
+				if (!configData)
+					return;
+				var datas : Array = LangConfigManager.getInstance().getCfgByFieldValue(_configDesc, configData.majorKey, configData.mKey);
+				if (datas.length > 1)
+				{
+					configData.mKey = orgKey;
+					Alert.show("已经存在一条同名的语言！", "提示");
+				}
+				pullData();
+			}
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<s:TextInput id="searchText"
+				 x="10"
+				 y="2"
+				 width="200"
+				 chromeColor="#FFFFFF"
+				 contentBackgroundColor="#444444"
+				 fontFamily="SimSun">
+	</s:TextInput>
+	<s:Button x="220"
+			  y="2"
+			  label="搜索"
+			  fontFamily="SimSun"
+			  click="button1_clickHandler(event)"/>
+	<s:Button x="10"
+			  y="30"
+			  label="增加项"
+			  id="btn_add"
+			  fontFamily="SimSun"
+			  click="btn_add_clickHandler(event)"/>
+	<s:Button x="100"
+			  y="30"
+			  label="删除项"
+			  id="btn_del"
+			  fontFamily="SimSun"
+			  click="btn_del_clickHandler(event)"/>
+	<mx:DataGrid id="dataGrid"
+				 x="0"
+				 y="55"
+				 width="100%"
+				 height="100%"
+				 dataProvider="{_cfgItems}"
+				 click="data_selectionChangeHandler(event)"
+				 editable="true"
+				 itemEditEnd="dataGrid_itemEditEndHandler(event)">
+		<mx:columns>
+			<mx:DataGridColumn id="headerKey"
+							   headerText="key"
+							   dataField="key"/>
+			<mx:DataGridColumn id="headerValue"
+							   headerText="value"
+							   dataField="value"/>
+			<mx:DataGridColumn id="headerType"
+							   headerText="type"
+							   dataField="type"
+							   width="80"/>
+			<mx:DataGridColumn id="headerSceneType"
+							   headerText="sceneType"
+							   dataField="sceneType"
+							   width="80"/>
+		</mx:columns>
+	</mx:DataGrid>
+</s:Group>

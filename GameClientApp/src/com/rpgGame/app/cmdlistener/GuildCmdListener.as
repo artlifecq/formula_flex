@@ -586,7 +586,7 @@ package com.rpgGame.app.cmdlistener
 		
 		private function replyJOinReqSuccess(buffer:ByteBuffer):void
 		{
-			ReqLockUtil.unlockReq(GuildModuleMessages.C2S_REPLY_JOIN_REQUEST);
+//			ReqLockUtil.unlockReq(GuildModuleMessages.C2S_REPLY_JOIN_REQUEST);
 		}
 		/**
 		 * 返回本国帮派列表
@@ -652,7 +652,7 @@ package com.rpgGame.app.cmdlistener
 		{
 			var error : int = buffer.readVarint32();
 			NoticeManager.showNotify("replyJoinReqFail"+error);
-			ReqLockUtil.unlockReq(GuildModuleMessages.C2S_REPLY_JOIN_REQUEST);
+//			ReqLockUtil.unlockReq(GuildModuleMessages.C2S_REPLY_JOIN_REQUEST);
 		}
 		
 		private function otherJoinGuild(buffer:ByteBuffer):void
@@ -692,7 +692,7 @@ package com.rpgGame.app.cmdlistener
 		{
 			var error : int = buffer.readVarint32();
 			NoticeManager.showNotify("reqJoinFail"+error);
-			ReqLockUtil.unlockReq(GuildModuleMessages.C2S_REQUEST_JOIN);
+//			ReqLockUtil.unlockReq(GuildModuleMessages.C2S_REQUEST_JOIN);
 		}
 		/**
 		 * 请求失败,返回varint32错误码

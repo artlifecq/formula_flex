@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 全局设置配置窗口
+* @author L.L.M.Sunny
+* 创建时间：2015-12-29 上午10:30:12
+*
+-->
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="800"
+			   height="700"
+			   title="全局设置配置"
+			   fontFamily="SimSun"
+			   creationComplete="onCreationComplete()"
+			   initialize="onInitialize()"
+			   close="window1_closeHandler(event)"
+			   xmlns:ui="com.editor.ui.*">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.ctrl.AppMenu;
+			import com.editor.data.FuncTagInfo;
+			import com.editor.data.InternalTabelName;
+			import com.editor.manager.AppManager;
+
+			import mx.managers.PopUpManager;
+
+			private static var _window : GlobalSettingConfigView;
+
+			public static function open() : void
+			{
+				if (!_window)
+				{
+					_window = new GlobalSettingConfigView();
+					PopUpManager.addPopUp(_window, AppManager.getInstance().appRoot, false);
+					PopUpManager.centerPopUp(_window);
+					AppMenu.getInstance().toggleGlobalSettingConfigView.checked = true;
+				}
+				PopUpManager.bringToFront(_window);
+			}
+
+			public static function close() : void
+			{
+				if (_window)
+				{
+					_window.destroy();
+					PopUpManager.removePopUp(_window);
+					AppMenu.getInstance().toggleGlobalSettingConfigView.checked = false;
+				}
+				_window = null;
+			}
+
+			public static function get window() : GlobalSettingConfigView
+			{
+				return _window;
+			}
+
+			private function onInitialize() : void
+			{
+				visible = false;
+			}
+
+			private function window1_closeHandler(event : Event) : void
+			{
+				close();
+			}
+
+			private function onCreationComplete() : void
+			{
+				visible = true;
+				var info : FuncTagInfo = new FuncTagInfo();
+				info.tabelName = InternalTabelName.GlobalSettingConfigName;
+				configList.funcInfo = info;
+			}
+
+			public function destroy() : void
+			{
+				configList.destroy();
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<ui:ConfigList id="configList"
+				   width="100%"
+				   height="100%">
+	</ui:ConfigList>
+</s:TitleWindow>

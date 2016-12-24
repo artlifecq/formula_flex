@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 换装文件列表项
+* @author L.L.M.Sunny
+* 创建时间：2015-7-3 上午10:30:12
+*
+-->
+<s:NavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009"
+					xmlns:s="library://ns.adobe.com/flex/spark"
+					xmlns:mx="library://ns.adobe.com/flex/mx"
+					width="100%"
+					height="100%"
+					label="未命名"
+					elementAdd="navigatorcontent1_elementAddHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.cfg.AvatarFileResConfig;
+			import com.editor.cfg.ConfigData;
+			import com.editor.data.ConfigDesc;
+			import com.editor.data.InputType;
+			import com.editor.data.InternalTabelName;
+			import com.editor.data.TabelData;
+			import com.editor.events.AvatarFileListEvent;
+			import com.editor.events.ConfigListEvent;
+			import com.editor.manager.DataManager;
+			import com.editor.manager.DataStructuresManager;
+
+			import mx.collections.ArrayCollection;
+
+			import spark.events.ElementExistenceEvent;
+
+			import org.client.mainCore.manager.EventManager;
+
+
+			private var _avatarItems : ArrayCollection;
+
+			protected function data_avatar_selectionChangeHandler(event : MouseEvent) : void
+			{
+				var tabel : TabelData = DataStructuresManager.getInstance().getTabel(InternalTabelName.AvatarFileResConfigName);
+				var configDesc : ConfigDesc = tabel ? tabel.getConfigDesc() : null;
+				if (!configDesc)
+					return;
+
+				var avatarCfg : AvatarFileResConfig = data_avatar.selectedItem as AvatarFileResConfig;
+				if (!avatarCfg)
+					return;
+
+				EventManager.dispatchEvent(ConfigListEvent.CONFIG_SELECTED, avatarCfg);
+
+				//换装资源配置选择
+				var resTabel : TabelData = DataStructuresManager.getInstance().getTabel(InternalTabelName.AvatarResConfigName);
+				if (resTabel)
+				{
+					var cfgDatas : Array = ConfigData.getCfgByFieldValue(resTabel.desc, resTabel.desc.majorKey, avatarCfg.mRes);
+					if (cfgDatas && cfgDatas.length > 0)
+					{
+						DataManager.getInstance().onSelectedConfigData(cfgDatas[0]);
+					}
+				}
+
+				RoleActionView.open();
+				if (RoleActionView.window)
+				{
+					RoleActionView.window.updateAvatarData();
+				}
+			}
+
+			public function destroy() : void
+			{
+				_avatarItems = null;
+			}
+
+			public function setAvatarItems(items : ArrayCollection) : void
+			{
+				_avatarItems = items;
+				if (data_avatar)
+				{
+					data_avatar.dataProvider = _avatarItems;
+					var tabel : TabelData = DataStructuresManager.getInstance().getTabel(InternalTabelName.AvatarFileResConfigName);
+					var configDesc : ConfigDesc = tabel ? tabel.getConfigDesc() : null;
+					if (!configDesc)
+						return;
+					data_avatar.selectedItem = configDesc.selectedData;
+					var index : int = _avatarItems.getItemIndex(configDesc.selectedData);
+					if (index > -1)
+						callLater(data_avatar.scrollToIndex, [index]);
+				}
+			}
+
+			public function getAvatarItems() : ArrayCollection
+			{
+				return _avatarItems;
+			}
+
+			protected function navigatorcontent1_elementAddHandler(event : ElementExistenceEvent) : void
+			{
+				var tabel : TabelData = DataStructuresManager.getInstance().getTabel(InternalTabelName.AvatarFileResConfigName);
+				var configDesc : ConfigDesc = tabel ? tabel.getConfigDesc() : null;
+				if (!configDesc)
+					return;
+				data_avatar.selectedItem = configDesc.selectedData;
+				var index : int = _avatarItems.getItemIndex(configDesc.selectedData);
+				if (index > -1)
+					callLater(data_avatar.scrollToIndex, [index]);
+			}
+
+			protected function data_avatar_doubleClickHandler(event : MouseEvent) : void
+			{
+				var avatarObj : AvatarFileResConfig = data_avatar.selectedItem as AvatarFileResConfig;
+				if (!avatarObj)
+					return;
+				var window : ConfigEditView = ConfigEditView.open("换装资源设置", avatarObj);
+				var inputTypes : Dictionary = new Dictionary();
+				inputTypes["res"] = new InputType("string", false);
+				window.setData(avatarObj, onPullData, onEditViewDragDropCallback, inputTypes, null, onOkCallback);
+			}
+
+			private function onEditViewDragDropCallback(dataField : String, data : ConfigData, dropData : Object) : void
+			{
+				if (data is AvatarFileResConfig)
+				{
+					if (dropData is AvatarFileResConfig)
+					{
+						var res : String = (dropData as AvatarFileResConfig).mRes;
+						var avatarObj : AvatarFileResConfig = data as AvatarFileResConfig;
+						avatarObj[dataField] = res;
+						EventManager.dispatchEvent(AvatarFileListEvent.UPDATE_AVATAR_FILE_LIST);
+					}
+				}
+			}
+
+			private function onPullData(dataField : String, data : ConfigData) : void
+			{
+				if (dataField != "name")
+					EventManager.dispatchEvent(AvatarFileListEvent.UPDATE_AVATAR_FILE_LIST);
+			}
+
+			private function onOkCallback(data : ConfigData) : void
+			{
+				EventManager.dispatchEvent(AvatarFileListEvent.UPDATE_AVATAR_FILE_LIST);
+			}
+
+			[Bindable]
+			/** 换装数据 **/
+			public function get avatarItems() : ArrayCollection
+			{
+				return _avatarItems;
+			}
+
+			/**
+			 * @private
+			 */
+			public function set avatarItems(value : ArrayCollection) : void
+			{
+				_avatarItems = value;
+			}
+		]]>
+	</fx:Script>
+	<s:Group left="0"
+			 right="0"
+			 top="0"
+			 bottom="0"
+			 width="100%"
+			 height="100%">
+		<mx:DataGrid id="data_avatar"
+					 x="0"
+					 y="0"
+					 width="100%"
+					 height="100%"
+					 dataProvider="{avatarItems}"
+					 click="data_avatar_selectionChangeHandler(event)"
+					 editable="false"
+					 dragEnabled="true"
+					 doubleClickEnabled="true"
+					 doubleClick="data_avatar_doubleClickHandler(event)">
+			<mx:columns>
+				<mx:DataGridColumn headerText="名称"
+								   dataField="name"
+								   width="100"/>
+				<mx:DataGridColumn headerText="资源"
+								   dataField="mRes"/>
+			</mx:columns>
+		</mx:DataGrid>
+	</s:Group>
+</s:NavigatorContent>

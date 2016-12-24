@@ -49,9 +49,9 @@ package gameEngine2D {
             if (null == node) {
                 return;
             }
-            CONFIG::netDebug {
-                //NetDebug.LOG("[LRUCache] [rmove] key:", key);
-            }
+//            CONFIG::netDebug {
+//                //NetDebug.LOG("[LRUCache] [rmove] key:", key);
+//            }
             node.value.dispose();
             if (null != node.prev) {
                 node.prev = node.next;
@@ -82,9 +82,9 @@ package gameEngine2D {
         private function removeTail() : void {
             if (null != this._tail) {
                 this._tail.value.dispose();
-                CONFIG::netDebug {
-                    //NetDebug.LOG("[LRUCache] [rmoveTail] key:", this._tail.key);
-                }
+//                CONFIG::netDebug {
+//                    //NetDebug.LOG("[LRUCache] [rmoveTail] key:", this._tail.key);
+//                }
                 if (null != this._tail.prev) {
                     this._tail.prev.next = null;
                 } else {

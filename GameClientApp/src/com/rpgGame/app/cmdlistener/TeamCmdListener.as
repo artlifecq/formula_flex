@@ -605,7 +605,7 @@ package com.rpgGame.app.cmdlistener
 		 */
 		private function onGetKickParterSuccess(buffer:ByteBuffer):void
 		{
-			ReqLockUtil.unlockReq(TeamModuleMessages.C2S_KICK);
+//			ReqLockUtil.unlockReq(TeamModuleMessages.C2S_KICK);
 			NoticeManager.showNotify( LangTeam.TEAM_CHATA_TIP19 );
 		}
 		

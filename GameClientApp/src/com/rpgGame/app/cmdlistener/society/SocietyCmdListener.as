@@ -286,7 +286,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecReplyJoinRequestFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REPLY_JOIN_REQUEST);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REPLY_JOIN_REQUEST);
 
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
@@ -332,7 +332,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecYourJoinRequestCancel(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REPLY_JOIN_REQUEST);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REPLY_JOIN_REQUEST);
 			var familyName : String = BytesUtil.readRemainUTF(buffer);
 			SocietyManager.removeJoinFamily(familyName);
 		}
@@ -344,7 +344,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecReplyJoinRequestSuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REPLY_JOIN_REQUEST);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REPLY_JOIN_REQUEST);
 		}
 
 		/**
@@ -393,7 +393,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecInvieJoinFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_INVITE_JOIN);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_INVITE_JOIN);
 
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
@@ -446,7 +446,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecInvieJoinSuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_INVITE_JOIN);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_INVITE_JOIN);
 			NoticeManager.showNotify("邀请成功，对方自动接受了您的邀请");
 		}
 
@@ -457,7 +457,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecInvieJoinSuccessAndWaitOtherReply(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_INVITE_JOIN);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_INVITE_JOIN);
 			NoticeManager.showNotify("邀请成功，请等待对方的回复");
 		}
 
@@ -548,7 +548,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecReplyJoinInviteSuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REPLY_JOIN_INVITE);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REPLY_JOIN_INVITE);
 		}
 
 		/**
@@ -710,7 +710,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecChangeAnnouncementFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_CHANGE_ANNOUNCEMENT);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_CHANGE_ANNOUNCEMENT);
 
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
@@ -740,7 +740,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecChangeAnnouncementSuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_CHANGE_ANNOUNCEMENT);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_CHANGE_ANNOUNCEMENT);
 			NoticeManager.showNotify(LangSociety.CHANGE_ANNOUNCEMENT_SUCCESS);
 			SocietyManager.submitAnnouncement();
 		}
@@ -767,7 +767,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecDoDonateFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_DO_DONATE);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_DO_DONATE);
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
 			switch (failID)
@@ -803,7 +803,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecDoDonateSuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_DO_DONATE);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_DO_DONATE);
 			NoticeManager.showNotify(LangSociety.SOCIETY_DO_DONATE_SUCCESS);
 		}
 
@@ -968,7 +968,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onLearnFamilyCollageSpell(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_LEARN_FAMILY_COLLAGE_SPELL);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_LEARN_FAMILY_COLLAGE_SPELL);
 			var index : int = buffer.readVarint32();
 			var level : int = buffer.readVarint32();
 			SocietyManager.setSocietySpellLevel(index, level);
@@ -987,7 +987,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onLearnFamilyCollageSpellFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_LEARN_FAMILY_COLLAGE_SPELL);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_LEARN_FAMILY_COLLAGE_SPELL);
 
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
@@ -1064,7 +1064,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecLeaveFamilyFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_LEAVE_FAMILY);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_LEAVE_FAMILY);
 
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
@@ -1091,7 +1091,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecLeaveFamilySuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_LEAVE_FAMILY);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_LEAVE_FAMILY);
 			SocietyManager.leaveSociety();
 		}
 
@@ -1105,7 +1105,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecDismissFamilyFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_DISMISS_FAMILY);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_DISMISS_FAMILY);
 
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
@@ -1134,7 +1134,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecDismissFamilySuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_DISMISS_FAMILY);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_DISMISS_FAMILY);
 			SocietyManager.leaveSociety();
 		}
 
@@ -1162,7 +1162,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecKickMemberFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_KICK_MEMBER);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_KICK_MEMBER);
 
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
@@ -1193,7 +1193,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecKickMemberSuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_KICK_MEMBER);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_KICK_MEMBER);
 		}
 
 		/**
@@ -1238,7 +1238,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecSetFamilyAutoAcceptJoinRequestFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_SET_FAMILY_AUTO_ACCEPT_JOIN_REQUEST);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_SET_FAMILY_AUTO_ACCEPT_JOIN_REQUEST);
 
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
@@ -1259,7 +1259,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecSetFamilyAutoAcceptJoinRequestSucces(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_SET_FAMILY_AUTO_ACCEPT_JOIN_REQUEST);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_SET_FAMILY_AUTO_ACCEPT_JOIN_REQUEST);
 		}
 
 		/**
@@ -1339,7 +1339,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecSetPositionFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_SET_POSITION);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_SET_POSITION);
 
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
@@ -1392,7 +1392,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecSetPositionSuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_SET_POSITION);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_SET_POSITION);
 
 			NoticeManager.showNotify("设置官职成功");
 		}
@@ -1456,7 +1456,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecRequestJoinFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REQUEST_JOIN);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REQUEST_JOIN);
 
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
@@ -1510,7 +1510,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecRequestJoinSuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REQUEST_JOIN);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REQUEST_JOIN);
 
 			var isApplyJoin : Boolean = buffer.readBoolean();
 			var societyName : String = buffer.readUTFBytes(buffer.bytesAvailable);
@@ -1536,7 +1536,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRequestJoinSuccessWaitOtherReply(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REQUEST_JOIN);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REQUEST_JOIN);
 
 			var outTime : Number = buffer.readVarint64();
 			var societyName : String = buffer.readUTFBytes(buffer.bytesAvailable);

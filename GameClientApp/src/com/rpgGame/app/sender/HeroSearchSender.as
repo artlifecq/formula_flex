@@ -20,9 +20,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function searchWithOffline(reqType : int, name : String,isMyCountry:Boolean = true) : void
 		{
-			if (ReqLockUtil.isReqLocked(SearchByHeroNameModuleMessages.C2S_SEARCH_WITH_OFFLINE))
-				return;
-			ReqLockUtil.lockReq(SearchByHeroNameModuleMessages.C2S_SEARCH_WITH_OFFLINE, 1000);
+//			if (ReqLockUtil.isReqLocked(SearchByHeroNameModuleMessages.C2S_SEARCH_WITH_OFFLINE))
+//				return;
+//			ReqLockUtil.lockReq(SearchByHeroNameModuleMessages.C2S_SEARCH_WITH_OFFLINE, 1000);
 
 			_bytes.clear();
 			_bytes.writeVarint32(reqType);
@@ -37,9 +37,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function searchWithoutOffline(reqType : int, name : String,isMyCountry:Boolean = true) : void
 		{
-			if (ReqLockUtil.isReqLocked(SearchByHeroNameModuleMessages.C2S_SEARCH_WITHOUT_OFFLINE))
-				return;
-			ReqLockUtil.lockReq(SearchByHeroNameModuleMessages.C2S_SEARCH_WITHOUT_OFFLINE, 1000);
+//			if (ReqLockUtil.isReqLocked(SearchByHeroNameModuleMessages.C2S_SEARCH_WITHOUT_OFFLINE))
+//				return;
+//			ReqLockUtil.lockReq(SearchByHeroNameModuleMessages.C2S_SEARCH_WITHOUT_OFFLINE, 1000);
 
 			_bytes.clear();
 			_bytes.writeVarint32(reqType);
@@ -50,9 +50,9 @@ package com.rpgGame.app.sender
 
 		public static function searchHeroIdByName(reqType : int, name : String) : void
 		{
-			if (ReqLockUtil.isReqLocked(SearchByHeroNameModuleMessages.C2S_SEARCH_HERO_ID_BY_NAME))
-				return;
-			ReqLockUtil.lockReq(SearchByHeroNameModuleMessages.C2S_SEARCH_HERO_ID_BY_NAME, 1000);
+//			if (ReqLockUtil.isReqLocked(SearchByHeroNameModuleMessages.C2S_SEARCH_HERO_ID_BY_NAME))
+//				return;
+//			ReqLockUtil.lockReq(SearchByHeroNameModuleMessages.C2S_SEARCH_HERO_ID_BY_NAME, 1000);
 
 			_bytes.clear();
 			_bytes.writeVarint32(reqType);

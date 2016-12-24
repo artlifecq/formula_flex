@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="400" height="200"
+		 creationComplete="titlewindow1_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			[Bindable]
+			public var datas:ArrayCollection = new ArrayCollection();
+			[Bindable]
+			public var storyTypeDatas:ArrayCollection = new ArrayCollection();
+			
+			protected function titlewindow1_creationCompleteHandler(event:FlexEvent):void
+			{
+				this.closeButton.visible = false;
+			}
+			
+		]]>
+	</fx:Script>
+	<s:HGroup y="10" width="100%" horizontalAlign="center">
+		<s:VGroup width="90%">
+			<s:HGroup width="100%">
+				<s:Label width="100" text="类型：">
+					
+				</s:Label>
+				<s:DropDownList id="storyTypeList" width="100%" dataProvider="{storyTypeDatas}" labelField="label" prompt="请选择"/>
+			</s:HGroup>
+			<s:HGroup width="100%">
+				<s:Label width="100" text="地图资源：">
+					
+				</s:Label>
+				<s:DropDownList id="mapList" width="100%" dataProvider="{datas}" labelField="label" prompt="请选择"/>
+			</s:HGroup>
+			<s:HGroup width="100%">
+				<s:Label width="100" text="刷怪ID：">
+					
+				</s:Label>
+				<s:TextInput width="100%" id="plotIDText">
+					
+				</s:TextInput>
+			</s:HGroup>
+			<s:HGroup width="100%">
+				<s:Label width="100" text="脚本ID：">
+					
+				</s:Label>
+				<s:TextInput width="100%" id="scriptIDText">
+					
+				</s:TextInput>
+			</s:HGroup>
+			<s:HGroup width="100%">
+				<s:Label width="100" text="描述：">
+					
+				</s:Label>
+				<s:TextInput width="100%" id="descText">
+					
+				</s:TextInput>
+			</s:HGroup>
+			<s:HGroup horizontalAlign="center" width="100%">
+				<s:Button id="btn_sure" label="确定">
+					
+				</s:Button>
+				<s:Button id="btn_cancel" label="取消">
+					
+				</s:Button>
+			</s:HGroup>
+		</s:VGroup>
+	</s:HGroup>
+</s:TitleWindow>

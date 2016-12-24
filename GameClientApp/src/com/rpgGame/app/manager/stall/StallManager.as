@@ -182,9 +182,9 @@ package com.rpgGame.app.manager.stall
 					return;
 				}
 			}
-			if(ReqLockUtil.isReqLocked(StallModuleMessages.C2S_STALL,true))
-				return;
-			ReqLockUtil.lockReq(StallModuleMessages.C2S_STALL,3000);
+//			if(ReqLockUtil.isReqLocked(StallModuleMessages.C2S_STALL,true))
+//				return;
+//			ReqLockUtil.lockReq(StallModuleMessages.C2S_STALL,3000);
 			StallSender.stall(selfStallData);
 		}
 		

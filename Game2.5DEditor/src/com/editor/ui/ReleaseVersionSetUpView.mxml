@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 发行版本设置窗口
+* @author L.L.M.Sunny
+* 创建时间：2016-4-5 上午10:30:12
+*
+-->
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="760"
+			   height="550"
+			   title="发行版本设置"
+			   fontFamily="SimSun"
+			   creationComplete="onCreationComplete()"
+			   initialize="onInitialize()"
+			   close="window1_closeHandler(event)"
+			   xmlns:ui="com.editor.ui.*"
+			   xmlns:spell="com.editor.ui.spell.*"
+			   xmlns:monster="com.editor.ui.monster.*"
+			   xmlns:component="com.editor.story.view.component.*"
+			   xmlns:scene="com.editor.ui.scene.*"
+			   xmlns:npc="com.editor.ui.npc.*"
+			   xmlns:transport="com.editor.ui.transport.*">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import com.editor.cfg.ProjectConfig;
+			import com.editor.data.VersionItemData;
+			import com.editor.manager.AppManager;
+			import com.editor.manager.ReleaseVersionManager;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.managers.PopUpManager;
+
+			private static var _window : ReleaseVersionSetUpView;
+
+			public static function get window() : ReleaseVersionSetUpView
+			{
+				return _window;
+			}
+
+			public static function open() : void
+			{
+				if (!_window)
+				{
+					_window = new ReleaseVersionSetUpView();
+					PopUpManager.addPopUp(_window, AppManager.getInstance().appRoot, true);
+					PopUpManager.centerPopUp(_window);
+				}
+				PopUpManager.bringToFront(_window);
+			}
+
+			public static function close() : void
+			{
+				if (_window)
+				{
+					_window.destroy();
+					PopUpManager.removePopUp(_window);
+				}
+				_window = null;
+			}
+
+			[Bindable]
+			private var _versionDatas : ArrayCollection;
+
+			private function onInitialize() : void
+			{
+				visible = false;
+			}
+
+			private function onCreationComplete() : void
+			{
+				visible = true;
+				_versionDatas = new ArrayCollection();
+				createVersionItem.setData("");
+				pullData();
+			}
+
+			private function destroy() : void
+			{
+				_versionDatas = null;
+			}
+
+			protected function window1_closeHandler(event : Event) : void
+			{
+				close();
+			}
+
+			public function pullData() : void
+			{
+				var versions : Array = ReleaseVersionManager.getInstance().versions;
+				_versionDatas.source = versions;
+				version_data.dataProvider = _versionDatas;
+			}
+
+			private function onVersionApplyCallback(item : LabelInputItem) : void
+			{
+				if (!item.data)
+				{
+					Alert.show("版本名称不能为空！", "提示");
+					return;
+				}
+				var version : VersionItemData = ReleaseVersionManager.getInstance().addVersion(String(item.data));
+				if (!version)
+				{
+					Alert.show("已存在该名称的版本！", "提示");
+					return;
+				}
+				ProjectConfig.saveSetting();
+				Alert.show("创建发行版本成功！", "提示");
+				pullData();
+			}
+
+			protected function cancel_clickHandler(event : MouseEvent) : void
+			{
+				close();
+			}
+
+			protected function ok_clickHandler(event : MouseEvent) : void
+			{
+				ReleaseVersionManager.getInstance().saveVersions();
+				Alert.show("保存发行版本设置成功！", "提示");
+				close();
+			}
+		]]>
+	</fx:Script>
+	<ui:LabelInputItem id="createVersionItem"
+					   x="20"
+					   y="20"
+					   itemWidth="330"
+					   label="创建发行版本"
+					   applyLabel="创建"
+					   applyCallback="{onVersionApplyCallback}">
+	</ui:LabelInputItem>
+	<mx:DataGrid id="version_data"
+				 borderColor="0"
+				 width="710"
+				 height="300"
+				 rowHeight="28"
+				 x="20"
+				 y="100"
+				 dataProvider="{_versionDatas}"
+				 editable="false">
+		<mx:columns>
+			<mx:DataGridColumn headerText="ID"
+							   dataField="versionId"
+							   width="50"
+							   editable="false"/>
+			<mx:DataGridColumn headerText="版本名称"
+							   dataField="versionName"
+							   editable="false"/>
+			<mx:DataGridColumn headerText="版本目录"
+							   dataField="versionId"
+							   width="200"
+							   editable="false">
+				<mx:itemRenderer>
+					<fx:Component>
+						<mx:Container>
+							<ui:BrowseForOpenItem id="item"
+												  width="100%"
+												  height="100%"
+												  x="-100"
+												  y="5"
+												  browseTile="请选择版本目录"
+												  browseExtension="dire"
+												  browseDesc="dire"
+												  onSelected="{selectReleaseDireBtn}"
+												  toolTip="版本.svn文件夹所在的目录"
+												  creationComplete="item_creationCompleteHandler(event)">
+							</ui:BrowseForOpenItem>
+							<fx:Script>
+								<![CDATA[
+									import mx.events.FlexEvent;
+									import com.editor.data.VersionItemData;
+									
+									protected function item_creationCompleteHandler(event : FlexEvent) : void
+									{
+										item.setInputWidth(80);
+										var versionData : VersionItemData = data as VersionItemData;
+										item.path = versionData.svnRootDire;
+									}
+									
+									private function selectReleaseDireBtn() : void
+									{
+										var versionData : VersionItemData = data as VersionItemData;
+										versionData.svnRootDire = item.path;
+									}
+								]]>
+							</fx:Script>
+						</mx:Container>
+					</fx:Component>
+				</mx:itemRenderer>
+			</mx:DataGridColumn>
+			<mx:DataGridColumn headerText="发行路径"
+							   dataField="versionId"
+							   width="200"
+							   editable="false">
+				<mx:itemRenderer>
+					<fx:Component>
+						<mx:Container>
+							<ui:BrowseForOpenItem id="item"
+												  width="100%"
+												  height="100%"
+												  x="-100"
+												  y="5"
+												  browseTile="请选择发行目录"
+												  browseExtension="dire"
+												  browseDesc="dire"
+												  onSelected="{selectReleaseDireBtn}"
+												  toolTip="选择发行目录"
+												  creationComplete="item_creationCompleteHandler(event)">
+							</ui:BrowseForOpenItem>
+							<fx:Script>
+								<![CDATA[
+									import mx.events.FlexEvent;
+									import com.editor.data.VersionItemData;
+
+									protected function item_creationCompleteHandler(event : FlexEvent) : void
+									{
+										item.setInputWidth(80);
+										var versionData : VersionItemData = data as VersionItemData;
+										item.path = versionData.releaseDire;
+									}
+
+									private function selectReleaseDireBtn() : void
+									{
+										var versionData : VersionItemData = data as VersionItemData;
+										versionData.releaseDire = item.path;
+									}
+								]]>
+							</fx:Script>
+						</mx:Container>
+					</fx:Component>
+				</mx:itemRenderer>
+			</mx:DataGridColumn>
+			<mx:DataGridColumn headerText="D"
+							   dataField="versionId"
+							   width="20"
+							   editable="false">
+				<mx:itemRenderer>
+					<fx:Component>
+						<mx:Button label="X"
+								   toolTip="删除"
+								   width="20"
+								   height="100%"
+								   click="button1_clickHandler(event)">
+							<fx:Script>
+								<![CDATA[
+									import com.editor.ui.ReleaseVersionSetUpView;
+									import mx.events.CloseEvent;
+									import mx.events.FlexEvent;
+									import com.editor.manager.ReleaseVersionManager;
+									import com.editor.data.VersionItemData;
+									import com.editor.cfg.ProjectConfig;
+									import mx.controls.Alert;
+
+									protected function button1_clickHandler(event : MouseEvent) : void
+									{
+										var versionData : VersionItemData = data as VersionItemData;
+										Alert.show("确定删除版本【" + versionData.versionName + "】吗！", "提示", Alert.OK | Alert.NO, null, onAlertClickHandler);
+									}
+
+									private function onAlertClickHandler(event : CloseEvent) : void
+									{
+										if (event.detail == Alert.OK)
+										{
+											var versionData : VersionItemData = data as VersionItemData;
+											ReleaseVersionManager.getInstance().removeVersion(versionData.versionName);
+											ProjectConfig.saveSetting();
+											ReleaseVersionSetUpView.window.pullData();
+										}
+									}
+								]]>
+							</fx:Script>
+						</mx:Button>
+					</fx:Component>
+				</mx:itemRenderer>
+			</mx:DataGridColumn>
+		</mx:columns>
+	</mx:DataGrid>
+	<s:Group x="40"
+			 y="420">
+		<s:Button id="okBtn"
+				  x="0"
+				  y="0"
+				  label="确定"
+				  click="ok_clickHandler(event)"/>
+		<s:Button x="82"
+				  y="0"
+				  label="取消"
+				  click="cancel_clickHandler(event)"/>
+	</s:Group>
+</s:TitleWindow>

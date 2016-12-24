@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 首选项窗口
+* @author L.L.M.Sunny
+* 创建时间：2015-6-17 上午10:30:12
+*
+-->
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="760"
+			   height="550"
+			   title="首选项"
+			   fontFamily="SimSun"
+			   creationComplete="onCreationComplete()"
+			   initialize="onInitialize()"
+			   close="window1_closeHandler(event)"
+			   xmlns:ui="com.editor.ui.*"
+			   xmlns:spell="com.editor.ui.spell.*"
+			   xmlns:monster="com.editor.ui.monster.*"
+			   xmlns:component="com.editor.story.view.component.*"
+			   xmlns:scene="com.editor.ui.scene.*"
+			   xmlns:npc="com.editor.ui.npc.*"
+			   xmlns:transport="com.editor.ui.transport.*">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import com.editor.cfg.ProjectConfig;
+			import com.editor.events.AppEvent;
+			import com.editor.events.PreferenceEvent;
+			import com.editor.manager.AppManager;
+
+			import mx.controls.Alert;
+			import mx.events.IndexChangedEvent;
+			import mx.managers.PopUpManager;
+
+			import org.client.mainCore.manager.EventManager;
+
+			private static var _window : PreferenceView;
+
+			public static function open() : void
+			{
+				if (!_window)
+				{
+					_window = new PreferenceView();
+					PopUpManager.addPopUp(_window, AppManager.getInstance().appRoot, true);
+					PopUpManager.centerPopUp(_window);
+				}
+				PopUpManager.bringToFront(_window);
+			}
+
+			public static function close() : void
+			{
+				if (_window)
+				{
+					_window.destroy();
+					PopUpManager.removePopUp(_window);
+				}
+				_window = null;
+			}
+
+			private function onInitialize() : void
+			{
+				visible = false;
+			}
+
+			private function onCreationComplete() : void
+			{
+				visible = true;
+				updateSetUp();
+				EventManager.addEvent(PreferenceEvent.PREFERENCE_UPDATE_PROJECT_CONFIG, updateSetUp);
+			}
+
+			private function destroy() : void
+			{
+				EventManager.removeEvent(PreferenceEvent.PREFERENCE_UPDATE_PROJECT_CONFIG, updateSetUp);
+			}
+
+			private function updateSetUp() : void
+			{
+				if (environmentPreferencePanel)
+					environmentPreferencePanel.updateSetUp();
+				if (programPreferenceView)
+					programPreferenceView.updateSetUp();
+				if (releasePreferenceView)
+					releasePreferenceView.updateSetUp();
+				if (storyPreferencePanel)
+					storyPreferencePanel.updateSetUp();
+			}
+
+			private function applyChanged() : void
+			{
+				try
+				{
+					if (environmentPreferencePanel)
+						environmentPreferencePanel.applyChanged();
+					if (programPreferenceView)
+						programPreferenceView.applyChanged();
+					if (releasePreferenceView)
+						releasePreferenceView.applyChanged();
+					if (storyPreferencePanel)
+						storyPreferencePanel.applyChanged();
+
+					ProjectConfig.save();
+					EventManager.dispatchEvent(PreferenceEvent.PREFERENCE_UPDATE_PROJECT_CONFIG);
+				}
+				catch (e : Error)
+				{
+					Alert.show("配置应用错误！" + "\n" + e.message + "\n" + e.getStackTrace(), "错误");
+				}
+			}
+
+			protected function window1_closeHandler(event : Event) : void
+			{
+				close();
+			}
+
+			protected function ok_clickHandler(event : MouseEvent) : void
+			{
+				applyChanged();
+				EventManager.dispatchEvent(AppEvent.SAVE_PROJECT_CONFIG);
+				close();
+				AppManager.getInstance().reboot();
+			}
+
+			protected function cancel_clickHandler(event : MouseEvent) : void
+			{
+				close();
+			}
+
+			private function tabnavigator1_changeHandler(event : IndexChangedEvent) : void
+			{
+				updateSetUp();
+			}
+
+			protected function applyBtn_clickHandler(event : MouseEvent) : void
+			{
+				applyChanged();
+				updateSetUp();
+				Alert.show("配置应用成功！", "提示");
+			}
+		]]>
+	</fx:Script>
+	<s:Group width="100%"
+			 height="440">
+		<mx:TabNavigator id="tabBar"
+						 width="100%"
+						 height="100%"
+						 left="5"
+						 right="5"
+						 top="5"
+						 bottom="5"
+						 paddingTop="5"
+						 change="tabnavigator1_changeHandler(event)">
+			<s:NavigatorContent label="环境设置">
+				<ui:EnvironmentPreferencePanel id="environmentPreferencePanel">
+				</ui:EnvironmentPreferencePanel>
+			</s:NavigatorContent>
+			<s:NavigatorContent label="程序设置">
+				<ui:ProgramPreferenceView id="programPreferenceView">
+				</ui:ProgramPreferenceView>
+			</s:NavigatorContent>
+			<s:NavigatorContent label="发行设置">
+				<ui:ReleasePreferenceView id="releasePreferenceView">
+				</ui:ReleasePreferenceView>
+			</s:NavigatorContent>
+			<!--///////////////国栋兄记得提炼出来//////////////////////-->
+			<s:NavigatorContent label="剧情编辑">
+				<component:StoryPreferencePanel id="storyPreferencePanel">
+				</component:StoryPreferencePanel>
+			</s:NavigatorContent>
+		</mx:TabNavigator>
+	</s:Group>
+	<!--/////////////////////////////////////-->
+	<s:Button id="applyBtn"
+			  x="340"
+			  y="448"
+			  label="应用"
+			  click="applyBtn_clickHandler(event)"/>
+	<s:Group x="300"
+			 y="480">
+		<s:Button id="okBtn"
+				  x="0"
+				  y="0"
+				  label="确定"
+				  click="ok_clickHandler(event)"/>
+		<s:Button x="82"
+				  y="0"
+				  label="取消"
+				  click="cancel_clickHandler(event)"/>
+	</s:Group>
+</s:TitleWindow>

@@ -27,6 +27,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.netData.client.message.ResClientCustomTagMessage;
+	import com.rpgGame.netData.player.message.ResPersonalNoticeMessage;
 	import com.rpgGame.netData.player.message.ResPlayerAttributesChangeMessage;
 	import com.rpgGame.netData.skill.message.ResSkillInfosMessage;
 	
@@ -63,6 +64,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(103106,RecvPlayerAttributesChangeMessage);
 			SocketConnection.addCmdListener(123101,RecvResSkillInfosMessage);
 			SocketConnection.addCmdListener(301102,RecvResClientCustomTagMessage);
+			SocketConnection.addCmdListener(103103,RecvResPersonalNoticeMessage);
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			//////
 			////// 以下为参考代码，是深圳那边的后台协议，不适用
@@ -135,6 +137,100 @@ package com.rpgGame.app.cmdlistener
 			ClientSettingManager.setup(msg.CustomTaginfos);
 			
 			ShortcutsManger.getInstance().setup();
+		}
+		
+		private function RecvResPersonalNoticeMessage(msg:ResPersonalNoticeMessage):void
+		{
+			
+			GameLog.addShow( "ResPersonalNoticeMessage"  ,msg.type , msg.content );
+			
+			var tmp :Vector.<String> = new Vector.<String>();
+			for ( var i :int = 0; i < msg.values.length; i++ )
+			{
+				if ( msg.values[i] == null )
+					continue;
+				tmp.push( msg.values[i] );//TextUtil.getTextStr( msg.values[i] ) );
+			}
+//			if ( msg.content == null || msg.content == '' )
+//				msg.content = Mgr.gameDataMgr.getServerLanguageStr( msg.contentId );
+//			var info :String = PromptUtil.connectStr( msg.content, tmp );
+//			info = info.replace( /\\f/g, String.fromCharCode( 0xc ) );
+			
+			var htmlStr :String;
+		
+			
+			if ( msg.type == 1 || msg.type == 2 || msg.type == 3 )// 个人通知
+			{
+//				AddPersonInfo( msg.type, info, true );
+			}
+				//			else if ( msg.type == EnumPersonalNoticeType.SROLL )// 滚动公告	
+				//			{
+				//				if ( TextUtil.isjson( msg.content ) )
+				//				{
+				//					var text :String = TextUtil.parseJsonLinkStrHtml( msg.content, ColorUtil.N_WRITE_STR, {linkcolor :"#cc9957", mapname :1} );
+				//					text = TextUtil.removeHTMLTag( text );
+				//					htmlStr = TextUtil.getHtmlStr( text, null, -1 );
+				//					addGmInfo( htmlStr );
+				//				}
+				//				else
+				//				{
+				//					htmlStr = TextUtil.getHtmlStr( info, null, -1 );
+				//					addGmInfo( htmlStr );
+				//				}
+				//			}
+			else if ( msg.type == 5 )// 头顶聊天公告提示
+			{
+//				htmlStr = TextUtil.GetHtmlStr( info, null, -1 );
+//				AddGlobalInfo( htmlStr );
+			}
+				//			else if ( msg.type == EnumPersonalNoticeType.CHAT_SYSTEM )// 右下角侧栏提示
+				//			{
+				//				
+				//			}
+				//			else if ( msg.type == EnumPersonalNoticeType.CHAT_COMMON )// 聊天普通频道
+				//			{
+				//				Mgr.chatMgr.addChatMsg( EnumChatChannelType.NORMAL, long.MAX_VALUE, Mgr.mainPlayer.sid, '', info, new ExtraResInfo() );
+				//			}
+				//			else if ( msg.type == EnumPersonalNoticeType.CHAT_TEAM )// 聊天队伍频道
+				//			{
+				//				Mgr.chatMgr.addChatMsg( EnumChatChannelType.TEAM, long.MAX_VALUE, Mgr.mainPlayer.sid, '', info, new ExtraResInfo() );
+				//			}
+				//			else if ( msg.type == EnumPersonalNoticeType.CHAT_GROUP )// 聊天普通频道
+				//			{
+				//				Mgr.chatMgr.addChatMsg( EnumChatChannelType.FACTION, long.MAX_VALUE, Mgr.mainPlayer.sid, '', info, new ExtraResInfo() );
+				//			}
+				//			else if ( msg.type == EnumPersonalNoticeType.CHAT_WORLD )
+				//			{
+				//				Mgr.chatMgr.addChatMsg( EnumChatChannelType.WORLD, long.MAX_VALUE, Mgr.mainPlayer.sid, '', info, new ExtraResInfo() );
+				//			}
+			else if ( msg.type == 6 )// 公告聊天提示
+			{
+//				Mgr.chatMgr.AddChatStr( info );
+				//				Mgr.chatMgr.addChatMsg( EnumChatChannelType.CIRCLE, long.MAX_VALUE, Mgr.mainPlayer.sid, '', info, new ExtraResInfo() );
+			}
+				//			else if ( msg.type == EnumPersonalNoticeType.CHAT_COUNTRY )
+				//			{
+				//				Mgr.chatMgr.addChatMsg( EnumChatChannelType.COUNTRY, long.MAX_VALUE, Mgr.mainPlayer.sid, '', info, new ExtraResInfo() );
+				//			}
+			else if ( msg.type == 7 )// 锻造延迟聊天提示
+			{
+//				if ( Mgr.equipForgeMgr.delayDoTool.lock )
+//				{
+//					Mgr.equipForgeMgr.delayDoTool.Push( Mgr.chatMgr.AddChatStr, info );
+//				}
+//				else
+//				{
+//					Mgr.chatMgr.AddChatStr( info );
+//				}
+			}
+			else if ( msg.type == 8 )// 鼠标提示
+			{
+//				FloatingText.showUp( info );
+			}
+			else if ( msg.type == 9 )// 鼠标提示( 绿色 )
+			{
+//				FloatingText.showUp( info );
+			}
 		}
 		
 		/**

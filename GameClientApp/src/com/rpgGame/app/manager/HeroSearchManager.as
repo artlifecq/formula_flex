@@ -70,8 +70,8 @@ package com.rpgGame.app.manager
 			
 			EventManager.dispatchEvent(SearchHeroEvent.SEARCH_SUCCESS);
 
-			ReqLockUtil.lockReq(SearchByHeroNameModuleMessages.C2S_SEARCH_WITH_OFFLINE, 1000);
-			ReqLockUtil.lockReq(SearchByHeroNameModuleMessages.C2S_SEARCH_WITHOUT_OFFLINE, 1000);
+//			ReqLockUtil.lockReq(SearchByHeroNameModuleMessages.C2S_SEARCH_WITH_OFFLINE, 1000);
+//			ReqLockUtil.lockReq(SearchByHeroNameModuleMessages.C2S_SEARCH_WITHOUT_OFFLINE, 1000);
 		}
 
 		public static function getHeroID(heroName:String):Number

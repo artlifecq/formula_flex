@@ -337,9 +337,9 @@ package com.rpgGame.app.manager
 				return;
 			}
 
-			if (!ReqLockUtil.isReqLocked(TeamModuleMessages.C2S_KICK, true))
-				TeamSender.kickParter(id);
-			ReqLockUtil.lockReq(TeamModuleMessages.C2S_KICK);
+//			if (!ReqLockUtil.isReqLocked(TeamModuleMessages.C2S_KICK, true))
+//				TeamSender.kickParter(id);
+//			ReqLockUtil.lockReq(TeamModuleMessages.C2S_KICK);
 		}
 
 		/**
@@ -797,7 +797,7 @@ package com.rpgGame.app.manager
 		 */
 		public static function unLockJoinOtherTeam() : void
 		{
-			ReqLockUtil.unlockReq(TeamModuleMessages.C2S_SEND_REQUEST);
+//			ReqLockUtil.unlockReq(TeamModuleMessages.C2S_SEND_REQUEST);
 		}
 
 		/**
@@ -823,11 +823,11 @@ package com.rpgGame.app.manager
 				return;
 			}
 
-			var key : String = TeamModuleMessages.C2S_SEND_REQUEST;
-			if (ReqLockUtil.isReqLocked(key)) //已经申请加入队伍了
-				return;
-
-			ReqLockUtil.lockReq(key);
+//			var key : String = TeamModuleMessages.C2S_SEND_REQUEST;
+//			if (ReqLockUtil.isReqLocked(key)) //已经申请加入队伍了
+//				return;
+//
+//			ReqLockUtil.lockReq(key);
 			TeamSender.requestJoinOtherTeam(id);
 		}
 
@@ -901,7 +901,7 @@ package com.rpgGame.app.manager
 		public static function otherRejectInvite(id : Number, name : String) : void
 		{
 			var key : String = TeamModuleMessages.C2S_SEND_INVITE + id;
-			ReqLockUtil.unlockReq(key);
+//			ReqLockUtil.unlockReq(key);
 			NoticeManager.showNotify(LangTeam.TEAM_CHATA_TIP16, name);
 		}
 
@@ -949,7 +949,7 @@ package com.rpgGame.app.manager
 		public static function invitePlayerJoinMyTeamWaitComplete() : void
 		{
 			var key : String = TeamModuleMessages.C2S_SEND_INVITE + invitePlayerId;
-			ReqLockUtil.unlockReq(key);
+//			ReqLockUtil.unlockReq(key);
 			invitePlayerId = 0;
 			NoticeManager.showNotify(LangTeam.TEAM_INVITE_PLAER_WAIT_COMPLETE);
 		}
@@ -961,7 +961,7 @@ package com.rpgGame.app.manager
 		public static function invitePlayerJionMyTeamComplete() : void
 		{
 			var key : String = TeamModuleMessages.C2S_SEND_INVITE + invitePlayerId;
-			ReqLockUtil.unlockReq(key);
+//			ReqLockUtil.unlockReq(key);
 			invitePlayerId = 0;
 			NoticeManager.showNotify(LangTeam.TEAM_INVITE_PLAYER_COMPLETE);
 		}

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="100%"
+		 height="100%"
+		 creationComplete="onCreationComplete()">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.cfg.ConfigData;
+			import com.editor.data.InternalTabelName;
+			import com.editor.data.TabelData;
+			import com.editor.manager.DataManager;
+			import com.editor.manager.DataStructuresManager;
+			import com.editor.manager.SceneManager;
+			import com.editor.story.controller.StoryController;
+			import com.editor.story.data.StoryConfig;
+			import com.editor.story.enum.StoryTypeEnum;
+			import com.editor.story.event.StoryEvent;
+			import com.editor.utils.FileUtil;
+			
+			import mx.collections.ArrayCollection;
+			
+			import org.client.mainCore.manager.EventManager;
+
+			[Bindable]
+			/** 配置数据 **/
+			public var datas : ArrayCollection = new ArrayCollection();
+
+			private function onCreationComplete() : void
+			{
+				EventManager.addEvent(StoryEvent.STORY_CREATED, storyCreatedHandler);
+				EventManager.addEvent(StoryEvent.STORY_DELETED, storyDeletedHandler);
+				EventManager.addEvent(StoryEvent.STORY_EDITED, updateStoryList);
+				updateStoryList();
+			}
+
+			public function destroy() : void
+			{
+				EventManager.removeEvent(StoryEvent.STORY_CREATED, storyCreatedHandler);
+				EventManager.removeEvent(StoryEvent.STORY_DELETED, storyDeletedHandler);
+				EventManager.removeEvent(StoryEvent.STORY_EDITED, updateStoryList);
+			}
+
+			private function updateStoryList() : void
+			{
+				datas.removeAll();
+				var tabel : TabelData = DataStructuresManager.getInstance().getTabel(InternalTabelName.XXXStoryConfigName);
+				if (!tabel)
+					return;
+				var cacheDic : Dictionary = tabel.desc.cacheDic;
+				var tempDatas : Array = FileUtil.dictToArray(cacheDic);
+				FileUtil.sortDatas(tempDatas);
+
+				var dataLen : int = tempDatas.length;
+				for (var i : int = 0; i < dataLen; i++)
+				{
+					var config : StoryConfig = tempDatas[i];
+					datas.addItem(config);
+				}
+			}
+
+			private function storyDeletedHandler() : void
+			{
+				StoryConfig.currentEditingStoryID = 0;
+				updateStoryList();
+			}
+
+			private function storyCreatedHandler(storyConfig : StoryConfig) : void
+			{
+				datas.addItem(storyConfig);
+			}
+
+			private function storyListClickHandler(event : MouseEvent) : void
+			{
+				var item : StoryConfig = data_grid.selectedItem as StoryConfig;
+				if (item != null)
+				{
+					var id : int = int(item.id);
+					var res : String = String(item.mRes);
+					StoryConfig.currentEditingStoryID = id;
+					SceneManager.getInstance().loadSceneMap(res);
+					if (item.mType == StoryTypeEnum.ANIMATION)
+					{
+						StoryController.openStoryActionListWindow();
+						StoryController.closeStoryEventListWindow();
+					}
+					else
+					{
+						StoryController.openStoryEventListWindow();
+						StoryController.closeStoryActionListWindow();
+					}
+					EventManager.dispatchEvent(StoryEvent.STORY_EDITING_CHANGED);
+				}
+			}
+
+			private function btnSaveClickHandler(event : MouseEvent) : void
+			{
+				DataManager.getInstance().saveStoryConfig();
+			}
+
+			private function btnDelClickHandler(event : MouseEvent) : void
+			{
+				if (data_grid.selectedIndex < 0)
+				{
+					return;
+				}
+				var tabel : TabelData = DataStructuresManager.getInstance().getTabel(InternalTabelName.XXXStoryConfigName);
+				if (!tabel)
+					return;
+				ConfigData.remove(tabel.desc,StoryConfig.currentEditingStoryID);
+				StoryController.closeStoryEventListWindow();
+				StoryController.closeStoryActionListWindow();
+				
+				EventManager.dispatchEvent(StoryEvent.STORY_DELETED);
+			}
+
+			private function btnEditClickHandler(event : MouseEvent) : void
+			{
+				if (data_grid.selectedIndex < 0)
+				{
+					return;
+				}
+				StoryController.openCreateStoryPanel(true);
+			}
+
+			private function btnAddClickHandler(event : MouseEvent) : void
+			{
+				StoryController.openCreateStoryPanel();
+			}
+		]]>
+	</fx:Script>
+	<s:HGroup verticalAlign="middle"
+			  gap="5">
+		<s:Button label="添加剧情"
+				  id="btn_add"
+				  click="btnAddClickHandler(event)"/>
+		<s:Button label="编辑剧情"
+				  id="btn_edit"
+				  click="btnEditClickHandler(event)"/>
+		<s:Button label="删除剧情"
+				  id="btn_del"
+				  click="btnDelClickHandler(event)"/>
+		<s:Button label="保存所有剧情"
+				  id="btn_save"
+				  click="btnSaveClickHandler(event)"/>
+	</s:HGroup>
+	<mx:DataGrid id="data_grid"
+				 x="0"
+				 y="30"
+				 width="100%"
+				 height="100%"
+				 dataProvider="{datas}"
+				 click="storyListClickHandler(event)"
+				 editable="false">
+		<mx:columns>
+			<mx:DataGridColumn headerText="ID"
+							   dataField="id"
+							   width="50"/>
+			<mx:DataGridColumn headerText="地图"
+							   dataField="mRes"
+							   width="100"/>
+			<mx:DataGridColumn headerText="类型"
+							   dataField="typeName"
+							   width="50"/>
+			<mx:DataGridColumn headerText="刷怪"
+							   dataField="mPlotID"
+							   width="50"/>
+			<mx:DataGridColumn headerText="脚本"
+							   dataField="mScriptID"
+							   width="50"/>
+			<mx:DataGridColumn headerText="描述"
+							   dataField="mDesc"/>
+		</mx:columns>
+	</mx:DataGrid>
+</s:Group>

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 场景导出场景地图块窗口
+* @author L.L.M.Sunny
+* 创建时间：2016-07-08 上午10:30:12
+*
+-->
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="400"
+			   height="470"
+			   title="导出场景地图块"
+			   fontFamily="SimSun"
+			   creationComplete="onCreationComplete()"
+			   initialize="onInitialize()"
+			   close="window1_closeHandler(event)"
+			   xmlns:ui="com.editor.ui.*">
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import com.editor.data.InternalTabelName;
+			import com.editor.data.map.EditorClientMapData;
+			import mx.managers.PopUpManager;
+			import mx.collections.ArrayCollection;
+			import com.editor.data.map.ClientMapAreaData;
+			import com.editor.data.TabelData;
+			import com.editor.data.map.MapAreaTypeEnum;
+			import org.client.mainCore.manager.EventManager;
+			import com.editor.events.ConfigListEvent;
+			import com.editor.cfg.ConfigData;
+			import com.editor.data.ConfigDesc;
+			import com.editor.core.SceneMapBlockInfoCreater;
+			import com.editor.manager.AppManager;
+			import com.editor.manager.DataStructuresManager;
+			import com.editor.manager.SceneManager;
+			import com.editor.utils.FileUtil;
+			import com.editor.ui.SceneMapBlockCreaterView;
+			import com.editor.data.map.ClientMapAreaData;
+			import com.editor.cfg.ConfigData;
+			import com.editor.core.SceneMapBlockInfoCreater;
+			import com.editor.data.ConfigDesc;
+			import com.editor.data.InternalTabelName;
+			import com.editor.data.TabelData;
+			import com.editor.data.map.ClientMapAreaData;
+			import com.editor.data.map.MapAreaTypeEnum;
+			import com.editor.events.ConfigListEvent;
+			import com.editor.manager.AppManager;
+			import com.editor.manager.DataStructuresManager;
+			import com.editor.utils.FileUtil;
+
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.managers.PopUpManager;
+
+			import org.client.mainCore.manager.EventManager;
+
+			private static var _window : SceneMapBlockCreaterView;
+
+			public static function open() : void
+			{
+				if (!_window)
+				{
+					_window = new SceneMapBlockCreaterView();
+					PopUpManager.addPopUp(_window, AppManager.getInstance().appRoot, false);
+					PopUpManager.centerPopUp(_window);
+				}
+				PopUpManager.bringToFront(_window);
+			}
+
+			public static function close() : void
+			{
+				if (_window)
+				{
+					_window.destroy();
+					PopUpManager.removePopUp(_window);
+				}
+				_window = null;
+			}
+
+			public static function get window() : SceneMapBlockCreaterView
+			{
+				return _window;
+			}
+			[Bindable]
+			private var _areaDatas : ArrayCollection;
+			private var _includeDynamic : Vector.<ClientMapAreaData>;
+			private var _sceneMapBlockVersion : int = 2;
+
+			private function onInitialize() : void
+			{
+				visible = false;
+			}
+
+			private function window1_closeHandler(event : Event) : void
+			{
+				close();
+			}
+
+			private function onCreationComplete() : void
+			{
+				_includeDynamic = new Vector.<ClientMapAreaData>();
+				_areaDatas = new ArrayCollection();
+				var tabel : TabelData = DataStructuresManager.getInstance().getTabel(InternalTabelName.MapDataAreaConfigName);
+				var configDesc : ConfigDesc = tabel ? tabel.getConfigDesc() : null;
+				if (configDesc)
+				{
+					var cacheDic : Dictionary = configDesc.cacheDic;
+					var datas : Array = FileUtil.dictToArray(cacheDic);
+					FileUtil.sortDatas(datas);
+					var areaSet : Array = [];
+					for each (var areaData : ClientMapAreaData in datas)
+					{
+						if (areaData.mType == MapAreaTypeEnum.DYNAMIC_OBSTACLE)
+							areaSet.push(areaData);
+					}
+					_areaDatas.source = areaSet;
+				}
+				dataGrid.dataProvider = _areaDatas;
+				exportItem.setData("");
+				visible = true;
+			}
+
+			protected function data_selectionChangeHandler(event : MouseEvent) : void
+			{
+				var configData : ConfigData = dataGrid.selectedItem as ConfigData;
+				if (!configData)
+					return;
+				EventManager.dispatchEvent(ConfigListEvent.CONFIG_SELECTED, configData);
+			}
+
+			public function destroy() : void
+			{
+				if (_areaDatas)
+				{
+					_areaDatas.removeAll();
+					_areaDatas = null;
+				}
+				if (_includeDynamic)
+				{
+					_includeDynamic.length = 0;
+					_includeDynamic = null;
+				}
+			}
+
+			private function onExportApplyCallback(item : LabelInputItem) : void
+			{
+				if (!exportItem.data)
+				{
+					Alert.show("导出地图信息扩展名不能为空！", "提示");
+					return;
+				}
+				var clientMapData : EditorClientMapData = SceneManager.getInstance().mapData;
+				SceneMapBlockInfoCreater.getInstance().export(_sceneMapBlockVersion, clientMapData);
+				SceneMapBlockInfoCreater.getInstance().exortBlockInfo(clientMapData, _sceneMapBlockVersion, _includeDynamic, String(exportItem.data));
+			}
+
+			protected function btn_export_clickHandler(event : MouseEvent) : void
+			{
+				var clientMapData : EditorClientMapData = SceneManager.getInstance().mapData;
+				SceneMapBlockInfoCreater.getInstance().export(_sceneMapBlockVersion, clientMapData);
+			}
+
+			public function includeDynamic(data : ClientMapAreaData, isInclude : Boolean) : void
+			{
+				if (_includeDynamic)
+				{
+					var index : int = _includeDynamic.indexOf(data);
+					if (isInclude)
+					{
+						if (index < 0)
+						{
+							_includeDynamic.push(data);
+						}
+					}
+					else
+					{
+						if (index > -1)
+						{
+							_includeDynamic.splice(index, 1);
+						}
+					}
+				}
+			}
+
+			protected function blockVersion_clickHandler(event : MouseEvent) : void
+			{
+				if (block_version_1.selected)
+				{
+					_sceneMapBlockVersion = 1;
+				}
+				else if (block_version_2.selected)
+				{
+					_sceneMapBlockVersion = 2;
+				}
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<mx:DataGrid id="dataGrid"
+				 borderColor="0"
+				 width="380"
+				 height="300"
+				 rowHeight="22"
+				 x="10"
+				 y="10"
+				 dataProvider="{_areaDatas}"
+				 click="data_selectionChangeHandler(event)"
+				 editable="false">
+		<mx:columns>
+			<mx:DataGridColumn headerText="ID"
+							   dataField="id"
+							   width="30"
+							   editable="false"/>
+			<mx:DataGridColumn headerText="名称"
+							   dataField="name"
+							   editable="false"/>
+			<mx:DataGridColumn headerText="是否包含"
+							   dataField="id"
+							   width="70"
+							   editable="false">
+				<mx:itemRenderer>
+					<fx:Component>
+						<mx:Container>
+							<mx:CheckBox id="includeBox"
+										 x="25"
+										 y="8"
+										 change="checkbox1_changeHandler(event)">
+							</mx:CheckBox>
+							<fx:Script>
+								<![CDATA[
+									import com.editor.ui.SceneMapBlockCreaterView;
+									import com.editor.data.map.ClientMapAreaData;
+
+									protected function checkbox1_changeHandler(event : Event) : void
+									{
+										var areaData : ClientMapAreaData = data as ClientMapAreaData;
+										SceneMapBlockCreaterView.window.includeDynamic(areaData, includeBox.selected);
+									}
+								]]>
+							</fx:Script>
+						</mx:Container>
+					</fx:Component>
+				</mx:itemRenderer>
+			</mx:DataGridColumn>
+		</mx:columns>
+	</mx:DataGrid>
+	<s:RadioButton id="block_version_1"
+				   x="120"
+				   y="320"
+				   label="版本1.0"
+				   groupName="sceneMapBlockVersion"
+				   click="blockVersion_clickHandler(event)">
+	</s:RadioButton>
+	<s:RadioButton id="block_version_2"
+				   x="230"
+				   y="320"
+				   label="版本2.0"
+				   selected="true"
+				   groupName="sceneMapBlockVersion"
+				   click="blockVersion_clickHandler(event)">
+	</s:RadioButton>
+	<ui:LabelInputItem id="exportItem"
+					   x="20"
+					   y="360"
+					   itemWidth="140"
+					   label="导出信息"
+					   applyLabel="导出"
+					   applyCallback="{onExportApplyCallback}">
+	</ui:LabelInputItem>
+	<s:Button x="165"
+			  y="395"
+			  label="导出信息"
+			  id="btn_export"
+			  fontFamily="SimSun"
+			  click="btn_export_clickHandler(event)"/>
+</s:TitleWindow>

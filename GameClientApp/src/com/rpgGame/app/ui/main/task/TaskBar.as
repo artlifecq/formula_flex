@@ -158,7 +158,7 @@ package com.rpgGame.app.ui.main.task
 					switch (taskInfo.type)
 					{
 						case TaskType.TASK_TYPE_STORY_DUNGEON:
-							SceneSender.requestLeaveDungeon();
+//							SceneSender.requestLeaveDungeon();
 							break;
 					}
 				}

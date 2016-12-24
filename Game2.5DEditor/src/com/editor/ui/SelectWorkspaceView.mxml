@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 选择工作空间窗口
+* @author L.L.M.Sunny
+* 创建时间：2015-6-17 上午10:30:12
+*
+-->
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="540"
+			   height="160"
+			   title="选择工作空间"
+			   fontFamily="SimSun"
+			   creationComplete="onCreationComplete()"
+			   initialize="onInitialize()"
+			   close="window1_closeHandler(event)">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import com.editor.cfg.EditorConfig;
+			import com.editor.manager.AppManager;
+
+			import mx.controls.Alert;
+			import mx.managers.PopUpManager;
+			private var _file : File;
+
+			private static var _window : SelectWorkspaceView;
+
+			public static function open() : void
+			{
+				if (!_window)
+				{
+					_window = new SelectWorkspaceView();
+					PopUpManager.addPopUp(_window, AppManager.getInstance().appRoot, true);
+					PopUpManager.centerPopUp(_window);
+				}
+				PopUpManager.bringToFront(_window);
+			}
+
+			public static function close() : void
+			{
+				if (_window)
+				{
+					_window.destroy();
+					PopUpManager.removePopUp(_window);
+				}
+				_window = null;
+			}
+
+			private function onInitialize() : void
+			{
+				visible = false;
+			}
+
+			private function onCreationComplete() : void
+			{
+				visible = true;
+				okBtn.enabled = false;
+				if (EditorConfig.WORKSPACE_PATH)
+					_file = new File(EditorConfig.WORKSPACE_PATH);
+				if (!_file)
+					_file = File.documentsDirectory;
+				pathText.text = _file.nativePath;
+			}
+
+			protected function window1_closeHandler(event : Event) : void
+			{
+				close();
+			}
+
+			protected function button1_clickHandler(event : MouseEvent) : void
+			{
+				_file.browseForDirectory("选择要使用的工作空间目录");
+				_file.addEventListener(Event.SELECT, directoySelectHandler);
+			}
+
+			private function directoySelectHandler(e : Event) : void
+			{
+				pathText.text = _file.nativePath;
+				if (_file.nativePath == File.applicationDirectory.nativePath || //
+					_file.nativePath == File.applicationStorageDirectory.nativePath || //
+					_file.nativePath == File.desktopDirectory.nativePath || //
+					_file.nativePath == File.documentsDirectory.nativePath)
+				{
+					Alert.show("路径无效，请重新选择！", "提示");
+					return;
+				}
+				okBtn.enabled = true;
+			}
+
+			protected function button2_clickHandler(event : MouseEvent) : void
+			{
+				if (_file)
+				{
+					EditorConfig.WORKSPACE_PATH = _file.nativePath;
+					EditorConfig.save();
+					AppManager.getInstance().readWorkspaceData();
+				}
+				close();
+				AppManager.getInstance().reboot();
+			}
+
+			protected function button3_clickHandler(event : MouseEvent) : void
+			{
+				close();
+			}
+
+			private function destroy() : void
+			{
+			}
+		]]>
+	</fx:Script>
+	<s:Label x="30"
+			 y="30"
+			 chromeColor="#FFFFFF"
+			 fontWeight="normal"
+			 text="工作空间(W)："/>
+	<s:TextInput id="pathText"
+				 x="109"
+				 y="25"
+				 width="301"
+				 chromeColor="#FFFFFF"
+				 contentBackgroundColor="#333333"
+				 editable="false"/>
+	<s:Button x="418"
+			  y="26"
+			  label="浏览(B)..."
+			  click="button1_clickHandler(event)"/>
+	<s:Button id="okBtn"
+			  x="346"
+			  y="90"
+			  label="确定"
+			  click="button2_clickHandler(event)"/>
+	<s:Button x="428"
+			  y="90"
+			  label="取消"
+			  click="button3_clickHandler(event)"/>
+</s:TitleWindow>

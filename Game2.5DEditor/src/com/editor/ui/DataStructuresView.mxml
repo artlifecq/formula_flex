@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 数据结构窗口
+* @author L.L.M.Sunny
+* 创建时间：2015-8-17 上午10:30:12
+*
+-->
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="600"
+			   height="500"
+			   title="数据结构"
+			   fontFamily="SimSun"
+			   creationComplete="onCreationComplete()"
+			   initialize="onInitialize()"
+			   close="window1_closeHandler(event)"
+			   xmlns:ui="com.editor.ui.*">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.cfg.ConfigData;
+			import com.editor.cfg.ProjectConfig;
+			import com.editor.ctrl.AppMenu;
+			import com.editor.data.InputType;
+			import com.editor.data.TabelData;
+			import com.editor.data.TabelFieldData;
+			import com.editor.enum.FeaturesType;
+			import com.editor.events.FuncTagEvent;
+			import com.editor.manager.AppManager;
+			import com.editor.manager.DataStructuresManager;
+
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.managers.PopUpManager;
+
+			import org.client.mainCore.manager.EventManager;
+
+			private static var _window : DataStructuresView;
+
+			public static function open() : void
+			{
+				if (!_window)
+				{
+					_window = new DataStructuresView();
+					PopUpManager.addPopUp(_window, AppManager.getInstance().appRoot, false);
+					PopUpManager.centerPopUp(_window);
+					AppMenu.getInstance().toggleDataStructuresView.checked = true;
+				}
+				PopUpManager.bringToFront(_window);
+			}
+
+			public static function close() : void
+			{
+				if (_window)
+				{
+					_window.destroy();
+					PopUpManager.removePopUp(_window);
+					AppMenu.getInstance().toggleDataStructuresView.checked = false;
+				}
+				_window = null;
+			}
+
+			public static function get window() : DataStructuresView
+			{
+				return _window;
+			}
+
+			private function onInitialize() : void
+			{
+				visible = false;
+			}
+
+			[Bindable]
+			private var _tabelDatas : ArrayCollection;
+			[Bindable]
+			private var _fields : ArrayCollection;
+
+			private function onCreationComplete() : void
+			{
+				visible = true;
+
+				_tabelDatas = new ArrayCollection();
+				createTableItem.setData("");
+				createFieldItem.setData("");
+				_fields = new ArrayCollection();
+				pullData();
+			}
+
+			private function window1_closeHandler(event : Event) : void
+			{
+				close();
+			}
+
+			private function destroy() : void
+			{
+				_tabelDatas = null;
+				_fields = null;
+			}
+
+			private function onTableApplyCallback(item : LabelInputItem) : void
+			{
+				if (!item.data)
+				{
+					Alert.show("数据表名称不能为空！", "提示");
+					return;
+				}
+				var tabel : TabelData = DataStructuresManager.getInstance().addTabel(String(item.data));
+				if (!tabel)
+				{
+					Alert.show("已存在该名称的数据表！", "提示");
+					return;
+				}
+				DataStructuresManager.getInstance().selectedTabel = tabel;
+				pullData();
+			}
+
+			private function onFieldApplyCallback(item : LabelInputItem) : void
+			{
+				if (!item.data)
+				{
+					Alert.show("字段名称不能为空！", "提示");
+					return;
+				}
+				var tabel : TabelData = DataStructuresManager.getInstance().selectedTabel;
+				if (!tabel)
+				{
+					Alert.show("请选择一份数据表！", "提示");
+					return;
+				}
+
+				var field : TabelFieldData = tabel.addField(String(item.data));
+				if (!field)
+				{
+					Alert.show("数据表已存在该名称的字段！", "提示");
+					return;
+				}
+				_fields.source = tabel.getFieldList();
+				field_data.dataProvider = _fields;
+				DataStructuresManager.getInstance().selectedFiled = field;
+				field_data.selectedItem = field;
+				var index : int = _fields.getItemIndex(field);
+				if (index > -1)
+					callLater(field_data.scrollToIndex, [index]);
+				openFieldEditView(field);
+			}
+
+			public function pullData() : void
+			{
+				var tabels : Array = DataStructuresManager.getInstance().getTabelList();
+				_tabelDatas.source = tabels;
+				tabel_data.dataProvider = _tabelDatas;
+				var tabel : TabelData = DataStructuresManager.getInstance().selectedTabel;
+				tabel_data.selectedItem = tabel;
+				var index : int = _tabelDatas.getItemIndex(tabel);
+				if (index > -1)
+					callLater(tabel_data.scrollToIndex, [index]);
+				if (tabel)
+				{
+					_fields.source = tabel.getFieldList();
+					field_data.dataProvider = _fields;
+				}
+				else
+				{
+					_fields.source = null;
+					field_data.dataProvider = _fields;
+				}
+				var field : TabelFieldData = DataStructuresManager.getInstance().selectedFiled;
+				field_data.selectedItem = field;
+				index = _fields.getItemIndex(field);
+				if (index > -1)
+					callLater(field_data.scrollToIndex, [index]);
+			}
+
+			protected function ok_clickHandler(event : MouseEvent) : void
+			{
+				ProjectConfig.saveProject();
+				EventManager.dispatchEvent(FuncTagEvent.UPDATE_FUNC_TAGS);
+				Alert.show("数据结构设置成功！", "提示");
+				close();
+				AppManager.getInstance().reboot();
+			}
+
+			protected function cancel_clickHandler(event : MouseEvent) : void
+			{
+				close();
+			}
+
+			private function btn_del_clickHandler(event : MouseEvent) : void
+			{
+				var tabel : TabelData = DataStructuresManager.getInstance().selectedTabel;
+				if (!tabel)
+					return;
+				DataStructuresManager.getInstance().removeTabel(tabel.name);
+				pullData();
+			}
+
+			protected function btn_add_field_clickHandler(event : MouseEvent) : void
+			{
+				var tabel : TabelData = DataStructuresManager.getInstance().selectedTabel;
+				if (!tabel)
+				{
+					Alert.show("请选择一份数据表！", "提示");
+					return;
+				}
+
+				TabelFieldsView.open();
+				var tabelFieldsView : TabelFieldsView = TabelFieldsView.window;
+				if (tabelFieldsView)
+				{
+					tabelFieldsView.setSelectedCallback(onSelectedCallback);
+				}
+			}
+
+			private function onSelectedCallback(filedName : String) : void
+			{
+				var tabel : TabelData = DataStructuresManager.getInstance().selectedTabel;
+				if (!tabel)
+				{
+					Alert.show("请选择一份数据表！", "提示");
+					return;
+				}
+
+				var field : TabelFieldData = tabel.addField(filedName);
+				if (!field)
+				{
+					Alert.show("数据表已存在该名称的字段！", "提示");
+					return;
+				}
+				_fields.source = tabel.getFieldList();
+				field_data.dataProvider = _fields;
+				DataStructuresManager.getInstance().selectedFiled = field;
+				field_data.selectedItem = field;
+				var index : int = _fields.getItemIndex(field);
+				if (index > -1)
+					callLater(field_data.scrollToIndex, [index]);
+				openFieldEditView(field);
+			}
+
+			protected function btn_del_field_clickHandler(event : MouseEvent) : void
+			{
+				var tabel : TabelData = DataStructuresManager.getInstance().selectedTabel;
+				if (!tabel)
+				{
+					Alert.show("请选择一份数据表！", "提示");
+					return;
+				}
+				var field : TabelFieldData = DataStructuresManager.getInstance().selectedFiled;
+				if (!field)
+				{
+					Alert.show("请选择一个字段！", "提示");
+					return;
+				}
+				DataStructuresManager.getInstance().removeTabelField(tabel.name, field.name);
+				pullData();
+			}
+
+			protected function field_data_clickHandler(event : MouseEvent) : void
+			{
+				var field : TabelFieldData = field_data.selectedItem as TabelFieldData;
+				if (!field)
+					return;
+				DataStructuresManager.getInstance().selectedFiled = field;
+			}
+
+			protected function btn_major_key_clickHandler(event : MouseEvent) : void
+			{
+				var tabel : TabelData = DataStructuresManager.getInstance().selectedTabel;
+				if (!tabel)
+				{
+					Alert.show("请选择一份数据表！", "提示");
+					return;
+				}
+				var field : TabelFieldData = DataStructuresManager.getInstance().selectedFiled;
+				if (!field)
+				{
+					Alert.show("请选择一个字段！", "提示");
+					return;
+				}
+				var majorField : TabelFieldData = tabel.majorKeyField;
+				if (majorField)
+					majorField.isKey = false;
+				tabel.majorKey = field.name;
+				field.isKey = true;
+				pullData();
+			}
+
+			protected function tabel_data_clickHandler(event : MouseEvent) : void
+			{
+				var tabel : TabelData = tabel_data.selectedItem as TabelData;
+				if (!tabel)
+					return;
+				DataStructuresManager.getInstance().selectedTabel = tabel;
+
+				_fields.source = tabel.getFieldList();
+				field_data.dataProvider = _fields;
+			}
+
+			protected function tabel_data_doubleClickHandler(event : MouseEvent) : void
+			{
+				var tabel : TabelData = tabel_data.selectedItem as TabelData;
+				if (!tabel)
+					return;
+				var window : ConfigEditView = ConfigEditView.open("数据表", tabel);
+				var inputTypes : Dictionary = new Dictionary();
+				var inputType : InputType = new InputType("*.txt");
+				inputType.setterField = "tabelFilePath";
+				inputType.getterField = "tabelFilePath";
+				inputTypes[TabelFieldData.FILE_PATH_FIELD_NAME] = inputType;
+				inputType = new InputType("dire");
+				inputType.setterField = "tabelDirePath";
+				inputType.getterField = "tabelDirePath";
+				inputTypes[TabelFieldData.FILE_DIRE_FIELD_NAME] = inputType;
+				inputType = new InputType("list");
+				inputType.listData = new ArrayCollection(FeaturesType.features);
+				inputTypes[TabelFieldData.FEATURE_TYPE_FIELD_NAME] = inputType;
+				inputType = new InputType("list");
+				inputType.listData = new ArrayCollection(FeaturesType.features);
+				inputTypes[TabelFieldData.SUB_FEATURE_TYPE_FIELD_NAME] = inputType;
+				window.setData(tabel, onInputTabelData, null, inputTypes, onValidate);
+			}
+
+			protected function field_data_doubleClickHandler(event : MouseEvent) : void
+			{
+				var field : TabelFieldData = field_data.selectedItem as TabelFieldData;
+				if (!field)
+					return;
+				openFieldEditView(field);
+			}
+
+			private function openFieldEditView(field : TabelFieldData) : void
+			{
+				var tabel : TabelData = DataStructuresManager.getInstance().selectedTabel;
+				if (tabel)
+				{
+					var window : ConfigEditView = ConfigEditView.open(tabel.name + "数据字段", field);
+					var inputTypes : Dictionary = new Dictionary();
+					inputTypes[TabelFieldData.NAME_FIELD_NAME] = new InputType("string", false);
+					if (field.name == TabelFieldData.ID_FIELD //
+						|| field.name == TabelFieldData.NAME_FIELD //
+						|| field.name == TabelFieldData.FIELD_NAME_FIELD)
+					{
+						inputTypes[TabelFieldData.FIELD_NAME_FIELD_NAME] = new InputType("string");
+					}
+					inputTypes[TabelFieldData.NAME_FIELD_NAME] = new InputType("string", false);
+					var inputType : InputType = new InputType("list");
+					inputType.listData = new ArrayCollection(DataStructuresManager.getInstance().getOtherTabels());
+					inputTypes[TabelFieldData.LINK_TABEL_FIELD_NAME] = inputType;
+					inputType = new InputType("list");
+					inputType.listData = new ArrayCollection(DataStructuresManager.getInstance().getParentTabelFields());
+					inputTypes[TabelFieldData.PARENT_TABLE_FIELD_FIELD_NAME] = inputType;
+					inputType = new InputType("list");
+					inputType.listData = new ArrayCollection(DataStructuresManager.getInstance().getOtherFields());
+					inputTypes[TabelFieldData.DATA_PROVIDED_FIELD_FIELD_NAME] = inputType;
+					window.setData(field, onInputFieldData, null, inputTypes, onValidate);
+				}
+			}
+
+			private function onValidate(dataField : String, data : ConfigData) : Object
+			{
+				if (data is TabelData)
+				{
+					var tabel : TabelData = data as TabelData;
+					if (dataField == TabelFieldData.NAME_FIELD_NAME)
+					{
+						var tabelNum : int = DataStructuresManager.getInstance().getTabelNum(tabel.name);
+						if (tabelNum > 1)
+							return {valid: false, tips: "存在同名配置表"};
+						else
+							return {valid: true, tips: "配置表名称"};
+					}
+				}
+				else if (data is TabelFieldData)
+				{
+
+				}
+				return null;
+			}
+
+			private function onInputTabelData(dataField : String, data : ConfigData) : void
+			{
+				pullData();
+			}
+
+			private function onInputFieldData(dataField : String, data : ConfigData) : void
+			{
+				var tabel : TabelData = DataStructuresManager.getInstance().selectedTabel;
+				if (tabel)
+				{
+					_fields.source = tabel.getFieldList();
+					field_data.dataProvider = _fields;
+				}
+				else
+				{
+					_fields.source = null;
+					field_data.dataProvider = _fields;
+				}
+				var field : TabelFieldData = DataStructuresManager.getInstance().selectedFiled;
+				field_data.selectedItem = field;
+				var index : int = _fields.getItemIndex(field);
+				if (index > -1)
+					callLater(field_data.scrollToIndex, [index]);
+			}
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<ui:LabelInputItem id="createTableItem"
+					   x="20"
+					   y="20"
+					   itemWidth="330"
+					   label="创建数据表"
+					   applyLabel="创建"
+					   applyCallback="{onTableApplyCallback}">
+	</ui:LabelInputItem>
+	<ui:LabelInputItem id="createFieldItem"
+					   x="20"
+					   y="45"
+					   itemWidth="330"
+					   label="创建字段"
+					   applyLabel="创建"
+					   applyCallback="{onFieldApplyCallback}">
+	</ui:LabelInputItem>
+	<s:Button x="80"
+			  y="70"
+			  label="删除数据表"
+			  id="btn_del"
+			  click="btn_del_clickHandler(event)"/>
+	<mx:DataGrid id="tabel_data"
+				 borderColor="0"
+				 width="200"
+				 height="300"
+				 x="20"
+				 y="100"
+				 dataProvider="{_tabelDatas}"
+				 click="tabel_data_clickHandler(event)"
+				 doubleClickEnabled="true"
+				 doubleClick="tabel_data_doubleClickHandler(event)">
+		<mx:columns>
+			<mx:DataGridColumn headerText="ID"
+							   dataField="id"
+							   width="50"/>
+			<mx:DataGridColumn headerText="表名称"
+							   dataField="name"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:DataGrid id="field_data"
+				 x="260"
+				 y="100"
+				 width="200"
+				 height="300"
+				 editable="false"
+				 borderColor="0"
+				 dataProvider="{_fields}"
+				 click="field_data_clickHandler(event)"
+				 doubleClickEnabled="true"
+				 doubleClick="field_data_doubleClickHandler(event)">
+		<mx:columns>
+			<mx:DataGridColumn headerText="字段标签"
+							   dataField="mFieldLabel"
+							   width="200"/>
+			<mx:DataGridColumn headerText="链接表"
+							   color="0x00ff00"
+							   dataField="mLinkTabelLabel"/>
+			<mx:DataGridColumn headerText="主键"
+							   color="0x0000ff"
+							   dataField="isKeyFlag"
+							   width="60"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<s:Button x="480"
+			  y="180"
+			  label="增加字段"
+			  id="btn_add_field"
+			  click="btn_add_field_clickHandler(event)"/>
+	<s:Button x="480"
+			  y="220"
+			  label="删除字段"
+			  id="btn_del_field"
+			  click="btn_del_field_clickHandler(event)"/>
+	<s:Button x="480"
+			  y="260"
+			  label="设为主键"
+			  id="btn_major_key"
+			  click="btn_major_key_clickHandler(event)"/>
+	<s:Group x="40"
+			 y="420">
+		<s:Button id="okBtn"
+				  x="0"
+				  y="0"
+				  label="确定"
+				  click="ok_clickHandler(event)"/>
+		<s:Button x="82"
+				  y="0"
+				  label="取消"
+				  click="cancel_clickHandler(event)"/>
+	</s:Group>
+</s:TitleWindow>
+

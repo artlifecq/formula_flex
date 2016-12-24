@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 特效文件列表
+* @author L.L.M.Sunny
+* 创建时间：2015-7-17 上午10:30:12
+*
+-->
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="100%"
+		 height="100%"
+		 initialize="onInitialize()"
+		 creationComplete="onCreationComplete()">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.cfg.ConfigData;
+			import com.editor.cfg.EffectResConfig;
+			import com.editor.cfg.ProjectConfig;
+			import com.editor.data.ConfigDesc;
+			import com.editor.data.InternalTabelName;
+			import com.editor.data.TabelData;
+			import com.editor.events.ConfigListEvent;
+			import com.editor.events.EffectFileListEvent;
+			import com.editor.manager.DataStructuresManager;
+			import com.editor.utils.FileUtil;
+
+			import mx.collections.ArrayCollection;
+			import mx.events.IndexChangedEvent;
+
+			import org.client.mainCore.manager.EventManager;
+
+			[Bindable]
+			/** 特效数据 **/
+			private var _effectItems : ArrayCollection;
+			private var _kindItems : Array;
+			private var _kindAllItem : EffectFileListItems;
+			private var _searchKey : String = "";
+
+			private function onInitialize() : void
+			{
+				_effectItems = new ArrayCollection();
+			}
+
+			private function onCreationComplete() : void
+			{
+				_kindItems = [];
+				pullData();
+				EventManager.addEvent(EffectFileListEvent.PULL_EFFECT_FILE_LIST, pullData);
+				EventManager.addEvent(EffectFileListEvent.UPDATE_EFFECT_FILE_LIST, updateData);
+				EventManager.addEvent(ConfigListEvent.SELECTED_CONFIG_DATA, onSelectedConfigData);
+			}
+
+			private function pullData() : void
+			{
+				clearItems();
+				enableKind.selected = ProjectConfig.USE_EFFECT_FILE_KINDS;
+
+				_kindAllItem = new EffectFileListItems();
+				_kindAllItem.setEffectItems(null);
+				_kindAllItem.label = "全部";
+				tabBar.addElement(_kindAllItem);
+
+				if (ProjectConfig.USE_EFFECT_FILE_KINDS)
+				{
+					var kindTypes : Array = EffectResConfig.effectFileKinds;
+					for each (var kt : String in kindTypes)
+					{
+						var kindItem : EffectFileListItems = new EffectFileListItems();
+						kindItem.setEffectItems(null);
+						kindItem.label = kt;
+						tabBar.addElement(kindItem);
+						_kindItems.push(kindItem);
+					}
+				}
+
+				updateData();
+			}
+
+			private function updateData() : void
+			{
+				var tabel : TabelData = DataStructuresManager.getInstance().getTabel(InternalTabelName.EffectResConfigName);
+				var configDesc : ConfigDesc = tabel ? tabel.getConfigDesc() : null;
+				if (!configDesc)
+					return;
+
+				var cacheDic : Dictionary = ConfigData.getCacheDatas(configDesc, _searchKey, ["name", "mRes"]);
+				var datas : Array = FileUtil.dictToArray(cacheDic);
+				FileUtil.sortDatas(datas);
+
+				_effectItems.source = datas;
+				_kindAllItem.setEffectItems(_effectItems);
+
+				if (ProjectConfig.USE_EFFECT_FILE_KINDS)
+				{
+					var kindTypes : Array = EffectResConfig.effectFileKinds;
+					var kindTypeLen : int = kindTypes.length;
+					for (var j : int = 0; j < kindTypeLen; j++)
+					{
+						var kt : String = kindTypes[j];
+						var effectItems : ArrayCollection = new ArrayCollection();
+						for each (var data : EffectResConfig in _effectItems.source)
+						{
+							if (String(data.mRes).indexOf(kt + "/") == 0)
+								effectItems.addItem(data);
+						}
+						var kindItem : EffectFileListItems = _kindItems[j];
+						kindItem.setEffectItems(effectItems);
+					}
+				}
+			}
+
+			private function clearItems() : void
+			{
+				tabBar.removeAll();
+				if (_kindItems)
+				{
+					for each (var kindItem : EffectFileListItems in _kindItems)
+					{
+						kindItem.destroy();
+					}
+					_kindItems.length = 0;
+				}
+				if (_kindAllItem)
+				{
+					_kindAllItem.destroy();
+					_kindAllItem = null;
+				}
+			}
+
+			public function destroy() : void
+			{
+				clearItems();
+				_effectItems = null;
+
+				EventManager.removeEvent(EffectFileListEvent.PULL_EFFECT_FILE_LIST, pullData);
+				EventManager.removeEvent(EffectFileListEvent.UPDATE_EFFECT_FILE_LIST, updateData);
+				EventManager.removeEvent(ConfigListEvent.SELECTED_CONFIG_DATA, onSelectedConfigData);
+			}
+
+			private function cancelSelect() : void
+			{
+				for each (var kindItem : EffectFileListItems in _kindItems)
+				{
+					if (kindItem.data_effect)
+						kindItem.data_effect.selectedItem = null;
+				}
+				if (_kindAllItem.data_effect)
+					_kindAllItem.data_effect.selectedItem = null;
+			}
+
+			private function onSelectedConfigData(data : ConfigData) : void
+			{
+				if (data.tabelName == InternalTabelName.EffectResConfigName)
+				{
+					var tabel : TabelData = DataStructuresManager.getInstance().getTabel(InternalTabelName.EffectResConfigName);
+					var configDesc : ConfigDesc = tabel ? tabel.getConfigDesc() : null;
+					if (!configDesc)
+						return;
+
+					configDesc.selectedData = data;
+					var isSelected : Boolean = false;
+					var index : int;
+					for each (var kindItem : EffectFileListItems in _kindItems)
+					{
+						if (kindItem.data_effect)
+							kindItem.data_effect.selectedItem = null;
+						if (!isSelected)
+						{
+							if (kindItem.getEffectItems().getItemIndex(configDesc.selectedData) != -1)
+							{
+								if (tabBar.selectedChild != kindItem)
+									tabBar.selectedChild = kindItem
+								if (kindItem.data_effect)
+								{
+									kindItem.data_effect.selectedItem = configDesc.selectedData;
+									index = kindItem.effectItems.getItemIndex(configDesc.selectedData);
+									if (index > -1)
+										callLater(kindItem.data_effect.scrollToIndex, [index]);
+								}
+								isSelected = true;
+								break;
+							}
+						}
+					}
+					if (!isSelected)
+					{
+						if (_kindAllItem.getEffectItems().getItemIndex(configDesc.selectedData) != -1)
+						{
+							if (tabBar.selectedChild != _kindAllItem)
+								tabBar.selectedChild = _kindAllItem;
+							if (_kindAllItem.data_effect)
+							{
+								_kindAllItem.data_effect.selectedItem = configDesc.selectedData;
+								index = _kindAllItem.effectItems.getItemIndex(configDesc.selectedData);
+								if (index > -1)
+									callLater(_kindAllItem.data_effect.scrollToIndex, [index]);
+							}
+						}
+					}
+				}
+			}
+
+			private function tabnavigator1_changeHandler(event : IndexChangedEvent) : void
+			{
+				var tabel : TabelData = DataStructuresManager.getInstance().getTabel(InternalTabelName.EffectResConfigName);
+				var configDesc : ConfigDesc = tabel ? tabel.getConfigDesc() : null;
+				if (!configDesc)
+					return;
+				var kindItem : EffectFileListItems = tabBar.selectedChild as EffectFileListItems;
+				if (kindItem.data_effect)
+				{
+					kindItem.data_effect.selectedItem = configDesc.selectedData;
+					var index : int = kindItem.effectItems.getItemIndex(configDesc.selectedData);
+					if (index > -1)
+						callLater(kindItem.data_effect.scrollToIndex, [index]);
+				}
+			}
+
+			protected function inputText_keyDownHandler(event : KeyboardEvent) : void
+			{
+				if (event.keyCode == 13)
+				{
+					_searchKey = searchText.text;
+					updateData();
+				}
+			}
+
+			protected function inputText_focusOutHandler(event : FocusEvent) : void
+			{
+				_searchKey = searchText.text;
+				updateData();
+			}
+
+			protected function button1_clickHandler(event : MouseEvent) : void
+			{
+				_searchKey = searchText.text;
+				updateData();
+			}
+
+			protected function enableKind_changeHandler(event : Event) : void
+			{
+				ProjectConfig.USE_EFFECT_FILE_KINDS = enableKind.selected;
+				pullData();
+			}
+		]]>
+	</fx:Script>
+	<s:Group width="100%"
+			 height="100%">
+		<s:TextInput id="searchText"
+					 x="10"
+					 y="2"
+					 width="200"
+					 chromeColor="#FFFFFF"
+					 contentBackgroundColor="#444444"
+					 fontFamily="SimSun"
+					 keyDown="inputText_keyDownHandler(event)"
+					 focusOut="inputText_focusOutHandler(event)">
+		</s:TextInput>
+		<s:Button x="220"
+				  y="2"
+				  label="搜索"
+				  fontFamily="SimSun"
+				  click="button1_clickHandler(event)">
+		</s:Button>
+		<s:CheckBox id="enableKind"
+					label="启用分类"
+					x="300"
+					y="2"
+					fontFamily="SimSun"
+					selected="false"
+					change="enableKind_changeHandler(event)">
+		</s:CheckBox>
+		<s:Group x="0"
+				 y="30"
+				 width="100%"
+				 height="100%">
+			<mx:TabNavigator id="tabBar"
+							 left="5"
+							 right="5"
+							 top="5"
+							 bottom="5"
+							 paddingTop="5"
+							 width="100%"
+							 height="100%"
+							 change="tabnavigator1_changeHandler(event)">
+			</mx:TabNavigator>
+		</s:Group>
+	</s:Group>
+</s:Group>

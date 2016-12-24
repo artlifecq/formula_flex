@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 检查文件窗口
+* @author L.L.M.Sunny
+* 创建时间：2016-03-29 上午10:30:12
+*
+-->
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="1000"
+			   height="600"
+			   title="检查文件"
+			   fontFamily="SimSun"
+			   creationComplete="onCreationComplete()"
+			   initialize="onInitialize()"
+			   close="window1_closeHandler(event)"
+			   xmlns:ui="com.editor.ui.*">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.manager.AppManager;
+
+			import mx.managers.PopUpManager;
+
+			private static var _window : CheckFilesView;
+
+			public static function open() : void
+			{
+				if (!_window)
+				{
+					_window = new CheckFilesView();
+					PopUpManager.addPopUp(_window, AppManager.getInstance().appRoot, false);
+					PopUpManager.centerPopUp(_window);
+				}
+				PopUpManager.bringToFront(_window);
+			}
+
+			public static function close() : void
+			{
+				if (_window)
+				{
+					_window.destroy();
+					PopUpManager.removePopUp(_window);
+				}
+				_window = null;
+			}
+
+			public static function get window() : CheckFilesView
+			{
+				return _window;
+			}
+
+			private function onInitialize() : void
+			{
+				visible = false;
+			}
+
+			private function window1_closeHandler(event : Event) : void
+			{
+				close();
+			}
+
+			private function onCreationComplete() : void
+			{
+				textAre.htmlText = "正在检查文件：";
+				visible = true;
+			}
+
+			public function destroy() : void
+			{
+				textAre.htmlText = "";
+			}
+
+			public function setProgress(curr : int, total : int) : void
+			{
+				progressBar.setProgress(curr, total);
+				var progress : int = curr / total * 100;
+				progressBar.label = "当前进度：" + progress + "%";
+			}
+
+			public function addError(msg : String) : void
+			{
+				textAre.htmlText += "<br>" + msg;
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<mx:TextArea id="textAre"
+				 x="10"
+				 y="45"
+				 width="970"
+				 height="500"
+				 fontFamily="SimSun"
+				 fontSize="14"
+				 editable="false">
+	</mx:TextArea>
+	<mx:ProgressBar x="104"
+					y="10"
+					width="876"
+					id="progressBar"
+					labelPlacement="bottom"
+					minimum="0"
+					visible="true"
+					maximum="100"
+					direction="right"
+					mode="manual"/>
+	<s:Label x="16"
+			 y="14"
+			 width="67"
+			 height="18"
+			 text="当前进度："/>
+</s:TitleWindow>

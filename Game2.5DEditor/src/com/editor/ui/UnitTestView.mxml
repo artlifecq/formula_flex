@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 单元测试窗口
+* @author L.L.M.Sunny
+* 创建时间：2016-03-29 上午10:30:12
+*
+-->
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="400"
+			   height="600"
+			   title="单元测试"
+			   fontFamily="SimSun"
+			   creationComplete="onCreationComplete()"
+			   initialize="onInitialize()"
+			   close="window1_closeHandler(event)"
+			   xmlns:ui="com.editor.ui.*">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.cfg.AvatarResConfig;
+			import com.editor.cfg.ConfigData;
+			import com.editor.cfg.GlobalConfig;
+			import com.editor.ctrl.AppMenu;
+			import com.editor.data.ConfigDesc;
+			import com.editor.data.InternalTabelName;
+			import com.editor.data.MonsterData;
+			import com.editor.data.RenderUnitID;
+			import com.editor.data.RenderUnitType;
+			import com.editor.data.RoleData;
+			import com.editor.data.TabelData;
+			import com.editor.manager.AppManager;
+			import com.editor.manager.DataStructuresManager;
+			import com.editor.manager.SceneRoleManager;
+			import com.editor.scene.SceneRole;
+			import com.game.engine3D.scene.render.RenderUnit3D;
+
+			import mx.managers.PopUpManager;
+
+			import gs.TweenLite;
+			import gs.easing.Linear;
+
+			private static var _window : UnitTestView;
+
+			public static function open() : void
+			{
+				if (!_window)
+				{
+					_window = new UnitTestView();
+					PopUpManager.addPopUp(_window, AppManager.getInstance().appRoot, false);
+					_window.move(AppManager.getInstance().appWidth - _window.width - 20, 2);
+					AppMenu.getInstance().toggleUnitTestView.checked = true;
+				}
+				PopUpManager.bringToFront(_window);
+			}
+
+			public static function close() : void
+			{
+				if (_window)
+				{
+					_window.destroy();
+					PopUpManager.removePopUp(_window);
+					AppMenu.getInstance().toggleUnitTestView.checked = false;
+				}
+				_window = null;
+			}
+
+			public static function get window() : UnitTestView
+			{
+				return _window;
+			}
+
+			private function onInitialize() : void
+			{
+				visible = false;
+			}
+
+			private function window1_closeHandler(event : Event) : void
+			{
+				close();
+			}
+
+			private function onCreationComplete() : void
+			{
+				visible = true;
+			}
+
+			public function destroy() : void
+			{
+				SceneRoleManager.getInstance().removeUnitTestEntity();
+				_blendFlip = false;
+			}
+
+			protected function btn_death_effect_clickHandler(event : MouseEvent) : void
+			{
+				var monsterData : MonsterData = new MonsterData();
+				monsterData.hp = 0;
+				SceneRoleManager.getInstance().createUnitTestMonster(monsterData);
+			}
+
+			protected function btn_outline_effect_clickHandler(event : MouseEvent) : void
+			{
+				var monsterData : MonsterData = new MonsterData();
+				monsterData.hp = 100;
+				SceneRoleManager.getInstance().createUnitTestMonster(monsterData);
+			}
+
+			private var _blendFlip : Boolean = false;
+
+			protected function btn_blend_effect_clickHandler(event : MouseEvent) : void
+			{
+				var monsterData : MonsterData = new MonsterData();
+				monsterData.hp = 100;
+				SceneRoleManager.getInstance().createUnitTestMonster(monsterData);
+				_blendFlip = false;
+
+				blendToNext();
+			}
+
+			private function blendToNext() : void
+			{
+				var role : SceneRole = SceneRoleManager.getInstance().unitTestEntity;
+				if (!role)
+				{
+					return;
+				}
+				var tabel : TabelData = DataStructuresManager.getInstance().getTabel(InternalTabelName.AvatarResConfigName);
+				if (tabel)
+				{
+					var desc : ConfigDesc = tabel.getConfigDesc();
+					var datas : Array = ConfigData.getCfgByFieldValue(desc, desc.majorKey, (role.data as RoleData).avatarInfo.bodyResID);
+					if (datas.length > 0)
+					{
+						var avatarResConfig : AvatarResConfig = datas[0] as AvatarResConfig;
+						if (avatarResConfig.mBlendMaskTexture && avatarResConfig.mBlendTexture)
+						{
+							var ru : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY);
+							TweenLite.killTweensOf(ru);
+							ru.addBlend(GlobalConfig.getAvatarTextureFilePath(avatarResConfig.mBlendMaskTexture), GlobalConfig.getAvatarTextureFilePath(avatarResConfig.mBlendTexture), avatarResConfig.mBlendMaterialName);
+							ru.blendBias = -2;
+							TweenLite.to(ru, 2, {blendBias: 2, ease: Linear.easeNone, onComplete: blendToPrev});
+						}
+					}
+				}
+			}
+
+			private function blendToPrev() : void
+			{
+				var role : SceneRole = SceneRoleManager.getInstance().unitTestEntity;
+				if (!role)
+				{
+					return;
+				}
+				var tabel : TabelData = DataStructuresManager.getInstance().getTabel(InternalTabelName.AvatarResConfigName);
+				if (tabel)
+				{
+					var desc : ConfigDesc = tabel.getConfigDesc();
+					var datas : Array = ConfigData.getCfgByFieldValue(desc, desc.majorKey, (role.data as RoleData).avatarInfo.bodyResID);
+					if (datas.length > 0)
+					{
+						var avatarResConfig : AvatarResConfig = datas[0] as AvatarResConfig;
+						if (avatarResConfig.mBlendRestoreMaskTexture && avatarResConfig.mBlendTexture)
+						{
+							var ru : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY);
+							TweenLite.killTweensOf(ru);
+							ru.addBlend(GlobalConfig.getAvatarTextureFilePath(avatarResConfig.mBlendRestoreMaskTexture), GlobalConfig.getAvatarTextureFilePath(avatarResConfig.mBlendTexture), avatarResConfig.mBlendMaterialName);
+							ru.blendBias = 2;
+							TweenLite.to(ru, 2, {blendBias: -2, ease: Linear.easeNone, onComplete: blendToNext});
+						}
+					}
+				}
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:Button x="10"
+			  y="30"
+			  label="死亡效果"
+			  id="btn_death_effect"
+			  fontFamily="SimSun"
+			  click="btn_death_effect_clickHandler(event)"/>
+	<s:Button x="10"
+			  y="60"
+			  label="外发光效果"
+			  id="btn_outline_effect"
+			  fontFamily="SimSun"
+			  click="btn_outline_effect_clickHandler(event)"/>
+	<s:Button x="10"
+			  y="90"
+			  label="贴图渐变混合"
+			  id="btn_blend_effect"
+			  fontFamily="SimSun"
+			  click="btn_blend_effect_clickHandler(event)"/>
+</s:TitleWindow>

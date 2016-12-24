@@ -93,9 +93,9 @@ package com.game.engine2D.scene.map.vo
                 }
                 return false;
             }
-            CONFIG::netDebug {
-                //NetDebug.LOG("[MapZone] ", "[load] ", "key:", this._key, " state:", STATE_DESC[this._state]);
-            }
+//            CONFIG::netDebug {
+//                //NetDebug.LOG("[MapZone] ", "[load] ", "key:", this._key, " state:", STATE_DESC[this._state]);
+//            }
             this._state = STATE_LOADING;
             this._completeHandler = cb;
             if (null == this._texture) {
@@ -116,9 +116,9 @@ package com.game.engine2D.scene.map.vo
                 }
                 return;
             }
-            CONFIG::netDebug {
-                //NetDebug.LOG("[MapZone] ", "[draw] ", "key:", this._key, " state:", STATE_DESC[this._state]);
-            }
+//            CONFIG::netDebug {
+//                //NetDebug.LOG("[MapZone] ", "[draw] ", "key:", this._key, " state:", STATE_DESC[this._state]);
+//            }
             this._state = STATE_DRAW;
             if (this._textureMaterial.texture) {
                 this._textureMaterial.texture.getTextureForStage3D(Stage3DLayerManager.stage3DProxy);
@@ -154,9 +154,9 @@ package com.game.engine2D.scene.map.vo
                 this._textureMaterial = null;
             }
             this._completeHandler = null;
-            CONFIG::netDebug {
-                //NetDebug.LOG("[MapZone] ", "[dispose] ", "key:", this._key, " state:", STATE_DESC[this._state]);
-            }
+//            CONFIG::netDebug {
+//                //NetDebug.LOG("[MapZone] ", "[dispose] ", "key:", this._key, " state:", STATE_DESC[this._state]);
+//            }
             this._state = STATE_CLEAR;
         }
         
@@ -171,9 +171,9 @@ package com.game.engine2D.scene.map.vo
                 }
                 return;
             }
-            CONFIG::netDebug {
-                //NetDebug.LOG("[MapZone] ", "[onLoaderComplete] ", "key:", this._key, " state:", STATE_DESC[this._state]);
-            }
+//            CONFIG::netDebug {
+//                //NetDebug.LOG("[MapZone] ", "[onLoaderComplete] ", "key:", this._key, " state:", STATE_DESC[this._state]);
+//            }
             this._state = STATE_LOADED;
             this._textureMaterial = MaterialUtils.getMaterialMapZoneByTexture(this._texture);
             if (null != this._completeHandler) {

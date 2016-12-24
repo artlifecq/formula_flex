@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 角色动作窗口
+* @author L.L.M.Sunny
+* 创建时间：2015-7-21 上午10:30:12
+*
+-->
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="200"
+			   height="170"
+			   title="角色动作"
+			   fontFamily="SimSun"
+			   creationComplete="onCreationComplete()"
+			   initialize="onInitialize()"
+			   close="window1_closeHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.cfg.ConfigData;
+			import com.editor.data.RenderUnitID;
+			import com.editor.data.RenderUnitType;
+			import com.editor.data.RoleActionType;
+			import com.editor.data.RoleData;
+			import com.editor.data.RoleStateType;
+			import com.editor.events.AvatarEvent;
+			import com.editor.events.AvatarPreviewEvent;
+			import com.editor.manager.AppManager;
+			import com.editor.manager.AvatarPreviewManager;
+			import com.editor.manager.SceneRoleManager;
+			import com.editor.scene.SceneRole;
+			import com.editor.state.role.action.PlayActionStateReference;
+			import com.game.engine3D.scene.render.RenderUnit3D;
+
+			import mx.collections.ArrayCollection;
+			import mx.managers.PopUpManager;
+
+			import away3d.animators.nodes.AnimationNodeBase;
+
+			import org.client.mainCore.manager.EventManager;
+
+			private static var _window : RoleActionView;
+
+			public static function open() : void
+			{
+				if (!_window)
+				{
+					_window = new RoleActionView();
+					PopUpManager.addPopUp(_window, AppManager.getInstance().appRoot, false);
+					_window.move(AppManager.getInstance().appWidth - _window.width - 420, 500);
+				}
+				PopUpManager.bringToFront(_window);
+			}
+
+			public static function close() : void
+			{
+				if (_window)
+				{
+					_window.destroy();
+					PopUpManager.removePopUp(_window);
+				}
+				_window = null;
+			}
+
+			public static function get window() : RoleActionView
+			{
+				return _window;
+			}
+
+			/** 换装数据 **/
+			[Bindable]
+			public var actionItems : ArrayCollection;
+			[Bindable]
+			public var selectedItem : Object;
+
+			private function get role() : SceneRole
+			{
+				return SceneRoleManager.getInstance().previewEntity;
+			}
+
+			private function onInitialize() : void
+			{
+				actionItems = new ArrayCollection();
+				visible = false;
+			}
+
+			private function onCreationComplete() : void
+			{
+				visible = true;
+				EventManager.addEvent(AvatarEvent.AVATAR_BODY_LOADED, onAvatarBodyLoaded);
+				EventManager.addEvent(AvatarEvent.AVATAR_EFFECT_LOADED, onAvatarBodyLoaded);
+				EventManager.addEvent(AvatarPreviewEvent.SET_ACTION, setActionHandler);
+				pullData();
+			}
+
+			private function onAvatarBodyLoaded(role : SceneRole) : void
+			{
+				AnimationExtraDataView.close();
+				pullData();
+			}
+
+			private function window1_closeHandler(event : Event) : void
+			{
+				AnimationExtraDataView.close();
+				close();
+			}
+
+			public function updateAvatarData() : void
+			{
+				AnimationExtraDataView.close();
+				pullData();
+			}
+
+			private function destroy() : void
+			{
+				EventManager.removeEvent(AvatarEvent.AVATAR_BODY_LOADED, onAvatarBodyLoaded);
+				EventManager.removeEvent(AvatarEvent.AVATAR_EFFECT_LOADED, onAvatarBodyLoaded);
+				EventManager.removeEvent(AvatarPreviewEvent.SET_ACTION, setActionHandler);
+
+				actionItems.removeAll();
+				actionItems = null;
+				selectedItem = null;
+			}
+
+			private function pullData() : void
+			{
+				if (!actionItems)
+					return;
+				var ru : RenderUnit3D = (role && role.avatar) ? role.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true) : null;
+				if (!ru)
+					ru = (role && role.avatar) ? role.avatar.getRenderUnitByID(RenderUnitType.EFFECT, RenderUnitID.EFFECT, true) : null;
+				var actionDatas : Array = [];
+				actionItems.removeAll();
+				var data : ConfigData;
+				var animationNames : Array = [];
+				var actionList : Array = RoleActionType.actionList;
+				var len : int = actionList.length;
+				for (var i : int = 0; i < len; i++)
+				{
+					var actionData : Object = actionList[i];
+					data = new ConfigData();
+					data.name = actionData.name;
+					data.type = actionData.type;
+					data.flag = "";
+					data.motion = data.type;
+					data.majorKey = "motion";
+					if (ru && ru.renderUnitData)
+					{
+						if (ru.renderUnitData.hasSkeletonAnimator)
+						{
+							if (ru.renderUnitData.hasAnimation(RoleActionType.getActionType(data.type, Boolean((role.data as RoleData).avatarInfo.mountResID))))
+								data.flag = "●";
+						}
+						else
+						{
+							if (ru.renderUnitData.getChildByName(RoleActionType.getActionType(data.type, Boolean((role.data as RoleData).avatarInfo.mountResID))) != null)
+								data.flag = "●";
+						}
+					}
+					actionDatas.push(data);
+					animationNames.push(data.type);
+				}
+
+				if (ru && ru.renderUnitData)
+				{
+					var animations : Vector.<AnimationNodeBase> = ru.renderUnitData.getAnimations();
+					if (animations)
+					{
+						for each (var animation : AnimationNodeBase in animations)
+						{
+							if (animationNames.indexOf(animation.name) == -1 && !RoleActionType.isMountActionType(animation.name))
+							{
+								data = new ConfigData();
+								data.name = animation.name;
+								data.type = animation.name;
+								data.motion = data.type;
+								data.majorKey = "motion";
+								data.flag = "●";
+								actionDatas.push(data);
+								animationNames.push(data.type);
+							}
+						}
+					}
+				}
+
+				actionDatas.sortOn(["motion"], Array.CASEINSENSITIVE);
+				actionItems.source = actionDatas;
+			}
+
+			protected function data_action_selectionChangeHandler(event : MouseEvent) : void
+			{
+				var actionData : ConfigData = data_action.selectedItem as ConfigData;
+				if (!actionData)
+					return;
+				var ref : PlayActionStateReference = role.stateMachine.getReference(PlayActionStateReference) as PlayActionStateReference;
+				ref.setParams(actionData.type);
+				role.stateMachine.transition(RoleStateType.ACTION_PLAY_ACTION, ref);
+				AvatarPreviewManager.setAction(actionData.type, true);
+			}
+
+			private function setActionHandler(action : String) : void
+			{
+				if (role)
+				{
+					var ref : PlayActionStateReference = role.stateMachine.getReference(PlayActionStateReference) as PlayActionStateReference;
+					ref.setParams(action);
+					role.stateMachine.transition(RoleStateType.ACTION_PLAY_ACTION, ref);
+				}
+			}
+
+			protected function data_action_doubleClickHandler(event : MouseEvent) : void
+			{
+				var actionData : ConfigData = data_action.selectedItem as ConfigData;
+				if (!actionData)
+					return;
+				AnimationExtraDataView.open();
+				if (AnimationExtraDataView.window)
+					AnimationExtraDataView.window.setAvatarData(actionData.type);
+			}
+		]]>
+	</fx:Script>
+	<s:Group left="0"
+			 right="0"
+			 top="0"
+			 bottom="0"
+			 width="100%"
+			 height="100%">
+		<mx:DataGrid id="data_action"
+					 x="0"
+					 y="0"
+					 width="100%"
+					 height="100%"
+					 dataProvider="{actionItems}"
+					 selectedItem="{selectedItem}"
+					 click="data_action_selectionChangeHandler(event)"
+					 doubleClickEnabled="true"
+					 doubleClick="data_action_doubleClickHandler(event)"
+					 editable="false"
+					 dragEnabled="true">
+			<mx:columns>
+				<mx:DataGridColumn headerText="名称"
+								   dataField="name"
+								   width="80"
+								   editable="false"/>
+				<mx:DataGridColumn headerText="动作"
+								   dataField="type"
+								   editable="false"/>
+				<mx:DataGridColumn headerText="有效"
+								   color="0x0000ff"
+								   dataField="flag"
+								   editable="false"/>
+			</mx:columns>
+		</mx:DataGrid>
+	</s:Group>
+</s:TitleWindow>

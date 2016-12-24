@@ -28,9 +28,9 @@ package com.rpgGame.app.sender
 		 */		
 		public static function reqOpenNpcShop(shopId:int):void
 		{
-			if( ReqLockUtil.isReqLocked( ShopModuleMessages.C2S_OPEN_NPC_SHOP ) )
-				return;
-			ReqLockUtil.lockReq( ShopModuleMessages.C2S_OPEN_NPC_SHOP, 5 * 1000 );
+//			if( ReqLockUtil.isReqLocked( ShopModuleMessages.C2S_OPEN_NPC_SHOP ) )
+//				return;
+//			ReqLockUtil.lockReq( ShopModuleMessages.C2S_OPEN_NPC_SHOP, 5 * 1000 );
 			
 			_bytes.clear();
 			_bytes.writeVarint32(shopId);
@@ -45,9 +45,9 @@ package com.rpgGame.app.sender
 		 */		
 		public static function reqBuyBackGoods(buyBackId:int, gridId:int ):void
 		{
-			if( ReqLockUtil.isReqLocked( ShopModuleMessages.C2S_BUY_BACK_GOODS ) )
-				return;
-			ReqLockUtil.lockReq( ShopModuleMessages.C2S_BUY_BACK_GOODS, 5 * 1000 );
+//			if( ReqLockUtil.isReqLocked( ShopModuleMessages.C2S_BUY_BACK_GOODS ) )
+//				return;
+//			ReqLockUtil.lockReq( ShopModuleMessages.C2S_BUY_BACK_GOODS, 5 * 1000 );
 			
 			_bytes.clear();
 			_bytes.writeVarint32(buyBackId);
@@ -76,9 +76,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqBuyGoods(shopId:int, tabIndex:int, goodsIndex:int, count:int, npcId:int=0):void
 		{
-			if( ReqLockUtil.isReqLocked( ShopModuleMessages.C2S_BUY_SHOP_GOODS ) )
-				return;
-			ReqLockUtil.lockReq( ShopModuleMessages.C2S_BUY_SHOP_GOODS, 5 * 1000 );
+//			if( ReqLockUtil.isReqLocked( ShopModuleMessages.C2S_BUY_SHOP_GOODS ) )
+//				return;
+//			ReqLockUtil.lockReq( ShopModuleMessages.C2S_BUY_SHOP_GOODS, 5 * 1000 );
 			
 			_bytes.clear();
 			_bytes.writeVarint32(shopId);
@@ -102,9 +102,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqBuyJinziShopGoods( type:int, goodsId:int, count:int ):void
 		{
-			if( ReqLockUtil.isReqLocked( ShopModuleMessages.C2S_BUY_JINZI_SHOP_GOODS ) )
-				return;
-			ReqLockUtil.lockReq( ShopModuleMessages.C2S_BUY_JINZI_SHOP_GOODS, 5 * 1000 );
+//			if( ReqLockUtil.isReqLocked( ShopModuleMessages.C2S_BUY_JINZI_SHOP_GOODS ) )
+//				return;
+//			ReqLockUtil.lockReq( ShopModuleMessages.C2S_BUY_JINZI_SHOP_GOODS, 5 * 1000 );
 			
 			_bytes.clear();
 			_bytes.writeByte(type);
