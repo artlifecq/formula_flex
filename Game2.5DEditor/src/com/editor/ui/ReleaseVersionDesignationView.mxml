@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 发行版本选派窗口
+* @author L.L.M.Sunny
+* 创建时间：2016-4-11 上午10:30:12
+*
+-->
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="420"
+			   height="210"
+			   title="发行版本选派"
+			   fontFamily="SimSun"
+			   creationComplete="onCreationComplete()"
+			   initialize="onInitialize()"
+			   close="window1_closeHandler(event)">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import com.editor.manager.AppManager;
+			import com.editor.manager.ReleaseVersionManager;
+
+			import mx.controls.Alert;
+			import mx.managers.PopUpManager;
+
+			private static var _window : ReleaseVersionDesignationView;
+
+			public static function get window() : ReleaseVersionDesignationView
+			{
+				return _window;
+			}
+
+			public static function open() : void
+			{
+				if (!_window)
+				{
+					_window = new ReleaseVersionDesignationView();
+					PopUpManager.addPopUp(_window, AppManager.getInstance().appRoot, true);
+					PopUpManager.centerPopUp(_window);
+				}
+				PopUpManager.bringToFront(_window);
+			}
+
+			public static function close() : void
+			{
+				if (_window)
+				{
+					_window.destroy();
+					PopUpManager.removePopUp(_window);
+				}
+				_window = null;
+			}
+
+			private function onInitialize() : void
+			{
+				visible = false;
+			}
+
+			private function onCreationComplete() : void
+			{
+				visible = true;
+				clientVersionText.text = "0";
+				loaderVersionText.text = "0";
+			}
+
+			private function destroy() : void
+			{
+
+			}
+
+			protected function window1_closeHandler(event : Event) : void
+			{
+				close();
+			}
+
+			protected function cancel_clickHandler(event : MouseEvent) : void
+			{
+				close();
+			}
+
+			protected function ok_clickHandler(event : MouseEvent) : void
+			{
+				var clientVersion : int = int(clientVersionText.text);
+				var loaderVersion : int = int(loaderVersionText.text);
+				if (clientVersion > 0 && loaderVersion > 0)
+				{
+					ReleaseVersionManager.getInstance().endReleaseVersion(clientVersion, loaderVersion);
+					close();
+				}
+				else
+				{
+					if (clientVersion <= 0)
+						Alert.show("请设置客户端版本号！", "提示");
+					else if (loaderVersion <= 0)
+						Alert.show("请设置加载器版本号！", "提示");
+					else
+						Alert.show("请设置客户端和加载器版本号！", "提示");
+				}
+			}
+
+			protected function clientLatestVersionBtn_clickHandler(event : MouseEvent) : void
+			{
+				var latestClientVersion : int = ReleaseVersionManager.getInstance().getLatestClientVersion();
+				clientVersionText.text = String(latestClientVersion);
+			}
+
+			protected function clientNewVersionBtn_clickHandler(event : MouseEvent) : void
+			{
+				var nextNewClientVersion : int = ReleaseVersionManager.getInstance().getNextNewClientVersion();
+				clientVersionText.text = String(nextNewClientVersion);
+			}
+
+			protected function loaderLatestVersionBtn_clickHandler(event : MouseEvent) : void
+			{
+				var latestLoaderVersion : int = ReleaseVersionManager.getInstance().getLatestLoaderVersion();
+				loaderVersionText.text = String(latestLoaderVersion);
+			}
+
+			protected function loaderNewVersionBtn_clickHandler(event : MouseEvent) : void
+			{
+				var nextNewLoaderVersion : int = ReleaseVersionManager.getInstance().getNextNewLoaderVersion();
+				loaderVersionText.text = String(nextNewLoaderVersion);
+			}
+		]]>
+	</fx:Script>
+	<s:Group x="20"
+			 y="20">
+		<s:Label id="clientLabelTxt"
+				 x="0"
+				 y="0"
+				 width="100"
+				 chromeColor="#FFFFFF"
+				 fontFamily="SimSun"
+				 fontWeight="normal"
+				 text="客户端版本："/>
+		<s:TextInput id="clientVersionText"
+					 x="80"
+					 y="-5"
+					 width="100"
+					 fontFamily="SimSun"
+					 chromeColor="#FFFFFF"
+					 contentBackgroundColor="#444444"/>
+		<s:Button id="clientLatestVersionBtn"
+				  x="200"
+				  y="-5"
+				  label="上一个版本"
+				  click="clientLatestVersionBtn_clickHandler(event)"/>
+		<s:Button id="clientNewVersionBtn"
+				  x="300"
+				  y="-5"
+				  label="最新版本"
+				  click="clientNewVersionBtn_clickHandler(event)"/>
+	</s:Group>
+	<s:Group x="20"
+			 y="50">
+		<s:Label id="loaderLabelTxt"
+				 x="0"
+				 y="0"
+				 width="100"
+				 chromeColor="#FFFFFF"
+				 fontFamily="SimSun"
+				 fontWeight="normal"
+				 text="加载器版本："/>
+		<s:TextInput id="loaderVersionText"
+					 x="80"
+					 y="-5"
+					 width="100"
+					 fontFamily="SimSun"
+					 chromeColor="#FFFFFF"
+					 contentBackgroundColor="#444444"/>
+		<s:Button id="loaderLatestVersionBtn"
+				  x="200"
+				  y="-5"
+				  label="上一个版本"
+				  click="loaderLatestVersionBtn_clickHandler(event)"/>
+		<s:Button id="loaderNewVersionBtn"
+				  x="300"
+				  y="-5"
+				  label="最新版本"
+				  click="loaderNewVersionBtn_clickHandler(event)"/>
+	</s:Group>
+	<s:Group x="110"
+			 y="120">
+		<s:Button id="okBtn"
+				  x="0"
+				  y="0"
+				  label="确定"
+				  click="ok_clickHandler(event)"/>
+		<s:Button x="120"
+				  y="0"
+				  label="取消"
+				  click="cancel_clickHandler(event)"/>
+	</s:Group>
+</s:TitleWindow>

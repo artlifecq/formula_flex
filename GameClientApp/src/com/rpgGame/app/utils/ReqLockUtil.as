@@ -21,30 +21,30 @@ package  com.rpgGame.app.utils
 		 * 							有些消息是10秒缓存的，同时可以手动解锁
 		 * 
 		 */		
-		public static function lockReq( reqType:String, lockTime:Number = 100):void
+		public static function lockReq( cmdID:int, lockTime:Number = 100):void
 		{
-			_reqLockMap.add(reqType, SystemTimeManager.curtTm + lockTime );
+			_reqLockMap.add(cmdID, SystemTimeManager.curtTm + lockTime );
 		}
 		
 		/**
 		 * 消息解锁
 		 * @reqType 消息类型
 		 */
-		public static function unlockReq( reqType:String ):void
+		public static function unlockReq( cmdID:int ):void
 		{
-			_reqLockMap.remove( reqType );
+			_reqLockMap.remove( cmdID );
 		}
 		
 		/**
 		 * 消息是否被锁定
 		 * @reqType 消息类型
 		 */
-		public static function isReqLocked(reqType:String,hint:Boolean = false):Boolean
+		public static function isReqLocked(cmdID:int,hint:Boolean = false):Boolean
 		{
-			if( _reqLockMap.getValue( reqType ) == null )
+			if( _reqLockMap.getValue( cmdID ) == null )
 				return false;
 			
-			var unlockTime:Number = _reqLockMap.getValue( reqType );
+			var unlockTime:Number = _reqLockMap.getValue( cmdID );
 			if(hint && SystemTimeManager.curtTm < unlockTime)
 				NoticeManager.showNotify("请求过于频繁");
 			return SystemTimeManager.curtTm < unlockTime;

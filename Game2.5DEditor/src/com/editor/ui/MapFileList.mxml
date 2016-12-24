@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 地图文件列表
+* @author L.L.M.Sunny
+* 创建时间：2015-6-19 上午10:30:12
+*
+-->
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="100%"
+		 height="100%"
+		 initialize="onInitialize()"
+		 creationComplete="onCreationComplete()">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.cfg.MapFileResConfig;
+			import com.editor.data.ConfigDesc;
+			import com.editor.data.InternalTabelName;
+			import com.editor.data.TabelData;
+			import com.editor.events.MapFileListEvent;
+			import com.editor.manager.ConfigEditorUtil;
+			import com.editor.manager.DataStructuresManager;
+			import com.editor.manager.SceneManager;
+			import com.editor.utils.FileUtil;
+
+			import mx.collections.ArrayCollection;
+
+			import org.client.mainCore.manager.EventManager;
+
+			[Bindable]
+			/** 地图数据 **/
+			private var _mapItems : ArrayCollection;
+
+			private function onInitialize() : void
+			{
+				_mapItems = new ArrayCollection();
+			}
+
+			protected function data_map_selectionChangeHandler(event : MouseEvent) : void
+			{
+				var mapObj : MapFileResConfig = data_map.selectedItem as MapFileResConfig;
+				if (!mapObj)
+					return;
+
+				var mapId : String = mapObj.mRes;
+				SceneManager.getInstance().loadSceneMap(mapId);
+			}
+
+			private function selectMapId(id : String) : void
+			{
+				for each (var data : MapFileResConfig in _mapItems.source)
+				{
+					if (data.mRes == id)
+					{
+						data_map.selectedItem = data;
+						var index : int = _mapItems.getItemIndex(data);
+						if (index > -1)
+							callLater(data_map.scrollToIndex, [index]);
+						break;
+					}
+				}
+			}
+
+			private function setDataGridEnabled(value : Boolean) : void
+			{
+				data_map.enabled = value;
+			}
+
+			private function pullData() : void
+			{
+				var tabel : TabelData = DataStructuresManager.getInstance().getTabel(InternalTabelName.MapFileResConfigName);
+				if (!tabel)
+					return;
+				var configDesc : ConfigDesc = tabel.getConfigDesc();
+				var datas : Array = FileUtil.dictToArray(configDesc.cacheDic);
+				FileUtil.sortDatas(datas);
+
+				_mapItems.source = datas;
+				data_map.dataProvider = _mapItems;
+
+				if (SceneManager.getInstance().currMapRes)
+				{
+					selectMapId(SceneManager.getInstance().currMapRes);
+				}
+			}
+
+			private function onCreationComplete() : void
+			{
+				pullData();
+				setDataGridEnabled(!SceneManager.getInstance().mainScene.isLoading);
+
+				EventManager.addEvent(MapFileListEvent.PULL_MAP_FILE_LIST, pullData);
+				EventManager.addEvent(MapFileListEvent.SELECTED_MAP_ID, selectMapId);
+			}
+
+			public function destroy() : void
+			{
+				_mapItems = null;
+
+				EventManager.removeEvent(MapFileListEvent.PULL_MAP_FILE_LIST, pullData);
+				EventManager.removeEvent(MapFileListEvent.SELECTED_MAP_ID, selectMapId);
+			}
+
+			protected function data_map_doubleClickHandler(event : MouseEvent) : void
+			{
+				var mapObj : MapFileResConfig = data_map.selectedItem as MapFileResConfig;
+				if (!mapObj)
+					return;
+				ConfigEditorUtil.showConfigEditView("地图设置", mapObj);
+			}
+		]]>
+	</fx:Script>
+	<mx:DataGrid id="data_map"
+				 x="0"
+				 y="0"
+				 width="100%"
+				 height="100%"
+				 dataProvider="{_mapItems}"
+				 click="data_map_selectionChangeHandler(event)"
+				 editable="false"
+				 dragEnabled="true"
+				 doubleClickEnabled="true"
+				 doubleClick="data_map_doubleClickHandler(event)">
+		<mx:columns>
+			<mx:DataGridColumn headerText="名称"
+							   dataField="name"/>
+		</mx:columns>
+	</mx:DataGrid>
+</s:Group>

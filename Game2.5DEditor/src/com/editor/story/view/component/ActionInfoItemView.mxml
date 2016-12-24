@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 width="100%" height="20" 
+		 creationComplete="group1_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			[Bindable]
+			public var bgColor:uint = 0x75B2EF;
+			[Bindable]
+			public var label:String;
+			[Bindable]
+			public var labelWidth:int;
+			public var actionID:int;
+			override public function set width(value:Number):void
+			{
+				super.width = value;
+				labelWidth = Math.max(value,100);
+				if(value < 100)
+				{
+					desc.setStyle("textAlign","left");
+				}
+				else
+				{
+					desc.setStyle("textAlign","center");
+				}
+			}
+			public function set selected(value:Boolean):void
+			{
+				bgColor = value?0x0E447A:0x75B2EF;
+			}
+			
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				this.mouseEnabled = false;
+				desc.mouseEnabled = false;
+			}
+			
+		]]>
+	</fx:Script>
+	<s:Group width="100%" height="100%">
+		<s:Rect width="100%" height="100%">
+			<s:fill>
+				<s:SolidColor color="{bgColor}" alpha="0.5">
+					
+				</s:SolidColor>
+			</s:fill>
+		</s:Rect>
+	</s:Group>
+	<s:Label id="desc" y="3" width="{labelWidth}" text="{label}" color="0x000000" textAlign="center">
+		
+	</s:Label>
+</s:Group>

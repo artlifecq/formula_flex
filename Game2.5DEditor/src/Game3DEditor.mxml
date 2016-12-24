@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+					   xmlns:s="library://ns.adobe.com/flex/spark"
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   width="1600"
+					   height="900"
+					   frameRate="60"
+					   backgroundAlpha="0"
+					   title="3D游戏编辑器 V{AppManager.getInstance().version} - {AppManager.getInstance().workspacePath} "
+					   initialize="windowedapplication1_initializeHandler(event)"
+					   addedToStage="onAddToStage(event)"
+					   creationComplete="windowedapplication1_creationCompleteHandler(event)"
+					   xmlns:view="com.view.*"
+					   xmlns:ui="com.editor.ui.*"
+					   xmlns:scene="com.editor.ui.scene.*" xmlns:controls="awaybuilder.view.components.controls.*">
+	<fx:Script>
+		<![CDATA[
+            import com.editor.manager.AppManager;
+            import com.game.engine2D.Engine;
+            import com.game.engine2D.config.GlobalConfig2D;
+            import com.game.engine2D.vo.PoolFrontMesh;
+            import com.game.engine3D.config.GlobalConfig;
+            import com.game.engine3D.manager.Stage3DLayerManager;
+            
+            import mx.controls.Alert;
+            import mx.core.UIComponent;
+            import mx.events.FlexEvent;
+            
+            import away3d.Away3D;
+            import away3d.events.Stage3DEvent;
+            
+
+			private const FLASH_VERSION : Number = 11.5;
+
+			protected function windowedapplication1_creationCompleteHandler(event : FlexEvent) : void
+			{
+				initGame();
+				var versionStr : String = Capabilities.version.split(" ")[1];
+				if (Number(versionStr.split(",")[0]) < FLASH_VERSION)
+				{
+					var textF : TextFormat = new TextFormat();
+					textF.align = TextFormatAlign.CENTER;
+
+					var textfiled : TextField = new TextField();
+					textfiled.setTextFormat(textF);
+					textfiled.width = 500;
+					textfiled.htmlText = "<font size='20' color='#ff0000'>您的Flash版片太低，请升级到" + FLASH_VERSION + "或更高版本！！</font>";
+					textfiled.x = (1600 - textfiled.width) * .5;
+					textfiled.y = (900 - textfiled.height) * .5;
+					var ui : UIComponent = new UIComponent();
+					addElement(ui);
+					ui.addChild(textfiled);
+					return;
+				}
+
+				visible = true;
+			}
+
+			private function initGame() : void
+			{
+				Alert.okLabel = "确定";
+				Alert.cancelLabel = "取消";
+			}
+
+			protected function onAddToStage(event : Event) : void
+			{
+                //Scene3DManager.init(this.sceneView.viewScope, this.sceneView.customCameraScope, this.sceneView.debugViewScope);
+                //Away3DEventDispatcher.addEventListener(Scene3DManager.instance, Stage3DEvent.CONTEXT3D_CREATED, onContext3DCreated);
+			}
+            
+            private function onContext3DCreated(e : Stage3DEvent) : void {
+                //Scene3DManager.enter2DMode = true;
+            }
+
+			protected function windowedapplication1_initializeHandler(event : FlexEvent) : void
+			{
+				visible = false;
+                
+                Away3D.LOAD_FILE_WITH_LIB = true;
+                //				Away3D.USE_ASYNC_TEXTURES = true;
+                //				Away3D.MIPMAP_WITH_BITMAPDATA = false;
+                Away3D.PARSE_JPG_IN_WORKER = true;
+                Away3D.PARSE_PNG_IN_WORKER = true;
+                Away3D.EVIL3D_VERSION = Math.random() * int.MAX_VALUE;
+                
+                Away3D.LOAD_FILE_WITH_LIB = true;
+                Away3D.PARSE_JPG_IN_WORKER = true;
+                Away3D.PARSE_PNG_IN_WORKER = true;
+                Away3D.PLANAR_STENCIL_AVAILABLE = true;
+                Away3D.EVIL3D_VERSION = Math.random() * int.MAX_VALUE;
+                
+                GlobalConfig.radiusForEntity = 32;
+                GlobalConfig.use2DMap = true;
+                GlobalConfig.use25DMap = true;
+                GlobalConfig.MAP_2D_CAMERA_ANGLE = 45;
+                GlobalConfig2D.MapZoneClass = PoolFrontMesh;
+                Stage3DLayerManager.errorChecking = true;
+                
+                Engine.initEngine(60,null,null,50,50,256,256);
+                
+				StyleManager.getStyleDeclaration("mx.controls.ToolTip").setStyle("fontSize", "14");
+				AppManager.getInstance().init();
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<mx:HDividedBox x="0"
+					y="0"
+					width="100%"
+					height="100%"
+					fontSize="12"
+					backgroundAlpha="0"
+					borderStyle="solid"
+					borderColor="#666666">
+		<mx:Canvas width="400"
+				   height="100%"
+				   backgroundColor="0x333333">
+			<mx:VDividedBox x="0"
+							y="0"
+							width="100%"
+							height="100%"
+							fontSize="12"
+							backgroundColor="0"
+							borderStyle="solid"
+							borderColor="#666666">
+				<mx:Canvas width="100%"
+						   height="50%"
+						   backgroundColor="0x333333">
+					<ui:ConfigPanel width="100%"
+									height="100%">
+					</ui:ConfigPanel>
+				</mx:Canvas>
+				<mx:Canvas width="100%"
+						   height="50%"
+						   backgroundColor="0x333333">
+					<ui:SubConfigPanel width="100%"
+									   height="100%">
+					</ui:SubConfigPanel>
+				</mx:Canvas>
+			</mx:VDividedBox>
+		</mx:Canvas>
+        
+		<mx:Canvas width="100%"
+				   height="100%"
+				   backgroundAlpha="0"
+				   horizontalScrollPolicy="off"
+				   verticalScrollPolicy="off">
+			<scene:ScenePanel id="sceneView"
+							  x="0"
+							  y="0"
+							  width="100%"
+							  height="100%"
+							  mouseEnabled="false">
+			</scene:ScenePanel>
+		</mx:Canvas>
+		<mx:Canvas width="400"
+				   height="100%"
+				   backgroundAlpha="0">
+			<mx:VDividedBox x="0"
+							y="0"
+							width="100%"
+							height="100%"
+							fontSize="12"
+							backgroundAlpha="0"
+							borderStyle="solid"
+							borderColor="#666666">
+				<mx:Canvas width="100%"
+						   height="400"
+						   backgroundAlpha="0">
+					<scene:PreviewScenePanel id="previewSceneView"
+											 x="0"
+											 y="0"
+											 width="100%"
+											 height="100%"
+											 mouseEnabled="false">
+					</scene:PreviewScenePanel>
+				</mx:Canvas>
+				<mx:Canvas width="100%"
+						   height="50%"
+						   backgroundColor="0x333333">
+					<ui:ResourcePanel width="100%"
+									  height="100%">
+					</ui:ResourcePanel>
+				</mx:Canvas>
+			</mx:VDividedBox>
+		</mx:Canvas>
+	</mx:HDividedBox>
+</s:WindowedApplication>

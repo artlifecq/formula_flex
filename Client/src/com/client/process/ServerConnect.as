@@ -192,7 +192,7 @@ package com.client.process
 		{
 			_connectDelay = deley;
 			GameLog.addShow("服务器连接" + msg);
-			SenderReferenceSet.stop();
+//			SenderReferenceSet.stop();
 			//
 			if (_retryTimer)
 			{

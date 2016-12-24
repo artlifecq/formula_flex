@@ -34,9 +34,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqCreateFamily(name : String, goodsPos : int, autoAgree : Boolean) : void
 		{
-			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_CREATE_FAMILY))
-				return;
-			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_CREATE_FAMILY);
+//			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_CREATE_FAMILY))
+//				return;
+//			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_CREATE_FAMILY);
 
 			_bytes.clear();
 			_bytes.writeBoolean(autoAgree);
@@ -53,9 +53,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqGetFamilyList() : void
 		{
-			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_GET_SELF_FAMILY_LIST))
-				return;
-			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_GET_SELF_FAMILY_LIST, 30000);
+//			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_GET_SELF_FAMILY_LIST))
+//				return;
+//			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_GET_SELF_FAMILY_LIST, 30000);
 
 			_bytes.clear();
 			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_GET_SELF_FAMILY_LIST, _bytes);
@@ -69,9 +69,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqGetOtherFamilyList() : void
 		{
-			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_GET_OTHER_FAMILY_LIST))
-				return;
-			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_GET_OTHER_FAMILY_LIST, 30000);
+//			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_GET_OTHER_FAMILY_LIST))
+//				return;
+//			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_GET_OTHER_FAMILY_LIST, 30000);
 
 			_bytes.clear();
 			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_GET_OTHER_FAMILY_LIST, _bytes);
@@ -138,9 +138,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqKickMember(heroId : Number) : void
 		{
-			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_KICK_MEMBER))
-				return;
-			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_KICK_MEMBER, 5 * 1000);
+//			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_KICK_MEMBER))
+//				return;
+//			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_KICK_MEMBER, 5 * 1000);
 
 			_bytes.clear();
 			_bytes.writeVarint64(heroId);
@@ -184,9 +184,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqSetFamilyAutoAcceptJoinRequest(isYes : Boolean) : void
 		{
-			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_SET_FAMILY_AUTO_ACCEPT_JOIN_REQUEST))
-				return;
-			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_SET_FAMILY_AUTO_ACCEPT_JOIN_REQUEST, 5 * 1000);
+//			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_SET_FAMILY_AUTO_ACCEPT_JOIN_REQUEST))
+//				return;
+//			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_SET_FAMILY_AUTO_ACCEPT_JOIN_REQUEST, 5 * 1000);
 
 			_bytes.clear();
 			_bytes.writeBoolean(isYes);
@@ -205,9 +205,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqSetPosition(heroId : Number, pos : int, isJob : Boolean) : void
 		{
-			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_SET_POSITION))
-				return;
-			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_SET_POSITION, 5 * 1000);
+//			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_SET_POSITION))
+//				return;
+//			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_SET_POSITION, 5 * 1000);
 
 			_bytes.clear();
 			_bytes.writeVarint32(pos);
@@ -229,10 +229,10 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqRequestJoin(doApply : Boolean, familyName : String) : void
 		{
-			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_REQUEST_JOIN))
-				return;
-
-			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_REQUEST_JOIN, 500);
+//			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_REQUEST_JOIN))
+//				return;
+//
+//			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_REQUEST_JOIN, 500);
 			_bytes.clear();
 			_bytes.writeBoolean(doApply);
 			_bytes.writeUTFBytes(familyName);
@@ -249,10 +249,10 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqReplyJoinRequest(heroId : Number, isYes : Boolean) : void
 		{
-			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_REPLY_JOIN_REQUEST))
-				return;
-
-			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_REPLY_JOIN_REQUEST, 5 * 1000);
+//			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_REPLY_JOIN_REQUEST))
+//				return;
+//
+//			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_REPLY_JOIN_REQUEST, 5 * 1000);
 
 			_bytes.clear();
 			_bytes.writeVarint64(heroId);
@@ -268,9 +268,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqInviteJoin(heroId : Number) : void
 		{
-			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_INVITE_JOIN))
-				return;
-			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_INVITE_JOIN, 5 * 1000);
+//			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_INVITE_JOIN))
+//				return;
+//			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_INVITE_JOIN, 5 * 1000);
 
 			//SocietyManager.putMyInviationOther(heroId);
 
@@ -325,9 +325,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqDoDonate(isMoney : Boolean, moneyCount : int = 0, goodsCount : int = 0, goodsBytes : ByteBuffer = null) : void
 		{
-			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_DO_DONATE))
-				return;
-			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_DO_DONATE, 5 * 1000);
+//			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_DO_DONATE))
+//				return;
+//			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_DO_DONATE, 5 * 1000);
 
 			_bytes.clear();
 			_bytes.writeBoolean(isMoney);
@@ -375,9 +375,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqLearnFamilyCollageSpell(spellIndex : int, upgradeBytes : ByteArray) : void
 		{
-			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_LEARN_FAMILY_COLLAGE_SPELL))
-				return;
-			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_LEARN_FAMILY_COLLAGE_SPELL, 5 * 1000);
+//			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_LEARN_FAMILY_COLLAGE_SPELL))
+//				return;
+//			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_LEARN_FAMILY_COLLAGE_SPELL, 5 * 1000);
 
 			_bytes.clear();
 			_bytes.writeVarint32(spellIndex);
@@ -455,9 +455,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqLeaveFamily() : void
 		{
-			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_LEAVE_FAMILY))
-				return;
-			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_LEAVE_FAMILY, 5 * 1000);
+//			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_LEAVE_FAMILY))
+//				return;
+//			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_LEAVE_FAMILY, 5 * 1000);
 
 			_bytes.clear();
 			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_LEAVE_FAMILY, _bytes);
@@ -470,9 +470,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqDismissFamily() : void
 		{
-			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_DISMISS_FAMILY))
-				return;
-			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_DISMISS_FAMILY, 5 * 1000);
+//			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_DISMISS_FAMILY))
+//				return;
+//			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_DISMISS_FAMILY, 5 * 1000);
 
 			_bytes.clear();
 			SocketConnection_protoBuffer.send(FamilyModuleMessages.C2S_DISMISS_FAMILY, _bytes);
@@ -495,9 +495,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqChangeAnnouncement(info : String) : void
 		{
-			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_CHANGE_ANNOUNCEMENT))
-				return;
-			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_CHANGE_ANNOUNCEMENT, 5000);
+//			if (ReqLockUtil.isReqLocked(FamilyModuleMessages.C2S_CHANGE_ANNOUNCEMENT))
+//				return;
+//			ReqLockUtil.lockReq(FamilyModuleMessages.C2S_CHANGE_ANNOUNCEMENT, 5000);
 
 			SocietyManager.cacheAnnouncement(info);
 			_bytes.clear();

@@ -1,8 +1,6 @@
 package com.rpgGame.app.sender
 {
-	import com.rpgGame.app.utils.ReqLockUtil;
 	
-	import app.cmd.ViewOtherHeroModuleMessages;
 
 	/**
 	 * @author 刘吉
@@ -20,14 +18,14 @@ package com.rpgGame.app.sender
 		 */		
 		public static function reqLook(roleID:Number, isNotify:Boolean = false) : void
 		{
-			if(ReqLockUtil.isReqLocked(ViewOtherHeroModuleMessages.C2S_VIEW_OTHER_HERO, true)) return;
-			
-			_bytes.clear();
-			_bytes.writeVarint64(roleID);
-			_bytes.writeBoolean(isNotify);
-			send(ViewOtherHeroModuleMessages.C2S_VIEW_OTHER_HERO, _bytes);
-			
-			ReqLockUtil.lockReq(ViewOtherHeroModuleMessages.C2S_VIEW_OTHER_HERO, 10000)
+//			if(ReqLockUtil.isReqLocked(ViewOtherHeroModuleMessages.C2S_VIEW_OTHER_HERO, true)) return;
+//			
+//			_bytes.clear();
+//			_bytes.writeVarint64(roleID);
+//			_bytes.writeBoolean(isNotify);
+//			send(ViewOtherHeroModuleMessages.C2S_VIEW_OTHER_HERO, _bytes);
+//			
+//			ReqLockUtil.lockReq(ViewOtherHeroModuleMessages.C2S_VIEW_OTHER_HERO, 10000)
 		}
 	}
 }

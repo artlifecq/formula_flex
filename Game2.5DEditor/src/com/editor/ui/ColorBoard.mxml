@@ -1,0 +1,785 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="205"
+			   height="350"
+			   title="取色器"
+			   creationComplete="init()">
+	<fx:Metadata>
+		[Style(name="hideCloseButton", type="Boolean", inherit="no", theme="spark")]
+		[Style(name = "hideTitleBar", type = "Boolean", inherit = "no", theme = "spark")]
+	</fx:Metadata>
+
+	<fx:Script>
+		<![CDATA[
+			import mx.core.FlexGlobals;
+			import mx.events.CloseEvent;
+			import mx.managers.PopUpManager;
+
+			private static var _instance : ColorBoard;
+
+			public static var isShowing : Boolean;
+
+			private static var _initColor : uint;
+			private static var _initAlpha : Number;
+			private static var _copiedColor : uint;
+			private static var _copiedAlpha : Number;
+			[Bindable]
+			private static var _hasCopied : Boolean;
+
+			public static function get instance() : ColorBoard
+			{
+				return _instance;
+			}
+
+			public static function show(colorChangeCallback : Function, initColor : uint = 0xff0000, alphaChangeCallBack : Function = null, initAlpha : Number = 1) : void
+			{
+				if (!_instance)
+				{
+					_instance = new ColorBoard();
+					_instance.addEventListener(CloseEvent.CLOSE, onInstanceClose);
+				}
+				if (!_instance.parent)
+				{
+					PopUpManager.addPopUp(_instance, DisplayObject(FlexGlobals.topLevelApplication));
+					if (_instance.lastX)
+					{
+						_instance.x = _instance.lastX;
+						_instance.y = _instance.lastY;
+					}
+					else
+					{
+						PopUpManager.centerPopUp(_instance);
+					}
+				}
+				PopUpManager.bringToFront(_instance);
+				_initColor = _instance.color = initColor;
+				_initAlpha = _instance.colorAlpha = initAlpha;
+				_instance.colorChangeCallback = colorChangeCallback;
+				_instance.colorAlphaChangeCallback = alphaChangeCallBack;
+				isShowing = true;
+			}
+
+			public static function hide() : void
+			{
+				closeColorBoard();
+			}
+
+			private static function onInstanceClose(event : CloseEvent) : void
+			{
+				closeColorBoard();
+			}
+
+			private static function closeColorBoard() : void
+			{
+				_instance.lastX = _instance.x;
+				_instance.lastY = _instance.y;
+				PopUpManager.removePopUp(_instance);
+				isShowing = false;
+			}
+
+			private var _color : uint;
+
+			private var _colorAlpha : Number;
+
+			private var colorGradients : Vector.<Vector3D> = new Vector.<Vector3D>();
+
+			private var colorLeft : Vector3D = new Vector3D(0xff, 0, 0);
+			private var colorRight : Vector3D = new Vector3D(0xff, 0, 0);
+
+			private var bpdLeft : BitmapData = new BitmapData(150, 150);
+			private var bpdRight : BitmapData = new BitmapData(20, 150);
+
+			private var bpdSilderR : BitmapData = new BitmapData(125, 15);
+			private var bpdSilderG : BitmapData = new BitmapData(125, 15);
+			private var bpdSilderB : BitmapData = new BitmapData(125, 15);
+			private var bpdSilderA : BitmapData = new BitmapData(125, 15);
+
+			private var isGrRightDown : Boolean;
+			private var isGrLeftDown : Boolean;
+			private var isGrSliderRDown : Boolean;
+			private var isGrSliderGDown : Boolean;
+			private var isGrSliderBDown : Boolean;
+			private var isGrSliderADown : Boolean;
+
+			private var lastX : Number;
+			private var lastY : Number;
+
+			private var _colorChangeCallback : Function;
+			private var _colorAlphaChangeCallback : Function;
+
+			private var _layoutChanged : Boolean;
+
+			protected function init() : void
+			{
+				colorGradients.push(new Vector3D(0xff, 0, 0));
+				colorGradients.push(new Vector3D(0xff, 0, 0xff));
+				colorGradients.push(new Vector3D(0, 0, 0xff));
+				colorGradients.push(new Vector3D(0, 0xff, 0xff));
+				colorGradients.push(new Vector3D(0, 0xff, 0));
+				colorGradients.push(new Vector3D(0xff, 0xff, 0));
+				colorGradients.push(new Vector3D(0xff, 0, 0));
+
+				for (var i : int = 0; i < 150; i++)
+				{
+					for (var j : int = 0; j < 20; j++)
+					{
+						var index : int = int(i * 6 / 150);
+						var startColor : Vector3D = colorGradients[index];
+						var endColor : Vector3D = colorGradients[index + 1];
+						var rate : Number = (i / 149 - index / 6) * 6;
+						var r : int = Math.round(startColor.x + (endColor.x - startColor.x) * rate);
+						var g : int = Math.round(startColor.y + (endColor.y - startColor.y) * rate);
+						var b : int = Math.round(startColor.z + (endColor.z - startColor.z) * rate);
+						var c : uint = (r << 16) | (g << 8) | b;
+						bpdRight.setPixel(j, i, c);
+					}
+				}
+
+				biRight.source = bpdRight;
+
+				for (i = 0; i < 125; i++)
+				{
+					for (j = 0; j < 20; j++)
+					{
+						var rgb : int = Math.round(i * 255 / 124);
+						c = (rgb << 16) | (rgb << 8) | rgb;
+						bpdSilderA.setPixel(i, j, c);
+					}
+				}
+				biSliderA.source = bpdSilderA;
+
+				var markSideL : Number = 6;
+				var markSideCos : Number = Math.cos(Math.PI / 4) * markSideL;
+				var markSideSin : Number = Math.sin(Math.PI / 4) * markSideL;
+				var markW : Number = 20;
+
+				var hMarkPathData : String = "M 0 " + (-markSideCos) + " L 0 " + markSideCos + " L " + markSideSin + " 0 L 0 " + (-markSideCos) + " M " + (markW + markSideSin * 2) + " " + (-markSideCos) + " L " + (markW + markSideSin * 2) + " " + markSideCos + " L " + (markW + markSideSin) + " 0 L " + (markW + markSideSin * 2) + " " + (-markSideCos);
+				grRightMarkPath.data = hMarkPathData;
+				grRightMark.x = -markSideSin;
+
+				var markH : Number = 15;
+				var vMarkPathData : String = "M " + (-markSideCos) + " 0 L " + markSideCos + " 0 L 0 " + markSideSin + " L " + (-markSideCos) + " 0 M " + (-markSideCos) + " " + (markH + markSideSin * 2) + " L " + markSideCos + " " + (markH + markSideSin * 2) + " L 0 " + (markH + markSideSin) + " L " + (-markSideCos) + " " + (markH + markSideSin * 2);
+				grSliderRPath.data = grSliderGPath.data = grSliderBPath.data = grSliderAPath.data = vMarkPathData;
+				grSliderRMark.y = grSliderGMark.y = grSliderBMark.y = grSliderAMark.y = -markSideSin;
+
+				color = 0x984456;
+				colorAlpha = 1;
+
+				colorAlphaChangeCallback = _colorAlphaChangeCallback;
+			}
+
+			public function get colorAlphaChangeCallback() : Function
+			{
+				return _colorAlphaChangeCallback;
+			}
+
+			public function set colorAlphaChangeCallback(value : Function) : void
+			{
+				_colorAlphaChangeCallback = value;
+				_layoutChanged = true;
+				invalidateProperties()
+			}
+
+			public function get colorChangeCallback() : Function
+			{
+				return _colorChangeCallback;
+			}
+
+			public function set colorChangeCallback(value : Function) : void
+			{
+				_colorChangeCallback = value;
+				undoButton.enabled = false;
+			}
+
+			override protected function commitProperties() : void
+			{
+				super.commitProperties();
+				if (_layoutChanged)
+				{
+					_layoutChanged = false;
+					if (_colorAlphaChangeCallback == null)
+					{
+						if (hgSliderA.parent)
+						{
+							sliderGroup.removeElement(hgSliderA);
+						}
+					}
+					else
+					{
+						if (!hgSliderA.parent)
+						{
+							sliderGroup.addElement(hgSliderA);
+						}
+					}
+
+					updateLayout();
+				}
+			}
+
+			private function updateLayout() : void
+			{
+				var h : Number = 350;
+				if (getStyle("hideTitleBar") == true)
+					h -= 30;
+				if (_colorAlphaChangeCallback == null)
+					h -= 30;
+				this.height = h;
+			}
+
+			public function get colorAlpha() : Number
+			{
+				return _colorAlpha;
+			}
+
+			public function set colorAlpha(value : Number) : void
+			{
+				if (_colorAlpha != value)
+				{
+					_colorAlpha = value;
+					grSliderAMark.x = _colorAlpha * (bpdSilderA.width - 1);
+					dsInputA.text = (255 * _colorAlpha).toString();
+				}
+			}
+
+			public function get color() : uint
+			{
+				return _color;
+			}
+
+			public function set color(value : uint) : void
+			{
+				if (_color != value)
+				{
+					_color = value;
+
+					colorToVector3d(_color, colorLeft);
+
+					var colorGradientIndex : int;
+					var colorGradientOffset : Number;
+					if (colorLeft.x >= colorLeft.y && colorLeft.x >= colorLeft.z)
+					{
+						colorRight.x = 0xff;
+						if (colorLeft.y >= colorLeft.z)
+						{
+							colorRight.z = 0;
+							grCircle.y = 149 - colorLeft.x * 149 / 255;
+							if (colorLeft.x == colorLeft.z)
+							{
+								grCircle.x = 0;
+								colorRight.y = 0;
+							}
+							else
+							{
+								grCircle.x = 149 - (colorLeft.z * 149 * 149) / (255 * (149 - grCircle.y))
+								colorRight.y = (149 * 149 * colorLeft.y / (149 - grCircle.y) - 255 * (149 - grCircle.x)) / grCircle.x;
+							}
+							colorGradientIndex = 5;
+							colorGradientOffset = 255 - colorRight.y;
+						}
+						else
+						{
+							colorRight.y = 0;
+							grCircle.y = 149 - colorLeft.x * 149 / 255;
+							grCircle.x = 149 - (colorLeft.y * 149 * 149) / (255 * (149 - grCircle.y))
+							colorRight.z = (149 * 149 * colorLeft.z / (149 - grCircle.y) - 255 * (149 - grCircle.x)) / grCircle.x;
+							colorGradientIndex = 0;
+							colorGradientOffset = colorRight.z;
+						}
+					}
+					else if (colorLeft.y >= colorLeft.x && colorLeft.y >= colorLeft.z)
+					{
+						colorRight.y = 0xff;
+						if (colorLeft.x >= colorLeft.z)
+						{
+							colorRight.z = 0;
+							grCircle.y = 149 - colorLeft.y * 149 / 255;
+							grCircle.x = 149 - (colorLeft.z * 149 * 149) / (255 * (149 - grCircle.y))
+							colorRight.x = (149 * 149 * colorLeft.x / (149 - grCircle.y) - 255 * (149 - grCircle.x)) / grCircle.x;
+							colorGradientIndex = 4;
+							colorGradientOffset = colorRight.x;
+						}
+						else
+						{
+							colorRight.x = 0;
+							grCircle.y = 149 - colorLeft.y * 149 / 255;
+							grCircle.x = 149 - (colorLeft.x * 149 * 149) / (255 * (149 - grCircle.y))
+							colorRight.z = (149 * 149 * colorLeft.z / (149 - grCircle.y) - 255 * (149 - grCircle.x)) / grCircle.x;
+							colorGradientIndex = 3;
+							colorGradientOffset = 255 - colorRight.z;
+						}
+					}
+					else if (colorLeft.z >= colorLeft.x && colorLeft.z >= colorLeft.y)
+					{
+						colorRight.z = 0xff;
+						if (colorLeft.x >= colorLeft.y)
+						{
+							colorRight.y = 0;
+							grCircle.y = 149 - colorLeft.z * 149 / 255;
+							grCircle.x = 149 - (colorLeft.y * 149 * 149) / (255 * (149 - grCircle.y))
+							colorRight.x = (149 * 149 * colorLeft.x / (149 - grCircle.y) - 255 * (149 - grCircle.x)) / grCircle.x;
+							colorGradientIndex = 1;
+							colorGradientOffset = 255 - colorRight.x;
+						}
+						else
+						{
+							colorRight.x = 0;
+							grCircle.y = 149 - colorLeft.z * 149 / 255;
+							grCircle.x = 149 - (colorLeft.x * 149 * 149) / (255 * (149 - grCircle.y))
+							colorRight.y = (149 * 149 * colorLeft.y / (149 - grCircle.y) - 255 * (149 - grCircle.x)) / grCircle.x;
+							colorGradientIndex = 2;
+							colorGradientOffset = colorRight.x;
+						}
+					}
+
+					updateBpdLeft();
+					updateSilders();
+					grRightMark.y = bpdRight.height * (colorGradientIndex + colorGradientOffset / 255) / 6;
+					currentColorSd.color = _color;
+				}
+			}
+
+			private function updateBpdLeft() : void
+			{
+				for (var i : int = 0; i < 150; i++)
+				{
+					for (var j : int = 0; j < 150; j++)
+					{
+						var hRate : Number = 1 - j / 149;
+						var vRate : Number = 1 - i / 149;
+						var r : int = Math.round((colorRight.x + (255 - colorRight.x) * hRate) * vRate);
+						var g : int = Math.round((colorRight.y + (255 - colorRight.y) * hRate) * vRate);
+						var b : int = Math.round((colorRight.z + (255 - colorRight.z) * hRate) * vRate);
+						var c : uint = (r << 16) | (g << 8) | b;
+						bpdLeft.setPixel(j, i, c);
+					}
+				}
+				biLeft.source = bpdLeft;
+			}
+
+			private function updateSilders() : void
+			{
+				for (var i : int = 0; i < 125; i++)
+				{
+					for (var j : int = 0; j < 20; j++)
+					{
+						var rgb : int = Math.round(i * 255 / 124);
+						var c : uint = (rgb << 16) | (colorLeft.y << 8) | colorLeft.z;
+						bpdSilderR.setPixel(i, j, c);
+						c = (colorLeft.x << 16) | (rgb << 8) | colorLeft.z;
+						bpdSilderG.setPixel(i, j, c);
+						c = (colorLeft.x << 16) | (colorLeft.y << 8) | rgb;
+						bpdSilderB.setPixel(i, j, c);
+					}
+				}
+
+				biSliderR.source = bpdSilderR;
+				biSliderG.source = bpdSilderG;
+				biSliderB.source = bpdSilderB;
+				dsInputR.text = colorLeft.x.toString();
+				dsInputG.text = colorLeft.y.toString();
+				dsInputB.text = colorLeft.z.toString();
+				grSliderRMark.x = colorLeft.x * (bpdSilderR.width - 1) / 255;
+				grSliderGMark.x = colorLeft.y * (bpdSilderG.width - 1) / 255;
+				grSliderBMark.x = colorLeft.z * (bpdSilderB.width - 1) / 255;
+			}
+
+			private function colorToVector3d(color : uint, vector3d : Vector3D) : void
+			{
+				vector3d.x = (color & 0xff0000) >> 16;
+				vector3d.y = (color & 0xff00) >> 8;
+				vector3d.z = color & 0xff;
+			}
+
+			protected function grRight_mouseDownHandler(event : MouseEvent) : void
+			{
+				var mx : Number = Math.max(0, Math.min(grRight.mouseX, bpdRight.width - 1));
+				var my : Number = Math.max(0, Math.min(grRight.mouseY, bpdRight.height - 1));
+				grRightMark.y = my;
+				var color : uint = bpdRight.getPixel(mx, my);
+				colorToVector3d(color, colorRight);
+				updateBpdLeft();
+				_color = bpdLeft.getPixel(grCircle.x, grCircle.y);
+				currentColorSd.color = _color;
+				colorToVector3d(_color, colorLeft);
+				updateSilders();
+				dispatchColorChangeEvent();
+				if (!isGrRightDown)
+				{
+					isGrRightDown = true;
+					this.stage.addEventListener(MouseEvent.MOUSE_MOVE, onStageMouseMove);
+					this.stage.addEventListener(MouseEvent.MOUSE_UP, onStageMouseUp);
+				}
+			}
+
+			protected function grLeft_mouseDownHandler(event : MouseEvent) : void
+			{
+				var mx : Number = Math.max(0, Math.min(grLeft.mouseX, bpdLeft.width - 1));
+				var my : Number = Math.max(0, Math.min(grLeft.mouseY, bpdLeft.height - 1));
+				grCircle.x = mx;
+				grCircle.y = my;
+				_color = bpdLeft.getPixel(mx, my);
+				currentColorSd.color = _color;
+				colorToVector3d(color, colorLeft);
+				updateSilders();
+				dispatchColorChangeEvent();
+				if (!isGrLeftDown)
+				{
+					isGrLeftDown = true;
+					this.stage.addEventListener(MouseEvent.MOUSE_MOVE, onStageMouseMove);
+					this.stage.addEventListener(MouseEvent.MOUSE_UP, onStageMouseUp);
+				}
+			}
+
+			protected function grSliderR_mouseDownHandler(event : MouseEvent) : void
+			{
+				var mx : Number = Math.max(0, Math.min(grSliderR.mouseX, bpdSilderR.width - 1));
+				var my : Number = Math.max(0, Math.min(grSliderR.mouseY, bpdSilderR.height - 1));
+				colorLeft.x = Math.round(mx * 255 / (bpdSilderR.width - 1));
+				color = (colorLeft.x << 16) | (colorLeft.y << 8) | colorLeft.z;
+				dispatchColorChangeEvent();
+				if (!isGrSliderRDown)
+				{
+					isGrSliderRDown = true;
+					this.stage.addEventListener(MouseEvent.MOUSE_MOVE, onStageMouseMove);
+					this.stage.addEventListener(MouseEvent.MOUSE_UP, onStageMouseUp);
+				}
+			}
+
+			protected function grSliderG_mouseDownHandler(event : MouseEvent) : void
+			{
+				var mx : Number = Math.max(0, Math.min(grSliderG.mouseX, bpdSilderG.width - 1));
+				var my : Number = Math.max(0, Math.min(grSliderG.mouseY, bpdSilderG.height - 1));
+				colorLeft.y = Math.round(mx * 255 / (bpdSilderG.width - 1));
+				color = (colorLeft.x << 16) | (colorLeft.y << 8) | colorLeft.z;
+				dispatchColorChangeEvent();
+				if (!isGrSliderGDown)
+				{
+					isGrSliderGDown = true;
+					this.stage.addEventListener(MouseEvent.MOUSE_MOVE, onStageMouseMove);
+					this.stage.addEventListener(MouseEvent.MOUSE_UP, onStageMouseUp);
+				}
+			}
+
+			protected function grSliderB_mouseDownHandler(event : MouseEvent) : void
+			{
+				var mx : Number = Math.max(0, Math.min(grSliderB.mouseX, bpdSilderB.width - 1));
+				var my : Number = Math.max(0, Math.min(grSliderB.mouseY, bpdSilderB.height - 1));
+				colorLeft.z = Math.round(mx * 255 / (bpdSilderB.width - 1));
+				color = (colorLeft.x << 16) | (colorLeft.y << 8) | colorLeft.z;
+				dispatchColorChangeEvent();
+				if (!isGrSliderBDown)
+				{
+					isGrSliderBDown = true;
+					this.stage.addEventListener(MouseEvent.MOUSE_MOVE, onStageMouseMove);
+					this.stage.addEventListener(MouseEvent.MOUSE_UP, onStageMouseUp);
+				}
+			}
+
+			protected function grSliderA_mouseDownHandler(event : MouseEvent) : void
+			{
+				var mx : Number = Math.max(0, Math.min(grSliderA.mouseX, bpdSilderA.width - 1));
+				var my : Number = Math.max(0, Math.min(grSliderA.mouseY, bpdSilderA.height - 1));
+				colorAlpha = mx / (bpdSilderA.width - 1);
+				dispatchAlphaChangeEvent();
+				if (!isGrSliderADown)
+				{
+					isGrSliderADown = true;
+					this.stage.addEventListener(MouseEvent.MOUSE_MOVE, onStageMouseMove);
+					this.stage.addEventListener(MouseEvent.MOUSE_UP, onStageMouseUp);
+				}
+			}
+
+			private function onStageMouseMove(event : MouseEvent) : void
+			{
+				if (isGrRightDown)
+					grRight_mouseDownHandler(null);
+				else if (isGrLeftDown)
+					grLeft_mouseDownHandler(null);
+				else if (isGrSliderRDown)
+					grSliderR_mouseDownHandler(null);
+				else if (isGrSliderGDown)
+					grSliderG_mouseDownHandler(null);
+				else if (isGrSliderBDown)
+					grSliderB_mouseDownHandler(null);
+				else if (isGrSliderADown)
+					grSliderA_mouseDownHandler(null);
+			}
+
+			protected function onStageMouseUp(event : MouseEvent) : void
+			{
+				this.stage.removeEventListener(MouseEvent.MOUSE_MOVE, onStageMouseMove);
+				this.stage.removeEventListener(MouseEvent.MOUSE_UP, onStageMouseUp);
+				isGrRightDown = false;
+				isGrLeftDown = false;
+				isGrSliderRDown = false;
+				isGrSliderGDown = false;
+				isGrSliderBDown = false;
+				isGrSliderADown = false;
+			}
+
+			protected function dsInputR_changeHandler(event : Event) : void
+			{
+				if (event is KeyboardEvent)
+				{
+					if ((event as KeyboardEvent).keyCode != 13)
+						return;
+				}
+				colorLeft.x = int(dsInputR.text);
+				color = (colorLeft.x << 16) | (colorLeft.y << 8) | colorLeft.z;
+				dispatchColorChangeEvent();
+			}
+
+			protected function dsInputG_changeHandler(event : Event) : void
+			{
+				if (event is KeyboardEvent)
+				{
+					if ((event as KeyboardEvent).keyCode != 13)
+						return;
+				}
+				colorLeft.y = int(dsInputG.text);
+				color = (colorLeft.x << 16) | (colorLeft.y << 8) | colorLeft.z;
+				dispatchColorChangeEvent();
+			}
+
+			protected function dsInputB_changeHandler(event : Event) : void
+			{
+				if (event is KeyboardEvent)
+				{
+					if ((event as KeyboardEvent).keyCode != 13)
+						return;
+				}
+				colorLeft.z = int(dsInputB.text);
+				color = (colorLeft.x << 16) | (colorLeft.y << 8) | colorLeft.z;
+				dispatchColorChangeEvent();
+			}
+
+			protected function dsInputA_changeHandler(event : Event) : void
+			{
+				if (event is KeyboardEvent)
+				{
+					if ((event as KeyboardEvent).keyCode != 13)
+						return;
+				}
+				colorAlpha = int(dsInputA.text) / 255;
+				dispatchAlphaChangeEvent();
+			}
+
+			private function dispatchColorChangeEvent() : void
+			{
+				undoButton.enabled = true;
+				if (_colorChangeCallback != null)
+					_colorChangeCallback(_color);
+			}
+
+			private function dispatchAlphaChangeEvent() : void
+			{
+				undoButton.enabled = true;
+				if (_colorAlphaChangeCallback != null)
+					_colorAlphaChangeCallback(_colorAlpha);
+			}
+
+			protected function undoButton_clickHandler(event : MouseEvent) : void
+			{
+				if (_initColor != _color)
+				{
+					color = _initColor;
+					dispatchColorChangeEvent();
+				}
+				if (_initAlpha != _colorAlpha)
+				{
+					colorAlpha = _initAlpha;
+					dispatchAlphaChangeEvent();
+				}
+				undoButton.enabled = false;
+			}
+
+			protected function copyButton_clickHandler(event : MouseEvent) : void
+			{
+				_copiedColor = _color;
+				if (_colorAlphaChangeCallback != null)
+					_copiedAlpha = _colorAlpha;
+				_hasCopied = true;
+			}
+
+			protected function pasteButton_clickHandler(event : MouseEvent) : void
+			{
+				if (_color != _copiedColor)
+				{
+					color = _copiedColor;
+					dispatchColorChangeEvent();
+				}
+				if (_colorAlphaChangeCallback != null && _colorAlpha != _copiedAlpha)
+				{
+					colorAlpha = _copiedAlpha;
+					dispatchAlphaChangeEvent();
+				}
+			}
+		]]>
+	</fx:Script>
+
+	<s:HGroup id="currentColorBar"
+			  x="8"
+			  y="8"
+			  verticalAlign="middle"
+			  gap="1">
+		<s:Label text="当前颜色："/>
+		<s:Graphic id="currentColorGr">
+			<s:Rect width="40"
+					height="20">
+				<s:fill>
+					<s:SolidColor id="currentColorSd"/>
+				</s:fill>
+			</s:Rect>
+		</s:Graphic>
+		<s:Button id="undoButton"
+				  width="30"
+				  label="X"
+				  styleName="toolbarButton"
+				  toolTip="撤销"
+				  click="undoButton_clickHandler(event)"/>
+		<s:Button id="copyButton"
+				  width="30"
+				  label="C"
+				  styleName="toolbarButton"
+				  toolTip="复制"
+				  click="copyButton_clickHandler(event)"/>
+		<s:Button id="pasteButton"
+				  width="30"
+				  label="P"
+				  styleName="toolbarButton"
+				  toolTip="粘贴"
+				  enabled="{_hasCopied == true}"
+				  click="pasteButton_clickHandler(event)"/>
+	</s:HGroup>
+
+	<s:Graphic id="grLeft"
+			   x="8"
+			   y="38"
+			   mouseDown="grLeft_mouseDownHandler(event)">
+		<s:BitmapImage id="biLeft"/>
+
+		<s:Graphic id="grCircle">
+			<s:Ellipse width="6"
+					   height="6"
+					   x="-3"
+					   y="-3">
+				<s:stroke>
+					<s:SolidColorStroke color="#ffffff"
+										weight="1"/>
+				</s:stroke>
+			</s:Ellipse>
+		</s:Graphic>
+
+	</s:Graphic>
+
+	<s:Graphic id="grRight"
+			   x="168"
+			   y="38"
+			   mouseDown="grRight_mouseDownHandler(event)">
+		<s:BitmapImage id="biRight"/>
+
+		<s:Graphic id="grRightMark">
+			<s:Path id="grRightMarkPath">
+				<s:stroke>
+					<s:SolidColorStroke color="#ffffff"
+										weight="1"/>
+				</s:stroke>
+			</s:Path>
+		</s:Graphic>
+
+	</s:Graphic>
+
+	<s:VGroup id="sliderGroup"
+			  x="8"
+			  y="198"
+			  gap="4">
+		<s:HGroup verticalAlign="middle">
+			<s:Label text="R"
+					 fontWeight="bold"/>
+			<s:Graphic id="grSliderR"
+					   mouseDown="grSliderR_mouseDownHandler(event)">
+				<s:BitmapImage id="biSliderR"/>
+
+				<s:Graphic id="grSliderRMark">
+					<s:Path id="grSliderRPath">
+						<s:stroke>
+							<s:SolidColorStroke color="#ffffff"
+												weight="1"/>
+						</s:stroke>
+					</s:Path>
+				</s:Graphic>
+
+			</s:Graphic>
+			<s:TextInput id="dsInputR"
+						 width="32"
+						 keyDown="dsInputR_changeHandler(event)"
+						 focusOut="dsInputR_changeHandler(event)"/>
+		</s:HGroup>
+
+		<s:HGroup verticalAlign="middle">
+			<s:Label text="G"
+					 fontWeight="bold"/>
+			<s:Graphic id="grSliderG"
+					   mouseDown="grSliderG_mouseDownHandler(event)">
+				<s:BitmapImage id="biSliderG"/>
+				<s:Graphic id="grSliderGMark">
+					<s:Path id="grSliderGPath">
+						<s:stroke>
+							<s:SolidColorStroke color="#ffffff"
+												weight="1"/>
+						</s:stroke>
+					</s:Path>
+				</s:Graphic>
+			</s:Graphic>
+			<s:TextInput id="dsInputG"
+						 width="32"
+						 keyDown="dsInputG_changeHandler(event)"
+						 focusOut="dsInputG_changeHandler(event)"/>
+		</s:HGroup>
+
+		<s:HGroup verticalAlign="middle">
+			<s:Label text="B"
+					 fontWeight="bold"/>
+			<s:Graphic id="grSliderB"
+					   mouseDown="grSliderB_mouseDownHandler(event)">
+				<s:BitmapImage id="biSliderB"/>
+				<s:Graphic id="grSliderBMark">
+					<s:Path id="grSliderBPath">
+						<s:stroke>
+							<s:SolidColorStroke color="#ffffff"
+												weight="1"/>
+						</s:stroke>
+					</s:Path>
+				</s:Graphic>
+			</s:Graphic>
+			<s:TextInput id="dsInputB"
+						 width="32"
+						 keyDown="dsInputB_changeHandler(event)"
+						 focusOut="dsInputB_changeHandler(event)"/>
+		</s:HGroup>
+
+		<s:HGroup id="hgSliderA"
+				  verticalAlign="middle">
+			<s:Label text="A"
+					 fontWeight="bold"/>
+			<s:Graphic id="grSliderA"
+					   mouseDown="grSliderA_mouseDownHandler(event)">
+				<s:BitmapImage id="biSliderA"/>
+				<s:Graphic id="grSliderAMark">
+					<s:Path id="grSliderAPath">
+						<s:stroke>
+							<s:SolidColorStroke color="#ffffff"
+												weight="1"/>
+						</s:stroke>
+					</s:Path>
+				</s:Graphic>
+			</s:Graphic>
+			<s:TextInput id="dsInputA"
+						 width="32"
+						 keyDown="dsInputA_changeHandler(event)"
+						 focusOut="dsInputA_changeHandler(event)"/>
+		</s:HGroup>
+	</s:VGroup>
+</s:TitleWindow>

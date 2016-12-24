@@ -5,7 +5,6 @@ package com.client.process
 	import com.client.view.loading.ResLoadingView;
 	import com.game.engine3D.process.BaseProcess;
 	import com.game.engine3D.process.ProcessStateMachine;
-	import com.game.engine3D.vo.SenderReferenceSet;
 
 	public class GetMainPlayerInfo extends BaseProcess
 	{
@@ -27,7 +26,7 @@ package com.client.process
 		
 		private function onGetMyPlayerInfoHandler():void
 		{
-			SenderReferenceSet.start();
+//			SenderReferenceSet.start();
 			completeProcess();
 			if (ClientGlobal.mainEntry)
 			{

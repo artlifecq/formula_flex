@@ -46,7 +46,7 @@ package com.rpgGame.app.manager.role
 			}
 			else
 			{
-				SceneSender.requestPickUpGoodsInfo(dropGoodsData.id);
+//				SceneSender.requestPickUpGoodsInfo(dropGoodsData.id);
 			}
 		}
 
@@ -70,7 +70,7 @@ package com.rpgGame.app.manager.role
 				var index : int = dropGoodsData.goodsDatas.indexOf(goodsItem);
 				if (index > -1)
 				{
-					SceneSender.requestPickUpGoods(dropGoodsData.id, index);
+//					SceneSender.requestPickUpGoods(dropGoodsData.id, index);
 				}
 			}
 			else

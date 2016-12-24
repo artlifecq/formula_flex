@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 小地图面板
+* @author L.L.M.Sunny
+* 创建时间：2015-11-27 上午10:30:12
+*
+-->
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="100%"
+		 height="100%"
+		 initialize="onInitialize(event)"
+		 creationComplete="onCreationComplete(event)"
+		 enterFrame="group1_enterFrameHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.cfg.ConfigData;
+			import com.editor.ctrl.AppMenu;
+			import com.editor.data.map.EditorClientMapData;
+			import com.editor.display.AimingPointShape;
+			import com.editor.display.SceneEntityArea3D;
+			import com.editor.events.MapEvent;
+			import com.editor.manager.DecorateEntitiesManager;
+			import com.editor.manager.SceneManager;
+			import com.editor.manager.SceneRoleManager;
+			import com.game.engine3D.controller.CameraController;
+			import com.game.engine3D.utils.MathUtil;
+
+			import mx.core.UIComponent;
+			import mx.events.FlexEvent;
+			import mx.events.ResizeEvent;
+
+			import away3d.pathFinding.PointsSet;
+
+			import org.client.mainCore.manager.EventManager;
+
+			private var _scaleMapX : Number = 0;
+			private var _scaleMapY : Number = 0;
+			private var _scaleX : Number = 0;
+			private var _scaleY : Number = 0;
+			private var _container : UIComponent;
+			private var _pathAreas : Sprite;
+			private var _monsterAreasMask : Shape;
+			private var _pathAreasMask : Shape;
+			private var _monsterAreas : Shape;
+			private var _focusArea : Sprite;
+			private var _miniMapData : BitmapData;
+			public var isRadar : Boolean = false;
+
+			protected function onInitialize(event : FlexEvent) : void
+			{
+				// TODO Auto-generated method stub
+			}
+
+			protected function onCreationComplete(event : FlexEvent) : void
+			{
+				_container = new UIComponent();
+				this.addElement(_container);
+				_container.mouseEnabled = false;
+				_container.mouseChildren = true;
+
+				_pathAreasMask = new Shape();
+				_container.addChild(_pathAreasMask);
+
+				_pathAreas = new Sprite();
+				_container.addChild(_pathAreas);
+				_pathAreas.mask = _pathAreasMask;
+				_pathAreas.buttonMode = true;
+				_pathAreas.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
+
+				_monsterAreasMask = new Shape();
+				_container.addChild(_monsterAreasMask);
+
+				_monsterAreas = new Shape();
+				_container.addChild(_monsterAreas);
+				_monsterAreas.mask = _monsterAreasMask;
+
+				_focusArea = new Sprite();
+				_focusArea.graphics.beginFill(0x00FF00, 0.3);
+				_focusArea.graphics.lineStyle(1);
+				_focusArea.graphics.drawRect(0, 0, 50, 50);
+				_focusArea.graphics.endFill();
+				_focusArea.buttonMode = true;
+				_container.addChild(_focusArea);
+
+				_focusArea.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
+				updateAll();
+
+				EventManager.addEvent(MapEvent.MINI_MAP_LOAD_COMPLETE, onUpdateMiniMap);
+				EventManager.addEvent(MapEvent.RADAR_MAP_LOAD_COMPLETE, onUpdateRadarMap);
+				EventManager.addEvent(MapEvent.MINI_MAP_UPDATE_MONSTER_AREA, updateMonsterArea);
+				EventManager.addEvent(MapEvent.SCENE_MAP_LOAD_COMPLETE, onMiniMapCorrectChange);
+				EventManager.addEvent(MapEvent.MINI_MAP_CORRECT_CHANGE, onMiniMapCorrectChange);
+				EventManager.addEvent(MapEvent.SHOW_MINI_MAP_CORRECT_VIEW, showMiniMapCorrectView);
+			}
+
+			override public function set visible(value : Boolean) : void
+			{
+				super.visible = value;
+				if (value)
+					updateAll();
+			}
+
+			private function updateAll() : void
+			{
+				updateMiniMap();
+				updateCorrectPoints();
+				updatePosition();
+				updatePathArea();
+				updateMonsterArea();
+			}
+
+			private function updateCorrectPoints() : void
+			{
+				if (!visible)
+					return;
+				if (!_container)
+					return;
+				if (!SceneManager.getInstance().mainScene)
+					return;
+				if (!SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper)
+					return;
+				var clientMapData : EditorClientMapData = SceneManager.getInstance().mapData;
+				if (!clientMapData)
+					return;
+
+				_scaleMapX = _scaleMapY = 0;
+				var miniMapData : BitmapData = isRadar ? SceneManager.getInstance().radarMapData : SceneManager.getInstance().miniMapData;
+				if (miniMapData)
+				{
+					_scaleMapX = (miniMapData.width / SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper.worldMaxX) * _scaleX;
+					_scaleMapY = (miniMapData.height / SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper.worldMaxZ) * _scaleY;
+				}
+				var offsetX : Number = clientMapData.mMiniCorrectOffsetX;
+				var offsetY : Number = clientMapData.mMiniCorrectOffsetY;
+				offsetX = offsetX * clientMapData.miniScaleX * _scaleMapX;
+				offsetY = offsetY * clientMapData.miniScaleY * _scaleMapY;
+
+				_pathAreas.x = offsetX;
+				_pathAreas.y = offsetY;
+			}
+
+			public function destroy() : void
+			{
+				if (_miniMapData)
+				{
+					_miniMapData.dispose();
+					_miniMapData = null;
+				}
+				_container = null;
+				if (_monsterAreas)
+				{
+					if (_monsterAreas.parent)
+						_monsterAreas.parent.removeChild(_monsterAreas);
+					_monsterAreas = null;
+				}
+				if (_monsterAreasMask)
+				{
+					if (_monsterAreasMask.parent)
+						_monsterAreasMask.parent.removeChild(_monsterAreasMask);
+					_monsterAreasMask = null;
+				}
+				if (_pathAreasMask)
+				{
+					if (_pathAreasMask.parent)
+						_pathAreasMask.parent.removeChild(_pathAreasMask);
+					_pathAreasMask = null;
+				}
+				if (_focusArea)
+				{
+					_focusArea.removeEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
+					_focusArea.removeEventListener(MouseEvent.MOUSE_MOVE, onFocusAreaMouseMoveHandler);
+					if (_focusArea.parent)
+						_focusArea.parent.removeChild(_focusArea);
+					_focusArea = null;
+				}
+				if (_pathAreas)
+				{
+					_pathAreas.removeEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
+					_pathAreas.removeEventListener(MouseEvent.MOUSE_MOVE, onPathAreasMouseMoveHandler);
+					if (_pathAreas.parent)
+						_pathAreas.parent.removeChild(_pathAreas);
+					_pathAreas = null;
+				}
+				EventManager.removeEvent(MapEvent.MINI_MAP_LOAD_COMPLETE, onUpdateMiniMap);
+				EventManager.removeEvent(MapEvent.RADAR_MAP_LOAD_COMPLETE, onUpdateRadarMap);
+				EventManager.removeEvent(MapEvent.MINI_MAP_UPDATE_MONSTER_AREA, updateMonsterArea);
+				EventManager.removeEvent(MapEvent.SCENE_MAP_LOAD_COMPLETE, onMiniMapCorrectChange);
+				EventManager.removeEvent(MapEvent.MINI_MAP_CORRECT_CHANGE, onMiniMapCorrectChange);
+				EventManager.removeEvent(MapEvent.SHOW_MINI_MAP_CORRECT_VIEW, showMiniMapCorrectView);
+			}
+
+			private function mouseDownHandler(event : MouseEvent) : void
+			{
+				if (event.currentTarget == _focusArea)
+				{
+					_focusArea.startDrag(false, new Rectangle(0, 0, imgContainer.width - _focusArea.width, imgContainer.height - _focusArea.height));
+					_focusArea.addEventListener(MouseEvent.MOUSE_MOVE, onFocusAreaMouseMoveHandler);
+				}
+				if (event.currentTarget == _pathAreas)
+				{
+					_pathAreas.startDrag(false, new Rectangle(-_pathAreas.width + 10, -_pathAreas.height + 10, 2 * _pathAreas.width - 20, 2 * _pathAreas.height - 20));
+					_pathAreas.addEventListener(MouseEvent.MOUSE_MOVE, onPathAreasMouseMoveHandler);
+				}
+				//	SceneManager.getInstance().resetCamera();
+				stage.addEventListener(MouseEvent.MOUSE_UP, mouseUpHandler);
+			}
+
+			private function mouseOverHandler(event : MouseEvent) : void
+			{
+				if (event.currentTarget is AimingPointShape)
+				{
+					if (!(event.currentTarget as AimingPointShape).selected)
+						(event.currentTarget as AimingPointShape).over();
+				}
+			}
+
+			private function mouseOutHandler(event : MouseEvent) : void
+			{
+				if (event.currentTarget is AimingPointShape)
+				{
+					if (!(event.currentTarget as AimingPointShape).selected)
+						(event.currentTarget as AimingPointShape).normal();
+				}
+			}
+
+			private function onPathAreasMouseMoveHandler(event : MouseEvent) : void
+			{
+				if (!SceneManager.getInstance().mainScene)
+					return;
+				if (!SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper)
+					return;
+				var clientMapData : EditorClientMapData = SceneManager.getInstance().mapData;
+				if (!clientMapData)
+					return;
+
+				var offsetX : int = _pathAreas.x / (clientMapData.miniScaleX * _scaleMapX);
+				var offsetY : int = _pathAreas.y / (clientMapData.miniScaleY * _scaleMapY);
+
+				clientMapData.setValue("miniCorrectOffsetX", offsetX);
+				clientMapData.setValue("miniCorrectOffsetY", offsetY);
+
+				EventManager.dispatchEvent(MapEvent.MINI_MAP_CORRECT_CHANGE);
+			}
+
+			private function onFocusAreaMouseMoveHandler(event : MouseEvent) : void
+			{
+				updateFocusAreaToCamera();
+			}
+
+			private function updateFocusAreaToCamera() : void
+			{
+				if (!SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper)
+					return;
+				var clientMapData : EditorClientMapData = SceneManager.getInstance().mapData;
+				if (!clientMapData)
+					return;
+
+				var offsetX : Number = clientMapData.mMiniCorrectOffsetX;
+				var offsetY : Number = clientMapData.mMiniCorrectOffsetY;
+				offsetX = offsetX * clientMapData.miniScaleX * _scaleMapX;
+				offsetY = offsetY * clientMapData.miniScaleY * _scaleMapY;
+
+				var pos : Point = getBackProjection(_focusArea.x + 25 - offsetX, _focusArea.y + 25 - offsetY);
+				SceneRoleManager.getInstance().targetPlayer.setGroundXY(pos.x / (clientMapData.miniScaleX * _scaleMapX), SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper.worldMaxZ - pos.y / (clientMapData.miniScaleY * _scaleMapY));
+			}
+
+			private function mouseUpHandler(event : MouseEvent) : void
+			{
+				_pathAreas.removeEventListener(MouseEvent.MOUSE_MOVE, onPathAreasMouseMoveHandler);
+				_focusArea.removeEventListener(MouseEvent.MOUSE_MOVE, onFocusAreaMouseMoveHandler);
+
+				stage.removeEventListener(MouseEvent.MOUSE_UP, mouseUpHandler);
+
+				_focusArea.stopDrag();
+				_pathAreas.stopDrag();
+			}
+
+			protected function imgContainer_clickHandler(event : MouseEvent) : void
+			{
+				if (!_focusArea.visible)
+					return;
+				_focusArea.x = imgContainer.mouseX - 25;
+				_focusArea.y = imgContainer.mouseY - 25;
+
+				if (_focusArea.x < 0)
+					_focusArea.x = 0;
+				if (_focusArea.x > imgContainer.width - 50)
+					_focusArea.x = imgContainer.width - 50;
+				if (_focusArea.y < 0)
+					_focusArea.y = 0;
+				if (_focusArea.y > imgContainer.height - 50)
+					_focusArea.y = imgContainer.height - 50;
+
+				updateFocusAreaToCamera();
+			}
+
+			private function onUpdateMiniMap() : void
+			{
+				if (isRadar)
+					return;
+				updateMiniMap();
+			}
+
+			private function onUpdateRadarMap() : void
+			{
+				if (!isRadar)
+					return;
+				updateMiniMap();
+			}
+
+			private function updateMiniMap() : void
+			{
+				if (!visible)
+					return;
+				if (!_container)
+					return;
+				imgContainer.source = null;
+				if (_miniMapData)
+				{
+					_miniMapData.dispose();
+					_miniMapData = null;
+				}
+				if (!SceneManager.getInstance().mainScene)
+					return;
+				var miniMapData : BitmapData = isRadar ? SceneManager.getInstance().radarMapData : SceneManager.getInstance().miniMapData;
+				if (!miniMapData)
+					return;
+				_miniMapData = new BitmapData(imgContainer.width, imgContainer.height, true, 0);
+				_scaleX = _miniMapData.width / miniMapData.width;
+				_scaleY = _miniMapData.height / miniMapData.height;
+				_scaleX = _scaleX < _scaleY ? _scaleX : _scaleY;
+				_scaleY = _scaleX;
+				var m : Matrix = new Matrix();
+				m.scale(_scaleX, _scaleY);
+				_miniMapData.draw(miniMapData, m);
+				imgContainer.source = _miniMapData;
+
+				_monsterAreasMask.graphics.clear();
+				_monsterAreasMask.graphics.beginFill(0, 0);
+				_monsterAreasMask.graphics.drawRect(0, 0, imgContainer.width, imgContainer.height);
+				_monsterAreasMask.graphics.endFill();
+
+				_pathAreasMask.graphics.clear();
+				_pathAreasMask.graphics.beginFill(0, 0);
+				_pathAreasMask.graphics.drawRect(0, 0, imgContainer.width, imgContainer.height);
+				_pathAreasMask.graphics.endFill();
+			}
+
+			private function updatePathArea() : void
+			{
+				if (!visible)
+					return;
+				if (!_container)
+					return;
+				if (!_pathAreas)
+					return;
+				var clientMapData : EditorClientMapData = SceneManager.getInstance().mapData;
+				if (!clientMapData)
+					return;
+
+				var scaleX : Number = clientMapData.miniScaleX * _scaleMapX;
+				var scaleY : Number = clientMapData.miniScaleY * _scaleMapY;
+
+				var boundPointsSet : Vector.<Vector3D> = SceneManager.getInstance().mainScene.sceneMapLayer.district.boundPointsSet.points;
+				var internalPointsSets : Vector.<PointsSet> = SceneManager.getInstance().mainScene.sceneMapLayer.district.internalPointsSets;
+
+				var pos : Point = new Point();
+				var drawPos : Point = null;
+				_pathAreas.graphics.clear();
+				_pathAreas.graphics.beginFill(0, 0);
+				_pathAreas.graphics.lineStyle(1, 0x00ff00);
+				var bpLen : int = boundPointsSet.length;
+				for (var i : int = 0; i < bpLen; i++)
+				{
+					var bp : Vector3D = boundPointsSet[i];
+					pos.x = bp.x;
+					pos.y = (SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper.worldMaxZ - bp.z);
+					drawPos = getProjection(pos.x * scaleX, pos.y * scaleY);
+					if (i == 0)
+					{
+						_pathAreas.graphics.moveTo(drawPos.x, drawPos.y);
+					}
+					else
+					{
+						_pathAreas.graphics.lineTo(drawPos.x, drawPos.y);
+					}
+				}
+				_pathAreas.graphics.endFill();
+				_pathAreas.graphics.lineTo(drawPos.x, drawPos.y);
+				_pathAreas.graphics.beginFill(0, 0);
+				_pathAreas.graphics.lineStyle(1, 0xff0000);
+				for each (var ips : PointsSet in internalPointsSets)
+				{
+					var ipLen : int = ips.points.length;
+					for (var j : int = 0; j < ipLen; j++)
+					{
+						var ip : Vector3D = ips.points[j];
+						pos.x = ip.x;
+						pos.y = (SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper.worldMaxZ - ip.z);
+						drawPos = getProjection(pos.x * scaleX, pos.y * scaleY);
+						if (j == 0)
+							_pathAreas.graphics.moveTo(drawPos.x, drawPos.y);
+						else
+							_pathAreas.graphics.lineTo(drawPos.x, drawPos.y);
+					}
+					_pathAreas.graphics.lineTo(drawPos.x, drawPos.y);
+				}
+				_pathAreas.graphics.endFill();
+			}
+
+			private function getProjection(x : int, y : int) : Point
+			{
+				var tilt : Number = MathUtil.angleToRadian(SceneManager.getInstance().mapData.mMiniCorrectTilt);
+				var pan : Number = MathUtil.angleToRadian(SceneManager.getInstance().mapData.mMiniCorrectPan);
+				var roll : Number = MathUtil.angleToRadian(SceneManager.getInstance().mapData.mMiniCorrectRoll);
+				var p : Point = MathUtil.projection(x, y, tilt, pan, roll);
+				return p;
+			}
+
+			private function getBackProjection(x : int, y : int) : Point
+			{
+				var tilt : Number = MathUtil.angleToRadian(SceneManager.getInstance().mapData.mMiniCorrectTilt);
+				var pan : Number = MathUtil.angleToRadian(SceneManager.getInstance().mapData.mMiniCorrectPan);
+				var roll : Number = MathUtil.angleToRadian(SceneManager.getInstance().mapData.mMiniCorrectRoll);
+				var p : Point = MathUtil.backProjection(x, y, tilt, pan, roll);
+				return p;
+			}
+
+			private function updatePosition() : void
+			{
+				if (!_focusArea)
+					return;
+				if (!SceneManager.getInstance().mainScene)
+					return;
+				if (!SceneManager.getInstance().mainScene.sceneMapLayer.isLoaded)
+					return;
+				var clientMapData : EditorClientMapData = SceneManager.getInstance().mapData;
+				if (!clientMapData)
+					return;
+
+				_focusArea.visible = !AppMenu.getInstance().toggleMiniMapCorrectView.checked;
+				_pathAreas.mouseEnabled = AppMenu.getInstance().toggleMiniMapCorrectView.checked;
+
+				var offsetX : Number = clientMapData.mMiniCorrectOffsetX;
+				var offsetY : Number = clientMapData.mMiniCorrectOffsetY;
+				offsetX = offsetX * clientMapData.miniScaleX * _scaleMapX;
+				offsetY = offsetY * clientMapData.miniScaleY * _scaleMapY;
+
+				var pos : Point = getProjection(SceneRoleManager.getInstance().targetPlayer.x * clientMapData.miniScaleX * _scaleMapX, (SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper.worldMaxZ - SceneRoleManager.getInstance().targetPlayer.z) * clientMapData.miniScaleY * _scaleMapY);
+
+				_focusArea.x = pos.x - 25 + offsetX;
+				_focusArea.y = pos.y - 25 + offsetY;
+
+				if (_focusArea.x < 0)
+					_focusArea.x = 0;
+				if (_focusArea.x > imgContainer.width - 50)
+					_focusArea.x = imgContainer.width - 50;
+				if (_focusArea.y < 0)
+					_focusArea.y = 0;
+				if (_focusArea.y > imgContainer.height - 50)
+					_focusArea.y = imgContainer.height - 50;
+			}
+
+			private function onMiniMapCorrectChange() : void
+			{
+				updateCorrectPoints();
+				updatePathArea();
+				updateMonsterArea();
+			}
+
+			private function updateMonsterArea(data : ConfigData = null) : void
+			{
+				if (!visible)
+					return;
+				if (!_container)
+					return;
+				if (!SceneManager.getInstance().mainScene)
+					return;
+				if (!SceneManager.getInstance().mainScene.sceneMapLayer.isLoaded)
+					return;
+				if (!_monsterAreas)
+					return;
+				var clientMapData : EditorClientMapData = SceneManager.getInstance().mapData;
+				if (!clientMapData)
+					return;
+
+				var scaleX : Number = clientMapData.miniScaleX * _scaleMapX;
+				var scaleY : Number = clientMapData.miniScaleY * _scaleMapY;
+
+				var offsetX : Number = SceneManager.getInstance().mapData.mMiniCorrectOffsetX;
+				var offsetY : Number = SceneManager.getInstance().mapData.mMiniCorrectOffsetY;
+				offsetX *= scaleX;
+				offsetY *= scaleY;
+
+				_monsterAreas.x = offsetX;
+				_monsterAreas.y = offsetY;
+
+				_monsterAreas.graphics.clear();
+
+				var monsterAreas : Array = DecorateEntitiesManager.getInstance().monsterAreas;
+				if (monsterAreas)
+				{
+					for each (var area : SceneEntityArea3D in monsterAreas)
+					{
+						var points : Vector.<Point> = area.points;
+						if (points)
+						{
+							var len : int = points.length;
+							var p : Point;
+							var i : int = 0;
+							var x : int;
+							var y : int;
+							for (i = 0; i < len; i++)
+							{
+								p = points[i];
+								p = getProjection(p.x * scaleX, (SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper.worldMaxZ - p.y) * scaleY);
+								x = p.x;
+								y = p.y;
+								_monsterAreas.graphics.beginFill(0xffff00, 0.5);
+								_monsterAreas.graphics.drawCircle(x, y, 2);
+								_monsterAreas.graphics.endFill();
+							}
+
+							_monsterAreas.graphics.beginFill(0x0000ff, 0.5);
+							for (i = 0; i < len; i++)
+							{
+								p = points[i];
+								p = getProjection(p.x * scaleX, (SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper.worldMaxZ - p.y) * scaleY);
+								x = p.x;
+								y = p.y;
+								if (i == 0)
+									_monsterAreas.graphics.moveTo(x, y);
+								else
+									_monsterAreas.graphics.lineTo(x, y);
+							}
+							_monsterAreas.graphics.endFill();
+						}
+					}
+				}
+			}
+
+			protected function group1_enterFrameHandler(event : Event) : void
+			{
+				if (CameraController.active)
+				{
+					updatePosition();
+				}
+			}
+
+			protected function imgContainer_resizeHandler(event : ResizeEvent) : void
+			{
+				callLater(updateAll);
+			}
+
+			private function showMiniMapCorrectView(visible : Boolean) : void
+			{
+				if (!_focusArea)
+					return;
+				_focusArea.visible = !visible;
+				_pathAreas.mouseEnabled = visible;
+			}
+		]]>
+	</fx:Script>
+	<s:Image id="imgContainer"
+			 width="100%"
+			 height="100%"
+			 x="0"
+			 y="0"
+			 backgroundColor="0x666666"
+			 click="imgContainer_clickHandler(event)"
+			 resize="imgContainer_resizeHandler(event)">
+	</s:Image>
+</s:Group>

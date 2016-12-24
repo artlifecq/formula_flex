@@ -1,7 +1,5 @@
 package com.rpgGame.app.sender
 {
-	import com.rpgGame.app.utils.ReqLockUtil;
-
 	import app.cmd.MazeModuleMessages;
 
 	public class MazeSender extends BaseSender
@@ -18,9 +16,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function tryTrans(index : int) : void
 		{
-			if (ReqLockUtil.isReqLocked(MazeModuleMessages.C2S_TRY_TRANSPORT))
-				return;
-			ReqLockUtil.lockReq(MazeModuleMessages.C2S_TRY_TRANSPORT, 5000);
+//			if (ReqLockUtil.isReqLocked(MazeModuleMessages.C2S_TRY_TRANSPORT))
+//				return;
+//			ReqLockUtil.lockReq(MazeModuleMessages.C2S_TRY_TRANSPORT, 5000);
 
 			_bytes.clear();
 			_bytes.writeVarint32(index);

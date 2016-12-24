@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 换装文件列表
+* @author L.L.M.Sunny
+* 创建时间：2015-6-19 上午10:30:12
+*
+-->
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="100%"
+		 height="100%"
+		 initialize="onInitialize()"
+		 creationComplete="onCreationComplete()">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.cfg.AvatarFileResConfig;
+			import com.editor.cfg.ConfigData;
+			import com.editor.cfg.ProjectConfig;
+			import com.editor.data.ConfigDesc;
+			import com.editor.data.InternalTabelName;
+			import com.editor.data.TabelData;
+			import com.editor.events.AvatarFileListEvent;
+			import com.editor.events.AvatarPreviewEvent;
+			import com.editor.events.ConfigListEvent;
+			import com.editor.manager.DataStructuresManager;
+			import com.editor.utils.FileUtil;
+
+			import mx.collections.ArrayCollection;
+			import mx.events.IndexChangedEvent;
+
+			import org.client.mainCore.manager.EventManager;
+
+
+
+
+			[Bindable]
+			/** 换装数据 **/
+			private var _avatarItems : ArrayCollection;
+			private var _kindItems : Array;
+			private var _kindAllItem : AvatarFileListItems;
+			private var _searchKey : String = "";
+
+			private function onInitialize() : void
+			{
+				_avatarItems = new ArrayCollection();
+			}
+
+			private function onCreationComplete() : void
+			{
+				_kindItems = [];
+				pullData();
+				EventManager.addEvent(AvatarFileListEvent.PULL_AVATAR_FILE_LIST, pullData);
+				EventManager.addEvent(AvatarFileListEvent.UPDATE_AVATAR_FILE_LIST, updateData);
+				EventManager.addEvent(AvatarPreviewEvent.SELECTED_RES, selectAvatarId);
+				EventManager.addEvent(AvatarFileListEvent.CANCEL_SELECTED_AVATAR, cancelSelect);
+				EventManager.addEvent(ConfigListEvent.SELECTED_CONFIG_DATA, onSelectedConfigData);
+			}
+
+			private function pullData() : void
+			{
+				clearItems();
+				enableKind.selected = ProjectConfig.USE_AVATAR_FILE_KINDS;
+
+				_kindAllItem = new AvatarFileListItems();
+				_kindAllItem.setAvatarItems(null);
+				_kindAllItem.label = "全部";
+				tabBar.addElement(_kindAllItem);
+
+				if (ProjectConfig.USE_AVATAR_FILE_KINDS)
+				{
+					var kindTypes : Array = AvatarFileResConfig.avatarFileKinds;
+					for each (var kt : String in kindTypes)
+					{
+						var kindItem : AvatarFileListItems = new AvatarFileListItems();
+						kindItem.setAvatarItems(null);
+						kindItem.label = kt;
+						tabBar.addElement(kindItem);
+						_kindItems.push(kindItem);
+					}
+				}
+
+				updateData();
+			}
+
+			private function updateData() : void
+			{
+				var tabel : TabelData = DataStructuresManager.getInstance().getTabel(InternalTabelName.AvatarFileResConfigName);
+				var configDesc : ConfigDesc = tabel ? tabel.getConfigDesc() : null;
+				if (!configDesc)
+					return;
+
+				var cacheDic : Dictionary = ConfigData.getCacheDatas(configDesc, _searchKey, ["name", "mRes"]);
+				var datas : Array = FileUtil.dictToArray(cacheDic);
+				FileUtil.sortDatas(datas);
+				_avatarItems.source = datas;
+
+				_kindAllItem.setAvatarItems(_avatarItems);
+
+				if (ProjectConfig.USE_AVATAR_FILE_KINDS)
+				{
+					var kindTypes : Array = AvatarFileResConfig.avatarFileKinds;
+					var kindTypeLen : int = kindTypes.length;
+					for (var j : int = 0; j < kindTypeLen; j++)
+					{
+						var kt : String = kindTypes[j];
+						var avatarItems : ArrayCollection = new ArrayCollection();
+						for each (var data : AvatarFileResConfig in _avatarItems.source)
+						{
+							if (data.mRes.indexOf(kt + "/") == 0)
+								avatarItems.addItem(data);
+						}
+						var kindItem : AvatarFileListItems = _kindItems[j];
+						kindItem.setAvatarItems(avatarItems);
+					}
+				}
+			}
+
+			private function clearItems() : void
+			{
+				tabBar.removeAll();
+				if (_kindItems)
+				{
+					for each (var kindItem : AvatarFileListItems in _kindItems)
+					{
+						kindItem.destroy();
+					}
+					_kindItems.length = 0;
+				}
+				if (_kindAllItem)
+				{
+					_kindAllItem.destroy();
+					_kindAllItem = null;
+				}
+			}
+
+			public function destroy() : void
+			{
+				clearItems();
+				_avatarItems = null;
+
+				EventManager.removeEvent(AvatarFileListEvent.PULL_AVATAR_FILE_LIST, pullData);
+				EventManager.removeEvent(AvatarFileListEvent.UPDATE_AVATAR_FILE_LIST, updateData);
+				EventManager.removeEvent(AvatarPreviewEvent.SELECTED_RES, selectAvatarId);
+				EventManager.removeEvent(AvatarFileListEvent.CANCEL_SELECTED_AVATAR, cancelSelect);
+				EventManager.removeEvent(ConfigListEvent.SELECTED_CONFIG_DATA, onSelectedConfigData);
+			}
+
+			private function cancelSelect() : void
+			{
+				for each (var kindItem : AvatarFileListItems in _kindItems)
+				{
+					if (kindItem.data_avatar)
+						kindItem.data_avatar.selectedItem = null;
+				}
+				if (_kindAllItem.data_avatar)
+					_kindAllItem.data_avatar.selectedItem = null;
+			}
+
+			private function onSelectedConfigData(data : ConfigData) : void
+			{
+				if (data.tabelName == InternalTabelName.AvatarFileResConfigName)
+				{
+					var tabel : TabelData = DataStructuresManager.getInstance().getTabel(InternalTabelName.AvatarFileResConfigName);
+					var configDesc : ConfigDesc = tabel ? tabel.getConfigDesc() : null;
+					if (!configDesc)
+						return;
+					configDesc.selectedData = data;
+					var isSelected : Boolean = false;
+					var index : int;
+					for each (var kindItem : AvatarFileListItems in _kindItems)
+					{
+						if (kindItem.data_avatar)
+							kindItem.data_avatar.selectedItem = null;
+						if (!isSelected)
+						{
+							if (kindItem.getAvatarItems().getItemIndex(configDesc.selectedData) != -1)
+							{
+								if (tabBar.selectedChild != kindItem)
+									tabBar.selectedChild = kindItem;
+								if (kindItem.data_avatar)
+								{
+									kindItem.data_avatar.selectedItem = configDesc.selectedData;
+									index = kindItem.avatarItems.getItemIndex(configDesc.selectedData);
+									if (index > -1)
+										callLater(kindItem.data_avatar.scrollToIndex, [index]);
+								}
+								isSelected = true;
+								break;
+							}
+						}
+					}
+					if (!isSelected)
+					{
+						if (_kindAllItem.getAvatarItems().getItemIndex(configDesc.selectedData) != -1)
+						{
+							if (tabBar.selectedChild != _kindAllItem)
+								tabBar.selectedChild = _kindAllItem;
+							if (_kindAllItem.data_avatar)
+							{
+								_kindAllItem.data_avatar.selectedItem = configDesc.selectedData;
+								index = _kindAllItem.avatarItems.getItemIndex(configDesc.selectedData);
+								if (index > -1)
+									callLater(_kindAllItem.data_avatar.scrollToIndex, [index]);
+							}
+						}
+					}
+				}
+			}
+
+			private function selectAvatarId(id : String) : void
+			{
+				if (id == null)
+				{
+					return;
+				}
+				var tabel : TabelData = DataStructuresManager.getInstance().getTabel(InternalTabelName.AvatarFileResConfigName);
+				var configDesc : ConfigDesc = tabel ? tabel.getConfigDesc() : null;
+				if (!configDesc)
+					return;
+				for each (var data : AvatarFileResConfig in _avatarItems.source)
+				{
+					if (data.mRes == id)
+					{
+						onSelectedConfigData(data);
+						break;
+					}
+				}
+			}
+
+			private function tabnavigator1_changeHandler(event : IndexChangedEvent) : void
+			{
+				var tabel : TabelData = DataStructuresManager.getInstance().getTabel(InternalTabelName.AvatarFileResConfigName);
+				var configDesc : ConfigDesc = tabel ? tabel.getConfigDesc() : null;
+				if (!configDesc)
+					return;
+
+				var kindItem : AvatarFileListItems = tabBar.selectedChild as AvatarFileListItems;
+				if (kindItem.data_avatar)
+				{
+					kindItem.data_avatar.selectedItem = configDesc.selectedData;
+					var index : int = kindItem.avatarItems.getItemIndex(configDesc.selectedData);
+					if (index > -1)
+						callLater(kindItem.data_avatar.scrollToIndex, [index]);
+				}
+			}
+
+			protected function inputText_keyDownHandler(event : KeyboardEvent) : void
+			{
+				if (event.keyCode == 13)
+				{
+					_searchKey = searchText.text;
+					updateData();
+				}
+			}
+
+			protected function inputText_focusOutHandler(event : FocusEvent) : void
+			{
+				_searchKey = searchText.text;
+				updateData();
+			}
+
+			protected function button1_clickHandler(event : MouseEvent) : void
+			{
+				_searchKey = searchText.text;
+				updateData();
+			}
+
+			protected function correctCheck_changeHandler(event : Event) : void
+			{
+
+			}
+
+			protected function enableKind_changeHandler(event : Event) : void
+			{
+				ProjectConfig.USE_AVATAR_FILE_KINDS = enableKind.selected;
+				pullData();
+			}
+		]]>
+	</fx:Script>
+	<s:Group width="100%"
+			 height="100%">
+		<s:TextInput id="searchText"
+					 x="10"
+					 y="2"
+					 width="200"
+					 chromeColor="#FFFFFF"
+					 contentBackgroundColor="#444444"
+					 fontFamily="SimSun"
+					 keyDown="inputText_keyDownHandler(event)"
+					 focusOut="inputText_focusOutHandler(event)">
+		</s:TextInput>
+		<s:Button x="220"
+				  y="2"
+				  label="搜索"
+				  fontFamily="SimSun"
+				  click="button1_clickHandler(event)">
+		</s:Button>
+		<s:CheckBox id="enableKind"
+					label="启用分类"
+					x="300"
+					y="2"
+					fontFamily="SimSun"
+					selected="false"
+					change="enableKind_changeHandler(event)">
+		</s:CheckBox>
+		<s:Group x="0"
+				 y="30"
+				 width="100%"
+				 height="100%">
+			<mx:TabNavigator id="tabBar"
+							 left="5"
+							 right="5"
+							 top="5"
+							 bottom="5"
+							 paddingTop="5"
+							 width="100%"
+							 height="100%"
+							 change="tabnavigator1_changeHandler(event)">
+			</mx:TabNavigator>
+		</s:Group>
+	</s:Group>
+</s:Group>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 数据表字段窗口
+* @author L.L.M.Sunny
+* 创建时间：2015-8-17 上午10:30:12
+*
+-->
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="600"
+			   height="500"
+			   title="字段选择"
+			   fontFamily="SimSun"
+			   creationComplete="onCreationComplete()"
+			   initialize="onInitialize()"
+			   close="window1_closeHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.data.TabelFieldData;
+			import com.editor.manager.AppManager;
+
+			import mx.collections.ArrayCollection;
+			import mx.managers.PopUpManager;
+
+			private static var _window : TabelFieldsView;
+
+			public static function open() : void
+			{
+				if (!_window)
+				{
+					_window = new TabelFieldsView();
+					PopUpManager.addPopUp(_window, AppManager.getInstance().appRoot, false);
+					PopUpManager.centerPopUp(_window);
+				}
+				PopUpManager.bringToFront(_window);
+			}
+
+			public static function close() : void
+			{
+				if (_window)
+				{
+					_window.destroy();
+					PopUpManager.removePopUp(_window);
+				}
+				_window = null;
+			}
+
+			public static function get window() : TabelFieldsView
+			{
+				return _window;
+			}
+
+			[Bindable]
+			private var _fieldItemsSpell : ArrayCollection;
+			[Bindable]
+			private var _fieldItemsDecorate : ArrayCollection;
+			[Bindable]
+			private var _fieldItemsOther : ArrayCollection;
+			private var _selectedCallback : Function;
+
+			private function onInitialize() : void
+			{
+				visible = false;
+				var fieldNames : Array = [];
+				for (var fieldType : String in TabelFieldData.fieldLabelByType)
+				{
+					if (TabelFieldData.isUnListableFields(fieldType))
+						continue;
+					var data : Object = {field: fieldType, tips: TabelFieldData.fieldLabelByType[fieldType]};
+					fieldNames.push(data);
+				}
+
+				var i : int;
+				var len : int;
+				var fieldData : Object;
+				var kindTypes : Array;
+				_fieldItemsSpell = new ArrayCollection();
+				var fieldNamesSpell : Array = [];
+				kindTypes = TabelFieldData.fieldTypeByKind["spell"];
+				if (kindTypes)
+				{
+					len = fieldNames.length;
+					for (i = len - 1; i >= 0; i--)
+					{
+						fieldData = fieldNames[i];
+						if (kindTypes.indexOf(fieldData.field) != -1)
+						{
+							fieldNamesSpell.push(fieldData);
+							fieldNames.splice(i, 1);
+						}
+					}
+				}
+				fieldNamesSpell.sortOn(["field"], Array.CASEINSENSITIVE);
+				_fieldItemsSpell.source = fieldNamesSpell;
+
+				_fieldItemsDecorate = new ArrayCollection();
+				var fieldNamesDecorate : Array = [];
+				kindTypes = TabelFieldData.fieldTypeByKind["decorate"];
+				if (kindTypes)
+				{
+					len = fieldNames.length;
+					for (i = len - 1; i >= 0; i--)
+					{
+						fieldData = fieldNames[i];
+						if (kindTypes.indexOf(fieldData.field) != -1)
+						{
+							fieldNamesDecorate.push(fieldData);
+							fieldNames.splice(i, 1);
+						}
+					}
+				}
+				fieldNamesDecorate.sortOn(["field"], Array.CASEINSENSITIVE);
+				_fieldItemsDecorate.source = fieldNamesDecorate;
+
+				_fieldItemsOther = new ArrayCollection();
+				fieldNames.sortOn(["field"], Array.CASEINSENSITIVE);
+				_fieldItemsOther.source = fieldNames;
+			}
+
+			private function onCreationComplete() : void
+			{
+				visible = true;
+			}
+
+			private function window1_closeHandler(event : Event) : void
+			{
+				close();
+			}
+
+			private function destroy() : void
+			{
+				_fieldItemsSpell = null;
+				_fieldItemsDecorate = null;
+				_fieldItemsOther = null;
+				_selectedCallback = null;
+			}
+
+			private function data_field_spell_selectionChangeHandler(event : MouseEvent) : void
+			{
+				var fieldData : Object = data_field_spell.selectedItem;
+				fieldDataSelected(fieldData);
+			}
+
+			private function data_field_decorate_selectionChangeHandler(event : MouseEvent) : void
+			{
+				var fieldData : Object = data_field_decorate.selectedItem;
+				fieldDataSelected(fieldData);
+			}
+
+			private function data_field_other_selectionChangeHandler(event : MouseEvent) : void
+			{
+				var fieldData : Object = data_field_other.selectedItem;
+				fieldDataSelected(fieldData);
+			}
+
+			private function fieldDataSelected(fieldData : Object) : void
+			{
+				if (!fieldData)
+					return;
+				if (_selectedCallback != null)
+					_selectedCallback(fieldData.field);
+				close();
+			}
+
+			public function setSelectedCallback(callback : Function) : void
+			{
+				_selectedCallback = callback;
+			}
+		]]>
+	</fx:Script>
+	<s:Group left="0"
+			 right="0"
+			 top="0"
+			 bottom="0"
+			 width="100%"
+			 height="100%">
+		<s:layout>
+			<s:HorizontalLayout paddingTop="0"
+								paddingLeft="0"/>
+		</s:layout>
+		<mx:DataGrid id="data_field_spell"
+					 x="0"
+					 y="0"
+					 width="33%"
+					 height="100%"
+					 dataProvider="{_fieldItemsSpell}"
+					 click="data_field_spell_selectionChangeHandler(event)"
+					 editable="false">
+			<mx:columns>
+				<mx:DataGridColumn headerText="技能特性字段"
+								   dataField="tips"
+								   editable="false"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:DataGrid id="data_field_decorate"
+					 x="0"
+					 y="0"
+					 width="33%"
+					 height="100%"
+					 dataProvider="{_fieldItemsDecorate}"
+					 click="data_field_decorate_selectionChangeHandler(event)"
+					 editable="false">
+			<mx:columns>
+				<mx:DataGridColumn headerText="布置特性字段"
+								   dataField="tips"
+								   editable="false"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:DataGrid id="data_field_other"
+					 x="0"
+					 y="0"
+					 width="33%"
+					 height="100%"
+					 dataProvider="{_fieldItemsOther}"
+					 click="data_field_other_selectionChangeHandler(event)"
+					 editable="false">
+			<mx:columns>
+				<mx:DataGridColumn headerText="其它字段"
+								   dataField="tips"
+								   editable="false"/>
+			</mx:columns>
+		</mx:DataGrid>
+	</s:Group>
+</s:TitleWindow>

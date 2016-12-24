@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 语言配置窗口
+* @author L.L.M.Sunny
+* 创建时间：2015-12-03 上午10:30:12
+*
+-->
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="800"
+			   height="700"
+			   title="语言配置"
+			   fontFamily="SimSun"
+			   creationComplete="onCreationComplete()"
+			   initialize="onInitialize()"
+			   close="window1_closeHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.core.LangCodeCreater;
+			import com.editor.core.LangPackCreater;
+			import com.editor.ctrl.AppMenu;
+			import com.editor.data.ConfigDesc;
+			import com.editor.manager.AppManager;
+			import com.editor.manager.LangConfigManager;
+
+			import mx.controls.Alert;
+			import mx.events.IndexChangedEvent;
+			import mx.managers.PopUpManager;
+
+			import spark.components.NavigatorContent;
+
+			private static var _window : LangConfigView;
+
+			public static function open() : void
+			{
+				if (!_window)
+				{
+					_window = new LangConfigView();
+					PopUpManager.addPopUp(_window, AppManager.getInstance().appRoot, false);
+					PopUpManager.centerPopUp(_window);
+					AppMenu.getInstance().toggleLangConfigView.checked = true;
+				}
+				PopUpManager.bringToFront(_window);
+			}
+
+			public static function close() : void
+			{
+				if (_window)
+				{
+					_window.destroy();
+					PopUpManager.removePopUp(_window);
+					AppMenu.getInstance().toggleLangConfigView.checked = false;
+				}
+				_window = null;
+			}
+
+			public static function get window() : LangConfigView
+			{
+				return _window;
+			}
+
+			private var _currStartIndex : int = 0;
+			private const tabContentStep : int = 10;
+			private var _funcElements : Array;
+			private var _configLists : Array;
+
+			private function onInitialize() : void
+			{
+				visible = false;
+			}
+
+			private function window1_closeHandler(event : Event) : void
+			{
+				close();
+			}
+
+			private function onCreationComplete() : void
+			{
+				visible = true;
+				_funcElements = [];
+				_configLists = [];
+				updateLangConfigs();
+			}
+
+			private function updateLangConfigs() : void
+			{
+				var configList : LangConfigList;
+				for each (configList in _configLists)
+				{
+					configList.destroy();
+				}
+				_configLists.length = 0;
+				_currStartIndex = 0;
+				_funcElements.length = 0;
+				LangConfigManager.getInstance().loadLangConfigs();
+				var langDict : Dictionary = LangConfigManager.getInstance().langDict;
+				var fileNames : Array = [];
+				var fileName : String;
+				for (fileName in langDict)
+				{
+					fileNames.push(fileName);
+				}
+				fileNames.sort(Array.CASEINSENSITIVE);
+				for each (fileName in fileNames)
+				{
+					var nc : NavigatorContent = new NavigatorContent();
+					configList = new LangConfigList();
+					nc.label = fileName;
+					nc.addElement(configList);
+					_configLists.push(configList);
+					_funcElements.push(nc);
+					configList.configDesc = langDict[fileName] as ConfigDesc;
+				}
+				updateTabContents();
+			}
+
+			private function updateTabContents() : void
+			{
+				tabBar.removeAll();
+				var len : int = _currStartIndex + tabContentStep;
+				if (len > _funcElements.length)
+					len = _funcElements.length;
+				for (var i : int = _currStartIndex; i < len; i++)
+				{
+					var nc : NavigatorContent = _funcElements[i];
+					tabBar.addElement(nc);
+				}
+			}
+
+			private function destroy() : void
+			{
+				tabBar.removeAll();
+				for each (var configList : LangConfigList in _configLists)
+				{
+					configList.destroy();
+				}
+				_configLists.length = 0;
+			}
+
+			private function tabnavigator1_changeHandler(event : IndexChangedEvent) : void
+			{
+				for each (var configList : LangConfigList in _configLists)
+				{
+					configList.pullData();
+				}
+			}
+
+			private function btn_prev_clickHandler(event : MouseEvent) : void
+			{
+				if (_currStartIndex > 0)
+				{
+					_currStartIndex -= tabContentStep;
+					if (_currStartIndex < 0)
+						_currStartIndex = 0;
+					updateTabContents();
+				}
+			}
+
+			private function btn_next_clickHandler(event : MouseEvent) : void
+			{
+				if (_currStartIndex < _funcElements.length - tabContentStep)
+				{
+					_currStartIndex += tabContentStep;
+					if (_currStartIndex >= _funcElements.length)
+						_currStartIndex = _funcElements.length - 1;
+					updateTabContents();
+				}
+			}
+
+			protected function exportBtn_clickHandler(event : MouseEvent) : void
+			{
+				LangConfigManager.getInstance().saveLangConfigs();
+				var generated : Boolean = LangCodeCreater.getInstance().generate();
+				var exported : Boolean = LangPackCreater.getInstance().export();
+				if (generated && exported)
+					Alert.show("生成代码并导出语言成功！", "提示");
+				else if (exported)
+					Alert.show("导出语言成功！", "提示");
+				else
+					Alert.show("发生错误，导出语言失败！", "提示");
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<mx:TabNavigator id="tabBar"
+					 width="100%"
+					 height="100%"
+					 left="5"
+					 right="5"
+					 top="5"
+					 bottom="5"
+					 paddingTop="5"
+					 change="tabnavigator1_changeHandler(event)">
+	</mx:TabNavigator>
+	<s:Button x="733"
+			  y="5"
+			  width="30"
+			  height="20"
+			  label="&lt;"
+			  id="btn_prev"
+			  fontSize="14"
+			  fontFamily="SimSun"
+			  click="btn_prev_clickHandler(event)"/>
+	<s:Button x="763"
+			  y="5"
+			  width="30"
+			  height="20"
+			  label="&gt;"
+			  id="btn_next"
+			  fontSize="14"
+			  fontFamily="SimSun"
+			  click="btn_next_clickHandler(event)"/>
+	<s:Button id="exportBtn"
+			  x="700"
+			  y="50"
+			  label="保存并导出"
+			  click="exportBtn_clickHandler(event)"/>
+</s:TitleWindow>

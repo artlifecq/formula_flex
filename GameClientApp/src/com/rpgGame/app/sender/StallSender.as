@@ -109,9 +109,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function changeSellGoods(index:int,type:int,stallItem : StallItemData):void
 		{
-			if(ReqLockUtil.isReqLocked(StallModuleMessages.C2S_CHANGE_TO_SELL_GOODS,true))
-				return;
-			ReqLockUtil.lockReq(StallModuleMessages.C2S_CHANGE_TO_SELL_GOODS,500);
+//			if(ReqLockUtil.isReqLocked(StallModuleMessages.C2S_CHANGE_TO_SELL_GOODS,true))
+//				return;
+//			ReqLockUtil.lockReq(StallModuleMessages.C2S_CHANGE_TO_SELL_GOODS,500);
 			_bytes.clear();
 			_bytes.writeVarint32(index);
 			_bytes.writeVarint32(type);
@@ -179,9 +179,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function changeBuyGoods(index:int,type:int,stallItem : StallItemData):void
 		{
-			if(ReqLockUtil.isReqLocked(StallModuleMessages.C2S_CHANGE_TO_BUY_GOODS,true))
-				return;
-			ReqLockUtil.lockReq(StallModuleMessages.C2S_CHANGE_TO_BUY_GOODS,500);
+//			if(ReqLockUtil.isReqLocked(StallModuleMessages.C2S_CHANGE_TO_BUY_GOODS,true))
+//				return;
+//			ReqLockUtil.lockReq(StallModuleMessages.C2S_CHANGE_TO_BUY_GOODS,500);
 			_bytes.clear();
 			_bytes.writeVarint32(index);
 			_bytes.writeVarint32(type);

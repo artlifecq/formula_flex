@@ -22,7 +22,7 @@ package com.rpgGame.coreData.role
 		public var effectRes : String;
 		public var polygon : Vector.<Point>;
 		//public var destCountry : int = 0;
-		//public var destScene : int = 0;
+		public var destScene : int = 0;
 		/**能够使用传送门的国家**/
 		//public var canTransportCountry : int;
 		public var offsetUp : int = 0;

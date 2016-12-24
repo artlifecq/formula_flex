@@ -199,7 +199,7 @@ package com.rpgGame.app.cmdlistener
 		private function changeToBuyGoodsFailUnlock(buffer:ByteBuffer):void
 		{
 //			NoticeManager.showNotify(LangStall.changeToBuyGoodsFailUnlock);
-			ReqLockUtil.unlockReq(StallModuleMessages.C2S_CHANGE_TO_BUY_GOODS);
+//			ReqLockUtil.unlockReq(StallModuleMessages.C2S_CHANGE_TO_BUY_GOODS);
 		}
 		/**
 		 * 修改收购物品成功
@@ -230,7 +230,7 @@ package com.rpgGame.app.cmdlistener
 		private function changeToSellGoodsFailUnlock(buffer:ByteBuffer):void
 		{
 //			NoticeManager.showNotify(LangStall.changeToSellGoodsFailUnlock);
-			ReqLockUtil.unlockReq(StallModuleMessages.C2S_CHANGE_TO_SELL_GOODS);
+//			ReqLockUtil.unlockReq(StallModuleMessages.C2S_CHANGE_TO_SELL_GOODS);
 		}
 		/**
 		 * 要出售的物品变更了

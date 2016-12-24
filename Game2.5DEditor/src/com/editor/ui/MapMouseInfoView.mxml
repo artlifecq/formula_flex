@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 地图鼠标信息窗口
+* @author L.L.M.Sunny
+* 创建时间：2015-6-17 上午10:30:12
+*
+-->
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="200"
+			   height="130"
+			   title="地图鼠标信息"
+			   fontFamily="SimSun"
+			   creationComplete="onCreationComplete()"
+			   initialize="onInitialize()"
+			   close="window1_closeHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.ctrl.AppMenu;
+			import com.editor.manager.AppManager;
+
+			import mx.managers.PopUpManager;
+
+			private static var _window : MapMouseInfoView;
+
+			public static function open() : void
+			{
+				if (!_window)
+				{
+					_window = new MapMouseInfoView();
+					PopUpManager.addPopUp(_window, AppManager.getInstance().appRoot, false);
+					_window.move(AppManager.getInstance().appWidth - _window.width - 20, AppManager.getInstance().appHeight - _window.height - 90);
+					AppMenu.getInstance().toggleMapMouseInfoView.checked = true;
+				}
+				PopUpManager.bringToFront(_window);
+			}
+
+			public static function close() : void
+			{
+				if (_window)
+				{
+					_window.destroy();
+					PopUpManager.removePopUp(_window);
+					AppMenu.getInstance().toggleMapMouseInfoView.checked = false;
+				}
+				_window = null;
+			}
+
+			public static function get window() : MapMouseInfoView
+			{
+				return _window;
+			}
+
+			[Bindable]
+			private var _mapX : int = 0;
+			[Bindable]
+			private var _mapY : int = 0;
+			[Bindable]
+			private var _measureSize : int = 0;
+
+			private function onInitialize() : void
+			{
+				visible = false;
+			}
+
+			private function window1_closeHandler(event : Event) : void
+			{
+				close();
+			}
+
+			private function onCreationComplete() : void
+			{
+				visible = true;
+			}
+
+			public function setMousePosition(pos : Vector3D) : void
+			{
+				_mapX = pos.x;
+				_mapY = pos.y;
+			}
+
+			public function setMeasureSize(dist : int) : void
+			{
+				_measureSize = dist;
+			}
+
+			private function destroy() : void
+			{
+			}
+		]]>
+	</fx:Script>
+	<mx:Label x="10"
+			  y="10"
+			  text="地图坐标X："
+			  color="0x000000"/>
+	<mx:Text x="82"
+			 y="10"
+			 color="0x000000"
+			 text="{_mapX}"/>
+	<mx:Label x="10"
+			  y="36"
+			  text="地图坐标Y："
+			  color="0x000000"/>
+	<mx:Text x="82"
+			 y="36"
+			 color="0x000000"
+			 text="{_mapY}"/>
+	<mx:Label x="10"
+			  y="62"
+			  text="标尺长度："
+			  color="0x000000"/>
+	<mx:Text x="82"
+			 y="62"
+			 color="0x000000"
+			 text="{_measureSize}"/>
+</s:TitleWindow>

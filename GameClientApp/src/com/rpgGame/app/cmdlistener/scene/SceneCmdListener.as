@@ -50,6 +50,8 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.map.bean.NpcInfo;
 	import com.rpgGame.netData.map.bean.PlayerInfo;
 	import com.rpgGame.netData.map.bean.SceneObjInfo;
+	import com.rpgGame.netData.map.message.ResChangeMapFailedMessage;
+	import com.rpgGame.netData.map.message.ResChangeMapMessage;
 	import com.rpgGame.netData.map.message.ResEnterMapMessage;
 	import com.rpgGame.netData.map.message.ResPlayerRunEndMessage;
 	import com.rpgGame.netData.map.message.ResPlayerRunFailMessage;
@@ -62,7 +64,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import flash.geom.Vector3D;
 	import flash.utils.ByteArray;
 	
-	import app.cmd.MazeModuleMessages;
 	import app.cmd.NpcModuleMessages;
 	import app.cmd.SceneModuleMessages;
 	import app.cmd.SimpleDungeonModuleMessages;
@@ -102,13 +103,18 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(103105, RecvBroadcastPlayerAttriChangeMessage);
 			
 			SocketConnection.addCmdListener(101143, RecvResPlayerRunFailMessage);
+			SocketConnection.addCmdListener(101117, onResChangeMapMessage);
+//			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SCENE_MAP_TRANSPORT, onSceneMapTransport);
+			SocketConnection.addCmdListener(101126, onResChangeMapFailedMessage);
+			
+//			SocketConnection.addCmdListener(SceneModuleMessages.S2C_TRIGGER_CLIENT_EVENT, onTriggerClientEvent);
 			
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			//////
 			////// 以下为参考代码，是深圳那边的后台协议，不适用
 			//////
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_CHANGE_SCENE, onChangeScene);
+			
 			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_ADD_SENT_NPC, addSentNpc);
 			SocketConnection_protoBuffer.addCmdListener(TaskModuleMessages.S2C_SYNC_SENT_NPC_POS, onSceneSyncSentNpcPos);
 			SocketConnection_protoBuffer.addCmdListener(StoryModuleMessages.S2C_ADD_STORY_PROTECT_MONSTER, onAddStoryProtectMonster);
@@ -120,10 +126,7 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_BEEN_TAUNT_TARGET, onBeenTauntTarget);
 			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_LOST_TAUNT_TARGET, onLostTauntTarget);
 			
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_MAP_TRANSPORT, onSceneMapTransport);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_MAP_TRANSPORT_FAIL, onSceneMapTransportFail);
 			
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_HERO_TRANSPORT_FAIL, onHeroTransportFail);
 			
 			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_OBJECT_MAX_LIFE_CHANGE, onRecObjectMaxLifeChange);
 			
@@ -132,7 +135,7 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection_protoBuffer.addCmdListener(SimpleDungeonModuleMessages.S2C_LEAVE_DUNGEON_SUCCESS, onLeaveDungeonSuccess);
 			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_HERO_JUMP, onHeroJump);
 			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_HERO_JUMP_FAIL, onHeroJumpFail);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_HERO_TRANSPORT_FAIL, onTransportFail);
+			
 			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_ADD_SCENE_BOX, onSceneAddBoxGoods);
 			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_DROP_SCENE_BOX, onSceneDropBoxGoods);
 			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PICK_UP_GOODS_INFO, onScenePickUpGoodsInfo);
@@ -146,7 +149,7 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PLUNDER_HURT_RANK, onPlunderHurtRank);
 			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_PLUNDER_HURT_RANK_SELF_AMOUNT, onPlunderHurtRankSelfAmount);
 			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_RESET_HURT_RANK, onResetHurtRank);
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_TRIGGER_CLIENT_EVENT, onTriggerClientEvent);
+			
 			
 			finish();
 		}
@@ -564,27 +567,91 @@ package com.rpgGame.app.cmdlistener.scene
 				ReliveManager.autoHideRelive();
 			}
 		}
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		//////
-		////// 以下为参考代码，是深圳那边的后台协议，不适用
-		//////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		
 		
 		/**
 		 * 服务器发来的切场景协议
 		 * @param buffer
 		 */
-		private function onChangeScene(buffer : ByteBuffer) : void
+		private function onResChangeMapMessage(msg : ResChangeMapMessage) : void
 		{
-			ReqLockUtil.unlockReq(SceneModuleMessages.C2S_SCENE_REQUEST_TRANSPORT);
-			ReqLockUtil.unlockReq(MazeModuleMessages.C2S_TRY_TRANSPORT);
+			ReqLockUtil.unlockReq(101206);
+			//			ReqLockUtil.unlockReq(MazeModuleMessages.C2S_TRY_TRANSPORT);
 			
-			var mapId : int = buffer.readVarint32();
+			var mapId : int = msg.mapId;
 			MainRoleManager.actorInfo.mapID = mapId;
 			SceneSwitchManager.changeMap();
 		}
+		
+		/**
+		 * 传送成功后，返回这个消息，只表示成功
+		 */
+		private function onSceneMapTransport(buffer : ByteBuffer) : void
+		{
+			
+		}
+		
+		/**
+		 * 地图传送失败，附带Byte错误码
+		 * 1、英雄不在普通场景中
+		 * 2、传送道具不足
+		 * 3、英雄已经在这个场景了
+		 * 4、客户端发送的场景ID不是普通场景
+		 * 5、英雄等级不足，还不能进入场景
+		 * 6、数据异常(客户端发送的物品不是传送物品ID,发送的物品位置是null,发送的物品位置是上物品已过期,发送的物品位置上的物品个数不足)
+		 * 7、帮派战期间 (板块战, 无双城, 皇城争霸)
+		 * 8、英雄已经死亡，不能够地图传送
+		 * 9、战斗中
+		 * 10、你在他国
+		 * 11、元宝不足
+		 */
+		private function onResChangeMapFailedMessage(msg : ResChangeMapFailedMessage) : void
+		{
+			ReqLockUtil.unlockReq(101206);
+			GameLog.addShow("现在暂时没有切换场景失败的错误提示信息！因为目前，后端没有告诉客户端为什么会切换场景失败！");return;
+			var failId : int = msg.getId();
+			switch (failId)
+			{
+				case 1:
+					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL1);
+					return;
+				case 2:
+					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL2);
+					return;
+				case 3:
+					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL3);
+					return;
+				case 4:
+					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL4);
+					return;
+				case 5:
+					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL5);
+					return;
+				case 6:
+					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL6);
+					return;
+				case 7:
+					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL7);
+					return;
+				case 8:
+					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL8);
+					return;
+				case 9:
+					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL9);
+					return;
+				case 10:
+					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL10);
+					return;
+				case 11:
+					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL11);
+					return;
+			}
+		}
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//////
+		////// 以下为参考代码，是深圳那边的后台协议，不适用
+		//////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		/**
 		 * 收到主角同场景传送消息
@@ -704,96 +771,6 @@ package com.rpgGame.app.cmdlistener.scene
 			}
 		}
 		
-		/**
-		 * 地图传送失败，附带Byte错误码
-		 * 1、英雄不在普通场景中
-		 * 2、传送道具不足
-		 * 3、英雄已经在这个场景了
-		 * 4、客户端发送的场景ID不是普通场景
-		 * 5、英雄等级不足，还不能进入场景
-		 * 6、数据异常(客户端发送的物品不是传送物品ID,发送的物品位置是null,发送的物品位置是上物品已过期,发送的物品位置上的物品个数不足)
-		 * 7、帮派战期间 (板块战, 无双城, 皇城争霸)
-		 * 8、英雄已经死亡，不能够地图传送
-		 * 9、战斗中
-		 * 10、你在他国
-		 * 11、元宝不足
-		 */
-		private function onSceneMapTransportFail(buffer : ByteBuffer) : void
-		{
-			var failId : int = buffer.readVarint32();
-			switch (failId)
-			{
-				case 1:
-					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL1);
-					return;
-				case 2:
-					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL2);
-					return;
-				case 3:
-					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL3);
-					return;
-				case 4:
-					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL4);
-					return;
-				case 5:
-					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL5);
-					return;
-				case 6:
-					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL6);
-					return;
-				case 7:
-					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL7);
-					return;
-				case 8:
-					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL8);
-					return;
-				case 9:
-					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL9);
-					return;
-				case 10:
-					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL10);
-					return;
-				case 11:
-					NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL11);
-					return;
-			}
-		}
-		
-		private function onHeroTransportFail(buffer : ByteBuffer) : void
-		{
-			//			SceneModuleMessages.S2C_HERO_TRANSPORT_FAIL;
-			var failId : int = buffer.readVarint32();
-			switch (failId)
-			{
-				case 1:
-					NoticeManager.showHint(EnumHintInfo.HERO_TRANSPORT_FAIL1);
-					return;
-				case 2:
-					NoticeManager.showHint(EnumHintInfo.HERO_TRANSPORT_FAIL2);
-					return;
-				case 3:
-					NoticeManager.showHint(EnumHintInfo.HERO_TRANSPORT_FAIL3);
-					return;
-				case 4:
-					NoticeManager.showHint(EnumHintInfo.HERO_TRANSPORT_FAIL4);
-					return;
-				case 5:
-					NoticeManager.showHint(EnumHintInfo.HERO_TRANSPORT_FAIL5);
-					return;
-				case 6:
-					NoticeManager.showHint(EnumHintInfo.HERO_TRANSPORT_FAIL6);
-					return;
-				case 7:
-					NoticeManager.showHint(EnumHintInfo.HERO_TRANSPORT_FAIL7);
-					return;
-				case 8:
-					NoticeManager.showHint(EnumHintInfo.HERO_TRANSPORT_FAIL8);
-					return;
-				case 9:
-					NoticeManager.showHint(EnumHintInfo.HERO_TRANSPORT_FAIL9);
-					return;
-			}
-		}
 		
 		/**
 		 * 离开副本失败, 附带varint32 错误码
@@ -802,16 +779,16 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onLeaveDungeonFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(SimpleDungeonModuleMessages.C2S_LEAVE_DUNGEON);
-			var failID : int = buffer.readVarint32();
-			var failReason : String;
-			switch (failID)
-			{
-				case 1:
-					failReason = LangText.SCENE_LEAVE_DUNGEON_FAIL;
-					return;
-			}
-			NoticeManager.showNotify(failReason, failID);
+//			ReqLockUtil.unlockReq(SimpleDungeonModuleMessages.C2S_LEAVE_DUNGEON);
+//			var failID : int = buffer.readVarint32();
+//			var failReason : String;
+//			switch (failID)
+//			{
+//				case 1:
+//					failReason = LangText.SCENE_LEAVE_DUNGEON_FAIL;
+//					return;
+//			}
+//			NoticeManager.showNotify(failReason, failID);
 		}
 		
 		/**
@@ -821,7 +798,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onLeaveDungeonSuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(SimpleDungeonModuleMessages.C2S_LEAVE_DUNGEON);
+//			ReqLockUtil.unlockReq(SimpleDungeonModuleMessages.C2S_LEAVE_DUNGEON);
 		}
 		
 		/**
@@ -881,57 +858,6 @@ package com.rpgGame.app.cmdlistener.scene
 		}
 		
 		/**
-		 * 传送失败,
-		 *
-		 * 附带varint32的失败原因
-		 *
-		 * 1. 距离太远
-		 *
-		 * 2. 被晕或者跳跃中或者已死亡等不能传送的状态中
-		 *
-		 * 3. 坐标没找到
-		 *
-		 * 4. 等级不够
-		 *
-		 * 5. 战斗状态中
-		 *
-		 * 6. 当前无法进入目标场景
-		 *
-		 * 7. 无法使用该传送门
-		 */
-		private function onTransportFail(buffer : ByteBuffer) : void
-		{
-			ReqLockUtil.unlockReq(SceneModuleMessages.C2S_SCENE_REQUEST_TRANSPORT);
-			var failID : int = buffer.readVarint32();
-			var failReason : String;
-			switch (failID)
-			{
-				case 1:
-					failReason = LangText.SCENE_TRANSPORT_INFO_FAIL_1;
-					return;
-				case 2:
-					failReason = LangText.SCENE_TRANSPORT_INFO_FAIL_2;
-					return;
-				case 3:
-					failReason = LangText.SCENE_TRANSPORT_INFO_FAIL_3;
-					return;
-				case 4:
-					failReason = LangText.SCENE_TRANSPORT_INFO_FAIL_4;
-					return;
-				case 5:
-					failReason = LangText.SCENE_TRANSPORT_INFO_FAIL_5;
-					return;
-				case 6:
-					failReason = LangText.SCENE_TRANSPORT_INFO_FAIL_6;
-					return;
-				case 7:
-					failReason = LangText.SCENE_TRANSPORT_INFO_FAIL_7;
-					return;
-			}
-			NoticeManager.showNotify(failReason, failID);
-		}
-		
-		/**
 		 * 在视野中添加一个箱子（掉地上的），附带以下信息
 		 *
 		 * while(byteArray.avaliable){
@@ -977,7 +903,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onScenePickUpGoodsInfo(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS_INFO);
+//			ReqLockUtil.unlockReq(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS_INFO);
 			var sceneGoodsId : Number = buffer.readVarint64();
 			var goodsItems : Vector.<SceneDropGoodsItem> = new Vector.<SceneDropGoodsItem>();
 			while (buffer.bytesAvailable)
@@ -1015,7 +941,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onScenePickUpGoodsInfoFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS_INFO);
+//			ReqLockUtil.unlockReq(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS_INFO);
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
 			switch (failID)
@@ -1046,7 +972,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onScenePickUpGoods(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS);
+//			ReqLockUtil.unlockReq(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS);
 			var sceneGoodsId : Number = buffer.readVarint64();
 			var index : int = buffer.readVarint32();
 			SceneDropGoodsManager.removeGoods(sceneGoodsId, index);
@@ -1068,7 +994,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onScenePickUpGoodsFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS);
+//			ReqLockUtil.unlockReq(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS);
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
 			switch (failID)
@@ -1101,13 +1027,6 @@ package com.rpgGame.app.cmdlistener.scene
 			NoticeManager.showNotify(failReason, failID);
 		}
 		
-		/**
-		 * 传送成功后，返回这个消息，只表示成功
-		 */
-		private function onSceneMapTransport(buffer : ByteBuffer) : void
-		{
-			
-		}
 		
 		/**
 		 * 场景里对象最大血量变换的通知,会改变对象的当前血量

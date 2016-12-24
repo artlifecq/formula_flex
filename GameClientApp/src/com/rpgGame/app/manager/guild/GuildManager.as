@@ -128,12 +128,12 @@ package com.rpgGame.app.manager.guild
 		{
 			seeGuildFamily = family;
 			AppManager.showAppNoHide(AppConstant.GUILD_FAMILY_PANEL);
-			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_GUILD_FAMILY_MEMBERS+family))
-			{
-				EventManager.dispatchEvent(GuildEvent.GUILD_FAMILY_CHANGE);
-				return;
-			}
-			ReqLockUtil.lockReq(GuildModuleMessages.C2S_GUILD_FAMILY_MEMBERS+family,15000);
+//			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_GUILD_FAMILY_MEMBERS+family))
+//			{
+//				EventManager.dispatchEvent(GuildEvent.GUILD_FAMILY_CHANGE);
+//				return;
+//			}
+//			ReqLockUtil.lockReq(GuildModuleMessages.C2S_GUILD_FAMILY_MEMBERS+family,15000);
 			GuildSender.getFamilyData(family);
 		}
 		//------------------------------列表项点击
@@ -245,12 +245,12 @@ package com.rpgGame.app.manager.guild
 		 */
 		public static function getGuildLog():void
 		{
-			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_GUILD_LOG))
-			{
-				EventManager.dispatchEvent(GuildEvent.GUILD_EVENT_CHANGE);
-				return;
-			}
-			ReqLockUtil.lockReq(GuildModuleMessages.C2S_GUILD_LOG,30000);
+//			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_GUILD_LOG))
+//			{
+//				EventManager.dispatchEvent(GuildEvent.GUILD_EVENT_CHANGE);
+//				return;
+//			}
+//			ReqLockUtil.lockReq(GuildModuleMessages.C2S_GUILD_LOG,30000);
 			GuildSender.getGuildLog();	
 		}
 		
@@ -609,9 +609,9 @@ package com.rpgGame.app.manager.guild
 		/**同意或者拒绝别人的请求**/
 		public static function replyJoinReq(isAgree:Boolean,guild:String):void
 		{
-			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_REPLY_JOIN_REQUEST,true))
-				return;
-			ReqLockUtil.lockReq(GuildModuleMessages.C2S_REPLY_JOIN_REQUEST,500);
+//			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_REPLY_JOIN_REQUEST,true))
+//				return;
+//			ReqLockUtil.lockReq(GuildModuleMessages.C2S_REPLY_JOIN_REQUEST,500);
 			GuildSender.replyJoinReq(isAgree,guild);
 			joinGuildList.splice(joinGuildList.indexOf(guild));
 			EventManager.dispatchEvent(GuildEvent.GET_JOIN_GUILD_LIST);
@@ -650,12 +650,12 @@ package com.rpgGame.app.manager.guild
 		 */
 		public static function getReqJoinGuildList():void
 		{
-			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_GET_REQUEST_JOIN_DETAIL) && joinGuildList.length >0)
-			{
-				EventManager.dispatchEvent(GuildEvent.GET_JOIN_GUILD_LIST);
-				return;
-			}
-			ReqLockUtil.lockReq(GuildModuleMessages.C2S_GET_REQUEST_JOIN_DETAIL,30000);
+//			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_GET_REQUEST_JOIN_DETAIL) && joinGuildList.length >0)
+//			{
+//				EventManager.dispatchEvent(GuildEvent.GET_JOIN_GUILD_LIST);
+//				return;
+//			}
+//			ReqLockUtil.lockReq(GuildModuleMessages.C2S_GET_REQUEST_JOIN_DETAIL,30000);
 			GuildSender.getReqJoinGuildList();
 		}
 		
@@ -682,9 +682,9 @@ package com.rpgGame.app.manager.guild
 				GameAlert.showAlertUtil(LangAlertInfo.JOIN_GUILD_HAVE_GUILD);
 				return;
 			}
-			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_REQUEST_JOIN+name,true))
-				return;
-			ReqLockUtil.lockReq(GuildModuleMessages.C2S_REQUEST_JOIN+name,10000);//这里上锁10s
+//			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_REQUEST_JOIN+name,true))
+//				return;
+//			ReqLockUtil.lockReq(GuildModuleMessages.C2S_REQUEST_JOIN+name,10000);//这里上锁10s
 			if(!reqJoinGuildList)
 				reqJoinGuildList = [];
 			//没有长度，找不到申请过这个帮派，走申请流程
@@ -763,12 +763,12 @@ package com.rpgGame.app.manager.guild
 		/**请求帮派列表**/
 		public static function getGuildList():void
 		{
-			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_GET_GUILD_LIST))
-			{
-				EventManager.dispatchEvent(GuildEvent.GET_GUILD_LIST);
-				return;
-			}
-			ReqLockUtil.lockReq(GuildModuleMessages.C2S_GET_GUILD_LIST,15000);
+//			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_GET_GUILD_LIST))
+//			{
+//				EventManager.dispatchEvent(GuildEvent.GET_GUILD_LIST);
+//				return;
+//			}
+//			ReqLockUtil.lockReq(GuildModuleMessages.C2S_GET_GUILD_LIST,15000);
 			GuildSender.getGuildList();
 		}
 		/**请求列表返回回来**/
@@ -785,12 +785,12 @@ package com.rpgGame.app.manager.guild
 				trace("你自己不是帮主，不能请求这个");
 				return;
 			}
-			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_GET_FAMILY_REQUEST_JOIN_GUILD_LIST))
-			{
-				EventManager.dispatchEvent(GuildEvent.GET_GUILD_LIST);
-				return;
-			}
-			ReqLockUtil.lockReq(GuildModuleMessages.C2S_GET_FAMILY_REQUEST_JOIN_GUILD_LIST,15000);
+//			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_GET_FAMILY_REQUEST_JOIN_GUILD_LIST))
+//			{
+//				EventManager.dispatchEvent(GuildEvent.GET_GUILD_LIST);
+//				return;
+//			}
+//			ReqLockUtil.lockReq(GuildModuleMessages.C2S_GET_FAMILY_REQUEST_JOIN_GUILD_LIST,15000);
 			GuildSender.getJoinGuildList();
 		}
 		//-----------------------------------下面是创建帮派的

@@ -198,7 +198,7 @@ package com.rpgGame.app.fight.spell
 		{
 			_flySceneObjID = flySceneObjID;//
 			
-			_spellEffectID = SpellDataManager.getSpellEffectID(flySceneObjID);
+			_spellEffectID = SpellDataManager.getSpellEffectID(msg.skillModelId);
 			_releaseAngle = msg.fightDirection;
 			_releaseAngle = (_releaseAngle + 270) % 360;
 			

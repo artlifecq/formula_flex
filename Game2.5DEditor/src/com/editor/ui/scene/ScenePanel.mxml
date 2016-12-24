@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 场景面板
+* @author L.L.M.Sunny
+* 创建时间：2015-6-17 上午10:30:12
+*
+-->
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="1200"
+		 height="100%"
+		 mouseEnabled="false"
+		 addedToStage="onAddToStage(event)"
+		 creationComplete="onCreateComplete(event)"
+		 resize="sceneView_resizeHandler(event)"
+		 xmlns:scene="com.editor.ui.scene.*" xmlns:controls="awaybuilder.view.components.controls.*">
+	<fx:Script>
+		<![CDATA[
+            import com.editor.display.PolygonVertex3D;
+            import com.editor.events.MapEvent;
+            import com.editor.manager.AppManager;
+            import com.editor.manager.EditorCameraManager;
+            import com.editor.manager.GlobalSettingManager;
+            import com.editor.manager.SceneManager;
+            import com.editor.manager.SceneRoleManager;
+            import com.editor.manager.StoryManager;
+            import com.editor.story.view.component.CameraSettingView;
+            import com.editor.story.view.component.StoryTextView;
+            import com.editor.utils.Status;
+            import com.game.engine2D.Scene;
+            import com.game.engine3D.events.MapLoadEvent;
+            import com.game.engine3D.manager.Stage3DLayerManager;
+            import com.game.mainCore.core.manager.LayerManager;
+            
+            import mx.core.UIComponent;
+            import mx.events.FlexEvent;
+            import mx.events.ResizeEvent;
+            
+            import away3d.filters.Filter3DBase;
+            import away3d.filters.HeatFilter3D;
+            import away3d.loaders.parsers.Parsers;
+            
+            import org.client.mainCore.manager.EventManager;
+
+
+
+
+			protected function onCreateComplete(event : FlexEvent) : void
+			{
+				EventManager.addEvent(MapLoadEvent.MAP_LOAD_COMPLETE, onMapResourceComplete);
+				EventManager.addEvent(MapLoadEvent.MAP_LOAD_PROGRESS, onMapLoadProgress);
+				EventManager.addEvent(MapLoadEvent.MAP_PARSE_PROGRESS, onMapParseProgress);
+				EventManager.addEvent(MapEvent.SHOW_MINI_MAP_CORRECT_VIEW, showMiniMapCorrectView);
+			}
+
+			protected function sceneView_resizeHandler(event : ResizeEvent) : void
+			{
+				updateMask();
+				AppManager.getInstance().viewResize();
+			}
+
+			protected function onAddToStage(event : Event) : void
+			{
+				updateMask();
+				var ui : UIComponent = new UIComponent();
+				AppManager.getInstance().appRoot.addElementAt(ui, 0);
+				var container : Sprite = new Sprite();
+				ui.addChild(container);
+				ui.mouseEnabled = container.mouseEnabled = false;
+
+				var fpUI : UIComponent = new UIComponent();
+				fpUI.mouseEnabled = false;
+				this.addElement(fpUI);
+				fpUI.addChild(Status.instance);
+
+				var cameraSettingView : CameraSettingView = new CameraSettingView();
+				storyUiGroup.addElement(cameraSettingView);
+
+				var storyTextView : StoryTextView = new StoryTextView();
+				storyUiGroup.addElement(storyTextView);
+
+				StoryManager.get().uiLayer = storyUiLayer;
+
+                LayerManager.setup(container);
+				Stage3DLayerManager.errorChecking = true;
+				Stage3DLayerManager.setup(container.stage, container, stage3DLayerSetupComplete, 1, 10);
+			}
+
+			private function stage3DLayerSetupComplete() : void
+			{
+				Parsers.enableAllBundled();
+				Stage3DLayerManager.screenAntiAlias = 2;
+				Stage3DLayerManager.viewAntiAlias = 2;
+				Stage3DLayerManager.startRender();
+				SceneManager.getInstance().setup();
+
+				SceneManager.getInstance().addMainRoleToMainScene(SceneRoleManager.getInstance().targetPlayer);
+				SceneManager.getInstance().mainScene.mainChar = SceneRoleManager.getInstance().targetPlayer;
+				SceneManager.getInstance().scene.mainChar = SceneRoleManager.getInstance().targetPlayer;
+
+				Stage3DLayerManager.screenView.filters3d = Vector.<Filter3DBase>([new HeatFilter3D()]);
+				Stage3DLayerManager.screenView.backgroundColor = 0x333333;
+				Stage3DLayerManager.screenView.scene.addChild(SceneRoleManager.getInstance().previewEntity.graphicDis);
+
+				EditorCameraManager.updateProperty();
+				SceneRoleManager.getInstance().updatePreviewState();
+				//EditorCameraManager.initCamera(SceneManager.getInstance().mainScene.camera, SceneManager.getInstance().mainScene.cameraTarget);
+				EditorCameraManager.initCamera(SceneManager.getInstance().view3D.camera, SceneManager.getInstance().scene.cameraTarget);
+				GlobalSettingManager.init();
+				stage.nativeWindow.maximize();
+
+				//StatsUtil.showOrHideAwayStats(stage,Stage3DLayerManager.stage3DProxy);
+				//Debug.active = true;
+			}
+
+			private function onMapLoadProgress(progress : Number) : void
+			{
+				if (reliesGroup.visible == false)
+					reliesGroup.visible = true;
+
+				var progressStr : String = (progress * 0.2 * 100).toFixed(2);
+				lab_bar.text = "加载地图中:" + progressStr + "%";
+			}
+
+			private function onMapParseProgress(progress : Number) : void
+			{
+				if (reliesGroup.visible == false)
+					reliesGroup.visible = true;
+
+				var progressStr : String = (0.2 + progress * 0.6 * 100).toFixed(2);
+				lab_bar.text = "解析地图中:" + progressStr + "%";
+			}
+
+			private function onMapResourceComplete() : void
+			{
+				reliesGroup.visible = false;
+			}
+
+			private function updateMask() : void
+			{
+				reliesGroup.graphics.clear();
+				reliesGroup.graphics.beginFill(0);
+				reliesGroup.graphics.drawRect(0, 0, width, height);
+				reliesGroup.graphics.endFill();
+			}
+
+			private function showMiniMapCorrectView(visible : Boolean) : void
+			{
+				miniMapCorrectView.visible = visible;
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<mx:UIComponent id="storyUiLayer"
+					width="100%"
+					height="100%">
+	</mx:UIComponent>
+	<s:Group id="storyUiGroup"
+			 width="100%"
+			 height="100%">
+	</s:Group>
+	<s:Group width="100%"
+			 height="100%">
+		<scene:MiniMapPanel id="miniMapCorrectView"
+							width="100%"
+							height="100%"
+							visible="false">
+		</scene:MiniMapPanel>
+	</s:Group>
+	<s:VGroup id="reliesGroup"
+			  width="100%"
+			  height="100%"
+			  horizontalAlign="center"
+			  verticalAlign="middle"
+			  visible="false">
+		<s:Label id="lab_bar"
+				 fontFamily="SimSun"
+				 text="加载地图中:"
+				 color="#FFFFFF"/>
+	</s:VGroup>
+</s:Group>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 程序首选项面板
+* @author L.L.M.Sunny
+* 创建时间：2015-7-29 下午2:30:12
+*
+-->
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="100%"
+		 height="100%"
+		 creationComplete="group1_creationCompleteHandler(event)"
+		 xmlns:ui="com.editor.ui.*">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import com.editor.cfg.ProjectConfig;
+
+			import mx.events.FlexEvent;
+
+			protected function group1_creationCompleteHandler(event : FlexEvent) : void
+			{
+				updateSetUp();
+			}
+
+			public function updateSetUp() : void
+			{
+				if (configPathItem)
+					configPathItem.path = ProjectConfig.configPath;
+				if (langPathItem)
+					langPathItem.path = ProjectConfig.langPath;
+				if (sceneMapBlockInfoPathItem)
+					sceneMapBlockInfoPathItem.path = ProjectConfig.sceneMapBlockInfoPath;
+				if (generateCodePathItem)
+					generateCodePathItem.path = ProjectConfig.generateCodePath;
+				if (effectAnimationTabel)
+					effectAnimationTabel.path = ProjectConfig.effectAnimationCfgPath;
+				if (avatarResConfigTabel)
+					avatarResConfigTabel.path = ProjectConfig.avatarResConfigPath;
+				if (globalSettingPathItem)
+					globalSettingPathItem.path = ProjectConfig.globalSettingPath;
+				if (dialogFaceMaskReferenItem)
+					dialogFaceMaskReferenItem.path = ProjectConfig.dialogFaceMaskReferenPath;
+				if (headFaceMaskReferenItem)
+					headFaceMaskReferenItem.path = ProjectConfig.headFaceMaskReferenPath;
+				if (bossHeadFaceMaskReferenItem)
+					bossHeadFaceMaskReferenItem.path = ProjectConfig.bossHeadFaceMaskReferenPath;
+			}
+
+			public function applyChanged() : void
+			{
+				if (configPathItem)
+					ProjectConfig.configPath = configPathItem.path;
+				if (langPathItem)
+					ProjectConfig.langPath = langPathItem.path;
+				if (sceneMapBlockInfoPathItem)
+					ProjectConfig.sceneMapBlockInfoPath = sceneMapBlockInfoPathItem.path;
+				if (generateCodePathItem)
+					ProjectConfig.generateCodePath = generateCodePathItem.path;
+				if (effectAnimationTabel)
+					ProjectConfig.effectAnimationCfgPath = effectAnimationTabel.path;
+				if (avatarResConfigTabel)
+					ProjectConfig.avatarResConfigPath = avatarResConfigTabel.path;
+				if (globalSettingPathItem)
+					ProjectConfig.globalSettingPath = globalSettingPathItem.path;
+				if (dialogFaceMaskReferenItem)
+					ProjectConfig.dialogFaceMaskReferenPath = dialogFaceMaskReferenItem.path;
+				if (headFaceMaskReferenItem)
+					ProjectConfig.headFaceMaskReferenPath = headFaceMaskReferenItem.path;
+				if (bossHeadFaceMaskReferenItem)
+					ProjectConfig.bossHeadFaceMaskReferenPath = bossHeadFaceMaskReferenItem.path;
+			}
+		]]>
+	</fx:Script>
+	<s:Group width="100%"
+			 height="100%">
+		<s:layout>
+			<s:VerticalLayout paddingTop="10"
+							  paddingLeft="30"/>
+		</s:layout>
+		<ui:BrowseForOpenItem id="configPathItem"
+							  title="导出配置目录："
+							  browseTile="请选择导出配置的目录"
+							  browseDesc="dire"
+							  browseExtension="dire"
+							  toolTip="../client_res/res/config/data"/>
+		<ui:BrowseForOpenItem id="langPathItem"
+							  title="导出语言目录："
+							  browseTile="请选择导出语言的目录"
+							  browseDesc="dire"
+							  browseExtension="dire"
+							  toolTip="../client_res/res/config/lang/cn"/>
+		<ui:BrowseForOpenItem id="sceneMapBlockInfoPathItem"
+							  title="导出地图数据目录："
+							  browseTile="请选择导出地图数据的目录"
+							  browseDesc="dire"
+							  browseExtension="dire"
+							  toolTip="服务器地图块数据保存目录"/>
+		<ui:BrowseForOpenItem id="generateCodePathItem"
+							  title="生成代码目录："
+							  browseTile="请选择生成代码的目录"
+							  browseDesc="dire"
+							  browseExtension="dire"
+							  toolTip="../GameClientDataCore"/>
+		<ui:BrowseForOpenItem id="effectAnimationTabel"
+							  title="特效动画表："
+							  browseTile="请选择特效动画表"
+							  browseDesc="配置(*.txt)"
+							  browseExtension="*.txt;"
+							  toolTip="../client_res/res/config/data/animat/EffectAnimation.txt"/>
+		<ui:BrowseForOpenItem id="avatarResConfigTabel"
+							  title="换装资源表："
+							  browseTile="请选择换装资源表"
+							  browseDesc="配置(*.txt)"
+							  browseExtension="*.txt;"
+							  toolTip="../client_res/res/config/data/res/AvatarResConfig.txt"/>
+		<ui:BrowseForOpenItem id="globalSettingPathItem"
+							  title="全局配置表："
+							  browseTile="请选择全局配置表"
+							  browseDesc="配置(*.txt)"
+							  browseExtension="*.txt;"
+							  toolTip="../client_res/res/config/data/GlobalSetting.txt"/>
+		<ui:BrowseForOpenItem id="dialogFaceMaskReferenItem"
+							  title="半身像参照图："
+							  browseTile="请选择半身像参照图"
+							  browseDesc="图片(*.jpg;*.png)"
+							  browseExtension="*.jpg;*.png"
+							  toolTip="一张参考图片"/>
+		<ui:BrowseForOpenItem id="headFaceMaskReferenItem"
+							  title="头像参照图："
+							  browseTile="请选择头像参照图"
+							  browseDesc="图片(*.jpg;*.png)"
+							  browseExtension="*.jpg;*.png"
+							  toolTip="一张参考图片"/>
+		<ui:BrowseForOpenItem id="bossHeadFaceMaskReferenItem"
+							  title="Boss头像参照图："
+							  browseTile="请选择头像参照图"
+							  browseDesc="图片(*.jpg;*.png)"
+							  browseExtension="*.jpg;*.png"
+							  toolTip="一张参考图片"/>
+	</s:Group>
+</s:Group>
+
