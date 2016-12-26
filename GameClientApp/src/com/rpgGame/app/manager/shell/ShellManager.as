@@ -15,6 +15,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.manager.scene.SceneManager;
     import com.rpgGame.app.manager.scene.SceneSwitchManager;
     import com.rpgGame.app.scene.SceneRole;
+    import com.rpgGame.app.sender.SceneSender;
     import com.rpgGame.core.utils.ConsoleDesk;
     import com.rpgGame.coreData.cfg.AreaCfgData;
     import com.rpgGame.coreData.cfg.TransCfgData;
@@ -67,11 +68,9 @@ package com.rpgGame.app.manager.shell
             GameLog.addShow("Command Help");
         }
         
-        private function gotoMap(mapID : uint, x : int, y : int) : void {
-            MainRoleManager.actorInfo.mapID = mapID;
-            SceneSwitchManager.changeMap();
-            MainRoleManager.actorInfo.x = x;
-            MainRoleManager.actorInfo.y = y;
+        private function gotoMap(mapID : uint, x : int, y : int) : void 
+		{
+           	SceneSender.sceneMapTransport(mapID,x,y);
         }
         
         private function addMonster(id : int, x : int, y : int) : void {

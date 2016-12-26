@@ -779,7 +779,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onLeaveDungeonFail(buffer : ByteBuffer) : void
 		{
-//			ReqLockUtil.unlockReq(SimpleDungeonModuleMessages.C2S_LEAVE_DUNGEON);
+//			ReqLockUtil.unlockReq(101218);
 //			var failID : int = buffer.readVarint32();
 //			var failReason : String;
 //			switch (failID)
@@ -798,7 +798,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onLeaveDungeonSuccess(buffer : ByteBuffer) : void
 		{
-//			ReqLockUtil.unlockReq(SimpleDungeonModuleMessages.C2S_LEAVE_DUNGEON);
+			ReqLockUtil.unlockReq(101218);
 		}
 		
 		/**
