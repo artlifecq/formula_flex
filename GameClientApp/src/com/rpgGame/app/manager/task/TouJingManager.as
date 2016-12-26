@@ -37,7 +37,6 @@ package com.rpgGame.app.manager.task
 	
 	import flash.geom.Point;
 	
-	import app.message.MonsterDataProto;
 	import app.message.TouJingTaskProto;
 	import app.message.NpcDialogProto.NpcType;
 	
