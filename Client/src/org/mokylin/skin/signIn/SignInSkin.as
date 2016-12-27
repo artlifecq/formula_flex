@@ -88,8 +88,8 @@ package org.mokylin.skin.signIn
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/signIn/logo.png";
-			temp.x = 585;
-			temp.y = 110;
+			temp.x = 498;
+			temp.y = 38;
 			return temp;
 		}
 
