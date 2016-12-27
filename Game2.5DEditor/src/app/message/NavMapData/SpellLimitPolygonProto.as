@@ -15,7 +15,7 @@ package app.message.NavMapData {
 		/**
 		 *  @private
 		 */
-		public static const POLY:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.NavMapData.SpellLimitPolygonProto.poly", "poly", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NavMapData.PolygonProto; });
+		public static const POLY:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.NavMapData.SpellLimitPolygonProto.poly", "poly", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NavMapData.PolygonProto; });
 
 		private var poly$field:app.message.NavMapData.PolygonProto;
 
@@ -38,7 +38,7 @@ package app.message.NavMapData {
 		/**
 		 *  @private
 		 */
-		public static const UNLIMIT_SPELL_TYPE:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.NavMapData.SpellLimitPolygonProto.unlimit_spell_type", "unlimitSpellType", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const UNLIMIT_SPELL_TYPE:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.NavMapData.SpellLimitPolygonProto.unlimit_spell_type", "unlimitSpellType", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var unlimitSpellType:Array = [];
@@ -49,11 +49,11 @@ package app.message.NavMapData {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasPoly) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, poly$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, poly$field);
 			}
 			for (var unlimitSpellType$index:uint = 0; unlimitSpellType$index < this.unlimitSpellType.length; ++unlimitSpellType$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.unlimitSpellType[unlimitSpellType$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.unlimitSpellType[unlimitSpellType$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -66,7 +66,7 @@ package app.message.NavMapData {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var poly$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (poly$count != 0) {
@@ -74,14 +74,14 @@ package app.message.NavMapData {
 					}
 					++poly$count;
 					this.poly = new app.message.NavMapData.PolygonProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.poly);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.poly);
 					break;
 				case 2:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.unlimitSpellType);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.unlimitSpellType);
 						break;
 					}
-					this.unlimitSpellType.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.unlimitSpellType.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				default:
 					super.readUnknown(input, tag);
