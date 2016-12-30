@@ -109,7 +109,7 @@ package org.mokylin.skin.loading
 			temp.height = 91;
 			temp.touchable = false;
 			temp.fontSize = 14;
-			temp.text = "《御龙在天》";
+			temp.text = "《寻秦记》";
 			temp.textAlign = "left";
 			temp.color = 0xEAA849;
 			temp.verticalAlign = "middle";

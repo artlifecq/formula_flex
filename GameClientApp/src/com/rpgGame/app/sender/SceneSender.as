@@ -11,9 +11,11 @@ package com.rpgGame.app.sender
 	import com.rpgGame.coreData.type.CostItemType;
 	import com.rpgGame.netData.login.message.ReqLoadFinishMessage;
 	import com.rpgGame.netData.map.message.ReqChangeMapByMoveMessage;
+	import com.rpgGame.netData.map.message.ReqChangeMapCommonMessage;
 	import com.rpgGame.netData.map.message.ReqLoadFinishForChangeMapMessage;
 	import com.rpgGame.netData.map.message.ReqNewRunningMessage;
 	import com.rpgGame.netData.map.message.ReqPlayerStopMessage;
+	import com.rpgGame.netData.map.message.ReqSmallFlyShoesMessage;
 	import com.rpgGame.netData.structs.Position;
 	
 	import flash.geom.Point;
@@ -108,17 +110,12 @@ package com.rpgGame.app.sender
 		 */
 		public static function sceneMapTransport(sceneID : int, posx : int, posy : int, randomRan : int = 25, isVipTrans : Boolean = false, upgradeItemListVo : UpgradeItemListVo = null) : void
 		{
-			if (PathFinderUtil.isSolid(SceneManager.getDistrict(), new Vector3D(posx, 0, posy)))
+			/*if (PathFinderUtil.isSolid(SceneManager.getDistrict(), new Vector3D(posx, posy, 0)))
 			{
 				NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL12);
 				return;
-			}
+			}*/
 			
-			_bytes.clear();
-			_bytes.writeVarint32(sceneID);
-			_bytes.writeVarint32(posx);
-			_bytes.writeVarint32(posy);
-			_bytes.writeVarint32(randomRan);
 			if (!isVipTrans)
 			{
 				if (upgradeItemListVo == null || !upgradeItemListVo.isItemEnough)
@@ -132,7 +129,47 @@ package com.rpgGame.app.sender
 				}
 			}
 			
-			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_MAP_TRANSPORT, _bytes);
+			var msg:ReqSmallFlyShoesMessage = new ReqSmallFlyShoesMessage();
+			msg.autoGold = 0;
+			msg.mapLine = 1;
+			msg.mapModel = sceneID;
+			msg.position = new Position();
+			msg.position.x = posx;
+			msg.position.y = posy;
+			SocketConnection.send(msg);
+		}
+		
+		/**
+		 * 在副本中要求离开副本, 回到进入副本前的场景/坐标.
+		 *
+		 * 必须在副本中才能请求, 请求后必须等返回
+		 *
+		 * 此消息不只是在剧情副本中才能用, 任何副本都用这条来主动离开副本
+		 *
+		 * 死亡时候发送也可以, 会满血回到进入副本前的位置
+		 *
+		 * 没有附带信息
+		 */
+		public static function requestLeaveDungeon(mapid:int=-1, pos:Point = null, params:int = 0) : void
+		{
+			if (ReqLockUtil.isReqLocked(101218))
+				return;
+			ReqLockUtil.lockReq(101218, 5 * 1000);
+			
+			var msg:ReqChangeMapCommonMessage = new ReqChangeMapCommonMessage();
+			msg.mapModel = mapid;
+			if (pos == null)
+			{
+				msg.position = new Position();
+			}
+			else
+			{
+				msg.position = Position.FromGridPoint(pos);
+			}
+			
+			msg.params = params;
+			
+			SocketConnection.send(msg);
 		}
 		
 		/**
@@ -147,8 +184,8 @@ package com.rpgGame.app.sender
 		 */
 		public static function sceneHeroJump(jumpAction : int) : void
 		{
-			_bytes.clear();
-			_bytes.writeVarint32(jumpAction);
+//			_bytes.clear();
+//			_bytes.writeVarint32(jumpAction);
 			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_HERO_JUMP, _bytes);
 		}
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -233,27 +270,6 @@ package com.rpgGame.app.sender
 //			_bytes.clear();
 //			_bytes.writeVarint32(jumpAction);
 //			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_HERO_JUMP, _bytes);
-//		}
-
-		/**
-		 * 在副本中要求离开副本, 回到进入副本前的场景/坐标.
-		 *
-		 * 必须在副本中才能请求, 请求后必须等返回
-		 *
-		 * 此消息不只是在剧情副本中才能用, 任何副本都用这条来主动离开副本
-		 *
-		 * 死亡时候发送也可以, 会满血回到进入副本前的位置
-		 *
-		 * 没有附带信息
-		 */
-//		public static function requestLeaveDungeon() : void
-//		{
-//			if (ReqLockUtil.isReqLocked(SimpleDungeonModuleMessages.C2S_LEAVE_DUNGEON))
-//				return;
-//			ReqLockUtil.lockReq(SimpleDungeonModuleMessages.C2S_LEAVE_DUNGEON, 5 * 1000);
-//
-//			_bytes.clear();
-//			send(SimpleDungeonModuleMessages.C2S_LEAVE_DUNGEON, _bytes);
 //		}
 
 		/**

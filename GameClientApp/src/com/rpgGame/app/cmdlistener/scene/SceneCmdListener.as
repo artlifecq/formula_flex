@@ -402,7 +402,6 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onSceneRemoveObject(roleID : uint) : void
 		{
-			GameLog.addShow("ResRoundObjectsMessage  通知来了！ 删除对象id：" + roleID);
 			var sceneRole : SceneRole = SceneManager.getSceneObjByID(roleID) as SceneRole;
 			if( sceneRole != null )
 			{
@@ -416,6 +415,8 @@ package com.rpgGame.app.cmdlistener.scene
 						sceneClientRole.visible = true;
 						TouJingManager.setHuGuoSiEffect(data.modelID, sceneClientRole, true);						
 					}
+					GameLog.addShow("删除对象客户端id：" + roleID);
+					GameLog.addShow("删除对象服务器id：" + data.serverID.ToString());
 				}
 			}
 			SceneRoleManager.getInstance().removeSceneRoleById(roleID);
@@ -436,7 +437,8 @@ package com.rpgGame.app.cmdlistener.scene
 			HeroData.setEnterEyeUserInfo(data, info);
 			var sceneRole : SceneRole = SceneRoleManager.getInstance().createHero(data);
 			
-			GameLog.addShow("ResRoundObjectsMessage  通知来了！ 添加角色对象id：" + data.id);
+			GameLog.addShow("添加角色对象id：" + data.id);
+			GameLog.addShow("添加对象服务器id：" + data.serverID.ToString());
 			//			var otherHeroBiaoMap:HashMap = YunBiaoManager._otherBiaoCheHashMap;
 			//			if( otherHeroBiaoMap.getValue( data.id ) != null )
 			//				data.biaoCheData = otherHeroBiaoMap.getValue( data.id );
@@ -476,7 +478,8 @@ package com.rpgGame.app.cmdlistener.scene
 			RoleData.readMonster(data,info);
 			SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
 			
-			GameLog.addShow("ResRoundObjectsMessage  通知来了！ 添加怪物对象id：" + data.id);
+			GameLog.addShow("添加怪物客户端id：" + data.id);
+			GameLog.addShow("添加怪物服务器id：" + data.serverID.ToString());
 		}
 		
 		/**
@@ -779,7 +782,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onLeaveDungeonFail(buffer : ByteBuffer) : void
 		{
-//			ReqLockUtil.unlockReq(SimpleDungeonModuleMessages.C2S_LEAVE_DUNGEON);
+//			ReqLockUtil.unlockReq(101218);
 //			var failID : int = buffer.readVarint32();
 //			var failReason : String;
 //			switch (failID)
@@ -798,7 +801,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onLeaveDungeonSuccess(buffer : ByteBuffer) : void
 		{
-//			ReqLockUtil.unlockReq(SimpleDungeonModuleMessages.C2S_LEAVE_DUNGEON);
+			ReqLockUtil.unlockReq(101218);
 		}
 		
 		/**

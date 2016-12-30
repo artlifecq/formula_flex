@@ -1,5 +1,6 @@
 package org.mokylin.skin.loading
 {
+	import feathers.controls.text.Fontter;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -66,7 +67,8 @@ package org.mokylin.skin.loading
 			temp.height = 24;
 			temp.text = "首次加载将会需要较多时间，请耐心等待";
 			temp.textAlign = "center";
-			temp.color = 0x9C8049;
+			temp.color = 0xD4C996;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 260;
 			temp.x = 714;
 			temp.y = 22;
@@ -93,7 +95,7 @@ package org.mokylin.skin.loading
 			temp.styleName = "ui/loading/liangdian.png";
 			temp.width = 38;
 			temp.x = 0;
-			temp.y = 37;
+			temp.y = 44;
 			return temp;
 		}
 
@@ -106,7 +108,7 @@ package org.mokylin.skin.loading
 			temp.styleName = "ui/loading/jindutiao.png";
 			temp.width = 1643;
 			temp.x = 24;
-			temp.y = 45;
+			temp.y = 53;
 			return temp;
 		}
 
@@ -131,7 +133,8 @@ package org.mokylin.skin.loading
 			temp.height = 24;
 			temp.text = "抵制不良游戏，拒绝盗版游戏。注意自我保护，谨防受骗上当。适度游戏益脑，沉迷游戏伤身。合理安排时间，享受健康生活。";
 			temp.textAlign = "center";
-			temp.color = 0x9C8049;
+			temp.color = 0xFFE258;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 850;
 			temp.x = 400;
 			temp.y = 885;
@@ -161,7 +164,8 @@ package org.mokylin.skin.loading
 			temp.fontSize = 36;
 			temp.text = "健康游戏忠告";
 			temp.textAlign = "center";
-			temp.color = 0x9C8049;
+			temp.color = 0xFFE258;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 800;
 			temp.x = 0;
 			temp.y = 0;
@@ -181,7 +185,9 @@ package org.mokylin.skin.loading
 			temp.letterSpacing = 5;
 			temp.fontSize = 36;
 			temp.textAlign = "center";
-			temp.color = 0x9C8049;
+			temp.color = 0xE9C099;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.underline = false;
 			temp.width = 800;
 			temp.x = 0;
 			temp.y = 90;
@@ -196,7 +202,8 @@ package org.mokylin.skin.loading
 			temp.bold = true;
 			temp.height = 22;
 			temp.text = "信息提示...";
-			temp.color = 0xC9B48A;
+			temp.color = 0xFFE258;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 700;
 			temp.x = 0;
 			temp.y = 0;
@@ -222,7 +229,8 @@ package org.mokylin.skin.loading
 			temp.bold = true;
 			temp.height = 22;
 			temp.text = "总进度：50%";
-			temp.color = 0xC9B48A;
+			temp.color = 0xFFE258;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 200;
 			temp.x = 0;
 			temp.y = 19;

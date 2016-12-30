@@ -17,7 +17,7 @@ package mapProtoV1.app.message {
 		/**
 		 *  @private
 		 */
-		public static const NUM_BLOCKS_X:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("mapProtoV1.app.message.navMapData.num_blocks_x", "numBlocksX", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const NUM_BLOCKS_X:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("mapProtoV1.app.message.navMapData.num_blocks_x", "numBlocksX", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var num_blocks_x$field:int;
 
@@ -44,7 +44,7 @@ package mapProtoV1.app.message {
 		/**
 		 *  @private
 		 */
-		public static const NUM_BLOCKS_Y:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("mapProtoV1.app.message.navMapData.num_blocks_y", "numBlocksY", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const NUM_BLOCKS_Y:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("mapProtoV1.app.message.navMapData.num_blocks_y", "numBlocksY", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var num_blocks_y$field:int;
 
@@ -69,7 +69,7 @@ package mapProtoV1.app.message {
 		/**
 		 *  @private
 		 */
-		public static const WALKABLE_POLY:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("mapProtoV1.app.message.navMapData.walkable_poly", "walkablePoly", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return mapProtoV1.app.message.navMapData.WalkablePolygonData_V1; });
+		public static const WALKABLE_POLY:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("mapProtoV1.app.message.navMapData.walkable_poly", "walkablePoly", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return mapProtoV1.app.message.navMapData.WalkablePolygonData_V1; });
 
 		private var walkable_poly$field:mapProtoV1.app.message.navMapData.WalkablePolygonData_V1;
 
@@ -92,7 +92,7 @@ package mapProtoV1.app.message {
 		/**
 		 *  @private
 		 */
-		public static const PKABLE_POLY:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("mapProtoV1.app.message.navMapData.pkable_poly", "pkablePoly", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return mapProtoV1.app.message.navMapData.PolygonProto_V1; });
+		public static const PKABLE_POLY:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("mapProtoV1.app.message.navMapData.pkable_poly", "pkablePoly", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return mapProtoV1.app.message.navMapData.PolygonProto_V1; });
 
 		[ArrayElementType("mapProtoV1.app.message.navMapData.PolygonProto_V1")]
 		public var pkablePoly:Array = [];
@@ -100,7 +100,7 @@ package mapProtoV1.app.message {
 		/**
 		 *  @private
 		 */
-		public static const SPELL_LIMIT_POLY:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("mapProtoV1.app.message.navMapData.spell_limit_poly", "spellLimitPoly", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return mapProtoV1.app.message.navMapData.SpellLimitPolygonProto_V1; });
+		public static const SPELL_LIMIT_POLY:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("mapProtoV1.app.message.navMapData.spell_limit_poly", "spellLimitPoly", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return mapProtoV1.app.message.navMapData.SpellLimitPolygonProto_V1; });
 
 		[ArrayElementType("mapProtoV1.app.message.navMapData.SpellLimitPolygonProto_V1")]
 		public var spellLimitPoly:Array = [];
@@ -108,7 +108,7 @@ package mapProtoV1.app.message {
 		/**
 		 *  @private
 		 */
-		public static const TRADE_POLY:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("mapProtoV1.app.message.navMapData.trade_poly", "tradePoly", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return mapProtoV1.app.message.navMapData.PolygonProto_V1; });
+		public static const TRADE_POLY:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("mapProtoV1.app.message.navMapData.trade_poly", "tradePoly", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return mapProtoV1.app.message.navMapData.PolygonProto_V1; });
 
 		[ArrayElementType("mapProtoV1.app.message.navMapData.PolygonProto_V1")]
 		public var tradePoly:Array = [];
@@ -116,7 +116,7 @@ package mapProtoV1.app.message {
 		/**
 		 *  @private
 		 */
-		public static const SAFE_POLY:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("mapProtoV1.app.message.navMapData.safe_poly", "safePoly", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return mapProtoV1.app.message.navMapData.PolygonProto_V1; });
+		public static const SAFE_POLY:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("mapProtoV1.app.message.navMapData.safe_poly", "safePoly", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return mapProtoV1.app.message.navMapData.PolygonProto_V1; });
 
 		[ArrayElementType("mapProtoV1.app.message.navMapData.PolygonProto_V1")]
 		public var safePoly:Array = [];
@@ -127,31 +127,31 @@ package mapProtoV1.app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasNumBlocksX) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, num_blocks_x$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, num_blocks_x$field);
 			}
 			if (hasNumBlocksY) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, num_blocks_y$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, num_blocks_y$field);
 			}
 			if (hasWalkablePoly) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, walkable_poly$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, walkable_poly$field);
 			}
 			for (var pkablePoly$index:uint = 0; pkablePoly$index < this.pkablePoly.length; ++pkablePoly$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.pkablePoly[pkablePoly$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.pkablePoly[pkablePoly$index]);
 			}
 			for (var spellLimitPoly$index:uint = 0; spellLimitPoly$index < this.spellLimitPoly.length; ++spellLimitPoly$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.spellLimitPoly[spellLimitPoly$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.spellLimitPoly[spellLimitPoly$index]);
 			}
 			for (var tradePoly$index:uint = 0; tradePoly$index < this.tradePoly.length; ++tradePoly$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.tradePoly[tradePoly$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.tradePoly[tradePoly$index]);
 			}
 			for (var safePoly$index:uint = 0; safePoly$index < this.safePoly.length; ++safePoly$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.safePoly[safePoly$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.safePoly[safePoly$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -166,21 +166,21 @@ package mapProtoV1.app.message {
 			var num_blocks_y$count:uint = 0;
 			var walkable_poly$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (num_blocks_x$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NavMapData.numBlocksX cannot be set twice.');
 					}
 					++num_blocks_x$count;
-					this.numBlocksX = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.numBlocksX = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (num_blocks_y$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NavMapData.numBlocksY cannot be set twice.');
 					}
 					++num_blocks_y$count;
-					this.numBlocksY = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.numBlocksY = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (walkable_poly$count != 0) {
@@ -188,19 +188,19 @@ package mapProtoV1.app.message {
 					}
 					++walkable_poly$count;
 					this.walkablePoly = new mapProtoV1.app.message.navMapData.WalkablePolygonData_V1();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.walkablePoly);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.walkablePoly);
 					break;
 				case 4:
-					this.pkablePoly.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new mapProtoV1.app.message.navMapData.PolygonProto_V1()));
+					this.pkablePoly.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new mapProtoV1.app.message.navMapData.PolygonProto_V1()));
 					break;
 				case 5:
-					this.spellLimitPoly.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new mapProtoV1.app.message.navMapData.SpellLimitPolygonProto_V1()));
+					this.spellLimitPoly.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new mapProtoV1.app.message.navMapData.SpellLimitPolygonProto_V1()));
 					break;
 				case 6:
-					this.tradePoly.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new mapProtoV1.app.message.navMapData.PolygonProto_V1()));
+					this.tradePoly.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new mapProtoV1.app.message.navMapData.PolygonProto_V1()));
 					break;
 				case 7:
-					this.safePoly.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new mapProtoV1.app.message.navMapData.PolygonProto_V1()));
+					this.safePoly.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new mapProtoV1.app.message.navMapData.PolygonProto_V1()));
 					break;
 				default:
 					super.readUnknown(input, tag);
