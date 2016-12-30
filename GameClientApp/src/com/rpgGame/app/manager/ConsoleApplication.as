@@ -11,7 +11,6 @@ package com.rpgGame.app.manager
 	import feathers.controls.Label;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.mokylin.skin.common.ConsolePanelSkin;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;

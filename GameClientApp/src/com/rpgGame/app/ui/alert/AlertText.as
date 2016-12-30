@@ -7,8 +7,6 @@ package com.rpgGame.app.ui.alert
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.lang.LangCrown;
 	
-	import org.mokylin.skin.app.alert.AlertTextSkin;
-	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.events.Event;

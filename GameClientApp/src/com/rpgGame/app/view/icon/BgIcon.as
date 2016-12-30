@@ -12,11 +12,6 @@ package com.rpgGame.app.view.icon
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
 	
-	import org.mokylin.skin.common.version_3.Q_quality.mc.UIMovieClipCheng;
-	import org.mokylin.skin.common.version_3.Q_quality.mc.UIMovieClipLan;
-	import org.mokylin.skin.common.version_3.Q_quality.mc.UIMovieClipLv;
-	import org.mokylin.skin.common.version_3.Q_quality.mc.UIMovieClipZi;
-	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.events.Touch;

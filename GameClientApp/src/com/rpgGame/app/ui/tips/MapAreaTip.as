@@ -8,8 +8,6 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.lang.LangTips;
 
-	import org.mokylin.skin.app.tips.MapAreaTipSkin;
-
 	/**
 	 *
 	 * 地图区域tips

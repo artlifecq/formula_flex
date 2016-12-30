@@ -10,7 +10,6 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.ChatSender;
-	import com.rpgGame.app.ui.main.chat.ChatWindowPanel;
 	import com.rpgGame.core.events.ChatEvent;
 	import com.rpgGame.core.events.FunctionMessageBarEvent;
 	import com.rpgGame.coreData.cfg.FaceCfgData;

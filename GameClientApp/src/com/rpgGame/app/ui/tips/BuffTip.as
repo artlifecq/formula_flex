@@ -7,8 +7,6 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.info.buff.BuffInfo;
 
-	import org.mokylin.skin.app.tips.BuffTipsSkin;
-
 	/**
 	 *
 	 * Buff tips

@@ -1,11 +1,7 @@
 package com.rpgGame.app.ui.tips
 {
 	
-	import org.mokylin.skin.app.tips.BaseTipsSkin;
-	
 	import starling.display.Sprite;
-	
-	import utils.TimerServer;
 	
 	public class BaseTip extends Sprite
 	{

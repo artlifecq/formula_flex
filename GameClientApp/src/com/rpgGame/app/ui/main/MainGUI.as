@@ -1,35 +1,16 @@
 package com.rpgGame.app.ui.main
 {
-	import com.rpgGame.app.cmdlistener.enum.EmEvenTrackType;
-	import com.rpgGame.app.manager.YuMaQiShouManager;
-	import com.rpgGame.app.manager.task.MiXinManager;
-	import com.rpgGame.app.manager.task.TouJingManager;
-	import com.rpgGame.app.manager.yunBiao.YunBiaoManager;
 	import com.rpgGame.app.ui.alert.GameAlert;
-	import com.rpgGame.app.ui.main.activityBar.ActivityBar;
 	import com.rpgGame.app.ui.main.chat.ChatBar;
 	import com.rpgGame.app.ui.main.head.PlayerHeadBar;
-	import com.rpgGame.app.ui.main.head.SelectRoleHeadBar;
-	import com.rpgGame.app.ui.main.hintBattleBar.HintBattleBar;
-	import com.rpgGame.app.ui.main.miniMap.MiniMapBar;
 	import com.rpgGame.app.ui.main.navigation.NavigationBar;
-	import com.rpgGame.app.ui.main.rank.HurtRankPanel;
 	import com.rpgGame.app.ui.main.shortcut.ShortcutBar;
-	import com.rpgGame.app.ui.main.shortcut.ShortcutMessageBar;
 	import com.rpgGame.app.ui.main.smallmap.SmallMapBar;
-	import com.rpgGame.app.ui.main.task.TaskBar;
-	import com.rpgGame.app.ui.main.task.TaskEventTrackPanel;
-	import com.rpgGame.app.ui.main.team.TeamBar;
 	import com.rpgGame.app.ui.main.top.TopBar;
 	import com.rpgGame.core.app.AppDispather;
 	import com.rpgGame.core.app.AppEvent;
 	import com.rpgGame.core.app.AppInfo;
 	import com.rpgGame.core.events.MapEvent;
-	import com.rpgGame.core.events.RankEvent;
-	import com.rpgGame.core.events.TaskEvent;
-	import com.rpgGame.core.events.YuMaQiShouEvent;
-	import com.rpgGame.core.events.YunBiaoEvent;
-	import com.rpgGame.core.events.toujing.TouJingEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.lang.LangAlertInfo;

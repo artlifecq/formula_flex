@@ -8,8 +8,6 @@ package com.rpgGame.app.graphics
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	
-	import org.mokylin.skin.mainui.head.MonsterHpBarSkin;
-	
 	import starling.display.BlendMode;
 	import starling.display.DisplayObject;
 	import starling.display.Quad;

@@ -26,7 +26,7 @@ package com.rpgGame.app.ui.main.shortcut
 
 		private const SHORTCUTS_KEY : Array = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10"];
 
-		private var _gridVect : Vector.<ShortcutGrid>;
+//		private var _gridVect : Vector.<ShortcutGrid>;
 
 		public function ShortcutSkillBar(shortcutBar : ShortcutBar)
 		{
@@ -62,43 +62,43 @@ package com.rpgGame.app.ui.main.shortcut
 		 */
 		private function createGrid() : void
 		{
-			_gridVect = new Vector.<ShortcutGrid>();
-			var cd : ShortcutGrid;
-			var size : int = IcoSizeEnum.SIZE_46;
-			var gridInfo : GridInfo;
-			for (var i : int = 0; i < GRID_COUNT; i++)
-			{
-				cd = new ShortcutGrid(_shortcutBar, size);
-				cd.width = cd.height = size;
-
-				cd.dragAble = true;
-				gridInfo = new GridInfo(ItemContainerID.Shortcut, i);
-				cd.gridInfo = gridInfo;
-				cd.onTouchEndCallBack = onTouchGrid;
-				cd.rightMouseClickFun = onRightMouseClick;
-				if (i < 10)
-				{
-					cd.x = 1 + 55 * i;
-					cd.y = 48;
-
-					cd.setBg(GridBGType.GRID_SIZE_46, 0);
-					cd.setIconPoint(0, 0);
-					addChild(cd);
-				}
-				else
-				{
-					cd.x = 1 + 55 * (i - 10);
-					cd.y = -5;
-
-					cd.setBg(GridBGType.GRID_SIZE_46, 0);
-					cd.setIconPoint(0, 0);
-					//addChild(cd);
-				}
-				_gridVect.push(cd);
-
-				if (i > 9)
-					cd.showShortCutText(SHORTCUTS_KEY[i]);
-			}
+//			_gridVect = new Vector.<ShortcutGrid>();
+//			var cd : ShortcutGrid;
+//			var size : int = IcoSizeEnum.SIZE_46;
+//			var gridInfo : GridInfo;
+//			for (var i : int = 0; i < GRID_COUNT; i++)
+//			{
+//				cd = new ShortcutGrid(_shortcutBar, size);
+//				cd.width = cd.height = size;
+//
+//				cd.dragAble = true;
+//				gridInfo = new GridInfo(ItemContainerID.Shortcut, i);
+//				cd.gridInfo = gridInfo;
+//				cd.onTouchEndCallBack = onTouchGrid;
+//				cd.rightMouseClickFun = onRightMouseClick;
+//				if (i < 10)
+//				{
+//					cd.x = 1 + 55 * i;
+//					cd.y = 48;
+//
+//					cd.setBg(GridBGType.GRID_SIZE_46, 0);
+//					cd.setIconPoint(0, 0);
+//					addChild(cd);
+//				}
+//				else
+//				{
+//					cd.x = 1 + 55 * (i - 10);
+//					cd.y = -5;
+//
+//					cd.setBg(GridBGType.GRID_SIZE_46, 0);
+//					cd.setIconPoint(0, 0);
+//					//addChild(cd);
+//				}
+//				_gridVect.push(cd);
+//
+//				if (i > 9)
+//					cd.showShortCutText(SHORTCUTS_KEY[i]);
+//			}
 		}
 
 		//---------------------------------------
@@ -108,11 +108,11 @@ package com.rpgGame.app.ui.main.shortcut
 		 */
 		private function updateAllGridData() : void
 		{
-			var len : int = _gridVect.length;
-			for (var i : int = 0; i < len; i++)
-			{
-				updateGrid(i);
-			}
+//			var len : int = _gridVect.length;
+//			for (var i : int = 0; i < len; i++)
+//			{
+//				updateGrid(i);
+//			}
 
 		}
 
@@ -121,60 +121,60 @@ package com.rpgGame.app.ui.main.shortcut
 		 * @param cd
 		 *
 		 */
-		private function onTouchGrid(cd : ShortcutGrid) : void
-		{
-			if (cd == null)
-				return;
-
-			ShortcutsManger.getInstance().useShortcuts(cd.index);
-		}
-
-		private function onRightMouseClick(cd : ShortcutGrid) : void
-		{
-			if (cd == null)
-				return;
-
-			var shortcutData : ShortcutsData = ShortcutsManger.getInstance().getShortcutsDataByPos(cd.index);
-			if (shortcutData == null)
-				return;
-
-			switch (shortcutData.type)
-			{
-				case ShortcutsTypeEnum.SKILL_TYPE: //如果是技能那么把这个技能设置成或自动释放的状态
-					var spellProto : Q_skill_model = MainRoleManager.actorInfo.spellList.getSpell(shortcutData.id);
-					if (spellProto == null)
-						return;
-
-					if (MainRoleManager.actorInfo.spellList.isAutoSpellId(shortcutData.id))
-					{
-						//已经设置了那么就取消
-						MainRoleManager.actorInfo.spellList.removeAutoSpell(shortcutData.id);
-
-						if (spellProto && spellProto.q_is_allow_auto_combat)
-							cd.showAutoImg(true);
-						else
-							cd.showAutoImg(false);
-						cd.showAutoEff(false);
-						return;
-					}
-
-					if (spellProto && spellProto.q_is_allow_auto_combat) //如果这个技能可以设置成自动释放技能就设置它
-					{
-						var reqSetted : Boolean = MainRoleManager.actorInfo.spellList.reqAutoSpellMsg(shortcutData.id);
-						if (reqSetted)
-						{
-							cd.showAutoImg(false);
-							cd.showAutoEff(true);
-						}
-					}
-					break;
-
-				case ShortcutsTypeEnum.ITEM_TYPE: //如果是物品那使用物品
-					ShortcutsManger.getInstance().useShortcuts(cd.index);
-					break;
-			}
-
-		}
+//		private function onTouchGrid(cd : ShortcutGrid) : void
+//		{
+//			if (cd == null)
+//				return;
+//
+//			ShortcutsManger.getInstance().useShortcuts(cd.index);
+//		}
+//
+//		private function onRightMouseClick(cd : ShortcutGrid) : void
+//		{
+//			if (cd == null)
+//				return;
+//
+//			var shortcutData : ShortcutsData = ShortcutsManger.getInstance().getShortcutsDataByPos(cd.index);
+//			if (shortcutData == null)
+//				return;
+//
+//			switch (shortcutData.type)
+//			{
+//				case ShortcutsTypeEnum.SKILL_TYPE: //如果是技能那么把这个技能设置成或自动释放的状态
+//					var spellProto : Q_skill_model = MainRoleManager.actorInfo.spellList.getSpell(shortcutData.id);
+//					if (spellProto == null)
+//						return;
+//
+//					if (MainRoleManager.actorInfo.spellList.isAutoSpellId(shortcutData.id))
+//					{
+//						//已经设置了那么就取消
+//						MainRoleManager.actorInfo.spellList.removeAutoSpell(shortcutData.id);
+//
+//						if (spellProto && spellProto.q_is_allow_auto_combat)
+//							cd.showAutoImg(true);
+//						else
+//							cd.showAutoImg(false);
+//						cd.showAutoEff(false);
+//						return;
+//					}
+//
+//					if (spellProto && spellProto.q_is_allow_auto_combat) //如果这个技能可以设置成自动释放技能就设置它
+//					{
+//						var reqSetted : Boolean = MainRoleManager.actorInfo.spellList.reqAutoSpellMsg(shortcutData.id);
+//						if (reqSetted)
+//						{
+//							cd.showAutoImg(false);
+//							cd.showAutoEff(true);
+//						}
+//					}
+//					break;
+//
+//				case ShortcutsTypeEnum.ITEM_TYPE: //如果是物品那使用物品
+//					ShortcutsManger.getInstance().useShortcuts(cd.index);
+//					break;
+//			}
+//
+//		}
 
 		//--------------------------------------------------------------------
 		/**
@@ -184,57 +184,57 @@ package com.rpgGame.app.ui.main.shortcut
 		 */
 		private function updateGrid(gridIndex : int) : void
 		{
-			var grid : ShortcutGrid = _gridVect[gridIndex];
-			if (grid == null)
-				return;
-
-			var shortData : ShortcutsData = ShortcutsManger.getInstance().getShortcutsDataByPos(gridIndex);
-			if (shortData == null)
-			{
-				grid.clear();
-				return;
-			}
-
-			switch (shortData.type)
-			{
-				case ShortcutsTypeEnum.SKILL_TYPE:
-					var skillData : Q_skill_model = ShortcutsManger.getInstance().getTempSellProto(shortData.id);
-					if(skillData == null)
-					{
-						skillData = MainRoleManager.actorInfo.spellList.getSpell(shortData.id);
-						if (skillData == null)
-						{
-							trace("为什么一个没有学习过的技能会保存在快捷栏里呢");
-							return;
-						}
-					}
-
-					FaceUtil.SetSkillGrid(grid, FaceUtil.chanceSpellToFaceInfo(skillData), true);
-
-					var isAutoSpell : Boolean = MainRoleManager.actorInfo.spellList.isAutoSpellId(skillData.q_skillID);
-					if (isAutoSpell)
-					{
-						grid.showAutoImg(false);
-						grid.showAutoEff(true);
-					}
-					else
-					{
-						if (skillData.q_is_allow_auto_combat)
-							grid.showAutoImg(true);
-						else
-							grid.showAutoImg(false);
-						grid.showAutoEff(false);
-					}
-					break;
-
-				case ShortcutsTypeEnum.ITEM_TYPE:
-					var itemInfo : ItemInfo = new ItemInfo();
-					itemInfo.cfgId = shortData.id;
-					itemInfo.count = BackPackManager.instance.getItemCount(shortData.id);
-					FaceUtil.SetItemGrid(grid, itemInfo);
-					grid.isEnabled = itemInfo.count > 0;
-					break;
-			}
+//			var grid : ShortcutGrid = _gridVect[gridIndex];
+//			if (grid == null)
+//				return;
+//
+//			var shortData : ShortcutsData = ShortcutsManger.getInstance().getShortcutsDataByPos(gridIndex);
+//			if (shortData == null)
+//			{
+//				grid.clear();
+//				return;
+//			}
+//
+//			switch (shortData.type)
+//			{
+//				case ShortcutsTypeEnum.SKILL_TYPE:
+//					var skillData : Q_skill_model = ShortcutsManger.getInstance().getTempSellProto(shortData.id);
+//					if(skillData == null)
+//					{
+//						skillData = MainRoleManager.actorInfo.spellList.getSpell(shortData.id);
+//						if (skillData == null)
+//						{
+//							trace("为什么一个没有学习过的技能会保存在快捷栏里呢");
+//							return;
+//						}
+//					}
+//
+//					FaceUtil.SetSkillGrid(grid, FaceUtil.chanceSpellToFaceInfo(skillData), true);
+//
+//					var isAutoSpell : Boolean = MainRoleManager.actorInfo.spellList.isAutoSpellId(skillData.q_skillID);
+//					if (isAutoSpell)
+//					{
+//						grid.showAutoImg(false);
+//						grid.showAutoEff(true);
+//					}
+//					else
+//					{
+//						if (skillData.q_is_allow_auto_combat)
+//							grid.showAutoImg(true);
+//						else
+//							grid.showAutoImg(false);
+//						grid.showAutoEff(false);
+//					}
+//					break;
+//
+//				case ShortcutsTypeEnum.ITEM_TYPE:
+//					var itemInfo : ItemInfo = new ItemInfo();
+//					itemInfo.cfgId = shortData.id;
+//					itemInfo.count = BackPackManager.instance.getItemCount(shortData.id);
+//					FaceUtil.SetItemGrid(grid, itemInfo);
+//					grid.isEnabled = itemInfo.count > 0;
+//					break;
+//			}
 		}
 
 		private function onClearSpell() : void

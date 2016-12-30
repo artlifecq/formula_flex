@@ -15,10 +15,6 @@ package com.rpgGame.app.ui.alert
 	import gs.TweenLite;
 	
 	import org.client.mainCore.ds.HashMap;
-	import org.mokylin.skin.common.AlertOkSkin;
-	import org.mokylin.skin.common.AlertSkin;
-	import org.mokylin.skin.common.AlertTransparentOkCancelSkin;
-	import org.mokylin.skin.common.AlertTransparentOkSkin;
 	
 	import starling.display.DisplayObject;
 

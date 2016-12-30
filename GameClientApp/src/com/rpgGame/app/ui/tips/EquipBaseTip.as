@@ -1,12 +1,8 @@
 package com.rpgGame.app.ui.tips
 {
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.coreData.info.item.EquipInfo;
-	import com.rpgGame.coreData.type.item.ItemQualityType;
 	
 	import feathers.controls.Label;
-	
-	import org.mokylin.skin.app.tips.EquipTipsSkin;
 	
 	public class EquipBaseTip extends SkinUI
 	{

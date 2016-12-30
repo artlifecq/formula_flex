@@ -3,8 +3,6 @@ package com.rpgGame.app.ui.alert
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.UIUtil;
 	
-	import org.mokylin.skin.common.AlertInputSkin;
-	
 	import starling.display.DisplayObject;
 	
 	/**

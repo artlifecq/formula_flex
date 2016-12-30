@@ -26,7 +26,6 @@ package com.rpgGame.app.ui.tips
 	import feathers.controls.Label;
 	
 	import org.client.mainCore.ds.HashMap;
-	import org.mokylin.skin.app.tips.MountTipSkin;
 	
 	/**
 	 * 坐骑tips 

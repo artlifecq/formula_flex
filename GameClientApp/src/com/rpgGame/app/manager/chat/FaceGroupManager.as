@@ -1,7 +1,6 @@
 package com.rpgGame.app.manager.chat
 {
 	import com.game.engine3D.manager.Stage3DLayerManager;
-	import com.rpgGame.app.ui.main.chat.FaceGroup;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
 
 	/**

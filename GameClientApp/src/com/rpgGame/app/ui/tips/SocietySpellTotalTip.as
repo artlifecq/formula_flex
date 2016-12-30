@@ -5,8 +5,6 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.info.society.SocietySpellTotalData;
 
-	import org.mokylin.skin.app.tips.SocietySpellTotalTipSkin;
-
 	/**
 	 *
 	 * 帮派技能总tips
