@@ -1,7 +1,8 @@
 <root>
 	<defalutTextColor>0xFFFFFF</defalutTextColor>
 	<defalutFontSize>14</defalutFontSize>
-	<defalutFontFamily>SimHei</defalutFontFamily>
+	<!-- <defalutFontFamily>SimHei</defalutFontFamily> -->
+	<defalutFontFamily>微软雅黑</defalutFontFamily>
 	<!--  是否启用，label的 自动缩略功能-->
 	<truncateToFit>0</truncateToFit>
 	<!-- 最近打开文件的，最大保存个数-->
@@ -35,15 +36,39 @@
 		<filterArr  id="textFilterYellow" desc="黄色滤镜">
 			<filter filterType="GlowFilter" alpha="1.00" blurY="2" color="0xFFFF00" quality="1" blurX="2" inner="false" strength="10" knockout="false"/>
 		</filterArr>
+		
+		
+		
+		<filterArr  id="labelFilterBlack2" desc="黑色滤镜">
+			<filter filterType="GlowFilter" alpha="0.40" blurY="2" color="0x000000" quality="1" blurX="2" inner="false" strength="10" knockout="false"/>
+		</filterArr>
+		<filterArr  id="labelFilterBlack3" desc="黑色滤镜">
+			<filter filterType="GlowFilter" alpha="1.00" blurY="2" color="0x000000" quality="1" blurX="2" inner="false" strength="4" knockout="false"/>
+		</filterArr>
+		
 	</filters>
 	<textFormats>
-		<textFormat id="101" name="1号 米黄文字(默认)" textColor="0xf9f0cc" textFilter="labelFilterBlack"/>
-		<textFormat id="103" name="2号 米黄文字" textColor="0xe9c099" textFilter="labelFilterBlack"/>
-		<textFormat id="104" name="3号 米黄文字" textColor="0xd4c996" textFilter="labelFilterBlack"/>
-		<textFormat id="105" name="4号 黄色文字" textColor="0xffe258" textFilter="labelFilterBlack"/>
-		<textFormat id="106" name="5号 黄色文字" textColor="0xf4bd63" textFilter="labelFilterBlack"/>
-		<textFormat id="107" name="6号 暗黄文字" textColor="0x9c8049" textFilter="labelFilterBlack"/>
-		<textFormat id="108" name="7号 暗黄文字" textColor="0xdb9736" textFilter="labelFilterBlack"/>
+	
+	
+		<textFormat id="001" name="1号 主字体1" textColor="0xC3C198" textFilter="labelFilterBlack2"/>
+		<textFormat id="002" name="2号 主字体2" textColor="0x989772" textFilter="labelFilterBlack3"/>
+		<textFormat id="003" name="3号 剧情字体" textColor="0x8d8674" textFilter="labelFilterBlack"/>
+		<textFormat id="004" name="4号 剧情字体" textColor="0xbcb6a7" textFilter="labelFilterBlack"/>
+		<textFormat id="005" name="5号 top字体" textColor="0x8b7d69" textFilter="labelFilterBlack"/>
+		<textFormat id="006" name="6号 foot字体" textColor="0xb1aca6" textFilter="labelFilterBlack"/>
+		<textFormat id="007" name="7号 role字体" textColor="0xd0c6a6" textFilter="labelFilterBlack"/>
+		<textFormat id="008" name="8号 nav字体" textColor="0x908371" textFilter="labelFilterBlack"/>
+		<textFormat id="009" name="9号 nav_over字体" textColor="0xdfcaad" textFilter="labelFilterBlack"/>
+	
+	
+	
+		<textFormat id="101" name="1号 角色属性" textColor="0x99915c" textFilter="labelFilterBlack"/>
+		<textFormat id="103" name="2号 伤害值" textColor="0xf2b13b" textFilter="labelFilterBlack"/>
+		<textFormat id="104" name="3号 属性值" textColor="0xa79f4f" textFilter="labelFilterBlack"/>
+		<textFormat id="105" name="4号 伴侣名称" textColor="0xabad97" textFilter="labelFilterBlack"/>
+		<textFormat id="106" name="5号 角色名称" textColor="0xe2c778" textFilter="labelFilterBlack"/>
+		<textFormat id="107" name="6号 银两" textColor="0xe3d9bf" textFilter="labelFilterBlack"/>
+		<textFormat id="108" name="7号 淡黄文字" textColor="0xe1d4a9" textFilter="labelFilterBlack2"/>
 		<textFormat id="109" name="8号 暗黄文字（标题）" textColor="0xd69e66" textFilter="labelFilterBlack"/>
 		<textFormat id="110" name="9号 暗黄文字" textColor="0x98692D" textFilter="labelFilterBlack"/>
 		<textFormat id="102" name="10号 橘色文字" textColor="0xf17733" textFilter="labelFilterBlack"/>

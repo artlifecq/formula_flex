@@ -34,7 +34,7 @@ package com.rpgGame.app.ui.tips
 	 */	
 	public class MountBeastCardTip extends SkinUI implements ITip
 	{
-		private var _mountBeastCardTip:MountBeastCardTipSkin;
+		private var _mountBeastCardTip:Object;//MountBeastCardTipSkin;
 		/** 图标icon **/
 		private var titleIconFace:IconCDFace;
 		/** 坐骑数据 **/
@@ -46,7 +46,7 @@ package com.rpgGame.app.ui.tips
 		
 		public function MountBeastCardTip()
 		{
-			_mountBeastCardTip = new MountBeastCardTipSkin();
+//			_mountBeastCardTip = new MountBeastCardTipSkin();
 			super( _mountBeastCardTip );
 			initTip();
 		}

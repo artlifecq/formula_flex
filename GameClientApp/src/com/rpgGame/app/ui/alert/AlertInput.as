@@ -15,13 +15,13 @@ package com.rpgGame.app.ui.alert
 	{
 		private static var _ins:AlertInput;;
 		
-		public var skin:AlertInputSkin;
+		public var skin:Object;//AlertInputSkin;
 		private var okFCallBack:Function;
 		private var closeCallBack:Function;
 		
 		public function AlertInput()
 		{
-			skin = new AlertInputSkin(); 
+			//skin = new AlertInputSkin(); 
 			super(skin);
 		}
 		

@@ -370,7 +370,7 @@ package com.rpgGame.app.cmdlistener
 				chatInfo.realShowName = chatInfo.name;
 				ChatWindowManager.addPrivateChatData(chatInfo.id,chatInfo,false,false,true);
 				ChatWindowManager.addWindowChatTargetId(chatInfo.id);
-				var isPrivateWindowShowing:Boolean = ChatWindowPanel.isShowing();
+				var isPrivateWindowShowing:Boolean = false;//ChatWindowPanel.isShowing();
 				if(isPrivateWindowShowing)
 				{
 					EventManager.dispatchEvent(ChatEvent.GET_NEW_WHISPER_DATA,chatInfo);
@@ -703,10 +703,10 @@ package com.rpgGame.app.cmdlistener
 			}
 			privateChaterVo.hasMoreRecord = haveMore;
 			
-			if(ChatWindowPanel.isShowing())
-			{
-				ChatWindowPanel.instance.freshRecore(chaterID,true);
-			}
+//			if(ChatWindowPanel.isShowing())
+//			{
+//				ChatWindowPanel.instance.freshRecore(chaterID,true);
+//			}
 		}
 		
 		/**

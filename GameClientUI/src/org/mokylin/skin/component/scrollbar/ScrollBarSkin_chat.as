@@ -1,7 +1,11 @@
 package org.mokylin.skin.component.scrollbar
 {
+	import feathers.controls.Button;
 	import feathers.controls.StateSkin;
-	import feathers.controls.UIAsset;
+	import org.mokylin.skin.component.scrollbar.skin_chat.button.ScrollBarSkin_decre;
+	import org.mokylin.skin.component.scrollbar.skin_chat.button.ScrollBarSkin_incre;
+	import org.mokylin.skin.component.scrollbar.skin_chat.button.ScrollBarSkin_thumb;
+	import org.mokylin.skin.component.scrollbar.skin_chat.button.ScrollBarSkin_track;
 
 	/**
 	 * @private
@@ -13,25 +17,13 @@ package org.mokylin.skin.component.scrollbar
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var __ScrollBarSkin_chat_UIAsset1:feathers.controls.UIAsset;
+		public var decrement:feathers.controls.Button;
 
-		public var __ScrollBarSkin_chat_UIAsset10:feathers.controls.UIAsset;
+		public var increment:feathers.controls.Button;
 
-		public var __ScrollBarSkin_chat_UIAsset2:feathers.controls.UIAsset;
+		public var thumb:feathers.controls.Button;
 
-		public var __ScrollBarSkin_chat_UIAsset3:feathers.controls.UIAsset;
-
-		public var __ScrollBarSkin_chat_UIAsset4:feathers.controls.UIAsset;
-
-		public var __ScrollBarSkin_chat_UIAsset5:feathers.controls.UIAsset;
-
-		public var __ScrollBarSkin_chat_UIAsset6:feathers.controls.UIAsset;
-
-		public var __ScrollBarSkin_chat_UIAsset7:feathers.controls.UIAsset;
-
-		public var __ScrollBarSkin_chat_UIAsset8:feathers.controls.UIAsset;
-
-		public var __ScrollBarSkin_chat_UIAsset9:feathers.controls.UIAsset;
+		public var track:feathers.controls.Button;
 
 
 		//==========================================================================
@@ -41,109 +33,66 @@ package org.mokylin.skin.component.scrollbar
 		{
 			super();
 			
-			this.currentState = "up";
+			this.currentState = "button";
+			this.height = 193;
 			this.elementsContent = [];
-			__ScrollBarSkin_chat_UIAsset1_i();
-			__ScrollBarSkin_chat_UIAsset2_i();
-			__ScrollBarSkin_chat_UIAsset3_i();
-			__ScrollBarSkin_chat_UIAsset4_i();
-			__ScrollBarSkin_chat_UIAsset5_i();
-			__ScrollBarSkin_chat_UIAsset6_i();
-			__ScrollBarSkin_chat_UIAsset7_i();
-			__ScrollBarSkin_chat_UIAsset8_i();
-			__ScrollBarSkin_chat_UIAsset9_i();
-			__ScrollBarSkin_chat_UIAsset10_i();
+			track_i();
+			decrement_i();
+			increment_i();
+			thumb_i();
 			
 			
 			states = {
 			};
-			skinNames={"down":"ui/component/scrollbar/skin_chat/decre_down.png,ui/component/scrollbar/skin_chat/incre_down.png,ui/component/scrollbar/skin_chat/thumb_down.png",
-			"hover":"ui/component/scrollbar/skin_chat/decre_over.png,ui/component/scrollbar/skin_chat/incre_over.png,ui/component/scrollbar/skin_chat/thumb_over.png",
-			"track":"ui/component/scrollbar/skin_chat/track.png",
-			"up":"ui/component/scrollbar/skin_chat/decre_up.png,ui/component/scrollbar/skin_chat/incre_up.png,ui/component/scrollbar/skin_chat/thumb_up.png"};
+			skinNames={"button":"org.mokylin.skin.component.scrollbar.skin_chat.button.ScrollBarSkin_track,org.mokylin.skin.component.scrollbar.skin_chat.button.ScrollBarSkin_decre,org.mokylin.skin.component.scrollbar.skin_chat.button.ScrollBarSkin_incre,org.mokylin.skin.component.scrollbar.skin_chat.button.ScrollBarSkin_thumb"};
 		}
 
 
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __ScrollBarSkin_chat_UIAsset10_i():feathers.controls.UIAsset
+		private function decrement_i():feathers.controls.Button
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__ScrollBarSkin_chat_UIAsset10 = temp;
-			temp.styleName = "ui/component/scrollbar/skin_chat/track.png";
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			decrement = temp;
+			temp.name = "decrement";
+			temp.left = 0;
+			temp.styleClass = org.mokylin.skin.component.scrollbar.skin_chat.button.ScrollBarSkin_decre;
+			temp.top = 0;
 			return temp;
 		}
 
-		private function __ScrollBarSkin_chat_UIAsset1_i():feathers.controls.UIAsset
+		private function increment_i():feathers.controls.Button
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__ScrollBarSkin_chat_UIAsset1 = temp;
-			temp.styleName = "ui/component/scrollbar/skin_chat/decre_down.png";
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			increment = temp;
+			temp.name = "increment";
+			temp.bottom = 0;
+			temp.left = 0;
+			temp.styleClass = org.mokylin.skin.component.scrollbar.skin_chat.button.ScrollBarSkin_incre;
 			return temp;
 		}
 
-		private function __ScrollBarSkin_chat_UIAsset2_i():feathers.controls.UIAsset
+		private function thumb_i():feathers.controls.Button
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__ScrollBarSkin_chat_UIAsset2 = temp;
-			temp.styleName = "ui/component/scrollbar/skin_chat/decre_over.png";
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			thumb = temp;
+			temp.name = "thumb";
+			temp.left = 0;
+			temp.styleClass = org.mokylin.skin.component.scrollbar.skin_chat.button.ScrollBarSkin_thumb;
+			temp.top = 13;
 			return temp;
 		}
 
-		private function __ScrollBarSkin_chat_UIAsset3_i():feathers.controls.UIAsset
+		private function track_i():feathers.controls.Button
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__ScrollBarSkin_chat_UIAsset3 = temp;
-			temp.styleName = "ui/component/scrollbar/skin_chat/decre_up.png";
-			return temp;
-		}
-
-		private function __ScrollBarSkin_chat_UIAsset4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__ScrollBarSkin_chat_UIAsset4 = temp;
-			temp.styleName = "ui/component/scrollbar/skin_chat/incre_down.png";
-			return temp;
-		}
-
-		private function __ScrollBarSkin_chat_UIAsset5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__ScrollBarSkin_chat_UIAsset5 = temp;
-			temp.styleName = "ui/component/scrollbar/skin_chat/incre_over.png";
-			return temp;
-		}
-
-		private function __ScrollBarSkin_chat_UIAsset6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__ScrollBarSkin_chat_UIAsset6 = temp;
-			temp.styleName = "ui/component/scrollbar/skin_chat/incre_up.png";
-			return temp;
-		}
-
-		private function __ScrollBarSkin_chat_UIAsset7_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__ScrollBarSkin_chat_UIAsset7 = temp;
-			temp.styleName = "ui/component/scrollbar/skin_chat/thumb_down.png";
-			return temp;
-		}
-
-		private function __ScrollBarSkin_chat_UIAsset8_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__ScrollBarSkin_chat_UIAsset8 = temp;
-			temp.styleName = "ui/component/scrollbar/skin_chat/thumb_over.png";
-			return temp;
-		}
-
-		private function __ScrollBarSkin_chat_UIAsset9_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__ScrollBarSkin_chat_UIAsset9 = temp;
-			temp.styleName = "ui/component/scrollbar/skin_chat/thumb_up.png";
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			track = temp;
+			temp.name = "track";
+			temp.bottom = 12;
+			temp.left = 6;
+			temp.styleClass = org.mokylin.skin.component.scrollbar.skin_chat.button.ScrollBarSkin_track;
+			temp.top = 12;
 			return temp;
 		}
 

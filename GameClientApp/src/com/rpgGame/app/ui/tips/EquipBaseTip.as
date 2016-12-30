@@ -11,11 +11,11 @@ package com.rpgGame.app.ui.tips
 	public class EquipBaseTip extends SkinUI
 	{
 		private var spriteStatVector : Vector.<EquipStatItem>;
-		private var skin : EquipTipsSkin;
+		private var skin : Object;//EquipTipsSkin;
 		public function EquipBaseTip()
 		{
 			spriteStatVector = new Vector.<EquipStatItem>();
-			skin = new EquipTipsSkin();
+//			skin = new EquipTipsSkin();
 			super(skin);
 		}
 		

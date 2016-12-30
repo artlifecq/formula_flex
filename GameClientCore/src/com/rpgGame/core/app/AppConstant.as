@@ -74,7 +74,7 @@ package com.rpgGame.core.app
 		/** 查看面板*/
 		public static var LOOK_PANEL:String = createAppInfo("look.LookPanel","look");
 		/** 背包面板 **/
-		public static var BACK_PACK_PANEL:String = createAppInfo("backpack.BackpackPanel","backpack");
+		public static var BACK_PACK_PANEL:String = createAppInfo("bag.BagPanel","beibao");
 		public static var STORAGE_PANEL:String = createAppInfo("storage.StoragePanel");
 		public static var RELIVE_PANEL:String = createAppInfo( "relive.RelivePanel","relive");
 		

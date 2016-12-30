@@ -9,11 +9,11 @@ package com.rpgGame.app.ui.tips
 	
 	public class PKModeTip extends SkinUI implements ITip
 	{
-		private var _pkTip:PKModeTipSkin;
+		private var _pkTip:Object;//PKModeTipSkin;
 		private var _type:int;
 		public function PKModeTip()
 		{
-			_pkTip = new PKModeTipSkin();
+//			_pkTip = new PKModeTipSkin();
 			super( _pkTip );
 			initTip()
 		}

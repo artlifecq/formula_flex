@@ -69,7 +69,7 @@ package com.rpgGame.app.manager.scene
 
 			DailyResetManager.setup();
 			//答题
-			DaTiManager.setup();
+//			DaTiManager.setup();
 			//国战预告
 //			CountryWarForeShowManager.setup();
 //			CountryWarPrepareManager.setup();

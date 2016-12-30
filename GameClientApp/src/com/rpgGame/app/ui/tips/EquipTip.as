@@ -29,7 +29,7 @@ package com.rpgGame.app.ui.tips
 	 */	
 	public class EquipTip extends SkinUI implements ITip
 	{
-		private var _itemTip:EquipTipsSkin;
+		private var _itemTip:Object;//EquipTipsSkin;
 		private const lineHeight:int=20;
 //		private const MIN_STAT:Array=[StatType.PHYSICAL_ATTACK_LOWER, StatType.MAGICAL_ATTACK_LOWER];//10,13
 //		private const MAX_STAT:Array=[StatType.PHYSICAL_ATTACK_UPPER, StatType.MAGICAL_ATTACK_UPPER];//11,14
@@ -61,7 +61,7 @@ package com.rpgGame.app.ui.tips
 
 		public function EquipTip()
 		{
-			_itemTip=new EquipTipsSkin();
+//			_itemTip=new EquipTipsSkin();
 			super(_itemTip);
 			initTip();
 		}
@@ -329,11 +329,11 @@ import starling.display.Sprite;
  */
 class StatLine extends SpriteStatLine
 {
-	public var skin:EquipGeneralStatLineSkin;
+	public var skin:Object;//EquipGeneralStatLineSkin;
 
 	public function StatLine()
 	{
-		skin=new EquipGeneralStatLineSkin();
+//		skin=new EquipGeneralStatLineSkin();
 		super(skin);
 	}
 

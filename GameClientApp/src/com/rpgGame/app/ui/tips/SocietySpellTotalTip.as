@@ -27,12 +27,12 @@ package com.rpgGame.app.ui.tips
 			return _instance;
 		}
 
-		private var _tipSkin : SocietySpellTotalTipSkin;
+		private var _tipSkin : Object;//SocietySpellTotalTipSkin;
 		private var _posy : int = 0;
 
 		public function SocietySpellTotalTip()
 		{
-			_tipSkin = new SocietySpellTotalTipSkin();
+//			_tipSkin = new SocietySpellTotalTipSkin();
 			super(_tipSkin);
 			initTip();
 		}

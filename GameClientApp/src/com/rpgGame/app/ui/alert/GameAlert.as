@@ -42,16 +42,16 @@ package com.rpgGame.app.ui.alert
 			switch (type)
 			{
 				case AlertTypeEnum.ALERT_TYPE_OK:
-					skin = new AlertOkSkin();
+					//skin = new AlertOkSkin();
 					break;
 				case AlertTypeEnum.ALERT_TYPE_OK_CANCEL:
-					skin = new AlertSkin();
+					//skin = new AlertSkin();
 					break;
 				case AlertTypeEnum.ALERT_TYPE_TRANSPARENT_OK:
-					skin = new AlertTransparentOkSkin();
+					//skin = new AlertTransparentOkSkin();
 					break;
 				case AlertTypeEnum.ALERT_TYPE_TRANSPARENT_OK_CANCEL:
-					skin = new AlertTransparentOkCancelSkin();
+					//skin = new AlertTransparentOkCancelSkin();
 					break;
 			}
 			super(skin);

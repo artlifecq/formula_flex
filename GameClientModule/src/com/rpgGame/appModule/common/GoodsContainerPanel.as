@@ -28,6 +28,7 @@ package com.rpgGame.appModule.common
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat;
 	import org.mokylin.skin.mainui.chat.VScrollBarChatSkin;
 	
 	import starling.core.Starling;
@@ -108,7 +109,7 @@ package com.rpgGame.appModule.common
 			gridList.verticalScrollBarPosition = "right";
 			gridList.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			gridList.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
-			GuiThemeStyle.setScrollerStyle(gridList, org.mokylin.skin.mainui.chat.VScrollBarChatSkin);
+			GuiThemeStyle.setScrollerStyle(gridList, org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat);
 		}
 		
 		/**

@@ -1,5 +1,6 @@
 package com.rpgGame.app.manager.chat
 {
+    import com.rpgGame.app.manager.shell.ShellManager;
 	import com.gameClient.utils.StringFilter;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -485,7 +486,11 @@ package com.rpgGame.app.manager.chat
 		 */
 		public static function sendGMMsg(msg : String) : Boolean
 		{
-			ShellManager.parse(msg);return false;
+            CONFIG::Debug {
+                if (ShellManager.parse(msg)) {
+                    return true;
+                }
+            }
 			//验证gm命令
 			var isGm : Boolean = isGmMsg(msg);
 			if (isGm)

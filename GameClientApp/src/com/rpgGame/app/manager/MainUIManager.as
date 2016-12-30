@@ -74,12 +74,12 @@ package com.rpgGame.app.manager
 
 		public static function showTaskBar() : void
 		{
-			mainui.showTaskBar();
+			//mainui.showTaskBar();
 		}
 
 		public static function hideTaskBar() : void
 		{
-			mainui.hideTaskBar();
+			//mainui.hideTaskBar();
 		}
 	}
 }

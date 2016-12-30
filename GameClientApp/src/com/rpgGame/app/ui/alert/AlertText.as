@@ -21,12 +21,12 @@ package com.rpgGame.app.ui.alert
 	 */	
 	public class AlertText extends SkinUIPanel
 	{
-		public var skin : AlertTextSkin;
+		public var skin : Object;//AlertTextSkin;
 		public var closeFun : Function;//抛出text
 		public var okFun : Function;//抛出text
 		public function AlertText()
 		{
-			skin =new AlertTextSkin();
+			//skin =new AlertTextSkin();
 			skin.text.addEventListener(Event.CHANGE,onTextChange);
 			super(skin);
 			model = true;

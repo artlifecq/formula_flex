@@ -260,7 +260,7 @@ package com.rpgGame.app.utils
 					if(FriendManager.checkIsFriend(heroId))
 					{
 						ChatWindowManager.addWindowChatTargetId(heroId,heroName);
-						ChatWindowPanel.instance.showChatWindow(heroId);
+//						ChatWindowPanel.instance.showChatWindow(heroId);
 					}
 					else
 					{

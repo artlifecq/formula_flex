@@ -9,7 +9,7 @@ package com.rpgGame.app.ui.tips
 	
 	public class BaseTip extends Sprite
 	{
-		private var tipBGSkin:BaseTipsSkin;
+		private var tipBGSkin:Object;//BaseTipsSkin;
 		
 		public function BaseTip()
 		{
@@ -25,7 +25,7 @@ package com.rpgGame.app.ui.tips
 		
 		private function createBg():void
 		{
-			tipBGSkin = new BaseTipsSkin();
+//			tipBGSkin = new BaseTipsSkin();
 			addChild( tipBGSkin.imgBG );
 		}
 		

@@ -12,10 +12,10 @@ package com.rpgGame.app.ui.alert
 	
 	public class DungeonRelivePanel extends SkinUIPanel
 	{
-		private var skin : DungeonRelivePanelSkin;
+		private var skin : Object;//DungeonRelivePanelSkin;
 		public function DungeonRelivePanel()
 		{
-			skin = new DungeonRelivePanelSkin();
+			//skin = new DungeonRelivePanelSkin();
 			model = true;
 			super(skin);
 		}

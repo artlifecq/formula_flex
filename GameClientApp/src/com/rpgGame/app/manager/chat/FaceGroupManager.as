@@ -30,13 +30,13 @@ package com.rpgGame.app.manager.chat
 			return _instance;
 		}
 		
-		private var _faceGroup : FaceGroup;
+		private var _faceGroup : Object;//FaceGroup;
 		
 		private var _touchFun:Function;
 
 		private function initFaceGroup():void
 		{
-			_faceGroup = new FaceGroup();
+//			_faceGroup = new FaceGroup();
 			if(_needShow)
 				showGroup();
 			_isInit = true;

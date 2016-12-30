@@ -99,16 +99,16 @@ package com.rpgGame.app.view.icon
 			switch(_qualityId)
 			{
 				case Quality.BLUE:
-					_quality.styleClass = UIMovieClipLv;
+//					_quality.styleClass = UIMovieClipLv;
 					break;
 				case Quality.YELLOW:
-					_quality.styleClass = UIMovieClipLan;
+//					_quality.styleClass = UIMovieClipLan;
 					break;
 				case Quality.GREEN:
-					_quality.styleClass = UIMovieClipZi;
+//					_quality.styleClass = UIMovieClipZi;
 					break;
 				case Quality.PURPLE:
-					_quality.styleClass = UIMovieClipCheng;
+//					_quality.styleClass = UIMovieClipCheng;
 					break;
 			}
 			if(_quality)

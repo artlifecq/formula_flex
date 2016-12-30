@@ -30,12 +30,12 @@ package com.rpgGame.app.ui.tips
 			return _instance;
 		}
 
-		private var _tipSkin : MapAreaTipSkin;
+		private var _tipSkin : Object;//MapAreaTipSkin;
 		private var _posy : int = 0;
 
 		public function MapAreaTip()
 		{
-			_tipSkin = new MapAreaTipSkin();
+//			_tipSkin = new MapAreaTipSkin();
 			super(_tipSkin);
 			initTip();
 		}
