@@ -150,7 +150,7 @@ package com.rpgGame.app.ui.main.shortcut
 						//已经设置了那么就取消
 						MainRoleManager.actorInfo.spellList.removeAutoSpell(shortcutData.id);
 
-						if (spellProto && spellProto.is_allow_auto_combat)
+						if (spellProto && spellProto.q_is_allow_auto_combat)
 							cd.showAutoImg(true);
 						else
 							cd.showAutoImg(false);
@@ -158,7 +158,7 @@ package com.rpgGame.app.ui.main.shortcut
 						return;
 					}
 
-					if (spellProto && spellProto.is_allow_auto_combat) //如果这个技能可以设置成自动释放技能就设置它
+					if (spellProto && spellProto.q_is_allow_auto_combat) //如果这个技能可以设置成自动释放技能就设置它
 					{
 						var reqSetted : Boolean = MainRoleManager.actorInfo.spellList.reqAutoSpellMsg(shortcutData.id);
 						if (reqSetted)
@@ -219,7 +219,7 @@ package com.rpgGame.app.ui.main.shortcut
 					}
 					else
 					{
-						if (skillData.is_allow_auto_combat)
+						if (skillData.q_is_allow_auto_combat)
 							grid.showAutoImg(true);
 						else
 							grid.showAutoImg(false);

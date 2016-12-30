@@ -126,6 +126,12 @@ package com.rpgGame.app.manager.chat
 			var language : Object = LanguageConfig.getLanguage(langType, textArgs);
 			var msg : String = language.value;
 			trace(msg);
+			
+			if(msg.indexOf("未知原因0") != -1)
+			{
+				trace(1);
+			}
+				
 			var type : String = language.type;
 			var showTimes : int = language.showTimes;
 			if (type == "" || type == null)

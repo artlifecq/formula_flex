@@ -26,16 +26,21 @@ package com.rpgGame.app.state.role.action
 	{
 		private var _stateReference : BlinkStateReference;
 		private var _statusType : String;
+		
 		private var _totalFrameTime : int;
 		private var _breakFrameTime : int;
+		
 		private var _totalFrameTween : TweenLite;
 		private var _breakFrameTween : TweenLite;
 		private var _soarFrameTween : TweenLite;
 		private var _nextSoarFrameTween : TweenLite;
+		
 		private var _isFixedFrame : Boolean;
+		
 		private var _totalTime : int;
 		private var _throwDelayTime : int;
 		private var _soarFrameTime : int;
+		
 		private var _blinkFinished : Boolean;
 		private var _hitFrameTime : int;
 		private var _hitFrameTween : TweenLite;

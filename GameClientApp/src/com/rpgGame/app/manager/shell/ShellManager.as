@@ -109,7 +109,7 @@ package com.rpgGame.app.manager.shell
             var plane:Plane3D = new Plane3D(0,Math.cos(_angle), -Math.sin(_angle));
             SceneManager.getScene().sceneMapLayer.view3DAsset.cameraMode2DAngle = angle;
             Scene.scene.directionalLight.planarShadowPlane = plane;
-            PlanarContainer3D.planarRotationX = -angle;
+            PlanarContainer3D.updatePlanarRotation(-angle);
         }
         
         private function show() : void {

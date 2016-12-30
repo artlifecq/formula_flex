@@ -42,6 +42,11 @@ package com.rpgGame.app.fight.spell
 		
 		private static var knifeLightObjID : int = 1;
 		
+		/**
+		 * 加刀光特效 ，施法特效。
+		 * @param info
+		 * 
+		 */		
 		public static function addKnifeLightEffect(info : ReleaseSpellInfo) : void
 		{
 			if (SceneManager.isSceneOtherRenderLimit)
@@ -105,7 +110,11 @@ package com.rpgGame.app.fight.spell
 		}
 		
 		private static var selfEffectObjID : int = 1;
-		
+		/**
+		 * 在角色身上加特效 
+		 * @param info
+		 * 
+		 */		
 		public static function addSelfEffect(info : ReleaseSpellInfo) : void
 		{
 			if (SceneManager.isSceneOtherRenderLimit)
@@ -227,7 +236,21 @@ package com.rpgGame.app.fight.spell
 			}
 		}
 		
-		public static function addTargetEffect(target : SceneRole, renderId : int, renderType : String, effectRes : String, bindBone : String = null, repeat : int = 1, offset : Vector3D = null, needInView : Boolean = true, sizeScale : Number = 1) : void
+		/**
+		 * 为目标角色添加特效 
+		 * @param target
+		 * @param renderId
+		 * @param renderType
+		 * @param effectRes
+		 * @param bindBone
+		 * @param repeat
+		 * @param offset
+		 * @param needInView
+		 * @param sizeScale
+		 * 
+		 */		
+		public static function addTargetEffect(target : SceneRole, renderId : int, renderType : String, effectRes : String, bindBone : String = null, 
+											   repeat : int = 1, offset : Vector3D = null, needInView : Boolean = true, sizeScale : Number = 1) : void
 		{
 			if (target == null || !target.usable || (needInView && !target.isInViewDistance))
 				return;
@@ -254,7 +277,20 @@ package com.rpgGame.app.fight.spell
 			}
 		}
 		
-		public static function addBuffEffect(target : SceneRole, renderId : int, renderType : String, effectRes : String, bindBone : String = null, repeat : int = 1, offset : Vector3D = null, needInView : Boolean = true) : void
+		/**
+		 * 为目标角色添加buff相关特效 
+		 * @param target
+		 * @param renderId
+		 * @param renderType
+		 * @param effectRes
+		 * @param bindBone
+		 * @param repeat
+		 * @param offset
+		 * @param needInView
+		 * 
+		 */		
+		public static function addBuffEffect(target : SceneRole, renderId : int, renderType : String, effectRes : String, bindBone : String = null,
+											 repeat : int = 1, offset : Vector3D = null, needInView : Boolean = true) : void
 		{
 			if (target == null || !target.usable || (needInView && !target.isInViewDistance))
 				return;
@@ -292,7 +328,13 @@ package com.rpgGame.app.fight.spell
 		}
 		
 		private static var hurtEffectObjID : int = 1;
-		
+		/**
+		 * 为目标角色添加受伤特效 
+		 * @param targetRole
+		 * @param info
+		 * @param animatData
+		 * 
+		 */		
 		public static function addTargetHurtEffect(targetRole : SceneRole, info : ReleaseSpellInfo, animatData : Q_SpellAnimation) : void
 		{
 			if (SceneManager.isSceneOtherRenderLimit)

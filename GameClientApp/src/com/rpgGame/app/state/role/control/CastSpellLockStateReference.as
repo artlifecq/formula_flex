@@ -1,7 +1,7 @@
 package com.rpgGame.app.state.role.control
 {
 	import com.game.engine3D.state.role.RoleStateReference;
-	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 
 	/**
 	 *
@@ -12,26 +12,26 @@ package com.rpgGame.app.state.role.control
 	 */
 	public class CastSpellLockStateReference extends RoleStateReference
 	{
-		private var _spellEffectData : Q_SpellEffect;
+		private var _spellData : Q_skill_model;
 
 		public function CastSpellLockStateReference()
 		{
 			super();
 		}
 
-		public function setParams(spellEffectData : Q_SpellEffect) : void
+		public function setParams(spellData : Q_skill_model) : void
 		{
-			_spellEffectData = spellEffectData;
+			_spellData = spellData;
 		}
 
-		public function get spellEffectData() : Q_SpellEffect
+		public function get spellData() : Q_skill_model
 		{
-			return _spellEffectData;
+			return _spellData;
 		}
 
 		override public function dispose() : void
 		{
-			_spellEffectData = null;
+			_spellData = null;
 			super.dispose();
 		}
 	}

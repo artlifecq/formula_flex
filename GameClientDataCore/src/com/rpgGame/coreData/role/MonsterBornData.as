@@ -32,7 +32,7 @@ package com.rpgGame.coreData.role
 			this.name = data.q_name;
 			this.monsterType = data.q_monster_type;
 			this.showInSmallMapType = data.q_isminimap;
-			this.level = data.q_grade;
+//			this.level = data.q_grade;
 			var monsterPos : Point = MonsterDataManager.getMonsterPositionByCfgID(data.q_id);
 			this.x = monsterPos.x;
 			this.y = monsterPos.y;

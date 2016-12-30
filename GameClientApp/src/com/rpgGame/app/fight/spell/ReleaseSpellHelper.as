@@ -103,6 +103,12 @@ package com.rpgGame.app.fight.spell
 			SpellAnimationHelper.addDestEffect(ref.targetRolePos.x, ref.targetRolePos.y, ref.angle, ref.spellInfo);
 		}
 
+		/**
+		 * 为位移技能类，提供的接口 
+		 * @param attackStateRef
+		 * @return 
+		 * 
+		 */		
 		private static function doBlink(attackStateRef : AttackStateReference) : Boolean
 		{
 			var spellInfo : ReleaseSpellInfo = attackStateRef.spellInfo;
@@ -111,7 +117,8 @@ package com.rpgGame.app.fight.spell
 			{
 				if (spellInfo.blinkType > 0)
 				{
-					RoleStateUtil.blinkToPos(spellInfo.atkor, attackStateRef.statusType, spellInfo.atkorPos, spellInfo.targetPos, spellInfo.blinkSpeed, spellInfo.blinkHeight, spellInfo.soarFrameTime, spellInfo.hitFrameTime, spellInfo.breakFrameTime, spellInfo);
+					RoleStateUtil.blinkToPos(spellInfo.atkor, attackStateRef.statusType, spellInfo.atkorPos, spellInfo.targetPos, spellInfo.blinkSpeed, spellInfo.blinkHeight, 
+						spellInfo.soarFrameTime, spellInfo.hitFrameTime, spellInfo.breakFrameTime, spellInfo);
 					return true;
 				}
 			}

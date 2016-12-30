@@ -16,6 +16,26 @@ package com.game.engine3D.core.poolObject
 	{
 		private static var _pool : Pool = new Pool("PoolContainer3D", 600);
 		private static var _cnt : int = 0;
+		
+		override public function get z() : Number
+		{
+			return super.y;
+		}
+		
+		override public function set z(value : Number) : void
+		{
+			super.y = value;
+		}
+		
+		override public function get y() : Number
+		{
+			return super.z;
+		}
+		
+		override public function set y(value : Number) : void
+		{
+			super.z = value;
+		}
 
 		public static function create() : PoolContainer3D
 		{

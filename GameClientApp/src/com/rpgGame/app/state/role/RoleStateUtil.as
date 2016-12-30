@@ -333,7 +333,8 @@ package com.rpgGame.app.state.role
 			(ref.owner as SceneRole).stateMachine.transition(RoleStateType.ACTION_BEAT_BACK);
 		}
 
-		public static function blinkToPos(role : SceneRole, statusType : String, atkorPos : Point, targetPos : Point, speed : int, blinkHeight : int, soarFrameTime : int, hitFrameTime : int, breakFrameTime : int, spellInfo : ReleaseSpellInfo) : void
+		public static function blinkToPos(role : SceneRole, statusType : String, atkorPos : Point, targetPos : Point, speed : int, blinkHeight : int, 
+										  soarFrameTime : int, hitFrameTime : int, breakFrameTime : int, spellInfo : ReleaseSpellInfo) : void
 		{
 			var moveRef : BlinkMoveStateReference = role.stateMachine.getReference(BlinkMoveStateReference) as BlinkMoveStateReference;
 			moveRef.setParams(atkorPos, targetPos, speed, blinkHeight, soarFrameTime, hitFrameTime, breakFrameTime, spellInfo);

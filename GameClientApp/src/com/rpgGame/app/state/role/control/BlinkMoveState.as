@@ -9,7 +9,7 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SpellBlinkType;
-
+	
 	import gs.TweenLite;
 	import gs.easing.Cubic;
 	import gs.easing.Linear;
@@ -43,7 +43,7 @@ package com.rpgGame.app.state.role.control
 					if (_ref is BlinkMoveStateReference)
 					{
 						_stateReference = _ref as BlinkMoveStateReference;
-						_ghostEffect = true;//_stateReference.spellInfo.ghostEffect;
+						_ghostEffect = _stateReference.spellInfo.ghostEffect;
 						doBlink(_stateReference.spellInfo);
 					}
 					else
@@ -84,9 +84,39 @@ package com.rpgGame.app.state.role.control
 				case SpellBlinkType.TIAO_PI:
 					doTiaoPi();
 					break;
+				case SpellBlinkType.DODGE:
+					doDodge();
+					break;
 				default:
 					break;
 			}
+		}
+		
+		private function doDodge():void
+		{
+			(_machine.owner as SceneRole).avatar.forEachRenderUnit(function(render : RenderUnit3D) : void
+			{
+				switch (render.type)
+				{
+					case RenderUnitType.BODY:
+					case RenderUnitType.HAIR:
+					case RenderUnitType.WEAPON:
+					case RenderUnitType.DEPUTY_WEAPON:
+					case RenderUnitType.MOUNT:
+						render.entityPhantom = _ghostEffect;
+						break;
+				}
+			});
+			
+			(_machine.owner as SceneRole).turnRoundTo(_stateReference.angle, 0);
+			var targetX : int = _stateReference.targetPos.x;
+			var targetZ : int = _stateReference.targetPos.y;
+			_stateReference.move();
+			var totalTime : int = _stateReference.totalTime;
+			if (totalTime > 0)
+				TweenLite.to(_machine.owner as SceneRole, totalTime * 0.001, {x: targetX, z: targetZ, ease: Linear.easeNone, overwrite: 0, onComplete: onMoveComplete});
+			else
+				onMoveComplete();
 		}
 
 		private function doChongFeng() : void

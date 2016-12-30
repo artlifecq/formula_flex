@@ -18,12 +18,17 @@ package com.rpgGame.app.state.role.action
 		private var _targetRolePos : Point;
 		private var _angle : int;
 		private var _statusType : String;
+		
 		private var _soarFrameTime : int;
 		private var _hitFrameTime : int;
 		private var _throwFrameTime : int;
+		/**
+		 * 攻速--暂时还没有启用，等后面有了这个属性，再启用 
+		 */		
 		private var _speed : Number;
 		private var _castTime : int;
 		private var _releaseEndHard : int;
+		
 		private var _hitFrameFunc : Function;
 		private var _breakFrameFunc : Function;
 		private var _totalFrameFunc : Function;

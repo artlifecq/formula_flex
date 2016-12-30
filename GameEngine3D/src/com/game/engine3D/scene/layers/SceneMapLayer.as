@@ -57,6 +57,8 @@ package com.game.engine3D.scene.layers
 	import away3d.primitives.SkyBox;
 	import away3d.weather.Weather;
 	
+	import feathers.core.ui_internal;
+	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
 
@@ -312,7 +314,7 @@ package com.game.engine3D.scene.layers
 						}
 						if (_view3DAsset && _view3DAsset.cameraMode2D && GlobalConfig.transformPlanarRotation)
 						{
-							(obj as ObjectContainer3D).z = PlanarContainer3D.transformPlanarRotation((obj as ObjectContainer3D).y);
+							(obj as ObjectContainer3D).z = GlobalConfig.transform2dValue((obj as ObjectContainer3D).y);
 //							trace(obj.name + "      ******************      "  + (obj as ObjectContainer3D).z);
 						}
 						break;
@@ -328,7 +330,7 @@ package com.game.engine3D.scene.layers
 						}
 						if (_view3DAsset && _view3DAsset.cameraMode2D && GlobalConfig.transformPlanarRotation)
 						{
-							(obj as ObjectContainer3D).z = PlanarContainer3D.transformPlanarRotation((obj as ObjectContainer3D).y) + (obj as ObjectContainer3D).parent.z;
+							(obj as ObjectContainer3D).z = GlobalConfig.transform2dValue((obj as ObjectContainer3D).y) + (obj as ObjectContainer3D).parent.z;
 						}
 						break;
 					case AssetType.SKYBOX:
@@ -399,7 +401,8 @@ package com.game.engine3D.scene.layers
 						Away3D.LOD_SCOPES = view3DAsset.lodScopes;
 						if (view3DAsset.cameraMode2D)
 						{
-							PlanarContainer3D.planarRotationX = -view3DAsset.cameraMode2DAngle;
+							GlobalConfig.mapCameraAngle = -view3DAsset.cameraMode2DAngle;
+							PlanarContainer3D.updatePlanarRotation(GlobalConfig.mapCameraAngle);
 						}
 						_view3DAsset = view3DAsset;
 						break;
@@ -499,7 +502,7 @@ package com.game.engine3D.scene.layers
 				}
 				else if (_view3DAsset && _view3DAsset.cameraMode2D && GlobalConfig.transformPlanarRotation)
 				{
-					m.z = PlanarContainer3D.transformPlanarRotation(m.y);
+					m.z = GlobalConfig.transform2dValue(m.y);
 //					trace(m.name + "   " + m.zOffset + "   z   " + m.z);
 				}
 			}

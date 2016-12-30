@@ -8,12 +8,14 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.cfg.SpellEffectDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
 	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.info.buff.BuffInfo;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.info.fight.FightSingleHurt;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.fight.bean.AttackResultInfo;
 	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
+	import com.rpgGame.netData.fight.message.ResAttackVentToClientMessage;
 	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
 	
 	import flash.geom.Point;
@@ -47,9 +49,9 @@ package com.rpgGame.app.fight.spell
 			{
 				info = new ReleaseSpellInfo();
 			}
-			if(msg is ResFightBroadcastMessage)
+			if(msg is ResFightBroadcastMessage || msg is ResAttackVentToClientMessage)
 			{
-				info.readFrom(flySceneObjID, msg as ResFightBroadcastMessage);
+				info.readFrom(flySceneObjID, msg);
 			}
 			else if(msg is ResAttackResultMessage)
 			{
@@ -95,6 +97,8 @@ package com.rpgGame.app.fight.spell
 			return info && !info.motionFinish;
 		}
 
+		private var _spellData:Q_skill_model;
+		
 		private var _spellEffectID : int = 0; //技能表现形式ID
 		private var _releaseAngle : int = 0;
 		private var _attackSpeed : int = 0;
@@ -194,71 +198,76 @@ package com.rpgGame.app.fight.spell
 		 * @param msg
 		 * 
 		 */		
-		public function readFrom(flySceneObjID : int, msg : ResFightBroadcastMessage) : void
+		public function readFrom(flySceneObjID : int, msg : Message) : void
 		{
 			_flySceneObjID = flySceneObjID;//
 			
-			_spellEffectID = SpellDataManager.getSpellEffectID(msg.skillModelId);
-			_releaseAngle = msg.fightDirection;
-			_releaseAngle = (_releaseAngle + 270) % 360;
-			
-			_atkorID = msg.personId.ToGID();
-			if (_atkorID > 0)
+			if(msg is ResFightBroadcastMessage)
 			{
-				_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
-				if (_atkor && !_atkor.usable)
-					_atkor = null;
+				var fightTargetMsg:ResFightBroadcastMessage = msg as ResFightBroadcastMessage;
+				_spellData = SpellDataManager.getSpellData(fightTargetMsg.skillModelId);
+				
+				_releaseAngle = fightTargetMsg.fightDirection;
+				_releaseAngle = (_releaseAngle + 270) % 360;
+				
+				_atkorID = fightTargetMsg.personId.ToGID();
+				if (_atkorID > 0)
+				{
+					_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
+					if (_atkor && !_atkor.usable)
+						_atkor = null;
+				}
+				
+				_targetID = fightTargetMsg.fightTarget.ToGID();
+				if (_targetID > 0)
+				{
+					_targetRole = SceneManager.getSceneObjByID(_targetID) as SceneRole;
+					if (_targetRole && !_targetRole.usable)
+						_targetRole = null;
+				}
+				
+				_atkorPos = new Point(_atkor.x, _atkor.y);
+				_targetPos = new Point(_targetRole.x, _targetRole.y);
+			}
+			else if(msg is ResAttackVentToClientMessage)
+			{
+				var fightPosMsg:ResAttackVentToClientMessage = msg as ResAttackVentToClientMessage;
+				_spellData = SpellDataManager.getSpellData(fightPosMsg.fightType);
+				
+				_releaseAngle = fightPosMsg.fightDirection;
+				_releaseAngle = (_releaseAngle + 270) % 360;
+				
+				_atkorID = fightPosMsg.playerid.ToGID();
+				if (_atkorID > 0)
+				{
+					_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
+					if (_atkor && !_atkor.usable)
+						_atkor = null;
+				}
+				
+				_atkorPos = new Point(_atkor.x, _atkor.y);
+				_targetPos = new Point(fightPosMsg.pos.x, -fightPosMsg.pos.y);
 			}
 			
-			_targetID = msg.fightTarget.ToGID();
-			if (_targetID > 0)
-			{
-				_targetRole = SceneManager.getSceneObjByID(_targetID) as SceneRole;
-				if (_targetRole && !_targetRole.usable)
-					_targetRole = null;
-			}
-			
-			_atkorPos = new Point(_atkor.x, _atkor.y);
-//			_targetPos = new Point(targetX, targetY); 不知道怎么定
-			
-//			_spellEffectID = buffer.readVarint32();
-//			_releaseAngle = buffer.readVarint32();
-//			_releaseAngle = (_releaseAngle + 270) % 360;
-			//_attackSpeed = buffer.readVarint64();
-//			_atkorID = buffer.readVarint64();
-//			var atkorX : int = buffer.readVarint32();
-//			var atkorY : int = buffer.readVarint32();
-//			_targetID = buffer.readVarint64();
-//			var targetX : int = buffer.readVarint32();
-//			var targetY : int = buffer.readVarint32();
-//			_atkorPos = new Point(atkorX, atkorY);
-//			_targetPos = new Point(targetX, targetY);
-			
-//			if (_atkorID > 0)
-//			{
-//				_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
-//				if (_atkor && !_atkor.usable)
-//					_atkor = null;
-//			}
-//			if (_targetID > 0)
-//			{
-//				_targetRole = SceneManager.getSceneObjByID(_targetID) as SceneRole;
-//				if (_targetRole && !_targetRole.usable)
-//					_targetRole = null;
-//			}
-
+			readSpellEffectData(_spellData.q_spell_effect);
+		}
+		
+		private function readSpellEffectData(spellEffectID:int):void
+		{
+			_spellEffectID = spellEffectID;
 			_spellEffectData = SpellEffectDataManager.getData(_spellEffectID);
 			if (_spellEffectData)
 			{
 				//动作.
 				_atkMotion = _spellEffectData.attack_motion;
+				
 				_fromSingleAni = AnimationDataManager.getData(_spellEffectData.cast_animation);
 				_selfAni = AnimationDataManager.getData(_spellEffectData.self_dest_animation);
 				_hurtAnimation = AnimationDataManager.getData(_spellEffectData.hurt_animation);
 				_sputteringHurtAnimation = AnimationDataManager.getData(_spellEffectData.sputtering_hurt_animation);
 				_posSingleAni = AnimationDataManager.getData(_spellEffectData.dest_animation);
 				_passSingleAni = AnimationDataManager.getData(_spellEffectData.fly_animation);
-
+				
 				_caromStartFrameTime = _spellEffectData.carom_start_frame_time;
 				_breakFrameTime = _spellEffectData.break_frame_time;
 				_hitFrameTime = _spellEffectData.hit_frame_time;
@@ -266,26 +275,31 @@ package com.rpgGame.app.fight.spell
 				_hurtDelay = _spellEffectData.hurt_delay;
 				_soarFrameTime = _spellEffectData.soar_frame_time;
 				_throwDelayTime = _spellEffectData.throw_delay_time;
-
+				
 				_castTime = _spellEffectData.cast_time;
-				_blinkType = _spellEffectData.blink_type;
-				_blinkSpeed = _spellEffectData.blink_speed;
-				_blinkHeight = _spellEffectData.blink_height;
-				_beatBackSpeed = _spellEffectData.beat_back_speed;
+				
+				_blinkType = _spellData.q_blink_type;
+				_blinkSpeed = _spellData.q_blink_speed;
+				_blinkHeight = _spellData.q_blink_height;
+				
+				_beatBackSpeed = _spellData.q_beat_back_speed;
+				
 				_ghostEffect = _spellEffectData.ghost_effect;
 				_matchTerrain = false;
-				_canWalkRelease = _spellEffectData.can_walk_release;
-				_deadLaunchHeight = _spellEffectData.dead_launch_height;
-				_deadLaunchDistance = _spellEffectData.dead_launch_distance;
-				_deadLaunchSpeed = _spellEffectData.dead_launch_speed;
-				_deadBeatDistance = _spellEffectData.dead_beat_distance;
-				_deadBeatSpeed = _spellEffectData.dead_beat_speed;
-				_deadBeatProbability = _spellEffectData.dead_beat_probability;
-				_deadLaunchProbability = _spellEffectData.dead_launch_probability;
+				_canWalkRelease = _spellData.q_can_walk_release;
+				
+				_deadLaunchHeight = _spellData.q_dead_launch_height;
+				_deadLaunchDistance = _spellData.q_dead_launch_distance;
+				_deadLaunchSpeed = _spellData.q_dead_launch_speed;
+				_deadBeatDistance = _spellData.q_dead_beat_distance;
+				_deadBeatSpeed = _spellData.q_dead_beat_speed;
+				_deadBeatProbability = _spellData.q_dead_beat_probability;
+				_deadLaunchProbability = _spellData.q_dead_launch_probability;
+				
 				_isTrackTarget = _spellEffectData.is_track_target;
-				_isTrapSpell = _spellEffectData.is_trap_spell;
-				_repeatTimes = _spellEffectData.repeat_times;
-				_repeatInterval = _spellEffectData.repeat_interval;
+				_isTrapSpell = _spellData.q_skill_type == 1;//暂时这么写，因为目前是把地面特效暂时当成陷阱技能
+				_repeatTimes = _spellData.q_skill_time;
+				_repeatInterval = _spellData.q_skill_ground_period;
 				_maxHurtTimes = _spellEffectData.max_hurt_times;
 				_throwHeight = _spellEffectData.throw_height;
 				_throwWeightRatio = _spellEffectData.throw_weight_ratio;
@@ -388,8 +402,8 @@ package com.rpgGame.app.fight.spell
 
 		public function get isFlyCross() : Boolean
 		{
-			if (_spellEffectData)
-				return _spellEffectData.is_fly_cross;
+			if (_spellData)
+				return _spellData.q_is_fly_cross;
 			return false;
 		}
 
@@ -407,8 +421,8 @@ package com.rpgGame.app.fight.spell
 		 */
 		public function get flyTm() : int
 		{
-			if (_spellEffectData)
-				return _spellEffectData.fly_time;
+			if (_spellData)
+				return _spellData.q_fly_time;
 			return 0;
 		}
 
@@ -419,8 +433,8 @@ package com.rpgGame.app.fight.spell
 		 */
 		public function get flySpeed() : int
 		{
-			if (_spellEffectData)
-				return _spellEffectData.fly_speed;
+			if (_spellData)
+				return _spellData.q_fly_speed;
 			return 0;
 		}
 
@@ -503,7 +517,7 @@ package com.rpgGame.app.fight.spell
 
 		public function get blinkType() : int
 		{
-			return 2;//_blinkType;
+			return _blinkType;
 		}
 
 		public function get blinkSpeed() : int
@@ -704,26 +718,51 @@ package com.rpgGame.app.fight.spell
 			return _atkMotion;
 		}
 
+		/**
+		 * 自身动画 
+		 * @return 
+		 * 
+		 */		
 		public function get selfAni() : Q_SpellAnimation
 		{
 			return _selfAni;
 		}
 
+		/**
+		 * 施法动画 
+		 * @return 
+		 * 
+		 */		
 		public function get fromAni() : Q_SpellAnimation
 		{
 			return _fromSingleAni;
 		}
 
+		/**
+		 * 弹道动画 
+		 * @return 
+		 * 
+		 */		
 		public function get passAni() : Q_SpellAnimation
 		{
 			return _passSingleAni;
 		}
 
+		/**
+		 * 被击动画 
+		 * @return 
+		 * 
+		 */		
 		public function get hurtAnimation() : Q_SpellAnimation
 		{
 			return _hurtAnimation;
 		}
 
+		/**
+		 * 溅射被击动画 
+		 * @return 
+		 * 
+		 */		
 		public function get sputteringHurtAnimation() : Q_SpellAnimation
 		{
 			return _sputteringHurtAnimation;
@@ -734,26 +773,51 @@ package com.rpgGame.app.fight.spell
 			return _beatBackSpeed;
 		}
 
+		/**
+		 * 对地动画 
+		 * @return 
+		 * 
+		 */		
 		public function get posAni() : Q_SpellAnimation
 		{
 			return _posSingleAni;
 		}
 
+		/**
+		 * 是否开启幻影 
+		 * @return 
+		 * 
+		 */		
 		public function get ghostEffect() : Boolean
 		{
 			return _ghostEffect;
 		}
 
+		/**
+		 * 是否适配地形 
+		 * @return 
+		 * 
+		 */		
 		public function get matchTerrain() : Boolean
 		{
 			return _matchTerrain;
 		}
 
+		/**
+		 * 是否可以边走边放技能 
+		 * @return 
+		 * 
+		 */		
 		public function get canWalkRelease() : Boolean
 		{
 			return _canWalkRelease;
 		}
 
+		/**
+		 * 攻击速度 
+		 * @return 
+		 * 
+		 */		
 		public function get attackSpeed() : int
 		{
 			return _attackSpeed;

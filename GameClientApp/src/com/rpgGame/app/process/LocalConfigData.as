@@ -2,20 +2,12 @@ package com.rpgGame.app.process
 {
     import com.game.engine3D.process.BaseProcess;
     import com.gameClient.log.GameLog;
-    import com.rpgGame.coreData.cfg.AnimationDataManager;
-    import com.rpgGame.coreData.cfg.SpellEffectDataManager;
-    import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
-    import com.rpgGame.coreData.info.MapDataManager;
-    import com.rpgGame.coreData.type.SpellBlinkType;
     
     import flash.utils.ByteArray;
     
-    import app.message.AnimationConfig;
-    import app.message.AnimationProto;
     import app.message.MonsterConfig;
     import app.message.MonsterDataProto;
     import app.message.SceneProto;
-    import app.message.SpellEffectProto;
     
     public class LocalConfigData extends BaseProcess {
         public function LocalConfigData() {

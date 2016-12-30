@@ -1,5 +1,6 @@
 package com.rpgGame.app.sender
 {
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
 	import com.rpgGame.netData.fight.message.CSPerformPosSkillMessage;
 	import com.rpgGame.netData.fight.message.CSPerformTargetSkillMessage;
@@ -60,6 +61,7 @@ package com.rpgGame.app.sender
 			msg.x = x;
 			msg.y = y;
 			SocketConnection.send(msg);
+			GameLog.addShow("============================发给服务器的技能点为：\t" + x  + "  _  " +y);
 		}
 		
 		public static function releaseSpellAtTarget(spellID:int,angle:int,targetID:long):void

@@ -345,7 +345,7 @@ package com.game.engine2D.vo
 				_pmPositionDirty = false;
 				_positionHelp.setTo(int(_posValue.x),
 					_posValue.z,
-					GlobalConfig.transformCoord_2d_3d(_posValue.y)
+					/*GlobalConfig.transformCoord_2d_3d(_posValue.y)*/0
 				);
 				this.position = _positionHelp;
 			}
@@ -359,7 +359,7 @@ package com.game.engine2D.vo
 				_posGeometry.setTo(_width, _height);
 				_pmPositionDirty = true;
 				_posGeometryScale.setTo(_width/_geometrySize, 
-					GlobalConfig.transformCoord_2d_3d(_height)/_geometrySize
+					/*GlobalConfig.transformCoord_2d_3d(*/_height/*)*//_geometrySize
 				);
 				if (this.castsShadows)
 				{

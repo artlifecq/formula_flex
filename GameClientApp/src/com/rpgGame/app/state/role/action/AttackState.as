@@ -26,6 +26,9 @@ package com.rpgGame.app.state.role.action
 	public class AttackState extends ActionState
 	{
 		private var _stateReference : AttackStateReference;
+		/**
+		 * 攻速--暂时还没有启用，等后面有了这个属性，再启用 
+		 */		
 		private var _speed : Number = 1;
 		private var _statusType : String;
 		private var _hitFrameTween : TweenLite;
@@ -240,8 +243,8 @@ package com.rpgGame.app.state.role.action
 					var bodyAp : RenderUnit3D = (_machine.owner as SceneRole).avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
 					totalFrameTm = (bodyAp ? bodyAp.totalDuration - _startFrameTime : 200);
 				}
-				//				keyFrameTm /= _speed;
-				//				totalFrameTm /= _speed;
+//				keyFrameTm /= _speed;
+//				totalFrameTm /= _speed;
 				var breakFrameTime : int = (_breakFrameTime > 0 ? _breakFrameTime : totalFrameTm);
 				if (breakFrameTime > totalFrameTm)
 					breakFrameTime = totalFrameTm;

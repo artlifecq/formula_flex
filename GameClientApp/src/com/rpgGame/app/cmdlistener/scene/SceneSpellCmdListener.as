@@ -24,11 +24,8 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
 	import com.rpgGame.netData.fight.message.ResFightFailedBroadcastMessage;
 	
-	import app.cmd.SceneModuleMessages;
-	
 	import org.client.mainCore.bean.BaseBean;
 	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
@@ -51,13 +48,8 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(102101,onResFightBroadcastMessage);
 			SocketConnection.addCmdListener(102102,onResAttackResultMessage);
 			SocketConnection.addCmdListener(102107,onResAttackVentToClientMessage);
-			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			///////////////////////////
-			///////////////////////////  参考协议------
-			///////////////////////////
-			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			//技能相关
-			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_YOUR_SPELL_RELEASED, onYouSpellRelease);
+			
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_YOUR_SPELL_RELEASED, onYouSpellRelease);
 			//
 			finish();
 		}
@@ -240,6 +232,20 @@ package com.rpgGame.app.cmdlistener.scene
 			//			}
 		}
 		
+		private function effectCharAttribute(info : ReleaseSpellInfo) : void
+		{
+			var hurtList : Vector.<FightHurtResult> = info.hurtList;
+			for each (var hurtResult : FightHurtResult in hurtList)
+			{
+				var role : SceneRole = SceneManager.getSceneObjByID(hurtResult.roleID) as SceneRole;
+				if (role && role.usable)
+				{
+					CharAttributeManager.setCharHp(role.data as RoleData, hurtResult.curLife);
+					CharAttributeManager.setCharMp(role.data as RoleData, hurtResult.curMana);
+				}
+			}
+		}
+		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////
 		///////////////////////////  参考协议------
@@ -282,19 +288,7 @@ package com.rpgGame.app.cmdlistener.scene
 			SkillCDManager.getInstance().addSkillCDTime(spellData);
 		}
 		
-		private function effectCharAttribute(info : ReleaseSpellInfo) : void
-		{
-			var hurtList : Vector.<FightHurtResult> = info.hurtList;
-			for each (var hurtResult : FightHurtResult in hurtList)
-			{
-				var role : SceneRole = SceneManager.getSceneObjByID(hurtResult.roleID) as SceneRole;
-				if (role && role.usable)
-				{
-					CharAttributeManager.setCharHp(role.data as RoleData, hurtResult.curLife);
-					CharAttributeManager.setCharMp(role.data as RoleData, hurtResult.curMana);
-				}
-			}
-		}
+		
 		
 		/**
 		 * 触发被动技能，附带varint32类型的技能类型
