@@ -24,7 +24,7 @@ package com.rpgGame.app.manager
 	 */	
 	public class ConsoleApplication extends SkinUI
 	{
-		private var skin:ConsolePanelSkin;
+		private var skin:Object;//ConsolePanelSkin;
 		/** 最大历史记录条数 **/
 		private const MAX_HISTORY:int = 5;
 		/** cmd历史记录数据 **/
@@ -44,7 +44,7 @@ package com.rpgGame.app.manager
 		
 		public function ConsoleApplication()
 		{
-			skin = new ConsolePanelSkin;
+			//skin = new ConsolePanelSkin;
 			super(skin);
 			skin.txtArea.isEditable = false;
 			skin.txtArea.scrollBarDisplayMode = "none";

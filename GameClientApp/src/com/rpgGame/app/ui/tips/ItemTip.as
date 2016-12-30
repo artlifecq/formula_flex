@@ -22,13 +22,13 @@ package com.rpgGame.app.ui.tips
 	 */
 	public class ItemTip extends SkinUI implements ITip
 	{
-		private var _itemTip : ItemTipsSkin;
+		private var _itemTip : Object;//ItemTipsSkin;
 		/** 物品信息类 **/
 		private var _itemInfo : ItemInfo;
 
 		public function ItemTip()
 		{
-			_itemTip = new ItemTipsSkin();
+//			_itemTip = new ItemTipsSkin();
 			super(_itemTip);
 			initTip();
 		}

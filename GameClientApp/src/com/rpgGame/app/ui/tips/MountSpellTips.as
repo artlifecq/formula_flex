@@ -19,7 +19,7 @@ package com.rpgGame.app.ui.tips
 	 */	
 	public class MountSpellTips extends SkinUI implements ITip
 	{
-		private var _skin:MountSpellTipSkin;
+		private var _skin:Object;//MountSpellTipSkin;
 		/** 图标icon **/
 		private var titleIconFace:IconCDFace;
 		/** 坐骑数据 **/
@@ -31,7 +31,7 @@ package com.rpgGame.app.ui.tips
 		 
 		public function MountSpellTips()
 		{
-			_skin = new MountSpellTipSkin();
+//			_skin = new MountSpellTipSkin();
 			super( _skin );
 			initTip();
 		}

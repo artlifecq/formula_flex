@@ -35,7 +35,7 @@ package com.rpgGame.app.ui.tips
 	 */	
 	public class MountTip extends SkinUI implements ITip
 	{
-		private var _mountTip:MountTipSkin;
+		private var _mountTip:Object;//MountTipSkin;
 		/** 图标icon **/
 		private var titleIconFace:IconCDFace;
 		/** 坐骑数据 **/
@@ -47,7 +47,7 @@ package com.rpgGame.app.ui.tips
 		
 		public function MountTip()
 		{
-			_mountTip = new MountTipSkin();
+//			_mountTip = new MountTipSkin();
 			super( _mountTip );
 			initTip();
 		}

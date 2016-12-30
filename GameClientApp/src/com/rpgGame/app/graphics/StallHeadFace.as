@@ -90,17 +90,17 @@ package com.rpgGame.app.graphics
 			switch(stallData.stallType)
 			{
 				case 0:
-					skin = new StallTitleSkin();
+					//skin = new StallTitleSkin();
 					skinWidth = 90;
 					labelX = 20;
 					break;
 				case 1:
-					skin = new StallTitle1Skin();
+					//skin = new StallTitle1Skin();
 					skinWidth = 100;
 					labelX = 20;
 					break;
 				case 2:
-					skin = new StallTitle2Skin();
+					//skin = new StallTitle2Skin();
 					skinWidth = 160;
 					labelX = 60;
 					break;

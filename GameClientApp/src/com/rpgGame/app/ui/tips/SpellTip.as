@@ -28,7 +28,7 @@ package com.rpgGame.app.ui.tips
 	 */	
 	public class SpellTip extends SkinUI implements ITip
 	{
-		private var _spellTip:SpellTipsSkin;
+		private var _spellTip:Object;//SpellTipsSkin;
 		/** 技能proto **/
 		private var spellProto:Q_skill_model;
 		/** 头部技能图标icon **/
@@ -54,7 +54,7 @@ package com.rpgGame.app.ui.tips
 		
 		public function SpellTip()
 		{
-			_spellTip = new SpellTipsSkin();
+//			_spellTip = new SpellTipsSkin();
 			super( _spellTip );
 			
 			initTip();

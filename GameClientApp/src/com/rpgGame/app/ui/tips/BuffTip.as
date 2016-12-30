@@ -29,12 +29,12 @@ package com.rpgGame.app.ui.tips
 			return _instance;
 		}
 
-		private var _tipSkin : BuffTipsSkin;
+		private var _tipSkin : Object;//BuffTipsSkin;
 		private var _posy : int = 0;
 
 		public function BuffTip()
 		{
-			_tipSkin = new BuffTipsSkin();
+//			_tipSkin = new BuffTipsSkin();
 			super(_tipSkin);
 			initTip();
 		}
