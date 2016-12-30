@@ -76,8 +76,8 @@ package com.rpgGame.app.graphics
 			
 			_role = $role;
 			
-			_hpSkinClass = new MonsterHpBarSkin();
-			_hpSkinClass.toSprite(this);
+			//_hpSkinClass = new MonsterHpBarSkin();
+			//_hpSkinClass.toSprite(this);
 			
 			_hpBackgroundBar = createBarBackground();
 			_hpBar = createBar();

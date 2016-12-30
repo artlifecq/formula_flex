@@ -64,7 +64,7 @@ package com.rpgGame.app.graphics
 		private var _moodMC : UIMovieClip;
 		private var _moodTween : TweenLite;
 		/**头顶说话*/
-		private var _wordFrame : ChatFramOnRole;
+		private var _wordFrame : Object;//ChatFramOnRole;
 		private var _wordTween : TweenLite;
 		/** body图标*/
 		private var _bodyImage : UIAsset;
@@ -666,10 +666,10 @@ package com.rpgGame.app.graphics
 			TweenLite.killDelayedCallsTo(hideWordFrame);
 			if (_wordFrame == null)
 			{
-				_wordFrame = new ChatFramOnRole();
+//				_wordFrame = new ChatFramOnRole();
 			}
 			_wordFrame.show(message);
-			container.addChild(_wordFrame);
+//			container.addChild(_wordFrame);
 			updateAllBarPosition();
 			if (_wordTween)
 			{

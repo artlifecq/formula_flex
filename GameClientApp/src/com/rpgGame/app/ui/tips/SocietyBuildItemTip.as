@@ -31,12 +31,12 @@ package com.rpgGame.app.ui.tips
 			return _instance;
 		}
 
-		private var _tipSkin : SocietyBuildItemTipSkin;
+		private var _tipSkin : Object;//SocietyBuildItemTipSkin;
 		private var _iconFace : IconCDFace;
 
 		public function SocietyBuildItemTip()
 		{
-			_tipSkin = new SocietyBuildItemTipSkin();
+//			_tipSkin = new SocietyBuildItemTipSkin();
 			super(_tipSkin);
 			initTip();
 		}

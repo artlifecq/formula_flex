@@ -14,10 +14,10 @@ package com.rpgGame.app.ui.tips
 	 */
 	public class EquipStatItem extends SkinUI
 	{
-		private var skin : EquipStatItemSkin;
+		private var skin : Object;//EquipStatItemSkin;
 		public function EquipStatItem()
 		{
-			skin = new EquipStatItemSkin();
+//			skin = new EquipStatItemSkin();
 			super(skin);
 		}
 		

@@ -56,7 +56,7 @@ package com.rpgGame.app.manager
 		public static var levelNotReach:Boolean;
 		private static var _TimeData:TimeData;
 		
-		private static var _icon:DaTiIcon;
+		private static var _icon:Object;//DaTiIcon;
 		
 		public static function setup():void
 		{
@@ -143,9 +143,9 @@ package com.rpgGame.app.manager
 		{
 			if(_icon == null)
 			{
-				_icon = new DaTiIcon();
+//				_icon = new DaTiIcon();
 			}
-			StarlingLayerManager.mainUILayer.addChild(_icon);
+//			StarlingLayerManager.mainUILayer.addChild(_icon);
 			_icon.onShow();
 			Starling.current.nativeStage.addEventListener(Event.RESIZE, onStageResize);
 			onStageResize();

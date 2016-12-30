@@ -32,8 +32,6 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.role.SceneTranportData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
-	import gameEngine2D.NetDebug;
-	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
 
@@ -84,32 +82,19 @@ package com.rpgGame.app.cmdlistener
 
 		private function mainCharMoveThroughHandler() : void
 		{
-            CONFIG::netDebug {
-                NetDebug.LOG("[RoleStateCmdListener] [mainCharMoveThroughHandler]");
-            }
 			var actor : SceneRole = MainRoleManager.actor;
 			if (!_otherAreaMap)
 				_otherAreaMap = SceneManager.getScene().getAreaMap(EnumAreaMapType.OTHER_AREA);
 			var areaMapData : AreaMapData = _otherAreaMap.getFlag(actor.x, actor.z);
 			var flagObj : Object = areaMapData ? areaMapData.data : null;
-            CONFIG::netDebug {
-                NetDebug.LOG("[RoleStateCmdListener] [mainCharMoveThroughHandler]" +
-                    "x:" + actor.x + ", z:" + actor.z + ", flagObj:" + flagObj);
-            }
 			if (flagObj is SceneRole)
 			{
 				if ((flagObj as SceneRole).type == SceneCharType.TRANS)
 				{
-                    CONFIG::netDebug {
-                        NetDebug.LOG("[RoleStateCmdListener] [mainCharMoveThroughHandler] [TRANS]");
-                    }
 					var trans : SceneRole = flagObj as SceneRole;
 					if (!trans.isInViewDistance)
 						return;
 					var tranportData : SceneTranportData = trans.data as SceneTranportData;
-                    CONFIG::netDebug {
-                        NetDebug.LOG("[RoleStateCmdListener] [mainCharMoveThroughHandler] [TRANS] id:" + tranportData.id);
-                    }
 					GameLog.add("[RoleStateCmdListener] [mainCharMoveThroughHandler]" + tranportData.id);
 					switch (tranportData.type)
 					{

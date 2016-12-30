@@ -237,7 +237,7 @@ package com.rpgGame.app.data
 			//传送门
 			if (config.hasSceneTranports)
 			{
-				TranportsDataManager.setConfig(config.sceneTranports);
+				//TranportsDataManager.setConfig(config.sceneTranports);
 			}
 
 			if (config.relationConfig)

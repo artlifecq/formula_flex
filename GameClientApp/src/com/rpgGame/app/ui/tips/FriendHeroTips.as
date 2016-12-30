@@ -22,11 +22,11 @@ package com.rpgGame.app.ui.tips
 	 */
 	public class FriendHeroTips extends SkinUI implements ITip
 	{
-		private var _tipsSkin : FriendHeroTipsSkin;
+		private var _tipsSkin : Object;//FriendHeroTipsSkin;
 
 		public function FriendHeroTips()
 		{
-			_tipsSkin = new FriendHeroTipsSkin();
+//			_tipsSkin = new FriendHeroTipsSkin();
 			super(_tipsSkin);
 		}
 
