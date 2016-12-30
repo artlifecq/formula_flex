@@ -13,11 +13,13 @@ package com.rpgGame.app.state.role.action
 	{
 		private var _statusType : String;
 		private var _isFixedFrame : Boolean;
+		
 		private var _totalTime : int;
 		private var _soarFrameTime : int;
 		private var _hitFrameTime : int;
 		private var _breakFrameTime : int;
 		private var _throwDelayTime : int;
+		
 		private var _hitFrameFunc : Function;
 		private var _hitFrameFuncArgs : Array;
 		private var _breakFrameFunc : Function;

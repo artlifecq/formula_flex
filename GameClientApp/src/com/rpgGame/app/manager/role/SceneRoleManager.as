@@ -160,7 +160,7 @@ package com.rpgGame.app.manager.role
 				data.avatarInfo.effectResID = avatarResConfig.idleEffect;
 			}
 			data.sizeScale = (bornData && bornData.q_scale > 0) ? (bornData.q_scale * 0.01) : 1;
-			data.totalStat.level = bornData ? bornData.q_grade : 0;
+//			data.totalStat.level = bornData ? bornData.q_grade : 0;
 			data.bodyRadius = bornData ? bornData.q_body_radius_pixel : 0;
 			data.direction = bornData ? bornData.q_direction : 0;
 			data.immuneDeadBeat = /*bornData ? bornData.immuneDeadBeat :*/ false;
@@ -296,7 +296,7 @@ package com.rpgGame.app.manager.role
 			role.ownerIsMainChar = (data.ownerId == MainRoleManager.actorID);
 			data.avatarInfo.setBodyResID(bornData ? bornData.q_body_res : "", null);
 			data.sizeScale = (bornData && bornData.q_scale > 0) ? (bornData.q_scale * 0.01) : 1;
-			data.totalStat.level = bornData ? bornData.q_grade : 0;
+//			data.totalStat.level = bornData ? bornData.q_grade : 0;
 			data.bodyRadius = bornData ? bornData.q_body_radius_pixel : 0;
 			data.direction = bornData ? bornData.q_direction : 0;
 			AvatarManager.updateAvatar(role);

@@ -58,36 +58,12 @@ package com.rpgGame.coreData.clientConfig
 		public var q_say_condition:String;
 		 /**  怪物血量倍数（0：不加倍，1：加1倍，2：加2倍，类推）处理大于20Y血量的情况 */
 		public var q_hprate:int;
-		 /**  怪物等级 */
-		public var q_grade:int;
-		 /**  生命值 */
-		public var q_maxhp:int;
-		 /**  内力 */
-		public var q_maxmp:int;
+		 /**  怪物基础属性 */
+		public var q_attributes:String;
 		 /**  装备属性占比（万分比） */
 		public var q_equip_ratio:int;
-		 /**  忽视防御伤害 */
-		public var q_holyDamage:int;
 		 /**  BUFF免疫类型（格式：[类型1，类型2] */
 		public var q_immunity_buff:String;
-		 /**  攻击 */
-		public var q_attack:int;
-		 /**  防御 */
-		public var q_defense:int;
-		 /**  暴击 */
-		public var q_crt:int;
-		 /**  暴击伤害 */
-		public var q_critdamage:int;
-		 /**  抗暴值(作废) */
-		public var q_antiCrit:int;
-		 /**  命中(作废) */
-		public var q_hit:int;
-		 /**  敏捷 */
-		public var q_dodge:int;
-		 /**  攻击速度 */
-		public var q_attack_speed:int;
-		 /**  移动速度 */
-		public var q_speed:int;
 		 /**  怪物生命恢复方式（0不恢复，1脱离战斗恢复，2掉血后就持续恢复,3表示脱离战斗后持续恢复生命） */
 		public var q_recover_hp_type:int;
 		 /**  怪物恢复血量的间隔(单位：毫秒） */

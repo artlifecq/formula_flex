@@ -79,8 +79,6 @@ package com.game.engine2D
 		private var _filter3ds:Vector.<Filter3DBase> = new Vector.<Filter3DBase>();
 		private var _cameraInit:Boolean = false;
 		
-		public var sceneAngle:Number;
-		
 		public function Scene($width:Number, $height:Number, name : String, view : View3D, viewDistance : int=1, areaMapLayer : int=0)
 		{
 			if(_current != null) {   
@@ -392,10 +390,9 @@ package com.game.engine2D
 //				initCamera();
 				_view.camera.lens.near = -100000;
 				_view.camera.lens.far = 100000;
-				GlobalConfig.MAP_2D_CAMERA_ANGLE = 0;
+				GlobalConfig.mapCameraAngle = -_viewAsset.cameraMode2DAngle;
 				GlobalConfig2D.MapZoneClass = PoolFrontMesh;
-				sceneAngle = (_viewAsset.cameraMode2DAngle*Math.PI)/180.0;
-				var plane:Plane3D = new Plane3D(0,Math.cos(sceneAngle),-Math.sin(sceneAngle));
+				var plane:Plane3D = new Plane3D(0,Math.cos(GlobalConfig.mapCameraRadian),Math.sin(GlobalConfig.mapCameraRadian));
 				_direction.planarShadowPlane = plane;
 			}
 		}

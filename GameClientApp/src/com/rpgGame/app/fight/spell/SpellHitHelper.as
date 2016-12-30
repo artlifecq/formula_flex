@@ -30,8 +30,6 @@ package com.rpgGame.app.fight.spell
 	
 	import flash.geom.Point;
 	
-	import app.message.StateProto;
-	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -87,9 +85,13 @@ package com.rpgGame.app.fight.spell
 						}
 
 						if (role == info.targetRole)
+						{
 							SpellAnimationHelper.addTargetHurtEffect(role, info, hurtAnimation);
+						}
 						else
+						{
 							SpellAnimationHelper.addTargetHurtEffect(role, info, sputteringHurtAnimation);
+						}
 
 						if (role.isMainChar && info.atkor && info.atkor.usable)
 						{

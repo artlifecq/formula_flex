@@ -163,8 +163,8 @@ package com.rpgGame.app.fight.spell
 				{
 					var angle : int = (360 - caseInfo.angle) % 360;
 					var ref : CastSpellLockStateReference = MainRoleManager.actor.stateMachine.getReference(CastSpellLockStateReference) as CastSpellLockStateReference;
-					var spellEffectData : Q_SpellEffect = caseInfo.spellEffectData;
-					ref.setParams(spellEffectData);
+					var spellData : Q_skill_model = caseInfo.spellData;
+					ref.setParams(spellData);
 					MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_CAST_SPELL_LOCK, ref);
 					SpellSender.releaseSpell(caseInfo.caseSpellData.q_skillID, caseInfo.releasePos.x, caseInfo.releasePos.y, angle, caseInfo.targetServerID);
 				}
@@ -393,7 +393,7 @@ package com.rpgGame.app.fight.spell
 				targetPos = new Point(selfPos.x, selfPos.y);
 				releasePos = new Point(selfPos.x, selfPos.y);
 			}
-			else if (spellData.is_locking_spell) //锁定技或者在挂机时都需要目标
+			else if (spellData.q_is_locking_spell) //锁定技或者在挂机时都需要目标
 			{
 				var nearCanAtkRole : SceneRole;
 				var selectedRole : SceneRole = SceneRoleSelectManager.selectedRole;
@@ -525,7 +525,7 @@ package com.rpgGame.app.fight.spell
 				if (targetRole)
 				{
 					var targetRadius : int = (targetRole.data as RoleData).bodyRadius; //处理半径
-					var keepSpacing : int = spellEffectData.keep_spacing;
+					var keepSpacing : int = spellData.q_keep_spacing;
 
 					targetServerID = (targetRole.data as BaseEntityData).serverID;
 					targetID = targetRole.id;
@@ -548,7 +548,7 @@ package com.rpgGame.app.fight.spell
 
 					var releaseRadius : int;
 					var targetRangeSpacing : int;
-					if (spellEffectData.blink_type == 0)
+					if (spellData.q_blink_type == 0)
 					{
 						releaseRadius = releaseRange/* + hurtRange*/;
 						targetRangeSpacing = (keepSpacing > 0 && keepSpacing < releaseRadius) ? keepSpacing : releaseRadius;
@@ -589,13 +589,13 @@ package com.rpgGame.app.fight.spell
 			}
 			else if (castInfo.isReleaseAtMouse) //对鼠标点施放的技能
 			{
-				var scenePosition : Vector3D = Stage3DLayerManager.getScenePositonByMousePositon(SceneManager.getScene().view, Stage3DLayerManager.stage.mouseX, Stage3DLayerManager.stage.mouseY, MainRoleManager.getActorSpellHandHight());
+				var scenePosition : Vector3D = Stage3DLayerManager.getPickPositonByMousePositon(SceneManager.getScene().view, Stage3DLayerManager.stage.mouseX, Stage3DLayerManager.stage.mouseY/*, MainRoleManager.getActorSpellHandHight()*/);
 				if (scenePosition)
 				{
 					releaseRange = releaseRange - DEVIATION_RANGE;
 					releaseRange = releaseRange < 0 ? 0 : releaseRange;
 
-					var mousePos : Point = new Point(scenePosition.x, scenePosition.z);
+					var mousePos : Point = new Point(scenePosition.x, scenePosition.y);
 					angle = MathUtil.getAngle(selfPos.x, selfPos.y, mousePos.x, mousePos.y);
 					radian = angle * Math.PI / 180;
 					dist = Point.distance(selfPos, mousePos);
@@ -613,11 +613,12 @@ package com.rpgGame.app.fight.spell
 			}
 			else
 			{
-				if (spellEffectData.blink_type == 0)
+				if (spellData.q_blink_type == 0)
 				{
 					releaseTargetPos = new Point(selfPos.x, selfPos.y);
 					targetPos = new Point(selfPos.x, selfPos.y);
 					releasePos = new Point(selfPos.x, selfPos.y);
+					angle = 270 - MainRoleManager.actor.rotationY;
 				}
 				else
 				{
@@ -748,13 +749,6 @@ package com.rpgGame.app.fight.spell
 		public static function getDefaultSpell() : Q_skill_model
 		{
 			var defaultSpell : Q_skill_model = MainRoleManager.actorInfo.spellList.getDefaultSpell();
-			
-//			var itemInfo : ItemInfo = MainRoleManager.actorInfo.equipInfo.getItemInfoByPos(EquipmentPos.POS_WEAPON);
-//			if (itemInfo)
-//			{
-//				var race : int = ItemCfgData.getEquipmentRace(itemInfo.cfgId);
-//				defaultSpell = RaceCfgData.getDefaultSpell(race);
-//			}
 			return defaultSpell;
 		}
 

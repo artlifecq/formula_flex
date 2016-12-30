@@ -24,8 +24,12 @@ package com.game.engine3D.config
 		
 		private static var _use25DMap : Boolean = false;
 		private static var _use2DMap : Boolean = false;
-		private static var _map_2D_scale_z_dir : Number = 1;
-		private static var _map_2D_camera_angle : int = 30; //2d场景中的摄像头角度
+//		private static var _map_2D_scale_z_dir : Number = 1;
+//		private static var _map_2D_camera_angle : int = 30; //2d场景中的摄像头角度
+		
+		private static var _mapCameraAngle:Number = 40;
+		private static var _mapCameraRadian:Number;
+		private static var _map2dScaleZDir:Number = 1;
 
 		public function GlobalConfig()
 		{
@@ -51,7 +55,7 @@ package com.game.engine3D.config
 		public static function set use2DMap(value : Boolean) : void
 		{
 			_use2DMap = value;
-			_map_2D_scale_z_dir = value ? Math.sin(MAP_2D_CAMERA_ANGLE * Math.PI / 180) : 1;
+//			_map_2D_scale_z_dir = value ? Math.sin(MAP_2D_CAMERA_ANGLE * Math.PI / 180) : 1;
 		}
 
 		public static function get use25DMap() : Boolean
@@ -64,7 +68,35 @@ package com.game.engine3D.config
 			_use25DMap = value;
 		}
 
-		public static function get MAP_2D_CAMERA_ANGLE() : int
+		public static function get mapCameraAngle():Number
+		{
+			return _mapCameraAngle;
+		}
+
+		public static function set mapCameraAngle(value:Number):void
+		{
+			_mapCameraAngle = value;
+			_mapCameraRadian = (_mapCameraAngle *Math.PI)/180.0;
+			_map2dScaleZDir = Math.tan(Math.abs(_mapCameraRadian));
+		}
+
+		public static function get mapCameraRadian():Number
+		{
+			return _mapCameraRadian;
+		}
+		
+		public static function transform2dValue(y:Number):Number
+		{
+			return y*_map2dScaleZDir;
+		}
+
+		public static function get map2dScaleZDir():Number
+		{
+			return _map2dScaleZDir;
+		}
+
+
+		/*public static function get MAP_2D_CAMERA_ANGLE() : int
 		{
 			return _map_2D_camera_angle;
 		}
@@ -78,6 +110,6 @@ package com.game.engine3D.config
 		public static function transformCoord_2d_3d(y : Number) : Number
 		{
 			return int(y / _map_2D_scale_z_dir);
-		}
+		}*/
 	}
 }

@@ -12,7 +12,7 @@ package com.rpgGame.coreData.clientConfig
 	*/
 	public class Q_SpellAnimation
 	{
-		 /**  1.0 */
+		 /**  id */
 		public var id:int;
 		 /**  名字 */
 		public var name:String;

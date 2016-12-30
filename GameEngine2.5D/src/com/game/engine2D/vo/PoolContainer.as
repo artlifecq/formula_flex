@@ -58,7 +58,7 @@ package com.game.engine2D.vo
 		override public function set y(val:Number):void
 		{
 			_pcPos.y = val >> 0;
-			super.z = GlobalConfig.transformCoord_2d_3d(-_pcPos.y);
+//			super.z = GlobalConfig.transformCoord_2d_3d(-_pcPos.y);
 		}
 
 		override public function set z(val:Number):void

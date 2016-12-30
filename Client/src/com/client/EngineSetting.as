@@ -28,7 +28,7 @@ package com.client
 			GlobalConfig.radiusForEntity = 32;
 			GlobalConfig.use2DMap = true;
 			GlobalConfig.use25DMap = true;
-			GlobalConfig.MAP_2D_CAMERA_ANGLE = 45;
+//			GlobalConfig.MAP_2D_CAMERA_ANGLE = 45;
 			GlobalConfig.setGlobalConfig(null, VersionUtils.getVersionPath);
 			
 			Engine.initEngine(60,null,VersionUtils.getVersionPath,50,50,256,256);
