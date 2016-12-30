@@ -37,7 +37,15 @@ package com.rpgGame.app.state.role.action
 		{
 			super();
 		}
-
+		/**
+		 *   
+		 * @param spellInfo      释放技能的信息
+		 * @param statusType     动作名称
+		 * @param speed          攻速
+		 * @param soarFrameTime  抬手时间
+		 * @param releaseEndHard 
+		 * 
+		 */
 		public function setParams(spellInfo : ReleaseSpellInfo, statusType : String, speed : Number = 1, soarFrameTime : int = 0, releaseEndHard : int = 0) : void
 		{
 			_spellInfo = spellInfo;

@@ -4,8 +4,6 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.info.stat.StatData;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
-	
-	import org.mokylin.skin.app.tips.EquipStatItemSkin;
 
 	/**
 	 * 带对比的属性条 

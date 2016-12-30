@@ -5,8 +5,6 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
-	import org.mokylin.skin.app.tips.OpenGridTipSkin;
-	
 	import starling.display.Sprite;
 	
 	import utils.TimerServer;

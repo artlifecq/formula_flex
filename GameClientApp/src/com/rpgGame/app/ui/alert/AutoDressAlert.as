@@ -9,8 +9,6 @@ package com.rpgGame.app.ui.alert
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.type.item.ItemQualityType;
 	
-	import org.mokylin.skin.common.AutoDressEquipAlertSkin;
-	
 	import starling.display.DisplayObject;
 	
 	/**

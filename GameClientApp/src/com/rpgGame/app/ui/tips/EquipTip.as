@@ -18,7 +18,6 @@ package com.rpgGame.app.ui.tips
 	import feathers.controls.UIAsset;
 	
 	import org.client.mainCore.ds.HashMap;
-	import org.mokylin.skin.app.tips.EquipTipsSkin;
 	
 	import starling.display.DisplayObject;
 
@@ -318,7 +317,6 @@ import com.rpgGame.coreData.lang.LangEquip;
 import feathers.controls.UIAsset;
 
 import org.client.mainCore.ds.HashMap;
-import org.mokylin.skin.app.equip.EquipGeneralStatLineSkin;
 
 import starling.display.Sprite;
 

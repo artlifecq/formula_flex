@@ -11,8 +11,6 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.coreData.utils.MoneyUtil;
 
-	import org.mokylin.skin.app.tips.ItemTipsSkin;
-
 	/**
 	 * 物品TIPS
 	 * @author luguozheng

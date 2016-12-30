@@ -9,8 +9,6 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.type.item.ItemQualityType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 
-	import org.mokylin.skin.app.tips.SocietyBuildItemTipSkin;
-
 	/**
 	 *
 	 * 帮派建设项tips

@@ -5,8 +5,6 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.utils.PKModeUtil;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	
-	import org.mokylin.skin.app.tips.PKModeTipSkin;
-	
 	public class PKModeTip extends SkinUI implements ITip
 	{
 		private var _pkTip:Object;//PKModeTipSkin;

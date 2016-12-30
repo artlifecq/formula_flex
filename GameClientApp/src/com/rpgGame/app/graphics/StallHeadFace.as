@@ -10,10 +10,6 @@ package com.rpgGame.app.graphics
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	
-	import org.mokylin.skin.app.stall.StallTitle1Skin;
-	import org.mokylin.skin.app.stall.StallTitle2Skin;
-	import org.mokylin.skin.app.stall.StallTitleSkin;
 
 	public class StallHeadFace extends BaseHeadFace implements IPoolClass
 	{

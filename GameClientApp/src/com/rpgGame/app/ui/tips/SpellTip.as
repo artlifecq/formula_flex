@@ -16,8 +16,6 @@ package com.rpgGame.app.ui.tips
 	
 	import feathers.controls.Label;
 	
-	import org.mokylin.skin.app.tips.SpellTipsSkin;
-	
 	import starling.display.DisplayObject;
 	
 	/**

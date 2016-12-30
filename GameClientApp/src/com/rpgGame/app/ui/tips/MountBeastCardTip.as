@@ -25,7 +25,6 @@ package com.rpgGame.app.ui.tips
 	import feathers.controls.Label;
 	
 	import org.client.mainCore.ds.HashMap;
-	import org.mokylin.skin.app.tips.MountBeastCardTipSkin;
 	
 	/**
 	 * 坐骑兽牌tips 

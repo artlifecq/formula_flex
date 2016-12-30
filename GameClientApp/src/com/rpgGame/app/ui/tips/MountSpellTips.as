@@ -10,8 +10,6 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
 	import com.rpgGame.coreData.info.mount.MountInfoData;
 	
-	import org.mokylin.skin.app.tips.MountSpellTipSkin;
-	
 	/**
 	 * 坐骑技能tips 
 	 * @author 陈鹉光

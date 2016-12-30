@@ -3,7 +3,6 @@ package com.rpgGame.app.graphics
 	import com.game.mainCore.libCore.pool.IPoolClass;
 	import com.game.mainCore.libCore.pool.Pool;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.ui.main.chat.ChatFramOnRole;
 	import com.rpgGame.app.utils.HeadBloodUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
