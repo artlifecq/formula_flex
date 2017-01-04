@@ -28,6 +28,11 @@ package com.rpgGame.app.state.role.action
 			_jumpAction = value;
 		}
 
+		/**
+		 * 跳跃的几段跳，一般都有2段跳 
+		 * @return 
+		 * 
+		 */		
 		public function get jumpAction() : int
 		{
 			return _jumpAction;

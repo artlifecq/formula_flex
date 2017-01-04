@@ -30,13 +30,19 @@ package com.rpgGame.app.state.role.action
 		 * 攻速--暂时还没有启用，等后面有了这个属性，再启用 
 		 */		
 		private var _speed : Number = 1;
+		/**
+		 * 动作名称 
+		 */		
 		private var _statusType : String;
+		
 		private var _hitFrameTween : TweenLite;
 		private var _totalFrameTween : TweenLite;
 		private var _breakFrameTween : TweenLite;
+		
 		private var _attackFinished : Boolean;
 		private var _attackBroken : Boolean;
 		private var _canWalkRelease : Boolean;
+		
 		private var _startFrameTime : int;
 		private var _breakFrameTime : int;
 		private var _hitFrameTime : int;
@@ -60,9 +66,13 @@ package com.rpgGame.app.state.role.action
 				{
 					_stateReference = _ref as AttackStateReference;
 					if (_stateReference.speed > 0)
+					{
 						_speed = _stateReference.speed;
+					}
 					else
+					{
 						_speed = ((_machine.owner as SceneRole).data as RoleData).totalStat.attackSpeed;
+					}
 					_canWalkRelease = _stateReference.spellInfo.canWalkRelease;
 				}
 				else

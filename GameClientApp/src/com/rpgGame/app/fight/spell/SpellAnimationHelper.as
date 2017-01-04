@@ -516,8 +516,9 @@ package com.rpgGame.app.fight.spell
 					var atkor : SceneRole = info.atkor;
 					if (atkor == null || !atkor.usable)
 					{
-						var scene : GameScene3D = SceneManager.getScene();
-						var posY : Number = scene.sceneMapLayer.queryHeightAt(info.atkorPos.x, info.atkorPos.y);
+//						var scene : GameScene3D = SceneManager.getScene();
+//						var posY : Number = scene.sceneMapLayer.queryHeightAt(info.atkorPos.x, info.atkorPos.y);
+						var posY:Number = 0;//2.5d没有高度值，因为只有2维的，默认为0
 						atkorPosition = new Vector3D(info.atkorPos.x, posY, info.atkorPos.y);
 						atkorRotationY = info.releaseAngle;
 						destPosition = new Vector3D(info.atkorPos.x, posY, info.atkorPos.y);
@@ -572,7 +573,9 @@ package com.rpgGame.app.fight.spell
 			{
 				if (effectCfg.animatorName == FrontAxleDoubleAroundAnimator.name)
 				{
-					renderSetAnimator = new FrontAxleDoubleAroundAnimator(info, new Vector3D(info.targetPos.x, 0, info.targetPos.y), info.targetRole, info.flyTm, info.flySpeed, info.isTrackTarget, info.matchTerrain, info.isFlyCross, info.isAdaptiveTargetHeight, moveDelay, playDelay, releaseDelayTime, info.throwHeight, info.throwWeightRatio, effectCfg.frontAxleAroundRadius, effectCfg.frontAxleAroundAngularVelocity, effectCfg.convergenceTimes);
+					renderSetAnimator = new FrontAxleDoubleAroundAnimator(info, new Vector3D(info.targetPos.x, 0, info.targetPos.y), info.targetRole, info.flyTm, info.flySpeed, info.isTrackTarget, 
+						info.matchTerrain, info.isFlyCross, info.isAdaptiveTargetHeight, moveDelay, playDelay, releaseDelayTime, info.throwHeight,
+						info.throwWeightRatio, effectCfg.frontAxleAroundRadius, effectCfg.frontAxleAroundAngularVelocity, effectCfg.convergenceTimes);
 					(renderSetAnimator as FrontAxleDoubleAroundAnimator).setAtkorData(atkorPosition, atkorRotationY, destPosition);
 					(renderSetAnimator as FrontAxleDoubleAroundAnimator).setQueue(effectQueue, locusPoints);
 					effectSet.setRenderAnimator(renderSetAnimator);
@@ -580,7 +583,8 @@ package com.rpgGame.app.fight.spell
 			}
 			if (!renderSetAnimator)
 			{
-				renderSetAnimator = new CommonTrajectoryAnimator(info, new Vector3D(info.targetPos.x, 0, info.targetPos.y), info.targetRole, info.flyTm, info.flySpeed, info.isTrackTarget, info.matchTerrain, info.isFlyCross, info.isAdaptiveTargetHeight, moveDelay, playDelay, releaseDelayTime, info.throwHeight, info.throwWeightRatio);
+				renderSetAnimator = new CommonTrajectoryAnimator(info, new Vector3D(info.targetPos.x, 0, info.targetPos.y), info.targetRole, info.flyTm, info.flySpeed, info.isTrackTarget, 
+					info.matchTerrain, info.isFlyCross, info.isAdaptiveTargetHeight, moveDelay, playDelay, releaseDelayTime, info.throwHeight, info.throwWeightRatio);
 				(renderSetAnimator as CommonTrajectoryAnimator).setAtkorData(atkorPosition, atkorRotationY, destPosition);
 				(renderSetAnimator as CommonTrajectoryAnimator).setQueue(effectQueue, locusPoints);
 				effectSet.setRenderAnimator(renderSetAnimator);

@@ -57,8 +57,6 @@ package com.game.engine3D.scene.layers
 	import away3d.primitives.SkyBox;
 	import away3d.weather.Weather;
 	
-	import feathers.core.ui_internal;
-	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
 

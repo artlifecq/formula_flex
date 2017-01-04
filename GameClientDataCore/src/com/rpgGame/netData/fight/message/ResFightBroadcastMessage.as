@@ -36,7 +36,7 @@ package com.rpgGame.netData.fight.message{
 			//角色Id
 			writeLong(_personId);
 			//攻击朝向
-			writeByte(_fightDirection);
+			writeShort(_fightDirection);
 			//技能编号
 			writeInt(_skillModelId);
 			//攻击目标
@@ -53,7 +53,7 @@ package com.rpgGame.netData.fight.message{
 			//角色Id
 			_personId = readLong();
 			//攻击朝向
-			_fightDirection = readByte();
+			_fightDirection = readShort();
 			//技能编号
 			_skillModelId = readInt();
 			//攻击目标
