@@ -42,11 +42,13 @@ package com.rpgGame.app.scene.animator
 		protected var _queue : Vector.<IRenderAnimator>;
 		protected var _locusPoints : Vector.<AnimatorLocusPoint>;
 		protected var _locusPointIndex : int = 0;
+		
 		protected var _destPosition : Vector3D;
 		protected var _targetPos : Vector3D;
 		protected var _targetRole : SceneRole;
 		protected var _lastPos : Vector3D;
 		protected var _lastOffset : Vector3D;
+		
 		protected var _totalTime : int;
 		protected var _trackTime : int;
 		protected var _trackPerTime : Number;
@@ -57,6 +59,7 @@ package com.rpgGame.app.scene.animator
 		protected var _lastUpdateTime : int;
 		protected var _elapseTime : int;
 		protected var _diffTime : int;
+		
 		protected var _speed : int;
 		protected var _destHeightOffset : Number;
 		protected var _targetOffsetY : Number;
@@ -74,6 +77,7 @@ package com.rpgGame.app.scene.animator
 		protected var _atkorRotationY : Number;
 		protected var _throwHeight : int;
 		protected var _throwWeightRatio : int;
+		
 		protected var _endPosX : Number;
 		protected var _endPosZ : Number;
 		protected var _endPosY : Number;
@@ -113,7 +117,7 @@ package com.rpgGame.app.scene.animator
 			_lastPos = new Vector3D();
 			_lastOffset = new Vector3D();
 			var scene : GameScene3D = SceneManager.getScene();
-			var posY : Number = scene.sceneMapLayer.queryHeightAt(_destPosition.x, _destPosition.z);
+			var posY : Number = 0;//scene.sceneMapLayer.queryHeightAt(_destPosition.x, _destPosition.z);2.5D没有高度值，因为只有2维
 			_destHeightOffset = _destPosition.y - posY;
 			_renderSet.position = _destPosition;
 			_renderSet.offsetY = 0;

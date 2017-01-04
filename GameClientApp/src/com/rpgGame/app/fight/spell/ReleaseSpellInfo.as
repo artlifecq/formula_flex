@@ -268,15 +268,15 @@ package com.rpgGame.app.fight.spell
 				_posSingleAni = AnimationDataManager.getData(_spellEffectData.dest_animation);
 				_passSingleAni = AnimationDataManager.getData(_spellEffectData.fly_animation);
 				
-				_caromStartFrameTime = _spellEffectData.carom_start_frame_time;
-				_breakFrameTime = _spellEffectData.break_frame_time;
-				_hitFrameTime = _spellEffectData.hit_frame_time;
-				_delayTime = _spellEffectData.delay_time;
-				_hurtDelay = _spellEffectData.hurt_delay;
-				_soarFrameTime = _spellEffectData.soar_frame_time;
-				_throwDelayTime = _spellEffectData.throw_delay_time;
+				_caromStartFrameTime = _spellEffectData.carom_start_frame_time;//暂时没有用
+				_breakFrameTime = _spellEffectData.break_frame_time;//暂时没有用
+				_hitFrameTime = _spellEffectData.hit_frame_time;//到这个时间上，会在地面上有特效,也会有伤害飘字，如果设置了hurtdelay的话，会以这个时间为主
+				_delayTime = _spellEffectData.delay_time;//跟弹道有关系
+				_hurtDelay = _spellEffectData.hurt_delay;//伤害飘字的时间
+				_soarFrameTime = _spellEffectData.soar_frame_time;//
+				_throwDelayTime = _spellEffectData.throw_delay_time;//
 				
-				_castTime = _spellEffectData.cast_time;
+				_castTime = _spellEffectData.cast_time;//当释放技能的时候，会锁定角色的时间
 				
 				_blinkType = _spellData.q_blink_type;
 				_blinkSpeed = _spellData.q_blink_speed;
@@ -300,7 +300,7 @@ package com.rpgGame.app.fight.spell
 				_isTrapSpell = _spellData.q_skill_type == 1;//暂时这么写，因为目前是把地面特效暂时当成陷阱技能
 				_repeatTimes = _spellData.q_skill_time;
 				_repeatInterval = _spellData.q_skill_ground_period;
-				_maxHurtTimes = _spellEffectData.max_hurt_times;
+				_maxHurtTimes = _spellData.q_skill_act_num;
 				_throwHeight = _spellEffectData.throw_height;
 				_throwWeightRatio = _spellEffectData.throw_weight_ratio;
 			}

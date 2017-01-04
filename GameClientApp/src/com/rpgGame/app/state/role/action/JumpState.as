@@ -63,9 +63,11 @@ package com.rpgGame.app.state.role.action
 		 * 二级跳概率
 		 */
 		public static var SECOND_JUMP_PROBABILITY : int = 30;
+		
 		private var _totalFrameTween : TweenLite;
 		private var _breakFrameTween : TweenLite;
 		private var _startRiseTween : TweenLite;
+		
 		private var _jumpFinished : Boolean;
 		private var _isSecondJump : Boolean;
 		private var _stateReference : JumpStateReference;

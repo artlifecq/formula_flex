@@ -39,7 +39,7 @@ package com.rpgGame.netData.fight.message{
 			//攻击类型(技能ID)
 			writeInt(_fightType);
 			//攻击朝向
-			writeByte(_fightDirection);
+			writeShort(_fightDirection);
 			//目标点
 			writeBean(_pos);
 			//唯一ID
@@ -56,7 +56,7 @@ package com.rpgGame.netData.fight.message{
 			//攻击类型(技能ID)
 			_fightType = readInt();
 			//攻击朝向
-			_fightDirection = readByte();
+			_fightDirection = readShort();
 			//目标点
 			_pos = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
 			//唯一ID

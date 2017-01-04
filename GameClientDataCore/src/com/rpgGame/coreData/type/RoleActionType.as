@@ -13,7 +13,7 @@ package com.rpgGame.coreData.type
 		/** 待机状态 **/
 		public static const STAND : String = "stand";
 		/** 个性待机状态 **/
-		public static const SPECIFIC_IDLE : String = "specificidle";
+		public static const IDLE : String = "idle";
 		/** 行走 **/
 		public static const WALK : String = "walk";
 		/** 跑步 **/
