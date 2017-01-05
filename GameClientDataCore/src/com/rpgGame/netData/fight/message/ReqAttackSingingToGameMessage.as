@@ -26,7 +26,7 @@ package com.rpgGame.netData.fight.message{
 			//攻击类型(技能ID)
 			writeInt(_fightType);
 			//攻击朝向
-			writeInt(_fightDirection);
+			writeShort(_fightDirection);
 			return true;
 		}
 		
@@ -37,7 +37,7 @@ package com.rpgGame.netData.fight.message{
 			//攻击类型(技能ID)
 			_fightType = readInt();
 			//攻击朝向
-			_fightDirection = readInt();
+			_fightDirection = readShort();
 			return true;
 		}
 		

@@ -10,6 +10,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
     import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
     import com.rpgGame.app.manager.AreaMapManager;
+    import com.rpgGame.app.manager.ShortcutsManger;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.role.SceneRoleManager;
     import com.rpgGame.app.manager.scene.SceneManager;
@@ -21,6 +22,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.cfg.TransCfgData;
     import com.rpgGame.coreData.clientConfig.Q_map_transfer;
     import com.rpgGame.coreData.enum.EnumAreaMapType;
+    import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
     import com.rpgGame.coreData.info.buff.BuffInfo;
     import com.rpgGame.coreData.role.MonsterData;
     import com.rpgGame.coreData.role.RoleType;
@@ -62,7 +64,13 @@ package com.rpgGame.app.manager.shell
             this._funcs["showTrans".toLowerCase()] = this.showTrans;
             this._funcs["addTrans".toLowerCase()] = this.addTrans;
             this._funcs["showAreaFlag".toLowerCase()] = this.showAreaFlag;
+			this._funcs["addSkillToBar".toLowerCase()] = this.addSkillToBar;
         }
+		
+		private function addSkillToBar(shortcutPos:int,id:int):void
+		{
+			ShortcutsManger.getInstance().setShortData(shortcutPos,ShortcutsTypeEnum.SKILL_TYPE,id);
+		}
         
         private function help() : void {
             GameLog.addShow("Command Help");

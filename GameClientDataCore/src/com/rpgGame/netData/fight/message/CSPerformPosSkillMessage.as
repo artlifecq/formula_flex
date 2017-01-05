@@ -32,7 +32,7 @@ package com.rpgGame.netData.fight.message{
 			//技能ID
 			writeInt(_skillId);
 			//攻击朝向
-			writeByte(_fightDirection);
+			writeShort(_fightDirection);
 			//攻击坐标x(像素坐标)
 			writeShort(_x);
 			//攻击坐标y((像素坐标)
@@ -47,7 +47,7 @@ package com.rpgGame.netData.fight.message{
 			//技能ID
 			_skillId = readInt();
 			//攻击朝向
-			_fightDirection = readByte();
+			_fightDirection = readShort();
 			//攻击坐标x(像素坐标)
 			_x = readShort();
 			//攻击坐标y((像素坐标)
