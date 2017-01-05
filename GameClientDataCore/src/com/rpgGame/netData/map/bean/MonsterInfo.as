@@ -89,7 +89,7 @@ package com.rpgGame.netData.map.bean{
 			//怪物速度
 			writeShort(_speed);
 			//怪物面对方向
-			writeByte(_dir);
+			writeShort(_dir);
 			//跑步坐标集合
 			writeShort(_positions.length);
 			for (var i: int = 0; i < _positions.length; i++) {
@@ -132,7 +132,7 @@ package com.rpgGame.netData.map.bean{
 			//怪物速度
 			_speed = readShort();
 			//怪物面对方向
-			_dir = readByte();
+			_dir = readShort();
 			//跑步坐标集合
 			var positions_length : int = readShort();
 			for (var i: int = 0; i < positions_length; i++) {

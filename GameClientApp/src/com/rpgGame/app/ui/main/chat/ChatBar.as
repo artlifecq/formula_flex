@@ -106,7 +106,7 @@ package com.rpgGame.app.ui.main.chat {
             this._chatText.wordWrap = true;
             this._chatText.multiline = true;
             this._chatText.defaultTextFormat = defaultFormat;
-            this._chatText.text = "test";
+            this._chatText.text = "";
             this._chatText.x = this._initVScollerWidth;//this._skin.vscrollbar.width;
             this._skin.vscrollbar.verticalScrollBarPosition = Scroller.VERTICAL_SCROLL_BAR_POSITION_LEFT;
             this._skin.vscrollbar.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
@@ -121,7 +121,7 @@ package com.rpgGame.app.ui.main.chat {
             this._inputText.isEditable = true;
             this._inputText.x = this._skin.inputbg.x;
             this._inputText.y = this._skin.inputbg.y;
-            this._inputText.text = "test12345678901234567890123456789012345678901234567890";
+            this._inputText.text = "";
             this._inputText.defaultTextFormat = defaultFormat;
             this._skin.grp_buttom.addChild(this._inputText);
             
