@@ -28,13 +28,13 @@ package com.rpgGame.app.sender
 		 * 设置客户端的数据
 		 */
 		
-		public static function reqSetClientCustomTag(key :int, value :String):void
+		public static function reqSetClientCustomTag(type :int, value :String):void
 		{
-			if ( key != 0 )
+			if ( type != 0 )
 			{
 				var msg :ReqClientCustomTagSetMessage = new ReqClientCustomTagSetMessage();
 				msg.customTaginfo = new CustomTaginfo();
-				msg.customTaginfo.key = key.toString();
+				msg.customTaginfo.key = type.toString();
 				msg.customTaginfo.value = value;
 				SocketConnection.send(msg);
 			}

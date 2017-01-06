@@ -246,7 +246,7 @@ package com.rpgGame.app.fight.spell
 				}
 				
 				_atkorPos = new Point(_atkor.x, _atkor.y);
-				_targetPos = new Point(fightPosMsg.pos.x, -fightPosMsg.pos.y);
+				_targetPos = new Point(fightPosMsg.pos.x, fightPosMsg.pos.y);
 			}
 			
 			readSpellEffectData(_spellData.q_spell_effect);

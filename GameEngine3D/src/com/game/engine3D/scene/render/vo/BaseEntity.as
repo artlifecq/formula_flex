@@ -273,7 +273,7 @@ package com.game.engine3D.scene.render.vo
 			_imposters = null;
 			type = $parameters[0];
 			id = $parameters[1];
-			_renderSet = RenderSet3D.create(type, id);
+			_renderSet = RenderSet3D.create(type, id,false);//角色暂时不用设置25d为true了，因为角度转换已经被PoolEntityContainer3D给处理了，如果这里再处理，角度将会搞2遍，等以后有时间了，再来统一重构
 
 			if (!_graphicDis)
 			{

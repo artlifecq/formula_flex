@@ -572,6 +572,10 @@ package com.rpgGame.app.manager.scene
 				{
 					SceneCameraLensEffectManager.playEffectOnce(EffectUrl.SWITCH_SCENE_EFFECT, 200, 0.5);
 				}
+				else
+				{
+					SceneCameraLensEffectManager.playEffectOnce(EffectUrl.SWITCH_SCENE_EFFECT, 200, 0.5);
+				}
 			}
 		}
 	}

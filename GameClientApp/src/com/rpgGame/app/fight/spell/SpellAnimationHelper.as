@@ -1,6 +1,5 @@
 package com.rpgGame.app.fight.spell
 {
-	import com.game.engine3D.core.GameScene3D;
 	import com.game.engine3D.scene.render.RenderSet3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.IRenderAnimator;
@@ -93,7 +92,7 @@ package com.rpgGame.app.fight.spell
 					
 					rud = new RenderParamData(knifeLightObjID, SceneCharType.KNIFE_LIGHT_EFFECT, ClientConfig.getEffect(animatData.scene_res));
 					
-					effectRu = RenderUnit3D.create(rud);
+					effectRu = RenderUnit3D.create(rud,true);
 					effectRu.allowCameraAnimator = atkor.isMainChar;
 					effectRu.repeat = 1;
 					effectRu.x = destPosition.x;
@@ -160,7 +159,7 @@ package com.rpgGame.app.fight.spell
 					
 					rud = new RenderParamData(selfEffectObjID, SceneCharType.SCENE_SELF_EFFECT, ClientConfig.getEffect(animatData.scene_res));
 					
-					effectRu = RenderUnit3D.create(rud);
+					effectRu = RenderUnit3D.create(rud,true);
 					effectRu.allowCameraAnimator = atkor.isMainChar;
 					effectRu.repeat = 1;
 					effectRu.x = destPosition.x;
@@ -217,7 +216,7 @@ package com.rpgGame.app.fight.spell
 					
 					rud = new RenderParamData(selfEffectObjID, SceneCharType.SCENE_SELF_EFFECT, ClientConfig.getEffect(animatData.scene_res));
 					
-					effectRu = RenderUnit3D.create(rud);
+					effectRu = RenderUnit3D.create(rud,true);
 					effectRu.allowCameraAnimator = role.isMainChar;
 					effectRu.repeat = 1;
 					effectRu.x = animatData.offset_x + destPosition.x;
@@ -381,7 +380,7 @@ package com.rpgGame.app.fight.spell
 					
 					rud = new RenderParamData(hurtEffectObjID, SceneCharType.SCENE_HURT_EFFECT, ClientConfig.getEffect(animatData.scene_res));
 					
-					effectRu = RenderUnit3D.create(rud);
+					effectRu = RenderUnit3D.create(rud,true);
 					effectRu.allowCameraAnimator = targetRole.isMainChar || (info.atkor && info.atkor.usable && info.atkor.isMainChar);
 					effectRu.repeat = 1;
 					effectRu.x = destPosition.x;
@@ -424,7 +423,7 @@ package com.rpgGame.app.fight.spell
 				{
 					rud = new RenderParamData(info.flySceneObjID, SceneCharType.SCENE_DEST_EFFECT, ClientConfig.getEffect(animatData.scene_res));
 					
-					effectRu = RenderUnit3D.create(rud);
+					effectRu = RenderUnit3D.create(rud,true);
 					effectRu.allowCameraAnimator = (info.atkor && info.atkor.isMainChar);
 					effectRu.repeat = repeat;
 					effectRu.x = destX;
@@ -552,11 +551,12 @@ package com.rpgGame.app.fight.spell
 												 moveDelay : int, playDelay : int, releaseDelayTime : int, 
 												 effectQueue : Vector.<IRenderAnimator>, locusPoints : Vector.<AnimatorLocusPoint>) : void
 		{
-			var effectSet : RenderSet3D = RenderSet3D.create(SceneCharType.SCENE_FLY_SPELL + info.flySceneObjID, flySceneObjID);
+			var effectSet : RenderSet3D = RenderSet3D.create(SceneCharType.SCENE_FLY_SPELL + info.flySceneObjID, flySceneObjID,true);
 			var rud : RenderParamData = new RenderParamData(1, "effect", ClientConfig.getEffect(effectRes), effectRes);
 			
 			var effectRu : RenderUnit3D = effectSet.addRenderUnit(rud);
 			effectRu.allowCameraAnimator = (info.atkor && info.atkor.isMainChar);
+			
 			
 			if (info.matchTerrain)
 			{
