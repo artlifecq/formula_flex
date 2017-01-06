@@ -48,6 +48,10 @@ package com.rpgGame.app.manager.scene
 			init();
 		}
 
+		/**
+		 * 游戏公共模块初始化，在第一次进入游戏时，都要初始化好 
+		 * 
+		 */		
 		private static function init() : void
 		{
 			EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_SHOW_TYPE, EnumFunctionMessageBarIcoType.PRIVILEGE_MARK_TYPE, 1);

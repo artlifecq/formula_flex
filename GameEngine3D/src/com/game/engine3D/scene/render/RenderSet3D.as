@@ -1,8 +1,6 @@
 package com.game.engine3D.scene.render
 {
-	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.core.poolObject.PoolContainer3D;
-	import com.game.engine3D.core.poolObject.PoolEntityContainer3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData;
 	import com.game.engine3D.scene.render.vo.RenderUnitSyncInfo;
 	import com.game.engine3D.utils.CallBackUtil;
@@ -40,11 +38,11 @@ package com.game.engine3D.scene.render
 		 * @param $type
 		 * @param $value
 		 */
-		public static function create(type : String, id : Number) : RenderSet3D
+		public static function create(type : String, id : Number,is25D:Boolean=false) : RenderSet3D
 		{
 			_cnt++;
 			//利用池生成
-			return _pool.createObj(RenderSet3D, type, id) as RenderSet3D;
+			return _pool.createObj(RenderSet3D, type, id,is25D) as RenderSet3D;
 		}
 
 		public static function recycle(rs : RenderSet3D) : void
@@ -80,10 +78,12 @@ package com.game.engine3D.scene.render
 		private var _mouseOutCallBackList : Vector.<CallBackData>;
 		private var _mouseRightUpCallBackList : Vector.<CallBackData>;
 		private var _mouseRightDownCallBackList : Vector.<CallBackData>;
+		
+		private var _is25D:Boolean=false;
 
-		public function RenderSet3D(type : String, id : Number)
+		public function RenderSet3D(type : String, id : Number,is25D:Boolean=false)
 		{
-			super([type, id]);
+			super([type, id,is25D]);
 			_syncInfos = new Dictionary();
 			_renderUnitMap = new Dictionary();
 		}
@@ -370,7 +370,7 @@ package com.game.engine3D.scene.render
 			var ru : RenderUnit3D = getRenderUnitByID(rpd.type, rpd.id, false);
 			if (!ru)
 			{
-				ru = RenderUnit3D.create(rpd); //创建一个新的
+				ru = RenderUnit3D.create(rpd,_is25D); //创建一个新的
 			}
 			ru.setRenderParamData(rpd);
 			ru.shareMaterials = _shareMaterials;
@@ -1037,6 +1037,7 @@ package com.game.engine3D.scene.render
 			//
 			type = $parameters[0];
 			id = $parameters[1];
+			_is25D = $parameters[2];
 			if (!_graphicDis)
 			{
 				_graphicDis = PoolContainer3D.create();

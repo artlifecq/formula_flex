@@ -371,7 +371,7 @@ package com.rpgGame.coreData.cfg
 		
 		public static function getRelateSpells(relateSpellStr : String):Vector.<Q_skill_model>
 		{
-			var relateSpells:Vector.<Q_skill_model>;
+			var relateSpells:Vector.<Q_skill_model> = new Vector.<Q_skill_model>();
 			
 			if(relateSpellStr != "")
 			{

@@ -36,31 +36,31 @@ package com.rpgGame.app.manager
 			for each ( var info :CustomTaginfo in tags ) 
 			{
 				var value :String = info.value;
-				var k:int = parseInt(info.key);
+				var type:int = parseInt(info.key);
 				if ( value == null )
 					value = "";
 				
-				if ( k == EnumCustomTagType.BOSS_REFRESH_NOTICE )
+				if ( type == EnumCustomTagType.BOSS_REFRESH_NOTICE )
 				{
 				}
-				else if ( k == EnumCustomTagType.DEFAULT_USE_SKILL_MID )
+				else if ( type == EnumCustomTagType.DEFAULT_USE_SKILL_MID )
 				{
 				}
-				else if ( k == EnumCustomTagType.CHAT_CHANNEL_SHOW )
+				else if ( type == EnumCustomTagType.CHAT_CHANNEL_SHOW )
 				{
 				}
-				else if ( k == EnumCustomTagType.SHORTCUT_CONFIG )
+				else if ( type == EnumCustomTagType.SHORTCUT_CONFIG )
 				{
 					//快捷键设置
 					initShortCutsConfig(value , isFirst);
 				}
-				else if ( k == EnumCustomTagType.SYSTEM_SET )
+				else if ( type == EnumCustomTagType.SYSTEM_SET )
 				{
 				}
-				else if(k == EnumCustomTagType.GET_JUE_MING_ATTRIBUTE_EFFECT)
+				else if(type == EnumCustomTagType.GET_JUE_MING_ATTRIBUTE_EFFECT)
 				{
 				}
-				else if (k == EnumCustomTagType.SCENEEFFECT_INTERACT)
+				else if (type == EnumCustomTagType.SCENEEFFECT_INTERACT)
 				{
 				}
 			}
