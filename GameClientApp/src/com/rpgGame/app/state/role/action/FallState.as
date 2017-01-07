@@ -17,7 +17,7 @@ package com.rpgGame.app.state.role.action
 
 	/**
 	 *
-	 * 场景角色击倒状态
+	 * 场景角色击飞状态
 	 * @author L.L.M.Sunny
 	 * 创建时间：2015-8-7 下午5:25:12
 	 *
