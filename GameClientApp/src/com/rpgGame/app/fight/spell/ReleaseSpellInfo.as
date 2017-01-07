@@ -91,6 +91,14 @@ package com.rpgGame.app.fight.spell
 			}
 		}
 
+		/**
+		 * 1.如果是新的技能产生的伤害结果（缓存为null），
+		 * 2.旧的技能产生的伤害结果，且动作已经播放完，则返回 false 
+		 * 
+		 * @param flySceneObjID
+		 * @return 
+		 * 
+		 */		
 		public static function isCurrReleaseInfo(flySceneObjID : int) : Boolean
 		{
 			var info : ReleaseSpellInfo = _releaseInfoById[flySceneObjID];

@@ -92,8 +92,10 @@ package com.rpgGame.coreData.clientConfig
 		public var q_fly_time:int;
 		 /**  是否飞行穿越 */
 		public var q_is_fly_cross:int;
-		 /**  技能属性 */
+		 /**  技能属性（人物属性加成） */
 		public var q_attributes:String;
+		 /**  战斗计算技能伤害属性 */
+		public var q_fight_attributes:String;
 		 /**  技能伤害系数（万分比分子） */
 		public var q_hurt_correct_factor:int;
 		 /**  技能附加伤害（为-1则通过技能编号_技能等级  去q_skill_ignore表中读取无视防御伤害值） */

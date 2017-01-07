@@ -41,22 +41,32 @@ package com.rpgGame.app.fight.spell
 	 */
 	public class SpellHitHelper
 	{
+//		private static var isServerComeOn:Boolean = false;
+//		private static var isClientComeOn:Boolean = false;
+		
 		public function SpellHitHelper()
 		{
 		}
 
-		public static function serverSpellHitEffect(info : ReleaseSpellInfo) : void
+		/**
+		 * 这个是用来处理类似陷阱类的伤害显示，有持续性伤害的显示 
+		 * @param info
+		 * 
+		 */		
+		public static function waveSpellHitEffect(info : ReleaseSpellInfo) : void
 		{
 			if (!ReleaseSpellInfo.isCurrReleaseInfo(info.flySceneObjID))
 			{
+//				isServerComeOn = true;
 				showSpellHitEffect(info);
 			}
 		}
 
-		public static function clientSpellHitEffect(info : ReleaseSpellInfo) : void
+		public static function fightSpellHitEffect(info : ReleaseSpellInfo) : void
 		{
 			if (ReleaseSpellInfo.isCurrReleaseInfo(info.flySceneObjID))
 			{
+//				isClientComeOn = true;
 				showSpellHitEffect(info);
 			}
 			info.motionFinish = true;
@@ -186,6 +196,8 @@ package com.rpgGame.app.fight.spell
 			}
 			else
 			{
+//				isServerComeOn = false;
+//				isClientComeOn = false;
 				ReleaseSpellInfo.removeReleaseInfo(info.flySceneObjID);
 			}
 		}

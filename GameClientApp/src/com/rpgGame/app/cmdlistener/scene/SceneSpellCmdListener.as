@@ -1,5 +1,6 @@
 package com.rpgGame.app.cmdlistener.scene
 {
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
@@ -23,6 +24,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.fight.message.ResAttackVentToClientMessage;
 	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
 	import com.rpgGame.netData.fight.message.ResFightFailedBroadcastMessage;
+	import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.game.netCore.connection.SocketConnection;
@@ -48,7 +50,7 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(102101,onResFightBroadcastMessage);
 			SocketConnection.addCmdListener(102102,onResAttackResultMessage);
 			SocketConnection.addCmdListener(102107,onResAttackVentToClientMessage);
-			
+			SocketConnection.addCmdListener(102114,onSCAttackerResultMessage);
 //			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_YOUR_SPELL_RELEASED, onYouSpellRelease);
 			//
 			finish();
@@ -184,10 +186,11 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onResFightBroadcastMessage(msg:ResFightBroadcastMessage):void
 		{
+			GameLog.addShow("技能流水号为： 对目标\t" + msg.uid);
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg.uid, msg, true);
 			ReleaseSpellHelper.releaseSpell(info);
-			effectCharAttribute(info);
+//			effectCharAttribute(info);
 			
 			//			if (info.atkor && info.atkor.isMainChar)
 			//			{
@@ -202,9 +205,23 @@ package com.rpgGame.app.cmdlistener.scene
 		
 		private function onResAttackVentToClientMessage(msg:ResAttackVentToClientMessage):void
 		{
+			GameLog.addShow("技能流水号为： 对地\t" + msg.uid);
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg.uid, msg, true);
 			ReleaseSpellHelper.releaseSpell(info);
+//			effectCharAttribute(info);
+		}
+		
+		/**
+		 * 技能伤害列表 
+		 * @param msg
+		 * 
+		 */		
+		private function onSCAttackerResultMessage(msg:SCAttackerResultMessage):void
+		{
+			GameLog.addShow("技能伤害流水号为： \t" + msg.uid);
+			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg.uid, msg);
+			SpellHitHelper.fightSpellHitEffect(info);
 			effectCharAttribute(info);
 		}
 
@@ -215,9 +232,9 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onResAttackResultMessage(msg:ResAttackResultMessage):void
 		{
-			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg.state.skillId, msg);
-			SpellHitHelper.serverSpellHitEffect(info);
-			effectCharAttribute(info);
+//			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg.state.uid, msg);
+//			SpellHitHelper.fightSpellHitEffect(info);
+//			effectCharAttribute(info);
 			
 			//			if (info.atkor && info.atkor.isMainChar)
 			//			{
