@@ -17,6 +17,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
 	import com.rpgGame.netData.fight.message.ResAttackVentToClientMessage;
 	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
+	import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
 	
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
@@ -53,9 +54,9 @@ package com.rpgGame.app.fight.spell
 			{
 				info.readFrom(flySceneObjID, msg);
 			}
-			else if(msg is ResAttackResultMessage)
+			else if(msg is SCAttackerResultMessage)
 			{
-				createResults(info, msg as ResAttackResultMessage);
+				createResults(info, msg as SCAttackerResultMessage);
 			}
 			
 			if (waitCache)
@@ -314,18 +315,13 @@ package com.rpgGame.app.fight.spell
 			}
 		}
 
-		private static const IS_STATE : int = 1 << 0;
-		private static const HAS_POSITION_CHANGE : int = 1 << 1;
-		private static const HAS_ATTACKER_ID : int = 1 << 2;
-		private static const HAS_STIFFTIME : int = 1 << 3;
-
 		/**
 		 * 技能造成的伤害和buff列表处理（通用）
 		 * @param info
 		 * @param buffer
 		 *
 		 */
-		private static function createResults(info : ReleaseSpellInfo, msg : ResAttackResultMessage) : void
+		private static function createResults(info : ReleaseSpellInfo, msg : SCAttackerResultMessage) : void
 		{
 			//类型和血量
 			var stateList : Vector.<BuffInfo> = new Vector.<BuffInfo>;
@@ -333,67 +329,67 @@ package com.rpgGame.app.fight.spell
 			var hurtCharList : Vector.<SceneRole> = new Vector.<SceneRole>;
 			var isHited : Boolean = false;
 			var roleID : Number = 0;
-			
-			var state:AttackResultInfo = msg.state;
-			
-//			var type : int = buffer.readVarint32();
-//			var isState : Boolean = Boolean(type & IS_STATE);
+			var resultInfo:AttackResultInfo;
 			var isState : Boolean = false;//现在还没有技能触发buff的功能，暂时不走这里面的逻辑
-			if (isState) //是否状态效果（buff/debuff）
+			
+			for(var i:uint = 0;i<msg.infos.length;i++)
 			{
-//				roleID = buffer.readVarint64();
-//				var buffInfo : BuffInfo = new BuffInfo(roleID);
-//				buffInfo.cfgId = buffer.readVarint32();
-//				buffInfo.curtStackCount = buffer.readVarint32();
-//				buffInfo.disappearTime = buffer.readVarint64();
-//				stateList.push(buffInfo);
-			}
-			else
-			{
-				roleID = state.targetId.ToGID();
-				var hurtResultVO : FightHurtResult = new FightHurtResult(roleID);
-				hurtResultVO.curLife = state.damage;
-				
-//				hurtResultVO.hasPositionChange = Boolean(type & HAS_POSITION_CHANGE);
-//				if (hurtResultVO.hasPositionChange)
-//				{
-//					hurtResultVO.newPosition = new Point(buffer.readVarint32(), buffer.readVarint32());
-//				}
-				
-//				var hasAttckerId : Boolean = Boolean(type & HAS_ATTACKER_ID);
-//				if (hasAttckerId)
-//				{
-					hurtResultVO.attackerId = state.attackerId.ToGID();
-//				}
-//				var hasStiffTime : Boolean = Boolean(type & HAS_STIFFTIME);
-//				if (hasStiffTime)
-//				{
-//					hurtResultVO.stiffTime = buffer.readVarint64();
-//				}
-				
-//				var hurtTimes : int = type >>> 4; //伤害次数
-//				for (var hurtTimeI : int = 0; hurtTimeI < hurtTimes; hurtTimeI++) //hp - 3*50 = curLife
-//				{
-//					var hurtTypeAmount : int = state.damage;
-					var hurtType : int = state.fightResult
-					var hurtAmount : int = state.damage; //本次
-					var sVo : FightSingleHurt = new FightSingleHurt(hurtType, hurtAmount, roleID);
-					hurtResultVO.addHurt(sVo);
-//				}
-				hurtList.push(hurtResultVO);
-				//
-				var role : SceneRole = SceneManager.getSceneObjByID(roleID) as SceneRole;
-				if (role)
+				resultInfo = msg.infos[i];
+				roleID = resultInfo.targetId.ToGID();
+				if (isState) //是否状态效果（buff/debuff）
 				{
-					//role.isServerLiving = hurtResultVO.curLife > 0;
-					hurtCharList.push(role);
+//					var buffInfo : BuffInfo = new BuffInfo(roleID);
+//					buffInfo.cfgId = buffer.readVarint32();
+//					buffInfo.curtStackCount = buffer.readVarint32();
+//					buffInfo.disappearTime = buffer.readVarint64();
+//					stateList.push(buffInfo);
 				}
-				//
-				if (roleID == MainRoleManager.actorID) //判定主角是否被攻击
+				else
 				{
-					if (info.atkor && info.atkor.data is HeroData) //是玩家才自动反击
+					var hurtResultVO : FightHurtResult = new FightHurtResult(roleID);
+					hurtResultVO.curLife = resultInfo.damage;
+					
+					var hasPositionChange:Boolean = (resultInfo.newPos.x != 0 || resultInfo.newPos.y != 0);
+					
+					hurtResultVO.hasPositionChange = hasPositionChange;
+					if (hurtResultVO.hasPositionChange)
 					{
-						isHited = true;
+						hurtResultVO.newPosition = new Point(resultInfo.newPos.x, resultInfo.newPos.y);
+					}
+					
+					
+					hurtResultVO.attackerId = resultInfo.attackerId.ToGID();
+					
+					var hasStiffTime : Boolean = false;//击飞时间，暂时没有，所以先为false
+					if (hasStiffTime)
+					{
+						hurtResultVO.stiffTime = 0;
+					}
+					
+					var hurtTimes : int = 1; //伤害次数
+					for (var hurtTimeI : int = 0; hurtTimeI < hurtTimes; hurtTimeI++) //hp - 3*50 = curLife
+					{
+						var hurtTypeAmount : int = resultInfo.damage;
+						var hurtType : int = resultInfo.fightResult
+						var hurtAmount : int = resultInfo.damage; //本次
+						var sVo : FightSingleHurt = new FightSingleHurt(hurtType, hurtAmount, roleID);
+						hurtResultVO.addHurt(sVo);
+					}
+					hurtList.push(hurtResultVO);
+					//
+					var role : SceneRole = SceneManager.getSceneObjByID(roleID) as SceneRole;
+					if (role)
+					{
+						//role.isServerLiving = hurtResultVO.curLife > 0;
+						hurtCharList.push(role);
+					}
+					//
+					if (roleID == MainRoleManager.actorID) //判定主角是否被攻击
+					{
+						if (info.atkor && info.atkor.data is HeroData) //是玩家才自动反击
+						{
+							isHited = true;
+						}
 					}
 				}
 			}
