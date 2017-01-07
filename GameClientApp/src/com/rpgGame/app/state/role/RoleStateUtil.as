@@ -360,7 +360,7 @@ package com.rpgGame.app.state.role
 		{
 			var spellInfo : ReleaseSpellInfo = ref.data as ReleaseSpellInfo;
 			SpellAnimationHelper.addDestEffect(ref.targetPos.x, ref.targetPos.y, ref.angle, spellInfo);
-			SpellHitHelper.clientSpellHitEffect(spellInfo);
+			SpellHitHelper.fightSpellHitEffect(spellInfo);
 		}
 
 		/**

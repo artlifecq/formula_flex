@@ -40,6 +40,9 @@ package com.rpgGame.netData.fight.bean{
 		//击退点
 		private var _newPos: com.rpgGame.netData.structs.Position;
 		
+		//战斗唯一ID
+		private var _uid: int;
+		
 		/**
 		 * 写入字节缓存
 		 */
@@ -60,6 +63,8 @@ package com.rpgGame.netData.fight.bean{
 			writeInt(_skillId);
 			//击退点
 			writeBean(_newPos);
+			//战斗唯一ID
+			writeInt(_uid);
 			return true;
 		}
 		
@@ -83,6 +88,8 @@ package com.rpgGame.netData.fight.bean{
 			_skillId = readInt();
 			//击退点
 			_newPos = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
+			//战斗唯一ID
+			_uid = readInt();
 			return true;
 		}
 		
@@ -204,6 +211,21 @@ package com.rpgGame.netData.fight.bean{
 		 */
 		public function set newPos(value: com.rpgGame.netData.structs.Position): void{
 			this._newPos = value;
+		}
+		
+		/**
+		 * get 战斗唯一ID
+		 * @return 
+		 */
+		public function get uid(): int{
+			return _uid;
+		}
+		
+		/**
+		 * set 战斗唯一ID
+		 */
+		public function set uid(value: int): void{
+			this._uid = value;
 		}
 		
 	}
