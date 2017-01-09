@@ -38,7 +38,7 @@ package com.rpgGame.core.fight.spell
 
 		public function get isReleaseAtMouse() : Boolean
 		{
-			return false;//_spellData.activeSpell && _spellData.activeSpell.isReleaseAtMouse; //是否鼠标处释放
+			return true;//_spellData.activeSpell && _spellData.activeSpell.isReleaseAtMouse; //是否鼠标处释放
 		}
 
 		public function get isReleaseOnlyUpMount() : Boolean

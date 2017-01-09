@@ -853,6 +853,7 @@ package com.rpgGame.app.fight.spell
 		public function get isTrapSpell() : Boolean
 		{
 			return _isTrapSpell;
+//			return false;
 		}
 
 		public function get throwHeight() : int

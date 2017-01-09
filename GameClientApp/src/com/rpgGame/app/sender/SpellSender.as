@@ -43,6 +43,7 @@ package com.rpgGame.app.sender
 		 */
 		public static function releaseSpell(spellID : int, x : int, y : int, angle : int, targetID : long) : void
 		{
+			GameLog.addShow("马上要释放技能id:\t" + spellID);
 			if(targetID != null)
 			{
 				releaseSpellAtTarget(spellID,angle,targetID);

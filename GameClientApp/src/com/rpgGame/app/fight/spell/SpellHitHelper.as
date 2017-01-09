@@ -118,7 +118,7 @@ package com.rpgGame.app.fight.spell
 						}
 						else
 						{
-							if (hurtVo.stiffTime > 0)
+							if (hurtVo.stiffTime > 0)//击飞
 							{
 								var fallRef : FallStateReference = role.stateMachine.getReference(FallStateReference) as FallStateReference;
 								fallRef.setParams(hurtVo.stiffTime);
