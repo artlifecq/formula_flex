@@ -86,28 +86,23 @@ package com.rpgGame.app.fight.spell
 			
 			var relateSpells:Vector.<Q_skill_model> = SpellDataManager.getRelateSpells(_caseSpell.q_relate_spells);
 			
-			if(!relateSpells)
+			if(!relateSpells || relateSpells.length == 0)
 			{
-				GameLog.add("这个技能没有连招哦！！！");
+//				GameLog.add("这个技能没有连招哦！！！");
 				return _caseSpell;
 			}
 			
+			_relateSpellIndex++;
 			if (_relateSpellIndex < 0)
 			{
-				_relateSpellIndex++;
-				return _caseSpell;
+				_relateSpellIndex = 0;
 			}
 			else if (_relateSpellIndex >= relateSpells.length)
 			{
 				_relateSpellIndex = 0;
-				return _caseSpell;
 			}
-			else
-			{
-				var currIndex : int = _relateSpellIndex;
-				_relateSpellIndex++;
-				return relateSpells[currIndex];
-			}
+			
+			return relateSpells[_relateSpellIndex];
 		}
 
 		public static function shortcutsTryCaseSpell(spellID : int) : void
@@ -172,11 +167,11 @@ package com.rpgGame.app.fight.spell
 
 			function onWalkArriveRelease(ref : WalkMoveStateReference) : void
 			{
-				caseState = caseSpell(caseInfo);
-				if (caseState == CASE_STATE_SUCCEED)
-				{
+//				caseState = caseSpell(caseInfo,false,true);
+//				if (caseState == CASE_STATE_SUCCEED)
+//				{
 					requestReleaseSpell();
-				}
+//				}
 			}
 
 			function onWalkThroughCase(ref : WalkMoveStateReference) : void
@@ -590,25 +585,40 @@ package com.rpgGame.app.fight.spell
 			else if (castInfo.isReleaseAtMouse) //对鼠标点施放的技能
 			{
 				var scenePosition : Vector3D = Stage3DLayerManager.getPickPositonByMousePositon(SceneManager.getScene().view, Stage3DLayerManager.stage.mouseX, Stage3DLayerManager.stage.mouseY/*, MainRoleManager.getActorSpellHandHight()*/);
-				if (scenePosition)
+				if (spellData.q_blink_type == 0)
 				{
+					if (scenePosition)
+					{
+						releaseRange = releaseRange - DEVIATION_RANGE;
+						releaseRange = releaseRange < 0 ? 0 : releaseRange;
+	
+						var mousePos : Point = new Point(scenePosition.x, scenePosition.y);
+						angle = MathUtil.getAngle(selfPos.x, selfPos.y, mousePos.x, mousePos.y);
+						radian = angle * Math.PI / 180;
+						dist = Point.distance(selfPos, mousePos);
+						if (dist > releaseRange)
+						{
+							dist = dist - releaseRange;
+							dist = dist < 0 ? 0 : dist;
+						}
+						releaseTargetPos = new Point();
+						releaseTargetPos.x = selfPos.x + dist * Math.cos(radian);
+						releaseTargetPos.y = selfPos.y + dist * Math.sin(radian);
+						targetPos = new Point(releaseTargetPos.x, releaseTargetPos.y);
+						releasePos = mousePos;
+					}
+				}
+				else
+				{
+					angle = 270 - MainRoleManager.actor.rotationY;
+					radian = angle * Math.PI / 180;
 					releaseRange = releaseRange - DEVIATION_RANGE;
 					releaseRange = releaseRange < 0 ? 0 : releaseRange;
-
-					var mousePos : Point = new Point(scenePosition.x, scenePosition.y);
-					angle = MathUtil.getAngle(selfPos.x, selfPos.y, mousePos.x, mousePos.y);
-					radian = angle * Math.PI / 180;
-					dist = Point.distance(selfPos, mousePos);
-					if (dist > releaseRange)
-					{
-						dist = dist - releaseRange;
-						dist = dist < 0 ? 0 : dist;
-					}
 					releaseTargetPos = new Point();
-					releaseTargetPos.x = selfPos.x + dist * Math.cos(radian);
-					releaseTargetPos.y = selfPos.y + dist * Math.sin(radian);
-					targetPos = new Point(releaseTargetPos.x, releaseTargetPos.y);
-					releasePos = mousePos;
+					releaseTargetPos.x = selfPos.x + releaseRange * Math.cos(radian);
+					releaseTargetPos.y = selfPos.y + releaseRange * Math.sin(radian);
+					targetPos = new Point(selfPos.x, selfPos.y);
+					releasePos = new Point(releaseTargetPos.x, releaseTargetPos.y);
 				}
 			}
 			else
