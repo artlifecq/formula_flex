@@ -2,6 +2,7 @@ package com.rpgGame.app.manager.shell
 {
     import com.game.engine2D.Scene;
     import com.game.engine3D.core.AreaMap;
+    import com.game.engine3D.display.shapeArea.ShapeArea3D;
     import com.game.engine3D.manager.Stage3DLayerManager;
     import com.game.engine3D.utils.StatsUtil;
     import com.game.engine3D.vo.AreaMapData;
@@ -65,7 +66,26 @@ package com.rpgGame.app.manager.shell
             this._funcs["addTrans".toLowerCase()] = this.addTrans;
             this._funcs["showAreaFlag".toLowerCase()] = this.showAreaFlag;
 			this._funcs["addSkillToBar".toLowerCase()] = this.addSkillToBar;
+			this._funcs["shape".toLocaleLowerCase()] = this.shapeFunc;
         }
+		
+		private var _measureShapeArea3D:ShapeArea3D;		
+		private function shapeFunc(type:int,x:Number,y:Number,width:Number):void
+		{
+			if(type == 0)
+			{
+				if (_measureShapeArea3D)
+				{
+					_measureShapeArea3D.dispose();
+					_measureShapeArea3D = null;
+				}
+			}
+			else
+			{
+				_measureShapeArea3D = new ShapeArea3D(SceneManager.getScene().sceneRenderLayer);
+				_measureShapeArea3D.updateFill(x, 0, y, 0xff0000, type,25,width);
+			}
+		}
 		
 		private function addSkillToBar(shortcutPos:int,id:int):void
 		{

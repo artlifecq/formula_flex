@@ -2,17 +2,12 @@ package com.rpgGame.app.scene
 {
 	import com.game.mainCore.libCore.pool.IPoolClass;
 	import com.game.mainCore.libCore.pool.Pool;
-	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.core.events.BuffEvent;
-	import com.rpgGame.coreData.cfg.AnimationDataManager;
-	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
 	import com.rpgGame.coreData.clientConfig.Q_buff;
 	import com.rpgGame.coreData.info.buff.BuffInfo;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RenderUnitType;
-	
-	import app.message.StateProto;
 	
 	import gs.TweenLite;
 	
