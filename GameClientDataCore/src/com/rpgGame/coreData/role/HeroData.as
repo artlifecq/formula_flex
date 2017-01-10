@@ -183,15 +183,15 @@ package com.rpgGame.coreData.role
 			///角色属性信息
 			data.totalStat.setData(heroInfo.attributes);
 			
-			data.buffList = new Vector.<BuffInfo>();
-			while (msg.buff > 0)
-			{
-				var buffInfo : BuffInfo = new BuffInfo(data.id);
-				buffInfo.cfgId = buffer.readVarint32();
-				buffInfo.curtStackCount = buffer.readVarint32();
-				buffInfo.disappearTime = buffer.readVarint64();
-				data.buffList.push(buffInfo);
-			}
+//			data.buffList = new Vector.<BuffInfo>();
+//			while (msg.buff > 0)
+//			{
+//				var buffInfo : BuffInfo = new BuffInfo(data.id);
+//				buffInfo.cfgId = buffer.readVarint32();
+//				buffInfo.curtStackCount = buffer.readVarint32();
+//				buffInfo.disappearTime = buffer.readVarint64();
+//				data.buffList.push(buffInfo);
+//			}
 			///角色位置信息
 			RoleData.readGeneric(data, new Point(heroInfo.position.x,heroInfo.position.y));
 			
