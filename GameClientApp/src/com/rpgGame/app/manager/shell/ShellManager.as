@@ -4,6 +4,7 @@ package com.rpgGame.app.manager.shell
     import com.game.engine3D.core.AreaMap;
     import com.game.engine3D.display.shapeArea.ShapeArea3D;
     import com.game.engine3D.manager.Stage3DLayerManager;
+    import com.game.engine3D.utils.MathUtil;
     import com.game.engine3D.utils.StatsUtil;
     import com.game.engine3D.vo.AreaMapData;
     import com.game.mainCore.core.manager.LayerManager;
@@ -82,8 +83,12 @@ package com.rpgGame.app.manager.shell
 			}
 			else
 			{
+                var role : SceneRole = MainRoleManager.actor;
+                var dist : Number = MathUtil.getDistance(role.x, role.z, x, y);
+                var angle : Number = MathUtil.getAngle(role.x, role.z, x, y);
 				_measureShapeArea3D = new ShapeArea3D(SceneManager.getScene().sceneRenderLayer);
-				_measureShapeArea3D.updateFill(x, 0, y, 0xff0000, type,25,width);
+				_measureShapeArea3D.updateFill(role.x, 0, role.z, 0xff0000, type, dist, width, 1, 0, 0, angle, 1);
+                GameLog.addShow("[Shape][x:" + role.x + ",z:" + role.z + "]");
 			}
 		}
 		
