@@ -69,6 +69,9 @@ package com.rpgGame.app.manager
 			for each (var transRole : SceneRole in transportList)
 			{
 				var info : SceneTranportData = transRole.data as SceneTranportData;
+                CONFIG::netDebug {
+                    NetDebug.LOG("[AreaMapManager] [updateTransportAreaMap] data:" + info + ", polygon:" + info.polygon);
+                }
 				var polygon : Vector.<Point> = info.polygon.slice();
 				var areaMapData : AreaMapData = new AreaMapData(polygon, AreaMapTypeEnum.TRANS, info.id, transRole);
 				var color : String = otherAreaMap.addFlag(areaMapData);

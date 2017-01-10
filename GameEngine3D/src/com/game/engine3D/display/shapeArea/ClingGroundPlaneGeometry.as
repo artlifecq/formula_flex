@@ -6,6 +6,7 @@ package com.game.engine3D.display.shapeArea
 	import flash.utils.Endian;
 	
 	import away3d.core.base.CompactSubGeometry;
+	import away3d.pathFinding.HeightMapHelper;
 	import away3d.primitives.PrimitiveBase;
 
 	/**
@@ -27,6 +28,7 @@ package com.game.engine3D.display.shapeArea
 		private var _doubleSided : Boolean;
 		private var _flatNormal : Boolean;
 		private var _rotationY : Number = 0;
+        private var _heightMapHelper : HeightMapHelper;
 
 		public function ClingGroundPlaneGeometry(width : Number = 100, height : Number = 100, segmentsW : uint = 1, segmentsH : uint = 1, yUp : Boolean = false, doubleSided : Boolean = false, flatNormal : Boolean = false, hasNormals : Boolean = true, hasTangents : Boolean = false)
 		{
@@ -37,7 +39,7 @@ package com.game.engine3D.display.shapeArea
 			_yUp = yUp;
 			_width = width;
 			_height = height;
-//			_heightMapHelper = heightMapHelper;
+			_heightMapHelper = null;
 			_doubleSided = doubleSided;
 			_flatNormal = flatNormal;
 		}
@@ -175,7 +177,7 @@ package com.game.engine3D.display.shapeArea
 					var angle : Number = MathUtil.getAngle(0, 0, x, y) + _rotationY;
 					var dx : Number = MathUtil.getDxByAngle(dist, angle);
 					var dy : Number = MathUtil.getDyByAngle(dist, angle);
-//					z = _heightMapHelper ? _heightMapHelper.queryHeightAt(_x + dx, _y + dy) : 0;
+					z = _heightMapHelper ? _heightMapHelper.queryHeightAt(_x + dx, _y + dy) : 0;
 
 					data.position = (index) << 2;
 					data.writeFloat(x);
@@ -391,6 +393,7 @@ package com.game.engine3D.display.shapeArea
 
 		override public function dispose() : void
 		{
+            _heightMapHelper = null;
 			super.dispose();
 		}
 	}
