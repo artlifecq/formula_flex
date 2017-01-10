@@ -150,9 +150,9 @@ package com.rpgGame.coreData.role
 			spell3.spellType = 3;
 			spell3.activeSpell = activeSpell3;
 			
-//			info.spellList.addSpell(spell1);
-//			info.spellList.addSpell(spell2);
-//			info.spellList.addSpell(spell3);
+			//			info.spellList.addSpell(spell1);
+			//			info.spellList.addSpell(spell2);
+			//			info.spellList.addSpell(spell3);
 			spellArrs.push(spell1);
 			spellArrs.push(spell2);
 			spellArrs.push(spell3);
@@ -183,19 +183,19 @@ package com.rpgGame.coreData.role
 			///角色属性信息
 			data.totalStat.setData(heroInfo.attributes);
 			
-			//			data.buffList = new Vector.<BuffInfo>();
-			/*while (msg.buff > 0)
+			data.buffList = new Vector.<BuffInfo>();
+			while (msg.buff > 0)
 			{
-			var buffInfo : BuffInfo = new BuffInfo(data.id);
-			buffInfo.cfgId = buffer.readVarint32();
-			buffInfo.curtStackCount = buffer.readVarint32();
-			buffInfo.disappearTime = buffer.readVarint64();
-			data.buffList.push(buffInfo);
-			}*/
+				var buffInfo : BuffInfo = new BuffInfo(data.id);
+				buffInfo.cfgId = buffer.readVarint32();
+				buffInfo.curtStackCount = buffer.readVarint32();
+				buffInfo.disappearTime = buffer.readVarint64();
+				data.buffList.push(buffInfo);
+			}
 			///角色位置信息
 			RoleData.readGeneric(data, new Point(heroInfo.position.x,heroInfo.position.y));
-		
-		
+			
+			
 			//			if (heroProto.heroMiscModuleObj)
 			//			{
 			//				info.amountInfo.setSomeType(AmountType.JINZI, heroProto.heroMiscModuleObj.jinzi ? heroProto.heroMiscModuleObj.jinzi.toNumber() : 0);
@@ -253,20 +253,20 @@ package com.rpgGame.coreData.role
 			
 			data.totalStat.setData(info.attributes);
 			
-//			data.hp = info.hp;
-//			data.totalStat.life = info.maxHp;
-//			data.mp = info.mp;
-//			data.totalStat.mana = info.maxMp;
-//			
-//			data.buffList = new Vector.<BuffInfo>();
-//			while (msg.buff > 0)
-//			{
-//				var buffInfo : BuffInfo = new BuffInfo(data.id);
-//				buffInfo.cfgId = buffer.readVarint32();
-//				buffInfo.curtStackCount = buffer.readVarint32();
-//				buffInfo.disappearTime = buffer.readVarint64();
-//				data.buffList.push(buffInfo);
-//			}
+			//			data.hp = info.hp;
+			//			data.totalStat.life = info.maxHp;
+			//			data.mp = info.mp;
+			//			data.totalStat.mana = info.maxMp;
+			//			
+			//			data.buffList = new Vector.<BuffInfo>();
+			//			while (msg.buff > 0)
+			//			{
+			//				var buffInfo : BuffInfo = new BuffInfo(data.id);
+			//				buffInfo.cfgId = buffer.readVarint32();
+			//				buffInfo.curtStackCount = buffer.readVarint32();
+			//				buffInfo.disappearTime = buffer.readVarint64();
+			//				data.buffList.push(buffInfo);
+			//			}
 			
 			RoleData.readGeneric(data, new Point(info.position.x,info.position.y));
 		}
@@ -287,7 +287,7 @@ package com.rpgGame.coreData.role
 			teamRoleData.countryId = teamUint.countryId;
 			teamRoleData.x = teamUint.mx;
 			teamRoleData.y = teamUint.my;
-//			teamRoleData._resources = teamUint.resources;
+			//			teamRoleData._resources = teamUint.resources;
 		}
 		
 		/**
@@ -298,37 +298,37 @@ package com.rpgGame.coreData.role
 		 */
 		public static function setOtherRoleData(heroData : HeroData, roleInfo : OtherHeroProto) : void
 		{
-//			if (roleInfo.hasHeroBasic)
-//			{
-//				heroData.id = roleInfo.heroBasic.id.toNumber();
-//				heroData.countryId = roleInfo.heroBasic.country;
-//				heroData.name = roleInfo.heroBasic.name;
-//				heroData._resources = roleInfo.heroBasic.model.resources;
-//			}
-//			
-//			if (roleInfo.hasFamilyModuleObj)
-//			{
-//				heroData.societyName = roleInfo.familyModuleObj.familyName;
-//				heroData.guildName = roleInfo.familyModuleObj.guildName;
-//			}
-//			if (roleInfo.hasSceneModuleObj)
-//			{
-//				if (roleInfo.sceneModuleObj.pkStatus && roleInfo.sceneModuleObj.pkStatus.pkAmount)
-//					heroData.pkAmount = roleInfo.sceneModuleObj.pkStatus.pkAmount;
-//				heroData.hp = roleInfo.sceneModuleObj.life ? roleInfo.sceneModuleObj.life.toNumber() : 0;
-//				heroData.mp = roleInfo.sceneModuleObj.mana ? roleInfo.sceneModuleObj.mana.toNumber() : 0;
-//				if (roleInfo.sceneModuleObj.heroLevel)
-//				{
-//					heroData.level = roleInfo.sceneModuleObj.heroLevel.level;
-//					heroData.curExp = roleInfo.sceneModuleObj.heroLevel.exp ? roleInfo.sceneModuleObj.heroLevel.exp.toNumber() : 0;
-//					heroData.upgradeExp = roleInfo.sceneModuleObj.heroLevel.upgradeExp ? roleInfo.sceneModuleObj.heroLevel.upgradeExp.toNumber() : 0;
-//				}
-//				heroData.fightingAmount = roleInfo.sceneModuleObj.fightingAmount.toNumber();
-//			}
-//			
-//			heroData.totalStat.setData(roleInfo.sceneModuleObj.totalStat);
-//			heroData.equipInfo.setEquipsProto(roleInfo.goodsContainerModuleObj.heroEquipment);
-//			heroData.mounModuletData.setConfig(roleInfo.mountModuleObj);
+			//			if (roleInfo.hasHeroBasic)
+			//			{
+			//				heroData.id = roleInfo.heroBasic.id.toNumber();
+			//				heroData.countryId = roleInfo.heroBasic.country;
+			//				heroData.name = roleInfo.heroBasic.name;
+			//				heroData._resources = roleInfo.heroBasic.model.resources;
+			//			}
+			//			
+			//			if (roleInfo.hasFamilyModuleObj)
+			//			{
+			//				heroData.societyName = roleInfo.familyModuleObj.familyName;
+			//				heroData.guildName = roleInfo.familyModuleObj.guildName;
+			//			}
+			//			if (roleInfo.hasSceneModuleObj)
+			//			{
+			//				if (roleInfo.sceneModuleObj.pkStatus && roleInfo.sceneModuleObj.pkStatus.pkAmount)
+			//					heroData.pkAmount = roleInfo.sceneModuleObj.pkStatus.pkAmount;
+			//				heroData.hp = roleInfo.sceneModuleObj.life ? roleInfo.sceneModuleObj.life.toNumber() : 0;
+			//				heroData.mp = roleInfo.sceneModuleObj.mana ? roleInfo.sceneModuleObj.mana.toNumber() : 0;
+			//				if (roleInfo.sceneModuleObj.heroLevel)
+			//				{
+			//					heroData.level = roleInfo.sceneModuleObj.heroLevel.level;
+			//					heroData.curExp = roleInfo.sceneModuleObj.heroLevel.exp ? roleInfo.sceneModuleObj.heroLevel.exp.toNumber() : 0;
+			//					heroData.upgradeExp = roleInfo.sceneModuleObj.heroLevel.upgradeExp ? roleInfo.sceneModuleObj.heroLevel.upgradeExp.toNumber() : 0;
+			//				}
+			//				heroData.fightingAmount = roleInfo.sceneModuleObj.fightingAmount.toNumber();
+			//			}
+			//			
+			//			heroData.totalStat.setData(roleInfo.sceneModuleObj.totalStat);
+			//			heroData.equipInfo.setEquipsProto(roleInfo.goodsContainerModuleObj.heroEquipment);
+			//			heroData.mounModuletData.setConfig(roleInfo.mountModuleObj);
 		}
 		
 		public function get jobName() : String
@@ -369,7 +369,7 @@ package com.rpgGame.coreData.role
 		 */
 		public function cloneResourcesTo(data : HeroData) : void
 		{
-//			data._resources = _resources;
+			//			data._resources = _resources;
 		}
 		
 		/**

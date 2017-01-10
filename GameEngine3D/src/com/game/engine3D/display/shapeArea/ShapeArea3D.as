@@ -38,7 +38,6 @@ package com.game.engine3D.display.shapeArea
                 _container = PoolEntityContainer3D.create();
             else
                 _container = PoolContainer3D.create();
-			//_container = new ObjectContainer3D();
 			_parent.addChild(_container);
 			_polygons = new Vector.<Mesh>();
 			_geometrys = new Vector.<ClingGroundPlaneGeometry>();

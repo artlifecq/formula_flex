@@ -14,7 +14,6 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.info.fight.FightSingleHurt;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.fight.bean.AttackResultInfo;
-	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
 	import com.rpgGame.netData.fight.message.ResAttackVentToClientMessage;
 	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
 	import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
