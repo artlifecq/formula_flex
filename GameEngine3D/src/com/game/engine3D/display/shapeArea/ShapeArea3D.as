@@ -12,7 +12,7 @@ package com.game.engine3D.display.shapeArea
 	import away3d.containers.ObjectContainer3D;
 	import away3d.entities.Mesh;
 	import away3d.materials.TextureMaterial;
-	import away3d.pathFinding.HeightMapHelper;
+
 	import away3d.utils.Cast;
 
 	/**
