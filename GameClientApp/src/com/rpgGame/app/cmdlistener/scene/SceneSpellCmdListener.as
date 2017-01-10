@@ -1,5 +1,8 @@
 package com.rpgGame.app.cmdlistener.scene
 {
+	import com.game.engine2D.config.SceneConfig;
+	import com.game.engine3D.display.shapeArea.ShapeArea3D;
+	import com.game.engine3D.utils.MathUtil;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
@@ -20,11 +23,14 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.lang.LangNoticeInfo;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.netData.fight.message.ResAttackRangeMessage;
 	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
 	import com.rpgGame.netData.fight.message.ResAttackVentToClientMessage;
 	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
 	import com.rpgGame.netData.fight.message.ResFightFailedBroadcastMessage;
 	import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
+	
+	import flash.geom.Point;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.game.netCore.connection.SocketConnection;
@@ -51,6 +57,7 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(102102,onResAttackResultMessage);
 			SocketConnection.addCmdListener(102107,onResAttackVentToClientMessage);
 			SocketConnection.addCmdListener(102114,onSCAttackerResultMessage);
+			SocketConnection.addCmdListener(102103,onResAttackRangeMessage);
 //			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_YOUR_SPELL_RELEASED, onYouSpellRelease);
 			//
 			finish();
@@ -260,6 +267,32 @@ package com.rpgGame.app.cmdlistener.scene
 					CharAttributeManager.setCharHp(role.data as RoleData, hurtResult.curLife);
 					CharAttributeManager.setCharMp(role.data as RoleData, hurtResult.curMana);
 				}
+			}
+		}
+		
+		private var attackAreas:Vector.<ShapeArea3D> = new Vector.<ShapeArea3D>();
+		private function onResAttackRangeMessage(msg:ResAttackRangeMessage):void
+		{
+			
+			var gw:int = SceneConfig.TILE_WIDTH;
+			var gh:int = SceneConfig.TILE_HEIGHT;
+			var i:int = 0;
+			for ( i = 0; i < attackAreas.length; i++ )
+			{
+				if (attackAreas[i])
+				{
+					attackAreas[i].dispose();
+					attackAreas[i] = null;
+				}
+			}
+			
+			attackAreas = new Vector.<ShapeArea3D>();
+			for (i = 0; i < msg.grids.length; i++)
+			{
+				var pt:Point = new Point(int(msg.grids[i] / 10000), int(msg.grids[i] % 10000));
+				var _measureShapeArea3D:ShapeArea3D = new ShapeArea3D(SceneManager.getScene().sceneRenderLayer);
+				_measureShapeArea3D.updateFill(pt.x, 0, -pt.y, 0xff0000, 4,25,0);
+				attackAreas.push( _measureShapeArea3D );
 			}
 		}
 		
