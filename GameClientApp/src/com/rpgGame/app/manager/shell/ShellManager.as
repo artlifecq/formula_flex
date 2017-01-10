@@ -70,15 +70,19 @@ package com.rpgGame.app.manager.shell
 			this._funcs["shape".toLocaleLowerCase()] = this.shapeFunc;
         }
 		
-		private var _measureShapeArea3D:ShapeArea3D;		
+		private var arr:Vector.<ShapeArea3D> = new Vector.<ShapeArea3D>();	
 		private function shapeFunc(type:int,x:Number,y:Number,width:Number):void
 		{
+			var _measureShapeArea3D:ShapeArea3D;
 			if(type == 0)
 			{
-				if (_measureShapeArea3D)
+				for(var i:uint=0;i<arr.length;i++)
 				{
-					_measureShapeArea3D.dispose();
-					_measureShapeArea3D = null;
+					if(arr[i])
+					{
+						arr[i].dispose();
+						arr[i]=null;
+					}
 				}
 			}
 			else
@@ -87,7 +91,8 @@ package com.rpgGame.app.manager.shell
                 var dist : Number = MathUtil.getDistance(role.x, role.z, x, y);
                 var angle : Number = MathUtil.getAngle(role.x, role.z, x, y);
 				_measureShapeArea3D = new ShapeArea3D(SceneManager.getScene().sceneRenderLayer);
-				_measureShapeArea3D.updateFill(role.x, 0, role.z, 0xff0000, type, dist, width, 1, 0, 0, angle, 1);
+				_measureShapeArea3D.updateFill(role.x, 0, role.z, 0xff0000, type,width,1);
+				arr.push(_measureShapeArea3D);
                 GameLog.addShow("[Shape][x:" + role.x + ",z:" + role.z + "]");
 			}
 		}

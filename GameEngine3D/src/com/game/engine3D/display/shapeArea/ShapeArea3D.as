@@ -12,7 +12,7 @@ package com.game.engine3D.display.shapeArea
 	import away3d.containers.ObjectContainer3D;
 	import away3d.entities.Mesh;
 	import away3d.materials.TextureMaterial;
-	import away3d.pathFinding.HeightMapHelper;
+
 	import away3d.utils.Cast;
 
 	/**
@@ -39,7 +39,6 @@ package com.game.engine3D.display.shapeArea
                 _container = PoolEntityContainer3D.create();
             else
                 _container = PoolContainer3D.create();
-			//_container = new ObjectContainer3D();
 			_parent.addChild(_container);
 			_polygons = new Vector.<Mesh>();
 			_geometrys = new Vector.<ClingGroundPlaneGeometry>();
