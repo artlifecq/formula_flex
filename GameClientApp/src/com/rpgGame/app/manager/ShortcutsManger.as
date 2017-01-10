@@ -115,7 +115,12 @@ package com.rpgGame.app.manager
 				shorts = ClientSettingManager.getShortCutDataByKey(i);
 
 				if (shorts == null)
+				{
+					//这段注释里写的是测试代码，为了方便调试技能，所以先这么写，后面系统成熟了，再去掉这段代码
+//					setShortData(i,ShortcutsTypeEnum.SKILL_TYPE,(1001 + i));
+					//
 					continue;
+				}
 				shortData = new ShortcutsData();
 				
 				shortData.type = shorts.t;
@@ -250,8 +255,6 @@ package com.rpgGame.app.manager
 			var shortData : ShortcutsData = getShortcutsDataByPos(shortcutPos);
 			if (shortData == null)
 			{
-				//以下是测试代码。。。。。。
-				CastSpellHelper.shortcutsTryCaseSpell(1);
 				return false; //这个快捷键没有设置数据
 			}
 

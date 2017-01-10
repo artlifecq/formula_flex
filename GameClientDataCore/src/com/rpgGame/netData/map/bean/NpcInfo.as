@@ -55,7 +55,7 @@ package com.rpgGame.netData.map.bean{
 			//NPC头像造型
 			writeString(_npcIcon);
 			//方向
-			writeByte(_dir);
+			writeShort(_dir);
 			//Npc所在位置
 			writeBean(_position);
 			//NPC状态
@@ -78,7 +78,7 @@ package com.rpgGame.netData.map.bean{
 			//NPC头像造型
 			_npcIcon = readString();
 			//方向
-			_dir = readByte();
+			_dir = readShort();
 			//Npc所在位置
 			_position = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
 			//NPC状态

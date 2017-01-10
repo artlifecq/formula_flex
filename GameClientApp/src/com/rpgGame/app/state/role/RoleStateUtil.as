@@ -88,7 +88,7 @@ package com.rpgGame.app.state.role
 					return;
 				}
 			}
-			var position : Vector3D = new Vector3D(posx, role.y, posy, role.position.w);
+			var position : Vector3D = new Vector3D(posx, posy, 0, role.position.w);
 			walkToPos(role, position, spacing, data, onArrive, onThrough, onUpdate);
 		}
 
@@ -142,9 +142,9 @@ package com.rpgGame.app.state.role
 		public static function doWalkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
 										   onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : Boolean
 		{
-            CONFIG::netDebug {
+            /*CONFIG::netDebug {
                 NetDebug.LOG("[RoleStateUtil] [doWalkToPos]");
-            }
+            }*/
 			if (!role || !role.usable)
 				return false;
 			var camouflageEntity : SceneRole = SceneRole(role.getCamouflageEntity());
@@ -201,6 +201,11 @@ package com.rpgGame.app.state.role
 			ref.onSync(onWalkSync);
 			walkRole.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref);
 			return walkRole.stateMachine.isWalkMoving;
+		}
+		
+		private static function nullFunc():void
+		{
+			
 		}
 
 		private static function onWalkArrivefunction(onArrive : Function, ref : WalkMoveStateReference) : void
@@ -360,7 +365,7 @@ package com.rpgGame.app.state.role
 		{
 			var spellInfo : ReleaseSpellInfo = ref.data as ReleaseSpellInfo;
 			SpellAnimationHelper.addDestEffect(ref.targetPos.x, ref.targetPos.y, ref.angle, spellInfo);
-			SpellHitHelper.clientSpellHitEffect(spellInfo);
+			SpellHitHelper.fightSpellHitEffect(spellInfo);
 		}
 
 		/**

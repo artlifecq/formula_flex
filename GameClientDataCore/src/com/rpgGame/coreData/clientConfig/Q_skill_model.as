@@ -16,28 +16,30 @@ package com.rpgGame.coreData.clientConfig
 		public var q_skillID_q_grade:String;
 		 /**  技能编号(不能超过65535) */
 		public var q_skillID:int;
+		 /**  技能名称 */
+		public var q_skillName:String;
+		 /**  技能面板上的伤害文字描述 */
+		public var q_skillpanel_description1:String;
+		 /**  技能面板上的技能进阶效果描述 */
+		public var q_skillpanel_description2:String;
+		 /**  职业技能(1:兵家 2：墨家 3：医家 0：不分职业-公共技能) */
+		public var q_job:int;
 		 /**  技能阶数(不能超过255) */
 		public var q_grade:int;
 		 /**  最大等级 */
 		public var q_max_level:int;
-		 /**  技能名称 */
-		public var q_skillName:String;
-		 /**  职业技能(1:兵家 2：墨家 3：医家 0：不分职业-公共技能) */
-		public var q_job:int;
 		 /**  技能图标ICON */
 		public var q_icon:String;
 		 /**  连招技能,逗号分割 */
 		public var q_relate_spells:String;
 		 /**  技能效果，配置“技能效果表”中的id */
 		public var q_spell_effect:int;
-		 /**  闪现类型，0-无 1-冲锋 2-跳劈 3-闪烁 4-翻滚 */
+		 /**  位移类型，0-无 1-冲锋 2-跳劈 3-闪烁 4-翻滚 */
 		public var q_blink_type:int;
-		 /**  闪现速度，填每秒飞行像素 */
+		 /**  位移速度，填每秒飞行像素 */
 		public var q_blink_speed:int;
 		 /**  跳劈的高度，可以不配置 */
 		public var q_blink_height:int;
-		 /**  施法时是否要震屏 */
-		public var q_shake_screen:int;
 		 /**  技能伤害类型（0默认攻击技能，1治疗技能 2，特殊技能） */
 		public var q_hurt_type:int;
 		 /**  作用对象（1自己，2友好目标，3敌对目标，4当前目标，5场景中鼠标的当前坐标点，6组队） */
@@ -58,10 +60,6 @@ package com.rpgGame.coreData.clientConfig
 		public var q_default_enable:int;
 		 /**  是否是锁定技能，必须指定一个目标的技能 */
 		public var q_is_locking_spell:int;
-		 /**  技能面板上的伤害文字描述 */
-		public var q_skillpanel_description1:String;
-		 /**  技能面板上的技能效果描述 */
-		public var q_skillpanel_description2:String;
 		 /**  显示所需人物等级 */
 		public var q_show_needgrade:int;
 		 /**  战斗力加成 */
@@ -94,8 +92,10 @@ package com.rpgGame.coreData.clientConfig
 		public var q_fly_time:int;
 		 /**  是否飞行穿越 */
 		public var q_is_fly_cross:int;
-		 /**  技能属性 */
+		 /**  技能属性（人物属性加成） */
 		public var q_attributes:String;
+		 /**  战斗计算技能伤害属性 */
+		public var q_fight_attributes:String;
 		 /**  技能伤害系数（万分比分子） */
 		public var q_hurt_correct_factor:int;
 		 /**  技能附加伤害（为-1则通过技能编号_技能等级  去q_skill_ignore表中读取无视防御伤害值） */
@@ -108,6 +108,24 @@ package com.rpgGame.coreData.clientConfig
 		public var q_shortcut:int;
 		 /**  位置编号（0:不在人物面板,，1：人物主动技能面板，2：人物被动技能面板，3，抵抗技能） */
 		public var q_index:int;
+		 /**  作用范围形状（1单体，2矩形，3扇形，4圆形, 5和目标之间的直线，6指定方向固定大小的矩，7全地图） */
+		public var q_area_shape:int;
+		 /**  处理单体攻击以外的范围攻击释放成功率，失败后将切换为单体攻击.万分比 */
+		public var q_area_success_per:int;
+		 /**  作用范围中心点（1自身为中心，2目标为中心）,如果地面魔法,那么也表示起点 */
+		public var q_area_target:int;
+		 /**  矩形长（像素） */
+		public var q_area_length:int;
+		 /**  矩形宽 */
+		public var q_area_width:int;
+		 /**  扇形开始角度 */
+		public var q_sector_start:int;
+		 /**  扇形结束角度 */
+		public var q_secto_end:int;
+		 /**  扇形半径(像素) */
+		public var q_sector_radius:int;
+		 /**  圆半径(像素) */
+		public var q_circular_radius:int;
 		 /**  召唤怪物ID（1是幻象分身） */
 		public var q_summon_id:int;
 		 /**  召唤怪物数量 */
@@ -140,24 +158,6 @@ package com.rpgGame.coreData.clientConfig
 		public var q_bufq_num_factor:int;
 		 /**  BUFF作用比例修正系数（特殊：符鬼技能攻击目标死亡后恢复生命值比例（万分比分子）） */
 		public var q_bufq_action_factor:int;
-		 /**  作用范围形状（1单体，2矩形，3扇形，4圆形, 5和目标之间的直线，6指定方向固定大小的矩，7全地图） */
-		public var q_area_shape:int;
-		 /**  处理单体攻击以外的范围攻击释放成功率，失败后将切换为单体攻击.万分比 */
-		public var q_area_success_per:int;
-		 /**  作用范围中心点（1自身为中心，2目标为中心）,如果地面魔法,那么也表示起点 */
-		public var q_area_target:int;
-		 /**  矩形长（像素） */
-		public var q_area_length:int;
-		 /**  矩形宽 */
-		public var q_area_width:int;
-		 /**  扇形开始角度 */
-		public var q_sector_start:int;
-		 /**  扇形结束角度 */
-		public var q_secto_end:int;
-		 /**  扇形半径(像素) */
-		public var q_sector_radius:int;
-		 /**  圆半径(像素) */
-		public var q_circular_radius:int;
 		 /**  是否触发一次战斗公式的伤害（0不触发，1触发，2造成 剩余生命值*q_hurt_correct_factor/10000 的伤害，3造成  总生命值*q_hurt_correct_factor/10000 的伤害） */
 		public var q_trigger_figth_hurt:int;
 		 /**  每次造成大怪(BOSS,精英)仇恨值 */
@@ -210,6 +210,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_dead_launch_height:int;
 		 /**  击飞概率 */
 		public var q_dead_launch_probability:int;
+		 /**  施法时是否要震屏 */
+		public var q_shake_screen:int;
 
 	}
 }

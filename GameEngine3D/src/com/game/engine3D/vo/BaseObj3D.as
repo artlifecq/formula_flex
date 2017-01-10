@@ -1,5 +1,6 @@
 package com.game.engine3D.vo
 {
+	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.core.interfaces.IDisplayObject3D;
 	import com.game.engine3D.core.poolObject.PoolContainer3D;
 	import com.game.engine3D.core.poolObject.PoolEntityContainer3D;
@@ -790,8 +791,16 @@ package com.game.engine3D.vo
 		 */
 		public function setGroundXY(x : Number, y : Number) : void
 		{
-			this.x = x;
-			this.z = y;
+			if(GlobalConfig.use25DMap)//暂时先这么写，因为现在还没有完整的时间去调整坐标系，怕有问题，所以暂时照原样搞，等以后有充足的时间，再来进行重构
+			{
+				this.x = x;
+				this.z = y;
+			}
+			else
+			{
+				this.x = x;
+				this.z = y;
+			}
 		}
 
 		public function faceToGround(x : Number, y : Number, angularVelocity : Number = 0.002, minTweenDuration : Number = 0.1, maxTweenDuration : Number = 0.2) : void

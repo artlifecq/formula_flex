@@ -25,6 +25,9 @@ package com.rpgGame.coreData.info.fight
 		private var _roleID : Number;
 		/** 本次技能对此目标单位共造成伤害 **/
 		private var _hurtAmount : int;
+		/*
+		 *跟击飞有关系 
+		*/
 		public var stiffTime : int = 0;
 		public var attackerId : Number = 0;
 		

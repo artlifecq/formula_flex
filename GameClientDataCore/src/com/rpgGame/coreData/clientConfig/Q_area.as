@@ -16,7 +16,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_area_id:int;
 		 /**  区域名 */
 		public var q_area_name:String;
-		 /**  开始传送地图ID */
+		 /**  区域所在地图ID */
 		public var q_map_id:int;
 		 /**  区域的所有的点，配置格式为: 点x=点y[;点x=点y;点x=点y;点x=点y....] */
 		public var q_pos:String;

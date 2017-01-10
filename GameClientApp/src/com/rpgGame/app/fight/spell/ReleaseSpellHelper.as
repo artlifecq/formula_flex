@@ -43,7 +43,7 @@ package com.rpgGame.app.fight.spell
 				}
 				else
 				{
-					SpellHitHelper.clientSpellHitEffect(spellInfo);
+					SpellHitHelper.fightSpellHitEffect(spellInfo);
 				}
 			}
 			else
@@ -73,13 +73,13 @@ package com.rpgGame.app.fight.spell
 						if (spellInfo.hurtDelay > hurtDelay)
 							hurtDelay = spellInfo.hurtDelay;
 						if (hurtDelay > 0)
-							TweenLite.delayedCall(hurtDelay * 0.001, SpellHitHelper.clientSpellHitEffect, [ref.spellInfo]);
+							TweenLite.delayedCall(hurtDelay * 0.001, SpellHitHelper.fightSpellHitEffect, [ref.spellInfo]);
 						else
-							SpellHitHelper.clientSpellHitEffect(ref.spellInfo);
+							SpellHitHelper.fightSpellHitEffect(ref.spellInfo);
 					}
 					else
 					{
-						SpellHitHelper.clientSpellHitEffect(spellInfo);
+						SpellHitHelper.fightSpellHitEffect(spellInfo);
 					}
 				}
 			}

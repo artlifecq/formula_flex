@@ -71,12 +71,7 @@ package com.rpgGame.app.cmdlistener.engine
 //测试代码，主要用来作场景处理的，临时的，当按回车键时，会执行换场景
 			if (info.code == Keyboard.TAB)
 			{
-				/*trace("点击了TAB键了！！！要换场景了");
-				if(MainRoleManager.actorInfo.mapID == 6)
-					MainRoleManager.actorInfo.mapID = 8;
-				else
-					MainRoleManager.actorInfo.mapID = 6;
-				SceneSwitchManager.changeMap();*/
+				
 				var b:Boolean = PathFinderUtil.isSolid(SceneManager.getDistrict(), new Vector3D(3697, -1165));
 				trace(b);
 				return;

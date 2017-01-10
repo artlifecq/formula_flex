@@ -19,9 +19,17 @@ package com.rpgGame.app.scene.animator
 	public class FrontAxleDoubleAroundAnimator extends CommonTrajectoryAnimator
 	{
 		public static const name : String = "FrontAxleDoubleAroundAnimator";
-		
+		/**
+		 *  前轴围绕半径
+		 */		
 		private var _frontAxleAroundRadius : int;
+		/**
+		 *  前轴围绕角速度（度/秒） 
+		 */		
 		private var _frontAxleAroundAngularVelocity : Number;
+		/**
+		 *  收敛次数
+		 */		
 		private var _convergenceTimes : int;
 		private var _subEffectRu : RenderUnit3D;
 		private var _currAroundFlip : int;
@@ -29,9 +37,13 @@ package com.rpgGame.app.scene.animator
 		private var _currAroundRadius : Number;
 		private var _totalAngle : int;
 		
-		public function FrontAxleDoubleAroundAnimator(spellInfo : ReleaseSpellInfo, targetPos : Vector3D, targetRole : SceneRole, totalTime : int, speed : int, isTrackTarget : Boolean, matchTerrain : Boolean, isFlyCross : Boolean, isAdaptiveTargetHeight : Boolean, moveDelay : int, playDelay : int, releaseDelayTime : int, throwHeight : int, throwWeightRatio : int, frontAxleAroundRadius : int, frontAxleAroundAngularVelocity : Number, convergenceTimes : int)
+		public function FrontAxleDoubleAroundAnimator(spellInfo : ReleaseSpellInfo, targetPos : Vector3D, targetRole : SceneRole, totalTime : int, speed : int, isTrackTarget : Boolean,
+													  matchTerrain : Boolean, isFlyCross : Boolean, isAdaptiveTargetHeight : Boolean, 
+													  moveDelay : int, playDelay : int, releaseDelayTime : int, throwHeight : int, throwWeightRatio : int, 
+													  frontAxleAroundRadius : int, frontAxleAroundAngularVelocity : Number, convergenceTimes : int)
 		{
-			super(spellInfo, targetPos, targetRole, totalTime, speed, isTrackTarget, matchTerrain, isFlyCross, isAdaptiveTargetHeight, moveDelay, playDelay, releaseDelayTime, throwHeight, throwWeightRatio);
+			super(spellInfo, targetPos, targetRole, totalTime, speed, isTrackTarget, matchTerrain, isFlyCross, isAdaptiveTargetHeight, moveDelay, playDelay, releaseDelayTime, 
+				throwHeight, throwWeightRatio);
 			_frontAxleAroundRadius = frontAxleAroundRadius;
 			_frontAxleAroundAngularVelocity = frontAxleAroundAngularVelocity;
 			_convergenceTimes = convergenceTimes;

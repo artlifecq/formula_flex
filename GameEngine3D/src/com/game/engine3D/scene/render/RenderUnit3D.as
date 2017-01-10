@@ -69,11 +69,11 @@ package com.game.engine3D.scene.render
 		 * @param $type
 		 * @param $value
 		 */
-		public static function create(rpd : RenderParamData) : RenderUnit3D
+		public static function create(rpd : RenderParamData,is25D:Boolean = false) : RenderUnit3D
 		{
 			_cnt++;
 			//利用池生成RenderUnit
-			return _pool.createObj(RenderUnit3D, rpd) as RenderUnit3D;
+			return _pool.createObj(RenderUnit3D, rpd,is25D) as RenderUnit3D;
 		}
 
 		public static function recycle(ru : RenderUnit3D) : void
@@ -216,10 +216,12 @@ package com.game.engine3D.scene.render
 		private var _blendUrl : String;
 		private var _blendBias : Number;
 		private var _useIndependentColor : Boolean;
+		
+		private var _is25D:Boolean = false;
 
-		public function RenderUnit3D(rpd : RenderParamData)
+		public function RenderUnit3D(rpd : RenderParamData,is25D:Boolean=false)
 		{
-			super([rpd]);
+			super([rpd,is25D]);
 			_waitAddUnitList = new Vector.<RenderUnitChild>();
 			_currChildUnitList = new Vector.<RenderUnitChild>();
 			_methodDatas = new Vector.<MethodData>();
@@ -2541,9 +2543,17 @@ package com.game.engine3D.scene.render
 		{
 			super.reSet(null);
 			setRenderParamData($parameters[0]);
+			_is25D = $parameters[1];
 			if (!_graphicDis)
 			{
-				_graphicDis = PoolContainer3D.create();
+				if(_is25D)
+				{
+					_graphicDis = PoolEntityContainer3D.create();
+				}
+				else
+				{
+					_graphicDis = PoolContainer3D.create();
+				}
 			}
 			_nextRenderParamData = null;
 			_currentStatus = null;

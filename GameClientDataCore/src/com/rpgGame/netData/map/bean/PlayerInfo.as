@@ -68,7 +68,7 @@ package com.rpgGame.netData.map.bean{
 			//玩家所在位置
 			writeBean(_position);
 			//人物面对方向
-			writeByte(_dir);
+			writeShort(_dir);
 			//玩家性别 1男 2女
 			writeByte(_sex);
 			//阶段
@@ -109,7 +109,7 @@ package com.rpgGame.netData.map.bean{
 			//玩家所在位置
 			_position = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
 			//人物面对方向
-			_dir = readByte();
+			_dir = readShort();
 			//玩家性别 1男 2女
 			_sex = readByte();
 			//阶段
