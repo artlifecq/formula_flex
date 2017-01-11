@@ -2,7 +2,6 @@ package com.rpgGame.app.cmdlistener.scene
 {
 	import com.game.engine2D.config.SceneConfig;
 	import com.game.engine3D.display.shapeArea.ShapeArea3D;
-	import com.game.engine3D.utils.MathUtil;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
@@ -212,7 +211,7 @@ package com.rpgGame.app.cmdlistener.scene
 		
 		private function onResAttackVentToClientMessage(msg:ResAttackVentToClientMessage):void
 		{
-			GameLog.addShow("技能流水号为： 对地\t" + msg.uid);
+			GameLog.addShow("技能流水号为： 对地\t" + msg.uid  + "\n" + "服务器给的点为：\t" + msg.pos.x +"_" + msg.pos.y);
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg.uid, msg, true);
 			ReleaseSpellHelper.releaseSpell(info);
