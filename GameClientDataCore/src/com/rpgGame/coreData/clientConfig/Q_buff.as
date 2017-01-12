@@ -12,126 +12,82 @@ package com.rpgGame.coreData.clientConfig
 	*/
 	public class Q_buff
 	{
-		 /**  ID */
-		public var id:int;
-		 /**  名字 */
-		public var name:String;
-		 /**  组。 相同组且相同堆叠类型的特效不会共存 */
-		public var group:int;
-		 /**  优先级。要顶掉相同组的buff时， 高等级的会留下 */
-		public var level:int;
+		 /**  BUFF编号（类型编号*1000+N） */
+		public var q_buff_id:int;
+		 /**  BUFF名称 */
+		public var q_buff_name:String;
 		 /**  客户端显示的图标 */
-		public var icon:String;
-		 /**  是否buff，增益填1，减益填0或不填 */
-		public var is_buff:int;
-		 /**  免疫的状态组，配置格式为：状态group1;状态group2..... */
-		public var immune_state_groups:int;
-		 /**  总共生效的次数。 如果是直接加血并只加这一次的， 填0. 如果是多次加血的，填生效的次数。 其他全部填1 */
-		public var total_tick:int;
-		 /**  每次生效的间隔 只对加减血类的 total_tick >= 1的效果有效 */
-		public var frame_time:int;
+		public var q_icon:String;
 		 /**  描述 */
-		public var description:String;
-		 /**  中招时客户端会收到的提示 */
-		public var notice_on_add:int;
+		public var q_description:String;
 		 /**  获得状态的初始化动画 */
-		public var init_animation:int;
+		public var q_init_animation:int;
 		 /**  角色中了buff后， 身上的特效。 填animation表中的名字 */
-		public var animation:int;
+		public var q_animation:String;
 		 /**  状态消失后的动画 */
-		public var disappear_animation:int;
+		public var q_disappear_animation:int;
 		 /**  角色中了buff后被攻击， 身上的特效。 填animation表中的名字 */
-		public var been_hurt_animation:int;
-		 /**  每次改变的血量值 负表示扣血 */
-		public var each_life:int;
-		 /**  每次改变的血量万分比 负的表示扣血 按最大血量乘 */
-		public var each_life_per:int;
-		 /**  每次改变的当前血量万分比 负的表示扣血 按当前血量乘 */
-		public var each_cur_life_per:int;
-		 /**  每次改变的魔法值 负表示扣蓝 */
-		public var each_mana:int;
-		 /**  每次改变的魔法万分比 负的表示扣魔法 按最大魔法量乘 */
-		public var each_mana_per:int;
-		 /**  每次改变的当前魔法万分比 负的表示扣魔法 按当前魔法量乘 */
-		public var each_cur_mana_per:int;
-		 /**  每次改变的跳闪值 负表示扣跳闪值 */
-		public var each_jump_shield:int;
-		 /**  附加的属性 */
-		public var sprite_stat:int;
-		 /**  额外加成属性， 配置 属性加成.txt 中的id */
-		public var additional_sprite_stat_id:int;
-		 /**  伤害吸收量 */
-		public var absorb_hurt_amount:int;
-		 /**  经验倍率，30%经验丹填30，双倍经验填100,三倍经验填200 */
-		public var exp_multiple:int;
-		 /**  是否物理攻击免疫 */
-		public var is_physical_immune:int;
-		 /**  是否法术攻击免疫 */
-		public var is_magical_immune:int;
-		 /**  是否不死，玩家永远1滴血 */
-		public var is_immortal:int;
-		 /**  是否是缴械状态，1表示是，0表示不是 */
-		public var is_jiao_xie:int;
-		 /**  是否附带晕眩 */
-		public var is_stun:int;
-		 /**  是否不能移动 */
-		public var is_unmovable:int;
-		 /**  是否不能跳跃 */
-		public var is_unjumpable:int;
-		 /**  是否沉默 */
-		public var is_hush:int;
-		 /**  是否致盲 */
-		public var is_blinding:int;
-		 /**  是否不可见 */
-		public var is_invisible:int;
-		 /**  是否具有真视能力 */
-		public var is_true_sight:int;
-		 /**  是否射马 */
-		public var is_shoot_mount:int;
-		 /**  是否混乱 */
-		public var is_hun_luan:int;
-		 /**  是否无敌 */
-		public var is_invincible:int;
-		 /**  死亡消失 */
-		public var is_death_dispel:int;
-		 /**  下线消失 */
-		public var is_offline_dispel:int;
-		 /**  是否切换场景消失 */
-		public var is_change_scene_dispel:int;
-		 /**  移动消失，目前只支持英雄 */
-		public var is_move_dispel:int;
-		 /**  跳跃消失 */
-		public var is_jump_dispel:int;
-		 /**  上马消失 */
-		public var is_up_mount_dispel:int;
-		 /**  打坐消失 */
-		public var is_meditate_dispel:int;
-		 /**  被攻击多少次后消失 */
-		public var been_attack_times_dispel:int;
-		 /**  攻击他人多少次以后消失，这个次数是打到一个目标算一次 */
-		public var attack_other_times_dispel:int;
-		 /**  释放N次攻击技能消失 */
-		public var release_spell_times_dispel:int;
-		 /**  是否对玩家不生效 */
-		public var is_not_affect_hero:int;
-		 /**  是否对普通怪物不生效 */
-		public var is_not_affect_normal_monster:int;
-		 /**  是否对精英怪物不生效 */
-		public var is_not_affect_elite_monster:int;
-		 /**  是否对BOSS怪物不生效 */
-		public var is_not_affect_boss:int;
-		 /**  是否对宠物不生效 */
-		public var is_not_affect_pet:int;
-		 /**  是否对镖车不生效 */
-		public var is_not_affect_biao:int;
-		 /**  最大堆叠层数 */
-		public var max_stack_count:int;
-		 /**  堆叠层数触发的技能，只有stack_type=1才会生效，配置规则如下：层级=触发技能(必须是type=ground的技能)，分号分隔多个层级。例子如下:1=112;2=112表示1层的时候触发112技能，2层的时候触发112技能 */
-		public var stack_count_trigger_spell:int;
-		 /**  堆叠类型（一次性生效的状态，不用配置） 1. 叠加效果, 时间刷新 2. 不叠加效果, 只刷新时间 3. 重复无效, 不给加 4. 时间叠加, 效果不叠加, 层数概念还是有, 但是客户端不显示层数 */
-		public var stack_type:int;
-		 /**  是否是进出副本消失的状态，1表示是进出副本消失的状态，不配置或者配置0表示不是进出副本消失的状态 */
-		public var is_enter_or_leave_dungeon_dispel:int;
+		public var q_been_hurt_animation:int;
+		 /**  作用目标（1自己，2目标，3自己与目标，4自己和队友,5主人） */
+		public var q_target:int;
+		 /**  BUFF广播类型（0隐藏式BUFF，1显示给自己知道的BUFF，2在地图同步给周围玩家的BUFF , 3其他玩家选中后,前端请求查看的BUFF） */
+		public var q_cast_type:int;
+		 /**  损益类型（0无所谓，1正面BUFF，2负面BUFF,3不受内力盾影响） */
+		public var q_effect_type:int;
+		 /**  效果类型 */
+		public var q_action_type:String;
+		 /**  效果添加成功几率（本处填万分比的分子） */
+		public var q_trigger_prob:int;
+		 /**  满足对应条件则增加BUFF添加几率。参考“效果类型”,例: 在眩晕状态下，加速BUFF添加几率提高10%，这里这个值就填101. */
+		public var q_state_condition:int;
+		 /**  添加此BUFF时需要BUFF施加者需要学会的技能ID */
+		public var q_need_skill_condition:String;
+		 /**  条件满足额外附加成功率（负数为减概率） */
+		public var q_state_condition_prob:int;
+		 /**  效果作用数值（允许负值） 对应action_type字段 */
+		public var q_effect_value:String;
+		 /**  效果作用比例（本处填万分比的分子）（允许负值）  对应action_type字段 */
+		public var q_effect_ratio:String;
+		 /**  在指定时间内，对同一个对象添加BUFF的冷却时间，在这个时间内，添加将失败。单位毫秒 */
+		public var q_add_cd:int;
+		 /**  效果的总持续时间（单位：毫秒）（填-1为永久生效） */
+		public var q_effect_time:int;
+		 /**  BUFF触发次数，配置后，触发次数用完就会删除该BUFF,{ 触发类型,触发条件,剩余次数 }; t=触发类型 1:命中 2:受伤 3:躲闪 4,暴击 5:死亡 6使用指定技能。 c=触发条件:部分需要触发类型需要配置条件(t=1 时 c=技能id),如:使用指定技能这类。r=剩余次数.例:{t:1,c:0,r:1} */
+		public var q_effect_remain:String;
+		 /**  效果的总容量 */
+		public var q_effect_maxvalue:int;
+		 /**  效果分次作用间隔时间（单位：毫秒） */
+		public var q_effect_cooldown:int;
+		 /**  效果重复选项（1效果叠加，2效果替换，3容量叠加(属性,层数）,4时间叠加，5重复无效） */
+		public var q_overlay:int;
+		 /**  叠加次数上限（-1为无限） */
+		public var q_overlay_maxcount:int;
+		 /**  叠加到达上限后，触发BUFF ID，（触发成功后根据q_is_delete_old_buff字段判断是否移除当前BUFF。）******当叠加次数为0时，这里也填值，就说明是添加这个BUFF成功后则触发另外一个BUFF的添加 */
+		public var q_overlay_max_trigger:String;
+		 /**  q_overlay_max_trigger字段中BUFF添加成功后是否删除原BUFF（1删除 0不删除） */
+		public var q_is_delete_old_buff:int;
+		 /**  替换类型（类型相同的才会替换） */
+		public var q_replace_type:int;
+		 /**  替换层级（高层级的将可替换低层级） */
+		public var q_replace_level:int;
+		 /**  获得者死亡或下线后是否清除（0不清除，1清除，2切换地图清除，3仅下线清除） */
+		public var q_effect_dieordown_clear:int;
+		 /**  BUFF加属性，格式【格式:攻击：X,防御:X,闪避:X,魔法攻击:X,魔法防御:X,暴击:X,闪避:X,最大生命值:X,最大魔法:X,魔法攻击比例:X,无视防御比例:X,吸血比例:X,能量消耗降低:X,圣神伤害:X】 */
+		public var q_attribute:String;
+		 /**  BUFF参数，技能ID、技能ID */
+		public var q_Bonus_skill:String;
+		 /**  下线是否计时（0不是，1是） */
+		public var q_Line_time:int;
+		 /**  脚本BUFFID */
+		public var q_script_id:int;
+		 /**  针对目标（1玩家） */
+		public var q_target_type:int;
+		 /**  拥有BUFF者是否变色（0否，1是） */
+		public var q_colour:int;
+		 /**  是否加成战斗力（1加成，0不加成） */
+		public var q_fihgt:int;
+		 /**  关联buff技能（填技能ID） */
+		public var q_other:String;
 
 	}
 }

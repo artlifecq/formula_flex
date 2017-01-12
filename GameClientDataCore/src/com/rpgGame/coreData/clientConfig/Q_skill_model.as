@@ -34,7 +34,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_relate_spells:String;
 		 /**  技能效果，配置“技能效果表”中的id */
 		public var q_spell_effect:int;
-		 /**  位移类型，0-无 1-冲锋 2-跳劈 3-闪烁 4-翻滚 */
+		 /**  位移类型（客户端），0-无 1-冲锋 2-跳劈 3-闪烁 4-翻滚 */
 		public var q_blink_type:int;
 		 /**  位移速度，填每秒飞行像素 */
 		public var q_blink_speed:int;
@@ -42,11 +42,11 @@ package com.rpgGame.coreData.clientConfig
 		public var q_blink_height:int;
 		 /**  技能伤害类型（0默认攻击技能，1治疗技能 2，特殊技能） */
 		public var q_hurt_type:int;
-		 /**  作用对象（1自己，2友好目标，3敌对目标，4当前目标，5场景中鼠标的当前坐标点，6组队） */
+		 /**  作用对象（1自己，2友好目标，3敌对目标，4当前目标，5场景中鼠标的当前坐标点，6组队 7无目标） */
 		public var q_target:int;
 		 /**  作用目标上限 */
 		public var q_target_max:int;
-		 /**  技能表现类型 1.陷阱类型 2.召唤类型 3.弹道类型 0.常规类型 */
+		 /**  技能表现类型（服务端区分） 0.常规类型 1.陷阱类型 2.召唤类型 3.弹道类型  4有位移类型 */
 		public var q_skill_type:int;
 		 /**  使用方式（1主动技能，2被动技能） */
 		public var q_trigger_type:int;
@@ -82,16 +82,34 @@ package com.rpgGame.coreData.clientConfig
 		public var q_cal_flycd:int;
 		 /**  延迟命中时间（单位：毫秒） */
 		public var q_delay_time:int;
-		 /**  保持间距，不配默认使用施法范围 */
-		public var q_keep_spacing:int;
-		 /**  使用距离限制（自身与目标之间的距离）（单位：格子）,地面行走魔法表示行走距离(小于等于3：判定为近战攻击（处理音效）大于3：判定为远程攻击（处理音效）)   0表示无限距离 */
+		 /**  施法距离限制（自身与目标之间的距离）（单位：格子）,地面行走魔法表示行走距离(小于等于3：判定为近战攻击（处理音效）大于3：判定为远程攻击（处理音效）)   0表示无限距离 */
 		public var q_range_limit:int;
+		 /**  保持间距（单位：像素）（不配默认使用施法范围） */
+		public var q_keep_spacing:int;
 		 /**  飞行特效的飞行速度。 有飞行特效才能填。 有飞行特效必须填 */
 		public var q_fly_speed:int;
 		 /**  飞行特效的飞行时间，单位毫秒 */
 		public var q_fly_time:int;
 		 /**  是否飞行穿越 */
 		public var q_is_fly_cross:int;
+		 /**  作用范围形状（1单体，2矩形，3扇形，4圆形,7全地图） */
+		public var q_area_shape:int;
+		 /**  作用范围中心点（1自身为中心，2目标为中心）,如果地面魔法,那么也表示起点 */
+		public var q_area_target:int;
+		 /**  矩形长（像素） */
+		public var q_area_length:int;
+		 /**  矩形宽（像素） */
+		public var q_area_width:int;
+		 /**  扇形角度 */
+		public var q_sector_start:int;
+		 /**  扇形半径(像素) */
+		public var q_sector_radius:int;
+		 /**  圆半径(像素) */
+		public var q_circular_radius:int;
+		 /**  处理单体攻击以外的范围攻击释放成功率，失败后将切换为单体攻击.万分比 */
+		public var q_area_success_per:int;
+		 /**  扇形结束角度（废弃） */
+		public var q_secto_end:int;
 		 /**  技能属性（人物属性加成） */
 		public var q_attributes:String;
 		 /**  战斗计算技能伤害属性 */
@@ -108,24 +126,6 @@ package com.rpgGame.coreData.clientConfig
 		public var q_shortcut:int;
 		 /**  位置编号（0:不在人物面板,，1：人物主动技能面板，2：人物被动技能面板，3，抵抗技能） */
 		public var q_index:int;
-		 /**  作用范围形状（1单体，2矩形，3扇形，4圆形, 5和目标之间的直线，6指定方向固定大小的矩，7全地图） */
-		public var q_area_shape:int;
-		 /**  处理单体攻击以外的范围攻击释放成功率，失败后将切换为单体攻击.万分比 */
-		public var q_area_success_per:int;
-		 /**  作用范围中心点（1自身为中心，2目标为中心）,如果地面魔法,那么也表示起点 */
-		public var q_area_target:int;
-		 /**  矩形长（像素） */
-		public var q_area_length:int;
-		 /**  矩形宽 */
-		public var q_area_width:int;
-		 /**  扇形开始角度 */
-		public var q_sector_start:int;
-		 /**  扇形结束角度 */
-		public var q_secto_end:int;
-		 /**  扇形半径(像素) */
-		public var q_sector_radius:int;
-		 /**  圆半径(像素) */
-		public var q_circular_radius:int;
 		 /**  召唤怪物ID（1是幻象分身） */
 		public var q_summon_id:int;
 		 /**  召唤怪物数量 */
@@ -188,8 +188,6 @@ package com.rpgGame.coreData.clientConfig
 		public var q_need_military_rank:int;
 		 /**  技能描述所需数值 */
 		public var q_introduce:String;
-		 /**  扩展字段 */
-		public var q_other:String;
 		 /**  击退格子数 支持负数 */
 		public var q_beat_distance:int;
 		 /**  是否以目标点的中心击退  1是以目标 其他是以释放者 */
@@ -212,6 +210,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_dead_launch_probability:int;
 		 /**  施法时是否要震屏 */
 		public var q_shake_screen:int;
+		 /**  扩展字段 */
+		public var q_other:int;
 
 	}
 }

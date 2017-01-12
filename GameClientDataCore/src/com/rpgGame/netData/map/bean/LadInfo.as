@@ -11,62 +11,62 @@ package com.rpgGame.netData.map.bean{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * ç«¥å­ä¿¡æ¯ç±»
+	 * Í¯×ÓĞÅÏ¢Àà
 	 */
 	public class LadInfo extends Bean {
 	
-		//ç«¥å­å”¯ä¸€Id
+		//Í¯×ÓÎ¨Ò»Id
 		private var _ladId: long;
 		
-		//ç«¥å­æ¨¡æ¿Id
+		//Í¯×ÓÄ£°åId
 		private var _ladModelId: int;
 		
-		//ç«¥å­æ¨¡æ¿Id
+		//Í¯×ÓÄ£°åId
 		private var _ladtype: int;
 		
-		//æ‰€æœ‰è€…ID
+		//ËùÓĞÕßID
 		private var _ownerId: long;
 		
-		//æ‰€æœ‰è€…åç§°
+		//ËùÓĞÕßÃû³Æ
 		private var _ownerName: String;
 		
-		//ç«¥å­æ‰€åœ¨X
+		//Í¯×ÓËùÔÚX
 		private var _x: int;
 		
-		//ç«¥å­æ‰€åœ¨Y
+		//Í¯×ÓËùÔÚY
 		private var _y: int;
 		
-		//ç«¥å­é€Ÿåº¦
+		//Í¯×ÓËÙ¶È
 		private var _speed: int;
 		
-		//ç«¥å­é¢å¯¹æ–¹å‘
+		//Í¯×ÓÃæ¶Ô·½Ïò
 		private var _dir: int;
 		
-		//è·‘æ­¥åæ ‡é›†åˆ
+		//ÅÜ²½×ø±ê¼¯ºÏ
 		private var _positions: Vector.<int> = new Vector.<int>();
 		/**
-		 * å†™å…¥å­—èŠ‚ç¼“å­˜
+		 * Ğ´Èë×Ö½Ú»º´æ
 		 */
 		override protected function writing(): Boolean{
-			//ç«¥å­å”¯ä¸€Id
+			//Í¯×ÓÎ¨Ò»Id
 			writeLong(_ladId);
-			//ç«¥å­æ¨¡æ¿Id
+			//Í¯×ÓÄ£°åId
 			writeShort(_ladModelId);
-			//ç«¥å­æ¨¡æ¿Id
+			//Í¯×ÓÄ£°åId
 			writeShort(_ladtype);
-			//æ‰€æœ‰è€…ID
+			//ËùÓĞÕßID
 			writeLong(_ownerId);
-			//æ‰€æœ‰è€…åç§°
+			//ËùÓĞÕßÃû³Æ
 			writeString(_ownerName);
-			//ç«¥å­æ‰€åœ¨X
+			//Í¯×ÓËùÔÚX
 			writeShort(_x);
-			//ç«¥å­æ‰€åœ¨Y
+			//Í¯×ÓËùÔÚY
 			writeShort(_y);
-			//ç«¥å­é€Ÿåº¦
+			//Í¯×ÓËÙ¶È
 			writeShort(_speed);
-			//ç«¥å­é¢å¯¹æ–¹å‘
+			//Í¯×ÓÃæ¶Ô·½Ïò
 			writeByte(_dir);
-			//è·‘æ­¥åæ ‡é›†åˆ
+			//ÅÜ²½×ø±ê¼¯ºÏ
 			writeShort(_positions.length);
 			for (var i: int = 0; i < _positions.length; i++) {
 				writeByte(_positions[i]);
@@ -75,28 +75,28 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * è¯»å–å­—èŠ‚ç¼“å­˜
+		 * ¶ÁÈ¡×Ö½Ú»º´æ
 		 */
 		override protected function reading(): Boolean{
-			//ç«¥å­å”¯ä¸€Id
+			//Í¯×ÓÎ¨Ò»Id
 			_ladId = readLong();
-			//ç«¥å­æ¨¡æ¿Id
+			//Í¯×ÓÄ£°åId
 			_ladModelId = readShort();
-			//ç«¥å­æ¨¡æ¿Id
+			//Í¯×ÓÄ£°åId
 			_ladtype = readShort();
-			//æ‰€æœ‰è€…ID
+			//ËùÓĞÕßID
 			_ownerId = readLong();
-			//æ‰€æœ‰è€…åç§°
+			//ËùÓĞÕßÃû³Æ
 			_ownerName = readString();
-			//ç«¥å­æ‰€åœ¨X
+			//Í¯×ÓËùÔÚX
 			_x = readShort();
-			//ç«¥å­æ‰€åœ¨Y
+			//Í¯×ÓËùÔÚY
 			_y = readShort();
-			//ç«¥å­é€Ÿåº¦
+			//Í¯×ÓËÙ¶È
 			_speed = readShort();
-			//ç«¥å­é¢å¯¹æ–¹å‘
+			//Í¯×ÓÃæ¶Ô·½Ïò
 			_dir = readByte();
-			//è·‘æ­¥åæ ‡é›†åˆ
+			//ÅÜ²½×ø±ê¼¯ºÏ
 			var positions_length : int = readShort();
 			for (var i: int = 0; i < positions_length; i++) {
 				_positions[i] = readByte();
@@ -105,7 +105,7 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * get ç«¥å­å”¯ä¸€Id
+		 * get Í¯×ÓÎ¨Ò»Id
 		 * @return 
 		 */
 		public function get ladId(): long{
@@ -113,14 +113,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set ç«¥å­å”¯ä¸€Id
+		 * set Í¯×ÓÎ¨Ò»Id
 		 */
 		public function set ladId(value: long): void{
 			this._ladId = value;
 		}
 		
 		/**
-		 * get ç«¥å­æ¨¡æ¿Id
+		 * get Í¯×ÓÄ£°åId
 		 * @return 
 		 */
 		public function get ladModelId(): int{
@@ -128,14 +128,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set ç«¥å­æ¨¡æ¿Id
+		 * set Í¯×ÓÄ£°åId
 		 */
 		public function set ladModelId(value: int): void{
 			this._ladModelId = value;
 		}
 		
 		/**
-		 * get ç«¥å­æ¨¡æ¿Id
+		 * get Í¯×ÓÄ£°åId
 		 * @return 
 		 */
 		public function get ladtype(): int{
@@ -143,14 +143,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set ç«¥å­æ¨¡æ¿Id
+		 * set Í¯×ÓÄ£°åId
 		 */
 		public function set ladtype(value: int): void{
 			this._ladtype = value;
 		}
 		
 		/**
-		 * get æ‰€æœ‰è€…ID
+		 * get ËùÓĞÕßID
 		 * @return 
 		 */
 		public function get ownerId(): long{
@@ -158,14 +158,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set æ‰€æœ‰è€…ID
+		 * set ËùÓĞÕßID
 		 */
 		public function set ownerId(value: long): void{
 			this._ownerId = value;
 		}
 		
 		/**
-		 * get æ‰€æœ‰è€…åç§°
+		 * get ËùÓĞÕßÃû³Æ
 		 * @return 
 		 */
 		public function get ownerName(): String{
@@ -173,14 +173,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set æ‰€æœ‰è€…åç§°
+		 * set ËùÓĞÕßÃû³Æ
 		 */
 		public function set ownerName(value: String): void{
 			this._ownerName = value;
 		}
 		
 		/**
-		 * get ç«¥å­æ‰€åœ¨X
+		 * get Í¯×ÓËùÔÚX
 		 * @return 
 		 */
 		public function get x(): int{
@@ -188,14 +188,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set ç«¥å­æ‰€åœ¨X
+		 * set Í¯×ÓËùÔÚX
 		 */
 		public function set x(value: int): void{
 			this._x = value;
 		}
 		
 		/**
-		 * get ç«¥å­æ‰€åœ¨Y
+		 * get Í¯×ÓËùÔÚY
 		 * @return 
 		 */
 		public function get y(): int{
@@ -203,14 +203,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set ç«¥å­æ‰€åœ¨Y
+		 * set Í¯×ÓËùÔÚY
 		 */
 		public function set y(value: int): void{
 			this._y = value;
 		}
 		
 		/**
-		 * get ç«¥å­é€Ÿåº¦
+		 * get Í¯×ÓËÙ¶È
 		 * @return 
 		 */
 		public function get speed(): int{
@@ -218,14 +218,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set ç«¥å­é€Ÿåº¦
+		 * set Í¯×ÓËÙ¶È
 		 */
 		public function set speed(value: int): void{
 			this._speed = value;
 		}
 		
 		/**
-		 * get ç«¥å­é¢å¯¹æ–¹å‘
+		 * get Í¯×ÓÃæ¶Ô·½Ïò
 		 * @return 
 		 */
 		public function get dir(): int{
@@ -233,14 +233,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set ç«¥å­é¢å¯¹æ–¹å‘
+		 * set Í¯×ÓÃæ¶Ô·½Ïò
 		 */
 		public function set dir(value: int): void{
 			this._dir = value;
 		}
 		
 		/**
-		 * get è·‘æ­¥åæ ‡é›†åˆ
+		 * get ÅÜ²½×ø±ê¼¯ºÏ
 		 * @return 
 		 */
 		public function get positions(): Vector.<int>{
@@ -248,7 +248,7 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set è·‘æ­¥åæ ‡é›†åˆ
+		 * set ÅÜ²½×ø±ê¼¯ºÏ
 		 */
 		public function set positions(value: Vector.<int>): void{
 			this._positions = value;

@@ -16,16 +16,14 @@ package com.rpgGame.coreData.clientConfig
 		public var id:int;
 		 /**  名字 */
 		public var name:String;
-		 /**  场景特效 */
+		 /**  场景特效（特效不随着人物移动） */
 		public var scene_res:String;
-		 /**  角色身上的特效 */
+		 /**  角色身上的特效（特效随着人物移动） */
 		public var role_res:String;
 		 /**  武器特效 */
 		public var weapon_res:String;
 		 /**  特效绑定点 */
 		public var bind_bone:String;
-		 /**  特效表现效果类型 0：无特殊效果 1：暴风雪类型，对应排云掌，悲天剑雨 2：龙卷风类型，对应风神腿，断情七绝 */
-		public var special_effect:int;
 		 /**  偏移量 */
 		public var offset_x:int;
 		 /**   */
@@ -38,6 +36,8 @@ package com.rpgGame.coreData.clientConfig
 		public var scale_y:int;
 		 /**   */
 		public var scale_z:int;
+		 /**  特效表现效果类型 0：无特殊效果 1：暴风雪类型，对应排云掌，悲天剑雨 2：龙卷风类型，对应风神腿，断情七绝 */
+		public var special_effect:int;
 		 /**  第一次播放延时 */
 		public var delay:int;
 		 /**  循环播放次数(0表示无限次, 状态不需要配, 默认就是循环播放到状态时间结束) */

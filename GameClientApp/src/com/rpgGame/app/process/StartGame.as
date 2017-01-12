@@ -34,13 +34,11 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.SocietySpellTotalTip;
     import com.rpgGame.app.ui.tips.SpellTip;
     import com.rpgGame.app.ui.tips.TxtTip;
-    import com.rpgGame.core.events.BuffEvent;
     import com.rpgGame.core.events.MapEvent;
     import com.rpgGame.core.manager.tips.TipManager;
     import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.utils.ConsoleDesk;
     import com.rpgGame.coreData.cfg.ClientConfig;
-    import com.rpgGame.coreData.info.buff.BuffInfo;
     import com.rpgGame.coreData.type.TipType;
     
     import flash.events.Event;

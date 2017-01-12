@@ -44,9 +44,9 @@ package com.rpgGame.coreData.cfg
 			var arr:Array = data.readObject();
 			if(!arr)
 				return;
-			for each(var dataProto:Q_buff in arr)
+			for each(var buffData:Q_buff in arr)
 			{
-				_map.add(dataProto.id,dataProto);
+				_map.add(buffData.q_buff_id,buffData);
 			}
 		}
 

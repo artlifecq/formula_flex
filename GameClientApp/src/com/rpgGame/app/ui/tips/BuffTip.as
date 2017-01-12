@@ -5,7 +5,7 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.TextSizeUtil;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
-	import com.rpgGame.coreData.info.buff.BuffInfo;
+	import com.rpgGame.coreData.info.buff.BuffData;
 
 	/**
 	 *
@@ -44,11 +44,11 @@ package com.rpgGame.app.ui.tips
 
 		public function setTipData(data : *) : void
 		{
-			var buffInfo : BuffInfo = data as BuffInfo;
-			var description : String = buffInfo.description;
-			var isBuff : Boolean = buffInfo.isBuff;
-			var timeStr : String = buffInfo.disappearTime > 0 ? TimeUtil.timeFormatCH((buffInfo.disappearTime - SystemTimeManager.curtTm) * 0.001) : "永久";
-			var tipsStr : String = "<font color='#ffe258'>" + buffInfo.name + "</font><br><font color='#f9f0cc'>" + description + "</font><br>" + //
+			var buffData : BuffData = data as BuffData;
+			var description : String = buffData.description;
+			var isBuff : Boolean = buffData.isBuff;
+			var timeStr : String = buffData.disappearTime > 0 ? TimeUtil.timeFormatCH((buffData.disappearTime - SystemTimeManager.curtTm) * 0.001) : "永久";
+			var tipsStr : String = "<font color='#ffe258'>" + buffData.name + "</font><br><font color='#f9f0cc'>" + description + "</font><br>" + //
 				"<font color='#f9f0cc'>剩余时间：</font>" + //
 				(isBuff ? ("<font color='#4efd6f'>" + timeStr + "</font>") : ("<font color='#ff0000'>" + timeStr + "</font>"));
 			_tipSkin.labDesc.htmlText = tipsStr;

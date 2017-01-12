@@ -2,7 +2,7 @@
 {
 	import com.rpgGame.coreData.AvatarInfo;
 	import com.rpgGame.coreData.SpriteStat;
-	import com.rpgGame.coreData.info.buff.BuffInfo;
+	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.fight.skill.ActiveSpellList;
 	import com.rpgGame.netData.map.bean.MonsterInfo;
 	import com.rpgGame.netData.map.bean.NpcInfo;
@@ -99,7 +99,7 @@
 		/** 所有学习过的技能数据 */
 		public var spellList : ActiveSpellList;
 		/** buff列表 **/
-		public var buffList : Vector.<BuffInfo>;
+		public var buffList : Vector.<BuffData> = new Vector.<BuffData>();
 		/** 坐骑槽数 **/
 		public var mountSlotCount : int = 0;
 
@@ -161,8 +161,12 @@
 			data.totalStat.life = info.maxHp;
 //			data.mp = info;
 //			data.totalStat.mana = ;
-			
-//			data.buffList = info.buffs;
+			for(var i:int=0;i<info.buffs.length;i++)
+			{
+				var buffData:BuffData = new BuffData(data.id);
+				buffData.buffInfo = info.buffs[i];
+				data.buffList.push(buffData);
+			}
 			readGeneric(data,new Point(info.position.x,info.position.y));
 		}
 		
@@ -175,7 +179,12 @@
 			//			data.mp = info.;
 			//			data.totalStat.mana = ;
 			
-//			data.buffList = info.buffs;
+			for(var i:int=0;i<info.buffs.length;i++)
+			{
+				var buffData:BuffData = new BuffData(data.id);
+				buffData.buffInfo = info.buffs[i];
+				data.buffList.push(buffData);
+			}
 			readGeneric(data,new Point(info.position.x,info.position.y));
 		}
 	}
