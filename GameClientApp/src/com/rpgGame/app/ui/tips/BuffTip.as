@@ -47,7 +47,7 @@ package com.rpgGame.app.ui.tips
 			var buffData : BuffData = data as BuffData;
 			var description : String = buffData.description;
 			var isBuff : Boolean = buffData.isBuff;
-			var timeStr : String = buffData.disappearTime > 0 ? TimeUtil.timeFormatCH((buffData.disappearTime - SystemTimeManager.curtTm) * 0.001) : "永久";
+			var timeStr : String = buffData.disappearTime > 0 ? TimeUtil.timeFormatCH((buffData.disappearTime) * 0.001) : "永久";
 			var tipsStr : String = "<font color='#ffe258'>" + buffData.name + "</font><br><font color='#f9f0cc'>" + description + "</font><br>" + //
 				"<font color='#f9f0cc'>剩余时间：</font>" + //
 				(isBuff ? ("<font color='#4efd6f'>" + timeStr + "</font>") : ("<font color='#ff0000'>" + timeStr + "</font>"));

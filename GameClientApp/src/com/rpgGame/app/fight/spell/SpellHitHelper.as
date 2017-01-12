@@ -132,52 +132,52 @@ package com.rpgGame.app.fight.spell
 					}
 				}
 			}
-			if (info.stateList && info.stateList.length > 0)
-			{
-				for each (var buffData : BuffData in info.stateList)
-				{
-					role = SceneManager.getSceneObjByID(buffData.roleId) as SceneRole;
-					if (role)
-					{
-						var data : Q_buff = BuffStateDataManager.getData(buffData.cfgId);
-						if (data)
-						{
-							var buffRef : BuffStateReference;
-//							if (data.is_stun) //眩晕
-//							{
-//								buffRef = role.stateMachine.getReference(StunStateReference) as StunStateReference;
-//								buffRef.setParams(buffInfo.disappearTime);
-//								role.stateMachine.transition(RoleStateType.CONTROL_STUN, buffRef);
-//							}
-//							else if (data.is_unmovable) //不能移动
-//							{
-//								buffRef = role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
-//								buffRef.setParams(buffInfo.disappearTime);
-//								role.stateMachine.transition(RoleStateType.CONTROL_UNMOVABLE, buffRef);
-//							}
-//							else if (data.is_hush) //沉默
-//							{
-//								buffRef = role.stateMachine.getReference(HushStateReference) as HushStateReference;
-//								buffRef.setParams(buffInfo.disappearTime);
-//								role.stateMachine.transition(RoleStateType.CONTROL_HUSH, buffRef);
-//							}
-//							else if (data.is_hun_luan) //混乱
-//							{
-//								buffRef = role.stateMachine.getReference(HunLuanStateReference) as HunLuanStateReference;
-//								buffRef.setParams(buffInfo.disappearTime);
-//								role.stateMachine.transition(RoleStateType.CONTROL_HUN_LUAN, buffRef);
-//							}
-//							else if (false) //定身
-//							{
-//								buffRef = role.stateMachine.getReference(StiffStateReference) as StiffStateReference;
-//								buffRef.setParams(buffInfo.disappearTime);
-//								role.stateMachine.transition(RoleStateType.CONTROL_STIFF, buffRef);
-//							}
-							role.buffSet.addBuff(buffData);
-						}
-					}
-				}
-			}
+//			if (info.stateList && info.stateList.length > 0)
+//			{
+//				for each (var buffData : BuffData in info.stateList)
+//				{
+//					role = SceneManager.getSceneObjByID(buffData.roleId) as SceneRole;
+//					if (role)
+//					{
+//						var data : Q_buff = BuffStateDataManager.getData(buffData.cfgId);
+//						if (data)
+//						{
+//							var buffRef : BuffStateReference;
+////							if (data.is_stun) //眩晕
+////							{
+////								buffRef = role.stateMachine.getReference(StunStateReference) as StunStateReference;
+////								buffRef.setParams(buffInfo.disappearTime);
+////								role.stateMachine.transition(RoleStateType.CONTROL_STUN, buffRef);
+////							}
+////							else if (data.is_unmovable) //不能移动
+////							{
+////								buffRef = role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
+////								buffRef.setParams(buffInfo.disappearTime);
+////								role.stateMachine.transition(RoleStateType.CONTROL_UNMOVABLE, buffRef);
+////							}
+////							else if (data.is_hush) //沉默
+////							{
+////								buffRef = role.stateMachine.getReference(HushStateReference) as HushStateReference;
+////								buffRef.setParams(buffInfo.disappearTime);
+////								role.stateMachine.transition(RoleStateType.CONTROL_HUSH, buffRef);
+////							}
+////							else if (data.is_hun_luan) //混乱
+////							{
+////								buffRef = role.stateMachine.getReference(HunLuanStateReference) as HunLuanStateReference;
+////								buffRef.setParams(buffInfo.disappearTime);
+////								role.stateMachine.transition(RoleStateType.CONTROL_HUN_LUAN, buffRef);
+////							}
+////							else if (false) //定身
+////							{
+////								buffRef = role.stateMachine.getReference(StiffStateReference) as StiffStateReference;
+////								buffRef.setParams(buffInfo.disappearTime);
+////								role.stateMachine.transition(RoleStateType.CONTROL_STIFF, buffRef);
+////							}
+//							role.buffSet.addBuff(buffData);
+//						}
+//					}
+//				}
+//			}
 			if (info.isTrapSpell)
 			{
 				if (hurted)

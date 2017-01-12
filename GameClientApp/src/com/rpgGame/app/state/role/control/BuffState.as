@@ -1,8 +1,7 @@
 package com.rpgGame.app.state.role.control
 {
-	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.core.state.role.control.ControlState;
-
+	
 	import gs.TweenLite;
 
 	/**
@@ -38,7 +37,7 @@ package com.rpgGame.app.state.role.control
 							_stiffTween.kill();
 							_stiffTween = null;
 						}
-						var duration : Number = _stateReference.disappearTime - SystemTimeManager.curtTm;
+						var duration : Number = _stateReference.disappearTime;
 						_stiffTween = TweenLite.delayedCall(duration * 0.001, onRemoveBuff);
 					}
 					else

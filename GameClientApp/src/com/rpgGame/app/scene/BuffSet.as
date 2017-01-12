@@ -117,7 +117,7 @@ package com.rpgGame.app.scene
 					}
 				}
 			}
-			var duration : Number = buffData.disappearTime - SystemTimeManager.curtTm;
+			var duration : Number = buffData.disappearTime;
 			var tween : TweenLite = TweenLite.delayedCall(duration * 0.001, onRemoveBuff, [buffData.cfgId]);
 			_buffEffectTweenMap.add(buffData.cfgId, tween);
 		}
@@ -132,7 +132,7 @@ package com.rpgGame.app.scene
 			if (!_role)
 				return;
 			var buffList : Vector.<BuffData> = (_role.data as RoleData).buffList;
-			if (!buffList)
+			if (!buffList || buffList.length == 0)
 				return;
 			var len : int = buffList.length;
 			for (var i : int = 0; i < len; i++)
@@ -148,12 +148,12 @@ package com.rpgGame.app.scene
 			EventManager.dispatchEvent(BuffEvent.REMOVE_BUFF, _role.id, currData.cfgId);
 		}
 		
-		public function removeBuff(stateId : int) : void
+		private function removeBuff(stateId : int) : void
 		{
 			if (!_role)
 				return;
 			var buffList : Vector.<BuffData> = (_role.data as RoleData).buffList;
-			if (!buffList)
+			if (!buffList || buffList.length == 0)
 				return;
 			var len : int = buffList.length;
 			for (var i : int = 0; i < len; i++)

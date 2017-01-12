@@ -137,8 +137,8 @@ package com.rpgGame.coreData.info.buff
 			
 			_buffId = _buffInfo.buffId.ToGID();
 			cfgId = _buffInfo.buffModelId;
-			_disappearTime = _buffInfo.remainTime;
-			_totalTime = _buffInfo.totalTime;
+			_disappearTime = _buffInfo.remainTime.fValue;
+			_totalTime = _buffInfo.totalTime.fValue;
 			_curtStackCount = _buffInfo.overlay;
 		}
 
@@ -177,7 +177,7 @@ package com.rpgGame.coreData.info.buff
 
 		public function get totalTime() : Number
 		{
-			return totalTime;
+			return _totalTime;
 		}
 
 		/**
