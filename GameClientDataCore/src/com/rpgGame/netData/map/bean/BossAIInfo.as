@@ -10,33 +10,33 @@ package com.rpgGame.netData.map.bean{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * bossAIä¿¡æ¯
+	 * bossAIĞÅÏ¢
 	 */
 	public class BossAIInfo extends Bean {
 	
-		//é˜¶æ®µï¼ˆ0è¡¨ç¤ºæ²¡æœ‰å¼€å§‹ 1,2,3...å’Œåç«¯çº¦å®šï¼‰
+		//½×¶Î£¨0±íÊ¾Ã»ÓĞ¿ªÊ¼ 1,2,3...ºÍºó¶ËÔ¼¶¨£©
 		private var _step: int;
 		
 		/**
-		 * å†™å…¥å­—èŠ‚ç¼“å­˜
+		 * Ğ´Èë×Ö½Ú»º´æ
 		 */
 		override protected function writing(): Boolean{
-			//é˜¶æ®µï¼ˆ0è¡¨ç¤ºæ²¡æœ‰å¼€å§‹ 1,2,3...å’Œåç«¯çº¦å®šï¼‰
+			//½×¶Î£¨0±íÊ¾Ã»ÓĞ¿ªÊ¼ 1,2,3...ºÍºó¶ËÔ¼¶¨£©
 			writeByte(_step);
 			return true;
 		}
 		
 		/**
-		 * è¯»å–å­—èŠ‚ç¼“å­˜
+		 * ¶ÁÈ¡×Ö½Ú»º´æ
 		 */
 		override protected function reading(): Boolean{
-			//é˜¶æ®µï¼ˆ0è¡¨ç¤ºæ²¡æœ‰å¼€å§‹ 1,2,3...å’Œåç«¯çº¦å®šï¼‰
+			//½×¶Î£¨0±íÊ¾Ã»ÓĞ¿ªÊ¼ 1,2,3...ºÍºó¶ËÔ¼¶¨£©
 			_step = readByte();
 			return true;
 		}
 		
 		/**
-		 * get é˜¶æ®µï¼ˆ0è¡¨ç¤ºæ²¡æœ‰å¼€å§‹ 1,2,3...å’Œåç«¯çº¦å®šï¼‰
+		 * get ½×¶Î£¨0±íÊ¾Ã»ÓĞ¿ªÊ¼ 1,2,3...ºÍºó¶ËÔ¼¶¨£©
 		 * @return 
 		 */
 		public function get step(): int{
@@ -44,7 +44,7 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set é˜¶æ®µï¼ˆ0è¡¨ç¤ºæ²¡æœ‰å¼€å§‹ 1,2,3...å’Œåç«¯çº¦å®šï¼‰
+		 * set ½×¶Î£¨0±íÊ¾Ã»ÓĞ¿ªÊ¼ 1,2,3...ºÍºó¶ËÔ¼¶¨£©
 		 */
 		public function set step(value: int): void{
 			this._step = value;

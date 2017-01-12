@@ -4,11 +4,12 @@ package com.rpgGame.coreData.info.society
 	import com.rpgGame.coreData.cfg.StatNameCfgData;
 	import com.rpgGame.coreData.cfg.society.SocietyStaticConfigData;
 	import com.rpgGame.coreData.enum.StaticBuffCfgId;
-	import com.rpgGame.coreData.info.buff.BuffInfo;
 	import com.rpgGame.coreData.info.stat.StatData;
-
+	
 	import app.message.AllFamilyCollageDatasProto.FamilyCollageSpellDatasProto;
 	import app.message.AllFamilyCollageDatasProto.FamilyCollageSpellDatasProto.FamilyCollageSpellDataProto;
+	
+	import com.rpgGame.coreData.info.buff.BuffData;
 
 	/**
 	 *
@@ -23,16 +24,16 @@ package com.rpgGame.coreData.info.society
 		private var _learnLevels : Array = null;
 		private var _societyData : SocietyDetailData = null;
 		private var _spellDatas : Array = null;
-		private var _buffInfo : BuffInfo = null;
+		private var _buffData : BuffData = null;
 
 		public function SocietySpellTotalData(roleId : Number)
 		{
-			_buffInfo = new BuffInfo(roleId);
-			_buffInfo.cfgId = StaticBuffCfgId.SOCIETY_SPELL_BUFF_CFG_ID;
-			_buffInfo.disappearTime = 0;
-			_buffInfo.icoName = "bangji";
-			_buffInfo.isBuff = true;
-			_buffInfo.specialData = this;
+			_buffData = new BuffData(roleId);
+			_buffData.cfgId = StaticBuffCfgId.SOCIETY_SPELL_BUFF_CFG_ID;
+			_buffData.disappearTime = 0;
+			_buffData.icoName = "bangji";
+			_buffData.isBuff = true;
+			_buffData.specialData = this;
 			_learnLevels = [];
 			_spellDatas = [];
 		}
@@ -165,9 +166,9 @@ package com.rpgGame.coreData.info.society
 			_societyData = null;
 		}
 
-		public function get buffInfo() : BuffInfo
+		public function get buffData() : BuffData
 		{
-			return _buffInfo;
+			return _buffData;
 		}
 
 		public function get societyData() : SocietyDetailData

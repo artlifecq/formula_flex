@@ -1,5 +1,6 @@
 package com.rpgGame.netData.player.bean{
 	import com.rpgGame.netData.player.bean.AttributeItem;
+	import com.rpgGame.netData.buff.bean.BuffInfo;
 	import com.rpgGame.netData.structs.Position;
 	
 	import org.game.netCore.data.long;
@@ -13,129 +14,141 @@ package com.rpgGame.netData.player.bean{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * æœ¬äººç©å®¶è¯¦ç»†ä¿¡æ¯
+	 * ±¾ÈËÍæ¼ÒÏêÏ¸ĞÅÏ¢
 	 */
 	public class MyPlayerInfo extends Bean {
 	
-		//è§’è‰²Id
+		//½ÇÉ«Id
 		private var _personId: long;
 		
-		//è§’è‰²åå­—
+		//½ÇÉ«Ãû×Ö
 		private var _name: String;
 		
-		//è§’è‰²æ‰€åœ¨åœ°å›¾æ¨¡ç‰ˆ
+		//½ÇÉ«ËùÔÚµØÍ¼Ä£°æ
 		private var _mapModelId: int;
 		
-		//è§’è‰²æ‰€åœ¨ä½ç½®
+		//½ÇÉ«ËùÔÚÎ»ÖÃ
 		private var _position: com.rpgGame.netData.structs.Position;
 		
-		//äººç‰©é¢å¯¹æ–¹å‘
+		//ÈËÎïÃæ¶Ô·½Ïò
 		private var _dir: int;
 		
-		//ç©å®¶æ€§åˆ« 1ç”· 2å¥³
+		//Íæ¼ÒĞÔ±ğ 1ÄĞ 2Å®
 		private var _sex: int;
 		
-		//é˜¶æ®µ
+		//½×¶Î
 		private var _body: int;
 		
-		//èŒä¸š
+		//Ö°Òµ
 		private var _job: int;
 		
-		//è¡£æœå¥—è£…
+		//ÒÂ·şÌ××°
 		private var _cloths: int;
 		
-		//ä¸»æ­¦å™¨
+		//Ö÷ÎäÆ÷
 		private var _weapon: int;
 		
-		//å‰¯æ­¦å™¨
+		//¸±ÎäÆ÷
 		private var _second_weapon: int;
 		
-		//åéª‘
+		//×øÆï
 		private var _mount: int;
 		
-		//PKç±»å‹
+		//PKÀàĞÍ
 		private var _pkType: int;
 		
-		//è§’è‰²å±æ€§ä¿¡æ¯
+		//½ÇÉ«ÊôĞÔĞÅÏ¢
 		private var _attributes: Vector.<AttributeItem> = new Vector.<AttributeItem>();
+		//buffÁĞ±í
+		private var _buffs: Vector.<com.rpgGame.netData.buff.bean.BuffInfo> = new Vector.<com.rpgGame.netData.buff.bean.BuffInfo>();
 		/**
-		 * å†™å…¥å­—èŠ‚ç¼“å­˜
+		 * Ğ´Èë×Ö½Ú»º´æ
 		 */
 		override protected function writing(): Boolean{
-			//è§’è‰²Id
+			//½ÇÉ«Id
 			writeLong(_personId);
-			//è§’è‰²åå­—
+			//½ÇÉ«Ãû×Ö
 			writeString(_name);
-			//è§’è‰²æ‰€åœ¨åœ°å›¾æ¨¡ç‰ˆ
+			//½ÇÉ«ËùÔÚµØÍ¼Ä£°æ
 			writeInt(_mapModelId);
-			//è§’è‰²æ‰€åœ¨ä½ç½®
+			//½ÇÉ«ËùÔÚÎ»ÖÃ
 			writeBean(_position);
-			//äººç‰©é¢å¯¹æ–¹å‘
+			//ÈËÎïÃæ¶Ô·½Ïò
 			writeShort(_dir);
-			//ç©å®¶æ€§åˆ« 1ç”· 2å¥³
+			//Íæ¼ÒĞÔ±ğ 1ÄĞ 2Å®
 			writeByte(_sex);
-			//é˜¶æ®µ
+			//½×¶Î
 			writeByte(_body);
-			//èŒä¸š
+			//Ö°Òµ
 			writeByte(_job);
-			//è¡£æœå¥—è£…
+			//ÒÂ·şÌ××°
 			writeInt(_cloths);
-			//ä¸»æ­¦å™¨
+			//Ö÷ÎäÆ÷
 			writeInt(_weapon);
-			//å‰¯æ­¦å™¨
+			//¸±ÎäÆ÷
 			writeInt(_second_weapon);
-			//åéª‘
+			//×øÆï
 			writeInt(_mount);
-			//PKç±»å‹
+			//PKÀàĞÍ
 			writeInt(_pkType);
-			//è§’è‰²å±æ€§ä¿¡æ¯
+			//½ÇÉ«ÊôĞÔĞÅÏ¢
 			writeShort(_attributes.length);
 			for (var i: int = 0; i < _attributes.length; i++) {
 				writeBean(_attributes[i]);
 			}
-			return true;
-		}
-		
-		/**
-		 * è¯»å–å­—èŠ‚ç¼“å­˜
-		 */
-		override protected function reading(): Boolean{
-			//è§’è‰²Id
-			_personId = readLong();
-			//è§’è‰²åå­—
-			_name = readString();
-			//è§’è‰²æ‰€åœ¨åœ°å›¾æ¨¡ç‰ˆ
-			_mapModelId = readInt();
-			//è§’è‰²æ‰€åœ¨ä½ç½®
-			_position = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
-			//äººç‰©é¢å¯¹æ–¹å‘
-			_dir = readShort();
-			//ç©å®¶æ€§åˆ« 1ç”· 2å¥³
-			_sex = readByte();
-			//é˜¶æ®µ
-			_body = readByte();
-			//èŒä¸š
-			_job = readByte();
-			//è¡£æœå¥—è£…
-			_cloths = readInt();
-			//ä¸»æ­¦å™¨
-			_weapon = readInt();
-			//å‰¯æ­¦å™¨
-			_second_weapon = readInt();
-			//åéª‘
-			_mount = readInt();
-			//PKç±»å‹
-			_pkType = readInt();
-			//è§’è‰²å±æ€§ä¿¡æ¯
-			var attributes_length : int = readShort();
-			for (var i: int = 0; i < attributes_length; i++) {
-				_attributes[i] = readBean(AttributeItem) as AttributeItem;
+			//buffÁĞ±í
+			writeShort(_buffs.length);
+			for (var i: int = 0; i < _buffs.length; i++) {
+				writeBean(_buffs[i]);
 			}
 			return true;
 		}
 		
 		/**
-		 * get è§’è‰²Id
+		 * ¶ÁÈ¡×Ö½Ú»º´æ
+		 */
+		override protected function reading(): Boolean{
+			//½ÇÉ«Id
+			_personId = readLong();
+			//½ÇÉ«Ãû×Ö
+			_name = readString();
+			//½ÇÉ«ËùÔÚµØÍ¼Ä£°æ
+			_mapModelId = readInt();
+			//½ÇÉ«ËùÔÚÎ»ÖÃ
+			_position = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
+			//ÈËÎïÃæ¶Ô·½Ïò
+			_dir = readShort();
+			//Íæ¼ÒĞÔ±ğ 1ÄĞ 2Å®
+			_sex = readByte();
+			//½×¶Î
+			_body = readByte();
+			//Ö°Òµ
+			_job = readByte();
+			//ÒÂ·şÌ××°
+			_cloths = readInt();
+			//Ö÷ÎäÆ÷
+			_weapon = readInt();
+			//¸±ÎäÆ÷
+			_second_weapon = readInt();
+			//×øÆï
+			_mount = readInt();
+			//PKÀàĞÍ
+			_pkType = readInt();
+			//½ÇÉ«ÊôĞÔĞÅÏ¢
+			var attributes_length : int = readShort();
+			for (var i: int = 0; i < attributes_length; i++) {
+				_attributes[i] = readBean(AttributeItem) as AttributeItem;
+			}
+			//buffÁĞ±í
+			var buffs_length : int = readShort();
+			for (var i: int = 0; i < buffs_length; i++) {
+				_buffs[i] = readBean(com.rpgGame.netData.buff.bean.BuffInfo) as com.rpgGame.netData.buff.bean.BuffInfo;
+			}
+			return true;
+		}
+		
+		/**
+		 * get ½ÇÉ«Id
 		 * @return 
 		 */
 		public function get personId(): long{
@@ -143,14 +156,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set è§’è‰²Id
+		 * set ½ÇÉ«Id
 		 */
 		public function set personId(value: long): void{
 			this._personId = value;
 		}
 		
 		/**
-		 * get è§’è‰²åå­—
+		 * get ½ÇÉ«Ãû×Ö
 		 * @return 
 		 */
 		public function get name(): String{
@@ -158,14 +171,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set è§’è‰²åå­—
+		 * set ½ÇÉ«Ãû×Ö
 		 */
 		public function set name(value: String): void{
 			this._name = value;
 		}
 		
 		/**
-		 * get è§’è‰²æ‰€åœ¨åœ°å›¾æ¨¡ç‰ˆ
+		 * get ½ÇÉ«ËùÔÚµØÍ¼Ä£°æ
 		 * @return 
 		 */
 		public function get mapModelId(): int{
@@ -173,14 +186,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set è§’è‰²æ‰€åœ¨åœ°å›¾æ¨¡ç‰ˆ
+		 * set ½ÇÉ«ËùÔÚµØÍ¼Ä£°æ
 		 */
 		public function set mapModelId(value: int): void{
 			this._mapModelId = value;
 		}
 		
 		/**
-		 * get è§’è‰²æ‰€åœ¨ä½ç½®
+		 * get ½ÇÉ«ËùÔÚÎ»ÖÃ
 		 * @return 
 		 */
 		public function get position(): com.rpgGame.netData.structs.Position{
@@ -188,14 +201,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set è§’è‰²æ‰€åœ¨ä½ç½®
+		 * set ½ÇÉ«ËùÔÚÎ»ÖÃ
 		 */
 		public function set position(value: com.rpgGame.netData.structs.Position): void{
 			this._position = value;
 		}
 		
 		/**
-		 * get äººç‰©é¢å¯¹æ–¹å‘
+		 * get ÈËÎïÃæ¶Ô·½Ïò
 		 * @return 
 		 */
 		public function get dir(): int{
@@ -203,14 +216,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set äººç‰©é¢å¯¹æ–¹å‘
+		 * set ÈËÎïÃæ¶Ô·½Ïò
 		 */
 		public function set dir(value: int): void{
 			this._dir = value;
 		}
 		
 		/**
-		 * get ç©å®¶æ€§åˆ« 1ç”· 2å¥³
+		 * get Íæ¼ÒĞÔ±ğ 1ÄĞ 2Å®
 		 * @return 
 		 */
 		public function get sex(): int{
@@ -218,14 +231,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set ç©å®¶æ€§åˆ« 1ç”· 2å¥³
+		 * set Íæ¼ÒĞÔ±ğ 1ÄĞ 2Å®
 		 */
 		public function set sex(value: int): void{
 			this._sex = value;
 		}
 		
 		/**
-		 * get é˜¶æ®µ
+		 * get ½×¶Î
 		 * @return 
 		 */
 		public function get body(): int{
@@ -233,14 +246,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set é˜¶æ®µ
+		 * set ½×¶Î
 		 */
 		public function set body(value: int): void{
 			this._body = value;
 		}
 		
 		/**
-		 * get èŒä¸š
+		 * get Ö°Òµ
 		 * @return 
 		 */
 		public function get job(): int{
@@ -248,14 +261,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set èŒä¸š
+		 * set Ö°Òµ
 		 */
 		public function set job(value: int): void{
 			this._job = value;
 		}
 		
 		/**
-		 * get è¡£æœå¥—è£…
+		 * get ÒÂ·şÌ××°
 		 * @return 
 		 */
 		public function get cloths(): int{
@@ -263,14 +276,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set è¡£æœå¥—è£…
+		 * set ÒÂ·şÌ××°
 		 */
 		public function set cloths(value: int): void{
 			this._cloths = value;
 		}
 		
 		/**
-		 * get ä¸»æ­¦å™¨
+		 * get Ö÷ÎäÆ÷
 		 * @return 
 		 */
 		public function get weapon(): int{
@@ -278,14 +291,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set ä¸»æ­¦å™¨
+		 * set Ö÷ÎäÆ÷
 		 */
 		public function set weapon(value: int): void{
 			this._weapon = value;
 		}
 		
 		/**
-		 * get å‰¯æ­¦å™¨
+		 * get ¸±ÎäÆ÷
 		 * @return 
 		 */
 		public function get second_weapon(): int{
@@ -293,14 +306,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set å‰¯æ­¦å™¨
+		 * set ¸±ÎäÆ÷
 		 */
 		public function set second_weapon(value: int): void{
 			this._second_weapon = value;
 		}
 		
 		/**
-		 * get åéª‘
+		 * get ×øÆï
 		 * @return 
 		 */
 		public function get mount(): int{
@@ -308,14 +321,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set åéª‘
+		 * set ×øÆï
 		 */
 		public function set mount(value: int): void{
 			this._mount = value;
 		}
 		
 		/**
-		 * get PKç±»å‹
+		 * get PKÀàĞÍ
 		 * @return 
 		 */
 		public function get pkType(): int{
@@ -323,14 +336,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set PKç±»å‹
+		 * set PKÀàĞÍ
 		 */
 		public function set pkType(value: int): void{
 			this._pkType = value;
 		}
 		
 		/**
-		 * get è§’è‰²å±æ€§ä¿¡æ¯
+		 * get ½ÇÉ«ÊôĞÔĞÅÏ¢
 		 * @return 
 		 */
 		public function get attributes(): Vector.<AttributeItem>{
@@ -338,10 +351,25 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set è§’è‰²å±æ€§ä¿¡æ¯
+		 * set ½ÇÉ«ÊôĞÔĞÅÏ¢
 		 */
 		public function set attributes(value: Vector.<AttributeItem>): void{
 			this._attributes = value;
+		}
+		
+		/**
+		 * get buffÁĞ±í
+		 * @return 
+		 */
+		public function get buffs(): Vector.<com.rpgGame.netData.buff.bean.BuffInfo>{
+			return _buffs;
+		}
+		
+		/**
+		 * set buffÁĞ±í
+		 */
+		public function set buffs(value: Vector.<com.rpgGame.netData.buff.bean.BuffInfo>): void{
+			this._buffs = value;
 		}
 		
 	}

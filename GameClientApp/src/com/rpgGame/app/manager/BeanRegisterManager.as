@@ -3,6 +3,7 @@
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.cmdlistener.AddSpriteStatCmdListener;
 	import com.rpgGame.app.cmdlistener.BaZhenTuCmdListener;
+	import com.rpgGame.app.cmdlistener.BuffCmdListener;
 	import com.rpgGame.app.cmdlistener.ChatCmdListener;
 	import com.rpgGame.app.cmdlistener.DaTiCmdListener;
 	import com.rpgGame.app.cmdlistener.FriendCmdListener;
@@ -87,6 +88,7 @@
 			register("SceneCmdListener", SceneCmdListener);
 			register("StoryDungeonCmdListener", StoryDungeonCmdListener);
 			register("SceneSpellCmdListener", SceneSpellCmdListener);
+			register("BuffCmdListener",BuffCmdListener);
 //			register("EquipmentCmdListener", EquipmentCmdListener);
 			register("SummonCmdListener", SummonCmdListener);
 			register("GMCmdListener", GMCmdListener);
