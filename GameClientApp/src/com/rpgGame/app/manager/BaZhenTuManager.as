@@ -12,7 +12,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.npc.NpcCfgData;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
-	import com.rpgGame.coreData.info.buff.BuffInfo;
+	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.lang.LangBaZhenTu;
 	import com.rpgGame.coreData.role.MonsterData;
 	
@@ -47,7 +47,7 @@ package com.rpgGame.app.manager
 		public static function setShiBeiBuff(type:int,end:Number):void
 		{
 			_shiBeiBuffHash.add(type,end);
-			var buff : BuffInfo = new BuffInfo(MainRoleManager.actorID);
+			var buff : BuffData = new BuffData(MainRoleManager.actorID);
 			buff.setClientBuffInfo(BUFF_KEY+type);
 			buff.disappearTime = end;
 			EventManager.dispatchEvent(BuffEvent.ADD_BUFF,buff);

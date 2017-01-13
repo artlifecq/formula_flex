@@ -488,7 +488,7 @@ package com.rpgGame.app.manager.chat
 		{
             CONFIG::Debug {
                 if (ShellManager.parse(msg)) {
-                    return true;
+//                    return true;
                 }
             }
 			//验证gm命令
@@ -503,7 +503,7 @@ package com.rpgGame.app.manager.chat
 
 		private static function isGmMsg(msg : String) : Boolean
 		{
-			if (msg.indexOf("/") != -1)
+			if (msg.indexOf("&") != -1)
 				return true;
 			return false;
 		}

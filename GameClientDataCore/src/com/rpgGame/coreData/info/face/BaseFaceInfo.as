@@ -114,7 +114,7 @@ package com.rpgGame.coreData.info.face
 		}
 
 		/**
-		 * ID————可物品ID、技能ID
+		 * ID————可物品ID、技能ID（配置表的id）
 		 * @return 
 		 * 
 		 */		

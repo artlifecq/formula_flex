@@ -14,115 +14,115 @@ package com.rpgGame.netData.player.bean{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * ä»–äººè¯¦ç»†ä¿¡æ¯
+	 * ËûÈËÏêÏ¸ĞÅÏ¢
 	 */
 	public class OthersInfo extends Bean {
 	
-		//è§’è‰²Id
+		//½ÇÉ«Id
 		private var _personId: long;
 		
-		//è§’è‰²åå­—
+		//½ÇÉ«Ãû×Ö
 		private var _name: String;
 		
-		//è§’è‰²ç­‰çº§
+		//½ÇÉ«µÈ¼¶
 		private var _level: int;
 		
-		//è§’è‰²å±æ€§ä¿¡æ¯
+		//½ÇÉ«ÊôĞÔĞÅÏ¢
 		private var _attributeList: Vector.<AttributeItem> = new Vector.<AttributeItem>();
-		//éª‘å…µé€ å‹ID
+		//Æï±øÔìĞÍID
 		private var _knightWepId: int;
 		
-		//æ€§åˆ« 0å¥³ 1ç”·
+		//ĞÔ±ğ 0Å® 1ÄĞ
 		private var _sex: int;
 		
-		//ç¾äººID
+		//ÃÀÈËID
 		private var _beautyModelId: int;
 		
-		//ç¾äººæŠ€èƒ½ä¿¡æ¯
+		//ÃÀÈË¼¼ÄÜĞÅÏ¢
 		private var _beautySkillInfos: Vector.<com.rpgGame.netData.skill.bean.SkillInfo> = new Vector.<com.rpgGame.netData.skill.bean.SkillInfo>();
-		//åéª‘ID
+		//×øÆïID
 		private var _horseModelid: int;
 		
-		//åéª‘è£…å¤‡åˆ—è¡¨(4ä¸ªæ ¼å­,ç©ºçš„æ˜¯itemidä¸º0)
+		//×øÆï×°±¸ÁĞ±í(4¸ö¸ñ×Ó,¿ÕµÄÊÇitemidÎª0)
 		private var _horseEquips: Vector.<com.rpgGame.netData.backpack.bean.ItemInfo> = new Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>();
-		//éª‘å…µæŠ€èƒ½ä¿¡æ¯
+		//Æï±ø¼¼ÄÜĞÅÏ¢
 		private var _weaponRideSkillInfos: Vector.<com.rpgGame.netData.skill.bean.SkillInfo> = new Vector.<com.rpgGame.netData.skill.bean.SkillInfo>();
-		//æˆ˜æ–—åŠ›
+		//Õ½¶·Á¦
 		private var _fightpower: int;
 		
-		//vipç­‰çº§
+		//vipµÈ¼¶
 		private var _viplevel: int;
 		
-		//å¸®ä¼šåç§°
+		//°ï»áÃû³Æ
 		private var _guildName: String;
 		
-		//æˆå°±ç­‰çº§
+		//³É¾ÍµÈ¼¶
 		private var _achievementLv: int;
 		
-		//å½“å‰æˆå°±å€¼
+		//µ±Ç°³É¾ÍÖµ
 		private var _achievementValue: int;
 		
-		//å‡»æ€BOSSæ•°
+		//»÷É±BOSSÊı
 		private var _bossKillNum: int;
 		
-		//è£…å¤‡æˆ˜å°Id
+		//×°±¸Õ½Ó¡Id
 		private var _warMarkId: int;
 		
-		//è£…å¤‡ä¿¡æ¯åˆ—è¡¨
+		//×°±¸ĞÅÏ¢ÁĞ±í
 		private var _equips: Vector.<com.rpgGame.netData.backpack.bean.ItemInfo> = new Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>();
 		/**
-		 * å†™å…¥å­—èŠ‚ç¼“å­˜
+		 * Ğ´Èë×Ö½Ú»º´æ
 		 */
 		override protected function writing(): Boolean{
-			//è§’è‰²Id
+			//½ÇÉ«Id
 			writeLong(_personId);
-			//è§’è‰²åå­—
+			//½ÇÉ«Ãû×Ö
 			writeString(_name);
-			//è§’è‰²ç­‰çº§
+			//½ÇÉ«µÈ¼¶
 			writeShort(_level);
-			//è§’è‰²å±æ€§ä¿¡æ¯
+			//½ÇÉ«ÊôĞÔĞÅÏ¢
 			writeShort(_attributeList.length);
 			for (var i: int = 0; i < _attributeList.length; i++) {
 				writeBean(_attributeList[i]);
 			}
-			//éª‘å…µé€ å‹ID
+			//Æï±øÔìĞÍID
 			writeByte(_knightWepId);
-			//æ€§åˆ« 0å¥³ 1ç”·
+			//ĞÔ±ğ 0Å® 1ÄĞ
 			writeByte(_sex);
-			//ç¾äººID
+			//ÃÀÈËID
 			writeByte(_beautyModelId);
-			//ç¾äººæŠ€èƒ½ä¿¡æ¯
+			//ÃÀÈË¼¼ÄÜĞÅÏ¢
 			writeShort(_beautySkillInfos.length);
 			for (var i: int = 0; i < _beautySkillInfos.length; i++) {
 				writeBean(_beautySkillInfos[i]);
 			}
-			//åéª‘ID
+			//×øÆïID
 			writeByte(_horseModelid);
-			//åéª‘è£…å¤‡åˆ—è¡¨(4ä¸ªæ ¼å­,ç©ºçš„æ˜¯itemidä¸º0)
+			//×øÆï×°±¸ÁĞ±í(4¸ö¸ñ×Ó,¿ÕµÄÊÇitemidÎª0)
 			writeShort(_horseEquips.length);
 			for (var i: int = 0; i < _horseEquips.length; i++) {
 				writeBean(_horseEquips[i]);
 			}
-			//éª‘å…µæŠ€èƒ½ä¿¡æ¯
+			//Æï±ø¼¼ÄÜĞÅÏ¢
 			writeShort(_weaponRideSkillInfos.length);
 			for (var i: int = 0; i < _weaponRideSkillInfos.length; i++) {
 				writeBean(_weaponRideSkillInfos[i]);
 			}
-			//æˆ˜æ–—åŠ›
+			//Õ½¶·Á¦
 			writeInt(_fightpower);
-			//vipç­‰çº§
+			//vipµÈ¼¶
 			writeByte(_viplevel);
-			//å¸®ä¼šåç§°
+			//°ï»áÃû³Æ
 			writeString(_guildName);
-			//æˆå°±ç­‰çº§
+			//³É¾ÍµÈ¼¶
 			writeShort(_achievementLv);
-			//å½“å‰æˆå°±å€¼
+			//µ±Ç°³É¾ÍÖµ
 			writeInt(_achievementValue);
-			//å‡»æ€BOSSæ•°
+			//»÷É±BOSSÊı
 			writeShort(_bossKillNum);
-			//è£…å¤‡æˆ˜å°Id
+			//×°±¸Õ½Ó¡Id
 			writeInt(_warMarkId);
-			//è£…å¤‡ä¿¡æ¯åˆ—è¡¨
+			//×°±¸ĞÅÏ¢ÁĞ±í
 			writeShort(_equips.length);
 			for (var i: int = 0; i < _equips.length; i++) {
 				writeBean(_equips[i]);
@@ -131,58 +131,58 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * è¯»å–å­—èŠ‚ç¼“å­˜
+		 * ¶ÁÈ¡×Ö½Ú»º´æ
 		 */
 		override protected function reading(): Boolean{
-			//è§’è‰²Id
+			//½ÇÉ«Id
 			_personId = readLong();
-			//è§’è‰²åå­—
+			//½ÇÉ«Ãû×Ö
 			_name = readString();
-			//è§’è‰²ç­‰çº§
+			//½ÇÉ«µÈ¼¶
 			_level = readShort();
-			//è§’è‰²å±æ€§ä¿¡æ¯
+			//½ÇÉ«ÊôĞÔĞÅÏ¢
 			var attributeList_length : int = readShort();
 			for (var i: int = 0; i < attributeList_length; i++) {
 				_attributeList[i] = readBean(AttributeItem) as AttributeItem;
 			}
-			//éª‘å…µé€ å‹ID
+			//Æï±øÔìĞÍID
 			_knightWepId = readByte();
-			//æ€§åˆ« 0å¥³ 1ç”·
+			//ĞÔ±ğ 0Å® 1ÄĞ
 			_sex = readByte();
-			//ç¾äººID
+			//ÃÀÈËID
 			_beautyModelId = readByte();
-			//ç¾äººæŠ€èƒ½ä¿¡æ¯
+			//ÃÀÈË¼¼ÄÜĞÅÏ¢
 			var beautySkillInfos_length : int = readShort();
 			for (var i: int = 0; i < beautySkillInfos_length; i++) {
 				_beautySkillInfos[i] = readBean(com.rpgGame.netData.skill.bean.SkillInfo) as com.rpgGame.netData.skill.bean.SkillInfo;
 			}
-			//åéª‘ID
+			//×øÆïID
 			_horseModelid = readByte();
-			//åéª‘è£…å¤‡åˆ—è¡¨(4ä¸ªæ ¼å­,ç©ºçš„æ˜¯itemidä¸º0)
+			//×øÆï×°±¸ÁĞ±í(4¸ö¸ñ×Ó,¿ÕµÄÊÇitemidÎª0)
 			var horseEquips_length : int = readShort();
 			for (var i: int = 0; i < horseEquips_length; i++) {
 				_horseEquips[i] = readBean(com.rpgGame.netData.backpack.bean.ItemInfo) as com.rpgGame.netData.backpack.bean.ItemInfo;
 			}
-			//éª‘å…µæŠ€èƒ½ä¿¡æ¯
+			//Æï±ø¼¼ÄÜĞÅÏ¢
 			var weaponRideSkillInfos_length : int = readShort();
 			for (var i: int = 0; i < weaponRideSkillInfos_length; i++) {
 				_weaponRideSkillInfos[i] = readBean(com.rpgGame.netData.skill.bean.SkillInfo) as com.rpgGame.netData.skill.bean.SkillInfo;
 			}
-			//æˆ˜æ–—åŠ›
+			//Õ½¶·Á¦
 			_fightpower = readInt();
-			//vipç­‰çº§
+			//vipµÈ¼¶
 			_viplevel = readByte();
-			//å¸®ä¼šåç§°
+			//°ï»áÃû³Æ
 			_guildName = readString();
-			//æˆå°±ç­‰çº§
+			//³É¾ÍµÈ¼¶
 			_achievementLv = readShort();
-			//å½“å‰æˆå°±å€¼
+			//µ±Ç°³É¾ÍÖµ
 			_achievementValue = readInt();
-			//å‡»æ€BOSSæ•°
+			//»÷É±BOSSÊı
 			_bossKillNum = readShort();
-			//è£…å¤‡æˆ˜å°Id
+			//×°±¸Õ½Ó¡Id
 			_warMarkId = readInt();
-			//è£…å¤‡ä¿¡æ¯åˆ—è¡¨
+			//×°±¸ĞÅÏ¢ÁĞ±í
 			var equips_length : int = readShort();
 			for (var i: int = 0; i < equips_length; i++) {
 				_equips[i] = readBean(com.rpgGame.netData.backpack.bean.ItemInfo) as com.rpgGame.netData.backpack.bean.ItemInfo;
@@ -191,7 +191,7 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * get è§’è‰²Id
+		 * get ½ÇÉ«Id
 		 * @return 
 		 */
 		public function get personId(): long{
@@ -199,14 +199,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set è§’è‰²Id
+		 * set ½ÇÉ«Id
 		 */
 		public function set personId(value: long): void{
 			this._personId = value;
 		}
 		
 		/**
-		 * get è§’è‰²åå­—
+		 * get ½ÇÉ«Ãû×Ö
 		 * @return 
 		 */
 		public function get name(): String{
@@ -214,14 +214,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set è§’è‰²åå­—
+		 * set ½ÇÉ«Ãû×Ö
 		 */
 		public function set name(value: String): void{
 			this._name = value;
 		}
 		
 		/**
-		 * get è§’è‰²ç­‰çº§
+		 * get ½ÇÉ«µÈ¼¶
 		 * @return 
 		 */
 		public function get level(): int{
@@ -229,14 +229,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set è§’è‰²ç­‰çº§
+		 * set ½ÇÉ«µÈ¼¶
 		 */
 		public function set level(value: int): void{
 			this._level = value;
 		}
 		
 		/**
-		 * get è§’è‰²å±æ€§ä¿¡æ¯
+		 * get ½ÇÉ«ÊôĞÔĞÅÏ¢
 		 * @return 
 		 */
 		public function get attributeList(): Vector.<AttributeItem>{
@@ -244,14 +244,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set è§’è‰²å±æ€§ä¿¡æ¯
+		 * set ½ÇÉ«ÊôĞÔĞÅÏ¢
 		 */
 		public function set attributeList(value: Vector.<AttributeItem>): void{
 			this._attributeList = value;
 		}
 		
 		/**
-		 * get éª‘å…µé€ å‹ID
+		 * get Æï±øÔìĞÍID
 		 * @return 
 		 */
 		public function get knightWepId(): int{
@@ -259,14 +259,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set éª‘å…µé€ å‹ID
+		 * set Æï±øÔìĞÍID
 		 */
 		public function set knightWepId(value: int): void{
 			this._knightWepId = value;
 		}
 		
 		/**
-		 * get æ€§åˆ« 0å¥³ 1ç”·
+		 * get ĞÔ±ğ 0Å® 1ÄĞ
 		 * @return 
 		 */
 		public function get sex(): int{
@@ -274,14 +274,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set æ€§åˆ« 0å¥³ 1ç”·
+		 * set ĞÔ±ğ 0Å® 1ÄĞ
 		 */
 		public function set sex(value: int): void{
 			this._sex = value;
 		}
 		
 		/**
-		 * get ç¾äººID
+		 * get ÃÀÈËID
 		 * @return 
 		 */
 		public function get beautyModelId(): int{
@@ -289,14 +289,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set ç¾äººID
+		 * set ÃÀÈËID
 		 */
 		public function set beautyModelId(value: int): void{
 			this._beautyModelId = value;
 		}
 		
 		/**
-		 * get ç¾äººæŠ€èƒ½ä¿¡æ¯
+		 * get ÃÀÈË¼¼ÄÜĞÅÏ¢
 		 * @return 
 		 */
 		public function get beautySkillInfos(): Vector.<com.rpgGame.netData.skill.bean.SkillInfo>{
@@ -304,14 +304,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set ç¾äººæŠ€èƒ½ä¿¡æ¯
+		 * set ÃÀÈË¼¼ÄÜĞÅÏ¢
 		 */
 		public function set beautySkillInfos(value: Vector.<com.rpgGame.netData.skill.bean.SkillInfo>): void{
 			this._beautySkillInfos = value;
 		}
 		
 		/**
-		 * get åéª‘ID
+		 * get ×øÆïID
 		 * @return 
 		 */
 		public function get horseModelid(): int{
@@ -319,14 +319,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set åéª‘ID
+		 * set ×øÆïID
 		 */
 		public function set horseModelid(value: int): void{
 			this._horseModelid = value;
 		}
 		
 		/**
-		 * get åéª‘è£…å¤‡åˆ—è¡¨(4ä¸ªæ ¼å­,ç©ºçš„æ˜¯itemidä¸º0)
+		 * get ×øÆï×°±¸ÁĞ±í(4¸ö¸ñ×Ó,¿ÕµÄÊÇitemidÎª0)
 		 * @return 
 		 */
 		public function get horseEquips(): Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>{
@@ -334,14 +334,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set åéª‘è£…å¤‡åˆ—è¡¨(4ä¸ªæ ¼å­,ç©ºçš„æ˜¯itemidä¸º0)
+		 * set ×øÆï×°±¸ÁĞ±í(4¸ö¸ñ×Ó,¿ÕµÄÊÇitemidÎª0)
 		 */
 		public function set horseEquips(value: Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>): void{
 			this._horseEquips = value;
 		}
 		
 		/**
-		 * get éª‘å…µæŠ€èƒ½ä¿¡æ¯
+		 * get Æï±ø¼¼ÄÜĞÅÏ¢
 		 * @return 
 		 */
 		public function get weaponRideSkillInfos(): Vector.<com.rpgGame.netData.skill.bean.SkillInfo>{
@@ -349,14 +349,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set éª‘å…µæŠ€èƒ½ä¿¡æ¯
+		 * set Æï±ø¼¼ÄÜĞÅÏ¢
 		 */
 		public function set weaponRideSkillInfos(value: Vector.<com.rpgGame.netData.skill.bean.SkillInfo>): void{
 			this._weaponRideSkillInfos = value;
 		}
 		
 		/**
-		 * get æˆ˜æ–—åŠ›
+		 * get Õ½¶·Á¦
 		 * @return 
 		 */
 		public function get fightpower(): int{
@@ -364,14 +364,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set æˆ˜æ–—åŠ›
+		 * set Õ½¶·Á¦
 		 */
 		public function set fightpower(value: int): void{
 			this._fightpower = value;
 		}
 		
 		/**
-		 * get vipç­‰çº§
+		 * get vipµÈ¼¶
 		 * @return 
 		 */
 		public function get viplevel(): int{
@@ -379,14 +379,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set vipç­‰çº§
+		 * set vipµÈ¼¶
 		 */
 		public function set viplevel(value: int): void{
 			this._viplevel = value;
 		}
 		
 		/**
-		 * get å¸®ä¼šåç§°
+		 * get °ï»áÃû³Æ
 		 * @return 
 		 */
 		public function get guildName(): String{
@@ -394,14 +394,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set å¸®ä¼šåç§°
+		 * set °ï»áÃû³Æ
 		 */
 		public function set guildName(value: String): void{
 			this._guildName = value;
 		}
 		
 		/**
-		 * get æˆå°±ç­‰çº§
+		 * get ³É¾ÍµÈ¼¶
 		 * @return 
 		 */
 		public function get achievementLv(): int{
@@ -409,14 +409,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set æˆå°±ç­‰çº§
+		 * set ³É¾ÍµÈ¼¶
 		 */
 		public function set achievementLv(value: int): void{
 			this._achievementLv = value;
 		}
 		
 		/**
-		 * get å½“å‰æˆå°±å€¼
+		 * get µ±Ç°³É¾ÍÖµ
 		 * @return 
 		 */
 		public function get achievementValue(): int{
@@ -424,14 +424,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set å½“å‰æˆå°±å€¼
+		 * set µ±Ç°³É¾ÍÖµ
 		 */
 		public function set achievementValue(value: int): void{
 			this._achievementValue = value;
 		}
 		
 		/**
-		 * get å‡»æ€BOSSæ•°
+		 * get »÷É±BOSSÊı
 		 * @return 
 		 */
 		public function get bossKillNum(): int{
@@ -439,14 +439,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set å‡»æ€BOSSæ•°
+		 * set »÷É±BOSSÊı
 		 */
 		public function set bossKillNum(value: int): void{
 			this._bossKillNum = value;
 		}
 		
 		/**
-		 * get è£…å¤‡æˆ˜å°Id
+		 * get ×°±¸Õ½Ó¡Id
 		 * @return 
 		 */
 		public function get warMarkId(): int{
@@ -454,14 +454,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set è£…å¤‡æˆ˜å°Id
+		 * set ×°±¸Õ½Ó¡Id
 		 */
 		public function set warMarkId(value: int): void{
 			this._warMarkId = value;
 		}
 		
 		/**
-		 * get è£…å¤‡ä¿¡æ¯åˆ—è¡¨
+		 * get ×°±¸ĞÅÏ¢ÁĞ±í
 		 * @return 
 		 */
 		public function get equips(): Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>{
@@ -469,7 +469,7 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set è£…å¤‡ä¿¡æ¯åˆ—è¡¨
+		 * set ×°±¸ĞÅÏ¢ÁĞ±í
 		 */
 		public function set equips(value: Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>): void{
 			this._equips = value;

@@ -10,40 +10,40 @@ package com.rpgGame.netData.player.bean{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * å±æ€§é¡¹
+	 * ÊôĞÔÏî
 	 */
 	public class AttributeItem extends Bean {
 	
-		//å±æ€§ç±»å‹
+		//ÊôĞÔÀàĞÍ
 		private var _type: int;
 		
-		//å±æ€§å€¼
+		//ÊôĞÔÖµ
 		private var _value: int;
 		
 		/**
-		 * å†™å…¥å­—èŠ‚ç¼“å­˜
+		 * Ğ´Èë×Ö½Ú»º´æ
 		 */
 		override protected function writing(): Boolean{
-			//å±æ€§ç±»å‹
+			//ÊôĞÔÀàĞÍ
 			writeByte(_type);
-			//å±æ€§å€¼
+			//ÊôĞÔÖµ
 			writeInt(_value);
 			return true;
 		}
 		
 		/**
-		 * è¯»å–å­—èŠ‚ç¼“å­˜
+		 * ¶ÁÈ¡×Ö½Ú»º´æ
 		 */
 		override protected function reading(): Boolean{
-			//å±æ€§ç±»å‹
+			//ÊôĞÔÀàĞÍ
 			_type = readByte();
-			//å±æ€§å€¼
+			//ÊôĞÔÖµ
 			_value = readInt();
 			return true;
 		}
 		
 		/**
-		 * get å±æ€§ç±»å‹
+		 * get ÊôĞÔÀàĞÍ
 		 * @return 
 		 */
 		public function get type(): int{
@@ -51,14 +51,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set å±æ€§ç±»å‹
+		 * set ÊôĞÔÀàĞÍ
 		 */
 		public function set type(value: int): void{
 			this._type = value;
 		}
 		
 		/**
-		 * get å±æ€§å€¼
+		 * get ÊôĞÔÖµ
 		 * @return 
 		 */
 		public function get value(): int{
@@ -66,7 +66,7 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set å±æ€§å€¼
+		 * set ÊôĞÔÖµ
 		 */
 		public function set value(value: int): void{
 			this._value = value;

@@ -3,6 +3,14 @@ package com.rpgGame.coreData.type
 
 	public class EffectUrl
 	{
+		/////选角色特效//////
+		public static const FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY:String = "tx_xuanzhongtexiao_difang";
+		
+		public static const FIGHT_ROLE_STATE_CAN_NOT_FIGHT:String = "tx_xuanzhongtexiao_jifang";
+		
+		public static const FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND:String = "";
+		
+		/////////////////////////////////////////////////////
 		public static const SHUBIAO_DIANJI:String = "dianji";
 		/**升级**/
 		public static const SHENG_JI : String = "tx_juese_shengji";

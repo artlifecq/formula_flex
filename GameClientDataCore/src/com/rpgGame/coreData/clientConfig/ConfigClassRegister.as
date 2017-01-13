@@ -94,7 +94,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const SceneCharPatrolInfo:String = "data.SceneCharPatrolInfo";
 		/**  socket返回错误码提示			 */
 		public static const SocketErrorNoteInfo:String = "data.SocketErrorNoteInfo";
-		/**  Buff表																																																											 */
+		/**  BUFF效果配置数据表																																					 */
 		public static const Q_buff:String = "data.spell.Q_buff";
 		/**  公共CD表	 */
 		public static const Q_GCD:String = "data.spell.Q_GCD";

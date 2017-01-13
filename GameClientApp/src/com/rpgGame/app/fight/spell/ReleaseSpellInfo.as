@@ -9,7 +9,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
 	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
-	import com.rpgGame.coreData.info.buff.BuffInfo;
+	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.info.fight.FightSingleHurt;
 	import com.rpgGame.coreData.role.HeroData;
@@ -166,7 +166,7 @@ package com.rpgGame.app.fight.spell
 		private var _targetPos : Point;
 		private var _flySceneObjID : Number = 0; //场景飞行特效唯一标识
 //		//施法结果列表，结果的类型分两种：1、状态改变效果，2、伤害效果
-		public var stateList : Vector.<BuffInfo>;
+		public var stateList : Vector.<BuffData>;
 		public var hurtList : Vector.<FightHurtResult>;
 		public var isMainCharHited : Boolean = false; //主角是否被打了
 		private var _ghostEffect : Boolean;
@@ -323,7 +323,7 @@ package com.rpgGame.app.fight.spell
 		private static function createResults(info : ReleaseSpellInfo, msg : SCAttackerResultMessage) : void
 		{
 			//类型和血量
-			var stateList : Vector.<BuffInfo> = new Vector.<BuffInfo>;
+			var stateList : Vector.<BuffData> = new Vector.<BuffData>;
 			var hurtList : Vector.<FightHurtResult> = new Vector.<FightHurtResult>;
 			var hurtCharList : Vector.<SceneRole> = new Vector.<SceneRole>;
 			var isHited : Boolean = false;
@@ -337,11 +337,11 @@ package com.rpgGame.app.fight.spell
 				roleID = resultInfo.targetId.ToGID();
 				if (isState) //是否状态效果（buff/debuff）
 				{
-//					var buffInfo : BuffInfo = new BuffInfo(roleID);
+					var buffData : BuffData = new BuffData(roleID);
 //					buffInfo.cfgId = buffer.readVarint32();
 //					buffInfo.curtStackCount = buffer.readVarint32();
 //					buffInfo.disappearTime = buffer.readVarint64();
-//					stateList.push(buffInfo);
+					stateList.push(buffData);
 				}
 				else
 				{
@@ -355,7 +355,6 @@ package com.rpgGame.app.fight.spell
 					{
 						hurtResultVO.newPosition = new Point(resultInfo.newPos.x, resultInfo.newPos.y);
 					}
-					
 					
 					hurtResultVO.attackerId = resultInfo.attackerId.ToGID();
 					

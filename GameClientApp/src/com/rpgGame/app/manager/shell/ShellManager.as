@@ -16,7 +16,6 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.role.SceneRoleManager;
     import com.rpgGame.app.manager.scene.SceneManager;
-    import com.rpgGame.app.manager.scene.SceneSwitchManager;
     import com.rpgGame.app.scene.SceneRole;
     import com.rpgGame.app.sender.SceneSender;
     import com.rpgGame.core.utils.ConsoleDesk;
@@ -25,7 +24,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.clientConfig.Q_map_transfer;
     import com.rpgGame.coreData.enum.EnumAreaMapType;
     import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
-    import com.rpgGame.coreData.info.buff.BuffInfo;
+    import com.rpgGame.coreData.info.buff.BuffData;
     import com.rpgGame.coreData.role.MonsterData;
     import com.rpgGame.coreData.role.RoleType;
     import com.rpgGame.coreData.role.SceneTranportData;
@@ -121,7 +120,7 @@ package com.rpgGame.app.manager.shell
             data.totalStat.life = 1000;
             data.totalStat.mp = 1000;
             data.totalStat.mana = 1000;
-            data.buffList = new Vector.<BuffInfo>();
+            data.buffList = new Vector.<BuffData>();
             var m : SceneRole = SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
         }
         

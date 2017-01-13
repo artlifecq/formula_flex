@@ -14,7 +14,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.cfg.mount.MountUnitData;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.face.FaceTypeEnum;
-	import com.rpgGame.coreData.info.buff.BuffInfo;
+	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
 	import com.rpgGame.coreData.info.face.IBaseFaceInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
@@ -159,7 +159,7 @@ package com.rpgGame.app.utils
 		 * @param data
 		 * 
 		 */		
-		public static function setBuffGrid( grid:IconCDFace, data:BuffInfo, isTips:Boolean = false ):void
+		public static function setBuffGrid( grid:IconCDFace, data:BuffData, isTips:Boolean = false ):void
 		{
 			grid.clear();
 			

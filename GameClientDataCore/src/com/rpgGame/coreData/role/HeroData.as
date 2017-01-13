@@ -2,6 +2,7 @@ package com.rpgGame.coreData.role
 {
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.coreData.enum.JobEnum;
+	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.fight.skill.ActiveSpellList;
 	import com.rpgGame.coreData.info.mount.MountModuleObjClientData;
 	import com.rpgGame.coreData.info.team.TeamUnit;
@@ -183,15 +184,12 @@ package com.rpgGame.coreData.role
 			///角色属性信息
 			data.totalStat.setData(heroInfo.attributes);
 			
-//			data.buffList = new Vector.<BuffInfo>();
-//			while (msg.buff > 0)
-//			{
-//				var buffInfo : BuffInfo = new BuffInfo(data.id);
-//				buffInfo.cfgId = buffer.readVarint32();
-//				buffInfo.curtStackCount = buffer.readVarint32();
-//				buffInfo.disappearTime = buffer.readVarint64();
-//				data.buffList.push(buffInfo);
-//			}
+			for(var i:int=0;i<heroInfo.buffs.length;i++)
+			{
+				var buffData:BuffData = new BuffData(data.id);
+				buffData.buffInfo = heroInfo.buffs[i];
+				data.buffList.push(buffData);
+			}
 			///角色位置信息
 			RoleData.readGeneric(data, new Point(heroInfo.position.x,heroInfo.position.y));
 			
@@ -258,15 +256,13 @@ package com.rpgGame.coreData.role
 			//			data.mp = info.mp;
 			//			data.totalStat.mana = info.maxMp;
 			//			
-			//			data.buffList = new Vector.<BuffInfo>();
-			//			while (msg.buff > 0)
-			//			{
-			//				var buffInfo : BuffInfo = new BuffInfo(data.id);
-			//				buffInfo.cfgId = buffer.readVarint32();
-			//				buffInfo.curtStackCount = buffer.readVarint32();
-			//				buffInfo.disappearTime = buffer.readVarint64();
-			//				data.buffList.push(buffInfo);
-			//			}
+
+			for(var i:int=0;i<info.buffs.length;i++)
+			{
+				var buffData:BuffData = new BuffData(data.id);
+				buffData.buffInfo = info.buffs[i];
+				data.buffList.push(buffData);
+			}
 			
 			RoleData.readGeneric(data, new Point(info.position.x,info.position.y));
 		}
