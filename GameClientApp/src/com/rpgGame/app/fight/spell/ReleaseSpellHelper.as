@@ -92,12 +92,32 @@ package com.rpgGame.app.fight.spell
 			}
 		}
 
+		/**
+		 * 刀光特效 
+		 * @param ref
+		 * 
+		 */		
 		private static function onAttackExecute(ref : AttackStateReference) : void
 		{
 			SpellAnimationHelper.addKnifeLightEffect(ref.spellInfo);
+			onSelfEffectFrame(ref);
+		}
+		
+		/**
+		 * 自身施法特效 
+		 * @param ref
+		 * 
+		 */		
+		private static function onSelfEffectFrame(ref : AttackStateReference):void
+		{
 			SpellAnimationHelper.addSelfEffect(ref.spellInfo);
 		}
 
+		/**
+		 * 释放地面特效 
+		 * @param ref
+		 * 
+		 */		
 		private static function onAttackHitFrame(ref : AttackStateReference) : void
 		{
 			SpellAnimationHelper.addDestEffect(ref.targetRolePos.x, ref.targetRolePos.y, ref.angle, ref.spellInfo);

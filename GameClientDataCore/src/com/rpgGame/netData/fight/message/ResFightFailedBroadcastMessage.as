@@ -1,5 +1,4 @@
 package com.rpgGame.netData.fight.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -13,26 +12,21 @@ package com.rpgGame.netData.fight.message{
 	 */
 	public class ResFightFailedBroadcastMessage extends Message {
 	
-		//角色Id
-		private var _personId: long;
-		
-		//攻击朝向
-		private var _fightDirection: int;
-		
 		//攻击类型
 		private var _fightType: int;
+		
+		//失败类型
+		private var _failType: int;
 		
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//角色Id
-			writeLong(_personId);
-			//攻击朝向
-			writeShort(_fightDirection);
 			//攻击类型
 			writeInt(_fightType);
+			//失败类型
+			writeByte(_failType);
 			return true;
 		}
 		
@@ -40,12 +34,10 @@ package com.rpgGame.netData.fight.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//角色Id
-			_personId = readLong();
-			//攻击朝向
-			_fightDirection = readShort();
 			//攻击类型
 			_fightType = readInt();
+			//失败类型
+			_failType = readByte();
 			return true;
 		}
 		
@@ -55,36 +47,6 @@ package com.rpgGame.netData.fight.message{
 		 */
 		override public function getId(): int {
 			return 102105;
-		}
-		
-		/**
-		 * get 角色Id
-		 * @return 
-		 */
-		public function get personId(): long{
-			return _personId;
-		}
-		
-		/**
-		 * set 角色Id
-		 */
-		public function set personId(value: long): void{
-			this._personId = value;
-		}
-		
-		/**
-		 * get 攻击朝向
-		 * @return 
-		 */
-		public function get fightDirection(): int{
-			return _fightDirection;
-		}
-		
-		/**
-		 * set 攻击朝向
-		 */
-		public function set fightDirection(value: int): void{
-			this._fightDirection = value;
 		}
 		
 		/**
@@ -100,6 +62,21 @@ package com.rpgGame.netData.fight.message{
 		 */
 		public function set fightType(value: int): void{
 			this._fightType = value;
+		}
+		
+		/**
+		 * get 失败类型
+		 * @return 
+		 */
+		public function get failType(): int{
+			return _failType;
+		}
+		
+		/**
+		 * set 失败类型
+		 */
+		public function set failType(value: int): void{
+			this._failType = value;
 		}
 		
 	}
