@@ -62,43 +62,32 @@ package com.rpgGame.app.cmdlistener.scene
 			finish();
 		}
 		/**
-		 * 施法失败, 附带varint32 失败原因
+		 * 施法失败, 失败原因
 		 *
-		 * 1. 已死亡
-		 * 2. 晕眩
-		 * 3. 沉默
-		 * 4. gcd 没到
-		 * 5. 跳跃中
-		 * 6. 这技能你不会 (不管是不是存在于这世上)
-		 * 7. cd 没到
-		 * 8. 魔法不够
-		 * 9. 技能目标没找到
-		 * 10. 技能目标已死亡
-		 * 11. 距离过远
-		 * 12. 伤害技能不能打自己人 或 不是伤害技能不能打坏人 攻击技能不能打英雄的原因有
-		 * 13. 法术值不足
-		 * 14. 施法中
-		 * 15. 前置技能没有释放
-		 * 16. 定身中，无法释放位移技能
-		 * 17. 当前场景，无法使用技能
-		 * 18. 发送过来的角度非法，必须在(0-360]之间
-		 * 19. 当前没有武器
-		 * 20. 当前副武器无法释放该技能
-		 * 21. 服务器bug
-		 * 22. 该技能必须在马上才能够释放
-		 * 23. 飞行中，无法释放技能
-		 * 24. 当前坐骑无法骑战
-		 * 25. 在镖车上
-		 * 26. 摆摊中,无法放技能
-		 * 27. 目标没有死亡，无法释放复活技能
-		 * 28. 目标正在被他人复活中
-		 * 29. 目标无法被复活
-		 * 30. 禁技
+			NONE(0),	//表示没有失败
+			NO_SKILL_ID(1),	//没有技能
+			NO_SCENE(2),	//没有场景
+			NO_SKILL_CFG(3),	//没有技能数据
+			PASSIVE_SKILL(4),	//无法释放被动技能
+			PERFORMING(5),	//释放技能中
+			SINGING(6),		//技能吟唱中
+			PUBLIC_CD(7),	//公共冷却中
+			NO_SKILL_TYPE(8),	/不到技能类型
+			CANT_PERFORM(9),	//无法释放技能
+			NO_MP(10),	//魔法不足
+			NO_COST_CFG(11),	/不到技能消耗配置
+			FAR_AWAY(12),	//释放距离过远
+			SELECT_TARGET(13),	//目标技能没有选定目标
+			NO_TARGET(14),	//没有找到目标
+			TARGET_DIE(15),	//目标死亡
+			SHUI_MIAN(16),	/眠状态
+			BAN_ATTACK(17),	//沉默状态
+			CHANGEMAP(18),	//切换地图中
 		 */
 		private function onResFightFailedBroadcastMessage(msg:ResFightFailedBroadcastMessage):void
 		{
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
-			var failID : int = 0;
+			var failID : int = msg.failType;
 			var failReason : String;
 			switch (failID)
 			{

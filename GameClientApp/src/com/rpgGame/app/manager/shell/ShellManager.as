@@ -16,7 +16,6 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.role.SceneRoleManager;
     import com.rpgGame.app.manager.scene.SceneManager;
-    import com.rpgGame.app.manager.scene.SceneSwitchManager;
     import com.rpgGame.app.scene.SceneRole;
     import com.rpgGame.app.sender.SceneSender;
     import com.rpgGame.core.utils.ConsoleDesk;

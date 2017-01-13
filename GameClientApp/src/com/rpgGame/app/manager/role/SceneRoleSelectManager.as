@@ -12,12 +12,13 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.core.events.SceneInteractiveEvent;
 	import com.rpgGame.core.manager.EscActionManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.SceneCharType;
-
+	
 	import away3d.filters.OutlineGlowFilter3D;
-
+	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -32,8 +33,8 @@ package com.rpgGame.app.manager.role
 		private static var _enemyOutlineData : SoftOutlineData = new SoftOutlineData(0xFF0000, 0.8, 0.005, 5);
 		private static var _friendOutlineData : SoftOutlineData = new SoftOutlineData(0x00FF00, 0.8, 0.005, 5);
 		private static var _neutralOutlineData : SoftOutlineData = new SoftOutlineData(0xFFFF00, 0.8, 0.005, 5);
-		private static var _selectedRingRedId : String = "quanhong";
-		private static var _selectedRingGreenId : String = "quanlv";
+		private static var _selectedRingRedId : String = EffectUrl.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
+		private static var _selectedRingGreenId : String = EffectUrl.FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
 		private static var _selectedRingYellowId : String = "quanhuang";
 
 		private static var _selectedRole : SceneRole;
