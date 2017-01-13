@@ -15,7 +15,12 @@ package com.rpgGame.app.ui.main.shortcut {
     import com.rpgGame.coreData.lang.LangMount;
     import com.rpgGame.coreData.type.item.GridBGType;
     
+    import flash.display.Graphics;
+    import flash.events.Event;
     import flash.geom.Point;
+    import flash.utils.setInterval;
+    
+    import feathers.controls.UIAsset;
     
     import gameEngine2D.NetDebug;
     
@@ -23,22 +28,63 @@ package com.rpgGame.app.ui.main.shortcut {
     import org.mokylin.skin.mainui.shortcut.shortcut_Skin;
     
     import starling.display.DisplayObject;
+    import starling.display.Sprite;
     
     public class ShortcutBar extends SkinUI {
 		
 		private var skillBar : ShortcutSkillBar;
 		
         private var _skin : shortcut_Skin;
+		
+		private var _jumpState:Vector.<UIAsset>
         
         public function ShortcutBar() {
             this._skin = new shortcut_Skin();
             super(this._skin);
 			
 			init();
+			
+			testMask();
+			
         }
+		
+		private function testMask():void
+		{
+			var msk:Sprite=new Sprite();
+			_skin.fangun_tiao.parent.addChild(msk);
+			msk.x=_skin.fangun_tiao.x;
+			msk.y=_skin.fangun_tiao.y;
+			msk.graphics.beginFill(0xff0000);
+			msk.graphics.drawRect(0,0,2,2);
+			var ras:Number=_skin.fangun_tiao.width/2;
+			var center:Point=new Point();
+			center.x=ras;
+			center.y=ras;
+			
+//			_skin.fangun_tiao.mask=msk;
+		}
+		
+		private function showJumpCD(time:int,isUse:Boolean=true):void
+		{
+			//根据总秒数切成对应的份数，每一次减对应的度数；
+			var ang:Number=180/time;
+		}
+		
+		private function useJump():void
+		{
+			var index:int=0;
+			while(index<3){
+				if(_jumpState[index].visible){
+					_jumpState[index].visible=false;
+					break;
+				}
+				index++;
+			}
+		}
 		
 		private function init() : void
 		{
+			
 			skillBar = new ShortcutSkillBar(this);
 			//skillBar.layerBatch = true;
 //			_skin.grpTopGrids.visible = false;
@@ -60,6 +106,8 @@ package com.rpgGame.app.ui.main.shortcut {
 //			Fac_skinl.backpackBtn = _skin.btnBackpack;
 //			_skin.botBgBar.touchable = false;
 //			_skin.botBgBar.touchAcross = true;
+			
+			initFanGunDis();
 			
 			initExp();
 			addSheHuiTab();
@@ -86,6 +134,14 @@ package com.rpgGame.app.ui.main.shortcut {
 			//			{
 			//				_skin.btnMount.visible = false;
 			//			}
+		}
+		
+		private function initFanGunDis():void
+		{
+			_jumpState=new Vector.<UIAsset>();
+			_jumpState.push(_skin.fangun_n3);
+			_jumpState.push(_skin.fangun_n2);
+			_jumpState.push(_skin.fangun_n1);
 		}
 		
 		public function getBtnGlobalPos(btnName : String) : Point
