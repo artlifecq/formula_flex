@@ -1,4 +1,6 @@
 package com.rpgGame.app.ui.main.shortcut {
+    import com.game.engine3D.display.InterObject3D;
+    import com.game.engine3D.scene.render.RenderUnit3D;
     import com.rpgGame.app.manager.chat.NoticeManager;
     import com.rpgGame.app.manager.mount.MountManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
@@ -11,8 +13,10 @@ package com.rpgGame.app.ui.main.shortcut {
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.cfg.LanguageConfig;
+    import com.rpgGame.coreData.enum.JobEnum;
     import com.rpgGame.coreData.enum.item.IcoSizeEnum;
     import com.rpgGame.coreData.lang.LangMount;
+    import com.rpgGame.coreData.type.EffectUrl;
     import com.rpgGame.coreData.type.item.GridBGType;
     
     import flash.display.Graphics;
@@ -36,39 +40,14 @@ package com.rpgGame.app.ui.main.shortcut {
 		
         private var _skin : shortcut_Skin;
 		
-		private var _jumpState:Vector.<UIAsset>
+		private var _jumpState:Vector.<UIAsset>;
         
         public function ShortcutBar() {
             this._skin = new shortcut_Skin();
             super(this._skin);
 			
 			init();
-			
-			testMask();
-			
         }
-		
-		private function testMask():void
-		{
-			var msk:Sprite=new Sprite();
-			_skin.fangun_tiao.parent.addChild(msk);
-			msk.x=_skin.fangun_tiao.x;
-			msk.y=_skin.fangun_tiao.y;
-			msk.graphics.beginFill(0xff0000);
-			msk.graphics.drawRect(0,0,2,2);
-			var ras:Number=_skin.fangun_tiao.width/2;
-			var center:Point=new Point();
-			center.x=ras;
-			center.y=ras;
-			
-//			_skin.fangun_tiao.mask=msk;
-		}
-		
-		private function showJumpCD(time:int,isUse:Boolean=true):void
-		{
-			//根据总秒数切成对应的份数，每一次减对应的度数；
-			var ang:Number=180/time;
-		}
 		
 		private function useJump():void
 		{
@@ -88,7 +67,7 @@ package com.rpgGame.app.ui.main.shortcut {
 			skillBar = new ShortcutSkillBar(this);
 			//skillBar.layerBatch = true;
 //			_skin.grpTopGrids.visible = false;
-			this.addChild(skillBar);
+			this._skin.Icons.addChild(skillBar);
 //			skillBar.x = _skin.grpTopGrids.x;
 //			skillBar.y = _skin.grpTopGrids.y;
 			
@@ -112,8 +91,12 @@ package com.rpgGame.app.ui.main.shortcut {
 			initExp();
 			addSheHuiTab();
 			
+			addEft();
+			
+			this._skin.jingzhen_yijia.visible=MainRoleManager.actorInfo.job==JobEnum.ROLE_3_TYPE;
+			
 			if (!ClientConfig.isBanShu)
-			{
+			{				
 //				TipTargetManager.show(_skin.btnBackpack, TargetTipsMaker.makeSimpleTextTips("背包<br/>快捷键：B"));
 //				TipTargetManager.show(_skin.btnRole, TargetTipsMaker.makeSimpleTextTips("人物<br/>快捷键：C"));
 //				TipTargetManager.show(_skin.btnHaoYou, TargetTipsMaker.makeSimpleTextTips("好友<br/>快捷键：F"));
@@ -134,6 +117,28 @@ package com.rpgGame.app.ui.main.shortcut {
 			//			{
 			//				_skin.btnMount.visible = false;
 			//			}
+		}
+		
+		private function addEft():void
+		{
+			var hp3D:InterObject3D= this.playInter3DAt(ClientConfig.getEffect(EffectUrl.XUE_TIAO_HONG),0,0,0);
+			hp3D.touchable=false;
+			var hpUint3D:RenderUnit3D=RenderUnit3D(hp3D.baseObj3D);
+			hpUint3D.setAddedCallBack(onAddHpEft,hp3D);
+		}
+		
+		private function onAddHpEft(hp3D:InterObject3D,renderUint:RenderUnit3D):void
+		{
+			renderUint.removeAddedCallBack(onAddHpEft);
+			
+			renderUint.scaleX=renderUint.scaleY=this._skin.left_xuecao.width/270;
+			hp3D.x=this._skin.left_xuecao.x+17;
+			hp3D.y=this._skin.left_xuecao.y+this._skin.left_xuecao.height-12;
+			this._skin.left_xuecao.mask=hp3D;				
+			
+//			var hp:Number=	MainRoleManager.actorInfo.totalStat.hp/MainRoleManager.actorInfo.totalStat.life;
+//			var hpTime:int=Math.floor(target.totalDuration);
+//			renderUint.stop(5000);
 		}
 		
 		private function initFanGunDis():void

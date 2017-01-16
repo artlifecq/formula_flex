@@ -98,10 +98,12 @@ package com.rpgGame.app.manager
 		}
 		private static function initShortCutsConfig( dataStr :String , isFirst :Boolean ):void
 		{
-			if ( isFirst )
+			shortCutsData  = JSONUtil.decode( dataStr );
+			
+			/*if ( isFirst )
 			{
 				shortCutsData  = JSONUtil.decode( dataStr );
-			}
+			}*/
 		}
 	}
 }

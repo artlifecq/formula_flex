@@ -100,6 +100,7 @@ package com.rpgGame.app.manager
 		public function setup() : void
 		{
 			initShortcutData();
+			EventManager.dispatchEvent(SpellEvent.SPELL_UPDATE_SHORTCUTS);
 		}
 
 		/**
@@ -108,6 +109,7 @@ package com.rpgGame.app.manager
 		 */		
 		private function initShortcutData() : void
 		{
+			shortcutsDataMap.clear();
 			var shortData : ShortcutsData;
 			var shorts : Object;
 			for (var i : int = 0; i < SHORTCUTS_LEN; i++)
