@@ -11,62 +11,62 @@ package com.rpgGame.netData.map.bean{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * ³¡¾°Ğ§¹ûĞÅÏ¢
+	 * åœºæ™¯æ•ˆæœä¿¡æ¯
 	 */
 	public class EffectInfo extends Bean {
 	
 		//EffectID
 		private var _effectId: long;
 		
-		//EffectÄ£ĞÍID
+		//Effectæ¨¡å‹ID
 		private var _effectModelId: int;
 		
-		//²¥·ÅÀàĞÍ(0-1´Î 1-²»Í£)
+		//æ’­æ”¾ç±»å‹(0-1æ¬¡ 1-ä¸åœ)
 		private var _type: int;
 		
-		//×ø±êX
+		//åæ ‡X
 		private var _x: int;
 		
-		//×ø±êY
+		//åæ ‡Y
 		private var _y: int;
 		
-		//²¥·ÅÊ±¼ä(Ãë)
+		//æ’­æ”¾æ—¶é—´(ç§’)
 		private var _play: int;
 		
-		//Ê©·¨Õß¹¥»÷Ä£Ê½
+		//æ–½æ³•è€…æ”»å‡»æ¨¡å¼
 		private var _pkstate: int;
 		
-		//¶ÔÏóid
+		//å¯¹è±¡id
 		private var _targetId: long;
 		
-		//Ê©·ÅÕßid
+		//æ–½æ”¾è€…id
 		private var _sourceId: long;
 		
-		//Ä£Äâ·ÉĞĞ²ÎÊı£¨0ËÙ¶ÈÖµ£¬1½Ç¶ÈÖµ[10000±¶], 2¾­¹ıÊ±¼ä£©
+		//æ¨¡æ‹Ÿé£è¡Œå‚æ•°ï¼ˆ0é€Ÿåº¦å€¼ï¼Œ1è§’åº¦å€¼[10000å€], 2ç»è¿‡æ—¶é—´ï¼‰
 		private var _simulateParams: Vector.<int> = new Vector.<int>();
 		/**
-		 * Ğ´Èë×Ö½Ú»º´æ
+		 * å†™å…¥å­—èŠ‚ç¼“å­˜
 		 */
 		override protected function writing(): Boolean{
 			//EffectID
 			writeLong(_effectId);
-			//EffectÄ£ĞÍID
+			//Effectæ¨¡å‹ID
 			writeInt(_effectModelId);
-			//²¥·ÅÀàĞÍ(0-1´Î 1-²»Í£)
+			//æ’­æ”¾ç±»å‹(0-1æ¬¡ 1-ä¸åœ)
 			writeByte(_type);
-			//×ø±êX
+			//åæ ‡X
 			writeShort(_x);
-			//×ø±êY
+			//åæ ‡Y
 			writeShort(_y);
-			//²¥·ÅÊ±¼ä(Ãë)
+			//æ’­æ”¾æ—¶é—´(ç§’)
 			writeInt(_play);
-			//Ê©·¨Õß¹¥»÷Ä£Ê½
+			//æ–½æ³•è€…æ”»å‡»æ¨¡å¼
 			writeInt(_pkstate);
-			//¶ÔÏóid
+			//å¯¹è±¡id
 			writeLong(_targetId);
-			//Ê©·ÅÕßid
+			//æ–½æ”¾è€…id
 			writeLong(_sourceId);
-			//Ä£Äâ·ÉĞĞ²ÎÊı£¨0ËÙ¶ÈÖµ£¬1½Ç¶ÈÖµ[10000±¶], 2¾­¹ıÊ±¼ä£©
+			//æ¨¡æ‹Ÿé£è¡Œå‚æ•°ï¼ˆ0é€Ÿåº¦å€¼ï¼Œ1è§’åº¦å€¼[10000å€], 2ç»è¿‡æ—¶é—´ï¼‰
 			writeShort(_simulateParams.length);
 			for (var i: int = 0; i < _simulateParams.length; i++) {
 				writeInt(_simulateParams[i]);
@@ -75,28 +75,28 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * ¶ÁÈ¡×Ö½Ú»º´æ
+		 * è¯»å–å­—èŠ‚ç¼“å­˜
 		 */
 		override protected function reading(): Boolean{
 			//EffectID
 			_effectId = readLong();
-			//EffectÄ£ĞÍID
+			//Effectæ¨¡å‹ID
 			_effectModelId = readInt();
-			//²¥·ÅÀàĞÍ(0-1´Î 1-²»Í£)
+			//æ’­æ”¾ç±»å‹(0-1æ¬¡ 1-ä¸åœ)
 			_type = readByte();
-			//×ø±êX
+			//åæ ‡X
 			_x = readShort();
-			//×ø±êY
+			//åæ ‡Y
 			_y = readShort();
-			//²¥·ÅÊ±¼ä(Ãë)
+			//æ’­æ”¾æ—¶é—´(ç§’)
 			_play = readInt();
-			//Ê©·¨Õß¹¥»÷Ä£Ê½
+			//æ–½æ³•è€…æ”»å‡»æ¨¡å¼
 			_pkstate = readInt();
-			//¶ÔÏóid
+			//å¯¹è±¡id
 			_targetId = readLong();
-			//Ê©·ÅÕßid
+			//æ–½æ”¾è€…id
 			_sourceId = readLong();
-			//Ä£Äâ·ÉĞĞ²ÎÊı£¨0ËÙ¶ÈÖµ£¬1½Ç¶ÈÖµ[10000±¶], 2¾­¹ıÊ±¼ä£©
+			//æ¨¡æ‹Ÿé£è¡Œå‚æ•°ï¼ˆ0é€Ÿåº¦å€¼ï¼Œ1è§’åº¦å€¼[10000å€], 2ç»è¿‡æ—¶é—´ï¼‰
 			var simulateParams_length : int = readShort();
 			for (var i: int = 0; i < simulateParams_length; i++) {
 				_simulateParams[i] = readInt();
@@ -120,7 +120,7 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * get EffectÄ£ĞÍID
+		 * get Effectæ¨¡å‹ID
 		 * @return 
 		 */
 		public function get effectModelId(): int{
@@ -128,14 +128,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set EffectÄ£ĞÍID
+		 * set Effectæ¨¡å‹ID
 		 */
 		public function set effectModelId(value: int): void{
 			this._effectModelId = value;
 		}
 		
 		/**
-		 * get ²¥·ÅÀàĞÍ(0-1´Î 1-²»Í£)
+		 * get æ’­æ”¾ç±»å‹(0-1æ¬¡ 1-ä¸åœ)
 		 * @return 
 		 */
 		public function get type(): int{
@@ -143,14 +143,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set ²¥·ÅÀàĞÍ(0-1´Î 1-²»Í£)
+		 * set æ’­æ”¾ç±»å‹(0-1æ¬¡ 1-ä¸åœ)
 		 */
 		public function set type(value: int): void{
 			this._type = value;
 		}
 		
 		/**
-		 * get ×ø±êX
+		 * get åæ ‡X
 		 * @return 
 		 */
 		public function get x(): int{
@@ -158,14 +158,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set ×ø±êX
+		 * set åæ ‡X
 		 */
 		public function set x(value: int): void{
 			this._x = value;
 		}
 		
 		/**
-		 * get ×ø±êY
+		 * get åæ ‡Y
 		 * @return 
 		 */
 		public function get y(): int{
@@ -173,14 +173,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set ×ø±êY
+		 * set åæ ‡Y
 		 */
 		public function set y(value: int): void{
 			this._y = value;
 		}
 		
 		/**
-		 * get ²¥·ÅÊ±¼ä(Ãë)
+		 * get æ’­æ”¾æ—¶é—´(ç§’)
 		 * @return 
 		 */
 		public function get play(): int{
@@ -188,14 +188,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set ²¥·ÅÊ±¼ä(Ãë)
+		 * set æ’­æ”¾æ—¶é—´(ç§’)
 		 */
 		public function set play(value: int): void{
 			this._play = value;
 		}
 		
 		/**
-		 * get Ê©·¨Õß¹¥»÷Ä£Ê½
+		 * get æ–½æ³•è€…æ”»å‡»æ¨¡å¼
 		 * @return 
 		 */
 		public function get pkstate(): int{
@@ -203,14 +203,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set Ê©·¨Õß¹¥»÷Ä£Ê½
+		 * set æ–½æ³•è€…æ”»å‡»æ¨¡å¼
 		 */
 		public function set pkstate(value: int): void{
 			this._pkstate = value;
 		}
 		
 		/**
-		 * get ¶ÔÏóid
+		 * get å¯¹è±¡id
 		 * @return 
 		 */
 		public function get targetId(): long{
@@ -218,14 +218,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set ¶ÔÏóid
+		 * set å¯¹è±¡id
 		 */
 		public function set targetId(value: long): void{
 			this._targetId = value;
 		}
 		
 		/**
-		 * get Ê©·ÅÕßid
+		 * get æ–½æ”¾è€…id
 		 * @return 
 		 */
 		public function get sourceId(): long{
@@ -233,14 +233,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set Ê©·ÅÕßid
+		 * set æ–½æ”¾è€…id
 		 */
 		public function set sourceId(value: long): void{
 			this._sourceId = value;
 		}
 		
 		/**
-		 * get Ä£Äâ·ÉĞĞ²ÎÊı£¨0ËÙ¶ÈÖµ£¬1½Ç¶ÈÖµ[10000±¶], 2¾­¹ıÊ±¼ä£©
+		 * get æ¨¡æ‹Ÿé£è¡Œå‚æ•°ï¼ˆ0é€Ÿåº¦å€¼ï¼Œ1è§’åº¦å€¼[10000å€], 2ç»è¿‡æ—¶é—´ï¼‰
 		 * @return 
 		 */
 		public function get simulateParams(): Vector.<int>{
@@ -248,7 +248,7 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set Ä£Äâ·ÉĞĞ²ÎÊı£¨0ËÙ¶ÈÖµ£¬1½Ç¶ÈÖµ[10000±¶], 2¾­¹ıÊ±¼ä£©
+		 * set æ¨¡æ‹Ÿé£è¡Œå‚æ•°ï¼ˆ0é€Ÿåº¦å€¼ï¼Œ1è§’åº¦å€¼[10000å€], 2ç»è¿‡æ—¶é—´ï¼‰
 		 */
 		public function set simulateParams(value: Vector.<int>): void{
 			this._simulateParams = value;

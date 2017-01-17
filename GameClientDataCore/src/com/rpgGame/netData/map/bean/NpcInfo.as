@@ -13,57 +13,57 @@ package com.rpgGame.netData.map.bean{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * NPCĞÅÏ¢
+	 * NPCä¿¡æ¯
 	 */
 	public class NpcInfo extends Bean {
 	
 		//NPCID
 		private var _npcId: long;
 		
-		//NPCÄ£ĞÍID
+		//NPCæ¨¡å‹ID
 		private var _npcModelId: int;
 		
-		//NPCÃû×Ö
+		//NPCåå­—
 		private var _npcName: String;
 		
-		//NPC×ÊÔ´ÔìĞÍ
+		//NPCèµ„æºé€ å‹
 		private var _npcRes: String;
 		
-		//NPCÍ·ÏñÔìĞÍ
+		//NPCå¤´åƒé€ å‹
 		private var _npcIcon: String;
 		
-		//·½Ïò
+		//æ–¹å‘
 		private var _dir: int;
 		
-		//NpcËùÔÚÎ»ÖÃ
+		//Npcæ‰€åœ¨ä½ç½®
 		private var _position: com.rpgGame.netData.structs.Position;
 		
-		//NPC×´Ì¬
+		//NPCçŠ¶æ€
 		private var _state: int;
 		
-		//buffÁĞ±í
+		//buffåˆ—è¡¨
 		private var _buffs: Vector.<com.rpgGame.netData.buff.bean.BuffInfo> = new Vector.<com.rpgGame.netData.buff.bean.BuffInfo>();
 		/**
-		 * Ğ´Èë×Ö½Ú»º´æ
+		 * å†™å…¥å­—èŠ‚ç¼“å­˜
 		 */
 		override protected function writing(): Boolean{
 			//NPCID
 			writeLong(_npcId);
-			//NPCÄ£ĞÍID
+			//NPCæ¨¡å‹ID
 			writeInt(_npcModelId);
-			//NPCÃû×Ö
+			//NPCåå­—
 			writeString(_npcName);
-			//NPC×ÊÔ´ÔìĞÍ
+			//NPCèµ„æºé€ å‹
 			writeString(_npcRes);
-			//NPCÍ·ÏñÔìĞÍ
+			//NPCå¤´åƒé€ å‹
 			writeString(_npcIcon);
-			//·½Ïò
+			//æ–¹å‘
 			writeShort(_dir);
-			//NpcËùÔÚÎ»ÖÃ
+			//Npcæ‰€åœ¨ä½ç½®
 			writeBean(_position);
-			//NPC×´Ì¬
+			//NPCçŠ¶æ€
 			writeByte(_state);
-			//buffÁĞ±í
+			//buffåˆ—è¡¨
 			writeShort(_buffs.length);
 			for (var i: int = 0; i < _buffs.length; i++) {
 				writeBean(_buffs[i]);
@@ -72,26 +72,26 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * ¶ÁÈ¡×Ö½Ú»º´æ
+		 * è¯»å–å­—èŠ‚ç¼“å­˜
 		 */
 		override protected function reading(): Boolean{
 			//NPCID
 			_npcId = readLong();
-			//NPCÄ£ĞÍID
+			//NPCæ¨¡å‹ID
 			_npcModelId = readInt();
-			//NPCÃû×Ö
+			//NPCåå­—
 			_npcName = readString();
-			//NPC×ÊÔ´ÔìĞÍ
+			//NPCèµ„æºé€ å‹
 			_npcRes = readString();
-			//NPCÍ·ÏñÔìĞÍ
+			//NPCå¤´åƒé€ å‹
 			_npcIcon = readString();
-			//·½Ïò
+			//æ–¹å‘
 			_dir = readShort();
-			//NpcËùÔÚÎ»ÖÃ
+			//Npcæ‰€åœ¨ä½ç½®
 			_position = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
-			//NPC×´Ì¬
+			//NPCçŠ¶æ€
 			_state = readByte();
-			//buffÁĞ±í
+			//buffåˆ—è¡¨
 			var buffs_length : int = readShort();
 			for (var i: int = 0; i < buffs_length; i++) {
 				_buffs[i] = readBean(com.rpgGame.netData.buff.bean.BuffInfo) as com.rpgGame.netData.buff.bean.BuffInfo;
@@ -115,7 +115,7 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * get NPCÄ£ĞÍID
+		 * get NPCæ¨¡å‹ID
 		 * @return 
 		 */
 		public function get npcModelId(): int{
@@ -123,14 +123,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set NPCÄ£ĞÍID
+		 * set NPCæ¨¡å‹ID
 		 */
 		public function set npcModelId(value: int): void{
 			this._npcModelId = value;
 		}
 		
 		/**
-		 * get NPCÃû×Ö
+		 * get NPCåå­—
 		 * @return 
 		 */
 		public function get npcName(): String{
@@ -138,14 +138,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set NPCÃû×Ö
+		 * set NPCåå­—
 		 */
 		public function set npcName(value: String): void{
 			this._npcName = value;
 		}
 		
 		/**
-		 * get NPC×ÊÔ´ÔìĞÍ
+		 * get NPCèµ„æºé€ å‹
 		 * @return 
 		 */
 		public function get npcRes(): String{
@@ -153,14 +153,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set NPC×ÊÔ´ÔìĞÍ
+		 * set NPCèµ„æºé€ å‹
 		 */
 		public function set npcRes(value: String): void{
 			this._npcRes = value;
 		}
 		
 		/**
-		 * get NPCÍ·ÏñÔìĞÍ
+		 * get NPCå¤´åƒé€ å‹
 		 * @return 
 		 */
 		public function get npcIcon(): String{
@@ -168,14 +168,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set NPCÍ·ÏñÔìĞÍ
+		 * set NPCå¤´åƒé€ å‹
 		 */
 		public function set npcIcon(value: String): void{
 			this._npcIcon = value;
 		}
 		
 		/**
-		 * get ·½Ïò
+		 * get æ–¹å‘
 		 * @return 
 		 */
 		public function get dir(): int{
@@ -183,14 +183,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set ·½Ïò
+		 * set æ–¹å‘
 		 */
 		public function set dir(value: int): void{
 			this._dir = value;
 		}
 		
 		/**
-		 * get NpcËùÔÚÎ»ÖÃ
+		 * get Npcæ‰€åœ¨ä½ç½®
 		 * @return 
 		 */
 		public function get position(): com.rpgGame.netData.structs.Position{
@@ -198,14 +198,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set NpcËùÔÚÎ»ÖÃ
+		 * set Npcæ‰€åœ¨ä½ç½®
 		 */
 		public function set position(value: com.rpgGame.netData.structs.Position): void{
 			this._position = value;
 		}
 		
 		/**
-		 * get NPC×´Ì¬
+		 * get NPCçŠ¶æ€
 		 * @return 
 		 */
 		public function get state(): int{
@@ -213,14 +213,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set NPC×´Ì¬
+		 * set NPCçŠ¶æ€
 		 */
 		public function set state(value: int): void{
 			this._state = value;
 		}
 		
 		/**
-		 * get buffÁĞ±í
+		 * get buffåˆ—è¡¨
 		 * @return 
 		 */
 		public function get buffs(): Vector.<com.rpgGame.netData.buff.bean.BuffInfo>{
@@ -228,7 +228,7 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set buffÁĞ±í
+		 * set buffåˆ—è¡¨
 		 */
 		public function set buffs(value: Vector.<com.rpgGame.netData.buff.bean.BuffInfo>): void{
 			this._buffs = value;

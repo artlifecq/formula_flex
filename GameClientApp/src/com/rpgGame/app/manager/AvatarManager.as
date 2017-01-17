@@ -425,7 +425,7 @@ package com.rpgGame.app.manager
 			var mountModel : MountModel = MountModelCfgData.getInfo(0);
 			
 			
-			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(/*roleData.cloths*/0);///先临时这么写
+			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(roleData.cloths);///先临时这么写
 			if (!clothesRes)
 			{
 				clothesRes = AvatarClothesResCfgData.getInfo(roleData.job);
@@ -436,7 +436,7 @@ package com.rpgGame.app.manager
 				bodyResID = clothesRes.bodyRes;
 				bodyEffectResID = clothesRes.effectRes;
 
-				var hairRes : AvatarHairRes = AvatarHairResCfgData.getInfo(/*roleData.hairId*/0);
+				var hairRes : AvatarHairRes = AvatarHairResCfgData.getInfo(roleData.hair);
 				if (!hairRes)
 				{
 					hairRes = AvatarHairResCfgData.getInfo(clothesRes.hairResId);
@@ -498,7 +498,7 @@ package com.rpgGame.app.manager
 						break;
 				}
 				
-				var weaponRes : AvatarWeaponRes = AvatarWeapontResCfgData.getInfo(/*roleData.weapon*/0);
+				var weaponRes : AvatarWeaponRes = AvatarWeapontResCfgData.getInfo(roleData.weapon);
 				if (!weaponRes)
 				{
 					weaponRes = AvatarWeapontResCfgData.getInfo(clothesRes.weaponResId);
@@ -511,11 +511,10 @@ package com.rpgGame.app.manager
 					weaponEffectOffset = new Vector3D(weaponRes.effectOffsetX, weaponRes.effectOffsetY, weaponRes.effectOffsetZ);
 				}
 				var deputyWeaponRes : AvatarDeputyWeaponRes = AvatarDeputyWeaponResCfgData.getInfo(roleData.deputyWeapon);
-				if (!deputyWeaponRes)
+				if (deputyWeaponRes)
 				{
-					deputyWeaponRes = AvatarDeputyWeaponResCfgData.getInfo(clothesRes.deputyWeaponResId);
+					deputyWeaponResID = deputyWeaponRes.res;
 				}
-				deputyWeaponResID = deputyWeaponRes.res;
 			}
 
 			if (roleData.trailMount)

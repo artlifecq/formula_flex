@@ -10,40 +10,40 @@ package com.rpgGame.netData.player.bean{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 玩家使用的加属性类道具
+	 * 鐜╁浣跨敤鐨勫姞灞炴�х被閬撳叿
 	 */
 	public class PlayerUseItem extends Bean {
 	
-		//道具ID
+		//閬撳叿ID
 		private var _itemModelId: int;
 		
-		//道具数量
+		//閬撳叿鏁伴噺
 		private var _itemNum: int;
 		
 		/**
-		 * 写入字节缓存
+		 * 鍐欏叆瀛楄妭缂撳瓨
 		 */
 		override protected function writing(): Boolean{
-			//道具ID
+			//閬撳叿ID
 			writeInt(_itemModelId);
-			//道具数量
+			//閬撳叿鏁伴噺
 			writeInt(_itemNum);
 			return true;
 		}
 		
 		/**
-		 * 读取字节缓存
+		 * 璇诲彇瀛楄妭缂撳瓨
 		 */
 		override protected function reading(): Boolean{
-			//道具ID
+			//閬撳叿ID
 			_itemModelId = readInt();
-			//道具数量
+			//閬撳叿鏁伴噺
 			_itemNum = readInt();
 			return true;
 		}
 		
 		/**
-		 * get 道具ID
+		 * get 閬撳叿ID
 		 * @return 
 		 */
 		public function get itemModelId(): int{
@@ -51,14 +51,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set 道具ID
+		 * set 閬撳叿ID
 		 */
 		public function set itemModelId(value: int): void{
 			this._itemModelId = value;
 		}
 		
 		/**
-		 * get 道具数量
+		 * get 閬撳叿鏁伴噺
 		 * @return 
 		 */
 		public function get itemNum(): int{
@@ -66,7 +66,7 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set 道具数量
+		 * set 閬撳叿鏁伴噺
 		 */
 		public function set itemNum(value: int): void{
 			this._itemNum = value;

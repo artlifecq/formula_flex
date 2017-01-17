@@ -10,40 +10,40 @@ package com.rpgGame.netData.map.bean{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 格子坐标
+	 * 鏍煎瓙鍧愭爣
 	 */
 	public class GridCoordinate extends Bean {
 	
-		//坐标X
+		//鍧愭爣X
 		private var _x: int;
 		
-		//坐标Y
+		//鍧愭爣Y
 		private var _y: int;
 		
 		/**
-		 * 写入字节缓存
+		 * 鍐欏叆瀛楄妭缂撳瓨
 		 */
 		override protected function writing(): Boolean{
-			//坐标X
+			//鍧愭爣X
 			writeShort(_x);
-			//坐标Y
+			//鍧愭爣Y
 			writeShort(_y);
 			return true;
 		}
 		
 		/**
-		 * 读取字节缓存
+		 * 璇诲彇瀛楄妭缂撳瓨
 		 */
 		override protected function reading(): Boolean{
-			//坐标X
+			//鍧愭爣X
 			_x = readShort();
-			//坐标Y
+			//鍧愭爣Y
 			_y = readShort();
 			return true;
 		}
 		
 		/**
-		 * get 坐标X
+		 * get 鍧愭爣X
 		 * @return 
 		 */
 		public function get x(): int{
@@ -51,14 +51,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set 坐标X
+		 * set 鍧愭爣X
 		 */
 		public function set x(value: int): void{
 			this._x = value;
 		}
 		
 		/**
-		 * get 坐标Y
+		 * get 鍧愭爣Y
 		 * @return 
 		 */
 		public function get y(): int{
@@ -66,7 +66,7 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set 坐标Y
+		 * set 鍧愭爣Y
 		 */
 		public function set y(value: int): void{
 			this._y = value;
