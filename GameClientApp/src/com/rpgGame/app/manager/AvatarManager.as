@@ -2,7 +2,6 @@ package com.rpgGame.app.manager
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData;
-	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.app.state.role.RoleStateUtil;
@@ -425,7 +424,7 @@ package com.rpgGame.app.manager
 			var mountModel : MountModel = MountModelCfgData.getInfo(0);
 			
 			
-			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(roleData.cloths);///先临时这么写
+			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(roleData.cloths);
 			if (!clothesRes)
 			{
 				clothesRes = AvatarClothesResCfgData.getInfo(roleData.job);
