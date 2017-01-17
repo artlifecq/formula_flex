@@ -7,10 +7,11 @@ package org.mokylin.skin.mainui.navigation
 	import org.mokylin.skin.component.button.ButtonSkin_zhankai;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_banghui;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_beibao;
-	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_jineng;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_juese;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_shangcheng;
-	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_shejiao;
+	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_wuxue;
+	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhuangbei;
+	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zuoqi;
 
 	/**
 	 * @private
@@ -28,15 +29,17 @@ package org.mokylin.skin.mainui.navigation
 
 		public var btn_close:feathers.controls.Button;
 
-		public var btn_jineng:feathers.controls.Button;
-
 		public var btn_juese:feathers.controls.Button;
 
 		public var btn_open:feathers.controls.Button;
 
 		public var btn_shangcheng:feathers.controls.Button;
 
-		public var btn_shejiao:feathers.controls.Button;
+		public var btn_wuxue:feathers.controls.Button;
+
+		public var btn_zhuangbei:feathers.controls.Button;
+
+		public var btn_zuoqi:feathers.controls.Button;
 
 		public var btns:feathers.controls.Group;
 
@@ -49,8 +52,8 @@ package org.mokylin.skin.mainui.navigation
 			super();
 			
 			this.currentState = "normal";
-			this.height = 51;
-			this.width = 294;
+			this.height = 70;
+			this.width = 351;
 			this.elementsContent = [btn_close_i(),btn_open_i(),btns_i()];
 			
 			states = {
@@ -68,8 +71,8 @@ package org.mokylin.skin.mainui.navigation
 			btn_banghui = temp;
 			temp.name = "btn_banghui";
 			temp.styleClass = org.mokylin.skin.mainui.navigation.button.ButtonSkin_banghui;
-			temp.x = 134;
-			temp.y = 4;
+			temp.x = 222;
+			temp.y = 17;
 			return temp;
 		}
 
@@ -80,7 +83,7 @@ package org.mokylin.skin.mainui.navigation
 			temp.name = "btn_beibao";
 			temp.styleClass = org.mokylin.skin.mainui.navigation.button.ButtonSkin_beibao;
 			temp.x = 44;
-			temp.y = 4;
+			temp.y = 17;
 			return temp;
 		}
 
@@ -90,19 +93,8 @@ package org.mokylin.skin.mainui.navigation
 			btn_close = temp;
 			temp.name = "btn_close";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shouhui;
-			temp.x = 275;
-			temp.y = 14;
-			return temp;
-		}
-
-		private function btn_jineng_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_jineng = temp;
-			temp.name = "btn_jineng";
-			temp.styleClass = org.mokylin.skin.mainui.navigation.button.ButtonSkin_jineng;
-			temp.x = 87;
-			temp.y = 4;
+			temp.x = 332;
+			temp.y = 25;
 			return temp;
 		}
 
@@ -113,7 +105,7 @@ package org.mokylin.skin.mainui.navigation
 			temp.name = "btn_juese";
 			temp.styleClass = org.mokylin.skin.mainui.navigation.button.ButtonSkin_juese;
 			temp.x = 0;
-			temp.y = 4;
+			temp.y = 17;
 			return temp;
 		}
 
@@ -123,8 +115,8 @@ package org.mokylin.skin.mainui.navigation
 			btn_open = temp;
 			temp.name = "btn_open";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zhankai;
-			temp.x = 275;
-			temp.y = 14;
+			temp.x = 332;
+			temp.y = 25;
 			return temp;
 		}
 
@@ -134,19 +126,41 @@ package org.mokylin.skin.mainui.navigation
 			btn_shangcheng = temp;
 			temp.name = "btn_shangcheng";
 			temp.styleClass = org.mokylin.skin.mainui.navigation.button.ButtonSkin_shangcheng;
-			temp.x = 221;
-			temp.y = 4;
+			temp.x = 264;
+			temp.y = 0;
 			return temp;
 		}
 
-		private function btn_shejiao_i():feathers.controls.Button
+		private function btn_wuxue_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_shejiao = temp;
-			temp.name = "btn_shejiao";
-			temp.styleClass = org.mokylin.skin.mainui.navigation.button.ButtonSkin_shejiao;
-			temp.x = 180;
-			temp.y = 4;
+			btn_wuxue = temp;
+			temp.name = "btn_wuxue";
+			temp.styleClass = org.mokylin.skin.mainui.navigation.button.ButtonSkin_wuxue;
+			temp.x = 178;
+			temp.y = 17;
+			return temp;
+		}
+
+		private function btn_zhuangbei_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_zhuangbei = temp;
+			temp.name = "btn_zhuangbei";
+			temp.styleClass = org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhuangbei;
+			temp.x = 133;
+			temp.y = 17;
+			return temp;
+		}
+
+		private function btn_zuoqi_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_zuoqi = temp;
+			temp.name = "btn_zuoqi";
+			temp.styleClass = org.mokylin.skin.mainui.navigation.button.ButtonSkin_zuoqi;
+			temp.x = 89;
+			temp.y = 17;
 			return temp;
 		}
 
@@ -155,9 +169,11 @@ package org.mokylin.skin.mainui.navigation
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			btns = temp;
 			temp.name = "btns";
+			temp.height = 70;
+			temp.width = 332;
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [btn_juese_i(),btn_beibao_i(),btn_jineng_i(),btn_banghui_i(),btn_shejiao_i(),btn_shangcheng_i()];
+			temp.elementsContent = [btn_juese_i(),btn_beibao_i(),btn_zuoqi_i(),btn_zhuangbei_i(),btn_wuxue_i(),btn_banghui_i(),btn_shangcheng_i()];
 			return temp;
 		}
 

@@ -42,12 +42,13 @@ package com.rpgGame.app.ui.main.navigation {
 			
 			if (!ClientConfig.isBanShu)
 			{
-				TipTargetManager.show(_skin.btn_juese, TargetTipsMaker.makeSimpleTextTips("人物<br/>快捷键：C"));
+				TipTargetManager.show(_skin.btn_juese, TargetTipsMaker.makeSimpleTextTips("角色<br/>快捷键：C"));
 				TipTargetManager.show(_skin.btn_beibao, TargetTipsMaker.makeSimpleTextTips("背包<br/>快捷键：B"));
-				TipTargetManager.show(_skin.btn_jineng, TargetTipsMaker.makeSimpleTextTips("技能<br/>快捷键：V"));
-				TipTargetManager.show(_skin.btn_banghui, TargetTipsMaker.makeSimpleTextTips("队伍<br/>快捷键：P"));
-				TipTargetManager.show(_skin.btn_shejiao, TargetTipsMaker.makeSimpleTextTips("社会<br/>快捷键：J"));
-				TipTargetManager.show(_skin.btn_shangcheng, TargetTipsMaker.makeSimpleTextTips("商店<br/>快捷键：O"));
+				TipTargetManager.show(_skin.btn_zuoqi, TargetTipsMaker.makeSimpleTextTips("坐骑<br/>快捷键：V"));
+				TipTargetManager.show(_skin.btn_zhuangbei, TargetTipsMaker.makeSimpleTextTips("装备<br/>快捷键：P"));
+				TipTargetManager.show(_skin.btn_wuxue, TargetTipsMaker.makeSimpleTextTips("武学<br/>快捷键：J"));
+				TipTargetManager.show(_skin.btn_banghui, TargetTipsMaker.makeSimpleTextTips("帮会<br/>快捷键：O"));
+				TipTargetManager.show(_skin.btn_shangcheng, TargetTipsMaker.makeSimpleTextTips("商城<br/>快捷键：O"));
 			}
 			
         }

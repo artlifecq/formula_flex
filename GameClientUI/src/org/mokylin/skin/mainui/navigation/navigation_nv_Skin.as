@@ -1,11 +1,9 @@
 package org.mokylin.skin.mainui.navigation
 {
 	import feathers.controls.Button;
-	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.mainui.navigation.button.nv_btn1_Skin;
 
 	/**
 	 * @private
@@ -24,8 +22,6 @@ package org.mokylin.skin.mainui.navigation
 		public var btn_n2:feathers.controls.Button;
 
 		public var btn_over:feathers.controls.UIAsset;
-
-		public var grpBtn_nv:feathers.controls.Group;
 
 		public var lbl0:feathers.controls.Label;
 
@@ -46,7 +42,7 @@ package org.mokylin.skin.mainui.navigation
 			this.currentState = "normal";
 			this.height = 86;
 			this.width = 57;
-			this.elementsContent = [nv_bg_i(),btn_over_i(),grpBtn_nv_i()];
+			this.elementsContent = [nv_bg_i(),btn_over_i()];
 			
 			states = {
 			};
@@ -57,42 +53,6 @@ package org.mokylin.skin.mainui.navigation
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function btn_n0_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_n0 = temp;
-			temp.name = "btn_n0";
-			temp.label = "帮盟";
-			temp.styleClass = org.mokylin.skin.mainui.navigation.button.nv_btn1_Skin;
-			temp.x = 4;
-			temp.y = 50;
-			return temp;
-		}
-
-		private function btn_n1_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_n1 = temp;
-			temp.name = "btn_n1";
-			temp.label = "帮盟";
-			temp.styleClass = org.mokylin.skin.mainui.navigation.button.nv_btn1_Skin;
-			temp.x = 4;
-			temp.y = 25;
-			return temp;
-		}
-
-		private function btn_n2_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_n2 = temp;
-			temp.name = "btn_n2";
-			temp.label = "帮盟";
-			temp.styleClass = org.mokylin.skin.mainui.navigation.button.nv_btn1_Skin;
-			temp.x = 4;
-			temp.y = 1;
-			return temp;
-		}
-
 		private function btn_over_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -102,19 +62,6 @@ package org.mokylin.skin.mainui.navigation
 			temp.width = 52;
 			temp.x = 3;
 			temp.y = 54;
-			return temp;
-		}
-
-		private function grpBtn_nv_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			grpBtn_nv = temp;
-			temp.name = "grpBtn_nv";
-			temp.height = 74;
-			temp.width = 55;
-			temp.x = 0;
-			temp.y = 0;
-			temp.elementsContent = [btn_n0_i(),btn_n1_i(),btn_n2_i()];
 			return temp;
 		}
 
