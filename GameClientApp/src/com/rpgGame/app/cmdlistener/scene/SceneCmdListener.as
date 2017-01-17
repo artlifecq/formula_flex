@@ -44,6 +44,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.role.SceneDropGoodsItem;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
+	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
@@ -663,6 +664,12 @@ package com.rpgGame.app.cmdlistener.scene
             CharAttributeManager.setAttributeValue(roleData, CharAttributeType.HP, msg.hp);
             
             role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
+			
+			//to do 给这个人播放一个复活特效 
+			SpellAnimationHelper.addTargetEffect(role, 
+				RenderUnitID.LEVEL, 
+				RenderUnitType.LEVEL, 
+				EffectUrl.RELIVE_NORMAL);
             
             if(roleData.id == MainRoleManager.actorID)
             {

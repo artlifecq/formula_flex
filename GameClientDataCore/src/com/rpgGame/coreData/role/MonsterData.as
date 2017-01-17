@@ -4,8 +4,6 @@ package com.rpgGame.coreData.role
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	
 	import app.message.MonsterDataProto.MonsterType;
-	
-	import org.game.netCore.net_protobuff.BytesUtil;
 
 	/**
 	 *

@@ -1,5 +1,6 @@
 package com.rpgGame.app.fight.spell
 {
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -208,7 +209,7 @@ package com.rpgGame.app.fight.spell
 		 */		
 		public function readFrom(flySceneObjID : int, msg : Message) : void
 		{
-			_flySceneObjID = flySceneObjID;//
+			_flySceneObjID = flySceneObjID;
 			
 			if(msg is ResFightBroadcastMessage)
 			{
@@ -226,6 +227,12 @@ package com.rpgGame.app.fight.spell
 						_atkor = null;
 				}
 				
+				if(_atkor == null)
+				{
+					GameLog.addShow("攻击者为空!攻击者服务器ID为：\t" + fightTargetMsg.personId.ToString());
+					return;
+				}
+				
 				_targetID = fightTargetMsg.fightTarget.ToGID();
 				if (_targetID > 0)
 				{
@@ -234,8 +241,13 @@ package com.rpgGame.app.fight.spell
 						_targetRole = null;
 				}
 				
-				_atkorPos = new Point(_atkor.x, _atkor.y);
-				_targetPos = new Point(_targetRole.x, _targetRole.y);
+				if(_targetRole == null)
+				{
+					GameLog.addShow("被攻击者为空!被攻击者服务器ID为：\t" + fightTargetMsg.fightTarget.ToString());
+					return;
+				}
+				_atkorPos = new Point(_atkor.x, _atkor.z);
+				_targetPos = new Point(_targetRole.x, _targetRole.z);
 			}
 			else if(msg is ResAttackVentToClientMessage)
 			{
@@ -251,6 +263,12 @@ package com.rpgGame.app.fight.spell
 					_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
 					if (_atkor && !_atkor.usable)
 						_atkor = null;
+				}
+				
+				if(_atkor == null)
+				{
+					GameLog.addShow("攻击者为空!攻击者服务器ID为：\t" + fightPosMsg.playerid.ToString());
+					return;
 				}
 				
 				_atkorPos = new Point(_atkor.x, _atkor.y);

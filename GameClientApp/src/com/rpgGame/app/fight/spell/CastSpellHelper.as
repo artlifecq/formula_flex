@@ -312,7 +312,7 @@ package com.rpgGame.app.fight.spell
 			var spellData : Q_skill_model = relateSelectable ? getNextRelateSpell() : _lastCaseSpell;
 			_lastCaseSpell = spellData;
 			castInfo.caseSpellData = spellData;
-			GameLog.add("========================================将要释放技能：" + spellData.q_skillID);
+			GameLog.add("====================将要释放技能：" + spellData.q_skillID);
 			if (!spellData)
 			{
 				return CASE_STATE_FAIL;
@@ -610,6 +610,8 @@ package com.rpgGame.app.fight.spell
 				}
 				else
 				{
+					MainRoleManager.actor.faceToGround(scenePosition.x, scenePosition.y);
+					
 					angle = 270 - MainRoleManager.actor.rotationY;
 					radian = angle * Math.PI / 180;
 					releaseRange = releaseRange - DEVIATION_RANGE;
@@ -644,7 +646,7 @@ package com.rpgGame.app.fight.spell
 				}
 			}
 
-			var range : int =  0;//Point.distance(targetPos, releaseTargetPos);
+			var range : int =  Point.distance(targetPos, releaseTargetPos);
 			range = range + DEVIATION_RANGE;
 			angle = (angle + 360) % 360;
 			castInfo.targetServerID = targetServerID;
@@ -652,16 +654,22 @@ package com.rpgGame.app.fight.spell
 			castInfo.targetPos = releaseTargetPos;
 			castInfo.releasePos = releasePos;
 			castInfo.angle = angle;
-			castInfo.range = range;
+			castInfo.range = 50;
 			//判断范围
 			tempVector3D.setTo(releaseTargetPos.x, 0, releaseTargetPos.y);
 			var districtWithPath : DistrictWithPath = SceneManager.getDistrict();
 			var path : Vector.<Vector3D> = PathFinderUtil.findPath(districtWithPath, MainRoleManager.actor.position, tempVector3D);
 			dist = Point.distance(selfPos, releaseTargetPos);
 			var inRange : Boolean;
+			
+			if (spellData.q_blink_type != 0)
+			{
+				return CASE_STATE_SUCCEED;
+			}
+			
 			if (path)
 			{
-				inRange = (path.length == 2) && (dist <= range);
+				inRange = (path.length == 2) && (dist <= 50);
 				if (!inRange)
 				{
 					return CASE_STATE_NOT_IN_RELEASE_RANGE;
@@ -669,7 +677,7 @@ package com.rpgGame.app.fight.spell
 			}
 			else
 			{
-				inRange = dist <= range;
+				inRange = dist <= 50;
 				if (!inRange)
 				{
 					return CASE_STATE_NOT_IN_RELEASE_RANGE;
