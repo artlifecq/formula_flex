@@ -312,7 +312,7 @@ package com.rpgGame.app.fight.spell
 			var spellData : Q_skill_model = relateSelectable ? getNextRelateSpell() : _lastCaseSpell;
 			_lastCaseSpell = spellData;
 			castInfo.caseSpellData = spellData;
-			GameLog.add("========================================将要释放技能：" + spellData.q_skillID);
+			GameLog.add("====================将要释放技能：" + spellData.q_skillID);
 			if (!spellData)
 			{
 				return CASE_STATE_FAIL;
