@@ -604,7 +604,7 @@ package com.rpgGame.app.fight.spell
 						releaseTargetPos = new Point();
 						releaseTargetPos.x = selfPos.x + dist * Math.cos(radian);
 						releaseTargetPos.y = selfPos.y + dist * Math.sin(radian);
-						targetPos = new Point(releaseTargetPos.x, releaseTargetPos.y);
+						targetPos = new Point(selfPos.x, selfPos.y);
 						releasePos = mousePos;
 					}
 				}
@@ -644,7 +644,7 @@ package com.rpgGame.app.fight.spell
 				}
 			}
 
-			var range : int = Point.distance(targetPos, releaseTargetPos);
+			var range : int =  0;//Point.distance(targetPos, releaseTargetPos);
 			range = range + DEVIATION_RANGE;
 			angle = (angle + 360) % 360;
 			castInfo.targetServerID = targetServerID;

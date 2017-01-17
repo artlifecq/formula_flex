@@ -10,54 +10,54 @@ package com.rpgGame.netData.player.bean{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * Íæ¼ÒÍâ¹ÛÕ¹Ê¾ĞÅÏ¢
+	 * ç©å®¶å¤–è§‚å±•ç¤ºä¿¡æ¯
 	 */
 	public class PlayerAppearanceInfo extends Bean {
 	
-		//ÎäÆ÷ÔìĞÍID_ÒÂ·şÔìĞÍID_ĞÔ±ğ ×¢:ÎäÆ÷µÍ15Î»£¬ÒÂ·şÒÀ´Î15Î»£¬ĞÔ±ğ2Î» 0Å® 1ÄĞ
+		//æ­¦å™¨é€ å‹ID_è¡£æœé€ å‹ID_æ€§åˆ« æ³¨:æ­¦å™¨ä½15ä½ï¼Œè¡£æœä¾æ¬¡15ä½ï¼Œæ€§åˆ«2ä½ 0å¥³ 1ç”·
 		private var _weapon_clothes_sex: int;
 		
-		//×øÆïID
+		//åéª‘ID
 		private var _horseModelid: int;
 		
-		//¹âÒíID
+		//å…‰ç¿¼ID
 		private var _wingModelId: int;
 		
-		//Æï±øID
+		//éª‘å…µID
 		private var _weaponRideModelid: int;
 		
 		/**
-		 * Ğ´Èë×Ö½Ú»º´æ
+		 * å†™å…¥å­—èŠ‚ç¼“å­˜
 		 */
 		override protected function writing(): Boolean{
-			//ÎäÆ÷ÔìĞÍID_ÒÂ·şÔìĞÍID_ĞÔ±ğ ×¢:ÎäÆ÷µÍ15Î»£¬ÒÂ·şÒÀ´Î15Î»£¬ĞÔ±ğ2Î» 0Å® 1ÄĞ
+			//æ­¦å™¨é€ å‹ID_è¡£æœé€ å‹ID_æ€§åˆ« æ³¨:æ­¦å™¨ä½15ä½ï¼Œè¡£æœä¾æ¬¡15ä½ï¼Œæ€§åˆ«2ä½ 0å¥³ 1ç”·
 			writeInt(_weapon_clothes_sex);
-			//×øÆïID
+			//åéª‘ID
 			writeInt(_horseModelid);
-			//¹âÒíID
+			//å…‰ç¿¼ID
 			writeInt(_wingModelId);
-			//Æï±øID
+			//éª‘å…µID
 			writeInt(_weaponRideModelid);
 			return true;
 		}
 		
 		/**
-		 * ¶ÁÈ¡×Ö½Ú»º´æ
+		 * è¯»å–å­—èŠ‚ç¼“å­˜
 		 */
 		override protected function reading(): Boolean{
-			//ÎäÆ÷ÔìĞÍID_ÒÂ·şÔìĞÍID_ĞÔ±ğ ×¢:ÎäÆ÷µÍ15Î»£¬ÒÂ·şÒÀ´Î15Î»£¬ĞÔ±ğ2Î» 0Å® 1ÄĞ
+			//æ­¦å™¨é€ å‹ID_è¡£æœé€ å‹ID_æ€§åˆ« æ³¨:æ­¦å™¨ä½15ä½ï¼Œè¡£æœä¾æ¬¡15ä½ï¼Œæ€§åˆ«2ä½ 0å¥³ 1ç”·
 			_weapon_clothes_sex = readInt();
-			//×øÆïID
+			//åéª‘ID
 			_horseModelid = readInt();
-			//¹âÒíID
+			//å…‰ç¿¼ID
 			_wingModelId = readInt();
-			//Æï±øID
+			//éª‘å…µID
 			_weaponRideModelid = readInt();
 			return true;
 		}
 		
 		/**
-		 * get ÎäÆ÷ÔìĞÍID_ÒÂ·şÔìĞÍID_ĞÔ±ğ ×¢:ÎäÆ÷µÍ15Î»£¬ÒÂ·şÒÀ´Î15Î»£¬ĞÔ±ğ2Î» 0Å® 1ÄĞ
+		 * get æ­¦å™¨é€ å‹ID_è¡£æœé€ å‹ID_æ€§åˆ« æ³¨:æ­¦å™¨ä½15ä½ï¼Œè¡£æœä¾æ¬¡15ä½ï¼Œæ€§åˆ«2ä½ 0å¥³ 1ç”·
 		 * @return 
 		 */
 		public function get weapon_clothes_sex(): int{
@@ -65,14 +65,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set ÎäÆ÷ÔìĞÍID_ÒÂ·şÔìĞÍID_ĞÔ±ğ ×¢:ÎäÆ÷µÍ15Î»£¬ÒÂ·şÒÀ´Î15Î»£¬ĞÔ±ğ2Î» 0Å® 1ÄĞ
+		 * set æ­¦å™¨é€ å‹ID_è¡£æœé€ å‹ID_æ€§åˆ« æ³¨:æ­¦å™¨ä½15ä½ï¼Œè¡£æœä¾æ¬¡15ä½ï¼Œæ€§åˆ«2ä½ 0å¥³ 1ç”·
 		 */
 		public function set weapon_clothes_sex(value: int): void{
 			this._weapon_clothes_sex = value;
 		}
 		
 		/**
-		 * get ×øÆïID
+		 * get åéª‘ID
 		 * @return 
 		 */
 		public function get horseModelid(): int{
@@ -80,14 +80,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set ×øÆïID
+		 * set åéª‘ID
 		 */
 		public function set horseModelid(value: int): void{
 			this._horseModelid = value;
 		}
 		
 		/**
-		 * get ¹âÒíID
+		 * get å…‰ç¿¼ID
 		 * @return 
 		 */
 		public function get wingModelId(): int{
@@ -95,14 +95,14 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set ¹âÒíID
+		 * set å…‰ç¿¼ID
 		 */
 		public function set wingModelId(value: int): void{
 			this._wingModelId = value;
 		}
 		
 		/**
-		 * get Æï±øID
+		 * get éª‘å…µID
 		 * @return 
 		 */
 		public function get weaponRideModelid(): int{
@@ -110,7 +110,7 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set Æï±øID
+		 * set éª‘å…µID
 		 */
 		public function set weaponRideModelid(value: int): void{
 			this._weaponRideModelid = value;
