@@ -11,68 +11,68 @@ package com.rpgGame.netData.map.bean{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * ×Ô¶¨ÒåÌØĞ§Õ¹Ê¾£¨Í¨ÓÃ£©
+	 * è‡ªå®šä¹‰ç‰¹æ•ˆå±•ç¤ºï¼ˆé€šç”¨ï¼‰
 	 */
 	public class ShowEffectInfo extends Bean {
 	
-		//ÀàĞÍ£¬1µØÃæĞ§¹û£¬2ÈËÎïĞ§¹û£¬3¹ÖÎïĞ§¹û£¬4µôÑª
+		//ç±»å‹ï¼Œ1åœ°é¢æ•ˆæœï¼Œ2äººç‰©æ•ˆæœï¼Œ3æ€ªç‰©æ•ˆæœï¼Œ4æ‰è¡€
 		private var _type: int;
 		
-		//¹ÖÎïID»òÕßÍæ¼ÒID
+		//æ€ªç‰©IDæˆ–è€…ç©å®¶ID
 		private var _id: long;
 		
-		//ÌØĞ§ID£¬ºÍÇ°¶Ë¶¨
+		//ç‰¹æ•ˆIDï¼Œå’Œå‰ç«¯å®š
 		private var _effectid: int;
 		
-		//×ø±êX£¬ÏñËØ
+		//åæ ‡Xï¼Œåƒç´ 
 		private var _x: int;
 		
-		//×ø±êY£¬ÏñËØ
+		//åæ ‡Yï¼Œåƒç´ 
 		private var _y: int;
 		
-		//ÊıÖµ²ÎÊı
+		//æ•°å€¼å‚æ•°
 		private var _param: int;
 		
 		/**
-		 * Ğ´Èë×Ö½Ú»º´æ
+		 * å†™å…¥å­—èŠ‚ç¼“å­˜
 		 */
 		override protected function writing(): Boolean{
-			//ÀàĞÍ£¬1µØÃæĞ§¹û£¬2ÈËÎïĞ§¹û£¬3¹ÖÎïĞ§¹û£¬4µôÑª
+			//ç±»å‹ï¼Œ1åœ°é¢æ•ˆæœï¼Œ2äººç‰©æ•ˆæœï¼Œ3æ€ªç‰©æ•ˆæœï¼Œ4æ‰è¡€
 			writeByte(_type);
-			//¹ÖÎïID»òÕßÍæ¼ÒID
+			//æ€ªç‰©IDæˆ–è€…ç©å®¶ID
 			writeLong(_id);
-			//ÌØĞ§ID£¬ºÍÇ°¶Ë¶¨
+			//ç‰¹æ•ˆIDï¼Œå’Œå‰ç«¯å®š
 			writeInt(_effectid);
-			//×ø±êX£¬ÏñËØ
+			//åæ ‡Xï¼Œåƒç´ 
 			writeShort(_x);
-			//×ø±êY£¬ÏñËØ
+			//åæ ‡Yï¼Œåƒç´ 
 			writeShort(_y);
-			//ÊıÖµ²ÎÊı
+			//æ•°å€¼å‚æ•°
 			writeInt(_param);
 			return true;
 		}
 		
 		/**
-		 * ¶ÁÈ¡×Ö½Ú»º´æ
+		 * è¯»å–å­—èŠ‚ç¼“å­˜
 		 */
 		override protected function reading(): Boolean{
-			//ÀàĞÍ£¬1µØÃæĞ§¹û£¬2ÈËÎïĞ§¹û£¬3¹ÖÎïĞ§¹û£¬4µôÑª
+			//ç±»å‹ï¼Œ1åœ°é¢æ•ˆæœï¼Œ2äººç‰©æ•ˆæœï¼Œ3æ€ªç‰©æ•ˆæœï¼Œ4æ‰è¡€
 			_type = readByte();
-			//¹ÖÎïID»òÕßÍæ¼ÒID
+			//æ€ªç‰©IDæˆ–è€…ç©å®¶ID
 			_id = readLong();
-			//ÌØĞ§ID£¬ºÍÇ°¶Ë¶¨
+			//ç‰¹æ•ˆIDï¼Œå’Œå‰ç«¯å®š
 			_effectid = readInt();
-			//×ø±êX£¬ÏñËØ
+			//åæ ‡Xï¼Œåƒç´ 
 			_x = readShort();
-			//×ø±êY£¬ÏñËØ
+			//åæ ‡Yï¼Œåƒç´ 
 			_y = readShort();
-			//ÊıÖµ²ÎÊı
+			//æ•°å€¼å‚æ•°
 			_param = readInt();
 			return true;
 		}
 		
 		/**
-		 * get ÀàĞÍ£¬1µØÃæĞ§¹û£¬2ÈËÎïĞ§¹û£¬3¹ÖÎïĞ§¹û£¬4µôÑª
+		 * get ç±»å‹ï¼Œ1åœ°é¢æ•ˆæœï¼Œ2äººç‰©æ•ˆæœï¼Œ3æ€ªç‰©æ•ˆæœï¼Œ4æ‰è¡€
 		 * @return 
 		 */
 		public function get type(): int{
@@ -80,14 +80,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set ÀàĞÍ£¬1µØÃæĞ§¹û£¬2ÈËÎïĞ§¹û£¬3¹ÖÎïĞ§¹û£¬4µôÑª
+		 * set ç±»å‹ï¼Œ1åœ°é¢æ•ˆæœï¼Œ2äººç‰©æ•ˆæœï¼Œ3æ€ªç‰©æ•ˆæœï¼Œ4æ‰è¡€
 		 */
 		public function set type(value: int): void{
 			this._type = value;
 		}
 		
 		/**
-		 * get ¹ÖÎïID»òÕßÍæ¼ÒID
+		 * get æ€ªç‰©IDæˆ–è€…ç©å®¶ID
 		 * @return 
 		 */
 		public function get id(): long{
@@ -95,14 +95,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set ¹ÖÎïID»òÕßÍæ¼ÒID
+		 * set æ€ªç‰©IDæˆ–è€…ç©å®¶ID
 		 */
 		public function set id(value: long): void{
 			this._id = value;
 		}
 		
 		/**
-		 * get ÌØĞ§ID£¬ºÍÇ°¶Ë¶¨
+		 * get ç‰¹æ•ˆIDï¼Œå’Œå‰ç«¯å®š
 		 * @return 
 		 */
 		public function get effectid(): int{
@@ -110,14 +110,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set ÌØĞ§ID£¬ºÍÇ°¶Ë¶¨
+		 * set ç‰¹æ•ˆIDï¼Œå’Œå‰ç«¯å®š
 		 */
 		public function set effectid(value: int): void{
 			this._effectid = value;
 		}
 		
 		/**
-		 * get ×ø±êX£¬ÏñËØ
+		 * get åæ ‡Xï¼Œåƒç´ 
 		 * @return 
 		 */
 		public function get x(): int{
@@ -125,14 +125,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set ×ø±êX£¬ÏñËØ
+		 * set åæ ‡Xï¼Œåƒç´ 
 		 */
 		public function set x(value: int): void{
 			this._x = value;
 		}
 		
 		/**
-		 * get ×ø±êY£¬ÏñËØ
+		 * get åæ ‡Yï¼Œåƒç´ 
 		 * @return 
 		 */
 		public function get y(): int{
@@ -140,14 +140,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set ×ø±êY£¬ÏñËØ
+		 * set åæ ‡Yï¼Œåƒç´ 
 		 */
 		public function set y(value: int): void{
 			this._y = value;
 		}
 		
 		/**
-		 * get ÊıÖµ²ÎÊı
+		 * get æ•°å€¼å‚æ•°
 		 * @return 
 		 */
 		public function get param(): int{
@@ -155,7 +155,7 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set ÊıÖµ²ÎÊı
+		 * set æ•°å€¼å‚æ•°
 		 */
 		public function set param(value: int): void{
 			this._param = value;

@@ -149,7 +149,8 @@ package com.rpgGame.app.cmdlistener.engine
 							TrusteeshipManager.getInstance().stopFightTarget();
 							WalkToRoleManager.walkToTranport(currTarget as SceneRole);
 						}
-					}else if(sceneRole.type == SceneCharType.STALL && (sceneRole.data as StallData).playerId == MainRoleManager.actorID)
+					}
+					else if(sceneRole.type == SceneCharType.STALL && (sceneRole.data as StallData).playerId == MainRoleManager.actorID)
 					{
 						var stallData : StallData = sceneRole.data as StallData;
 						if(stallData)
@@ -159,7 +160,8 @@ package com.rpgGame.app.cmdlistener.engine
 							if(sceneRole.headFace is StallHeadFace)
 								(sceneRole.headFace as StallHeadFace).addAndUpdateStallBg();
 						}
-					}else 
+					}
+					else 
 					{
 						var modeState : int = FightManager.getFightRoleState(currTarget as SceneRole);
 						if (modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY || modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)

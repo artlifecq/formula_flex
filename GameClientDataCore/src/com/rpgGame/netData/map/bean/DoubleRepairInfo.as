@@ -11,40 +11,40 @@ package com.rpgGame.netData.map.bean{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 双修信息
+	 * 鍙屼慨淇℃伅
 	 */
 	public class DoubleRepairInfo extends Bean {
 	
-		//玩家ID
+		//鐜╁ID
 		private var _sourceid: long;
 		
-		//玩家ID
+		//鐜╁ID
 		private var _targetid: long;
 		
 		/**
-		 * 写入字节缓存
+		 * 鍐欏叆瀛楄妭缂撳瓨
 		 */
 		override protected function writing(): Boolean{
-			//玩家ID
+			//鐜╁ID
 			writeLong(_sourceid);
-			//玩家ID
+			//鐜╁ID
 			writeLong(_targetid);
 			return true;
 		}
 		
 		/**
-		 * 读取字节缓存
+		 * 璇诲彇瀛楄妭缂撳瓨
 		 */
 		override protected function reading(): Boolean{
-			//玩家ID
+			//鐜╁ID
 			_sourceid = readLong();
-			//玩家ID
+			//鐜╁ID
 			_targetid = readLong();
 			return true;
 		}
 		
 		/**
-		 * get 玩家ID
+		 * get 鐜╁ID
 		 * @return 
 		 */
 		public function get sourceid(): long{
@@ -52,14 +52,14 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set 玩家ID
+		 * set 鐜╁ID
 		 */
 		public function set sourceid(value: long): void{
 			this._sourceid = value;
 		}
 		
 		/**
-		 * get 玩家ID
+		 * get 鐜╁ID
 		 * @return 
 		 */
 		public function get targetid(): long{
@@ -67,7 +67,7 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set 玩家ID
+		 * set 鐜╁ID
 		 */
 		public function set targetid(value: long): void{
 			this._targetid = value;

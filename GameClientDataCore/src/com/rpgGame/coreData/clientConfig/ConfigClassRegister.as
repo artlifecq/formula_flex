@@ -56,7 +56,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const SceneTriggerInfo:String = "data.map.SceneTriggerInfo";
 		/**  换装衣服特效资源配置							 */
 		public static const AvatarClothesEffectRes:String = "data.model.AvatarClothesEffectRes";
-		/**  换装衣服资源配置，ID只能填1-255，第一套不用填，从第二套开始		武器资源ID	副武器资源ID	头发资源ID	身体资源名称	 */
+		/**  衣服换模型						 */
 		public static const AvatarClothesRes:String = "data.model.AvatarClothesRes";
 		/**  换装副武器资源配置							 */
 		public static const AvatarDeputyWeaponRes:String = "data.model.AvatarDeputyWeaponRes";

@@ -202,7 +202,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var objId : Number = msg.personId.ToGID();
 			if(MainRoleManager.actorID == objId)
 			{
-				trace("主角自己，不用同步了吧！不然，场景会跳一下，体验不好！");
+//				trace("主角自己，不用同步了吧！不然，场景会跳一下，体验不好！");
 				return;
 			}
 			//			var speed : int = buffer.readVarint32();

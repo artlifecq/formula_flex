@@ -79,6 +79,8 @@ package com.rpgGame.coreData.role
 		 */	
 		public var body:int;
 		
+		public var hair:int;
+		
 		public var cloths:int;
 		
 		public var mount:int;
@@ -175,7 +177,8 @@ package com.rpgGame.coreData.role
 			data.mapID = heroInfo.mapModelId;
 			data.body = heroInfo.body;
 			data.cloths = heroInfo.cloths;
-			data.mount = 0;//heroInfo.mount;
+			data.hair = heroInfo.hair;
+			data.mount = heroInfo.mount;
 			data.pkType = heroInfo.pkType;
 			data.weapon = heroInfo.weapon;
 			data.deputyWeapon = heroInfo.second_weapon;
@@ -243,8 +246,9 @@ package com.rpgGame.coreData.role
 			
 			//avatar相关
 			data.body = info.body;
+			data.hair = info.hair;
 			data.cloths = info.cloths;
-			data.mount = 0;//info.mount;
+			data.mount = info.mount;
 			data.pkType = info.pkType;
 			data.weapon = info.weapon;
 			data.deputyWeapon = info.second_weapon;
