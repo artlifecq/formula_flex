@@ -30,7 +30,7 @@ package com.rpgGame.coreData.clientConfig
 		public var offset_y:int;
 		 /**    */
 		public var offset_z:int;
-		 /**  缩放量 */
+		 /**  缩放量（1是原大小，不填默认为1） */
 		public var scale_x:int;
 		 /**    */
 		public var scale_y:int;

@@ -52,7 +52,9 @@ package com.rpgGame.app.fight.spell
 				if (ref)
 				{
 					ref.onAfterExecute(onAttackExecute);
+					ref.onStartFrame(onSelfEffectFrame);
 					ref.onHitFrame(onAttackHitFrame);
+//					ref.onBreakFrame(onBreakFrame);
 					spellInfo.atkor.stateMachine.transition(RoleStateType.ACTION_ATTACK, ref, true);
 				}
 				else
@@ -101,7 +103,7 @@ package com.rpgGame.app.fight.spell
 		private static function onAttackExecute(ref : AttackStateReference) : void
 		{
 			SpellAnimationHelper.addKnifeLightEffect(ref.spellInfo);
-			onSelfEffectFrame(ref);
+//			onSelfEffectFrame(ref);
 		}
 		
 		/**
@@ -146,7 +148,7 @@ package com.rpgGame.app.fight.spell
 				if (spellInfo.blinkType > 0)
 				{
 					RoleStateUtil.blinkToPos(spellInfo.atkor, attackStateRef.statusType, spellInfo.atkorPos, spellInfo.targetPos, spellInfo.blinkSpeed, spellInfo.blinkHeight, 
-						spellInfo.soarFrameTime, spellInfo.hitFrameTime, spellInfo.breakFrameTime, spellInfo);
+						spellInfo.soarFrameTime, spellInfo.hitFrameTime, spellInfo);
 					return true;
 				}
 			}

@@ -127,13 +127,17 @@ package com.rpgGame.app.fight.spell
 		private var _atkorID : Number = 0;
 		private var _atkor : SceneRole = null;
 		/**
-		 * 连招起手帧时间
+		 * 动作起手帧时间
 		 */
 		private var _caromStartFrameTime : int = 0;
 		/**
+		 * 抬手特效开始时间 
+		 */		
+		private var _startSelfFrameTime:int = 0;
+		/**
 		 * 打断帧时间
 		 */
-		private var _breakFrameTime : int = 0;
+//		private var _breakFrameTime : int = 0;
 		/**
 		 * 判定帧时间
 		 */
@@ -271,7 +275,7 @@ package com.rpgGame.app.fight.spell
 					return;
 				}
 				
-				_atkorPos = new Point(_atkor.x, _atkor.y);
+				_atkorPos = new Point(_atkor.x, _atkor.z);
 				_targetPos = new Point(fightPosMsg.pos.x, fightPosMsg.pos.y);
 			}
 			
@@ -294,8 +298,9 @@ package com.rpgGame.app.fight.spell
 				_posSingleAni = AnimationDataManager.getData(_spellEffectData.dest_animation);
 				_passSingleAni = AnimationDataManager.getData(_spellEffectData.fly_animation);
 				
-				_caromStartFrameTime = _spellEffectData.carom_start_frame_time;//暂时没有用
-				_breakFrameTime = _spellEffectData.break_frame_time;//暂时没有用
+				_startSelfFrameTime = _spellEffectData.start_frame_time;//抬手特效开始时间
+				_caromStartFrameTime = _spellEffectData.carom_start_frame_time;//动作从那帧开始播放
+//				_breakFrameTime = _spellEffectData.break_frame_time;//暂时没有用
 				_hitFrameTime = _spellEffectData.hit_frame_time;//到这个时间上，会在地面上有特效,也会有伤害飘字，如果设置了hurtdelay的话，会以这个时间为主
 				_delayTime = _spellEffectData.delay_time;//跟弹道有关系
 				_hurtDelay = _spellEffectData.hurt_delay;//伤害飘字的时间
@@ -544,6 +549,11 @@ package com.rpgGame.app.fight.spell
 		{
 			return _blinkSpeed;
 		}
+		
+		public function get startFrameTime():int
+		{
+			return _startSelfFrameTime;
+		}
 
 		public function get hitFrameTime() : int
 		{
@@ -570,10 +580,10 @@ package com.rpgGame.app.fight.spell
 			return _soarFrameTime;
 		}
 
-		public function get breakFrameTime() : int
-		{
-			return _breakFrameTime;
-		}
+//		public function get breakFrameTime() : int
+//		{
+//			return _breakFrameTime;
+//		}
 
 		public function get caromStartFrameTime() : int
 		{

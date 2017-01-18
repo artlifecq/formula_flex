@@ -596,15 +596,23 @@ package com.rpgGame.app.fight.spell
 						angle = MathUtil.getAngle(selfPos.x, selfPos.y, mousePos.x, mousePos.y);
 						radian = angle * Math.PI / 180;
 						dist = Point.distance(selfPos, mousePos);
+						
+						releaseTargetPos = new Point();
 						if (dist > releaseRange)
 						{
 							dist = dist - releaseRange;
 							dist = dist < 0 ? 0 : dist;
+							
+							releaseTargetPos.x = selfPos.x + dist * Math.cos(radian);
+							releaseTargetPos.y = selfPos.y + dist * Math.sin(radian);
 						}
-						releaseTargetPos = new Point();
-						releaseTargetPos.x = selfPos.x + dist * Math.cos(radian);
-						releaseTargetPos.y = selfPos.y + dist * Math.sin(radian);
-						targetPos = new Point(selfPos.x, selfPos.y);
+						else
+						{
+							releaseTargetPos.x = selfPos.x;
+							releaseTargetPos.y = selfPos.y;
+						}
+						
+						targetPos = new Point(releaseTargetPos.x, releaseTargetPos.y);
 						releasePos = mousePos;
 					}
 				}
@@ -654,7 +662,7 @@ package com.rpgGame.app.fight.spell
 			castInfo.targetPos = releaseTargetPos;
 			castInfo.releasePos = releasePos;
 			castInfo.angle = angle;
-			castInfo.range = 50;
+			castInfo.range = range;
 			//判断范围
 			tempVector3D.setTo(releaseTargetPos.x, 0, releaseTargetPos.y);
 			var districtWithPath : DistrictWithPath = SceneManager.getDistrict();
@@ -677,7 +685,7 @@ package com.rpgGame.app.fight.spell
 			}
 			else
 			{
-				inRange = dist <= 50;
+				inRange = dist <= range;
 				if (!inRange)
 				{
 					return CASE_STATE_NOT_IN_RELEASE_RANGE;
