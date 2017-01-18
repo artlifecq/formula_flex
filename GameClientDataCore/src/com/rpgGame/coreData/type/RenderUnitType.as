@@ -21,6 +21,8 @@ package com.rpgGame.coreData.type
 
 		/**武器特效*/
 		public static const WEAPON_EFFECT : String = "weapon_effect";
+		
+		public static const DEPUTY_WEAPON_EFFECT:String = "deputy_weapon_effect";
 
 		/**身体特效*/
 		public static const BODY_EFFECT : String = "body_effect";

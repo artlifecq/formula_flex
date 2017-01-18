@@ -20,8 +20,12 @@ package com.rpgGame.coreData
 		private var _bodyAnimatResID : String = null;
 		private var _rpd_body : RenderParamData;
 		
+		private var _bodyEffectID : String = null;
+		private var _rpd_body_effect : RenderParamData;
+		
 		private var _hairResID : String = null;
 		private var _rpd_hair : RenderParamData;
+		
 		
 		private var _weaponResID : String = null;
 		private var _rpd_weapon : RenderParamData;
@@ -31,12 +35,13 @@ package com.rpgGame.coreData
 		private var _weaponEffectOffset : Vector3D = null;
 		private var _rpd_weapon_effect : RenderParamData;
 		
-		private var _bodyEffectID : String = null;
-		private var _rpd_body_effect : RenderParamData;
-		
-		
 		private var _deputyWeaponResID : String = null;
 		private var _rpd_deputy_weapon : RenderParamData;
+		
+		private var _deputyWeaponEffectID : String = null;
+		private var _deputyWeaponEffectScale : int = 0;
+		private var _deputyWeaponEffectOffset : Vector3D = null;
+		private var _rpd_deputyWeapon_effect : RenderParamData;
 		
 		private var _mountResID : String = null;
 		private var _mountAnimatResID : String = null;
@@ -109,6 +114,25 @@ package com.rpgGame.coreData
 			{
 				_rpd_weapon_effect = null;
 				_weaponEffectID = null;
+			}
+		}
+		
+		/**武器换装特效资源ID*/
+		public function set deputyWeaponEffectID(value : String) : void
+		{
+			if (_deputyWeaponEffectID == value)
+				return;
+			_deputyWeaponEffectID = value;
+			if (_deputyWeaponEffectID)
+			{
+				_rpd_deputyWeapon_effect = new RenderParamData(RenderUnitID.DEPUTY_WEAPON_EFFECT, RenderUnitType.DEPUTY_WEAPON_EFFECT, ClientConfig.getEffect(_deputyWeaponEffectID));
+				_rpd_deputyWeapon_effect.mouseEnable = false;
+				_rpd_deputyWeapon_effect.clearSameType = false;
+			}
+			else
+			{
+				_rpd_deputyWeapon_effect = null;
+				_deputyWeaponEffectID = null;
 			}
 		}
 
@@ -252,6 +276,34 @@ package com.rpgGame.coreData
 		{
 			return _weaponEffectID;
 		}
+		
+		public function set deputyWeaponEffectScale(value : int) : void
+		{
+			_deputyWeaponEffectScale = value;
+		}
+		
+		/**武器换装特效缩放*/
+		public function get deputyWeaponEffectScale() : int
+		{
+			return _deputyWeaponEffectScale;
+		}
+		
+		public function set deputyWeaponEffectOffset(value : Vector3D) : void
+		{
+			_deputyWeaponEffectOffset = value;
+		}
+		
+		/**武器换装特效偏移*/
+		public function get deputyWeaponEffectOffset() : Vector3D
+		{
+			return _deputyWeaponEffectOffset;
+		}
+		
+		/**武器换装特效资源*/
+		public function get deputyWeaponEffectID() : String
+		{
+			return _deputyWeaponEffectID;
+		}
 
 		/**身体换装特效资源*/
 		public function get bodyEffectID() : String
@@ -312,6 +364,12 @@ package com.rpgGame.coreData
 		{
 			return _rpd_weapon_effect;
 		}
+		
+		/**副武器特效*/
+		public function get rpd_deputyWeapon_effect() : RenderParamData
+		{
+			return _rpd_deputyWeapon_effect;
+		}
 
 		/**身体特效*/
 		public function get rpd_body_effect() : RenderParamData
@@ -354,6 +412,9 @@ package com.rpgGame.coreData
 			weaponEffectID = null;
 			weaponEffectScale = 0;
 			weaponEffectOffset = null;
+			deputyWeaponEffectID = null;
+			deputyWeaponEffectScale = 0;
+			deputyWeaponEffectOffset = null;
 			effectResID = null;
 			bodyEffectID = null;
 		}

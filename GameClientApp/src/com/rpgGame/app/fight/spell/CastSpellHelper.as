@@ -618,7 +618,10 @@ package com.rpgGame.app.fight.spell
 				}
 				else
 				{
-					MainRoleManager.actor.faceToGround(scenePosition.x, scenePosition.y);
+					if (scenePosition)
+					{
+						MainRoleManager.actor.faceToGround(scenePosition.x, scenePosition.y);
+					}
 					
 					angle = 270 - MainRoleManager.actor.rotationY;
 					radian = angle * Math.PI / 180;
