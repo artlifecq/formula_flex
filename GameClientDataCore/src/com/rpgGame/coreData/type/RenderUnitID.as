@@ -23,6 +23,9 @@ package com.rpgGame.coreData.type
 
 		/**武器特效ID*/
 		public static const WEAPON_EFFECT : int = rEnum.next;
+		
+		/**副武器特效ID*/
+		public static const DEPUTY_WEAPON_EFFECT : int = rEnum.next;
 
 		/**身体特效ID*/
 		public static const BODY_EFFECT : int = rEnum.next;
