@@ -11,9 +11,9 @@ package com.rpgGame.app.state.role.action
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
-
+	
 	import away3d.animators.transitions.CrossfadeTransition;
-
+	
 	import gs.TweenLite;
 
 	/**
@@ -35,6 +35,7 @@ package com.rpgGame.app.state.role.action
 		 */		
 		private var _statusType : String;
 		
+		private var _startSelfFrameTween:TweenLite;
 		private var _hitFrameTween : TweenLite;
 		private var _totalFrameTween : TweenLite;
 		private var _breakFrameTween : TweenLite;
@@ -43,8 +44,8 @@ package com.rpgGame.app.state.role.action
 		private var _attackBroken : Boolean;
 		private var _canWalkRelease : Boolean;
 		
+		private var _startSelfFrameTime:int;
 		private var _startFrameTime : int;
-		private var _breakFrameTime : int;
 		private var _hitFrameTime : int;
 
 		public function AttackState()
@@ -87,15 +88,15 @@ package com.rpgGame.app.state.role.action
 //						_startFrameTime = caromStartFrameTime || _stateReference.spellInfo.caromStartFrameTime;
 //					else
 					_startFrameTime = 0;
-					_breakFrameTime = _stateReference.spellInfo.breakFrameTime - _startFrameTime;
+					_startSelfFrameTime = _stateReference.spellInfo.startFrameTime - _startFrameTime;
 					_hitFrameTime = _stateReference.spellInfo.hitFrameTime - _startFrameTime;
 					var frameTime : int = _stateReference.spellInfo.throwDelayTime - _startFrameTime;
 					_stateReference.setThrowFrameTime(frameTime > 0 ? frameTime : 0);
 				}
 				else
 				{
+					_startSelfFrameTime = 0;
 					_startFrameTime = 0;
-					_breakFrameTime = 0;
 					_hitFrameTime = 0;
 					_stateReference.setThrowFrameTime(0);
 				}
@@ -255,13 +256,33 @@ package com.rpgGame.app.state.role.action
 				}
 //				keyFrameTm /= _speed;
 //				totalFrameTm /= _speed;
-				var breakFrameTime : int = (_breakFrameTime > 0 ? _breakFrameTime : totalFrameTm);
+				/*var breakFrameTime : int = (_breakFrameTime > 0 ? _breakFrameTime : totalFrameTm);
 				if (breakFrameTime > totalFrameTm)
 					breakFrameTime = totalFrameTm;
 				var hitFrameTime : int = (_hitFrameTime > 0 ? _hitFrameTime : breakFrameTime);
 				if (hitFrameTime > breakFrameTime)
-					hitFrameTime = breakFrameTime;
+					hitFrameTime = breakFrameTime;*/
+				
+				var startSelfFrameTime:int = (_startSelfFrameTime > 0 ? _startSelfFrameTime : 0);
+				if(startSelfFrameTime > totalFrameTm)
+				{
+					startSelfFrameTime = totalFrameTm;
+				}
+				
+				var hitFrameTime : int = (_hitFrameTime > 0 ? _hitFrameTime : totalFrameTm);
+				if (hitFrameTime > totalFrameTm)
+				{
+					hitFrameTime = totalFrameTm;
+				}
+				
+				var castTime:int = _stateReference.castTime > 0 ? _stateReference.castTime : totalFrameTm;
+				
 				_stateReference.setHitFrameTime(hitFrameTime);
+				if(_startSelfFrameTween)
+				{
+					_startSelfFrameTween.kill();
+					_startSelfFrameTween = null;
+				}
 				if (_hitFrameTween)
 				{
 					_hitFrameTween.kill();
@@ -279,14 +300,15 @@ package com.rpgGame.app.state.role.action
 				}
 				if (totalFrameTm > 0)
 				{
+					_startSelfFrameTween = TweenLite.delayedCall(startSelfFrameTime * 0.001,onStartFrameCmp);
 					_hitFrameTween = TweenLite.delayedCall(hitFrameTime * 0.001, onHitFrameCmp);
-					_breakFrameTween = TweenLite.delayedCall(breakFrameTime * 0.001, onBreakFrameCmp);
+					_breakFrameTween = TweenLite.delayedCall(castTime * 0.001, onBreakFrameCmp);
 					_totalFrameTween = TweenLite.delayedCall(totalFrameTm * 0.001, onTotalFrameCmp);
 				}
 				else
 				{
 					onHitFrameCmp();
-					onBreakFrameCmp();
+					onStartFrameCmp();
 					onTotalFrameCmp();
 				}
 			}
@@ -297,6 +319,11 @@ package com.rpgGame.app.state.role.action
 			_attackBroken = true;
 			_attackFinished = true;
 			_canWalkRelease = false;
+			if(_startSelfFrameTween)
+			{
+				_startSelfFrameTween.kill();
+				_startSelfFrameTween = null;
+			}
 			if (_hitFrameTween)
 			{
 				_hitFrameTween.kill();
@@ -321,6 +348,17 @@ package com.rpgGame.app.state.role.action
 			_attackBroken = false;
 			_attackFinished = false;
 			_canWalkRelease = false;
+		}
+		
+		private function onStartFrameCmp() : void
+		{
+			if(_startSelfFrameTween)
+			{
+				_startSelfFrameTween.kill();
+				_startSelfFrameTween = null;
+			}
+			if (_stateReference)
+				_stateReference.startFrame();
 		}
 
 		private function onHitFrameCmp() : void
@@ -358,6 +396,7 @@ package com.rpgGame.app.state.role.action
 		private function onBreakFrameCmp() : void
 		{
 			_attackBroken = true;
+			_attackFinished = true;
 			if (_machine && !_machine.isDisposed)
 			{
 				if (_breakFrameTween)
@@ -400,12 +439,12 @@ package com.rpgGame.app.state.role.action
 			}
 			else if (nextState.type == RoleStateType.ACTION_BLINK)
 			{
-				if (!force && !_attackBroken)
+				if (/*!force && */!_attackBroken)
 					return false;
 			}
 			else if (nextState.type == RoleStateType.ACTION_ATTACK)
 			{
-				if (!force && !_attackBroken)
+				if (/*!force && */!_attackBroken)
 					return false;
 			}
 			else if (nextState.type == RoleStateType.ACTION_HIT)
@@ -420,17 +459,17 @@ package com.rpgGame.app.state.role.action
 			}
 			else if (nextState.type == RoleStateType.ACTION_WALK)
 			{
-				if (!force && !_attackBroken)
+				if (/*!force && */!_attackBroken)
 					return false;
 			}
 			else if (nextState.type == RoleStateType.ACTION_RUN)
 			{
-				if (!force && !_attackBroken)
+				if (/*!force && */!_attackBroken)
 					return false;
 			}
 			else if (nextState.type == RoleStateType.ACTION_JUMP)
 			{
-				if (!force && !_attackBroken)
+				if (/*!force && */!_attackBroken)
 					return false;
 			}
 			else if (nextState.type == RoleStateType.ACTION_BEAT_BACK)
@@ -472,6 +511,11 @@ package com.rpgGame.app.state.role.action
 			_attackBroken = false;
 			_attackFinished = false;
 			_canWalkRelease = false;
+			if(_startSelfFrameTween)
+			{
+				_startSelfFrameTween.kill();
+				_startSelfFrameTween = null;
+			}
 			if (_hitFrameTween)
 			{
 				_hitFrameTween.kill();
