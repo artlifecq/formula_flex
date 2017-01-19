@@ -22,9 +22,9 @@ package com.rpgGame.app.ui.main.shortcut
 	public class ShortcutSkillBar extends Sprite
 	{
 		private var _shortcutBar : ShortcutBar;
-		private const GRID_COUNT : int = 10;
+		private const GRID_COUNT : int = 8;
 
-		private const SHORTCUTS_KEY : Array = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10"];
+		private const SHORTCUTS_KEY : Array = ["1", "2", "3", "4","Q", "W", "E", "R"];
 
 		private var _gridVect : Vector.<ShortcutGrid>;
 
@@ -78,8 +78,8 @@ package com.rpgGame.app.ui.main.shortcut
 				cd.rightMouseClickFun = onRightMouseClick;
 				if (i < 10)
 				{
-					cd.x = 1 + 55 * i;
-					cd.y = 48;
+					cd.x = 9 + 54 * i;
+					cd.y = 6;
 
 					cd.setBg(GridBGType.GRID_SIZE_46, 0);
 					cd.setIconPoint(0, 0);

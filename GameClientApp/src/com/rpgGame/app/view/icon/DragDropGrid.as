@@ -284,8 +284,8 @@ package com.rpgGame.app.view.icon
 		
 		protected function dragSourceOutChange():void
 		{
-//			clear();
-//			TipTargetManager.removeTxtTipTarget(this);
+			clear();
+			TipTargetManager.remove(this);
 		}
 		
 		protected function dragSourceBack():void

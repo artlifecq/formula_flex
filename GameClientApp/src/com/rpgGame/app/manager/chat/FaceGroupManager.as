@@ -35,7 +35,7 @@ package com.rpgGame.app.manager.chat
 
 		private function initFaceGroup():void
 		{
-//			_faceGroup = new FaceGroup();
+			_faceGroup = new FaceGroup();
 			if(_needShow)
 				showGroup();
 			_isInit = true;

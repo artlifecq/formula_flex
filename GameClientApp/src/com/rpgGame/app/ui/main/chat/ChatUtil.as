@@ -31,24 +31,20 @@ package com.rpgGame.app.ui.main.chat
 					return StaticValue.CHAT_XI_TONG_COLOR;
 				case EnumChatChannelType.CHAT_CHANNEL_WORLD:
 					return StaticValue.CHAT_SHI_JIE_COLOR;
-				case EnumChatChannelType.CHAT_CHANNEL_COUNTRY:
-					return StaticValue.CHAT_GUO_JIA_COLOR;
 				case EnumChatChannelType.CHAT_CHANNEL_NORMAL:
 					return StaticValue.CHAT_PU_TONG_COLOR;
 				case EnumChatChannelType.CHAT_CHANNEL_PARTY:
 					return StaticValue.CHAT_BANG_PAI_COLOR;
 				case EnumChatChannelType.CHAT_CHANNEL_TEAM:
 					return StaticValue.CHAT_DUI_WU_COLOR;
-				case EnumChatChannelType.CHAT_CHANNEL_FAMILY:
-					return StaticValue.CHAT_JIA_ZU_COLOR;
 				case EnumChatChannelType.CHAT_CHANNEL_LABA:
 					return StaticValue.CHAT_LA_BA_COLOR;
 				case EnumChatChannelType.CHAT_CHANNEL_KUA_FU:
 					return StaticValue.CHAT_KUA_FU_COLOR;
-				case EnumChatChannelType.CHAT_CHANNEL_MENG_GUO:
-					return StaticValue.CHAT_MENG_GUO_COLOR;
 				case EnumChatChannelType.CHAT_CHANNEL_SILIAO:
 					return StaticValue.CHAT_SI_LIAO_COLOR;
+				case EnumChatChannelType.CHAT_CHANNEL_NOTICE:
+					return StaticValue.SYSTEM_CHAT_COLOR;
 			}
 			return StaticValue.COLOR_CODE_1;
 		}
@@ -97,9 +93,6 @@ package com.rpgGame.app.ui.main.chat
 				case EnumChatChannelType.CHAT_CHANNEL_WORLD:
 					info = LanguageConfig.getText(LangChat.CHAT_CHANNEL_WORLD);
 					break;
-				case EnumChatChannelType.CHAT_CHANNEL_COUNTRY:
-					info = LanguageConfig.getText(LangChat.CHAT_CHANNEL_ALLY);
-					break;
 				case EnumChatChannelType.CHAT_CHANNEL_NORMAL:
 					info = LanguageConfig.getText(LangChat.CHAT_CHANNEL_NORMAL);
 					break;
@@ -112,8 +105,8 @@ package com.rpgGame.app.ui.main.chat
 				case EnumChatChannelType.CHAT_CHANNEL_LABA:
 					info = LanguageConfig.getText(LangChat.CHAT_CHANNEL_LABA);
 					break;
-				case EnumChatChannelType.CHAT_CHANNEL_FAMILY:
-					info = "家族";
+				case EnumChatChannelType.CHAT_CHANNEL_NOTICE:
+					info = "公告";
 					break;
 				case EnumChatChannelType.CHAT_CHANNEL_SILIAO:
 					info = "私聊";
@@ -121,11 +114,8 @@ package com.rpgGame.app.ui.main.chat
 				case EnumChatChannelType.CHAT_CHANNEL_KUA_FU:
 					info = "跨服";
 					break;
-				case EnumChatChannelType.CHAT_CHANNEL_MENG_GUO:
-					info = "盟国";
-					break;
-				case EnumChatChannelType.CHAT_CHANNEL_WINDOW:
-					info = LanguageConfig.getText(LangChat.CHAT_CHANNEL_WINDOW);
+				case EnumChatChannelType.CHAT_CHANNEL_HEARSAY:
+					info = "传闻";
 					break;
 			}
 			return info;

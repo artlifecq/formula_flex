@@ -28,6 +28,11 @@ package com.rpgGame.coreData.type
 		public static const COMPLETE_TASK_EFFECT : String = "ui_renwushuaxin";
 		/**切场景特效**/
 		public static const SWITCH_SCENE_EFFECT : String = "tx_lianyi";
+		
+		/**
+		 *红血条 
+		 */
+		public static const XUE_TIAO_HONG : String = "ui_xuetiaohong";
 
 		/**偷经0 白**/
 		public static const SCRIPTURES0 : String = "tx_duojin_bai";

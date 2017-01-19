@@ -5,6 +5,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.coreData.cfg.AddSpriteStatCfgData;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
+	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ChatCfgData;
 	import com.rpgGame.coreData.cfg.ClientAreaCfgData;
@@ -16,6 +17,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.ClientSceneRoleCfgData;
 	import com.rpgGame.coreData.cfg.ClientTriggerCfgData;
 	import com.rpgGame.coreData.cfg.DaTiCfgData;
+	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.cfg.FriendCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSettingCfgData;
 	import com.rpgGame.coreData.cfg.GmConfig;
@@ -34,7 +36,6 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.TaxCfgData;
 	import com.rpgGame.coreData.cfg.TranportsDataManager;
 	import com.rpgGame.coreData.cfg.TransCfgData;
-	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
 	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
@@ -139,7 +140,7 @@ package com.rpgGame.app.data
 			
 			
 			EffectAnimationCfgData.setup(dic[ConfigClassRegister.EffectAnimation]);
-//			FaceCfgData.setup(dic[ConfigClassRegister.FaceInfo]);
+			FaceCfgData.setup(dic[ConfigClassRegister.FaceInfo]);
 //			GmLevelAddSpellPointData.setup(dic[ConfigClassRegister.GmLevelAddSpellPoint]);
 			StatNameCfgData.setup(dic[ConfigClassRegister.SpriteStatNameInfo]);
 //			EquipTypeNameCfgData.setup(dic[ConfigClassRegister.EquipTypeNameInfo]);

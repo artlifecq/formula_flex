@@ -26,7 +26,7 @@ package org.mokylin.skin.mainui.navigation.button
 		{
 			super();
 			
-			this.currentState = "disabled";
+			this.currentState = "down";
 			this.elementsContent = [];
 			
 			states = {
@@ -47,10 +47,7 @@ package org.mokylin.skin.mainui.navigation.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/navigation/button/skin_juese/down.png",
-			"hover":"ui/mainui/navigation/button/skin_juese/over.png",
-			"select":"ui/mainui/navigation/button/skin_juese/select.png",
-			"up":"ui/mainui/navigation/button/skin_juese/up.png"};
+			skinNames={"down":"ui/mainui/navigation/button/skin_juese/down.png", "hover":"ui/mainui/navigation/button/skin_juese/over.png", "up":"ui/mainui/navigation/button/skin_juese/up.png"};
 		}
 
 

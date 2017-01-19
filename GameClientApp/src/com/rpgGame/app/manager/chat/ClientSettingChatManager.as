@@ -89,7 +89,7 @@ package com.rpgGame.app.manager.chat
 		{
 			var channelProto:ChatSetTabProtoC = new ChatSetTabProtoC();
 			channelProto.name = getNewTabName(1);
-			channelProto.selectedChannelArr = [EnumChatChannelType.CHAT_CHANNEL_SILIAO,EnumChatChannelType.CHAT_CHANNEL_COUNTRY,EnumChatChannelType.CHAT_CHANNEL_FAMILY];
+			channelProto.selectedChannelArr = [EnumChatChannelType.CHAT_CHANNEL_SILIAO];
 			return channelProto;
 		}
 		

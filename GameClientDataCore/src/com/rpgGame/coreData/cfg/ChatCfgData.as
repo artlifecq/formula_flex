@@ -26,12 +26,10 @@ package com.rpgGame.coreData.cfg
 				return;
 			var channelArr:Array = [
 									EnumChatChannelType.CHAT_CHANNEL_WORLD,
-									EnumChatChannelType.CHAT_CHANNEL_COUNTRY,
 									EnumChatChannelType.CHAT_CHANNEL_NORMAL,
 									EnumChatChannelType.CHAT_CHANNEL_LABA,
 									EnumChatChannelType.CHAT_CHANNEL_SILIAO,
 									EnumChatChannelType.CHAT_CHANNEL_TEAM,
-									EnumChatChannelType.CHAT_CHANNEL_FAMILY
 									];
 			var len:int = channelArr.length;
 			for(var i:int = 0; i < len; i++)

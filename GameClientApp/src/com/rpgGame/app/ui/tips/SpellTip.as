@@ -7,6 +7,7 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.TextSizeUtil;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
@@ -15,6 +16,8 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import feathers.controls.Label;
+	
+	import org.mokylin.skin.app.tips.SpellTipsSkin;
 	
 	import starling.display.DisplayObject;
 	
@@ -52,7 +55,7 @@ package com.rpgGame.app.ui.tips
 		
 		public function SpellTip()
 		{
-//			_spellTip = new SpellTipsSkin();
+			_spellTip = new SpellTipsSkin();
 			super( _spellTip );
 			
 			initTip();
@@ -359,10 +362,10 @@ package com.rpgGame.app.ui.tips
 		private function updateTipsIcon():void
 		{
 			//技能右上角的图标类型
-//			var charType:int = spellProto.clientShowSpellType;
-//			var res:String = ClientConfig.getSpellTipsCharTypeById( charType );
-//			_spellTip.imgChar.styleName = res;
-//			_spellTip.labName.htmlText = spellProto.name;
+			var charType:int = spellProto.q_trigger_type;
+			var res:String = ClientConfig.getSpellTipsCharTypeById( charType );
+			_spellTip.imgChar.styleName = res;
+			_spellTip.labName.htmlText = spellProto.q_skillName;
 			
 			//头部技能icon
 			FaceUtil.SetSkillGrid( titleIconFace, FaceUtil.chanceSpellToFaceInfo( spellProto ), true );

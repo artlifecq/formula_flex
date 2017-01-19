@@ -26,10 +26,32 @@ package org.mokylin.skin.mainui.chat.button
 		{
 			super();
 			
-			this.currentState = "disabled";
+			this.currentState = "upAndSelected";
 			this.elementsContent = [];
 			
 			states = {
+				up:[
+						{target:"labelDisplay",
+							name:"left",
+							value:0
+						}
+						,
+						{target:"labelDisplay",
+							name:"right",
+							value:0
+						}
+						,
+						{target:"labelDisplay",
+							name:"top",
+							value:0
+						}
+						,
+						{target:"labelDisplay",
+							name:"bottom",
+							value:0
+						}
+					]
+				,
 				init:[
 						{target:"labelDisplay",
 							name:"textAlign",
@@ -48,9 +70,11 @@ package org.mokylin.skin.mainui.chat.button
 					]
 			};
 			skinNames={"down":"ui/mainui/chat/button/chat_geren/down.png",
+			"downAndSelected":"ui/mainui/chat/button/chat_geren/select_down.png",
 			"hover":"ui/mainui/chat/button/chat_geren/over.png",
-			"select":"ui/mainui/chat/button/chat_geren/select.png",
-			"up":"ui/mainui/chat/button/chat_geren/up.png"};
+			"overAndSelected":"ui/mainui/chat/button/chat_geren/select_over.png",
+			"up":"ui/mainui/chat/button/chat_geren/up.png",
+			"upAndSelected":"ui/mainui/chat/button/chat_geren/select.png"};
 		}
 
 
