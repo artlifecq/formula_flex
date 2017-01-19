@@ -2022,6 +2022,8 @@ package com.rpgGame.coreData.lang
 		public static const CastSpellByBinding:String = "CastSpellByBinding";
 		 /**  该目标不可攻击 */
 		public static const NotAttack:String = "NotAttack";
+		 /**  翻滚Cd中 */
+		public static const RollInCd:String = "RollInCd";
 
 	}
 }

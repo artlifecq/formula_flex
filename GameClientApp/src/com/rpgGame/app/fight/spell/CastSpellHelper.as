@@ -110,6 +110,9 @@ package com.rpgGame.app.fight.spell
 
 		public static function shortcutsTryCaseSpell(spellID : int) : void
 		{
+            CONFIG::netDebug {
+                NetDebug.LOG("CastSpellHelper shortcutsTryCaseSpell spellID:" + spellID);
+            }
             var caseInfo : CastSpellInfo = new CastSpellInfo(getSpellData(spellID));
 			var cased : Boolean = tryCaseSpell(caseInfo);
 //			if (!cased)

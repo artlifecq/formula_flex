@@ -1,8 +1,11 @@
 package com.rpgGame.app.manager.input
 {
 	import com.game.engine3D.utils.PathFinderUtil;
+	import com.rpgGame.app.fight.spell.CastSpellHelper;
+	import com.rpgGame.app.manager.RollManager;
 	import com.rpgGame.app.manager.TrailManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.stall.StallManager;
@@ -12,14 +15,15 @@ package com.rpgGame.app.manager.input
 	import com.rpgGame.app.state.role.action.JumpStateReference;
 	import com.rpgGame.app.state.role.action.RunStateReference;
 	import com.rpgGame.coreData.info.key.KeyInfo;
+	import com.rpgGame.coreData.lang.LangNoticeInfo;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
-
+	
 	import flash.geom.Vector3D;
 	import flash.utils.getTimer;
-
+	
 	import away3d.cameras.Camera3D;
-
+	
 	import org.client.mainCore.utils.Tick;
 
 	/**
@@ -72,7 +76,7 @@ package com.rpgGame.app.manager.input
 		{
 			if (info.funcID == 225) //SPACE
 			{
-				jump(isDown);
+                roll(isDown);
 			}
 
 			if (info.funcID == 1 || info.funcID == 5) //W,UP
@@ -92,6 +96,24 @@ package com.rpgGame.app.manager.input
 				walkRight(isDown);
 			}
 		}
+        
+        private function roll(bool : Boolean) : void {
+            if (!bool) {
+                return;
+            }
+            var canRoll : Boolean = RollManager.INSTANCE.canUseRoll();
+            if (canRoll) {
+                if (1 == MainRoleManager.actorInfo.job) {
+                    CastSpellHelper.shortcutsTryCaseSpell(1);
+                } else if (2 == MainRoleManager.actorInfo.job) {
+                    CastSpellHelper.shortcutsTryCaseSpell(2);
+                } else if (3 == MainRoleManager.actorInfo.job) {
+                    CastSpellHelper.shortcutsTryCaseSpell(3);
+                }
+             } else {
+                 NoticeManager.showNotify(LangNoticeInfo.RollInCd);
+             }
+        }
 
 		private function jump(bool : Boolean) : void
 		{
