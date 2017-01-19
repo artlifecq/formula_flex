@@ -7,9 +7,7 @@ package com.rpgGame.coreData.lang
 	* 【**不可手动修改此类**】，
 	*	
 	* 【任何修改都将被生成工具覆盖，如需修改请直接修改具体的config文件】
-	* @author fly.AutoUICreater
-	* @modifier L.L.M.Sunny
-	* 修改时间：2015-7-2 上午10:05:12
+	* @author NEIL
 	* 
 	*/
 	public class LangNoticeInfo
@@ -2020,6 +2018,10 @@ package com.rpgGame.coreData.lang
 		public static const SpellSelectedOnlyOtherCountryBiao:String = "SpellSelectedOnlyOtherCountryBiao";
 		 /**  禁食状态不能使用恢复类物品 */
 		public static const FastingStateCanNotUseRecoveryGoods:String = "FastingStateCanNotUseRecoveryGoods";
+		 /**  请绑定技能后进行施放 */
+		public static const CastSpellByBinding:String = "CastSpellByBinding";
+		 /**  该目标不可攻击 */
+		public static const NotAttack:String = "NotAttack";
 
 	}
 }

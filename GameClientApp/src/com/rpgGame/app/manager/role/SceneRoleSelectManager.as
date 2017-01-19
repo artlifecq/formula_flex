@@ -2,6 +2,7 @@ package com.rpgGame.app.manager.role
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.VolumeBounds;
 	import com.game.engine3D.vo.SoftOutlineData;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.fight.FightManager;
@@ -17,7 +18,11 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
+	import away3d.containers.ObjectContainer3D;
+	import away3d.entities.CompositeMesh;
 	import away3d.filters.OutlineGlowFilter3D;
+	
+	import gameEngine2D.NetDebug;
 	
 	import org.client.mainCore.manager.EventManager;
 
@@ -160,6 +165,68 @@ package com.rpgGame.app.manager.role
 
 		private static function selectedRolePartAddedCallBack(effectRu : RenderUnit3D, ru : RenderUnit3D) : void
 		{
+            CONFIG::netDebug {
+                function getBounds() : VolumeBounds
+                {
+                    var _animatorElements : Vector.<CompositeMesh> = ru.getAnimatorElements();
+                    var _drawElements : Vector.<ObjectContainer3D> = ru.getDrawElements();
+                    if (!_drawElements)
+                    {
+                        return null;
+                    }
+                    var bounds : VolumeBounds = null;
+                    if (_animatorElements)
+                    {
+                        for each (var animatElement : CompositeMesh in _animatorElements)
+                        {
+                            CONFIG::netDebug {
+                                NetDebug.LOG("[getBounds] [_animatorElements] " +
+                                    "minX:" + animatElement.minX + ", " +
+                                    "minY:" + animatElement.minY + ", " +
+                                    "minZ:" + animatElement.minZ + ", " +
+                                    "maxX:" + animatElement.maxX + ", " +
+                                    "maxY:" + animatElement.maxY + ", " +
+                                    "maxZ:" + animatElement.maxZ + ", " +
+                                    "scaleX:" + animatElement.scaleX + ", " +
+                                    "scaleY:" + animatElement.scaleY + ", " + 
+                                    "scaleZ:" + animatElement.scaleZ);
+                            }
+                                bounds = new VolumeBounds(animatElement.minX * animatElement.scaleX, animatElement.minY * animatElement.scaleY, animatElement.minZ * animatElement.scaleZ, //
+                                    animatElement.maxX * animatElement.scaleX, animatElement.maxY * animatElement.scaleY, animatElement.maxZ * animatElement.scaleZ);
+                            return bounds;
+                        }
+                    }
+                    else
+                    {
+                        for each (var element : ObjectContainer3D in _drawElements)
+                        {
+                            CONFIG::netDebug {
+                                NetDebug.LOG("[getBounds] " +
+                                    "minX:" + element.minX + ", " +
+                                    "minY:" + element.minY + ", " +
+                                    "minZ:" + element.minZ + ", " +
+                                    "maxX:" + element.maxX + ", " +
+                                    "maxY:" + element.maxY + ", " +
+                                    "maxZ:" + element.maxZ + ", " +
+                                    "scaleX:" + element.scaleX + ", " +
+                                    "scaleY:" + element.scaleY + ", " + 
+                                    "scaleZ:" + element.scaleZ);
+                            }
+                                bounds = new VolumeBounds(element.minX * element.scaleX, element.minY * element.scaleY, element.minZ * element.scaleZ, //
+                                    element.maxX * element.scaleX, element.maxY * element.scaleY, element.maxZ * element.scaleZ);
+                            return bounds;
+                        }
+                    }
+                    return null;
+                }
+                var bounds : VolumeBounds = getBounds();
+                if (bounds)
+                {
+                    NetDebug.LOG("load select role part added callback maxX:" + bounds.maxX + ", minX:" + bounds.minX);
+                } else {
+                    NetDebug.LOG("load select role part added callback bounds is null");
+                }
+            }
 			ru.removeAddedCallBack(selectedRolePartAddedCallBack);
 			if (ru && ru.usable && effectRu && effectRu.usable)
 			{

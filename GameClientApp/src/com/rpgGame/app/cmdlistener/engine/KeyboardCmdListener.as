@@ -4,6 +4,8 @@ package com.rpgGame.app.cmdlistener.engine
 	import com.game.engine3D.utils.PathFinderUtil;
 	import com.game.mainCore.core.events.KeyCodeEvent;
 	import com.game.mainCore.core.info.key.KeysCodeInfo;
+	import com.game.mainCore.core.timer.GameTimer;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.controller.keyboard.KeyFuncProcess;
 	import com.rpgGame.app.controller.keyboard.KeyNormalProcess;
 	import com.rpgGame.app.controller.keyboard.KeySpellProcess;
@@ -45,6 +47,10 @@ package com.rpgGame.app.cmdlistener.engine
 		private static var _singleInfo : KeyInfo;
 		private static var _mixInfo : MulitKeyInfo;
 		private static var _orderInfo : MulitKeyInfo;
+        
+        private var _longPressKey : Vector.<KeyInfo> = new Vector.<KeyInfo>();
+        
+        private var _timer : GameTimer;
 
 		public function KeyboardCmdListener()
 		{
@@ -57,6 +63,9 @@ package com.rpgGame.app.cmdlistener.engine
 			EventManager.addEvent(KeyCodeEvent.KEYS_UP, onKeysUp);
 			EventManager.addEvent(KeyCodeEvent.KEYS_CLEAR, onKeysClear);
 			Stage3DLayerManager.stage.addEventListener(Event.DEACTIVATE, onDeactivate);
+            
+            this._timer = new GameTimer("KeyboardCmdListener", 500, 0, onTimer);
+            this._timer.start();
 
 			super.finish();
 		}
@@ -66,14 +75,6 @@ package com.rpgGame.app.cmdlistener.engine
 			//当前焦点为可输入文本时不响应快捷键
 			if (FocusManager.focus is TextInput)
 			{
-				return;
-			}
-//测试代码，主要用来作场景处理的，临时的，当按回车键时，会执行换场景
-			if (info.code == Keyboard.TAB)
-			{
-				
-				var b:Boolean = PathFinderUtil.isSolid(SceneManager.getDistrict(), new Vector3D(3697, -1165));
-				trace(b);
 				return;
 			}
 /////////////////////////////////////////////////////
@@ -117,6 +118,7 @@ package com.rpgGame.app.cmdlistener.engine
 			}
 			//执行动作(执行已经在down状态的按键逻辑,也执行顺序键按键逻辑)
 			excuteDownKey();
+            this.addLongPressKey(KeyManager.getSingleInfo(info.code));
 		}
 
 		private function onKeysUp(info : KeysCodeInfo) : void
@@ -152,6 +154,7 @@ package com.rpgGame.app.cmdlistener.engine
 					_upKeyList.splice(len, 1);
 				}
 			}
+            this.delLongPressKey(KeyManager.getSingleInfo(info.code));
 		}
 
 		private function onKeysClear() : void
@@ -161,6 +164,7 @@ package com.rpgGame.app.cmdlistener.engine
 			_upKeyList.length = 0;
 			_upKeyInfoList.length = 0;
 			_orderKeyList.length = 0;
+            this._longPressKey.length = 0;
 		}
 
 		private function onDeactivate(e : Event) : void
@@ -302,7 +306,7 @@ package com.rpgGame.app.cmdlistener.engine
 
 		private function singleKeyDownExec(info : KeyInfo) : void
 		{
-			//			GameLog.addShow("singleKeyDownExec--执行单键:"+info.name+"_"+info.type+"_"+info.code);
+			GameLog.addShow("singleKeyDownExec--:"+info.name+"_"+info.type+"_"+info.code);
 			////////////////////////////////////////// 
 			switch (info.type)
 			{
@@ -361,5 +365,30 @@ package com.rpgGame.app.cmdlistener.engine
 					break;
 			}
 		}
+        
+        private function addLongPressKey(info : KeyInfo) : void {
+            if (null == info || KeyCodeType.SKILL != info.type) {
+                return;
+            }
+            this._longPressKey.push(info);
+        }
+        
+        private function delLongPressKey(info : KeyInfo) : void {
+            if (null == info || KeyCodeType.SKILL != info.type) {
+                return;
+            }
+            for (var i : int = 0, len : int = this._longPressKey.length; i < len; ++i) {
+                if (info.code == this._longPressKey[i].code) {
+                    this._longPressKey.splice(i, 1);
+                }
+            }
+        }
+        
+        private function onTimer() : void {
+            if (this._longPressKey.length < 1) {
+                return;
+            }
+            this.singleKeyDownExec(this._longPressKey[this._longPressKey.length - 1]);
+        }
 	}
 }

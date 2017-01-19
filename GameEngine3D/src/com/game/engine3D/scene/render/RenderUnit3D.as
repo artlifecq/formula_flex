@@ -3095,6 +3095,19 @@ package com.game.engine3D.scene.render
 				_renderUnitData.lightPicker = _useLight ? _lightPicker : null;
 			}
 		}
+        
+        CONFIG::netDebug {
+            public function getAnimatorElements() : Vector.<CompositeMesh> {
+                if (!_drawElements) {
+                    return null;
+                }
+                return this._animatorElements;
+            }
+            
+            public function getDrawElements() : Vector.<ObjectContainer3D> {
+                return _drawElements;
+            }
+        }
 
 		public function getBounds() : VolumeBounds
 		{
