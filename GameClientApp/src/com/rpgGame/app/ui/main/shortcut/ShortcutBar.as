@@ -11,6 +11,7 @@ package com.rpgGame.app.ui.main.shortcut {
     import com.rpgGame.core.manager.tips.TargetTipsMaker;
     import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
+    import com.rpgGame.coreData.SpriteStat;
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.cfg.LanguageConfig;
     import com.rpgGame.coreData.enum.JobEnum;
@@ -22,7 +23,15 @@ package com.rpgGame.app.ui.main.shortcut {
     import flash.display.Graphics;
     import flash.events.Event;
     import flash.geom.Point;
+    import flash.utils.clearInterval;
     import flash.utils.setInterval;
+    import flash.utils.setTimeout;
+    
+    import away3d.animators.CompositeAnimator;
+    import away3d.animators.KeyframeAnimator;
+    import away3d.animators.data.CompositeAnimatorInstance;
+    import away3d.containers.ObjectContainer3D;
+    import away3d.entities.Mesh;
     
     import feathers.controls.UIAsset;
     
@@ -33,6 +42,7 @@ package com.rpgGame.app.ui.main.shortcut {
     
     import starling.display.DisplayObject;
     import starling.display.Sprite;
+    import starling.events.Event;
     
     public class ShortcutBar extends SkinUI {
 		
@@ -41,6 +51,8 @@ package com.rpgGame.app.ui.main.shortcut {
         private var _skin : shortcut_Skin;
 		
 		private var _jumpState:Vector.<UIAsset>;
+
+		private var renderUint:RenderUnit3D;
         
         public function ShortcutBar() {
             this._skin = new shortcut_Skin();
@@ -123,8 +135,8 @@ package com.rpgGame.app.ui.main.shortcut {
 		{
 			var hp3D:InterObject3D= this.playInter3DAt(ClientConfig.getEffect(EffectUrl.XUE_TIAO_HONG),0,0,0);
 			hp3D.touchable=false;
-			var hpUint3D:RenderUnit3D=RenderUnit3D(hp3D.baseObj3D);
-			hpUint3D.setAddedCallBack(onAddHpEft,hp3D);
+			renderUint=RenderUnit3D(hp3D.baseObj3D);
+			renderUint.setAddedCallBack(onAddHpEft,hp3D);
 		}
 		
 		private function onAddHpEft(hp3D:InterObject3D,renderUint:RenderUnit3D):void
@@ -135,10 +147,6 @@ package com.rpgGame.app.ui.main.shortcut {
 			hp3D.x=this._skin.left_xuecao.x+17;
 			hp3D.y=this._skin.left_xuecao.y+this._skin.left_xuecao.height-12;
 			this._skin.left_xuecao.mask=hp3D;				
-			
-//			var hp:Number=	MainRoleManager.actorInfo.totalStat.hp/MainRoleManager.actorInfo.totalStat.life;
-//			var hpTime:int=Math.floor(target.totalDuration);
-//			renderUint.stop(5000);
 		}
 		
 		private function initFanGunDis():void

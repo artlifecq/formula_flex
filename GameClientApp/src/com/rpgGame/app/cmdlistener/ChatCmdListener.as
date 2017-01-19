@@ -19,6 +19,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.info.chat.PrivateChaterVo;
 	import com.rpgGame.coreData.type.EnumFunctionMessageBarIcoType;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
+	import com.rpgGame.netData.chat.message.ResChatMessage;
 	
 	import flash.utils.ByteArray;
 	
@@ -28,6 +29,7 @@ package com.rpgGame.app.cmdlistener
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
 	import org.client.mainCore.utils.Delegate;
+	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 	import org.game.netCore.net_protobuff.BytesUtil;
@@ -51,7 +53,10 @@ package com.rpgGame.app.cmdlistener
 //			SocketConnection.addCmdListener(ChatModuleMessages.S2C_GOODS_INFO_REPLY, onGetItemInfo);
 //			SocketConnection.addCmdListener(ChatModuleMessages.S2C_GOODS_INFO_REPLY_ERROR, onGetItemInfoError);
 			
-			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_COUNTRY_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_COUNTRY));
+			
+			SocketConnection.addCmdListener(112101, onResChatMessage );
+			
+//			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_COUNTRY_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_COUNTRY));
 			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_COUNTRY_CHAT_FAIL, onSendWorldFaile);
 			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_COUNTRY_CHAT_BROADCAST, getCountryBroadCast);
 			
@@ -95,10 +100,15 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_BROADCAST_MOOD_FAIL, onBroadcastMoodFail);
 			
 			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_FAMILY_CHAT_FAIL, onSendFamilyFaile);
-			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_FAMILY_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_FAMILY));
+//			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_FAMILY_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_FAMILY));
 			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_FAMILY_CHAT_BROADCAST, getFamilyBroadCast);
 			
 			finish();
+		}
+		
+		private function onResChatMessage(msg:ResChatMessage):void
+		{
+			EventManager.dispatchEvent(ChatEvent.SEND_SUCCESS,msg);
 		}
 		
 		/**
@@ -208,7 +218,7 @@ package com.rpgGame.app.cmdlistener
 		 */
 		private function getCountryBroadCast(buffer:ByteBuffer):void
 		{
-			showGetChatMessage(EnumChatChannelType.CHAT_CHANNEL_COUNTRY, getChatProto(buffer));
+//			showGetChatMessage(EnumChatChannelType.CHAT_CHANNEL_COUNTRY, getChatProto(buffer));
 		}
 		
 		/**
@@ -360,7 +370,7 @@ package com.rpgGame.app.cmdlistener
 		private function getWindowChatCast(buffer:ByteBuffer):void
 		{
 			var talkTime:Number = buffer.readVarint64();
-			var chatInfo:ChatInfo = getChatInfo(EnumChatChannelType.CHAT_CHANNEL_WINDOW, buffer);
+			/*var chatInfo:ChatInfo = getChatInfo(EnumChatChannelType.CHAT_CHANNEL_WINDOW, buffer);
 			chatInfo.talkTime = talkTime;
 			if(chatInfo)
 			{
@@ -378,7 +388,7 @@ package com.rpgGame.app.cmdlistener
 				{
 					EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_SHOW_TYPE, EnumFunctionMessageBarIcoType.CHAT_TYPE);
 				}
-			}
+			}*/
 		}
 		
 		/**
@@ -539,7 +549,7 @@ package com.rpgGame.app.cmdlistener
 				ChatWindowManager.addPrivateChatOfflineData(id,name,level);
 				ChatWindowManager.addWindowChatTargetId(id);
 				showIcon = true;
-				ChatSender.requestChatRecord(id);
+//				ChatSender.requestChatRecord(id);
 			}
 			if(showIcon)
 			{
@@ -554,12 +564,12 @@ package com.rpgGame.app.cmdlistener
 		 */
 		private function onGetUnionChatBroadCast(buffer:ByteBuffer):void
 		{
-			showGetChatMessage(EnumChatChannelType.CHAT_CHANNEL_COUNTRY, getChatProto(buffer) );
+//			showGetChatMessage(EnumChatChannelType.CHAT_CHANNEL_COUNTRY, getChatProto(buffer) );
 		}
 		
 		private function showGetChatMessage(channel:int, chatMessage:ChatContentProto):void
 		{
-			var chatInfo:ChatInfo = getChatInfoByChatMessage(channel,chatMessage);
+			/*var chatInfo:ChatInfo = getChatInfoByChatMessage(channel,chatMessage);
 			//不显示黑名单聊天内容
 			if(FriendManager.checkIsBlackList(chatInfo.id))
 			{
@@ -574,7 +584,7 @@ package com.rpgGame.app.cmdlistener
 			}
 			ChatDataManager.GetInstance().putChatData( chatInfo );
 			
-			EventManager.dispatchEvent( ChatEvent.GET_NEW_NORMAL_DATA, chatInfo );
+			EventManager.dispatchEvent( ChatEvent.GET_NEW_NORMAL_DATA, chatInfo );*/
 		}
 		
 		/**
@@ -800,7 +810,7 @@ package com.rpgGame.app.cmdlistener
 		 */
 		private function getFamilyBroadCast(buffer:ByteBuffer):void
 		{
-			showGetChatMessage(EnumChatChannelType.CHAT_CHANNEL_FAMILY,getChatProto(buffer));
+//			showGetChatMessage(EnumChatChannelType.CHAT_CHANNEL_FAMILY,getChatProto(buffer));
 		}
 		
 		/** 解析聊天附带 chatMessage proto */

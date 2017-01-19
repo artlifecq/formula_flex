@@ -252,9 +252,6 @@ package com.rpgGame.app.manager.chat
 					case CHAT_CHANNEL_WORLD: //11聊天框 子类型,世界频道
 						ChatManager.addMsgInChat($msg, EnumChatChannelType.CHAT_CHANNEL_WORLD);
 						break;
-					case CHAT_CHANNEL_ALLY: //12聊天框 子类型,国家频道
-						ChatManager.addMsgInChat($msg, EnumChatChannelType.CHAT_CHANNEL_COUNTRY);
-						break;
 					case CHAT_CHANNEL_NORMAL: //13聊天框 子类型,普通频道\场景
 						ChatManager.addMsgInChat($msg, EnumChatChannelType.CHAT_CHANNEL_NORMAL);
 						break;
@@ -266,12 +263,6 @@ package com.rpgGame.app.manager.chat
 						break;
 					case CHAT_CHANNEL_LABA: //16聊天框 子类型,喇叭频道
 						ChatManager.addMsgInChat($msg, EnumChatChannelType.CHAT_CHANNEL_LABA);
-						break;
-					case CHAT_CHANNEL_FAMILY: //17聊天框 子类型,家族频道
-						ChatManager.addMsgInChat($msg, EnumChatChannelType.CHAT_CHANNEL_FAMILY);
-						break;
-					case CHAT_CHANNEL_WINDOW: //18聊天框 子类型,窗口私聊
-						ChatManager.addMsgInChat($msg, EnumChatChannelType.CHAT_CHANNEL_WINDOW);
 						break;
 					case CHAT_CHANAEL_SYSTEM: //19聊天框 子类型,系统频道
 						ChatManager.addMsgInChat($msg, EnumChatChannelType.CHAT_CHANNEL_SYSTEM);

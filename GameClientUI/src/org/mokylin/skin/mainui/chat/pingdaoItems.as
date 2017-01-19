@@ -45,6 +45,11 @@ package org.mokylin.skin.mainui.chat
 			states = {
 				down:[
 						{target:"labelDisplay",
+							name:"color",
+							value:0x868276
+						}
+						,
+						{target:"labelDisplay",
 							name:"width",
 							value:40
 						}

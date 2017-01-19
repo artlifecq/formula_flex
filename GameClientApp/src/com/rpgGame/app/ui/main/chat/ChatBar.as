@@ -2,14 +2,24 @@ package com.rpgGame.app.ui.main.chat {
     import com.rpgGame.app.manager.chat.ChatInputManager;
     import com.rpgGame.app.manager.chat.ChatManager;
     import com.rpgGame.app.manager.chat.ChatSpeakHistoryManager;
+    import com.rpgGame.app.manager.chat.FaceGroupManager;
     import com.rpgGame.app.manager.chat.NoticeManager;
+    import com.rpgGame.app.manager.role.MainRoleManager;
+    import com.rpgGame.app.richText.RichTextCustomLinkType;
     import com.rpgGame.app.richText.RichTextCustomUtil;
     import com.rpgGame.app.richText.component.RichTextArea3D;
+    import com.rpgGame.app.ui.main.chat.laba.VipChatCanvas;
+    import com.rpgGame.core.events.ChatEvent;
     import com.rpgGame.core.manager.tips.TargetTipsMaker;
     import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ChatCfgData;
+    import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
+    import com.rpgGame.coreData.clientConfig.FaceInfo;
+    import com.rpgGame.coreData.info.MapDataManager;
+    import com.rpgGame.coreData.type.chat.EnumChatChannelType;
     import com.rpgGame.coreData.utils.ColorUtils;
+    import com.rpgGame.netData.chat.message.ResChatMessage;
     
     import flash.geom.Point;
     import flash.text.TextFormat;
@@ -17,20 +27,17 @@ package com.rpgGame.app.ui.main.chat {
     import flash.ui.Keyboard;
     
     import feathers.controls.Button;
-    import feathers.controls.Group;
     import feathers.controls.Scroller;
-    import feathers.controls.ToggleButton;
     import feathers.controls.text.Fontter;
     import feathers.core.ToggleGroup;
-    import feathers.events.FeathersEventType;
     
     import gameEngine2D.NetDebug;
     
     import gs.TweenLite;
     
+    import org.client.mainCore.manager.EventManager;
     import org.mokylin.skin.mainui.chat.chat_Skin;
     import org.mokylin.skin.mainui.chat.pingdaoItems;
-    import org.mokylin.skin.mainui.chat.button.ButtonChat_siliao;
     
     import starling.core.Starling;
     import starling.display.DisplayObject;
@@ -48,16 +55,17 @@ package com.rpgGame.app.ui.main.chat {
 		
 		private static const DEFAULT_CHAT_TEXT:String = "输入内容，点击发送";
 		
-		private static const CHANNEL_NAME:Array=["世界","喇叭",/*"系统","公告",*/"帮会","当前","队伍","私聊",/*"跨服"*/];
+		
+		private static const CHANNEL_TYPES:Array=[EnumChatChannelType.CHAT_CHANNEL_LABA,EnumChatChannelType.CHAT_CHANNEL_WORLD,
+			EnumChatChannelType.CHAT_CHANNEL_PARTY,EnumChatChannelType.CHAT_CHANNEL_TEAM,EnumChatChannelType.CHAT_CHANNEL_SILIAO,
+			EnumChatChannelType.CHAT_CHANNEL_NORMAL];
+		private static const CHANNEL_NAME:Array=["喇叭","世界","帮会","队伍","私聊","当前"];
         private static const CHANNEL_NUM:int=CHANNEL_NAME.length;
 		
 		private static const CHANNEL_ZHONGHE:Array=[0,1,2,3,4,5];
 		private static const CHANNEL_SHEJIAO:Array=[0,1,2,3,4,5];
 		private static const CHANNEL_GEREN:Array=[3,4,5];
 		private static const CHANNEL_ITEMS:Array=[CHANNEL_ZHONGHE,CHANNEL_SHEJIAO,CHANNEL_GEREN];
-		
-		private var _curr_items:Array;		
-		
 		
         private var _skin : chat_Skin;
         
@@ -92,6 +100,11 @@ package com.rpgGame.app.ui.main.chat {
         private var _channelBtns:Vector.<Button>;
         private var _channelItems:Vector.<Button>;
 		
+		/**当前输入的频道*/
+		private var _curSendChannel:int;
+		private var _vipChatCanvas:VipChatCanvas;
+		private var _curShowTab:int;
+		
         
         public function ChatBar() {
             this._skin = new chat_Skin();
@@ -101,12 +114,16 @@ package com.rpgGame.app.ui.main.chat {
             this._initScaleY = this._skin.btn_scale.y;
             this._initBgWidth = this._skin.bg.width;
             this._initBgHeight = this._skin.bg.height;
-            this._initVScollerHeight = this._skin.vscrollbar.height;
-            this._initVScollerWidth = this._skin.vscrollbar.width;
+			
+            this._initVScollerHeight =_initBgHeight;
+            this._initVScollerWidth =_initBgWidth;
             this._initInputBgWidth = this._skin.inputbg.width;
             this._initSendX = this._skin.btn_send.x;
 //            this._initGroupButtomRightX = this._skin.grp_buttomR.x;
             this._initGroupTopY = this._skin.grp_top.y;
+			
+			this._skin.vscrollbar.x=0;
+			
             this._initVScollerY = this._skin.vscrollbar.y;
             this._initVScollerX = this._skin.vscrollbar.x;
             this._initBgY = this._skin.bg.y;
@@ -119,14 +136,15 @@ package com.rpgGame.app.ui.main.chat {
             defaultFormat.letterSpacing = 1;
             defaultFormat.leading = 5;
             
-            this._chatText = new RichTextArea3D(this._initBgWidth - this._initVScollerWidth - this._initVScollerX, 0, ColorUtils.getDefaultStrokeFilter());
+            this._chatText = new RichTextArea3D(this._initBgWidth -5, 0, ColorUtils.getDefaultStrokeFilter());
             this._chatText.setConfig(RichTextCustomUtil.cloneChatUnitConfigVec());
             this._chatText.wordWrap = true;
             this._chatText.multiline = true;
             this._chatText.defaultTextFormat = defaultFormat;
             this._chatText.text = "";
-            this._chatText.x = this._initVScollerWidth;//this._skin.vscrollbar.width;
-            this._skin.vscrollbar.verticalScrollBarPosition = Scroller.VERTICAL_SCROLL_BAR_POSITION_LEFT;
+            this._chatText.x = 0;//this._skin.vscrollbar.width;
+		
+            this._skin.vscrollbar.verticalScrollBarPosition = Scroller.VERTICAL_SCROLL_BAR_POSITION_RIGHT;
             this._skin.vscrollbar.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
             this._skin.vscrollbar.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
             this._skin.vscrollbar.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_FIXED;
@@ -149,31 +167,106 @@ package com.rpgGame.app.ui.main.chat {
             
 //            this._skin.btn_dangqian.gotoAndStop(1);
             
-            this.addEventListener(TouchEvent.TOUCH, this.onTouchEventHandler);
-            Starling.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, this.onKeyboardEventHandler);
-            
 			this._skin.btn_open.x=this._skin.btn_send.x+this._skin.btn_send.width;
 			
             this.setOpenOrClose(true);
 			
+			//初始化喇叭显示框
+			_vipChatCanvas = new VipChatCanvas();
+			addChildAt( _vipChatCanvas, 0 );
+			_vipChatCanvas.x = 0;
+			_vipChatCanvas.y = -10;
+			
 			//初始化按钮Tips
 			TipTargetManager.show( _skin.btn_location, TargetTipsMaker.makeSimpleTextTips("添加当前位置信息"));
 			TipTargetManager.show( _skin.btn_send, TargetTipsMaker.makeSimpleTextTips("按回车键发送消息"));
-			
+			//mouseOut();
 			initChatChannel();
 			initTabBar();
+			initEvent();
         }
+		
+		private function initEvent():void
+		{
+			//MouseListenerUtil.addEventListener( this, null, mouseOver, mouseOut );			
+			
+			EventManager.addEvent(ChatEvent.SWITCH_PRIVATE_CHANNEL,onSwitchPrivateChannel);
+			EventManager.addEvent(ChatEvent.SEND_SUCCESS, onSendSuccess);
+			
+			this.addEventListener(TouchEvent.TOUCH, this.onTouchEventHandler);
+			Starling.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, this.onKeyboardEventHandler);
+		}
+		
+		/**
+		 * 自己的消息发送成功了
+		 * @param info
+		 * 
+		 */		
+		private function onSendSuccess( info:ResChatMessage ):void 
+		{
+			showChatMsg( info );
+		}
+		
+		/**
+		 * 显示一条消息
+		 * @param info
+		 * 
+		 */		
+		private function showChatMsg( info:ResChatMessage ):void
+		{
+			_chatText.appendRichText( ChatUtil.getChatMessageByChannel( info.type, info.chatText ) );
+			updateScroller();
+			_inputText.text="";
+		}
+		
+		private function onSwitchPrivateChannel(targetID:Number, targetName:String):void
+		{
+			changeCurrChannel(EnumChatChannelType.CHAT_CHANNEL_SILIAO);
+			
+			ChatManager.currentSiLiaoTargetID = targetID;
+			ChatManager.currentSiLiaoTargetName = targetName;
+			var siLiaoTag:String ="你悄悄对 " + targetName +  " 说:";
+		}
+		
+		
+		private function mouseOut():void
+		{
+			if( this._skin.btn_open.visible){
+				return;
+			}
+			_skin.grp_buttom.visible=false;
+			_skin.grp_top.visible=false;
+			_skin.btn_lock.visible=false;
+			_skin.lb_tishi.visible=false;
+			_skin.grp_laba.visible=false;
+			_skin.btn_scale.visible=false;
+			_skin.grp_select.visible=false;
+			hideSelectChannel();
+		}
+		
+		private function mouseOver():void
+		{
+			_skin.grp_buttom.visible=true;
+			_skin.grp_top.visible=true;
+			_skin.btn_lock.visible=true;
+			_skin.lb_tishi.visible=true;
+			_skin.grp_laba.visible=true;
+			_skin.btn_scale.visible=true;
+			_skin.grp_select.visible=true;
+		}
 		
 		private function initChatChannel():void
 		{
 			_skin.select_bg.visible=false;
+			_skin.grp_channel.visible=false;
 			_channelBtns=new Vector.<Button>();
-			_channelBtns.push(_skin.btn_shijie);
 			_channelBtns.push(_skin.btn_laba);
+			_channelBtns.push(_skin.btn_shijie);
 			_channelBtns.push(_skin.btn_banghui);
-			_channelBtns.push(_skin.btn_dangqian);
 			_channelBtns.push(_skin.btn_duiwu);
 			_channelBtns.push(_skin.btn_siliao);
+			_channelBtns.push(_skin.btn_dangqian);
+			
 			_channelItems=new Vector.<Button>();
 			for (var i:int = 0; i <CHANNEL_NUM; i++) 
 			{
@@ -184,9 +277,11 @@ package com.rpgGame.app.ui.main.chat {
 				item.width = 40;
 				item.height=20;
 				
-				item.x = 5;
+				item.x = 7;
 				_channelItems.push(item);
 			}
+			
+			changeCurrChannel(5);
 		}
 		
 		private function initTabBar():void
@@ -205,10 +300,11 @@ package com.rpgGame.app.ui.main.chat {
 			var elementsContent:Array=[];
 			var list:Array=CHANNEL_ITEMS[_toggleGroup.selectedIndex];
 			var num:int=list.length;
-			for(var i:int=0;i<num;i++){
+			var i:int;
+			for(i=0;i<num;i++){
 				var btn:Button=_channelItems[list[i]];
 				if(i==0){
-					btn.y=0;
+					btn.y=7;
 				}else{
 					btn.y=elementsContent[i-1].y+elementsContent[i-1].height+2;
 				}
@@ -217,32 +313,12 @@ package com.rpgGame.app.ui.main.chat {
 			_skin.grp_channel.elementsContent=elementsContent;
 			_skin.select_bg.height=_skin.grp_channel.height;
 			_skin.select_bg.y=_skin.btn_laba.y-_skin.select_bg.height;
+			_curShowTab=_toggleGroup.selectedIndex;
 		}
 		
 		private function setChatType(type:int):void
 		{
 			_toggleGroup.selectedIndex=type;
-		}
-		
-		/**
-		 * 处理页签设置后的更新
-		 * 
-		 */
-		private function onChatTabsSetet():void
-		{
-		/*	var currentTab:int = _curShowTab;
-			_chatBarSkin.tabBar.dataProvider = ChatManager.getChatAllTab();
-			if(currentTab < _chatBarSkin.tabBar.dataProvider.length)
-			{
-				_chatBarSkin.tabBar.selectedIndex = currentTab;
-			}
-			updateBtnSetX();*/
-		}
-		
-		private function updateBtnSetX():void
-		{
-			/*var tabArr:Array = 	_chatBarSkin.tabBar.dataProvider.data as Array;
-			_chatBarSkin.btnSet.x = _chatBarSkin.tabBar.x+(_chatBarSkin.tabBar.btnWidth+1)*tabArr.length;*/
 		}
 		
 		
@@ -257,6 +333,29 @@ package com.rpgGame.app.ui.main.chat {
             CONFIG::netDebug {
                 NetDebug.LOG("[ChatBar] [onTouchTarget] targetName:" + target.name);
             }
+				
+				switch(target){
+					case this._skin.btn_dangqian:
+					case this._skin.btn_siliao:
+					case this._skin.btn_duiwu:
+					case this._skin.btn_banghui:
+					case this._skin.btn_shijie:
+					case this._skin.btn_laba:
+						toggleSelectChannel();
+						return;
+				}
+				
+				if(target is Button){
+					var channelBtnIndex:int=_channelItems.indexOf(Button(target));
+					if(channelBtnIndex!=-1){
+						toggleSelectChannel();
+						changeCurrChannel(channelBtnIndex);
+						return;
+					}
+				}
+				
+			hideSelectChannel();
+				
             switch (target) {
                 case this._skin.btn_send:
 					this.sendMsg();
@@ -267,16 +366,34 @@ package com.rpgGame.app.ui.main.chat {
                 case this._skin.btn_close:
                     this.setOpenOrClose(false);
                     break;
-				
-				case this._skin.btn_dangqian:
-					showSelectChannel();
-					break;
             }
         }
 		
-		private function showSelectChannel():void
+		/**
+		 *设置当前频道 
+		 * @param type
+		 * 
+		 */
+		private function changeCurrChannel(type:int):void
 		{
-			_skin.select_bg.visible=true;
+			var num:int=_channelBtns.length;
+			for(var i:int=0;i<num;i++){
+				_channelBtns[i].visible=false;
+			}
+			
+			_channelBtns[type].visible=true;
+			_curSendChannel=CHANNEL_TYPES[type];
+		}
+		
+		private function toggleSelectChannel():void
+		{
+			var showState:Boolean=_skin.select_bg.visible;
+			_skin.grp_channel.visible=_skin.select_bg.visible=!showState;
+		}
+		
+		private function hideSelectChannel():void
+		{
+			_skin.grp_channel.visible=_skin.select_bg.visible=false;
 		}
 		
         private function onTouchEventHandler(e : TouchEvent) : void {
@@ -284,7 +401,21 @@ package com.rpgGame.app.ui.main.chat {
             var touch : Touch = e.getTouch(this._skin.btn_scale, TouchPhase.BEGAN);
             if (touch) {
                 this.setAdjustSizeState(true);
+				return;
             }
+			
+			
+			touch=e.getTouch(_skin.btn_face,TouchPhase.ENDED);
+			if(touch != null)
+			{
+				onShowFaceListView();
+			}
+			
+			touch = e.getTouch(_skin.btn_location,TouchPhase.ENDED);
+			if(touch != null)
+			{
+				onAddLocation();
+			}
 			
             touch = e.getTouch(this._skin.btn_scale, TouchPhase.ENDED);
             if (touch) {
@@ -293,8 +424,55 @@ package com.rpgGame.app.ui.main.chat {
             if (this._isAdjustSize) {
                 this.adjustSize();
             }
+			
+		/*	touch = e.getTouch(Starling.current.stage,TouchPhase.ENDED);
+			if(touch){
+				hideSelectChannel();
+			}*/
         }
-        
+		
+		/**
+		 * 添加坐标到输入文本
+		 * 
+		 */
+		private function onAddLocation():void
+		{
+			var countryName : String = "[" + CountryNameCfgData.getCountryNameById(MainRoleManager.actorInfo.countryId) + "]";
+			var sceneID:String = MapDataManager.currentScene.sceneId.toString();
+			var xy:String = int(MainRoleManager.actor.x) + "," + int(MainRoleManager.actor.z);
+			var posName:String = countryName + MapDataManager.currentScene.name + "(" + xy + ")";
+			var locationCode:String = RichTextCustomUtil.getTextLinkCode(posName,-1,RichTextCustomLinkType.POSITION_TYPE,sceneID + "," + xy);
+			if(_inputText.text == DEFAULT_CHAT_TEXT)
+			{
+				_inputText.text = "";
+			}
+			_inputText.appendRichText(locationCode);
+		}
+		
+		private function onShowFaceListView():void
+		{
+			var point:Point = _skin.btn_face.localToGlobal(new Point());
+			FaceGroupManager.instance.showOrHide(onAddFace,point.x,point.y);
+		}
+		
+		/**
+		 * 添加表情
+		 * @param faceInfo
+		 * 
+		 */
+		private function onAddFace(faceInfo : FaceInfo):void
+		{
+			if(_inputText.text == DEFAULT_CHAT_TEXT)
+			{
+				_inputText.text = faceInfo.str;
+			}
+			else
+			{
+				_inputText.appendRichText(faceInfo.str);
+			}
+		}
+		
+		
         private function onKeyboardEventHandler(e : KeyboardEvent) : void {
             do {
                 if (this._inputText.isInputFocus) {
@@ -343,7 +521,7 @@ package com.rpgGame.app.ui.main.chat {
             
             this._skin.bg.width = this._initBgWidth + dx;
             this._skin.bg.height = this._initBgHeight - dy;
-            this._skin.vscrollbar.height = this._initVScollerHeight - dy;
+            this._skin.vscrollbar.height =178;
             this._skin.vscrollbar.width = this._initBgWidth + dx - this._initVScollerX;
             this._skin.bg.y = this._initBgY + dy;
             this._skin.vscrollbar.y = this._initVScollerY + dy;
@@ -417,7 +595,9 @@ package com.rpgGame.app.ui.main.chat {
 				NoticeManager.mouseFollowNotify("请勿重复发言");
 				return;
 			}
-//			ChatManager.reqSendChat( sendMsg, _curSendChannel, ChatManager.currentSiLiaoTargetID, ChatManager.currentSiLiaoTargetName );
+			
+			ChatManager.currentSiLiaoTargetName=MainRoleManager.actorInfo.name;
+			ChatManager.reqSendChat( sendMsg, _curSendChannel,  ChatManager.currentSiLiaoTargetName );
         }
         
         private function updateScroller() : void {
