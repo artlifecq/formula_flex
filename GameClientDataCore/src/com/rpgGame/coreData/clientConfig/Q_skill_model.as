@@ -22,7 +22,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_skillpanel_description1:String;
 		 /**  技能面板上的技能进阶效果描述 */
 		public var q_skillpanel_description2:String;
-		 /**  职业技能(1:兵家 2：墨家 3：医家 0：不分职业-公共技能) */
+		 /**  职业技能(1:兵家 2：墨家男3：墨家女 4：医家 0：不分职业-公共技能) */
 		public var q_job:int;
 		 /**  技能阶数(不能超过255) */
 		public var q_grade:int;
@@ -36,6 +36,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_spell_effect:int;
 		 /**  位移类型（客户端），0-无 1-冲锋 2-跳劈 3-闪烁 4-翻滚 */
 		public var q_blink_type:int;
+		 /**  位移距离 */
+		public var q_blink_range:int;
 		 /**  位移速度，填每秒飞行像素 */
 		public var q_blink_speed:int;
 		 /**  跳劈的高度，可以不配置 */
@@ -54,11 +56,11 @@ package com.rpgGame.coreData.clientConfig
 		public var q_affect_target:int;
 		 /**  能否边走边放，1表示可以，0或者不配表示不行，默认不行 */
 		public var q_can_walk_release:int;
-		 /**  是否可以激活自动施法 */
+		 /**  是否可以激活自动施法(0激活) */
 		public var q_is_allow_auto_combat:int;
 		 /**  是否可以设为默认技能（0不可设为默认技能，1可以设为默认技能） */
 		public var q_default_enable:int;
-		 /**  是否是锁定技能，必须指定一个目标的技能 */
+		 /**  是否是锁定技能，必须指定一个目标的技能（0不锁定，1锁定） */
 		public var q_is_locking_spell:int;
 		 /**  显示所需人物等级 */
 		public var q_show_needgrade:int;
@@ -211,7 +213,7 @@ package com.rpgGame.coreData.clientConfig
 		 /**  施法时是否要震屏 */
 		public var q_shake_screen:int;
 		 /**  扩展字段 */
-		public var q_other:int;
+		public var q_other:String;
 
 	}
 }

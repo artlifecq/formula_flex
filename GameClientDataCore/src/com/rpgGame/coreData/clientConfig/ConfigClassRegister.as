@@ -58,15 +58,15 @@ package com.rpgGame.coreData.clientConfig
 		public static const AvatarClothesEffectRes:String = "data.model.AvatarClothesEffectRes";
 		/**  衣服换模型						 */
 		public static const AvatarClothesRes:String = "data.model.AvatarClothesRes";
-		/**  换装副武器资源配置							 */
+		/**  副武器资源							 */
 		public static const AvatarDeputyWeaponRes:String = "data.model.AvatarDeputyWeaponRes";
-		/**  换装头发资源配置ID		 */
+		/**  头发资源		 */
 		public static const AvatarHairRes:String = "data.model.AvatarHairRes";
 		/**  换装坐骑资源配置ID		 */
 		public static const AvatarMountRes:String = "data.model.AvatarMountRes";
 		/**  换装武器特效资源配置				 */
 		public static const AvatarWeaponEffectRes:String = "data.model.AvatarWeaponEffectRes";
-		/**  换装武器资源配置ID							 */
+		/**  主武器资源							 */
 		public static const AvatarWeaponRes:String = "data.model.AvatarWeaponRes";
 		/**  换装头发资源配置ID		 */
 		public static const BaZhenTuRes:String = "data.model.BaZhenTuRes";
@@ -74,7 +74,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const HeroModel:String = "data.model.HeroModel";
 		/**  坐骑模型表	功能名称	动画资源名称 */
 		public static const MountModel:String = "data.model.MountModel";
-		/**  怪物列表																																																								 */
+		/**  怪物列表																																																									 */
 		public static const Q_monster:String = "data.monster.Q_monster";
 		/**  NPC配置数据库																																																 */
 		public static const Q_npc:String = "data.monster.Q_npc";
@@ -98,7 +98,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_buff:String = "data.spell.Q_buff";
 		/**  公共CD表	 */
 		public static const Q_GCD:String = "data.spell.Q_GCD";
-		/**  技能基本信息配置数据表																																																																																																			 */
+		/**  技能基本信息配置数据表																																																																																																				 */
 		public static const Q_skill_model:String = "data.spell.Q_skill_model";
 		/**  技能效果配置表																			 */
 		public static const Q_SpellAnimation:String = "data.spell.Q_SpellAnimation";

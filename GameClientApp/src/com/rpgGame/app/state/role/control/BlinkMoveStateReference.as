@@ -30,7 +30,7 @@ package com.rpgGame.app.state.role.control
 		
 		private var _soarFrameTime : int;
 		private var _hitFrameTime : int;
-		private var _breakFrameTime : int;
+//		private var _breakFrameTime : int;
 		private var _throwDelayTime : int;
 
 		public function BlinkMoveStateReference()
@@ -39,7 +39,7 @@ package com.rpgGame.app.state.role.control
 		}
 
 		public function setParams(atkorPos : Point, targetPos : Point, moveSpeed : int, blinkHeight : int, 
-								  soarFrameTime : int, hitFrameTime : int, breakFrameTime : int, spellInfo : ReleaseSpellInfo) : void
+								  soarFrameTime : int, hitFrameTime : int, spellInfo : ReleaseSpellInfo) : void
 		{
 			_spellInfo = spellInfo;
 			_atkorPos = atkorPos;
@@ -50,7 +50,7 @@ package com.rpgGame.app.state.role.control
 			
 			_soarFrameTime = soarFrameTime;
 			_hitFrameTime = hitFrameTime;
-			_breakFrameTime = breakFrameTime;
+//			_breakFrameTime = breakFrameTime;
 			_throwDelayTime = _spellInfo.throwDelayTime;
 		}
 
@@ -113,10 +113,10 @@ package com.rpgGame.app.state.role.control
 			return _hitFrameTime;
 		}
 
-		public function get breakFrameTime() : int
-		{
-			return _breakFrameTime;
-		}
+//		public function get breakFrameTime() : int
+//		{
+//			return _breakFrameTime;
+//		}
 
 		public function get throwDelayTime() : int
 		{

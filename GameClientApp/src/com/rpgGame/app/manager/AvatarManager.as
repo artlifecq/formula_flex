@@ -316,6 +316,37 @@ package com.rpgGame.app.manager
 			{
 				role.avatar.removeRenderUnitByID(RenderUnitType.DEPUTY_WEAPON, RenderUnitID.DEPUTY_WEAPON);
 			}
+			
+			var rpd_deputyWeapon_effect : RenderParamData = avatarInfo.rpd_deputyWeapon_effect;
+			if (rpd_deputyWeapon_effect != null)
+			{
+				if (rpd_body)
+				{
+					if (rpd_body.animatorSourchPath)
+					{
+						ru = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.b_l_wq_01, rpd_deputyWeapon_effect);
+					}
+					else
+					{
+						ru = role.avatar.addRenderUnitToBone(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.b_l_wq_01, rpd_deputyWeapon_effect);
+					}
+				}
+				if (ru)
+				{
+					ru.setAddedCallBack(partAddedCallBack, role);
+					ru.entityGlass = false;
+					ru.useLight = false;
+					ru.castsShadows = false;
+					ru.repeat = 0;
+					ru.position = avatarInfo.deputyWeaponEffectOffset || new Vector3D();
+					ru.setScale(avatarInfo.deputyWeaponEffectScale > 0 ? avatarInfo.deputyWeaponEffectScale * 0.01 : 1);
+					ru.play(0);
+				}
+			}
+			else
+			{
+				role.avatar.removeRenderUnitByID(RenderUnitType.DEPUTY_WEAPON_EFFECT, RenderUnitID.DEPUTY_WEAPON_EFFECT);
+			}
 		}
 
 		private static function updateEffect(role : SceneRole) : void
@@ -419,6 +450,9 @@ package com.rpgGame.app.manager
 			var weaponEffectScale : int = 0;
 			var weaponEffectOffset : Vector3D = null;
 			var deputyWeaponResID : String = null;
+			var deputyWeaponEffectResID : String = "";
+			var deputyWeaponEffectScale : int = 0;
+			var deputyWeaponEffectOffset : Vector3D = null;
 			var bodyEffectResID : String = null;
 			var heroModel : HeroModel = HeroModelCfgData.getInfo(roleData.body);
 			var mountModel : MountModel = MountModelCfgData.getInfo(0);
@@ -513,6 +547,9 @@ package com.rpgGame.app.manager
 				if (deputyWeaponRes)
 				{
 					deputyWeaponResID = deputyWeaponRes.res;
+					deputyWeaponEffectResID = deputyWeaponRes.effectRes;
+					deputyWeaponEffectScale = deputyWeaponRes.effectScale;
+					deputyWeaponEffectOffset = new Vector3D(deputyWeaponRes.effectOffsetX, deputyWeaponRes.effectOffsetY, deputyWeaponRes.effectOffsetZ);
 				}
 			}
 
@@ -530,6 +567,9 @@ package com.rpgGame.app.manager
 			roleData.avatarInfo.weaponEffectScale = weaponEffectScale;
 			roleData.avatarInfo.weaponEffectOffset = weaponEffectOffset;
 			roleData.avatarInfo.deputyWeaponResID = deputyWeaponResID;
+			roleData.avatarInfo.deputyWeaponEffectID = deputyWeaponEffectResID;
+			roleData.avatarInfo.deputyWeaponEffectScale = deputyWeaponEffectScale;
+			roleData.avatarInfo.deputyWeaponEffectOffset = deputyWeaponEffectOffset;
 			if (mountResID)
 			{
 				var ref : RidingStateReference = role.stateMachine.getReference(RidingStateReference) as RidingStateReference;

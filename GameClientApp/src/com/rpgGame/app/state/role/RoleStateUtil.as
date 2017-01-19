@@ -339,10 +339,10 @@ package com.rpgGame.app.state.role
 		}
 
 		public static function blinkToPos(role : SceneRole, statusType : String, atkorPos : Point, targetPos : Point, speed : int, blinkHeight : int, 
-										  soarFrameTime : int, hitFrameTime : int, breakFrameTime : int, spellInfo : ReleaseSpellInfo) : void
+										  soarFrameTime : int, hitFrameTime : int, spellInfo : ReleaseSpellInfo) : void
 		{
 			var moveRef : BlinkMoveStateReference = role.stateMachine.getReference(BlinkMoveStateReference) as BlinkMoveStateReference;
-			moveRef.setParams(atkorPos, targetPos, speed, blinkHeight, soarFrameTime, hitFrameTime, breakFrameTime, spellInfo);
+			moveRef.setParams(atkorPos, targetPos, speed, blinkHeight, soarFrameTime, hitFrameTime, spellInfo);
 			moveRef.data = spellInfo;
 			moveRef.onAfterExecute(onBlinkExecute, statusType, spellInfo);
 			moveRef.onHitFrame(onBlinkMoveHitFrame, role);
@@ -354,7 +354,7 @@ package com.rpgGame.app.state.role
 			if (!spellInfo.atkor || !spellInfo.atkor.usable)
 				return;
 			var actionRef : BlinkStateReference = spellInfo.atkor.stateMachine.getReference(BlinkStateReference) as BlinkStateReference;
-			actionRef.setParams(statusType, spellInfo.blinkType == SpellBlinkType.TIAO_PI, ref.totalTime, ref.soarFrameTime, ref.hitFrameTime, ref.breakFrameTime, ref.throwDelayTime);
+			actionRef.setParams(statusType, spellInfo.blinkType == SpellBlinkType.TIAO_PI, ref.totalTime, ref.soarFrameTime, ref.hitFrameTime, ref.throwDelayTime);
 			actionRef.data = spellInfo;
 			spellInfo.atkor.stateMachine.transition(RoleStateType.ACTION_BLINK, actionRef, true);
 			SpellAnimationHelper.addKnifeLightEffect(ref.spellInfo);
