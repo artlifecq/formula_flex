@@ -28,6 +28,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.lang.LangNoticeInfo;
 	import com.rpgGame.coreData.role.BaseEntityData;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
@@ -37,6 +38,8 @@ package com.rpgGame.app.fight.spell
 	import flash.geom.Vector3D;
 	
 	import away3d.pathFinding.DistrictWithPath;
+	
+	import gameEngine2D.NetDebug;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
@@ -107,7 +110,8 @@ package com.rpgGame.app.fight.spell
 
 		public static function shortcutsTryCaseSpell(spellID : int) : void
 		{
-			var cased : Boolean = tryCaseSpell(new CastSpellInfo(getSpellData(spellID)));
+            var caseInfo : CastSpellInfo = new CastSpellInfo(getSpellData(spellID));
+			var cased : Boolean = tryCaseSpell(caseInfo);
 //			if (!cased)
 //				TrusteeshipManager.getInstance().nextSpell = getSpellData(spellType);
 		}
@@ -119,6 +123,19 @@ package com.rpgGame.app.fight.spell
 			var caseState : int = caseSpell(caseInfo, true);
 			if (!caseInfo.caseSpellData)
 				return false;
+            var info : HeroData = MainRoleManager.actorInfo;
+            if (caseInfo.caseSpellData.q_need_mp > info.totalStat.mp) {
+                NoticeManager.showNotify(LangNoticeInfo.CastSpellByBinding);
+                return false;
+            }
+            if (null != SceneRoleSelectManager.selectedRole) {
+                var modeState : int = FightManager.getFightRoleState(SceneRoleSelectManager.selectedRole);
+                if (modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY &&
+                    modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND) {
+                    NoticeManager.showNotify(LangNoticeInfo.NotAttack);
+                    return false;
+                }
+            }
 			var targerRole : SceneRole = null;
 			if (caseState == CASE_STATE_SUCCEED)
 			{
@@ -715,7 +732,7 @@ package com.rpgGame.app.fight.spell
 			return targetPos;
 		}*/
 
-		private static function getNearestCanAtkRole(spellData : Q_skill_model) : SceneRole
+		public static function getNearestCanAtkRole(spellData : Q_skill_model) : SceneRole
 		{
 			var list : Vector.<SceneRole> = _roleList ? _roleList : SceneManager.getSceneRoleList();
 			list.sort(onSortNearestRole);
