@@ -102,17 +102,29 @@ package com.rpgGame.app.manager.input
                 return;
             }
             var canRoll : Boolean = RollManager.INSTANCE.canUseRoll();
-            if (canRoll) {
-                if (1 == MainRoleManager.actorInfo.job) {
+            if (canRoll)
+			{
+                if (1 == MainRoleManager.actorInfo.job)
+				{
                     CastSpellHelper.shortcutsTryCaseSpell(1);
-                } else if (2 == MainRoleManager.actorInfo.job) {
+                }
+				else if (2 == MainRoleManager.actorInfo.job)
+				{
                     CastSpellHelper.shortcutsTryCaseSpell(2);
-                } else if (3 == MainRoleManager.actorInfo.job) {
+                } 
+				else if (3 == MainRoleManager.actorInfo.job) 
+				{
                     CastSpellHelper.shortcutsTryCaseSpell(3);
                 }
-             } else {
+				else
+				{
+					CastSpellHelper.shortcutsTryCaseSpell(3);
+				}
+             } 
+			else 
+			{
                  NoticeManager.showNotify(LangNoticeInfo.RollInCd);
-             }
+            }
         }
 
 		private function jump(bool : Boolean) : void
