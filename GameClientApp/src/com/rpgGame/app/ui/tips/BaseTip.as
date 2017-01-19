@@ -1,6 +1,8 @@
 package com.rpgGame.app.ui.tips
 {
 	
+	import org.mokylin.skin.app.tips.BaseTipsSkin;
+	
 	import starling.display.Sprite;
 	
 	public class BaseTip extends Sprite
@@ -21,7 +23,7 @@ package com.rpgGame.app.ui.tips
 		
 		private function createBg():void
 		{
-//			tipBGSkin = new BaseTipsSkin();
+			tipBGSkin = new BaseTipsSkin();
 			addChild( tipBGSkin.imgBG );
 		}
 		

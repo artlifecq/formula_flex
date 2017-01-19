@@ -103,6 +103,9 @@ package com.rpgGame.app.ui.main.smallmap {
             this._smallMap.y = this._skin.UIMap.y;
             this._skin.grp_cont.addChildAt(this._smallMap, this._skin.grp_cont.getChildIndex(this._skin.UIMap) + 1);
             this._smallMap.mask = mask;
+			
+			this._skin.lbLocation.width=110;
+			this._skin.lbLocation.wordWrap=false;
         }
         
         private function setState(isOpen : Boolean) : void {
@@ -154,7 +157,7 @@ package com.rpgGame.app.ui.main.smallmap {
         private function timerUpdate() : void {
             if (MapDataManager.currentScene) {
                 this._skin.lbName.text = MapDataManager.currentScene.name;
-                this._skin.lbLocation.text = "(" + int(MainRoleManager.actor.position.x) + "," + int(MainRoleManager.actor.position.z) + ")";
+                this._skin.lbLocation.text = "(" + int(MainRoleManager.actor.position.x) + "," + Math.abs(int(MainRoleManager.actor.position.z)) + ")";
             }
             //this._smallMap.timerUpdate();
         }

@@ -62,7 +62,7 @@ package com.rpgGame.app.manager.tips
 				_waiteTipsCfgId = cfgId;
 				_waiteItemInfo = itemInfo;
 				_waitePos = pos;
-				ChatSender.sendToGetItmeInfo(cfgId);
+//				ChatSender.sendToGetItmeInfo(cfgId);
 			}
 		}
 		
@@ -77,7 +77,7 @@ package com.rpgGame.app.manager.tips
 				_waiteTipsCfgId = cfgId;
 				_waiteGetShowItemVo = getShowItemVo;
 				_waitePos = pos;
-				ChatSender.sendToGetItmeInfo(cfgId);
+//				ChatSender.sendToGetItmeInfo(cfgId);
 			}
 		}
 

@@ -1,11 +1,21 @@
 package com.rpgGame.app.ui.main.navigation {
     import com.rpgGame.core.app.AppConstant;
     import com.rpgGame.core.app.AppManager;
+    import com.rpgGame.core.manager.tips.TargetTipsMaker;
+    import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
+    import com.rpgGame.coreData.cfg.ClientConfig;
+    
+    import flash.utils.setInterval;
+    
+    import feathers.controls.Button;
     
     import gameEngine2D.NetDebug;
     
     import gs.TweenLite;
+    import gs.easing.EaseLookup;
+    import gs.easing.Elastic;
+    import gs.easing.Expo;
     
     import org.mokylin.skin.mainui.navigation.navigation_main_Skin;
     
@@ -19,24 +29,30 @@ package com.rpgGame.app.ui.main.navigation {
         private var _normalN1X : int;
         private var _normalN1W : int;
         private var _gapN1X : int;
-        private var _gapN2X : int;
-        private var _gapN3X : int;
-        private var _gapN4X : int;
-        private var _gapN5X : int;
-        private var _gapN6X : int;
         
         public function NavigationBar() {
             this._skin = new navigation_main_Skin();
             super(this._skin);
             
-            this._gapN1X = this._skin.btn_n1.x;
-            this._gapN2X = this._skin.btn_n2.x - this._skin.btn_n1.x;
-            this._gapN3X = this._skin.btn_n3.x - this._skin.btn_n1.x;
-            this._gapN4X = this._skin.btn_n4.x - this._skin.btn_n1.x;
-            this._gapN5X = this._skin.btn_n5.x - this._skin.btn_n1.x;
-            this._gapN6X = this._skin.btn_n6.x - this._skin.btn_n1.x;
+            this._gapN1X = this._skin.btns.x;
+			
+			this._skin.btns.parent.setChildIndex(this._skin.btns,0);
             this.setState(true);
+			
+			
+			if (!ClientConfig.isBanShu)
+			{
+				TipTargetManager.show(_skin.btn_juese, TargetTipsMaker.makeSimpleTextTips("角色<br/>快捷键：C"));
+				TipTargetManager.show(_skin.btn_beibao, TargetTipsMaker.makeSimpleTextTips("背包<br/>快捷键：B"));
+				TipTargetManager.show(_skin.btn_zuoqi, TargetTipsMaker.makeSimpleTextTips("坐骑<br/>快捷键：V"));
+				TipTargetManager.show(_skin.btn_zhuangbei, TargetTipsMaker.makeSimpleTextTips("装备<br/>快捷键：P"));
+				TipTargetManager.show(_skin.btn_wuxue, TargetTipsMaker.makeSimpleTextTips("武学<br/>快捷键：J"));
+				TipTargetManager.show(_skin.btn_banghui, TargetTipsMaker.makeSimpleTextTips("帮会<br/>快捷键：O"));
+				TipTargetManager.show(_skin.btn_shangcheng, TargetTipsMaker.makeSimpleTextTips("商城<br/>快捷键：O"));
+			}
+			
         }
+		
         
         public function resize(w : int, h : int) : void {
             this.x = w - this._skin.width;
@@ -56,7 +72,7 @@ package com.rpgGame.app.ui.main.navigation {
                     // 关闭
                     this.setState(false);
                     break;
-                case this._skin.btn_n2:
+                case this._skin.btn_beibao:
                     // 背包
                     AppManager.showApp(AppConstant.BACK_PACK_PANEL);
                     break;
@@ -76,17 +92,9 @@ package com.rpgGame.app.ui.main.navigation {
             CONFIG::netDebug {
                 NetDebug.LOG("[NavigationNar] [setState] isOpen:" + isOpen + ", targetX:" + targetX);
             }
-            this._tween = TweenLite.to(this._skin.btn_n1, 0.5, {x : targetX, onUpdate : onUpdateDisplayObjectsPos});
+            this._tween = TweenLite.to(this._skin.btns, 0.5, {x : targetX,ease:Expo.easeIn});
             this._skin.btn_close.visible = isOpen;
             this._skin.btn_open.visible = !isOpen;
-        }
-        
-        private function onUpdateDisplayObjectsPos() : void {
-            this._skin.btn_n2.x = this._skin.btn_n1.x + this._gapN2X;
-            this._skin.btn_n3.x = this._skin.btn_n1.x + this._gapN3X;
-            this._skin.btn_n4.x = this._skin.btn_n1.x + this._gapN4X;
-            this._skin.btn_n5.x = this._skin.btn_n1.x + this._gapN5X;
-            this._skin.btn_n6.x = this._skin.btn_n1.x + this._gapN6X;
         }
     }
 }

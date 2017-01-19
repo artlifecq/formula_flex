@@ -1,4 +1,6 @@
 package com.rpgGame.app.ui.main.shortcut {
+    import com.game.engine3D.display.InterObject3D;
+    import com.game.engine3D.scene.render.RenderUnit3D;
     import com.rpgGame.app.manager.chat.NoticeManager;
     import com.rpgGame.app.manager.mount.MountManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
@@ -9,13 +11,29 @@ package com.rpgGame.app.ui.main.shortcut {
     import com.rpgGame.core.manager.tips.TargetTipsMaker;
     import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
+    import com.rpgGame.coreData.SpriteStat;
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.cfg.LanguageConfig;
+    import com.rpgGame.coreData.enum.JobEnum;
     import com.rpgGame.coreData.enum.item.IcoSizeEnum;
     import com.rpgGame.coreData.lang.LangMount;
+    import com.rpgGame.coreData.type.EffectUrl;
     import com.rpgGame.coreData.type.item.GridBGType;
     
+    import flash.display.Graphics;
+    import flash.events.Event;
     import flash.geom.Point;
+    import flash.utils.clearInterval;
+    import flash.utils.setInterval;
+    import flash.utils.setTimeout;
+    
+    import away3d.animators.CompositeAnimator;
+    import away3d.animators.KeyframeAnimator;
+    import away3d.animators.data.CompositeAnimatorInstance;
+    import away3d.containers.ObjectContainer3D;
+    import away3d.entities.Mesh;
+    
+    import feathers.controls.UIAsset;
     
     import gameEngine2D.NetDebug;
     
@@ -23,12 +41,18 @@ package com.rpgGame.app.ui.main.shortcut {
     import org.mokylin.skin.mainui.shortcut.shortcut_Skin;
     
     import starling.display.DisplayObject;
+    import starling.display.Sprite;
+    import starling.events.Event;
     
     public class ShortcutBar extends SkinUI {
 		
 		private var skillBar : ShortcutSkillBar;
 		
         private var _skin : shortcut_Skin;
+		
+		private var _jumpState:Vector.<UIAsset>;
+
+		private var renderUint:RenderUnit3D;
         
         public function ShortcutBar() {
             this._skin = new shortcut_Skin();
@@ -37,12 +61,25 @@ package com.rpgGame.app.ui.main.shortcut {
 			init();
         }
 		
+		private function useJump():void
+		{
+			var index:int=0;
+			while(index<3){
+				if(_jumpState[index].visible){
+					_jumpState[index].visible=false;
+					break;
+				}
+				index++;
+			}
+		}
+		
 		private function init() : void
 		{
+			
 			skillBar = new ShortcutSkillBar(this);
 			//skillBar.layerBatch = true;
 //			_skin.grpTopGrids.visible = false;
-			this.addChild(skillBar);
+			this._skin.Icons.addChild(skillBar);
 //			skillBar.x = _skin.grpTopGrids.x;
 //			skillBar.y = _skin.grpTopGrids.y;
 			
@@ -61,11 +98,17 @@ package com.rpgGame.app.ui.main.shortcut {
 //			_skin.botBgBar.touchable = false;
 //			_skin.botBgBar.touchAcross = true;
 			
+			initFanGunDis();
+			
 			initExp();
 			addSheHuiTab();
 			
+			addEft();
+			
+			this._skin.jingzhen_yijia.visible=MainRoleManager.actorInfo.job==JobEnum.ROLE_3_TYPE;
+			
 			if (!ClientConfig.isBanShu)
-			{
+			{				
 //				TipTargetManager.show(_skin.btnBackpack, TargetTipsMaker.makeSimpleTextTips("背包<br/>快捷键：B"));
 //				TipTargetManager.show(_skin.btnRole, TargetTipsMaker.makeSimpleTextTips("人物<br/>快捷键：C"));
 //				TipTargetManager.show(_skin.btnHaoYou, TargetTipsMaker.makeSimpleTextTips("好友<br/>快捷键：F"));
@@ -86,6 +129,32 @@ package com.rpgGame.app.ui.main.shortcut {
 			//			{
 			//				_skin.btnMount.visible = false;
 			//			}
+		}
+		
+		private function addEft():void
+		{
+			var hp3D:InterObject3D= this.playInter3DAt(ClientConfig.getEffect(EffectUrl.XUE_TIAO_HONG),0,0,0);
+			hp3D.touchable=false;
+			renderUint=RenderUnit3D(hp3D.baseObj3D);
+			renderUint.setAddedCallBack(onAddHpEft,hp3D);
+		}
+		
+		private function onAddHpEft(hp3D:InterObject3D,renderUint:RenderUnit3D):void
+		{
+			renderUint.removeAddedCallBack(onAddHpEft);
+			
+			renderUint.scaleX=renderUint.scaleY=this._skin.left_xuecao.width/270;
+			hp3D.x=this._skin.left_xuecao.x+17;
+			hp3D.y=this._skin.left_xuecao.y+this._skin.left_xuecao.height-12;
+			this._skin.left_xuecao.mask=hp3D;				
+		}
+		
+		private function initFanGunDis():void
+		{
+			_jumpState=new Vector.<UIAsset>();
+			_jumpState.push(_skin.fangun_n3);
+			_jumpState.push(_skin.fangun_n2);
+			_jumpState.push(_skin.fangun_n1);
 		}
 		
 		public function getBtnGlobalPos(btnName : String) : Point

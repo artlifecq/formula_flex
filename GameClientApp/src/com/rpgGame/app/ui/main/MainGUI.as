@@ -6,6 +6,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.ui.main.navigation.NavigationBar;
 	import com.rpgGame.app.ui.main.shortcut.ShortcutBar;
 	import com.rpgGame.app.ui.main.smallmap.SmallMapBar;
+	import com.rpgGame.app.ui.main.top.ExpBar;
 	import com.rpgGame.app.ui.main.top.TopBar;
 	import com.rpgGame.core.app.AppDispather;
 	import com.rpgGame.core.app.AppEvent;
@@ -41,6 +42,7 @@ package com.rpgGame.app.ui.main
 		private static const TIME:int = int( LanguageConfig.getText( LangYuMaQiShou.TIME ) );
         // 头部
         private var _topBar : TopBar;
+        private var _expBar : ExpBar;
         // 人物头像
         private var _headBar : PlayerHeadBar;
         // 小地图
@@ -103,6 +105,9 @@ package com.rpgGame.app.ui.main
 		private function initBar() : void
 		{
             this._topBar = new TopBar();
+			_expBar=new ExpBar();
+            this.addChild(this._expBar);
+			_topBar.y=5;
             this.addChild(this._topBar);
             this._headBar = new PlayerHeadBar();
             this.addChild(this._headBar);
@@ -297,6 +302,7 @@ package com.rpgGame.app.ui.main
             this._shortcutBar.resize(sWidth, sHeight);
             this._navigationBar.resize(sWidth, sHeight);
             this._chatBar.resize(sWidth, sHeight);
+			this._expBar.resize(sWidth, sHeight);
 //			_mainBar.resize(sWidth, sHeight);
 //			_headBar.resize(sWidth, sHeight);
 //			_selectRoleHeadBar.resize(sWidth, sHeight);
