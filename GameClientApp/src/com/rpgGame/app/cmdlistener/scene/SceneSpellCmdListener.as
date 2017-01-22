@@ -92,67 +92,67 @@ package com.rpgGame.app.cmdlistener.scene
 			switch (failID)
 			{
 				case 1:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_10;
+					failReason = LangQ_NoticeInfo.SkillError_1;
 					break;
 				case 2:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_11;
+					failReason = LangQ_NoticeInfo.SkillError_2;
 					break;
 				case 3:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_12;
+					failReason = LangQ_NoticeInfo.SkillError_3;
 					break;
 				case 4:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_13;
+					failReason = LangQ_NoticeInfo.SkillError_4;
 					break;
 				case 5:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_14;
+					failReason = LangQ_NoticeInfo.SkillError_5;
 					break;
 				case 6:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_15;
+					failReason = LangQ_NoticeInfo.SkillError_6;
 					break;
 				case 7:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_16;
+					failReason = LangQ_NoticeInfo.SkillError_7;
 					break;
 				case 8:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_17;
+					failReason = LangQ_NoticeInfo.SkillError_8;
 					break;
 				case 9:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_18;
+					failReason = LangQ_NoticeInfo.SkillError_9;
 					break;
 				case 10:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_19; //（英雄死亡后不会被删除，怪物会被立即删除,所以一般情况下怪物目标不会返还这个消息）
+					failReason = LangQ_NoticeInfo.SkillError_10; //（英雄死亡后不会被删除，怪物会被立即删除,所以一般情况下怪物目标不会返还这个消息）
 					break;
 				case 11:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_20;
+					failReason = LangQ_NoticeInfo.SkillError_11;
 					break;
 				case 12:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_21;
+					failReason = LangQ_NoticeInfo.SkillError_12;
 					break;
 				case 13:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_22;
+					failReason = LangQ_NoticeInfo.SkillError_13;
 					break;
 				case 14:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_23;
+					failReason = LangQ_NoticeInfo.SkillError_14;
 					break;
 				case 15:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_24;
+					failReason = LangQ_NoticeInfo.SkillError_15;
 					break;
 				case 16:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_81;
+					failReason = LangQ_NoticeInfo.SkillError_16;
 					break;
 				case 17:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_82;
+					failReason = LangQ_NoticeInfo.SkillError_17;
 					break;
 				case 18:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_83;
+					failReason = LangQ_NoticeInfo.SkillError_18;
 					break;
 				case 19:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_84;
+					failReason = LangQ_NoticeInfo.SkillError_19;
 					break;
 				case 20:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_85;
+//					failReason = LangQ_NoticeInfo.SkillError_20;
 					break;
 				case 21:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_86;
+//					failReason = LangQ_NoticeInfo.SkillError_21;
 					break;
 				case 22:
 					failReason = "该技能必须在马上才能够释放";
@@ -167,7 +167,7 @@ package com.rpgGame.app.cmdlistener.scene
 					failReason = "在镖车上";
 					break;
 				default:
-					failReason = LangQ_NoticeInfo.ErrorMsgNoticeManager_25;
+					failReason = LangQ_NoticeInfo.SkillError_1;
 					break;
 			}
 			
