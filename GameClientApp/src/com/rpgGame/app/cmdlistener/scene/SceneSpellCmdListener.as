@@ -3,7 +3,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.game.engine2D.config.SceneConfig;
 	import com.game.engine3D.display.shapeArea.ShapeArea3D;
 	import com.gameClient.log.GameLog;
-	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
@@ -150,21 +149,6 @@ package com.rpgGame.app.cmdlistener.scene
 					break;
 				case 20:
 //					failReason = LangQ_NoticeInfo.SkillError_20;
-					break;
-				case 21:
-//					failReason = LangQ_NoticeInfo.SkillError_21;
-					break;
-				case 22:
-					failReason = "该技能必须在马上才能够释放";
-					break;
-				case 23:
-					failReason = "飞行中，无法释放技能";
-					break;
-				case 24:
-					failReason = "当前坐骑无法骑战";
-					break;
-				case 25:
-					failReason = "在镖车上";
 					break;
 				default:
 					failReason = LangQ_NoticeInfo.SkillError_1;

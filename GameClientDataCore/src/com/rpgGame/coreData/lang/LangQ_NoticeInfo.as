@@ -2074,5 +2074,4 @@ package com.rpgGame.coreData.lang
 		public static const SkillError_19:String = "SkillError_19";
 
 	}
-}
-		
+}	

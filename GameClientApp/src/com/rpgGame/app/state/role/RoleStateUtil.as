@@ -31,6 +31,8 @@ package com.rpgGame.app.state.role
 	import flash.geom.Vector3D;
 	import flash.utils.getTimer;
 	
+	import gameEngine2D.NetDebug;
+	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
