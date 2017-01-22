@@ -538,7 +538,7 @@ package com.rpgGame.app.fight.spell
                         }
                     }
                     targetRole = selectedRole;
-                    MainRoleManager.actor.faceToGround(targetRole.x, targetRole.y);
+                    //MainRoleManager.actor.faceToGround(targetRole.x, targetRole.y);
                     var targetRadius : int = (targetRole.data as RoleData).bodyRadius; //处理半径
                     var keepSpacing : int = spellData.q_keep_spacing;
                     
