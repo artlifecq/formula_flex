@@ -47,6 +47,8 @@ package com.rpgGame.app.manager.fight
 		 */
 		public static function getFightRoleState(role : SceneRole, spellData : Q_skill_model = null) : int
 		{
+            // TODO 可以全体攻击
+            return FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
 			var modeState : int = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
 			var heroData:HeroData = MainRoleManager.actorInfo;
 			if (role == null || !role.usable || role.isMainChar || role.stateMachine.isDeadState)
