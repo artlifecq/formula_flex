@@ -39,8 +39,6 @@ package com.rpgGame.app.fight.spell
 	
 	import away3d.pathFinding.DistrictWithPath;
 	
-	import gameEngine2D.NetDebug;
-	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
 	import org.game.netCore.net_protobuff.ByteBuffer;
@@ -131,16 +129,6 @@ package com.rpgGame.app.fight.spell
                 NoticeManager.showNotify(LangQ_NoticeInfo.ErrorMsgNoticeManager_22);
                 return false;
             }
-//            if (caseInfo.caseSpellData.q_target != SpellTargetType.SELF && 
-//                null != SceneRoleSelectManager.selectedRole) {
-//                // 如果作用对象不是自己且不可攻击
-//                var modeState : int = FightManager.getFightRoleState(SceneRoleSelectManager.selectedRole);
-//                if (modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY &&
-//                    modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND) {
-//                    NoticeManager.showNotify(LangQ_NoticeInfo.NotAttack);
-//                    return false;
-//                }
-//            }
 			var targerRole : SceneRole = null;
 			if (caseState == CASE_STATE_SUCCEED)
 			{
@@ -409,7 +397,9 @@ package com.rpgGame.app.fight.spell
 				releaseTargetPos = new Point(selfPos.x, selfPos.y);
 				targetPos = new Point(selfPos.x, selfPos.y);
 				releasePos = new Point(selfPos.x, selfPos.y);
-			} else {
+			}
+			else
+			{
                 do {
                     if (null == SceneRoleSelectManager.selectedRole) {
                         // 如果没有锁定目标
