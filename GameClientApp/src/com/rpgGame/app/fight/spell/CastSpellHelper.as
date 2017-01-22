@@ -26,7 +26,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.info.MapDataManager;
-	import com.rpgGame.coreData.lang.LangNoticeInfo;
+	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.role.BaseEntityData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
@@ -128,17 +128,19 @@ package com.rpgGame.app.fight.spell
 				return false;
             var info : HeroData = MainRoleManager.actorInfo;
             if (caseInfo.caseSpellData.q_need_mp > info.totalStat.mp) {
-                NoticeManager.showNotify(LangNoticeInfo.CastSpellByBinding);
+                NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellByBinding);
                 return false;
             }
-            if (null != SceneRoleSelectManager.selectedRole) {
-                var modeState : int = FightManager.getFightRoleState(SceneRoleSelectManager.selectedRole);
-                if (modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY &&
-                    modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND) {
-                    NoticeManager.showNotify(LangNoticeInfo.NotAttack);
-                    return false;
-                }
-            }
+//            if (caseInfo.caseSpellData.q_target != SpellTargetType.SELF && 
+//                null != SceneRoleSelectManager.selectedRole) {
+//                // 如果作用对象不是自己且不可攻击
+//                var modeState : int = FightManager.getFightRoleState(SceneRoleSelectManager.selectedRole);
+//                if (modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY &&
+//                    modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND) {
+//                    NoticeManager.showNotify(LangQ_NoticeInfo.NotAttack);
+//                    return false;
+//                }
+//            }
 			var targerRole : SceneRole = null;
 			if (caseState == CASE_STATE_SUCCEED)
 			{
@@ -245,7 +247,7 @@ package com.rpgGame.app.fight.spell
 //					{
 //						if (!_autoAtkNearRole)
 //						{
-//							NoticeManager.showNotify(LangNoticeInfo.CastSpellNoAccordWithWeapon); //"穿戴的武器不能释放该技能"
+//							NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellNoAccordWithWeapon); //"穿戴的武器不能释放该技能"
 //						}
 //						return CASE_STATE_FAIL;
 //					}
@@ -254,7 +256,7 @@ package com.rpgGame.app.fight.spell
 //				{
 //					if (!_autoAtkNearRole)
 //					{
-//						NoticeManager.showNotify(LangNoticeInfo.CastSpellHasNoWeapon); //"没有穿戴武器不能释放技能"
+//						NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellHasNoWeapon); //"没有穿戴武器不能释放技能"
 //					}
 //					return CASE_STATE_FAIL;
 //				}
@@ -264,7 +266,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.CastSpellIsDead); //"已死亡不能放技能"
+					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsDead); //"已死亡不能放技能"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -272,7 +274,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.CastSpellIsHarding); //"技能硬直中"
+					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsHarding); //"技能硬直中"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -280,7 +282,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.CastSpellIsLock); //"释放技能被锁定"
+					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsLock); //"释放技能被锁定"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -288,7 +290,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.CastSpellIsBlinking); //"冲锋中不能放技能"
+					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsBlinking); //"冲锋中不能放技能"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -296,7 +298,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.CastSpellIsBeatMoving); //"被击退中不能放技能"
+					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsBeatMoving); //"被击退中不能放技能"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -304,7 +306,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.CastSpellIsStun); //"眩晕中不能放技能"
+					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsStun); //"眩晕中不能放技能"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -312,7 +314,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.CastSpellIsHush); //"沉默中不能放技能"
+					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsHush); //"沉默中不能放技能"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -342,7 +344,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.SpellIsCD); //"技能正在冷却"
+					NoticeManager.showNotify(LangQ_NoticeInfo.SpellIsCD); //"技能正在冷却"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -350,7 +352,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.SpellIsOnlyUpMount); //"该技能只能在马上释放"
+					NoticeManager.showNotify(LangQ_NoticeInfo.SpellIsOnlyUpMount); //"该技能只能在马上释放"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -376,7 +378,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.CAST_SPELL_FORBID_IN_AREA); //"本区域内不能使用该技能"
+					NoticeManager.showNotify(LangQ_NoticeInfo.CAST_SPELL_FORBID_IN_AREA); //"本区域内不能使用该技能"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -407,275 +409,457 @@ package com.rpgGame.app.fight.spell
 				releaseTargetPos = new Point(selfPos.x, selfPos.y);
 				targetPos = new Point(selfPos.x, selfPos.y);
 				releasePos = new Point(selfPos.x, selfPos.y);
-			}
-			else if (spellData.q_is_locking_spell) //锁定技或者在挂机时都需要目标
-			{
-				var nearCanAtkRole : SceneRole;
-				var selectedRole : SceneRole = SceneRoleSelectManager.selectedRole;
-				if (selectedRole && (!_roleList || _roleList.indexOf(selectedRole) == -1) && !selectedRole.isInViewDistance)
-				{
-					selectedRole = null;
-				}
-				if (selectedRole && selectedRole.usable && selectedRole.isInViewDistance && !selectedRole.stateMachine.isDeadState)
-				{
-					var modeState : int = FightManager.getFightRoleState(selectedRole, spellData);
-					if (modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY || modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)
-					{
-						if (selectedRole.type == SceneCharType.PLAYER)
-						{
-							if (_autoAtkNearRole)
-							{
-								nearCanAtkRole = getNearestCanAtkRole(spellData);
-								if (nearCanAtkRole)
-								{
-									targetRole = nearCanAtkRole;
-								}
-							}
-							else
-							{
-								if (modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY) //敌方
-								{
-									var areaType : int = AreaMapManager.getRoleInMapDataAreaType(MainRoleManager.actor);
-									if (areaType == MapAreaTypeEnum.SAFE)
-									{
-										NoticeManager.showNotify(LangNoticeInfo.CAST_SPELL_IN_SAFE_AREA); //"您在安全区域，不能攻击其他玩家"
-										return CASE_STATE_FAIL;
-									}
-									areaType = AreaMapManager.getRoleInMapDataAreaType(selectedRole);
-									if (areaType == MapAreaTypeEnum.SAFE)
-									{
-										NoticeManager.showNotify(LangNoticeInfo.CAST_SPELL_TARGET_IN_SAFE_AREA); //"对方处于安全区中，不能被攻击"
-										return CASE_STATE_FAIL;
-									}
-
-									if (MapDataManager.currentScene && MapDataManager.currentScene.isNewHeroProtect)
-									{
-										//新手保护
-										var protectLevel : int = 35;
-										if (ClientConfig.isBanShu) //版署
-										{
-											protectLevel = 69;
-										}
-										var selectedData : RoleData = selectedRole.data as RoleData;
-										if (MainRoleManager.actorInfo.totalStat.level <= protectLevel)
-										{
-											NoticeManager.showNotify(LangNoticeInfo.SpellSelfIsProtect); //"70级以下为新手保护期，不能攻击其他玩家"
-											return CASE_STATE_FAIL;
-										}
-										else if (MainRoleManager.actorInfo.totalStat.level > protectLevel && selectedData.totalStat.level <= protectLevel)
-										{
-											NoticeManager.showNotify(LangNoticeInfo.SpellSelectedIsProtect); //"70级以下为新手保护期，对方不能被攻击"
-											return CASE_STATE_FAIL;
-										}
-									}
-								}
-								targetRole = selectedRole;
-							}
-						}
-						else
-						{
-							if (selectedRole.type == SceneCharType.BIAO_CHE) //镖车
-							{
-//								if (CountryManager.isAtMyCountry())
-//									NoticeManager.showNotify(LangNoticeInfo.SpellSelectedOnlyOtherCountryBiao); //"攻击本国镖车无效"
-							}
-							targetRole = selectedRole;
-						}
-					}
-					else
-					{
-						if (_autoAtkNearRole)
-						{
-							nearCanAtkRole = getNearestCanAtkRole(spellData);
-							if (nearCanAtkRole)
-							{
-								targetRole = nearCanAtkRole;
-							}
-						}
-						else
-						{
-							if (selectedRole.type == SceneCharType.PLAYER)
-							{
-								if (spellData.q_target == SpellTargetType.FRIEND)
-								{
-									NoticeManager.showNotify(LangNoticeInfo.SpellSelectedOnlyUseToFriend); //"该技能只能对友方释放"
-									return CASE_STATE_FAIL;
-								}
-								else if (spellData.q_target == SpellTargetType.TEAM)
-								{
-									NoticeManager.showNotify(LangNoticeInfo.SpellSelectedOnlyUseToTeam); //"该技能只能对队友释放"
-									return CASE_STATE_FAIL;
-								}
-							}
-							else if (selectedRole.type == SceneCharType.BIAO_CHE) //镖车
-							{
-//								if (CountryManager.isAtMyCountry())
+			} else {
+                do {
+                    if (null == SceneRoleSelectManager.selectedRole) {
+                        // 如果没有锁定目标
+                        if (1 == spellData.q_is_locking_spell) {
+                            // 该技能需要锁定目标才能释放
+                            NoticeManager.showNotify(LangQ_NoticeInfo.NeedLockSpell);
+                            return CASE_STATE_FAIL;
+                        }
+                        if (castInfo.isReleaseAtMouse) {
+                            // 对鼠标点释放
+                            var scenePosition : Vector3D = Stage3DLayerManager.getPickPositonByMousePositon(SceneManager.getScene().view, Stage3DLayerManager.stage.mouseX, Stage3DLayerManager.stage.mouseY/*, MainRoleManager.getActorSpellHandHight()*/);
+                            if (null == scenePosition) {
+                                // 无效释放点
+                                NoticeManager.showNotify(LangQ_NoticeInfo.TargetInvalid);
+                                return CASE_STATE_FAIL;
+                            }
+                            MainRoleManager.actor.faceToGround(scenePosition.x, scenePosition.y);
+                            if (0 == spellData.q_blink_type) {
+                                releaseRange = releaseRange - DEVIATION_RANGE;
+                                releaseRange = releaseRange < 0 ? 0 : releaseRange;
+                                var mousePos : Point = new Point(scenePosition.x, scenePosition.y);
+                                angle = MathUtil.getAngle(selfPos.x, selfPos.y, mousePos.x, mousePos.y);
+                                radian = angle * Math.PI / 180;
+                                dist = Point.distance(selfPos, mousePos);
+                                releaseTargetPos = new Point();
+                                if (dist > releaseRange) {
+                                    // 距离大于最大释放距离
+                                    //dist = dist - releaseRange;
+                                    //dist = dist < 0 ? 0 : dist;
+                                    //releaseTargetPos.x = selfPos.x + dist * Math.cos(radian);
+                                    //releaseTargetPos.y = selfPos.y + dist * Math.sin(radian);
+                                    releaseTargetPos.x = selfPos.x;
+                                    releaseTargetPos.y = selfPos.y;
+                                    mousePos.x = selfPos.x + releaseRange * Math.cos(radian);
+                                    mousePos.y = selfPos.y + releaseRange * Math.sin(radian);
+                                }
+                                targetPos = new Point(selfPos.x, selfPos.y);
+                                releasePos = mousePos;
+                            } else {
+                                angle = 270 - MainRoleManager.actor.rotationY;
+                                radian = angle * Math.PI / 180;
+                                releaseRange = releaseRange - DEVIATION_RANGE;
+                                releaseRange = releaseRange < 0 ? 0 : releaseRange;
+                                releaseTargetPos = new Point();
+                                releaseTargetPos.x = selfPos.x + releaseRange * Math.cos(radian);
+                                releaseTargetPos.y = selfPos.y + releaseRange * Math.sin(radian);
+                                targetPos = new Point(selfPos.x, selfPos.y);
+                                releasePos = new Point(releaseTargetPos.x, releaseTargetPos.y);
+                            }
+                            break;
+                        }
+                        // 在鼠标点释放
+                        if (0 == spellData.q_blink_type) {
+                            releaseTargetPos = new Point(selfPos.x, selfPos.y);
+                            targetPos = new Point(selfPos.x, selfPos.y);
+                            releasePos = new Point(selfPos.x, selfPos.y);
+                            angle = 270 - MainRoleManager.actor.rotationY;
+                        } else {
+                            angle = 270 - MainRoleManager.actor.rotationY;
+                            radian = angle * Math.PI / 180;
+                            releaseRange = releaseRange - DEVIATION_RANGE;
+                            releaseRange = releaseRange < 0 ? 0 : releaseRange;
+                            releaseTargetPos = new Point();
+                            releaseTargetPos.x = selfPos.x + releaseRange * Math.cos(radian);
+                            releaseTargetPos.y = selfPos.y + releaseRange * Math.sin(radian);
+                            targetPos = new Point(selfPos.x, selfPos.y);
+                            releasePos = new Point(releaseTargetPos.x, releaseTargetPos.y);
+                        }
+                        break;
+                    }
+                    var modeState : int = FightManager.getFightRoleState(SceneRoleSelectManager.selectedRole);
+                    if (modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY &&
+                        modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND) {
+                        NoticeManager.showNotify(LangQ_NoticeInfo.NotAttack);
+                        return CASE_STATE_FAIL;
+                    }
+                    if (0 == spellData.q_hurt_type) {
+                        // 攻击技能
+                        if (modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY) {
+                            NoticeManager.showNotify(LangQ_NoticeInfo.NotAttack);
+                            return CASE_STATE_FAIL;
+                        }
+                    } else {
+                        // 其他技能
+                        if (modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND) {
+                            NoticeManager.showNotify(LangQ_NoticeInfo.SpellTarget);
+                            return CASE_STATE_FAIL;
+                        }
+                    }
+                    // 符合攻击目标
+                    var selectedRole : SceneRole = SceneRoleSelectManager.selectedRole;
+                    if ((!_roleList || _roleList.indexOf(selectedRole) == -1) && 
+                        !selectedRole.isInViewDistance) {
+                        // 不在视野范围
+                        NoticeManager.showNotify(LangQ_NoticeInfo.TargetNotInViewDistance);
+                        return CASE_STATE_FAIL;
+                    }
+                    if (selectedRole.stateMachine.isDeadState) {
+                        // 目标已经死亡
+                        NoticeManager.showNotify(LangQ_NoticeInfo.DeadTarget);
+                        return CASE_STATE_FAIL;
+                    }
+                    if (SceneCharType.PLAYER == selectedRole.type) {
+                        // 目标是玩家
+                        if (modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY) { //敌方 
+                            var areaType : int = AreaMapManager.getRoleInMapDataAreaType(MainRoleManager.actor);
+                            if (areaType == MapAreaTypeEnum.SAFE) {
+                                NoticeManager.showNotify(LangQ_NoticeInfo.CAST_SPELL_IN_SAFE_AREA); //"您在安全区域，不能攻击其他玩家"
+                                return CASE_STATE_FAIL;
+                            }
+                            areaType = AreaMapManager.getRoleInMapDataAreaType(selectedRole);
+                            if (areaType == MapAreaTypeEnum.SAFE) {
+                                NoticeManager.showNotify(LangQ_NoticeInfo.CAST_SPELL_TARGET_IN_SAFE_AREA); //"对方处于安全区中，不能被攻击"
+                                return CASE_STATE_FAIL;
+                            }
+                            
+                            if (MapDataManager.currentScene && MapDataManager.currentScene.isNewHeroProtect) {
+                                //新手保护
+                                var protectLevel : int = 35;
+                                if (ClientConfig.isBanShu) { //版署 
+                                    protectLevel = 69;
+                                }
+                                var selectedData : RoleData = selectedRole.data as RoleData;
+                                if (MainRoleManager.actorInfo.totalStat.level <= protectLevel) {
+                                    NoticeManager.showNotify(LangQ_NoticeInfo.SpellSelfIsProtect); //"70级以下为新手保护期，不能攻击其他玩家"
+                                    return CASE_STATE_FAIL;
+                                } else if (MainRoleManager.actorInfo.totalStat.level > protectLevel && 
+                                    selectedData.totalStat.level <= protectLevel) {
+                                    NoticeManager.showNotify(LangQ_NoticeInfo.SpellSelectedIsProtect); //"70级以下为新手保护期，对方不能被攻击"
+                                    return CASE_STATE_FAIL;
+                                }
+                            }
+                        }
+                    }
+                    targetRole = selectedRole;
+                    var targetRadius : int = (targetRole.data as RoleData).bodyRadius; //处理半径
+                    var keepSpacing : int = spellData.q_keep_spacing;
+                    
+                    targetServerID = (targetRole.data as BaseEntityData).serverID;
+                    targetID = targetRole.id;
+                    releaseTargetPos = new Point(targetRole.x, targetRole.z);
+                    targetPos = new Point(selfPos.x, selfPos.y);
+                    releasePos = new Point(releaseTargetPos.x, releaseTargetPos.y);
+                    
+                    if (targetRole.isMainChar) {
+                        angle = 270 - MainRoleManager.actor.rotationY;
+                    } else {
+                        angle = MathUtil.getAngle(selfPos.x, selfPos.y, releaseTargetPos.x, releaseTargetPos.y);
+                    }
+                    radian = angle * Math.PI / 180;
+                    var dx : Number = Math.cos(radian);
+                    var dy : Number = Math.sin(radian);
+                    var releaseDist : int = Point.distance(selfPos, releaseTargetPos);
+                    
+                    var releaseRadius : int;
+                    var targetRangeSpacing : int;
+                    if (spellData.q_blink_type == 0)
+                    {
+                        releaseRadius = releaseRange/* + hurtRange*/;
+                        targetRangeSpacing = (keepSpacing > 0 && keepSpacing < releaseRadius) ? keepSpacing : releaseRadius;
+                    } else {
+                        releaseRadius = releaseRange /*+ ((keepSpacing > 0 && keepSpacing < hurtRange) ? keepSpacing : hurtRange)*/;
+                        targetRangeSpacing = releaseRadius;
+                    }
+                    targetRangeSpacing = targetRangeSpacing + targetRadius - DEVIATION_RANGE;
+                    targetRangeSpacing = targetRangeSpacing < 0 ? 0 : targetRangeSpacing;
+                    dist = releaseDist - targetRangeSpacing;
+                    dist = dist < 0 ? 0 : dist;
+                    targetPos.x = selfPos.x + dist * dx;
+                    targetPos.y = selfPos.y + dist * dy;
+                    
+                    var releaseRangeSpacing : int = 0/*(keepSpacing > 0 && keepSpacing < hurtRange) ? keepSpacing : hurtRange*/;
+                    releaseRangeSpacing = releaseRangeSpacing + targetRadius - DEVIATION_RANGE;
+                    releaseRangeSpacing = releaseRangeSpacing < 0 ? 0 : releaseRangeSpacing;
+                    dist = releaseDist - releaseRangeSpacing;
+                    dist = dist < 0 ? 0 : dist;
+                    dist = dist > releaseRange ? releaseRange : dist;
+                    
+                    releasePos.x = selfPos.x + dist * dx;
+                    releasePos.y = selfPos.y + dist * dy;
+                } while (false);
+            }
+//			else if (spellData.q_is_locking_spell) //锁定技或者在挂机时都需要目标
+//			{
+//				var nearCanAtkRole : SceneRole;
+//				var selectedRole : SceneRole = SceneRoleSelectManager.selectedRole;
+//				if (selectedRole && (!_roleList || _roleList.indexOf(selectedRole) == -1) && !selectedRole.isInViewDistance)
+//				{
+//					selectedRole = null;
+//				}
+//				if (selectedRole && selectedRole.usable && selectedRole.isInViewDistance && !selectedRole.stateMachine.isDeadState)
+//				{
+//					var modeState : int = FightManager.getFightRoleState(selectedRole, spellData);
+//					if (modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY || modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)
+//					{
+//						if (selectedRole.type == SceneCharType.PLAYER)
+//						{
+//							if (_autoAtkNearRole)
+//							{
+//								nearCanAtkRole = getNearestCanAtkRole(spellData);
+//								if (nearCanAtkRole)
 //								{
-//									NoticeManager.showNotify(LangNoticeInfo.SpellSelectedOnlyOtherCountryBiao); //"攻击本国镖车无效"
+//									targetRole = nearCanAtkRole;
+//								}
+//							}
+//							else
+//							{
+//								if (modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY) //敌方
+//								{
+//									var areaType : int = AreaMapManager.getRoleInMapDataAreaType(MainRoleManager.actor);
+//									if (areaType == MapAreaTypeEnum.SAFE)
+//									{
+//										NoticeManager.showNotify(LangQ_NoticeInfo.CAST_SPELL_IN_SAFE_AREA); //"您在安全区域，不能攻击其他玩家"
+//										return CASE_STATE_FAIL;
+//									}
+//									areaType = AreaMapManager.getRoleInMapDataAreaType(selectedRole);
+//									if (areaType == MapAreaTypeEnum.SAFE)
+//									{
+//										NoticeManager.showNotify(LangQ_NoticeInfo.CAST_SPELL_TARGET_IN_SAFE_AREA); //"对方处于安全区中，不能被攻击"
+//										return CASE_STATE_FAIL;
+//									}
+//
+//									if (MapDataManager.currentScene && MapDataManager.currentScene.isNewHeroProtect)
+//									{
+//										//新手保护
+//										var protectLevel : int = 35;
+//										if (ClientConfig.isBanShu) //版署
+//										{
+//											protectLevel = 69;
+//										}
+//										var selectedData : RoleData = selectedRole.data as RoleData;
+//										if (MainRoleManager.actorInfo.totalStat.level <= protectLevel)
+//										{
+//											NoticeManager.showNotify(LangQ_NoticeInfo.SpellSelfIsProtect); //"70级以下为新手保护期，不能攻击其他玩家"
+//											return CASE_STATE_FAIL;
+//										}
+//										else if (MainRoleManager.actorInfo.totalStat.level > protectLevel && selectedData.totalStat.level <= protectLevel)
+//										{
+//											NoticeManager.showNotify(LangQ_NoticeInfo.SpellSelectedIsProtect); //"70级以下为新手保护期，对方不能被攻击"
+//											return CASE_STATE_FAIL;
+//										}
+//									}
+//								}
+//								targetRole = selectedRole;
+//							}
+//						}
+//						else
+//						{
+//							if (selectedRole.type == SceneCharType.BIAO_CHE) //镖车
+//							{
+////								if (CountryManager.isAtMyCountry())
+////									NoticeManager.showNotify(LangQ_NoticeInfo.SpellSelectedOnlyOtherCountryBiao); //"攻击本国镖车无效"
+//							}
+//							targetRole = selectedRole;
+//						}
+//					}
+//					else
+//					{
+//						if (_autoAtkNearRole)
+//						{
+//							nearCanAtkRole = getNearestCanAtkRole(spellData);
+//							if (nearCanAtkRole)
+//							{
+//								targetRole = nearCanAtkRole;
+//							}
+//						}
+//						else
+//						{
+//							if (selectedRole.type == SceneCharType.PLAYER)
+//							{
+//								if (spellData.q_target == SpellTargetType.FRIEND)
+//								{
+//									NoticeManager.showNotify(LangQ_NoticeInfo.SpellSelectedOnlyUseToFriend); //"该技能只能对友方释放"
 //									return CASE_STATE_FAIL;
 //								}
-							}
-							NoticeManager.showNotify(LangNoticeInfo.SpellSelectedUnAttackable); //"当前选择的目标不可攻击"
-							return CASE_STATE_FAIL;
-						}
-					}
-				}
-				else if (_autoAtkNearRole)
-				{
-					nearCanAtkRole = getNearestCanAtkRole(spellData);
-					if (nearCanAtkRole)
-					{
-						targetRole = nearCanAtkRole;
-					}
-				}
-
-				if (!targetRole)
-				{
-					if (spellData.q_target == SpellTargetType.FRIEND || spellData.q_target == SpellTargetType.TEAM) //对友方施放的技能，无目标默认对自己释放。
-					{
-						targetRole = MainRoleManager.actor;
-					}
-				}
-
-				if (targetRole)
-				{
-					var targetRadius : int = (targetRole.data as RoleData).bodyRadius; //处理半径
-					var keepSpacing : int = spellData.q_keep_spacing;
-
-					targetServerID = (targetRole.data as BaseEntityData).serverID;
-					targetID = targetRole.id;
-					releaseTargetPos = new Point(targetRole.x, targetRole.z);
-					targetPos = new Point(selfPos.x, selfPos.y);
-					releasePos = new Point(releaseTargetPos.x, releaseTargetPos.y);
-
-					if (targetRole.isMainChar)
-					{
-						angle = 270 - MainRoleManager.actor.rotationY;
-					}
-					else
-					{
-						angle = MathUtil.getAngle(selfPos.x, selfPos.y, releaseTargetPos.x, releaseTargetPos.y);
-					}
-					radian = angle * Math.PI / 180;
-					var dx : Number = Math.cos(radian);
-					var dy : Number = Math.sin(radian);
-					var releaseDist : int = Point.distance(selfPos, releaseTargetPos);
-
-					var releaseRadius : int;
-					var targetRangeSpacing : int;
-					if (spellData.q_blink_type == 0)
-					{
-						releaseRadius = releaseRange/* + hurtRange*/;
-						targetRangeSpacing = (keepSpacing > 0 && keepSpacing < releaseRadius) ? keepSpacing : releaseRadius;
-					}
-					else
-					{
-						releaseRadius = releaseRange /*+ ((keepSpacing > 0 && keepSpacing < hurtRange) ? keepSpacing : hurtRange)*/;
-						targetRangeSpacing = releaseRadius;
-					}
-					targetRangeSpacing = targetRangeSpacing + targetRadius - DEVIATION_RANGE;
-					targetRangeSpacing = targetRangeSpacing < 0 ? 0 : targetRangeSpacing;
-					dist = releaseDist - targetRangeSpacing;
-					dist = dist < 0 ? 0 : dist;
-					targetPos.x = selfPos.x + dist * dx;
-					targetPos.y = selfPos.y + dist * dy;
-
-					var releaseRangeSpacing : int = 0/*(keepSpacing > 0 && keepSpacing < hurtRange) ? keepSpacing : hurtRange*/;
-					releaseRangeSpacing = releaseRangeSpacing + targetRadius - DEVIATION_RANGE;
-					releaseRangeSpacing = releaseRangeSpacing < 0 ? 0 : releaseRangeSpacing;
-					dist = releaseDist - releaseRangeSpacing;
-					dist = dist < 0 ? 0 : dist;
-					dist = dist > releaseRange ? releaseRange : dist;
-
-					releasePos.x = selfPos.x + dist * dx;
-					releasePos.y = selfPos.y + dist * dy;
-
-					if (!targetRole.isMainChar)
-						SceneRoleSelectManager.selectedRole = targetRole;
-				}
-				else
-				{
-					if (!_autoAtkNearRole)
-					{
-						NoticeManager.showNotify(LangNoticeInfo.SpellNeedSelectedAttackable); //"未选择目标，无法施放该技能"
-					}
-					return CASE_STATE_FAIL;
-				}
-			}
-			else if (castInfo.isReleaseAtMouse) //对鼠标点施放的技能
-			{
-				var scenePosition : Vector3D = Stage3DLayerManager.getPickPositonByMousePositon(SceneManager.getScene().view, Stage3DLayerManager.stage.mouseX, Stage3DLayerManager.stage.mouseY/*, MainRoleManager.getActorSpellHandHight()*/);
-				if (spellData.q_blink_type == 0)
-				{
-					if (scenePosition)
-					{
-						releaseRange = releaseRange - DEVIATION_RANGE;
-						releaseRange = releaseRange < 0 ? 0 : releaseRange;
-	
-						var mousePos : Point = new Point(scenePosition.x, scenePosition.y);
-						angle = MathUtil.getAngle(selfPos.x, selfPos.y, mousePos.x, mousePos.y);
-						radian = angle * Math.PI / 180;
-						dist = Point.distance(selfPos, mousePos);
-						
-						releaseTargetPos = new Point();
-						if (dist > releaseRange)
-						{
-							dist = dist - releaseRange;
-							dist = dist < 0 ? 0 : dist;
-							
-							releaseTargetPos.x = selfPos.x + dist * Math.cos(radian);
-							releaseTargetPos.y = selfPos.y + dist * Math.sin(radian);
-						}
-						else
-						{
-							releaseTargetPos.x = selfPos.x;
-							releaseTargetPos.y = selfPos.y;
-						}
-						
-						targetPos = new Point(releaseTargetPos.x, releaseTargetPos.y);
-						releasePos = mousePos;
-					}
-				}
-				else
-				{
-					if (scenePosition)
-					{
-						MainRoleManager.actor.faceToGround(scenePosition.x, scenePosition.y);
-					}
-					
-					angle = 270 - MainRoleManager.actor.rotationY;
-					radian = angle * Math.PI / 180;
-					releaseRange = releaseRange - DEVIATION_RANGE;
-					releaseRange = releaseRange < 0 ? 0 : releaseRange;
-					releaseTargetPos = new Point();
-					releaseTargetPos.x = selfPos.x + releaseRange * Math.cos(radian);
-					releaseTargetPos.y = selfPos.y + releaseRange * Math.sin(radian);
-					targetPos = new Point(selfPos.x, selfPos.y);
-					releasePos = new Point(releaseTargetPos.x, releaseTargetPos.y);
-				}
-			}
-			else
-			{
-				if (spellData.q_blink_type == 0)
-				{
-					releaseTargetPos = new Point(selfPos.x, selfPos.y);
-					targetPos = new Point(selfPos.x, selfPos.y);
-					releasePos = new Point(selfPos.x, selfPos.y);
-					angle = 270 - MainRoleManager.actor.rotationY;
-				}
-				else
-				{
-					angle = 270 - MainRoleManager.actor.rotationY;
-					radian = angle * Math.PI / 180;
-					releaseRange = releaseRange - DEVIATION_RANGE;
-					releaseRange = releaseRange < 0 ? 0 : releaseRange;
-					releaseTargetPos = new Point();
-					releaseTargetPos.x = selfPos.x + releaseRange * Math.cos(radian);
-					releaseTargetPos.y = selfPos.y + releaseRange * Math.sin(radian);
-					targetPos = new Point(selfPos.x, selfPos.y);
-					releasePos = new Point(releaseTargetPos.x, releaseTargetPos.y);
-				}
-			}
+//								else if (spellData.q_target == SpellTargetType.TEAM)
+//								{
+//									NoticeManager.showNotify(LangQ_NoticeInfo.SpellSelectedOnlyUseToTeam); //"该技能只能对队友释放"
+//									return CASE_STATE_FAIL;
+//								}
+//							}
+//							else if (selectedRole.type == SceneCharType.BIAO_CHE) //镖车
+//							{
+////								if (CountryManager.isAtMyCountry())
+////								{
+////									NoticeManager.showNotify(LangQ_NoticeInfo.SpellSelectedOnlyOtherCountryBiao); //"攻击本国镖车无效"
+////									return CASE_STATE_FAIL;
+////								}
+//							}
+//							NoticeManager.showNotify(LangQ_NoticeInfo.SpellSelectedUnAttackable); //"当前选择的目标不可攻击"
+//							return CASE_STATE_FAIL;
+//						}
+//					}
+//				}
+//				else if (_autoAtkNearRole)
+//				{
+//					nearCanAtkRole = getNearestCanAtkRole(spellData);
+//					if (nearCanAtkRole)
+//					{
+//						targetRole = nearCanAtkRole;
+//					}
+//				}
+//
+//				if (!targetRole)
+//				{
+//					if (spellData.q_target == SpellTargetType.FRIEND || spellData.q_target == SpellTargetType.TEAM) //对友方施放的技能，无目标默认对自己释放。
+//					{
+//						targetRole = MainRoleManager.actor;
+//					}
+//				}
+//
+//				if (targetRole)
+//				{
+//					var targetRadius : int = (targetRole.data as RoleData).bodyRadius; //处理半径
+//					var keepSpacing : int = spellData.q_keep_spacing;
+//
+//					targetServerID = (targetRole.data as BaseEntityData).serverID;
+//					targetID = targetRole.id;
+//					releaseTargetPos = new Point(targetRole.x, targetRole.z);
+//					targetPos = new Point(selfPos.x, selfPos.y);
+//					releasePos = new Point(releaseTargetPos.x, releaseTargetPos.y);
+//
+//					if (targetRole.isMainChar)
+//					{
+//						angle = 270 - MainRoleManager.actor.rotationY;
+//					}
+//					else
+//					{
+//						angle = MathUtil.getAngle(selfPos.x, selfPos.y, releaseTargetPos.x, releaseTargetPos.y);
+//					}
+//					radian = angle * Math.PI / 180;
+//					var dx : Number = Math.cos(radian);
+//					var dy : Number = Math.sin(radian);
+//					var releaseDist : int = Point.distance(selfPos, releaseTargetPos);
+//
+//					var releaseRadius : int;
+//					var targetRangeSpacing : int;
+//					if (spellData.q_blink_type == 0)
+//					{
+//						releaseRadius = releaseRange/* + hurtRange*/;
+//						targetRangeSpacing = (keepSpacing > 0 && keepSpacing < releaseRadius) ? keepSpacing : releaseRadius;
+//					}
+//					else
+//					{
+//						releaseRadius = releaseRange /*+ ((keepSpacing > 0 && keepSpacing < hurtRange) ? keepSpacing : hurtRange)*/;
+//						targetRangeSpacing = releaseRadius;
+//					}
+//					targetRangeSpacing = targetRangeSpacing + targetRadius - DEVIATION_RANGE;
+//					targetRangeSpacing = targetRangeSpacing < 0 ? 0 : targetRangeSpacing;
+//					dist = releaseDist - targetRangeSpacing;
+//					dist = dist < 0 ? 0 : dist;
+//					targetPos.x = selfPos.x + dist * dx;
+//					targetPos.y = selfPos.y + dist * dy;
+//
+//					var releaseRangeSpacing : int = 0/*(keepSpacing > 0 && keepSpacing < hurtRange) ? keepSpacing : hurtRange*/;
+//					releaseRangeSpacing = releaseRangeSpacing + targetRadius - DEVIATION_RANGE;
+//					releaseRangeSpacing = releaseRangeSpacing < 0 ? 0 : releaseRangeSpacing;
+//					dist = releaseDist - releaseRangeSpacing;
+//					dist = dist < 0 ? 0 : dist;
+//					dist = dist > releaseRange ? releaseRange : dist;
+//
+//					releasePos.x = selfPos.x + dist * dx;
+//					releasePos.y = selfPos.y + dist * dy;
+//
+//					if (!targetRole.isMainChar)
+//						SceneRoleSelectManager.selectedRole = targetRole;
+//				}
+//				else
+//				{
+//					if (!_autoAtkNearRole)
+//					{
+//						NoticeManager.showNotify(LangQ_NoticeInfo.SpellNeedSelectedAttackable); //"未选择目标，无法施放该技能"
+//					}
+//					return CASE_STATE_FAIL;
+//				}
+//			}
+//			else if (castInfo.isReleaseAtMouse) //对鼠标点施放的技能
+//			{
+//				var scenePosition : Vector3D = Stage3DLayerManager.getPickPositonByMousePositon(SceneManager.getScene().view, Stage3DLayerManager.stage.mouseX, Stage3DLayerManager.stage.mouseY/*, MainRoleManager.getActorSpellHandHight()*/);
+//				if (spellData.q_blink_type == 0)
+//				{
+//					if (scenePosition)
+//					{
+//						releaseRange = releaseRange - DEVIATION_RANGE;
+//						releaseRange = releaseRange < 0 ? 0 : releaseRange;
+//	
+//						var mousePos : Point = new Point(scenePosition.x, scenePosition.y);
+//						angle = MathUtil.getAngle(selfPos.x, selfPos.y, mousePos.x, mousePos.y);
+//						radian = angle * Math.PI / 180;
+//						dist = Point.distance(selfPos, mousePos);
+//						
+//						releaseTargetPos = new Point();
+//						if (dist > releaseRange)
+//						{
+//							dist = dist - releaseRange;
+//							dist = dist < 0 ? 0 : dist;
+//							
+//							releaseTargetPos.x = selfPos.x + dist * Math.cos(radian);
+//							releaseTargetPos.y = selfPos.y + dist * Math.sin(radian);
+//						}
+//						else
+//						{
+//							releaseTargetPos.x = selfPos.x;
+//							releaseTargetPos.y = selfPos.y;
+//						}
+//						
+//						targetPos = new Point(releaseTargetPos.x, releaseTargetPos.y);
+//						releasePos = mousePos;
+//					}
+//				}
+//				else
+//				{
+//					if (scenePosition)
+//					{
+//						MainRoleManager.actor.faceToGround(scenePosition.x, scenePosition.y);
+//					}
+//					
+//					angle = 270 - MainRoleManager.actor.rotationY;
+//					radian = angle * Math.PI / 180;
+//					releaseRange = releaseRange - DEVIATION_RANGE;
+//					releaseRange = releaseRange < 0 ? 0 : releaseRange;
+//					releaseTargetPos = new Point();
+//					releaseTargetPos.x = selfPos.x + releaseRange * Math.cos(radian);
+//					releaseTargetPos.y = selfPos.y + releaseRange * Math.sin(radian);
+//					targetPos = new Point(selfPos.x, selfPos.y);
+//					releasePos = new Point(releaseTargetPos.x, releaseTargetPos.y);
+//				}
+//			}
+//			else
+//			{
+//				if (spellData.q_blink_type == 0)
+//				{
+//					releaseTargetPos = new Point(selfPos.x, selfPos.y);
+//					targetPos = new Point(selfPos.x, selfPos.y);
+//					releasePos = new Point(selfPos.x, selfPos.y);
+//					angle = 270 - MainRoleManager.actor.rotationY;
+//				}
+//				else
+//				{
+//					angle = 270 - MainRoleManager.actor.rotationY;
+//					radian = angle * Math.PI / 180;
+//					releaseRange = releaseRange - DEVIATION_RANGE;
+//					releaseRange = releaseRange < 0 ? 0 : releaseRange;
+//					releaseTargetPos = new Point();
+//					releaseTargetPos.x = selfPos.x + releaseRange * Math.cos(radian);
+//					releaseTargetPos.y = selfPos.y + releaseRange * Math.sin(radian);
+//					targetPos = new Point(selfPos.x, selfPos.y);
+//					releasePos = new Point(releaseTargetPos.x, releaseTargetPos.y);
+//				}
+//			}
 
 			var range : int =  Point.distance(targetPos, releaseTargetPos);
 			range = range + DEVIATION_RANGE;

@@ -10,7 +10,7 @@ package com.rpgGame.coreData.lang
 	* @author NEIL
 	* 
 	*/
-	public class LangNoticeInfo
+	public class LangQ_NoticeInfo
 	{
 		 /**  中了状态，不能跳跃 */
 		public static const MainCharJumpManager_1:String = "MainCharJumpManager_1";
@@ -2024,6 +2024,16 @@ package com.rpgGame.coreData.lang
 		public static const NotAttack:String = "NotAttack";
 		 /**  翻滚Cd中 */
 		public static const RollInCd:String = "RollInCd";
+		 /**  该技能需要锁定目表 */
+		public static const NeedLockSpell:String = "NeedLockSpell";
+		 /**  目标无效 */
+		public static const TargetInvalid:String = "TargetInvalid";
+		 /**  错误施法目标 */
+		public static const SpellTarget:String = "SpellTarget";
+		 /**  目标不再视野 */
+		public static const TargetNotInViewDistance:String = "TargetNotInViewDistance";
+		 /**  目标已死亡 */
+		public static const DeadTarget:String = "DeadTarget";
 
 	}
 }

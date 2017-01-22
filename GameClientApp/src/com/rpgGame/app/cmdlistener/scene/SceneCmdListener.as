@@ -34,7 +34,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.info.map.EnumMapUnitType;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
 	import com.rpgGame.coreData.info.task.target.TaskFollowEscortInfo;
-	import com.rpgGame.coreData.lang.LangNoticeInfo;
+	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.lang.LangText;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
@@ -733,34 +733,34 @@ package com.rpgGame.app.cmdlistener.scene
 			switch (failtype)
 			{
 				case 1:
-					infostr = LanguageConfig.getText(LangNoticeInfo.ErrorMsgNoticeManager_47);
+					infostr = LanguageConfig.getText(LangQ_NoticeInfo.ErrorMsgNoticeManager_47);
 					break;
 				case 2:
-					infostr = LanguageConfig.getText(LangNoticeInfo.ErrorMsgNoticeManager_48);
+					infostr = LanguageConfig.getText(LangQ_NoticeInfo.ErrorMsgNoticeManager_48);
 					break;
 				case 3:
-					infostr = LanguageConfig.getText(LangNoticeInfo.ErrorMsgNoticeManager_49);
+					infostr = LanguageConfig.getText(LangQ_NoticeInfo.ErrorMsgNoticeManager_49);
 					break;
 				case 4:
-					infostr = LanguageConfig.getText(LangNoticeInfo.ErrorMsgNoticeManager_50);
+					infostr = LanguageConfig.getText(LangQ_NoticeInfo.ErrorMsgNoticeManager_50);
 					break;
 				case 5:
-					infostr = LanguageConfig.getText(LangNoticeInfo.ErrorMsgNoticeManager_51);
+					infostr = LanguageConfig.getText(LangQ_NoticeInfo.ErrorMsgNoticeManager_51);
 					break;
 				case 6:
-					infostr = LanguageConfig.getText(LangNoticeInfo.ErrorMsgNoticeManager_52);
+					infostr = LanguageConfig.getText(LangQ_NoticeInfo.ErrorMsgNoticeManager_52);
 					break;
 				case 7:
-					infostr = LanguageConfig.getText(LangNoticeInfo.ErrorMsgNoticeManager_53);
+					infostr = LanguageConfig.getText(LangQ_NoticeInfo.ErrorMsgNoticeManager_53);
 					break;
 				case 8:
-					infostr = LanguageConfig.getText(LangNoticeInfo.ErrorMsgNoticeManager_54);
+					infostr = LanguageConfig.getText(LangQ_NoticeInfo.ErrorMsgNoticeManager_54);
 					break;
 				case 9:
-					infostr = LanguageConfig.getText(LangNoticeInfo.ErrorMsgNoticeManager_55);
+					infostr = LanguageConfig.getText(LangQ_NoticeInfo.ErrorMsgNoticeManager_55);
 					break;
 				default:
-					infostr = LanguageConfig.getText(LangNoticeInfo.ErrorMsgNoticeManager_56);
+					infostr = LanguageConfig.getText(LangQ_NoticeInfo.ErrorMsgNoticeManager_56);
 					break;
 			}
 			NoticeManager.showNotify(infostr);
