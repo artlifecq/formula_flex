@@ -11,6 +11,7 @@ package com.rpgGame.app.manager.fight
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
+	import flash.utils.setInterval;
 	
 	import away3d.core.math.Matrix3DUtils;
 	
@@ -416,13 +417,10 @@ package com.rpgGame.app.manager.fight
 				return;
 			}
 			StarlingLayerManager.headFaceLayer.addChild(attackFace);
-			var offset : Point = new Point();
-			offset = $displayObjectContainer.localToGlobal(offset);
-			offset = StarlingLayerManager.headFaceLayer.globalToLocal(offset);
 
 			if (null != $funTween)
 			{
-				$funTween(attackFace, offset, $from, $end, $scaleAgo, $scaleLater, $isLeftShow, $onComplete);
+				$funTween(attackFace, $displayObjectContainer, $from, $end, $scaleAgo, $scaleLater, $isLeftShow, $onComplete);
 			}
 		}
 
@@ -668,7 +666,7 @@ package com.rpgGame.app.manager.fight
 		 * @param onComplete 飘字完成回调
 		 * @author 陈鹉光 2016-01-28
 		 */
-		public static function tweenTypeRoleHurt(attackFace : DisplayObject, $offset : Point, $from : Point, $end : Point, $scaleAgo : Number, $scaleLater : Number, isLeftShow : Boolean = false, onComplete : Function = null) : void
+		public static function tweenTypeRoleHurt(attackFace : DisplayObject, $displayObjectContainer:*, $from : Point, $end : Point, $scaleAgo : Number, $scaleLater : Number, isLeftShow : Boolean = false, onComplete : Function = null) : void
 		{
 			if (null == $from)
 			{
@@ -678,19 +676,28 @@ package com.rpgGame.app.manager.fight
 			{
 				$end = new Point(-23, -200);
 			}
-			$from.offset($offset.x, $offset.y);
-			$end.offset($offset.x, $offset.y);
+
 
 			attackFace.scaleX = attackFace.scaleY = $scaleAgo;
-			attackFace.x = (-attackFace.width >> 1) + $from.x;
-			attackFace.y = $from.y;
-
+			attackFace.x = $displayObjectContainer.x-attackFace.width/2;
+			attackFace.y = $displayObjectContainer.y-attackFace.height/2-50;
+			
+			
 			var timeLine : TimelineLite = new TimelineLite();
-			var tiltAngleNum : Number = CameraController.lockedOnPlayerController.tiltAngle; //摄像机角度
-			var W : Number = attackFace.width * $scaleLater;
-			var nextX : Number = attackFace.x + attackFace.width / 2 - W / 2; //计算attackFace缩小0.33倍之后的X坐标
-			timeLine.insert(TweenLite.to(attackFace, 0.5, {x: nextX, scaleX: $scaleLater, scaleY: $scaleLater, ease: Linear.easeOut}));
-			timeLine.append(TweenLite.to(attackFace, 1.2, {alpha: 0, y: $end.y + tiltAngleNum, onComplete: onComplete, onCompleteParams: [attackFace], ease: Linear.easeIn}));
+			timeLine.insert(TweenLite.to(attackFace, 0.5, {scaleX: $scaleLater, scaleY: $scaleLater, ease: Linear.easeOut,onUpdate:updateXY,onUpdateParams:[attackFace,$displayObjectContainer]}));//缩放
+			timeLine.append(TweenLite.to(attackFace, 1.2, {alpha: 0,onComplete: onComplete, onCompleteParams: [attackFace], ease: Linear.easeIn,onUpdate:updateXY,onUpdateParams:[attackFace,$displayObjectContainer]}));//隐藏
+		}
+		
+		/**
+		 * 更新坐标，因为attackFace坐标依赖$displayObjectContainer
+		 * @param attackFace
+		 * @param $displayObjectContainer
+		 * 
+		 */
+		private static function updateXY(attackFace : DisplayObject, $displayObjectContainer:*):void
+		{
+			attackFace.x=$displayObjectContainer.x-attackFace.width/2;
+			attackFace.y=$displayObjectContainer.y-attackFace.height/2-50;
 		}
 
 		/**

@@ -215,9 +215,11 @@ package com.rpgGame.app.display2D
 			/////////////////////////数字//////////////////////////
 			var numStr:String = (Math.abs(_value)).toString();
 			var image:Image;
-			var nStr:String
+			var nStr:String;
+			var normalNum:int=0;
 			for( var i:uint=0; i < numStr.length ; i++ )
 			{
+				normalNum++;
 				nStr = numStr.charAt(i);
 				bmpUrl = FightFaceHelper.getNumberURLByType( _numberRes, nStr )
 				texture = GuiTheme.ins.getTexture( bmpUrl );
@@ -230,9 +232,15 @@ package com.rpgGame.app.display2D
 				
 				image.readjustSize();
 				addChild( image );
+				//经验类不缩放
+				if(normalNum>2&&_numberRes!=FightFaceHelper.NUMBER_PC_EXP&&_numberRes!=FightFaceHelper.NUMBER_PC_EXPSPEC){
+					image.scale=0.8;
+					image.x = (image.width - gap) * i + tX - 5 + _specialOffsetPos.x+20;
+				}else{
+					image.x = (image.width - gap) * i + tX - 5 + _specialOffsetPos.x;
+				}
 				image.touchAcross = true;
 				image.touchable = false;
-				image.x = (image.width - gap) * i + tX - 5 + _specialOffsetPos.x;
 				image.y = - image.height * 0.5 + _specialOffsetPos.y;
 			}
 		}
