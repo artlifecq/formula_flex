@@ -84,16 +84,22 @@ package com.rpgGame.coreData.clientConfig
 		public var q_cal_flycd:int;
 		 /**  延迟命中时间（单位：毫秒） */
 		public var q_delay_time:int;
+		 /**  飞行特效的飞行速度。 有飞行特效才能填。 有飞行特效必须填 */
+		public var q_fly_speed:int;
+		 /**  是否飞行穿越（0不穿越，1是穿越） */
+		public var q_is_fly_cross:int;
+		 /**  弹道飞行总时长(目前客户端专用) */
+		public var q_fly_time:int;
+		 /**  飞行数量（1次技能有多少飞行弹道数量） */
+		public var q_fly_count:int;
+		 /**  飞行间隔时间（毫秒） */
+		public var q_fly_spacing:int;
+		 /**  飞行是否追踪（0是不追踪，1是追踪） */
+		public var q_fly_follow:int;
 		 /**  施法距离限制（自身与目标之间的距离）（单位：格子）,地面行走魔法表示行走距离(小于等于3：判定为近战攻击（处理音效）大于3：判定为远程攻击（处理音效）)   0表示无限距离 */
 		public var q_range_limit:int;
 		 /**  保持间距（单位：像素）（不配默认使用施法范围） */
 		public var q_keep_spacing:int;
-		 /**  飞行特效的飞行速度。 有飞行特效才能填。 有飞行特效必须填 */
-		public var q_fly_speed:int;
-		 /**  飞行特效的飞行时间，单位毫秒 */
-		public var q_fly_time:int;
-		 /**  是否飞行穿越 */
-		public var q_is_fly_cross:int;
 		 /**  作用范围形状（1单体，2矩形，3扇形，4圆形,7全地图） */
 		public var q_area_shape:int;
 		 /**  作用范围中心点（1自身为中心，2目标为中心）,如果地面魔法,那么也表示起点 */
@@ -132,12 +138,16 @@ package com.rpgGame.coreData.clientConfig
 		public var q_summon_id:int;
 		 /**  召唤怪物数量 */
 		public var q_summon_num:int;
-		 /**  召唤的幻象分身，生命值比例（万分比分子） */
+		 /**  召唤怪上限 */
+		public var q_summon_max:int;
+		 /**  召唤物继承召唤者的生命值比例（万分比分子），如果不填，和档案表属性是叠加关系 */
 		public var q_summon_hp:int;
 		 /**  召唤的幻象分身，攻击力比例（万分比分子） */
 		public var q_summon_attack:int;
 		 /**  召唤的怪物/幻象分身持续时间（单位：秒） */
 		public var q_summon_last:int;
+		 /**  召唤类型，1为累加召唤，2为替换召唤 */
+		public var q_summon_type:int;
 		 /**  BUFF触发器，JSON格式用于描述改技能释放后如如何触发各种BUFF。格式为:{t, id, max }{触发类型,作用目标，BuffID}t=触发类型: 1:命中，2:未命中,3:暴击 4:杀死 5攻击开始时触发被动技能 攻击目标id=buff的ID对应BUFF表。Max=一次攻击最多触发多少次.例子:[{t:1, id:1001, r:10000},{t:3, id:5040001, r:10000}]可以把里边值复制到http://www.json.cn.网站去查看 */
 		public var q_buff_trigger:String;
 		 /**  被动触发几率（本处填万分比的分子） 如果是被动技能触发才有效，BUFF触发概率通过BUFF表控制 */

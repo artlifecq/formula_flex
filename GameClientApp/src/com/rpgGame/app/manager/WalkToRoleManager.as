@@ -49,22 +49,22 @@ package com.rpgGame.app.manager
 			switch (role.type)
 			{
 				case SceneCharType.PLAYER:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 200, role);
+					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role);
 					break;
 				case SceneCharType.MONSTER:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 200, role, onArriveMonster);
+					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveMonster);
 					break;
 				case SceneCharType.LIANG_CANG:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 200, role, onArriveMonster);
+					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveMonster);
 					break;
 				case SceneCharType.NPC:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 200, role, onArriveNpc);
+					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveNpc);
 					break;
 				case SceneCharType.PROTECT_NPC:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 200, role, onArriveNpc);
+					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveNpc);
 					break;
 				case SceneCharType.COLLECT:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 200, role, onArriveCollect);
+					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveCollect);
 					break;
 				case SceneCharType.DROP_GOODS:
 					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveDropGoods);

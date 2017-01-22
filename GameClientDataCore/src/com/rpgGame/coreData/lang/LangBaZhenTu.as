@@ -7,9 +7,7 @@ package com.rpgGame.coreData.lang
 	* 【**不可手动修改此类**】，
 	*	
 	* 【任何修改都将被生成工具覆盖，如需修改请直接修改具体的config文件】
-	* @author fly.AutoUICreater
-	* @modifier L.L.M.Sunny
-	* 修改时间：2015-7-2 上午10:05:12
+	* @author NEIL
 	* 
 	*/
 	public class LangBaZhenTu
@@ -66,10 +64,42 @@ package com.rpgGame.coreData.lang
 		public static const DUNGEON_COMPLETE:String = "DUNGEON_COMPLETE";
 		 /**  非常遗憾，您本次挑战副本失败，请提高实力、组好队伍后再次进行挑战 */
 		public static const DUNGEON_FAIL:String = "DUNGEON_FAIL";
-		 /**  ！！！请注意，<font color='#ff312e'>15秒钟后</font>，将会有新一名守卫出现，请做好战斗准备。 */
+		 /**  ！！！请注意，很快将会有新的守卫出现，击毁其相对应<font color='#ff312e'>石碑</font>可免除守卫BUFF效果。 */
 		public static const NEW_WAVE_UPDATE:String = "NEW_WAVE_UPDATE";
 		 /**  单人挑战该副本<font color='#ff312e'>难度较高</font>，是否确认进入？ */
 		public static const LONEY_JOIN_DUNGEON:String = "LONEY_JOIN_DUNGEON";
+		 /**  tx_baguazhen_qian */
+		public static const SHI_BEI_EFFECT_0:String = "SHI_BEI_EFFECT_0";
+		 /**  tx_baguazhen_kan */
+		public static const SHI_BEI_EFFECT_1:String = "SHI_BEI_EFFECT_1";
+		 /**  tx_baguazhen_gen */
+		public static const SHI_BEI_EFFECT_2:String = "SHI_BEI_EFFECT_2";
+		 /**  tx_baguazhen_xun */
+		public static const SHI_BEI_EFFECT_3:String = "SHI_BEI_EFFECT_3";
+		 /**  tx_baguazhen_kun */
+		public static const SHI_BEI_EFFECT_4:String = "SHI_BEI_EFFECT_4";
+		 /**  tx_baguazhen_li */
+		public static const SHI_BEI_EFFECT_5:String = "SHI_BEI_EFFECT_5";
+		 /**  tx_baguazhen_dui */
+		public static const SHI_BEI_EFFECT_6:String = "SHI_BEI_EFFECT_6";
+		 /**  tx_baguazhen_zhen */
+		public static const SHI_BEI_EFFECT_7:String = "SHI_BEI_EFFECT_7";
+		 /**  tx_baguazhen_touding_qian */
+		public static const MONSTER_EFFECT_0:String = "MONSTER_EFFECT_0";
+		 /**  tx_baguazhen_touding_kan */
+		public static const MONSTER_EFFECT_1:String = "MONSTER_EFFECT_1";
+		 /**  tx_baguazhen_touding_gen */
+		public static const MONSTER_EFFECT_2:String = "MONSTER_EFFECT_2";
+		 /**  tx_baguazhen_touding_xun */
+		public static const MONSTER_EFFECT_3:String = "MONSTER_EFFECT_3";
+		 /**  tx_baguazhen_touding_kun */
+		public static const MONSTER_EFFECT_4:String = "MONSTER_EFFECT_4";
+		 /**  tx_baguazhen_touding_li */
+		public static const MONSTER_EFFECT_5:String = "MONSTER_EFFECT_5";
+		 /**  tx_baguazhen_touding_dui */
+		public static const MONSTER_EFFECT_6:String = "MONSTER_EFFECT_6";
+		 /**  tx_baguazhen_touding_zhen */
+		public static const MONSTER_EFFECT_7:String = "MONSTER_EFFECT_7";
 
 	}
 }

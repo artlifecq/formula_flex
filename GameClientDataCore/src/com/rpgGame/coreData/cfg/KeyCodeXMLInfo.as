@@ -31,10 +31,10 @@ package com.rpgGame.coreData.cfg
 					<key funcID="2" code="50" name="2" dataID="0" type="3" />
 					<key funcID="3" code="51" name="3" dataID="0" type="3" />
 					<key funcID="4" code="52" name="4" dataID="0" type="3" />
-					<key funcID="5" code="112" name="F1" dataID="" type="3" />
-					<key funcID="6" code="113" name="F2" dataID="" type="3" />
-					<key funcID="7" code="114" name="F3" dataID="" type="3" />
-					<key funcID="8" code="115" name="F4" dataID="" type="3" />
+					<key funcID="5" code="81" name="Q" dataID="" type="3" />
+					<key funcID="6" code="87" name="W" dataID="" type="3" />
+					<key funcID="7" code="69" name="E" dataID="" type="3" />
+					<key funcID="8" code="82" name="R" dataID="" type="3" />
 					<!-- 移动快捷键 -->
 					<key funcID="1" code="87" name="W" dataID="0" type="4"/>
 					<key funcID="2" code="65" name="A" dataID="0" type="4"/>
