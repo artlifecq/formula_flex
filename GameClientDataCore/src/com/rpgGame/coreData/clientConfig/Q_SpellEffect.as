@@ -34,7 +34,7 @@ package com.rpgGame.coreData.clientConfig
 		public var dest_animation:int;
 		 /**  飞行弹道特效 */
 		public var fly_animation:int;
-		 /**  飞行弹道特效的出现时间（跟弹道有关），单位毫秒，不配默认为0 */
+		 /**  暂时没用 */
 		public var delay_time:int;
 		 /**  抬手特效出现时间（若不填则直接播放特效） */
 		public var start_frame_time:int;
@@ -52,7 +52,7 @@ package com.rpgGame.coreData.clientConfig
 		public var hit_sound:int;
 		 /**  暴击爆点音效 */
 		public var crit_sound:int;
-		 /**  投掷延迟时间，需小于等于可打断帧时间 */
+		 /**  这个时间主要用来控制弹道出现时间，及位移时，执行动作的开始时间 */
 		public var throw_delay_time:int;
 		 /**  是否匹配目标高度 */
 		public var is_adaptive_target_height:int;

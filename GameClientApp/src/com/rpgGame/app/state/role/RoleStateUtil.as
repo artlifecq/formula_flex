@@ -22,7 +22,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
-	import com.rpgGame.coreData.lang.LangNoticeInfo;
+	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SpellBlinkType;
@@ -170,22 +170,22 @@ package com.rpgGame.app.state.role
 				}
 				if (walkRole.stateMachine.isDeadState)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.WalkMoveIsDead); //"已死亡不能移动"
+					NoticeManager.showNotify(LangQ_NoticeInfo.WalkMoveIsDead); //"已死亡不能移动"
 					return false;
 				}
 				else if (walkRole.stateMachine.isAttackHarding)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.CastSpellIsHarding); //"技能硬直中"
+					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsHarding); //"技能硬直中"
 					return false;
 				}
 				else if (walkRole.stateMachine.isStun)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.WalkMoveIsStun); //"眩晕中不能移动"
+					NoticeManager.showNotify(LangQ_NoticeInfo.WalkMoveIsStun); //"眩晕中不能移动"
 					return false;
 				}
 				else if (walkRole.stateMachine.isStiff)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.WalkMoveIsStiff); //"定身中不能移动"
+					NoticeManager.showNotify(LangQ_NoticeInfo.WalkMoveIsStiff); //"定身中不能移动"
 					return false;
 				}
 				RoleStateUtil.lastWalkTime = nowTime;

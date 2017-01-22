@@ -22,7 +22,7 @@ package com.rpgGame.app.cmdlistener.engine
 	import com.rpgGame.core.controller.MouseCursorController;
 	import com.rpgGame.coreData.cfg.task.TouZhuCfgData;
 	import com.rpgGame.coreData.info.stall.StallData;
-	import com.rpgGame.coreData.lang.LangNoticeInfo;
+	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
@@ -237,7 +237,7 @@ package com.rpgGame.app.cmdlistener.engine
 //								}
 //								else
 //								{
-//									NoticeManager.showNotify(LangNoticeInfo.CastSpellHasNoWeapon); //"没有穿戴武器不能释放技能"
+//									NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellHasNoWeapon); //"没有穿戴武器不能释放技能"
 //								}
 //							}
 						}

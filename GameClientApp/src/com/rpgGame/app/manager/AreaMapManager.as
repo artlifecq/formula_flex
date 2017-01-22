@@ -18,7 +18,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.enum.AreaMapTypeEnum;
 	import com.rpgGame.coreData.enum.EnumAreaMapType;
 	import com.rpgGame.coreData.enum.EnumClientTriggerType;
-	import com.rpgGame.coreData.lang.LangNoticeInfo;
+	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.role.SceneTranportData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
@@ -285,16 +285,16 @@ package com.rpgGame.app.manager
 				switch (areaType)
 				{
 					case MapAreaTypeEnum.ATHLETICS:
-						NoticeManager.showNotify(LangNoticeInfo.ENTER_ATHLETICS_AREA_INFO); //"您已进入竞技区！击杀本国、盟国玩家不会增加恶名值！"
+						NoticeManager.showNotify(LangQ_NoticeInfo.ENTER_ATHLETICS_AREA_INFO); //"您已进入竞技区！击杀本国、盟国玩家不会增加恶名值！"
 						break;
 					case MapAreaTypeEnum.SAFE:
-						NoticeManager.showNotify(LangNoticeInfo.ENTER_SAFE_AREA_INFO); //"您已进入安全区！不能攻击其他玩家或被其他玩家攻击！"
+						NoticeManager.showNotify(LangQ_NoticeInfo.ENTER_SAFE_AREA_INFO); //"您已进入安全区！不能攻击其他玩家或被其他玩家攻击！"
 						break;
 					case MapAreaTypeEnum.STALL:
-						NoticeManager.showNotify(LangNoticeInfo.ENTER_STALL_AREA_INFO); //"您已进入摆摊区！可自由摆摊！"
+						NoticeManager.showNotify(LangQ_NoticeInfo.ENTER_STALL_AREA_INFO); //"您已进入摆摊区！可自由摆摊！"
 						break;
 					case MapAreaTypeEnum.SPELL_FORBID:
-						NoticeManager.showNotify(LangNoticeInfo.ENTER_SPELL_FORBID_AREA_INFO); //"您已进入技能禁止区！禁止使用部分技能！"
+						NoticeManager.showNotify(LangQ_NoticeInfo.ENTER_SPELL_FORBID_AREA_INFO); //"您已进入技能禁止区！禁止使用部分技能！"
 						break;
 				}
 			}
