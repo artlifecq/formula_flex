@@ -13,7 +13,7 @@ package com.rpgGame.coreData.type
 		/** 待机状态 **/
 		public static const STAND : String = "stand";
 		/** 个性待机状态 **/
-		public static const IDLE : String = "idle";
+		public static const IDLE : String = "stand";//暂时把个性待机动作调为stand，因为现在美术还没有做这个动作
 		/** 行走 **/
 		public static const WALK : String = "walk";
 		/** 跑步 **/
