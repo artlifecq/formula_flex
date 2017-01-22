@@ -128,7 +128,7 @@ package com.rpgGame.app.fight.spell
 				return false;
             var info : HeroData = MainRoleManager.actorInfo;
             if (caseInfo.caseSpellData.q_need_mp > info.totalStat.mp) {
-                NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellByBinding);
+                NoticeManager.showNotify(LangQ_NoticeInfo.ErrorMsgNoticeManager_22);
                 return false;
             }
 //            if (caseInfo.caseSpellData.q_target != SpellTargetType.SELF && 
