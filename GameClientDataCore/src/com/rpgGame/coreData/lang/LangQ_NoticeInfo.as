@@ -2072,6 +2072,5 @@ package com.rpgGame.coreData.lang
 		public static const SkillError_18:String = "SkillError_18";
 		 /**  召唤物达到上限 */
 		public static const SkillError_19:String = "SkillError_19";
-
 	}
 }	
