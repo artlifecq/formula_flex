@@ -397,8 +397,8 @@ package com.rpgGame.app.fight.spell
 				releaseTargetPos = new Point(selfPos.x, selfPos.y);
 				targetPos = new Point(selfPos.x, selfPos.y);
 				releasePos = new Point(selfPos.x, selfPos.y);
-			}
-			else
+			} 
+			else 
 			{
                 do {
                     if (null == SceneRoleSelectManager.selectedRole) {
@@ -849,6 +849,7 @@ package com.rpgGame.app.fight.spell
 //					targetPos = new Point(selfPos.x, selfPos.y);
 //					releasePos = new Point(releaseTargetPos.x, releaseTargetPos.y);
 //				}
+//			}
 //			}
 
 			var range : int =  Point.distance(targetPos, releaseTargetPos);
