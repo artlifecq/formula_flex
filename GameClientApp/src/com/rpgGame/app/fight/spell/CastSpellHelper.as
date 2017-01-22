@@ -39,6 +39,8 @@ package com.rpgGame.app.fight.spell
 	
 	import away3d.pathFinding.DistrictWithPath;
 	
+	import gameEngine2D.NetDebug;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
 	import org.game.netCore.net_protobuff.ByteBuffer;
@@ -475,6 +477,9 @@ package com.rpgGame.app.fight.spell
                         modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND) {
                         NoticeManager.showNotify(LangQ_NoticeInfo.NotAttack);
                         return CASE_STATE_FAIL;
+                    }
+                    CONFIG::netDebug {
+                        NetDebug.LOG("CastSpellHelper setSpellTarget spellID:" + spellID + " q_hurt_type:" + spellData.q_hurt_type);
                     }
                     if (0 == spellData.q_hurt_type) {
                         // 攻击技能
