@@ -13,6 +13,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.manager.BeanRegisterManager;
     import com.rpgGame.app.manager.ClientTriggerManager;
     import com.rpgGame.app.manager.GlobalSettingManager;
+    import com.rpgGame.app.manager.RollManager;
     import com.rpgGame.app.manager.SceneCameraLensEffectManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.scene.FirstEnterSceneManager;
@@ -129,6 +130,7 @@ package com.rpgGame.app.process
 				//
 				MainRoleManager.initActor();
 				GlobalSettingManager.init();
+                RollManager.INSTANCE.init();
 				//
 
                 CONFIG::Debug {

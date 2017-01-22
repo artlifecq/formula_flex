@@ -2,7 +2,7 @@ package com.rpgGame.app.state.role.action
 {
 	import com.game.engine3D.state.role.RoleStateReference;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
-
+	
 	import flash.geom.Point;
 
 	/**
@@ -29,6 +29,7 @@ package com.rpgGame.app.state.role.action
 		private var _castTime : int;
 		private var _releaseEndHard : int;
 		
+		private var _startFrameFunc:Function;
 		private var _hitFrameFunc : Function;
 		private var _breakFrameFunc : Function;
 		private var _totalFrameFunc : Function;
@@ -97,6 +98,12 @@ package com.rpgGame.app.state.role.action
 		{
 			return _angle;
 		}
+		
+		public function onStartFrame(func:Function):AttackStateReference
+		{
+			_startFrameFunc = func;
+			return this;
+		}
 
 		/**
 		 * 判定帧
@@ -152,6 +159,14 @@ package com.rpgGame.app.state.role.action
 		internal function setThrowFrameTime(value : int) : void
 		{
 			_throwFrameTime = value;
+		}
+		
+		internal function startFrame():void
+		{
+			if(_startFrameFunc != null)
+			{
+				_startFrameFunc(this);
+			}
 		}
 
 		internal function hitFrame() : void

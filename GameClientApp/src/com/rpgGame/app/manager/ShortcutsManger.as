@@ -1,11 +1,13 @@
 package com.rpgGame.app.manager
 {
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
 	import com.rpgGame.coreData.info.shortcuts.ShortcutsData;
+	import com.rpgGame.coreData.lang.LangNoticeInfo;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
@@ -257,6 +259,7 @@ package com.rpgGame.app.manager
 			var shortData : ShortcutsData = getShortcutsDataByPos(shortcutPos);
 			if (shortData == null)
 			{
+                NoticeManager.showNotify(LangNoticeInfo.CastSpellByBinding); //"没有穿戴武器不能释放技能"
 				return false; //这个快捷键没有设置数据
 			}
 

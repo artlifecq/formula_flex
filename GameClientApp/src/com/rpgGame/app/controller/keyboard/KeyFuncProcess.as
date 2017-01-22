@@ -1,7 +1,9 @@
 package com.rpgGame.app.controller.keyboard
 {
+	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.mount.MountManager;
+	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.interfaces.IEscExcute;
@@ -104,6 +106,9 @@ package com.rpgGame.app.controller.keyboard
 				case "50": //BO 切换目标
 					break;
 				case "51": //TAB
+                    if (null == SceneRoleSelectManager.selectedRole) {
+                        SceneRoleSelectManager.selectedRole = CastSpellHelper.getNearestCanAtkRole(null);
+                    }
 					break;
 				case "52": //ESC
 					if (EscActionManager.executeAction() == false)

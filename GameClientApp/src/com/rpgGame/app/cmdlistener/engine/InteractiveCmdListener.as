@@ -27,8 +27,11 @@ package com.rpgGame.app.cmdlistener.engine
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Vector3D;
+	import flash.utils.getTimer;
 	
 	import away3d.events.MouseEvent3D;
+	
+	import gameEngine2D.NetDebug;
 	
 	import gs.TweenLite;
 	
@@ -45,6 +48,10 @@ package com.rpgGame.app.cmdlistener.engine
 	public class InteractiveCmdListener extends BaseBean
 	{
 		private var _isPanningStarted : Boolean = false;
+        // 是否左击地图
+        private var _isLeftDown : Boolean = false;
+        // 上一次选中实体时间
+        private var _prevSelectEntityTime : int = 0;
 
 		public function InteractiveCmdListener()
 		{
@@ -87,6 +94,12 @@ package com.rpgGame.app.cmdlistener.engine
 				case SceneEventAction3D.SCENE_MAP_MOUSE_DOWN: //点击场景
 					sceneMapClick(position);
 					break;
+                case SceneEventAction3D.SCENE_MAP_MOUSE_UP: // 场景地图弹起
+                    sceneMapUp(position);
+                    break;
+                case SceneEventAction3D.SCENE_MAP_MOUSE_MOVE: // 场景地图滑动
+                    sceneMapMove(position);
+                    break;
 				case SceneEventAction3D.SCENE_ENTITY_MOUSE_DOWN: //点击实体
 					sceneEntityClick(position, currTarget, target);
 					break;
@@ -112,6 +125,10 @@ package com.rpgGame.app.cmdlistener.engine
 		 */
 		private function sceneMapClick(position : Vector3D) : void
 		{
+            CONFIG::netDebug {
+                NetDebug.LOG("MapDown");
+            }
+            this._isLeftDown = true;
 			if (CameraController.lockedOnPlayerController.ispanning)
 				return;
 			if (!KeyMoveManager.getInstance().keyMoving)
@@ -125,6 +142,29 @@ package com.rpgGame.app.cmdlistener.engine
 				}
 			}
 		}
+        
+        private function sceneMapUp(position : Vector3D) : void {
+            this._isLeftDown = false;
+            CONFIG::netDebug {
+                NetDebug.LOG("MapUp");
+            }
+        }
+        
+        private function sceneMapMove(position : Vector3D) : void {
+            if (CameraController.lockedOnPlayerController.ispanning) {
+                return;
+            }
+            if (!this._isLeftDown) {
+                return;
+            }
+            if (KeyMoveManager.getInstance().keyMoving) {
+                return;
+            }
+            CONFIG::netDebug {
+                NetDebug.LOG("MapMove vec:" + position);
+            }
+            RoleStateUtil.doWalkToPos(MainRoleManager.actor, position);
+        }
 
 		private function sceneEntityClick(position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
 		{
@@ -132,6 +172,14 @@ package com.rpgGame.app.cmdlistener.engine
 				return;
 			if (!currTarget.usable)
 				return;
+            var curTime : int = getTimer();
+            var isDoubleClick : Boolean = false;
+            if (curTime - this._prevSelectEntityTime < 300) {
+                // 双击
+                isDoubleClick = true;
+            } else {
+                this._prevSelectEntityTime = curTime;
+            }
 			if (currTarget is SceneRole)
 			{
 				SceneRoleSelectManager.selectedRole = currTarget as SceneRole;
@@ -140,6 +188,13 @@ package com.rpgGame.app.cmdlistener.engine
 			{
 				if (currTarget is SceneRole)
 				{
+                    CONFIG::netDebug {
+                        NetDebug.LOG("WalkToRole role[type:" +
+                        (currTarget as SceneRole).type + ", usable:" +
+                        (currTarget as SceneRole).usable + ", pos:" +
+                        (currTarget as SceneRole).position + "] isDoubleClick:" + isDoubleClick);
+                    }
+                    var role:SceneRole = currTarget as SceneRole;
 					var sceneRole : SceneRole = currTarget as SceneRole;
 					if (sceneRole.type == SceneCharType.TRANS) //传送门
 					{
@@ -150,7 +205,8 @@ package com.rpgGame.app.cmdlistener.engine
 							WalkToRoleManager.walkToTranport(currTarget as SceneRole);
 						}
 					}
-					else if(sceneRole.type == SceneCharType.STALL && (sceneRole.data as StallData).playerId == MainRoleManager.actorID)
+					else if(sceneRole.type == SceneCharType.STALL && 
+                        (sceneRole.data as StallData).playerId == MainRoleManager.actorID)
 					{
 						var stallData : StallData = sceneRole.data as StallData;
 						if(stallData)
@@ -164,39 +220,43 @@ package com.rpgGame.app.cmdlistener.engine
 					else 
 					{
 						var modeState : int = FightManager.getFightRoleState(currTarget as SceneRole);
-						if (modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY || modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)
+						if (modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY || 
+                            modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)
 						{
-							if(MainRoleManager.actorInfo.zhanCheOwnerID <= 0)//没在战车上
-							{
-								var hasSpellCanCast : Boolean = CastSpellHelper.hasSpellCanCast();
-								if (hasSpellCanCast)
-								{
-									TrusteeshipManager.getInstance().startFightTarget(Vector.<SceneRole>([currTarget]));
-								}
-								else
-								{
-									NoticeManager.showNotify(LangNoticeInfo.CastSpellHasNoWeapon); //"没有穿戴武器不能释放技能"
-								}
-							}
+                            // 可攻击
+                            if (role.type == SceneCharType.MONSTER) {
+                                WalkToRoleManager.walkToRole(currTarget as SceneRole);
+                            }
+//							if(MainRoleManager.actorInfo.zhanCheOwnerID <= 0)//没在战车上
+//							{
+//								var hasSpellCanCast : Boolean = CastSpellHelper.hasSpellCanCast();
+//								if (hasSpellCanCast)
+//								{
+//									TrusteeshipManager.getInstance().startFightTarget(Vector.<SceneRole>([currTarget]));
+//								}
+//								else
+//								{
+//									NoticeManager.showNotify(LangNoticeInfo.CastSpellHasNoWeapon); //"没有穿戴武器不能释放技能"
+//								}
+//							}
 						}
 						else
 						{
+                            // 不可攻击
 							TrusteeshipManager.getInstance().broken();
 							TrusteeshipManager.getInstance().stopFightTarget();
-							var role:SceneRole = currTarget as SceneRole;
 							if(role)
 							{
-								if(role.type == SceneCharType.MONSTER)
+								if(role.type == SceneCharType.MONSTER ||
+                                   role.type == SceneCharType.NPC)
 								{
-									var monsterData:MonsterData = role.data as MonsterData;
-									if (false && TouZhuCfgData.isZhuMonster(monsterData.modelID))
-									{
-										WalkToRoleManager.walkToRole(currTarget as SceneRole);
-									}
+                                    WalkToRoleManager.walkToRole(currTarget as SceneRole);
 								}
-								else
+								else if (role.type == SceneCharType.PLAYER)
 								{
-									WalkToRoleManager.walkToRole(currTarget as SceneRole);
+                                    if (isDoubleClick) {
+                                        WalkToRoleManager.walkToRole(currTarget as SceneRole);
+                                    }
 								}
 							}
 						}

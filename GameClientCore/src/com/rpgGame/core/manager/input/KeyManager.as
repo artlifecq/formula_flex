@@ -8,6 +8,8 @@ package com.rpgGame.core.manager.input
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	
+	import gameEngine2D.NetDebug;
+	
 	import org.client.mainCore.ds.HashMap;
 	
 	/**
@@ -41,6 +43,11 @@ package com.rpgGame.core.manager.input
 		 */
 		public static function getSingleInfo(key:uint):KeyInfo
 		{
+            CONFIG::netDebug {
+                _singleHash.forEach(function (key : uint, value : KeyInfo) : void {
+                    //NetDebug.LOG("SingleHash  key:" + key + " info:" + value.name + "_" + value.type + "_" + value.code + "_" + value.funcID);
+                });
+            }
 			var info:KeyInfo = _singleHash.getValue(key);
 			if(info)
 			{

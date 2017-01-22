@@ -43,7 +43,9 @@ package com.rpgGame.app.manager
 		{
 			if (!role || !role.usable)
 				return;
-			var targerPos : Vector3D = role.position;
+			var targerPos : Vector3D = role.position.clone();
+            targerPos.y = targerPos.z;
+            targerPos.z = 0;
 			switch (role.type)
 			{
 				case SceneCharType.PLAYER:
@@ -103,11 +105,11 @@ package com.rpgGame.app.manager
 				return;
 
 			//如果这只怪是猪，那么是不能杀的，请求抓猪
-			if (TouZhuCfgData.isZhuMonster(monsterData.modelID))
-			{
-				TouZhuManager.reqStratTouZhu(monsterData.id);
-				return;
-			}
+//			if (TouZhuCfgData.isZhuMonster(monsterData.modelID))
+//			{
+//				TouZhuManager.reqStratTouZhu(monsterData.id);
+//				return;
+//			}
 		}
 
 		private static function onArriveNpc(ref : WalkMoveStateReference) : void

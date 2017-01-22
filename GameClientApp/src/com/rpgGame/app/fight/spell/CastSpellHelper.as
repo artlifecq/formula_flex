@@ -28,6 +28,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.lang.LangNoticeInfo;
 	import com.rpgGame.coreData.role.BaseEntityData;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
@@ -37,6 +38,8 @@ package com.rpgGame.app.fight.spell
 	import flash.geom.Vector3D;
 	
 	import away3d.pathFinding.DistrictWithPath;
+	
+	import gameEngine2D.NetDebug;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
@@ -107,7 +110,11 @@ package com.rpgGame.app.fight.spell
 
 		public static function shortcutsTryCaseSpell(spellID : int) : void
 		{
-			var cased : Boolean = tryCaseSpell(new CastSpellInfo(getSpellData(spellID)));
+            CONFIG::netDebug {
+                NetDebug.LOG("CastSpellHelper shortcutsTryCaseSpell spellID:" + spellID);
+            }
+            var caseInfo : CastSpellInfo = new CastSpellInfo(getSpellData(spellID));
+			var cased : Boolean = tryCaseSpell(caseInfo);
 //			if (!cased)
 //				TrusteeshipManager.getInstance().nextSpell = getSpellData(spellType);
 		}
@@ -119,6 +126,19 @@ package com.rpgGame.app.fight.spell
 			var caseState : int = caseSpell(caseInfo, true);
 			if (!caseInfo.caseSpellData)
 				return false;
+            var info : HeroData = MainRoleManager.actorInfo;
+            if (caseInfo.caseSpellData.q_need_mp > info.totalStat.mp) {
+                NoticeManager.showNotify(LangNoticeInfo.CastSpellByBinding);
+                return false;
+            }
+            if (null != SceneRoleSelectManager.selectedRole) {
+                var modeState : int = FightManager.getFightRoleState(SceneRoleSelectManager.selectedRole);
+                if (modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY &&
+                    modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND) {
+                    NoticeManager.showNotify(LangNoticeInfo.NotAttack);
+                    return false;
+                }
+            }
 			var targerRole : SceneRole = null;
 			if (caseState == CASE_STATE_SUCCEED)
 			{
@@ -312,7 +332,7 @@ package com.rpgGame.app.fight.spell
 			var spellData : Q_skill_model = relateSelectable ? getNextRelateSpell() : _lastCaseSpell;
 			_lastCaseSpell = spellData;
 			castInfo.caseSpellData = spellData;
-			GameLog.add("========================================将要释放技能：" + spellData.q_skillID);
+			GameLog.add("====================将要释放技能：" + spellData.q_skillID);
 			if (!spellData)
 			{
 				return CASE_STATE_FAIL;
@@ -596,20 +616,33 @@ package com.rpgGame.app.fight.spell
 						angle = MathUtil.getAngle(selfPos.x, selfPos.y, mousePos.x, mousePos.y);
 						radian = angle * Math.PI / 180;
 						dist = Point.distance(selfPos, mousePos);
+						
+						releaseTargetPos = new Point();
 						if (dist > releaseRange)
 						{
 							dist = dist - releaseRange;
 							dist = dist < 0 ? 0 : dist;
+							
+							releaseTargetPos.x = selfPos.x + dist * Math.cos(radian);
+							releaseTargetPos.y = selfPos.y + dist * Math.sin(radian);
 						}
-						releaseTargetPos = new Point();
-						releaseTargetPos.x = selfPos.x + dist * Math.cos(radian);
-						releaseTargetPos.y = selfPos.y + dist * Math.sin(radian);
-						targetPos = new Point(selfPos.x, selfPos.y);
+						else
+						{
+							releaseTargetPos.x = selfPos.x;
+							releaseTargetPos.y = selfPos.y;
+						}
+						
+						targetPos = new Point(releaseTargetPos.x, releaseTargetPos.y);
 						releasePos = mousePos;
 					}
 				}
 				else
 				{
+					if (scenePosition)
+					{
+						MainRoleManager.actor.faceToGround(scenePosition.x, scenePosition.y);
+					}
+					
 					angle = 270 - MainRoleManager.actor.rotationY;
 					radian = angle * Math.PI / 180;
 					releaseRange = releaseRange - DEVIATION_RANGE;
@@ -644,7 +677,7 @@ package com.rpgGame.app.fight.spell
 				}
 			}
 
-			var range : int =  0;//Point.distance(targetPos, releaseTargetPos);
+			var range : int =  Point.distance(targetPos, releaseTargetPos);
 			range = range + DEVIATION_RANGE;
 			angle = (angle + 360) % 360;
 			castInfo.targetServerID = targetServerID;
@@ -659,9 +692,15 @@ package com.rpgGame.app.fight.spell
 			var path : Vector.<Vector3D> = PathFinderUtil.findPath(districtWithPath, MainRoleManager.actor.position, tempVector3D);
 			dist = Point.distance(selfPos, releaseTargetPos);
 			var inRange : Boolean;
+			
+			if (spellData.q_blink_type != 0)
+			{
+				return CASE_STATE_SUCCEED;
+			}
+			
 			if (path)
 			{
-				inRange = (path.length == 2) && (dist <= range);
+				inRange = (path.length == 2) && (dist <= 50);
 				if (!inRange)
 				{
 					return CASE_STATE_NOT_IN_RELEASE_RANGE;
@@ -696,7 +735,7 @@ package com.rpgGame.app.fight.spell
 			return targetPos;
 		}*/
 
-		private static function getNearestCanAtkRole(spellData : Q_skill_model) : SceneRole
+		public static function getNearestCanAtkRole(spellData : Q_skill_model) : SceneRole
 		{
 			var list : Vector.<SceneRole> = _roleList ? _roleList : SceneManager.getSceneRoleList();
 			list.sort(onSortNearestRole);

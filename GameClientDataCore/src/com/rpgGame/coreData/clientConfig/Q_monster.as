@@ -18,6 +18,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_name:String;
 		 /**  身体资源 */
 		public var q_body_res:String;
+		 /**  怪物等级 */
+		public var q_level:int;
 		 /**  坐骑资源 */
 		public var q_mount_res:String;
 		 /**  怪物头顶血条偏移 */
@@ -58,8 +60,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_say_condition:String;
 		 /**  怪物血量倍数（0：不加倍，1：加1倍，2：加2倍，类推）处理大于20Y血量的情况 */
 		public var q_hprate:int;
-		 /**  怪物基础属性 */
-		public var q_attributes:String;
+		 /**  总属性ID */
+		public var q_att_type:int;
 		 /**  装备属性占比（万分比） */
 		public var q_equip_ratio:int;
 		 /**  BUFF免疫类型（格式：[类型1，类型2] */

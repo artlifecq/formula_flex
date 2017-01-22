@@ -1,13 +1,14 @@
 package com.rpgGame.app.fight.spell
 {
 	import com.game.engine3D.utils.MathUtil;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.action.AttackStateReference;
 	import com.rpgGame.app.state.role.control.AttackHardStateReference;
 	import com.rpgGame.coreData.type.RoleStateType;
-
+	
 	import flash.geom.Point;
-
+	
 	import gs.TweenLite;
 
 	/**
@@ -51,7 +52,9 @@ package com.rpgGame.app.fight.spell
 				if (ref)
 				{
 					ref.onAfterExecute(onAttackExecute);
+					ref.onStartFrame(onSelfEffectFrame);
 					ref.onHitFrame(onAttackHitFrame);
+//					ref.onBreakFrame(onBreakFrame);
 					spellInfo.atkor.stateMachine.transition(RoleStateType.ACTION_ATTACK, ref, true);
 				}
 				else
@@ -100,7 +103,7 @@ package com.rpgGame.app.fight.spell
 		private static function onAttackExecute(ref : AttackStateReference) : void
 		{
 			SpellAnimationHelper.addKnifeLightEffect(ref.spellInfo);
-			onSelfEffectFrame(ref);
+//			onSelfEffectFrame(ref);
 		}
 		
 		/**
@@ -120,7 +123,14 @@ package com.rpgGame.app.fight.spell
 		 */		
 		private static function onAttackHitFrame(ref : AttackStateReference) : void
 		{
-			SpellAnimationHelper.addDestEffect(ref.targetRolePos.x, ref.targetRolePos.y, ref.angle, ref.spellInfo);
+			try
+			{
+				SpellAnimationHelper.addDestEffect(ref.targetRolePos.x, ref.targetRolePos.y, ref.angle, ref.spellInfo);
+			}
+			catch(e:Error)
+			{
+				GameLog.addShow("有被攻击者为空的情况，属于异常情况！！！");
+			}
 		}
 
 		/**
@@ -138,7 +148,7 @@ package com.rpgGame.app.fight.spell
 				if (spellInfo.blinkType > 0)
 				{
 					RoleStateUtil.blinkToPos(spellInfo.atkor, attackStateRef.statusType, spellInfo.atkorPos, spellInfo.targetPos, spellInfo.blinkSpeed, spellInfo.blinkHeight, 
-						spellInfo.soarFrameTime, spellInfo.hitFrameTime, spellInfo.breakFrameTime, spellInfo);
+						spellInfo.soarFrameTime, spellInfo.hitFrameTime, spellInfo);
 					return true;
 				}
 			}

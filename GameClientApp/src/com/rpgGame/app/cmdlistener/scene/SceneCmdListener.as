@@ -42,7 +42,9 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
 	import com.rpgGame.coreData.role.SceneDropGoodsItem;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
+	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
@@ -59,6 +61,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.map.message.ResRoundObjectsMessage;
 	import com.rpgGame.netData.map.message.SCSceneObjMoveMessage;
 	import com.rpgGame.netData.player.message.BroadcastPlayerAttriChangeMessage;
+	import com.rpgGame.netData.player.message.ResReviveSuccessMessage;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
@@ -106,6 +109,8 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(101117, onResChangeMapMessage);
 //			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SCENE_MAP_TRANSPORT, onSceneMapTransport);
 			SocketConnection.addCmdListener(101126, onResChangeMapFailedMessage);
+            // 复活成功
+			SocketConnection.addCmdListener(103115, onResReviveSuccessMessage);
 			
 //			SocketConnection.addCmdListener(SceneModuleMessages.S2C_TRIGGER_CLIENT_EVENT, onTriggerClientEvent);
 			
@@ -649,6 +654,28 @@ package com.rpgGame.app.cmdlistener.scene
 					return;
 			}
 		}
+        
+        private function onResReviveSuccessMessage(msg : ResReviveSuccessMessage) : void {
+            var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+            if (!role)
+                return;
+            var roleData : RoleData = role.data as RoleData;
+            
+            CharAttributeManager.setAttributeValue(roleData, CharAttributeType.HP, msg.hp);
+            
+            role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
+			
+			//to do 给这个人播放一个复活特效 
+			SpellAnimationHelper.addTargetEffect(role, 
+				RenderUnitID.LEVEL, 
+				RenderUnitType.LEVEL, 
+				EffectUrl.RELIVE_NORMAL);
+            
+            if(roleData.id == MainRoleManager.actorID)
+            {
+                ReliveManager.autoHideRelive();
+            }
+        }
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//////
