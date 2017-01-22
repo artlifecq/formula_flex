@@ -66,6 +66,68 @@ package com.rpgGame.app.fight.spell
 			}
 			info.motionFinish = true;
 		}
+		
+		public static function showSpellSingleHitEffect(info : ReleaseSpellInfo):void
+		{
+			var hurted : Boolean = false;
+			var role : SceneRole;
+			var hurtAnimation : Q_SpellAnimation = info.hurtAnimation;
+			var sputteringHurtAnimation : Q_SpellAnimation = info.sputteringHurtAnimation;
+			if (!sputteringHurtAnimation)
+				sputteringHurtAnimation = hurtAnimation;
+			
+			hurted = true;
+			
+			role = SceneManager.getSceneObjByID(info.singleHurtVo.roleID) as SceneRole;
+			if (role && role.usable)
+			{
+				if (RoleHpStatusManager.checkShowHpBarWhenHurt(role, info.atkor))
+				{
+					role.headFace.show();
+				}
+				
+				if (role == info.targetRole)
+				{
+					SpellAnimationHelper.addTargetHurtEffect(role, info, hurtAnimation);
+				}
+				else
+				{
+					SpellAnimationHelper.addTargetHurtEffect(role, info, sputteringHurtAnimation);
+				}
+				
+				if (role.isMainChar && info.atkor && info.atkor.usable)
+				{
+					info.atkor.updateInteractTime();
+				}
+				if (info.atkor && info.atkor.usable && info.atkor.isMainChar)
+				{
+					role.updateInteractTime();
+				}
+				//击退位移
+				if (info.singleHurtVo.hasPositionChange)
+				{
+					RoleStateUtil.beatToPos(role, info.singleHurtVo.newPosition, info.atkorPos, info.beatBackSpeed);
+				}
+				else
+				{
+					if (info.singleHurtVo.stiffTime > 0)//击飞
+					{
+						var fallRef : FallStateReference = role.stateMachine.getReference(FallStateReference) as FallStateReference;
+						fallRef.setParams(info.singleHurtVo.stiffTime);
+						role.stateMachine.transition(RoleStateType.ACTION_FALL, fallRef);
+					}
+				}
+				
+				//显示被击特效
+				var atkorPos : Point = (info.atkor && info.atkor.usable) ? new Point(info.atkor.x, info.atkor.z) : info.atkorPos;
+				var hitRef : HitStateReference = role.stateMachine.getReference(HitStateReference) as HitStateReference;
+				hitRef.setParams(atkorPos);
+				role.stateMachine.transition(RoleStateType.ACTION_HIT, hitRef);
+				var hurtRef : HurtStateReference = role.stateMachine.getReference(HurtStateReference) as HurtStateReference;
+				hurtRef.setParams(info, info.singleHurtVo);
+				role.stateMachine.transition(RoleStateType.CONTROL_HURT, hurtRef);
+			}
+		}
 
 		private static function showSpellHitEffect(info : ReleaseSpellInfo) : void
 		{
@@ -178,21 +240,21 @@ package com.rpgGame.app.fight.spell
 //					}
 //				}
 //			}
-			if (info.isTrapSpell)
-			{
-				if (hurted)
-				{
-					var expended : Boolean = ReleaseSpellInfo.expendReleaseInfo(info.flySceneObjID);
-					if (expended)
-					{
-						SpellAnimationHelper.removeSceneTrapEffect(info.atkorID, info.flySceneObjID);
-					}
-				}
-			}
-			else
-			{
+//			if (info.isTrapSpell)
+//			{
+//				if (hurted)
+//				{
+//					var expended : Boolean = ReleaseSpellInfo.expendReleaseInfo(info.flySceneObjID);
+//					if (expended)
+//					{
+//						SpellAnimationHelper.removeSceneTrapEffect(info.atkorID, info.flySceneObjID);
+//					}
+//				}
+//			}
+//			else
+//			{
 				ReleaseSpellInfo.removeReleaseInfo(info.flySceneObjID);
-			}
+//			}
 		}
 
 		public static function showSingleHurt(info : ReleaseSpellInfo, attackerId : Number, hurtRoleID : Number, hurtType : uint, hurtAmount : int) : void

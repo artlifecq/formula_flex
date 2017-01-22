@@ -142,7 +142,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_1;
 					break;
 				case 2:
@@ -156,7 +156,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 5:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_5;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -201,7 +201,7 @@ package com.rpgGame.app.cmdlistener.mount
 		{
 			var failId:int = buffer.readVarint32();
 			var failStr:String = "";
-			switch (failId)
+			/*switch (failId)
 			{
 				case 3:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_3;
@@ -221,7 +221,7 @@ package com.rpgGame.app.cmdlistener.mount
 				case 8:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_10;
 					break;
-			}
+			}*/
 			NoticeManager.showNotify(failStr, failId);
 		}
 		
@@ -289,7 +289,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_11;
 					break;
 				case 2:
@@ -312,7 +312,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 8:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_117;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -344,7 +344,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_18;
 					break;
 				case 2:
@@ -361,7 +361,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 6:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_23;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -388,7 +388,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_25;
 					break;
 				case 2:
@@ -396,7 +396,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 3:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_9;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -433,7 +433,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_3;
 					break;
 				case 2:
@@ -471,7 +471,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 13:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_38;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -533,7 +533,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_39;
 					break;
 				case 2:
@@ -583,7 +583,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 17:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_53;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -631,7 +631,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_54;
 					break;
 				case 2:
@@ -645,7 +645,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 5:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_57;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -682,7 +682,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_118;
 					break;
 				case 2:
@@ -720,7 +720,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 13:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_99;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -768,7 +768,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_68;
 					break;
 				case 2:
@@ -794,7 +794,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 9:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_75;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -840,7 +840,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_77;
 					break;
 				case 2:
@@ -848,7 +848,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 3:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_9;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -890,7 +890,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_75;
 					break;
 				case 2:
@@ -898,7 +898,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 3:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_80;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -943,7 +943,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_81;
 					break;
 				case 2:
@@ -954,7 +954,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 4:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_83;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -988,7 +988,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_75;
 					break;
 				case 2:
@@ -1002,7 +1002,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 5:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_9;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -1072,7 +1072,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_81;
 					break;
 				case 2:
@@ -1089,7 +1089,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 6:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_91;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -1174,7 +1174,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_93;
 					break;
 				case 2:
@@ -1188,7 +1188,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 5:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_97;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -1253,7 +1253,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_104;
 					break;
 				case 2:
@@ -1300,7 +1300,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 16:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_116;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}

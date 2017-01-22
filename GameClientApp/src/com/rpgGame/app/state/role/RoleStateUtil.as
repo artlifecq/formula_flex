@@ -31,8 +31,6 @@ package com.rpgGame.app.state.role
 	import flash.geom.Vector3D;
 	import flash.utils.getTimer;
 	
-	import gameEngine2D.NetDebug;
-	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -127,6 +125,14 @@ package com.rpgGame.app.state.role
 		{
 			if (!role || !role.usable)
 				return;
+			
+			var dist:int = Point.distance(new Point(role.position.x,role.position.z),new Point(pos.x,pos.y));
+			if(dist <= spacing)
+			{
+				role.faceToGround(pos.x,pos.y);
+				return;
+			}
+			
 			if (role.isMainChar || role.isMainCamouflage)
 			{
 				var nowTime : int = getTimer();
