@@ -395,28 +395,28 @@ package com.rpgGame.app.cmdlistener
 			switch (errID)
 			{
 				case 1:
-					failReason = LangNoticeInfo.FriendCmdListener_2;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_2;
 					break;
 				case 2:
-					failReason = LangNoticeInfo.FriendCmdListener_55;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_55;
 					break;
 				case 3:
-					failReason = LangNoticeInfo.FriendCmdListener_20;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_20;
 					break;
 				case 4:
-					failReason = LangNoticeInfo.FriendCmdListener_21;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_21;
 					break;
 				case 5:
-					failReason = LangNoticeInfo.FriendCmdListener_32;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_32;
 					break;
 				case 6:
-					failReason = LangNoticeInfo.FriendCmdListener_61;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_61;
 					break;
 				case 7:
-					failReason = LangNoticeInfo.FriendCmdListener_33;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_33;
 					break;
 				default:
-					failReason = LangNoticeInfo.FriendCmdListener_62;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_62;
 					break;
 			}
 			NoticeManager.showNotify(failReason, errID);
