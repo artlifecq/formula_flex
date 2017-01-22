@@ -26,7 +26,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.info.MapDataManager;
-	import com.rpgGame.coreData.lang.LangNoticeInfo;
+	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.role.BaseEntityData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
@@ -128,14 +128,14 @@ package com.rpgGame.app.fight.spell
 				return false;
             var info : HeroData = MainRoleManager.actorInfo;
             if (caseInfo.caseSpellData.q_need_mp > info.totalStat.mp) {
-                NoticeManager.showNotify(LangNoticeInfo.CastSpellByBinding);
+                NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellByBinding);
                 return false;
             }
             if (null != SceneRoleSelectManager.selectedRole) {
                 var modeState : int = FightManager.getFightRoleState(SceneRoleSelectManager.selectedRole);
                 if (modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY &&
                     modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND) {
-                    NoticeManager.showNotify(LangNoticeInfo.NotAttack);
+                    NoticeManager.showNotify(LangQ_NoticeInfo.NotAttack);
                     return false;
                 }
             }
@@ -245,7 +245,7 @@ package com.rpgGame.app.fight.spell
 //					{
 //						if (!_autoAtkNearRole)
 //						{
-//							NoticeManager.showNotify(LangNoticeInfo.CastSpellNoAccordWithWeapon); //"穿戴的武器不能释放该技能"
+//							NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellNoAccordWithWeapon); //"穿戴的武器不能释放该技能"
 //						}
 //						return CASE_STATE_FAIL;
 //					}
@@ -254,7 +254,7 @@ package com.rpgGame.app.fight.spell
 //				{
 //					if (!_autoAtkNearRole)
 //					{
-//						NoticeManager.showNotify(LangNoticeInfo.CastSpellHasNoWeapon); //"没有穿戴武器不能释放技能"
+//						NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellHasNoWeapon); //"没有穿戴武器不能释放技能"
 //					}
 //					return CASE_STATE_FAIL;
 //				}
@@ -264,7 +264,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.CastSpellIsDead); //"已死亡不能放技能"
+					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsDead); //"已死亡不能放技能"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -272,7 +272,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.CastSpellIsHarding); //"技能硬直中"
+					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsHarding); //"技能硬直中"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -280,7 +280,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.CastSpellIsLock); //"释放技能被锁定"
+					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsLock); //"释放技能被锁定"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -288,7 +288,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.CastSpellIsBlinking); //"冲锋中不能放技能"
+					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsBlinking); //"冲锋中不能放技能"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -296,7 +296,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.CastSpellIsBeatMoving); //"被击退中不能放技能"
+					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsBeatMoving); //"被击退中不能放技能"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -304,7 +304,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.CastSpellIsStun); //"眩晕中不能放技能"
+					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsStun); //"眩晕中不能放技能"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -312,7 +312,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.CastSpellIsHush); //"沉默中不能放技能"
+					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsHush); //"沉默中不能放技能"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -342,7 +342,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.SpellIsCD); //"技能正在冷却"
+					NoticeManager.showNotify(LangQ_NoticeInfo.SpellIsCD); //"技能正在冷却"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -350,7 +350,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.SpellIsOnlyUpMount); //"该技能只能在马上释放"
+					NoticeManager.showNotify(LangQ_NoticeInfo.SpellIsOnlyUpMount); //"该技能只能在马上释放"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -376,7 +376,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.CAST_SPELL_FORBID_IN_AREA); //"本区域内不能使用该技能"
+					NoticeManager.showNotify(LangQ_NoticeInfo.CAST_SPELL_FORBID_IN_AREA); //"本区域内不能使用该技能"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -438,13 +438,13 @@ package com.rpgGame.app.fight.spell
 									var areaType : int = AreaMapManager.getRoleInMapDataAreaType(MainRoleManager.actor);
 									if (areaType == MapAreaTypeEnum.SAFE)
 									{
-										NoticeManager.showNotify(LangNoticeInfo.CAST_SPELL_IN_SAFE_AREA); //"您在安全区域，不能攻击其他玩家"
+										NoticeManager.showNotify(LangQ_NoticeInfo.CAST_SPELL_IN_SAFE_AREA); //"您在安全区域，不能攻击其他玩家"
 										return CASE_STATE_FAIL;
 									}
 									areaType = AreaMapManager.getRoleInMapDataAreaType(selectedRole);
 									if (areaType == MapAreaTypeEnum.SAFE)
 									{
-										NoticeManager.showNotify(LangNoticeInfo.CAST_SPELL_TARGET_IN_SAFE_AREA); //"对方处于安全区中，不能被攻击"
+										NoticeManager.showNotify(LangQ_NoticeInfo.CAST_SPELL_TARGET_IN_SAFE_AREA); //"对方处于安全区中，不能被攻击"
 										return CASE_STATE_FAIL;
 									}
 
@@ -459,12 +459,12 @@ package com.rpgGame.app.fight.spell
 										var selectedData : RoleData = selectedRole.data as RoleData;
 										if (MainRoleManager.actorInfo.totalStat.level <= protectLevel)
 										{
-											NoticeManager.showNotify(LangNoticeInfo.SpellSelfIsProtect); //"70级以下为新手保护期，不能攻击其他玩家"
+											NoticeManager.showNotify(LangQ_NoticeInfo.SpellSelfIsProtect); //"70级以下为新手保护期，不能攻击其他玩家"
 											return CASE_STATE_FAIL;
 										}
 										else if (MainRoleManager.actorInfo.totalStat.level > protectLevel && selectedData.totalStat.level <= protectLevel)
 										{
-											NoticeManager.showNotify(LangNoticeInfo.SpellSelectedIsProtect); //"70级以下为新手保护期，对方不能被攻击"
+											NoticeManager.showNotify(LangQ_NoticeInfo.SpellSelectedIsProtect); //"70级以下为新手保护期，对方不能被攻击"
 											return CASE_STATE_FAIL;
 										}
 									}
@@ -477,7 +477,7 @@ package com.rpgGame.app.fight.spell
 							if (selectedRole.type == SceneCharType.BIAO_CHE) //镖车
 							{
 //								if (CountryManager.isAtMyCountry())
-//									NoticeManager.showNotify(LangNoticeInfo.SpellSelectedOnlyOtherCountryBiao); //"攻击本国镖车无效"
+//									NoticeManager.showNotify(LangQ_NoticeInfo.SpellSelectedOnlyOtherCountryBiao); //"攻击本国镖车无效"
 							}
 							targetRole = selectedRole;
 						}
@@ -498,12 +498,12 @@ package com.rpgGame.app.fight.spell
 							{
 								if (spellData.q_target == SpellTargetType.FRIEND)
 								{
-									NoticeManager.showNotify(LangNoticeInfo.SpellSelectedOnlyUseToFriend); //"该技能只能对友方释放"
+									NoticeManager.showNotify(LangQ_NoticeInfo.SpellSelectedOnlyUseToFriend); //"该技能只能对友方释放"
 									return CASE_STATE_FAIL;
 								}
 								else if (spellData.q_target == SpellTargetType.TEAM)
 								{
-									NoticeManager.showNotify(LangNoticeInfo.SpellSelectedOnlyUseToTeam); //"该技能只能对队友释放"
+									NoticeManager.showNotify(LangQ_NoticeInfo.SpellSelectedOnlyUseToTeam); //"该技能只能对队友释放"
 									return CASE_STATE_FAIL;
 								}
 							}
@@ -511,11 +511,11 @@ package com.rpgGame.app.fight.spell
 							{
 //								if (CountryManager.isAtMyCountry())
 //								{
-//									NoticeManager.showNotify(LangNoticeInfo.SpellSelectedOnlyOtherCountryBiao); //"攻击本国镖车无效"
+//									NoticeManager.showNotify(LangQ_NoticeInfo.SpellSelectedOnlyOtherCountryBiao); //"攻击本国镖车无效"
 //									return CASE_STATE_FAIL;
 //								}
 							}
-							NoticeManager.showNotify(LangNoticeInfo.SpellSelectedUnAttackable); //"当前选择的目标不可攻击"
+							NoticeManager.showNotify(LangQ_NoticeInfo.SpellSelectedUnAttackable); //"当前选择的目标不可攻击"
 							return CASE_STATE_FAIL;
 						}
 					}
@@ -597,7 +597,7 @@ package com.rpgGame.app.fight.spell
 				{
 					if (!_autoAtkNearRole)
 					{
-						NoticeManager.showNotify(LangNoticeInfo.SpellNeedSelectedAttackable); //"未选择目标，无法施放该技能"
+						NoticeManager.showNotify(LangQ_NoticeInfo.SpellNeedSelectedAttackable); //"未选择目标，无法施放该技能"
 					}
 					return CASE_STATE_FAIL;
 				}
