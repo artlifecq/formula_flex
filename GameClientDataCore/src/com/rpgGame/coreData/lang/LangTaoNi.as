@@ -7,9 +7,7 @@ package com.rpgGame.coreData.lang
 	* 【**不可手动修改此类**】，
 	*	
 	* 【任何修改都将被生成工具覆盖，如需修改请直接修改具体的config文件】
-	* @author fly.AutoUICreater
-	* @modifier L.L.M.Sunny
-	* 修改时间：2015-7-2 上午10:05:12
+	* @author NEIL
 	* 
 	*/
 	public class LangTaoNi
@@ -18,9 +16,9 @@ package com.rpgGame.coreData.lang
 		public static const TAO_NI_ENTER_SCENE_ALERT_INFO:String = "TAO_NI_ENTER_SCENE_ALERT_INFO";
 		 /**  你不是队长，不能开启讨逆副本 */
 		public static const TAO_NI_ENTER_SCENE_NOT_IS_TEAM_LEADER:String = "TAO_NI_ENTER_SCENE_NOT_IS_TEAM_LEADER";
-		 /**  即将进入下一阶段作战，请做好战斗准备 */
-		public static const TAO_NI_ENTER_NEW_STAGE:String = "TAO_NI_ENTER_NEW_STAGE";
-		 /**  下一波攻击即将到来，请做好战斗准备 */
+		 /**  欢迎将军前来讨逆平叛，当前叛军势大，请将军先做好防守准备，以待时机 */
+		public static const TAO_NI_ENTER_NEW_STAGE_1:String = "TAO_NI_ENTER_NEW_STAGE_1";
+		 /**  下一波叛军即将到来，请做好战斗准备 */
 		public static const TAO_NI_ENTER_NEW_WAVE:String = "TAO_NI_ENTER_NEW_WAVE";
 		 /**  讨逆副本挑战成功 */
 		public static const TAO_NI_FINISH_SUCCESS:String = "TAO_NI_FINISH_SUCCESS";
@@ -54,6 +52,22 @@ package com.rpgGame.coreData.lang
 		public static const COUNTRY_TAO_NI_START_INFO:String = "COUNTRY_TAO_NI_START_INFO";
 		 /**  讨逆副本结束 */
 		public static const COUNTRY_TAO_NI_END_INFO:String = "COUNTRY_TAO_NI_END_INFO";
+		 /**  <font color='#ffe258'>【第一阶段】击杀来犯的</font>$ */
+		public static const COUNTRY_TAO_NI_TASK_INFO_STAGE_1_ACTIVE:String = "COUNTRY_TAO_NI_TASK_INFO_STAGE_1_ACTIVE";
+		 /**  <font color='#ffe258'>【第二阶段】守卫</font>$<font color='#ffe258'>和</font>$ */
+		public static const COUNTRY_TAO_NI_TASK_INFO_STAGE_2_ACTIVE:String = "COUNTRY_TAO_NI_TASK_INFO_STAGE_2_ACTIVE";
+		 /**  【第一阶段】击杀来犯的$ */
+		public static const COUNTRY_TAO_NI_TASK_INFO_STAGE_1:String = "COUNTRY_TAO_NI_TASK_INFO_STAGE_1";
+		 /**  【第二阶段】守卫$和$ */
+		public static const COUNTRY_TAO_NI_TASK_INFO_STAGE_2:String = "COUNTRY_TAO_NI_TASK_INFO_STAGE_2";
+		 /**  <font color='#ffe258'>【第三阶段】进攻敌军山寨，击杀</font><font color='#ffe258'>$</font> */
+		public static const COUNTRY_TAO_NI_TASK_INFO_STAGE_3_ACTIVE:String = "COUNTRY_TAO_NI_TASK_INFO_STAGE_3_ACTIVE";
+		 /**  【第三阶段】进攻敌军山寨，击杀$ */
+		public static const COUNTRY_TAO_NI_TASK_INFO_STAGE_3:String = "COUNTRY_TAO_NI_TASK_INFO_STAGE_3";
+		 /**  探马来报，叛军派出斥候前来偷袭我方粮草，请速速前往守卫 */
+		public static const TAO_NI_ENTER_NEW_STAGE_2:String = "TAO_NI_ENTER_NEW_STAGE_2";
+		 /**  报！叛军溃兵冲开了山寨大门，我方现在可以直捣黄龙了 */
+		public static const TAO_NI_ENTER_NEW_STAGE_3:String = "TAO_NI_ENTER_NEW_STAGE_3";
 
 	}
 }

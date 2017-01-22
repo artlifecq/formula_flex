@@ -16,7 +16,7 @@ package com.rpgGame.coreData.clientConfig
 		public var id:int;
 		 /**  名字 */
 		public var name:String;
-		 /**  特效不随着人物移动 */
+		 /**  特效不随着人物移动（对地效果只能配成这个） */
 		public var scene_res:String;
 		 /**  特效随着人物移动 */
 		public var role_res:String;

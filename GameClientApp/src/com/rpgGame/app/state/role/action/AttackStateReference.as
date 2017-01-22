@@ -21,6 +21,9 @@ package com.rpgGame.app.state.role.action
 		
 		private var _soarFrameTime : int;
 		private var _hitFrameTime : int;
+		/**
+		 * 这个属性在攻击状态里，暂时没有用到 
+		 */		
 		private var _throwFrameTime : int;
 		/**
 		 * 攻速--暂时还没有启用，等后面有了这个属性，再启用 

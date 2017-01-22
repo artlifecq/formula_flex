@@ -184,18 +184,7 @@ package com.rpgGame.app.cmdlistener.scene
 			GameLog.addShow("技能流水号为： 对目标\t" + msg.uid);
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg.uid, msg, true);
-			ReleaseSpellHelper.releaseSpell(info);
-//			effectCharAttribute(info);
-			
-			//			if (info.atkor && info.atkor.isMainChar)
-			//			{
-			//				GameLog.addShow("释放技能" + info.flySceneObjID + "效果：" + info.spellEffectID);
-			//			}
-			//
-			//			for each (var bInfo : BuffInfo in info.stateList)
-			//			{
-			//				BuffManager.addBuf(bInfo);
-			//			}			
+			ReleaseSpellHelper.releaseSpell(info);			
 		}
 		
 		private function onResAttackVentToClientMessage(msg:ResAttackVentToClientMessage):void
@@ -204,7 +193,6 @@ package com.rpgGame.app.cmdlistener.scene
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg.uid, msg, true);
 			ReleaseSpellHelper.releaseSpell(info);
-//			effectCharAttribute(info);
 		}
 		
 		/**
@@ -227,9 +215,9 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onResAttackResultMessage(msg:ResAttackResultMessage):void
 		{
-//			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg.state.uid, msg);
-//			SpellHitHelper.fightSpellHitEffect(info);
-//			effectCharAttribute(info);
+			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(-1, msg);//-1 为不缓存的技能信息，也不知道哪里来的伤害，只知道是后端通知的伤害
+			SpellHitHelper.showSpellSingleHitEffect(info);
+			effectCharAttribute(info);
 			
 			//			if (info.atkor && info.atkor.isMainChar)
 			//			{

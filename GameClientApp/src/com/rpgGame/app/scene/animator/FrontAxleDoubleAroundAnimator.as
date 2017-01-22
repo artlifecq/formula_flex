@@ -39,10 +39,10 @@ package com.rpgGame.app.scene.animator
 		
 		public function FrontAxleDoubleAroundAnimator(spellInfo : ReleaseSpellInfo, targetPos : Vector3D, targetRole : SceneRole, totalTime : int, speed : int, isTrackTarget : Boolean,
 													  matchTerrain : Boolean, isFlyCross : Boolean, isAdaptiveTargetHeight : Boolean, 
-													  moveDelay : int, playDelay : int, releaseDelayTime : int, throwHeight : int, throwWeightRatio : int, 
+													  moveDelay : int, playDelay : int, /*releaseDelayTime : int,*/ throwHeight : int, throwWeightRatio : int, 
 													  frontAxleAroundRadius : int, frontAxleAroundAngularVelocity : Number, convergenceTimes : int)
 		{
-			super(spellInfo, targetPos, targetRole, totalTime, speed, isTrackTarget, matchTerrain, isFlyCross, isAdaptiveTargetHeight, moveDelay, playDelay, releaseDelayTime, 
+			super(spellInfo, targetPos, targetRole, totalTime, speed, isTrackTarget, matchTerrain, isFlyCross, isAdaptiveTargetHeight, moveDelay, playDelay, /*releaseDelayTime,*/ 
 				throwHeight, throwWeightRatio);
 			_frontAxleAroundRadius = frontAxleAroundRadius;
 			_frontAxleAroundAngularVelocity = frontAxleAroundAngularVelocity;

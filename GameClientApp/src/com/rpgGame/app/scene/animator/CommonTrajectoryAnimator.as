@@ -26,12 +26,10 @@ package com.rpgGame.app.scene.animator
 	import gs.easing.Linear;
 	
 	/**
-	 *
-	 * 普通弹道动画
-	 * @author L.L.M.Sunny
-	 * 创建时间：2016-01-05 上午11:12:28
-	 *
-	 */
+	 * 弹道动画控制 
+	 * @author NEIL
+	 * 
+	 */	
 	public class CommonTrajectoryAnimator implements IRenderAnimator
 	{
 		private static const POINT_1 : Point = new Point();
@@ -46,18 +44,39 @@ package com.rpgGame.app.scene.animator
 		protected var _destPosition : Vector3D;
 		protected var _targetPos : Vector3D;
 		protected var _targetRole : SceneRole;
+		/**
+		 * 飞行特效的每次更新位置时的当前位置，方面用来算当前飞行特效到目标点的方位 
+		 */		
 		protected var _lastPos : Vector3D;
 		protected var _lastOffset : Vector3D;
 		
 		protected var _totalTime : int;
-		protected var _trackTime : int;
+//		protected var _trackTime : int;
 		protected var _trackPerTime : Number;
+		/**
+		 * 到目标点所需要的时间，根据速度算出来的 
+		 */		
 		protected var _collideTime : int;
 		protected var _collidePerTime : Number;
+		/**
+		 * 弹道开始的时间 
+		 */		
 		protected var _startTime : int;
+		/**
+		 * 每一次更新时的当前时间刻度 
+		 */		
 		protected var _lastTime : int;
+		/**
+		 * 专门针对追踪弹道来计时的，当每次更新弹道的位置时，去获取目标的当前点 ，要求每次至少要在100毫秒以上的时间，才能获取目标的当前点，为了性能
+		 */		
 		protected var _lastUpdateTime : int;
+		/**
+		 * 从弹道开始到目前已经过去了多少毫秒 
+		 */		
 		protected var _elapseTime : int;
+		/**
+		 * 每次更新弹道的时间差（上一次更新后，到这一次要更新时的时间间隔） 
+		 */		
 		protected var _diffTime : int;
 		
 		protected var _speed : int;
@@ -65,11 +84,14 @@ package com.rpgGame.app.scene.animator
 		protected var _targetOffsetY : Number;
 		protected var _isTrackTarget : Boolean;
 		protected var _matchTerrain : Boolean;
+		/**
+		 * 当已经击中了目标，是否还要朝目标点，继续飞行 
+		 */		
 		protected var _isFlyCross : Boolean;
 		protected var _isAdaptiveTargetHeight : Boolean;
 		protected var _moveDelay : int;
 		protected var _playDelay : int;
-		protected var _releaseDelayTime : int;
+//		protected var _releaseDelayTime : int;
 		protected var _isMoving : Boolean;
 		protected var _isPlaying : Boolean;
 		protected var _spellInfo : ReleaseSpellInfo;
@@ -88,23 +110,26 @@ package com.rpgGame.app.scene.animator
 		public function CommonTrajectoryAnimator(spellInfo : ReleaseSpellInfo, targetPos : Vector3D, targetRole : SceneRole, 
 												 totalTime : int, speed : int, isTrackTarget : Boolean, matchTerrain : Boolean, 
 												 isFlyCross : Boolean, isAdaptiveTargetHeight : Boolean, moveDelay : int, 
-												 playDelay : int, releaseDelayTime : int, throwHeight : int, throwWeightRatio : int)
+												 playDelay : int, /*releaseDelayTime : int,*/ throwHeight : int, throwWeightRatio : int)
 		{
 			_spellInfo = spellInfo;
 			_targetPos = targetPos;
 			_targetRole = targetRole;
 			_totalTime = totalTime;
-			_trackTime = totalTime;
+//			_trackTime = totalTime;
 			_speed = speed;
 			_isTrackTarget = isTrackTarget;
 			_matchTerrain = matchTerrain;
 			_isFlyCross = isFlyCross;
 			_isAdaptiveTargetHeight = isAdaptiveTargetHeight;
+			
 			_moveDelay = moveDelay;
 			_playDelay = playDelay;
-			_releaseDelayTime = releaseDelayTime;
+//			_releaseDelayTime = releaseDelayTime;
+			
 			_throwHeight = throwHeight;
 			_throwWeightRatio = throwWeightRatio;
+			
 			_isMoving = false;
 			_isPlaying = false;
 		}
@@ -119,7 +144,9 @@ package com.rpgGame.app.scene.animator
 			var scene : GameScene3D = SceneManager.getScene();
 			var posY : Number = 0;//scene.sceneMapLayer.queryHeightAt(_destPosition.x, _destPosition.z);2.5D没有高度值，因为只有2维
 			_destHeightOffset = _destPosition.y - posY;
+			
 			_renderSet.position = _destPosition;
+			
 			_renderSet.offsetY = 0;
 			_renderSet.rotationX = 0;
 			_renderSet.rotationY = _atkorRotationY;
@@ -135,13 +162,21 @@ package com.rpgGame.app.scene.animator
 			}
 			
 			if (_moveDelay > 0)
+			{
 				TweenLite.delayedCall(_moveDelay * 0.001, onStartMove);
+			}
 			else
+			{
 				onStartMove();
+			}
 			if (_playDelay > 0)
+			{
 				TweenLite.delayedCall(_playDelay * 0.001, onStartPlay);
+			}
 			else
+			{
 				onStartPlay();
+			}
 		}
 		
 		public function setAtkorData(position : Vector3D, rotationY : Number, destPosition : Vector3D) : void
@@ -217,6 +252,11 @@ package com.rpgGame.app.scene.animator
 			return locusPoint;
 		}
 		
+		/**
+		 *  
+		 * @param isReached 是否一定要把策划填的总得飞行时间，飞完---此值受isflycross影响。技能基础表的q_is_fly_cross字段来控制
+		 * 
+		 */		
 		private function updateMove(isReached : Boolean = false) : void
 		{
 			var locusPoint : AnimatorLocusPoint = _locusPointIndex < _locusPoints.length ? _locusPoints[_locusPointIndex] : null;
@@ -232,10 +272,10 @@ package com.rpgGame.app.scene.animator
 			POINT_2.setTo(_targetPos.x, _targetPos.z);
 			var angle : Number = ZMath.getTowPointsAngle(POINT_1, POINT_2);
 			var dist : Number = MathUtil.getDistance(POINT_1.x, POINT_1.y, POINT_2.x, POINT_2.y);
-			_collideTime = dist / (_speed * 0.001);
+			_collideTime = dist / (_speed * 0.001);//到目标点所需要的时间，根据速度算出来的
 			_renderSet.rotationY = 270 - angle;
 			
-			var maxDist : int = isReached ? (_speed * 0.001 * _trackTime) : dist;
+			var maxDist : int = isReached ? (_speed * 0.001 * _totalTime) : dist;
 			var angleRad : Number = angle * Math.PI / 180;
 			var cosV : Number = Math.cos(angleRad);
 			var sinV : Number = Math.sin(angleRad);
@@ -253,18 +293,18 @@ package com.rpgGame.app.scene.animator
 			{
 				if (_matchTerrain)
 				{
-					TweenLite.to(_renderSet, _trackTime * 0.001, {x: _endPosX, z: _endPosZ, ease: Linear.easeNone, overwrite: 0, onUpdate: onUpdateAnimation, onComplete: onReachRemoveEffect});
+					TweenLite.to(_renderSet, _totalTime * 0.001, {x: _endPosX, z: _endPosZ, ease: Linear.easeNone, overwrite: 0, onUpdate: onUpdateAnimation, onComplete: onReachRemoveEffect});
 				}
 				else
 				{
 					if (_isAdaptiveTargetHeight)
 					{
 						_endRotationX = 0;
-						TweenLite.to(_renderSet, _trackTime * 0.001, {x: _endPosX, z: _endPosZ, rotationX: _endRotationX, ease: Linear.easeNone, overwrite: 0, onUpdate: onUpdateAnimation, onComplete: onReachRemoveEffect});
+						TweenLite.to(_renderSet, _totalTime * 0.001, {x: _endPosX, z: _endPosZ, rotationX: _endRotationX, ease: Linear.easeNone, overwrite: 0, onUpdate: onUpdateAnimation, onComplete: onReachRemoveEffect});
 					}
 					else
 					{
-						TweenLite.to(_renderSet, _trackTime * 0.001, {x: _endPosX, z: _endPosZ, ease: Linear.easeNone, overwrite: 0, onUpdate: onUpdateAnimation, onComplete: onReachRemoveEffect});
+						TweenLite.to(_renderSet, _totalTime * 0.001, {x: _endPosX, z: _endPosZ, ease: Linear.easeNone, overwrite: 0, onUpdate: onUpdateAnimation, onComplete: onReachRemoveEffect});
 					}
 				}
 			}
@@ -279,7 +319,7 @@ package com.rpgGame.app.scene.animator
 				}
 				else
 				{
-					var hitTime : int = _collideTime - (_moveDelay - _releaseDelayTime);
+					var hitTime : int = _collideTime - /*(*/_moveDelay /*- _releaseDelayTime)*/;
 					if (hitTime < 0)
 						hitTime = 0;
 					if (hitTime > 0)
@@ -287,11 +327,12 @@ package com.rpgGame.app.scene.animator
 						if (_isAdaptiveTargetHeight)
 						{
 							_endOffsetY = _targetPos.y + _targetOffsetY;
-							_endRotationX = dist > 0 ? Math.atan((_endOffsetY - _destPosition.y) / dist) * 57.33 : 0;
+							_endRotationX = dist > 0 ? Math.atan((_endOffsetY - _destPosition.y) / dist) * 57.33 : 0;//旋转x轴，匹配从上向下，或者从下朝上的感觉
 							TweenLite.to(_renderSet, hitTime * 0.001, {x: _endPosX, z: _endPosZ, y: _endOffsetY, rotationX: _endRotationX, ease: Linear.easeNone, overwrite: 0, onUpdate: onUpdateAnimation, onComplete: onReachRemoveEffect});
 						}
 						else
 						{
+							//这个控制飞向目标点的
 							TweenLite.to(_renderSet, hitTime * 0.001, {x: _endPosX, z: _endPosZ, ease: Linear.easeNone, overwrite: 0, onUpdate: onUpdateAnimation, onComplete: onReachRemoveEffect});
 							var scene : GameScene3D;
 							var currThrowHeight : int;
@@ -300,6 +341,7 @@ package com.rpgGame.app.scene.animator
 								scene = SceneManager.getScene();
 								_endPosY = scene.sceneMapLayer.queryHeightAt(_endPosX, _endPosZ) + _destHeightOffset;
 								currThrowHeight = _renderSet.y + (_throwWeightRatio > 0 ? (_throwHeight * dist * 0.5 / _throwWeightRatio) : _throwHeight);
+								//这个控制飞行特效的 y值，也就是高度值
 								TweenLite.to(_renderSet, hitTime * 0.5 * 0.001, {y: currThrowHeight, ease: Cubic.easeOut, overwrite: 0, onComplete: onThrowOffComplete, onCompleteParams: [hitTime]});
 							}
 							else if (_throwWeightRatio > 0) //角度值
@@ -307,6 +349,7 @@ package com.rpgGame.app.scene.animator
 								scene = SceneManager.getScene();
 								_endPosY = scene.sceneMapLayer.queryHeightAt(_endPosX, _endPosZ) + _destHeightOffset;
 								currThrowHeight = _renderSet.y + dist * 0.5 * Math.tan(_throwWeightRatio * 0.0175);
+								//这个控制飞行特效的 y值，也就是高度值
 								TweenLite.to(_renderSet, hitTime * 0.5 * 0.001, {y: currThrowHeight, ease: Cubic.easeOut, overwrite: 0, onComplete: onThrowOffComplete, onCompleteParams: [hitTime]});
 							}
 						}
@@ -393,7 +436,7 @@ package com.rpgGame.app.scene.animator
 				_elapseTime = currTime - _startTime;
 				_diffTime = currTime - _lastTime;
 				_lastTime = currTime;
-				_trackPerTime = _elapseTime / _trackTime;
+				_trackPerTime = _elapseTime / _totalTime;
 				_trackPerTime = _trackPerTime > 1 ? 1 : _trackPerTime;
 				_collidePerTime = _elapseTime / _collideTime;
 				_collidePerTime = _collidePerTime > 1 ? 1 : _collidePerTime;
@@ -465,7 +508,7 @@ package com.rpgGame.app.scene.animator
 			_destHeightOffset = 0;
 			_targetOffsetY = 0;
 			_totalTime = 0;
-			_trackTime = 0;
+//			_trackTime = 0;
 			_trackPerTime = 0;
 			_collideTime = 0;
 			_collidePerTime = 0;
@@ -481,7 +524,7 @@ package com.rpgGame.app.scene.animator
 			_isAdaptiveTargetHeight = false;
 			_moveDelay = 0;
 			_playDelay = 0;
-			_releaseDelayTime = 0;
+//			_releaseDelayTime = 0;
 			_isMoving = false;
 			_isPlaying = false;
 			_spellInfo = null;

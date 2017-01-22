@@ -224,7 +224,8 @@ package com.rpgGame.app.cmdlistener.engine
                             modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)
 						{
                             // 可攻击
-                            if (role.type == SceneCharType.MONSTER) {
+                            if (role.type == SceneCharType.MONSTER) 
+							{
                                 WalkToRoleManager.walkToRole(currTarget as SceneRole);
                             }
 //							if(MainRoleManager.actorInfo.zhanCheOwnerID <= 0)//没在战车上

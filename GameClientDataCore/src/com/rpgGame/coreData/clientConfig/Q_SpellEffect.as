@@ -20,7 +20,7 @@ package com.rpgGame.coreData.clientConfig
 		public var attack_motion:String;
 		 /**  是否残影（0没有残影；1表示有残影） */
 		public var ghost_effect:int;
-		 /**  技能施法时长（只能比动作的施法时间长，否则以动作施法时间为准，值为总时长） */
+		 /**  施法时长（填多久就锁定多久不能移动，不填等动作播完） */
 		public var cast_time:int;
 		 /**  刀光特效（和武器相关需要根据动作调整特效出现时间） */
 		public var cast_animation:int;
@@ -36,18 +36,16 @@ package com.rpgGame.coreData.clientConfig
 		public var fly_animation:int;
 		 /**  飞行弹道特效的出现时间（跟弹道有关），单位毫秒，不配默认为0 */
 		public var delay_time:int;
-		 /**  抬手特效出现时间 */
+		 /**  抬手特效出现时间（若不填则直接播放特效） */
 		public var start_frame_time:int;
-		 /**  地面特效出现时间（1.若为动点飞行弹道相关的对地击中点特效，则不需要配置出现时间2.若不配延迟时间，则动作播放完后才播特效） */
+		 /**  地面特效出现时间（1.若为动点飞行弹道相关的对地击中点特效，则不需要配置出现时间2.若不配延迟时间，则动作播放完后才开始播特效） */
 		public var hit_frame_time:int;
-		 /**  动作的起始时间（可以定义从动作的某帧开始播放--特殊需求会有用） */
+		 /**  动作的起始时间（可以定义从动作的某帧开始播放，前面的帧自动被跳过） */
 		public var carom_start_frame_time:int;
 		 /**  受击飘字延迟时间(必须比hit_frame_time大，否则则以hit_frame_time的时间为准） */
 		public var hurt_delay:int;
 		 /**  凌空时间 */
 		public var soar_frame_time:int;
-		 /**  是否跟踪目标 默认不跟踪（0不跟踪，1是跟踪） */
-		public var is_track_target:int;
 		 /**  施法音效 */
 		public var cast_sound:int;
 		 /**  爆点音效 */
