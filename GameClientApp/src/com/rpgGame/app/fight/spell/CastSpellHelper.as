@@ -402,6 +402,8 @@ package com.rpgGame.app.fight.spell
 			} 
 			else 
 			{
+                releaseRange = releaseRange - DEVIATION_RANGE;
+                releaseRange = releaseRange < 0 ? 0 : releaseRange;
                 do {
                     if (null == SceneRoleSelectManager.selectedRole) {
                         // 如果没有锁定目标
@@ -419,8 +421,6 @@ package com.rpgGame.app.fight.spell
                                 return CASE_STATE_FAIL;
                             }
                             MainRoleManager.actor.faceToGround(scenePosition.x, scenePosition.y);
-                            releaseRange = releaseRange - DEVIATION_RANGE;
-                            releaseRange = releaseRange < 0 ? 0 : releaseRange;
                             if (0 == spellData.q_blink_type) {
                                 var mousePos : Point = new Point(scenePosition.x, scenePosition.y);
                                 angle = MathUtil.getAngle(selfPos.x, selfPos.y, mousePos.x, mousePos.y);
@@ -460,8 +460,6 @@ package com.rpgGame.app.fight.spell
                         } else {
                             angle = 270 - MainRoleManager.actor.rotationY;
                             radian = angle * Math.PI / 180;
-                            releaseRange = releaseRange - DEVIATION_RANGE;
-                            releaseRange = releaseRange < 0 ? 0 : releaseRange;
                             releaseTargetPos = new Point();
                             releaseTargetPos.x = selfPos.x + releaseRange * Math.cos(radian);
                             releaseTargetPos.y = selfPos.y + releaseRange * Math.sin(radian);
@@ -477,7 +475,7 @@ package com.rpgGame.app.fight.spell
                         return CASE_STATE_FAIL;
                     }
                     CONFIG::netDebug {
-                        NetDebug.LOG("CastSpellHelper setSpellTarget spellID:" + spellData.q_skillID + " q_hurt_type:" + spellData.q_hurt_type);
+                        NetDebug.LOG("CastSpellHelper setSpellTarget spellID:" + spellData.q_skillID + " q_hurt_type:" + spellData.q_hurt_type + " releaseRange:" + releaseRange);
                     }
                     if (0 == spellData.q_hurt_type) {
                         // 攻击技能
@@ -557,24 +555,34 @@ package com.rpgGame.app.fight.spell
                     var dx : Number = Math.cos(radian);
                     var dy : Number = Math.sin(radian);
                     
-                    releaseRange = releaseRange - DEVIATION_RANGE;
-                    releaseRange = releaseRange < 0 ? 0 : releaseRange;
-                    
-                    var releaseDist : int = Point.distance(selfPos, releaseTargetPos);
-                    
-                    CONFIG::netDebug {
-                        NetDebug.LOG("CastSpellHelper setSpellTarget spellID:" + spellData.q_skillID + " releaseDist:" + releaseDist + " releaseRange:" + releaseRange);
+                    if (0 == spellData.q_blink_type) {
+                        var mousePos : Point = new Point(releasePos.x, releasePos.y);
+                        angle = MathUtil.getAngle(selfPos.x, selfPos.y, mousePos.x, mousePos.y);
+                        radian = angle * Math.PI / 180;
+                        dist = Point.distance(selfPos, mousePos);
+                        releaseTargetPos = new Point(selfPos.x, selfPos.y);
+                        if (dist > releaseRange) {
+                            // 距离大于最大释放距离
+                            dist = dist - releaseRange;
+                            dist = dist < 0 ? 0 : dist;
+                            releaseTargetPos.x = selfPos.x + dist * Math.cos(radian);
+                            releaseTargetPos.y = selfPos.y + dist * Math.sin(radian);
+                            //releaseTargetPos.x = selfPos.x;
+                            //releaseTargetPos.y = selfPos.y;
+                            mousePos.x = selfPos.x + releaseRange * Math.cos(radian);
+                            mousePos.y = selfPos.y + releaseRange * Math.sin(radian);
+                        }
+                        targetPos = new Point(releaseTargetPos.x, releaseTargetPos.y);
+                        releasePos = mousePos;
+                    } else {
+                        angle = 270 - MainRoleManager.actor.rotationY;
+                        radian = angle * Math.PI / 180;
+                        releaseTargetPos = new Point();
+                        releaseTargetPos.x = selfPos.x + releaseRange * Math.cos(radian);
+                        releaseTargetPos.y = selfPos.y + releaseRange * Math.sin(radian);
+                        targetPos = new Point(selfPos.x, selfPos.y);
+                        releasePos = new Point(releaseTargetPos.x, releaseTargetPos.y);
                     }
-                    dist = 0;
-                    if (releaseDist > releaseRange) {
-                        dist = releaseDist - releaseRange;
-                    }
-                    
-                    targetPos.x = selfPos.x + dist * dx;
-                    targetPos.y = selfPos.y + dist * dy;
-                    
-                    releasePos.x = releaseTargetPos.x;
-                    releasePos.y = releaseTargetPos.y;
                 } while (false);
             }
 //			else if (spellData.q_is_locking_spell) //锁定技或者在挂机时都需要目标
