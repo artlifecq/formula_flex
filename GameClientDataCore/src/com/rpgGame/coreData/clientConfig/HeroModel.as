@@ -24,6 +24,8 @@ package com.rpgGame.coreData.clientConfig
 		public var animatRes_mojia_woman:String;
 		 /**  医家动画资源名称 */
 		public var animatRes_yijia:String;
+		 /**    */
+		public var animatRes_waibao:String;
 
 	}
 }

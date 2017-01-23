@@ -96,6 +96,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_fly_spacing:int;
 		 /**  飞行是否追踪（0是不追踪，1是追踪） */
 		public var q_fly_follow:int;
+		 /**  是否计算路径点伤害（0不计算，1计算） */
+		public var q_fly_cal_line:int;
 		 /**  施法距离限制（自身与目标之间的距离）（单位：格子）,地面行走魔法表示行走距离(小于等于3：判定为近战攻击（处理音效）大于3：判定为远程攻击（处理音效）)   0表示无限距离 */
 		public var q_range_limit:int;
 		 /**  保持间距（单位：像素）（不配默认使用施法范围） */
