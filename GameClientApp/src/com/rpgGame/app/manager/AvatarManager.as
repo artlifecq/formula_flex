@@ -488,11 +488,7 @@ package com.rpgGame.app.manager
 				switch (roleData.job)
 				{
 					case 1:
-						animatResID = heroModel.animatRes_bingjia;
-						if (mountModel)
-						{
-							mountAnimatResID = mountModel.animatRes;
-						}
+						animatResID = heroModel.animatRes_bingjia;	
 						break;
 					case 2:
 						if(roleData.sex)
@@ -502,10 +498,6 @@ package com.rpgGame.app.manager
 						else
 						{
 							animatResID = heroModel.animatRes_mojia_woman;
-						}
-						if (mountModel)
-						{
-							mountAnimatResID = mountModel.animatRes;
 						}
 						break;
 					case 3:
@@ -517,18 +509,18 @@ package com.rpgGame.app.manager
 						{
 							animatResID = heroModel.animatRes_mojia_woman;
 						}
-						if (mountModel)
-						{
-							mountAnimatResID = mountModel.animatRes;
-						}
 						break;
 					case 4:
 						animatResID = heroModel.animatRes_yijia;
-						if (mountModel)
-						{
-							mountAnimatResID = mountModel.animatRes;
-						}
 						break;
+					case 5:
+						animatResID = heroModel.animatRes_waibao;
+						break;
+				}
+				
+				if (mountModel)
+				{
+					mountAnimatResID = mountModel.animatRes;
 				}
 				
 				var weaponRes : AvatarWeaponRes = AvatarWeapontResCfgData.getInfo(roleData.weapon);

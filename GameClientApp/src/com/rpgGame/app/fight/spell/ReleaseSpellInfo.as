@@ -24,8 +24,6 @@ package com.rpgGame.app.fight.spell
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	
-	import cmodule.PreLoader._sprintf;
-	
 	import org.game.netCore.net.Message;
 
 	/**
@@ -64,7 +62,7 @@ package com.rpgGame.app.fight.spell
 			}
 			else if(msg is ResAttackResultMessage)
 			{
-				createSingleResult(info, msg as ResAttackResultMessage);
+				info.createSingleResult(info, msg as ResAttackResultMessage);
 			}
 			
 			if (waitCache)
@@ -416,10 +414,11 @@ package com.rpgGame.app.fight.spell
 			}
 		}
 		
-		private static function createSingleResult(info:ReleaseSpellInfo,msg : ResAttackResultMessage):void
+		private function createSingleResult(info:ReleaseSpellInfo,msg : ResAttackResultMessage):void
 		{
 			var isHited : Boolean = false;
 			var resultInfo:AttackResultInfo = msg.state;
+			
 			var roleID:Number = resultInfo.targetId.ToGID();
 			var hurtResultVO : FightHurtResult = new FightHurtResult(roleID);
 			hurtResultVO.curLife = resultInfo.damage;
@@ -461,9 +460,29 @@ package com.rpgGame.app.fight.spell
 				}
 			}
 			
+			_atkorID = resultInfo.attackerId.ToGID();
+			if (_atkorID > 0)
+			{
+				_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
+				if (_atkor && !_atkor.usable)
+					_atkor = null;
+			}
+			
+			if(_atkor == null)
+			{
+				GameLog.addShow("攻击者为空!攻击者服务器ID为：\t 这些伤害不知道哪里来的，也不需要关注是谁打的");
+			}
+			
+			if(_atkor && _atkor.usable)
+			{
+				_atkorPos = new Point(_atkor.x, _atkor.z);
+			}
+			
 			info.spellData = SpellDataManager.getSpellData(resultInfo.skillId);
 			info.isMainCharHited = isHited;
 			info.singleHurtVo = hurtResultVO;
+			
+			readSpellEffectData(info.spellData.q_spell_effect);
 		}
 
 		/**
@@ -1054,7 +1073,5 @@ package com.rpgGame.app.fight.spell
 		{
 			_spellData = value;
 		}
-
-
 	}
 }

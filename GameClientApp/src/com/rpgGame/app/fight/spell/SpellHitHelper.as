@@ -72,9 +72,6 @@ package com.rpgGame.app.fight.spell
 			var hurted : Boolean = false;
 			var role : SceneRole;
 			var hurtAnimation : Q_SpellAnimation = info.hurtAnimation;
-			var sputteringHurtAnimation : Q_SpellAnimation = info.sputteringHurtAnimation;
-			if (!sputteringHurtAnimation)
-				sputteringHurtAnimation = hurtAnimation;
 			
 			hurted = true;
 			
@@ -86,14 +83,7 @@ package com.rpgGame.app.fight.spell
 					role.headFace.show();
 				}
 				
-				if (role == info.targetRole)
-				{
-					SpellAnimationHelper.addTargetHurtEffect(role, info, hurtAnimation);
-				}
-				else
-				{
-					SpellAnimationHelper.addTargetHurtEffect(role, info, sputteringHurtAnimation);
-				}
+				SpellAnimationHelper.addTargetHurtEffect(role, info, hurtAnimation);
 				
 				if (role.isMainChar && info.atkor && info.atkor.usable)
 				{
