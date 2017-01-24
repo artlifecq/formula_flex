@@ -1,15 +1,19 @@
 package com.rpgGame.app.ui.main.chat {
+    import com.rpgGame.app.manager.AvatarManager;
     import com.rpgGame.app.manager.chat.ChatInputManager;
     import com.rpgGame.app.manager.chat.ChatManager;
     import com.rpgGame.app.manager.chat.ChatSpeakHistoryManager;
     import com.rpgGame.app.manager.chat.FaceGroupManager;
     import com.rpgGame.app.manager.chat.NoticeManager;
+    import com.rpgGame.app.manager.fight.FightFaceHelper;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.richText.RichTextCustomLinkType;
     import com.rpgGame.app.richText.RichTextCustomUtil;
     import com.rpgGame.app.richText.component.RichTextArea3D;
+    import com.rpgGame.app.scene.SceneRole;
     import com.rpgGame.app.ui.main.chat.laba.VipChatCanvas;
     import com.rpgGame.core.events.ChatEvent;
+    import com.rpgGame.core.events.MapEvent;
     import com.rpgGame.core.manager.tips.TargetTipsMaker;
     import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
@@ -17,6 +21,7 @@ package com.rpgGame.app.ui.main.chat {
     import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
     import com.rpgGame.coreData.clientConfig.FaceInfo;
     import com.rpgGame.coreData.info.MapDataManager;
+    import com.rpgGame.coreData.type.EnumHurtType;
     import com.rpgGame.coreData.type.chat.EnumChatChannelType;
     import com.rpgGame.coreData.utils.ColorUtils;
     import com.rpgGame.netData.chat.message.ResChatMessage;
@@ -25,6 +30,7 @@ package com.rpgGame.app.ui.main.chat {
     import flash.text.TextFormat;
     import flash.text.TextFormatAlign;
     import flash.ui.Keyboard;
+    import flash.utils.setInterval;
     
     import feathers.controls.Button;
     import feathers.controls.Scroller;
@@ -195,11 +201,25 @@ package com.rpgGame.app.ui.main.chat {
 			
 			this.addEventListener(TouchEvent.TOUCH, this.onTouchEventHandler);
 			Starling.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, this.onKeyboardEventHandler);
+			
+		/*	
+			//测试飘字代码
+			EventManager.addEvent(MapEvent.UPDATE_MAP_ROLE_ADD, onadd);
+			setInterval(function():void{
+				var hp:int=(10000*Math.random()+5000);
+				FightFaceHelper.showAttChange(EnumHurtType.ADDHP,hp);
+			},1000);*/
 		}
 		
+		private function onadd(sceneRole : SceneRole) : void
+		{
+			if(!sceneRole.isMainChar){
+				FightFaceHelper.showHurtText(MainRoleManager.actor,sceneRole,0,10000*Math.random()+5000);
+			}
+		}
 		/**
 		 * 自己的消息发送成功了
-		 * @param info
+		 * @param infos
 		 * 
 		 */		
 		private function onSendSuccess( info:ResChatMessage ):void 
@@ -596,8 +616,11 @@ package com.rpgGame.app.ui.main.chat {
 				return;
 			}
 			
+			
 			ChatManager.currentSiLiaoTargetName=MainRoleManager.actorInfo.name;
 			ChatManager.reqSendChat( sendMsg, _curSendChannel,  ChatManager.currentSiLiaoTargetName );
+			
+			AvatarManager.callEquipmentChange(MainRoleManager.actor);
         }
         
         private function updateScroller() : void {

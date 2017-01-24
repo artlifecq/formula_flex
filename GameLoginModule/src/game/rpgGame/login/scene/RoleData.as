@@ -1,43 +1,46 @@
-package game.rpgGame.login.scene
+﻿package game.rpgGame.login.scene
 {
+	import flash.geom.Point;
+	
+	import game.rpgGame.login.scene.AvatarInfo;
+
 	/**
 	 *
 	 * 角色数据
 	 * @author L.L.M.Sunny
-	 * 创建时间：2015-8-31 上午11:32:15
+	 * 创建时间：2015-5-4 上午11:32:15
 	 *
 	 */
-	public class RoleData
+	public class RoleData  extends BaseEntityData
 	{
-		private var _id : Number = 0;
-		/** 名字 */
-		public var name : String = "";
+
+		private var _type : int;
 		/**
 		 * 换装信息
 		 */
 		public var avatarInfo : AvatarInfo;
-		
-		public function RoleData()
+
+		/**
+		 *
+		 * @param type 角色类型
+		 *
+		 */
+		public function RoleData(type : int)
 		{
+			_type = type;
 			avatarInfo = new AvatarInfo();
 		}
-		
+
 		/**
-		 * 标识id (也是场景唯一标识符ID)
+		 * 角色类型
 		 * @return
 		 *
 		 */
-		public function get id() : Number
+		public function get type() : int
 		{
-			return _id;
+			return _type;
 		}
-		
-		/**
-		 * @private
-		 */
-		public function set id(value : Number) : void
-		{
-			_id = value;
-		}
+
+
 	}
 }
