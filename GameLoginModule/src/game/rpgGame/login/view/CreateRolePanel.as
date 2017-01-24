@@ -280,13 +280,15 @@ package game.rpgGame.login.view
 			job_info_2.weaponResID = "pc/weapon/mojia_wq_crossbow_007";
 			job_info_2.weaponEffectID = "tx_nu_01";
 			job_info_2.deputyWeaponResID = "pc/weapon/mojia_wq_crossbow_007";			
+			job_info_2.deputyWeaponEffectID="tx_nu_01";
 			
 			job_info_3=new AvatarInfo();
 			job_info_3.setBodyResID("pc/body/mojia_m_pl04_skin","pc/body/mojia_m_pl04_animat");
 			job_info_3.hairResID = "pc/hair/mojia_m_pl04_toufa_skin";
 			job_info_3.weaponResID = "pc/weapon/mojia_wq_crossbow_007";
 			job_info_3.weaponEffectID = "tx_nu_01";
-			job_info_3.deputyWeaponResID = "pc/weapon/mojia_wq_crossbow_007";			
+			job_info_3.deputyWeaponResID = "pc/weapon/mojia_wq_crossbow_007";		
+			job_info_3.deputyWeaponEffectID="tx_nu_01";
 			
 			avatarInfos=new Array();
 			avatarInfos.push([job_info_0,null]);
@@ -311,6 +313,7 @@ package game.rpgGame.login.view
 			this._avatarData.avatarInfo.weaponEffectID = avatarInfos[jobGroup.selectedIndex][sexGroup.selectedIndex].weaponEffectID;
 			this._avatarData.avatarInfo.weaponEffectScale = avatarInfos[jobGroup.selectedIndex][sexGroup.selectedIndex].weaponEffectScale;
 			this._avatarData.avatarInfo.deputyWeaponResID = avatarInfos[jobGroup.selectedIndex][sexGroup.selectedIndex].deputyWeaponResID;
+			this._avatarData.avatarInfo.deputyWeaponEffectID = avatarInfos[jobGroup.selectedIndex][sexGroup.selectedIndex].deputyWeaponEffectID;
 			
 			this._avatar.setRoleData(this._avatarData);
 			this._avatar.role.setScale(3);
@@ -318,6 +321,12 @@ package game.rpgGame.login.view
 		
 		public function destroy() : void
 		{
+			if(testBtn){
+				_stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+				testBtn.removeEventListener(starling.events.TouchEvent.TOUCH, onTouchTest);
+			}
+			
+			
 			if (_stage)
 			{
 				_stage.removeEventListener(flash.events.Event.RESIZE, onStageResize);
