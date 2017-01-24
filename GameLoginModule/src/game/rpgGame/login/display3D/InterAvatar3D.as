@@ -29,7 +29,7 @@ package game.rpgGame.login.display3D
 			if (this._role == null)
 			{
 				this._role = SceneRole.create("0",data.id);
-//				_role.rotationX = 45;
+				_role.rotationX = -25;
 			}
 			this._role.data = data;
 			

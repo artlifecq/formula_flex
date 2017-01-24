@@ -1,5 +1,6 @@
 package game.rpgGame.login.view
 {
+	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.utils.DisplayUtil;
 	import com.gameClient.alert.AlertPanel;
@@ -246,7 +247,7 @@ package game.rpgGame.login.view
 		{
 			_avatar=new InterAvatar3D();
 			_avatar.x=700;
-			_avatar.y=800;
+			_avatar.y=750;
 			this.addChild3D(this._avatar);
 			_avatarData=new RoleData(0);
 			
