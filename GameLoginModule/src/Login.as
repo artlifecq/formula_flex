@@ -1,14 +1,15 @@
 package
 {
 	import com.game.engine3D.manager.Stage3DLayerManager;
-
+	
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.utils.Dictionary;
-
+	
+	import game.rpgGame.login.data.CreateRoleData;
 	import game.rpgGame.login.util.RandomNick;
-	import game.rpgGame.login.view.CreateHeroPanel;
-
+	import game.rpgGame.login.view.CreateRolePanel;
+	
 	/**
 	 * 创建角色
 	 * @author 卢国征
@@ -17,16 +18,16 @@ package
 	public class Login extends Sprite
 	{
 		/** 角色名字面板 **/
-		private var _creatCharacterPanel : CreateHeroPanel;
+		private var _creatCharacterPanel : CreateRolePanel;
 		/** 发送选择玩家的回调 **/
 		public var sendRegisterRole : Function;
 		public var showInfoAlert : Function;
-
+		
 		public function Login()
 		{
 			addEventListener(Event.ADDED_TO_STAGE, onAddToStatge);
 		}
-
+		
 		/**
 		 * 初始化
 		 * @param event
@@ -35,9 +36,12 @@ package
 		private function onAddToStatge(event : Event) : void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, onAddToStatge);
-			_creatCharacterPanel = new CreateHeroPanel(Stage3DLayerManager.starlingLayer.getLayer("login"), onCreateChar, onShowInfoAlert);
+			
+			_creatCharacterPanel=new CreateRolePanel(Stage3DLayerManager.starlingLayer.getLayer("login"),onCreateChar);
+			
+			//			_creatCharacterPanel = new CreateHeroPanel(Stage3DLayerManager.starlingLayer.getLayer("login"), onCreateChar, onShowInfoAlert);
 		}
-
+		
 		/**
 		 * 设置名字库配置
 		 * @param $config
@@ -54,37 +58,36 @@ package
 			var maleNameStr : String = lang ? lang.value : "";
 			lang = $config["FEMALE_NAME"];
 			var femaleNameStr : String = lang ? lang.value : "";
-
+			
 			RandomNick.setup(lastNameStr.split(","), flagNameStr.split(","), maleNameStr.split(","), femaleNameStr.split(","));
 		}
-
+		
 		public function onCreateHeroFail(msg : String) : void
 		{
-			_creatCharacterPanel.setInfo(msg);
+//			_creatCharacterPanel.setInfo(msg);
 		}
-
+		
 		/**
 		 * 创建角色
 		 * @param e
 		 * @author 卢国征
 		 */
-		private function onCreateChar() : void
+		private function onCreateChar(data:CreateRoleData) : void
 		{
-			if (sendRegisterRole != null)
-				sendRegisterRole(_creatCharacterPanel.sex == 1, _creatCharacterPanel.face, _creatCharacterPanel.body, _creatCharacterPanel.nickName, _creatCharacterPanel.country);
+				sendRegisterRole(data.sex, data.nickName, data.job);
 		}
-
+		
 		private function onShowInfoAlert(info : String) : void
 		{
 			if (showInfoAlert != null)
 				showInfoAlert(info);
 		}
-
+		
 		public function destroy() : void
 		{
 			_creatCharacterPanel.destroy();
 			_creatCharacterPanel = null;
-
+			
 			if (parent)
 				parent.removeChild(this);
 		}

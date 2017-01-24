@@ -45,11 +45,9 @@ package com.client.process
 		private var _pkTipsView : PkTipsView;
 		private var _onCreateHeroFail : Function;
 
-		private var _sex : Boolean;
-		private var _headFace : int;
-		private var _body : int;
+		private var _sex : int;
 		private var _nickName : String;
-		private var _countryID : int;
+		private var _job : int;
 
 		public function CreateChar()
 		{
@@ -168,13 +166,11 @@ package com.client.process
 			GameLog.addShow("创建角色程序解析错误：" + event.text);
 		}
 
-		private function onCreateRoleComplete(sex : Boolean, headFace : int, body : int, nickName : String, countryID : int) : void
+		private function onCreateRoleComplete(sex : int, nickName : String, job : int) : void
 		{
 			_sex = sex;
-			_headFace = headFace;
-			_body = body;
 			_nickName = nickName;
-			_countryID = countryID;
+			_job = job;
 			if (_needShowPkTipsView)
 			{
 				if (!_pkTipsView)
@@ -202,7 +198,7 @@ package com.client.process
 			}
 			onCreateCharFailHandler("正在请求创建角色，请稍等...");
 			GameLog.addShow("请求服务器创建新角色");
-			LoginSender.register(_sex, _headFace, _body, _nickName, _countryID);
+			LoginSender.register(_sex, _nickName, _job);
 		}
 
 		private function onExitGame() : void

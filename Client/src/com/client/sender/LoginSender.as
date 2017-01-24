@@ -36,16 +36,16 @@ package com.client.sender
 		/**
 		 * 玩家注册，选择帐号
 		 */
-		public static function register(sex : Boolean, headFace : int, body : int, nickName : String, job : int) : void
+		public static function register(sex : int,  nickName : String, job : int) : void
 		{
-		    if(job < 1 || job > 4)
+		   /* if(job < 1 || job > 4)
 			{
 				job = int(Math.random() * 3);
-			}
+			}*/
 			var msg:ReqCreateCharacterMessage = new ReqCreateCharacterMessage();
 			msg.name=nickName;
 			msg.job=job;
-			msg.sex=sex?1:2;
+			msg.sex=sex;
 			msg.auto=0;
 			msg.win_high = ClientGlobal.stage.height;
 			msg.win_width = ClientGlobal.stage.width;
