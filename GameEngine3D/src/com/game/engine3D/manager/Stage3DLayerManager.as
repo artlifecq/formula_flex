@@ -201,7 +201,7 @@ package com.game.engine3D.manager
 				_screenLight.specular = 1;
 				_screenLight.castsPlanarShadows = true;
 				_screenLight.castsShadows = false;
-				_screenLight.planarShadowAlpha = 0.3;
+				_screenLight.planarShadowAlpha = 1;
 				var plane:Plane3D = new Plane3D(0,Math.cos(GlobalConfig.mapCameraRadian),Math.sin(GlobalConfig.mapCameraRadian));
 				_screenLight.planarShadowPlane = plane;
 				_screenLightPicker = new StaticLightPicker([_screenLight]);
