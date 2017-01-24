@@ -103,9 +103,7 @@ package game.rpgGame.login.view
 			
 			initAvatar();
 			
-			_skin.btn_man.label="男性";
 			
-			_skin.btn_man.labelOffsetY=80;
 			_stage = Starling.current.nativeStage;
 
 			initEvent();
@@ -201,7 +199,7 @@ package game.rpgGame.login.view
 				}else if(t.target==_skin.btn_create){
 					_createRoleData=new CreateRoleData();
 					_createRoleData.nickName=_skin.text_input.text ;
-					_createRoleData.sex=sexGroup.selectedIndex;
+					_createRoleData.sex=sexGroup.selectedIndex+1;
 					_createRoleData.job=jobTyps[jobGroup.selectedIndex][sexGroup.selectedIndex];
 					toCreate(_createRoleData);
 				}
