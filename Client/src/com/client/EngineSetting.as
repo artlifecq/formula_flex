@@ -29,6 +29,8 @@ package com.client
 			GlobalConfig.use2DMap = true;
 			GlobalConfig.use25DMap = true;
 //			GlobalConfig.MAP_2D_CAMERA_ANGLE = 45;
+			GlobalConfig.mapCameraAngle = -40;
+			
 			GlobalConfig.setGlobalConfig(null, VersionUtils.getVersionPath);
 			
 			Engine.initEngine(60,null,VersionUtils.getVersionPath,50,50,256,256);
