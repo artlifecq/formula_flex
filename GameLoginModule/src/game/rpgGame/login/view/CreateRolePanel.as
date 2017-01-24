@@ -158,7 +158,7 @@ package game.rpgGame.login.view
 			{
 				_createRoleData=new CreateRoleData();
 				_createRoleData.nickName=RandomNick.randomNick(true);
-				_createRoleData.sex=0;
+				_createRoleData.sex=1;
 				var job:int=int(testJob.text);
 				if(job==0){
 					AlertPanel.showMsg("错误的职业！");
