@@ -144,7 +144,7 @@ package game.rpgGame.login.view
 		
 		protected function onKeyDown(event:KeyboardEvent):void
 		{
-			if (event.keyCode == Keyboard.F8)
+			if (event.keyCode == Keyboard.TAB)
 			{
 				testBtn.visible=!testBtn.visible;
 				testJob.visible=!testJob.visible;

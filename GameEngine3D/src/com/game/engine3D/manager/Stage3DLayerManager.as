@@ -193,10 +193,10 @@ package com.game.engine3D.manager
 				_viewContainer.addChild(_screenView);
 				_screenView.visible = false;
 
-				_screenLight = new DirectionalLight(0, -0.7, 0.7);
-				_screenLight.ambient = 0.8;
-				_screenLight.ambientColor = 0xffffff;
-				_screenLight.diffuse = 0.8;
+				_screenLight = new DirectionalLight(0.345, -0.379, 0.857);
+				_screenLight.ambient = 0.5;
+				_screenLight.ambientColor = 0xcdd2ea;
+				_screenLight.diffuse = 1;
 				_screenLight.color = 0xffffff;
 				_screenLight.specular = 1;
 				_screenLightPicker = new StaticLightPicker([_screenLight]);
