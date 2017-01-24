@@ -7,9 +7,7 @@ package com.rpgGame.coreData.lang
 	* 【**不可手动修改此类**】，
 	*	
 	* 【任何修改都将被生成工具覆盖，如需修改请直接修改具体的config文件】
-	* @author fly.AutoUICreater
-	* @modifier L.L.M.Sunny
-	* 修改时间：2015-7-2 上午10:05:12
+	* @author NEIL
 	* 
 	*/
 	public class LangGuild
@@ -274,6 +272,24 @@ package com.rpgGame.coreData.lang
 		public static const leaderLeaveGuildAlert:String = "leaderLeaveGuildAlert";
 		 /**  您想离开现在的帮派吗？ */
 		public static const leaveGuildAlert:String = "leaveGuildAlert";
+		 /**  帮派邀请发出 */
+		public static const inviteSocietyComplete:String = "inviteSocietyComplete";
+		 /**  您没有帮派，无法邀请别人加入 */
+		public static const dontHaveGuildCantInvite:String = "dontHaveGuildCantInvite";
+		 /**  您没有权限邀请别人加入帮派 */
+		public static const posCantInvite:String = "posCantInvite";
+		 /**  当前帮派已入驻的家族数已满 */
+		public static const guildSocietyFull:String = "guildSocietyFull";
+		 /**  不能开除帮主所在的家族 */
+		public static const cantKickLeaderSociety:String = "cantKickLeaderSociety";
+		 /**  $家族被开除出本帮派 */
+		public static const kickGuildComplete:String = "kickGuildComplete";
+		 /**  领取每日俸禄成功 */
+		public static const getSalaryComplete:String = "getSalaryComplete";
+		 /**  领取王帮奖励成功 */
+		public static const getKingSalaryComplete:String = "getKingSalaryComplete";
+		 /**  $家族离开了本帮派 */
+		public static const societyleaveGuild:String = "societyleaveGuild";
 
 	}
 }

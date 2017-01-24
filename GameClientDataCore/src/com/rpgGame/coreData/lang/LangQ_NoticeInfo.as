@@ -10,7 +10,7 @@ package com.rpgGame.coreData.lang
 	* @author NEIL
 	* 
 	*/
-	public class LangNoticeInfo
+	public class LangQ_NoticeInfo
 	{
 		 /**  中了状态，不能跳跃 */
 		public static const MainCharJumpManager_1:String = "MainCharJumpManager_1";
@@ -2024,6 +2024,54 @@ package com.rpgGame.coreData.lang
 		public static const NotAttack:String = "NotAttack";
 		 /**  翻滚Cd中 */
 		public static const RollInCd:String = "RollInCd";
+		 /**  该技能需要锁定目表 */
+		public static const NeedLockSpell:String = "NeedLockSpell";
+		 /**  目标无效 */
+		public static const TargetInvalid:String = "TargetInvalid";
+		 /**  错误施法目标 */
+		public static const SpellTarget:String = "SpellTarget";
+		 /**  目标不再视野 */
+		public static const TargetNotInViewDistance:String = "TargetNotInViewDistance";
+		 /**  目标已死亡 */
+		public static const DeadTarget:String = "DeadTarget";
+		 /**  没有技能 */
+		public static const SkillError_1:String = "SkillError_1";
+		 /**  没有场景 */
+		public static const SkillError_2:String = "SkillError_2";
+		 /**  没有技能数据 */
+		public static const SkillError_3:String = "SkillError_3";
+		 /**  无法施法被动技能 */
+		public static const SkillError_4:String = "SkillError_4";
+		 /**  释放技能中 */
+		public static const SkillError_5:String = "SkillError_5";
+		 /**  技能吟唱中 */
+		public static const SkillError_6:String = "SkillError_6";
+		 /**  公共冷却中 */
+		public static const SkillError_7:String = "SkillError_7";
+		 /**  找不到技能类型 */
+		public static const SkillError_8:String = "SkillError_8";
+		 /**  无法释放技能 */
+		public static const SkillError_9:String = "SkillError_9";
+		 /**  魔法不足 */
+		public static const SkillError_10:String = "SkillError_10";
+		 /**  找不到技能消耗配置 */
+		public static const SkillError_11:String = "SkillError_11";
+		 /**  释放距离过远 */
+		public static const SkillError_12:String = "SkillError_12";
+		 /**  目标技能没有选定目标 */
+		public static const SkillError_13:String = "SkillError_13";
+		 /**  没有找到目标 */
+		public static const SkillError_14:String = "SkillError_14";
+		 /**  目标死亡 */
+		public static const SkillError_15:String = "SkillError_15";
+		 /**  睡眠状态 */
+		public static const SkillError_16:String = "SkillError_16";
+		 /**  沉默状态 */
+		public static const SkillError_17:String = "SkillError_17";
+		 /**  切换地图中 */
+		public static const SkillError_18:String = "SkillError_18";
+		 /**  召唤物达到上限 */
+		public static const SkillError_19:String = "SkillError_19";
 
 	}
 }

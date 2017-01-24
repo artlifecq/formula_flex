@@ -26,6 +26,10 @@ package com.rpgGame.netData.fight.message{
 		//目标点
 		private var _pos: com.rpgGame.netData.structs.Position;
 		
+		//目标点列表
+		private var _posList: Vector.<com.rpgGame.netData.structs.Position> = new Vector.<com.rpgGame.netData.structs.Position>();
+		//目标对象列表
+		private var _targets: Vector.<long> = new Vector.<long>();
 		//唯一ID
 		private var _uid: int;
 		
@@ -34,6 +38,7 @@ package com.rpgGame.netData.fight.message{
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
+			var i: int = 0;
 			//角色Id
 			writeLong(_playerid);
 			//攻击类型(技能ID)
@@ -42,6 +47,16 @@ package com.rpgGame.netData.fight.message{
 			writeShort(_fightDirection);
 			//目标点
 			writeBean(_pos);
+			//目标点列表
+			writeShort(_posList.length);
+			for (i = 0; i < _posList.length; i++) {
+				writeBean(_posList[i]);
+			}
+			//目标对象列表
+			writeShort(_targets.length);
+			for (i = 0; i < _targets.length; i++) {
+				writeLong(_targets[i]);
+			}
 			//唯一ID
 			writeInt(_uid);
 			return true;
@@ -51,6 +66,7 @@ package com.rpgGame.netData.fight.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
+			var i: int = 0;
 			//角色Id
 			_playerid = readLong();
 			//攻击类型(技能ID)
@@ -59,6 +75,16 @@ package com.rpgGame.netData.fight.message{
 			_fightDirection = readShort();
 			//目标点
 			_pos = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
+			//目标点列表
+			var posList_length : int = readShort();
+			for (i = 0; i < posList_length; i++) {
+				_posList[i] = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
+			}
+			//目标对象列表
+			var targets_length : int = readShort();
+			for (i = 0; i < targets_length; i++) {
+				_targets[i] = readLong();
+			}
 			//唯一ID
 			_uid = readInt();
 			return true;
@@ -130,6 +156,36 @@ package com.rpgGame.netData.fight.message{
 		 */
 		public function set pos(value: com.rpgGame.netData.structs.Position): void{
 			this._pos = value;
+		}
+		
+		/**
+		 * get 目标点列表
+		 * @return 
+		 */
+		public function get posList(): Vector.<com.rpgGame.netData.structs.Position>{
+			return _posList;
+		}
+		
+		/**
+		 * set 目标点列表
+		 */
+		public function set posList(value: Vector.<com.rpgGame.netData.structs.Position>): void{
+			this._posList = value;
+		}
+		
+		/**
+		 * get 目标对象列表
+		 * @return 
+		 */
+		public function get targets(): Vector.<long>{
+			return _targets;
+		}
+		
+		/**
+		 * set 目标对象列表
+		 */
+		public function set targets(value: Vector.<long>): void{
+			this._targets = value;
 		}
 		
 		/**

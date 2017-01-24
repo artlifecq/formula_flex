@@ -15,7 +15,7 @@ package com.rpgGame.app.manager.input
 	import com.rpgGame.app.state.role.action.JumpStateReference;
 	import com.rpgGame.app.state.role.action.RunStateReference;
 	import com.rpgGame.coreData.info.key.KeyInfo;
-	import com.rpgGame.coreData.lang.LangNoticeInfo;
+	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
@@ -123,7 +123,7 @@ package com.rpgGame.app.manager.input
              } 
 			else 
 			{
-                 NoticeManager.showNotify(LangNoticeInfo.RollInCd);
+                 NoticeManager.showNotify(LangQ_NoticeInfo.RollInCd);
             }
         }
 

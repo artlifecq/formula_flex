@@ -15,9 +15,11 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.info.fight.FightSingleHurt;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.fight.bean.AttackResultInfo;
+	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
 	import com.rpgGame.netData.fight.message.ResAttackVentToClientMessage;
 	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
 	import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
+	import com.rpgGame.netData.structs.Position;
 	
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
@@ -58,6 +60,10 @@ package com.rpgGame.app.fight.spell
 			{
 				createResults(info, msg as SCAttackerResultMessage);
 			}
+			else if(msg is ResAttackResultMessage)
+			{
+				info.createSingleResult(info, msg as ResAttackResultMessage);
+			}
 			
 			if (waitCache)
 			{
@@ -66,21 +72,27 @@ package com.rpgGame.app.fight.spell
 			return info;
 		}
 
-		public static function expendReleaseInfo(flySceneObjID : int) : Boolean
-		{
-			var info : ReleaseSpellInfo = _releaseInfoById[flySceneObjID];
-			if (info)
-			{
-				var expended : Boolean = info.expendHurtTimes();
-				if (expended)
-				{
-					_releaseInfoById[flySceneObjID] = null;
-					delete _releaseInfoById[flySceneObjID];
-					return true;
-				}
-			}
-			return false;
-		}
+		/**
+		 * 每次伤害协议过来时，调用一次，主要是执行expendHurtTimes(),用来计数
+		 * @param flySceneObjID
+		 * @return 
+		 * 
+		 */		
+//		public static function expendReleaseInfo(flySceneObjID : int) : Boolean
+//		{
+//			var info : ReleaseSpellInfo = _releaseInfoById[flySceneObjID];
+//			if (info)
+//			{
+//				var expended : Boolean = info.expendHurtTimes();
+//				if (expended)
+//				{
+//					_releaseInfoById[flySceneObjID] = null;
+//					delete _releaseInfoById[flySceneObjID];
+//					return true;
+//				}
+//			}
+//			return false;
+//		}
 
 		public static function removeReleaseInfo(flySceneObjID : int) : void
 		{
@@ -145,7 +157,7 @@ package com.rpgGame.app.fight.spell
 		/**
 		 * 释放延迟
 		 */
-		private var _delayTime : int = 0;
+//		private var _delayTime : int = 0;
 		/**
 		 * 伤害延迟
 		 */
@@ -163,20 +175,33 @@ package com.rpgGame.app.fight.spell
 		private var _blinkType : int = 0;
 		private var _blinkSpeed : int = 0;
 		private var _blinkHeight : int = 0;
-		private var _beatBackSpeed : int = 0;
-
+		
 		private var _atkorPos : Point;
 		private var _targetID : Number = 0; //施法目标对象id,客户端可能找不到目标对象
 		private var _targetRole : SceneRole;
 		private var _targetPos : Point;
+		
+		//弹道相关的后端信息
+		private var _flyTargetPosList:Vector.<Position>;
+		private var _flyTargets:Vector.<SceneRole>;
+		
 		private var _flySceneObjID : Number = 0; //场景飞行特效唯一标识
+		
 //		//施法结果列表，结果的类型分两种：1、状态改变效果，2、伤害效果
 		public var stateList : Vector.<BuffData>;
 		public var hurtList : Vector.<FightHurtResult>;
 		public var isMainCharHited : Boolean = false; //主角是否被打了
+		
+		public var singleHurtVo:FightHurtResult;
+		
 		private var _ghostEffect : Boolean;
 		private var _matchTerrain : Boolean;
-		private var _canWalkRelease : Boolean; //能够边走边放
+		/**
+		 *  能够边走边放
+		 */		
+		private var _canWalkRelease : Boolean; //
+		
+		//-----------------击退，击飞相关表信息
 		private var _deadLaunchHeight : int;
 		private var _deadLaunchDistance : int;
 		private var _deadLaunchSpeed : int;
@@ -184,14 +209,29 @@ package com.rpgGame.app.fight.spell
 		private var _deadBeatSpeed : int;
 		private var _deadBeatProbability : int;
 		private var _deadLaunchProbability : int;
+		
+		private var _beatBackSpeed : int = 0;
+		/**
+		 * 是否是追踪弹道 
+		 */		
 		private var _isTrackTarget : Boolean;
-		private var _isTrapSpell : Boolean;
-		private var _repeatTimes : int = 0;
-		private var _repeatInterval : int = 0;
+		
+		/**
+		 * 是否是陷进技能 
+		 */		
+//		private var _isTrapSpell : Boolean;
+		/**
+		 * 在一次陷进技能中，要有几次计算伤害 
+		 */		
+//		private var _repeatTimes : int = 0;
+		/**
+		 * 每一次的计算伤害时间间隔 
+		 */		
+//		private var _repeatInterval : int = 0;
 		/**
 		 * 陷阱技能最大伤害波数
 		 */
-		private var _maxHurtTimes : int = 0;
+//		private var _maxHurtTimes : int = 0;
 		/**
 		 * 投掷高度
 		 */
@@ -200,6 +240,12 @@ package com.rpgGame.app.fight.spell
 		 * 投掷分量比
 		 */
 		private var _throwWeightRatio : int = 0;
+		
+		//---弹道技能相关表信息
+		
+		private var _flyCount:int = 0;
+		
+		private var _flyInterval:int = 0;
 
 		public function ReleaseSpellInfo() : void
 		{
@@ -214,6 +260,9 @@ package com.rpgGame.app.fight.spell
 		public function readFrom(flySceneObjID : int, msg : Message) : void
 		{
 			_flySceneObjID = flySceneObjID;
+			var flyTargets:Vector.<SceneRole>;
+			var targetID:uint;
+			var targetRole:SceneRole;
 			
 			if(msg is ResFightBroadcastMessage)
 			{
@@ -252,6 +301,16 @@ package com.rpgGame.app.fight.spell
 				}
 				_atkorPos = new Point(_atkor.x, _atkor.z);
 				_targetPos = new Point(_targetRole.x, _targetRole.z);
+				
+				
+				_flyTargetPosList = fightTargetMsg.posList;
+				for(var i:int =0;i<fightTargetMsg.targets;i++)
+				{
+					targetID = fightTargetMsg.targets[i].ToGID();
+					targetRole = SceneManager.getSceneObjByID(targetID) as SceneRole;
+					flyTargets.push(targetRole);
+				}
+				_flyTargets = flyTargets;
 			}
 			else if(msg is ResAttackVentToClientMessage)
 			{
@@ -277,6 +336,15 @@ package com.rpgGame.app.fight.spell
 				
 				_atkorPos = new Point(_atkor.x, _atkor.z);
 				_targetPos = new Point(fightPosMsg.pos.x, fightPosMsg.pos.y);
+				
+				_flyTargetPosList = fightPosMsg.posList;
+				for(var j:int =0;j<fightPosMsg.targets;j++)
+				{
+					targetID = fightPosMsg.targets[j].ToGID();
+					targetRole = SceneManager.getSceneObjByID(targetID) as SceneRole;
+					flyTargets.push(targetRole);
+				}
+				_flyTargets = flyTargets;
 			}
 			
 			readSpellEffectData(_spellData.q_spell_effect);
@@ -301,8 +369,8 @@ package com.rpgGame.app.fight.spell
 				_startSelfFrameTime = _spellEffectData.start_frame_time;//抬手特效开始时间
 				_caromStartFrameTime = _spellEffectData.carom_start_frame_time;//动作从那帧开始播放
 //				_breakFrameTime = _spellEffectData.break_frame_time;//暂时没有用
-				_hitFrameTime = _spellEffectData.hit_frame_time;//到这个时间上，会在地面上有特效,也会有伤害飘字，如果设置了hurtdelay的话，会以这个时间为主
-				_delayTime = _spellEffectData.delay_time;//跟弹道有关系
+				_hitFrameTime = _spellEffectData.hit_frame_time;//到这个时间上，会在地面上有特效,也会有伤害飘字，如果设置了hurtdelay的话，会以这个时间为主--弹道技能的话，是用来控制什么时候来播放弹道技能，内部循环
+				
 				_hurtDelay = _spellEffectData.hurt_delay;//伤害飘字的时间
 				_soarFrameTime = _spellEffectData.soar_frame_time;//
 				_throwDelayTime = _spellEffectData.throw_delay_time;//
@@ -317,8 +385,9 @@ package com.rpgGame.app.fight.spell
 				
 				_ghostEffect = _spellEffectData.ghost_effect;
 				_matchTerrain = false;
-				_canWalkRelease = _spellData.q_can_walk_release;
+				_canWalkRelease = _spellData.q_can_walk_release;//是否边走边放
 				
+				//击退，击飞相关表字段信息
 				_deadLaunchHeight = _spellData.q_dead_launch_height;
 				_deadLaunchDistance = _spellData.q_dead_launch_distance;
 				_deadLaunchSpeed = _spellData.q_dead_launch_speed;
@@ -327,14 +396,93 @@ package com.rpgGame.app.fight.spell
 				_deadBeatProbability = _spellData.q_dead_beat_probability;
 				_deadLaunchProbability = _spellData.q_dead_launch_probability;
 				
-				_isTrackTarget = _spellEffectData.is_track_target;
-				_isTrapSpell = _spellData.q_skill_type == 1;//暂时这么写，因为目前是把地面特效暂时当成陷阱技能
-				_repeatTimes = _spellData.q_skill_time;
-				_repeatInterval = _spellData.q_skill_ground_period;
-				_maxHurtTimes = _spellData.q_skill_act_num;
+				//陷进相关表字段信息
+//				_isTrapSpell = _spellData.q_skill_type == 1;
+//				_repeatTimes = _spellData.q_skill_time;
+//				_repeatInterval = _spellData.q_skill_ground_period;
+//				_maxHurtTimes = _spellData.q_skill_act_num;
+				
+				//以下是弹道相关表信息
+//				_delayTime = _spellEffectData.delay_time;//跟弹道有关系
+				
 				_throwHeight = _spellEffectData.throw_height;
 				_throwWeightRatio = _spellEffectData.throw_weight_ratio;
+				
+				_isTrackTarget = _spellData.q_fly_follow;
+				_flyCount = _spellData.q_fly_count;
+				_flyInterval = _spellData.q_fly_spacing;
 			}
+		}
+		
+		private function createSingleResult(info:ReleaseSpellInfo,msg : ResAttackResultMessage):void
+		{
+			var isHited : Boolean = false;
+			var resultInfo:AttackResultInfo = msg.state;
+			
+			var roleID:Number = resultInfo.targetId.ToGID();
+			var hurtResultVO : FightHurtResult = new FightHurtResult(roleID);
+			hurtResultVO.curLife = resultInfo.damage;
+			
+			var hasPositionChange:Boolean = (resultInfo.newPos.x != 0 || resultInfo.newPos.y != 0);
+			
+			hurtResultVO.hasPositionChange = hasPositionChange;
+			if (hurtResultVO.hasPositionChange)
+			{
+				hurtResultVO.newPosition = new Point(resultInfo.newPos.x, resultInfo.newPos.y);
+			}
+			
+			hurtResultVO.attackerId = resultInfo.attackerId.ToGID();
+			
+			var hasStiffTime : Boolean = false;//击飞时间，暂时没有，所以先为false
+			if (hasStiffTime)
+			{
+				hurtResultVO.stiffTime = 0;
+			}
+			
+			var hurtTypeAmount : int = resultInfo.damage;
+			var hurtType : int = resultInfo.fightResult
+			var hurtAmount : int = resultInfo.damage; //本次
+			var sVo : FightSingleHurt = new FightSingleHurt(hurtType, hurtAmount, roleID);
+			hurtResultVO.addHurt(sVo);
+			
+			//
+			var role : SceneRole = SceneManager.getSceneObjByID(roleID) as SceneRole;
+			if (role)
+			{
+				//role.isServerLiving = hurtResultVO.curLife > 0;
+			}
+			//
+			if (roleID == MainRoleManager.actorID) //判定主角是否被攻击
+			{
+				if (info.atkor && info.atkor.data is HeroData) //是玩家才自动反击
+				{
+					isHited = true;
+				}
+			}
+			
+			_atkorID = resultInfo.attackerId.ToGID();
+			if (_atkorID > 0)
+			{
+				_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
+				if (_atkor && !_atkor.usable)
+					_atkor = null;
+			}
+			
+			if(_atkor == null)
+			{
+				GameLog.addShow("攻击者为空!攻击者服务器ID为：\t 这些伤害不知道哪里来的，也不需要关注是谁打的");
+			}
+			
+			if(_atkor && _atkor.usable)
+			{
+				_atkorPos = new Point(_atkor.x, _atkor.z);
+			}
+			
+			info.spellData = SpellDataManager.getSpellData(resultInfo.skillId);
+			info.isMainCharHited = isHited;
+			info.singleHurtVo = hurtResultVO;
+			
+			readSpellEffectData(info.spellData.q_spell_effect);
 		}
 
 		/**
@@ -560,19 +708,14 @@ package com.rpgGame.app.fight.spell
 			return _hitFrameTime;
 		}
 
-		public function get delayTime() : int
-		{
-			return _delayTime;
-		}
+//		public function get delayTime() : int
+//		{
+//			return _delayTime;
+//		}
 
 		public function get hurtDelay() : int
 		{
 			return _hurtDelay;
-		}
-
-		public function get throwDelayTime() : int
-		{
-			return _throwDelayTime;
 		}
 
 		public function get soarFrameTime() : int
@@ -853,34 +996,38 @@ package com.rpgGame.app.fight.spell
 			return _attackSpeed;
 		}
 
-		public function get repeatInterval() : int
-		{
-			return _repeatInterval;
-		}
+//		public function get repeatInterval() : int
+//		{
+//			return _repeatInterval;
+//		}
 
-		public function get repeatTimes() : int
-		{
-			return _repeatTimes;
-		}
+//		public function get repeatTimes() : int
+//		{
+//			return _repeatTimes;
+//		}
 
-		public function expendHurtTimes() : Boolean
-		{
-			_maxHurtTimes--;
-			if (_maxHurtTimes > 0)
-				return false;
-			return true;
-		}
+		/**
+		 * 陷阱类技能伤害次数倒计时 
+		 * @return 
+		 * 
+		 */		
+//		public function expendHurtTimes() : Boolean
+//		{
+//			_maxHurtTimes--;
+//			if (_maxHurtTimes > 0)
+//				return false;
+//			return true;
+//		}
 
 		/**
 		 * 是否陷阱技能
 		 * @return
 		 *
 		 */
-		public function get isTrapSpell() : Boolean
-		{
-			return _isTrapSpell;
-//			return false;
-		}
+//		public function get isTrapSpell() : Boolean
+//		{
+//			return _isTrapSpell;
+//		}
 
 		public function get throwHeight() : int
 		{
@@ -890,6 +1037,41 @@ package com.rpgGame.app.fight.spell
 		public function get throwWeightRatio() : int
 		{
 			return _throwWeightRatio;
+		}
+		
+		public function get flyCount():int
+		{
+			return _flyCount;
+		}
+		
+		public function get flyInterval():int
+		{
+			return _flyInterval;
+		}
+		
+		public function get throwDelayTime() : int
+		{
+			return _throwDelayTime;
+		}
+
+		public function get flyTargetPosList():Vector.<Position>
+		{
+			return _flyTargetPosList;
+		}
+
+		public function get flyTargets():Vector.<SceneRole>
+		{
+			return _flyTargets;
+		}
+
+		public function get spellData():Q_skill_model
+		{
+			return _spellData;
+		}
+
+		public function set spellData(value:Q_skill_model):void
+		{
+			_spellData = value;
 		}
 	}
 }

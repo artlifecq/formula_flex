@@ -2,7 +2,7 @@ package com.game.engine3D.manager
 {
 	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.core.StarlingLayer;
-
+	
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Stage;
 	import flash.display.StageAlign;
@@ -13,15 +13,15 @@ package com.game.engine3D.manager
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	import flash.system.Capabilities;
-
+	
 	import away3d.arcane;
-	import away3d.cameras.lenses.OrthographicLens;
 	import away3d.cameras.lenses.OrthographicOffCenterLens;
 	import away3d.containers.ObjectContainer3D;
 	import away3d.containers.View3D;
 	import away3d.core.managers.Stage3DManager;
 	import away3d.core.managers.Stage3DProxy;
 	import away3d.core.math.Matrix3DUtils;
+	import away3d.core.math.Plane3D;
 	import away3d.core.pick.PickingCollisionVO;
 	import away3d.core.pick.PickingType;
 	import away3d.core.pick.RaycastPicker;
@@ -30,7 +30,7 @@ package com.game.engine3D.manager
 	import away3d.lights.DirectionalLight;
 	import away3d.materials.lightpickers.StaticLightPicker;
 	import away3d.tools.utils.Bounds;
-
+	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.events.Event;
@@ -193,12 +193,17 @@ package com.game.engine3D.manager
 				_viewContainer.addChild(_screenView);
 				_screenView.visible = false;
 
-				_screenLight = new DirectionalLight(0, -0.7, 0.7);
-				_screenLight.ambient = 0.8;
-				_screenLight.ambientColor = 0xffffff;
-				_screenLight.diffuse = 0.8;
+				_screenLight = new DirectionalLight(0.345, -0.379, 0.857);
+				_screenLight.ambient = 0.5;
+				_screenLight.ambientColor = 0xcdd2ea;
+				_screenLight.diffuse = 1;
 				_screenLight.color = 0xffffff;
 				_screenLight.specular = 1;
+				_screenLight.castsPlanarShadows = true;
+				_screenLight.castsShadows = false;
+				_screenLight.planarShadowAlpha = 0.3;
+				var plane:Plane3D = new Plane3D(0,Math.cos(GlobalConfig.mapCameraRadian),Math.sin(GlobalConfig.mapCameraRadian));
+				_screenLight.planarShadowPlane = plane;
 				_screenLightPicker = new StaticLightPicker([_screenLight]);
 				_screenView.scene.addChild(_screenLight);
 			}

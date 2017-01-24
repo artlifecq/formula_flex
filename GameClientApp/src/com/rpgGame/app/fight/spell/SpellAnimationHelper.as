@@ -175,6 +175,12 @@ package com.rpgGame.app.fight.spell
 			}
 		}
 		
+		/**
+		 *  
+		 * @param role
+		 * @param animatData
+		 * 
+		 */		
 		public static function addSelfDestEffect(role : SceneRole, animatData : Q_SpellAnimation) : void
 		{
 			/** 特效 **/
@@ -398,6 +404,14 @@ package com.rpgGame.app.fight.spell
 		
 		private static var _sceneTrapsByAtkorID : Dictionary = new Dictionary(true);
 		
+		/**
+		 * 添加地面特效(陷进特效也是地面特效)
+		 * @param destX
+		 * @param destZ
+		 * @param rotationY
+		 * @param info
+		 * 
+		 */		
 		public static function addDestEffect(destX : int, destZ : int, rotationY : int, info : ReleaseSpellInfo) : void
 		{
 			if (SceneManager.isSceneOtherRenderLimit)
@@ -411,14 +425,14 @@ package com.rpgGame.app.fight.spell
 				var rud : RenderParamData;
 				var repeat : int = 1;
 				var lifecycle : int = 0;
-				if (info.isTrapSpell)
-				{
-					repeat = 0;
-					if (info.atkor && info.atkor.isMainChar) //只有自己才一直显示陷阱 
-						lifecycle = info.repeatTimes * info.repeatInterval;
-					else
-						lifecycle = 3000;
-				}
+//				if (info.isTrapSpell)//如果该技能是陷进特效的话，就算出陷进特效的持续时间
+//				{
+//					repeat = 0;
+//					if (info.atkor && info.atkor.isMainChar) //只有自己才一直显示陷阱 
+//						lifecycle = info.repeatTimes * info.repeatInterval;
+//					else
+//						lifecycle = 3000;
+//				}
 				if (animatData.scene_res)
 				{
 					rud = new RenderParamData(info.flySceneObjID, SceneCharType.SCENE_DEST_EFFECT, ClientConfig.getEffect(animatData.scene_res));
@@ -454,6 +468,12 @@ package com.rpgGame.app.fight.spell
 			}
 		}
 		
+		/**
+		 * 删除陷进特效 
+		 * @param atkorID
+		 * @param obj
+		 * 
+		 */		
 		private static function removeTrapFromScene(atkorID : Number, obj : BaseObj3D) : void
 		{
 			var objId : Number = obj.id;
@@ -466,6 +486,12 @@ package com.rpgGame.app.fight.spell
 			}
 		}
 		
+		/**
+		 * 删除陷阱特效 
+		 * @param atkorID
+		 * @param objId
+		 * 
+		 */		
 		public static function removeSceneTrapEffect(atkorID : Number, objId : Number) : void
 		{
 			var traps : Dictionary = _sceneTrapsByAtkorID[atkorID];
@@ -481,6 +507,11 @@ package com.rpgGame.app.fight.spell
 			}
 		}
 		
+		/**
+		 * 根据角色id，删除陷进特效 
+		 * @param atkorID
+		 * 
+		 */		
 		public static function removeTrapEffectsByAtkorID(atkorID : Number) : void
 		{
 			var traps : Dictionary = _sceneTrapsByAtkorID[atkorID];
@@ -498,6 +529,12 @@ package com.rpgGame.app.fight.spell
 			}
 		}
 		
+		
+		/**
+		 * 添加弹道特效 
+		 * @param info
+		 * 
+		 */		
 		public static function addFlyEffect(info : ReleaseSpellInfo) : void
 		{
 			if (SceneManager.isSceneOtherRenderLimit)
@@ -536,22 +573,49 @@ package com.rpgGame.app.fight.spell
 					
 					var effectQueue : Vector.<IRenderAnimator> = new Vector.<IRenderAnimator>();
 					var locusPoints : Vector.<AnimatorLocusPoint> = new Vector.<AnimatorLocusPoint>();
-					addFlyEffectOnce(info, animatData.scene_res, atkorPosition, atkorRotationY, destPosition, info.throwDelayTime, info.hitFrameTime, info.delayTime, effectQueue, locusPoints);
-					for (var i : int = 1; i < info.repeatTimes; i++)
+					for (var i : int = 0; i < info.flyTargetPosList; i++)
 					{
-						TweenLite.delayedCall((info.throwDelayTime + info.repeatInterval * i) * 0.001, addFlyEffectOnce, [info, animatData.scene_res, atkorPosition, atkorRotationY, destPosition, 0, 0, 0, effectQueue, locusPoints]);
+						var targetPosition:Vector3D = new Vector3D(info.flyTargetPosList[i].x,0,info.flyTargetPosList[i].y);
+						TweenLite.delayedCall((info.throwDelayTime + info.flyInterval * i) * 0.001, addFlyEffectOnce, [info, animatData.scene_res, atkorPosition, atkorRotationY, destPosition,targetPosition,null, 0, 0,effectQueue, locusPoints]);
 					}
+					
+					var startTime:Number = info.flyTargetPosList.length * info.flyInterval;
+					for(var j:int = 0;j<info.flyTargets;j++)
+					{
+						TweenLite.delayedCall((startTime + info.throwDelayTime + info.flyInterval * j) * 0.001, addFlyEffectOnce, [info, animatData.scene_res, atkorPosition, atkorRotationY, destPosition,info.flyTargets[j].position,info.flyTargets[j],0, 0, effectQueue, locusPoints]);
+					}
+//					addFlyEffectOnce(info, animatData.scene_res, atkorPosition, atkorRotationY, destPosition, info.throwDelayTime, info.hitFrameTime/*, info.delayTime*/, effectQueue, locusPoints);
+//					for (var i : int = 1; i < info.flyCount; i++)
+//					{
+//						
+//					}
 				}
 			}
 		}
 		
 		private static var flySceneObjID : int = 1;
 		
-		private static function addFlyEffectOnce(info : ReleaseSpellInfo, effectRes : String, atkorPosition : Vector3D, atkorRotationY : Number, destPosition : Vector3D, 
-												 moveDelay : int, playDelay : int, releaseDelayTime : int, 
+		
+		/**
+		 * 添加一个弹道特效 
+		 * @param info
+		 * @param effectRes
+		 * @param atkorPosition
+		 * @param atkorRotationY
+		 * @param destPosition
+		 * @param moveDelay
+		 * @param playDelay
+		 * @param releaseDelayTime
+		 * @param effectQueue
+		 * @param locusPoints
+		 * 
+		 */		
+		private static function addFlyEffectOnce(info : ReleaseSpellInfo, effectRes : String, atkorPosition : Vector3D, atkorRotationY : Number, destPosition : Vector3D,
+												 targetPosition:Vector3D,targetRole:SceneRole,
+												 moveDelay : int, playDelay : int, /*releaseDelayTime : int,*/ 
 												 effectQueue : Vector.<IRenderAnimator>, locusPoints : Vector.<AnimatorLocusPoint>) : void
 		{
-			var effectSet : RenderSet3D = RenderSet3D.create(SceneCharType.SCENE_FLY_SPELL + info.flySceneObjID, flySceneObjID,true);
+			var effectSet : RenderSet3D = RenderSet3D.create(SceneCharType.SCENE_FLY_SPELL/* + info.flySceneObjID*/, flySceneObjID,true);
 			var rud : RenderParamData = new RenderParamData(1, "effect", ClientConfig.getEffect(effectRes), effectRes);
 			
 			var effectRu : RenderUnit3D = effectSet.addRenderUnit(rud);
@@ -573,8 +637,8 @@ package com.rpgGame.app.fight.spell
 			{
 				if (effectCfg.animatorName == FrontAxleDoubleAroundAnimator.name)
 				{
-					renderSetAnimator = new FrontAxleDoubleAroundAnimator(info, new Vector3D(info.targetPos.x, 0, info.targetPos.y), info.targetRole, info.flyTm, info.flySpeed, info.isTrackTarget, 
-						info.matchTerrain, info.isFlyCross, info.isAdaptiveTargetHeight, moveDelay, playDelay, releaseDelayTime, info.throwHeight,
+					renderSetAnimator = new FrontAxleDoubleAroundAnimator(info, targetPosition, info.targetRole, info.flyTm, info.flySpeed, info.isTrackTarget, 
+						info.matchTerrain, info.isFlyCross, info.isAdaptiveTargetHeight, moveDelay, playDelay, info.throwHeight,
 						info.throwWeightRatio, effectCfg.frontAxleAroundRadius, effectCfg.frontAxleAroundAngularVelocity, effectCfg.convergenceTimes);
 					(renderSetAnimator as FrontAxleDoubleAroundAnimator).setAtkorData(atkorPosition, atkorRotationY, destPosition);
 					(renderSetAnimator as FrontAxleDoubleAroundAnimator).setQueue(effectQueue, locusPoints);
@@ -583,8 +647,8 @@ package com.rpgGame.app.fight.spell
 			}
 			if (!renderSetAnimator)
 			{
-				renderSetAnimator = new CommonTrajectoryAnimator(info, new Vector3D(info.targetPos.x, 0, info.targetPos.y), info.targetRole, info.flyTm, info.flySpeed, info.isTrackTarget, 
-					info.matchTerrain, info.isFlyCross, info.isAdaptiveTargetHeight, moveDelay, playDelay, releaseDelayTime, info.throwHeight, info.throwWeightRatio);
+				renderSetAnimator = new CommonTrajectoryAnimator(info, targetPosition, info.targetRole, info.flyTm, info.flySpeed, info.isTrackTarget, 
+					info.matchTerrain, info.isFlyCross, info.isAdaptiveTargetHeight, moveDelay, playDelay, info.throwHeight, info.throwWeightRatio);
 				(renderSetAnimator as CommonTrajectoryAnimator).setAtkorData(atkorPosition, atkorRotationY, destPosition);
 				(renderSetAnimator as CommonTrajectoryAnimator).setQueue(effectQueue, locusPoints);
 				effectSet.setRenderAnimator(renderSetAnimator);
@@ -592,6 +656,12 @@ package com.rpgGame.app.fight.spell
 			flySceneObjID++;
 		}
 		
+		/**
+		 * 从角色身上删除 技能添加的特效，主要用于回调用 
+		 * @param avatar
+		 * @param ru
+		 * 
+		 */		
 		private static function avatarRuPlayComplete(avatar : RenderSet3D, ru : RenderUnit3D) : void
 		{
 			avatar.removeRenderUnit(ru);

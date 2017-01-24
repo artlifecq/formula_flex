@@ -22,7 +22,7 @@ package com.rpgGame.app.cmdlistener.engine
 	import com.rpgGame.core.controller.MouseCursorController;
 	import com.rpgGame.coreData.cfg.task.TouZhuCfgData;
 	import com.rpgGame.coreData.info.stall.StallData;
-	import com.rpgGame.coreData.lang.LangNoticeInfo;
+	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
@@ -224,7 +224,8 @@ package com.rpgGame.app.cmdlistener.engine
                             modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)
 						{
                             // 可攻击
-                            if (role.type == SceneCharType.MONSTER) {
+                            if (role.type == SceneCharType.MONSTER) 
+							{
                                 WalkToRoleManager.walkToRole(currTarget as SceneRole);
                             }
 //							if(MainRoleManager.actorInfo.zhanCheOwnerID <= 0)//没在战车上
@@ -236,7 +237,7 @@ package com.rpgGame.app.cmdlistener.engine
 //								}
 //								else
 //								{
-//									NoticeManager.showNotify(LangNoticeInfo.CastSpellHasNoWeapon); //"没有穿戴武器不能释放技能"
+//									NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellHasNoWeapon); //"没有穿戴武器不能释放技能"
 //								}
 //							}
 						}

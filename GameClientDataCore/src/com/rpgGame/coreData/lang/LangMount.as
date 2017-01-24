@@ -7,9 +7,7 @@ package com.rpgGame.coreData.lang
 	* 【**不可手动修改此类**】，
 	*	
 	* 【任何修改都将被生成工具覆盖，如需修改请直接修改具体的config文件】
-	* @author fly.AutoUICreater
-	* @modifier L.L.M.Sunny
-	* 修改时间：2015-7-2 上午10:05:12
+	* @author NEIL
 	* 
 	*/
 	public class LangMount
@@ -216,7 +214,7 @@ package com.rpgGame.coreData.lang
 		public static const MOUNT_TIP_78:String = "MOUNT_TIP_78";
 		 /**  没有足够的空位放置你的繁育马和宝宝马了！ */
 		public static const MOUNT_TIP_79:String = "MOUNT_TIP_79";
-		 /**  本次消耗绑银：$ */
+		 /**  本次消耗：$ */
 		public static const MOUNT_TIP_80:String = "MOUNT_TIP_80";
 		 /**  根骨经验：$ */
 		public static const MOUNT_TIP_81:String = "MOUNT_TIP_81";
@@ -236,7 +234,7 @@ package com.rpgGame.coreData.lang
 		public static const MOUNT_TIP_88:String = "MOUNT_TIP_88";
 		 /**  坐骑可以领悟技能，拥有更多战斗效果 */
 		public static const MOUNT_TIP_89:String = "MOUNT_TIP_89";
-		 /**  获得强化经验：$ */
+		 /**  +$ */
 		public static const MOUNT_TIP_90:String = "MOUNT_TIP_90";
 		 /**  消耗绑银不足!!! */
 		public static const MOUNT_TIP_91:String = "MOUNT_TIP_91";
@@ -276,204 +274,288 @@ package com.rpgGame.coreData.lang
 		public static const MOUNT_TIP_108:String = "MOUNT_TIP_108";
 		 /**  鉴定消耗：银子/绑银 $ */
 		public static const MOUNT_TIP_109:String = "MOUNT_TIP_109";
+		 /**  经验满后根骨等级提升：$/$ */
+		public static const MOUNT_TIP_110:String = "MOUNT_TIP_110";
+		 /**  根骨等级已达上限 */
+		public static const MOUNT_TIP_111:String = "MOUNT_TIP_111";
+		 /**  开启新技能成功几率：$ */
+		public static const MOUNT_TIP_112:String = "MOUNT_TIP_112";
+		 /**  消耗$：$ */
+		public static const MOUNT_TIP_113:String = "MOUNT_TIP_113";
+		 /**  同类型的技能将被覆盖 */
+		public static const MOUNT_TIP_114:String = "MOUNT_TIP_114";
+		 /**  技能类型：$ */
+		public static const MOUNT_TIP_115:String = "MOUNT_TIP_115";
 		 /**  npc没找到 */
-		public static const MOUNT_CMDLISTENER_FAILD_1:String = "MOUNT_CMDLISTENER_FAILD_1";
+		public static const MOUNT_IDENTIFY_FAILD_1:String = "MOUNT_IDENTIFY_FAILD_1";
 		 /**  距离npc过远 */
-		public static const MOUNT_CMDLISTENER_FAILD_2:String = "MOUNT_CMDLISTENER_FAILD_2";
+		public static const MOUNT_IDENTIFY_FAILD_2:String = "MOUNT_IDENTIFY_FAILD_2";
 		 /**  没有找到坐骑 */
-		public static const MOUNT_CMDLISTENER_FAILD_3:String = "MOUNT_CMDLISTENER_FAILD_3";
+		public static const MOUNT_IDENTIFY_FAILD_3:String = "MOUNT_IDENTIFY_FAILD_3";
 		 /**  坐骑已经被鉴定了 */
-		public static const MOUNT_CMDLISTENER_FAILD_4:String = "MOUNT_CMDLISTENER_FAILD_4";
+		public static const MOUNT_IDENTIFY_FAILD_4:String = "MOUNT_IDENTIFY_FAILD_4";
 		 /**  鉴定费不够 */
-		public static const MOUNT_CMDLISTENER_FAILD_5:String = "MOUNT_CMDLISTENER_FAILD_5";
+		public static const MOUNT_IDENTIFY_FAILD_5:String = "MOUNT_IDENTIFY_FAILD_5";
+		 /**  没有找到坐骑 */
+		public static const MOUNT_TRANS_FAILD_3:String = "MOUNT_TRANS_FAILD_3";
 		 /**  坐骑未被鉴定了 */
-		public static const MOUNT_CMDLISTENER_FAILD_6:String = "MOUNT_CMDLISTENER_FAILD_6";
+		public static const MOUNT_TRANS_FAILD_4:String = "MOUNT_TRANS_FAILD_4";
 		 /**  玩家等级低于携带等级 */
-		public static const MOUNT_CMDLISTENER_FAILD_7:String = "MOUNT_CMDLISTENER_FAILD_7";
+		public static const MOUNT_TRANS_FAILD_5:String = "MOUNT_TRANS_FAILD_5";
 		 /**  无效的物品放置位置 */
-		public static const MOUNT_CMDLISTENER_FAILD_8:String = "MOUNT_CMDLISTENER_FAILD_8";
+		public static const MOUNT_TRANS_FAILD_6:String = "MOUNT_TRANS_FAILD_6";
 		 /**  服务器bug */
-		public static const MOUNT_CMDLISTENER_FAILD_9:String = "MOUNT_CMDLISTENER_FAILD_9";
+		public static const MOUNT_TRANS_FAILD_7:String = "MOUNT_TRANS_FAILD_7";
 		 /**  坐骑不能穿装备 */
-		public static const MOUNT_CMDLISTENER_FAILD_10:String = "MOUNT_CMDLISTENER_FAILD_10";
+		public static const MOUNT_TRANS_FAILD_8:String = "MOUNT_TRANS_FAILD_8";
 		 /**  槽位上面竟然没有坐骑 */
-		public static const MOUNT_CMDLISTENER_FAILD_11:String = "MOUNT_CMDLISTENER_FAILD_11";
+		public static const MOUNT_STATUS_FAILD_1:String = "MOUNT_STATUS_FAILD_1";
 		 /**  坐骑没有鉴定 */
-		public static const MOUNT_CMDLISTENER_FAILD_12:String = "MOUNT_CMDLISTENER_FAILD_12";
+		public static const MOUNT_STATUS_FAILD_2:String = "MOUNT_STATUS_FAILD_2";
 		 /**  等级不够，无法操作 */
-		public static const MOUNT_CMDLISTENER_FAILD_13:String = "MOUNT_CMDLISTENER_FAILD_13";
+		public static const MOUNT_STATUS_FAILD_3:String = "MOUNT_STATUS_FAILD_3";
 		 /**  未知的状态 */
-		public static const MOUNT_CMDLISTENER_FAILD_14:String = "MOUNT_CMDLISTENER_FAILD_14";
+		public static const MOUNT_STATUS_FAILD_4:String = "MOUNT_STATUS_FAILD_4";
 		 /**  要设置的状态跟当前状态是一致的 */
-		public static const MOUNT_CMDLISTENER_FAILD_15:String = "MOUNT_CMDLISTENER_FAILD_15";
+		public static const MOUNT_STATUS_FAILD_5:String = "MOUNT_STATUS_FAILD_5";
 		 /**  当前能够训练的坐骑数量已满 */
-		public static const MOUNT_CMDLISTENER_FAILD_16:String = "MOUNT_CMDLISTENER_FAILD_16";
-		 /**  坐骑等级过低，无法上马 */
-		public static const MOUNT_CMDLISTENER_FAILD_17:String = "MOUNT_CMDLISTENER_FAILD_17";
+		public static const MOUNT_STATUS_FAILD_6:String = "MOUNT_STATUS_FAILD_6";
+		 /**  坐骑等级过低，无法操作 */
+		public static const MOUNT_STATUS_FAILD_7:String = "MOUNT_STATUS_FAILD_7";
+		 /**  当前坐骑处于上马状态,请先下马 */
+		public static const MOUNT_STATUS_FAILD_8:String = "MOUNT_STATUS_FAILD_8";
 		 /**  施法中，无法上下马 */
-		public static const MOUNT_CMDLISTENER_FAILD_18:String = "MOUNT_CMDLISTENER_FAILD_18";
+		public static const MOUNT_RIDE_FAILD_1:String = "MOUNT_RIDE_FAILD_1";
 		 /**  击晕或者定身 */
-		public static const MOUNT_CMDLISTENER_FAILD_19:String = "MOUNT_CMDLISTENER_FAILD_19";
+		public static const MOUNT_RIDE_FAILD_2:String = "MOUNT_RIDE_FAILD_2";
 		 /**  没有出战坐骑 */
-		public static const MOUNT_CMDLISTENER_FAILD_20:String = "MOUNT_CMDLISTENER_FAILD_20";
+		public static const MOUNT_RIDE_FAILD_3:String = "MOUNT_RIDE_FAILD_3";
 		 /**  该场景不能上马 */
-		public static const MOUNT_CMDLISTENER_FAILD_21:String = "MOUNT_CMDLISTENER_FAILD_21";
+		public static const MOUNT_RIDE_FAILD_4:String = "MOUNT_RIDE_FAILD_4";
 		 /**  上下马cd没到 */
-		public static const MOUNT_CMDLISTENER_FAILD_22:String = "MOUNT_CMDLISTENER_FAILD_22";
+		public static const MOUNT_RIDE_FAILD_5:String = "MOUNT_RIDE_FAILD_5";
 		 /**  坐骑太饿了 */
-		public static const MOUNT_CMDLISTENER_FAILD_23:String = "MOUNT_CMDLISTENER_FAILD_23";
+		public static const MOUNT_RIDE_FAILD_6:String = "MOUNT_RIDE_FAILD_6";
+		 /**  当前状态无法上马 */
+		public static const MOUNT_RIDE_FAILD_7:String = "MOUNT_RIDE_FAILD_7";
+		 /**  要放生的坐骑非法 */
+		public static const MOUNT_RELEASE_FAILD_1:String = "MOUNT_RELEASE_FAILD_1";
+		 /**  该坐骑正在骑乘中，请先下马 */
+		public static const MOUNT_RELEASE_FAILD_2:String = "MOUNT_RELEASE_FAILD_2";
+		 /**  服务器bug */
+		public static const MOUNT_RELEASE_FAILD_3:String = "MOUNT_RELEASE_FAILD_3";
+		 /**  没有找到坐骑 */
+		public static const MOUNT_FEED_FAILD_1:String = "MOUNT_FEED_FAILD_1";
+		 /**  没有鉴定 */
+		public static const MOUNT_FEED_FAILD_2:String = "MOUNT_FEED_FAILD_2";
+		 /**  玩家等级低于坐骑携带等级 */
+		public static const MOUNT_FEED_FAILD_3:String = "MOUNT_FEED_FAILD_3";
+		 /**  无效的喂养物品的位置 */
+		public static const MOUNT_FEED_FAILD_4:String = "MOUNT_FEED_FAILD_4";
+		 /**  物品正在交易中 */
+		public static const MOUNT_FEED_FAILD_5:String = "MOUNT_FEED_FAILD_5";
+		 /**  物品没找到 */
+		public static const MOUNT_FEED_FAILD_6:String = "MOUNT_FEED_FAILD_6";
+		 /**  物品已经过期了 */
+		public static const MOUNT_FEED_FAILD_7:String = "MOUNT_FEED_FAILD_7";
+		 /**  物品不够 */
+		public static const MOUNT_FEED_FAILD_8:String = "MOUNT_FEED_FAILD_8";
+		 /**  要喂养的物品跟你想喂养的物品不同 */
+		public static const MOUNT_FEED_FAILD_9:String = "MOUNT_FEED_FAILD_9";
+		 /**  不饿 */
+		public static const MOUNT_FEED_FAILD_10:String = "MOUNT_FEED_FAILD_10";
+		 /**  当前等级已经达到能够达到的上限了 */
+		public static const MOUNT_FEED_FAILD_11:String = "MOUNT_FEED_FAILD_11";
+		 /**  服务器bug */
+		public static const MOUNT_FEED_FAILD_12:String = "MOUNT_FEED_FAILD_12";
+		 /**  该装备无法喂食 */
+		public static const MOUNT_FEED_FAILD_13:String = "MOUNT_FEED_FAILD_13";
+		 /**  要强化的坐骑没找到 */
+		public static const MOUNT_REFINE_FAILD_1:String = "MOUNT_REFINE_FAILD_1";
+		 /**  要强化的坐骑没有鉴定 */
+		public static const MOUNT_REFINE_FAILD_2:String = "MOUNT_REFINE_FAILD_2";
+		 /**  玩家等级低于坐骑携带等级 */
+		public static const MOUNT_REFINE_FAILD_3:String = "MOUNT_REFINE_FAILD_3";
+		 /**  没有找到坐骑强化的配置数据 */
+		public static const MOUNT_REFINE_FAILD_4:String = "MOUNT_REFINE_FAILD_4";
+		 /**  强化非法 */
+		public static const MOUNT_REFINE_FAILD_5:String = "MOUNT_REFINE_FAILD_5";
+		 /**  目标坐骑没有找到 */
+		public static const MOUNT_REFINE_FAILD_6:String = "MOUNT_REFINE_FAILD_6";
+		 /**  目标坐骑未鉴定 */
+		public static const MOUNT_REFINE_FAILD_7:String = "MOUNT_REFINE_FAILD_7";
+		 /**  玩家等级低于目标坐骑携带等级 */
+		public static const MOUNT_REFINE_FAILD_8:String = "MOUNT_REFINE_FAILD_8";
+		 /**  目标坐骑根骨条件不满足 */
+		public static const MOUNT_REFINE_FAILD_9:String = "MOUNT_REFINE_FAILD_9";
+		 /**  目标坐骑不能是出战坐骑 */
+		public static const MOUNT_REFINE_FAILD_10:String = "MOUNT_REFINE_FAILD_10";
+		 /**  服务器bug */
+		public static const MOUNT_REFINE_FAILD_11:String = "MOUNT_REFINE_FAILD_11";
+		 /**  物品没有找到 */
+		public static const MOUNT_REFINE_FAILD_12:String = "MOUNT_REFINE_FAILD_12";
+		 /**  兽牌根骨条件不满足 */
+		public static const MOUNT_REFINE_FAILD_13:String = "MOUNT_REFINE_FAILD_13";
+		 /**  锻骨丹根骨条件不满足 */
+		public static const MOUNT_REFINE_FAILD_14:String = "MOUNT_REFINE_FAILD_14";
+		 /**  该物品不能用来强化坐骑 */
+		public static const MOUNT_REFINE_FAILD_15:String = "MOUNT_REFINE_FAILD_15";
+		 /**  银两不足 */
+		public static const MOUNT_REFINE_FAILD_16:String = "MOUNT_REFINE_FAILD_16";
+		 /**  成年马不能强化 */
+		public static const MOUNT_REFINE_FAILD_17:String = "MOUNT_REFINE_FAILD_17";
+		 /**  根骨经验已满，无法强化 */
+		public static const MOUNT_REFINE_FAILD_18:String = "MOUNT_REFINE_FAILD_18";
+		 /**  坐骑没找到 */
+		public static const MOUNT_LEARNSPELL_FAILD_1:String = "MOUNT_LEARNSPELL_FAILD_1";
+		 /**  坐骑没鉴定 */
+		public static const MOUNT_LEARNSPELL_FAILD_2:String = "MOUNT_LEARNSPELL_FAILD_2";
+		 /**  玩家等级低于坐骑携带等级 */
+		public static const MOUNT_LEARNSPELL_FAILD_3:String = "MOUNT_LEARNSPELL_FAILD_3";
+		 /**  技能书没找到 */
+		public static const MOUNT_LEARNSPELL_FAILD_4:String = "MOUNT_LEARNSPELL_FAILD_4";
+		 /**  技能书学满了/或者技能书等级过低 */
+		public static const MOUNT_LEARNSPELL_FAILD_5:String = "MOUNT_LEARNSPELL_FAILD_5";
+		 /**  银两不足 */
+		public static const MOUNT_LEARNSPELL_FAILD_6:String = "MOUNT_LEARNSPELL_FAILD_6";
+		 /**  坐骑有装备,无法繁育 */
+		public static const MOUNT_BREEDTONPC_FAILD_1:String = "MOUNT_BREEDTONPC_FAILD_1";
+		 /**  坐骑没找到 */
+		public static const MOUNT_BREEDTONPC_FAILD_2:String = "MOUNT_BREEDTONPC_FAILD_2";
+		 /**  坐骑未鉴定 */
+		public static const MOUNT_BREEDTONPC_FAILD_3:String = "MOUNT_BREEDTONPC_FAILD_3";
+		 /**  玩家等级过低 */
+		public static const MOUNT_BREEDTONPC_FAILD_4:String = "MOUNT_BREEDTONPC_FAILD_4";
+		 /**  坐骑出战中 */
+		public static const MOUNT_BREEDTONPC_FAILD_5:String = "MOUNT_BREEDTONPC_FAILD_5";
+		 /**  当前有繁育或者邀请 */
+		public static const MOUNT_BREEDTONPC_FAILD_6:String = "MOUNT_BREEDTONPC_FAILD_6";
+		 /**  坐骑已经繁育过了 */
+		public static const MOUNT_BREEDTONPC_FAILD_7:String = "MOUNT_BREEDTONPC_FAILD_7";
+		 /**  坐骑饱食度不够 */
+		public static const MOUNT_BREEDTONPC_FAILD_8:String = "MOUNT_BREEDTONPC_FAILD_8";
+		 /**  没有任何邀请 */
+		public static const MOUNT_BREEDTONPC_FAILD_9:String = "MOUNT_BREEDTONPC_FAILD_9";
+		 /**  邀请过期了 */
+		public static const MOUNT_BREEDTONPC_FAILD_10:String = "MOUNT_BREEDTONPC_FAILD_10";
+		 /**  相同性别无法繁育 */
+		public static const MOUNT_BREEDTONPC_FAILD_11:String = "MOUNT_BREEDTONPC_FAILD_11";
+		 /**  不是宝宝马,无法繁育 */
+		public static const MOUNT_BREEDTONPC_FAILD_12:String = "MOUNT_BREEDTONPC_FAILD_12";
+		 /**  物种不同,无法繁育 */
+		public static const MOUNT_BREEDTONPC_FAILD_13:String = "MOUNT_BREEDTONPC_FAILD_13";
+		 /**  你无法邀请他人 */
+		public static const MOUNT_INVITEOTHERBREED_FAILD_1:String = "MOUNT_INVITEOTHERBREED_FAILD_1";
+		 /**  目标不在线 */
+		public static const MOUNT_INVITEOTHERBREED_FAILD_2:String = "MOUNT_INVITEOTHERBREED_FAILD_2";
+		 /**  目标不是本国的 */
+		public static const MOUNT_INVITEOTHERBREED_FAILD_3:String = "MOUNT_INVITEOTHERBREED_FAILD_3";
+		 /**  目标不能是本人 */
+		public static const MOUNT_INVITEOTHERBREED_FAILD_4:String = "MOUNT_INVITEOTHERBREED_FAILD_4";
+		 /**  当前已经被邀请了或者当前自己在繁育 */
+		public static const MOUNT_INVITEOTHERBREED_FAILD_5:String = "MOUNT_INVITEOTHERBREED_FAILD_5";
+		 /**  服务器bug */
+		public static const MOUNT_INVITEOTHERBREED_FAILD_6:String = "MOUNT_INVITEOTHERBREED_FAILD_6";
+		 /**  上次邀请没过期，请等待对方回应 */
+		public static const MOUNT_INVITEOTHERBREED_FAILD_7:String = "MOUNT_INVITEOTHERBREED_FAILD_7";
+		 /**  当前已经无法在设置邀请对象了 */
+		public static const MOUNT_INVITEOTHERBREED_FAILD_8:String = "MOUNT_INVITEOTHERBREED_FAILD_8";
+		 /**  当前没有繁育 */
+		public static const MOUNT_INVITEOTHERBREED_FAILD_9:String = "MOUNT_INVITEOTHERBREED_FAILD_9";
+		 /**  没有被邀请 */
+		public static const MOUNT_REFUSEOTHERINVITEYOU_FAILD_1:String = "MOUNT_REFUSEOTHERINVITEYOU_FAILD_1";
+		 /**  当前情况下，无法拒绝 */
+		public static const MOUNT_REFUSEOTHERINVITEYOU_FAILD_2:String = "MOUNT_REFUSEOTHERINVITEYOU_FAILD_2";
+		 /**  服务器bug */
+		public static const MOUNT_REFUSEOTHERINVITEYOU_FAILD_3:String = "MOUNT_REFUSEOTHERINVITEYOU_FAILD_3";
+		 /**  当前没有繁育 */
+		public static const MOUNT_BREEDLOCK_FAILD_1:String = "MOUNT_BREEDLOCK_FAILD_1";
+		 /**  当前无法锁定 */
+		public static const MOUNT_BREEDLOCK_FAILD_2:String = "MOUNT_BREEDLOCK_FAILD_2";
+		 /**  当前已经锁定了 */
+		public static const MOUNT_BREEDLOCK_FAILD_3:String = "MOUNT_BREEDLOCK_FAILD_3";
+		 /**  没有繁育 */
+		public static const MOUNT_GETBREEDBABYMOUNT_FAILD_1:String = "MOUNT_GETBREEDBABYMOUNT_FAILD_1";
+		 /**  当前没有宝宝产生 */
+		public static const MOUNT_GETBREEDBABYMOUNT_FAILD_2:String = "MOUNT_GETBREEDBABYMOUNT_FAILD_2";
+		 /**  服务器bug */
+		public static const MOUNT_GETBREEDBABYMOUNT_FAILD_3:String = "MOUNT_GETBREEDBABYMOUNT_FAILD_3";
+		 /**  请求过于频繁 */
+		public static const MOUNT_GETBREEDBABYMOUNT_FAILD_4:String = "MOUNT_GETBREEDBABYMOUNT_FAILD_4";
+		 /**  当前没有繁育 */
+		public static const MOUNT_GETBREEDCANCEL_FAILD_1:String = "MOUNT_GETBREEDCANCEL_FAILD_1";
+		 /**  没有空位置放置你的坐骑 */
+		public static const MOUNT_GETBREEDCANCEL_FAILD_2:String = "MOUNT_GETBREEDCANCEL_FAILD_2";
+		 /**  已经取回去了啊 */
+		public static const MOUNT_GETBREEDCANCEL_FAILD_3:String = "MOUNT_GETBREEDCANCEL_FAILD_3";
+		 /**  当前已经在繁育了，无法取消 */
+		public static const MOUNT_GETBREEDCANCEL_FAILD_4:String = "MOUNT_GETBREEDCANCEL_FAILD_4";
+		 /**  服务器bug */
+		public static const MOUNT_GETBREEDCANCEL_FAILD_5:String = "MOUNT_GETBREEDCANCEL_FAILD_5";
+		 /**  没有繁育 */
+		public static const MOUNT_COLLECTBABYMOUNT_FAILD_1:String = "MOUNT_COLLECTBABYMOUNT_FAILD_1";
+		 /**  已经领取了 */
+		public static const MOUNT_COLLECTBABYMOUNT_FAILD_2:String = "MOUNT_COLLECTBABYMOUNT_FAILD_2";
+		 /**  没有空位放置你的繁育马 */
+		public static const MOUNT_COLLECTBABYMOUNT_FAILD_3:String = "MOUNT_COLLECTBABYMOUNT_FAILD_3";
+		 /**  没有空位放置你的宝宝马 */
+		public static const MOUNT_COLLECTBABYMOUNT_FAILD_4:String = "MOUNT_COLLECTBABYMOUNT_FAILD_4";
+		 /**  服务器bug */
+		public static const MOUNT_COLLECTBABYMOUNT_FAILD_5:String = "MOUNT_COLLECTBABYMOUNT_FAILD_5";
+		 /**  还没有繁育出宝宝马 */
+		public static const MOUNT_COLLECTBABYMOUNT_FAILD_6:String = "MOUNT_COLLECTBABYMOUNT_FAILD_6";
+		 /**  没找到可以采集的坐骑 */
+		public static const MOUNT_COLLECTMOUNTCOLLECTOBJ_FAILD_1:String = "MOUNT_COLLECTMOUNTCOLLECTOBJ_FAILD_1";
+		 /**  空位不够 */
+		public static const MOUNT_COLLECTMOUNTCOLLECTOBJ_FAILD_2:String = "MOUNT_COLLECTMOUNTCOLLECTOBJ_FAILD_2";
+		 /**  已经被别人采集了 */
+		public static const MOUNT_COLLECTMOUNTCOLLECTOBJ_FAILD_3:String = "MOUNT_COLLECTMOUNTCOLLECTOBJ_FAILD_3";
+		 /**  当前无法采集 */
+		public static const MOUNT_COLLECTMOUNTCOLLECTOBJ_FAILD_4:String = "MOUNT_COLLECTMOUNTCOLLECTOBJ_FAILD_4";
+		 /**  距离过远 */
+		public static const MOUNT_COLLECTMOUNTCOLLECTOBJ_FAILD_5:String = "MOUNT_COLLECTMOUNTCOLLECTOBJ_FAILD_5";
+		 /**  要强化的坐骑没找到 */
+		public static const MOUNT_INHERIT_FAILD_1:String = "MOUNT_INHERIT_FAILD_1";
+		 /**  要强化的坐骑没有鉴定 */
+		public static const MOUNT_INHERIT_FAILD_2:String = "MOUNT_INHERIT_FAILD_2";
+		 /**  玩家等级低于坐骑携带等级 */
+		public static const MOUNT_INHERIT_FAILD_3:String = "MOUNT_INHERIT_FAILD_3";
+		 /**  要么继承经验,要么继承技能 */
+		public static const MOUNT_INHERIT_FAILD_4:String = "MOUNT_INHERIT_FAILD_4";
+		 /**  坐骑根骨已满 */
+		public static const MOUNT_INHERIT_FAILD_5:String = "MOUNT_INHERIT_FAILD_5";
+		 /**  目标坐骑没有找到 */
+		public static const MOUNT_INHERIT_FAILD_6:String = "MOUNT_INHERIT_FAILD_6";
+		 /**  目标坐骑未鉴定 */
+		public static const MOUNT_INHERIT_FAILD_7:String = "MOUNT_INHERIT_FAILD_7";
+		 /**  玩家等级低于目标坐骑携带等级 */
+		public static const MOUNT_INHERIT_FAILD_8:String = "MOUNT_INHERIT_FAILD_8";
+		 /**  目标坐骑不能是出战坐骑 */
+		public static const MOUNT_INHERIT_FAILD_10:String = "MOUNT_INHERIT_FAILD_10";
+		 /**  服务器bug */
+		public static const MOUNT_INHERIT_FAILD_11:String = "MOUNT_INHERIT_FAILD_11";
+		 /**  物品没有找到 */
+		public static const MOUNT_INHERIT_FAILD_12:String = "MOUNT_INHERIT_FAILD_12";
+		 /**  该物品不能用来强化坐骑 */
+		public static const MOUNT_INHERIT_FAILD_15:String = "MOUNT_INHERIT_FAILD_15";
+		 /**  绑银不足 */
+		public static const MOUNT_INHERIT_FAILD_16:String = "MOUNT_INHERIT_FAILD_16";
+		 /**  根骨经验满了，无法继承 */
+		public static const MOUNT_INHERIT_FAILD_17:String = "MOUNT_INHERIT_FAILD_17";
 		 /**  坐骑放生成功 */
 		public static const MOUNT_CMDLISTENER_FAILD_24:String = "MOUNT_CMDLISTENER_FAILD_24";
-		 /**  要放生的坐骑非法 */
-		public static const MOUNT_CMDLISTENER_FAILD_25:String = "MOUNT_CMDLISTENER_FAILD_25";
-		 /**  该坐骑正在骑乘中，请先下马 */
-		public static const MOUNT_CMDLISTENER_FAILD_26:String = "MOUNT_CMDLISTENER_FAILD_26";
 		 /**  喂养成功 */
 		public static const MOUNT_CMDLISTENER_FAILD_27:String = "MOUNT_CMDLISTENER_FAILD_27";
-		 /**  没有鉴定 */
-		public static const MOUNT_CMDLISTENER_FAILD_28:String = "MOUNT_CMDLISTENER_FAILD_28";
-		 /**  玩家等级低于坐骑携带等级 */
-		public static const MOUNT_CMDLISTENER_FAILD_29:String = "MOUNT_CMDLISTENER_FAILD_29";
-		 /**  无效的喂养物品的位置 */
-		public static const MOUNT_CMDLISTENER_FAILD_30:String = "MOUNT_CMDLISTENER_FAILD_30";
-		 /**  物品正在交易中 */
-		public static const MOUNT_CMDLISTENER_FAILD_31:String = "MOUNT_CMDLISTENER_FAILD_31";
-		 /**  物品没找到 */
-		public static const MOUNT_CMDLISTENER_FAILD_32:String = "MOUNT_CMDLISTENER_FAILD_32";
-		 /**  物品已经过期了 */
-		public static const MOUNT_CMDLISTENER_FAILD_33:String = "MOUNT_CMDLISTENER_FAILD_33";
-		 /**  物品不够 */
-		public static const MOUNT_CMDLISTENER_FAILD_34:String = "MOUNT_CMDLISTENER_FAILD_34";
-		 /**  要喂养的物品跟你想喂养的物品不同 */
-		public static const MOUNT_CMDLISTENER_FAILD_35:String = "MOUNT_CMDLISTENER_FAILD_35";
-		 /**  不饿 */
-		public static const MOUNT_CMDLISTENER_FAILD_36:String = "MOUNT_CMDLISTENER_FAILD_36";
-		 /**  当前等级已经达到能够达到的上限了 */
-		public static const MOUNT_CMDLISTENER_FAILD_37:String = "MOUNT_CMDLISTENER_FAILD_37";
-		 /**  该装备无法喂食 */
-		public static const MOUNT_CMDLISTENER_FAILD_38:String = "MOUNT_CMDLISTENER_FAILD_38";
-		 /**  要强化的坐骑没找到 */
-		public static const MOUNT_CMDLISTENER_FAILD_39:String = "MOUNT_CMDLISTENER_FAILD_39";
-		 /**  要强化的坐骑没有鉴定 */
-		public static const MOUNT_CMDLISTENER_FAILD_40:String = "MOUNT_CMDLISTENER_FAILD_40";
-		 /**  没有找到坐骑强化的配置数据 */
-		public static const MOUNT_CMDLISTENER_FAILD_41:String = "MOUNT_CMDLISTENER_FAILD_41";
-		 /**  强化非法 */
-		public static const MOUNT_CMDLISTENER_FAILD_42:String = "MOUNT_CMDLISTENER_FAILD_42";
-		 /**  目标坐骑没有找到 */
-		public static const MOUNT_CMDLISTENER_FAILD_43:String = "MOUNT_CMDLISTENER_FAILD_43";
-		 /**  目标坐骑未鉴定 */
-		public static const MOUNT_CMDLISTENER_FAILD_44:String = "MOUNT_CMDLISTENER_FAILD_44";
-		 /**  玩家等级低于目标坐骑携带等级 */
-		public static const MOUNT_CMDLISTENER_FAILD_45:String = "MOUNT_CMDLISTENER_FAILD_45";
-		 /**  目标坐骑根骨条件不满足 */
-		public static const MOUNT_CMDLISTENER_FAILD_46:String = "MOUNT_CMDLISTENER_FAILD_46";
-		 /**  目标坐骑不能是出战坐骑 */
-		public static const MOUNT_CMDLISTENER_FAILD_47:String = "MOUNT_CMDLISTENER_FAILD_47";
-		 /**  物品没有找到 */
-		public static const MOUNT_CMDLISTENER_FAILD_48:String = "MOUNT_CMDLISTENER_FAILD_48";
-		 /**  兽牌根骨条件不满足 */
-		public static const MOUNT_CMDLISTENER_FAILD_49:String = "MOUNT_CMDLISTENER_FAILD_49";
-		 /**  锻骨丹根骨条件不满足 */
-		public static const MOUNT_CMDLISTENER_FAILD_50:String = "MOUNT_CMDLISTENER_FAILD_50";
-		 /**  该物品不能用来强化坐骑 */
-		public static const MOUNT_CMDLISTENER_FAILD_51:String = "MOUNT_CMDLISTENER_FAILD_51";
-		 /**  银两不足 */
-		public static const MOUNT_CMDLISTENER_FAILD_52:String = "MOUNT_CMDLISTENER_FAILD_52";
-		 /**  野生马不能强化 */
-		public static const MOUNT_CMDLISTENER_FAILD_53:String = "MOUNT_CMDLISTENER_FAILD_53";
-		 /**  坐骑没找到 */
-		public static const MOUNT_CMDLISTENER_FAILD_54:String = "MOUNT_CMDLISTENER_FAILD_54";
-		 /**  坐骑没鉴定 */
-		public static const MOUNT_CMDLISTENER_FAILD_55:String = "MOUNT_CMDLISTENER_FAILD_55";
-		 /**  技能书没找到 */
-		public static const MOUNT_CMDLISTENER_FAILD_56:String = "MOUNT_CMDLISTENER_FAILD_56";
-		 /**  技能书学满了/或者技能书等级过低 */
-		public static const MOUNT_CMDLISTENER_FAILD_57:String = "MOUNT_CMDLISTENER_FAILD_57";
-		 /**  坐骑未鉴定 */
-		public static const MOUNT_CMDLISTENER_FAILD_58:String = "MOUNT_CMDLISTENER_FAILD_58";
-		 /**  玩家等级过低 */
-		public static const MOUNT_CMDLISTENER_FAILD_59:String = "MOUNT_CMDLISTENER_FAILD_59";
-		 /**  坐骑出战中 */
-		public static const MOUNT_CMDLISTENER_FAILD_60:String = "MOUNT_CMDLISTENER_FAILD_60";
-		 /**  当前有繁育或者邀请 */
-		public static const MOUNT_CMDLISTENER_FAILD_61:String = "MOUNT_CMDLISTENER_FAILD_61";
-		 /**  坐骑已经繁育过了 */
-		public static const MOUNT_CMDLISTENER_FAILD_62:String = "MOUNT_CMDLISTENER_FAILD_62";
-		 /**  坐骑饱食度不够 */
-		public static const MOUNT_CMDLISTENER_FAILD_63:String = "MOUNT_CMDLISTENER_FAILD_63";
-		 /**  没有任何邀请 */
-		public static const MOUNT_CMDLISTENER_FAILD_64:String = "MOUNT_CMDLISTENER_FAILD_64";
-		 /**  邀请过期了 */
-		public static const MOUNT_CMDLISTENER_FAILD_65:String = "MOUNT_CMDLISTENER_FAILD_65";
 		 /**  交给npc成功 */
 		public static const MOUNT_CMDLISTENER_FAILD_66:String = "MOUNT_CMDLISTENER_FAILD_66";
 		 /**  邀请别人成功，等待玩家回复 */
 		public static const MOUNT_CMDLISTENER_FAILD_67:String = "MOUNT_CMDLISTENER_FAILD_67";
-		 /**  你无法邀请他人 */
-		public static const MOUNT_CMDLISTENER_FAILD_68:String = "MOUNT_CMDLISTENER_FAILD_68";
-		 /**  目标不在线 */
-		public static const MOUNT_CMDLISTENER_FAILD_69:String = "MOUNT_CMDLISTENER_FAILD_69";
-		 /**  目标不是本国的 */
-		public static const MOUNT_CMDLISTENER_FAILD_70:String = "MOUNT_CMDLISTENER_FAILD_70";
-		 /**  目标不能是本人 */
-		public static const MOUNT_CMDLISTENER_FAILD_71:String = "MOUNT_CMDLISTENER_FAILD_71";
-		 /**  当前已经被邀请了或者当前自己在繁育 */
-		public static const MOUNT_CMDLISTENER_FAILD_72:String = "MOUNT_CMDLISTENER_FAILD_72";
-		 /**  上次邀请没过期，请等待对方回应 */
-		public static const MOUNT_CMDLISTENER_FAILD_73:String = "MOUNT_CMDLISTENER_FAILD_73";
-		 /**  当前已经无法在设置邀请对象了 */
-		public static const MOUNT_CMDLISTENER_FAILD_74:String = "MOUNT_CMDLISTENER_FAILD_74";
-		 /**  当前没有繁育 */
-		public static const MOUNT_CMDLISTENER_FAILD_75:String = "MOUNT_CMDLISTENER_FAILD_75";
 		 /**  拒绝成功 */
 		public static const MOUNT_CMDLISTENER_FAILD_76:String = "MOUNT_CMDLISTENER_FAILD_76";
-		 /**  没有被邀请 */
-		public static const MOUNT_CMDLISTENER_FAILD_77:String = "MOUNT_CMDLISTENER_FAILD_77";
-		 /**  当前情况下，无法拒绝 */
-		public static const MOUNT_CMDLISTENER_FAILD_78:String = "MOUNT_CMDLISTENER_FAILD_78";
-		 /**  当前无法锁定 */
-		public static const MOUNT_CMDLISTENER_FAILD_79:String = "MOUNT_CMDLISTENER_FAILD_79";
-		 /**  当前已经锁定了 */
-		public static const MOUNT_CMDLISTENER_FAILD_80:String = "MOUNT_CMDLISTENER_FAILD_80";
-		 /**  没有繁育 */
-		public static const MOUNT_CMDLISTENER_FAILD_81:String = "MOUNT_CMDLISTENER_FAILD_81";
-		 /**  当前没有宝宝产生 */
-		public static const MOUNT_CMDLISTENER_FAILD_82:String = "MOUNT_CMDLISTENER_FAILD_82";
-		 /**  请求过于频繁 */
-		public static const MOUNT_CMDLISTENER_FAILD_83:String = "MOUNT_CMDLISTENER_FAILD_83";
-		 /**  没有空位置放置你的坐骑 */
-		public static const MOUNT_CMDLISTENER_FAILD_84:String = "MOUNT_CMDLISTENER_FAILD_84";
-		 /**  已经取回去了啊 */
-		public static const MOUNT_CMDLISTENER_FAILD_85:String = "MOUNT_CMDLISTENER_FAILD_85";
-		 /**  当前已经在繁育了，无法取消 */
-		public static const MOUNT_CMDLISTENER_FAILD_86:String = "MOUNT_CMDLISTENER_FAILD_86";
 		 /**  别人取消繁育了，将本次繁育设置为已经取消，你自己只能够把坐骑领回去了 */
 		public static const MOUNT_CMDLISTENER_FAILD_87:String = "MOUNT_CMDLISTENER_FAILD_87";
-		 /**  已经领取了 */
-		public static const MOUNT_CMDLISTENER_FAILD_88:String = "MOUNT_CMDLISTENER_FAILD_88";
-		 /**  没有空位放置你的繁育马 */
-		public static const MOUNT_CMDLISTENER_FAILD_89:String = "MOUNT_CMDLISTENER_FAILD_89";
-		 /**  没有空位放置你的宝宝马 */
-		public static const MOUNT_CMDLISTENER_FAILD_90:String = "MOUNT_CMDLISTENER_FAILD_90";
-		 /**  还没有繁育出宝宝马 */
-		public static const MOUNT_CMDLISTENER_FAILD_91:String = "MOUNT_CMDLISTENER_FAILD_91";
 		 /**  采集成功 */
 		public static const MOUNT_CMDLISTENER_FAILD_92:String = "MOUNT_CMDLISTENER_FAILD_92";
-		 /**  没找到可以采集的坐骑 */
-		public static const MOUNT_CMDLISTENER_FAILD_93:String = "MOUNT_CMDLISTENER_FAILD_93";
-		 /**  当前兽栏无空置位置，无法抓捕 */
-		public static const MOUNT_CMDLISTENER_FAILD_94:String = "MOUNT_CMDLISTENER_FAILD_94";
-		 /**  已经被别人采集了 */
-		public static const MOUNT_CMDLISTENER_FAILD_95:String = "MOUNT_CMDLISTENER_FAILD_95";
-		 /**  当前无法采集 */
-		public static const MOUNT_CMDLISTENER_FAILD_96:String = "MOUNT_CMDLISTENER_FAILD_96";
-		 /**  相同性别无法繁育 */
-		public static const MOUNT_CMDLISTENER_FAILD_97:String = "MOUNT_CMDLISTENER_FAILD_97";
-		 /**  不是宝宝马,无法繁育 */
-		public static const MOUNT_CMDLISTENER_FAILD_98:String = "MOUNT_CMDLISTENER_FAILD_98";
-		 /**  物种不同,无法繁育 */
-		public static const MOUNT_CMDLISTENER_FAILD_99:String = "MOUNT_CMDLISTENER_FAILD_99";
 		 /**  请选择被传承的坐骑 */
 		public static const MOUNT_CMDLISTENER_FAILD_100:String = "MOUNT_CMDLISTENER_FAILD_100";
 		 /**  请选择消耗传承的坐骑、或兽牌 */
@@ -482,50 +564,10 @@ package com.rpgGame.coreData.lang
 		public static const MOUNT_CMDLISTENER_FAILD_102:String = "MOUNT_CMDLISTENER_FAILD_102";
 		 /**  您还未拥有坐骑 */
 		public static const MOUNT_CMDLISTENER_FAILD_103:String = "MOUNT_CMDLISTENER_FAILD_103";
-		 /**  要强化的坐骑没找到 */
-		public static const MOUNT_CMDLISTENER_FAILD_104:String = "MOUNT_CMDLISTENER_FAILD_104";
-		 /**  要强化的坐骑没有鉴定 */
-		public static const MOUNT_CMDLISTENER_FAILD_105:String = "MOUNT_CMDLISTENER_FAILD_105";
-		 /**  玩家等级低于坐骑携带等级 */
-		public static const MOUNT_CMDLISTENER_FAILD_106:String = "MOUNT_CMDLISTENER_FAILD_106";
-		 /**  要么继承经验,要么继承技能 */
-		public static const MOUNT_CMDLISTENER_FAILD_107:String = "MOUNT_CMDLISTENER_FAILD_107";
-		 /**  坐骑根骨已满 */
-		public static const MOUNT_CMDLISTENER_FAILD_108:String = "MOUNT_CMDLISTENER_FAILD_108";
-		 /**  目标坐骑没有找到 */
-		public static const MOUNT_CMDLISTENER_FAILD_109:String = "MOUNT_CMDLISTENER_FAILD_109";
-		 /**  目标坐骑未鉴定 */
-		public static const MOUNT_CMDLISTENER_FAILD_110:String = "MOUNT_CMDLISTENER_FAILD_110";
-		 /**  玩家等级低于目标坐骑携带等级 */
-		public static const MOUNT_CMDLISTENER_FAILD_111:String = "MOUNT_CMDLISTENER_FAILD_111";
-		 /**  目标坐骑不能是出战坐骑 */
-		public static const MOUNT_CMDLISTENER_FAILD_112:String = "MOUNT_CMDLISTENER_FAILD_112";
-		 /**  服务器bug */
-		public static const MOUNT_CMDLISTENER_FAILD_113:String = "MOUNT_CMDLISTENER_FAILD_113";
-		 /**  物品没有找到 */
-		public static const MOUNT_CMDLISTENER_FAILD_114:String = "MOUNT_CMDLISTENER_FAILD_114";
-		 /**  该物品不能用来强化坐骑 */
-		public static const MOUNT_CMDLISTENER_FAILD_115:String = "MOUNT_CMDLISTENER_FAILD_115";
-		 /**  绑银不足 */
-		public static const MOUNT_CMDLISTENER_FAILD_116:String = "MOUNT_CMDLISTENER_FAILD_116";
-		 /**  当前坐骑处于上马状态,请先下马 */
-		public static const MOUNT_CMDLISTENER_FAILD_117:String = "MOUNT_CMDLISTENER_FAILD_117";
-		 /**  坐骑有装备,无法繁育！ */
-		public static const MOUNT_CMDLISTENER_FAILD_118:String = "MOUNT_CMDLISTENER_FAILD_118";
 		 /**  领取坐骑成功！ */
 		public static const MOUNT_CMDLISTENER_FAILD_119:String = "MOUNT_CMDLISTENER_FAILD_119";
 		 /**  角色等级到达30级后开启坐骑系统！ */
 		public static const MOUNT_CMDLISTENER_FAILD_120:String = "MOUNT_CMDLISTENER_FAILD_120";
-		 /**  坐骑正在转化操作，无法打开该界面！ */
-		public static const MOUNT_CMDLISTENER_FAILD_121:String = "MOUNT_CMDLISTENER_FAILD_121";
-		 /**  坐骑正在鉴定操作，无法打开该界面！ */
-		public static const MOUNT_CMDLISTENER_FAILD_122:String = "MOUNT_CMDLISTENER_FAILD_122";
-		 /**  坐骑正在繁育操作，无法打开该界面！ */
-		public static const MOUNT_CMDLISTENER_FAILD_123:String = "MOUNT_CMDLISTENER_FAILD_123";
-		 /**  坐骑正在转化操作，无法打开该界面！ */
-		public static const MOUNT_CMDLISTENER_FAILD_124:String = "MOUNT_CMDLISTENER_FAILD_124";
-		 /**  正在操作坐骑主界面，无法打开该界面！ */
-		public static const MOUNT_CMDLISTENER_FAILD_125:String = "MOUNT_CMDLISTENER_FAILD_125";
 
 	}
 }

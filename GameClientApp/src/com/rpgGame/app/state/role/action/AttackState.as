@@ -79,8 +79,11 @@ package com.rpgGame.app.state.role.action
 				else
 					throw new Error("攻击状态引用必须是AttackStateReference类型！");
 
-				if (!_canWalkRelease)
+				if (!_canWalkRelease)//不可边走边放技能
+				{
 					transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
+				}
+				
 				_statusType = _stateReference.statusType;
 				if (_statusType)
 				{
@@ -135,6 +138,15 @@ package com.rpgGame.app.state.role.action
 			super.playAnimation(role, render, isFreeze, time, speedRatio);
 
 			var status : String = _statusType ? _statusType : RoleActionType.STAND;
+			
+			if(_canWalkRelease)
+			{
+				if((_machine.owner as SceneRole).stateMachine.isWalkMoving)
+				{
+					status = RoleActionType.RUN;
+				}
+			}
+			
 			var matchStatus : String = RoleActionType.getActionType(status, (_machine as RoleStateMachine).isRiding);
 			switch (render.type)
 			{

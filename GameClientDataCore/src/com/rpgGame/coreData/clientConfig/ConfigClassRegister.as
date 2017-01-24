@@ -70,7 +70,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const AvatarWeaponRes:String = "data.model.AvatarWeaponRes";
 		/**  换装头发资源配置ID		 */
 		public static const BaZhenTuRes:String = "data.model.BaZhenTuRes";
-		/**  角色阶段ID 每个阶段对应的骨骼资源不一样，为以后角色换骨骼做准备	阶段名称	兵家动画资源名称	墨家男动画资源名称	墨家女动画资源名称	医家动画资源名称 */
+		/**  角色骨骼						 */
 		public static const HeroModel:String = "data.model.HeroModel";
 		/**  坐骑模型表	功能名称	动画资源名称 */
 		public static const MountModel:String = "data.model.MountModel";
@@ -98,11 +98,11 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_buff:String = "data.spell.Q_buff";
 		/**  公共CD表	 */
 		public static const Q_GCD:String = "data.spell.Q_GCD";
-		/**  技能基本信息配置数据表																																																																																																				 */
+		/**  技能基本信息配置数据表																																																																																																										 */
 		public static const Q_skill_model:String = "data.spell.Q_skill_model";
 		/**  技能效果配置表																			 */
 		public static const Q_SpellAnimation:String = "data.spell.Q_SpellAnimation";
-		/**  单个技能效果的数据配置																								 */
+		/**  单个技能效果的数据配置																							 */
 		public static const Q_SpellEffect:String = "data.spell.Q_SpellEffect";
 		/**  召唤物表												 */
 		public static const Q_summon:String = "data.spell.Q_summon";
