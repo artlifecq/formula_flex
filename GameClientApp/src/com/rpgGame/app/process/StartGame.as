@@ -134,11 +134,11 @@ package com.rpgGame.app.process
 				//
 
                 CONFIG::Debug {
-                    StatsUtil.showOrHideAwayStats(Stage3DLayerManager.stage,
+                   /* StatsUtil.showOrHideAwayStats(Stage3DLayerManager.stage,
                                                   Stage3DLayerManager.stage3DProxy);
                     LayerManager.showOrHideMM();
                     ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
-                    initMM();
+                    initMM();*/
                 }
 			}
 

@@ -70,6 +70,8 @@ package com.rpgGame.coreData.role
 		public var mood : String = "";
 		/**帮派名**/
 		public var guildName : String = "";
+		/**伴侣**/
+		public var loveName : String = "";
 		/**今天接了几次镖车任务**/
 		public var biaoTimes : int;
 		/**
@@ -338,11 +340,12 @@ package com.rpgGame.coreData.role
 				case JobEnum.ROLE_1_TYPE:
 					return JobEnum.ROLE_1_NAME;
 				case JobEnum.ROLE_2_TYPE:
-					return JobEnum.ROLE_2_NAME;
 				case JobEnum.ROLE_3_TYPE:
+					return JobEnum.ROLE_2_NAME;
+				case JobEnum.ROLE_4_TYPE:
 					return JobEnum.ROLE_3_NAME;
 			}
-			return "无";
+			return "不存在的职业类型";
 		}
 		
 		private function setCountryModuleData(countryModuleObj : CountryModuleObjProto) : void

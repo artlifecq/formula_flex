@@ -9,7 +9,7 @@ package org.mokylin.skin.app.beibao.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class Btn_shuxing3 extends feathers.controls.StateSkin
+	public class ButtonPaimaihang extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,11 +22,11 @@ package org.mokylin.skin.app.beibao.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function Btn_shuxing3()
+		public function ButtonPaimaihang()
 		{
 			super();
 			
-			this.currentState = "disabled";
+			this.currentState = "down";
 			this.elementsContent = [];
 			
 			states = {
@@ -47,10 +47,7 @@ package org.mokylin.skin.app.beibao.button
 						}
 					]
 			};
-			skinNames={"down":"org.mokylin.skin.app.beibao.button.btn_shuxing_up",
-			"hover":"org.mokylin.skin.app.beibao.button.btn_shuxing_up",
-			"select":"org.mokylin.skin.app.beibao.button.btn_shuxing_select",
-			"up":"org.mokylin.skin.app.beibao.button.btn_shuxing_up"};
+			skinNames={"down":"ui/app/beibao/button/paimaihang/down.png", "hover":"ui/app/beibao/button/paimaihang/over.png", "up":"ui/app/beibao/button/paimaihang/up.png"};
 		}
 
 

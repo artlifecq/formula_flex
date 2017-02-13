@@ -9,7 +9,7 @@ package org.mokylin.skin.app.beibao.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class Btn_shuxing extends feathers.controls.StateSkin
+	public class ButtonShangdian extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,11 +22,11 @@ package org.mokylin.skin.app.beibao.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function Btn_shuxing()
+		public function ButtonShangdian()
 		{
 			super();
 			
-			this.currentState = "disabled";
+			this.currentState = "down";
 			this.elementsContent = [];
 			
 			states = {
@@ -47,10 +47,7 @@ package org.mokylin.skin.app.beibao.button
 						}
 					]
 			};
-			skinNames={"down":"ui/component/button/btn_juese/down.png,ui/app/beibao/btntext/btnText2_1.png",
-			"hover":"ui/component/button/btn_juese/over.png,ui/app/beibao/btntext/btnText2_1.png",
-			"select":"ui/component/button/btn_juese/select.png,ui/app/beibao/btntext/btnText2_2.png",
-			"up":"ui/component/button/btn_juese/up.png,ui/app/beibao/btntext/btnText2_1.png"};
+			skinNames={"down":"ui/app/beibao/button/shangdian/down.png", "hover":"ui/app/beibao/button/shangdian/over.png", "up":"ui/app/beibao/button/shangdian/up.png"};
 		}
 
 

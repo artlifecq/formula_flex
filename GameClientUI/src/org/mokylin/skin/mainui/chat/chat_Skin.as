@@ -153,7 +153,6 @@ package org.mokylin.skin.mainui.chat
 			btn_banghui = temp;
 			temp.name = "btn_banghui";
 			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_banghui;
-			temp.visible = false;
 			temp.width = 50;
 			temp.x = 1;
 			temp.y = 145;
@@ -178,7 +177,6 @@ package org.mokylin.skin.mainui.chat
 			btn_dangqian = temp;
 			temp.name = "btn_dangqian";
 			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_dangqian;
-			temp.visible = false;
 			temp.width = 50;
 			temp.x = 1;
 			temp.y = 145;
@@ -191,7 +189,6 @@ package org.mokylin.skin.mainui.chat
 			btn_duiwu = temp;
 			temp.name = "btn_duiwu";
 			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_duiwu;
-			temp.visible = false;
 			temp.width = 50;
 			temp.x = 1;
 			temp.y = 145;
@@ -319,7 +316,6 @@ package org.mokylin.skin.mainui.chat
 			btn_siliao = temp;
 			temp.name = "btn_siliao";
 			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_siliao;
-			temp.visible = false;
 			temp.width = 50;
 			temp.x = 1;
 			temp.y = 145;
@@ -446,9 +442,10 @@ package org.mokylin.skin.mainui.chat
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			select_banghui = temp;
 			temp.name = "select_banghui";
+			temp.height = 20;
 			temp.label = "帮会";
 			temp.styleClass = org.mokylin.skin.mainui.chat.pingdaoItems;
-			temp.visible = false;
+			temp.width = 40;
 			temp.x = 6;
 			temp.y = 48;
 			return temp;
@@ -459,11 +456,12 @@ package org.mokylin.skin.mainui.chat
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			select_bg = temp;
 			temp.name = "select_bg";
-			temp.height = 132;
-			temp.styleName = "ui/mainui/chat/pindaokuang.png";
+			temp.height = 148;
+			temp.styleName = "ui/common/tips/tips_2.png";
 			temp.visible = false;
+			temp.width = 52;
 			temp.x = 1;
-			temp.y = 17;
+			temp.y = 1;
 			return temp;
 		}
 
@@ -472,11 +470,12 @@ package org.mokylin.skin.mainui.chat
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			select_dangqian = temp;
 			temp.name = "select_dangqian";
+			temp.height = 20;
 			temp.label = "当前";
 			temp.styleClass = org.mokylin.skin.mainui.chat.pingdaoItems;
-			temp.visible = false;
+			temp.width = 40;
 			temp.x = 6;
-			temp.y = 120;
+			temp.y = 119;
 			return temp;
 		}
 
@@ -485,9 +484,10 @@ package org.mokylin.skin.mainui.chat
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			select_duiwu = temp;
 			temp.name = "select_duiwu";
+			temp.height = 20;
 			temp.label = "队伍";
 			temp.styleClass = org.mokylin.skin.mainui.chat.pingdaoItems;
-			temp.visible = false;
+			temp.width = 40;
 			temp.x = 6;
 			temp.y = 72;
 			return temp;
@@ -498,9 +498,10 @@ package org.mokylin.skin.mainui.chat
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			select_laba = temp;
 			temp.name = "select_laba";
+			temp.height = 20;
 			temp.label = "喇叭";
 			temp.styleClass = org.mokylin.skin.mainui.chat.pingdaoItems;
-			temp.visible = false;
+			temp.width = 40;
 			temp.x = 6;
 			temp.y = 0;
 			return temp;
@@ -511,9 +512,10 @@ package org.mokylin.skin.mainui.chat
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			select_shijie = temp;
 			temp.name = "select_shijie";
+			temp.height = 20;
 			temp.label = "世界";
 			temp.styleClass = org.mokylin.skin.mainui.chat.pingdaoItems;
-			temp.visible = false;
+			temp.width = 40;
 			temp.x = 6;
 			temp.y = 24;
 			return temp;
@@ -524,9 +526,10 @@ package org.mokylin.skin.mainui.chat
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			select_siliao = temp;
 			temp.name = "select_siliao";
+			temp.height = 20;
 			temp.label = "私聊";
 			temp.styleClass = org.mokylin.skin.mainui.chat.pingdaoItems;
-			temp.visible = false;
+			temp.width = 40;
 			temp.x = 6;
 			temp.y = 96;
 			return temp;

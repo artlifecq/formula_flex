@@ -29,7 +29,6 @@ package com.rpgGame.appModule.common
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat;
-	import org.mokylin.skin.mainui.chat.VScrollBarChatSkin;
 	
 	import starling.core.Starling;
 	
@@ -394,12 +393,12 @@ package com.rpgGame.appModule.common
 			
 			if(!movingFace)
 			{
-				movingFace = new DragDropItem( IcoSizeEnum.SIZE_46, -1);
+				movingFace = new DragDropItem( IcoSizeEnum.SIZE_44, -1);
 				movingFace.touchable = movingFace.touchGroup = false;
 			}
 //			if(helperGridInfo == null)helperGridInfo = new GridInfo(info.containerID, info.index);
 			movingFace.faceInfo = info;
-			movingFace.setIconResName(ClientConfig.getItemIcon(info.icoName, IcoSizeEnum.SIZE_46 ));
+			movingFace.setIconResName(ClientConfig.getItemIcon(info.icoName, IcoSizeEnum.SIZE_44 ));
 			
 			//拖出后仅在显示层清空此格子
 			setGridInfo(info.index, null);

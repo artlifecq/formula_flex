@@ -9,7 +9,7 @@ package org.mokylin.skin.app.beibao.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class Btn_taozhuang2 extends feathers.controls.StateSkin
+	public class ButtonCunchu extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,11 +22,11 @@ package org.mokylin.skin.app.beibao.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function Btn_taozhuang2()
+		public function ButtonCunchu()
 		{
 			super();
 			
-			this.currentState = "disabled";
+			this.currentState = "down";
 			this.elementsContent = [];
 			
 			states = {
@@ -47,10 +47,7 @@ package org.mokylin.skin.app.beibao.button
 						}
 					]
 			};
-			skinNames={"down":"ui/component/button/btn_juese/down.png",
-			"hover":"ui/component/button/btn_juese/over.png",
-			"select":"ui/component/button/btn_juese/select.png",
-			"up":"ui/component/button/btn_juese/up.png"};
+			skinNames={"down":"ui/app/beibao/button/cunchu/down.png", "hover":"ui/app/beibao/button/cunchu/over.png", "up":"ui/app/beibao/button/cunchu/up.png"};
 		}
 
 
@@ -62,9 +59,6 @@ package org.mokylin.skin.app.beibao.button
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			iconDisplay = temp;
 			temp.name = "iconDisplay";
-			temp.styleName = "ui/app/beibao/btntext/btnText1_1.png";
-			temp.x = 37;
-			temp.y = 10;
 			return temp;
 		}
 

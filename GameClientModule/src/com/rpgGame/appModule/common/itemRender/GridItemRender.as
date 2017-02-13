@@ -22,7 +22,7 @@ package com.rpgGame.appModule.common.itemRender
 		
 		private var padding:int;
 		
-		public function GridItemRender(size:int =  IcoSizeEnum.SIZE_40,bg:String = GridBGType.CHORTCUT_2,padding:int = 1)
+		public function GridItemRender(size:int =  IcoSizeEnum.SIZE_40,bg:String = GridBGType.CHORTCUT_2,padding:int = 0)
 		{
 			this.size = size;
 			this.bg = bg;

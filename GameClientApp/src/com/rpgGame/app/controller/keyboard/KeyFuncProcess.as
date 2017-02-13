@@ -46,7 +46,7 @@ package com.rpgGame.app.controller.keyboard
 					break;
 				case "4": //B 背包
 					if (!ClientConfig.isBanShu)
-						AppManager.showApp(AppConstant.BACK_PACK_PANEL);
+						AppManager.showApp(AppConstant.ROLE_PANEL);
 					break;
 				case "5": //C 人物
 					if (!ClientConfig.isBanShu)

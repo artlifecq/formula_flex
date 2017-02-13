@@ -33,7 +33,7 @@ package com.rpgGame.appModule.bag {
             this.setChildIndex(this._avatar, this.getChildIndex(this._skin.weapons) - 1);
             this._showAvatarData = new RoleData(0);
             
-            
+			
             CONFIG::netDebug {
                 NetDebug.LOG("[AppModule] [BagPanel] init exp_pro[x:" + this._skin.pro_jinyan.x + 
                     ", y:" + this._skin.pro_jinyan.y +
@@ -108,7 +108,7 @@ package com.rpgGame.appModule.bag {
                 NetDebug.LOG("[AppModule] [BagPanel] [initProperty]");
             }
             // 秒伤
-            this._skin.txt_cur.text = isClear ? "0" : "0"; //info.totalStat.getStatValueString(CharAttributeType.;
+       /*     this._skin.txt_cur.text = isClear ? "0" : "0"; //info.totalStat.getStatValueString(CharAttributeType.;
             // 经验
             this._skin.txt_jinyan.text = isClear ? "0/0" : info.curExp + "/" + info.upgradeExp;
             this._skin.pro_jinyan.value = isClear ? 0 : 10;//info.totalStat.getStatValue(CharAttributeType.EXP) / info.totalStat.getStatValue(CharAttributeType.MAX_EXP);
@@ -165,7 +165,7 @@ package com.rpgGame.appModule.bag {
             this._skin.txt0.text = isClear ? "0" : "0";
             this._skin.txt1.text = isClear ? "0" : "0";
             this._skin.txt2.text = isClear ? "0" : "0";
-            this._skin.txt3.text = isClear ? "0" : "0";
+            this._skin.txt3.text = isClear ? "0" : "0";*/
         }
     }
 }

@@ -52,7 +52,7 @@ package com.rpgGame.app.ui.main.head {
 
         public function resize(w : int, h : int) : void {
             this.x = 0;
-            this.y = 0;//28;
+            this.y = 29;//28;
         }
 
         public function updateNameAndLevel(name : String, level : int) : void {
@@ -60,7 +60,7 @@ package com.rpgGame.app.ui.main.head {
         }
 
         public function updateBattleValue(battleValue : int) : void {
-            this._skin.role_zhandou.number = battleValue;
+            this._skin.role_zhandouli.number = battleValue;
         }
         
         public function updateJob(job : int) : void {

@@ -2,6 +2,7 @@ package com.rpgGame.app.ui.main
 {
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.main.chat.ChatBar;
+	import com.rpgGame.app.ui.main.chat.SystemMsgBar;
 	import com.rpgGame.app.ui.main.head.PlayerHeadBar;
 	import com.rpgGame.app.ui.main.navigation.NavigationBar;
 	import com.rpgGame.app.ui.main.shortcut.ShortcutBar;
@@ -53,6 +54,8 @@ package com.rpgGame.app.ui.main
         private var _navigationBar : NavigationBar;
         // 聊天框
         private var _chatBar : ChatBar;
+		//系统消息条
+		private var _systemMsgBar:SystemMsgBar;
 //		/** 主工具栏 **/
 //		private var _mainBar : ShortcutBar;
 //		/** 人物头像栏 **/
@@ -119,6 +122,8 @@ package com.rpgGame.app.ui.main
             this.addChild(this._navigationBar);
             this._chatBar = new ChatBar();
             this.addChild(this._chatBar);
+			this._systemMsgBar=new SystemMsgBar();
+			this.addChild(_systemMsgBar);
 //			_chatBar = new ChatBar();
 //			addChild(_chatBar);
 //			
@@ -303,6 +308,7 @@ package com.rpgGame.app.ui.main
             this._navigationBar.resize(sWidth, sHeight);
             this._chatBar.resize(sWidth, sHeight);
 			this._expBar.resize(sWidth, sHeight);
+			this._systemMsgBar.resize(sWidth, sHeight);
 //			_mainBar.resize(sWidth, sHeight);
 //			_headBar.resize(sWidth, sHeight);
 //			_selectRoleHeadBar.resize(sWidth, sHeight);
