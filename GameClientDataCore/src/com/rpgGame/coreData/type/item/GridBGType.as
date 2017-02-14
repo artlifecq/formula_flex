@@ -12,6 +12,8 @@ package com.rpgGame.coreData.type.item
 		public static const GRID_SIZE_16 : String = "normal/16";
 		/** 格子 22*22 **/
 		public static const GRID_SIZE_22 : String = "normal/22";
+		/** 格子 44*44 **/
+		public static const GRID_SIZE_44 : String = "normal/44";
 		/** 格子 46*46 **/
 		public static const GRID_SIZE_46 : String = "normal/46";
 		/** 格子 50*50 **/
@@ -31,6 +33,8 @@ package com.rpgGame.coreData.type.item
 		public static const GRID_SIZE_40 : String = "quality/40_4";
 		/** 格子光圈品质 40*40 **/
 		public static const SELECT_40:String = "select/40";
+		/** 格子光圈品质 44*44 **/
+		public static const SELECT_44:String = "select/44";
 		/** 格子光圈品质 46*46 **/
 		public static const SELECT_46:String = "select/46";
 		/** 格子光圈品质 60*60 **/

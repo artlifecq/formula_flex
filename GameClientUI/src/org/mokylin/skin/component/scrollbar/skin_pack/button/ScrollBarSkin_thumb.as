@@ -19,12 +19,6 @@ package org.mokylin.skin.component.scrollbar.skin_pack.button
 
 		public var __ScrollBarSkin_thumb_UIAsset3:feathers.controls.UIAsset;
 
-		public var __ScrollBarSkin_thumb_UIAsset4:feathers.controls.UIAsset;
-
-		public var __ScrollBarSkin_thumb_UIAsset5:feathers.controls.UIAsset;
-
-		public var __ScrollBarSkin_thumb_UIAsset6:feathers.controls.UIAsset;
-
 
 		//==========================================================================
 		//                                定义构造函数
@@ -34,19 +28,16 @@ package org.mokylin.skin.component.scrollbar.skin_pack.button
 			super();
 			
 			this.currentState = "up";
-			this.height = 30;
+			this.height = 66;
 			this.elementsContent = [];
 			__ScrollBarSkin_thumb_UIAsset1_i();
 			__ScrollBarSkin_thumb_UIAsset2_i();
 			__ScrollBarSkin_thumb_UIAsset3_i();
-			__ScrollBarSkin_thumb_UIAsset4_i();
-			__ScrollBarSkin_thumb_UIAsset5_i();
-			__ScrollBarSkin_thumb_UIAsset6_i();
 			
 			
 			states = {
 			};
-			skinNames={"down":"ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_di.png,ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai.png", "hover":"ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_di.png,ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai.png", "up":"ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_di.png,ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai.png"};
+			skinNames={"down":"ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_down.png", "hover":"ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_over.png", "up":"ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_up.png"};
 		}
 
 
@@ -57,10 +48,9 @@ package org.mokylin.skin.component.scrollbar.skin_pack.button
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__ScrollBarSkin_thumb_UIAsset1 = temp;
-			temp.bottom = 0;
-			temp.styleName = "ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_di.png";
-			temp.top = 0;
-			temp.x = 1;
+			temp.styleName = "ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_down.png";
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -68,9 +58,9 @@ package org.mokylin.skin.component.scrollbar.skin_pack.button
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__ScrollBarSkin_thumb_UIAsset2 = temp;
-			temp.styleName = "ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai.png";
-			temp.verticalCenter = 0;
+			temp.styleName = "ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_over.png";
 			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -78,41 +68,9 @@ package org.mokylin.skin.component.scrollbar.skin_pack.button
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__ScrollBarSkin_thumb_UIAsset3 = temp;
-			temp.bottom = 0;
-			temp.styleName = "ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_di.png";
-			temp.top = 0;
-			temp.x = 1;
-			return temp;
-		}
-
-		private function __ScrollBarSkin_thumb_UIAsset4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__ScrollBarSkin_thumb_UIAsset4 = temp;
-			temp.styleName = "ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai.png";
-			temp.verticalCenter = 0;
+			temp.styleName = "ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_up.png";
 			temp.x = 0;
-			return temp;
-		}
-
-		private function __ScrollBarSkin_thumb_UIAsset5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__ScrollBarSkin_thumb_UIAsset5 = temp;
-			temp.bottom = 0;
-			temp.styleName = "ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_di.png";
-			temp.top = 0;
-			temp.x = 1;
-			return temp;
-		}
-
-		private function __ScrollBarSkin_thumb_UIAsset6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__ScrollBarSkin_thumb_UIAsset6 = temp;
-			temp.styleName = "ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai.png";
-			temp.verticalCenter = 0;
-			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 

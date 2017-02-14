@@ -1,4 +1,4 @@
-package org.mokylin.skin.app.beibao.button
+package org.mokylin.skin.component.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.app.beibao.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class Btn_taozhuang extends feathers.controls.StateSkin
+	public class ButtonSkin_jian extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,11 +22,11 @@ package org.mokylin.skin.app.beibao.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function Btn_taozhuang()
+		public function ButtonSkin_jian()
 		{
 			super();
 			
-			this.currentState = "disabled";
+			this.currentState = "down";
 			this.elementsContent = [];
 			
 			states = {
@@ -47,10 +47,7 @@ package org.mokylin.skin.app.beibao.button
 						}
 					]
 			};
-			skinNames={"down":"ui/component/button/btn_juese/down.png,ui/app/beibao/btntext/btnText1_1.png",
-			"hover":"ui/component/button/btn_juese/over.png,ui/app/beibao/btntext/btnText1_1.png",
-			"select":"ui/component/button/btn_juese/select.png,ui/app/beibao/btntext/btnText1_2.png",
-			"up":"ui/component/button/btn_juese/up.png,ui/app/beibao/btntext/btnText1_1.png"};
+			skinNames={"down":"ui/component/button/skin_jian/down.png", "hover":"ui/component/button/skin_jian/over.png", "up":"ui/component/button/skin_jian/up.png"};
 		}
 
 

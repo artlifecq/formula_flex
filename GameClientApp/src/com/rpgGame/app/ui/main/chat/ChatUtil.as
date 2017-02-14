@@ -6,6 +6,7 @@ package com.rpgGame.app.ui.main.chat
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.coreData.type.chat.EnumChatTabsType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
+	import com.rpgGame.netData.chat.message.ResChatMessage;
 	
 	import flash.utils.ByteArray;
 
@@ -22,13 +23,33 @@ package com.rpgGame.app.ui.main.chat
 		{
 			return HtmlTextUtil.getTextColor(getChannelColor(channel), "【" + ChatUtil.getChannelTitle(channel) + "】" + message);
 		}
+		
+		/**
+		 *获取HTML聊天消息 
+		 * @param msgInfo
+		 * @return 
+		 * 
+		 */
+		public static function getHTMLChatMessage(msgInfo:ResChatMessage):String
+		{
+			var chatHtml:String="【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+msgInfo.name+": "+msgInfo.chatText;
+			chatHtml=HtmlTextUtil.getTextColor(getChannelColor(msgInfo.type),chatHtml);
+			return chatHtml;
+		}
+		
+		public static function getHTMLSystemMsg(msgInfo:ResChatMessage):String
+		{
+			var chatHtml:String="【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+msgInfo.chatText;
+			chatHtml=HtmlTextUtil.getTextColor(getChannelColor(msgInfo.type),chatHtml);
+			return chatHtml;
+		}
 
 		public static function getChannelColor(channelType : int) : uint
 		{
 			switch (channelType)
 			{
 				case EnumChatChannelType.CHAT_CHANNEL_SYSTEM:
-					return StaticValue.CHAT_XI_TONG_COLOR;
+					return StaticValue.CHAT_SYSTEM_COLOR;
 				case EnumChatChannelType.CHAT_CHANNEL_WORLD:
 					return StaticValue.CHAT_SHI_JIE_COLOR;
 				case EnumChatChannelType.CHAT_CHANNEL_NORMAL:
@@ -44,7 +65,9 @@ package com.rpgGame.app.ui.main.chat
 				case EnumChatChannelType.CHAT_CHANNEL_SILIAO:
 					return StaticValue.CHAT_SI_LIAO_COLOR;
 				case EnumChatChannelType.CHAT_CHANNEL_NOTICE:
-					return StaticValue.SYSTEM_CHAT_COLOR;
+					return StaticValue.CHAT_NOTICE_COLOR;
+				case EnumChatChannelType.CHAT_CHANNEL_HEARSAY:
+					return StaticValue.CHAT_HEARSAY_COLOR;
 			}
 			return StaticValue.COLOR_CODE_1;
 		}

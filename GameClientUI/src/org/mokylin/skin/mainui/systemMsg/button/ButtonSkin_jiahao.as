@@ -1,4 +1,4 @@
-package org.mokylin.skin.app.beibao.button
+package org.mokylin.skin.mainui.systemMsg.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.app.beibao.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class zhengliBtn extends feathers.controls.StateSkin
+	public class ButtonSkin_jiahao extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,7 +22,7 @@ package org.mokylin.skin.app.beibao.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function zhengliBtn()
+		public function ButtonSkin_jiahao()
 		{
 			super();
 			
@@ -47,7 +47,7 @@ package org.mokylin.skin.app.beibao.button
 						}
 					]
 			};
-			skinNames={"down":"ui/app/beibao/beibaoIcon/zhengli.png", "hover":"ui/app/beibao/beibaoIcon/zhengli.png", "up":"ui/app/beibao/beibaoIcon/zhengli.png"};
+			skinNames={"down":"ui/mainui/systemMsg/button/skin_jiahao/down.png", "hover":"ui/mainui/systemMsg/button/skin_jiahao/over.png", "up":"ui/mainui/systemMsg/button/skin_jiahao/up.png"};
 		}
 
 

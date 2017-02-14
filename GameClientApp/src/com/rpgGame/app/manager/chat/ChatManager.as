@@ -25,6 +25,7 @@ package com.rpgGame.app.manager.chat
     import com.rpgGame.coreData.type.chat.EnumChatChannelType;
     import com.rpgGame.coreData.type.chat.EnumChatTabsType;
     import com.rpgGame.netData.chat.bean.HyperInfo;
+    import com.rpgGame.netData.chat.message.ResChatMessage;
     
     import flash.utils.Dictionary;
     
@@ -59,11 +60,17 @@ package com.rpgGame.app.manager.chat
 
 		private static var _chatItemHash : HashMap = new HashMap();
 
-		private static var MAX_CHATSHOWITEMCACEHE : int = 500;
-		private static var _chatShowItemVec : Vector.<GetShowItemVo> = new Vector.<GetShowItemVo>(MAX_CHATSHOWITEMCACEHE);
+		private static var MAX_CHATSHOWITEMCACEHE : int = 300;
+		
+		
+		
+		private static var _systemHearsayMsg:Vector.<ResChatMessage>=new Vector.<ResChatMessage>;
+		private static var _systemMsg:Vector.<ResChatMessage>=new Vector.<ResChatMessage>;
+		private static var _hearsayMsg:Vector.<ResChatMessage>=new Vector.<ResChatMessage>;
+		public  static var sysHearsayMsgChange:Function;
 
 		private static var _currentShowItemInsertIndex : int = 99;
-
+		
 		/**
 		 * 综合频道里，设置各个频道是否显示
 		 */
@@ -78,6 +85,77 @@ package com.rpgGame.app.manager.chat
 		private static var _geRenChannelShowSetting : Dictionary;
 
 		private static var _freeHockUsedTimes : int = 0;
+		
+		
+		/**
+		 *传闻消息缓存 
+		 */
+		public static function get hearsayMsg():Vector.<ResChatMessage>
+		{
+			return _hearsayMsg;
+		}
+
+		/**
+		 *系统消息缓存 
+		 */
+		public static function get systemMsg():Vector.<ResChatMessage>
+		{
+			return _systemMsg;
+		}
+
+		/**
+		 *系统和传闻消息缓存 
+		 */
+		public static function get systemHearsayMsg():Vector.<ResChatMessage>
+		{
+			return _systemHearsayMsg;
+		}
+
+		/**
+		 * 记录系统传闻消息 
+		 * @param msg
+		 * 
+		 */
+		public static function recordSystemHearsayMsg(msg:ResChatMessage):void
+		{
+			_systemHearsayMsg.push(msg);
+			if(msg.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
+				recordSystemMsg(msg);
+			}else if(msg.type==EnumChatChannelType.CHAT_CHANNEL_HEARSAY){
+				recordHearsayMsg(msg);
+			}
+			
+			if(sysHearsayMsgChange){
+				sysHearsayMsgChange();
+			}
+		}
+		
+		/**
+		 * 记录传闻消息 
+		 * @param msg
+		 * 
+		 */
+		private static function recordHearsayMsg(msg:ResChatMessage):void
+		{
+			if(_hearsayMsg.length>=MAX_CHATSHOWITEMCACEHE){
+				_hearsayMsg.shift();
+			}
+			_hearsayMsg.push(msg);
+		}
+		
+		/**
+		 * 记录系统消息 
+		 * @param msg
+		 * 
+		 */
+		private static function recordSystemMsg(msg:ResChatMessage):void
+		{
+			if(_systemMsg.length>=MAX_CHATSHOWITEMCACEHE){
+				_systemMsg.shift();
+			}
+			_systemMsg.push(msg);
+		}
+		
 		
 		public function ChatManager()
 		{
