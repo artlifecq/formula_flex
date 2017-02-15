@@ -10,6 +10,8 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.lang.LangTips;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.coreData.utils.MoneyUtil;
+	
+	import org.mokylin.skin.common.tips.wupin_Skin;
 
 	/**
 	 * 物品TIPS
@@ -26,7 +28,7 @@ package com.rpgGame.app.ui.tips
 
 		public function ItemTip()
 		{
-//			_itemTip = new ItemTipsSkin();
+			_itemTip = new wupin_Skin();
 			super(_itemTip);
 			initTip();
 		}
@@ -37,9 +39,9 @@ package com.rpgGame.app.ui.tips
 		 */
 		private function initTip() : void
 		{
-			_itemTip.labDecTxt.leading = 5;
-			_itemTip.labDecTxt.color = StaticValue.COLOR_CODE_1;
-			_itemTip.labDecTxt.maxWidth = _itemTip.labDecTxt.width = 240;
+//			_itemTip.labDecTxt.leading = 5;
+//			_itemTip.labDecTxt.color = StaticValue.COLOR_CODE_1;
+//			_itemTip.labDecTxt.maxWidth = _itemTip.labDecTxt.width = 240;
 		}
 
 		/**
@@ -56,15 +58,15 @@ package com.rpgGame.app.ui.tips
 
 			if (_itemInfo.price > 0)
 			{
-				_itemTip.labName.htmlText = HtmlTextUtil.getTextColor(ItemCfgData.getItemQualityColor(_itemInfo.cfgId), ItemCfgData.getItemName(_itemInfo.cfgId));
+				_itemTip.lbl_name.htmlText = HtmlTextUtil.getTextColor(ItemCfgData.getItemQualityColor(_itemInfo.cfgId), ItemCfgData.getItemName(_itemInfo.cfgId));
 			}
 			else
 			{
-				_itemTip.labName.htmlText = HtmlTextUtil.getTextColor(ItemCfgData.getItemQualityColor(_itemInfo.cfgId), ItemCfgData.getItemName(_itemInfo.cfgId)) + //
+				_itemTip.lbl_name.htmlText = HtmlTextUtil.getTextColor(ItemCfgData.getItemQualityColor(_itemInfo.cfgId), ItemCfgData.getItemName(_itemInfo.cfgId)) + //
 					(_itemInfo.count > 0 ? (" " + "<font size='12'>X</font>" + _itemInfo.count) : "");
 			}
 
-			var decTxts : Array = [];
+		/*	var decTxts : Array = [];
 
 			if (_itemInfo.price > 0)
 			{
@@ -101,7 +103,7 @@ package com.rpgGame.app.ui.tips
 				_itemTip.unbindImage.visible = true;
 			}
 
-			_itemTip.imgBG.height = _itemTip.labDecTxt.y + _itemTip.labDecTxt.textHeight + 20;
+			_itemTip.imgBG.height = _itemTip.labDecTxt.y + _itemTip.labDecTxt.textHeight + 20;*/
 		}
 
 		public function hideTips() : void
@@ -117,7 +119,7 @@ package com.rpgGame.app.ui.tips
 		public override function get height() : Number
 		{
 
-			return _itemTip.imgBG.height;
+			return _itemTip.height;
 		}
 
 		private static var _instance : ItemTip = null;

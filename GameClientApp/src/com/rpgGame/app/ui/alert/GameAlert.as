@@ -169,6 +169,11 @@ package com.rpgGame.app.ui.alert
 			gameAlert.clickCallBack = clickCallBack;
 			if(!isNaN(alertSet.autoCloseTime))
 				gameAlert.autoCloseTime = alertSet.autoCloseTime;
+			
+			if(!gameAlert.skin){
+				return null;
+			}
+			
 			if (gameAlert.cboxTip)
 			{
 				gameAlert.cboxTip.visible = alertSet.isShowCBox;

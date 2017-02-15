@@ -1,5 +1,6 @@
-package org.mokylin.skin.app.beibao.button
+package org.mokylin.skin.common.gezi_grid
 {
+	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -9,72 +10,59 @@ package org.mokylin.skin.app.beibao.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class shangdianBtn extends feathers.controls.StateSkin
+	public class grid48_text extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var iconDisplay:feathers.controls.UIAsset;
+		public var grid:feathers.controls.UIAsset;
 
-		public var labelDisplay:feathers.controls.Label;
+		public var lblDisplay:feathers.controls.Label;
 
 
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function shangdianBtn()
+		public function grid48_text()
 		{
 			super();
 			
-			this.currentState = "down";
-			this.elementsContent = [];
+			this.currentState = "normal";
+			this.height = 60;
+			this.width = 60;
+			this.elementsContent = [grid_i(),lblDisplay_i()];
 			
 			states = {
-				init:[
-						{target:"labelDisplay",
-							name:"textAlign",
-							value:"center"
-						}
-						,
-						{target:"labelDisplay",
-							name:"color",
-							value:0xFFFFFF
-						}
-						,
-						{target:"labelDisplay",
-							name:"verticalAlign",
-							value:"middle"
-						}
-					]
 			};
-			skinNames={"down":"ui/app/beibao/beibaoIcon/shangdian.png", "hover":"ui/app/beibao/beibaoIcon/shangdian.png", "up":"ui/app/beibao/beibaoIcon/shangdian.png"};
+			skinNames={};
 		}
 
 
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function iconDisplay_i():feathers.controls.UIAsset
+		private function grid_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			iconDisplay = temp;
-			temp.name = "iconDisplay";
+			grid = temp;
+			temp.name = "grid";
+			temp.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
-		private function labelDisplay_i():feathers.controls.Label
+		private function lblDisplay_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			labelDisplay = temp;
-			temp.name = "labelDisplay";
-			temp.bottom = 0;
-			temp.left = 0;
-			temp.right = 0;
-			temp.text = "";
-			temp.textAlign = "center";
-			temp.color = 0xFFFFFF;
-			temp.top = 0;
-			temp.verticalAlign = "middle";
+			lblDisplay = temp;
+			temp.name = "lblDisplay";
+			temp.fontSize = 12;
+			temp.text = "100";
+			temp.color = 0xf1efc7;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.x = 28;
+			temp.y = 35;
 			return temp;
 		}
 

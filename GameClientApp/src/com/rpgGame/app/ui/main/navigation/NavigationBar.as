@@ -73,8 +73,8 @@ package com.rpgGame.app.ui.main.navigation {
                     this.setState(false);
                     break;
                 case this._skin.btn_beibao:
-                    // 背包
-                    AppManager.showApp(AppConstant.BACK_PACK_PANEL);
+                case this._skin.btn_juese:
+                    AppManager.showApp(AppConstant.ROLE_PANEL);
                     break;
             }
         }

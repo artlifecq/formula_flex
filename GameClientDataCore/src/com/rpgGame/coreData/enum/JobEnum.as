@@ -4,10 +4,12 @@ package com.rpgGame.coreData.enum
 	{
 		/** 兵家 */		
 		public static const ROLE_1_TYPE:int = 1;
-		/** 墨家*/		
+		/** 墨家男*/		
 		public static const ROLE_2_TYPE:int = 2;
-		/** 医家 */		
+		/** 墨家女 */		
 		public static const ROLE_3_TYPE:int = 3;
+		/** 医家 */		
+		public static const ROLE_4_TYPE:int = 4;
 		
 		/** 兵家 */		
 		public static const ROLE_1_NAME:String = "兵家";

@@ -14,6 +14,8 @@ package com.rpgGame.coreData.enum.item
 		public static const SIZE_22:int = 22;
 		/** ico的大小 40*40 **/
 		public static const SIZE_40:int = 40;
+		/** ico的大小 44*44 **/
+		public static const SIZE_44:int = 44;
 		/** ico的大小 46*46 **/
 		public static const SIZE_46:int = 46;
 		/** ico的大小 50*50 **/

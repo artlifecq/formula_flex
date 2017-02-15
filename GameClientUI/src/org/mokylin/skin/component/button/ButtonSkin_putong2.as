@@ -1,5 +1,6 @@
-package org.mokylin.skin.app.beibao.button
+package org.mokylin.skin.component.button
 {
+	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -9,7 +10,7 @@ package org.mokylin.skin.app.beibao.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class Btn_shuxing2 extends feathers.controls.StateSkin
+	public class ButtonSkin_putong2 extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,11 +23,11 @@ package org.mokylin.skin.app.beibao.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function Btn_shuxing2()
+		public function ButtonSkin_putong2()
 		{
 			super();
 			
-			this.currentState = "disabled";
+			this.currentState = "down";
 			this.elementsContent = [];
 			
 			states = {
@@ -38,7 +39,12 @@ package org.mokylin.skin.app.beibao.button
 						,
 						{target:"labelDisplay",
 							name:"color",
-							value:0xFFFFFF
+							value:0xe1d4a9
+						}
+						,
+						{target:"labelDisplay",
+							name:"nativeFilters",
+							value:Fontter.filterObj["labelFilterBlack3"]
 						}
 						,
 						{target:"labelDisplay",
@@ -47,10 +53,10 @@ package org.mokylin.skin.app.beibao.button
 						}
 					]
 			};
-			skinNames={"down":"ui/component/button/btn_juese/down.png",
-			"hover":"ui/component/button/btn_juese/over.png",
-			"select":"ui/component/button/btn_juese/select.png",
-			"up":"ui/component/button/btn_juese/up.png"};
+			skinNames={"disabled":"ui/component/button/skin_putong2/disabled.png",
+			"down":"ui/component/button/skin_putong2/down.png",
+			"hover":"ui/component/button/skin_putong2/over.png",
+			"up":"ui/component/button/skin_putong2/up.png"};
 		}
 
 
@@ -62,9 +68,6 @@ package org.mokylin.skin.app.beibao.button
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			iconDisplay = temp;
 			temp.name = "iconDisplay";
-			temp.styleName = "ui/app/beibao/btntext/btnText2_1.png";
-			temp.x = 37;
-			temp.y = 10;
 			return temp;
 		}
 
@@ -76,11 +79,13 @@ package org.mokylin.skin.app.beibao.button
 			temp.bottom = 0;
 			temp.left = 0;
 			temp.right = 0;
-			temp.text = "";
+			temp.text = "按钮";
 			temp.textAlign = "center";
-			temp.color = 0xFFFFFF;
+			temp.color = 0xe1d4a9;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack3"];
 			temp.top = 0;
 			temp.verticalAlign = "middle";
+			temp.verticalCenter = -2;
 			return temp;
 		}
 

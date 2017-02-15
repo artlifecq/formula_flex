@@ -68,7 +68,7 @@ package org.mokylin.skin.mainui.top
 			temp.styleName = "ui/mainui/top/down.png";
 			temp.width = 28;
 			temp.x = 164;
-			temp.y = 1;
+			temp.y = 2;
 			return temp;
 		}
 
@@ -80,7 +80,7 @@ package org.mokylin.skin.mainui.top
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_top_GM;
 			temp.width = 28;
 			temp.x = 84;
-			temp.y = 2;
+			temp.y = 3;
 			return temp;
 		}
 
@@ -91,7 +91,7 @@ package org.mokylin.skin.mainui.top
 			temp.name = "btn_lock";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_top_suo;
 			temp.x = 56;
-			temp.y = 0;
+			temp.y = 1;
 			return temp;
 		}
 
@@ -114,7 +114,7 @@ package org.mokylin.skin.mainui.top
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_top_shezhi;
 			temp.width = 28;
 			temp.x = 139;
-			temp.y = 0;
+			temp.y = 2;
 			return temp;
 		}
 
@@ -123,11 +123,9 @@ package org.mokylin.skin.mainui.top
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_sound = temp;
 			temp.name = "btn_sound";
-			temp.height = 22;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_top_shengyin;
-			temp.width = 22;
 			temp.x = 113;
-			temp.y = 0;
+			temp.y = 2;
 			return temp;
 		}
 
@@ -138,7 +136,7 @@ package org.mokylin.skin.mainui.top
 			temp.name = "btn_write";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_top_qiandao;
 			temp.x = 30;
-			temp.y = 2;
+			temp.y = 1;
 			return temp;
 		}
 

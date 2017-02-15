@@ -17,12 +17,6 @@ package org.mokylin.skin.mainui.chat
 		//==========================================================================
 		public var __pingdaoItems_UIAsset1:feathers.controls.UIAsset;
 
-		public var __pingdaoItems_UIAsset2:feathers.controls.UIAsset;
-
-		public var __pingdaoItems_UIAsset3:feathers.controls.UIAsset;
-
-		public var iconDisplay:feathers.controls.UIAsset;
-
 		public var labelDisplay:feathers.controls.Label;
 
 
@@ -34,12 +28,10 @@ package org.mokylin.skin.mainui.chat
 			super();
 			
 			this.currentState = "down";
-			this.height = 18;
-			this.width = 41;
-			this.elementsContent = [labelDisplay_i(),iconDisplay_i()];
+			this.height = 20;
+			this.width = 40;
+			this.elementsContent = [labelDisplay_i()];
 			__pingdaoItems_UIAsset1_i();
-			__pingdaoItems_UIAsset2_i();
-			__pingdaoItems_UIAsset3_i();
 			
 			
 			states = {
@@ -48,16 +40,6 @@ package org.mokylin.skin.mainui.chat
 							name:"color",
 							value:0x868276
 						}
-						,
-						{target:"labelDisplay",
-							name:"width",
-							value:40
-						}
-						,
-						{target:"labelDisplay",
-							name:"x",
-							value:0
-						}
 					]
 				,
 				hover:[
@@ -65,46 +47,28 @@ package org.mokylin.skin.mainui.chat
 							name:"color",
 							value:0xcfc6ae
 						}
-						,
-						{target:"labelDisplay",
-							name:"width",
-							value:40
-						}
-						,
-						{target:"labelDisplay",
-							name:"x",
-							value:0
-						}
 					]
 				,
 				up:[
+						{target:"__pingdaoItems_UIAsset1",
+							name:"alpha",
+							value:0
+						}
+						,
 						{target:"labelDisplay",
 							name:"color",
 							value:0x8b8d7b
 						}
-						,
+					]
+				,
+				select:[
 						{target:"labelDisplay",
-							name:"x",
-							value:0
-						}
-						,
-						{target:"labelDisplay",
-							name:"width",
-							value:40
-						}
-						,
-						{target:"labelDisplay",
-							name:"height",
-							value:20
-						}
-						,
-						{target:"labelDisplay",
-							name:"y",
-							value:0
+							name:"color",
+							value:0xcfc6ae
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/chat/pingdao_di.png", "hover":"ui/mainui/chat/pingdao_di.png", "up":"ui/mainui/chat/pingdao_di.png"};
+			skinNames={"down":"ui/common/tips/tips_di.png", "hover":"ui/common/tips/tips_di.png", "select":"ui/common/tips/tips_di.png"};
 		}
 
 
@@ -115,44 +79,11 @@ package org.mokylin.skin.mainui.chat
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__pingdaoItems_UIAsset1 = temp;
-			temp.alpha = 1;
-			temp.height = 18;
-			temp.styleName = "ui/mainui/chat/pingdao_di.png";
+			temp.height = 20;
+			temp.styleName = "ui/common/tips/tips_di.png";
 			temp.width = 41;
 			temp.x = 0;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function __pingdaoItems_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__pingdaoItems_UIAsset2 = temp;
-			temp.height = 18;
-			temp.styleName = "ui/mainui/chat/pingdao_di.png";
-			temp.width = 41;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __pingdaoItems_UIAsset3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__pingdaoItems_UIAsset3 = temp;
-			temp.height = 18;
-			temp.styleName = "ui/mainui/chat/pingdao_di.png";
-			temp.width = 41;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function iconDisplay_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			iconDisplay = temp;
-			temp.name = "iconDisplay";
 			return temp;
 		}
 
@@ -161,16 +92,13 @@ package org.mokylin.skin.mainui.chat
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
-			temp.height = 20;
+			temp.height = 24;
 			temp.text = "文本";
 			temp.textAlign = "center";
-			temp.color = 0x8b8d7b;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.verticalAlign = "middle";
-			temp.verticalCenter = -3;
+			temp.verticalCenter = -2;
 			temp.width = 40;
-			temp.x = 0;
-			temp.y = -2;
 			return temp;
 		}
 
