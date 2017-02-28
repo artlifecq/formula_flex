@@ -2,7 +2,7 @@ package com.rpgGame.app.sender
 {
 	import com.rpgGame.app.utils.UpgradeUtil;
 	import com.rpgGame.coreData.info.item.EquipInfo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.upgrade.UpgradeProtoInfo;
 	
@@ -79,7 +79,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeBoolean(useBind);
 			_bytes.writeVarint32(mainPos);
-			var itemInfo : ItemInfo;
+			var itemInfo : ClientItemInfo;
 			for each(itemInfo in items)
 			{
 				_bytes.writeVarint32(itemInfo.index);
@@ -172,7 +172,7 @@ package com.rpgGame.app.sender
 			_bytes.writeBoolean(!useBind);
 			i=0;
 			len = items.length;
-			var item : ItemInfo;
+			var item : ClientItemInfo;
 			for(;i<len;i++)
 			{
 				item = items[i];

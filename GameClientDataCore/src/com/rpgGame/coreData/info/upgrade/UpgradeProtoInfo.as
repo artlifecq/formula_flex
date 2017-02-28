@@ -1,7 +1,7 @@
 package com.rpgGame.coreData.info.upgrade
 {
 	import com.rpgGame.coreData.cfg.LanguageConfig;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.lang.LangMisc;
 	
 	import app.message.UpgradeProto;
@@ -69,7 +69,7 @@ package com.rpgGame.coreData.info.upgrade
 			if( goodsInfoVect.length <= 0 )
 				return LanguageConfig.getText( LangMisc.NOTHING_INFO );
 			
-			return ItemCfgData.getItemName( goodsInfoVect[0].cfgId );
+			return ItemConfig.getItemName(goodsInfoVect[0].cfgId);
 		}
 		
 		/**

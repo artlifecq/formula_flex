@@ -1,7 +1,7 @@
 package com.client.view
 {
 	import com.client.ClientGlobal;
-
+	
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -11,6 +11,8 @@ package com.client.view
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFieldType;
 	import flash.text.TextFormat;
+	
+	import feathers.controls.List;
 
 	/**
 	 *
@@ -25,8 +27,9 @@ package com.client.view
 		private var _xml : XML = <ipList>
 				<item ip="192.168.1.18" port="8001" name="稳定服"/>
 				<item ip="0.0.0.0" port="0" name="单机版本"/>
-				<item ip="192.168.4.139" port="8001" name="阿杜服"/>
-				<item ip="192.168.4.112" port="8001" name="樊科服"/>
+				<item ip="192.168.4.139" port="8001" name="杜服"/>
+				<item ip="192.168.4.112" port="8001" name="樊服"/>
+				<item ip="192.168.4.94" port="8001" name="蒋服"/>
 			</ipList>;
 
 		private var _clickFun : Function;
@@ -109,7 +112,7 @@ package com.client.view
 			var str : String = _so.data["UserIpPort"] || "127.0.0.1:9999";
 			_textIpPort.text = str;
 			this.addChild(_textIpPort);
-
+			
 			var txtBtn : TextField = new TextField();
 			txtBtn.x = 600;
 			txtBtn.defaultTextFormat = txtFmt;

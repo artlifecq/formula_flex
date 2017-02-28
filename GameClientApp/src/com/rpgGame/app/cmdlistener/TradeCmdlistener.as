@@ -364,13 +364,13 @@ package com.rpgGame.app.cmdlistener
 		 */
 		private function otherSetGoods(bytes:ByteBuffer):void
 		{
-			var index:int = bytes.readVarint32();
+			/*var index:int = bytes.readVarint32();
 			var goods : GoodsProto = new GoodsProto();
 			goods.mergeFrom(bytes);
 			var item : GridInfo = new GridInfo(ItemContainerID.TRADE_TARGET,index);
 			item.data =  ItemUtil.convertGoodsProtoToItemInfo(goods);
 			item.realIndex = index;
-			TradeManager.targetSetGoods(item);
+			TradeManager.targetSetGoods(item);*/
 		}
 		/**
 		 * 放物品上去成功, 把收到消息的时候, 在之前消息中附带的格子中的物品, 放到消息中附带的交易格子中去. (未必是当时拖的那个物品, 可能这条消息之前客户端又收到了物品移动消息)

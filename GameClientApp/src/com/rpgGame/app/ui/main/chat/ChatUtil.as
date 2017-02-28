@@ -32,7 +32,7 @@ package com.rpgGame.app.ui.main.chat
 		 */
 		public static function getHTMLChatMessage(msgInfo:ResChatMessage):String
 		{
-			var chatHtml:String="【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+msgInfo.name+": "+msgInfo.chatText;
+			var chatHtml:String="【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(msgInfo.name)+": "+msgInfo.chatText;
 			chatHtml=HtmlTextUtil.getTextColor(getChannelColor(msgInfo.type),chatHtml);
 			return chatHtml;
 		}

@@ -17,7 +17,7 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.core.events.toujing.TouJingEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.npc.NpcCfgData;
 	import com.rpgGame.coreData.cfg.task.TouJingCfgData;
@@ -598,9 +598,9 @@ package com.rpgGame.app.manager.task
 			var itemId:int = int(LanguageConfig.getText( LangTouJing.TOU_JING_HUI_CHENG_ITEM_ID ));
 			var count:int = BackPackManager.instance.getItemCount(itemId);
 			if( count <= 0 )
-				tittle = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_13,ItemCfgData.getItemName(itemId));
+				tittle = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_13,ItemConfig.getItemName(itemId));
 			else
-				tittle = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_15,ItemCfgData.getItemName(itemId));
+				tittle = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_15,ItemConfig.getItemName(itemId));
 			GameAlert.showAlertUtil( LangTouJing.TOU_JING_HUI_CHENG_DESC, onCheckClickBtn, tittle );
 		}
 		
@@ -618,11 +618,11 @@ package com.rpgGame.app.manager.task
 					var count:int = BackPackManager.instance.getItemCount(itemId);
 					if( count <= 0 )//背包没该物品
 					{
-						NoticeManager.showNotify( LangTouJing.TOU_JING_HUI_CHENG_FAIL, HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_15,ItemCfgData.getItemName(itemId)) );
+						NoticeManager.showNotify( LangTouJing.TOU_JING_HUI_CHENG_FAIL, HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_15,ItemConfig.getItemName(itemId)) );
 						
 						//下面是物品不够自动购买，策划说暂时不需要
 //						var info:AmountInfo = MainRoleManager.actorInfo.amountInfo;
-//						var spellPrice:int = ItemCfgData.getItemSellPrice( itemId );
+//						var spellPrice:int = ItemConfig.getItemSellPrice( itemId );
 //						if( info.getAmountByType(AmountType.MONEY) >= spellPrice )//钱足够，自动购买一个回城卷
 //						{
 //							ShopSender.reqBuyJinziShopGoods( AmountType.MONEY, itemId, 1 );

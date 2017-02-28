@@ -10,7 +10,7 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.StatNameCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.mount.MountConfigData;
 	import com.rpgGame.coreData.cfg.mount.MountMiscData;
 	import com.rpgGame.coreData.cfg.mount.MountSpeciesData;
@@ -272,7 +272,7 @@ package com.rpgGame.app.ui.tips
 				var cfgId:int = data.spellMap.getValue(i);
 				if( cfgId != 0 )
 				{
-					var spellBookGroupName:String = ItemCfgData.getItemNameWithQualityColor(cfgId);
+					var spellBookGroupName:String = ItemConfig.getItemNameWithQualityColor(cfgId);
 					spellStatStr += "  " + spellBookGroupName + "<br/>";
 				}
 			}
@@ -293,7 +293,7 @@ package com.rpgGame.app.ui.tips
 			
 			_mountBeastCardTip.labName.htmlText = mountName;
 			_mountBeastCardTip.labType.htmlText = LanguageConfig.getText( LangMount.MOUNT_TIP_100 );
-			_mountBeastCardTip.labLevel.htmlText = LanguageConfig.getText( LangMount.MOUNT_TIP_101, ItemCfgData.getItemRequireLevel( data.cfgId ) );
+			_mountBeastCardTip.labLevel.htmlText = LanguageConfig.getText( LangMount.MOUNT_TIP_101, ItemConfig.getItemRequireLevel( data.cfgId ) );
 			_mountBeastCardTip.labDesc.htmlText = tipsStr;
 			_mountBeastCardTip.labDesc.wordWrap = true;
 			_mountBeastCardTip.imgBG.height = tipsHeight;

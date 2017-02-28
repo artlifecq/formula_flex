@@ -4,18 +4,17 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.events.ItemEvent;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.mount.MountInfoData;
 	import com.rpgGame.coreData.lang.LangMount;
 	import com.rpgGame.coreData.type.SexType;
 	import com.rpgGame.coreData.type.mount.MountEquipmentPos;
 	
 	import app.message.EquipType;
-	import app.message.EquipmentDataProto;
 	import app.message.GoodsType;
 	import app.message.ContainerProto.ContainerType;
 	
@@ -116,9 +115,9 @@ package com.rpgGame.app.manager.mount
 		 * @return 
 		 * 
 		 */		
-		public function getEquipPos(item:ItemInfo):int
+		public function getEquipPos(item:ClientItemInfo):int
 		{
-			var type:int = ItemCfgData.getEquipmentType(item.cfgId);
+			var type:int = ItemConfig.getItemType(item.cfgId);
 			var pos:* = typeToPosMap.getValue(type);
 			var items:Array = getAllItem();
 			if( pos is Array )
@@ -154,9 +153,9 @@ package com.rpgGame.app.manager.mount
 		 * @return 
 		 * 
 		 */		
-		public function isBetterEquip(item:ItemInfo):Boolean
+		public function isBetterEquip(item:ClientItemInfo):Boolean
 		{
-			var type:int = ItemCfgData.getEquipmentType(item.cfgId);
+			var type:int = ItemConfig.getItemType(item.cfgId);
 			var pos:* = typeToPosMap.getValue(type);
 			var items:Array = getAllItem();
 			var equip:EquipInfo = item as EquipInfo;
@@ -193,7 +192,7 @@ package com.rpgGame.app.manager.mount
 		 * @param info
 		 * 
 		 */		
-		override public function setItemByIndex(index:int, info:ItemInfo):void
+		override public function setItemByIndex(index:int, info:ClientItemInfo):void
 		{
 			super.setItemByIndex(index, info);
 			
@@ -211,7 +210,7 @@ package com.rpgGame.app.manager.mount
 				}
 				else
 				{
-					info = mountData.mountEquipInfo.remove(index) as ItemInfo;
+					info = mountData.mountEquipInfo.remove(index) as ClientItemInfo;
 					EventManager.dispatchEvent(ItemEvent.ITEM_TOOK_OFF_MOUNT_EQUIP, info);
 				}
 			}
@@ -223,7 +222,7 @@ package com.rpgGame.app.manager.mount
 		 * @return 
 		 * 
 		 */	
-		public function equipIsWearing(equip:ItemInfo):Boolean
+		public function equipIsWearing(equip:ClientItemInfo):Boolean
 		{
 			if(!equip)
 				return false;
@@ -246,7 +245,7 @@ package com.rpgGame.app.manager.mount
 		 * @return 
 		 * 
 		 */	
-		public function canPutOnEquipAt(item:ItemInfo, pos:int, tip:Boolean=true):Boolean
+		public function canPutOnEquipAt(item:ClientItemInfo, pos:int, tip:Boolean=true):Boolean
 		{
 			if(!item || item.type != GoodsType.EQUIPMENT || !instance.isEquipSuitablePos(item, pos))
 			{
@@ -254,15 +253,15 @@ package com.rpgGame.app.manager.mount
 				return false;
 			}
 			
+			var sex:int=ItemConfig.getItemSex(item.cfgId)
 			//装备其它属性检测
-			var equip:EquipmentDataProto = ItemCfgData.getEquipmentDataProto(item.cfgId);
-			if(!isSuitSex(equip.sex))
+			if(!isSuitSex(sex))
 			{
-				if(tip)NoticeManager.showHint(EnumHintInfo.EQUIPMENT_ERROR_SEX, [SexType.getName(equip.sex)]);
+				if(tip)NoticeManager.showHint(EnumHintInfo.EQUIPMENT_ERROR_SEX, [SexType.getName(sex)]);
 				return false;
 			}
 			//装备等级判断
-			var lv:int = ItemCfgData.getItemRequireLevel( item.cfgId );
+			var lv:int = ItemConfig.getItemRequireLevel( item.cfgId );
 			if(!isSuitLv(lv))
 			{
 				if(tip)NoticeManager.showNotify( LangMount.MOUNT_TIP_42, lv );
@@ -277,7 +276,7 @@ package com.rpgGame.app.manager.mount
 		 * @return 
 		 * 
 		 */
-		public function isMountEquipType( item:ItemInfo ):Boolean
+		public function isMountEquipType( item:ClientItemInfo ):Boolean
 		{
 			var equipData:EquipInfo = item as EquipInfo;
 			var isBool:Boolean = ( equipData.equipType == EquipType.SADDLE
@@ -292,9 +291,9 @@ package com.rpgGame.app.manager.mount
 		/**
 		 *此件装备是否合适放在pos位置上 
 		 */		
-		public function isEquipSuitablePos(item:ItemInfo, pos:int):Boolean
+		public function isEquipSuitablePos(item:ClientItemInfo, pos:int):Boolean
 		{
-			var type:int = ItemCfgData.getEquipmentType(item.cfgId);
+			var type:int = ItemConfig.getItemType(item.cfgId);
 			var tar:* = typeToPosMap.getValue(type);
 			var b:Boolean;
 			if(tar is Array)

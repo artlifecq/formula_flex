@@ -189,12 +189,12 @@ package com.rpgGame.app.ui.main.shortcut {
 		 */
 		private function getExp() : Array
 		{
-			return [MainRoleManager.actorInfo.curExp, MainRoleManager.actorInfo.upgradeExp, (MainRoleManager.actorInfo.curExp / MainRoleManager.actorInfo.upgradeExp * 100).toFixed(2)];
+			return [MainRoleManager.actorInfo.curExp, MainRoleManager.actorInfo.maxExp, (MainRoleManager.actorInfo.curExp / MainRoleManager.actorInfo.maxExp * 100).toFixed(2)];
 		}
 		
 		private function changeExp() : void
 		{
-			var p : Number = MainRoleManager.actorInfo.curExp / MainRoleManager.actorInfo.upgradeExp;
+			var p : Number = MainRoleManager.actorInfo.curExp / MainRoleManager.actorInfo.maxExp;
 			if (p > 1)
 				p = 1;
 			

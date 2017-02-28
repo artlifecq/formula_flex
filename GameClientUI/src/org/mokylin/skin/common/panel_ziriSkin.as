@@ -142,7 +142,7 @@ package org.mokylin.skin.common
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 91;
 			temp.x = 114;
-			temp.y = 8;
+			temp.y = 11;
 			return temp;
 		}
 

@@ -19,15 +19,6 @@ package com.rpgGame.core.events
 		/** 经验最大值变化*/
 		public static const MAXEXP_CHANGE:int = UNIQUEID.NEXT;
 		
-		/** 贡献值变化*/
-		public static const CONTRIBUTION_CHANGE:int = UNIQUEID.NEXT;
-		/** 金子值变化*/
-		public static const JINZI_CHANGE:int = UNIQUEID.NEXT;
-		/** 银两值变化*/
-		public static const MONEY_CHANGE:int = UNIQUEID.NEXT;
-		/** Amount值变化*/
-		public static const AMOUNT_CHANGE:int = UNIQUEID.NEXT;
-		
 		/** PK模式变化*/
 		public static const PK_MODE_CHANGE:int = UNIQUEID.NEXT;
 		/** PK值变化*/
@@ -37,5 +28,9 @@ package com.rpgGame.core.events
 		
 		/** 属性变化*/
 		public static const STAT_CHANGE:int = UNIQUEID.NEXT;
+		/** 最大属性变化*/
+		public static const STAT_MAX_CHANGE:int = UNIQUEID.NEXT;
+		/** RES属性变化*/
+		public static const STAT_RES_CHANGE:int = UNIQUEID.NEXT;
 	}
 }

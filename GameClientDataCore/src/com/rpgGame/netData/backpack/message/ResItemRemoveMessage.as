@@ -1,5 +1,4 @@
 package com.rpgGame.netData.backpack.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -13,16 +12,16 @@ package com.rpgGame.netData.backpack.message{
 	 */
 	public class ResItemRemoveMessage extends Message {
 	
-		//物品Id
-		private var _itemId: long;
+		//物品格子Id
+		private var _gridId: int;
 		
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//物品Id
-			writeLong(_itemId);
+			//物品格子Id
+			writeInt(_gridId);
 			return true;
 		}
 		
@@ -30,8 +29,8 @@ package com.rpgGame.netData.backpack.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//物品Id
-			_itemId = readLong();
+			//物品格子Id
+			_gridId = readInt();
 			return true;
 		}
 		
@@ -44,18 +43,18 @@ package com.rpgGame.netData.backpack.message{
 		}
 		
 		/**
-		 * get 物品Id
+		 * get 物品格子Id
 		 * @return 
 		 */
-		public function get itemId(): long{
-			return _itemId;
+		public function get gridId(): int{
+			return _gridId;
 		}
 		
 		/**
-		 * set 物品Id
+		 * set 物品格子Id
 		 */
-		public function set itemId(value: long): void{
-			this._itemId = value;
+		public function set gridId(value: int): void{
+			this._gridId = value;
 		}
 		
 	}

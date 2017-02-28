@@ -2,17 +2,15 @@ package com.rpgGame.app.cmdlistener
 {
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.stall.StallManager;
-	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.core.events.StallEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.StallCfgData;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.info.stall.StallItemData;
 	import com.rpgGame.coreData.lang.LangStall;
 	import com.rpgGame.coreData.utils.MoneyUtil;
 	
-	import flash.sampler.getSampleCount;
 	import flash.utils.ByteArray;
 	
 	import app.cmd.StallModuleMessages;
@@ -137,7 +135,7 @@ package com.rpgGame.app.cmdlistener
 			if(stallItem.num == 0)
 				stallItem.item = null;
 			stallItem.price = price;
-			var itemName : String = ItemCfgData.getItemName(id);
+			var itemName : String = ItemConfig.getItemName(id);
 			NoticeManager.showNotify(LangStall.buyStallItemComplete,itemName,sellNum);
 			StallManager.addStallInfo(LanguageConfig.getText(LangStall.infoSellGoods,TimeUtil.getCurrentTimeFromt(),
 				itemName,

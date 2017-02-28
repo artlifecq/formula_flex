@@ -1,31 +1,98 @@
 package app.message {
 	public final class GoodsType {
-		public static const EQUIPMENT:int = 1;
-		public static const MEDICINE:int = 2;
-		public static const TRANSPORTATION:int = 4;
-		public static const TASK_BOOK:int = 5;
-		public static const SPELL_BOOK:int = 6;
-		public static const PACKAGE:int = 7;
-		public static const PANEL:int = 9;
-		public static const NORMAL:int = 10;
-		public static const TASK:int = 11;
-		public static const MATERIAL:int = 12;
-		public static const LEGEND_CARD:int = 16;
-		public static const CRIT_CARD:int = 17;
-		public static const REFINED_STAT:int = 18;
-		public static const BLESS:int = 20;
-		public static const SEAL:int = 21;
-		public static const SUMMON_TOKEN:int = 22;
-		public static const BEAST_CARD:int = 23;
-		public static const FEED:int = 24;
-		public static const MOUNT_EXP:int = 25;
-		public static const DUAN_GU_DAN:int = 26;
-		public static const FLOWERS_DEGREE:int = 27;
-		public static const MOUNT_SPELL_BOOK:int = 28;
-		public static const EXP_GOODS:int = 50;
-		public static const MONEY_GOODS:int = 51;
-		public static const BAND_JINZI_GOODS:int = 53;
-		public static const JINZI_GOODS:int = 54;
-		public static const SPECIAL:int = 99;
+		/**
+		 *所有物品 
+		 */
+		public static const ALL_GOODS:int = 0;
+		/**
+		 *货币
+		 */
+		public static const MONEY:int = 1;
+		/**
+		 *聊天
+		 */
+		public static const CHAT:int = 2;
+		
+		
+		/**
+		 *药品 
+		 */
+		public static const MEDICINE:int = 3;
+		/**
+		 *装备 
+		 */
+		public static const EQUIPMENT:int = 4;
+		
+		/**
+		 *合成材料
+		 */
+		public static const MATERIAL_COMBO:int = 9;
+		/**
+		 *进阶材料
+		 */
+		public static const MATERIAL_ADVANCE:int = 10;
+		/**
+		 *礼包
+		 */
+		public static const GIFT:int = 11;
+		/**
+		 *属性丹
+		 */
+		public static const PROPERTY:int = 12;
+		/**
+		 *buff
+		 */
+		public static const BUFF:int = 13;
+		/**
+		 *传送
+		 */
+		public static const TRANSFER:int = 14;
+		/**
+		 *复活
+		 */
+		public static const RESURGENCE:int = 15;
+		/**
+		 *任务
+		 */
+		public static const TASK:int = 16;
+		/**
+		 *坐骑
+		 */
+		public static const MOUNT:int = 17;
+		/**
+		 *称号
+		 */
+		public static const TITLE:int = 18;
+		/**
+		 *副本
+		 */
+		public static const DUNGOEN:int = 19;
+		
+		/**
+		 *帮会
+		 */
+		public static const FACTION:int = 20;
+		
+		/**
+		 *pk
+		 */
+		public static const PK:int = 21;
+		
+		/**
+		 *特殊道具
+		 */
+		public static const SPECIAL:int = 22;
+		
+		/**
+		 *坐骑技能书
+		 */
+		public static const SKILL_BOOK_MOUNT:int = 30;
+		
+		/**
+		 *人物技能书
+		 */
+		public static const SKILL_BOOK_HERO:int = 31;
+		
+		
 	}
 }

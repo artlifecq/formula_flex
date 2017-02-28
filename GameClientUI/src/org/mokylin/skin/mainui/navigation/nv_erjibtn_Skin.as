@@ -67,7 +67,6 @@ package org.mokylin.skin.mainui.navigation
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
 			temp.bottom = 0;
-			temp.text = "";
 			temp.textAlign = "center";
 			temp.color = 0x908371;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];

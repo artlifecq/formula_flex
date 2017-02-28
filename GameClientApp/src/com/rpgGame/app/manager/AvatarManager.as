@@ -428,7 +428,8 @@ package com.rpgGame.app.manager
 					role.headFace.setBodyRender(ru);
 			}
 		}
-
+		
+		
 		/**
 		 *  等以后确定了，这里的逻辑还是要改的，目前能知道的是，每个角色的不同形态可以用自己的一套骨骼。坐骑的话，还不确定。
 		 * 但是可以确定的是不分男女

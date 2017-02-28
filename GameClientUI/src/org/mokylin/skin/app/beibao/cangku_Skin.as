@@ -1,16 +1,18 @@
 package org.mokylin.skin.app.beibao
 {
 	import feathers.controls.text.Fontter;
+	import feathers.layout.IVirtualLayout;
+	import feathers.layout.TiledRowsLayout;
 	import feathers.controls.Button;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
+	import feathers.controls.List;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import feathers.controls.ScrollContainer;
 	import org.mokylin.skin.app.beibao.button.ButtonCunchu;
 	import org.mokylin.skin.app.beibao.button.ButtonZhengli;
 	import org.mokylin.skin.component.button.ButtonSkin_close2;
-	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
+	import org.mokylin.skin.component.list.ListSkin1;
 
 	/**
 	 * @private
@@ -22,6 +24,10 @@ package org.mokylin.skin.app.beibao
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var bg:feathers.controls.UIAsset;
+
+		public var btnClose:feathers.controls.Button;
+
 		public var btn_chucun:feathers.controls.Button;
 
 		public var btn_zhengli:feathers.controls.Button;
@@ -30,7 +36,7 @@ package org.mokylin.skin.app.beibao
 
 		public var lb_Title:feathers.controls.Label;
 
-		public var pack_Bar:feathers.controls.ScrollContainer;
+		public var lst_pack:feathers.controls.List;
 
 
 		//==========================================================================
@@ -43,7 +49,7 @@ package org.mokylin.skin.app.beibao
 			this.currentState = "normal";
 			this.height = 447;
 			this.width = 364;
-			this.elementsContent = [__cangku_Skin_Group1_i(),__cangku_Skin_UIAsset5_i(),__cangku_Skin_UIAsset6_i(),__cangku_Skin_UIAsset7_i(),__cangku_Skin_UIAsset8_i(),__cangku_Skin_Label1_i(),lb_Num_i(),btn_zhengli_i(),btn_chucun_i(),lb_Title_i(),pack_Bar_i(),__cangku_Skin_Button1_i()];
+			this.elementsContent = [__cangku_Skin_Group1_i(),bg_i(),__cangku_Skin_UIAsset5_i(),__cangku_Skin_UIAsset6_i(),__cangku_Skin_UIAsset7_i(),__cangku_Skin_Label1_i(),lb_Num_i(),btn_zhengli_i(),btn_chucun_i(),lb_Title_i(),btnClose_i(),lst_pack_i()];
 			
 			states = {
 			};
@@ -54,15 +60,6 @@ package org.mokylin.skin.app.beibao
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __cangku_Skin_Button1_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close2;
-			temp.x = 338;
-			temp.y = 9;
-			return temp;
-		}
-
 		private function __cangku_Skin_Group1_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -79,7 +76,15 @@ package org.mokylin.skin.app.beibao
 			temp.color = 0x8b8d7b;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 27;
-			temp.y = 408;
+			temp.y = 413;
+			return temp;
+		}
+
+		private function __cangku_Skin_TileLayout1_i():feathers.layout.TiledRowsLayout
+		{
+			var temp:feathers.layout.TiledRowsLayout = new feathers.layout.TiledRowsLayout();
+			temp.requestedColumnCount = 7;
+			temp.requestedRowCount = 6;
 			return temp;
 		}
 
@@ -128,23 +133,13 @@ package org.mokylin.skin.app.beibao
 		private function __cangku_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/cangku/title.png";
-			temp.width = 354;
-			temp.x = 5;
-			temp.y = 4;
-			return temp;
-		}
-
-		private function __cangku_Skin_UIAsset6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/cangku/anniukuang.png";
 			temp.x = 269;
 			temp.y = 393;
 			return temp;
 		}
 
-		private function __cangku_Skin_UIAsset7_i():feathers.controls.UIAsset
+		private function __cangku_Skin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/cangku/anniukuang.png";
@@ -153,7 +148,7 @@ package org.mokylin.skin.app.beibao
 			return temp;
 		}
 
-		private function __cangku_Skin_UIAsset8_i():feathers.controls.UIAsset
+		private function __cangku_Skin_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 23;
@@ -161,6 +156,29 @@ package org.mokylin.skin.app.beibao
 			temp.width = 128;
 			temp.x = 16;
 			temp.y = 410;
+			return temp;
+		}
+
+		private function bg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg = temp;
+			temp.name = "bg";
+			temp.styleName = "ui/app/beibao/cangku/title.png";
+			temp.width = 354;
+			temp.x = 5;
+			temp.y = 4;
+			return temp;
+		}
+
+		private function btnClose_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btnClose = temp;
+			temp.name = "btnClose";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close2;
+			temp.x = 338;
+			temp.y = 9;
 			return temp;
 		}
 
@@ -196,7 +214,7 @@ package org.mokylin.skin.app.beibao
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 45;
 			temp.x = 98;
-			temp.y = 409;
+			temp.y = 413;
 			return temp;
 		}
 
@@ -211,19 +229,21 @@ package org.mokylin.skin.app.beibao
 			temp.color = 0xa6a07b;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 33;
-			temp.y = 3;
+			temp.y = 7;
 			return temp;
 		}
 
-		private function pack_Bar_i():feathers.controls.ScrollContainer
+		private function lst_pack_i():feathers.controls.List
 		{
-			var temp:feathers.controls.ScrollContainer = new feathers.controls.ScrollContainer();
-			pack_Bar = temp;
-			temp.name = "pack_Bar";
+			var temp:feathers.controls.List = new feathers.controls.List();
+			lst_pack = temp;
+			temp.name = "lst_pack";
 			temp.height = 314;
-			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
-			temp.x = 332;
+			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
+			temp.width = 346;
+			temp.x = 9;
 			temp.y = 31;
+			temp.layout = __cangku_Skin_TileLayout1_i();
 			return temp;
 		}
 

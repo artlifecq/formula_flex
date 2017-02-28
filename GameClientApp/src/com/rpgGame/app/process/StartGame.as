@@ -23,6 +23,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.scene.SceneRole;
     import com.rpgGame.app.ui.ResLoadingView;
     import com.rpgGame.app.ui.tips.BuffTip;
+    import com.rpgGame.app.ui.tips.EquipTip;
     import com.rpgGame.app.ui.tips.FriendHeroTips;
     import com.rpgGame.app.ui.tips.ItemTip;
     import com.rpgGame.app.ui.tips.MapAreaTip;
@@ -43,6 +44,8 @@ package com.rpgGame.app.process
     import com.rpgGame.coreData.type.TipType;
     
     import flash.events.Event;
+    import flash.events.KeyboardEvent;
+    import flash.ui.Keyboard;
     
     import gameEngine2D.NetDebug;
     
@@ -134,18 +137,25 @@ package com.rpgGame.app.process
 				//
 
                 CONFIG::Debug {
-                   /* StatsUtil.showOrHideAwayStats(Stage3DLayerManager.stage,
-                                                  Stage3DLayerManager.stage3DProxy);
-                    LayerManager.showOrHideMM();
-                    ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
-                    initMM();*/
+					Stage3DLayerManager.stage.addEventListener(KeyboardEvent.KEY_UP,onShowFrameState);
+                    initMM();
                 }
 			}
 
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
 			SceneSwitchManager.changeMap();
 		}
-
+		
+		private function onShowFrameState(e:KeyboardEvent):void
+		{
+			if(e.ctrlKey&&e.keyCode==Keyboard.F){
+				StatsUtil.showOrHideAwayStats(Stage3DLayerManager.stage,
+					Stage3DLayerManager.stage3DProxy);
+				LayerManager.showOrHideMM();
+				ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
+			}
+		}
+		
 		private function tipsSetup() : void
 		{
 			TipTargetManager.setup();
@@ -156,7 +166,7 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.SPELL_TIP, SpellTip);
 			TipManager.registerTipsParserClass(TipType.OPEN_GRID_TIP, OpenGridTip);
 			TipManager.registerTipsParserClass(TipType.FRIEND_HERO_TIP, FriendHeroTips);
-//			TipManager.registerTipsParserClass(TipType.EQUIP_TIP, EquipTip);
+			TipManager.registerTipsParserClass(TipType.EQUIP_TIP, EquipTip);
 			TipManager.registerTipsParserClass(TipType.BUFF_TIP, BuffTip);
 			TipManager.registerTipsParserClass(TipType.SOCIETY_SPELL_TOTAL_TIP, SocietySpellTotalTip);
 			TipManager.registerTipsParserClass(TipType.MAP_AREA_TIP, MapAreaTip);

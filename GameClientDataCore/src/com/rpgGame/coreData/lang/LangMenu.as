@@ -92,6 +92,8 @@ package com.rpgGame.coreData.lang
 		public static const SET_UP_VICE_LEADER:String = "SET_UP_VICE_LEADER";
 		 /**  卸任副帮主 */
 		public static const REMOVE_VICE_LEADER:String = "REMOVE_VICE_LEADER";
+		 /**  取出 */
+		public static const GET_ITEM:String = "GET_ITEM";
 
 	}
 }

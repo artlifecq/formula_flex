@@ -82,6 +82,12 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_scene_monster:String = "data.monster.Q_scene_monster";
 		/**  区域刷怪数据库 -- 编辑器录入											 */
 		public static const Q_scene_monster_area:String = "data.monster.Q_scene_monster_area";
+		/**  每个职业一级属性换算二级属性表		 */
+		public static const Q_att_transfer:String = "data.Q_att_transfer";
+		/**  所有属性相关的数据																														 */
+		public static const Q_att_values:String = "data.Q_att_values";
+		/**  物品基本信息数据库																																																																																				 */
+		public static const Q_item:String = "data.Q_item";
 		/**  职业对应的名字		 */
 		public static const RaceNameInfo:String = "data.RaceNameInfo";
 		/**  赛马模型等配置信息								 */
@@ -94,11 +100,15 @@ package com.rpgGame.coreData.clientConfig
 		public static const SceneCharPatrolInfo:String = "data.SceneCharPatrolInfo";
 		/**  socket返回错误码提示			 */
 		public static const SocketErrorNoteInfo:String = "data.SocketErrorNoteInfo";
+		/**  对象绑定器,绑定器可绑定在玩家，怪物，地面特效等，用来加强效果和增强功能，实现功能的组合							 */
+		public static const Attach:String = "data.spell.Attach";
+		/**  地面特效		 */
+		public static const Attach_effect:String = "data.spell.Attach_effect";
 		/**  BUFF效果配置数据表																																					 */
 		public static const Q_buff:String = "data.spell.Q_buff";
 		/**  公共CD表	 */
 		public static const Q_GCD:String = "data.spell.Q_GCD";
-		/**  技能基本信息配置数据表																																																																																																										 */
+		/**  技能基本信息配置数据表																																																																																																														 */
 		public static const Q_skill_model:String = "data.spell.Q_skill_model";
 		/**  技能效果配置表																			 */
 		public static const Q_SpellAnimation:String = "data.spell.Q_SpellAnimation";
@@ -145,12 +155,17 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.monster.Q_npc", com.rpgGame.coreData.clientConfig.Q_npc);
 			regClass("data.monster.Q_scene_monster", com.rpgGame.coreData.clientConfig.Q_scene_monster);
 			regClass("data.monster.Q_scene_monster_area", com.rpgGame.coreData.clientConfig.Q_scene_monster_area);
+			regClass("data.Q_att_transfer", com.rpgGame.coreData.clientConfig.Q_att_transfer);
+			regClass("data.Q_att_values", com.rpgGame.coreData.clientConfig.Q_att_values);
+			regClass("data.Q_item", com.rpgGame.coreData.clientConfig.Q_item);
 			regClass("data.RaceNameInfo", com.rpgGame.coreData.clientConfig.RaceNameInfo);
 			regClass("data.RacingInfo", com.rpgGame.coreData.clientConfig.RacingInfo);
 			regClass("data.RacingQuestion", com.rpgGame.coreData.clientConfig.RacingQuestion);
 			regClass("data.res.AvatarResConfig", com.rpgGame.coreData.clientConfig.AvatarResConfig);
 			regClass("data.SceneCharPatrolInfo", com.rpgGame.coreData.clientConfig.SceneCharPatrolInfo);
 			regClass("data.SocketErrorNoteInfo", com.rpgGame.coreData.clientConfig.SocketErrorNoteInfo);
+			regClass("data.spell.Attach", com.rpgGame.coreData.clientConfig.Attach);
+			regClass("data.spell.Attach_effect", com.rpgGame.coreData.clientConfig.Attach_effect);
 			regClass("data.spell.Q_buff", com.rpgGame.coreData.clientConfig.Q_buff);
 			regClass("data.spell.Q_GCD", com.rpgGame.coreData.clientConfig.Q_GCD);
 			regClass("data.spell.Q_skill_model", com.rpgGame.coreData.clientConfig.Q_skill_model);

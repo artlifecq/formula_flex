@@ -32,7 +32,7 @@ package org.mokylin.skin.mainui.head
 
 		public var role_name:feathers.controls.Label;
 
-		public var sbar:feathers.controls.SkinnableContainer;
+		public var xuecao_bar:feathers.controls.SkinnableContainer;
 
 
 		//==========================================================================
@@ -45,7 +45,7 @@ package org.mokylin.skin.mainui.head
 			this.currentState = "normal";
 			this.height = 56;
 			this.width = 217;
-			this.elementsContent = [__head_min_Skin_UIAsset1_i(),grp_zhiye_i(),qizi_i(),role_buffer_i(),role_name_i(),sbar_i()];
+			this.elementsContent = [__head_min_Skin_UIAsset1_i(),grp_zhiye_i(),qizi_i(),role_buffer_i(),role_name_i(),xuecao_bar_i()];
 			
 			states = {
 			};
@@ -151,15 +151,15 @@ package org.mokylin.skin.mainui.head
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
 			temp.width = 144;
 			temp.x = 58;
-			temp.y = 5;
+			temp.y = 8;
 			return temp;
 		}
 
-		private function sbar_i():feathers.controls.SkinnableContainer
+		private function xuecao_bar_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			sbar = temp;
-			temp.name = "sbar";
+			xuecao_bar = temp;
+			temp.name = "xuecao_bar";
 			temp.height = 11;
 			var skin:StateSkin = new org.mokylin.skin.mainui.head.npc_xuecao2()
 			temp.skin = skin

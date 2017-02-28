@@ -102,7 +102,7 @@ package com.rpgGame.coreData.info.mail
 			for( var i:int = 0; i < len; i++ )
 			{
 				mailGoodsProto = goods[i];
-				itemMap.add( mailGoodsProto.pos, ItemUtil.convertGoodsProtoToItemInfo( mailGoodsProto.goods ) );
+//				itemMap.add( mailGoodsProto.pos, ItemUtil.convertGoodsProtoToItemInfo( mailGoodsProto.goods ) );
 			}
 		}
 		

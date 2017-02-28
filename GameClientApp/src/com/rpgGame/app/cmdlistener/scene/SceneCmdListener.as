@@ -2,6 +2,7 @@ package com.rpgGame.app.cmdlistener.scene
 {
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
+	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.GameCameraManager;
@@ -48,17 +49,23 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
+	import com.rpgGame.netData.map.bean.DropGoodsInfo;
 	import com.rpgGame.netData.map.bean.MonsterInfo;
 	import com.rpgGame.netData.map.bean.NpcInfo;
 	import com.rpgGame.netData.map.bean.PlayerInfo;
 	import com.rpgGame.netData.map.bean.SceneObjInfo;
+	import com.rpgGame.netData.map.message.ResArmorChangeMessage;
 	import com.rpgGame.netData.map.message.ResChangeMapFailedMessage;
 	import com.rpgGame.netData.map.message.ResChangeMapMessage;
 	import com.rpgGame.netData.map.message.ResEnterMapMessage;
+	import com.rpgGame.netData.map.message.ResHelmChangeMessage;
 	import com.rpgGame.netData.map.message.ResPlayerRunEndMessage;
 	import com.rpgGame.netData.map.message.ResPlayerRunFailMessage;
 	import com.rpgGame.netData.map.message.ResPlayerStopMessage;
+	import com.rpgGame.netData.map.message.ResRoundGoodsExtraMessage;
+	import com.rpgGame.netData.map.message.ResRoundGoodsMessage;
 	import com.rpgGame.netData.map.message.ResRoundObjectsMessage;
+	import com.rpgGame.netData.map.message.ResWeaponChangeMessage;
 	import com.rpgGame.netData.map.message.SCSceneObjMoveMessage;
 	import com.rpgGame.netData.player.message.BroadcastPlayerAttriChangeMessage;
 	import com.rpgGame.netData.player.message.ResReviveSuccessMessage;
@@ -111,6 +118,15 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(101126, onResChangeMapFailedMessage);
             // 复活成功
 			SocketConnection.addCmdListener(103115, onResReviveSuccessMessage);
+			SocketConnection.addCmdListener(101146, onResRoundGoodsExtraMessage);
+			SocketConnection.addCmdListener(101103, onResRoundGoodsMessage);
+			
+			//换装
+			SocketConnection.addCmdListener(101119, onResArmorChangeMessage);//衣服
+			SocketConnection.addCmdListener(101150, onResHelmChangeMessage);//头盔
+			SocketConnection.addCmdListener(101118, onResWeaponChangeMessage);//武器
+			
+			
 			
 //			SocketConnection.addCmdListener(SceneModuleMessages.S2C_TRIGGER_CLIENT_EVENT, onTriggerClientEvent);
 			
@@ -157,6 +173,38 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			
 			finish();
+		}
+		
+		private function onResArmorChangeMessage(msg:ResArmorChangeMessage):void
+		{
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+			if(!role){
+				return;
+			}
+			var heroData : HeroData = role.data as HeroData; 
+			heroData.cloths=msg.armorResId;
+			AvatarManager.callEquipmentChange(role);
+		}
+		
+		private function onResHelmChangeMessage(msg:ResHelmChangeMessage):void
+		{
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+			if(!role){
+				return;
+			}
+			var heroData : HeroData = role.data as HeroData; 
+			heroData.hair=msg.helmResId;
+			AvatarManager.callEquipmentChange(role);
+		}
+		private function onResWeaponChangeMessage(msg:ResWeaponChangeMessage):void
+		{
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+			if(!role){
+				return;
+			}
+			var heroData : HeroData = role.data as HeroData; 
+			heroData.weapon=msg.weaponResId;
+			AvatarManager.callEquipmentChange(role);
 		}
 		
 		/**
@@ -396,8 +444,24 @@ package com.rpgGame.app.cmdlistener.scene
 							addNpc(addArr[j].bytesList[k]);
 						}
 						break;
+					case SceneCharType.DROP_GOODS:
+						for(k=0;k<len;k++)
+						{
+							addDropGoods(addArr[j].bytesList[k]);
+						}
+						break;
 				}
 			}
+		}
+		
+		private function addDropGoods(buffer:ByteArray):void
+		{
+			var info:DropGoodsInfo=new DropGoodsInfo();
+			info.read(buffer);
+			var data:SceneDropGoodsData=new SceneDropGoodsData();
+			data.updateWithGoodsData(info);
+			data.isDroped=true;
+			SceneRoleManager.getInstance().createDropGoods(data);
 		}
 		
 		/**
@@ -654,6 +718,23 @@ package com.rpgGame.app.cmdlistener.scene
 					return;
 			}
 		}
+		
+		
+		private function onResRoundGoodsMessage(msg:ResRoundGoodsMessage):void
+		{
+			var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
+			dropGoodsData.setGoodsMsg(msg);
+			dropGoodsData.isDroped=true;
+			SceneRoleManager.getInstance().createDropGoods(dropGoodsData)
+		}
+        
+		private function onResRoundGoodsExtraMessage(msg:ResRoundGoodsExtraMessage):void
+		{
+			var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
+			dropGoodsData.setGoodsExtraMsg(msg);
+			dropGoodsData.isDroped=true;
+			SceneRoleManager.getInstance().createDropGoods(dropGoodsData)
+		}
         
         private function onResReviveSuccessMessage(msg : ResReviveSuccessMessage) : void {
             var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
@@ -900,10 +981,10 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			while (buffer.bytesAvailable)
 			{
-				var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
-				dropGoodsData.readFrom(buffer);
-				dropGoodsData.isDroped = true;
-				SceneRoleManager.getInstance().createDropGoods(dropGoodsData);
+//				var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
+//				dropGoodsData.readFrom(buffer);
+//				dropGoodsData.isDroped = true;
+//				SceneRoleManager.getInstance().createDropGoods(dropGoodsData);
 			}
 		}
 		
@@ -915,9 +996,9 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			while (buffer.bytesAvailable)
 			{
-				var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
-				dropGoodsData.readFrom(buffer);
-				SceneRoleManager.getInstance().createDropGoods(dropGoodsData);
+//				var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
+//				dropGoodsData.readFrom(buffer);
+//				SceneRoleManager.getInstance().createDropGoods(dropGoodsData);
 			}
 		}
 		

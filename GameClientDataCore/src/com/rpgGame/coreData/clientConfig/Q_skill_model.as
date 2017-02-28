@@ -12,7 +12,7 @@ package com.rpgGame.coreData.clientConfig
 	*/
 	public class Q_skill_model
 	{
-		 /**  技能编号_技能等级 */
+		 /**  技能编号_技能阶数 */
 		public var q_skillID_q_grade:String;
 		 /**  技能编号(不能超过65535) */
 		public var q_skillID:int;
@@ -32,6 +32,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_icon:String;
 		 /**  连招技能,逗号分割 */
 		public var q_relate_spells:String;
+		 /**    */
+		public var q_mainSkill:int;
 		 /**  技能效果，配置“技能效果表”中的id */
 		public var q_spell_effect:int;
 		 /**  位移类型（客户端），0-无 1-冲锋 2-跳劈 3-闪烁 4-翻滚 */
@@ -48,7 +50,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_target:int;
 		 /**  作用目标上限 */
 		public var q_target_max:int;
-		 /**  技能表现类型（服务端区分） 0.常规类型 1.陷阱类型 2.召唤类型 3.弹道类型  4有位移类型 */
+		 /**  技能表现类型（服务端区分） 0.常规类型 2.召唤类型  4有位移类型 */
 		public var q_skill_type:int;
 		 /**  使用方式（1主动技能，2被动技能） */
 		public var q_trigger_type:int;
@@ -56,6 +58,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_affect_target:int;
 		 /**  能否边走边放，1表示可以，0或者不配表示不行，默认不行 */
 		public var q_can_walk_release:int;
+		 /**  是否可以和别的技能同时释放（0不可以，1可以，1的状态下相当于施法者同时释放多个技能，但是同一个技能同时只能释放一个，受CD检查的限制） */
+		public var q_performAtTime:int;
 		 /**  是否可以激活自动施法(0激活) */
 		public var q_is_allow_auto_combat:int;
 		 /**  是否可以设为默认技能（0不可设为默认技能，1可以设为默认技能） */
@@ -102,6 +106,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_range_limit:int;
 		 /**  保持间距（单位：像素）（不配默认使用施法范围） */
 		public var q_keep_spacing:int;
+		 /**  伤害衰减 */
+		public var q_reduce_per:int;
 		 /**  作用范围形状（1单体，2矩形，3扇形，4圆形,7全地图） */
 		public var q_area_shape:int;
 		 /**  作用范围中心点（1自身为中心，2目标为中心）,如果地面魔法,那么也表示起点 */
@@ -120,11 +126,11 @@ package com.rpgGame.coreData.clientConfig
 		public var q_area_success_per:int;
 		 /**  扇形结束角度（废弃） */
 		public var q_secto_end:int;
-		 /**  技能属性（人物属性加成） */
+		 /**  技能属性（人物属性加成）被动技能加成人物属性 */
 		public var q_attributes:String;
 		 /**  战斗计算技能伤害属性 */
 		public var q_fight_attributes:String;
-		 /**  技能伤害系数（万分比分子） */
+		 /**  技能伤害系数（万分比分子）没启用 */
 		public var q_hurt_correct_factor:int;
 		 /**  技能附加伤害（为-1则通过技能编号_技能等级  去q_skill_ignore表中读取无视防御伤害值） */
 		public var q_ignore_defence:int;
@@ -138,6 +144,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_index:int;
 		 /**  召唤怪物ID（1是幻象分身） */
 		public var q_summon_id:int;
+		 /**  召唤距离（像素距离，距离当前朝向的距离，0在脚下，为负表示以选中坐标点） */
+		public var q_summon_dist:int;
 		 /**  召唤怪物数量 */
 		public var q_summon_num:int;
 		 /**  召唤怪上限 */
@@ -148,9 +156,9 @@ package com.rpgGame.coreData.clientConfig
 		public var q_summon_attack:int;
 		 /**  召唤的怪物/幻象分身持续时间（单位：秒） */
 		public var q_summon_last:int;
-		 /**  召唤类型，1为累加召唤，2为替换召唤 */
+		 /**  召唤类型，1为累加召唤，2为替换召唤3地面特效 */
 		public var q_summon_type:int;
-		 /**  BUFF触发器，JSON格式用于描述改技能释放后如如何触发各种BUFF。格式为:{t, id, max }{触发类型,作用目标，BuffID}t=触发类型: 1:命中，2:未命中,3:暴击 4:杀死 5攻击开始时触发被动技能 攻击目标id=buff的ID对应BUFF表。Max=一次攻击最多触发多少次.例子:[{t:1, id:1001, r:10000},{t:3, id:5040001, r:10000}]可以把里边值复制到http://www.json.cn.网站去查看 */
+		 /**  BUFF触发器，JSON格式用于描述改技能释放后如如何触发各种BUFF。格式为:{t, id, max }{触发类型,作用目标，BuffID}t=触发类型: 1:命中，2:未命中,3:暴击 4:杀死 5攻击开始时触发被动技能，6技能释放后触发，7召唤触发BUFF 攻击目标id=buff的ID对应BUFF表。Max=一次攻击最多触发多少次.例子:[{t:1, id:1001, r:10000},{t:3, id:5040001, r:10000}]可以把里边值复制到http://www.json.cn.网站去查看 */
 		public var q_buff_trigger:String;
 		 /**  被动触发几率（本处填万分比的分子） 如果是被动技能触发才有效，BUFF触发概率通过BUFF表控制 */
 		public var q_passive_prob:int;
