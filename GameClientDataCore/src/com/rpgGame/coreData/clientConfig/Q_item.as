@@ -22,12 +22,16 @@ package com.rpgGame.coreData.clientConfig
 		public var q_location:int;
 		 /**  装备阶数 */
 		public var q_levelnum:int;
-		 /**  物品品质（0白色，1绿色，2蓝色，3紫色，4橙色） */
+		 /**  物品品质（0白色，1绿色，2蓝色，3紫色，4金色） */
 		public var q_default:int;
 		 /**  是否显示转框特效（0显示 1不显示） */
 		public var q_isshoweffects:int;
 		 /**  物品描述信息（本处需要支持html标记）<font color= */
 		public var q_describe:String;
+		 /**  产出途径描述 */
+		public var q_output:String;
+		 /**  物品产出（显示产出文字描述） */
+		public var q_itemsofoutput:int;
 		 /**  需要性别(0通用 1男 2女) */
 		public var q_sex:int;
 		 /**  佩戴职业需求（0通用 1兵家 2墨家 3医家） */
@@ -44,12 +48,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_max:int;
 		 /**  最大拥有数（0表示无限制） */
 		public var q_maxownnum:int;
-		 /**  今日使用次数上限（0表示无限制） */
-		public var q_dailylimit:int;
-		 /**  本周使用次数上限（0表示无限制） */
-		public var q_weeklimit:int;
-		 /**  终生使用次数上限（0表示无限制） */
-		public var q_limitnum:int;
+		 /**  该道具最大的使用次数(个数|时间类型|参数，如10|1|1，即为1天可以使用10个，如21|2|2，则代表每2周可以用21个，如30|3|1则代表每月能用30个，时间类型1为自然天，2为自然周，3为自然月，4为自然年；参数为具体单位；本项支持多重限制，当出现多重限制时，时间类型大的优先生效，小的后生效；本项不填则代表没有限制) */
+		public var q_item_limit:String;
 		 /**  怪物爆出后是同步类型（0全部同步，1如果是小怪爆出的，则只同步给有拾取权的人（JY BOSS无视此规则）） */
 		public var q_issyn:int;
 		 /**  商店中的购买价格 */
@@ -78,10 +78,6 @@ package com.rpgGame.coreData.clientConfig
 		public var q_cooldown_type:int;
 		 /**  使用后学会技能编号 */
 		public var q_skill:int;
-		 /**  使用后获得的货币类型(scriptid为20108的道具，使用后读这个字段) */
-		public var q_get_coin_type:int;
-		 /**  使用后获得的货币数量(scriptid为20108的道具，使用后读这个字段) */
-		public var q_get_coin_value:int;
 		 /**  使用后打开礼包表编号 */
 		public var q_gift:int;
 		 /**  使用后打开面板编号 */
@@ -96,7 +92,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_icon:int;
 		 /**  物品掉落在场景中图标ID */
 		public var q_dropicon:int;
-		 /**  物品换装资源编号（装备类物品使用） */
+		 /**  物品换装资源编号（装备类物品使用）模型ID */
 		public var q_equip_resource:int;
 		 /**  是否自动使用（1是，0否） */
 		public var q_auto_use:int;
@@ -106,38 +102,38 @@ package com.rpgGame.coreData.clientConfig
 		public var q_whether_batch:int;
 		 /**  道具是否可进入仓库（1否，0是） */
 		public var q_save_warehouse:int;
-		 /**  物品每天使用上限 */
-		public var q_item_limit:int;
 		 /**  拾取优先级(数字越小优先级越高) */
 		public var q_loot_priority:int;
 		 /**  使用后关联buff的ID,格式 [xxx,xxx,xxx] */
 		public var q_buff:String;
 		 /**  使用后触发技能 */
 		public var q_sparkskill:int;
+		 /**  特殊物品使用类型 */
+		public var q_specialUseType:int;
 		 /**  特殊使用参数1 */
 		public var q_specialUseValue1:int;
-		 /**  时效性（0表示永久1表示一段时间生效） */
-		public var q_duration:int;
-		 /**  时效时间(填毫秒) */
-		public var q_timelinesstime:int;
+		 /**  特殊使用参数2 */
+		public var q_specialUseValue2:int;
+		 /**  特殊使用参数3 */
+		public var q_specialUseValue3:int;
 		 /**  是否显示获得和销毁时间（0显示 1不显示） */
 		public var q_isdisplaytime:int;
 		 /**  属性ID */
 		public var q_att_type:String;
-		 /**  特殊物品使用类型 */
-		public var q_specialUseType:int;
-		 /**  特殊使用参数2 */
-		public var q_specialUseValue2:int;
-		 /**  特殊使用参数2 */
-		public var q_specialUseValue3:int;
 		 /**  使用的场景ID限制 */
 		public var q_sceneid:int;
-		 /**  使用限制时间 */
-		public var q_limitusetime:int;
-		 /**  使用消耗的货币类型 */
-		public var q_castmoneytype:int;
-		 /**  使用消耗的货币数 */
-		public var q_castmoneynum:int;
+		 /**  敏感道具数量异常数值 */
+		public var q_abnormal_num:int;
+		 /**  物品回收时间(掉落地面物品系统回收时间)单位秒 */
+		public var q_recoverytime:int;
+		 /**  道具穿戴身上时获得额外buff效果 */
+		public var q_item_equip_buff:int;
+		 /**  道具穿戴身上时的额外特效效果编号 */
+		public var q_item_equip_effects:int;
+		 /**  道具存在包裹时获得buff效果 */
+		public var q_item_pack_buff:int;
+		 /**  道具存在包裹时获得特效效果 */
+		public var q_item_bag_effects:int;
 		 /**  是否可被搜索（0可以被搜索 1表示不可以） */
 		public var q_cansearch:int;
 		 /**  阵营限制(0表示无限制 ) */
@@ -176,12 +172,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_max_awaken:int;
 		 /**  装备最大可注灵等级 */
 		public var q_max_soul:int;
-		 /**  产出途径描述 */
-		public var q_output:String;
 		 /**  帮会捐献/兑换贡献度 */
 		public var q_contribution:int;
-		 /**  物品产出（显示产出文字描述） */
-		public var q_itemsofoutput:int;
 
 	}
 }

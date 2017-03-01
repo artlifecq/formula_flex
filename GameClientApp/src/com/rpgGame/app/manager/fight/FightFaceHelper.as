@@ -32,27 +32,31 @@ package com.rpgGame.app.manager.fight
 	public class FightFaceHelper
 	{
 		/** 根路径 **/
-		public static const ROOT : String = "ui/pngx/fight/";
+		public static const ROOT : String = "ui/pngicon/fight/";
 		//---------------------------文字------------------------------------------//
 		/** 有用，正面特效，其实就是图片是绿色的**/
 		public static const USESFUL_EFFECT : String = "fight_effect/usesful_effect/";
 		/** 无用，反面特效，其实就是图片是红色的**/
 		public static const HARMFUL_EFFECT : String = "fight_effect/harmful_effect/";
+		
 		/** 有用，正面特效，其实就是图片是绿色的**/
 		public static const ATTRIBUTE_USESFUL_EFFECT : String = "attribute_effect/usesful_effect/";
 		/** 无用，反面特效，其实就是图片是红色的**/
 		public static const ATTRIBUTE_HARMFUL_EFFECT : String = "attribute_effect/harmful_effect/";
 		//-----------------------数字------------------------------------------//
+		/** 战斗-目标飘字 受伤**/
+		public static const NUMBER_NPC_HIT : String = "skin_shanghai/";
+		/** 战斗-自身飘字 回血（绿色）**/
+		public static const NUMBER_PC_HPREC : String = "skin_zhiliao/";
+		
+		
+		
 		/** 战斗-自身飘字 受伤 (红色) **/
 		public static const NUMBER_PC_HIT : String = "pc_hit/";
 		/** 战斗-自身飘字 受暴击(暗红色) **/
 		public static const NUMBER_PC_HITCRIT : String = "pc_hitcrit/";
-		/** 战斗-自身飘字 回血（绿色）**/
-		public static const NUMBER_PC_HPREC : String = "pc_hprec/";
 		/** 战斗-自身飘字 回蓝（深蓝色） **/
 		public static const NUMBER_PC_MPREC : String = "pc_mprec/";
-		/** 战斗-目标飘字 受伤（黄橙色）**/
-		public static const NUMBER_NPC_HIT : String = "npc_hit/";
 		/** 战斗-目标飘字 受暴击（紫色）**/
 		public static const NUMBER_NPC_CRIT : String = "npc_crit/";
 		/** 其他飘字 武勋增加（深黄色）**/
@@ -682,7 +686,7 @@ package com.rpgGame.app.manager.fight
 			attackFace.x = $displayObjectContainer.x-attackFace.width/2;
 			attackFace.y = $displayObjectContainer.y-attackFace.height/2-50;
 			
-			
+			return;
 			var timeLine : TimelineLite = new TimelineLite();
 			timeLine.insert(TweenLite.to(attackFace, 0.5, {scaleX: $scaleLater, scaleY: $scaleLater, ease: Linear.easeOut,onUpdate:updateXY,onUpdateParams:[attackFace,$displayObjectContainer]}));//缩放
 			timeLine.append(TweenLite.to(attackFace, 1.2, {alpha: 0,onComplete: onComplete, onCompleteParams: [attackFace], ease: Linear.easeIn,onUpdate:updateXY,onUpdateParams:[attackFace,$displayObjectContainer]}));//隐藏

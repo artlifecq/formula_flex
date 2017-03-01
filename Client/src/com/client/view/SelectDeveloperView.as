@@ -27,7 +27,7 @@ package com.client.view
 		private var _xml : XML = <ipList>
 				<item ip="192.168.1.18" port="8001" name="稳定服"/>
 				<item ip="0.0.0.0" port="0" name="单机版本"/>
-				<item ip="192.168.4.139" port="8001" name="杜服"/>
+				<item ip="192.168.1.18" port="18001" name="杜服"/>
 				<item ip="192.168.4.112" port="8001" name="樊服"/>
 				<item ip="192.168.4.94" port="8001" name="蒋服"/>
 			</ipList>;

@@ -204,6 +204,7 @@ package com.rpgGame.app.cmdlistener.scene
 			}
 			var heroData : HeroData = role.data as HeroData; 
 			heroData.weapon=msg.weaponResId;
+			heroData.deputyWeapon=msg.deputyWeaponResId;
 			AvatarManager.callEquipmentChange(role);
 		}
 		

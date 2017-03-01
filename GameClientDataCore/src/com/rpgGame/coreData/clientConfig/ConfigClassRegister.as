@@ -86,7 +86,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_att_transfer:String = "data.Q_att_transfer";
 		/**  所有属性相关的数据																														 */
 		public static const Q_att_values:String = "data.Q_att_values";
-		/**  物品基本信息数据库																																																																																				 */
+		/**  物品基本信息数据库																																																																																 */
 		public static const Q_item:String = "data.Q_item";
 		/**  职业对应的名字		 */
 		public static const RaceNameInfo:String = "data.RaceNameInfo";

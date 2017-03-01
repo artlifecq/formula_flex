@@ -19,6 +19,7 @@ package com.rpgGame.app.ui.main.chat {
     import com.rpgGame.coreData.cfg.ChatCfgData;
     import com.rpgGame.coreData.clientConfig.FaceInfo;
     import com.rpgGame.coreData.info.MapDataManager;
+    import com.rpgGame.coreData.type.EnumHurtType;
     import com.rpgGame.coreData.type.chat.EnumChatChannelType;
     import com.rpgGame.coreData.utils.ColorUtils;
     import com.rpgGame.netData.chat.message.ResChatMessage;
@@ -601,6 +602,10 @@ package com.rpgGame.app.ui.main.chat {
         
         private function sendMsg() : void 
 		{
+			FightFaceHelper.showAttChange(EnumHurtType.ADDHP,50);
+			
+			return ;
+			
 			if("" == this._inputText.text )
 			{
 				return;

@@ -122,7 +122,8 @@ package com.rpgGame.appModule.role
 			updateRole();
 			updateBaseInfo();
 			if(!ItemSender.isReqRole){
-				ItemSender.getItemsByType(containerId);
+				//等待背包请求装备数据一起返回
+				EventManager.addEvent(ItemEvent.ITEM_INIT,initDatas);
 			}else{
 				updateRoleEquip();
 			}
@@ -193,9 +194,7 @@ package com.rpgGame.appModule.role
 		
 		private function initEvent():void
 		{
-			if(!ItemSender.isReqRole){
-				EventManager.addEvent(ItemEvent.ITEM_INIT,initDatas);
-			}else{
+			if(ItemSender.isReqRole){
 				updateRoleEquip();
 			}
 			
@@ -289,7 +288,7 @@ package com.rpgGame.appModule.role
 		
 		private function initDatas(containerId:int):void 
 		{
-			if(containerId!=ItemContainerID.Role){
+			if(containerId!=ItemContainerID.BackPack){
 				return;
 			}
 			EventManager.removeEvent(ItemEvent.ITEM_INIT,initDatas);

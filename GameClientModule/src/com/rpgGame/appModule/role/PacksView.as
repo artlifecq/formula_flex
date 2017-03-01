@@ -15,6 +15,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.appModule.storage.StoragePanel;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
@@ -26,6 +27,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.lang.LangBackPack;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.MenuType;
+	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.coreData.utils.MoneyUtil;
 	
@@ -128,12 +130,18 @@ package com.rpgGame.appModule.role
 			
 			var stat:SpriteStat=MainRoleManager.actorInfo.totalStat;
 			_skin.txt_lijin.text =stat.getResData(CharAttributeType.RES_BIND_GOLD)+"";//绑金
-			_skin.txt_yingzi.htmlText = MoneyUtil.getAutoHtmlMoneyString(stat.getResData(CharAttributeType.RES_BIND_MONEY) );//绑银
+			_skin.txt_yingzi.htmlText = MoneyUtil.getAutoHtmlMoneyString(stat.getResData(CharAttributeType.RES_MONEY) );//银子
 			_skin.txt_yuanbao.text = stat.getResData(CharAttributeType.RES_GOLD)+"";//金子
-			_skin.txt_yingzibang.htmlText = MoneyUtil.getAutoHtmlMoneyString(stat.getResData(CharAttributeType.RES_MONEY) );//银子
+			_skin.txt_yingzibang.htmlText = MoneyUtil.getAutoHtmlMoneyString(stat.getResData(CharAttributeType.RES_BIND_MONEY) );//绑银
 			
-//			TipTargetManager.remove(_skin.txt_yingzibang);
-//			TipTargetManager.show( _skin.txt_yingzibang, TargetTipsMaker.makeSimpleTextTips(MoneyUtil.getHtmlMoneyString( info.getAmountByType(AmountType.MONEY) )));
+			TipTargetManager.remove(_skin.txt_lijin);
+			TipTargetManager.remove(_skin.txt_yingzi);
+			TipTargetManager.remove(_skin.txt_yuanbao);
+			TipTargetManager.remove(_skin.txt_yingzibang);
+			TipTargetManager.show( _skin.txt_lijin, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,_skin.txt_lijin.text   ));
+			TipTargetManager.show( _skin.txt_yingzi, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP, _skin.txt_yingzi.htmlText));
+			TipTargetManager.show( _skin.txt_yuanbao, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,  _skin.txt_yuanbao.text));
+			TipTargetManager.show( _skin.txt_yingzibang, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,	_skin.txt_yingzibang.htmlText));
 		}
 		
 		private function setGridsCount(count:int, refleshNow:Boolean):void
@@ -425,6 +433,9 @@ package com.rpgGame.appModule.role
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);
+			
+			EventManager.removeEvent(ItemEvent.CHANGE_ACCESS_STATE,changeAccessState);
+			EventManager.removeEvent(ItemEvent.ITEM_PRE_SPLITE, preSplit);
 			
 			TipTargetManager.remove(_skin.txt_yingzibang);
 			

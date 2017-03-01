@@ -221,7 +221,7 @@ package com.rpgGame.app.manager.goods
 				case ItemContainerID.Storage:
 					ItemSender.isReqStorage=true;
 					break;
-				case ItemContainerID.Storage:
+				case ItemContainerID.Role:
 					ItemSender.isReqRole=true;
 					break;
 			}

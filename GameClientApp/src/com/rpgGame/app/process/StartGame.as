@@ -22,6 +22,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.manager.time.SystemTimeManager;
     import com.rpgGame.app.scene.SceneRole;
     import com.rpgGame.app.ui.ResLoadingView;
+    import com.rpgGame.app.ui.tips.AmountTip;
     import com.rpgGame.app.ui.tips.BuffTip;
     import com.rpgGame.app.ui.tips.EquipTip;
     import com.rpgGame.app.ui.tips.FriendHeroTips;
@@ -167,6 +168,7 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.OPEN_GRID_TIP, OpenGridTip);
 			TipManager.registerTipsParserClass(TipType.FRIEND_HERO_TIP, FriendHeroTips);
 			TipManager.registerTipsParserClass(TipType.EQUIP_TIP, EquipTip);
+			TipManager.registerTipsParserClass(TipType.AMOUNT_TIP, AmountTip);
 			TipManager.registerTipsParserClass(TipType.BUFF_TIP, BuffTip);
 			TipManager.registerTipsParserClass(TipType.SOCIETY_SPELL_TOTAL_TIP, SocietySpellTotalTip);
 			TipManager.registerTipsParserClass(TipType.MAP_AREA_TIP, MapAreaTip);

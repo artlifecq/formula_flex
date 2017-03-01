@@ -29,7 +29,6 @@ package com.rpgGame.app.ui.tips
 		/** 物品信息类 **/
 		private var _itemInfo : ClientItemInfo;
 		
-		private var goldIcon:UIAsset;
 		private var yinIcon:UIAsset;
 		
 		/** 装备格子 **/
@@ -55,12 +54,10 @@ package com.rpgGame.app.ui.tips
 			_iconFace=new IconCDFace(IcoSizeEnum.SIZE_60);
 			addChild(_iconFace);
 			_iconFace.setBg(GridBGType.GRID_SIZE_60);
-			_iconFace.x=30;
-			_iconFace.y=67;
+			_iconFace.x=5;
+			_iconFace.y=35;
 			_iconFace.setIconPoint(8, 8);
 			
-			goldIcon=new UIAsset();
-			goldIcon.styleName="ui/common/tubiao/lijin_24.png";
 			yinIcon=new UIAsset();
 			yinIcon.styleName="ui/common/tubiao/yinzi_24.png";
 		}
@@ -85,8 +82,10 @@ package com.rpgGame.app.ui.tips
 			_itemTip.lbl_name.text=_itemInfo.qItem.q_name;
 			_itemTip.lbl_lock.visible=true;
 			if(_itemInfo.binded){
-				_itemTip.lbl_lock.text="[已绑定]"
+				_itemTip.lbl_lock.text="[已绑定]";
+				_itemTip.lock.visible=true;
 			}else{
+				_itemTip.lock.visible=false;
 				if(_itemInfo.qItem.q_bind==0){
 					_itemTip.lbl_lock.visible=false;
 				}else if(_itemInfo.qItem.q_bind==1){
@@ -125,7 +124,7 @@ package com.rpgGame.app.ui.tips
 			curY+=22;
 			
 			curX=10;
-			if(_itemInfo.qItem.q_dailylimit!=0){//今日使用次数
+		/*	if(_itemInfo.qItem.q_dailylimit!=0){//今日使用次数
 				name=HtmlTextUtil.getTextColor(nameColor,"今日使用次数:");
 				value=HtmlTextUtil.getTextColor(valueColor,"0/"+_itemInfo.qItem.q_dailylimit);
 				createLabel(name,value);
@@ -137,7 +136,7 @@ package com.rpgGame.app.ui.tips
 				value=HtmlTextUtil.getTextColor(valueColor,"0/"+_itemInfo.qItem.q_weeklimit);
 				createLabel(name,value);
 				curY+=22;
-			}
+			}*/
 			
 			name=HtmlTextUtil.getTextColor(nameColor,"[物品说明]\n");
 			var label:Label=createLabel(name,_itemInfo.qItem.q_describe);
@@ -157,18 +156,12 @@ package com.rpgGame.app.ui.tips
 			curY+=22;
 			
 			name=HtmlTextUtil.getTextColor(nameColor,"商城定价:");
-			if(_itemInfo.qItem.q_gold==0){
-				value=HtmlTextUtil.getTextColor(valueColor2,"      "+_itemInfo.qItem.q_gold.toString());
-				yinIcon.removeFromParent();
-				_itemTip.container.addChild(goldIcon);
-			}else{
-				value=HtmlTextUtil.getTextColor(valueColor2,"     "+_itemInfo.qItem.q_sell_price.toString());
-				goldIcon.removeFromParent();
-				_itemTip.container.addChild(yinIcon);
-			}
+			value=HtmlTextUtil.getTextColor(valueColor2,"     "+_itemInfo.qItem.q_sell_price.toString());
+			_itemTip.container.addChild(yinIcon);
+			
 			label=createLabel(name,value);
-			goldIcon.x=yinIcon.x=100;
-			goldIcon.y=yinIcon.y=curY;
+			yinIcon.x=50;
+			yinIcon.y=curY;
 			_itemTip.bg.height=curY+25;
 		}
 		

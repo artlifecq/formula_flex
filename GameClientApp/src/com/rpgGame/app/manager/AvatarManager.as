@@ -525,10 +525,10 @@ package com.rpgGame.app.manager
 				}
 				
 				var weaponRes : AvatarWeaponRes = AvatarWeapontResCfgData.getInfo(roleData.weapon);
-				if (!weaponRes)
+			/*	if (!weaponRes)
 				{
 					weaponRes = AvatarWeapontResCfgData.getInfo(clothesRes.weaponResId);
-				}
+				}*/
 				if (weaponRes)
 				{
 					weaponResID = weaponRes.res;

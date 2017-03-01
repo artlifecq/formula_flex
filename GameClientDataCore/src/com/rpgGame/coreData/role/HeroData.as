@@ -216,13 +216,13 @@ package com.rpgGame.coreData.role
 			data.sex = heroInfo.sex;
 			data.job = heroInfo.job;
 			
-			data.maxExp=heroInfo.maxExp.fValue;
-			data.maxZhenqi=heroInfo.maxZhenQi.fValue;
-			data.curExp=heroInfo.exp.fValue;
+//			data.maxExp=heroInfo.maxExp.fValue;
+//			data.maxZhenqi=heroInfo.maxZhenQi.fValue;
+//			data.curExp=heroInfo.exp.fValue;
 			
 			///角色属性信息
 			data.totalStat.setData(heroInfo.attributes);
-			data.totalStat.setResDatas(heroInfo.resourceData);
+//			data.totalStat.setResDatas(heroInfo.resourceData);
 			
 			for(var i:int=0;i<heroInfo.buffs.length;i++)
 			{

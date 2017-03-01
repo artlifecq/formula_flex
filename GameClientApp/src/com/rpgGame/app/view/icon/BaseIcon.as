@@ -94,7 +94,7 @@ package com.rpgGame.app.view.icon
 						_iconImage.y = 0;
 					}
 					break;
-				case  IcoSizeEnum.SIZE_46:
+				case  IcoSizeEnum.ICON_48:
 					if( posx != 0 || posy != 0 )
 					{
 						_iconImage.x = posx;

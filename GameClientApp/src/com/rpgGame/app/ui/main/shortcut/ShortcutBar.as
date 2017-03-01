@@ -1,37 +1,14 @@
 package com.rpgGame.app.ui.main.shortcut {
     import com.game.engine3D.display.InterObject3D;
     import com.game.engine3D.scene.render.RenderUnit3D;
-    import com.rpgGame.app.manager.chat.NoticeManager;
-    import com.rpgGame.app.manager.mount.MountManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
-    import com.rpgGame.core.app.AppConstant;
-    import com.rpgGame.core.app.AppManager;
-    import com.rpgGame.core.events.MainPlayerEvent;
     import com.rpgGame.core.events.society.SocietyEvent;
-    import com.rpgGame.core.manager.tips.TargetTipsMaker;
-    import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
-    import com.rpgGame.coreData.SpriteStat;
     import com.rpgGame.coreData.cfg.ClientConfig;
-    import com.rpgGame.coreData.cfg.LanguageConfig;
     import com.rpgGame.coreData.enum.JobEnum;
-    import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-    import com.rpgGame.coreData.lang.LangMount;
     import com.rpgGame.coreData.type.EffectUrl;
-    import com.rpgGame.coreData.type.item.GridBGType;
     
-    import flash.display.Graphics;
-    import flash.events.Event;
     import flash.geom.Point;
-    import flash.utils.clearInterval;
-    import flash.utils.setInterval;
-    import flash.utils.setTimeout;
-    
-    import away3d.animators.CompositeAnimator;
-    import away3d.animators.KeyframeAnimator;
-    import away3d.animators.data.CompositeAnimatorInstance;
-    import away3d.containers.ObjectContainer3D;
-    import away3d.entities.Mesh;
     
     import feathers.controls.UIAsset;
     
@@ -42,7 +19,6 @@ package com.rpgGame.app.ui.main.shortcut {
     
     import starling.display.DisplayObject;
     import starling.display.Sprite;
-    import starling.events.Event;
     
     public class ShortcutBar extends SkinUI {
 		
@@ -146,7 +122,15 @@ package com.rpgGame.app.ui.main.shortcut {
 			renderUint.scaleX=renderUint.scaleY=this._skin.left_xuecao.width/270;
 			hp3D.x=this._skin.left_xuecao.x+17;
 			hp3D.y=this._skin.left_xuecao.y+this._skin.left_xuecao.height-12;
-			this._skin.left_xuecao.mask=hp3D;				
+			this._skin.left_xuecao.visible=false;			
+			
+			var sp:Sprite=new Sprite();
+			sp.graphics.beginFill(0xff0000);
+			sp.graphics.drawCircle(0,0,10);
+			sp.x=110;
+			sp.y=50;
+			hp3D.mask=sp;
+			this.addChild(sp);
 		}
 		
 		private function initFanGunDis():void

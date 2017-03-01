@@ -1,5 +1,4 @@
 package com.rpgGame.netData.player.bean{
-	import com.rpgGame.netData.player.bean.ResourceDataItem;
 	import com.rpgGame.netData.player.bean.AttributeItem;
 	import com.rpgGame.netData.buff.bean.BuffInfo;
 	import com.rpgGame.netData.structs.Position;
@@ -18,7 +17,7 @@ package com.rpgGame.netData.player.bean{
 	 * 本人玩家详细信息
 	 */
 	public class MyPlayerInfo extends Bean {
-	
+		
 		//角色Id
 		private var _personId: long;
 		
@@ -65,17 +64,6 @@ package com.rpgGame.netData.player.bean{
 		private var _attributes: Vector.<AttributeItem> = new Vector.<AttributeItem>();
 		//buff列表
 		private var _buffs: Vector.<com.rpgGame.netData.buff.bean.BuffInfo> = new Vector.<com.rpgGame.netData.buff.bean.BuffInfo>();
-		//资源属性项
-		private var _resourceData: Vector.<ResourceDataItem> = new Vector.<ResourceDataItem>();
-		//当前经验值
-		private var _exp: long;
-		
-		//最大经验值
-		private var _maxExp: long;
-		
-		//最大真气值
-		private var _maxZhenQi: long;
-		
 		/**
 		 * 写入字节缓存
 		 */
@@ -118,17 +106,6 @@ package com.rpgGame.netData.player.bean{
 			for (var i: int = 0; i < _buffs.length; i++) {
 				writeBean(_buffs[i]);
 			}
-			//资源属性项
-			writeShort(_resourceData.length);
-			for (var i: int = 0; i < _resourceData.length; i++) {
-				writeBean(_resourceData[i]);
-			}
-			//当前经验值
-			writeLong(_exp);
-			//最大经验值
-			writeLong(_maxExp);
-			//最大真气值
-			writeLong(_maxZhenQi);
 			return true;
 		}
 		
@@ -174,17 +151,6 @@ package com.rpgGame.netData.player.bean{
 			for (var i: int = 0; i < buffs_length; i++) {
 				_buffs[i] = readBean(com.rpgGame.netData.buff.bean.BuffInfo) as com.rpgGame.netData.buff.bean.BuffInfo;
 			}
-			//资源属性项
-			var resourceData_length : int = readShort();
-			for (var i: int = 0; i < resourceData_length; i++) {
-				_resourceData[i] = readBean(ResourceDataItem) as ResourceDataItem;
-			}
-			//当前经验值
-			_exp = readLong();
-			//最大经验值
-			_maxExp = readLong();
-			//最大真气值
-			_maxZhenQi = readLong();
 			return true;
 		}
 		
@@ -426,66 +392,6 @@ package com.rpgGame.netData.player.bean{
 		 */
 		public function set buffs(value: Vector.<com.rpgGame.netData.buff.bean.BuffInfo>): void{
 			this._buffs = value;
-		}
-		
-		/**
-		 * get 资源属性项
-		 * @return 
-		 */
-		public function get resourceData(): Vector.<ResourceDataItem>{
-			return _resourceData;
-		}
-		
-		/**
-		 * set 资源属性项
-		 */
-		public function set resourceData(value: Vector.<ResourceDataItem>): void{
-			this._resourceData = value;
-		}
-		
-		/**
-		 * get 当前经验值
-		 * @return 
-		 */
-		public function get exp(): long{
-			return _exp;
-		}
-		
-		/**
-		 * set 当前经验值
-		 */
-		public function set exp(value: long): void{
-			this._exp = value;
-		}
-		
-		/**
-		 * get 最大经验值
-		 * @return 
-		 */
-		public function get maxExp(): long{
-			return _maxExp;
-		}
-		
-		/**
-		 * set 最大经验值
-		 */
-		public function set maxExp(value: long): void{
-			this._maxExp = value;
-		}
-		
-		/**
-		 * get 最大真气值
-		 * @return 
-		 */
-		public function get maxZhenQi(): long{
-			return _maxZhenQi;
-		}
-		
-		/**
-		 * set 最大真气值
-		 */
-		public function set maxZhenQi(value: long): void{
-			this._maxZhenQi = value;
 		}
 		
 	}

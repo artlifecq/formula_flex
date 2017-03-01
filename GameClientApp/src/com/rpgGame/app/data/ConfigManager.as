@@ -6,6 +6,8 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.AddSpriteStatCfgData;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
+	import com.rpgGame.coreData.cfg.AttFormulaConfig;
+	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ChatCfgData;
 	import com.rpgGame.coreData.cfg.ClientAreaCfgData;
@@ -151,6 +153,8 @@ package com.rpgGame.app.data
 //			CrownPanelPagesCfgData.setup(dic[ConfigClassRegister.CrownPageInfo]);
 			ClientBuffCfgData.setUpHintTypeSet(dic[ConfigClassRegister.ClientBuff]);
 			ItemConfig.setup(dic[ConfigClassRegister.Q_item]);
+			AttValueConfig.setup(dic[ConfigClassRegister.Q_att_values]);
+			AttFormulaConfig.setup(dic[ConfigClassRegister.Q_att_transfer]);
 //			CountryUnionStatCfgData.setup(null); //待解决
 
 			

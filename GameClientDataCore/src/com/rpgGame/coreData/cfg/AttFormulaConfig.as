@@ -27,6 +27,9 @@ package com.rpgGame.coreData.cfg
 			for each(var info : Q_att_transfer in arr) {
 				var list:Vector.<ClientAttFormula>=new Vector.<ClientAttFormula>();
 				var att:ClientAttFormula;
+				if(info.q_attributes.length==0){
+					continue;
+				}
 				var arr1:Array=JSON.parse(info.q_attributes) as Array;
 				for(var i:int=0;i<arr1.length;i++){
 					att=new ClientAttFormula();

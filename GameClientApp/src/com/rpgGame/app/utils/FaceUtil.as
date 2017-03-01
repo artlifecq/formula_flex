@@ -138,6 +138,8 @@ package com.rpgGame.app.utils
 				switch( itemInfo.type )
 				{
 					case GoodsType.EQUIPMENT://装备
+					case GoodsType.EQUIPMENT1://装备
+					case GoodsType.EQUIPMENT2://装备
 						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.EQUIP_TIP, itemInfo ) );
 						break;
 					/*case GoodsType.BEAST_CARD://兽牌

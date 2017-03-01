@@ -19,9 +19,17 @@ package app.message {
 		 */
 		public static const MEDICINE:int = 3;
 		/**
-		 *装备 
+		 * 装备
 		 */
 		public static const EQUIPMENT:int = 4;
+		/**
+		 *防具
+		 */
+		public static const EQUIPMENT1:int = 5;
+		/**
+		 *首饰
+		 */
+		public static const EQUIPMENT2:int = 6;
 		
 		/**
 		 *合成材料
