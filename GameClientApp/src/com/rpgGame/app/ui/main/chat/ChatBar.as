@@ -602,9 +602,9 @@ package com.rpgGame.app.ui.main.chat {
         
         private function sendMsg() : void 
 		{
-			FightFaceHelper.showAttChange(EnumHurtType.ADDHP,50);
+//			FightFaceHelper.showAttChange(EnumHurtType.ADDHP,50);
 			
-			return ;
+//			return ;
 			
 			if("" == this._inputText.text )
 			{
