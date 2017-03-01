@@ -80,7 +80,7 @@ package org.mokylin.skin.app.tips
 			temp.text = "通过参与活动等方式可获得银两";
 			temp.color = 0x2083B9;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 235;
+			temp.width = 276;
 			temp.x = 11;
 			temp.y = 57;
 			return temp;
@@ -95,7 +95,7 @@ package org.mokylin.skin.app.tips
 			temp.text = "货币可用于玩家间交易及购买商店道具";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 235;
+			temp.width = 271;
 			temp.x = 11;
 			temp.y = 33;
 			return temp;

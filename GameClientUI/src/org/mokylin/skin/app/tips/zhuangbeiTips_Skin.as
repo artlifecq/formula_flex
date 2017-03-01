@@ -33,8 +33,6 @@ package org.mokylin.skin.app.tips
 
 		public var bg_zi:feathers.controls.UIAsset;
 
-		public var grp_baseAttribute:feathers.controls.Group;
-
 		public var grp_duibi:feathers.controls.Group;
 
 		public var grp_head:feathers.controls.Group;
@@ -47,13 +45,7 @@ package org.mokylin.skin.app.tips
 
 		public var isLock:feathers.controls.Label;
 
-		public var lbl_baoji:feathers.controls.Label;
-
 		public var lbl_buwei:feathers.controls.Label;
-
-		public var lbl_gongji:feathers.controls.Label;
-
-		public var lbl_mingzhong:feathers.controls.Label;
 
 		public var lbl_pingzhi:feathers.controls.Label;
 
@@ -94,7 +86,7 @@ package org.mokylin.skin.app.tips
 			this.currentState = "normal";
 			this.height = 479;
 			this.width = 283;
-			this.elementsContent = [imgBG_i(),lbl_titile_i(),zhuangbei_bg_i(),grp_icon_i(),grp_zhandouli_i(),grp_head_i(),grp_baseAttribute_i(),grp_duibi_i(),yizhuangbei_i()];
+			this.elementsContent = [imgBG_i(),lbl_titile_i(),zhuangbei_bg_i(),grp_icon_i(),grp_zhandouli_i(),grp_head_i(),lbl_qianghuatitle_i(),lbl_qianghua_i(),grp_duibi_i(),yizhuangbei_i()];
 			
 			states = {
 			};
@@ -164,51 +156,6 @@ package org.mokylin.skin.app.tips
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 154;
 			temp.y = 24;
-			return temp;
-		}
-
-		private function __zhuangbeiTips_Skin_Label5_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.letterSpacing = 0;
-			temp.text = "【基础属性】";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __zhuangbeiTips_Skin_Label6_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "攻击力：";
-			temp.color = 0x8B8D7B;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 5;
-			temp.y = 20;
-			return temp;
-		}
-
-		private function __zhuangbeiTips_Skin_Label7_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "命中值：";
-			temp.color = 0x8B8D7B;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 5;
-			temp.y = 41;
-			return temp;
-		}
-
-		private function __zhuangbeiTips_Skin_Label8_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "暴击值：";
-			temp.color = 0x8B8D7B;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 5;
-			temp.y = 63;
 			return temp;
 		}
 
@@ -311,17 +258,6 @@ package org.mokylin.skin.app.tips
 			return temp;
 		}
 
-		private function grp_baseAttribute_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			grp_baseAttribute = temp;
-			temp.name = "grp_baseAttribute";
-			temp.x = 5;
-			temp.y = 170;
-			temp.elementsContent = [__zhuangbeiTips_Skin_Label5_i(),lbl_qianghuatitle_i(),__zhuangbeiTips_Skin_Label6_i(),__zhuangbeiTips_Skin_Label7_i(),__zhuangbeiTips_Skin_Label8_i(),lbl_qianghua_i(),lbl_gongji_i(),lbl_mingzhong_i(),lbl_baoji_i()];
-			return temp;
-		}
-
 		private function grp_duibi_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -392,20 +328,6 @@ package org.mokylin.skin.app.tips
 			return temp;
 		}
 
-		private function lbl_baoji_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbl_baoji = temp;
-			temp.name = "lbl_baoji";
-			temp.text = "100";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 76;
-			temp.x = 63;
-			temp.y = 63;
-			return temp;
-		}
-
 		private function lbl_buwei_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -417,34 +339,6 @@ package org.mokylin.skin.app.tips
 			temp.width = 68;
 			temp.x = 197;
 			temp.y = 24;
-			return temp;
-		}
-
-		private function lbl_gongji_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbl_gongji = temp;
-			temp.name = "lbl_gongji";
-			temp.text = "100";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 76;
-			temp.x = 63;
-			temp.y = 20;
-			return temp;
-		}
-
-		private function lbl_mingzhong_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbl_mingzhong = temp;
-			temp.name = "lbl_mingzhong";
-			temp.text = "100";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 76;
-			temp.x = 63;
-			temp.y = 41;
 			return temp;
 		}
 
@@ -471,8 +365,8 @@ package org.mokylin.skin.app.tips
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 49;
-			temp.x = 220;
-			temp.y = 0;
+			temp.x = 225;
+			temp.y = 164;
 			return temp;
 		}
 
@@ -484,8 +378,8 @@ package org.mokylin.skin.app.tips
 			temp.text = "强化等级：";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 148;
-			temp.y = 0;
+			temp.x = 153;
+			temp.y = 164;
 			return temp;
 		}
 
