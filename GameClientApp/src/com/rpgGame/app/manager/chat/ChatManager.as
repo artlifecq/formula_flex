@@ -16,14 +16,15 @@ package com.rpgGame.app.manager.chat
     import com.rpgGame.coreData.cfg.ChatCfgData;
     import com.rpgGame.coreData.cfg.LanguageConfig;
     import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
-    import com.rpgGame.coreData.cfg.item.ItemCfgData;
+    import com.rpgGame.coreData.cfg.item.ItemConfig;
     import com.rpgGame.coreData.configEnum.EnumHintInfo;
     import com.rpgGame.coreData.info.chat.ChatInfo;
+    import com.rpgGame.coreData.info.item.ClientItemInfo;
     import com.rpgGame.coreData.info.item.GetShowItemVo;
-    import com.rpgGame.coreData.info.item.ItemInfo;
     import com.rpgGame.coreData.info.item.ItemUtil;
     import com.rpgGame.coreData.type.chat.EnumChatChannelType;
     import com.rpgGame.coreData.type.chat.EnumChatTabsType;
+    import com.rpgGame.netData.backpack.bean.ItemInfo;
     import com.rpgGame.netData.chat.bean.HyperInfo;
     import com.rpgGame.netData.chat.message.ResChatMessage;
     
@@ -377,17 +378,14 @@ package com.rpgGame.app.manager.chat
 			{
 				var itemArr : Array = [];
 				var len : int = chatInfo.chatGoods.length;
-				var chatGoods : GoodsProto;
-				var itemVo : GetShowItemVo;
+				var chatGoods : ItemInfo;
 				var itemCode : String;
 				for (var i : int = 0; i < len; i++)
 				{
 					chatGoods = chatInfo.chatGoods[i];
-					itemVo = new GetShowItemVo();
-					itemVo.decode(chatGoods);
-					var itemInfo:ItemInfo = ItemUtil.convertGoodsProtoToItemInfo(chatGoods);
+					var itemInfo:ClientItemInfo = ItemUtil.convertClientItemInfo(chatGoods);
 					var key:String = ChatGoodsManager.addItemInfo(itemInfo);
-					itemCode = RichTextCustomUtil.getItemCode(key, ItemCfgData.getItemName(chatGoods.id), ItemCfgData.getItemQuality(chatGoods.id));
+					itemCode = RichTextCustomUtil.getItemCode(key, ItemConfig.getItemName(chatGoods.itemModelId), ItemConfig.getItemQuality(chatGoods.itemModelId));
 					itemArr.push(itemCode);
 				}
 
@@ -490,10 +488,10 @@ package com.rpgGame.app.manager.chat
 
 			if (channel == EnumChatChannelType.CHAT_CHANNEL_LABA)
 			{
-				var itemInfo : ItemInfo = BackPackManager.instance.getFirstCanUseItemByCfgId(ChatCfgData.paidChatGoodsID);
+				var itemInfo : ClientItemInfo = BackPackManager.instance.getFirstCanUseItemByCfgId(ChatCfgData.paidChatGoodsID);
 				if (itemInfo == null)
 				{
-					NoticeManager.showHint(EnumHintInfo.CHAT_CHANNEL_NO_LABA_ITEM, [ItemCfgData.getItemName(ChatCfgData.paidChatGoodsID)]);
+					NoticeManager.showHint(EnumHintInfo.CHAT_CHANNEL_NO_LABA_ITEM, [ItemConfig.getItemName(ChatCfgData.paidChatGoodsID)]);
 					return;
 				}
 			}
@@ -618,11 +616,11 @@ package com.rpgGame.app.manager.chat
 		 * @return
 		 *
 		 */
-		public static function getShowItemInfo(specialMsg:RichTextUnitData) : ItemInfo
+		public static function getShowItemInfo(specialMsg:RichTextUnitData) : ClientItemInfo
 		{
 			var arr:Array = specialMsg.linkData.split(",");
 			var key:String = arr[0];
-			var itemInfo:ItemInfo  = ChatGoodsManager.getItemInfo(key);
+			var itemInfo:ClientItemInfo  = ChatGoodsManager.getItemInfo(key);
 			return itemInfo;
 		}
 		/**

@@ -1,7 +1,7 @@
 package com.rpgGame.coreData.info.mount
 {
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	
 	import app.message.EquipmentListProto;
@@ -32,10 +32,10 @@ package com.rpgGame.coreData.info.mount
 		{
 			_equips.clear();
 			var ep:EquipClientProto;
-			var item:ItemInfo;
+			var item:ClientItemInfo;
 			for each( ep in proto.equipments )
 			{
-				item = ( ep && ep.equip ) ? ItemUtil.convertGoodsProtoToItemInfo( ep.equip ) : null;
+//				item = ( ep && ep.equip ) ? ItemUtil.convertGoodsProtoToItemInfo( ep.equip ) : null;
 				if( item != null )
 				{
 					item.setIndex( ep.pos );
@@ -51,7 +51,7 @@ package com.rpgGame.coreData.info.mount
 		 * return ItemInfo
 		 * 
 		 */	
-		public function getItemInfoByPos( pos:int ):ItemInfo
+		public function getItemInfoByPos( pos:int ):ClientItemInfo
 		{
 			return _equips.getValue( pos );
 		}
@@ -62,7 +62,7 @@ package com.rpgGame.coreData.info.mount
 		 * @param item 
 		 * 
 		 */		
-		public function add( pos:int, item:ItemInfo ):void
+		public function add( pos:int, item:ClientItemInfo ):void
 		{
 			_equips.add( pos, item );
 		}

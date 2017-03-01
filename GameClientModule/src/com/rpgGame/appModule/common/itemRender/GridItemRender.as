@@ -22,6 +22,13 @@ package com.rpgGame.appModule.common.itemRender
 		
 		private var padding:int;
 		
+		/**
+		 * 
+		 * @param size 格子尺寸
+		 * @param bg 格子背景
+		 * @param padding 格子间距
+		 * 
+		 */
 		public function GridItemRender(size:int =  IcoSizeEnum.SIZE_40,bg:String = GridBGType.CHORTCUT_2,padding:int = 0)
 		{
 			this.size = size;
@@ -32,12 +39,12 @@ package com.rpgGame.appModule.common.itemRender
 		
 		override public function get width():Number
 		{
-			return size + padding*2;
+			return size + (padding+1)*2;
 		}
 		
 		override public function get height():Number
 		{
-			return size + padding*2;
+			return size +  (padding+1)*2;
 		}
 		
 		protected var grid:DragDropItem;
@@ -53,7 +60,7 @@ package com.rpgGame.appModule.common.itemRender
 			
 			this.grid.x = grid.y = padding;
 			this.addChild(this.grid);
-			this.width = this.height = size + padding*2;
+			this.width = this.height = size + (padding+1)*2;
 		}
 		
 		override protected function commitData():void

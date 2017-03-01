@@ -1,7 +1,7 @@
 package com.rpgGame.coreData.info.trade
 {
 	import com.rpgGame.coreData.info.item.GridInfo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	
 	import app.message.GoodsType;
 	
@@ -44,7 +44,7 @@ package com.rpgGame.coreData.info.trade
 			waitMoney = money;
 		}
 		
-		public function getIndexByItem(item:ItemInfo):int
+		public function getIndexByItem(item:ClientItemInfo):int
 		{
 			var result : int = -1;
 			for (var i : int = 0 ; i < 6;i++)
@@ -52,7 +52,7 @@ package com.rpgGame.coreData.info.trade
 				var grid : GridInfo = _items.getValue(i);
 				if(!grid || !grid.data)
 					continue;
-				grid.data as ItemInfo
+				grid.data as ClientItemInfo
 			}
 			
 			return result;
@@ -119,16 +119,16 @@ package com.rpgGame.coreData.info.trade
 			waitItem = null;
 		}
 		
-		public function getWaitItemInfo():ItemInfo
+		public function getWaitItemInfo():ClientItemInfo
 		{
-			return waitItem.data as ItemInfo;
+			return waitItem.data as ClientItemInfo;
 		}
 		
-		public function getItemInfoByIndex(index:int):ItemInfo
+		public function getItemInfoByIndex(index:int):ClientItemInfo
 		{
 			var grid : GridInfo = _items.getValue(index);
 			if(grid)
-				return grid.data as ItemInfo;
+				return grid.data as ClientItemInfo;
 			return null;
 		}
 		

@@ -114,7 +114,7 @@ package org.mokylin.skin.mainui.top
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_top_shezhi;
 			temp.width = 28;
 			temp.x = 139;
-			temp.y = 2;
+			temp.y = 3;
 			return temp;
 		}
 
@@ -123,9 +123,11 @@ package org.mokylin.skin.mainui.top
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_sound = temp;
 			temp.name = "btn_sound";
+			temp.height = 22;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_top_shengyin;
+			temp.width = 22;
 			temp.x = 113;
-			temp.y = 2;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -153,7 +155,7 @@ package org.mokylin.skin.mainui.top
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 48;
 			temp.x = 194;
-			temp.y = 3;
+			temp.y = 5;
 			return temp;
 		}
 

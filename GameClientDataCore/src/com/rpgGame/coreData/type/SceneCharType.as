@@ -24,8 +24,8 @@ package com.rpgGame.coreData.type
 		public static const NPC : String = rEnum.next.toString();
 		/** NPC 4 **/
 		public static const MOUNT : String = rEnum.next.toString();
-		/** 保护NPC 5 **/
-		public static const PROTECT_NPC : String = rEnum.next.toString();
+		/** 掉落物 5 **/
+		public static const DROP_GOODS : String = rEnum.next.toString();
 		/** 传送门 6 **/
 		public static const TRANS : String = rEnum.next.toString();
 		/** 场景特效 7 **/
@@ -50,8 +50,8 @@ package com.rpgGame.coreData.type
 		public static const COLLECT : String = rEnum.next.toString();
 		/** 镖车 17 **/
 		public static const BIAO_CHE : String = rEnum.next.toString();
-		/** 掉落物 18 **/
-		public static const DROP_GOODS : String = rEnum.next.toString();
+		/** 保护NPC 18 **/
+		public static const PROTECT_NPC : String = rEnum.next.toString();
 		/** 摊位 19 **/
 		public static const STALL : String = rEnum.next.toString();
 		/** 战车 20 */
@@ -151,7 +151,7 @@ package com.rpgGame.coreData.type
 //		
 		public static function get serverType() : Array
 		{
-			return [PLAYER, NPC, PROTECT_NPC, MONSTER, BIAO_CHE, DROP_GOODS, LIANG_CANG, ZHAN_CHE]; //,FOLLOWER,BAG,SUMMON_MONSTER,BAO_DAI_MONSTER,STORY_ACTOR
+			return [PLAYER, NPC, DROP_GOODS, MONSTER, BIAO_CHE,PROTECT_NPC , LIANG_CANG, ZHAN_CHE]; //,FOLLOWER,BAG,SUMMON_MONSTER,BAO_DAI_MONSTER,STORY_ACTOR
 		}
 	}
 }

@@ -1,6 +1,5 @@
 package game.rpgGame.login.view
 {
-	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.utils.DisplayUtil;
 	import com.gameClient.alert.AlertPanel;
@@ -9,11 +8,8 @@ package game.rpgGame.login.view
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
-	import flash.utils.clearInterval;
-	import flash.utils.setInterval;
 	import flash.utils.setTimeout;
 	
-	import feathers.controls.Alert;
 	import feathers.controls.Button;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.TextInput;
@@ -25,6 +21,10 @@ package game.rpgGame.login.view
 	import game.rpgGame.login.scene.AvatarInfo;
 	import game.rpgGame.login.scene.RoleData;
 	import game.rpgGame.login.util.RandomNick;
+	
+	import gs.TweenLite;
+	import gs.easing.Bounce;
+	import gs.easing.Linear;
 	
 	import org.mokylin.skin.loginui.create_input_Skin;
 	import org.mokylin.skin.loginui.create_role_Skin;
@@ -226,6 +226,18 @@ package game.rpgGame.login.view
 			
 			updateJobDes();
 			updateAvatar();
+			
+			displaySexGrp();
+		}
+		
+		private function displaySexGrp():void
+		{
+			if(jobGroup.selectedIndex!=2){
+				TweenLite.to(_skin.grp_sex,0.4,{x:1380,y:472,alpha:0,ease: Bounce.easeIn});
+			}else{
+				TweenLite.to(_skin.grp_sex,0.4,{x:1268,y:472,alpha:1,ease: Bounce.easeOut});
+				sexGroup.selectedIndex=0;
+			}
 		}
 		
 		private function updateJobDes():void

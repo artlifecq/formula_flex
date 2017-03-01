@@ -40,7 +40,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_monster_type:int;
 		 /**  怪物掉落归属（0：最后一击，1：伤害排行最高玩家，2：无主掉落） */
 		public var q_drop_type:int;
-		 /**  怪物攻击模式(1主动攻击,2被动攻击，3木桩类怪物) */
+		 /**  怪物攻击模式(1主动攻击,2被动攻击，3木桩类怪物,4木桩主动攻击) */
 		public var q_evasive_style:int;
 		 /**  怪物头像资源编号 */
 		public var q_head:String;

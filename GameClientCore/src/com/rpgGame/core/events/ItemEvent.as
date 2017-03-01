@@ -9,10 +9,39 @@ package com.rpgGame.core.events
 	 */	
 	public class ItemEvent 
 	{
-		/** 添加物品 **/
-		public static const ITEM_ADD:int = UNIQUEID.NEXT;
-		/** 物品属性变化,如数理 **/
+		
+	
+		/**
+		 *初始化物品
+		 */
+		public static const ITEM_INIT:int=UNIQUEID.NEXT;
+		
+		/**
+		 *添加物品
+		 */
+		public static const ITEM_ADD:int=UNIQUEID.NEXT;
+		
+		/**
+		 *物品删除
+		 */
+		public static const ITEM_REMOVE:int=UNIQUEID.NEXT;
+		
+		/**
+		 *物品改变 
+		 */
 		public static const ITEM_CHANG:int = UNIQUEID.NEXT;
+		
+		/**
+		 *物品改变 
+		 */
+		public static const ITEM_GET:int = UNIQUEID.NEXT;
+		
+		/**
+		 *仓库储存状态
+		 */
+		public static const CHANGE_ACCESS_STATE:int = UNIQUEID.NEXT;
+		
+		
 		/** 删除物品 **/
 		public static const ITEM_DELETE:int = UNIQUEID.NEXT;
 		/** 预拆分物品,弹窗输入 **/

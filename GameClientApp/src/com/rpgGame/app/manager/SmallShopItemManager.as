@@ -9,7 +9,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.ShopCfgData;
 	import com.rpgGame.coreData.enum.PromptSaveNameEnum;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.shop.ShopBuyBackGoodsData;
 	import com.rpgGame.coreData.info.shop.ShopData;
 	import com.rpgGame.coreData.info.shop.ShopGoodData;
@@ -222,7 +222,7 @@ package com.rpgGame.app.manager
 		 * 卖出物品发送C2S_SELL_GOODS，附带以下信息
 		 * byte 卖出物品的位置(背包中)
 		 */	
-		public static  function reqSellGoods( itemInfo:ItemInfo ):void
+		public static  function reqSellGoods( itemInfo:ClientItemInfo ):void
 		{
 			if(!itemInfo)return;
 			var isAlert:Boolean = PromptSetControl.instance.isAlert(PromptSaveNameEnum.SHOP_SELL_ITEM_ALERT);

@@ -6,12 +6,13 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.AddSpriteStatCfgData;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
+	import com.rpgGame.coreData.cfg.AttFormulaConfig;
+	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ChatCfgData;
 	import com.rpgGame.coreData.cfg.ClientAreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientBuffCfgData;
 	import com.rpgGame.coreData.cfg.ClientDialogCfgData;
-	import com.rpgGame.coreData.cfg.ClientSceneCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneEffectCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneNpcCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneRoleCfgData;
@@ -34,7 +35,6 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.StallCfgData;
 	import com.rpgGame.coreData.cfg.StatNameCfgData;
 	import com.rpgGame.coreData.cfg.TaxCfgData;
-	import com.rpgGame.coreData.cfg.TranportsDataManager;
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
@@ -42,7 +42,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.country.CountryStaticConfigData;
 	import com.rpgGame.coreData.cfg.country.CountryTaoNiCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarHairResCfgData;
@@ -152,6 +152,9 @@ package com.rpgGame.app.data
 //			ClientCountryWarChengMenCfgData.setup(dic[ConfigClassRegister.CountryWarChengMenInfo]);
 //			CrownPanelPagesCfgData.setup(dic[ConfigClassRegister.CrownPageInfo]);
 			ClientBuffCfgData.setUpHintTypeSet(dic[ConfigClassRegister.ClientBuff]);
+			ItemConfig.setup(dic[ConfigClassRegister.Q_item]);
+			AttValueConfig.setup(dic[ConfigClassRegister.Q_att_values]);
+			AttFormulaConfig.setup(dic[ConfigClassRegister.Q_att_transfer]);
 //			CountryUnionStatCfgData.setup(null); //待解决
 
 			
@@ -256,7 +259,7 @@ package com.rpgGame.app.data
 			//复活相关配置
 			ReliveCfgData.setConfig(config.reliveConfig);
 			//物品
-			ItemCfgData.setAllCfgData(config.goodsConfig);
+//			ItemCfgData.setAllCfgData(config.goodsConfig);
 			//背包仓库解锁格子数据
 			GoodsContainerMamager.setUnlockDataConfig(config.allUnlockData);
 			//帮派

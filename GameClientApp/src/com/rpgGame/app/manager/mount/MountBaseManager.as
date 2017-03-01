@@ -10,7 +10,7 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.coreData.enum.cost.CostCheckTypeEnum;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
 	import com.rpgGame.coreData.info.cost.CostInfo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	
 	import gs.TweenLite;
@@ -37,7 +37,7 @@ package com.rpgGame.app.manager.mount
 		/** 容器 **/
 		protected var _gridMap:HashMap;
 		/** 中心格子数据 **/
-		public var mainGrid:ItemInfo;
+		public var mainGrid:ClientItemInfo;
 		/**是否不再显示绑定切换**/
 		public var _isNotShowAlertBind : Boolean = false;
 		
@@ -72,7 +72,7 @@ package com.rpgGame.app.manager.mount
 		 * @return 
 		 * 
 		 */		
-		public function updateItemBind(item : ItemInfo,okfun:Function):Boolean
+		public function updateItemBind(item : ClientItemInfo,okfun:Function):Boolean
 		{
 			return true;
 		}
@@ -85,7 +85,7 @@ package com.rpgGame.app.manager.mount
 		public function itemsIsNull():Boolean
 		{
 			var isNull : Boolean = true;
-			var item : ItemInfo;
+			var item : ClientItemInfo;
 			for each(item in _gridMap.getValues())
 			{
 				if(item)
@@ -125,7 +125,7 @@ package com.rpgGame.app.manager.mount
 			}
 			var arr : Array = _gridMap.getValues();
 			var isBindItem : Boolean = false;
-			for each(var item : ItemInfo in arr)
+			for each(var item : ClientItemInfo in arr)
 			{
 				if(item && item.binded)
 				{
@@ -223,7 +223,7 @@ package com.rpgGame.app.manager.mount
 			var i:uint=0;
 			var vs:Array=_gridMap.getValues()
 			var len:uint=vs.length;
-			var itemInfo:ItemInfo;
+			var itemInfo:ClientItemInfo;
 			costCheck.clearHaveItem();
 			var costInfo : CostInfo;
 			for (; i < len; i++)
@@ -242,7 +242,7 @@ package com.rpgGame.app.manager.mount
 		 * @param itemInfo
 		 * 
 		 */		
-		public function updateGridData(index:int, itemInfo:ItemInfo):void
+		public function updateGridData(index:int, itemInfo:ClientItemInfo):void
 		{
 			_gridMap.add(index, itemInfo);
 		}

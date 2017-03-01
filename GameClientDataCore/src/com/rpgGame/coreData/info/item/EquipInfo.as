@@ -1,7 +1,7 @@
 package com.rpgGame.coreData.info.item
 {
 	import com.rpgGame.coreData.SpriteStat;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.netData.player.bean.AttributeItem;
 	
 	/**
@@ -9,7 +9,7 @@ package com.rpgGame.coreData.info.item
 	 * @author wewell@163.com
 	 *
 	 */
-	public class EquipInfo extends ItemInfo
+	public class EquipInfo extends ClientItemInfo
 	{
 		/** 评价 **/
 		public var evaluate:int;
@@ -48,26 +48,6 @@ package com.rpgGame.coreData.info.item
 		public function EquipInfo()
 		{
 
-		}
-		
-		/**
-		 * 装备等阶 
-		 * @return 
-		 * 
-		 */		
-		public function get levelStage():int
-		{
-			return ItemCfgData.getEquipmentLevlStage(cfgId);
-		}
-		
-		/**
-		 * 装备类型 
-		 * @return 
-		 * 
-		 */		
-		public function getEquipType():int
-		{
-			return ItemCfgData.getEquipmentType(cfgId);
 		}
 		
 		/**
@@ -132,32 +112,17 @@ package com.rpgGame.coreData.info.item
 		 */		
 		public function get equipType():int
 		{
-			return ItemCfgData.getEquipmentType(cfgId);
+			return ItemConfig.getItemType(cfgId);
 		}
 		
-		/**
-		 * 属性 
-		 * @return 
-		 * 
-		 */		
-		public function get race():int
-		{
-			return ItemCfgData.getEquipmentRace(cfgId);
-		}
-		
-		public function get sex():int
-		{
-			return ItemCfgData.getEquipmentSex(cfgId);
-		}
-		
-		override public function clone():ItemInfo
+		override public function clone():ClientItemInfo
 		{
 			var equipInfo : EquipInfo = new EquipInfo();
 			equipInfo.count = count;
 			equipInfo.cfgId = cfgId;
 			equipInfo.type = type;
 			equipInfo.name = name;
-			equipInfo.expireTime = expireTime;
+//			equipInfo.expireTime = expireTime;
 			equipInfo.evaluate = evaluate;
 			equipInfo.quality = quality;
 			equipInfo.base_stat = this.base_stat;

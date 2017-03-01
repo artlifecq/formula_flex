@@ -11,7 +11,7 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.GridInfo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.shortcuts.ShortcutsData;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	
@@ -64,7 +64,7 @@ package com.rpgGame.app.ui.main.shortcut
 		{
 			_gridVect = new Vector.<ShortcutGrid>();
 			var cd : ShortcutGrid;
-			var size : int = IcoSizeEnum.SIZE_46;
+			var size : int = IcoSizeEnum.ICON_48;
 			var gridInfo : GridInfo;
 			for (var i : int = 0; i < GRID_COUNT; i++)
 			{
@@ -228,8 +228,7 @@ package com.rpgGame.app.ui.main.shortcut
 					break;
 
 				case ShortcutsTypeEnum.ITEM_TYPE:
-					var itemInfo : ItemInfo = new ItemInfo();
-					itemInfo.cfgId = shortData.id;
+					var itemInfo : ClientItemInfo = new ClientItemInfo( shortData.id);
 					itemInfo.count = BackPackManager.instance.getItemCount(shortData.id);
 					FaceUtil.SetItemGrid(grid, itemInfo);
 					grid.isEnabled = itemInfo.count > 0;
@@ -337,7 +336,7 @@ package com.rpgGame.app.ui.main.shortcut
 			updateGrid(shortCutGridIndex);
 		}
 
-		private function onItemChang(itemInfo : ItemInfo) : void
+		private function onItemChang(itemInfo : ClientItemInfo) : void
 		{
 			if (!itemInfo)
 				return;

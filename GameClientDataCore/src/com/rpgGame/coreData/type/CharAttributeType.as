@@ -12,6 +12,8 @@ package com.rpgGame.coreData.type
 	 */	
 	public class CharAttributeType
 	{
+		public static const TYPE_NUM:int=16;
+		
 		/**
 		 * 力道
 		 */
@@ -102,6 +104,75 @@ package com.rpgGame.coreData.type
 		 */
 		public static const ATT_SPEED:int = 26;
 		
+		/**等级**/	
+		public static const LV:int =27;
+		/**治疗提升**/	
+		public static const CURE_LIFT:int =28;
+		/**减少技能CD百分比**/	
+		public static const SUB_SKILL_CD:int =29;
+		/**伤害加深百分比**/	
+		public static const HURT_ADD_PERCENT:int =30;
+		/**伤害加深固定值**/	
+		public static const HURT_ADD_FIX:int =31;
+		/**无视防御伤害**/	
+		public static const IGNORE_DEFENSE:int =32;
+		/**伤害减免百分比**/	
+		public static const HURT_SUB_PERCENT:int =33;
+		
+		/**攻击速度百分比**/	
+		public static const ATT_SPEED_PER:int =43;
+		/**战斗力**/	
+		public static const FIGHTING:int =44;
+		/**秒伤**/	
+		public static const HURT_SEC:int =45;
+		
+		
+		//资源属性
+		/**
+		 *经验 
+		 */
+		public static const  RES_EXP:int=1;
+		/**
+		 * 真气
+
+		 */
+		public static const  RES_ZHENQI:int=2;
+		/**
+		 * 元宝
+		 */
+		public static const  RES_GOLD:int=3;
+		/**
+		 * 银两
+		 */
+		public static const  RES_MONEY:int=4;
+		/**
+		 * 礼金
+		 */
+		public static const  RES_BIND_GOLD:int=5;
+		/**
+		 * 绑银
+		 */
+		public static const  RES_BIND_MONEY:int=6;
+		/**
+		 * 声望
+		 */
+		public static const  RES_PRESTIGE:int=7;
+		/**
+		 *帮派贡献
+		 */
+		public static const  RES_GUILD_DEVOTE:int=8;
+		/**
+		 * 荣誉点
+		 */
+		public static const  RES_HONOR:int=9;
+		/**
+		 * 匠心值
+		 */
+		public static const  RES_JIANGXING:int=10;
+		/**
+		 *BOSS积分
+		 */
+		public static const  RES_BOSS_TOTAL:int=11;
 		
 		
 		/**最大血量（生命）**/	
@@ -163,12 +234,6 @@ package com.rpgGame.coreData.type
 //		public static const MAX_PH:int = rEnum.next;
 		//---------------------------------------------------------------
 		
-		/**等级**/	
-		public static const LV:int = rEnum.ENUM_START(100);//上面的属性要跟服务器对应,有固定值...下面的客户端自己用,是随便值...
-		/**当前经验**/	
-		public static const EXP:int = rEnum.next;
-		/**下一级经验**/	
-		public static const MAX_EXP:int = rEnum.next;
 		/**pk模式**/	
 		public static const PK_MODE:int = rEnum.next;
 		/**hp自动回血百分比**/	
@@ -264,36 +329,51 @@ package com.rpgGame.coreData.type
 		
 		private static var idMap:Dictionary;
 		private static var enMap:Dictionary;
-		public static var baseAttrIdArr:Array;
+		public static var baseAttrIdArr:Array=[];
 		
 		private static function setup():void
 		{
 			idMap = new Dictionary();
-			enMap = new Dictionary();
-			baseAttrIdArr = [];
 			
 			//对应SpriteStat
-			pushAttir(MAX_HP, 							"life", 								"生命", 					"提高生命上限");
-			pushAttir(MAX_MP, 							"mana", 							"法术", 					"提高法术上限");
-//			pushAttir(PHYSICAL_ATTACK_LOWER, 	"physicalAttackLower", 		"物理攻击下限", 	"提高物理攻击最低伤害值");
-			pushAttir(WAI_GONG, 		"physicalAttackUpper", 		"物理攻击上限", 	"提高物理攻击最高伤害值");
-			pushAttir(PHYSICAL_DEFENCE, 				"physicalDefence", 			"物理防御", 			"降低受到的物理伤害");
-//			pushAttir(MAGICAL_ATTACK_LOWER, 		"magicalAttackLower", 		"法术攻击下限", 	"提高法术攻击最低伤害值");
-			pushAttir(NEI_GONG, 		"magicalAttackUpper", 		"法术攻击上限", 	"提高法术攻击最高伤害值");
-			pushAttir(MAGICAL_DEFENCE, 				"magicalDefence", 			"法术防御", 			"降低受到的法术伤害");
-			pushAttir(HIT, 									"hit", 								"命中", 					"提高攻击的命中概率");
-			pushAttir(CRIT, 									"crit", 								"暴击", 					"增加暴击、降低被暴击的概率");
-			pushAttir(SPEED, 						"moveSpeed", 					"移动速度", 			"移动速度");
+			pushAttir(LIDAO,"力道");
+			pushAttir(GENGU,"根骨");
+			pushAttir(SHENFA,"身法");
+			pushAttir(HUIGEN,"慧根");
+			pushAttir(HP,"气血");
+			pushAttir(MP,"能量");
+			pushAttir(MAX_HP,"最大气血");
+			pushAttir(MAX_MP,"最大能量");
+			pushAttir(WAI_GONG,"外功");
+			pushAttir(NEI_GONG,"最大能量");
+			pushAttir(DEFENSE_PER,"防御百分比");
+			pushAttir(CRIT_PER,"暴击率");
+			pushAttir(CRIT,"暴击伤害");
+			pushAttir(ANTI_CRIT_PER,"暴击抗性");
+			pushAttir(HP_REC,"生命回复");
+			pushAttir(MP_REC,"能量回复");
+			pushAttir(ANTI_EFFECT,"效果抵抗");
+			pushAttir(HIT,"命中率");
+			pushAttir(MISS,"闪避率");
+			pushAttir(SPEED,"移动速度");
+			pushAttir(ATT_SPEED,"攻击速度");
+			pushAttir(LV,"角色等级");
+			pushAttir(CURE_LIFT,"治疗效果提升");
+			pushAttir(SUB_SKILL_CD,"减少技能CD百分比");
+			pushAttir(HURT_ADD_FIX,"伤害加深百分比");
+			pushAttir(HURT_SUB_PERCENT,"伤害加深固定值");
+			pushAttir(ATT_SPEED_PER,"无视防御伤害");
+			pushAttir(FIGHTING,"战斗力");
+			pushAttir(HURT_SEC,"秒伤");
 		}
 		
 		setup();
 		
-		public static function pushAttir(id:int, en:String, cn:String, tip:String):void
+		public static function pushAttir(id:int,cn:String):void
 		{
-			var attri:Object = {id:id, en:en, cn:cn, tip:tip};
-			idMap[id] = attri;
-			enMap[en] = attri;
 			baseAttrIdArr.push(id);
+			var attri:Object = {id:id, cn:cn};
+			idMap[id] = attri;
 		}
 		
 		/**

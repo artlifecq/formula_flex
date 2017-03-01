@@ -12,7 +12,7 @@ package com.rpgGame.app.manager.trade
 	import com.rpgGame.core.events.TradeEvent;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.info.item.GridInfo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.trade.TradeData;
 	import com.rpgGame.coreData.info.trade.TradeTargetData;
 	import com.rpgGame.coreData.lang.LangTrade;
@@ -72,10 +72,10 @@ package com.rpgGame.app.manager.trade
 			NoticeManager.showNotify("交易已经结束了");
 			AppManager.hideApp(AppConstant.TRADE_PANEL);
 			var mineItems : Array = _mineTrade.getAllItems();
-			var item :ItemInfo;
+			var item :ClientItemInfo;
 			for (var i:int = 0 ; i < mineItems.length;i++)
 			{
-				item = (mineItems[i] as GridInfo).data as ItemInfo;
+				item = (mineItems[i] as GridInfo).data as ClientItemInfo;
 				if(!item)
 					continue;
 				GoodsContainerMamager.setItemInfo(ItemContainerID.BackPack,item.index,null);
@@ -97,7 +97,7 @@ package com.rpgGame.app.manager.trade
 			{
 				if(targetItems[i] is GridInfo)
 				{
-					item = (targetItems[i] as GridInfo).data as ItemInfo;
+					item = (targetItems[i] as GridInfo).data as ClientItemInfo;
 					if(!item)
 						continue;
 					index = itemsIndex[i];
@@ -237,7 +237,7 @@ package com.rpgGame.app.manager.trade
 		{
 			if(_mineTrade.getWaitRemoveIndex() != -1)
 			{
-				var itemInfo : ItemInfo = _mineTrade.getItemInfoByIndex(_mineTrade.getWaitRemoveIndex());
+				var itemInfo : ClientItemInfo = _mineTrade.getItemInfoByIndex(_mineTrade.getWaitRemoveIndex());
 				if(itemInfo)
 					GoodsContainerMamager.removeLockAssetByIndex(ItemContainerID.BackPack,itemInfo.index);
 			}
@@ -267,7 +267,7 @@ package com.rpgGame.app.manager.trade
 		{
 			if(_mineTrade.hasWaitItem())
 			{
-				var item : ItemInfo = _mineTrade.getWaitItemInfo();
+				var item : ClientItemInfo = _mineTrade.getWaitItemInfo();
 				if(item)
 					GoodsContainerMamager.setShowLockAssetIndex(ItemContainerID.BackPack,item.index);
 			}
@@ -289,7 +289,7 @@ package com.rpgGame.app.manager.trade
 				trace("需要等待上一次操作完成，才能继续操作");
 				return;
 			}
-			var item : ItemInfo = tradeitem.data as ItemInfo;
+			var item : ClientItemInfo = tradeitem.data as ClientItemInfo;
 			if(!item)
 			{
 				trace("放上来的物品有误");
@@ -301,7 +301,7 @@ package com.rpgGame.app.manager.trade
 				trace("绑定物品无法交易");
 				return;
 			}
-			var itemInfo : ItemInfo = _mineTrade.getItemInfoByIndex(tradeitem.index);
+			var itemInfo : ClientItemInfo = _mineTrade.getItemInfoByIndex(tradeitem.index);
 			if(itemInfo)
 			{
 				//如果之前是有物品的，那就把这个物品从背包里面解锁
@@ -309,7 +309,7 @@ package com.rpgGame.app.manager.trade
 			}
 			_mineTrade.setWaitItem(tradeitem);
 //			setMineGoodsComplete();		
-			TradeSender.tradeSetGoods(tradeitem.index,(tradeitem.data as ItemInfo).index,(tradeitem.data as ItemInfo).cfgId);
+			TradeSender.tradeSetGoods(tradeitem.index,(tradeitem.data as ClientItemInfo).index,(tradeitem.data as ClientItemInfo).cfgId);
 		}
 		
 		/**清除我邀请交易的目标ID**/

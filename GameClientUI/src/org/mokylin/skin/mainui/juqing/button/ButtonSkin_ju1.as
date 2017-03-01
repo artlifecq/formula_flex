@@ -53,12 +53,12 @@ package org.mokylin.skin.mainui.juqing.button
 						,
 						{target:"labelDisplay",
 							name:"color",
-							value:0xBCB6A7
+							value:0xC3C198
 						}
 						,
 						{target:"labelDisplay",
 							name:"nativeFilters",
-							value:Fontter.filterObj["labelFilterBlack"]
+							value:Fontter.filterObj["labelFilterBlack2"]
 						}
 						,
 						{target:"labelDisplay",
@@ -95,8 +95,8 @@ package org.mokylin.skin.mainui.juqing.button
 			temp.right = 0;
 			temp.text = "";
 			temp.textAlign = "center";
-			temp.color = 0xBCB6A7;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xC3C198;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
 			temp.top = 0;
 			temp.verticalAlign = "middle";
 			return temp;

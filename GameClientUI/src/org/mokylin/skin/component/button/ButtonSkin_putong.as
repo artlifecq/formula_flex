@@ -85,7 +85,7 @@ package org.mokylin.skin.component.button
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack3"];
 			temp.top = 0;
 			temp.verticalAlign = "middle";
-			temp.verticalCenter = -2;
+			temp.verticalCenter = -1;
 			return temp;
 		}
 

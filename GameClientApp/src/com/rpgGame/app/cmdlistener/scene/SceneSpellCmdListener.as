@@ -203,7 +203,7 @@ package com.rpgGame.app.cmdlistener.scene
 		private function onSCAttackerResultMessage(msg:SCAttackerResultMessage):void
 		{
 			GameLog.addShow("技能伤害流水号为： \t" + msg.uid);
-			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg.uid, msg);
+			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg.uid, msg,true);
 			SpellHitHelper.fightSpellHitEffect(info);
 			effectCharAttribute(info);
 		}

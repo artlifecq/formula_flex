@@ -2,7 +2,7 @@ package com.rpgGame.app.view.icon
 {
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.coreData.info.item.GridInfo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.type.item.GridBGType;
 
 	/**
@@ -65,8 +65,8 @@ package com.rpgGame.app.view.icon
 					setGridUnlock();
 				}
 			}
-			if(_gridInfo.data is ItemInfo)
-				setIsShowLockAsset(_gridInfo.isShowLockAsset,(_gridInfo.data as ItemInfo).binded);
+			if(_gridInfo.data is ClientItemInfo)
+				setIsShowLockAsset(_gridInfo.isShowLockAsset,(_gridInfo.data as ClientItemInfo).binded);
 			
 			isEnabled = _gridInfo.isEnabled;
 		}

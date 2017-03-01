@@ -23,7 +23,7 @@ package com.rpgGame.app.manager.society
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.society.SocietyData;
 	import com.rpgGame.coreData.info.society.SocietyDetailData;
 	import com.rpgGame.coreData.info.society.SocietyJoinApproveData;
@@ -863,7 +863,7 @@ package com.rpgGame.app.manager.society
 //			sceneRole.headFace.addAndUpdateFamilyName();
 		}
 
-		public static function useFamilyLeaderToken(item : ItemInfo) : void
+		public static function useFamilyLeaderToken(item : ClientItemInfo) : void
 		{
 			var selfMemberData : SocietyMemberData = getSelfMemberData();
 			if (!selfMemberData || !selfMemberData.isLeader)
@@ -885,7 +885,7 @@ package com.rpgGame.app.manager.society
 			GameAlert.showAlert(alertSet,useFamilyLeaderTokenClick,item);
 		}
 		
-		private static function useFamilyLeaderTokenClick(gameAlert:GameAlert,item : ItemInfo):void
+		private static function useFamilyLeaderTokenClick(gameAlert:GameAlert,item : ClientItemInfo):void
 		{
 			switch(gameAlert.clickType)
 			{
@@ -895,11 +895,11 @@ package com.rpgGame.app.manager.society
 			}			
 		}
 
-		private static function onUseFamilyLeaderToken(item : ItemInfo) : void
+		private static function onUseFamilyLeaderToken(item : ClientItemInfo) : void
 		{
 			var msgBytes : ByteBuffer = new ByteBuffer();
 			msgBytes.writeUTFBytes(LangSociety.FAMILY_LEADER_TOKEN_CONVENE_MSG);
-			ItemSender.reqUseGoods(item.index, 1, msgBytes);
+//			ItemSender.reqUseGoods(item.index, 1, msgBytes);
 		}
 
 		public static function setLeaderSummon(tokenData : SummonTokenData) : void

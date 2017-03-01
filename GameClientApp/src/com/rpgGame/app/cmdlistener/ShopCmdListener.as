@@ -4,12 +4,11 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
-	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.core.events.ShopEvent;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.shop.ShopBuyBackGoodsData;
 	import com.rpgGame.coreData.info.shop.ShopItemBuyInfo;
 	import com.rpgGame.coreData.type.ShopType;
@@ -183,13 +182,13 @@ package com.rpgGame.app.cmdlistener
 			var buyBackPos:int = buffer.readVarint32();
 			var backPackGridId:int = buffer.readVarint32();
 			
-			var itemInfo:ItemInfo = SmallShopItemManager.delBackBuyItem( buyBackPos ).itemInfo;
+			var itemInfo:ClientItemInfo = SmallShopItemManager.delBackBuyItem( buyBackPos ).itemInfo;
 			if( itemInfo != null )
 			{
 				itemInfo.setIndex( backPackGridId );
 				
 				var qualityColor:int = ItemQualityType.getColorValue(itemInfo.quality)
-				var itemQualityColorName:String = HtmlTextUtil.getTextColor( qualityColor, ItemCfgData.getItemName( itemInfo.cfgId ) );
+				var itemQualityColorName:String = HtmlTextUtil.getTextColor( qualityColor, ItemConfig.getItemName( itemInfo.cfgId ) );
 				
 				NoticeManager.showHint( EnumHintInfo.BUY_BACK_GOODS_SUCCESS, [ itemQualityColorName ] );
 			}
@@ -242,11 +241,11 @@ package com.rpgGame.app.cmdlistener
 			var gridId:int = buffer.readVarint32();
 			var extime:Number = buffer.readVarint64();
 			
-			var itemInfo:ItemInfo = BackPackManager.instance.getItemInfoByIndex( gridId );
+			var itemInfo:ClientItemInfo = BackPackManager.instance.getItemInfoByIndex( gridId );
 			if( itemInfo != null )
 			{
 				var qualityColor:int = ItemQualityType.getColorValue(itemInfo.quality)
-				var itemQualityColorName:String = HtmlTextUtil.getTextColor( qualityColor, ItemCfgData.getItemName( itemInfo.cfgId ) );
+				var itemQualityColorName:String = HtmlTextUtil.getTextColor( qualityColor, ItemConfig.getItemName( itemInfo.cfgId ) );
 				
 				NoticeManager.showHint( EnumHintInfo.SELL_GOODS_SUCCESS, [ itemQualityColorName ] );
 			}

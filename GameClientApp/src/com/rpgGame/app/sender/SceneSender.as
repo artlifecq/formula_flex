@@ -1,14 +1,12 @@
 package com.rpgGame.app.sender
 {
-	import com.game.engine3D.utils.PathFinderUtil;
 	import com.gameClient.log.GameLog;
-	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.scene.FirstEnterSceneManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.utils.ReqLockUtil;
-	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
 	import com.rpgGame.coreData.type.CostItemType;
+	import com.rpgGame.netData.backpack.message.ReqTakeUpMessage;
 	import com.rpgGame.netData.login.message.ReqLoadFinishMessage;
 	import com.rpgGame.netData.map.message.ReqChangeMapByMoveMessage;
 	import com.rpgGame.netData.map.message.ReqChangeMapCommonMessage;
@@ -25,6 +23,7 @@ package com.rpgGame.app.sender
 	
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 
 	/**
@@ -299,15 +298,11 @@ package com.rpgGame.app.sender
 		 *
 		 * varint64 物品id
 		 */
-//		public static function requestPickUpGoodsInfo(sceneGoodsId : Number) : void
-//		{
-//			if (ReqLockUtil.isReqLocked(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS_INFO))
-//				return;
-//			ReqLockUtil.lockReq(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS_INFO, 5 * 1000);
-//
-//			_bytes.clear();
-//			_bytes.writeVarint64(sceneGoodsId);
-//			send(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS_INFO, _bytes);
-//		}
+		public static function requestPickUpGoodsInfo(sceneGoodsId : long) : void
+		{
+			var msg:ReqTakeUpMessage=new ReqTakeUpMessage();
+			msg.goodsId=sceneGoodsId;
+			SocketConnection.send(msg);
+		}
 	}
 }

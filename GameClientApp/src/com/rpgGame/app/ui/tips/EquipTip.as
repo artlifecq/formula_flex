@@ -1,25 +1,29 @@
 package com.rpgGame.app.ui.tips
 {
+	import com.rpgGame.app.manager.fight.FightValueUtil;
+	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
-	import com.rpgGame.coreData.SpriteStat;
-	import com.rpgGame.coreData.cfg.StatNameCfgData;
+	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.clientConfig.Q_att_values;
+	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.item.EquipInfo;
-	import com.rpgGame.coreData.info.stat.StatData;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.item.GridBGType;
-	import com.rpgGame.netData.player.bean.AttributeItem;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
-	import app.message.Quality;
+	import app.message.EquipType;
 	
-	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
 	
 	import org.client.mainCore.ds.HashMap;
-	
-	import starling.display.DisplayObject;
+	import org.mokylin.skin.app.tips.zhuangbeiTips_Skin;
 
 	/**
 	 * 装备tips 
@@ -28,41 +32,29 @@ package com.rpgGame.app.ui.tips
 	 */	
 	public class EquipTip extends SkinUI implements ITip
 	{
-		private var _itemTip:Object;//EquipTipsSkin;
-		private const lineHeight:int=20;
-//		private const MIN_STAT:Array=[StatType.PHYSICAL_ATTACK_LOWER, StatType.MAGICAL_ATTACK_LOWER];//10,13
-//		private const MAX_STAT:Array=[StatType.PHYSICAL_ATTACK_UPPER, StatType.MAGICAL_ATTACK_UPPER];//11,14
-		private var spriteStatLines:Vector.<StatLine>;
-		private var statPool:Vector.<StatLine>;
-		/** 索引 **/
-		private var childIndex:int=0;
-		/** 装备品质底图 **/
-		private var qualityBgs:HashMap;
-		/** 装备信息 **/
-		private var _itemInfo:EquipInfo;
-		/** 装备格子 **/
-		private var _iconFace:IconCDFace;
-		/** 基础属性Title **/
-		private var baseStatTitle:Group;
-		/** 随机属性Title **/
-		private var randomStatTitile:Group;
-		/** 强化属性Title **/
-		private var generalStatTitle:Group;
-		/** 武器名字 **/
-		private var generalName:Label;
-		/** 装备套装名字 **/
-		private var generalTaozName:Label;
-		/** 基础属性group **/
-		private var baseGroup:Group;
-		/** 强化星星等级 **/
-		private var equipRefineTimes : EquipRefineTimesBar;
+		private var _itemTip:zhuangbeiTips_Skin;
+
 		private static var _instance:EquipTip=null;
+		private var _iconFace:IconCDFace;
+		private var _itemInfo:ClientItemInfo;
+		private var isShowDuiBi:Boolean;
+		private var yinIcon:UIAsset;
+		
+		private var _equipTip:EquipTip;
+		private var _isDuibiShow:Boolean;
+		private var labelList:Vector.<Label>;
+		private var lines:Vector.<UIAsset>;
 
 		public function EquipTip()
 		{
-//			_itemTip=new EquipTipsSkin();
+			_itemTip=new zhuangbeiTips_Skin();
 			super(_itemTip);
 			initTip();
+		}
+
+		public function set isDuibiShow(value:Boolean):void
+		{
+			_isDuibiShow = value;
 		}
 
 		public static function get instance():EquipTip
@@ -84,148 +76,265 @@ package com.rpgGame.app.ui.tips
 			_iconFace=new IconCDFace(IcoSizeEnum.SIZE_60);
 			addChild(_iconFace);
 			_iconFace.setBg(GridBGType.GRID_SIZE_60);
-			_iconFace.x=30;
-			_iconFace.y=67;
+			_iconFace.x=5;
+			_iconFace.y=35;
 			_iconFace.setIconPoint(8, 8);
-
-			baseGroup=_itemTip.baseGroup;
-
-			spriteStatLines=new Vector.<StatLine>();
-			statPool=new Vector.<StatLine>();
-			
-			//初始化品质底图
-			qualityBgs=new HashMap();
-			qualityBgs.add(Quality.PURPLE, _itemTip.qualityBg2);
-			qualityBgs.add(Quality.WHITE, _itemTip.qualityBg3);
-			qualityBgs.add(Quality.YELLOW, _itemTip.qualityBg1);
-			qualityBgs.add(Quality.BLUE, _itemTip.qualityBg0);
-			qualityBgs.add(Quality.GREEN, _itemTip.qualityBg4);
-			
-			//修理价格
-			_itemTip.xiuliCostGroup.visible = false;
-			//绑定还是非绑定
-			_itemTip.isBind.visible = false;
-			
-			equipRefineTimes = new EquipRefineTimesBar();
-			equipRefineTimes.x = _itemTip.refine.x;
-			equipRefineTimes.y = _itemTip.refine.y;
-			addChild(equipRefineTimes);
+			_itemTip.container.addChild(_iconFace);
+			labelList=new Vector.<Label>();
+			lines=new Vector.<UIAsset>();
+			yinIcon=new UIAsset();
+			yinIcon.styleName="ui/common/tubiao/yinzi_24.png";
 		}
 
-		/**
-		 * 设置装备tips数据 
-		 * @param data
-		 * 
-		 */		
 		public function setTipData(data:*):void
 		{
-//			_itemInfo=data as EquipInfo;
-//
-//			if (_itemInfo == null)
-//				return;
-//
-//			var statline:StatLine;
-//			while (spriteStatLines.length)
-//			{
-//				statline=spriteStatLines.shift();
-//				if (statline && statline.parent)
-//					statline.parent.removeChild(statline);
-//				statPool.push(statline);
-//			}
-//			equipRefineTimes.setRefineTimes(_itemInfo.refined_times);
-//
-//			//清楚数据,基础属性、随机属性、名将属性、XXX的武器、套装
-//			baseGroup.removeChild(_itemTip.baseStatTitle);
-//			baseGroup.removeChild(_itemTip.randomStatTitile);
-//			baseGroup.removeChild(_itemTip.generalStatTitle);
-//			baseGroup.removeChild(_itemTip.generalName);
-//			baseGroup.removeChild(_itemTip.generalTaozName);
-//
-//			spriteStatLines.length=0;
-//
-//			//设置装备格子信息
-//			FaceUtil.SetItemGrid(_iconFace, _itemInfo, false);
-//			//装备名字
-//			_itemTip.labName.htmlText=ItemQualityType.getHtmlEquipQualityEvaluteName(_itemInfo.refined_times, _itemInfo.quality, _itemInfo.name, _itemInfo.evaluate);
-//			//装备品质
-//			setQualityVisable(_itemInfo.quality);
-//			//绑定还是非绑定
-////			_itemTip.isBind.visible = _itemInfo.isEquipBind;
-//			var sex : String = _itemInfo.sex?"("+SexType.getName(_itemInfo.sex)+")":"";
-//			//装备类型
-////			_itemTip.equipType.text=_itemInfo.race?RaceCfgData.getRaceName(_itemInfo.race):EquipTypeNameCfgData.getTypeName(_itemInfo.equipType)+sex;
-//			//装备位置
-////			_itemTip.equipType0.text=EquipTypeNameCfgData.getTypeName(_itemInfo.equipType);
-//			//装备等级
-//			_itemTip.equipLvl.text=_itemInfo.level + "";
-//			//耐久度
-//			_itemTip.equipNaijiu.text=(_itemInfo.durability - _itemInfo.used_durability) + "/" + _itemInfo.durability;
-//
-//			childIndex=-1;
-//			
-//			//获取基础属性
-//			if (_itemInfo.baseSpriteStat.getStatValues().length > 0)
-//			{
-//				baseGroupAddchild(_itemTip.baseStatTitle);
-//				SpriteStatLineUtil.createSpriteStatLine(StatLine,baseGroupAddchild,_itemInfo.baseSpriteStat,true,_itemInfo.refinedStat);
-//			}
-//
-//			//获取随机属性
-//			if (_itemInfo.randomSpriteStat.getStatValues().length > 0)
-//			{
-//				baseGroupAddchild(_itemTip.randomStatTitile);
-//				SpriteStatLineUtil.createSpriteStatLine(StatLine,baseGroupAddchild,_itemInfo.randomSpriteStat);
-//			}
-//			
-//			//获取套装属性
-////			var equipGeneralTaoz:EquipmentGeneralTaozDataProto=EquipmentGeneralCfgData.getGeneralTaozData(_itemInfo.general_taoz_id);
-////			if (equipGeneralTaoz)
-////			{
-////				baseGroupAddchild(_itemTip.generalStatTitle);
-////				baseGroupAddchild(_itemTip.generalName);
-////				baseGroupAddchild(_itemTip.generalTaozName);
-////				_itemTip.generalName.text=equipGeneralTaoz.name + "的" + EquipTypeNameCfgData.getTypeName(_itemInfo.type);
-////				_itemTip.generalTaozName.htmlText=LanguageConfig.getText(LangEquip.GENERAL_TAOZ_NAME, equipGeneralTaoz.name, EquipmentGeneralCfgData.getGeneralTaozAddSpriteStatsLenght(equipGeneralTaoz));
-////				var spritestatMap:HashMap=EquipmentGeneralCfgData.getGeneralTaozAddSpriteStats(equipGeneralTaoz);
-////				if (spritestatMap.length > 0)
-////					updateSpriteStateLabel(spritestatMap);
-//			}
-//
-//			//描述
-//			_itemTip.labDecTitle.text=_itemInfo.desc ? _itemInfo.desc : "没有填写描述";
-//			_itemTip.labDecTitle.height = _itemTip.labDecTitle.bounds.height;
-//			//评分
-//			_itemTip.pingfen.text=_itemInfo.fighting_amount + "";
-//			//出售价格
-//			_itemTip.sell.htmlText=MoneyUtil.getHtmlMoneyString( _itemInfo.sellPrize, true, StaticValue.COLOR_CODE_1, StaticValue.COLOR_CODE_1, StaticValue.COLOR_CODE_1, StaticValue.COLOR_CODE_26, StaticValue.COLOR_CODE_16, StaticValue.COLOR_CODE_14 );
-//			var display:DisplayObject;
-//			var height:int=0;
-//			var index:int=0;
-//			
-//			//计算baseGroup的高度
-//			for (; index < baseGroup.numChildren; index++)
-//			{
-//				display=baseGroup.getChildAt(index);
-//				if ( display )
-//				{
-//					if( display is Label )//重新计算lab的真实高度 2016-06-21 陈鹉光 改
-//					{
-//						display.height = (display as Label).textBounds.height;
-//					}
-//					height+=display.height;
-//				}
-//			}
-//			
-//			//装备tips背景高度
-//			_itemTip.imgBG.height=baseGroup.y + height + lineHeight;
+			_itemInfo = data as ClientItemInfo;
+			FaceUtil.SetItemGrid(_iconFace, _itemInfo, false);
+			
+			var info:HeroData=MainRoleManager.actorInfo;
+			while(labelList.length!=0){
+				var l:Label=labelList.shift();
+				l.removeFromParent(true);
+			}
+			while(lines.length!=0){
+				var line:UIAsset=lines.shift();
+				line.removeFromParent(true);
+			}
+			_itemTip.lbl_titile.text=_itemInfo.qItem.q_name;
+			var equipItemInfo:ClientItemInfo=RoleEquipmentManager.instance.getEquipInfoByIndex(_itemInfo.qItem.q_kind);//根据佩戴部位获取已经装备的装备信息
+			var equipFight:Number=FightValueUtil.getFightValueByEquip(_itemInfo);
+			var currentFight:int=0;
+			if(equipItemInfo){
+				currentFight=FightValueUtil.getFightValueByEquip(equipItemInfo);
+			}
+			_itemTip.numbers.number=equipFight;
+			_itemTip.tip_down.visible=false;
+			_itemTip.tip_up.visible=false;
+			if(equipFight>currentFight){//装备后战斗力提升
+				_itemTip.tip_up.visible=true;
+			}else if(equipFight<currentFight){
+				_itemTip.tip_down.visible=true;
+			}
+			
+			_itemTip.isLock.visible=true;
+			if(_itemInfo.binded){
+				_itemTip.Icon_lock.visible=true;
+				_itemTip.isLock.text="[已绑定]"
+			}else{
+				_itemTip.Icon_lock.visible=false;
+				if(_itemInfo.qItem.q_bind==0){
+					_itemTip.isLock.visible=false;
+				}else if(_itemInfo.qItem.q_bind==1){
+					_itemTip.isLock.visible="[获得时绑定]";
+				}else{
+					_itemTip.isLock.visible="[使用后绑定]";
+				}
+			}
+			
+			_itemTip.yizhuangbei.visible=false;
+			isShowDuiBi=false;
+			if(equipItemInfo){
+				if(_itemInfo==equipItemInfo){
+					_itemTip.yizhuangbei.visible=true;
+				}else if(_itemInfo.qItem.q_job==0||_itemInfo.qItem.q_job==equipItemInfo.qItem.q_job){//职业符合
+					isShowDuiBi=true;
+				}
+			}
+			
+			_itemTip.lbl_xuqiu.text=_itemInfo.qItem.q_level+"级";
+			_itemTip.lbl_zhiye.text=getJobName(_itemInfo.qItem.q_job);
+			_itemTip.lbl_pingzhi.text=_itemInfo.qItem.q_levelnum.toString();
+			_itemTip.lbl_buwei.text=EquipType.EquipNames[_itemInfo.qItem.q_kind];
+			
+			if(_itemInfo.qItem.q_max_strengthen!=0){
+				_itemTip.lbl_qianghuatitle.visible=true;
+				_itemTip.lbl_qianghua.visible=_itemInfo.qItem.q_max_strengthen.toString();
+			}else{
+				_itemTip.lbl_qianghuatitle.visible=false;
+				_itemTip.lbl_qianghua.visible=false;
+			}
+			
+			createLine(10,160,270);
+			
+			var name:String;
+			var value:String;
+			var attValues1:Q_att_values=AttValueConfig.getAttInfoById(int(_itemInfo.qItem.q_att_type));
+			var map1:HashMap=new HashMap();
+		
+			var label:Label;
+			var curY:int=170;
+			var num:int=0;
+			for(var i:int=1;i<CharAttributeType.TYPE_NUM;i++){
+				if(attValues1["q_value"+i]!=0){
+					map1.add(attValues1["q_type"+i],attValues1["q_value"+i]);
+				}
+			}
+			var ids:Array=CharAttributeType.baseAttrIdArr;
+			name=HtmlTextUtil.getTextColor(0xCFC6AE,"[基础属性]\n");
+			label=createLabel(name,"");
+			label.x=10;
+			label.y=curY;
+			var id:int;
+			var per:String="";
+			for each(id in ids){
+				var v:int=map1.getValue(id);
+				if(v==0){
+					continue;
+				}
+				if(num%2==0){
+					curY+=25;
+				}
+				num++;
+				name=CharAttributeType.getCNName(id);
+				if(name.indexOf("率")!=-1||name.indexOf("百分比")!=-1){
+					per="%"
+				}else{
+					per="";
+				}
+				name=HtmlTextUtil.getTextColor(0x8B8D7B,name+":");
+				value=HtmlTextUtil.getTextColor(0xCFC6AE,v+per);
+				label=createLabel(name,value);
+				if(num%2!=0){
+					label.x=10;
+				}else{
+					label.x=155;
+				}
+				label.y=curY;
+			}
+			
+			//琢磨等级暂时不管
+			//洗练属性也不管
+			
+			createLine(10,curY+25,270);
+			curY+=35;
+			name=HtmlTextUtil.getTextColor(0xCFC6AE,"[装备产出]\n");
+			label=createLabel(name,_itemInfo.qItem.q_describe);
+			label.width=250;
+			label.leading=5;
+			label.wordWrap=true;
+			label.x=10;
+			label.y=curY;
+			curY=curY+label.height+5;
+			createLine(10,curY,270);
+			
+			name=HtmlTextUtil.getTextColor(0x8B8D7B,"售价:");
+			value=HtmlTextUtil.getTextColor(0x5CB006,"     "+_itemInfo.qItem.q_sell_price.toString());
+			_itemTip.container.addChild(yinIcon);
+			label=createLabel(name,value);
+			curY=curY+5
+			label.x=10;
+			label.y=curY;
+			yinIcon.x=50;
+			yinIcon.y=curY-5;
+			
+			
+			_itemTip.grp_duibi.visible=false;
+			if(isShowDuiBi&&!_isDuibiShow){
+				showCurrentEquipInfo(equipItemInfo);
+				
+				var attValues2:Q_att_values=AttValueConfig.getAttInfoById(int(equipItemInfo.qItem.q_att_type));
+				var map2:HashMap=new HashMap();
+				
+				for(i=1;i<CharAttributeType.TYPE_NUM;i++){
+					if(attValues2["q_value"+i]!=0){
+						map2.add(attValues2["q_type"+i],attValues2["q_value"+i]);
+					}
+				}
+				
+				curY=curY+5;
+				_itemTip.grp_duibi.y=curY;
+				curY+=25;
+				num=0;
+				for each(id in ids){
+					var value1:int=map1.getValue(id);
+					var value2:int=map2.getValue(id);
+					var change:int;
+					if(value1!=0||value2!=0){
+						change=value1-value2;
+						num++;
+					}else{
+						continue;						
+					}
+					var valueName:String= CharAttributeType.getCNName(id);
+					name=HtmlTextUtil.getTextColor(0xCFC6AE,valueName+":");
+					if(change>=0){
+						value=HtmlTextUtil.getTextColor(0x5CB006,"+"+change.toString());
+					}else{
+						value=HtmlTextUtil.getTextColor(0xE1201C,change.toString());
+					}
+					
+					label=createLabel(name,value);
+					if(num%2!=0){
+						label.x=10;
+					}else{
+						label.x=155;
+					}
+					label.y=curY;
+					if(num%2==0){
+						curY+=25;
+					}
+				}
+			}
+			
+			_itemTip.imgBG.height=curY+30;
 		}
-
+		
+		private function showCurrentEquipInfo(equipItemInfo:ClientItemInfo):void
+		{
+			if(!_equipTip){
+				_equipTip=new EquipTip();
+			}
+			_equipTip.setTipData(equipItemInfo);
+			_equipTip.isShowDuiBi=true;
+			this._itemTip.container.addChild(_equipTip);
+			_equipTip.x=this.x+this.width;
+		}		
+		
+		private function createLabel(name:String,value:String):Label
+		{
+			var label:Label=new Label();
+			label.fontSize=14;
+			label.htmlText=name+value;
+			_itemTip.container.addChild(label);
+			labelList.push(label);
+			return label;
+		}
+		
+		private function getJobName(job:int):String
+		{
+			switch (job)
+			{
+				case JobEnum.ROLE_1_TYPE:
+					return JobEnum.ROLE_1_NAME;
+				case JobEnum.ROLE_2_TYPE:
+				case JobEnum.ROLE_3_TYPE:
+					return JobEnum.ROLE_2_NAME;
+				case JobEnum.ROLE_4_TYPE:
+					return JobEnum.ROLE_3_NAME;
+			}
+			return "不存在的职业"
+		}
+		
+		private function createLine(x:int,y:int,w:int):void
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/tips/tips_1fengexian.png";
+			temp.width=w;
+			temp.x=x;
+			temp.y=y;
+			lines.push(temp);
+			_itemTip.container.addChild(temp);
+		}
+		
 		/**
 		 * 移除装备tips 
 		 * 
 		 */		
 		public function hideTips():void
 		{
+			if(_equipTip){
+				_equipTip.removeFromParent();
+			}
 		}
 
 		/**
@@ -237,242 +346,6 @@ package com.rpgGame.app.ui.tips
 		{
 			return _itemTip.imgBG.height;
 		}
-
-		/**
-		 * 装备属性 
-		 * @param spriteStateMap
-		 * 
-		 */		
-		private function updateSpriteStateLabel(spriteStateMap:HashMap):void
-		{
-			var i:int=0;
-			var len:int;
-			var label:StatLine;
-			var index:int;
-			var spriteState:Vector.<AttributeItem>;
-			if (!spriteStateMap)
-				return;
-			var spriteStates:Array=spriteStateMap.getValues();
-			var spriteStateInfo:SpriteStat=new SpriteStat();
-			;
-			var statData:StatData;
-			var statDatas:Array;
-			var statValue:String;
-			for each (spriteState in spriteStates)
-			{
-				if (!spriteState)
-					continue;
-				spriteStateInfo.setData(spriteState);
-				statDatas=spriteStateInfo.getStatValues();
-				len=statDatas.length;
-				i=0;
-				for (; i < len; i++)
-				{
-					statData=statDatas[i];
-					label=new StatLine();
-					baseGroupAddchild(label);
-					statValue=statData.value ? statData.value.toString() : statData.percent + "%";
-					label.setData(StatNameCfgData.getStatName(statData.type), statValue, spriteStateMap.key(spriteState));
-					index++;
-				}
-			}
-		}
-
-		/**
-		 * 设置装备品质 
-		 * @param q
-		 * 
-		 */		
-		private function setQualityVisable(q:int):void
-		{
-			var uiasset:UIAsset;
-			for each (uiasset in qualityBgs.getValues())
-			{
-				uiasset.visible=false;
-			}
-			uiasset=qualityBgs.getValue(q);
-			if (uiasset)
-				uiasset.visible=true;
-		}
-
-		/**
-		 * 添加一条属性 
-		 * @param display
-		 * 
-		 */		
-		private function baseGroupAddchild(display:DisplayObject):void
-		{
-			childIndex++;
-			baseGroup.addChildAt(display, childIndex);
-			if(display is StatLine)
-				spriteStatLines.push(display);
-		}
-	}
-}
-import com.rpgGame.core.ui.SpriteStatLine;
-import com.rpgGame.coreData.cfg.LanguageConfig;
-import com.rpgGame.coreData.info.stat.StatData;
-import com.rpgGame.coreData.lang.LangEquip;
-
-import feathers.controls.UIAsset;
-
-import org.client.mainCore.ds.HashMap;
-
-import starling.display.Sprite;
-
-/**
- * 属性条 
- * @author 陈鹉光
- * 
- */
-class StatLine extends SpriteStatLine
-{
-	public var skin:Object;//EquipGeneralStatLineSkin;
-
-	public function StatLine()
-	{
-//		skin=new EquipGeneralStatLineSkin();
-		super(skin);
-	}
-
-	/**
-	 * 设置单条属性条数据 
-	 * @param statName  名字
-	 * @param statAdd 增加的属性
-	 * @param taozCount 套装数 XXXX件
-	 * 
-	 */	
-	public function setData(statName:String, statAdd:String, taozCount:int):void
-	{
-		skin.statName.text=statName;
-		skin.statAdd.text=statAdd;
-		skin.taozCount.htmlText=LanguageConfig.getText(LangEquip.GENERAL_TAOZ_STAT, taozCount);
-	}
-
-	/**
-	 * 设置基础属性 
-	 * @param str
-	 * @param stat
-	 * 
-	 */	
-	override public function setBaseStatStr(str:String,stat:StatData):void
-	{
-		skin.statName.htmlText=str;
-	}
-	
-	/**
-	 * 设置其他属性 
-	 * @param isAdd
-	 * @param addValue
-	 * 
-	 */	
-	override public function setOtherStatStr(isAdd:Boolean,addValue:Number):void
-	{
-		
 	}
 }
 
-/**
- * 强化星星数 
- * @author 陈鹉光
- * 
- */
-class EquipRefineTimesBar extends Sprite
-{
-	/** 强化图标宽度，位置排序用 **/
-	private const ASSET_WIDTH : int = 21;
-	/** 强化图标哈希表 **/
-	private var _assetMap : HashMap;
-	/** 索引 **/
-	private var index:int = 0;
-	
-	public function EquipRefineTimesBar()
-	{
-		super();
-		_assetMap = new HashMap();
-	}
-	
-	/**
-	 * 设置强化等级 
-	 * @param refine  强化等级， 0表示没有强化
-	 * 
-	 */	
-	public function setRefineTimes(refine:int):void
-	{
-//		var refineTimes : EquipRefineTimesInfo = EquipRefineTimesCfgData.getInfoByRefineTimes(refine);
-//		if(!refineTimes)
-//		{
-//			clearAllAsset();
-//			return;
-//		}
-//		index = 0;
-//		addAsset(refineTimes.taiyang,AssetUrl.EQUIP_REFINT_TIMES_TAI_YANG);
-//		addAsset(refineTimes.yueliang,AssetUrl.EQUIP_REFINE_TIMES_YUE_LIANG);
-//		addAsset(refineTimes.xing,AssetUrl.EQUIP_REFINE_TIMES_XING);
-//		for(index;index<_assetMap.length;index++)
-//		{
-//			clearAssetByIndex(index);
-//		}
-	}
-	
-	/**
-	 * 添加一个强化图标显示 
-	 * @param max
-	 * @param styleName
-	 * 
-	 */	
-	private function addAsset(max:int,styleName:String):void
-	{
-		var asset : UIAsset;
-		var i : int = 0;
-		for (i=0;i<max;i++)
-		{
-			asset = getAssetByIndex(index);
-			asset.styleName = styleName;
-			asset.x = index * ASSET_WIDTH;
-			index++;
-			addChild(asset);
-		}
-	}
-	
-	/**
-	 * 通过索引，清除一个强化图标 
-	 * @param index
-	 * 
-	 */	
-	private function clearAssetByIndex(index:int):void
-	{
-		var asset : UIAsset = _assetMap.getValue(index);
-		if(asset)
-			asset.visible = false;
-	}
-	
-	/**
-	 * 清除所有强化图标 
-	 * 
-	 */	
-	public function clearAllAsset():void
-	{
-		_assetMap.eachKey(clearAssetByIndex);
-	}
-	
-	/**
-	 * 获取一个强化图标 
-	 * @param index
-	 * @return 
-	 * 
-	 */	
-	private function getAssetByIndex(index:int):UIAsset
-	{
-		var asset : UIAsset;
-		if(index<_assetMap.length)
-		{
-			asset = _assetMap.getValue(index);
-			asset.visible = true;
-			return asset;
-		}
-		asset = new UIAsset();
-		_assetMap.add(index,asset);
-		return asset;
-	}
-}

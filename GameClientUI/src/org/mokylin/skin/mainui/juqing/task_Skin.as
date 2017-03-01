@@ -15,9 +15,9 @@ package org.mokylin.skin.mainui.juqing
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var btn_n1:feathers.controls.Button;
+		public var btn_juqing:feathers.controls.Button;
 
-		public var btn_n2:feathers.controls.Button;
+		public var btn_wanfa:feathers.controls.Button;
 
 
 		//==========================================================================
@@ -30,7 +30,7 @@ package org.mokylin.skin.mainui.juqing
 			this.currentState = "normal";
 			this.height = 228;
 			this.width = 224;
-			this.elementsContent = [__task_Skin_UIAsset1_i(),btn_n1_i(),btn_n2_i()];
+			this.elementsContent = [__task_Skin_UIAsset1_i(),btn_juqing_i(),btn_wanfa_i()];
 			
 			states = {
 			};
@@ -51,11 +51,11 @@ package org.mokylin.skin.mainui.juqing
 			return temp;
 		}
 
-		private function btn_n1_i():feathers.controls.Button
+		private function btn_juqing_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_n1 = temp;
-			temp.name = "btn_n1";
+			btn_juqing = temp;
+			temp.name = "btn_juqing";
 			temp.label = "剧\n情";
 			temp.styleClass = org.mokylin.skin.mainui.juqing.button.ButtonSkin_ju1;
 			temp.x = 196;
@@ -63,11 +63,11 @@ package org.mokylin.skin.mainui.juqing
 			return temp;
 		}
 
-		private function btn_n2_i():feathers.controls.Button
+		private function btn_wanfa_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_n2 = temp;
-			temp.name = "btn_n2";
+			btn_wanfa = temp;
+			temp.name = "btn_wanfa";
 			temp.label = "玩\n法";
 			temp.styleClass = org.mokylin.skin.mainui.juqing.button.ButtonSkin_ju1;
 			temp.x = 196;

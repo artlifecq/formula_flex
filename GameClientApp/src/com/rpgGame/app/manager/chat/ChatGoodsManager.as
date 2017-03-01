@@ -1,6 +1,6 @@
 package com.rpgGame.app.manager.chat
 {
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	
 	import org.client.mainCore.ds.HashMap;
 	
@@ -14,7 +14,7 @@ package com.rpgGame.app.manager.chat
 		private static var idCounter:int;
 		private static var _itemInfoMap:HashMap = new HashMap();
 		
-		public static function addItemInfo(itemInfo:ItemInfo):String
+		public static function addItemInfo(itemInfo:ClientItemInfo):String
 		{
 			idCounter++;
 			var key:String = idCounter.toString();
@@ -22,7 +22,7 @@ package com.rpgGame.app.manager.chat
 			return key;
 		}
 		
-		public static function getItemInfo(key:String):ItemInfo
+		public static function getItemInfo(key:String):ClientItemInfo
 		{
 			return _itemInfoMap.getValue(key);
 		}

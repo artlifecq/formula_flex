@@ -123,6 +123,7 @@ package com.rpgGame.app.fight.spell
 		{
 			var hurted : Boolean = false;
 			var role : SceneRole;
+			var atkor:SceneRole;
 			if (info.hurtList && info.hurtList.length > 0)
 			{
 				var hurtAnimation : Q_SpellAnimation = info.hurtAnimation;
@@ -172,9 +173,9 @@ package com.rpgGame.app.fight.spell
 								role.stateMachine.transition(RoleStateType.ACTION_FALL, fallRef);
 							}
 						}
-
 						//显示被击特效
-						var atkorPos : Point = (info.atkor && info.atkor.usable) ? new Point(info.atkor.x, info.atkor.z) : info.atkorPos;
+						atkor=SceneManager.getSceneObjByID(hurtVo.attackerId) as SceneRole;
+						var atkorPos : Point = new Point(atkor.x, atkor.z);
 						var hitRef : HitStateReference = role.stateMachine.getReference(HitStateReference) as HitStateReference;
 						hitRef.setParams(atkorPos);
 						role.stateMachine.transition(RoleStateType.ACTION_HIT, hitRef);
