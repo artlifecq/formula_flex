@@ -9,7 +9,7 @@ package org.mokylin.skin.app.beibao.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class chushouBtn extends feathers.controls.StateSkin
+	public class ButtonChushou extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,7 +22,7 @@ package org.mokylin.skin.app.beibao.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function chushouBtn()
+		public function ButtonChushou()
 		{
 			super();
 			
@@ -47,7 +47,7 @@ package org.mokylin.skin.app.beibao.button
 						}
 					]
 			};
-			skinNames={"down":"ui/app/beibao/beibaoIcon/chushou.png", "hover":"ui/app/beibao/beibaoIcon/chushou.png", "up":"ui/app/beibao/beibaoIcon/chushou.png"};
+			skinNames={"down":"ui/app/beibao/button/chushou/down.png", "hover":"ui/app/beibao/button/chushou/over.png", "up":"ui/app/beibao/button/chushou/up.png"};
 		}
 
 

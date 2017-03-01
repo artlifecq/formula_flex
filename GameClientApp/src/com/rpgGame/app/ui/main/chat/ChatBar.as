@@ -13,7 +13,6 @@ package com.rpgGame.app.ui.main.chat {
     import com.rpgGame.app.scene.SceneRole;
     import com.rpgGame.app.ui.main.chat.laba.VipChatCanvas;
     import com.rpgGame.core.events.ChatEvent;
-    import com.rpgGame.core.events.MapEvent;
     import com.rpgGame.core.manager.tips.TargetTipsMaker;
     import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
@@ -21,7 +20,6 @@ package com.rpgGame.app.ui.main.chat {
     import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
     import com.rpgGame.coreData.clientConfig.FaceInfo;
     import com.rpgGame.coreData.info.MapDataManager;
-    import com.rpgGame.coreData.type.EnumHurtType;
     import com.rpgGame.coreData.type.chat.EnumChatChannelType;
     import com.rpgGame.coreData.utils.ColorUtils;
     import com.rpgGame.netData.chat.message.ResChatMessage;
@@ -30,7 +28,6 @@ package com.rpgGame.app.ui.main.chat {
     import flash.text.TextFormat;
     import flash.text.TextFormatAlign;
     import flash.ui.Keyboard;
-    import flash.utils.setInterval;
     
     import feathers.controls.Button;
     import feathers.controls.Scroller;
@@ -43,7 +40,6 @@ package com.rpgGame.app.ui.main.chat {
     
     import org.client.mainCore.manager.EventManager;
     import org.mokylin.skin.mainui.chat.chat_Skin;
-    import org.mokylin.skin.mainui.chat.pingdaoItems;
     
     import starling.core.Starling;
     import starling.display.DisplayObject;
@@ -65,8 +61,7 @@ package com.rpgGame.app.ui.main.chat {
 		private static const CHANNEL_TYPES:Array=[EnumChatChannelType.CHAT_CHANNEL_LABA,EnumChatChannelType.CHAT_CHANNEL_WORLD,
 			EnumChatChannelType.CHAT_CHANNEL_PARTY,EnumChatChannelType.CHAT_CHANNEL_TEAM,EnumChatChannelType.CHAT_CHANNEL_SILIAO,
 			EnumChatChannelType.CHAT_CHANNEL_NORMAL];
-		private static const CHANNEL_NAME:Array=["喇叭","世界","帮会","队伍","私聊","当前"];
-        private static const CHANNEL_NUM:int=CHANNEL_NAME.length;
+        private static const CHANNEL_NUM:int=6;
 		
 		private static const CHANNEL_ZHONGHE:Array=[0,1,2,3,4,5];
 		private static const CHANNEL_SHEJIAO:Array=[0,1,2,3,4,5];
@@ -178,10 +173,8 @@ package com.rpgGame.app.ui.main.chat {
             this.setOpenOrClose(true);
 			
 			//初始化喇叭显示框
-			_vipChatCanvas = new VipChatCanvas();
-			addChildAt( _vipChatCanvas, 0 );
-			_vipChatCanvas.x = 0;
-			_vipChatCanvas.y = -10;
+			_vipChatCanvas = new VipChatCanvas(_skin.grp_laba);
+			_vipChatCanvas.displayVIPChat(false);
 			
 			//初始化按钮Tips
 			TipTargetManager.show( _skin.btn_location, TargetTipsMaker.makeSimpleTextTips("添加当前位置信息"));
@@ -224,6 +217,9 @@ package com.rpgGame.app.ui.main.chat {
 		 */		
 		private function onSendSuccess( info:ResChatMessage ):void 
 		{
+			if(info.type==EnumChatChannelType.CHAT_CHANNEL_HEARSAY||info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
+				return;	
+			}
 			showChatMsg( info );
 		}
 		
@@ -234,7 +230,7 @@ package com.rpgGame.app.ui.main.chat {
 		 */		
 		private function showChatMsg( info:ResChatMessage ):void
 		{
-			_chatText.appendRichText( ChatUtil.getChatMessageByChannel( info.type, info.chatText ) );
+			_chatText.appendRichText( ChatUtil.getHTMLChatMessage( info) );
 			updateScroller();
 			_inputText.text="";
 		}
@@ -288,18 +284,12 @@ package com.rpgGame.app.ui.main.chat {
 			_channelBtns.push(_skin.btn_dangqian);
 			
 			_channelItems=new Vector.<Button>();
-			for (var i:int = 0; i <CHANNEL_NUM; i++) 
-			{
-				var item:Button=new Button();
-				item.name="item_"+i;
-				item.label=CHANNEL_NAME[i];
-				item.styleClass = org.mokylin.skin.mainui.chat.pingdaoItems;
-				item.width = 40;
-				item.height=20;
-				
-				item.x = 7;
-				_channelItems.push(item);
-			}
+			_channelItems.push(_skin.select_laba);
+			_channelItems.push(_skin.select_shijie);
+			_channelItems.push(_skin.select_banghui);
+			_channelItems.push(_skin.select_duiwu);
+			_channelItems.push(_skin.select_siliao);
+			_channelItems.push(_skin.select_dangqian);
 			
 			changeCurrChannel(5);
 		}
@@ -321,6 +311,7 @@ package com.rpgGame.app.ui.main.chat {
 			var list:Array=CHANNEL_ITEMS[_toggleGroup.selectedIndex];
 			var num:int=list.length;
 			var i:int;
+			clearBtns();
 			for(i=0;i<num;i++){
 				var btn:Button=_channelItems[list[i]];
 				if(i==0){
@@ -329,11 +320,22 @@ package com.rpgGame.app.ui.main.chat {
 					btn.y=elementsContent[i-1].y+elementsContent[i-1].height+2;
 				}
 				elementsContent.push(btn);
+				_skin.grp_channel.addChild(btn);
 			}
-			_skin.grp_channel.elementsContent=elementsContent;
 			_skin.select_bg.height=_skin.grp_channel.height;
 			_skin.select_bg.y=_skin.btn_laba.y-_skin.select_bg.height;
 			_curShowTab=_toggleGroup.selectedIndex;
+		}
+		
+		private function clearBtns():void
+		{
+			var num:int=_channelItems.length;
+			for(var i:int=0;i<num;i++){
+				var btn:Button=_channelItems[i];
+				if(btn.parent){
+					btn.removeFromParent();
+				}
+			}
 		}
 		
 		private function setChatType(type:int):void
@@ -457,10 +459,11 @@ package com.rpgGame.app.ui.main.chat {
 		 */
 		private function onAddLocation():void
 		{
-			var countryName : String = "[" + CountryNameCfgData.getCountryNameById(MainRoleManager.actorInfo.countryId) + "]";
+			//国家名称暂时不要
+//			var countryName : String = "[" + CountryNameCfgData.getCountryNameById(MainRoleManager.actorInfo.countryId) + "]";
 			var sceneID:String = MapDataManager.currentScene.sceneId.toString();
 			var xy:String = int(MainRoleManager.actor.x) + "," + int(MainRoleManager.actor.z);
-			var posName:String = countryName + MapDataManager.currentScene.name + "(" + xy + ")";
+			var posName:String =  MapDataManager.currentScene.name + "(" + xy + ")";
 			var locationCode:String = RichTextCustomUtil.getTextLinkCode(posName,-1,RichTextCustomLinkType.POSITION_TYPE,sceneID + "," + xy);
 			if(_inputText.text == DEFAULT_CHAT_TEXT)
 			{
@@ -616,7 +619,7 @@ package com.rpgGame.app.ui.main.chat {
 				return;
 			}
 			
-			
+//			_curSendChannel=8;//测试用来发系统和传闻消息的
 			ChatManager.currentSiLiaoTargetName=MainRoleManager.actorInfo.name;
 			ChatManager.reqSendChat( sendMsg, _curSendChannel,  ChatManager.currentSiLiaoTargetName );
 			

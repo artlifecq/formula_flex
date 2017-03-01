@@ -1,8 +1,8 @@
 <root>
 	<defalutTextColor>0xFFFFFF</defalutTextColor>
 	<defalutFontSize>14</defalutFontSize>
-	<!-- <defalutFontFamily>SimHei</defalutFontFamily> -->
-	<defalutFontFamily>微软雅黑</defalutFontFamily>
+	<defalutFontFamily>SimHei</defalutFontFamily>
+<!-- 	<defalutFontFamily>微软雅黑</defalutFontFamily> -->
 	<!--  是否启用，label的 自动缩略功能-->
 	<truncateToFit>0</truncateToFit>
 	<!-- 最近打开文件的，最大保存个数-->

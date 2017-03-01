@@ -46,7 +46,7 @@ package org.mokylin.skin.mainui.head
 
 		public var role_name:feathers.controls.Label;
 
-		public var role_zhandou:feathers.controls.UINumber;
+		public var role_zhandouli:feathers.controls.UINumber;
 
 
 		//==========================================================================
@@ -59,7 +59,7 @@ package org.mokylin.skin.mainui.head
 			this.currentState = "normal";
 			this.height = 102;
 			this.width = 283;
-			this.elementsContent = [__head_main_Skin_UIAsset1_i(),__head_main_Skin_UIAsset2_i(),role_zhandou_i(),role_name_i(),grp_zhiye_i(),grp_mode_i()];
+			this.elementsContent = [__head_main_Skin_UIAsset1_i(),__head_main_Skin_UIAsset2_i(),role_zhandouli_i(),role_name_i(),grp_zhiye_i(),grp_mode_i()];
 			
 			states = {
 			};
@@ -217,16 +217,17 @@ package org.mokylin.skin.mainui.head
 			temp.text = "角色名六个字 (120级)";
 			temp.color = 0xC3C198;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
+			temp.verticalAlign = "-2";
 			temp.x = 88;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function role_zhandou_i():feathers.controls.UINumber
+		private function role_zhandouli_i():feathers.controls.UINumber
 		{
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
-			role_zhandou = temp;
-			temp.name = "role_zhandou";
+			role_zhandouli = temp;
+			temp.name = "role_zhandouli";
 			temp.gap = -3;
 			temp.height = 25;
 			temp.label = "6521478";

@@ -1,6 +1,5 @@
 package org.mokylin.skin.component.button
 {
-	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -39,12 +38,7 @@ package org.mokylin.skin.component.button
 						,
 						{target:"labelDisplay",
 							name:"color",
-							value:0xe1d4a9
-						}
-						,
-						{target:"labelDisplay",
-							name:"nativeFilters",
-							value:Fontter.filterObj["labelFilterBlack"]
+							value:0xFFFFFF
 						}
 						,
 						{target:"labelDisplay",
@@ -53,7 +47,10 @@ package org.mokylin.skin.component.button
 						}
 					]
 			};
-			skinNames={"down":"ui/component/button/skin_btn1/down.png", "hover":"ui/component/button/skin_btn1/over.png", "up":"ui/component/button/skin_btn1/up.png"};
+			skinNames={"disabled":"ui/component/button/skin_btn1/disabled.png",
+			"down":"ui/component/button/skin_btn1/down.png",
+			"hover":"ui/component/button/skin_btn1/over.png",
+			"up":"ui/component/button/skin_btn1/up.png"};
 		}
 
 
@@ -76,10 +73,9 @@ package org.mokylin.skin.component.button
 			temp.bottom = 0;
 			temp.left = 0;
 			temp.right = 0;
-			temp.text = "按钮";
+			temp.text = "";
 			temp.textAlign = "center";
-			temp.color = 0xe1d4a9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xFFFFFF;
 			temp.top = 0;
 			temp.verticalAlign = "middle";
 			return temp;
