@@ -686,7 +686,7 @@ package com.rpgGame.app.manager.fight
 			attackFace.x = $displayObjectContainer.x-attackFace.width/2;
 			attackFace.y = $displayObjectContainer.y-attackFace.height/2-50;
 			
-			return;
+//			return;
 			var timeLine : TimelineLite = new TimelineLite();
 			timeLine.insert(TweenLite.to(attackFace, 0.5, {scaleX: $scaleLater, scaleY: $scaleLater, ease: Linear.easeOut,onUpdate:updateXY,onUpdateParams:[attackFace,$displayObjectContainer]}));//缩放
 			timeLine.append(TweenLite.to(attackFace, 1.2, {alpha: 0,onComplete: onComplete, onCompleteParams: [attackFace], ease: Linear.easeIn,onUpdate:updateXY,onUpdateParams:[attackFace,$displayObjectContainer]}));//隐藏

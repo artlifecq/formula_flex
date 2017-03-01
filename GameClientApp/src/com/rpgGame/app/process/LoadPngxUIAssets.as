@@ -44,7 +44,7 @@ package com.rpgGame.app.process
 			ResLoadingView.instance.title = "正在加载公共UI素材...";
 
 			var loader : ThemeLoader = new ThemeLoader(true);
-			loader.load(_url, onFinishOld, onLoaderPorgress, onResError);
+			loader.load(_url, onFinish, onLoaderPorgress, onResError);
 		}
 		
 		private function onFinishOld(loader : ThemeLoader) : void
