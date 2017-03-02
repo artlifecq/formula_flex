@@ -11,6 +11,7 @@ package com.rpgGame.app.ui.main.chat
 	
 	import org.mokylin.skin.mainui.chat.ChatFrameOnRoleSkin;
 	
+	
 	public class ChatFramOnRole extends SkinUI
 	{
 		private var _customSkin : ChatFrameOnRoleSkin;
