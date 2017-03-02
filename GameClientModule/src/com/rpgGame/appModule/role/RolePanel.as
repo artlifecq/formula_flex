@@ -37,9 +37,6 @@ package com.rpgGame.appModule.role
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
 		{
-			CONFIG::netDebug {
-				NetDebug.LOG("[AppModule] [RolePanel] show");
-			}
 			super.show(data, openTable, parentContiner);
 			avatartView.updateAvatar();
 			
