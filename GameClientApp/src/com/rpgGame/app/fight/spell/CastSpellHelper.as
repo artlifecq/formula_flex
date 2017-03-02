@@ -913,20 +913,51 @@ package com.rpgGame.app.fight.spell
 			return targetPos;
 		}*/
 
-		public static function getNearestCanAtkRole(spellData : Q_skill_model) : SceneRole
+		public static function getNearestCanAtkRole(spellData : Q_skill_model, next : Boolean) : SceneRole
 		{
 			var list : Vector.<SceneRole> = _roleList ? _roleList : SceneManager.getSceneRoleList();
 			list.sort(onSortNearestRole);
 			//
+            var find : Boolean = false;
 			for each (var role : SceneRole in list)
 			{
 				if (role && role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
 				{
 					var modeState : int = FightManager.getFightRoleState(role, spellData);
-					if (modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY)
-						return role;
+					if (modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY) {
+                        continue;
+                    }
+                    if (MainRoleManager.actor == role) {
+                        // 自己
+                        continue;
+                    }
+                    var dis : Number = MathUtil.getDistanceNoSqrt(MainRoleManager.actor.x, MainRoleManager.actor.z, role.x, role.z);
+                    if (dis > 250000) {
+                        // 超过10格
+                        if (SceneCharType.PLAYER == role.type) {
+                            continue;
+                        }
+                        break;
+                    }
+                    if (SceneCharType.PLAYER == role.type) {
+                        return role;
+                    }
+                    if (null == SceneRoleSelectManager.selectedRole) {
+                        return role;
+                    }
+                    if (!next) {
+                        return role;
+                    }
+                    if (SceneRoleSelectManager.selectedRole == role) {
+                        find = true;
+                    } else if (find) {
+                        return role;
+                    }
 				}
 			}
+            if (find) {
+                return getNearestCanAtkRole(spellData, false);
+            }
 			return null;
 		}
 
@@ -938,6 +969,9 @@ package com.rpgGame.app.fight.spell
 		 */
 		private static function onSortNearestRole(roleA : SceneRole, roleB : SceneRole) : int
 		{
+            if (roleA.type != roleB.type) {
+                return parseInt(roleA.type) - parseInt(roleB.type);
+            }
 			var disA : Number = MathUtil.getDistanceNoSqrt(MainRoleManager.actor.x, MainRoleManager.actor.z, roleA.x, roleA.z);
 			var disB : Number = MathUtil.getDistanceNoSqrt(MainRoleManager.actor.x, MainRoleManager.actor.z, roleB.x, roleB.z);
 			if (disA > disB)
