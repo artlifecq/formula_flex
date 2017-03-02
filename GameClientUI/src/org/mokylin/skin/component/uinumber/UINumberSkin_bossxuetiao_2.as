@@ -18,6 +18,8 @@ package org.mokylin.skin.component.uinumber
 			super();
 			
 			this.currentState = "6";
+			this.height = 17;
+			this.width = 15;
 			this.elementsContent = [];
 			
 			states = {

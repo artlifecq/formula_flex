@@ -532,7 +532,7 @@ package org.mokylin.skin.app.beibao
 		private function __beibao_bakSkin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/huawen_1.png";
+			temp.styleName = "ui/common/wenshi/huawen_1.png";
 			temp.x = 0;
 			temp.y = 11;
 			return temp;
@@ -541,7 +541,7 @@ package org.mokylin.skin.app.beibao
 		private function __beibao_bakSkin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/huawen_2.png";
+			temp.styleName = "ui/common/wenshi/huawen_2.png";
 			temp.x = 261;
 			temp.y = 11;
 			return temp;

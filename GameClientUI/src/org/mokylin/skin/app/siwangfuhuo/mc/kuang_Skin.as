@@ -1,4 +1,4 @@
-package org.mokylin.skin.common.tips
+package org.mokylin.skin.app.siwangfuhuo.mc
 {
 	import feathers.controls.StateSkin;
 
@@ -7,21 +7,24 @@ package org.mokylin.skin.common.tips
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class vdfdSkin extends feathers.controls.StateSkin
+	public class kuang_Skin extends feathers.controls.StateSkin
 	{
 
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function vdfdSkin()
+		public function kuang_Skin()
 		{
 			super();
 			
-			this.currentState = "normal";
+			this.currentState = "kuang1";
+			this.height = 190;
+			this.width = 141;
+			this.elementsContent = [];
 			
 			states = {
 			};
-			skinNames={};
+			skinNames={"kuang1":"ui/app/siwangfuhuo/kuang.png", "kuang2":"ui/app/siwangfuhuo/kuang_liang.png"};
 		}
 
 

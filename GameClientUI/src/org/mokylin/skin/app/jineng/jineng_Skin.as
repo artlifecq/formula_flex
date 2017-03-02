@@ -155,7 +155,7 @@ package org.mokylin.skin.app.jineng
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/jineng/bg_you.png";
-			temp.x = 567;
+			temp.x = 569;
 			temp.y = 75;
 			return temp;
 		}
@@ -165,7 +165,7 @@ package org.mokylin.skin.app.jineng
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/jineng/biaotou_di.png";
 			temp.width = 141;
-			temp.x = 684;
+			temp.x = 686;
 			temp.y = 82;
 			return temp;
 		}
@@ -202,7 +202,7 @@ package org.mokylin.skin.app.jineng
 			temp.skin = skin
 			temp.visible = false;
 			temp.width = 200;
-			temp.x = 567;
+			temp.x = 569;
 			temp.y = 75;
 			return temp;
 		}
@@ -217,7 +217,7 @@ package org.mokylin.skin.app.jineng
 			temp.skin = skin
 			temp.visible = false;
 			temp.width = 200;
-			temp.x = 567;
+			temp.x = 569;
 			temp.y = 75;
 			return temp;
 		}
@@ -259,7 +259,7 @@ package org.mokylin.skin.app.jineng
 			var skin:StateSkin = new org.mokylin.skin.app.jineng.jineng_shengji()
 			temp.skin = skin
 			temp.width = 365;
-			temp.x = 567;
+			temp.x = 569;
 			temp.y = 75;
 			return temp;
 		}
@@ -271,7 +271,7 @@ package org.mokylin.skin.app.jineng
 			temp.name = "vs_bar";
 			temp.height = 450;
 			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
-			temp.x = 549;
+			temp.x = 550;
 			temp.y = 74;
 			return temp;
 		}

@@ -1,36 +1,39 @@
-package org.mokylin.skin.common.tips
+package org.mokylin.skin.app.maps
 {
 	import feathers.controls.text.Fontter;
+	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.component.button.ButtonSkin_jia;
+	import org.mokylin.skin.component.button.ButtonSkin_jian;
 
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class mouseTips2_Skin extends feathers.controls.StateSkin
+	public class mapItems extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var lbl_name:feathers.controls.Label;
+		public var btn_jia:feathers.controls.Button;
 
-		public var lbl_name0:feathers.controls.Label;
+		public var btn_jian:feathers.controls.Button;
+
+		public var lbl_name:feathers.controls.Label;
 
 
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function mouseTips2_Skin()
+		public function mapItems()
 		{
 			super();
 			
 			this.currentState = "normal";
-			this.height = 37;
-			this.width = 273;
-			this.elementsContent = [__mouseTips2_Skin_UIAsset1_i(),lbl_name_i(),lbl_name0_i()];
+			this.elementsContent = [__mapItems_UIAsset1_i(),btn_jian_i(),btn_jia_i(),lbl_name_i()];
 			
 			states = {
 			};
@@ -41,30 +44,36 @@ package org.mokylin.skin.common.tips
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __mouseTips2_Skin_UIAsset1_i():feathers.controls.UIAsset
+		private function __mapItems_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.bottom = 0;
 			temp.left = 0;
 			temp.right = 0;
-			temp.styleName = "ui/common/tips/tips_2.png";
+			temp.styleName = "ui/app/maps/tiao.png";
 			temp.top = 0;
 			return temp;
 		}
 
-		private function lbl_name0_i():feathers.controls.Label
+		private function btn_jia_i():feathers.controls.Button
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbl_name0 = temp;
-			temp.name = "lbl_name0";
-			temp.height = 24;
-			temp.htmlText = "99999/100000<font color='#5DBD37'>(75%)</font>";
-			temp.text = "文本";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 176;
-			temp.x = 87;
-			temp.y = 6;
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_jia = temp;
+			temp.name = "btn_jia";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jia;
+			temp.visible = false;
+			temp.x = 4;
+			temp.y = 3;
+			return temp;
+		}
+
+		private function btn_jian_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_jian = temp;
+			temp.name = "btn_jian";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jian;
+			temp.x = 4;
+			temp.y = 3;
 			return temp;
 		}
 
@@ -73,13 +82,13 @@ package org.mokylin.skin.common.tips
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbl_name = temp;
 			temp.name = "lbl_name";
-			temp.height = 24;
-			temp.text = "当前经验：";
-			temp.color = 0x8b8d7b;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 85;
-			temp.x = 10;
-			temp.y = 6;
+			temp.letterSpacing = 0;
+			temp.text = "NPC";
+			temp.color = 0xE1D4A9;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen3"];
+			temp.width = 167;
+			temp.x = 33;
+			temp.y = 4;
 			return temp;
 		}
 

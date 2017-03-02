@@ -314,7 +314,7 @@ package com.rpgGame.appModule.role
 			var zone:String=info.name.substr(0,zoneInddex);
 			var roleName:String=info.name.substr(zoneInddex);
 			_skin.txt_roleName.text=roleName;
-			_skin.txt_qu.text=zone;
+//			_skin.txt_qu.text=zone;
 			_skin.txt_type.text=info.jobName;
 			_skin.txt_team.text=info.societyName;
 		

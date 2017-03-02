@@ -12,11 +12,6 @@ package org.mokylin.skin.common
 	 */
 	public class yiji_panelbg_Skin extends feathers.controls.StateSkin
 	{
-		//==========================================================================
-		//                                定义成员变量
-		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
-
 		public var btnClose:feathers.controls.Button;
 
 
@@ -30,7 +25,7 @@ package org.mokylin.skin.common
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [bg_i(),__yiji_panelbg_Skin_UIAsset1_i(),__yiji_panelbg_Skin_UIAsset2_i(),btnClose_i()];
+			this.elementsContent = [__yiji_panelbg_Skin_UIAsset1_i(),__yiji_panelbg_Skin_UIAsset2_i(),__yiji_panelbg_Skin_UIAsset3_i(),btnClose_i()];
 			
 			states = {
 			};
@@ -44,33 +39,30 @@ package org.mokylin.skin.common
 		private function __yiji_panelbg_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 459;
-			temp.styleName = "ui/common/background/neikuang_1.png";
-			temp.width = 921;
-			temp.x = 13;
-			temp.y = 69;
+			temp.height = 587;
+			temp.styleName = "ui/common/background/tongyongdi.png";
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
 		private function __yiji_panelbg_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/background/yiji_huawen.png";
-			temp.x = 450;
-			temp.y = 0;
+			temp.height = 459;
+			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.width = 924;
+			temp.x = 13;
+			temp.y = 69;
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function __yiji_panelbg_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			bg = temp;
-			temp.name = "bg";
-			temp.height = 582;
-			temp.styleName = "ui/common/background/yiji_mianban.png";
-			temp.width = 947;
-			temp.x = 0;
-			temp.y = 5;
+			temp.styleName = "ui/common/background/yiji_huawen.png";
+			temp.x = 450;
+			temp.y = 0;
 			return temp;
 		}
 

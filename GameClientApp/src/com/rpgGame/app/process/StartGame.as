@@ -149,9 +149,14 @@ package com.rpgGame.app.process
 		
 		private function onShowFrameState(e:KeyboardEvent):void
 		{
-			if(e.ctrlKey&&e.keyCode==Keyboard.F){
-				StatsUtil.showOrHideAwayStats(Stage3DLayerManager.stage,
-					Stage3DLayerManager.stage3DProxy);
+			var bool:Boolean = false;
+			if(e.ctrlKey&&e.keyCode==Keyboard.F)
+			{
+				bool = !bool;
+				if(bool)
+				{
+					StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
+				}
 				LayerManager.showOrHideMM();
 				ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
 			}
