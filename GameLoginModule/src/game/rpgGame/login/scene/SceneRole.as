@@ -1,7 +1,7 @@
 package game.rpgGame.login.scene
 {
+	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.vo.BaseRole;
-	import com.game.mainCore.libCore.pool.Pool;
 	
 	import game.rpgGame.login.state.RoleStateMachine;
 	
@@ -14,7 +14,7 @@ package game.rpgGame.login.scene
 	 */
 	public class SceneRole extends BaseRole
 	{
-		private static var _pool : Pool = new Pool("LoginSceneRole", 10);
+		private static var _pool : InstancePool = new InstancePool("LoginSceneRole", 10);
 		private static var _cnt : int = 0;
 		
 		public function get stateMachine():RoleStateMachine

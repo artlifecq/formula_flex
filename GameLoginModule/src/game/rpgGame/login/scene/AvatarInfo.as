@@ -1,6 +1,6 @@
 package game.rpgGame.login.scene
 {
-	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	
 	import flash.geom.Vector3D;
 	
@@ -17,37 +17,37 @@ package game.rpgGame.login.scene
 	{
 		private var _bodyResID : String = null;
 		private var _bodyAnimatResID : String = null;
-		private var _rpd_body : RenderParamData;
+		private var _rpd_body : RenderParamData3D;
 		
 		private var _bodyEffectID : String = null;
-		private var _rpd_body_effect : RenderParamData;
+		private var _rpd_body_effect : RenderParamData3D;
 		
 		private var _hairResID : String = null;
-		private var _rpd_hair : RenderParamData;
+		private var _rpd_hair : RenderParamData3D;
 		
 		
 		private var _weaponResID : String = null;
-		private var _rpd_weapon : RenderParamData;
+		private var _rpd_weapon : RenderParamData3D;
 		
 		private var _weaponEffectID : String = null;
 		private var _weaponEffectScale : int = 0;
 		private var _weaponEffectOffset : Vector3D = null;
-		private var _rpd_weapon_effect : RenderParamData;
+		private var _rpd_weapon_effect : RenderParamData3D;
 		
 		private var _deputyWeaponResID : String = null;
-		private var _rpd_deputy_weapon : RenderParamData;
+		private var _rpd_deputy_weapon : RenderParamData3D;
 		
 		private var _deputyWeaponEffectID : String = null;
 		private var _deputyWeaponEffectScale : int = 0;
 		private var _deputyWeaponEffectOffset : Vector3D = null;
-		private var _rpd_deputyWeapon_effect : RenderParamData;
+		private var _rpd_deputyWeapon_effect : RenderParamData3D;
 		
 		private var _mountResID : String = null;
 		private var _mountAnimatResID : String = null;
-		private var _rpd_mount : RenderParamData;
+		private var _rpd_mount : RenderParamData3D;
 		
 		private var _effectResID : String = null;
-		private var _rpd_effect : RenderParamData;
+		private var _rpd_effect : RenderParamData3D;
 
 		public function AvatarInfo()
 		{
@@ -62,7 +62,7 @@ package game.rpgGame.login.scene
 			_bodyAnimatResID = animat;
 			if (_bodyResID)
 			{
-				_rpd_body = new RenderParamData(RenderUnitID.BODY, RenderUnitType.BODY, ClientConfig.getAvatar(_bodyResID));
+				_rpd_body = new RenderParamData3D(RenderUnitID.BODY, RenderUnitType.BODY, ClientConfig.getAvatar(_bodyResID));
 				if (_bodyAnimatResID)
 					_rpd_body.animatorSourchPath = ClientConfig.getAvatar(_bodyAnimatResID);
 				else
@@ -86,7 +86,7 @@ package game.rpgGame.login.scene
 			_hairResID = value;
 			if (_hairResID)
 			{
-				_rpd_hair = new RenderParamData(RenderUnitID.HAIR, RenderUnitType.HAIR, ClientConfig.getAvatar(_hairResID));
+				_rpd_hair = new RenderParamData3D(RenderUnitID.HAIR, RenderUnitType.HAIR, ClientConfig.getAvatar(_hairResID));
 				_rpd_hair.mouseEnable = true;
 				_rpd_hair.clearSameType = false;
 			}
@@ -105,7 +105,7 @@ package game.rpgGame.login.scene
 			_weaponEffectID = value;
 			if (_weaponEffectID)
 			{
-				_rpd_weapon_effect = new RenderParamData(RenderUnitID.WEAPON_EFFECT, RenderUnitType.WEAPON_EFFECT, ClientConfig.getEffect(_weaponEffectID));
+				_rpd_weapon_effect = new RenderParamData3D(RenderUnitID.WEAPON_EFFECT, RenderUnitType.WEAPON_EFFECT, ClientConfig.getEffect(_weaponEffectID));
 				_rpd_weapon_effect.mouseEnable = false;
 				_rpd_weapon_effect.clearSameType = false;
 			}
@@ -124,7 +124,7 @@ package game.rpgGame.login.scene
 			_deputyWeaponEffectID = value;
 			if (_deputyWeaponEffectID)
 			{
-				_rpd_deputyWeapon_effect = new RenderParamData(RenderUnitID.DEPUTY_WEAPON_EFFECT, RenderUnitType.DEPUTY_WEAPON_EFFECT, ClientConfig.getEffect(_deputyWeaponEffectID));
+				_rpd_deputyWeapon_effect = new RenderParamData3D(RenderUnitID.DEPUTY_WEAPON_EFFECT, RenderUnitType.DEPUTY_WEAPON_EFFECT, ClientConfig.getEffect(_deputyWeaponEffectID));
 				_rpd_deputyWeapon_effect.mouseEnable = false;
 				_rpd_deputyWeapon_effect.clearSameType = false;
 			}
@@ -143,7 +143,7 @@ package game.rpgGame.login.scene
 			_bodyEffectID = value;
 			if (_bodyEffectID)
 			{
-				_rpd_body_effect = new RenderParamData(RenderUnitID.BODY_EFFECT, RenderUnitType.BODY_EFFECT, ClientConfig.getEffect(_bodyEffectID));
+				_rpd_body_effect = new RenderParamData3D(RenderUnitID.BODY_EFFECT, RenderUnitType.BODY_EFFECT, ClientConfig.getEffect(_bodyEffectID));
 				_rpd_body_effect.mouseEnable = false;
 				_rpd_body_effect.clearSameType = false;
 			}
@@ -162,7 +162,7 @@ package game.rpgGame.login.scene
 			_weaponResID = value;
 			if (_weaponResID)
 			{
-				_rpd_weapon = new RenderParamData(RenderUnitID.WEAPON, RenderUnitType.WEAPON, ClientConfig.getAvatar(_weaponResID));
+				_rpd_weapon = new RenderParamData3D(RenderUnitID.WEAPON, RenderUnitType.WEAPON, ClientConfig.getAvatar(_weaponResID));
 				_rpd_weapon.mouseEnable = true;
 				_rpd_weapon.clearSameType = false;
 			}
@@ -181,7 +181,7 @@ package game.rpgGame.login.scene
 			_deputyWeaponResID = value;
 			if (_deputyWeaponResID)
 			{
-				_rpd_deputy_weapon = new RenderParamData(RenderUnitID.DEPUTY_WEAPON, RenderUnitType.DEPUTY_WEAPON, ClientConfig.getAvatar(_deputyWeaponResID));
+				_rpd_deputy_weapon = new RenderParamData3D(RenderUnitID.DEPUTY_WEAPON, RenderUnitType.DEPUTY_WEAPON, ClientConfig.getAvatar(_deputyWeaponResID));
 				_rpd_deputy_weapon.mouseEnable = true;
 				_rpd_deputy_weapon.clearSameType = false;
 			}
@@ -201,7 +201,7 @@ package game.rpgGame.login.scene
 			_mountAnimatResID = animat;
 			if (_mountResID)
 			{
-				_rpd_mount = new RenderParamData(RenderUnitID.MOUNT, RenderUnitType.MOUNT, ClientConfig.getAvatar(_mountResID));
+				_rpd_mount = new RenderParamData3D(RenderUnitID.MOUNT, RenderUnitType.MOUNT, ClientConfig.getAvatar(_mountResID));
 				if (_mountAnimatResID)
 					_rpd_mount.animatorSourchPath = ClientConfig.getAvatar(_mountAnimatResID);
 				else
@@ -225,7 +225,7 @@ package game.rpgGame.login.scene
 			_effectResID = value;
 			if (_effectResID)
 			{
-				_rpd_effect = new RenderParamData(RenderUnitID.EFFECT, RenderUnitType.EFFECT, ClientConfig.getEffect(_effectResID));
+				_rpd_effect = new RenderParamData3D(RenderUnitID.EFFECT, RenderUnitType.EFFECT, ClientConfig.getEffect(_effectResID));
 				_rpd_effect.mouseEnable = true;
 				_rpd_effect.clearSameType = false;
 			}
@@ -347,55 +347,55 @@ package game.rpgGame.login.scene
 		}
 
 		/**主体*/
-		public function get rpd_body() : RenderParamData
+		public function get rpd_body() : RenderParamData3D
 		{
 			return _rpd_body;
 		}
 
 		/**头发*/
-		public function get rpd_hair() : RenderParamData
+		public function get rpd_hair() : RenderParamData3D
 		{
 			return _rpd_hair;
 		}
 
 		/**武器特效*/
-		public function get rpd_weapon_effect() : RenderParamData
+		public function get rpd_weapon_effect() : RenderParamData3D
 		{
 			return _rpd_weapon_effect;
 		}
 		
 		/**副武器特效*/
-		public function get rpd_deputyWeapon_effect() : RenderParamData
+		public function get rpd_deputyWeapon_effect() : RenderParamData3D
 		{
 			return _rpd_deputyWeapon_effect;
 		}
 
 		/**身体特效*/
-		public function get rpd_body_effect() : RenderParamData
+		public function get rpd_body_effect() : RenderParamData3D
 		{
 			return _rpd_body_effect;
 		}
 
 		/**武器*/
-		public function get rpd_weapon() : RenderParamData
+		public function get rpd_weapon() : RenderParamData3D
 		{
 			return _rpd_weapon;
 		}
 
 		/**副武器*/
-		public function get rpd_deputy_weapon() : RenderParamData
+		public function get rpd_deputy_weapon() : RenderParamData3D
 		{
 			return _rpd_deputy_weapon;
 		}
 
 		/**坐骑*/
-		public function get rpd_mount() : RenderParamData
+		public function get rpd_mount() : RenderParamData3D
 		{
 			return _rpd_mount;
 		}
 
 		/**特效*/
-		public function get rpd_effect() : RenderParamData
+		public function get rpd_effect() : RenderParamData3D
 		{
 			return _rpd_effect;
 		}
