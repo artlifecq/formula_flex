@@ -1,5 +1,6 @@
 package com.game.engine3D.core
 {
+	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.events.SceneEvent;
 	import com.game.engine3D.scene.SceneRender3D;
 	import com.game.engine3D.scene.layers.SceneMapLayer;
@@ -7,6 +8,7 @@ package com.game.engine3D.core
 	import com.game.engine3D.scene.render.RenderSet3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.BaseEntity;
+	import com.game.engine3D.scene.render.vo.MethodData;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.game.engine3D.vo.BaseObjSyncInfo;
 	import com.game.engine3D.vo.BaseRole;
@@ -22,9 +24,9 @@ package com.game.engine3D.core
 	import away3d.containers.View3D;
 	import away3d.enum.ShadowMapMethodType;
 	import away3d.enum.ShadowMapperType;
-	import away3d.filters.BlurFilter3D;
 	import away3d.filters.Filter3DBase;
 	import away3d.filters.GlowFilter3D;
+	import away3d.filters.GodRayFilter3D;
 	import away3d.filters.HeatFilter3D;
 	import away3d.filters.OutlineGlowFilter3D;
 	import away3d.filters.PhantomFilter3D;
@@ -33,13 +35,14 @@ package com.game.engine3D.core
 	import away3d.lights.LightBase;
 	import away3d.materials.lightpickers.LightPickerBase;
 	import away3d.materials.lightpickers.StaticLightPicker;
+	import away3d.materials.methods.FogMethod;
 	import away3d.materials.methods.ShadingMethodBase;
 	
 	import gs.TweenLite;
 	
 	import org.client.mainCore.ds.DHash;
 	import org.client.mainCore.manager.EventManager;
-
+	
 	/**
 	 *
 	 * 游戏3D场景
@@ -69,23 +72,22 @@ package com.game.engine3D.core
 		 * 区域图尺寸
 		 */
 		public static var AREA_MAP_SIZE : uint = 1024;
-
-		/** 滤镜  **/
+		
+		/** 残影滤镜  **/
 		private var _phantomFilter : PhantomFilter3D;
-		/** 滤镜  **/
+		/** 热扭曲滤镜  **/
 		private var _heatFilter : HeatFilter3D;
-		/** 滤镜  **/
+		/** 发光滤镜  **/
 		private var _glowFilter : GlowFilter3D;
-		/** 滤镜  **/
-		private var _blurFilter : BlurFilter3D;
 		/** 外发光滤镜  **/
 		private var _outlineGlowFilter : OutlineGlowFilter3D;
 		/** 美术通过引擎工具设置的滤镜  **/
 		private var _sceneArtFilters : Vector.<Filter3DBase>;
 		private var _viewFilters : Vector.<Filter3DBase>;
 		private var _useRingDepthOfFieldFilter : Boolean = true;
+		private var _useGodRayFilter : Boolean = true;
 		private var _ringDepthOfFieldFilter3D : RingDepthOfFieldFilter3D;
-
+		
 		private var _sceneName : String;
 		private var _glow : Boolean = true;
 		private var _phantom : Boolean = true;
@@ -130,30 +132,29 @@ package com.game.engine3D.core
 		private var _cameraTarget : ObjectContainer3D;
 		private var _mainChar : BaseRole;
 		private var _isLoading : Boolean;
-
+		
 		/** 空的光照对象 **/
 		private var _lightNullObject : ObjectContainer3D;
-
+		
 		private var _disableShadowLevel : Boolean;
-
+		
 		public function GameScene3D(name : String, view : View3D, viewDistance : int, areaMapLayer : int)
 		{
 			super();
 			_sceneName = name;
 			_isLoading = false;
-
+			
 			_sceneObjMap = new DHash();
 			_sceneRoleList = new Vector.<BaseRole>();
 			_renderUnitList = new Vector.<RenderUnit3D>();
-
+			
 			_sceneMapLayer = new SceneMapLayer(this);
-            _sceneMapLayer.mousePickerMovable = true;
 			addChild(_sceneMapLayer);
-
+			
 			_sceneRenderLayer = new SceneRenderLayer(this);
 			addChild(_sceneRenderLayer);
 			_shadowMethods = new Vector.<ShadingMethodBase>();
-
+			
 			if (areaMapLayer > 0)
 			{
 				_areaMaps = new Vector.<AreaMap>();
@@ -163,22 +164,22 @@ package com.game.engine3D.core
 					_areaMaps.push(areaMap);
 				}
 			}
-
+			
 			//创建场景渲染器
 			sceneRender = new SceneRender3D(this);
 			_view = view;
 			_camera = _view.camera;
 			_viewDistance = viewDistance;
-
-			if(_camera.lens is PerspectiveLens)
-			{	
+			
+			if (_camera.lens is PerspectiveLens)
+			{
 				(_camera.lens as PerspectiveLens).fieldOfView = 45;
 			}
-			else if(_camera.lens is OrthographicOffCenterLens)
+			else if (_camera.lens is OrthographicOffCenterLens)
 			{
-
+				
 			}
-		
+			
 			_camera.lens.near = _cameraNear;
 			_camera.lens.far = _cameraFar;
 			_camera.position = new Vector3D(0, 200, -1000);
@@ -187,23 +188,22 @@ package com.game.engine3D.core
 			_camera.rotationZ = 0;
 			_sceneArtFilters = new Vector.<Filter3DBase>();
 			_viewFilters = new Vector.<Filter3DBase>();
-			_phantomFilter = new PhantomFilter3D(0.95, 0.7, 4);
+			_phantomFilter = new PhantomFilter3D(0.95, 0.7);
 			_heatFilter = new HeatFilter3D();
 			_glowFilter = new GlowFilter3D();
-			_blurFilter = new BlurFilter3D(20, 20);
 			resetViewFilters();
 		}
-
+		
 		public function get isLoading() : Boolean
 		{
 			return _isLoading;
 		}
-
+		
 		public function get disableShadowLevel() : Boolean
 		{
 			return _disableShadowLevel;
 		}
-
+		
 		/**
 		 * 禁用shadow level设置
 		 * @param value
@@ -213,7 +213,7 @@ package com.game.engine3D.core
 		{
 			_disableShadowLevel = value;
 		}
-
+		
 		public function setOutlineGlowFilter(value : OutlineGlowFilter3D) : void
 		{
 			if (_outlineGlowFilter == value)
@@ -227,41 +227,41 @@ package com.game.engine3D.core
 			_outlineGlowFilter = value;
 			resetViewFilters();
 		}
-
+		
 		/** 滤镜  **/
 		public function get ringDepthOfFieldFilter3D() : RingDepthOfFieldFilter3D
 		{
 			return _ringDepthOfFieldFilter3D;
 		}
-
+		
 		/** 场景区域方向光顶灯 **/
 		public function get sceneAreaDirectionalLight() : DirectionalLight
 		{
 			return _sceneAreaDirectionalLight;
 		}
-
+		
 		/** 实体区域方向光顶灯 **/
 		public function get entityAreaDirectionalLight() : DirectionalLight
 		{
 			return _entityAreaDirectionalLight;
 		}
-
+		
 		/** 主角同步位置点光灯 **/
 		public function get mainCharSyncPosLight() : LightBase
 		{
 			return _mainCharSyncPosLight;
 		}
-
+		
 		public function get mainCharSyncLightDirection() : Vector3D
 		{
 			return _mainCharSyncLightDirection;
 		}
-
+		
 		public function get shadowLevel() : int
 		{
 			return _shadowLevel;
 		}
-
+		
 		/**
 		 * 0:不启用阴影
 		 * 1:硬非级联阴影
@@ -279,10 +279,10 @@ package com.game.engine3D.core
 			_shadowLevel = value;
 			validateAreaDirectionalLight();
 		}
-
+		
 		private function validateShadow() : void
 		{
-			if (!_entityAreaDirectionalLight)
+			if (!_entityAreaDirectionalLight || GlobalConfig.use2DMap)
 			{
 				return;
 			}
@@ -299,6 +299,10 @@ package com.game.engine3D.core
 					_entityAreaDirectionalLight.castsShadows = true;
 					_entityAreaDirectionalLight.shadowMapMethodType = ShadowMapMethodType.HARD;
 					_entityAreaDirectionalLight.shadowMapperType = ShadowMapperType.DIRECTIONAL;
+					if (_view && _view.screenSpaceShadowMaskRenderer.enable)
+					{
+						_view.screenSpaceShadowMaskRenderer.quality = 0.5;
+					}
 					break;
 				}
 				case 2:
@@ -307,6 +311,10 @@ package com.game.engine3D.core
 					_entityAreaDirectionalLight.castsShadows = true;
 					_entityAreaDirectionalLight.shadowMapMethodType = ShadowMapMethodType.HARD;
 					_entityAreaDirectionalLight.shadowMapperType = ShadowMapperType.CASCADE;
+					if (_view && _view.screenSpaceShadowMaskRenderer.enable)
+					{
+						_view.screenSpaceShadowMaskRenderer.quality = 0.65;
+					}
 					break;
 				}
 				case 3:
@@ -317,6 +325,10 @@ package com.game.engine3D.core
 					_entityAreaDirectionalLight.shadowMapperType = ShadowMapperType.DIRECTIONAL;
 					_lightRange = 2;
 					_lightNumSamples = 7;
+					if (_view && _view.screenSpaceShadowMaskRenderer.enable)
+					{
+						_view.screenSpaceShadowMaskRenderer.quality = 0.8;
+					}
 					break;
 				}
 				case 4:
@@ -327,6 +339,10 @@ package com.game.engine3D.core
 					_entityAreaDirectionalLight.shadowMapperType = ShadowMapperType.CASCADE;
 					_lightRange = 3;
 					_lightNumSamples = 11;
+					if (_view && _view.screenSpaceShadowMaskRenderer.enable)
+					{
+						_view.screenSpaceShadowMaskRenderer.quality = 1.0;
+					}
 					break;
 				}
 				case 5:
@@ -337,27 +353,31 @@ package com.game.engine3D.core
 					_entityAreaDirectionalLight.shadowMapperType = ShadowMapperType.CASCADE;
 					_lightRange = 4;
 					_lightNumSamples = 17;
+					if (_view && _view.screenSpaceShadowMaskRenderer.enable)
+					{
+						_view.screenSpaceShadowMaskRenderer.quality = 1.0;
+					}
 					break;
 				}
 			}
 		}
-
+		
 		public function get cameraNear() : int
 		{
 			return _cameraNear;
 		}
-
+		
 		public function set cameraNear(value : int) : void
 		{
 			_cameraNear = value;
 			_view.camera.lens.near = _cameraNear;
 		}
-
+		
 		public function get cameraFar() : int
 		{
 			return _cameraFar;
 		}
-
+		
 		public function set cameraFar(value : int) : void
 		{
 			if (value <= 0)
@@ -368,12 +388,12 @@ package com.game.engine3D.core
 			_cameraFar = value;
 			_view.camera.lens.far = _cameraFar;
 		}
-
+		
 		public function get blur() : Boolean
 		{
 			return _blur;
 		}
-
+		
 		public function set blur(value : Boolean) : void
 		{
 			if (_blur == value)
@@ -381,12 +401,12 @@ package com.game.engine3D.core
 			_blur = value;
 			resetViewFilters();
 		}
-
+		
 		public function get heat() : Boolean
 		{
 			return _heat;
 		}
-
+		
 		public function set heat(value : Boolean) : void
 		{
 			if (_heat == value)
@@ -394,12 +414,12 @@ package com.game.engine3D.core
 			_heat = value;
 			resetViewFilters();
 		}
-
+		
 		public function get phantom() : Boolean
 		{
 			return _phantom;
 		}
-
+		
 		public function set phantom(value : Boolean) : void
 		{
 			if (_phantom == value)
@@ -407,12 +427,12 @@ package com.game.engine3D.core
 			_phantom = value;
 			resetViewFilters();
 		}
-
+		
 		public function get glow() : Boolean
 		{
 			return _glow;
 		}
-
+		
 		public function set glow(value : Boolean) : void
 		{
 			if (_glow == value)
@@ -420,12 +440,12 @@ package com.game.engine3D.core
 			_glow = value;
 			resetViewFilters();
 		}
-
+		
 		public function get useRingDepthOfFieldFilter() : Boolean
 		{
 			return _useRingDepthOfFieldFilter;
 		}
-
+		
 		public function set useRingDepthOfFieldFilter(value : Boolean) : void
 		{
 			if (_useRingDepthOfFieldFilter == value)
@@ -433,7 +453,20 @@ package com.game.engine3D.core
 			_useRingDepthOfFieldFilter = value;
 			resetViewFilters();
 		}
-
+		
+		public function get useGodRayFilter() : Boolean
+		{
+			return _useGodRayFilter;
+		}
+		
+		public function set useGodRayFilter(value : Boolean) : void
+		{
+			if (_useGodRayFilter == value)
+				return;
+			_useGodRayFilter = value;
+			resetViewFilters();
+		}
+		
 		public function addFilter3D(value : Filter3DBase) : void
 		{
 			if (value is RingDepthOfFieldFilter3D)
@@ -443,25 +476,30 @@ package com.game.engine3D.core
 			_sceneArtFilters.push(value);
 			resetViewFilters();
 		}
-
+		
 		private function resetViewFilters() : void
 		{
 			_viewFilters.length = 0;
-			if (_blur)
-				_viewFilters.push(_blurFilter);
-			if (!_blur && _glow) //glow必须放在之前
+			if (_glow) //glow必须放在之前
 				_viewFilters.push(_glowFilter);
-			if (!_blur && _heat)
+			if (_heat)
 				_viewFilters.push(_heatFilter);
-			if (!_blur && _phantom)
+			if (_phantom)
 				_viewFilters.push(_phantomFilter);
-			if (!_blur && _outlineGlowFilter)
+			if (_outlineGlowFilter)
 				_viewFilters.push(_outlineGlowFilter);
 			for each (var filter3D : Filter3DBase in _sceneArtFilters)
 			{
 				if (filter3D is RingDepthOfFieldFilter3D)
 				{
 					if (_useRingDepthOfFieldFilter)
+					{
+						_viewFilters.push(filter3D);
+					}
+				}
+				else if (filter3D is GodRayFilter3D)
+				{
+					if (_useGodRayFilter)
 					{
 						_viewFilters.push(filter3D);
 					}
@@ -473,12 +511,12 @@ package com.game.engine3D.core
 			}
 			_view.filters3d = _viewFilters;
 		}
-
+		
 		public function get lightRange() : Number
 		{
 			return _lightRange;
 		}
-
+		
 		public function set lightRange(value : Number) : void
 		{
 			if (_lightRange == value)
@@ -486,12 +524,12 @@ package com.game.engine3D.core
 			_lightRange = value;
 			validateAreaDirectionalLight();
 		}
-
+		
 		public function get lightNumSamples() : int
 		{
 			return _lightNumSamples;
 		}
-
+		
 		public function set lightNumSamples(value : int) : void
 		{
 			if (_lightNumSamples == value)
@@ -499,12 +537,12 @@ package com.game.engine3D.core
 			_lightNumSamples = value;
 			validateAreaDirectionalLight();
 		}
-
+		
 		public function get lightFarPlane() : Number
 		{
 			return _lightFarPlane;
 		}
-
+		
 		public function set lightFarPlane(value : Number) : void
 		{
 			if (_lightFarPlane == value)
@@ -512,10 +550,10 @@ package com.game.engine3D.core
 			_lightFarPlane = value;
 			validateAreaDirectionalLight();
 		}
-
+		
 		private function validateAreaDirectionalLight() : void
 		{
-			if (_disableShadowLevel)
+			if (_disableShadowLevel || GlobalConfig.use2DMap)
 			{
 				return;
 			}
@@ -524,10 +562,10 @@ package com.game.engine3D.core
 				return;
 			}
 			validateShadow();
-
+			
 			_entityAreaDirectionalLight.range = _lightRange;
 			_entityAreaDirectionalLight.numSamples = _lightNumSamples;
-
+			
 			if (_entityAreaDirectionalLight.shadowMapperType == ShadowMapperType.CASCADE)
 			{
 				_entityAreaDirectionalLight.farPlane = clamp(5000, 15000, _lightFarPlane * 8);
@@ -538,7 +576,7 @@ package com.game.engine3D.core
 			}
 			EventManager.dispatchEvent(SceneEvent.VALIDATE_AREA_DIRECTIONALLIGHT);
 		}
-
+		
 		private function clamp(min : Number, max : Number, value : Number) : Number
 		{
 			if (value < min)
@@ -554,7 +592,7 @@ package com.game.engine3D.core
 				return value;
 			}
 		}
-
+		
 		/**
 		 * 场景主角
 		 */
@@ -567,29 +605,29 @@ package com.game.engine3D.core
 				_mainChar.isMainChar = true;
 			}
 		}
-
+		
 		public function get mainChar() : BaseRole
 		{
 			return _mainChar;
 		}
-
+		
 		public function get sceneName() : String
 		{
 			return _sceneName;
 		}
-
+		
 		/** 视口对象 **/
 		public function get view() : View3D
 		{
 			return _view;
 		}
-
+		
 		/** 摄像机对象 **/
 		public function get camera() : Camera3D
 		{
 			return _view ? _view.camera : null;
 		}
-
+		
 		/**
 		 * @private
 		 * 场景所有角色集合
@@ -598,7 +636,7 @@ package com.game.engine3D.core
 		{
 			return _sceneRenderLayer.baseObjList;
 		}
-
+		
 		/**
 		 * @private
 		 * 场景所有角色集合
@@ -607,12 +645,12 @@ package com.game.engine3D.core
 		{
 			return _sceneRoleList;
 		}
-
+		
 		public function get renderUnitList() : Vector.<RenderUnit3D>
 		{
 			return _renderUnitList;
 		}
-
+		
 		/**
 		 * 向场景中添加角色
 		 * @param obj
@@ -639,7 +677,7 @@ package com.game.engine3D.core
 				trace("====================移除已经存在的对象, id:" + oldObj.id + ",type:" + oldObj.type);
 				removeSceneObj(oldObj, true);
 			}
-
+			
 			obj.sceneName = _sceneName;
 			if (obj is RenderUnit3D)
 			{
@@ -653,6 +691,7 @@ package com.game.engine3D.core
 			{
 				(obj as BaseEntity).avatar.lightPicker = entityLightPicker;
 			}
+			addFogMethods(obj);
 			_sceneRenderLayer.addBaseObj(obj, parent, needInViewDist, renderLimitable);
 			////////////////////////////////////////////
 			var index : int;
@@ -672,7 +711,30 @@ package com.game.engine3D.core
 			//需要添加的对象和key的对应关系唯一
 			_sceneObjMap.addForValue(obj, obj.id + "_" + obj.type);
 		}
-
+		
+		private function addFogMethods(obj : BaseObj3D) : void
+		{
+			if (_sceneMapLayer)
+			{
+				var fogMethods : Array = _sceneMapLayer.getFogMethods();
+				for each (var fogMethod : FogMethod in fogMethods)
+				{
+					if (obj is RenderUnit3D)
+					{
+						RenderUnit3D(obj).addMethod(new MethodData(fogMethod));
+					}
+					else if (obj is RenderSet3D)
+					{
+						RenderSet3D(obj).addMethod(new MethodData(fogMethod));
+					}
+					else if (obj is BaseEntity)
+					{
+						BaseEntity(obj).avatar.addMethod(new MethodData(fogMethod));
+					}
+				}
+			}
+		}
+		
 		/**
 		 * 从场景中移除角色
 		 * @param obj
@@ -702,7 +764,7 @@ package com.game.engine3D.core
 			_sceneObjMap.removeForValue(obj);
 			_sceneRenderLayer.removeBaseObj(obj, recycle);
 		}
-
+		
 		/**
 		 * 从场景中移除所有可以移除的角色
 		 * @param recycle 是否池回收
@@ -719,7 +781,7 @@ package com.game.engine3D.core
 				}
 			}
 		}
-
+		
 		/**
 		 * 从场景中移除所有角色
 		 * @param type
@@ -734,7 +796,7 @@ package com.game.engine3D.core
 				removeSceneObj(list[len]);
 			}
 		}
-
+		
 		/**
 		 * 从场景中移除角色(通过ID和类型)
 		 * @param id
@@ -750,7 +812,7 @@ package com.game.engine3D.core
 			}
 			removeSceneObj(obj, recycle);
 		}
-
+		
 		/**
 		 * 从场景中查找角色
 		 * @parm id 角色ID
@@ -769,7 +831,7 @@ package com.game.engine3D.core
 			}
 			return null;
 		}
-
+		
 		/**
 		 * 从场景中查找角色
 		 * @parm type 角色类型
@@ -778,7 +840,7 @@ package com.game.engine3D.core
 		{
 			return _sceneRenderLayer.getBaseObjByType(type);
 		}
-
+		
 		public function get entityLightPicker() : LightPickerBase
 		{
 			if (_sceneMapLayer)
@@ -799,17 +861,17 @@ package com.game.engine3D.core
 			}
 			return null;
 		}
-
+		
 		public function get viewDistance() : Number
 		{
 			return _viewDistance;
 		}
-
+		
 		public function set viewDistance(value : Number) : void
 		{
 			_viewDistance = value;
 		}
-
+		
 		/**
 		 * 获得虚拟的空的光照对象
 		 * @return 光照对象
@@ -823,7 +885,7 @@ package com.game.engine3D.core
 			}
 			return _lightNullObject;
 		}
-
+		
 		public function get cameraTarget() : ObjectContainer3D
 		{
 			if (_cameraTarget == null)
@@ -833,14 +895,14 @@ package com.game.engine3D.core
 			}
 			return _cameraTarget;
 		}
-
+		
 		public function clearAreaMap(index : int) : void
 		{
 			var areaMap : AreaMap = getAreaMap(index);
 			if (areaMap)
 				areaMap.clear();
 		}
-
+		
 		public function clearAllAreaMap() : void
 		{
 			if (_areaMaps)
@@ -851,7 +913,7 @@ package com.game.engine3D.core
 				}
 			}
 		}
-
+		
 		public function clear() : void
 		{
 			_isLoading = false;
@@ -885,45 +947,58 @@ package com.game.engine3D.core
 				_mainChar.avatar.lightPicker = null;
 			}
 			_sceneMapLayer.clear();
-
-			var list : Array = _sceneObjMap.getValues();
-			for (var i : int = list.length; i > 0; i--)
+			
+			var baseObjList : Array = _sceneObjMap.getValues();
+			for (var i : int = baseObjList.length - 1; i > 0; i--)
 			{
-				var bObj : BaseObj3D = list[i];
-				removeSceneObj(bObj);
+				var baseObj : BaseObj3D = baseObjList[i];
+				if (baseObj is RenderUnit3D)
+				{
+					(baseObj as RenderUnit3D).lightPicker = null;
+				}
+				else if (baseObj is RenderSet3D)
+				{
+					(baseObj as RenderSet3D).lightPicker = null;
+				}
+				else if (baseObj is BaseEntity)
+				{
+					(baseObj as BaseEntity).avatar.lightPicker = null;
+				}
+				removeSceneObj(baseObj);
 			}
+			
 			_sceneRenderLayer.clear();
 			TweenLite.killTweensOf(_scene);
-
+			
 			//clear sceneArtFilters
 			_ringDepthOfFieldFilter3D = null;
 			_sceneArtFilters.length = 0;
 			resetViewFilters();
 		}
-
+		
 		public function get sceneRenderLayer() : SceneRenderLayer
 		{
 			return _sceneRenderLayer;
 		}
-
+		
 		public function get sceneMapLayer() : SceneMapLayer
 		{
 			return _sceneMapLayer;
 		}
-
+		
 		public function getAreaMap(index : int) : AreaMap
 		{
 			if (_areaMaps && index >= 0 && index < _areaMaps.length)
 				return _areaMaps[index];
 			return null;
 		}
-
+		
 		public function loadMapData(mapName : String, mapDataUrl : String, completeHandler : Function = null, errorHandler : Function = null, useBitmapData : Boolean = false) : void
 		{
 			_isLoading = true;
 			_sceneMapLayer.loadData(mapName, mapDataUrl, completeHandler, errorHandler, useBitmapData);
 		}
-
+		
 		/**
 		 * 切换场景
 		 * @param mapUrl
@@ -957,7 +1032,7 @@ package com.game.engine3D.core
 						}
 					}
 				}
-
+				
 				//场景顶灯
 				_sceneAreaDirectionalLight = _sceneMapLayer.getObj(SCENE_AREA_DIRECTIONAL_LIGHT_NAME) as DirectionalLight;
 				if (!_sceneAreaDirectionalLight)
@@ -965,9 +1040,10 @@ package com.game.engine3D.core
 				validateAreaDirectionalLight();
 				//开始渲染
 				sceneRender.startRender();
-				var baseObjList : Vector.<BaseObj3D> = _sceneRenderLayer.baseObjList;
-				for each (var baseObj : BaseObj3D in baseObjList)
+				var baseObjList : Array = _sceneObjMap.getValues();
+				for (var i : int = baseObjList.length - 1; i > 0; i--)
 				{
+					var baseObj : BaseObj3D = baseObjList[i];
 					if (baseObj is RenderUnit3D)
 					{
 						(baseObj as RenderUnit3D).lightPicker = entityLightPicker;
@@ -981,10 +1057,11 @@ package com.game.engine3D.core
 						(baseObj as BaseEntity).avatar.lightPicker = entityLightPicker;
 					}
 				}
+				
 				if (_mainChar)
 				{
 					_mainChar.addSyncInfo(new BaseObjSyncInfo(cameraTarget, true));
-
+					
 					_mainCharSyncPosLight = _sceneMapLayer.getObj(MAIN_CHAR_SYNC_POS_LIGHT_NAME) as LightBase;
 					if (_mainCharSyncPosLight)
 					{
@@ -1007,7 +1084,7 @@ package com.game.engine3D.core
 					completeHandler(gameScene3D);
 			}
 		}
-
+		
 		public function loadMiniMap(mapName : String, miniMapUrl : String, rect : Rectangle = null, completeHandler : Function = null) : void
 		{
 			var gameScene3D : GameScene3D = this;
@@ -1018,7 +1095,7 @@ package com.game.engine3D.core
 					completeHandler(gameScene3D);
 			}
 		}
-
+		
 		public function loadRadarMap(mapName : String, radarMapUrl : String, rect : Rectangle = null, completeHandler : Function = null) : void
 		{
 			var gameScene3D : GameScene3D = this;
@@ -1029,7 +1106,7 @@ package com.game.engine3D.core
 					completeHandler(gameScene3D);
 			}
 		}
-
+		
 		/**
 		 * 附着地面
 		 * @param baseObj
@@ -1041,7 +1118,7 @@ package com.game.engine3D.core
 				return sceneMapLayer.queryHeightAt(x, z);
 			return 0;
 		}
-
+		
 		override public function dispose() : void
 		{
 			clear();
@@ -1099,11 +1176,6 @@ package com.game.engine3D.core
 				_glowFilter.dispose();
 				_glowFilter = null;
 			}
-			if (_blurFilter)
-			{
-				_blurFilter.dispose();
-				_blurFilter = null;
-			}
 			if (_outlineGlowFilter)
 			{
 				_outlineGlowFilter.dispose();
@@ -1128,7 +1200,7 @@ package com.game.engine3D.core
 				parent.removeChild(this);
 			super.dispose();
 		}
-
+		
 		public function destroy() : void
 		{
 			dispose();

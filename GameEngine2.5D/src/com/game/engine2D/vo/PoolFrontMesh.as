@@ -1,10 +1,9 @@
 package com.game.engine2D.vo
 {
 	
-	import com.game.engine2D.interfaces.IZoneMesh;
 	import com.game.engine2D.utils.MaterialUtils;
-	import com.game.mainCore.libCore.pool.IPoolClass;
-	import com.game.mainCore.libCore.pool.Pool;
+	import com.game.engine3D.core.poolObject.IInstancePoolClass;
+	import com.game.engine3D.core.poolObject.InstancePool;
 	
 	import flash.geom.Matrix;
 	import flash.geom.Point;
@@ -18,10 +17,9 @@ package com.game.engine2D.vo
 	 * @author guoqing.wen
 	 * 
 	 */
-	public class PoolFrontMesh extends Mesh implements IPoolClass,IZoneMesh
+	public class PoolFrontMesh extends Mesh implements IInstancePoolClass
 	{
-		static private const poolSize:int = 1000;
-		static private var _pool:Pool = new Pool("SceneZoneMesh_pool", poolSize);
+		static private var _pool:InstancePool = new InstancePool("SceneZoneMesh_pool", 1000);
 		static private var _geometrySize:Number = 100;
 		static private var _geometryPlane:PlaneFrameGeometry = new PlaneFrameGeometry(_geometrySize, _geometrySize, false);
 		
@@ -42,7 +40,7 @@ package com.game.engine2D.vo
 		{
 			_posScale.x = val;
 		}
-
+		
 		override public function set scaleY(val:Number):void
 		{
 			_posScale.y = val;
@@ -65,7 +63,10 @@ package com.game.engine2D.vo
 		
 		public function set width(value:int):void
 		{
-			setSize(value, height);
+			if (_posGeometry.x != value)
+			{
+				setSize(value, _posGeometry.y);
+			}
 		}
 		
 		public function get height():int
@@ -75,7 +76,10 @@ package com.game.engine2D.vo
 		
 		public function set height(value:int):void
 		{
-			setSize(width, value);
+			if (_posGeometry.y != value)
+			{
+				setSize(_posGeometry.x, value);
+			}
 		}
 		
 		public function run():void
@@ -85,11 +89,8 @@ package com.game.engine2D.vo
 		
 		public function setSize(width:Number, height:Number):void
 		{
-			if (_posGeometry.x != width || _posGeometry.y != height)
-			{
-				_posGeometry.setTo(width, height);
-				_posGeometryScale.setTo(_posGeometry.x/_geometrySize, _posGeometry.y/_geometrySize);
-			}
+			_posGeometry.setTo(width, height);
+			_posGeometryScale.setTo(_posGeometry.x/_geometrySize, _posGeometry.y/_geometrySize);
 			super.scaleX = _posGeometryScale.x*_posScale.x;
 			super.scaleY = _posGeometryScale.y*_posScale.y;
 		}
@@ -113,55 +114,34 @@ package com.game.engine2D.vo
 		{
 			super.y = -val;
 		}
-
-		override public function get z():Number
-		{
-			return 0;
-			//return -super.z;
-		}
-		
-		override public function set z(val:Number):void
-		{
-			//super.z = -val;
-		}
-		
-		public function set depth(value:int):void
-		{
-		}
 		
 		public function reSet($parameters:Array):void
 		{
+			this.x = this.y = this.z = 0;
 			this.material = MaterialUtils.default1x1Texture;
 			this.layerType = EntityLayerType.DEFAULT;
 		}
 		
-		override public function dispose():void
+		public function instanceDestroy():void
 		{
+			this.dispose();
+		}
+		
+		public function instanceDispose():void
+		{
+			if (parent)parent.removeChild(this);
 			this.material = MaterialUtils.default1x1Texture;
-		}
-		
-		public function destory():void
-		{
-			super.dispose();
-		}
-		
-		public function setPosition():void
-		{
-			
 		}
 		
 		static public function recycle($pool:PoolFrontMesh):void
 		{
 			if ($pool)
 			{
-				if ($pool.parent)$pool.parent.removeChild($pool);
-				if (_pool.length >= poolSize)
-					$pool.destory();
 				_pool.disposeObj($pool);
 			}
 		}
 		
-		static public function create(p:Object):PoolFrontMesh
+		static public function create():PoolFrontMesh
 		{
 			return _pool.createObj(PoolFrontMesh) as PoolFrontMesh;
 		}

@@ -76,8 +76,8 @@ package com.client.process
 				ResLoadingView.instance.show();
 				ResLoadingView.instance.title = "加载创建角色资源...";
 
-				_themeLoader = new ThemeLoader(true);
-				_themeLoader.load(ClientGlobal.getLoginuiResUrl(), onResLoaded, onPorgress, onResError);
+				_themeLoader = new ThemeLoader();
+				_themeLoader.load(ClientGlobal.getLoginuiResUrl(), onResLoaded, onProgress, onResError);
 			}
 		}
 
@@ -93,10 +93,10 @@ package com.client.process
 			urlLoader.load(new URLRequest(url));
 		}
 
-		private function onPorgress(ld : MultiLoadData, e : ProgressEvent) : void
+		private function onProgress(progress:Number) : void
 		{
-			var currPercent : Number = (e.bytesLoaded / e.bytesTotal) * 0.8;
-			setProcessPercent(currPercent);
+			//			var currPercent : Number = e.bytesLoaded / e.bytesTotal;
+			setProcessPercent(progress);
 		}
 
 		private function onResError(ld : MultiLoadData, e : Event) : void

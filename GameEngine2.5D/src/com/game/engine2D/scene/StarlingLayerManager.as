@@ -10,7 +10,7 @@ package com.game.engine2D.scene
 	
 	import starling.display.Sprite;
 	import starling.display.Stage;
-
+	
 	/**
 	 * starlingUI层级初始化 
 	 * @author guoqing.wen
@@ -18,12 +18,12 @@ package com.game.engine2D.scene
 	 */
 	public class StarlingLayerManager
 	{
-
+		
 		public static function get mapUILevel():Sprite
 		{
 			return _mapUILevel;
 		}
-
+		
 		static private var _setupComplete:Function;
 		static private var _stage:flash.display.Stage;
 		static private var _starlingStage:starling.display.Stage;
@@ -41,6 +41,8 @@ package com.game.engine2D.scene
 		public static function setup(stage : flash.display.Stage, 
 									 viewContainer : DisplayObjectContainer, 
 									 setupComplete : Function, 
+									 setupError : Function, 
+									 userDisabledError : Function, 
 									 viewCount : int = 1, 
 									 starlingLayerCount : int = 0, 
 									 onStarlingEventCapture : Function = null, 
@@ -50,7 +52,7 @@ package com.game.engine2D.scene
 			_setupComplete = setupComplete;
 			Stage3DLayerManager.setup(
 				stage, stage, 
-				stage3DLayerSetupComplete, viewCount, 
+				stage3DLayerSetupComplete, setupError, userDisabledError, viewCount, 
 				starlingLayerCount,onStarlingEventCapture,
 				useScreenView
 			);
@@ -73,63 +75,63 @@ package com.game.engine2D.scene
 			
 			if (_setupComplete!=null)_setupComplete();
 		}
-
+		
 		public static function openMouseEvent():void
 		{
 			_alertLevel.touchable = _uiLevel.touchable = _mapUILevel.touchable = _loginLevel.touchable = _gameLevel.touchable = true;
 			_topLevel.touchable = true;
 		}
-
+		
 		public static function closeMouseEvent(isTop:Boolean,isTools:Boolean):void
 		{
 			_alertLevel.touchable = _uiLevel.touchable = _mapUILevel.touchable = _loginLevel.touchable = _gameLevel.touchable = false;
 			_topLevel.touchable = isTop;
 		}
-
+		
 		public static function get stage():flash.display.Stage
 		{
 			return _stage;
 		}
-
+		
 		public static function get alertLevel():Sprite
 		{
 			return _alertLevel;
 		}
-
+		
 		public static function get topLevel():Sprite
 		{
 			return _topLevel;
 		}
-
+		
 		public static function get uiLevel():Sprite
 		{
 			return _uiLevel;
 		}
-
+		
 		public static function get loginLevel():Sprite
 		{
 			return _loginLevel;
 		}
-
+		
 		public static function get gameLevel():Sprite
 		{
 			return _gameLevel;
 		}
-
+		
 		public static function get starlingStage():starling.display.Stage
 		{
 			return _starlingStage;
 		}
-
+		
 		public static function get stageWidth():Number
 		{
 			return _stage.stageWidth;
 		}
-
+		
 		public static function get stageHeight():Number
 		{
 			return _stage.stageHeight;
 		}
-
+		
 	}
 }

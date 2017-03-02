@@ -1,13 +1,14 @@
 package com.game.engine3D.utils
 {
+	import com.game.engine3D.config.GlobalConfig;
 	import com.game.mainCore.libCore.utils.ZMath;
-
+	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
-
+	
 	import away3d.core.math.Matrix3DUtils;
 	import away3d.pathFinding.DistrictWithPath;
-
+	
 	/**
 	 *
 	 * 寻路工具
@@ -20,7 +21,7 @@ package com.game.engine3D.utils
 		public function PathFinderUtil()
 		{
 		}
-
+		
 		/**
 		 * 客户端自己模拟寻路
 		 * @param position 当前站立的地方
@@ -35,17 +36,19 @@ package com.game.engine3D.utils
 				var pathBak : Vector.<Vector3D> = new Vector.<Vector3D>;
 				var pathCoordList : Vector.<Number>;
 				//兼容2.5D 对3d寻路没有影响
-				position.y = position.z;
-				
+				if (GlobalConfig.use2DMap)
+				{
+					position.y = position.z;
+				}
 				if (isPointInSide(district, targetPos))
 					pathCoordList = district.findPath(position, targetPos);
-
+				
 				if (pathCoordList && pathCoordList.length > 1)
 				{
 					var coordCount : int = pathCoordList.length / 2;
 					path = new Vector.<Vector3D>();
 					path.length = coordCount / 2 - 1;
-
+					
 					for (var i : int = 0; i < coordCount; i++)
 					{
 						if (pathBak.length - 1 < i)
@@ -53,7 +56,7 @@ package com.game.engine3D.utils
 							pathBak.length = i;
 							pathBak[i] = new Vector3D();
 						}
-
+						
 						pathBak[i].setTo(pathCoordList[i * 2], 0, pathCoordList[i * 2 + 1]);
 						path[i] = pathBak[i];
 					}
@@ -62,7 +65,7 @@ package com.game.engine3D.utils
 			}
 			return null;
 		}
-
+		
 		public static function isPointInSide(district : DistrictWithPath, position : Vector3D) : Boolean
 		{
 			if (district && district.isPointInSide(position, district.radiusForEntity))
@@ -71,7 +74,7 @@ package com.game.engine3D.utils
 			}
 			return false;
 		}
-
+		
 		public static function isSolid(district : DistrictWithPath, targetPos : Vector3D) : Boolean
 		{
 			if (district && district.isPointInSide(targetPos, district.radiusForEntity))
@@ -80,7 +83,7 @@ package com.game.engine3D.utils
 			}
 			return true;
 		}
-
+		
 		public static function getFarthestWalkablePosByStraight(district : DistrictWithPath, position : Vector3D, offsetPos : Vector3D, dist : int = 100, step : int = 32) : Vector3D
 		{
 			var resultPos : Vector3D;
@@ -101,7 +104,7 @@ package com.game.engine3D.utils
 			}
 			return resultPos;
 		}
-
+		
 		public static function getWalkablePosByOffset(district : DistrictWithPath, position : Vector3D, offsetPos : Vector3D, dist : int, stepDist : int = 32) : Vector3D
 		{
 			if (district)
@@ -121,7 +124,7 @@ package com.game.engine3D.utils
 					var angleRad : Number = angle * Math.PI / 180;
 					var cosV : Number = Math.cos(angleRad);
 					var sinV : Number = Math.sin(angleRad);
-
+					
 					var doubleStepDist : int = stepDist * stepDist;
 					var tmpPos3d : Vector3D = new Vector3D();
 					tmpPos3d.setTo(position.x, position.z, position.z);
@@ -157,7 +160,7 @@ package com.game.engine3D.utils
 			}
 			return null;
 		}
-
+		
 		/**
 		 * 获取前方非障碍点
 		 * @param district
@@ -180,7 +183,7 @@ package com.game.engine3D.utils
 					var angleRad : Number = angle * Math.PI / 180;
 					var cosV : Number = Math.cos(angleRad);
 					var sinV : Number = Math.sin(angleRad);
-
+					
 					var doubleStepDist : int = stepDist * stepDist;
 					var tmpPos3d : Vector3D = new Vector3D();
 					tmpPos3d.setTo(position.x, 0, position.z);
@@ -215,7 +218,7 @@ package com.game.engine3D.utils
 			}
 			return null;
 		}
-
+		
 		public static function getDistPos(district : DistrictWithPath, position : Vector3D, targetPos : Vector3D, dist : int, stepDist : int = 32) : Vector3D
 		{
 			if (district)
@@ -229,7 +232,7 @@ package com.game.engine3D.utils
 					var angleRad : Number = angle * Math.PI / 180;
 					var cosV : Number = Math.cos(angleRad);
 					var sinV : Number = Math.sin(angleRad);
-
+					
 					var pos3d : Vector3D = new Vector3D();
 					pos3d.setTo(position.x + dist * cosV, 0, position.z + dist * sinV);
 					if (isPointInSide(district, pos3d))
@@ -265,7 +268,7 @@ package com.game.engine3D.utils
 			}
 			return null;
 		}
-
+		
 		public static function getNearestPos(district : DistrictWithPath, position : Vector3D, targetPos : Vector3D, stepDist : int = 32) : Vector3D
 		{
 			if (district)
@@ -274,7 +277,7 @@ package com.game.engine3D.utils
 				{
 					return targetPos;
 				}
-
+				
 				var dx : Number = 0;
 				var dz : Number = 0;
 				var targetDist : Number = MathUtil.getDistance(position.x, position.z, targetPos.x, targetPos.z);
@@ -284,7 +287,7 @@ package com.game.engine3D.utils
 					var angleRad : Number = angle * Math.PI / 180;
 					var cosV : Number = Math.cos(angleRad);
 					var sinV : Number = Math.sin(angleRad);
-
+					
 					var pos3d : Vector3D = new Vector3D();
 					pos3d.setTo(position.x + targetDist * cosV, 0, position.z + targetDist * sinV);
 					//
@@ -313,7 +316,7 @@ package com.game.engine3D.utils
 			}
 			return null;
 		}
-
+		
 		public static function getRoundPoses(district : DistrictWithPath, targetPos : Vector3D, dist : int = 200, stepDist : int = 32) : Vector.<Vector3D>
 		{
 			if (district)

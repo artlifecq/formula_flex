@@ -115,7 +115,7 @@ package
 			//引擎设置
 			EngineSetting.init();
 //			StarlingLayerManager.setup(root.stage, root.stage, stage3DLayerSetupComplete, 1, 10, CameraController.forceStopPanning);
-			Stage3DLayerManager.setup(this.stage, this.stage, stage3DLayerSetupComplete, 1, 10, null);
+			Stage3DLayerManager.setup(this.stage, this.stage, stage3DLayerSetupComplete,null,null, 1, 10, null);
 		}
 		
 		private function stage3DLayerSetupComplete() : void

@@ -7,6 +7,7 @@ package com.game.engine3D.scene.layers
 	import com.game.engine3D.events.SceneEventAction3D;
 	import com.game.engine3D.manager.SceneMapDataManager;
 	import com.game.engine3D.manager.Stage3DLayerManager;
+	import com.game.engine3D.pathFinding.HeightMapHelperProxy;
 	import com.game.engine3D.vo.MapPointSet;
 	import com.game.engine3D.vo.SceneMapData;
 	
@@ -18,6 +19,7 @@ package com.game.engine3D.scene.layers
 	import away3d.Away3D;
 	import away3d.animators.IAnimator;
 	import away3d.animators.IAnimatorOwner;
+	import away3d.audio.SoundBox;
 	import away3d.cameras.lenses.PerspectiveLens;
 	import away3d.containers.ObjectContainer3D;
 	import away3d.containers.PlanarContainer3D;
@@ -25,6 +27,7 @@ package com.game.engine3D.scene.layers
 	import away3d.core.base.Geometry;
 	import away3d.core.base.SubGeometryBase;
 	import away3d.core.base.SubMesh;
+	import away3d.core.partition.PlanarPartition3D;
 	import away3d.core.partition.QuadTreePartition3D;
 	import away3d.core.pick.PickingColliderType;
 	import away3d.entities.EntityLayerType;
@@ -40,7 +43,9 @@ package com.game.engine3D.scene.layers
 	import away3d.library.assets.AssetType;
 	import away3d.library.assets.IAsset;
 	import away3d.lights.LightBase;
+	import away3d.lights.PointLight;
 	import away3d.loaders.AssetLoader;
+	import away3d.loaders.ResourceBundleInstance;
 	import away3d.loaders.parsers.AWD2Parser;
 	import away3d.materials.MaterialBase;
 	import away3d.materials.SinglePassMaterialBase;
@@ -97,6 +102,8 @@ package com.game.engine3D.scene.layers
 		private var _useFogByHeight : Boolean;
 		private var _rimMethodsMap : HashMap;
 		private var _useRim : Boolean;
+		
+		private var _animatorRandom : int = 5000;
 		/** 灯，包含顶灯 **/
 		private var _lights : Vector.<LightBase>;
 		private var _useLight : Boolean;
@@ -133,8 +140,10 @@ package com.game.engine3D.scene.layers
 		private var _view3DAsset : View3DAsset;
 
 		private var _quadTree : QuadTreePartition3D;
+		
+		private var _planarPartition : PlanarPartition3D;
         
-        private var _xyzMode : int = HeightMapHelper.MODE_XZ;
+        private var _xyzMode : int = HeightMapHelperProxy.MODE_XZ;
 
 		public function SceneMapLayer(scene : GameScene3D)
 		{
@@ -249,7 +258,7 @@ package com.game.engine3D.scene.layers
 			_onMapLoadErrorHandler = loadErrorHandler;
 			_onMapParseErrorHandler = parseErrorHandler;
 
-			_heightMapHelper = new HeightMapHelper(2048, 2048);
+			_heightMapHelper = HeightMapHelper.getInstance(1024, 1024);
 			_mousePickerList = new Vector.<ObjectContainer3D>();
 
 			trace("开始加载地图：" + mapUrl);
@@ -270,8 +279,15 @@ package com.game.engine3D.scene.layers
 						addLightPicker(obj as LightPickerBase);
 						break;
 					case AssetType.LIGHT:
-						addLight(obj as LightBase);
-						addMapObject(obj as ObjectContainer3D);
+						if (obj is PointLight && (obj as PointLight).parent) 
+						{
+							// nothing							
+						} 
+						else
+						{
+							addLight(obj as LightBase);
+							addMapObject(obj as ObjectContainer3D);
+						}
 						break;
 					case AssetType.MATERIAL:
 						if (obj is SinglePassMaterialBase)
@@ -296,8 +312,10 @@ package com.game.engine3D.scene.layers
 						{
 							addMapObject(obj as ObjectContainer3D);
 						}
+						objTransformPlanared(obj as ObjectContainer3D);
 						addMousePicker(obj as ObjectContainer3D);
 						break;
+					case AssetType.PROPERTY_ANIMATOR_CONTAINER:
 					case AssetType.CONTAINER:
 					case AssetType.COMPOSITE_ANIMATOR_GROUP:
 					case AssetType.KEY_FRAME_OBJECT_CONTAINER:
@@ -310,25 +328,32 @@ package com.game.engine3D.scene.layers
 						{
 							addMapObject(obj as ObjectContainer3D);
 						}
-						if (_view3DAsset && _view3DAsset.cameraMode2D && GlobalConfig.transformPlanarRotation)
+						objTransformPlanared(obj as ObjectContainer3D);
+						//加大ResourceBundleInstance动画随机大小
+						if (obj.assetType == AssetType.RESOURCE_BUNDLE_INSTANCE)
 						{
-							(obj as ObjectContainer3D).z = GlobalConfig.transform2dValue((obj as ObjectContainer3D).y);
-//							trace(obj.name + "      ******************      "  + (obj as ObjectContainer3D).z);
+							(obj as ResourceBundleInstance).animatorRandom = -_animatorRandom;
 						}
 						break;
 					case AssetType.SPARTICLE_MESH:
 						var particle : SparticleMesh = obj as SparticleMesh;
 						if (!particle.parent || !(particle.parent is IAnimatorOwner))
 						{
-							particle.animator.start(-Math.random() * 5000);
+							particle.animator.start(-Math.random() * _animatorRandom);
 						}
 						if (!(obj as ObjectContainer3D).parent)
 						{
 							addMapObject(obj as ObjectContainer3D);
 						}
-						if (_view3DAsset && _view3DAsset.cameraMode2D && GlobalConfig.transformPlanarRotation)
+						
+						//暂时这么写
+						objTransformPlanared(obj as ObjectContainer3D);
+						break;
+					case AssetType.SOUND_BOX:
+						if (!(obj as SoundBox).parent)
 						{
-							(obj as ObjectContainer3D).z = GlobalConfig.transform2dValue((obj as ObjectContainer3D).y) + (obj as ObjectContainer3D).parent.z;
+							addMapObject(obj as ObjectContainer3D);	
+							(obj as SoundBox).animator.start();
 						}
 						break;
 					case AssetType.SKYBOX:
@@ -373,7 +398,7 @@ package com.game.engine3D.scene.layers
 						}
 						break;
 					case AssetType.ANIMATOR:
-						IAnimator(obj).start(-Math.random() * 5000);
+						IAnimator(obj).start(-Math.random() * _animatorRandom);
 						_animatorMap.add(obj.name, obj);
 						break;
 					case AssetType.VIEW_3D:
@@ -400,9 +425,26 @@ package com.game.engine3D.scene.layers
 						if (view3DAsset.cameraMode2D)
 						{
 							GlobalConfig.mapCameraAngle = -view3DAsset.cameraMode2DAngle;
-							PlanarContainer3D.updatePlanarRotation(GlobalConfig.mapCameraAngle);
+							PlanarContainer3D.planarRotationX = GlobalConfig.mapCameraAngle;
+//							PlanarContainer3D.updatePlanarRotation(GlobalConfig.mapCameraAngle);
+							
+							_quadTree = null;
+							_planarPartition ||= new PlanarPartition3D();
+							this.partition = _planarPartition;
 						}
 						_view3DAsset = view3DAsset;
+						_scene3D.view.screenSpaceShadowMaskRenderer.blurXGussianA = view3DAsset.blurXGussianA;
+						_scene3D.view.screenSpaceShadowMaskRenderer.blurXGussianL = view3DAsset.blurXGussianL;
+						_scene3D.view.screenSpaceShadowMaskRenderer.blurXSize = view3DAsset.blurXSize;
+						_scene3D.view.screenSpaceShadowMaskRenderer.blurYGussianA = view3DAsset.blurYGussianA;
+						_scene3D.view.screenSpaceShadowMaskRenderer.blurYGussianL = view3DAsset.blurYGussianL;
+						_scene3D.view.screenSpaceShadowMaskRenderer.blurYSize = view3DAsset.blurYSize;
+						_scene3D.view.screenSpaceShadowMaskRenderer.enable = view3DAsset.enableScreenSpaceShadow;
+						_scene3D.view.screenSpaceShadowMaskRenderer.quality = view3DAsset.quality;
+						
+						Away3D.GAMMA_CORRECTION = view3DAsset.gammaCorrection;
+						Away3D.GAMMA_VALUE = view3DAsset.gammaValue;
+						
 						break;
 					case AssetType.FILTER_3D:
 						_scene3D.addFilter3D(obj as Filter3DBase);
@@ -476,6 +518,15 @@ package com.game.engine3D.scene.layers
 			}
 			_district.generateNavMesh(generateNavMeshComplete);
 		}
+		
+		private function objTransformPlanared(obj : ObjectContainer3D) : void
+		{
+			if (obj && _view3DAsset && _view3DAsset.cameraMode2D && GlobalConfig.transformPlanared)
+			{
+				obj.z = GlobalConfig.transform2dValue(obj.y);
+				//trace("objTransformPlanared:",obj.name);
+			}
+		}
 
 		private function addMousePicker(o : ObjectContainer3D) : void
 		{
@@ -495,13 +546,15 @@ package com.game.engine3D.scene.layers
 					_mousePickerList.push(o);
 					o.addEventListener(MouseEvent3D.MOUSE_UP, handleMouseUpEvent3D);
 					o.addEventListener(MouseEvent3D.MOUSE_DOWN, handleMouseDownEvent3D);
+					o.addEventListener(MouseEvent3D.MOUSE_DOWN, handleMouseDownEvent3D);
+					o.addEventListener(MouseEvent3D.RIGHT_MOUSE_UP, handleRightMouseUpEvent3D);
+					o.addEventListener(MouseEvent3D.RIGHT_MOUSE_DOWN, handleRightMouseDownEvent3D);
 					if (_mousePickerMovable)
 						o.addEventListener(MouseEvent3D.MOUSE_MOVE, handleMouseMoveEvent3D);
 				}
-				else if (_view3DAsset && _view3DAsset.cameraMode2D && GlobalConfig.transformPlanarRotation)
+				else if (_view3DAsset && _view3DAsset.cameraMode2D)
 				{
 					m.z = GlobalConfig.transform2dValue(m.y);
-//					trace(m.name + "   " + m.zOffset + "   z   " + m.z);
 				}
 			}
 		}
@@ -585,6 +638,22 @@ package com.game.engine3D.scene.layers
 			//function onSceneInteractive(action : String, mosEvt : MouseEvent3D, position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
 			EventManager.dispatchEvent(SceneEvent.INTERACTIVE, SceneEventAction3D.SCENE_MAP_MOUSE_DOWN, e, position, null, null);
 		}
+		
+		private function handleRightMouseUpEvent3D(e : MouseEvent3D) : void
+		{
+			var position : Vector3D = e.scenePosition;
+			//派发事件
+			//function onSceneInteractive(action : String, mosEvt : MouseEvent3D, position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
+			EventManager.dispatchEvent(SceneEvent.INTERACTIVE, SceneEventAction3D.SCENE_MAP_RIGHT_MOUSE_UP, e, position, null, null);
+		}
+		
+		private function handleRightMouseDownEvent3D(e : MouseEvent3D) : void
+		{
+			var position : Vector3D = e.scenePosition;
+			//派发事件
+			//function onSceneInteractive(action : String, mosEvt : MouseEvent3D, position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
+			EventManager.dispatchEvent(SceneEvent.INTERACTIVE, SceneEventAction3D.SCENE_MAP_RIGHT_MOUSE_DOWN, e, position, null, null);
+		}
 
 		private function handleMouseMoveEvent3D(e : MouseEvent3D) : void
 		{
@@ -606,7 +675,8 @@ package com.game.engine3D.scene.layers
 			_cameraFar = _cameraFar > 0 ? _cameraFar : 12000;
 			_scene3D.cameraNear = _cameraNear;
 			_scene3D.cameraFar = _cameraFar;
-			_quadTree.reBuildQuadTree();
+			if (_quadTree)
+				_quadTree.reBuildQuadTree();
 			EventManager.dispatchEvent(MapLoadEvent.MAP_RESOURCE_COMPLETE);
 			Stage3DLayerManager.stage3DProxy.addEventListener(Stage3DEvent.INIT_FRAME, onInitFrame);
 		}
@@ -654,6 +724,11 @@ package com.game.engine3D.scene.layers
 		public function get plantCastsShadows() : Boolean
 		{
 			return _plantCastsShadows;
+		}
+		
+		public function get plantGroups() : Vector.<PlantGroup>
+		{
+			return _plantGroups;
 		}
 
 		private function generateHeightMap() : void
@@ -989,6 +1064,16 @@ package com.game.engine3D.scene.layers
 		{
 			return _cameraFar;
 		}
+		
+		public function get animatorRandom() : int
+		{
+			return _animatorRandom;
+		}
+		
+		public function set animatorRandom(value : int) : void
+		{
+			_animatorRandom = value;
+		}
 
 		private function updateDistrictWithHeightMap() : void
 		{
@@ -996,13 +1081,30 @@ package com.game.engine3D.scene.layers
 				return;
 			if (_heightMapHelper && _district)
 			{
-				_heightMapHelper.traslateVector3Ds(_district.boundPointsSet.points, this._xyzMode);
+				HeightMapHelperProxy.traslateVector3Ds(_heightMapHelper,_district.boundPointsSet.points, this._xyzMode);
 				_district.boundPointsSet.updateWireFrame();
 				for (var j : int = 0; j < _district.internalPointsSets.length; j++)
 				{
 					var ps : PointsSet = _district.internalPointsSets[j];
-					_heightMapHelper.traslateVector3Ds(ps.points, this._xyzMode);
+					HeightMapHelperProxy.traslateVector3Ds(_heightMapHelper,ps.points, this._xyzMode);
 					ps.updateWireFrame();
+				}
+			}
+		}
+		
+		public function setLayerVisible(value:Boolean):void
+		{
+			this.visible = value;
+			
+			var animators:Array = _animatorMap.getValues();
+			for each (var animator:IAnimator in animators) 
+			{
+				if (animator)
+				{
+					if (value)
+						animator.start(-Math.random() * _animatorRandom);
+					else
+						animator.stop();
 				}
 			}
 		}
@@ -1043,6 +1145,8 @@ package com.game.engine3D.scene.layers
 				{
 					o.removeEventListener(MouseEvent3D.MOUSE_UP, handleMouseUpEvent3D);
 					o.removeEventListener(MouseEvent3D.MOUSE_DOWN, handleMouseDownEvent3D);
+					o.removeEventListener(MouseEvent3D.RIGHT_MOUSE_UP, handleRightMouseUpEvent3D);
+					o.removeEventListener(MouseEvent3D.RIGHT_MOUSE_DOWN, handleRightMouseDownEvent3D);
 					if (_mousePickerMovable)
 						o.removeEventListener(MouseEvent3D.MOUSE_MOVE, handleMouseMoveEvent3D);
 				}
@@ -1107,11 +1211,8 @@ package com.game.engine3D.scene.layers
 				_loader = null;
 			}
 
-			if (_heightMapHelper)
-			{
-				_heightMapHelper.dispose();
-				_heightMapHelper = null;
-			}
+			_heightMapHelper = null;
+			
 			if (_district)
 			{
 				_district.dispose();

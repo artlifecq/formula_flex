@@ -1,10 +1,15 @@
 package com.game.engine2D.core
 {
-	import flash.display3D.textures.TextureBase;
+	import com.game.engine2D.config.GlobalConfig2D;
+	import com.game.engine3D.manager.Stage3DLayerManager;
+	
 	import flash.events.Event;
 	import flash.utils.ByteArray;
+	import flash.utils.Endian;
 	
+	import away3d.arcane;
 	import away3d.core.managers.Stage3DProxy;
+	import away3d.premium.ImageAreaAvgScale;
 	import away3d.textures.ATFData;
 	import away3d.textures.BGRAData;
 	import away3d.textures.BPGData;
@@ -13,6 +18,8 @@ package com.game.engine2D.core
 	import worker.CustomMainToWorker;
 	import worker.parser.WorkerProtocol;
 	
+	use namespace arcane;
+	
 	/**
 	 * BPG资源异步解析 
 	 * @author guoqing.wen
@@ -20,35 +27,48 @@ package com.game.engine2D.core
 	 */
 	public class BPGByteTexture extends Texture2DBase
 	{
-		private var _isReady:Boolean = false;
-		private var _bpgTexture:TextureBase;
-		/** 紧释放显存，可能还会在使用 */
-		private var _isDisposeTexture:Boolean = false;
 		/** 释放显存及销毁，不会在使用 */
 		private var _isDispose:Boolean = false;
 		private var _atfData:ATFData;
-		private var _isParseAtfData:Boolean;
 		private var _bgraData:BGRAData;
 		private var _isParseBgraData:Boolean;
+		private var _bpgTextureScale:Boolean;
+		private var _bpgTextureScaleValue:Number = 1.0;
+		private var _enableTextureScale:Boolean;
 		private var _bpgData:BPGData;
 		private var _path:String;
+		private var _bpgTag:int = 0;
 		
-		public function BPGByteTexture(byteArray:ByteArray, path:String = null)
+		public function BPGByteTexture(byteArray:ByteArray, path:String = null, enableScaleTexture:Boolean = true,autoRecycleEnable:Boolean = true)
 		{
 			super();
 			_path = path;
-			parseBpg2Bgra(new BPGData(byteArray));
-			this.autoRecycleEnable = true;
+			_enableTextureScale = enableScaleTexture;
+			_bpgData = new BPGData(byteArray);
+			parseBpg2Bgra(_bpgData);
+			this.autoRecycleEnable = autoRecycleEnable;
 			this.autoRecycleDataEnable = false;
 		}
 		
 		private function parseBpg2Bgra(bpgData:BPGData):void
 		{
 			_isParseBgraData = true;
-			_bpgData = bpgData;
-			_width = bpgData.width;
-			_height = bpgData.height;
-			var tag:int = CustomMainToWorker.getInstance().sendData(
+			_bpgTextureScale = false;
+			if (_enableTextureScale && GlobalConfig2D.avatarBpgResScale)
+			{
+				var proxy:Stage3DProxy = Stage3DLayerManager.stage3DProxy;
+				var totalMemory:int = proxy.textureMemory2D + proxy.textureMemory3D;
+				var scaleMemory:int = GlobalConfig2D.avatarBpgResScaleMemory;
+				if (totalMemory + scaleMemory >= proxy.maxTextureMemory)
+				{
+					_bpgTextureScale = bpgData.width > 64 && bpgData.height > 64;
+					_bpgTextureScaleValue = GlobalConfig2D.avatarBpgResScaleValue;
+				}
+			}
+			_smooth = _bpgTextureScale;
+			_width = _bpgTextureScale ? bpgData.width/_bpgTextureScaleValue : bpgData.width;
+			_height = _bpgTextureScale ? bpgData.height/_bpgTextureScaleValue : bpgData.height;
+			_bpgTag = CustomMainToWorker.getInstance().sendData(
 				WorkerProtocol.MW_BPGFile2BgraBmdBytes, 
 				bpgData.data, 
 				bgp2BgraByteCompelte
@@ -57,20 +77,36 @@ package com.game.engine2D.core
 		
 		private function bgp2BgraByteCompelte(cmd:int, tag:int, bytes:ByteArray, releaseTime:int):void
 		{
-			CONFIG::BPG_Debug {
-				trace("parse bpg2Bgra time:",releaseTime, this.width, this.height);
-			}
 			_isParseBgraData = false;
-			if (_isDispose){
+			if (_isDispose)
+			{
 				bytes.clear();
 			}
-			else{
-				_bgraData = new BGRAData(bytes,_bpgData.width, _bpgData.height, _bpgData.hasAlpha);
+			else
+			{
+				if (_bpgTextureScale)
+				{
+					var w:Number = _bpgData.width, h:Number = _bpgData.height;
+					var halfW:Number = w/_bpgTextureScaleValue,halfH:Number = h/_bpgTextureScaleValue;
+					var scaleBytes:ByteArray = new ByteArray();
+					scaleBytes.endian = Endian.LITTLE_ENDIAN;
+					ImageAreaAvgScale.scaleToByteArray(bytes,w,h,halfW,halfH,scaleBytes);
+					scaleBytes.position = 0;
+					bytes.clear();
+					_bgraData = new BGRAData(scaleBytes,halfW, halfH, _bpgData.hasAlpha);
+				}
+				else
+				{
+					_bgraData = new BGRAData(bytes,_bpgData.width, _bpgData.height, _bpgData.hasAlpha);
+				}
 				_compressed = true;
 				_hasAlpha = _bgraData.hasAlpha;
 				_hasMipmaps = false;
 				this.textureData = _bgraData;
-				parseBgra2Atf(_bgraData);
+				if (!_bpgTextureScale)
+				{
+					parseBgra2Atf(_bgraData);
+				}
 				if (this.hasEventListener(Event.COMPLETE)){
 					this.dispatchEventWith(Event.COMPLETE);
 				}
@@ -81,8 +117,7 @@ package com.game.engine2D.core
 		
 		private function parseBgra2Atf(bpgData:BGRAData):void
 		{
-			_isParseAtfData = true;
-			var tag:int = CustomMainToWorker.getInstance().sendData(
+			_bpgTag = CustomMainToWorker.getInstance().sendData(
 				WorkerProtocol.MW_BgraBmdBytes2ATF, 
 				bpgData.bgraBytes, 
 				bgra2AtfByteCompelte
@@ -91,13 +126,8 @@ package com.game.engine2D.core
 		
 		private function bgra2AtfByteCompelte(cmd:int, tag:int, atfBytes:ByteArray, releaseTime:int):void
 		{
-			CONFIG::BPG_Debug {
-				trace("parse bpg2atf time:",releaseTime, this.width, this.height);
-			}
-			_isParseAtfData = false;
+			_bpgTag = 0;
 			if (_isDispose){
-				if(_bgraData)_bgraData.dispose();
-				_bgraData = null;
 				atfBytes.clear();
 			}
 			else{
@@ -105,6 +135,8 @@ package com.game.engine2D.core
 				data.isAsync = false;
 				this.atfData = data;
 			}
+			if(_bgraData)_bgraData.dispose();
+			_bgraData = null;
 		}
 		
 		public function get atfData():ATFData
@@ -121,92 +153,34 @@ package com.game.engine2D.core
 			this.textureData = _atfData;
 		}
 		
-		public function get isAsync():Boolean
-		{
-			if (atfData is ATFByteData)
-				return ATFByteData(atfData).isAsync;
-			return false;
-		}
-		
-		override protected function createTexture(stage3DProxy:Stage3DProxy):TextureBase
-		{
-			_isDisposeTexture = false;
-			if (isAsync)
-			{
-				_bpgTexture = super.createTexture(stage3DProxy);
-				_bpgTexture.addEventListener(Event.TEXTURE_READY, onTextureReady);
-				return _bpgTexture;
-			}
-			return super.createTexture(stage3DProxy);
-		}
-		
-		protected function onTextureReady(event:Event):void
-		{
-			if (_bpgTexture)
-			{
-				_bpgTexture.removeEventListener(Event.TEXTURE_READY, onTextureReady);
-				_isReady = true;
-				if (_isDispose)
-				{
-					disposeByteTexture();
-				}
-				else if (_isDisposeTexture)//仅释放显存
-				{
-					super.invalidateContent();
-					_bpgTexture = null;
-				}
-			}
-		}
-		
-		override protected function uploadContent(texture:TextureBase):void
-		{
-			_isReady = false;
-			super.uploadContent(texture);
-		}
-		
-		/** 仅释放显存 */
-		override public function invalidateContent():void
-		{
-			if (_bpgTexture && isAsync) 
-			{
-				_isDisposeTexture = !_isReady;
-				if (_isReady)
-				{
-					super.invalidateContent();
-					_bpgTexture = null;
-				}
-			}
-			else
-			{
-				super.invalidateContent();
-				_bpgTexture = null;
-			}
-		}
-
 		public function get isParseBgraData():Boolean
 		{
 			return _isParseBgraData;
 		}
 		
-		/** 销毁及释放显存 */
-		private function disposeByteTexture():void
+		public function get isTextureScale():Boolean
 		{
+			return _bpgTextureScale;
+		}
+		
+		public function get textureScale():Number
+		{
+			return _bpgTextureScaleValue;
+		}
+		
+		override public function dispose():void
+		{
+			_isDispose = true;
+			if (_bpgTag != 0)
+				CustomMainToWorker.getInstance().removeTaskByTag(_bpgTag);
+			_bpgTag = 0;
 			if (_atfData)_atfData.dispose();
 			_atfData = null;
 			if (_bgraData)_bgraData.dispose();
 			_bgraData = null;
+			if (_bpgData)_bpgData.data.clear();
 			_bpgData = null;
-			_bpgTexture = null;
 			super.dispose();
-		}
-
-		override public function dispose():void
-		{
-			_isDispose = true;
-			if (_isReady){
-				disposeByteTexture();
-			}
-			_atfData = null;
 		}
 	}
 }

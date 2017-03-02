@@ -146,7 +146,7 @@ package com.rpgGame.app.manager.shell
             var plane:Plane3D = new Plane3D(0,Math.cos(_angle), -Math.sin(_angle));
             SceneManager.getScene().sceneMapLayer.view3DAsset.cameraMode2DAngle = angle;
             Scene.scene.directionalLight.planarShadowPlane = plane;
-            PlanarContainer3D.updatePlanarRotation(-angle);
+//            PlanarContainer3D.updatePlanarRotation(-angle);
         }
         
         private function show() : void {
@@ -158,8 +158,8 @@ package com.rpgGame.app.manager.shell
         }
 
         private function status() : void {
-            StatsUtil.showOrHideAwayStats(Stage3DLayerManager.stage,
-                                          Stage3DLayerManager.stage3DProxy);
+//            StatsUtil.showOrHideAwayStats(Stage3DLayerManager.stage,
+//                                          Stage3DLayerManager.stage3DProxy);
             LayerManager.showOrHideMM();
             ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
         }

@@ -10,18 +10,9 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.state.role.action.DeadLaunchStateReference;
 	import com.rpgGame.app.state.role.action.FallStateReference;
 	import com.rpgGame.app.state.role.action.HitStateReference;
-	import com.rpgGame.app.state.role.control.BuffStateReference;
-	import com.rpgGame.app.state.role.control.HunLuanStateReference;
 	import com.rpgGame.app.state.role.control.HurtStateReference;
-	import com.rpgGame.app.state.role.control.HushStateReference;
-	import com.rpgGame.app.state.role.control.StiffStateReference;
-	import com.rpgGame.app.state.role.control.StunStateReference;
-	import com.rpgGame.app.state.role.control.UnmovableStateReference;
 	import com.rpgGame.core.events.SceneCharacterEvent;
-	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
-	import com.rpgGame.coreData.clientConfig.Q_buff;
-	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;

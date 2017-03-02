@@ -3,7 +3,7 @@ package com.game.engine3D.controller.camera
 	import com.game.engine3D.events.SceneEvent;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.mainCore.core.controller.KeyController;
-
+	
 	import flash.display.InteractiveObject;
 	import flash.display.Stage;
 	import flash.events.Event;
@@ -11,13 +11,13 @@ package com.game.engine3D.controller.camera
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	import flash.ui.Multitouch;
-
+	
 	import away3d.controllers.LockedOnPlayerController;
 	import away3d.events.Event;
-
+	
 	import gs.TweenLite;
 	import gs.easing.Linear;
-
+	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -29,7 +29,6 @@ package com.game.engine3D.controller.camera
 	 */
 	public class CameraLockOnTargetController extends LockedOnPlayerController
 	{
-
 		public var mouseWheelCallback : Function;
 		public var minDist : Number = 0;
 		public var maxDist : Number = int.MAX_VALUE;
@@ -43,7 +42,7 @@ package com.game.engine3D.controller.camera
 		private var _ispanning : Boolean;
 		private var _distance : Number = 0;
 		private var _enable : Boolean = false;
-		private var _mouseLeftControlable : Boolean = false; // 是否启用鼠标左键拖动镜头。Note:OSX平台下面按住右键之后，stage不会在触发MouseMove事件，以及更新stage.mouseX,stage.mouseY。Windows平台下面Air可能会出现上述问题
+		private var _mouseLeftControlable : Boolean = true; // 是否启用鼠标左键拖动镜头。Note:OSX平台下面按住右键之后，stage不会在触发MouseMove事件，以及更新stage.mouseX,stage.mouseY。Windows平台下面Air可能会出现上述问题
 		private var _mouseRightControlable : Boolean = true;
 		private var _mouseDownPosition : Point = new Point(); // 鼠标按下位置
 
@@ -350,17 +349,17 @@ package com.game.engine3D.controller.camera
 			{
 				if (_isMouseDown)
 				{
-					if (KeyController.instance.isKeyDown(Keyboard.CONTROL))
-					{
-						if (!_ispanning)
-							startPanning();
-					}
-					else if (mouseLeftControlable)
+					if (_mouseLeftControlable)
 					{
 						if (!_ispanning)
 						{
 							startPanning();
 						}
+					}
+					else if (KeyController.instance.isKeyDown(Keyboard.CONTROL))
+					{
+						if (!_ispanning)
+							startPanning();
 					}
 					else
 					{
@@ -444,6 +443,7 @@ package com.game.engine3D.controller.camera
 
 		private function onMouseRightDown(e : MouseEvent) : void
 		{
+			_isMouseRightDown = true;
 			if (!_mouseRightControlable)
 			{
 				return;
@@ -451,29 +451,30 @@ package com.game.engine3D.controller.camera
 			if (active)
 			{
 				var stage : Stage = Stage3DLayerManager.stage;
-				if (!stage)
-					return;
-				_isMouseRightDown = true;
-				//鼠标右键down的时候，会触发mouseLeave事件，所以先必须移除leave事件的监听
-				stage.removeEventListener(flash.events.Event.MOUSE_LEAVE, onMouseLeave);
-				stage.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+				if (stage)
+				{
+					//鼠标右键down的时候，会触发mouseLeave事件，所以先必须移除leave事件的监听
+					stage.removeEventListener(flash.events.Event.MOUSE_LEAVE, onMouseLeave);
+					stage.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+					_mouseDownPosition.setTo(stage.mouseX, stage.mouseY);
+				}
 				startPanning();
-				_mouseDownPosition.setTo(stage.mouseX, stage.mouseY);
 			}
 		}
 
 		private function onMouseRightUp(e : MouseEvent) : void
 		{
+			_isMouseRightDown = false;
 			if (!_mouseRightControlable)
 			{
 				return;
 			}
 			var stage : Stage = Stage3DLayerManager.stage;
-			if (!stage)
-				return;
-			_isMouseRightDown = false;
-			stage.addEventListener(flash.events.Event.MOUSE_LEAVE, onMouseLeave);
-			stage.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+			if (stage)
+			{
+				stage.addEventListener(flash.events.Event.MOUSE_LEAVE, onMouseLeave);
+				stage.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+			}
 			endPanning();
 		}
 
@@ -484,6 +485,10 @@ package com.game.engine3D.controller.camera
 				var stage : Stage = Stage3DLayerManager.stage;
 				if (!stage)
 					return;
+				if(Stage3DLayerManager.hitTestStarling(stage.mouseX, stage.mouseY))
+				{
+					return;
+				}
 				_pan.x = stage.mouseX;
 				_pan.y = stage.mouseY;
 				if (!_ispanning)
@@ -511,12 +516,38 @@ package com.game.engine3D.controller.camera
 		private function onMouseDown(event : MouseEvent) : void
 		{
 			_isMouseDown = true;
-			_mouseDownPosition.setTo(event.stageX, event.stageY);
+			if (!_mouseLeftControlable)
+			{
+				return;
+			}
+			if (active)
+			{
+				var stage : Stage = Stage3DLayerManager.stage;
+				if (stage)
+				{
+					//鼠标右键down的时候，会触发mouseLeave事件，所以先必须移除leave事件的监听
+					stage.removeEventListener(flash.events.Event.MOUSE_LEAVE, onMouseLeave);
+					stage.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+					_mouseDownPosition.setTo(stage.mouseX, stage.mouseY);
+				}
+				startPanning();
+			}
 		}
 
 		private function onMouseUp(event : MouseEvent) : void
 		{
 			_isMouseDown = false;
+			if (!_mouseLeftControlable)
+			{
+				return;
+			}
+			var stage : Stage = Stage3DLayerManager.stage;
+			if (stage)
+			{
+				stage.addEventListener(flash.events.Event.MOUSE_LEAVE, onMouseLeave);
+				stage.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+			}
+			endPanning();
 		}
 
 		private function onMouseOver(event : MouseEvent) : void

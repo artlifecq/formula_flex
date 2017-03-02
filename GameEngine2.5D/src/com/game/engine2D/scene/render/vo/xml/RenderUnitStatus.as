@@ -26,6 +26,24 @@ package com.game.engine2D.scene.render.vo.xml
 		private var _apd_dict:Dictionary;
 		private var _actionInfoDic:Dictionary;
 		private var _frameTmDic:Dictionary;
+		private var _defaultAngle:uint;
+		private var _defaultAction:uint;
+		
+		/** 编辑器使用 */
+		public function get actionInfoDic():Dictionary
+		{
+			return _actionInfoDic;
+		}
+		
+		public function get defaultAction():uint
+		{
+			return _defaultAction;
+		}
+		
+		public function get defaultAngle():uint
+		{
+			return _defaultAngle;
+		}
 		
 		public function get blendMode():String
 		{
@@ -35,9 +53,9 @@ package com.game.engine2D.scene.render.vo.xml
 		public function initForBitmapData($fullSourchPath:String,status:uint,angle:uint,frame:uint, bitmapDataWidth:int,bitmapDataHeight:int):void
 		{
 			fullSourchPath = $fullSourchPath;
-//			frame = 1;
+			//			frame = 1;
 			_angle = 1;
-//			time = 1000;
+			//			time = 1000;
 			_apd_dict = new Dictionary();
 			var apd:RenderUnitData = new RenderUnitData(0,null,1,false);
 			apd.angle = angle;
@@ -53,6 +71,24 @@ package com.game.engine2D.scene.render.vo.xml
 		{
 			_actionInfoDic = new Dictionary();
 			_actionInfoDic[StatusConvert.getIdByNum(actionName,angle,0)] = actionInfo;
+		}
+		
+		public function getFrameByTime(time:int, actionName:uint,angle:int):int
+		{
+			var totalTime:uint = getTotalFrameTm(actionName,angle);
+			//if (time > totalTime)return 0;
+			time = time%totalTime;
+			var frame:int = 0;
+			var gt:int = 0;
+			
+			while(true)
+			{
+				gt += getTime(actionName,angle,frame);
+				if (gt >= time)
+					break;
+				frame++;
+			}
+			return frame;
 		}
 		
 		public function getTime(actionName:uint,angle:int,frame:int):int
@@ -107,7 +143,7 @@ package com.game.engine2D.scene.render.vo.xml
 		{
 			return _angle;
 		}
-
+		
 		/**
 		 * 读取位图资源原始位置数据
 		 * @param $angle 0-7
@@ -149,6 +185,8 @@ package com.game.engine2D.scene.render.vo.xml
 			{
 				var length:int = actionInfo.framVec.length;
 				var sheetData:SheetData;
+				_defaultAngle = actionInfo.angle;
+				_defaultAction = actionInfo.action;
 				for (var i:int = 0; i < length; i++) 
 				{
 					sheetData = actionInfo.framVec[i];
@@ -164,10 +202,12 @@ package com.game.engine2D.scene.render.vo.xml
 		{
 			var info:ActionInfo=_actionInfoDic[StatusConvert.getIdByNum(actionName, angle, 0)];
 			if(!info)
+			{
 				info=_actionInfoDic[StatusConvert.getIdByNum(actionName, GlobalConfig2D.resAngleFunc(angle), 0)];
+			}
 			return info;
 		}
-
+		
 		public function isNeedScaleX(actionName:uint,angle:int):Boolean
 		{
 			var info:ActionInfo=_actionInfoDic[StatusConvert.getIdByNum(actionName, angle, 0)];

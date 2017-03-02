@@ -1,20 +1,15 @@
 package com.game.engine2D.scene.map.vo
 {
-    import com.game.engine2D.config.GlobalConfig2D;
     import com.game.engine2D.config.SceneConfig;
     import com.game.engine2D.core.AsyncByteTexture;
-    import com.game.engine2D.interfaces.IZoneMesh;
     import com.game.engine2D.utils.MaterialUtils;
     import com.game.engine3D.manager.Stage3DLayerManager;
-
-    import gameEngine2D.NetDebug;
-    import gameEngine2D.IDispose;
     
     import away3d.containers.ObjectContainer3D;
-    import away3d.entities.EntityLayerType;
-    import away3d.entities.Mesh;
     import away3d.events.Event;
     import away3d.materials.TextureMaterial;
+    
+    import gameEngine2D.IDispose;
 
     public class MapZone2 implements IDispose {
         public static const STATE_INVALID : int = 0;    // 无效状态
@@ -55,7 +50,7 @@ package com.game.engine2D.scene.map.vo
         private var _key : String = "";                 // key
         private var _completeHandler : Function = null; // 加载完成回调
         
-        private var _mesh : IZoneMesh = null;
+//        private var _mesh : IZoneMesh = null;
         private var _textureMaterial : TextureMaterial = null;
         private var _texture : AsyncByteTexture = null;
         
@@ -68,7 +63,7 @@ package com.game.engine2D.scene.map.vo
         }
         
         public function setContainer(container : ObjectContainer3D, x : int, y : int) : void {
-            if (null == this._mesh) {
+           /* if (null == this._mesh) {
                 this._mesh = GlobalConfig2D.MapZoneClass["create"](null);
                 this._mesh.width = SceneConfig.ZONE_WIDTH;
                 this._mesh.height = SceneConfig.ZONE_HEIGHT;
@@ -83,7 +78,7 @@ package com.game.engine2D.scene.map.vo
             this._mesh.z = -200;
             this._mesh.run();
             this._mesh.depth = -300;
-            this._mesh.layerType = EntityLayerType.DEFAULT | EntityLayerType.POST_GLASS;
+            this._mesh.layerType = EntityLayerType.DEFAULT | EntityLayerType.POST_GLASS;*/
         }
         
         public function load(filePath : String, priority : int, userData : Object, cb : Function) : Boolean {
@@ -123,8 +118,8 @@ package com.game.engine2D.scene.map.vo
             if (this._textureMaterial.texture) {
                 this._textureMaterial.texture.getTextureForStage3D(Stage3DLayerManager.stage3DProxy);
             }
-            this._mesh.material = this._textureMaterial;
-            this._mesh.run();
+            /*this._mesh.material = this._textureMaterial;
+            this._mesh.run();*/
         }
 
         public function waitDispose() : void {
@@ -140,10 +135,10 @@ package com.game.engine2D.scene.map.vo
                     NetDebug.LOG("[MapZone] ", "[dispose] ", "key:", this._key, " 还在加载中");
                 }
             }
-            if (this._mesh) {
+            /*if (this._mesh) {
                 GlobalConfig2D.MapZoneClass["recycle"](this._mesh);
                 this._mesh = null;
-            }
+            }*/
             if (this._texture) {
                 this._texture.removeEventListener(Event.COMPLETE, onLoaderComplete);
                 this._texture.dispose();

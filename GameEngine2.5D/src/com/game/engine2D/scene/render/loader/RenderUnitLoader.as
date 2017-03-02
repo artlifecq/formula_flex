@@ -9,7 +9,6 @@ package com.game.engine2D.scene.render.loader
 	import com.game.engine2D.scene.render.vo.XmlImgData;
 	import com.game.engine2D.tools.SceneCache;
 	import com.game.engine2D.vo.BaseObj;
-	import com.game.mainCore.libCore.utils.LoadBlackListUtils;
 	
 	/**
 	 * @private
@@ -42,26 +41,32 @@ package com.game.engine2D.scene.render.loader
 			)
 			{
 				var fullSourchPath:String = apd.getFullSourcePath($status);
-				var is404Error:Boolean = LoadBlackListUtils.getIs404Error(fullSourchPath,3); 
-				if(is404Error)
-				{
-//					trace("404Error : ",fullSourchPath);
-					return;
-				}
+//				var is404Error:Boolean = MultiBlackManager.is404ErrorUrl(fullSourchPath); 
+//				if(is404Error)
+//				{
+//					trace("Black 404Error : ",fullSourchPath);
+//					return;
+//				}
 				var xid:XmlImgData = SceneCache.renderUnitCountShare.getShareData(fullSourchPath) as XmlImgData;
 				if(!xid)//如果不在xml缓存中，则加载 
 				{
 					//创建一个空的缓存数据对象
 					xid = new XmlImgData();
 					xid.isStarling = isStarling;
+					xid.enableScaleTexture = apd.enableScaleTexture;
 					SceneCache.renderUnitCountShare.addShareData(fullSourchPath,xid);
 					//添加进等待队列
 					SceneCache.addWaitingLoadAvatar($ap,fullSourchPath);//注意apd在这里不要复制副本
 					//记录加载函数（只需在首次赋值）
+					xid.destroyTm = apd.destoryTm;
+					xid.autoRecycleEnable = apd.autoRecycleEnable;
 					xid.loadSource(fullSourchPath,apd);//开始加载
 				}
 				else
 				{ 
+					xid.autoRecycleEnable = apd.autoRecycleEnable;
+					if (xid.destroyTm < apd.destoryTm)
+						xid.destroyTm = apd.destoryTm;
 					if(xid.aps == null)//如果没有没有内容，则放到待加载的数组里
 					{
 						SceneCache.addWaitingLoadAvatar($ap,fullSourchPath);
@@ -98,6 +103,7 @@ package com.game.engine2D.scene.render.loader
 					else if(bo is RenderSet)
 					{
 						(bo as RenderSet).removeRenderUnit($ap);
+						Scene.scene.removeSceneObj(bo);
 					}
 					else if(bo is RenderUnit)
 					{

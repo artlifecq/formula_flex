@@ -135,7 +135,7 @@ package com.rpgGame.app.manager.role
 				SceneManager.getScene().mainChar = _actor;
 				SceneManager.scene.mainChar = _actor;
 				
-				if(GlobalConfig.use25DMap)
+				if(GlobalConfig.use2DMap)
 				{
 					GameCameraManager.startPlayerMode(SceneManager.scene.cameraTarget);
 				}
@@ -174,7 +174,7 @@ package com.rpgGame.app.manager.role
 		public static function updateActorStatus() : void
 		{
 			CharAttributeManager.setCharHp(MainRoleManager.actorInfo, MainRoleManager.actorInfo.totalStat.hp);
-			MainRoleManager.actor.mapAreaType = 0;
+//			MainRoleManager.actor.mapAreaType = 0;
 			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
 			MainRoleManager.actor.setGroundXY(MainRoleManager.actorInfo.x, MainRoleManager.actorInfo.y);
 			if (MainRoleManager.actorInfo.totalStat.hp <= 0)

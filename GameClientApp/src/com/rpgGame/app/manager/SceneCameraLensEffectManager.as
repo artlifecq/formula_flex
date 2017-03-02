@@ -2,7 +2,7 @@ package com.rpgGame.app.manager
 {
 	import com.game.engine3D.core.GameScene3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.type.EffectUrl;
@@ -41,7 +41,7 @@ package com.rpgGame.app.manager
 			if (!effectRu)
 			{
 				var scene : GameScene3D = SceneManager.getScene();
-				var rud : RenderParamData = new RenderParamData(++UNIQUE_ID, SceneCharType.SCENE_CAMERA_LENS_EFFECT, ClientConfig.getEffect(effectName));
+				var rud : RenderParamData3D = new RenderParamData3D(++UNIQUE_ID, SceneCharType.SCENE_CAMERA_LENS_EFFECT, ClientConfig.getEffect(effectName));
 				effectRu = RenderUnit3D.create(rud);
 				effectRu.name = effectName;
 				effectRu.allowCameraAnimator = true;

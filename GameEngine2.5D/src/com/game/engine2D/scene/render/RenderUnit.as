@@ -12,22 +12,25 @@ package com.game.engine2D.scene.render
 	import com.game.engine2D.scene.render.vo.xml.RenderUnitData;
 	import com.game.engine2D.scene.render.vo.xml.RenderUnitStatus;
 	import com.game.engine2D.tools.SceneCache;
-	import com.game.engine2D.utils.RenderItemAngleUtil;
 	import com.game.engine2D.utils.MaterialUtils;
+	import com.game.engine2D.utils.RenderItemAngleUtil;
 	import com.game.engine2D.utils.Transformer;
 	import com.game.engine2D.vo.BaseObj;
 	import com.game.engine2D.vo.PoolMesh;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.vo.SoftOutlineData;
 	import com.game.mainCore.libCore.pool.Pool;
 	
 	import flash.display.BlendMode;
-	import flash.filters.BitmapFilter;
 	import flash.geom.ColorTransform;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.geom.Vector3D;
 	import flash.utils.getTimer;
 	
-	import away3d.containers.ObjectContainer3D;
+	import away3d.arcane;
+	import away3d.bounds.AxisAlignedBoundingBox;
+	import away3d.core.partition.EntityNode;
 	import away3d.entities.EntityLayerType;
 	
 	import gs.TweenLite;
@@ -43,10 +46,10 @@ package com.game.engine2D.scene.render
 	public class RenderUnit extends BaseObj implements IRenderUnit
 	{
 		static private var _helpRect:Rectangle = new Rectangle();
-		private static var _pool:Pool = new Pool("RenderUnit",2000);
-		//显示和更新控制*********************************************************************************************************
+		static private var _pool:Pool = new Pool("RenderUnit",2000);
+		
 		private var _resReady:Boolean = false;
-
+		
 		/**
 		 * 资源是否准备完毕
 		 */
@@ -61,36 +64,19 @@ package com.game.engine2D.scene.render
 		 */	
 		private var _oldData:OldData;
 		
-		/**
-		 * 深度是否有改变,用于上层父类排序用
-		 */
-		public var depthHasChg:Boolean = false;
+		public var renderSet:RenderSet;
 		
-		/**
-		 * 是否有优先级别(比如主角的换装)
-		 */
-		public var isPriority:Boolean = false;
-		
-		/**
-		 * 渲染宽度偏僻(用于线性渲染)
-		 */
-		public var drawWdithOffset:Number = 0;
-		
-		/**
-		 * 渲染宽度偏移(用于线程渲染)
-		 */
-		public var drawHeightOffset:Number = 0;
-		
-		//*********************************************原始参数数据************************************************************
 		/**
 		 * 生成此RenderUnit的换装源参数
 		 */	
 		private var _renderUnitData:IRenderUnitData;
-		private var cutRect:Rectangle = new Rectangle();
+		private var _cutRect:Rectangle = new Rectangle();
 		private var _hitTestX:int = int.MIN_VALUE;
 		private var _hitTestY:int = int.MIN_VALUE;
 		private var _showPos:Point = new Point();
 		private var _softOutlineData:SoftOutlineData;
+		private var _ruDebugStr:String = "";
+		private var _ruDebugDraw:int = 0;
 		
 		/**
 		 * 生成此RenderUnit的换装源参数
@@ -109,7 +95,7 @@ package com.game.engine2D.scene.render
 		{
 			if (int.MIN_VALUE == _hitTestX)
 			{
-				if (null == currentApData)
+				if (null == currentApData || _drawSourceTexture == null)
 					return 0;
 				if(_renderScaleX == -1)
 				{
@@ -128,12 +114,12 @@ package com.game.engine2D.scene.render
 			{
 				if (null == currentApData)
 					return 0;
-
+				
 				_hitTestY = - currentApData.ty;
 			}
 			return _hitTestY;
 		}
-
+		
 		/**本换装部件在场景中 的 显示位置(外部设置无效,只用来读取)*/
 		override final public function get showPos():Point
 		{
@@ -166,19 +152,14 @@ package com.game.engine2D.scene.render
 			if(_x != value)
 			{
 				_x = value;
+				this.finalShowX = value;
 				if(_graphicDis)
 				{
-					_graphicDis.x = showPos.x + cutRect.x*_renderScaleX;
+					_graphicDis.x = showPos.x + _cutRect.x*_renderScaleX;
 					if(_graphicDis.scaleX != _renderScaleX)
 					{
 						_graphicDis.scaleX = _renderScaleX;
 					}
-				}
-				
-				if(_shadow)
-				{
-					//添加进容器
-					_shadow.x = this.x+GlobalConfig2D.shadowOffsetX+_shadowOffsetX;
 				}
 				updateNow = true;
 			}
@@ -191,14 +172,10 @@ package com.game.engine2D.scene.render
 			if(_y != value)
 			{
 				_y = value;
+				this.finalShowY = value;
 				if(_graphicDis)
 				{
-					_graphicDis.y = showPos.y + cutRect.y;
-				}
-				if(_shadow)
-				{
-					//添加进容器
-					_shadow.y = this.y+GlobalConfig2D.shadowOffsetY+_shadowOffsetY;
+					_graphicDis.y = showPos.y + _cutRect.y;
 				}
 				updateNow = true;
 			}
@@ -213,7 +190,7 @@ package com.game.engine2D.scene.render
 				_offsetX = value;
 				if(_graphicDis)
 				{
-					_graphicDis.x = showPos.x + cutRect.x*_renderScaleX;
+					_graphicDis.x = showPos.x + _cutRect.x*_renderScaleX;
 					if(_graphicDis.scaleX != _renderScaleX)
 					{
 						_graphicDis.scaleX = _renderScaleX;
@@ -233,11 +210,23 @@ package com.game.engine2D.scene.render
 				_offsetY = value;
 				if(_graphicDis)
 				{
-					_graphicDis.y = showPos.y + cutRect.y;
+					_graphicDis.y = showPos.y + _cutRect.y;
 				}
 				updateNow = true;
 			}
 		}
+		
+		public function set mouseEnable(value : Boolean) : void
+		{
+			this.mouseEnabled = value;
+		}
+		
+		/** 是否可以选中 **/
+		public function get mouseEnable() : Boolean
+		{
+			return _mouseEnabled;
+		}
+		
 		/**
 		 * 设置旋转
 		 */	
@@ -287,8 +276,6 @@ package com.game.engine2D.scene.render
 			}
 		}
 		
-		public var hitTestFun:Function;
-		
 		/**
 		 * 是否与某个点发生碰撞
 		 * @param $p
@@ -299,17 +286,17 @@ package com.game.engine2D.scene.render
 				return false;
 			if (!visible)
 				return false;
-			var pxielX:Number = $p.x - getHitTestX();
-			var pxielY:Number = $p.y - getHitTestY();
-			
-			//容器翻转了。 内存里的位图是木有翻转的，so，减一下
-			if(_renderScaleX == -1)
-			{
-				pxielX = _drawSourceTexture.width - pxielX;
-			}
 			var sourceTexture:ATFSubTexture = _drawSourceTexture as ATFSubTexture;
 			if(sourceTexture!=null)
 			{
+				var pxielX:Number = $p.x - getHitTestX();
+				var pxielY:Number = $p.y - getHitTestY();
+				
+				//容器翻转了。 内存里的位图是木有翻转的，so，减一下
+				if(_renderScaleX == -1)
+				{
+					pxielX = _drawSourceTexture.width - pxielX;
+				}
 				if (sourceTexture.checkHinderData(pxielX, pxielY))
 				{
 					return true;//256的25%
@@ -330,7 +317,7 @@ package com.game.engine2D.scene.render
 			//guoqing.wen
 			if(_drawSourceTexture!=null)
 			{
-				_helpRect.setTo(cutRect.x,cutRect.y,_drawSourceTexture.width, _drawSourceTexture.height);
+				_helpRect.setTo(_cutRect.x,_cutRect.y,_drawSourceTexture.width, _drawSourceTexture.height);
 				if(_helpRect.contains($p.x, $p.y)){
 					return true;
 				}
@@ -350,15 +337,6 @@ package com.game.engine2D.scene.render
 			return false;
 		}
 		
-		override public function set parent(value:ObjectContainer3D):void
-		{
-			super.parent = value;
-			if(_shadow && _shadow.parent == _parent && _parent.getChildIndex(_shadow)!=0)
-			{
-				_parent.addChild(_shadow);
-			}
-		}
-		
 		override public function set layerType(value:uint):void
 		{
 			super.layerType = value;
@@ -366,55 +344,31 @@ package com.game.engine2D.scene.render
 				PoolMesh(_graphicDis).layerType = value;
 		}
 		
-		override public function set depth(value:int):void
+		override public function set planarRenderLayer(value:uint):void
 		{
-			if(_depth != value)
-			{
-				depthHasChg = true;
-			}
-			PoolMesh(_graphicDis).depth = value;
-			super.depth = value;
+			_planarRenderLayer = value;
+			if (_graphicDis)
+				PoolMesh(_graphicDis).planarRenderLayer = value;
 		}
 		
-		override public function set depthIndex(value:uint):void
+		override public function set depth(value:int):void
 		{
-			if(_depthIndex != value)
-			{
-				depthHasChg = true;
-			}
-			super.depthIndex = value;
-			if(_shadow && _shadow.parent == _parent && _parent.getChildIndex(_shadow)!=0)
-			{
-				_parent.setChildIndex(_shadow,0);
-			}
+			if (_graphicDis)
+				PoolMesh(_graphicDis).depth = value;
+			super.depth = value;
 		}
 		
 		override public function set visible(value:Boolean):void
 		{
 			super.visible = value;
-			if (value)
+			if (value && _needRender)//如果为false,就不管...
 			{
-				if (_needRender)//如果为false,就不管...
+				var ruStatus:RenderUnitStatus = _currentRenderUnitStatus || _defaultRenderUnitStatus;
+				if(ruStatus == null && _currentStatus != 0)
 				{
-					var ruStatus:RenderUnitStatus = _currentRenderUnitStatus || _defaultRenderUnitStatus;
-					if(ruStatus == null && _currentStatus != 0)
-					{
-						var status:uint = _currentStatus;
-						_currentStatus = 0;
-						setStatus(status);//重置,再设置..
-					}
-				}
-				if (_shadow && !_shadow.parent && parent && _enableShadow && _isDrawShadow)
-				{
-					parent.addChild(_shadow);
-					parent.setChildIndex(_shadow,0);
-				}
-			}
-			else
-			{
-				if (_shadow && _shadow.parent)
-				{
-					_shadow.parent.removeChild(_shadow);
+					var status:uint = _currentStatus;
+					_currentStatus = 0;
+					setStatus(status);//重置,再设置..
 				}
 			}
 		}
@@ -429,14 +383,14 @@ package com.game.engine2D.scene.render
 		{
 			if (_needRender == value)
 				return;
-
+			
 			super.needRender = value;
 			if (!value)
 				return;
-
+			
 			if(!_visible)//如果为false,就不管...
 				return;
-
+			
 			var ruStatus:RenderUnitStatus = _currentRenderUnitStatus || _defaultRenderUnitStatus;
 			if(ruStatus == null && _currentStatus != 0)//
 			{
@@ -618,9 +572,9 @@ package com.game.engine2D.scene.render
 				while(len-->0)
 				{
 					cbData = list[len];
-					if(cbData && cbData.callBackFun == value)//有了就不管了
+					if(cbData && cbData.callBackFun == value)
 					{
-						list.splice(len,1);;
+						list.splice(len,1);
 					}
 				}
 			}
@@ -635,7 +589,7 @@ package com.game.engine2D.scene.render
 				for(i=0;i<cbList.length;i++)
 				{
 					var cbData:CallBackData = cbList[i];
-					if(cbData && cbData.callBackFun != null)//有了就不管了
+					if(cbData && cbData.callBackFun != null)
 					{
 						var arr:Array = [];
 						if(cbData.cbFunParames && cbData.cbFunParames.length)
@@ -646,17 +600,17 @@ package com.game.engine2D.scene.render
 						{
 							arr = [this];
 						}
-						cbData.callBackFun.apply(null,arr);//临时先用着啦,为了怕有底的放改出错误来了
+						cbData.callBackFun.apply(null,arr);
 					}
 				}
 			}
 		}
 		
 		//==============================================================================
-		//位图资源**********************************************************************
-		//
 		private var _defaultRenderUnitStatus:RenderUnitStatus;
 		private var _defaultRenderImgData:RenderImgData;
+		private var _defaultRenderTexture:ATFSubTexture;
+		
 		
 		/**
 		 * @private
@@ -678,24 +632,45 @@ package com.game.engine2D.scene.render
 				{
 					var msg:String = "模型资源格式错误， 资源只画了一个方向，你让我播放8方向，不是搞笑？ 动作:$0 角度:" + _logicAngle + " 帧数:" + currentFrame + " 资源路径"+  _currentFullSourchPath; 
 					trace(msg)
-					 EventManager.dispatchEvent("renderTextNull",msg,_currentStatus);
+					EventManager.dispatchEvent("renderTextNull",msg,_currentStatus);
+					_ruDebugDraw = 5;
+					return getDefaultTexture(sourceKey);
 				}
-				if (texture && texture.parentI.textureParsed){
-					if (_defaultRenderImgData)
-						return _defaultRenderImgData.getSubTexture(String(sourceKey));
-					else 
-						return null;
+				if (texture && !texture.textureReady){
+					_ruDebugDraw = 2;
+					return getDefaultTexture(sourceKey);
 				}
+				_ruDebugDraw = 1;
 				return texture;
 			}
-			else if (_defaultRenderImgData){
-				return _defaultRenderImgData.getSubTexture(String(sourceKey));
-			}
 			else {
+				_ruDebugDraw = 3;
+				return getDefaultTexture(sourceKey);
+			}
+		}
+		
+		private function getDefaultTexture(sourceKey:uint):ATFSubTexture
+		{
+			if (_defaultRenderImgData)
+			{
+				var subTexture:ATFSubTexture = _defaultRenderImgData.getSubTexture(String(sourceKey));
+				if (subTexture && !subTexture.textureReady){
+					return null;
+				}
+				return subTexture;
+			}else if(_defaultRenderTexture)
+			{
+				if (_defaultRenderTexture && !_defaultRenderTexture.textureReady){
+					return null;
+				}
+				return _defaultRenderTexture;
+			}
+			else 
+			{
 				return null;
 			}
 		}
-
+		
 		/**
 		 * @private 
 		 * 绘制用的资源BD
@@ -725,27 +700,8 @@ package com.game.engine2D.scene.render
 			_blendMode = value;
 			/*if(_graphicDis)
 			{
-				_graphicDis.blendMode = _blendMode;
+			_graphicDis.blendMode = _blendMode;
 			}*/
-		}
-		
-		/**应用滤镜数组*/
-		private const _bitmapFilters:Array = [];
-		/**应用滤镜数组*/
-		public function get bitmapFilters():Array{return _bitmapFilters};
-		/**添加滤镜*/
-		public function addFilter($bf:BitmapFilter):void
-		{
-		}
-		
-		/**移除滤镜*/
-		public function removeFilter($bf:BitmapFilter):void
-		{
-		}
-		
-		/**清除所有滤镜*/
-		public function removeAllFilters():void
-		{
 		}
 		
 		public function setSoftOutline(data : SoftOutlineData) : void
@@ -767,11 +723,6 @@ package com.game.engine2D.scene.render
 			{
 				mesh.layerType = EntityLayerType.DEFAULT;
 			}
-		}
-		
-		override public function get colorTransform():ColorTransform
-		{
-			return _colorTransform;
 		}
 		
 		override public function set colorTransform(value:ColorTransform):void
@@ -797,7 +748,6 @@ package com.game.engine2D.scene.render
 			}
 		}
 		
-		//当前状态信息**********************************************************************
 		/**
 		 * @private 
 		 * 当前状态
@@ -813,7 +763,7 @@ package com.game.engine2D.scene.render
 		 * 
 		 */	
 		public function getFullSourchPath():String{return _currentFullSourchPath;}
-
+		
 		/**
 		 * @private 
 		 * 当前换装部件的当前状态的原始数据(与_currentFullSourchPath区别， _currentRenderUnitStatus只有在资源加载完毕才会有)
@@ -824,7 +774,7 @@ package com.game.engine2D.scene.render
 		 * 当前帧数(从0开始到totalFrame-1)
 		 */
 		private var _currentFrame:int = 0;
-
+		
 		/**
 		 * 当前播放帧(0到totalFrame-1)
 		 */
@@ -992,7 +942,7 @@ package com.game.engine2D.scene.render
 		 * 注意此值应该为一个大于0的值！！！不能设置为0.
 		 * */
 		public var speed:Number = 1;
-
+		
 		//当前播放信息**********************************************************************
 		/**
 		 * @private 
@@ -1033,7 +983,6 @@ package com.game.engine2D.scene.render
 			_dynamicPosition = value;
 		}
 		
-		//其他参数**********************************************************************
 		/**
 		 * RenderUnit
 		 * @param $avatar 所属avatar
@@ -1054,16 +1003,16 @@ package com.game.engine2D.scene.render
 		public static function create($apd:IRenderUnitData):RenderUnit
 		{
 			_cnt++;
-			//利用池生成RenderUnit
 			return _pool.createObj(RenderUnit,$apd) as RenderUnit;
 		}
 		
 		public static function recycle($ap:RenderUnit):void
 		{
-			_cnt--;
-			//利用池回收RenderUnit
-			//$ap.dispose();
-			_pool.disposeObj($ap);
+			if ($ap)
+			{
+				_cnt--;
+				_pool.disposeObj($ap);
+			}
 		}
 		
 		public static function get cnt():int
@@ -1071,7 +1020,6 @@ package com.game.engine2D.scene.render
 			return _cnt;
 		}
 		
-		//获取、设置 状态、逻辑角度、旋转
 		//-----------------------------------------------------------------------------------------------------------------------
 		/**
 		 * 获取状态
@@ -1093,7 +1041,7 @@ package com.game.engine2D.scene.render
 				return;
 			if (!_needRender)
 				return;
-			
+			_ruDebugStr = "status" + $status + "-";
 			// 设置状态
 			_currentStatus = $status;
 			// 释放旧的换装
@@ -1123,6 +1071,8 @@ package com.game.engine2D.scene.render
 			_keyFrame = -1;
 			_keyFrameTm = -1;
 			_totalFrameTm = -1;
+			_preCompleteExceted = false;
+			_preStartTime = 0;
 			//
 			setRuStatusData(_defaultRenderUnitStatus);
 			//
@@ -1145,15 +1095,17 @@ package com.game.engine2D.scene.render
 			{
 				//记录下新的换装地址
 				_currentFullSourchPath = _renderUnitData.getFullSourcePath(_currentStatus);
-				if(_currentFullSourchPath == null)
+				//主角禁用动态显存缩放
+				if(this.isMainChar)
 				{
-					_renderUnitData.getFullSourcePath(_currentStatus);
+					_renderUnitData.enableScaleTexture = false;
 				}
+				_ruDebugStr += "loading-";
 				//加载新的换装
 				RenderUnitLoader.loadRenderUnit(this, _currentStatus);
 			} 
 		}
-	
+		
 		/**
 		 * 设置角度
 		 * @param $angle
@@ -1189,6 +1141,7 @@ package com.game.engine2D.scene.render
 			{
 				blendMode = BlendMode.NORMAL;
 			}
+			_ruDebugStr += "cmp-";
 			//获取状态数据
 			_currentRenderUnitStatus = $aps;
 			//装在新的换装
@@ -1211,7 +1164,8 @@ package com.game.engine2D.scene.render
 				//
 				_totalFrame = ruStatus.getTotalFrame(_currentStatus,_logicAngle);
 				_totalFrameTm = ruStatus.getTotalFrameTm(_currentStatus,_logicAngle);
-				
+				_preCompleteExceted = false;
+				_preStartTime = 0;
 				_isNeedScaleX = ruStatus.isNeedScaleX(_currentStatus,_logicAngle);
 				//
 				if(_isNeedScaleX)
@@ -1225,15 +1179,11 @@ package com.game.engine2D.scene.render
 			}
 		}
 		
-		private var _rOffsetX:Number = 0;
-		private var _rOffsetY:Number = 0;
-		private var _lastDrawTm:uint = 0;
-		private var _dyncTickcount:uint = 0;
-		
 		private var currentApData:RenderUnitData;
 		
-		private var _preCompleteTime:int = 0;
-		private var _delyTime:int = 0;
+		/** 时间验证播放完成回调 */
+		private var _preStartTime:int = 0;
+		private var _preCompleteExceted:Boolean = false;
 		
 		
 		/**
@@ -1250,7 +1200,7 @@ package com.game.engine2D.scene.render
 			}
 			//计算是否睡眠
 			var inSleep:Boolean = false;
-			var nowTime:int = GlobalConfig2D.nowTime || getTimer();	// 减少getTimer()的调用次数，提高性能;
+			var nowTime:int = GlobalConfig2D.nowTime || getTimer();
 			if(
 				_renderUnitData
 				&&
@@ -1264,7 +1214,7 @@ package com.game.engine2D.scene.render
 				//改变标识
 				inSleep = true;
 			}
-
+			
 			//睡眠变化
 			if(_oldData.inSleep != inSleep)
 			{
@@ -1277,114 +1227,93 @@ package com.game.engine2D.scene.render
 			//-------------------------------------------------------
 			var ruStatus:RenderUnitStatus = _currentRenderUnitStatus || _defaultRenderUnitStatus;
 			var isNeedExcuteCallBack:Boolean = false;
-			if(ruStatus)//小于等于1帧的时候,就不用更新了...
+			if(ruStatus && !inSleep)//小于等于1帧的时候,就不用更新了...
 			{
-				if(!inSleep)//如果不在睡眠中
+				//播放开始前回调
+				if(_playBeforeStart)
 				{
-					//播放开始前回调
-					if(_playBeforeStart)
+					updateNow = true;
+					//
+					_playBeforeStart = false;
+					//执行播放前回调
+					exceteCallBackData(_playBeforeStartCallBackList);
+				}
+				//----------------------------------------------------------------------
+				if(stayAtEnd && _currentFrame==_totalFrame)//如果有指定停留在最后一帧
+				{
+					//不处理
+				}
+				else if(_stayAt>0 && _stayAt==_currentFrame)//如果有指定停留帧
+				{
+					//不处理
+				}
+				else if(_playing && _totalFrame > 1)
+				{
+					_lastTime = _lastTime || nowTime;//第一次...不走时间执行
+					//更新帧数
+					var time:Number = nowTime-_lastTime;
+					var frameTm:uint = ruStatus.getTime(_currentStatus,_logicAngle,_currentFrame);
+					var speedFtameTM:Number = frameTm/speed;
+					//如果满足刷新时间间隔
+					if(time >= speedFtameTM) 
 					{
-						updateNow = true;
-						//
-						_playBeforeStart = false;
-						//执行播放前回调
-						exceteCallBackData(_playBeforeStartCallBackList);
-					}
-					//----------------------------------------------------------------------
-					if(stayAtEnd && _currentFrame==_totalFrame)//如果有指定停留在最后一帧
-					{
-						//不处理
-					}
-					else if(_stayAt>0 && _stayAt==_currentFrame)//如果有指定停留帧
-					{
-						//不处理
-					}
-					else if(_playing && _totalFrame > 1)
-					{
-						_lastTime = _lastTime || nowTime;//第一次...不走时间执行
-						//更新帧数
-						var time:Number = nowTime-_lastTime;
-						var frameTm:uint = ruStatus.getTime(_currentStatus,_logicAngle,_currentFrame);
-						var speedFtameTM:Number = frameTm/speed;
-						//如果满足刷新时间间隔
-						if(time >= speedFtameTM) 
+						var currentDelyTime:int = time - speedFtameTM;
+						//记录下最近一次刷新的时间
+						_lastTime = nowTime;
+						if(currentDelyTime < 200)//浏览器最小化时帧数只有2帧
 						{
-							var currentDelyTime:int = time - speedFtameTM;
-							if(_currentStatus == 5)
+							//减去此帧多出来的时间
+							_lastTime -= currentDelyTime;
+						}
+						//当前帧加1
+						_currentFrame++;
+						
+						//如果当前帧播放到“末尾加1帧”
+						if(_currentFrame >= _totalFrame) //一个循环播放完成了， 
+						{
+							_currentFrame = 0;
+							//如果睡眠时间大于0
+							if(_renderUnitData.sleepTime>0)
 							{
-								_delyTime += currentDelyTime;
-								addTraceLog(type + "---" + _currentFrame + "==========跳帧, 需要" + speedFtameTM + "毫秒, 当前" +  time + " 毫秒" + "当前延迟：" + currentDelyTime +  " 总延迟:" + _delyTime + "--" + _currentFullSourchPath);
+								//记录时间
+								_lastPlayCompleteTime = nowTime;
+								//强制进入睡眠
+								inSleep = true;
 							}
-							//记录下最近一次刷新的时间
-							_lastTime = nowTime;
-							if(currentDelyTime < 200)//浏览器最小化时帧数只有2帧
-							{
-								//减去此帧多出来的时间
-								_lastTime -= currentDelyTime;
-							}
-							if(isMainChar && _currentStatus == 5)
-							{
-								if(type == "body")
-								{
-									addTraceLog("body:" + _currentFrame);
-								}
-								if(type == "weapon")
-								{
-									addTraceLog("weap:" + _currentFrame);
-								}
-							}
-							//当前帧加1
-							_currentFrame++;
 							
-							//如果当前帧播放到“末尾加1帧”
-							if(_currentFrame >= _totalFrame) //一个循环播放完成了， 
+							if(repeat!=0 && (++_playCount)>=repeat)//非无限循环
 							{
-								_currentFrame = 0;
-								//如果睡眠时间大于0
-								if(_renderUnitData.sleepTime>0)
-								{
-									//记录时间
-									_lastPlayCompleteTime = nowTime;
-									//强制进入睡眠
-									inSleep = true;
-								}
-								
-								if(repeat!=0 && (++_playCount)>=repeat)//非无限循环
-								{
-									_currentFrame = _totalFrame-1;
-									_playComplete = true;
-								}
-								var getTime:int = getTimer();
-								var playGap:int = getTime - _preCompleteTime;
-								if(_currentStatus == 5)
-								{
-									addLogMsg(type+ "---" + _currentFrame +"本次播放间隔：" + playGap + "毫秒" + "--" + _currentFullSourchPath);
-									addLogMsg(type + "---" + _currentFrame +"本次延迟了：" + _delyTime + "毫秒" + "--" + _currentFullSourchPath);
-									addLogMsg(type + "---" + _currentFrame +"减去延迟间隔" + (playGap - _delyTime) + "毫秒" + "--" + _currentFullSourchPath);
-									addLogMsg("");
-									addLogMsg("");
-									_delyTime = 0;
-								}
-								_preCompleteTime = getTime;
-							}
-							//设置渲染标志位
-							if(_totalFrame > 1 || _playComplete)//注意这个判断,只有大于1帧或者只有一帧但为播放完毕状态的的才复渲染了
-							{
-								updateNow = true;
-							}
-							isNeedExcuteCallBack = true;
-						}else
-						{
-							//当前帧时间未到,暂不跳帧
-							if(_currentStatus == 5)
-							{
-								addTraceLog(type + "---" + _currentFrame + "不跳帧, 需要" + speedFtameTM + "毫秒, 当前" +  time + " 毫秒" + "--" + _currentFullSourchPath);
+								_currentFrame = _totalFrame-1;
+								_playComplete = true;
 							}
 						}
-					}
-					else if (_playing && _totalFrame == 1)//增加只有1帧的动画回调
-					{
+						//设置渲染标志位
+						if(_totalFrame > 1 || _playComplete)//注意这个判断,只有大于1帧或者只有一帧但为播放完毕状态的的才复渲染了
+						{
+							updateNow = true;
+						}
 						isNeedExcuteCallBack = true;
+					}else
+					{
+						//当前帧时间未到,暂不跳帧
+					}
+				}
+				else if (_playing && _totalFrame == 1)//增加只有1帧的动画回调
+				{
+					isNeedExcuteCallBack = true;
+					_playComplete = true;
+					updateNow = true;//避免只有1帧的动画，bpg解析完成未刷新
+				}
+				//增加播放时间回调验证
+				if(repeat != 0 && _totalFrame != 1)
+				{
+					_preStartTime = _preStartTime || nowTime;
+					if (!_preCompleteExceted && nowTime - _preStartTime > _totalFrameTm*repeat)
+					{
+						_currentFrame = _totalFrame-1;
+						updateNow = true;
+						isNeedExcuteCallBack = true;
+						_playComplete = true;
 					}
 				}
 			}
@@ -1398,34 +1327,37 @@ package com.game.engine2D.scene.render
 				_drawSourceTexture = renderImg;//取不到的时候,就取原来的吧...
 				if(_drawSourceTexture == null)//清空渲染...
 				{
+					_ruDebugDraw = 4;
 					graphicSp.material = MaterialUtils.default1x1Texture;
-					if(_shadow)
-					{
-						_shadow.material = MaterialUtils.default1x1Texture;
-					}
 				}
 				var isNeedDraw:Boolean = false;
 				//可见性判断
-				if(     _drawSourceTexture!=null
-						&& (!inSleep)
-						&& ruStatus!=null
-					)
+				if(_drawSourceTexture != null && (!inSleep) && ruStatus != null )
 				{
 					currentApData = ruStatus.getRenderUnitData(_currentStatus,_logicAngle, _currentFrame);
 					if (currentApData!=null)
 					{
-						cutRect.x = - currentApData.tx;
-						cutRect.y = - currentApData.ty;
-						cutRect.width = _drawSourceTexture.width;
-						cutRect.height = _drawSourceTexture.height;
-
+						_cutRect.x = -currentApData.tx;
+						_cutRect.y = -currentApData.ty;
+						_cutRect.width = _drawSourceTexture.width;
+						_cutRect.height = _drawSourceTexture.height;
+						
 						_hitTestX = int.MIN_VALUE;
 						_hitTestY = int.MIN_VALUE;
 						//
 						isNeedDraw = true;
 					}
 				}
-
+				
+				if( _drawSourceTexture!=null && _drawSourceTexture == _defaultRenderTexture)
+				{
+					_cutRect.x = -_defaultRenderTexture.width/2;
+					_cutRect.y = -_defaultRenderTexture.height + 5;
+					_cutRect.width = _defaultRenderTexture.width;
+					_cutRect.height = _defaultRenderTexture.height;
+					isNeedDraw = true;
+				}
+				
 				//拷贝
 				if(isNeedDraw)
 				{
@@ -1442,8 +1374,8 @@ package com.game.engine2D.scene.render
 			
 			if(hasNeedRender && graphicSp)
 			{
-				graphicSp.x = showPos.x + cutRect.x*_renderScaleX;
-				graphicSp.y = showPos.y + cutRect.y;
+				graphicSp.x = showPos.x + _cutRect.x*_renderScaleX;
+				graphicSp.y = showPos.y + _cutRect.y;
 				if(graphicSp.scaleX != _renderScaleX)
 				{
 					graphicSp.scaleX = _renderScaleX;
@@ -1458,45 +1390,109 @@ package com.game.engine2D.scene.render
 			}
 		}
 		
+		public function getRenderUnitStatus():RenderUnitStatus
+		{
+			return _currentRenderUnitStatus;
+		}
+		
+		public function editUpdate(time:int):void
+		{
+			var ruStatus:RenderUnitStatus = _currentRenderUnitStatus;
+			if(_playing && _totalFrame > 1 && ruStatus)
+			{
+				if(_renderUnitData && _renderUnitData.sleepTime<=0)//强制进入睡眠
+				{
+					_currentFrame = ruStatus.getFrameByTime(time,_currentStatus,_logicAngle);
+					updateNow = true;
+				}
+			}
+			var graphicSp:PoolMesh = _graphicDis as PoolMesh;
+			var isNeedDraw:Boolean = false;
+			var hasNeedRender:Boolean = needRender && visible && _graphicDis.parent;
+			if(updateNow && hasNeedRender)
+			{ 
+				_drawSourceTexture = renderImg;//取不到的时候,就取原来的吧...
+				if(_drawSourceTexture == null)//清空渲染...
+				{
+					graphicSp.material = MaterialUtils.default1x1Texture;
+				}
+				if(_drawSourceTexture && ruStatus)
+				{
+					currentApData = ruStatus.getRenderUnitData(_currentStatus,_logicAngle, _currentFrame);
+					if (currentApData!=null)
+					{
+						_cutRect.x = -currentApData.tx;
+						_cutRect.y = -currentApData.ty;
+						_cutRect.width = _drawSourceTexture.width;
+						_cutRect.height = _drawSourceTexture.height;
+						isNeedDraw = true;
+					}
+				}
+				if(isNeedDraw)
+				{
+					if(_oldData.oldSourceBD != _drawSourceTexture)
+					{
+						graphicSp.texture = _drawSourceTexture;
+					}
+					_oldData.oldSourceBD = _drawSourceTexture;
+				}
+				updateNow = false;
+			}
+			if(hasNeedRender && graphicSp)
+			{
+				graphicSp.x = showPos.x + _cutRect.x*_renderScaleX;
+				graphicSp.y = showPos.y + _cutRect.y;
+				if(graphicSp.scaleX != _renderScaleX)
+				{
+					graphicSp.scaleX = _renderScaleX;
+				}
+				graphicSp.run();
+			}
+		}
+		
 		private function addLogMsg(msg:String):void
 		{
 			EventManager.dispatchEvent("Game_log",msg);
 		}
 		
-		private var _shadow:PoolMesh;
+		public function addDebugLogMsg(isTrace:Boolean = false):String
+		{
+			if (isTrace)
+				addLogMsg(_ruDebugStr + this.id + "-" + this._currentFullSourchPath);
+			var p:Vector3D = _graphicDis.scenePosition;
+			var pm:PoolMesh = PoolMesh(_graphicDis);
+			var bound:AxisAlignedBoundingBox = pm.worldBounds as AxisAlignedBoundingBox;
+			var max:Vector3D = bound.max;
+			var min:Vector3D = bound.min;
+			var entityNode:EntityNode = pm.getEntityPartitionNode();
+			var bNodeStr:String = "null";
+			if (pm.scene)
+			{
+				var bNode:Boolean = pm.scene.view.arcane::entityCollector.enterNode(entityNode,pm.scene.view);
+				bNodeStr = String(bNode);
+			}
+			return "-B:" + bNode + 
+				"-BMax:" + int(max.x) +","+ int(max.y) + ","+ int(max.z) +
+				"-BMin:" + int(min.x) +","+ int(min.y) + ","+ int(min.z) +
+				"-H:"+int(bound.halfExtentsX)+"-"+int(bound.halfExtentsY)+"-"+int(bound.halfExtentsZ)+
+				"-RF:" + entityNode.readyForRender()+
+//				"-R:" + pm.renderStatus + 
+				"-F:" + pm.parent +"," + pm.width +
+				"-P:" + p.x + "," + p.y + "," + p.z+
+				"-S:" + pm.scaleX + "," + pm.scaleY + "," + pm.scaleZ+
+				"-O:" + pm.object3DScaleX + "," + pm.object3DScaleY + "," + pm.object3DScaleZ;
+		}
+		
 		private function get drawCastsShadows():Boolean
 		{
-			var texture:ITextureMaterial = PoolMesh(_graphicDis).material as ITextureMaterial;
-			if (texture && texture.textureParsed){
-				return false;
-			}
-			return _isDrawShadow && _enableShadow && _alpha > 0;
-		}
-		
-		override public function set isDrawShadow(value:Boolean):void
-		{
-			_isDrawShadow = value;
-			if(!value)
+			if (_graphicDis)
 			{
-				if(_shadow)
-				{
-					PoolMesh.recycle(_shadow);
-					_shadow = null;
+				var texture:ITextureMaterial = PoolMesh(_graphicDis).material as ITextureMaterial;
+				if (texture && !texture.textureReady){
+					return false;
 				}
 			}
-		}
-		
-		private var _shadowDepthIndex:int = 0;
-		public function set shadowDepthIndex(value:uint):void
-		{
-			if(_shadow && _shadow.parent == _parent && _shadowDepthIndex != value)
-			{
-				if(_parent.numChildren > value)
-				{
-					_parent.setChildIndex(_shadow,value);
-				}
-			}
-			_shadowDepthIndex = value;
+			return _isDrawShadow && _enableShadow && _alpha > 0.2;
 		}
 		
 		private var _shadowOffsetX:Number = 0;
@@ -1507,37 +1503,11 @@ package com.game.engine2D.scene.render
 		
 		public function set shadowOffsetX(value:Number):void
 		{
-			if (_shadowOffsetX == value)
+			if (_shadowOffsetX != value)
 			{
-				return;
-			}
-
-			_shadowOffsetX = value;
-			if (_graphicDis is PoolMesh){
-				PoolMesh(_graphicDis).setPlanarShadowOffset(_shadowOffsetX, _shadowOffsetY);
-			}
-			if (!_shadow)
-			{
-				return;
-			}
-
-			if (GlobalConfig2D.shadowRenderType == GlobalConfig2D.SHADOW_SHAPE)
-			{
-				_shadow.x = this.x+GlobalConfig2D.shadowOffsetX+_shadowOffsetX;
-			} else
-			{
-				if (null == cutRect)
-				{
-					return;
-				}
-
-				if (-1 == _renderScaleX)
-				{
-					_shadow.x = this.x-(_drawSourceTexture.width+cutRect.x) + GlobalConfig2D.tanShadow * cutRect.y + _shadowOffsetX;
-				} 
-				else
-				{
-					_shadow.x = this.x+cutRect.x + GlobalConfig2D.tanShadow * cutRect.y + _shadowOffsetX;
+				_shadowOffsetX = value;
+				if (_graphicDis is PoolMesh){
+					PoolMesh(_graphicDis).setPlanarShadowOffset(_shadowOffsetX, _shadowOffsetY);
 				}
 			}
 		}
@@ -1557,20 +1527,6 @@ package com.game.engine2D.scene.render
 				if (_graphicDis is PoolMesh){
 					PoolMesh(_graphicDis).setPlanarShadowOffset(_shadowOffsetX, _shadowOffsetY);
 				}
-				if(_shadow)
-				{
-					if (GlobalConfig2D.shadowRenderType == GlobalConfig2D.SHADOW_SHAPE)
-					{
-						_shadow.y = this.y+GlobalConfig2D.shadowOffsetY+_shadowOffsetY;
-					} 
-					else
-					{
-						if (null != cutRect)
-						{
-							_shadow.y = ((cutRect.y * GlobalConfig2D.shadowYScale)>>0)+_shadowOffsetY;
-						}
-					}
-				}
 			}
 		}
 		
@@ -1584,12 +1540,14 @@ package com.game.engine2D.scene.render
 				exceteCallBackData(_playStartCallBackList);
 			}
 			//播放过程回调
-			exceteCallBackData(_playUpdateCallBackList);
+			if (_playUpdateCallBackList)
+				exceteCallBackData(_playUpdateCallBackList);
 			//播放结束回调
 			if(_playComplete)
 			{
 				exceteCallBackData(_playCompleteCallBackList);
 				_playComplete = false;	
+				_preCompleteExceted = true;
 			}
 		}
 		
@@ -1604,7 +1562,7 @@ package com.game.engine2D.scene.render
 			}
 			var afd:RenderFaceData = new RenderFaceData();
 			afd.sourceTexture =  _drawSourceTexture;//guoqing.wen
-			afd.cutRect = cutRect;
+			afd.cutRect = _cutRect;
 			afd.id = id;
 			afd.type = type;
 			afd.showX = finalShowX;
@@ -1613,6 +1571,11 @@ package com.game.engine2D.scene.render
 			return afd;
 		}
 		
+		public function setHighlightEnable(value:Boolean):void
+		{
+			if (_renderImgData)
+				_renderImgData.setWriteDepthEnable(value);
+		}
 		/**
 		 * @private 
 		 * 释放
@@ -1646,7 +1609,6 @@ package com.game.engine2D.scene.render
 			_renderUnitData = null;
 			
 			alpha = 1;
-			removeAllFilters();
 			_renderScaleX = 1;
 			
 			_enableFilters = true;
@@ -1655,14 +1617,8 @@ package com.game.engine2D.scene.render
 			_isDrawShadow = false;
 			_forceEnableBlendMode = false;
 			
-			if(_shadow)
-			{
-				PoolMesh.recycle(_shadow);
-				_shadow = null;
-			}
+			_cutRect.setEmpty();
 			
-			cutRect.setEmpty();
-
 			_shadowOffsetX = 0;
 			_shadowOffsetY = 0;
 			_totalFrame = 0;
@@ -1692,11 +1648,11 @@ package com.game.engine2D.scene.render
 			{
 				_removedCallBackList.length = 0;
 			}
-			
+			_preCompleteExceted = false;
+			_preStartTime = 0;
 			_resReady = false;
 			_renderImgData = null;
 			_drawSourceTexture = null;
-			_bitmapFilters.length = 0;
 			_currentStatus = 0;
 			_currentFullSourchPath = null;
 			_currentRenderUnitStatus = null;
@@ -1709,6 +1665,7 @@ package com.game.engine2D.scene.render
 			
 			_defaultRenderImgData = null;
 			_defaultRenderUnitStatus = null;
+			_defaultRenderTexture = null;
 			
 			_playCount = 0;
 			_lastTime = 0;
@@ -1723,10 +1680,10 @@ package com.game.engine2D.scene.render
 				PoolMesh.recycle(_graphicDis as PoolMesh);
 				_graphicDis = null;
 			}
-			
+			renderSet = null;
 			super.dispose();
 		}
-
+		
 		/**
 		 * @private 
 		 * 重置
@@ -1734,7 +1691,8 @@ package com.game.engine2D.scene.render
 		override public function reSet($parameters:Array):void
 		{
 			super.reSet(null);
-			
+			_ruDebugStr = "";
+			_ruDebugDraw = 0;
 			_renderUnitData = $parameters[0];
 			id = _renderUnitData.id;
 			type = _renderUnitData.type;
@@ -1744,12 +1702,9 @@ package com.game.engine2D.scene.render
 			_softOutlineData = null;
 			_oldData ||= new OldData();
 			_oldData.clear();
-			if(!_graphicDis)  
-			{
-				_graphicDis = PoolMesh.create(null, this);
-				//PoolMesh(_graphicDis).castsShadows = true;
-			}
-			PoolMesh(_graphicDis).blendMode = GlobalConfig2D.enableBlendMode?data.blendMode:BlendMode.NORMAL;
+			_preCompleteExceted = false;
+			_preStartTime = 0;
+			_graphicDis ||= PoolMesh.create(this);
 		}
 		
 		public function set defaultRenderData($xmlImgData:XmlImgData):void
@@ -1758,7 +1713,6 @@ package com.game.engine2D.scene.render
 			{
 				_defaultRenderImgData = $xmlImgData.aid;
 				_defaultRenderUnitStatus = $xmlImgData.aps;
-				//
 				setRuStatusData(_defaultRenderUnitStatus);
 			}
 			else
@@ -1768,17 +1722,36 @@ package com.game.engine2D.scene.render
 			}
 		}
 		
-		public function addTraceLog(msg:String):void
+		public function set defaultRenderTexture($defaultTexture:ATFSubTexture):void
 		{
-			if(_enableTrace)
+			if($defaultTexture)
 			{
-				trace(msg);
+				_defaultRenderTexture = $defaultTexture;
+				if ($defaultTexture)
+					$defaultTexture.uploadTexture();
+				_keyFrame = 1;
+				_keyFrameTm = 1;
+				_totalFrame = 1;
+				_totalFrameTm = 1;
+				
+				_isNeedScaleX = false;				 
+				_renderScaleX = 1;
 			}
+			else
+			{
+				_defaultRenderImgData = null;
+				_defaultRenderUnitStatus = null;
+			}
+		}
+		
+		public function get renderParamData():RenderParamData3D
+		{
+			return null;
 		}
 	}
 }
-
 import com.game.engine2D.core.ATFSubTexture;
+
 
 /**
  * 旧数据记录类

@@ -13,6 +13,9 @@ package com.game.engine2D.core
 		public var atfDataArr:Vector.<ByteArray>;
 		public var dataBytes:ByteArray;
 		public var hinderBytes:ByteArray;
+		public var enableScaleTexture:Boolean;
+		public var autoRecycleEnable:Boolean;
+		public var isAsync:Boolean;
 		private var config:Object;
 		
 		public function TexturePack()

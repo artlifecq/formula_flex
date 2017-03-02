@@ -59,7 +59,7 @@ package com.rpgGame.coreData.type
 		/** 客户端NPC 21 */
 		public static const CLIENT_NPC : String = rEnum.next.toString();
 
-
+		public static const XUE_WEN : String = rEnum.next.toString();
 		//		/** 召唤怪  3 **/
 //		public static const SUMMON_MONSTER:String = rEnum.next.toString();
 //		/** 宝袋（精英怪或BOSS死后出现） 4 **/

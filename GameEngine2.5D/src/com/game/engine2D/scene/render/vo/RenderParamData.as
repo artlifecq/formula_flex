@@ -15,6 +15,10 @@ package com.game.engine2D.scene.render.vo
 		private var _type:String;
 		/**部件加载列表里的优先级*/
 		public var priority:int = 0;
+		/**部件资源释放延长时间，想加快释放设置为负值，要减慢释放设置为正值*/
+		public var destoryTm:int = 0;
+		/** 是否自动回收显存 */
+		public var autoRecycleEnable:Boolean = true;
 		
 		/**
 		 * ID 某角色换装的唯一标识,注意该ID必须唯一
@@ -49,6 +53,18 @@ package com.game.engine2D.scene.render.vo
 		public function set mouseEnabled(value:Boolean):void
 		{
 			_mouseEnabled = value;
+		}
+		
+		private var _enableScaleTexture:Boolean = true;
+		/** 是否允许动态缩放显存  */
+		public function get enableScaleTexture():Boolean
+		{
+			return _enableScaleTexture;
+		}
+		
+		public function set enableScaleTexture(value:Boolean):void
+		{
+			_enableScaleTexture = value;
 		}
 		
 		private var _sleepTime:int = 0;
@@ -106,9 +122,9 @@ package com.game.engine2D.scene.render.vo
 			//替换占位符
 			var fullPath:String = isBitmap?sourcePath:sourcePath.replace("#",resName);
 			//获取版本地址
-			if(GlobalConfig2D.version!=null)
+			if(GlobalConfig2D.avatarFileVersion!=null)
 			{
-				fullPath = GlobalConfig2D.version(fullPath);
+				fullPath = GlobalConfig2D.avatarFileVersion(fullPath);
 			}
 			return fullPath;
 		}

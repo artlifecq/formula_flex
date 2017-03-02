@@ -1,12 +1,14 @@
 package com.game.engine3D.scene.render
 {
+	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.core.poolObject.PoolContainer3D;
-	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.MethodData;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
+	import com.game.engine3D.scene.render.vo.RenderUnitChild;
 	import com.game.engine3D.scene.render.vo.RenderUnitSyncInfo;
 	import com.game.engine3D.utils.CallBackUtil;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.game.engine3D.vo.CallBackData;
-	import com.game.mainCore.libCore.pool.Pool;
 	
 	import flash.geom.Matrix3D;
 	import flash.geom.Point;
@@ -31,7 +33,7 @@ package com.game.engine3D.scene.render
 		//---------------------------对象池---------------------------
 		private static var _cnt : int = 0;
 
-		private static var _pool : Pool = new Pool("RenderSet3D", 1000);
+		private static var _pool : InstancePool = new InstancePool("RenderSet3D", 1000);
 
 		/**
 		 * 生成一个RenderUnit
@@ -71,6 +73,9 @@ package com.game.engine3D.scene.render
 		private var _shareMaterials : Boolean;
 		private var _syncInfos : Dictionary;
 		private var _volumeRender : RenderUnit3D;
+		
+		private var _secondStatusRender : RenderUnit3D;
+		private var _secondStatusGetter : Function = null;
 
 		private var _mouseUpCallBackList : Vector.<CallBackData>;
 		private var _mouseDownCallBackList : Vector.<CallBackData>;
@@ -78,6 +83,7 @@ package com.game.engine3D.scene.render
 		private var _mouseOutCallBackList : Vector.<CallBackData>;
 		private var _mouseRightUpCallBackList : Vector.<CallBackData>;
 		private var _mouseRightDownCallBackList : Vector.<CallBackData>;
+		private var _methodDatas : Vector.<MethodData>;
 		
 		private var _is25D:Boolean=false;
 
@@ -86,6 +92,56 @@ package com.game.engine3D.scene.render
 			super([type, id,is25D]);
 			_syncInfos = new Dictionary();
 			_renderUnitMap = new Dictionary();
+			_methodDatas = new Vector.<MethodData>();
+		}
+		
+		public function addMethod(methodData : MethodData) : void
+		{
+			if (_methodDatas)
+			{
+				if (_methodDatas.indexOf(methodData) == -1)
+				{
+					_methodDatas.push(methodData);
+				}
+				for each (var ru : RenderUnit3D in _renderUnitMap)
+				{
+					ru.addMethod(methodData);
+				}
+			}
+		}
+		
+		public function removeMethod(methodData : MethodData) : void
+		{
+			if (_methodDatas)
+			{
+				if (_methodDatas.length > 0)
+				{
+					var index : int = _methodDatas.indexOf(methodData);
+					if (index != -1)
+					{
+						_methodDatas.splice(index, 1);
+					}
+				}
+				for each (var ru : RenderUnit3D in _renderUnitMap)
+				{
+					ru.removeMethod(methodData);
+				}
+			}
+		}
+		
+		public function removeAllMethods() : void
+		{
+			if (_methodDatas)
+			{
+				for each (var methodData : MethodData in _methodDatas)
+				{
+					for each (var ru : RenderUnit3D in _renderUnitMap)
+					{
+						ru.removeMethod(methodData);
+					}
+				}
+				_methodDatas.length = 0;
+			}
 		}
 
 		/**
@@ -228,7 +284,7 @@ package com.game.engine3D.scene.render
 		 * @return
 		 *
 		 */
-		public function addRenderUnitToComposite(renderUnitType : String, id : int, rpd : RenderParamData, compositeIndex : int = 0, boneName : String = null) : RenderUnit3D
+		public function addRenderUnitToComposite(renderUnitType : String, id : int, rpd : RenderParamData3D, compositeIndex : int = 0, boneName : String = null) : RenderUnit3D
 		{
 			//清空同种类型换装
 			if (rpd.clearSameType)
@@ -238,7 +294,7 @@ package com.game.engine3D.scene.render
 			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
 			if (ru)
 			{
-				var childRu : RenderUnit3D = createRenderUnit(rpd, _graphicDis);
+				var childRu : RenderUnit3D = createRenderUnit(rpd);
 				ru.addUnitAtComposite(childRu, compositeIndex, boneName);
 				return childRu;
 			}
@@ -252,14 +308,22 @@ package com.game.engine3D.scene.render
 		 * @return
 		 *
 		 */
-		public function addRenderUnitToJoint(renderUnitType : String, id : int, childName : String, rpd : RenderParamData, compositeIndex : int = 0) : RenderUnit3D
+		public function addRenderUnitToJoint(renderUnitType : String, id : int, childName : String, rpd : RenderParamData3D, compositeIndex : int = 0) : RenderUnit3D
 		{
 			//清空同种类型换装
 			if (rpd.clearSameType)
 			{
 				removeRenderUnitsByType(rpd.type); //注意后面的参数
 			}
-			if (childName)
+			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
+			if (ru)
+			{
+				var childRu : RenderUnit3D = createRenderUnit(rpd);
+				ru.addUnitAtJoint(childRu, childName, compositeIndex);
+				return childRu;
+			}
+			return null;
+			/*if (childName)
 			{
 				var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
 				if (ru)
@@ -273,7 +337,7 @@ package com.game.engine3D.scene.render
 			{
 				//清除同ID
 				removeRenderUnitByID(rpd.type, rpd.id);
-			}
+			}*/
 			return null;
 		}
 
@@ -284,27 +348,19 @@ package com.game.engine3D.scene.render
 		 * @return
 		 *
 		 */
-		public function addRenderUnitToBone(renderUnitType : String, id : int, boneName : String, rpd : RenderParamData) : RenderUnit3D
+		public function addRenderUnitToBone(renderUnitType : String, id : int, boneName : String, rpd : RenderParamData3D) : RenderUnit3D
 		{
 			//清空同种类型换装
 			if (rpd.clearSameType)
 			{
 				removeRenderUnitsByType(rpd.type); //注意后面的参数
 			}
-			if (boneName)
+			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
+			if (ru)
 			{
-				var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
-				if (ru)
-				{
-					var childRu : RenderUnit3D = createRenderUnit(rpd, _graphicDis);
-					ru.addUnitAtBone(childRu, boneName);
-					return childRu;
-				}
-			}
-			else
-			{
-				//清除同ID
-				removeRenderUnitByID(rpd.type, rpd.id);
+				var childRu : RenderUnit3D = createRenderUnit(rpd);
+				ru.addUnitAtBone(childRu, boneName);
+				return childRu;
 			}
 			return null;
 		}
@@ -316,27 +372,19 @@ package com.game.engine3D.scene.render
 		 * @return
 		 *
 		 */
-		public function addRenderUnitToChild(renderUnitType : String, id : int, childName : String, rpd : RenderParamData) : RenderUnit3D
+		public function addRenderUnitToChild(renderUnitType : String, id : int, childName : String, rpd : RenderParamData3D, meshIndex : int = -1) : RenderUnit3D
 		{
 			//清空同种类型换装
 			if (rpd.clearSameType)
 			{
 				removeRenderUnitsByType(rpd.type); //注意后面的参数
 			}
-			if (childName)
+			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
+			if (ru)
 			{
-				var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
-				if (ru)
-				{
-					var childRu : RenderUnit3D = createRenderUnit(rpd, _graphicDis);
-					ru.addUnitAtChild(childRu, childName);
-					return childRu;
-				}
-			}
-			else
-			{
-				//清除同ID
-				removeRenderUnitByID(rpd.type, rpd.id);
+				var childRu : RenderUnit3D = createRenderUnit(rpd);
+				ru.addUnitAtChild(childRu, childName, meshIndex);
+				return childRu;
 			}
 			return null;
 		}
@@ -348,24 +396,80 @@ package com.game.engine3D.scene.render
 		 * @return
 		 *
 		 */
-		public function addRenderUnitToUnit(renderUnitType : String, id : int, rpd : RenderParamData) : RenderUnit3D
+		public function addRenderUnitToUnit(renderUnitType : String, renderUnitId : int, rpd : RenderParamData3D) : RenderUnit3D
 		{
 			//清空同种类型换装
 			if (rpd.clearSameType)
 			{
 				removeRenderUnitsByType(rpd.type); //注意后面的参数
 			}
-			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
+			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, renderUnitId);
 			if (ru)
 			{
-				var childRu : RenderUnit3D = createRenderUnit(rpd, _graphicDis);
+				var childRu : RenderUnit3D = createRenderUnit(rpd);
 				ru.addUnitChild(childRu);
 				return childRu;
 			}
 			return null;
 		}
+		
+		public function addUnitChildData(renderUnitType : String, renderUnitId : int, childData : RenderUnitChild) : RenderUnit3D
+		{
+			var childRu : RenderUnit3D = childData.renderUnit;
+			var compositeIndex : int = childData.compositeIndex;
+			var boneName : String = childData.boneName;
+			var childName : String = childData.childName;
+			var meshIndex : int = childData.meshIndex;
+			var renderUnit : RenderUnit3D = childData.renderUnit;
+			removeRenderUnit(renderUnit, false, false);
+			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, renderUnitId);
+			if (ru)
+			{
+				if (compositeIndex > -1)
+				{
+					ru.addUnitAtJoint(renderUnit, boneName, compositeIndex);
+				}
+				else if (boneName)
+				{
+					ru.addUnitAtBone(renderUnit, boneName);
+				}
+				else if (meshIndex > -1)
+				{
+					ru.addUnitAtChild(renderUnit, childName, meshIndex);
+				}
+				else if (childName)
+				{
+					ru.addUnitAtChild(renderUnit, childName);
+				}
+				else
+				{
+					ru.addUnitChild(renderUnit);
+				}
+				return childRu;
+			}
+			return null;
+		}
+		
+		public function getUnitChildDatasByName(renderUnitType : String, renderUnitId : int, childName : String) : Vector.<RenderUnitChild>
+		{
+			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, renderUnitId);
+			if (ru && ru.usable)
+			{
+				var datas : Vector.<RenderUnitChild> = new Vector.<RenderUnitChild>();
+				var childUnitList : Vector.<RenderUnitChild> = ru.getUnitChildDatas();
+				for each (var unitChild : RenderUnitChild in childUnitList)
+				{
+					if (unitChild.childName == childName || unitChild.boneName == childName)
+					{
+						datas.push(unitChild);
+					}
+				}
+				return datas;
+			}
+			return null;
+		}
 
-		private function createRenderUnit(rpd : RenderParamData, parent : ObjectContainer3D) : RenderUnit3D
+		private function createRenderUnit(rpd : RenderParamData3D) : RenderUnit3D
 		{
 			var ru : RenderUnit3D = getRenderUnitByID(rpd.type, rpd.id, false);
 			if (!ru)
@@ -378,8 +482,13 @@ package com.game.engine3D.scene.render
 			ru.useLight = _useLight;
 			ru.isInViewDistance = _isInViewDistance;
 			ru.mouseEnable = rpd.mouseEnable && _mouseEnable;
-			ru.parent = parent;
+			ru.alpha = _alpha;
+			ru.zOffset = _zOffset;
 			ru.needRun = false;
+			for each (var methodData : MethodData in _methodDatas)
+			{
+				ru.addMethod(methodData);
+			}
 			ru.setMouseUpCallBack(handleMouseUp);
 			ru.setMouseDownCallBack(handleMouseDown);
 			ru.setMouseOverCallBack(handlerMouseOver);
@@ -391,6 +500,30 @@ package com.game.engine3D.scene.render
 			{
 				ru.startRender();
 			}
+			if (rpd.useSecondStatus)
+			{
+				ru.secondStatusGetter = null;
+				_secondStatusRender = ru;
+				for each (var otherRu : RenderUnit3D in _renderUnitMap)
+				{
+					if (otherRu == _secondStatusRender)
+					{
+						continue;
+					}
+					otherRu.secondStatusGetter = _secondStatusGetter;
+				}
+			}
+			else if (_secondStatusRender)
+			{
+				if (ru == _secondStatusRender)
+				{
+					ru.secondStatusGetter = null;
+				}
+				else
+				{
+					ru.secondStatusGetter = _secondStatusGetter;
+				}
+			}
 			//添加进表
 			var key : String = rpd.type + "_" + rpd.id;
 			_renderUnitMap[key] = ru;
@@ -401,8 +534,12 @@ package com.game.engine3D.scene.render
 		{
 		}
 
-		private function recycleRenderUnit(ru : RenderUnit3D) : void
+		private function recycleRenderUnit(ru : RenderUnit3D, recycle : Boolean = true) : void
 		{
+			var key : String = ru.type + "_" + ru.id;
+			//从表中移除
+			_renderUnitMap[key] = null;
+			delete _renderUnitMap[key];
 			ru.restoreAllChildUnitToParent(_graphicDis);
 			ru.removeMouseUpCallBack(handleMouseUp);
 			ru.removeMouseDownCallBack(handleMouseDown);
@@ -411,8 +548,25 @@ package com.game.engine3D.scene.render
 			ru.removeMouseRightUpCallBack(handleMouseRightUp);
 			ru.removeMouseRightDownCallBack(handleMouseRightDown);
 			ru.removeRemovedCallBack(doRenderUnitRemoved);
+			ru.parent = null;
+			ru.stopRender();
+			if (_volumeRender == ru)
+			{
+				_volumeRender = null;
+			}
+			if (_secondStatusRender == ru)
+			{
+				_secondStatusRender = null;
+				for each (var otherRu : RenderUnit3D in _renderUnitMap)
+				{
+					otherRu.secondStatusGetter = null;
+				}
+			}
 			//执行remove回调,回收renderUnit
-			ru.destroy();
+			if (recycle)
+			{
+				ru.destroy();
+			}
 		}
 
 		/**
@@ -479,14 +633,15 @@ package com.game.engine3D.scene.render
 		 * 添加一项RenderUnit
 		 *  @param apd 换装数据 如果apd==null，则创建一个空RenderParamData
 		 */
-		public function addRenderUnit(rpd : RenderParamData) : RenderUnit3D
+		public function addRenderUnit(rpd : RenderParamData3D) : RenderUnit3D
 		{
 			//清空同种类型换装
 			if (rpd.clearSameType)
 			{
 				removeRenderUnitsByType(rpd.type); //注意后面的参数
 			}
-			var ru : RenderUnit3D = createRenderUnit(rpd, _graphicDis);
+			var ru : RenderUnit3D = createRenderUnit(rpd);
+			ru.parent = _graphicDis;
 			return ru;
 		}
 
@@ -495,24 +650,16 @@ package com.game.engine3D.scene.render
 		 * @param renderUnit
 		 * @param clearSameType 是否清空同种类型的换装
 		 */
-		public function removeRenderUnit(renderUnit : RenderUnit3D, clearSameType : Boolean = false) : void
+		public function removeRenderUnit(renderUnit : RenderUnit3D, clearSameType : Boolean = false, recycle : Boolean = true) : void
 		{
 			//清空同种状态换装
 			if (clearSameType)
 			{
-				removeRenderUnitsByType(renderUnit.type);
+				removeRenderUnitsByType(renderUnit.type, recycle);
 			}
 			else
 			{
-				var key : String = renderUnit.type + "_" + renderUnit.id;
-				//从表中移除
-				_renderUnitMap[key] = null;
-				delete _renderUnitMap[key];
-				if (_volumeRender == renderUnit)
-				{
-					_volumeRender = null;
-				}
-				recycleRenderUnit(renderUnit);
+				recycleRenderUnit(renderUnit, recycle);
 				renderUnit = null;
 			}
 		}
@@ -532,12 +679,6 @@ package com.game.engine3D.scene.render
 			if (ru)
 			{
 				//从表中移除
-				_renderUnitMap[key] = null;
-				delete _renderUnitMap[key];
-				if (_volumeRender == ru)
-				{
-					_volumeRender = null;
-				}
 				recycleRenderUnit(ru);
 				ru = null;
 			}
@@ -547,25 +688,18 @@ package com.game.engine3D.scene.render
 		 * 移除指定类型的RenderUnit(此函数执行后,会检查主体换装，如果为空则启用默认换装)
 		 * @param renderUnitType 换装类型
 		 */
-		public function removeRenderUnitsByType(renderUnitType : String) : void
+		public function removeRenderUnitsByType(renderUnitType : String, recycle : Boolean = true) : void
 		{
 			if (renderUnitType == null || renderUnitType == "")
 				return; //注意这个判断
-
+			
 			//检查换装内
 			for (var key : String in _renderUnitMap)
 			{
 				var ru : RenderUnit3D = _renderUnitMap[key];
 				if (ru.type == renderUnitType)
 				{
-					//从表中移除
-					_renderUnitMap[key] = null;
-					delete _renderUnitMap[key];
-					if (_volumeRender == ru)
-					{
-						_volumeRender = null;
-					}
-					recycleRenderUnit(ru);
+					recycleRenderUnit(ru, recycle);
 				}
 				ru = null;
 			}
@@ -574,19 +708,16 @@ package com.game.engine3D.scene.render
 		/**
 		 * 移除所有RenderUnit((此函数执行后,不会检查主体换装是否存在)
 		 */
-		public function removeAllRenderUnits() : void
+		public function removeAllRenderUnits(recycle : Boolean = true) : void
 		{
 			//检查换装内
-			for (var key : String in _renderUnitMap)
+			for each (var ru : RenderUnit3D in _renderUnitMap)
 			{
-				var ru : RenderUnit3D = _renderUnitMap[key];
-				//从表中移除
-				_renderUnitMap[key] = null;
-				delete _renderUnitMap[key];
-				recycleRenderUnit(ru);
+				recycleRenderUnit(ru, recycle);
 				ru = null;
 			}
 			_volumeRender = null;
+			_secondStatusRender = null;
 		}
 
 		/**
@@ -625,11 +756,11 @@ package com.game.engine3D.scene.render
 		 * @param rpd 换装RPD
 		 * 注意：不检测回调
 		 */
-		public function hasSameRenderUnit(rpd : RenderParamData, checkResReady : Boolean = false) : Boolean
+		public function hasSameRenderUnit(rpd : RenderParamData3D, checkResReady : Boolean = false) : Boolean
 		{
 			for each (var ru : RenderUnit3D in _renderUnitMap)
 			{
-				var apd : RenderParamData = ru.renderParamData;
+				var apd : RenderParamData3D = ru.renderParamData;
 				if (apd && apd.equals(rpd) && ((!checkResReady) || ru.resReady))
 				{
 					return true;
@@ -855,6 +986,16 @@ package com.game.engine3D.scene.render
 				}
 			}
 		}
+		
+		public function get secondStatusGetter() : Function
+		{
+			return _secondStatusGetter;
+		}
+		
+		public function set secondStatusGetter(value : Function) : void
+		{
+			_secondStatusGetter = value;
+		}
 
 		/**
 		 * 获取换装RenderUnit数量
@@ -1030,6 +1171,41 @@ package com.game.engine3D.scene.render
 			}
 		}
 		
+		override public function set zOffset(value : int) : void
+		{
+			super.zOffset = value;
+			for each (var ru : RenderUnit3D in _renderUnitMap)
+			{
+				ru.zOffset = value;
+			}
+		}
+		
+		override public function set depth(value : int) : void
+		{
+			super.depth = value;
+			for each (var ru : RenderUnit3D in _renderUnitMap)
+			{
+				ru.depth = value;
+			}
+		}
+		
+		public function set castsShadows(value : Boolean) : void
+		{
+			for each (var ru : RenderUnit3D in _renderUnitMap)
+			{
+				ru.castsShadows = value;
+			}
+		}
+		
+		public function hasEntity(entity : ObjectContainer3D) : Boolean
+		{
+			for each (var ru : RenderUnit3D in _renderUnitMap)
+			{
+				if (ru.graphicDis.contains(entity))
+					return true;
+			}
+			return false;
+		}
 		
 		override public function reSet($parameters : Array) : void
 		{
@@ -1046,6 +1222,8 @@ package com.game.engine3D.scene.render
 			_lightPicker = null;
 			_useLight = false;
 			_volumeRender = null;
+			_secondStatusRender = null;
+			_secondStatusGetter = null;
 		}
 
 		/**销毁显示对象 */
@@ -1076,7 +1254,13 @@ package com.game.engine3D.scene.render
 				}
 			}
 			_volumeRender = null;
-
+			_secondStatusRender = null;
+			_secondStatusGetter = null;
+			
+			if (_methodDatas)
+			{
+				_methodDatas.length = 0;
+			}
 			//回收所有换装
 			removeAllRenderUnits();
 

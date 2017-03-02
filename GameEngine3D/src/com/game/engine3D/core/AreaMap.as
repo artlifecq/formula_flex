@@ -41,7 +41,7 @@ package com.game.engine3D.core
 			_min = min;
 			_max = max;
 
-			if(GlobalConfig.use25DMap)
+			if(GlobalConfig.use2DMap)
 			{
 				_scaleX = _bitmapData.width / (_max.x - _min.x);
 				_scaleY = _bitmapData.height / (_max.y - _min.y);

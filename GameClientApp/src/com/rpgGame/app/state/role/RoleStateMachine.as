@@ -1,9 +1,9 @@
 package com.rpgGame.app.state.role
 {
+	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.state.StateMachine;
 	import com.game.engine3D.state.StateReference;
-	import com.game.mainCore.libCore.pool.Pool;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.action.AttackState;
 	import com.rpgGame.app.state.role.action.BeatBackState;
@@ -25,15 +25,21 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.AvatarState;
 	import com.rpgGame.app.state.role.control.BeatMoveState;
 	import com.rpgGame.app.state.role.control.BingDongState;
+	import com.rpgGame.app.state.role.control.BlindState;
 	import com.rpgGame.app.state.role.control.BlinkMoveState;
 	import com.rpgGame.app.state.role.control.CastSpellLockState;
 	import com.rpgGame.app.state.role.control.DeadLaunchMoveState;
+	import com.rpgGame.app.state.role.control.FastingState;
 	import com.rpgGame.app.state.role.control.HunLuanState;
 	import com.rpgGame.app.state.role.control.HurtState;
 	import com.rpgGame.app.state.role.control.HushState;
 	import com.rpgGame.app.state.role.control.JumpRiseState;
+	import com.rpgGame.app.state.role.control.MountRideState;
 	import com.rpgGame.app.state.role.control.PrewarWaitingState;
 	import com.rpgGame.app.state.role.control.RidingState;
+	import com.rpgGame.app.state.role.control.ScaredMoveState;
+	import com.rpgGame.app.state.role.control.ScaredState;
+	import com.rpgGame.app.state.role.control.ShadowState;
 	import com.rpgGame.app.state.role.control.StiffState;
 	import com.rpgGame.app.state.role.control.StopWalkMoveState;
 	import com.rpgGame.app.state.role.control.StunState;
@@ -43,9 +49,9 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.core.state.role.action.ActionState;
 	import com.rpgGame.core.state.role.control.MoveState;
 	import com.rpgGame.coreData.type.RoleStateType;
-
+	
 	import flash.utils.Dictionary;
-
+	
 	/**
 	 *
 	 * 场景角色状态机
@@ -55,8 +61,8 @@ package com.rpgGame.app.state.role
 	 */
 	public class RoleStateMachine extends StateMachine
 	{
-		private static var machinePool : Pool = new Pool("RoleStateMachine", 500);
-
+		private static var machinePool : InstancePool = new InstancePool("RoleStateMachine", 300);
+		
 		/**
 		 * 生成一个RoleStateMachine
 		 */
@@ -65,7 +71,7 @@ package com.rpgGame.app.state.role
 			//利用池生成RoleStateMachine
 			return machinePool.createObj(RoleStateMachine, role) as RoleStateMachine;
 		}
-
+		
 		/**
 		 * @private
 		 * 回收一个RoleStateMachine
@@ -76,9 +82,9 @@ package com.rpgGame.app.state.role
 			//利用池回收RoleStateMachine
 			machinePool.disposeObj(machine);
 		}
-
+		
 		private static var stateMapping : Dictionary = new Dictionary();
-
+		
 		stateMapping[RoleStateType.ACTION_IDLE] = IdleState;
 		stateMapping[RoleStateType.ACTION_WALK] = WalkState;
 		stateMapping[RoleStateType.ACTION_RUN] = RunState;
@@ -95,7 +101,7 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.ACTION_PREWAR] = PrewarState;
 		stateMapping[RoleStateType.ACTION_PLAY_ACTION] = PlayActionState;
 		stateMapping[RoleStateType.ACTION_TRAIL] = TrailState;
-
+		
 		stateMapping[RoleStateType.CONTROL_AVATAR] = AvatarState;
 		stateMapping[RoleStateType.CONTROL_HURT] = HurtState;
 		stateMapping[RoleStateType.CONTROL_ATTACK_HARD] = AttackHardState;
@@ -105,7 +111,11 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.CONTROL_STUN] = StunState;
 		stateMapping[RoleStateType.CONTROL_UNMOVABLE] = UnmovableState;
 		stateMapping[RoleStateType.CONTROL_HUSH] = HushState;
+		stateMapping[RoleStateType.CONTROL_SHADOW] = ShadowState;
+		stateMapping[RoleStateType.CONTROL_BLIND] = BlindState;
+		stateMapping[RoleStateType.CONTROL_SCARED] = ScaredState;
 		stateMapping[RoleStateType.CONTROL_HUN_LUAN] = HunLuanState;
+		stateMapping[RoleStateType.CONTROL_FASTING] = FastingState;
 		stateMapping[RoleStateType.CONTROL_WALK_MOVE] = WalkMoveState;
 		stateMapping[RoleStateType.CONTROL_JUMP_RISE] = JumpRiseState;
 		stateMapping[RoleStateType.CONTROL_STOP_WALK_MOVE] = StopWalkMoveState;
@@ -115,210 +125,270 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.CONTROL_RIDING] = RidingState;
 		stateMapping[RoleStateType.CONTROL_PREWAR_WAITING] = PrewarWaitingState;
 		stateMapping[RoleStateType.CONTROL_TRAIL_MOVE] = TrailMoveState;
-
+		stateMapping[RoleStateType.CONTROL_SCARED_MOVE] = ScaredMoveState;
+		stateMapping[RoleStateType.CONTROL_MOUNT_RIDE] = MountRideState;
+		
 		private var _role : SceneRole;
-
+		private var _lastCanShowRiding : Boolean;
+		
 		public function RoleStateMachine(role : SceneRole)
 		{
 			super(role);
 		}
-
+		
 		override public function reSet($parameters : Array) : void
 		{
 			super.reSet($parameters);
 			_role = _owner as SceneRole;
+			_lastCanShowRiding = true;
 		}
-
+		
+		public function get lastCanShowRiding() : Boolean
+		{
+			return _lastCanShowRiding;
+		}
+		
 		override public function transition(type : int, ref : StateReference = null, force : Boolean = false, allowQueue : Boolean = false, dumpTypes : Array = null) : Boolean
 		{
 			if (_role && _role.usable)
 				return super.transition(type, ref, force, allowQueue, dumpTypes);
 			return false;
 		}
-
+		
 		override public function dispose() : void
 		{
 			_role = null;
 			super.dispose();
 		}
-
+		
 		public function updateAvatar() : void
 		{
 			var state : ActionState = getCurrState(ActionState) as ActionState;
 			if (state)
 				state.syncAnimation(state.isFreeze);
+			_lastCanShowRiding = canShowRiding;
 		}
-
+		
 		public function actionPause() : void
 		{
 			var state : IState = getCurrState(ActionState);
 			if (state)
 				state.pause();
 		}
-
+		
 		public function actionResume() : void
 		{
 			var state : IState = getCurrState(ActionState);
 			if (state)
 				state.resume();
 		}
-
+		
 		public function get isWalking() : Boolean
 		{
 			var state : IState = getCurrState(ActionState);
 			return state && (state.type == RoleStateType.ACTION_WALK);
 		}
-
+		
+		public function get isRunning() : Boolean
+		{
+			var state : IState = getCurrState(ActionState);
+			return state && (state.type == RoleStateType.ACTION_RUN);
+		}
+		
 		public function get isJumping() : Boolean
 		{
 			var state : IState = getCurrState(ActionState);
 			return state && (state.type == RoleStateType.ACTION_JUMP);
 		}
-
+		
 		public function get isJumpRising() : Boolean
 		{
 			var state : IState = getCurrState(JumpRiseState);
 			return state != null;
 		}
-
+		
 		public function get isWalkMoving() : Boolean
 		{
 			var state : IState = getCurrState(MoveState);
 			return state && (state.type == RoleStateType.CONTROL_WALK_MOVE);
 		}
-
+		
 		public function get isDead() : Boolean
 		{
 			var state : IState = getCurrState(ActionState);
 			return state && (state.type == RoleStateType.ACTION_DEATH);
 		}
-
+		
 		public function get isDeadLaunch() : Boolean
 		{
 			var state : IState = getCurrState(ActionState);
 			return state && (state.type == RoleStateType.ACTION_DEAD_LAUNCH);
 		}
-
+		
 		public function get isDeadState() : Boolean
 		{
 			return isDead || isDeadLaunch;
 		}
-
+		
 		public function get isTrailMoving() : Boolean
 		{
 			var state : IState = getCurrState(MoveState);
 			return state && (state.type == RoleStateType.CONTROL_TRAIL_MOVE);
 		}
-
+		
 		public function get isAttacking() : Boolean
 		{
 			var state : IState = getCurrState(ActionState);
 			return state && (state.type == RoleStateType.ACTION_ATTACK);
 		}
-
+		
 		public function get isCollecting() : Boolean
 		{
 			var state : IState = getCurrState(ActionState);
 			return state && (state.type == RoleStateType.ACTION_COLLECT);
 		}
-
+		
 		/** 骑乘状态 **/
 		public function get isRiding() : Boolean
 		{
 			var state : IState = getCurrState(RidingState);
 			return state != null;
 		}
-
+		
+		public function get isShowRiding() : Boolean
+		{
+			var state : IState = getCurrState(RidingState);
+			return state != null && canShowRiding;
+		}
+		
+		/**
+		 * 是否可以显示在马上的动作，如采集不能显示在马上，但实际上是在马上的。@L.L.M.Sunny 2016.11.09
+		 * @return
+		 *
+		 */
+		public function get canShowRiding() : Boolean
+		{
+			if (isCollecting)
+			{
+				return false;
+			}
+			return true;
+		}
+		
 		public function get isBlinking() : Boolean
 		{
 			var state : IState = getCurrState(ActionState);
 			return state && (state.type == RoleStateType.ACTION_BLINK);
 		}
-
+		
 		public function get isBlinkMoving() : Boolean
 		{
 			var state : IState = getCurrState(MoveState);
 			return state && (state.type == RoleStateType.CONTROL_BLINK_MOVE);
 		}
-
+		
 		public function get isBeatMoving() : Boolean
 		{
 			var state : IState = getCurrState(MoveState);
 			return state && (state.type == RoleStateType.CONTROL_BEAT_MOVE);
 		}
-
+		
 		public function get isDeadLaunching() : Boolean
 		{
 			var state : IState = getCurrState(MoveState);
 			return state && (state.type == RoleStateType.CONTROL_DEAD_LAUNCH_MOVE);
 		}
-
+		
 		public function get isBeatBack() : Boolean
 		{
 			var state : IState = getCurrState(ActionState);
 			return state && (state.type == RoleStateType.ACTION_BEAT_BACK);
 		}
-
+		
+		public function get isIdle() : Boolean
+		{
+			var state : IState = getCurrState(ActionState);
+			return state && (state.type == RoleStateType.ACTION_IDLE);
+		}
+		
 		public function get isPrewar() : Boolean
 		{
 			var state : IState = getCurrState(ActionState);
 			return state && (state.type == RoleStateType.ACTION_PREWAR);
 		}
-
+		
 		public function get isPrewarWaiting() : Boolean
 		{
 			var state : IState = getCurrState(PrewarWaitingState);
 			return state != null;
 		}
-
+		
 		public function get isAttackHarding() : Boolean
 		{
 			var state : IState = getCurrState(AttackHardState);
 			return state != null;
 		}
-
+		
 		public function get isLockCaseSpell() : Boolean
 		{
 			var state : IState = getCurrState(CastSpellLockState);
 			return state != null;
 		}
-
+		
 		public function get isBingDong() : Boolean
 		{
 			var state : IState = getCurrState(BingDongState);
 			return state != null;
 		}
-
+		
 		public function get isStun() : Boolean
 		{
 			var state : IState = getCurrState(StunState);
 			return state != null;
 		}
-
+		
 		public function get isUnmovable() : Boolean
 		{
 			var state : IState = getCurrState(UnmovableState);
 			return state != null;
 		}
-
+		
 		public function get isStiff() : Boolean
 		{
 			var state : IState = getCurrState(StiffState);
 			return state != null;
 		}
-
+		
 		public function get isHush() : Boolean
 		{
 			var state : IState = getCurrState(HushState);
 			return state != null;
 		}
-
+		
+		public function get isShadow() : Boolean
+		{
+			var state : IState = getCurrState(ShadowState);
+			return state != null;
+		}
+		
+		public function get isScared() : Boolean
+		{
+			var state : IState = getCurrState(ScaredState);
+			return state != null;
+		}
+		
 		public function get isHunLuan() : Boolean
 		{
 			var state : IState = getCurrState(HunLuanState);
 			return state != null;
 		}
-
+		
+		public function get isFasting() : Boolean
+		{
+			var state : IState = getCurrState(FastingState);
+			return state != null;
+		}
+		
 		override protected function createState(type : int) : IState
 		{
 			var state : IState = null;
