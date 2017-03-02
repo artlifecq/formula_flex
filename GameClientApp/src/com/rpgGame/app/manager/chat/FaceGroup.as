@@ -1,6 +1,5 @@
 package com.rpgGame.app.manager.chat
 {
-	import com.rpgGame.app.sender.ChatSender;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
@@ -38,7 +37,7 @@ package com.rpgGame.app.manager.chat
 		
 		public function get tabBar():TabBar
 		{
-			return _skin.tabBar;
+			return _skin.tab_Face;
 		}
 		
 		public function show():void
@@ -49,21 +48,22 @@ package com.rpgGame.app.manager.chat
 		
 		private function addEvent():void
 		{
-			_skin.tabBar.addEventListener( Event.CHANGE, onPage );
+			_skin.tab_Face.addEventListener( Event.CHANGE, onPage );
 			Starling.current.stage.addEventListener( TouchEvent.TOUCH, onStarlingTouch );
 		}
 		
 		public function removeEvent():void
 		{
-			_skin.tabBar.removeEventListener( Event.CHANGE, onPage );
+			_skin.tab_Face.removeEventListener( Event.CHANGE, onPage );
 			Starling.current.stage.removeEventListener(TouchEvent.TOUCH,onStarlingTouch);
 		}
 		
 		private function onPage( e:Event ):void
 		{
-			var isFaceTab:Boolean = (_skin.tabBar.selectedIndex < 1);
+			var isFaceTab:Boolean = (_skin.tab_Face.selectedIndex < 1);
 			showOrHideFace(isFaceTab);
 			showOrHideMood(!isFaceTab);
+			_skin.lbl_Title.text=isFaceTab?"普通表情":"心情表情";
 		}
 		
 		private function onStarlingTouch(event:TouchEvent):void
@@ -120,7 +120,7 @@ package com.rpgGame.app.manager.chat
 						faceItem = new FaceItem(faceInfo);    
 						faceItem.touchGroup = true;
 						faceItem.x = (i % 7) * 33 + 4;
-						faceItem.y = Math.floor(i / 7) * 33+10;
+						faceItem.y = Math.floor(i / 7) * 33+33;
 						_faceList.push(faceItem);
 					}
 					else
@@ -163,7 +163,7 @@ package com.rpgGame.app.manager.chat
 						faceItem = new FaceItem(faceInfo);    
 						faceItem.touchGroup = true;
 						faceItem.x = (i % 7) * 33 + 4;
-						faceItem.y = Math.floor(i / 7) * 33+10;
+						faceItem.y = Math.floor(i / 7) * 33+33;
 						_moodList.push(faceItem);
 					}
 					else

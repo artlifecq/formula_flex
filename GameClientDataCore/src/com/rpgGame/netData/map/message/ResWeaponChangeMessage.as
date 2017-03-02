@@ -16,8 +16,11 @@ package com.rpgGame.netData.map.message{
 		//角色Id
 		private var _personId: long;
 		
-		//武器模板Id
-		private var _weaponId: int;
+		//武器资源Id
+		private var _weaponResId: int;
+		
+		//副武器资源Id
+		private var _deputyWeaponResId: int;
 		
 		//强化等级
 		private var _weaponStreng: int;
@@ -32,8 +35,10 @@ package com.rpgGame.netData.map.message{
 		override protected function writing(): Boolean{
 			//角色Id
 			writeLong(_personId);
-			//武器模板Id
-			writeInt(_weaponId);
+			//武器资源Id
+			writeInt(_weaponResId);
+			//副武器资源Id
+			writeInt(_deputyWeaponResId);
 			//强化等级
 			writeByte(_weaponStreng);
 			//注灵等级
@@ -47,8 +52,10 @@ package com.rpgGame.netData.map.message{
 		override protected function reading(): Boolean{
 			//角色Id
 			_personId = readLong();
-			//武器模板Id
-			_weaponId = readInt();
+			//武器资源Id
+			_weaponResId = readInt();
+			//副武器资源Id
+			_deputyWeaponResId = readInt();
 			//强化等级
 			_weaponStreng = readByte();
 			//注灵等级
@@ -80,18 +87,33 @@ package com.rpgGame.netData.map.message{
 		}
 		
 		/**
-		 * get 武器模板Id
+		 * get 武器资源Id
 		 * @return 
 		 */
-		public function get weaponId(): int{
-			return _weaponId;
+		public function get weaponResId(): int{
+			return _weaponResId;
 		}
 		
 		/**
-		 * set 武器模板Id
+		 * set 武器资源Id
 		 */
-		public function set weaponId(value: int): void{
-			this._weaponId = value;
+		public function set weaponResId(value: int): void{
+			this._weaponResId = value;
+		}
+		
+		/**
+		 * get 副武器资源Id
+		 * @return 
+		 */
+		public function get deputyWeaponResId(): int{
+			return _deputyWeaponResId;
+		}
+		
+		/**
+		 * set 副武器资源Id
+		 */
+		public function set deputyWeaponResId(value: int): void{
+			this._deputyWeaponResId = value;
 		}
 		
 		/**

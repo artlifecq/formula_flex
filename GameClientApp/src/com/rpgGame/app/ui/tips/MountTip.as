@@ -11,7 +11,7 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.StatNameCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.mount.MountConfigData;
 	import com.rpgGame.coreData.cfg.mount.MountMiscData;
 	import com.rpgGame.coreData.cfg.mount.MountSpeciesData;
@@ -287,7 +287,8 @@ package com.rpgGame.app.ui.tips
 					var cfgId:int = mountData.spellMap.getValue(i);
 					if( cfgId != 0 )
 					{
-						var spellBookGroupName:String = ItemCfgData.getItemNameWithQualityColor(cfgId);
+//						var spellBookGroupName:String = ItemCfgData.getItemNameWithQualityColor(cfgId);
+						var spellBookGroupName:String=ItemConfig.getItemName(cfgId);
 						spellStatStr += "  " + spellBookGroupName + "<br/>";
 					}
 				}

@@ -29,6 +29,47 @@ package com.rpgGame.coreData.type.item
 		/** 格子 60*60 **/
 		public static const GRID_SIZE_60 : String = "normal/60";
 		
+		/**
+		 *手镯 
+		 */
+		public static const EQUIP_BRACER:String="equip/01shoubi";
+		/**
+		 *鞋子 
+		 */
+		public static const EQUIP_SHOE:String="equip/02xiezi";
+		/**
+		 *肩甲 
+		 */
+		public static const EQUIP_SCAPULA:String="equip/03yaodai";
+		/**
+		 *项链 
+		 */
+		public static const EQUIP_NECKLACE:String="equip/04diaozui";
+		/**
+		 *衣服 
+		 */
+		public static const EQUIP_ARMOR:String="equip/05xiongjia";
+		/**
+		 *戒指 
+		 */
+		public static const EQUIP_RING:String="equip/06jiezhi";
+		/**
+		 *护腿 
+		 */
+		public static const EQUIP_LEGHARNESS:String="equip/07hutui";
+		/**
+		 *玉佩 
+		 */
+		public static const EQUIP_JADE:String="equip/08yupei";
+		/**
+		 *帽子 
+		 */
+		public static const EQUIP_HELM:String="equip/09maozi";
+		/**
+		 *武器 
+		 */
+		public static const EQUIP_WEAPON:String="equip/10wuqi";
+		
 		/** 格子光圈品质 44*44 **/
 		public static const GRID_SIZE_40 : String = "quality/40_4";
 		/** 格子光圈品质 40*40 **/

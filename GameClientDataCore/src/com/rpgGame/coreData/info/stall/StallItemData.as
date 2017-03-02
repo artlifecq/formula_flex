@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.info.stall
 {
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	
 	import app.message.StallBuyGoodsProto;
@@ -21,7 +21,7 @@ package com.rpgGame.coreData.info.stall
 		/**
 		 * 如果是直接拖上来的物品，就读这个 
 		 */		
-		public var item : ItemInfo;
+		public var item : ClientItemInfo;
 		
 		private var _index : int;
 		/**我也不知道这玩意儿干嘛的，后端说买卖的时候要带上这个，自己用的时候不需要**/
@@ -29,7 +29,7 @@ package com.rpgGame.coreData.info.stall
 		/**
 		 * 改变的数量，如果大于０就是加，小于就减，等于就是没有改变 
 		 */		
-		public var changeItem : ItemInfo;
+		public var changeItem : ClientItemInfo;
 		
 		public function clear():void
 		{
@@ -42,7 +42,7 @@ package com.rpgGame.coreData.info.stall
 		{
 			_index = proto.idx;
 			if(proto.goods)
-				item = ItemUtil.convertGoodsProtoToItemInfo(proto.goods);
+//				item = ItemUtil.convertGoodsProtoToItemInfo(proto.goods);
 			flag = proto.flag;
 			price = proto.price;
 			if(num==0)
@@ -52,7 +52,7 @@ package com.rpgGame.coreData.info.stall
 		public function setupBuyProto(proto:StallBuyGoodsProto):void
 		{
 			_index = proto.idx;
-			item = new ItemInfo(proto.goodsId);
+			item = new ClientItemInfo(proto.goodsId);
 			item.count = proto.buyCount;
 			flag = proto.flag;
 			price = proto.buyPrice;

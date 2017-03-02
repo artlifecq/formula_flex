@@ -1,12 +1,10 @@
 package com.rpgGame.coreData.info.item
 {
 	import com.rpgGame.coreData.SpriteStat;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
 	import com.rpgGame.netData.player.bean.AttributeItem;
 	
 	import app.message.MountProto;
 	import app.message.MountSpellsProto;
-	import app.message.SpriteStatProto;
 	
 	import org.client.mainCore.ds.HashMap;
 
@@ -15,7 +13,7 @@ package com.rpgGame.coreData.info.item
 	 * @author 陈鹉光
 	 * 
 	 */	
-	public class MountBeastCardInfo extends ItemInfo
+	public class MountBeastCardInfo extends ClientItemInfo
 	{
 		/** 基础属性，显示的时候，所有属性都要除以100，如303点力量，则显示为3.03 **/
 		public var bornStat:Vector.<AttributeItem>;
@@ -140,14 +138,14 @@ package com.rpgGame.coreData.info.item
 			return _mountGrowthTransStat;
 		}
 		
-		override public function clone():ItemInfo
+		override public function clone():ClientItemInfo
 		{
 			var mountBreastCardInfo:MountBeastCardInfo = new MountBeastCardInfo();
 			mountBreastCardInfo.count = count;
 			mountBreastCardInfo.cfgId = cfgId;
 			mountBreastCardInfo.type = type;
 			mountBreastCardInfo.name = name;
-			mountBreastCardInfo.expireTime = expireTime;
+//			mountBreastCardInfo.expireTime = expireTime;
 			mountBreastCardInfo.bornStat = bornStat;
 			mountBreastCardInfo.mountBornStat.setData( bornStat );
 			//成长属性

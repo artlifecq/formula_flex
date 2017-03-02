@@ -458,7 +458,6 @@ package org.mokylin.skin.mainui.chat
 			temp.name = "select_bg";
 			temp.height = 148;
 			temp.styleName = "ui/common/tips/tips_2.png";
-			temp.visible = false;
 			temp.width = 52;
 			temp.x = 1;
 			temp.y = 1;

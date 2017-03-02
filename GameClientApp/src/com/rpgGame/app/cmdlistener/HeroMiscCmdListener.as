@@ -8,7 +8,6 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.PlayerAttributeManager;
 	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
@@ -22,20 +21,20 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.lang.LangText;
 	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
-	import com.rpgGame.coreData.type.EnumHurtType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.netData.client.message.ResClientCustomTagMessage;
 	import com.rpgGame.netData.player.message.ResPersonalNoticeMessage;
+	import com.rpgGame.netData.player.message.ResPlayerAddExpMessage;
 	import com.rpgGame.netData.player.message.ResPlayerAttributesChangeMessage;
+	import com.rpgGame.netData.player.message.SCCurrencyChangeMessage;
+	import com.rpgGame.netData.player.message.SCMaxValueChangeMessage;
 	import com.rpgGame.netData.skill.message.ResSkillInfosMessage;
-	
-	import flash.utils.ByteArray;
 	
 	import app.cmd.HeroMiscModuleMessages;
 	import app.message.AmountType;
-	import app.message.ChangeLevelProto;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
@@ -65,14 +64,17 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(123101,RecvResSkillInfosMessage);
 			SocketConnection.addCmdListener(301102,RecvResClientCustomTagMessage);
 			SocketConnection.addCmdListener(103103,RecvResPersonalNoticeMessage);
+			SocketConnection.addCmdListener(103102,RecvResPlayerAddExpMessage);
+			SocketConnection.addCmdListener(103127,RecvSCCurrencyChangeMessage);
+			SocketConnection.addCmdListener(103128,RecvSCMaxValueChangeMessage);
+			
+			
+			
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			//////
 			////// 以下为参考代码，是深圳那边的后台协议，不适用
 			//////
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_AMOUNT, onRecChangeAmount);
-			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_LEVEL, onRecChangeLevel);
-			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_INIT_LEVEL_INFO, onRecInitChangeLevel);
 			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_LEVEL_TO_OTHERS, onChangeLevelToOthers);
 			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_HERO_DAILY_CLEARED, onHeroDailyCleared);
 			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_PK_MODE, onChangePkMode);
@@ -94,6 +96,35 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_ONLINE_STRONG, onRecFangChenMiOnelineStrong);
 			
 			finish();
+		}
+		
+		private function RecvSCMaxValueChangeMessage(msg:SCMaxValueChangeMessage):void
+		{
+			if(msg.type==CharAttributeType.RES_EXP){
+				MainRoleManager.actorInfo.maxExp=msg.value.fValue;
+			}else if(msg.type==CharAttributeType.RES_ZHENQI){
+				MainRoleManager.actorInfo.maxZhenqi=msg.value.fValue;
+			}else{
+				MainRoleManager.actorInfo.totalStat.setMaxData(msg.type,msg.value);
+			}
+			EventManager.dispatchEvent(MainPlayerEvent.STAT_MAX_CHANGE,msg.type);
+		}
+		
+		private function RecvSCCurrencyChangeMessage(msg:SCCurrencyChangeMessage):void
+		{
+			MainRoleManager.actorInfo.totalStat.setResData(msg.curType,msg.value);
+			EventManager.dispatchEvent(MainPlayerEvent.STAT_RES_CHANGE,msg.curType);
+		}
+		
+		private function RecvResPlayerAddMPMessage(msg:*):void
+		{
+			EventManager.dispatchEvent(MainPlayerEvent.NOWMP_CHANGE);
+		}
+		
+		private function RecvResPlayerAddExpMessage(msg:ResPlayerAddExpMessage):void
+		{
+			MainRoleManager.actorInfo.curExp=msg.exp.fValue;
+			EventManager.dispatchEvent(MainPlayerEvent.NOWEXP_CHANGE);
 		}
 		
 		private function RecvPlayerAttributesChangeMessage(msg:ResPlayerAttributesChangeMessage):void
@@ -251,115 +282,6 @@ package com.rpgGame.app.cmdlistener
 			}
 		}
 		
-		/**
-		 * 数额改变时收到此消息，附带以下信息
-		 * varint32 类型
-		 * varint64 当前值
-		 *
-		 * bool 增加(true)还是减少(false)
-		 * if(增加){
-		 *      varint64 增加的量
-		 * } else {
-		 *      varint64 减少的量
-		 * }
-		 */
-		private function onRecChangeAmount(buffer : ByteBuffer) : void
-		{
-			var type : int = buffer.readVarint32();
-			var value : int = buffer.readVarint64();
-			var isAdd : Boolean = buffer.readBoolean();
-			var addValue : Number = buffer.readVarint64();
-			
-			MainRoleManager.actorInfo.amountInfo.setSomeType(type, value);
-			
-			EventManager.dispatchEvent(MainPlayerEvent.AMOUNT_CHANGE);
-			
-			switch (type)
-			{
-				case AmountType.MONEY:
-					EventManager.dispatchEvent(MainPlayerEvent.MONEY_CHANGE);
-					break;
-				case AmountType.JINZI:
-					EventManager.dispatchEvent(MainPlayerEvent.JINZI_CHANGE);
-					break;
-				case AmountType.FAMILY_LILIAN:
-					EventManager.dispatchEvent(MainPlayerEvent.CONTRIBUTION_CHANGE);
-					break;
-				case AmountType.GUILD_CONTRIBUTION_POINT:
-					GuildManager.guildContributionPointChange(value);
-					break;
-				case AmountType.EXP:
-					MainRoleManager.actorInfo.curExp = value;
-					if(isAdd)
-						FightFaceHelper.showAttChange(EnumHurtType.EXP, addValue);
-					EventManager.dispatchEvent(MainPlayerEvent.NOWEXP_CHANGE);
-					break;
-			}
-		}
-		
-		/**
-		 * 等级变化
-		 * @param buffer
-		 *
-		 */
-		private function onRecChangeLevel(buffer : ByteBuffer) : void
-		{
-			var roleData : HeroData = MainRoleManager.actorInfo;
-			if (roleData == null)
-				return;
-			
-			var client : ChangeLevelProto = new ChangeLevelProto();
-			var bytes : ByteArray = new ByteArray();
-			buffer.readBytes(bytes);
-			bytes.uncompress();
-			client.mergeFrom(bytes);
-			
-			roleData.totalStat.level = client.newLevel;
-			roleData.upgradeExp = client.exp.toNumber();
-			roleData.canStorageExp = client.canStorageExp ? client.canStorageExp.toNumber() : 0;
-			roleData.spellList.totalAddSpellPoint = client.totalAddSpellPoint;
-			//			roleData.totalAddSpriteStatPoint = client.totalAddSpriteStatPoint;
-			roleData.relive_coeff = client.reliveCoeff;
-			roleData.mountSlotCount = client.mountSlotCount;
-			//			MainRoleManager.actor.headFace.addAndUpdateLevel();
-			
-			SpellAnimationHelper.addTargetEffect(MainRoleManager.actor, RenderUnitID.LEVEL, RenderUnitType.LEVEL, EffectUrl.SHENG_JI);
-			
-			EventManager.dispatchEvent(MainPlayerEvent.LEVEL_CHANGE);
-			EventManager.dispatchEvent(MainPlayerEvent.MAXEXP_CHANGE);
-			
-			
-			//Demo版本的自动学习技能逻辑
-			//			var info : GmLevelAddSpellPoint = GmLevelAddSpellPointData.getInfo(roleData.level);
-			//			if (info)
-			//				SpellSender.learnOrUpgradeActiveSpell(info.spellID, new UpgradeItemListVo());
-		}
-		
-		/**
-		 * 等级初始化
-		 * @param buffer
-		 *
-		 */
-		private function onRecInitChangeLevel(buffer : ByteBuffer) : void
-		{
-			var roleData : HeroData = MainRoleManager.actorInfo;
-			if (roleData == null)
-				return;
-			
-			var client : ChangeLevelProto = new ChangeLevelProto();
-			var bytes : ByteArray = new ByteArray();
-			buffer.readBytes(bytes);
-			bytes.uncompress();
-			client.mergeFrom(bytes);
-			
-			roleData.totalStat.level = client.newLevel;
-			roleData.upgradeExp = client.exp.toNumber();
-			roleData.spellList.totalAddSpellPoint = client.totalAddSpellPoint;
-			//			roleData.totalAddSpriteStatPoint = client.totalAddSpriteStatPoint;
-			roleData.relive_coeff = client.reliveCoeff;
-			roleData.mountSlotCount = client.mountSlotCount;
-			//			MainRoleManager.actor.headFace.addAndUpdateLevel();
-		}
 		
 		/**
 		 * 视野里玩家升级了

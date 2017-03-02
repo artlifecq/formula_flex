@@ -1,9 +1,9 @@
 package com.rpgGame.app.utils
 {
-	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.info.item.UpgradeItemData;
 	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
@@ -135,7 +135,7 @@ package com.rpgGame.app.utils
 					itemData = upgradeItemList[i];
 					if( !itemData.isHasItem )
 					{
-						itemName += ItemCfgData.getItemName( itemData.itemId ) + " ";
+						itemName += ItemConfig.getItemName( itemData.itemId ) + " ";
 					}
 				}
 				

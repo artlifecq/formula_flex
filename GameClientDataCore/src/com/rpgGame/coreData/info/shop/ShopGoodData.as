@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.info.shop
 {
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 
 	import app.message.ShopGoodsProto;
@@ -34,7 +34,7 @@ package com.rpgGame.coreData.info.shop
 		/** 原价 */
 		public var showPrice : int;
 		/** 物品数据  */
-		public var itemInfo : ItemInfo;
+		public var itemInfo : ClientItemInfo;
 		/** 商城商品描述 */
 		public var goodsDesc : String;
 
@@ -60,10 +60,10 @@ package com.rpgGame.coreData.info.shop
 			showPrice = goodsProto.showPrice;
 			goodsDesc = goodsProto.desc;
 
-			itemInfo = ItemUtil.wrapperProtoToItemInfo(goodsProto.goodsWrapper);
+			/*itemInfo = ItemUtil.wrapperProtoToItemInfo(goodsProto.goodsWrapper);
 			itemInfo.priceType = priceType;
 			itemInfo.price = price;
-			itemInfo.taxType = TaxType.SHOP_TAX_CONFIG;
+			itemInfo.taxType = TaxType.SHOP_TAX_CONFIG;*/
 		}
 	}
 }

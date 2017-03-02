@@ -7,6 +7,7 @@ package com.rpgGame.coreData.role
 	import com.rpgGame.coreData.info.mount.MountModuleObjClientData;
 	import com.rpgGame.coreData.info.team.TeamUnit;
 	import com.rpgGame.coreData.info.upgrade.AmountInfo;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.SpellTargetType;
 	import com.rpgGame.netData.map.bean.PlayerInfo;
 	import com.rpgGame.netData.player.bean.MyPlayerInfo;
@@ -23,7 +24,7 @@ package com.rpgGame.coreData.role
 	/**
 	 *
 	 * 英雄数据
-	 * @author L.L.M.Sunny
+	 * @author L.L.M.Sunnyse
 	 * 创建时间：2015-5-4 上午11:32:15
 	 *
 	 */
@@ -47,9 +48,11 @@ package com.rpgGame.coreData.role
 		public var equipInfo : RoleEquipInfo;
 		/** 角色当前经验 **/
 		public var curExp : Number;
-		/** 角色当前增加的经验 **/
-		public var upgradeExp : Number;
-		public var canStorageExp : Number;
+		/** 最大经验 **/
+		public var maxExp:Number;
+		/** 最大经验 **/
+		public var maxZhenqi:Number;
+		
 		/**场景是哪个国家的   副本、中立时是 0，是无效值**/
 		public var sceneSequence : int;
 		/**几线**/
@@ -81,16 +84,31 @@ package com.rpgGame.coreData.role
 		 */	
 		public var body:int;
 		
+		/**
+		 *头发资源id 
+		 */
 		public var hair:int;
 		
+		/**
+		 *衣服资源id 
+		 */
 		public var cloths:int;
 		
+		/**
+		 *坐骑资源id 
+		 */
 		public var mount:int;
 		
 		public var pkType:int;
 		
+		/**
+		 *武器资源id
+		 */
 		public var weapon:int;
 		
+		/**
+		 *副武器资源 
+		 */
 		public var deputyWeapon:int;
 		
 		public var sex:int;
@@ -108,6 +126,7 @@ package com.rpgGame.coreData.role
 			equipInfo = new RoleEquipInfo();
 			mounModuletData = new MountModuleObjClientData();
 		}
+		
 		
 		public static var spellArrs:Array = [];
 		public static function setUserSingleInfo(info : HeroData, nick : String = null) : void
@@ -164,6 +183,16 @@ package com.rpgGame.coreData.role
 		}
 		
 		/**
+		 *当前真气 
+		 * @return 
+		 * 
+		 */
+		public function get curZhenqi():Number
+		{
+			return totalStat.getResData(CharAttributeType.RES_ZHENQI);
+		}
+		
+		/**
 		 * 设置英雄登录专用
 		 * @param info
 		 * @param heroProto
@@ -186,8 +215,14 @@ package com.rpgGame.coreData.role
 			data.deputyWeapon = heroInfo.second_weapon;
 			data.sex = heroInfo.sex;
 			data.job = heroInfo.job;
+			
+			data.maxExp=heroInfo.maxExp.fValue;
+			data.maxZhenqi=heroInfo.maxZhenQi.fValue;
+			data.curExp=heroInfo.exp.fValue;
+			
 			///角色属性信息
 			data.totalStat.setData(heroInfo.attributes);
+			data.totalStat.setResDatas(heroInfo.resourceData);
 			
 			for(var i:int=0;i<heroInfo.buffs.length;i++)
 			{
@@ -221,6 +256,11 @@ package com.rpgGame.coreData.role
 			//				info.mood = heroProto.relationModuleObj.hasMood ? BytesUtil.bytes2UTF(heroProto.relationModuleObj.mood) : "";
 			//			info.spellList.setHeroData(heroProto.spellModuleObj.learnRaceSpells);
 			GameLog.addShow("主角的服务器id为：  " + data.serverID.ToString());
+		}
+		
+		public  function setSomeType(type:int,value:int):void
+		{
+			amountInfo.setSomeType(type,value);
 		}
 		
 		/**

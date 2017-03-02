@@ -1,7 +1,7 @@
 package com.rpgGame.coreData.info.shop
 {
 	import app.message.ShopGoodsProto;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 
 	public class ShopItemData
@@ -13,14 +13,14 @@ package com.rpgGame.coreData.info.shop
 		/** 物品消耗 */
 		private var _cost:int;
 		/** 物品信息 */
-		private var _itemInfo:ItemInfo;
+		private var _itemInfo:ClientItemInfo;
 		
 		public function ShopItemData(shopType:int,index:int,goodProto:ShopGoodsProto)
 		{
 			_shopType = shopType;
 			_index = index;
 			_cost = goodProto.price;
-			_itemInfo = ItemUtil.wrapperProtoToItemInfo(goodProto.goodsWrapper);
+//			_itemInfo = ItemUtil.wrapperProtoToItemInfo(goodProto.goodsWrapper);
 		}
 		
 		/** 个人兑换商店ID */
@@ -42,7 +42,7 @@ package com.rpgGame.coreData.info.shop
 		}
 		
 		/** 物品信息 */
-		public function get itemInfo():ItemInfo
+		public function get itemInfo():ClientItemInfo
 		{
 			return _itemInfo;
 		}

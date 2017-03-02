@@ -4,18 +4,15 @@ package com.rpgGame.appModule.common
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.app.sender.ItemSender;
-	import com.rpgGame.app.ui.alert.AlertInput;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.enum.item.ItemTypeEnum;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
-	import com.rpgGame.coreData.lang.LangBackPack;
 	import com.rpgGame.coreData.lang.LangGoods;
 	
 	import flash.geom.Point;
@@ -70,6 +67,13 @@ package com.rpgGame.appModule.common
 		 */	
 		private var containerId:int = -1;
 		private var goodsList : List;
+
+		public function set dataProvider(value:ListCollection):void
+		{
+			_dataProvider = value;
+			goodsList.dataProvider =  _dataProvider;
+		}
+
 		private var createGoodsListItemRender:Function;
 		public var updateGridLen : Function;	
 		public var onDragDropEnd : Function;
@@ -187,7 +191,7 @@ package com.rpgGame.appModule.common
 		 * @param itemInfo
 		 * @param gridIndex 不为-1表示背包格子需要显示不能使用的索引
 		 */		
-		public function setGridInfo(index:int, itemInfo:ItemInfo, gridIndex:int = -1):void
+		public function setGridInfo(index:int, itemInfo:ClientItemInfo, gridIndex:int = -1):void
 		{
 			var gridInfo:GridInfo = dataProvider.getItemAt(index) as GridInfo;
 			if(!gridInfo)
@@ -221,7 +225,7 @@ package com.rpgGame.appModule.common
 		 * @return 
 		 * 
 		 */		
-		public function getDragDropItemByItemInfo(iteminfo : ItemInfo):DragDropItem
+		public function getDragDropItemByItemInfo(iteminfo : ClientItemInfo):DragDropItem
 		{
 			var dragDropItem : DragDropItem;
 			for each(dragDropItem in dndGrids)
@@ -232,15 +236,15 @@ package com.rpgGame.appModule.common
 			return null;
 		}
 		
-		protected function getGridInfoByItemInfo(iteminfo : ItemInfo):GridInfo
+		protected function getGridInfoByItemInfo(iteminfo : ClientItemInfo):GridInfo
 		{
 			var dragDropItem : DragDropItem;
-			var item : ItemInfo;
+			var item : ClientItemInfo;
 			for each(dragDropItem in dndGrids)
 			{
 				if(!dragDropItem || !dragDropItem.gridInfo)
 					continue;
-				item = dragDropItem.gridInfo.data as ItemInfo;
+				item = dragDropItem.gridInfo.data as ClientItemInfo;
 				if(item && item.index == iteminfo.index)
 					return dragDropItem.gridInfo;
 			}
@@ -299,7 +303,7 @@ package com.rpgGame.appModule.common
 				refleshGrids();
 		}
 		
-		private function refleshGrid(info:ItemInfo, newInfo:ItemInfo):void
+		private function refleshGrid(info:ClientItemInfo, newInfo:ClientItemInfo):void
 		{
 			if(!info || info.containerID != containerId) return;
 			if(containerId == ItemContainerID.BackPack && BackPackManager.instance.tabbarIndex != 0)//背包中除了显示所有物品的分页都要刷新所有
@@ -317,7 +321,7 @@ package com.rpgGame.appModule.common
 		 * @param info
 		 * 
 		 */		
-		protected function onAddItem(info:ItemInfo):void
+		protected function onAddItem(info:ClientItemInfo):void
 		{
 			refleshGrid(info,info);
 		}
@@ -327,7 +331,7 @@ package com.rpgGame.appModule.common
 		 * @param info
 		 * 
 		 */		
-		private function onItemInfoChange(info:ItemInfo):void
+		private function onItemInfoChange(info:ClientItemInfo):void
 		{
 			refleshGrid(info,info);
 		}
@@ -337,49 +341,14 @@ package com.rpgGame.appModule.common
 		 * @param info
 		 * 
 		 */		
-		private function removeItem(info:ItemInfo):void
+		private function removeItem(info:ClientItemInfo):void
 		{
 			refleshGrid(info,null);
 		}
 		
 		//============================拆分===============================
 		 
-		/**
-		 * 物品拆分 
-		 * @param info
-		 * 
-		 */		
-		private function preSplit(info:ItemInfo):void
-		{
-			if(!info || info.containerID != containerId)return;
-			if(info.count <= 1)
-			{
-				return;
-			}
-			
-			var alert:AlertInput = AlertInput.show(LanguageConfig.getText(LangBackPack.ITEM_SPLIT_TIP),onInputSplitNum);
-			alert.skin.txtInput.restrict="0-9";
-			function onInputSplitNum(txt:String):void
-			{
-				var num:int = parseInt(txt);
-				if(num <= 0)
-				{
-					NoticeManager.showNotify(LangBackPack.ITEM_SPLIT_NUM_ERR);
-					return;
-				}else if(num > info.count)
-				{
-					alert.skin.txtInput.text = info.count+"";
-					num = info.count;
-				}
-				var firstEmptyIndex:int = _mgr.getFirstEmptyIndex();
-				if(firstEmptyIndex == -1)
-				{
-					NoticeManager.showNotify(LangBackPack.ITEM_SPLIT_NO_GRID);
-					return;
-				}
-				ItemSender.reqSplitGoods(info.containerID, info.index,firstEmptyIndex,num);
-			}
-		}
+		
 		
 		//============================移动===============================
 		/**
@@ -387,18 +356,18 @@ package com.rpgGame.appModule.common
 		 * @param info
 		 * 
 		 */		
-		private function preMove(info:ItemInfo):void
+		private function preMove(info:ClientItemInfo):void
 		{
 			if(!info ||  !_mgr.isEnabled(info.index))return;//info.containerID != containerId ||
 			
 			if(!movingFace)
 			{
-				movingFace = new DragDropItem( IcoSizeEnum.SIZE_44, -1);
+				movingFace = new DragDropItem( IcoSizeEnum.ICON_42, -1);
 				movingFace.touchable = movingFace.touchGroup = false;
 			}
 //			if(helperGridInfo == null)helperGridInfo = new GridInfo(info.containerID, info.index);
 			movingFace.faceInfo = info;
-			movingFace.setIconResName(ClientConfig.getItemIcon(info.icoName, IcoSizeEnum.SIZE_44 ));
+			movingFace.setIconResName(ClientConfig.getItemIcon(info.icoName, IcoSizeEnum.ICON_42 ));
 			
 			//拖出后仅在显示层清空此格子
 			setGridInfo(info.index, null);
@@ -442,7 +411,7 @@ package com.rpgGame.appModule.common
 		 */		
 		public function onItemDroped(srcGrid:GridInfo, dstGrid:GridInfo):void
 		{
-			var item : ItemInfo = srcGrid.data as ItemInfo;
+			var item : ClientItemInfo = srcGrid.data as ClientItemInfo;
 			if(!item)
 			{
 				trace("try move grid fail ,index :",srcGrid.index);
@@ -453,7 +422,8 @@ package com.rpgGame.appModule.common
 				NoticeManager.mouseFollowNotify("物品不能移动到这里!");
 				return;
 			}
-			ItemSender.reqMoveGoods(srcGrid.containerID, dstGrid.containerID, item.index, dstGrid.index);
+			
+			ItemSender.moveItem(srcGrid,dstGrid);
 		}
 		
 		/**
@@ -501,7 +471,7 @@ package com.rpgGame.appModule.common
 		 */		
 		private function onFaceMoveFail():void
 		{
-			var info:ItemInfo = movingFace.faceInfo as ItemInfo;
+			var info:ClientItemInfo = movingFace.faceInfo as ClientItemInfo;
 			var srcFace:DragDropItem = getGridByIndex(info.index);
 			var pos:Point = srcFace.localToGlobal(new Point(0,0));
 			if(movingFace.stage == null)Starling.current.stage.addChild(movingFace);
@@ -515,7 +485,7 @@ package com.rpgGame.appModule.common
 		private function reShowSrcFace():void
 		{
 			if(!movingFace)return;
-			var info:ItemInfo = movingFace.faceInfo as ItemInfo;
+			var info:ClientItemInfo = movingFace.faceInfo as ClientItemInfo;
 			if(info)
 				GoodsContainerMamager.setItemInfo(info.containerID, info.index, info);
 			movingFace.removeFromParent();
@@ -526,13 +496,15 @@ package com.rpgGame.appModule.common
 		 * @param dstIndex
 		 * 
 		 */		
-		public function onFaceMoveSuccess(dstIndex:int):void
+		public function onFaceMoveSuccess(dstGrid:GridInfo):void
 		{
-			var info:ItemInfo = movingFace.faceInfo as ItemInfo;
+			var dstIndex:int=getRealIndex(dstGrid.index);
+			var info:ClientItemInfo = movingFace.faceInfo as ClientItemInfo;
 			if(!info)
 				return;
 			var srcIndex:int = info.index;
-			
+			var srcGrid:GridInfo=new GridInfo(info.containerID,info.itemInfo.gridId);
+			srcGrid.data=info;
 			stopFaceMove();
 			movingFace.removeFromParent();
 			
@@ -542,7 +514,7 @@ package com.rpgGame.appModule.common
 				return;
 			}
 			
-			ItemSender.reqMoveGoods(info.containerID, containerId, srcIndex, dstIndex);
+			ItemSender.moveItem(srcGrid,dstGrid);
 		}
 		
 		/**
@@ -579,7 +551,7 @@ package com.rpgGame.appModule.common
 			EventManager.addEvent(ItemEvent.ITEM_ADD,onAddItem);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,onItemInfoChange);
 			EventManager.addEvent(ItemEvent.ITEM_DELETE,removeItem);
-			EventManager.addEvent(ItemEvent.ITEM_PRE_SPLITE, preSplit);
+		
 			EventManager.addEvent(ItemEvent.ITEM_PRE_MOVE, preMove);
 			EventManager.addEvent(ItemEvent.ITEM_DROPED, onDropItem);
 			EventManager.addEvent(ItemEvent.ITEM_MOVE_FAIL, onServerReturnMoveFail);
@@ -598,7 +570,6 @@ package com.rpgGame.appModule.common
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,onAddItem);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onItemInfoChange);
 			EventManager.removeEvent(ItemEvent.ITEM_DELETE,removeItem);
-			EventManager.removeEvent(ItemEvent.ITEM_PRE_SPLITE, preSplit);
 			EventManager.removeEvent(ItemEvent.ITEM_PRE_MOVE, preMove);
 			EventManager.removeEvent(ItemEvent.ITEM_DROPED, onDropItem);
 			EventManager.removeEvent(ItemEvent.ITEM_MOVE_FAIL, onServerReturnMoveFail);

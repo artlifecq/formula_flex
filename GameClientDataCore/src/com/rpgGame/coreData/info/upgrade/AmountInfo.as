@@ -1,6 +1,5 @@
 package com.rpgGame.coreData.info.upgrade
 {
-	import app.message.AmountType;
 	import app.message.AmountValue;
 	
 	import org.client.mainCore.ds.HashMap;

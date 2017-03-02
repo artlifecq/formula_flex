@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.info.equip
 {
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 
 	/**
 	 * 装备拆解用于显示的单个数据 
@@ -15,7 +15,7 @@ package com.rpgGame.coreData.info.equip
 		private var _lower:int;
 		private var _upper:int;
 		
-		public var itemInfo : ItemInfo;
+		public var itemInfo : ClientItemInfo;
 		
 		public function getSubCount():String
 		{

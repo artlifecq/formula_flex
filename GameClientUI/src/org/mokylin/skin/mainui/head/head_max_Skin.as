@@ -1,11 +1,16 @@
 package org.mokylin.skin.mainui.head
 {
 	import feathers.controls.text.Fontter;
+	import feathers.controls.Button;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.mainui.head.button.ButtonSkin_cha;
+	import org.mokylin.skin.mainui.head.button.ButtonSkin_gengduo;
+	import org.mokylin.skin.mainui.head.button.ButtonSkin_yi;
+	import org.mokylin.skin.mainui.head.button.ButtonSkin_zu;
 	import org.mokylin.skin.mainui.head.npc_xuecao1;
 
 	/**
@@ -24,23 +29,29 @@ package org.mokylin.skin.mainui.head
 
 		public var UI_yijia:feathers.controls.UIAsset;
 
-		public var grp_txt:feathers.controls.Group;
+		public var btn_cha:feathers.controls.Button;
+
+		public var btn_more:feathers.controls.Button;
+
+		public var btn_yi:feathers.controls.Button;
+
+		public var btn_zu:feathers.controls.Button;
+
+		public var buff1:feathers.controls.UIAsset;
+
+		public var buff2:feathers.controls.UIAsset;
+
+		public var buff3:feathers.controls.UIAsset;
+
+		public var grp_buff:feathers.controls.Group;
+
+		public var grp_more:feathers.controls.Group;
 
 		public var grp_zhiye:feathers.controls.Group;
-
-		public var role_buffer:feathers.controls.UIAsset;
 
 		public var role_name:feathers.controls.Label;
 
 		public var role_xuecao:feathers.controls.SkinnableContainer;
-
-		public var txt_cha:feathers.controls.Label;
-
-		public var txt_more:feathers.controls.Label;
-
-		public var txt_yi:feathers.controls.Label;
-
-		public var txt_zu:feathers.controls.Label;
 
 
 		//==========================================================================
@@ -52,8 +63,8 @@ package org.mokylin.skin.mainui.head
 			
 			this.currentState = "normal";
 			this.height = 91;
-			this.width = 309;
-			this.elementsContent = [__head_max_Skin_UIAsset1_i(),role_xuecao_i(),__head_max_Skin_UIAsset2_i(),role_name_i(),grp_zhiye_i(),role_buffer_i(),grp_txt_i()];
+			this.width = 310;
+			this.elementsContent = [__head_max_Skin_UIAsset1_i(),role_xuecao_i(),__head_max_Skin_UIAsset2_i(),role_name_i(),grp_zhiye_i(),grp_more_i(),grp_buff_i()];
 			
 			states = {
 			};
@@ -121,14 +132,101 @@ package org.mokylin.skin.mainui.head
 			return temp;
 		}
 
-		private function grp_txt_i():feathers.controls.Group
+		private function btn_cha_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_cha = temp;
+			temp.name = "btn_cha";
+			temp.styleClass = org.mokylin.skin.mainui.head.button.ButtonSkin_cha;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function btn_more_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_more = temp;
+			temp.name = "btn_more";
+			temp.styleClass = org.mokylin.skin.mainui.head.button.ButtonSkin_gengduo;
+			temp.x = 84;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function btn_yi_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_yi = temp;
+			temp.name = "btn_yi";
+			temp.styleClass = org.mokylin.skin.mainui.head.button.ButtonSkin_yi;
+			temp.x = 56;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function btn_zu_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_zu = temp;
+			temp.name = "btn_zu";
+			temp.styleClass = org.mokylin.skin.mainui.head.button.ButtonSkin_zu;
+			temp.x = 28;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function buff1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			buff1 = temp;
+			temp.name = "buff1";
+			temp.styleName = "ui/mainui/head/BAFF/buff_dix24.png";
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function buff2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			buff2 = temp;
+			temp.name = "buff2";
+			temp.styleName = "ui/mainui/head/BAFF/buff_dix24.png";
+			temp.x = 30;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function buff3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			buff3 = temp;
+			temp.name = "buff3";
+			temp.styleName = "ui/mainui/head/BAFF/buff_dix24.png";
+			temp.x = 60;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function grp_buff_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
-			grp_txt = temp;
-			temp.name = "grp_txt";
-			temp.x = 190;
+			grp_buff = temp;
+			temp.name = "grp_buff";
+			temp.x = 97;
+			temp.y = 52;
+			temp.elementsContent = [buff1_i(),buff2_i(),buff3_i()];
+			return temp;
+		}
+
+		private function grp_more_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			grp_more = temp;
+			temp.name = "grp_more";
+			temp.x = 187;
 			temp.y = 53;
-			temp.elementsContent = [txt_cha_i(),txt_zu_i(),txt_yi_i(),txt_more_i()];
+			temp.elementsContent = [btn_cha_i(),btn_zu_i(),btn_yi_i(),btn_more_i()];
 			return temp;
 		}
 
@@ -143,17 +241,6 @@ package org.mokylin.skin.mainui.head
 			return temp;
 		}
 
-		private function role_buffer_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			role_buffer = temp;
-			temp.name = "role_buffer";
-			temp.styleName = "ui/mainui/head/BAFF/24.png";
-			temp.x = 99;
-			temp.y = 54;
-			return temp;
-		}
-
 		private function role_name_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -164,7 +251,7 @@ package org.mokylin.skin.mainui.head
 			temp.color = 0xC3C198;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
 			temp.x = 92;
-			temp.y = 7;
+			temp.y = 10;
 			return temp;
 		}
 
@@ -179,70 +266,6 @@ package org.mokylin.skin.mainui.head
 			temp.width = 200;
 			temp.x = 90;
 			temp.y = 33;
-			return temp;
-		}
-
-		private function txt_cha_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			txt_cha = temp;
-			temp.name = "txt_cha";
-			temp.bold = false;
-			temp.height = 24;
-			temp.fontSize = 16;
-			temp.text = "查";
-			temp.color = 0x525252;
-			temp.width = 20;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function txt_more_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			txt_more = temp;
-			temp.name = "txt_more";
-			temp.bold = false;
-			temp.height = 24;
-			temp.fontSize = 16;
-			temp.text = "更多";
-			temp.color = 0x525252;
-			temp.width = 42;
-			temp.x = 74;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function txt_yi_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			txt_yi = temp;
-			temp.name = "txt_yi";
-			temp.bold = false;
-			temp.height = 24;
-			temp.fontSize = 16;
-			temp.text = "易";
-			temp.color = 0x525252;
-			temp.width = 20;
-			temp.x = 44;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function txt_zu_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			txt_zu = temp;
-			temp.name = "txt_zu";
-			temp.bold = false;
-			temp.height = 24;
-			temp.fontSize = 16;
-			temp.text = "组";
-			temp.color = 0x525252;
-			temp.width = 20;
-			temp.x = 22;
-			temp.y = 0;
 			return temp;
 		}
 

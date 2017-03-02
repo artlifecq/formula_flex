@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.info.stall
 {
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 
 	public class StallBuyTreeItem
 	{
@@ -14,7 +14,7 @@ package com.rpgGame.coreData.info.stall
 		
 		public function get itemName():String
 		{
-			return ItemCfgData.getItemName(itemId);
+			return ItemConfig.getItemName(itemId);
 		}
 	}
 }

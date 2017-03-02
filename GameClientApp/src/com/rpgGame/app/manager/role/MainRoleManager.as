@@ -49,6 +49,7 @@ package com.rpgGame.app.manager.role
 			_actroInfo = _actroInfo || new HeroData();
 			return _actroInfo;
 		}
+		
 
 		/**
 		 * 获取个人用户ID

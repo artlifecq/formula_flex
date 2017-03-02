@@ -3,17 +3,16 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.mount.MountEquipmentManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.alert.AutoDressAlert;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.core.events.ItemEvent;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.cfg.item.StaticItem;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
 	import com.rpgGame.coreData.info.upgrade.AmountInfo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangBackPack;
@@ -23,6 +22,8 @@ package com.rpgGame.app.manager.goods
 	import app.message.GoodsType;
 	import app.message.Config.AllGoodsContainerUnlockProto;
 	import app.message.NormalUsableDataProto.NormalEfficacy;
+	
+	import feathers.data.ListCollection;
 	
 	import org.client.mainCore.manager.EventManager;
 
@@ -44,19 +45,18 @@ package com.rpgGame.app.manager.goods
 		public function BackPackManager()
 		{
 			super(ItemContainerID.BackPack)
-			defaultCol = 6;
-			defaultRow = 7;
 			EventManager.addEvent(ItemEvent.ITEM_GETED_NEW_ITEM, onGetedNewItem);
 			EventManager.addEvent(ItemEvent.ITEM_DROPED,deleteItemByDrop);
 		}
+		
 		
 		private function deleteItemByDrop(src : GridInfo, target : GridInfo) : void
 		{
 			if (!src || src.containerID != containerId || target != null)
 				return;
-			if (src.data is ItemInfo)
+			if (src.data is ClientItemInfo)
 			{
-				dropItem(src.data as ItemInfo);
+				dropItem(src.data as ClientItemInfo);
 			}
 		}
 
@@ -68,7 +68,7 @@ package com.rpgGame.app.manager.goods
 				return;
 			}
 			var useSilver : Number = unlockSilver>0?unlockSilver:unlockBindSilver;
-			GameAlert.showAlertUtil(LangBackPack.UNLOCK_GRID, unLockGridClick, MoneyUtil.getHtmlMoneyString(unlockBindSilver), ItemCfgData.getItemName(StaticItem.UNLOCK_BACKPACK));
+			GameAlert.showAlertUtil(LangBackPack.UNLOCK_GRID, unLockGridClick, MoneyUtil.getHtmlMoneyString(unlockBindSilver), ItemConfig.getItemName(StaticItem.UNLOCK_BACKPACK));
 		}
 
 		private function unLockGridClick(gameAlert : GameAlert) : void
@@ -96,13 +96,13 @@ package com.rpgGame.app.manager.goods
 				GameAlert.showAlertUtil(LangAlertInfo.UNLOCK_GRID_SILVER, null, MoneyUtil.getHtmlMoneyString(unlockSilver));
 				return;
 			}
-			var item : ItemInfo = getItemInfoByUsabelEfficacy(NormalEfficacy.OPEN_DEPOT_GRID);
+			var item : ClientItemInfo = getItemInfoByUsabelEfficacy(NormalEfficacy.OPEN_DEPOT_GRID);
 			if (!item)
 			{
-				GameAlert.showAlertUtil(LangAlertInfo.UNLOCK_GRID_ITEM, null, ItemCfgData.getItemName(StaticItem.UNLOCK_BACKPACK));
+				GameAlert.showAlertUtil(LangAlertInfo.UNLOCK_GRID_ITEM, null, ItemConfig.getItemName(StaticItem.UNLOCK_BACKPACK));
 				return;
 			}
-			ItemSender.reqUseGoods(item.index, 1);
+//			ItemSender.reqUseGoods(item.index, 1);
 		}
 
 		public function setUnlockData(data : AllGoodsContainerUnlockProto) : void
@@ -149,7 +149,7 @@ package com.rpgGame.app.manager.goods
 			{
 				return true;
 			}
-			var item : ItemInfo = getCurItemInfoByIndex(index);
+			var item : ClientItemInfo = getCurItemInfoByIndex(index);
 			if(isShowBindLock && item && item.binded)
 			{
 				return true;
@@ -166,7 +166,7 @@ package com.rpgGame.app.manager.goods
 		 */
 		public function useItem(cfgId : int, bind:Boolean,count : int = 1) : void
 		{
-			var itemInfo : ItemInfo = getFirstCanUseItemByCfgIdAndBind(cfgId,bind);
+			var itemInfo : ClientItemInfo = getFirstCanUseItemByCfgIdAndBind(cfgId,bind);
 			if (itemInfo == null)
 				return;
 
@@ -178,7 +178,7 @@ package com.rpgGame.app.manager.goods
 		 * @param info
 		 *
 		 */
-		public function onGetedNewItem(info : ItemInfo) : void
+		public function onGetedNewItem(info : ClientItemInfo) : void
 		{
 			switch (info.type)
 			{

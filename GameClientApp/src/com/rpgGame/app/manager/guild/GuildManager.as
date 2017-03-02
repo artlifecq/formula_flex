@@ -12,7 +12,6 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.alert.AlertText;
 	import com.rpgGame.app.ui.alert.GameAlert;
-	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.FunctionMessageBarEvent;
@@ -21,7 +20,7 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.core.events.country.CrownEvent;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
@@ -32,7 +31,7 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.coreData.info.guild.GuildFamilyData;
 	import com.rpgGame.coreData.info.guild.GuildListItemData;
 	import com.rpgGame.coreData.info.guild.GuildModuleObjData;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.society.SocietyDetailData;
 	import com.rpgGame.coreData.info.society.SocietyMemberData;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
@@ -44,7 +43,6 @@ package com.rpgGame.app.manager.guild
 	
 	import flash.geom.Point;
 	
-	import app.cmd.GuildModuleMessages;
 	import app.message.AmountType;
 	import app.message.GuildModuleObjProto;
 	import app.message.GuildNewsProto;
@@ -849,10 +847,10 @@ package com.rpgGame.app.manager.guild
 			var costItem : int = BackPackManager.instance.getItemCount(GuildCfgData.guildMiscData.createCostGoods);
 			if(costItem<=0)
 			{
-				GameAlert.showAlertUtil(LangAlertInfo.createGuildEroor4,null,ItemCfgData.getItemName(GuildCfgData.guildMiscData.createCostGoods));
+				GameAlert.showAlertUtil(LangAlertInfo.createGuildEroor4,null,ItemConfig.getItemName(GuildCfgData.guildMiscData.createCostGoods));
 				return;
 			}
-			var cost : ItemInfo = BackPackManager.instance.getBagItemsByID(GuildCfgData.guildMiscData.createCostGoods)[0];
+			var cost : ClientItemInfo = BackPackManager.instance.getBagItemsByID(GuildCfgData.guildMiscData.createCostGoods)[0];
 			
 			GuildSender.createGuild(createNpcId,createDialog,cost.index,diwenIndex,dikuangIndex,banner,name);
 		}
