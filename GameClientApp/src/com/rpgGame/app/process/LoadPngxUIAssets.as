@@ -21,7 +21,6 @@ package com.rpgGame.app.process
 	public class LoadPngxUIAssets extends BaseProcess
 	{
 		private static const UI_ASSETS : String = "pngx";
-		private static const UI_ASSETS_PNEICON : String = "pngicon";
 
 		private var _url : String;
 
@@ -46,14 +45,7 @@ package com.rpgGame.app.process
 			var loader : ThemeLoader = new ThemeLoader(true);
 			loader.load(_url, onFinish, onLoaderPorgress, onResError);
 		}
-		
-		private function onFinishOld(loader : ThemeLoader) : void
-		{
-			loader = new ThemeLoader(true);
-			_url = ClientConfig.getUI(UI_ASSETS_PNEICON + ".png.bpg");
-			loader.load(_url, onFinish, onLoaderPorgress, onResError);
-		}
-		
+
 		private function onLoaderPorgress(ld : MultiLoadData, e : ProgressEvent) : void
 		{
 			var currPercent : Number = e.bytesLoaded / e.bytesTotal;
