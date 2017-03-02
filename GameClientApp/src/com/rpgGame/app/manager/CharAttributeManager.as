@@ -59,9 +59,13 @@ package com.rpgGame.app.manager
 						{
 							EventManager.dispatchEvent(TaoNiEvent.TAO_NI_LIANG_CANG_STATE_CHANGE, data, CharAttributeType.HP);
 						}
-						if (data.id == MainRoleManager.actorID && offset > 0) //自己看到就好了
+						if (data.id == MainRoleManager.actorID) //自己看到就好了
 						{
-							FightFaceHelper.showAttChange(EnumHurtType.ADDHP, offset);
+							if(  offset > 0){
+								FightFaceHelper.showAttChange(EnumHurtType.ADDHP, offset);//回血
+							}else if(offset<0){
+								FightFaceHelper.showAttChange(EnumHurtType.SUBHP, offset);//掉血
+							}
 						}	
 						break;
 					case CharAttributeType.MAX_HP:

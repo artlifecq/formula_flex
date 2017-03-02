@@ -2,6 +2,7 @@ package com.rpgGame.app.scene
 {
 	import com.game.engine3D.vo.BaseRole;
 	import com.game.mainCore.libCore.pool.Pool;
+	import com.rpgGame.app.graphics.AttackFaceSprite;
 	import com.rpgGame.app.graphics.BaseHeadFace;
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.coreData.cfg.EvilConfig;
@@ -24,6 +25,24 @@ package com.rpgGame.app.scene
 		private static var _pool : Pool = new Pool("SceneRole", 600);
 
 		private static var _cnt : int = 0;
+
+		public function get attackFace():AttackFaceSprite
+		{
+			return _attackFace;
+		}
+
+		public function set attackFace(value:AttackFaceSprite):void
+		{
+			_attackFace = value;
+		}
+		
+		public function get attackFaceContainer() : Sprite
+		{
+			if (_attackFace == null)
+				return null;
+			
+			return _attackFace.container;
+		}
 
 		/**
 		 * 生成一个RenderUnit
@@ -52,6 +71,7 @@ package com.rpgGame.app.scene
 		private var _stateMachine : RoleStateMachine;
 		private var _buffSet : BuffSet;
 		private var _headFace : BaseHeadFace;
+		private var _attackFace:AttackFaceSprite;
 		protected var _fightChange : Boolean = false;
 		public var mapAreaType : int = 0;
 

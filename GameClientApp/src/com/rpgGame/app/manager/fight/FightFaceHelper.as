@@ -11,7 +11,6 @@ package com.rpgGame.app.manager.fight
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
-	import flash.utils.setInterval;
 	
 	import away3d.core.math.Matrix3DUtils;
 	
@@ -38,27 +37,32 @@ package com.rpgGame.app.manager.fight
 		public static const USESFUL_EFFECT : String = "fight_effect/usesful_effect/";
 		/** 无用，反面特效，其实就是图片是红色的**/
 		public static const HARMFUL_EFFECT : String = "fight_effect/harmful_effect/";
+		
 		/** 有用，正面特效，其实就是图片是绿色的**/
 		public static const ATTRIBUTE_USESFUL_EFFECT : String = "attribute_effect/usesful_effect/";
 		/** 无用，反面特效，其实就是图片是红色的**/
 		public static const ATTRIBUTE_HARMFUL_EFFECT : String = "attribute_effect/harmful_effect/";
 		//-----------------------数字------------------------------------------//
+		/** 战斗-目标飘字 受伤**/
+		public static const NUMBER_NPC_HIT : String = "skin_shanghai/";
+		/** 战斗-自身飘字 回血**/
+		public static const NUMBER_PC_HPREC : String = "skin_zhiliao/";
+		/** 战斗-自身飘字 掉血**/
+		public static const NUMBER_PC_HPSUB : String = "skin_shoushanghai/";
+		/**  经验增加**/
+		public static const NUMBER_PC_EXP : String = "skin_jingyan/";
+		/** 战斗-目标飘字 受暴击**/
+		public static const NUMBER_NPC_CRIT : String = "skin_baoji/";
+		
+		
 		/** 战斗-自身飘字 受伤 (红色) **/
 		public static const NUMBER_PC_HIT : String = "pc_hit/";
 		/** 战斗-自身飘字 受暴击(暗红色) **/
 		public static const NUMBER_PC_HITCRIT : String = "pc_hitcrit/";
-		/** 战斗-自身飘字 回血（绿色）**/
-		public static const NUMBER_PC_HPREC : String = "pc_hprec/";
 		/** 战斗-自身飘字 回蓝（深蓝色） **/
 		public static const NUMBER_PC_MPREC : String = "pc_mprec/";
-		/** 战斗-目标飘字 受伤（黄橙色）**/
-		public static const NUMBER_NPC_HIT : String = "npc_hit/";
-		/** 战斗-目标飘字 受暴击（紫色）**/
-		public static const NUMBER_NPC_CRIT : String = "npc_crit/";
 		/** 其他飘字 武勋增加（深黄色）**/
 		public static const NUMBER_PC_EXPLOIT : String = "pc_exploit/";
-		/** 其他飘字 经验增加（浅蓝色）**/
-		public static const NUMBER_PC_EXP : String = "pc_exp/";
 		/** 其他飘字 特殊经验加成（紫色）**/
 		public static const NUMBER_PC_EXPSPEC : String = "pc_expspec/";
 		/** 加号 **/
@@ -95,12 +99,9 @@ package com.rpgGame.app.manager.fight
 		 * @return
 		 *
 		 */
-		public static function getFightURlByType(hurtType : String, isUsesful : Boolean) : String
+		public static function getFightURlByAttType(hurtType : String, isUsesful : Boolean) : String
 		{
-			if (isUsesful)
-				return ROOT + USESFUL_EFFECT + hurtType + ".png";
-			else
-				return ROOT + HARMFUL_EFFECT + hurtType + ".png";
+			return ROOT+USESFUL_EFFECT+hurtType+".png";
 		}
 
 		/**
@@ -144,9 +145,9 @@ package com.rpgGame.app.manager.fight
 				return;
 
 			var mainPlayer : SceneRole = MainRoleManager.actor; //主角
-			var typeRes : String; //得到攻击效果的指定类型的URL
+			var typeRes : String=""; //得到攻击效果的指定类型的URL
 			var isUsefulBmp : Boolean = true; //是否正面效果，相对主角自己而言的
-			var numberType : String = NUMBER_RED2; //飘字数字颜色类型
+			var numberType : String ; //飘字数字颜色类型
 			var tweenDis : int;
 			var dirVec : Vector3D;
 			var tweenFun : Function; //飘字回调
@@ -160,8 +161,8 @@ package com.rpgGame.app.manager.fight
 				case EnumHurtType.SPELL_HURT_TYPE_NORMAL: //无文字
 					typeRes = "";
 					isUsefulBmp = hurter.isMainChar;
-					scaleAgo = 1;
-					scaleLater = 0.33;
+					scaleAgo = 2;
+					scaleLater = 1;
 					if (isUsefulBmp)
 					{
 						numberType = NUMBER_PC_HIT;
@@ -173,23 +174,18 @@ package com.rpgGame.app.manager.fight
 					}
 					break;
 				case EnumHurtType.SPELL_HURT_TYPE_MISS: //闪避
-					isUsefulBmp = hurter.isMainChar;
-					typeRes = "";
-					scaleAgo = 1;
-					scaleLater = 0.33;
+//					isUsefulBmp = hurter.isMainChar;
+					typeRes = ROOT+USESFUL_EFFECT+"weimingzhong.png";
+					scaleAgo = 2;
+					scaleLater = 1;
+					tweenFun=tweenTypeRoleMiss;
 					break;
 				case EnumHurtType.SPELL_HURT_TYPE_CRIT: //暴击
-					isUsefulBmp = hurter.isMainChar;
-					scaleAgo = 1;
-					scaleLater = 0.26;
-					if (isUsefulBmp)
-					{
-						numberType = NUMBER_PC_HITCRIT;
-					}
-					else
-					{
-						numberType = NUMBER_NPC_CRIT;
-					}
+//					isUsefulBmp = hurter.isMainChar;
+					typeRes = ROOT+USESFUL_EFFECT+"bao_ji_piao_zi.png";
+					scaleAgo = 2;
+					scaleLater = 1;
+					numberType = NUMBER_NPC_CRIT;
 					break;
 				case EnumHurtType.SPELL_HURT_TYPE_THUMP: //重击
 					isUsefulBmp = hurter.isMainChar;
@@ -225,8 +221,9 @@ package com.rpgGame.app.manager.fight
 					break;
 			}
 
-			tweenFun = tweenTypeRoleHurt
-			typeRes = getFightURlByType(hurtType + "", isUsefulBmp);
+			if(!tweenFun){
+				tweenFun = tweenTypeRoleHurt;
+			}
 			var showFace:Boolean = false;
 			var roleData:RoleData;
 			if(atkor && atkor.usable)
@@ -276,23 +273,65 @@ package com.rpgGame.app.manager.fight
 		{
 			var scaleAgo : Number = 1;
 			var scaleLater : Number = 0.33;
-			var typeRes : String = getFightURlByType(type, true);
+			var typeRes : String = getFightURlByAttType(type, true);
 			var numberColor : String = "";
 			switch (type)
 			{
 				case EnumHurtType.ADDHP: //回血
-					numberColor = NUMBER_PC_HPREC;
+					numberColor=NUMBER_PC_HPREC;
+					scaleAgo=1;
+					scaleLater=1;
+					showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenUp);
+					return;
+				case EnumHurtType.SUBHP: //掉血
+					numberColor=NUMBER_PC_HPSUB;
 					break;
 				case EnumHurtType.ADDMP: //回蓝
 					numberColor = NUMBER_PC_MPREC;
 					break;
 				case EnumHurtType.EXP: //经验
 					numberColor = NUMBER_PC_EXP;
-					break;
+					scaleAgo=1;
+					scaleLater=1;
+					showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenUp);
+					return;
 				default:
 					break;
 			}
 			showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenTypeRoleHurt);
+		}
+		
+		public static function tweenTypeRoleMiss(attackFace : DisplayObject, $displayObjectContainer:*, $from : Point, $end : Point, $scaleAgo : Number, $scaleLater : Number, isLeftShow : Boolean = false, onComplete : Function = null) : void
+		{
+			
+			attackFace.x=-attackFace.width/2;
+			attackFace.scaleX = attackFace.scaleY = $scaleAgo;
+			$end=new Point(attackFace.x,attackFace.y);
+			
+			var timeLine : TimelineLite = new TimelineLite();
+			timeLine.insert(TweenLite.to(attackFace, 0.2, {scaleX: $scaleLater, scaleY: $scaleLater, ease: Linear.easeOut}));//缩放
+			timeLine.append(TweenLite.to(attackFace, 0.5, {x:$end.x,y:$end.y,alpha: 0,onComplete: onComplete, onCompleteParams: [attackFace], ease: Linear.easeIn}));//隐藏
+		}
+		
+		/**
+		 *向上飘 
+		 * @param attackFace
+		 * @param $displayObjectContainer
+		 * @param $from
+		 * @param $end
+		 * @param $scaleAgo
+		 * @param $scaleLater
+		 * @param isLeftShow
+		 * @param onComplete
+		 * 
+		 */
+		public static function tweenUp(attackFace : DisplayObject, $displayObjectContainer:*, $from : Point, $end : Point, $scaleAgo : Number, $scaleLater : Number, isLeftShow : Boolean = false, onComplete : Function = null) : void
+		{
+			attackFace.x = -attackFace.width/2;
+			attackFace.y =-attackFace.height/2;
+			var timeLine : TimelineLite = new TimelineLite();
+			timeLine.insert(TweenLite.to(attackFace, 0.3, {ease: Linear.easeOut}));//缩放
+			timeLine.append(TweenLite.to(attackFace, 0.3, {y:attackFace.y-50,onComplete: onComplete, onCompleteParams: [attackFace], ease: Linear.easeIn}));//隐藏
 		}
 
 		/**
@@ -314,7 +353,7 @@ package com.rpgGame.app.manager.fight
 		 */
 		public static function showQueueAttackFace($sc : SceneRole, $attackType : String = "", numberRes : String = "", $attackValue : * = 0, $scaleAgo : Number = 1, $scaleLater : Number = 1, $from : Point = null, $end : Point = null, $specialType : String = null, $specialPos : Point = null, $tweenFun : Function = null, $isLeftShow : Boolean = false, $queueTm : uint = 50) : void
 		{
-			_queueThread.push(showAttackFace, [$sc.boneNameContainer, $attackType, numberRes, $attackValue, $specialType, $specialPos, $tweenFun, $from, $end, $scaleAgo, $scaleLater, $isLeftShow], $queueTm);
+			_queueThread.push(showAttackFace, [$sc.attackFaceContainer, $attackType, numberRes, $attackValue, $specialType, $specialPos, $tweenFun, $from, $end, $scaleAgo, $scaleLater, $isLeftShow], $queueTm);
 		}
 
 		/**
@@ -416,7 +455,8 @@ package com.rpgGame.app.manager.fight
 				$onComplete(attackFace); // 动画就算不播放，也要调用完成函数
 				return;
 			}
-			StarlingLayerManager.headFaceLayer.addChild(attackFace);
+			$displayObjectContainer.addChild(attackFace);
+//			StarlingLayerManager.headFaceLayer.addChild(attackFace);
 
 			if (null != $funTween)
 			{
@@ -668,24 +708,32 @@ package com.rpgGame.app.manager.fight
 		 */
 		public static function tweenTypeRoleHurt(attackFace : DisplayObject, $displayObjectContainer:*, $from : Point, $end : Point, $scaleAgo : Number, $scaleLater : Number, isLeftShow : Boolean = false, onComplete : Function = null) : void
 		{
-			if (null == $from)
-			{
-				$from = new Point(0, -50);
-			}
-			if (null == $end)
-			{
-				$end = new Point(-23, -200);
-			}
-
-
 			attackFace.scaleX = attackFace.scaleY = $scaleAgo;
-			attackFace.x = $displayObjectContainer.x-attackFace.width/2;
-			attackFace.y = $displayObjectContainer.y-attackFace.height/2-50;
-			
+			attackFace.alpha=0;
+			var $to:Point=new Point(0,0);
+			$from=new Point($to.x,$to.y);
+			$end=new Point($to.x,$to.y);
+			if(isLeftShow){//飘左边
+				$from.x=$to.x+getPianYi(attackFace.width);
+				$end.x=$to.x-getPianYi(attackFace.width);
+			}else{
+				$from.x=$to.x-getPianYi(attackFace.width);
+				$end.x=$to.x+getPianYi(attackFace.width);
+			}
+			attackFace.x=$from.x;
+			attackFace.y=$from.y;
 			
 			var timeLine : TimelineLite = new TimelineLite();
-			timeLine.insert(TweenLite.to(attackFace, 0.5, {scaleX: $scaleLater, scaleY: $scaleLater, ease: Linear.easeOut,onUpdate:updateXY,onUpdateParams:[attackFace,$displayObjectContainer]}));//缩放
-			timeLine.append(TweenLite.to(attackFace, 1.2, {alpha: 0,onComplete: onComplete, onCompleteParams: [attackFace], ease: Linear.easeIn,onUpdate:updateXY,onUpdateParams:[attackFace,$displayObjectContainer]}));//隐藏
+			timeLine.insert(TweenLite.to(attackFace, 0.3, {x: $to.x, y:$to.y,alpha:1,scaleX: $scaleLater, scaleY: $scaleLater, ease: Linear.easeOut}));//大到小
+			timeLine.append(TweenLite.to(attackFace, 0.3, {x:$end.x,y:$end.y,alpha: 0,onComplete: onComplete, onCompleteParams: [attackFace], ease: Linear.easeIn}));//隐藏
+		}
+		
+		private static function getPianYi(value:int):int
+		{
+			var result:int=value*Math.random();
+			result=result>100?100:result;
+			result=result<30?30:result;
+			return result;
 		}
 		
 		/**
@@ -694,10 +742,9 @@ package com.rpgGame.app.manager.fight
 		 * @param $displayObjectContainer
 		 * 
 		 */
-		private static function updateXY(attackFace : DisplayObject, $displayObjectContainer:*):void
+		private static function updateChildIndex(attackFace : DisplayObject):void
 		{
-			attackFace.x=$displayObjectContainer.x-attackFace.width/2;
-			attackFace.y=$displayObjectContainer.y-attackFace.height/2-50;
+			attackFace.parent.addChild(attackFace);
 		}
 
 		/**

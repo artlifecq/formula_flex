@@ -1,7 +1,13 @@
 package com.rpgGame.app.sender
 {
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.app.manager.fight.FightFaceHelper;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.SceneRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
+	import com.rpgGame.coreData.type.EnumHurtType;
 	import com.rpgGame.netData.fight.message.CSPerformPosSkillMessage;
 	import com.rpgGame.netData.fight.message.CSPerformTargetSkillMessage;
 	
@@ -46,7 +52,10 @@ package com.rpgGame.app.sender
 			GameLog.addShow("马上要释放技能id:\t" + spellID);
 			if(targetID != null)
 			{
-				releaseSpellAtTarget(spellID,angle,targetID);
+				var role:SceneRole=SceneManager.getSceneObjByID(targetID.ToGID()) as SceneRole;
+				FightFaceHelper.showHurtText(MainRoleManager.actor,role,EnumHurtType.SPELL_HURT_TYPE_CRIT,-2358);
+				
+//				releaseSpellAtTarget(spellID,angle,targetID);
 			}
 			else
 			{
