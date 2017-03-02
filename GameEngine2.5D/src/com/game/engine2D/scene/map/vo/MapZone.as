@@ -1,11 +1,10 @@
 package com.game.engine2D.scene.map.vo
 {
 	import com.game.engine2D.Scene;
-	import com.game.engine2D.config.GlobalConfig2D;
 	import com.game.engine2D.config.SceneConfig;
 	import com.game.engine2D.core.AsyncByteTexture;
-	import com.game.engine2D.interfaces.IZoneMesh;
 	import com.game.engine2D.scene.map.MapCache;
+	import com.game.engine2D.vo.PoolFrontMesh;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	
 	import flash.text.TextField;
@@ -13,7 +12,6 @@ package com.game.engine2D.scene.map.vo
 	
 	import away3d.containers.ObjectContainer3D;
 	import away3d.entities.EntityLayerType;
-	import away3d.entities.Mesh;
 	import away3d.events.Event;
 	import away3d.materials.TextureMaterial;
 	
@@ -30,12 +28,20 @@ package com.game.engine2D.scene.map.vo
 			return tileX + "_" + tileY;
 		}
 		
-		private var _mesh : IZoneMesh;
+		private var _mesh : PoolFrontMesh;
 		private var _isClear : Boolean = false;
 		private var _isLoaded : Boolean = false;
 		private var _isLoading : Boolean = false;
 		private var _completeHandler : Function;
-
+		private var _asyncTexture:AsyncByteTexture;
+		
+		/*private var _loadStr:String = "_ld_";
+		private var _cmpStr:String = "cmp_";
+		private var _drawStr:String = "draw_";
+		private var _clearStr:String = "clear";
+		
+		private var _txtStr:String = "";*/
+		
 		public function MapZone()
 		{
 		}
@@ -44,39 +50,38 @@ package com.game.engine2D.scene.map.vo
 		{
 			return !_isClear && _mesh && _mesh.material == _bmpMaterial;
 		}
-
+		
 		final public function setContainer(container : ObjectContainer3D, x : int, y : int) : void
 		{
 			if (!_mesh)
 			{
-				_mesh = GlobalConfig2D.MapZoneClass.create(null);
+				_mesh = PoolFrontMesh.create();
 				_mesh.width = SceneConfig.ZONE_WIDTH;
 				_mesh.height = SceneConfig.ZONE_HEIGHT;
 			}
 			if (_mesh.parent != container)
-				container.addChild(_mesh as Mesh);
+				container.addChild(_mesh);
 			_mesh.x = x;
 			_mesh.y = y;
-			_mesh.z = -200;
+//			_mesh.z = 400;
 			_mesh.run();
-			_mesh.depth = -300;
 			_mesh.layerType = EntityLayerType.DEFAULT | EntityLayerType.POST_GLASS;
 		}
-
+		
 		final public function drawMask(textureMaterial : TextureMaterial, smallScaleX : Number, smallScaleY : Number) : void
 		{
 			/*if (_mesh)
 			{
-				_mesh.material = textureMaterial;
-				_mesh.width = SceneConfig.ZONE_WIDTH;
-				_mesh.height = SceneConfig.ZONE_HEIGHT;
-				_mesh.run();
-				var transformationMatrix:Matrix = _mesh.overrideMaterialProps.prependedUVTransform;
-				transformationMatrix.identity();
-				transformationMatrix.scale(SceneConfig.ZONE_WIDTH/(smallScaleX*textureMaterial.texture.width), 
-					SceneConfig.ZONE_HEIGHT/(smallScaleX*textureMaterial.texture.height));
-				transformationMatrix.translate(Math.round(piexl_x / smallScaleX)/textureMaterial.texture.width,
-					Math.round(piexl_y / smallScaleY)/textureMaterial.texture.height);
+			_mesh.material = textureMaterial;
+			_mesh.width = SceneConfig.ZONE_WIDTH;
+			_mesh.height = SceneConfig.ZONE_HEIGHT;
+			_mesh.run();
+			var transformationMatrix:Matrix = _mesh.overrideMaterialProps.prependedUVTransform;
+			transformationMatrix.identity();
+			transformationMatrix.scale(SceneConfig.ZONE_WIDTH/(smallScaleX*textureMaterial.texture.width), 
+			SceneConfig.ZONE_HEIGHT/(smallScaleX*textureMaterial.texture.height));
+			transformationMatrix.translate(Math.round(piexl_x / smallScaleX)/textureMaterial.texture.width,
+			Math.round(piexl_y / smallScaleY)/textureMaterial.texture.height);
 			}*/
 		}
 		
@@ -92,11 +97,14 @@ package com.game.engine2D.scene.map.vo
 			_isLoaded = false;
 			_completeHandler = completeHandler;
 			
-			var texture:AsyncByteTexture = new AsyncByteTexture(false);
-			texture.url = filePath;
-			texture.userData = userData;
-			texture.addEventListener(Event.COMPLETE, onLoaderComplete);
-			texture.load(filePath);
+			_asyncTexture = new AsyncByteTexture(false);
+			_asyncTexture.userData = userData;
+			_asyncTexture.addEventListener(Event.COMPLETE, onLoaderComplete);
+			_asyncTexture.load(filePath);
+			
+			//_txtStr = getKey(this.tile_x, this.tile_y) + _loadStr; 
+			//addTxt(_txtStr);
+			
 			return true;
 		}
 		
@@ -108,18 +116,16 @@ package com.game.engine2D.scene.map.vo
 			var key : * = getKey(mapZone.tile_x, mapZone.tile_y);
 			_isLoading = false;
 			_isLoaded = true;
+			_asyncTexture = null;
 			MapCache.getInstance().addZoneBmpData(key, texture);
 			MapCache.getInstance().removeWaitingLoad(key);
-			
 			if (_completeHandler != null)
 				_completeHandler(this);
-			else
-				trace("我日，真是日了狗了！！！_completeHandler=null！！！");
-				
+			//_txtStr += _cmpStr; 
+			//addTxt(_txtStr);
 		}
 		
 		private var _bmpMaterial:TextureMaterial;
-		static private var _count:int = 0;
 		final public function draw($material : TextureMaterial) : void
 		{
 			if(_mesh && $material)
@@ -131,125 +137,130 @@ package com.game.engine2D.scene.map.vo
 				_mesh.width = SceneConfig.ZONE_WIDTH;
 				_mesh.height = SceneConfig.ZONE_HEIGHT;
 				_mesh.run();
-			}
-			else
-			{
-				trace(_tile_x + "_" + _tile_y + " : _mesh=null;");
+				
+				//_txtStr += _drawStr; 
+				//addTxt(_txtStr);
 			}
 		}
-
+		
 		/**
 		 * 清除
 		 */
 		final public function clear() : void
 		{
-			if (!_isLoading){
-				_isLoading = false;
-				_isLoaded = false;
-				_completeHandler = null;
-				if (_mesh)
-				{
-					GlobalConfig2D.MapZoneClass.recycle(_mesh);
-					hideTxt();
-					_mesh = null;
-					_bmpMaterial = null;
-				}
-				_isClear = true;
+			if (_asyncTexture)
+			{
+				_asyncTexture.removeEventListener(Event.COMPLETE, onLoaderComplete);
+				_asyncTexture.dispose();
+				_asyncTexture = null;
+				
+				//_txtStr += (_clearStr + srcTarget); 
+				//addTxt(_txtStr);
 			}
+			_isLoading = false;
+			_isLoaded = false;
+			_completeHandler = null;
+			if (_mesh)
+			{
+				PoolFrontMesh.recycle(_mesh);
+				_mesh = null;
+				_bmpMaterial = null;
+			}
+			_isClear = true;
+			//trace("clear,srcTarget=",srcTarget, getKey(this.tile_x, this.tile_y));
 		}
-
+		
 		public function get isLoaded() : Boolean
 		{
 			return _isLoaded;
 		}
-
+		
 		public function get isLoading() : Boolean
 		{
 			return _isLoading;
 		}
-
+		
 		//坐标相关================================================================================================
 		/**
 		 * @private
 		 * 像素坐标x
 		 */
 		private var _piexl_x : Number = 0;
-
+		
 		/*** 像素坐标x*/
 		final public function get piexl_x() : Number
 		{
 			return _piexl_x
 		}
-
+		
 		/*** 像素坐标x*/
 		final public function set piexl_x($value : Number) : void
 		{
 			_piexl_x = $value;
 			_tile_x = _piexl_x / SceneConfig.ZONE_WIDTH;
 		}
-
+		
 		/**
 		 * @private
 		 * 像素坐标y
 		 */
 		private var _piexl_y : Number = 0;
-
+		
 		/*** 像素坐标y*/
 		final public function get piexl_y() : Number
 		{
 			return _piexl_y
 		}
-
+		
 		/*** 像素坐标y*/
 		final public function set piexl_y($value : Number) : void
 		{
 			_piexl_y = $value;
 			_tile_y = _piexl_y / SceneConfig.ZONE_HEIGHT;
 		}
-
+		
 		/**
 		 * @private
 		 * 逻辑坐标x
 		 */
 		private var _tile_x : int = 0;
-
+		
 		/*** 逻辑坐标x*/
 		final public function get tile_x() : int
 		{
 			return _tile_x
 		}
-
+		
 		/*** 逻辑坐标x*/
 		final public function set tile_x($value : int) : void
 		{
 			_tile_x = $value;
 			_piexl_x = _tile_x * SceneConfig.ZONE_WIDTH;
 		}
-
+		
 		/**
 		 * @private
 		 * 逻辑坐标y
 		 */
 		private var _tile_y : int = 0;
-
+		
 		/*** 逻辑坐标y*/
 		final public function get tile_y() : int
 		{
 			return _tile_y
 		}
-
+		
 		/*** 逻辑坐标y*/
 		final public function set tile_y($value : int) : void
 		{
 			_tile_y = $value;
 			_piexl_y = _tile_y * SceneConfig.ZONE_HEIGHT;
 		}
-
+		
 		private var txt : TextField
-
+		
 		final public function addTxt(txtStr : String) : void
 		{
-			return;
 			if (_mesh && _mesh.parent)
 			{
 				if (!txt)
@@ -267,7 +278,7 @@ package com.game.engine2D.scene.map.vo
 				txt.y = _mesh.y;
 			}
 		}
-
+		
 		final public function hideTxt() : void
 		{
 			if(txt && txt.parent)

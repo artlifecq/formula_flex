@@ -1,7 +1,7 @@
 package com.rpgGame.app.manager.role
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.scene.render.vo.VolumeBounds;
 	import com.game.engine3D.vo.SoftOutlineData;
 	import com.rpgGame.app.graphics.HeadFace;
@@ -60,7 +60,7 @@ package com.rpgGame.app.manager.role
 
 		public static function setOutlineData(size : Number = 4, strength : Number = 1, quality : int = 3, enemyColor : uint = 0xFF0000, friendColor : uint = 0x00FF00, neutralColor : uint = 0xFFFF00) : void
 		{
-			var outlineGlowFilter : OutlineGlowFilter3D = new OutlineGlowFilter3D(size, strength, quality);
+			var outlineGlowFilter : OutlineGlowFilter3D = new OutlineGlowFilter3D(size, strength);
 			SceneManager.getScene().setOutlineGlowFilter(outlineGlowFilter);
 			_enemyOutlineData = new SoftOutlineData(enemyColor);
 			_friendOutlineData = new SoftOutlineData(friendColor);
@@ -148,7 +148,7 @@ package com.rpgGame.app.manager.role
 				selectedRindId = _selectedRingGreenId;
 			else
 				selectedRindId = _selectedRingGreenId;
-			var rud : RenderParamData = new RenderParamData(RenderUnitID.SELECTED_RING, RenderUnitType.SELECTED_RING, ClientConfig.getEffect(selectedRindId));
+			var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.SELECTED_RING, RenderUnitType.SELECTED_RING, ClientConfig.getEffect(selectedRindId));
 			var effectRu : RenderUnit3D = role.avatar.addRenderUnit(rud);
 			effectRu.repeat = 0;
 			effectRu.visible = false;

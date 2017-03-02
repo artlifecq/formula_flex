@@ -3,18 +3,17 @@ package com.game.engine3D.loader
 	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.utils.CallBackUtil;
 	import com.game.engine3D.vo.CallBackData;
-
+	
 	import flash.events.Event;
-	import flash.net.URLRequest;
 	import flash.utils.Dictionary;
-
+	
 	import away3d.Away3D;
 	import away3d.events.AssetEvent;
 	import away3d.events.LoaderEvent;
 	import away3d.library.assets.AssetType;
-	import away3d.loaders.AssetLoader;
 	import away3d.textures.AsyncTexture2D;
-
+	import away3d.tools.utils.TextureUtils;
+	
 	import org.client.load.loader.multi.DobjLoadManager;
 	import org.client.load.loader.multi.vo.LoadData;
 
@@ -57,7 +56,7 @@ package com.game.engine3D.loader
 
 		private var _useAssetLoader : Boolean;
 		private var _url : String;
-		private var _textureLoader : AssetLoader;
+//		private var _textureLoader : AssetLoader;
 		private var _isLoaded : Boolean;
 		private var _texture : AsyncTexture2D;
 		private var _loadCompleteCallBackList : Vector.<CallBackData>;
@@ -75,10 +74,13 @@ package com.game.engine3D.loader
 			_useAssetLoader = useAssetLoader;
 			if (_useAssetLoader)
 			{
-				_textureLoader = new AssetLoader();
-				_textureLoader.addEventListener(LoaderEvent.RESOURCE_COMPLETE, onResourceComplete);
-				_textureLoader.addEventListener(AssetEvent.ASSET_COMPLETE, onTextureAssetComplete);
-				_textureLoader.load(new URLRequest(Away3D.USE_TEXTURES_BPG_FORMAT ? (_url + ".bpg") : _url));
+				_texture = new AsyncTexture2D(TextureUtils.checkHasAlphaFromUrl(url));
+				_texture.addEventListener(away3d.events.Event.COMPLETE, onResourceComplete);
+				_texture.load(Away3D.USE_ATF_FOR_TEXTURES ? (_url + ".atf") : _url);
+//				_textureLoader = new AssetLoader();
+//				_textureLoader.addEventListener(LoaderEvent.RESOURCE_COMPLETE, onResourceComplete);
+//				_textureLoader.addEventListener(AssetEvent.ASSET_COMPLETE, onTextureAssetComplete);
+//				_textureLoader.load(new URLRequest(Away3D.USE_TEXTURES_BPG_FORMAT ? (_url + ".bpg") : _url));
 			}
 			else
 			{
@@ -98,26 +100,25 @@ package com.game.engine3D.loader
 				_texture = e.asset as AsyncTexture2D;
 		}
 
-		private function onResourceComplete(e : LoaderEvent) : void
+		private function onResourceComplete(e : away3d.events.Event) : void
 		{
 			removeLoaderEvents();
 			onLoadComplete();
 		}
-
+		
 		private function removeLoaderEvents() : void
 		{
-			if (!_textureLoader)
+			if (!_texture)
 				return;
-			_textureLoader.removeEventListener(LoaderEvent.RESOURCE_COMPLETE, onResourceComplete);
-			_textureLoader.removeEventListener(AssetEvent.ASSET_COMPLETE, onTextureAssetComplete);
+			_texture.removeEventListener(LoaderEvent.RESOURCE_COMPLETE, onResourceComplete);
 		}
-
-		private function onTextureLoadComplete(ld : LoadData, e : Event) : void
+		
+		private function onTextureLoadComplete(ld : LoadData, e : flash.events.Event) : void
 		{
-//			var bitmapData : BitmapData = ((e.target as DobjLoader).content as Bitmap).bitmapData;
-//			if (bitmapData)
-//				_texture = Cast.bitmapTexture(bitmapData);
-
+			//			var bitmapData : BitmapData = ((e.target as DobjLoader).content as Bitmap).bitmapData;
+			//			if (bitmapData)
+			//				_texture = Cast.bitmapTexture(bitmapData);
+			
 			//:todo
 			onLoadComplete();
 		}
@@ -129,12 +130,12 @@ package com.game.engine3D.loader
 			{
 				DobjLoadManager.cancelLoadByUrl(_url);
 			}
-			if (_textureLoader)
-			{
-				_textureLoader.stop();
-				_textureLoader.disposeGPUResource();
-				_textureLoader = null;
-			}
+//			if (_textureLoader)
+//			{
+//				_textureLoader.stop();
+//				_textureLoader.disposeGPUResource();
+//				_textureLoader = null;
+//			}
 			if (_texture)
 			{
 				_texture.dispose();

@@ -8,11 +8,9 @@ package com.game.engine3D.controller
 	import com.game.engine3D.vo.BaseObj3D;
 
 	import flash.display.InteractiveObject;
-	import flash.geom.Vector3D;
 
 	import away3d.cameras.Camera3D;
 	import away3d.containers.ObjectContainer3D;
-	import away3d.core.math.MathConsts;
 
 	/**
 	 * 镜头控制器
@@ -148,12 +146,7 @@ package com.game.engine3D.controller
 		 * @param $xDegControl 是否可以鼠标右键控制水平角度
 		 *
 		 */
-		public static function initLockOnControl($offsetY : Number, $xDeg : Number, $yDeg : Number, 
-												 $distance : Number, $distanceControl : Boolean = false, 
-												 $yDegControl : Boolean = false, $xDegControl : Boolean = true, 
-												 $minDistance : int = 0, $maxDistance : int = 0, 
-												 $minTiltAngle : int = 0, $maxTiltAngle : int = 0, 
-												 checkBlock : Boolean = false, blockMinDistance : int = 0, $mouseWheelCallback : Function = null) : void
+		public static function initLockOnControl($offsetY : Number, $xDeg : Number, $yDeg : Number, $distance : Number, $distanceControl : Boolean = false, $yDegControl : Boolean = false, $xDegControl : Boolean = true, $minDistance : int = 0, $maxDistance : int = 0, $minTiltAngle : int = 0, $maxTiltAngle : int = 0, checkBlock : Boolean = false, blockMinDistance : int = 0, $mouseWheelCallback : Function = null) : void
 		{
 			lockedOnPlayerController.mouseWheelCallback = $mouseWheelCallback;
 			lockedOnPlayerController.minDist = $minDistance;
@@ -183,7 +176,7 @@ package com.game.engine3D.controller
 				return;
 			}
 			stopControl();
-			if (_mode > 0)
+			/*if (_mode > 0)
 			{
 				if (_mode == CameraModeEnum.DIRECT_CAMERA)
 				{
@@ -212,7 +205,7 @@ package com.game.engine3D.controller
 				lockedOnPlayerController.distance = subVector.length;
 				lockedOnPlayerController.yDeg = Math.asin(subVector.y / lockedOnPlayerController.distance) * MathConsts.RADIANS_TO_DEGREES;
 				lockedOnPlayerController.xDeg = Math.atan2(subVector.x, subVector.z) * MathConsts.RADIANS_TO_DEGREES + 180;
-			}
+			}*/
 
 			lockedOnPlayerController.lookAtObject = _target;
 			lockedOnPlayerController.targetObject = _camera;
@@ -277,14 +270,13 @@ package com.game.engine3D.controller
 			}
 			stopControl();
 			directController.targetObject = _camera;
-			directController.xDeg = _camera.rotationY;
-			directController.yDeg = _camera.rotationX;
 			directController.startControl(_listenerTarget);
 			_mode = CameraModeEnum.DIRECT_CAMERA;
 		}
 
 		public static function stopControl() : void
 		{
+			_mode = 0;
 			lockedOnPlayerController.lookAtObject = null;
 			lockedOnPlayerController.targetObject = null;
 			lockedOnPlayerController.stopControl();

@@ -1,11 +1,12 @@
 package com.game.engine2D.core
 {
+	import com.game.engine3D.manager.Stage3DLayerManager;
+	
 	import flash.display3D.textures.TextureBase;
 	import flash.events.Event;
 	import flash.utils.ByteArray;
 	
 	import away3d.core.managers.Stage3DProxy;
-	import away3d.textures.ATFData;
 	import away3d.textures.Texture2DBase;
 	
 	/**
@@ -16,25 +17,47 @@ package com.game.engine2D.core
 	public class ATFByteTexture extends Texture2DBase
 	{
 		private var _isReady:Boolean = false;
-		private var _atfTexture:TextureBase;
+		private var _texture:TextureBase;
 		private var _isDispose:Boolean = false;
 		private var _isDisposeTexture:Boolean = false;
-		private var _atfData:ATFData;
+		private var _atfData:ATFByteData;
+		private var _path:String;
 		
-		public function ATFByteTexture(byteArray:ByteArray)
+		public function ATFByteTexture(byteArray:ByteArray, path:String, autoRecycleEnable:Boolean, isAsync:Boolean)
 		{
 			super();
-			this.atfData = new ATFByteData(byteArray);
-			this.autoRecycleEnable = true;
+			_path = path;
+			var atfByteData:ATFByteData = new ATFByteData(byteArray);
+			atfByteData.isAsync = isAsync;
+			this.atfData = atfByteData;
+			this.autoRecycleEnable = autoRecycleEnable;
 			this.autoRecycleDataEnable = false;
 		}
 		
-		public function get atfData():ATFData
+		public function get isDefaultTexture():Boolean
+		{
+			return !_isReady;
+		}
+		
+		public function get isReady():Boolean
+		{
+			if (!_isReady && !_texture)
+			{
+				var stage3DProxy:Stage3DProxy = Stage3DLayerManager.stage3DProxy;
+				//避免锁屏恢复刚好加载完资源创建createTexture
+				if (stage3DProxy && stage3DProxy.driverInfo == "Disposed")
+					return false;
+				getTextureForStage3D(stage3DProxy);
+			}
+			return _isReady;
+		}
+		
+		public function get atfData():ATFByteData
 		{
 			return _atfData;
 		}
 		
-		public function set atfData(value:ATFData):void
+		public function set atfData(value:ATFByteData):void
 		{
 			_atfData = value;
 			_compressed = _atfData.compressed;
@@ -43,73 +66,75 @@ package com.game.engine2D.core
 			this.textureData = _atfData;
 		}
 		
-		public function get isAsync():Boolean
-		{
-			if (atfData is ATFByteData)
-				return ATFByteData(atfData).isAsync;
-			return false;
-		}
-		
 		override protected function createTexture(stage3DProxy:Stage3DProxy):TextureBase
 		{
-			if (isAsync)
-			{
-				_atfTexture = super.createTexture(stage3DProxy);
-				_atfTexture.addEventListener(Event.TEXTURE_READY, onTextureReady);
-				return _atfTexture;
-			}
-			return super.createTexture(stage3DProxy);
+			_isDisposeTexture = _isReady = false;
+			_texture = super.createTexture(stage3DProxy);
+			if (_atfData.isAsync)
+				_texture.addEventListener(Event.TEXTURE_READY, onTextureReady);
+			else
+				onTextureReady(null);
+			return _texture;
 		}
 		
 		protected function onTextureReady(event:Event):void
 		{
-			if (_atfTexture)
+			if (_texture)
 			{
-				_atfTexture.removeEventListener(Event.TEXTURE_READY, onTextureReady);
+				if (event)
+					_texture.removeEventListener(Event.TEXTURE_READY, onTextureReady);
 				_isReady = true;
 				if (_isDispose)
 				{
-					super.dispose();
-					_atfTexture = null;
+					disposeTexture();
 				}
 				else if (_isDisposeTexture)
 				{
-					super.invalidateContent();
-					_atfTexture = null;
+					invalidateTexture();
 				}
 			}
 		}
 		
 		override protected function uploadContent(texture:TextureBase):void
 		{
-			_isReady = false;
+			_isReady = !_atfData.isAsync;
 			super.uploadContent(texture);
 		}
 		
 		override public function invalidateContent():void
 		{
-			if (_atfTexture && isAsync) 
+			if (_texture) 
 			{
 				_isDisposeTexture = !_isReady;
 				if (_isReady)
 				{
-					super.invalidateContent();
-					_atfTexture = null;
+					invalidateTexture();
 				}
 			}
-			else
-			{
-				super.invalidateContent();
-				_atfTexture = null;
-			}
+		}
+		
+		/** 仅释放显存  */
+		private function invalidateTexture():void
+		{
+			super.invalidateContent();
+			_texture = null;
+			_isReady = false;
+		}
+		
+		/** 释放Texture对象  */
+		private function disposeTexture():void
+		{
+			super.dispose();
+			_texture = null;
+			_isReady = false;
 		}
 		
 		override public function dispose():void
 		{
 			_isDispose = true;
+			_isDisposeTexture = true;
 			if (_isReady){
-				super.dispose();
-				_atfTexture = null;
+				disposeTexture();
 			}
 			_atfData = null;
 		}

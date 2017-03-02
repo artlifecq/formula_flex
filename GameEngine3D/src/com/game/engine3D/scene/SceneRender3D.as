@@ -1,11 +1,9 @@
 package com.game.engine3D.scene
 {
 	import com.game.engine3D.core.GameScene3D;
-
-	import flash.utils.getTimer;
-
-	import org.client.mainCore.utils.Tick;
-
+	
+	import away3d.tick.Tick;
+	
 	/**
 	 *
 	 * 3D场景渲染器
@@ -25,45 +23,42 @@ package com.game.engine3D.scene
 		 * 是否正在渲染
 		 */
 		private var _isRendering : Boolean = false;
-		private var _lastTime : uint = 0;
-
+		
 		public function SceneRender3D(scene : GameScene3D)
 		{
 			_scene = scene;
 		}
-
+		
 		/**
 		 * 开始渲染
 		 * @param $immediatelyDo 是否立即执行一次
 		 */
 		public function startRender($immediatelyDo : Boolean = false) : void
 		{
-			_lastTime = getTimer();
 			if ($immediatelyDo)
 			{
 				render();
 			}
 			if (!_isRendering)
 			{
-				Tick.addCallback(render);
+				Tick.instance.addCallBack(render);
 				_isRendering = true;
 			}
 		}
-
+		
 		/**
 		 * 停止渲染
 		 */
 		public function stopRender() : void
 		{
-			_lastTime = 0;
 			if (_isRendering)
 			{
-				Tick.removeCallback(render);
+				Tick.instance.removeCallBack(render);
 				//
 				_isRendering = false;
 			}
 		}
-
+		
 		/**
 		 * 是否正在渲染
 		 */
@@ -71,15 +66,13 @@ package com.game.engine3D.scene
 		{
 			return _isRendering;
 		}
-
+		
 		/**
 		 * @private
 		 * 渲染
 		 */
 		final private function render(gapTm : uint = 0) : void
 		{
-			gapTm = getTimer() - _lastTime;
-			_lastTime = getTimer();
 			//场景刷新
 			_scene.sceneRenderLayer.run(gapTm);
 		}

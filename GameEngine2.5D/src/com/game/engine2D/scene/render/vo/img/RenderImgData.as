@@ -35,7 +35,7 @@ package com.game.engine2D.scene.render.vo.img
 		 * 1,2,3方向直接拿5,6，7方向资源
 		 */
 		private static const RENDER_SHAP : int = 1;
-
+		
 		private static var renderID:uint = 0;
 		
 		public var id:uint = 0;
@@ -44,23 +44,23 @@ package com.game.engine2D.scene.render.vo.img
 		 * RenderUnitStatus
 		 */
 		private var _aps : RenderUnitStatus;
-
+		
 		/**
 		 * key: 角度
 		 * value: BitmapData
 		 */
 		private var _rotationDict : Dictionary;
-
+		
 		/**
 		 * 存放每一帧位图的反射class
 		 */
 		private var _sourceClassDic : Dictionary;
-
+		
 		/**
 		 * 存放每一帧位图的BitmapData数据
 		 */
 		private var _sourceBitmapDataDic : Dictionary;
-
+		
 		private var _renderType:int = RENDER_SHAP;
 		
 		public function RenderImgData()
@@ -123,7 +123,7 @@ package com.game.engine2D.scene.render.vo.img
 			}
 			return null;
 		}
-
+		
 		/**
 		 * 判断当前方向的图片是否需要翻转
 		 * 1，2，3 方向的图片可以由 7，6，5 水平翻转得到
@@ -135,7 +135,7 @@ package com.game.engine2D.scene.render.vo.img
 		{
 			return $angle > CharAngleType.ANGEL_0 && $angle < CharAngleType.ANGEL_180;
 		}
-
+		
 		/**
 		 * @private
 		 * 释放
@@ -192,7 +192,7 @@ package com.game.engine2D.scene.render.vo.img
 				}
 				_sourceClassDic = null;
 			}
-
+			
 			if (_rotationDict != null)
 			{
 				for (key in _rotationDict)
@@ -204,7 +204,7 @@ package com.game.engine2D.scene.render.vo.img
 				_rotationDict = null;
 			}
 		}
-
+		
 		
 		private var _textureSubSingle:ATFSubTexture;
 		private var _textureSingle:ITextureMaterial;
@@ -255,7 +255,7 @@ package com.game.engine2D.scene.render.vo.img
 				}
 			}
 		}
-
+		
 		/** atf资源集 */
 		public function initForATFStarlingDic(aps:RenderUnitStatus, _actionInfoDic:Dictionary, pack:TexturePack):void
 		{
@@ -287,6 +287,14 @@ package com.game.engine2D.scene.render.vo.img
 			var region:Rectangle = bitmapData.rect.clone();
 			_textureSingle = MaterialUtils.getSingleMaterialByBitmapData(bitmapData);
 			_textureSubSingle = new ATFSubTexture(_textureSingle,region, null, 0, 0,aps.fullSourchPath);
+		}
+		
+		public function setWriteDepthEnable(value:Boolean):void
+		{
+			if (_textureAtlas)
+			{
+				_textureAtlas.setWriteDepthEnable(value);
+			}
 		}
 	}
 }

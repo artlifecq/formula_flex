@@ -27,7 +27,6 @@ package com.client
 		{
 			GlobalConfig.radiusForEntity = 32;
 			GlobalConfig.use2DMap = true;
-			GlobalConfig.use25DMap = true;
 //			GlobalConfig.MAP_2D_CAMERA_ANGLE = 45;
 			GlobalConfig.mapCameraAngle = -40;
 			
@@ -64,7 +63,7 @@ package com.client
 		{
 			GuiTheme.RES_ROOT = ClientGlobal.baseDir + ClientGlobal.resURL;
 			GuiTheme.decodeURL = VersionUtils.getVersionPath;
-			GuiTheme.useWorkerLoadTextureBytes = true;
+//			GuiTheme.useWorkerLoadTextureBytes = true;
 			GuiTheme.useCompressedTexture = false; //ClientGlobal.uiCompressed;
 		}
 	}

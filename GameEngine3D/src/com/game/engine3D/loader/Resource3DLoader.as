@@ -1,9 +1,12 @@
 package com.game.engine3D.loader
 {
+	import com.game.engine3D.config.GlobalConfig;
+	
 	import flash.net.URLRequest;
 	import flash.utils.Dictionary;
-
+	
 	import away3d.audio.SoundBox;
+	import away3d.cameras.Camera3D;
 	import away3d.containers.ObjectContainer3D;
 	import away3d.core.base.SubMesh;
 	import away3d.entities.CompositeMesh;
@@ -23,11 +26,11 @@ package com.game.engine3D.loader
 	import away3d.materials.lightpickers.LightPickerBase;
 	import away3d.materials.methods.EffectMethodBase;
 	import away3d.materials.methods.RimLightMethod;
-
+	
 	import gs.TweenLite;
-
+	
 	import org.client.mainCore.ds.HashMap;
-
+	
 	/**
 	 * 3D资源加载器
 	 * @author L.L.M.Sunny
@@ -44,9 +47,8 @@ package com.game.engine3D.loader
 		private var _objMap : HashMap;
 		private var _elements : Vector.<ObjectContainer3D>;
 		private var _methods : Vector.<EffectMethodBase>;
-		private var _layerTypeByName : Dictionary;
-		private var _visibleByName : Dictionary;
 		private var _soundBox : SoundBox;
+		private var _camera : Camera3D;
 		private var _materialMap : Dictionary;
 		private var _materialLightPickerMap : Dictionary;
 		/** 灯光选择 **/
@@ -54,7 +56,7 @@ package com.game.engine3D.loader
 		/** 灯，包含顶灯 **/
 		private var _lights : Vector.<LightBase>;
 		public static var dabugDelayComplete : int = 0;
-
+		
 		public function Resource3DLoader()
 		{
 			super();
@@ -64,23 +66,22 @@ package com.game.engine3D.loader
 			_objMap = new HashMap();
 			_elements = new Vector.<ObjectContainer3D>();
 			_methods = new Vector.<EffectMethodBase>();
-			_layerTypeByName = new Dictionary(true);
-			_visibleByName = new Dictionary(true);
 			_lightPickerMap = new HashMap();
 			_lights = new Vector.<LightBase>();
 			_soundBox = null;
+			_camera = null;
 		}
-
+		
 		public function get isLoaded() : Boolean
 		{
 			return _isLoaded;
 		}
-
+		
 		public function get isAsyncLoaded() : Boolean
 		{
 			return _isAsyncLoaded;
 		}
-
+		
 		public function load(url : String) : void
 		{
 			if (!_loader)
@@ -89,21 +90,22 @@ package com.game.engine3D.loader
 				_isAsyncLoaded = false;
 				_url = url;
 				_loader = new AssetLoader();
-
+				
 				_loader.addEventListener(LoaderEvent.RESOURCE_COMPLETE, onResourceComplete);
 				_loader.addEventListener(AssetEvent.ASSET_COMPLETE, onAssetComplete);
 				_loader.addEventListener(LoaderEvent.ASYNC_TEXTURES_COMPLETE, onAsyncTexturesComplete);
 				_loader.addEventListener(LoaderEvent.LOAD_ERROR, onLoadError);
 				_loader.addEventListener(ParserEvent.PARSE_ERROR, onParseError);
 				_loader.load(new URLRequest(_url), null, null, new AWD2Parser());
+				trace(GlobalConfig.DEBUG_HEAD + " " + "加载资源：" + _url);
 			}
 		}
-
+		
 		public function get url() : String
 		{
 			return _url;
 		}
-
+		
 		private function onAssetComplete(e : AssetEvent) : void
 		{
 			if (e.type == AssetEvent.ASSET_COMPLETE)
@@ -118,14 +120,7 @@ package com.game.engine3D.loader
 						var mesh : Mesh = e.asset as Mesh; //CompositeMesh,SparticleMesh//
 						if (mesh)
 						{
-							if (!(mesh is CompositeMesh))
-							{
-								if (!(mesh is SparticleMesh))
-								{
-									_meshByName[mesh.name] = mesh;
-								}
-							}
-							/*if (mesh is CompositeMesh)
+							if (mesh is CompositeMesh)
 							{
 							}
 							else if (mesh is SparticleMesh)
@@ -134,7 +129,7 @@ package com.game.engine3D.loader
 							else
 							{
 								_meshByName[mesh.name] = mesh;
-							}*/
+							}
 							if (!mesh.parent)
 							{
 								_elements.push(mesh);
@@ -144,18 +139,18 @@ package com.game.engine3D.loader
 					case AssetType.ANIMATOR:
 						break;
 					case AssetType.MATERIAL:
-//					if (e.asset is MaterialBase)
-//					{
-//						var material : SinglePassMaterialBase = e.asset as SinglePassMaterialBase;
-//						if (material)
-//						{
-//							materials.push(material);
-//						}
-//						else
-//						{
-//							throw new Error("un-supported material!!!");
-//						}
-//					}
+						//					if (e.asset is MaterialBase)
+						//					{
+						//						var material : SinglePassMaterialBase = e.asset as SinglePassMaterialBase;
+						//						if (material)
+						//						{
+						//							materials.push(material);
+						//						}
+						//						else
+						//						{
+						//							throw new Error("un-supported material!!!");
+						//						}
+						//					}
 						break;
 					case AssetType.CONTAINER:
 					case AssetType.COMPOSITE_ANIMATOR_GROUP:
@@ -184,14 +179,17 @@ package com.game.engine3D.loader
 						addLight(obj as LightBase);
 						break;
 					case AssetType.SOUND_BOX:
-						_soundBox = SoundBox(e.asset);
+						_soundBox = SoundBox(obj);
+						break;
+					case AssetType.CAMERA:
+						_camera = Camera3D(obj);
 						break;
 					default:
 						break;
 				}
 			}
 		}
-
+		
 		private function onResourceComplete(e : Event) : void
 		{
 			if (dabugDelayComplete == 0)
@@ -199,21 +197,15 @@ package com.game.engine3D.loader
 			else
 				TweenLite.delayedCall(dabugDelayComplete * 0.001, completeHandler, [e]);
 		}
-
+		
 		private function onAsyncTexturesComplete(e : Event) : void
 		{
 			_isAsyncLoaded = true;
 			this.dispatchEvent(e);
 		}
-
+		
 		private function completeHandler(e : Event) : void
 		{
-			var len : int = _elements.length;
-			for (var index : int = 0; index < len; index++)
-			{
-				var element : ObjectContainer3D = _elements[index];
-				addLayerType(element);
-			}
 			for (var name : String in _meshByName)
 			{
 				var mesh : Mesh = _meshByName[name];
@@ -230,37 +222,21 @@ package com.game.engine3D.loader
 			_isLoaded = true;
 			this.dispatchEvent(e);
 		}
-
-		private function addLayerType(element : ObjectContainer3D) : void
-		{
-			if (element is Mesh)
-			{
-				var layerType : uint = (element as Mesh).layerType;
-				_layerTypeByName[element.name] = layerType;
-			}
-			_visibleByName[element.name] = element.visible;
-			var numChildren : int = element.numChildren;
-			for (var i : int = 0; i < numChildren; i++)
-			{
-				var child : ObjectContainer3D = element.getChildAt(i);
-				addLayerType(child);
-			}
-		}
-
+		
 		private function onParseError(e : ParserEvent) : void
 		{
-			trace("解析错误：" + _url);
+			trace(GlobalConfig.DEBUG_HEAD + " " + "解析错误：" + _url);
 			this.dispatchEvent(e);
 			unload();
 		}
-
+		
 		private function onLoadError(e : LoaderEvent) : void
 		{
-			trace("加载错误：" + _url);
+			trace(GlobalConfig.DEBUG_HEAD + " " + "加载错误：" + _url);
 			this.dispatchEvent(e);
 			unload();
 		}
-
+		
 		private function removeLoaderEvents() : void
 		{
 			if (_loader)
@@ -272,42 +248,32 @@ package com.game.engine3D.loader
 				_loader.removeEventListener(ParserEvent.PARSE_ERROR, onParseError);
 			}
 		}
-
+		
 		public function get elements() : Vector.<ObjectContainer3D>
 		{
 			return _elements;
 		}
-
+		
 		public function get methods() : Vector.<EffectMethodBase>
 		{
 			return _methods;
 		}
-
+		
 		public function get materialLightPickerMap() : Dictionary
 		{
 			return _materialLightPickerMap;
 		}
-
+		
 		public function get materialMap() : Dictionary
 		{
 			return _materialMap;
 		}
-
-		public function get layerTypeByName() : Dictionary
-		{
-			return _layerTypeByName;
-		}
-
-		public function get visibleByName() : Dictionary
-		{
-			return _visibleByName;
-		}
-
+		
 		private function addLightPicker(lightPicker : LightPickerBase) : void
 		{
 			_lightPickerMap.add(lightPicker.name, lightPicker);
 		}
-
+		
 		private function addLight(light : LightBase) : void
 		{
 			if (!light)
@@ -317,22 +283,27 @@ package com.game.engine3D.loader
 				_lights.push(light);
 			}
 		}
-
+		
 		public function get lightPickerMap() : HashMap
 		{
 			return _lightPickerMap;
 		}
-
+		
 		public function get lights() : Vector.<LightBase>
 		{
 			return _lights;
 		}
-
+		
 		public function get soundBox() : SoundBox
 		{
 			return _soundBox;
 		}
-
+		
+		public function get camera() : Camera3D
+		{
+			return _camera;
+		}
+		
 		public function unload() : void
 		{
 			_isLoaded = false;
@@ -345,7 +316,7 @@ package com.game.engine3D.loader
 				_loader = null;
 			}
 		}
-
+		
 		public function dispose() : void
 		{
 			if (_elements)
@@ -395,24 +366,6 @@ package com.game.engine3D.loader
 				}
 				_materialLightPickerMap = null;
 			}
-			if (_layerTypeByName)
-			{
-				for (name in _layerTypeByName)
-				{
-					_layerTypeByName[name] = null;
-					delete _layerTypeByName[name];
-				}
-				_layerTypeByName = null;
-			}
-			if (_visibleByName)
-			{
-				for (name in _visibleByName)
-				{
-					_visibleByName[name] = null;
-					delete _visibleByName[name];
-				}
-				_visibleByName = null;
-			}
 			if (_lightPickerMap)
 			{
 				var lightPickers : Array = _lightPickerMap.getValues();
@@ -437,6 +390,7 @@ package com.game.engine3D.loader
 				_lights = null;
 			}
 			_soundBox = null;
+			_camera = null;
 			unload();
 			if (dabugDelayComplete > 0)
 				TweenLite.killDelayedCallsTo(completeHandler);

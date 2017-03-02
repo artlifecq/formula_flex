@@ -7,7 +7,6 @@ package com.game.engine2D.scene.render
 	import com.game.engine2D.vo.PoolContainer;
 	import com.game.mainCore.libCore.pool.Pool;
 	
-	import flash.filters.BitmapFilter;
 	import flash.geom.ColorTransform;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
@@ -21,6 +20,10 @@ package com.game.engine2D.scene.render
 	 */
 	public class RenderSet extends BaseObj
 	{
+		public function RenderSet()
+		{
+			super(null);
+		}
 		//显示和更新控制*********************************************************************************************************
 		/**
 		 * 是否在可视范围内 
@@ -44,7 +47,7 @@ package com.game.engine2D.scene.render
 				}
 			}
 		}
-		 
+		
 		/**
 		 * 是否在可视范围内 
 		 * @param value
@@ -138,7 +141,7 @@ package com.game.engine2D.scene.render
 				_rotation = value;
 				if(_graphicDis)
 				{
-					_graphicDis.rotationY = value;
+					_graphicDis.rotationZ = -value;
 				}
 				smooth = (value != 0);
 				updateNow = true;
@@ -286,69 +289,6 @@ package com.game.engine2D.scene.render
 		 */
 		private var _renderUnitList:Vector.<RenderUnit> = new Vector.<RenderUnit>;
 		//-------------------------------------------------------------------------------------------------------------
-		/**应用滤镜数组*/
-		private const _bitmapFilters:Array = [];
-		/**应用滤镜数组*/
-		public function get bitmapFilters():Array{return _bitmapFilters};
-		
-		/**添加滤镜*/
-		public function addFilter($bf:BitmapFilter):void
-		{
-			if($bf)
-			{
-				for each(var ru:RenderUnit in _renderUnitList)
-				{
-					var index:int = _bitmapFilters.indexOf($bf);
-					if(index != -1)
-					{
-						_bitmapFilters.splice(index,1);
-					}
-					_bitmapFilters.push($bf);
-					if(ru && ru.usable)
-					{
-						ru.addFilter($bf);
-					}
-				}
-			}
-		}
-		
-		/**移除滤镜*/
-		public function removeFilter($bf:BitmapFilter):void
-		{
-			for each(var ru:RenderUnit in _renderUnitList)
-			{
-				var index:int = _bitmapFilters.indexOf($bf);
-				if(index!=-1)
-				{
-					_bitmapFilters.splice(index,1);
-				}
-				if(ru && ru.usable)
-				{
-					ru.removeFilter($bf);
-				}
-			}
-		}
-		
-		/**清除所有滤镜*/
-		public function removeAllFilters():void
-		{
-			_bitmapFilters.length = 0;
-			/*if(_graphicDis)
-			{
-				_graphicDis.filter = null;
-			}*/
-			var ap:RenderUnit;
-			var len:int = _renderUnitList.length;
-			while(len-->0)
-			{
-				ap = _renderUnitList[len];
-				if(ap)
-				{
-					ap.removeAllFilters();
-				}
-			}
-		}
-		
 		/*** 设置阴影偏移量x */	
 		public function set shadowOffsetX(value:Number):void
 		{
@@ -393,43 +333,10 @@ package com.game.engine2D.scene.render
 			}
 		}
 		
-		//鼠标感应区*********************************************************************************************************
-//		private var _mouseRect:Rectangle;
-		/**
-		 * @private
-		 * 扩展鼠标感应区
-		 */	
-//		internal function unionMouseRect($rect:Rectangle):void
-//		{
-//			if(mouseRect!=null)
-//			{
-//				mouseRect = mouseRect.union($rect);
-//			}
-//			else
-//			{
-//				mouseRect = $rect.clone();
-//			}
-
-//			graphicSp.graphics.clear();
-//			graphicSp.graphics.lineStyle(1,0xff0000);
-//			graphicSp.graphics.drawRect(0,0,mouseRect.width,mouseRect.height);
-//			graphicSp.graphics.endFill();
-//			
-//			DisplayObjectContainer(_graphicDis).addChild(graphicSp);
-//			graphicSp.x = mouseRect.x;
-//			graphicSp.y = mouseRect.y;
-//		}
-		
-		public function RenderSet()
-		{
-			super(null);
-		}
-		
 		override public function reSet($parameters:Array):void
 		{
 			super.reSet(null);
 			mouseEnabled = true;
-			//
 			if(!_graphicDis)
 			{
 				_graphicDis = PoolContainer.create();
@@ -455,9 +362,12 @@ package com.game.engine2D.scene.render
 		
 		public static function recycle($av:RenderSet):void
 		{
-			_cnt--;
-			//利用池回收
-			_pool.disposeObj($av);
+			if ($av)
+			{
+				_cnt--;
+				//利用池回收
+				_pool.disposeObj($av);
+			}
 		}
 		
 		public static function get cnt():int
@@ -476,12 +386,13 @@ package com.game.engine2D.scene.render
 			x = y = 0;
 			offsetX = offsetY = 0;
 			scaleX = scaleY = 1;
+			rotation = 0;
+			alpha = 1;
 			
 			_needRender = true;
 			_enableShadow = false;
 			_isDrawShadow = false;
 			_isInViewDistance = false;
-			removeAllFilters();
 			//回收所有换装
 			removeAllRenderUnits();
 			
@@ -490,10 +401,9 @@ package com.game.engine2D.scene.render
 			_renderUnitList.length = 0;
 			
 			_parent = null;
-
-			alpha = 1;
 			
-			PoolContainer.recycle(_graphicDis as PoolContainer);
+			if (_graphicDis)
+				PoolContainer.recycle(_graphicDis as PoolContainer);
 			_graphicDis = null;
 			super.dispose();
 		}
@@ -692,6 +602,9 @@ package com.game.engine2D.scene.render
 			ap.finalShowX = this.finalShowX;
 			ap.finalShowY = this.finalShowY;
 			ap.isMainChar = isMainChar;
+			ap.depthEnable = this.depthEnable;
+			ap.layerType = this.layerType;
+			ap.renderSet = this;
 			////////////////////////////////////
 			if($apd.playCompleteAutoRecycle)
 			{
@@ -699,8 +612,6 @@ package com.game.engine2D.scene.render
 			}
 			//添加进数组
 			_renderUnitList.push(ap); 
-			//需要排序
-			_needSort = true;
 			return ap;
 		}
 		
@@ -722,12 +633,10 @@ package com.game.engine2D.scene.render
 				var index:int = _renderUnitList.indexOf($renderUnit);
 				if(index != -1)
 				{
-//					needSort = true;
 					//从数组中移除
 					_renderUnitList.splice(index,1);
 					//执行remove回调,回收renderUnit
 					RenderUnit.recycle($renderUnit);
-//					$renderUnit.dispose();
 					$renderUnit = null;
 				}
 			}
@@ -751,13 +660,10 @@ package com.game.engine2D.scene.render
 					var index:int = _renderUnitList.indexOf(ap);
 					if(index != -1)
 					{
-//						needSort = true;
-						//从数组中移除
 						_renderUnitList.splice(index,1);
 					}
 					//执行remove回调,回收renderUnit
 					RenderUnit.recycle(ap);
-//					ap.dispose();
 					ap = null;
 					break;//注意此处break
 				}
@@ -781,12 +687,10 @@ package com.game.engine2D.scene.render
 				ap = _renderUnitList[len];
 				if(ap.type == $renderUnitType)
 				{
-//					needSort = true;
 					//从数组中移除
 					_renderUnitList.splice(len,1);
 					//执行remove回调,回收renderUnit
 					RenderUnit.recycle(ap);
-//					ap.dispose();
 					ap = null;
 				}
 			}
@@ -804,7 +708,6 @@ package com.game.engine2D.scene.render
 				ap = _renderUnitList.pop();
 				//执行remove回调,回收renderUnit
 				RenderUnit.recycle(ap);
-//				ap.dispose();
 				ap = null;
 			}
 		}
@@ -934,6 +837,18 @@ package com.game.engine2D.scene.render
 			}
 		}
 		
+		override public function set planarRenderLayer(value:uint):void
+		{
+			_planarRenderLayer = value;
+			var ap:RenderUnit;
+			var len:int = _renderUnitList.length;
+			while (len-- > 0)
+			{
+				ap = _renderUnitList[len];
+				ap.planarRenderLayer = value;
+			}
+		}
+		
 		override public function set isDrawShadow(value:Boolean):void
 		{
 			_isDrawShadow = value;
@@ -962,7 +877,6 @@ package com.game.engine2D.scene.render
 		override public function set depth(value:int):void
 		{
 			super.depth = value;
-			//执行隐藏
 			var ap:RenderUnit;
 			var len:int = _renderUnitList.length;
 			while (len-- > 0)
@@ -971,7 +885,19 @@ package com.game.engine2D.scene.render
 				ap.depth = value;
 			}
 		}
-	
+		
+		override public function set depthEnable(value:Boolean):void
+		{
+			super.depthEnable = value;
+			var ap:RenderUnit;
+			var len:int = _renderUnitList.length;
+			while (len-- > 0)
+			{
+				ap = _renderUnitList[len];
+				ap.depthEnable = value;
+			}
+		}
+		
 		//运行相关
 		//-----------------------------------------------------------------------------------------------------------
 		/**
@@ -998,17 +924,9 @@ package com.game.engine2D.scene.render
 		 */	
 		override final public function run(gmTime:uint):void
 		{
-			//深度排序
-			if(_needSort)
-			{
-				//_renderUnitList.sort(depthSort);
-				_needSort = false;
-			}
-			//var numChild:int = _graphicDis.numChildren;
 			//运行逻辑
 			var ap:RenderUnit;
 			var len:int = _renderUnitList.length;
-			//var shadowApList:Vector.<RenderUnit> = new Vector.<RenderUnit>();
 			while (len-->0)
 			{
 				ap = _renderUnitList[len];
@@ -1016,19 +934,7 @@ package com.game.engine2D.scene.render
 				{
 					if (ap.visible)
 					{
-						//ap.depthIndex = --numChild;
-						//运行逻辑
 						ap.run(gmTime);
-						//--------------------------------------------------------
-						if(ap.depthHasChg)
-						{
-							_needSort = true;
-							ap.depthHasChg = false;
-						}
-						/*if(ap.enableShadow && ap.isDrawShadow)
-						{
-							shadowApList.push(ap);
-						}*/
 					}
 				}
 				else
@@ -1036,31 +942,6 @@ package com.game.engine2D.scene.render
 					removeRenderUnit(ap);
 				}
 			}
-			//
-			/*len = shadowApList.length;
-			for (var i:uint=0;i<len;i++)
-			{
-				ap = shadowApList[len-i-1];
-				ap.shadowDepthIndex = i;
-			}*/
-		}
-		
-		protected var _needSort:Boolean = true;
-		private function depthSort(apA:RenderUnit,apB:RenderUnit):int
-		{
-			if(apA.depth > apB.depth)
-			{
-				return 1;
-			}
-			if(apA.depth < apB.depth)
-			{
-				return -1;
-			}
-			if(apA.id > apB.id)
-			{
-				return 1;
-			}
-			return 0;
 		}
 		
 		/**

@@ -1,5 +1,7 @@
 package com.rpgGame.app.scene
 {
+	import com.game.engine3D.core.poolObject.IInstancePoolClass;
+	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.mainCore.libCore.pool.IPoolClass;
 	import com.game.mainCore.libCore.pool.Pool;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
@@ -32,9 +34,9 @@ package com.rpgGame.app.scene
 	 * 创建时间：2015-11-5 下午2:05:15
 	 *
 	 */
-	public class BuffSet implements IPoolClass
+	public class BuffSet implements IInstancePoolClass
 	{
-		private static var buffSetPool : Pool = new Pool("BuffSet", 300);
+		private static var buffSetPool : InstancePool = new InstancePool("BuffSet", 300);
 		
 		/**
 		 * 生成一个BuffSet
@@ -44,6 +46,17 @@ package com.rpgGame.app.scene
 			//利用池生成BuffSet
 			return buffSetPool.createObj(BuffSet, role) as BuffSet;
 		}
+		
+		public function instanceDestroy():void
+		{
+			dispose();
+		}
+		
+		public function instanceDispose():void
+		{
+//			dispose();
+		}
+		
 		
 		/**
 		 * @private

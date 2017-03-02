@@ -3,7 +3,7 @@ package com.rpgGame.app.fight.spell
 	import com.game.engine3D.scene.render.RenderSet3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.IRenderAnimator;
-	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -60,10 +60,10 @@ package com.rpgGame.app.fight.spell
 			if (animatData)
 			{
 				var effectRu : RenderUnit3D;
-				var rud : RenderParamData;
+				var rud : RenderParamData3D;
 				if (animatData.role_res)
 				{
-					rud = new RenderParamData(RenderUnitID.KNIFE_LIGHT, RenderUnitType.KNIFE_LIGHT, ClientConfig.getEffect(animatData.role_res));
+					rud = new RenderParamData3D(RenderUnitID.KNIFE_LIGHT, RenderUnitType.KNIFE_LIGHT, ClientConfig.getEffect(animatData.role_res));
 					rud.clearSameType = true;
 					
 					if (animatData.bind_bone)
@@ -78,7 +78,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.rotationY = 0;
 					effectRu.completeWhenInvisible = true;
 					effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, atkor.avatar);
-					effectRu.play(0);
+					effectRu.play(1);
 				}
 				else if (animatData.scene_res)
 				{
@@ -90,7 +90,7 @@ package com.rpgGame.app.fight.spell
 					if (!destPosition)
 						destPosition = atkor.position;
 					
-					rud = new RenderParamData(knifeLightObjID, SceneCharType.KNIFE_LIGHT_EFFECT, ClientConfig.getEffect(animatData.scene_res));
+					rud = new RenderParamData3D(knifeLightObjID, SceneCharType.KNIFE_LIGHT_EFFECT, ClientConfig.getEffect(animatData.scene_res));
 					
 					effectRu = RenderUnit3D.create(rud,true);
 					effectRu.allowCameraAnimator = atkor.isMainChar;
@@ -102,7 +102,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu);
 					effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
-					effectRu.play(0);
+					effectRu.play(1);
 				}
 				knifeLightObjID++;
 			}
@@ -127,10 +127,10 @@ package com.rpgGame.app.fight.spell
 			if (animatData)
 			{
 				var effectRu : RenderUnit3D;
-				var rud : RenderParamData;
+				var rud : RenderParamData3D;
 				if (animatData.role_res)
 				{
-					rud = new RenderParamData(RenderUnitID.SPELL_SELF_EFFECT, RenderUnitType.SPELL_SELF_EFFECT, ClientConfig.getEffect(animatData.role_res));
+					rud = new RenderParamData3D(RenderUnitID.SPELL_SELF_EFFECT, RenderUnitType.SPELL_SELF_EFFECT, ClientConfig.getEffect(animatData.role_res));
 					rud.clearSameType = true;
 					
 					if (animatData.bind_bone)
@@ -145,7 +145,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.rotationY = 0;
 					effectRu.completeWhenInvisible = true;
 					effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, atkor.avatar);
-					effectRu.play(0);
+					effectRu.play(1);
 				}
 				else if (animatData.scene_res)
 				{
@@ -157,7 +157,7 @@ package com.rpgGame.app.fight.spell
 					if (!destPosition)
 						destPosition = atkor.position;
 					
-					rud = new RenderParamData(selfEffectObjID, SceneCharType.SCENE_SELF_EFFECT, ClientConfig.getEffect(animatData.scene_res));
+					rud = new RenderParamData3D(selfEffectObjID, SceneCharType.SCENE_SELF_EFFECT, ClientConfig.getEffect(animatData.scene_res));
 					
 					effectRu = RenderUnit3D.create(rud,true);
 					effectRu.allowCameraAnimator = atkor.isMainChar;
@@ -169,7 +169,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu);
 					effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
-					effectRu.play(0);
+					effectRu.play(1);
 				}
 				selfEffectObjID++;
 			}
@@ -187,10 +187,10 @@ package com.rpgGame.app.fight.spell
 			if (animatData)
 			{
 				var effectRu : RenderUnit3D;
-				var rud : RenderParamData;
+				var rud : RenderParamData3D;
 				if (animatData.role_res)
 				{
-					rud = new RenderParamData(RenderUnitID.SPELL_SELF_EFFECT, RenderUnitType.SPELL_SELF_EFFECT, ClientConfig.getEffect(animatData.role_res));
+					rud = new RenderParamData3D(RenderUnitID.SPELL_SELF_EFFECT, RenderUnitType.SPELL_SELF_EFFECT, ClientConfig.getEffect(animatData.role_res));
 					rud.clearSameType = true;
 					
 					if (animatData.bind_bone)
@@ -208,7 +208,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.rotationY = 0;
 					effectRu.completeWhenInvisible = true;
 					effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, role.avatar);
-					effectRu.play(0);
+					effectRu.play(1);
 				}
 				else if (animatData.scene_res)
 				{
@@ -220,7 +220,7 @@ package com.rpgGame.app.fight.spell
 					if (!destPosition)
 						destPosition = role.position;
 					
-					rud = new RenderParamData(selfEffectObjID, SceneCharType.SCENE_SELF_EFFECT, ClientConfig.getEffect(animatData.scene_res));
+					rud = new RenderParamData3D(selfEffectObjID, SceneCharType.SCENE_SELF_EFFECT, ClientConfig.getEffect(animatData.scene_res));
 					
 					effectRu = RenderUnit3D.create(rud,true);
 					effectRu.allowCameraAnimator = role.isMainChar;
@@ -235,7 +235,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu);
 					effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
-					effectRu.play(0);
+					effectRu.play(1);
 				}
 				selfEffectObjID++;
 			}
@@ -263,7 +263,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!offset)
 					offset = new Vector3D();
-				var rud : RenderParamData = new RenderParamData(renderId, renderType, ClientConfig.getEffect(effectRes));
+				var rud : RenderParamData3D = new RenderParamData3D(renderId, renderType, ClientConfig.getEffect(effectRes));
 				var effectRu : RenderUnit3D;
 				if (bindBone)
 					effectRu = target.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, bindBone, rud);
@@ -278,7 +278,7 @@ package com.rpgGame.app.fight.spell
 				effectRu.setScale(sizeScale);
 				effectRu.rotationY = 0;
 				effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, target.avatar);
-				effectRu.play(0);
+				effectRu.play(1);
 			}
 		}
 		
@@ -303,12 +303,12 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!offset)
 					offset = new Vector3D();
-				var rud : RenderParamData = new RenderParamData(renderId, renderType, ClientConfig.getEffect(effectRes));
+				var rud : RenderParamData3D = new RenderParamData3D(renderId, renderType, ClientConfig.getEffect(effectRes));
 				var effectRu : RenderUnit3D;
 				if (bindBone)
 				{
 					var avatarInfo : AvatarInfo = (target.data as RoleData).avatarInfo;
-					var rpd_mount : RenderParamData = avatarInfo.rpd_mount;
+					var rpd_mount : RenderParamData3D = avatarInfo.rpd_mount;
 					if (rpd_mount)
 					{
 						effectRu = target.avatar.addRenderUnitToChild(RenderUnitType.MOUNT, RenderUnitID.MOUNT, bindBone, rud);
@@ -328,7 +328,7 @@ package com.rpgGame.app.fight.spell
 				effectRu.z = offset.z;
 				effectRu.rotationY = 0;
 				effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, target.avatar);
-				effectRu.play(0);
+				effectRu.play(1);
 			}
 		}
 		
@@ -352,10 +352,10 @@ package com.rpgGame.app.fight.spell
 			if (animatData)
 			{
 				var effectRu : RenderUnit3D;
-				var rud : RenderParamData;
+				var rud : RenderParamData3D;
 				if (animatData.role_res)
 				{
-					rud = new RenderParamData(hurtEffectObjID, RenderUnitType.HURT, ClientConfig.getEffect(animatData.role_res));
+					rud = new RenderParamData3D(hurtEffectObjID, RenderUnitType.HURT, ClientConfig.getEffect(animatData.role_res));
 					
 					if (animatData.bind_bone)
 						effectRu = targetRole.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, animatData.bind_bone, rud);
@@ -371,7 +371,7 @@ package com.rpgGame.app.fight.spell
 						effectRu.rotationY = 0;
 						effectRu.completeWhenInvisible = true;
 						effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, targetRole.avatar);
-						effectRu.play(0);
+						effectRu.play(1);
 					}
 				}
 				else if (animatData.scene_res)
@@ -384,7 +384,7 @@ package com.rpgGame.app.fight.spell
 					if (!destPosition)
 						destPosition = targetRole.position;
 					
-					rud = new RenderParamData(hurtEffectObjID, SceneCharType.SCENE_HURT_EFFECT, ClientConfig.getEffect(animatData.scene_res));
+					rud = new RenderParamData3D(hurtEffectObjID, SceneCharType.SCENE_HURT_EFFECT, ClientConfig.getEffect(animatData.scene_res));
 					
 					effectRu = RenderUnit3D.create(rud,true);
 					effectRu.allowCameraAnimator = targetRole.isMainChar || (info.atkor && info.atkor.usable && info.atkor.isMainChar);
@@ -396,7 +396,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu);
 					effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
-					effectRu.play(0);
+					effectRu.play(1);
 				}
 				hurtEffectObjID++;
 			}
@@ -422,7 +422,7 @@ package com.rpgGame.app.fight.spell
 			if (animatData)
 			{
 				var effectRu : RenderUnit3D;
-				var rud : RenderParamData;
+				var rud : RenderParamData3D;
 				var repeat : int = 1;
 				var lifecycle : int = 0;
 //				if (info.isTrapSpell)//如果该技能是陷进特效的话，就算出陷进特效的持续时间
@@ -435,7 +435,7 @@ package com.rpgGame.app.fight.spell
 //				}
 				if (animatData.scene_res)
 				{
-					rud = new RenderParamData(info.flySceneObjID, SceneCharType.SCENE_DEST_EFFECT, ClientConfig.getEffect(animatData.scene_res));
+					rud = new RenderParamData3D(info.flySceneObjID, SceneCharType.SCENE_DEST_EFFECT, ClientConfig.getEffect(animatData.scene_res));
 					
 					effectRu = RenderUnit3D.create(rud,true);
 					effectRu.allowCameraAnimator = (info.atkor && info.atkor.isMainChar);
@@ -463,7 +463,7 @@ package com.rpgGame.app.fight.spell
 					{
 						effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
 					}
-					effectRu.play(0);
+					effectRu.play(1);
 				}
 			}
 		}
@@ -616,7 +616,7 @@ package com.rpgGame.app.fight.spell
 												 effectQueue : Vector.<IRenderAnimator>, locusPoints : Vector.<AnimatorLocusPoint>) : void
 		{
 			var effectSet : RenderSet3D = RenderSet3D.create(SceneCharType.SCENE_FLY_SPELL/* + info.flySceneObjID*/, flySceneObjID,true);
-			var rud : RenderParamData = new RenderParamData(1, "effect", ClientConfig.getEffect(effectRes), effectRes);
+			var rud : RenderParamData3D = new RenderParamData3D(1, "effect", ClientConfig.getEffect(effectRes), effectRes);
 			
 			var effectRu : RenderUnit3D = effectSet.addRenderUnit(rud);
 			effectRu.allowCameraAnimator = (info.atkor && info.atkor.isMainChar);

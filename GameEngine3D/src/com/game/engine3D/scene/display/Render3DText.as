@@ -2,11 +2,11 @@ package com.game.engine3D.scene.display
 {
 	import com.game.engine3D.scene.render.RenderSet3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.utils.CallBackUtil;
 	import com.game.engine3D.vo.CallBackData;
 	import com.game.engine3D.vo.Render3DTextData;
-	import com.game.mainCore.libCore.pool.Pool;
+	import com.game.engine3D.core.poolObject.InstancePool;
 
 	import flash.utils.Dictionary;
 
@@ -22,7 +22,7 @@ package com.game.engine3D.scene.display
 		//---------------------------对象池---------------------------
 		private static var _cnt : int = 0;
 
-		private static var _pool : Pool = new Pool("Render3DText", 1000);
+		private static var _pool : InstancePool = new InstancePool("Render3DText", 1000);
 
 		/**
 		 * 生成一个RenderUnit
@@ -91,9 +91,9 @@ package com.game.engine3D.scene.display
 			CallBackUtil.removeCallBackData(_addedCallBackList, value);
 		}
 
-		override public function removeAllRenderUnits() : void
+		override public function removeAllRenderUnits(recycle : Boolean = true) : void
 		{
-			super.removeAllRenderUnits();
+			super.removeAllRenderUnits(recycle);
 			if (_textRenderUnits)
 			{
 				_textRenderUnits.length = 0;
@@ -111,7 +111,7 @@ package com.game.engine3D.scene.display
 				if (data.styleName == styleName)
 				{
 					var sourcePath : String = data.getStyleSourcePath(style);
-					var rud : RenderParamData = new RenderParamData(i + 1, type, sourcePath);
+					var rud : RenderParamData3D = new RenderParamData3D(i + 1, type, sourcePath);
 					var ru : RenderUnit3D = _textRenderUnits[i];
 					ru.setAddedCallBack(doAddUnit, data);
 					ru.setRenderParamData(rud);
@@ -163,7 +163,7 @@ package com.game.engine3D.scene.display
 				var data : Render3DTextData = _textDatas[i];
 				var style : String = _styleByName[data.styleName];
 				var sourcePath : String = data.getStyleSourcePath(style);
-				var rud : RenderParamData = new RenderParamData(i + 1, type, sourcePath);
+				var rud : RenderParamData3D = new RenderParamData3D(i + 1, type, sourcePath);
 				var ru : RenderUnit3D = addRenderUnit(rud);
 				ru.setAddedCallBack(doAddUnit, data);
 				_textRenderUnits.push(ru);

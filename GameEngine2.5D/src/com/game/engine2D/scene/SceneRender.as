@@ -7,10 +7,11 @@ package com.game.engine2D.scene
 	import flash.events.Event;
 	import flash.utils.getTimer;
 	
+	import away3d.tick.Tick;
+	
 	import gs.TweenLite;
 	
 	import org.client.mainCore.utils.FrameTimer;
-	import org.client.mainCore.utils.Tick;
 	
 	
 	/**
@@ -48,7 +49,7 @@ package com.game.engine2D.scene
 			}
 			if(!_isRendering)
 			{
-				Tick.addCallback(render);
+				Tick.instance.addCallBack(render);
 				_isRendering = true;
 				//
 				Stage3DLayerManager.stage.addEventListener(Event.ENTER_FRAME,onSceneRender);
@@ -61,7 +62,7 @@ package com.game.engine2D.scene
 		{
 			if(_isRendering)
 			{
-				Tick.removeCallback(render);
+				Tick.instance.removeCallBack(render);
 				//
 				Stage3DLayerManager.stage.removeEventListener(Event.ENTER_FRAME,onSceneRender);
 				//

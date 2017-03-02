@@ -61,7 +61,7 @@ package com.rpgGame.core.view.ui
 			}
 			else
 			{
-				EventManager.addEvent(type, listener, arg);
+				EventManager.addEvent(type, listener);
 			}
 		}
 		

@@ -125,9 +125,9 @@ package com.rpgGame.app.manager
 //
 //			HeadFaceManager.updateGuildName(char.headFace, info);
 //			//
-//			var apd : RenderParamData;
+//			var apd : RenderParamData3D;
 //			var ap : RenderUnit;
-//			apd = new RenderParamData(RenderUnitID.MAGIC_RING_FOOT, RenderUnitType.MAGIC_RING_FOOT, ClientConfig.getAvatarEffect(ClientPathConfig.AVATAR_SELECT_BLUE));
+//			apd = new RenderParamData3D(RenderUnitID.MAGIC_RING_FOOT, RenderUnitType.MAGIC_RING_FOOT, ClientConfig.getAvatarEffect(ClientPathConfig.AVATAR_SELECT_BLUE));
 //			ap = char.addRenderUnit(apd);
 //			ap.mouseEnabled = false;
 //			ap.depth = RenderUnitType.getDefaultDepth(RenderUnitType.MAGIC_RING_FOOT);

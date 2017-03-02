@@ -15,9 +15,23 @@ package com.game.engine2D.core
 			super(texture);
 		}
 		
-		public function get textureParsed():Boolean
+		public function get textureReady():Boolean
+		{
+			return true;
+		}
+		
+		public function uploadTexture():void
+		{
+		}
+		
+		public function get isTextureScale():Boolean
 		{
 			return false;
+		}
+		
+		public function get textureScale():Number
+		{
+			return 1.0;
 		}
 		
 		public function get height():int

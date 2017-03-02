@@ -1,7 +1,6 @@
 package com.game.engine2D.config
 {
 	import com.game.engine2D.utils.MaterialUtils;
-	import com.game.engine2D.vo.PoolMesh;
 	
 	import flash.display.BitmapData;
 	import flash.geom.Point;
@@ -10,7 +9,7 @@ package com.game.engine2D.config
 	
 	import starling.utils.MathUtil;
 	
-
+	
 	/**
 	 * 引擎主配置
 	 * @author Carver
@@ -45,7 +44,7 @@ package com.game.engine2D.config
 			_shadowTexture ||= MaterialUtils.getMaterialCompressAlpha(_shadowBmpData);
 			return _shadowTexture;
 		}
-
+		
 		public static function set shadowBmpData(value:BitmapData):void
 		{
 			if (_shadowBmpData)
@@ -66,18 +65,18 @@ package com.game.engine2D.config
 				_shadowTexture.dispose();
 			_shadowTexture = null;
 		}
-
+		
 		public static function get tanShadow():Number
 		{
 			return _tanShadow;
 		}
-
+		
 		/**影子旋转角度(竖直方向上与原图夹角)(取值范围(-90,90))*/
 		public static function get shadowAngle():Number
 		{
 			return _shadowAngle;
 		}
-
+		
 		public static function set shadowAngle(value:Number):void
 		{
 			_shadowAngle = value;
@@ -85,12 +84,15 @@ package com.game.engine2D.config
 		}
 		
 		public static var nowTime:int;
-
+		
 		/**解密函数*/
 		public static var decode:Function;
 		
 		/**版本控制函数*/
 		public static var version:Function;
+		
+		/**版本控制函数*/
+		public static var avatarFileVersion:Function;
 		
 		/**资源解析函数*/
 		public static var resParseFunc:Function;
@@ -109,7 +111,7 @@ package com.game.engine2D.config
 		 * @L.L.M.Sunny 2015-5-8 
 		 */		
 		public static var mapTileResParser:Class=null;
-
+		
 		/**影子高度系数(取值范围(0,1))*/
 		public static var shadowYScale:Number=0.7;
 		
@@ -132,14 +134,21 @@ package com.game.engine2D.config
 		public static var isShowDrawRect:Boolean = false;
 		public static var enableBlendMode:Boolean = true;
 		public static var useWorker:Boolean = false;
-		public static var avatarResExtension:String = ".zatf";
-		
+		//atf资源是否启用异步上传
+		public static var avatarAtfResAsync:Boolean = true;
+		//是否启用bpg资源动态缩小4倍显存
+		public static var avatarBpgResScale:Boolean = false;
+		//启用动态缩小显存与最大显存的差值(默认64M)
+		public static var avatarBpgResScaleMemory:int = 64000000;
+		//启用动态缩小显存倍数(2,4,8)
+		public static var avatarBpgResScaleValue:Number = 2.0;
 		//仅仅只有值为-1的时候，才不会使用摄像机缓动。默认为0，代表使用。
 		public static var cameraTween:int = -1;
+		//2d模型是否写入深度，启用遮挡效果
+		public static var avatarHighlightEnabled:Boolean = false;
 		
 		/** 而是否使用高刷新率来渲染，注意使用后会导致cpu升高 */
 		public static var heightFramRender:Boolean = false;
-		public static var MapZoneClass:Class = PoolMesh;
 		
 		public function GlobalConfig2D(){}
 		/**

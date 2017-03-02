@@ -1,6 +1,7 @@
 package com.game.engine3D.manager
 {
 	import com.game.engine3D.config.GlobalConfig;
+	import com.game.engine3D.controller.CameraController;
 	import com.game.engine3D.core.StarlingLayer;
 	
 	import flash.display.DisplayObjectContainer;
@@ -13,6 +14,8 @@ package com.game.engine3D.manager
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	import flash.system.Capabilities;
+	import flash.system.Security;
+	import flash.system.SecurityPanel;
 	
 	import away3d.arcane;
 	import away3d.cameras.lenses.OrthographicOffCenterLens;
@@ -21,7 +24,6 @@ package com.game.engine3D.manager
 	import away3d.core.managers.Stage3DManager;
 	import away3d.core.managers.Stage3DProxy;
 	import away3d.core.math.Matrix3DUtils;
-	import away3d.core.math.Plane3D;
 	import away3d.core.pick.PickingCollisionVO;
 	import away3d.core.pick.PickingType;
 	import away3d.core.pick.RaycastPicker;
@@ -73,6 +75,8 @@ package com.game.engine3D.manager
 		/** 安装完成 **/
 		private static var _setupCompleteFunc : Function;
 		private static var _setupCompleted : Boolean;
+		private static var _setupError : Function;
+		private static var _userDisabledError : Function;
 		/** 截获2D层鼠标事件 **/
 		private static var _view2DCaptureEventFunc : Function;
 		/**
@@ -82,8 +86,9 @@ package com.game.engine3D.manager
 		/** 3D场景父容器 **/
 		private static var _viewContainer : DisplayObjectContainer;
 		private static var _viewCount : int;
-		private static var _viewAntiAlias : int = 2;
-		private static var _screenAntiAlias : int = 2;
+		
+		private static var _viewAntiAlias : int = 0;
+		private static var _screenAntiAlias : int = 0;
 		private static var _errorChecking : Boolean = false;
 
 		/**
@@ -120,38 +125,79 @@ package com.game.engine3D.manager
 		 * @param starlingLayerCount
 		 * @param onStarlingEventCapture
 		 * @param useScreenView
+		 * @param forceSoftware
+		 * @param profile:要指定profile，需要设置Away.REQUEST_HIGHEST_PROFILE = false;Context3DProfile类的枚举;
 		 *
 		 */
-		public static function setup(stage : Stage, viewContainer : DisplayObjectContainer, setupComplete : Function, viewCount : int = 1, starlingLayerCount : int = 0, onStarlingEventCapture : Function = null, useScreenView : Boolean = true) : void
+		public static function setup(stage : Stage, viewContainer : DisplayObjectContainer, //
+									 setupComplete : Function, setupError : Function, userDisabledError : Function, //
+									 viewCount : int = 1, starlingLayerCount : int = 0, //
+									 onStarlingEventCapture : Function = null, useScreenView : Boolean = true, //
+									 profile : String = "baseline", forceSoftware : Boolean = false) : void
 		{
 			_stage = stage;
 			//将黄色焦点框隐藏掉
 			_stage.stageFocusRect = false;
 			_stage.scaleMode = StageScaleMode.NO_SCALE;
 			_stage.align = StageAlign.TOP_LEFT;
+			
 			_stage.quality = StageQuality.LOW;
 			_stage.frameRate = _frameRate;
 			_stage.focus = _stage;
-
+			
 			_viewContainer = viewContainer;
 			_setupCompleteFunc = setupComplete;
+			_setupError = setupError;
+			_userDisabledError = userDisabledError;
 			_viewCount = viewCount;
 			_view2DCaptureEventFunc = onStarlingEventCapture;
 			_starlingLayerCount = starlingLayerCount;
 			_useScreenView = useScreenView;
 			_renderable = false;
 			_setupCompleted = false;
-			_stage3DProxy = Stage3DManager.getInstance(stage).getFreeStage3DProxy();
-			_stage3DProxy.antiAlias = _screenAntiAlias;
-			_stage3DProxy.color = stage.color;
-			_stage3DProxy.addEventListener(Stage3DEvent.CONTEXT3D_CREATED, onContextCreated);
+			_stage3DProxy = Stage3DManager.getInstance(_stage).getFreeStage3DProxy(forceSoftware, profile);
+			if (_stage3DProxy)
+			{
+				_stage3DProxy.antiAlias = _screenAntiAlias;
+				_stage3DProxy.color = _stage.color;
+				_stage3DProxy.addEventListener(Stage3DEvent.CONTEXT3D_CREATED, onContextCreated);
+				_stage3DProxy.addEventListener(Stage3DEvent.CONTEXT3D_USER_DISABLED_ERROR, showSecurityPanel);
+				_stage3DProxy.addEventListener(Stage3DEvent.CONTEXT3D_UNKONW_ERROR, onContextError);
+			}
 		}
+		
+		private static function showSecurityPanel(e : Stage3DEvent) : void
+		{
+			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_USER_DISABLED_ERROR, showSecurityPanel);
+			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_UNKONW_ERROR, onContextError);
+			if (_userDisabledError != null)
+			{
+				_userDisabledError();
+			}
+			Security.showSettings(SecurityPanel.DISPLAY);
+		}
+		
+		/**
+		 * 创建失敗
+		 */
+		private static function onContextError(e : Stage3DEvent) : void
+		{
+			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_UNKONW_ERROR, onContextError);
+			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_USER_DISABLED_ERROR, showSecurityPanel);
+			if (_setupError != null)
+			{
+				_setupError();
+			}
+		}
+
 
 		/**
 		 * 创建成功
 		 */
 		private static function onContextCreated(e : Stage3DEvent) : void
 		{
+			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_USER_DISABLED_ERROR, showSecurityPanel);
+			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_UNKONW_ERROR, onContextError);
 			_views = new Vector.<View3D>();
 			for (var i : int = 0; i < _viewCount; i++)
 			{
@@ -174,7 +220,8 @@ package com.game.engine3D.manager
 			}
 			if (_starlingLayerCount > 0)
 			{
-				_starlingView2D = new Starling(StarlingLayer, _stage, _stage3DProxy, _stage3DProxy.viewPort, _stage3DProxy.stage3D);
+//				_starlingView2D = new Starling(StarlingLayer, _stage, _stage3DProxy, _stage3DProxy.viewPort, _stage3DProxy.stage3D);
+				_starlingView2D = new Starling(StarlingLayer, _stage, _stage3DProxy);
 				_starlingView2D.addEventListener(starling.events.Event.ROOT_CREATED, starlingViewCreated);
 				_starlingView2D.start();
 			}
@@ -199,11 +246,11 @@ package com.game.engine3D.manager
 				_screenLight.diffuse = 1;
 				_screenLight.color = 0xffffff;
 				_screenLight.specular = 1;
-				_screenLight.castsPlanarShadows = true;
-				_screenLight.castsShadows = false;
-				_screenLight.planarShadowAlpha = 0.3;
-				var plane:Plane3D = new Plane3D(0,Math.cos(GlobalConfig.mapCameraRadian),Math.sin(GlobalConfig.mapCameraRadian));
-				_screenLight.planarShadowPlane = plane;
+//				_screenLight.castsPlanarShadows = true;
+//				_screenLight.castsShadows = false;
+//				_screenLight.planarShadowAlpha = 1;
+//				var plane:Plane3D = new Plane3D(0,Math.cos(GlobalConfig.mapCameraRadian),Math.sin(GlobalConfig.mapCameraRadian));
+//				_screenLight.planarShadowPlane = plane;
 				_screenLightPicker = new StaticLightPicker([_screenLight]);
 				_screenView.scene.addChild(_screenLight);
 			}
@@ -216,17 +263,18 @@ package com.game.engine3D.manager
 
 		private static function starlingViewCreated(e : starling.events.Event) : void
 		{
+			_starlingView2D.removeEventListener(starling.events.Event.ROOT_CREATED, starlingViewCreated);
 			_starlingLayer = _starlingView2D.root as StarlingLayer;
 			_starlingLayer.initLayer(_starlingLayerCount);
 			stage3DCreated();
 		}
-
+		
 		private static function stage3DCreated() : void
 		{
 			if (_setupCompleted)
 				return;
 			_stage3DProxy.context3D.enableErrorChecking = _errorChecking;
-			_stage.addEventListener(flash.events.Event.RESIZE, handleScreenSize);
+			_stage.addEventListener(flash.events.Event.RESIZE, handleScreenSize, false, 1000);
 			_stage3DProxy.addEventListener(away3d.events.Event.ENTER_FRAME, rendering);
 			if (_screenView)
 				_screenView.visible = true;
@@ -234,6 +282,7 @@ package com.game.engine3D.manager
 				_setupCompleteFunc();
 			handleScreenSize(null);
 			_setupCompleted = true;
+			_renderable = true;
 		}
 
 		public static function get screenAntiAlias() : int
@@ -297,54 +346,53 @@ package com.game.engine3D.manager
 				return;
 			var width : Number = _viewWidth || _stage.stageWidth;
 			var height : Number = _viewHeight || _stage.stageHeight;
-			if (GlobalConfig.use2DMap)
-			{
-				if (width % 2 == 1)
-					width = width - 1;
-				if (height % 2 == 1)
-					height = height - 1;
-			}
+			
+			_stage3DProxy.hackViewSize(width, height);
+			var hackedWidth : Number = _stage3DProxy.width;
+			var hackedHeight : Number = _stage3DProxy.height;
+			
+			//防止最小化，stageWidth,stageHeight为0
+			if (width <= 1 || height <= 1)
+				return;
 			//设置坐标
 			_stage3DProxy.x = _viewX;
 			_stage3DProxy.y = _viewY;
-			_stage3DProxy.width = width;
-			_stage3DProxy.height = height;
 			for each (var view : View3D in _views)
 			{
 				view.x = _viewMarginLeft;
 				view.y = _viewMarginTop;
-				view.width = (width) - _viewMarginRight;
-				view.height = (height) - _viewMarginBottom;
+				view.width = width - _viewMarginRight;
+				view.height = height - _viewMarginBottom;
 			}
 			if (_starlingView2D)
 			{
-				_starlingView2D.stage.stageWidth = width;
-				_starlingView2D.stage.stageHeight = height
-				_starlingView2D.viewPort.width = _starlingView2D.stage.stageWidth;
-				_starlingView2D.viewPort.height = _starlingView2D.stage.stageHeight;
-				_starlingView2D.viewPort = _starlingView2D.viewPort;
+				_starlingView2D.stage.stageWidth = hackedWidth;
+				_starlingView2D.stage.stageHeight = hackedHeight;
+				_starlingView2D.viewPort.width = hackedWidth;
+				_starlingView2D.viewPort.height = hackedHeight;
+				_starlingView2D.updateViewPort(true);
 			}
-
+			
 			if (_screenView)
 			{
-				_screenView.width = (_screenViewWidth || _stage.stageWidth) - _screenViewMarginRight;
-				_screenView.height = (_screenViewHeight || _stage.stageHeight) - _screenViewMarginBottom;
+				_screenView.width = (_screenViewWidth || width) - _screenViewMarginRight;
+				_screenView.height = (_screenViewHeight || height) - _screenViewMarginBottom;
 				_screenView.x = _screenViewMarginLeft;
 				_screenView.y = _screenViewMarginTop;
-
+				
 				(_screenView.camera.lens as OrthographicOffCenterLens).maxX = _screenView.width;
 				(_screenView.camera.lens as OrthographicOffCenterLens).maxY = _screenView.height;
-
-//				_screenViewInternalScale = 10000 / _stage.stageHeight;
-//				var numChildren : int = _screenView.scene.numChildren;
-//				for (var i : int = 0; i < numChildren; i++)
-//				{
-//					var screenObj : ObjectContainer3D = _screenView.scene.getChildAt(i);
-//					if (screenObj is ScreenElement3D)
-//					{
-//						(screenObj as ScreenElement3D).internalScale = _screenViewInternalScale;
-//					}
-//				}
+				
+				//				_screenViewInternalScale = 10000 / _stage.stageHeight;
+				//				var numChildren : int = _screenView.scene.numChildren;
+				//				for (var i : int = 0; i < numChildren; i++)
+				//				{
+				//					var screenObj : ObjectContainer3D = _screenView.scene.getChildAt(i);
+				//					if (screenObj is ScreenElement3D)
+				//					{
+				//						(screenObj as ScreenElement3D).internalScale = _screenViewInternalScale;
+				//					}
+				//				}
 			}
 		}
 
@@ -386,7 +434,7 @@ package com.game.engine3D.manager
 			if (_starlingView2D)
 			{
 				_starlingView2D.nextFrame(false);
-				if (_starlingView2D.touchProcessor.capturedEvent || hitTestStarling(_stage.mouseX, _stage.mouseY))
+				if (_starlingView2D.touchProcessor.capturedEvent && !CameraController.lockedOnPlayerController.ispanning) //hitTestStarling(_stage.mouseX, _stage.mouseY)
 				{
 					_stage3DProxy.mouse3DManager.cleanQuenedEvents();
 					_stage3DProxy.mouse3DManager.enabled = false;
@@ -448,7 +496,11 @@ package com.game.engine3D.manager
 			var rayCastPicker : RaycastPicker = view.mousePicker as RaycastPicker;
 			if (rayCastPicker == null)
 				return null;
-			var pickPosition : Vector3D = rayCastPicker.getXZPlaneCollison(mouseX, mouseY, height, view);
+			var pickPosition : Vector3D = null;
+			if (GlobalConfig.use2DMap)
+				pickPosition = rayCastPicker.getXYPlaneCollison(mouseX, mouseY, height, view);
+			else
+				pickPosition = rayCastPicker.getXZPlaneCollison(mouseX, mouseY, height, view);
 			return pickPosition;
 		}
 
@@ -603,12 +655,17 @@ package com.game.engine3D.manager
 
 		public static function get isWindows() : Boolean
 		{
-			return Capabilities.os.indexOf("Windows") == 0;
+			return Capabilities.os.toLowerCase().indexOf("windows") != -1;
 		}
-
+		
 		public static function get isOpenGL() : Boolean
 		{
-			return driverInfo.indexOf("OpenGL") == 0;
+			return driverInfo.toLowerCase().indexOf("opengl") != -1;
+		}
+		
+		public static function get isStandardConstrained() : Boolean
+		{
+			return driverInfo.toLowerCase().indexOf("standard constrained") != -1;
 		}
 
 		public static function set frameRate(value : int) : void
@@ -624,5 +681,16 @@ package com.game.engine3D.manager
 		{
 			return _frameRate;
 		}
+		/** ---------------------------------编辑器使用代码------------------------- */
+		public static function set stage3DProxy(value : Stage3DProxy) : void
+		{
+			_stage3DProxy = value;
+		}
+		
+		public static function set stage(value : Stage) : void
+		{
+			_stage = value;
+		}
+		/** ---------------------------------编辑器使用代码------------------------- */
 	}
 }
