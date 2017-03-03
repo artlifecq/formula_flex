@@ -5,7 +5,6 @@ package com.rpgGame.app.manager.fight
 	import com.rpgGame.app.display2D.AttackFace;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.EnumHurtType;
 	
@@ -17,7 +16,9 @@ package com.rpgGame.app.manager.fight
 	import gs.TimelineLite;
 	import gs.TweenLite;
 	import gs.TweenMax;
+	import gs.easing.Back;
 	import gs.easing.Circ;
+	import gs.easing.Elastic;
 	import gs.easing.Linear;
 	
 	import starling.display.DisplayObject;
@@ -250,7 +251,7 @@ package com.rpgGame.app.manager.fight
 			}
 			if (showFace) //主角或主角所属角色受伤害/攻击...
 			{
-				var isLeftShow : Boolean = (atkor && hurter) ? (atkor.x - hurter.x >= 0) : false;
+				var isLeftShow : Boolean = (atkor && hurter) ? (atkor.x - hurter.x >= 0) : false;//攻击者在被攻击者的右侧
 				//是否正面效果，相对主角自己而言的   是主角还是场景其他SceneRole，因为主角同时受到攻击的时候，伤害数值同时出现，造成重叠，所以用队列飘字，避免重叠
 				if (isUsefulBmp)
 				{
@@ -258,7 +259,7 @@ package com.rpgGame.app.manager.fight
 				}
 				else
 				{
-					showAttackFace(hurter.boneNameContainer, typeRes, numberType, hurtAmount, null, null, tweenFun, from, end, scaleAgo, scaleLater, isLeftShow);
+					showAttackFace(hurter.attackFaceContainer, typeRes, numberType, hurtAmount, null, null, tweenFun, from, end, scaleAgo, scaleLater, isLeftShow);
 				}
 			}
 		}
@@ -284,7 +285,10 @@ package com.rpgGame.app.manager.fight
 					showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenUp);
 					return;
 				case EnumHurtType.SUBHP: //掉血
+					scaleAgo=1;
+					scaleLater=1;
 					numberColor=NUMBER_PC_HPSUB;
+					showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenUp);
 					break;
 				case EnumHurtType.ADDMP: //回蓝
 					numberColor = NUMBER_PC_MPREC;
@@ -331,7 +335,7 @@ package com.rpgGame.app.manager.fight
 			attackFace.y =-attackFace.height/2;
 			var timeLine : TimelineLite = new TimelineLite();
 			timeLine.insert(TweenLite.to(attackFace, 0.3, {ease: Linear.easeOut}));//缩放
-			timeLine.append(TweenLite.to(attackFace, 0.3, {y:attackFace.y-50,onComplete: onComplete, onCompleteParams: [attackFace], ease: Linear.easeIn}));//隐藏
+			timeLine.append(TweenLite.to(attackFace, 0.3, {y:attackFace.y-50,alpha:0,onComplete: onComplete, onCompleteParams: [attackFace], ease: Linear.easeIn}));//隐藏
 		}
 
 		/**
@@ -710,41 +714,31 @@ package com.rpgGame.app.manager.fight
 		{
 			attackFace.scaleX = attackFace.scaleY = $scaleAgo;
 			attackFace.alpha=0;
-			var $to:Point=new Point(0,0);
-			$from=new Point($to.x,$to.y);
-			$end=new Point($to.x,$to.y);
-			if(isLeftShow){//飘左边
-				$from.x=$to.x+getPianYi(attackFace.width);
-				$end.x=$to.x-getPianYi(attackFace.width);
+			$from=new Point(-attackFace.width/2,0);
+			$end=new Point();
+			var pian:int=attackFace.width;
+			pian=attackFace.width>200?200:attackFace.width;
+			if(isLeftShow){//往左侧飘
+				$end.x=-pian;
+				$end.y=-200;
 			}else{
-				$from.x=$to.x-getPianYi(attackFace.width);
-				$end.x=$to.x+getPianYi(attackFace.width);
+				$end.x=pian;
+				$end.y=-200;
 			}
 			attackFace.x=$from.x;
 			attackFace.y=$from.y;
 			
 			var timeLine : TimelineLite = new TimelineLite();
-			timeLine.insert(TweenLite.to(attackFace, 0.3, {x: $to.x, y:$to.y,alpha:1,scaleX: $scaleLater, scaleY: $scaleLater, ease: Linear.easeOut}));//大到小
-			timeLine.append(TweenLite.to(attackFace, 0.3, {x:$end.x,y:$end.y,alpha: 0,onComplete: onComplete, onCompleteParams: [attackFace], ease: Linear.easeIn}));//隐藏
+			//onUpdate:updateXY,onUpdateParams:[attackFace,$displayObjectContainer]}));//缩放
+			timeLine.insert(TweenMax.to(attackFace, 0.5, {alpha:1,scaleX:$scaleLater, scaleY:$scaleLater,ease:Elastic.easeInOut,onUpdate:updateCenter,onUpdateParams:[attackFace]}));//大到小
+			timeLine.append(TweenLite.to(attackFace,0.5,{}));
+			timeLine.append(TweenLite.to(attackFace, 1.2, {x:$end.x,y:$end.y,alpha: 0,onComplete: onComplete, onCompleteParams: [attackFace],ease:Back.easeOut}));//消失
 		}
 		
-		private static function getPianYi(value:int):int
+		private static function updateCenter(face:AttackFace):void
 		{
-			var result:int=value*Math.random();
-			result=result>100?100:result;
-			result=result<30?30:result;
-			return result;
-		}
-		
-		/**
-		 * 更新坐标，因为attackFace坐标依赖$displayObjectContainer
-		 * @param attackFace
-		 * @param $displayObjectContainer
-		 * 
-		 */
-		private static function updateChildIndex(attackFace : DisplayObject):void
-		{
-			attackFace.parent.addChild(attackFace);
+			face.x=-face.width/2;
+			face.y=0;
 		}
 
 		/**

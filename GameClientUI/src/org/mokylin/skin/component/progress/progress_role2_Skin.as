@@ -43,8 +43,10 @@ package org.mokylin.skin.component.progress
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			thumb = temp;
 			temp.name = "thumb";
+			temp.height = 10;
+			temp.left = 0;
+			temp.right = 0;
 			temp.styleName = "ui/component/progress/skin_role2/thumb.png";
-			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
@@ -54,8 +56,9 @@ package org.mokylin.skin.component.progress
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			track = temp;
 			temp.name = "track";
+			temp.left = 0;
+			temp.right = 0;
 			temp.styleName = "ui/component/progress/skin_role2/track.png";
-			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}

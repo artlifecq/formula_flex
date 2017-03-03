@@ -310,14 +310,17 @@ package com.rpgGame.appModule.role
 		private function updateBaseInfo():void
 		{
 			var info:HeroData=MainRoleManager.actorInfo;
-			var zoneInddex:int=info.name.indexOf("]")+1;
-			var zone:String=info.name.substr(0,zoneInddex);
-			var roleName:String=info.name.substr(zoneInddex);
-			_skin.txt_roleName.text=roleName;
-			_skin.txt_qu.text=zone;
+//			var zoneInddex:int=info.name.indexOf("]")+1;
+//			var zone:String=info.name.substr(0,zoneInddex);
+//			var roleName:String=info.name.substr(zoneInddex);
+			_skin.txt_roleName.text=info.name;
+//			_skin.txt_qu.text=zone;
 			_skin.txt_type.text=info.jobName;
 			_skin.txt_team.text=info.societyName;
 		
+			_skin.txt_roleName.width=_skin.txt_roleName.textWidth;
+			_skin.txt_roleName.x=(_skin.headMsg.width-_skin.txt_roleName.width)/2;
+			
 			updateTxt();
 		}
 		
@@ -326,6 +329,8 @@ package com.rpgGame.appModule.role
 		{
 			var info:HeroData=MainRoleManager.actorInfo;
 			_skin.txt_level.text="Lv"+info.totalStat.level;
+			
+			_skin.txt_loveName.visible=_skin.LoveIcon.visible=false;
 			
 			_skin.txt_loveName.text=info.loveName.length!=0?info.loveName:"无";
 			_skin.Num_zhandouli.number=info.totalStat.getStatValue(CharAttributeType.FIGHTING);

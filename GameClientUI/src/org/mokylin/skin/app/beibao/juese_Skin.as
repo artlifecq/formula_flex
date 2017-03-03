@@ -155,8 +155,6 @@ package org.mokylin.skin.app.beibao
 
 		public var txt_qixue:feathers.controls.Label;
 
-		public var txt_qu:feathers.controls.Label;
-
 		public var txt_roleName:feathers.controls.Label;
 
 		public var txt_shenfa:feathers.controls.Label;
@@ -179,6 +177,8 @@ package org.mokylin.skin.app.beibao
 
 		public var txt_zhiliaotishen:feathers.controls.Label;
 
+		public var ui_zhandou:feathers.controls.UIAsset;
+
 		public var values:feathers.controls.Group;
 
 		public var weapons:feathers.controls.Group;
@@ -194,7 +194,7 @@ package org.mokylin.skin.app.beibao
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__juese_Skin_UIAsset1_i(),__juese_Skin_UIAsset2_i(),headMsg_i(),weapons_i(),footMsg_i(),values_i(),packs_i()];
+			this.elementsContent = [__juese_Skin_UIAsset2_i(),__juese_Skin_UIAsset3_i(),headMsg_i(),weapons_i(),footMsg_i(),values_i(),packs_i()];
 			
 			states = {
 			};
@@ -211,7 +211,7 @@ package org.mokylin.skin.app.beibao
 			Icons = temp;
 			temp.name = "Icons";
 			temp.x = 12;
-			temp.y = 406;
+			temp.y = 405;
 			temp.elementsContent = [btn_getYuanbao_i(),btn_chushou_i(),btn_zhengli_i(),btn_cangku_i(),btn_shangdian_i(),btn_paimaihang_i()];
 			return temp;
 		}
@@ -222,8 +222,8 @@ package org.mokylin.skin.app.beibao
 			LoveIcon = temp;
 			temp.name = "LoveIcon";
 			temp.styleName = "ui/app/beibao/xin.png";
-			temp.x = 1;
-			temp.y = 42;
+			temp.x = 128;
+			temp.y = 20;
 			return temp;
 		}
 
@@ -232,13 +232,13 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
 			Num_zhandouli = temp;
 			temp.name = "Num_zhandouli";
-			temp.gap = -5;
+			temp.gap = -3;
 			temp.height = 25;
-			temp.label = "6521478";
+			temp.label = "652147898";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli;
 			temp.width = 123;
-			temp.x = 126;
-			temp.y = 0;
+			temp.x = 128;
+			temp.y = 1;
 			return temp;
 		}
 
@@ -311,10 +311,9 @@ package org.mokylin.skin.app.beibao
 		private function __juese_Skin_UIAsset10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/fengexian.png";
-			temp.width = 333;
-			temp.x = 5;
-			temp.y = 341;
+			temp.styleName = "ui/app/beibao/huawendi.png";
+			temp.x = 6;
+			temp.y = 404;
 			return temp;
 		}
 
@@ -324,23 +323,33 @@ package org.mokylin.skin.app.beibao
 			temp.styleName = "ui/app/beibao/fengexian.png";
 			temp.width = 333;
 			temp.x = 5;
-			temp.y = 399;
+			temp.y = 340;
 			return temp;
 		}
 
 		private function __juese_Skin_UIAsset12_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/neikuang.png";
-			temp.width = 128;
-			temp.x = 0;
-			temp.y = 0;
+			temp.styleName = "ui/app/beibao/fengexian.png";
+			temp.width = 333;
+			temp.x = 5;
+			temp.y = 398;
 			return temp;
 		}
 
 		private function __juese_Skin_UIAsset13_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/beibao/neikuang.png";
+			temp.width = 128;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __juese_Skin_UIAsset14_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 23;
 			temp.styleName = "ui/app/beibao/neikuang.png";
 			temp.width = 128;
@@ -349,7 +358,7 @@ package org.mokylin.skin.app.beibao
 			return temp;
 		}
 
-		private function __juese_Skin_UIAsset14_i():feathers.controls.UIAsset
+		private function __juese_Skin_UIAsset15_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/neikuang.png";
@@ -359,7 +368,7 @@ package org.mokylin.skin.app.beibao
 			return temp;
 		}
 
-		private function __juese_Skin_UIAsset15_i():feathers.controls.UIAsset
+		private function __juese_Skin_UIAsset16_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 23;
@@ -370,7 +379,7 @@ package org.mokylin.skin.app.beibao
 			return temp;
 		}
 
-		private function __juese_Skin_UIAsset1_i():feathers.controls.UIAsset
+		private function __juese_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/juese.png";
@@ -379,7 +388,7 @@ package org.mokylin.skin.app.beibao
 			return temp;
 		}
 
-		private function __juese_Skin_UIAsset2_i():feathers.controls.UIAsset
+		private function __juese_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/bg.png";
@@ -388,34 +397,34 @@ package org.mokylin.skin.app.beibao
 			return temp;
 		}
 
-		private function __juese_Skin_UIAsset3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/huawen_1.png";
-			temp.x = 0;
-			temp.y = 11;
-			return temp;
-		}
-
 		private function __juese_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/huawen_2.png";
-			temp.x = 261;
-			temp.y = 11;
+			temp.styleName = "ui/app/beibao/di.png";
+			temp.x = 104;
+			temp.y = -12;
 			return temp;
 		}
 
 		private function __juese_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/zhandouli.png";
-			temp.x = 80;
-			temp.y = 1;
+			temp.styleName = "ui/common/wenshi/huawen_1.png";
+			temp.x = -15;
+			temp.y = 12;
 			return temp;
 		}
 
 		private function __juese_Skin_UIAsset6_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/wenshi/huawen_2.png";
+			temp.x = 278;
+			temp.y = 12;
+			return temp;
+		}
+
+		private function __juese_Skin_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/shuxingkuang.png";
@@ -424,34 +433,25 @@ package org.mokylin.skin.app.beibao
 			return temp;
 		}
 
-		private function __juese_Skin_UIAsset7_i():feathers.controls.UIAsset
+		private function __juese_Skin_UIAsset8_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 449;
 			temp.styleName = "ui/common/background/neikuang_3.png";
 			temp.width = 343;
 			temp.x = 0;
-			temp.y = 1;
-			return temp;
-		}
-
-		private function __juese_Skin_UIAsset8_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 421;
-			temp.styleName = "ui/common/background/neikuang_2.png";
-			temp.width = 339;
-			temp.x = 2;
-			temp.y = 28;
+			temp.y = 0;
 			return temp;
 		}
 
 		private function __juese_Skin_UIAsset9_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/huawendi.png";
-			temp.x = 6;
-			temp.y = 405;
+			temp.height = 421;
+			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.width = 339;
+			temp.x = 2;
+			temp.y = 27;
 			return temp;
 		}
 
@@ -530,8 +530,8 @@ package org.mokylin.skin.app.beibao
 			footMsg = temp;
 			temp.name = "footMsg";
 			temp.x = 237;
-			temp.y = 485;
-			temp.elementsContent = [__juese_Skin_UIAsset3_i(),__juese_Skin_UIAsset4_i(),__juese_Skin_UIAsset5_i(),Num_zhandouli_i()];
+			temp.y = 488;
+			temp.elementsContent = [__juese_Skin_UIAsset4_i(),__juese_Skin_UIAsset5_i(),__juese_Skin_UIAsset6_i(),ui_zhandou_i(),Num_zhandouli_i()];
 			return temp;
 		}
 
@@ -540,9 +540,10 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			headMsg = temp;
 			temp.name = "headMsg";
-			temp.x = 233;
-			temp.y = 76;
-			temp.elementsContent = [txt_level_i(),txt_type_i(),LoveIcon_i(),txt_loveName_i(),txt_qu_i(),txt_roleName_i(),txt_team_i()];
+			temp.width = 361;
+			temp.x = 225;
+			temp.y = 91;
+			temp.elementsContent = [txt_level_i(),txt_type_i(),LoveIcon_i(),txt_loveName_i(),txt_roleName_i(),txt_team_i()];
 			return temp;
 		}
 
@@ -552,8 +553,8 @@ package org.mokylin.skin.app.beibao
 			icon_lijin = temp;
 			temp.name = "icon_lijin";
 			temp.styleName = "ui/common/tubiao/lijin_24.png";
-			temp.x = 294;
-			temp.y = 27;
+			temp.x = 296;
+			temp.y = 26;
 			return temp;
 		}
 
@@ -574,7 +575,7 @@ package org.mokylin.skin.app.beibao
 			icon_yingzibang = temp;
 			temp.name = "icon_yingzibang";
 			temp.styleName = "ui/common/tubiao/yinzib_24.png";
-			temp.x = 294;
+			temp.x = 298;
 			temp.y = 0;
 			return temp;
 		}
@@ -585,7 +586,7 @@ package org.mokylin.skin.app.beibao
 			icon_yuanbao = temp;
 			temp.name = "icon_yuanbao";
 			temp.styleName = "ui/common/tubiao/yuanbao_24.png";
-			temp.x = 131;
+			temp.x = 133;
 			temp.y = 27;
 			return temp;
 		}
@@ -847,11 +848,11 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.List = new feathers.controls.List();
 			lst_pack = temp;
 			temp.name = "lst_pack";
-			temp.height = 313;
+			temp.height = 318;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
-			temp.width = 330;
-			temp.x = 8;
-			temp.y = 32;
+			temp.width = 337;
+			temp.x = 4;
+			temp.y = 29;
 			temp.layout = __juese_Skin_TileLayout1_i();
 			return temp;
 		}
@@ -862,8 +863,8 @@ package org.mokylin.skin.app.beibao
 			money = temp;
 			temp.name = "money";
 			temp.x = 12;
-			temp.y = 349;
-			temp.elementsContent = [__juese_Skin_UIAsset12_i(),__juese_Skin_UIAsset13_i(),__juese_Skin_UIAsset14_i(),__juese_Skin_UIAsset15_i(),txt_yingzi_i(),txt_yuanbao_i(),txt_yingzibang_i(),txt_lijin_i(),icon_yingzi_i(),icon_yuanbao_i(),icon_yingzibang_i(),icon_lijin_i()];
+			temp.y = 347;
+			temp.elementsContent = [__juese_Skin_UIAsset13_i(),__juese_Skin_UIAsset14_i(),__juese_Skin_UIAsset15_i(),__juese_Skin_UIAsset16_i(),txt_yingzi_i(),txt_yuanbao_i(),txt_yingzibang_i(),txt_lijin_i(),icon_yingzi_i(),icon_yuanbao_i(),icon_yingzibang_i(),icon_lijin_i()];
 			return temp;
 		}
 
@@ -872,9 +873,9 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			packs = temp;
 			temp.name = "packs";
-			temp.x = 588;
-			temp.y = 74;
-			temp.elementsContent = [__juese_Skin_UIAsset7_i(),__juese_Skin_UIAsset8_i(),__juese_Skin_UIAsset9_i(),__juese_Skin_UIAsset10_i(),__juese_Skin_UIAsset11_i(),tab_pack_i(),money_i(),Icons_i(),lst_pack_i()];
+			temp.x = 590;
+			temp.y = 73;
+			temp.elementsContent = [__juese_Skin_UIAsset8_i(),__juese_Skin_UIAsset9_i(),__juese_Skin_UIAsset10_i(),__juese_Skin_UIAsset11_i(),__juese_Skin_UIAsset12_i(),tab_pack_i(),money_i(),Icons_i(),lst_pack_i()];
 			return temp;
 		}
 
@@ -896,10 +897,9 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
 			pro_zhenqi = temp;
 			temp.name = "pro_zhenqi";
-			temp.height = 11;
+			temp.height = 13;
 			temp.styleClass = org.mokylin.skin.component.progress.progress_role2_Skin;
 			temp.value = 0;
-			temp.width = 131;
 			temp.x = 48;
 			temp.y = 95;
 			return temp;
@@ -915,7 +915,7 @@ package org.mokylin.skin.app.beibao
 			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 			temp.width = 326;
 			temp.x = 9;
-			temp.y = 0;
+			temp.y = -1;
 			temp.layout = __juese_Skin_HorizontalLayout1_i();
 			temp.dataProvider = __juese_Skin_ArrayCollection1_i();
 			return temp;
@@ -1076,8 +1076,8 @@ package org.mokylin.skin.app.beibao
 			temp.height = 22;
 			temp.fontSize = 14;
 			temp.text = "Lv3";
-			temp.color = 0xABAD97;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0x8B8D7B;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
 			temp.y = 3;
 			return temp;
@@ -1109,7 +1109,7 @@ package org.mokylin.skin.app.beibao
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 116;
 			temp.x = 172;
-			temp.y = 28;
+			temp.y = 29;
 			return temp;
 		}
 
@@ -1119,11 +1119,11 @@ package org.mokylin.skin.app.beibao
 			txt_loveName = temp;
 			temp.name = "txt_loveName";
 			temp.letterSpacing = -1;
-			temp.text = "名字六个字";
+			temp.text = "配偶名字六字";
 			temp.color = 0xABAD97;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 15;
-			temp.y = 41;
+			temp.x = 145;
+			temp.y = 17;
 			return temp;
 		}
 
@@ -1187,33 +1187,19 @@ package org.mokylin.skin.app.beibao
 			return temp;
 		}
 
-		private function txt_qu_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			txt_qu = temp;
-			temp.name = "txt_qu";
-			temp.height = 24;
-			temp.letterSpacing = -1;
-			temp.text = "[1区]";
-			temp.color = 0xABAD97;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 43;
-			temp.x = 111;
-			temp.y = 4;
-			return temp;
-		}
-
 		private function txt_roleName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			txt_roleName = temp;
 			temp.name = "txt_roleName";
-			temp.bold = true;
-			temp.text = "名字共六个字";
-			temp.color = 0xE2C778;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 144;
-			temp.y = 4;
+			temp.bold = false;
+			temp.text = "[1区]名字共六个字";
+			temp.textAlign = "center";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 186;
+			temp.x = 84;
+			temp.y = 2;
 			return temp;
 		}
 
@@ -1254,10 +1240,10 @@ package org.mokylin.skin.app.beibao
 			temp.name = "txt_team";
 			temp.letterSpacing = -1;
 			temp.text = "[帮会名字]";
-			temp.color = 0xABAD97;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 149;
-			temp.y = 24;
+			temp.color = 0x5CB006;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 237;
+			temp.y = 2;
 			return temp;
 		}
 
@@ -1270,8 +1256,8 @@ package org.mokylin.skin.app.beibao
 			temp.text = "兵家";
 			temp.color = 0xABAD97;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 0;
-			temp.y = 20;
+			temp.x = 31;
+			temp.y = 3;
 			return temp;
 		}
 
@@ -1301,7 +1287,7 @@ package org.mokylin.skin.app.beibao
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 116;
 			temp.x = 2;
-			temp.y = 3;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -1316,7 +1302,7 @@ package org.mokylin.skin.app.beibao
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 116;
 			temp.x = 172;
-			temp.y = 3;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -1331,7 +1317,7 @@ package org.mokylin.skin.app.beibao
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 116;
 			temp.x = 2;
-			temp.y = 28;
+			temp.y = 29;
 			return temp;
 		}
 
@@ -1366,14 +1352,25 @@ package org.mokylin.skin.app.beibao
 			return temp;
 		}
 
+		private function ui_zhandou_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ui_zhandou = temp;
+			temp.name = "ui_zhandou";
+			temp.styleName = "ui/app/beibao/zhandouli.png";
+			temp.x = 76;
+			temp.y = 1;
+			return temp;
+		}
+
 		private function values_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			values = temp;
 			temp.name = "values";
-			temp.x = 27;
-			temp.y = 75;
-			temp.elementsContent = [__juese_Skin_UIAsset6_i(),__juese_Skin_Label1_i(),__juese_Skin_Label2_i(),txt_miaoshang_i(),__juese_Skin_Label3_i(),lbl_jingyan_i(),lbl_zhenqi_i(),pro_jinyan_i(),pro_zhenqi_i(),txt_jinyan_i(),txt_zhenqi_i(),__juese_Skin_Group1_i(),txt_i()];
+			temp.x = 25;
+			temp.y = 78;
+			temp.elementsContent = [__juese_Skin_UIAsset7_i(),__juese_Skin_Label1_i(),__juese_Skin_Label2_i(),txt_miaoshang_i(),__juese_Skin_Label3_i(),lbl_jingyan_i(),lbl_zhenqi_i(),pro_jinyan_i(),pro_zhenqi_i(),txt_jinyan_i(),txt_zhenqi_i(),__juese_Skin_Group1_i(),txt_i()];
 			return temp;
 		}
 
@@ -1384,8 +1381,8 @@ package org.mokylin.skin.app.beibao
 			temp.name = "weapons";
 			temp.height = 296;
 			temp.width = 344;
-			temp.x = 232;
-			temp.y = 159;
+			temp.x = 219;
+			temp.y = 149;
 			temp.elementsContent = [];
 			return temp;
 		}

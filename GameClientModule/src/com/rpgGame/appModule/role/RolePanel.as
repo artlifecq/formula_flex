@@ -57,6 +57,17 @@ package com.rpgGame.appModule.role
 			}
 		}
 		
+		/**
+		 * 当舞台尺寸变化后
+		 * @param sw 舞台宽
+		 * @param sh 舞台高
+		 *
+		 */
+		override protected function onStageResize(sw : int, sh : int) : void
+		{
+			super.onStageResize(sw,sh);
+		}
+		
 		override public function hide():void
 		{
 			super.hide();
