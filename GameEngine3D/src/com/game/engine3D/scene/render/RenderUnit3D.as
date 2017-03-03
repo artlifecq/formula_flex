@@ -1,14 +1,17 @@
 package com.game.engine3D.scene.render
 {
 	import com.game.engine3D.config.GlobalConfig;
+	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.core.poolObject.PoolContainer3D;
 	import com.game.engine3D.core.poolObject.PoolEntityContainer3D;
+	import com.game.engine3D.loader.GlobalTexture;
 	import com.game.engine3D.scene.render.vo.IRenderUnit3D;
+	import com.game.engine3D.scene.render.vo.MaterialPropertyData;
 	import com.game.engine3D.scene.render.vo.MethodData;
-	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.scene.render.vo.RenderResourceData;
 	import com.game.engine3D.scene.render.vo.RenderUnitChild;
-	import com.game.engine3D.scene.render.vo.RenderUnitData;
+	import com.game.engine3D.scene.render.vo.RenderUnitData3D;
 	import com.game.engine3D.scene.render.vo.RenderUnitSyncInfo;
 	import com.game.engine3D.scene.render.vo.VolumeBounds;
 	import com.game.engine3D.utils.CallBackUtil;
@@ -17,7 +20,6 @@ package com.game.engine3D.scene.render
 	import com.game.engine3D.vo.CallBackData;
 	import com.game.engine3D.vo.FadeAlphaRectData;
 	import com.game.engine3D.vo.SoftOutlineData;
-	import com.game.mainCore.libCore.pool.Pool;
 	
 	import flash.display.BitmapData;
 	import flash.display.BlendMode;
@@ -26,6 +28,7 @@ package com.game.engine3D.scene.render
 	import flash.geom.Matrix3D;
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
+	import flash.utils.Dictionary;
 	
 	import away3d.animators.AnimatorBase;
 	import away3d.animators.IAnimator;
@@ -49,7 +52,9 @@ package com.game.engine3D.scene.render
 	import away3d.materials.TextureMaterial;
 	import away3d.materials.lightpickers.LightPickerBase;
 	import away3d.materials.methods.EffectMethodBase;
+	import away3d.materials.methods.FogMethod;
 	import away3d.primitives.CubeGeometry;
+	import away3d.primitives.PlaneGeometry;
 	import away3d.utils.Cast;
 
 	/**
@@ -61,7 +66,7 @@ package com.game.engine3D.scene.render
 	 */
 	public class RenderUnit3D extends BaseObj3D implements IRenderUnit3D
 	{
-		private static var _pool : Pool = new Pool("RenderUnit3D", 2000);
+		private static var _pool : InstancePool = new InstancePool("RenderUnit3D", 2000);
 		private static var _cnt : int = 0;
 
 		/**
@@ -69,7 +74,7 @@ package com.game.engine3D.scene.render
 		 * @param $type
 		 * @param $value
 		 */
-		public static function create(rpd : RenderParamData,is25D:Boolean = false) : RenderUnit3D
+		public static function create(rpd : RenderParamData3D,is25D:Boolean = false) : RenderUnit3D
 		{
 			_cnt++;
 			//利用池生成RenderUnit
@@ -100,22 +105,26 @@ package com.game.engine3D.scene.render
 			MaterialBase.glassPassColor = color;
 		}
 
-		private static const pickDummyMaterial : TextureMaterial = new TextureMaterial(Cast.asyncTexture(new BitmapData(64, 64, true, 0), true, false, false));
-		pickDummyMaterial.blendMode = BlendMode.LAYER;
-
-		protected var _renderParamData : RenderParamData;
-		protected var _renderResourceData : RenderResourceData;
-		protected var _renderUnitData : RenderUnitData = null;
+		public static var VISIBLE_NEED_ASYNC_LOADED : Boolean = false;
 		
-		private var _nextRenderParamData : RenderParamData;
-		private var _nextRenderResourceData : RenderResourceData;
+		private static var pickDummyMaterial : TextureMaterial = null;
+		
+		private static var shadowGeometry : PlaneGeometry = null;
+		private static var shadowMaterial : TextureMaterial = null;
+
+		protected var _renderParamData : RenderParamData3D;
+		protected var _renderResourceData : RenderResourceData;
+		protected var _renderUnitData : RenderUnitData3D = null;
 		
 		protected var _drawElements : Vector.<ObjectContainer3D>;
 		protected var _animatorElements : Vector.<CompositeMesh>;
 		
 		private var _visibleNeedAsyncLoaded : Boolean;
 		
-		private var _invisibleList : Array;
+		private var _nextRenderParamData : RenderParamData3D;
+		private var _nextRenderResourceData : RenderResourceData;
+		private var _setVisibleMap : Dictionary;
+		
 		private var _isElementStatus : Boolean;
 		private var _hasSkeletonAnimator : Boolean;
 		private var _meshes : Vector.<Mesh>;
@@ -123,6 +132,8 @@ package com.game.engine3D.scene.render
 		private var _childObj3ds : Vector.<ObjectContainer3D>;
 		private var _castsShadows : Boolean;
 		private var _showBounds : Boolean;
+		
+		public var useFog : Boolean;
 
 		//各种回调，统一回传参数：	(ru:RenderUnit3D=null)
 		//===============================================================================
@@ -145,6 +156,9 @@ package com.game.engine3D.scene.render
 		 */
 		private var _currentStatus : String = null; //注意这个默认值要给空
 		private var _defalutStatus : String = null;
+		
+		private var _secondStatusGetter : Function = null;
+		
 		private var _animationTransition : IAnimationTransition;
 		/** 动作开始时间 **/
 		private var _playToTime : int = 0;
@@ -158,6 +172,10 @@ package com.game.engine3D.scene.render
 		 * 不可见即完成
 		 */
 		private var _completeNotInView : Boolean;
+		/**
+		 * 禁用加载资源逝去时间
+		 */
+		private var _disableLoadResPastTime : Boolean;
 		private var _animateSpeed : Number;
 		/** 玻璃效果 **/
 		private var _entityGlass : Boolean;
@@ -217,14 +235,39 @@ package com.game.engine3D.scene.render
 		private var _blendBias : Number;
 		private var _useIndependentColor : Boolean;
 		
+		private var _layerTypeByName : Dictionary;
+		private var _visibleByName : Dictionary;
+		private var _zOffsetByName : Dictionary;
+		private var _shareMaterialProperty : Vector.<MaterialPropertyData>;
+		
 		private var _is25D:Boolean = false;
+		
+		private var _useSimpleShadow : Boolean;
+		private var _simpleShadowTextureUrl : String;
+		private var _simpleShadowBaseScale : Number;
+		private var _simpleShadowMesh : Mesh;
 
-		public function RenderUnit3D(rpd : RenderParamData,is25D:Boolean=false)
+		public function RenderUnit3D(rpd : RenderParamData3D,is25D:Boolean=false)
 		{
 			super([rpd,is25D]);
 			_waitAddUnitList = new Vector.<RenderUnitChild>();
 			_currChildUnitList = new Vector.<RenderUnitChild>();
 			_methodDatas = new Vector.<MethodData>();
+		}
+		
+		override public function set zOffset(value : int) : void
+		{
+			if (zOffset == value)
+				return;
+			super.zOffset = value;
+			validateZoffset();
+		}
+		
+		override public function set y(value : Number) : void
+		{
+			super.y = value;
+			if (GlobalConfig.use2DMap)
+				this.zOffset = GlobalConfig.get2DMapDepth(value);
 		}
 		
 		override public function set alpha(value:Number):void
@@ -245,7 +288,7 @@ package com.game.engine3D.scene.render
 			super.blendMode = value;
 			if (_renderUnitData)
 			{
-				_renderUnitData.blendMode = value;
+//				_renderUnitData.blendMode = value;
 			}
 		}
 		
@@ -258,9 +301,9 @@ package com.game.engine3D.scene.render
 			return _currentStatus;
 		}
 
-		public function get defalutStatus() : String
+		public function set secondStatusGetter(value : Function) : void
 		{
-			return _defalutStatus;
+			_secondStatusGetter = value;
 		}
 
 		public function set defalutStatus(value : String) : void
@@ -664,6 +707,10 @@ package com.game.engine3D.scene.render
 			_meshes = _renderUnitData.meshes;
 			_rootObj3ds = _renderUnitData.rootObj3ds;
 			_childObj3ds = _renderUnitData.childObj3ds;
+			if (GlobalConfig.use2DMap)
+			{
+				initChildZoffset();
+			}
 			if (_animatorElements)
 			{
 				for each (var animatElement : CompositeMesh in _animatorElements)
@@ -702,7 +749,6 @@ package com.game.engine3D.scene.render
 			_renderUnitData.shareMaterials = _shareMaterials;
 			_renderUnitData.lightPicker = _useLight ? _lightPicker : null;
 
-			resetAllChildUnit();
 			validateIndependentAnimator();
 			//默认播放待机动作
 //			_animator = _renderUnitData.animator;
@@ -714,38 +760,122 @@ package com.game.engine3D.scene.render
 			validateAnimation();
 			registerEvent();
 			setMeshPickEnable(_mouseEnable);
+			validateMaterialProperty();
+			validateSimpleShadow();
 		}
-
-		private function resetAllChildUnit() : void
+		
+		private function onShadowTextureComplete(globalTexture : GlobalTexture) : void
+		{
+			GlobalTexture.removeTextureCallBack(_simpleShadowTextureUrl, onShadowTextureComplete);
+			if (!shadowGeometry)
+			{
+				shadowGeometry = new PlaneGeometry(100, 100, 1, 1, true, false, false, false, false);
+				shadowMaterial = new TextureMaterial(globalTexture.texture);
+				shadowMaterial.blendMode = BlendMode.LAYER;
+			}
+			if (!_simpleShadowMesh)
+			{
+				_simpleShadowMesh = new Mesh(shadowGeometry, shadowMaterial);
+				_simpleShadowMesh.mouseEnabled = false;
+			}
+			_simpleShadowMesh.y = 1;
+			_simpleShadowMesh.scaleX = _simpleShadowMesh.scaleZ = radius * _simpleShadowBaseScale;
+			_graphicDis.addChild(_simpleShadowMesh);
+		}
+		
+		public function addSimpleShadow(textureUrl : String, baseScale : Number = 0.01) : void
+		{
+			if (_useSimpleShadow)
+				return;
+			_useSimpleShadow = true;
+			_simpleShadowTextureUrl = textureUrl;
+			_simpleShadowBaseScale = baseScale;
+			validateSimpleShadow();
+		}
+		
+		public function removeSimpleShadow() : void
+		{
+			if (!_useSimpleShadow)
+				return;
+			_useSimpleShadow = false;
+			_simpleShadowTextureUrl = null;
+			_simpleShadowBaseScale = 0;
+			GlobalTexture.removeTextureCallBack(_simpleShadowTextureUrl, onShadowTextureComplete);
+			if (_simpleShadowMesh)
+			{
+				if (_simpleShadowMesh.parent)
+					_simpleShadowMesh.parent.removeChild(_simpleShadowMesh);
+			}
+		}
+		
+		private function validateSimpleShadow() : void
 		{
 			if (!_renderUnitData)
-				return;
-			for each (var childData : RenderUnitChild in _currChildUnitList)
 			{
-				if (childData.renderUnit && childData.renderUnit.usable)
-				{
-					if (childData.boneName || childData.compositeIndex > -1)
-					{
-						addUnitAtBone(childData.renderUnit, childData.boneName);
-					}
-					else if (childData.childName)
-					{
-						addUnitAtChild(childData.renderUnit, childData.childName);
-					}
-					else
-					{
-						addUnitChild(childData.renderUnit);
-					}
-				}
+				return;
+			}
+			if (_useSimpleShadow)
+			{
+				GlobalTexture.addTexture(_simpleShadowTextureUrl, onShadowTextureComplete);
 			}
 		}
 
+		private function initChildZoffset() : void
+		{
+			var obj : ObjectContainer3D;
+			
+			for each (obj in _rootObj3ds)
+			{
+				if (obj && !_zOffsetByName.hasOwnProperty(obj.name))
+				{
+					_zOffsetByName[obj.name] = obj.zOffset;
+				}
+			}
+			for each (obj in _childObj3ds)
+			{
+				if (obj && !_zOffsetByName.hasOwnProperty(obj.name))
+				{
+					_zOffsetByName[obj.name] = obj.zOffset;
+				}
+			}
+		}
+		
 		protected function registerEvent() : void
 		{
 		}
 
 		protected function unregisterEvent() : void
 		{
+		}
+		
+		private function validateMaterialProperty() : void
+		{
+			for each (var propertyData : MaterialPropertyData in _shareMaterialProperty)
+			{
+				_renderUnitData.setShareMaterial(propertyData);
+			}
+			_shareMaterialProperty.length = 0;
+		}
+		
+		private function validateZoffset() : void
+		{
+			var obj : ObjectContainer3D;
+			var value : int = this.zOffset + this.depth;
+			
+			for each (obj in _rootObj3ds)
+			{
+				if (obj && _zOffsetByName.hasOwnProperty(obj.name))
+				{
+					obj.zOffset = value + _zOffsetByName[obj.name];
+				}
+			}
+			for each (obj in _childObj3ds)
+			{
+				if (obj && _zOffsetByName.hasOwnProperty(obj.name))
+				{
+					obj.zOffset = value + _zOffsetByName[obj.name];
+				}
+			}
 		}
 
 		private function validateEffect() : void
@@ -788,20 +918,31 @@ package com.game.engine3D.scene.render
 			{
 				return;
 			}
-			var objVisible : Boolean;
-			var layerType : uint;
-			if (_invisibleList && _invisibleList.indexOf(mesh.name) > -1)
+			if (!_setVisibleMap || !_setVisibleMap.hasOwnProperty(mesh.name))
 			{
-				objVisible = false;
-				layerType = 0;
+				return;
+			}
+			if (!_layerTypeByName.hasOwnProperty(mesh.name))
+			{
+				_layerTypeByName[mesh.name] = mesh.layerType;
+			}
+			var layerType : uint;
+			if (_setVisibleMap[mesh.name])
+			{
+				layerType = getLayerType(mesh.name);
 			}
 			else
 			{
-				objVisible = _renderUnitData.getVisible(mesh.name);
-				layerType = _renderUnitData.getLayerType(mesh.name);
+				layerType = 0;
+			}
+			if (_visible)
+			{
+			}
+			else
+			{
+				layerType = 0;
 			}
 			mesh.layerType = layerType;
-			mesh.visible = _visible && objVisible;
 		}
 
 		private function validateMeshEffect(mesh : Mesh) : void
@@ -810,33 +951,56 @@ package com.game.engine3D.scene.render
 			{
 				return;
 			}
-			var objVisible : Boolean;
-			var layerType : uint;
-			if (_invisibleList && _invisibleList.indexOf(mesh.name) > -1)
+			if (!_layerTypeByName.hasOwnProperty(mesh.name))
 			{
-				objVisible = false;
-				layerType = 0;
+				_layerTypeByName[mesh.name] = mesh.layerType;
+			}
+			var layerType : uint = getLayerType(mesh.name);
+			layerType |= EntityLayerType.POST_GLASS | EntityLayerType.PLANAR_REFLECTION_LAYER;
+			if (_entityGlass)
+				layerType |= EntityLayerType.GLASS;
+			if (_entityPhantom)
+				layerType |= EntityLayerType.PHANTOM;
+			if (_softOutlineData)
+			{
+				layerType |= EntityLayerType.OUTLINE_GLOW_LAYER; //EntityLayerType.SOFT_OUTLINE_LAYER//
+				mesh.outlineColor = _softOutlineData.color;
+				mesh.outlineAlpha = _softOutlineData.alpha;
+				mesh.outlineSize = _softOutlineData.size;
+				mesh.outlineDrawLevel = _softOutlineData.outlineDrawLevel;
+			}
+			
+			if (_setVisibleMap && _setVisibleMap.hasOwnProperty(mesh.name))
+			{
+				if (!_setVisibleMap[mesh.name])
+				{
+					layerType = 0;
+				}
+			}
+			if (_visible && (!_isElementStatus || mesh.name == _currentStatus))
+			{
 			}
 			else
 			{
-				objVisible = _renderUnitData.getVisible(mesh.name);
-				layerType = _renderUnitData.getLayerType(mesh.name);
-				layerType |= EntityLayerType.POST_GLASS | EntityLayerType.PLANAR_REFLECTION_LAYER;
-				if (_entityGlass)
-					layerType |= EntityLayerType.GLASS;
-				if (_entityPhantom)
-					layerType |= EntityLayerType.PHANTOM;
-				if (_softOutlineData)
-				{
-					layerType |= EntityLayerType.OUTLINE_GLOW_LAYER; //EntityLayerType.SOFT_OUTLINE_LAYER//
-					mesh.outlineColor = _softOutlineData.color;
-					mesh.outlineAlpha = _softOutlineData.alpha;
-					mesh.outlineSize = _softOutlineData.size;
-					mesh.outlineDrawLevel = _softOutlineData.outlineDrawLevel;
-				}
+				layerType = 0;
 			}
 			mesh.layerType = layerType;
-			mesh.visible = _visible && objVisible && (!_isElementStatus || mesh.name == _currentStatus);
+		}
+		
+		/**
+		 * 由美术来确定是否显示出来，EntityLayerType.DEFAULT可能会被勾选掉 L.L.M.Sunny
+		 * @param name
+		 * @return
+		 *
+		 */
+		public function getLayerType(name : String) : uint
+		{
+			return uint(_layerTypeByName[name]);
+		}
+		
+		public function getVisible(name : String) : Boolean
+		{
+			return Boolean(_visibleByName[name]);
 		}
 
 		private function validateContainerEffect(obj : ObjectContainer3D) : void
@@ -845,16 +1009,31 @@ package com.game.engine3D.scene.render
 			{
 				return;
 			}
-			var objVisible : Boolean;
-			if (_invisibleList && _invisibleList.indexOf(obj.name) > -1)
+			if (!_setVisibleMap || !_setVisibleMap.hasOwnProperty(obj.name))
 			{
-				objVisible = false;
+				return;
+			}
+			if (!_visibleByName.hasOwnProperty(obj.name))
+			{
+				_visibleByName[obj.name] = obj.visible;
+			}
+			var objVisible : Boolean;
+			if (_setVisibleMap[obj.name])
+			{
+				objVisible = getVisible(obj.name);
 			}
 			else
 			{
-				objVisible = _renderUnitData.getVisible(obj.name);
+				objVisible = false;
 			}
-			obj.visible = _visible && objVisible && (!_isElementStatus || obj.name == _currentStatus);
+			if (_visible && (!_isElementStatus || obj.name == _currentStatus))
+			{
+			}
+			else
+			{
+				objVisible = false;
+			}
+			obj.visible = objVisible;
 		}
 
 		private function setMeshPickEnable(value : Boolean) : void
@@ -947,6 +1126,11 @@ package com.game.engine3D.scene.render
 			}
 			if (value)
 			{
+				if (!pickDummyMaterial)
+				{
+					pickDummyMaterial = new TextureMaterial(Cast.asyncTexture(new BitmapData(64, 64, true, 0), true, false, false));
+					pickDummyMaterial.blendMode = BlendMode.LAYER;
+				}
 				var bounds : VolumeBounds = getBounds();
 				var width : int = bounds.maxX - bounds.minX;
 				var height : int = bounds.maxY - bounds.minY;
@@ -1076,11 +1260,7 @@ package com.game.engine3D.scene.render
 			var offsetTime : Number = NaN;
 			if (_playing)
 			{
-				if (_currDurationTime > _totalDuration)
-				{
-					_currDurationTime = _totalDuration;
-				}
-				offsetTime = _currDurationTime;
+				offsetTime = int(_currDurationTime) % _totalDuration;
 			}
 			else if (_playToTime > -1)
 			{
@@ -1103,29 +1283,39 @@ package com.game.engine3D.scene.render
 					}
 					if (_isElementStatus)
 					{
-						if (_isRendering && _parent && _visible && _isInViewDistance)
+						meshElement.visible = _visible && (!_setVisibleMap.hasOwnProperty(meshElement.name) || _setVisibleMap[meshElement.name]) && meshElement.name == _currentStatus;
+						if (_isRendering && _visible && _isInViewDistance)
 						{
-							meshElement.visible = _visible && (!_invisibleList || _invisibleList.indexOf(meshElement.name) < 0) && meshElement.name == _currentStatus;
-							if (currAnimator)
+							if (meshElement.visible)
 							{
-								currAnimator.start(offsetTime);
-								if (_playing && meshElement.visible)
+								if (currAnimator)
 								{
-									CONFIG::GameEngine3D_Debug
+									currAnimator.start(offsetTime);
+									if (_playing)
 									{
-										if (_repeat != 0)
-										{
-											if (currAnimator.looping)
-												trace(GlobalConfig.DEBUG_HEAD + "   " + currAnimator.name + "   " + _renderParamData.sourcePath + "_应当设置为不循环[no loop]！");
-										}
-										else
-										{
-											if (!currAnimator.looping)
-												trace(GlobalConfig.DEBUG_HEAD + " "+ currAnimator.name + "   " + _renderParamData.sourcePath + "_应当设置为循环[loop]！");
-										}
+										CONFIG::GameEngine3D_Debug
+											{
+												if (_repeat != 0)
+												{
+													if (currAnimator.looping)
+														trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "_应当设置为不循环[no loop]！");
+												}
+												else
+												{
+													if (!currAnimator.looping)
+														trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "_应当设置为循环[loop]！");
+												}
+											}
+									}
+									else
+									{
+										currAnimator.stop();
 									}
 								}
-								else
+							}
+							else
+							{
+								if (currAnimator)
 								{
 									currAnimator.stop();
 								}
@@ -1154,7 +1344,7 @@ package com.game.engine3D.scene.render
 						{
 							if (currAnimator is SkeletonAnimator)
 							{
-								if (_isRendering && _parent && _visible && _isInViewDistance)
+								if (_isRendering && _visible && _isInViewDistance)
 								{
 									activeStatus = null;
 									if (_currentStatus)
@@ -1166,10 +1356,10 @@ package com.game.engine3D.scene.render
 										else if (_defalutStatus && currAnimator.animationSet.hasAnimation(_defalutStatus))
 										{
 											CONFIG::GameEngine3D_Debug
-											{
-												trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "_没有找到动作_" + _currentStatus, "将取默认动作_" + _defalutStatus);
-											}
-											activeStatus = _defalutStatus;
+												{
+													trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "_没有找到动作_" + _currentStatus, "将取默认动作_" + _defalutStatus);
+												}
+												activeStatus = _defalutStatus;
 										}
 									}
 									if (activeStatus)
@@ -1183,18 +1373,18 @@ package com.game.engine3D.scene.render
 									if (_playing)
 									{
 										CONFIG::GameEngine3D_Debug
-										{
-											if (_repeat != 0)
 											{
-												if (currAnimator.looping)
-													trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "_动作_" + currAnimator.name + "_应当设置为不循环[no loop]！");
+												if (_repeat != 0)
+												{
+													if (currAnimator.looping)
+														trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "_动作_" + currAnimator.name + "_应当设置为不循环[no loop]！");
+												}
+												else
+												{
+													if (!currAnimator.looping)
+														trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "_动作_" + currAnimator.name + "_应当设置为循环[loop]！");
+												}
 											}
-											else
-											{
-												if (!currAnimator.looping)
-													trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "_动作_" + currAnimator.name + "_应当设置为循环[loop]！");
-											}
-										}
 									}
 									else
 									{
@@ -1224,7 +1414,7 @@ package com.game.engine3D.scene.render
 							{
 								if (_hasSkeletonAnimator)
 								{
-									if (_isRendering && _parent && _visible && _isInViewDistance)
+									if (_isRendering && _visible && _isInViewDistance)
 									{
 										if (!currAnimator.isPlaying)
 										{
@@ -1241,24 +1431,32 @@ package com.game.engine3D.scene.render
 								}
 								else
 								{
-									if (_isRendering && _parent && _visible && _isInViewDistance)
+									if (_isRendering && _visible && _isInViewDistance)
 									{
 										currAnimator.start(offsetTime);
 										validateChildrenAnimation(meshElement, offsetTime);
-										if (_playing && meshElement.visible)
+										if (meshElement.visible)
 										{
-											CONFIG::GameEngine3D_Debug
+											if (_playing)
 											{
-												if (_repeat != 0)
-												{
-													if (currAnimator.looping)
-														trace(GlobalConfig.DEBUG_HEAD + " "+ currAnimator.name + "   " + _renderParamData.sourcePath + "_应当设置为不循环[no loop]！");
-												}
-												else
-												{
-													if (!currAnimator.looping)
-														trace(GlobalConfig.DEBUG_HEAD + " "+ currAnimator.name + "   " + _renderParamData.sourcePath + "_应当设置为循环[loop]！");
-												}
+												CONFIG::GameEngine3D_Debug
+													{
+														if (_repeat != 0)
+														{
+															if (currAnimator.looping)
+																trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "_应当设置为不循环[no loop]！");
+														}
+														else
+														{
+															if (!currAnimator.looping)
+																trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "_应当设置为循环[loop]！");
+														}
+													}
+											}
+											else
+											{
+												currAnimator.stop();
+												validateChildrenAnimation(meshElement);
 											}
 										}
 										else
@@ -1296,7 +1494,7 @@ package com.game.engine3D.scene.render
 					currAnimator = animatElement.animator as AnimatorBase;
 					if (currAnimator)
 					{
-						if (_isRendering && _parent && _visible && _isInViewDistance)
+						if (_isRendering && _visible && _isInViewDistance)
 						{
 							if (currAnimator is SkeletonAnimator)
 							{
@@ -1309,10 +1507,10 @@ package com.game.engine3D.scene.render
 									else if (_defalutStatus && currAnimator.animationSet.hasAnimation(_defalutStatus))
 									{
 										CONFIG::GameEngine3D_Debug
-										{
-											trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.animatorSourchPath + "_没有找到动作_" + _currentStatus, "将取默认动作_" + _defalutStatus);
-										}
-										activeStatus = _defalutStatus;
+											{
+												trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.animatorSourchPath + "_没有找到动作_" + _currentStatus, "将取默认动作_" + _defalutStatus);
+											}
+											activeStatus = _defalutStatus;
 									}
 								}
 								if (activeStatus)
@@ -1324,41 +1522,41 @@ package com.game.engine3D.scene.render
 									(currAnimator as SkeletonAnimator).start(offsetTime);
 								}
 								CONFIG::GameEngine3D_Debug
-								{
-									if (_playing)
 									{
-										if (_repeat != 0)
+										if (_playing)
 										{
-											if (currAnimator.looping)
-												trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.animatorSourchPath + "_动作_" + currAnimator.name + "_应当设置为不循环[no loop]！");
-										}
-										else
-										{
-											if (!currAnimator.looping)
-												trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.animatorSourchPath + "_动作_" + currAnimator.name + "_应当设置为循环[loop]！");
+											if (_repeat != 0)
+											{
+												if (currAnimator.looping)
+													trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.animatorSourchPath + "_动作_" + currAnimator.name + "_应当设置为不循环[no loop]！");
+											}
+											else
+											{
+												if (!currAnimator.looping)
+													trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.animatorSourchPath + "_动作_" + currAnimator.name + "_应当设置为循环[loop]！");
+											}
 										}
 									}
-								}
 							}
 							else
 							{
 								currAnimator.start(offsetTime);
 								CONFIG::GameEngine3D_Debug
-								{
-									if (_playing)
 									{
-										if (_repeat != 0)
+										if (_playing)
 										{
-											if (currAnimator.looping)
-												trace(GlobalConfig.DEBUG_HEAD + " "+ currAnimator.name + "   " + _renderParamData.animatorSourchPath + "_应当设置为不循环[no loop]！");
-										}
-										else
-										{
-											if (!currAnimator.looping)
-												trace(GlobalConfig.DEBUG_HEAD + " "+ currAnimator.name + "   " + _renderParamData.animatorSourchPath + "_应当设置为循环[loop]！");
+											if (_repeat != 0)
+											{
+												if (currAnimator.looping)
+													trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.animatorSourchPath + "_应当设置为不循环[no loop]！");
+											}
+											else
+											{
+												if (!currAnimator.looping)
+													trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.animatorSourchPath + "_应当设置为循环[loop]！");
+											}
 										}
 									}
-								}
 							}
 							if (!_playing)
 							{
@@ -1386,8 +1584,8 @@ package com.game.engine3D.scene.render
 					}
 				}
 			}
-
-			if (_isRendering && _parent && _visible && _isInViewDistance)
+			
+			if (_isRendering && _visible && _isInViewDistance)
 			{
 				if (_playing)
 				{
@@ -1402,6 +1600,7 @@ package com.game.engine3D.scene.render
 			{
 				unregisterCameraAnimator();
 			}
+			//trace("validateAnimation", _renderParamData.sourcePath, _currDurationTime, _totalDuration, offsetTime, getTimer());
 		}
 
 		private function validateChildrenAnimation(meshElement : ObjectContainer3D, offsetTime : Number = NaN) : void
@@ -1418,18 +1617,28 @@ package com.game.engine3D.scene.render
 				}
 				if (childAnimator)
 				{
-					if (_isRendering && _parent && _visible && _isInViewDistance)
+					if (meshElement.visible)
 					{
-						if (_hasSkeletonAnimator)
+						if (_isRendering && _visible && _isInViewDistance)
 						{
-							if (!childAnimator.isPlaying)
+							if (_hasSkeletonAnimator)
 							{
-								childAnimator.start(0);
+								if (!childAnimator.isPlaying)
+								{
+									childAnimator.start(0);
+								}
 							}
-						}
-						else
-						{
-							childAnimator.start(offsetTime);
+							else
+							{
+								childAnimator.start(offsetTime);
+								if (_playing)
+								{
+								}
+								else
+								{
+									childAnimator.stop();
+								}
+							}
 						}
 					}
 					else
@@ -1502,6 +1711,7 @@ package com.game.engine3D.scene.render
 				return;
 			initRenderUnitContent();
 			validateEffect();
+			validateZoffset();
 			_renderUnitData.setMethods(_methodDatas);
 			if (_textureUrl)
 			{
@@ -1531,6 +1741,22 @@ package com.game.engine3D.scene.render
 			if (_renderUnitData)
 			{
 				_renderUnitData.setIndependentTexture(url, materialName);
+			}
+		}
+		
+		public function setIndependentMatarial(materialName : String, propertyName : String, value : *) : void
+		{
+			var propertyData : MaterialPropertyData = new MaterialPropertyData();
+			propertyData.materialName = materialName;
+			propertyData.propertyName = propertyName;
+			propertyData.propertyValue = value;
+			if (_renderUnitData)
+			{
+				_renderUnitData.setShareMaterial(propertyData);
+			}
+			else
+			{
+				_shareMaterialProperty.push(propertyData);
 			}
 		}
 
@@ -1624,6 +1850,14 @@ package com.game.engine3D.scene.render
 
 		public function addMethod(methodData : MethodData) : void
 		{
+			if (!methodData || !methodData.method)
+			{
+				return;
+			}
+			if (!useFog && (methodData.method is FogMethod))
+			{
+				return;
+			}
 			if (_methodDatas.indexOf(methodData) == -1)
 			{
 				_methodDatas.push(methodData);
@@ -1683,17 +1917,28 @@ package com.game.engine3D.scene.render
 
 		override public function startRender() : void
 		{
+			if (_isRendering)
+				return;
 			super.startRender();
+			_currDurationTime = 0;
+			_playDuration = 0;
+			_playToTime = 0;
+			//trace("startRender", _renderParamData.sourcePath, getTimer());
 			loadRes();
 			validateAnimation();
 		}
-
+		
 		override public function stopRender() : void
 		{
+			if (!_isRendering)
+				return;
 			super.stopRender();
+			_currDurationTime = 0;
+			_playDuration = 0;
+			_playToTime = 0;
 			validateAnimation();
 		}
-
+		
 		override public function set visible(value : Boolean) : void
 		{
 			if (_visible != value)
@@ -1702,8 +1947,8 @@ package com.game.engine3D.scene.render
 				if (_visible)
 				{
 					loadRes();
-					validateAnimation();
 				}
+				validateAnimation();
 				validateEffect();
 			}
 		}
@@ -1716,8 +1961,8 @@ package com.game.engine3D.scene.render
 				if (_isInViewDistance)
 				{
 					loadRes();
-					validateAnimation();
 				}
+				validateAnimation();
 			}
 			if (_completeNotInView && _playInited && !_isInViewDistance)
 			{
@@ -1725,7 +1970,7 @@ package com.game.engine3D.scene.render
 			}
 		}
 
-		override public function set parent(value : ObjectContainer3D) : void
+		/*override public function set parent(value : ObjectContainer3D) : void
 		{
 			if (_parent != value)
 			{
@@ -1736,7 +1981,7 @@ package com.game.engine3D.scene.render
 					validateAnimation();
 				}
 			}
-		}
+		}*/
 
 		/**
 		 * 动作序列完成
@@ -1809,12 +2054,12 @@ package com.game.engine3D.scene.render
 			CallBackUtil.exceteCallBackData(this, _mouseRightDownCallBackList, e);
 		}
 
-		public function get renderParamData() : RenderParamData
+		public function get renderParamData() : RenderParamData3D
 		{
 			return _renderParamData;
 		}
 
-		public function get renderUnitData() : RenderUnitData
+		public function get renderUnitData() : RenderUnitData3D
 		{
 			return _renderUnitData;
 		}
@@ -1860,7 +2105,7 @@ package com.game.engine3D.scene.render
 
 					validateGraphic();
 					validateProperties();
-					validateWaitChildren();
+					validateUnitChildren();
 					//执行添加回调
 					if (_addedCallBackList)
 					{
@@ -1880,30 +2125,25 @@ package com.game.engine3D.scene.render
 			}
 		}
 
-		private function validateWaitChildren() : void
+		private function validateUnitChildren() : void
 		{
-			for each (var childData : RenderUnitChild in _waitAddUnitList)
+			var len : int = _currChildUnitList.length;
+			for (var i : int = len - 1; i >= 0; i--)
 			{
+				var childData : RenderUnitChild = _currChildUnitList[i];
 				if (childData.renderUnit && childData.renderUnit.usable)
 				{
-					if (childData.compositeIndex > -1)
+					if (childData.compositeIndex > -1 || childData.boneName)
 					{
 						doWaitAddBone(childData);
 					}
+					else if (childData.meshIndex > -1 || childData.childName)
+					{
+						doWaitAddChild(childData);
+					}
 					else
 					{
-						if (childData.boneName)
-						{
-							doWaitAddBone(childData);
-						}
-						else if (childData.childName)
-						{
-							doWaitAddChild(childData);
-						}
-						else
-						{
-							doWaitAddUnit(childData);
-						}
+						doWaitAddUnit(childData);
 					}
 				}
 				else
@@ -1949,11 +2189,7 @@ package com.game.engine3D.scene.render
 			{
 				childData = _currChildUnitList[index];
 			}
-			if (childData.renderUnit != this)
-			{
-				childData.renderUnit.parent = _graphicDis;
-			}
-			if (resReady)
+			if (_resReady && !_resSwitch)
 			{
 				doWaitAddBone(childData);
 			}
@@ -1983,10 +2219,10 @@ package com.game.engine3D.scene.render
 			{
 				childData = _currChildUnitList[index];
 			}
-			if (childData.renderUnit != this)
+			/*if (childData.renderUnit != this)
 			{
 				childData.renderUnit.parent = _graphicDis;
-			}
+			}*/
 			if (resReady)
 			{
 				doWaitAddBone(childData);
@@ -2010,10 +2246,7 @@ package com.game.engine3D.scene.render
 			{
 				childData = _currChildUnitList[index];
 			}
-			if (childData.renderUnit != this)
-			{
-				childData.renderUnit.parent = _graphicDis;
-			}
+			
 			if (resReady)
 			{
 				doWaitAddBone(childData);
@@ -2114,10 +2347,14 @@ package com.game.engine3D.scene.render
 				}
 				else
 				{
-					CONFIG::GameEngine3D_Debug
+					if (childData.renderUnit != this)
 					{
-						trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "使用的动画" + _renderParamData.animatorSourchPath + "不是一个有效的骨骼动画资源！");
+						childData.renderUnit.parent = _graphicDis;
 					}
+					CONFIG::GameEngine3D_Debug
+						{
+							trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "使用的动画" + _renderParamData.animatorSourchPath + "不是一个有效的骨骼动画资源，将添加到同级层！");
+						}
 				}
 			}
 			else
@@ -2131,22 +2368,26 @@ package com.game.engine3D.scene.render
 					}
 					else
 					{
-						CONFIG::GameEngine3D_Debug
+						if (childData.renderUnit != this)
 						{
-							trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "没有找到或没激活骨骼：" + childData.boneName + "，将添加到同级层");
+							childData.renderUnit.parent = _graphicDis;
 						}
+						CONFIG::GameEngine3D_Debug
+							{
+								trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "没有找到或没激活骨骼：" + childData.boneName + "，将添加到同级层！");
+							}
 					}
 				}
 			}
 		}
 
-		public function addUnitAtChild(ru : RenderUnit3D, childName : String) : void
+		public function addUnitAtChild(ru : RenderUnit3D, childName : String, meshIndex : int = -1) : void
 		{
 			var childData : RenderUnitChild;
 			var index : int = getChildDataIndexByUnit(ru);
 			if (index < 0)
 			{
-				childData = new RenderUnitChild(ru, childName, null);
+				childData = new RenderUnitChild(ru, childName, null, -1, meshIndex);
 				addChildDataToList(childData);
 			}
 			else
@@ -2162,22 +2403,32 @@ package com.game.engine3D.scene.render
 				addWaitRenderUnitChild(childData);
 			}
 		}
-
+		
 		private function doWaitAddChild(childData : RenderUnitChild) : void
 		{
 			if (childData.renderUnit && childData.renderUnit.usable)
 			{
-				var container : ObjectContainer3D = getChildByName(childData.childName);
-				if (container)
+				if (childData.meshIndex >= 0 && childData.meshIndex < _drawElements.length)
 				{
-					childData.renderUnit.parent = container;
+					childData.renderUnit.parent = _drawElements[childData.meshIndex];
 				}
 				else
 				{
-					childData.renderUnit.parent = _graphicDis;
-					CONFIG::GameEngine3D_Debug
+					var container : ObjectContainer3D = getChildByName(childData.childName);
+					if (container)
 					{
-						trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "没有找到挂节点：" + childData.childName + "，将添加到同级层");
+						childData.renderUnit.parent = container;
+					}
+					else
+					{
+						if (childData.renderUnit != this)
+						{
+							childData.renderUnit.parent = _graphicDis;
+						}
+						CONFIG::GameEngine3D_Debug
+							{
+								trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "没有找到挂节点：" + childData.childName + "，将添加到同级层");
+							}
 					}
 				}
 			}
@@ -2208,7 +2459,10 @@ package com.game.engine3D.scene.render
 
 		private function doWaitAddUnit(childData : RenderUnitChild) : void
 		{
-			childData.renderUnit.parent = _graphicDis;
+			if (childData.renderUnit != this)
+			{
+				childData.renderUnit.parent = _graphicDis;
+			}
 			if (childData.renderUnit.renderParamData.isEffectMethodType)
 			{
 				if (childData.renderUnit.resReady && !childData.renderUnit.resSwitch)
@@ -2224,7 +2478,7 @@ package com.game.engine3D.scene.render
 
 		private function doSetUnitChildMethods(childData : RenderUnitChild, ru : RenderUnit3D) : void
 		{
-			if (childData.renderUnit.resReady && childData.renderUnit.renderParamData.isEffectMethodType)
+			if (childData.renderUnit.resReady && !childData.renderUnit.resSwitch && childData.renderUnit.renderParamData.isEffectMethodType)
 			{
 				var methodChanged : Boolean = false;
 				var renderMethods : Vector.<EffectMethodBase> = childData.renderUnit.renderUnitData.effectMethods;
@@ -2284,7 +2538,7 @@ package com.game.engine3D.scene.render
 		private function removeUnitChildEffectMethods(ru : RenderUnit3D) : Boolean
 		{
 			var methodChanged : Boolean = false;
-			if (ru.resReady && ru.renderParamData.isEffectMethodType)
+			if (ru.resReady && !ru.resSwitch && ru.renderParamData.isEffectMethodType)
 			{
 				var renderMethods : Vector.<EffectMethodBase> = ru.renderUnitData.effectMethods;
 				var methodIndex : int;
@@ -2367,8 +2621,11 @@ package com.game.engine3D.scene.render
 		{
 			if (!_currentStatus)
 				transition = null;
-			// 设置状态
-			_currentStatus = status;
+			//设置状态
+			if (_secondStatusGetter == null)
+				_currentStatus = status;
+			else
+				_currentStatus = _secondStatusGetter(status);
 			_animationTransition = transition;
 			play(time, animateSpeed);
 		}
@@ -2401,6 +2658,8 @@ package com.game.engine3D.scene.render
 		{
 			_playing = false;
 			_playToTime = time;
+			_currDurationTime = 0;
+			_playDuration = 0;
 			validateAnimation();
 		}
 
@@ -2412,7 +2671,7 @@ package com.game.engine3D.scene.render
 		private function loadRes() : void
 		{
 			//如果是有资源数据
-			if (!_renderResourceData && _renderParamData && ((_isRendering && _playInited && _parent && _visible && _isInViewDistance) || _forceLoad)) //隐藏的时候，就不处理加载了。
+			if (!_renderResourceData && _renderParamData && ((_isRendering && _playInited && _visible && _isInViewDistance) || _forceLoad)) //隐藏的时候，就不处理加载了。
 			{
 				//加载新的换装
 				_renderResourceData = SceneRenderCache.installRenderResourceData(_renderParamData.sourcePath, _renderParamData.animatorSourchPath, this) as RenderResourceData;
@@ -2436,15 +2695,14 @@ package com.game.engine3D.scene.render
 				}
 			}
 		}
-
-		private function loadNextRes() : void
+		
+		private function tryLoadNextRes() : void
 		{
 			//如果是有资源数据
 			if (!_nextRenderResourceData && _nextRenderParamData)
 			{
-				if ((_isRendering && _playInited && _parent && _visible && _isInViewDistance) || _forceLoad) //隐藏的时候，就不处理加载了。
+				if ((_isRendering && _playInited && _visible && _isInViewDistance) || _forceLoad) //隐藏的时候，就不处理加载了。
 				{
-					_resSwitch = true;
 					//加载新的换装
 					_nextRenderResourceData = SceneRenderCache.installRenderResourceData(_nextRenderParamData.sourcePath, _nextRenderParamData.animatorSourchPath, this) as RenderResourceData;
 					_nextRenderResourceData.isOnlyInstance = _nextRenderParamData.isOnlyInstance;
@@ -2502,7 +2760,7 @@ package com.game.engine3D.scene.render
 			}
 		}
 
-		public function setRenderParamData(data : RenderParamData) : void
+		public function setRenderParamData(data : RenderParamData3D) : void
 		{
 			if (!data)
 			{
@@ -2519,14 +2777,14 @@ package com.game.engine3D.scene.render
 				{
 					clearNextSource();
 					_nextRenderParamData = data;
-					loadNextRes();
+					_resSwitch = true;
 					return;
 				}
 				doSetRenderParamData(data);
 			}
 		}
 
-		private function doSetRenderParamData(data : RenderParamData) : void
+		private function doSetRenderParamData(data : RenderParamData3D) : void
 		{
 			if (_renderParamData)
 			{
@@ -2557,20 +2815,23 @@ package com.game.engine3D.scene.render
 			}
 			_nextRenderParamData = null;
 			_currentStatus = null;
-			_visibleNeedAsyncLoaded = false;
+			_visibleNeedAsyncLoaded = VISIBLE_NEED_ASYNC_LOADED;
 			_renderResourceData = null;
 			_nextRenderResourceData = null;
 			_renderUnitData = null;
 			_drawElements = null;
 			_animatorElements = null;
-			_invisibleList = null;
 			_isElementStatus = false;
 			_hasSkeletonAnimator = false;
 			_meshes = null;
 			_rootObj3ds = null;
 			_childObj3ds = null;
 			_playing = false;
+			_currDurationTime = 0;
+			_playDuration = 0;
+			_playToTime = 0;
 			_completeNotInView = false;
+			_disableLoadResPastTime = false;
 			_animateSpeed = 1;
 			_animator = null;
 			_animationTransition = null;
@@ -2582,10 +2843,11 @@ package com.game.engine3D.scene.render
 			_playInited = false;
 			_pickDummyEnable = false;
 			_pickDummyBindBone = null;
+			_defalutStatus = null;
+			_secondStatusGetter = null;
 			_repeat = 0;
 			_lifecycle = 0;
 			_playCount = 0;
-			_currDurationTime = 0;
 			_totalDuration = 0;
 			_resReady = false;
 			_resSwitch = false;
@@ -2608,6 +2870,17 @@ package com.game.engine3D.scene.render
 			_blendUrl = null;
 			_blendBias = 0;
 			_useIndependentColor = false;
+			_setVisibleMap = new Dictionary(true);
+			_layerTypeByName = new Dictionary(true);
+			_visibleByName = new Dictionary(true);
+			_zOffsetByName = new Dictionary(true);
+			_shareMaterialProperty = new Vector.<MaterialPropertyData>();
+			
+			_useSimpleShadow = false;
+			_simpleShadowTextureUrl = null;
+			_simpleShadowBaseScale = 0;
+			_simpleShadowMesh = null;
+			useFog = false;
 		}
 
 		/**
@@ -2925,6 +3198,13 @@ package com.game.engine3D.scene.render
 				return null;
 			return _renderUnitData.getBoneByName(name);
 		}
+		
+		public function get camera() : Camera3D
+		{
+			if (_renderResourceData)
+				return _renderResourceData.camera;
+			return null;
+		}
 
 		/**
 		 * 添加指定的显示对象到对应的骨胳上
@@ -3015,30 +3295,11 @@ package com.game.engine3D.scene.render
 
 		public function setVisibleByName(names : Array, visible : Boolean) : void
 		{
-			if (!visible && !_invisibleList)
+			if (_setVisibleMap && names)
 			{
-				_invisibleList = [];
-			}
-			if (_invisibleList)
-			{
-				var childsArr : Array = getChildsByNames(names);
-				for each (var child : ObjectContainer3D in childsArr)
+				for each (var nameStr : String in names)
 				{
-					var index : int = _invisibleList.indexOf(child.name);
-					if (visible)
-					{
-						if (index > -1)
-						{
-							_invisibleList.splice(index, 1);
-						}
-					}
-					else
-					{
-						if (index < 0)
-						{
-							_invisibleList.push(child.name);
-						}
-					}
+					_setVisibleMap[nameStr] = visible;
 				}
 				validateEffect();
 			}
@@ -3115,21 +3376,11 @@ package com.game.engine3D.scene.render
 			{
 				return null;
 			}
-			var bounds : VolumeBounds = null;
-			if (_animatorElements)
-			{
-				for each (var animatElement : CompositeMesh in _animatorElements)
-				{
-					bounds = new VolumeBounds(animatElement.minX * animatElement.scaleX, animatElement.minY * animatElement.scaleY, animatElement.minZ * animatElement.scaleZ, //
-						animatElement.maxX * animatElement.scaleX, animatElement.maxY * animatElement.scaleY, animatElement.maxZ * animatElement.scaleZ);
-					return bounds;
-				}
-			}
-			else
+			if (_drawElements)
 			{
 				for each (var element : ObjectContainer3D in _drawElements)
 				{
-					bounds = new VolumeBounds(element.minX * element.scaleX, element.minY * element.scaleY, element.minZ * element.scaleZ, //
+					var bounds : VolumeBounds = new VolumeBounds(element.minX * element.scaleX, element.minY * element.scaleY, element.minZ * element.scaleZ, //
 						element.maxX * element.scaleX, element.maxY * element.scaleY, element.maxZ * element.scaleZ);
 					return bounds;
 				}
@@ -3159,7 +3410,7 @@ package com.game.engine3D.scene.render
 			return 0;
 		}
 
-		public function get depth() : Number
+		public function get boundZ() : Number
 		{
 			var bounds : VolumeBounds = getBounds();
 			if (bounds)
@@ -3208,42 +3459,50 @@ package com.game.engine3D.scene.render
 			_completeNotInView = value;
 		}
 
+		/**
+		 * 禁用加载资源逝去时间
+		 * @param value
+		 *
+		 */
+		public function set disableLoadResPastTime(value : Boolean) : void
+		{
+			_disableLoadResPastTime = value;
+		}
+		
 		override public function run(gapTm : uint) : void
 		{
 			super.run(gapTm);
-			if (_isRendering && _playing && !_playComplete)
+			if (_isRendering)
 			{
-				_playDuration += gapTm;
-				_currDurationTime += gapTm * _animateSpeed;
-				if (!_resReady)
+				tryLoadNextRes();
+				if (_playing && !_playComplete)
 				{
-					return;
-				}
-				if (_currDurationTime >= _totalDuration)
-				{
+					if (_resReady || (!_resReady && !_disableLoadResPastTime))
+					{
+						_playDuration += gapTm;
+						_currDurationTime += gapTm * _animateSpeed;
+					}
+					if (!_resReady)
+					{
+						return;
+					}
 					_playCount = _playCount + int(_currDurationTime / _totalDuration);
 					if (_repeat != 0 && _playCount >= _repeat) //非无限循环
 					{
 						callStop();
 					}
-					else
+					if (!_playComplete && _lifecycle > 0 && _playDuration >= _lifecycle)
 					{
-						_currDurationTime = int(_currDurationTime) % _totalDuration;
+						callStop();
 					}
-				}
-				if (!_playComplete && _lifecycle > 0 && _playDuration >= _lifecycle)
-				{
-					callStop();
 				}
 			}
 		}
-
+		
 		private function callStop() : void
 		{
 			_playComplete = true;
-			if (_currDurationTime > _totalDuration)
-				_currDurationTime = _totalDuration;
-			stop(_currDurationTime);
+			stop(_totalDuration);
 			CallBackUtil.exceteCallBackData(this, _playCompleteCallBackList);
 		}
 
@@ -3276,8 +3535,7 @@ package com.game.engine3D.scene.render
 			_resSwitch = false;
 			unregisterCameraAnimator();
 			setMeshPickEnable(false);
-			_rootObj3ds = null;
-			_childObj3ds = null;
+
 			_isElementStatus = false;
 			_hasSkeletonAnimator = false;
 			if (_animatorElements)
@@ -3337,12 +3595,107 @@ package com.game.engine3D.scene.render
 			}*/
 			if (_renderUnitData)
 			{
+				restoreRenderUnit();
 				SceneRenderCache.recycleRenderUnitData(_renderResourceData, _renderUnitData);
 				_renderUnitData = null;
 			}
+			var name : String;
+			if (_setVisibleMap)
+			{
+				for (name in _setVisibleMap)
+				{
+					_setVisibleMap[name] = null;
+					delete _setVisibleMap[name];
+				}
+			}
+			if (_layerTypeByName)
+			{
+				for (name in _layerTypeByName)
+				{
+					_layerTypeByName[name] = null;
+					delete _layerTypeByName[name];
+				}
+			}
+			if (_visibleByName)
+			{
+				for (name in _visibleByName)
+				{
+					_visibleByName[name] = null;
+					delete _visibleByName[name];
+				}
+			}
+			if (_zOffsetByName)
+			{
+				for (name in _zOffsetByName)
+				{
+					_zOffsetByName[name] = null;
+					delete _zOffsetByName[name];
+				}
+			}
 			_waitAddUnitList.length = 0;
+			_rootObj3ds = null;
+			_childObj3ds = null;
 			_renderParamData = null;
 			_renderResourceData = null;
+		}
+		
+		private function restoreRenderUnit() : void
+		{
+			if (!_renderUnitData)
+				return;
+			
+			var obj : ObjectContainer3D;
+			var name : String;
+			var objVisible : Boolean;
+			var layerType : uint;
+			if (_rootObj3ds)
+			{
+				for each (obj in _rootObj3ds)
+				{
+					name = obj.name;
+					if (_zOffsetByName && _zOffsetByName.hasOwnProperty(name))
+					{
+						obj.zOffset = int(_zOffsetByName[name]);
+					}
+					if (obj is Mesh)
+					{
+						if (_layerTypeByName && _layerTypeByName.hasOwnProperty(name))
+						{
+							layerType = uint(_layerTypeByName[name]);
+							(obj as Mesh).layerType = layerType;
+						}
+					}
+					else
+					{
+						if (_visibleByName && _visibleByName.hasOwnProperty(name))
+						{
+							objVisible = Boolean(_visibleByName[name]);
+							obj.visible = objVisible;
+						}
+					}
+				}
+			}
+			if (_childObj3ds)
+			{
+				for each (obj in _childObj3ds)
+				{
+					name = obj.name;
+					if (_visibleByName && _visibleByName.hasOwnProperty(name))
+					{
+						objVisible = Boolean(_visibleByName[name]);
+						obj.visible = objVisible;
+					}
+					if (_zOffsetByName && _zOffsetByName.hasOwnProperty(name))
+					{
+						obj.zOffset = int(_zOffsetByName[name]);
+					}
+				}
+			}
+		}
+		
+		public function getUnitChildDatas() : Vector.<RenderUnitChild>
+		{
+			return _currChildUnitList;
 		}
 
 		/**销毁显示对象 */
@@ -3376,6 +3729,7 @@ package com.game.engine3D.scene.render
 			removeAllMethods();
 			_playing = false;
 			_completeNotInView = false;
+			_disableLoadResPastTime = false;
 			_pickDummyEnable = false;
 			_pickDummyBindBone = null;
 			_totalDuration = 0;
@@ -3384,15 +3738,20 @@ package com.game.engine3D.scene.render
 				_independentAnimator.dispose();
 				_independentAnimator = null;
 			}
-			if (_invisibleList)
+			
+			removeSimpleShadow();
+			if (_simpleShadowMesh)
 			{
-				_invisibleList.length = 0;
-				_invisibleList = null;
+				_simpleShadowMesh.dispose();
+				_simpleShadowMesh = null;
 			}
+		
 			restoreAllChildUnitToParent();
 			_visibleNeedAsyncLoaded = false;
 			_currentStatus = null;
 			_defalutStatus = null;
+			_secondStatusGetter = null;
+			
 			_animationTransition = null;
 			_playToTime = 0;
 			_currDurationTime = 0;
@@ -3416,6 +3775,10 @@ package com.game.engine3D.scene.render
 			_blendUrl = null;
 			_blendBias = 0;
 			_useIndependentColor = false;
+			_setVisibleMap = null;
+			_layerTypeByName = null;
+			_visibleByName = null;
+			useFog = false;
 			if (_addedCallBackList)
 			{
 				_addedCallBackList.length = 0;

@@ -1,6 +1,7 @@
 package com.game.engine3D.scene.render.vo
 {
-
+	import com.game.engine3D.vo.SoftOutlineData;
+	
 	/**
 	 *
 	 * 3D元渲染单元接口
@@ -10,7 +11,10 @@ package com.game.engine3D.scene.render.vo
 	 */
 	public interface IRenderUnit3D
 	{
+		function get mouseEnabled() : Boolean;
+		function set mouseEnabled(value : Boolean) : void;
 		function get usable() : Boolean;
-		function get renderParamData() : RenderParamData;
+		function get renderParamData() : RenderParamData3D;
+		function setSoftOutline(data : SoftOutlineData) : void
 	}
 }

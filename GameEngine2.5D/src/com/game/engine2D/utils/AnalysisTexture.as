@@ -1,8 +1,10 @@
 package com.game.engine2D.utils
 {
-	import flash.utils.ByteArray;
-	
 	import com.game.engine2D.core.TexturePack;
+	
+	
+	import org.client.mainCore.manager.EventManager;
+	import flash.utils.ByteArray;
 	
 	/**
 	 * 纹理包格式控制
@@ -11,6 +13,8 @@ package com.game.engine2D.utils
 	 */
 	public class AnalysisTexture
 	{
+		static public const ANALYSIS_TEXTURE_ERROR:String = "ANALYSIS_TEXTURE_ERROR";
+		
 		public function AnalysisTexture()
 		{
 		}
@@ -63,44 +67,50 @@ package com.game.engine2D.utils
 			var len:int = 0;
 			var pack:TexturePack = null;
 			var atfBytes:ByteArray = null;
-			
-			var head:FileHead = getReadHead(fileBytes);
-			if (head)
+			try
 			{
-				pack = new TexturePack();
-				
-				var count:int = fileBytes.readByte();
-				while(count-- > 0)
+				var head:FileHead = getReadHead(fileBytes);
+				if (head)
 				{
-					atfBytes = new ByteArray();
+					pack = new TexturePack();
+					
+					var count:int = fileBytes.readByte();
+					while(count-- > 0)
+					{
+						atfBytes = new ByteArray();
+						len = fileBytes.readUnsignedInt();
+						fileBytes.readBytes(atfBytes, 0, len);
+						pack.addAtfData(atfBytes);
+					}
 					len = fileBytes.readUnsignedInt();
-					fileBytes.readBytes(atfBytes, 0, len);
-					pack.addAtfData(atfBytes);
+					fileBytes.readBytes(dataBytes, 0, len);
+					len = fileBytes.readUnsignedInt();
+					fileBytes.readBytes(tmpBytes, 0, len);
+					len = fileBytes.readUnsignedInt();
+					fileBytes.readBytes(hinderBytes, 0, len);
+					
+					tmpBytes.uncompress("lzma");
+					dataBytes.uncompress("lzma");
+					hinderBytes.uncompress("lzma");
+					
+					config = JSON.parse(tmpBytes.readUTFBytes(tmpBytes.length));
+					pack.setConfig(path, config, dataBytes, hinderBytes);
+					tmpBytes.clear();
+					tmpBytes = null;
+					fileBytes.clear();
+					fileBytes = null;
+					
+					return pack;
 				}
-				len = fileBytes.readUnsignedInt();
-				fileBytes.readBytes(dataBytes, 0, len);
-				len = fileBytes.readUnsignedInt();
-				fileBytes.readBytes(tmpBytes, 0, len);
-				len = fileBytes.readUnsignedInt();
-				fileBytes.readBytes(hinderBytes, 0, len);
-				
-				tmpBytes.uncompress("lzma");
-				dataBytes.uncompress("lzma");
-				hinderBytes.uncompress("lzma");
-				
-				config = JSON.parse(tmpBytes.readUTFBytes(tmpBytes.length));
-				pack.setConfig(path, config, dataBytes, hinderBytes);
-				tmpBytes.clear();
-				tmpBytes = null;
-				fileBytes.clear();
-				fileBytes = null;
-				
-				return pack;
-			}else
-			{
-				trace("非法文件" + path);
+				else
+				{
+					EventManager.dispatchEvent(ANALYSIS_TEXTURE_ERROR,"avatar文件头错误:"+path);
+				}
 			}
-			
+			catch(error:Error)
+			{
+				EventManager.dispatchEvent(ANALYSIS_TEXTURE_ERROR,"非法avatar文件:"+path);
+			}
 			return null;
 		}
 		

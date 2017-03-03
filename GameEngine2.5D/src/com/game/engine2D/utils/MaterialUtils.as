@@ -1,5 +1,6 @@
 package com.game.engine2D.utils
 {
+	import com.game.engine2D.config.GlobalConfig2D;
 	import com.game.engine2D.core.ATFByteTexture;
 	import com.game.engine2D.core.ATFTextureMaterial;
 	import com.game.engine2D.core.AsyncByteTexture;
@@ -10,11 +11,12 @@ package com.game.engine2D.utils
 	
 	import flash.display.BitmapData;
 	import flash.display.BlendMode;
+	import flash.display3D.Context3DCompareMode;
+	import flash.geom.ColorTransform;
 	import flash.geom.Point;
 	import flash.utils.ByteArray;
 	import flash.utils.Endian;
 	
-	import away3d.materials.MaterialBase;
 	import away3d.materials.TextureMaterial;
 	import away3d.materials.WriteDepthOption;
 	import away3d.textures.AsyncTexture2D;
@@ -24,7 +26,7 @@ package com.game.engine2D.utils
 	import starling.textures.IStarlingTexture;
 	import starling.textures.TextureFactory;
 	import starling.utils.MathUtil;
-
+	
 	public class MaterialUtils
 	{
 		/** bpg资源没有解析出来前显示的透明度  */
@@ -51,6 +53,7 @@ package com.game.engine2D.utils
 			{
 				var bmT:AsyncTexture2D = Cast.asyncTexture(new BitmapData(4,4,true,0xffff0000), true, false);
 				_defaultTexture = new TextureMaterial(bmT);
+				_defaultTexture.name = "default1x1";
 			}
 			return _defaultTexture;
 		}
@@ -62,6 +65,9 @@ package com.game.engine2D.utils
 			var textureMaterial:TextureMaterial = new TextureMaterial(bmT);
 			textureMaterial.writeDepth = WriteDepthOption.FALSE;
 			textureMaterial.blendMode = BlendMode.LAYER;
+			textureMaterial.animateUVs = true;
+			textureMaterial.depthCompareMode = Context3DCompareMode.ALWAYS;
+			textureMaterial.colorTransform = new ColorTransform();
 			return textureMaterial;
 		}
 		
@@ -83,30 +89,31 @@ package com.game.engine2D.utils
 			return textureMaterial;
 		}
 		
-		public static function getAtfMaterialByData(data:ByteArray):ITextureMaterial
+		public static function getAtfMaterialByData(data:ByteArray, path:String, autoRecycleEnable:Boolean, isAsync:Boolean):ITextureMaterial
 		{
-			var atfTexture:ATFByteTexture = new ATFByteTexture(data);
+			var atfTexture:ATFByteTexture = new ATFByteTexture(data,path,autoRecycleEnable,isAsync);
 			var texture:ATFTextureMaterial = new ATFTextureMaterial(atfTexture);
 			texture.animateUVs = true;
-			texture.writeDepth = WriteDepthOption.FALSE;
+			texture.writeDepth = GlobalConfig2D.avatarHighlightEnabled?WriteDepthOption.TRUE:WriteDepthOption.FALSE;
+			texture.depthCompareMode = Context3DCompareMode.ALWAYS;
 			texture.bothSides = true;
 			texture.blendMode = BlendMode.LAYER;
-			//texture.getInternalPasses(MaterialBase.PLANAR_SHADOW_PASS).smooth = true;
 			texture.alphaThreshold = 0.05;
+			texture.name += "-atf";
 			return texture;
 		}
 		
-		public static function getBpgMaterialByData(data:ByteArray, path:String):ITextureMaterial
+		public static function getBpgMaterialByData(data:ByteArray, path:String, enableScaleTexture:Boolean,autoRecycleEnable:Boolean):ITextureMaterial
 		{
-			var atfTexture:BPGByteTexture = new BPGByteTexture(data, path);
-			var texture:BPGTextureMaterial = new BPGTextureMaterial(atfTexture);
+			var bpgTexture:BPGByteTexture = new BPGByteTexture(data, path, enableScaleTexture,autoRecycleEnable);
+			var texture:BPGTextureMaterial = new BPGTextureMaterial(bpgTexture);
 			texture.animateUVs = true;
 			texture.writeDepth = WriteDepthOption.FALSE;
-			atfTexture.smooth = false;
+			texture.depthCompareMode = Context3DCompareMode.ALWAYS;
 			texture.bothSides = true;
 			texture.blendMode = BlendMode.LAYER;
-			//texture.getInternalPasses(MaterialBase.PLANAR_SHADOW_PASS).smooth = true;
 			texture.alphaThreshold = 0.05;
+			texture.name += "-bpg";
 			return texture;
 		}
 		
@@ -127,7 +134,7 @@ package com.game.engine2D.utils
 			bitmapData.copyPixelsToByteArray(bitmapData.rect,bgraBytes);
 			var bgraData:BGRAData = new BGRAData(bgraBytes,bitmapData.width,bitmapData.height,true);
 			asyncTexture.setBgraData(bgraData);
-			
+			bitmapData.dispose();
 			var textureSingle:SingleTextureMaterial = new SingleTextureMaterial(asyncTexture);
 			textureSingle.animateUVs = true;
 			textureSingle.writeDepth = WriteDepthOption.FALSE;

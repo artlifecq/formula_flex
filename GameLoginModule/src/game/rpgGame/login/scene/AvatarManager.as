@@ -1,7 +1,7 @@
 package game.rpgGame.login.scene
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	
 	import flash.geom.Vector3D;
 	
@@ -47,8 +47,8 @@ package game.rpgGame.login.scene
 		private static function updateBody(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			var rpd_body : RenderParamData = avatarInfo.rpd_body;
-			var rpd_mount : RenderParamData = avatarInfo.rpd_mount;
+			var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
+			var rpd_mount : RenderParamData3D = avatarInfo.rpd_mount;
 			if (rpd_body != null)
 			{
 				var ru : RenderUnit3D;
@@ -93,7 +93,7 @@ package game.rpgGame.login.scene
 				role.avatar.removeRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY);
 			}
 
-			var rpd_body_effect : RenderParamData = avatarInfo.rpd_body_effect;
+			var rpd_body_effect : RenderParamData3D = avatarInfo.rpd_body_effect;
 			if (rpd_body_effect != null)
 			{
 				ru = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_body_effect);
@@ -126,11 +126,11 @@ package game.rpgGame.login.scene
 		private static function updateHair(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			var rpd_hair : RenderParamData = avatarInfo.rpd_hair;
+			var rpd_hair : RenderParamData3D = avatarInfo.rpd_hair;
 			if (rpd_hair != null)
 			{
 				var ru : RenderUnit3D;
-				var rpd_body : RenderParamData = avatarInfo.rpd_body;
+				var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
 				if (rpd_body)
 				{
 					if (rpd_body.animatorSourchPath)
@@ -165,8 +165,8 @@ package game.rpgGame.login.scene
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
 			var ru : RenderUnit3D;
-			var rpd_weapon : RenderParamData = avatarInfo.rpd_weapon;
-			var rpd_body : RenderParamData = avatarInfo.rpd_body;
+			var rpd_weapon : RenderParamData3D = avatarInfo.rpd_weapon;
+			var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
 			if (rpd_weapon != null)
 			{
 				if (rpd_body)
@@ -198,7 +198,7 @@ package game.rpgGame.login.scene
 				role.avatar.removeRenderUnitByID(RenderUnitType.WEAPON, RenderUnitID.WEAPON);
 			}
 
-			var rpd_weapon_effect : RenderParamData = avatarInfo.rpd_weapon_effect;
+			var rpd_weapon_effect : RenderParamData3D = avatarInfo.rpd_weapon_effect;
 			if (rpd_weapon_effect != null)
 			{
 				if (rpd_body)
@@ -232,11 +232,11 @@ package game.rpgGame.login.scene
 		private static function updateDeputyWeapon(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			var rpd_deputy_weapon : RenderParamData = avatarInfo.rpd_deputy_weapon;
+			var rpd_deputy_weapon : RenderParamData3D = avatarInfo.rpd_deputy_weapon;
 			if (rpd_deputy_weapon != null)
 			{
 				var ru : RenderUnit3D;
-				var rpd_body : RenderParamData = avatarInfo.rpd_body;
+				var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
 				if (rpd_body)
 				{
 					if (rpd_body.animatorSourchPath)
@@ -266,7 +266,7 @@ package game.rpgGame.login.scene
 				role.avatar.removeRenderUnitByID(RenderUnitType.DEPUTY_WEAPON, RenderUnitID.DEPUTY_WEAPON);
 			}
 			
-			var rpd_deputyWeapon_effect : RenderParamData = avatarInfo.rpd_deputyWeapon_effect;
+			var rpd_deputyWeapon_effect : RenderParamData3D = avatarInfo.rpd_deputyWeapon_effect;
 			if (rpd_deputyWeapon_effect != null)
 			{
 				if (rpd_body)
@@ -300,7 +300,7 @@ package game.rpgGame.login.scene
 		private static function updateEffect(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			var rpd_effect : RenderParamData = avatarInfo.rpd_effect;
+			var rpd_effect : RenderParamData3D = avatarInfo.rpd_effect;
 			if (rpd_effect != null)
 			{
 				var ru : RenderUnit3D = role.avatar.addRenderUnit(rpd_effect);
@@ -321,7 +321,7 @@ package game.rpgGame.login.scene
 		private static function updateMount(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			var rpd_mount : RenderParamData = avatarInfo.rpd_mount;
+			var rpd_mount : RenderParamData3D = avatarInfo.rpd_mount;
 			if (rpd_mount != null)
 			{
 				var ru : RenderUnit3D = role.avatar.addRenderUnit(rpd_mount);

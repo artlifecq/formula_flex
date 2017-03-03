@@ -1,5 +1,7 @@
 package com.game.engine2D.core
 {
+	import com.game.engine3D.manager.Stage3DLayerManager;
+	
 	import flash.geom.ColorTransform;
 	
 	import away3d.materials.TextureMaterial;
@@ -19,9 +21,34 @@ package com.game.engine2D.core
 			this.colorTransform = new ColorTransform();
 		}
 		
-		public function get textureParsed():Boolean
+		public function get isDefaultTexture():Boolean
+		{
+			if (_atfByteTexture)
+				return _atfByteTexture.isDefaultTexture;
+			return true;
+		}
+		
+		public function get textureReady():Boolean
+		{
+			if (_atfByteTexture)
+				return _atfByteTexture.isReady;
+			return false;
+		}
+		
+		public function uploadTexture():void
+		{
+			if (_atfByteTexture)
+				_atfByteTexture.getTextureForStage3D(Stage3DLayerManager.stage3DProxy);
+		}
+		
+		public function get isTextureScale():Boolean
 		{
 			return false;
+		}
+		
+		public function get textureScale():Number
+		{
+			return 1.0;
 		}
 		
 		public function get height():int

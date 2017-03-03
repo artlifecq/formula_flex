@@ -47,7 +47,7 @@ package com.client.process
 			ResLoadingView.instance.title = "加载登录资源...";
 
 			_themeLoader = new ThemeLoader();
-			_themeLoader.load(ClientGlobal.getSignInResUrl(), onResLoaded, onPorgress, onResError);
+			_themeLoader.load(ClientGlobal.getSignInResUrl(), onResLoaded, onProgress, onResError);
 		}
 
 		private function onResLoaded(loader : ThemeLoader) : void
@@ -68,10 +68,10 @@ package com.client.process
 			}
 		}
 
-		private function onPorgress(ld : MultiLoadData, e : ProgressEvent) : void
+		private function onProgress(progress:Number) : void
 		{
-			var currPercent : Number = e.bytesLoaded / e.bytesTotal;
-			setProcessPercent(currPercent);
+//			var currPercent : Number = e.bytesLoaded / e.bytesTotal;
+			setProcessPercent(progress);
 		}
 
 		private function onResError(ld : MultiLoadData, e : Event) : void

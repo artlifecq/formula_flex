@@ -1,12 +1,12 @@
 package com.game.engine2D.core
 {
-	import com.game.engine2D.config.GlobalConfig2D;
 	import com.game.engine2D.utils.MaterialUtils;
 	
-	import flash.display3D.Context3DTextureFormat;
 	import flash.geom.Rectangle;
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
+	
+	import away3d.materials.WriteDepthOption;
 	
 	/**
 	 * ATFTexture贴图集 
@@ -15,7 +15,6 @@ package com.game.engine2D.core
 	 */
 	public class ATFTextureAtlas
 	{
-		static private var count:uint = 0;
 		private var _texturePack:TexturePack;
 		private var _atlasTextures:Vector.<ITextureMaterial>;
 		private var _textureInfos:Dictionary;
@@ -37,16 +36,20 @@ package com.game.engine2D.core
 		private function parseAtfData(pack:TexturePack):void
 		{
 			var len:int = pack.atfDataArr.length;
+			var isAtf:Boolean = false;
+			if (pack.path && pack.path.toLocaleLowerCase().indexOf(".zatf") != -1)
+			{
+				isAtf = true;
+			}
 			for (var i:int = 0; i < len; i++) 
 			{
 				var texture:ITextureMaterial = null;
-				if (GlobalConfig2D.avatarResExtension == ".zatf")
-					texture = MaterialUtils.getAtfMaterialByData(pack.atfDataArr[i]);
+				if (isAtf)
+					texture = MaterialUtils.getAtfMaterialByData(pack.atfDataArr[i],pack.path,pack.autoRecycleEnable, pack.isAsync);
 				else 
-					texture = MaterialUtils.getBpgMaterialByData(pack.atfDataArr[i],pack.path);
+					texture = MaterialUtils.getBpgMaterialByData(pack.atfDataArr[i],pack.path,pack.enableScaleTexture,pack.autoRecycleEnable);
 				_atlasTextures.push(texture);
 			}
-			count += len;
 		}
 		
 		protected function parseAtlasConfig(textureObj:Object):void
@@ -62,6 +65,19 @@ package com.game.engine2D.core
 				}
 			}
 		}
+		
+		public function setWriteDepthEnable(value:Boolean):void
+		{
+			if (_atlasTextures == null)return;
+			var len:int = _atlasTextures.length;
+			for (var i:int = 0; i < len; i++) 
+			{
+				var texture:ITextureMaterial = _atlasTextures[i];
+				if (texture is ATFTextureMaterial)
+					ATFTextureMaterial(texture).writeDepth = value?WriteDepthOption.TRUE:WriteDepthOption.FALSE;
+			}
+		}
+		
 		public function getDataBytes():ByteArray
 		{
 			if (_texturePack)
@@ -137,10 +153,10 @@ package com.game.engine2D.core
 			}
 			for each (var texture:ITextureMaterial in _atlasTextures) 
 			{
-				texture.texture.dispose();
+				if (texture.texture)
+					texture.texture.dispose();
 				texture.dispose();
 			}
-			count -=  _atlasTextures.length;
 			if (_atlasTextures)
 			{
 				_atlasTextures.splice(0, _atlasTextures.length);

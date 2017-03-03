@@ -14,6 +14,8 @@ package com.game.engine2D.scene.render.ui2D
 	import com.game.engine2D.utils.RenderItemAngleUtil;
 	import com.game.engine2D.utils.RenderUnitShadowUtil;
 	import com.game.engine2D.utils.Transformer;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
+	import com.game.engine3D.vo.SoftOutlineData;
 	import com.game.mainCore.core.poolObject.PoolBitmap;
 	import com.game.mainCore.core.poolObject.PoolShape;
 	import com.game.mainCore.libCore.log.ZLog;
@@ -51,7 +53,7 @@ package com.game.engine2D.scene.render.ui2D
 		
 		//显示和更新控制*********************************************************************************************************
 		private var _resReady:Boolean = false;
-
+		
 		/**
 		 * 资源是否准备完毕
 		 */
@@ -110,7 +112,7 @@ package com.game.engine2D.scene.render.ui2D
 		
 		private var _hitTestX:int = int.MIN_VALUE;
 		private var _hitTestY:int = int.MIN_VALUE;
-
+		
 		private var _showPos:Point = new Point();
 		
 		private var _bmdShadowSource:BitmapData = null;
@@ -139,12 +141,12 @@ package com.game.engine2D.scene.render.ui2D
 			{
 				if (null == currentApData)
 					return 0;
-
+				
 				_hitTestY = - currentApData.ty;
 			}
 			return _hitTestY;
 		}
-
+		
 		/**本换装部件在场景中 的 显示位置(外部设置无效,只用来读取)*/
 		override final public function get showPos():Point
 		{
@@ -303,7 +305,7 @@ package com.game.engine2D.scene.render.ui2D
 			if (!visible)
 				return false;
 			
-//			return this._graphicDis.hitTestPoint($p.x, $p.y, true);
+			//			return this._graphicDis.hitTestPoint($p.x, $p.y, true);
 			var sourceBD:BitmapData = _drawSourceBitmapData;
 			if(sourceBD!=null)
 				
@@ -314,19 +316,19 @@ package com.game.engine2D.scene.render.ui2D
 					ZLog.add("RenderUnit.hitPoint sourceBD被dispose了");
 					return false;
 				}
-//				var pixelValue:uint = sourceBD.getPixel32($p.x-cutRect.x+_sourcePoint.x, $p.y-cutRect.y+_sourcePoint.y) >>> 24;
-//				var pxielX:Number = $p.x - hitTestRect.x;
-//				var pxielY:Number = $p.y - hitTestRect.y;
+				//				var pixelValue:uint = sourceBD.getPixel32($p.x-cutRect.x+_sourcePoint.x, $p.y-cutRect.y+_sourcePoint.y) >>> 24;
+				//				var pxielX:Number = $p.x - hitTestRect.x;
+				//				var pxielY:Number = $p.y - hitTestRect.y;
 				var pxielX:Number = $p.x - getHitTestX();
 				var pxielY:Number = $p.y - getHitTestY();
-
+				
 				//容器翻转了。 内存里的位图是木有翻转的，so，减一下
 				if(_renderScaleX == -1)
 				{
 					pxielX = _drawSourceBitmapData.width - pxielX;
 				}
-//				var pixelValue:uint = sourceBD.getPixel32(pxielX,pxielY) >>> 24;
-//				if(pixelValue!=0x00)return true;
+				//				var pixelValue:uint = sourceBD.getPixel32(pxielX,pxielY) >>> 24;
+				//				if(pixelValue!=0x00)return true;
 				if(sourceBD.getPixel32(pxielX,pxielY) >>> 30)	// 等价代码 if ((sourceBD.getPixel32(pxielX,pxielY)>>24) > 64)
 				{
 					return true;//256的25%
@@ -387,10 +389,10 @@ package com.game.engine2D.scene.render.ui2D
 				depthHasChg = true;
 			}
 			super.depthIndex = value;
-//			if(_shadow && _shadow.parent == _parent && _parent.getChildIndex(_shadow)!=0)
-//			{
-//				_parent.setChildIndex(_shadow,0);
-//			}
+			//			if(_shadow && _shadow.parent == _parent && _parent.getChildIndex(_shadow)!=0)
+			//			{
+			//				_parent.setChildIndex(_shadow,0);
+			//			}
 		}
 		
 		override public function set visible(value:Boolean):void
@@ -426,14 +428,14 @@ package com.game.engine2D.scene.render.ui2D
 		{
 			if (_needRender == value)
 				return;
-
+			
 			super.needRender = value;
 			if (!value)
 				return;
-
+			
 			if(!_visible)//如果为false,就不管...
 				return;
-
+			
 			var ruStatus:RenderUnitStatus = _currentRenderUnitStatus || _defaultRenderUnitStatus;
 			if(ruStatus == null && _currentStatus != 0)//
 			{
@@ -644,16 +646,16 @@ package com.game.engine2D.scene.render.ui2D
 							arr = [this];
 						}
 						
-//						try
-//						{
-//							var k:Sprite = Sprite(cbData.callBackFun);
-//						}
-//						catch(err:Error)
-//						{
-//							var fn:String = err.message.replace(/.+::(\w+\/\w+)\(\)\}\@.+/,"$1");
-//							fn = err.message?(err.message.replace(/.+ (function\-\d+) .+/i,"$1")):fn;
-//							trace(fn,arr); 
-//						}
+						//						try
+						//						{
+						//							var k:Sprite = Sprite(cbData.callBackFun);
+						//						}
+						//						catch(err:Error)
+						//						{
+						//							var fn:String = err.message.replace(/.+::(\w+\/\w+)\(\)\}\@.+/,"$1");
+						//							fn = err.message?(err.message.replace(/.+ (function\-\d+) .+/i,"$1")):fn;
+						//							trace(fn,arr); 
+						//						}
 						cbData.callBackFun.apply(null,arr);//临时先用着啦,为了怕有底的放改出错误来了
 					}
 				}
@@ -821,7 +823,7 @@ package com.game.engine2D.scene.render.ui2D
 		 * 
 		 */	
 		public function getFullSourchPath():String{return _currentFullSourchPath;}
-
+		
 		/**
 		 * @private 
 		 * 当前换装部件的当前状态的原始数据(与_currentFullSourchPath区别， _currentRenderUnitStatus只有在资源加载完毕才会有)
@@ -832,7 +834,7 @@ package com.game.engine2D.scene.render.ui2D
 		 * 当前帧数(从0开始到totalFrame-1)
 		 */
 		private var _currentFrame:int = 0;
-
+		
 		/**
 		 * 当前播放帧(0到totalFrame-1)
 		 */
@@ -877,18 +879,18 @@ package com.game.engine2D.scene.render.ui2D
 			return _totalFrameTm;
 		}
 		
-//		/**
-//		 * 获取此RenderUnit对应的配置和位图信息(注意只有资源加载完毕才能获取此信息，否则返回null, 所以请在onAdd回调发生之后中取该值)
-//		 * 注意：基于性能考虑，此信息对外提供时没有创建副本，所以一定不要再外部改变该信息，否则可能引起出错。
-//		 */
-//		public function get xmlImgData():XmlImgData
-//		{
-//			if(_currentRenderUnitStatus==null)
-//			{
-//				return null;
-//			}
-//			return SceneCache.avatarCountShare.getShareData(_currentRenderUnitStatus.fullSourchPath) as XmlImgData;
-//		}
+		//		/**
+		//		 * 获取此RenderUnit对应的配置和位图信息(注意只有资源加载完毕才能获取此信息，否则返回null, 所以请在onAdd回调发生之后中取该值)
+		//		 * 注意：基于性能考虑，此信息对外提供时没有创建副本，所以一定不要再外部改变该信息，否则可能引起出错。
+		//		 */
+		//		public function get xmlImgData():XmlImgData
+		//		{
+		//			if(_currentRenderUnitStatus==null)
+		//			{
+		//				return null;
+		//			}
+		//			return SceneCache.avatarCountShare.getShareData(_currentRenderUnitStatus.fullSourchPath) as XmlImgData;
+		//		}
 		
 		public function getImgApData($action:uint,$angle:uint,$frame:uint):RenderUnitData
 		{
@@ -1013,7 +1015,7 @@ package com.game.engine2D.scene.render.ui2D
 		 * 注意此值应该为一个大于0的值！！！不能设置为0.
 		 * */
 		public var speed:Number = 1;
-
+		
 		//当前播放信息**********************************************************************
 		/**
 		 * @private 
@@ -1170,7 +1172,20 @@ package com.game.engine2D.scene.render.ui2D
 				RenderUnitLoader.loadRenderUnit(this, _currentStatus);
 			}
 		}
-	
+		
+		public function get renderParamData():RenderParamData3D
+		{
+			// TODO Auto Generated method stub
+			return null;
+		}
+		
+		public function setSoftOutline(data:SoftOutlineData):void
+		{
+			// TODO Auto Generated method stub
+			
+		}
+		
+		
 		/**
 		 * 设置角度
 		 * @param $angle
@@ -1253,7 +1268,7 @@ package com.game.engine2D.scene.render.ui2D
 			if(
 				_currentStatus==0
 				|| _playComplete
-				)
+			)
 			{
 				return;
 			}
@@ -1273,7 +1288,7 @@ package com.game.engine2D.scene.render.ui2D
 				//改变标识
 				inSleep = true;
 			}
-
+			
 			//睡眠变化
 			if(_oldData.inSleep != inSleep)
 			{
@@ -1360,11 +1375,11 @@ package com.game.engine2D.scene.render.ui2D
 			{ 
 				_drawSourceBitmapData = renderImg;//取不到的时候,就取原来的吧...
 				
-//				var graphicSp:Shape = _graphicDis as Shape;
+				//				var graphicSp:Shape = _graphicDis as Shape;
 				var graphicSp:Bitmap = _graphicDis as Bitmap;
 				if(_drawSourceBitmapData == null)//清空渲染...
 				{
-//					graphicSp.graphics.clear();
+					//					graphicSp.graphics.clear();
 					graphicSp.bitmapData = null;
 					if(_shadow)
 					{
@@ -1374,9 +1389,9 @@ package com.game.engine2D.scene.render.ui2D
 				var isNeedDraw:Boolean = false;
 				//可见性判断
 				if(     _drawSourceBitmapData!=null
-						&& (!inSleep)
-						&& ruStatus!=null
-					)
+					&& (!inSleep)
+					&& ruStatus!=null
+				)
 				{
 					currentApData = ruStatus.getRenderUnitData(_currentStatus,_logicAngle, _currentFrame);
 					if (currentApData!=null)
@@ -1385,7 +1400,7 @@ package com.game.engine2D.scene.render.ui2D
 						cutRect.y = - currentApData.ty;
 						cutRect.width = _drawSourceBitmapData.width;
 						cutRect.height = _drawSourceBitmapData.height;
- 
+						
 						_hitTestX = int.MIN_VALUE;
 						_hitTestY = int.MIN_VALUE;
 						//
@@ -1401,14 +1416,14 @@ package com.game.engine2D.scene.render.ui2D
 					var drawHeight:Number = sourceBD.height + drawHeightOffset;
 					if(_oldData.oldSourceBD != _drawSourceBitmapData)
 					{
-//						graphicSp.graphics.clear();
-//						if(GlobalConfig.isShowDrawRect)
-//						{
-//							graphicSp.graphics.lineStyle(1,0xff0000);
-//						}
-//						graphicSp.graphics.beginBitmapFill(sourceBD);
-//						graphicSp.graphics.drawRect(0,0,drawWdith,drawHeight);
-//						graphicSp.graphics.endFill();
+						//						graphicSp.graphics.clear();
+						//						if(GlobalConfig.isShowDrawRect)
+						//						{
+						//							graphicSp.graphics.lineStyle(1,0xff0000);
+						//						}
+						//						graphicSp.graphics.beginBitmapFill(sourceBD);
+						//						graphicSp.graphics.drawRect(0,0,drawWdith,drawHeight);
+						//						graphicSp.graphics.endFill();
 						graphicSp.bitmapData = sourceBD;
 						
 						_lastDrawTm = GlobalConfig2D.nowTime;// getTimer();
@@ -1470,7 +1485,7 @@ package com.game.engine2D.scene.render.ui2D
 								var ty:int = -cutRect.y;
 								ma.tx = -errorValue-tx -errorValue;
 								ma.ty = (-errorValue-ty)*GlobalConfig2D.shadowYScale;
-
+								
 								//填充图像
 								_shadow.graphics.beginBitmapFill(_drawSourceBitmapData,ma,false);
 								_shadow.graphics.drawRect(-tx,-(ty*GlobalConfig2D.shadowYScale)>>0,cutRect.width-errorValue*2,((cutRect.height-errorValue*2)*GlobalConfig2D.shadowYScale)>>0);//.drawRect(afd.cutRect.x,afd.cutRect.y,afd.cutRect.width,afd.cutRect.height);
@@ -1486,14 +1501,14 @@ package com.game.engine2D.scene.render.ui2D
 									
 									var bf:BlurFilter = new BlurFilter(2,2,BitmapFilterQuality.LOW);
 									_shadow.filters = [bf];
-
+									
 									//增加倾斜
 									ma.identity();
 									ma.tx = _shadow.x;
 									ma.ty = _shadow.y;
 									ma.c = GlobalConfig2D.tanShadow;
 									_shadow.transform.matrix = ma;
-//									_shadow.cacheAsBitmap = true;
+									//									_shadow.cacheAsBitmap = true;
 								}
 							}
 						}
@@ -1517,7 +1532,7 @@ package com.game.engine2D.scene.render.ui2D
 							}
 							var oy:Number = (_drawSourceBitmapData.height * GlobalConfig2D.shadowYScale - ((_drawSourceBitmapData.height * GlobalConfig2D.shadowYScale) >> 0)) * (1-GlobalConfig2D.shadowYScale);
 							_shadow.y = showPos.y + cutRect.y * GlobalConfig2D.shadowYScale + oy + _shadowOffsetY;
-
+							
 						}
 						else
 						{
@@ -1551,124 +1566,124 @@ package com.game.engine2D.scene.render.ui2D
 			{
 				execPlayCallBack();
 			}
-//			else if ((GlobalConfig.shadowRenderType==GlobalConfig.SHADOW_DYNC_CACHE) && (!(_dyncTickcount++&63)))
-//			{
-//				if (_isDrawShadow)
-//				{
-//					// 每帧都要查询一次阴影缓存，否则在只有一帧的动画中可能会被释放掉，查询的性能消耗为一次hash表查询，性能影响不会太大
-//					var bitmapData:BitmapData = avatarImg;
-//					if (bitmapData)
-//					{
-//						bmdShadow = (_avatarScaleX!=-1)?RenderUnitShadowUtil.getApCache(bitmapData):RenderUnitShadowUtil.getApScaleCache(bitmapData);
-//					}
-//				}
-//			}
+			//			else if ((GlobalConfig.shadowRenderType==GlobalConfig.SHADOW_DYNC_CACHE) && (!(_dyncTickcount++&63)))
+			//			{
+			//				if (_isDrawShadow)
+			//				{
+			//					// 每帧都要查询一次阴影缓存，否则在只有一帧的动画中可能会被释放掉，查询的性能消耗为一次hash表查询，性能影响不会太大
+			//					var bitmapData:BitmapData = avatarImg;
+			//					if (bitmapData)
+			//					{
+			//						bmdShadow = (_avatarScaleX!=-1)?RenderUnitShadowUtil.getApCache(bitmapData):RenderUnitShadowUtil.getApScaleCache(bitmapData);
+			//					}
+			//				}
+			//			}
 		}
 		
-//		private var _time:uint = 0;
+		//		private var _time:uint = 0;
 		
 		
-//		/**
-//		 * 可见性判断 
-//		 * @return 
-//		 * 
-//		 */		
-//		private function isAvailable(inSleep:Boolean):Boolean
-//		{
-//			var available:Boolean =  
-//				visible
-//				&& _drawSourceBitmapData!=null
-//				&& (!inSleep)
-//				&& _currentRenderUnitStatus!=null//如过状态资源存在（比如：武器的打坐状态， 武器的跳跃状态 等）
-//				&&
-//				_isInViewDistance
-//			return available;
-//		}
-//		
-//		/**
-//		 * @private 
-//		 * 将换装部件画向主换装BD
-//		 * @param $target 画向的目标
-//		 */
-//		override public function draw($target:IBitmapDrawable):void
-//		{o
-//			if(
-//				!_resReady
-//				|| !_currentStatus
-//				|| _currentStatus=="")
-//			{
-//				return;
-//			}
-//			if(updateNow)
-//			{
-//				//播放开始前回调
-//				if(_playBeforeStart)
-//				{
-//					_playBeforeStart = false;
-//					//执行播放前回调
-//					exceteCallBackData(_playBeforeStartCallBackList);
-//				}
-//				var isNeedDraw:Boolean = visible && _isInViewDistance;
-//				//拷贝
-//				if(isNeedDraw)
-//				{
-//					if(_drawSourceBitmapData)
-//					{
-//						drawGraphicSP(_drawSourceBitmapData,cutRect);
-//					}
-//					else
-//					{
-//						var graphicSp:Shape = _graphicDis as Shape;
-//						graphicSp.graphics.clear();
-//						if(_shadow)
-//						{
-//							_shadow.graphics.clear();
-//						}
-//					}
-//				}
-//				execPlayCallBack();
-//			}
-//		}
-//		
-//		private function drawGraphicSP(sourceBD:BitmapData,rect:Rectangle):void
-//		{
-//			var scaleX:int = _avatarScaleX;
-//			var graphicSp:Shape = _graphicDis as Shape;
-//			var drawWdith:Number = sourceBD.width + drawWdithOffset;
-//			var drawHeight:Number = sourceBD.height + drawHeightOffset;
-//			if(_oldData.oldSourceBD != _drawSourceBitmapData)
-//			{
-//				graphicSp.graphics.clear();
-//				graphicSp.graphics.beginBitmapFill(sourceBD);
-//				graphicSp.graphics.drawRect(0,0,drawWdith,drawHeight);
-//				graphicSp.graphics.endFill();
-//				//
-//				if(_enableShadow && _isDrawShadow)
-//				{
-//					drawShadow(sourceBD,rect,scaleX);
-//				}
-//			}
-//			//
-//			_graphicDis.x = showPos.x + rect.x*scaleX;
-//			_graphicDis.y = showPos.y + rect.y;
-//			if(graphicSp.scaleX != scaleX)
-//			{
-//				graphicSp.scaleX = scaleX;
-//			}
-//			//
-//			if(_shadow)
-//			{
-//				//添加进容器
-//				_shadow.x = this.x+GlobalConfig.shadowOffsetX+_shadowOffsetX;
-//				_shadow.y = this.y+GlobalConfig.shadowOffsetY+_shadowOffsetY;
-//				//
-//				_shadow.scaleX = scaleX;
-//			}
-//			//
-//			_oldData.oldSourceBD = _drawSourceBitmapData;
-//			//执行一次以后在置成falsh
-//			updateNow = false;
-//		}
+		//		/**
+		//		 * 可见性判断 
+		//		 * @return 
+		//		 * 
+		//		 */		
+		//		private function isAvailable(inSleep:Boolean):Boolean
+		//		{
+		//			var available:Boolean =  
+		//				visible
+		//				&& _drawSourceBitmapData!=null
+		//				&& (!inSleep)
+		//				&& _currentRenderUnitStatus!=null//如过状态资源存在（比如：武器的打坐状态， 武器的跳跃状态 等）
+		//				&&
+		//				_isInViewDistance
+		//			return available;
+		//		}
+		//		
+		//		/**
+		//		 * @private 
+		//		 * 将换装部件画向主换装BD
+		//		 * @param $target 画向的目标
+		//		 */
+		//		override public function draw($target:IBitmapDrawable):void
+		//		{o
+		//			if(
+		//				!_resReady
+		//				|| !_currentStatus
+		//				|| _currentStatus=="")
+		//			{
+		//				return;
+		//			}
+		//			if(updateNow)
+		//			{
+		//				//播放开始前回调
+		//				if(_playBeforeStart)
+		//				{
+		//					_playBeforeStart = false;
+		//					//执行播放前回调
+		//					exceteCallBackData(_playBeforeStartCallBackList);
+		//				}
+		//				var isNeedDraw:Boolean = visible && _isInViewDistance;
+		//				//拷贝
+		//				if(isNeedDraw)
+		//				{
+		//					if(_drawSourceBitmapData)
+		//					{
+		//						drawGraphicSP(_drawSourceBitmapData,cutRect);
+		//					}
+		//					else
+		//					{
+		//						var graphicSp:Shape = _graphicDis as Shape;
+		//						graphicSp.graphics.clear();
+		//						if(_shadow)
+		//						{
+		//							_shadow.graphics.clear();
+		//						}
+		//					}
+		//				}
+		//				execPlayCallBack();
+		//			}
+		//		}
+		//		
+		//		private function drawGraphicSP(sourceBD:BitmapData,rect:Rectangle):void
+		//		{
+		//			var scaleX:int = _avatarScaleX;
+		//			var graphicSp:Shape = _graphicDis as Shape;
+		//			var drawWdith:Number = sourceBD.width + drawWdithOffset;
+		//			var drawHeight:Number = sourceBD.height + drawHeightOffset;
+		//			if(_oldData.oldSourceBD != _drawSourceBitmapData)
+		//			{
+		//				graphicSp.graphics.clear();
+		//				graphicSp.graphics.beginBitmapFill(sourceBD);
+		//				graphicSp.graphics.drawRect(0,0,drawWdith,drawHeight);
+		//				graphicSp.graphics.endFill();
+		//				//
+		//				if(_enableShadow && _isDrawShadow)
+		//				{
+		//					drawShadow(sourceBD,rect,scaleX);
+		//				}
+		//			}
+		//			//
+		//			_graphicDis.x = showPos.x + rect.x*scaleX;
+		//			_graphicDis.y = showPos.y + rect.y;
+		//			if(graphicSp.scaleX != scaleX)
+		//			{
+		//				graphicSp.scaleX = scaleX;
+		//			}
+		//			//
+		//			if(_shadow)
+		//			{
+		//				//添加进容器
+		//				_shadow.x = this.x+GlobalConfig.shadowOffsetX+_shadowOffsetX;
+		//				_shadow.y = this.y+GlobalConfig.shadowOffsetY+_shadowOffsetY;
+		//				//
+		//				_shadow.scaleX = scaleX;
+		//			}
+		//			//
+		//			_oldData.oldSourceBD = _drawSourceBitmapData;
+		//			//执行一次以后在置成falsh
+		//			updateNow = false;
+		//		}
 		
 		private var _shadow:Shape;
 		
@@ -1712,13 +1727,13 @@ package com.game.engine2D.scene.render.ui2D
 			{
 				return;
 			}
-
+			
 			_shadowOffsetX = value;
 			if (!_shadow)
 			{
 				return;
 			}
-
+			
 			if (GlobalConfig2D.shadowRenderType == GlobalConfig2D.SHADOW_SHAPE)
 			{
 				_shadow.x = this.x+GlobalConfig2D.shadowOffsetX+_shadowOffsetX;
@@ -1728,7 +1743,7 @@ package com.game.engine2D.scene.render.ui2D
 				{
 					return;
 				}
-
+				
 				if (-1 == _renderScaleX)
 				{
 					_shadow.x = this.x-(_drawSourceBitmapData.width+cutRect.x) + GlobalConfig2D.tanShadow * cutRect.y + _shadowOffsetX;
@@ -1769,82 +1784,82 @@ package com.game.engine2D.scene.render.ui2D
 		}
 		
 		//
-//		private function drawShadow(sourceBD:BitmapData,rect:Rectangle,avatarScaleX:int=1):void
-//		{
-//			//--------------------------------------------------------------------------------------------//
-//			//			if(!_shadow)
-//			//			{
-//			//				_shadow = new RenderUnitShadow();
-//			//				parent.addChildAt(_shadow,0);
-//			//			}
-//			//			_shadow.update(sourceBD);
-//			//			//
-//			//			_shadow.x = showPos.x + rect.x;
-//			//			_shadow.y = showPos.y + rect.y;
-//			//			if(_shadow.scaleX != avatarScaleX)
-//			//			{
-//			//				_shadow.scaleX = avatarScaleX;
-//			//			}
-//			//			if(avatarScaleX == -1)
-//			//			{
-//			//				_shadow.x = showPos.x-rect.x;
-//			//			}
-//			//--------------------------------------------------------------------------------------------//
-//			var isFirstNew:Boolean = false;
-//			//否则
-//			//保证存在
-//			if(_shadow==null)
-//			{
-//				_shadow = new Shape();
-//				isFirstNew = true;
-//			}
-//			if(!_shadow.parent)
-//			{
-//				parent.addChildAt(_shadow,0);
-//			}
-//			
-//			//先清空
-//			_shadow.graphics.clear();
-//			
-//			//方法1(优点 ：性能较高  缺点：同一角色不同阴影之间有重叠 加深)
-//			//---------------------------------------------------------------------------------
-//			//一个共用的矩阵
-//			var ma:Matrix = new Matrix();
-//			ma.identity();
-//			ma.scale(1,GlobalConfig.shadowYScale);
-//			
-//			//依次将各个换装部件画向影子并压缩图像
-//			var errorValue:Number = 0;//误差修正（修正因为缩放和倾斜带来的小数误差问题,111111111临时这么解决下）
-//			var tx:int = -cutRect.x;
-//			var ty:int = -cutRect.y;
-//			ma.tx = -_sourcePoint.x-errorValue-tx -errorValue;
-//			ma.ty = (-_sourcePoint.y-errorValue-ty)*GlobalConfig.shadowYScale;
-//			
-//			//填充图像
-//			_shadow.graphics.beginBitmapFill(_drawSourceBitmapData,ma,false);
-//			_shadow.graphics.drawRect(-tx,-ty*GlobalConfig.shadowYScale,cutRect.width-errorValue*2,Math.floor((cutRect.height-errorValue*2)*GlobalConfig.shadowYScale));//.drawRect(afd.cutRect.x,afd.cutRect.y,afd.cutRect.width,afd.cutRect.height);
-//			_shadow.graphics.endFill();
-//			
-//			if(isFirstNew)
-//			{
-//				//转变颜色
-//				var ctf:ColorTransform = new ColorTransform();
-//				ctf.color = 0x000000;
-//				ctf.alphaMultiplier = GlobalConfig.shadowAlpha;
-//				_shadow.transform.colorTransform = ctf;
-//				
-//				var bf:BlurFilter = new BlurFilter(2,2,BitmapFilterQuality.LOW);
-//				_shadow.filters = [bf];
-//				
-//				//增加倾斜
-//				ma.identity();
-//				ma.tx = _shadow.x;
-//				ma.ty = _shadow.y;
-//				var rad:Number = GlobalConfig.shadowAngle/180 * Math.PI;
-//				ma.c = Math.tan(rad);
-//				_shadow.transform.matrix = ma;
-//			}
-//		}
+		//		private function drawShadow(sourceBD:BitmapData,rect:Rectangle,avatarScaleX:int=1):void
+		//		{
+		//			//--------------------------------------------------------------------------------------------//
+		//			//			if(!_shadow)
+		//			//			{
+		//			//				_shadow = new RenderUnitShadow();
+		//			//				parent.addChildAt(_shadow,0);
+		//			//			}
+		//			//			_shadow.update(sourceBD);
+		//			//			//
+		//			//			_shadow.x = showPos.x + rect.x;
+		//			//			_shadow.y = showPos.y + rect.y;
+		//			//			if(_shadow.scaleX != avatarScaleX)
+		//			//			{
+		//			//				_shadow.scaleX = avatarScaleX;
+		//			//			}
+		//			//			if(avatarScaleX == -1)
+		//			//			{
+		//			//				_shadow.x = showPos.x-rect.x;
+		//			//			}
+		//			//--------------------------------------------------------------------------------------------//
+		//			var isFirstNew:Boolean = false;
+		//			//否则
+		//			//保证存在
+		//			if(_shadow==null)
+		//			{
+		//				_shadow = new Shape();
+		//				isFirstNew = true;
+		//			}
+		//			if(!_shadow.parent)
+		//			{
+		//				parent.addChildAt(_shadow,0);
+		//			}
+		//			
+		//			//先清空
+		//			_shadow.graphics.clear();
+		//			
+		//			//方法1(优点 ：性能较高  缺点：同一角色不同阴影之间有重叠 加深)
+		//			//---------------------------------------------------------------------------------
+		//			//一个共用的矩阵
+		//			var ma:Matrix = new Matrix();
+		//			ma.identity();
+		//			ma.scale(1,GlobalConfig.shadowYScale);
+		//			
+		//			//依次将各个换装部件画向影子并压缩图像
+		//			var errorValue:Number = 0;//误差修正（修正因为缩放和倾斜带来的小数误差问题,111111111临时这么解决下）
+		//			var tx:int = -cutRect.x;
+		//			var ty:int = -cutRect.y;
+		//			ma.tx = -_sourcePoint.x-errorValue-tx -errorValue;
+		//			ma.ty = (-_sourcePoint.y-errorValue-ty)*GlobalConfig.shadowYScale;
+		//			
+		//			//填充图像
+		//			_shadow.graphics.beginBitmapFill(_drawSourceBitmapData,ma,false);
+		//			_shadow.graphics.drawRect(-tx,-ty*GlobalConfig.shadowYScale,cutRect.width-errorValue*2,Math.floor((cutRect.height-errorValue*2)*GlobalConfig.shadowYScale));//.drawRect(afd.cutRect.x,afd.cutRect.y,afd.cutRect.width,afd.cutRect.height);
+		//			_shadow.graphics.endFill();
+		//			
+		//			if(isFirstNew)
+		//			{
+		//				//转变颜色
+		//				var ctf:ColorTransform = new ColorTransform();
+		//				ctf.color = 0x000000;
+		//				ctf.alphaMultiplier = GlobalConfig.shadowAlpha;
+		//				_shadow.transform.colorTransform = ctf;
+		//				
+		//				var bf:BlurFilter = new BlurFilter(2,2,BitmapFilterQuality.LOW);
+		//				_shadow.filters = [bf];
+		//				
+		//				//增加倾斜
+		//				ma.identity();
+		//				ma.tx = _shadow.x;
+		//				ma.ty = _shadow.y;
+		//				var rad:Number = GlobalConfig.shadowAngle/180 * Math.PI;
+		//				ma.c = Math.tan(rad);
+		//				_shadow.transform.matrix = ma;
+		//			}
+		//		}
 		
 		private function execPlayCallBack():void
 		{
@@ -1942,7 +1957,7 @@ package com.game.engine2D.scene.render.ui2D
 			}
 			
 			cutRect.setEmpty();
-
+			
 			_x = 0;
 			_y = 0;
 			_offsetX = 0;
@@ -2010,7 +2025,7 @@ package com.game.engine2D.scene.render.ui2D
 				_graphicDis.y = 0;
 				DisplayUtil.removeForParent(_graphicDis);
 				//
-//				PoolShape.recycle(_graphicDis as PoolShape);
+				//				PoolShape.recycle(_graphicDis as PoolShape);
 				PoolBitmap.recycle(_graphicDis as PoolBitmap);
 				_graphicDis = null;
 			}

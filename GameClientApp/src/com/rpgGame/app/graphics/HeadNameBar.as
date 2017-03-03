@@ -1,9 +1,9 @@
 package com.rpgGame.app.graphics
 {
-	import com.game.mainCore.libCore.pool.IPoolClass;
-	import com.game.mainCore.libCore.pool.Pool;
+	import com.game.engine3D.core.poolObject.IInstancePoolClass;
+	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.rpgGame.coreData.utils.ColorUtils;
-	
+
 	import feathers.controls.Label;
 	import feathers.controls.text.Fontter;
 
@@ -14,9 +14,9 @@ package com.rpgGame.app.graphics
 	 * 创建时间：2015-6-10 上午11:12:28
 	 *
 	 */
-	public class HeadNameBar extends Label implements IPoolClass
+	public class HeadNameBar extends Label implements IInstancePoolClass
 	{
-		private static var headNameBarPool : Pool = new Pool("HeadNameBar", 300);
+		private static var headNameBarPool : InstancePool = new InstancePool("HeadNameBar", 300);
 
 		/**
 		 * 生成一个HeadNameBar
@@ -38,53 +38,46 @@ package com.rpgGame.app.graphics
 			headNameBarPool.disposeObj(bar);
 		}
 
-		private const WIDTH : uint = 300;
-		private const HEIGHT : uint = 44;
-
 		public function HeadNameBar()
 		{
 			super();
 			reSet(null);
 			touchable = touchGroup = false;
 			touchAcross = true;
-						
-		}
-
-		public function get realWidth() : uint
-		{
-			return WIDTH;
 		}
 
 		public function get realHeight() : uint
 		{
-			return HEIGHT;
+			return this.height;
+		}
+
+		public function get realWidth() : uint
+		{
+			return this.width;
 		}
 
 		/**
-		 * 更新数据名字
-		 * @param value
-		 * @author 卢国征   2015-5-5
+		 * 设置颜色
 		 */
-		public function update( value : *, $color:uint ) : void
+		public function setColor(color : uint) : void
 		{
-			htmlText = value;
-			color = $color;
+			this.color = color;
 		}
 
 		/**
-		 * 更新名字颜色 
-		 * @param value
-		 * @author 陈鹉光   2016-06-22
-		 */		
-		public function updateNameColor( value:* ):void
+		 * 设置名字
+		 */
+		public function setName(name : String) : void
 		{
-			htmlText = value;
+			this.height = 100;
+			this.width = 300;
+			this.htmlText = name;
+			this.width = this.textWidth;
+			this.height = this.textHeight;
 		}
-		
+
 		public function reSet($parameters : Array) : void
 		{
-			width = WIDTH;
-			height = HEIGHT;
 			htmlText = "";
 			fontName = Fontter.FONT_Hei;
 			fontSize = 14;
@@ -96,11 +89,16 @@ package com.rpgGame.app.graphics
 			nativeFilters = ColorUtils.getDefaultStrokeFilter();
 		}
 
-		override public function dispose() : void
+		public function instanceDestroy() : void
+		{
+			instanceDispose();
+			dispose();
+		}
+
+		public function instanceDispose() : void
 		{
 			if (parent)
 				parent.removeChild(this);
-//			super.dispose();
 		}
 	}
 }

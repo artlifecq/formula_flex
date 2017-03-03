@@ -1,6 +1,6 @@
 package com.game.engine3D.display
 {
-	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 
 	import flash.geom.Point;
 
@@ -43,7 +43,7 @@ package com.game.engine3D.display
 		public function playInter3DAt(url : String, x : int, y : int, repeat : int = 1, onPlayComplete : Function = null) : InterObject3D
 		{
 			var sr3D : InterObject3D = new InterObject3D();
-			var data : RenderParamData = new RenderParamData(0, "effect_ui", url);
+			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", url);
 			sr3D.addRenderUnitWith(data, repeat, onPlayComplete);
 
 			sr3D.x = x;

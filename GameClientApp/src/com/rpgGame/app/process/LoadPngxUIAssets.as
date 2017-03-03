@@ -42,14 +42,14 @@ package com.rpgGame.app.process
 			ResLoadingView.instance.show();
 			ResLoadingView.instance.title = "正在加载公共UI素材...";
 
-			var loader : ThemeLoader = new ThemeLoader(true);
-			loader.load(_url, onFinish, onLoaderPorgress, onResError);
+			var loader : ThemeLoader = new ThemeLoader();
+			loader.load(_url, onFinish, onProgress, onResError);
 		}
 
-		private function onLoaderPorgress(ld : MultiLoadData, e : ProgressEvent) : void
+		private function onProgress(progress:Number) : void
 		{
-			var currPercent : Number = e.bytesLoaded / e.bytesTotal;
-			setProcessPercent(currPercent);
+			//			var currPercent : Number = e.bytesLoaded / e.bytesTotal;
+			setProcessPercent(progress);
 		}
 
 		private function onResError(ld : MultiLoadData, e : Event) : void

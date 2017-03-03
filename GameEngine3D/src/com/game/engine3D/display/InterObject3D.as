@@ -3,7 +3,7 @@ package com.game.engine3D.display
 	import com.game.engine3D.core.poolObject.PoolContainer3D;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.vo.BaseObj3D;
 
 	import away3d.containers.View3D;
@@ -43,7 +43,7 @@ package com.game.engine3D.display
 				_unit.stopRender();
 		}
 
-		public function addRenderUnitWith(rend : RenderParamData, repeat : int = 1, onPlayComplete : Function = null) : RenderUnit3D
+		public function addRenderUnitWith(rend : RenderParamData3D, repeat : int = 1, onPlayComplete : Function = null) : RenderUnit3D
 		{
 			if (rend == null)
 			{

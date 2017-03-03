@@ -91,16 +91,12 @@ package com.rpgGame.app.richText
 	import com.rpgGame.app.richText.component.RichTextUnitData;
 	import com.rpgGame.app.utils.MenuUtil;
 	import com.rpgGame.app.utils.TaskUtil;
-	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipManager;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.type.AssetUrl;
-	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.ItemQualityType;
-	
-	import app.message.GoodsType;
 	
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;

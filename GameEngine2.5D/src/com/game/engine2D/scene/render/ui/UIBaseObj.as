@@ -1,11 +1,11 @@
 package com.game.engine2D.scene.render.ui{
-	import com.game.engine2D.vo.IFrameRender;
+	import com.game.engine3D.vo.IFrameRender;
 	import com.game.mainCore.libCore.pool.IPoolClass;
 	
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
-	import org.client.mainCore.utils.Tick;
+	import away3d.tick.Tick;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
@@ -74,12 +74,12 @@ package com.game.engine2D.scene.render.ui{
 		//*******************************************IFrameRender接口基本参数*******************************************
 		public function startRender():void
 		{
-			Tick.addCallback(onTick);
+			Tick.instance.addCallBack(onTick);
 		}
 		
 		public function stopRender():void
 		{
-			Tick.removeCallback(onTick);
+			Tick.instance.removeCallBack(onTick);
 		}
 		
 		//*******************************************IDisplayable接口基本参数*******************************************
@@ -592,7 +592,7 @@ package com.game.engine2D.scene.render.ui{
 			_offsetY = 0;
 			_x = 0;
 			_y = 0;
-//			_graphicDis = null;
+			//			_graphicDis = null;
 		}
 		
 		

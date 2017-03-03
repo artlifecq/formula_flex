@@ -336,16 +336,16 @@ package com.game.engine2D.vo
 			for (var yi:uint = 0; yi <= _segmentsH; ++yi) {
 				for (var xi:uint = 0; xi <= _segmentsW; ++xi) {
 					data.position = index<<2;
-					data.writeFloat( (xi/_segmentsW)*target.scaleU );
-					data.writeFloat( (1 - yi/_segmentsH)*target.scaleV );
+					data.writeFloat( (xi/_segmentsW) );
+					data.writeFloat( (1 - yi/_segmentsH) );
 					index++;
 					index++;
 					index += skip;
 					
 					if (_doubleSided) {
 						data.position = index<<2;
-						data.writeFloat( (xi/_segmentsW)*target.scaleU );
-						data.writeFloat( (1 - yi/_segmentsH)*target.scaleV );
+						data.writeFloat( (xi/_segmentsW) );
+						data.writeFloat( (1 - yi/_segmentsH) );
 						index++;
 						index++;
 						index += skip;

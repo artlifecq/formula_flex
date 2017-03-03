@@ -1,10 +1,10 @@
 package com.game.engine3D.state
 {
-	import com.game.mainCore.libCore.pool.IPoolClass;
-
+	import com.game.engine3D.core.poolObject.IInstancePoolClass;
+	
 	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
-
+	
 	/**
 	 *
 	 * 状态机
@@ -12,7 +12,7 @@ package com.game.engine3D.state
 	 * 创建时间：2015-4-9 下午2:05:15
 	 *
 	 */
-	public class StateMachine implements IPoolClass
+	public class StateMachine implements IInstancePoolClass
 	{
 		public static var isDebug : Boolean = false;
 		protected var _owner : Object;
@@ -23,7 +23,7 @@ package com.game.engine3D.state
 		protected var _referenceMapping : Dictionary;
 		protected var _usePass : Boolean;
 		protected var _isDisposed : Boolean;
-
+		
 		public function StateMachine(owner : Object)
 		{
 			_states = new Dictionary(true);
@@ -33,19 +33,19 @@ package com.game.engine3D.state
 			_referenceMapping = new Dictionary(true);
 			reSet([owner]);
 		}
-
+		
 		public function reSet($parameters : Array) : void
 		{
 			_owner = $parameters[0];
 			_usePass = true;
 			_isDisposed = false;
 		}
-
+		
 		public function get owner() : Object
 		{
 			return _owner;
 		}
-
+		
 		/**
 		 *
 		 * @param type 状态类型
@@ -105,7 +105,7 @@ package com.game.engine3D.state
 						_blockQueue[type] = null;
 						delete _blockQueue[type];
 					}
-
+					
 					if (passed)
 					{
 						if (currState)
@@ -113,9 +113,7 @@ package com.game.engine3D.state
 						transState.beforeEnter();
 						if (currState)
 							currState.leave();
-						//////
 						_currStates[transState.tribe] = transState;
-						//////
 						transState.enter();
 						if (currState)
 							currState.afterLeave();
@@ -142,7 +140,7 @@ package com.game.engine3D.state
 			}
 			return false;
 		}
-
+		
 		public function passTo(transType : int, force : Boolean = false) : Boolean
 		{
 			if (_isDisposed)
@@ -162,7 +160,7 @@ package com.game.engine3D.state
 				trace("====================" + this + "no pass:", currState ? currState.type : "", transState.type);
 			return passed;
 		}
-
+		
 		public function removeState(type : int) : void
 		{
 			if (_isDisposed)
@@ -186,12 +184,12 @@ package com.game.engine3D.state
 				delete _lastStates[state.tribe];
 			}
 		}
-
+		
 		protected function createState(type : int) : IState
 		{
 			return null;
 		}
-
+		
 		public function extractState(type : int) : IState
 		{
 			if (_isDisposed)
@@ -209,26 +207,26 @@ package com.game.engine3D.state
 			}
 			return state;
 		}
-
+		
 		public function getCurrState(tribe : Class) : IState
 		{
 			if (_isDisposed)
 				return null;
 			return _currStates[getQualifiedClassName(tribe)];
 		}
-
+		
 		public function getLastState(tribe : Class) : IState
 		{
 			if (_isDisposed)
 				return null;
 			return _lastStates[getQualifiedClassName(tribe)];
 		}
-
+		
 		public function set usePass(value : Boolean) : void
 		{
 			_usePass = value;
 		}
-
+		
 		public function getReference(referenceType : Class, key : Object = null) : StateReference
 		{
 			if (!_referenceMapping)
@@ -246,7 +244,12 @@ package com.game.engine3D.state
 			reference.reset();
 			return reference;
 		}
-
+		
+		public function get isDisposed() : Boolean
+		{
+			return _isDisposed;
+		}
+		
 		public function dispose() : void
 		{
 			if (_referenceMapping)
@@ -291,13 +294,8 @@ package com.game.engine3D.state
 			_owner = null;
 			_isDisposed = true;
 		}
-
-		public function get isDisposed() : Boolean
-		{
-			return _isDisposed;
-		}
-
-		public function destroy() : void
+		
+		public function instanceDestroy() : void
 		{
 			dispose();
 			if (_states)
@@ -315,6 +313,11 @@ package com.game.engine3D.state
 			_currStates = null;
 			_lastStates = null;
 			_blockQueue = null;
+		}
+		
+		public function instanceDispose() : void
+		{
+			dispose();
 		}
 	}
 }

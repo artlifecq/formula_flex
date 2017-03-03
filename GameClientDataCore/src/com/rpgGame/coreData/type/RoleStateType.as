@@ -52,5 +52,11 @@ package com.rpgGame.coreData.type
 		public static const CONTROL_DEAD_LAUNCH_MOVE : int = rEnum.next;
 		public static const CONTROL_PREWAR_WAITING : int = rEnum.next;
 		public static const CONTROL_TRAIL_MOVE : int = rEnum.next;
+		public static const CONTROL_BLIND : int = rEnum.next;
+		public static const CONTROL_SHADOW : int = rEnum.next;
+		public static const CONTROL_SCARED : int = rEnum.next;
+		public static const CONTROL_FASTING : int = rEnum.next;
+		public static const CONTROL_SCARED_MOVE : int = rEnum.next;
+		public static const CONTROL_MOUNT_RIDE : int = rEnum.next;
 	}
 }

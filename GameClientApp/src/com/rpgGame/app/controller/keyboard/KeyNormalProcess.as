@@ -69,7 +69,7 @@ package com.rpgGame.app.controller.keyboard
 				case "59_60": //+-
 					if (!ClientConfig.isRelease)
 					{
-						StatsUtil.showOrHideAwayStats(Stage3DLayerManager.stage, Stage3DLayerManager.stage3DProxy);
+						StatsUtil.showAwayStats(Stage3DLayerManager.stage, Stage3DLayerManager.stage3DProxy);
 						LayerManager.showOrHideMM();
 						ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
 					}

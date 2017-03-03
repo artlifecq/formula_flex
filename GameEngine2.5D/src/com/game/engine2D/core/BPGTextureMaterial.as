@@ -35,9 +35,23 @@ package com.game.engine2D.core
 			this.colorTransform = new ColorTransform();
 		}
 		
-		public function get textureParsed():Boolean
+		public function get textureReady():Boolean
 		{
-			return _bpgParsed;
+			return !_bpgParsed;
+		}
+		
+		public function uploadTexture():void
+		{
+		}
+		
+		public function get isTextureScale():Boolean
+		{
+			return _bpgTexture.isTextureScale;
+		}
+		
+		public function get textureScale():Number
+		{
+			return _bpgTexture.textureScale;
 		}
 		
 		protected function get bpgTexture():BPGByteTexture

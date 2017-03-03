@@ -7,7 +7,7 @@ package org.mokylin.skin.mainui.head
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
 	import feathers.layout.HorizontalLayout;
-	import org.mokylin.skin.component.uinumber.UINumberSkin_bossxuetiao;
+	import org.mokylin.skin.component.uinumber.UINumberSkin_bossxuetiao_2;
 	import org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
 
 	/**
@@ -174,10 +174,10 @@ package org.mokylin.skin.mainui.head
 			temp.gap = 0;
 			temp.height = 25;
 			temp.label = "x5";
-			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_bossxuetiao;
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_bossxuetiao_2;
 			temp.width = 46;
 			temp.x = 335;
-			temp.y = 9;
+			temp.y = 11;
 			temp.layout = __head_boss_Skin_HorizontalLayout1_i();
 			return temp;
 		}

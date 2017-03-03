@@ -338,12 +338,12 @@ package com.rpgGame.app.manager
 							}
 							if (index > -1)
 							{
-								(sceneRole.headFace as HeadFace).addWordFrame(contents[index], clientDialog.duration);
+								sceneRole.dialogFace.addWordFrame(RenderUnitType.HAIR, RenderUnitID.HAIR,contents[index], clientDialog.duration);
 							}
 						}
 						else
 						{
-							(sceneRole.headFace as HeadFace).addWordFrame(contents[0], clientDialog.duration);
+							sceneRole.dialogFace.addWordFrame(RenderUnitType.HAIR, RenderUnitID.HAIR,contents[0], clientDialog.duration);
 						}
 					}
 				}
@@ -383,15 +383,13 @@ package com.rpgGame.app.manager
 						var sceneRoles : Vector.<SceneRole> = SceneManager.getSceneRolesByModelId(clientDialog.npcModelId);
 						for each (sceneRole in sceneRoles)
 						{
-							if (sceneRole.headFace is HeadFace)
-								(sceneRole.headFace as HeadFace).addWordFrame(clientDialog.content, clientDialog.duration);
+							sceneRole.dialogFace.addWordFrame(RenderUnitType.HAIR, RenderUnitID.HAIR,clientDialog.content, clientDialog.duration);
 						}
 					}
 					else
 					{
 						sceneRole = MainRoleManager.actor;
-						if (sceneRole.headFace is HeadFace)
-							(sceneRole.headFace as HeadFace).addWordFrame(clientDialog.content, clientDialog.duration);
+						sceneRole.dialogFace.addWordFrame(RenderUnitType.HAIR, RenderUnitID.HAIR,clientDialog.content, clientDialog.duration);
 					}
 				}
 				else

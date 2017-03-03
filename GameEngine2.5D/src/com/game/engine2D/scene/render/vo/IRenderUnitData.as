@@ -10,9 +10,12 @@ package com.game.engine2D.scene.render.vo
 		
 		function get sleepTime():int;
 		function set sleepTime(value:int):void;
-	
+		
 		function get mouseEnabled():Boolean;
 		function set mouseEnabled(value:Boolean):void;
+		
+		function get enableScaleTexture():Boolean;
+		function set enableScaleTexture(value:Boolean):void;
 		
 		function get clearSameType():Boolean;
 		function set clearSameType(value:Boolean):void;

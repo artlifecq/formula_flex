@@ -1,15 +1,20 @@
 package com.rpgGame.app.scene
 {
+	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.vo.BaseRole;
 	import com.game.mainCore.libCore.pool.Pool;
 	import com.rpgGame.app.graphics.AttackFaceSprite;
 	import com.rpgGame.app.graphics.BaseHeadFace;
+	import com.rpgGame.app.graphics.BubbleDialogFace;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.coreData.cfg.EvilConfig;
+	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import starling.display.Sprite;
-
-
+	
+	
 	/**
 	 *
 	 * 场景角色
@@ -22,8 +27,8 @@ package com.rpgGame.app.scene
 		/** 半径 **/
 		protected var _radius : int = EvilConfig.ELE_DEFAULT_RADIUS;
 		//---------------------------对象池---------------------------
-		private static var _pool : Pool = new Pool("SceneRole", 600);
-
+		private static var _pool : InstancePool = new InstancePool("SceneRole", 600);
+		
 		private static var _cnt : int = 0;
 
 		public function get attackFace():AttackFaceSprite
@@ -43,7 +48,7 @@ package com.rpgGame.app.scene
 			
 			return _attackFace.container;
 		}
-
+		
 		/**
 		 * 生成一个RenderUnit
 		 * @param $type
@@ -54,7 +59,7 @@ package com.rpgGame.app.scene
 			_cnt++;
 			return _pool.createObj(SceneRole, type, id) as SceneRole;
 		}
-
+		
 		public static function recycle(role : SceneRole) : void
 		{
 			if (!role)
@@ -62,100 +67,122 @@ package com.rpgGame.app.scene
 			_cnt--;
 			_pool.disposeObj(role);
 		}
-
+		
 		public static function get cnt() : int
 		{
 			return _cnt;
 		}
-
+		
 		private var _stateMachine : RoleStateMachine;
 		private var _buffSet : BuffSet;
 		private var _headFace : BaseHeadFace;
 		private var _attackFace:AttackFaceSprite;
+		private var _dialogFace : BubbleDialogFace;
 		protected var _fightChange : Boolean = false;
-		public var mapAreaType : int = 0;
-
+		public var mapAreaTypes : Array = [];
+		public var isWheel : Boolean = false;
+		
 		public function SceneRole(type : String, id : Number)
 		{
 			super(type, id);
 		}
-
+		
 		public function get stateMachine() : RoleStateMachine
 		{
 			return _stateMachine;
 		}
-
+		
 		public function get buffSet() : BuffSet
 		{
 			return _buffSet;
 		}
-
+		
 		override public function reSet($parameters : Array) : void
 		{
 			super.reSet($parameters);
 			_stateMachine = RoleStateMachine.create(this);
 			_buffSet = BuffSet.create(this);
+			mapAreaTypes.length = 0;
+			isWheel = false;
 		}
-
+		
 		public function get headFace() : BaseHeadFace
 		{
 			return _headFace;
 		}
 		
-		public function set headFace(value:BaseHeadFace) : void
+		public function set headFace(value : BaseHeadFace) : void
 		{
 			_headFace = value;
 		}
-
+		
+		public function get dialogFace() : BubbleDialogFace
+		{
+			return _dialogFace;
+		}
+		
+		public function set dialogFace(value : BubbleDialogFace) : void
+		{
+			_dialogFace = value;
+		}
+		
 		public function get boneNameContainer() : Sprite
 		{
 			if (_headFace == null)
 				return null;
-
-			return _headFace.container;
+			
+			return _headFace;
 		}
-
+		
 		/**销毁对象 */
 		override public function destroy() : void
 		{
 			recycle(this);
 		}
-
+		
 		override protected function addToGraphic() : void
 		{
 			super.addToGraphic();
 			if (_headFace)
-				_headFace.visible = true;
+				_headFace.show();
+			if (_dialogFace)
+				_dialogFace.show();
 		}
-
+		
 		override protected function removeFromGraphic() : void
 		{
 			super.removeFromGraphic();
 			if (_headFace)
-				_headFace.visible = false;
+				_headFace.hide();
+			if (_dialogFace)
+				_dialogFace.hide();
 		}
-
+		
 		override public function setAttachVisible(attachType : String, visible : Boolean) : void
 		{
 			super.setAttachVisible(attachType, visible);
 			if (_headFace)
 				_headFace.displayVisible(attachType, visible);
 		}
-
+		
 		override protected function onAddCamouflageEntity() : void
 		{
 			super.onAddCamouflageEntity();
 			if (_headFace)
 				_headFace.isCamouflage = true;
+			
+			//设置成伪装者的时候需要隐藏血纹场景模型
+			setXueWenVisible(false);
 		}
-
+		
 		override protected function onRemoveCamouflageEntity() : void
 		{
 			super.onRemoveCamouflageEntity();
 			if (_headFace)
 				_headFace.isCamouflage = false;
+			setXueWenVisible(true);
 		}
-
+		
 		override public function dispose() : void
 		{
 			if (_stateMachine)
@@ -173,20 +200,36 @@ package com.rpgGame.app.scene
 				_headFace.recycleSelf();
 				_headFace = null;
 			}
-
+			if (_dialogFace)
+			{
+				_dialogFace.recycleSelf();
+				_dialogFace = null;
+			}
+			mapAreaTypes.length = 0;
+			isWheel = false;
 			super.dispose();
 		}
-
+		
 		public function get fightChange() : Boolean
 		{
 			return _fightChange;
 		}
-
+		
 		public function set fightChange(value : Boolean) : void
 		{
 			_fightChange = value;
 		}
-
-
+		
+		private function setXueWenVisible(flag : Boolean) : void
+		{
+			if (this.data is HeroData && this.data.xueWen > 0)
+			{
+				var role : SceneRole = SceneManager.getScene().getSceneObjByID(this.id, SceneCharType.XUE_WEN) as SceneRole;
+				if (role)
+				{
+					role.visible = flag;
+				}
+			}
+		}
 	}
 }

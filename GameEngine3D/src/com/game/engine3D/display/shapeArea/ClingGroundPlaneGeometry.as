@@ -359,8 +359,8 @@ package com.game.engine3D.display.shapeArea
 				for (var xi : uint = 0; xi <= _segmentsW; ++xi)
 				{
 					data.position = index << 2;
-					data.writeFloat((xi / _segmentsW) * target.scaleU);
-					data.writeFloat((1 - yi / _segmentsH) * target.scaleV);
+					data.writeFloat((xi / _segmentsW) * 1/*target.scaleU*/);
+					data.writeFloat((1 - yi / _segmentsH) * 1/*target.scaleV*/);
 					index++;
 					index++;
 					index += skip;
@@ -368,8 +368,8 @@ package com.game.engine3D.display.shapeArea
 					if (_doubleSided)
 					{
 						data.position = index << 2;
-						data.writeFloat((xi / _segmentsW) * target.scaleU);
-						data.writeFloat((1 - yi / _segmentsH) * target.scaleV);
+						data.writeFloat((xi / _segmentsW) * 1/*target.scaleU*/);
+						data.writeFloat((1 - yi / _segmentsH) * 1/*target.scaleV*/);
 						index++;
 						index++;
 						index += skip;

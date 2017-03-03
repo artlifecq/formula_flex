@@ -415,6 +415,8 @@ package com.rpgGame.app.cmdlistener.scene
 			{
 				var roleID:uint = delArr[i].ToGID();
 				onSceneRemoveObject(roleID);
+				GameLog.addShow("删除对象客户端id：" + roleID);
+				GameLog.addShow("删除对象服务器id：" + delArr[i].ToString());
 			}
 			
 			var addArr:Vector.<SceneObjInfo> = msg.objInfos;
@@ -479,14 +481,12 @@ package com.rpgGame.app.cmdlistener.scene
 				if( data != null )
 				{
 					TouJingManager.setHuGuoSiEffect(data.modelID, sceneRole, false);
-					var sceneClientRole:SceneRole = SceneManager.getSceneClientNpcByModelId( data.modelID );
+					var sceneClientRole:SceneRole = SceneManager.getSceneClientNpcByModelId( data.modelID);
 					if( sceneClientRole != null )
 					{
 						sceneClientRole.visible = true;
 						TouJingManager.setHuGuoSiEffect(data.modelID, sceneClientRole, true);						
 					}
-					GameLog.addShow("删除对象客户端id：" + roleID);
-					GameLog.addShow("删除对象服务器id：" + data.serverID.ToString());
 				}
 			}
 			SceneRoleManager.getInstance().removeSceneRoleById(roleID);

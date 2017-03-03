@@ -16,6 +16,8 @@ package com.game.engine2D.scene.render.ui
 	import com.game.engine2D.utils.RenderUnitShadowUtil;
 	import com.game.engine2D.utils.SDisplayUtil;
 	import com.game.engine2D.utils.Transformer;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
+	import com.game.engine3D.vo.SoftOutlineData;
 	import com.game.mainCore.libCore.log.ZLog;
 	import com.game.mainCore.libCore.pool.Pool;
 	
@@ -44,7 +46,7 @@ package com.game.engine2D.scene.render.ui
 		
 		//显示和更新控制*********************************************************************************************************
 		private var _resReady:Boolean = false;
-
+		
 		/**
 		 * 资源是否准备完毕
 		 */
@@ -81,9 +83,9 @@ package com.game.engine2D.scene.render.ui
 		
 		//*********************************************原始参数数据************************************************************
 		/**设置之前的初始记录*/
-//		private var _isColorTF:Boolean;
-//		private var _initColorTF:FragmentFilter;
-//		private var _initColorF:ColorTransform;
+		//		private var _isColorTF:Boolean;
+		//		private var _initColorTF:FragmentFilter;
+		//		private var _initColorF:ColorTransform;
 		/**
 		 * 生成此RenderUnit的换装源参数
 		 */	
@@ -105,7 +107,7 @@ package com.game.engine2D.scene.render.ui
 		
 		private var _hitTestX:int = int.MIN_VALUE;
 		private var _hitTestY:int = int.MIN_VALUE;
-
+		
 		private var _showPos:Point = new Point();
 		
 		private var _bmdShadowSource:BitmapData = null;
@@ -134,12 +136,12 @@ package com.game.engine2D.scene.render.ui
 			{
 				if (null == currentApData)
 					return 0;
-
+				
 				_hitTestY = - currentApData.ty;
 			}
 			return _hitTestY;
 		}
-
+		
 		/**本换装部件在场景中 的 显示位置(外部设置无效,只用来读取)*/
 		override final public function get showPos():Point
 		{
@@ -414,14 +416,14 @@ package com.game.engine2D.scene.render.ui
 		{
 			if (_needRender == value)
 				return;
-
+			
 			super.needRender = value;
 			if (!value)
 				return;
-
+			
 			if(!_visible)//如果为false,就不管...
 				return;
-
+			
 			var ruStatus:RenderUnitStatus = _currentRenderUnitStatus || _defaultRenderUnitStatus;
 			if(ruStatus == null && _currentStatus != 0)//
 			{
@@ -671,7 +673,7 @@ package com.game.engine2D.scene.render.ui
 			}
 			return null;
 		}
-
+		
 		/**
 		 * @private 
 		 * 绘制用的资源BD
@@ -679,33 +681,33 @@ package com.game.engine2D.scene.render.ui
 		private var _drawSourceObj:Object;
 		private var _drawSourceBitmapData:BitmapData;
 		
-//		private var _enableFilters:Boolean = true;
-//		
-//		public function get enableFilters():Boolean
-//		{
-//			return _enableFilters;
-//		}
-//		
-//		public function set enableFilters(value:Boolean):void
-//		{
-//			_enableFilters = value;
-//			if(value)
-//			{
-//				if(_graphicDis && _bitmapFilters.length > 0)
-//				{
-//					_graphicDis.filter = FragmentFilterUtils.getFragmentFilter(_bitmapFilters[0]);
-//				}
-//			}
-//			else
-//			{
-//				if(_graphicDis is UIImage)
-//				{
-//					if (_graphicDis.filter)
-//						_graphicDis.filter.dispose();
-//					_graphicDis.filter = null;
-//				}
-//			}
-//		}
+		//		private var _enableFilters:Boolean = true;
+		//		
+		//		public function get enableFilters():Boolean
+		//		{
+		//			return _enableFilters;
+		//		}
+		//		
+		//		public function set enableFilters(value:Boolean):void
+		//		{
+		//			_enableFilters = value;
+		//			if(value)
+		//			{
+		//				if(_graphicDis && _bitmapFilters.length > 0)
+		//				{
+		//					_graphicDis.filter = FragmentFilterUtils.getFragmentFilter(_bitmapFilters[0]);
+		//				}
+		//			}
+		//			else
+		//			{
+		//				if(_graphicDis is UIImage)
+		//				{
+		//					if (_graphicDis.filter)
+		//						_graphicDis.filter.dispose();
+		//					_graphicDis.filter = null;
+		//				}
+		//			}
+		//		}
 		
 		private var _blendMode:String = "normal";
 		public function get blendMode():String
@@ -722,87 +724,87 @@ package com.game.engine2D.scene.render.ui
 			}
 		}
 		
-//		/**应用滤镜数组*/
-//		private const _bitmapFilters:Array = [];
-//		/**应用滤镜数组*/
-//		public function get bitmapFilters():Array{return _bitmapFilters};
+		//		/**应用滤镜数组*/
+		//		private const _bitmapFilters:Array = [];
+		//		/**应用滤镜数组*/
+		//		public function get bitmapFilters():Array{return _bitmapFilters};
 		
 		/**添加滤镜*/
-//		public function addFilter($bf:BitmapFilter):void
-//		{
-//			if($bf)
-//			{
-//				var index:int = _bitmapFilters.indexOf($bf);
-//				if(index != -1)
-//				{
-//					_bitmapFilters.splice(index,1);
-//				}
-//				_bitmapFilters.push($bf);
-//				
-//				if(_graphicDis is UIImage && _enableFilters)
-//				{
-//					if (_graphicDis.filter != _initColorTF)
-//						_graphicDis.filter.dispose();
-//					_graphicDis.filter = FragmentFilterUtils.getFragmentFilter($bf);
-//				}
-//			}
-//		}
+		//		public function addFilter($bf:BitmapFilter):void
+		//		{
+		//			if($bf)
+		//			{
+		//				var index:int = _bitmapFilters.indexOf($bf);
+		//				if(index != -1)
+		//				{
+		//					_bitmapFilters.splice(index,1);
+		//				}
+		//				_bitmapFilters.push($bf);
+		//				
+		//				if(_graphicDis is UIImage && _enableFilters)
+		//				{
+		//					if (_graphicDis.filter != _initColorTF)
+		//						_graphicDis.filter.dispose();
+		//					_graphicDis.filter = FragmentFilterUtils.getFragmentFilter($bf);
+		//				}
+		//			}
+		//		}
 		
-//		/**移除滤镜*/
-//		public function removeFilter($bf:BitmapFilter):void
-//		{
-//			var index:int = _bitmapFilters.indexOf($bf);
-//			if(index!=-1)
-//			{
-//				_bitmapFilters.splice(index,1);
-//			}
-//			if(_graphicDis is UIImage)
-//			{
-//				if (_bitmapFilters.length > 0)
-//					_graphicDis.filter = FragmentFilterUtils.getFragmentFilter(_bitmapFilters[0]);
-//			}
-//		}
-//		
-//		/**清除所有滤镜*/
-//		public function removeAllFilters():void
-//		{
-//			_bitmapFilters.length = 0;
-//			if(_graphicDis is UIImage)
-//			{
-//				if (_graphicDis.filter && (_graphicDis.filter != _initColorTF))
-//					_graphicDis.filter.dispose();
-//				_graphicDis.filter = null;
-//			}
-//		}
+		//		/**移除滤镜*/
+		//		public function removeFilter($bf:BitmapFilter):void
+		//		{
+		//			var index:int = _bitmapFilters.indexOf($bf);
+		//			if(index!=-1)
+		//			{
+		//				_bitmapFilters.splice(index,1);
+		//			}
+		//			if(_graphicDis is UIImage)
+		//			{
+		//				if (_bitmapFilters.length > 0)
+		//					_graphicDis.filter = FragmentFilterUtils.getFragmentFilter(_bitmapFilters[0]);
+		//			}
+		//		}
+		//		
+		//		/**清除所有滤镜*/
+		//		public function removeAllFilters():void
+		//		{
+		//			_bitmapFilters.length = 0;
+		//			if(_graphicDis is UIImage)
+		//			{
+		//				if (_graphicDis.filter && (_graphicDis.filter != _initColorTF))
+		//					_graphicDis.filter.dispose();
+		//				_graphicDis.filter = null;
+		//			}
+		//		}
 		
-//		/**添加滤镜*/
-//		public function addColorTransform($colorTrans:*):void
-//		{
-//			if(_graphicDis && $colorTrans)
-//			{
-//				if (_graphicDis is UIImage)
-//				{
-//					_isColorTF = ($colorTrans is ColorTransform);
-//					_graphicDis.filter = _isColorTF ? FragmentFilterUtils.getColorMatrixFilter($colorTrans) : $colorTrans;
-//					if(_initColorTF == null)
-//					{
-//						_initColorTF = _graphicDis.filter;
-//					}
-//				}
-//			}
-//		}
-//		
-//		/**移除滤镜*/
-//		public function removeColorTransform():void
-//		{
-//			if(_graphicDis is UIImage)
-//			{
-//				if(_initColorTF)
-//				{
-//					_graphicDis.filter = _initColorTF;
-//				}
-//			}
-//		}
+		//		/**添加滤镜*/
+		//		public function addColorTransform($colorTrans:*):void
+		//		{
+		//			if(_graphicDis && $colorTrans)
+		//			{
+		//				if (_graphicDis is UIImage)
+		//				{
+		//					_isColorTF = ($colorTrans is ColorTransform);
+		//					_graphicDis.filter = _isColorTF ? FragmentFilterUtils.getColorMatrixFilter($colorTrans) : $colorTrans;
+		//					if(_initColorTF == null)
+		//					{
+		//						_initColorTF = _graphicDis.filter;
+		//					}
+		//				}
+		//			}
+		//		}
+		//		
+		//		/**移除滤镜*/
+		//		public function removeColorTransform():void
+		//		{
+		//			if(_graphicDis is UIImage)
+		//			{
+		//				if(_initColorTF)
+		//				{
+		//					_graphicDis.filter = _initColorTF;
+		//				}
+		//			}
+		//		}
 		
 		public var finalShowX:Number;
 		public var finalShowY:Number;
@@ -823,13 +825,13 @@ package com.game.engine2D.scene.render.ui
 		 * 
 		 */	
 		public function getFullSourchPath():String{return _currentFullSourchPath;}
-
+		
 		/**
 		 * @private 
 		 * 当前帧数(从0开始到totalFrame-1)
 		 */
 		private var _currentFrame:int = 0;
-
+		
 		/**
 		 * 当前播放帧(0到totalFrame-1)
 		 */
@@ -997,7 +999,7 @@ package com.game.engine2D.scene.render.ui
 		 * 注意此值应该为一个大于0的值！！！不能设置为0.
 		 * */
 		public var speed:Number = 1;
-
+		
 		//当前播放信息**********************************************************************
 		/**
 		 * @private 
@@ -1156,7 +1158,7 @@ package com.game.engine2D.scene.render.ui
 				RenderUnitLoader.loadRenderUnit(this, _currentStatus, true);
 			}
 		}
-	
+		
 		/**
 		 * 设置角度
 		 * @param $angle
@@ -1245,7 +1247,7 @@ package com.game.engine2D.scene.render.ui
 			if(
 				_currentStatus==0
 				|| _playComplete
-				)
+			)
 			{
 				return;
 			}
@@ -1265,7 +1267,7 @@ package com.game.engine2D.scene.render.ui
 				//改变标识
 				inSleep = true;
 			}
-
+			
 			//睡眠变化
 			if(_oldData.inSleep != inSleep)
 			{
@@ -1364,9 +1366,9 @@ package com.game.engine2D.scene.render.ui
 				var isNeedDraw:Boolean = false;
 				//可见性判断
 				if(     _drawSourceObj!=null
-						&& (!inSleep)
-						&& ruStatus!=null
-					)
+					&& (!inSleep)
+					&& ruStatus!=null
+				)
 				{
 					currentApData = ruStatus.getRenderUnitData(_currentStatus,_logicAngle, _currentFrame);
 					if (currentApData!=null)
@@ -1375,14 +1377,14 @@ package com.game.engine2D.scene.render.ui
 						cutRect.y = - currentApData.ty;
 						cutRect.width = _drawSourceObj.width;
 						cutRect.height = _drawSourceObj.height;
-
+						
 						_hitTestX = int.MIN_VALUE;
 						_hitTestY = int.MIN_VALUE;
 						//
 						isNeedDraw = true;
 					}
 				}
-
+				
 				//拷贝
 				if(isNeedDraw)
 				{
@@ -1456,13 +1458,13 @@ package com.game.engine2D.scene.render.ui
 			{
 				return;
 			}
-
+			
 			_shadowOffsetX = value;
 			if (!_shadow)
 			{
 				return;
 			}
-
+			
 			if (GlobalConfig2D.shadowRenderType == GlobalConfig2D.SHADOW_SHAPE)
 			{
 				_shadow.x = this.x+GlobalConfig2D.shadowOffsetX+_shadowOffsetX;
@@ -1472,7 +1474,7 @@ package com.game.engine2D.scene.render.ui
 				{
 					return;
 				}
-
+				
 				if (-1 == _renderScaleX)
 				{
 					_shadow.x = this.x-(_drawSourceObj.width+cutRect.x) + GlobalConfig2D.tanShadow * cutRect.y + _shadowOffsetX;
@@ -1583,10 +1585,10 @@ package com.game.engine2D.scene.render.ui
 			_renderUnitData = null;
 			
 			alpha = 1;
-//			removeAllFilters();
+			//			removeAllFilters();
 			_renderScaleX = 1;
 			
-//			_enableFilters = true;
+			//			_enableFilters = true;
 			_needRender = true;
 			_enableShadow = false;
 			_isDrawShadow = false;
@@ -1643,7 +1645,7 @@ package com.game.engine2D.scene.render.ui
 			_resReady = false;
 			_renderImgData = null;
 			_drawSourceBitmapData = null;
-//			_bitmapFilters.length = 0;
+			//			_bitmapFilters.length = 0;
 			_currentStatus = 0;
 			_currentFullSourchPath = null;
 			_currentRenderUnitStatus = null;
@@ -1722,6 +1724,19 @@ package com.game.engine2D.scene.render.ui
 				_defaultRenderUnitStatus = null;
 			}
 		}
+		
+		public function get renderParamData():RenderParamData3D
+		{
+			// TODO Auto Generated method stub
+			return null;
+		}
+		
+		public function setSoftOutline(data:SoftOutlineData):void
+		{
+			// TODO Auto Generated method stub
+			
+		}
+		
 	}
 }
 

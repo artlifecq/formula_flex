@@ -48,7 +48,7 @@ package com.rpgGame.app.manager
 		 */
 		public static function startPlayerMode(target : ObjectContainer3D) : void
 		{
-			if(GlobalConfig.use25DMap)
+			if(GlobalConfig.use2DMap)
 			{
 				CameraFrontController.initcontroller(SceneManager.scene.view3d.camera, target);
 				CameraFrontController.LOCK_DISTANCE = 90000;

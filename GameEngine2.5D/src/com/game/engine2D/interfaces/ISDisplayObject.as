@@ -1,44 +1,12 @@
 package com.game.engine2D.interfaces
 {
+	import com.game.engine3D.core.interfaces.IObject;
+	
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
-	import away3d.containers.ObjectContainer3D;
-
-	public interface ISDisplayObject
+	public interface ISDisplayObject extends IObject
 	{
-		/**显示坐标X*/
-		function get x():Number;
-		function set x(value:Number):void;
-		
-		/**显示坐标Y*/
-		function get y():Number;
-		function set y(value:Number):void;
-		
-		/**显示偏移量X*/
-		function get offsetX():Number;
-		function set offsetX(value:Number):void;
-		
-		/**显示偏移量Y*/
-		function get offsetY():Number;
-		function set offsetY(value:Number):void;
-		
-		/**是否显示 */
-		function get visible():Boolean;
-		function set visible(value:Boolean):void;
-		
-		/**透明度 */
-		function get alpha():Number;
-		function set alpha(value:Number):void;
-		
-		/**X缩放 */
-		function get scaleX():Number;
-		function set scaleX(value:Number):void;
-		
-		/**Y缩放 */
-		function get scaleY():Number;
-		function set scaleY(value:Number):void;
-		
 		/**角度 */
 		function get rotationAngle():Number;
 		function set rotationAngle(value:Number):void;
@@ -62,21 +30,10 @@ package com.game.engine2D.interfaces
 		/**渲染显示坐标(一般由,(x+offsetX,y+offsetY),也可能别的接口过来赋值)*/
 		function get showPos():Point;
 		
-		/**所属渲染容器*/
-		function get graphicDis():ObjectContainer3D;
-		function set graphicDis(value:ObjectContainer3D):void;
-		
-		/**所属显示对象(显示对象容器)*/
-		function get parent():ObjectContainer3D;
-		function set parent(value:ObjectContainer3D):void;
-		
 		/**是否与某个矩形发生碰撞*/
 		function hitRect(rect:Rectangle):Boolean;
 		
 		/**是否与某个点发生碰撞*/
 		function hitPoint(p:Point):Boolean;
-		
-		/**销毁显示对象 */
-		function destroy():void;
 	}
 }
