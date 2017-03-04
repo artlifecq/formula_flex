@@ -28,6 +28,8 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
 	import com.rpgGame.netData.fight.message.ResFightFailedBroadcastMessage;
 	import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
+
+    import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	
 	import flash.geom.Point;
 	
@@ -206,6 +208,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg.uid, msg);
 			SpellHitHelper.fightSpellHitEffect(info);
 			effectCharAttribute(info);
+            lockAttack(info);
 		}
 
 		/**
@@ -218,6 +221,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(-1, msg);//-1 为不缓存的技能信息，也不知道哪里来的伤害，只知道是后端通知的伤害
 			SpellHitHelper.showSpellSingleHitEffect(info);
 			effectCharAttribute(info);
+            lockAttack(info);
 			
 			//			if (info.atkor && info.atkor.isMainChar)
 			//			{
@@ -245,6 +249,19 @@ package com.rpgGame.app.cmdlistener.scene
 				}
 			}
 		}
+
+        // 锁定攻击源
+        private function lockAttack(info : ReleaseSpellInfo) {
+            if (info.isMainCharHited && null == SceneRoleSelectManager.selectedRole) {
+                var hurtList : Vector.<FightHurtResult> = info.hurtList;
+                if (hurtList.length > 0) {
+                    var attacker : SceneRole = SceneManager.getSceneObjByID(hurtList[0].attackerId) as SceneRole;
+                    if (null != attacker) {
+                        SceneRoleSelectManager.selectedRole = attacker;
+                    }
+                }
+            }
+        }
 		
 		private var attackAreas:Vector.<ShapeArea3D> = new Vector.<ShapeArea3D>();
 		private function onResAttackRangeMessage(msg:ResAttackRangeMessage):void
