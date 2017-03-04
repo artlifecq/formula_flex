@@ -2,7 +2,7 @@ package com.game.engine3D.scene.render
 {
 	import com.game.engine3D.scene.render.vo.IRenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderResourceData;
-	import com.game.engine3D.scene.render.vo.RenderUnitData;
+	import com.game.engine3D.scene.render.vo.RenderUnitData3D;
 	import com.game.mainCore.libCore.share.CountShare;
 
 	import flash.utils.Dictionary;
@@ -148,23 +148,23 @@ package com.game.engine3D.scene.render
 			}
 		}
 
-		public static function getRenderUnitData(resourceData : RenderResourceData, type : String, id : Number) : RenderUnitData
+		public static function getRenderUnitData(resourceData : RenderResourceData, type : String, id : Number) : RenderUnitData3D
 		{
 			if (!resourceData)
 			{
 				return null;
 			}
 			var datas : Array = renderUnitDataPool[resourceData];
-			var renderUnitData : RenderUnitData = datas ? datas.pop() : null;
+			var renderUnitData : RenderUnitData3D = datas ? datas.pop() : null;
 			if (!renderUnitData)
 			{
-				renderUnitData = new RenderUnitData(type, id);
+				renderUnitData = new RenderUnitData3D(type, id);
 				renderUnitData.setResourceData(resourceData);
 			}
 			return renderUnitData;
 		}
 
-		public static function recycleRenderUnitData(resourceData : RenderResourceData, renderUnitData : RenderUnitData) : void
+		public static function recycleRenderUnitData(resourceData : RenderResourceData, renderUnitData : RenderUnitData3D) : void
 		{
 			if (!resourceData)
 			{
@@ -196,7 +196,7 @@ package com.game.engine3D.scene.render
 			var datas : Array = renderUnitDataPool[resourceData];
 			if (datas)
 			{
-				for each (var renderUnitData : RenderUnitData in datas)
+				for each (var renderUnitData : RenderUnitData3D in datas)
 				{
 					renderUnitData.dispose();
 				}

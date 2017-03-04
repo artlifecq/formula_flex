@@ -1,49 +1,46 @@
 package com.rpgGame.appModule.role
 {
 	import com.rpgGame.app.manager.MenuManager;
-	import com.rpgGame.app.manager.SmallShopItemManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
-	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.app.manager.goods.ItemUseManager;
-	import com.rpgGame.app.manager.goods.StorageManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.shop.ShopManager;
 	import com.rpgGame.app.sender.ItemSender;
-	import com.rpgGame.app.sender.ShopSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.appModule.bag.ItemSplitPanel;
 	import com.rpgGame.appModule.common.GoodsContainerPanel;
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
+	import com.rpgGame.appModule.storage.StoragePanel;
+	import com.rpgGame.core.events.ItemEvent;
+	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
-	import com.rpgGame.coreData.info.item.EquipInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
-	import com.rpgGame.coreData.info.upgrade.AmountInfo;
 	import com.rpgGame.coreData.lang.LangBackPack;
-	import com.rpgGame.coreData.lang.LangShop;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.MenuType;
+	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.coreData.utils.MoneyUtil;
 	
 	import flash.geom.Point;
 	
-	import app.message.AmountType;
-	import app.message.GoodsContainerProto;
-	import app.message.GoodsProto;
 	import app.message.GoodsType;
 	
 	import feathers.controls.Scroller;
+	import feathers.data.ListCollection;
 	import feathers.themes.GuiThemeStyle;
 	
-	import org.mokylin.skin.app.beibao.beibao_Skin;
+	import org.client.mainCore.manager.EventManager;
+	import org.mokylin.skin.app.beibao.juese_Skin;
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 	
 	import starling.display.DisplayObject;
@@ -56,45 +53,50 @@ package com.rpgGame.appModule.role
 	 */
 	public class PacksView
 	{
-		private var _skin : beibao_Skin;
-		
+		private var _skin : juese_Skin;
 		private var goodsContainer : GoodsContainerPanel;
 		
-		public function PacksView(skin:beibao_Skin)
+		private var TAB_TYPE:Array;
+		private var curType:Array;
+		private var currentListData:ListCollection;
+		
+		private var storagePanel:StoragePanel;
+		private var itemSplitPanel:ItemSplitPanel;
+		private var toStorage:Boolean;
+		private var toStorageGridInfo:GridInfo;
+		
+		public function PacksView(skin:juese_Skin)
 		{
 			_skin=skin;
 			
-			initTestDatas();
 			
 			initPacks();
-			initEvent();
+			initDatas();
 		}
 		
-		private function initTestDatas():void
+		private function initDatas():void
 		{
-			var data:GoodsContainerProto=new GoodsContainerProto();
-			data.initCount=42;
-			data.size=42;
-			var posArr:Array = [];
-			var goodsArr:Array = [];
-			var i:int
-			for(i=0;i<42;i++){
-				var goods:GoodsProto=new GoodsProto();
-				goods.id=i;
-				goodsArr.push(goods);
-				posArr.push(i);
-			}
+			currentListData=new ListCollection();
+			TAB_TYPE= [
+				[GoodsType.ALL_GOODS],
+				[GoodsType.EQUIPMENT], 
+				[GoodsType.MEDICINE],
+				[GoodsType.MATERIAL_COMBO,GoodsType.MATERIAL_ADVANCE], 
+				[GoodsType.CHAT,GoodsType.GIFT,GoodsType.PROPERTY,GoodsType.BUFF,GoodsType.TRANSFER,GoodsType.RESURGENCE,
+				GoodsType.TASK,GoodsType.MOUNT,GoodsType.TITLE,GoodsType.DUNGOEN,GoodsType.FACTION,GoodsType.PK,GoodsType.SPECIAL,
+				GoodsType.SKILL_BOOK_MOUNT,GoodsType.SKILL_BOOK_HERO]
+				];
 			
-			data.posList=posArr;
-			data.goodsList=goodsArr;
-			BackPackManager.instance.setGoodsInfo(data);
+			toStorageGridInfo=new GridInfo(ItemContainerID.Storage,-1);
 		}
 		
 		private function initPacks():void
 		{
+			storagePanel=new StoragePanel();
+			itemSplitPanel=new ItemSplitPanel();
+			
 			goodsContainer = new GoodsContainerPanel(_skin.lst_pack,ItemContainerID.BackPack,createItemRender);
 			goodsContainer.acceptDropFromContainerIdArr = [ItemContainerID.BackPack, ItemContainerID.Storage, ItemContainerID.Role, ItemContainerID.Mount];
-			goodsContainer.updateGridLen = setUseGridLen;
 			goodsContainer.onDragDropEnd = onItemDroped;
 			
 			_skin.lst_pack.clipContent = true;
@@ -106,40 +108,55 @@ package com.rpgGame.appModule.role
 		}
 		
 		
-		public function updatePacks():void
+		public function show():void
 		{
-			setGridsCount(80,true);
+			initEvent();
+			
+			if(!ItemSender.isReqPack){
+				ItemSender.getItemsByType(ItemContainerID.BackPack);
+			}else{
+				setGridsCount(BackPackManager.instance.hasOpenCount,true);
+			}
+			
 			updateAmount();
 		}
 		
-		private function updateAmount():void
+		private function updateAmount(type:int=3):void
 		{
-			var info:AmountInfo = MainRoleManager.actorInfo.amountInfo;
-			_skin.txt_lijin.text = info.getAmountByType(AmountType.BAND_JINZI)+"";//绑金
-			_skin.txt_yingzi.htmlText = MoneyUtil.getAutoHtmlMoneyString( info.getAmountByType(AmountType.BAND_MONEY) );//绑银
-			_skin.txt_yuanbao.text = info.getAmountByType(AmountType.JINZI)+"";//金子
-			_skin.txt_yingzibang.htmlText = MoneyUtil.getAutoHtmlMoneyString( info.getAmountByType(AmountType.MONEY) );//银子
+			if(type!=CharAttributeType.RES_GOLD&&type!=CharAttributeType.RES_MONEY&&
+				type!=CharAttributeType.RES_BIND_GOLD&&type!=CharAttributeType.RES_BIND_MONEY){
+				return;
+			}
+			
+			var stat:SpriteStat=MainRoleManager.actorInfo.totalStat;
+			_skin.txt_lijin.text =stat.getResData(CharAttributeType.RES_BIND_GOLD)+"";//绑金
+			_skin.txt_yingzi.htmlText = MoneyUtil.getAutoHtmlMoneyString(stat.getResData(CharAttributeType.RES_MONEY) );//银子
+			_skin.txt_yuanbao.text = stat.getResData(CharAttributeType.RES_GOLD)+"";//金子
+			_skin.txt_yingzibang.htmlText = MoneyUtil.getAutoHtmlMoneyString(stat.getResData(CharAttributeType.RES_BIND_MONEY) );//绑银
+			
+			TipTargetManager.remove(_skin.txt_lijin);
+			TipTargetManager.remove(_skin.txt_yingzi);
+			TipTargetManager.remove(_skin.txt_yuanbao);
+			TipTargetManager.remove(_skin.txt_yingzibang);
+			TipTargetManager.show( _skin.txt_lijin, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,_skin.txt_lijin.text   ));
+			TipTargetManager.show( _skin.txt_yingzi, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP, _skin.txt_yingzi.htmlText));
+			TipTargetManager.show( _skin.txt_yuanbao, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,  _skin.txt_yuanbao.text));
+			TipTargetManager.show( _skin.txt_yingzibang, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,	_skin.txt_yingzibang.htmlText));
 		}
 		
-		public function setGridsCount(count:int, refleshNow:Boolean):void
+		private function setGridsCount(count:int, refleshNow:Boolean):void
 		{
 			goodsContainer.gridCount = count;
-			//如果当前容器长度不够，则自动补充
-			var len:int = goodsContainer.dataProvider.length;
-			for( var i:int = len; i < goodsContainer.gridCount; i++ )
-			{
-				var gridInfo:GridInfo = new GridInfo(ItemContainerID.BackPack, i);
-				goodsContainer.dataProvider.push(gridInfo);
-			}
+			BackPackManager.instance.setGridNum(count);
+			currentListData.removeAll();
+			currentListData.addAll(BackPackManager.instance.gridInfoDatas);
+			goodsContainer.dataProvider=currentListData;
 			goodsContainer.dataProvider.updateAll();
-			setUseGridLen();
 			if(refleshNow)
 			{
 				setRefleshLock();
 			}
 		}
-		
-		
 		
 		private function setRefleshLock():void
 		{
@@ -151,39 +168,34 @@ package com.rpgGame.appModule.role
 			else
 			{
 				BackPackManager.instance.setUnusableGrid(true);
-				setUnusable();
+				refreshPackGrid();
 			}
 		}
 		
 		
-		/**刷新背包不能使用的grid*/
-		public function setUnusable():void
+		/**
+		 *刷新背包格子 
+		 * 
+		 */
+		public function refreshPackGrid():void
 		{
 			var goodsInfo:Array = BackPackManager.instance.getAllItem();
 			var i:int =0;
 			var goodsLen:int = goodsInfo ? goodsInfo.length : 0;
-			for (i=0; i<goodsContainer.gridCount; i++)
+			if(_skin.tab_pack.selectedIndex == 0)
 			{
-				if(i < goodsLen)
-				{
-					goodsContainer.setGridInfo(i, goodsInfo[i], i);
-				}
-				else
-				{
-					goodsContainer.setGridInfo(i, null, i);
-				}
+				goodsLen=BackPackManager.instance.gridInfoDatas.length;
 			}
-			setUseGridLen();
+			for (i=0; i<goodsLen; i++)
+			{
+				goodsContainer.setGridInfo(i, goodsInfo[i], i);
+			}
+			
+			while(currentListData.length>goodsLen){
+				currentListData.pop();
+			}
+			
 			goodsContainer.dataProvider.updateAll();
-		}
-		
-		/**
-		 *更新开启数 
-		 * 
-		 */
-		private function setUseGridLen():void
-		{
-//			_skin.lbCount.text = BackPackManager.instance.useGridLen() + "/" + BackPackManager.instance.hasOpenCount;
 		}
 		
 		/**
@@ -196,7 +208,7 @@ package com.rpgGame.appModule.role
 		{
 			if(_skin.tab_pack.selectedIndex != 0)
 				return;
-			var item : ItemInfo = srcGrid.data as ItemInfo;
+			var item : ClientItemInfo = srcGrid.data as ClientItemInfo;
 			if(!item)
 			{
 				trace("try move grid fail ,index :",srcGrid.index);
@@ -207,9 +219,10 @@ package com.rpgGame.appModule.role
 				NoticeManager.mouseFollowNotify("物品不能移动到这里!");
 				return;
 			}
+			var target : ClientItemInfo;
 			if(dstGrid)
 			{
-				var target : ItemInfo = dstGrid.data as ItemInfo;
+				target  = dstGrid.data as ClientItemInfo;
 				if(target && target.cfgId == item.cfgId && target.binded != item.binded && target.expireTime == 0 && item.expireTime == 0 && item.maxCount>1 && target.maxCount>1)
 				{
 					if(BackPackManager.instance.isAlertChangeBind == false)
@@ -221,7 +234,14 @@ package com.rpgGame.appModule.role
 					}
 				}
 			}
-			ItemSender.reqMoveGoods(srcGrid.containerID, dstGrid.containerID, item.index, dstGrid.index);
+			
+			if(item.containerID==ItemContainerID.Storage){
+				ItemSender.StoreTobag(item.itemInfo.itemId,dstGrid.index);
+			}else if(item.containerID==ItemContainerID.Role){
+				ItemSender.unwearEquip(item.itemInfo.itemId);
+			}else{
+				ItemSender.moveItem(srcGrid,dstGrid);
+			}
 		}
 		
 		private function changeItemBind(gameAlert:GameAlert,srcGrid:GridInfo, dstGrid:GridInfo):void
@@ -229,9 +249,9 @@ package com.rpgGame.appModule.role
 			if(gameAlert.clickType == AlertClickTypeEnum.TYPE_SURE)
 			{
 				BackPackManager.instance.isAlertChangeBind = gameAlert.isCheckSelected;
-				var item : ItemInfo = srcGrid.data as ItemInfo;
+		/*		var item : ClientItemInfo = srcGrid.data as ClientItemInfo;
 				if(item)
-					ItemSender.reqMoveGoods(srcGrid.containerID, dstGrid.containerID, item.index, dstGrid.index);
+					ItemSender.reqMoveGoods(srcGrid.containerID, dstGrid.containerID, item.index, dstGrid.index);*/
 			}
 		}
 		
@@ -241,7 +261,7 @@ package com.rpgGame.appModule.role
 		 */		
 		private function createItemRender():GridItemRender
 		{
-			var render:GridItemRender = new GridItemRender(IcoSizeEnum.SIZE_44,GridBGType.GRID_SIZE_44);
+			var render:GridItemRender = new GridItemRender(IcoSizeEnum.ICON_42,GridBGType.GRID_SIZE_44);
 			var grid:DragDropItem = render.getGrid();
 			grid.doubleClickFun = onDoubleClick;
 			grid.rightMouseClickFun = onRightMouse;
@@ -251,12 +271,12 @@ package com.rpgGame.appModule.role
 		
 		protected function onDoubleClick(grid:IconCDFace):void
 		{
-			ItemUseManager.useItem(grid.faceInfo as ItemInfo);
+			ItemUseManager.useItem(grid.faceInfo as ClientItemInfo);
 		}
 		
 		protected function onRightMouse(grid:IconCDFace):void
 		{
-			ItemUseManager.useItem(grid.faceInfo as ItemInfo);
+			ItemUseManager.useItem(grid.faceInfo as ClientItemInfo);
 		}
 		
 		/**
@@ -266,46 +286,28 @@ package com.rpgGame.appModule.role
 		 */		
 		protected function onTouchGrid( grid:DragDropItem ):void
 		{
-			if(!BackPackManager.instance.isEnabled(grid.index))return;
+			if(toStorage){//存到仓库去
+				if(grid.gridInfo.data==null){
+					return;
+				}
+				var item:ClientItemInfo = grid.gridInfo.data as ClientItemInfo;
+				ItemSender.bagToStore(item.itemInfo.itemId,-1);
+				return;
+			}
 			
 			var realIndex:int =  goodsContainer.getRealIndex(grid.index);
-			if(GoodsContainerPanel.isFaceMoving)
+			if(GoodsContainerPanel.isFaceMoving)//移动状态
 			{
-				goodsContainer.onFaceMoveSuccess(realIndex );
-				return;
-			}
-			var isLock : Boolean = BackPackManager.instance.isUnlock(realIndex);
-			if(isLock)
-			{
-				BackPackManager.instance.unLockGrid();//解锁
-				return;
-			}
-			if( grid == null || grid.faceInfo == null)
-				return;
-			
-			if(ShopManager.inSellMode)
-			{
-				SmallShopItemManager.reqSellGoods(grid.faceInfo as ItemInfo);
+				goodsContainer.onFaceMoveSuccess(grid.gridInfo );
 				return;
 			}
 			
-			if(ShopManager.inRepairMode)
-			{
-				if(grid.faceInfo is EquipInfo)
-				{
-					ShopSender.reqRepairGoods(grid.containerID, grid.index, grid.faceInfo.cfgId);
-				}else{
-					NoticeManager.showNotify(LangShop.SHOP_ERROR_5);
-				}
-				return;
-			}
-			
-			showMenu(grid);
+			showMenu(grid);//显示菜单
 		}
 		
 		public function showMenu(grid:IconCDFace):void
 		{
-			var item:ItemInfo = grid.faceInfo as ItemInfo;
+			var item:ClientItemInfo = grid.faceInfo as ClientItemInfo;
 			if( item == null )
 				return;
 			if(BackPackManager.instance.getIsShowBindLock())
@@ -323,29 +325,80 @@ package com.rpgGame.appModule.role
 		
 		private function initEvent():void
 		{
-			_skin.tab_pack.addEventListener(Event.CHANGE, onTab)
+			_skin.tab_pack.addEventListener(Event.CHANGE, onTab);
+			EventManager.addEvent(ItemEvent.ITEM_INIT,initPackDatas);
+			
+			EventManager.addEvent(ItemEvent.ITEM_ADD,onFreshItems);
+			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
+			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
+			EventManager.addEvent(ItemEvent.CHANGE_ACCESS_STATE,changeAccessState);
+			
+			EventManager.addEvent(ItemEvent.ITEM_PRE_SPLITE, preSplit);
+			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
+			
+			goodsContainer.addEvents();
+		}
+		
+		/**
+		 * 物品拆分 
+		 * @param info
+		 * 
+		 */		
+		private function preSplit(info:ClientItemInfo):void
+		{
+			if(info.count <= 1)
+			{
+				return;
+			}
+			itemSplitPanel.show(info,"",this._skin.container);
+			itemSplitPanel.x=235;
+			itemSplitPanel.y=160;
+		}
+		
+		private function changeAccessState(isSave:Boolean):void
+		{
+			toStorage=isSave;
+		}
+		
+		private function initPackDatas(containerId:int):void 
+		{
+			if(containerId!=ItemContainerID.BackPack){
+				return;
+			}
+			EventManager.removeEvent(ItemEvent.ITEM_INIT,initPackDatas);
+			setGridsCount(BackPackManager.instance.hasOpenCount,true);
 		}
 		
 		private function onTab(e:Event):void
 		{
+			onFreshItems();
+		}
+		
+		private function onFreshItems(info:ClientItemInfo=null):void
+		{
+			if(info&&info.containerID!=ItemContainerID.BackPack){
+				return;
+			}
+			
 			BackPackManager.instance.tabbarIndex = _skin.tab_pack.selectedIndex;
-	/*		curType =TAB_TYPE[ skin.tabBar.selectedIndex ];
-			if(skin.tabBar.selectedIndex == 0)
+			curType =TAB_TYPE[ _skin.tab_pack.selectedIndex ];
+			
+			currentListData.removeAll();
+			currentListData.addAll(BackPackManager.instance.gridInfoDatas);
+			
+			if(_skin.tab_pack.selectedIndex == 0)
 			{
 				BackPackManager.instance.setCheckType(null);
-				//				BackPackManager.instance.checkType = null;
 				BackPackManager.instance.setUnusableGrid(false);
 				goodsContainer.refleshGrids();
 			}
 			else
 			{
 				BackPackManager.instance.setCheckType(curType);
-				//				BackPackManager.instance.checkType = curType;
 				BackPackManager.instance.setUnusableGrid(true);
-				setUnusable();
-			}*/
-		}
-		
+				refreshPackGrid();
+			}			
+		}		
 		
 		internal function onTouchTarget(target : DisplayObject):Boolean
 		{
@@ -353,8 +406,12 @@ package com.rpgGame.appModule.role
 				case _skin.btn_chushou:
 					return true;
 				case _skin.btn_zhengli:
+					ItemSender.clearUpItem(ItemContainerID.BackPack);
 					return true;
 				case _skin.btn_cangku:
+					storagePanel.show(null,"",this._skin.container);
+					storagePanel.x=225;
+					storagePanel.y=75;
 					return true;
 				case _skin.btn_shangdian:
 					return true;
@@ -364,6 +421,26 @@ package com.rpgGame.appModule.role
 					return true;
 			}
 			return false;
+		}
+		
+		internal function onHide():void
+		{
+			goodsContainer.hide();
+			
+			_skin.tab_pack.removeEventListener(Event.CHANGE, onTab);
+			
+			EventManager.removeEvent(ItemEvent.ITEM_ADD,onFreshItems);
+			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
+			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
+			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);
+			
+			EventManager.removeEvent(ItemEvent.CHANGE_ACCESS_STATE,changeAccessState);
+			EventManager.removeEvent(ItemEvent.ITEM_PRE_SPLITE, preSplit);
+			
+			TipTargetManager.remove(_skin.txt_yingzibang);
+			
+			storagePanel.hide();
+			itemSplitPanel.hide();
 		}
 	}
 }

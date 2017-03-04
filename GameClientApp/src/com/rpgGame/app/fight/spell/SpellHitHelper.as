@@ -10,18 +10,9 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.state.role.action.DeadLaunchStateReference;
 	import com.rpgGame.app.state.role.action.FallStateReference;
 	import com.rpgGame.app.state.role.action.HitStateReference;
-	import com.rpgGame.app.state.role.control.BuffStateReference;
-	import com.rpgGame.app.state.role.control.HunLuanStateReference;
 	import com.rpgGame.app.state.role.control.HurtStateReference;
-	import com.rpgGame.app.state.role.control.HushStateReference;
-	import com.rpgGame.app.state.role.control.StiffStateReference;
-	import com.rpgGame.app.state.role.control.StunStateReference;
-	import com.rpgGame.app.state.role.control.UnmovableStateReference;
 	import com.rpgGame.core.events.SceneCharacterEvent;
-	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
-	import com.rpgGame.coreData.clientConfig.Q_buff;
-	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
@@ -123,6 +114,7 @@ package com.rpgGame.app.fight.spell
 		{
 			var hurted : Boolean = false;
 			var role : SceneRole;
+			var atkor:SceneRole;
 			if (info.hurtList && info.hurtList.length > 0)
 			{
 				var hurtAnimation : Q_SpellAnimation = info.hurtAnimation;
@@ -172,9 +164,9 @@ package com.rpgGame.app.fight.spell
 								role.stateMachine.transition(RoleStateType.ACTION_FALL, fallRef);
 							}
 						}
-
 						//显示被击特效
-						var atkorPos : Point = (info.atkor && info.atkor.usable) ? new Point(info.atkor.x, info.atkor.z) : info.atkorPos;
+						atkor=SceneManager.getSceneObjByID(hurtVo.attackerId) as SceneRole;
+						var atkorPos : Point = new Point(atkor.x, atkor.z);
 						var hitRef : HitStateReference = role.stateMachine.getReference(HitStateReference) as HitStateReference;
 						hitRef.setParams(atkorPos);
 						role.stateMachine.transition(RoleStateType.ACTION_HIT, hitRef);

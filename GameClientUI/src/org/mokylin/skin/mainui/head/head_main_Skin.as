@@ -219,7 +219,7 @@ package org.mokylin.skin.mainui.head
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
 			temp.verticalAlign = "-2";
 			temp.x = 88;
-			temp.y = 0;
+			temp.y = 3;
 			return temp;
 		}
 

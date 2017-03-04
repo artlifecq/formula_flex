@@ -3,6 +3,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.ui.SkinUIPanel;
 	
 	import org.mokylin.skin.app.beibao.beibao_Skin;
+	import org.mokylin.skin.app.beibao.juese_Skin;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
@@ -16,7 +17,7 @@ package com.rpgGame.appModule.role
 	{
 		private var _skin : beibao_Skin;
 		
-		private var basicView:BasicView;
+		private var basicView:BasicRoleView;
 		private var avatartView:AvatarView;
 		private var packsView:PacksView;
 		
@@ -30,17 +31,19 @@ package com.rpgGame.appModule.role
 		
 		private function initView():void
 		{
-			basicView=new BasicView(_skin);
-			avatartView=new AvatarView(_skin);
-			packsView=new PacksView(_skin);			
+			_skin.jineng.visible=false;
+			_skin.juese.visible=true;
+			basicView=new BasicRoleView(_skin.juese.skin as juese_Skin);
+			avatartView=new AvatarView(_skin.juese.skin as juese_Skin);
+			packsView=new PacksView(_skin.juese.skin as juese_Skin);			
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
 		{
 			super.show(data, openTable, parentContiner);
-			avatartView.updateAvatar();
-			
-			packsView.updatePacks();
+			basicView.show();
+			avatartView.show();
+			packsView.show();
 		}
 		
 		override protected function onTouchTarget(target : DisplayObject) : void {
@@ -49,12 +52,14 @@ package com.rpgGame.appModule.role
 			if(packsView.onTouchTarget(target)){
 				return;
 			}
-			
-			switch (target) {
-				case this._skin.btn_close:
-					this.hide();
-					break;
-			}
+		}
+		
+		override public function hide():void
+		{
+			super.hide();
+			basicView.onHide();
+			avatartView.onHide();
+			packsView.onHide();
 		}
 	}
 }

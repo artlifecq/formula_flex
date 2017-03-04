@@ -1,7 +1,7 @@
 package com.rpgGame.app.manager
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.app.state.role.RoleStateUtil;
@@ -51,7 +51,7 @@ package com.rpgGame.app.manager
 			if (role == null || !role.usable)
 				return;
 			if (role.headFace)
-				role.headFace.removeBodyRender();
+//				role.headFace.instanceDispose();
 
 			role.avatar.buildSyncInfo(RenderUnitType.BODY, RenderUnitID.BODY);
 			role.avatar.buildSyncInfo(RenderUnitType.HAIR, RenderUnitID.HAIR);
@@ -61,7 +61,7 @@ package com.rpgGame.app.manager
 
 			//无模型时添加血条
 			if (role.headFace)
-				role.headFace.addTemporaryBar();
+//				role.headFace.setTemporary();
 
 			//上“坐骑”
 			updateMount(role); //暂时先不搞坐骑。动作有问题
@@ -92,8 +92,8 @@ package com.rpgGame.app.manager
 		private static function updateBody(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			var rpd_body : RenderParamData = avatarInfo.rpd_body;
-			var rpd_mount : RenderParamData = avatarInfo.rpd_mount;
+			var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
+			var rpd_mount : RenderParamData3D = avatarInfo.rpd_mount;
 			if (rpd_body != null)
 			{
 				var ru : RenderUnit3D;
@@ -139,7 +139,7 @@ package com.rpgGame.app.manager
 				role.avatar.removeRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY);
 			}
 
-			var rpd_body_effect : RenderParamData = avatarInfo.rpd_body_effect;
+			var rpd_body_effect : RenderParamData3D = avatarInfo.rpd_body_effect;
 			if (rpd_body_effect != null)
 			{
 				ru = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_body_effect);
@@ -173,11 +173,11 @@ package com.rpgGame.app.manager
 		private static function updateHair(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			var rpd_hair : RenderParamData = avatarInfo.rpd_hair;
+			var rpd_hair : RenderParamData3D = avatarInfo.rpd_hair;
 			if (rpd_hair != null)
 			{
 				var ru : RenderUnit3D;
-				var rpd_body : RenderParamData = avatarInfo.rpd_body;
+				var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
 				if (rpd_body)
 				{
 					if (rpd_body.animatorSourchPath)
@@ -213,8 +213,8 @@ package com.rpgGame.app.manager
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
 			var ru : RenderUnit3D;
-			var rpd_weapon : RenderParamData = avatarInfo.rpd_weapon;
-			var rpd_body : RenderParamData = avatarInfo.rpd_body;
+			var rpd_weapon : RenderParamData3D = avatarInfo.rpd_weapon;
+			var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
 			if (rpd_weapon != null)
 			{
 				if (rpd_body)
@@ -247,7 +247,7 @@ package com.rpgGame.app.manager
 				role.avatar.removeRenderUnitByID(RenderUnitType.WEAPON, RenderUnitID.WEAPON);
 			}
 
-			var rpd_weapon_effect : RenderParamData = avatarInfo.rpd_weapon_effect;
+			var rpd_weapon_effect : RenderParamData3D = avatarInfo.rpd_weapon_effect;
 			if (rpd_weapon_effect != null)
 			{
 				if (rpd_body)
@@ -282,11 +282,11 @@ package com.rpgGame.app.manager
 		private static function updateDeputyWeapon(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			var rpd_deputy_weapon : RenderParamData = avatarInfo.rpd_deputy_weapon;
+			var rpd_deputy_weapon : RenderParamData3D = avatarInfo.rpd_deputy_weapon;
 			if (rpd_deputy_weapon != null)
 			{
 				var ru : RenderUnit3D;
-				var rpd_body : RenderParamData = avatarInfo.rpd_body;
+				var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
 				if (rpd_body)
 				{
 					if (rpd_body.animatorSourchPath)
@@ -317,7 +317,7 @@ package com.rpgGame.app.manager
 				role.avatar.removeRenderUnitByID(RenderUnitType.DEPUTY_WEAPON, RenderUnitID.DEPUTY_WEAPON);
 			}
 			
-			var rpd_deputyWeapon_effect : RenderParamData = avatarInfo.rpd_deputyWeapon_effect;
+			var rpd_deputyWeapon_effect : RenderParamData3D = avatarInfo.rpd_deputyWeapon_effect;
 			if (rpd_deputyWeapon_effect != null)
 			{
 				if (rpd_body)
@@ -352,7 +352,7 @@ package com.rpgGame.app.manager
 		private static function updateEffect(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			var rpd_effect : RenderParamData = avatarInfo.rpd_effect;
+			var rpd_effect : RenderParamData3D = avatarInfo.rpd_effect;
 			if (rpd_effect != null)
 			{
 				var ru : RenderUnit3D = role.avatar.addRenderUnit(rpd_effect);
@@ -373,7 +373,7 @@ package com.rpgGame.app.manager
 		private static function updateMount(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			var rpd_mount : RenderParamData = avatarInfo.rpd_mount;
+			var rpd_mount : RenderParamData3D = avatarInfo.rpd_mount;
 			if (rpd_mount != null)
 			{
 				var ru : RenderUnit3D = role.avatar.addRenderUnit(rpd_mount);
@@ -407,10 +407,10 @@ package com.rpgGame.app.manager
 		{
 			ru.removeAddedCallBack(partAddedCallBack);
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			var rpd_body : RenderParamData = avatarInfo.rpd_body;
+			var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
 			if (rpd_body)
 			{
-				var rpd_mount : RenderParamData = avatarInfo.rpd_mount;
+				var rpd_mount : RenderParamData3D = avatarInfo.rpd_mount;
 				if (rpd_mount)
 				{
 					if (ru.id == RenderUnitID.MOUNT && role.headFace)
@@ -428,7 +428,8 @@ package com.rpgGame.app.manager
 					role.headFace.setBodyRender(ru);
 			}
 		}
-
+		
+		
 		/**
 		 *  等以后确定了，这里的逻辑还是要改的，目前能知道的是，每个角色的不同形态可以用自己的一套骨骼。坐骑的话，还不确定。
 		 * 但是可以确定的是不分男女
@@ -524,10 +525,10 @@ package com.rpgGame.app.manager
 				}
 				
 				var weaponRes : AvatarWeaponRes = AvatarWeapontResCfgData.getInfo(roleData.weapon);
-				if (!weaponRes)
+			/*	if (!weaponRes)
 				{
 					weaponRes = AvatarWeapontResCfgData.getInfo(clothesRes.weaponResId);
-				}
+				}*/
 				if (weaponRes)
 				{
 					weaponResID = weaponRes.res;

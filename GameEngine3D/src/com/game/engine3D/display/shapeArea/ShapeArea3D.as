@@ -35,7 +35,7 @@ package com.game.engine3D.display.shapeArea
 		public function ShapeArea3D(parent : ObjectContainer3D)
 		{
 			_parent = parent;
-            if (GlobalConfig.use25DMap)
+            if (GlobalConfig.use2DMap)
                 _container = PoolEntityContainer3D.create();
             else
                 _container = PoolContainer3D.create();

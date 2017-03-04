@@ -4,9 +4,9 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.info.heroSearch.HeroSearchData;
-
+	
 	import app.cmd.SearchByHeroNameModuleMessages;
-
+	
 	import org.client.mainCore.bean.BaseBean;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.net_protobuff.ByteBuffer;

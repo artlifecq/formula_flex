@@ -37,6 +37,11 @@ package com.rpgGame.app.fight.spell
 	{
 		private static var _releaseInfoById : Dictionary = new Dictionary();
 
+		public function set flySceneObjID(value:Number):void
+		{
+			_flySceneObjID = value;
+		}
+
 		/**
 		 *  
 		 * @param flySceneObjID 暂时把这个id，以技能的id来处理，后面看后端要不要有其他处理
@@ -51,6 +56,7 @@ package com.rpgGame.app.fight.spell
 			if (!info)
 			{
 				info = new ReleaseSpellInfo();
+				info.flySceneObjID=flySceneObjID;
 			}
 			if(msg is ResFightBroadcastMessage || msg is ResAttackVentToClientMessage)
 			{
@@ -115,6 +121,7 @@ package com.rpgGame.app.fight.spell
 		public static function isCurrReleaseInfo(flySceneObjID : int) : Boolean
 		{
 			var info : ReleaseSpellInfo = _releaseInfoById[flySceneObjID];
+			var value:Boolean=info && !info.motionFinish;
 			return info && !info.motionFinish;
 		}
 
@@ -502,10 +509,11 @@ package com.rpgGame.app.fight.spell
 			var resultInfo:AttackResultInfo;
 			var isState : Boolean = false;//现在还没有技能触发buff的功能，暂时不走这里面的逻辑
 			
+			
 			for(var i:uint = 0;i<msg.infos.length;i++)
 			{
 				resultInfo = msg.infos[i];
-				roleID = resultInfo.targetId.ToGID();
+				roleID = resultInfo.targetId.ToGID();//目标 
 				if (isState) //是否状态效果（buff/debuff）
 				{
 					var buffData : BuffData = new BuffData(roleID);
@@ -527,7 +535,7 @@ package com.rpgGame.app.fight.spell
 						hurtResultVO.newPosition = new Point(resultInfo.newPos.x, resultInfo.newPos.y);
 					}
 					
-					hurtResultVO.attackerId = resultInfo.attackerId.ToGID();
+					hurtResultVO.attackerId = resultInfo.attackerId.ToGID();//攻击者
 					
 					var hasStiffTime : Boolean = false;//击飞时间，暂时没有，所以先为false
 					if (hasStiffTime)

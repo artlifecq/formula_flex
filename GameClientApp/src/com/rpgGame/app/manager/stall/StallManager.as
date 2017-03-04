@@ -25,10 +25,10 @@ package com.rpgGame.app.manager.stall
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.StallCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.stall.StallBuyTreeItem;
 	import com.rpgGame.coreData.info.stall.StallData;
 	import com.rpgGame.coreData.info.stall.StallItemData;
@@ -477,7 +477,7 @@ package com.rpgGame.app.manager.stall
 			var stallItem : StallItemData = selfStallData.getStallBuyIndex(index);
 			if(stallItem&&stallItem.itemId==itemId)
 			{
-				var itemName : String = ItemCfgData.getItemName(itemId);
+				var itemName : String = ItemConfig.getItemName(itemId);
 				NoticeManager.showNotify(LangStall.buyStallItemComplete,itemName,haveItem);
 				stallItem.num = stallItem.num - haveItem;
 				stallItem.price = price;
@@ -682,7 +682,7 @@ package com.rpgGame.app.manager.stall
 			var items : Array = BackPackManager.instance.getItemsByItemId(stallItem.itemId);
 			var sellCount : int = 0;
 			var bagIndexs:Array = [];
-			for each(var itemInfo : ItemInfo in items)
+			for each(var itemInfo : ClientItemInfo in items)
 			{
 				if(itemInfo && itemInfo.count>0 && itemInfo.binded == false)
 				{

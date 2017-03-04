@@ -216,6 +216,8 @@ package com.rpgGame.app.cmdlistener.engine
 							if(sceneRole.headFace is StallHeadFace)
 								(sceneRole.headFace as StallHeadFace).addAndUpdateStallBg();
 						}
+					}else if(role.type==SceneCharType.DROP_GOODS){//掉落物
+						WalkToRoleManager.walkToRole(role);
 					}
 					else 
 					{

@@ -13,7 +13,7 @@ package com.rpgGame.app.cmdlistener.mount
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.cfg.mount.MountConfigData;
 	import com.rpgGame.coreData.cfg.mount.MountSpeciesData;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.item.MountBeastCardInfo;
 	import com.rpgGame.coreData.info.mount.MountInfoData;
@@ -181,10 +181,10 @@ package com.rpgGame.app.cmdlistener.mount
 			var goodsPro:GoodsProto = new GoodsProto();
 			goodsPro.mergeFrom(buffer);
 			//物品信息
-			var info:MountBeastCardInfo = ItemUtil.convertGoodsProtoToItemInfo( goodsPro ) as MountBeastCardInfo;
+			/*var info:MountBeastCardInfo = ItemUtil.convertGoodsProtoToItemInfo( goodsPro ) as MountBeastCardInfo;
 			info.setContainerId(ItemContainerID.BackPack);
 			BackPackManager.instance.setItemByIndex( index,info );
-			EventManager.dispatchEvent( MountEvent.MOUNT_TRANS_SUCCESS, info );
+			EventManager.dispatchEvent( MountEvent.MOUNT_TRANS_SUCCESS, info );*/
 		}
 		
 		/**
@@ -603,7 +603,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var index:int = buffer.readVarint32();
 			var skillBooksId:int = buffer.readVarint32();
 			
-			var item:ItemInfo = GoodsContainerMamager.getItemInfo( ItemContainerID.BackPack, index );
+			var item:ClientItemInfo = GoodsContainerMamager.getItemInfo( ItemContainerID.BackPack, index );
 			if( item != null )
 			{
 				item.count -= 1;
@@ -1120,14 +1120,14 @@ package com.rpgGame.app.cmdlistener.mount
 		 */
 		private function onDropMountCollectObj( buffer:ByteBuffer ):void
 		{
-			var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
+			/*var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
 			dropGoodsData.readFromIsMountCollect(buffer);
 			dropGoodsData.isDroped = true;
 			var mountSpeciesId:int = buffer.readVarint32();
 			var mountData:MountSpeciesData = MountConfigData.getMountSpecieById( mountSpeciesId );
 			if( mountData != null )
 				dropGoodsData.name = mountData.name;
-			SceneRoleManager.getInstance().createDropGoods(dropGoodsData);
+			SceneRoleManager.getInstance().createDropGoods(dropGoodsData);*/
 		}
 		
 		/**
@@ -1141,14 +1141,14 @@ package com.rpgGame.app.cmdlistener.mount
 		 */
 		private function onSeeMountCollectObj( buffer:ByteBuffer ):void
 		{
-			var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
+			/*var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
 			dropGoodsData.readFromIsMountCollect(buffer);
 			dropGoodsData.isMount = true;
 			var mountSpeciesId:int = buffer.readVarint32();
 			var mountData:MountSpeciesData = MountConfigData.getMountSpecieById( mountSpeciesId );
 			if( mountData != null )
 				dropGoodsData.name = mountData.name;
-			SceneRoleManager.getInstance().createDropGoods(dropGoodsData);
+			SceneRoleManager.getInstance().createDropGoods(dropGoodsData);*/
 		}
 		
 		/**

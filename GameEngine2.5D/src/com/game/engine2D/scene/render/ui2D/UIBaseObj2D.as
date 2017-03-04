@@ -1,7 +1,6 @@
 package com.game.engine2D.scene.render.ui2D{
 	import com.game.engine2D.config.GlobalConfig2D;
 	import com.game.engine2D.vo.IDisplayDrawable;
-	import com.game.engine2D.vo.IFrameRender;
 	import com.game.mainCore.core.interfaces.IDisplayObject;
 	import com.game.mainCore.libCore.pool.IPoolClass;
 	
@@ -12,6 +11,7 @@ package com.game.engine2D.scene.render.ui2D{
 	import flash.geom.Rectangle;
 	
 	import org.client.mainCore.utils.Tick;
+	import com.game.engine3D.vo.IFrameRender;
 	
 	/**
 	 * 基本元素模型（实现了池接口）
@@ -345,16 +345,16 @@ package com.game.engine2D.scene.render.ui2D{
 		}
 		
 		public var updateNow:Boolean = true;
-//		protected var _updateNow:Boolean = true;
-//		/**是否需要立即更新*/
-//		public function get updateNow():Boolean
-//		{
-//			return _updateNow;
-//		}
-//		public function set updateNow(value:Boolean):void
-//		{
-//			_updateNow = value;
-//		}
+		//		protected var _updateNow:Boolean = true;
+		//		/**是否需要立即更新*/
+		//		public function get updateNow():Boolean
+		//		{
+		//			return _updateNow;
+		//		}
+		//		public function set updateNow(value:Boolean):void
+		//		{
+		//			_updateNow = value;
+		//		}
 		
 		/**渲染显示坐标(一般由,(x+offsetX,y+offsetY),也可能别的接口过来赋值)*/
 		public function get showPos():Point
@@ -605,7 +605,7 @@ package com.game.engine2D.scene.render.ui2D{
 			_offsetY = 0;
 			_x = 0;
 			_y = 0;
-//			_graphicDis = null;
+			//			_graphicDis = null;
 		}
 		
 		

@@ -3,22 +3,23 @@ package com.game.engine2D.scene.map
 	import com.game.engine2D.core.AsyncByteTexture;
 	import com.game.engine2D.scene.SceneCamera;
 	import com.game.engine2D.scene.map.vo.MapZone;
-	import com.game.engine2D.utils.SceneUtil;
 	import com.game.engine2D.utils.MaterialUtils;
+	import com.game.engine2D.utils.SceneUtil;
 	import com.game.engine2D.utils.Transformer;
 	
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	
 	import away3d.materials.TextureMaterial;
+	import away3d.materials.WriteDepthOption;
 	
 	import org.client.mainCore.ds.HashMap;
-
+	
 	/**
 	 *
 	 * 地图缓存
-	 * @author L.L.M.Sunny
-	 * 创建时间：2015-5-11 下午16:12:35
+	 * @author guoqing.wen
+	 * 修改时间：2017-2-17 上午10:40:35
 	 *
 	 */
 	final public class MapCache
@@ -32,7 +33,8 @@ package com.game.engine2D.scene.map
 			}
 			return _instance;
 		}
-
+		
+		private var _zoneBmpWriteDepth:Boolean;
 		private var _zoneBmpDataMap : HashMap;
 		private var _disposeMapZone : Dictionary;
 		/**
@@ -42,14 +44,14 @@ package com.game.engine2D.scene.map
 		 *
 		 */
 		private var _waitingLoadDatas : Dictionary;
-
+		
 		public function MapCache()
 		{
 			_zoneBmpDataMap = new HashMap();
 			_disposeMapZone = new Dictionary();
 			_waitingLoadDatas = new Dictionary();
 		}
-
+		
 		/**
 		 * 停止所有正在加载的加载
 		 *
@@ -58,17 +60,17 @@ package com.game.engine2D.scene.map
 		{
 			_waitingLoadDatas = new Dictionary();
 		}
-
+		
 		final public function isWaitingLoad(key : *) : Boolean
 		{
 			return _waitingLoadDatas[key];
 		}
-
+		
 		final public function addWaitingLoad(key : *) : void
 		{
 			_waitingLoadDatas[key] = true;
 		}
-
+		
 		/**
 		 * 从等待数组中删除
 		 * @param key
@@ -79,14 +81,25 @@ package com.game.engine2D.scene.map
 			_waitingLoadDatas[key] = null;
 			delete _waitingLoadDatas[key];
 		}
-
+		
+		/** 修改地图切片是否需要写入深度 */
+		final public function updateZoneWriteDepth(value:Boolean) : void
+		{
+			_zoneBmpWriteDepth = value;
+			_zoneBmpDataMap.eachValue(function(textureMaterial : TextureMaterial) : void
+			{
+				textureMaterial.writeDepth = value ? WriteDepthOption.TRUE : WriteDepthOption.FALSE;
+			});
+		}
+		
 		final public function addZoneBmpData(key : *, texture:AsyncByteTexture) : void
 		{
 			disposeZoneBmpData(key);
 			var textureMaterial:TextureMaterial = MaterialUtils.getMaterialMapZoneByTexture(texture);
+			textureMaterial.writeDepth = _zoneBmpWriteDepth ? WriteDepthOption.TRUE : WriteDepthOption.FALSE;
 			_zoneBmpDataMap.add(key, textureMaterial);
 		}
-
+		
 		final public function disposeCacheZone(sceneCamera : SceneCamera) : void
 		{
 			//拿到摄像机(注意不是摄像机跟随元素)所在的区域图块
@@ -95,6 +108,7 @@ package com.game.engine2D.scene.map
 			//得到新区域的可视点数组
 			var pointArr : Array = SceneUtil.findViewZonePoints(zonePoint.x, zonePoint.y, sceneCamera.zoneRangeXY.x, sceneCamera.zoneRangeXY.y);
 			//
+			var zoneCnt:int = 0;
 			for each (var tempMapZone : MapZone in _disposeMapZone)
 			{
 				var pLen : uint = pointArr.length;
@@ -110,29 +124,34 @@ package com.game.engine2D.scene.map
 				}
 				if (!has)
 				{
+					zoneCnt++;
 					disposeZone(tempMapZone);
 				}
 			}
 			_disposeMapZone = new Dictionary();
+			if (zoneCnt)
+			{
+				trace("释放地图格子：zoneCnt=",zoneCnt);
+			}
 		}
-
+		
 		final public function clearDisposeCacheZone() : void
 		{
 			_disposeMapZone = new Dictionary();
 		}
-
+		
 		final public function addDisposeCacheZone(key : *, mapZone : MapZone) : void
 		{
 			_disposeMapZone[key] = mapZone;
 			removeWaitingLoad(key);
 		}
-
+		
 		final public function removeDisposeCacheZone(key : *) : void
 		{
 			_disposeMapZone[key] = null;
 			delete _disposeMapZone[key];
 		}
-
+		
 		final public function disposeAllZoneBmpData() : void
 		{
 			_zoneBmpDataMap.forEach(function(key : *, textureMaterial : TextureMaterial) : void
@@ -145,7 +164,7 @@ package com.game.engine2D.scene.map
 			});
 			_zoneBmpDataMap.clear();
 		}
-
+		
 		final public function disposeZone(mZone : MapZone) : void
 		{
 			var key : * = MapZone.getKey(mZone.tile_x, mZone.tile_y);
@@ -153,7 +172,7 @@ package com.game.engine2D.scene.map
 			removeWaitingLoad(key);
 			mZone.clear();
 		}
-
+		
 		final private function disposeZoneBmpData(key : String) : void
 		{
 			var tm : TextureMaterial = _zoneBmpDataMap.getValue(key);
@@ -167,13 +186,13 @@ package com.game.engine2D.scene.map
 			}
 			_zoneBmpDataMap.remove(key);
 		}
-
+		
 		final public function getZoneBmpData(key : *) : TextureMaterial
 		{
 			var bmpData : TextureMaterial = _zoneBmpDataMap.getValue(key);
 			return bmpData;
 		}
-
+		
 		final public function hasZoneBmpData(key : *) : Boolean
 		{
 			var hasBmpData : Boolean = _zoneBmpDataMap.containsKey(key);

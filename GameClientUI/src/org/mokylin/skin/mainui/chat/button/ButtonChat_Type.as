@@ -92,13 +92,14 @@ package org.mokylin.skin.mainui.chat.button
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
+			temp.left = 0;
+			temp.right = 1;
 			temp.text = "按钮";
 			temp.textAlign = "center";
 			temp.color = 0xbca78a;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.verticalAlign = "middle";
-			temp.width = 50;
-			temp.y = 2;
+			temp.y = 5;
 			return temp;
 		}
 

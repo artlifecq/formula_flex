@@ -59,7 +59,6 @@ package org.mokylin.skin.component.scrollbar
 			temp.right = 3;
 			temp.styleClass = org.mokylin.skin.component.scrollbar.skin_pack.button.ScrollBarSkin_decre;
 			temp.top = 0;
-			temp.width = 17;
 			return temp;
 		}
 
@@ -71,7 +70,6 @@ package org.mokylin.skin.component.scrollbar
 			temp.bottom = 0;
 			temp.right = 3;
 			temp.styleClass = org.mokylin.skin.component.scrollbar.skin_pack.button.ScrollBarSkin_incre;
-			temp.width = 17;
 			return temp;
 		}
 
@@ -80,11 +78,9 @@ package org.mokylin.skin.component.scrollbar
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			thumb = temp;
 			temp.name = "thumb";
-			temp.height = 66;
-			temp.right = 2;
+			temp.right = 3;
 			temp.styleClass = org.mokylin.skin.component.scrollbar.skin_pack.button.ScrollBarSkin_thumb;
 			temp.top = 31;
-			temp.width = 18;
 			return temp;
 		}
 
@@ -97,7 +93,6 @@ package org.mokylin.skin.component.scrollbar
 			temp.right = 4;
 			temp.styleClass = org.mokylin.skin.component.scrollbar.skin_pack.button.ScrollBarSkin_track;
 			temp.top = 16;
-			temp.width = 15;
 			return temp;
 		}
 

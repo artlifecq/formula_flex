@@ -13,11 +13,13 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.core.events.ItemEvent;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
+	import com.rpgGame.coreData.enum.item.ItemChangeType;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.item.UpgradeItemData;
 	import com.rpgGame.coreData.info.item.UpgradeItemInfo;
@@ -26,12 +28,14 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.coreData.info.upgrade.UpgradeGoodsInfo;
 	import com.rpgGame.coreData.info.upgrade.UpgradeProtoInfo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
+	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
 	import flash.utils.Dictionary;
 	
-	import app.message.GoodsContainerProto;
 	import app.message.GoodsType;
 	import app.message.Config.AllGoodsContainerUnlockProto;
+	
+	import feathers.data.ListCollection;
 	
 	import org.client.mainCore.manager.EventManager;
 	
@@ -43,16 +47,9 @@ package com.rpgGame.app.manager.goods
 	{
 		protected var containerId:int;
 		
-		/**列数*/
-		public var defaultCol:int = 8;
-		/**行数*/
-		public var defaultRow:int = 7;
-		/** 默认开启个数 */
-		protected var initOpenCount:int;
 		/** 已经开启个数 */
 		public var hasOpenCount:int;
 		public const Max_Grid_Count:int = 126;
-		public var hasOpenPage:int;
 		
 		/** 解锁位置*/
 		public var curUnlockIndex:int;
@@ -65,7 +62,7 @@ package com.rpgGame.app.manager.goods
 		/** 所有药品id **/
 		private var _drugList:Array = [];
 		
-		private var _goodsList:Array;
+		protected var _goodsList:Array;
 		
 		/**用于背包这样当前显示的标签页物品list*/
 		private var _curShowList:Array;
@@ -82,6 +79,7 @@ package com.rpgGame.app.manager.goods
 		/** 区分装备类型（人物装备还是坐骑装备） **/
 		private var _checkEquipType:Array;
 		
+		private var _gridInfoDatas:ListCollection;
 		
 		public function GoodsContainerMamager(containerID:int)
 		{
@@ -90,6 +88,42 @@ package com.rpgGame.app.manager.goods
 			_goodsList = [];
 			goodsEnableDict = new Dictionary();
 		}
+		
+		/**
+		 *背包格子数据集 
+		 * @return 
+		 * 
+		 */
+		public function get gridInfoDatas():ListCollection
+		{
+			if(!_gridInfoDatas){
+				_gridInfoDatas=new ListCollection();
+			}
+			return _gridInfoDatas;
+		}
+		
+		/**
+		 *设置背包格子数
+		 * @param num
+		 * 
+		 */
+		public function setGridNum(num:int):void
+		{
+			if(!_gridInfoDatas){
+				_gridInfoDatas=new ListCollection();
+			}
+			var currentNum:int=_gridInfoDatas.length;
+			if(currentNum>=num){
+				return;
+			}
+			var createNum:int=num-currentNum;
+			for(var i:int=0;i<createNum;i++){
+				var gridInfo:GridInfo = new GridInfo(containerId, i);
+				_gridInfoDatas.push(gridInfo);
+			}
+		}
+		
+		
 		
 		public function set showLockAssetIndex(value:Array):void
 		{
@@ -142,7 +176,7 @@ package com.rpgGame.app.manager.goods
 			{
 				return true;
 			}
-			var item : ItemInfo = getItemInfoByIndex(index);
+			var item : ClientItemInfo = getItemInfoByIndex(index);
 			if(item && item.binded)
 			{
 				return true;
@@ -161,50 +195,95 @@ package com.rpgGame.app.manager.goods
 		}
 		
 		/**
-		 *初始化物品容器信息 
-		 * @param data
+		 * 初始化物品容器信息 
+		 * @param cellnum
+		 * @param items
 		 * 
 		 */
-		public function setGoodsInfo(data:GoodsContainerProto):void
+		public function setItemsInfo(cellnum:int,items:Vector.<ItemInfo>):void
 		{
-			initOpenCount = data.initCount;
-			hasOpenCount = data.size;
+			hasOpenCount = cellnum;
 			curUnlockIndex = hasOpenCount;
-			if(containerId == ItemContainerID.BackPack)
-			{
-//				unlockData.setOffIndex(initOpenCount);
-//				unlockData.setUnlockedSize(hasOpenCount-initOpenCount);
-			}else if(containerId == ItemContainerID.Storage)
-			{
-				hasOpenPage = data.storage.unlockedPage;
-//				unlockData.setOffIndex(initOpenCount);
-//				unlockData.setUnlockedSize(hasOpenCount-initOpenCount);
-			}
 			
-			var posArr:Array = data.posList;
-			var goodsArr:Array = data.goodsList;
-			for(var i:int=0; i<posArr.length; i++)
+			_goodsList=[];
+			for(var i:int=0; i<items.length; i++)
 			{
-				var info:ItemInfo = ItemUtil.convertGoodsProtoToItemInfo(goodsArr[i]);
-				info.setContainerId( containerId );
-				info.setIndex( posArr[i] );
-				_goodsList[info.index] = info;
+				var info:ClientItemInfo =  ItemUtil.convertClientItemInfo(items[i]);
+				info.setContainerId(containerId);
+				_goodsList[info.index] =  info;
 			}
 			setEnabledAll(true);
+			EventManager.dispatchEvent(ItemEvent.ITEM_INIT,containerId);
+			switch(containerId){
+				case ItemContainerID.BackPack:
+					ItemSender.isReqPack=true;
+					break;
+				case ItemContainerID.Storage:
+					ItemSender.isReqStorage=true;
+					break;
+				case ItemContainerID.Role:
+					ItemSender.isReqRole=true;
+					break;
+			}
 		}
 		
 		/**
-		 * 添加物品
-		 * @param info
+		 *改变物品 
+		 * @param msg
+		 * 
 		 */
-		public function addItem(info:ItemInfo):void
+		public function removeItem(gridId:Number):void
 		{
-			if(info)
-			{
-				_goodsList[info.index] = info;
-				EventManager.dispatchEvent(ItemEvent.ITEM_ADD, info);
+			removeItemByIndex(gridId);
+		}
+		/**
+		 *改变物品 
+		 * @param msg
+		 * 
+		 */
+		public function changItem(item:ItemInfo,type:int=4):void
+		{
+			var info:ClientItemInfo=ItemUtil.convertClientItemInfo(item);
+			info.setContainerId(containerId);
+			
+			switch(type){
+				case ItemChangeType.ADD_ITEM:
+					addItemInfo(info);
+					break;
+				case ItemChangeType.MOVE_ITEM:
+					_goodsList[info.index] = info;
+					EventManager.dispatchEvent(ItemEvent.ITEM_CHANG,info);
+					break;
+				case ItemChangeType.DELETE_ITEM:
+					_goodsList[info.index] = null;
+					break;
+				case ItemChangeType.CHANGE_ITEM:
+					_goodsList[info.index] = info;
+					EventManager.dispatchEvent(ItemEvent.ITEM_CHANG,info);
+					break;
 			}
 		}
+		
+		
+		
+		/**
+		 * 添加物品
+		 * @param data
+		 * 
+		 */
+		public function addItem(item:ItemInfo):void
+		{
+			var info:ClientItemInfo=ItemUtil.convertClientItemInfo(item);
+			info.setContainerId(containerId);
+			addItemInfo(info);
+		}
+		
+		public function addItemInfo(info:ClientItemInfo):void
+		{
+			_goodsList[info.index] = info;
+			EventManager.dispatchEvent(ItemEvent.ITEM_ADD,info);
+		}
+		
 		/**
 		 * 刷新指定物品下标的所有物品（防止有些操作可能会使物品下标和实际下标不相同，那就刷新一下这些下标的物品 
 		 * @param container
@@ -217,7 +296,8 @@ package com.rpgGame.app.manager.goods
 			EventManager.dispatchEvent(ItemEvent.ITEM_REFLESH_BY_ITEM_INDEX,index);
 		}
 		
-		public function setItemByIndex(index:int, info:ItemInfo):void
+		
+		public function setItemByIndex(index:int, info:ClientItemInfo):void
 		{
 			if(!info)
 			{
@@ -233,7 +313,7 @@ package com.rpgGame.app.manager.goods
 			
 			if(!_goodsList[index])
 			{
-				addItem(info);
+				addItemInfo(info);
 			}else
 			{
 				_goodsList[index] = info;
@@ -257,7 +337,7 @@ package com.rpgGame.app.manager.goods
 		public function useGridLen():int
 		{
 			var result : int = 0;
-			for each(var info:ItemInfo in _goodsList)
+			for each(var info:ClientItemInfo in _goodsList)
 			{
 				if(info != null)
 					result ++ ;
@@ -280,7 +360,7 @@ package com.rpgGame.app.manager.goods
 				return goods;//并没有赛选
 			}
 			var result : Array = [];
-			for each(var item:ItemInfo in goods)
+			for each(var item:ClientItemInfo in goods)
 			{
 				if(!item)
 					continue;
@@ -371,21 +451,12 @@ package com.rpgGame.app.manager.goods
 			return getFirstEmptyIndex() != -1;
 		}
 		
-		public function getMaxRows():int
-		{
-			if(curUnlockIndex >= Max_Grid_Count)
-				return Math.floor(Max_Grid_Count / defaultCol);
-			else if(curUnlockIndex >= (Max_Grid_Count - defaultCol))
-				return Math.floor(curUnlockIndex / defaultCol) + 1;
-			else
-				return Math.floor(curUnlockIndex / defaultCol) + 2;
-		}
 		
-		public function removeItemByIndex(index:int):ItemInfo
+		public function removeItemByIndex(index:int):ClientItemInfo
 		{
-			var info:ItemInfo = getItemInfoByIndex(index);
+			var info:ClientItemInfo = getItemInfoByIndex(index);
 			_goodsList[index] = null;
-			if(info)EventManager.dispatchEvent(ItemEvent.ITEM_DELETE,info);
+			EventManager.dispatchEvent(ItemEvent.ITEM_REMOVE,info);			
 			return info;
 		}
 		
@@ -394,12 +465,12 @@ package com.rpgGame.app.manager.goods
 		 * 通过容器格子index获取对应的物品数据
 		 * 如果没有的话则会返回null
 		 * */
-		public function getItemInfoByIndex(index:int):ItemInfo
+		public function getItemInfoByIndex(index:int):ClientItemInfo
 		{
 			return index <_goodsList.length ? _goodsList[index] : null;
 		}
 		
-		public function getCurItemInfoByIndex(index:int):ItemInfo
+		public function getCurItemInfoByIndex(index:int):ClientItemInfo
 		{
 			return index <_curShowList.length ? _curShowList[index] : null;
 		}
@@ -409,14 +480,15 @@ package com.rpgGame.app.manager.goods
 		{
 			return _goodsList.concat();
 		}
+		
 		/**
 		 * 根据物品id获得物品内的所有物品集合
 		 * @param itemID物品id
 		 * */
-		public function getBagItemsByID(itemID:uint):Vector.<ItemInfo>
+		public function getBagItemsByID(itemID:uint):Vector.<ClientItemInfo>
 		{
-			var items:Vector.<ItemInfo> = new Vector.<ItemInfo>();
-			for each(var info:ItemInfo in _goodsList)
+			var items:Vector.<ClientItemInfo> = new Vector.<ClientItemInfo>();
+			for each(var info:ClientItemInfo in _goodsList)
 			{
 				if(info && info.cfgId == itemID)
 				{
@@ -434,7 +506,7 @@ package com.rpgGame.app.manager.goods
 		public function getBagItemsCountById(itemID:uint):int
 		{
 			var result : uint = 0;
-			for each(var info:ItemInfo in _goodsList)
+			for each(var info:ClientItemInfo in _goodsList)
 			{
 				if(info && info.cfgId == itemID)
 				{
@@ -454,7 +526,7 @@ package com.rpgGame.app.manager.goods
 		public function getBagItemsCountByIdAndBind(itemID:uint,isBind:Boolean = false):int
 		{
 			var result : uint = 0;
-			for each(var info:ItemInfo in _goodsList)
+			for each(var info:ClientItemInfo in _goodsList)
 			{
 				if(info && info.cfgId == itemID && info.binded == isBind)
 				{
@@ -470,10 +542,10 @@ package com.rpgGame.app.manager.goods
 		 * @return 
 		 * 
 		 */
-		public function getFirstCanUseItemByCfgId(cfgId:uint):ItemInfo
+		public function getFirstCanUseItemByCfgId(cfgId:uint):ClientItemInfo
 		{
 			var itemValues:Array = _goodsList;
-			for each(var info:ItemInfo in itemValues)
+			for each(var info:ClientItemInfo in itemValues)
 			{
 				if(info && info.cfgId == cfgId && (info.expireTime == 0 || isCanUse(info)))
 				{
@@ -483,10 +555,10 @@ package com.rpgGame.app.manager.goods
 			return null;
 		}
 		
-		public function getFirstCanUseItemByCfgIdAndBind(cfgId:uint,bind:Boolean):ItemInfo
+		public function getFirstCanUseItemByCfgIdAndBind(cfgId:uint,bind:Boolean):ClientItemInfo
 		{
 			var itemValues:Array = _goodsList;
-			for each(var info:ItemInfo in itemValues)
+			for each(var info:ClientItemInfo in itemValues)
 			{
 				if(info && info.cfgId == cfgId && (info.expireTime == 0 || isCanUse(info)) && info.binded == bind)
 				{
@@ -503,7 +575,7 @@ package com.rpgGame.app.manager.goods
 		public function getItemCount(itemID:uint):int
 		{
 			var countNum:int = 0;
-			for each(var info:ItemInfo in _goodsList)
+			for each(var info:ClientItemInfo in _goodsList)
 			{
 				if(info && info.cfgId == itemID && !isExpirt(info.expireTime))
 				{
@@ -519,7 +591,7 @@ package com.rpgGame.app.manager.goods
 		public function getItemIndexByType(type:int):int
 		{
 			var items:Array = [];
-			for each (var itemInfo:ItemInfo in _goodsList) 
+			for each (var itemInfo:ClientItemInfo in _goodsList) 
 			{
 				if(itemInfo && itemInfo.type == type)
 					return itemInfo.index;
@@ -536,7 +608,7 @@ package com.rpgGame.app.manager.goods
 		public function getItemsByType(type:int):Array
 		{
 			var items:Array = [];
-			for each (var itemInfo:ItemInfo in _goodsList) 
+			for each (var itemInfo:ClientItemInfo in _goodsList) 
 			{
 				if(itemInfo && itemInfo.type == type)
 				{
@@ -549,7 +621,7 @@ package com.rpgGame.app.manager.goods
 		public function getItemsByItemId(id:int):Array
 		{
 			var items:Array = [];
-			for each (var itemInfo:ItemInfo in _goodsList) 
+			for each (var itemInfo:ClientItemInfo in _goodsList) 
 			{
 				if(itemInfo && itemInfo.cfgId == id)
 				{
@@ -574,7 +646,7 @@ package com.rpgGame.app.manager.goods
 		public function getItemsByGroup(group:int):Array
 		{
 			var items : Array = [];
-			for each (var itemInfo:ItemInfo in _goodsList) 
+			for each (var itemInfo:ClientItemInfo in _goodsList) 
 			{
 				if(itemInfo && itemInfo.group == group)
 				{
@@ -587,7 +659,7 @@ package com.rpgGame.app.manager.goods
 		public function getItemsCountByGroup(group:int):int
 		{
 			var result : int = 0;
-			for each (var itemInfo:ItemInfo in _goodsList) 
+			for each (var itemInfo:ClientItemInfo in _goodsList) 
 			{
 				if(itemInfo && itemInfo.group == group)
 					result += itemInfo.count;
@@ -595,22 +667,9 @@ package com.rpgGame.app.manager.goods
 			return result;
 		}
 		
-		public function getSummonTokenByType(type:int):Array
-		{
-			var items:Array = [];
-			for each (var itemInfo:ItemInfo in _goodsList) 
-			{
-				if(itemInfo && itemInfo.summonTokenType == type)
-				{
-					items.push(itemInfo);
-				}
-			}
-			return items;
-		}
-		
 		//---------------排序-------------------
 		
-		private function compareItemInfoSort(itemInfo1:ItemInfo,itemInfo2:ItemInfo):int
+		private function compareItemInfoSort(itemInfo1:ClientItemInfo,itemInfo2:ClientItemInfo):int
 		{
 			if(itemInfo1.cfgId == itemInfo2.cfgId)
 			{
@@ -648,7 +707,7 @@ package com.rpgGame.app.manager.goods
 		 */
 		public function getNearExpirtime(cfgID:int):int
 		{
-			var info:ItemInfo = getNearExpirtimeItemInfo(cfgID);
+			var info:ClientItemInfo = getNearExpirtimeItemInfo(cfgID);
 			if(info)
 			{
 				return info.expireTime;
@@ -663,11 +722,11 @@ package com.rpgGame.app.manager.goods
 		 * @param cfgID
 		 * @return 
 		 */
-		private function getNearExpirtimeItemInfo(cfgID:int):ItemInfo
+		private function getNearExpirtimeItemInfo(cfgID:int):ClientItemInfo
 		{
-			var info:ItemInfo = null;
-			var itemList:Vector.<ItemInfo> = getBagItemsByID(cfgID);
-			for each(var itemInfo:ItemInfo in itemList)
+			var info:ClientItemInfo = null;
+			var itemList:Vector.<ClientItemInfo> = getBagItemsByID(cfgID);
+			for each(var itemInfo:ClientItemInfo in itemList)
 			{
 				if(!isCanUse(itemInfo))
 				{
@@ -726,12 +785,12 @@ package com.rpgGame.app.manager.goods
 			
 			var upgradeItemData:UpgradeItemData = new UpgradeItemData();
 			var currentCount:int = 0;
-			var itemValues:Vector.<ItemInfo> = new Vector.<ItemInfo>();
+			var itemValues:Vector.<ClientItemInfo> = new Vector.<ClientItemInfo>();
 			if( substituteGoods != null )
 			{
 				for each (var subCfgId:int in substituteGoods) 
 				{
-					var tmpVec:Vector.<ItemInfo> = getBagItemsByID(subCfgId);
+					var tmpVec:Vector.<ClientItemInfo> = getBagItemsByID(subCfgId);
 					tmpVec = tmpVec.sort(sortItemByExpireTime);
 					itemValues = itemValues.concat(tmpVec);
 				}
@@ -740,7 +799,7 @@ package com.rpgGame.app.manager.goods
 			tmpVec = getBagItemsByID(upgradeItemId);
 			tmpVec = tmpVec.sort( sortItemByExpireTime );
 			itemValues = itemValues.concat(tmpVec);
-			for each(var info:ItemInfo in itemValues)
+			for each(var info:ClientItemInfo in itemValues)
 			{
 				if (!canUsePeriodGoods) 
 				{
@@ -806,7 +865,7 @@ package com.rpgGame.app.manager.goods
 			return itemListVO;
 		}
 		
-		private function sortItemByExpireTime(itemInfo1:ItemInfo, itemInfo2:ItemInfo):int
+		private function sortItemByExpireTime(itemInfo1:ClientItemInfo, itemInfo2:ClientItemInfo):int
 		{
 			if(itemInfo1.expireTime == 0)
 			{
@@ -857,7 +916,7 @@ package com.rpgGame.app.manager.goods
 			var itemVec:Vector.<UpgradeItemInfo> = new Vector.<UpgradeItemInfo>();
 			var currentCount:int;
 			var itemDic:Dictionary = new Dictionary();
-			for each(var info:ItemInfo in _goodsList)
+			for each(var info:ClientItemInfo in _goodsList)
 			{
 				if(info && info.cfgId == upgradeItemId)
 				{
@@ -886,34 +945,34 @@ package com.rpgGame.app.manager.goods
 		}
 		
 		/** 查找当前背包中最合适的药品，品质优先，品质相同的等级优先 **/
-		private function searchSuitDrugItem( isAutoBuy:Boolean ):ItemInfo
+		private function searchSuitDrugItem( isAutoBuy:Boolean ):ClientItemInfo
 		{
 			var itemInfoList:Array = _goodsList;
-			var returnItem:ItemInfo;
+			var returnItem:ClientItemInfo;
 			if( isAutoBuy )
 			{
-				for each(var item:ItemInfo in itemInfoList)
+				for each(var item:ClientItemInfo in itemInfoList)
 				{
 					var cfgId:int = item.cfgId;
-					var requireLevel:int = ItemCfgData.getItemRequireLevel( cfgId ) ;
-					var quality:int = ItemCfgData.getItemQuality( cfgId );
+					var requireLevel:int = ItemConfig.getItemRequireLevel( cfgId ) ;
+					var quality:int = ItemConfig.getItemQuality( cfgId );
 					var cfgId1:int;
 					var requireLevel1:int;
 					var quality1:int;
 					
-					if(ItemCfgData.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel)
+					if(ItemConfig.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel)
 					{
 						if( returnItem )
 						{
 							cfgId1 = returnItem.cfgId;
-							requireLevel1 = ItemCfgData.getItemRequireLevel( cfgId1 ) ;
+							requireLevel1 = ItemConfig.getItemRequireLevel( cfgId1 ) ;
 						}
 						else
 						{
 							cfgId1 = _drugShopInfo.itemInfo.cfgId;
-							requireLevel1 = ItemCfgData.getItemRequireLevel( cfgId1 ) - 1 ;
+							requireLevel1 = ItemConfig.getItemRequireLevel( cfgId1 ) - 1 ;
 						}
-						quality1 = ItemCfgData.getItemQuality( cfgId1 );
+						quality1 = ItemConfig.getItemQuality( cfgId1 );
 						if( quality > quality1 )
 						{
 							returnItem = item;
@@ -933,15 +992,15 @@ package com.rpgGame.app.manager.goods
 				for each(item in itemInfoList)
 				{
 					cfgId = item.cfgId;
-					requireLevel = ItemCfgData.getItemRequireLevel( cfgId ) ;
+					requireLevel = ItemConfig.getItemRequireLevel( cfgId ) ;
 					
-					if(ItemCfgData.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel)
+					if(ItemConfig.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel)
 					{
-						quality = ItemCfgData.getItemQuality( cfgId );
+						quality = ItemConfig.getItemQuality( cfgId );
 						if( returnItem )
 						{
-							requireLevel1 = ItemCfgData.getItemRequireLevel( returnItem.cfgId );
-							quality1 = ItemCfgData.getItemQuality( returnItem.cfgId );
+							requireLevel1 = ItemConfig.getItemRequireLevel( returnItem.cfgId );
+							quality1 = ItemConfig.getItemQuality( returnItem.cfgId );
 							if( quality > quality1 )
 							{
 								returnItem = item;
@@ -966,7 +1025,7 @@ package com.rpgGame.app.manager.goods
 		 * 当前物品是否过期；(当前物品是否可用)
 		 * true(可用) false(不可用)
 		 */
-		public function isCanUse($info:ItemInfo):Boolean
+		public function isCanUse($info:ClientItemInfo):Boolean
 		{
 			return checkItemExpireTime($info.expireTime);
 		}
@@ -1077,7 +1136,6 @@ package com.rpgGame.app.manager.goods
 		{
 			curUnlockIndex = index+1;
 			hasOpenCount = index+1;
-			hasOpenPage = Math.ceil(hasOpenCount/(defaultCol*defaultRow));
 //			unlockData.setUnlockedSize(hasOpenCount-initOpenCount);
 			EventManager.dispatchEvent(ItemEvent.ITEM_GRID_UNLOCK, containerId,index);
 		}
@@ -1088,14 +1146,14 @@ package com.rpgGame.app.manager.goods
 			
 		}
 		/** 获取指定使用效果的物品 **/
-		public function getItemInfoByUsabelEfficacy(type:int):ItemInfo
+		public function getItemInfoByUsabelEfficacy(type:int):ClientItemInfo
 		{
-			for each(var item : ItemInfo in _goodsList)
+			for each(var item : ClientItemInfo in _goodsList)
 			{
 				if(!item)
 					continue;
-				if(item.getNormalUsableType == type)
-					return item;
+			/*	if(item.getNormalUsableType == type)
+					return item;*/
 			}
 			return null;
 		}
@@ -1145,12 +1203,12 @@ package com.rpgGame.app.manager.goods
 			return null;
 		}
 		
-		public static function addItem(containerId:int,info:ItemInfo):void
+		public static function addItem(containerId:int,info:ClientItemInfo):void
 		{
-			return getMrg(containerId).addItem(info);
+			return getMrg(containerId).addItemInfo(info);
 		}
 		
-		public static function getItemInfo(containerId:int, index:int):ItemInfo
+		public static function getItemInfo(containerId:int, index:int):ClientItemInfo
 		{
 			return getMrg(containerId).getItemInfoByIndex(index);
 		}
@@ -1168,7 +1226,7 @@ package com.rpgGame.app.manager.goods
 		 * @return 
 		 * 
 		 */		
-		public static function setItemInfo( containerId:int, index:int, item:ItemInfo=null):void
+		public static function setItemInfo( containerId:int, index:int, item:ClientItemInfo=null):void
 		{
 			return getMrg(containerId).setItemByIndex(index, item);
 		}
@@ -1178,8 +1236,8 @@ package com.rpgGame.app.manager.goods
 			return getMrg(containerId).setAllItem(items);
 		}
 		
-		public static var waitingDropItem:ItemInfo;
-		public static function dropItem(item:ItemInfo):void
+		public static var waitingDropItem:ClientItemInfo;
+		public static function dropItem(item:ClientItemInfo):void
 		{
 			if(waitingDropItem != null)
 			{
@@ -1219,7 +1277,7 @@ package com.rpgGame.app.manager.goods
 		
 		private static function onDeleteItem():void
 		{
-			ItemSender.reqDropGoods(waitingDropItem.containerID,waitingDropItem.index, waitingDropItem.cfgId);
+//			ItemSender.reqDropGoods(waitingDropItem.containerID,waitingDropItem.index, waitingDropItem.cfgId);
 		}
 		
 		private static function onDeleteItemFail():void

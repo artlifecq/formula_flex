@@ -2,6 +2,8 @@ package com.game.engine2D.tools
 {
 	import com.game.engine2D.Scene;
 	import com.game.engine2D.SceneCharacter;
+	import com.game.engine2D.config.GlobalConfig2D;
+	import com.game.engine2D.scene.StarlingLayerManager;
 	import com.game.engine2D.scene.render.IRenderUnit;
 	import com.game.engine2D.scene.render.RenderSet;
 	import com.game.engine2D.scene.render.RenderUnit;
@@ -10,17 +12,24 @@ package com.game.engine2D.tools
 	import com.game.engine2D.vo.BaseObj;
 	import com.game.mainCore.libCore.share.CountShare;
 	
+	import flash.text.TextField;
+	import flash.text.TextFormat;
+	
+	import away3d.loaders.multi.MultiUrlLoadManager;
+	import away3d.tick.Tick;
+	
 	import org.client.mainCore.ds.HashMap;
 	
 	/**
-	 * @private
 	 * 场景所有缓存
 	 * @author Carver
-	 * @modifier L.L.M.Sunny
-	 * 修改时间：2015-4-21 上午10:33:37
+	 * @modifier guoqing.wen
+	 * 修改时间：2017-2-20 上午10:33:37
 	 */
 	public class SceneCache
 	{
+		private static const LOAD_CACHE_TIME:uint = 60000;
+		private static var loadCacheMap:HashMap = new HashMap();
 		/**
 		 * 等待加载的换装数据
 		 * 类型:Vector.<WaitLoadAvatarVo>数组的集合
@@ -31,8 +40,63 @@ package com.game.engine2D.tools
 		/**
 		 * 换装计数卸载
 		 */
-		public static var renderUnitCountShare:CountShare = new CountShare(180000);
-
+		public static var renderUnitCountShare:CountShare = new CountShare(600000);
+		
+		public static function startCountShare():void
+		{
+			renderUnitCountShare.startCount();
+		}
+		
+		public static function stopCountShare():void
+		{
+			renderUnitCountShare.stopCount();
+		}
+		
+		setup();
+		private static function setup():void
+		{
+			Tick.instance.addCallBack(onTickLoadCache);
+		}
+		
+		
+		static private var txt : TextField
+		static public function addTxt(txtStr : String) : void
+		{
+			if (!txt)
+			{
+				txt = new TextField();
+				txt.x = 100;
+				txt.y = 100;
+				if (txt.parent == null)
+				{
+					StarlingLayerManager.stage.addChild(txt);
+				}
+				txt.defaultTextFormat = new TextFormat(null, 14, 0xffff00);
+			}
+			txt.width = 1920;
+			txt.text = txtStr;
+		}
+		
+		private static function onTickLoadCache(deltaTime:int):void
+		{
+			var time:int = GlobalConfig2D.nowTime;
+			var urlList:Array = loadCacheMap.keys();
+			for(var i:int=urlList.length-1;i>=0;i--)
+			{
+				var url:String = urlList[i];
+				var t:int = loadCacheMap.getValue(url);
+				if(time - t > LOAD_CACHE_TIME)
+				{
+					var isInWait:Boolean = waitingLoadAvatarsMap.containsKey(url);
+					if(!isInWait)
+					{
+						loadCacheMap.remove(url);
+						MultiUrlLoadManager.cancelLoadByUrl(url);
+						//addTxt("UrlLoadManager.cancelLoadByUrl(url):"+url);
+					}
+				}
+			}
+		}
 		
 		public static function get countShareCnt():uint
 		{
@@ -118,19 +182,19 @@ package com.game.engine2D.tools
 						watingArr.splice(len,1);
 					}
 				}
-				//移除加载函数 
-				if($stopLoad)
-				{
-//					DobjLoadManager.cancelLoadByUrl($in_fullSourchPath);
-				}
 				if(watingArr.length == 0)//如果没了...就移除掉...
 				{
+					//移除加载函数 
+					if($stopLoad)
+					{
+						loadCacheMap.add($in_fullSourchPath,GlobalConfig2D.nowTime);
+						//						MultiUrlLoadManager.cancelLoadByUrl($in_fullSourchPath);
+					}
 					//移除等待加载项
 					waitingLoadAvatarsMap.remove($in_fullSourchPath);
 					xid = SceneCache.renderUnitCountShare.getShareData($in_fullSourchPath) as XmlImgData;
 					if(xid)
-						xid.unload();
-					/////////////////////////////////////////////////////////
+						xid.destroy();
 					renderUnitCountShare.removeShareData($in_fullSourchPath);//干掉
 				}
 			}
@@ -138,14 +202,15 @@ package com.game.engine2D.tools
 			{
 				if($stopLoad)
 				{
+					loadCacheMap.add($in_fullSourchPath,GlobalConfig2D.nowTime);
+					//MultiUrlLoadManager.cancelLoadByUrl($in_fullSourchPath);
 					xid = SceneCache.renderUnitCountShare.getShareData($in_fullSourchPath) as XmlImgData;
 					if(xid)
-						xid.unload();
+						xid.destroy();
 					///////////////////////////////////////////////////////
 					renderUnitCountShare.removeShareData($in_fullSourchPath);//干掉
 				}
 			}
-//			trace("移除等待加载队列 : " ,$in_fullSourchPath, watingArr?watingArr.length:null);
 		}
 		
 		/**
@@ -177,22 +242,30 @@ package com.game.engine2D.tools
 			}
 			else
 			{
-//				trace("这个一般应该到这里来...22222222222222222222222222222222");
 				while(len-->0)
 				{
 					ap = watingArr[len];
 					if(isRemoveRenderSetUnit)
 					{
-						var bo:BaseObj = Scene.scene.getSceneObjByAp(ap as RenderUnit);
+						var scene:Scene = Scene.scene;
+						var bo:BaseObj = scene.getSceneObjByAp(ap as RenderUnit);
+						var renderUnit:RenderUnit = ap as RenderUnit;
 						if(bo)
 						{
 							if(bo is SceneCharacter)
 							{
-								(bo as SceneCharacter).avatar.removeRenderUnit(ap as RenderUnit);
+								if(renderUnit.renderSet != null)
+								{
+									(bo as SceneCharacter).removeBaseObj(renderUnit.renderSet);
+								}else
+								{
+									(bo as SceneCharacter).avatar.removeRenderUnit(renderUnit);
+								}
 							}
 							else if(bo is RenderSet)
 							{
-								(bo as RenderSet).removeRenderUnit(ap as RenderUnit);
+								//(bo as RenderSet).removeRenderUnit(ap as RenderUnit);
+								Scene.scene.removeSceneObj(bo);
 							}
 							else if(bo is RenderUnit)//只移除单个好了。。。
 							{

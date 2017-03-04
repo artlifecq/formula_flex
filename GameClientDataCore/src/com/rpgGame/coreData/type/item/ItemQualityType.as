@@ -3,7 +3,7 @@ package com.rpgGame.coreData.type.item
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.info.item.EquipInfo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.lang.LangMisc;
 	
 	import app.message.Evaluate;
@@ -87,7 +87,7 @@ package com.rpgGame.coreData.type.item
 		 * @return 
 		 * 
 		 */		
-		public static function getHtmlItemName(item:ItemInfo):String
+		public static function getHtmlItemName(item:ClientItemInfo):String
 		{
 			if(!item)
 				return "";
@@ -96,7 +96,7 @@ package com.rpgGame.coreData.type.item
 			{
 				equip = item as EquipInfo;
 				return equip?"<font color='" + StaticValue.tran16ToStr(getColorValue(equip.quality)) +"'>" + getEvaluteStr(equip.evaluate) + equip.name + "</font>":item.name;
-			}else if(item is ItemInfo)
+			}else if(item is ClientItemInfo)
 				return "<font color='" + StaticValue.tran16ToStr(getColorValue(item.quality)) +"'>" + item.name + "</font>";
 			return "";
 		}

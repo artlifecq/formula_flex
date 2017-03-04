@@ -1,7 +1,7 @@
 package com.rpgGame.coreData.role
 {
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.type.item.EquipmentPos;
 	
@@ -28,11 +28,11 @@ package com.rpgGame.coreData.role
 		{
 			_equips.clear();
 			var ep:EquipClientProto;
-			var item:ItemInfo;
+			var item:ClientItemInfo;
 			var clientIndex:int;
 			for each(ep in proto.equipmentList.equipments)
 			{
-				item = (ep && ep.equip) ? ItemUtil.convertGoodsProtoToItemInfo(ep.equip) : null;
+//				item = (ep && ep.equip) ? ItemUtil.convertGoodsProtoToItemInfo(ep.equip) : null;
 				if(item != null)
 				{
 					//翻译成客户端下标
@@ -50,7 +50,7 @@ package com.rpgGame.coreData.role
 		 * return ItemInfo
 		 * 
 		 */	
-		public function getItemInfoByPos(pos:int):ItemInfo
+		public function getItemInfoByPos(pos:int):ClientItemInfo
 		{
 			return _equips.getValue(pos);
 		}
@@ -61,7 +61,7 @@ package com.rpgGame.coreData.role
 		 * @param item 
 		 * 
 		 */		
-		public function add(pos:int, item:ItemInfo):void
+		public function add(pos:int, item:ClientItemInfo):void
 		{
 			_equips.add(pos, item);
 		}

@@ -26,7 +26,8 @@ package com.game.engine2D.controller
 	 */
 	public class CameraFrontController
 	{
-		public static var LOCK_DISTANCE:Number = 2200;
+		public static var LOCK_DISTANCE:Number = 90000;
+		public static var LOCK_NEAR_FAR:Number = 100000;
 		
 		private static var _target : ObjectContainer3D;
 		private static var _camera : Camera3D;

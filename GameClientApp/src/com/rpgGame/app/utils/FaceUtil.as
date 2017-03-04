@@ -18,7 +18,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
 	import com.rpgGame.coreData.info.face.IBaseFaceInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.mount.MountInfoData;
 	import com.rpgGame.coreData.lang.LangMount;
 	import com.rpgGame.coreData.type.ShopType;
@@ -48,9 +48,9 @@ package com.rpgGame.app.utils
 		//----------------------------------------------------------
 		
 		
-		public static function getUnItemInfo( type:int, count:int ):ItemInfo
+		public static function getUnItemInfo( type:int, count:int ):ClientItemInfo
 		{
-			var itemInfo:ItemInfo = new ItemInfo();
+			var itemInfo:ClientItemInfo = new ClientItemInfo();
 			itemInfo.cfgId = 1111;
 			itemInfo.name = ShopType.getMoneyStrByType( type );
 			itemInfo.count = count;
@@ -63,7 +63,7 @@ package com.rpgGame.app.utils
 		 * @param itemInfo
 		 * 
 		 */		
-		public static function SetUnItemGrid( grid:IconCDFace, itemInfo:ItemInfo, type:int ):void
+		public static function SetUnItemGrid( grid:IconCDFace, itemInfo:ClientItemInfo, type:int ):void
 		{ 
 			var size:int = grid.iconSize;
 			grid.setIconResName( ClientConfig.getItemIcon( ShopType.getMoneyIco( type ), size ) );
@@ -103,7 +103,7 @@ package com.rpgGame.app.utils
 		 * 方法未完成，慎用。。。。<br>
 		 * 期望做成可以一键完成所有物品的设置，如TIPS、图标、CD、数量等
 		 */		
-		public static function SetItemGrid( grid:IconCDFace, itemInfo:ItemInfo, isTips:Boolean = true ):void
+		public static function SetItemGrid( grid:IconCDFace, itemInfo:ClientItemInfo, isTips:Boolean = true ):void
 		{
 			if(!grid)
 				return;
@@ -138,12 +138,14 @@ package com.rpgGame.app.utils
 				switch( itemInfo.type )
 				{
 					case GoodsType.EQUIPMENT://装备
+					case GoodsType.EQUIPMENT1://装备
+					case GoodsType.EQUIPMENT2://装备
 						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.EQUIP_TIP, itemInfo ) );
 						break;
-					case GoodsType.BEAST_CARD://兽牌
+					/*case GoodsType.BEAST_CARD://兽牌
 						grid.setIsBind(itemInfo.binded);
 						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.MOUNT_BEAST_CARD_TIP, itemInfo ) );
-						break;
+						break;*/
 					default:
 						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.ITEM_TIP, itemInfo ) );
 						break;
@@ -270,8 +272,8 @@ package com.rpgGame.app.utils
 			if( data == null )
 				return;
 			
-			if(data is ItemInfo)
-				SetItemGrid(grid, data as ItemInfo, isTips);
+			if(data is ClientItemInfo)
+				SetItemGrid(grid, data as ClientItemInfo, isTips);
 			else
 				SetSkillGrid(grid, data as BaseFaceInfo, isTips);
 		}

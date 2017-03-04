@@ -1,10 +1,10 @@
 package game.rpgGame.login.state
 {
+	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.state.StateMachine;
 	import com.game.engine3D.state.StateReference;
 	import com.game.engine3D.state.role.BaseActionState;
-	import com.game.mainCore.libCore.pool.Pool;
 	
 	import flash.utils.Dictionary;
 	
@@ -19,7 +19,7 @@ package game.rpgGame.login.state
 	 */
 	public class RoleStateMachine extends StateMachine
 	{
-		private static var machinePool : Pool = new Pool("RoleStateMachine", 500);
+		private static var machinePool : InstancePool = new InstancePool("RoleStateMachine", 500);
 
 		/**
 		 * 生成一个RoleStateMachine

@@ -35,11 +35,11 @@ package com.rpgGame.coreData.utils
 					continue;
 				if(data is Array && data.length >0)
 				{
-					if(data.length == 2 && data[1] is HashMap)//处理第二个是HashMap的情况
+					/*if(data.length == 2 && data[1] is HashMap)//处理第二个是HashMap的情况
 					{
 						setTreeNode(root.addChildren(data.shift()),data[0].getValues());
 					}else
-						root.addChildren(data.shift()).addChildrens(data);
+						root.addChildren(data.shift()).addChildrens(data);*/
 				}else
 				{
 					root.addChildren(data);

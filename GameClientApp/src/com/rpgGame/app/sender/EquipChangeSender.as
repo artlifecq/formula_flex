@@ -1,7 +1,6 @@
 package com.rpgGame.app.sender
 {
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	
 	import app.cmd.EquipmentModuleMessages;
 	import app.message.MaterialDataProto;
@@ -23,14 +22,14 @@ package com.rpgGame.app.sender
 		{
 			var len : uint = items.length;
 			var i : uint = 0;
-			var item : ItemInfo;
+			var item : ClientItemInfo;
 			var materialData : MaterialDataProto;
 			_bytes.writeVarint32(equipId);
 			_bytes.writeVarint32(len);
 			for(;i<len;i++)
 			{
 				item = items[i];
-				_bytes.writeVarint32(ItemCfgData.getMaterialDataProtoLevel(item.cfgId));
+//				_bytes.writeVarint32(ItemCfgData.getMaterialDataProtoLevel(item.cfgId));
 			}
 			_bytes.writeBoolean(useBand);
 			i = 0;

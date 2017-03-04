@@ -76,14 +76,14 @@ package org.mokylin.skin.component.tabbar
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
 			temp.height = 28;
+			temp.left = 0;
+			temp.right = 0;
 			temp.text = "按钮";
 			temp.textAlign = "center";
 			temp.color = 0xaea790;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.verticalAlign = "middle";
-			temp.width = 66;
-			temp.x = 1;
-			temp.y = 2;
+			temp.y = 3;
 			return temp;
 		}
 

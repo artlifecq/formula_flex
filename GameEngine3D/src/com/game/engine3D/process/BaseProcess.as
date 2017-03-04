@@ -45,6 +45,8 @@ package com.game.engine3D.process
 
 		public function setProcessPercent(value : Number) : void
 		{
+			value = value < 0 ? 0 : value;
+			value = value > 1 ? 1 : value;
 			processHandler(_fromPercent + (_toPercent - _fromPercent) * value);
 		}
 

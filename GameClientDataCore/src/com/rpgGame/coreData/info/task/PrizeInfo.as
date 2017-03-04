@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.info.task
 {
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.upgrade.AmountInfo;
 	
@@ -21,16 +21,16 @@ package com.rpgGame.coreData.info.task
 		/** 各种数值类型的消耗 **/
 		public var moneyAmount:AmountInfo;
 		/** 物品数据列表   */
-		private var _itemInfoList:Vector.<ItemInfo>;
+		private var _itemInfoList:Vector.<ClientItemInfo>;
 		
 		public function PrizeInfo()
 		{
 			moneyAmount = new AmountInfo();
-			_itemInfoList = new Vector.<ItemInfo>();
+			_itemInfoList = new Vector.<ClientItemInfo>();
 		}
 
 		/** 物品数据列表   */
-		public function get itemInfoList() : Vector.<ItemInfo>
+		public function get itemInfoList() : Vector.<ClientItemInfo>
 		{
 			return _itemInfoList;
 		}
@@ -45,11 +45,11 @@ package com.rpgGame.coreData.info.task
 			var ret:PrizeInfo = new PrizeInfo();
 			ret.moneyAmount = moneyAmount;
 			
-			ret._itemInfoList = new Vector.<ItemInfo>();
+			ret._itemInfoList = new Vector.<ClientItemInfo>();
 			var length:int = _itemInfoList.length;
 			for(var i:int = 0; i < length; i++)
 			{
-				var itemInfo:ItemInfo = new ItemInfo(_itemInfoList[i].cfgId, _itemInfoList[i].type);
+				var itemInfo:ClientItemInfo = new ClientItemInfo(_itemInfoList[i].cfgId);
 				itemInfo.count = _itemInfoList[i].count;
 				ret._itemInfoList.push(itemInfo);
 			}
@@ -57,9 +57,9 @@ package com.rpgGame.coreData.info.task
 		}
 		
 		/** 将新的奖励道具加入到奖励道具列表中 **/
-		private function addItem($item:ItemInfo) : void
+		private function addItem($item:ClientItemInfo) : void
 		{
-			for each (var item:ItemInfo in _itemInfoList)
+			for each (var item:ClientItemInfo in _itemInfoList)
 			{
 				if (item.isSame($item))
 				{
@@ -96,12 +96,12 @@ package com.rpgGame.coreData.info.task
 //			}
 //		}
 
-		public function addItemInfo(value:ItemInfo):void
+		public function addItemInfo(value:ClientItemInfo):void
 		{
 			_itemInfoList.push(value);
 		}
 		
-		public function getItemInfoVec():Vector.<ItemInfo>
+		public function getItemInfoVec():Vector.<ClientItemInfo>
 		{
 			return _itemInfoList;
 		}
@@ -137,7 +137,6 @@ package com.rpgGame.coreData.info.task
 				//百分比
 				moneyAmount.addSomeType(AmountType.EXP, data.exp.per);
 			}
-			
 		}
 		
 		
@@ -147,15 +146,15 @@ package com.rpgGame.coreData.info.task
 			if( items == null )
 				return;
 			
-			var itemInfo:ItemInfo;
+			var itemInfo:ClientItemInfo;
 			var index:int;
 			var len:int = items.length;
-			while(index < len)
+			/*while(index < len)
 			{
 				itemInfo = ItemUtil.wrapperProtoToItemInfo(items[index] as GoodsWrapperProto);
 				_itemInfoList.push(itemInfo);
 				index++;
-			}
+			}*/
 		}
 	}
 }

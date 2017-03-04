@@ -1,6 +1,6 @@
 package com.rpgGame.app.sender
 {
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	
 	import app.cmd.MailModuleMessages;
 	
@@ -114,7 +114,7 @@ package com.rpgGame.app.sender
 		 *
 		 * varint32 物品id[用于验证]，物品只能是没有过期时间，同时非绑定的物品 }
 		 */
-		public static function reqSendMail( heroID:Number, title:String, info:String, money:int, items:Vector.<ItemInfo> ):void
+		public static function reqSendMail( heroID:Number, title:String, info:String, money:int, items:Vector.<ClientItemInfo> ):void
 		{
 			_bytes.clear();
 			_bytes.writeVarint64( heroID );
@@ -125,7 +125,7 @@ package com.rpgGame.app.sender
 			if( items != null )
 			{
 				var len:int = items.length;
-				var itemObject:ItemInfo;
+				var itemObject:ClientItemInfo;
 				for( var i:int = 0; i < len; i++ )
 				{
 					itemObject = items[i];

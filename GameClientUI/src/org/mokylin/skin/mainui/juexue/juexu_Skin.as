@@ -16,35 +16,35 @@ package org.mokylin.skin.mainui.juexue
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var btn_j1:feathers.controls.Button;
+		public var bg1:feathers.controls.UIAsset;
 
-		public var btn_j2:feathers.controls.Button;
+		public var bg2:feathers.controls.UIAsset;
 
-		public var btn_j3:feathers.controls.Button;
+		public var bg3:feathers.controls.UIAsset;
 
-		public var btn_j4:feathers.controls.Button;
+		public var bg4:feathers.controls.UIAsset;
 
-		public var btn_j5:feathers.controls.Button;
+		public var bg5:feathers.controls.UIAsset;
 
-		public var btn_j6:feathers.controls.Button;
+		public var bg6:feathers.controls.UIAsset;
 
-		public var btn_jx:feathers.controls.Group;
+		public var bg_jineng:feathers.controls.Group;
+
+		public var btn_jineng:feathers.controls.Group;
+
+		public var btn_jineng1:feathers.controls.Button;
+
+		public var btn_jineng2:feathers.controls.Button;
+
+		public var btn_jineng3:feathers.controls.Button;
+
+		public var btn_jineng4:feathers.controls.Button;
+
+		public var btn_jineng5:feathers.controls.Button;
+
+		public var btn_jineng6:feathers.controls.Button;
 
 		public var juexue:feathers.controls.Group;
-
-		public var sh:feathers.controls.Group;
-
-		public var sh1:feathers.controls.UIAsset;
-
-		public var sh2:feathers.controls.UIAsset;
-
-		public var sh3:feathers.controls.UIAsset;
-
-		public var sh4:feathers.controls.UIAsset;
-
-		public var sh5:feathers.controls.UIAsset;
-
-		public var sh6:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -77,11 +77,88 @@ package org.mokylin.skin.mainui.juexue
 			return temp;
 		}
 
-		private function btn_j1_i():feathers.controls.Button
+		private function bg1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg1 = temp;
+			temp.name = "bg1";
+			temp.styleName = "ui/mainui/juexue/shan_1.png";
+			temp.x = 0;
+			temp.y = 40;
+			return temp;
+		}
+
+		private function bg2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg2 = temp;
+			temp.name = "bg2";
+			temp.styleName = "ui/mainui/juexue/shan_2.png";
+			temp.x = 30;
+			temp.y = 9;
+			return temp;
+		}
+
+		private function bg3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg3 = temp;
+			temp.name = "bg3";
+			temp.styleName = "ui/mainui/juexue/shan_3.png";
+			temp.x = 69;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function bg4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg4 = temp;
+			temp.name = "bg4";
+			temp.styleName = "ui/mainui/juexue/shan_4.png";
+			temp.x = 112;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function bg5_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg5 = temp;
+			temp.name = "bg5";
+			temp.styleName = "ui/mainui/juexue/shan_5.png";
+			temp.x = 156;
+			temp.y = 12;
+			return temp;
+		}
+
+		private function bg6_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg6 = temp;
+			temp.name = "bg6";
+			temp.styleName = "ui/mainui/juexue/shan_6.png";
+			temp.x = 174;
+			temp.y = 49;
+			return temp;
+		}
+
+		private function bg_jineng_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			bg_jineng = temp;
+			temp.name = "bg_jineng";
+			temp.x = 3;
+			temp.y = 0;
+			temp.elementsContent = [bg1_i(),bg2_i(),bg3_i(),bg4_i(),bg5_i(),bg6_i()];
+			return temp;
+		}
+
+		private function btn_jineng1_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_j1 = temp;
-			temp.name = "btn_j1";
+			btn_jineng1 = temp;
+			temp.name = "btn_jineng1";
 			temp.label = "1";
 			temp.styleClass = org.mokylin.skin.mainui.juexue.button.ButtonJuexue_bt;
 			temp.x = 0;
@@ -89,11 +166,11 @@ package org.mokylin.skin.mainui.juexue
 			return temp;
 		}
 
-		private function btn_j2_i():feathers.controls.Button
+		private function btn_jineng2_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_j2 = temp;
-			temp.name = "btn_j2";
+			btn_jineng2 = temp;
+			temp.name = "btn_jineng2";
 			temp.label = "2";
 			temp.styleClass = org.mokylin.skin.mainui.juexue.button.ButtonJuexue_bt;
 			temp.x = 37;
@@ -101,11 +178,11 @@ package org.mokylin.skin.mainui.juexue
 			return temp;
 		}
 
-		private function btn_j3_i():feathers.controls.Button
+		private function btn_jineng3_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_j3 = temp;
-			temp.name = "btn_j3";
+			btn_jineng3 = temp;
+			temp.name = "btn_jineng3";
 			temp.label = "3";
 			temp.styleClass = org.mokylin.skin.mainui.juexue.button.ButtonJuexue_bt;
 			temp.x = 86;
@@ -113,11 +190,11 @@ package org.mokylin.skin.mainui.juexue
 			return temp;
 		}
 
-		private function btn_j4_i():feathers.controls.Button
+		private function btn_jineng4_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_j4 = temp;
-			temp.name = "btn_j4";
+			btn_jineng4 = temp;
+			temp.name = "btn_jineng4";
 			temp.label = "4";
 			temp.styleClass = org.mokylin.skin.mainui.juexue.button.ButtonJuexue_bt;
 			temp.x = 136;
@@ -125,11 +202,11 @@ package org.mokylin.skin.mainui.juexue
 			return temp;
 		}
 
-		private function btn_j5_i():feathers.controls.Button
+		private function btn_jineng5_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_j5 = temp;
-			temp.name = "btn_j5";
+			btn_jineng5 = temp;
+			temp.name = "btn_jineng5";
 			temp.label = "5";
 			temp.styleClass = org.mokylin.skin.mainui.juexue.button.ButtonJuexue_bt;
 			temp.x = 183;
@@ -137,11 +214,11 @@ package org.mokylin.skin.mainui.juexue
 			return temp;
 		}
 
-		private function btn_j6_i():feathers.controls.Button
+		private function btn_jineng6_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_j6 = temp;
-			temp.name = "btn_j6";
+			btn_jineng6 = temp;
+			temp.name = "btn_jineng6";
 			temp.label = "6";
 			temp.styleClass = org.mokylin.skin.mainui.juexue.button.ButtonJuexue_bt;
 			temp.x = 220;
@@ -149,14 +226,14 @@ package org.mokylin.skin.mainui.juexue
 			return temp;
 		}
 
-		private function btn_jx_i():feathers.controls.Group
+		private function btn_jineng_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
-			btn_jx = temp;
-			temp.name = "btn_jx";
+			btn_jineng = temp;
+			temp.name = "btn_jineng";
 			temp.x = 42;
 			temp.y = 32;
-			temp.elementsContent = [btn_j1_i(),btn_j2_i(),btn_j3_i(),btn_j4_i(),btn_j5_i(),btn_j6_i()];
+			temp.elementsContent = [btn_jineng1_i(),btn_jineng2_i(),btn_jineng3_i(),btn_jineng4_i(),btn_jineng5_i(),btn_jineng6_i()];
 			return temp;
 		}
 
@@ -167,84 +244,7 @@ package org.mokylin.skin.mainui.juexue
 			temp.name = "juexue";
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [__juexu_Skin_UIAsset1_i(),sh_i(),btn_jx_i()];
-			return temp;
-		}
-
-		private function sh1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sh1 = temp;
-			temp.name = "sh1";
-			temp.styleName = "ui/mainui/juexue/shan_1.png";
-			temp.x = 0;
-			temp.y = 40;
-			return temp;
-		}
-
-		private function sh2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sh2 = temp;
-			temp.name = "sh2";
-			temp.styleName = "ui/mainui/juexue/shan_2.png";
-			temp.x = 30;
-			temp.y = 9;
-			return temp;
-		}
-
-		private function sh3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sh3 = temp;
-			temp.name = "sh3";
-			temp.styleName = "ui/mainui/juexue/shan_3.png";
-			temp.x = 69;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function sh4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sh4 = temp;
-			temp.name = "sh4";
-			temp.styleName = "ui/mainui/juexue/shan_4.png";
-			temp.x = 112;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function sh5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sh5 = temp;
-			temp.name = "sh5";
-			temp.styleName = "ui/mainui/juexue/shan_5.png";
-			temp.x = 156;
-			temp.y = 12;
-			return temp;
-		}
-
-		private function sh6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sh6 = temp;
-			temp.name = "sh6";
-			temp.styleName = "ui/mainui/juexue/shan_6.png";
-			temp.x = 174;
-			temp.y = 49;
-			return temp;
-		}
-
-		private function sh_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			sh = temp;
-			temp.name = "sh";
-			temp.x = 3;
-			temp.y = 0;
-			temp.elementsContent = [sh1_i(),sh2_i(),sh3_i(),sh4_i(),sh5_i(),sh6_i()];
+			temp.elementsContent = [__juexu_Skin_UIAsset1_i(),bg_jineng_i(),btn_jineng_i()];
 			return temp;
 		}
 

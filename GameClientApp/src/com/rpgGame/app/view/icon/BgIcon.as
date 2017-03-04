@@ -6,11 +6,8 @@ package com.rpgGame.app.view.icon
 	
 	import flash.geom.Point;
 	
-	import app.message.Quality;
-	
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
-	import feathers.controls.UIMovieClip;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
@@ -37,6 +34,9 @@ package com.rpgGame.app.view.icon
 	 */	
 	public class BgIcon extends BaseIcon
 	{
+		
+		private var _alwayShowCount:Boolean
+		
 		/** 显示数量用的文本框 */		
 		protected var _countText:Label;
 		/** ico的品质  */
@@ -44,7 +44,7 @@ package com.rpgGame.app.view.icon
 		/**
 		 * 品质框特效 
 		 */		
-		protected var _quality : UIMovieClip;
+		protected var _qualityImage : UIAsset;
 		/**选中框资源路径**/
 		private var _selectRes:String;
 		/** 选中框 */		
@@ -67,6 +67,14 @@ package com.rpgGame.app.view.icon
 			setSelectedImgSize($iconSize);
 		}
 		
+		/**
+		 *总是显示数量文本框 
+		 */
+		public function set alwayShowCount(value:Boolean):void
+		{
+			_alwayShowCount = value;
+		}
+
 		public function setUIRoot():void
 		{
 			
@@ -79,66 +87,25 @@ package com.rpgGame.app.view.icon
 		public function showQuality( qualityID:int ):void
 		{
 			_qualityId = qualityID;
-			
 			if( _qualityId <= 0 )
 			{
 				hideQuality();
 				return;
 			}
-			if(_quality == null)
+			if(_qualityImage == null)
 			{
-				_quality = new UIMovieClip();
-				_quality.frameRate = 8;
-				_quality.autoPlay = true;
+				_qualityImage = new UIAsset();
 			}
-			switch(_qualityId)
-			{
-				case Quality.BLUE:
-//					_quality.styleClass = UIMovieClipLv;
-					break;
-				case Quality.YELLOW:
-//					_quality.styleClass = UIMovieClipLan;
-					break;
-				case Quality.GREEN:
-//					_quality.styleClass = UIMovieClipZi;
-					break;
-				case Quality.PURPLE:
-//					_quality.styleClass = UIMovieClipCheng;
-					break;
-			}
-			if(_quality)
-			{
-				switch(iconSize)
-				{
-					case IcoSizeEnum.SIZE_40:
-						_quality.scaleX = _quality.scaleY = 46/64;
-						break;
-					case IcoSizeEnum.SIZE_46:
-						_quality.scaleX = _quality.scaleY = 1;
-						break;
-					case IcoSizeEnum.SIZE_50:
-						_quality.scaleX = _quality.scaleY = 62/64;
-						break;
-					case IcoSizeEnum.SIZE_60:
-						_quality.scaleX = _quality.scaleY = 75/64;
-						break;
-					
-				}
-			}
-			_quality.x = -6;
-			_quality.y = -7;
-			_quality.validate();
-//			if(_quality)
-			_quality.visible = true;
-			_quality.play();
+			_qualityImage.styleName = ClientConfig.getQualityBg( _qualityId ,iconSize);
+	
 			sortLayer();
 		}
 		
 		/** 隐藏品质框 */		
 		public function hideQuality():void
 		{
-			if( _quality != null )
-				_quality.visible = false;
+			if( _qualityImage != null )
+				_qualityImage.visible = false;
 		}
 		
 		/**
@@ -146,7 +113,7 @@ package com.rpgGame.app.view.icon
 		 */		
 		public function setBg( value:String, alpha:Number=1 ):void
 		{
-			if( _bgResName == value )
+			if(!value|| _bgResName == value )
 				return;
 			
 			_bgResName = value;
@@ -160,7 +127,7 @@ package com.rpgGame.app.view.icon
 			
 			_bgImage.alpha = alpha;
 			_bgImage.styleName = ClientConfig.getGridBg( _bgResName );
-			//_bgImage.onImageLoaded = onBgImgComplete;
+			_bgImage.onImageLoaded = onBgImgComplete;
 			
 			sortLayer();
 		}
@@ -232,6 +199,9 @@ package com.rpgGame.app.view.icon
 		{
 			this.width = _bgImage.width;
 			this.height = _bgImage.height;
+			
+			_iconPositionX=(this.width-iconSize)/2;
+			_iconPositionY=(this.height-iconSize)/2;
 		}
 		
 		public function get bgImage():UIAsset
@@ -269,10 +239,10 @@ package com.rpgGame.app.view.icon
 		 */		
 		public function setQualityImageIconPoint(x:int,y:int):void
 		{
-			if( _quality != null )
+			if( _qualityImage != null )
 			{
-				_quality.x = x;
-				_quality.y = y;
+				_qualityImage.x = x;
+				_qualityImage.y = y;
 				updateIconImagePosition( x, y );
 			}
 		}
@@ -316,8 +286,7 @@ package com.rpgGame.app.view.icon
 				_selectImage.visible = false;
 				addEventListener( TouchEvent.TOUCH, onTouchSelect );
 			}
-			_selectImage.x = _iconPositionX;
-			_selectImage.y = _iconPositionY;
+		
 			
 			_selectImage.styleName = ClientConfig.getSelectBg( _selectRes );
 			
@@ -346,7 +315,7 @@ package com.rpgGame.app.view.icon
 		 */		
 		public function set count( value:int ):void
 		{
-			if( value <= 1 )
+			if( value <= 1 &&!_alwayShowCount)
 			{
 				setSubString("");
 				return;
@@ -371,8 +340,8 @@ package com.rpgGame.app.view.icon
 				initCountText();
 			_countText.htmlText = value;
 			
-			_countText.x = iconSize - _countText.width;
-			_countText.y = iconSize - _countText.height;
+			_countText.x = iconSize - _countText.maxWidth;
+			_countText.y = iconSize - _countText.maxHeight;
 			sortLayer();
 		}
 		
@@ -387,6 +356,8 @@ package com.rpgGame.app.view.icon
 			_countText.height = 20;
 			_countText.touchable =false;
 			_countText.autoSize = TextFieldAutoSize.HORIZONTAL;
+			_countText.verticalAlign="middle";
+			_countText.verticalCenter=-2;
 			_countText.textAlign = Align.RIGHT;
 			_countText.color = 0xffffff;
 			_countText.fontSize = 10;
@@ -410,8 +381,8 @@ package com.rpgGame.app.view.icon
 			if( _iconImage != null )
 				addChild( _iconImage );
 			
-			if( _quality != null )
-				addChild( _quality );
+			if( _qualityImage != null )
+				addChild( _qualityImage );
 			
 			if( _selectImage != null )
 				addChild( _selectImage );
@@ -432,8 +403,8 @@ package com.rpgGame.app.view.icon
 			if( _selectImage != null )
 				_selectImage.visible = false;
 			
-			if(_quality)
-				_quality.visible = false;
+			if(_qualityImage)
+				_qualityImage.visible = false;
 			clearLockAsset();
 			super.clear();
 		}
@@ -468,7 +439,11 @@ package com.rpgGame.app.view.icon
 			if( touch != null )
 			{
 				if( _selectImage != null && isShow )
+				{
 					_selectImage.visible = true;
+					_selectImage.x = _iconPositionX;
+					_selectImage.y = _iconPositionY;
+				}
 			}
 		}
 	}

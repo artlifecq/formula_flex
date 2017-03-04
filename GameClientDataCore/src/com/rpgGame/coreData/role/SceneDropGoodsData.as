@@ -1,8 +1,11 @@
 package com.rpgGame.coreData.role
 {
 	import com.rpgGame.coreData.type.AvatarUrl;
+	import com.rpgGame.netData.map.bean.DropGoodsInfo;
+	import com.rpgGame.netData.map.message.ResRoundGoodsExtraMessage;
+	import com.rpgGame.netData.map.message.ResRoundGoodsMessage;
 	
-	import org.game.netCore.net_protobuff.ByteBuffer;
+	import org.game.netCore.data.long;
 
 	/**
 	 *
@@ -13,51 +16,51 @@ package com.rpgGame.coreData.role
 	 */
 	public class SceneDropGoodsData extends RoleData
 	{
-		/** 外观 **/
-		public var avatarRes : String = null;
-		/** 保护结束时间(这个时间以后就可以采集了) **/
-		public var pickCd : Number = 0;
-		/** 是否能自动拾取 **/
-		public var canAutoPick : Boolean = false;
-		/** 距离 **/
-		public var farDistance : int = 0;
-		/** 是不是掉落物 **/
-		public var isDroped : Boolean = false;
-		/** 采集物是不是坐骑幼崽 **/
-		public var isMount:Boolean = false;
-		/** 场景掉落物项数据 **/
-		public var goodsDatas : Vector.<SceneDropGoodsItem> = null;
-
+		public var isDroped:Boolean;
+		
+		public var goodsDatas:DropGoodsInfo;
+		public var droptype:int;
+		public var droptargetId:long;
+		
+		public var avatarRes:String;
+		
+		public var farDistance:int=200;
+		
+		private var isBaoXiang:Boolean=true;
+		
 		public function SceneDropGoodsData()
 		{
 			super(RoleType.TYPE_DROP_GOODS);
 			this.name = "";
 		}
 
-		public function readFrom(buffer : ByteBuffer) : void
+		/**
+		 *掉落数据源 
+		 * @param msg
+		 * 
+		 */
+		public function setGoodsExtraMsg(msg:ResRoundGoodsExtraMessage):void
 		{
-			id = buffer.readVarint64();
-			x = buffer.readVarint32();
-			y = buffer.readVarint32();
-			pickCd = buffer.readVarint64();
-			canAutoPick = buffer.readBoolean();
-			avatarRes = AvatarUrl.BAO_XIANG;
-			farDistance = 200;
+			droptype=msg.droptype;
+			droptargetId=msg.droptargetId;
+			updateWithGoodsData(msg.goods);
 		}
 		
-		/**
-		 * 坐骑掉落落物 
-		 * @param buffer
-		 * 
-		 */		
-		public function readFromIsMountCollect(buffer : ByteBuffer) : void
+		public function setGoodsMsg(msg:ResRoundGoodsMessage):void
 		{
-			id = buffer.readVarint64();
-			x = buffer.readVarint32();
-			y = buffer.readVarint32();
-			pickCd = buffer.readVarint64();
-			avatarRes = AvatarUrl.BAO_XIANG;
-			farDistance = 200;
+			updateWithGoodsData(msg.goods);
+		}
+		
+		public function updateWithGoodsData(goods:DropGoodsInfo):void
+		{
+			goodsDatas=goods;
+			id=goodsDatas.dropGoodsId.ToGID();
+			avatarRes="goods/"+goodsDatas.itemModelId+"/"+goodsDatas.itemModelId;
+			if(isBaoXiang){
+				avatarRes=AvatarUrl.BAO_XIANG;
+			}
+			x=goodsDatas.x;
+			y=-1*goodsDatas.y;
 		}
 	}
 }

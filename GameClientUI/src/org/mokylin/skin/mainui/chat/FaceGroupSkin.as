@@ -1,12 +1,12 @@
 package org.mokylin.skin.mainui.chat
 {
 	import feathers.data.ListCollection;
-	import feathers.controls.Group;
+	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
 	import feathers.layout.HorizontalLayout;
-	import org.mokylin.skin.mainui.chat.button.ButtonSkin_channel;
+	import org.mokylin.skin.mainui.chat.button.ButtonChat_Type;
 
 	/**
 	 * @private
@@ -18,11 +18,9 @@ package org.mokylin.skin.mainui.chat
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var __FaceGroupSkin_HorizontalLayout1:feathers.layout.HorizontalLayout;
+		public var lbl_Title:feathers.controls.Label;
 
-		public var faceGroup:feathers.controls.Group;
-
-		public var tabBar:feathers.controls.TabBar;
+		public var tab_Face:feathers.controls.TabBar;
 
 
 		//==========================================================================
@@ -33,17 +31,11 @@ package org.mokylin.skin.mainui.chat
 			super();
 			
 			this.currentState = "normal";
-			this.height = 220;
-			this.width = 240;
-			this.elementsContent = [__FaceGroupSkin_UIAsset1_i(),faceGroup_i(),tabBar_i()];
+			this.height = 263;
+			this.width = 241;
+			this.elementsContent = [__FaceGroupSkin_UIAsset1_i(),__FaceGroupSkin_UIAsset2_i(),__FaceGroupSkin_UIAsset3_i(),lbl_Title_i(),tab_Face_i()];
 			
 			states = {
-				init:[
-						{target:"__FaceGroupSkin_HorizontalLayout1",
-							name:"paddingLeft",
-							value:2
-						}
-					]
 			};
 			skinNames={};
 		}
@@ -55,52 +47,72 @@ package org.mokylin.skin.mainui.chat
 		private function __FaceGroupSkin_ArrayCollection1_i():feathers.data.ListCollection
 		{
 			var temp:feathers.data.ListCollection = new feathers.data.ListCollection();
-			temp.data = ['表 情','心 情'];
+			temp.data = ['普通表情','心情表情'];
 			return temp;
 		}
 
 		private function __FaceGroupSkin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
-			__FaceGroupSkin_HorizontalLayout1 = temp;
-			temp.paddingRight = 2;
+			temp.gap = 0;
 			return temp;
 		}
 
 		private function __FaceGroupSkin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 220;
-			temp.styleName = "ui/mainui/chat/di.png";
-			temp.width = 240;
-			temp.x = 0;
+			temp.height = 264;
+			temp.styleName = "ui/common/tips/tips_1.png";
+			temp.width = 245;
+			temp.x = -2;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function faceGroup_i():feathers.controls.Group
+		private function __FaceGroupSkin_UIAsset2_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			faceGroup = temp;
-			temp.name = "faceGroup";
-			temp.height = 220;
-			temp.width = 240;
-			temp.x = 0;
-			temp.y = 0;
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/tips/tips_1fengexian.png";
+			temp.width = 234;
+			temp.x = 4;
+			temp.y = 230;
 			return temp;
 		}
 
-		private function tabBar_i():feathers.controls.TabBar
+		private function __FaceGroupSkin_UIAsset3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.height = 33;
+			temp.styleName = "ui/common/tips/mc/title_bg/title_bg1.png";
+			temp.x = 34;
+			temp.y = 2;
+			return temp;
+		}
+
+		private function lbl_Title_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbl_Title = temp;
+			temp.name = "lbl_Title";
+			temp.bold = false;
+			temp.letterSpacing = 0;
+			temp.fontSize = 14;
+			temp.text = "普通表情";
+			temp.color = 0xCFC6AE;
+			temp.x = 83;
+			temp.y = 8;
+			return temp;
+		}
+
+		private function tab_Face_i():feathers.controls.TabBar
 		{
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
-			tabBar = temp;
-			temp.name = "tabBar";
-			temp.btnWidth = 59;
-			temp.height = 26;
-			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonSkin_channel;
-			temp.width = 155;
-			temp.x = 2;
-			temp.y = -20;
+			tab_Face = temp;
+			temp.name = "tab_Face";
+			temp.btnWidth = 69;
+			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_Type;
+			temp.x = 3;
+			temp.y = 234;
 			temp.layout = __FaceGroupSkin_HorizontalLayout1_i();
 			temp.dataProvider = __FaceGroupSkin_ArrayCollection1_i();
 			return temp;

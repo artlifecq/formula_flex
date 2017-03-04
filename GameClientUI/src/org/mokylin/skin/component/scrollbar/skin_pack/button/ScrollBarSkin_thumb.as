@@ -28,7 +28,6 @@ package org.mokylin.skin.component.scrollbar.skin_pack.button
 			super();
 			
 			this.currentState = "up";
-			this.height = 66;
 			this.elementsContent = [];
 			__ScrollBarSkin_thumb_UIAsset1_i();
 			__ScrollBarSkin_thumb_UIAsset2_i();
@@ -37,7 +36,7 @@ package org.mokylin.skin.component.scrollbar.skin_pack.button
 			
 			states = {
 			};
-			skinNames={"down":"ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_down.png", "hover":"ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_over.png", "up":"ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_up.png"};
+			skinNames={"down":"ui/component/scrollbar/skin_pack/button/skin_thumb/thumb_di_dwon.png", "hover":"ui/component/scrollbar/skin_pack/button/skin_thumb/thumb_di_over.png", "up":"ui/component/scrollbar/skin_pack/button/skin_thumb/thumb_di_up.png"};
 		}
 
 
@@ -48,9 +47,10 @@ package org.mokylin.skin.component.scrollbar.skin_pack.button
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__ScrollBarSkin_thumb_UIAsset1 = temp;
-			temp.styleName = "ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_down.png";
-			temp.x = 0;
-			temp.y = 0;
+			temp.bottom = 0;
+			temp.left = 1;
+			temp.styleName = "ui/component/scrollbar/skin_pack/button/skin_thumb/thumb_di_dwon.png";
+			temp.top = 0;
 			return temp;
 		}
 
@@ -58,9 +58,10 @@ package org.mokylin.skin.component.scrollbar.skin_pack.button
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__ScrollBarSkin_thumb_UIAsset2 = temp;
-			temp.styleName = "ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_over.png";
-			temp.x = 0;
-			temp.y = 0;
+			temp.bottom = 0;
+			temp.left = 1;
+			temp.styleName = "ui/component/scrollbar/skin_pack/button/skin_thumb/thumb_di_over.png";
+			temp.top = 0;
 			return temp;
 		}
 
@@ -68,9 +69,10 @@ package org.mokylin.skin.component.scrollbar.skin_pack.button
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__ScrollBarSkin_thumb_UIAsset3 = temp;
-			temp.styleName = "ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_up.png";
-			temp.x = 0;
-			temp.y = 0;
+			temp.bottom = 0;
+			temp.left = 1;
+			temp.styleName = "ui/component/scrollbar/skin_pack/button/skin_thumb/thumb_di_up.png";
+			temp.top = 0;
 			return temp;
 		}
 

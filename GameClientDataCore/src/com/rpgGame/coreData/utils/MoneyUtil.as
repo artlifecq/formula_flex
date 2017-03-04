@@ -82,6 +82,16 @@ package com.rpgGame.coreData.utils
 			return (isCost ? "-" : "") + moneyStrs.join(" ");
 		}
 		
+		
+		public static function getHtmlMoneyTips():String
+		{
+			var result:String="";
+			
+			return result;
+		}
+			
+		
+		
 		/**
 		 * 获取带颜色的钱
 		 * @param money 钱

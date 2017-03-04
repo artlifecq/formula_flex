@@ -1,7 +1,7 @@
 package com.rpgGame.app.manager.role
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.vo.map.ClientMapAreaData;
 	import com.game.engine3D.vo.map.ClientMapAreaGridData;
 	import com.rpgGame.app.graphics.HeadFace;
@@ -411,7 +411,7 @@ package com.rpgGame.app.manager.role
 			if (role != null)
 				role.name = YunBiaoManager.setBiaoName(role);
 			if (role.headFace is HeadFace)
-				(role.headFace as HeadFace).updateNameColor();
+				(role.headFace as HeadFace).updateName();
 		}
 
 		/**
@@ -519,7 +519,7 @@ package com.rpgGame.app.manager.role
 		{
 			//如果场景中存在此类型此ID的角色，则移除之
 			removeSceneRoleByIdAndType(id, type);
-			var rud : RenderParamData = new RenderParamData(id, type, ClientConfig.getEffect(data.effectRes));
+			var rud : RenderParamData3D = new RenderParamData3D(id, type, ClientConfig.getEffect(data.effectRes));
 
 			var effectRu : RenderUnit3D = RenderUnit3D.create(rud);
 			effectRu.repeat = 0;

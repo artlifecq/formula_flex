@@ -7,18 +7,21 @@ package com.game.engine3D.scene.render.vo
 	import com.game.engine3D.events.SceneEventAction3D;
 	import com.game.engine3D.scene.render.RenderSet3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.game.engine3D.vo.BaseObjSyncInfo;
-
+	
 	import flash.geom.Matrix3D;
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
-
+	
 	import away3d.containers.ObjectContainer3D;
 	import away3d.containers.View3D;
+	import away3d.core.math.MathConsts;
 	import away3d.core.math.Matrix3DUtils;
 	import away3d.events.MouseEvent3D;
-
+	import away3d.events.Object3DEvent;
+	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -30,11 +33,12 @@ package com.game.engine3D.scene.render.vo
 	 */
 	public class BaseEntity extends BaseObj3D
 	{
-		protected var _renderSet : RenderSet3D;
+		private var _renderSet : RenderSet3D;
 		private var _baseObjList : Vector.<BaseObjChild>;
 		protected var _camouflageEntity : BaseEntity;
 		private var _imposters : Vector.<BaseEntity>;
 		private var _waitAddObjList : Vector.<BaseObjChild>;
+		protected var _view : View3D;
 
 		public function BaseEntity(type : String, id : Number)
 		{
@@ -72,35 +76,48 @@ package com.game.engine3D.scene.render.vo
 		{
 			baseObj.isInViewDistance = _isInViewDistance;
 			baseObj.needRun = false;
+			
+			if (baseObj is RenderSet3D)
+			{
+				var render : RenderSet3D = baseObj as RenderSet3D;
+				render.setMouseUpCallBack(handleMouseUp);
+				render.setMouseDownCallBack(handleMouseDown);
+				render.setMouseOverCallBack(handlerMouseOver);
+				render.setMouseOutCallBack(handlerMouseOut);
+				render.setMouseRightUpCallBack(handleMouseRightUp);
+				render.setMouseRightDownCallBack(handleMouseRightDown);
+			}
+			
 			if (_isRendering)
 			{
 				baseObj.startRender();
 			}
 		}
 
-		public function addBaseObj(baseObj : BaseObj3D) : void
+		
+		public function addBaseObj(baseObj : BaseObj3D, billboardMode : Boolean = false) : void
 		{
 			removeBaseObjByID(baseObj.type, baseObj.id);
-			var childData : BaseObjChild = new BaseObjChild(null, baseObj, null);
+			var childData : BaseObjChild = new BaseObjChild(null, baseObj, null, billboardMode);
 			addChildDataToList(childData);
 			//
 			doWaitAddChild(childData);
 			setBaseObjState(baseObj);
 		}
-
-		public function addBaseObjToUnitChild(renderUnitType : String, id : int, childName : String, baseObj : BaseObj3D) : void
+		
+		public function addBaseObjToUnitChild(renderUnitType : String, renderUnitId : int, childName : String, baseObj : BaseObj3D, billboardMode : Boolean = false) : void
 		{
 			if (!_renderSet)
 			{
 				return;
 			}
-			var ru : RenderUnit3D = _renderSet.getRenderUnitByID(renderUnitType, id);
+			removeBaseObjByID(baseObj.type, baseObj.id, false);
+			var ru : RenderUnit3D = _renderSet.getRenderUnitByID(renderUnitType, renderUnitId);
 			if (ru)
 			{
-				removeBaseObjByID(baseObj.type, baseObj.id);
-				var childData : BaseObjChild = new BaseObjChild(ru, baseObj, childName);
+				var childData : BaseObjChild = new BaseObjChild(ru, baseObj, childName, billboardMode);
 				addChildDataToList(childData);
-				if (ru.resReady)
+				if (ru.resReady && !ru.resSwitch)
 				{
 					doWaitAddChild(childData);
 				}
@@ -109,22 +126,120 @@ package com.game.engine3D.scene.render.vo
 					addWaitRenderUnitChild(childData);
 				}
 				setBaseObjState(baseObj);
+				if (billboardMode)
+				{
+					if (_graphicDis.scene)
+						view = _graphicDis.scene.view;
+					else
+						view = null;
+					_graphicDis.addEventListener(Object3DEvent.SCENE_CHANGED, onSceneChanged);
+					_graphicDis.addEventListener(Object3DEvent.SCENETRANSFORM_CHANGED, onSceneTransformChanged);
+					updateTranform();
+				}
 			}
+		}
+		
+		public function addObjChildDataToUnitChild(renderUnitType : String, renderUnitId : int, childName : String, childData : BaseObjChild) : void
+		{
+			addBaseObjToUnitChild(renderUnitType, renderUnitId, childName, childData.baseObj, childData.billboardMode);
+		}
+		
+		/**
+		 * 更新变换
+		 */
+		private function updateTranform() : void
+		{
+			if (_view && _graphicDis && _graphicDis.scene)
+			{
+				var len : int = _baseObjList.length;
+				while (len-- > 0)
+				{
+					var childData : BaseObjChild = _baseObjList[len];
+					if (childData.billboardMode)
+					{
+						var comps : Vector.<Vector3D> = _graphicDis.sceneTransform.decompose();
+						var dx : Number = comps[1].x * MathConsts.RADIANS_TO_DEGREES;
+						var dy : Number = comps[1].y * MathConsts.RADIANS_TO_DEGREES;
+						//trace(dx, dy);
+						var cameraAngle : Number = MathUtil.getAngle(comps[0].x, comps[0].z, _view.camera.x, _view.camera.z);
+						//trace(cameraAngle);
+						if (dx > 0)
+						{
+							childData.baseObj.syncRotationY(dy - cameraAngle + 90, childData.baseObj);
+						}
+						else
+						{
+							childData.baseObj.syncRotationY(-dy - cameraAngle + 270, childData.baseObj);
+						}
+					}
+				}
+			}
+		}
+		
+		/**
+		 * 摄像机变化
+		 * @param e
+		 */
+		private function onCameraSceneTransformChanged(e : Object3DEvent) : void
+		{
+			updateTranform();
+		}
+		
+		/**
+		 * 更新坐标
+		 * @param e
+		 */
+		private function onSceneTransformChanged(e : Object3DEvent) : void
+		{
+			updateTranform();
+		}
+		
+		private function set view(value : View3D) : void
+		{
+			if (_view == value)
+			{
+				return;
+			}
+			if (_view)
+			{
+				_view.camera.removeEventListener(Object3DEvent.SCENETRANSFORM_CHANGED, onCameraSceneTransformChanged);
+			}
+			_view = value;
+			if (_view)
+			{
+				_view.camera.addEventListener(Object3DEvent.SCENETRANSFORM_CHANGED, onCameraSceneTransformChanged);
+				updateTranform();
+			}
+		}
+		
+		private function onSceneChanged(e : Object3DEvent) : void
+		{
+			if (_graphicDis.scene)
+				view = _graphicDis.scene.view;
+			else
+				view = null;
 		}
 
 		private function doWaitAddChild(childData : BaseObjChild) : void
 		{
 			removeWaitAddObj(childData.baseObj);
-			if (childData.renderUnit && childData.renderUnit.usable && childData.baseObj && childData.baseObj.usable)
+			if (childData.baseObj && childData.baseObj.usable)
 			{
-				childData.renderUnit.removeAddedCallBack(doUnitChildAdded);
-				if (childData.childName)
+				if (childData.renderUnit && childData.renderUnit.usable)
 				{
-					var childParent : ObjectContainer3D = childData.renderUnit.getChildByName(childData.childName);
-					if (childParent)
-						childData.baseObj.parent = childParent;
+					childData.renderUnit.removeAddedCallBack(doUnitChildAdded);
+					if (childData.childName)
+					{
+						var childParent : ObjectContainer3D = childData.renderUnit.getChildByName(childData.childName);
+						if (childParent)
+							childData.baseObj.parent = childParent;
+						else
+							childData.baseObj.parent = childData.renderUnit.graphicDis;
+					}
 					else
-						childData.baseObj.parent = childData.renderUnit.graphicDis;
+					{
+						childData.baseObj.parent = _renderSet.graphicDis;
+					}
 				}
 				else
 				{
@@ -140,7 +255,10 @@ package com.game.engine3D.scene.render.vo
 			{
 				_waitAddObjList.push(childData);
 			}
-			childData.renderUnit.setAddedCallBack(doUnitChildAdded, childData);
+			if (childData.renderUnit && childData.renderUnit.usable)
+			{
+				childData.renderUnit.setAddedCallBack(doUnitChildAdded, childData);
+			}
 		}
 
 		private function getChildDataIndex(type : String, id : int) : int
@@ -158,21 +276,50 @@ package com.game.engine3D.scene.render.vo
 			return -1;
 		}
 
+		public function getChildDatasByName(renderUnitType : String, renderUnitId : int, childName : String) : Vector.<BaseObjChild>
+		{
+			if (_baseObjList)
+			{
+				var datas : Vector.<BaseObjChild> = new Vector.<BaseObjChild>();
+				for each (var objChild : BaseObjChild in _baseObjList)
+				{
+					if (objChild.renderUnit && objChild.renderUnit.type == renderUnitType && objChild.renderUnit.id == renderUnitId && objChild.childName == childName)
+					{
+						datas.push(objChild);
+					}
+				}
+				return datas;
+			}
+			return null;
+		}
+		
 		private function addChildDataToList(childData : BaseObjChild) : void
 		{
 			_baseObjList.push(childData);
-			childData.renderUnit.setRemovedCallBack(doUnitChildRemoved, childData);
-		}
-
-		private function doUnitChildAdded(childData : BaseObjChild, ru : RenderUnit3D) : void
-		{
-			if (childData.renderUnit && childData.renderUnit.usable && childData.baseObj && childData.baseObj.usable)
+			if (childData.renderUnit && childData.renderUnit.usable)
 			{
-				doWaitAddChild(childData);
+				childData.renderUnit.setRemovedCallBack(doUnitChildRemoved, childData);
 			}
-			else
+		}
+		
+		private function doUnitChildAdded(backChildData : BaseObjChild, ru : RenderUnit3D) : void
+		{
+			var childData : BaseObjChild;
+			var len : int = _waitAddObjList.length;
+			for (var i : int = len - 1; i >= 0; i--)
 			{
-				removeBaseObj(childData.baseObj);
+				childData = _waitAddObjList[i];
+				if (childData.renderUnit == backChildData.renderUnit)
+				{
+					if (childData.renderUnit && childData.renderUnit.usable && childData.baseObj && childData.baseObj.usable)
+					{
+						doWaitAddChild(childData);
+					}
+					else
+					{
+						removeBaseObj(childData.baseObj);
+					}
+				}
 			}
 		}
 
@@ -196,25 +343,61 @@ package com.game.engine3D.scene.render.vo
 			}
 		}
 
-		public function removeBaseObj(baseObj : BaseObj3D) : void
+		public function removeBaseObj(baseObj : BaseObj3D, recycle : Boolean = true) : void
 		{
+			if (baseObj is RenderSet3D)
+			{
+				var render : RenderSet3D = baseObj as RenderSet3D;
+				render.removeMouseUpCallBack(handleMouseUp);
+				render.removeMouseDownCallBack(handleMouseDown);
+				render.removeMouseOverCallBack(handlerMouseOver);
+				render.removeMouseOutCallBack(handlerMouseOut);
+				render.removeMouseRightUpCallBack(handleMouseRightUp);
+				render.removeMouseRightDownCallBack(handleMouseRightDown);
+			}
+			
 			removeWaitAddObj(baseObj);
 			var index : int = getChildDataIndex(baseObj.type, baseObj.id);
 			var childData : BaseObjChild = index > -1 ? _baseObjList[index] : null;
 			if (childData)
 			{
-				if (childData.renderUnit.usable)
+				if (childData.renderUnit && childData.renderUnit.usable)
 				{
 					childData.renderUnit.removeAddedCallBack(doUnitChildAdded);
 					childData.renderUnit.removeRemovedCallBack(doUnitChildRemoved);
 				}
-				childData.baseObj.destroy();
+				if (recycle)
+				{
+					childData.baseObj.destroy();
+				}
 				childData.destroy();
 				_baseObjList.splice(index, 1);
 			}
+			
+			var hasBillboardMode : Boolean = false;
+			var len : int = _baseObjList.length;
+			while (len-- > 0)
+			{
+				childData = _baseObjList[len];
+				if (childData.billboardMode)
+				{
+					hasBillboardMode = true;
+					break;
+				}
+			}
+			if (!hasBillboardMode)
+			{
+				if (_view)
+				{
+					_view.camera.removeEventListener(Object3DEvent.SCENETRANSFORM_CHANGED, onCameraSceneTransformChanged);
+					_view = null;
+				}
+				_graphicDis.removeEventListener(Object3DEvent.SCENE_CHANGED, onSceneChanged);
+				_graphicDis.removeEventListener(Object3DEvent.SCENETRANSFORM_CHANGED, onSceneTransformChanged);
+			}
 		}
-
-		public function removeBaseObjByID(type : String, id : Number) : void
+		
+		public function removeBaseObjByID(type : String, id : Number, recycle : Boolean = true) : void
 		{
 			var len : int = _baseObjList.length;
 			while (len-- > 0)
@@ -222,7 +405,7 @@ package com.game.engine3D.scene.render.vo
 				var childData : BaseObjChild = _baseObjList[len];
 				if (childData.baseObj.type == type && childData.baseObj.id == id)
 				{
-					removeBaseObj(childData.baseObj);
+					removeBaseObj(childData.baseObj, recycle);
 				}
 			}
 		}
@@ -274,10 +457,10 @@ package com.game.engine3D.scene.render.vo
 			type = $parameters[0];
 			id = $parameters[1];
 			_renderSet = RenderSet3D.create(type, id,false);//角色暂时不用设置25d为true了，因为角度转换已经被PoolEntityContainer3D给处理了，如果这里再处理，角度将会搞2遍，等以后有时间了，再来统一重构
-
+			_view = null;
 			if (!_graphicDis)
 			{
-				if (GlobalConfig.use25DMap)
+				if (GlobalConfig.use2DMap)
 					_graphicDis = PoolEntityContainer3D.create();
 				else
 					_graphicDis = PoolContainer3D.create();
@@ -370,13 +553,20 @@ package com.game.engine3D.scene.render.vo
 		 * @param func 第一个参数是参数BaseEntity, 第二个参数是RenderUnit
 		 *
 		 */
-		public function forEachRenderUnit(func : Function, args : Array = null) : void
+		public function forEachRenderUnit(func : Function, args : Array = null, hasEntity : Boolean = true) : void
 		{
 			var funcArgs : Array;
-			if (args)
-				funcArgs = args.concat(this);
+			if (!hasEntity)
+			{
+				funcArgs = args;
+			}
 			else
-				funcArgs = [this];
+			{
+				if (args)
+					funcArgs = args.concat(this);
+				else
+					funcArgs = [this];
+			}
 			avatar.forEachRenderUnit(func, funcArgs);
 		}
 
@@ -746,7 +936,7 @@ package com.game.engine3D.scene.render.vo
 
 			for each (var childData : BaseObjChild in _baseObjList)
 			{
-				if (childData.renderUnit.usable)
+				if (childData.renderUnit && childData.renderUnit.usable)
 				{
 					childData.renderUnit.removeAddedCallBack(doUnitChildAdded);
 					childData.renderUnit.removeRemovedCallBack(doUnitChildRemoved);
@@ -756,7 +946,17 @@ package com.game.engine3D.scene.render.vo
 			}
 			_baseObjList.length = 0;
 			_waitAddObjList.length = 0;
-
+			
+			if (_view)
+			{
+				_view.camera.removeEventListener(Object3DEvent.SCENETRANSFORM_CHANGED, onCameraSceneTransformChanged);
+				_view = null;
+			}
+			if (_graphicDis)
+			{
+				_graphicDis.removeEventListener(Object3DEvent.SCENE_CHANGED, onSceneChanged);
+				_graphicDis.removeEventListener(Object3DEvent.SCENETRANSFORM_CHANGED, onSceneTransformChanged);
+			}
 			if (_renderSet)
 			{
 				_renderSet.destroy();

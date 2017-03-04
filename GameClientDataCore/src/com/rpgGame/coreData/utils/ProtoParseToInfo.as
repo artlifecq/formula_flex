@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.utils
 {
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.task.PrizeInfo;
 	
 	import app.message.PrizeProto;
@@ -34,9 +34,9 @@ package com.rpgGame.coreData.utils
 			return prizeInfo;
 		}
 		
-		public static function getPrizeInfoVectItem( prizeVect:Vector.<PrizeInfo> ):Vector.<ItemInfo>
+		public static function getPrizeInfoVectItem( prizeVect:Vector.<PrizeInfo> ):Vector.<ClientItemInfo>
 		{
-			var itemInfoList:Vector.<ItemInfo> = new Vector.<ItemInfo>();
+			var itemInfoList:Vector.<ClientItemInfo> = new Vector.<ClientItemInfo>();
 			var len:int = prizeVect.length;
 			var prize:PrizeInfo;
 			for( var i:int = 0; i < len; i++ )

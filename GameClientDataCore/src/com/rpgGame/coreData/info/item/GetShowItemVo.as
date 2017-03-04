@@ -21,7 +21,7 @@ package com.rpgGame.coreData.info.item
 		public var quality:int;
 //		public var showPos:int;
 		//完整的物品
-		private var _itemInfo:ItemInfo;
+		private var _itemInfo:ClientItemInfo;
 		//动态属性proto ary
 		public var dynamicGoodsBytes:ByteArray;
 		
@@ -34,12 +34,12 @@ package com.rpgGame.coreData.info.item
 			dynamicGoodsBytes = null;
 		}
 		
-		public function setLocalItemInfo(value:ItemInfo):void
+		public function setLocalItemInfo(value:ClientItemInfo):void
 		{
 			_itemInfo = value;
 		}
 		
-		public function get itemInfo():ItemInfo
+		public function get itemInfo():ClientItemInfo
 		{
 			return _itemInfo;
 		}

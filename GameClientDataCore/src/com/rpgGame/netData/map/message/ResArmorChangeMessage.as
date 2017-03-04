@@ -16,8 +16,8 @@ package com.rpgGame.netData.map.message{
 		//角色Id
 		private var _personId: long;
 		
-		//衣服模板Id
-		private var _armorId: int;
+		//衣服资源Id
+		private var _armorResId: int;
 		
 		
 		/**
@@ -26,8 +26,8 @@ package com.rpgGame.netData.map.message{
 		override protected function writing(): Boolean{
 			//角色Id
 			writeLong(_personId);
-			//衣服模板Id
-			writeInt(_armorId);
+			//衣服资源Id
+			writeInt(_armorResId);
 			return true;
 		}
 		
@@ -37,8 +37,8 @@ package com.rpgGame.netData.map.message{
 		override protected function reading(): Boolean{
 			//角色Id
 			_personId = readLong();
-			//衣服模板Id
-			_armorId = readInt();
+			//衣服资源Id
+			_armorResId = readInt();
 			return true;
 		}
 		
@@ -66,18 +66,18 @@ package com.rpgGame.netData.map.message{
 		}
 		
 		/**
-		 * get 衣服模板Id
+		 * get 衣服资源Id
 		 * @return 
 		 */
-		public function get armorId(): int{
-			return _armorId;
+		public function get armorResId(): int{
+			return _armorResId;
 		}
 		
 		/**
-		 * set 衣服模板Id
+		 * set 衣服资源Id
 		 */
-		public function set armorId(value: int): void{
-			this._armorId = value;
+		public function set armorResId(value: int): void{
+			this._armorResId = value;
 		}
 		
 	}

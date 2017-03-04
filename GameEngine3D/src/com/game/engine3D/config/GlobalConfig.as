@@ -20,9 +20,6 @@ package com.game.engine3D.config
 
 		public static const DEBUG_HEAD : String = "[GameEngine3D Debug]";
 
-		public static var transformPlanarRotation:Boolean = true;
-		
-		private static var _use25DMap : Boolean = false;
 		private static var _use2DMap : Boolean = false;
 //		private static var _map_2D_scale_z_dir : Number = 1;
 //		private static var _map_2D_camera_angle : int = 30; //2d场景中的摄像头角度
@@ -30,6 +27,8 @@ package com.game.engine3D.config
 		private static var _mapCameraAngle:Number = 40;
 		private static var _mapCameraRadian:Number;
 		private static var _map2dScaleZDir:Number = 1;
+		
+		private static var _transformPlanared : Boolean = true;
 
 		public function GlobalConfig()
 		{
@@ -55,19 +54,23 @@ package com.game.engine3D.config
 		public static function set use2DMap(value : Boolean) : void
 		{
 			_use2DMap = value;
-//			_map_2D_scale_z_dir = value ? Math.sin(MAP_2D_CAMERA_ANGLE * Math.PI / 180) : 1;
 		}
 
-		public static function get use25DMap() : Boolean
+		public static function get2DMapDepth(value : int) : int
 		{
-			return _use25DMap;
+			return (value>0?value:-value)<<7;
 		}
-
-		public static function set use25DMap(value : Boolean) : void
+		
+		public static function get transformPlanared():Boolean
 		{
-			_use25DMap = value;
+			return _transformPlanared;
 		}
-
+		
+		public static function set transformPlanared(value:Boolean):void
+		{
+			_transformPlanared = value;
+		}
+		
 		public static function get mapCameraAngle():Number
 		{
 			return _mapCameraAngle;
@@ -94,22 +97,5 @@ package com.game.engine3D.config
 		{
 			return _map2dScaleZDir;
 		}
-
-
-		/*public static function get MAP_2D_CAMERA_ANGLE() : int
-		{
-			return _map_2D_camera_angle;
-		}
-
-		public static function set MAP_2D_CAMERA_ANGLE(value : int) : void
-		{
-			_map_2D_camera_angle = value;
-			_map_2D_scale_z_dir = _use2DMap ? Math.sin(_map_2D_camera_angle * Math.PI / 180) : 1;
-		}
-		
-		public static function transformCoord_2d_3d(y : Number) : Number
-		{
-			return int(y / _map_2D_scale_z_dir);
-		}*/
 	}
 }

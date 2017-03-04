@@ -3,7 +3,7 @@ package org.mokylin.skin.common
 	import feathers.controls.Button;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.common.erjiItem_Skin;
+	import org.mokylin.skin.common.erjiItem2_Skin;
 
 	/**
 	 * @private
@@ -38,7 +38,7 @@ package org.mokylin.skin.common
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			temp.label = "使用";
-			temp.styleClass = org.mokylin.skin.common.erjiItem_Skin;
+			temp.styleClass = org.mokylin.skin.common.erjiItem2_Skin;
 			temp.width = 70;
 			temp.x = 9;
 			temp.y = 7;
@@ -49,7 +49,7 @@ package org.mokylin.skin.common
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			temp.label = "展示";
-			temp.styleClass = org.mokylin.skin.common.erjiItem_Skin;
+			temp.styleClass = org.mokylin.skin.common.erjiItem2_Skin;
 			temp.width = 70;
 			temp.x = 9;
 			temp.y = 32;
@@ -60,7 +60,7 @@ package org.mokylin.skin.common
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			temp.label = "丢弃";
-			temp.styleClass = org.mokylin.skin.common.erjiItem_Skin;
+			temp.styleClass = org.mokylin.skin.common.erjiItem2_Skin;
 			temp.width = 70;
 			temp.x = 9;
 			temp.y = 56;

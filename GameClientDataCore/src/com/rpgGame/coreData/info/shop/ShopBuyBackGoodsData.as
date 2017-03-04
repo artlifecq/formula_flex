@@ -26,7 +26,7 @@ package com.rpgGame.coreData.info.shop
 			if( buyBackProto.expireTime != null )
 				expireTime = buyBackProto.expireTime.toNumber();
 			
-			itemInfo = ItemUtil.convertGoodsProtoToItemInfo( buyBackProto.goods );
+//			itemInfo = ItemUtil.convertGoodsProtoToItemInfo( buyBackProto.goods );
 			
 		}
 		

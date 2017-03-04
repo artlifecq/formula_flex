@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.info.roulette
 {
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	
 	import app.message.GoodsWrapperProto;
@@ -15,7 +15,7 @@ package com.rpgGame.coreData.info.roulette
 	{
 		// 转盘经验加成百分比奖励
 		public var expMultiple:Number;
-		public var itemInfo:ItemInfo;
+		public var itemInfo:ClientItemInfo;
 		
 		public function RoulettePrizeInfo()
 		{
@@ -28,7 +28,7 @@ package com.rpgGame.coreData.info.roulette
 			
 			if(data.hasGoods)
 			{
-				itemInfo = ItemUtil.wrapperProtoToItemInfo(data.goods as GoodsWrapperProto);
+//				itemInfo = ItemUtil.wrapperProtoToItemInfo(data.goods as GoodsWrapperProto);
 			}
 			
 			expMultiple = data.exp.per;

@@ -8,13 +8,14 @@ package com.game.engine2D
 	import com.game.engine2D.scene.render.RenderUnit;
 	import com.game.engine2D.utils.SceneUtil;
 	import com.game.engine2D.utils.Transformer;
-	import com.game.engine2D.vo.AvatarSprite;
 	import com.game.engine2D.vo.BaseCharacter;
 	import com.game.engine2D.vo.BaseObj;
 	import com.game.engine2D.vo.HeadBindableContainer;
 	import com.game.engine2D.vo.PoolContainer;
 	import com.game.engine2D.vo.PoolMesh;
 	import com.game.engine2D.vo.ShowContainer;
+	import com.game.engine3D.config.GlobalConfig;
+	import com.game.engine3D.scene.render.RenderSet3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.game.mainCore.libCore.utils.ZMath;
@@ -26,6 +27,7 @@ package com.game.engine2D
 	import flash.geom.Rectangle;
 	
 	import away3d.containers.ObjectContainer3D;
+	import away3d.containers.PlanarContainer3D;
 	import away3d.materials.TextureMaterial;
 	
 	import gs.TweenLite;
@@ -49,7 +51,7 @@ package com.game.engine2D
 		 * 用于绑定角色复杂数据的动态类 
 		 */		
 		private var _userData:Object;
-
+		
 		/**
 		 * @private 
 		 * 换装
@@ -58,7 +60,19 @@ package com.game.engine2D
 		{
 			return _renderSet;
 		}
-
+		
+		public function get avatar3D():RenderSet3D
+		{
+			if (_avatar3D)
+				return _avatar3D.avatar;
+			return null;
+		}
+		
+		public function get character3D():SceneCharacter3D
+		{
+			return _avatar3D;
+		}
+		
 		/**
 		 * 用于绑定角色复杂数据的动态类 
 		 */		
@@ -128,9 +142,9 @@ package com.game.engine2D
 			{
 				_showContainer = ShowContainer.create();
 			}
-			if(_headBindableContainer && _headBindableContainer.container)
+			if(_headBindableContainer && _headBindableContainer)
 			{
-				_headBindableContainer.container.addChild(_showContainer);
+				_headBindableContainer.addChild(_showContainer);
 			}
 		}
 		/**
@@ -160,8 +174,9 @@ package com.game.engine2D
 		protected var _nativeContainerOffset:Point;//2d容器
 		protected var _nativeContainer:Sprite;//2d容器
 		protected var _headBindableContainer:HeadBindableContainer;//starling容器用来添加头顶HeadFace
-		protected var _avatarContainer:AvatarSprite;//avatar部件容器
+		protected var _avatarContainer:PoolContainer;//avatar部件容器
 		protected var _avatarShadow:PoolMesh;//阴影
+		protected var _avatar3D:SceneCharacter3D;//3d模型
 		/**
 		 * 角色所在场景
 		 */
@@ -188,6 +203,15 @@ package com.game.engine2D
 		 * 角色状态
 		 */	
 		private var _status:uint = 0;
+		
+		override public function set layerType(value:uint):void
+		{
+			if (_layerType != value)
+			{
+				_layerType = value;
+				avatar.layerType = value;
+			}
+		}
 		
 		//*******************************************IDisplayable接口基本参数*******************************************	
 		/*** 显示偏移量x */	
@@ -230,14 +254,15 @@ package com.game.engine2D
 				super.visible = value;
 				this.avatar.visible = value;
 				if(_nativeContainer)_nativeContainer.visible = value;
-				if(_headBindableContainer)_headBindableContainer.visible = value;
+				if(_headBindableContainer)_headBindableContainer.headVisible = value;
+				if(_avatar3D)_avatar3D.visible = value;
 				if(_showContainer)
 				{
 					if(value)
 					{
 						if(!_showContainer.parent && _headBindableContainer && _useContainer)
 						{
-							_headBindableContainer.container.addChild(_showContainer);
+							_headBindableContainer.addChild(_showContainer);
 						}
 					}
 					else
@@ -250,7 +275,7 @@ package com.game.engine2D
 		
 		override public function set alpha(value:Number):void
 		{
-			if(alpha == value)return;
+			if(alpha == value || value < 0 || value > 1.0)return;
 			super.alpha = value;
 			if (_renderSet)_renderSet.alpha = value;
 			if (_baseObjList)
@@ -261,9 +286,11 @@ package com.game.engine2D
 					_baseObjList[i].alpha = value;
 				}
 			}
+			if (_avatarShadow)_avatarShadow.alpha = value;
 			if (_nativeContainer)_nativeContainer.alpha = value;
-			if (_headBindableContainer && _headBindableContainer.container)
-				_headBindableContainer.container.alpha = value;
+			if (_avatar3D)_avatar3D.alpha = value;
+			if (_headBindableContainer)
+				_headBindableContainer.alpha = value;
 		}
 		
 		override public function set colorTransform(value:ColorTransform):void
@@ -297,7 +324,7 @@ package com.game.engine2D
 			}
 		}
 		
-		final override public function set y(value:Number):void
+		override public function set y(value:Number):void
 		{
 			if(_y != value)
 			{
@@ -310,6 +337,38 @@ package com.game.engine2D
 					_nativeContainer.y = value;
 					_nativeContainerOffset.y = _offsetX + value;
 				}
+				if(_avatar3D){
+					_avatar3D.zOffset = GlobalConfig.get2DMapDepth(value);
+				}
+				if(_graphicDis){
+					_graphicDis.z = PlanarContainer3D.transformPlanarRotation(-value);
+				}
+			}
+		}
+		
+		override public function set z(value:Number):void
+		{
+			if(_z != value)
+			{
+				_z = value;
+				value = value >> 0;
+				if(_graphicDis)_graphicDis.z = value;
+			}
+		}
+		
+		override public function set finalShowY(value:Number):void
+		{
+			super.finalShowY = value;
+			var $baseObj:BaseObj3D;
+			var offset:Number = value << 7;//value*128
+			for (var i:int = _baseObj3DList.length - 1; i >= 0 ; i--) 
+			{
+				$baseObj = _baseObj3DList[i];
+				$baseObj.zOffset = offset;
+			}
+			for (i = _baseObjList.length - 1; i >= 0 ; i--) 
+			{
+				_baseObjList[i].finalShowY = value;
 			}
 		}
 		
@@ -324,10 +383,19 @@ package com.game.engine2D
 			//
 			var i:uint=0;
 			var bo:BaseObj;
+			var $baseObj:BaseObj3D;
 			for(i=0;i<_baseObjList.length;i++)
 			{
 				bo = _baseObjList[i];
 				bo.isInViewDistance = value;
+			}
+			for (i = 0; i < _baseObj3DList.length; i++) 
+			{
+				$baseObj = _baseObj3DList[i];
+				$baseObj.isInViewDistance = value;
+			}
+			if(_avatar3D){
+				_avatar3D.isInViewDistance = value;
 			}
 		}
 		
@@ -335,24 +403,37 @@ package com.game.engine2D
 		{
 			_enableShadow = value;
 			_renderSet.enableShadow = _enableShadow;
+			if (_avatar3D)
+				_avatar3D.castsShadows = _isDrawShadow && _enableShadow;
+		}
+		
+		override public function set planarRenderLayer(value:uint):void
+		{
+			_planarRenderLayer = value;
+			if (_avatar3D)
+				_avatar3D.planarRenderLayer = value;
+			if (_renderSet)
+				_renderSet.planarRenderLayer = value;
 		}
 		
 		override public function set isDrawShadow(value:Boolean):void
 		{
 			_isDrawShadow = value;
 			_renderSet.isDrawShadow = _isDrawShadow;
-			
+			if (_avatar3D)
+				_avatar3D.castsShadows = _isDrawShadow && _enableShadow;
 			//如果允许有阴影...那么添加一个默认小黑圈阴影
 			if(!_isDrawShadow && enableShadow)
 			{
 				var shadowTexture:TextureMaterial = GlobalConfig2D.shadowTexture;
 				if(_graphicDis && _avatarShadow == null && shadowTexture)
 				{
-					_avatarShadow = PoolMesh.create(null,_renderSet);
+					_avatarShadow = PoolMesh.create(_renderSet);
 					_avatarShadow.material = shadowTexture;
 					_avatarShadow.x = - (GlobalConfig2D.shadowWidth>>1);
 					_avatarShadow.y = - (GlobalConfig2D.shadowHeight>>1);
 					_avatarShadow.visible = this.visible;
+					_avatarShadow.alpha = this.alpha;
 					_avatarShadow.run();
 					_avatarShadow.depth = -200;
 					_graphicDis.addChild(_avatarShadow);
@@ -367,9 +448,23 @@ package com.game.engine2D
 		
 		override public function set smooth(value:Boolean):void
 		{
-			super.smooth = value;
+			_smooth = value;
 			if (_renderSet)
 				_renderSet.smooth = value;
+		}
+		
+		override public function set depthEnable(value:Boolean):void
+		{
+			_depthEnable = value;
+			if (_renderSet)
+				_renderSet.depthEnable = value;
+		}
+		
+		override public function set depth(value:int):void
+		{
+			_depth = value;
+			if (_renderSet)
+				_renderSet.depth = value;
 		}
 		
 		/**
@@ -411,13 +506,15 @@ package com.game.engine2D
 				_shadow.y = this.y+GlobalConfig2D.shadowOffsetY;
 			}
 		}
-
+		
 		override public function set mouseEnabled(value:Boolean):void
 		{
 			if(_mouseEnabled != value)
 			{
 				_mouseEnabled = value;
 				_renderSet.mouseEnabled = value;
+				if (_avatar3D)
+					_avatar3D.mouseEnabled = value;
 				updateNow = true;
 			}
 		}
@@ -491,29 +588,32 @@ package com.game.engine2D
 			_userData = {};
 			//创建换装（用池创建）
 			_renderSet = RenderSet.create();
-			//
 			enableMask = true;
-			//
-			if(!_avatarContainer)
-			{
-				_avatarContainer = AvatarSprite.create();
-				_avatarContainer.shadowEnabled = true;
-			}
+			_avatarContainer ||= PoolContainer.create();
 			_headBindableContainer ||= HeadBindableContainer.create();
 			_graphicDis ||= PoolContainer.create();
 			_graphicDis.addChild(_avatarContainer);
 			_graphicDis.name = "SceneCharacter";
 			_renderSet.parent = _avatarContainer;
-			_headBindableContainer.bindTarget = _graphicDis;
+			_headBindableContainer.bind(_graphicDis,_graphicDis);
 			//------------------------------------
 			type = $parameters[0];
 			id = $parameters[1];
 			scene = $parameters[2];
 			tile_x = $parameters[3];
 			tile_y = $parameters[4];
-			//
+			var hasAvatar3D:Boolean = $parameters[5];
+			if (hasAvatar3D)
+			{
+				_avatar3D ||= SceneCharacter3D.create(type,id);
+				_avatar3D.parentChar = this;
+			}
 			if (scene)
-				scene.sceneStarlingLayer.addChild(_headBindableContainer.container);
+			{
+				if (_avatar3D)
+					scene.gameScene3d.addSceneObj(_avatar3D,_graphicDis);
+				scene.sceneStarlingLayer.addChild(_headBindableContainer);
+			}
 		}
 		
 		//-----------------------------------------------------------2d对象-----------------------------------------------------------
@@ -559,13 +659,31 @@ package com.game.engine2D
 		//-----------------------------------------------------------其它BaseObj-----------------------------------------------------------
 		protected var _baseObjList:Vector.<BaseObj> = new Vector.<BaseObj>();
 		//
+		public function get numBaseObj():uint
+		{
+			return _baseObjList.length;
+		}
+		
 		public function addBaseObj($baseObj:BaseObj,$depthIndex:int=0):void
 		{
 			_baseObjList.push($baseObj);
-			//
 			$baseObj.parent = _avatarContainer as ObjectContainer3D;
 			$baseObj.isMainChar = isMainChar;
-			//$baseObj.depthIndex = $depthIndex;
+			$baseObj.finalShowX = this.finalShowX;
+			$baseObj.finalShowY = this.finalShowY;
+		}
+		
+		public function hasBaseObj($baseObj:BaseObj):Boolean
+		{
+			if(_baseObjList)
+			{
+				var index:int = _baseObjList.indexOf($baseObj);
+				if(index != -1)
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 		//
 		public function removeBaseObj($baseObj:BaseObj):void// 上层要重写下。。。
@@ -634,40 +752,81 @@ package com.game.engine2D
 		}
 		
 		//--------------------------------------------------------------------------------------------------------------------------------
-
+		
 		//-----------------------------------------------------------其它BaseObj-----------------------------------------------------------
 		protected var _baseObj3DList:Vector.<BaseObj3D> = new Vector.<BaseObj3D>();
-		//
-		public function addBaseObj3D($baseObj:BaseObj3D,$depthIndex:int=0):void
+		public function get numBaseObj3D():uint
+		{
+			return _baseObj3DList.length;
+		}
+		
+		public function hasRenderUintEntity(entity:ObjectContainer3D):Boolean
+		{
+			var len:int = _baseObj3DList.length;
+			while(len-->0)
+			{
+				var bo:BaseObj3D = _baseObj3DList[len];
+				if(bo is RenderUnit3D)
+				{
+					var container3D:ObjectContainer3D = RenderUnit3D(bo).graphicDis;
+					if (container3D && container3D.contains(entity))
+						return true;
+				}
+				else if(bo is RenderSet3D && RenderSet3D(bo).hasEntity(entity))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		public function addBaseObj3D($baseObj:BaseObj3D, autoRecycle:Boolean = false):void
 		{
 			$baseObj.parent = _avatarContainer as ObjectContainer3D;
 			$baseObj.isInViewDistance = true;
+			$baseObj.mouseEnable = this.mouseEnabled;
 			$baseObj.startRender();
 			_baseObj3DList.push($baseObj);
+			if (autoRecycle && $baseObj is RenderUnit3D)
+				RenderUnit3D($baseObj).setPlayCompleteCallBack(removeBaseObj3D);
+			//$baseObj.graphicDis.zOffset = this.finalShowY<<7;
+			$baseObj.zOffset = this.finalShowY<<7;
 		}
-		//
-		public function removeBaseObj3D($baseObj:BaseObj3D):void// 上层要重写下。。。
+		
+		public function removeAllBaseObj3D():void
 		{
-			if(_baseObj3DList)
+			while(_baseObj3DList.length>0)
 			{
-				var index:int = _baseObj3DList.indexOf($baseObj);
-				if(index != -1)
+				removeBaseObj3DAt(0);
+			}
+		}
+		
+		public function removeBaseObj3D($baseObj:BaseObj3D):void
+		{
+			var index:int = _baseObj3DList.indexOf($baseObj);
+			if(index != -1)
+			{
+				removeBaseObj3DAt(index);
+			}
+		}
+		
+		public function removeBaseObj3DAt(index:int):void
+		{
+			if(index >= 0 && index < _baseObj3DList.length)
+			{
+				var bo:BaseObj3D = _baseObj3DList[index];
+				if(bo is RenderUnit3D)
 				{
-					var bo:BaseObj3D = _baseObj3DList[index];
-					if(bo is RenderUnit3D)
-					{
-						RenderUnit3D.recycle(bo as RenderUnit3D);
-					}
-					else
-					{
-						bo.destroy();
-					}
-					$baseObj.stopRender();
-					$baseObj.isInViewDistance = false;
-					bo = null;
-					//
-					_baseObj3DList.splice(index,1);
+					RenderUnit3D.recycle(bo as RenderUnit3D);
 				}
+				else
+				{
+					bo.destroy();
+				}
+				bo.stopRender();
+				bo.isInViewDistance = false;
+				bo = null;
+				_baseObj3DList.splice(index,1);
 			}
 		}
 		
@@ -679,7 +838,7 @@ package com.game.engine2D
 				var bo:BaseObj3D = _baseObj3DList[len];
 				if(bo.id == $id && bo.type == $type)
 				{
-					removeBaseObj3D(bo);
+					removeBaseObj3DAt(len);
 				}
 			}
 		}
@@ -726,10 +885,13 @@ package com.game.engine2D
 			mouseEnabled = false;
 			//=============================================================================
 			RenderSet.recycle(_renderSet);//回收avatar
+			if (_avatar3D)
+				scene.gameScene3d.removeSceneObj(_avatar3D);
 			//=============================================================================
 			_sceneAvatarLayer = null;
 			_parent = null;
 			_renderSet = null;
+			_avatar3D = null;
 			scene = null;
 			_status = 0;
 			_logicAngle = 0;
@@ -744,6 +906,13 @@ package com.game.engine2D
 				removeBaseObjAt(0);
 			}
 			_baseObjList.length = 0;
+			
+			len = _baseObj3DList.length;
+			while(len--)
+			{
+				removeBaseObj3DAt(0);
+			}
+			_baseObj3DList.length = 0;
 			
 			if (_displayObjList)
 			{
@@ -764,10 +933,8 @@ package com.game.engine2D
 				_shadow = null;
 			}
 			if (_avatarShadow)
-			{
 				PoolMesh.recycle(_avatarShadow);
-				_avatarShadow = null;
-			}
+			_avatarShadow = null;
 			//
 			if (_nativeContainer)
 			{
@@ -777,21 +944,16 @@ package com.game.engine2D
 				_nativeContainerOffset = null;
 			}
 			if (_avatarContainer)
-			{
-				AvatarSprite.recycle(_avatarContainer);
-				_avatarContainer = null;
-			}
+				PoolContainer.recycle(_avatarContainer);
+			_avatarContainer = null;
 			if (_headBindableContainer)
-			{
 				HeadBindableContainer.recycle(_headBindableContainer);
-				_headBindableContainer = null;
-			}
+			_headBindableContainer = null;
 			if(_showContainer)
-			{
 				ShowContainer.recycle(_showContainer);
-				_showContainer = null;
-			}
-			PoolContainer.recycle(_graphicDis as PoolContainer);
+			_showContainer = null;
+			if (_graphicDis)
+				PoolContainer.recycle(_graphicDis as PoolContainer);
 			_graphicDis = null;
 			//
 			super.dispose();
@@ -853,6 +1015,8 @@ package com.game.engine2D
 		public function setStatus($status:uint):void 
 		{
 			_status = $status;
+			if (_avatar3D)
+				_avatar3D.playCharStatus($status);
 			//派发角色状态改变事件
 			EventManager.dispatchEvent(SceneEvent.CHAR, SceneEventAction_char.CHAR_STATUS_CHANGED,this);
 		}
@@ -883,6 +1047,8 @@ package com.game.engine2D
 			if(_logicAngle != $logicAngle)
 			{
 				_logicAngle = $logicAngle;
+				if (_avatar3D)
+					_avatar3D.logicAngle = $logicAngle;
 				//派发角色状态改变事件
 				EventManager.dispatchEvent(SceneEvent.CHAR, SceneEventAction_char.CHAR_LOGICANGLE_CHANGED,this);
 			}
@@ -922,7 +1088,7 @@ package com.game.engine2D
 			return 0;
 		}
 		
-
+		
 		/**
 		 * 对整个换装的每一项执行函数
 		 * @param $fun 第一个参数是参数sceneCharacter, 第二个参数是RenderUnit
@@ -931,6 +1097,25 @@ package com.game.engine2D
 		public function forEachAvatarAps($fun:Function):void
 		{
 			avatar.forEachRenderUnit($fun,this);
+		}
+		
+		public function forEachAvatar3DAps($fun:Function):void
+		{
+			if (_avatar3D)
+				_avatar3D.forEachRenderUnit($fun, [this], false);
+			var len:int = _baseObj3DList.length;
+			while(len-->0)
+			{
+				var bo:BaseObj3D = _baseObj3DList[len];
+				if(bo is RenderUnit3D)
+				{
+					$fun.apply(null,[this,bo]);
+				}
+				else if(bo is RenderSet3D)
+				{
+					RenderSet3D(bo).forEachRenderUnit($fun,[this]);
+				}
+			}
 		}
 		
 		/**
@@ -943,16 +1128,16 @@ package com.game.engine2D
 			//更新换装
 			this.avatar.run(gTime);
 			
+			var i:uint = 0;
 			if(_baseObjList)
 			{
-				var i:uint = 0;
 				for(i=0;i<_baseObjList.length;i++)
 				{
 					var bo:BaseObj = _baseObjList[i];
 					bo.run(gTime);//更新换装 
 				}
 			}
-
+			
 			if(_baseObj3DList)
 			{
 				for(i=0;i<_baseObj3DList.length;i++)
@@ -967,10 +1152,10 @@ package com.game.engine2D
 		
 		override public function set isMainChar(value:Boolean):void
 		{
-			super.isMainChar = value;
-			if(avatar)
+			_isMainChar = value;
+			if(_renderSet)
 			{
-				avatar.isMainChar = true;
+				_renderSet.isMainChar = value;
 			}
 		}
 	}

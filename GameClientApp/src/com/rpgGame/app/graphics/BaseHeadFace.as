@@ -1,27 +1,41 @@
 package com.rpgGame.app.graphics
 {
+	import com.game.engine3D.core.poolObject.IInstancePoolClass;
 	import com.game.engine3D.scene.display.BindableSprite;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.AttachDisplayType;
+	
+	import flash.geom.Vector3D;
 	
 	import away3d.containers.ObjectContainer3D;
 	
+	import feathers.controls.UIAsset;
+	
 	import starling.display.DisplayObject;
 
-	public class BaseHeadFace extends BindableSprite
+	public class BaseHeadFace extends BindableSprite  implements IInstancePoolClass
 	{
+		private static var bodyBindOffset : Vector3D = new Vector3D(0, 10);
+		private static var manMountBindOffset : Vector3D = new Vector3D(0, 40);
+		private static var womanMountBindOffset : Vector3D = new Vector3D(0, 30);
 		public function BaseHeadFace()
 		{
+			super();
 		}
 		/**是否临时资源**/
 		protected var isTemporary : Boolean;
 		protected var _isCamouflage : Boolean;
 		protected var _isSelected : Boolean;
 		protected var _role : SceneRole;
-		protected var _nameBar : HeadNameBar;
+//		protected var _nameBar : HeadNameBar;
+		
+		public function reSet(parameters : Array) : void
+		{
+		}
 		
 		public function displayVisible(attachType : String, visible : Boolean) : void
 		{
@@ -31,6 +45,15 @@ package com.rpgGame.app.graphics
 					updateShowAndHide();
 					break;
 			}
+		}
+		
+		/**
+		 * 更新角色名字
+		 * @param color
+		 *
+		 */
+		public function updateName() : void
+		{
 		}
 		
 		public function set isCamouflage(value : Boolean) : void
@@ -47,10 +70,30 @@ package com.rpgGame.app.graphics
 			if (nameBindTarget == null)
 				return;
 			
-			bindTarget = nameBindTarget;
+			if (_role.stateMachine.isShowRiding)
+			{
+				if (_role.data is HeroData)
+				{
+					if (HeroData(_role.data).sex)
+					{
+						bindOffset = manMountBindOffset;
+					}
+					else
+					{
+						bindOffset = womanMountBindOffset;
+					}
+				}
+				else
+				{
+					bindOffset = manMountBindOffset;
+				}
+			}
+			else
+			{
+				bindOffset = bodyBindOffset;
+			}
 			
-			if (container)
-				StarlingLayerManager.headFaceLayer.addChild(container);
+			bind(nameBindTarget, null);
 			
 			addAllBar();
 			isTemporary = false;
@@ -59,7 +102,7 @@ package com.rpgGame.app.graphics
 			updateTranform();
 		}
 		
-		public function removeBodyRender() : void
+		protected function removeBodyRender() : void
 		{
 			_isSelected = false;
 			_isCamouflage = false;
@@ -69,12 +112,9 @@ package com.rpgGame.app.graphics
 		 * 添加临时点血条
 		 *
 		 */
-		public function addTemporaryBar() : void
+		public function setTemporary() : void
 		{
-			bindTarget = _role.avatar.graphicDis;
-			
-			if (container)
-				StarlingLayerManager.headFaceLayer.addChild(container);
+			bind(_role.graphicDis, null);
 			
 			initAddBar();
 			
@@ -89,16 +129,22 @@ package com.rpgGame.app.graphics
 		{
 			if (element == null)
 				return;
-			
-			container.addChild(element);
+			if (element is UIAsset)
+			{
+				trace("!!!!!!!!addElement", (element as UIAsset).styleName);
+			}
+			this.addChild(element);
 		}
 		
 		final protected function removeElement(element : DisplayObject) : void
 		{
 			if (element == null)
 				return;
-			
-			container.removeChild(element);
+			if (element is UIAsset)
+			{
+				trace("!!!!!!!!removeElement", (element as UIAsset).styleName);
+			}
+			this.removeChild(element);
 		}
 		
 		//-----------------------------------------------------
@@ -151,14 +197,39 @@ package com.rpgGame.app.graphics
 		{
 			
 		}
-		public function show() : void
+		public function showHead() : void
 		{
-			
 		}
 		
-		public function hide():void
+		public function hideHead() : void
 		{
-			
+		}
+		
+		public function show() : void
+		{
+			StarlingLayerManager.headFaceLayer.addChild(this);
+		}
+		
+		public function hide() : void
+		{
+			if (this.parent)
+			{
+				this.parent.removeChild(this);
+			}
+		}
+		
+		public function instanceDestroy() : void
+		{
+			instanceDispose();
+			dispose();
+		}
+		
+		public function instanceDispose() : void
+		{
+			if (parent)
+			{
+				parent.removeChild(this);
+			}
 		}
 		/**
 		 * 销毁自身，需要重写 

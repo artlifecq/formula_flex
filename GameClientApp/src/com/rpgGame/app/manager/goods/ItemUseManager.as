@@ -1,23 +1,21 @@
 package com.rpgGame.app.manager.goods
 {
 	import com.rpgGame.app.manager.SmallShopItemManager;
-	import com.rpgGame.app.manager.SpellManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.mount.MountEquipmentManager;
 	import com.rpgGame.app.manager.mount.MountManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.society.SocietyManager;
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.ChatCfgData;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.MouseCursorEnum;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.role.HeroData;
 	
@@ -37,9 +35,9 @@ package com.rpgGame.app.manager.goods
 	{
 		private static var _dailyUseGoodHash : HashMap;
 		/** 人物装备 **/
-		private static var _equip : ItemInfo;
+		private static var _equip : ClientItemInfo;
 		/** 坐骑装备 **/
-		private static var _mountEquip : ItemInfo;
+		private static var _mountEquip : ClientItemInfo;
 
 		public function ItemUseManager()
 		{
@@ -106,7 +104,7 @@ package com.rpgGame.app.manager.goods
 		 */
 		public static function useItemById(id : int, count : int) : void
 		{
-			var item : ItemInfo = BackPackManager.instance.getFirstCanUseItemByCfgId(id);
+			var item : ClientItemInfo = BackPackManager.instance.getFirstCanUseItemByCfgId(id);
 			useItem(item, count);
 		}
 
@@ -118,7 +116,7 @@ package com.rpgGame.app.manager.goods
 		 */
 		public static function useItemByIndex(index : int, count : int) : void
 		{
-			var item : ItemInfo = BackPackManager.instance.getItemInfoByIndex(index);
+			var item : ClientItemInfo = BackPackManager.instance.getItemInfoByIndex(index);
 			useItem(item, count);
 		}
 
@@ -127,26 +125,28 @@ package com.rpgGame.app.manager.goods
 		 * @param item
 		 *
 		 */
-		private static function useEquip(item : ItemInfo) : void
+		private static function useEquip(item : ClientItemInfo) : void
 		{
 			var dstPos : int;
 
-//			else if(item.type == GoodsType.EQUIPMENT)//人物面板在舞台，并且类型是装备
-//			{
-//				dstPos = RoleEquipmentManager.instance.getEquipPos(item);
-//				if(dstPos != -1)
-//				{
-//					if(RoleEquipmentManager.canPutOnEquipAt(item,dstPos))
-//						ItemSender.reqMoveGoods(item.containerID, ItemContainerID.Role, item.index, dstPos);
-//				}
-//				return;
-//			}
+			if(item.type == GoodsType.EQUIPMENT)//人物面板在舞台，并且类型是装备
+			{
+				dstPos = RoleEquipmentManager.instance.getEquipPos(item);
+				if(dstPos != -1)
+				{
+					if(RoleEquipmentManager.canPutOnEquipAt(item,dstPos))
+					{
+						ItemSender.wearEquip(item.itemInfo.itemId);
+					}
+				}
+				return;
+			}
 			if (AppManager.isAppInScene(AppConstant.STORAGE_PANEL)) //放入仓库
 			{
 				var emptyIndex : int = StorageManager.instance.getFirstEmptyIndex();
 				if (emptyIndex != -1)
 				{
-					ItemSender.reqMoveGoods(item.containerID, ItemContainerID.Storage, item.index, emptyIndex);
+//					ItemSender.reqMoveGoods(item.containerID, ItemContainerID.Storage, item.index, emptyIndex);
 				}
 				return;
 			}
@@ -167,7 +167,7 @@ package com.rpgGame.app.manager.goods
 								GameAlert.showAlertUtil(LangAlertInfo.EQUIPMENT_BIND_TIP,onMountEquipBindClick);
 								return;
 							}
-							ItemSender.reqMoveGoods(item.containerID, ItemContainerID.Mount, item.index, dstPos, MountManager.curSelectIdx);
+//							ItemSender.reqMoveGoods(item.containerID, ItemContainerID.Mount, item.index, dstPos, MountManager.curSelectIdx);
 						}
 					}
 				}
@@ -187,7 +187,7 @@ package com.rpgGame.app.manager.goods
 								GameAlert.showAlertUtil(LangAlertInfo.EQUIPMENT_BIND_TIP,onRoleEquipBindClick);
 								return;
 							}
-							ItemSender.reqMoveGoods(item.containerID, ItemContainerID.Role, item.index, dstPos);
+//							ItemSender.reqMoveGoods(item.containerID, ItemContainerID.Role, item.index, dstPos);
 						}
 					}
 				}
@@ -229,7 +229,7 @@ package com.rpgGame.app.manager.goods
 			if (!_equip)
 				return;
 			var dstPos : int = RoleEquipmentManager.instance.getEquipPos(_equip);
-			ItemSender.reqMoveGoods(_equip.containerID, ItemContainerID.Role, _equip.index, dstPos);
+//			ItemSender.reqMoveGoods(_equip.containerID, ItemContainerID.Role, _equip.index, dstPos);
 			_equip = null;
 		}
 
@@ -252,7 +252,7 @@ package com.rpgGame.app.manager.goods
 				return;
 
 			var dstPos : int = MountEquipmentManager.instance.getEquipPos(_mountEquip);
-			ItemSender.reqMoveGoods(_mountEquip.containerID, ItemContainerID.Mount, _mountEquip.index, dstPos, MountManager.curSelectIdx);
+//			ItemSender.reqMoveGoods(_mountEquip.containerID, ItemContainerID.Mount, _mountEquip.index, dstPos, MountManager.curSelectIdx);
 			_mountEquip = null;
 		}
 
@@ -272,7 +272,7 @@ package com.rpgGame.app.manager.goods
 		 * @param isShowEquipFly
 		 *
 		 */
-		public static function useItem(item : ItemInfo, count : int = 1, isShowEquipFly : Boolean = true) : void
+		public static function useItem(item : ClientItemInfo, count : int = 1, isShowEquipFly : Boolean = true) : void
 		{
 			if (item == null)
 			{
@@ -296,7 +296,7 @@ package com.rpgGame.app.manager.goods
 				case GoodsType.EQUIPMENT:
 					useEquip(item);
 					return;
-				case GoodsType.TRANSPORTATION:
+				/*case GoodsType.TRANSPORTATION:
 				{
 					useTransBook(item);
 					return;
@@ -315,7 +315,7 @@ package com.rpgGame.app.manager.goods
 				{
 //					CrownManager.openCrownPanel();
 					return;
-				}
+				}*/
 				case GoodsType.MEDICINE:
 				{
 					break;
@@ -326,7 +326,7 @@ package com.rpgGame.app.manager.goods
 //					return;
 //					break;
 //				}
-				case GoodsType.SPELL_BOOK:
+			/*	case GoodsType.SPELL_BOOK:
 				{
 					SpellManager.learnOrUpdateSpellByType(ItemCfgData.getSpellBookType(item.cfgId), true);
 					return;
@@ -350,33 +350,33 @@ package com.rpgGame.app.manager.goods
 				{
 					AppManager.showAppNoHide( AppConstant.MOUNT_PANEL, { tab:1, itemInfo:item } );
 					return;
-				}
+				}*/
 			}
 			
-			switch(item.getNormalUsableType)
+			/*switch(item.getNormalUsableType)
 			{
 				case NormalEfficacy.OPEN_DEPOT_GRID:
 					BackPackManager.instance.unLockGrid();
 					return;
-			}
-			ItemSender.reqUseGoods(item.index, count);
+			}*/
+			ItemSender.useItem(item,count);
 		}
 
 		/** 使用普通物品 **/
-		private static function useNormalItem(item : ItemInfo, count : int = 1) : void
+		private static function useNormalItem(item : ClientItemInfo, count : int = 1) : void
 		{
 			if (item.cfgId == ChatCfgData.paidChatGoodsID)
 			{
 				AppManager.showApp(AppConstant.LABA_PANEL);
 				return;
 			}
-			switch (item.getNormalUsableType)
+		/*	switch (item.getNormalUsableType)
 			{
 				case NormalEfficacy.OPEN_DEPOT_GRID:
 					BackPackManager.instance.unLockGrid();
 					return;
-			}
-			ItemSender.reqUseGoods(item.index, count);
+			}*/
+//			ItemSender.reqUseGoods(item.index, count);
 		}
 
 		private static function openPanel(cfgId : int) : void
@@ -391,7 +391,7 @@ package com.rpgGame.app.manager.goods
 		 * //读条5秒后,未打断情况下再执行请求使用物品-->因为有5秒读条时间，
 		 * 不直接请求使用物品，已在TransferMgr中处理。
 		 */
-		private static function useTransBook(item : ItemInfo) : void
+		private static function useTransBook(item : ClientItemInfo) : void
 		{
 			/*if(TransferManager.isOnUseTransferRoll)
 			{
@@ -416,9 +416,9 @@ package com.rpgGame.app.manager.goods
 			onUseTransBook(item);
 		}
 
-		private static function onUseTransBook(itemInfo : ItemInfo) : void
+		private static function onUseTransBook(itemInfo : ClientItemInfo) : void
 		{
-			ItemSender.reqUseGoods(itemInfo.index, 1);
+//			ItemSender.reqUseGoods(itemInfo.index, 1);
 		}
 
 		/**
@@ -432,20 +432,20 @@ package com.rpgGame.app.manager.goods
 		 * @return
 		 * @return 返回布尔值
 		 */
-		public static function canUse(item : ItemInfo) : Boolean
+		public static function canUse(item : ClientItemInfo) : Boolean
 		{
 			var userInfo : HeroData = MainRoleManager.actorInfo;
-			var requireLevel : int = ItemCfgData.getItemRequireLevel(item.cfgId);
+			var requireLevel : int = ItemConfig.getItemRequireLevel(item.cfgId);
 			var roleLvl : int = MainRoleManager.actorInfo.totalStat.level;
 			if (roleLvl < requireLevel)
 			{
 				NoticeManager.showHint(EnumHintInfo.CHAT_WORLD_CHAT_FAIL1);
 				return false;
 			}
-			/*			if( BackPackManager.instance.checkItemExpireTime(item.expireTime) == false )
-						{
-							return false;
-						}*/
+			if( BackPackManager.instance.checkItemExpireTime(item.expireTime) == false )
+			{
+				return false;
+			}
 			return true;
 		}
 

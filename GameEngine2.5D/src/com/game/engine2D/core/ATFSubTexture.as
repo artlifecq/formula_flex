@@ -8,19 +8,20 @@ package com.game.engine2D.core
 	import away3d.materials.TextureMaterial;
 	import away3d.textures.Texture2DBase;
 	
-
+	
 	/**
 	 * ATFSubTexture
 	 * @author guoqing.wen
 	 * 
 	 */
-    public class ATFSubTexture
-    {
+	public class ATFSubTexture
+	{
 		private var _atfPath:String;
 		private var _hinderStart:uint;
 		private var _hitSize:uint;
 		private var _textureWidth:int;
 		private var _hinderBytes:ByteArray;
+		private var _hinderLen:int;
 		
 		private var mParent:ITextureMaterial;
 		private var mRegion:Rectangle;
@@ -37,12 +38,16 @@ package com.game.engine2D.core
 		 * @param hitSize:障碍数据单元格的大小
 		 * 
 		 */
-        public function ATFSubTexture(parent:ITextureMaterial, region:Rectangle, hinderBytes:ByteArray, hinderStart:uint, hitSize:uint, path:String = null)
-        {
+		public function ATFSubTexture(parent:ITextureMaterial, region:Rectangle, hinderBytes:ByteArray, hinderStart:uint, hitSize:uint, path:String = null)
+		{
 			_atfPath = path;
 			_hinderStart = hinderStart;
 			_hitSize = hitSize;
 			_hinderBytes = hinderBytes;
+			if (hinderBytes)
+				_hinderLen = hinderBytes.length;
+			else
+				_hinderLen = 0;
 			_textureWidth = region.width;
 			
 			updateTexture(parent, region);
@@ -55,6 +60,14 @@ package com.game.engine2D.core
 			mRegion = region ? region.clone() : new Rectangle(0, 0, parent.width, parent.height);
 			mWidth  = mRegion.width;
 			mHeight = mRegion.height;
+			if (parent.isTextureScale)
+			{
+				var textureScale:Number = parent.textureScale;
+				mRegion.x = mRegion.x/textureScale;
+				mRegion.y = mRegion.y/textureScale;
+				mRegion.width = mRegion.width/textureScale;
+				mRegion.height = mRegion.height/textureScale;
+			}
 			mTransformationMatrix = new Matrix();
 			mTransformationMatrix.scale(mRegion.width  / parent.width,
 				mRegion.height / parent.height);
@@ -62,22 +75,35 @@ package com.game.engine2D.core
 				mRegion.y  / parent.height);
 		}
 		
-		public function get textureParsed():Boolean
+		public function get textureReady():Boolean
 		{
-			return mParent.textureParsed;
+			return mParent.textureReady;
 		}
-
+		
+		public function uploadTexture():void
+		{
+			mParent.uploadTexture();
+		}
+		
 		/**
 		 * 获取障碍数据
 		 * @return 
 		 */
 		public function checkHinderData(px:Number, py:Number):Boolean
 		{
-			if (_hinderBytes && _hinderBytes.length > 0)
+			if (_hinderLen > 0 && _hinderBytes)
 			{
 				var pos:int = int(py/_hitSize) * Math.ceil(_textureWidth/_hitSize) + int(px/_hitSize);
-				var hex:int = _hinderBytes[_hinderStart + int(pos / 8)];
-				return ((hex >> (pos % 8)) & 1);
+				var index:int = _hinderStart + int(pos / 8);
+				if (index > 1 && index < _hinderLen - 1)
+				{
+					//事件检测判断，取三个点，任意一个为1
+					var hex0:int = _hinderBytes[index];
+					var hex1:int = _hinderBytes[index-1];
+					var hex2:int = _hinderBytes[index+1];
+					var off:int = (pos % 8);
+					return ((hex0 >> off) & 1) || ((hex1 >> off) & 1) || ((hex2 >> off) & 1);
+				}
 			}
 			return false;
 		}
@@ -89,14 +115,15 @@ package com.game.engine2D.core
 		public function get parentI():ITextureMaterial { return mParent; }
 		public function get parentTexture():Texture2DBase { return parent.texture; }
 		public function get region():Rectangle { return mRegion; }
-		public function get width():Number { return mRegion.width; }
-		public function get height():Number { return mRegion.height; }
+		public function get width():Number { return mWidth; }
+		public function get height():Number { return mHeight; }
 		public function get textureWidth():Number { return mParent.width; }
 		public function get textureHeight():Number { return mParent.height; }
+		public function get atfPath():String { return _atfPath; }
 		
-        public function dispose():void
-        { 
+		public function dispose():void
+		{ 
 			_hinderBytes = null;
-        }
-    }
+		}
+	}
 }

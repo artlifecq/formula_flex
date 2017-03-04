@@ -12,20 +12,19 @@ package com.game.engine2D
 	import com.game.engine2D.scene.SceneSmallLayer;
 	import com.game.engine2D.scene.layers.SceneInteractiveLayer;
 	import com.game.engine2D.scene.layers.SceneRenderLayer;
-	import com.game.engine2D.scene.layers.SceneZoneMapLayer2;
-	import com.game.engine2D.scene.map.vo.MapTile;
+	import com.game.engine2D.scene.layers.SceneZoneMapLayer;
 	import com.game.engine2D.scene.render.RenderSet;
 	import com.game.engine2D.scene.render.RenderUnit;
+	import com.game.engine2D.tools.SceneCache;
 	import com.game.engine2D.utils.MaterialUtils;
-	import com.game.engine2D.utils.SceneUtil;
 	import com.game.engine2D.vo.BaseObj;
-	import com.game.engine2D.vo.PoolFrontMesh;
 	import com.game.engine2D.vo.ShowContainer;
 	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.core.GameScene3D;
 	import com.game.engine3D.manager.GameScene3DManager;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.scene.render.vo.ISceneCameraTarget;
+	import com.game.engine3D.vo.BaseObj3D;
 	
 	import flash.display.Sprite;
 	import flash.geom.Point;
@@ -34,6 +33,7 @@ package com.game.engine2D
 	import away3d.containers.View3D;
 	import away3d.containers.View3DAsset;
 	import away3d.core.math.Plane3D;
+	import away3d.core.pick.PickingCollisionVO;
 	import away3d.events.Event;
 	import away3d.filters.Filter3DBase;
 	import away3d.lights.DirectionalLight;
@@ -49,6 +49,15 @@ package com.game.engine2D
 	
 	public class Scene extends ObjectContainer3D
 	{
+		/** 场景阴影灯1 */
+		public static const SCENE_SHADOW_DIRECTIONAL_NAME : String = "SCENE_SHADOW_DIRECTIONAL_LIGHT";
+		/** 场景阴影灯2 */
+		public static const SCENE_SHADOW_MODEL_DIRECTIONAL_NAME : String = "SCENE_SHADOW_MODEL_DIRECTIONAL_LIGHT";
+		/** 场景实体灯 */
+		public static const SCENE_ENTITY_DIRECTIONAL_NAME : String = "SCENE_ENTITY_DIRECTIONAL_LIGHT";
+		/** 场景实体LightPicker */
+		public static const SCENE_ENTITY_LIGHT_PICKER_NAME : String = "SCENE_ENTITY_LIGHT_PICKER";
+		
 		private static const floor:Function = Math.floor;
 		private static var _current:Scene;
 		public static function get scene():Scene
@@ -60,7 +69,7 @@ package com.game.engine2D
 		public var sceneCamera:SceneCamera;
 		public var sceneRender:SceneRender;
 		public var sceneSmallMapLayer:SceneSmallLayer;
-		public var sceneZoneMapLayer:SceneZoneMapLayer2;
+		public var sceneZoneMapLayer:SceneZoneMapLayer;
 		public var sceneInteractiveLayer:SceneInteractiveLayer;
 		public var sceneRenderLayer:SceneRenderLayer;
 		public var sceneStarlingLayer:starling.display.Sprite;
@@ -72,24 +81,27 @@ package com.game.engine2D
 		private var _view:View3D;
 		private var _scene3d:GameScene3D;
 		private var _scenePos:Point = new Point(int.MIN_VALUE, int.MIN_VALUE);
-		private var _cameraTarget:SceneCameraTarget;/**虚拟目标，跟镜头绑定的，导致镜头移动的参照 */
+		
+		private var _cameraTarget:ObjectContainer3D;/**虚拟目标，跟镜头绑定的，导致镜头移动的参照 */
 		private var _cameraOffsetX:Number = 0;
 		private var _cameraOffsetY:Number = 0;
+		
 		private var _direction:DirectionalLight;
+		private var _directionModel:DirectionalLight;
+		
+		private var _planarShadowAlpha:Number = 0.3;
 		private var _filter3ds:Vector.<Filter3DBase> = new Vector.<Filter3DBase>();
 		private var _cameraInit:Boolean = false;
+		private var _cameraOrthographicLens:CameraOrthographicLens;
 		
-		public function Scene($width:Number, $height:Number, name : String, view : View3D, viewDistance : int=1, areaMapLayer : int=0)
+		public function Scene($width:Number, $height:Number, name : String, view : View3D, viewDistance : int=1, areaMapLayer : int=0, view3dEvent:Boolean = true)
 		{
 			if(_current != null) {   
 				throw new Error("单例!");   
 			}
 			_current = this;
 			_view = view;
-			var len2d : CameraOrthographicLens = new CameraOrthographicLens(1000);
-			len2d.far = 3000;
-			len2d.near = -500;
-			_view.camera.lens = len2d;
+			_cameraOrthographicLens = new CameraOrthographicLens(1000);
 			
 			//场景引擎配置
 			sceneConfig = new SceneConfig($width,$height);
@@ -97,10 +109,10 @@ package com.game.engine2D
 			sceneSmallMapLayer = new SceneSmallLayer(this);
 			addChild(sceneSmallMapLayer);
 			
-			sceneCamera = new SceneCamera(this,len2d);
+			sceneCamera = new SceneCamera(this,_cameraOrthographicLens);
 			sceneRender = new SceneRender(this);
 			
-			sceneZoneMapLayer = new SceneZoneMapLayer2(this);
+			sceneZoneMapLayer = new SceneZoneMapLayer(this);
 			addChild(sceneZoneMapLayer);
 			
 			sceneInteractiveLayer = new SceneInteractiveLayer(this);
@@ -114,19 +126,17 @@ package com.game.engine2D
 			
 			//初始化GameScene3D			
 			_scene3d = GameScene3DManager.createScene(name, _view, viewDistance, areaMapLayer);
-			_scene3d.glow = true;
-			_scene3d.phantom = true;
-			_scene3d.heat = true;
-			_scene3d.sceneMapLayer.mousePickerDisabled = false;
+			_scene3d.glow = view3dEvent;
+			_scene3d.phantom = view3dEvent;
+			_scene3d.heat = view3dEvent;
+			_scene3d.sceneMapLayer.mousePickerDisabled = !view3dEvent;
 			_scene3d.shadowLevel = 2;
 			_view.scene.addChild(this);
-			_view.mouseEnabled = true;
-			_view.mouseChildren = true;
+			_view.mouseEnabled = view3dEvent;
+			_view.mouseChildren = view3dEvent;
 			_view.filters3d = _filter3ds;
-			
-//			_cameraTarget = PoolContainer.create();
-//			this.addChild(_cameraTarget);
-//			Camera2DController.initcontroller(_view.camera,_cameraTarget);
+			//初始化camera
+			_view.camera.lens = _cameraOrthographicLens;
 			
 			//添加starling stage最下层
 			Starling.current.stage.addChildAt(sceneStarlingLayer, 0);
@@ -143,6 +153,22 @@ package com.game.engine2D
 			if (!_direction)
 				initLight();
 			return _direction;
+		}
+		
+		public function get directionalModelLight():DirectionalLight
+		{
+			if (!_directionModel)
+				initLight();
+			return _directionModel;
+		}
+		
+		public function set planarShadowAlpha(value:Number):void
+		{
+			_planarShadowAlpha = value;
+			if (_direction)
+				_direction.planarShadowAlpha = value;
+			if (_directionModel)
+				_directionModel.planarShadowAlpha = value;
 		}
 		
 		public function localToGlobal(p:Point, result:Point = null):Point
@@ -171,11 +197,11 @@ package com.game.engine2D
 			return _view;
 		}
 		
-		public function get cameraTarget() : SceneCameraTarget
+		public function get cameraTarget() : ObjectContainer3D
 		{
 			if (_cameraTarget == null)
 			{
-				_cameraTarget = new SceneCameraTarget();
+				_cameraTarget = new ObjectContainer3D();
 				_view.scene.addChild(_cameraTarget);
 			}
 			return _cameraTarget;
@@ -264,6 +290,7 @@ package com.game.engine2D
 			if (index != -1)
 			{
 				_filter3ds.splice(index, 1);
+				_view.filters3d = _filter3ds;
 			}
 		}
 		
@@ -274,6 +301,8 @@ package com.game.engine2D
 		 */
 		public function reSize($width:Number, $height:Number):void
 		{
+			if ($width <= 1 || $height <= 1)
+				return;
 			sceneConfig.width = $width*sceneCamera.scale;
 			sceneConfig.height = $height*sceneCamera.scale;
 			sceneSmallMapLayer.drawSmallMapScale();
@@ -352,7 +381,8 @@ package com.game.engine2D
 					init3DAwd();
 					//开始渲染
 					sceneRender.startRender(false);//注意此处应该给false,否则地图加载优先级会以旧的角色坐标计算
-					
+					//开始缓存
+					SceneCache.startCountShare();
 					//执行原来回调
 					if($on3DComplete != null)
 					{
@@ -372,38 +402,66 @@ package com.game.engine2D
 		{
 			_viewAsset =  _scene3d.sceneMapLayer.view3DAsset;
 			
-			var lights : Vector.<LightBase> = _scene3d.sceneMapLayer.lights;
-			for each (var light:LightBase in lights) 
+			if (_direction && _direction.parent)
+				_direction.parent.removeChild(_direction);
+			if (_directionModel && _directionModel.parent)
+				_directionModel.parent.removeChild(_directionModel);
+			_direction = _scene3d.sceneMapLayer.getObj(SCENE_SHADOW_DIRECTIONAL_NAME) as DirectionalLight;
+			_directionModel = _scene3d.sceneMapLayer.getObj(SCENE_SHADOW_MODEL_DIRECTIONAL_NAME) as DirectionalLight;
+			
+			if (!_direction)
 			{
-				if (light is DirectionalLight)
+				var lights : Vector.<LightBase> = _scene3d.sceneMapLayer.lights;
+				for each (var light:LightBase in lights) 
 				{
-					_direction = light as DirectionalLight;
-					break;
+					if (light is DirectionalLight && DirectionalLight(light).castsPlanarShadows)
+					{
+						_direction = light as DirectionalLight;
+						break;
+					}
 				}
 			}
-
-			GlobalConfig.use25DMap = _viewAsset.cameraMode2D;
+			else
+			{
+				var direction:DirectionalLight = _scene3d.sceneMapLayer.getObj(SCENE_ENTITY_DIRECTIONAL_NAME) as DirectionalLight;
+				if (direction)
+					direction.castsPlanarShadows = false;
+				if (_direction)
+					_direction.castsPlanarShadows = true;
+			}
+			
+			if (_direction)
+			{
+				_direction.planarShadowAlpha = _planarShadowAlpha;
+			}
+			if (_directionModel == null)
+			{
+				_directionModel = _direction;
+				_directionModel.planarShadowAlpha = _planarShadowAlpha;
+			}
+			
+			GlobalConfig.use2DMap = _viewAsset.cameraMode2D;
 			if (_viewAsset.cameraMode2D)
 			{
 				disableInteractiveHandle();
 				initLight();
-//				initCamera();
-				_view.camera.lens.near = -100000;
-				_view.camera.lens.far = 100000;
-				GlobalConfig.mapCameraAngle = -_viewAsset.cameraMode2DAngle;
-				GlobalConfig2D.MapZoneClass = PoolFrontMesh;
-				var plane:Plane3D = new Plane3D(0,Math.cos(GlobalConfig.mapCameraRadian),Math.sin(GlobalConfig.mapCameraRadian));
+				initCamera();
+				var angle:Number = (_viewAsset.cameraMode2DAngle*Math.PI)/180.0;
+				var plane:Plane3D = new Plane3D(0,Math.cos(angle),-Math.sin(angle));
 				_direction.planarShadowPlane = plane;
+				_directionModel.planarShadowPlane = plane;
 			}
 		}
 		
 		private function initCamera():void
 		{
+			_cameraOrthographicLens.near = -CameraFrontController.LOCK_NEAR_FAR;
+			_cameraOrthographicLens.far = CameraFrontController.LOCK_NEAR_FAR;
 			if (_cameraInit)return;
 			_cameraInit = true;
-			
-			CameraFrontController.initcontroller(_view.camera, cameraTarget);
-			CameraFrontController.LOCK_DISTANCE = 90000;
+			_cameraTarget = new SceneCameraTarget();
+			this.addChild(_cameraTarget);
+			CameraFrontController.initcontroller(_view.camera, _cameraTarget);
 		}
 		
 		private function initLight():void
@@ -414,8 +472,14 @@ package com.game.engine2D
 				_direction.castsShadows = false;
 				_direction.castsPlanarShadows = true;
 				_direction.planarShadowAlpha = 0.3;
-				this.view3d.scene.addChild(_direction);
+				_direction.name = "you are shot!";
 			}
+			if (!_directionModel)
+			{
+				_directionModel = _direction;
+			}
+			_view.scene.addChild(_direction);
+			_view.scene.addChild(_directionModel);
 		}
 		
 		public function drawSmallMap():void
@@ -446,6 +510,7 @@ package com.game.engine2D
 			var len:int = sceneRenderLayer.baseObjList.length;
 			var bo:BaseObj;
 			var list:Array = [];
+			if (!ap)return null;
 			while(len-->0)
 			{
 				bo = sceneRenderLayer.baseObjList[len];
@@ -453,9 +518,18 @@ package com.game.engine2D
 				{
 					if(bo is SceneCharacter)
 					{
-						if((bo as SceneCharacter).avatar.hasRenderUnit(ap))
+						if(ap.renderSet)
 						{
-							return bo;
+							if((bo as SceneCharacter).hasBaseObj(ap.renderSet))
+							{
+								return bo;
+							}
+						}else
+						{
+							if((bo as SceneCharacter).avatar.hasRenderUnit(ap))
+							{
+								return bo;
+							}
 						}
 					}
 					else if(bo is RenderSet)
@@ -503,7 +577,7 @@ package com.game.engine2D
 		{
 			return sceneRenderLayer.baseObjList;
 		}
-
+		
 		/**
 		 * 向场景中添加角色
 		 * @param $sc
@@ -541,22 +615,33 @@ package com.game.engine2D
 		 */
 		public function removeSceneObj($bo:BaseObj, $recycle:Boolean=true):void
 		{
-			sceneRenderLayer.removeBaseObj($bo, $recycle);
-			////////////////////////////////////////////
-			var index:int = _sceneCharacterList.indexOf($bo as SceneCharacter);
-			if (index != -1 && $bo.canRemoved)
+			//先做个判断
+			if(!$bo || !$bo.canRemoved)
 			{
-				_sceneCharacterList.splice(index,1);
+				return;
 			}
-			////////////////////////////////////////////
-			index = _renderUnitList.indexOf($bo as RenderUnit);
-			if (index != -1 && $bo.canRemoved)
+			sceneRenderLayer.removeBaseObj($bo, $recycle);
+			//
+			var index:int = -1;
+			if ($bo is SceneCharacter)
 			{
-				_renderUnitList.splice(index,1);
+				index = _sceneCharacterList.indexOf($bo as SceneCharacter);
+				if (index != -1)
+				{
+					_sceneCharacterList.splice(index,1);
+				}
+			}
+			//
+			if ($bo is RenderUnit)
+			{
+				index = _renderUnitList.indexOf($bo as RenderUnit);
+				if (index != -1)
+				{
+					_renderUnitList.splice(index,1);
+				}
 			}
 			
-			//
-			if ($bo && $bo.canRemoved)
+			if ($bo)
 			{
 				_sceneObjMap.removeForValue($bo);
 			}
@@ -644,62 +729,47 @@ package com.game.engine2D
 			return sceneRenderLayer.getBaseObjByType($type);
 		}
 		
-		//释放**********************************************************************************************************
 		/**
-		 * @private
 		 * 释放
 		 * 此函数发生在切换场景时
 		 * 规则：
-		 * 		1.暂停并移除所有的小地图和切片地图加载
-		 * 		2.释放所有地图数据
-		 * 		3.移除所有角色，但不包括主角 和 鼠标点击效果虚拟角色（同时会将相应未加载完毕的换装取消加载，将加载完毕的换装添加进延时卸载缓存中）
+		 * 	1.暂停并移除所有的小地图和切片地图加载
+		 * 	2.释放所有地图数据
+		 * 	3.移除所有角色，但不包括主角 和 鼠标点击效果虚拟角色（同时会将相应未加载完毕的换装取消加载，将加载完毕的换装添加进延时卸载缓存中）
 		 */	
 		public function destory($isDisposeMapConfig:Boolean=true):void
 		{
-			//小地图
-			//------------------------------------
-			//停止上一个场景小地图的加载11111111111111(如果其他地方也在使用此地址则也会同时停止掉)
-			if(mapConfig!=null && mapConfig.smallMapUrl!=null && mapConfig.smallMapUrl!="")
-			{
-				DobjLoadManager.cancelLoadByUrl(mapConfig.smallMapUrl);
-			}
 			if(mapConfig)
 			{
-				if(mapConfig.smallMapTexture)
-				{
-					mapConfig.smallMapTexture.dispose();
-					mapConfig.smallMapTexture = null;
-				}
 				if($isDisposeMapConfig)
 				{
+					if(mapConfig.smallMapTexture)
+					{
+						mapConfig.smallMapTexture.dispose();
+						mapConfig.smallMapTexture = null;
+					}
 					mapConfig.dispose();
 				}
 			}
 			//释放小地图
 			//sceneSmallMapTexture.disposeTexture();
-			//------------------------------------
 			//地图切片
-			//------------------------------------
-			if (sceneZoneMapLayer)sceneZoneMapLayer.dispose();
-			//------------------------------------
+			if (sceneZoneMapLayer)
+				sceneZoneMapLayer.dispose();
 			//换装
-			//------------------------------------
 			var list:Array = _sceneObjMap.getValues();
-			for(var i:int=list.length;i>0;i--)
+			for(var i:int=list.length - 1;i >= 0;i--)
 			{
 				var bObj:BaseObj = list[i];
 				removeSceneObj(bObj);
 			}
-			sceneRenderLayer.dispose();
+			if (sceneRenderLayer)
+				sceneRenderLayer.dispose();
+			if (_scene3d)
+				_scene3d.clear();
+			if (_view)
+				_view.filters3d = _filter3ds;
 			TweenLite.killTweensOf(_current);
-			
-			/*if (_cameraTarget)
-			{
-				if (_cameraTarget.parent)
-					_cameraTarget.parent.removeChild(_cameraTarget);
-				_cameraTarget.dispose();
-				_cameraTarget = null;
-			}*/
 		}
 		
 		/**
@@ -726,15 +796,15 @@ package com.game.engine2D
 		 * return
 		 * 
 		 */		
-		public function getScFromAvatarUnderPointByPixel32($p:Point):SceneCharacter 
+		public function getScFromAvatarUnderPointByPixel32($p:Point, $pickVO:PickingCollisionVO):SceneCharacter 
 		{
 			//注意顺序
 			var list:Vector.<SceneCharacter> = sceneCharacterList;
 			//注意顺序
-			var len:int = sceneObjList.length;
+			var len:int = list.length;
 			for(var i:int=len-1; i>=0; i--)
 			{
-				var sc:SceneCharacter = sceneObjList[i] as SceneCharacter;
+				var sc:SceneCharacter = list[i] as SceneCharacter;
 				if(!sc) continue;
 				if(!sc.visible) continue;
 				if(!sc.mouseEnabled) continue;
@@ -748,8 +818,30 @@ package com.game.engine2D
 						return sc;
 					}
 				}	
+				else if ($pickVO && sc.hasRenderUintEntity($pickVO.entity))
+				{
+					return sc;
+				}
 			}
 			
+			return null;
+		}
+		
+		public function getScFromAvatar3DUnderPoint($pickVO:PickingCollisionVO):SceneCharacter 
+		{
+			if($pickVO == null)return null;
+			var entity:ObjectContainer3D = ObjectContainer3D($pickVO.entity);
+			var baseObjList:Vector.<BaseObj3D> = _scene3d.sceneRenderLayer.baseObjList;
+			var len:int = baseObjList.length;
+			for(var i:int=len-1; i>=0; i--)
+			{
+				var sc:SceneCharacter3D = baseObjList[i] as SceneCharacter3D;
+				if(!sc) continue;
+				if(!sc.visible) continue;
+				if(!sc.mouseEnabled) continue;
+				if(sc.hasRenderUintEntity(entity))
+					return sc.parentChar;
+			}
 			return null;
 		}
 		/**
@@ -764,17 +856,13 @@ package com.game.engine2D
 			var tileX:int = floor($p.x/SceneConfig.TILE_WIDTH);
 			var tileY:int = floor($p.y/SceneConfig.TILE_HEIGHT);
 			
-			//如果位于地图之外，则直接返回
-			var mapTile:MapTile = SceneUtil.getMapTile(tileX, tileY);
-			//guoqing.wen 事件临时注释
-			//if(mapTile==null) return null;
-			
 			//获取鼠标下的名字
 			var stageXY:Point = this.sceneStarlingLayer.localToGlobal($p);
-			var len:int = sceneObjList.length;
+			var list:Vector.<BaseObj> = sceneObjList;
+			var len:int = list.length;
 			for(var i:int=0; i<len; i++)
 			{
-				var sc:SceneCharacter = sceneObjList[i] as SceneCharacter;
+				var sc:SceneCharacter = list[i] as SceneCharacter;
 				if(sc && sc.mouseEnabled)
 				{
 					var showContainer:ShowContainer = sc.showContainer;
@@ -788,6 +876,40 @@ package com.game.engine2D
 				}
 			}
 			return null;
+		}
+		
+		public function getAllScFromAvatarUnderPointByMouse($p:Point):Array 
+		{
+			var $pickVO:PickingCollisionVO = _view.mousePicker.getViewCollision($p.x,$p.y,_view);
+			//注意顺序
+			var list:Vector.<SceneCharacter> = sceneCharacterList;
+			//注意顺序
+			var len:int = list.length;
+			var scArr:Array = new Array();
+			
+			for(var i:int=len-1; i>=0; i--)
+			{
+				var sc:SceneCharacter = sceneObjList[i] as SceneCharacter;
+				if(!sc) continue;
+				if(!sc.visible) continue;
+				if(!sc.mouseEnabled) continue;
+				if(!sc.avatar.mouseEnabled) continue;
+				
+				//如果该角色鼠标感应区包含点击点，则将继续精确事件判断
+				if(sc.containsPoint($p, false))
+				{
+					if(sc.avatar.hitPoint($p))
+					{
+						scArr.push(sc);
+					}
+				}	
+				else if ($pickVO && sc.hasRenderUintEntity($pickVO.entity))
+				{
+					scArr.push(sc);
+				}
+			}
+			
+			return scArr;
 		}
 		
 		/**
@@ -811,7 +933,7 @@ package com.game.engine2D
 			var value:int = Stage3DLayerManager.stage.mouseX - _scenePos.x;
 			return value;
 		}
-
+		
 		public function get mouseY():Number
 		{
 			var value:int = Stage3DLayerManager.stage.mouseY - _scenePos.y;

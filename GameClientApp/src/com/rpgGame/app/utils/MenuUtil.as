@@ -5,7 +5,6 @@ package com.rpgGame.app.utils
 	import com.rpgGame.app.manager.chat.ChatWindowManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.friend.FriendManager;
-	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.app.manager.goods.ItemUseManager;
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -23,7 +22,8 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.society.SocietyStaticConfigData;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.info.society.SocietyMemberData;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangMenu;
@@ -129,13 +129,13 @@ package com.rpgGame.app.utils
 			if (data == null)
 				return;
 
-			if (data is ItemInfo)
+			if (data is ClientItemInfo)
 			{
-				var item : ItemInfo = data as ItemInfo;
+				var item : ClientItemInfo = data as ClientItemInfo;
 				switch (type)
 				{
 					case LangMenu.SELL:
-						ItemSender.reqSellGoods(item.index);
+//						ItemSender.reqSellGoods(item.index);
 						break;
 					case LangMenu.MOVE:
 						EventManager.dispatchEvent(ItemEvent.ITEM_PRE_MOVE, data);
@@ -149,14 +149,25 @@ package com.rpgGame.app.utils
 					case LangMenu.USE_ITEM:
 						ItemUseManager.useItem(item);
 						break;
-					case LangMenu.DISCARDED:
-						GoodsContainerMamager.dropItem(item);
+					case LangMenu.DISCARDED://丢弃
+						ItemSender.discardItem(item);
 						break;
 					case LangMenu.SHOW:
 						EventManager.dispatchEvent(ChatEvent.SHOW_GOODS, data);
 						break;
 				}
 				return;
+			}
+			
+			
+			if(data is GridInfo){
+				switch (type)
+				{
+					case LangMenu.GET_ITEM:
+						EventManager.dispatchEvent(ItemEvent.ITEM_GET, data);
+						break;
+				}
+				return ;
 			}
 
 			var datas : Array = data as Array;

@@ -17,9 +17,9 @@ package com.rpgGame.app.ui.main.chat {
     import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ChatCfgData;
-    import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
     import com.rpgGame.coreData.clientConfig.FaceInfo;
     import com.rpgGame.coreData.info.MapDataManager;
+    import com.rpgGame.coreData.type.EnumHurtType;
     import com.rpgGame.coreData.type.chat.EnumChatChannelType;
     import com.rpgGame.coreData.utils.ColorUtils;
     import com.rpgGame.netData.chat.message.ResChatMessage;
@@ -128,6 +128,8 @@ package com.rpgGame.app.ui.main.chat {
             this._initVScollerY = this._skin.vscrollbar.y;
             this._initVScollerX = this._skin.vscrollbar.x;
             this._initBgY = this._skin.bg.y;
+			
+			this.alpha=0.5;
             
             
             var defaultFormat : TextFormat = new TextFormat(Fontter.FONT_Hei);
@@ -137,9 +139,9 @@ package com.rpgGame.app.ui.main.chat {
             defaultFormat.letterSpacing = 1;
             defaultFormat.leading = 5;
             
-            this._chatText = new RichTextArea3D(this._initBgWidth -5, 0, ColorUtils.getDefaultStrokeFilter());
+            this._chatText = new RichTextArea3D(this._initBgWidth, 0, ColorUtils.getDefaultStrokeFilter());
             this._chatText.setConfig(RichTextCustomUtil.cloneChatUnitConfigVec());
-            this._chatText.wordWrap = true;
+            this._chatText.wordWrap = false;
             this._chatText.multiline = true;
             this._chatText.defaultTextFormat = defaultFormat;
             this._chatText.text = "";
@@ -151,13 +153,13 @@ package com.rpgGame.app.ui.main.chat {
             this._skin.vscrollbar.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_FIXED;
             this._skin.vscrollbar.addChild(this._chatText);
             this._skin.vscrollbar.width = this._initBgWidth - this._initVScollerX;
-            this._chatText.setSize(this._skin.vscrollbar.width - this._chatText.x - 6, 0);
+            this._chatText.setSize(this._skin.vscrollbar.width - this._chatText.x -10, 0);
             
             this._inputText = new RichTextArea3D(this._skin.inputbg.width, this._skin.inputbg.height, ColorUtils.getDefaultStrokeFilter());
             this._inputText.maxChars = ChatCfgData.MAX_CHAR_LENGTH;
             this._inputText.isEditable = true;
             this._inputText.x = this._skin.inputbg.x;
-            this._inputText.y = this._skin.inputbg.y;
+            this._inputText.y = this._skin.inputbg.y+3;
             this._inputText.text = "";
             this._inputText.defaultTextFormat = defaultFormat;
             this._skin.grp_buttom.addChild(this._inputText);
@@ -342,9 +344,6 @@ package com.rpgGame.app.ui.main.chat {
 		{
 			_toggleGroup.selectedIndex=type;
 		}
-		
-		
-		
         
         public function resize(w : int, h : int) : void {
             this.x = 0;
@@ -418,9 +417,21 @@ package com.rpgGame.app.ui.main.chat {
 			_skin.grp_channel.visible=_skin.select_bg.visible=false;
 		}
 		
-        private function onTouchEventHandler(e : TouchEvent) : void {
+        private function onTouchEventHandler(e : TouchEvent) : void 
+		{
+			var mousePoint : Point = this.globalToLocal(new Point(Starling.current.nativeStage.mouseX, Starling.current.nativeStage.mouseY))
+			
+			var currentTarget:DisplayObject = e.currentTarget as DisplayObject;
+			var touch:Touch = e.getTouch( currentTarget );
+			if( touch == null || !hitTest(mousePoint) )
+			{
+				this.alpha=0.5;
+			}else{
+				this.alpha=1;
+			}
+			
             // 调整大小
-            var touch : Touch = e.getTouch(this._skin.btn_scale, TouchPhase.BEGAN);
+            touch = e.getTouch(this._skin.btn_scale, TouchPhase.BEGAN);
             if (touch) {
                 this.setAdjustSizeState(true);
 				return;
@@ -544,17 +555,17 @@ package com.rpgGame.app.ui.main.chat {
             
             this._skin.bg.width = this._initBgWidth + dx;
             this._skin.bg.height = this._initBgHeight - dy;
-            this._skin.vscrollbar.height =178;
             this._skin.vscrollbar.width = this._initBgWidth + dx - this._initVScollerX;
             this._skin.bg.y = this._initBgY + dy;
             this._skin.vscrollbar.y = this._initVScollerY + dy;
-            this._chatText.setSize(this._skin.vscrollbar.width - this._chatText.x - 6, 0);
+            this._chatText.setSize(this._skin.vscrollbar.width - this._chatText.x -10, 0);
             
 //            this._skin.grp_buttomR.x = this._initGroupButtomRightX + dx;
             this._skin.grp_top.y = this._initGroupTopY + dy;
             
             this._skin.inputbg.width = this._initInputBgWidth + dx;
             this._inputText.setSize(this._skin.inputbg.width, this._skin.inputbg.height);
+            this._skin.vscrollbar.height =this._skin.bg.height-this._inputText.height*2-5;
             this._skin.btn_send.x = this._initSendX + dx;
             
             this._curWidth = this._skin.bg.width;
@@ -591,6 +602,10 @@ package com.rpgGame.app.ui.main.chat {
         
         private function sendMsg() : void 
 		{
+//			FightFaceHelper.showAttChange(EnumHurtType.ADDHP,50);
+			
+//			return ;
+			
 			if("" == this._inputText.text )
 			{
 				return;

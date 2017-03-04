@@ -168,7 +168,7 @@ package org.mokylin.skin.common
 			temp.color = 0x8b8d7b;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.verticalAlign = "middle";
-			temp.verticalCenter = -3;
+			temp.verticalCenter = 0;
 			temp.width = 40;
 			temp.y = -2;
 			return temp;

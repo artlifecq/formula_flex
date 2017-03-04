@@ -160,16 +160,15 @@ package com.rpgGame.app.manager
 			var role : SceneRole = ref.data as SceneRole;
 			if (role == null || !role.usable)
 				return;
-
 			var actor : SceneRole = MainRoleManager.actor;
 			var dist : int = MathUtil.getDistanceNoSqrt(actor.x, actor.z, role.x, role.z);
 			var dropGoodsData : SceneDropGoodsData = role.data as SceneDropGoodsData;
 			var farDistance : int = dropGoodsData.farDistance;
 			if (dist < farDistance * farDistance)
 			{
-				if (dropGoodsData.isMount)
+				/*if (dropGoodsData.isMount)
 					MountManager.collectMountItem(dropGoodsData.id, dropGoodsData.name);
-				else
+				else*/
 					SceneDropGoodsManager.selectedDropGoods(dropGoodsData);
 			}
 		}

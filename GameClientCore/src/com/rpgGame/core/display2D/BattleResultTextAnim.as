@@ -20,6 +20,13 @@ package com.rpgGame.core.display2D
 	{
 		protected var _view:View3D;
 		
+		public function bind(bindTarget:ObjectContainer3D, syncTarget:Object=null):void
+		{
+			// TODO Auto Generated method stub
+			
+		}
+		
+		
 		protected var _bindTarget:ObjectContainer3D;
 		protected var _avatar3D:RenderUnit3D;
 		
