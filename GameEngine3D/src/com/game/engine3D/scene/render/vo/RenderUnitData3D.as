@@ -76,6 +76,8 @@ package com.game.engine3D.scene.render.vo
 		private var _independentMaterialName : String;
 		private var _textureUrl : String;
 		private var _useIndependentColor : Boolean;
+		private var _useIndependentDiffuseColor : Boolean;
+		private var _independentDiffuseColor : uint;
 		private var _blendMaterialName : String;
 		private var _blendMaskUrl : String;
 		private var _blendUrl : String;
@@ -126,6 +128,8 @@ package com.game.engine3D.scene.render.vo
 			_independentTexture = null;
 			_textureUrl = null;
 			_useIndependentColor = false;
+			_useIndependentDiffuseColor = false;
+			_independentDiffuseColor = 0;
 			_blendMethodData = null;
 			_fadeAlphaMethodData = null;
 			_onFadeAlphaValidate = null;
@@ -276,38 +280,23 @@ package com.game.engine3D.scene.render.vo
 		}
 		}*/
 		
-		public function switchMaterialsToIndependent(independentTexture : Texture2DBase, independentMaterialName : String) : void
+		private function switchMaterialsToIndependent() : void
 		{
-			initIndependentMaterials();
-			if (_independentMaterialMap == null)
+			if (_targetMeterialMap == _independentMaterialMap)
 			{
 				return;
 			}
-			for (var name : String in _independentMaterialMap)
-			{
-				var material : TextureMaterial = (_independentMaterialMap[name] as MaterialData).material as TextureMaterial;
-				if (independentTexture)
-				{
-					if (!independentMaterialName || (material.name == independentMaterialName))
-					{
-						material.texture = independentTexture;
-					}
-					else
-					{
-						material.texture = ((_materialMap[name] as MaterialData).material as TextureMaterial).texture;
-					}
-				}
-				else
-				{
-					material.texture = ((_materialMap[name] as MaterialData).material as TextureMaterial).texture;
-				}
-			}
+			initIndependentMaterials();
 			_targetMeterialMap = _independentMaterialMap;
 			validateMeterials();
 		}
 		
-		public function switchMaterialsToShare() : void
+		private function switchMaterialsToShare() : void
 		{
+			if (_targetMeterialMap == _materialMap)
+			{
+				return;
+			}
 			_targetMeterialMap = _materialMap;
 			validateMeterials();
 			if (_animatorElements)
@@ -686,6 +675,8 @@ package com.game.engine3D.scene.render.vo
 			_independentColorTransform.blueMultiplier = 1;
 			_independentColorTransform.alphaMultiplier = 1;
 			_useIndependentColor = false;
+			_useIndependentDiffuseColor = false;
+			_independentDiffuseColor = 0;
 		}
 		
 		public function restore() : void
@@ -697,7 +688,7 @@ package com.game.engine3D.scene.render.vo
 			restoreMaterials();
 		}
 		
-		public function initIndependentMaterials() : void
+		private function initIndependentMaterials() : void
 		{
 			if (!_independentMaterialMap)
 			{
@@ -732,8 +723,8 @@ package com.game.engine3D.scene.render.vo
 			if (material)
 			{
 				material.copyFrom(orgMaterial);
-				if (GlobalConfig.use2DMap && material.blendMode == BlendMode.NORMAL)
-					material.blendMode = BlendMode.LAYER;
+//				if (GlobalConfig.use2DMap && material.blendMode == BlendMode.NORMAL)
+//					material.blendMode = BlendMode.LAYER;
 				material.colorTransform = _independentColorTransform;
 				material.diffuseAcc = orgMaterial.diffuseAcc;
 				material.lightPicker = orgMaterial.lightPicker ? _lightPicker : null;
@@ -781,7 +772,7 @@ package com.game.engine3D.scene.render.vo
 			return _hasSkeletonAnimator;
 		}
 		
-		public function validateMeterials() : void
+		private function validateMeterials() : void
 		{
 			if (_animatorElements)
 			{
@@ -878,12 +869,12 @@ package com.game.engine3D.scene.render.vo
 			updateMaterials();
 		}
 		
-		public function setShareMaterial(propertyData:MaterialPropertyData) : void
+		public function setShareMaterial(propertyData : MaterialPropertyData) : void
 		{
-			var materialName:String = getUnitMaterialName(propertyData.materialName);
+			var materialName : String = getUnitMaterialName(propertyData.materialName);
 			if (materialName in _materialMap)
 			{
-				var materialData:MaterialData = (_materialMap[materialName] as MaterialData);
+				var materialData : MaterialData = (_materialMap[materialName] as MaterialData);
 				if (materialData)
 				{
 					var material : TextureMaterial = materialData.material as TextureMaterial;
@@ -893,12 +884,12 @@ package com.game.engine3D.scene.render.vo
 					}
 					else
 					{
-						trace("设置材质属性失败，材质没有对应属性:",propertyData.materialName,propertyData.propertyName);
+						trace("设置材质属性失败，材质没有对应属性:", propertyData.materialName, propertyData.propertyName);
 					}
 				}
 				else
 				{
-					trace("设置材质属性失败，不存在对应材质:",propertyData.materialName);
+					trace("设置材质属性失败，不存在对应材质:", propertyData.materialName);
 				}
 			}
 		}
@@ -941,13 +932,41 @@ package com.game.engine3D.scene.render.vo
 		{
 			if (_methodDatas)
 			{
-				if (!_shareMaterials || _methodDatas.length > 0 || _blendMethodData || _fadeAlphaMethodData || _independentTexture || _useIndependentColor)
+				if (!_shareMaterials || _methodDatas.length > 0 || _blendMethodData || _fadeAlphaMethodData || _independentTexture || _useIndependentColor || _useIndependentDiffuseColor)
 				{
-					switchMaterialsToIndependent(_independentTexture, _independentMaterialName);
+					switchMaterialsToIndependent();
 					if (_independentMaterialMap)
 					{
 						for each (var materialData : MaterialData in _independentMaterialMap)
 						{
+							var material : TextureMaterial = materialData.material as TextureMaterial;
+							var orgMaterialData : MaterialData = _materialMap[getUnitMaterialName(materialData.name)];
+							var orgMaterial : TextureMaterial = orgMaterialData.material as TextureMaterial;
+							if (_independentTexture)
+							{
+								if (!_independentMaterialName || (material.name == _independentMaterialName))
+								{
+									material.texture = _independentTexture;
+								}
+								else
+								{
+									material.texture = orgMaterial.texture;
+								}
+							}
+							else
+							{
+								material.texture = orgMaterial.texture;
+							}
+							
+							if (_useIndependentDiffuseColor)
+							{
+								material.diffuseColor = _independentDiffuseColor;
+							}
+							else
+							{
+								material.diffuseColor = orgMaterial.diffuseColor;
+							}
+							
 							var singlePassMaterial : SinglePassMaterialBase = materialData.material as SinglePassMaterialBase;
 							if (_lastOneRemoveMethodData)
 							{
@@ -1159,6 +1178,26 @@ package com.game.engine3D.scene.render.vo
 				_independentColorTransform.alphaMultiplier = 1;
 				setIndependentColorTransform(_independentColorTransform);
 				_useIndependentColor = false;
+				updateMaterials();
+			}
+		}
+		
+		public function setIndependentDiffuseColor(value : uint) : void
+		{
+			if (!_useIndependentDiffuseColor)
+			{
+				_useIndependentDiffuseColor = true;
+			}
+			_independentDiffuseColor = value;
+			updateMaterials();
+		}
+		
+		public function restoreDiffuseColor() : void
+		{
+			if (_useIndependentDiffuseColor)
+			{
+				_useIndependentDiffuseColor = false;
+				_independentDiffuseColor = 0;
 				updateMaterials();
 			}
 		}

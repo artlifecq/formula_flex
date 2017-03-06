@@ -47,7 +47,7 @@ package com.game.engine2D.vo{
 		 */		
 		private var _tile_x:int = 0;
 		/*** 逻辑坐标x*/	
-		public function get tile_x():int{return _tile_x}
+		final public function get tile_x():int{return _tile_x}
 		/*** 逻辑坐标x*/	
 		public function set tile_x($value:int):void
 		{
@@ -60,7 +60,7 @@ package com.game.engine2D.vo{
 		 */	
 		private var _tile_y:int = 0;
 		/*** 逻辑坐标y*/	
-		public function get tile_y():int{return _tile_y}
+		final public function get tile_y():int{return _tile_y}
 		/*** 逻辑坐标y*/	
 		public function set tile_y($value:int):void
 		{
@@ -95,7 +95,7 @@ package com.game.engine2D.vo{
 		 */	
 		protected var _show_x:Number = 0;
 		/**显示像素x*/
-		public function get show_x():Number
+		final public function get show_x():Number
 		{
 			return _show_x;
 		}
@@ -113,7 +113,7 @@ package com.game.engine2D.vo{
 		 */	
 		protected var _show_y:Number = 0;
 		/**显示像素y*/
-		public function get show_y():Number
+		final public function get show_y():Number
 		{
 			return _show_y;
 		}
@@ -129,7 +129,7 @@ package com.game.engine2D.vo{
 		
 		//===========================================摄像机相关=====================================================
 		private var _speed:Number = 0;
-		public function get speed():Number
+		final public function get speed():Number
 		{
 			return _speed;
 		}
@@ -140,7 +140,7 @@ package com.game.engine2D.vo{
 		}
 		
 		private var _pos:Point;
-		public function get pos():Point
+		final public function get pos():Point
 		{
 			if(!_pos)
 			{

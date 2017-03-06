@@ -1,6 +1,5 @@
 package com.game.engine2D.scene.map.vo
 {
-	import com.game.engine2D.config.SceneConfig;
 	import com.game.engine2D.utils.SceneUtil;
 
 	/**
@@ -23,74 +22,34 @@ package com.game.engine2D.scene.map.vo
 		 */
 		public var isMask:Boolean;
 		
-		
-		//坐标相关================================================================================================
 		/**
-		 * @private
 		 * 像素坐标x 
 		 */	
-		private var _x:Number = 0;
-		/*** 像素坐标x*/	
-		public function get x():Number{return _x}
-		/*** 像素坐标x*/	
-		public function set x($value:Number):void
-		{
-			_x = $value;
-			_tile_x = _x / SceneConfig.TILE_WIDTH;
-		}
-		
+		public var x:int = 0;
 		/**
-		 * @private
 		 * 像素坐标y 
 		 */	
-		private var _y:Number = 0;
-		/*** 像素坐标y*/	
-		public function get y():Number{return _y}
-		/*** 像素坐标y*/	
-		public function set y($value:Number):void{
-			_y = $value;
-			_tile_y = _y / SceneConfig.TILE_HEIGHT;
-		}
+		public var y:int = 0;
 		
-		/**
-		 * @private
-		 * 逻辑坐标x 
-		 */		
-		private var _tile_x:int = 0;
 		/*** 逻辑坐标x*/	
-		public function get tile_x():int{return _tile_x}
-		/*** 逻辑坐标x*/	
-		public function set tile_x($value:int):void{
-			_tile_x = $value;
-			_x = SceneUtil.getTileXPixel($value);//_tile_x * SceneConfig.TILE_WIDTH;
-		}
-		
-		/**
-		 * @private
-		 * 逻辑坐标y
-		 */	
-		private var _tile_y:int = 0;
+		public var tile_x:int;
 		/*** 逻辑坐标y*/	
-		public function get tile_y():int{return _tile_y}
-		/*** 逻辑坐标y*/	
-		public function set tile_y($value:int):void{
-			_tile_y = $value;
-			_y = SceneUtil.getTileYPixel($value);;//_tile_y * SceneConfig.TILE_HEIGHT;
-		}
-		
+		public var tile_y:int;
 		
 		public function MapTile($tileX:int, $tileY:int, $isSolid:Boolean=false, $isIsland:Boolean=false,$isMask:Boolean=false){
-			tile_x = $tileX;
-			tile_y = $tileY;
-			isSolid = $isSolid;
-			isIsland = $isIsland;
-			isMask = $isMask;
+			this.tile_x = $tileX;
+			this.x = SceneUtil.getTileXPixel($tileX);
+			this.tile_y = $tileY;
+			this.y = SceneUtil.getTileYPixel($tileY);
+			this.isSolid = $isSolid;
+			this.isIsland = $isIsland;
+			this.isMask = $isMask;
 		}
 		
-		public function equals(mapTitle:MapTile):Boolean
+		static public function equals(tile1:MapTile,tile2:MapTile):Boolean
 		{
-			if(mapTitle == null)return false;
-			if(mapTitle.tile_x == _tile_x && mapTitle.tile_y == _tile_y)
+			if(tile1 == null)return false;
+			if(tile1.tile_x == tile2.tile_x && tile1.tile_y == tile2.tile_y)
 			{
 				return true;
 			}

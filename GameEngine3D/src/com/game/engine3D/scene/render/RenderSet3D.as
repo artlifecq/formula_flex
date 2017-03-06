@@ -1197,6 +1197,14 @@ package com.game.engine3D.scene.render
 			}
 		}
 		
+		public function set planarRenderLayer(value : uint) : void
+		{
+			for each (var ru : RenderUnit3D in _renderUnitMap)
+			{
+				ru.planarRenderLayer = value;
+			}
+		}
+		
 		public function hasEntity(entity : ObjectContainer3D) : Boolean
 		{
 			for each (var ru : RenderUnit3D in _renderUnitMap)
