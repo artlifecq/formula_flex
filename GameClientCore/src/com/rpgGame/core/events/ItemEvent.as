@@ -46,6 +46,8 @@ package com.rpgGame.core.events
 		public static const ITEM_DELETE:int = UNIQUEID.NEXT;
 		/** 预拆分物品,弹窗输入 **/
 		public static const ITEM_PRE_SPLITE:int = UNIQUEID.NEXT;
+		/** 批量使用 **/
+		public static const ITEM_BATCH:int = UNIQUEID.NEXT;
 		/** 预移动物品,跟随鼠标 **/
 		public static const ITEM_PRE_MOVE:int = UNIQUEID.NEXT;
 		/** 拖动物品放下时 **/

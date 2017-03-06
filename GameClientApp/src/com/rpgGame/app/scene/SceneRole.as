@@ -2,6 +2,8 @@ package com.rpgGame.app.scene
 {
 	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.vo.BaseRole;
+	import com.game.mainCore.libCore.pool.Pool;
+	import com.rpgGame.app.graphics.AttackFaceSprite;
 	import com.rpgGame.app.graphics.BaseHeadFace;
 	import com.rpgGame.app.graphics.BubbleDialogFace;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -56,6 +58,7 @@ package com.rpgGame.app.scene
 		private var _stateMachine : RoleStateMachine;
 		private var _buffSet : BuffSet;
 		private var _headFace : BaseHeadFace;
+		private var _attackFace:AttackFaceSprite;
 		private var _dialogFace : BubbleDialogFace;
 		protected var _fightChange : Boolean = false;
 		public var mapAreaTypes : Array = [];
@@ -105,6 +108,16 @@ package com.rpgGame.app.scene
 			_dialogFace = value;
 		}
 		
+		public function get attackFace():AttackFaceSprite
+		{
+			return _attackFace;
+		}
+		
+		public function set attackFace(value:AttackFaceSprite):void
+		{
+			_attackFace = value;
+		}
+		
 		public function get boneNameContainer() : Sprite
 		{
 			if (_headFace == null)
@@ -126,6 +139,9 @@ package com.rpgGame.app.scene
 				_headFace.show();
 			if (_dialogFace)
 				_dialogFace.show();
+			if (_attackFace)
+				_attackFace.show();
+			
 		}
 		
 		override protected function removeFromGraphic() : void
@@ -135,6 +151,8 @@ package com.rpgGame.app.scene
 				_headFace.hide();
 			if (_dialogFace)
 				_dialogFace.hide();
+			if (_attackFace)
+				_attackFace.hide();
 		}
 		
 		override public function setAttachVisible(attachType : String, visible : Boolean) : void
@@ -183,6 +201,11 @@ package com.rpgGame.app.scene
 			{
 				_dialogFace.recycleSelf();
 				_dialogFace = null;
+			}
+			if (_attackFace)
+			{
+				_attackFace.recycleSelf();
+				_attackFace = null;
 			}
 			mapAreaTypes.length = 0;
 			isWheel = false;

@@ -16,7 +16,7 @@ package com.rpgGame.app.display2D
 	 * 伤害效果
 	 * @author Carver
 	 */
-	public class AttackFace extends starling.display.Sprite implements IPoolClass
+	public class AttackFace extends Sprite implements IPoolClass
 	{
 		//		public var easeFun:Function;
 		/** 特殊类型,带来的特殊坐标偏移 **/
@@ -109,6 +109,28 @@ package com.rpgGame.app.display2D
 			_specialOffsetPos.x = _specialOffsetPos.y = 0;
 			if( parent != null )
 				parent.removeChild(this);
+			
+			disposeText(_geBmpStarling);
+			disposeText(_shiBmpStarling);
+			disposeText(_baiBmpStarling);
+			disposeText(_qianBmpStarling);
+			disposeText(_wanBmpStarling);
+			disposeText(_shiwanBmpStarling);
+			disposeText(_baiwanBmpStarling);
+			disposeText(_qianwanBmpStarling);
+			disposeText(_yiBmpStarling);
+			disposeText(_shiyiBmpStarling);
+			
+			_geBmpStarling=null;
+			_shiBmpStarling=null;
+			_baiBmpStarling=null;
+			_qianBmpStarling=null;
+			_wanBmpStarling=null;
+			_shiwanBmpStarling=null;
+			_baiwanBmpStarling=null;
+			_qianwanBmpStarling=null;
+			_yiBmpStarling=null;
+			_shiyiBmpStarling=null;
 		}
 		
 		/**
@@ -176,6 +198,10 @@ package com.rpgGame.app.display2D
 		 */		
 		public function addNumber():void
 		{
+			if(!_numberRes){
+				return;
+			}
+			
 			if( _value is String || _value == 0 ) 
 				return;	
 			
@@ -212,6 +238,7 @@ package com.rpgGame.app.display2D
 				_plusBmpStarling.y = - _plusBmpStarling.height * 0.5 + _specialOffsetPos.y;
 				tX += _plusBmpStarling.width;
 			}
+			
 			/////////////////////////数字//////////////////////////
 			var numStr:String = (Math.abs(_value)).toString();
 			var image:Image;
@@ -235,7 +262,7 @@ package com.rpgGame.app.display2D
 				//经验类不缩放
 				if(normalNum>2&&_numberRes!=FightFaceHelper.NUMBER_PC_EXP&&_numberRes!=FightFaceHelper.NUMBER_PC_EXPSPEC){
 					image.scale=0.8;
-					image.x = (image.width - gap) * i + tX - 5 + _specialOffsetPos.x+20;
+					image.x = (image.width - gap) * i + tX - 5 + _specialOffsetPos.x+10;
 				}else{
 					image.x = (image.width - gap) * i + tX - 5 + _specialOffsetPos.x;
 				}

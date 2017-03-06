@@ -137,7 +137,7 @@ package com.rpgGame.coreData.info.item
 
 		override public function get quality() : int
 		{
-			if (_quality)
+			if (_qItem)
 				_quality=_qItem.q_default;
 				return _quality;
 		}

@@ -27,7 +27,7 @@ package com.rpgGame.app.manager.goods
 	 */
 	public class RoleEquipmentManager extends GoodsContainerMamager
 	{
-		public static const COUNT:int = 12;
+		public static const COUNT:int = 10;
 		private var typeToPosMap:HashMap;
 		
 		public function RoleEquipmentManager()

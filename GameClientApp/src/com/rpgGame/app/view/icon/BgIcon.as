@@ -97,7 +97,7 @@ package com.rpgGame.app.view.icon
 				_qualityImage = new UIAsset();
 			}
 			_qualityImage.styleName = ClientConfig.getQualityBg( _qualityId ,iconSize);
-	
+			_qualityImage.visible=true;
 			sortLayer();
 		}
 		
@@ -382,13 +382,24 @@ package com.rpgGame.app.view.icon
 				addChild( _iconImage );
 			
 			if( _qualityImage != null )
+			{
 				addChild( _qualityImage );
-			
-			if( _selectImage != null )
-				addChild( _selectImage );
+			}
 			
 			if( _countText != null )
 				addChild( _countText );
+			
+			if(_bindImage){
+				addChild( _bindImage );
+			}
+			if(_jobImage){
+				addChild( _jobImage );
+			}
+			if(_lvImage){
+				addChild( _lvImage );
+			}
+			if( _selectImage != null )
+				addChild( _selectImage );
 		}
 		
 		/**
@@ -443,6 +454,7 @@ package com.rpgGame.app.view.icon
 					_selectImage.visible = true;
 					_selectImage.x = _iconPositionX;
 					_selectImage.y = _iconPositionY;
+					addChild(_selectImage);
 				}
 			}
 		}

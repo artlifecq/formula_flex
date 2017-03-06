@@ -251,10 +251,11 @@ package com.rpgGame.app.sender
 		 * @param itemId
 		 * 
 		 */
-		public static function unwearEquip(itemId:long):void
+		public static function unwearEquip(itemId:long,gridId:int=-1):void
 		{
 			var msg:UnwearEquipMessage=new UnwearEquipMessage();
 			msg.itemId=itemId;
+			msg.cellId=gridId;
 			SocketConnection.send(msg);
 		}
 	}

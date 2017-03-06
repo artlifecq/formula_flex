@@ -78,8 +78,8 @@ package com.rpgGame.coreData.type.item
 		public static const SELECT_44:String = "select/44";
 		/** 格子光圈品质 46*46 **/
 		public static const SELECT_46:String = "select/46";
-		/** 格子光圈品质 60*60 **/
-		public static const SELECT_60:String = "select/60";
+		/** 格子光圈品质 64*64 **/
+		public static const SELECT_64:String = "select/64";
 		
 		public function GridBGType()
 		{

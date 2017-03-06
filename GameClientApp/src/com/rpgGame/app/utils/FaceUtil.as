@@ -3,6 +3,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
 	import com.rpgGame.app.manager.mount.MountEquipmentManager;
 	import com.rpgGame.app.manager.mount.MountManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.manager.StarlingLayerManager;
@@ -10,6 +11,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.cfg.mount.MountConfigData;
 	import com.rpgGame.coreData.cfg.mount.MountUnitData;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
@@ -17,10 +19,11 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
 	import com.rpgGame.coreData.info.face.IBaseFaceInfo;
-	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.mount.MountInfoData;
 	import com.rpgGame.coreData.lang.LangMount;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.ShopType;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.GridBGType;
@@ -125,10 +128,10 @@ package com.rpgGame.app.utils
 			grid.faceInfo = itemInfo;
 			grid.setIsShowCdTm( true );
 			grid.sortLayer();
+			grid.setIsBind(itemInfo.binded);
 			
 			if(itemInfo is EquipInfo)
 			{
-				grid.setIsBind(itemInfo.binded);
 				grid.setIsWear( RoleEquipmentManager.equipIsWearing(itemInfo));
 				grid.setIsWear( MountEquipmentManager.instance.equipIsWearing(itemInfo));
 			}
@@ -141,6 +144,16 @@ package com.rpgGame.app.utils
 					case GoodsType.EQUIPMENT1://装备
 					case GoodsType.EQUIPMENT2://装备
 						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.EQUIP_TIP, itemInfo ) );
+						grid.setLV(itemInfo.qItem.q_levelnum);
+//						grid.setLV(3);
+						if(itemInfo.containerID==ItemContainerID.BackPack){
+							var hero:HeroData=MainRoleManager.actorInfo;
+							if(hero.job!=itemInfo.qItem.q_job&&itemInfo.qItem.q_job!=0){
+								grid.setIsJob(false);//职业不符合
+							}else{
+								grid.setIsJob(true);
+							}
+						}
 						break;
 					/*case GoodsType.BEAST_CARD://兽牌
 						grid.setIsBind(itemInfo.binded);
