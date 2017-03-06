@@ -34,7 +34,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(108102, onResItemAddMessage );
 			SocketConnection.addCmdListener(108103, onResItemChangeMessage );
 			SocketConnection.addCmdListener(108104, onResItemRemoveMessage );
-//			SocketConnection.addCmdListener(108105, onResUseItemSuccessMessage );暂时不用物品使用成功
+			SocketConnection.addCmdListener(108105, onResUseItemSuccessMessage );
 			
 			SocketConnection.addCmdListener(105100, onResStoreItemInfosMessage );
 			SocketConnection.addCmdListener(105101, onResStoreItemAddMessage );

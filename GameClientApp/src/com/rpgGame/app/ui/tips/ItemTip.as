@@ -56,10 +56,22 @@ package com.rpgGame.app.ui.tips
 			_iconFace.x=8;
 			_iconFace.y=12;
 			labelList=new Vector.<Label>();
+			lines=new Vector.<UIAsset>();
 			yinIcon=new UIAsset();
 			yinIcon.styleName="ui/common/tubiao/yinzi_24.png";
 		}
 
+		private function createLine(x:int,y:int,w:int):void
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/tips/tips_1fengexian.png";
+			temp.width=w;
+			temp.x=x;
+			temp.y=y;
+			lines.push(temp);
+			_itemTip.container.addChild(temp);
+		}
+		
 		/**
 		 * 设置物品数据tips
 		 * @param data
@@ -72,6 +84,11 @@ package com.rpgGame.app.ui.tips
 			while(labelList.length!=0){
 				var l:Label=labelList.shift();
 				l.removeFromParent(true);
+			}
+			
+			while(lines.length!=0){
+				var line:UIAsset=lines.shift();
+				line.removeFromParent(true);
 			}
 			
 			if (_itemInfo == null)
@@ -87,9 +104,7 @@ package com.rpgGame.app.ui.tips
 			_itemTip.lbl_lock.visible=true;
 			if(_itemInfo.binded){
 				_itemTip.lbl_lock.text="[已绑定]";
-				_itemTip.lock.visible=true;
 			}else{
-				_itemTip.lock.visible=false;
 				if(_itemInfo.qItem.q_bind==0){
 					_itemTip.lbl_lock.visible=false;
 				}else if(_itemInfo.qItem.q_bind==1){
@@ -142,12 +157,18 @@ package com.rpgGame.app.ui.tips
 				curY+=22;
 			}*/
 			
-			name=HtmlTextUtil.getTextColor(nameColor,"[物品说明]\n");
+			createLine(10,curY,280);
+			curY+=10;
+			
+			name=HtmlTextUtil.getTextColor(0xcfc6ae,"[物品说明]\n");
 			var label:Label=createLabel(name,_itemInfo.qItem.q_describe);
 			label.width=250;
 			label.leading=5;
 			label.wordWrap=true;
-			curY+=label.height;
+			curY+=label.height+10;
+			
+			createLine(10,curY,280);
+			curY+=10;
 			
 			if(_itemInfo.itemInfo.lostTime==0){
 				name=HtmlTextUtil.getTextColor(nameColor,"类别:");
@@ -158,6 +179,9 @@ package com.rpgGame.app.ui.tips
 			}
 			createLabel(name,value);
 			curY+=22;
+			
+			createLine(10,curY,280);
+			curY+=10;
 			
 			name=HtmlTextUtil.getTextColor(nameColor,"售价:");
 			value=HtmlTextUtil.getTextColor(valueColor2,"     "+_itemInfo.qItem.q_sell_price.toString());

@@ -86,7 +86,7 @@ package com.rpgGame.appModule.role
 					equipGrids[i].x=0;
 					equipGrids[i].y=i*60;
 				}else{
-					equipGrids[i].x=284;
+					equipGrids[i].x=310;
 					equipGrids[i].y=(i-5)*60;
 				}
 				_skin.weapons.addChild(equipGrids[i]);

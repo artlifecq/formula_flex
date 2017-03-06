@@ -19,8 +19,6 @@ package org.mokylin.skin.app.tips
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var Icon_lock:feathers.controls.UIAsset;
-
 		public var bg_bai:feathers.controls.UIAsset;
 
 		public var bg_cheng:feathers.controls.UIAsset;
@@ -97,17 +95,6 @@ package org.mokylin.skin.app.tips
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function Icon_lock_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			Icon_lock = temp;
-			temp.name = "Icon_lock";
-			temp.styleName = "ui/common/tubiao/suo.png";
-			temp.x = 56;
-			temp.y = 53;
-			return temp;
-		}
-
 		private function __zhuangbeiTips_Skin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
@@ -287,7 +274,7 @@ package org.mokylin.skin.app.tips
 			temp.name = "grp_icon";
 			temp.x = 7;
 			temp.y = 36;
-			temp.elementsContent = [__zhuangbeiTips_Skin_UIAsset1_i(),Icon_lock_i()];
+			temp.elementsContent = [__zhuangbeiTips_Skin_UIAsset1_i()];
 			return temp;
 		}
 

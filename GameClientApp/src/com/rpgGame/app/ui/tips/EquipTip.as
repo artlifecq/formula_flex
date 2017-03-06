@@ -103,24 +103,17 @@ package com.rpgGame.app.ui.tips
 			var equipItemInfo:ClientItemInfo=RoleEquipmentManager.instance.getEquipInfoByIndex(_itemInfo.qItem.q_kind);//根据佩戴部位获取已经装备的装备信息
 			var equipFight:Number=FightValueUtil.getFightValueByEquip(_itemInfo);
 			var currentFight:int=0;
-			if(equipItemInfo){
-				currentFight=FightValueUtil.getFightValueByEquip(equipItemInfo);
-			}
 			_itemTip.numbers.number=equipFight;
 			_itemTip.tip_down.visible=false;
 			_itemTip.tip_up.visible=false;
-			if(equipFight>currentFight){//装备后战斗力提升
-				_itemTip.tip_up.visible=true;
-			}else if(equipFight<currentFight){
-				_itemTip.tip_down.visible=true;
+			if(equipItemInfo){
+				currentFight=FightValueUtil.getFightValueByEquip(equipItemInfo);
 			}
 			
 			_itemTip.isLock.visible=true;
 			if(_itemInfo.binded){
-				_itemTip.Icon_lock.visible=true;
 				_itemTip.isLock.text="[已绑定]"
 			}else{
-				_itemTip.Icon_lock.visible=false;
 				if(_itemInfo.qItem.q_bind==0){
 					_itemTip.isLock.visible=false;
 				}else if(_itemInfo.qItem.q_bind==1){
@@ -140,7 +133,14 @@ package com.rpgGame.app.ui.tips
 				}
 			}
 			
-			_itemTip.lbl_xuqiu.text=_itemInfo.qItem.q_level+"级";
+			if(_itemInfo.qItem.q_level==0){
+				name=HtmlTextUtil.getTextColor(0xCFC6AE,"无限制");
+			}else if(info.totalStat.level>=_itemInfo.qItem.q_level){
+				name=HtmlTextUtil.getTextColor(0xCFC6AE,_itemInfo.qItem.q_level+"级");
+			}else{
+				name=HtmlTextUtil.getTextColor(0xE1201C,_itemInfo.qItem.q_level+"级");
+			}
+			_itemTip.lbl_xuqiu.htmlText=name;
 			_itemTip.lbl_zhiye.text=getJobName(_itemInfo.qItem.q_job);
 			_itemTip.lbl_pingzhi.text=_itemInfo.qItem.q_levelnum.toString();
 			_itemTip.lbl_buwei.text=EquipType.EquipNames[_itemInfo.qItem.q_kind];
@@ -232,7 +232,11 @@ package com.rpgGame.app.ui.tips
 			_itemTip.grp_duibi.visible=false;
 			if(isShowDuiBi&&!_isDuibiShow){
 				showCurrentEquipInfo(equipItemInfo);
-				
+				if(equipFight>currentFight){//装备后战斗力提升
+					_itemTip.tip_up.visible=true;
+				}else if(equipFight<currentFight){
+					_itemTip.tip_down.visible=true;
+				}
 				var attValues2:Q_att_values=AttValueConfig.getAttInfoById(int(equipItemInfo.qItem.q_att_type));
 				var map2:HashMap=new HashMap();
 				
