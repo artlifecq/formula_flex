@@ -33,6 +33,9 @@ package com.rpgGame.app.ui.tips
 		
 		/** 装备格子 **/
 		private var _iconFace:IconCDFace;
+		
+		private var labelList:Vector.<Label>;
+		private var lines:Vector.<UIAsset>;
 
 		public function ItemTip()
 		{
@@ -47,17 +50,12 @@ package com.rpgGame.app.ui.tips
 		 */
 		private function initTip() : void
 		{
-//			_itemTip.labDecTxt.leading = 5;
-//			_itemTip.labDecTxt.color = StaticValue.COLOR_CODE_1;
-//			_itemTip.labDecTxt.maxWidth = _itemTip.labDecTxt.width = 240;
 			
-			_iconFace=new IconCDFace(IcoSizeEnum.SIZE_60);
+			_iconFace=new IconCDFace(IcoSizeEnum.ICON_64);
 			addChild(_iconFace);
-			_iconFace.setBg(GridBGType.GRID_SIZE_60);
-			_iconFace.x=5;
-			_iconFace.y=35;
-			_iconFace.setIconPoint(8, 8);
-			
+			_iconFace.x=8;
+			_iconFace.y=12;
+			labelList=new Vector.<Label>();
 			yinIcon=new UIAsset();
 			yinIcon.styleName="ui/common/tubiao/yinzi_24.png";
 		}
@@ -71,6 +69,11 @@ package com.rpgGame.app.ui.tips
 		{
 			_itemInfo = data as ClientItemInfo;
 
+			while(labelList.length!=0){
+				var l:Label=labelList.shift();
+				l.removeFromParent(true);
+			}
+			
 			if (_itemInfo == null)
 			{
 				return;
@@ -78,7 +81,8 @@ package com.rpgGame.app.ui.tips
 			
 			//设置装备格子信息
 			FaceUtil.SetItemGrid(_iconFace, _itemInfo, false);
-			
+			_iconFace.setQualityImageIconPoint(6,4);
+			_iconFace.countText.visible=false;
 			_itemTip.lbl_name.text=_itemInfo.qItem.q_name;
 			_itemTip.lbl_lock.visible=true;
 			if(_itemInfo.binded){
@@ -155,13 +159,13 @@ package com.rpgGame.app.ui.tips
 			createLabel(name,value);
 			curY+=22;
 			
-			name=HtmlTextUtil.getTextColor(nameColor,"商城定价:");
+			name=HtmlTextUtil.getTextColor(nameColor,"售价:");
 			value=HtmlTextUtil.getTextColor(valueColor2,"     "+_itemInfo.qItem.q_sell_price.toString());
 			_itemTip.container.addChild(yinIcon);
 			
 			label=createLabel(name,value);
 			yinIcon.x=50;
-			yinIcon.y=curY;
+			yinIcon.y=curY-5;
 			_itemTip.bg.height=curY+25;
 		}
 		
@@ -172,6 +176,7 @@ package com.rpgGame.app.ui.tips
 			label.htmlText=name+value;
 			label.y=curY;
 			label.x=curX;
+			labelList.push(label);
 			_itemTip.container.addChild(label);
 			return label;
 		}

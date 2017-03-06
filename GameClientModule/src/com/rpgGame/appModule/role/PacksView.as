@@ -9,6 +9,8 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.app.view.uiComponent.menu.Menu;
+	import com.rpgGame.appModule.bag.ItemBatchPanel;
 	import com.rpgGame.appModule.bag.ItemSplitPanel;
 	import com.rpgGame.appModule.common.GoodsContainerPanel;
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
@@ -29,7 +31,6 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.type.MenuType;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.GridBGType;
-	import com.rpgGame.coreData.utils.MoneyUtil;
 	
 	import flash.geom.Point;
 	
@@ -62,6 +63,7 @@ package com.rpgGame.appModule.role
 		
 		private var storagePanel:StoragePanel;
 		private var itemSplitPanel:ItemSplitPanel;
+		private var itemBatchPanel:ItemBatchPanel;
 		private var toStorage:Boolean;
 		private var toStorageGridInfo:GridInfo;
 		
@@ -94,6 +96,7 @@ package com.rpgGame.appModule.role
 		{
 			storagePanel=new StoragePanel();
 			itemSplitPanel=new ItemSplitPanel();
+			itemBatchPanel=new ItemBatchPanel();
 			
 			goodsContainer = new GoodsContainerPanel(_skin.lst_pack,ItemContainerID.BackPack,createItemRender);
 			goodsContainer.acceptDropFromContainerIdArr = [ItemContainerID.BackPack, ItemContainerID.Storage, ItemContainerID.Role, ItemContainerID.Mount];
@@ -132,9 +135,9 @@ package com.rpgGame.appModule.role
 			
 			var stat:SpriteStat=MainRoleManager.actorInfo.totalStat;
 			_skin.txt_lijin.text =stat.getResData(CharAttributeType.RES_BIND_GOLD)+"";//绑金
-			_skin.txt_yingzi.htmlText = MoneyUtil.getAutoHtmlMoneyString(stat.getResData(CharAttributeType.RES_MONEY) );//银子
+			_skin.txt_yingzi.text = stat.getResData(CharAttributeType.RES_MONEY) +"";//银子
 			_skin.txt_yuanbao.text = stat.getResData(CharAttributeType.RES_GOLD)+"";//金子
-			_skin.txt_yingzibang.htmlText = MoneyUtil.getAutoHtmlMoneyString(stat.getResData(CharAttributeType.RES_BIND_MONEY) );//绑银
+			_skin.txt_yingzibang.text = stat.getResData(CharAttributeType.RES_BIND_MONEY)+"";//绑银
 			
 			TipTargetManager.remove(_skin.txt_lijin);
 			TipTargetManager.remove(_skin.txt_yingzi);
@@ -240,7 +243,7 @@ package com.rpgGame.appModule.role
 			if(item.containerID==ItemContainerID.Storage){
 				ItemSender.StoreTobag(item.itemInfo.itemId,dstGrid.index);
 			}else if(item.containerID==ItemContainerID.Role){
-				ItemSender.unwearEquip(item.itemInfo.itemId);
+				ItemSender.unwearEquip(item.itemInfo.itemId,dstGrid.index);
 			}else{
 				ItemSender.moveItem(srcGrid,dstGrid);
 			}
@@ -273,11 +276,13 @@ package com.rpgGame.appModule.role
 		
 		protected function onDoubleClick(grid:IconCDFace):void
 		{
+			Menu.GetInstance().hide();
 			ItemUseManager.useItem(grid.faceInfo as ClientItemInfo);
 		}
 		
 		protected function onRightMouse(grid:IconCDFace):void
 		{
+			Menu.GetInstance().hide();
 			ItemUseManager.useItem(grid.faceInfo as ClientItemInfo);
 		}
 		
@@ -288,6 +293,7 @@ package com.rpgGame.appModule.role
 		 */		
 		protected function onTouchGrid( grid:DragDropItem ):void
 		{
+			Menu.GetInstance().hide();
 			if(toStorage){//存到仓库去
 				if(grid.gridInfo.data==null){
 					return;
@@ -336,9 +342,21 @@ package com.rpgGame.appModule.role
 			EventManager.addEvent(ItemEvent.CHANGE_ACCESS_STATE,changeAccessState);
 			
 			EventManager.addEvent(ItemEvent.ITEM_PRE_SPLITE, preSplit);
+			EventManager.addEvent(ItemEvent.ITEM_BATCH, preBatch);
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
 			
 			goodsContainer.addEvents();
+		}
+		
+		private function preBatch(info:ClientItemInfo):void
+		{
+			if(info.count <= 1)
+			{
+				return;
+			}
+			itemBatchPanel.show(info,"",this._skin.container);
+			itemBatchPanel.x=235;
+			itemBatchPanel.y=160;
 		}
 		
 		/**
@@ -381,7 +399,7 @@ package com.rpgGame.appModule.role
 			if(info&&info.containerID!=ItemContainerID.BackPack){
 				return;
 			}
-			
+			Menu.GetInstance().hide();
 			BackPackManager.instance.tabbarIndex = _skin.tab_pack.selectedIndex;
 			curType =TAB_TYPE[ _skin.tab_pack.selectedIndex ];
 			
@@ -435,7 +453,7 @@ package com.rpgGame.appModule.role
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);
-			
+			EventManager.removeEvent(ItemEvent.ITEM_BATCH, preBatch);
 			EventManager.removeEvent(ItemEvent.CHANGE_ACCESS_STATE,changeAccessState);
 			EventManager.removeEvent(ItemEvent.ITEM_PRE_SPLITE, preSplit);
 			

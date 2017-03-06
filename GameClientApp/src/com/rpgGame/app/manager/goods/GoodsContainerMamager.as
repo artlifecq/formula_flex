@@ -255,7 +255,8 @@ package com.rpgGame.app.manager.goods
 					EventManager.dispatchEvent(ItemEvent.ITEM_CHANG,info);
 					break;
 				case ItemChangeType.DELETE_ITEM:
-					_goodsList[info.index] = null;
+					_goodsList[info.index] = info;
+					EventManager.dispatchEvent(ItemEvent.ITEM_CHANG,info);
 					break;
 				case ItemChangeType.CHANGE_ITEM:
 					_goodsList[info.index] = info;

@@ -259,7 +259,7 @@ package com.rpgGame.app.manager.fight
 				}
 				else
 				{
-					showAttackFace(hurter.attackFaceContainer, typeRes, numberType, hurtAmount, null, null, tweenFun, from, end, scaleAgo, scaleLater, isLeftShow);
+					showAttackFace(hurter.attackFace, typeRes, numberType, hurtAmount, null, null, tweenFun, from, end, scaleAgo, scaleLater, isLeftShow);
 				}
 			}
 		}
@@ -289,7 +289,7 @@ package com.rpgGame.app.manager.fight
 					scaleLater=1;
 					numberColor=NUMBER_PC_HPSUB;
 					showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenUp);
-					break;
+					return;
 				case EnumHurtType.ADDMP: //回蓝
 					numberColor = NUMBER_PC_MPREC;
 					break;
@@ -357,7 +357,7 @@ package com.rpgGame.app.manager.fight
 		 */
 		public static function showQueueAttackFace($sc : SceneRole, $attackType : String = "", numberRes : String = "", $attackValue : * = 0, $scaleAgo : Number = 1, $scaleLater : Number = 1, $from : Point = null, $end : Point = null, $specialType : String = null, $specialPos : Point = null, $tweenFun : Function = null, $isLeftShow : Boolean = false, $queueTm : uint = 50) : void
 		{
-			_queueThread.push(showAttackFace, [$sc.attackFaceContainer, $attackType, numberRes, $attackValue, $specialType, $specialPos, $tweenFun, $from, $end, $scaleAgo, $scaleLater, $isLeftShow], $queueTm);
+			_queueThread.push(showAttackFace, [$sc.attackFace, $attackType, numberRes, $attackValue, $specialType, $specialPos, $tweenFun, $from, $end, $scaleAgo, $scaleLater, $isLeftShow], $queueTm);
 		}
 
 		/**

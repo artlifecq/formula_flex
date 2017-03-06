@@ -10,8 +10,12 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.ItemSender;
+	import com.rpgGame.app.utils.MenuUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
+	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.app.view.uiComponent.menu.Menu;
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
+	import com.rpgGame.core.events.AvatarEvent;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
@@ -94,7 +98,17 @@ package com.rpgGame.appModule.role
 			var render:GridItemRender = new GridItemRender(IcoSizeEnum.ICON_48,bg);
 			var grid:DragDropItem = render.getGrid();
 			grid.onTouchEndCallBack = onTouchGrid;
+			grid.doubleClickFun=onDoubleClick
 			return grid;
+		}
+		
+		private function onDoubleClick(grid:IconCDFace):void
+		{
+			Menu.GetInstance().hide();
+			var item:ClientItemInfo=grid.faceInfo as ClientItemInfo;
+			if(item){
+				ItemSender.unwearEquip(item.itemInfo.itemId);
+			}
 		}
 		
 		private function onTouchGrid(grid:DragDropItem ):void
@@ -177,6 +191,7 @@ package com.rpgGame.appModule.role
 			var grid:DragDropItem = getGridByIndex(index);
 			if(!grid)return;
 			grid.gridInfo = gridInfo;
+			grid.setQualityImageIconPoint(6,6);
 		}
 		
 		/**
@@ -206,6 +221,15 @@ package com.rpgGame.appModule.role
 			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_GET, getItem);
+			
+			EventManager.addEvent(AvatarEvent.EQUIP_CHANGE, equipChange);
+		}
+		
+		private function equipChange(role:SceneRole):void
+		{
+			if(role== MainRoleManager.actor){
+				updateRole();
+			}
 		}
 		
 		private function getItem(info:GridInfo):void
@@ -233,6 +257,7 @@ package com.rpgGame.appModule.role
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_GET, getItem);
+			EventManager.removeEvent(AvatarEvent.EQUIP_CHANGE, equipChange);
 		}
 		
 		/**
@@ -288,7 +313,7 @@ package com.rpgGame.appModule.role
 		
 		private function initDatas(containerId:int):void 
 		{
-			if(containerId!=ItemContainerID.BackPack){
+			if(containerId!=ItemContainerID.Role){
 				return;
 			}
 			EventManager.removeEvent(ItemEvent.ITEM_INIT,initDatas);
@@ -343,6 +368,8 @@ package com.rpgGame.appModule.role
 				return;
 			}
 			var playerData : RoleData = player.data as RoleData;
+			
+			
 			this._showAvatarData.avatarInfo.setBodyResID(playerData.avatarInfo.bodyResID, playerData.avatarInfo.bodyAnimatResID);
 			this._showAvatarData.avatarInfo.hairResID = playerData.avatarInfo.hairResID;
 			this._showAvatarData.avatarInfo.weaponResID = playerData.avatarInfo.weaponResID;

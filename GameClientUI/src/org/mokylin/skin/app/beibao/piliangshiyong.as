@@ -37,11 +37,7 @@ package org.mokylin.skin.app.beibao
 
 		public var icon_all:feathers.controls.UIAsset;
 
-		public var lbl_all:feathers.controls.Label;
-
 		public var lbl_currentNum:feathers.controls.Label;
-
-		public var lbl_lock:feathers.controls.Label;
 
 		public var lbl_name:feathers.controls.Label;
 
@@ -194,7 +190,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "contents";
 			temp.x = 30;
 			temp.y = 49;
-			temp.elementsContent = [icon_all_i(),lbl_all_i(),lbl_name_i(),lbl_num_i(),lbl_lock_i()];
+			temp.elementsContent = [icon_all_i(),lbl_name_i(),lbl_num_i()];
 			return temp;
 		}
 
@@ -206,22 +202,6 @@ package org.mokylin.skin.app.beibao
 			temp.styleName = "ui/common/gezikuang/tubiaodikuang/60.png";
 			temp.x = 0;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function lbl_all_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbl_all = temp;
-			temp.name = "lbl_all";
-			temp.fontSize = 12;
-			temp.text = "100";
-			temp.textAlign = "right";
-			temp.color = 0xF1EFC7;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 61;
-			temp.x = 7;
-			temp.y = 52;
 			return temp;
 		}
 
@@ -239,20 +219,6 @@ package org.mokylin.skin.app.beibao
 			temp.width = 62;
 			temp.x = 109;
 			temp.y = 5;
-			return temp;
-		}
-
-		private function lbl_lock_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbl_lock = temp;
-			temp.name = "lbl_lock";
-			temp.height = 24;
-			temp.text = "【已绑定】";
-			temp.color = 0xd23735;
-			temp.width = 76;
-			temp.x = 222;
-			temp.y = 51;
 			return temp;
 		}
 

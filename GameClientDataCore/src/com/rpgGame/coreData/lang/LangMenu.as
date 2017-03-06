@@ -94,6 +94,8 @@ package com.rpgGame.coreData.lang
 		public static const REMOVE_VICE_LEADER:String = "REMOVE_VICE_LEADER";
 		 /**  取出 */
 		public static const GET_ITEM:String = "GET_ITEM";
+		 /**  批量 */
+		public static const BATCH_ITM:String = "BATCH_ITM";
 
 	}
 }

@@ -30,24 +30,6 @@ package com.rpgGame.app.scene
 		private static var _pool : InstancePool = new InstancePool("SceneRole", 600);
 		
 		private static var _cnt : int = 0;
-
-		public function get attackFace():AttackFaceSprite
-		{
-			return _attackFace;
-		}
-
-		public function set attackFace(value:AttackFaceSprite):void
-		{
-			_attackFace = value;
-		}
-		
-		public function get attackFaceContainer() : Sprite
-		{
-			if (_attackFace == null)
-				return null;
-			
-			return _attackFace.container;
-		}
 		
 		/**
 		 * 生成一个RenderUnit
@@ -126,6 +108,16 @@ package com.rpgGame.app.scene
 			_dialogFace = value;
 		}
 		
+		public function get attackFace():AttackFaceSprite
+		{
+			return _attackFace;
+		}
+		
+		public function set attackFace(value:AttackFaceSprite):void
+		{
+			_attackFace = value;
+		}
+		
 		public function get boneNameContainer() : Sprite
 		{
 			if (_headFace == null)
@@ -147,6 +139,9 @@ package com.rpgGame.app.scene
 				_headFace.show();
 			if (_dialogFace)
 				_dialogFace.show();
+			if (_attackFace)
+				_attackFace.show();
+			
 		}
 		
 		override protected function removeFromGraphic() : void
@@ -156,6 +151,8 @@ package com.rpgGame.app.scene
 				_headFace.hide();
 			if (_dialogFace)
 				_dialogFace.hide();
+			if (_attackFace)
+				_attackFace.hide();
 		}
 		
 		override public function setAttachVisible(attachType : String, visible : Boolean) : void
@@ -204,6 +201,11 @@ package com.rpgGame.app.scene
 			{
 				_dialogFace.recycleSelf();
 				_dialogFace = null;
+			}
+			if (_attackFace)
+			{
+				_attackFace.recycleSelf();
+				_attackFace = null;
 			}
 			mapAreaTypes.length = 0;
 			isWheel = false;

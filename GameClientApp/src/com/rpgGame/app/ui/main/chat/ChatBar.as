@@ -606,7 +606,7 @@ package com.rpgGame.app.ui.main.chat {
         
         private function sendMsg() : void 
 		{
-			/*var txt:String=this._inputText.text;
+			var txt:String=this._inputText.text;
 			switch(txt){
 				case "exp":
 					FightFaceHelper.showAttChange(EnumHurtType.EXP,5000);
@@ -627,7 +627,6 @@ package com.rpgGame.app.ui.main.chat {
 					FightFaceHelper.showHurtText(MainRoleManager.actor,testRole,EnumHurtType.SPELL_HURT_TYPE_MISS,-2358);
 					break;
 			}
-			return ;*/
 			
 			if("" == this._inputText.text )
 			{
