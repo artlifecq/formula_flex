@@ -131,6 +131,7 @@ package com.game.engine3D.scene.render
 		private var _rootObj3ds : Vector.<ObjectContainer3D>;
 		private var _childObj3ds : Vector.<ObjectContainer3D>;
 		private var _castsShadows : Boolean;
+		private var _planarRenderLayer : uint = 1;
 		private var _showBounds : Boolean;
 		
 		public var useFog : Boolean;
@@ -234,7 +235,8 @@ package com.game.engine3D.scene.render
 		private var _blendUrl : String;
 		private var _blendBias : Number;
 		private var _useIndependentColor : Boolean;
-		
+		private var _useIndependentDiffuseColor : Boolean;
+		private var _independentDiffuseColor : uint;
 		private var _layerTypeByName : Dictionary;
 		private var _visibleByName : Dictionary;
 		private var _zOffsetByName : Dictionary;
@@ -696,6 +698,32 @@ package com.game.engine3D.scene.render
 		{
 			return _castsShadows;
 		}
+		
+		public function set planarRenderLayer(value : uint) : void
+		{
+			if (_planarRenderLayer == value)
+				return;
+			_planarRenderLayer = value;
+			if (_animatorElements)
+			{
+				for each (var compositeMesh : CompositeMesh in _animatorElements)
+				{
+					compositeMesh.planarRenderLayer = value;
+				}
+			}
+			if (_meshes)
+			{
+				for each (var mesh : Mesh in _meshes)
+				{
+					mesh.planarRenderLayer = value;
+				}
+			}
+		}
+		
+		public function get planarRenderLayer() : uint
+		{
+			return _planarRenderLayer;
+		}
 
 		private function initRenderUnitContent() : void
 		{
@@ -716,6 +744,7 @@ package com.game.engine3D.scene.render
 				for each (var animatElement : CompositeMesh in _animatorElements)
 				{
 					animatElement.castsShadows = _castsShadows;
+					animatElement.planarRenderLayer = _planarRenderLayer;
 					animatElement.showBounds = _showBounds;
 					animatElement.extra = this;
 					animatElement.pickingCollider = PickingColliderType.BOUNDS_ONLY;
@@ -741,6 +770,7 @@ package com.game.engine3D.scene.render
 				for each (var mesh : Mesh in _meshes)
 				{
 					mesh.castsShadows = _castsShadows;
+					mesh.planarRenderLayer = _planarRenderLayer;
 					mesh.showBounds = _showBounds;
 					mesh.extra = this;
 					mesh.pickingCollider = PickingColliderType.BOUNDS_ONLY;
@@ -780,6 +810,7 @@ package com.game.engine3D.scene.render
 			}
 			_simpleShadowMesh.y = 1;
 			_simpleShadowMesh.scaleX = _simpleShadowMesh.scaleZ = radius * _simpleShadowBaseScale;
+			_simpleShadowMesh.layerType = EntityLayerType.DEFAULT | EntityLayerType.HARD_TRANSPARENT;
 			_graphicDis.addChild(_simpleShadowMesh);
 		}
 		
@@ -1726,12 +1757,16 @@ package com.game.engine3D.scene.render
 			{
 				_renderUnitData.setIndependentColorTransform(_independentColorTransform);
 			}
+			if (_useIndependentDiffuseColor)
+			{
+				_renderUnitData.setIndependentDiffuseColor(_independentDiffuseColor);
+			}
 			if (_fadeAlphaUrl)
 			{
 				_renderUnitData.addFadeAlpha(_fadeAlphaUrl, _fadeAlphaRect, validateGraphic);
 				validateGraphic();
 			}
-			_renderUnitData.validateMeterials();
+			//_renderUnitData.validateMeterials();
 		}
 
 		public function setIndependentTexture(url : String, materialName : String = null) : void
@@ -1905,6 +1940,11 @@ package com.game.engine3D.scene.render
 			validateEffect();
 		}
 
+		/**
+		 * 这个方法已经过时了
+		 * @param value
+		 *
+		 */
 		public function set depthCompareMode(value : String) : void
 		{
 			if (_depthCompareMode == value)
@@ -1912,7 +1952,7 @@ package com.game.engine3D.scene.render
 			_depthCompareMode = value;
 			if (_renderUnitData == null)
 				return;
-			_renderUnitData.validateMeterials();
+			//_renderUnitData.validateMeterials();
 		}
 
 		override public function startRender() : void
@@ -2870,6 +2910,8 @@ package com.game.engine3D.scene.render
 			_blendUrl = null;
 			_blendBias = 0;
 			_useIndependentColor = false;
+			_useIndependentDiffuseColor = false;
+			_independentDiffuseColor = 0;
 			_setVisibleMap = new Dictionary(true);
 			_layerTypeByName = new Dictionary(true);
 			_visibleByName = new Dictionary(true);
@@ -2972,6 +3014,26 @@ package com.game.engine3D.scene.render
 			if (_renderUnitData)
 			{
 				_renderUnitData.restoreColor();
+			}
+		}
+		
+		public function setIndependentDiffuseColor(value : uint) : void
+		{
+			_useIndependentDiffuseColor = true;
+			_independentDiffuseColor = value;
+			if (_renderUnitData)
+			{
+				_renderUnitData.setIndependentDiffuseColor(_independentDiffuseColor);
+			}
+		}
+		
+		public function restoreDiffuseColor() : void
+		{
+			_useIndependentDiffuseColor = false;
+			_independentDiffuseColor = 0;
+			if (_renderUnitData)
+			{
+				_renderUnitData.restoreDiffuseColor();
 			}
 		}
 
@@ -3775,6 +3837,8 @@ package com.game.engine3D.scene.render
 			_blendUrl = null;
 			_blendBias = 0;
 			_useIndependentColor = false;
+			_useIndependentDiffuseColor = false;
+			_independentDiffuseColor = 0;
 			_setVisibleMap = null;
 			_layerTypeByName = null;
 			_visibleByName = null;
