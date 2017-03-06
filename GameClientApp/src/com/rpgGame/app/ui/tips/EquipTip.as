@@ -73,12 +73,11 @@ package com.rpgGame.app.ui.tips
 		private function initTip():void
 		{
 			//装备格子
-			_iconFace=new IconCDFace(IcoSizeEnum.SIZE_60);
+			_iconFace=new IconCDFace(IcoSizeEnum.ICON_64);
+			_iconFace.alwayShowCount=false;
 			addChild(_iconFace);
-			_iconFace.setBg(GridBGType.GRID_SIZE_60);
 			_iconFace.x=5;
 			_iconFace.y=35;
-			_iconFace.setIconPoint(8, 8);
 			_itemTip.container.addChild(_iconFace);
 			labelList=new Vector.<Label>();
 			lines=new Vector.<UIAsset>();
@@ -90,7 +89,7 @@ package com.rpgGame.app.ui.tips
 		{
 			_itemInfo = data as ClientItemInfo;
 			FaceUtil.SetItemGrid(_iconFace, _itemInfo, false);
-			
+			_iconFace.setQualityImageIconPoint(8,7);
 			var info:HeroData=MainRoleManager.actorInfo;
 			while(labelList.length!=0){
 				var l:Label=labelList.shift();
@@ -159,6 +158,9 @@ package com.rpgGame.app.ui.tips
 			var name:String;
 			var value:String;
 			var attValues1:Q_att_values=AttValueConfig.getAttInfoById(int(_itemInfo.qItem.q_att_type));
+			if(!attValues1){
+				return ;
+			}
 			var map1:HashMap=new HashMap();
 		
 			var label:Label;
@@ -181,9 +183,8 @@ package com.rpgGame.app.ui.tips
 				if(v==0){
 					continue;
 				}
-				if(num%2==0){
-					curY+=25;
-				}
+				curY+=25;
+				
 				num++;
 				name=CharAttributeType.getCNName(id);
 				if(name.indexOf("率")!=-1||name.indexOf("百分比")!=-1){
@@ -194,11 +195,11 @@ package com.rpgGame.app.ui.tips
 				name=HtmlTextUtil.getTextColor(0x8B8D7B,name+":");
 				value=HtmlTextUtil.getTextColor(0xCFC6AE,v+per);
 				label=createLabel(name,value);
-				if(num%2!=0){
+//				if(num%2!=0){
 					label.x=10;
-				}else{
-					label.x=155;
-				}
+//				}else{
+//					label.x=155;
+//				}
 				label.y=curY;
 			}
 			

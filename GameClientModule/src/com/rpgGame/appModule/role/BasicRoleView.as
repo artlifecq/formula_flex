@@ -42,13 +42,14 @@ package com.rpgGame.appModule.role
 			_skin.txt_waigong.text=info.totalStat.getStatValueString(CharAttributeType.WAI_GONG);
 			_skin.txt_neigong.text=info.totalStat.getStatValueString(CharAttributeType.NEI_GONG);
 			_skin.txt_gongsu.text=info.totalStat.getStatValueString(CharAttributeType.ATT_SPEED);
-			_skin.txt_mingzhonglv.text=info.totalStat.getStatValueString(CharAttributeType.HIT);
+			_skin.txt_mingzhonglv.text=info.totalStat.getStatValueString(CharAttributeType.HIT)+"%";
 			_skin.txt_baojikangxing.text=info.totalStat.getStatValueString(CharAttributeType.ANTI_CRIT_PER);
-			_skin.txt_bishanlv.text=info.totalStat.getStatValueString(CharAttributeType.MISS);
-			_skin.txt_fangyubaifenbi.text=info.totalStat.getStatValueString(CharAttributeType.DEFENSE_PER);
-			_skin.txt_shengminhuifu.text=info.totalStat.getStatValueString(CharAttributeType.HP_REC);
-			_skin.txt_zhiliaotishen.text=info.totalStat.getStatValueString(CharAttributeType.CURE_LIFT);
-			_skin.txt_baojijiacheng.text=info.totalStat.getStatValueString(CharAttributeType.CRIT);			
+			_skin.txt_bishanlv.text=info.totalStat.getStatValueString(CharAttributeType.MISS)+"%";
+			_skin.txt_fangyubaifenbi.text=info.totalStat.getStatValueString(CharAttributeType.DEFENSE_PER)+"%";
+			_skin.txt_shengminhuifu.text=info.totalStat.getStatValueString(CharAttributeType.HP_REC)+"/5秒";
+			_skin.txt_zhiliaotishen.text=info.totalStat.getStatValueString(CharAttributeType.CURE_LIFT)+"%";
+			_skin.txt_baojilv.text=info.totalStat.getStatValueString(CharAttributeType.CRIT_PER)+"%";
+			_skin.txt_baojijiacheng.text=info.totalStat.getStatValueString(CharAttributeType.CRIT)+"%";		
 		}
 		
 		public function onHide():void

@@ -271,7 +271,6 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Slider = new feathers.controls.Slider();
 			slider = temp;
 			temp.name = "slider";
-			temp.height = 11;
 			temp.direction = Slider.DIRECTION_HORIZONTAL
 			temp.styleClass = org.mokylin.skin.component.slider.skin_Slider;
 			temp.value = 2;

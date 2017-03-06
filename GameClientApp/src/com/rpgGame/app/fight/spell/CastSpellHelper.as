@@ -108,22 +108,22 @@ package com.rpgGame.app.fight.spell
 			return relateSpells[_relateSpellIndex];
 		}
 
-		public static function shortcutsTryCaseSpell(spellID : int) : void
+		public static function shortcutsTryCaseSpell(spellID : int, ignoreLock : Boolean = false) : void
 		{
             CONFIG::netDebug {
                 NetDebug.LOG("CastSpellHelper shortcutsTryCaseSpell spellID:" + spellID);
             }
             var caseInfo : CastSpellInfo = new CastSpellInfo(getSpellData(spellID));
-			var cased : Boolean = tryCaseSpell(caseInfo);
+			var cased : Boolean = tryCaseSpell(caseInfo, null, false, ignoreLock);
 //			if (!cased)
 //				TrusteeshipManager.getInstance().nextSpell = getSpellData(spellType);
 		}
 
-		public static function tryCaseSpell(caseInfo : CastSpellInfo, roleList : Vector.<SceneRole> = null, autoAtkNearRole : Boolean = false) : Boolean
+		public static function tryCaseSpell(caseInfo : CastSpellInfo, roleList : Vector.<SceneRole> = null, autoAtkNearRole : Boolean = false, ignoreLock : Boolean = false) : Boolean
 		{
 			_roleList = roleList;
 			_autoAtkNearRole = autoAtkNearRole;
-			var caseState : int = caseSpell(caseInfo, true);
+			var caseState : int = caseSpell(caseInfo, true, ignoreLock);
 			if (!caseInfo.caseSpellData)
 				return false;
             var info : HeroData = MainRoleManager.actorInfo;
@@ -194,7 +194,7 @@ package com.rpgGame.app.fight.spell
 				var range : int = caseInfo.range;
 				if ((!ref.path || ref.path.length < 1) && dist <= range * range)
 				{
-					caseState = caseSpell(caseInfo);
+					caseState = caseSpell(caseInfo, false, ignoreLock);
 					if (caseState == CASE_STATE_SUCCEED)
 					{
 						requestReleaseSpell();
@@ -219,7 +219,7 @@ package com.rpgGame.app.fight.spell
 		 * @return 
 		 * 
 		 */		
-		public static function caseSpell(castInfo : CastSpellInfo, relateSelectable : Boolean = false) : int
+		public static function caseSpell(castInfo : CastSpellInfo, relateSelectable : Boolean = false, ignoreLock : Boolean = false) : int
 		{
 			if (!castInfo.spellData)
 			{
@@ -346,7 +346,7 @@ package com.rpgGame.app.fight.spell
 				}
 				return CASE_STATE_FAIL;
 			}
-			var state : int = setSpellTarget(castInfo);
+			var state : int = setSpellTarget(castInfo, ignoreLock);
 			return state;
 		}
 
@@ -356,7 +356,7 @@ package com.rpgGame.app.fight.spell
 		 * @return
 		 *
 		 */
-		private static function setSpellTarget(castInfo : CastSpellInfo) : int
+		private static function setSpellTarget(castInfo : CastSpellInfo, ignoreLock : Boolean = false) : int
 		{
 			var spellData : Q_skill_model = castInfo.caseSpellData;
 			var spellEffectData : Q_SpellEffect = castInfo.spellEffectData;
@@ -404,8 +404,12 @@ package com.rpgGame.app.fight.spell
 			{
                 releaseRange = releaseRange - DEVIATION_RANGE;
                 releaseRange = releaseRange < 0 ? 0 : releaseRange;
+                if (4 == spellData.q_skill_type) {
+                    // 位移类忽略锁定目标
+                    ignoreLock = true;
+                }
                 do {
-                    if (null == SceneRoleSelectManager.selectedRole) {
+                    if (null == SceneRoleSelectManager.selectedRole || ignoreLock) {
                         // 如果没有锁定目标
                         if (1 == spellData.q_is_locking_spell) {
                             // 该技能需要锁定目标才能释放
@@ -545,6 +549,8 @@ package com.rpgGame.app.fight.spell
                     releaseTargetPos = new Point(targetRole.x, targetRole.z);
                     targetPos = new Point(selfPos.x, selfPos.y);
                     releasePos = new Point(releaseTargetPos.x, releaseTargetPos.y);
+
+                    MainRoleManager.actor.faceToGround(releaseTargetPos.x, releaseTargetPos.y);
                     
                     if (targetRole.isMainChar) {
                         angle = 270 - MainRoleManager.actor.rotationY;
@@ -913,20 +919,51 @@ package com.rpgGame.app.fight.spell
 			return targetPos;
 		}*/
 
-		public static function getNearestCanAtkRole(spellData : Q_skill_model) : SceneRole
+		public static function getNearestCanAtkRole(spellData : Q_skill_model, next : Boolean) : SceneRole
 		{
 			var list : Vector.<SceneRole> = _roleList ? _roleList : SceneManager.getSceneRoleList();
 			list.sort(onSortNearestRole);
 			//
+            var find : Boolean = false;
 			for each (var role : SceneRole in list)
 			{
 				if (role && role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
 				{
 					var modeState : int = FightManager.getFightRoleState(role, spellData);
-					if (modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY)
-						return role;
+					if (modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY) {
+                        continue;
+                    }
+                    if (MainRoleManager.actor == role) {
+                        // 自己
+                        continue;
+                    }
+                    var dis : Number = MathUtil.getDistanceNoSqrt(MainRoleManager.actor.x, MainRoleManager.actor.z, role.x, role.z);
+                    if (dis > 250000) {
+                        // 超过10格
+                        if (SceneCharType.PLAYER == role.type) {
+                            continue;
+                        }
+                        break;
+                    }
+                    if (SceneCharType.PLAYER == role.type) {
+                        return role;
+                    }
+                    if (null == SceneRoleSelectManager.selectedRole) {
+                        return role;
+                    }
+                    if (!next) {
+                        return role;
+                    }
+                    if (SceneRoleSelectManager.selectedRole == role) {
+                        find = true;
+                    } else if (find) {
+                        return role;
+                    }
 				}
 			}
+            if (find) {
+                return getNearestCanAtkRole(spellData, false);
+            }
 			return null;
 		}
 
@@ -938,6 +975,9 @@ package com.rpgGame.app.fight.spell
 		 */
 		private static function onSortNearestRole(roleA : SceneRole, roleB : SceneRole) : int
 		{
+            if (roleA.type != roleB.type) {
+                return parseInt(roleA.type) - parseInt(roleB.type);
+            }
 			var disA : Number = MathUtil.getDistanceNoSqrt(MainRoleManager.actor.x, MainRoleManager.actor.z, roleA.x, roleA.z);
 			var disB : Number = MathUtil.getDistanceNoSqrt(MainRoleManager.actor.x, MainRoleManager.actor.z, roleB.x, roleB.z);
 			if (disA > disB)

@@ -40,9 +40,6 @@ package com.rpgGame.appModule.role
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
 		{
-			CONFIG::netDebug {
-				NetDebug.LOG("[AppModule] [RolePanel] show");
-			}
 			super.show(data, openTable, parentContiner);
 			basicView.show();
 			avatartView.show();
@@ -55,6 +52,17 @@ package com.rpgGame.appModule.role
 			if(packsView.onTouchTarget(target)){
 				return;
 			}
+		}
+		
+		/**
+		 * 当舞台尺寸变化后
+		 * @param sw 舞台宽
+		 * @param sh 舞台高
+		 *
+		 */
+		override protected function onStageResize(sw : int, sh : int) : void
+		{
+			super.onStageResize(sw,sh);
 		}
 		
 		override public function hide():void

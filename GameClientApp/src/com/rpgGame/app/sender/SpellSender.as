@@ -1,7 +1,13 @@
 package com.rpgGame.app.sender
 {
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.app.manager.fight.FightFaceHelper;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.SceneRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
+	import com.rpgGame.coreData.type.EnumHurtType;
 	import com.rpgGame.netData.fight.message.CSPerformPosSkillMessage;
 	import com.rpgGame.netData.fight.message.CSPerformTargetSkillMessage;
 	

@@ -24,6 +24,8 @@ package org.mokylin.skin.app.beibao
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var __cangku_Skin_TileLayout1:feathers.layout.IVirtualLayout;
+
 		public var bg:feathers.controls.UIAsset;
 
 		public var btnClose:feathers.controls.Button;
@@ -52,6 +54,12 @@ package org.mokylin.skin.app.beibao
 			this.elementsContent = [__cangku_Skin_Group1_i(),bg_i(),__cangku_Skin_UIAsset5_i(),__cangku_Skin_UIAsset6_i(),__cangku_Skin_UIAsset7_i(),__cangku_Skin_Label1_i(),lb_Num_i(),btn_zhengli_i(),btn_chucun_i(),lb_Title_i(),btnClose_i(),lst_pack_i()];
 			
 			states = {
+				init:[
+						{target:"__cangku_Skin_TileLayout1",
+							name:"paddingLeft",
+							value:0
+						}
+					]
 			};
 			skinNames={};
 		}
@@ -83,6 +91,10 @@ package org.mokylin.skin.app.beibao
 		private function __cangku_Skin_TileLayout1_i():feathers.layout.TiledRowsLayout
 		{
 			var temp:feathers.layout.TiledRowsLayout = new feathers.layout.TiledRowsLayout();
+			temp.paddingBottom = 0;
+			__cangku_Skin_TileLayout1 = temp;
+			temp.paddingRight = 0;
+			temp.paddingTop = 0;
 			temp.requestedColumnCount = 7;
 			temp.requestedRowCount = 6;
 			return temp;
@@ -240,7 +252,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "lst_pack";
 			temp.height = 314;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
-			temp.width = 346;
+			temp.width = 343;
 			temp.x = 9;
 			temp.y = 31;
 			temp.layout = __cangku_Skin_TileLayout1_i();

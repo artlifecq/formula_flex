@@ -31,6 +31,7 @@ package com.rpgGame.app.ui.main.smallmap
     import starling.display.Sprite;
     import starling.events.Event;
     import starling.text.TextFieldAutoSize;
+
     
     /**
      * 地图角色图标

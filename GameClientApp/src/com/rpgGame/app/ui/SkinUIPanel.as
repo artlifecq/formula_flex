@@ -185,7 +185,7 @@ package com.rpgGame.app.ui
 				if (touch.phase == TouchPhase.MOVED)
 				{
 					//仅点中背景层时才允许被拖动,bg必须是第０层
-					if (this.getChildByName("bg") != touch.target&&this.getChildAt(0) != touch.target)
+					if (this.getChildByName("bg") != touch.target&&this.getChildAt(0) != touch.target&&touch.target.name!="bg")
 					{
 						return;
 					}
