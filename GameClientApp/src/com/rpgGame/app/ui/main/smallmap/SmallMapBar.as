@@ -19,8 +19,8 @@ package com.rpgGame.app.ui.main.smallmap {
     import starling.display.Shape;
     
     public class SmallMapBar extends SkinUI {
-        private static const MAXMAPSCALE : Number = 1.25;
-        private static const MINMAPSCALE : Number = 0.75;
+        private static const MAXMAPSCALE : Number = 1.50;
+        private static const MINMAPSCALE : Number = 0.50;
         private static const STEPMAPSCALE : Number = 0.25;
         private var _skin : map_Skin;
         

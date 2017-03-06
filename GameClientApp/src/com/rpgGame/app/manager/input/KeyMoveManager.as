@@ -106,19 +106,19 @@ package com.rpgGame.app.manager.input
 			{
                 if (1 == MainRoleManager.actorInfo.job)
 				{
-                    CastSpellHelper.shortcutsTryCaseSpell(1);
+                    CastSpellHelper.shortcutsTryCaseSpell(1, true);
                 }
 				else if (2 == MainRoleManager.actorInfo.job)
 				{
-                    CastSpellHelper.shortcutsTryCaseSpell(2);
+                    CastSpellHelper.shortcutsTryCaseSpell(2, true);
                 } 
 				else if (3 == MainRoleManager.actorInfo.job) 
 				{
-                    CastSpellHelper.shortcutsTryCaseSpell(3);
+                    CastSpellHelper.shortcutsTryCaseSpell(3, true);
                 }
 				else
 				{
-					CastSpellHelper.shortcutsTryCaseSpell(3);
+					CastSpellHelper.shortcutsTryCaseSpell(3, true);
 				}
              } 
 			else 

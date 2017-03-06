@@ -13,10 +13,13 @@ package com.rpgGame.app.controller.keyboard
 	import com.rpgGame.coreData.info.key.KeyInfo;
 	
 	import starling.display.DisplayObjectContainer;
+    
+    import flash.utils.getTimer;
 
 	public class KeyFuncProcess
 	{
 		private static var _keyDownTm : uint;
+		private static var _keyDownTabTm : uint;
 
 		public static function exec(info : KeyInfo) : void
 		{
@@ -106,9 +109,10 @@ package com.rpgGame.app.controller.keyboard
 				case "50": //BO 切换目标
 					break;
 				case "51": //TAB
-                    if (null == SceneRoleSelectManager.selectedRole) {
-                        SceneRoleSelectManager.selectedRole = CastSpellHelper.getNearestCanAtkRole(null);
-                    }
+                    var curTime : uint = getTimer();
+                    var next : Boolean = (curTime - _keyDownTabTm) < 500;
+                    _keyDownTabTm = curTime;
+                    SceneRoleSelectManager.selectedRole = CastSpellHelper.getNearestCanAtkRole(null, next);
 					break;
 				case "52": //ESC
 					if (EscActionManager.executeAction() == false)

@@ -377,9 +377,11 @@ package com.rpgGame.app.cmdlistener.engine
             if (null == info || KeyCodeType.SKILL != info.type) {
                 return;
             }
-            for (var i : int = 0, len : int = this._longPressKey.length; i < len; ++i) {
+            for (var i : int = 0; i < this._longPressKey.length;) {
                 if (info.code == this._longPressKey[i].code) {
                     this._longPressKey.splice(i, 1);
+                } else {
+                    ++i
                 }
             }
         }
