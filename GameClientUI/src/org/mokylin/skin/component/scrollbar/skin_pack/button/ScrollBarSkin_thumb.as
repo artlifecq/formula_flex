@@ -28,6 +28,7 @@ package org.mokylin.skin.component.scrollbar.skin_pack.button
 			super();
 			
 			this.currentState = "up";
+			this.width = 16;
 			this.elementsContent = [];
 			__ScrollBarSkin_thumb_UIAsset1_i();
 			__ScrollBarSkin_thumb_UIAsset2_i();

@@ -7,12 +7,14 @@ package com.rpgGame.app.ui.main.chat {
     import com.rpgGame.app.manager.chat.NoticeManager;
     import com.rpgGame.app.manager.fight.FightFaceHelper;
     import com.rpgGame.app.manager.role.MainRoleManager;
+    import com.rpgGame.app.manager.scene.SceneManager;
     import com.rpgGame.app.richText.RichTextCustomLinkType;
     import com.rpgGame.app.richText.RichTextCustomUtil;
     import com.rpgGame.app.richText.component.RichTextArea3D;
     import com.rpgGame.app.scene.SceneRole;
     import com.rpgGame.app.ui.main.chat.laba.VipChatCanvas;
     import com.rpgGame.core.events.ChatEvent;
+    import com.rpgGame.core.events.SceneInteractiveEvent;
     import com.rpgGame.core.manager.tips.TargetTipsMaker;
     import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
@@ -105,6 +107,7 @@ package com.rpgGame.app.ui.main.chat {
 		private var _curSendChannel:int;
 		private var _vipChatCanvas:VipChatCanvas;
 		private var _curShowTab:int;
+		private var testRole:SceneRole;
 		
         
         public function ChatBar() {
@@ -197,6 +200,8 @@ package com.rpgGame.app.ui.main.chat {
 			this.addEventListener(TouchEvent.TOUCH, this.onTouchEventHandler);
 			Starling.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, this.onKeyboardEventHandler);
 			
+			EventManager.addEvent(SceneInteractiveEvent.SELECTED_SCENE_ROLE, showTest);
+			
 		/*	
 			//测试飘字代码
 			EventManager.addEvent(MapEvent.UPDATE_MAP_ROLE_ADD, onadd);
@@ -206,12 +211,11 @@ package com.rpgGame.app.ui.main.chat {
 			},1000);*/
 		}
 		
-		private function onadd(sceneRole : SceneRole) : void
+		private function showTest(role:SceneRole):void
 		{
-			if(!sceneRole.isMainChar){
-				FightFaceHelper.showHurtText(MainRoleManager.actor,sceneRole,0,10000*Math.random()+5000);
-			}
+			testRole=role;
 		}
+		
 		/**
 		 * 自己的消息发送成功了
 		 * @param infos
@@ -602,9 +606,27 @@ package com.rpgGame.app.ui.main.chat {
         
         private function sendMsg() : void 
 		{
-//			FightFaceHelper.showAttChange(EnumHurtType.ADDHP,50);
-			
-//			return ;
+			var txt:String=this._inputText.text;
+			switch(txt){
+				case "exp":
+					FightFaceHelper.showAttChange(EnumHurtType.EXP,5000);
+					break;
+				case "hp":
+					FightFaceHelper.showAttChange(EnumHurtType.ADDHP,1234);
+					break;
+				case "baoji":
+					FightFaceHelper.showHurtText(MainRoleManager.actor,testRole,EnumHurtType.SPELL_HURT_TYPE_CRIT,-2358);
+					break;
+				case "subhp":
+					FightFaceHelper.showAttChange(EnumHurtType.SUBHP,-234);
+					break;
+				case "gongji":
+					FightFaceHelper.showHurtText(MainRoleManager.actor,testRole,EnumHurtType.SPELL_HURT_TYPE_NORMAL,-2358);
+					break;
+				case "shanbi":
+					FightFaceHelper.showHurtText(MainRoleManager.actor,testRole,EnumHurtType.SPELL_HURT_TYPE_MISS,-2358);
+					break;
+			}
 			
 			if("" == this._inputText.text )
 			{

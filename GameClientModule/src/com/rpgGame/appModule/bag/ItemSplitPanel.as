@@ -54,6 +54,11 @@ package com.rpgGame.appModule.bag
 			skin.slider.y+=10;
 		}
 		
+		override protected function onStageResize(sw : int, sh : int) : void
+		{
+			
+		}
+		
 		private function onChange(event:Event):void
 		{
 			skin.lbl_currentNum.text=skin.slider.value.toString();

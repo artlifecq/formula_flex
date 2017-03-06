@@ -27,14 +27,23 @@ package com.rpgGame.coreData.type
 		public static const SELECTED_BORDER:String = "ui/common/grid/select/46.png";
 		/**同组**/
 		public static const TEAM_SAME_GROUP:String = "ui/common/icon/icon_171.png";
-		/**icon上绑字 46* 46**/
-		public static const EQUIP_BIND_46 : String = "ui/common/tubiao/tongyongtubiao_xiao/bang.png";
 		/**icon上穿戴 46 * 46**/
 		public static const EQUIP_WARING_46 : String = "ui/common/tubiao/tongyongtubiao_xiao/chuan.png";
-		/**icon上绑字 60 * 60**/
-		public static const EQUIP_BIND_60 : String = "ui/common/tubiao/tongyongtubiao_xiao/bang_60.png";
 		/**icon上穿戴 60 * 60**/
 		public static const EQUIP_WARING_60 : String = "ui/common/tubiao/tongyongtubiao_xiao/chuan_60.png";
+		
+		/**icon上职业**/
+		public static const EQUIP_JOB : String = "ui/common/grid/normal/jz.png";
+		/**icon上绑字 42 * 42**/
+		public static const EQUIP_BIND_42 : String = "ui/common/grid/normal/suo_xiao.png";
+		/**icon上绑字 46* 46**/
+		public static const EQUIP_BIND_64 : String = "ui/common/grid/normal/suo_da.png";
+		
+		/**
+		 *装备阶数 
+		 */
+		public static const EQUIP_LV : String = "ui/common/grid/equip/";
+		
 		/** 组队--经验平局分配 **/
 		public static const TEAM_EXP_MEAN_MODE:String = "ui/app/team/jun.png";
 		/** 组队--经验按伤害分配 **/

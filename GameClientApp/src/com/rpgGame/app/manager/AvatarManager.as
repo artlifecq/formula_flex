@@ -414,18 +414,33 @@ package com.rpgGame.app.manager
 				if (rpd_mount)
 				{
 					if (ru.id == RenderUnitID.MOUNT && role.headFace)
+					{
 						role.headFace.setBodyRender(ru);
+						if(role.attackFace){
+							role.attackFace.setBodyRender(ru);
+						}
+					}
 				}
 				else
 				{
 					if (ru.id == RenderUnitID.BODY && role.headFace)
+					{
 						role.headFace.setBodyRender(ru);
+						if(role.attackFace){
+							role.attackFace.setBodyRender(ru);
+						}
+					}
 				}
 			}
 			else
 			{
 				if (ru.id == RenderUnitID.EFFECT && role.headFace)
+				{
 					role.headFace.setBodyRender(ru);
+					if(role.attackFace){
+						role.attackFace.setBodyRender(ru);
+					}
+				}
 			}
 		}
 		

@@ -68,6 +68,8 @@ package com.rpgGame.appModule.storage
 			_skin.lst_pack.verticalScrollBarPosition = Scroller.VERTICAL_SCROLL_BAR_POSITION_RIGHT;
 			_skin.lst_pack.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			_skin.lst_pack.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
+			
+			_skin.lst_pack.padding=3;
 			GuiThemeStyle.setScrollerStyle(_skin.lst_pack, org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack);			
 		}
 		
@@ -124,6 +126,10 @@ package com.rpgGame.appModule.storage
 				}
 				var item:ClientItemInfo=grid.gridInfo.data as ClientItemInfo;
 				ItemSender.StoreTobag(item.itemInfo.itemId,-1);
+				return;
+			}
+			
+			if(grid.gridInfo.data==null){
 				return;
 			}
 			
@@ -250,6 +256,11 @@ package com.rpgGame.appModule.storage
 			
 			StorageManager.instance.setCheckType(null);
 			goodsContainer.refleshGrids();		
+		}
+		
+		override protected function onStageResize(sw : int, sh : int) : void
+		{
+			
 		}
 		
 		override protected function onTouchTarget(target : DisplayObject) : void 

@@ -149,6 +149,9 @@ package com.rpgGame.app.utils
 					case LangMenu.USE_ITEM:
 						ItemUseManager.useItem(item);
 						break;
+					case LangMenu.BATCH_ITM:
+						EventManager.dispatchEvent(ItemEvent.ITEM_BATCH, data);
+						break;
 					case LangMenu.DISCARDED://丢弃
 						ItemSender.discardItem(item);
 						break;
