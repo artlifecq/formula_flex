@@ -47,7 +47,7 @@ package com.game.engine2D.scene.render
 				}
 			}
 		}
-		
+		 
 		/**
 		 * 是否在可视范围内 
 		 * @param value
@@ -337,10 +337,9 @@ package com.game.engine2D.scene.render
 		{
 			super.reSet(null);
 			mouseEnabled = true;
-			if(!_graphicDis)
-			{
-				_graphicDis = PoolContainer.create();
-			}
+			
+			_graphicDis = PoolContainer.create();
+			
 			_graphicDis.name = "RenderSet";
 		}
 		
@@ -362,7 +361,7 @@ package com.game.engine2D.scene.render
 		
 		public static function recycle($av:RenderSet):void
 		{
-			if ($av)
+			if ($av && !$av.disposing)
 			{
 				_cnt--;
 				//利用池回收
@@ -401,7 +400,7 @@ package com.game.engine2D.scene.render
 			_renderUnitList.length = 0;
 			
 			_parent = null;
-			
+
 			if (_graphicDis)
 				PoolContainer.recycle(_graphicDis as PoolContainer);
 			_graphicDis = null;
@@ -897,7 +896,7 @@ package com.game.engine2D.scene.render
 				ap.depthEnable = value;
 			}
 		}
-		
+	
 		//运行相关
 		//-----------------------------------------------------------------------------------------------------------
 		/**

@@ -588,14 +588,16 @@ package com.game.engine2D
 			_userData = {};
 			//创建换装（用池创建）
 			_renderSet = RenderSet.create();
-			enableMask = true;
-			_avatarContainer ||= PoolContainer.create();
-			_headBindableContainer ||= HeadBindableContainer.create();
-			_graphicDis ||= PoolContainer.create();
+			
+			_avatarContainer = PoolContainer.create();
+			_headBindableContainer = HeadBindableContainer.create();
+			_graphicDis = PoolContainer.create();
 			_graphicDis.addChild(_avatarContainer);
 			_graphicDis.name = "SceneCharacter";
 			_renderSet.parent = _avatarContainer;
 			_headBindableContainer.bind(_graphicDis,_graphicDis);
+			
+			enableMask = true;
 			//------------------------------------
 			type = $parameters[0];
 			id = $parameters[1];
@@ -605,7 +607,7 @@ package com.game.engine2D
 			var hasAvatar3D:Boolean = $parameters[5];
 			if (hasAvatar3D)
 			{
-				_avatar3D ||= SceneCharacter3D.create(type,id);
+				_avatar3D = SceneCharacter3D.create(type,id);
 				_avatar3D.parentChar = this;
 			}
 			if (scene)
@@ -886,7 +888,10 @@ package com.game.engine2D
 			//=============================================================================
 			RenderSet.recycle(_renderSet);//回收avatar
 			if (_avatar3D)
+			{
 				scene.gameScene3d.removeSceneObj(_avatar3D);
+				SceneCharacter3D.recycle(_avatar3D);
+			}
 			//=============================================================================
 			_sceneAvatarLayer = null;
 			_parent = null;

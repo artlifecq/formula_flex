@@ -436,7 +436,7 @@ package com.rpgGame.app.ui.main.smallmap
             myIco.visible = true;
             if (gTime == null)
             {
-                gTime = new GameTimer("Thumbnail" + thumbnailMapType, 500, 0, onUpdate);
+                gTime = new GameTimer("Thumbnail" + thumbnailMapType, 100, 0, onUpdate);
             }
             gTime.start();
             onDrawPath();

@@ -7,6 +7,7 @@ package com.rpgGame.app.ui.main.shortcut {
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.enum.JobEnum;
     import com.rpgGame.coreData.type.EffectUrl;
+    import com.rpgGame.app.manager.RollManager;
     
     import flash.geom.Point;
     
@@ -19,6 +20,8 @@ package com.rpgGame.app.ui.main.shortcut {
     
     import starling.display.DisplayObject;
     import starling.display.Sprite;
+    import starling.events.Event;
+    import starling.display.Shape;
     
     public class ShortcutBar extends SkinUI {
 		
@@ -139,7 +142,37 @@ package com.rpgGame.app.ui.main.shortcut {
 			_jumpState.push(_skin.fangun_n3);
 			_jumpState.push(_skin.fangun_n2);
 			_jumpState.push(_skin.fangun_n1);
+            EventManager.addEvent(RollManager.EVENT_UPDATE, onRollUpdate);
+            EventManager.addEvent(RollManager.EVENT_STARTCD, onRollStartCd);
+            EventManager.addEvent(RollManager.EVENT_ENDCD, onRollEndCd);
+            EventManager.addEvent(RollManager.EVENT_UPDATECD, onRollUpdateCd);
+            EventManager.addEvent(RollManager.EVENT_UPDATEUSECD, onRollUpdateUseCd);
+
+            var _mask : Shape = new Shape();
 		}
+
+        private function onRollUpdate(times : int) : void {
+            times = 3 - times;
+            for (var i : int = 0; i < 3; ++i) {
+                _jumpState[i].visible = i >= times;
+            }
+        }
+
+        private function onRollStartCd() : void {
+            this._skin.lbl_times.text = "15s";
+        }
+
+        private function onRollEndCd() : void {
+            this._skin.lbl_times.text = "0s";
+        }
+
+        private function onRollUpdateCd(useTime : int) : void {
+            this._skin.lbl_times.text = useTime + "s";
+        }
+
+        private function onRollUpdateUseCd(useTime : int) : void {
+            this._skin.lbl_times.text = (15 - useTime) + "s";
+        }
 		
 		public function getBtnGlobalPos(btnName : String) : Point
 		{

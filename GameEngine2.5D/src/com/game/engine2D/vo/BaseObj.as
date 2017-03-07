@@ -31,12 +31,12 @@ package com.game.engine2D.vo{
 		{
 			return _isMainChar;
 		}
-		
+
 		public function set isMainChar(value:Boolean):void
 		{
 			_isMainChar = value;
 		}
-		
+
 		/**
 		 * 唯一ID
 		 */		
@@ -112,7 +112,7 @@ package com.game.engine2D.vo{
 				updateNow = true;
 			}
 		}
-		
+
 		protected var _z:Number = 0;
 		/**显示位置Z*/
 		final public function get z():Number
@@ -203,7 +203,7 @@ package com.game.engine2D.vo{
 		{
 			_smooth = value;
 		}
-		
+
 		protected var _depthEnable:Boolean = true;
 		final public function get depthEnable():Boolean
 		{
@@ -607,7 +607,7 @@ package com.game.engine2D.vo{
 		{
 			//改变唯一ID
 			_uniqueID = (++BaseObj3D.UNIQUE_ID);
-			
+			_runTickCnt = 0;
 			disposing = false;
 			usable = true;
 			updateNow = true;
@@ -632,9 +632,8 @@ package com.game.engine2D.vo{
 			name = null;
 			type = null;
 			_depth = 0;
-			
-			disposing=false;
-			usable = false;
+			_smooth = false;
+			_usable = false;
 			_visible = true;
 			_isInViewDistance = false;
 			updateNow = false;
@@ -674,7 +673,7 @@ package com.game.engine2D.vo{
 		{
 			return _usable;
 		}
-		
+
 		/**
 		 * @private
 		 */

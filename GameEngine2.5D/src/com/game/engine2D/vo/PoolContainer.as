@@ -14,9 +14,10 @@ package com.game.engine2D.vo
 	 */
 	public class PoolContainer extends ObjectContainer3D implements IInstancePoolClass
 	{
-		private static const poolSize:int = 1000;
-		private static var _pool:InstancePool = new InstancePool("PoolContainer3D_pool", poolSize);
+		private static var _pool:InstancePool = new InstancePool("PoolContainer3D_pool", 1000);
 		private var _pos:Vector3D = new Vector3D();
+		
+		private var _isDisposed:Boolean = false;
 		
 		public function PoolContainer()
 		{
@@ -71,11 +72,13 @@ package com.game.engine2D.vo
 			scaleX = scaleY = scaleZ = 1.0;
 			rotationX = rotationY = rotationZ = 0.0;
 			x = y = z = 0;
+			_isDisposed = false;
 		}
 		
 		/** 缓存池销毁对象 */
 		public function instanceDestroy():void
 		{
+			_isDisposed = true;
 			this.dispose();
 		}
 		
@@ -85,11 +88,15 @@ package com.game.engine2D.vo
 			if (this.parent)
 				this.parent.removeChild(this);
 			removeAllChild(this);
+			scaleX = scaleY = scaleZ = 1.0;
+			rotationX = rotationY = rotationZ = 0.0;
+			x = y = z = 0;
+			_isDisposed = true;
 		}
 		
 		static public function recycle($pool:PoolContainer):void
 		{
-			if ($pool)
+			if ($pool && !$pool._isDisposed)
 			{
 				_pool.disposeObj($pool);
 			}

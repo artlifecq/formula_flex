@@ -56,12 +56,12 @@ package com.game.engine2D.utils
 			_grid.setEndNode(endX, endY);
 			
 			var fPath:Array;
-			var time:int = getTimer();
+//			var time:int = getTimer();
 			if (_aStar.findPath())
 			{
 				_aStar.floyd();
 				fPath = _aStar.floydPath;
-				time = getTimer() - time;
+//				time = getTimer() - time;
 //				trace("寻路时间 : ",time);
 			}
 			
