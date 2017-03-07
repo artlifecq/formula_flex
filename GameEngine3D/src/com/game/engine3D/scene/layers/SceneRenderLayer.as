@@ -446,11 +446,12 @@ package com.game.engine3D.scene.layers
 						if(isInMask)
 						{
 							baseObj.blendMode = BlendMode.LAYER;
-							
+							baseObj.alpha = 0.5;
 						}
 						else
 						{
 							baseObj.blendMode = BlendMode.NORMAL;
+							baseObj.alpha = 1;
 						}
 					}
 				}
