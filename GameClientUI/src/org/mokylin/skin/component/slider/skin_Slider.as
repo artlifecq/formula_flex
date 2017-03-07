@@ -18,9 +18,9 @@ package org.mokylin.skin.component.slider
 		//==========================================================================
 		public var thumb:feathers.controls.Button;
 
-		public var track:feathers.controls.Button;
-
 		public var trackMax:feathers.controls.Button;
+
+		public var trackMin:feathers.controls.Button;
 
 
 		//==========================================================================
@@ -33,7 +33,7 @@ package org.mokylin.skin.component.slider
 			this.currentState = "normal";
 			this.height = 28;
 			this.width = 156;
-			this.elementsContent = [track_i(),trackMax_i(),thumb_i()];
+			this.elementsContent = [trackMin_i(),trackMax_i(),thumb_i()];
 			
 			states = {
 			};
@@ -61,21 +61,22 @@ package org.mokylin.skin.component.slider
 			trackMax = temp;
 			temp.name = "trackMax";
 			temp.height = 6;
-			temp.styleClass = org.mokylin.skin.component.slider.skin_Slider.button.ButtonSkin_bar;
-			temp.width = 152;
-			temp.x = 2;
-			temp.y = 13;
-			return temp;
-		}
-
-		private function track_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			track = temp;
-			temp.name = "track";
 			temp.left = 0;
 			temp.right = 0;
 			temp.styleClass = org.mokylin.skin.component.slider.skin_Slider.button.ButtonSkin_track;
+			temp.y = 10;
+			return temp;
+		}
+
+		private function trackMin_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			trackMin = temp;
+			temp.name = "trackMin";
+			temp.height = 6;
+			temp.left = 2;
+			temp.right = 2;
+			temp.styleClass = org.mokylin.skin.component.slider.skin_Slider.button.ButtonSkin_bar;
 			temp.y = 10;
 			return temp;
 		}

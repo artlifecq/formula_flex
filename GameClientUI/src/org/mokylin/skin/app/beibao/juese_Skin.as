@@ -540,7 +540,6 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			headMsg = temp;
 			temp.name = "headMsg";
-			temp.width = 361;
 			temp.x = 225;
 			temp.y = 91;
 			temp.elementsContent = [txt_level_i(),txt_type_i(),LoveIcon_i(),txt_loveName_i(),txt_roleName_i(),txt_team_i()];
@@ -653,7 +652,7 @@ package org.mokylin.skin.app.beibao
 			lbl_fangyubaifenbi = temp;
 			temp.name = "lbl_fangyubaifenbi";
 			temp.letterSpacing = -1;
-			temp.text = "防御百分比：";
+			temp.text = "防御：";
 			temp.color = 0xA79F4F;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 0;
@@ -848,11 +847,11 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.List = new feathers.controls.List();
 			lst_pack = temp;
 			temp.name = "lst_pack";
-			temp.height = 318;
+			temp.height = 313;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
 			temp.width = 337;
 			temp.x = 4;
-			temp.y = 29;
+			temp.y = 32;
 			temp.layout = __juese_Skin_TileLayout1_i();
 			return temp;
 		}
@@ -897,9 +896,10 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
 			pro_zhenqi = temp;
 			temp.name = "pro_zhenqi";
-			temp.height = 13;
+			temp.height = 11;
 			temp.styleClass = org.mokylin.skin.component.progress.progress_role2_Skin;
 			temp.value = 0;
+			temp.width = 131;
 			temp.x = 48;
 			temp.y = 95;
 			return temp;

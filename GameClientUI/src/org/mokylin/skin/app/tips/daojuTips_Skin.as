@@ -42,8 +42,6 @@ package org.mokylin.skin.app.tips
 
 		public var lbl_yinzi:feathers.controls.Label;
 
-		public var lock:feathers.controls.UIAsset;
-
 		public var yingzi:feathers.controls.UIAsset;
 
 		public var yuanbao:feathers.controls.UIAsset;
@@ -99,7 +97,7 @@ package org.mokylin.skin.app.tips
 			temp.name = "grp_icon";
 			temp.x = 8;
 			temp.y = 10;
-			temp.elementsContent = [__daojuTips_Skin_UIAsset1_i(),lock_i()];
+			temp.elementsContent = [__daojuTips_Skin_UIAsset1_i()];
 			return temp;
 		}
 
@@ -131,17 +129,6 @@ package org.mokylin.skin.app.tips
 			temp.width = 196;
 			temp.x = 86;
 			temp.y = 13;
-			return temp;
-		}
-
-		private function lock_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			lock = temp;
-			temp.name = "lock";
-			temp.styleName = "ui/common/tubiao/suo.png";
-			temp.x = 10;
-			temp.y = 51;
 			return temp;
 		}
 

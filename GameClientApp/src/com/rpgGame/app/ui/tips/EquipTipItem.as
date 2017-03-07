@@ -6,7 +6,6 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
 	import com.rpgGame.coreData.enum.JobEnum;
@@ -14,58 +13,38 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
-	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import app.message.EquipType;
 	
 	import feathers.controls.Label;
+	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.mokylin.skin.app.tips.zhuangbeiTips_Skin;
-
-	/**
-	 * 装备tips 
-	 * @author Mandragora
-	 * 
-	 */	
-	public class EquipTip extends SkinUI implements ITip
+	
+	public class EquipTipItem extends SkinUI
 	{
-		private var _itemTip:zhuangbeiTips_Skin;
-
-		private static var _instance:EquipTip=null;
+		private var _skin:zhuangbeiTips_Skin;
 		private var _iconFace:IconCDFace;
-		private var _itemInfo:ClientItemInfo;
-		private var isShowDuiBi:Boolean;
-		private var yinIcon:UIAsset;
-		
-		private var _equipTip:EquipTip;
-		private var _isDuibiShow:Boolean;
 		private var labelList:Vector.<Label>;
 		private var lines:Vector.<UIAsset>;
+		private var yinIcon:UIAsset;
+		private var _itemInfo:ClientItemInfo;
 
-		public function EquipTip()
+		private var curY:int;
+
+		private var map1:HashMap;
+
+		private var ids:Array;
+		
+		public function EquipTipItem(skin:StateSkin=null)
 		{
-			_itemTip=new zhuangbeiTips_Skin();
-			super(_itemTip);
+			_skin=new zhuangbeiTips_Skin();
+			super(_skin);
 			initTip();
 		}
-
-		public function set isDuibiShow(value:Boolean):void
-		{
-			_isDuibiShow = value;
-		}
-
-		public static function get instance():EquipTip
-		{
-			if (null == _instance)
-			{
-				_instance=new EquipTip();
-			}
-			return _instance;
-		}
-		
 		/**
 		 * 初始化 
 		 * 
@@ -78,14 +57,19 @@ package com.rpgGame.app.ui.tips
 			addChild(_iconFace);
 			_iconFace.x=5;
 			_iconFace.y=35;
-			_itemTip.container.addChild(_iconFace);
+			_skin.container.addChild(_iconFace);
 			labelList=new Vector.<Label>();
 			lines=new Vector.<UIAsset>();
 			yinIcon=new UIAsset();
 			yinIcon.styleName="ui/common/tubiao/yinzi_24.png";
 		}
-
-		public function setTipData(data:*):void
+		
+		/**
+		 *显示基本信息 
+		 * @param data
+		 * 
+		 */
+		public function showBaseTips(data:ClientItemInfo):void
 		{
 			_itemInfo = data as ClientItemInfo;
 			FaceUtil.SetItemGrid(_iconFace, _itemInfo, false);
@@ -99,37 +83,27 @@ package com.rpgGame.app.ui.tips
 				var line:UIAsset=lines.shift();
 				line.removeFromParent(true);
 			}
-			_itemTip.lbl_titile.text=_itemInfo.qItem.q_name;
+			_skin.lbl_titile.text=_itemInfo.qItem.q_name;
 			var equipItemInfo:ClientItemInfo=RoleEquipmentManager.instance.getEquipInfoByIndex(_itemInfo.qItem.q_kind);//根据佩戴部位获取已经装备的装备信息
 			var equipFight:Number=FightValueUtil.getFightValueByEquip(_itemInfo);
 			var currentFight:int=0;
-			_itemTip.numbers.number=equipFight;
-			_itemTip.tip_down.visible=false;
-			_itemTip.tip_up.visible=false;
+			_skin.numbers.number=equipFight;
+			_skin.tip_down.visible=false;
+			_skin.tip_up.visible=false;
 			if(equipItemInfo){
 				currentFight=FightValueUtil.getFightValueByEquip(equipItemInfo);
 			}
 			
-			_itemTip.isLock.visible=true;
+			_skin.isLock.visible=true;
 			if(_itemInfo.binded){
-				_itemTip.isLock.text="[已绑定]"
+				_skin.isLock.text="[已绑定]"
 			}else{
 				if(_itemInfo.qItem.q_bind==0){
-					_itemTip.isLock.visible=false;
+					_skin.isLock.visible=false;
 				}else if(_itemInfo.qItem.q_bind==1){
-					_itemTip.isLock.visible="[获得时绑定]";
+					_skin.isLock.visible="[获得时绑定]";
 				}else{
-					_itemTip.isLock.visible="[使用后绑定]";
-				}
-			}
-			
-			_itemTip.yizhuangbei.visible=false;
-			isShowDuiBi=false;
-			if(equipItemInfo){
-				if(_itemInfo==equipItemInfo){
-					_itemTip.yizhuangbei.visible=true;
-				}else if(_itemInfo.qItem.q_job==0||_itemInfo.qItem.q_job==equipItemInfo.qItem.q_job){//职业符合
-					isShowDuiBi=true;
+					_skin.isLock.visible="[使用后绑定]";
 				}
 			}
 			
@@ -140,20 +114,25 @@ package com.rpgGame.app.ui.tips
 			}else{
 				name=HtmlTextUtil.getTextColor(0xE1201C,_itemInfo.qItem.q_level+"级");
 			}
-			_itemTip.lbl_xuqiu.htmlText=name;
-			_itemTip.lbl_zhiye.text=getJobName(_itemInfo.qItem.q_job);
-			_itemTip.lbl_pingzhi.text=_itemInfo.qItem.q_levelnum.toString();
-			_itemTip.lbl_buwei.text=EquipType.EquipNames[_itemInfo.qItem.q_kind];
+			_skin.lbl_xuqiu.htmlText=name;
+			_skin.lbl_zhiye.text=getJobName(_itemInfo.qItem.q_job);
+			_skin.lbl_pingzhi.text=getLevele(_itemInfo.qItem.q_levelnum);
+			_skin.lbl_buwei.text=EquipType.EquipNames[_itemInfo.qItem.q_kind];
 			
 			if(_itemInfo.qItem.q_max_strengthen!=0){
-				_itemTip.lbl_qianghuatitle.visible=true;
-				_itemTip.lbl_qianghua.visible=_itemInfo.qItem.q_max_strengthen.toString();
+				_skin.lbl_qianghuatitle.visible=true;
+				_skin.lbl_qianghua.visible=_itemInfo.qItem.q_max_strengthen.toString();
 			}else{
-				_itemTip.lbl_qianghuatitle.visible=false;
-				_itemTip.lbl_qianghua.visible=false;
+				_skin.lbl_qianghuatitle.visible=false;
+				_skin.lbl_qianghua.visible=false;
 			}
 			
-			createLine(10,160,270);
+			createLine(10,160,260);
+			
+			for(var i:int=0;i<_skin.zhuangbei_bg.numChildren;i++){
+				_skin.zhuangbei_bg.getChildAt(i).visible=false;
+			}
+			_skin.zhuangbei_bg.getChildAt(_itemInfo.qItem.q_default-1).visible=true;
 			
 			var name:String;
 			var value:String;
@@ -161,17 +140,17 @@ package com.rpgGame.app.ui.tips
 			if(!attValues1){
 				return ;
 			}
-			var map1:HashMap=new HashMap();
-		
+			map1=new HashMap();
+			
 			var label:Label;
-			var curY:int=170;
+			curY=170;
 			var num:int=0;
-			for(var i:int=1;i<CharAttributeType.TYPE_NUM;i++){
+			for(i=1;i<CharAttributeType.TYPE_NUM;i++){
 				if(attValues1["q_value"+i]!=0){
 					map1.add(attValues1["q_type"+i],attValues1["q_value"+i]);
 				}
 			}
-			var ids:Array=CharAttributeType.baseAttrIdArr;
+			ids=CharAttributeType.baseAttrIdArr;
 			name=HtmlTextUtil.getTextColor(0xCFC6AE,"[基础属性]\n");
 			label=createLabel(name,"");
 			label.x=10;
@@ -195,18 +174,18 @@ package com.rpgGame.app.ui.tips
 				name=HtmlTextUtil.getTextColor(0x8B8D7B,name+":");
 				value=HtmlTextUtil.getTextColor(0xCFC6AE,v+per);
 				label=createLabel(name,value);
-//				if(num%2!=0){
-					label.x=10;
-//				}else{
-//					label.x=155;
-//				}
+				//				if(num%2!=0){
+				label.x=10;
+				//				}else{
+				//					label.x=155;
+				//				}
 				label.y=curY;
 			}
 			
 			//琢磨等级暂时不管
 			//洗练属性也不管
 			
-			createLine(10,curY+25,270);
+			createLine(10,curY+25,260);
 			curY+=35;
 			name=HtmlTextUtil.getTextColor(0xCFC6AE,"[装备产出]\n");
 			label=createLabel(name,_itemInfo.qItem.q_describe);
@@ -216,91 +195,125 @@ package com.rpgGame.app.ui.tips
 			label.x=10;
 			label.y=curY;
 			curY=curY+label.height+5;
-			createLine(10,curY,270);
+			createLine(10,curY,260);
 			
 			name=HtmlTextUtil.getTextColor(0x8B8D7B,"售价:");
 			value=HtmlTextUtil.getTextColor(0x5CB006,"     "+_itemInfo.qItem.q_sell_price.toString());
-			_itemTip.container.addChild(yinIcon);
+			_skin.container.addChild(yinIcon);
 			label=createLabel(name,value);
 			curY=curY+5
 			label.x=10;
 			label.y=curY;
 			yinIcon.x=50;
 			yinIcon.y=curY-5;
-			
-			
-			_itemTip.grp_duibi.visible=false;
-			if(isShowDuiBi&&!_isDuibiShow){
-				showCurrentEquipInfo(equipItemInfo);
-				if(equipFight>currentFight){//装备后战斗力提升
-					_itemTip.tip_up.visible=true;
-				}else if(equipFight<currentFight){
-					_itemTip.tip_down.visible=true;
-				}
-				var attValues2:Q_att_values=AttValueConfig.getAttInfoById(int(equipItemInfo.qItem.q_att_type));
-				var map2:HashMap=new HashMap();
-				
-				for(i=1;i<CharAttributeType.TYPE_NUM;i++){
-					if(attValues2["q_value"+i]!=0){
-						map2.add(attValues2["q_type"+i],attValues2["q_value"+i]);
-					}
-				}
-				
-				curY=curY+5;
-				_itemTip.grp_duibi.y=curY;
-				curY+=25;
-				num=0;
-				for each(id in ids){
-					var value1:int=map1.getValue(id);
-					var value2:int=map2.getValue(id);
-					var change:int;
-					if(value1!=0||value2!=0){
-						change=value1-value2;
-						num++;
-					}else{
-						continue;						
-					}
-					var valueName:String= CharAttributeType.getCNName(id);
-					name=HtmlTextUtil.getTextColor(0xCFC6AE,valueName+":");
-					if(change>=0){
-						value=HtmlTextUtil.getTextColor(0x5CB006,"+"+change.toString());
-					}else{
-						value=HtmlTextUtil.getTextColor(0xE1201C,change.toString());
-					}
-					
-					label=createLabel(name,value);
-					if(num%2!=0){
-						label.x=10;
-					}else{
-						label.x=155;
-					}
-					label.y=curY;
-					if(num%2==0){
-						curY+=25;
-					}
-				}
-			}
-			
-			_itemTip.imgBG.height=curY+30;
 		}
 		
-		private function showCurrentEquipInfo(equipItemInfo:ClientItemInfo):void
+		public function showDuiBiTips(data:ClientItemInfo):void
 		{
-			if(!_equipTip){
-				_equipTip=new EquipTip();
+			_skin.grp_duibi.visible=true;
+			curY+=30;
+			
+			var equipItemInfo:ClientItemInfo=RoleEquipmentManager.instance.getEquipInfoByIndex(_itemInfo.qItem.q_kind);//根据佩戴部位获取已经装备的装备信息
+			var equipFight:Number=FightValueUtil.getFightValueByEquip(_itemInfo);
+			var currentFight:int=FightValueUtil.getFightValueByEquip(equipItemInfo);
+			
+			if(equipFight>currentFight){//装备后战斗力提升
+				_skin.tip_up.visible=true;
+			}else if(equipFight<currentFight){
+				_skin.tip_down.visible=true;
 			}
-			_equipTip.setTipData(equipItemInfo);
-			_equipTip.isShowDuiBi=true;
-			this._itemTip.container.addChild(_equipTip);
-			_equipTip.x=this.x+this.width;
-		}		
+			var attValues2:Q_att_values=AttValueConfig.getAttInfoById(int(equipItemInfo.qItem.q_att_type));
+			var map2:HashMap=new HashMap();
+			
+			for(var i:int=1;i<CharAttributeType.TYPE_NUM;i++){
+				if(attValues2["q_value"+i]!=0){
+					map2.add(attValues2["q_type"+i],attValues2["q_value"+i]);
+				}
+			}
+			
+			curY=curY+5;
+			_skin.grp_duibi.y=curY;
+			curY+=25;
+			var num:int=0;
+			var name:String;
+			var value:String;
+			for each(var id in ids){
+				var value1:int=map1.getValue(id);
+				var value2:int=map2.getValue(id);
+				var change:int;
+				if(value1!=0||value2!=0){
+					change=value1-value2;
+					num++;
+				}else{
+					continue;						
+				}
+				var valueName:String= CharAttributeType.getCNName(id);
+				name=HtmlTextUtil.getTextColor(0xCFC6AE,valueName+":");
+				if(change>=0){
+					value=HtmlTextUtil.getTextColor(0x5CB006,"+"+change.toString());
+				}else{
+					value=HtmlTextUtil.getTextColor(0xE1201C,change.toString());
+				}
+				
+				label=createLabel(name,value);
+				if(num%2!=0){
+					label.x=10;
+				}else{
+					label.x=155;
+				}
+				label.y=curY;
+				if(num%2==0){
+					curY+=25;
+				}
+			}
+		
+		_skin.imgBG.height=curY+30;
+		}
+		
+		private function getLevele(num:int):String
+		{
+			var result:String=num.toString();
+			switch(num){
+				case 1:
+					result="一阶";
+					break;
+				case 2:
+					result="二阶";
+					break;
+				case 3:
+					result="三阶";
+					break;
+				case 4:
+					result="四阶";
+					break;
+				case 5:
+					result="五阶";
+					break;
+				case 6:
+					result="六阶";
+					break;
+				case 7:
+					result="七阶";
+					break;
+				case 8:
+					result="八阶";
+					break;
+				case 9:
+					result="九阶";
+					break;
+				case 10:
+					result="十阶";
+					break;
+			}
+			return result;
+		}
 		
 		private function createLabel(name:String,value:String):Label
 		{
 			var label:Label=new Label();
 			label.fontSize=14;
 			label.htmlText=name+value;
-			_itemTip.container.addChild(label);
+			_skin.container.addChild(label);
 			labelList.push(label);
 			return label;
 		}
@@ -328,29 +341,7 @@ package com.rpgGame.app.ui.tips
 			temp.x=x;
 			temp.y=y;
 			lines.push(temp);
-			_itemTip.container.addChild(temp);
-		}
-		
-		/**
-		 * 移除装备tips 
-		 * 
-		 */		
-		public function hideTips():void
-		{
-			if(_equipTip){
-				_equipTip.removeFromParent();
-			}
-		}
-
-		/**
-		 * 获取装备tips默认的背景高度 
-		 * @return 
-		 * 
-		 */		
-		public override function get height():Number
-		{
-			return _itemTip.imgBG.height;
+			_skin.container.addChild(temp);
 		}
 	}
 }
-

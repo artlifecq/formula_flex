@@ -59,7 +59,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "该物品价值较高，是否确认出售？";
 			temp.color = 0xcfc6ae;
-			temp.x = 56;
+			temp.x = 60;
 			temp.y = 74;
 			return temp;
 		}
@@ -69,7 +69,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "本次出售不再确认";
 			temp.color = 0x6bcc08;
-			temp.x = 111;
+			temp.x = 123;
 			temp.y = 123;
 			return temp;
 		}
@@ -118,7 +118,7 @@ package org.mokylin.skin.app.beibao
 			temp.label = "取 消";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.width = 95;
-			temp.x = 212;
+			temp.x = 187;
 			temp.y = 196;
 			return temp;
 		}
@@ -132,7 +132,7 @@ package org.mokylin.skin.app.beibao
 			temp.label = "拆 分";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.width = 95;
-			temp.x = 61;
+			temp.x = 56;
 			temp.y = 196;
 			return temp;
 		}
@@ -143,7 +143,7 @@ package org.mokylin.skin.app.beibao
 			chk_ok = temp;
 			temp.name = "chk_ok";
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
-			temp.x = 71;
+			temp.x = 97;
 			temp.y = 121;
 			return temp;
 		}

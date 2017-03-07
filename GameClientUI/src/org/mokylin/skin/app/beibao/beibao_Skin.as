@@ -52,10 +52,10 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 491;
+			temp.height = 587;
 			var skin:StateSkin = new org.mokylin.skin.common.yiji_panelbg_Skin()
 			temp.skin = skin
-			temp.width = 750;
+			temp.width = 947;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -66,10 +66,10 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			daohang = temp;
 			temp.name = "daohang";
-			temp.height = 44;
+			temp.height = 50;
 			var skin:StateSkin = new org.mokylin.skin.app.beibao.daohang_Skin()
 			temp.skin = skin
-			temp.width = 200;
+			temp.width = 283;
 			temp.x = 20;
 			temp.y = 528;
 			return temp;
@@ -80,10 +80,10 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			jineng = temp;
 			temp.name = "jineng";
-			temp.height = 200;
+			temp.height = 587;
 			var skin:StateSkin = new org.mokylin.skin.app.jineng.jineng_Skin()
 			temp.skin = skin
-			temp.width = 200;
+			temp.width = 947;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -94,10 +94,10 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			juese = temp;
 			temp.name = "juese";
-			temp.height = 200;
+			temp.height = 587;
 			var skin:StateSkin = new org.mokylin.skin.app.beibao.juese_Skin()
 			temp.skin = skin
-			temp.width = 200;
+			temp.width = 947;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
