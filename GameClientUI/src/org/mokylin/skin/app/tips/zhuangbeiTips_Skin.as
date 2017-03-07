@@ -19,8 +19,6 @@ package org.mokylin.skin.app.tips
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var Icon_lock:feathers.controls.UIAsset;
-
 		public var bg_bai:feathers.controls.UIAsset;
 
 		public var bg_cheng:feathers.controls.UIAsset;
@@ -38,6 +36,8 @@ package org.mokylin.skin.app.tips
 		public var grp_head:feathers.controls.Group;
 
 		public var grp_icon:feathers.controls.Group;
+
+		public var grp_titlebg:feathers.controls.Group;
 
 		public var grp_zhandouli:feathers.controls.Group;
 
@@ -67,6 +67,18 @@ package org.mokylin.skin.app.tips
 
 		public var tip_up:feathers.controls.UIAsset;
 
+		public var titlebg_bai:feathers.controls.UIAsset;
+
+		public var titlebg_cheng:feathers.controls.UIAsset;
+
+		public var titlebg_hong:feathers.controls.UIAsset;
+
+		public var titlebg_lan:feathers.controls.UIAsset;
+
+		public var titlebg_lv:feathers.controls.UIAsset;
+
+		public var titlebg_zi:feathers.controls.UIAsset;
+
 		public var xilian_tip:feathers.controls.Label;
 
 		public var yizhuangbei:feathers.controls.UIAsset;
@@ -86,7 +98,7 @@ package org.mokylin.skin.app.tips
 			this.currentState = "normal";
 			this.height = 479;
 			this.width = 283;
-			this.elementsContent = [imgBG_i(),lbl_titile_i(),zhuangbei_bg_i(),grp_icon_i(),grp_zhandouli_i(),grp_head_i(),lbl_qianghuatitle_i(),lbl_qianghua_i(),grp_duibi_i(),yizhuangbei_i()];
+			this.elementsContent = [imgBG_i(),grp_titlebg_i(),lbl_titile_i(),zhuangbei_bg_i(),grp_icon_i(),grp_zhandouli_i(),grp_head_i(),lbl_qianghuatitle_i(),lbl_qianghua_i(),grp_duibi_i(),yizhuangbei_i()];
 			
 			states = {
 			};
@@ -97,17 +109,6 @@ package org.mokylin.skin.app.tips
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function Icon_lock_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			Icon_lock = temp;
-			temp.name = "Icon_lock";
-			temp.styleName = "ui/common/tubiao/suo.png";
-			temp.x = 56;
-			temp.y = 53;
-			return temp;
-		}
-
 		private function __zhuangbeiTips_Skin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
@@ -287,7 +288,18 @@ package org.mokylin.skin.app.tips
 			temp.name = "grp_icon";
 			temp.x = 7;
 			temp.y = 36;
-			temp.elementsContent = [__zhuangbeiTips_Skin_UIAsset1_i(),Icon_lock_i()];
+			temp.elementsContent = [__zhuangbeiTips_Skin_UIAsset1_i()];
+			return temp;
+		}
+
+		private function grp_titlebg_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			grp_titlebg = temp;
+			temp.name = "grp_titlebg";
+			temp.x = 73;
+			temp.y = 4;
+			temp.elementsContent = [titlebg_bai_i(),titlebg_lv_i(),titlebg_lan_i(),titlebg_zi_i(),titlebg_cheng_i(),titlebg_hong_i()];
 			return temp;
 		}
 
@@ -395,8 +407,8 @@ package org.mokylin.skin.app.tips
 			temp.textAlign = "center";
 			temp.color = 0x6BCC08;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 253;
-			temp.x = 12;
+			temp.width = 283;
+			temp.x = 0;
 			temp.y = 7;
 			return temp;
 		}
@@ -463,6 +475,77 @@ package org.mokylin.skin.app.tips
 			temp.styleName = "ui/common/tubiao/xiangshang.png";
 			temp.x = 162;
 			temp.y = 6;
+			return temp;
+		}
+
+		private function titlebg_bai_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			titlebg_bai = temp;
+			temp.name = "titlebg_bai";
+			temp.styleName = "ui/common/tips/mc/title_bg/title_bg1.png";
+			temp.visible = false;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function titlebg_cheng_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			titlebg_cheng = temp;
+			temp.name = "titlebg_cheng";
+			temp.styleName = "ui/common/tips/mc/title_bg/title_bg5.png";
+			temp.visible = false;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function titlebg_hong_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			titlebg_hong = temp;
+			temp.name = "titlebg_hong";
+			temp.styleName = "ui/common/tips/mc/title_bg/title_bg6.png";
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function titlebg_lan_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			titlebg_lan = temp;
+			temp.name = "titlebg_lan";
+			temp.styleName = "ui/common/tips/mc/title_bg/title_bg3.png";
+			temp.visible = false;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function titlebg_lv_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			titlebg_lv = temp;
+			temp.name = "titlebg_lv";
+			temp.styleName = "ui/common/tips/mc/title_bg/title_bg2.png";
+			temp.visible = false;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function titlebg_zi_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			titlebg_zi = temp;
+			temp.name = "titlebg_zi";
+			temp.styleName = "ui/common/tips/mc/title_bg/title_bg4.png";
+			temp.visible = false;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 

@@ -55,7 +55,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "此装备可分解获得强化材料,是否确认丢弃";
 			temp.color = 0xcfc6ae;
-			temp.x = 39;
+			temp.x = 37;
 			temp.y = 99;
 			return temp;
 		}
@@ -104,7 +104,7 @@ package org.mokylin.skin.app.beibao
 			temp.label = "取 消";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.width = 95;
-			temp.x = 212;
+			temp.x = 187;
 			temp.y = 196;
 			return temp;
 		}
@@ -118,7 +118,7 @@ package org.mokylin.skin.app.beibao
 			temp.label = "拆 分";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.width = 95;
-			temp.x = 61;
+			temp.x = 56;
 			temp.y = 196;
 			return temp;
 		}

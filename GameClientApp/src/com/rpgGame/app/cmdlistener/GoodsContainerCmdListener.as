@@ -4,6 +4,8 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
+	import com.rpgGame.netData.backpack.message.ResChangeBindItemMessage;
+	import com.rpgGame.netData.backpack.message.ResChangeLimitItemMessage;
 	import com.rpgGame.netData.backpack.message.ResItemAddMessage;
 	import com.rpgGame.netData.backpack.message.ResItemChangeMessage;
 	import com.rpgGame.netData.backpack.message.ResItemInfosMessage;
@@ -34,7 +36,9 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(108102, onResItemAddMessage );
 			SocketConnection.addCmdListener(108103, onResItemChangeMessage );
 			SocketConnection.addCmdListener(108104, onResItemRemoveMessage );
-//			SocketConnection.addCmdListener(108105, onResUseItemSuccessMessage );暂时不用物品使用成功
+			SocketConnection.addCmdListener(108105, onResUseItemSuccessMessage );
+			SocketConnection.addCmdListener(108115, onResChangeBindItemMessage );
+			SocketConnection.addCmdListener(108116, onResChangeLimitItemMessage );
 			
 			SocketConnection.addCmdListener(105100, onResStoreItemInfosMessage );
 			SocketConnection.addCmdListener(105101, onResStoreItemAddMessage );
@@ -46,6 +50,16 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(107105, onResEquipInfoMessage );
 			
 			finish();
+		}
+		
+		private function onResChangeLimitItemMessage(msg:ResChangeLimitItemMessage):void
+		{
+			GoodsContainerMamager.getMrg(ItemContainerID.BackPack).changItemLimit(msg);	
+		}
+		
+		private function onResChangeBindItemMessage(msg:ResChangeBindItemMessage):void
+		{
+			GoodsContainerMamager.getMrg(ItemContainerID.BackPack).changItemBind(msg);	
 		}
 		
 		private function onResEquipInfoMessage(msg:ResEquipInfoMessage):void

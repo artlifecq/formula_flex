@@ -29,6 +29,8 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.coreData.info.upgrade.UpgradeProtoInfo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
+	import com.rpgGame.netData.backpack.message.ResChangeBindItemMessage;
+	import com.rpgGame.netData.backpack.message.ResChangeLimitItemMessage;
 	
 	import flash.utils.Dictionary;
 	
@@ -38,6 +40,7 @@ package com.rpgGame.app.manager.goods
 	import feathers.data.ListCollection;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.data.long;
 	
 	/**
 	 * 物品容器管理器
@@ -266,6 +269,37 @@ package com.rpgGame.app.manager.goods
 		}
 		
 		
+		/**
+		 *改变限制 
+		 * @param msg
+		 * 
+		 */
+		public function changItemLimit(msg:ResChangeLimitItemMessage):void
+		{
+			var all:Array=getAllItem();
+			for each( var info:ClientItemInfo in all){
+				if(msg.itemModelId==info.qItem.q_id){//将id一样的物品全部替换
+					info.itemInfo.limitType=msg.limitType;
+					info.itemInfo.limitNum=msg.limitNum;
+					info.itemInfo.limitValue=msg.limitValue;
+				}
+			}
+		}
+		
+		
+		/**
+		 *改变绑定 
+		 * @param gridId
+		 * @param isbind
+		 * 
+		 */
+		public function changItemBind(msg:ResChangeBindItemMessage):void
+		{
+			var info:ClientItemInfo=_goodsList[msg.itemGridId];
+			if(info){
+				info.itemInfo.isbind=msg.isBind;
+			}
+		}
 		
 		/**
 		 * 添加物品
