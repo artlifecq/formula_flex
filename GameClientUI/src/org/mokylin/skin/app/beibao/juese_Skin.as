@@ -382,6 +382,8 @@ package org.mokylin.skin.app.beibao
 		private function __juese_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.styleName = "ui/app/beibao/juese.png";
 			temp.x = 442;
 			temp.y = 11;

@@ -5,6 +5,7 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.core.manager.tips.TipManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
@@ -14,7 +15,6 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
-	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import app.message.EquipType;
@@ -84,7 +84,17 @@ package com.rpgGame.app.ui.tips
 			yinIcon=new UIAsset();
 			yinIcon.styleName="ui/common/tubiao/yinzi_24.png";
 		}
-
+		
+		
+		public function updatePosition():void
+		{
+			if(_equipTip&&isShowDuiBi&&!_equipTip.parent){
+				this._itemTip.container.addChild(_equipTip);
+				_equipTip.x=this.x+this.width;
+				TipManager.updatePositon();
+			}
+		}
+		
 		public function setTipData(data:*):void
 		{
 			_itemInfo = data as ClientItemInfo;
@@ -142,7 +152,7 @@ package com.rpgGame.app.ui.tips
 			}
 			_itemTip.lbl_xuqiu.htmlText=name;
 			_itemTip.lbl_zhiye.text=getJobName(_itemInfo.qItem.q_job);
-			_itemTip.lbl_pingzhi.text=_itemInfo.qItem.q_levelnum.toString();
+			_itemTip.lbl_pingzhi.text=getLevele(_itemInfo.qItem.q_levelnum);
 			_itemTip.lbl_buwei.text=EquipType.EquipNames[_itemInfo.qItem.q_kind];
 			
 			if(_itemInfo.qItem.q_max_strengthen!=0){
@@ -153,7 +163,12 @@ package com.rpgGame.app.ui.tips
 				_itemTip.lbl_qianghua.visible=false;
 			}
 			
-			createLine(10,160,270);
+			createLine(10,160,260);
+			
+			for(var i:int=0;i<_itemTip.zhuangbei_bg.numChildren;i++){
+				_itemTip.zhuangbei_bg.getChildAt(i).visible=false;
+			}
+			_itemTip.zhuangbei_bg.getChildAt(_itemInfo.qItem.q_default-1).visible=true;
 			
 			var name:String;
 			var value:String;
@@ -166,7 +181,7 @@ package com.rpgGame.app.ui.tips
 			var label:Label;
 			var curY:int=170;
 			var num:int=0;
-			for(var i:int=1;i<CharAttributeType.TYPE_NUM;i++){
+			for(i=1;i<CharAttributeType.TYPE_NUM;i++){
 				if(attValues1["q_value"+i]!=0){
 					map1.add(attValues1["q_type"+i],attValues1["q_value"+i]);
 				}
@@ -206,7 +221,7 @@ package com.rpgGame.app.ui.tips
 			//琢磨等级暂时不管
 			//洗练属性也不管
 			
-			createLine(10,curY+25,270);
+			createLine(10,curY+25,260);
 			curY+=35;
 			name=HtmlTextUtil.getTextColor(0xCFC6AE,"[装备产出]\n");
 			label=createLabel(name,_itemInfo.qItem.q_describe);
@@ -216,7 +231,7 @@ package com.rpgGame.app.ui.tips
 			label.x=10;
 			label.y=curY;
 			curY=curY+label.height+5;
-			createLine(10,curY,270);
+			createLine(10,curY,260);
 			
 			name=HtmlTextUtil.getTextColor(0x8B8D7B,"售价:");
 			value=HtmlTextUtil.getTextColor(0x5CB006,"     "+_itemInfo.qItem.q_sell_price.toString());
@@ -228,9 +243,13 @@ package com.rpgGame.app.ui.tips
 			yinIcon.x=50;
 			yinIcon.y=curY-5;
 			
+//			curY+=yinIcon.y+yinIcon.height+10;
+			
 			
 			_itemTip.grp_duibi.visible=false;
 			if(isShowDuiBi&&!_isDuibiShow){
+				_itemTip.grp_duibi.visible=true;
+				curY+=30;
 				showCurrentEquipInfo(equipItemInfo);
 				if(equipFight>currentFight){//装备后战斗力提升
 					_itemTip.tip_up.visible=true;
@@ -284,6 +303,44 @@ package com.rpgGame.app.ui.tips
 			_itemTip.imgBG.height=curY+30;
 		}
 		
+		private function getLevele(num:int):String
+		{
+			var result:String=num.toString();
+			switch(num){
+				case 1:
+					result="一阶";
+					break;
+				case 2:
+					result="二阶";
+					break;
+				case 3:
+					result="三阶";
+					break;
+				case 4:
+					result="四阶";
+					break;
+				case 5:
+					result="五阶";
+					break;
+				case 6:
+					result="六阶";
+					break;
+				case 7:
+					result="七阶";
+					break;
+				case 8:
+					result="八阶";
+					break;
+				case 9:
+					result="九阶";
+					break;
+				case 10:
+					result="十阶";
+					break;
+			}
+			return result;
+		}
+		
 		private function showCurrentEquipInfo(equipItemInfo:ClientItemInfo):void
 		{
 			if(!_equipTip){
@@ -291,8 +348,7 @@ package com.rpgGame.app.ui.tips
 			}
 			_equipTip.setTipData(equipItemInfo);
 			_equipTip.isShowDuiBi=true;
-			this._itemTip.container.addChild(_equipTip);
-			_equipTip.x=this.x+this.width;
+			updatePosition();
 		}		
 		
 		private function createLabel(name:String,value:String):Label

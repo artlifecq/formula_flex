@@ -224,6 +224,8 @@ package org.mokylin.skin.app.beibao
 			lb_Title = temp;
 			temp.name = "lb_Title";
 			temp.bold = true;
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.letterSpacing = 5;
 			temp.text = "仓库";
 			temp.color = 0xa6a07b;
