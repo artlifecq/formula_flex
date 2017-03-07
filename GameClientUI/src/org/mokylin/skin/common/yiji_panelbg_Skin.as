@@ -12,6 +12,11 @@ package org.mokylin.skin.common
 	 */
 	public class yiji_panelbg_Skin extends feathers.controls.StateSkin
 	{
+		//==========================================================================
+		//                                定义成员变量
+		//==========================================================================
+		public var bg:feathers.controls.UIAsset;
+
 		public var btnClose:feathers.controls.Button;
 
 
@@ -25,7 +30,7 @@ package org.mokylin.skin.common
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__yiji_panelbg_Skin_UIAsset1_i(),__yiji_panelbg_Skin_UIAsset2_i(),__yiji_panelbg_Skin_UIAsset3_i(),btnClose_i()];
+			this.elementsContent = [bg_i(),__yiji_panelbg_Skin_UIAsset2_i(),btnClose_i()];
 			
 			states = {
 			};
@@ -36,16 +41,6 @@ package org.mokylin.skin.common
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __yiji_panelbg_Skin_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 587;
-			temp.styleName = "ui/common/background/tongyongdi.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function __yiji_panelbg_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -57,11 +52,14 @@ package org.mokylin.skin.common
 			return temp;
 		}
 
-		private function __yiji_panelbg_Skin_UIAsset3_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/background/yiji_huawen.png";
-			temp.x = 450;
+			bg = temp;
+			temp.name = "bg";
+			temp.height = 587;
+			temp.styleName = "ui/common/background/tongyongdi.png";
+			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}

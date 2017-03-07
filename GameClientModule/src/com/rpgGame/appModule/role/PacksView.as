@@ -271,7 +271,13 @@ package com.rpgGame.appModule.role
 			grid.doubleClickFun = onDoubleClick;
 			grid.rightMouseClickFun = onRightMouse;
 			grid.onTouchEndCallBack = onTouchGrid;
+			grid.checkDrag=checkDrag;
 			return render;
+		}
+		
+		private function checkDrag():Boolean
+		{
+			return GoodsContainerPanel.isFaceMoving;
 		}
 		
 		protected function onDoubleClick(grid:IconCDFace):void

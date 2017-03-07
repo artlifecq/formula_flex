@@ -36,6 +36,15 @@ package com.rpgGame.netData.backpack.bean{
 		//强化等级
 		private var _job: int;
 		
+		//限制类型1:天,2:周,3:月,4:年
+		private var _limitType: int;
+		
+		//限制数量
+		private var _limitNum: int;
+		
+		//限制剩余数量
+		private var _limitValue: int;
+		
 		//参数，额外信息
 		private var _parameters: String;
 		
@@ -57,6 +66,12 @@ package com.rpgGame.netData.backpack.bean{
 			writeString(_ldate);
 			//强化等级
 			writeByte(_job);
+			//限制类型1:天,2:周,3:月,4:年
+			writeInt(_limitType);
+			//限制数量
+			writeInt(_limitNum);
+			//限制剩余数量
+			writeInt(_limitValue);
 			//参数，额外信息
 			writeString(_parameters);
 			return true;
@@ -80,6 +95,12 @@ package com.rpgGame.netData.backpack.bean{
 			_ldate = readString();
 			//强化等级
 			_job = readByte();
+			//限制类型1:天,2:周,3:月,4:年
+			_limitType = readInt();
+			//限制数量
+			_limitNum = readInt();
+			//限制剩余数量
+			_limitValue = readInt();
 			//参数，额外信息
 			_parameters = readString();
 			return true;
@@ -188,6 +209,51 @@ package com.rpgGame.netData.backpack.bean{
 		 */
 		public function set job(value: int): void{
 			this._job = value;
+		}
+		
+		/**
+		 * get 限制类型1:天,2:周,3:月,4:年
+		 * @return 
+		 */
+		public function get limitType(): int{
+			return _limitType;
+		}
+		
+		/**
+		 * set 限制类型1:天,2:周,3:月,4:年
+		 */
+		public function set limitType(value: int): void{
+			this._limitType = value;
+		}
+		
+		/**
+		 * get 限制数量
+		 * @return 
+		 */
+		public function get limitNum(): int{
+			return _limitNum;
+		}
+		
+		/**
+		 * set 限制数量
+		 */
+		public function set limitNum(value: int): void{
+			this._limitNum = value;
+		}
+		
+		/**
+		 * get 限制剩余数量
+		 * @return 
+		 */
+		public function get limitValue(): int{
+			return _limitValue;
+		}
+		
+		/**
+		 * set 限制剩余数量
+		 */
+		public function set limitValue(value: int): void{
+			this._limitValue = value;
 		}
 		
 		/**

@@ -97,7 +97,7 @@ package com.rpgGame.appModule.role
 		{
 			var render:GridItemRender = new GridItemRender(IcoSizeEnum.ICON_48,bg);
 			var grid:DragDropItem = render.getGrid();
-			grid.onTouchEndCallBack = onTouchGrid;
+//			grid.onTouchEndCallBack = onTouchGrid;
 			grid.doubleClickFun=onDoubleClick
 			return grid;
 		}

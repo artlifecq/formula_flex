@@ -78,7 +78,7 @@ package org.mokylin.skin.app.beibao
 			temp.letterSpacing = 0;
 			temp.text = "标签";
 			temp.color = 0x8b8d7b;
-			temp.x = 75;
+			temp.x = 71;
 			temp.y = 106;
 			return temp;
 		}
@@ -88,7 +88,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "请点击调节栏输入要拆分的数量";
 			temp.color = 0x8b8d7b;
-			temp.x = 75;
+			temp.x = 71;
 			temp.y = 125;
 			return temp;
 		}
@@ -147,7 +147,7 @@ package org.mokylin.skin.app.beibao
 			temp.label = "取 消";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.width = 95;
-			temp.x = 212;
+			temp.x = 187;
 			temp.y = 201;
 			return temp;
 		}
@@ -183,7 +183,7 @@ package org.mokylin.skin.app.beibao
 			temp.label = "拆 分";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.width = 95;
-			temp.x = 61;
+			temp.x = 56;
 			temp.y = 201;
 			return temp;
 		}
@@ -194,7 +194,7 @@ package org.mokylin.skin.app.beibao
 			icon_all = temp;
 			temp.name = "icon_all";
 			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 70;
+			temp.x = 63;
 			temp.y = 48;
 			return temp;
 		}
@@ -205,7 +205,7 @@ package org.mokylin.skin.app.beibao
 			icon_arrow = temp;
 			temp.name = "icon_arrow";
 			temp.styleName = "ui/common/tubiao/jiantou.png";
-			temp.x = 133;
+			temp.x = 126;
 			temp.y = 65;
 			return temp;
 		}
@@ -216,7 +216,7 @@ package org.mokylin.skin.app.beibao
 			icon_part1 = temp;
 			temp.name = "icon_part1";
 			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 173;
+			temp.x = 166;
 			temp.y = 48;
 			return temp;
 		}
@@ -227,7 +227,7 @@ package org.mokylin.skin.app.beibao
 			icon_part2 = temp;
 			temp.name = "icon_part2";
 			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 229;
+			temp.x = 222;
 			temp.y = 48;
 			return temp;
 		}

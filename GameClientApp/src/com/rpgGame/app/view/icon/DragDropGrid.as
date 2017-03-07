@@ -143,7 +143,7 @@ package com.rpgGame.app.view.icon
 				
 				if (touch.phase == TouchPhase.MOVED)
 				{
-					if( _gridInfo == null || iconResURL == "" )
+					if( _gridInfo == null || iconResURL == "" ||(checkDrag&&checkDrag()))
 						return;
 					
 					
@@ -342,6 +342,7 @@ package com.rpgGame.app.view.icon
 		
 		//---------------------@author luguozheng----------------------------- 
 		private var _rightMouseClickFun:Function;
+		public var checkDrag:Function;
 		public function get rightMouseClickFun():Function
 		{
 			return _rightMouseClickFun;
