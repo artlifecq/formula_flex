@@ -6,9 +6,9 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.enum.item.ItemLimitType;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.role.HeroData;
-	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import feathers.controls.Label;
@@ -156,6 +156,26 @@ package com.rpgGame.app.ui.tips
 				createLabel(name,value);
 				curY+=22;
 			}*/
+			if(_itemInfo.itemInfo.limitType>0){
+				switch(_itemInfo.itemInfo.limitType){
+					case ItemLimitType.LIMIT_DAY:
+						name=HtmlTextUtil.getTextColor(nameColor,"今日使用次数:");
+						
+						break;
+					case ItemLimitType.LIMIT_WEEK:
+						name=HtmlTextUtil.getTextColor(nameColor,"本周使用次数:");
+						break;
+					case ItemLimitType.LIMIT_MONTH:
+						name=HtmlTextUtil.getTextColor(nameColor,"本月使用次数:");
+						break;
+					case ItemLimitType.LIMIT_YEAR:
+						name=HtmlTextUtil.getTextColor(nameColor,"本年使用次数:");
+						break;
+				}
+				value=HtmlTextUtil.getTextColor(valueColor,_itemInfo.itemInfo.limitValue+"/"+_itemInfo.itemInfo.limitNum);
+				createLabel(name,value);
+				curY+=22;
+			}
 			
 			createLine(10,curY,280);
 			curY+=10;
