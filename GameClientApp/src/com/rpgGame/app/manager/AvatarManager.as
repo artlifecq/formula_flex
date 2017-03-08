@@ -1004,35 +1004,35 @@ package com.rpgGame.app.manager
 			
 			if (!isUseforAvatar)
 			{
-				var weaponRes : AvatarWeaponRes = AvatarWeapontResCfgData.getInfo(roleData.weapon);
-				if (!weaponRes)
-				{
-					if (heroModel)
-						weaponRes = AvatarWeapontResCfgData.getInfo(heroModel.weaponResId);
-				}
-				if (weaponRes)
-				{
-					weaponResID = weaponRes.res;
-					var weaponBaseEffectRes : AvatarWeaponEffectRes = AvatarWeaponEffectResCfgData.getInfo(weaponRes.effectResId);
-					var weaponEffectRes : AvatarWeaponEffectRes = AvatarWeaponEffectResCfgData.getInfo(roleData.qianghuaType);
-					if (weaponBaseEffectRes)
-					{
-						//武器基础特效
-						weaponEffectResIDs = weaponBaseEffectRes.effectRes.split(";");
-						weaponEffectBindBones = weaponBaseEffectRes.effectBindBone.split(";");
-					}
-					if (weaponEffectRes)
-					{
-						//武器强化特效
-						weaponEffectResIDs = weaponEffectResIDs ? weaponEffectResIDs.concat(weaponEffectRes.effectRes.split(";")) : weaponEffectRes.effectRes.split(";");
-						weaponEffectBindBones = weaponEffectBindBones ? weaponEffectBindBones.concat(weaponEffectRes.effectBindBone.split(";")) : weaponEffectRes.effectBindBone.split(";");
-					}
-				}
-				var deputyWeaponRes : AvatarDeputyWeaponRes = AvatarDeputyWeaponResCfgData.getInfo(roleData.deputyWeapon);
-				if (deputyWeaponRes)
-				{
-					deputyWeaponResID = deputyWeaponRes.res;
-				}
+//				var weaponRes : AvatarWeaponRes = AvatarWeapontResCfgData.getInfo(roleData.weapon);
+//				if (!weaponRes)
+//				{
+//					if (heroModel)
+//						weaponRes = AvatarWeapontResCfgData.getInfo(heroModel.weaponResId);
+//				}
+//				if (weaponRes)
+//				{
+//					weaponResID = weaponRes.res;
+//					var weaponBaseEffectRes : AvatarWeaponEffectRes = AvatarWeaponEffectResCfgData.getInfo(weaponRes.effectResId);
+//					var weaponEffectRes : AvatarWeaponEffectRes = AvatarWeaponEffectResCfgData.getInfo(roleData.qianghuaType);
+//					if (weaponBaseEffectRes)
+//					{
+//						//武器基础特效
+//						weaponEffectResIDs = weaponBaseEffectRes.effectRes.split(";");
+//						weaponEffectBindBones = weaponBaseEffectRes.effectBindBone.split(";");
+//					}
+//					if (weaponEffectRes)
+//					{
+//						//武器强化特效
+//						weaponEffectResIDs = weaponEffectResIDs ? weaponEffectResIDs.concat(weaponEffectRes.effectRes.split(";")) : weaponEffectRes.effectRes.split(";");
+//						weaponEffectBindBones = weaponEffectBindBones ? weaponEffectBindBones.concat(weaponEffectRes.effectBindBone.split(";")) : weaponEffectRes.effectBindBone.split(";");
+//					}
+//				}
+//				var deputyWeaponRes : AvatarDeputyWeaponRes = AvatarDeputyWeaponResCfgData.getInfo(roleData.deputyWeapon);
+//				if (deputyWeaponRes)
+//				{
+//					deputyWeaponResID = deputyWeaponRes.res;
+//				}
 				
 				if (roleData.trailMount && !isMountBlank)
 				{
@@ -1044,11 +1044,25 @@ package com.rpgGame.app.manager
 			roleData.avatarInfo.setBodyResID(bodyResID, animatResID);
 			roleData.avatarInfo.hairResID = hairResID;
 			roleData.avatarInfo.setMountResID(mountResID, mountAnimatResID);
-			roleData.avatarInfo.setBodyEffectResIDs(bodyEffectResIDs, bodyEffectBindBones, bodyEffectOnMountResIDs, bodyEffectOnMountBindBones);
+			roleData.avatarInfo.bodyEffectID = bodyEffectResID;
 			roleData.avatarInfo.bodyMethodTypeEffectResID = bodyMethodTypeEffectResID;
 			roleData.avatarInfo.weaponResID = weaponResID;
-			roleData.avatarInfo.setWeaponEffectResIDs(weaponEffectResIDs, weaponEffectBindBones);
+			roleData.avatarInfo.weaponEffectID = weaponEffectResID;
+			roleData.avatarInfo.weaponEffectScale = weaponEffectScale;
+			roleData.avatarInfo.weaponEffectOffset = weaponEffectOffset;
 			roleData.avatarInfo.deputyWeaponResID = deputyWeaponResID;
+			roleData.avatarInfo.deputyWeaponEffectID = deputyWeaponEffectResID;
+			roleData.avatarInfo.deputyWeaponEffectScale = deputyWeaponEffectScale;
+			roleData.avatarInfo.deputyWeaponEffectOffset = deputyWeaponEffectOffset;
+			
+//			roleData.avatarInfo.setBodyResID(bodyResID, animatResID);
+//			roleData.avatarInfo.hairResID = hairResID;
+//			roleData.avatarInfo.setMountResID(mountResID, mountAnimatResID);
+//			roleData.avatarInfo.setBodyEffectResIDs(bodyEffectResIDs, bodyEffectBindBones, bodyEffectOnMountResIDs, bodyEffectOnMountBindBones);
+//			roleData.avatarInfo.bodyMethodTypeEffectResID = bodyMethodTypeEffectResID;
+//			roleData.avatarInfo.weaponResID = weaponResID;
+//			roleData.avatarInfo.setWeaponEffectResIDs(weaponEffectResIDs, weaponEffectBindBones);
+//			roleData.avatarInfo.deputyWeaponResID = deputyWeaponResID;
 			
 			if (mountResID)
 			{
