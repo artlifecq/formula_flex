@@ -11,7 +11,6 @@ package com.rpgGame.app.manager.scene
 	import com.game.mainCore.core.manager.LayerManager;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.AreaMapManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneDropGoodsManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
@@ -20,7 +19,6 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.ClientSceneNpcCfgData;
-	import com.rpgGame.coreData.cfg.TranportsDataManager;
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
@@ -39,11 +37,7 @@ package com.rpgGame.app.manager.scene
 	import flash.events.Event;
 	import flash.geom.Point;
 	
-	import app.message.SceneTransportProto;
-	
 	import away3d.pathFinding.DistrictWithPath;
-	
-	import gameEngine2D.NetDebug;
 	
 	import org.client.mainCore.manager.EventManager;
 
@@ -56,10 +50,25 @@ package com.rpgGame.app.manager.scene
 	 */
 	public class SceneManager
 	{
+		/**
+		 * 场景中最大渲染的角色的个数 
+		 */		
 		private static var _playerMaxRenderNum : int = 300;
+		/**
+		 * 场景中最大渲染的怪物个数 
+		 */		
 		private static var _monsterMaxRenderNum : int = 100;
+		/**
+		 * 场景中最大渲染的其它种类个数，比如说特效，采集物== 
+		 */		
 		private static var _otherMaxRenderNum : int = 100;
+		/**
+		 * 场景中最大渲染角色名字的个数 
+		 */		
 		private static var _maxRoleHeadNameNum : int = 50;
+		/**
+		 * 场景中的可视范围 
+		 */		
 		private static var _viewDistance : int = 4000;
 
 		public static function setup() : void

@@ -20,17 +20,27 @@ package com.game.engine3D.scene.layers
 	 */
 	public class SceneRenderLayer extends ObjectContainer3D
 	{
+		private static const MAX_BATCH_RENDER : int = 10;
 		/**
 		 * 场景
 		 */
 		private var _scene3D : GameScene3D;
 		private var _baseObjList : Vector.<BaseObj3D>;
+		
+		private var _waitBatchRender : Vector.<BaseObj3D>;
+		
 		private var _currRenderLimitNumByType : Dictionary;
+		
 		private var _maxRenderLimitNumByType : Dictionary;
+		
 		private var _currAttachLimitNumByType : Dictionary;
+		
 		private var _maxAttachLimitNumByType : Dictionary;
+		
 		private var _maxOtherRenderLimitNum : int;
+		
 		private var _currOtherRenderLimitNum : int;
+		
 		private var _renderObjCnt : int = 0;
 		private var _tickCnt : uint = 0;
 		private var _viewDistanceSquare : Number = 0;
@@ -40,6 +50,7 @@ package com.game.engine3D.scene.layers
 			super();
 			_scene3D = scene;
 			_baseObjList = new Vector.<BaseObj3D>();
+			_waitBatchRender = new Vector.<BaseObj3D>();
 			_currRenderLimitNumByType = new Dictionary();
 			_maxRenderLimitNumByType = new Dictionary();
 			_currAttachLimitNumByType = new Dictionary();
@@ -104,9 +115,13 @@ package com.game.engine3D.scene.layers
 		}
 
 		/**
-		 * 向场景中添加角色
-		 * @param baseObj
-		 */
+		 * 向场景中添加角色 
+		 * @param baseObj      要添加的角色
+		 * @param parent       添加到什么容器上去
+		 * @param needInViewDist        是否开启视野判断
+		 * @param renderLimitable       是否有显示限制
+		 * 
+		 */		
 		public function addBaseObj(baseObj : BaseObj3D, parent : ObjectContainer3D = null, needInViewDist : Boolean = true, renderLimitable : Boolean = false) : void
 		{
 			if (!baseObj)
@@ -115,16 +130,23 @@ package com.game.engine3D.scene.layers
 			}
 			if (_baseObjList.indexOf(baseObj) == -1)
 			{
-				//强制改变此值,并更新到各个RenderUnit内
+				//强制改变此值,并更新到各个BaseObj3D内
 				baseObj.parent = parent || this;
 				baseObj.needInViewDist = needInViewDist;
 				baseObj.renderLimitable = renderLimitable;
 				baseObj.needRun = true;
 				viewStateAdd(baseObj);
-				baseObj.startRender();
+				if (renderLimitable)
+				{
+					_waitBatchRender.push(baseObj);
+				}
+				else
+				{
+					baseObj.startRender();
+				}
 				_baseObjList.push(baseObj);
 
-				ZLog.add("###场景角色数量：" + _baseObjList.length);
+				//ZLog.add("###场景角色数量：" + _baseObjList.length);
 			}
 		}
 
@@ -146,10 +168,15 @@ package com.game.engine3D.scene.layers
 				return;
 			}
 			var index : int = _baseObjList.indexOf(baseObj);
-			if (index != -1)
+			if (index > -1)
 			{
 				//从数组中移除
 				_baseObjList.splice(index, 1);
+				index = _waitBatchRender.indexOf(baseObj);
+				if (index > -1)
+				{
+					_waitBatchRender.splice(index, 1);
+				}
 				//清除缓动
 				baseObj.sceneName = null;
 				baseObj.parent = null;
@@ -501,6 +528,17 @@ package com.game.engine3D.scene.layers
 			//
 			if (isInRender)
 			{
+				var count : int = 0;
+				while (_waitBatchRender.length > 0)
+				{
+					var baseObj : BaseObj3D = _waitBatchRender.shift();
+					baseObj.startRender();
+					count++;
+					if (count > MAX_BATCH_RENDER)
+					{
+						break;
+					}
+				}
 				updateViewState();
 			}
 		}
