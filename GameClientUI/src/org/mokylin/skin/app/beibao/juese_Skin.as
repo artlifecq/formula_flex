@@ -542,6 +542,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			headMsg = temp;
 			temp.name = "headMsg";
+			temp.width = 362;
 			temp.x = 225;
 			temp.y = 91;
 			temp.elementsContent = [txt_level_i(),txt_type_i(),LoveIcon_i(),txt_loveName_i(),txt_roleName_i(),txt_team_i()];

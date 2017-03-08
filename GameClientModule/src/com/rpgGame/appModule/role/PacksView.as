@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.role
 {
+	import com.gameClient.alert.AlertPanel;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
@@ -20,6 +21,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.SpriteStat;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -27,6 +29,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.lang.LangBackPack;
+	import com.rpgGame.coreData.lang.LangMenu;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.MenuType;
 	import com.rpgGame.coreData.type.TipType;
@@ -143,10 +146,20 @@ package com.rpgGame.appModule.role
 			TipTargetManager.remove(_skin.txt_yingzi);
 			TipTargetManager.remove(_skin.txt_yuanbao);
 			TipTargetManager.remove(_skin.txt_yingzibang);
-			TipTargetManager.show( _skin.txt_lijin, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,_skin.txt_lijin.text   ));
-			TipTargetManager.show( _skin.txt_yingzi, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP, _skin.txt_yingzi.htmlText));
-			TipTargetManager.show( _skin.txt_yuanbao, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,  _skin.txt_yuanbao.text));
-			TipTargetManager.show( _skin.txt_yingzibang, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,	_skin.txt_yingzibang.htmlText));
+			TipTargetManager.remove(_skin.icon_lijin);
+			TipTargetManager.remove(_skin.icon_yingzi);
+			TipTargetManager.remove(_skin.icon_yuanbao);
+			TipTargetManager.remove(_skin.icon_yingzibang);
+			
+			TipTargetManager.show( _skin.txt_lijin, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,{name:"礼金:",value:_skin.txt_lijin.text  ,des:ItemConfig.getQItemByID(5).q_describe} ));
+			TipTargetManager.show( _skin.txt_yingzi, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP, {name:"银两:",value:_skin.txt_yingzi.text  ,des:ItemConfig.getQItemByID(4).q_describe}));
+			TipTargetManager.show( _skin.txt_yuanbao, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,  {name:"元宝:",value:_skin.txt_yuanbao.text  ,des:ItemConfig.getQItemByID(3).q_describe}));
+			TipTargetManager.show( _skin.txt_yingzibang, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,	{name:"绑银:",value:_skin.txt_yingzibang.text  ,des:ItemConfig.getQItemByID(6).q_describe}));
+			
+			TipTargetManager.show( _skin.icon_lijin, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,{name:"礼金:",value:_skin.txt_lijin.text  ,des:ItemConfig.getQItemByID(5).q_describe} ));
+			TipTargetManager.show( _skin.icon_yingzi, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP, {name:"银两:",value:_skin.txt_yingzi.text  ,des:ItemConfig.getQItemByID(4).q_describe}));
+			TipTargetManager.show( _skin.icon_yuanbao, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,  {name:"元宝:",value:_skin.txt_yuanbao.text  ,des:ItemConfig.getQItemByID(3).q_describe}));
+			TipTargetManager.show( _skin.icon_yingzibang, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,	{name:"绑银:",value:_skin.txt_yingzibang.text  ,des:ItemConfig.getQItemByID(6).q_describe}));
 		}
 		
 		private function setGridsCount(count:int, refleshNow:Boolean):void
@@ -272,12 +285,18 @@ package com.rpgGame.appModule.role
 			grid.rightMouseClickFun = onRightMouse;
 			grid.onTouchEndCallBack = onTouchGrid;
 			grid.checkDrag=checkDrag;
+			grid.setQualityImageIconPoint(1,1);
 			return render;
 		}
 		
+		/**
+		 *返回为真就不能拖动了 
+		 * @return 
+		 * 
+		 */
 		private function checkDrag():Boolean
 		{
-			return GoodsContainerPanel.isFaceMoving;
+			return GoodsContainerPanel.isFaceMoving||_skin.tab_pack.selectedIndex!=0;
 		}
 		
 		protected function onDoubleClick(grid:IconCDFace):void
@@ -328,13 +347,41 @@ package com.rpgGame.appModule.role
 				return;
 			var pos:Point = grid.parent.localToGlobal(new Point(grid.x+2,grid.y+IcoSizeEnum.SIZE_40));
 			
+			var menus:Array;
+			
 			if(item.type == GoodsType.EQUIPMENT)
 			{
-				MenuManager.showMenu( MenuType.EQUIP_MENUS,  grid.faceInfo, pos.x, pos.y, 40, _skin.container);
+				menus= MenuType.EQUIP_MENUS;
 			}else
 			{
-				MenuManager.showMenu( MenuType.ITEM_MENUS,  grid.faceInfo, pos.x, pos.y, 40, _skin.container);
+				menus= MenuType.ITEM_MENUS;
 			}
+			
+			var showMenus:Array=[];
+			var outMenus:Array=[];//排除的列表
+			if(_skin.tab_pack.selectedIndex!=0)//不在全部标签不能移动
+			{
+				outMenus.push(LangMenu.MOVE);
+			}
+			if(item.itemInfo.num<2){
+				outMenus.push(LangMenu.SPLIT);
+				outMenus.push(LangMenu.BATCH_ITM);
+			}
+			if(item.qItem.q_whether_batch==0&&outMenus.indexOf(LangMenu.BATCH_ITM)==-1){
+				outMenus.push(LangMenu.BATCH_ITM);
+			}
+			if(item.qItem.q_drop==0){//不可丢弃
+				outMenus.push(LangMenu.DISCARDED);
+			}
+		
+			var num:int=menus.length;
+			for(var i:int=0;i<num;i++){
+				if(outMenus.indexOf(menus[i])==-1){//不是排除列表里面的
+					showMenus.push(menus[i]);
+				}
+			}
+			
+			MenuManager.showMenu(showMenus,  grid.faceInfo, pos.x, pos.y, 40, _skin.container);
 		}
 		
 		private function initEvent():void
@@ -349,9 +396,28 @@ package com.rpgGame.appModule.role
 			
 			EventManager.addEvent(ItemEvent.ITEM_PRE_SPLITE, preSplit);
 			EventManager.addEvent(ItemEvent.ITEM_BATCH, preBatch);
+			EventManager.addEvent(ItemEvent.ITEM_DISCARDED, preDiscard);
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
 			
 			goodsContainer.addEvents();
+		}
+		
+		private function preDiscard(info:ClientItemInfo):void
+		{
+			if(info.qItem.q_drop_confirm==1){//需要二次确认
+				var alertSet:AlertSetInfo=new AlertSetInfo(LangBackPack.ITEM_dropItemToScene_3);
+				GameAlert.showAlert(alertSet,okDiscard,info);
+
+			}else{
+				ItemSender.discardItem(info);
+			}
+		}
+		
+		private function okDiscard(gameAlert:GameAlert,info:ClientItemInfo):void
+		{
+			if(gameAlert.clickType==AlertClickTypeEnum.TYPE_SURE){
+				ItemSender.discardItem(info);
+			}
 		}
 		
 		private function preBatch(info:ClientItemInfo):void
@@ -435,6 +501,10 @@ package com.rpgGame.appModule.role
 					ItemSender.clearUpItem(ItemContainerID.BackPack);
 					return true;
 				case _skin.btn_cangku:
+					if(storagePanel.parent){
+						storagePanel.hide();
+						return true;
+					}
 					storagePanel.show(null,"",this._skin.container);
 					storagePanel.x=225;
 					storagePanel.y=75;
@@ -462,6 +532,7 @@ package com.rpgGame.appModule.role
 			EventManager.removeEvent(ItemEvent.ITEM_BATCH, preBatch);
 			EventManager.removeEvent(ItemEvent.CHANGE_ACCESS_STATE,changeAccessState);
 			EventManager.removeEvent(ItemEvent.ITEM_PRE_SPLITE, preSplit);
+			EventManager.removeEvent(ItemEvent.ITEM_DISCARDED, preDiscard);
 			
 			TipTargetManager.remove(_skin.txt_yingzibang);
 			

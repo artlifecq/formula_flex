@@ -3,6 +3,8 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	
+	import flash.text.TextFormat;
+	
 	import org.mokylin.skin.app.tips.huobiTips_Skin;
 
 	public class AmountTip extends SkinUI implements ITip
@@ -13,6 +15,8 @@ package com.rpgGame.app.ui.tips
 		public function AmountTip()
 		{
 			_itemTip=new huobiTips_Skin();
+			_itemTip.lbl_miaoshu.wordWrap=true;
+			_itemTip.lbl_miaoshu.leading=5;
 			super(_itemTip);
 		}
 		
@@ -27,7 +31,10 @@ package com.rpgGame.app.ui.tips
 		
 		public function setTipData(data:*):void
 		{
-			_itemTip.lbl_huobi.htmlText=data;
+			_itemTip.lbl_name.text=data.name;
+			_itemTip.lbl_huobi.text=data.value;
+			_itemTip.lbl_miaoshu.htmlText=data.des;
+			_itemTip.bg.height=_itemTip.lbl_miaoshu.y+_itemTip.lbl_miaoshu.textHeight+10;
 		}
 		
 		/**
@@ -36,6 +43,12 @@ package com.rpgGame.app.ui.tips
 		 */		
 		public function hideTips():void
 		{
+		}
+		
+		public override function get height() : Number
+		{
+			
+			return _itemTip.bg.height;
 		}
 	}
 }

@@ -10,7 +10,6 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.ItemSender;
-	import com.rpgGame.app.utils.MenuUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.app.view.uiComponent.menu.Menu;
@@ -123,10 +122,13 @@ package com.rpgGame.appModule.role
 		private function initAvatar():void
 		{
 			_avatar = new InterAvatar3D();
-			_avatar.x = _skin.weapons.x + (_skin.weapons.width >> 1);
-			_avatar.y = _skin.weapons.y + _skin.weapons.height;
+			_avatar.x = _skin.weapons.x + (_skin.weapons.width >> 1)+20;
+			_avatar.y = _skin.weapons.y + _skin.weapons.height+20;
 			_avatarContainer.addChild3D(_avatar);
+			
 			_showAvatarData = new RoleData(0);
+			
+//			_avatar.transition(
 		}
 		
 		public function show():void
@@ -378,7 +380,7 @@ package com.rpgGame.appModule.role
 			this._showAvatarData.avatarInfo.deputyWeaponResID = playerData.avatarInfo.deputyWeaponResID;
 			
 			this._avatar.setRoleData(this._showAvatarData);
-			this._avatar.curRole.setScale(1.45);			
+			this._avatar.curRole.setScale(1.7);			
 		}
 	}
 }

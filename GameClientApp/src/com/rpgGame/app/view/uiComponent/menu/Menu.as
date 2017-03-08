@@ -41,7 +41,7 @@ package com.rpgGame.app.view.uiComponent.menu
 //			addChild( _menuBG );
 
 			_menuBG = new UIAsset();
-			_menuBG.styleName = "ui/common/tip/tip.png";
+			_menuBG.styleName = "ui/common/tips/tips_2.png";
 			addChild( _menuBG );
 			_menuBG.width = MenuItemView.MAX_WIDTH + 12;
 		}
@@ -81,7 +81,7 @@ package com.rpgGame.app.view.uiComponent.menu
 					_menuItemVect.push( menuItem );
 				}
 				
-				menuItem.setWidth( menuWidth, 5 );
+//				menuItem.setWidth( menuWidth, 5 );
 				
 				menuItem.setData( menus[i] );
 				menuItem.visible = true;

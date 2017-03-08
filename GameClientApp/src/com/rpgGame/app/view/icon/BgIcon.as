@@ -8,6 +8,7 @@ package com.rpgGame.app.view.icon
 	
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
+	import feathers.controls.text.Fontter;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
@@ -87,11 +88,11 @@ package com.rpgGame.app.view.icon
 		public function showQuality( qualityID:int ):void
 		{
 			_qualityId = qualityID;
-			if( _qualityId <= 0 )
+		/*	if( _qualityId <= 0 )
 			{
 				hideQuality();
 				return;
-			}
+			}*/
 			if(_qualityImage == null)
 			{
 				_qualityImage = new UIAsset();
@@ -359,8 +360,9 @@ package com.rpgGame.app.view.icon
 			_countText.verticalAlign="middle";
 			_countText.verticalCenter=-2;
 			_countText.textAlign = Align.RIGHT;
-			_countText.color = 0xffffff;
+			_countText.color = 0xcfc6ae;
 			_countText.fontSize = 10;
+			_countText.nativeFilters=Fontter.filterObj["labelFilterBlack"];
 			addChild(_countText);
 		}
 		
@@ -378,13 +380,13 @@ package com.rpgGame.app.view.icon
 			if( _bgImage != null )
 				addChild( _bgImage );
 			
-			if( _iconImage != null )
-				addChild( _iconImage );
-			
 			if( _qualityImage != null )
 			{
 				addChild( _qualityImage );
 			}
+			if( _iconImage != null )
+				addChild( _iconImage );
+			
 			
 			if( _countText != null )
 				addChild( _countText );

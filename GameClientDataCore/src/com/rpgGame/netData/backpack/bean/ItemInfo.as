@@ -48,6 +48,9 @@ package com.rpgGame.netData.backpack.bean{
 		
 		//附加属性表
 		private var _attributeInfos: Vector.<AttributeInfo> = new Vector.<AttributeInfo>();
+		//战斗力
+		private var _fightPower: int;
+		
 		/**
 		 * 写入字节缓存
 		 */
@@ -77,6 +80,8 @@ package com.rpgGame.netData.backpack.bean{
 			for (var i: int = 0; i < _attributeInfos.length; i++) {
 				writeBean(_attributeInfos[i]);
 			}
+			//战斗力
+			writeInt(_fightPower);
 			return true;
 		}
 		
@@ -109,6 +114,8 @@ package com.rpgGame.netData.backpack.bean{
 			for (var i: int = 0; i < attributeInfos_length; i++) {
 				_attributeInfos[i] = readBean(AttributeInfo) as AttributeInfo;
 			}
+			//战斗力
+			_fightPower = readInt();
 			return true;
 		}
 		
@@ -275,6 +282,21 @@ package com.rpgGame.netData.backpack.bean{
 		 */
 		public function set attributeInfos(value: Vector.<AttributeInfo>): void{
 			this._attributeInfos = value;
+		}
+		
+		/**
+		 * get 战斗力
+		 * @return 
+		 */
+		public function get fightPower(): int{
+			return _fightPower;
+		}
+		
+		/**
+		 * set 战斗力
+		 */
+		public function set fightPower(value: int): void{
+			this._fightPower = value;
 		}
 		
 	}

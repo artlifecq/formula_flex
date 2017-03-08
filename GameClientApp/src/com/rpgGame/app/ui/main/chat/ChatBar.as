@@ -12,6 +12,7 @@ package com.rpgGame.app.ui.main.chat {
     import com.rpgGame.app.richText.RichTextCustomUtil;
     import com.rpgGame.app.richText.component.RichTextArea3D;
     import com.rpgGame.app.scene.SceneRole;
+    import com.rpgGame.app.ui.alert.GameAlert;
     import com.rpgGame.app.ui.main.chat.laba.VipChatCanvas;
     import com.rpgGame.core.events.ChatEvent;
     import com.rpgGame.core.events.SceneInteractiveEvent;
@@ -21,6 +22,9 @@ package com.rpgGame.app.ui.main.chat {
     import com.rpgGame.coreData.cfg.ChatCfgData;
     import com.rpgGame.coreData.clientConfig.FaceInfo;
     import com.rpgGame.coreData.info.MapDataManager;
+    import com.rpgGame.coreData.info.alert.AlertInfo;
+    import com.rpgGame.coreData.info.alert.AlertSetInfo;
+    import com.rpgGame.coreData.lang.LangBackPack;
     import com.rpgGame.coreData.type.EnumHurtType;
     import com.rpgGame.coreData.type.chat.EnumChatChannelType;
     import com.rpgGame.coreData.utils.ColorUtils;

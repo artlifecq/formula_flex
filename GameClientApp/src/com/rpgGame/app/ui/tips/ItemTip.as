@@ -2,12 +2,15 @@ package com.rpgGame.app.ui.tips
 {
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.utils.FaceUtil;
-	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.enum.item.ItemLimitType;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
@@ -32,7 +35,7 @@ package com.rpgGame.app.ui.tips
 		private var yinIcon:UIAsset;
 		
 		/** 装备格子 **/
-		private var _iconFace:IconCDFace;
+		private var _iconFace:DragDropItem;
 		
 		private var labelList:Vector.<Label>;
 		private var lines:Vector.<UIAsset>;
@@ -51,7 +54,8 @@ package com.rpgGame.app.ui.tips
 		private function initTip() : void
 		{
 			
-			_iconFace=new IconCDFace(IcoSizeEnum.ICON_64);
+			_iconFace=new DragDropItem(IcoSizeEnum.ICON_64,0);
+			_iconFace.gridInfo=new GridInfo(ItemContainerID.BackPack,0);
 			addChild(_iconFace);
 			_iconFace.x=8;
 			_iconFace.y=12;
@@ -97,9 +101,12 @@ package com.rpgGame.app.ui.tips
 			}
 			
 			//设置装备格子信息
-			FaceUtil.SetItemGrid(_iconFace, _itemInfo, false);
+			FaceUtil.SetItemGrid(_iconFace, _itemInfo);
 			_iconFace.setQualityImageIconPoint(6,4);
 			_iconFace.countText.visible=false;
+			
+			
+			_itemTip.lbl_name.color=ItemConfig.getItemQualityColor(_itemInfo.cfgId);
 			_itemTip.lbl_name.text=_itemInfo.qItem.q_name;
 			_itemTip.lbl_lock.visible=true;
 			if(_itemInfo.binded){
@@ -239,7 +246,7 @@ package com.rpgGame.app.ui.tips
 		public override function get height() : Number
 		{
 
-			return _itemTip.height;
+			return _itemTip.bg.height;
 		}
 
 		private static var _instance : ItemTip = null;
