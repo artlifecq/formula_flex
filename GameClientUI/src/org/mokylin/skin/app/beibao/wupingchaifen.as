@@ -34,13 +34,7 @@ package org.mokylin.skin.app.beibao
 
 		public var btn_ok:feathers.controls.Button;
 
-		public var icon_all:feathers.controls.UIAsset;
-
 		public var icon_arrow:feathers.controls.UIAsset;
-
-		public var icon_part1:feathers.controls.UIAsset;
-
-		public var icon_part2:feathers.controls.UIAsset;
 
 		public var lbl_currentNum:feathers.controls.Label;
 
@@ -59,7 +53,7 @@ package org.mokylin.skin.app.beibao
 			this.currentState = "normal";
 			this.height = 250;
 			this.width = 337;
-			this.elementsContent = [bg_i(),__wupingchaifen_UIAsset1_i(),lbl_title_i(),btnClose_i(),btn_ok_i(),btn_cancel_i(),icon_all_i(),icon_part1_i(),icon_part2_i(),icon_arrow_i(),__wupingchaifen_Label1_i(),__wupingchaifen_Label2_i(),slider_i(),btn_min_i(),btn_max_i(),__wupingchaifen_UIAsset2_i(),lbl_currentNum_i()];
+			this.elementsContent = [bg_i(),__wupingchaifen_UIAsset1_i(),lbl_title_i(),btnClose_i(),btn_ok_i(),btn_cancel_i(),icon_arrow_i(),__wupingchaifen_Label1_i(),__wupingchaifen_Label2_i(),slider_i(),btn_min_i(),btn_max_i(),__wupingchaifen_UIAsset2_i(),lbl_currentNum_i()];
 			
 			states = {
 			};
@@ -74,10 +68,11 @@ package org.mokylin.skin.app.beibao
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.bold = false;
+			temp.height = 18;
 			temp.htmlText = "需要将这组物品<font color='#5DBD37'>拆分</font>成两堆吗?";
 			temp.letterSpacing = 0;
-			temp.text = "标签";
 			temp.color = 0x8b8d7b;
+			temp.width = 200;
 			temp.x = 71;
 			temp.y = 106;
 			return temp;
@@ -188,17 +183,6 @@ package org.mokylin.skin.app.beibao
 			return temp;
 		}
 
-		private function icon_all_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon_all = temp;
-			temp.name = "icon_all";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 63;
-			temp.y = 48;
-			return temp;
-		}
-
 		private function icon_arrow_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -207,28 +191,6 @@ package org.mokylin.skin.app.beibao
 			temp.styleName = "ui/common/tubiao/jiantou.png";
 			temp.x = 126;
 			temp.y = 65;
-			return temp;
-		}
-
-		private function icon_part1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon_part1 = temp;
-			temp.name = "icon_part1";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 166;
-			temp.y = 48;
-			return temp;
-		}
-
-		private function icon_part2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon_part2 = temp;
-			temp.name = "icon_part2";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 222;
-			temp.y = 48;
 			return temp;
 		}
 

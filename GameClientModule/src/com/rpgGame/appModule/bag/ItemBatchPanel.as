@@ -33,7 +33,6 @@ package com.rpgGame.appModule.bag
 		{
 			_skin=new piliangshiyong();
 			_iconFace=new IconCDFace(IcoSizeEnum.ICON_64);
-			_iconFace.touchable=false;
 			super(_skin);
 		}
 		
@@ -57,10 +56,23 @@ package com.rpgGame.appModule.bag
 			_skin.lbl_num.text="本组剩余:"+clientItemInfo.itemInfo.num;
 			_iconFace.x=30;
 			_iconFace.y=50;
-			FaceUtil.SetItemGrid(_iconFace, clientItemInfo, false);
+			FaceUtil.SetItemGrid(_iconFace, clientItemInfo);
 			_iconFace.setQualityImageIconPoint(6,4);
+			_iconFace.selectImgVisible=false;
 			_skin.container.addChild(_iconFace);
 			_skin.lbl_currentNum.text=currentNum.toString();
+			
+			if(clientItemInfo.binded){
+				_skin.isLock.text="[已绑定]";
+			}else{
+				if(clientItemInfo.qItem.q_bind==0){
+					_skin.isLock.visible=false;
+				}else if(clientItemInfo.qItem.q_bind==1){
+					_skin.isLock.visible="[获得时绑定]";
+				}else{
+					_skin.isLock.visible="[使用后绑定]";
+				}
+			}
 		}
 		
 		override protected function onStageResize(sw : int, sh : int) : void

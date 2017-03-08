@@ -40,6 +40,7 @@ package com.rpgGame.app.fight.spell
 	import away3d.pathFinding.DistrictWithPath;
 	
 	import gameEngine2D.NetDebug;
+	import gameEngine2D.PolyUtil;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
@@ -873,7 +874,8 @@ package com.rpgGame.app.fight.spell
 			//判断范围
 			tempVector3D.setTo(releaseTargetPos.x, 0, releaseTargetPos.y);
 			var districtWithPath : DistrictWithPath = SceneManager.getDistrict();
-			var path : Vector.<Vector3D> = PathFinderUtil.findPath(districtWithPath, MainRoleManager.actor.position, tempVector3D);
+			//var path : Vector.<Vector3D> = PathFinderUtil.findPath(districtWithPath, MainRoleManager.actor.position, tempVector3D);
+			var path : Vector.<Vector3D> = PolyUtil.findPath(districtWithPath, MainRoleManager.actor.position, tempVector3D);
 			dist = Point.distance(selfPos, releaseTargetPos);
 			var inRange : Boolean;
 			

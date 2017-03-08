@@ -153,7 +153,7 @@ package com.rpgGame.app.utils
 						EventManager.dispatchEvent(ItemEvent.ITEM_BATCH, data);
 						break;
 					case LangMenu.DISCARDED://丢弃
-						ItemSender.discardItem(item);
+						EventManager.dispatchEvent(ItemEvent.ITEM_BATCH, data);
 						break;
 					case LangMenu.SHOW:
 						EventManager.dispatchEvent(ChatEvent.SHOW_GOODS, data);

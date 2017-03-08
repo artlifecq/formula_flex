@@ -15,9 +15,9 @@ package org.mokylin.skin.app.tips
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var lbl_huobi:feathers.controls.Label;
+		public var bg:feathers.controls.UIAsset;
 
-		public var lbl_laiyuan:feathers.controls.Label;
+		public var lbl_huobi:feathers.controls.Label;
 
 		public var lbl_miaoshu:feathers.controls.Label;
 
@@ -32,7 +32,7 @@ package org.mokylin.skin.app.tips
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [__huobiTips_Skin_UIAsset1_i(),lbl_name_i(),lbl_huobi_i(),lbl_miaoshu_i(),lbl_laiyuan_i()];
+			this.elementsContent = [bg_i(),lbl_name_i(),lbl_huobi_i(),lbl_miaoshu_i()];
 			
 			states = {
 			};
@@ -43,9 +43,11 @@ package org.mokylin.skin.app.tips
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __huobiTips_Skin_UIAsset1_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg = temp;
+			temp.name = "bg";
 			temp.height = 85;
 			temp.styleName = "ui/common/tips/tips_2.png";
 			temp.width = 295;
@@ -65,24 +67,9 @@ package org.mokylin.skin.app.tips
 			temp.text = "99999/100000";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 214;
-			temp.x = 71;
+			temp.width = 226;
+			temp.x = 59;
 			temp.y = 8;
-			return temp;
-		}
-
-		private function lbl_laiyuan_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbl_laiyuan = temp;
-			temp.name = "lbl_laiyuan";
-			temp.height = 20;
-			temp.text = "通过参与活动等方式可获得银两";
-			temp.color = 0x2083B9;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 276;
-			temp.x = 11;
-			temp.y = 57;
 			return temp;
 		}
 
@@ -91,7 +78,7 @@ package org.mokylin.skin.app.tips
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbl_miaoshu = temp;
 			temp.name = "lbl_miaoshu";
-			temp.height = 20;
+			temp.height = 39;
 			temp.text = "货币可用于玩家间交易及购买商店道具";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];

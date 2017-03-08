@@ -70,15 +70,15 @@ package com.rpgGame.coreData.cfg
 		public static const COLOR_CODE_27:uint = 0x76726d;
 		//////////////////////////////品质色///////////////////////////////////////////
 		/**品质白*/		
-		public static const Q_WHITE:uint = COLOR_CODE_1;
+		public static const Q_WHITE:uint = 0x939388;
 		/**品质绿*/		
-		public static const Q_GREEN:uint = COLOR_CODE_16;
+		public static const Q_GREEN:uint = 0x25931b;
 		/**品质蓝色*/		
-		public static const Q_BLUE:uint = COLOR_CODE_19;
+		public static const Q_BLUE:uint = 0x2c87b0;
 		/**品质紫色*/		
-		public static const Q_PURPLE:uint = COLOR_CODE_21;
+		public static const Q_PURPLE:uint = 0x9b4aa8;
 		/**品质橙色  */		
-		public static const Q_YELLOW:uint = COLOR_CODE_25;
+		public static const Q_YELLOW:uint = 0xc2992b;
 		
 		//////////////////////////////聊天文字颜色///////////////////////////////////////////
 		/**公告*/

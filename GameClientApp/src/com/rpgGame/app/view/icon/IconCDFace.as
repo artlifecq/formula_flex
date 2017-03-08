@@ -301,7 +301,6 @@ package com.rpgGame.app.view.icon
 			_faceInfo = null;
 
 			TipTargetManager.remove(this);
-
 			super.clear();
 		}
 

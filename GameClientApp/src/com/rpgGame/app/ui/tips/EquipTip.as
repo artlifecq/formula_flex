@@ -1,6 +1,5 @@
 package com.rpgGame.app.ui.tips
 {
-	import com.rpgGame.app.manager.fight.FightValueUtil;
 	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.utils.FaceUtil;
@@ -9,6 +8,7 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -109,15 +109,15 @@ package com.rpgGame.app.ui.tips
 				var line:UIAsset=lines.shift();
 				line.removeFromParent(true);
 			}
-			_itemTip.lbl_titile.text=_itemInfo.qItem.q_name;
+			
 			var equipItemInfo:ClientItemInfo=RoleEquipmentManager.instance.getEquipInfoByIndex(_itemInfo.qItem.q_kind);//根据佩戴部位获取已经装备的装备信息
-			var equipFight:Number=FightValueUtil.getFightValueByEquip(_itemInfo);
+			var equipFight:Number=_itemInfo.itemInfo.fightPower;
 			var currentFight:int=0;
 			_itemTip.numbers.number=equipFight;
 			_itemTip.tip_down.visible=false;
 			_itemTip.tip_up.visible=false;
 			if(equipItemInfo){
-				currentFight=FightValueUtil.getFightValueByEquip(equipItemInfo);
+				currentFight=equipItemInfo.itemInfo.fightPower;
 			}
 			
 			_itemTip.isLock.visible=true;
@@ -167,8 +167,13 @@ package com.rpgGame.app.ui.tips
 			
 			for(var i:int=0;i<_itemTip.zhuangbei_bg.numChildren;i++){
 				_itemTip.zhuangbei_bg.getChildAt(i).visible=false;
+				_itemTip.grp_titlebg.getChildAt(i).visible=false;
 			}
-			_itemTip.zhuangbei_bg.getChildAt(_itemInfo.qItem.q_default-1).visible=true;
+			_itemTip.zhuangbei_bg.getChildAt(_itemInfo.qItem.q_default).visible=true;
+			_itemTip.grp_titlebg.getChildAt(_itemInfo.qItem.q_default).visible=true;
+			
+			_itemTip.lbl_titile.color=ItemConfig.getItemQualityColor(_itemInfo.cfgId);
+			_itemTip.lbl_titile.text=_itemInfo.qItem.q_name;
 			
 			var name:String;
 			var value:String;
