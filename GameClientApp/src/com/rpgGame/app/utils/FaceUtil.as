@@ -24,6 +24,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.info.mount.MountInfoData;
 	import com.rpgGame.coreData.lang.LangMount;
 	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.coreData.type.AssetUrl;
 	import com.rpgGame.coreData.type.ShopType;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.GridBGType;
@@ -116,6 +117,7 @@ package com.rpgGame.app.utils
 			if(!itemInfo)
 			{
 				TipTargetManager.remove( grid );
+				grid.selectImgVisible = false;
 				return;
 			}
 			
@@ -129,11 +131,23 @@ package com.rpgGame.app.utils
 			grid.setIsShowCdTm( true );
 			grid.sortLayer();
 			grid.setIsBind(itemInfo.binded);
+			grid.selectImgVisible = true;
 			
 			if(itemInfo is EquipInfo)
 			{
 				grid.setIsWear( RoleEquipmentManager.equipIsWearing(itemInfo));
 				grid.setIsWear( MountEquipmentManager.instance.equipIsWearing(itemInfo));
+			}
+			var hero:HeroData=MainRoleManager.actorInfo;
+			switch( itemInfo.type )
+			{
+				case GoodsType.EQUIPMENT://装备
+				case GoodsType.EQUIPMENT1://装备
+				case GoodsType.EQUIPMENT2://装备
+					grid.setLV(itemInfo.qItem.q_levelnum);
+					break;
+				default:
+					break;
 			}
 			
 			if( isTips )
@@ -144,14 +158,23 @@ package com.rpgGame.app.utils
 					case GoodsType.EQUIPMENT1://装备
 					case GoodsType.EQUIPMENT2://装备
 						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.EQUIP_TIP, itemInfo ) );
-						grid.setLV(itemInfo.qItem.q_levelnum);
-//						grid.setLV(3);
 						if(itemInfo.containerID==ItemContainerID.BackPack){
-							var hero:HeroData=MainRoleManager.actorInfo;
 							if(hero.job!=itemInfo.qItem.q_job&&itemInfo.qItem.q_job!=0){
-								grid.setIsJob(false);//职业不符合
+								grid.setJobState(AssetUrl.EQUIP_JOB_NO);
 							}else{
-								grid.setIsJob(true);
+								var equipItemInfo:ClientItemInfo=RoleEquipmentManager.instance.getEquipInfoByIndex(itemInfo.qItem.q_kind);
+								var equipFight:int;
+								if(equipItemInfo){
+									equipFight=equipItemInfo.itemInfo.fightPower;
+								}
+								var targetFight:int=itemInfo.itemInfo.fightPower;
+								if(equipFight>targetFight){
+									grid.setJobState(AssetUrl.EQUIP_JOB_DOWN);
+								}else if(equipFight<targetFight){
+									grid.setJobState(AssetUrl.EQUIP_JOB_UP);
+								}else{
+									grid.setJobState(null);
+								}
 							}
 						}
 						break;

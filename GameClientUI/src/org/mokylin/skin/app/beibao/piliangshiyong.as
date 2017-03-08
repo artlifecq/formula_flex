@@ -37,6 +37,8 @@ package org.mokylin.skin.app.beibao
 
 		public var icon_all:feathers.controls.UIAsset;
 
+		public var isLock:feathers.controls.Label;
+
 		public var lbl_currentNum:feathers.controls.Label;
 
 		public var lbl_name:feathers.controls.Label;
@@ -190,7 +192,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "contents";
 			temp.x = 30;
 			temp.y = 49;
-			temp.elementsContent = [icon_all_i(),lbl_name_i(),lbl_num_i()];
+			temp.elementsContent = [icon_all_i(),lbl_name_i(),lbl_num_i(),isLock_i()];
 			return temp;
 		}
 
@@ -202,6 +204,19 @@ package org.mokylin.skin.app.beibao
 			temp.styleName = "ui/common/gezikuang/tubiaodikuang/60.png";
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function isLock_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			isLock = temp;
+			temp.name = "isLock";
+			temp.text = "【已绑定】";
+			temp.color = 0xE1201C;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 202;
+			temp.y = 46;
 			return temp;
 		}
 

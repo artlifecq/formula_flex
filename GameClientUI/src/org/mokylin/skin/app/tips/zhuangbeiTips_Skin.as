@@ -23,8 +23,6 @@ package org.mokylin.skin.app.tips
 
 		public var bg_cheng:feathers.controls.UIAsset;
 
-		public var bg_hong:feathers.controls.UIAsset;
-
 		public var bg_lan:feathers.controls.UIAsset;
 
 		public var bg_lv:feathers.controls.UIAsset;
@@ -70,8 +68,6 @@ package org.mokylin.skin.app.tips
 		public var titlebg_bai:feathers.controls.UIAsset;
 
 		public var titlebg_cheng:feathers.controls.UIAsset;
-
-		public var titlebg_hong:feathers.controls.UIAsset;
 
 		public var titlebg_lan:feathers.controls.UIAsset;
 
@@ -215,17 +211,6 @@ package org.mokylin.skin.app.tips
 			return temp;
 		}
 
-		private function bg_hong_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			bg_hong = temp;
-			temp.name = "bg_hong";
-			temp.styleName = "ui/common/tips/mc/icon_bg/di_hong.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function bg_lan_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -299,7 +284,7 @@ package org.mokylin.skin.app.tips
 			temp.name = "grp_titlebg";
 			temp.x = 73;
 			temp.y = 4;
-			temp.elementsContent = [titlebg_bai_i(),titlebg_lv_i(),titlebg_lan_i(),titlebg_zi_i(),titlebg_cheng_i(),titlebg_hong_i()];
+			temp.elementsContent = [titlebg_bai_i(),titlebg_lv_i(),titlebg_lan_i(),titlebg_zi_i(),titlebg_cheng_i()];
 			return temp;
 		}
 
@@ -484,7 +469,6 @@ package org.mokylin.skin.app.tips
 			titlebg_bai = temp;
 			temp.name = "titlebg_bai";
 			temp.styleName = "ui/common/tips/mc/title_bg/title_bg1.png";
-			temp.visible = false;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -496,18 +480,6 @@ package org.mokylin.skin.app.tips
 			titlebg_cheng = temp;
 			temp.name = "titlebg_cheng";
 			temp.styleName = "ui/common/tips/mc/title_bg/title_bg5.png";
-			temp.visible = false;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function titlebg_hong_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			titlebg_hong = temp;
-			temp.name = "titlebg_hong";
-			temp.styleName = "ui/common/tips/mc/title_bg/title_bg6.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -519,7 +491,6 @@ package org.mokylin.skin.app.tips
 			titlebg_lan = temp;
 			temp.name = "titlebg_lan";
 			temp.styleName = "ui/common/tips/mc/title_bg/title_bg3.png";
-			temp.visible = false;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -531,7 +502,6 @@ package org.mokylin.skin.app.tips
 			titlebg_lv = temp;
 			temp.name = "titlebg_lv";
 			temp.styleName = "ui/common/tips/mc/title_bg/title_bg2.png";
-			temp.visible = false;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -543,7 +513,6 @@ package org.mokylin.skin.app.tips
 			titlebg_zi = temp;
 			temp.name = "titlebg_zi";
 			temp.styleName = "ui/common/tips/mc/title_bg/title_bg4.png";
-			temp.visible = false;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -567,7 +536,7 @@ package org.mokylin.skin.app.tips
 			temp.name = "zhuangbei_bg";
 			temp.x = 79;
 			temp.y = 41;
-			temp.elementsContent = [bg_bai_i(),bg_lv_i(),bg_lan_i(),bg_zi_i(),bg_hong_i(),bg_cheng_i()];
+			temp.elementsContent = [bg_bai_i(),bg_lv_i(),bg_lan_i(),bg_zi_i(),bg_cheng_i()];
 			return temp;
 		}
 

@@ -15,6 +15,7 @@ package com.rpgGame.app.ui.alert
 	import gs.TweenLite;
 	
 	import org.client.mainCore.ds.HashMap;
+	import org.mokylin.skin.common.alert.AlertOKCancel;
 	
 	import starling.display.DisplayObject;
 
@@ -41,7 +42,7 @@ package com.rpgGame.app.ui.alert
 					//skin = new AlertOkSkin();
 					break;
 				case AlertTypeEnum.ALERT_TYPE_OK_CANCEL:
-					//skin = new AlertSkin();
+					skin = new AlertOKCancel();
 					break;
 				case AlertTypeEnum.ALERT_TYPE_TRANSPARENT_OK:
 					//skin = new AlertTransparentOkSkin();

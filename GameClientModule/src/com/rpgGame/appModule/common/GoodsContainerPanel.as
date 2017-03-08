@@ -370,7 +370,10 @@ package com.rpgGame.appModule.common
 			movingFace.setIconResName(ClientConfig.getItemIcon(info.icoName, IcoSizeEnum.ICON_42 ));
 			
 			//拖出后仅在显示层清空此格子
-			setGridInfo(info.index, null);
+			
+			var srcFace:DragDropItem = getDragDropItemByItemInfo(info);
+			srcFace.isGary=true;//置灰
+//			setGridInfo(info.index, null);//前清空
 			
 			startFaceMove();
 		}

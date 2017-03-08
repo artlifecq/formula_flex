@@ -32,8 +32,12 @@ package com.rpgGame.coreData.type
 		/**icon上穿戴 60 * 60**/
 		public static const EQUIP_WARING_60 : String = "ui/common/tubiao/tongyongtubiao_xiao/chuan_60.png";
 		
-		/**icon上职业**/
-		public static const EQUIP_JOB : String = "ui/common/grid/normal/jz.png";
+		/**icon上职业不符合**/
+		public static const EQUIP_JOB_NO : String = "ui/common/grid/normal/jz.png";
+		/**icon上战斗力提升**/
+		public static const EQUIP_JOB_UP : String = "ui/common/grid/normal/jobup.png";
+		/**icon上战斗力下降**/
+		public static const EQUIP_JOB_DOWN : String = "ui/common/grid/normal/jobdown.png";
 		/**icon上绑字 42 * 42**/
 		public static const EQUIP_BIND_42 : String = "ui/common/grid/normal/suo_xiao.png";
 		/**icon上绑字 46* 46**/

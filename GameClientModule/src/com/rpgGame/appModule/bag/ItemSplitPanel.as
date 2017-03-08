@@ -2,11 +2,13 @@ package com.rpgGame.appModule.bag
 {
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	
 	import org.mokylin.skin.app.beibao.wupingchaifen;
@@ -43,7 +45,7 @@ package com.rpgGame.appModule.bag
 			this.addChild(split2);
 			this.addChild(targetIcon);
 			
-			split1.touchable=split2.touchable=targetIcon.touchable=false;
+//			split1.touchable=split2.touchable=targetIcon.touchable=false;
 			
 			targetIcon.x=70;
 			split1.x=173;
@@ -68,8 +70,10 @@ package com.rpgGame.appModule.bag
 		
 		private function getGrid():DragDropItem
 		{
-			var render:GridItemRender = new GridItemRender(IcoSizeEnum.ICON_48,GridBGType.GRID_SIZE_46);
+			var render:GridItemRender = new GridItemRender(IcoSizeEnum.ICON_42,GridBGType.GRID_SIZE_44);
 			var grid:DragDropItem = render.getGrid();
+			grid.selectImgVisible=false;
+			grid.gridInfo=new GridInfo(0,0);
 			return grid;
 		}
 		
@@ -77,12 +81,13 @@ package com.rpgGame.appModule.bag
 		{
 			_iteminfo = value;
 			
-			allNum=_iteminfo.itemInfo.num;
-			targetIcon.setIconResName( ClientConfig.getItemIcon(_iteminfo.icoName, targetIcon. iconSize));
-			split1.setIconResName( ClientConfig.getItemIcon(_iteminfo.icoName, split1. iconSize));
-			split2.setIconResName( ClientConfig.getItemIcon(_iteminfo.icoName, split2. iconSize));
-			targetIcon.count=allNum;
+			FaceUtil.SetItemGrid(targetIcon, _iteminfo);
+			FaceUtil.SetItemGrid(split1, _iteminfo);
+			FaceUtil.SetItemGrid(split2, _iteminfo);
 			
+			allNum=_iteminfo.itemInfo.num;
+			
+			targetIcon.count=allNum;
 			targetIcon.alwayShowCount=split1.alwayShowCount=split2.alwayShowCount=true;
 			
 			skin.slider.minimum=1;
