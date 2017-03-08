@@ -14,28 +14,23 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.events.AvatarEvent;
 	import com.rpgGame.coreData.AvatarInfo;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.model.AvatarClothesEffectResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarHairResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarMountResCfgData;
-	import com.rpgGame.coreData.cfg.model.AvatarWeaponEffectResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarWeapontResCfgData;
 	import com.rpgGame.coreData.cfg.model.HeroModelCfgData;
 	import com.rpgGame.coreData.cfg.model.MountModelCfgData;
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
-	import com.rpgGame.coreData.clientConfig.AvatarClothesEffectRes;
 	import com.rpgGame.coreData.clientConfig.AvatarClothesRes;
 	import com.rpgGame.coreData.clientConfig.AvatarDeputyWeaponRes;
 	import com.rpgGame.coreData.clientConfig.AvatarHairRes;
 	import com.rpgGame.coreData.clientConfig.AvatarMountRes;
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
-	import com.rpgGame.coreData.clientConfig.AvatarWeaponEffectRes;
 	import com.rpgGame.coreData.clientConfig.AvatarWeaponRes;
 	import com.rpgGame.coreData.clientConfig.HeroModel;
 	import com.rpgGame.coreData.clientConfig.MountModel;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
-	import com.rpgGame.coreData.role.BaseHeroData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RenderUnitID;
@@ -45,8 +40,6 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Vector3D;
-	
-	import app.message.RaceId;
 	
 	import org.client.mainCore.manager.EventManager;
 	
@@ -443,7 +436,7 @@ package com.rpgGame.app.manager
 				{
 					if (rpd_body.animatorSourchPath)
 					{
-						ru = role.avatar.addRenderUnitToComposite(RenderUnitType.BODY, RenderUnitID.BODY,rpd_weapon,0,BoneNameEnum.b_r_wq_01);
+						ru = role.avatar.addRenderUnitToComposite(RenderUnitType.BODY, RenderUnitID.BODY, rpd_weapon);
 //						ru = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.b_r_wq_01, rpd_weapon);
 					}
 					else
@@ -554,7 +547,7 @@ package com.rpgGame.app.manager
 				{
 					if (rpd_body.animatorSourchPath)
 					{
-						ru = role.avatar.addRenderUnitToComposite(RenderUnitType.BODY, RenderUnitID.BODY,rpd_deputy_weapon,0,BoneNameEnum.b_l_wq_01);
+						ru = role.avatar.addRenderUnitToComposite(RenderUnitType.BODY, RenderUnitID.BODY, rpd_deputy_weapon);
 //						ru = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.b_l_wq_01, rpd_deputy_weapon);
 					}
 					else
@@ -581,6 +574,37 @@ package com.rpgGame.app.manager
 			else
 			{
 				role.avatar.removeRenderUnitByID(RenderUnitType.DEPUTY_WEAPON, RenderUnitID.DEPUTY_WEAPON);
+			}
+			
+			var rpd_deputyWeapon_effect : RenderParamData3D = avatarInfo.rpd_deputyWeapon_effect;
+			if (rpd_deputyWeapon_effect != null)
+			{
+				if (rpd_body)
+				{
+					if (rpd_body.animatorSourchPath)
+					{
+						ru = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.b_l_wq_01, rpd_deputyWeapon_effect);
+					}
+					else
+					{
+						ru = role.avatar.addRenderUnitToBone(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.b_l_wq_01, rpd_deputyWeapon_effect);
+					}
+				}
+				if (ru)
+				{
+					ru.setAddedCallBack(partAddedCallBack, role);
+					ru.entityGlass = false;
+					ru.useLight = false;
+					ru.castsShadows = false;
+					ru.repeat = 0;
+					ru.position = avatarInfo.deputyWeaponEffectOffset || new Vector3D();
+					ru.setScale(avatarInfo.deputyWeaponEffectScale > 0 ? avatarInfo.deputyWeaponEffectScale * 0.01 : 1);
+					ru.play(0);
+				}
+			}
+			else
+			{
+				role.avatar.removeRenderUnitByID(RenderUnitType.DEPUTY_WEAPON_EFFECT, RenderUnitID.DEPUTY_WEAPON_EFFECT);
 			}
 		}
 		

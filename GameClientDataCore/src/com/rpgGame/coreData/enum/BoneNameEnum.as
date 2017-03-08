@@ -6,11 +6,11 @@ package com.rpgGame.coreData.enum
 		/**
 		 * 左手武器 
 		 */		
-		public static const b_l_wq_01 : String = "Bip001 Head";
+		public static const b_l_wq_01 : String = "b_l_wq_01";
 		/**
 		 * 右手武器 
 		 */		
-		public static const b_r_wq_01 : String = "Bip001 Head";
+		public static const b_r_wq_01 : String = "b_r_wq_01";
 		/**
 		 * 身体位置 
 		 */		
