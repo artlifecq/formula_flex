@@ -14,13 +14,15 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.core.state.role.control.MoveState;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
 	import com.rpgGame.coreData.type.RoleStateType;
-
+	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	import flash.utils.getTimer;
-
+	
 	import away3d.pathFinding.DistrictWithPath;
-
+	
+	import gameEngine2D.PolyUtil;
+	
 	import gs.TweenLite;
 	import gs.easing.Linear;
 
@@ -187,19 +189,22 @@ package com.rpgGame.app.state.role.control
 			if (_machine && !_machine.isDisposed)
 			{
 				var targetPos3D : Vector3D = _stateReference.vectorPath;
-				var path : Vector.<Vector3D> = PathFinderUtil.findPath(_districtWithPath, (_machine.owner as SceneRole).position, targetPos3D);
+				var path : Vector.<Vector3D> = PolyUtil.findPath(_districtWithPath, (_machine.owner as SceneRole).position, targetPos3D);
+				//path = PathFinderUtil.findPath(_districtWithPath, (_machine.owner as SceneRole).position, targetPos3D);
 				//如果无法找到寻路路径则找最近的点
 				if (path == null || path.length < 2)
 				{
 					var nearestPos : Vector3D = PathFinderUtil.getNearestPos(_districtWithPath, (_machine.owner as SceneRole).position, targetPos3D);
-					path = PathFinderUtil.findPath(_districtWithPath, (_machine.owner as SceneRole).position, nearestPos);
+					path = PolyUtil.findPath(_districtWithPath, (_machine.owner as SceneRole).position, targetPos3D);
+					//path = PathFinderUtil.findPath(_districtWithPath, (_machine.owner as SceneRole).position, nearestPos);
 				}
 				//如果无法找到寻路路径则找附近的点
 				if (path == null || path.length < 2)
 				{
 					var roundPoses : Vector.<Vector3D> = PathFinderUtil.getRoundPoses(_districtWithPath, targetPos3D);
 					if (roundPoses && roundPoses.length > 0)
-						path = PathFinderUtil.findPath(_districtWithPath, (_machine.owner as SceneRole).position, roundPoses[0]);
+						path = PolyUtil.findPath(_districtWithPath, (_machine.owner as SceneRole).position, targetPos3D);
+						//path = PathFinderUtil.findPath(_districtWithPath, (_machine.owner as SceneRole).position, roundPoses[0]);
 					else
 						path = null;
 				}
