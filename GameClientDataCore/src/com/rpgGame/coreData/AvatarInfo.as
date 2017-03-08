@@ -4,7 +4,7 @@ package com.rpgGame.coreData
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
-
+	
 	import flash.geom.Vector3D;
 
 	/**
@@ -49,6 +49,8 @@ package com.rpgGame.coreData
 		
 		private var _effectResID : String = null;
 		private var _rpd_effect : RenderParamData3D;
+		
+		private var _rpd_body_method_type_effect : RenderParamData3D;
 
 		public function AvatarInfo()
 		{
@@ -399,6 +401,11 @@ package com.rpgGame.coreData
 		public function get rpd_effect() : RenderParamData3D
 		{
 			return _rpd_effect;
+		}
+		
+		public function get rpd_body_method_type_effect():RenderParamData3D
+		{
+			return _rpd_body_method_type_effect;
 		}
 
 		/**清空*/

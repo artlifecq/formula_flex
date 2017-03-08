@@ -108,9 +108,6 @@ package com.game.engine3D.scene.render
 		public static var VISIBLE_NEED_ASYNC_LOADED : Boolean = false;
 		
 		private static var pickDummyMaterial : TextureMaterial = null;
-		
-		private static var shadowGeometry : PlaneGeometry = null;
-		private static var shadowMaterial : TextureMaterial = null;
 
 		protected var _renderParamData : RenderParamData3D;
 		protected var _renderResourceData : RenderResourceData;
@@ -243,11 +240,6 @@ package com.game.engine3D.scene.render
 		private var _shareMaterialProperty : Vector.<MaterialPropertyData>;
 		
 		private var _is25D:Boolean = false;
-		
-		private var _useSimpleShadow : Boolean;
-		private var _simpleShadowTextureUrl : String;
-		private var _simpleShadowBaseScale : Number;
-		private var _simpleShadowMesh : Mesh;
 
 		public function RenderUnit3D(rpd : RenderParamData3D,is25D:Boolean=false)
 		{
@@ -791,64 +783,6 @@ package com.game.engine3D.scene.render
 			registerEvent();
 			setMeshPickEnable(_mouseEnable);
 			validateMaterialProperty();
-			validateSimpleShadow();
-		}
-		
-		private function onShadowTextureComplete(globalTexture : GlobalTexture) : void
-		{
-			GlobalTexture.removeTextureCallBack(_simpleShadowTextureUrl, onShadowTextureComplete);
-			if (!shadowGeometry)
-			{
-				shadowGeometry = new PlaneGeometry(100, 100, 1, 1, true, false, false, false, false);
-				shadowMaterial = new TextureMaterial(globalTexture.texture);
-				shadowMaterial.blendMode = BlendMode.LAYER;
-			}
-			if (!_simpleShadowMesh)
-			{
-				_simpleShadowMesh = new Mesh(shadowGeometry, shadowMaterial);
-				_simpleShadowMesh.mouseEnabled = false;
-			}
-			_simpleShadowMesh.y = 1;
-			_simpleShadowMesh.scaleX = _simpleShadowMesh.scaleZ = radius * _simpleShadowBaseScale;
-			_simpleShadowMesh.layerType = EntityLayerType.DEFAULT | EntityLayerType.HARD_TRANSPARENT;
-			_graphicDis.addChild(_simpleShadowMesh);
-		}
-		
-		public function addSimpleShadow(textureUrl : String, baseScale : Number = 0.01) : void
-		{
-			if (_useSimpleShadow)
-				return;
-			_useSimpleShadow = true;
-			_simpleShadowTextureUrl = textureUrl;
-			_simpleShadowBaseScale = baseScale;
-			validateSimpleShadow();
-		}
-		
-		public function removeSimpleShadow() : void
-		{
-			if (!_useSimpleShadow)
-				return;
-			_useSimpleShadow = false;
-			_simpleShadowTextureUrl = null;
-			_simpleShadowBaseScale = 0;
-			GlobalTexture.removeTextureCallBack(_simpleShadowTextureUrl, onShadowTextureComplete);
-			if (_simpleShadowMesh)
-			{
-				if (_simpleShadowMesh.parent)
-					_simpleShadowMesh.parent.removeChild(_simpleShadowMesh);
-			}
-		}
-		
-		private function validateSimpleShadow() : void
-		{
-			if (!_renderUnitData)
-			{
-				return;
-			}
-			if (_useSimpleShadow)
-			{
-				GlobalTexture.addTexture(_simpleShadowTextureUrl, onShadowTextureComplete);
-			}
 		}
 
 		private function initChildZoffset() : void
@@ -1960,9 +1894,7 @@ package com.game.engine3D.scene.render
 			if (_isRendering)
 				return;
 			super.startRender();
-			_currDurationTime = 0;
-			_playDuration = 0;
-			_playToTime = 0;
+
 			//trace("startRender", _renderParamData.sourcePath, getTimer());
 			loadRes();
 			validateAnimation();
@@ -1973,9 +1905,7 @@ package com.game.engine3D.scene.render
 			if (!_isRendering)
 				return;
 			super.stopRender();
-			_currDurationTime = 0;
-			_playDuration = 0;
-			_playToTime = 0;
+
 			validateAnimation();
 		}
 		
@@ -2009,19 +1939,6 @@ package com.game.engine3D.scene.render
 				callStop();
 			}
 		}
-
-		/*override public function set parent(value : ObjectContainer3D) : void
-		{
-			if (_parent != value)
-			{
-				super.parent = value;
-				if (value)
-				{
-					loadRes();
-					validateAnimation();
-				}
-			}
-		}*/
 
 		/**
 		 * 动作序列完成
@@ -2259,10 +2176,7 @@ package com.game.engine3D.scene.render
 			{
 				childData = _currChildUnitList[index];
 			}
-			/*if (childData.renderUnit != this)
-			{
-				childData.renderUnit.parent = _graphicDis;
-			}*/
+
 			if (resReady)
 			{
 				doWaitAddBone(childData);
@@ -2918,10 +2832,6 @@ package com.game.engine3D.scene.render
 			_zOffsetByName = new Dictionary(true);
 			_shareMaterialProperty = new Vector.<MaterialPropertyData>();
 			
-			_useSimpleShadow = false;
-			_simpleShadowTextureUrl = null;
-			_simpleShadowBaseScale = 0;
-			_simpleShadowMesh = null;
 			useFog = false;
 		}
 
@@ -3418,19 +3328,6 @@ package com.game.engine3D.scene.render
 				_renderUnitData.lightPicker = _useLight ? _lightPicker : null;
 			}
 		}
-        
-        CONFIG::netDebug {
-            public function getAnimatorElements() : Vector.<CompositeMesh> {
-                if (!_drawElements) {
-                    return null;
-                }
-                return this._animatorElements;
-            }
-            
-            public function getDrawElements() : Vector.<ObjectContainer3D> {
-                return _drawElements;
-            }
-        }
 
 		public function getBounds() : VolumeBounds
 		{
@@ -3799,13 +3696,6 @@ package com.game.engine3D.scene.render
 			{
 				_independentAnimator.dispose();
 				_independentAnimator = null;
-			}
-			
-			removeSimpleShadow();
-			if (_simpleShadowMesh)
-			{
-				_simpleShadowMesh.dispose();
-				_simpleShadowMesh = null;
 			}
 		
 			restoreAllChildUnitToParent();

@@ -5,12 +5,11 @@ package com.rpgGame.app.state.role.control
 	import gs.TweenLite;
 
 	/**
-	 *
-	 * 场景角色buff状态
-	 * @author L.L.M.Sunny
-	 * 创建时间：2015-10-30 下午2:25:12
-	 *
-	 */
+	 * 场景角色的buff状态
+	 * 主要做一个计时处理，时间到了，移除自己 
+	 * @author NEIL
+	 * 
+	 */	
 	public class BuffState extends ControlState
 	{
 		protected var _stateReference : BuffStateReference;

@@ -718,6 +718,12 @@ package com.rpgGame.coreData.cfg
 			return baseDir + resURL + url;
 		}
 		
+		public static function getDynAlphaTexture(name:String):String
+		{
+			var url : String = "icon/common/" + name + eName_PNG;
+			return baseDir + resURL + url;
+		}
+		
 		/**
 		 * 判断当前版本是否是发行版本
 		 */
