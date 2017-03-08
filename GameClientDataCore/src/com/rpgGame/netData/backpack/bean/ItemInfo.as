@@ -115,7 +115,7 @@ package com.rpgGame.netData.backpack.bean{
 				_attributeInfos[i] = readBean(AttributeInfo) as AttributeInfo;
 			}
 			//战斗力
-//			_fightPower = readInt();
+			_fightPower = readInt();
 			return true;
 		}
 		
