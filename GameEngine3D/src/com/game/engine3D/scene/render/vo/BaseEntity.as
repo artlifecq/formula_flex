@@ -465,7 +465,15 @@ package com.game.engine3D.scene.render.vo
 				else
 					_graphicDis = PoolContainer3D.create();
 			}
+			if (!_staticGraphicDis) {
+				if (GlobalConfig.use2DMap)
+					_staticGraphicDis = PoolEntityContainer3D.create();
+				else
+					_staticGraphicDis = PoolContainer3D.create();
+			}
+			
 			_renderSet.parent = _graphicDis;
+			_renderSet.staticGraphicDis = _staticGraphicDis;
 			_renderSet.mouseEnable = _mouseEnable;
 			_renderSet.needRun = false;
 			_renderSet.setMouseUpCallBack(handleMouseUp);
@@ -474,6 +482,34 @@ package com.game.engine3D.scene.render.vo
 			_renderSet.setMouseOutCallBack(handlerMouseOut);
 			_renderSet.setMouseRightUpCallBack(handleMouseRightUp);
 			_renderSet.setMouseRightDownCallBack(handleMouseRightDown);
+		}
+		
+		override protected function addToGraphic() : void
+		{
+			if (_parent && _graphicDis)
+			{
+				if (_graphicDis.parent != _parent)
+					_parent.addChild(_graphicDis);
+			}
+			if (_parent && _staticGraphicDis) {
+				if (_staticGraphicDis.parent != _parent) {
+					_parent.addChild(_staticGraphicDis);
+				}
+			}
+		}
+		
+		override protected function removeFromGraphic() : void
+		{
+			if (_graphicDis)
+			{
+				if (_graphicDis.parent)
+					_graphicDis.parent.removeChild(_graphicDis);
+			}
+			if (_staticGraphicDis) {
+				if (_staticGraphicDis.parent) {
+					_staticGraphicDis.parent.removeChild(_staticGraphicDis);
+				}
+			}
 		}
 
 		/**

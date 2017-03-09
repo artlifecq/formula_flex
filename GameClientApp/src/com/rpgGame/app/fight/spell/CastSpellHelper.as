@@ -442,7 +442,10 @@ package com.rpgGame.app.fight.spell
                                     releaseTargetPos.y = selfPos.y;
                                     mousePos.x = selfPos.x + releaseRange * Math.cos(radian);
                                     mousePos.y = selfPos.y + releaseRange * Math.sin(radian);
-                                }
+                                } else {
+									releaseTargetPos.x = mousePos.x;
+									releaseTargetPos.y = mousePos.y;
+								}
                                 targetPos = new Point(selfPos.x, selfPos.y);
                                 releasePos = mousePos;
                             } else {
@@ -578,7 +581,10 @@ package com.rpgGame.app.fight.spell
                             //releaseTargetPos.y = selfPos.y;
                             mousePos.x = selfPos.x + releaseRange * Math.cos(radian);
                             mousePos.y = selfPos.y + releaseRange * Math.sin(radian);
-                        }
+                        } else {
+							releaseTargetPos.x = mousePos.x;
+							releaseTargetPos.y = mousePos.y;
+						}
                         targetPos = new Point(releaseTargetPos.x, releaseTargetPos.y);
                         releasePos = mousePos;
                     } else {
@@ -872,7 +878,7 @@ package com.rpgGame.app.fight.spell
 			castInfo.angle = angle;
 			castInfo.range = range;
 			//判断范围
-			tempVector3D.setTo(releaseTargetPos.x, 0, releaseTargetPos.y);
+			tempVector3D.setTo(releaseTargetPos.x, releaseTargetPos.y, 0);
 			var districtWithPath : DistrictWithPath = SceneManager.getDistrict();
 			//var path : Vector.<Vector3D> = PathFinderUtil.findPath(districtWithPath, MainRoleManager.actor.position, tempVector3D);
 			var path : Vector.<Vector3D> = PolyUtil.findPath(districtWithPath, MainRoleManager.actor.position, tempVector3D);

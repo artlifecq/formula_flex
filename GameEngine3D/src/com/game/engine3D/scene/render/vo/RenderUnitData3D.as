@@ -48,6 +48,7 @@ package com.game.engine3D.scene.render.vo
 		private var _id : Number;
 		private var _meshElements : Vector.<ObjectContainer3D>;
 		private var _animatorElements : Vector.<CompositeMesh>;
+		private var _baseVirtualElements : Vector.<ObjectContainer3D>;
 		private var _meshes : Vector.<Mesh>;
 		private var _effectMethods : Vector.<EffectMethodBase>;
 		private var _sparticleMeshes : Vector.<SparticleMesh>;
@@ -106,6 +107,7 @@ package com.game.engine3D.scene.render.vo
 			_camera3DAnimators = new Vector.<iCamera3DAnimator>();
 			_meshElements = resData.cloneMeshElements();
 			_animatorElements = resData.cloneAnimatorElements();
+			_baseVirtualElements = resData.cloneBaseVirtualElements();
 			_effectMethods = resData.getMethods();
 			_rootObj3ds = new Vector.<ObjectContainer3D>();
 			_childObj3ds = new Vector.<ObjectContainer3D>();
@@ -161,6 +163,11 @@ package com.game.engine3D.scene.render.vo
 				for each (var animatElement : CompositeMesh in _animatorElements)
 				{
 					addRootElement(animatElement);
+				}
+			}
+			if (_baseVirtualElements) {
+				for each(var virtualElement : ObjectContainer3D in _baseVirtualElements) {
+					addRootElement(virtualElement);
 				}
 			}
 		}
@@ -401,6 +408,17 @@ package com.game.engine3D.scene.render.vo
 					}
 				}
 			}
+			if (_baseVirtualElements) {
+				for each(var virtualElement : ObjectContainer3D in _baseVirtualElements) {
+					if (name == virtualElement.name) {
+						return virtualElement;
+					}
+					child = getChild(virtualElement, name);
+					if (child) {
+						return child;
+					}
+				}
+			}
 			return null;
 		}
 		
@@ -494,6 +512,10 @@ package com.game.engine3D.scene.render.vo
 		public function get meshes() : Vector.<Mesh>
 		{
 			return _meshes;
+		}
+		
+		public function get baseVirutalElements() : Vector.<ObjectContainer3D> {
+			return _baseVirtualElements;
 		}
 		
 		public function get sparticleMeshes() : Vector.<SparticleMesh>

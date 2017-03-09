@@ -475,6 +475,7 @@ package com.game.engine3D.scene.render
 			if (!ru)
 			{
 				ru = RenderUnit3D.create(rpd,_is25D); //创建一个新的
+				ru.staticGraphicDis = this._staticGraphicDis;
 			}
 			ru.setRenderParamData(rpd);
 			ru.shareMaterials = _shareMaterials;

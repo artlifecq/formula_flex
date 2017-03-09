@@ -115,6 +115,7 @@ package com.game.engine3D.scene.render
 		
 		protected var _drawElements : Vector.<ObjectContainer3D>;
 		protected var _animatorElements : Vector.<CompositeMesh>;
+		protected var _baseVirtualElements : Vector.<ObjectContainer3D>;
 		
 		private var _visibleNeedAsyncLoaded : Boolean;
 		
@@ -724,6 +725,7 @@ package com.game.engine3D.scene.render
 			_hasSkeletonAnimator = _renderUnitData.hasSkeletonAnimator;
 			_drawElements = _renderUnitData.meshElements;
 			_animatorElements = _renderUnitData.animatorElements;
+			_baseVirtualElements = _renderUnitData.baseVirutalElements;
 			_meshes = _renderUnitData.meshes;
 			_rootObj3ds = _renderUnitData.rootObj3ds;
 			_childObj3ds = _renderUnitData.childObj3ds;
@@ -768,6 +770,14 @@ package com.game.engine3D.scene.render
 					mesh.pickingCollider = PickingColliderType.BOUNDS_ONLY;
 				}
 			}
+			
+			if (_staticGraphicDis && _baseVirtualElements) {
+				for each(var virtual : ObjectContainer3D in _baseVirtualElements) {
+					virtual.extra = this;
+					_staticGraphicDis.addChild(virtual);
+				}
+			}
+			
 			_renderUnitData.shareMaterials = _shareMaterials;
 			_renderUnitData.lightPicker = _useLight ? _lightPicker : null;
 
@@ -3536,6 +3546,15 @@ package com.game.engine3D.scene.render
 				}
 				_meshes = null;
 			}
+			if (_baseVirtualElements) {
+				for each(var baseVirtual : ObjectContainer3D in _baseVirtualElements) {
+					baseVirtual.extra = null;
+					if (baseVirtual.parent) {
+						baseVirtual.parent.removeChild(baseVirtual);
+					}
+				}
+				_baseVirtualElements = null;
+			}
 			/*if (_boneChildrenByName)
 			{
 				for (var boneName : String in _boneChildrenByName)
@@ -3771,6 +3790,10 @@ package com.game.engine3D.scene.render
 			}
 			unregisterEvent();
 			super.dispose();
+		}
+		
+		override public function set staticGraphicDis(value:ObjectContainer3D):void {
+			super.staticGraphicDis = value;
 		}
 	}
 }
