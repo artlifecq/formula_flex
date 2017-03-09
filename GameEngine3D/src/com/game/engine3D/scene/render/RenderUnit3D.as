@@ -4,7 +4,6 @@ package com.game.engine3D.scene.render
 	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.core.poolObject.PoolContainer3D;
 	import com.game.engine3D.core.poolObject.PoolEntityContainer3D;
-	import com.game.engine3D.loader.GlobalTexture;
 	import com.game.engine3D.scene.render.vo.IRenderUnit3D;
 	import com.game.engine3D.scene.render.vo.MaterialPropertyData;
 	import com.game.engine3D.scene.render.vo.MethodData;
@@ -54,7 +53,6 @@ package com.game.engine3D.scene.render
 	import away3d.materials.methods.EffectMethodBase;
 	import away3d.materials.methods.FogMethod;
 	import away3d.primitives.CubeGeometry;
-	import away3d.primitives.PlaneGeometry;
 	import away3d.utils.Cast;
 
 	/**
@@ -298,7 +296,12 @@ package com.game.engine3D.scene.render
 
 		public function set secondStatusGetter(value : Function) : void
 		{
+			if (_secondStatusGetter == value)
+			{
+				return;
+			}
 			_secondStatusGetter = value;
+			validateAnimation();
 		}
 
 		public function set defalutStatus(value : String) : void
@@ -952,7 +955,13 @@ package com.game.engine3D.scene.render
 					layerType = 0;
 				}
 			}
-			if (_visible && (!_isElementStatus || mesh.name == _currentStatus))
+			var animatStatus : String;
+			//设置状态
+			if (_secondStatusGetter == null)
+				animatStatus = _currentStatus;
+			else
+				animatStatus = _secondStatusGetter(_currentStatus);
+			if (_visible && (!_isElementStatus || mesh.name == animatStatus))
 			{
 			}
 			else
@@ -1001,7 +1010,13 @@ package com.game.engine3D.scene.render
 			{
 				objVisible = false;
 			}
-			if (_visible && (!_isElementStatus || obj.name == _currentStatus))
+			var animatStatus : String;
+			//设置状态
+			if (_secondStatusGetter == null)
+				animatStatus = _currentStatus;
+			else
+				animatStatus = _secondStatusGetter(_currentStatus);
+			if (_visible && (!_isElementStatus || obj.name == animatStatus))
 			{
 			}
 			else
@@ -1231,7 +1246,13 @@ package com.game.engine3D.scene.render
 				return;
 			}
 			_animator = null;
-			_totalDuration = _renderUnitData.getAnimationDuration(_currentStatus);
+			var animatStatus : String;
+			//设置状态
+			if (_secondStatusGetter == null)
+				animatStatus = _currentStatus;
+			else
+				animatStatus = _secondStatusGetter(_currentStatus);
+			_totalDuration = _renderUnitData.getAnimationDuration(animatStatus);
 			var offsetTime : Number = NaN;
 			if (_playing)
 			{
@@ -1258,7 +1279,7 @@ package com.game.engine3D.scene.render
 					}
 					if (_isElementStatus)
 					{
-						meshElement.visible = _visible && (!_setVisibleMap.hasOwnProperty(meshElement.name) || _setVisibleMap[meshElement.name]) && meshElement.name == _currentStatus;
+						meshElement.visible = _visible && (!_setVisibleMap.hasOwnProperty(meshElement.name) || _setVisibleMap[meshElement.name]) && meshElement.name == animatStatus;
 						if (_isRendering && _visible && _isInViewDistance)
 						{
 							if (meshElement.visible)
@@ -1322,17 +1343,17 @@ package com.game.engine3D.scene.render
 								if (_isRendering && _visible && _isInViewDistance)
 								{
 									activeStatus = null;
-									if (_currentStatus)
+									if (animatStatus)
 									{
-										if (currAnimator.animationSet.hasAnimation(_currentStatus))
+										if (currAnimator.animationSet.hasAnimation(animatStatus))
 										{
-											activeStatus = _currentStatus;
+											activeStatus = animatStatus;
 										}
 										else if (_defalutStatus && currAnimator.animationSet.hasAnimation(_defalutStatus))
 										{
 											CONFIG::GameEngine3D_Debug
 												{
-													trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "_没有找到动作_" + _currentStatus, "将取默认动作_" + _defalutStatus);
+													trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "_没有找到动作_" + animatStatus, "将取默认动作_" + _defalutStatus);
 												}
 												activeStatus = _defalutStatus;
 										}
@@ -1473,17 +1494,17 @@ package com.game.engine3D.scene.render
 						{
 							if (currAnimator is SkeletonAnimator)
 							{
-								if (_currentStatus)
+								if (animatStatus)
 								{
-									if (currAnimator.animationSet.hasAnimation(_currentStatus))
+									if (currAnimator.animationSet.hasAnimation(animatStatus))
 									{
-										activeStatus = _currentStatus;
+										activeStatus = animatStatus;
 									}
 									else if (_defalutStatus && currAnimator.animationSet.hasAnimation(_defalutStatus))
 									{
 										CONFIG::GameEngine3D_Debug
 											{
-												trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.animatorSourchPath + "_没有找到动作_" + _currentStatus, "将取默认动作_" + _defalutStatus);
+												trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.animatorSourchPath + "_没有找到动作_" + animatStatus, "将取默认动作_" + _defalutStatus);
 											}
 											activeStatus = _defalutStatus;
 									}
@@ -2586,10 +2607,11 @@ package com.game.engine3D.scene.render
 			if (!_currentStatus)
 				transition = null;
 			//设置状态
-			if (_secondStatusGetter == null)
-				_currentStatus = status;
-			else
-				_currentStatus = _secondStatusGetter(status);
+//			if (_secondStatusGetter == null)
+//				_currentStatus = status;
+//			else
+//				_currentStatus = _secondStatusGetter(status);
+			_currentStatus = status;
 			_animationTransition = transition;
 			play(time, animateSpeed);
 		}
