@@ -315,6 +315,7 @@ package com.rpgGame.app.fight.spell
 					}
 					else
 					{
+						//effectRu = target.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, bindBone, rud);
 						effectRu = target.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, bindBone, rud);
 					}
 				}

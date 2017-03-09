@@ -11,6 +11,7 @@ package com.rpgGame.app.manager.shell
     import com.gameClient.log.GameLog;
     import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
     import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
+    import com.rpgGame.app.fight.spell.SpellAnimationHelper;
     import com.rpgGame.app.manager.AreaMapManager;
     import com.rpgGame.app.manager.ShortcutsManger;
     import com.rpgGame.app.manager.role.MainRoleManager;
@@ -67,6 +68,7 @@ package com.rpgGame.app.manager.shell
             this._funcs["showAreaFlag".toLowerCase()] = this.showAreaFlag;
 			this._funcs["addSkillToBar".toLowerCase()] = this.addSkillToBar;
 			this._funcs["shape".toLocaleLowerCase()] = this.shapeFunc;
+			this._funcs["addBuff".toLocaleLowerCase()] = this.addBuff;
         }
 		
 		private var arr:Vector.<ShapeArea3D> = new Vector.<ShapeArea3D>();	
@@ -237,6 +239,10 @@ package com.rpgGame.app.manager.shell
                 tt = "";
             }
         }
+		
+		private function addBuff() : void {
+			SpellAnimationHelper.addBuffEffect(MainRoleManager.actor, 0, "buff1003", "tx_role_budongrushan_01", "c_test_01", 0);
+		}
       
         private function handler(command : String, ...params) : Boolean {
             var func : Function = this._funcs[command.toLowerCase()];

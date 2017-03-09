@@ -378,8 +378,10 @@ package com.rpgGame.app.fight.spell
 			var targetServerID : long = null;
 			var targetID:Number = 0;
 			var targetRole : SceneRole = null;
+			// 释放技能目标点
 			var releaseTargetPos : Point = null;
-			var targetPos : Point = null;
+			//var targetPos : Point = null;
+			// 释放技能的位置
 			var releasePos : Point = null;
 			var dist : int = 0;
 			var radian : Number = 0;
@@ -398,7 +400,7 @@ package com.rpgGame.app.fight.spell
 				}
 				angle = 270 - MainRoleManager.actor.rotationY;
 				releaseTargetPos = new Point(selfPos.x, selfPos.y);
-				targetPos = new Point(selfPos.x, selfPos.y);
+				//targetPos = new Point(selfPos.x, selfPos.y);
 				releasePos = new Point(selfPos.x, selfPos.y);
 			} 
 			else 
@@ -438,28 +440,30 @@ package com.rpgGame.app.fight.spell
                                     //dist = dist < 0 ? 0 : dist;
                                     //releaseTargetPos.x = selfPos.x + dist * Math.cos(radian);
                                     //releaseTargetPos.y = selfPos.y + dist * Math.sin(radian);
-                                    releaseTargetPos.x = selfPos.x;
-                                    releaseTargetPos.y = selfPos.y;
+                                    //releaseTargetPos.x = selfPos.x;
+                                    //releaseTargetPos.y = selfPos.y;
                                     mousePos.x = selfPos.x + releaseRange * Math.cos(radian);
                                     mousePos.y = selfPos.y + releaseRange * Math.sin(radian);
                                 }
-                                targetPos = new Point(selfPos.x, selfPos.y);
-                                releasePos = mousePos;
+                                //targetPos = new Point(selfPos.x, selfPos.y);
+                                //releasePos = mousePos;
+								releaseTargetPos = new Point(mousePos.x, mousePos.y);
+								releasePos = new Point(selfPos.x, selfPos.y);
                             } else {
                                 angle = 270 - MainRoleManager.actor.rotationY;
                                 radian = angle * Math.PI / 180;
                                 releaseTargetPos = new Point();
                                 releaseTargetPos.x = selfPos.x + releaseRange * Math.cos(radian);
                                 releaseTargetPos.y = selfPos.y + releaseRange * Math.sin(radian);
-                                targetPos = new Point(selfPos.x, selfPos.y);
-                                releasePos = new Point(releaseTargetPos.x, releaseTargetPos.y);
+                                //targetPos = new Point(selfPos.x, selfPos.y);
+                                releasePos = new Point(selfPos.x, selfPos.y);
                             }
                             break;
                         }
-                        // 在鼠标点释放
+                        // 在鼠标点释放 暂时无效
                         if (0 == spellData.q_blink_type) {
                             releaseTargetPos = new Point(selfPos.x, selfPos.y);
-                            targetPos = new Point(selfPos.x, selfPos.y);
+                            //targetPos = new Point(selfPos.x, selfPos.y);
                             releasePos = new Point(selfPos.x, selfPos.y);
                             angle = 270 - MainRoleManager.actor.rotationY;
                         } else {
@@ -468,7 +472,7 @@ package com.rpgGame.app.fight.spell
                             releaseTargetPos = new Point();
                             releaseTargetPos.x = selfPos.x + releaseRange * Math.cos(radian);
                             releaseTargetPos.y = selfPos.y + releaseRange * Math.sin(radian);
-                            targetPos = new Point(selfPos.x, selfPos.y);
+                            //targetPos = new Point(selfPos.x, selfPos.y);
                             releasePos = new Point(releaseTargetPos.x, releaseTargetPos.y);
                         }
                         break;
@@ -548,8 +552,8 @@ package com.rpgGame.app.fight.spell
                     targetServerID = (targetRole.data as BaseEntityData).serverID;
                     targetID = targetRole.id;
                     releaseTargetPos = new Point(targetRole.x, targetRole.z);
-                    targetPos = new Point(selfPos.x, selfPos.y);
-                    releasePos = new Point(releaseTargetPos.x, releaseTargetPos.y);
+                    //targetPos = new Point(selfPos.x, selfPos.y);
+                    releasePos = new Point(selfPos.x, selfPos.y);
 
                     MainRoleManager.actor.faceToGround(releaseTargetPos.x, releaseTargetPos.y);
                     
@@ -563,32 +567,34 @@ package com.rpgGame.app.fight.spell
                     var dy : Number = Math.sin(radian);
                     
                     if (0 == spellData.q_blink_type) {
-                        var mousePos : Point = new Point(releasePos.x, releasePos.y);
-                        angle = MathUtil.getAngle(selfPos.x, selfPos.y, mousePos.x, mousePos.y);
+                        //var mousePos : Point = new Point(releasePos.x, releasePos.y);
+                        angle = MathUtil.getAngle(selfPos.x, selfPos.y, releaseTargetPos.x, releaseTargetPos.y);
                         radian = angle * Math.PI / 180;
-                        dist = Point.distance(selfPos, mousePos);
-                        releaseTargetPos = new Point(selfPos.x, selfPos.y);
+                        dist = Point.distance(selfPos, releaseTargetPos);
+                        //releaseTargetPos = new Point(selfPos.x, selfPos.y);
                         if (dist > releaseRange) {
                             // 距离大于最大释放距离
                             dist = dist - releaseRange;
                             dist = dist < 0 ? 0 : dist;
-                            releaseTargetPos.x = selfPos.x + dist * Math.cos(radian);
-                            releaseTargetPos.y = selfPos.y + dist * Math.sin(radian);
+							releasePos.x = selfPos.x + dist * Math.cos(radian);
+							releasePos.y = selfPos.y + dist * Math.sin(radian);
                             //releaseTargetPos.x = selfPos.x;
                             //releaseTargetPos.y = selfPos.y;
-                            mousePos.x = selfPos.x + releaseRange * Math.cos(radian);
-                            mousePos.y = selfPos.y + releaseRange * Math.sin(radian);
-                        }
-                        targetPos = new Point(releaseTargetPos.x, releaseTargetPos.y);
-                        releasePos = mousePos;
+                            //mousePos.x = selfPos.x + releaseRange * Math.cos(radian);
+                            //mousePos.y = selfPos.y + releaseRange * Math.sin(radian);
+                        } else {
+							//releaseTargetPos.x = mousePos.x;
+							//releaseTargetPos.y = mousePos.y;
+						}
+                        //targetPos = new Point(releaseTargetPos.x, releaseTargetPos.y);
                     } else {
                         angle = 270 - MainRoleManager.actor.rotationY;
                         radian = angle * Math.PI / 180;
                         releaseTargetPos = new Point();
                         releaseTargetPos.x = selfPos.x + releaseRange * Math.cos(radian);
                         releaseTargetPos.y = selfPos.y + releaseRange * Math.sin(radian);
-                        targetPos = new Point(selfPos.x, selfPos.y);
-                        releasePos = new Point(releaseTargetPos.x, releaseTargetPos.y);
+                        //targetPos = new Point(selfPos.x, selfPos.y);
+                        releasePos = new Point(selfPos.x, selfPos.y);
                     }
                 } while (false);
             }
@@ -862,21 +868,21 @@ package com.rpgGame.app.fight.spell
 //			}
 //			}
 
-			var range : int =  Point.distance(targetPos, releaseTargetPos);
+			var range : int =  Point.distance(releasePos, releaseTargetPos);
 			range = range + DEVIATION_RANGE;
 			angle = (angle + 360) % 360;
 			castInfo.targetServerID = targetServerID;
 			castInfo.targetID = targetID;
-			castInfo.targetPos = releaseTargetPos;
-			castInfo.releasePos = releasePos;
+			castInfo.targetPos = releasePos;
+			castInfo.releasePos = releaseTargetPos;
 			castInfo.angle = angle;
 			castInfo.range = range;
 			//判断范围
-			tempVector3D.setTo(releaseTargetPos.x, 0, releaseTargetPos.y);
+			tempVector3D.setTo(releasePos.x, releasePos.y, 0);
 			var districtWithPath : DistrictWithPath = SceneManager.getDistrict();
 			//var path : Vector.<Vector3D> = PathFinderUtil.findPath(districtWithPath, MainRoleManager.actor.position, tempVector3D);
 			var path : Vector.<Vector3D> = PolyUtil.findPath(districtWithPath, MainRoleManager.actor.position, tempVector3D);
-			dist = Point.distance(selfPos, releaseTargetPos);
+			dist = Point.distance(selfPos, releasePos);
 			var inRange : Boolean;
 			
 			if (spellData.q_blink_type != 0)
