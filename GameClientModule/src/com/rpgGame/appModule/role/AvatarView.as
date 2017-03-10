@@ -79,7 +79,7 @@ package com.rpgGame.appModule.role
 			_zhandouliEftContaner=new Inter3DContainer();
 			var index:int=_skin.container.getChildIndex(_skin.weapons);
 			_skin.container.addChildAt(_avatarContainer,index);
-			_skin.footMsg.addChildAt(_zhandouliEftContaner,4);
+			_skin.footMsg.addChild(_zhandouliEftContaner);
 			_mgr=RoleEquipmentManager.instance;
 			initAvatar();
 			initEquips();
@@ -138,7 +138,6 @@ package com.rpgGame.appModule.role
 			_showAvatarData = new RoleData(0);
 			
 			_zhandouliEft= _zhandouliEftContaner.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JIEMIAN_ZHANDOULI),135,28,0);
-			var renderUint:RenderUnit3D=RenderUnit3D(_zhandouliEft.baseObj3D);
 		}
 		
 		internal function onTouchTarget(target : DisplayObject):Boolean

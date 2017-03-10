@@ -77,7 +77,6 @@ package com.rpgGame.app.state.role.action
 		{
 			if (_machine && !_machine.isDisposed&&!_totalFrameTween)
 			{
-				(_machine as RoleStateMachine).updateAvatar();
 				super.afterExecute();
 				
 				var bodyAp : RenderUnit3D = (_machine.owner as SceneRole).avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
@@ -87,6 +86,7 @@ package com.rpgGame.app.state.role.action
 				}else{
 					onTotalFrameCmp();
 				}
+				syncAnimation();
 			}
 		}
 		
@@ -101,13 +101,14 @@ package com.rpgGame.app.state.role.action
 				}
 				_showType=RoleActionType.SHOW1;
 				_repeatNum=0;
-//				_machine.removeState(RoleStateType.ACTION_SHOW);
+				_machine.removeState(RoleStateType.ACTION_SHOW);
 				syncAnimation();
 			}
 		}
 		
-		override public function leavePass(nextState : IState, force : Boolean = false) : Boolean
+/*		override public function leavePass(nextState : IState, force : Boolean = false) : Boolean
 		{
+			trace("leavePass",_totalFrameTween==null);
 			if(_totalFrameTween){
 				return false;
 			}
@@ -116,11 +117,12 @@ package com.rpgGame.app.state.role.action
 		
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
 		{
+			trace("enterPass",_totalFrameTween==null);
 			if(_totalFrameTween){
 				return false;
 			}
 			return true;
-		}
+		}*/
 		
 		override public function dispose() : void
 		{

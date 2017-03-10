@@ -707,6 +707,8 @@ package com.rpgGame.app.manager
 					{
 						if (role.headFace)
 							role.headFace.setBodyRender(ru);
+						if(role.attackFace)
+							role.attackFace.setBodyRender(ru);
 						updateRoleSimpleShadow(role);
 					}
 				}
@@ -716,6 +718,8 @@ package com.rpgGame.app.manager
 					{
 						if (role.headFace)
 							role.headFace.setBodyRender(ru);
+						if(role.attackFace)
+							role.attackFace.setBodyRender(ru);
 						updateRoleSimpleShadow(role);
 					}
 				}

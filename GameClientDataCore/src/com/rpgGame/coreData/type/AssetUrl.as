@@ -94,6 +94,14 @@ package com.rpgGame.coreData.type
 		public static const MOUNT_MENG_BAN:String = "ui/common/kang/di.png";
 		/** 小队跟随头像 **/
 		public static const TEAM_FOLLOW_HEAD_ICON:String = "ui/mainui/head/renwutouxiang.png";
+		/** 头像兵家 **/
+		public static const HEAD_ICON_1:String = "ui/mainui/head/touxiang/bingjia/zhujue.png";
+		/** 头像墨家男 **/
+		public static const HEAD_ICON_2:String = "ui/mainui/head/touxiang/mojia/zhujue.png";
+		/** 头像墨家女**/
+		public static const HEAD_ICON_3:String = "ui/mainui/head/touxiang/mojia/zhujue.png";
+		/** 头像医家**/
+		public static const HEAD_ICON_4:String = "ui/mainui/head/touxiang/yijia/zhujue.png";
 		/** 喇叭图标 **/
 		public static const LA_BA_ICON:String = "ui/common/version_3/B_bujian/la_ba.png";
 		/** 上升箭头 **/
@@ -138,6 +146,8 @@ package com.rpgGame.coreData.type
 		public static const SPELL_BEI_DONG:String = "ui/app/spell/char_type/bei_dong.png";
 		/** 共用填充贴图 **/
 		public static const COMMON_RECT_ICON : String = "ui/common/version_3/B_bujian/nan.png";
+		
+		
 		public function AssetUrl()
 		{
 		}

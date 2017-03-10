@@ -8,13 +8,14 @@ package org.mokylin.skin.loginui
 	import feathers.controls.StateSkin;
 	import feathers.controls.TextInput;
 	import feathers.controls.UIAsset;
+	import feathers.controls.UIMovieClip;
 	import org.mokylin.skin.loginui.button.ButtonSkin_bingjia;
 	import org.mokylin.skin.loginui.button.ButtonSkin_create;
 	import org.mokylin.skin.loginui.button.ButtonSkin_mojia;
 	import org.mokylin.skin.loginui.button.ButtonSkin_sex;
-	import org.mokylin.skin.loginui.button.ButtonSkin_shaizi;
 	import org.mokylin.skin.loginui.button.ButtonSkin_yijia;
 	import org.mokylin.skin.loginui.create_input_Skin;
+	import org.mokylin.skin.loginui.mc.UIMovieClipSaizi;
 	import org.mokylin.skin.loginui.select_binjia_Skin;
 	import org.mokylin.skin.loginui.select_mojia_Skin;
 	import org.mokylin.skin.loginui.select_yijia_Skin;
@@ -37,8 +38,6 @@ package org.mokylin.skin.loginui
 
 		public var btn_mojia:feathers.controls.Radio;
 
-		public var btn_random:feathers.controls.Button;
-
 		public var btn_woman:feathers.controls.Radio;
 
 		public var btn_yijia:feathers.controls.Radio;
@@ -52,6 +51,8 @@ package org.mokylin.skin.loginui
 		public var grp_input:feathers.controls.Group;
 
 		public var grp_sex:feathers.controls.Group;
+
+		public var num_saizi:feathers.controls.UIMovieClip;
 
 		public var nv_bg:feathers.controls.UIAsset;
 
@@ -219,19 +220,6 @@ package org.mokylin.skin.loginui
 			return temp;
 		}
 
-		private function btn_random_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_random = temp;
-			temp.name = "btn_random";
-			temp.height = 34;
-			temp.styleClass = org.mokylin.skin.loginui.button.ButtonSkin_shaizi;
-			temp.width = 34;
-			temp.x = 238;
-			temp.y = 2;
-			return temp;
-		}
-
 		private function btn_woman_i():feathers.controls.Radio
 		{
 			var temp:feathers.controls.Radio = new feathers.controls.Radio();
@@ -310,7 +298,7 @@ package org.mokylin.skin.loginui
 			temp.name = "grp_input";
 			temp.x = 1275;
 			temp.y = 741;
-			temp.elementsContent = [text_input_i(),btn_random_i()];
+			temp.elementsContent = [text_input_i(),num_saizi_i()];
 			return temp;
 		}
 
@@ -323,6 +311,19 @@ package org.mokylin.skin.loginui
 			temp.x = 1268;
 			temp.y = 472;
 			temp.elementsContent = [__create_role_Skin_UIAsset2_i(),__create_role_Skin_UIAsset3_i(),btn_man_i(),btn_woman_i(),__create_role_Skin_Label1_i(),__create_role_Skin_Label2_i()];
+			return temp;
+		}
+
+		private function num_saizi_i():feathers.controls.UIMovieClip
+		{
+			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
+			num_saizi = temp;
+			temp.name = "num_saizi";
+			temp.height = 34;
+			temp.styleClass = org.mokylin.skin.loginui.mc.UIMovieClipSaizi;
+			temp.width = 34;
+			temp.x = 238;
+			temp.y = 2;
 			return temp;
 		}
 

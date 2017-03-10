@@ -2,10 +2,16 @@ package game.rpgGame.login.scene
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
+	import com.rpgGame.coreData.AvatarInfo;
+	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
+	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
+	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.RenderUnitID;
+	import com.rpgGame.coreData.type.RenderUnitType;
+	import com.rpgGame.coreData.type.RoleActionType;
 	
 	import flash.geom.Vector3D;
-	
-	import game.rpgGame.login.state.RoleActionType;
 
 	/**
 	 *
@@ -16,6 +22,8 @@ package game.rpgGame.login.scene
 	 */
 	public class AvatarManager
 	{
+		private static const simpleShadowBaseScale : Number = 0.01;
+		
 		public static function updateAvatar(role : SceneRole) : void
 		{
 			if (role == null || !role.usable)
@@ -27,6 +35,7 @@ package game.rpgGame.login.scene
 			role.avatar.buildSyncInfo(RenderUnitType.WEAPON, RenderUnitID.WEAPON);
 			role.avatar.buildSyncInfo(RenderUnitType.DEPUTY_WEAPON, RenderUnitID.DEPUTY_WEAPON);
 			role.avatar.buildSyncInfo(RenderUnitType.MOUNT, RenderUnitID.MOUNT);
+			role.avatar.buildSyncInfo(RenderUnitType.EFFECT, RenderUnitID.EFFECT);
 
 
 			//上“坐骑”
@@ -41,6 +50,109 @@ package game.rpgGame.login.scene
 			updateDeputyWeapon(role);
 			//穿“特效”
 			updateEffect(role);
+			//穿“效果方法类型特效”
+			updateMethodTypeEffect(role);
+			
+			updateRoleSimpleShadow(role);
+		}
+		
+		private static function updateMethodTypeEffect(role : SceneRole) : void
+		{
+			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
+			var rpd_method_type_effect : RenderParamData3D = avatarInfo.rpd_body_method_type_effect;
+			if (rpd_method_type_effect != null)
+			{
+				var effectRu : RenderUnit3D = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_method_type_effect);
+				effectRu.defalutStatus = RoleActionType.IDLE;
+				effectRu.setAddedCallBack(partAddedCallBack, role);
+				effectRu.setErrorCallBack(partErrorCallBack, role);
+				effectRu.entityGlass = false;
+				effectRu.useLight = false;
+				effectRu.castsShadows = false;
+				effectRu.repeat = 0;
+				effectRu.play(0);
+			}
+			else
+			{
+				role.avatar.removeRenderUnitByID(RenderUnitType.BODY_METHOD_TYPE_EFFECT, RenderUnitID.BODY_METHOD_TYPE_EFFECT);
+			}
+		}
+		
+		/**部件添加完成*/
+		private static function partAddedCallBack(role : SceneRole, ru : RenderUnit3D) : void
+		{
+			ru.removeAddedCallBack(partAddedCallBack);
+			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
+			var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
+			if (rpd_body)
+			{
+				if (role.avatar.hasIDRenderUnit(RenderUnitType.MOUNT, RenderUnitID.MOUNT))
+				{
+					if (ru.id == RenderUnitID.MOUNT)
+					{
+						updateRoleSimpleShadow(role);
+					}
+				}
+				else
+				{
+					if (ru.id == RenderUnitID.BODY)
+					{
+						updateRoleSimpleShadow(role);
+					}
+				}
+			}
+			else
+			{
+				/*if (ru.id == RenderUnitID.EFFECT && role.headFace)
+					role.headFace.setBodyRender(ru);*/
+			}
+		}
+		
+		/**部件添加错误*/
+		private static function partErrorCallBack(role : SceneRole, ru : RenderUnit3D) : void
+		{
+			
+		}
+		
+		/**
+		 * 启用假的影子，比如用一个黑圈图，为了提高性能，就不用实时计算影子了。为了提高性能做的处理 
+		 * @param role
+		 * 
+		 */		
+		public static function updateRoleSimpleShadow(role : SceneRole) : void
+		{
+			if ( role.isClingGround)
+			{
+				var data : RoleData = RoleData(role.data);
+				var avatarResConfig : AvatarResConfig;
+				if (role.avatar.hasIDRenderUnit(RenderUnitType.MOUNT, RenderUnitID.MOUNT))
+				{
+					var mountRu : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.MOUNT, RenderUnitID.MOUNT, true);
+					if (mountRu)
+					{
+						avatarResConfig = AvatarResConfigSetData.getInfo(data.avatarInfo.mountResID);
+						if (avatarResConfig /*&& !avatarResConfig.disableSimpleShadow*/)
+						{
+							role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"), mountRu.radius * simpleShadowBaseScale);
+							return;
+						}
+					}
+				}
+				else
+				{
+					var bodyRu : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
+					if (bodyRu)
+					{
+						avatarResConfig = AvatarResConfigSetData.getInfo(data.avatarInfo.bodyResID);
+						if (avatarResConfig/* && !avatarResConfig.disableSimpleShadow*/)
+						{
+							role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"), bodyRu.radius * simpleShadowBaseScale);
+							return;
+						}
+					}
+				}
+			}
+			role.removeSimpleShadow();
 		}
 
 
