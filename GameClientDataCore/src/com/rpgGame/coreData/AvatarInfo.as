@@ -4,7 +4,7 @@ package com.rpgGame.coreData
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
-
+	
 	import flash.geom.Vector3D;
 
 	/**
@@ -49,6 +49,9 @@ package com.rpgGame.coreData
 		
 		private var _effectResID : String = null;
 		private var _rpd_effect : RenderParamData3D;
+		
+		private var _bodyMethodTypeEffectResID:String = null;
+		private var _rpd_body_method_type_effect : RenderParamData3D;
 
 		public function AvatarInfo()
 		{
@@ -152,6 +155,24 @@ package com.rpgGame.coreData
 			{
 				_rpd_body_effect = null;
 				_bodyEffectID = null;
+			}
+		}
+		
+		public function set bodyMethodTypeEffectResID(value : String):void
+		{
+			if (_bodyMethodTypeEffectResID == value)
+				return;
+			_bodyMethodTypeEffectResID = value;
+			if (_bodyMethodTypeEffectResID)
+			{
+				_rpd_body_method_type_effect = new RenderParamData3D(RenderUnitID.BODY_METHOD_TYPE_EFFECT, RenderUnitType.BODY_METHOD_TYPE_EFFECT, ClientConfig.getEffect(_bodyMethodTypeEffectResID));
+				_rpd_body_method_type_effect.mouseEnable = false;
+				_rpd_body_method_type_effect.clearSameType = false;
+			}
+			else
+			{
+				_rpd_body_method_type_effect = null;
+				_bodyMethodTypeEffectResID = null;
 			}
 		}
 
@@ -399,6 +420,11 @@ package com.rpgGame.coreData
 		public function get rpd_effect() : RenderParamData3D
 		{
 			return _rpd_effect;
+		}
+		
+		public function get rpd_body_method_type_effect():RenderParamData3D
+		{
+			return _rpd_body_method_type_effect;
 		}
 
 		/**清空*/

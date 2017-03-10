@@ -1079,6 +1079,7 @@ package com.game.engine3D.core
 						areaMap.setBounds(layer.district.min, layer.district.max);
 					}
 				}
+//				view.virtualRender(); //预渲染，避免opengl进视野卡顿。
 				_isLoading = false;
 				if (completeHandler != null)
 					completeHandler(gameScene3D);

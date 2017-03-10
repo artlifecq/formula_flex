@@ -155,7 +155,7 @@ package com.game.engine3D.manager
 			_useScreenView = useScreenView;
 			_renderable = false;
 			_setupCompleted = false;
-			_stage3DProxy = Stage3DManager.getInstance(_stage).getFreeStage3DProxy(forceSoftware, profile);
+			_stage3DProxy = Stage3DManager.getInstance(_stage).getFreeStage3DProxy(forceSoftware, profile);//Stage3DProxy.initEngine(stage, profile);
 			if (_stage3DProxy)
 			{
 				_stage3DProxy.antiAlias = _screenAntiAlias;

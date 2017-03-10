@@ -4,7 +4,6 @@ package com.game.engine3D.scene.render
 	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.core.poolObject.PoolContainer3D;
 	import com.game.engine3D.core.poolObject.PoolEntityContainer3D;
-	import com.game.engine3D.loader.GlobalTexture;
 	import com.game.engine3D.scene.render.vo.IRenderUnit3D;
 	import com.game.engine3D.scene.render.vo.MaterialPropertyData;
 	import com.game.engine3D.scene.render.vo.MethodData;
@@ -54,7 +53,6 @@ package com.game.engine3D.scene.render
 	import away3d.materials.methods.EffectMethodBase;
 	import away3d.materials.methods.FogMethod;
 	import away3d.primitives.CubeGeometry;
-	import away3d.primitives.PlaneGeometry;
 	import away3d.utils.Cast;
 
 	/**
@@ -108,9 +106,6 @@ package com.game.engine3D.scene.render
 		public static var VISIBLE_NEED_ASYNC_LOADED : Boolean = false;
 		
 		private static var pickDummyMaterial : TextureMaterial = null;
-		
-		private static var shadowGeometry : PlaneGeometry = null;
-		private static var shadowMaterial : TextureMaterial = null;
 
 		protected var _renderParamData : RenderParamData3D;
 		protected var _renderResourceData : RenderResourceData;
@@ -118,6 +113,7 @@ package com.game.engine3D.scene.render
 		
 		protected var _drawElements : Vector.<ObjectContainer3D>;
 		protected var _animatorElements : Vector.<CompositeMesh>;
+		protected var _baseVirtualElements : Vector.<ObjectContainer3D>;
 		
 		private var _visibleNeedAsyncLoaded : Boolean;
 		
@@ -243,11 +239,6 @@ package com.game.engine3D.scene.render
 		private var _shareMaterialProperty : Vector.<MaterialPropertyData>;
 		
 		private var _is25D:Boolean = false;
-		
-		private var _useSimpleShadow : Boolean;
-		private var _simpleShadowTextureUrl : String;
-		private var _simpleShadowBaseScale : Number;
-		private var _simpleShadowMesh : Mesh;
 
 		public function RenderUnit3D(rpd : RenderParamData3D,is25D:Boolean=false)
 		{
@@ -305,7 +296,12 @@ package com.game.engine3D.scene.render
 
 		public function set secondStatusGetter(value : Function) : void
 		{
+			if (_secondStatusGetter == value)
+			{
+				return;
+			}
 			_secondStatusGetter = value;
+			validateAnimation();
 		}
 
 		public function set defalutStatus(value : String) : void
@@ -732,6 +728,7 @@ package com.game.engine3D.scene.render
 			_hasSkeletonAnimator = _renderUnitData.hasSkeletonAnimator;
 			_drawElements = _renderUnitData.meshElements;
 			_animatorElements = _renderUnitData.animatorElements;
+			_baseVirtualElements = _renderUnitData.baseVirutalElements;
 			_meshes = _renderUnitData.meshes;
 			_rootObj3ds = _renderUnitData.rootObj3ds;
 			_childObj3ds = _renderUnitData.childObj3ds;
@@ -776,6 +773,14 @@ package com.game.engine3D.scene.render
 					mesh.pickingCollider = PickingColliderType.BOUNDS_ONLY;
 				}
 			}
+			
+			if (_staticGraphicDis && _baseVirtualElements) {
+				for each(var virtual : ObjectContainer3D in _baseVirtualElements) {
+					virtual.extra = this;
+					_staticGraphicDis.addChild(virtual);
+				}
+			}
+			
 			_renderUnitData.shareMaterials = _shareMaterials;
 			_renderUnitData.lightPicker = _useLight ? _lightPicker : null;
 
@@ -791,64 +796,6 @@ package com.game.engine3D.scene.render
 			registerEvent();
 			setMeshPickEnable(_mouseEnable);
 			validateMaterialProperty();
-			validateSimpleShadow();
-		}
-		
-		private function onShadowTextureComplete(globalTexture : GlobalTexture) : void
-		{
-			GlobalTexture.removeTextureCallBack(_simpleShadowTextureUrl, onShadowTextureComplete);
-			if (!shadowGeometry)
-			{
-				shadowGeometry = new PlaneGeometry(100, 100, 1, 1, true, false, false, false, false);
-				shadowMaterial = new TextureMaterial(globalTexture.texture);
-				shadowMaterial.blendMode = BlendMode.LAYER;
-			}
-			if (!_simpleShadowMesh)
-			{
-				_simpleShadowMesh = new Mesh(shadowGeometry, shadowMaterial);
-				_simpleShadowMesh.mouseEnabled = false;
-			}
-			_simpleShadowMesh.y = 1;
-			_simpleShadowMesh.scaleX = _simpleShadowMesh.scaleZ = radius * _simpleShadowBaseScale;
-			_simpleShadowMesh.layerType = EntityLayerType.DEFAULT | EntityLayerType.HARD_TRANSPARENT;
-			_graphicDis.addChild(_simpleShadowMesh);
-		}
-		
-		public function addSimpleShadow(textureUrl : String, baseScale : Number = 0.01) : void
-		{
-			if (_useSimpleShadow)
-				return;
-			_useSimpleShadow = true;
-			_simpleShadowTextureUrl = textureUrl;
-			_simpleShadowBaseScale = baseScale;
-			validateSimpleShadow();
-		}
-		
-		public function removeSimpleShadow() : void
-		{
-			if (!_useSimpleShadow)
-				return;
-			_useSimpleShadow = false;
-			_simpleShadowTextureUrl = null;
-			_simpleShadowBaseScale = 0;
-			GlobalTexture.removeTextureCallBack(_simpleShadowTextureUrl, onShadowTextureComplete);
-			if (_simpleShadowMesh)
-			{
-				if (_simpleShadowMesh.parent)
-					_simpleShadowMesh.parent.removeChild(_simpleShadowMesh);
-			}
-		}
-		
-		private function validateSimpleShadow() : void
-		{
-			if (!_renderUnitData)
-			{
-				return;
-			}
-			if (_useSimpleShadow)
-			{
-				GlobalTexture.addTexture(_simpleShadowTextureUrl, onShadowTextureComplete);
-			}
 		}
 
 		private function initChildZoffset() : void
@@ -1008,7 +955,13 @@ package com.game.engine3D.scene.render
 					layerType = 0;
 				}
 			}
-			if (_visible && (!_isElementStatus || mesh.name == _currentStatus))
+			var animatStatus : String;
+			//设置状态
+			if (_secondStatusGetter == null)
+				animatStatus = _currentStatus;
+			else
+				animatStatus = _secondStatusGetter(_currentStatus);
+			if (_visible && (!_isElementStatus || mesh.name == animatStatus))
 			{
 			}
 			else
@@ -1057,7 +1010,13 @@ package com.game.engine3D.scene.render
 			{
 				objVisible = false;
 			}
-			if (_visible && (!_isElementStatus || obj.name == _currentStatus))
+			var animatStatus : String;
+			//设置状态
+			if (_secondStatusGetter == null)
+				animatStatus = _currentStatus;
+			else
+				animatStatus = _secondStatusGetter(_currentStatus);
+			if (_visible && (!_isElementStatus || obj.name == animatStatus))
 			{
 			}
 			else
@@ -1287,7 +1246,13 @@ package com.game.engine3D.scene.render
 				return;
 			}
 			_animator = null;
-			_totalDuration = _renderUnitData.getAnimationDuration(_currentStatus);
+			var animatStatus : String;
+			//设置状态
+			if (_secondStatusGetter == null)
+				animatStatus = _currentStatus;
+			else
+				animatStatus = _secondStatusGetter(_currentStatus);
+			_totalDuration = _renderUnitData.getAnimationDuration(animatStatus);
 			var offsetTime : Number = NaN;
 			if (_playing)
 			{
@@ -1314,7 +1279,7 @@ package com.game.engine3D.scene.render
 					}
 					if (_isElementStatus)
 					{
-						meshElement.visible = _visible && (!_setVisibleMap.hasOwnProperty(meshElement.name) || _setVisibleMap[meshElement.name]) && meshElement.name == _currentStatus;
+						meshElement.visible = _visible && (!_setVisibleMap.hasOwnProperty(meshElement.name) || _setVisibleMap[meshElement.name]) && meshElement.name == animatStatus;
 						if (_isRendering && _visible && _isInViewDistance)
 						{
 							if (meshElement.visible)
@@ -1378,17 +1343,17 @@ package com.game.engine3D.scene.render
 								if (_isRendering && _visible && _isInViewDistance)
 								{
 									activeStatus = null;
-									if (_currentStatus)
+									if (animatStatus)
 									{
-										if (currAnimator.animationSet.hasAnimation(_currentStatus))
+										if (currAnimator.animationSet.hasAnimation(animatStatus))
 										{
-											activeStatus = _currentStatus;
+											activeStatus = animatStatus;
 										}
 										else if (_defalutStatus && currAnimator.animationSet.hasAnimation(_defalutStatus))
 										{
 											CONFIG::GameEngine3D_Debug
 												{
-													trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "_没有找到动作_" + _currentStatus, "将取默认动作_" + _defalutStatus);
+													trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.sourcePath + "_没有找到动作_" + animatStatus, "将取默认动作_" + _defalutStatus);
 												}
 												activeStatus = _defalutStatus;
 										}
@@ -1529,17 +1494,17 @@ package com.game.engine3D.scene.render
 						{
 							if (currAnimator is SkeletonAnimator)
 							{
-								if (_currentStatus)
+								if (animatStatus)
 								{
-									if (currAnimator.animationSet.hasAnimation(_currentStatus))
+									if (currAnimator.animationSet.hasAnimation(animatStatus))
 									{
-										activeStatus = _currentStatus;
+										activeStatus = animatStatus;
 									}
 									else if (_defalutStatus && currAnimator.animationSet.hasAnimation(_defalutStatus))
 									{
 										CONFIG::GameEngine3D_Debug
 											{
-												trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.animatorSourchPath + "_没有找到动作_" + _currentStatus, "将取默认动作_" + _defalutStatus);
+												trace(GlobalConfig.DEBUG_HEAD + " " + _renderParamData.animatorSourchPath + "_没有找到动作_" + animatStatus, "将取默认动作_" + _defalutStatus);
 											}
 											activeStatus = _defalutStatus;
 									}
@@ -1960,9 +1925,7 @@ package com.game.engine3D.scene.render
 			if (_isRendering)
 				return;
 			super.startRender();
-			_currDurationTime = 0;
-			_playDuration = 0;
-			_playToTime = 0;
+
 			//trace("startRender", _renderParamData.sourcePath, getTimer());
 			loadRes();
 			validateAnimation();
@@ -1973,9 +1936,7 @@ package com.game.engine3D.scene.render
 			if (!_isRendering)
 				return;
 			super.stopRender();
-			_currDurationTime = 0;
-			_playDuration = 0;
-			_playToTime = 0;
+
 			validateAnimation();
 		}
 		
@@ -2009,19 +1970,6 @@ package com.game.engine3D.scene.render
 				callStop();
 			}
 		}
-
-		/*override public function set parent(value : ObjectContainer3D) : void
-		{
-			if (_parent != value)
-			{
-				super.parent = value;
-				if (value)
-				{
-					loadRes();
-					validateAnimation();
-				}
-			}
-		}*/
 
 		/**
 		 * 动作序列完成
@@ -2259,10 +2207,7 @@ package com.game.engine3D.scene.render
 			{
 				childData = _currChildUnitList[index];
 			}
-			/*if (childData.renderUnit != this)
-			{
-				childData.renderUnit.parent = _graphicDis;
-			}*/
+
 			if (resReady)
 			{
 				doWaitAddBone(childData);
@@ -2662,10 +2607,11 @@ package com.game.engine3D.scene.render
 			if (!_currentStatus)
 				transition = null;
 			//设置状态
-			if (_secondStatusGetter == null)
-				_currentStatus = status;
-			else
-				_currentStatus = _secondStatusGetter(status);
+//			if (_secondStatusGetter == null)
+//				_currentStatus = status;
+//			else
+//				_currentStatus = _secondStatusGetter(status);
+			_currentStatus = status;
 			_animationTransition = transition;
 			play(time, animateSpeed);
 		}
@@ -2918,10 +2864,6 @@ package com.game.engine3D.scene.render
 			_zOffsetByName = new Dictionary(true);
 			_shareMaterialProperty = new Vector.<MaterialPropertyData>();
 			
-			_useSimpleShadow = false;
-			_simpleShadowTextureUrl = null;
-			_simpleShadowBaseScale = 0;
-			_simpleShadowMesh = null;
 			useFog = false;
 		}
 
@@ -3418,19 +3360,6 @@ package com.game.engine3D.scene.render
 				_renderUnitData.lightPicker = _useLight ? _lightPicker : null;
 			}
 		}
-        
-        CONFIG::netDebug {
-            public function getAnimatorElements() : Vector.<CompositeMesh> {
-                if (!_drawElements) {
-                    return null;
-                }
-                return this._animatorElements;
-            }
-            
-            public function getDrawElements() : Vector.<ObjectContainer3D> {
-                return _drawElements;
-            }
-        }
 
 		public function getBounds() : VolumeBounds
 		{
@@ -3639,6 +3568,15 @@ package com.game.engine3D.scene.render
 				}
 				_meshes = null;
 			}
+			if (_baseVirtualElements) {
+				for each(var baseVirtual : ObjectContainer3D in _baseVirtualElements) {
+					baseVirtual.extra = null;
+					if (baseVirtual.parent) {
+						baseVirtual.parent.removeChild(baseVirtual);
+					}
+				}
+				_baseVirtualElements = null;
+			}
 			/*if (_boneChildrenByName)
 			{
 				for (var boneName : String in _boneChildrenByName)
@@ -3800,13 +3738,6 @@ package com.game.engine3D.scene.render
 				_independentAnimator.dispose();
 				_independentAnimator = null;
 			}
-			
-			removeSimpleShadow();
-			if (_simpleShadowMesh)
-			{
-				_simpleShadowMesh.dispose();
-				_simpleShadowMesh = null;
-			}
 		
 			restoreAllChildUnitToParent();
 			_visibleNeedAsyncLoaded = false;
@@ -3881,6 +3812,10 @@ package com.game.engine3D.scene.render
 			}
 			unregisterEvent();
 			super.dispose();
+		}
+		
+		override public function set staticGraphicDis(value:ObjectContainer3D):void {
+			super.staticGraphicDis = value;
 		}
 	}
 }

@@ -475,6 +475,7 @@ package com.game.engine3D.scene.render
 			if (!ru)
 			{
 				ru = RenderUnit3D.create(rpd,_is25D); //创建一个新的
+				ru.staticGraphicDis = this._staticGraphicDis;
 			}
 			ru.setRenderParamData(rpd);
 			ru.shareMaterials = _shareMaterials;
@@ -500,7 +501,7 @@ package com.game.engine3D.scene.render
 			{
 				ru.startRender();
 			}
-			if (rpd.useSecondStatus)
+			if (rpd.useSecondStatus)//使用二套动作的单元
 			{
 				ru.secondStatusGetter = null;
 				_secondStatusRender = ru;
@@ -510,10 +511,13 @@ package com.game.engine3D.scene.render
 					{
 						continue;
 					}
-					otherRu.secondStatusGetter = _secondStatusGetter;
+					if (_secondStatusRender.resReady)
+					{
+						otherRu.secondStatusGetter = _secondStatusGetter;
+					}
 				}
 			}
-			else if (_secondStatusRender)
+			else if (_secondStatusRender) //其他单元
 			{
 				if (ru == _secondStatusRender)
 				{
@@ -521,13 +525,36 @@ package com.game.engine3D.scene.render
 				}
 				else
 				{
-					ru.secondStatusGetter = _secondStatusGetter;
+					if (_secondStatusRender.resReady)
+					{
+						ru.secondStatusGetter = _secondStatusGetter;
+					}
 				}
+			}
+			if (_secondStatusRender && !_secondStatusRender.resReady)
+			{
+				_secondStatusRender.setAddedCallBack(doSetsecondStatusGetter);
 			}
 			//添加进表
 			var key : String = rpd.type + "_" + rpd.id;
 			_renderUnitMap[key] = ru;
 			return ru;
+		}
+		
+		private function doSetsecondStatusGetter(ru : RenderUnit3D) : void
+		{
+			if (ru != _secondStatusRender)
+			{
+				return;
+			}
+			for each (var otherRu : RenderUnit3D in _renderUnitMap)
+			{
+				if (otherRu == _secondStatusRender)
+				{
+					continue;
+				}
+				otherRu.secondStatusGetter = _secondStatusGetter;
+			}
 		}
 
 		private function doRenderUnitRemoved(ru : RenderUnit3D) : void
@@ -556,6 +583,7 @@ package com.game.engine3D.scene.render
 			}
 			if (_secondStatusRender == ru)
 			{
+				_secondStatusRender.removeAddedCallBack(doSetsecondStatusGetter);
 				_secondStatusRender = null;
 				for each (var otherRu : RenderUnit3D in _renderUnitMap)
 				{
@@ -717,7 +745,11 @@ package com.game.engine3D.scene.render
 				ru = null;
 			}
 			_volumeRender = null;
-			_secondStatusRender = null;
+			if (_secondStatusRender)
+			{
+				_secondStatusRender.removeAddedCallBack(doSetsecondStatusGetter);
+				_secondStatusRender = null;
+			}
 		}
 
 		/**

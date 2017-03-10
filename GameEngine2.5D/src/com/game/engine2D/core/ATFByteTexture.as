@@ -51,7 +51,7 @@ package com.game.engine2D.core
 			}
 			return _isReady;
 		}
-		
+
 		public function get atfData():ATFByteData
 		{
 			return _atfData;
@@ -98,7 +98,14 @@ package com.game.engine2D.core
 		override protected function uploadContent(texture:TextureBase):void
 		{
 			_isReady = !_atfData.isAsync;
-			super.uploadContent(texture);
+			try
+			{
+				super.uploadContent(texture);
+			}
+			catch(e:Error)
+			{
+				trace("zatf贴图上传出错：",_path, e.message);
+			}
 		}
 		
 		override public function invalidateContent():void
@@ -120,7 +127,7 @@ package com.game.engine2D.core
 			_texture = null;
 			_isReady = false;
 		}
-		
+
 		/** 释放Texture对象  */
 		private function disposeTexture():void
 		{
