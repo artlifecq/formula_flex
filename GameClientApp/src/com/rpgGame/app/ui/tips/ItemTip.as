@@ -115,9 +115,9 @@ package com.rpgGame.app.ui.tips
 				if(_itemInfo.qItem.q_bind==0){
 					_itemTip.lbl_lock.visible=false;
 				}else if(_itemInfo.qItem.q_bind==1){
-					_itemTip.lbl_lock.visible="[获得时绑定]";
+					_itemTip.lbl_lock.text="[获得时绑定]";
 				}else{
-					_itemTip.lbl_lock.visible="[使用后绑定]";
+					_itemTip.lbl_lock.text="[使用后绑定]";
 				}
 			}
 			

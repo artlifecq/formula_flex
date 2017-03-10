@@ -19,6 +19,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.action.PlayActionState;
 	import com.rpgGame.app.state.role.action.PrewarState;
 	import com.rpgGame.app.state.role.action.RunState;
+	import com.rpgGame.app.state.role.action.ShowState;
 	import com.rpgGame.app.state.role.action.TrailState;
 	import com.rpgGame.app.state.role.action.WalkState;
 	import com.rpgGame.app.state.role.control.AttackHardState;
@@ -86,6 +87,7 @@ package com.rpgGame.app.state.role
 		private static var stateMapping : Dictionary = new Dictionary();
 		
 		stateMapping[RoleStateType.ACTION_IDLE] = IdleState;
+		stateMapping[RoleStateType.ACTION_SHOW] = ShowState;
 		stateMapping[RoleStateType.ACTION_WALK] = WalkState;
 		stateMapping[RoleStateType.ACTION_RUN] = RunState;
 		stateMapping[RoleStateType.ACTION_JUMP] = JumpState;

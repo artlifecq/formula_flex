@@ -3,8 +3,9 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.view.icon.DragDropGrid;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.EffectUrl;
-
+	
 	import feathers.controls.UIAsset;
 
 	/**
@@ -36,6 +37,14 @@ package com.rpgGame.app.ui.main.shortcut
 			imgAutoUse.styleName = ClientConfig.getSpellAutoIco();
 		}
 
+		override  protected function updateIconImagePosition( posx:Number=0, posy:Number=0 ):void
+		{
+			if(!_iconImage)
+				return;
+			_iconImage.x = 6;
+			_iconImage.y = 6;
+		}
+		
 
 		public function showAutoImg(isShow : Boolean) : void
 		{

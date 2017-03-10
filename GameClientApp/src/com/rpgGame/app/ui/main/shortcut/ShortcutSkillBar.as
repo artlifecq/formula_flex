@@ -10,8 +10,8 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.info.shortcuts.ShortcutsData;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	
@@ -63,12 +63,12 @@ package com.rpgGame.app.ui.main.shortcut
 		private function createGrid() : void
 		{
 			_gridVect = new Vector.<ShortcutGrid>();
-			var cd : ShortcutGrid;
 			var size : int = IcoSizeEnum.ICON_48;
 			var gridInfo : GridInfo;
+			var bgWH:int=54;
 			for (var i : int = 0; i < GRID_COUNT; i++)
 			{
-				cd = new ShortcutGrid(_shortcutBar, size);
+				var cd:ShortcutGrid = new ShortcutGrid(_shortcutBar, size);
 				cd.width = cd.height = size;
 
 				cd.dragAble = true;
@@ -76,28 +76,14 @@ package com.rpgGame.app.ui.main.shortcut
 				cd.gridInfo = gridInfo;
 				cd.onTouchEndCallBack = onTouchGrid;
 				cd.rightMouseClickFun = onRightMouseClick;
-				if (i < 10)
-				{
-					cd.x = 9 + 54 * i;
-					cd.y = 6;
-
-					cd.setBg(GridBGType.GRID_SIZE_46, 0);
-					cd.setIconPoint(0, 0);
-					addChild(cd);
-				}
-				else
-				{
-					cd.x = 1 + 55 * (i - 10);
-					cd.y = -5;
-
-					cd.setBg(GridBGType.GRID_SIZE_46, 0);
-					cd.setIconPoint(0, 0);
-					//addChild(cd);
-				}
+				cd.x = 9 + bgWH * i;
+				cd.y = 4;
+				
+				cd.setBg(GridBGType.GRID_SIZE_48);
+				cd.setIconPoint(0, 0);
+				addChild(cd);
 				_gridVect.push(cd);
-
-				if (i > 9)
-					cd.showShortCutText(SHORTCUTS_KEY[i]);
+				cd.showShortCutText(SHORTCUTS_KEY[i]);
 			}
 		}
 
@@ -209,7 +195,7 @@ package com.rpgGame.app.ui.main.shortcut
 						}
 					}
 
-					FaceUtil.SetSkillGrid(grid, FaceUtil.chanceSpellToFaceInfo(skillData), true);
+					FaceUtil.SetSkillGrid(grid, FaceUtil.chanceSpellToFaceInfo(skillData), false);//暂时不展示tips
 
 					var isAutoSpell : Boolean = MainRoleManager.actorInfo.spellList.isAutoSpellId(skillData.q_skillID);
 					if (isAutoSpell)

@@ -230,9 +230,8 @@ package com.rpgGame.app.utils
 			grid.faceInfo = data;
 			grid.setIconResName( ClientConfig.getSkillIcon( data.icoName, size ) );
 			grid.setIsShowCdTm( true );
-			grid.setQualityImageIconPoint( -2, -2 );
+//			grid.setQualityImageIconPoint( -2, -2 );
 			grid.sortLayer();
-			
 			if( isTips )
 				TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.SPELL_TIP, data,false,new Point(grid.x,grid.y)) );
 			else

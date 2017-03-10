@@ -41,6 +41,11 @@ package com.rpgGame.core.events
 		 */
 		public static const CHANGE_ACCESS_STATE:int = UNIQUEID.NEXT;
 		
+		/**
+		 *剩余格子改变
+		 */
+		public static const LEFT_GRID_CHANG:int = UNIQUEID.NEXT;
+		
 		
 		/** 删除物品 **/
 		public static const ITEM_DELETE:int = UNIQUEID.NEXT;

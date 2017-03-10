@@ -1,6 +1,8 @@
 package com.rpgGame.appModule.role
 {
 	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -17,6 +19,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.core.events.AvatarEvent;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -26,6 +29,8 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.type.EffectUrl;
+	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	
 	import flash.geom.Point;
@@ -36,6 +41,8 @@ package com.rpgGame.appModule.role
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.juese_Skin;
+	
+	import starling.display.DisplayObject;
 
 	/**
 	 *装备部分
@@ -58,18 +65,21 @@ package com.rpgGame.appModule.role
 		private var listDatas:ListCollection;
 		private var _mgr:RoleEquipmentManager;
 		private var containerId:int=ItemContainerID.Role;
-		
-		
 		public var acceptDropFromContainerIdArr:Array;
+		
+		private var _zhandouliEftContaner:Inter3DContainer;
+		private var _zhandouliEft:InterObject3D;
+		
 		
 		public function AvatarView(skin:juese_Skin)
 		{
 			acceptDropFromContainerIdArr=[ItemContainerID.BackPack];
-			
 			_skin=skin;
 			_avatarContainer=new Inter3DContainer();
+			_zhandouliEftContaner=new Inter3DContainer();
 			var index:int=_skin.container.getChildIndex(_skin.weapons);
 			_skin.container.addChildAt(_avatarContainer,index);
+			_skin.footMsg.addChildAt(_zhandouliEftContaner,4);
 			_mgr=RoleEquipmentManager.instance;
 			initAvatar();
 			initEquips();
@@ -125,10 +135,19 @@ package com.rpgGame.appModule.role
 			_avatar.x = _skin.weapons.x + (_skin.weapons.width >> 1)+20;
 			_avatar.y = _skin.weapons.y + _skin.weapons.height+20;
 			_avatarContainer.addChild3D(_avatar);
-			
 			_showAvatarData = new RoleData(0);
 			
-//			_avatar.transition(
+			_zhandouliEft= _zhandouliEftContaner.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JIEMIAN_ZHANDOULI),135,28,0);
+			var renderUint:RenderUnit3D=RenderUnit3D(_zhandouliEft.baseObj3D);
+		}
+		
+		internal function onTouchTarget(target : DisplayObject):Boolean
+		{
+			if(_skin.roleZone==target){
+				_avatar.curRole.stateMachine.transition(RoleStateType.ACTION_SHOW);
+				return true;
+			}
+			return false;
 		}
 		
 		public function show():void
@@ -361,6 +380,7 @@ package com.rpgGame.appModule.role
 			
 			_skin.txt_loveName.text=info.loveName.length!=0?info.loveName:"无";
 			_skin.Num_zhandouli.number=info.totalStat.getStatValue(CharAttributeType.FIGHTING);
+			_skin.Num_zhandouli.x=128+_skin.Num_zhandouli.width/2;
 		}
 		
 		private function updateRole():void
@@ -381,6 +401,7 @@ package com.rpgGame.appModule.role
 			
 			this._avatar.setRoleData(this._showAvatarData);
 			this._avatar.curRole.setScale(1.7);			
+			_avatar.curRole.stateMachine.transition(RoleStateType.ACTION_SHOW);
 		}
 	}
 }

@@ -17,7 +17,7 @@ package org.mokylin.skin.component.text
 		//==========================================================================
 		public var bg:feathers.controls.UIAsset;
 
-		public var labelDisplay:feathers.controls.Label;
+		public var textDisplay:feathers.controls.Label;
 
 
 		//==========================================================================
@@ -28,7 +28,7 @@ package org.mokylin.skin.component.text
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [bg_i(),labelDisplay_i()];
+			this.elementsContent = [bg_i(),textDisplay_i()];
 			
 			states = {
 			};
@@ -51,11 +51,11 @@ package org.mokylin.skin.component.text
 			return temp;
 		}
 
-		private function labelDisplay_i():feathers.controls.Label
+		private function textDisplay_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			labelDisplay = temp;
-			temp.name = "labelDisplay";
+			textDisplay = temp;
+			temp.name = "textDisplay";
 			temp.left = 3;
 			temp.right = 3;
 			temp.text = "标签";

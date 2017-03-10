@@ -179,7 +179,7 @@ package com.rpgGame.app.manager.fight
 					typeRes = ROOT+USESFUL_EFFECT+"weimingzhong.png";
 					scaleAgo = 2;
 					scaleLater = 1;
-					tweenFun=tweenTypeRoleMiss;
+					tweenFun=tweenUp;
 					break;
 				case EnumHurtType.SPELL_HURT_TYPE_CRIT: //暴击
 //					isUsefulBmp = hurter.isMainChar;

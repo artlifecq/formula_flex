@@ -3,8 +3,6 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	
-	import flash.text.TextFormat;
-	
 	import org.mokylin.skin.app.tips.huobiTips_Skin;
 
 	public class AmountTip extends SkinUI implements ITip

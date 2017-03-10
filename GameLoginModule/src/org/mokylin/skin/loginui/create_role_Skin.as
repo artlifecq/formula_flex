@@ -227,7 +227,7 @@ package org.mokylin.skin.loginui
 			temp.height = 34;
 			temp.styleClass = org.mokylin.skin.loginui.button.ButtonSkin_shaizi;
 			temp.width = 34;
-			temp.x = 233;
+			temp.x = 238;
 			temp.y = 2;
 			return temp;
 		}
@@ -346,7 +346,7 @@ package org.mokylin.skin.loginui
 			temp.name = "text_input";
 			temp.height = 42;
 			temp.styleClass = org.mokylin.skin.loginui.create_input_Skin;
-			temp.width = 225;
+			temp.width = 276;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

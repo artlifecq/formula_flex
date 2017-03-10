@@ -135,6 +135,8 @@ package org.mokylin.skin.common
 			temp.name = "titleDisplay";
 			temp.bold = true;
 			temp.height = 26;
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.fontSize = 16;
 			temp.text = "日志记录";
 			temp.textAlign = "center";
