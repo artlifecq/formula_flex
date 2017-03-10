@@ -2,10 +2,10 @@ package game.rpgGame.login.display3D
 {
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.manager.Stage3DLayerManager;
-	import com.rpgGame.coreData.role.RoleData;
 	
 	import away3d.containers.View3D;
 	
+	import game.rpgGame.login.data.RoleData;
 	import game.rpgGame.login.scene.AvatarManager;
 	import game.rpgGame.login.scene.SceneRole;
 	import game.rpgGame.login.state.RoleStateType;

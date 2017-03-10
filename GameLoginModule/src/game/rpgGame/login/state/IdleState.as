@@ -3,8 +3,9 @@ package game.rpgGame.login.state
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.state.role.BaseActionState;
 	import com.game.engine3D.vo.BaseRole;
-	import com.rpgGame.coreData.type.RenderUnitType;
-	import com.rpgGame.coreData.type.RoleActionType;
+	
+	import game.rpgGame.login.scene.RenderUnitType;
+	import game.rpgGame.login.scene.RoleActionType;
 	
 	/**
 	 *

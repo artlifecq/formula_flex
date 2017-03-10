@@ -1,4 +1,4 @@
-package game.rpgGame.login.scene
+package game.rpgGame.login.data
 {
 
 	public class BoneNameEnum

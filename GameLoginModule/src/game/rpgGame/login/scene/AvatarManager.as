@@ -1,18 +1,21 @@
 package game.rpgGame.login.scene
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.game.engine3D.scene.render.vo.BaseObjChild;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
-	import com.rpgGame.coreData.AvatarInfo;
-	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
-	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
-	import com.rpgGame.coreData.role.RoleData;
-	import com.rpgGame.coreData.type.RenderUnitID;
-	import com.rpgGame.coreData.type.RenderUnitType;
-	import com.rpgGame.coreData.type.RoleActionType;
+	import com.game.engine3D.scene.render.vo.RenderUnitChild;
 	
 	import flash.geom.Vector3D;
-
+	
+	import game.rpgGame.login.ClientConfig;
+	import game.rpgGame.login.data.AvatarInfo;
+	import game.rpgGame.login.data.BoneNameEnum;
+	import game.rpgGame.login.data.RoleData;
+	import game.rpgGame.login.state.RoleStateMachine;
+	import game.rpgGame.login.state.RoleStateType;
+	
+	import org.client.mainCore.manager.EventManager;
+	
 	/**
 	 *
 	 * 换装管理器
@@ -28,18 +31,37 @@ package game.rpgGame.login.scene
 		{
 			if (role == null || !role.usable)
 				return;
-
 			
+			var objChild : BaseObjChild;
+			var objChildDatas : Vector.<BaseObjChild>;
+			var unitChild : RenderUnitChild;
+			var unitChildDatas : Vector.<RenderUnitChild>;
+			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
+			if (avatarInfo.rpd_body)
+			{
+				//将坐骑头顶的绑点子部件转到body上
+				objChildDatas = role.getChildDatasByName(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.c_0_name_01);
+				for each (objChild in objChildDatas)
+				{
+					role.addObjChildDataToUnitChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01, objChild);
+				}
+				unitChildDatas = role.avatar.getUnitChildDatasByName(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.c_0_name_01);
+				for each (unitChild in unitChildDatas)
+				{
+					role.avatar.addUnitChildData(RenderUnitType.BODY, RenderUnitID.BODY, unitChild);
+				}
+			}
+			
+			role.avatar.secondStatusGetter = getSecondStatus;
 			role.avatar.buildSyncInfo(RenderUnitType.BODY, RenderUnitID.BODY);
 			role.avatar.buildSyncInfo(RenderUnitType.HAIR, RenderUnitID.HAIR);
 			role.avatar.buildSyncInfo(RenderUnitType.WEAPON, RenderUnitID.WEAPON);
 			role.avatar.buildSyncInfo(RenderUnitType.DEPUTY_WEAPON, RenderUnitID.DEPUTY_WEAPON);
 			role.avatar.buildSyncInfo(RenderUnitType.MOUNT, RenderUnitID.MOUNT);
 			role.avatar.buildSyncInfo(RenderUnitType.EFFECT, RenderUnitID.EFFECT);
-
-
+			
 			//上“坐骑”
-			updateMount(role); //暂时先不搞坐骑。动作有问题
+			updateMount(role);
 			//穿“主体”
 			updateBody(role);
 			//穿“头发”
@@ -53,114 +75,47 @@ package game.rpgGame.login.scene
 			//穿“效果方法类型特效”
 			updateMethodTypeEffect(role);
 			
-			updateRoleSimpleShadow(role);
-		}
-		
-		private static function updateMethodTypeEffect(role : SceneRole) : void
-		{
-			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			var rpd_method_type_effect : RenderParamData3D = avatarInfo.rpd_body_method_type_effect;
-			if (rpd_method_type_effect != null)
+			if (role.avatar.hasIDRenderUnit(RenderUnitType.MOUNT, RenderUnitID.MOUNT))
 			{
-				var effectRu : RenderUnit3D = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_method_type_effect);
-				effectRu.defalutStatus = RoleActionType.IDLE;
-				effectRu.setAddedCallBack(partAddedCallBack, role);
-				effectRu.setErrorCallBack(partErrorCallBack, role);
-				effectRu.entityGlass = false;
-				effectRu.useLight = false;
-				effectRu.castsShadows = false;
-				effectRu.repeat = 0;
-				effectRu.play(0);
-			}
-			else
-			{
-				role.avatar.removeRenderUnitByID(RenderUnitType.BODY_METHOD_TYPE_EFFECT, RenderUnitID.BODY_METHOD_TYPE_EFFECT);
-			}
-		}
-		
-		/**部件添加完成*/
-		private static function partAddedCallBack(role : SceneRole, ru : RenderUnit3D) : void
-		{
-			ru.removeAddedCallBack(partAddedCallBack);
-			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
-			if (rpd_body)
-			{
-				if (role.avatar.hasIDRenderUnit(RenderUnitType.MOUNT, RenderUnitID.MOUNT))
+				//将body头顶的绑点子部件转到坐骑上
+				objChildDatas = role.getChildDatasByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01);
+				for each (objChild in objChildDatas)
 				{
-					if (ru.id == RenderUnitID.MOUNT)
-					{
-						updateRoleSimpleShadow(role);
-					}
+					role.addObjChildDataToUnitChild(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.c_0_name_01, objChild);
 				}
-				else
+				unitChildDatas = role.avatar.getUnitChildDatasByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01);
+				for each (unitChild in unitChildDatas)
 				{
-					if (ru.id == RenderUnitID.BODY)
-					{
-						updateRoleSimpleShadow(role);
-					}
+					role.avatar.addUnitChildData(RenderUnitType.MOUNT, RenderUnitID.MOUNT, unitChild);
 				}
 			}
-			else
-			{
-				/*if (ru.id == RenderUnitID.EFFECT && role.headFace)
-					role.headFace.setBodyRender(ru);*/
-			}
-		}
-		
-		/**部件添加错误*/
-		private static function partErrorCallBack(role : SceneRole, ru : RenderUnit3D) : void
-		{
 			
+			role.stateMachine.transition(RoleStateType.CONTROL_AVATAR);
 		}
 		
-		/**
-		 * 启用假的影子，比如用一个黑圈图，为了提高性能，就不用实时计算影子了。为了提高性能做的处理 
-		 * @param role
-		 * 
-		 */		
-		public static function updateRoleSimpleShadow(role : SceneRole) : void
+		
+		private static function getSecondStatus(type : String) : String
 		{
-			if ( role.isClingGround)
-			{
-				var data : RoleData = RoleData(role.data);
-				var avatarResConfig : AvatarResConfig;
-				if (role.avatar.hasIDRenderUnit(RenderUnitType.MOUNT, RenderUnitID.MOUNT))
-				{
-					var mountRu : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.MOUNT, RenderUnitID.MOUNT, true);
-					if (mountRu)
-					{
-						avatarResConfig = AvatarResConfigSetData.getInfo(data.avatarInfo.mountResID);
-						if (avatarResConfig /*&& !avatarResConfig.disableSimpleShadow*/)
-						{
-							role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"), mountRu.radius * simpleShadowBaseScale);
-							return;
-						}
-					}
-				}
-				else
-				{
-					var bodyRu : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
-					if (bodyRu)
-					{
-						avatarResConfig = AvatarResConfigSetData.getInfo(data.avatarInfo.bodyResID);
-						if (avatarResConfig/* && !avatarResConfig.disableSimpleShadow*/)
-						{
-							role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"), bodyRu.radius * simpleShadowBaseScale);
-							return;
-						}
-					}
-				}
-			}
-			role.removeSimpleShadow();
+			if (!type)
+				return null;
+			var actionHead : String = type.substr(0, type.length - 1);
+			return actionHead + "5";
 		}
-
-
+		
+		
+		/*private static function getIsWheel(resId : String) : Boolean
+		{
+		var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(resId);
+		if (avatarResConfig)
+		return avatarResConfig.isWheel;
+		return false;
+		}*/
+		
 		private static function updateBody(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
 			var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
-			var rpd_mount : RenderParamData3D = avatarInfo.rpd_mount;
+			var rpd_mount : RenderParamData3D =  null;
 			if (rpd_body != null)
 			{
 				var ru : RenderUnit3D;
@@ -179,23 +134,36 @@ package game.rpgGame.login.scene
 				{
 					if (rpd_body.animatorSourchPath)
 					{
+						//ru.setPickDummyEnable(true, BoneNameEnum.c_0_body_01); //目前游戏中只是英雄需要这么做,只有英雄是骨骼分离的,绑点美术没有给中心绑点,先用身体的。
 						ru.addUnitAtComposite(ru);
 					}
-					ru.defalutStatus = RoleActionType.STAND;
-					if (role.isMainChar)
-						ru.entityGlass = true;
 					else
+					{
+						ru.removeUnitChild(ru);
+					}
+					ru.defalutStatus = RoleActionType.IDLE;
+					ru.setAddedCallBack(partAddedCallBack, role);
+					ru.setErrorCallBack(partErrorCallBack, role);
+					if (role.isMainChar)
+					{
+						ru.entityGlass = true;
+					}
+					else
+					{
 						ru.entityGlass = false;
+					}
 					ru.useLight = true;
+					ru.useFog = true;
 					if (role.type != SceneCharType.DUMMY)
 					{
-						/*ru.castsShadows = true;
-						var useVolume : Boolean = false;
+						ru.castsShadows = true;
 						if (!rpd_mount)
 						{
-							useVolume = getUseVolume(avatarInfo.bodyResID);
+							var useVolume : Boolean = false;
+							//							var isWheel : Boolean = getIsWheel(avatarInfo.bodyResID);
+							role.setRenderUseVolume(RenderUnitType.BODY, RenderUnitID.BODY, useVolume);
+							role.isWheel = false;
 						}
-						role.setRenderUseVolume(RenderUnitType.BODY, RenderUnitID.BODY, useVolume);*/
 					}
 					role.avatar.applySyncInfo(RenderUnitType.BODY, RenderUnitID.BODY);
 				}
@@ -204,7 +172,7 @@ package game.rpgGame.login.scene
 			{
 				role.avatar.removeRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY);
 			}
-
+			
 			var rpd_body_effect : RenderParamData3D = avatarInfo.rpd_body_effect;
 			if (rpd_body_effect != null)
 			{
@@ -222,6 +190,9 @@ package game.rpgGame.login.scene
 				}
 				if (ru)
 				{
+					ru.defalutStatus = RoleActionType.IDLE;
+					ru.setAddedCallBack(partAddedCallBack, role);
+					ru.setErrorCallBack(partErrorCallBack, role);
 					ru.entityGlass = false;
 					ru.useLight = false;
 					ru.castsShadows = false;
@@ -233,8 +204,51 @@ package game.rpgGame.login.scene
 			{
 				role.avatar.removeRenderUnitByID(RenderUnitType.BODY_EFFECT, RenderUnitID.BODY_EFFECT);
 			}
+			
+			//			role.avatar.removeRenderUnitsByType(RenderUnitType.BODY_EFFECTS);
+			//			var rpd_body_effects : Vector.<RenderParamData3D> = rpd_mount ? avatarInfo.rpd_body_on_mount_effects : avatarInfo.rpd_body_effects;
+			//			var bodyEffectBindBones : Array = rpd_mount ? avatarInfo.bodyEffectOnMountBindBones : avatarInfo.bodyEffectBindBones;
+			//			if (rpd_body_effects != null)
+			//			{
+			//				var len : int = rpd_body_effects.length;
+			//				for (var i : int = 0; i < len; i++)
+			//				{
+			//					var effectRu : RenderUnit3D = null;
+			//					var rpd_effect : RenderParamData3D = rpd_body_effects[i];
+			//					var effectBindBone : String = bodyEffectBindBones ? bodyEffectBindBones[i] : null;
+			//					if (rpd_body)
+			//					{
+			//						if (effectBindBone)
+			//						{
+			//							if (rpd_body.animatorSourchPath)
+			//							{
+			//								effectRu = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, effectBindBone, rpd_effect);
+			//							}
+			//							else
+			//							{
+			//								effectRu = role.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, effectBindBone, rpd_effect);
+			//							}
+			//						}
+			//						else
+			//						{
+			//							effectRu = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_effect);
+			//						}
+			//					}
+			//					if (effectRu)
+			//					{
+			//						effectRu.defalutStatus = RoleActionType.IDLE;
+			//						effectRu.setAddedCallBack(partAddedCallBack, role);
+			//						effectRu.setErrorCallBack(partErrorCallBack, role);
+			//						effectRu.entityGlass = false;
+			//						effectRu.useLight = false;
+			//						effectRu.castsShadows = false;
+			//						effectRu.repeat = 0;
+			//						effectRu.play(0);
+			//					}
+			//				}
+			//			}
 		}
-
+		
 		private static function updateHair(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
@@ -256,12 +270,15 @@ package game.rpgGame.login.scene
 				}
 				if (ru)
 				{
-					ru.defalutStatus = RoleActionType.STAND;
+					ru.defalutStatus = RoleActionType.IDLE;
+					ru.setAddedCallBack(partAddedCallBack, role);
+					ru.setErrorCallBack(partErrorCallBack, role);
 					if (role.isMainChar)
 						ru.entityGlass = true;
 					else
 						ru.entityGlass = false;
 					ru.useLight = true;
+					ru.useFog = true;
 					if (role.type != SceneCharType.DUMMY)
 						ru.castsShadows = true;
 					role.avatar.applySyncInfo(RenderUnitType.HAIR, RenderUnitID.HAIR);
@@ -272,7 +289,7 @@ package game.rpgGame.login.scene
 				role.avatar.removeRenderUnitByID(RenderUnitType.HAIR, RenderUnitID.HAIR);
 			}
 		}
-
+		
 		private static function updateWeapon(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
@@ -285,7 +302,8 @@ package game.rpgGame.login.scene
 				{
 					if (rpd_body.animatorSourchPath)
 					{
-						ru = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.b_r_wq_01, rpd_weapon);
+						ru = role.avatar.addRenderUnitToComposite(RenderUnitType.BODY, RenderUnitID.BODY, rpd_weapon);
+						//						ru = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.b_r_wq_01, rpd_weapon);
 					}
 					else
 					{
@@ -294,12 +312,15 @@ package game.rpgGame.login.scene
 				}
 				if (ru)
 				{
-					ru.defalutStatus = RoleActionType.STAND;
+					ru.defalutStatus = RoleActionType.IDLE;
+					ru.setAddedCallBack(partAddedCallBack, role);
+					ru.setErrorCallBack(partErrorCallBack, role);
 					if (role.isMainChar)
 						ru.entityGlass = true;
 					else
 						ru.entityGlass = false;
 					ru.useLight = true;
+					ru.useFog = true;
 					if (role.type != SceneCharType.DUMMY)
 						ru.castsShadows = true;
 					role.avatar.applySyncInfo(RenderUnitType.WEAPON, RenderUnitID.WEAPON);
@@ -309,7 +330,7 @@ package game.rpgGame.login.scene
 			{
 				role.avatar.removeRenderUnitByID(RenderUnitType.WEAPON, RenderUnitID.WEAPON);
 			}
-
+			
 			var rpd_weapon_effect : RenderParamData3D = avatarInfo.rpd_weapon_effect;
 			if (rpd_weapon_effect != null)
 			{
@@ -326,6 +347,9 @@ package game.rpgGame.login.scene
 				}
 				if (ru)
 				{
+					ru.defalutStatus = RoleActionType.IDLE;
+					ru.setErrorCallBack(partErrorCallBack, role);
+					ru.setAddedCallBack(partAddedCallBack, role);
 					ru.entityGlass = false;
 					ru.useLight = false;
 					ru.castsShadows = false;
@@ -339,8 +363,44 @@ package game.rpgGame.login.scene
 			{
 				role.avatar.removeRenderUnitByID(RenderUnitType.WEAPON_EFFECT, RenderUnitID.WEAPON_EFFECT);
 			}
+			
+			//			role.avatar.removeRenderUnitsByType(RenderUnitType.WEAPON_EFFECTS);
+			//			var rpd_weapon_effects : Vector.<RenderParamData3D> = avatarInfo.rpd_weapon_effects;
+			//			var weaponEffectBindBones : Array = avatarInfo.weaponEffectBindBones;
+			//			if (rpd_weapon_effects != null)
+			//			{
+			//				var len : int = rpd_weapon_effects.length;
+			//				for (var i : int = 0; i < len; i++)
+			//				{
+			//					var effectRu : RenderUnit3D = null;
+			//					var rpd_effect : RenderParamData3D = rpd_weapon_effects[i];
+			//					var effectBindBone : String = weaponEffectBindBones[i];
+			//					if (rpd_weapon)
+			//					{
+			//						if (effectBindBone)
+			//						{
+			//							effectRu = role.avatar.addRenderUnitToChild(RenderUnitType.WEAPON, RenderUnitID.WEAPON, effectBindBone, rpd_effect);
+			//						}
+			//						else
+			//						{
+			//							effectRu = role.avatar.addRenderUnitToChild(RenderUnitType.WEAPON, RenderUnitID.WEAPON, null, rpd_effect, 0);
+			//						}
+			//					}
+			//					if (effectRu)
+			//					{
+			//						effectRu.defalutStatus = RoleActionType.IDLE;
+			//						effectRu.setAddedCallBack(partAddedCallBack, role);
+			//						effectRu.setErrorCallBack(partErrorCallBack, role);
+			//						effectRu.entityGlass = false;
+			//						effectRu.useLight = false;
+			//						effectRu.castsShadows = false;
+			//						effectRu.repeat = 0;
+			//						effectRu.play(0);
+			//					}
+			//				}
+			//			}
 		}
-
+		
 		private static function updateDeputyWeapon(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
@@ -353,7 +413,8 @@ package game.rpgGame.login.scene
 				{
 					if (rpd_body.animatorSourchPath)
 					{
-						ru = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.b_l_wq_01, rpd_deputy_weapon);
+						ru = role.avatar.addRenderUnitToComposite(RenderUnitType.BODY, RenderUnitID.BODY, rpd_deputy_weapon);
+						//						ru = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.b_l_wq_01, rpd_deputy_weapon);
 					}
 					else
 					{
@@ -362,12 +423,15 @@ package game.rpgGame.login.scene
 				}
 				if (ru)
 				{
-					ru.defalutStatus = RoleActionType.STAND;
+					ru.defalutStatus = RoleActionType.IDLE;
+					ru.setAddedCallBack(partAddedCallBack, role);
+					ru.setErrorCallBack(partErrorCallBack, role);
 					if (role.isMainChar)
 						ru.entityGlass = true;
 					else
 						ru.entityGlass = false;
 					ru.useLight = true;
+					ru.useFog = true;
 					if (role.type != SceneCharType.DUMMY)
 						ru.castsShadows = true;
 					role.avatar.applySyncInfo(RenderUnitType.DEPUTY_WEAPON, RenderUnitID.DEPUTY_WEAPON);
@@ -394,6 +458,7 @@ package game.rpgGame.login.scene
 				}
 				if (ru)
 				{
+					ru.setAddedCallBack(partAddedCallBack, role);
 					ru.entityGlass = false;
 					ru.useLight = false;
 					ru.castsShadows = false;
@@ -408,7 +473,29 @@ package game.rpgGame.login.scene
 				role.avatar.removeRenderUnitByID(RenderUnitType.DEPUTY_WEAPON_EFFECT, RenderUnitID.DEPUTY_WEAPON_EFFECT);
 			}
 		}
-
+		
+		private static function updateMethodTypeEffect(role : SceneRole) : void
+		{
+			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
+			var rpd_method_type_effect : RenderParamData3D = avatarInfo.rpd_body_method_type_effect;
+			if (rpd_method_type_effect != null)
+			{
+				var effectRu : RenderUnit3D = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_method_type_effect);
+				effectRu.defalutStatus = RoleActionType.IDLE;
+				effectRu.setAddedCallBack(partAddedCallBack, role);
+				effectRu.setErrorCallBack(partErrorCallBack, role);
+				effectRu.entityGlass = false;
+				effectRu.useLight = false;
+				effectRu.castsShadows = false;
+				effectRu.repeat = 0;
+				effectRu.play(0);
+			}
+			else
+			{
+				role.avatar.removeRenderUnitByID(RenderUnitType.BODY_METHOD_TYPE_EFFECT, RenderUnitID.BODY_METHOD_TYPE_EFFECT);
+			}
+		}
+		
 		private static function updateEffect(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
@@ -418,9 +505,12 @@ package game.rpgGame.login.scene
 				var ru : RenderUnit3D = role.avatar.addRenderUnit(rpd_effect);
 				if (ru)
 				{
+					ru.setAddedCallBack(partAddedCallBack, role);
+					ru.setErrorCallBack(partErrorCallBack, role);
 					ru.entityGlass = false;
 					ru.useLight = false;
 					ru.castsShadows = false;
+					role.avatar.applySyncInfo(RenderUnitType.EFFECT, RenderUnitID.EFFECT);
 				}
 			}
 			else
@@ -429,29 +519,37 @@ package game.rpgGame.login.scene
 			}
 		}
 		
-
 		private static function updateMount(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			var rpd_mount : RenderParamData3D = avatarInfo.rpd_mount;
+			var rpd_mount : RenderParamData3D =  null;
 			if (rpd_mount != null)
 			{
 				var ru : RenderUnit3D = role.avatar.addRenderUnit(rpd_mount);
 				if (rpd_mount.animatorSourchPath)
 				{
-//					ru.addUnitAtComposite(ru);
+					ru.addUnitAtComposite(ru);
 				}
-				ru.defalutStatus = RoleActionType.STAND;
+				else
+				{
+					ru.removeUnitChild(ru);
+				}
+				ru.defalutStatus = RoleActionType.IDLE;
+				ru.setAddedCallBack(partAddedCallBack, role);
+				ru.setErrorCallBack(partErrorCallBack, role);
 				if (role.isMainChar)
 					ru.entityGlass = true;
 				else
 					ru.entityGlass = false;
 				ru.useLight = true;
+				ru.useFog = true;
 				if (role.type != SceneCharType.DUMMY)
 				{
-				/*	ru.castsShadows = true;
-					var useVolume : Boolean = getUseVolume(avatarInfo.mountResID);
-					role.setRenderUseVolume(RenderUnitType.MOUNT, RenderUnitID.MOUNT, useVolume);*/
+					ru.castsShadows = true;
+					var useVolume : Boolean = false;
+					//					var isWheel : Boolean = getIsWheel(avatarInfo.mountResID);
+					role.setRenderUseVolume(RenderUnitType.MOUNT, RenderUnitID.MOUNT, useVolume);
+					role.isWheel = false;
 				}
 				role.avatar.applySyncInfo(RenderUnitType.MOUNT, RenderUnitID.MOUNT);
 			}
@@ -460,6 +558,55 @@ package game.rpgGame.login.scene
 				role.avatar.removeRenderUnitByID(RenderUnitType.MOUNT, RenderUnitID.MOUNT);
 			}
 		}
-
+		
+		/**部件添加完成*/
+		private static function partAddedCallBack(role : SceneRole, ru : RenderUnit3D) : void
+		{
+			ru.removeAddedCallBack(partAddedCallBack);
+			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
+			var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
+			if (rpd_body)
+			{
+				if (role.avatar.hasIDRenderUnit(RenderUnitType.MOUNT, RenderUnitID.MOUNT))
+				{
+					if (ru.id == RenderUnitID.MOUNT)
+					{
+					/*	if (role.headFace)
+							role.headFace.setBodyRender(ru);
+						if(role.attackFace)
+							role.attackFace.setBodyRender(ru);
+						updateRoleSimpleShadow(role);*/
+					}
+				}
+				else
+				{
+					if (ru.id == RenderUnitID.BODY)
+					{
+						/*if (role.headFace)
+							role.headFace.setBodyRender(ru);
+						if(role.attackFace)
+							role.attackFace.setBodyRender(ru);
+						updateRoleSimpleShadow(role);*/
+					}
+				}
+			}
+			else
+			{
+				/*if (ru.id == RenderUnitID.EFFECT && role.headFace)
+					role.headFace.setBodyRender(ru);*/
+			}
+		}
+		
+		/**部件添加错误*/
+		private static function partErrorCallBack(role : SceneRole, ru : RenderUnit3D) : void
+		{
+			//无模型时添加血条
+		/*	if (!ru.resReady && role.headFace)
+			{
+				role.headFace.setTemporary();
+			}*/
+		}
 	}
 }
+
+

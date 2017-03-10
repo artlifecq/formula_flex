@@ -3,25 +3,26 @@ package game.rpgGame.login.scene
 	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.vo.BaseRole;
 	
+	import game.rpgGame.login.data.EvilConfig;
 	import game.rpgGame.login.state.RoleStateMachine;
+	
 	
 	/**
 	 *
 	 * 场景角色
 	 * @author L.L.M.Sunny
-	 * 创建时间：2015-8-31 上午11:12:28
+	 * 创建时间：2015-6-5 上午11:12:28
 	 *
 	 */
 	public class SceneRole extends BaseRole
 	{
-		private static var _pool : InstancePool = new InstancePool("LoginSceneRole", 10);
+		/** 半径 **/
+		protected var _radius : int = EvilConfig.ELE_DEFAULT_RADIUS;
+		//---------------------------对象池---------------------------
+		private static var _pool : InstancePool = new InstancePool("SceneRole", 600);
+		
 		private static var _cnt : int = 0;
 		
-		public function get stateMachine():RoleStateMachine
-		{
-			return _stateMachine;
-		}
-
 		/**
 		 * 生成一个RenderUnit
 		 * @param $type
@@ -30,7 +31,7 @@ package game.rpgGame.login.scene
 		public static function create(type : String, id : Number) : SceneRole
 		{
 			_cnt++;
-			return _pool.createObj(SceneRole, type,id) as SceneRole;
+			return _pool.createObj(SceneRole, type, id) as SceneRole;
 		}
 		
 		public static function recycle(role : SceneRole) : void
@@ -47,16 +48,26 @@ package game.rpgGame.login.scene
 		}
 		
 		private var _stateMachine : RoleStateMachine;
+		protected var _fightChange : Boolean = false;
+		public var mapAreaTypes : Array = [];
+		public var isWheel : Boolean = false;
 		
-		public function SceneRole(type : Number,id : Number)
+		public function SceneRole(type : String, id : Number)
 		{
 			super(type, id);
+		}
+		
+		public function get stateMachine() : RoleStateMachine
+		{
+			return _stateMachine;
 		}
 		
 		override public function reSet($parameters : Array) : void
 		{
 			super.reSet($parameters);
 			_stateMachine = RoleStateMachine.create(this);
+			mapAreaTypes.length = 0;
+			isWheel = false;
 		}
 		
 		/**销毁对象 */
@@ -65,6 +76,9 @@ package game.rpgGame.login.scene
 			recycle(this);
 		}
 		
+		
+		
+		
 		override public function dispose() : void
 		{
 			if (_stateMachine)
@@ -72,8 +86,19 @@ package game.rpgGame.login.scene
 				RoleStateMachine.recycle(_stateMachine);
 				_stateMachine = null;
 			}
+			mapAreaTypes.length = 0;
+			isWheel = false;
 			super.dispose();
 		}
 		
+		public function get fightChange() : Boolean
+		{
+			return _fightChange;
+		}
+		
+		public function set fightChange(value : Boolean) : void
+		{
+			_fightChange = value;
+		}
 	}
 }

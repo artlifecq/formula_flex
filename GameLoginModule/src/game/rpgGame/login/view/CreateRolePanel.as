@@ -3,8 +3,6 @@ package game.rpgGame.login.view
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.utils.DisplayUtil;
 	import com.gameClient.alert.AlertPanel;
-	import com.rpgGame.coreData.AvatarInfo;
-	import com.rpgGame.coreData.role.RoleData;
 	
 	import flash.display.Stage;
 	import flash.events.Event;
@@ -17,8 +15,10 @@ package game.rpgGame.login.view
 	import feathers.controls.TextInput;
 	import feathers.core.ToggleGroup;
 	
+	import game.rpgGame.login.data.AvatarInfo;
 	import game.rpgGame.login.data.CreateRoleData;
 	import game.rpgGame.login.data.JobType;
+	import game.rpgGame.login.data.RoleData;
 	import game.rpgGame.login.display3D.InterAvatar3D;
 	import game.rpgGame.login.util.RandomNick;
 	
