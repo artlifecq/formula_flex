@@ -109,7 +109,7 @@ package com.rpgGame.appModule.common
 			gridList.itemRendererFactory = createItemRender;
 			gridList.clipContent = true;
 			gridList.scrollBarDisplayMode = "fixed";
-			gridList.verticalScrollBarPosition = "right";
+//			gridList.verticalScrollBarPosition = "right";
 			gridList.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			gridList.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			GuiThemeStyle.setScrollerStyle(gridList, org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat);

@@ -1,22 +1,18 @@
 package com.rpgGame.app.ui.main.navigation {
+    import com.rpgGame.app.sender.ItemSender;
     import com.rpgGame.core.app.AppConstant;
     import com.rpgGame.core.app.AppManager;
+    import com.rpgGame.core.events.ItemEvent;
     import com.rpgGame.core.manager.tips.TargetTipsMaker;
     import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ClientConfig;
-    
-    import flash.utils.setInterval;
-    
-    import feathers.controls.Button;
-    
-    import gameEngine2D.NetDebug;
+    import com.rpgGame.coreData.cfg.item.ItemContainerID;
     
     import gs.TweenLite;
-    import gs.easing.EaseLookup;
-    import gs.easing.Elastic;
     import gs.easing.Expo;
     
+    import org.client.mainCore.manager.EventManager;
     import org.mokylin.skin.mainui.navigation.navigation_main_Skin;
     
     import starling.display.DisplayObject;
@@ -39,6 +35,9 @@ package com.rpgGame.app.ui.main.navigation {
 			this._skin.btns.parent.setChildIndex(this._skin.btns,0);
             this.setState(true);
 			
+			_skin.qi_bg.visible=false;
+			_skin.qi_mc.visible=false;
+			_skin.qi_mc.gotoAndStop("m");
 			
 			if (!ClientConfig.isBanShu)
 			{
@@ -51,8 +50,29 @@ package com.rpgGame.app.ui.main.navigation {
 				TipTargetManager.show(_skin.btn_shangcheng, TargetTipsMaker.makeSimpleTextTips("商城<br/>快捷键：O"));
 			}
 			
+			if(!ItemSender.isReqPack){
+				ItemSender.getItemsByType(ItemContainerID.BackPack);
+			}
+			
+			EventManager.addEvent(ItemEvent.LEFT_GRID_CHANG,showLeftGridState);
         }
 		
+		private function showLeftGridState(leftGrid:int):void
+		{
+			if(leftGrid<=5){
+				_skin.qi_bg.visible=true;
+				_skin.qi_mc.visible=true;
+				if(leftGrid==0){
+					_skin.qi_mc.gotoAndStop("m");
+				}else{
+					_skin.qi_mc.gotoAndStop(leftGrid.toString());
+				}
+			}else{
+				_skin.qi_bg.visible=false;
+				_skin.qi_mc.visible=false;
+				_skin.qi_mc.gotoAndStop("m");
+			}
+		}		
         
         public function resize(w : int, h : int) : void {
             this.x = w - this._skin.width;

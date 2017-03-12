@@ -52,6 +52,10 @@ package com.rpgGame.appModule.role
 			if(packsView.onTouchTarget(target)){
 				return;
 			}
+			
+			if(avatartView.onTouchTarget(target)){
+				return;
+			}
 		}
 		
 		/**

@@ -39,9 +39,13 @@ package com.rpgGame.appModule.role
 	
 	import app.message.GoodsType;
 	
+	import feathers.controls.IScrollBar;
+	import feathers.controls.ScrollBar;
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
 	import feathers.themes.GuiThemeStyle;
+	
+	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.juese_Skin;
@@ -69,6 +73,8 @@ package com.rpgGame.appModule.role
 		private var itemBatchPanel:ItemBatchPanel;
 		private var toStorage:Boolean;
 		private var toStorageGridInfo:GridInfo;
+		private var clickTween:TweenLite;
+		private var waitDouble:Boolean;
 		
 		public function PacksView(skin:juese_Skin)
 		{
@@ -105,22 +111,22 @@ package com.rpgGame.appModule.role
 			goodsContainer.acceptDropFromContainerIdArr = [ItemContainerID.BackPack, ItemContainerID.Storage, ItemContainerID.Role, ItemContainerID.Mount];
 			goodsContainer.onDragDropEnd = onItemDroped;
 			
+			GuiThemeStyle.setScrollerStyle(_skin.lst_pack, org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack);
 			_skin.lst_pack.clipContent = true;
 			_skin.lst_pack.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_FIXED;
-			_skin.lst_pack.verticalScrollBarPosition = Scroller.VERTICAL_SCROLL_BAR_POSITION_RIGHT;
+//			_skin.lst_pack.verticalScrollBarPosition = Scroller.VERTICAL_SCROLL_BAR_POSITION_RIGHT;
 			_skin.lst_pack.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			_skin.lst_pack.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			
 			_skin.lst_pack.padding=3;
-			GuiThemeStyle.setScrollerStyle(_skin.lst_pack, org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack);
 		}
 		
 		
 		public function show():void
 		{
 			initEvent();
-			
 			if(!ItemSender.isReqPack){
+				EventManager.addEvent(ItemEvent.ITEM_INIT,initPackDatas);
 				ItemSender.getItemsByType(ItemContainerID.BackPack);
 			}else{
 				setGridsCount(BackPackManager.instance.hasOpenCount,true);
@@ -141,7 +147,6 @@ package com.rpgGame.appModule.role
 			_skin.txt_yingzi.text = stat.getResData(CharAttributeType.RES_MONEY) +"";//银子
 			_skin.txt_yuanbao.text = stat.getResData(CharAttributeType.RES_GOLD)+"";//金子
 			_skin.txt_yingzibang.text = stat.getResData(CharAttributeType.RES_BIND_MONEY)+"";//绑银
-			
 			TipTargetManager.remove(_skin.txt_lijin);
 			TipTargetManager.remove(_skin.txt_yingzi);
 			TipTargetManager.remove(_skin.txt_yuanbao);
@@ -301,8 +306,22 @@ package com.rpgGame.appModule.role
 		
 		protected function onDoubleClick(grid:IconCDFace):void
 		{
-			Menu.GetInstance().hide();
-			ItemUseManager.useItem(grid.faceInfo as ClientItemInfo);
+			if(clickTween){
+				clickTween.kill();
+				clickTween=null;
+			}
+			waitDouble=true;
+			clickTween=TweenLite.delayedCall(0.2,useItem,[grid.faceInfo]);
+		}
+		
+		private function useItem(grid:ClientItemInfo):void
+		{
+			waitDouble=false;
+			ItemUseManager.useItem(grid);
+			if(clickTween){
+				clickTween.kill();
+				clickTween=null;
+			}
 		}
 		
 		protected function onRightMouse(grid:IconCDFace):void
@@ -318,7 +337,10 @@ package com.rpgGame.appModule.role
 		 */		
 		protected function onTouchGrid( grid:DragDropItem ):void
 		{
-			Menu.GetInstance().hide();
+			if(waitDouble){
+				return;
+			}
+			
 			if(toStorage){//存到仓库去
 				if(grid.gridInfo.data==null){
 					return;
@@ -335,11 +357,21 @@ package com.rpgGame.appModule.role
 				return;
 			}
 			
-			showMenu(grid);//显示菜单
+			if(clickTween){
+				clickTween.kill();
+				clickTween=null;
+			}
+			
+			clickTween=TweenLite.delayedCall(0.2,showMenu,[grid]);
 		}
 		
 		public function showMenu(grid:IconCDFace):void
 		{
+			if(clickTween){
+				clickTween.kill();
+				clickTween=null;
+			}
+			
 			var item:ClientItemInfo = grid.faceInfo as ClientItemInfo;
 			if( item == null )
 				return;
@@ -387,7 +419,6 @@ package com.rpgGame.appModule.role
 		private function initEvent():void
 		{
 			_skin.tab_pack.addEventListener(Event.CHANGE, onTab);
-			EventManager.addEvent(ItemEvent.ITEM_INIT,initPackDatas);
 			
 			EventManager.addEvent(ItemEvent.ITEM_ADD,onFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onFreshItems);

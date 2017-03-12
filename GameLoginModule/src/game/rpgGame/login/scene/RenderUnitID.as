@@ -35,6 +35,8 @@ package game.rpgGame.login.scene
 
 		/**特效ID */
 		public static const EFFECT : int = rEnum.next;
+		
+		public static const BODY_METHOD_TYPE_EFFECT : int = rEnum.next;
 
 		/**刀光ID */
 		public static const KNIFE_LIGHT : int = rEnum.next;

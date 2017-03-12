@@ -28,7 +28,7 @@ package org.mokylin.skin.loginui
 			
 			this.currentState = "focused";
 			this.height = 42;
-			this.width = 270;
+			this.width = 280;
 			this.elementsContent = [textDisplay_i()];
 			__create_input_Skin_UIAsset1_i();
 			
@@ -47,6 +47,7 @@ package org.mokylin.skin.loginui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__create_input_Skin_UIAsset1 = temp;
 			temp.styleName = "ui/loginui/IDkuang.png";
+			temp.width = 280;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -57,13 +58,13 @@ package org.mokylin.skin.loginui
 			var temp:feathers.controls.text.TextFieldTextEditor = new feathers.controls.text.TextFieldTextEditor();
 			textDisplay = temp;
 			temp.name = "textDisplay";
-			temp.bottom = 5;
+			temp.bottom = 8;
 			temp.left = 7;
-			temp.right = 11;
+			temp.right = 59;
 			temp.fontSize = 16;
 			temp.text = "输入角色名称";
 			temp.color = 0x757575;
-			temp.top = 12;
+			temp.top = 9;
 			return temp;
 		}
 

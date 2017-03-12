@@ -1,27 +1,24 @@
 package com.rpgGame.app.ui.main.shortcut {
     import com.game.engine3D.display.InterObject3D;
     import com.game.engine3D.scene.render.RenderUnit3D;
+    import com.rpgGame.app.manager.RollManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.core.events.society.SocietyEvent;
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.enum.JobEnum;
     import com.rpgGame.coreData.type.EffectUrl;
-    import com.rpgGame.app.manager.RollManager;
     
     import flash.geom.Point;
     
     import feathers.controls.UIAsset;
     
-    import gameEngine2D.NetDebug;
-    
     import org.client.mainCore.manager.EventManager;
     import org.mokylin.skin.mainui.shortcut.shortcut_Skin;
     
     import starling.display.DisplayObject;
-    import starling.display.Sprite;
-    import starling.events.Event;
     import starling.display.Shape;
+    import starling.display.Sprite;
     
     public class ShortcutBar extends SkinUI {
 		

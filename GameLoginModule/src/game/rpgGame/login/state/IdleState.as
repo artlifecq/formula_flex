@@ -5,6 +5,7 @@ package game.rpgGame.login.state
 	import com.game.engine3D.vo.BaseRole;
 	
 	import game.rpgGame.login.scene.RenderUnitType;
+	import game.rpgGame.login.scene.RoleActionType;
 	
 	/**
 	 *

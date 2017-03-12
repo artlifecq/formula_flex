@@ -60,7 +60,6 @@ package com.rpgGame.app.graphics
 		{
 			bind(_owner.graphicDis, null);
 			
-			updatePosition();
 			updateTranform();
 		}
 		
@@ -103,49 +102,6 @@ package com.rpgGame.app.graphics
 			recycle(this);
 		}
 		
-		public function addWordFrame(renderUnitType : String, renderUnitId : int, message : String, delay : Number = 5000, boneName : String = BoneNameEnum.c_0_name_01, autoRecycle : Boolean = false) : void
-		{
-			if (_owner)
-			{
-				if (_owner is SceneRole)
-				{
-					var camouflage : SceneRole = (_owner as SceneRole).getCamouflageEntity() as SceneRole;
-					if (camouflage)
-					{
-						var camouflageDialogFace : BubbleDialogFace = camouflage.dialogFace as BubbleDialogFace;
-						if (camouflageDialogFace)
-						{
-							camouflageDialogFace.addWordFrame(renderUnitType, renderUnitId, message, delay);
-						}
-						return;
-					}
-				}
-				var ru : RenderUnit3D = null;
-				if (_owner is SceneRole)
-				{
-					ru = (_owner as SceneRole).avatar.getRenderUnitByID(renderUnitType, renderUnitId);
-				}
-				else if (_owner is RenderUnit3D)
-				{
-					ru = _owner as RenderUnit3D;
-				}
-				if (ru)
-				{
-					if (ru.resReady)
-					{
-						setBodyRender(ru, boneName);
-					}
-					else
-					{
-						setTemporary();
-					}
-				}
-				else
-				{
-					setTemporary();
-				}
-			}
-		}
 		
 		public function setBodyRender(ru : RenderUnit3D, boneName : String = BoneNameEnum.c_0_name_01) : void
 		{
@@ -182,22 +138,8 @@ package com.rpgGame.app.graphics
 			
 			bind(nameBindTarget, null);
 			
-			updatePosition();
 			updateTranform();
 		}
 		
-		public function hideWordFrame(recycle : Boolean = false) : void
-		{
-			updatePosition();
-			if (recycle)
-			{
-				recycleSelf();
-			}
-		}
-		
-		private function updatePosition() : void
-		{
-			
-		}
 	}
 }

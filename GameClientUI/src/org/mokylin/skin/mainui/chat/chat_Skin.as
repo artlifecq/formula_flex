@@ -2,11 +2,14 @@ package org.mokylin.skin.mainui.chat
 {
 	import feathers.controls.Button;
 	import feathers.controls.Group;
+	import feathers.controls.ScrollContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.ToggleButton;
 	import feathers.controls.UIAsset;
-	import feathers.controls.ScrollContainer;
+	
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat;
+	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
+	import org.mokylin.skin.mainui.chat.pingdaoItems;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_banghui;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_biaoqiang;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_dangqian;
@@ -23,7 +26,6 @@ package org.mokylin.skin.mainui.chat
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_suo;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_zhankai;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_zonghe;
-	import org.mokylin.skin.mainui.chat.pingdaoItems;
 
 	/**
 	 * @private
@@ -540,7 +542,7 @@ package org.mokylin.skin.mainui.chat
 			vscrollbar = temp;
 			temp.name = "vscrollbar";
 			temp.height = 225;
-			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat;
+			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 			temp.x = 347;
 			temp.y = 27;
 			return temp;
