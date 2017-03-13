@@ -45,6 +45,8 @@ package com.rpgGame.appModule.bag
 			this.addChild(split2);
 			this.addChild(targetIcon);
 			
+			skin.input_txt.restrict="0-9";
+			
 //			split1.touchable=split2.touchable=targetIcon.touchable=false;
 			
 			targetIcon.x=70;
@@ -52,8 +54,26 @@ package com.rpgGame.appModule.bag
 			split2.x=229;
 			targetIcon.y=split1.y=split2.y=52;
 			skin.slider.value=1;
-			skin.slider.addEventListener(Event.CHANGE,onChange);
 			skin.slider.y+=10;
+		}
+		
+		override public function hide():void
+		{
+			super.hide();
+			skin.input_txt.removeEventListener(Event.CHANGE,onChangeNum);
+			skin.slider.removeEventListener(Event.CHANGE,onChange);
+		}
+		
+		private function onChangeNum(e:Event):void
+		{
+			var num:int=int(skin.input_txt.text);
+			num=num<=0?1:num;
+			num=num>=_iteminfo.itemInfo.num?_iteminfo.itemInfo.num:num;
+			
+			skin.slider.value=num;
+			skin.input_txt.text=skin.slider.value.toString();
+			split1.count=allNum-skin.slider.value;
+			split2.count=skin.slider.value;
 		}
 		
 		override protected function onStageResize(sw : int, sh : int) : void
@@ -63,7 +83,7 @@ package com.rpgGame.appModule.bag
 		
 		private function onChange(event:Event):void
 		{
-			skin.lbl_currentNum.text=skin.slider.value.toString();
+			skin.input_txt.text=skin.slider.value.toString();
 			split1.count=allNum-skin.slider.value;
 			split2.count=skin.slider.value;
 		}
@@ -94,10 +114,10 @@ package com.rpgGame.appModule.bag
 			skin.slider.maximum=_iteminfo.itemInfo.num;
 			skin.slider.step=1;
 			
-			skin.slider.value=1;
+			skin.slider.value=Math.floor(allNum/2);//默认对半拆分
 			split1.count=allNum-skin.slider.value;
 			split2.count=skin.slider.value;
-			skin.lbl_currentNum.text=skin.slider.value.toString();
+			skin.input_txt.text=skin.slider.value.toString();
 		}
 
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -113,13 +133,13 @@ package com.rpgGame.appModule.bag
 					break;
 				case skin.btn_min:
 					skin.slider.value=skin.slider.value-1;
-					skin.lbl_currentNum.text=skin.slider.value.toString();
+					skin.input_txt.text=skin.slider.value.toString();
 					split1.count=allNum-skin.slider.value;
 					split2.count=skin.slider.value;
 					break;
 				case skin.btn_max:
 					skin.slider.value=skin.slider.value+1;
-					skin.lbl_currentNum.text=skin.slider.value.toString();
+					skin.input_txt.text=skin.slider.value.toString();
 					split1.count=allNum-skin.slider.value;
 					split2.count=skin.slider.value;
 					break;
@@ -135,6 +155,8 @@ package com.rpgGame.appModule.bag
 		{
 			super.show(data,openTable,parentContiner)
 			iteminfo=data as ClientItemInfo;
+			skin.slider.addEventListener(Event.CHANGE,onChange);
+			skin.input_txt.addEventListener(Event.CHANGE,onChangeNum);
 		}
 	}
 }

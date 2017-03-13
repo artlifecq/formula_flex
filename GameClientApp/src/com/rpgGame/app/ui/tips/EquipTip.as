@@ -127,9 +127,9 @@ package com.rpgGame.app.ui.tips
 				if(_itemInfo.qItem.q_bind==0){
 					_itemTip.isLock.visible=false;
 				}else if(_itemInfo.qItem.q_bind==1){
-					_itemTip.isLock.visible="[获得时绑定]";
+					_itemTip.isLock.text="[获得时绑定]";
 				}else{
-					_itemTip.isLock.visible="[使用后绑定]";
+					_itemTip.isLock.text="[使用后绑定]";
 				}
 			}
 			
@@ -199,7 +199,7 @@ package com.rpgGame.app.ui.tips
 			var id:int;
 			var per:String="";
 			for each(id in ids){
-				var v:int=map1.getValue(id);
+				var v:Number=map1.getValue(id);
 				if(v==0){
 					continue;
 				}
@@ -208,7 +208,8 @@ package com.rpgGame.app.ui.tips
 				num++;
 				name=CharAttributeType.getCNName(id);
 				if(name.indexOf("率")!=-1||name.indexOf("百分比")!=-1){
-					per="%"
+					per="%";
+					v/=100;
 				}else{
 					per="";
 				}
@@ -229,7 +230,7 @@ package com.rpgGame.app.ui.tips
 			createLine(10,curY+25,260);
 			curY+=35;
 			name=HtmlTextUtil.getTextColor(0xCFC6AE,"[装备产出]\n");
-			label=createLabel(name,_itemInfo.qItem.q_describe);
+			label=createLabel(name,_itemInfo.qItem.q_output);
 			label.width=250;
 			label.leading=5;
 			label.wordWrap=true;

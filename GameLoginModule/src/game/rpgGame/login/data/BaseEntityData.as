@@ -1,4 +1,4 @@
-package game.rpgGame.login.scene
+package game.rpgGame.login.data
 {
 	import org.game.netCore.data.long;
 	

@@ -16,7 +16,9 @@ package com.rpgGame.coreData.clientConfig
 		public var q_id:int;
 		 /**  物品名称 */
 		public var q_name:String;
-		 /**  物品类型 */
+		 /**  物品描述信息（本处需要支持html标记）<font color= */
+		public var q_describe:String;
+		 /**  物品类型(根据物品类型说明填) */
 		public var q_type:int;
 		 /**  物品子类型 */
 		public var q_location:int;
@@ -24,20 +26,16 @@ package com.rpgGame.coreData.clientConfig
 		public var q_levelnum:int;
 		 /**  物品品质（0白色，1绿色，2蓝色，3紫色，4金色） */
 		public var q_default:int;
-		 /**  是否显示转框特效（0显示 1不显示） */
-		public var q_isshoweffects:int;
-		 /**  物品描述信息（本处需要支持html标记）<font color= */
-		public var q_describe:String;
+		 /**  佩戴职业需求（0通用 1兵家 2墨家男 3墨家女4 医家） */
+		public var q_job:int;
+		 /**  需要性别(0通用 1男 2女) */
+		public var q_sex:int;
+		 /**  佩戴部位 */
+		public var q_kind:int;
 		 /**  产出途径描述 */
 		public var q_output:String;
 		 /**  物品产出（显示产出文字描述） */
 		public var q_itemsofoutput:int;
-		 /**  需要性别(0通用 1男 2女) */
-		public var q_sex:int;
-		 /**  佩戴职业需求（0通用 1兵家 2墨家 3医家） */
-		public var q_job:int;
-		 /**  佩戴部位 */
-		public var q_kind:int;
 		 /**  最低使用等级需求 */
 		public var q_level:int;
 		 /**  等级上限需求 */
@@ -104,6 +102,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_save_warehouse:int;
 		 /**  拾取优先级(数字越小优先级越高) */
 		public var q_loot_priority:int;
+		 /**  是否允许注册快捷栏(0不允许 1允许) */
+		public var q_isitembar:int;
 		 /**  使用后关联buff的ID,格式 [xxx,xxx,xxx] */
 		public var q_buff:String;
 		 /**  使用后触发技能 */
@@ -116,10 +116,12 @@ package com.rpgGame.coreData.clientConfig
 		public var q_specialUseValue2:int;
 		 /**  特殊使用参数3 */
 		public var q_specialUseValue3:int;
+		 /**  特殊使用参数4 */
+		public var q_specialUseValue4:String;
 		 /**  是否显示获得和销毁时间（0显示 1不显示） */
 		public var q_isdisplaytime:int;
 		 /**  属性ID */
-		public var q_att_type:String;
+		public var q_att_type:int;
 		 /**  使用的场景ID限制 */
 		public var q_sceneid:int;
 		 /**  敏感道具数量异常数值 */
@@ -138,6 +140,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_cansearch:int;
 		 /**  阵营限制(0表示无限制 ) */
 		public var q_grouplimit:int;
+		 /**  是否显示转框特效（0显示 1不显示） */
+		public var q_isshoweffects:int;
 		 /**  使用后触发任务id */
 		public var q_task:int;
 		 /**  使用后触发脚本编号 */

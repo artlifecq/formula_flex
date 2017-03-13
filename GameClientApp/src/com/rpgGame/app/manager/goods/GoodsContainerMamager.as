@@ -40,7 +40,6 @@ package com.rpgGame.app.manager.goods
 	import feathers.data.ListCollection;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.data.long;
 	
 	/**
 	 * 物品容器管理器
@@ -220,6 +219,7 @@ package com.rpgGame.app.manager.goods
 			switch(containerId){
 				case ItemContainerID.BackPack:
 					ItemSender.isReqPack=true;
+					checkBackGrdi();
 					break;
 				case ItemContainerID.Storage:
 					ItemSender.isReqStorage=true;
@@ -228,6 +228,15 @@ package com.rpgGame.app.manager.goods
 					ItemSender.isReqRole=true;
 					break;
 			}
+		}
+		
+		private function checkBackGrdi():void
+		{
+			if(containerId!=ItemContainerID.BackPack){//只检测背包的
+				return;
+			}
+			var leftGrid:int=hasOpenCount-useGridLen();
+			EventManager.dispatchEvent(ItemEvent.LEFT_GRID_CHANG,leftGrid);
 		}
 		
 		/**
@@ -266,6 +275,8 @@ package com.rpgGame.app.manager.goods
 					EventManager.dispatchEvent(ItemEvent.ITEM_CHANG,info);
 					break;
 			}
+			
+			checkBackGrdi();
 		}
 		
 		
@@ -317,6 +328,7 @@ package com.rpgGame.app.manager.goods
 		{
 			_goodsList[info.index] = info;
 			EventManager.dispatchEvent(ItemEvent.ITEM_ADD,info);
+			checkBackGrdi();
 		}
 		
 		/**
@@ -492,6 +504,7 @@ package com.rpgGame.app.manager.goods
 			var info:ClientItemInfo = getItemInfoByIndex(index);
 			_goodsList[index] = null;
 			EventManager.dispatchEvent(ItemEvent.ITEM_REMOVE,info);			
+			checkBackGrdi();
 			return info;
 		}
 		

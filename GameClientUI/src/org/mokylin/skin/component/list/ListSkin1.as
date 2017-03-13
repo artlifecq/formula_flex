@@ -22,8 +22,8 @@ package org.mokylin.skin.component.list
 			super();
 			
 			this.currentState = "normal";
-			this.height = 193;
-			this.width = 20;
+			this.height = 242;
+			this.width = 18;
 			this.elementsContent = [vBar_i()];
 			
 			states = {
@@ -41,7 +41,6 @@ package org.mokylin.skin.component.list
 			temp.right = 0;
 			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 			temp.top = 0;
-			temp.width = 20;
 			return temp;
 		}
 

@@ -5,12 +5,14 @@ package org.mokylin.skin.app.beibao
 	import feathers.controls.Slider;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
+	import feathers.controls.TextInput;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.button.ButtonSkin_jia;
 	import org.mokylin.skin.component.button.ButtonSkin_jian;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.slider.skin_Slider;
+	import org.mokylin.skin.component.text.textInput3_Skin;
 
 	/**
 	 * @private
@@ -36,7 +38,7 @@ package org.mokylin.skin.app.beibao
 
 		public var icon_arrow:feathers.controls.UIAsset;
 
-		public var lbl_currentNum:feathers.controls.Label;
+		public var input_txt:feathers.controls.TextInput;
 
 		public var lbl_title:feathers.controls.Label;
 
@@ -53,7 +55,7 @@ package org.mokylin.skin.app.beibao
 			this.currentState = "normal";
 			this.height = 250;
 			this.width = 337;
-			this.elementsContent = [bg_i(),__wupingchaifen_UIAsset1_i(),lbl_title_i(),btnClose_i(),btn_ok_i(),btn_cancel_i(),icon_arrow_i(),__wupingchaifen_Label1_i(),__wupingchaifen_Label2_i(),slider_i(),btn_min_i(),btn_max_i(),__wupingchaifen_UIAsset2_i(),lbl_currentNum_i()];
+			this.elementsContent = [bg_i(),__wupingchaifen_UIAsset1_i(),lbl_title_i(),btnClose_i(),btn_ok_i(),btn_cancel_i(),icon_arrow_i(),__wupingchaifen_Label1_i(),__wupingchaifen_Label2_i(),slider_i(),btn_min_i(),btn_max_i(),input_txt_i()];
 			
 			states = {
 			};
@@ -96,16 +98,6 @@ package org.mokylin.skin.app.beibao
 			temp.width = 315;
 			temp.x = 11;
 			temp.y = 41;
-			return temp;
-		}
-
-		private function __wupingchaifen_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.width = 66;
-			temp.x = 240;
-			temp.y = 154;
 			return temp;
 		}
 
@@ -194,19 +186,17 @@ package org.mokylin.skin.app.beibao
 			return temp;
 		}
 
-		private function lbl_currentNum_i():feathers.controls.Label
+		private function input_txt_i():feathers.controls.TextInput
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbl_currentNum = temp;
-			temp.name = "lbl_currentNum";
-			temp.fontSize = 14;
-			temp.text = "100";
+			var temp:feathers.controls.TextInput = new feathers.controls.TextInput();
+			input_txt = temp;
+			temp.name = "input_txt";
+			temp.height = 25;
+			temp.styleClass = org.mokylin.skin.component.text.textInput3_Skin;
 			temp.textAlign = "center";
-			temp.color = 0xF1EFC7;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 62;
-			temp.x = 242;
-			temp.y = 158;
+			temp.width = 78;
+			temp.x = 240;
+			temp.y = 154;
 			return temp;
 		}
 
