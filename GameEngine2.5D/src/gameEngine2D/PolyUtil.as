@@ -99,7 +99,7 @@ package gameEngine2D {
 			}
 			var p3p4p1Area : Number = cross(district, new Vector3D(p3.x - p1.x, Math.abs(p3.y) - Math.abs(p1.y), p3.z - p1.z), new Vector3D(p4.x - p1.x, Math.abs(p4.y) - Math.abs(p1.y), p4.z - p1.z));
 			var p3p4p2Area : Number = p3p4p1Area + p1p2p3Area - p1p2p4Area;
-			if ((p3p4p1Area <= 0 && p3p4p2Area <= 0) || (p3p4p1Area > 0 && p3p4p1Area > 0)) {
+			if ((p3p4p1Area <= 0 && p3p4p2Area <= 0) || (p3p4p1Area > 0 && p3p4p2Area > 0)) {
 				return null;
 			}
 			var t : Number = p3p4p1Area / (p1p2p4Area - p1p2p3Area);

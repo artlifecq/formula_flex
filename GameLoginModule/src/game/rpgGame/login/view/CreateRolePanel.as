@@ -15,16 +15,15 @@ package game.rpgGame.login.view
 	import feathers.controls.TextInput;
 	import feathers.core.ToggleGroup;
 	
+	import game.rpgGame.login.data.AvatarInfo;
 	import game.rpgGame.login.data.CreateRoleData;
 	import game.rpgGame.login.data.JobType;
+	import game.rpgGame.login.data.RoleData;
 	import game.rpgGame.login.display3D.InterAvatar3D;
-	import game.rpgGame.login.scene.AvatarInfo;
-	import game.rpgGame.login.scene.RoleData;
 	import game.rpgGame.login.util.RandomNick;
 	
 	import gs.TweenLite;
 	import gs.easing.Bounce;
-	import gs.easing.Linear;
 	
 	import org.mokylin.skin.loginui.create_input_Skin;
 	import org.mokylin.skin.loginui.create_role_Skin;
@@ -72,6 +71,7 @@ package game.rpgGame.login.view
 		private var testJob:feathers.controls.TextInput;
 
 		private var testBtn:Button;
+		private var randomTween:TweenLite;
 		
 		public function CreateRolePanel(parent:DisplayObjectContainer,onCreateCharFunc:Function)
 		{
@@ -194,16 +194,37 @@ package game.rpgGame.login.view
 			var t : Touch = e.getTouch(this, TouchPhase.ENDED);
 			if (t != null && t.target != null)
 			{
-				if (t.target ==_skin.btn_random){
-					onRandomName();
+				if (t.target ==_skin.num_saizi){
+					if(randomTween){
+						return;
+					}
+					_skin.num_saizi.gotoAndPlay(2);
+					randomTween=TweenLite.delayedCall(1+Math.random()*0.5,toRandom);
 				}else if(t.target==_skin.btn_create){
 					_createRoleData=new CreateRoleData();
+					var sexIndex:int;
+					if(jobGroup.selectedIndex==0){
+						sexIndex=0;
+					}else if(jobGroup.selectedIndex==1){
+						sexIndex=1;
+					}else{
+						sexIndex=sexGroup.selectedIndex;
+					}
+					
 					_createRoleData.nickName=_skin.text_input.text ;
-					_createRoleData.sex=sexGroup.selectedIndex+1;
-					_createRoleData.job=jobTyps[jobGroup.selectedIndex][sexGroup.selectedIndex];
+					_createRoleData.sex=sexIndex+1;
+					_createRoleData.job=jobTyps[jobGroup.selectedIndex][sexIndex];
 					toCreate(_createRoleData);
 				}
 			}
+		}
+		
+		private function toRandom():void
+		{
+			randomTween.kill();
+			randomTween=null;
+			_skin.num_saizi.stop();
+			onRandomName();			
 		}
 		
 		private function onRandomName():void
@@ -215,13 +236,12 @@ package game.rpgGame.login.view
 		{
 			if(jobGroup.selectedIndex==0){
 				_skin.btn_woman.touchable=false;
-				sexGroup.selectedIndex=0;
 			}else if(jobGroup.selectedIndex==1){
 				_skin.btn_man.touchable=false;
-				sexGroup.selectedIndex=1;
 			}else{
 				_skin.btn_man.touchable=true;
 				_skin.btn_woman.touchable=true;
+				sexGroup.selectedIndex=0;
 			}
 			
 			updateJobDes();
@@ -317,14 +337,22 @@ package game.rpgGame.login.view
 		{
 			this._avatarData.avatarInfo.clear();
 			this._avatar.setRoleData(this._avatarData);
-			
-			this._avatarData.avatarInfo.setBodyResID(avatarInfos[jobGroup.selectedIndex][sexGroup.selectedIndex].bodyResID, avatarInfos[jobGroup.selectedIndex][sexGroup.selectedIndex].bodyAnimatResID);
-			this._avatarData.avatarInfo.hairResID = avatarInfos[jobGroup.selectedIndex][sexGroup.selectedIndex].hairResID;
-			this._avatarData.avatarInfo.weaponResID = avatarInfos[jobGroup.selectedIndex][sexGroup.selectedIndex].weaponResID;
-			this._avatarData.avatarInfo.weaponEffectID = avatarInfos[jobGroup.selectedIndex][sexGroup.selectedIndex].weaponEffectID;
-			this._avatarData.avatarInfo.weaponEffectScale = avatarInfos[jobGroup.selectedIndex][sexGroup.selectedIndex].weaponEffectScale;
-			this._avatarData.avatarInfo.deputyWeaponResID = avatarInfos[jobGroup.selectedIndex][sexGroup.selectedIndex].deputyWeaponResID;
-			this._avatarData.avatarInfo.deputyWeaponEffectID = avatarInfos[jobGroup.selectedIndex][sexGroup.selectedIndex].deputyWeaponEffectID;
+			var sexIndex:int;
+			if(jobGroup.selectedIndex==0){
+				sexIndex=0;
+			}else if(jobGroup.selectedIndex==1){
+				sexIndex=1;
+			}else{
+				sexIndex=sexGroup.selectedIndex;
+			}
+			this._avatarData.avatarInfo.setBodyResID(avatarInfos[jobGroup.selectedIndex][sexIndex].bodyResID, avatarInfos[jobGroup.selectedIndex][sexIndex].bodyAnimatResID);
+			this._avatarData.avatarInfo.hairResID = avatarInfos[jobGroup.selectedIndex][sexIndex].hairResID;
+			this._avatarData.avatarInfo.weaponResID = avatarInfos[jobGroup.selectedIndex][sexIndex].weaponResID;
+			this._avatarData.avatarInfo.weaponEffectID = avatarInfos[jobGroup.selectedIndex][sexIndex].weaponEffectID;
+			this._avatarData.avatarInfo.weaponEffectScale = avatarInfos[jobGroup.selectedIndex][sexIndex].weaponEffectScale;
+			this._avatarData.avatarInfo.deputyWeaponResID = avatarInfos[jobGroup.selectedIndex][sexIndex].deputyWeaponResID;
+			this._avatarData.avatarInfo.deputyWeaponEffectID = avatarInfos[jobGroup.selectedIndex][sexIndex].deputyWeaponEffectID;
+		
 			
 			this._avatar.setRoleData(this._avatarData);
 			this._avatar.role.setScale(3);

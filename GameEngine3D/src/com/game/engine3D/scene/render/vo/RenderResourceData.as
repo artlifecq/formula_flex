@@ -30,6 +30,7 @@ package com.game.engine3D.scene.render.vo
 	{
 		private var _meshElements : Vector.<ObjectContainer3D>;
 		private var _animatorElements : Vector.<CompositeMesh>;
+		private var _baseVirtualElements : Vector.<ObjectContainer3D>;
 		
 		private var _soundBox : SoundBox;
 		private var _camera : Camera3D;
@@ -168,13 +169,17 @@ package com.game.engine3D.scene.render.vo
 			if (elements)
 			{
 				_animatorElements = new Vector.<CompositeMesh>();
+				_baseVirtualElements = new Vector.<ObjectContainer3D>();
 				for each (var element : ObjectContainer3D in elements)
 				{
 					if (element is CompositeMesh)
 					{
 						_animatorElements.push(CompositeMesh(element));
+					} else if (element is ObjectContainer3D) {
+						_baseVirtualElements.push(ObjectContainer3D(element));
 					}
 				}
+				
 			}
 			
 			tryResourceComplete();
@@ -349,6 +354,20 @@ package com.game.engine3D.scene.render.vo
 			}
 			return elements;
 		}
+		
+		public function cloneBaseVirtualElements() : Vector.<ObjectContainer3D> {
+			if (!_baseVirtualElements) {
+				return null;
+			}
+			if (_isOnlyInstance) {
+				return _baseVirtualElements;
+			}
+			var elements : Vector.<ObjectContainer3D> = new Vector.<ObjectContainer3D>();
+			for each(var element : ObjectContainer3D in _baseVirtualElements) {
+				elements.push(ObjectContainer3D(element.clone()));
+			}
+			return elements;
+		}
 
 		public function get materialMap() : Dictionary
 		{
@@ -433,6 +452,7 @@ package com.game.engine3D.scene.render.vo
 			_renderAnimatorLoader = null;
 			_meshElements = null;
 			_animatorElements = null;
+			_baseVirtualElements = null;
 			
 			_lightPickerMap = null;
 			_lights = null;

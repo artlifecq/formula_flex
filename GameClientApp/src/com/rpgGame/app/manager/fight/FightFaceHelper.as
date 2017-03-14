@@ -179,7 +179,7 @@ package com.rpgGame.app.manager.fight
 					typeRes = ROOT+USESFUL_EFFECT+"weimingzhong.png";
 					scaleAgo = 2;
 					scaleLater = 1;
-					tweenFun=tweenTypeRoleMiss;
+					tweenFun=tweenUp;
 					break;
 				case EnumHurtType.SPELL_HURT_TYPE_CRIT: //暴击
 //					isUsefulBmp = hurter.isMainChar;
@@ -730,7 +730,7 @@ package com.rpgGame.app.manager.fight
 			
 			var timeLine : TimelineLite = new TimelineLite();
 			//onUpdate:updateXY,onUpdateParams:[attackFace,$displayObjectContainer]}));//缩放
-			timeLine.insert(TweenMax.to(attackFace, 0.5, {alpha:1,scaleX:$scaleLater, scaleY:$scaleLater,ease:Elastic.easeInOut,onUpdate:updateCenter,onUpdateParams:[attackFace]}));//大到小
+			timeLine.insert(TweenMax.to(attackFace, 0.2, {alpha:1,scaleX:$scaleLater, scaleY:$scaleLater,ease:Elastic.easeInOut,onUpdate:updateCenter,onUpdateParams:[attackFace]}));//大到小
 			timeLine.append(TweenLite.to(attackFace,0.5,{}));
 			timeLine.append(TweenLite.to(attackFace, 1.2, {x:$end.x,y:$end.y,alpha: 0,onComplete: onComplete, onCompleteParams: [attackFace],ease:Back.easeOut}));//消失
 		}

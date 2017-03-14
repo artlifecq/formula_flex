@@ -40,6 +40,11 @@ package com.game.engine3D.scene.render.vo
 		{
 			return _boneName;
 		}
+		
+		public function set boneName(value : String) : void
+		{
+			this._boneName = value;
+		}
 
 		public function get compositeIndex() : int
 		{

@@ -50,6 +50,7 @@ package com.game.engine3D.vo
 		 */
 		private var _uniqueID : Number = 0;
 		protected var _graphicDis : ObjectContainer3D;
+		protected var _staticGraphicDis : ObjectContainer3D;
 		protected var _parent : ObjectContainer3D;
 		protected var _visible : Boolean;
 		protected var _disposing : Boolean;
@@ -251,6 +252,10 @@ package com.game.engine3D.vo
 					_showPosition.y = _position.y + _offset.y;
 					_graphicDis.x = _showPosition.x;
 					_graphicDis.y = _showPosition.y;
+					if (_staticGraphicDis) {
+						_staticGraphicDis.x = _showPosition.x;
+						_staticGraphicDis.y = _showPosition.y;
+					}
 					calculateVolumeBounds();
 					syncInfo(initiator);
 				}
@@ -288,6 +293,9 @@ package com.game.engine3D.vo
 						_position.y = value;
 						_showPosition.y = _position.y + _offset.y;
 						_graphicDis.y = _showPosition.y;
+						if (_staticGraphicDis) {
+							_staticGraphicDis.y = _showPosition.y;
+						}
 						syncInfo(initiator);
 					}
 				}
@@ -325,6 +333,10 @@ package com.game.engine3D.vo
 					_showPosition.z = _position.z + _offset.z;
 					_graphicDis.y = _showPosition.y;
 					_graphicDis.z = _showPosition.z;
+					if (_staticGraphicDis) {
+						_staticGraphicDis.y = _showPosition.y;
+						_staticGraphicDis.z = _showPosition.z;
+					}
 					calculateVolumeBounds();
 					syncInfo(initiator);
 				}
@@ -375,6 +387,9 @@ package com.game.engine3D.vo
 				{
 					_scale.x = value;
 					_graphicDis.scaleX = _scale.x;
+					if (_staticGraphicDis) {
+						_staticGraphicDis.scaleX = _scale.x;
+					}
 				}
 			}
 		}
@@ -392,6 +407,9 @@ package com.game.engine3D.vo
 				{
 					_scale.y = value;
 					_graphicDis.scaleY = _scale.y;
+					if (_staticGraphicDis) {
+						_staticGraphicDis.scaleY = _scale.y;
+					}
 				}
 			}
 		}
@@ -409,6 +427,9 @@ package com.game.engine3D.vo
 				{
 					_scale.z = value;
 					_graphicDis.scaleZ = _scale.z;
+					if (_staticGraphicDis) {
+						_staticGraphicDis.scaleZ = _scale.z;
+					}
 				}
 			}
 		}
@@ -547,6 +568,9 @@ package com.game.engine3D.vo
 					_offset.x = value;
 					_showPosition.x = _position.x + _offset.x;
 					_graphicDis.x = _showPosition.x;
+					if (_staticGraphicDis) {
+						_staticGraphicDis.x = _showPosition.x;
+					}
 					syncInfo(this);
 				}
 			}
@@ -567,6 +591,9 @@ package com.game.engine3D.vo
 					_offset.y = value;
 					_showPosition.y = _position.y + _offset.y;
 					_graphicDis.y = _showPosition.y;
+					if (_staticGraphicDis) {
+						_staticGraphicDis.y = _showPosition.y;
+					}
 					syncInfo(this);
 				}
 			}
@@ -587,6 +614,9 @@ package com.game.engine3D.vo
 					_offset.z = value;
 					_showPosition.z = _position.z + _offset.z;
 					_graphicDis.z = _showPosition.z;
+					if (_staticGraphicDis) {
+						_staticGraphicDis.z = _showPosition.z;
+					}
 					syncInfo(this);
 				}
 			}
@@ -903,7 +933,7 @@ package com.game.engine3D.vo
 			}
 		}
 
-		private function onUpdateGraphicRotation() : void
+		protected function onUpdateGraphicRotation() : void
 		{
 			if (_graphicDis)
 			{
@@ -980,7 +1010,7 @@ package com.game.engine3D.vo
 		 * @param initiator 发起对象
 		 *
 		 */
-		private function syncInfo(initiator : BaseObj3D) : void
+		protected function syncInfo(initiator : BaseObj3D) : void
 		{
 			if (!_syncInfos)
 			{
@@ -1173,6 +1203,9 @@ package com.game.engine3D.vo
 				}
 				_showPosition.y = _position.y + _offset.y;
 				_graphicDis.y = _showPosition.y;
+				if (_staticGraphicDis) {
+					//_staticGraphicDis.y = _showPosition.y;
+				}
 
 				if (_clingGroundCalculate != null && _volumeBounds)
 				{
@@ -1230,6 +1263,17 @@ package com.game.engine3D.vo
 					PoolEntityContainer3D.recycle(_graphicDis as PoolEntityContainer3D);
 				_graphicDis = null;
 			}
+			//if (_staticGraphicDis) {
+			//	if (_staticGraphicDis.parent) {
+			//		_staticGraphicDis.parent.removeChild(_staticGraphicDis);
+			//	}
+			//	if (_staticGraphicDis is PoolContainer3D) {
+			//		PoolContainer3D.recycle(_staticGraphicDis as PoolContainer3D);
+			//	} else if (_staticGraphicDis is PoolEntityContainer3D) {
+			//		PoolEntityContainer3D.recycle(_staticGraphicDis as PoolEntityContainer3D);
+			//	}
+			//}
+			_staticGraphicDis = null;
 			_data = null;
 			_sceneName = null;
 			_visible = false;
@@ -1601,6 +1645,10 @@ package com.game.engine3D.vo
 		public function set depth(value : int) : void
 		{
 			_depth = value;
+		}
+		
+		public function set staticGraphicDis(value : ObjectContainer3D) : void {
+			this._staticGraphicDis = value;
 		}
 	}
 }

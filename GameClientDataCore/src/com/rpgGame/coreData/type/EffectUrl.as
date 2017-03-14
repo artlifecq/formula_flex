@@ -150,6 +150,11 @@ package com.rpgGame.coreData.type
 		public static const HU_GUO_SI_EMPTY_EFFECT : String = "tx_npc_huguosi_001_baics";
 		/**护国寺--真谛**/
 		public static const HU_GUO_SI_PARAMARTHA_EFFECT : String = "tx_npc_huguosi_001_baics";
+		
+		/**
+		 *战斗力特效 
+		 */
+		public static const UI_JIEMIAN_ZHANDOULI:String="ui_jiemian_zhandouli";
 
 		public function EffectUrl()
 		{

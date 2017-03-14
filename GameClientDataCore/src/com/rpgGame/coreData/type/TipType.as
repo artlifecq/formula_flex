@@ -29,6 +29,10 @@ package com.rpgGame.coreData.type
 		public static const MAP_AREA_TIP : int = rEnum.next;
 		
 		/**
+		 *普通
+		 */
+		public static const NORMAL_TIP : int = rEnum.next;
+		/**
 		 *装备 
 		 */
 		public static const EQUIP_TIP : int = rEnum.next;

@@ -35,6 +35,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.StallCfgData;
 	import com.rpgGame.coreData.cfg.StatNameCfgData;
 	import com.rpgGame.coreData.cfg.TaxCfgData;
+	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
@@ -153,6 +154,7 @@ package com.rpgGame.app.data
 //			CrownPanelPagesCfgData.setup(dic[ConfigClassRegister.CrownPageInfo]);
 			ClientBuffCfgData.setUpHintTypeSet(dic[ConfigClassRegister.ClientBuff]);
 			ItemConfig.setup(dic[ConfigClassRegister.Q_item]);
+			TipsCfgData.setup(dic[ConfigClassRegister.Q_tipsinfo]);
 			AttValueConfig.setup(dic[ConfigClassRegister.Q_att_values]);
 			AttFormulaConfig.setup(dic[ConfigClassRegister.Q_att_transfer]);
 //			CountryUnionStatCfgData.setup(null); //待解决

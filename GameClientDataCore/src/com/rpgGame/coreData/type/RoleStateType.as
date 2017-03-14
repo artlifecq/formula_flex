@@ -13,6 +13,7 @@ package com.rpgGame.coreData.type
 	{
 		public static const NONE : int = 0;
 		public static const ACTION_IDLE : int = rEnum.ENUM_START(1);//待机状态
+		public static const ACTION_SHOW : int = rEnum.next;//展示状态
 		public static const ACTION_WALK : int = rEnum.next; //走路状态
 		public static const ACTION_RUN : int = rEnum.next;//跑步状态
 		public static const ACTION_JUMP : int = rEnum.next;//跳跃状态

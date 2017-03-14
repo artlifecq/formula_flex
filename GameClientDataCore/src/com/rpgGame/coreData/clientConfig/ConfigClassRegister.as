@@ -88,7 +88,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_att_values:String = "data.Q_att_values";
 		/**  物品基本信息数据库																																																																																		 */
 		public static const Q_item:String = "data.Q_item";
-		/**  tipsid	标题	描述 */
+
+		/**  Tips信息数据库		 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
 		/**  职业对应的名字		 */
 		public static const RaceNameInfo:String = "data.RaceNameInfo";
