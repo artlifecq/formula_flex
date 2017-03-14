@@ -240,8 +240,9 @@ package com.rpgGame.app.manager.shell
             }
         }
 		
-		private function addBuff() : void {
-			SpellAnimationHelper.addBuffEffect(MainRoleManager.actor, 0, "buff1003", "tx_role_budongrushan_01", "c_test_01", 0);
+		private function addBuff(bone : String) : void {
+			bone = bone || "c_test_01";
+			SpellAnimationHelper.addBuffEffect(MainRoleManager.actor, 0, "buff1003", "tx_role_budongrushan_01", bone, 0);
 		}
       
         private function handler(command : String, ...params) : Boolean {
