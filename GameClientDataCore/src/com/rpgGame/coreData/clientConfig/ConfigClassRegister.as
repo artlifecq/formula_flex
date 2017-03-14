@@ -74,7 +74,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const HeroModel:String = "data.model.HeroModel";
 		/**  坐骑模型表	功能名称	动画资源名称 */
 		public static const MountModel:String = "data.model.MountModel";
-		/**  怪物列表																																																									 */
+		/**  怪物列表																																																										 */
 		public static const Q_monster:String = "data.monster.Q_monster";
 		/**  NPC配置数据库																																																 */
 		public static const Q_npc:String = "data.monster.Q_npc";
@@ -86,8 +86,10 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_att_transfer:String = "data.Q_att_transfer";
 		/**  所有属性相关的数据																														 */
 		public static const Q_att_values:String = "data.Q_att_values";
-		/**  物品基本信息数据库																																																																																 */
+		/**  物品基本信息数据库																																																																																		 */
 		public static const Q_item:String = "data.Q_item";
+		/**  tipsid	标题	描述 */
+		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
 		/**  职业对应的名字		 */
 		public static const RaceNameInfo:String = "data.RaceNameInfo";
 		/**  赛马模型等配置信息								 */
@@ -108,7 +110,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_buff:String = "data.spell.Q_buff";
 		/**  公共CD表	 */
 		public static const Q_GCD:String = "data.spell.Q_GCD";
-		/**  技能基本信息配置数据表																																																																																																														 */
+		/**  技能基本信息配置数据表																																																																																																															 */
 		public static const Q_skill_model:String = "data.spell.Q_skill_model";
 		/**  技能效果配置表																			 */
 		public static const Q_SpellAnimation:String = "data.spell.Q_SpellAnimation";
@@ -158,6 +160,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_att_transfer", com.rpgGame.coreData.clientConfig.Q_att_transfer);
 			regClass("data.Q_att_values", com.rpgGame.coreData.clientConfig.Q_att_values);
 			regClass("data.Q_item", com.rpgGame.coreData.clientConfig.Q_item);
+			regClass("data.Q_tipsinfo", com.rpgGame.coreData.clientConfig.Q_tipsinfo);
 			regClass("data.RaceNameInfo", com.rpgGame.coreData.clientConfig.RaceNameInfo);
 			regClass("data.RacingInfo", com.rpgGame.coreData.clientConfig.RacingInfo);
 			regClass("data.RacingQuestion", com.rpgGame.coreData.clientConfig.RacingQuestion);

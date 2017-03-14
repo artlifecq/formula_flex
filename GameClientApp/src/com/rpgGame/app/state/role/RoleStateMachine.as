@@ -12,6 +12,9 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.action.DeadLaunchState;
 	import com.rpgGame.app.state.role.action.DeathState;
 	import com.rpgGame.app.state.role.action.FallState;
+	import com.rpgGame.app.state.role.action.FlyFallState;
+	import com.rpgGame.app.state.role.action.FlyHitState;
+	import com.rpgGame.app.state.role.action.FlyUpState;
 	import com.rpgGame.app.state.role.action.GetupState;
 	import com.rpgGame.app.state.role.action.HitState;
 	import com.rpgGame.app.state.role.action.IdleState;
@@ -30,6 +33,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.CastSpellLockState;
 	import com.rpgGame.app.state.role.control.DeadLaunchMoveState;
 	import com.rpgGame.app.state.role.control.FastingState;
+	import com.rpgGame.app.state.role.control.HiddingState;
 	import com.rpgGame.app.state.role.control.HunLuanState;
 	import com.rpgGame.app.state.role.control.HurtState;
 	import com.rpgGame.app.state.role.control.HushState;
@@ -127,6 +131,16 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.CONTROL_TRAIL_MOVE] = TrailMoveState;
 		stateMapping[RoleStateType.CONTROL_SCARED_MOVE] = ScaredMoveState;
 		stateMapping[RoleStateType.CONTROL_MOUNT_RIDE] = MountRideState;
+		
+		stateMapping[RoleStateType.CONTROL_HIDDING] = HiddingState;
+		
+		stateMapping[RoleStateType.CONTROL_FLY_UP] = com.rpgGame.app.state.role.control.FlyUpState;
+		stateMapping[RoleStateType.CONTROL_FLY_HIT] = com.rpgGame.app.state.role.control.FlyHitState;
+		stateMapping[RoleStateType.CONTROL_FLY_FALL] = com.rpgGame.app.state.role.control.FlyFallState;
+		
+		stateMapping[RoleStateType.ACTION_FLY_UP] = com.rpgGame.app.state.role.action.FlyUpState;
+		stateMapping[RoleStateType.ACTION_FLY_HIT] = com.rpgGame.app.state.role.action.FlyHitState;
+		stateMapping[RoleStateType.ACTION_FLY_FALL] = com.rpgGame.app.state.role.action.FlyFallState;
 		
 		private var _role : SceneRole;
 		private var _lastCanShowRiding : Boolean;

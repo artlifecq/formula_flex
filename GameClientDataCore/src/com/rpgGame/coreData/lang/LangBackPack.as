@@ -298,8 +298,6 @@ package com.rpgGame.coreData.lang
 		public static const ITEM_dropItemToScene_1:String = "ITEM_dropItemToScene_1";
 		 /**  此物品已经绑定不可以丢弃！ */
 		public static const ITEM_dropItemToScene_2:String = "ITEM_dropItemToScene_2";
-		 /**  这件物品看起来还不错哦！你确定要丢弃吗？ */
-		public static const ITEM_dropItemToScene_3:String = "ITEM_dropItemToScene_3";
 		 /**  交易中不能进行整理 */
 		public static const ITEM_Not_ClearItem:String = "ITEM_Not_ClearItem";
 		 /**  点击背包中物品可出售，双击退出 */

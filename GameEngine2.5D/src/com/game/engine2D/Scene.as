@@ -430,14 +430,14 @@ package com.game.engine2D
 					_direction.castsPlanarShadows = true;
 			}
 			
-			if (_direction)
-			{
-				_direction.planarShadowAlpha = _planarShadowAlpha;
-			}
+//			if (_direction)
+//			{
+//				_direction.planarShadowAlpha = _planarShadowAlpha;
+//			}
 			if (_directionModel == null)
 			{
 				_directionModel = _direction;
-				_directionModel.planarShadowAlpha = _planarShadowAlpha;
+//				_directionModel.planarShadowAlpha = _planarShadowAlpha;
 			}
 			
 			GlobalConfig.use2DMap = _viewAsset.cameraMode2D;

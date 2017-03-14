@@ -563,10 +563,10 @@ package com.rpgGame.app.fight.spell
                     var dy : Number = Math.sin(radian);
                     
                     if (0 == spellData.q_blink_type) {
-                        var mousePos : Point = new Point(releasePos.x, releasePos.y);
-                        angle = MathUtil.getAngle(selfPos.x, selfPos.y, mousePos.x, mousePos.y);
+                        var mousePos1 : Point = new Point(releasePos.x, releasePos.y);
+                        angle = MathUtil.getAngle(selfPos.x, selfPos.y, mousePos1.x, mousePos1.y);
                         radian = angle * Math.PI / 180;
-                        dist = Point.distance(selfPos, mousePos);
+                        dist = Point.distance(selfPos, mousePos1);
                         releaseTargetPos = new Point(selfPos.x, selfPos.y);
                         if (dist > releaseRange) {
                             // 距离大于最大释放距离
@@ -576,11 +576,11 @@ package com.rpgGame.app.fight.spell
                             releaseTargetPos.y = selfPos.y + dist * Math.sin(radian);
                             //releaseTargetPos.x = selfPos.x;
                             //releaseTargetPos.y = selfPos.y;
-                            mousePos.x = selfPos.x + releaseRange * Math.cos(radian);
-                            mousePos.y = selfPos.y + releaseRange * Math.sin(radian);
+                            mousePos1.x = selfPos.x + releaseRange * Math.cos(radian);
+                            mousePos1.y = selfPos.y + releaseRange * Math.sin(radian);
                         }
                         targetPos = new Point(releaseTargetPos.x, releaseTargetPos.y);
-                        releasePos = mousePos;
+                        releasePos = mousePos1;
                     } else {
                         angle = 270 - MainRoleManager.actor.rotationY;
                         radian = angle * Math.PI / 180;

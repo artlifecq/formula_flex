@@ -29,6 +29,8 @@ package com.game.engine3D.config
 		private static var _map2dScaleZDir:Number = 1;
 		
 		private static var _transformPlanared : Boolean = true;
+		
+		private static var _kernelVersion : String = "";
 
 		public function GlobalConfig()
 		{
@@ -96,6 +98,31 @@ package com.game.engine3D.config
 		public static function get map2dScaleZDir():Number
 		{
 			return _map2dScaleZDir;
+		}
+		
+		public static function set kernelVersion(value : String) : void
+		{
+			_kernelVersion = value;
+		}
+		
+		public static function get kernelVersion() : String
+		{
+			return _kernelVersion;
+		}
+		
+		public static function get kernelIsIE() : Boolean
+		{
+			return Boolean(_kernelVersion == "IE");
+		}
+		
+		public static function get kernelIsChrome() : Boolean
+		{
+			return Boolean(_kernelVersion == "Chrome");
+		}
+		
+		public static function get kernelIsFireFox() : Boolean
+		{
+			return Boolean(_kernelVersion == "Firefox");
 		}
 	}
 }

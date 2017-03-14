@@ -16,7 +16,9 @@ package com.rpgGame.coreData.clientConfig
 		public var q_id:int;
 		 /**  物品名称 */
 		public var q_name:String;
-		 /**  物品类型 */
+		 /**  物品描述信息（本处需要支持html标记）<font color= */
+		public var q_describe:String;
+		 /**  物品类型(根据物品类型说明填) */
 		public var q_type:int;
 		 /**  物品子类型 */
 		public var q_location:int;
@@ -24,20 +26,16 @@ package com.rpgGame.coreData.clientConfig
 		public var q_levelnum:int;
 		 /**  物品品质（0白色，1绿色，2蓝色，3紫色，4金色） */
 		public var q_default:int;
-		 /**  是否显示转框特效（0显示 1不显示） */
-		public var q_isshoweffects:int;
-		 /**  物品描述信息（本处需要支持html标记）<font color= */
-		public var q_describe:String;
+		 /**  佩戴职业需求（0通用 1兵家 2墨家男 3墨家女4 医家） */
+		public var q_job:int;
+		 /**  需要性别(0通用 1男 2女) */
+		public var q_sex:int;
+		 /**  佩戴部位 */
+		public var q_kind:int;
 		 /**  产出途径描述 */
 		public var q_output:String;
 		 /**  物品产出（显示产出文字描述） */
 		public var q_itemsofoutput:int;
-		 /**  需要性别(0通用 1男 2女) */
-		public var q_sex:int;
-		 /**  佩戴职业需求（0通用 1兵家 2墨家 3医家） */
-		public var q_job:int;
-		 /**  佩戴部位 */
-		public var q_kind:int;
 		 /**  最低使用等级需求 */
 		public var q_level:int;
 		 /**  等级上限需求 */
@@ -48,7 +46,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_max:int;
 		 /**  最大拥有数（0表示无限制） */
 		public var q_maxownnum:int;
-		 /**  该道具最大的使用次数(个数|时间类型|参数，如10|1|1，即为1天可以使用10个，如21|2|2，则代表每2周可以用21个，如30|3|1则代表每月能用30个，时间类型1为自然天，2为自然周，3为自然月，4为自然年；参数为具体单位；本项支持多重限制，当出现多重限制时，时间类型大的优先生效，小的后生效；本项不填则代表没有限制) */
+		 /**  该道具最大的使用次数(个数|时间类型|参数(当前只能为1)，如10|1|1，即为1天可以使用10个，如21|2|1，则代表每1周可以用21个，如30|3|1则代表每月能用30个，时间类型1为自然天，2为自然周，3为自然月，4为自然年；参数为具体单位 */
 		public var q_item_limit:String;
 		 /**  怪物爆出后是同步类型（0全部同步，1如果是小怪爆出的，则只同步给有拾取权的人（JY BOSS无视此规则）） */
 		public var q_issyn:int;
@@ -104,6 +102,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_save_warehouse:int;
 		 /**  拾取优先级(数字越小优先级越高) */
 		public var q_loot_priority:int;
+		 /**  是否允许注册快捷栏(0不允许 1允许) */
+		public var q_isitembar:int;
 		 /**  使用后关联buff的ID,格式 [xxx,xxx,xxx] */
 		public var q_buff:String;
 		 /**  使用后触发技能 */
@@ -116,10 +116,12 @@ package com.rpgGame.coreData.clientConfig
 		public var q_specialUseValue2:int;
 		 /**  特殊使用参数3 */
 		public var q_specialUseValue3:int;
+		 /**  特殊使用参数4 */
+		public var q_specialUseValue4:String;
 		 /**  是否显示获得和销毁时间（0显示 1不显示） */
 		public var q_isdisplaytime:int;
 		 /**  属性ID */
-		public var q_att_type:String;
+		public var q_att_type:int;
 		 /**  使用的场景ID限制 */
 		public var q_sceneid:int;
 		 /**  敏感道具数量异常数值 */
@@ -138,6 +140,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_cansearch:int;
 		 /**  阵营限制(0表示无限制 ) */
 		public var q_grouplimit:int;
+		 /**  是否显示转框特效（0显示 1不显示） */
+		public var q_isshoweffects:int;
 		 /**  使用后触发任务id */
 		public var q_task:int;
 		 /**  使用后触发脚本编号 */

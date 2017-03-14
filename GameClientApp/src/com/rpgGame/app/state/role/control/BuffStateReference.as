@@ -1,6 +1,7 @@
 package com.rpgGame.app.state.role.control
 {
 	import com.game.engine3D.state.role.RoleStateReference;
+	import com.rpgGame.coreData.info.buff.BuffData;
 
 	/**
 	 *
@@ -11,26 +12,30 @@ package com.rpgGame.app.state.role.control
 	 */
 	public class BuffStateReference extends RoleStateReference
 	{
-		private var _disappearTime : Number;
+		private var _buffData:BuffData;
+//		private var _disappearTime : Number;
 
 		public function BuffStateReference()
 		{
 			super();
 		}
 
-		public function setParams(disappearTime : Number) : void
+		public function setParams(buffData : BuffData) : void
 		{
-			_disappearTime = disappearTime;
+			_buffData = buffData;
+//			_disappearTime = disappearTime;
 		}
 
-		public function get disappearTime() : Number
+		public function get buffData() : BuffData
 		{
-			return _disappearTime;
+//			return _disappearTime;
+			return _buffData;
 		}
 
 		override public function dispose() : void
 		{
-			_disappearTime = 0;
+			_buffData = null;
+//			_disappearTime = 0;
 			super.dispose();
 		}
 	}

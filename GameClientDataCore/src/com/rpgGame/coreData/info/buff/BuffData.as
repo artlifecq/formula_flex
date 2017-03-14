@@ -9,12 +9,11 @@ package com.rpgGame.coreData.info.buff
 	import com.rpgGame.netData.buff.bean.BuffInfo;
 	
 	/**
-	 *
-	 * Buff数据
-	 * @author L.L.M.Sunny
-	 * 创建时间：2016-05-06 下午2:53:32
-	 *
-	 */
+	 * buff数据--部分数据是客户端从服务器读过来，另外部分数据是读buff表的 
+	 * buff相关的都是围绕这个数据来表现的
+	 * @author NEIL
+	 * 
+	 */	
 	public class BuffData extends BaseFaceInfo
 	{
 		private var _buffId:Number = 0;//服务器生成id
@@ -24,11 +23,6 @@ package com.rpgGame.coreData.info.buff
 		private var _specialData : Object = null;
 		private var _description : String = "";
 		
-		private var _dizziness:Boolean;
-		private var _freeze:Boolean;
-		private var _silence:Boolean;
-		private var _chaos:Boolean;
-		private var _hiding:Boolean;
 		private var _totalTime:Number = 0;
 		private var _disappearTime : Number = 0;
 		private var _curtStackCount : uint = 0;
@@ -45,6 +39,12 @@ package com.rpgGame.coreData.info.buff
 			if (cfgId > 0 && !_data && !_specialData)
 				_data = BuffStateDataManager.getData(cfgId);
 			return _data;
+		}
+		
+		public function get buffStates():String
+		{
+			var str:String = _data.q_action_type;
+			return str.substring(1,str.length-1);
 		}
 
 		public function get description() : String
@@ -194,67 +194,5 @@ package com.rpgGame.coreData.info.buff
 		{
 			_buffId = value;
 		}
-
-		/**
-		 * EBUFFTYPE_DIZZINESS("眩晕", 1),                   // 不能攻击,不能移动
-		EBUFFTYPE_FREEZE("定身", 2),                      // 不能移动跳跃
-		EBUFFTYPE_SILENCE("沉默", 3),                     // 不能攻击
-		EBUFFTYPE_CHAOS("混乱", 4),                       //
-		EBUFFTYPE_HIDING("隐身", 5),                      // 
-		 */
-		public function get dizziness():Boolean
-		{
-			return _dizziness;
-		}
-
-		/**
-		 * @private
-		 */
-		public function set dizziness(value:Boolean):void
-		{
-			_dizziness = value;
-		}
-
-		public function get freeze():Boolean
-		{
-			return _freeze;
-		}
-
-		public function set freeze(value:Boolean):void
-		{
-			_freeze = value;
-		}
-
-		public function get silence():Boolean
-		{
-			return _silence;
-		}
-
-		public function set silence(value:Boolean):void
-		{
-			_silence = value;
-		}
-
-		public function get chaos():Boolean
-		{
-			return _chaos;
-		}
-
-		public function set chaos(value:Boolean):void
-		{
-			_chaos = value;
-		}
-
-		public function get hiding():Boolean
-		{
-			return _hiding;
-		}
-
-		public function set hiding(value:Boolean):void
-		{
-			_hiding = value;
-		}
-
-
 	}
 }

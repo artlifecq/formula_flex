@@ -121,19 +121,20 @@ package com.game.engine2D.scene.layers
 		 */
 		public function removeBaseObj(baseObj:BaseObj,$recycle:Boolean=true):void
 		{
+			//先做个判断
+			if(!baseObj || !baseObj.canRemoved)
+			{
+				//trace("不能移除该角色, ID:"+baseObj.id+",type:"+baseObj.type);
+				return;
+			}
 			var index:int = _baseObjList.indexOf(baseObj);
 			if(index != -1)
 			{
-				//先做个判断
-				if(!baseObj.canRemoved)
-				{
-					trace("不能移除该角色, ID:"+baseObj.id+",type:"+baseObj.type);
-					return;
-				}
 				//从数组中移除
 				_baseObjList.splice(index,1);
 				//清除缓动
 				TweenLite.killTweensOf(baseObj);
+				baseObj.stopRender();
 				if($recycle)
 				{
 					baseObj.destroy();

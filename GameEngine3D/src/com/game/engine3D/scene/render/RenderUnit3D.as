@@ -158,7 +158,13 @@ package com.game.engine3D.scene.render
 		private var _animationTransition : IAnimationTransition;
 		/** 动作开始时间 **/
 		private var _playToTime : int = 0;
+		/**
+		 * 到目前为止已经播放的时间 --受播放速度的影响，如果speed为0.5，则时间为_playDuration*0.5
+		 */		
 		private var _currDurationTime : Number = 0;
+		/**
+		 * 到目前为止已经播放的时间 
+		 */
 		private var _playDuration : int = 0;
 		/**
 		 * 是否播放中
@@ -203,6 +209,8 @@ package com.game.engine3D.scene.render
 		private var _waitAddUnitList : Vector.<RenderUnitChild>;
 		private var _currChildUnitList : Vector.<RenderUnitChild>;
 
+		protected var _compositeMesh : CompositeMesh;
+		
 		private var _methodDatas : Vector.<MethodData>;
 		//private var _boneChildrenByName : Dictionary;
 		private var _softOutlineData : SoftOutlineData;
@@ -2270,10 +2278,11 @@ package com.game.engine3D.scene.render
 						if (element is Mesh)
 						{
 							childData.renderUnit._renderResourceData.isSkinMesh = true;
+							childData.renderUnit._compositeMesh = compositeMesh;
 							compositeMesh.addUnit(Mesh(element));
 							if (ru != this)
 							{
-								addCompositeUnit(compositeMesh, ru);
+								addCompositeMaterials(compositeMesh, ru);
 							}
 						}
 						else
@@ -2571,7 +2580,7 @@ package com.game.engine3D.scene.render
 			return -1;
 		}
 
-		private function addCompositeUnit(compositeMesh : CompositeMesh, ru : RenderUnit3D) : void
+		private function addCompositeMaterials(compositeMesh : CompositeMesh, ru : RenderUnit3D) : void
 		{
 			if (ru == this || !_renderUnitData || !compositeMesh || !ru || !ru.renderUnitData)
 			{
@@ -2585,7 +2594,7 @@ package com.game.engine3D.scene.render
 		}
 
 		/**
-		 *
+		 * 设置动作状态，且开始播放动作，播放的开始时间为参数time
 		 * @param status
 		 * @param transition "如：new CrossfadeTransition(0.2)"
 		 * @param time
@@ -3025,32 +3034,7 @@ package com.game.engine3D.scene.render
 				childData.destroy();
 			}
 			_currChildUnitList.length = 0;
-		}
-
-		protected function restoreElementsParent(parentUnit : RenderUnit3D, parent : ObjectContainer3D) : void
-		{
-			if (!_graphicDis)
-			{
-				return;
-			}
-			if (_animatorElements)
-			{
-				var parentUnitDrawElements : Vector.<ObjectContainer3D> = parentUnit._drawElements;
-				for each (var animatElement : CompositeMesh in _animatorElements)
-				{
-					for each (var parentUnitMeshElement : ObjectContainer3D in parentUnitDrawElements)
-					{
-						if (parentUnitMeshElement is Mesh)
-						{
-							var index : int = animatElement.getUnitIndex(Mesh(parentUnitMeshElement));
-							if (index > -1)
-								animatElement.removeUnitByIndex(index);
-						}
-					}
-					animatElement.hookingJointName = null;
-					_graphicDis.addChild(animatElement);
-				}
-			}
+			
 			if (_drawElements)
 			{
 				for each (var element : ObjectContainer3D in _drawElements)
@@ -3060,9 +3044,42 @@ package com.game.engine3D.scene.render
 						element.hookingJointName = null;
 						_graphicDis.addChild(element);
 					}
+					if (_compositeMesh && (element is Mesh))
+					{
+						var index : int = _compositeMesh.getUnitIndex(Mesh(element));
+						if (index > -1)
+							_compositeMesh.removeUnitByIndex(index);
+					}
 				}
 			}
+			_compositeMesh = null;
 			this.parent = parent;
+		}
+
+		protected function restoreElementsParent(parentUnit : RenderUnit3D, parent : ObjectContainer3D) : void
+		{
+			if (!_graphicDis)
+			{
+				return;
+			}
+			if (_drawElements)
+			{
+				var animatorElements : Vector.<CompositeMesh> = parentUnit._animatorElements;
+				for each (var drawElement : ObjectContainer3D in _drawElements)
+				{
+					if (animatorElements && (drawElement is Mesh))
+					{
+						for each (var animatElement : CompositeMesh in animatorElements)
+						{
+							var index : int = animatElement.getUnitIndex(Mesh(drawElement));
+							if (index > -1)
+								animatElement.removeUnitByIndex(index);
+						}
+					}
+					drawElement.hookingJointName = null;
+					_graphicDis.addChild(drawElement);
+				}
+			}
 		}
 
 		public function getChildSceneTransformByName(name : String) : Matrix3D
@@ -3539,6 +3556,12 @@ package com.game.engine3D.scene.render
 			{
 				for each (var meshElement : ObjectContainer3D in _drawElements)
 				{
+					if (_compositeMesh)
+					{
+						var index : int = _compositeMesh.getUnitIndex(Mesh(meshElement));
+						if (index > -1)
+							_compositeMesh.removeUnitByIndex(index);
+					}
 					if (meshElement.parent)
 					{
 						meshElement.parent.removeChild(meshElement);
@@ -3547,6 +3570,7 @@ package com.game.engine3D.scene.render
 				}
 				_drawElements = null;
 			}
+			_compositeMesh = null;
 			if (_meshes)
 			{
 				for each (var mesh : Mesh in _meshes)

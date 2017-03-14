@@ -26,6 +26,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_life_bar_offset:int;
 		 /**  模型半径像素（左右各一半），最低25，左右各25，最大250 */
 		public var q_body_radius_pixel:int;
+		 /**  出生特效 */
+		public var q_born_animation:int;
 		 /**  特效 */
 		public var q_animation:int;
 		 /**  受击特效，如果配置了此处，那么怪物受到攻击时只会播放这个特效，而忽略本来的受击特效 */
@@ -62,6 +64,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_hprate:int;
 		 /**  总属性ID */
 		public var q_att_type:int;
+		 /**  阵营关系 */
+		public var q_relation:int;
 		 /**  装备属性占比（万分比） */
 		public var q_equip_ratio:int;
 		 /**  BUFF免疫类型（格式：[类型1，类型2] */

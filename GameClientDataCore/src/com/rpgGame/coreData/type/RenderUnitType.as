@@ -9,7 +9,9 @@ package com.rpgGame.coreData.type
 	{
 		/**主体(一般为衣服，也就是默认的换装类型，这是每个角色必备的换装)*/
 		public static const BODY : String = "body";
-		
+		/**
+		 * 身体特效 
+		 */		
 		public static const BODY_EFFECTS : String = "body_effects";
 
 		/**头发*/
@@ -23,7 +25,7 @@ package com.rpgGame.coreData.type
 
 		/**武器特效*/
 		public static const WEAPON_EFFECT : String = "weapon_effect";
-		
+		/**副武器特效 */
 		public static const DEPUTY_WEAPON_EFFECT:String = "deputy_weapon_effect";
 
 		/**身体特效*/
