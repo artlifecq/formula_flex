@@ -244,6 +244,12 @@ package com.rpgGame.app.state.role
 			return state && (state.type == RoleStateType.ACTION_ATTACK);
 		}
 		
+		public function get isHiting() : Boolean
+		{
+			var state : IState = getCurrState(ActionState);
+			return state && (state.type == RoleStateType.ACTION_HIT);
+		}
+		
 		public function get isCollecting() : Boolean
 		{
 			var state : IState = getCurrState(ActionState);

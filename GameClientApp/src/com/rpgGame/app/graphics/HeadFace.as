@@ -7,10 +7,15 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.app.utils.Render3DTextUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
+	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
+	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.AttachDisplayType;
 	import com.rpgGame.coreData.type.SceneCharType;
+	
+	import app.message.MonsterDataProto.MonsterType;
 	
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
@@ -190,10 +195,16 @@ package com.rpgGame.app.graphics
 				showAndHideElement(_nameBar, _isSelected && nameVisible);
 				showAndHideElement(_bloodBar, _isSelected);
 			}
-//			else if (_role.type == SceneCharType.MONSTER || _role.type == SceneCharType.SHI_BEI || _role.type == SceneCharType.FAMILY_WAR_FLAG) //怪物，全显示或者全隐藏
-//			{
-//				showAndHideElement(_nameBar, _isSelected && nameVisible);
-//			}
+			else if (_role.type == SceneCharType.MONSTER) //怪物，全显示或者全隐藏
+			{
+				var monster:Q_monster=MonsterDataManager.getData((_role.data as MonsterData).modelID);
+				//普通怪在战斗状态显示血条
+				if(monster.q_monster_type==MonsterType.NORMAL&&_role.stateMachine&&(_role.stateMachine.isAttacking||_role.stateMachine.isHiting)){
+					showAndHideElement(_bloodBar, true);
+				}
+				
+				showAndHideElement(_nameBar, _isSelected && nameVisible);
+			}
 //			else if (_role.type == SceneCharType.SUMMON_MONSTER) //召唤怪物，全显示或者全隐藏
 //			{
 //				showAndHideElement(_nameBar, nameVisible);
@@ -227,6 +238,7 @@ package com.rpgGame.app.graphics
 			}
 			else if (_role.type == SceneCharType.PLAYER) //玩家
 			{
+				showAndHideElement(_bloodBar, true);
 				if (_role.isMainChar) //自己
 				{
 					//显示血条、称号、昵称

@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main.chat {
     import com.rpgGame.app.manager.AvatarManager;
+    import com.rpgGame.app.manager.chat.ChatGoodsManager;
     import com.rpgGame.app.manager.chat.ChatInputManager;
     import com.rpgGame.app.manager.chat.ChatManager;
     import com.rpgGame.app.manager.chat.ChatSpeakHistoryManager;
@@ -7,12 +8,10 @@ package com.rpgGame.app.ui.main.chat {
     import com.rpgGame.app.manager.chat.NoticeManager;
     import com.rpgGame.app.manager.fight.FightFaceHelper;
     import com.rpgGame.app.manager.role.MainRoleManager;
-    import com.rpgGame.app.manager.scene.SceneManager;
     import com.rpgGame.app.richText.RichTextCustomLinkType;
     import com.rpgGame.app.richText.RichTextCustomUtil;
     import com.rpgGame.app.richText.component.RichTextArea3D;
     import com.rpgGame.app.scene.SceneRole;
-    import com.rpgGame.app.ui.alert.GameAlert;
     import com.rpgGame.app.ui.main.chat.laba.VipChatCanvas;
     import com.rpgGame.core.events.ChatEvent;
     import com.rpgGame.core.events.SceneInteractiveEvent;
@@ -22,9 +21,7 @@ package com.rpgGame.app.ui.main.chat {
     import com.rpgGame.coreData.cfg.ChatCfgData;
     import com.rpgGame.coreData.clientConfig.FaceInfo;
     import com.rpgGame.coreData.info.MapDataManager;
-    import com.rpgGame.coreData.info.alert.AlertInfo;
-    import com.rpgGame.coreData.info.alert.AlertSetInfo;
-    import com.rpgGame.coreData.lang.LangBackPack;
+    import com.rpgGame.coreData.info.item.ClientItemInfo;
     import com.rpgGame.coreData.type.EnumHurtType;
     import com.rpgGame.coreData.type.chat.EnumChatChannelType;
     import com.rpgGame.coreData.utils.ColorUtils;
@@ -34,13 +31,12 @@ package com.rpgGame.app.ui.main.chat {
     import flash.text.TextFormat;
     import flash.text.TextFormatAlign;
     import flash.ui.Keyboard;
+    import flash.utils.setTimeout;
     
     import feathers.controls.Button;
     import feathers.controls.Scroller;
     import feathers.controls.text.Fontter;
     import feathers.core.ToggleGroup;
-    
-    import gameEngine2D.NetDebug;
     
     import gs.TweenLite;
     
@@ -204,6 +200,8 @@ package com.rpgGame.app.ui.main.chat {
 			this.addEventListener(TouchEvent.TOUCH, this.onTouchEventHandler);
 			Starling.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, this.onKeyboardEventHandler);
 			
+			EventManager.addEvent(ChatEvent.SHOW_GOODS,onShowGoods);
+			
 			EventManager.addEvent(SceneInteractiveEvent.SELECTED_SCENE_ROLE, showTest);
 			
 		/*	
@@ -213,6 +211,17 @@ package com.rpgGame.app.ui.main.chat {
 				var hp:int=(10000*Math.random()+5000);
 				FightFaceHelper.showAttChange(EnumHurtType.ADDHP,hp);
 			},1000);*/
+		}
+		
+		private function onShowGoods(item:ClientItemInfo):void
+		{
+			if(_inputText.text == DEFAULT_CHAT_TEXT)
+			{
+				_inputText.text = "";
+			}
+			var key:String = ChatGoodsManager.addItemInfo(item);
+			var goodsCode:String = RichTextCustomUtil.getItemCode(key,item.name,item.quality);
+			_inputText.appendRichText(goodsCode);
 		}
 		
 		private function showTest(role:SceneRole):void

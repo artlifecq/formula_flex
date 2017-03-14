@@ -74,7 +74,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const HeroModel:String = "data.model.HeroModel";
 		/**  坐骑模型表	功能名称	动画资源名称 */
 		public static const MountModel:String = "data.model.MountModel";
-		/**  怪物列表																																																										 */
+		/**  怪物列表																																																												 */
 		public static const Q_monster:String = "data.monster.Q_monster";
 		/**  NPC配置数据库																																																 */
 		public static const Q_npc:String = "data.monster.Q_npc";
@@ -88,7 +88,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_att_values:String = "data.Q_att_values";
 		/**  物品基本信息数据库																																																																																		 */
 		public static const Q_item:String = "data.Q_item";
-		/**  Tips信息数据库		 */
+		/**  tipsid	标题	描述 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
 		/**  职业对应的名字		 */
 		public static const RaceNameInfo:String = "data.RaceNameInfo";

@@ -8,7 +8,7 @@ package com.rpgGame.app.graphics
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	
-	import org.mokylin.skin.mainui.head.MonsterHpBarSkin;
+	import org.mokylin.skin.mainui.head.guai_head_mini;
 	
 	import starling.display.BlendMode;
 	import starling.display.DisplayObject;
@@ -50,7 +50,7 @@ package com.rpgGame.app.graphics
 		
 		private var WIDTH : uint = 114;
 		private var BLOOD_WIDTH : uint = 79;
-		private var BLOOD_HEIGHT : uint = 8;
+		private var BLOOD_HEIGHT : uint = 6;
 		/**部件类型**/
 		private var _partType : uint;
 		/**血条颜色**/
@@ -76,12 +76,17 @@ package com.rpgGame.app.graphics
 			
 			_role = $role;
 			
-//			_hpSkinClass = new MonsterHpBarSkin();
-//			_hpSkinClass.toSprite(this);
+			_hpSkinClass = new guai_head_mini();
+			_hpSkinClass.toSprite(this);
+			
+			_hpSkinClass.width=WIDTH;
 			
 			_hpBackgroundBar = createBarBackground();
 			_hpBar = createBar();
-			
+			if(_hpSkinClass){
+				_hpBackgroundBar.width=WIDTH;
+				_hpBar.width=WIDTH;
+			}
 			WIDTH = _hpBackgroundBar.width;
 			BLOOD_WIDTH = _hpBar.width;
 			BLOOD_HEIGHT = _hpBar.height;

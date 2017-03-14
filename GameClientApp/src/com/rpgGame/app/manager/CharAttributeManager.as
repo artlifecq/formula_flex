@@ -70,6 +70,7 @@ package com.rpgGame.app.manager
 						break;
 					case CharAttributeType.MAX_HP:
 						data.totalStat.life = attributeValue;
+						EventManager.dispatchEvent(MainPlayerEvent.MAXHP_CHANGE,data);//通知最大血量改变
 						break;
 					case CharAttributeType.MP:
 						offset = attributeValue - data.totalStat.mp;

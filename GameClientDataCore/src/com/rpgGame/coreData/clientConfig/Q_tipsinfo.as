@@ -12,11 +12,11 @@ package com.rpgGame.coreData.clientConfig
 	*/
 	public class Q_tipsinfo
 	{
-		 /**    */
+		 /**  tips信息数据库 */
 		public var q_id:int;
-		 /**  <font color= */
+		 /**    */
 		public var q_describe_tittle:String;
-		 /**  <font color= */
+		 /**    */
 		public var q_describe:String;
 
 	}

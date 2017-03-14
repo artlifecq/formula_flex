@@ -2,7 +2,6 @@ package com.rpgGame.appModule.role
 {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
-	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -154,6 +153,7 @@ package com.rpgGame.appModule.role
 			initEvent();
 			
 			updateRole();
+			_avatar.curRole.stateMachine.transition(RoleStateType.ACTION_SHOW);
 			updateBaseInfo();
 			if(!ItemSender.isReqRole){
 				//等待背包请求装备数据一起返回
@@ -400,7 +400,6 @@ package com.rpgGame.appModule.role
 			
 			this._avatar.setRoleData(this._showAvatarData);
 			this._avatar.curRole.setScale(1.7);			
-			_avatar.curRole.stateMachine.transition(RoleStateType.ACTION_SHOW);
 		}
 	}
 }
