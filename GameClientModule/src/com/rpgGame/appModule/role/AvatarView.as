@@ -23,6 +23,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.lang.LangGoods;
 	import com.rpgGame.coreData.lang.LangMenu;
 	import com.rpgGame.coreData.role.HeroData;
@@ -31,6 +32,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.item.GridBGType;
+	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
 	import flash.geom.Point;
 	
@@ -71,6 +73,7 @@ package com.rpgGame.appModule.role
 		
 		private var _roleData:HeroData;
 		private var isMainRole:Boolean;
+		private var otherItems:Vector.<ItemInfo>;
 		
 		
 		public function AvatarView(skin:juese_Skin)
@@ -151,8 +154,9 @@ package com.rpgGame.appModule.role
 			return false;
 		}
 		
-		public function show(data:HeroData):void
+		public function show(data:HeroData,items:Vector.<ItemInfo>=null):void
 		{
+			otherItems=items;
 			_roleData=data;
 			initEvent();
 			
@@ -160,7 +164,7 @@ package com.rpgGame.appModule.role
 		
 			var gridNum:int=equipGrids.length;
 			for(var i:int=0;i<gridNum;i++){
-				equipGrids[i].touchable=isMainRole;
+				equipGrids[i].dragAble=isMainRole;
 			}
 			
 			updateRole();
@@ -174,13 +178,34 @@ package com.rpgGame.appModule.role
 					updateRoleEquip();
 				}
 			}else{//获取玩家的装备列表
-				
+				updateRoleEquip();
 			}
+		}
+		
+		private function getGoodsInfoForOther():Array
+		{
+			var goodsInfo:Array=[];
+			var num:int;
+			if(otherItems){
+				num=otherItems.length
+			}else{
+				num=0;
+			}
+			for(var i:int=0;i<num;i++){
+				var info:ClientItemInfo=ItemUtil.convertClientItemInfo(otherItems[i]);
+				goodsInfo.push(info);
+			}
+			return goodsInfo;
 		}
 		
 		private function updateRoleEquip():void
 		{
-			var goodsInfo:Array = _mgr.getAllItem();
+			var goodsInfo:Array ;
+			if(isMainRole){
+				goodsInfo= _mgr.getAllItem();
+			}else{
+				goodsInfo=getGoodsInfoForOther();
+			}
 			var i:int =0;
 			var goodsLen:int = goodsInfo ? goodsInfo.length : 0;
 			for (i=0; i<equipNum; i++)

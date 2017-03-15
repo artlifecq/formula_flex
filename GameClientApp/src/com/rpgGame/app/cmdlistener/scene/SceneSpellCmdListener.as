@@ -250,9 +250,9 @@ package com.rpgGame.app.cmdlistener.scene
 					{
 						var offset:int=hurtResult.curLife*-1;
 						if( offset< 0){
-							FightFaceHelper.showAttChange(EnumHurtType.ADDHP, offset);//回血
-						}else if( offset>0){
 							FightFaceHelper.showAttChange(EnumHurtType.SUBHP, offset);//掉血
+						}else if( offset>0){
+							FightFaceHelper.showAttChange(EnumHurtType.ADDHP, offset);//回血
 						}
 					}	
 //					CharAttributeManager.setCharHp(role.data as RoleData, hurtResult.curLife);

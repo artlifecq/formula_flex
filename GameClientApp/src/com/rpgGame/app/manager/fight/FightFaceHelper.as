@@ -162,18 +162,16 @@ package com.rpgGame.app.manager.fight
 					typeRes = "";
 					isUsefulBmp = hurter.isMainChar;
 					scaleAgo = 1.5;
-					scaleLater = 0.5;
+					scaleLater = 0.3;
 					numberType = NUMBER_NPC_HIT;
 					break;
 				case EnumHurtType.SPELL_HURT_TYPE_MISS: //闪避
-//					isUsefulBmp = hurter.isMainChar;
 					typeRes = ROOT+USESFUL_EFFECT+"weimingzhong.png";
 					scaleAgo = 2;
 					scaleLater = 1;
 					tweenFun=tweenUp;
 					break;
 				case EnumHurtType.SPELL_HURT_TYPE_CRIT: //暴击
-//					isUsefulBmp = hurter.isMainChar;
 					typeRes = ROOT+USESFUL_EFFECT+"bao_ji_piao_zi.png";
 					scaleAgo = 2;
 					scaleLater = 1;
@@ -244,14 +242,14 @@ package com.rpgGame.app.manager.fight
 			{
 				var isLeftShow : Boolean = (atkor && hurter) ? (atkor.x - hurter.x >= 0) : false;//攻击者在被攻击者的右侧
 				//是否正面效果，相对主角自己而言的   是主角还是场景其他SceneRole，因为主角同时受到攻击的时候，伤害数值同时出现，造成重叠，所以用队列飘字，避免重叠
-				if (isUsefulBmp)
+				/*if (isUsefulBmp)
 				{
 					showQueueAttackFace(hurter, typeRes, numberType, hurtAmount, scaleAgo, scaleLater, from, end, null, null, tweenFun, isLeftShow);
 				}
-				else
-				{
+				elseq
+				{*/
 					showAttackFace(hurter.attackFace, typeRes, numberType, hurtAmount, null, null, tweenFun, from, end, scaleAgo, scaleLater, isLeftShow);
-				}
+//				}
 			}
 		}
 		
@@ -269,29 +267,29 @@ package com.rpgGame.app.manager.fight
 		 */
 		public static function tweenTypeRoleHurt(attackFace : DisplayObject, $displayObjectContainer:*, $from : Point, $end : Point, $scaleAgo : Number, $scaleLater : Number, isLeftShow : Boolean = false, onComplete : Function = null) : void
 		{
-			attackFace.scaleX = attackFace.scaleY = 1;//最大化出现
+			attackFace.scaleX = attackFace.scaleY = 1;
 			$from=new Point(-attackFace.width/2,0);
 			$end=new Point();
 			attackFace.x=$from.x;
 			attackFace.y=$from.y+20;
 				
-			$end.y=-80;
 			var end2:Point=new Point();
 			var random:Number=Math.random();
+			$end.y=-80+50*random;
 			isLeftShow=random>0.5;//随机计算
 			end2.y=$end.y+30+10*random;
 			if(isLeftShow){//往左飘
 				$end.x=$from.x-20-random*20;
-				end2.x=$end.x-10;
+				end2.x=$end.x-20-random*20;
 			}else{
 				$end.x=$from.x+20+random*20;
-				end2.x=$end.x+10;
+				end2.x=$end.x+20+random*20;
 			}
 			
-				var timeLine : TimelineLite = new TimelineLite();
-				timeLine.append(TweenLite.to(attackFace, 0.3, { x:$from.x,y:$from.y,scaleX: $scaleAgo, scaleY: $scaleAgo,ease:Bounce.easeOut,onUpdate:updateCenter,onUpdateParams:[attackFace]}));//小到大
-				timeLine.append(TweenLite.to(attackFace, 0.3, { x:$end.x,y:$end.y,scaleX: $scaleLater, scaleY: $scaleLater,ease:Circ.easeOut}));//大到小
-				timeLine.append(TweenLite.to(attackFace, 0.3, { x:end2.x,y:end2.y,scaleX: $scaleLater+0.3, scaleY: $scaleLater+0.3,alpha:0,onComplete: onComplete, onCompleteParams: [attackFace],ease:Circ.easeOut}));
+			var timeLine : TimelineLite = new TimelineLite();
+			timeLine.append(TweenLite.to(attackFace, 0.3, { x:$from.x,y:$from.y,scaleX: $scaleAgo, scaleY: $scaleAgo,ease:Bounce.easeOut,onUpdate:updateCenter,onUpdateParams:[attackFace]}));//小到大
+			timeLine.append(TweenLite.to(attackFace, 0.5, { x:$end.x,y:$end.y,scaleX: $scaleLater, scaleY: $scaleLater,ease:Circ.easeOut}));//大到小
+			timeLine.append(TweenLite.to(attackFace, 0.3, { x:end2.x,y:end2.y,scaleX: $scaleLater+0.3, scaleY: $scaleLater+0.3,alpha:0,onComplete: onComplete, onCompleteParams: [attackFace],ease:Circ.easeOut}));
 		}
 		
 		private static function updateCenter(face:AttackFace):void

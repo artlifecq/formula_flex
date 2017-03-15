@@ -1,9 +1,10 @@
 package org.mokylin.skin.app.siwangfuhuo
 {
 	import feathers.controls.Label;
+	import feathers.controls.Radio;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIMovieClip;
-	import org.mokylin.skin.app.siwangfuhuo.mc.kuang_Skin;
+	import org.mokylin.skin.app.siwangfuhuo.Itemkuang_Skin;
 	import org.mokylin.skin.app.siwangfuhuo.mc.xingxing_Skin;
 
 	/**
@@ -18,7 +19,7 @@ package org.mokylin.skin.app.siwangfuhuo
 		//==========================================================================
 		public var lbl_name:feathers.controls.Label;
 
-		public var mc_bg:feathers.controls.UIMovieClip;
+		public var mc_bg:feathers.controls.Radio;
 
 		public var mc_star1:feathers.controls.UIMovieClip;
 
@@ -56,6 +57,8 @@ package org.mokylin.skin.app.siwangfuhuo
 			lbl_name = temp;
 			temp.name = "lbl_name";
 			temp.bold = true;
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.letterSpacing = 1;
 			temp.text = "获取神器";
 			temp.textAlign = "center";
@@ -66,15 +69,12 @@ package org.mokylin.skin.app.siwangfuhuo
 			return temp;
 		}
 
-		private function mc_bg_i():feathers.controls.UIMovieClip
+		private function mc_bg_i():feathers.controls.Radio
 		{
-			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
+			var temp:feathers.controls.Radio = new feathers.controls.Radio();
 			mc_bg = temp;
 			temp.name = "mc_bg";
-			temp.autoPlay = false;
-			temp.height = 180;
-			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.mc.kuang_Skin;
-			temp.width = 136;
+			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.Itemkuang_Skin;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -87,6 +87,8 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.name = "mc_star1";
 			temp.autoPlay = false;
 			temp.height = 20;
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.mc.xingxing_Skin;
 			temp.width = 20;
 			temp.x = 13;
@@ -101,6 +103,8 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.name = "mc_star2";
 			temp.autoPlay = false;
 			temp.height = 20;
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.mc.xingxing_Skin;
 			temp.width = 20;
 			temp.x = 38;
@@ -115,6 +119,8 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.name = "mc_star3";
 			temp.autoPlay = false;
 			temp.height = 20;
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.mc.xingxing_Skin;
 			temp.width = 20;
 			temp.x = 63;
@@ -129,6 +135,8 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.name = "mc_star4";
 			temp.autoPlay = false;
 			temp.height = 20;
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.mc.xingxing_Skin;
 			temp.width = 20;
 			temp.x = 87;
@@ -143,6 +151,8 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.name = "mc_star5";
 			temp.autoPlay = false;
 			temp.height = 20;
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.mc.xingxing_Skin;
 			temp.width = 20;
 			temp.x = 112;

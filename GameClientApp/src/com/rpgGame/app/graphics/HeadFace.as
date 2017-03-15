@@ -272,6 +272,8 @@ package com.rpgGame.app.graphics
 		{
 			updateAllBarPosition();
 		}
+		
+		public function showBlood
 
 		//---------------------------------------------
 		//---------------------------------------------更新位置
@@ -915,8 +917,8 @@ package com.rpgGame.app.graphics
 			if (_isSelected && _role && _role.type == SceneCharType.PLAYER)
 				return;
 			showAndHideElement(_nameBar, true);
-			if (_role.type != SceneCharType.MONSTER /*&& _role.type != SceneCharType.SUMMON_MONSTER*/)
-				showAndHideElement(_bloodBar, true);
+//			if (_role.type != SceneCharType.MONSTER /*&& _role.type != SceneCharType.SUMMON_MONSTER*/)
+//				showAndHideElement(_bloodBar, true);
 		}
 		
 		//---------------------------------------------

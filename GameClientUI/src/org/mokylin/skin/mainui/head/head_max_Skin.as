@@ -37,14 +37,6 @@ package org.mokylin.skin.mainui.head
 
 		public var btn_zu:feathers.controls.Button;
 
-		public var buff1:feathers.controls.UIAsset;
-
-		public var buff2:feathers.controls.UIAsset;
-
-		public var buff3:feathers.controls.UIAsset;
-
-		public var grp_buff:feathers.controls.Group;
-
 		public var grp_more:feathers.controls.Group;
 
 		public var grp_zhiye:feathers.controls.Group;
@@ -64,7 +56,7 @@ package org.mokylin.skin.mainui.head
 			this.currentState = "normal";
 			this.height = 91;
 			this.width = 310;
-			this.elementsContent = [__head_max_Skin_UIAsset1_i(),role_xuecao_i(),__head_max_Skin_UIAsset2_i(),role_name_i(),grp_zhiye_i(),grp_more_i(),grp_buff_i()];
+			this.elementsContent = [__head_max_Skin_UIAsset1_i(),role_xuecao_i(),__head_max_Skin_UIAsset2_i(),role_name_i(),grp_zhiye_i(),grp_more_i()];
 			
 			states = {
 			};
@@ -172,50 +164,6 @@ package org.mokylin.skin.mainui.head
 			temp.styleClass = org.mokylin.skin.mainui.head.button.ButtonSkin_zu;
 			temp.x = 28;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function buff1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			buff1 = temp;
-			temp.name = "buff1";
-			temp.styleName = "ui/mainui/head/BAFF/buff_dix24.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function buff2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			buff2 = temp;
-			temp.name = "buff2";
-			temp.styleName = "ui/mainui/head/BAFF/buff_dix24.png";
-			temp.x = 30;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function buff3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			buff3 = temp;
-			temp.name = "buff3";
-			temp.styleName = "ui/mainui/head/BAFF/buff_dix24.png";
-			temp.x = 60;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function grp_buff_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			grp_buff = temp;
-			temp.name = "grp_buff";
-			temp.x = 97;
-			temp.y = 52;
-			temp.elementsContent = [buff1_i(),buff2_i(),buff3_i()];
 			return temp;
 		}
 

@@ -6,13 +6,14 @@ package com.rpgGame.app.ui.main.chat {
     import com.rpgGame.app.manager.chat.ChatSpeakHistoryManager;
     import com.rpgGame.app.manager.chat.FaceGroupManager;
     import com.rpgGame.app.manager.chat.NoticeManager;
-    import com.rpgGame.app.manager.fight.FightFaceHelper;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.richText.RichTextCustomLinkType;
     import com.rpgGame.app.richText.RichTextCustomUtil;
     import com.rpgGame.app.richText.component.RichTextArea3D;
     import com.rpgGame.app.scene.SceneRole;
     import com.rpgGame.app.ui.main.chat.laba.VipChatCanvas;
+    import com.rpgGame.core.app.AppConstant;
+    import com.rpgGame.core.app.AppManager;
     import com.rpgGame.core.events.ChatEvent;
     import com.rpgGame.core.events.SceneInteractiveEvent;
     import com.rpgGame.core.manager.tips.TargetTipsMaker;
@@ -22,16 +23,15 @@ package com.rpgGame.app.ui.main.chat {
     import com.rpgGame.coreData.clientConfig.FaceInfo;
     import com.rpgGame.coreData.info.MapDataManager;
     import com.rpgGame.coreData.info.item.ClientItemInfo;
-    import com.rpgGame.coreData.type.EnumHurtType;
     import com.rpgGame.coreData.type.chat.EnumChatChannelType;
     import com.rpgGame.coreData.utils.ColorUtils;
     import com.rpgGame.netData.chat.message.ResChatMessage;
+    import com.rpgGame.netData.player.message.ResPlayerDieMessage;
     
     import flash.geom.Point;
     import flash.text.TextFormat;
     import flash.text.TextFormatAlign;
     import flash.ui.Keyboard;
-    import flash.utils.setTimeout;
     
     import feathers.controls.Button;
     import feathers.controls.Scroller;
@@ -619,27 +619,11 @@ package com.rpgGame.app.ui.main.chat {
         
         private function sendMsg() : void 
 		{
-			var txt:String=this._inputText.text;
-			switch(txt){
-				case "exp":
-					FightFaceHelper.showAttChange(EnumHurtType.EXP,5000);
-					break;
-				case "hp":
-					FightFaceHelper.showAttChange(EnumHurtType.ADDHP,1234);
-					break;
-				case "baoji":
-					FightFaceHelper.showHurtText(MainRoleManager.actor,testRole,EnumHurtType.SPELL_HURT_TYPE_CRIT,-2358);
-					break;
-				case "subhp":
-					FightFaceHelper.showAttChange(EnumHurtType.SUBHP,-234);
-					break;
-				case "gongji":
-					FightFaceHelper.showHurtText(MainRoleManager.actor,testRole,EnumHurtType.SPELL_HURT_TYPE_NORMAL,-2358);
-					break;
-				case "shanbi":
-					FightFaceHelper.showHurtText(MainRoleManager.actor,testRole,EnumHurtType.SPELL_HURT_TYPE_MISS,-2358);
-					break;
-			}
+			var ms:ResPlayerDieMessage=new ResPlayerDieMessage();
+			ms.attackername="111";
+			ms.time=new Date().getTime()/1000;
+			AppManager.showApp(AppConstant.DIE_PANEL,ms);
+			
 			
 			if("" == this._inputText.text )
 			{

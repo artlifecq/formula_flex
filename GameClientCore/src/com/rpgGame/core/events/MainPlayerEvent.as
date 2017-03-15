@@ -8,6 +8,8 @@ package com.rpgGame.core.events
 		public static const LEVEL_CHANGE:int = UNIQUEID.NEXT;
 		/** 当前血量变化*/
 		public static const NOWHP_CHANGE:int = UNIQUEID.NEXT;
+		/** 自己血量变化*/
+		public static const SELFHP_CHANGE:int = UNIQUEID.NEXT;
 		/** 血量最大值变化*/
 		public static const MAXHP_CHANGE:int = UNIQUEID.NEXT;
 		/** 当前魔法变化*/

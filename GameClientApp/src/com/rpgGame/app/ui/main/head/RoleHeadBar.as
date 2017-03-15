@@ -2,14 +2,17 @@ package com.rpgGame.app.ui.main.head
 {
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.LookSender;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.LookEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.AssetUrl;
+	import com.rpgGame.netData.player.bean.OthersInfo;
 	
 	import feathers.controls.UIAsset;
 	
@@ -87,9 +90,27 @@ package com.rpgGame.app.ui.main.head
 		{
 				switch (target) {
 					case this._skin.btn_cha:
-						AppManager.showApp(AppConstant.PLAYERINFO_PANEL,_roleData);
+						EventManager.addEvent(LookEvent.ROLE_INFO,onRoleInfo);
+						LookSender.lookOtherPlayer(_roleData.serverID);
 						break;
 				}
+		}
+		
+		private function onRoleInfo(info:OthersInfo):void
+		{
+			EventManager.removeEvent(LookEvent.ROLE_INFO,onRoleInfo);
+			
+			_roleData.totalStat.setData(info.attributeList);
+			_roleData.totalStat.setResDatas(info.resourceData);
+			_roleData.sex=info.sex;
+			_roleData.job=info.job;
+			_roleData.societyName=info.guildName;
+			
+			_roleData.maxExp=info.maxExp.fValue;
+			_roleData.maxZhenqi=info.maxZhenQi.fValue;
+			_roleData.curExp=info.exp.fValue;
+			var data:Object={roleData:_roleData,info:info};
+			AppManager.showApp(AppConstant.PLAYERINFO_PANEL,data);
 		}
 		
 		override protected function onHide():void

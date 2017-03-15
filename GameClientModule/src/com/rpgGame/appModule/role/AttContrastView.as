@@ -4,8 +4,6 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	
-	import feathers.controls.ProgressBar;
-	
 	import org.mokylin.skin.app.beibao.VS_Skin;
 	import org.mokylin.skin.app.beibao.juese_Skin;
 

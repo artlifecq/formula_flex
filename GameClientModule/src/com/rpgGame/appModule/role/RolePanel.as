@@ -17,13 +17,13 @@ package com.rpgGame.appModule.role
 	 */
 	public class RolePanel extends SkinUIPanel
 	{
-		private var _skin : beibao_Skin;
+		protected var _skin : beibao_Skin;
 		
-		private var basicView:BasicRoleView;
-		private var avatarView:AvatarView;
-		private var packsView:PacksView;
-		private var attConstrastView:AttContrastView;
-		private var _roleData:HeroData;
+		protected var basicView:BasicRoleView;
+		protected var avatarView:AvatarView;
+		protected var packsView:PacksView;
+		protected var attConstrastView:AttContrastView;
+		protected var _roleData:HeroData;
 		
 		public function RolePanel()
 		{
@@ -46,15 +46,9 @@ package com.rpgGame.appModule.role
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
 		{
 			super.show(data, openTable, parentContiner);
-			_roleData=data as HeroData;
-			if(!_roleData){
-				_roleData=MainRoleManager.actorInfo;
-				packsView.show();
-				attConstrastView.onHide();
-			}else{
-				packsView.onHide();
-				attConstrastView.show(_roleData);
-			}
+			_roleData=MainRoleManager.actorInfo;
+			packsView.show();
+			attConstrastView.onHide();
 			basicView.show(_roleData);
 			avatarView.show(_roleData);
 		}

@@ -79,7 +79,10 @@ package com.rpgGame.core.app
 		public static var BACK_PACK_PANEL:String = createAppInfo("bag.BagPanel","beibao");
 		public static var STORAGE_PANEL:String = createAppInfo("storage.StoragePanel");
 		public static var RELIVE_PANEL:String = createAppInfo( "relive.RelivePanel","relive");
-		
+		/**
+		 *死亡复活 
+		 */
+		public static var DIE_PANEL:String = createAppInfo( "die.DiePanel","siwangfuhuo");
 		
 		
 		/**世界地图**/

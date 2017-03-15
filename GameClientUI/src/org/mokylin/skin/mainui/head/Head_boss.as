@@ -20,12 +20,6 @@ package org.mokylin.skin.mainui.head
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var buff1:feathers.controls.UIAsset;
-
-		public var buff2:feathers.controls.UIAsset;
-
-		public var buff3:feathers.controls.UIAsset;
-
 		public var grp_xueyiao:feathers.controls.Group;
 
 		public var lbl_name:feathers.controls.Label;
@@ -44,6 +38,8 @@ package org.mokylin.skin.mainui.head
 
 		public var xuetiao_zi:feathers.controls.UIAsset;
 
+		public var zhan_bg:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -55,7 +51,7 @@ package org.mokylin.skin.mainui.head
 			this.currentState = "normal";
 			this.height = 92;
 			this.width = 506;
-			this.elementsContent = [__Head_boss_UIAsset1_i(),grp_xueyiao_i(),lbl_name_i(),uim_xuetiao_i(),__Head_boss_UIAsset2_i(),uim_zhandouli_i()];
+			this.elementsContent = [__Head_boss_UIAsset1_i(),grp_xueyiao_i(),lbl_name_i(),uim_xuetiao_i(),zhan_bg_i(),uim_zhandouli_i()];
 			
 			states = {
 			};
@@ -80,15 +76,6 @@ package org.mokylin.skin.mainui.head
 			temp.styleName = "ui/mainui/head/boss/3_sanji.png";
 			temp.x = 0;
 			temp.y = 13;
-			return temp;
-		}
-
-		private function __Head_boss_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/head/zhandi.png";
-			temp.x = 360;
-			temp.y = 43;
 			return temp;
 		}
 
@@ -204,6 +191,17 @@ package org.mokylin.skin.mainui.head
 			temp.styleName = "ui/mainui/head/boss/zise.png";
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function zhan_bg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			zhan_bg = temp;
+			temp.name = "zhan_bg";
+			temp.styleName = "ui/mainui/head/zhandi.png";
+			temp.x = 360;
+			temp.y = 43;
 			return temp;
 		}
 

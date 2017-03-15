@@ -67,7 +67,12 @@ package com.rpgGame.app.ui.main.head
 		{
 			_stateSkin["lbl_name"].text=_monsterData.name + " (" + _monsterCfg.q_level +"级)";
 			if(_stateSkin["uim_zhandouli"]){
-				_stateSkin["uim_zhandouli"].number=int(_monsterData.fightingAmount);
+				if(!_monsterData.fightingAmount){
+					_stateSkin["uim_zhandouli"].visible=_stateSkin["zhan_bg"].visible=false;
+				}else{
+					_stateSkin["uim_zhandouli"].number=int(_monsterData.fightingAmount);
+					_stateSkin["uim_zhandouli"].visible=_stateSkin["zhan_bg"].visible=true;
+				}
 			}
 		}
 		

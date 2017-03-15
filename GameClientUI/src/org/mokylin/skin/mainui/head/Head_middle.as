@@ -18,12 +18,6 @@ package org.mokylin.skin.mainui.head
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var buff1:feathers.controls.UIAsset;
-
-		public var buff2:feathers.controls.UIAsset;
-
-		public var buff3:feathers.controls.UIAsset;
-
 		public var grp_buff:feathers.controls.Group;
 
 		public var lbl_name:feathers.controls.Label;
@@ -31,6 +25,8 @@ package org.mokylin.skin.mainui.head
 		public var uim_zhandouli:feathers.controls.UINumber;
 
 		public var xuetiao_hong:feathers.controls.UIAsset;
+
+		public var zhan_bg:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -43,7 +39,7 @@ package org.mokylin.skin.mainui.head
 			this.currentState = "normal";
 			this.height = 92;
 			this.width = 409;
-			this.elementsContent = [__Head_middle_UIAsset1_i(),xuetiao_hong_i(),lbl_name_i(),grp_buff_i(),__Head_middle_UIAsset2_i(),uim_zhandouli_i()];
+			this.elementsContent = [__Head_middle_UIAsset1_i(),xuetiao_hong_i(),lbl_name_i(),grp_buff_i(),zhan_bg_i(),uim_zhandouli_i()];
 			
 			states = {
 			};
@@ -63,48 +59,6 @@ package org.mokylin.skin.mainui.head
 			return temp;
 		}
 
-		private function __Head_middle_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/head/zhandi.png";
-			temp.x = 263;
-			temp.y = 43;
-			return temp;
-		}
-
-		private function buff1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			buff1 = temp;
-			temp.name = "buff1";
-			temp.styleName = "ui/mainui/head/BAFF/buff_dix24.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function buff2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			buff2 = temp;
-			temp.name = "buff2";
-			temp.styleName = "ui/mainui/head/BAFF/buff_dix24.png";
-			temp.x = 30;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function buff3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			buff3 = temp;
-			temp.name = "buff3";
-			temp.styleName = "ui/mainui/head/BAFF/buff_dix24.png";
-			temp.x = 60;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function grp_buff_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -112,7 +66,6 @@ package org.mokylin.skin.mainui.head
 			temp.name = "grp_buff";
 			temp.x = 8;
 			temp.y = 57;
-			temp.elementsContent = [buff1_i(),buff2_i(),buff3_i()];
 			return temp;
 		}
 
@@ -157,6 +110,17 @@ package org.mokylin.skin.mainui.head
 			temp.styleName = "ui/mainui/head/middle/hongse_2.png";
 			temp.x = 13;
 			temp.y = 26;
+			return temp;
+		}
+
+		private function zhan_bg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			zhan_bg = temp;
+			temp.name = "zhan_bg";
+			temp.styleName = "ui/mainui/head/zhandi.png";
+			temp.x = 263;
+			temp.y = 43;
 			return temp;
 		}
 
