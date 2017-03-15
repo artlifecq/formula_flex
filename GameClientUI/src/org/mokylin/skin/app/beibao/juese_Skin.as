@@ -8,6 +8,7 @@ package org.mokylin.skin.app.beibao
 	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.List;
+	import feathers.controls.SkinnablePanel;
 	import feathers.controls.ProgressBar;
 	import feathers.controls.Radio;
 	import feathers.controls.StateSkin;
@@ -15,6 +16,7 @@ package org.mokylin.skin.app.beibao
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
 	import feathers.layout.HorizontalLayout;
+	import org.mokylin.skin.app.beibao.VS_Skin;
 	import org.mokylin.skin.app.beibao.button.ButtonCangku;
 	import org.mokylin.skin.app.beibao.button.ButtonChushou;
 	import org.mokylin.skin.app.beibao.button.ButtonPaimaihang;
@@ -59,6 +61,8 @@ package org.mokylin.skin.app.beibao
 		public var btn_shangdian:feathers.controls.Button;
 
 		public var btn_zhengli:feathers.controls.Button;
+
+		public var duibi_panel:feathers.controls.SkinnablePanel;
 
 		public var footMsg:feathers.controls.Group;
 
@@ -201,7 +205,7 @@ package org.mokylin.skin.app.beibao
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__juese_Skin_UIAsset1_i(),__juese_Skin_UIAsset2_i(),weapons_i(),headMsg_i(),footMsg_i(),values_i(),packs_i()];
+			this.elementsContent = [__juese_Skin_UIAsset1_i(),__juese_Skin_UIAsset2_i(),weapons_i(),headMsg_i(),footMsg_i(),values_i(),packs_i(),duibi_panel_i()];
 			
 			states = {
 			};
@@ -507,6 +511,19 @@ package org.mokylin.skin.app.beibao
 			temp.styleClass = org.mokylin.skin.app.beibao.button.ButtonZhengli;
 			temp.x = 43;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function duibi_panel_i():feathers.controls.SkinnablePanel
+		{
+			var temp:feathers.controls.SkinnablePanel = new feathers.controls.SkinnablePanel();
+			duibi_panel = temp;
+			temp.name = "duibi_panel";
+			temp.height = 463;
+			temp.styleClass = org.mokylin.skin.app.beibao.VS_Skin;
+			temp.width = 344;
+			temp.x = 590;
+			temp.y = 65;
 			return temp;
 		}
 

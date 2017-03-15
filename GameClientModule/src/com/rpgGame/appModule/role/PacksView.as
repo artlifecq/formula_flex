@@ -36,14 +36,15 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.type.item.GridBGType;
 	
 	import flash.geom.Point;
+	import flash.utils.clearInterval;
+	import flash.utils.setInterval;
 	
 	import app.message.GoodsType;
 	
-	import feathers.controls.IScrollBar;
-	import feathers.controls.ScrollBar;
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
 	import feathers.themes.GuiThemeStyle;
+	import feathers.utils.filter.GrayFilter;
 	
 	import gs.TweenLite;
 	
@@ -75,6 +76,8 @@ package com.rpgGame.appModule.role
 		private var toStorageGridInfo:GridInfo;
 		private var clickTween:TweenLite;
 		private var waitDouble:Boolean;
+		private var cdTime:uint;
+		private var leftCD:int;
 		
 		public function PacksView(skin:juese_Skin)
 		{
@@ -124,6 +127,7 @@ package com.rpgGame.appModule.role
 		
 		public function show():void
 		{
+			_skin.packs.visible=true;
 			initEvent();
 			if(!ItemSender.isReqPack){
 				EventManager.addEvent(ItemEvent.ITEM_INIT,initPackDatas);
@@ -529,6 +533,15 @@ package com.rpgGame.appModule.role
 				case _skin.btn_chushou:
 					return true;
 				case _skin.btn_zhengli:
+					if(leftCD!=0){
+						var alertSet:AlertSetInfo=new AlertSetInfo(LangBackPack.ITEM_SORT_CD);
+						alertSet.alertInfo.value=alertSet.alertInfo.value.replace(/#/,leftCD);
+						NoticeManager.mouseFollowNotify(alertSet.alertInfo.value);
+						return true;
+					}
+					GrayFilter.gray(_skin.btn_zhengli);
+					cdTime=setInterval(cdComplete,1000);
+					leftCD=10;
 					ItemSender.clearUpItem(ItemContainerID.BackPack);
 					return true;
 				case _skin.btn_cangku:
@@ -550,8 +563,20 @@ package com.rpgGame.appModule.role
 			return false;
 		}
 		
+		private function cdComplete():void
+		{
+			if(leftCD==0){
+				clearInterval(cdTime);
+				cdTime=0;
+				_skin.btn_zhengli.filter=null;
+				return;
+			}
+			leftCD--;
+		}
+		
 		internal function onHide():void
 		{
+			_skin.packs.visible=false;
 			goodsContainer.hide();
 			
 			_skin.tab_pack.removeEventListener(Event.CHANGE, onTab);

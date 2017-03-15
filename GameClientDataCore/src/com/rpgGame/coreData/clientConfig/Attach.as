@@ -20,6 +20,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_res:int;
 		 /**  技能编号 */
 		public var q_skill:int;
+		 /**  范围BUFF（进入添加，出界移除） */
+		public var q_enterBuff:int;
 		 /**  执行次数（超过次数则会被移除,0不移除） */
 		public var q_executeCount:int;
 		 /**  延迟移除时间(毫秒) */

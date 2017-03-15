@@ -1,12 +1,9 @@
 package com.rpgGame.appModule.role
 {
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
-	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
-	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.TipType;
@@ -22,13 +19,15 @@ package com.rpgGame.appModule.role
 	public class BasicRoleView
 	{
 		private var _skin : juese_Skin;
+		private var _roleData:HeroData;
 		public function BasicRoleView(skin:juese_Skin)
 		{
 			_skin=skin;
 		}
 		
-		public function show():void
+		public function show(data:HeroData):void
 		{
+			_roleData=data;
 			initEvent();
 			
 			updateTxt();
@@ -37,24 +36,23 @@ package com.rpgGame.appModule.role
 		
 		private function updateTxt():void
 		{
-			var info:HeroData=MainRoleManager.actorInfo;
-			_skin.num_miaoshang.number=info.totalStat.getStatValue(CharAttributeType.HURT_SEC);
-			_skin.txt_lidao.text=info.totalStat.getStatValueString(CharAttributeType.LIDAO);
-			_skin.txt_genggu.text=info.totalStat.getStatValueString(CharAttributeType.GENGU);
-			_skin.txt_huigeng.text=info.totalStat.getStatValueString(CharAttributeType.HUIGEN);
-			_skin.txt_shenfa.text=info.totalStat.getStatValueString(CharAttributeType.SHENFA);
-			_skin.txt_qixue.text=info.totalStat.getStatValueString(CharAttributeType.QI_XUE);
-			_skin.txt_waigong.text=info.totalStat.getStatValueString(CharAttributeType.WAI_GONG);
-			_skin.txt_neigong.text=info.totalStat.getStatValueString(CharAttributeType.NEI_GONG);
-			_skin.txt_gongsu.text=info.totalStat.getStatValueString(CharAttributeType.ATT_SPEED);
-			_skin.txt_mingzhonglv.text=info.totalStat.getStatValue(CharAttributeType.HIT)/100+"%";
-			_skin.txt_baojikangxing.text=info.totalStat.getStatValueString(CharAttributeType.ANTI_CRIT_PER);
-			_skin.txt_bishanlv.text=info.totalStat.getStatValue(CharAttributeType.MISS)/100+"%";
-			_skin.txt_fangyubaifenbi.text=info.totalStat.getStatValue(CharAttributeType.DEFENSE_PER)/100+"%";
-			_skin.txt_shengminhuifu.text=info.totalStat.getStatValueString(CharAttributeType.HP_REC)+"/5秒";
-			_skin.txt_zhiliaotishen.text=info.totalStat.getStatValue(CharAttributeType.CURE_LIFT)/100+"%";
-			_skin.txt_baojilv.text=info.totalStat.getStatValue(CharAttributeType.CRIT_PER)/100+"%";
-			_skin.txt_baojijiacheng.text=info.totalStat.getStatValue(CharAttributeType.CRIT)/100+"%";		
+			_skin.num_miaoshang.number=_roleData.totalStat.getStatValue(CharAttributeType.HURT_SEC);
+			_skin.txt_lidao.text=_roleData.totalStat.getStatValueString(CharAttributeType.LIDAO);
+			_skin.txt_genggu.text=_roleData.totalStat.getStatValueString(CharAttributeType.GENGU);
+			_skin.txt_huigeng.text=_roleData.totalStat.getStatValueString(CharAttributeType.HUIGEN);
+			_skin.txt_shenfa.text=_roleData.totalStat.getStatValueString(CharAttributeType.SHENFA);
+			_skin.txt_qixue.text=_roleData.totalStat.getStatValueString(CharAttributeType.QI_XUE);
+			_skin.txt_waigong.text=_roleData.totalStat.getStatValueString(CharAttributeType.WAI_GONG);
+			_skin.txt_neigong.text=_roleData.totalStat.getStatValueString(CharAttributeType.NEI_GONG);
+			_skin.txt_gongsu.text=_roleData.totalStat.getStatValueString(CharAttributeType.ATT_SPEED);
+			_skin.txt_mingzhonglv.text=_roleData.totalStat.getStatValue(CharAttributeType.HIT)/100+"%";
+			_skin.txt_baojikangxing.text=_roleData.totalStat.getStatValueString(CharAttributeType.ANTI_CRIT_PER);
+			_skin.txt_bishanlv.text=_roleData.totalStat.getStatValue(CharAttributeType.MISS)/100+"%";
+			_skin.txt_fangyubaifenbi.text=_roleData.totalStat.getStatValue(CharAttributeType.DEFENSE_PER)/100+"%";
+			_skin.txt_shengminhuifu.text=_roleData.totalStat.getStatValueString(CharAttributeType.HP_REC)+"/5秒";
+			_skin.txt_zhiliaotishen.text=_roleData.totalStat.getStatValue(CharAttributeType.CURE_LIFT)/100+"%";
+			_skin.txt_baojilv.text=_roleData.totalStat.getStatValue(CharAttributeType.CRIT_PER)/100+"%";
+			_skin.txt_baojijiacheng.text=_roleData.totalStat.getStatValue(CharAttributeType.CRIT)/100+"%";		
 			
 			var allW:int=_skin.msIcon.width+_skin.msName.width+_skin.num_miaoshang.width;
 			var xx:int=(185-allW)/2;
@@ -161,14 +159,13 @@ package com.rpgGame.appModule.role
 			if(type!=CharAttributeType.RES_EXP&&type!=CharAttributeType.RES_ZHENQI){
 				return;
 			}
-			var stat:SpriteStat=MainRoleManager.actorInfo.totalStat;
-			_skin.txt_zhenqi.text=MainRoleManager.actorInfo.curZhenqi+"/"+MainRoleManager.actorInfo.maxZhenqi;			
-			_skin.txt_jinyan.text=MainRoleManager.actorInfo.curExp+"/"+MainRoleManager.actorInfo.maxExp;
+			_skin.txt_zhenqi.text=_roleData.curZhenqi+"/"+_roleData.maxZhenqi;			
+			_skin.txt_jinyan.text=_roleData.curExp+"/"+_roleData.maxExp;
 			
-			_skin.pro_jinyan.maximum=MainRoleManager.actorInfo.maxExp;
-			_skin.pro_jinyan.value=MainRoleManager.actorInfo.curExp;
-			_skin.pro_zhenqi.maximum=MainRoleManager.actorInfo.maxZhenqi;
-			_skin.pro_zhenqi.value=MainRoleManager.actorInfo.curZhenqi;
+			_skin.pro_jinyan.maximum=_roleData.maxExp;
+			_skin.pro_jinyan.value=_roleData.curExp;
+			_skin.pro_zhenqi.maximum=_roleData.maxZhenqi;
+			_skin.pro_zhenqi.value=_roleData.curZhenqi;
 		}
 	}	
 }

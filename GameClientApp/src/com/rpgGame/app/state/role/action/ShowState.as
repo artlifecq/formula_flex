@@ -44,14 +44,14 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.MOUNT:
 					render.visible = true;
 					render.repeat = _repeatNum;
-					render.setStatus(ref.data.type, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
+					render.setStatus(statusType, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
 					if (isFreeze)
 						render.stop(time);
 					break;
 				case RenderUnitType.EFFECT:
 					render.visible = true;
 					render.repeat = _repeatNum;
-					render.setStatus(ref.data.type, null, time);
+					render.setStatus(statusType, null, time);
 					break;
 				case RenderUnitType.WEAPON_EFFECT:
 					render.visible = true;
@@ -68,6 +68,7 @@ package com.rpgGame.app.state.role.action
 			if (_machine && !_machine.isDisposed)
 			{
 				super.execute();
+				transition(RoleStateType.ACTION_IDLE,null,true);
 				_showType=RoleActionType.SHOW2;
 				_repeatNum=1;
 			}
@@ -75,8 +76,9 @@ package com.rpgGame.app.state.role.action
 		
 		override public function afterExecute() : void
 		{
-			if (_machine && !_machine.isDisposed&&!_totalFrameTween)
+			if (_machine && !_machine.isDisposed)
 			{
+				syncAnimation();
 				super.afterExecute();
 				
 				var bodyAp : RenderUnit3D = (_machine.owner as SceneRole).avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
@@ -86,7 +88,6 @@ package com.rpgGame.app.state.role.action
 				}else{
 					onTotalFrameCmp();
 				}
-				syncAnimation();
 			}
 		}
 		
@@ -99,30 +100,21 @@ package com.rpgGame.app.state.role.action
 					_totalFrameTween.kill();
 					_totalFrameTween = null;
 				}
+				
 				_showType=RoleActionType.SHOW1;
 				_repeatNum=0;
-				_machine.removeState(RoleStateType.ACTION_SHOW);
 				syncAnimation();
 			}
 		}
 		
-/*		override public function leavePass(nextState : IState, force : Boolean = false) : Boolean
+		/**
+		 *结束展示之后 
+		 * 
+		 */
+		override public function afterLeave():void
 		{
-			trace("leavePass",_totalFrameTween==null);
-			if(_totalFrameTween){
-				return false;
-			}
-			return true;
+			super.afterLeave();
 		}
-		
-		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
-		{
-			trace("enterPass",_totalFrameTween==null);
-			if(_totalFrameTween){
-				return false;
-			}
-			return true;
-		}*/
 		
 		override public function dispose() : void
 		{
@@ -133,6 +125,36 @@ package com.rpgGame.app.state.role.action
 				_totalFrameTween = null;
 			}
 			super.dispose();
+		}
+		
+		/**
+		 *离开状态判定 
+		 * @param nextState
+		 * @param force
+		 * @return 
+		 * 
+		 */
+		override public function leavePass(nextState:IState, force:Boolean=false):Boolean
+		{
+			if(!nextState){
+				return false;
+			}
+			
+			if (_totalFrameTween)//还在播放动画
+			{
+				return false;				
+			}
+			
+			return true;
+		}
+		
+		override public function enterPass(prevState:IState, force:Boolean=false):Boolean
+		{
+			if(!prevState){
+				return false;
+			}
+			
+			return true;
 		}
 	}
 }

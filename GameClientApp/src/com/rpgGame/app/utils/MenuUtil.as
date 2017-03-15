@@ -180,7 +180,7 @@ package com.rpgGame.app.utils
 			switch (type)
 			{
 				case LangMenu.LOOK_HERO://查看玩家信息
-					LookSender.reqLook(heroId,true);
+//					LookSender.reqLook(heroId,true);
 					break;
 				case LangMenu.INVITE_JOIN_SOCIETY://邀请加入帮派
 					SocietyManager.reqInviteJoin(heroId);

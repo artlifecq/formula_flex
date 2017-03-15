@@ -10,16 +10,18 @@ package com.rpgGame.coreData.clientConfig
 	* @author NEIL
 	* 
 	*/
-	public class Attach_effect
+	public class Q_die
 	{
-		 /**  ID */
+		 /**  顺序ID */
 		public var q_id:int;
-		 /**  状态0特效资源 */
-		public var q_res_0:String;
-		 /**  状态1特效资源 */
-		public var q_res_1:String;
-		 /**  绑定器 */
-		public var q_attachs:String;
+		 /**  功能名称 */
+		public var q_name:String;
+		 /**  界面名称 */
+		public var q_panel:String;
+		 /**  星星数量 */
+		public var q_starsnum:int;
+		 /**  图标 */
+		public var q_icon:int;
 
 	}
 }

@@ -21,6 +21,8 @@ package org.mokylin.skin.app.siwangfuhuo
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var bg:feathers.controls.UIAsset;
+
 		public var btnClose:feathers.controls.Button;
 
 		public var btn_fuhuodian:feathers.controls.Button;
@@ -32,6 +34,8 @@ package org.mokylin.skin.app.siwangfuhuo
 		public var btn_prev:feathers.controls.Button;
 
 		public var btn_yuandi:feathers.controls.Button;
+
+		public var lbl_msg:feathers.controls.Label;
 
 		public var lbl_name:feathers.controls.Label;
 
@@ -60,7 +64,7 @@ package org.mokylin.skin.app.siwangfuhuo
 			this.currentState = "normal";
 			this.height = 415;
 			this.width = 629;
-			this.elementsContent = [__fuhuo_Skin_UIAsset1_i(),__fuhuo_Skin_UIAsset2_i(),__fuhuo_Skin_UIAsset3_i(),__fuhuo_Skin_UIAsset4_i(),__fuhuo_Skin_UIAsset5_i(),__fuhuo_Skin_Label1_i(),lbl_time_i(),btn_prev_i(),btn_next_i(),btn_fuhuodian_i(),btn_yuandi_i(),btn_goumai_i(),btnClose_i()];
+			this.elementsContent = [bg_i(),__fuhuo_Skin_UIAsset2_i(),__fuhuo_Skin_UIAsset3_i(),__fuhuo_Skin_UIAsset4_i(),__fuhuo_Skin_UIAsset5_i(),lbl_msg_i(),lbl_time_i(),btn_prev_i(),btn_next_i(),btn_fuhuodian_i(),btn_yuandi_i(),btn_goumai_i(),btnClose_i()];
 			
 			states = {
 			};
@@ -71,44 +75,24 @@ package org.mokylin.skin.app.siwangfuhuo
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __fuhuo_Skin_Label1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.htmlText = "你被<font color='#5DBD37'>【贪婪的食尸鬼】</font>杀死了（2016年11月10日 15：50：30）";
-			temp.text = "标签";
-			temp.color = 0xe1201c;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 24;
-			temp.y = 113;
-			return temp;
-		}
-
-		private function __fuhuo_Skin_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/background/yiji_head.png";
-			temp.width = 629;
-			temp.x = 0;
-			temp.y = 7;
-			return temp;
-		}
-
 		private function __fuhuo_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 332;
-			temp.styleName = "ui/common/background/yiji_mianban.png";
-			temp.width = 620;
-			temp.x = 4;
-			temp.y = 83;
+			temp.height = 205;
+			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.width = 602;
+			temp.x = 12;
+			temp.y = 137;
 			return temp;
 		}
 
 		private function __fuhuo_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.styleName = "ui/common/background/yiji_huawen.png";
-			temp.x = 299;
+			temp.x = 298;
 			temp.y = 0;
 			return temp;
 		}
@@ -116,9 +100,11 @@ package org.mokylin.skin.app.siwangfuhuo
 		private function __fuhuo_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.styleName = "ui/app/siwangfuhuo/swfh.png";
-			temp.x = 280;
-			temp.y = 13;
+			temp.x = 279;
+			temp.y = 11;
 			return temp;
 		}
 
@@ -126,8 +112,21 @@ package org.mokylin.skin.app.siwangfuhuo
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/siwangfuhuo/batty.png";
-			temp.x = 13;
+			temp.x = 12;
 			temp.y = 73;
+			return temp;
+		}
+
+		private function bg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg = temp;
+			temp.name = "bg";
+			temp.height = 411;
+			temp.styleName = "ui/common/background/yiji_mianban.png";
+			temp.width = 629;
+			temp.x = 0;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -138,7 +137,7 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
 			temp.x = 595;
-			temp.y = 23;
+			temp.y = 21;
 			return temp;
 		}
 
@@ -207,6 +206,19 @@ package org.mokylin.skin.app.siwangfuhuo
 			return temp;
 		}
 
+		private function lbl_msg_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbl_msg = temp;
+			temp.name = "lbl_msg";
+			temp.htmlText = "你被<font color='#5DBD37'>【贪婪的食尸鬼】</font>杀死了（2016年11月10日 15：50：30）";
+			temp.color = 0xe1201c;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.x = 23;
+			temp.y = 114;
+			return temp;
+		}
+
 		private function lbl_time_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -215,8 +227,9 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.text = "剩余：28秒";
 			temp.color = 0xe8c857;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 96;
 			temp.x = 514;
-			temp.y = 367;
+			temp.y = 368;
 			return temp;
 		}
 

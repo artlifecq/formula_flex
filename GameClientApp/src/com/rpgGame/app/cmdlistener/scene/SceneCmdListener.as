@@ -68,6 +68,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.map.message.ResWeaponChangeMessage;
 	import com.rpgGame.netData.map.message.SCSceneObjMoveMessage;
 	import com.rpgGame.netData.player.message.BroadcastPlayerAttriChangeMessage;
+	import com.rpgGame.netData.player.message.ResPlayerDieMessage;
 	import com.rpgGame.netData.player.message.ResReviveSuccessMessage;
 	
 	import flash.geom.Point;
@@ -117,6 +118,7 @@ package com.rpgGame.app.cmdlistener.scene
 //			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SCENE_MAP_TRANSPORT, onSceneMapTransport);
 			SocketConnection.addCmdListener(101126, onResChangeMapFailedMessage);
             // 复活成功
+			SocketConnection.addCmdListener(103114, onResPlayerDieMessage);
 			SocketConnection.addCmdListener(103115, onResReviveSuccessMessage);
 			SocketConnection.addCmdListener(101146, onResRoundGoodsExtraMessage);
 			SocketConnection.addCmdListener(101103, onResRoundGoodsMessage);
@@ -173,6 +175,13 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			
 			finish();
+		}
+		
+		private function onResPlayerDieMessage(msg:ResPlayerDieMessage):void
+		{
+			if(msg.personId.ToGID()==MainRoleManager.actor.id){
+				AppManager.showApp(AppConstant.DIE_PANEL,msg);
+			}
 		}
 		
 		private function onResArmorChangeMessage(msg:ResArmorChangeMessage):void

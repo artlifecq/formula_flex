@@ -1,9 +1,15 @@
 package com.rpgGame.app.ui.main
 {
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.main.chat.ChatBar;
 	import com.rpgGame.app.ui.main.chat.SystemMsgBar;
-	import com.rpgGame.app.ui.main.head.PlayerHeadBar;
+	import com.rpgGame.app.ui.main.head.MainRoleHeadBar;
+	import com.rpgGame.app.ui.main.head.MonsterBossBar;
+	import com.rpgGame.app.ui.main.head.MonsterEliteBar;
+	import com.rpgGame.app.ui.main.head.MonsterNormalBar;
+	import com.rpgGame.app.ui.main.head.RoleHeadBar;
 	import com.rpgGame.app.ui.main.navigation.NavigationBar;
 	import com.rpgGame.app.ui.main.shortcut.ShortcutBar;
 	import com.rpgGame.app.ui.main.smallmap.SmallMapBar;
@@ -12,14 +18,25 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.core.app.AppDispather;
 	import com.rpgGame.core.app.AppEvent;
 	import com.rpgGame.core.app.AppInfo;
+	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
+	import com.rpgGame.core.events.SceneInteractiveEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangYuMaQiShou;
+	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.coreData.role.MonsterData;
+	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.display.Stage;
 	import flash.geom.Point;
+	
+	import app.message.MonsterDataProto.MonsterType;
+	
+	import feathers.controls.UIAsset;
 	
 	import org.client.mainCore.manager.EventManager;
 	
@@ -41,11 +58,26 @@ package com.rpgGame.app.ui.main
 		private var starlingStage : starling.display.Stage;
 		/** 秒 **/
 		private static const TIME:int = int( LanguageConfig.getText( LangYuMaQiShou.TIME ) );
+		
+		private const SHOW_BLOOD_TIPS:Number=0.2;
+		
         // 头部
         private var _topBar : TopBar;
         private var _expBar : ExpBar;
         // 人物头像
-        private var _headBar : PlayerHeadBar;
+        private var _headBar : MainRoleHeadBar;
+		
+		/**
+		 *玩家头像 
+		 */
+		private var _playerHead:RoleHeadBar;
+		/**
+		 *怪物头像 
+		 */
+		private var _bossHead:MonsterBossBar;
+		private var _eliteHead:MonsterEliteBar;
+		private var _normalHead:MonsterNormalBar;
+		
         // 小地图
         private var _smallMapBar : SmallMapBar;
         // 快捷栏
@@ -56,10 +88,13 @@ package com.rpgGame.app.ui.main
         private var _chatBar : ChatBar;
 		//系统消息条
 		private var _systemMsgBar:SystemMsgBar;
+		
+		private var _lowBloodBg:UIAsset;
+		
 //		/** 主工具栏 **/
 //		private var _mainBar : ShortcutBar;
 //		/** 人物头像栏 **/
-//		private var _headBar : PlayerHeadBar;
+//		private var _headBar : MainRoleHeadBar;
 //		/** 当前选中的英雄头像栏 **/
 //		private var _selectRoleHeadBar : SelectRoleHeadBar;
 //		/** 小地图 **/
@@ -80,6 +115,7 @@ package com.rpgGame.app.ui.main
 //		private var _yuMaChangActivityBar:HurtRankPanel;
 		/** cd时间 **/
 		private var _cdTime : int = TIME;
+		private var selectedRole:SceneRole;
 		
 		public function MainGUI()
 		{
@@ -112,7 +148,7 @@ package com.rpgGame.app.ui.main
             this.addChild(this._expBar);
 			_topBar.y=5;
             this.addChild(this._topBar);
-            this._headBar = new PlayerHeadBar();
+            this._headBar = new MainRoleHeadBar();
             this.addChild(this._headBar);
             this._smallMapBar = new SmallMapBar();
             this.addChild(this._smallMapBar);
@@ -124,6 +160,14 @@ package com.rpgGame.app.ui.main
             this.addChild(this._chatBar);
 			this._systemMsgBar=new SystemMsgBar();
 			this.addChild(_systemMsgBar);
+			_playerHead=new RoleHeadBar();
+			_bossHead=new MonsterBossBar();
+			_eliteHead=new MonsterEliteBar();
+			_normalHead=new MonsterNormalBar();
+			
+			_lowBloodBg=new UIAsset();
+			_lowBloodBg.styleName="ui/common/dyingeffect.png";
+			
 //			_chatBar = new ChatBar();
 //			addChild(_chatBar);
 //			
@@ -145,7 +189,7 @@ package com.rpgGame.app.ui.main
 //			_teamBar = new TeamBar();
 //			addChild(_teamBar);
 //			
-//			_headBar = new PlayerHeadBar();
+//			_headBar = new MainRoleHeadBar();
 //			addChild(_headBar);
 //			
 //			_mainBar = new ShortcutBar();
@@ -183,6 +227,54 @@ package com.rpgGame.app.ui.main
 		    //EventManager.addEvent(RankEvent.PLUNDER_HURT_RANK_CHANGE, updateRankInfo);
 			
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
+			
+			EventManager.addEvent(SceneInteractiveEvent.SELECTED_SCENE_ROLE, showHead);
+			EventManager.addEvent(MainPlayerEvent.SELFHP_CHANGE,showLowBlood);
+		}
+		
+		private function showLowBlood(data:HeroData):void
+		{
+			var value:int=MainRoleManager.actorInfo.totalStat.hp;
+			var max:int=MainRoleManager.actorInfo.totalStat.life;
+			var per:Number=value/max;
+			if(per<=SHOW_BLOOD_TIPS){
+				this.addChild(_lowBloodBg);
+			}else{
+				this.removeChild(_lowBloodBg);
+			}
+		}
+		
+		private  function showHead(role : SceneRole) : void
+		{
+			if(selectedRole==role){
+				return;
+			}
+			
+			this.removeChild(_playerHead);
+			this.removeChild(_bossHead);
+			this.removeChild(_eliteHead);
+			this.removeChild(_normalHead);
+			selectedRole=role;
+			if(!role){
+				return;
+			}
+			switch(role.type){
+				case SceneCharType.PLAYER:
+					this.addChild(_playerHead);
+					break;
+				case SceneCharType.MONSTER:
+					var data:MonsterData=role.data as MonsterData;
+					var bornData : Q_monster = MonsterDataManager.getData(data.modelID); 
+					var type:int=bornData.q_monster_type;
+					if(type== MonsterType.NORMAL){
+						this.addChild(_normalHead);
+					}else if(type== MonsterType.ELITE){
+						this.addChild(_eliteHead);
+					}else{
+						this.addChild(_bossHead);
+					}
+					break;
+			}
 		}
 		
 		/**
@@ -309,6 +401,11 @@ package com.rpgGame.app.ui.main
             this._chatBar.resize(sWidth, sHeight);
 			this._expBar.resize(sWidth, sHeight);
 			this._systemMsgBar.resize(sWidth, sHeight);
+			this._playerHead.resize(sWidth, sHeight);
+			
+			_lowBloodBg.width=sWidth;
+			_lowBloodBg.height=sHeight;
+			
 //			_mainBar.resize(sWidth, sHeight);
 //			_headBar.resize(sWidth, sHeight);
 //			_selectRoleHeadBar.resize(sWidth, sHeight);

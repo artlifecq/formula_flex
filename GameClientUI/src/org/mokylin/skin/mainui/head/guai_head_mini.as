@@ -1,4 +1,4 @@
-package org.mokylin.skin.component.progress
+package org.mokylin.skin.mainui.head
 {
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -8,26 +8,27 @@ package org.mokylin.skin.component.progress
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class pro_vs1_Skin extends feathers.controls.StateSkin
+	public class guai_head_mini extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var thumb:feathers.controls.UIAsset;
+		public var bar:feathers.controls.UIAsset;
 
-		public var track:feathers.controls.UIAsset;
+		public var bg:feathers.controls.UIAsset;
 
 
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function pro_vs1_Skin()
+		public function guai_head_mini()
 		{
 			super();
 			
 			this.currentState = "normal";
-			this.width = 118;
-			this.elementsContent = [track_i(),thumb_i()];
+			this.height = 6;
+			this.width = 63;
+			this.elementsContent = [bg_i(),bar_i()];
 			
 			states = {
 			};
@@ -38,24 +39,26 @@ package org.mokylin.skin.component.progress
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function thumb_i():feathers.controls.UIAsset
+		private function bar_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			thumb = temp;
-			temp.name = "thumb";
-			temp.styleName = "ui/app/beibao/vs/zuo_tiao.png";
-			temp.x = 2;
+			bar = temp;
+			temp.name = "bar";
+			temp.left = 1;
+			temp.right = 1;
+			temp.styleName = "ui/mainui/head/mini/xuetiao_bar.png";
 			temp.y = 1;
 			return temp;
 		}
 
-		private function track_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			track = temp;
-			temp.name = "track";
-			temp.styleName = "ui/app/beibao/vs/zuo_di.png";
-			temp.x = 0;
+			bg = temp;
+			temp.name = "bg";
+			temp.left = 0;
+			temp.right = 0;
+			temp.styleName = "ui/mainui/head/mini/xuetiao_bg.png";
 			temp.y = 0;
 			return temp;
 		}
