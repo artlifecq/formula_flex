@@ -1,7 +1,7 @@
 package org.mokylin.skin.app.siwangfuhuo
 {
+	import feathers.controls.Button;
 	import feathers.controls.Label;
-	import feathers.controls.Radio;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIMovieClip;
 	import org.mokylin.skin.app.siwangfuhuo.Itemkuang_Skin;
@@ -17,9 +17,9 @@ package org.mokylin.skin.app.siwangfuhuo
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var lbl_name:feathers.controls.Label;
+		public var btn:feathers.controls.Button;
 
-		public var mc_bg:feathers.controls.Radio;
+		public var lbl_name:feathers.controls.Label;
 
 		public var mc_star1:feathers.controls.UIMovieClip;
 
@@ -40,7 +40,7 @@ package org.mokylin.skin.app.siwangfuhuo
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [mc_bg_i(),lbl_name_i(),mc_star1_i(),mc_star2_i(),mc_star3_i(),mc_star4_i(),mc_star5_i()];
+			this.elementsContent = [btn_i(),lbl_name_i(),mc_star1_i(),mc_star2_i(),mc_star3_i(),mc_star4_i(),mc_star5_i()];
 			
 			states = {
 			};
@@ -51,6 +51,15 @@ package org.mokylin.skin.app.siwangfuhuo
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function btn_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn = temp;
+			temp.name = "btn";
+			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.Itemkuang_Skin;
+			return temp;
+		}
+
 		private function lbl_name_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -66,17 +75,6 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.width = 136;
 			temp.x = 2;
 			temp.y = 8;
-			return temp;
-		}
-
-		private function mc_bg_i():feathers.controls.Radio
-		{
-			var temp:feathers.controls.Radio = new feathers.controls.Radio();
-			mc_bg = temp;
-			temp.name = "mc_bg";
-			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.Itemkuang_Skin;
-			temp.x = 0;
-			temp.y = 0;
 			return temp;
 		}
 

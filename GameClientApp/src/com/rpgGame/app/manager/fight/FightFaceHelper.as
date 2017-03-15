@@ -3,6 +3,7 @@ package com.rpgGame.app.manager.fight
 	import com.game.engine3D.controller.CameraController;
 	import com.game.mainCore.libCore.handle.HandleThread;
 	import com.rpgGame.app.display2D.AttackFace;
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.role.RoleData;
@@ -162,7 +163,7 @@ package com.rpgGame.app.manager.fight
 					typeRes = "";
 					isUsefulBmp = hurter.isMainChar;
 					scaleAgo = 1.5;
-					scaleLater = 0.3;
+					scaleLater = 0.5;
 					numberType = NUMBER_NPC_HIT;
 					break;
 				case EnumHurtType.SPELL_HURT_TYPE_MISS: //闪避
@@ -248,8 +249,14 @@ package com.rpgGame.app.manager.fight
 				}
 				elseq
 				{*/
-					showAttackFace(hurter.attackFace, typeRes, numberType, hurtAmount, null, null, tweenFun, from, end, scaleAgo, scaleLater, isLeftShow);
+					showAttackFace(hurter.headFace, typeRes, numberType, hurtAmount, null, null, tweenFun, from, end, scaleAgo, scaleLater, isLeftShow);
 //				}
+					if(hurter.data.id!=MainRoleManager.actorID){
+						var headFace:HeadFace=hurter.headFace as HeadFace;
+						if(headFace){
+							headFace.showBloodBar();
+						}
+					}
 			}
 		}
 		
@@ -288,8 +295,9 @@ package com.rpgGame.app.manager.fight
 			
 			var timeLine : TimelineLite = new TimelineLite();
 			timeLine.append(TweenLite.to(attackFace, 0.3, { x:$from.x,y:$from.y,scaleX: $scaleAgo, scaleY: $scaleAgo,ease:Bounce.easeOut,onUpdate:updateCenter,onUpdateParams:[attackFace]}));//小到大
-			timeLine.append(TweenLite.to(attackFace, 0.5, { x:$end.x,y:$end.y,scaleX: $scaleLater, scaleY: $scaleLater,ease:Circ.easeOut}));//大到小
-			timeLine.append(TweenLite.to(attackFace, 0.3, { x:end2.x,y:end2.y,scaleX: $scaleLater+0.3, scaleY: $scaleLater+0.3,alpha:0,onComplete: onComplete, onCompleteParams: [attackFace],ease:Circ.easeOut}));
+			timeLine.append(TweenLite.to(attackFace, 0.5, { x:$end.x,y:$end.y,scaleX: $scaleLater, scaleY: $scaleLater,ease:Circ.easeOut,onUpdate:updateCenter,onUpdateParams:[attackFace]}));//大到小
+			timeLine.append(TweenLite.to(attackFace, 0.2, { x:$end.x,y:$end.y,scaleX: $scaleLater+0.1, scaleY: $scaleLater+0.1,alpha:0.8,onUpdate:updateCenter,onUpdateParams:[attackFace]}));//小到大
+			timeLine.append(TweenLite.to(attackFace, 0.3, { x:end2.x,y:end2.y,alpha:0,onComplete: onComplete, onCompleteParams: [attackFace],ease:Circ.easeOut}));
 		}
 		
 		private static function updateCenter(face:AttackFace):void
@@ -390,7 +398,7 @@ package com.rpgGame.app.manager.fight
 		 */
 		public static function showQueueAttackFace($sc : SceneRole, $attackType : String = "", numberRes : String = "", $attackValue : * = 0, $scaleAgo : Number = 1, $scaleLater : Number = 1, $from : Point = null, $end : Point = null, $specialType : String = null, $specialPos : Point = null, $tweenFun : Function = null, $isLeftShow : Boolean = false, $queueTm : uint = 50) : void
 		{
-			_queueThread.push(showAttackFace, [$sc.attackFace, $attackType, numberRes, $attackValue, $specialType, $specialPos, $tweenFun, $from, $end, $scaleAgo, $scaleLater, $isLeftShow], $queueTm);
+			_queueThread.push(showAttackFace, [$sc.headFace, $attackType, numberRes, $attackValue, $specialType, $specialPos, $tweenFun, $from, $end, $scaleAgo, $scaleLater, $isLeftShow], $queueTm);
 		}
 
 		/**

@@ -17,17 +17,12 @@ package org.mokylin.skin.app.siwangfuhuo
 		{
 			super();
 			
-			this.currentState = "upAndSelected";
+			this.currentState = "down";
 			this.elementsContent = [];
 			
 			states = {
 			};
-			skinNames={"down":"ui/app/siwangfuhuo/kuang.png",
-			"downAndSelected":"ui/app/siwangfuhuo/kuang_liang.png",
-			"hover":"ui/app/siwangfuhuo/kuang.png",
-			"overAndSelected":"ui/app/siwangfuhuo/kuang_liang.png",
-			"up":"ui/app/siwangfuhuo/kuang.png",
-			"upAndSelected":"ui/app/siwangfuhuo/kuang_liang.png"};
+			skinNames={"down":"ui/app/siwangfuhuo/kuang_liang.png", "hover":"ui/app/siwangfuhuo/kuang_liang.png", "up":"ui/app/siwangfuhuo/kuang.png"};
 		}
 
 

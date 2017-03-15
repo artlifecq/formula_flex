@@ -59,9 +59,9 @@ package com.rpgGame.app.ui.main.head
 			updateNormal();
 			updateAttInfo();
 			
-			this.x=320;
+			this.x=330;
 			this.y=42;
-			this.alpha=0;
+			this.alpha=0.5;
 			tween=	TweenLite.to(this, 0.5, {x:283,y:42,alpha:1, ease:Bounce.easeOut,onComplete:onTween});
 			intiEvent();
 		}

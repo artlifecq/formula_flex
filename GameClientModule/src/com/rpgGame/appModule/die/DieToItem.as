@@ -1,16 +1,22 @@
 package com.rpgGame.appModule.die
 {
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.clientConfig.Q_die;
 	
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
 	
 	import org.mokylin.skin.app.siwangfuhuo.tuijianItems_Skin;
 	
+	import starling.display.DisplayObject;
+	
 	public class DieToItem extends SkinUI
 	{
 		private var _skin:tuijianItems_Skin;
 		private var _icon:UIAsset;
+		private var _item:Q_die;
 		
 		public function DieToItem()
 		{
@@ -23,12 +29,30 @@ package com.rpgGame.appModule.die
 		{
 			_icon=new UIAsset();
 			_icon.touchable=false;
+			_icon.x=20;
+			_icon.y=48;
 			this.addChild(_icon);
 		}
 		
-		public  function update():void
+		override protected function onTouchTarget(target:DisplayObject):void
 		{
-			starNum(3);
+			if(target==_skin.btn&&_item.q_panel){
+				AppManager.showAppNoCloseAll(_item.q_panel);
+			}
+		}
+		
+		public  function update(item:Q_die):void
+		{
+			_item=item;
+			if(item){
+				_skin.lbl_name.text=_item.q_name;
+				_icon.styleName=ClientConfig.getPanelIcon("die/"+_item.q_icon.toString());
+				starNum(_item.q_starsnum);
+			}else{
+				_skin.lbl_name.text="";
+				_icon.styleName="";
+				starNum(0);
+			}
 		}
 		
 		private function starNum(num:int):void

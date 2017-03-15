@@ -2,6 +2,7 @@ package com.rpgGame.app.graphics
 {
 	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.display.InterObject3D;
+	import com.rpgGame.app.display2D.AttackFace;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.utils.HeadBloodUtil;
 	import com.rpgGame.app.utils.Render3DTextUtil;
@@ -24,6 +25,7 @@ package com.rpgGame.app.graphics
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
+	import starling.display.DisplayObject;
 
 	/**
 	 *
@@ -100,6 +102,7 @@ package com.rpgGame.app.graphics
 		public var offsetY : int = 0;
 		/**头顶鲜花显示的坐标*/
 		public var flowerY : int = 0;
+		private var showBloodTween:TweenLite;
 
 		public function HeadFace(role : SceneRole)
 		{
@@ -164,7 +167,7 @@ package com.rpgGame.app.graphics
 		override protected function addAllBar() : void
 		{
 			//更新一下容器，从临时的到模型真正容器
-			addElement(_bloodBar);
+//			addElement(_bloodBar);
 			addElement(_nameBar);
 			//			addElement(_countryNameBar);
 			addElement(_junXianBar);
@@ -184,7 +187,6 @@ package com.rpgGame.app.graphics
 		override protected function updateShowAndHide() : void
 		{
 			var nameVisible : Boolean = _role.getAttachVisible(AttachDisplayType.ROLE_HEAD_NAME);
-			showAndHideElement(_bloodBar, false);
 			if (_role.type == SceneCharType.NPC) //NPC，不管是否被选中都显示
 			{
 				showAndHideElement(_nameBar, nameVisible);
@@ -197,11 +199,11 @@ package com.rpgGame.app.graphics
 			}
 			else if (_role.type == SceneCharType.MONSTER) //怪物，全显示或者全隐藏
 			{
-				var monster:Q_monster=MonsterDataManager.getData((_role.data as MonsterData).modelID);
+			/*	var monster:Q_monster=MonsterDataManager.getData((_role.data as MonsterData).modelID);
 				//普通怪在战斗状态显示血条
 				if(monster.q_monster_type==MonsterType.NORMAL&&(_isSelected||(_role.stateMachine&&(_role.stateMachine.isAttacking||_role.stateMachine.isHiting)))){
 					showAndHideElement(_bloodBar, true);
-				}
+				}*/
 				
 				showAndHideElement(_nameBar, _isSelected && nameVisible);
 			}
@@ -238,7 +240,6 @@ package com.rpgGame.app.graphics
 			}
 			else if (_role.type == SceneCharType.PLAYER) //玩家
 			{
-				showAndHideElement(_bloodBar, true);
 				if (_role.isMainChar) //自己
 				{
 					//显示血条、称号、昵称
@@ -254,6 +255,7 @@ package com.rpgGame.app.graphics
 					
 					//选中显示
 					//showAndHideElement( _bloodBar, _isSelected );
+//					showAndHideElement(_bloodBar, true);
 					showAndHideElement(_guildNameBar, _isSelected && !_isCamouflage);
 					showAndHideElement(_familNameBar, _isSelected && !_isCamouflage);
 				}
@@ -268,12 +270,25 @@ package com.rpgGame.app.graphics
 			showAndHideElement(_moodMC, true);
 		}
 		
+		private function sortAttackFace():void
+		{
+			var list:Array=[];
+			 var i:int=0;
+			for(i;i<this.numChildren;i++){
+				 var a:DisplayObject=this.getChildAt(i);
+				if(a is AttackFace){
+					list.push(a);
+				}
+			}
+			for(i;i<list.length;i++){
+				this.addChild(list[i]);
+			}
+		}
+		
 		public function updateAllPosition() : void
 		{
 			updateAllBarPosition();
 		}
-		
-		public function showBlood
 
 		//---------------------------------------------
 		//---------------------------------------------更新位置
@@ -412,7 +427,7 @@ package com.rpgGame.app.graphics
 				//原来没有血条添加一个
 				_bloodBar = HeadBloodBar.create(_role);
 				//				_bloodBar.state = HeadBloodUtil.getRoleBloodState( _role );
-				this.addChild(_bloodBar); //更新一下容器，从临时的到模型真正容器
+//				this.addChild(_bloodBar); //更新一下容器，从临时的到模型真正容器
 			}
 			//更新一下数据
 			_bloodBar.update(_bloodPercent);
@@ -446,8 +461,6 @@ package com.rpgGame.app.graphics
 			{
 				EventManager.dispatchEvent(UPDATE_HEAD_FIGHT_INFO, _role, _bloodPercent);
 			}
-			
-			updateShowAndHide();
 		}
 		//---------------------------------------------
 
@@ -1041,6 +1054,24 @@ package com.rpgGame.app.graphics
 				_moodMC = null;
 			}
 			updateAllBarPosition();
+		}
+		
+		public function showBloodBar():void
+		{
+			this.addChildAt(_bloodBar,0);
+			if(showBloodTween){
+				showBloodTween.kill();
+				showBloodTween=null;
+			}
+			showBloodTween=TweenLite.delayedCall(5,onHideBlood);
+			sortAttackFace();
+		}
+		
+		private function onHideBlood():void
+		{
+			showBloodTween.kill();
+			showBloodTween=null;
+			showAndHideElement(_bloodBar,false);
 		}
 	}
 }
