@@ -1,7 +1,6 @@
 package com.rpgGame.app.state.role.control
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.state.role.control.ControlState;
@@ -9,9 +8,9 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.coreData.info.fight.FightSingleHurt;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
-
+	
 	import flash.utils.Dictionary;
-
+	
 	import gs.TweenLite;
 
 	/**
@@ -58,7 +57,7 @@ package com.rpgGame.app.state.role.control
 		override public function afterExecute() : void
 		{
 			super.afterExecute();
-			var info : ReleaseSpellInfo = _stateReference.info;
+//			var info : SpellResultInfo = _stateReference.info;
 			var hurtVo : FightHurtResult = _stateReference.hurtVo;
 			var i : int = 0;
 			while (hurtVo.hurtList.length)
@@ -73,7 +72,7 @@ package com.rpgGame.app.state.role.control
 					hurtAmount = sVo.hurtAmount;
 				}
 				_count++;
-				var tw : TweenLite = TweenLite.delayedCall(0.3 * i, showSingleHurt, [_count, info, hurtVo.attackerId, hurtVo.roleID, hurtType, hurtAmount]);
+				var tw : TweenLite = TweenLite.delayedCall(0.3 * i, showSingleHurt, [_count, hurtVo, hurtType, hurtAmount]);
 				_delayHurtTws[_count] = tw;
 				i++;
 			}
@@ -104,7 +103,7 @@ package com.rpgGame.app.state.role.control
 			_effectTween = TweenLite.delayedCall(0.1, onEffectComplete);
 		}
 
-		private function showSingleHurt(key : int, info : ReleaseSpellInfo, attackerId : Number, hurtRoleID : Number, hurtType : uint, hurtAmount : int) : void
+		private function showSingleHurt(key : int, hortVo:FightHurtResult, hurtType : uint, hurtAmount : int) : void
 		{
 			var tw : TweenLite = _delayHurtTws[key];
 			tw.kill();
@@ -113,7 +112,7 @@ package com.rpgGame.app.state.role.control
 			delete _delayHurtTws[key];
 
 			playEffect();
-			SpellHitHelper.showSingleHurt(info, attackerId, hurtRoleID, hurtType, hurtAmount);
+			SpellHitHelper.showSingleHurt(hortVo, hortVo.atkorID, hortVo.targetID, hurtType, hurtAmount);
 		}
 
 		private function clearDelayHurtTws() : void

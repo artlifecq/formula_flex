@@ -1,6 +1,5 @@
 package com.rpgGame.core.state.role.action
 {
-	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.state.role.BaseActionState;

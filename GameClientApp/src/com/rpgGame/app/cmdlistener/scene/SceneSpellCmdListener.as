@@ -8,10 +8,12 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
+	import com.rpgGame.app.fight.spell.SpellResultInfo;
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
@@ -28,8 +30,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
 	import com.rpgGame.netData.fight.message.ResFightFailedBroadcastMessage;
 	import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
-
-    import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	
 	import flash.geom.Point;
 	
@@ -55,7 +55,7 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			SocketConnection.addCmdListener(102105,onResFightFailedBroadcastMessage);
 			SocketConnection.addCmdListener(102101,onResFightBroadcastMessage);
-			SocketConnection.addCmdListener(102102,onResAttackResultMessage);
+//			SocketConnection.addCmdListener(102102,onResAttackResultMessage);
 			SocketConnection.addCmdListener(102107,onResAttackVentToClientMessage);
 			SocketConnection.addCmdListener(102114,onSCAttackerResultMessage);
 			SocketConnection.addCmdListener(102103,onResAttackRangeMessage);
@@ -185,7 +185,7 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			GameLog.addShow("技能流水号为： 对目标\t" + msg.uid);
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
-			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg.uid, msg, true);
+			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
 			ReleaseSpellHelper.releaseSpell(info);			
 		}
 		
@@ -193,7 +193,7 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			GameLog.addShow("技能流水号为： 对地\t" + msg.uid  + "\n" + "服务器给的点为：\t" + msg.pos.x +"_" + msg.pos.y);
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
-			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg.uid, msg, true);
+			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
 			ReleaseSpellHelper.releaseSpell(info);
 		}
 		
@@ -205,43 +205,18 @@ package com.rpgGame.app.cmdlistener.scene
 		private function onSCAttackerResultMessage(msg:SCAttackerResultMessage):void
 		{
 			GameLog.addShow("技能伤害流水号为： \t" + msg.uid);
-			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg.uid, msg,true);
+			var info : SpellResultInfo = SpellResultInfo.setSpellResultInfo(msg);
 			SpellHitHelper.fightSpellHitEffect(info);
 			effectCharAttribute(info);
             lockAttack(info);
 		}
-
-		/**
-		 * 技能的后续延时伤害广播(包括自己)(通用)
-		 * @param buffer
-		 *
-		 */
-		private function onResAttackResultMessage(msg:ResAttackResultMessage):void
-		{
-			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(-1, msg);//-1 为不缓存的技能信息，也不知道哪里来的伤害，只知道是后端通知的伤害
-			SpellHitHelper.showSpellSingleHitEffect(info);
-			effectCharAttribute(info);
-            lockAttack(info);
-			
-			//			if (info.atkor && info.atkor.isMainChar)
-			//			{
-			//				GameLog.addShow("技能伤害" + info.flySceneObjID + "效果：" + (info.hurtList.length > 0 ? "伤害" + info.hurtList[0].hurtAmount : "无"));
-			//			}
-			
-			//			SpellAnimationManager.addPosEffectAnimaton(info);
-			//			//
-			//			for each (var bInfo : BuffInfo in info.stateList)
-			//			{
-			//				BuffManager.addBuf(bInfo);
-			//			}
-		}
 		
-		private function effectCharAttribute(info : ReleaseSpellInfo) : void
+		private function effectCharAttribute(info : SpellResultInfo) : void
 		{
 			var hurtList : Vector.<FightHurtResult> = info.hurtList;
 			for each (var hurtResult : FightHurtResult in hurtList)
 			{
-				var role : SceneRole = SceneManager.getSceneObjByID(hurtResult.roleID) as SceneRole;
+				var role : SceneRole = SceneManager.getSceneObjByID(hurtResult.targetID) as SceneRole;
 				if (role && role.usable)
 				{
 					CharAttributeManager.setCharHp(role.data as RoleData, hurtResult.curLife);
@@ -251,12 +226,16 @@ package com.rpgGame.app.cmdlistener.scene
 		}
 
         // 锁定攻击源
-        private function lockAttack(info : ReleaseSpellInfo):void {
-            if (info.isMainCharHited && null == SceneRoleSelectManager.selectedRole) {
+        private function lockAttack(info : SpellResultInfo):void
+		{
+            if (info.isMainCharHited && null == SceneRoleSelectManager.selectedRole)
+			{
                 var hurtList : Vector.<FightHurtResult> = info.hurtList;
-                if (hurtList.length > 0) {
+                if (hurtList.length > 0)
+				{
                     var attacker : SceneRole = SceneManager.getSceneObjByID(hurtList[0].attackerId) as SceneRole;
-                    if (null != attacker) {
+                    if (null != attacker)
+					{
                         SceneRoleSelectManager.selectedRole = attacker;
                     }
                 }

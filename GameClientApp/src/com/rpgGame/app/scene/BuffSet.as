@@ -3,11 +3,8 @@ package com.rpgGame.app.scene
 	import com.game.engine3D.core.poolObject.IInstancePoolClass;
 	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
-	import com.rpgGame.app.state.role.action.PlayActionStateReference;
 	import com.rpgGame.app.state.role.control.BingDongStateReference;
 	import com.rpgGame.app.state.role.control.BuffStateReference;
-	import com.rpgGame.app.state.role.control.FlyFallStateReference;
-	import com.rpgGame.app.state.role.control.FlyHitStateReference;
 	import com.rpgGame.app.state.role.control.FlyUpStateReference;
 	import com.rpgGame.app.state.role.control.HiddingStateReference;
 	import com.rpgGame.app.state.role.control.HunLuanStateReference;
@@ -23,7 +20,6 @@ package com.rpgGame.app.scene
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RenderUnitType;
-	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import gs.TweenLite;
@@ -134,10 +130,11 @@ package com.rpgGame.app.scene
 		{
 			if (!_role)
 				return;
-			handlerRoleState(buffData);
-			
 			removeBuffEffect(buffData.cfgId);
 			var data : Q_buff = buffData.buffData;
+			
+			handlerRoleState(buffData);
+			
 			var animations:Array = data.q_animation.split(";");
 			if (data && animations)
 			{
@@ -279,7 +276,7 @@ package com.rpgGame.app.scene
 			var stateTypes:Array = buffStatesStr.split(",");
 			for(var i:uint=0;i<stateTypes.length;i++)
 			{
-				everyRoleBuffState(int(i),buffData);
+				everyRoleBuffState(int(stateTypes[i]),buffData);
 			}
 		}
 		
@@ -377,17 +374,7 @@ package com.rpgGame.app.scene
 						buffRef.setParams(buffData);
 						_role.stateMachine.transition(RoleStateType.CONTROL_FLY_UP, buffRef);
 						break;
-					case 27://浮空停留buff
-						buffRef = _role.stateMachine.getReference(FlyHitStateReference) as FlyHitStateReference;
-						buffRef.setParams(buffData);
-						_role.stateMachine.transition(RoleStateType.CONTROL_FLY_HIT, buffRef);
-						break;
-					case 28://浮空落地buff
-						buffRef = _role.stateMachine.getReference(FlyFallStateReference) as FlyFallStateReference;
-						buffRef.setParams(buffData);
-						_role.stateMachine.transition(RoleStateType.CONTROL_FLY_FALL, buffRef);
-						break;
-					case 29://技能同步buff
+					case 27://技能同步buff
 						buffRef = _role.stateMachine.getReference(SyncSpellActionStateReference) as SyncSpellActionStateReference;
 						buffRef.setParams(buffData);
 						_role.stateMachine.transition(RoleStateType.CONTROL_SYNC_SPELLACTION, buffRef, true); //切换到“技能动作同步状态”

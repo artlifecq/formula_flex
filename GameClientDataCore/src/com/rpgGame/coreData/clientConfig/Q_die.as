@@ -10,14 +10,18 @@ package com.rpgGame.coreData.clientConfig
 	* @author NEIL
 	* 
 	*/
-	public class Q_tipsinfo
+	public class Q_die
 	{
-		 /**  tips信息数据库 */
+		 /**  顺序ID */
 		public var q_id:int;
-		 /**    */
-		public var q_describe_tittle:String;
-		 /**    */
-		public var q_describe:String;
+		 /**  功能名称 */
+		public var q_name:String;
+		 /**  界面名称 */
+		public var q_panel:String;
+		 /**  星星数量 */
+		public var q_starsnum:int;
+		 /**  图标 */
+		public var q_icon:int;
 
 	}
 }

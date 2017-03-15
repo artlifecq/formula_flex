@@ -3,7 +3,6 @@ package com.rpgGame.app.state.role.control
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.vo.BaseRole;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.coreData.type.RoleStateType;
 
 	/**
@@ -13,7 +12,7 @@ package com.rpgGame.app.state.role.control
 	 */	
 	public class HiddingState extends BuffState
 	{
-		public function HiddingState(type:uint)
+		public function HiddingState()
 		{
 			super(RoleStateType.CONTROL_HIDDING);
 		}
@@ -30,7 +29,6 @@ package com.rpgGame.app.state.role.control
 					{
 						var role : SceneRole = _machine.owner as SceneRole;
 						role.forEachRenderUnit(eachUnVisible);
-						(_machine as RoleStateMachine).actionPause();
 					}
 					else
 						throw new Error("场景隐身状态引用必须是HiddingStateReference类型！");
@@ -40,12 +38,14 @@ package com.rpgGame.app.state.role.control
 		
 		private function eachVisible(role : BaseRole, render : RenderUnit3D) : void
 		{
-			render.visible = true;
+//			render.visible = true;
+			render.alpha = 1;
 		}
 		
 		private function eachUnVisible(role : BaseRole, render : RenderUnit3D) : void
 		{
-			render.visible = false;
+//			render.visible = false;
+			render.alpha = 0;
 		}
 		
 		override public function afterLeave() : void
@@ -53,7 +53,6 @@ package com.rpgGame.app.state.role.control
 			super.afterLeave();
 			if (_machine && !_machine.isDisposed)
 			{
-				(_machine as RoleStateMachine).actionResume();
 				var role : SceneRole = _machine.owner as SceneRole;
 				role.forEachRenderUnit(eachVisible);
 			}

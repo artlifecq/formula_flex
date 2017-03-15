@@ -2,7 +2,6 @@ package com.rpgGame.app.scene
 {
 	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.vo.BaseRole;
-	import com.game.mainCore.libCore.pool.Pool;
 	import com.rpgGame.app.graphics.AttackFaceSprite;
 	import com.rpgGame.app.graphics.BaseHeadFace;
 	import com.rpgGame.app.graphics.BubbleDialogFace;

@@ -30,6 +30,7 @@ package com.rpgGame.coreData.type
 		public static const ACTION_PLAY_ACTION : int = rEnum.next;//播放动作状态
 		public static const ACTION_TRAIL : int = rEnum.next;//追踪状态
 		
+		public static const ACTION_PLAY_SPELL:int = rEnum.next;
 		public static const ACTION_FLY_UP:int = rEnum.next;
 		public static const ACTION_FLY_HIT:int = rEnum.next;
 		public static const ACTION_FLY_FALL:int = rEnum.next;

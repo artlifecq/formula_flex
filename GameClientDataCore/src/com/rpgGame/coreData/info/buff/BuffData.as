@@ -1,5 +1,6 @@
 package com.rpgGame.coreData.info.buff
 {
+	import com.game.engine3D.vo.BaseRole;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ClientBuffCfgData;
 	import com.rpgGame.coreData.clientConfig.ClientBuff;
@@ -27,6 +28,10 @@ package com.rpgGame.coreData.info.buff
 		private var _disappearTime : Number = 0;
 		private var _curtStackCount : uint = 0;
 		private var _buffInfo:BuffInfo;
+		
+		private var _clientData:Object=null;
+		
+		private var _srcRole:BaseRole;
 
 		public function BuffData(roleId : Number) : void
 		{
@@ -194,5 +199,35 @@ package com.rpgGame.coreData.info.buff
 		{
 			_buffId = value;
 		}
+
+		/**
+		 * [{"skill":1008,"up":340,"stay":340,"down":340,"h":300}]
+                           客户端other（上升时间:"up"；被同步的技能ID："skill"；浮空时间："stay"；落地时间："down"；离地高度："h"） 
+		 * @return 
+		 * 
+		 */		
+		public function get clientData():Object
+		{
+			try
+			{
+				_clientData = JSON.parse(_data.q_client_other)[0];
+			}
+			catch(e:Error)
+			{
+				trace(e.message + "\t" + _data.q_buff_id);
+			}
+			return _clientData;
+		}
+
+		public function get srcRole():BaseRole
+		{
+			return _srcRole;
+		}
+
+		public function set srcRole(value:BaseRole):void
+		{
+			_srcRole = value;
+		}
+
 	}
 }

@@ -3,8 +3,10 @@ package com.game.engine3D.manager
 	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.controller.CameraController;
 	import com.game.engine3D.core.StarlingLayer;
+	import com.game.engine3D.utils.UnCatchErrorReport;
 	
 	import flash.display.DisplayObjectContainer;
+	import flash.display.Loader;
 	import flash.display.Stage;
 	import flash.display.StageAlign;
 	import flash.display.StageDisplayState;
@@ -31,6 +33,8 @@ package com.game.engine3D.manager
 	import away3d.entities.EntityLayerType;
 	import away3d.events.Stage3DEvent;
 	import away3d.lights.DirectionalLight;
+	import away3d.log.Log;
+	import away3d.log.LogItem;
 	import away3d.materials.lightpickers.StaticLightPicker;
 	import away3d.tools.utils.Bounds;
 	
@@ -169,7 +173,7 @@ package com.game.engine3D.manager
 				_stage3DProxy.addEventListener(Stage3DEvent.CONTEXT3D_CREATED, onContextCreated);
 				_stage3DProxy.addEventListener(Stage3DEvent.CONTEXT3D_USER_DISABLED_ERROR, showSecurityPanel);
 				_stage3DProxy.addEventListener(Stage3DEvent.CONTEXT3D_UNKONW_ERROR, onContextError);
-				_stage3DProxy.addEventListener(Stage3DEvent.CONTEXT3D_BACKBUFFER_INVALID, onContextError);
+//				_stage3DProxy.addEventListener(Stage3DEvent.CONTEXT3D_BACKBUFFER_INVALID, onContextError);
 			}
 		}
 		
@@ -191,7 +195,7 @@ package com.game.engine3D.manager
 		{
 			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_UNKONW_ERROR, onContextError);
 			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_USER_DISABLED_ERROR, showSecurityPanel);
-			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_BACKBUFFER_INVALID, onContextError);
+//			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_BACKBUFFER_INVALID, onContextError);
 			if (_setupError != null)
 			{
 				_setupError();
@@ -206,7 +210,7 @@ package com.game.engine3D.manager
 		{
 			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_USER_DISABLED_ERROR, showSecurityPanel);
 			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_UNKONW_ERROR, onContextError);
-			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_BACKBUFFER_INVALID, onContextError);
+//			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_BACKBUFFER_INVALID, onContextError);
 			_views = new Vector.<View3D>();
 			for (var i : int = 0; i < _viewCount; i++)
 			{
@@ -738,7 +742,7 @@ package com.game.engine3D.manager
 		
 		public static function registerApplicationLoader(loader : Loader) : void
 		{
-			Stage3DProxy.registerApplicationLoader(loader);
+//			Stage3DProxy.registerApplicationLoader(loader);
 		}
 		
 		private static function onLogCallBack(item : LogItem) : void

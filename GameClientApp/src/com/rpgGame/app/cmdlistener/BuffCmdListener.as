@@ -85,6 +85,7 @@ package com.rpgGame.app.cmdlistener
 //				tarObj.SetFightState(msg.fightState);
 				var buffData:BuffData = new BuffData(msg.personId.ToGID());
 				buffData.buffInfo = msg.buff;
+				buffData.srcRole = srcObj;
 				tarObj.buffSet.addBuff(buffData);
 			}
 		}

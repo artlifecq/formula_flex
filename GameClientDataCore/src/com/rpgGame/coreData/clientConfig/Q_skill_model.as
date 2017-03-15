@@ -44,7 +44,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_blink_speed:int;
 		 /**  跳劈的高度，可以不配置 */
 		public var q_blink_height:int;
-		 /**  技能伤害类型（0默认攻击技能，1治疗技能 2，特殊技能） */
+		 /**  技能伤害类型（0默认攻击技能，1友好技能 2，特殊技能） */
 		public var q_hurt_type:int;
 		 /**  作用对象（1自己，2友好目标，3敌对目标，4当前目标，5场景中鼠标的当前坐标点，6组队 7无目标） */
 		public var q_target:int;
@@ -64,7 +64,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_is_allow_auto_combat:int;
 		 /**  是否可以设为默认技能（0不可设为默认技能，1可以设为默认技能） */
 		public var q_default_enable:int;
-		 /**  是否是锁定技能，必须指定一个目标的技能（0不锁定，1锁定） */
+		 /**  是否是锁定技能，必须指定一个目标的技能（0不锁定，1锁定,2锁定死亡） */
 		public var q_is_locking_spell:int;
 		 /**  显示所需人物等级 */
 		public var q_show_needgrade:int;
@@ -102,6 +102,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_fly_follow:int;
 		 /**  是否计算路径点伤害（0不计算，1计算） */
 		public var q_fly_cal_line:int;
+		 /**  无目标状态是否触发空弹道（0不触发，1触发） */
+		public var q_fly_empty:int;
 		 /**  施法距离限制（自身与目标之间的距离）（单位：格子）,地面行走魔法表示行走距离(小于等于3：判定为近战攻击（处理音效）大于3：判定为远程攻击（处理音效）)   0表示无限距离 */
 		public var q_range_limit:int;
 		 /**  保持间距（单位：像素）（不配默认使用施法范围） */

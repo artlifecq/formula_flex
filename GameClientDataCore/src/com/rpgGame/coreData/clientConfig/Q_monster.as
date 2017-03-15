@@ -132,6 +132,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_double_weakend:int;
 		 /**  怪物史记类型[勋章类型,单次伤害值,每次产出勋章个数] */
 		public var q_redord_type:String;
+		 /**  推荐战斗(只有精英和BOSS显示) */
+		public var q_fighting:int;
 
 	}
 }

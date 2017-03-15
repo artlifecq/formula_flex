@@ -139,7 +139,7 @@ package com.rpgGame.app.manager.shell
             buffer.writeVarint32(m.z);
             buffer.position = 0;
             var info : ReleaseSpellInfo = new ReleaseSpellInfo();
-            info.readFrom(1, null);
+            info.readFrom(null);
             ReleaseSpellHelper.releaseSpell(info);
         }
         

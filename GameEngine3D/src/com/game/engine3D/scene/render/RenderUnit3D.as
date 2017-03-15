@@ -1230,11 +1230,11 @@ package com.game.engine3D.scene.render
 				}
 				else
 				{
-					for each (var meshElement : ObjectContainer3D in _drawElements)
+					for each (var element : ObjectContainer3D in _drawElements)
 					{
-						if (meshElement is IAnimatorOwner)
+						if (element is IAnimatorOwner)
 						{
-							(meshElement as IAnimatorOwner).animator = _independentAnimator;
+							(element as IAnimatorOwner).animator = _independentAnimator;
 						}
 					}
 				}
@@ -1278,19 +1278,19 @@ package com.game.engine3D.scene.render
 			var currAnimator : AnimatorBase;
 			if (_drawElements)
 			{
-				for each (var meshElement : ObjectContainer3D in _drawElements)
+				for each (var element : ObjectContainer3D in _drawElements)
 				{
 					currAnimator = null;
-					if (meshElement is IAnimatorOwner)
+					if (element is IAnimatorOwner)
 					{
-						currAnimator = (meshElement as IAnimatorOwner).animator as AnimatorBase;
+						currAnimator = (element as IAnimatorOwner).animator as AnimatorBase;
 					}
 					if (_isElementStatus)
 					{
-						meshElement.visible = _visible && (!_setVisibleMap.hasOwnProperty(meshElement.name) || _setVisibleMap[meshElement.name]) && meshElement.name == animatStatus;
+						element.visible = _visible && (!_setVisibleMap.hasOwnProperty(element.name) || _setVisibleMap[element.name]) && element.name == animatStatus;
 						if (_isRendering && _visible && _isInViewDistance)
 						{
-							if (meshElement.visible)
+							if (element.visible)
 							{
 								if (currAnimator)
 								{
@@ -1335,7 +1335,7 @@ package com.game.engine3D.scene.render
 						if (currAnimator)
 						{
 							currAnimator.playbackSpeed = _animateSpeed;
-							if (meshElement.visible)
+							if (element.visible)
 							{
 								_animator = currAnimator;
 								_totalDuration = _animator.duration;
@@ -1424,12 +1424,12 @@ package com.game.engine3D.scene.render
 										{
 											currAnimator.start(0);
 										}
-										validateChildrenAnimation(meshElement);
+										validateChildrenAnimation(element);
 									}
 									else
 									{
 										currAnimator.stop();
-										validateChildrenAnimation(meshElement);
+										validateChildrenAnimation(element);
 									}
 									currAnimator.playbackSpeed = 1;
 								}
@@ -1438,8 +1438,8 @@ package com.game.engine3D.scene.render
 									if (_isRendering && _visible && _isInViewDistance)
 									{
 										currAnimator.start(offsetTime);
-										validateChildrenAnimation(meshElement, offsetTime);
-										if (meshElement.visible)
+										validateChildrenAnimation(element, offsetTime);
+										if (element.visible)
 										{
 											if (_playing)
 											{
@@ -1460,19 +1460,19 @@ package com.game.engine3D.scene.render
 											else
 											{
 												currAnimator.stop();
-												validateChildrenAnimation(meshElement);
+												validateChildrenAnimation(element);
 											}
 										}
 										else
 										{
 											currAnimator.stop();
-											validateChildrenAnimation(meshElement);
+											validateChildrenAnimation(element);
 										}
 									}
 									else
 									{
 										currAnimator.stop();
-										validateChildrenAnimation(meshElement);
+										validateChildrenAnimation(element);
 									}
 									currAnimator.playbackSpeed = _animateSpeed;
 									if (!_animator)
@@ -2840,6 +2840,7 @@ package com.game.engine3D.scene.render
 			_pickDummyBindBone = null;
 			_defalutStatus = null;
 			_secondStatusGetter = null;
+			_compositeMesh = null;
 			_repeat = 0;
 			_lifecycle = 0;
 			_playCount = 0;
@@ -3564,19 +3565,22 @@ package com.game.engine3D.scene.render
 			}
 			if (_drawElements)
 			{
-				for each (var meshElement : ObjectContainer3D in _drawElements)
+				for each (var element : ObjectContainer3D in _drawElements)
 				{
 					if (_compositeMesh)
 					{
-						var index : int = _compositeMesh.getUnitIndex(Mesh(meshElement));
-						if (index > -1)
-							_compositeMesh.removeUnitByIndex(index);
+						if (element is Mesh)
+						{
+							var index : int = _compositeMesh.getUnitIndex(Mesh(element));
+							if (index > -1)
+								_compositeMesh.removeUnitByIndex(index);
+						}
 					}
-					if (meshElement.parent)
+					if (element.parent)
 					{
-						meshElement.parent.removeChild(meshElement);
+						element.parent.removeChild(element);
 					}
-					meshElement.hookingJointName = null;
+					element.hookingJointName = null;
 				}
 				_drawElements = null;
 			}

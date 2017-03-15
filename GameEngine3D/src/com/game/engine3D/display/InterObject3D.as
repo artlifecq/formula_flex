@@ -98,6 +98,10 @@ package com.game.engine3D.display
 
 		override public function dispose() : void
 		{
+			if (this.parent)
+			{
+				this.parent.removeChild(this);
+			}
 			if (_container3D)
 			{
 				PoolContainer3D.recycle(_container3D);

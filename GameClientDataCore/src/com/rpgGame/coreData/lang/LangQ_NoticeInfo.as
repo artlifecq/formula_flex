@@ -2072,6 +2072,22 @@ package com.rpgGame.coreData.lang
 		public static const SkillError_18:String = "SkillError_18";
 		 /**  召唤物达到上限 */
 		public static const SkillError_19:String = "SkillError_19";
+		 /**  施法者死亡 */
+		public static const SkillError_20:String = "SkillError_20";
+		 /**  不可移动 */
+		public static const SkillError_21:String = "SkillError_21";
+		 /**  无敌 */
+		public static const SkillError_22:String = "SkillError_22";
+		 /**  不是有效单位 */
+		public static const SkillError_23:String = "SkillError_23";
+		 /**  请选择死亡单位 */
+		public static const SkillError_24:String = "SkillError_24";
+		 /**  怒气不足 */
+		public static const SkillError_25:String = "SkillError_25";
+		 /**  弩塔数量不足 */
+		public static const SkillError_26:String = "SkillError_26";
+		 /**  金针数量不足 */
+		public static const SkillError_27:String = "SkillError_27";
 
 	}
 }

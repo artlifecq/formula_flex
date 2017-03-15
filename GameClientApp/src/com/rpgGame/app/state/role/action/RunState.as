@@ -149,6 +149,10 @@ package com.rpgGame.app.state.role.action
 			{
 				return false;
 			}
+			else if((_machine as RoleStateMachine).isFly)
+			{
+				return false;
+			}
 			return true;
 		}
 

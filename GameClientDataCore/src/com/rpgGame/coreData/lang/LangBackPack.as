@@ -298,6 +298,8 @@ package com.rpgGame.coreData.lang
 		public static const ITEM_dropItemToScene_1:String = "ITEM_dropItemToScene_1";
 		 /**  此物品已经绑定不可以丢弃！ */
 		public static const ITEM_dropItemToScene_2:String = "ITEM_dropItemToScene_2";
+		 /**  这件物品看起来还不错哦！你确定要丢弃吗？ */
+		public static const ITEM_dropItemToScene_3:String = "ITEM_dropItemToScene_3";
 		 /**  交易中不能进行整理 */
 		public static const ITEM_Not_ClearItem:String = "ITEM_Not_ClearItem";
 		 /**  点击背包中物品可出售，双击退出 */
@@ -322,6 +324,8 @@ package com.rpgGame.coreData.lang
 		public static const UNLOCK_GRID:String = "UNLOCK_GRID";
 		 /**  叠加不绑定物品将使物品变为绑定！是否继续操作 */
 		public static const CHANGE_ITEM_BIND:String = "CHANGE_ITEM_BIND";
+		 /**  整理CD中，剩余#s */
+		public static const ITEM_SORT_CD:String = "ITEM_SORT_CD";
 
 	}
 }

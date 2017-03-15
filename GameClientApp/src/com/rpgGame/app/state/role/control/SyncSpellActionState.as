@@ -3,7 +3,6 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.action.PlayActionStateReference;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
-	import com.rpgGame.coreData.cfg.SpellEffectDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.type.RoleStateType;
@@ -11,7 +10,7 @@ package com.rpgGame.app.state.role.control
 	public class SyncSpellActionState extends BuffState
 	{
 		private var role : SceneRole;
-		public function SyncSpellActionState(type:uint)
+		public function SyncSpellActionState()
 		{
 			super(RoleStateType.CONTROL_SYNC_SPELLACTION);
 		}
@@ -36,11 +35,14 @@ package com.rpgGame.app.state.role.control
 		
 		private function playSpell(buffData:BuffData):void
 		{
-			var spellEffectData:Q_SpellEffect = SpellDataManager.getSpellEffectData(buffData.buffInfo);
+			var spellEffectData:Q_SpellEffect = SpellDataManager.getSpellEffectData(buffData.clientData.skill);
+			var actionType:String = spellEffectData.attack_motion;
+			
+			var startTime:Number = buffData.totalTime - buffData.disappearTime;
 			
 			var ref : PlayActionStateReference = role.stateMachine.getReference(PlayActionStateReference) as PlayActionStateReference;
-			ref.setParams();
-			role.stateMachine.transition(RoleStateType.ACTION_PLAY_ACTION, ref, true); //切换到“播放状态”
+			ref.setParams(actionType,1,startTime);
+			role.stateMachine.transition(RoleStateType.ACTION_PLAY_SPELL, ref, true);
 		}
 		
 		override public function dispose():void

@@ -14,8 +14,10 @@ package com.rpgGame.coreData.clientConfig
 	{
 		 /**  ID */
 		public var q_id:int;
-		 /**  资源路径 */
-		public var q_res:String;
+		 /**  状态0特效资源 */
+		public var q_res_0:String;
+		 /**  状态1特效资源 */
+		public var q_res_1:String;
 		 /**  绑定器 */
 		public var q_attachs:String;
 

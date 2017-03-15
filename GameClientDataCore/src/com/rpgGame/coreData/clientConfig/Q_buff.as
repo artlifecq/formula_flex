@@ -88,6 +88,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_fihgt:int;
 		 /**  关联buff技能（填技能ID） */
 		public var q_other:String;
+		 /**  客户端other（上升时间:up；被同步的技能ID：skill；浮空时间：stay；落地时间：down；离地高度：h） */
+		public var q_client_other:String;
 
 	}
 }
