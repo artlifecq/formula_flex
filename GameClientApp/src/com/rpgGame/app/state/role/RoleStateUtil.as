@@ -13,6 +13,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.state.role.action.BlinkStateReference;
+	import com.rpgGame.app.state.role.action.FallStateReference;
 	import com.rpgGame.app.state.role.action.RunStateReference;
 	import com.rpgGame.app.state.role.control.BeatMoveStateReference;
 	import com.rpgGame.app.state.role.control.BlinkMoveStateReference;
@@ -340,6 +341,13 @@ package com.rpgGame.app.state.role
 			ref.onMove(onBeatMove);
 			role.stateMachine.transition(RoleStateType.CONTROL_BEAT_MOVE, ref);
 		}
+		
+		public static function fallToPos(stiffTime:int,role : SceneRole, pos : Point, atkorPos : Point, speed : int):void
+		{
+			var fallRef : FallStateReference = role.stateMachine.getReference(FallStateReference) as FallStateReference;
+			fallRef.setParams(stiffTime,pos, atkorPos, speed);
+			role.stateMachine.transition(RoleStateType.ACTION_FALL, fallRef);
+		}
 
 		private static function onBeatMove(ref : BeatMoveStateReference) : void
 		{
@@ -373,7 +381,7 @@ package com.rpgGame.app.state.role
 		{
 			var spellInfo : ReleaseSpellInfo = ref.data as ReleaseSpellInfo;
 			SpellAnimationHelper.addDestEffect(ref.targetPos.x, ref.targetPos.y, ref.angle, spellInfo);
-			SpellHitHelper.fightSpellHitEffect(spellInfo);
+//			SpellHitHelper.fightSpellHitEffect(spellInfo);
 		}
 
 		/**

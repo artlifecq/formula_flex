@@ -36,7 +36,7 @@ package com.rpgGame.app.state.role.control
 							_stiffTween.kill();
 							_stiffTween = null;
 						}
-						var duration : Number = _stateReference.disappearTime;
+						var duration : Number = _stateReference.buffData.disappearTime;
 						_stiffTween = TweenLite.delayedCall(duration * 0.001, onRemoveBuff);
 					}
 					else

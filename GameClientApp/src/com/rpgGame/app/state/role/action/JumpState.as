@@ -12,9 +12,9 @@ package com.rpgGame.app.state.role.action
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
-
+	
 	import away3d.animators.transitions.CrossfadeTransition;
-
+	
 	import gs.TweenLite;
 
 	/**
@@ -135,6 +135,7 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.KNIFE_LIGHT:
 					break;
 				case RenderUnitType.WEAPON_EFFECT:
+				case RenderUnitType.DEPUTY_WEAPON_EFFECT:
 					render.visible = true;
 					break;
 				case RenderUnitType.EFFECT:
@@ -206,7 +207,7 @@ package com.rpgGame.app.state.role.action
 					_totalFrameTween = null;
 				}
 				var bodyAp : RenderUnit3D = (_machine.owner as SceneRole).avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
-				var totalFrameTm : uint = (bodyAp ? bodyAp.totalDuration : 0);
+				var totalFrameTm : uint = (bodyAp ? bodyAp.totalDuration : 0);//动画的总时间
 				if (totalFrameTm > 0)
 				{
 					var breakFrameTm : int = _isSecondJump ? JUMP_BREAK_TIME : SECOND_JUMP_BREAK_TIME;

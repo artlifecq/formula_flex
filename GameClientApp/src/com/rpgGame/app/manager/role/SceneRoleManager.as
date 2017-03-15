@@ -2,8 +2,10 @@ package com.rpgGame.app.manager.role
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
+	import com.game.engine3D.vo.BaseObj3D;
 	import com.game.engine3D.vo.map.ClientMapAreaData;
 	import com.game.engine3D.vo.map.ClientMapAreaGridData;
+	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.graphics.StallHeadFace;
 	import com.rpgGame.app.manager.AvatarManager;
@@ -131,6 +133,24 @@ package com.rpgGame.app.manager.role
 			return role;
 		}
 
+		
+		public function removeBornEffectAndShow(role:SceneRole,mountResID:String,obj:BaseObj3D):void
+		{
+			var objId : Number = obj.id;
+			SceneManager.removeSceneObjFromScene(obj);
+			
+			if (mountResID)
+			{
+				var ref1 : RidingStateReference = role.stateMachine.getReference(RidingStateReference) as RidingStateReference;
+				ref1.setParams(mountResID, null);
+				role.stateMachine.transition(RoleStateType.CONTROL_RIDING, ref1);
+			}
+			else
+			{
+				//执行主换装更新
+				AvatarManager.updateAvatar(role);
+			}
+		}
 		/**
 		 * 创建怪物
 		 * @param data
@@ -165,12 +185,16 @@ package com.rpgGame.app.manager.role
 			data.direction = bornData ? bornData.q_direction : 0;
 			data.immuneDeadBeat = /*bornData ? bornData.immuneDeadBeat :*/ false;
 
+			if(bornData.q_born_animation)//有出生特效
+			{
+				SpellAnimationHelper.addBornEffect(role,data.x, data.y,data.direction,bornData.q_born_animation);
+			}
 			var mountResID : String = bornData ? bornData.q_mount_res : "";
 			if (mountResID)
 			{
-				var ref : RidingStateReference = role.stateMachine.getReference(RidingStateReference) as RidingStateReference;
-				ref.setParams(mountResID, null);
-				role.stateMachine.transition(RoleStateType.CONTROL_RIDING, ref);
+				var ref1 : RidingStateReference = role.stateMachine.getReference(RidingStateReference) as RidingStateReference;
+				ref1.setParams(mountResID, null);
+				role.stateMachine.transition(RoleStateType.CONTROL_RIDING, ref1);
 			}
 			else
 			{

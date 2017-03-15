@@ -109,11 +109,12 @@ package com.game.engine3D.vo
 		{
 			if (!_useSimpleShadow)
 				return;
+			GlobalTexture.removeTextureCallBack(_simpleShadowTextureUrl, onShadowTextureComplete);
 			_useSimpleShadow = false;
 			_simpleShadowShowing = false;
 			_simpleShadowTextureUrl = null;
 			_simpleShadowScale = 0;
-			GlobalTexture.removeTextureCallBack(_simpleShadowTextureUrl, onShadowTextureComplete);
+			
 			if (_simpleShadowMesh)
 			{
 				if (_simpleShadowMesh.parent)
@@ -150,7 +151,7 @@ package com.game.engine3D.vo
 			{
 				if (_graphicDis.parent)
 					_graphicDis.parent.addChild(_simpleShadowMesh);
-				addSyncInfo(new BaseObjSyncInfo(_simpleShadowMesh, true, false));
+				addSyncInfo(new BaseObjSyncInfo(_simpleShadowMesh, true, false,true));
 			}
 			_simpleShadowMesh.scaleX = _simpleShadowMesh.scaleZ = _simpleShadowScale;
 			_simpleShadowShowing = true;

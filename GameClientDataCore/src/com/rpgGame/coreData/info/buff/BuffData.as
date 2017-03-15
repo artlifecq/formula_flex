@@ -1,5 +1,6 @@
 package com.rpgGame.coreData.info.buff
 {
+	import com.game.engine3D.vo.BaseRole;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ClientBuffCfgData;
 	import com.rpgGame.coreData.clientConfig.ClientBuff;
@@ -9,12 +10,11 @@ package com.rpgGame.coreData.info.buff
 	import com.rpgGame.netData.buff.bean.BuffInfo;
 	
 	/**
-	 *
-	 * Buff数据
-	 * @author L.L.M.Sunny
-	 * 创建时间：2016-05-06 下午2:53:32
-	 *
-	 */
+	 * buff数据--部分数据是客户端从服务器读过来，另外部分数据是读buff表的 
+	 * buff相关的都是围绕这个数据来表现的
+	 * @author NEIL
+	 * 
+	 */	
 	public class BuffData extends BaseFaceInfo
 	{
 		private var _buffId:Number = 0;//服务器生成id
@@ -24,15 +24,14 @@ package com.rpgGame.coreData.info.buff
 		private var _specialData : Object = null;
 		private var _description : String = "";
 		
-		private var _dizziness:Boolean;
-		private var _freeze:Boolean;
-		private var _silence:Boolean;
-		private var _chaos:Boolean;
-		private var _hiding:Boolean;
 		private var _totalTime:Number = 0;
 		private var _disappearTime : Number = 0;
 		private var _curtStackCount : uint = 0;
 		private var _buffInfo:BuffInfo;
+		
+		private var _clientData:Object=null;
+		
+		private var _srcRole:BaseRole;
 
 		public function BuffData(roleId : Number) : void
 		{
@@ -45,6 +44,12 @@ package com.rpgGame.coreData.info.buff
 			if (cfgId > 0 && !_data && !_specialData)
 				_data = BuffStateDataManager.getData(cfgId);
 			return _data;
+		}
+		
+		public function get buffStates():String
+		{
+			var str:String = _data.q_action_type;
+			return str.substring(1,str.length-1);
 		}
 
 		public function get description() : String
@@ -196,65 +201,33 @@ package com.rpgGame.coreData.info.buff
 		}
 
 		/**
-		 * EBUFFTYPE_DIZZINESS("眩晕", 1),                   // 不能攻击,不能移动
-		EBUFFTYPE_FREEZE("定身", 2),                      // 不能移动跳跃
-		EBUFFTYPE_SILENCE("沉默", 3),                     // 不能攻击
-		EBUFFTYPE_CHAOS("混乱", 4),                       //
-		EBUFFTYPE_HIDING("隐身", 5),                      // 
-		 */
-		public function get dizziness():Boolean
+		 * [{"skill":1008,"up":340,"stay":340,"down":340,"h":300}]
+                           客户端other（上升时间:"up"；被同步的技能ID："skill"；浮空时间："stay"；落地时间："down"；离地高度："h"） 
+		 * @return 
+		 * 
+		 */		
+		public function get clientData():Object
 		{
-			return _dizziness;
+			try
+			{
+				_clientData = JSON.parse(_data.q_client_other)[0];
+			}
+			catch(e:Error)
+			{
+				trace(e.message + "\t" + _data.q_buff_id);
+			}
+			return _clientData;
 		}
 
-		/**
-		 * @private
-		 */
-		public function set dizziness(value:Boolean):void
+		public function get srcRole():BaseRole
 		{
-			_dizziness = value;
+			return _srcRole;
 		}
 
-		public function get freeze():Boolean
+		public function set srcRole(value:BaseRole):void
 		{
-			return _freeze;
+			_srcRole = value;
 		}
-
-		public function set freeze(value:Boolean):void
-		{
-			_freeze = value;
-		}
-
-		public function get silence():Boolean
-		{
-			return _silence;
-		}
-
-		public function set silence(value:Boolean):void
-		{
-			_silence = value;
-		}
-
-		public function get chaos():Boolean
-		{
-			return _chaos;
-		}
-
-		public function set chaos(value:Boolean):void
-		{
-			_chaos = value;
-		}
-
-		public function get hiding():Boolean
-		{
-			return _hiding;
-		}
-
-		public function set hiding(value:Boolean):void
-		{
-			_hiding = value;
-		}
-
 
 	}
 }

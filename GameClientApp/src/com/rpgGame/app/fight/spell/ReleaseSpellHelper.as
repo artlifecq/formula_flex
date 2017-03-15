@@ -44,7 +44,7 @@ package com.rpgGame.app.fight.spell
 				}
 				else
 				{
-					SpellHitHelper.fightSpellHitEffect(spellInfo);
+//					SpellHitHelper.fightSpellHitEffect(spellInfo);
 				}
 			}
 			else
@@ -75,7 +75,7 @@ package com.rpgGame.app.fight.spell
 				}
 				else
 				{
-					if (ref)
+					/*if (ref)
 					{
 						var hurtDelay : int = ref.hitFrameTime;
 						if (spellInfo.hurtDelay > hurtDelay)
@@ -88,7 +88,7 @@ package com.rpgGame.app.fight.spell
 					else
 					{
 						SpellHitHelper.fightSpellHitEffect(spellInfo);
-					}
+					}*/
 				}
 			}
 

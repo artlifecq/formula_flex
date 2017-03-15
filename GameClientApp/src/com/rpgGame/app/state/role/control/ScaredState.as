@@ -4,12 +4,11 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.action.RunStateReference;
-	import com.rpgGame.coreData.cfg.activityHall.racing.RacingCfgData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
-
+	
 	import flash.geom.Vector3D;
-
+	
 	import away3d.pathFinding.DistrictWithPath;
 
 	/**
@@ -53,7 +52,7 @@ package com.rpgGame.app.state.role.control
 
 							var ref : ScaredMoveStateReference = role.stateMachine.getReference(ScaredMoveStateReference) as ScaredMoveStateReference;
 							ref.dispose();
-							ref.setParams(posAry, _stateReference.disappearTime, /*RacingCfgData.miscData.moveSpeed*/400);
+							ref.setParams(posAry, _stateReference.buffData.disappearTime, /*RacingCfgData.miscData.moveSpeed*/400);
 							ref.onMove(onWalkMove);
 							ref.onThrough(onWalkThrough);
 							ref.onStop(onWalkStop);

@@ -172,6 +172,10 @@ package com.rpgGame.app.state.role.action
 					return false;
 				else if (prevState.type == RoleStateType.ACTION_BEAT_BACK)
 					return false;
+				else if((_machine as RoleStateMachine).isFly)
+				{
+					return false;
+				}
 			}
 			return true;
 		}

@@ -23,6 +23,7 @@ package com.rpgGame.app.manager
 		public static const SHORTCUTS_LEN : uint = 10;
 		private var shortcutsDataMap : HashMap;
 		private var _tempSpells:HashMap;
+		private var _isDown : Boolean = false;
 
 		public function ShortcutsManger()
 		{
@@ -270,7 +271,11 @@ package com.rpgGame.app.manager
 					//使用这个技能，走释放技能的流程
                     var config : Q_skill_model = CastSpellHelper.getSpellData(shortData.id);
                     if (isKeyboard && null != config && 1 == config.q_skill_state) {
+						if (_isDown) {
+							return true;
+						}
                         SpellSender.reqSkillContiState(shortData.id, 1);
+						this._isDown = true;
                         return true;
                     }
 					CastSpellHelper.shortcutsTryCaseSpell(shortData.id);
@@ -298,7 +303,8 @@ package com.rpgGame.app.manager
                 case ShortcutsTypeEnum.SKILL_TYPE:
                     //使用这个技能，走释放技能的流程
                     var config : Q_skill_model = CastSpellHelper.getSpellData(shortData.id);
-                    if (isKeyboard && null != config && 1 == config.q_skill_state) {
+                    if (this._isDown && isKeyboard && null != config && 1 == config.q_skill_state) {
+						this._isDown = false;
                         SpellSender.reqSkillContiState(shortData.id, 0);
                         return true;
                     }

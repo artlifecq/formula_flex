@@ -82,6 +82,7 @@ package com.rpgGame.app.state.role.action
 						render.stop(time);
 					break;
 				case RenderUnitType.KNIFE_LIGHT:
+				case RenderUnitType.SPELL_SELF_EFFECT:
 					render.visible = true;
 					render.repeat = _stateReference.repeat;
 					render.play(time);

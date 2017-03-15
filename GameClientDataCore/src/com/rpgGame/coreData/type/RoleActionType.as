@@ -44,6 +44,10 @@ package com.rpgGame.coreData.type
 		public static const FALL : String = "fall";
 		/** 起身 **/
 		public static const GETUP : String = "getup";
+		
+		public static const FLY:String = "fly";
+		public static const FLY_HIT:String = "flyhit";
+		public static const DROPOUT:String = "dropout";
 
 		public static function getActionType(type : String, onMount : Boolean = false) : String
 		{

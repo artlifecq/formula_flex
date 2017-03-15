@@ -231,7 +231,7 @@ package com.rpgGame.app.scene.animator
 		
 		private function onTimeOutRemove() : void
 		{
-			SpellHitHelper.fightSpellHitEffect(_spellInfo);
+//			SpellHitHelper.fightSpellHitEffect(_spellInfo);
 			onRemoveRender();
 		}
 		
@@ -381,7 +381,7 @@ package com.rpgGame.app.scene.animator
 		{
 			if (_renderSet && _renderSet.usable)
 			{
-				SpellHitHelper.fightSpellHitEffect(_spellInfo);
+//				SpellHitHelper.fightSpellHitEffect(_spellInfo);
 				
 				_renderSet.x = _endPosX;
 				_renderSet.z = _endPosZ;
