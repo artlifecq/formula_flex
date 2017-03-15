@@ -324,6 +324,8 @@ package com.rpgGame.coreData.lang
 		public static const UNLOCK_GRID:String = "UNLOCK_GRID";
 		 /**  叠加不绑定物品将使物品变为绑定！是否继续操作 */
 		public static const CHANGE_ITEM_BIND:String = "CHANGE_ITEM_BIND";
+		 /**  整理CD中，剩余#s */
+		public static const ITEM_SORT_CD:String = "ITEM_SORT_CD";
 
 	}
 }

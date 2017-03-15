@@ -199,7 +199,7 @@ package com.rpgGame.app.graphics
 			{
 				var monster:Q_monster=MonsterDataManager.getData((_role.data as MonsterData).modelID);
 				//普通怪在战斗状态显示血条
-				if(monster.q_monster_type==MonsterType.NORMAL&&_role.stateMachine&&(_role.stateMachine.isAttacking||_role.stateMachine.isHiting)){
+				if(monster.q_monster_type==MonsterType.NORMAL&&(_isSelected||(_role.stateMachine&&(_role.stateMachine.isAttacking||_role.stateMachine.isHiting)))){
 					showAndHideElement(_bloodBar, true);
 				}
 				
@@ -444,6 +444,8 @@ package com.rpgGame.app.graphics
 			{
 				EventManager.dispatchEvent(UPDATE_HEAD_FIGHT_INFO, _role, _bloodPercent);
 			}
+			
+			updateShowAndHide();
 		}
 		//---------------------------------------------
 

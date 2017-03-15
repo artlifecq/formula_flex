@@ -1,9 +1,9 @@
 package com.rpgGame.app.ui.main.head
 {
-	import com.game.engine2D.scene.StarlingLayerManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
-	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.enum.JobEnum;
@@ -11,14 +11,15 @@ package com.rpgGame.app.ui.main.head
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.AssetUrl;
 	
-	import flash.geom.Point;
-	
 	import feathers.controls.UIAsset;
 	
 	import gs.TweenLite;
+	import gs.easing.Bounce;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.head.head_max_Skin;
+	
+	import starling.display.DisplayObject;
 	
 	/**
 	 *玩家头像 
@@ -55,10 +56,10 @@ package com.rpgGame.app.ui.main.head
 			updateNormal();
 			updateAttInfo();
 			
-			this.x=_stage.mouseX;
-			this.y=_stage.mouseY;
+			this.x=320;
+			this.y=42;
 			this.alpha=0;
-			tween=TweenLite.to(this,0.5,{x:283,y:42,alpha:1,onComplete:onTween});
+			tween=	TweenLite.to(this, 0.5, {x:283,y:42,alpha:1, ease:Bounce.easeOut,onComplete:onTween});
 			intiEvent();
 		}
 		
@@ -80,6 +81,15 @@ package com.rpgGame.app.ui.main.head
 		private function intiEvent():void
 		{
 			EventManager.addEvent(MainPlayerEvent.NOWHP_CHANGE, changeAtt);			
+		}
+		
+		override protected function onTouchTarget(target : DisplayObject) : void 
+		{
+				switch (target) {
+					case this._skin.btn_cha:
+						AppManager.showApp(AppConstant.PLAYERINFO_PANEL,_roleData);
+						break;
+				}
 		}
 		
 		override protected function onHide():void

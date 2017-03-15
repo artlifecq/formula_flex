@@ -71,6 +71,8 @@ package com.rpgGame.core.app
 		public static var UIDEMO_PANEL:String = createAppInfo("demo.UIDemoPanel");
 		/** 人物面板 **/
 		public static var ROLE_PANEL:String = createAppInfo("role.RolePanel","beibao");
+		/** 玩家信息面板 **/
+		public static var PLAYERINFO_PANEL:String = createAppInfo("role.PlayerInfoPanel","beibao");
 		/** 查看面板*/
 		public static var LOOK_PANEL:String = createAppInfo("look.LookPanel","look");
 		/** 背包面板 **/

@@ -48,25 +48,12 @@ package com.rpgGame.app.manager
 				switch (attributeType)
 				{
 					case CharAttributeType.HP:
-						offset = attributeValue - data.totalStat.hp;
-						
-//						data.hp = attributeValue;
-						
 						updateBloodBar(data);
-						
 						EventManager.dispatchEvent(MainPlayerEvent.NOWHP_CHANGE, data);
 						if (data.type == RoleType.TYPE_LIANG_CANG)
 						{
 							EventManager.dispatchEvent(TaoNiEvent.TAO_NI_LIANG_CANG_STATE_CHANGE, data, CharAttributeType.HP);
 						}
-						if (data.id == MainRoleManager.actorID) //自己看到就好了
-						{
-							if(  offset > 0){
-								FightFaceHelper.showAttChange(EnumHurtType.ADDHP, offset);//回血
-							}else if(offset<0){
-								FightFaceHelper.showAttChange(EnumHurtType.SUBHP, offset);//掉血
-							}
-						}	
 						break;
 					case CharAttributeType.MAX_HP:
 						data.totalStat.life = attributeValue;
@@ -98,7 +85,7 @@ package com.rpgGame.app.manager
 				dispatchEvent(data.id, attributeType, attributeValue);
 			}
 		}
-
+		
 		public static function setCharHp(data : RoleData, hpValue : int) : void
 		{
 			setAttributeValue(data, CharAttributeType.HP, hpValue);

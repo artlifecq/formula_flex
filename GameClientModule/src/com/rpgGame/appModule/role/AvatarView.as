@@ -69,6 +69,9 @@ package com.rpgGame.appModule.role
 		private var _zhandouliEftContaner:Inter3DContainer;
 		private var _zhandouliEft:InterObject3D;
 		
+		private var _roleData:HeroData;
+		private var isMainRole:Boolean;
+		
 		
 		public function AvatarView(skin:juese_Skin)
 		{
@@ -148,18 +151,30 @@ package com.rpgGame.appModule.role
 			return false;
 		}
 		
-		public function show():void
+		public function show(data:HeroData):void
 		{
+			_roleData=data;
 			initEvent();
+			
+			isMainRole=MainRoleManager.actorInfo==data;
+		
+			var gridNum:int=equipGrids.length;
+			for(var i:int=0;i<gridNum;i++){
+				equipGrids[i].touchable=isMainRole;
+			}
 			
 			updateRole();
 			_avatar.curRole.stateMachine.transition(RoleStateType.ACTION_SHOW);
 			updateBaseInfo();
-			if(!ItemSender.isReqRole){
-				//等待背包请求装备数据一起返回
-				EventManager.addEvent(ItemEvent.ITEM_INIT,initDatas);
-			}else{
-				updateRoleEquip();
+			
+			if(isMainRole){
+				if(!ItemSender.isReqRole){//等待背包请求装备数据一起返回
+					EventManager.addEvent(ItemEvent.ITEM_INIT,initDatas);
+				}else{
+					updateRoleEquip();
+				}
+			}else{//获取玩家的装备列表
+				
 			}
 		}
 		
@@ -229,11 +244,6 @@ package com.rpgGame.appModule.role
 		
 		private function initEvent():void
 		{
-			if(ItemSender.isReqRole){
-				updateRoleEquip();
-			}
-			
-		
 			EventManager.addEvent(ItemEvent.ITEM_DROPED, onDropItem);
 			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateTxt);//基本属性改变
 			
@@ -354,14 +364,13 @@ package com.rpgGame.appModule.role
 		
 		private function updateBaseInfo():void
 		{
-			var info:HeroData=MainRoleManager.actorInfo;
 //			var zoneInddex:int=info.name.indexOf("]")+1;
 //			var zone:String=info.name.substr(0,zoneInddex);
 //			var roleName:String=info.name.substr(zoneInddex);
-			_skin.txt_roleName.text=info.name;
+			_skin.txt_roleName.text=_roleData.name;
 //			_skin.txt_qu.text=zone;
-			_skin.txt_type.text=info.jobName;
-			_skin.txt_team.text=info.societyName;
+			_skin.txt_type.text=_roleData.jobName;
+			_skin.txt_team.text=_roleData.societyName;
 		
 			_skin.txt_roleName.width=_skin.txt_roleName.textWidth;
 			_skin.txt_roleName.x=(_skin.headMsg.width-_skin.txt_roleName.width)/2;
@@ -372,13 +381,12 @@ package com.rpgGame.appModule.role
 		
 		private function updateTxt():void
 		{
-			var info:HeroData=MainRoleManager.actorInfo;
-			_skin.txt_level.text="Lv"+info.totalStat.level;
+			_skin.txt_level.text="Lv"+_roleData.totalStat.level;
 			
 			_skin.txt_loveName.visible=_skin.LoveIcon.visible=false;
 			
-			_skin.txt_loveName.text=info.loveName.length!=0?info.loveName:"无";
-			_skin.Num_zhandouli.number=info.totalStat.getStatValue(CharAttributeType.FIGHTING);
+			_skin.txt_loveName.text=_roleData.loveName.length!=0?_roleData.loveName:"无";
+			_skin.Num_zhandouli.number=_roleData.totalStat.getStatValue(CharAttributeType.FIGHTING);
 			_skin.Num_zhandouli.x=128+_skin.Num_zhandouli.width/2;
 		}
 		
@@ -388,15 +396,13 @@ package com.rpgGame.appModule.role
 			if (null == player || !player.usable) {
 				return;
 			}
-			var playerData : RoleData = player.data as RoleData;
 			
-			
-			this._showAvatarData.avatarInfo.setBodyResID(playerData.avatarInfo.bodyResID, playerData.avatarInfo.bodyAnimatResID);
-			this._showAvatarData.avatarInfo.hairResID = playerData.avatarInfo.hairResID;
-			this._showAvatarData.avatarInfo.weaponResID = playerData.avatarInfo.weaponResID;
-			this._showAvatarData.avatarInfo.weaponEffectID = playerData.avatarInfo.weaponEffectID;
-			this._showAvatarData.avatarInfo.weaponEffectScale = playerData.avatarInfo.weaponEffectScale;
-			this._showAvatarData.avatarInfo.deputyWeaponResID = playerData.avatarInfo.deputyWeaponResID;
+			this._showAvatarData.avatarInfo.setBodyResID(_roleData.avatarInfo.bodyResID, _roleData.avatarInfo.bodyAnimatResID);
+			this._showAvatarData.avatarInfo.hairResID = _roleData.avatarInfo.hairResID;
+			this._showAvatarData.avatarInfo.weaponResID = _roleData.avatarInfo.weaponResID;
+			this._showAvatarData.avatarInfo.weaponEffectID = _roleData.avatarInfo.weaponEffectID;
+			this._showAvatarData.avatarInfo.weaponEffectScale = _roleData.avatarInfo.weaponEffectScale;
+			this._showAvatarData.avatarInfo.deputyWeaponResID = _roleData.avatarInfo.deputyWeaponResID;
 			
 			this._avatar.setRoleData(this._showAvatarData);
 			this._avatar.curRole.setScale(1.7);			

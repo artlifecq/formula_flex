@@ -13,11 +13,9 @@ package org.mokylin.skin.component.progress
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bar:feathers.controls.UIAsset;
-
-		public var tack:feathers.controls.UIAsset;
-
 		public var thumb:feathers.controls.UIAsset;
+
+		public var track:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -29,7 +27,7 @@ package org.mokylin.skin.component.progress
 			
 			this.currentState = "normal";
 			this.width = 118;
-			this.elementsContent = [tack_i(),thumb_i(),bar_i()];
+			this.elementsContent = [track_i(),thumb_i()];
 			
 			states = {
 			};
@@ -40,28 +38,6 @@ package org.mokylin.skin.component.progress
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function bar_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			bar = temp;
-			temp.name = "bar";
-			temp.styleName = "ui/app/beibao/vs/zuo_guang.png";
-			temp.x = 110;
-			temp.y = 1;
-			return temp;
-		}
-
-		private function tack_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			tack = temp;
-			temp.name = "tack";
-			temp.styleName = "ui/app/beibao/vs/zuo_di.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function thumb_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -70,6 +46,17 @@ package org.mokylin.skin.component.progress
 			temp.styleName = "ui/app/beibao/vs/zuo_tiao.png";
 			temp.x = 2;
 			temp.y = 1;
+			return temp;
+		}
+
+		private function track_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			track = temp;
+			temp.name = "track";
+			temp.styleName = "ui/app/beibao/vs/zuo_di.png";
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
