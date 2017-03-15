@@ -1,5 +1,8 @@
 package com.rpgGame.app.cmdlistener.scene
 {
+	import com.game.engine2D.scene.render.RenderUnit;
+	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.game.engine3D.vo.BaseObj3D;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.manager.AvatarManager;
@@ -29,7 +32,10 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MapEvent;
+	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.clientConfig.Attach;
+	import com.rpgGame.coreData.clientConfig.Attach_effect;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.info.map.EnumMapUnitType;
@@ -43,12 +49,14 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
 	import com.rpgGame.coreData.role.SceneDropGoodsItem;
+	import com.rpgGame.coreData.role.TrapInfo;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
+	import com.rpgGame.netData.map.bean.AttachInfo;
 	import com.rpgGame.netData.map.bean.DropGoodsInfo;
 	import com.rpgGame.netData.map.bean.MonsterInfo;
 	import com.rpgGame.netData.map.bean.NpcInfo;
@@ -66,6 +74,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.map.message.ResRoundGoodsMessage;
 	import com.rpgGame.netData.map.message.ResRoundObjectsMessage;
 	import com.rpgGame.netData.map.message.ResWeaponChangeMessage;
+	import com.rpgGame.netData.map.message.SCAttachStateChangeMessage;
 	import com.rpgGame.netData.map.message.SCSceneObjMoveMessage;
 	import com.rpgGame.netData.player.message.BroadcastPlayerAttriChangeMessage;
 	import com.rpgGame.netData.player.message.ResReviveSuccessMessage;
@@ -126,7 +135,8 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(101150, onResHelmChangeMessage);//头盔
 			SocketConnection.addCmdListener(101118, onResWeaponChangeMessage);//武器
 			
-			
+			// 陷阱状态改变
+            SocketConnection.addCmdListener(101151, onRecvSCAttachStateChangeMessage);
 			
 //			SocketConnection.addCmdListener(SceneModuleMessages.S2C_TRIGGER_CLIENT_EVENT, onTriggerClientEvent);
 			
@@ -174,6 +184,21 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			finish();
 		}
+        
+        // 陷阱状态改变
+        private function onRecvSCAttachStateChangeMessage(msg : SCAttachStateChangeMessage) : void {
+            var trap : RenderUnit3D = SceneManager.getSceneObjByID(msg.personId.ToGID()) as RenderUnit3D;
+            if (null == trap) {
+                return;
+            }
+            var info : TrapInfo = trap.data as TrapInfo;
+            if (null == info || info.state == msg.state) {
+                return;
+            }
+            SceneManager.removeSceneObjFromScene(info.effect);
+            info.state = msg.state;
+            SceneManager.addSceneObjToScene(info.effect, true, false, false);
+        }
 		
 		private function onResArmorChangeMessage(msg:ResArmorChangeMessage):void
 		{
@@ -453,6 +478,11 @@ package com.rpgGame.app.cmdlistener.scene
 							addDropGoods(addArr[j].bytesList[k]);
 						}
 						break;
+                    case SceneCharType.TRAP:
+                        for (k = 0; k < len; ++k) {
+                            addTrap(addArr[j].bytesList[k]);
+                        }
+                        break;
 				}
 			}
 		}
@@ -466,6 +496,18 @@ package com.rpgGame.app.cmdlistener.scene
 			data.isDroped=true;
 			SceneRoleManager.getInstance().createDropGoods(data);
 		}
+        
+        private function addTrap(buffer : ByteArray) : void {
+            var info : AttachInfo = new AttachInfo();
+            info.read(buffer);
+            var cfg : Attach_effect = AttachEffectCfgData.getInfo(info.modelId);
+            if (null == cfg) {
+                GameLog.add("陷阱配置不存在:" + data.modelId);
+                return;
+            }
+            var data : TrapInfo = new TrapInfo(info.id, info.id.ToGID(), info.modelId, info.state, info.position.x, info.position.y);
+            SceneManager.addSceneObjToScene(data.normalEffect, true, false, false);
+        }
 		
 		/**
 		 * 把一个英雄/怪物/宠物等从视野中删除
@@ -474,22 +516,38 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onSceneRemoveObject(roleID : uint) : void
 		{
-			var sceneRole : SceneRole = SceneManager.getSceneObjByID(roleID) as SceneRole;
-			if( sceneRole != null )
-			{
-				var data:MonsterData = sceneRole.data as MonsterData;
-				if( data != null )
-				{
-					TouJingManager.setHuGuoSiEffect(data.modelID, sceneRole, false);
-					var sceneClientRole:SceneRole = SceneManager.getSceneClientNpcByModelId( data.modelID);
-					if( sceneClientRole != null )
-					{
-						sceneClientRole.visible = true;
-						TouJingManager.setHuGuoSiEffect(data.modelID, sceneClientRole, true);						
-					}
-				}
-			}
-			SceneRoleManager.getInstance().removeSceneRoleById(roleID);
+            var unit : BaseObj3D = SceneManager.getSceneObjByID(roleID);
+            if (null == unit) {
+                return;
+            }
+            if (unit is SceneRole) {
+                var sceneRole : SceneRole = unit as SceneRole;
+                if(sceneRole != null )
+                {
+                    var data:MonsterData = sceneRole.data as MonsterData;
+                    if( data != null )
+                    {
+                        TouJingManager.setHuGuoSiEffect(data.modelID, sceneRole, false);
+                        var sceneClientRole:SceneRole = SceneManager.getSceneClientNpcByModelId( data.modelID);
+                        if( sceneClientRole != null )
+                        {
+                            sceneClientRole.visible = true;
+                            TouJingManager.setHuGuoSiEffect(data.modelID, sceneClientRole, true);						
+                        }
+                    }
+                }
+                SceneRoleManager.getInstance().removeSceneRoleById(roleID);
+                return;
+            }
+            if (unit is RenderUnit3D){
+                var trap : RenderUnit3D = unit as RenderUnit3D;
+                if (null != trap && (trap.data is TrapInfo)) {
+                    var trapInfo : TrapInfo = trap.data as TrapInfo;
+                    SceneManager.removeSceneObjFromScene(trapInfo.effect);
+                    SceneManager.removeSceneObjFromScene(trapInfo.normalEffect);
+                }
+            }
+            SceneManager.removeSceneObjFromScene(unit);
 		}
 		
 		/**

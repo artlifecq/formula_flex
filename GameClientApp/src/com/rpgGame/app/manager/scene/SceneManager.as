@@ -129,6 +129,9 @@ package com.rpgGame.app.manager.scene
 
 		public static function addSceneObjToScene(obj : BaseObj3D, clingGround : Boolean = false, needInViewDist : Boolean = true, renderLimitable : Boolean = true, sceneName : String = GameScene3DType.MAIN_SCENE) : void
 		{
+            if (null == obj) {
+                return;
+            }
 			var scene : GameScene3D = getScene(sceneName);
 			if (scene)
 			{

@@ -574,14 +574,14 @@ package com.rpgGame.app.fight.spell
 					
 					var effectQueue : Vector.<IRenderAnimator> = new Vector.<IRenderAnimator>();
 					var locusPoints : Vector.<AnimatorLocusPoint> = new Vector.<AnimatorLocusPoint>();
-					for (var i : int = 0; i < info.flyTargetPosList; i++)
+					for (var i : int = 0; i < info.flyTargetPosList.length; i++)
 					{
 						var targetPosition:Vector3D = new Vector3D(info.flyTargetPosList[i].x,0,info.flyTargetPosList[i].y);
 						TweenLite.delayedCall((info.throwDelayTime + info.flyInterval * i) * 0.001, addFlyEffectOnce, [info, animatData.scene_res, atkorPosition, atkorRotationY, destPosition,targetPosition,null, 0, 0,effectQueue, locusPoints]);
 					}
 					
 					var startTime:Number = info.flyTargetPosList.length * info.flyInterval;
-					for(var j:int = 0;j<info.flyTargets;j++)
+					for(var j:int = 0;j<info.flyTargets.length;j++)
 					{
 						TweenLite.delayedCall((startTime + info.throwDelayTime + info.flyInterval * j) * 0.001, addFlyEffectOnce, [info, animatData.scene_res, atkorPosition, atkorRotationY, destPosition,info.flyTargets[j].position,info.flyTargets[j],0, 0, effectQueue, locusPoints]);
 					}

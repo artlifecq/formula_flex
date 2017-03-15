@@ -251,7 +251,7 @@ package com.rpgGame.app.cmdlistener.scene
 		}
 
         // 锁定攻击源
-        private function lockAttack(info : ReleaseSpellInfo) {
+        private function lockAttack(info : ReleaseSpellInfo) : void {
             if (info.isMainCharHited && null == SceneRoleSelectManager.selectedRole) {
                 var hurtList : Vector.<FightHurtResult> = info.hurtList;
                 if (hurtList.length > 0) {

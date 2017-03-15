@@ -7,6 +7,7 @@ package com.rpgGame.app.scene.animator
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.game.mainCore.libCore.utils.ZMath;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -145,7 +146,9 @@ package com.rpgGame.app.scene.animator
 			var posY : Number = 0;//scene.sceneMapLayer.queryHeightAt(_destPosition.x, _destPosition.z);2.5D没有高度值，因为只有2维
 			_destHeightOffset = _destPosition.y - posY;
 			
-			_renderSet.position = _destPosition;
+			_renderSet.position.x = _destPosition.x;
+			_renderSet.position.y = _destPosition.z;
+			_renderSet.position.z = _destPosition.y;
 			
 			_renderSet.offsetY = 0;
 			_renderSet.rotationX = 0;

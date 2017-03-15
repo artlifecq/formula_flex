@@ -311,13 +311,14 @@ package com.rpgGame.app.fight.spell
 				
 				
 				_flyTargetPosList = fightTargetMsg.posList;
-				for(var i:int =0;i<fightTargetMsg.targets;i++)
+                _flyTargets = new Vector.<SceneRole>();
+				for(var i:int =0;i<fightTargetMsg.targets.length;i++)
 				{
 					targetID = fightTargetMsg.targets[i].ToGID();
 					targetRole = SceneManager.getSceneObjByID(targetID) as SceneRole;
-					flyTargets.push(targetRole);
+                    _flyTargets.push(targetRole);
 				}
-				_flyTargets = flyTargets;
+				//_flyTargets = flyTargets;
 			}
 			else if(msg is ResAttackVentToClientMessage)
 			{
@@ -345,13 +346,14 @@ package com.rpgGame.app.fight.spell
 				_targetPos = new Point(fightPosMsg.pos.x, fightPosMsg.pos.y);
 				
 				_flyTargetPosList = fightPosMsg.posList;
-				for(var j:int =0;j<fightPosMsg.targets;j++)
+                _flyTargets = new Vector.<SceneRole>();
+				for(var j:int =0;j<fightPosMsg.targets.length;j++)
 				{
 					targetID = fightPosMsg.targets[j].ToGID();
 					targetRole = SceneManager.getSceneObjByID(targetID) as SceneRole;
-					flyTargets.push(targetRole);
+                    _flyTargets.push(targetRole);
 				}
-				_flyTargets = flyTargets;
+				//_flyTargets = flyTargets;
 			}
 			
 			readSpellEffectData(_spellData.q_spell_effect);
