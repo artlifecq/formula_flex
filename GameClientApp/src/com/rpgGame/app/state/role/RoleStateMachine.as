@@ -50,6 +50,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.SyncSpellActionState;
 	import com.rpgGame.app.state.role.control.TrailMoveState;
 	import com.rpgGame.app.state.role.control.UnmovableState;
+	import com.rpgGame.app.state.role.control.UseSpellState;
 	import com.rpgGame.app.state.role.control.WalkMoveState;
 	import com.rpgGame.core.state.role.action.ActionState;
 	import com.rpgGame.core.state.role.control.MoveState;
@@ -140,6 +141,7 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.CONTROL_HIDDING] = HiddingState;
 		stateMapping[RoleStateType.CONTROL_FLY_UP] = FlyUpState;
 		stateMapping[RoleStateType.CONTROL_SYNC_SPELLACTION] = SyncSpellActionState;
+		stateMapping[RoleStateType.CONTROL_USE_SPELL] = UseSpellState;
 		
 		private var _role : SceneRole;
 		private var _lastCanShowRiding : Boolean;
@@ -369,6 +371,18 @@ package com.rpgGame.app.state.role
 		public function get isUnmovable() : Boolean
 		{
 			var state : IState = getCurrState(UnmovableState);
+			return state != null;
+		}
+		
+		public function get isHiding():Boolean
+		{
+			var state : IState = getCurrState(HiddingState);
+			return state != null;
+		}
+		
+		public function get isUseSpell():Boolean
+		{
+			var state : IState = getCurrState(UseSpellState);
 			return state != null;
 		}
 		

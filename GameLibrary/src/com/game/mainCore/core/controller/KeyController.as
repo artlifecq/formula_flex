@@ -115,7 +115,7 @@
             info.time = getTimer();
             if (isPrint)
             {
-                trace("keyDown : " + _downKeyCode);
+//                trace("keyDown : " + _downKeyCode);
                 if (printFun != null)
                 {
                     printFun("keyDown : " + _downKeyCode);
@@ -131,7 +131,7 @@
             info.time = getTimer();
             if (isPrint)
             {
-                trace("keyUp : " + _upKeyCode);
+//                trace("keyUp : " + _upKeyCode);
                 if (printFun != null)
                 {
                     printFun("keyUp : " + _upKeyCode);

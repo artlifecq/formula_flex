@@ -70,5 +70,7 @@ package com.rpgGame.coreData.type
 		public static const CONTROL_FLY_HIT:int = rEnum.next;
 		public static const CONTROL_FLY_FALL:int = rEnum.next;
 		public static const CONTROL_SYNC_SPELLACTION:int = rEnum.next;
+		
+		public static const CONTROL_USE_SPELL:int = rEnum.next;
 	}
 }

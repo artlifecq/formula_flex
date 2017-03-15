@@ -38,13 +38,13 @@ package com.rpgGame.app.state.role.control
 		
 		private function eachVisible(role : BaseRole, render : RenderUnit3D) : void
 		{
-//			render.visible = true;
+			render.visible = true;
 			render.alpha = 1;
 		}
 		
 		private function eachUnVisible(role : BaseRole, render : RenderUnit3D) : void
 		{
-//			render.visible = false;
+			render.visible = false;
 			render.alpha = 0;
 		}
 		
