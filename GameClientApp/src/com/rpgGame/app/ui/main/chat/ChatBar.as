@@ -1,19 +1,19 @@
 package com.rpgGame.app.ui.main.chat {
     import com.rpgGame.app.manager.AvatarManager;
+    import com.rpgGame.app.manager.chat.ChatGoodsManager;
     import com.rpgGame.app.manager.chat.ChatInputManager;
     import com.rpgGame.app.manager.chat.ChatManager;
     import com.rpgGame.app.manager.chat.ChatSpeakHistoryManager;
     import com.rpgGame.app.manager.chat.FaceGroupManager;
     import com.rpgGame.app.manager.chat.NoticeManager;
-    import com.rpgGame.app.manager.fight.FightFaceHelper;
     import com.rpgGame.app.manager.role.MainRoleManager;
-    import com.rpgGame.app.manager.scene.SceneManager;
     import com.rpgGame.app.richText.RichTextCustomLinkType;
     import com.rpgGame.app.richText.RichTextCustomUtil;
     import com.rpgGame.app.richText.component.RichTextArea3D;
     import com.rpgGame.app.scene.SceneRole;
-    import com.rpgGame.app.ui.alert.GameAlert;
     import com.rpgGame.app.ui.main.chat.laba.VipChatCanvas;
+    import com.rpgGame.core.app.AppConstant;
+    import com.rpgGame.core.app.AppManager;
     import com.rpgGame.core.events.ChatEvent;
     import com.rpgGame.core.events.SceneInteractiveEvent;
     import com.rpgGame.core.manager.tips.TargetTipsMaker;
@@ -22,13 +22,11 @@ package com.rpgGame.app.ui.main.chat {
     import com.rpgGame.coreData.cfg.ChatCfgData;
     import com.rpgGame.coreData.clientConfig.FaceInfo;
     import com.rpgGame.coreData.info.MapDataManager;
-    import com.rpgGame.coreData.info.alert.AlertInfo;
-    import com.rpgGame.coreData.info.alert.AlertSetInfo;
-    import com.rpgGame.coreData.lang.LangBackPack;
-    import com.rpgGame.coreData.type.EnumHurtType;
+    import com.rpgGame.coreData.info.item.ClientItemInfo;
     import com.rpgGame.coreData.type.chat.EnumChatChannelType;
     import com.rpgGame.coreData.utils.ColorUtils;
     import com.rpgGame.netData.chat.message.ResChatMessage;
+    import com.rpgGame.netData.player.message.ResPlayerDieMessage;
     
     import flash.geom.Point;
     import flash.text.TextFormat;
@@ -39,8 +37,6 @@ package com.rpgGame.app.ui.main.chat {
     import feathers.controls.Scroller;
     import feathers.controls.text.Fontter;
     import feathers.core.ToggleGroup;
-    
-    import gameEngine2D.NetDebug;
     
     import gs.TweenLite;
     
@@ -204,6 +200,8 @@ package com.rpgGame.app.ui.main.chat {
 			this.addEventListener(TouchEvent.TOUCH, this.onTouchEventHandler);
 			Starling.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, this.onKeyboardEventHandler);
 			
+			EventManager.addEvent(ChatEvent.SHOW_GOODS,onShowGoods);
+			
 			EventManager.addEvent(SceneInteractiveEvent.SELECTED_SCENE_ROLE, showTest);
 			
 		/*	
@@ -213,6 +211,17 @@ package com.rpgGame.app.ui.main.chat {
 				var hp:int=(10000*Math.random()+5000);
 				FightFaceHelper.showAttChange(EnumHurtType.ADDHP,hp);
 			},1000);*/
+		}
+		
+		private function onShowGoods(item:ClientItemInfo):void
+		{
+			if(_inputText.text == DEFAULT_CHAT_TEXT)
+			{
+				_inputText.text = "";
+			}
+			var key:String = ChatGoodsManager.addItemInfo(item);
+			var goodsCode:String = RichTextCustomUtil.getItemCode(key,item.name,item.quality);
+			_inputText.appendRichText(goodsCode);
 		}
 		
 		private function showTest(role:SceneRole):void
@@ -610,27 +619,11 @@ package com.rpgGame.app.ui.main.chat {
         
         private function sendMsg() : void 
 		{
-			var txt:String=this._inputText.text;
-			switch(txt){
-				case "exp":
-					FightFaceHelper.showAttChange(EnumHurtType.EXP,5000);
-					break;
-				case "hp":
-					FightFaceHelper.showAttChange(EnumHurtType.ADDHP,1234);
-					break;
-				case "baoji":
-					FightFaceHelper.showHurtText(MainRoleManager.actor,testRole,EnumHurtType.SPELL_HURT_TYPE_CRIT,-2358);
-					break;
-				case "subhp":
-					FightFaceHelper.showAttChange(EnumHurtType.SUBHP,-234);
-					break;
-				case "gongji":
-					FightFaceHelper.showHurtText(MainRoleManager.actor,testRole,EnumHurtType.SPELL_HURT_TYPE_NORMAL,-2358);
-					break;
-				case "shanbi":
-					FightFaceHelper.showHurtText(MainRoleManager.actor,testRole,EnumHurtType.SPELL_HURT_TYPE_MISS,-2358);
-					break;
-			}
+			var ms:ResPlayerDieMessage=new ResPlayerDieMessage();
+			ms.attackername="111";
+			ms.time=new Date().getTime()/1000;
+			AppManager.showApp(AppConstant.DIE_PANEL,ms);
+			
 			
 			if("" == this._inputText.text )
 			{

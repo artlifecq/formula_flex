@@ -2,7 +2,6 @@ package com.rpgGame.appModule.role
 {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
-	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -24,6 +23,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.lang.LangGoods;
 	import com.rpgGame.coreData.lang.LangMenu;
 	import com.rpgGame.coreData.role.HeroData;
@@ -32,6 +32,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.item.GridBGType;
+	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
 	import flash.geom.Point;
 	
@@ -69,6 +70,10 @@ package com.rpgGame.appModule.role
 		
 		private var _zhandouliEftContaner:Inter3DContainer;
 		private var _zhandouliEft:InterObject3D;
+		
+		private var _roleData:HeroData;
+		private var isMainRole:Boolean;
+		private var otherItems:Vector.<ItemInfo>;
 		
 		
 		public function AvatarView(skin:juese_Skin)
@@ -149,23 +154,58 @@ package com.rpgGame.appModule.role
 			return false;
 		}
 		
-		public function show():void
+		public function show(data:HeroData,items:Vector.<ItemInfo>=null):void
 		{
+			otherItems=items;
+			_roleData=data;
 			initEvent();
 			
+			isMainRole=MainRoleManager.actorInfo==data;
+		
+			var gridNum:int=equipGrids.length;
+			for(var i:int=0;i<gridNum;i++){
+				equipGrids[i].dragAble=isMainRole;
+			}
+			
 			updateRole();
+			_avatar.curRole.stateMachine.transition(RoleStateType.ACTION_SHOW);
 			updateBaseInfo();
-			if(!ItemSender.isReqRole){
-				//等待背包请求装备数据一起返回
-				EventManager.addEvent(ItemEvent.ITEM_INIT,initDatas);
-			}else{
+			
+			if(isMainRole){
+				if(!ItemSender.isReqRole){//等待背包请求装备数据一起返回
+					EventManager.addEvent(ItemEvent.ITEM_INIT,initDatas);
+				}else{
+					updateRoleEquip();
+				}
+			}else{//获取玩家的装备列表
 				updateRoleEquip();
 			}
 		}
 		
+		private function getGoodsInfoForOther():Array
+		{
+			var goodsInfo:Array=[];
+			var num:int;
+			if(otherItems){
+				num=otherItems.length
+			}else{
+				num=0;
+			}
+			for(var i:int=0;i<num;i++){
+				var info:ClientItemInfo=ItemUtil.convertClientItemInfo(otherItems[i]);
+				goodsInfo.push(info);
+			}
+			return goodsInfo;
+		}
+		
 		private function updateRoleEquip():void
 		{
-			var goodsInfo:Array = _mgr.getAllItem();
+			var goodsInfo:Array ;
+			if(isMainRole){
+				goodsInfo= _mgr.getAllItem();
+			}else{
+				goodsInfo=getGoodsInfoForOther();
+			}
 			var i:int =0;
 			var goodsLen:int = goodsInfo ? goodsInfo.length : 0;
 			for (i=0; i<equipNum; i++)
@@ -229,11 +269,6 @@ package com.rpgGame.appModule.role
 		
 		private function initEvent():void
 		{
-			if(ItemSender.isReqRole){
-				updateRoleEquip();
-			}
-			
-		
 			EventManager.addEvent(ItemEvent.ITEM_DROPED, onDropItem);
 			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateTxt);//基本属性改变
 			
@@ -354,14 +389,13 @@ package com.rpgGame.appModule.role
 		
 		private function updateBaseInfo():void
 		{
-			var info:HeroData=MainRoleManager.actorInfo;
 //			var zoneInddex:int=info.name.indexOf("]")+1;
 //			var zone:String=info.name.substr(0,zoneInddex);
 //			var roleName:String=info.name.substr(zoneInddex);
-			_skin.txt_roleName.text=info.name;
+			_skin.txt_roleName.text=_roleData.name;
 //			_skin.txt_qu.text=zone;
-			_skin.txt_type.text=info.jobName;
-			_skin.txt_team.text=info.societyName;
+			_skin.txt_type.text=_roleData.jobName;
+			_skin.txt_team.text=_roleData.societyName;
 		
 			_skin.txt_roleName.width=_skin.txt_roleName.textWidth;
 			_skin.txt_roleName.x=(_skin.headMsg.width-_skin.txt_roleName.width)/2;
@@ -372,13 +406,12 @@ package com.rpgGame.appModule.role
 		
 		private function updateTxt():void
 		{
-			var info:HeroData=MainRoleManager.actorInfo;
-			_skin.txt_level.text="Lv"+info.totalStat.level;
+			_skin.txt_level.text="Lv"+_roleData.totalStat.level;
 			
 			_skin.txt_loveName.visible=_skin.LoveIcon.visible=false;
 			
-			_skin.txt_loveName.text=info.loveName.length!=0?info.loveName:"无";
-			_skin.Num_zhandouli.number=info.totalStat.getStatValue(CharAttributeType.FIGHTING);
+			_skin.txt_loveName.text=_roleData.loveName.length!=0?_roleData.loveName:"无";
+			_skin.Num_zhandouli.number=_roleData.totalStat.getStatValue(CharAttributeType.FIGHTING);
 			_skin.Num_zhandouli.x=128+_skin.Num_zhandouli.width/2;
 		}
 		
@@ -388,19 +421,16 @@ package com.rpgGame.appModule.role
 			if (null == player || !player.usable) {
 				return;
 			}
-			var playerData : RoleData = player.data as RoleData;
 			
-			
-			this._showAvatarData.avatarInfo.setBodyResID(playerData.avatarInfo.bodyResID, playerData.avatarInfo.bodyAnimatResID);
-			this._showAvatarData.avatarInfo.hairResID = playerData.avatarInfo.hairResID;
-			this._showAvatarData.avatarInfo.weaponResID = playerData.avatarInfo.weaponResID;
-			this._showAvatarData.avatarInfo.weaponEffectID = playerData.avatarInfo.weaponEffectID;
-			this._showAvatarData.avatarInfo.weaponEffectScale = playerData.avatarInfo.weaponEffectScale;
-			this._showAvatarData.avatarInfo.deputyWeaponResID = playerData.avatarInfo.deputyWeaponResID;
+			this._showAvatarData.avatarInfo.setBodyResID(_roleData.avatarInfo.bodyResID, _roleData.avatarInfo.bodyAnimatResID);
+			this._showAvatarData.avatarInfo.hairResID = _roleData.avatarInfo.hairResID;
+			this._showAvatarData.avatarInfo.weaponResID = _roleData.avatarInfo.weaponResID;
+			this._showAvatarData.avatarInfo.weaponEffectID = _roleData.avatarInfo.weaponEffectID;
+			this._showAvatarData.avatarInfo.weaponEffectScale = _roleData.avatarInfo.weaponEffectScale;
+			this._showAvatarData.avatarInfo.deputyWeaponResID = _roleData.avatarInfo.deputyWeaponResID;
 			
 			this._avatar.setRoleData(this._showAvatarData);
 			this._avatar.curRole.setScale(1.7);			
-			_avatar.curRole.stateMachine.transition(RoleStateType.ACTION_SHOW);
 		}
 	}
 }

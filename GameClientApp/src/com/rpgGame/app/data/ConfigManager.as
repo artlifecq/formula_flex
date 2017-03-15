@@ -8,6 +8,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.AttFormulaConfig;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ChatCfgData;
 	import com.rpgGame.coreData.cfg.ClientAreaCfgData;
@@ -18,6 +19,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.ClientSceneRoleCfgData;
 	import com.rpgGame.coreData.cfg.ClientTriggerCfgData;
 	import com.rpgGame.coreData.cfg.DaTiCfgData;
+	import com.rpgGame.coreData.cfg.DieCfgData;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.cfg.FriendCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSettingCfgData;
@@ -136,6 +138,8 @@ package com.rpgGame.app.data
 			AvatarClothesResCfgData.setup(dic[ConfigClassRegister.AvatarClothesRes]);
 			AvatarHairResCfgData.setup(dic[ConfigClassRegister.AvatarHairRes]);
 			AvatarResConfigSetData.setup(dic[ConfigClassRegister.AvatarResConfig]);
+            
+            AttachEffectCfgData.setup(dic[ConfigClassRegister.Attach_effect]);
 			
 			BaZhenTuResCfgData.setup(dic[ConfigClassRegister.BaZhenTuRes]);
 			
@@ -157,6 +161,7 @@ package com.rpgGame.app.data
 			TipsCfgData.setup(dic[ConfigClassRegister.Q_tipsinfo]);
 			AttValueConfig.setup(dic[ConfigClassRegister.Q_att_values]);
 			AttFormulaConfig.setup(dic[ConfigClassRegister.Q_att_transfer]);
+			DieCfgData.setup(dic[ConfigClassRegister.Q_die]);
 //			CountryUnionStatCfgData.setup(null); //待解决
 
 			

@@ -12,6 +12,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -23,6 +24,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.EnumHurtType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.netData.fight.message.ResAttackRangeMessage;
 	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
@@ -219,13 +221,24 @@ package com.rpgGame.app.cmdlistener.scene
 				var role : SceneRole = SceneManager.getSceneObjByID(hurtResult.targetID) as SceneRole;
 				if (role && role.usable)
 				{
-					CharAttributeManager.setCharHp(role.data as RoleData, hurtResult.curLife);
+					var data:RoleData=role.data as RoleData;
+					if (data.id == MainRoleManager.actorID) //自己看到就好了
+					{
+						var offset:int=hurtResult.curLife*-1;
+						if( offset< 0){
+							FightFaceHelper.showAttChange(EnumHurtType.SUBHP, offset);//掉血
+						}else if( offset>0){
+							FightFaceHelper.showAttChange(EnumHurtType.ADDHP, offset);//回血
+						}
+					}	
+//					CharAttributeManager.setCharHp(role.data as RoleData, hurtResult.curLife);
 					CharAttributeManager.setCharMp(role.data as RoleData, hurtResult.curMana);
 				}
 			}
 		}
 
         // 锁定攻击源
+<<<<<<< HEAD
         private function lockAttack(info : SpellResultInfo):void
 		{
             if (info.isMainCharHited && null == SceneRoleSelectManager.selectedRole)
@@ -236,6 +249,15 @@ package com.rpgGame.app.cmdlistener.scene
                     var attacker : SceneRole = SceneManager.getSceneObjByID(hurtList[0].attackerId) as SceneRole;
                     if (null != attacker)
 					{
+=======
+        private function lockAttack(info : ReleaseSpellInfo):void
+		{
+            if (info.isMainCharHited && null == SceneRoleSelectManager.selectedRole) {
+                var hurtList : Vector.<FightHurtResult> = info.hurtList;
+                if (hurtList.length > 0) {
+                    var attacker : SceneRole = SceneManager.getSceneObjByID(hurtList[0].attackerId) as SceneRole;
+                    if (null != attacker) {
+>>>>>>> master
                         SceneRoleSelectManager.selectedRole = attacker;
                     }
                 }

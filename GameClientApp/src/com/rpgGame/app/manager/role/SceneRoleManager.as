@@ -6,7 +6,6 @@ package com.rpgGame.app.manager.role
 	import com.game.engine3D.vo.map.ClientMapAreaData;
 	import com.game.engine3D.vo.map.ClientMapAreaGridData;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
-	import com.rpgGame.app.graphics.AttackFaceSprite;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.graphics.StallHeadFace;
 	import com.rpgGame.app.manager.AvatarManager;
@@ -104,7 +103,6 @@ package com.rpgGame.app.manager.role
 			role.name = data.name;
 			data.bodyRadius = radiusForHero;
 			role.headFace = HeadFace.create(role);
-			role.attackFace=AttackFaceSprite.create(role);
 
 			//执行主换装更新
 			AvatarManager.callEquipmentChange(role);
@@ -168,7 +166,6 @@ package com.rpgGame.app.manager.role
 			//设置VO
 			role.data = data;
 			role.headFace = HeadFace.create(role);
-			role.attackFace = AttackFaceSprite.create(role);
 			var roleNameStr : String = (bornData ? bornData.q_name.toString() : "未知怪物");
 			if (charType == SceneCharType.NPC && data.ownerName)
 			{

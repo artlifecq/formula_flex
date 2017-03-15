@@ -32,31 +32,33 @@ package com.rpgGame.coreData.type
 		public static const SCENE_EFFECT : String = rEnum.next.toString();
 		/** 粮仓 8 **/
 		public static const LIANG_CANG : String = rEnum.next.toString();
-		/** 场景飞行技能 9 **/
+        /** 陷阱9 **/
+        public static const TRAP : String = rEnum.next.toString();
+		/** 场景飞行技能 10 **/
 		public static const SCENE_FLY_SPELL : String = rEnum.next.toString();
-		/** 场景受击特效 10 **/
+		/** 场景受击特效 11 **/
 		public static const SCENE_HURT_EFFECT : String = rEnum.next.toString();
-		/** 刀光特效 11 **/
+		/** 刀光特效 12 **/
 		public static const KNIFE_LIGHT_EFFECT : String = rEnum.next.toString();
-		/** 场景自身特效 12 **/
+		/** 场景自身特效 13 **/
 		public static const SCENE_SELF_EFFECT : String = rEnum.next.toString();
-		/** 场景目标特效 13 **/
+		/** 场景目标特效 14 **/
 		public static const SCENE_DEST_EFFECT : String = rEnum.next.toString();
-		/** 场景摄像机镜头前特效 14 **/
+		/** 场景摄像机镜头前特效 15 **/
 		public static const SCENE_CAMERA_LENS_EFFECT : String = rEnum.next.toString();
-		/** 鼠标点击特效 15 **/
+		/** 鼠标点击特效 16 **/
 		public static const MOUSE_CLICK_EFFECT : String = rEnum.next.toString();
-		/** 采集物 16 **/
+		/** 采集物 17 **/
 		public static const COLLECT : String = rEnum.next.toString();
-		/** 镖车 17 **/
+		/** 镖车 18 **/
 		public static const BIAO_CHE : String = rEnum.next.toString();
-		/** 保护NPC 18 **/
+		/** 保护NPC 19 **/
 		public static const PROTECT_NPC : String = rEnum.next.toString();
-		/** 摊位 19 **/
+		/** 摊位 20 **/
 		public static const STALL : String = rEnum.next.toString();
-		/** 战车 20 */
+		/** 战车 21 */
 		public static const ZHAN_CHE : String = rEnum.next.toString();
-		/** 客户端NPC 21 */
+		/** 客户端NPC 22 */
 		public static const CLIENT_NPC : String = rEnum.next.toString();
 
 		public static const XUE_WEN : String = rEnum.next.toString();
@@ -153,7 +155,7 @@ package com.rpgGame.coreData.type
 //		
 		public static function get serverType() : Array
 		{
-			return [PLAYER, NPC, DROP_GOODS, MONSTER, BIAO_CHE,PROTECT_NPC , LIANG_CANG, ZHAN_CHE]; //,FOLLOWER,BAG,SUMMON_MONSTER,BAO_DAI_MONSTER,STORY_ACTOR
+			return [PLAYER, NPC, DROP_GOODS, MONSTER, BIAO_CHE,PROTECT_NPC, TRAP, LIANG_CANG, ZHAN_CHE]; //,FOLLOWER,BAG,SUMMON_MONSTER,BAO_DAI_MONSTER,STORY_ACTOR
 		}
 	}
 }

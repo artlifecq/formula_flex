@@ -151,6 +151,7 @@ package com.rpgGame.app.fight.spell
 						var hurtRef : HurtStateReference = role.stateMachine.getReference(HurtStateReference) as HurtStateReference;
 						hurtRef.setParams(/*info, */hurtVo);
 						role.stateMachine.transition(RoleStateType.CONTROL_HURT, hurtRef);
+
 					}
 				}
 			}

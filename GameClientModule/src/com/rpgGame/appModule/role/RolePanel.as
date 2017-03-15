@@ -1,6 +1,8 @@
 package com.rpgGame.appModule.role
 {
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.coreData.role.HeroData;
 	
 	import org.mokylin.skin.app.beibao.beibao_Skin;
 	import org.mokylin.skin.app.beibao.juese_Skin;
@@ -15,11 +17,13 @@ package com.rpgGame.appModule.role
 	 */
 	public class RolePanel extends SkinUIPanel
 	{
-		private var _skin : beibao_Skin;
+		protected var _skin : beibao_Skin;
 		
-		private var basicView:BasicRoleView;
-		private var avatartView:AvatarView;
-		private var packsView:PacksView;
+		protected var basicView:BasicRoleView;
+		protected var avatarView:AvatarView;
+		protected var packsView:PacksView;
+		protected var attConstrastView:AttContrastView;
+		protected var _roleData:HeroData;
 		
 		public function RolePanel()
 		{
@@ -34,16 +38,19 @@ package com.rpgGame.appModule.role
 			_skin.jineng.visible=false;
 			_skin.juese.visible=true;
 			basicView=new BasicRoleView(_skin.juese.skin as juese_Skin);
-			avatartView=new AvatarView(_skin.juese.skin as juese_Skin);
+			avatarView=new AvatarView(_skin.juese.skin as juese_Skin);
 			packsView=new PacksView(_skin.juese.skin as juese_Skin);			
+			attConstrastView=new AttContrastView(_skin.juese.skin as juese_Skin);
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
 		{
 			super.show(data, openTable, parentContiner);
-			basicView.show();
-			avatartView.show();
+			_roleData=MainRoleManager.actorInfo;
 			packsView.show();
+			attConstrastView.onHide();
+			basicView.show(_roleData);
+			avatarView.show(_roleData);
 		}
 		
 		override protected function onTouchTarget(target : DisplayObject) : void {
@@ -53,7 +60,7 @@ package com.rpgGame.appModule.role
 				return;
 			}
 			
-			if(avatartView.onTouchTarget(target)){
+			if(avatarView.onTouchTarget(target)){
 				return;
 			}
 		}
@@ -73,8 +80,9 @@ package com.rpgGame.appModule.role
 		{
 			super.hide();
 			basicView.onHide();
-			avatartView.onHide();
+			avatarView.onHide();
 			packsView.onHide();
+			attConstrastView.onHide();
 		}
 	}
 }

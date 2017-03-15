@@ -304,6 +304,10 @@ package com.rpgGame.app.ui.tips
 						curY+=25;
 					}
 				}
+			}else{
+				if(_equipTip){
+					_equipTip.removeFromParent();
+				}
 			}
 			
 			_itemTip.imgBG.height=curY+30;
@@ -399,9 +403,7 @@ package com.rpgGame.app.ui.tips
 		 */		
 		public function hideTips():void
 		{
-			if(_equipTip){
-				_equipTip.removeFromParent();
-			}
+		
 		}
 
 		/**
