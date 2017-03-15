@@ -238,7 +238,6 @@ package com.rpgGame.app.cmdlistener.scene
 		}
 
         // 锁定攻击源
-<<<<<<< HEAD
         private function lockAttack(info : SpellResultInfo):void
 		{
             if (info.isMainCharHited && null == SceneRoleSelectManager.selectedRole)
@@ -246,18 +245,9 @@ package com.rpgGame.app.cmdlistener.scene
                 var hurtList : Vector.<FightHurtResult> = info.hurtList;
                 if (hurtList.length > 0)
 				{
-                    var attacker : SceneRole = SceneManager.getSceneObjByID(hurtList[0].attackerId) as SceneRole;
+                    var attacker : SceneRole = SceneManager.getSceneObjByID(hurtList[0].atkorID) as SceneRole;
                     if (null != attacker)
 					{
-=======
-        private function lockAttack(info : ReleaseSpellInfo):void
-		{
-            if (info.isMainCharHited && null == SceneRoleSelectManager.selectedRole) {
-                var hurtList : Vector.<FightHurtResult> = info.hurtList;
-                if (hurtList.length > 0) {
-                    var attacker : SceneRole = SceneManager.getSceneObjByID(hurtList[0].attackerId) as SceneRole;
-                    if (null != attacker) {
->>>>>>> master
                         SceneRoleSelectManager.selectedRole = attacker;
                     }
                 }

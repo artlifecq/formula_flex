@@ -8,7 +8,6 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.action.DeadLaunchStateReference;
-	import com.rpgGame.app.state.role.action.FallStateReference;
 	import com.rpgGame.app.state.role.action.HitStateReference;
 	import com.rpgGame.app.state.role.control.HurtStateReference;
 	import com.rpgGame.core.events.SceneCharacterEvent;

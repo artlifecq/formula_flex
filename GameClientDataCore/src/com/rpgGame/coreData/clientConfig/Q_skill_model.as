@@ -34,6 +34,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_relate_spells:String;
 		 /**    */
 		public var q_mainSkill:int;
+		 /**  技能施法状态（0连续释放技能，1施法状态） */
+		public var q_skill_state:int;
 		 /**  技能效果，配置“技能效果表”中的id */
 		public var q_spell_effect:int;
 		 /**  位移类型（客户端），0-无 1-冲锋 2-跳劈 3-闪烁 4-翻滚 */
