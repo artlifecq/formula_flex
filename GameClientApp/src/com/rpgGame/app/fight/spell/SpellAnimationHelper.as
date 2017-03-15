@@ -648,8 +648,20 @@ package com.rpgGame.app.fight.spell
 			}
 			if (!renderSetAnimator)
 			{
-				renderSetAnimator = new CommonTrajectoryAnimator(info, targetPosition, info.targetRole, info.flyTm, info.flySpeed, info.isTrackTarget, 
-					info.matchTerrain, info.isFlyCross, info.isAdaptiveTargetHeight, moveDelay, playDelay, info.throwHeight, info.throwWeightRatio);
+				renderSetAnimator = new CommonTrajectoryAnimator(
+                    info, 
+                    targetPosition, 
+                    info.targetRole, 
+                    info.flyTm, 
+                    info.flySpeed, 
+                    info.isTrackTarget, 
+					info.matchTerrain, 
+                    info.isFlyCross, 
+                    info.isAdaptiveTargetHeight, 
+                    moveDelay, 
+                    playDelay, 
+                    info.throwHeight, 
+                    info.throwWeightRatio);
 				(renderSetAnimator as CommonTrajectoryAnimator).setAtkorData(atkorPosition, atkorRotationY, destPosition);
 				(renderSetAnimator as CommonTrajectoryAnimator).setQueue(effectQueue, locusPoints);
 				effectSet.setRenderAnimator(renderSetAnimator);

@@ -289,14 +289,14 @@ package com.rpgGame.app.manager.shell
             effectRu.repeat = 0;
             effectRu.mouseEnable = true;
             effectRu.x = pos.x; //MainRoleManager.actor.x;
-            effectRu.z = pos.z; //MainRoleManager.actor.z;
+            effectRu.z = pos.y; //MainRoleManager.actor.z;
             effectRu.y = 0;//pos.y; //MainRoleManager.actor.y;
             //effectRu.setGroundXY(role.x, role.z);
             effectRu.setScale(1);
             effectRu.rotationY = MainRoleManager.actor.rotationY;
             effectRu.play(1);
             SceneManager.addSceneObjToScene(effectRu/*, true, false, false*/);
-            var rud : RenderParamData3D = new RenderParamData3D(4, "effect", ClientConfig.getEffect("tx_role_qianjibian_03"), "tx_role_qianjibian_03");
+            var rud : RenderParamData3D = new RenderParamData3D(4, "effect", ClientConfig.getEffect("tx_role_jishujian_03"), "tx_role_jishujian_03");
             var effectRu : RenderUnit3D = RenderUnit3D.create(rud, true);
             effectRu.repeat = 0;
             effectRu.mouseEnable = true;

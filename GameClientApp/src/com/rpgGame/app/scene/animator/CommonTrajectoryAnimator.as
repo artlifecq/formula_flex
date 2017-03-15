@@ -153,7 +153,7 @@ package com.rpgGame.app.scene.animator
 			_renderSet.offsetY = 0;
 			_renderSet.rotationX = 0;
 			_renderSet.rotationY = _atkorRotationY;
-			_targetOffsetY = 0;
+			_targetOffsetY = _targetPos.z;
 			
 			var targetDestPosition : Vector3D = null;
 			if (_targetRole && _targetRole.usable)
