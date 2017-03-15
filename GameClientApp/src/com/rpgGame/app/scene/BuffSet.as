@@ -13,6 +13,7 @@ package com.rpgGame.app.scene
 	import com.rpgGame.app.state.role.control.StunStateReference;
 	import com.rpgGame.app.state.role.control.SyncSpellActionStateReference;
 	import com.rpgGame.app.state.role.control.UnmovableStateReference;
+	import com.rpgGame.app.state.role.control.UseSpellStateReference;
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
@@ -369,6 +370,11 @@ package com.rpgGame.app.scene
 						buffRef.setParams(buffData);
 						_role.stateMachine.transition(RoleStateType.CONTROL_HIDDING, buffRef);
 						break;
+					case 25:
+						buffRef = _role.stateMachine.getReference(UseSpellStateReference) as UseSpellStateReference;
+						buffRef.setParams(buffData);
+						_role.stateMachine.transition(RoleStateType.CONTROL_USE_SPELL, buffRef);
+						break;
 					case 26://浮空上升buff
 						buffRef = _role.stateMachine.getReference(FlyUpStateReference) as FlyUpStateReference;
 						buffRef.setParams(buffData);
@@ -385,9 +391,9 @@ package com.rpgGame.app.scene
 						_role.stateMachine.transition(RoleStateType.CONTROL_BING_DONG, buffRef);
 						break;
 					default:
-						buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
+						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
 						buffRef.setParams(buffData);
-						_role.stateMachine.transition(RoleStateType.CONTROL_UNMOVABLE, buffRef);
+						_role.stateMachine.transition(RoleStateType.CONTROL_UNMOVABLE, buffRef);*/
 						break;
 				}
 			}

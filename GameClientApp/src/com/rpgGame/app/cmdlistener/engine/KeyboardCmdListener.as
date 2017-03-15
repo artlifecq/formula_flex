@@ -306,7 +306,7 @@ package com.rpgGame.app.cmdlistener.engine
 
 		private function singleKeyDownExec(info : KeyInfo) : void
 		{
-			GameLog.addShow("singleKeyDownExec--:"+info.name+"_"+info.type+"_"+info.code);
+//			GameLog.addShow("singleKeyDownExec--:"+info.name+"_"+info.type+"_"+info.code);
 			////////////////////////////////////////// 
 			switch (info.type)
 			{

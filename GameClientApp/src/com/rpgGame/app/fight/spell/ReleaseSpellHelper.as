@@ -55,7 +55,7 @@ package com.rpgGame.app.fight.spell
 					ref.onStartFrame(onSelfEffectFrame);
 					ref.onHitFrame(onAttackHitFrame);
 //					ref.onBreakFrame(onBreakFrame);
-					spellInfo.atkor.stateMachine.transition(RoleStateType.ACTION_ATTACK, ref, true);
+					spellInfo.atkor.stateMachine.transition(RoleStateType.ACTION_ATTACK, ref);
 				}
 				else
 				{
