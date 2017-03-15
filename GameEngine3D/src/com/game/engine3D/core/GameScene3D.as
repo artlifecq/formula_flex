@@ -149,6 +149,7 @@ package com.game.engine3D.core
 			_renderUnitList = new Vector.<RenderUnit3D>();
 			
 			_sceneMapLayer = new SceneMapLayer(this);
+			_sceneMapLayer.mousePickerMovable = true;
 			addChild(_sceneMapLayer);
 			
 			_sceneRenderLayer = new SceneRenderLayer(this);

@@ -3817,5 +3817,24 @@ package com.game.engine3D.scene.render
 		override public function set staticGraphicDis(value:ObjectContainer3D):void {
 			super.staticGraphicDis = value;
 		}
+		
+		public function changeBaseVirtualParent(toBone : Boolean) : void {
+			if (null == this._staticGraphicDis || null == this._baseVirtualElements) {
+				return;
+			}
+			for each(var virtual : ObjectContainer3D in this._baseVirtualElements) {
+				for each(var unit : RenderUnitChild in _currChildUnitList) {
+					if (virtual.name == unit.childName) {
+						unit.renderUnit.removeFromGraphic();
+						unit.boneName = "c_0_body_01";
+						if (toBone) {
+							addUnitAtBone(unit.renderUnit, "c_0_body_01");
+						} else {
+							addUnitAtChild(unit.renderUnit, unit.childName);
+						}
+					}
+				}
+			}
+		}
 	}
 }

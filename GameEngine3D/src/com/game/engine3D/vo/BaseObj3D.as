@@ -933,7 +933,7 @@ package com.game.engine3D.vo
 			}
 		}
 
-		private function onUpdateGraphicRotation() : void
+		protected function onUpdateGraphicRotation() : void
 		{
 			if (_graphicDis)
 			{
@@ -1010,7 +1010,7 @@ package com.game.engine3D.vo
 		 * @param initiator 发起对象
 		 *
 		 */
-		private function syncInfo(initiator : BaseObj3D) : void
+		protected function syncInfo(initiator : BaseObj3D) : void
 		{
 			if (!_syncInfos)
 			{
@@ -1203,6 +1203,9 @@ package com.game.engine3D.vo
 				}
 				_showPosition.y = _position.y + _offset.y;
 				_graphicDis.y = _showPosition.y;
+				if (_staticGraphicDis) {
+					//_staticGraphicDis.y = _showPosition.y;
+				}
 
 				if (_clingGroundCalculate != null && _volumeBounds)
 				{
@@ -1260,6 +1263,17 @@ package com.game.engine3D.vo
 					PoolEntityContainer3D.recycle(_graphicDis as PoolEntityContainer3D);
 				_graphicDis = null;
 			}
+			//if (_staticGraphicDis) {
+			//	if (_staticGraphicDis.parent) {
+			//		_staticGraphicDis.parent.removeChild(_staticGraphicDis);
+			//	}
+			//	if (_staticGraphicDis is PoolContainer3D) {
+			//		PoolContainer3D.recycle(_staticGraphicDis as PoolContainer3D);
+			//	} else if (_staticGraphicDis is PoolEntityContainer3D) {
+			//		PoolEntityContainer3D.recycle(_staticGraphicDis as PoolEntityContainer3D);
+			//	}
+			//}
+			_staticGraphicDis = null;
 			_data = null;
 			_sceneName = null;
 			_visible = false;
