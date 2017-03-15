@@ -10,6 +10,7 @@ package com.rpgGame.app.sender
 	import com.rpgGame.coreData.type.EnumHurtType;
 	import com.rpgGame.netData.fight.message.CSPerformPosSkillMessage;
 	import com.rpgGame.netData.fight.message.CSPerformTargetSkillMessage;
+	import com.rpgGame.netData.fight.message.CSSkillContiStateMessage;
 	
 	import app.cmd.SpellModuleMessages;
 	
@@ -79,6 +80,13 @@ package com.rpgGame.app.sender
 			msg.targetId = targetID;
 			SocketConnection.send(msg);
 		}
+        
+        public static function reqSkillContiState(skillId : int, state : int) : void {
+            var msg : CSSkillContiStateMessage = new CSSkillContiStateMessage();
+            msg.skillId = skillId;
+            msg.skillState = state;
+            SocketConnection.send(msg);
+        }
 
 		//-----------------------------------
 

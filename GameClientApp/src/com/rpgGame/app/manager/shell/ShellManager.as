@@ -302,10 +302,11 @@ package com.rpgGame.app.manager.shell
             effectRu.mouseEnable = true;
             effectRu.x = MainRoleManager.actor.x;
             effectRu.z = MainRoleManager.actor.z;
-            effectRu.y = MainRoleManager.actor.y;
+            effectRu.y = 0;//MainRoleManager.actor.y;
             //effectRu.setGroundXY(role.x, role.z);
             effectRu.setScale(1);
             effectRu.rotationY = MainRoleManager.actor.rotationY;
+            effectRu.rotationX = 35;
             effectRu.play(1);
             SceneManager.addSceneObjToScene(effectRu/*, true, false, false*/);
 		}

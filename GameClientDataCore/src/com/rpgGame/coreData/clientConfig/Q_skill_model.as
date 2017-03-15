@@ -34,6 +34,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_relate_spells:String;
 		 /**    */
 		public var q_mainSkill:int;
+		 /**  技能施法状态（0连续释放技能，1施法状态） */
+		public var q_skill_state:int;
 		 /**  技能效果，配置“技能效果表”中的id */
 		public var q_spell_effect:int;
 		 /**  位移类型（客户端），0-无 1-冲锋 2-跳劈 3-闪烁 4-翻滚 */
@@ -44,13 +46,13 @@ package com.rpgGame.coreData.clientConfig
 		public var q_blink_speed:int;
 		 /**  跳劈的高度，可以不配置 */
 		public var q_blink_height:int;
-		 /**  技能伤害类型（0默认攻击技能，1治疗技能 2，特殊技能） */
+		 /**  技能伤害类型（0默认攻击技能，1友好技能 2，特殊技能） */
 		public var q_hurt_type:int;
 		 /**  作用对象（1自己，2友好目标，3敌对目标，4当前目标，5场景中鼠标的当前坐标点，6组队 7无目标） */
 		public var q_target:int;
 		 /**  作用目标上限 */
 		public var q_target_max:int;
-		 /**  技能表现类型（服务端区分） 0.常规类型 2.召唤类型  4有位移类型 */
+		 /**  技能表现类型（服务端区分） 0.常规类型 2.召唤类型  4有位移类型,5灭世金针6多段伤害 */
 		public var q_skill_type:int;
 		 /**  使用方式（1主动技能，2被动技能） */
 		public var q_trigger_type:int;
@@ -64,7 +66,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_is_allow_auto_combat:int;
 		 /**  是否可以设为默认技能（0不可设为默认技能，1可以设为默认技能） */
 		public var q_default_enable:int;
-		 /**  是否是锁定技能，必须指定一个目标的技能（0不锁定，1锁定） */
+		 /**  是否是锁定技能，必须指定一个目标的技能（0不锁定，1锁定,2锁定死亡） */
 		public var q_is_locking_spell:int;
 		 /**  显示所需人物等级 */
 		public var q_show_needgrade:int;
@@ -102,6 +104,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_fly_follow:int;
 		 /**  是否计算路径点伤害（0不计算，1计算） */
 		public var q_fly_cal_line:int;
+		 /**  无目标状态是否触发空弹道（0不触发，1触发） */
+		public var q_fly_empty:int;
 		 /**  施法距离限制（自身与目标之间的距离）（单位：格子）,地面行走魔法表示行走距离(小于等于3：判定为近战攻击（处理音效）大于3：判定为远程攻击（处理音效）)   0表示无限距离 */
 		public var q_range_limit:int;
 		 /**  保持间距（单位：像素）（不配默认使用施法范围） */
@@ -158,8 +162,10 @@ package com.rpgGame.coreData.clientConfig
 		public var q_summon_last:int;
 		 /**  召唤类型，1为累加召唤，2为替换召唤3地面特效 */
 		public var q_summon_type:int;
-		 /**  BUFF触发器，JSON格式用于描述改技能释放后如如何触发各种BUFF。格式为:{t, id, max }{触发类型,作用目标，BuffID}t=触发类型: 1:命中，2:未命中,3:暴击 4:杀死 5攻击开始时触发被动技能，6技能释放后触发，7召唤触发BUFF 攻击目标id=buff的ID对应BUFF表。Max=一次攻击最多触发多少次.例子:[{t:1, id:1001, r:10000},{t:3, id:5040001, r:10000}]可以把里边值复制到http://www.json.cn.网站去查看 */
+		 /**  BUFF触发器，JSON格式用于描述改技能释放后如如何触发各种BUFF。格式为:{t, id, max }{触发类型,作用目标，BuffID}t=触发类型: 1:命中，2:未命中,3:暴击 4:杀死 5攻击开始时触发被动技能，6技能释放后触发，7召唤触发BUFF , 8技能释放前触发，攻击目标id=buff的ID对应BUFF表。Max=一次攻击最多触发多少次.例子:[{t:1, id:1001, r:10000},{t:3, id:5040001, r:10000}]可以把里边值复制到http://www.json.cn.网站去查看 */
 		public var q_buff_trigger:String;
+		 /**  技能回复消耗触发（tt=触发类型(和BUFF触发一致),tv=触发值,（目前支持命中数量）rt=回复类型(可回复资源类型，)，,rv=回复数值（为负则为扣除）），可支持多个触发，[{tt:1, tv:1001, rt:1,rv:10}],回复类型：100=仇恨，101=血量上限回复比例，102=魔法（能量），怒气12，金针13，弩塔14 */
+		public var q_recovers:String;
 		 /**  被动触发几率（本处填万分比的分子） 如果是被动技能触发才有效，BUFF触发概率通过BUFF表控制 */
 		public var q_passive_prob:int;
 		 /**  触发后附加的BUFF编号序列（格式：BUFF编号;BUFF编号）（该字段已作废） */
@@ -232,7 +238,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_dead_launch_probability:int;
 		 /**  施法时是否要震屏 */
 		public var q_shake_screen:int;
-		 /**  扩展字段 */
+		 /**  扩展字段[dp：伤害加深比例，dr：伤害范围,为0表示必须指定目标，没有目标则没有伤害，dt,伤害时间间隔，受技能总的延迟时间影响，，dbt:BUFF触发方式，0伤害前触发，1伤害后触发，db:触发BUFF  id,dk:是否触发击退1击退] */
 		public var q_other:String;
 
 	}

@@ -330,7 +330,7 @@ package com.rpgGame.app.scene.animator
 						if (_isAdaptiveTargetHeight)
 						{
 							_endOffsetY = _targetPos.y + _targetOffsetY;
-							_endRotationX = dist > 0 ? Math.atan((_endOffsetY - _destPosition.y) / dist) * 57.33 : 0;//旋转x轴，匹配从上向下，或者从下朝上的感觉
+							_endRotationX = dist > 0 ? Math.atan((_endOffsetY - _destPosition.z) / dist) * 57.33 : 0;//旋转x轴，匹配从上向下，或者从下朝上的感觉
 							TweenLite.to(_renderSet, hitTime * 0.001, {x: _endPosX, z: _endPosZ, y: _endOffsetY, rotationX: _endRotationX, ease: Linear.easeNone, overwrite: 0, onUpdate: onUpdateAnimation, onComplete: onReachRemoveEffect});
 						}
 						else

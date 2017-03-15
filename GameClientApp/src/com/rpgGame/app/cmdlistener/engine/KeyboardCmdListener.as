@@ -339,6 +339,10 @@ package com.rpgGame.app.cmdlistener.engine
 					///////////////////////////////////////////
 					KeyMoveManager.getInstance().setKeyStatus(info, false);
 					break;
+                case KeyCodeType.SKILL:
+                    info.funcS = info.funcID.toString();
+                    KeySpellProcess.execUp(info);
+                    break;
 			}
 		}
 
