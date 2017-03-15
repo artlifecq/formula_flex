@@ -3,6 +3,7 @@ package com.rpgGame.app.manager.fight
 	import com.game.engine3D.controller.CameraController;
 	import com.game.mainCore.libCore.handle.HandleThread;
 	import com.rpgGame.app.display2D.AttackFace;
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.role.RoleData;
@@ -16,9 +17,8 @@ package com.rpgGame.app.manager.fight
 	import gs.TimelineLite;
 	import gs.TweenLite;
 	import gs.TweenMax;
-	import gs.easing.Back;
+	import gs.easing.Bounce;
 	import gs.easing.Circ;
-	import gs.easing.Elastic;
 	import gs.easing.Linear;
 	
 	import starling.display.DisplayObject;
@@ -162,27 +162,17 @@ package com.rpgGame.app.manager.fight
 				case EnumHurtType.SPELL_HURT_TYPE_NORMAL: //无文字
 					typeRes = "";
 					isUsefulBmp = hurter.isMainChar;
-					scaleAgo = 2;
-					scaleLater = 1;
-					if (isUsefulBmp)
-					{
-						numberType = NUMBER_PC_HIT;
-					}
-					else
-					{
-						end = new Point(-50, -200);
-						numberType = NUMBER_NPC_HIT;
-					}
+					scaleAgo = 1.5;
+					scaleLater = 0.5;
+					numberType = NUMBER_NPC_HIT;
 					break;
 				case EnumHurtType.SPELL_HURT_TYPE_MISS: //闪避
-//					isUsefulBmp = hurter.isMainChar;
 					typeRes = ROOT+USESFUL_EFFECT+"weimingzhong.png";
 					scaleAgo = 2;
 					scaleLater = 1;
 					tweenFun=tweenUp;
 					break;
 				case EnumHurtType.SPELL_HURT_TYPE_CRIT: //暴击
-//					isUsefulBmp = hurter.isMainChar;
 					typeRes = ROOT+USESFUL_EFFECT+"bao_ji_piao_zi.png";
 					scaleAgo = 2;
 					scaleLater = 1;
@@ -253,15 +243,66 @@ package com.rpgGame.app.manager.fight
 			{
 				var isLeftShow : Boolean = (atkor && hurter) ? (atkor.x - hurter.x >= 0) : false;//攻击者在被攻击者的右侧
 				//是否正面效果，相对主角自己而言的   是主角还是场景其他SceneRole，因为主角同时受到攻击的时候，伤害数值同时出现，造成重叠，所以用队列飘字，避免重叠
-				if (isUsefulBmp)
+				/*if (isUsefulBmp)
 				{
 					showQueueAttackFace(hurter, typeRes, numberType, hurtAmount, scaleAgo, scaleLater, from, end, null, null, tweenFun, isLeftShow);
 				}
-				else
-				{
-					showAttackFace(hurter.attackFace, typeRes, numberType, hurtAmount, null, null, tweenFun, from, end, scaleAgo, scaleLater, isLeftShow);
-				}
+				elseq
+				{*/
+					showAttackFace(hurter.headFace, typeRes, numberType, hurtAmount, null, null, tweenFun, from, end, scaleAgo, scaleLater, isLeftShow);
+//				}
+					if(hurter.data.id!=MainRoleManager.actorID){
+						var headFace:HeadFace=hurter.headFace as HeadFace;
+						if(headFace){
+							headFace.showBloodBar();
+						}
+					}
 			}
+		}
+		
+		/**
+		 * 角色伤害飘字 （单行飘字。要两行飘字，配合tweenTypeRoleHurt2方法用）
+		 * @param attackFace 飘字对象
+		 * @param $offset 偏移
+		 * @param $from 开始点
+		 * @param $end 结束点
+		 * @param $scaleAgo 飘字缩放--前
+		 * @param $scaleLater 飘字缩放--后
+		 * @param isLeftShow
+		 * @param onComplete 飘字完成回调
+		 * @author 陈鹉光 2016-01-28
+		 */
+		public static function tweenTypeRoleHurt(attackFace : DisplayObject, $displayObjectContainer:*, $from : Point, $end : Point, $scaleAgo : Number, $scaleLater : Number, isLeftShow : Boolean = false, onComplete : Function = null) : void
+		{
+			attackFace.scaleX = attackFace.scaleY = 1;
+			$from=new Point(-attackFace.width/2,0);
+			$end=new Point();
+			attackFace.x=$from.x;
+			attackFace.y=$from.y+20;
+				
+			var end2:Point=new Point();
+			var random:Number=Math.random();
+			$end.y=-80+50*random;
+			isLeftShow=random>0.5;//随机计算
+			end2.y=$end.y+30+10*random;
+			if(isLeftShow){//往左飘
+				$end.x=$from.x-20-random*20;
+				end2.x=$end.x-20-random*20;
+			}else{
+				$end.x=$from.x+20+random*20;
+				end2.x=$end.x+20+random*20;
+			}
+			
+			var timeLine : TimelineLite = new TimelineLite();
+			timeLine.append(TweenLite.to(attackFace, 0.3, { x:$from.x,y:$from.y,scaleX: $scaleAgo, scaleY: $scaleAgo,ease:Bounce.easeOut,onUpdate:updateCenter,onUpdateParams:[attackFace]}));//小到大
+			timeLine.append(TweenLite.to(attackFace, 0.5, { x:$end.x,y:$end.y,scaleX: $scaleLater, scaleY: $scaleLater,ease:Circ.easeOut,onUpdate:updateCenter,onUpdateParams:[attackFace]}));//大到小
+			timeLine.append(TweenLite.to(attackFace, 0.2, { x:$end.x,y:$end.y,scaleX: $scaleLater+0.1, scaleY: $scaleLater+0.1,alpha:0.8,onUpdate:updateCenter,onUpdateParams:[attackFace]}));//小到大
+			timeLine.append(TweenLite.to(attackFace, 0.3, { x:end2.x,y:end2.y,alpha:0,onComplete: onComplete, onCompleteParams: [attackFace],ease:Circ.easeOut}));
+		}
+		
+		private static function updateCenter(face:AttackFace):void
+		{
+			face.x=-face.width/2;
 		}
 
 		/**
@@ -357,7 +398,7 @@ package com.rpgGame.app.manager.fight
 		 */
 		public static function showQueueAttackFace($sc : SceneRole, $attackType : String = "", numberRes : String = "", $attackValue : * = 0, $scaleAgo : Number = 1, $scaleLater : Number = 1, $from : Point = null, $end : Point = null, $specialType : String = null, $specialPos : Point = null, $tweenFun : Function = null, $isLeftShow : Boolean = false, $queueTm : uint = 50) : void
 		{
-			_queueThread.push(showAttackFace, [$sc.attackFace, $attackType, numberRes, $attackValue, $specialType, $specialPos, $tweenFun, $from, $end, $scaleAgo, $scaleLater, $isLeftShow], $queueTm);
+			_queueThread.push(showAttackFace, [$sc.headFace, $attackType, numberRes, $attackValue, $specialType, $specialPos, $tweenFun, $from, $end, $scaleAgo, $scaleLater, $isLeftShow], $queueTm);
 		}
 
 		/**
@@ -696,49 +737,6 @@ package com.rpgGame.app.manager.fight
 			var timeLine : TimelineLite = new TimelineLite();
 			timeLine.insert(TweenLite.to(attackFace, 0.7, {x: $end.x, y: $end.y, alpha: 0, ease: Linear.easeNone}));
 			timeLine.append(TweenLite.to(attackFace, 0.2, {transformAroundCenter: {scaleX: $scaleLater, scaleY: $scaleLater}, alpha: 0, onComplete: onComplete, onCompleteParams: [attackFace], ease: Linear.easeInOut}));
-		}
-
-		/**
-		 * 角色伤害飘字 （单行飘字。要两行飘字，配合tweenTypeRoleHurt2方法用）
-		 * @param attackFace 飘字对象
-		 * @param $offset 偏移
-		 * @param $from 开始点
-		 * @param $end 结束点
-		 * @param $scaleAgo 飘字缩放--前
-		 * @param $scaleLater 飘字缩放--后
-		 * @param isLeftShow
-		 * @param onComplete 飘字完成回调
-		 * @author 陈鹉光 2016-01-28
-		 */
-		public static function tweenTypeRoleHurt(attackFace : DisplayObject, $displayObjectContainer:*, $from : Point, $end : Point, $scaleAgo : Number, $scaleLater : Number, isLeftShow : Boolean = false, onComplete : Function = null) : void
-		{
-			attackFace.scaleX = attackFace.scaleY = $scaleAgo;
-			attackFace.alpha=0;
-			$from=new Point(-attackFace.width/2,0);
-			$end=new Point();
-			var pian:int=attackFace.width;
-			pian=attackFace.width>200?200:attackFace.width;
-			if(isLeftShow){//往左侧飘
-				$end.x=-pian;
-				$end.y=-200;
-			}else{
-				$end.x=pian;
-				$end.y=-200;
-			}
-			attackFace.x=$from.x;
-			attackFace.y=$from.y;
-			
-			var timeLine : TimelineLite = new TimelineLite();
-			//onUpdate:updateXY,onUpdateParams:[attackFace,$displayObjectContainer]}));//缩放
-			timeLine.insert(TweenMax.to(attackFace, 0.2, {alpha:1,scaleX:$scaleLater, scaleY:$scaleLater,ease:Elastic.easeInOut,onUpdate:updateCenter,onUpdateParams:[attackFace]}));//大到小
-			timeLine.append(TweenLite.to(attackFace,0.5,{}));
-			timeLine.append(TweenLite.to(attackFace, 1.2, {x:$end.x,y:$end.y,alpha: 0,onComplete: onComplete, onCompleteParams: [attackFace],ease:Back.easeOut}));//消失
-		}
-		
-		private static function updateCenter(face:AttackFace):void
-		{
-			face.x=-face.width/2;
-			face.y=0;
 		}
 
 		/**

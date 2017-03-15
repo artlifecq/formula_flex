@@ -47,7 +47,7 @@ package com.rpgGame.app.state.role.action
 					{
 						fixDirection = ((_machine.owner as SceneRole).data as RoleData).fixDirection;
 					}
-					if (!fixDirection)
+					if (!fixDirection)1
 					{
 						var atkorX : int = _stateReference.atkorPos.x;
 						var atkorY : int = _stateReference.atkorPos.y;

@@ -11,7 +11,9 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
@@ -21,6 +23,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.EnumHurtType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.netData.fight.message.ResAttackRangeMessage;
 	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
@@ -28,8 +31,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
 	import com.rpgGame.netData.fight.message.ResFightFailedBroadcastMessage;
 	import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
-
-    import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	
 	import flash.geom.Point;
 	
@@ -244,14 +245,25 @@ package com.rpgGame.app.cmdlistener.scene
 				var role : SceneRole = SceneManager.getSceneObjByID(hurtResult.roleID) as SceneRole;
 				if (role && role.usable)
 				{
-					CharAttributeManager.setCharHp(role.data as RoleData, hurtResult.curLife);
+					var data:RoleData=role.data as RoleData;
+					if (data.id == MainRoleManager.actorID) //自己看到就好了
+					{
+						var offset:int=hurtResult.curLife*-1;
+						if( offset< 0){
+							FightFaceHelper.showAttChange(EnumHurtType.SUBHP, offset);//掉血
+						}else if( offset>0){
+							FightFaceHelper.showAttChange(EnumHurtType.ADDHP, offset);//回血
+						}
+					}	
+//					CharAttributeManager.setCharHp(role.data as RoleData, hurtResult.curLife);
 					CharAttributeManager.setCharMp(role.data as RoleData, hurtResult.curMana);
 				}
 			}
 		}
 
         // 锁定攻击源
-        private function lockAttack(info : ReleaseSpellInfo) : void {
+        private function lockAttack(info : ReleaseSpellInfo):void
+		{
             if (info.isMainCharHited && null == SceneRoleSelectManager.selectedRole) {
                 var hurtList : Vector.<FightHurtResult> = info.hurtList;
                 if (hurtList.length > 0) {

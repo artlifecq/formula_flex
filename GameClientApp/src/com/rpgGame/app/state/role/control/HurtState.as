@@ -73,7 +73,7 @@ package com.rpgGame.app.state.role.control
 					hurtAmount = sVo.hurtAmount;
 				}
 				_count++;
-				var tw : TweenLite = TweenLite.delayedCall(0.3 * i, showSingleHurt, [_count, info, hurtVo.attackerId, hurtVo.roleID, hurtType, hurtAmount]);
+				var tw : TweenLite = TweenLite.delayedCall(0 * i, showSingleHurt, [_count, info, hurtVo.attackerId, hurtVo.roleID, hurtType, hurtAmount]);
 				_delayHurtTws[_count] = tw;
 				i++;
 			}

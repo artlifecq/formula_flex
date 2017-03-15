@@ -13,7 +13,7 @@ package com.rpgGame.coreData.info.fight
 	{
 		/** 否造成位移。 **/
 		public var hasPositionChange : Boolean = false;
-		/** 本次技能之后, 还剩多少血。。 **/
+		/** 输出结果正数为伤害，负数为加血... **/
 		public var curLife : Number = 0;
 		/** 本次技能之后, 还剩多少法术。。 **/
 		public var curMana : Number = 0;

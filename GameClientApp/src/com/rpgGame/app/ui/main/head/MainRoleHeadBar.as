@@ -18,14 +18,14 @@ package com.rpgGame.app.ui.main.head {
     
     import starling.display.DisplayObject;
 
-    public class PlayerHeadBar extends SkinUI {
+    public class MainRoleHeadBar extends SkinUI {
         private var _skin : head_main_Skin;
 		
 		private var _zhandouliEftContaner:Inter3DContainer;
 		private var _zhandouliEft:InterObject3D;
 		private var _headImg:UIAsset;
 
-        public function PlayerHeadBar() {
+        public function MainRoleHeadBar() {
             this._skin = new head_main_Skin();
             super(this._skin);
             this._skin.btn_banghui.visible = false;
@@ -56,7 +56,7 @@ package com.rpgGame.app.ui.main.head {
 		{
 			var info:HeroData=MainRoleManager.actorInfo;
 			
-			this._skin.role_name.text = info.name + " " + info.totalStat.level +"(级)";
+			this._skin.role_name.text = info.name + " (" + info.totalStat.level +"级)";
 			this._skin.UI_bingjia.visible = JobEnum.ROLE_1_TYPE==info.job;
 			this._skin.UI_mojia.visible = JobEnum.ROLE_2_TYPE==info.job||JobEnum.ROLE_3_TYPE==info.job;
 			this._skin.UI_yijia.visible = JobEnum.ROLE_4_TYPE==info.job;

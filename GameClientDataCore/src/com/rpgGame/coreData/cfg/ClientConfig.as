@@ -412,6 +412,18 @@ package com.rpgGame.coreData.cfg
 		{
 			return "org.mokylin.skin.component.button."+name;
 		}
+		
+		/**
+		 *获取面板icon 
+		 * @param name
+		 * @return 
+		 * 
+		 */
+		public static function getPanelIcon(name:String):String
+		{
+			var url : String = "icon/panel/" + name + eName_PNG;
+			return baseDir + resURL + url;
+		}
 
 		/**
 		 * 得到技能图标

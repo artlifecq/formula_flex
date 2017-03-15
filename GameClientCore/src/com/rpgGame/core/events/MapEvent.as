@@ -30,6 +30,9 @@ package com.rpgGame.core.events
 		public static const UPDATE_MAP_ROLE_MOVE : int = UNIQUEID.NEXT;
 		/** 地图怪物或玩家被删除 参数：id**/
 		public static const UPDATE_MAP_ROLE_REMOVE : int = UNIQUEID.NEXT;
+		
+		/** 角色死亡**/
+		public static const ROLE_DIE : int = UNIQUEID.NEXT;
 	}
 }
 

@@ -1,7 +1,7 @@
 package com.rpgGame.netData.player.bean{
+	import com.rpgGame.netData.player.bean.ResourceDataItem;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.player.bean.AttributeItem;
-	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
 	import org.game.netCore.data.long;
 	
@@ -27,26 +27,12 @@ package com.rpgGame.netData.player.bean{
 		//角色等级
 		private var _level: int;
 		
-		//角色属性信息
-		private var _attributeList: Vector.<AttributeItem> = new Vector.<AttributeItem>();
-		//骑兵造型ID
-		private var _knightWepId: int;
+		//职业
+		private var _job: int;
 		
 		//性别 0女 1男
 		private var _sex: int;
 		
-		//美人ID
-		private var _beautyModelId: int;
-		
-		//美人技能信息
-		private var _beautySkillInfos: Vector.<com.rpgGame.netData.skill.bean.SkillInfo> = new Vector.<com.rpgGame.netData.skill.bean.SkillInfo>();
-		//坐骑ID
-		private var _horseModelid: int;
-		
-		//坐骑装备列表(4个格子,空的是itemid为0)
-		private var _horseEquips: Vector.<com.rpgGame.netData.backpack.bean.ItemInfo> = new Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>();
-		//骑兵技能信息
-		private var _weaponRideSkillInfos: Vector.<com.rpgGame.netData.skill.bean.SkillInfo> = new Vector.<com.rpgGame.netData.skill.bean.SkillInfo>();
 		//战斗力
 		private var _fightpower: int;
 		
@@ -56,18 +42,19 @@ package com.rpgGame.netData.player.bean{
 		//帮会名称
 		private var _guildName: String;
 		
-		//成就等级
-		private var _achievementLv: int;
+		//当前经验值
+		private var _exp: long;
 		
-		//当前成就值
-		private var _achievementValue: int;
+		//最大经验值
+		private var _maxExp: long;
 		
-		//击杀BOSS数
-		private var _bossKillNum: int;
+		//最大真气值
+		private var _maxZhenQi: long;
 		
-		//装备战印Id
-		private var _warMarkId: int;
-		
+		//角色属性信息
+		private var _attributeList: Vector.<AttributeItem> = new Vector.<AttributeItem>();
+		//资源属性项
+		private var _resourceData: Vector.<ResourceDataItem> = new Vector.<ResourceDataItem>();
 		//装备信息列表
 		private var _equips: Vector.<com.rpgGame.netData.backpack.bean.ItemInfo> = new Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>();
 		/**
@@ -80,48 +67,32 @@ package com.rpgGame.netData.player.bean{
 			writeString(_name);
 			//角色等级
 			writeShort(_level);
-			//角色属性信息
-			writeShort(_attributeList.length);
-			for (var i: int = 0; i < _attributeList.length; i++) {
-				writeBean(_attributeList[i]);
-			}
-			//骑兵造型ID
-			writeByte(_knightWepId);
+			//职业
+			writeByte(_job);
 			//性别 0女 1男
 			writeByte(_sex);
-			//美人ID
-			writeByte(_beautyModelId);
-			//美人技能信息
-			writeShort(_beautySkillInfos.length);
-			for (var i: int = 0; i < _beautySkillInfos.length; i++) {
-				writeBean(_beautySkillInfos[i]);
-			}
-			//坐骑ID
-			writeByte(_horseModelid);
-			//坐骑装备列表(4个格子,空的是itemid为0)
-			writeShort(_horseEquips.length);
-			for (var i: int = 0; i < _horseEquips.length; i++) {
-				writeBean(_horseEquips[i]);
-			}
-			//骑兵技能信息
-			writeShort(_weaponRideSkillInfos.length);
-			for (var i: int = 0; i < _weaponRideSkillInfos.length; i++) {
-				writeBean(_weaponRideSkillInfos[i]);
-			}
 			//战斗力
 			writeInt(_fightpower);
 			//vip等级
 			writeByte(_viplevel);
 			//帮会名称
 			writeString(_guildName);
-			//成就等级
-			writeShort(_achievementLv);
-			//当前成就值
-			writeInt(_achievementValue);
-			//击杀BOSS数
-			writeShort(_bossKillNum);
-			//装备战印Id
-			writeInt(_warMarkId);
+			//当前经验值
+			writeLong(_exp);
+			//最大经验值
+			writeLong(_maxExp);
+			//最大真气值
+			writeLong(_maxZhenQi);
+			//角色属性信息
+			writeShort(_attributeList.length);
+			for (var i: int = 0; i < _attributeList.length; i++) {
+				writeBean(_attributeList[i]);
+			}
+			//资源属性项
+			writeShort(_resourceData.length);
+			for (var i: int = 0; i < _resourceData.length; i++) {
+				writeBean(_resourceData[i]);
+			}
 			//装备信息列表
 			writeShort(_equips.length);
 			for (var i: int = 0; i < _equips.length; i++) {
@@ -140,48 +111,32 @@ package com.rpgGame.netData.player.bean{
 			_name = readString();
 			//角色等级
 			_level = readShort();
-			//角色属性信息
-			var attributeList_length : int = readShort();
-			for (var i: int = 0; i < attributeList_length; i++) {
-				_attributeList[i] = readBean(AttributeItem) as AttributeItem;
-			}
-			//骑兵造型ID
-			_knightWepId = readByte();
+			//职业
+			_job = readByte();
 			//性别 0女 1男
 			_sex = readByte();
-			//美人ID
-			_beautyModelId = readByte();
-			//美人技能信息
-			var beautySkillInfos_length : int = readShort();
-			for (var i: int = 0; i < beautySkillInfos_length; i++) {
-				_beautySkillInfos[i] = readBean(com.rpgGame.netData.skill.bean.SkillInfo) as com.rpgGame.netData.skill.bean.SkillInfo;
-			}
-			//坐骑ID
-			_horseModelid = readByte();
-			//坐骑装备列表(4个格子,空的是itemid为0)
-			var horseEquips_length : int = readShort();
-			for (var i: int = 0; i < horseEquips_length; i++) {
-				_horseEquips[i] = readBean(com.rpgGame.netData.backpack.bean.ItemInfo) as com.rpgGame.netData.backpack.bean.ItemInfo;
-			}
-			//骑兵技能信息
-			var weaponRideSkillInfos_length : int = readShort();
-			for (var i: int = 0; i < weaponRideSkillInfos_length; i++) {
-				_weaponRideSkillInfos[i] = readBean(com.rpgGame.netData.skill.bean.SkillInfo) as com.rpgGame.netData.skill.bean.SkillInfo;
-			}
 			//战斗力
 			_fightpower = readInt();
 			//vip等级
 			_viplevel = readByte();
 			//帮会名称
 			_guildName = readString();
-			//成就等级
-			_achievementLv = readShort();
-			//当前成就值
-			_achievementValue = readInt();
-			//击杀BOSS数
-			_bossKillNum = readShort();
-			//装备战印Id
-			_warMarkId = readInt();
+			//当前经验值
+			_exp = readLong();
+			//最大经验值
+			_maxExp = readLong();
+			//最大真气值
+			_maxZhenQi = readLong();
+			//角色属性信息
+			var attributeList_length : int = readShort();
+			for (var i: int = 0; i < attributeList_length; i++) {
+				_attributeList[i] = readBean(AttributeItem) as AttributeItem;
+			}
+			//资源属性项
+			var resourceData_length : int = readShort();
+			for (var i: int = 0; i < resourceData_length; i++) {
+				_resourceData[i] = readBean(ResourceDataItem) as ResourceDataItem;
+			}
 			//装备信息列表
 			var equips_length : int = readShort();
 			for (var i: int = 0; i < equips_length; i++) {
@@ -236,33 +191,18 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * get 角色属性信息
+		 * get 职业
 		 * @return 
 		 */
-		public function get attributeList(): Vector.<AttributeItem>{
-			return _attributeList;
+		public function get job(): int{
+			return _job;
 		}
 		
 		/**
-		 * set 角色属性信息
+		 * set 职业
 		 */
-		public function set attributeList(value: Vector.<AttributeItem>): void{
-			this._attributeList = value;
-		}
-		
-		/**
-		 * get 骑兵造型ID
-		 * @return 
-		 */
-		public function get knightWepId(): int{
-			return _knightWepId;
-		}
-		
-		/**
-		 * set 骑兵造型ID
-		 */
-		public function set knightWepId(value: int): void{
-			this._knightWepId = value;
+		public function set job(value: int): void{
+			this._job = value;
 		}
 		
 		/**
@@ -278,81 +218,6 @@ package com.rpgGame.netData.player.bean{
 		 */
 		public function set sex(value: int): void{
 			this._sex = value;
-		}
-		
-		/**
-		 * get 美人ID
-		 * @return 
-		 */
-		public function get beautyModelId(): int{
-			return _beautyModelId;
-		}
-		
-		/**
-		 * set 美人ID
-		 */
-		public function set beautyModelId(value: int): void{
-			this._beautyModelId = value;
-		}
-		
-		/**
-		 * get 美人技能信息
-		 * @return 
-		 */
-		public function get beautySkillInfos(): Vector.<com.rpgGame.netData.skill.bean.SkillInfo>{
-			return _beautySkillInfos;
-		}
-		
-		/**
-		 * set 美人技能信息
-		 */
-		public function set beautySkillInfos(value: Vector.<com.rpgGame.netData.skill.bean.SkillInfo>): void{
-			this._beautySkillInfos = value;
-		}
-		
-		/**
-		 * get 坐骑ID
-		 * @return 
-		 */
-		public function get horseModelid(): int{
-			return _horseModelid;
-		}
-		
-		/**
-		 * set 坐骑ID
-		 */
-		public function set horseModelid(value: int): void{
-			this._horseModelid = value;
-		}
-		
-		/**
-		 * get 坐骑装备列表(4个格子,空的是itemid为0)
-		 * @return 
-		 */
-		public function get horseEquips(): Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>{
-			return _horseEquips;
-		}
-		
-		/**
-		 * set 坐骑装备列表(4个格子,空的是itemid为0)
-		 */
-		public function set horseEquips(value: Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>): void{
-			this._horseEquips = value;
-		}
-		
-		/**
-		 * get 骑兵技能信息
-		 * @return 
-		 */
-		public function get weaponRideSkillInfos(): Vector.<com.rpgGame.netData.skill.bean.SkillInfo>{
-			return _weaponRideSkillInfos;
-		}
-		
-		/**
-		 * set 骑兵技能信息
-		 */
-		public function set weaponRideSkillInfos(value: Vector.<com.rpgGame.netData.skill.bean.SkillInfo>): void{
-			this._weaponRideSkillInfos = value;
 		}
 		
 		/**
@@ -401,63 +266,78 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * get 成就等级
+		 * get 当前经验值
 		 * @return 
 		 */
-		public function get achievementLv(): int{
-			return _achievementLv;
+		public function get exp(): long{
+			return _exp;
 		}
 		
 		/**
-		 * set 成就等级
+		 * set 当前经验值
 		 */
-		public function set achievementLv(value: int): void{
-			this._achievementLv = value;
+		public function set exp(value: long): void{
+			this._exp = value;
 		}
 		
 		/**
-		 * get 当前成就值
+		 * get 最大经验值
 		 * @return 
 		 */
-		public function get achievementValue(): int{
-			return _achievementValue;
+		public function get maxExp(): long{
+			return _maxExp;
 		}
 		
 		/**
-		 * set 当前成就值
+		 * set 最大经验值
 		 */
-		public function set achievementValue(value: int): void{
-			this._achievementValue = value;
+		public function set maxExp(value: long): void{
+			this._maxExp = value;
 		}
 		
 		/**
-		 * get 击杀BOSS数
+		 * get 最大真气值
 		 * @return 
 		 */
-		public function get bossKillNum(): int{
-			return _bossKillNum;
+		public function get maxZhenQi(): long{
+			return _maxZhenQi;
 		}
 		
 		/**
-		 * set 击杀BOSS数
+		 * set 最大真气值
 		 */
-		public function set bossKillNum(value: int): void{
-			this._bossKillNum = value;
+		public function set maxZhenQi(value: long): void{
+			this._maxZhenQi = value;
 		}
 		
 		/**
-		 * get 装备战印Id
+		 * get 角色属性信息
 		 * @return 
 		 */
-		public function get warMarkId(): int{
-			return _warMarkId;
+		public function get attributeList(): Vector.<AttributeItem>{
+			return _attributeList;
 		}
 		
 		/**
-		 * set 装备战印Id
+		 * set 角色属性信息
 		 */
-		public function set warMarkId(value: int): void{
-			this._warMarkId = value;
+		public function set attributeList(value: Vector.<AttributeItem>): void{
+			this._attributeList = value;
+		}
+		
+		/**
+		 * get 资源属性项
+		 * @return 
+		 */
+		public function get resourceData(): Vector.<ResourceDataItem>{
+			return _resourceData;
+		}
+		
+		/**
+		 * set 资源属性项
+		 */
+		public function set resourceData(value: Vector.<ResourceDataItem>): void{
+			this._resourceData = value;
 		}
 		
 		/**

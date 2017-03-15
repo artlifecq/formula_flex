@@ -16,6 +16,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.task.TouJingManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.ClientSceneNpcCfgData;

@@ -4,8 +4,6 @@ package com.rpgGame.app.manager.role
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.vo.map.ClientMapAreaData;
 	import com.game.engine3D.vo.map.ClientMapAreaGridData;
-	import com.gameClient.log.GameLog;
-	import com.rpgGame.app.graphics.AttackFaceSprite;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.graphics.StallHeadFace;
 	import com.rpgGame.app.manager.AvatarManager;
@@ -21,13 +19,11 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.YunBiaoEvent;
-	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.StallCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
-	import com.rpgGame.coreData.clientConfig.Attach_effect;
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
@@ -39,7 +35,6 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
 	import com.rpgGame.coreData.role.SceneTranportData;
-	import com.rpgGame.coreData.role.TrapInfo;
 	import com.rpgGame.coreData.role.ZhanCheData;
 	import com.rpgGame.coreData.type.AttachDisplayType;
 	import com.rpgGame.coreData.type.HeadBloodStateType;
@@ -106,7 +101,6 @@ package com.rpgGame.app.manager.role
 			role.name = data.name;
 			data.bodyRadius = radiusForHero;
 			role.headFace = HeadFace.create(role);
-			role.attackFace=AttackFaceSprite.create(role);
 
 			//执行主换装更新
 			AvatarManager.callEquipmentChange(role);
@@ -152,7 +146,6 @@ package com.rpgGame.app.manager.role
 			//设置VO
 			role.data = data;
 			role.headFace = HeadFace.create(role);
-			role.attackFace = AttackFaceSprite.create(role);
 			var roleNameStr : String = (bornData ? bornData.q_name.toString() : "未知怪物");
 			if (charType == SceneCharType.NPC && data.ownerName)
 			{
