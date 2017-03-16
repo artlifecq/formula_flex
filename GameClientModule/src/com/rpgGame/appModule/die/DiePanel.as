@@ -65,10 +65,12 @@ package com.rpgGame.appModule.die
 			}
 			
 			timer.reset();
-			timer.repeatCount=openTime;
-			timer.addEventListener(TimerEvent.TIMER_COMPLETE,onTimeComplete);
-			timer.addEventListener(TimerEvent.TIMER,onTimer);
-			timer.start();
+			if(openTime>0){
+				timer.repeatCount=openTime;
+				timer.addEventListener(TimerEvent.TIMER_COMPLETE,onTimeComplete);
+				timer.addEventListener(TimerEvent.TIMER,onTimer);
+				timer.start();
+			}
 		}
 		
 		protected function onTimer(event:TimerEvent):void

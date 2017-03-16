@@ -1,5 +1,6 @@
 package org.mokylin.skin.loading
 {
+	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -51,7 +52,7 @@ package org.mokylin.skin.loading
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 210;
-			temp.styleName = "ui/loading/alert/backgound/dikuang.png";
+			temp.styleName = "ui/loading/alert/backgound/erji_kuang.png";
 			temp.width = 471;
 			temp.x = 0;
 			temp.y = 0;
@@ -61,11 +62,11 @@ package org.mokylin.skin.loading
 		private function __PkTipsPanelSkin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 92;
-			temp.styleName = "ui/loading/alert/kang/shu_ru_kuang_1.png";
-			temp.width = 438;
-			temp.x = 16;
-			temp.y = 42;
+			temp.height = 104;
+			temp.styleName = "ui/loading/alert/kang/neikuang_2.png";
+			temp.width = 448;
+			temp.x = 12;
+			temp.y = 40;
 			return temp;
 		}
 
@@ -74,14 +75,14 @@ package org.mokylin.skin.loading
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnExit = temp;
 			temp.name = "btnExit";
-			temp.height = 33;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "退出游戏";
 			temp.fontSize = 14;
 			temp.styleClass = org.mokylin.skin.loading.alert.button.ButtonSkin_yellow;
-			temp.color = 0xF9F0CC;
+			temp.color = 0xE1D4A9;
 			temp.width = 90;
-			temp.x = 330;
-			temp.y = 150;
+			temp.x = 326;
+			temp.y = 154;
 			return temp;
 		}
 
@@ -90,14 +91,14 @@ package org.mokylin.skin.loading
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnOk = temp;
 			temp.name = "btnOk";
-			temp.height = 42;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "已 阅 读 并 同 意 声 明";
 			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.loading.alert.button.ButtonSkin_red;
-			temp.color = 0xF9F0CC;
+			temp.color = 0xE1D4A9;
 			temp.width = 211;
-			temp.x = 112;
-			temp.y = 144;
+			temp.x = 62;
+			temp.y = 154;
 			return temp;
 		}
 
@@ -132,7 +133,8 @@ package org.mokylin.skin.loading
 			temp.fontSize = 14;
 			temp.text = "补充协议";
 			temp.textAlign = "center";
-			temp.color = 0xF9F0CC;
+			temp.color = 0xE1D4A9;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 240;
 			temp.x = 114;
 			temp.y = 12;

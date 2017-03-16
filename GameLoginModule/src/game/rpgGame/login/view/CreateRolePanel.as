@@ -15,6 +15,7 @@ package game.rpgGame.login.view
 	import feathers.controls.TextInput;
 	import feathers.core.ToggleGroup;
 	
+	import game.rpgGame.login.ClientConfig;
 	import game.rpgGame.login.data.AvatarInfo;
 	import game.rpgGame.login.data.CreateRoleData;
 	import game.rpgGame.login.data.JobType;
@@ -65,6 +66,8 @@ package game.rpgGame.login.view
 		private var jobGroup:ToggleGroup;
 		private var jobDesList:Vector.<SkinnableContainer>;
 		private var jobDes:SkinnableContainer;
+		
+		private var bgEft:Inter3DContainer;
 		
 		private var avatarInfos:Array;
 		private var jobTyps:Array;
@@ -282,6 +285,9 @@ package game.rpgGame.login.view
 			_avatar=new InterAvatar3D();
 			_avatar.x=700;
 			_avatar.y=780;
+			bgEft=new Inter3DContainer();
+			bgEft.playInter3DAt(ClientConfig.getEffect("ui_xuanren"),0,0,0);
+			this.addChildAt(bgEft,1);
 			this.addChild3D(this._avatar);
 			_avatarData=new RoleData(0);
 			

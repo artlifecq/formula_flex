@@ -452,6 +452,7 @@ package com.rpgGame.appModule.role
 					this._avatar.curRole.rotationY=movex;
 				}else if (touch.phase == TouchPhase.ENDED)	{
 					this._touchID = -1;
+					this._avatar.curRole.rotationY=0;
 				}
 			}else{
 				touch = e.getTouch(_skin.roleZone, TouchPhase.BEGAN);

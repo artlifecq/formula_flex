@@ -619,10 +619,15 @@ package com.rpgGame.app.ui.main.chat {
         
         private function sendMsg() : void 
 		{
+			//死亡面板测试
+		/*	if(){
+				
+			}
 			var ms:ResPlayerDieMessage=new ResPlayerDieMessage();
 			ms.attackername="111";
+			ms.autoTime=30;
 			ms.time=new Date().getTime()/1000;
-			AppManager.showApp(AppConstant.DIE_PANEL,ms);
+			AppManager.showApp(AppConstant.DIE_PANEL,ms);*/
 			
 			
 			if("" == this._inputText.text )
