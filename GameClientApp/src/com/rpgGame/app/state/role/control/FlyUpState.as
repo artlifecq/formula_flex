@@ -27,6 +27,7 @@ package com.rpgGame.app.state.role.control
 		 */
 		public static var FLY_HEIGHT : int = 0;
 		
+		public var hitTime:Number;
 		public var upTime:Number;
 		public var flyTime:Number;
 		public var fallTime:Number;
@@ -42,6 +43,7 @@ package com.rpgGame.app.state.role.control
 				_stateReference = _ref as FlyUpStateReference;
 				
 //				FLY_HEIGHT = Number(_stateReference.buffData.clientData.h);
+				hitTime = 200;
 				upTime = Number(_stateReference.buffData.clientData.up);
 				flyTime = Number(_stateReference.buffData.clientData.stay);
 				fallTime = Number(_stateReference.buffData.clientData.down);
@@ -87,7 +89,7 @@ package com.rpgGame.app.state.role.control
 					}
 				}
 				
-				doFly();
+				doHit();
 			}
 			else
 				throw new Error("击飞上升状态引用必须是JumpRiseStateReference类型！");
@@ -113,7 +115,6 @@ package com.rpgGame.app.state.role.control
 				case RenderUnitType.HAIR:
 				case RenderUnitType.WEAPON:
 				case RenderUnitType.DEPUTY_WEAPON:
-					render.visible = true;
 					render.repeat = repeat;
 					render.setStatus(statusType, new CrossfadeTransition(0.2), time);
 					if (isFreeze)
@@ -123,17 +124,33 @@ package com.rpgGame.app.state.role.control
 					render.visible = false;
 					break;
 				case RenderUnitType.EFFECT:
-					render.visible = true;
 					render.repeat = 0;
 					render.setStatus(RoleActionType.IDLE, null, time);
 					break;
 				case RenderUnitType.WEAPON_EFFECT:
-					render.visible = true;
 					break;
 				case RenderUnitType.KNIFE_LIGHT:
 					break;
 				case RenderUnitType.HURT:
 					break;
+			}
+		}
+		
+		private function doHit():void
+		{
+			if (_machine && !_machine.isDisposed)
+			{
+				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {offsetZ: true});
+				changeAction(RoleActionType.HIT,1);
+				var totalTime : int = hitTime;
+				if(totalTime > 0)
+				{
+					TweenLite.to(_machine.owner as SceneRole, totalTime * 0.001, {offsetZ: FLY_HEIGHT, ease: Cubic.easeOut, overwrite: 0, onComplete: doFly});
+				}
+				else
+				{
+					doFly();
+				}
 			}
 		}
 		
@@ -145,7 +162,6 @@ package com.rpgGame.app.state.role.control
 		{
 			if (_machine && !_machine.isDisposed)
 			{
-				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {offsetZ: true});
 				changeAction(RoleActionType.FLY,1);
 				var totalTime : int = upTime;
 				if(totalTime > 0)

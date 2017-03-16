@@ -77,7 +77,7 @@ package com.rpgGame.app.state.role.action
 			{
 				case RenderUnitType.BODY:
 				case RenderUnitType.HAIR:
-					render.visible = true;
+//					render.visible = true;
 					render.repeat = _repeat;
 					render.setStatus(statusType, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
 					if (isFreeze)
