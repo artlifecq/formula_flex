@@ -44,6 +44,9 @@ package com.rpgGame.appModule.role
 	import org.mokylin.skin.app.beibao.juese_Skin;
 	
 	import starling.display.DisplayObject;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
 
 	/**
 	 *装备部分
@@ -74,6 +77,9 @@ package com.rpgGame.appModule.role
 		private var _roleData:HeroData;
 		private var isMainRole:Boolean;
 		private var otherItems:Vector.<ItemInfo>;
+		private var _touchID:int;
+
+		private var startX:Number;
 		
 		
 		public function AvatarView(skin:juese_Skin)
@@ -431,6 +437,29 @@ package com.rpgGame.appModule.role
 			
 			this._avatar.setRoleData(this._showAvatarData);
 			this._avatar.curRole.setScale(1.7);			
+		}
+		
+		public function onTouch(e:TouchEvent):void
+		{
+			var touch : Touch;
+			if(_touchID!=-1){
+				touch = e.getTouch(_skin.roleZone,null,this._touchID);
+				if (!touch)
+					return;
+				if (touch.phase == TouchPhase.MOVED)
+				{
+					var movex:Number=touch.globalX-startX;
+					this._avatar.curRole.rotationY=movex;
+				}else if (touch.phase == TouchPhase.ENDED)	{
+					this._touchID = -1;
+				}
+			}else{
+				touch = e.getTouch(_skin.roleZone, TouchPhase.BEGAN);
+				if(touch){
+					this._touchID=touch.id;
+					startX=touch.globalX;
+				}
+			}
 		}
 	}
 }

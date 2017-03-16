@@ -20,6 +20,7 @@ package game.rpgGame.login.view
 	import game.rpgGame.login.data.JobType;
 	import game.rpgGame.login.data.RoleData;
 	import game.rpgGame.login.display3D.InterAvatar3D;
+	import game.rpgGame.login.state.RoleStateType;
 	import game.rpgGame.login.util.RandomNick;
 	
 	import gs.TweenLite;
@@ -189,6 +190,7 @@ package game.rpgGame.login.view
 			this.addEventListener(starling.events.TouchEvent.TOUCH, onTouch);
 		}
 		
+		
 		private function onTouch(e : TouchEvent) : void
 		{
 			var t : Touch = e.getTouch(this, TouchPhase.ENDED);
@@ -215,6 +217,8 @@ package game.rpgGame.login.view
 					_createRoleData.sex=sexIndex+1;
 					_createRoleData.job=jobTyps[jobGroup.selectedIndex][sexIndex];
 					toCreate(_createRoleData);
+				}else if(t.target==_skin.roleZone){
+					_avatar.role.stateMachine.transition(RoleStateType.ACTION_SHOW);
 				}
 			}
 		}
@@ -277,7 +281,7 @@ package game.rpgGame.login.view
 		{
 			_avatar=new InterAvatar3D();
 			_avatar.x=700;
-			_avatar.y=750;
+			_avatar.y=780;
 			this.addChild3D(this._avatar);
 			_avatarData=new RoleData(0);
 			

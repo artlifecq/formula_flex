@@ -41,6 +41,8 @@ package org.mokylin.skin.mainui.head
 
 		public var grp_zhiye:feathers.controls.Group;
 
+		public var lbl_num:feathers.controls.Label;
+
 		public var role_name:feathers.controls.Label;
 
 		public var role_xuecao:feathers.controls.SkinnableContainer;
@@ -56,7 +58,7 @@ package org.mokylin.skin.mainui.head
 			this.currentState = "normal";
 			this.height = 91;
 			this.width = 310;
-			this.elementsContent = [__head_max_Skin_UIAsset1_i(),role_xuecao_i(),__head_max_Skin_UIAsset2_i(),role_name_i(),grp_zhiye_i(),grp_more_i()];
+			this.elementsContent = [__head_max_Skin_UIAsset1_i(),role_xuecao_i(),__head_max_Skin_UIAsset2_i(),role_name_i(),grp_zhiye_i(),grp_more_i(),lbl_num_i()];
 			
 			states = {
 			};
@@ -186,6 +188,19 @@ package org.mokylin.skin.mainui.head
 			temp.x = 0;
 			temp.y = 0;
 			temp.elementsContent = [UI_bingjia_i(),UI_mojia_i(),UI_yijia_i()];
+			return temp;
+		}
+
+		private function lbl_num_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbl_num = temp;
+			temp.name = "lbl_num";
+			temp.text = "标签";
+			temp.textAlign = "center";
+			temp.width = 196;
+			temp.x = 93;
+			temp.y = 30;
 			return temp;
 		}
 

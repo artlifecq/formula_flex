@@ -24,6 +24,7 @@ package com.rpgGame.app.ui.main.head
 			if(data.id!=_monsterData.id){
 				return;
 			}
+			super.changeHp(data);
 			_skin.xuetiao_hong.scaleX=data.totalStat.hp/data.totalStat.life;
 		}
 	}

@@ -52,7 +52,7 @@ package com.rpgGame.app.ui.main.head
 		
 		protected function changeHp(data:RoleData):void
 		{
-			
+			_stateSkin["lbl_num"].text=data.totalStat.hp+"/"+data.totalStat.life;
 		}
 		
 		 override protected function onHide() : void

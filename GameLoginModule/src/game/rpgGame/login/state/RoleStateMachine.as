@@ -45,6 +45,7 @@ package game.rpgGame.login.state
 		stateMapping[RoleStateType.ACTION_IDLE] = IdleState;
 		stateMapping[RoleStateType.CONTROL_AVATAR] = AvatarState;
 		stateMapping[RoleStateType.CONTROL_STOP_WALK_MOVE] = StopWalkMoveState;
+		stateMapping[RoleStateType.ACTION_SHOW] = ShowState;
 		
 		private var _role : SceneRole;
 		private var _lastCanShowRiding : Boolean;

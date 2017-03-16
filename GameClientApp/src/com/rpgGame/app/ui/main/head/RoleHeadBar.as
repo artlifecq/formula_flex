@@ -133,6 +133,7 @@ package com.rpgGame.app.ui.main.head
 			var hp:int=_roleData.totalStat.hp;
 			
 			_skin.role_xuecao.scaleX=hp/maxHp;
+			this._skin.lbl_num.text=hp+"/"+maxHp;
 		}
 		
 		/**
@@ -145,6 +146,7 @@ package com.rpgGame.app.ui.main.head
 			this._skin.UI_bingjia.visible = JobEnum.ROLE_1_TYPE==_roleData.job;
 			this._skin.UI_mojia.visible = JobEnum.ROLE_2_TYPE==_roleData.job||JobEnum.ROLE_3_TYPE==_roleData.job;
 			this._skin.UI_yijia.visible = JobEnum.ROLE_4_TYPE==_roleData.job;
+			
 			switch(_roleData.job){
 				case JobEnum.ROLE_1_TYPE:
 					_headImg.styleName=AssetUrl.HEAD_ICON_1;
