@@ -4,6 +4,8 @@ package com.rpgGame.app.state.role.control
 	import com.game.engine3D.vo.BaseRole;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.type.RoleStateType;
+	
+	import flash.utils.getQualifiedClassName;
 
 	/**
 	 * 隐身状态处理 
@@ -36,16 +38,20 @@ package com.rpgGame.app.state.role.control
 			}
 		}
 		
+		override public function get tribe():String
+		{
+			return getQualifiedClassName(HiddingState);
+		}
+		
+		
 		private function eachVisible(role : BaseRole, render : RenderUnit3D) : void
 		{
 			render.visible = true;
-			render.alpha = 1;
 		}
 		
 		private function eachUnVisible(role : BaseRole, render : RenderUnit3D) : void
 		{
 			render.visible = false;
-			render.alpha = 0;
 		}
 		
 		override public function afterLeave() : void

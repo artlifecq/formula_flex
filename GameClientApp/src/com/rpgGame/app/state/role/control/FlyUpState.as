@@ -10,8 +10,6 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
-	import flash.geom.Point;
-	
 	import away3d.animators.transitions.CrossfadeTransition;
 	
 	import gs.TweenLite;
@@ -42,11 +40,6 @@ package com.rpgGame.app.state.role.control
 			if (_ref is FlyUpStateReference)
 			{
 				_stateReference = _ref as FlyUpStateReference;
-				
-				trace(_stateReference.buffData.clientData.h);
-				trace(_stateReference.buffData.clientData.up);
-				trace(_stateReference.buffData.clientData.stay);
-				trace(_stateReference.buffData.clientData.down);
 				
 //				FLY_HEIGHT = Number(_stateReference.buffData.clientData.h);
 				upTime = Number(_stateReference.buffData.clientData.up);
@@ -86,10 +79,12 @@ package com.rpgGame.app.state.role.control
 				}
 				if (!fixDirection)
 				{
-//					var pos:Point = new Point(atkor.x, atkor.z);
-					var atkorX : int = _stateReference.buffData.srcRole.x;
-					var atkorY : int = _stateReference.buffData.srcRole.z;
-					(_machine.owner as SceneRole).faceToGround(atkorX, atkorY, 0);
+					if(_stateReference.buffData.srcRole)
+					{
+						var atkorX : int = _stateReference.buffData.srcRole.x;
+						var atkorY : int = _stateReference.buffData.srcRole.z;
+						(_machine.owner as SceneRole).faceToGround(atkorX, atkorY, 0);
+					}
 				}
 				
 				doFly();
