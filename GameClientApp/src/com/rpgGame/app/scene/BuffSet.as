@@ -13,7 +13,6 @@ package com.rpgGame.app.scene
 	import com.rpgGame.app.state.role.control.StiffStateReference;
 	import com.rpgGame.app.state.role.control.StunStateReference;
 	import com.rpgGame.app.state.role.control.SyncSpellActionStateReference;
-	import com.rpgGame.app.state.role.control.UnmovableStateReference;
 	import com.rpgGame.app.state.role.control.UseSpellStateReference;
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
@@ -23,8 +22,6 @@ package com.rpgGame.app.scene
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
-	
-	import gs.TweenLite;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
@@ -78,6 +75,37 @@ package com.rpgGame.app.scene
 		private var _buffEffectTweenMap : HashMap;
 		
 		/**
+		 * 为角色身上添加buff效果及buff的计时器 
+		 * @param buffData
+		 * 
+		 */		
+		private function addBuffEffect(buffData : BuffData) : void
+		{
+			if (!_role)
+				return;
+			removeBuffEffect(buffData.cfgId);
+			var data : Q_buff = buffData.buffData;
+			
+			handlerRoleState(buffData);
+			
+			var animations:Array = data.q_animation.split(";");
+			if (data && animations)
+			{
+				var len : int = animations.length;
+				for (var i : int = 0; i < len; i++)
+				{
+					var animation : int = animations[i];
+					var animatData : Q_SpellAnimation = animation > 0 ? AnimationDataManager.getData(animation) : null;
+					if (animatData)
+					{
+						SpellAnimationHelper.addBuffEffect(_role, i, RenderUnitType.BUFF + buffData.cfgId, animatData.role_res, animatData.bind_bone, 0);
+					}
+				}
+			}
+			_buffEffectTweenMap.add(buffData.cfgId,buffData.cfgId);
+		}
+		
+		/**
 		 * 更新角色身上的所有buff效果
 		 * 
 		 */		
@@ -124,49 +152,6 @@ package com.rpgGame.app.scene
 		}
 		
 		/**
-		 * 为角色身上添加buff效果及buff的计时器 
-		 * @param buffData
-		 * 
-		 */		
-		private function addBuffEffect(buffData : BuffData) : void
-		{
-			if (!_role)
-				return;
-			removeBuffEffect(buffData.cfgId);
-			var data : Q_buff = buffData.buffData;
-			
-			handlerRoleState(buffData);
-			
-			var animations:Array = data.q_animation.split(";");
-			if (data && animations)
-			{
-				var len : int = animations.length;
-				for (var i : int = 0; i < len; i++)
-				{
-					var animation : int = animations[i];
-					var animatData : Q_SpellAnimation = animation > 0 ? AnimationDataManager.getData(animation) : null;
-					if (animatData)
-					{
-						SpellAnimationHelper.addBuffEffect(_role, i, RenderUnitType.BUFF + buffData.cfgId, animatData.role_res, animatData.bind_bone, 0);
-					}
-				}
-			}
-			var duration : Number = buffData.disappearTime;
-			var tween : TweenLite = TweenLite.delayedCall(duration * 0.001, onRemoveBuff, [buffData.cfgId]);
-			_buffEffectTweenMap.add(buffData.cfgId, tween);
-		}
-		
-		/**
-		 * 根据buff的配置表的id删掉这个buff
-		 * @param stateId
-		 * 
-		 */		
-		private function onRemoveBuff(stateId : int) : void
-		{
-			removeBuff(stateId);
-		}
-		
-		/**
 		 * 根据后台的buffID删除buff 
 		 * @param buffID
 		 * 
@@ -185,39 +170,14 @@ package com.rpgGame.app.scene
 				if (currData.buffId == buffID)
 				{
 					buffList.splice(i, 1);
+					removeRoleState(currData);
+					removeBuffEffect(currData.cfgId);
 					break;
 				}
 			}
-			removeBuffEffect(currData.cfgId);
+			
 			EventManager.dispatchEvent(BuffEvent.REMOVE_BUFF, _role.id, currData.cfgId);
-		}
-		
-		/**
-		 * 根据buff的配置表id删掉buff 
-		 * @param stateId
-		 * 
-		 */		
-		private function removeBuff(stateId : int) : void
-		{
-			if (!_role)
-				return;
-			var buffList : Vector.<BuffData> = (_role.data as RoleData).buffList;
-			if (!buffList || buffList.length == 0)
-				return;
-			var len : int = buffList.length;
-			for (var i : int = 0; i < len; i++)
-			{
-				var currData : BuffData = buffList[i];
-				if (currData.cfgId == stateId)
-				{
-					buffList.splice(i, 1);
-					break;
-				}
-			}
-			removeBuffEffect(stateId);
-			EventManager.dispatchEvent(BuffEvent.REMOVE_BUFF, _role.id, stateId);
-		}
-		
+		}	
 		
 		/**
 		 * 删掉角色身上的buff效果及计时器 
@@ -230,12 +190,7 @@ package com.rpgGame.app.scene
 			{
 				_role.avatar.removeRenderUnitsByType(RenderUnitType.BUFF + stateId);
 			}
-			var tween : TweenLite = _buffEffectTweenMap.getValue(stateId) as TweenLite;
-			if (tween)
-			{
-				tween.kill();
-				_buffEffectTweenMap.remove(stateId);
-			}
+			_buffEffectTweenMap.remove(stateId);
 		}
 		
 		public function BuffSet(role : SceneRole)
@@ -258,13 +213,60 @@ package com.rpgGame.app.scene
 				{
 					_role.avatar.removeRenderUnitsByType(RenderUnitType.BUFF + stateId);
 				}
-				var tween : TweenLite = _buffEffectTweenMap.getValue(stateId) as TweenLite;
-				if (tween)
-				{
-					tween.kill(); 
-				}
 			}
 			_buffEffectTweenMap.clear();
+		}
+		
+		private function removeRoleState(buffData : BuffData):void
+		{
+			var buffStatesStr:String = buffData.buffStates;
+			var stateTypes:Array = buffStatesStr.split(",");
+			for(var i:uint=0;i<stateTypes.length;i++)
+			{
+				removeRoleBuffState(int(stateTypes[i]));
+			}
+		}
+		
+		private function removeRoleBuffState(stateType:int):void
+		{
+			if (_role)
+			{
+				switch(stateType)
+				{
+					case 1://眩晕状态
+						_role.stateMachine.removeState(RoleStateType.CONTROL_STUN);
+						break;
+					case 2://定身状态
+						_role.stateMachine.removeState(RoleStateType.CONTROL_STIFF);
+						break;
+					case 3://沉默状态
+						_role.stateMachine.removeState(RoleStateType.CONTROL_HUSH);
+						break;
+					case 4://混乱状态
+						_role.stateMachine.removeState(RoleStateType.CONTROL_HUN_LUAN);
+						break;
+					case 5://隐身buff
+						_role.stateMachine.removeState(RoleStateType.CONTROL_HIDDING);
+						break;
+					case 25:
+						_role.stateMachine.removeState(RoleStateType.CONTROL_USE_SPELL);
+						break;
+					case 26://浮空上升buff
+						_role.stateMachine.removeState(RoleStateType.CONTROL_FLY_UP);
+						break;
+					case 27://技能同步buff
+						_role.stateMachine.removeState(RoleStateType.CONTROL_SYNC_SPELLACTION); //切换到“技能动作同步状态”
+						break;
+					case 199://冰冻
+						_role.stateMachine.removeState(RoleStateType.CONTROL_BING_DONG);
+						break;
+					default:
+						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
+						buffRef.setParams(buffData);
+						_role.stateMachine.transition(RoleStateType.CONTROL_UNMOVABLE, buffRef);*/
+						break;
+				}
+			}
 		}
 		
 		/**

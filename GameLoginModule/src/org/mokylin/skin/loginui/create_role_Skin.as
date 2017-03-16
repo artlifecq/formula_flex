@@ -56,6 +56,8 @@ package org.mokylin.skin.loginui
 
 		public var nv_bg:feathers.controls.UIAsset;
 
+		public var roleZone:feathers.controls.UIAsset;
+
 		public var text_input:feathers.controls.TextInput;
 
 
@@ -69,7 +71,7 @@ package org.mokylin.skin.loginui
 			this.currentState = "normal";
 			this.height = 900;
 			this.width = 1600;
-			this.elementsContent = [__create_role_Skin_UIAsset1_i(),nv_bg_i(),btn_bingjia_i(),btn_yijia_i(),btn_mojia_i(),grp_sex_i(),__create_role_Skin_Group1_i(),grp_input_i(),btn_create_i(),__create_role_Skin_UIAsset6_i(),cont_mojia_i(),cont_yijia_i(),cont_binjia_i()];
+			this.elementsContent = [__create_role_Skin_UIAsset1_i(),nv_bg_i(),btn_bingjia_i(),btn_yijia_i(),btn_mojia_i(),grp_sex_i(),__create_role_Skin_Group1_i(),grp_input_i(),btn_create_i(),__create_role_Skin_UIAsset6_i(),cont_mojia_i(),cont_yijia_i(),cont_binjia_i(),roleZone_i()];
 			
 			states = {
 			};
@@ -337,6 +339,20 @@ package org.mokylin.skin.loginui
 			temp.width = 459;
 			temp.x = 1142;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function roleZone_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			roleZone = temp;
+			temp.name = "roleZone";
+			temp.alpha = 0;
+			temp.height = 716;
+			temp.styleName = "ui/loginui/IDkuang.png";
+			temp.width = 776;
+			temp.x = 410;
+			temp.y = 131;
 			return temp;
 		}
 

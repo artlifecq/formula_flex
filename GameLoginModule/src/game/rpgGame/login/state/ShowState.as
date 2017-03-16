@@ -1,17 +1,15 @@
-package com.rpgGame.app.state.role.action
+package game.rpgGame.login.state
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.vo.BaseRole;
-	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.state.role.RoleStateMachine;
-	import com.rpgGame.core.state.role.action.ActionState;
-	import com.rpgGame.coreData.type.RenderUnitID;
-	import com.rpgGame.coreData.type.RenderUnitType;
-	import com.rpgGame.coreData.type.RoleActionType;
-	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import away3d.animators.transitions.CrossfadeTransition;
+	
+	import game.rpgGame.login.scene.RenderUnitID;
+	import game.rpgGame.login.scene.RenderUnitType;
+	import game.rpgGame.login.scene.RoleActionType;
+	import game.rpgGame.login.scene.SceneRole;
 	
 	import gs.TweenLite;
 
@@ -27,14 +25,14 @@ package com.rpgGame.app.state.role.action
 		
 		override public function playAnimation(role : BaseRole, render : RenderUnit3D, isFreeze : Boolean = false, time : int = -1, speedRatio : Number = 1) : void
 		{
-			var statusType : String = RoleActionType.getActionType(_showType, (_machine as RoleStateMachine).isRiding);
+			var statusType : String = RoleActionType.getActionType(_showType, false);
 			switch (render.type)
 			{
 				case RenderUnitType.BODY:
 				case RenderUnitType.HAIR:
 				case RenderUnitType.WEAPON:
 				case RenderUnitType.DEPUTY_WEAPON:
-//					render.visible = true;
+					render.visible = true;
 					render.repeat = _repeatNum;
 					render.setStatus(statusType, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
 					
@@ -42,19 +40,19 @@ package com.rpgGame.app.state.role.action
 						render.stop(time);
 					break;
 				case RenderUnitType.MOUNT:
-//					render.visible = true;
+					render.visible = true;
 					render.repeat = _repeatNum;
 					render.setStatus(statusType, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
 					if (isFreeze)
 						render.stop(time);
 					break;
 				case RenderUnitType.EFFECT:
-//					render.visible = true;
+					render.visible = true;
 					render.repeat = _repeatNum;
 					render.setStatus(statusType, null, time);
 					break;
 				case RenderUnitType.WEAPON_EFFECT:
-//					render.visible = true;
+					render.visible = true;
 					break;
 				case RenderUnitType.KNIFE_LIGHT:
 					break;
@@ -150,10 +148,6 @@ package com.rpgGame.app.state.role.action
 		
 		override public function enterPass(prevState:IState, force:Boolean=false):Boolean
 		{
-			if(!prevState){
-				return false;
-			}
-			
 			return true;
 		}
 	}

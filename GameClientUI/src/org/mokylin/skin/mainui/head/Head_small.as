@@ -17,6 +17,8 @@ package org.mokylin.skin.mainui.head
 		//==========================================================================
 		public var lbl_name:feathers.controls.Label;
 
+		public var lbl_num:feathers.controls.Label;
+
 		public var xuetiao_zi:feathers.controls.UIAsset;
 
 
@@ -30,7 +32,7 @@ package org.mokylin.skin.mainui.head
 			this.currentState = "normal";
 			this.height = 47;
 			this.width = 217;
-			this.elementsContent = [__Head_small_UIAsset1_i(),xuetiao_zi_i(),lbl_name_i()];
+			this.elementsContent = [__Head_small_UIAsset1_i(),xuetiao_zi_i(),lbl_name_i(),lbl_num_i()];
 			
 			states = {
 			};
@@ -65,6 +67,19 @@ package org.mokylin.skin.mainui.head
 			temp.width = 195;
 			temp.x = 11;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function lbl_num_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbl_num = temp;
+			temp.name = "lbl_num";
+			temp.text = "标签";
+			temp.textAlign = "center";
+			temp.width = 189;
+			temp.x = 15;
+			temp.y = 25;
 			return temp;
 		}
 
