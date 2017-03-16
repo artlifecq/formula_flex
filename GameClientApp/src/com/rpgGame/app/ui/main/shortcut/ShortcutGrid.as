@@ -7,6 +7,10 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.coreData.type.EffectUrl;
 	
 	import feathers.controls.UIAsset;
+	
+	import gs.TimelineLite;
+	import gs.TweenMax;
+	import gs.easing.Bounce;
 
 	/**
 	 * 快捷栏数据
@@ -20,6 +24,8 @@ package com.rpgGame.app.ui.main.shortcut
 		private var effAutoUse : InterObject3D;
 		private var offsetX : int = 315;
 		private var offsetY : int = 27;
+
+		private var timeLine:TimelineLite;
 
 		public function ShortcutGrid(shortcutBar : ShortcutBar, size : int)
 		{
@@ -45,6 +51,20 @@ package com.rpgGame.app.ui.main.shortcut
 			_iconImage.y = 6;
 		}
 		
+		public function tweenGrid():void
+		{
+			if(timeLine){
+				timeLine.complete();
+			}
+			timeLine = new TimelineLite();
+			timeLine.append(TweenMax.to(this,0.1,{y:this.y+2,ease:Bounce.easeOut}));
+			timeLine.append(TweenMax.to(this,0.1,{y:this.y,ease:Bounce.easeOut,onComplete:onComplete}));			
+		}
+		
+		private function onComplete():void
+		{
+			timeLine=null;
+		}
 
 		public function showAutoImg(isShow : Boolean) : void
 		{

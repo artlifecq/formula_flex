@@ -2,9 +2,11 @@ package com.rpgGame.app.fight.spell
 {
 	import com.game.engine3D.utils.MathUtil;
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.action.AttackStateReference;
 	import com.rpgGame.app.state.role.control.AttackHardStateReference;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.geom.Point;
@@ -97,6 +99,7 @@ package com.rpgGame.app.fight.spell
 				var hardRef : AttackHardStateReference = spellInfo.atkor.stateMachine.getReference(AttackHardStateReference) as AttackHardStateReference;
 				hardRef.setParams(spellInfo.castTime);
 				spellInfo.atkor.stateMachine.transition(RoleStateType.CONTROL_ATTACK_HARD, hardRef, true);
+				SkillCDManager.getInstance().addSkillCDTime(spellInfo.spellData);
 			}
 		}
 

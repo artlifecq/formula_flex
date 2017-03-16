@@ -168,9 +168,9 @@ package com.rpgGame.app.fight.spell
 			{
 				return;
 			}
+			showHurtText(hortVo.atkor as SceneRole, attackerId, role, hurtType, hurtAmount);
 			if (roleData.totalStat.hp > 0)
 			{
-				showHurtText(hortVo.atkor as SceneRole, attackerId, role, hurtType, hurtAmount);
 				YunBiaoManager.showInvivcibleBiaoEffect(hortVo.atkor as SceneRole, attackerId, role, hurtType, hurtAmount);
 			}
 

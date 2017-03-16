@@ -38,6 +38,8 @@ package com.rpgGame.app.ui.main
 	
 	import feathers.controls.UIAsset;
 	
+	import gs.TweenLite;
+	
 	import org.client.mainCore.manager.EventManager;
 	
 	import starling.core.Starling;
@@ -116,6 +118,7 @@ package com.rpgGame.app.ui.main
 		/** cd时间 **/
 		private var _cdTime : int = TIME;
 		private var selectedRole:SceneRole;
+		private var lowBloodTween:TweenLite;
 		
 		public function MainGUI()
 		{
@@ -166,6 +169,7 @@ package com.rpgGame.app.ui.main
 			_normalHead=new MonsterNormalBar();
 			
 			_lowBloodBg=new UIAsset();
+			_lowBloodBg.touchable=false;
 			_lowBloodBg.styleName="ui/common/dyingeffect.png";
 			
 //			_chatBar = new ChatBar();
@@ -232,15 +236,29 @@ package com.rpgGame.app.ui.main
 			EventManager.addEvent(MainPlayerEvent.SELFHP_CHANGE,showLowBlood);
 		}
 		
-		private function showLowBlood(data:HeroData):void
+		private function showLowBlood():void
 		{
 			var value:int=MainRoleManager.actorInfo.totalStat.hp;
 			var max:int=MainRoleManager.actorInfo.totalStat.life;
 			var per:Number=value/max;
 			if(per<=SHOW_BLOOD_TIPS){
 				this.addChild(_lowBloodBg);
+				lowBloodTween=TweenLite.to(_lowBloodBg,0.5,{alpha:0.5,onComplete:tweenLowBood});
 			}else{
 				this.removeChild(_lowBloodBg);
+				if(lowBloodTween){
+					lowBloodTween.kill();
+					lowBloodTween=null;
+				}
+			}
+		}
+		
+		private function tweenLowBood():void
+		{
+			if(_lowBloodBg.alpha==0.5){
+				TweenLite.to(_lowBloodBg,0.5,{alpha:1,onComplete:tweenLowBood});
+			}else{
+				TweenLite.to(_lowBloodBg,0.5,{alpha:0.5,onComplete:tweenLowBood});
 			}
 		}
 		

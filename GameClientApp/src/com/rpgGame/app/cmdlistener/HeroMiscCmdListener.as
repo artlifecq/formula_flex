@@ -114,9 +114,6 @@ package com.rpgGame.app.cmdlistener
 		{
 			MainRoleManager.actorInfo.totalStat.setResData(msg.curType,msg.value);
 			EventManager.dispatchEvent(MainPlayerEvent.STAT_RES_CHANGE,msg.curType);
-			if(msg.curType==CharAttributeType.HP){
-				EventManager.dispatchEvent(MainPlayerEvent.SELFHP_CHANGE);
-			}
 		}
 		
 		private function RecvResPlayerAddMPMessage(msg:*):void

@@ -54,8 +54,14 @@ package com.rpgGame.app.ui.main.shortcut
 			EventManager.addEvent(ItemEvent.ITEM_ADD, onItemChang);
 			EventManager.addEvent(ItemEvent.ITEM_INPUT_SHORTCUT, autoInputItemToShortcutGrid);
 			EventManager.addEvent(SpellEvent.SPELL_UPDATE_SHORTCUTS, onClearSpell);
+			EventManager.addEvent(SpellEvent.SPELL_KEY_RELEASE, onKeySkill);
 		}
-
+		
+		private function onKeySkill(index:int):void
+		{
+			_gridVect[index].tweenGrid();
+		}
+		
 		/**
 		 * 创建格子
 		 *
@@ -113,8 +119,9 @@ package com.rpgGame.app.ui.main.shortcut
 				return;
 
 			ShortcutsManger.getInstance().useShortcuts(cd.index);
+			cd.tweenGrid();
 		}
-
+		
 		private function onRightMouseClick(cd : ShortcutGrid) : void
 		{
 			if (cd == null)

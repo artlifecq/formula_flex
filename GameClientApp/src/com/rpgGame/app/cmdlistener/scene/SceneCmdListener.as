@@ -30,6 +30,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
@@ -712,6 +713,10 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			if(roleData.id == MainRoleManager.actorID)
 			{
+				if(msg.attributeChange.type==CharAttributeType.HP){
+					EventManager.dispatchEvent(MainPlayerEvent.SELFHP_CHANGE);
+				}
+				
 				ReliveManager.autoHideRelive();
 			}
 		}
