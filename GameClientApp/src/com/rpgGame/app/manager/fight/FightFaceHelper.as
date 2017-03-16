@@ -284,16 +284,16 @@ package com.rpgGame.app.manager.fight
 			$end.y=-80+50*random;
 			isLeftShow=random>0.5;//随机计算
 			end2.y=$end.y+30+10*random;
-			var randomV:Number=20+random*20;
+			var randomV:Number=10+random*10;
 			var randomV1:Number=attackFace.width-random*50;
 			if(isLeftShow){//往左飘
 				$from.x-=randomV;
 				$end.x=$from.x-randomV;
-				end2.x=$end.x-randomV;
+				end2.x=$end.x-randomV-30;
 			}else{
 				$from.x+=randomV;
 				$end.x=$from.x+randomV;
-				end2.x=$end.x+randomV;
+				end2.x=$end.x+randomV+30;
 			}
 			attackFace.x=$from.x;
 			
