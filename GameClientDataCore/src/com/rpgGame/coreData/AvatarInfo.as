@@ -444,5 +444,36 @@ package com.rpgGame.coreData
 			effectResID = null;
 			bodyEffectID = null;
 		}
+        
+        public function clone() : AvatarInfo {
+            var info : AvatarInfo = new AvatarInfo();
+            info._bodyAnimatResID = this._bodyAnimatResID;
+            info._bodyEffectID = this._bodyEffectID;
+            info._bodyMethodTypeEffectResID = this._bodyMethodTypeEffectResID;
+            info._bodyResID = this._bodyResID;
+            info._deputyWeaponEffectID = this._deputyWeaponEffectID;
+            info._deputyWeaponEffectOffset = this._deputyWeaponEffectOffset;
+            info._deputyWeaponEffectScale = this._deputyWeaponEffectScale;
+            info._deputyWeaponResID = this._deputyWeaponResID;
+            info._effectResID = this._effectResID;
+            info._hairResID = this._hairResID;
+            info._mountAnimatResID = this._mountAnimatResID;
+            info._mountResID = this._mountResID;
+            info._rpd_body = this._rpd_body;
+            info._rpd_body_effect = this._rpd_body_effect;
+            info._rpd_body_method_type_effect = this._rpd_body_method_type_effect;
+            info._rpd_deputy_weapon = this._rpd_deputy_weapon;
+            info._rpd_deputyWeapon_effect = this._rpd_deputyWeapon_effect;
+            info._rpd_effect = this._rpd_effect;
+            info._rpd_hair = this._rpd_hair;
+            info._rpd_mount = this._rpd_mount;
+            info._rpd_weapon = this._rpd_weapon;
+            info._rpd_weapon_effect = this._rpd_weapon_effect;
+            info._weaponEffectID = this._weaponEffectID;
+            info._weaponEffectOffset = this._weaponEffectOffset;
+            info._weaponEffectScale = this._weaponEffectScale;
+            info._weaponResID = this._weaponResID;
+            return info;
+        }
 	}
 }

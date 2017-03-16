@@ -10,6 +10,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
+	import com.rpgGame.coreData.cfg.ChangeModelCfgData;
 	import com.rpgGame.coreData.cfg.ChatCfgData;
 	import com.rpgGame.coreData.cfg.ClientAreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientBuffCfgData;
@@ -140,6 +141,7 @@ package com.rpgGame.app.data
 			AvatarResConfigSetData.setup(dic[ConfigClassRegister.AvatarResConfig]);
             
             AttachEffectCfgData.setup(dic[ConfigClassRegister.Attach_effect]);
+            ChangeModelCfgData.setup(dic[ConfigClassRegister.ChangeModel]);
 			
 			BaZhenTuResCfgData.setup(dic[ConfigClassRegister.BaZhenTuRes]);
 			

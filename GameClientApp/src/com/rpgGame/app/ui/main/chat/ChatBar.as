@@ -657,7 +657,7 @@ package com.rpgGame.app.ui.main.chat {
 			ChatManager.currentSiLiaoTargetName=MainRoleManager.actorInfo.name;
 			ChatManager.reqSendChat( sendMsg, _curSendChannel,  ChatManager.currentSiLiaoTargetName );
 			
-			AvatarManager.callEquipmentChange(MainRoleManager.actor);
+			//AvatarManager.callEquipmentChange(MainRoleManager.actor);
         }
         
         private function updateScroller() : void {
