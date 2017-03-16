@@ -246,6 +246,7 @@ package com.rpgGame.app.graphics
 					showAndHideElement(_nameBar, nameVisible && !_isCamouflage);
 					showAndHideElement(_guildNameBar, !_isCamouflage);
 					showAndHideElement(_familNameBar, !_isCamouflage);
+					showAndHideElement(_bloodBar, true);
 				}
 				else
 				{

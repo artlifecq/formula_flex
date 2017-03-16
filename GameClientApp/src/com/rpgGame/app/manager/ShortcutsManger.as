@@ -270,7 +270,7 @@ package com.rpgGame.app.manager
 				case ShortcutsTypeEnum.SKILL_TYPE:
 					//使用这个技能，走释放技能的流程
                     var config : Q_skill_model = CastSpellHelper.getSpellData(shortData.id);
-                    if (isKeyboard && null != config && 1 == config.q_skill_state) {
+                    if (isKeyboard && null != config && 1 == config.q_skill_state) {//技能持续状态
 						if (_isDown) {
 							return true;
 						}

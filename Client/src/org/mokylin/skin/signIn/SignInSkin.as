@@ -50,7 +50,7 @@ package org.mokylin.skin.signIn
 			this.currentState = "normal";
 			this.height = 924;
 			this.width = 1643;
-			this.elementsContent = [bgImage_i(),userNameText_i(),passWordText_i(),loginBtn_i(),__SignInSkin_Button1_i(),__SignInSkin_Label1_i(),infoTxt_i(),bottomInfo_i(),rememberBox_i(),passWordTips_i(),userNameTips_i(),__SignInSkin_UIAsset1_i()];
+			this.elementsContent = [bgImage_i(),userNameText_i(),passWordText_i(),loginBtn_i(),__SignInSkin_Button1_i(),__SignInSkin_Label1_i(),infoTxt_i(),bottomInfo_i(),rememberBox_i(),passWordTips_i(),userNameTips_i()];
 			
 			states = {
 			};
@@ -84,15 +84,6 @@ package org.mokylin.skin.signIn
 			return temp;
 		}
 
-		private function __SignInSkin_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/signIn/logo.png";
-			temp.x = 498;
-			temp.y = 38;
-			return temp;
-		}
-
 		private function bgImage_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -114,10 +105,10 @@ package org.mokylin.skin.signIn
 			temp.height = 24;
 			temp.text = "抵制不良游戏，拒绝盗版游戏。注意自我保护，谨防受骗上当。适度游戏益脑，沉迷游戏伤身。合理安排时间，享受健康生活。";
 			temp.textAlign = "center";
-			temp.color = 0x9c8049;
+			temp.color = 0x333a40;
 			temp.width = 850;
-			temp.x = 400;
-			temp.y = 885;
+			temp.x = 396;
+			temp.y = 895;
 			return temp;
 		}
 
