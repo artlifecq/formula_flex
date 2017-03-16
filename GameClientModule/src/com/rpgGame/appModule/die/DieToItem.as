@@ -36,8 +36,8 @@ package com.rpgGame.appModule.die
 		
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
-			if(target==_skin.btn&&_item.q_panel){
-				AppManager.showAppNoCloseAll(_item.q_panel);
+			if(target==_skin.btn&&_item.q_panel.length!=0){
+				AppManager.showApp(_item.q_panel);
 			}
 		}
 		

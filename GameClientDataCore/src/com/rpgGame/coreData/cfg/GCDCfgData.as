@@ -1,7 +1,8 @@
 package com.rpgGame.coreData.cfg
 {
-	import app.message.GcdGroupProto;
-	import app.message.GcdGroupsConfig;
+	import com.rpgGame.coreData.clientConfig.Q_GCD;
+	
+	import flash.utils.ByteArray;
 	
 	import org.client.mainCore.ds.HashMap;
 
@@ -13,16 +14,11 @@ package com.rpgGame.coreData.cfg
 		{
 		}
 		
-		public static function setConfig( gcdConfig:GcdGroupsConfig ):void
+		public static function setup(data:ByteArray ):void
 		{
-			if(!gcdConfig)
-				return;
-			var len:int = gcdConfig.gcd.length;
-			var gcd:GcdGroupProto;
-			for( var i:int = 0; i < len; i++ )
-			{
-				gcd = gcdConfig.gcd[i];
-				gcdMap.add( gcd.id, gcd.cd );
+			var arr : Array = data.readObject();
+			for each(var info : Q_GCD in arr) {
+				gcdMap.add(info.id,info.cd);
 			}
 		}
 		

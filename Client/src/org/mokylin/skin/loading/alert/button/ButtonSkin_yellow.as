@@ -27,7 +27,6 @@ package org.mokylin.skin.loading.alert.button
 			super();
 			
 			this.currentState = "down";
-			this.height = 33;
 			this.width = 90;
 			this.elementsContent = [];
 			

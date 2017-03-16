@@ -22,6 +22,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.DieCfgData;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.cfg.FriendCfgData;
+	import com.rpgGame.coreData.cfg.GCDCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSettingCfgData;
 	import com.rpgGame.coreData.cfg.GmConfig;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
@@ -162,6 +163,7 @@ package com.rpgGame.app.data
 			AttValueConfig.setup(dic[ConfigClassRegister.Q_att_values]);
 			AttFormulaConfig.setup(dic[ConfigClassRegister.Q_att_transfer]);
 			DieCfgData.setup(dic[ConfigClassRegister.Q_die]);
+			GCDCfgData.setup(dic[ConfigClassRegister.Q_GCD]);
 //			CountryUnionStatCfgData.setup(null); //待解决
 
 			

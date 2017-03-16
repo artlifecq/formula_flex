@@ -9,6 +9,7 @@ package com.rpgGame.appModule.role
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
+	import starling.events.TouchEvent;
 	
 	/**
 	 *角色面板 
@@ -51,6 +52,12 @@ package com.rpgGame.appModule.role
 			attConstrastView.onHide();
 			basicView.show(_roleData);
 			avatarView.show(_roleData);
+		}
+		
+		override protected function onTouch(e:TouchEvent):void
+		{
+			super.onTouch(e);
+			avatarView.onTouch(e);
 		}
 		
 		override protected function onTouchTarget(target : DisplayObject) : void {

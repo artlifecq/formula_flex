@@ -50,13 +50,13 @@ package com.rpgGame.app.ui.main.head {
 		{
 			var info:HeroData=MainRoleManager.actorInfo;
 			this._skin.role_zhandouli.number = info.totalStat.getStatValue(CharAttributeType.FIGHTING);
+			this._skin.role_name.text = info.name + " (" + info.totalStat.level +"级)";
 		}
 		
 		private function updateAll():void
 		{
 			var info:HeroData=MainRoleManager.actorInfo;
-			
-			this._skin.role_name.text = info.name + " (" + info.totalStat.level +"级)";
+		
 			this._skin.UI_bingjia.visible = JobEnum.ROLE_1_TYPE==info.job;
 			this._skin.UI_mojia.visible = JobEnum.ROLE_2_TYPE==info.job||JobEnum.ROLE_3_TYPE==info.job;
 			this._skin.UI_yijia.visible = JobEnum.ROLE_4_TYPE==info.job;

@@ -1,6 +1,5 @@
 package com.rpgGame.app.cmdlistener.scene
 {
-	import com.game.engine2D.scene.render.RenderUnit;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.gameClient.log.GameLog;
@@ -31,11 +30,13 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
+	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
-	import com.rpgGame.coreData.clientConfig.Attach;
 	import com.rpgGame.coreData.clientConfig.Attach_effect;
+	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.info.map.EnumMapUnitType;
@@ -696,6 +697,14 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			CharAttributeManager.setAttributeValue(roleData,msg.attributeChange.type, msg.attributeChange.value);
 			
+			if(msg.attributeChange.type==CharAttributeType.LV){//升级了
+				var animatData : Q_SpellAnimation=AnimationDataManager.getData(9999);//获取升级动画
+				SpellAnimationHelper.addTargetEffect(	role, 
+					RenderUnitID.LEVEL, 
+					RenderUnitType.LEVEL, 
+					animatData.role_res,
+					animatData.bind_bone);
+			}
 			
 			if (roleData.totalStat.hp <= 0)
 			{
@@ -704,6 +713,10 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			if(roleData.id == MainRoleManager.actorID)
 			{
+				if(msg.attributeChange.type==CharAttributeType.HP){
+					EventManager.dispatchEvent(MainPlayerEvent.SELFHP_CHANGE);
+				}
+				
 				ReliveManager.autoHideRelive();
 			}
 		}

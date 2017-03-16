@@ -120,7 +120,7 @@ package com.rpgGame.app.manager
 			{
 				return;
 			}
-			var curGcd : int = GCDCfgData.getGcd(spellData.q_public_cd);
+			var curGcd : int = GCDCfgData.getGcd(spellData.q_public_cd_level);
 			var isGlobal : Boolean = curGcd > 0;
 			if (isGlobal) //是否添加全局CD
 			{
@@ -142,7 +142,7 @@ package com.rpgGame.app.manager
 			{
 				spellData = spellList[i];
 				skillLastCd = CDDataManager.getCdLostTm(getSkillKey(spellData.q_skillID));
-				if (skillLastCd < curGcd)
+				if (skillLastCd < curGcd)1
 				{
 					CDDataManager.playCD(getSkillKey(spellData.q_skillID), curGcd, 0);
 				}
