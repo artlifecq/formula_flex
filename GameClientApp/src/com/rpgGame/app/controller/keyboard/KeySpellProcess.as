@@ -19,8 +19,18 @@ package com.rpgGame.app.controller.keyboard
 
 			//使用这快捷栏上的技能或者是物品
 			// funcID从1开如，快捷栏从0开如所以减1
-			ShortcutsManger.getInstance().useShortcuts(int(funcID) - 1);
+			ShortcutsManger.getInstance().useShortcuts(int(funcID) - 1, true);
 		}
+        
+        public static function execUp(info : KeyInfo) : void
+        {
+            var dataID : uint = info.dataID;
+            var funcID : String = info.funcS;
+            
+            //使用这快捷栏上的技能或者是物品
+            // funcID从1开如，快捷栏从0开如所以减1
+            ShortcutsManger.getInstance().unUseShortcuts(int(funcID) - 1, true);
+        }
 
 		public function KeySpellProcess()
 		{

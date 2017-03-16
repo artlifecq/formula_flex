@@ -44,7 +44,7 @@ package com.rpgGame.app.fight.spell
 				}
 				else
 				{
-					SpellHitHelper.fightSpellHitEffect(spellInfo);
+//					SpellHitHelper.fightSpellHitEffect(spellInfo);
 				}
 			}
 			else
@@ -55,7 +55,7 @@ package com.rpgGame.app.fight.spell
 					ref.onStartFrame(onSelfEffectFrame);
 					ref.onHitFrame(onAttackHitFrame);
 //					ref.onBreakFrame(onBreakFrame);
-					spellInfo.atkor.stateMachine.transition(RoleStateType.ACTION_ATTACK, ref, true);
+					spellInfo.atkor.stateMachine.transition(RoleStateType.ACTION_ATTACK, ref);
 				}
 				else
 				{
@@ -75,7 +75,7 @@ package com.rpgGame.app.fight.spell
 				}
 				else
 				{
-					if (ref)
+					/*if (ref)
 					{
 						var hurtDelay : int = ref.hitFrameTime;
 						if (spellInfo.hurtDelay > hurtDelay)
@@ -88,7 +88,7 @@ package com.rpgGame.app.fight.spell
 					else
 					{
 						SpellHitHelper.fightSpellHitEffect(spellInfo);
-					}
+					}*/
 				}
 			}
 

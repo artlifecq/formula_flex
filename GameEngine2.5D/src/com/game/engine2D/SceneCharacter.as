@@ -790,7 +790,10 @@ package com.game.engine2D
 			$baseObj.startRender();
 			_baseObj3DList.push($baseObj);
 			if (autoRecycle && $baseObj is RenderUnit3D)
+			{
+				RenderUnit3D($baseObj).setErrorCallBack(removeBaseObj3D);
 				RenderUnit3D($baseObj).setPlayCompleteCallBack(removeBaseObj3D);
+			}
 			//$baseObj.graphicDis.zOffset = this.finalShowY<<7;
 			$baseObj.zOffset = this.finalShowY<<7;
 		}
@@ -817,17 +820,15 @@ package com.game.engine2D
 			if(index >= 0 && index < _baseObj3DList.length)
 			{
 				var bo:BaseObj3D = _baseObj3DList[index];
-				if(bo is RenderUnit3D)
+				if(bo)
 				{
-					RenderUnit3D.recycle(bo as RenderUnit3D);
-				}
-				else
-				{
+				
 					bo.destroy();
+				
+					bo.stopRender();
+					bo.isInViewDistance = false;
+					bo = null;
 				}
-				bo.stopRender();
-				bo.isInViewDistance = false;
-				bo = null;
 				_baseObj3DList.splice(index,1);
 			}
 		}

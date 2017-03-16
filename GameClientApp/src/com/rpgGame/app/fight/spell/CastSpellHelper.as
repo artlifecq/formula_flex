@@ -109,13 +109,14 @@ package com.rpgGame.app.fight.spell
 			return relateSpells[_relateSpellIndex];
 		}
 
-		public static function shortcutsTryCaseSpell(spellID : int, ignoreLock : Boolean = false) : void
+		public static function shortcutsTryCaseSpell(spellID : int, ignoreLock : Boolean = false) : Boolean
 		{
             CONFIG::netDebug {
                 NetDebug.LOG("CastSpellHelper shortcutsTryCaseSpell spellID:" + spellID);
             }
             var caseInfo : CastSpellInfo = new CastSpellInfo(getSpellData(spellID));
 			var cased : Boolean = tryCaseSpell(caseInfo, null, false, ignoreLock);
+            return cased;
 //			if (!cased)
 //				TrusteeshipManager.getInstance().nextSpell = getSpellData(spellType);
 		}
@@ -164,7 +165,7 @@ package com.rpgGame.app.fight.spell
 					buffer.position = 0;
 
 					var info : ReleaseSpellInfo = new ReleaseSpellInfo();
-					info.readFrom(1,null);
+					info.readFrom(null);
 					ReleaseSpellHelper.releaseSpell(info);
 				}
 				else

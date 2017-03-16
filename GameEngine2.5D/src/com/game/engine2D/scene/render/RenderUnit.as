@@ -1609,6 +1609,7 @@ package com.game.engine2D.scene.render
 			_renderUnitData = null;
 			
 			alpha = 1;
+			_rotation = 0;
 			_renderScaleX = 1;
 			
 			_enableFilters = true;

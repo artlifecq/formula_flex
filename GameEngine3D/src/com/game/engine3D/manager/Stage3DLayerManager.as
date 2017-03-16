@@ -3,8 +3,10 @@ package com.game.engine3D.manager
 	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.controller.CameraController;
 	import com.game.engine3D.core.StarlingLayer;
+	import com.game.engine3D.utils.UnCatchErrorReport;
 	
 	import flash.display.DisplayObjectContainer;
+	import flash.display.Loader;
 	import flash.display.Stage;
 	import flash.display.StageAlign;
 	import flash.display.StageDisplayState;
@@ -16,6 +18,7 @@ package com.game.engine3D.manager
 	import flash.system.Capabilities;
 	import flash.system.Security;
 	import flash.system.SecurityPanel;
+	import flash.utils.getTimer;
 	
 	import away3d.arcane;
 	import away3d.cameras.lenses.OrthographicOffCenterLens;
@@ -30,6 +33,8 @@ package com.game.engine3D.manager
 	import away3d.entities.EntityLayerType;
 	import away3d.events.Stage3DEvent;
 	import away3d.lights.DirectionalLight;
+	import away3d.log.Log;
+	import away3d.log.LogItem;
 	import away3d.materials.lightpickers.StaticLightPicker;
 	import away3d.tools.utils.Bounds;
 	
@@ -110,6 +115,11 @@ package com.game.engine3D.manager
 		private static var _screenViewWidth : int = 0;
 		private static var _screenViewHeight : int = 0;
 
+		private static var _lastTime : int = 0;
+		private static var _frame : int = 0;
+		private static var _fps : Number = 0;
+		private static var _averageFps : Array = [];
+		
 		private static var _screenViewInternalScale : Number = 0;
 
 		public function Stage3DLayerManager()
@@ -163,6 +173,7 @@ package com.game.engine3D.manager
 				_stage3DProxy.addEventListener(Stage3DEvent.CONTEXT3D_CREATED, onContextCreated);
 				_stage3DProxy.addEventListener(Stage3DEvent.CONTEXT3D_USER_DISABLED_ERROR, showSecurityPanel);
 				_stage3DProxy.addEventListener(Stage3DEvent.CONTEXT3D_UNKONW_ERROR, onContextError);
+//				_stage3DProxy.addEventListener(Stage3DEvent.CONTEXT3D_BACKBUFFER_INVALID, onContextError);
 			}
 		}
 		
@@ -184,6 +195,7 @@ package com.game.engine3D.manager
 		{
 			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_UNKONW_ERROR, onContextError);
 			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_USER_DISABLED_ERROR, showSecurityPanel);
+//			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_BACKBUFFER_INVALID, onContextError);
 			if (_setupError != null)
 			{
 				_setupError();
@@ -198,6 +210,7 @@ package com.game.engine3D.manager
 		{
 			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_USER_DISABLED_ERROR, showSecurityPanel);
 			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_UNKONW_ERROR, onContextError);
+//			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_BACKBUFFER_INVALID, onContextError);
 			_views = new Vector.<View3D>();
 			for (var i : int = 0; i < _viewCount; i++)
 			{
@@ -273,6 +286,10 @@ package com.game.engine3D.manager
 		{
 			if (_setupCompleted)
 				return;
+			_fps = _frameRate;
+			_frame = 0;
+			_averageFps.length = 0;
+			_lastTime = getTimer();
 			_stage3DProxy.context3D.enableErrorChecking = _errorChecking;
 			_stage.addEventListener(flash.events.Event.RESIZE, handleScreenSize, false, 1000);
 			_stage3DProxy.addEventListener(away3d.events.Event.ENTER_FRAME, rendering);
@@ -457,7 +474,24 @@ package com.game.engine3D.manager
 			}
 
 			if (_screenView && _screenView.visible)
+			{
 				_screenView.render();
+			}
+			
+			_frame++;
+			var currTime : int = getTimer();
+			var now : int = currTime - _lastTime;
+			if (now >= 1000)
+			{
+				_fps = Math.floor(_frame / (now * 0.001) * 1000) * 0.001;
+				_lastTime = currTime;
+				_frame = 0;
+				_averageFps.push(fps);
+				if (_averageFps.length > 600)
+				{
+					_averageFps.shift();
+				}
+			}
 		}
 
 		public static function startRender() : void
@@ -675,11 +709,48 @@ package com.game.engine3D.manager
 			_stepTime = 1000 / _frameRate;
 			if (_stage)
 				_stage.frameRate = _frameRate;
+			_fps = _frameRate;
+			_frame = 0;
+			_averageFps.length = 0;
 		}
 
 		public static function get frameRate() : int
 		{
 			return _frameRate;
+		}
+		public static function get fps() : int
+		{
+			return _fps;
+		}
+		
+		public static function getAverageFps(seconds : int) : int
+		{
+			var len : int = _averageFps.length;
+			var currLen : int = len > seconds ? seconds : len;
+			if (currLen > 0)
+			{
+				var minIndex : int = len - currLen;
+				var count : int = 0;
+				for (var i : int = len - 1; i >= minIndex; i--)
+				{
+					count += _averageFps[i];
+				}
+				return count / currLen;
+			}
+			return _fps;
+		}
+		
+		public static function registerApplicationLoader(loader : Loader) : void
+		{
+//			Stage3DProxy.registerApplicationLoader(loader);
+		}
+		
+		private static function onLogCallBack(item : LogItem) : void
+		{
+			if (item.type == Log.LOG_TYPE_ERROR)
+			{
+				UnCatchErrorReport.sendErroLog(item.message);
+			}
 		}
 		/** ---------------------------------编辑器使用代码------------------------- */
 		public static function set stage3DProxy(value : Stage3DProxy) : void

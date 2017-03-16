@@ -107,13 +107,16 @@ package com.game.engine3D.scene.render.vo
 					}
 				}
 
-				if (_renderMeshLoader.isAsyncLoaded)
+				if (_renderMeshLoader)
 				{
-					onMeshAsyncComplete(_renderMeshLoader);
-				}
-				else
-				{
-					_renderMeshLoader.setSyncResCompleteCallBack(onMeshAsyncComplete);
+					if (_renderMeshLoader.isAsyncLoaded)
+					{
+						onMeshAsyncComplete(_renderMeshLoader);
+					}
+					else
+					{
+						_renderMeshLoader.setSyncResCompleteCallBack(onMeshAsyncComplete);
+					}
 				}
 			}
 			if (_animatorSourcePath && !_renderAnimatorLoader)

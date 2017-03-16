@@ -3,6 +3,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.sender.SpellSender;
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
@@ -22,6 +23,7 @@ package com.rpgGame.app.manager
 		public static const SHORTCUTS_LEN : uint = 10;
 		private var shortcutsDataMap : HashMap;
 		private var _tempSpells:HashMap;
+		private var _isDown : Boolean = false;
 
 		public function ShortcutsManger()
 		{
@@ -254,7 +256,7 @@ package com.rpgGame.app.manager
 		 * @return
 		 *
 		 */
-		public function useShortcuts(shortcutPos : uint) : Boolean
+		public function useShortcuts(shortcutPos : uint, isKeyboard : Boolean = false) : Boolean
 		{
 			var shortData : ShortcutsData = getShortcutsDataByPos(shortcutPos);
 			if (shortData == null)
@@ -267,6 +269,15 @@ package com.rpgGame.app.manager
 			{
 				case ShortcutsTypeEnum.SKILL_TYPE:
 					//使用这个技能，走释放技能的流程
+                    var config : Q_skill_model = CastSpellHelper.getSpellData(shortData.id);
+                    if (isKeyboard && null != config && 1 == config.q_skill_state) {
+						if (_isDown) {
+							return true;
+						}
+                        SpellSender.reqSkillContiState(shortData.id, 1);
+						this._isDown = true;
+                        return true;
+                    }
 					CastSpellHelper.shortcutsTryCaseSpell(shortData.id);
 					return true;
 
@@ -279,6 +290,33 @@ package com.rpgGame.app.manager
 			//没有这个类型
 			return true;
 		}
+        
+        public function unUseShortcuts(shortcutPos : uint, isKeyboard : Boolean = false) : Boolean {
+            var shortData : ShortcutsData = getShortcutsDataByPos(shortcutPos);
+            if (shortData == null)
+            {
+                return false; //这个快捷键没有设置数据
+            }
+            
+            switch (shortData.type)
+            {
+                case ShortcutsTypeEnum.SKILL_TYPE:
+                    //使用这个技能，走释放技能的流程
+                    var config : Q_skill_model = CastSpellHelper.getSpellData(shortData.id);
+                    if (this._isDown && isKeyboard && null != config && 1 == config.q_skill_state) {
+						this._isDown = false;
+                        SpellSender.reqSkillContiState(shortData.id, 0);
+                        return true;
+                    }
+                    return true;
+                case ShortcutsTypeEnum.ITEM_TYPE:
+                    //使用这个物品，走物品流程
+                    return true;
+            }
+            
+            //没有这个类型
+            return true;
+        }
 
 		//-------------------------------------------------------
 		//----------------------消息相关

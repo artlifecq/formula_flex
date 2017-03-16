@@ -7,6 +7,7 @@ package com.rpgGame.app.scene.animator
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.game.mainCore.libCore.utils.ZMath;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -145,12 +146,14 @@ package com.rpgGame.app.scene.animator
 			var posY : Number = 0;//scene.sceneMapLayer.queryHeightAt(_destPosition.x, _destPosition.z);2.5D没有高度值，因为只有2维
 			_destHeightOffset = _destPosition.y - posY;
 			
-			_renderSet.position = _destPosition;
+			_renderSet.position.x = _destPosition.x;
+			_renderSet.position.y = _destPosition.z;
+			_renderSet.position.z = _destPosition.y;
 			
 			_renderSet.offsetY = 0;
 			_renderSet.rotationX = 0;
 			_renderSet.rotationY = _atkorRotationY;
-			_targetOffsetY = 0;
+			_targetOffsetY = _targetPos.z;
 			
 			var targetDestPosition : Vector3D = null;
 			if (_targetRole && _targetRole.usable)
@@ -228,7 +231,7 @@ package com.rpgGame.app.scene.animator
 		
 		private function onTimeOutRemove() : void
 		{
-			SpellHitHelper.fightSpellHitEffect(_spellInfo);
+//			SpellHitHelper.fightSpellHitEffect(_spellInfo);
 			onRemoveRender();
 		}
 		
@@ -327,7 +330,7 @@ package com.rpgGame.app.scene.animator
 						if (_isAdaptiveTargetHeight)
 						{
 							_endOffsetY = _targetPos.y + _targetOffsetY;
-							_endRotationX = dist > 0 ? Math.atan((_endOffsetY - _destPosition.y) / dist) * 57.33 : 0;//旋转x轴，匹配从上向下，或者从下朝上的感觉
+							_endRotationX = dist > 0 ? Math.atan((_endOffsetY - _destPosition.z) / dist) * 57.33 : 0;//旋转x轴，匹配从上向下，或者从下朝上的感觉
 							TweenLite.to(_renderSet, hitTime * 0.001, {x: _endPosX, z: _endPosZ, y: _endOffsetY, rotationX: _endRotationX, ease: Linear.easeNone, overwrite: 0, onUpdate: onUpdateAnimation, onComplete: onReachRemoveEffect});
 						}
 						else
@@ -378,7 +381,7 @@ package com.rpgGame.app.scene.animator
 		{
 			if (_renderSet && _renderSet.usable)
 			{
-				SpellHitHelper.fightSpellHitEffect(_spellInfo);
+//				SpellHitHelper.fightSpellHitEffect(_spellInfo);
 				
 				_renderSet.x = _endPosX;
 				_renderSet.z = _endPosZ;

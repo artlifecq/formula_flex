@@ -634,17 +634,8 @@ package com.game.engine3D.vo
 			if (_parent == value)
 				return;
 			_parent = value;
-			if (_graphicDis)
-			{
-				if (_visible && _isInViewDistance)
-				{
-					addToGraphic();
-				}
-				else
-				{
-					removeFromGraphic();
-				}
-			}
+			
+			validateGraphic();
 		}
 
 		public function get graphicDis() : ObjectContainer3D
@@ -658,12 +649,18 @@ package com.game.engine3D.vo
 				return;
 			removeFromGraphic();
 			_graphicDis = value;
-			if (_parent && _graphicDis)
+			validateGraphic();
+		}
+		
+		private function validateGraphic() : void
+		{
+			if (_isRendering && _parent && _graphicDis && _visible && _isInViewDistance)
 			{
-				if (_visible && _isInViewDistance)
-				{
-					addToGraphic();
-				}
+				addToGraphic();
+			}
+			else
+			{
+				removeFromGraphic();
 			}
 		}
 		
@@ -952,6 +949,7 @@ package com.game.engine3D.vo
 			if (_isRendering)
 				return;
 			_isRendering = true;
+			validateGraphic();
 			if (_needRun)
 			{
 				Tick.instance.addCallBack(onTick);
@@ -963,6 +961,7 @@ package com.game.engine3D.vo
 			if (!_isRendering)
 				return;
 			_isRendering = false;
+			validateGraphic();
 			Tick.instance.removeCallBack(onTick);
 			TweenLite.killTweensOf(_graphicRotation);
 			TweenLite.killTweensOf(_graphicDis);
@@ -1020,7 +1019,7 @@ package com.game.engine3D.vo
 			{
 				if (info.obj != initiator) //阻止互相同步时循环执行。
 				{
-					info.syncPos(_position, _rotation, this);
+					info.syncInfo(_position, _rotation, this);
 				}
 			}
 		}
@@ -1450,18 +1449,10 @@ package com.game.engine3D.vo
 		/**是否显示 */
 		public function set visible(value : Boolean) : void
 		{
+			if (_visible == value)
+				return;
 			_visible = value;
-			if (_parent && _graphicDis)
-			{
-				if (_visible && _isInViewDistance)
-				{
-					addToGraphic();
-				}
-				else
-				{
-					removeFromGraphic();
-				}
-			}
+			validateGraphic();
 		}
 
 		protected function addToGraphic() : void
@@ -1469,16 +1460,22 @@ package com.game.engine3D.vo
 			if (_parent && _graphicDis)
 			{
 				if (_graphicDis.parent != _parent)
+				{
 					_parent.addChild(_graphicDis);
+					syncInfo(this);
+				}
 			}
 		}
-
+		
 		protected function removeFromGraphic() : void
 		{
 			if (_graphicDis)
 			{
 				if (_graphicDis.parent)
+				{
 					_graphicDis.parent.removeChild(_graphicDis);
+					syncInfo(this);
+				}
 			}
 		}
 
@@ -1491,17 +1488,7 @@ package com.game.engine3D.vo
 			if (_isInViewDistance != value)
 			{
 				_isInViewDistance = value;
-				if (_parent && _graphicDis)
-				{
-					if (_visible && _isInViewDistance)
-					{
-						addToGraphic();
-					}
-					else
-					{
-						removeFromGraphic();
-					}
-				}
+				validateGraphic();
 				//当视野状态变化时回调
 				CallBackUtil.exceteCallBackData(this, _inViewDistanceChangedCallbackVec);
 			}

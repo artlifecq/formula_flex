@@ -1,6 +1,5 @@
 package com.rpgGame.app.state.role.control
 {
-	import com.rpgGame.app.manager.activity.RacingManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.type.RoleStateType;
 

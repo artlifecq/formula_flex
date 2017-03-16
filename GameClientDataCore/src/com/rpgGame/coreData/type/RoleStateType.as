@@ -29,6 +29,11 @@ package com.rpgGame.coreData.type
 		public static const ACTION_COLLECT : int = rEnum.next;//采集状态
 		public static const ACTION_PLAY_ACTION : int = rEnum.next;//播放动作状态
 		public static const ACTION_TRAIL : int = rEnum.next;//追踪状态
+		
+		public static const ACTION_PLAY_SPELL:int = rEnum.next;
+		public static const ACTION_FLY_UP:int = rEnum.next;
+		public static const ACTION_FLY_HIT:int = rEnum.next;
+		public static const ACTION_FLY_FALL:int = rEnum.next;
 
 		public static const CONTROL_WALK_MOVE : int = rEnum.next;
 		public static const CONTROL_STOP_WALK_MOVE : int = rEnum.next;
@@ -59,5 +64,13 @@ package com.rpgGame.coreData.type
 		public static const CONTROL_FASTING : int = rEnum.next;
 		public static const CONTROL_SCARED_MOVE : int = rEnum.next;
 		public static const CONTROL_MOUNT_RIDE : int = rEnum.next;
+		
+		public static const CONTROL_HIDDING:int = rEnum.next;
+		public static const CONTROL_FLY_UP:int = rEnum.next;
+		public static const CONTROL_FLY_HIT:int = rEnum.next;
+		public static const CONTROL_FLY_FALL:int = rEnum.next;
+		public static const CONTROL_SYNC_SPELLACTION:int = rEnum.next;
+		
+		public static const CONTROL_USE_SPELL:int = rEnum.next;
 	}
 }

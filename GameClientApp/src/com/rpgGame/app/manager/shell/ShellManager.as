@@ -4,9 +4,14 @@ package com.rpgGame.app.manager.shell
     import com.game.engine3D.core.AreaMap;
     import com.game.engine3D.display.shapeArea.ShapeArea3D;
     import com.game.engine3D.manager.Stage3DLayerManager;
+    import com.game.engine3D.scene.render.RenderSet3D;
+    import com.game.engine3D.scene.render.RenderUnit3D;
+    import com.game.engine3D.scene.render.vo.RenderParamData3D;
     import com.game.engine3D.utils.MathUtil;
     import com.game.engine3D.utils.StatsUtil;
     import com.game.engine3D.vo.AreaMapData;
+    import com.game.engine3D.vo.BaseObj3D;
+    import com.game.engine3D.vo.BaseRole;
     import com.game.mainCore.core.manager.LayerManager;
     import com.gameClient.log.GameLog;
     import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
@@ -21,6 +26,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.sender.SceneSender;
     import com.rpgGame.core.utils.ConsoleDesk;
     import com.rpgGame.coreData.cfg.AreaCfgData;
+    import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.cfg.TransCfgData;
     import com.rpgGame.coreData.clientConfig.Q_map_transfer;
     import com.rpgGame.coreData.enum.EnumAreaMapType;
@@ -29,10 +35,14 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.role.MonsterData;
     import com.rpgGame.coreData.role.RoleType;
     import com.rpgGame.coreData.role.SceneTranportData;
+    import com.rpgGame.coreData.role.TrapInfo;
+    import com.rpgGame.coreData.type.RenderUnitID;
+    import com.rpgGame.coreData.type.RenderUnitType;
     import com.rpgGame.coreData.type.SceneCharType;
     
     import flash.display.BitmapData;
     import flash.geom.Point;
+    import flash.geom.Vector3D;
     import flash.utils.Dictionary;
     
     import away3d.containers.PlanarContainer3D;
@@ -40,6 +50,7 @@ package com.rpgGame.app.manager.shell
     
     import gameEngine2D.NetDebug;
     
+    import org.game.netCore.data.long;
     import org.game.netCore.net_protobuff.ByteBuffer;
 
     /*********************************************************************************************************
@@ -69,6 +80,9 @@ package com.rpgGame.app.manager.shell
 			this._funcs["addSkillToBar".toLowerCase()] = this.addSkillToBar;
 			this._funcs["shape".toLocaleLowerCase()] = this.shapeFunc;
 			this._funcs["addBuff".toLocaleLowerCase()] = this.addBuff;
+			this._funcs["setRenderFunc".toLocaleLowerCase()] = this.setRenderFunc;
+            this._funcs["addTrap".toLowerCase()] = this.addTrap;
+            this._funcs["changeTrap".toLowerCase()] = this.changeTrap;
         }
 		
 		private var arr:Vector.<ShapeArea3D> = new Vector.<ShapeArea3D>();	
@@ -139,7 +153,7 @@ package com.rpgGame.app.manager.shell
             buffer.writeVarint32(m.z);
             buffer.position = 0;
             var info : ReleaseSpellInfo = new ReleaseSpellInfo();
-            info.readFrom(1, null);
+            info.readFrom(null);
             ReleaseSpellHelper.releaseSpell(info);
         }
         
@@ -240,10 +254,98 @@ package com.rpgGame.app.manager.shell
             }
         }
 		
-		private function addBuff(bone : String) : void {
-			bone = bone || "c_test_01";
-			SpellAnimationHelper.addBuffEffect(MainRoleManager.actor, 0, "buff1003", "tx_role_budongrushan_01", bone, 0);
+		private function addBuff() : void {
+			// bone = bone || "c_test_01";
+			// SpellAnimationHelper.addBuffEffect(MainRoleManager.actor, 0, "buff1003", "tx_role_qianjibian_03", "c_0_body_01", 0);
+            var role : BaseRole = MainRoleManager.actor;
+            var effectSet : RenderSet3D = RenderSet3D.create(SceneCharType.SCENE_FLY_SPELL/* + info.flySceneObjID*/, 1, true);
+            var rud : RenderParamData3D = new RenderParamData3D(1, "effect", ClientConfig.getEffect("tx_role_qianjibian_03"), "tx_role_qianjibian_03");
+            var pos : Vector3D = MainRoleManager.actor.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, "b_r_wq_01");
+            var effectRu : RenderUnit3D = effectSet.addRenderUnit(rud);
+            effectRu.repeat = 0;
+            effectRu.allowCameraAnimator = false;
+            effectSet.x = pos.x; //MainRoleManager.actor.x;
+            effectSet.y = pos.y; //MainRoleManager.actor.y;
+            effectSet.z = pos.z; //MainRoleManager.actor.z;
+            effectRu.rotationY = MainRoleManager.actor.rotationY;
+            //effectRu.setScale(1);
+            effectRu.play(1);
+            SceneManager.addSceneObjToScene(effectSet);
+            var rud : RenderParamData3D = new RenderParamData3D(2, "effect", ClientConfig.getEffect("tx_role_qianjibian_03"), "tx_role_qianjibian_03");
+            var effectRu : RenderUnit3D = RenderUnit3D.create(rud, true);
+            effectRu.repeat = 0;
+            effectRu.mouseEnable = true;
+            effectRu.x = pos.x; //MainRoleManager.actor.x;
+            effectRu.z = pos.z; //MainRoleManager.actor.z;
+            effectRu.y = pos.y; //MainRoleManager.actor.y;
+            //effectRu.setGroundXY(role.x, role.z);
+            effectRu.setScale(1);
+            effectRu.rotationY = MainRoleManager.actor.rotationY;
+            effectRu.play(1);
+            SceneManager.addSceneObjToScene(effectRu/*, true, false, false*/);
+            var pos : Vector3D = MainRoleManager.actor.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, "b_r_wq_01");
+            var rud : RenderParamData3D = new RenderParamData3D(3, "effect", ClientConfig.getEffect("tx_role_qianjibian_03"), "tx_role_qianjibian_03");
+            var effectRu : RenderUnit3D = RenderUnit3D.create(rud, true);
+            effectRu.repeat = 0;
+            effectRu.mouseEnable = true;
+            effectRu.x = pos.x; //MainRoleManager.actor.x;
+            effectRu.z = pos.y; //MainRoleManager.actor.z;
+            effectRu.y = 0;//pos.y; //MainRoleManager.actor.y;
+            //effectRu.setGroundXY(role.x, role.z);
+            effectRu.setScale(1);
+            effectRu.rotationY = MainRoleManager.actor.rotationY;
+            effectRu.play(1);
+            SceneManager.addSceneObjToScene(effectRu/*, true, false, false*/);
+            var rud : RenderParamData3D = new RenderParamData3D(4, "effect", ClientConfig.getEffect("tx_role_jishujian_03"), "tx_role_jishujian_03");
+            var effectRu : RenderUnit3D = RenderUnit3D.create(rud, true);
+            effectRu.repeat = 0;
+            effectRu.mouseEnable = true;
+            effectRu.x = MainRoleManager.actor.x;
+            effectRu.z = MainRoleManager.actor.z;
+            effectRu.y = 0;//MainRoleManager.actor.y;
+            //effectRu.setGroundXY(role.x, role.z);
+            effectRu.setScale(1);
+            effectRu.rotationY = MainRoleManager.actor.rotationY;
+            effectRu.rotationX = 35;
+            effectRu.play(1);
+            SceneManager.addSceneObjToScene(effectRu/*, true, false, false*/);
 		}
+		
+		private function setRenderFunc(funcName : String, name : *, name2 : *, name3 : *) : void {
+			MainRoleManager.actor.forEachRenderUnit(function (role : BaseRole, render : RenderUnit3D) : void {
+				render.restoreTexture();
+				if ("1" == funcName) {
+					render.setIndependentTexture(ClientConfig.getDynTexture(name));
+				} else if ("2" == funcName) {
+					render.setIndependentMatarial(name, name2, name3);
+				} else if ("3" == funcName) {
+					render.addFadeAlpha(ClientConfig.getDynTexture(name));
+				} else if ("4" == funcName) {
+					render.setIndependentDiffuseColor(parseInt(name));
+				} else if ("5" == funcName) {
+					render.addBlend(ClientConfig.getDynTexture(name), ClientConfig.getDynTexture(name2));
+				}
+			});
+		}
+        
+        private function addTrap(id : int) : void {
+            var data : TrapInfo = new TrapInfo(new long(), id, id, 0, MainRoleManager.actor.x, MainRoleManager.actor.z);
+            SceneManager.addSceneObjToScene(data.normalEffect, true, false, false);
+        }
+        
+        private function changeTrap(id : int, state : int) : void {
+            var trap : RenderUnit3D = SceneManager.getSceneObjByID(id) as RenderUnit3D;
+            if (null == trap) {
+                return;
+            }
+            var info : TrapInfo = trap.data as TrapInfo;
+            if (null == info || info.state == state) {
+                return;
+            }
+            SceneManager.removeSceneObjFromScene(info.effect);
+            info.state = state;
+            SceneManager.addSceneObjToScene(info.effect, true, false, false);
+        }
       
         private function handler(command : String, ...params) : Boolean {
             var func : Function = this._funcs[command.toLowerCase()];

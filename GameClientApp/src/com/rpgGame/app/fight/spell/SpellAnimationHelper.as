@@ -11,11 +11,15 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.scene.animator.CommonTrajectoryAnimator;
 	import com.rpgGame.app.scene.animator.FrontAxleDoubleAroundAnimator;
 	import com.rpgGame.coreData.AvatarInfo;
+	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.clientConfig.EffectAnimation;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
+	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
+	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
@@ -341,7 +345,7 @@ package com.rpgGame.app.fight.spell
 		 * @param animatData
 		 * 
 		 */		
-		public static function addTargetHurtEffect(targetRole : SceneRole, info : ReleaseSpellInfo, animatData : Q_SpellAnimation) : void
+		public static function addTargetHurtEffect(targetRole : SceneRole, fightHurtResult : FightHurtResult, animatData : Q_SpellAnimation) : void
 		{
 			if (SceneManager.isSceneOtherRenderLimit)
 				return;
@@ -364,7 +368,7 @@ package com.rpgGame.app.fight.spell
 						effectRu = targetRole.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_01, rud);
 					if (effectRu)
 					{
-						effectRu.allowCameraAnimator = targetRole.isMainChar || (info.atkor && info.atkor.usable && info.atkor.isMainChar);
+						effectRu.allowCameraAnimator = targetRole.isMainChar || (fightHurtResult.atkor && fightHurtResult.atkor.usable && fightHurtResult.atkor.isMainChar);
 						effectRu.repeat = 1;
 						effectRu.x = 0;
 						effectRu.y = 0;
@@ -388,7 +392,7 @@ package com.rpgGame.app.fight.spell
 					rud = new RenderParamData3D(hurtEffectObjID, SceneCharType.SCENE_HURT_EFFECT, ClientConfig.getEffect(animatData.scene_res));
 					
 					effectRu = RenderUnit3D.create(rud,true);
-					effectRu.allowCameraAnimator = targetRole.isMainChar || (info.atkor && info.atkor.usable && info.atkor.isMainChar);
+					effectRu.allowCameraAnimator = targetRole.isMainChar || (fightHurtResult.atkor && fightHurtResult.atkor.usable && fightHurtResult.atkor.isMainChar);
 					effectRu.repeat = 1;
 					effectRu.x = destPosition.x;
 					effectRu.y = destPosition.y;
@@ -400,6 +404,34 @@ package com.rpgGame.app.fight.spell
 					effectRu.play(1);
 				}
 				hurtEffectObjID++;
+			}
+		}
+		
+		public static function addBornEffect(role : SceneRole,destX : int, destZ : int, rotationY : int,effectID:int,mountResID:String="",finishFunc:Function=null):void
+		{
+			var animatData:Q_SpellAnimation = AnimationDataManager.getData(effectID);
+			/** 特效 **/
+			if (animatData)
+			{
+				var effectRu : RenderUnit3D;
+				var rud : RenderParamData3D;
+				var repeat : int = 1;
+				if (animatData.scene_res)
+				{
+					rud = new RenderParamData3D(role.id, SceneCharType.BORN_EFFECT, ClientConfig.getEffect(animatData.scene_res));
+					
+					effectRu = RenderUnit3D.create(rud,true);
+					effectRu.allowCameraAnimator = (role && role.isMainChar);
+					effectRu.repeat = repeat;
+					effectRu.x = destX;
+					effectRu.z = destZ;
+					effectRu.rotationY = rotationY;
+					effectRu.completeWhenInvisible = true;
+					SceneManager.addSceneObjToScene(effectRu, true);
+					if(finishFunc!=null)
+						effectRu.setPlayCompleteCallBack(finishFunc, role,mountResID);
+					effectRu.play(1);
+				}
 			}
 		}
 		
@@ -436,7 +468,7 @@ package com.rpgGame.app.fight.spell
 //				}
 				if (animatData.scene_res)
 				{
-					rud = new RenderParamData3D(info.flySceneObjID, SceneCharType.SCENE_DEST_EFFECT, ClientConfig.getEffect(animatData.scene_res));
+					rud = new RenderParamData3D(1, SceneCharType.SCENE_DEST_EFFECT, ClientConfig.getEffect(animatData.scene_res));
 					
 					effectRu = RenderUnit3D.create(rud,true);
 					effectRu.allowCameraAnimator = (info.atkor && info.atkor.isMainChar);
@@ -447,23 +479,23 @@ package com.rpgGame.app.fight.spell
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu, true);
 					
-					if (lifecycle > 0)
-					{
-						effectRu.lifecycle = lifecycle;
-						effectRu.setPlayCompleteCallBack(removeTrapFromScene, info.atkorID);
-						
-						var traps : Dictionary = _sceneTrapsByAtkorID[info.atkorID];
-						if (!traps)
-						{
-							traps = new Dictionary(true);
-							_sceneTrapsByAtkorID[info.atkorID] = traps;
-						}
-						traps[info.flySceneObjID] = effectRu;
-					}
-					else
-					{
+//					if (lifecycle > 0)
+//					{
+//						effectRu.lifecycle = lifecycle;
+//						effectRu.setPlayCompleteCallBack(removeTrapFromScene, info.atkorID);
+//						
+//						var traps : Dictionary = _sceneTrapsByAtkorID[info.atkorID];
+//						if (!traps)
+//						{
+//							traps = new Dictionary(true);
+//							_sceneTrapsByAtkorID[info.atkorID] = traps;
+//						}
+//						traps[info.flySceneObjID] = effectRu;
+//					}
+//					else
+//					{
 						effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
-					}
+//					}
 					effectRu.play(1);
 				}
 			}
@@ -574,14 +606,14 @@ package com.rpgGame.app.fight.spell
 					
 					var effectQueue : Vector.<IRenderAnimator> = new Vector.<IRenderAnimator>();
 					var locusPoints : Vector.<AnimatorLocusPoint> = new Vector.<AnimatorLocusPoint>();
-					for (var i : int = 0; i < info.flyTargetPosList; i++)
+					for (var i : int = 0; i < info.flyTargetPosList.length; i++)
 					{
 						var targetPosition:Vector3D = new Vector3D(info.flyTargetPosList[i].x,0,info.flyTargetPosList[i].y);
 						TweenLite.delayedCall((info.throwDelayTime + info.flyInterval * i) * 0.001, addFlyEffectOnce, [info, animatData.scene_res, atkorPosition, atkorRotationY, destPosition,targetPosition,null, 0, 0,effectQueue, locusPoints]);
 					}
 					
 					var startTime:Number = info.flyTargetPosList.length * info.flyInterval;
-					for(var j:int = 0;j<info.flyTargets;j++)
+					for(var j:int = 0;j<info.flyTargets.length;j++)
 					{
 						TweenLite.delayedCall((startTime + info.throwDelayTime + info.flyInterval * j) * 0.001, addFlyEffectOnce, [info, animatData.scene_res, atkorPosition, atkorRotationY, destPosition,info.flyTargets[j].position,info.flyTargets[j],0, 0, effectQueue, locusPoints]);
 					}
@@ -648,8 +680,20 @@ package com.rpgGame.app.fight.spell
 			}
 			if (!renderSetAnimator)
 			{
-				renderSetAnimator = new CommonTrajectoryAnimator(info, targetPosition, info.targetRole, info.flyTm, info.flySpeed, info.isTrackTarget, 
-					info.matchTerrain, info.isFlyCross, info.isAdaptiveTargetHeight, moveDelay, playDelay, info.throwHeight, info.throwWeightRatio);
+				renderSetAnimator = new CommonTrajectoryAnimator(
+                    info, 
+                    targetPosition, 
+                    info.targetRole, 
+                    info.flyTm, 
+                    info.flySpeed, 
+                    info.isTrackTarget, 
+					info.matchTerrain, 
+                    info.isFlyCross, 
+                    info.isAdaptiveTargetHeight, 
+                    moveDelay, 
+                    playDelay, 
+                    info.throwHeight, 
+                    info.throwWeightRatio);
 				(renderSetAnimator as CommonTrajectoryAnimator).setAtkorData(atkorPosition, atkorRotationY, destPosition);
 				(renderSetAnimator as CommonTrajectoryAnimator).setQueue(effectQueue, locusPoints);
 				effectSet.setRenderAnimator(renderSetAnimator);
@@ -666,6 +710,132 @@ package com.rpgGame.app.fight.spell
 		private static function avatarRuPlayComplete(avatar : RenderSet3D, ru : RenderUnit3D) : void
 		{
 			avatar.removeRenderUnit(ru);
+		}
+		
+		/**
+		 * 同步施法特效 
+		 * @param time
+		 * @param spellID
+		 * @param role
+		 * 
+		 */		
+		public static function synSelfSpellAnimator(time:Number,spellID:int,role:SceneRole):void
+		{
+			if (SceneManager.isSceneOtherRenderLimit)
+				return;
+			/** 施法者 **/
+			var atkor : SceneRole = role;
+			if (atkor == null || !atkor.usable || !atkor.isInViewDistance)
+				return;
+			var spellEffectData:Q_SpellEffect = SpellDataManager.getSpellEffectData(spellID);
+			var animatData : Q_SpellAnimation = AnimationDataManager.getData(spellEffectData.self_dest_animation);
+			/** 特效 **/
+			if (animatData)
+			{
+				var effectRu : RenderUnit3D;
+				var rud : RenderParamData3D;
+				if (animatData.role_res)
+				{
+					rud = new RenderParamData3D(RenderUnitID.SPELL_SELF_EFFECT, RenderUnitType.SPELL_SELF_EFFECT, ClientConfig.getEffect(animatData.role_res));
+					rud.clearSameType = true;
+					
+					if (animatData.bind_bone)
+						effectRu = atkor.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, animatData.bind_bone, rud);
+					else
+						effectRu = atkor.avatar.addRenderUnit(rud);
+					effectRu.allowCameraAnimator = atkor.isMainChar;
+					effectRu.repeat = 1;
+					effectRu.x = 0;
+					effectRu.y = 0;
+					effectRu.z = 0;
+					effectRu.rotationY = 0;
+					effectRu.completeWhenInvisible = true;
+					effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, atkor.avatar);
+					effectRu.play(time);
+				}
+				else if (animatData.scene_res)
+				{
+					var destPosition : Vector3D = null;
+					if (animatData.bind_bone)
+						destPosition = atkor.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, animatData.bind_bone);
+					else
+						destPosition = atkor.position;
+					if (!destPosition)
+						destPosition = atkor.position;
+					
+					rud = new RenderParamData3D(selfEffectObjID, SceneCharType.SCENE_SELF_EFFECT, ClientConfig.getEffect(animatData.scene_res));
+					
+					effectRu = RenderUnit3D.create(rud,true);
+					effectRu.allowCameraAnimator = atkor.isMainChar;
+					effectRu.repeat = 1;
+					effectRu.x = destPosition.x;
+					effectRu.y = destPosition.y;
+					effectRu.z = destPosition.z;
+					effectRu.rotationY = atkor.rotationY;
+					effectRu.completeWhenInvisible = true;
+					SceneManager.addSceneObjToScene(effectRu);
+					effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
+					effectRu.play(time);
+				}
+				selfEffectObjID++;
+			}
+		}
+		
+		/**
+		 * 同步地面特效 
+		 * @param time
+		 * @param spellID
+		 * @param role
+		 * 
+		 */		
+		public static function synDestSpellAnimator(time:Number,spellID:int,role:SceneRole):void
+		{
+			if (SceneManager.isSceneOtherRenderLimit)
+				return;
+			var spellEffectData:Q_SpellEffect = SpellDataManager.getSpellEffectData(spellID);
+			var animatData : Q_SpellAnimation = AnimationDataManager.getData(spellEffectData.dest_animation);
+
+			/** 特效 **/
+			if (animatData)
+			{
+//				var effectRu : RenderUnit3D;
+//				var rud : RenderParamData3D;
+//				var repeat : int = 1;
+//				var lifecycle : int = 0;
+//			
+//				if (animatData.scene_res)
+//				{
+//					rud = new RenderParamData3D(info.flySceneObjID, SceneCharType.SCENE_DEST_EFFECT, ClientConfig.getEffect(animatData.scene_res));
+//					
+//					effectRu = RenderUnit3D.create(rud,true);
+//					effectRu.allowCameraAnimator = (role && role.isMainChar);
+//					effectRu.repeat = repeat;
+//					effectRu.x = destX;
+//					effectRu.z = destZ;
+//					effectRu.rotationY = rotationY;
+//					effectRu.completeWhenInvisible = true;
+//					SceneManager.addSceneObjToScene(effectRu, true);
+//					
+//					if (lifecycle > 0)
+//					{
+//						effectRu.lifecycle = lifecycle;
+//						effectRu.setPlayCompleteCallBack(removeTrapFromScene, info.atkorID);
+//						
+//						var traps : Dictionary = _sceneTrapsByAtkorID[info.atkorID];
+//						if (!traps)
+//						{
+//							traps = new Dictionary(true);
+//							_sceneTrapsByAtkorID[info.atkorID] = traps;
+//						}
+//						traps[info.flySceneObjID] = effectRu;
+//					}
+//					else
+//					{
+//						effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
+//					}
+//					effectRu.play(1);
+//				}
+			}
 		}
 	}
 }

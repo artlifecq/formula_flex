@@ -2,6 +2,7 @@ package com.game.engine3D.scene.render
 {
 	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.core.poolObject.PoolContainer3D;
+	import com.game.engine3D.core.poolObject.PoolEntityContainer3D;
 	import com.game.engine3D.scene.render.vo.MethodData;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.scene.render.vo.RenderUnitChild;
@@ -474,7 +475,7 @@ package com.game.engine3D.scene.render
 			var ru : RenderUnit3D = getRenderUnitByID(rpd.type, rpd.id, false);
 			if (!ru)
 			{
-				ru = RenderUnit3D.create(rpd,_is25D); //创建一个新的
+				ru = RenderUnit3D.create(rpd,false); //创建一个新的
 				ru.staticGraphicDis = this._staticGraphicDis;
 			}
 			ru.setRenderParamData(rpd);
@@ -1256,7 +1257,11 @@ package com.game.engine3D.scene.render
 			_is25D = $parameters[2];
 			if (!_graphicDis)
 			{
-				_graphicDis = PoolContainer3D.create();
+                if (_is25D) {
+				    _graphicDis = PoolEntityContainer3D.create();
+                } else {
+				    _graphicDis = PoolContainer3D.create();
+                }
 			}
 			_shareMaterials = true;
 			_lightPicker = null;

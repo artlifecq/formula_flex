@@ -8,6 +8,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.AttFormulaConfig;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ChatCfgData;
 	import com.rpgGame.coreData.cfg.ClientAreaCfgData;
@@ -137,6 +138,8 @@ package com.rpgGame.app.data
 			AvatarClothesResCfgData.setup(dic[ConfigClassRegister.AvatarClothesRes]);
 			AvatarHairResCfgData.setup(dic[ConfigClassRegister.AvatarHairRes]);
 			AvatarResConfigSetData.setup(dic[ConfigClassRegister.AvatarResConfig]);
+            
+            AttachEffectCfgData.setup(dic[ConfigClassRegister.Attach_effect]);
 			
 			BaZhenTuResCfgData.setup(dic[ConfigClassRegister.BaZhenTuRes]);
 			

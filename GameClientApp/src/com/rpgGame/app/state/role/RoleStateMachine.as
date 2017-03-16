@@ -17,6 +17,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.action.IdleState;
 	import com.rpgGame.app.state.role.action.JumpState;
 	import com.rpgGame.app.state.role.action.PlayActionState;
+	import com.rpgGame.app.state.role.action.PlaySpellState;
 	import com.rpgGame.app.state.role.action.PrewarState;
 	import com.rpgGame.app.state.role.action.RunState;
 	import com.rpgGame.app.state.role.action.ShowState;
@@ -31,6 +32,8 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.CastSpellLockState;
 	import com.rpgGame.app.state.role.control.DeadLaunchMoveState;
 	import com.rpgGame.app.state.role.control.FastingState;
+	import com.rpgGame.app.state.role.control.FlyUpState;
+	import com.rpgGame.app.state.role.control.HiddingState;
 	import com.rpgGame.app.state.role.control.HunLuanState;
 	import com.rpgGame.app.state.role.control.HurtState;
 	import com.rpgGame.app.state.role.control.HushState;
@@ -44,14 +47,18 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.StiffState;
 	import com.rpgGame.app.state.role.control.StopWalkMoveState;
 	import com.rpgGame.app.state.role.control.StunState;
+	import com.rpgGame.app.state.role.control.SyncSpellActionState;
 	import com.rpgGame.app.state.role.control.TrailMoveState;
 	import com.rpgGame.app.state.role.control.UnmovableState;
+	import com.rpgGame.app.state.role.control.UseSpellState;
 	import com.rpgGame.app.state.role.control.WalkMoveState;
 	import com.rpgGame.core.state.role.action.ActionState;
 	import com.rpgGame.core.state.role.control.MoveState;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.utils.Dictionary;
+	
+	import app.message.BoolArrayProto;
 	
 	/**
 	 *
@@ -103,6 +110,7 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.ACTION_PREWAR] = PrewarState;
 		stateMapping[RoleStateType.ACTION_PLAY_ACTION] = PlayActionState;
 		stateMapping[RoleStateType.ACTION_TRAIL] = TrailState;
+		stateMapping[RoleStateType.ACTION_PLAY_SPELL] = PlaySpellState;
 		
 		stateMapping[RoleStateType.CONTROL_AVATAR] = AvatarState;
 		stateMapping[RoleStateType.CONTROL_HURT] = HurtState;
@@ -129,6 +137,11 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.CONTROL_TRAIL_MOVE] = TrailMoveState;
 		stateMapping[RoleStateType.CONTROL_SCARED_MOVE] = ScaredMoveState;
 		stateMapping[RoleStateType.CONTROL_MOUNT_RIDE] = MountRideState;
+		
+		stateMapping[RoleStateType.CONTROL_HIDDING] = HiddingState;
+		stateMapping[RoleStateType.CONTROL_FLY_UP] = FlyUpState;
+		stateMapping[RoleStateType.CONTROL_SYNC_SPELLACTION] = SyncSpellActionState;
+		stateMapping[RoleStateType.CONTROL_USE_SPELL] = UseSpellState;
 		
 		private var _role : SceneRole;
 		private var _lastCanShowRiding : Boolean;
@@ -358,6 +371,30 @@ package com.rpgGame.app.state.role
 		public function get isUnmovable() : Boolean
 		{
 			var state : IState = getCurrState(UnmovableState);
+			return state != null;
+		}
+		
+		public function get isHiding():Boolean
+		{
+			var state : IState = getCurrState(HiddingState);
+			return state != null;
+		}
+		
+		public function get isUseSpell():Boolean
+		{
+			var state : IState = getCurrState(UseSpellState);
+			return state != null;
+		}
+		
+		public function get isFly():Boolean
+		{
+			var state : IState = getCurrState(FlyUpState);
+			return state != null;
+		}
+		
+		public function get isFall():Boolean
+		{
+			var state : IState = getCurrState(FallState);
 			return state != null;
 		}
 		

@@ -61,7 +61,7 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.HAIR:
 				case RenderUnitType.WEAPON:
 				case RenderUnitType.DEPUTY_WEAPON:
-					render.visible = true;
+//					render.visible = true;
 					render.repeat = 0;
 					render.setStatus(statusType, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time, speedRatio);
 					if (isFreeze)
@@ -76,10 +76,10 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.KNIFE_LIGHT:
 					break;
 				case RenderUnitType.WEAPON_EFFECT:
-					render.visible = true;
+//					render.visible = true;
 					break;
 				case RenderUnitType.EFFECT:
-					render.visible = false;
+//					render.visible = false;
 					break;
 				case RenderUnitType.HURT:
 					break;
@@ -146,6 +146,10 @@ package com.rpgGame.app.state.role.action
 				return false;
 			}
 			else if ((_machine as RoleStateMachine).isUnmovable)
+			{
+				return false;
+			}
+			else if((_machine as RoleStateMachine).isFly)
 			{
 				return false;
 			}

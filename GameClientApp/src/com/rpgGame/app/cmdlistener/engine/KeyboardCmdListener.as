@@ -306,7 +306,7 @@ package com.rpgGame.app.cmdlistener.engine
 
 		private function singleKeyDownExec(info : KeyInfo) : void
 		{
-			GameLog.addShow("singleKeyDownExec--:"+info.name+"_"+info.type+"_"+info.code);
+//			GameLog.addShow("singleKeyDownExec--:"+info.name+"_"+info.type+"_"+info.code);
 			////////////////////////////////////////// 
 			switch (info.type)
 			{
@@ -339,6 +339,10 @@ package com.rpgGame.app.cmdlistener.engine
 					///////////////////////////////////////////
 					KeyMoveManager.getInstance().setKeyStatus(info, false);
 					break;
+                case KeyCodeType.SKILL:
+                    info.funcS = info.funcID.toString();
+                    KeySpellProcess.execUp(info);
+                    break;
 			}
 		}
 

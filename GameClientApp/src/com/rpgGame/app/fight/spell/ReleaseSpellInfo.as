@@ -1,7 +1,6 @@
 package com.rpgGame.app.fight.spell
 {
 	import com.gameClient.log.GameLog;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
@@ -10,19 +9,11 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
 	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
-	import com.rpgGame.coreData.info.buff.BuffData;
-	import com.rpgGame.coreData.info.fight.FightHurtResult;
-	import com.rpgGame.coreData.info.fight.FightSingleHurt;
-	import com.rpgGame.coreData.role.HeroData;
-	import com.rpgGame.netData.fight.bean.AttackResultInfo;
-	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
 	import com.rpgGame.netData.fight.message.ResAttackVentToClientMessage;
 	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
-	import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
 	import com.rpgGame.netData.structs.Position;
 	
 	import flash.geom.Point;
-	import flash.utils.Dictionary;
 	
 	import org.game.netCore.net.Message;
 
@@ -35,107 +26,34 @@ package com.rpgGame.app.fight.spell
 	 */
 	public class ReleaseSpellInfo
 	{
-		private static var _releaseInfoById : Dictionary = new Dictionary();
-
-		public function set flySceneObjID(value:Number):void
-		{
-			_flySceneObjID = value;
-		}
-
 		/**
 		 *  
-		 * @param flySceneObjID 暂时把这个id，以技能的id来处理，后面看后端要不要有其他处理
 		 * @param msg
 		 * @param waitCache
 		 * @return 
 		 * 
 		 */		
-		public static function setReleaseInfo(flySceneObjID : int, msg : Message, waitCache : Boolean = false) : ReleaseSpellInfo
+		public static function setReleaseInfo(msg : Message, waitCache : Boolean = false) : ReleaseSpellInfo
 		{
-			var info : ReleaseSpellInfo = _releaseInfoById[flySceneObjID];
-			if (!info)
-			{
-				info = new ReleaseSpellInfo();
-				info.flySceneObjID=flySceneObjID;
-			}
-			if(msg is ResFightBroadcastMessage || msg is ResAttackVentToClientMessage)
-			{
-				info.readFrom(flySceneObjID, msg);
-			}
-			else if(msg is SCAttackerResultMessage)
-			{
-				createResults(info, msg as SCAttackerResultMessage);
-			}
-			else if(msg is ResAttackResultMessage)
-			{
-				info.createSingleResult(info, msg as ResAttackResultMessage);
-			}
+			var info : ReleaseSpellInfo = new ReleaseSpellInfo();
 			
-			if (waitCache)
-			{
-				_releaseInfoById[flySceneObjID] = info;
-			}
+			info.readFrom(msg);
+
 			return info;
-		}
-
-		/**
-		 * 每次伤害协议过来时，调用一次，主要是执行expendHurtTimes(),用来计数
-		 * @param flySceneObjID
-		 * @return 
-		 * 
-		 */		
-//		public static function expendReleaseInfo(flySceneObjID : int) : Boolean
-//		{
-//			var info : ReleaseSpellInfo = _releaseInfoById[flySceneObjID];
-//			if (info)
-//			{
-//				var expended : Boolean = info.expendHurtTimes();
-//				if (expended)
-//				{
-//					_releaseInfoById[flySceneObjID] = null;
-//					delete _releaseInfoById[flySceneObjID];
-//					return true;
-//				}
-//			}
-//			return false;
-//		}
-
-		public static function removeReleaseInfo(flySceneObjID : int) : void
-		{
-			var info : ReleaseSpellInfo = _releaseInfoById[flySceneObjID];
-			if (info)
-			{
-				_releaseInfoById[flySceneObjID] = null;
-				delete _releaseInfoById[flySceneObjID];
-			}
-		}
-
-		/**
-		 * 1.如果是新的技能产生的伤害结果（缓存为null），
-		 * 2.旧的技能产生的伤害结果，且动作已经播放完，则返回 false 
-		 * 
-		 * @param flySceneObjID
-		 * @return 
-		 * 
-		 */		
-		public static function isCurrReleaseInfo(flySceneObjID : int) : Boolean
-		{
-			var info : ReleaseSpellInfo = _releaseInfoById[flySceneObjID];
-			var value:Boolean=info && !info.motionFinish;
-			return info && !info.motionFinish;
 		}
 
 		private var _spellData:Q_skill_model;
 		
 		private var _spellEffectID : int = 0; //技能表现形式ID
+		private var _spellEffectData : Q_SpellEffect;
+		
 		private var _releaseAngle : int = 0;
 		private var _attackSpeed : int = 0;
-		private var _spellEffectData : Q_SpellEffect;
+		
 		private var _atkMotion : String; //对动作
 		private var _fromSingleAni : Q_SpellAnimation; //施法动画
 		private var _selfAni : Q_SpellAnimation; //自身动画
-		private var _hurtAnimation : Q_SpellAnimation; //被击动画
-		private var _sputteringHurtAnimation : Q_SpellAnimation; //溅射被击动画
+		
 		private var _posSingleAni : Q_SpellAnimation; //对地动画
 		private var _passSingleAni : Q_SpellAnimation; //弹道动画
 
@@ -165,10 +83,7 @@ package com.rpgGame.app.fight.spell
 		 * 释放延迟
 		 */
 //		private var _delayTime : int = 0;
-		/**
-		 * 伤害延迟
-		 */
-		private var _hurtDelay : int = 0;
+		
 		/**
 		 * 投掷延迟时间
 		 */
@@ -192,15 +107,6 @@ package com.rpgGame.app.fight.spell
 		private var _flyTargetPosList:Vector.<Position>;
 		private var _flyTargets:Vector.<SceneRole>;
 		
-		private var _flySceneObjID : Number = 0; //场景飞行特效唯一标识
-		
-//		//施法结果列表，结果的类型分两种：1、状态改变效果，2、伤害效果
-		public var stateList : Vector.<BuffData>;
-		public var hurtList : Vector.<FightHurtResult>;
-		public var isMainCharHited : Boolean = false; //主角是否被打了
-		
-		public var singleHurtVo:FightHurtResult;
-		
 		private var _ghostEffect : Boolean;
 		private var _matchTerrain : Boolean;
 		/**
@@ -208,16 +114,7 @@ package com.rpgGame.app.fight.spell
 		 */		
 		private var _canWalkRelease : Boolean; //
 		
-		//-----------------击退，击飞相关表信息
-		private var _deadLaunchHeight : int;
-		private var _deadLaunchDistance : int;
-		private var _deadLaunchSpeed : int;
-		private var _deadBeatDistance : int;
-		private var _deadBeatSpeed : int;
-		private var _deadBeatProbability : int;
-		private var _deadLaunchProbability : int;
 		
-		private var _beatBackSpeed : int = 0;
 		/**
 		 * 是否是追踪弹道 
 		 */		
@@ -264,9 +161,8 @@ package com.rpgGame.app.fight.spell
 		 * @param msg
 		 * 
 		 */		
-		public function readFrom(flySceneObjID : int, msg : Message) : void
+		public function readFrom(msg : Message) : void
 		{
-			_flySceneObjID = flySceneObjID;
 			var flyTargets:Vector.<SceneRole>;
 			var targetID:uint;
 			var targetRole:SceneRole;
@@ -311,13 +207,14 @@ package com.rpgGame.app.fight.spell
 				
 				
 				_flyTargetPosList = fightTargetMsg.posList;
-				for(var i:int =0;i<fightTargetMsg.targets;i++)
+                _flyTargets = new Vector.<SceneRole>();
+				for(var i:int =0;i<fightTargetMsg.targets.length;i++)
 				{
 					targetID = fightTargetMsg.targets[i].ToGID();
 					targetRole = SceneManager.getSceneObjByID(targetID) as SceneRole;
-					flyTargets.push(targetRole);
+                    _flyTargets.push(targetRole);
 				}
-				_flyTargets = flyTargets;
+				//_flyTargets = flyTargets;
 			}
 			else if(msg is ResAttackVentToClientMessage)
 			{
@@ -345,13 +242,14 @@ package com.rpgGame.app.fight.spell
 				_targetPos = new Point(fightPosMsg.pos.x, fightPosMsg.pos.y);
 				
 				_flyTargetPosList = fightPosMsg.posList;
-				for(var j:int =0;j<fightPosMsg.targets;j++)
+                _flyTargets = new Vector.<SceneRole>();
+				for(var j:int =0;j<fightPosMsg.targets.length;j++)
 				{
 					targetID = fightPosMsg.targets[j].ToGID();
 					targetRole = SceneManager.getSceneObjByID(targetID) as SceneRole;
-					flyTargets.push(targetRole);
+                    _flyTargets.push(targetRole);
 				}
-				_flyTargets = flyTargets;
+				//_flyTargets = flyTargets;
 			}
 			
 			readSpellEffectData(_spellData.q_spell_effect);
@@ -368,8 +266,6 @@ package com.rpgGame.app.fight.spell
 				
 				_fromSingleAni = AnimationDataManager.getData(_spellEffectData.cast_animation);
 				_selfAni = AnimationDataManager.getData(_spellEffectData.self_dest_animation);
-				_hurtAnimation = AnimationDataManager.getData(_spellEffectData.hurt_animation);
-				_sputteringHurtAnimation = AnimationDataManager.getData(_spellEffectData.sputtering_hurt_animation);
 				_posSingleAni = AnimationDataManager.getData(_spellEffectData.dest_animation);
 				_passSingleAni = AnimationDataManager.getData(_spellEffectData.fly_animation);
 				
@@ -378,7 +274,6 @@ package com.rpgGame.app.fight.spell
 //				_breakFrameTime = _spellEffectData.break_frame_time;//暂时没有用
 				_hitFrameTime = _spellEffectData.hit_frame_time;//到这个时间上，会在地面上有特效,也会有伤害飘字，如果设置了hurtdelay的话，会以这个时间为主--弹道技能的话，是用来控制什么时候来播放弹道技能，内部循环
 				
-				_hurtDelay = _spellEffectData.hurt_delay;//伤害飘字的时间
 				_soarFrameTime = _spellEffectData.soar_frame_time;//
 				_throwDelayTime = _spellEffectData.throw_delay_time;//
 				
@@ -387,21 +282,13 @@ package com.rpgGame.app.fight.spell
 				_blinkType = _spellData.q_blink_type;
 				_blinkSpeed = _spellData.q_blink_speed;
 				_blinkHeight = _spellData.q_blink_height;
-				
-				_beatBackSpeed = _spellData.q_beat_back_speed;
+	
 				
 				_ghostEffect = _spellEffectData.ghost_effect;
 				_matchTerrain = false;
 				_canWalkRelease = _spellData.q_can_walk_release;//是否边走边放
 				
-				//击退，击飞相关表字段信息
-				_deadLaunchHeight = _spellData.q_dead_launch_height;
-				_deadLaunchDistance = _spellData.q_dead_launch_distance;
-				_deadLaunchSpeed = _spellData.q_dead_launch_speed;
-				_deadBeatDistance = _spellData.q_dead_beat_distance;
-				_deadBeatSpeed = _spellData.q_dead_beat_speed;
-				_deadBeatProbability = _spellData.q_dead_beat_probability;
-				_deadLaunchProbability = _spellData.q_dead_launch_probability;
+			
 				
 				//陷进相关表字段信息
 //				_isTrapSpell = _spellData.q_skill_type == 1;
@@ -421,165 +308,76 @@ package com.rpgGame.app.fight.spell
 			}
 		}
 		
-		private function createSingleResult(info:ReleaseSpellInfo,msg : ResAttackResultMessage):void
-		{
-			var isHited : Boolean = false;
-			var resultInfo:AttackResultInfo = msg.state;
-			
-			var roleID:Number = resultInfo.targetId.ToGID();
-			var hurtResultVO : FightHurtResult = new FightHurtResult(roleID);
-			hurtResultVO.curLife = resultInfo.damage;
-			
-			var hasPositionChange:Boolean = (resultInfo.newPos.x != 0 || resultInfo.newPos.y != 0);
-			
-			hurtResultVO.hasPositionChange = hasPositionChange;
-			if (hurtResultVO.hasPositionChange)
-			{
-				hurtResultVO.newPosition = new Point(resultInfo.newPos.x, resultInfo.newPos.y);
-			}
-			
-			hurtResultVO.attackerId = resultInfo.attackerId.ToGID();
-			
-			var hasStiffTime : Boolean = false;//击飞时间，暂时没有，所以先为false
-			if (hasStiffTime)
-			{
-				hurtResultVO.stiffTime = 0;
-			}
-			
-			var hurtTypeAmount : int = resultInfo.damage;
-			var hurtType : int = resultInfo.fightResult
-			var hurtAmount : int = resultInfo.damage; //本次
-			var sVo : FightSingleHurt = new FightSingleHurt(hurtType, hurtAmount, roleID);
-			hurtResultVO.addHurt(sVo);
-			
-			//
-			var role : SceneRole = SceneManager.getSceneObjByID(roleID) as SceneRole;
-			if (role)
-			{
-				//role.isServerLiving = hurtResultVO.curLife > 0;
-			}
-			//
-			if (roleID == MainRoleManager.actorID) //判定主角是否被攻击
-			{
-				if (info.atkor && info.atkor.data is HeroData) //是玩家才自动反击
-				{
-					isHited = true;
-				}
-			}
-			
-			_atkorID = resultInfo.attackerId.ToGID();
-			if (_atkorID > 0)
-			{
-				_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
-				if (_atkor && !_atkor.usable)
-					_atkor = null;
-			}
-			
-			if(_atkor == null)
-			{
-				GameLog.addShow("攻击者为空!攻击者服务器ID为：\t 这些伤害不知道哪里来的，也不需要关注是谁打的");
-			}
-			
-			if(_atkor && _atkor.usable)
-			{
-				_atkorPos = new Point(_atkor.x, _atkor.z);
-			}
-			
-			info.spellData = SpellDataManager.getSpellData(resultInfo.skillId);
-			info.isMainCharHited = isHited;
-			info.singleHurtVo = hurtResultVO;
-			
-			readSpellEffectData(info.spellData.q_spell_effect);
-		}
-
-		/**
-		 * 技能造成的伤害和buff列表处理（通用）
-		 * @param info
-		 * @param buffer
-		 *
-		 */
-		private static function createResults(info : ReleaseSpellInfo, msg : SCAttackerResultMessage) : void
-		{
-			//类型和血量
-			var stateList : Vector.<BuffData> = new Vector.<BuffData>;
-			var hurtList : Vector.<FightHurtResult> = new Vector.<FightHurtResult>;
-			var hurtCharList : Vector.<SceneRole> = new Vector.<SceneRole>;
-			var isHited : Boolean = false;
-			var roleID : Number = 0;
-			var resultInfo:AttackResultInfo;
-			var isState : Boolean = false;//现在还没有技能触发buff的功能，暂时不走这里面的逻辑
-			
-			
-			for(var i:uint = 0;i<msg.infos.length;i++)
-			{
-				resultInfo = msg.infos[i];
-				roleID = resultInfo.targetId.ToGID();//目标 
-				if (isState) //是否状态效果（buff/debuff）
-				{
-					var buffData : BuffData = new BuffData(roleID);
-//					buffInfo.cfgId = buffer.readVarint32();
-//					buffInfo.curtStackCount = buffer.readVarint32();
-//					buffInfo.disappearTime = buffer.readVarint64();
-					stateList.push(buffData);
-				}
-				else
-				{
-					var hurtResultVO : FightHurtResult = new FightHurtResult(roleID);
-					hurtResultVO.curLife = resultInfo.damage;
-					
-					var hasPositionChange:Boolean = (resultInfo.newPos.x != 0 || resultInfo.newPos.y != 0);
-					
-					hurtResultVO.hasPositionChange = hasPositionChange;
-					if (hurtResultVO.hasPositionChange)
-					{
-						hurtResultVO.newPosition = new Point(resultInfo.newPos.x, resultInfo.newPos.y);
-					}
-					
-					hurtResultVO.attackerId = resultInfo.attackerId.ToGID();//攻击者
-					
-					var hasStiffTime : Boolean = false;//击飞时间，暂时没有，所以先为false
-					if (hasStiffTime)
-					{
-						hurtResultVO.stiffTime = 0;
-					}
-					
-					var hurtTimes : int = 1; //伤害次数
-					for (var hurtTimeI : int = 0; hurtTimeI < hurtTimes; hurtTimeI++) //hp - 3*50 = curLife
-					{
-						var hurtTypeAmount : int = resultInfo.damage;
-						var hurtType : int = resultInfo.fightResult
-						var hurtAmount : int = resultInfo.damage; //本次
-						var sVo : FightSingleHurt = new FightSingleHurt(hurtType, hurtAmount, roleID);
-						hurtResultVO.addHurt(sVo);
-					}
-					hurtList.push(hurtResultVO);
-					//
-					var role : SceneRole = SceneManager.getSceneObjByID(roleID) as SceneRole;
-					if (role)
-					{
-						//role.isServerLiving = hurtResultVO.curLife > 0;
-						hurtCharList.push(role);
-					}
-					//
-					if (roleID == MainRoleManager.actorID) //判定主角是否被攻击
-					{
-						if (info.atkor && info.atkor.data is HeroData) //是玩家才自动反击
-						{
-							isHited = true;
-						}
-					}
-				}
-			}
-			
-			info.hurtList = hurtList;
-			info.stateList = stateList;
-			info.isMainCharHited = isHited;
-		}
-
-		public function get flySceneObjID() : Number
-		{
-			return _flySceneObjID;
-		}
+//		private function createSingleResult(info:ReleaseSpellInfo,msg : ResAttackResultMessage):void
+//		{
+//			var isHited : Boolean = false;
+//			var resultInfo:AttackResultInfo = msg.state;
+//			
+//			var roleID:Number = resultInfo.targetId.ToGID();
+//			var hurtResultVO : FightHurtResult = new FightHurtResult(roleID);
+//			hurtResultVO.curLife = resultInfo.damage;
+//			
+//			var hasPositionChange:Boolean = (resultInfo.newPos.x != 0 || resultInfo.newPos.y != 0);
+//			
+//			hurtResultVO.hasPositionChange = hasPositionChange;
+//			if (hurtResultVO.hasPositionChange)
+//			{
+//				hurtResultVO.newPosition = new Point(resultInfo.newPos.x, resultInfo.newPos.y);
+//			}
+//			
+//			hurtResultVO.attackerId = resultInfo.attackerId.ToGID();
+//			
+//			var hasStiffTime : Boolean = false;//击飞时间，暂时没有，所以先为false
+//			if (hasStiffTime)
+//			{
+//				hurtResultVO.stiffTime = 0;
+//			}
+//			
+//			var hurtTypeAmount : int = resultInfo.damage;
+//			var hurtType : int = resultInfo.fightResult
+//			var hurtAmount : int = resultInfo.damage; //本次
+//			var sVo : FightSingleHurt = new FightSingleHurt(hurtType, hurtAmount, roleID);
+//			hurtResultVO.addHurt(sVo);
+//			
+//			//
+//			var role : SceneRole = SceneManager.getSceneObjByID(roleID) as SceneRole;
+//			if (role)
+//			{
+//				//role.isServerLiving = hurtResultVO.curLife > 0;
+//			}
+//			//
+//			if (roleID == MainRoleManager.actorID) //判定主角是否被攻击
+//			{
+//				if (info.atkor && info.atkor.data is HeroData) //是玩家才自动反击
+//				{
+//					isHited = true;
+//				}
+//			}
+//			
+//			_atkorID = resultInfo.attackerId.ToGID();
+//			if (_atkorID > 0)
+//			{
+//				_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
+//				if (_atkor && !_atkor.usable)
+//					_atkor = null;
+//			}
+//			
+//			if(_atkor == null)
+//			{
+//				GameLog.addShow("攻击者为空!攻击者服务器ID为：\t 这些伤害不知道哪里来的，也不需要关注是谁打的");
+//			}
+//			
+//			if(_atkor && _atkor.usable)
+//			{
+//				_atkorPos = new Point(_atkor.x, _atkor.z);
+//			}
+//			
+//			info.spellData = SpellDataManager.getSpellData(resultInfo.skillId);
+//			info.isMainCharHited = isHited;
+//			info.singleHurtVo = hurtResultVO;
+//			
+//			readSpellEffectData(info.spellData.q_spell_effect);
+//		}
 
 		public function get isFlyCross() : Boolean
 		{
@@ -646,40 +444,7 @@ package com.rpgGame.app.fight.spell
 //		}
 //		
 
-		public function get deadLaunchProbability() : int
-		{
-			return _deadLaunchProbability > 0 ? _deadLaunchProbability : 100;
-		}
-
-		public function get deadBeatProbability() : int
-		{
-			return _deadBeatProbability > 0 ? _deadBeatProbability : 100;
-		}
-
-		public function get deadBeatSpeed() : int
-		{
-			return _deadBeatSpeed;
-		}
-
-		public function get deadBeatDistance() : int
-		{
-			return _deadBeatDistance;
-		}
-
-		public function get deadLaunchHeight() : int
-		{
-			return _deadLaunchHeight;
-		}
-
-		public function get deadLaunchSpeed() : int
-		{
-			return _deadLaunchSpeed;
-		}
-
-		public function get deadLaunchDistance() : int
-		{
-			return _deadLaunchDistance;
-		}
+		
 
 		public function get releaseAngle() : int
 		{
@@ -720,11 +485,6 @@ package com.rpgGame.app.fight.spell
 //		{
 //			return _delayTime;
 //		}
-
-		public function get hurtDelay() : int
-		{
-			return _hurtDelay;
-		}
 
 		public function get soarFrameTime() : int
 		{
@@ -930,31 +690,6 @@ package com.rpgGame.app.fight.spell
 		}
 
 		/**
-		 * 被击动画 
-		 * @return 
-		 * 
-		 */		
-		public function get hurtAnimation() : Q_SpellAnimation
-		{
-			return _hurtAnimation;
-		}
-
-		/**
-		 * 溅射被击动画 
-		 * @return 
-		 * 
-		 */		
-		public function get sputteringHurtAnimation() : Q_SpellAnimation
-		{
-			return _sputteringHurtAnimation;
-		}
-
-		public function get beatBackSpeed() : int
-		{
-			return _beatBackSpeed;
-		}
-
-		/**
 		 * 对地动画 
 		 * @return 
 		 * 
@@ -1003,39 +738,6 @@ package com.rpgGame.app.fight.spell
 		{
 			return _attackSpeed;
 		}
-
-//		public function get repeatInterval() : int
-//		{
-//			return _repeatInterval;
-//		}
-
-//		public function get repeatTimes() : int
-//		{
-//			return _repeatTimes;
-//		}
-
-		/**
-		 * 陷阱类技能伤害次数倒计时 
-		 * @return 
-		 * 
-		 */		
-//		public function expendHurtTimes() : Boolean
-//		{
-//			_maxHurtTimes--;
-//			if (_maxHurtTimes > 0)
-//				return false;
-//			return true;
-//		}
-
-		/**
-		 * 是否陷阱技能
-		 * @return
-		 *
-		 */
-//		public function get isTrapSpell() : Boolean
-//		{
-//			return _isTrapSpell;
-//		}
 
 		public function get throwHeight() : int
 		{

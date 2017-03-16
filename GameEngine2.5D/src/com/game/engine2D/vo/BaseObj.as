@@ -74,6 +74,7 @@ package com.game.engine2D.vo{
 		//*******************************************IFrameRender接口基本参数*******************************************
 		public function startRender():void
 		{
+			_runTickCnt = 0;
 			Tick.instance.addCallBack(onTick);
 		}
 		

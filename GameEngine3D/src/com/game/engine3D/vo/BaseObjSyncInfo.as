@@ -19,15 +19,17 @@ package com.game.engine3D.vo
 		private var _obj : Object;
 		private var _syncHeight : Boolean;
 		private var _syncRotation : Boolean;
+		private var _syncVisible : Boolean;
 		private var _offsetX : Number;
 		private var _offsetY : Number;
 		private var _offsetZ : Number;
 		
-		public function BaseObjSyncInfo(obj : Object, syncHeight : Boolean = false, syncRotation : Boolean = false)
+		public function BaseObjSyncInfo(obj : Object, syncHeight : Boolean = false, syncRotation : Boolean = false, syncVisible : Boolean = false)
 		{
 			_obj = obj;
 			_syncHeight = syncHeight;
 			_syncRotation = syncRotation;
+			_syncVisible = syncVisible;
 			_offsetX = 0;
 			_offsetY = 0;
 			_offsetZ = 0;
@@ -40,7 +42,7 @@ package com.game.engine3D.vo
 			_offsetZ = z;
 		}
 		
-		public function syncPos(position : Vector3D, rotation : Vector3D, initiator : BaseObj3D) : void
+		public function syncInfo(position : Vector3D, rotation : Vector3D, initiator : BaseObj3D) : void
 		{
 			if (!_obj)
 				return;
@@ -57,6 +59,10 @@ package com.game.engine3D.vo
 					ObjectContainer3D(_obj).rotationX = rotation.x;
 					ObjectContainer3D(_obj).rotationY = rotation.y;
 					ObjectContainer3D(_obj).rotationZ = rotation.z;
+				}
+				if (_syncVisible)
+				{
+					ObjectContainer3D(_obj).visible = initiator.graphicDis.parent;
 				}
 				ObjectContainer3D(_obj).sceneTransform; //执行变换 
 			}
@@ -76,6 +82,10 @@ package com.game.engine3D.vo
 						BaseObj3D(_obj).syncRotationY(rotation.y, initiator);
 						BaseObj3D(_obj).syncRotationZ(rotation.z, initiator);
 					}
+					if (_syncVisible)
+					{
+						BaseObj3D(_obj).visible = initiator.graphicDis.parent;
+					}
 				}
 			}
 			else if (_obj is IBindable)
@@ -92,6 +102,11 @@ package com.game.engine3D.vo
 		public function get syncRotation() : Boolean
 		{
 			return _syncRotation;
+		}
+		
+		public function get syncVisible() : Boolean
+		{
+			return _syncVisible;
 		}
 		
 		public function get obj() : Object
@@ -111,6 +126,7 @@ package com.game.engine3D.vo
 			_obj = null;
 			_syncHeight = false;
 			_syncRotation = false;
+			_syncVisible = false;
 			_offsetX = 0;
 			_offsetY = 0;
 			_offsetZ = 0;

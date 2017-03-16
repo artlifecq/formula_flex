@@ -3,11 +3,9 @@ package com.rpgGame.coreData.info.face
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	
-	
-
 	/**
 	 * face对象的基础根类 
-	 * @author carver
+	 * @author neil
 	 * 
 	 */	
 	public class BaseFaceInfo implements IBaseFaceInfo

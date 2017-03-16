@@ -47,6 +47,10 @@ package com.rpgGame.app.state.role.control
 				throw new Error("跳跃上升状态引用必须是JumpRiseStateReference类型！");
 		}
 
+		/**
+		 * 上升阶段 
+		 * 
+		 */		
 		private function doJump() : void
 		{
 			if (_machine && !_machine.isDisposed)
@@ -58,6 +62,10 @@ package com.rpgGame.app.state.role.control
 			}
 		}
 
+		/**
+		 * 下降阶段 
+		 * 
+		 */		
 		private function onJumpOffComplete() : void
 		{
 			if (_machine && !_machine.isDisposed)
@@ -67,6 +75,10 @@ package com.rpgGame.app.state.role.control
 			}
 		}
 
+		/**
+		 * 落地了，切换跑路状态 
+		 * 
+		 */		
 		private function onJumpFallComplete() : void
 		{
 			if (_machine && !_machine.isDisposed)
@@ -85,6 +97,10 @@ package com.rpgGame.app.state.role.control
 			stopJump();
 		}
 
+		/**
+		 * 停止跳跃，把角色的高度重置为0，清理计时器 
+		 * 
+		 */		
 		private function stopJump() : void
 		{
 			if (_machine && !_machine.isDisposed)
@@ -96,7 +112,7 @@ package com.rpgGame.app.state.role.control
 
 		override public function leavePass(nextState : IState, force : Boolean = false) : Boolean
 		{
-			if ((_machine as RoleStateMachine).isBingDong)
+			if ((_machine as RoleStateMachine).isBingDong)//如果是冰冻状态，且是非强制的话，则要永远保持这个跳跃状态
 			{
 				if (!force)
 					return false;
@@ -106,15 +122,15 @@ package com.rpgGame.app.state.role.control
 
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
 		{
-			if ((_machine as RoleStateMachine).isDead)
+			if ((_machine as RoleStateMachine).isDead)//死亡的时候，不能进入跳跃状态
 			{
 				return false;
 			}
-			else if ((_machine as RoleStateMachine).isDeadLaunch)
+			else if ((_machine as RoleStateMachine).isDeadLaunch)//击飞死亡状态，不能进入跳跃状态
 			{
 				return false;
 			}
-			else if ((_machine as RoleStateMachine).isTrailMoving)
+			else if ((_machine as RoleStateMachine).isTrailMoving)//如果是轨迹行走阶状态，也不能进入跳跃状态
 			{
 				return false;
 			}
