@@ -174,7 +174,7 @@ package com.rpgGame.app.state.role.action
 //					render.visible = true;
 					break;
 				case RenderUnitType.EFFECT:
-//					render.visible = false;
+					render.visible = false;
 					break;
 				case RenderUnitType.HURT:
 					break;
