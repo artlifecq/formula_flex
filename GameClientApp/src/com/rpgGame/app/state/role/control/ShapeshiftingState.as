@@ -24,6 +24,7 @@ package com.rpgGame.app.state.role.control
 	 */	
 	public class ShapeshiftingState extends BuffState
 	{
+		private var _reference:ShapeshiftingStateReference;
     	private var avatarInfo:AvatarInfo;
         
 		public function ShapeshiftingState()
@@ -35,16 +36,17 @@ package com.rpgGame.app.state.role.control
 		{
 			if (_machine && !_machine.isDisposed)
 			{
+				_reference = null;
 				super.execute();
 				if (_ref is ShapeshiftingStateReference)
 				{
-					_stateReference = _ref as ShapeshiftingStateReference;
+					_reference = _ref as ShapeshiftingStateReference;
 					
 					var role : SceneRole = _machine.owner as SceneRole;
 					
-					trace(_stateReference.buffData.clientData.model);
+					trace(_reference.buffData.clientData.model);
                     
-                    var changeModel : ChangeModel = ChangeModelCfgData.getInfoById(_stateReference.buffData.clientData.model);
+                    var changeModel : ChangeModel = ChangeModelCfgData.getInfoById(_reference.buffData.clientData.model);
                     if (null == changeModel)
 					{
                         return;
@@ -60,10 +62,6 @@ package com.rpgGame.app.state.role.control
 					heroData.avatarInfo.hairResID = changeModel.q_hair_res;
 					
 					var weaponRes : AvatarWeaponRes = AvatarWeapontResCfgData.getInfo(changeModel.q_weapon_res);
-					/*	if (!weaponRes)
-					{
-					weaponRes = AvatarWeapontResCfgData.getInfo(clothesRes.weaponResId);
-					}*/
 					if (weaponRes)
 					{
 						heroData.avatarInfo.weaponResID = weaponRes.res;
@@ -115,6 +113,7 @@ package com.rpgGame.app.state.role.control
 		{
 			super.dispose();
 			avatarInfo = null;
+			_reference = null;
 		}
 	}
 }

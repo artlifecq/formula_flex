@@ -178,6 +178,7 @@ package com.rpgGame.app.manager.shell
             buffData.cfgId = 2002;
             buffData.disappearTime = 1000000;
             buffRef.setParams(buffData);
+			buffData.buffData;
             MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_SHAPESHIFTING, buffRef);
         }
         
