@@ -34,7 +34,7 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.HAIR:
 				case RenderUnitType.WEAPON:
 				case RenderUnitType.DEPUTY_WEAPON:
-					render.visible = true;
+//					render.visible = true;
 					render.repeat = _repeatNum;
 					render.setStatus(statusType, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
 					
@@ -42,19 +42,19 @@ package com.rpgGame.app.state.role.action
 						render.stop(time);
 					break;
 				case RenderUnitType.MOUNT:
-					render.visible = true;
+//					render.visible = true;
 					render.repeat = _repeatNum;
 					render.setStatus(statusType, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
 					if (isFreeze)
 						render.stop(time);
 					break;
 				case RenderUnitType.EFFECT:
-					render.visible = true;
+//					render.visible = true;
 					render.repeat = _repeatNum;
 					render.setStatus(statusType, null, time);
 					break;
 				case RenderUnitType.WEAPON_EFFECT:
-					render.visible = true;
+//					render.visible = true;
 					break;
 				case RenderUnitType.KNIFE_LIGHT:
 					break;
