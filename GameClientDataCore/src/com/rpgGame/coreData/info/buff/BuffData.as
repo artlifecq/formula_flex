@@ -48,6 +48,8 @@ package com.rpgGame.coreData.info.buff
 		
 		public function get buffStates():String
 		{
+			if (cfgId > 0 && !_data && !_specialData)
+				_data = BuffStateDataManager.getData(cfgId);
 			var str:String = _data.q_action_type;
 			return str.substring(1,str.length-1);
 		}

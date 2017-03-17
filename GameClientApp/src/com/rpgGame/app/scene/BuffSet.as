@@ -86,8 +86,6 @@ package com.rpgGame.app.scene
 			removeBuffEffect(buffData.cfgId);
 			var data : Q_buff = buffData.buffData;
 			
-			
-			
 			var animations:Array = data.q_animation.split(";");
 			if (data && animations)
 			{
@@ -147,6 +145,7 @@ package com.rpgGame.app.scene
 			{
 				buffList.push(buffData);
 			}
+            handlerRoleState(buffData);
 			addBuffEffect(buffData);
 			handlerRoleState(buffData);
 			EventManager.dispatchEvent(BuffEvent.ADD_BUFF, buffData);
@@ -258,6 +257,9 @@ package com.rpgGame.app.scene
 					case 27://技能同步buff
 						_role.stateMachine.removeState(RoleStateType.CONTROL_SYNC_SPELLACTION); //切换到“技能动作同步状态”
 						break;
+                    case 34:// 变身
+                        _role.stateMachine.removeState(RoleStateType.CONTROL_SHAPESHIFTING);
+                        break;
 					case 199://冰冻
 						_role.stateMachine.removeState(RoleStateType.CONTROL_BING_DONG);
 						break;
