@@ -103,7 +103,7 @@ package com.rpgGame.app.manager
 		{
 			if (!spellProto)
 				return false;
-			var curGcd : int = GCDCfgData.getGcd(spellProto.q_public_cd);
+			var curGcd : int = GCDCfgData.getGcd(spellProto.q_public_cd_level);
 			return curGcd > 0;
 		}
 

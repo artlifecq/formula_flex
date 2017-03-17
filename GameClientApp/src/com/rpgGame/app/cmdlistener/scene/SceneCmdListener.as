@@ -836,6 +836,7 @@ package com.rpgGame.app.cmdlistener.scene
             if(roleData.id == MainRoleManager.actorID)
             {
                 ReliveManager.autoHideRelive();
+				EventManager.dispatchEvent(MainPlayerEvent.SELFHP_CHANGE);
             }
         }
 		

@@ -623,12 +623,6 @@ package com.rpgGame.app.ui.main.chat {
 			
 			if("" == this._inputText.text )
 			{
-				var ms:ResPlayerDieMessage=new ResPlayerDieMessage();
-				ms.attackername="111";
-				ms.autoTime=30;
-				ms.time=new Date().getTime()/1000;
-				AppManager.showApp(AppConstant.DIE_PANEL,ms);
-				
 				return;
 			}
 			

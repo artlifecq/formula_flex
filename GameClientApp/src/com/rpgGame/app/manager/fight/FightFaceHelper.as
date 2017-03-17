@@ -166,6 +166,10 @@ package com.rpgGame.app.manager.fight
 					scaleAgo = 1.5;
 					scaleLater = 0.5;
 					numberType = NUMBER_NPC_HIT;
+					if(isUsefulBmp){
+						showAttChange(EnumHurtType.SUBHP,hurtAmount);
+						return;
+					}
 					break;
 				case EnumHurtType.SPELL_HURT_TYPE_MISS: //闪避
 					typeRes = ROOT+USESFUL_EFFECT+"weimingzhong.png";
