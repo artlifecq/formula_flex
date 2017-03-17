@@ -18,6 +18,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_name:String;
 		 /**  身体资源 */
 		public var q_body_res:String;
+		 /**  怪物类型(1普通小怪,2精英,3BOSS 4NPC) */
+		public var q_monster_type:int;
 		 /**  怪物等级 */
 		public var q_level:int;
 		 /**  坐骑资源 */
@@ -38,8 +40,6 @@ package com.rpgGame.coreData.clientConfig
 		public var q_direction:int;
 		 /**  是否在小地图中显示（1是，2否） */
 		public var q_isminimap:int;
-		 /**  怪物类型(1普通小怪,2精英,3BOSS) */
-		public var q_monster_type:int;
 		 /**  怪物掉落归属（0：最后一击，1：伤害排行最高玩家，2：无主掉落） */
 		public var q_drop_type:int;
 		 /**  怪物攻击模式(1主动攻击,2被动攻击，3木桩类怪物,4木桩主动攻击) */
@@ -64,7 +64,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_hprate:int;
 		 /**  总属性ID */
 		public var q_att_type:int;
-		 /**  阵营关系 */
+		 /**  阵营关系(0 ) */
 		public var q_relation:int;
 		 /**  装备属性占比（万分比） */
 		public var q_equip_ratio:int;
@@ -134,6 +134,10 @@ package com.rpgGame.coreData.clientConfig
 		public var q_redord_type:String;
 		 /**  显示推荐战斗力数值(只对精英和BOSS有效) */
 		public var q_fighting:int;
+		 /**  BOSS每一管血条的最大血量 */
+		public var q_per_blood:int;
+		 /**  关联NPC功能表 */
+		public var q_npc_function:int;
 
 	}
 }

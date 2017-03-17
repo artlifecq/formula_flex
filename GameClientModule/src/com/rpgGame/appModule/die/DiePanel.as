@@ -1,7 +1,6 @@
 package com.rpgGame.appModule.die
 {
 	import com.rpgGame.app.manager.goods.BackPackManager;
-	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.alert.GameAlert;
@@ -9,7 +8,7 @@ package com.rpgGame.appModule.die
 	import com.rpgGame.coreData.cfg.DieCfgData;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
-	import com.rpgGame.coreData.lang.LangBackPack;
+	import com.rpgGame.coreData.lang.LangQ_BackPack;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.player.message.ResPlayerDieMessage;
 	
@@ -137,7 +136,7 @@ package com.rpgGame.appModule.die
 					if(BackPackManager.instance.getBagItemsCountById(FUHUO_ID)>0){
 						SceneSender.reqReviveLocalRole(FUHUO_ID,1);
 					}else{
-						var alertSet:AlertSetInfo=new AlertSetInfo(LangBackPack.ITEM_dropItemToScene_3);
+						var alertSet:AlertSetInfo=new AlertSetInfo(LangQ_BackPack.ITEM_dropItemToScene_3);
 						GameAlert.showAlert(alertSet,alertToBuy);
 					}
 					this.hide();

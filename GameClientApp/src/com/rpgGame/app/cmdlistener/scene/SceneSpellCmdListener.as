@@ -93,86 +93,10 @@ package com.rpgGame.app.cmdlistener.scene
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
 			var failID : int = msg.failType;
 			var failReason : String;
-			switch (failID)
-			{
-				case 1:
-					failReason = LangQ_NoticeInfo.SkillError_1;
-					break;
-				case 2:
-					failReason = LangQ_NoticeInfo.SkillError_2;
-					break;
-				case 3:
-					failReason = LangQ_NoticeInfo.SkillError_3;
-					break;
-				case 4:
-					failReason = LangQ_NoticeInfo.SkillError_4;
-					break;
-				case 5:
-					failReason = LangQ_NoticeInfo.SkillError_5;
-					break;
-				case 6:
-					failReason = LangQ_NoticeInfo.SkillError_6;
-					break;
-				case 7:
-					failReason = LangQ_NoticeInfo.SkillError_7;
-					break;
-				case 8:
-					failReason = LangQ_NoticeInfo.SkillError_8;
-					break;
-				case 9:
-					failReason = LangQ_NoticeInfo.SkillError_9;
-					break;
-				case 10:
-					failReason = LangQ_NoticeInfo.SkillError_10; //（英雄死亡后不会被删除，怪物会被立即删除,所以一般情况下怪物目标不会返还这个消息）
-					break;
-				case 11:
-					failReason = LangQ_NoticeInfo.SkillError_11;
-					break;
-				case 12:
-					failReason = LangQ_NoticeInfo.SkillError_12;
-					break;
-				case 13:
-					failReason = LangQ_NoticeInfo.SkillError_13;
-					break;
-				case 14:
-					failReason = LangQ_NoticeInfo.SkillError_14;
-					break;
-				case 15:
-					failReason = LangQ_NoticeInfo.SkillError_15;
-					break;
-				case 16:
-					failReason = LangQ_NoticeInfo.SkillError_16;
-					break;
-				case 17:
-					failReason = LangQ_NoticeInfo.SkillError_17;
-					break;
-				case 18:
-					failReason = LangQ_NoticeInfo.SkillError_18;
-					break;
-				case 19:
-					failReason = LangQ_NoticeInfo.SkillError_19;
-					break;
-				case 20:
-//					failReason = LangQ_NoticeInfo.SkillError_20;
-					break;
-				case 21:
-//					failReason = LangQ_NoticeInfo.SkillError_21;
-					break;
-				case 22:
-					failReason = "该技能必须在马上才能够释放";
-					break;
-				case 23:
-					failReason = "飞行中，无法释放技能";
-					break;
-				case 24:
-					failReason = "当前坐骑无法骑战";
-					break;
-				case 25:
-					failReason = "在镖车上";
-					break;
-				default:
-					failReason = LangQ_NoticeInfo.SkillError_1;
-					break;
+			failReason = LangQ_NoticeInfo["SkillError_"+failID];
+			if(!failReason){
+				failReason="未配置的技能错误码!----failID";
+				GameLog.addShow(failReason);
 			}
 			
 			NoticeManager.showNotify(failReason, failID);

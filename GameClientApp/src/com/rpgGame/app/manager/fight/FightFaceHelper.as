@@ -167,8 +167,7 @@ package com.rpgGame.app.manager.fight
 					scaleLater = 0.5;
 					numberType = NUMBER_NPC_HIT;
 					if(isUsefulBmp){
-						showAttChange(EnumHurtType.SUBHP,hurtAmount);
-						return;
+						numberType=NUMBER_PC_HPSUB;
 					}
 					break;
 				case EnumHurtType.SPELL_HURT_TYPE_MISS: //闪避
@@ -336,12 +335,6 @@ package com.rpgGame.app.manager.fight
 					numberColor=NUMBER_PC_HPREC;
 					scaleAgo=1;
 					scaleLater=1;
-					showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenUp);
-					return;
-				case EnumHurtType.SUBHP: //掉血
-					scaleAgo=1;
-					scaleLater=1;
-					numberColor=NUMBER_PC_HPSUB;
 					showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenUp);
 					return;
 				case EnumHurtType.ADDMP: //回蓝
