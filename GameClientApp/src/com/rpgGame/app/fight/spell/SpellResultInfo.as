@@ -82,7 +82,7 @@ package com.rpgGame.app.fight.spell
 				hurtResultVO.targetRole = SceneManager.getSceneObjByID(hurtResultVO.targetID) as BaseRole;
 				if(hurtResultVO.targetRole == null)
 				{
-					GameLog.addShow("被攻击者为空!攻击者服务器ID为：\t 这些伤害不知道哪里来的，也不需要关注是谁打的");
+					GameLog.addShow("被攻击者为空!攻击者服务器ID为：\t " + resultInfo.targetId.ToString());
 				}
 				
 				if(hurtResultVO.targetRole && hurtResultVO.targetRole.usable)
@@ -95,7 +95,7 @@ package com.rpgGame.app.fight.spell
 				hurtResultVO.atkor = SceneManager.getSceneObjByID(hurtResultVO.atkorID) as BaseRole;
 				if(hurtResultVO.atkor == null)
 				{
-					GameLog.addShow("攻击者为空!攻击者服务器ID为：\t 这些伤害不知道哪里来的，也不需要关注是谁打的");
+					GameLog.addShow("攻击者为空!攻击者服务器ID为：\t" + resultInfo.attackerId.ToString());
 				}
 							
 				if(hurtResultVO.atkor && hurtResultVO.atkor.usable)

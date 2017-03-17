@@ -1966,7 +1966,7 @@ package com.rpgGame.coreData.lang
 		public static const ActivityCmdListener_11:String = "ActivityCmdListener_11";
 		 /**  当前游戏正在开启运镖获得奖励翻倍活动 */
 		public static const ActivityCmdListener_12:String = "ActivityCmdListener_12";
-		 /**  技能冷却中 */
+		 /**  技能释放中 */
 		public static const CastSpellIsHarding:String = "CastSpellIsHarding";
 		 /**  穿戴的武器不能释放该技能 */
 		public static const CastSpellNoAccordWithWeapon:String = "CastSpellNoAccordWithWeapon";

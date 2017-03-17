@@ -1,6 +1,5 @@
 package com.rpgGame.appModule.role
 {
-	import com.gameClient.alert.AlertPanel;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
@@ -28,8 +27,8 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
-	import com.rpgGame.coreData.lang.LangBackPack;
 	import com.rpgGame.coreData.lang.LangMenu;
+	import com.rpgGame.coreData.lang.LangQ_BackPack;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.MenuType;
 	import com.rpgGame.coreData.type.TipType;
@@ -254,7 +253,7 @@ package com.rpgGame.appModule.role
 				{
 					if(BackPackManager.instance.isAlertChangeBind == false)
 					{
-						var alertSet : AlertSetInfo =  new AlertSetInfo(LangBackPack.CHANGE_ITEM_BIND);
+						var alertSet : AlertSetInfo =  new AlertSetInfo(LangQ_BackPack.CHANGE_ITEM_BIND);
 						alertSet.isShowCBox = true;
 						GameAlert.showAlert(alertSet,changeItemBind,srcGrid,dstGrid);
 						return;
@@ -440,7 +439,7 @@ package com.rpgGame.appModule.role
 		private function preDiscard(info:ClientItemInfo):void
 		{
 			if(info.qItem.q_drop_confirm==1){//需要二次确认
-				var alertSet:AlertSetInfo=new AlertSetInfo(LangBackPack.ITEM_dropItemToScene_3);
+				var alertSet:AlertSetInfo=new AlertSetInfo(LangQ_BackPack.ITEM_dropItemToScene_3);
 				GameAlert.showAlert(alertSet,okDiscard,info);
 
 			}else{
@@ -534,7 +533,7 @@ package com.rpgGame.appModule.role
 					return true;
 				case _skin.btn_zhengli:
 					if(leftCD!=0){
-						var alertSet:AlertSetInfo=new AlertSetInfo(LangBackPack.ITEM_SORT_CD);
+						var alertSet:AlertSetInfo=new AlertSetInfo(LangQ_BackPack.ITEM_SORT_CD);
 						alertSet.alertInfo.value=alertSet.alertInfo.value.replace(/#/,leftCD);
 						NoticeManager.mouseFollowNotify(alertSet.alertInfo.value);
 						return true;

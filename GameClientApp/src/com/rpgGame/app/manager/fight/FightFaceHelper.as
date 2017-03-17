@@ -18,6 +18,7 @@ package com.rpgGame.app.manager.fight
 	import gs.TweenLite;
 	import gs.TweenMax;
 	import gs.easing.Circ;
+	import gs.easing.Cubic;
 	import gs.easing.Elastic;
 	import gs.easing.Linear;
 	
@@ -165,6 +166,9 @@ package com.rpgGame.app.manager.fight
 					scaleAgo = 1.5;
 					scaleLater = 0.5;
 					numberType = NUMBER_NPC_HIT;
+					if(isUsefulBmp){
+						numberType=NUMBER_PC_HPSUB;
+					}
 					break;
 				case EnumHurtType.SPELL_HURT_TYPE_MISS: //闪避
 					typeRes = ROOT+USESFUL_EFFECT+"weimingzhong.png";
@@ -274,11 +278,14 @@ package com.rpgGame.app.manager.fight
 		 */
 		public static function tweenTypeRoleHurt(attackFace : DisplayObject, $displayObjectContainer:*, $from : Point, $end : Point, $scaleAgo : Number, $scaleLater : Number, isLeftShow : Boolean = false, onComplete : Function = null) : void
 		{
+			$scaleAgo=1.6;
+			$scaleLater=0.7 ;
+			
 			attackFace.scaleX = attackFace.scaleY = 1;
 			$end=new Point();
 			var end2:Point=new Point();
 			var random:Number=Math.random();
-			$from=new Point(-attackFace.width/2,0);
+			$from=new Point(-attackFace.width/2,-50);
 			attackFace.y=$from.y+20;
 			
 			$end.y=-80+50*random;
@@ -298,10 +305,11 @@ package com.rpgGame.app.manager.fight
 			attackFace.x=$from.x;
 			
 			var timeLine : TimelineLite = new TimelineLite();
-			timeLine.append(TweenLite.to(attackFace, 0.3, { x:$from.x,y:$from.y,scaleX: $scaleAgo, scaleY: $scaleAgo,ease:Elastic.easeOut}));//小到大
-			timeLine.append(TweenLite.to(attackFace, 0.5, { x:$end.x,y:$end.y,scaleX: $scaleLater, scaleY: $scaleLater,ease:Circ.easeInOut}));//大到小
-			timeLine.append(TweenLite.to(attackFace, 0.2, { x:$end.x,y:$end.y,scaleX: $scaleLater+0.1, scaleY: $scaleLater+0.1,alpha:0.8,ease:Circ.easeInOut}));//小到大
-			timeLine.append(TweenLite.to(attackFace, 0.3, { x:end2.x,y:end2.y,alpha:0,onComplete: onComplete, onCompleteParams: [attackFace],ease:Circ.easeInOut}));
+			timeLine.append(TweenLite.to(attackFace, 0, { x:$from.x,y:$from.y,scaleX: $scaleAgo, scaleY: $scaleAgo,ease:Elastic.easeOut}));//小到大
+			timeLine.append(TweenLite.to(attackFace, 0.2, {}));//大到小
+			timeLine.append(TweenLite.to(attackFace, 0.2, { x:$end.x,y:$end.y,scaleX: $scaleLater, scaleY: $scaleLater,ease:Circ.easeOut}));//大到小
+			timeLine.append(TweenLite.to(attackFace, 0.3, { x:$end.x,y:$end.y,scaleX: $scaleLater+0.1, scaleY: $scaleLater+0.1,alpha:0.8,ease:Cubic.easeOut}));//小到大
+			timeLine.append(TweenLite.to(attackFace, 0.5, { x:end2.x,y:end2.y,alpha:0,onComplete: onComplete, onCompleteParams: [attackFace],ease:Cubic.easeOut}));
 		}
 		
 		private static function updateCenter(face:AttackFace):void
@@ -327,12 +335,6 @@ package com.rpgGame.app.manager.fight
 					numberColor=NUMBER_PC_HPREC;
 					scaleAgo=1;
 					scaleLater=1;
-					showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenUp);
-					return;
-				case EnumHurtType.SUBHP: //掉血
-					scaleAgo=1;
-					scaleLater=1;
-					numberColor=NUMBER_PC_HPSUB;
 					showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenUp);
 					return;
 				case EnumHurtType.ADDMP: //回蓝

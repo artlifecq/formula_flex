@@ -273,7 +273,7 @@ package com.rpgGame.app.manager
 					}
 					else
 					{
-						ru.removeUnitChild(ru);
+//						ru.removeUnitChild(ru);
 					}
 					ru.defalutStatus = RoleActionType.IDLE;
 					ru.setAddedCallBack(partAddedCallBack, role);

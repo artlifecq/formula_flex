@@ -15,15 +15,13 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.info.upgrade.AmountInfo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
-	import com.rpgGame.coreData.lang.LangBackPack;
+	import com.rpgGame.coreData.lang.LangQ_BackPack;
 	import com.rpgGame.coreData.utils.MoneyUtil;
 	
 	import app.message.AmountType;
 	import app.message.GoodsType;
 	import app.message.Config.AllGoodsContainerUnlockProto;
 	import app.message.NormalUsableDataProto.NormalEfficacy;
-	
-	import feathers.data.ListCollection;
 	
 	import org.client.mainCore.manager.EventManager;
 
@@ -68,7 +66,7 @@ package com.rpgGame.app.manager.goods
 				return;
 			}
 			var useSilver : Number = unlockSilver>0?unlockSilver:unlockBindSilver;
-			GameAlert.showAlertUtil(LangBackPack.UNLOCK_GRID, unLockGridClick, MoneyUtil.getHtmlMoneyString(unlockBindSilver), ItemConfig.getItemName(StaticItem.UNLOCK_BACKPACK));
+			GameAlert.showAlertUtil(LangQ_BackPack.UNLOCK_GRID, unLockGridClick, MoneyUtil.getHtmlMoneyString(unlockBindSilver), ItemConfig.getItemName(StaticItem.UNLOCK_BACKPACK));
 		}
 
 		private function unLockGridClick(gameAlert : GameAlert) : void
