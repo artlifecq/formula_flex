@@ -14,6 +14,8 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.map.message.ReqNewRunningMessage;
 	import com.rpgGame.netData.map.message.ReqPlayerStopMessage;
 	import com.rpgGame.netData.map.message.ReqSmallFlyShoesMessage;
+	import com.rpgGame.netData.player.message.ReqLocalReviveMessage;
+	import com.rpgGame.netData.player.message.ReqReviveMessage;
 	import com.rpgGame.netData.structs.Position;
 	
 	import flash.geom.Point;
@@ -302,6 +304,31 @@ package com.rpgGame.app.sender
 		{
 			var msg:ReqTakeUpMessage=new ReqTakeUpMessage();
 			msg.goodsId=sceneGoodsId;
+			SocketConnection.send(msg);
+		}
+		
+		
+		/**
+		 *返回复活点复活 
+		 * 
+		 */
+		public static function reqReviveRole():void
+		{
+			var msg:ReqReviveMessage=new ReqReviveMessage();
+			SocketConnection.send(msg);
+		}	
+		
+		/**
+		 *原地复活 
+		 * @param itemid
+		 * @param type
+		 * 
+		 */
+		public static function reqReviveLocalRole(itemid:int,type:int):void
+		{
+			var msg:ReqLocalReviveMessage=new ReqLocalReviveMessage();
+			msg.itemmodelid=itemid;
+			msg.type=type;
 			SocketConnection.send(msg);
 		}
 	}

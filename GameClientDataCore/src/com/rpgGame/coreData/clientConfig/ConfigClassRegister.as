@@ -76,7 +76,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const HeroModel:String = "data.model.HeroModel";
 		/**  坐骑模型表	功能名称	动画资源名称 */
 		public static const MountModel:String = "data.model.MountModel";
-		/**  怪物列表																																																													 */
+		/**  怪物列表																																																														 */
 		public static const Q_monster:String = "data.monster.Q_monster";
 		/**  NPC配置数据库																																																 */
 		public static const Q_npc:String = "data.monster.Q_npc";

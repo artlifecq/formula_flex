@@ -421,6 +421,10 @@ package com.rpgGame.app.ui.main
 			this._systemMsgBar.resize(sWidth, sHeight);
 			this._playerHead.resize(sWidth, sHeight);
 			
+			this._bossHead.resize(sWidth, sHeight);
+			this._eliteHead.resize(sWidth, sHeight);
+			this._normalHead.resize(sWidth, sHeight);
+			
 			_lowBloodBg.width=sWidth;
 			_lowBloodBg.height=sHeight;
 			
