@@ -22,7 +22,7 @@ package com.rpgGame.app.ui.main.head
 
 		protected var toY:int=42;
 
-		private var _monsterCfg:Q_monster;
+		protected var _monsterCfg:Q_monster;
 		
 		public function MonsterHeadBase(skin:StateSkin=null)
 		{

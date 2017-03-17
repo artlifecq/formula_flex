@@ -134,6 +134,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_redord_type:String;
 		 /**  显示推荐战斗力数值(只对精英和BOSS有效) */
 		public var q_fighting:int;
+		 /**  BOSS每一管血条的最大血量 */
+		public var q_per_blood:int;
 		 /**  关联NPC功能表 */
 		public var q_npc_function:int;
 

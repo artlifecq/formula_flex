@@ -22,8 +22,9 @@ package com.rpgGame.app.controller.keyboard
 
 			//使用这快捷栏上的技能或者是物品
 			// funcID从1开如，快捷栏从0开如所以减1
-			ShortcutsManger.getInstance().useShortcuts(int(funcID) - 1, true);
-			EventManager.dispatchEvent(SpellEvent.SPELL_KEY_RELEASE, int(funcID) - 1);
+			if(ShortcutsManger.getInstance().useShortcuts(int(funcID) - 1, true)){
+				EventManager.dispatchEvent(SpellEvent.SPELL_KEY_RELEASE, int(funcID) - 1);
+			}
 		}
         
         public static function execUp(info : KeyInfo) : void

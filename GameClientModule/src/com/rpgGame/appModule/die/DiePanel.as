@@ -1,8 +1,14 @@
 package com.rpgGame.appModule.die
 {
+	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.coreData.cfg.DieCfgData;
+	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
+	import com.rpgGame.coreData.info.alert.AlertSetInfo;
+	import com.rpgGame.coreData.lang.LangQ_BackPack;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.player.message.ResPlayerDieMessage;
 	
@@ -42,6 +48,8 @@ package com.rpgGame.appModule.die
 		private var currentSeeIndex:int;
 		private var maxSeeIndex:int;
 		private var tween:TweenLite;
+		
+		private const FUHUO_ID:int=300;
 		
 		public function DiePanel()
 		{
@@ -120,12 +128,25 @@ package com.rpgGame.appModule.die
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
+			
+			BackPackManager.instance.getBagItemsCountById(FUHUO_ID);
+			
 			switch(target){
 				case _skin.btn_yuandi:
+					if(BackPackManager.instance.getBagItemsCountById(FUHUO_ID)>0){
+						SceneSender.reqReviveLocalRole(FUHUO_ID,1);
+					}else{
+						var alertSet:AlertSetInfo=new AlertSetInfo(LangQ_BackPack.ITEM_dropItemToScene_3);
+						GameAlert.showAlert(alertSet,alertToBuy);
+					}
+					this.hide();
 					break;
 				case _skin.btn_goumai:
+					showByFuHuo();
 					break;
 				case _skin.btn_fuhuodian:
+					SceneSender.reqReviveRole();
+					this.hide();
 					break;
 				case _skin.btn_prev:
 					if(tween){
@@ -144,19 +165,29 @@ package com.rpgGame.appModule.die
 			}
 		}
 		
+		private function alertToBuy(alert:GameAlert):void
+		{
+			if(alert.clickType==AlertClickTypeEnum.TYPE_SURE){
+				showByFuHuo();
+			}			
+		}
+		
+		private function showByFuHuo():void
+		{
+			// TODO Auto Generated method stub
+			
+		}
+		
 		private function updateSeeItem(isNext:Boolean,showAni:Boolean=true):void
 		{
-			GrayFilter.unGray(_skin.btn_prev);
-			GrayFilter.unGray(_skin.btn_next);
-			_skin.btn_prev.touchable=true;
-			_skin.btn_next.touchable=true;
+			_skin.btn_prev.visible=true;
+			_skin.btn_next.visible=true;
 			if(currentSeeIndex==0){
-				GrayFilter.gray(_skin.btn_next);
-				_skin.btn_next.touchable=false;
+				_skin.btn_next.visible=false;
 			}
 			if(currentSeeIndex==maxSeeIndex){
 				GrayFilter.gray(_skin.btn_prev);
-				_skin.btn_prev.touchable=false;
+				_skin.btn_prev.visible=false;
 			}
 			
 			if(!showAni){

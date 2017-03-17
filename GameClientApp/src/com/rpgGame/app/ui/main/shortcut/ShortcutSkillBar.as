@@ -117,9 +117,9 @@ package com.rpgGame.app.ui.main.shortcut
 		{
 			if (cd == null)
 				return;
-
-			ShortcutsManger.getInstance().useShortcuts(cd.index);
-			cd.tweenGrid();
+			if(ShortcutsManger.getInstance().useShortcuts(cd.index)){
+				cd.tweenGrid();
+			}
 		}
 		
 		private function onRightMouseClick(cd : ShortcutGrid) : void
