@@ -46,7 +46,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const HintTypeSetInfo:String = "data.HintTypeSetInfo";
 		/**  区域数据库					 */
 		public static const Q_area:String = "data.map.Q_area";
-		/**  							本列取消，安全区改为刷格方式				本列取消																																									 */
+		/**  							本列取消，安全区改为刷格方式				本列取消																																										 */
 		public static const Q_map:String = "data.map.Q_map";
 		/**  地图传送点数据库											 */
 		public static const Q_map_transfer:String = "data.map.Q_map_transfer";
@@ -70,11 +70,13 @@ package com.rpgGame.coreData.clientConfig
 		public static const AvatarWeaponRes:String = "data.model.AvatarWeaponRes";
 		/**  换装头发资源配置ID		 */
 		public static const BaZhenTuRes:String = "data.model.BaZhenTuRes";
+		/**  变身ID						 */
+		public static const ChangeModel:String = "data.model.ChangeModel";
 		/**  角色骨骼						 */
 		public static const HeroModel:String = "data.model.HeroModel";
 		/**  坐骑模型表	功能名称	动画资源名称 */
 		public static const MountModel:String = "data.model.MountModel";
-		/**  怪物列表																																																												 */
+		/**  怪物列表																																																													 */
 		public static const Q_monster:String = "data.monster.Q_monster";
 		/**  NPC配置数据库																																																 */
 		public static const Q_npc:String = "data.monster.Q_npc";
@@ -112,7 +114,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_buff:String = "data.spell.Q_buff";
 		/**  公共CD表	 */
 		public static const Q_GCD:String = "data.spell.Q_GCD";
-		/**  技能基本信息配置数据表																																																																																																																	 */
+		/**  技能基本信息配置数据表																																																																																																																				 */
 		public static const Q_skill_model:String = "data.spell.Q_skill_model";
 		/**  技能效果配置表																			 */
 		public static const Q_SpellAnimation:String = "data.spell.Q_SpellAnimation";
@@ -153,6 +155,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.model.AvatarWeaponEffectRes", com.rpgGame.coreData.clientConfig.AvatarWeaponEffectRes);
 			regClass("data.model.AvatarWeaponRes", com.rpgGame.coreData.clientConfig.AvatarWeaponRes);
 			regClass("data.model.BaZhenTuRes", com.rpgGame.coreData.clientConfig.BaZhenTuRes);
+			regClass("data.model.ChangeModel", com.rpgGame.coreData.clientConfig.ChangeModel);
 			regClass("data.model.HeroModel", com.rpgGame.coreData.clientConfig.HeroModel);
 			regClass("data.model.MountModel", com.rpgGame.coreData.clientConfig.MountModel);
 			regClass("data.monster.Q_monster", com.rpgGame.coreData.clientConfig.Q_monster);

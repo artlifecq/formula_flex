@@ -202,7 +202,14 @@ package com.rpgGame.coreData.info.buff
 
 		/**
 		 * [{"skill":1008,"up":340,"stay":340,"down":340,"h":300}]
-                           客户端other（上升时间:"up"；被同步的技能ID："skill"；浮空时间："stay"；落地时间："down"；离地高度："h"） 
+                           客户端other（
+						   * 受击时间: hit
+						   * 上升时间:"up"；
+						   * 被同步的技能ID："skill"；
+						   * 浮空时间："stay"；
+						   * 落地时间："down"；
+						   * 离地高度："h"
+						   * 变身模型：model
 		 * @return 
 		 * 
 		 */		

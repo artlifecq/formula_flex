@@ -350,6 +350,27 @@ package com.rpgGame.app.manager
 			}
 			EventManager.dispatchEvent(SpellEvent.SPELL_UPDATE_SHORTCUTS);
 		}
+        
+        public function replaceToTempSpellByVector(spells:Vector.<Q_skill_model>):void
+        {
+            shortcutsDataMap.clear();
+            if(spells != null)
+            {
+                if(_tempSpells == null)
+                {
+                    _tempSpells = new HashMap();
+                }
+                var len:int = spells.length;
+                var i:int;
+                for(i = 0; i < len; i++)
+                {
+                    var spellProto:Q_skill_model = spells[i];
+                    _tempSpells.add(spellProto.q_skillID,spellProto);
+                    updateNewSpell(spellProto,false);
+                }
+            }
+            EventManager.dispatchEvent(SpellEvent.SPELL_UPDATE_SHORTCUTS);
+        }
 		
 		/**
 		 * 是否是临时技能条

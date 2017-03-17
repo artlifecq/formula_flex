@@ -9,6 +9,7 @@ package com.rpgGame.app.scene
 	import com.rpgGame.app.state.role.control.HiddingStateReference;
 	import com.rpgGame.app.state.role.control.HunLuanStateReference;
 	import com.rpgGame.app.state.role.control.HushStateReference;
+	import com.rpgGame.app.state.role.control.ShapeshiftingStateReference;
 	import com.rpgGame.app.state.role.control.StiffStateReference;
 	import com.rpgGame.app.state.role.control.StunStateReference;
 	import com.rpgGame.app.state.role.control.SyncSpellActionStateReference;
@@ -85,7 +86,7 @@ package com.rpgGame.app.scene
 			removeBuffEffect(buffData.cfgId);
 			var data : Q_buff = buffData.buffData;
 			
-			handlerRoleState(buffData);
+			
 			
 			var animations:Array = data.q_animation.split(";");
 			if (data && animations)
@@ -147,6 +148,7 @@ package com.rpgGame.app.scene
 				buffList.push(buffData);
 			}
 			addBuffEffect(buffData);
+			handlerRoleState(buffData);
 			EventManager.dispatchEvent(BuffEvent.ADD_BUFF, buffData);
 		}
 		
@@ -315,6 +317,7 @@ package com.rpgGame.app.scene
 				28		不死，血量保持在指定值
 				29		不可击退
 				30		不受指定技能伤害
+                34      变身
 				100		增加或减少能量消耗总量
 				101		增加或减少气血
 				102		增加或减少能量
@@ -387,6 +390,11 @@ package com.rpgGame.app.scene
 						buffRef.setParams(buffData);
 						_role.stateMachine.transition(RoleStateType.CONTROL_SYNC_SPELLACTION, buffRef, true); //切换到“技能动作同步状态”
 						break;
+                    case 34:// 变身
+                        buffRef = _role.stateMachine.getReference(ShapeshiftingStateReference) as ShapeshiftingStateReference;
+                        buffRef.setParams(buffData);
+                        _role.stateMachine.transition(RoleStateType.CONTROL_SHAPESHIFTING, buffRef);
+                        break;
 					case 199://冰冻
 						buffRef = _role.stateMachine.getReference(BingDongStateReference) as BingDongStateReference;
 						buffRef.setParams(buffData);

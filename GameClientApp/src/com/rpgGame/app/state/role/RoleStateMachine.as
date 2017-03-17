@@ -44,6 +44,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.ScaredMoveState;
 	import com.rpgGame.app.state.role.control.ScaredState;
 	import com.rpgGame.app.state.role.control.ShadowState;
+	import com.rpgGame.app.state.role.control.ShapeshiftingState;
 	import com.rpgGame.app.state.role.control.StiffState;
 	import com.rpgGame.app.state.role.control.StopWalkMoveState;
 	import com.rpgGame.app.state.role.control.StunState;
@@ -142,6 +143,7 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.CONTROL_FLY_UP] = FlyUpState;
 		stateMapping[RoleStateType.CONTROL_SYNC_SPELLACTION] = SyncSpellActionState;
 		stateMapping[RoleStateType.CONTROL_USE_SPELL] = UseSpellState;
+		stateMapping[RoleStateType.CONTROL_SHAPESHIFTING] = ShapeshiftingState;
 		
 		private var _role : SceneRole;
 		private var _lastCanShowRiding : Boolean;
