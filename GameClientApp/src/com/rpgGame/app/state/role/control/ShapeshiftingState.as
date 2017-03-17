@@ -7,10 +7,14 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.core.events.AvatarEvent;
 	import com.rpgGame.coreData.AvatarInfo;
 	import com.rpgGame.coreData.cfg.ChangeModelCfgData;
+	import com.rpgGame.coreData.cfg.model.AvatarWeapontResCfgData;
+	import com.rpgGame.coreData.clientConfig.AvatarWeaponRes;
 	import com.rpgGame.coreData.clientConfig.ChangeModel;
 	import com.rpgGame.coreData.clientConfig.Q_buff;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.RoleStateType;
+	
+	import flash.geom.Vector3D;
 	
 	import org.client.mainCore.manager.EventManager;
 	
@@ -23,12 +27,6 @@ package com.rpgGame.app.state.role.control
 	 */	
 	public class ShapeshiftingState extends BuffState
 	{
-        private var _oldBody : int = -1;
-        private var _oldHair : int = -1;
-        private var _oldCloths : int = -1;
-        private var _oldWeapon : int = -1;
-        private var _oldDeputyWeapon : int = -1;
-        
 		public function ShapeshiftingState()
 		{
 			super(RoleStateType.CONTROL_SHAPESHIFTING);
@@ -53,27 +51,35 @@ package com.rpgGame.app.state.role.control
                             return;
                         }
                         if (null == changeModel.q_body_res || 0 == changeModel.q_body_res.length) {
-                            var heroData : HeroData = role.data as HeroData;
-                            this._oldBody = heroData.body;
-                            this._oldCloths = heroData.cloths;
-                            this._oldHair = heroData.hair;
-                            this._oldWeapon = heroData.weapon;
-                            this._oldDeputyWeapon = heroData.deputyWeapon;
-                            heroData.body = changeModel.heroModel;
-                            heroData.cloths = changeModel.avatarClothesRes;
-                            heroData.hair = changeModel.avatarHairRes;
-                            heroData.weapon = changeModel.weapon;
-                            heroData.deputyWeapon = 0;
-                            AvatarManager.callEquipmentChange(role);
+                            (role.data as HeroData).avatarInfo.clear();
+                            (role.data as HeroData).avatarInfo.setBodyResID(changeModel.avatarClothesRes, changeModel.heroModel);
+                            (role.data as HeroData).avatarInfo.hairResID = changeModel.avatarHairRes;
+                            var weaponRes : AvatarWeaponRes = AvatarWeapontResCfgData.getInfo(changeModel.weapon);
+                            var weaponResID : String = null;
+                            var weaponEffectResID : String = "";
+                            var weaponEffectScale : int = 0;
+                            var weaponEffectOffset : Vector3D = null;
+                            if (weaponRes)
+                            {
+                                weaponResID = weaponRes.res;
+                                weaponEffectResID = weaponRes.effectRes;
+                                weaponEffectScale = weaponRes.effectScale;
+                                weaponEffectOffset = new Vector3D(weaponRes.effectOffsetX, weaponRes.effectOffsetY, weaponRes.effectOffsetZ);
+                            }
+                            (role.data as HeroData).avatarInfo.weaponResID = weaponResID;
+                            (role.data as HeroData).avatarInfo.weaponEffectID = weaponEffectResID;
+                            (role.data as HeroData).avatarInfo.weaponEffectScale = weaponEffectScale;
+                            (role.data as HeroData).avatarInfo.weaponEffectOffset = weaponEffectOffset;
                         } else {
                             (role.data as HeroData).avatarInfo.clear();
-                            (role.data as HeroData).avatarInfo.setBodyResID("pc/body/binjia_skin", null);
-                            AvatarManager.updateAvatar(role);
+                            (role.data as HeroData).avatarInfo.setBodyResID("monster/pt_bing_2/pt_bing_2", null);
+                            //(role.data as HeroData).avatarInfo.hairResID = "monster/pt_bing_2/pt_bing_2";
                         }
+                        AvatarManager.updateAvatar(role);
                         
                         if (role.isMainChar) {
                             ShortcutsManger.getInstance().replaceToTempSpellByVector(
-                                MainRoleManager.actorInfo.spellList.getAutoSpellList());
+                                MainRoleManager.actorInfo.spellList.getShortcutSpellList());
                         }
 					}
 					else
@@ -88,20 +94,7 @@ package com.rpgGame.app.state.role.control
 			if (_machine && !_machine.isDisposed)
 			{
 				var role : SceneRole = _machine.owner as SceneRole;
-                if (-1 != this._oldBody) {
-                    var heroData : HeroData = role.data as HeroData;
-                    heroData.body = this._oldBody;
-                    heroData.cloths = this._oldCloths;
-                    heroData.hair = this._oldHair;
-                    heroData.weapon = this._oldWeapon;
-                    heroData.deputyWeapon = this._oldDeputyWeapon;
-                }
                 AvatarManager.callEquipmentChange(role);
-                this._oldBody = -1;
-                this._oldCloths = -1;
-                this._oldHair = -1;
-                this._oldWeapon = -1;
-                this._oldDeputyWeapon = -1;
                 if (role.isMainChar) {
                     ShortcutsManger.getInstance().reset();
                 }

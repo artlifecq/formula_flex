@@ -17,11 +17,11 @@ package com.rpgGame.coreData.clientConfig
 		 /**  名称 */
 		public var name:String;
 		 /**  角色骨骼 */
-		public var heroModel:int;
+		public var heroModel:String;
 		 /**  初始衣服模型 */
-		public var avatarClothesRes:int;
+		public var avatarClothesRes:String;
 		 /**  初始头发资源 */
-		public var avatarHairRes:int;
+		public var avatarHairRes:String;
 		 /**  武器资源 */
 		public var weapon:int;
 		 /**  身体资源 */

@@ -143,13 +143,16 @@ package com.rpgGame.app.fight.spell
 						}
 						//显示被击特效
 						atkor=SceneManager.getSceneObjByID(hurtVo.atkorID) as SceneRole;
-						var atkorPos : Point = new Point(atkor.x, atkor.z);
-						var hitRef : HitStateReference = role.stateMachine.getReference(HitStateReference) as HitStateReference;
-						hitRef.setParams(atkorPos);
-						role.stateMachine.transition(RoleStateType.ACTION_HIT, hitRef);
-						var hurtRef : HurtStateReference = role.stateMachine.getReference(HurtStateReference) as HurtStateReference;
-						hurtRef.setParams(/*info, */hurtVo);
-						role.stateMachine.transition(RoleStateType.CONTROL_HURT, hurtRef);
+                        if (null != atkor) {
+ 						    var atkorPos : Point = new Point(atkor.x, atkor.z);
+						    var hitRef : HitStateReference = role.stateMachine.getReference(HitStateReference) as HitStateReference;
+						    hitRef.setParams(atkorPos);
+						    role.stateMachine.transition(RoleStateType.ACTION_HIT, hitRef);
+						    var hurtRef : HurtStateReference = role.stateMachine.getReference(HurtStateReference) as HurtStateReference;
+						    hurtRef.setParams(/*info, */hurtVo);
+						    role.stateMachine.transition(RoleStateType.CONTROL_HURT, hurtRef);
+                        }
+
 
 					}
 				}

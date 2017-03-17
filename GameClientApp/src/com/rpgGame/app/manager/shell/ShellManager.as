@@ -17,7 +17,9 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
     import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
     import com.rpgGame.app.fight.spell.SpellAnimationHelper;
+    import com.rpgGame.app.graphics.HeadFace;
     import com.rpgGame.app.manager.AreaMapManager;
+    import com.rpgGame.app.manager.AvatarManager;
     import com.rpgGame.app.manager.ShortcutsManger;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.role.SceneRoleManager;
@@ -31,10 +33,13 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.cfg.AreaCfgData;
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.cfg.TransCfgData;
+    import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
     import com.rpgGame.coreData.clientConfig.Q_map_transfer;
+    import com.rpgGame.coreData.clientConfig.Q_monster;
     import com.rpgGame.coreData.enum.EnumAreaMapType;
     import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
     import com.rpgGame.coreData.info.buff.BuffData;
+    import com.rpgGame.coreData.role.HeroData;
     import com.rpgGame.coreData.role.MonsterData;
     import com.rpgGame.coreData.role.RoleType;
     import com.rpgGame.coreData.role.SceneTranportData;
@@ -73,6 +78,7 @@ package com.rpgGame.app.manager.shell
             this._funcs["help".toLowerCase()] = this.help;
             this._funcs["gotomap".toLowerCase()] = this.gotoMap;
             this._funcs["addMonster".toLowerCase()] = this.addMonster;
+            this._funcs["addHero".toLowerCase()] = this.addHero;
             this._funcs["skill".toLowerCase()] = this.skill;
             this._funcs["camera".toLowerCase()] = this.camera;
             this._funcs["show".toLowerCase()] = this.show;
@@ -131,6 +137,48 @@ package com.rpgGame.app.manager.shell
            	SceneSender.sceneMapTransport(mapID,x,y);
         }
         
+        private var role : SceneRole;
+        private var index : int = 0;
+        private function addHero(id : int, x : int, y : int) : void {
+            if (null == role) {
+                var data : HeroData = new HeroData();
+                data.id = ++this._monsterID;
+                data.x = x;
+                data.y = y;
+                data.totalStat.hp = 1000;
+                data.totalStat.life = 1000;
+                data.totalStat.mp = 1000;
+                data.totalStat.mana = 1000;
+                data.buffList = new Vector.<BuffData>();
+                //var m : SceneRole = SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
+                
+                role = SceneRole.create(SceneCharType.PLAYER, data.id);
+                //设置VO
+                role.data = data;
+                role.headFace = HeadFace.create(role);
+                
+                role.name = data.name = "tttt";
+                role.ownerIsMainChar = true;
+                
+                data.avatarInfo.clear();
+                data.avatarInfo.setBodyResID("monster/pt_bing_1/pt_bing_1", null);
+                //data.avatarInfo.setBodyResID("pc/body/mojia_m_pl04_skin", "pc/body/mojia_m_pl04_animat");
+                AvatarManager.updateAvatar(role);
+                role.setGroundXY(data.x, data.y);
+                SceneManager.addSceneObjToScene(role, true, true, true);
+                role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
+            } else {
+                //(role.data as HeroData).avatarInfo.setBodyResID("monster/pt_bing_1/pt_bing_1", null);
+                if (0 == index++ % 2) {
+                    (role.data as HeroData).avatarInfo.setBodyResID("pc/body/mojia_m_pl04_skin", "pc/body/mojia_m_pl04_animat");
+                } else {
+                    (role.data as HeroData).avatarInfo.setBodyResID("monster/pt_bing_1/pt_bing_1", null);
+                }
+                
+                AvatarManager.updateAvatar(role);
+            }
+        }
+        
         private function addMonster(id : int, x : int, y : int) : void {
             var data : MonsterData = new MonsterData(RoleType.TYPE_MONSTER);
             data.modelID = id;
@@ -142,7 +190,23 @@ package com.rpgGame.app.manager.shell
             data.totalStat.mp = 1000;
             data.totalStat.mana = 1000;
             data.buffList = new Vector.<BuffData>();
-            var m : SceneRole = SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
+            //var m : SceneRole = SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
+            
+            var role : SceneRole = SceneRole.create(SceneCharType.MONSTER, data.id);
+            //设置VO
+            role.data = data;
+            role.headFace = HeadFace.create(role);
+            
+            role.name = data.name = "";
+            role.ownerIsMainChar = true;
+            data.avatarInfo.clear();
+            data.avatarInfo.setBodyResID("monster/pt_bing_2/pt_bing_2", null);
+            AvatarManager.updateAvatar(role);
+            role.setGroundXY(data.x, data.y);
+            SceneManager.addSceneObjToScene(role, true, true, true);
+            role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
+            data.avatarInfo.setBodyResID("monster/pt_bing_1/pt_bing_1", null);
+            AvatarManager.updateAvatar(role);
         }
         
         private function skill(id : int) : void {
