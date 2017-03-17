@@ -46,7 +46,7 @@ package com.rpgGame.app.state.role.control
                         if (null == buffInfo) {
                             return;
                         }
-                        var changeModel : ChangeModel = ChangeModelCfgData.getInfoById(buffInfo.q_change_model_res);
+                        var changeModel : ChangeModel = ChangeModelCfgData.getInfoById(1);
                         if (null == changeModel) {
                             return;
                         }
