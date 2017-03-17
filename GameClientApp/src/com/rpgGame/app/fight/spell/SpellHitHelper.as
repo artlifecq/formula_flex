@@ -143,7 +143,11 @@ package com.rpgGame.app.fight.spell
 						}
 						//显示被击特效
 						atkor=SceneManager.getSceneObjByID(hurtVo.atkorID) as SceneRole;
-						var atkorPos : Point = new Point(atkor.x, atkor.z);
+						var atkorPos : Point
+						if(atkor != null)
+						{
+							atkorPos = new Point(atkor.x, atkor.z);
+						}
 						var hitRef : HitStateReference = role.stateMachine.getReference(HitStateReference) as HitStateReference;
 						hitRef.setParams(atkorPos);
 						role.stateMachine.transition(RoleStateType.ACTION_HIT, hitRef);
