@@ -41,11 +41,10 @@ package com.rpgGame.app.state.role.control
 					_stateReference = _ref as ShapeshiftingStateReference;
 					
 					var role : SceneRole = _machine.owner as SceneRole;
-//					var clientData:Object = _stateReference.buffData.clientData;
 					
-//					trace("要变身的模型ID:\t" + clientData.model);
+					trace(_stateReference.buffData.clientData.model);
                     
-                    var changeModel : ChangeModel = ChangeModelCfgData.getInfoById(2/*_stateReference.buffData.clientData.model*/);
+                    var changeModel : ChangeModel = ChangeModelCfgData.getInfoById(_stateReference.buffData.clientData.model);
                     if (null == changeModel)
 					{
                         return;
