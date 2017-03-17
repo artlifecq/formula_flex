@@ -28,8 +28,6 @@ package com.rpgGame.coreData.clientConfig
 		public var q_disappear_animation:int;
 		 /**  角色中了buff后被攻击， 身上的特效。 填animation表中的名字 */
 		public var q_been_hurt_animation:int;
-		 /**  变身资源读取（变身资源表找ID） */
-		public var q_change_model_res:int;
 		 /**  作用目标（1自己，2目标，3自己与目标，4自己和队友,5主人） */
 		public var q_target:int;
 		 /**  BUFF广播类型（0隐藏式BUFF，1显示给自己知道的BUFF，2在地图同步给周围玩家的BUFF , 3其他玩家选中后,前端请求查看的BUFF） */
@@ -90,7 +88,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_fihgt:int;
 		 /**  关联buff技能（填技能ID） */
 		public var q_other:String;
-		 /**  客户端other（上升时间:up；被同步的技能ID：skill；浮空时间：stay；落地时间：down；离地高度：h） */
+		 /**  客户端other（上升时间:up；受击时间：hit;被同步的技能ID：skill；浮空时间：stay；落地时间：down；离地高度：h；变身：model） */
 		public var q_client_other:String;
 
 	}

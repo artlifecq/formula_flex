@@ -118,6 +118,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_mapzone_type:int;
 		 /**  跳跃连接点 */
 		public var q_jump_link:String;
+		 /**  地图复活区域 */
+		public var q_revive_area:int;
 
 	}
 }

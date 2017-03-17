@@ -16,16 +16,16 @@ package com.rpgGame.coreData.clientConfig
 		public var id:int;
 		 /**  名称 */
 		public var name:String;
-		 /**  角色骨骼 */
-		public var heroModel:int;
-		 /**  初始衣服模型 */
-		public var avatarClothesRes:int;
-		 /**  初始头发资源 */
-		public var avatarHairRes:int;
-		 /**  武器资源 */
-		public var weapon:int;
-		 /**  身体资源 */
+		 /**  骨骼 */
+		public var q_animator_res:String;
+		 /**  身体(主，包括怪物) */
 		public var q_body_res:String;
+		 /**  头发 */
+		public var q_hair_res:String;
+		 /**  武器资源 */
+		public var q_weapon_res:int;
+		 /**  副武器资源 */
+		public var q_deputyweapon_res:int;
 
 	}
 }

@@ -86,7 +86,7 @@ package com.rpgGame.app.scene
 			removeBuffEffect(buffData.cfgId);
 			var data : Q_buff = buffData.buffData;
 			
-			handlerRoleState(buffData);
+			
 			
 			var animations:Array = data.q_animation.split(";");
 			if (data && animations)
@@ -148,6 +148,7 @@ package com.rpgGame.app.scene
 				buffList.push(buffData);
 			}
 			addBuffEffect(buffData);
+			handlerRoleState(buffData);
 			EventManager.dispatchEvent(BuffEvent.ADD_BUFF, buffData);
 		}
 		
