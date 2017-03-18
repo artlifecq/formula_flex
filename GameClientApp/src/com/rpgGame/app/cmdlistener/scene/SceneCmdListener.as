@@ -66,6 +66,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.map.message.ResArmorChangeMessage;
 	import com.rpgGame.netData.map.message.ResChangeMapFailedMessage;
 	import com.rpgGame.netData.map.message.ResChangeMapMessage;
+	import com.rpgGame.netData.map.message.ResChangePositionMessage;
 	import com.rpgGame.netData.map.message.ResEnterMapMessage;
 	import com.rpgGame.netData.map.message.ResHelmChangeMessage;
 	import com.rpgGame.netData.map.message.ResPlayerRunEndMessage;
@@ -120,6 +121,7 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(101123, RecvResPlayerRunEndMessage);
 			SocketConnection.addCmdListener(101148, RecvSCSceneObjMoveMessage);
 			SocketConnection.addCmdListener(101125, RecvResRoundObjectsMessage);
+			SocketConnection.addCmdListener(101128, onResChangePositionMessage);
 			//场景中有对象血量有变化. 可能是因为状态, 可能是因为吃药
 			SocketConnection.addCmdListener(103105, RecvBroadcastPlayerAttriChangeMessage);
 			
@@ -187,7 +189,20 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			finish();
 		}
-        
+		
+		private function onResChangePositionMessage(msg:ResChangePositionMessage):void
+		{
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+			var posX : uint = msg.position.x;
+			var posY : uint = msg.position.y;
+			var walkMoveRef : WalkMoveStateReference = MainRoleManager.actor.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+			walkMoveRef.isServerStop = true;
+			var stopWalkRef : StopWalkMoveStateReference = MainRoleManager.actor.stateMachine.getReference(StopWalkMoveStateReference) as StopWalkMoveStateReference;
+			stopWalkRef.setParams(posX, posY);
+			role.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, stopWalkRef);
+			role.stateMachine.transition(RoleStateType.ACTION_IDLE);
+		}
+		
         // 陷阱状态改变
         private function onRecvSCAttachStateChangeMessage(msg : SCAttachStateChangeMessage) : void {
             var trap : RenderUnit3D = SceneManager.getSceneObjByID(msg.personId.ToGID()) as RenderUnit3D;
@@ -716,8 +731,7 @@ package com.rpgGame.app.cmdlistener.scene
 				if(msg.attributeChange.type==CharAttributeType.HP){
 					EventManager.dispatchEvent(MainPlayerEvent.SELFHP_CHANGE);
 				}
-				
-				ReliveManager.autoHideRelive();
+//				ReliveManager.autoHideRelive();
 			}
 		}
 		
