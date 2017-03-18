@@ -86,8 +86,6 @@ package com.rpgGame.app.scene
 			removeBuffEffect(buffData.cfgId);
 			var data : Q_buff = buffData.buffData;
 			
-			
-			
 			var animations:Array = data.q_animation.split(";");
 			if (data && animations)
 			{
@@ -102,7 +100,7 @@ package com.rpgGame.app.scene
 					}
 				}
 			}
-			_buffEffectTweenMap.add(buffData.cfgId,buffData.cfgId);
+			_buffEffectTweenMap.add(buffData.cfgId,buffData.buffId);
 		}
 		
 		/**
@@ -137,7 +135,7 @@ package com.rpgGame.app.scene
 			var buffExist : Boolean = false;
 			for each (var currData : BuffData in buffList)
 			{
-				if (currData.cfgId == buffData.cfgId)
+				if (currData.buffId == buffData.buffId)
 				{
 					buffExist = true;
 					break;
@@ -177,7 +175,7 @@ package com.rpgGame.app.scene
 				}
 			}
 			
-			EventManager.dispatchEvent(BuffEvent.REMOVE_BUFF, _role.id, currData.cfgId);
+			EventManager.dispatchEvent(BuffEvent.REMOVE_BUFF, _role.id, currData.buffId);
 		}	
 		
 		/**
@@ -185,13 +183,13 @@ package com.rpgGame.app.scene
 		 * @param stateId
 		 * 
 		 */		
-		private function removeBuffEffect(stateId : int) : void
+		private function removeBuffEffect(cfgId : int) : void
 		{
 			if (_role)
 			{
-				_role.avatar.removeRenderUnitsByType(RenderUnitType.BUFF + stateId);
+				_role.avatar.removeRenderUnitsByType(RenderUnitType.BUFF + cfgId);
 			}
-			_buffEffectTweenMap.remove(stateId);
+			_buffEffectTweenMap.remove(cfgId);
 		}
 		
 		public function BuffSet(role : SceneRole)
@@ -208,11 +206,11 @@ package com.rpgGame.app.scene
 		private function clear() : void
 		{
 			var keys : Array = _buffEffectTweenMap.keys();
-			for each (var stateId : * in keys)
+			for each (var cfgId : * in keys)
 			{
 				if (_role)
 				{
-					_role.avatar.removeRenderUnitsByType(RenderUnitType.BUFF + stateId);
+					_role.avatar.removeRenderUnitsByType(RenderUnitType.BUFF + cfgId);
 				}
 			}
 			_buffEffectTweenMap.clear();
@@ -258,6 +256,9 @@ package com.rpgGame.app.scene
 					case 27://技能同步buff
 						_role.stateMachine.removeState(RoleStateType.CONTROL_SYNC_SPELLACTION); //切换到“技能动作同步状态”
 						break;
+                    case 34:// 变身
+                        _role.stateMachine.removeState(RoleStateType.CONTROL_SHAPESHIFTING);
+                        break;
 					case 199://冰冻
 						_role.stateMachine.removeState(RoleStateType.CONTROL_BING_DONG);
 						break;

@@ -133,6 +133,28 @@ package com.rpgGame.coreData.info.fight.skill
 
 			return spellVect;
 		}
+        
+        /**
+         * 得到所有的主动技能
+         * @return
+         *
+         */
+        public function getShortcutSpellList() : Vector.<Q_skill_model>
+        {
+            var spellVect : Vector.<Q_skill_model> = new Vector.<Q_skill_model>;
+            
+            var spell : Q_skill_model;
+            var spells : Array = _spellMap.getValues();
+            var len : int = spells.length;
+            for (var i : int = 0; i < len; i++)
+            {
+                spell = spells[i];
+                if(spell.q_shortcut == 1)
+                    spellVect.push(spell);
+            }
+            
+            return spellVect;
+        }
 
 		/**
 		 * 得到当前对某个职业总等级

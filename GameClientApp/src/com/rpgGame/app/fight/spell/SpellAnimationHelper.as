@@ -407,7 +407,8 @@ package com.rpgGame.app.fight.spell
 			}
 		}
 		
-		public static function addBornEffect(role : SceneRole,destX : int, destZ : int, rotationY : int,effectID:int,mountResID:String="",finishFunc:Function=null):void
+		private static var bornEffectID:int = 0;
+		public static function addBornEffect(role : SceneRole,destX : int, destZ : int,effectID:int,mountResID:String="",finishFunc:Function=null):void
 		{
 			var animatData:Q_SpellAnimation = AnimationDataManager.getData(effectID);
 			/** 特效 **/
@@ -418,21 +419,24 @@ package com.rpgGame.app.fight.spell
 				var repeat : int = 1;
 				if (animatData.scene_res)
 				{
-					rud = new RenderParamData3D(role.id, SceneCharType.BORN_EFFECT, ClientConfig.getEffect(animatData.scene_res));
+					rud = new RenderParamData3D(bornEffectID, SceneCharType.BORN_EFFECT, ClientConfig.getEffect(animatData.scene_res));
 					
 					effectRu = RenderUnit3D.create(rud,true);
 					effectRu.allowCameraAnimator = (role && role.isMainChar);
 					effectRu.repeat = repeat;
 					effectRu.x = destX;
 					effectRu.z = destZ;
-					effectRu.rotationY = rotationY;
+
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu, true);
 					if(finishFunc!=null)
 						effectRu.setPlayCompleteCallBack(finishFunc, role,mountResID);
+					else
+						effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
 					effectRu.play(1);
 				}
 			}
+			bornEffectID++;
 		}
 		
 		private static var _sceneTrapsByAtkorID : Dictionary = new Dictionary(true);

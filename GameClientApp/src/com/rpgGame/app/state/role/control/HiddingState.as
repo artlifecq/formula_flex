@@ -5,6 +5,7 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
+	import flash.display.BlendMode;
 	import flash.utils.getQualifiedClassName;
 
 	/**
@@ -46,12 +47,16 @@ package com.rpgGame.app.state.role.control
 		
 		private function eachVisible(role : BaseRole, render : RenderUnit3D) : void
 		{
-			render.visible = true;
+			role.isHiding = false;
+			render.blendMode = BlendMode.NORMAL;
+			render.alpha = 1;
 		}
 		
 		private function eachUnVisible(role : BaseRole, render : RenderUnit3D) : void
 		{
-			render.visible = false;
+			role.isHiding = true;
+			render.blendMode = BlendMode.LAYER;
+			render.alpha = 0;
 		}
 		
 		override public function afterLeave() : void

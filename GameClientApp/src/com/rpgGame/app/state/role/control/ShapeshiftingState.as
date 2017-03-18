@@ -24,9 +24,6 @@ package com.rpgGame.app.state.role.control
 	 */	
 	public class ShapeshiftingState extends BuffState
 	{
-		private var _reference:ShapeshiftingStateReference;
-    	private var avatarInfo:AvatarInfo;
-        
 		public function ShapeshiftingState()
 		{
 			super(RoleStateType.CONTROL_SHAPESHIFTING);
@@ -36,25 +33,20 @@ package com.rpgGame.app.state.role.control
 		{
 			if (_machine && !_machine.isDisposed)
 			{
-				_reference = null;
 				super.execute();
 				if (_ref is ShapeshiftingStateReference)
 				{
-					_reference = _ref as ShapeshiftingStateReference;
+					_stateReference = _ref as ShapeshiftingStateReference;
 					
 					var role : SceneRole = _machine.owner as SceneRole;
 					
-					trace(_reference.buffData.clientData.model);
-                    
-                    var changeModel : ChangeModel = ChangeModelCfgData.getInfoById(_reference.buffData.clientData.model);
+                    var changeModel : ChangeModel = ChangeModelCfgData.getInfoById(_stateReference.buffData.clientData.model);
                     if (null == changeModel)
 					{
                         return;
                     }
                     
                     var heroData : HeroData = role.data as HeroData;
-					
-					avatarInfo = heroData.avatarInfo.clone();
 					
 					heroData.avatarInfo.clear();
 					
@@ -81,7 +73,7 @@ package com.rpgGame.app.state.role.control
 					AvatarManager.updateAvatar(role);
                     if (role.isMainChar)
 					{
-                        ShortcutsManger.getInstance().replaceToTempSpellByVector(MainRoleManager.actorInfo.spellList.getAutoSpellList());
+                        ShortcutsManger.getInstance().replaceToTempSpellByVector(MainRoleManager.actorInfo.spellList.getShortcutSpellList());
                     }
 				}
 				else
@@ -95,13 +87,8 @@ package com.rpgGame.app.state.role.control
 			if (_machine && !_machine.isDisposed)
 			{
 				var role : SceneRole = _machine.owner as SceneRole;
-               
-				var heroData : HeroData = role.data as HeroData;
-				heroData.avatarInfo.clear();
 				
-				heroData.avatarInfo = avatarInfo;
-				
-				AvatarManager.updateAvatar(role);
+				AvatarManager.callEquipmentChange(role);
                 if (role.isMainChar)
 				{
                     ShortcutsManger.getInstance().reset();
@@ -112,8 +99,6 @@ package com.rpgGame.app.state.role.control
 		override public function dispose():void
 		{
 			super.dispose();
-			avatarInfo = null;
-			_reference = null;
 		}
 	}
 }
