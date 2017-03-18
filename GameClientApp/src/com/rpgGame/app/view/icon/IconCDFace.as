@@ -249,10 +249,10 @@ package com.rpgGame.app.view.icon
 
 		public function setIsShowCdTm(isShow : Boolean) : void
 		{
+			_isShwoTm = isShow;
 			if (_cdFace == null)
 				return;
 
-			_isShwoTm = isShow;
 			if (isShow)
 				_cdFace.showTmTxt();
 			else

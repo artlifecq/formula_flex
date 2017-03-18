@@ -101,7 +101,8 @@ package com.rpgGame.core.view.uiComponent.face.cd
 		{
 			if (!_tmTxt)
 			{
-				txtFormat = txtFormat || new TextFormat(null, 12, 0xffffff, true, null, null, null, null, TextFormatAlign.CENTER);
+				txtFormat = txtFormat || new TextFormat(null, 14, 0x8b8d7b, true, null, null, null, null, TextFormatAlign.CENTER);
+				txtFormat.letterSpacing=2;
 				var texture : BitmapFontTexture = MaskCDUtil.getAssetTexture("CDFace_text") as BitmapFontTexture;
 				if (texture == null)
 				{
@@ -110,10 +111,8 @@ package com.rpgGame.core.view.uiComponent.face.cd
 				}
 				_tmTxt = new NumberBitmap(texture);
 				_tmTxt.numberGap = -2;
-//				_tmTxt.width = _w*2;//guoqing.wen
-//				_tmTxt.height = 20;//guoqing.wen
-				_tmTxt.x = -_w / 2;
-				_tmTxt.y = -_w / 2;
+				_tmTxt.x = _w/2;
+				_tmTxt.y =_h/2;
 //				_tmTxt.filters = [new GlowFilter(0x000e07, 1, 2, 2, 15, BitmapFilterQuality.LOW)];//guoqing.wen
 			}
 			addChild(_tmTxt);
