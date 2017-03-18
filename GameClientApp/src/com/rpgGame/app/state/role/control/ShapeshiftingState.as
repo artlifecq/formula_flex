@@ -33,10 +33,11 @@ package com.rpgGame.app.state.role.control
 		{
 			if (_machine && !_machine.isDisposed)
 			{
+				_reference = null;
 				super.execute();
 				if (_ref is ShapeshiftingStateReference)
 				{
-					_stateReference = _ref as ShapeshiftingStateReference;
+					_reference = _ref as ShapeshiftingStateReference;
 					
 					var role : SceneRole = _machine.owner as SceneRole;
 					

@@ -10,12 +10,16 @@ package com.rpgGame.app.cmdlistener.engine
 	import com.rpgGame.app.controller.keyboard.KeyNormalProcess;
 	import com.rpgGame.app.controller.keyboard.KeySpellProcess;
 	import com.rpgGame.app.manager.input.KeyMoveManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.state.role.control.ShapeshiftingStateReference;
 	import com.rpgGame.core.manager.input.KeyManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.key.KeyCodeType;
 	import com.rpgGame.coreData.info.key.KeyInfo;
 	import com.rpgGame.coreData.info.key.MulitKeyInfo;
+	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.events.Event;
 	import flash.geom.Vector3D;
@@ -80,9 +84,7 @@ package com.rpgGame.app.cmdlistener.engine
 /////////////////////////////////////////////////////
 			if (info.code == Keyboard.H)
 			{
-				if (!ClientConfig.isRelease)
-				{
-				}
+				
 				return;
 			}
 
