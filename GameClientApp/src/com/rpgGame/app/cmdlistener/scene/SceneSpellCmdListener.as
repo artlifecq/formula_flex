@@ -130,7 +130,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */		
 		private function onSCAttackerResultMessage(msg:SCAttackerResultMessage):void
 		{
-			GameLog.addShow("技能伤害流水号为： \t" + msg.uid);
+			GameLog.addShow("*************************技能伤害流水号为： \t" + msg.uid);
 			var info : SpellResultInfo = SpellResultInfo.setSpellResultInfo(msg);
 			SpellHitHelper.fightSpellHitEffect(info);
 			effectCharAttribute(info);

@@ -285,11 +285,11 @@ package com.game.engine3D.scene.render
 		
 		override public function set blendMode(value:String):void
 		{
-			if (this.blendMode == value)return;
+//			if (this.blendMode == value)return;
 			super.blendMode = value;
 			if (_renderUnitData)
 			{
-//				_renderUnitData.blendMode = value;
+				_renderUnitData.blendMode = value;
 			}
 		}
 		

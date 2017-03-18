@@ -1,5 +1,6 @@
 package com.rpgGame.app.fight.spell
 {
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.RoleHpStatusManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
@@ -154,7 +155,8 @@ package com.rpgGame.app.fight.spell
 						var hurtRef : HurtStateReference = role.stateMachine.getReference(HurtStateReference) as HurtStateReference;
 						hurtRef.setParams(/*info, */hurtVo);
 						role.stateMachine.transition(RoleStateType.CONTROL_HURT, hurtRef);
-
+						
+						GameLog.addShow("*************************本次伤害值为： \t" + hurtVo.curLife);
 					}
 				}
 			}

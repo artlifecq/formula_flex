@@ -44,7 +44,7 @@ package com.game.engine3D.loader
 		private var _isLoaded : Boolean;
 		private var _isAsyncLoaded : Boolean;
 		private var _meshByName : Dictionary;
-		private var _objMap : HashMap;
+		private var _objMap : HashMap;//装载awd里面所有的对象
 		private var _elements : Vector.<ObjectContainer3D>;
 		private var _methods : Vector.<EffectMethodBase>;
 		private var _soundBox : SoundBox;
@@ -204,6 +204,11 @@ package com.game.engine3D.loader
 			this.dispatchEvent(e);
 		}
 		
+		/**
+		 * 主要处理材质的收集 
+		 * @param e
+		 * 
+		 */		
 		private function completeHandler(e : Event) : void
 		{
 			for (var name : String in _meshByName)

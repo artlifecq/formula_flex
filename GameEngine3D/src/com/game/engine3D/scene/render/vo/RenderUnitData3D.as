@@ -60,11 +60,11 @@ package com.game.engine3D.scene.render.vo
 		private var _objByName : Dictionary;
 		private var _compositeAnimatorGroupByName : Dictionary;
 		private var _childrenWithAnimatByRoot : Dictionary;
-		private var _materialMap : Dictionary;
+
 		private var _materialLightPickerMap : Dictionary;
-		private var _targetMeterialMap : Dictionary;
+		
 		private var _camera3DAnimators : Vector.<iCamera3DAnimator>;
-		private var _independentMaterialMap : Dictionary;
+		
 		private var _independentColorTransform : ColorTransform;
 		//private var _overrideMaterialProps : OverrideMaterialProps;
 		/** 灯光 **/
@@ -88,6 +88,10 @@ package com.game.engine3D.scene.render.vo
 		private var _fadeAlphaMethodData : MethodData;
 		private var _fadeAlphaRect : FadeAlphaRectData;
 		private var _onFadeAlphaValidate : Function;
+		/////////////////////////////////////////////////////材质相关////////////////////////////////////////////////////////
+		private var _independentMaterialMap : Dictionary;
+		private var _materialMap : Dictionary;
+		private var _targetMeterialMap : Dictionary;
 		
 		public function RenderUnitData3D(type : String, id : Number)
 		{
@@ -105,10 +109,13 @@ package com.game.engine3D.scene.render.vo
 			_meshes = new Vector.<Mesh>();
 			_sparticleMeshes = new Vector.<SparticleMesh>();
 			_camera3DAnimators = new Vector.<iCamera3DAnimator>();
+			
 			_meshElements = resData.cloneMeshElements();
 			_animatorElements = resData.cloneAnimatorElements();
 			_baseVirtualElements = resData.cloneBaseVirtualElements();
+			
 			_effectMethods = resData.getMethods();
+			
 			_rootObj3ds = new Vector.<ObjectContainer3D>();
 			_childObj3ds = new Vector.<ObjectContainer3D>();
 			_compositeUnitDatas = new Vector.<RenderUnitData3D>();
@@ -172,6 +179,12 @@ package com.game.engine3D.scene.render.vo
 			}
 		}
 		
+		/**
+		 * 重组下材质的名字，让他唯一 
+		 * @param name
+		 * @return 
+		 * 
+		 */		
 		public function getUnitMaterialName(name : String) : String
 		{
 			return _type + "_" + _id + "_" + name;
@@ -216,6 +229,11 @@ package com.game.engine3D.scene.render.vo
 			}
 		}
 		
+		/**
+		 * 递归element，把所有的子对象都添加到childObj3ds数组里面 
+		 * @param element
+		 * 
+		 */		
 		private function addChildObj(element : ObjectContainer3D) : void
 		{
 			_objByName[element.name] = element;
@@ -228,6 +246,12 @@ package com.game.engine3D.scene.render.vo
 			}
 		}
 		
+		/**
+		 * 递归element，一个element对应一个数组（他的所有儿子element） ，然后把所有的CompositeAnimator理出来，全部添加到_camera3DAnimators数组里面去
+		 * @param element
+		 * @param root
+		 * 
+		 */		
 		private function addChildWithAnimat(element : ObjectContainer3D, root : ObjectContainer3D) : void
 		{
 			if (element is IAnimatorOwner && (element as IAnimatorOwner).animator)
@@ -252,6 +276,11 @@ package com.game.engine3D.scene.render.vo
 			}
 		}
 		
+		/**
+		 * 递归所有animator，把所有的 CameraVibrateAnimator添加到_camera3DAnimators数组里面去
+		 * @param animator
+		 * 
+		 */		
 		private function addCameraAnimator(animator : CompositeAnimator) : void
 		{
 			if (!animator)
@@ -287,6 +316,10 @@ package com.game.engine3D.scene.render.vo
 		}
 		}*/
 		
+		/**
+		 * 切换到独立的材质 (主要是重新new了，然后把旧的赋值到new出来的对象)
+		 * 
+		 */		
 		private function switchMaterialsToIndependent() : void
 		{
 			if (_targetMeterialMap == _independentMaterialMap)
@@ -298,6 +331,10 @@ package com.game.engine3D.scene.render.vo
 			validateMeterials();
 		}
 		
+		/**
+		 * 切换到共享的材质 
+		 * 
+		 */		
 		private function switchMaterialsToShare() : void
 		{
 			if (_targetMeterialMap == _materialMap)
@@ -327,6 +364,12 @@ package com.game.engine3D.scene.render.vo
 			return _objByName[name];
 		}
 		
+		/**
+		 * 根据element来获取他的所有儿子 
+		 * @param rootElement
+		 * @return 
+		 * 
+		 */		
 		public function getChildrenWithAnimat(rootElement : ObjectContainer3D) : Array
 		{
 			var animatChildren : Array = _childrenWithAnimatByRoot[rootElement];
@@ -710,6 +753,10 @@ package com.game.engine3D.scene.render.vo
 			restoreMaterials();
 		}
 		
+		/**
+		 * 把awd里面的材质放到 _independentMaterialMap里面去
+		 * 
+		 */		
 		private function initIndependentMaterials() : void
 		{
 			if (!_independentMaterialMap)
@@ -727,6 +774,12 @@ package com.game.engine3D.scene.render.vo
 			}
 		}
 		
+		private var _blendMode:String = BlendMode.NORMAL;
+		public function set blendMode(value:String):void
+		{
+			_blendMode = value;
+		}
+		
 		private function addIndependentMaterial(name : String, orgMaterial : SinglePassMaterialBase) : void
 		{
 			if (!_independentMaterialMap || !orgMaterial)
@@ -734,19 +787,22 @@ package com.game.engine3D.scene.render.vo
 				return;
 			}
 			var material : SinglePassMaterialBase;
-			if (orgMaterial is TextureMaterial)
+			if (orgMaterial is TextureMaterial)//贴图材质
 			{
 				material = new TextureMaterial();
 			}
-			else if (orgMaterial is ColorMaterial)
+			else if (orgMaterial is ColorMaterial)//颜色材质
 			{
 				material = new ColorMaterial();
 			}
 			if (material)
 			{
 				material.copyFrom(orgMaterial);
-				if (GlobalConfig.use2DMap && material.blendMode == BlendMode.NORMAL)
-					material.blendMode = BlendMode.LAYER;
+//				if (GlobalConfig.use2DMap && material.blendMode == BlendMode.NORMAL)
+//				{
+//					material.blendMode = BlendMode.LAYER;
+//				}
+				material.blendMode = _blendMode;
 				material.colorTransform = _independentColorTransform;
 				material.diffuseAcc = orgMaterial.diffuseAcc;
 				material.lightPicker = orgMaterial.lightPicker ? _lightPicker : null;

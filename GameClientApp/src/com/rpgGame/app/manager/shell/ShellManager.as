@@ -8,15 +8,12 @@ package com.rpgGame.app.manager.shell
     import com.game.engine3D.scene.render.RenderUnit3D;
     import com.game.engine3D.scene.render.vo.RenderParamData3D;
     import com.game.engine3D.utils.MathUtil;
-    import com.game.engine3D.utils.StatsUtil;
     import com.game.engine3D.vo.AreaMapData;
-    import com.game.engine3D.vo.BaseObj3D;
     import com.game.engine3D.vo.BaseRole;
     import com.game.mainCore.core.manager.LayerManager;
     import com.gameClient.log.GameLog;
     import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
     import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
-    import com.rpgGame.app.fight.spell.SpellAnimationHelper;
     import com.rpgGame.app.graphics.HeadFace;
     import com.rpgGame.app.manager.AreaMapManager;
     import com.rpgGame.app.manager.AvatarManager;
@@ -26,16 +23,12 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.manager.scene.SceneManager;
     import com.rpgGame.app.scene.SceneRole;
     import com.rpgGame.app.sender.SceneSender;
-    import com.rpgGame.app.state.role.control.HiddingStateReference;
-    import com.rpgGame.app.state.role.control.ShapeshiftingState;
     import com.rpgGame.app.state.role.control.ShapeshiftingStateReference;
     import com.rpgGame.core.utils.ConsoleDesk;
     import com.rpgGame.coreData.cfg.AreaCfgData;
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.cfg.TransCfgData;
-    import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
     import com.rpgGame.coreData.clientConfig.Q_map_transfer;
-    import com.rpgGame.coreData.clientConfig.Q_monster;
     import com.rpgGame.coreData.enum.EnumAreaMapType;
     import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
     import com.rpgGame.coreData.info.buff.BuffData;
@@ -48,17 +41,14 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.type.RenderUnitType;
     import com.rpgGame.coreData.type.RoleStateType;
     import com.rpgGame.coreData.type.SceneCharType;
-    import com.rpgGame.netData.buff.bean.BuffInfo;
     
     import flash.display.BitmapData;
+    import flash.display.BlendMode;
     import flash.geom.Point;
     import flash.geom.Vector3D;
     import flash.utils.Dictionary;
     
-    import away3d.containers.PlanarContainer3D;
     import away3d.core.math.Plane3D;
-    
-    import gameEngine2D.NetDebug;
     
     import org.game.netCore.data.long;
     import org.game.netCore.net_protobuff.ByteBuffer;
@@ -94,7 +84,14 @@ package com.rpgGame.app.manager.shell
 			this._funcs["setRenderFunc".toLocaleLowerCase()] = this.setRenderFunc;
             this._funcs["addTrap".toLowerCase()] = this.addTrap;
             this._funcs["changeTrap".toLowerCase()] = this.changeTrap;
+			this._funcs["test".toLowerCase()] = this.test;
         }
+		
+		private function test(alpha:Number):void
+		{
+			MainRoleManager.actor.blendMode = BlendMode.LAYER;
+			MainRoleManager.actor.alpha = alpha;
+		}
 		
 		private var arr:Vector.<ShapeArea3D> = new Vector.<ShapeArea3D>();	
 		private function shapeFunc(type:int,x:Number,y:Number,width:Number):void
