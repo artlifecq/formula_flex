@@ -10,7 +10,7 @@ package com.rpgGame.coreData.lang
 	* @author NEIL
 	* 
 	*/
-	public class LangQ_BackPack
+	public class LangBackPack
 	{
 		 /**  <font color='#f3940d'>您拥有铜钱：$0</font><br><font color='#0df31e'>铜钱可以通过完成游戏中的任务/击败怪物/出售物品等途径获得</font> */
 		public static const ITEM_Tongqian_Number:String = "ITEM_Tongqian_Number";
@@ -300,8 +300,6 @@ package com.rpgGame.coreData.lang
 		public static const ITEM_dropItemToScene_2:String = "ITEM_dropItemToScene_2";
 		 /**  这件物品看起来还不错哦！你确定要丢弃吗？ */
 		public static const ITEM_dropItemToScene_3:String = "ITEM_dropItemToScene_3";
-		 /**  您背包中的还魂丹貌似不足了，是否去商城购买? */
-		public static const ITEM_less_1:String = "ITEM_less_1";
 		 /**  交易中不能进行整理 */
 		public static const ITEM_Not_ClearItem:String = "ITEM_Not_ClearItem";
 		 /**  点击背包中物品可出售，双击退出 */

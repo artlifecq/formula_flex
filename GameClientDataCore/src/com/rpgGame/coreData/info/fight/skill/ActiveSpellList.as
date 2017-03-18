@@ -44,6 +44,7 @@ package com.rpgGame.coreData.info.fight.skill
 //			{
 //				addSpell(spellData);
 //			}
+            _spellMap.clear();
 			for each (var spellInfo : SkillInfo in msg.skills)
 			{
 				addSpell(SpellDataManager.getSpellData(spellInfo.skillModelId));

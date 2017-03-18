@@ -24,6 +24,9 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.manager.scene.SceneManager;
     import com.rpgGame.app.scene.SceneRole;
     import com.rpgGame.app.sender.SceneSender;
+    import com.rpgGame.app.state.role.control.HiddingStateReference;
+    import com.rpgGame.app.state.role.control.ShapeshiftingState;
+    import com.rpgGame.app.state.role.control.ShapeshiftingStateReference;
     import com.rpgGame.core.utils.ConsoleDesk;
     import com.rpgGame.coreData.cfg.AreaCfgData;
     import com.rpgGame.coreData.cfg.ClientConfig;
@@ -38,7 +41,9 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.role.TrapInfo;
     import com.rpgGame.coreData.type.RenderUnitID;
     import com.rpgGame.coreData.type.RenderUnitType;
+    import com.rpgGame.coreData.type.RoleStateType;
     import com.rpgGame.coreData.type.SceneCharType;
+    import com.rpgGame.netData.buff.bean.BuffInfo;
     
     import flash.display.BitmapData;
     import flash.geom.Point;
@@ -167,10 +172,19 @@ package com.rpgGame.app.manager.shell
         
         private function show() : void {
             RotateGizmo3D.instance().show(null);
+            
+            var buffRef : ShapeshiftingStateReference = MainRoleManager.actor.stateMachine.getReference(ShapeshiftingStateReference) as ShapeshiftingStateReference;
+            var buffData : BuffData = new BuffData(MainRoleManager.actor.id);
+            buffData.cfgId = 2002;
+            buffData.disappearTime = 1000000;
+            buffRef.setParams(buffData);
+			buffData.buffData;
+            MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_SHAPESHIFTING, buffRef);
         }
         
         private function hide() : void {
             RotateGizmo3D.instance().hide();
+            MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_SHAPESHIFTING);
         }
 
         private function status() : void {

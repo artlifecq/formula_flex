@@ -60,6 +60,12 @@ package com.rpgGame.coreData.clientConfig
 		public var q_affect_target:int;
 		 /**  能否边走边放，1表示可以，0或者不配表示不行，默认不行 */
 		public var q_can_walk_release:int;
+		 /**  取消类型（0不可取消，1主动取消，2打断取消，3主动和打断取消） */
+		public var q_cancel:int;
+		 /**  取消时间（针对主动取消） */
+		public var q_cancel_time:int;
+		 /**  取消清除CD类型（0不清除，1清除） */
+		public var q_cancel_cd:int;
 		 /**  是否可以和别的技能同时释放（0不可以，1可以，1的状态下相当于施法者同时释放多个技能，但是同一个技能同时只能释放一个，受CD检查的限制） */
 		public var q_performAtTime:int;
 		 /**  是否可以激活自动施法(0激活) */
@@ -82,7 +88,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_singing_time:int;
 		 /**  冷却时间（毫秒） */
 		public var q_cd:int;
-		 /**  公共冷却时间 */
+		 /**  公共冷却时间（未启用） */
 		public var q_public_cd:int;
 		 /**  公共冷却层级 */
 		public var q_public_cd_level:int;
