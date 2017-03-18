@@ -187,7 +187,8 @@ package com.rpgGame.app.manager.role
 
 			if(bornData.q_born_animation)//有出生特效
 			{
-				SpellAnimationHelper.addBornEffect(role,data.x, data.y,data.direction,bornData.q_born_animation);
+				trace(data.x+"   "+data.y);
+				SpellAnimationHelper.addBornEffect(role,data.x, data.y,bornData.q_born_animation);
 			}
 			var mountResID : String = bornData ? bornData.q_mount_res : "";
 			if (mountResID)

@@ -477,8 +477,11 @@ package com.game.engine3D.scene.layers
 						}
 						else
 						{
-							baseObj.blendMode = BlendMode.NORMAL;
-							baseObj.alpha = 1;
+							if(!baseObj.isHiding)
+							{
+								baseObj.blendMode = BlendMode.NORMAL;
+								baseObj.alpha = 1;
+							}
 						}
 					}
 				}

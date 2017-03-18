@@ -123,6 +123,8 @@ package com.game.engine3D.vo
 		private var _inViewDistanceChangedCallbackVec : Vector.<CallBackData>;
 		private var _disposeCallbackVec : Vector.<CallBackData>;
 		private var _renderAnimator : IRenderAnimator;
+		
+		public var isHiding:Boolean = false;
 
 		public function BaseObj3D(parameters : Array = null)
 		{
