@@ -195,8 +195,6 @@ package com.rpgGame.app.cmdlistener.scene
 			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
 			var posX : uint = msg.position.x;
 			var posY : uint = msg.position.y;
-			var walkMoveRef : WalkMoveStateReference = MainRoleManager.actor.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
-			walkMoveRef.isServerStop = true;
 			var stopWalkRef : StopWalkMoveStateReference = MainRoleManager.actor.stateMachine.getReference(StopWalkMoveStateReference) as StopWalkMoveStateReference;
 			stopWalkRef.setParams(posX, posY);
 			role.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, stopWalkRef);
@@ -839,6 +837,7 @@ package com.rpgGame.app.cmdlistener.scene
             
             CharAttributeManager.setAttributeValue(roleData, CharAttributeType.HP, msg.hp);
             
+			
             role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
 			
 			//to do 给这个人播放一个复活特效 
@@ -846,7 +845,6 @@ package com.rpgGame.app.cmdlistener.scene
 				RenderUnitID.LEVEL, 
 				RenderUnitType.LEVEL, 
 				EffectUrl.RELIVE_NORMAL);
-            
             if(roleData.id == MainRoleManager.actorID)
             {
                 ReliveManager.autoHideRelive();
