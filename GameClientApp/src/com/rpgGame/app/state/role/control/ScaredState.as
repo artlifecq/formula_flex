@@ -8,6 +8,7 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.geom.Vector3D;
+	import flash.utils.getQualifiedClassName;
 	
 	import away3d.pathFinding.DistrictWithPath;
 
@@ -108,5 +109,11 @@ package com.rpgGame.app.state.role.control
 			}
 			super.leave();
 		}
+		
+		override public function get tribe():String
+		{
+			return getQualifiedClassName(ScaredState);
+		}
+		
 	}
 }

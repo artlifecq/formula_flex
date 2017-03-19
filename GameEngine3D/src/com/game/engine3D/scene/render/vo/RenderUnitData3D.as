@@ -774,12 +774,6 @@ package com.game.engine3D.scene.render.vo
 			}
 		}
 		
-		private var _blendMode:String = BlendMode.NORMAL;
-		public function set blendMode(value:String):void
-		{
-			_blendMode = value;
-		}
-		
 		private function addIndependentMaterial(name : String, orgMaterial : SinglePassMaterialBase) : void
 		{
 			if (!_independentMaterialMap || !orgMaterial)
@@ -1227,6 +1221,14 @@ package com.game.engine3D.scene.render.vo
 					}
 				}
 			}
+		}
+		
+		private var _blendMode:String = BlendMode.NORMAL;
+		public function set blendMode(value:String):void
+		{
+			if (this._blendMode == value)return;
+			_blendMode = value;
+			updateMaterials();
 		}
 		
 		public function setIndependentColorTransform(value : ColorTransform) : void

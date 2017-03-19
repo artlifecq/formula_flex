@@ -2,6 +2,7 @@ package com.rpgGame.app.state.role.action
 {
 	import com.game.engine3D.loader.GlobalTexture;
 	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.game.engine3D.scene.render.vo.MethodData;
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.utils.EffectMethodUtil;
 	import com.game.engine3D.vo.BaseRole;
@@ -11,15 +12,17 @@ package com.rpgGame.app.state.role.action
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.core.state.role.action.ActionState;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
+	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
-
+	
 	import away3d.animators.transitions.CrossfadeTransition;
 	import away3d.materials.methods.CorrodeMethod;
-
+	
 	import gs.TweenLite;
 	import gs.easing.Linear;
 
@@ -32,7 +35,7 @@ package com.rpgGame.app.state.role.action
 	 */
 	public class DeathState extends ActionState
 	{
-		private var _corrodeMethod : CorrodeMethod;
+		private var _corrodeMethodData : MethodData;
 		private var _corrodeTween : TweenLite;
 		private var _valueObj : Object;
 		private var _colorMultiplier : Number = 0.33;
@@ -56,18 +59,123 @@ package com.rpgGame.app.state.role.action
 			}
 		}
 
+		override public function playAnimation(role : BaseRole, render : RenderUnit3D, isFreeze : Boolean = false, time : int = -1, speedRatio : Number = 1) : void
+		{
+			super.playAnimation(role, render, isFreeze, time, speedRatio);
+
+			var statusType : String = RoleActionType.getActionType(RoleActionType.DIE, (_machine as RoleStateMachine).isRiding);
+			switch (render.type)
+			{
+				case RenderUnitType.BODY:
+				case RenderUnitType.HAIR:
+				case RenderUnitType.WEAPON:
+				case RenderUnitType.DEPUTY_WEAPON:
+					render.visible = true;
+					render.repeat = 1;
+					render.setStatus(statusType, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
+					break;
+				case RenderUnitType.MOUNT:
+					render.repeat = 1;
+					render.setStatus(RoleActionType.DIE, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
+					break;
+				case RenderUnitType.KNIFE_LIGHT:
+					break;
+				case RenderUnitType.WEAPON_EFFECT:
+					render.visible = true;
+					break;
+				case RenderUnitType.EFFECT:
+					render.visible = false;
+					break;
+				case RenderUnitType.HURT:
+					break;
+			}
+		}
+
+		override public function afterExecute() : void
+		{
+			if (_machine && !_machine.isDisposed)
+			{
+				super.afterExecute();
+				var state : IState = _machine.getLastState(ActionState);
+				if (state)
+					syncAnimation(false, 0);
+				else
+					syncAnimation(false, int.MAX_VALUE);
+				var role : SceneRole = _machine.owner as SceneRole;
+				if (!role)
+					return;
+
+				if (role.type == SceneCharType.BIAO_CHE  || role.type == SceneCharType.FAMILY_WAR_FLAG)
+				{
+					stopCorrode();
+				}
+				else
+				{
+					if(role.type == SceneCharType.MONSTER)
+					{
+						var monsterData:MonsterData = role.data as MonsterData;
+						if(monsterData)
+						{
+							if(CountryWarCfgData.isMonsterHoly(monsterData.modelID))
+							{
+								stopCorrode();
+								return;
+							}
+						}
+					}
+					_valueObj = {alpha: 1};
+					var bodyAp : RenderUnit3D = (_machine.owner as SceneRole).avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
+					var totalFrameTm : uint = (bodyAp ? bodyAp.totalDuration : 0);
+					if (totalFrameTm > 0)
+					{
+						if (role.type != SceneCharType.PLAYER)
+						{
+							if (RoleStateUtil.deathStateEffectType == RoleStateUtil.DEATH_STATE_EFFECT_CORRODE)
+							{
+								if (!_corrodeMethodData)
+									GlobalTexture.addTexture(ClientConfig.getDynTexture("corrode"), onCorrodeTextureComplete);
+								_corrodeTween = TweenLite.delayedCall(totalFrameTm * 0.001, onRoleDiedDelay);
+							}
+							else
+							{
+								_corrodeTween = TweenLite.delayedCall((totalFrameTm + 2000) * 0.001, onRoleDiedDelay);
+							}
+						}
+					}
+					else
+						stopCorrode();
+				}
+			}
+		}
+		
 		private function onCorrodeTextureComplete(globalTexture : GlobalTexture) : void
 		{
 			GlobalTexture.removeTextureCallBack(ClientConfig.getDynTexture("corrode"), onCorrodeTextureComplete);
 			if (_machine && !_machine.isDisposed)
 			{
-				_corrodeMethod = EffectMethodUtil.createCorrodeMethod(globalTexture.texture);
-				var role : SceneRole = _machine.owner as SceneRole;
-				//role.avatar.addMethod(_corrodeMethod);
-				_corrodeMethod.corrodeAlpha = 1 - _valueObj.alpha;
+				if (globalTexture.texture)
+				{
+					var corrodeMethod : CorrodeMethod = EffectMethodUtil.createCorrodeMethod(globalTexture.texture);
+					_corrodeMethodData = new MethodData(corrodeMethod);
+					var role : SceneRole = _machine.owner as SceneRole;
+					role.avatar.forEachRenderUnit(function(render : RenderUnit3D) : void
+					{
+						switch (render.type)
+						{
+							case RenderUnitType.BODY:
+							case RenderUnitType.HAIR:
+							case RenderUnitType.WEAPON:
+							case RenderUnitType.DEPUTY_WEAPON:
+							case RenderUnitType.MOUNT:
+								render.addMethod(_corrodeMethodData);
+								break;
+						}
+					});
+					corrodeMethod.corrodeAlpha = 1 - _valueObj.alpha;
+				}
 			}
 		}
-
+		
 		private function onRoleDiedDelay() : void
 		{
 			if (_corrodeTween)
@@ -91,15 +199,27 @@ package com.rpgGame.app.state.role.action
 							break;
 					}
 				});
-				if (_corrodeMethod)
+				if (_corrodeMethodData)
 				{
-					//role.avatar.addMethod(_corrodeMethod);
-					_corrodeMethod.corrodeAlpha = 1 - _valueObj.alpha;
+					role.avatar.forEachRenderUnit(function(render : RenderUnit3D) : void
+					{
+						switch (render.type)
+						{
+							case RenderUnitType.BODY:
+							case RenderUnitType.HAIR:
+							case RenderUnitType.WEAPON:
+							case RenderUnitType.DEPUTY_WEAPON:
+							case RenderUnitType.MOUNT:
+								render.addMethod(_corrodeMethodData);
+								break;
+						}
+					});
+					CorrodeMethod(_corrodeMethodData.method).corrodeAlpha = 1 - _valueObj.alpha;
 				}
 				_corrodeTween = TweenLite.to(_valueObj, 2, {alpha: 0, onComplete: stopCorrode, onUpdate: function() : void
 				{
-					if (_corrodeMethod)
-						_corrodeMethod.corrodeAlpha = 1 - _valueObj.alpha;
+					if (_corrodeMethodData)
+						CorrodeMethod(_corrodeMethodData.method).corrodeAlpha = 1 - _valueObj.alpha;
 				}, ease: Linear.easeNone});
 			}
 			else if (RoleStateUtil.deathStateEffectType == RoleStateUtil.DEATH_STATE_EFFECT_COLOR)
@@ -126,7 +246,7 @@ package com.rpgGame.app.state.role.action
 				stopCorrode();
 			}
 		}
-
+		
 		private function stopColorEffect() : void
 		{
 			_valueObj = {alpha: 1};
@@ -162,92 +282,6 @@ package com.rpgGame.app.state.role.action
 			}, ease: Linear.easeNone});
 		}
 
-		override public function playAnimation(role : BaseRole, render : RenderUnit3D, isFreeze : Boolean = false, time : int = -1, speedRatio : Number = 1) : void
-		{
-			super.playAnimation(role, render, isFreeze, time, speedRatio);
-
-			var statusType : String = RoleActionType.getActionType(RoleActionType.DIE, (_machine as RoleStateMachine).isRiding);
-			switch (render.type)
-			{
-				case RenderUnitType.BODY:
-				case RenderUnitType.HAIR:
-				case RenderUnitType.WEAPON:
-				case RenderUnitType.DEPUTY_WEAPON:
-//					render.visible = true;
-					render.repeat = 1;
-					render.setStatus(statusType, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
-					break;
-				case RenderUnitType.MOUNT:
-					render.repeat = 1;
-					render.setStatus(RoleActionType.DIE, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
-					break;
-				case RenderUnitType.KNIFE_LIGHT:
-					break;
-				case RenderUnitType.WEAPON_EFFECT:
-//					render.visible = true;
-					break;
-				case RenderUnitType.EFFECT:
-					render.visible = false;
-					break;
-				case RenderUnitType.HURT:
-					break;
-			}
-		}
-
-		override public function afterExecute() : void
-		{
-			if (_machine && !_machine.isDisposed)
-			{
-				super.afterExecute();
-				var state : IState = _machine.getLastState(ActionState);
-				if (state)
-					syncAnimation(false, 0);
-				else
-					syncAnimation(false, int.MAX_VALUE);
-				var role : SceneRole = _machine.owner as SceneRole;
-				if (!role)
-					return;
-
-				if (role.type == SceneCharType.BIAO_CHE)
-				{
-					stopCorrode();
-				}
-				else
-				{
-					_valueObj = {alpha: 1};
-					var bodyAp : RenderUnit3D = (_machine.owner as SceneRole).avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
-					var totalFrameTm : uint = (bodyAp ? bodyAp.totalDuration : 0);
-					if (totalFrameTm > 0)
-					{
-						if (role.type != SceneCharType.PLAYER)
-						{
-							if (RoleStateUtil.deathStateEffectType == RoleStateUtil.DEATH_STATE_EFFECT_CORRODE)
-							{
-								if (!_corrodeMethod)
-									GlobalTexture.addTexture(ClientConfig.getDynTexture("corrode"), onCorrodeTextureComplete);
-								_corrodeTween = TweenLite.delayedCall(totalFrameTm * 0.001, onRoleDiedDelay);
-							}
-							else
-							{
-								_corrodeTween = TweenLite.delayedCall((totalFrameTm + 2000) * 0.001, onRoleDiedDelay);
-							}
-						}
-					}
-					else
-						stopCorrode();
-				}
-			}
-		}
-
-		private function roleDied() : void
-		{
-			if (_machine && !_machine.isDisposed)
-			{
-				var role : SceneRole = _machine.owner as SceneRole;
-				SceneRoleManager.getInstance().removeSceneRole(role);
-			}
-		}
-
 		override public function leave() : void
 		{
 			super.leave();
@@ -259,7 +293,19 @@ package com.rpgGame.app.state.role.action
 			if (_machine && !_machine.isDisposed)
 			{
 				var role : SceneRole = _machine.owner as SceneRole;
-				//role.avatar.removeMethod(_corrodeMethod);
+				role.avatar.forEachRenderUnit(function(render : RenderUnit3D) : void
+				{
+					switch (render.type)
+					{
+						case RenderUnitType.BODY:
+						case RenderUnitType.HAIR:
+						case RenderUnitType.WEAPON:
+						case RenderUnitType.DEPUTY_WEAPON:
+						case RenderUnitType.MOUNT:
+							render.removeMethod(_corrodeMethodData);
+							break;
+					}
+				});
 				GlobalTexture.removeTextureCallBack(ClientConfig.getDynTexture("corrode"), onCorrodeTextureComplete);
 				if (_corrodeTween)
 				{
@@ -267,6 +313,15 @@ package com.rpgGame.app.state.role.action
 					_corrodeTween = null;
 				}
 				roleDied();
+			}
+		}
+		
+		private function roleDied() : void
+		{
+			if (_machine && !_machine.isDisposed)
+			{
+				var role : SceneRole = _machine.owner as SceneRole;
+				SceneRoleManager.getInstance().removeSceneRole(role);
 			}
 		}
 
@@ -332,10 +387,10 @@ package com.rpgGame.app.state.role.action
 		override public function dispose() : void
 		{
 			GlobalTexture.removeTextureCallBack(ClientConfig.getDynTexture("corrode"), onCorrodeTextureComplete);
-			if (_corrodeMethod)
+			if (_corrodeMethodData)
 			{
-				_corrodeMethod.dispose();
-				_corrodeMethod = null;
+				_corrodeMethodData.method.dispose();
+				_corrodeMethodData = null;
 			}
 			if (_corrodeTween)
 			{

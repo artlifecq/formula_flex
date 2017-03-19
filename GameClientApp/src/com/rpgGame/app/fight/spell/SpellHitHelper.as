@@ -40,58 +40,6 @@ package com.rpgGame.app.fight.spell
 		{
 			showSpellHitEffect(info);
 		}
-		
-//		public static function showSpellSingleHitEffect(info : SpellResultInfo):void
-//		{
-//			var hurted : Boolean = false;
-//			var role : SceneRole;
-//			var hurtAnimation : Q_SpellAnimation = info.hurtAnimation;
-//			
-//			hurted = true;
-//			
-//			role = SceneManager.getSceneObjByID(info.singleHurtVo.roleID) as SceneRole;
-//			if (role && role.usable)
-//			{
-//				if (RoleHpStatusManager.checkShowHpBarWhenHurt(role, info.atkor))
-//				{
-//					role.headFace.show();
-//				}
-//				
-//				SpellAnimationHelper.addTargetHurtEffect(role, info, hurtAnimation);
-//				
-//				if (role.isMainChar && info.atkor && info.atkor.usable)
-//				{
-//					info.atkor.updateInteractTime();
-//				}
-//				if (info.atkor && info.atkor.usable && info.atkor.isMainChar)
-//				{
-//					role.updateInteractTime();
-//				}
-//				//击退位移
-//				if (info.singleHurtVo.hasPositionChange)
-//				{
-//					RoleStateUtil.beatToPos(role, info.singleHurtVo.newPosition, info.atkorPos, info.beatBackSpeed);
-//				}
-//				else
-//				{
-//					if (info.singleHurtVo.stiffTime > 0)//击飞
-//					{
-//						var fallRef : FallStateReference = role.stateMachine.getReference(FallStateReference) as FallStateReference;
-//						fallRef.setParams(info.singleHurtVo.stiffTime);
-//						role.stateMachine.transition(RoleStateType.ACTION_FALL, fallRef);
-//					}
-//				}
-//				
-//				//显示被击特效
-//				var atkorPos : Point = (info.atkor && info.atkor.usable) ? new Point(info.atkor.x, info.atkor.z) : info.atkorPos;
-//				var hitRef : HitStateReference = role.stateMachine.getReference(HitStateReference) as HitStateReference;
-//				hitRef.setParams(atkorPos);
-//				role.stateMachine.transition(RoleStateType.ACTION_HIT, hitRef);
-//				var hurtRef : HurtStateReference = role.stateMachine.getReference(HurtStateReference) as HurtStateReference;
-//				hurtRef.setParams(info, info.singleHurtVo);
-//				role.stateMachine.transition(RoleStateType.CONTROL_HURT, hurtRef);
-//			}
-//		}
 
 		private static function showSpellHitEffect(info : SpellResultInfo) : void
 		{
@@ -142,6 +90,12 @@ package com.rpgGame.app.fight.spell
 						{
 							RoleStateUtil.fallToPos(hurtVo.stiffTime,role, hurtVo.newPosition, hurtVo.atkorPos, hurtVo.deadLaunchSpeed);
 						}
+						
+						if(role.isHiding)//如果是隐身的话，就不执行角色的受击动作和伤害变色
+						{
+							return;
+						}
+						
 						//显示被击特效
 						atkor=SceneManager.getSceneObjByID(hurtVo.atkorID) as SceneRole;
 						var atkorPos : Point

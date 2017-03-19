@@ -64,6 +64,8 @@ package com.rpgGame.coreData.type
 		public static const XUE_WEN : String = rEnum.next.toString();
 		
 		public static const BORN_EFFECT:String = rEnum.next.toString();
+		
+		public static const FAMILY_WAR_FLAG:String = rEnum.next.toString();
 		//		/** 召唤怪  3 **/
 //		public static const SUMMON_MONSTER:String = rEnum.next.toString();
 //		/** 宝袋（精英怪或BOSS死后出现） 4 **/

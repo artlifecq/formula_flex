@@ -33,5 +33,8 @@ package com.game.engine3D.core.interfaces
 		function get sceneTransform() : Matrix3D;
 		function get offsetZ() : Number;
 		function set offsetZ(value : Number) : void;
+		
+		function set blendMode(value:String):void;
+		function get blendMode():String;
 	}
 }

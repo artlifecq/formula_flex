@@ -77,7 +77,7 @@ package com.rpgGame.app.state.role.action
 			{
 				case RenderUnitType.BODY:
 				case RenderUnitType.HAIR:
-//					render.visible = true;
+					render.visible = true;
 					render.repeat = _repeat;
 					render.setStatus(statusType, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
 					if (isFreeze)
@@ -115,6 +115,16 @@ package com.rpgGame.app.state.role.action
 			super.afterExecute();
 			if (_machine && !_machine.isDisposed)
 			{
+				if (_totalTimeTween)
+				{
+					_totalTimeTween.kill();
+					_totalTimeTween = null;
+				}
+				if (_animatTween)
+				{
+					_animatTween.kill();
+					_animatTween = null;
+				}
 				startCollect();
 				if (_stateReference.time > 0)
 					_totalTimeTween = TweenLite.delayedCall(_stateReference.time * 0.001, onEndCollect);
@@ -129,11 +139,6 @@ package com.rpgGame.app.state.role.action
 			_repeat = 1;
 			syncAnimation(false, 0);
 
-			if (_animatTween)
-			{
-				_animatTween.kill();
-				_animatTween = null;
-			}
 			var bodyAp : RenderUnit3D = (_machine.owner as SceneRole).avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
 			var totalFrameTm : uint = (bodyAp ? bodyAp.totalDuration : 0);
 			if (totalFrameTm > 0)
@@ -170,6 +175,7 @@ package com.rpgGame.app.state.role.action
 				_animatTween.kill();
 				_animatTween = null;
 			}
+			_stateReference.end();
 			var bodyAp : RenderUnit3D = (_machine.owner as SceneRole).avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
 			var totalFrameTm : uint = (bodyAp ? bodyAp.totalDuration : 0);
 			if (totalFrameTm > 0)
@@ -182,7 +188,6 @@ package com.rpgGame.app.state.role.action
 		{
 			if (_machine && !_machine.isDisposed)
 			{
-				_stateReference.end();
 				stopCollect();
 				if ((_machine as RoleStateMachine).isPrewarWaiting)
 					transition(RoleStateType.ACTION_PREWAR);
@@ -215,7 +220,11 @@ package com.rpgGame.app.state.role.action
 
 		override public function leavePass(nextState : IState, force : Boolean = false) : Boolean
 		{
-			if (nextState.type == RoleStateType.ACTION_DEATH)
+			if ((_machine as RoleStateMachine).isBingDong)
+			{
+				return false;
+			}
+			else if (nextState.type == RoleStateType.ACTION_DEATH)
 			{
 				return true;
 			}
@@ -229,22 +238,15 @@ package com.rpgGame.app.state.role.action
 			}
 			else if (nextState.type == RoleStateType.ACTION_IDLE)
 			{
-				return false;
+				if (!force && !_collectFinish)
+					return false;
 			}
 			else if (nextState.type == RoleStateType.ACTION_PREWAR)
-			{
-				return false;
-			}
-			else if ((_machine as RoleStateMachine).isBingDong)
-			{
-				return false;
-			}
-			else if (nextState.type == RoleStateType.ACTION_HIT)
 			{
 				if (!force && !_collectFinish)
 					return false;
 			}
-			else if (nextState.type == RoleStateType.ACTION_COLLECT)
+			else if (nextState.type == RoleStateType.ACTION_HIT)
 			{
 				if (!force && !_collectFinish)
 					return false;
