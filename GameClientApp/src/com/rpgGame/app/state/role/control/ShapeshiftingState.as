@@ -16,6 +16,7 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.geom.Vector3D;
+	import flash.utils.getQualifiedClassName;
 
 	/**
 	 * 变身状态处理 
@@ -100,5 +101,11 @@ package com.rpgGame.app.state.role.control
 		{
 			super.dispose();
 		}
+		
+		override public function get tribe():String
+		{
+			return getQualifiedClassName(ShapeshiftingState);
+		}
+		
 	}
 }

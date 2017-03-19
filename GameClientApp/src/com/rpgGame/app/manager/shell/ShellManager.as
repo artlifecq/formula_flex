@@ -85,12 +85,22 @@ package com.rpgGame.app.manager.shell
             this._funcs["addTrap".toLowerCase()] = this.addTrap;
             this._funcs["changeTrap".toLowerCase()] = this.changeTrap;
 			this._funcs["test".toLowerCase()] = this.test;
+			this._funcs["removeTest".toLowerCase()] = this.removeTest;
         }
 		
 		private function test(alpha:Number):void
 		{
+			MainRoleManager.actor.isHiding = true;
 			MainRoleManager.actor.blendMode = BlendMode.LAYER;
 			MainRoleManager.actor.alpha = alpha;
+			MainRoleManager.actor.avatar.castsShadows = false;
+		}
+		
+		private function removeTest():void
+		{
+			MainRoleManager.actor.isHiding = false;
+			MainRoleManager.actor.blendMode = BlendMode.NORMAL;
+			MainRoleManager.actor.avatar.castsShadows = true;
 		}
 		
 		private var arr:Vector.<ShapeArea3D> = new Vector.<ShapeArea3D>();	

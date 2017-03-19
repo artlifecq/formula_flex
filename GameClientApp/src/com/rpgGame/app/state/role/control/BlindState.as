@@ -2,6 +2,8 @@ package com.rpgGame.app.state.role.control
 {
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.type.RoleStateType;
+	
+	import flash.utils.getQualifiedClassName;
 
 	/**
 	 * 致盲
@@ -49,5 +51,11 @@ package com.rpgGame.app.state.role.control
 			}
 			super.leave();
 		}
+		
+		override public function get tribe():String
+		{
+			return getQualifiedClassName(BlindState);
+		}
+		
 	}
 }

@@ -4,6 +4,8 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
+	
+	import flash.utils.getQualifiedClassName;
 
 	/**
 	 * 场景角色残影状态
@@ -60,5 +62,11 @@ package com.rpgGame.app.state.role.control
 			setOnOff(false);
 			super.leave();
 		}
+		
+		override public function get tribe():String
+		{
+			return getQualifiedClassName(ShadowState);
+		}
+		
 	}
 }

@@ -120,7 +120,7 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.HAIR:
 				case RenderUnitType.WEAPON:
 				case RenderUnitType.DEPUTY_WEAPON:
-//					render.visible = true;
+					render.visible = true;
 					render.repeat = 1;
 					render.setStatus(statusType, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time, speedRatio);
 					if (isFreeze)
@@ -136,7 +136,7 @@ package com.rpgGame.app.state.role.action
 					break;
 				case RenderUnitType.WEAPON_EFFECT:
 				case RenderUnitType.DEPUTY_WEAPON_EFFECT:
-//					render.visible = true;
+					render.visible = true;
 					break;
 				case RenderUnitType.EFFECT:
 					render.visible = false;
