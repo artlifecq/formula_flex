@@ -9,6 +9,7 @@ package com.rpgGame.app.manager.shell
     import com.game.engine3D.scene.render.vo.RenderParamData3D;
     import com.game.engine3D.utils.MathUtil;
     import com.game.engine3D.vo.AreaMapData;
+    import com.game.engine3D.vo.BaseObj3D;
     import com.game.engine3D.vo.BaseRole;
     import com.game.mainCore.core.manager.LayerManager;
     import com.gameClient.log.GameLog;

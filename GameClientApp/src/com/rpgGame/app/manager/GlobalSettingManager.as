@@ -35,7 +35,7 @@ package com.rpgGame.app.manager
 				JumpState.SECOND_JUMP_PROBABILITY = setting.secondJumpProbability;
 				JumpRiseState.JUMP_HEIGHT = setting.jumpHeight;
 				JumpRiseState.SECOND_JUMP_HEIGHT = setting.secondJumpHeight;
-				RoleStateUtil.deathStateEffectType = setting.deathStateEffectType;
+//				RoleStateUtil.deathStateEffectType = setting.deathStateEffectType;
 				SceneRoleSelectManager.setOutlineData(setting.outlineEffectSize, setting.outlineEffectStrength, setting.outlineEffectQuality, setting.outlineEnemyColor, 
 					setting.outlineFriendColor, setting.outlineNeutralColor);
 			}
