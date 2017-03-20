@@ -44,7 +44,6 @@ package com.rpgGame.coreData.role
         }
         
         private function changeEffect() : void {
-            this._effect = null;
             if (0 == this._state) {
                 return;
             }
@@ -56,8 +55,8 @@ package com.rpgGame.coreData.role
                 ClientConfig.getEffect(res), 
                 res);
             var trap : RenderUnit3D = RenderUnit3D.create(rud, true);
-            trap.repeat = 0;
-            trap.data = this;
+            trap.repeat = 1;
+            trap.data = null;
             trap.setGroundXY(x, y);
             trap.rotationY = 0;
             trap.play(0);

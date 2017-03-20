@@ -24,6 +24,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.role.SceneRoleManager;
     import com.rpgGame.app.manager.scene.SceneManager;
+    import com.rpgGame.app.manager.task.TouJingManager;
     import com.rpgGame.app.scene.SceneRole;
     import com.rpgGame.app.sender.SceneSender;
     import com.rpgGame.app.state.role.control.HiddingStateReference;
@@ -54,6 +55,8 @@ package com.rpgGame.app.manager.shell
     import flash.geom.Point;
     import flash.geom.Vector3D;
     import flash.utils.Dictionary;
+    import flash.utils.getTimer;
+    import flash.utils.setTimeout;
     
     import away3d.containers.PlanarContainer3D;
     import away3d.core.math.Plane3D;
@@ -409,6 +412,9 @@ package com.rpgGame.app.manager.shell
         private function addTrap(id : int) : void {
             var data : TrapInfo = new TrapInfo(new long(), id, id, 0, MainRoleManager.actor.x, MainRoleManager.actor.z);
             SceneManager.addSceneObjToScene(data.normalEffect, true, false, false);
+            setTimeout(function () : void {
+                changeTrap(id, 1);
+            }, 456);
         }
         
         private function changeTrap(id : int, state : int) : void {
@@ -420,9 +426,55 @@ package com.rpgGame.app.manager.shell
             if (null == info || info.state == state) {
                 return;
             }
-            SceneManager.removeSceneObjFromScene(info.effect);
+            if (info.effect) {
+                info.effect.stop();
+                SceneManager.removeSceneObjFromScene(info.effect);
+            }
             info.state = state;
             SceneManager.addSceneObjToScene(info.effect, true, false, false);
+            setTimeout(function () : void {
+                            // remove
+                var unit : BaseObj3D = SceneManager.getSceneObjByID(id);
+                if (null == unit) {
+                    return;
+                }
+                if (unit is SceneRole) {
+                    var sceneRole : SceneRole = unit as SceneRole;
+                    if(sceneRole != null )
+                    {
+                        var data:MonsterData = sceneRole.data as MonsterData;
+                        if( data != null )
+                        {
+                            TouJingManager.setHuGuoSiEffect(data.modelID, sceneRole, false);
+                            var sceneClientRole:SceneRole = SceneManager.getSceneClientNpcByModelId( data.modelID);
+                            if( sceneClientRole != null )
+                            {
+                                sceneClientRole.visible = true;
+                                TouJingManager.setHuGuoSiEffect(data.modelID, sceneClientRole, true);						
+                            }
+                        }
+                    }
+                    SceneRoleManager.getInstance().removeSceneRoleById(id);
+                    return;
+                }
+                if (unit is RenderUnit3D){
+                    var trap : RenderUnit3D = unit as RenderUnit3D;
+                    if (null != trap && (trap.data is TrapInfo)) {
+                        GameLog.add("[onSceneRemoveObject]:" + getTimer());
+                        var trapInfo : TrapInfo = trap.data as TrapInfo;
+                        if (trapInfo.effect) {
+                            trapInfo.effect.stop();
+                        }
+                        if (trapInfo.normalEffect) {
+                            trapInfo.normalEffect.stop();
+                        }
+                        SceneManager.removeSceneObjFromScene(trapInfo.effect);
+                        SceneManager.removeSceneObjFromScene(trapInfo.normalEffect);
+                    }
+                }
+                SceneManager.removeSceneObjFromScene(unit);
+            }, 376);
+
         }
       
         private function handler(command : String, ...params) : Boolean {
