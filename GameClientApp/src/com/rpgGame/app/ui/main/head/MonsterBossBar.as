@@ -89,7 +89,9 @@ package com.rpgGame.app.ui.main.head
 				allSubHp-=firstBlood;
 				leftHp=maxBlood-allSubHp%maxBlood;
 			}
-			_bloodBar.scaleX=leftHp/maxBlood;
+			var scale:int=leftHp/maxBlood;
+			scale=scale>1?1:scale;
+			_bloodBar.scaleX=scale;
 		}
 	}
 }
