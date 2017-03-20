@@ -63,6 +63,8 @@ package com.rpgGame.app.ui.main.head
 			}else{
 				firstBlood=_monsterData.totalStat.life%_monsterCfg.q_per_blood;
 			}
+			
+			changeHp(_monsterData);
 		}
 		
 		override protected function updateAttInfo():void

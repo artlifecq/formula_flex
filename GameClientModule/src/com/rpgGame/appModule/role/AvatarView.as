@@ -418,7 +418,8 @@ package com.rpgGame.appModule.role
 			
 			_skin.txt_loveName.text=_roleData.loveName.length!=0?_roleData.loveName:"无";
 			_skin.Num_zhandouli.number=_roleData.totalStat.getStatValue(CharAttributeType.FIGHTING);
-			_skin.Num_zhandouli.x=128+_skin.Num_zhandouli.width/2;
+			_skin.Num_zhandouli.number=1000;
+			_skin.Num_zhandouli.x=128+(135-_skin.Num_zhandouli.width)/2;
 		}
 		
 		private function updateRole():void
