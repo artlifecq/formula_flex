@@ -51,8 +51,10 @@ package com.rpgGame.appModule.role
 	import org.mokylin.skin.app.beibao.juese_Skin;
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 	
+	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.events.Event;
+	import starling.events.TouchEvent;
 
 	/**
 	 *背包部分 
@@ -294,6 +296,7 @@ package com.rpgGame.appModule.role
 			grid.onTouchEndCallBack = onTouchGrid;
 			grid.checkDrag=checkDrag;
 			grid.setQualityImageIconPoint(1,1);
+			
 			return render;
 		}
 		
@@ -364,7 +367,7 @@ package com.rpgGame.appModule.role
 				clickTween.kill();
 				clickTween=null;
 			}
-			
+			Menu.GetInstance().hide();
 			clickTween=TweenLite.delayedCall(0.2,showMenu,[grid]);
 		}
 		

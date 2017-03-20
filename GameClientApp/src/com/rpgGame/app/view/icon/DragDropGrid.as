@@ -21,6 +21,7 @@ package com.rpgGame.app.view.icon
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.events.Touch;
+	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	
 	import utils.KeyboardMananger;
