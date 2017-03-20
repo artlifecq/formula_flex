@@ -157,7 +157,7 @@ package com.rpgGame.app.fight.spell
 			{
 				deadLaunchHeight = 0;
 			}
-			var canDeadBeat : Boolean = (target.type == SceneCharType.MONSTER && !(target.data as MonsterData).immuneDeadBeat && prob < (deadBeatProbability + deadLaunchProbability));
+			var canDeadBeat : Boolean = false;//(target.type == SceneCharType.MONSTER && !(target.data as MonsterData).immuneDeadBeat && prob < (deadBeatProbability + deadLaunchProbability));
 			if (canDeadBeat)
 			{
 				var atkorPos : Point = (hortVo.atkor && hortVo.atkor.usable) ? new Point(hortVo.atkor.x, hortVo.atkor.z) : hortVo.atkorPos;
