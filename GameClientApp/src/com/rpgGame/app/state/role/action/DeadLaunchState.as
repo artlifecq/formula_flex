@@ -144,7 +144,9 @@ package com.rpgGame.app.state.role.action
 				_corrodeTween = TweenLite.to(_valueObj, 2, {alpha: 0, onComplete: stopCorrode, onUpdate: function() : void
 				{
 					if (_corrodeMethodData)
+					{
 						CorrodeMethod(_corrodeMethodData.method).corrodeAlpha = 1 - _valueObj.alpha;
+					}
 				}, ease: Linear.easeNone});
 			}
 			else if (RoleStateUtil.deathStateEffectType == RoleStateUtil.DEATH_STATE_EFFECT_COLOR)
