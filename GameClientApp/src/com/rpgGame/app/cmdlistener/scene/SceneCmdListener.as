@@ -85,6 +85,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	import flash.utils.ByteArray;
+	import flash.utils.getTimer;
 	
 	import app.cmd.NpcModuleMessages;
 	import app.cmd.SceneModuleMessages;
@@ -211,7 +212,10 @@ package com.rpgGame.app.cmdlistener.scene
             if (null == info || info.state == msg.state) {
                 return;
             }
-            SceneManager.removeSceneObjFromScene(info.effect);
+            if (info.effect) {
+                info.effect.stop();
+                SceneManager.removeSceneObjFromScene(info.effect);
+            }
             info.state = msg.state;
             SceneManager.addSceneObjToScene(info.effect, true, false, false);
         }
@@ -566,8 +570,15 @@ package com.rpgGame.app.cmdlistener.scene
                 var trap : RenderUnit3D = unit as RenderUnit3D;
                 if (null != trap && (trap.data is TrapInfo)) {
                     var trapInfo : TrapInfo = trap.data as TrapInfo;
+                    if (trapInfo.effect) {
+                        trapInfo.effect.stop();
+                    }
+                    if (trapInfo.normalEffect) {
+                        trapInfo.normalEffect.stop();
+                    }
                     SceneManager.removeSceneObjFromScene(trapInfo.effect);
                     SceneManager.removeSceneObjFromScene(trapInfo.normalEffect);
+                    return;
                 }
             }
             SceneManager.removeSceneObjFromScene(unit);
