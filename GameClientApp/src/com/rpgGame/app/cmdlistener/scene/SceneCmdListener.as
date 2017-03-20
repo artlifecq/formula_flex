@@ -849,7 +849,6 @@ package com.rpgGame.app.cmdlistener.scene
             
             CharAttributeManager.setAttributeValue(roleData, CharAttributeType.HP, msg.hp);
 			
-			role.mouseEnable = true;
 			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
 //			SceneManager.removeSceneObjFromScene(role);
 //			role = SceneRoleManager.getInstance().createHero(roleData as HeroData);
@@ -864,6 +863,10 @@ package com.rpgGame.app.cmdlistener.scene
                 ReliveManager.autoHideRelive();
 				EventManager.dispatchEvent(MainPlayerEvent.SELFHP_CHANGE);
             }
+			else
+			{
+				role.mouseEnable = true;
+			}
         }
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

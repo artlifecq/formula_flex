@@ -136,11 +136,11 @@ package com.rpgGame.app.state.role.action
 								{
 									GlobalTexture.addTexture(ClientConfig.getDynTexture("corrode"), onCorrodeTextureComplete);
 								}
-								_corrodeTween = TweenLite.delayedCall(totalFrameTm * 0.001, onRoleDiedDelay);
+								TweenLite.delayedCall(totalFrameTm * 0.001, onRoleDiedDelay);
 							}
 							else
 							{
-								_corrodeTween = TweenLite.delayedCall((totalFrameTm + 2000) * 0.001, onRoleDiedDelay);
+								TweenLite.delayedCall((totalFrameTm + 2000) * 0.001, onRoleDiedDelay);
 							}
 						}
 					}
@@ -186,6 +186,10 @@ package com.rpgGame.app.state.role.action
 			{
 				_corrodeTween.kill();
 				_corrodeTween = null;
+			}
+			if (!_machine || _machine.isDisposed)
+			{
+				return;
 			}
 			var role : SceneRole = _machine.owner as SceneRole;
 			if (RoleStateUtil.deathStateEffectType == RoleStateUtil.DEATH_STATE_EFFECT_CORRODE)
