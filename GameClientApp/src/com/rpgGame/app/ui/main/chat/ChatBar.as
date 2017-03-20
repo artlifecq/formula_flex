@@ -618,8 +618,8 @@ package com.rpgGame.app.ui.main.chat {
         private function sendMsg() : void 
 		{
 			//死亡面板测试
-			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_CRIT,5000);
-			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_NORMAL,8000);
+//			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_CRIT,5000);
+//			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_NORMAL,8000);
 			
 			
 			if("" == this._inputText.text )
