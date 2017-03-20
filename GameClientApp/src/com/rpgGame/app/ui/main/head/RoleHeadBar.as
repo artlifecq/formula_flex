@@ -133,9 +133,9 @@ package com.rpgGame.app.ui.main.head
 		{
 			var maxHp:int=_roleData.totalStat.life;
 			var hp:int=_roleData.totalStat.hp;
-			var scale:Number=hp/maxHp;
-			scale=scale>1?1:scale;
-			_skin.role_xuecao.scaleX=scale;
+			var scaleX:Number=hp/maxHp;
+			scaleX=scaleX>1?1:scaleX;
+			_skin.role_xuecao.scaleX=scaleX;
 			this._skin.lbl_num.text=hp+"/"+maxHp;
 		}
 		

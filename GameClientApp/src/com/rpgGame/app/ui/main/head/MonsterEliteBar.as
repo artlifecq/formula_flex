@@ -25,9 +25,9 @@ package com.rpgGame.app.ui.main.head
 				return;
 			}
 			super.changeHp(data);
-			var scale:Number=data.totalStat.hp/data.totalStat.life;
-			scale=scale>1?1:scale;
-			_skin.xuetiao_hong.scaleX=scale;
+			var scaleX:Number=data.totalStat.hp/data.totalStat.life;
+			scaleX=scaleX>1?1:scaleX;
+			_skin.xuetiao_hong.scaleX=scaleX;
 		}
 	}
 }
