@@ -849,7 +849,9 @@ package com.rpgGame.app.cmdlistener.scene
             
             CharAttributeManager.setAttributeValue(roleData, CharAttributeType.HP, msg.hp);
 			
-			role = SceneRoleManager.getInstance().createHero(roleData as HeroData);
+			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
+//			SceneManager.removeSceneObjFromScene(role);
+//			role = SceneRoleManager.getInstance().createHero(roleData as HeroData);
 			
 			//to do 给这个人播放一个复活特效 
 			SpellAnimationHelper.addTargetEffect(role, 

@@ -133,7 +133,9 @@ package com.rpgGame.app.state.role.action
 							if (RoleStateUtil.deathStateEffectType == RoleStateUtil.DEATH_STATE_EFFECT_CORRODE)
 							{
 								if (!_corrodeMethodData)
+								{
 									GlobalTexture.addTexture(ClientConfig.getDynTexture("corrode"), onCorrodeTextureComplete);
+								}
 								_corrodeTween = TweenLite.delayedCall(totalFrameTm * 0.001, onRoleDiedDelay);
 							}
 							else
@@ -143,7 +145,9 @@ package com.rpgGame.app.state.role.action
 						}
 					}
 					else
+					{
 						stopCorrode();
+					}
 				}
 			}
 		}
