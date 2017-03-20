@@ -52,7 +52,7 @@ package com.game.engine3D.state
 		 * @param ref 状态引用
 		 * @param force 是否强制，自定义支持
 		 * @param allowQueue 允许队列，不能通过的状态是否置入队列
-		 * @param dumpTypes 倾出类型，如果队列中有该类型的状态则会优先执行
+		 * @param dumpTypes 倾出类型，如果队列中有该类型的状态则会优先执行   （dumpTypes与_blockQueue配合使用）
 		 *
 		 */
 		public function transition(type : int, ref : StateReference = null, force : Boolean = false, allowQueue : Boolean = false, dumpTypes : Array = null) : Boolean
@@ -87,6 +87,8 @@ package com.game.engine3D.state
 					}
 				}
 			}
+			
+			//如果以上没有优先从_blockQueue中取得的状态的话，则新建一个状态，根据传入的type值，来创建对应的state实例
 			if (!transState && type > 0)
 			{
 				transState = extractState(type);
@@ -98,7 +100,11 @@ package com.game.engine3D.state
 				var passEnter : Boolean = false;
 				var currState : IState = _currStates[transState.tribe];
 				currState = currState ? (currState.isDisposed ? null : currState) : null;
-				if (!currState || (currState != transState && currState.tribe == transState.tribe)) //互斥种群
+				
+				//如果currState为null  或者 currState与transState不是一个实例对象且他们的父类是一样的话  ------这样，就要执行2个state的交替工作，
+				//先执行currState相关的退出流程，中间交叉着transState的进入流程。
+				//然后才是transState本身的执行流程
+				if (!currState || (currState != transState && currState.tribe == transState.tribe)) 
 				{
 					if (_blockQueue[type])
 					{

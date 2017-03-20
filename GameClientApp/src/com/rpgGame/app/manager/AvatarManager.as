@@ -280,7 +280,7 @@ package com.rpgGame.app.manager
 					ru.setErrorCallBack(partErrorCallBack, role);
 					if (role.isMainChar)
 					{
-						ru.entityGlass = true;
+//						ru.entityGlass = true;
 					}
 					else
 					{
@@ -408,9 +408,13 @@ package com.rpgGame.app.manager
 					ru.setAddedCallBack(partAddedCallBack, role);
 					ru.setErrorCallBack(partErrorCallBack, role);
 					if (role.isMainChar)
-						ru.entityGlass = true;
+					{
+//						ru.entityGlass = true;
+					}
 					else
+					{
 						ru.entityGlass = false;
+					}
 					ru.useLight = true;
 					ru.useFog = true;
 					if (role.type != SceneCharType.DUMMY)
@@ -450,9 +454,13 @@ package com.rpgGame.app.manager
 					ru.setAddedCallBack(partAddedCallBack, role);
 					ru.setErrorCallBack(partErrorCallBack, role);
 					if (role.isMainChar)
-						ru.entityGlass = true;
+					{
+//						ru.entityGlass = true;
+					}
 					else
+					{
 						ru.entityGlass = false;
+					}
 					ru.useLight = true;
 					ru.useFog = true;
 					if (role.type != SceneCharType.DUMMY)
@@ -561,9 +569,13 @@ package com.rpgGame.app.manager
 					ru.setAddedCallBack(partAddedCallBack, role);
 					ru.setErrorCallBack(partErrorCallBack, role);
 					if (role.isMainChar)
-						ru.entityGlass = true;
+					{
+//						ru.entityGlass = true;
+					}
 					else
+					{
 						ru.entityGlass = false;
+					}
 					ru.useLight = true;
 					ru.useFog = true;
 					if (role.type != SceneCharType.DUMMY)
@@ -672,9 +684,13 @@ package com.rpgGame.app.manager
 				ru.setAddedCallBack(partAddedCallBack, role);
 				ru.setErrorCallBack(partErrorCallBack, role);
 				if (role.isMainChar)
-					ru.entityGlass = true;
+				{
+//					ru.entityGlass = true;
+				}
 				else
+				{
 					ru.entityGlass = false;
+				}
 				ru.useLight = true;
 				ru.useFog = true;
 				if (role.type != SceneCharType.DUMMY)

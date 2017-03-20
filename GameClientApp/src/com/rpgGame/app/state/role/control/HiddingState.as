@@ -3,6 +3,7 @@ package com.rpgGame.app.state.role.control
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.vo.BaseRole;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.display.BlendMode;
@@ -50,6 +51,11 @@ package com.rpgGame.app.state.role.control
 			role.isHiding = false;
 			render.blendMode = BlendMode.NORMAL;
 			render.alpha = 1;
+			render.castsShadows = true;
+			if(render.type == RenderUnitType.HAIR)
+			{
+				render.visible = true;
+			}
 		}
 		
 		private function eachUnVisible(role : BaseRole, render : RenderUnit3D) : void
@@ -57,6 +63,11 @@ package com.rpgGame.app.state.role.control
 			role.isHiding = true;
 			render.blendMode = BlendMode.LAYER;
 			render.alpha = 0;
+			render.castsShadows = false;
+			if(render.type == RenderUnitType.HAIR)
+			{
+				render.visible = false;
+			}
 		}
 		
 		override public function afterLeave() : void

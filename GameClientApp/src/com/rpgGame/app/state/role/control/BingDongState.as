@@ -6,6 +6,8 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.type.RoleStateType;
+	
+	import flash.utils.getQualifiedClassName;
 
 	/**
 	 *
@@ -40,7 +42,13 @@ package com.rpgGame.app.state.role.control
 				}
 			}
 		}
-
+		
+		override public function get tribe():String
+		{
+			return getQualifiedClassName(BingDongState);
+		}
+		
+		
 		private function eachSetBingDongTexture(role : BaseRole, render : RenderUnit3D) : void
 		{
 			render.setIndependentTexture(ClientConfig.getDynTexture("bingdongbuff"));

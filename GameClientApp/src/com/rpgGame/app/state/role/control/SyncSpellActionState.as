@@ -6,6 +6,8 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.type.RoleStateType;
+	
+	import flash.utils.getQualifiedClassName;
 
 	public class SyncSpellActionState extends BuffState
 	{
@@ -55,5 +57,11 @@ package com.rpgGame.app.state.role.control
 			super.leave();
 			
 		}
+		
+		override public function get tribe():String
+		{
+			return getQualifiedClassName(SyncSpellActionState);
+		}
+		
 	}
 }

@@ -484,6 +484,7 @@ package com.game.engine3D.scene.render
 			ru.useLight = _useLight;
 			ru.isInViewDistance = _isInViewDistance;
 			ru.mouseEnable = rpd.mouseEnable && _mouseEnable;
+			ru.blendMode = _blendMode;
 			ru.alpha = _alpha;
 			ru.zOffset = _zOffset;
 			ru.needRun = false;
@@ -880,6 +881,17 @@ package com.game.engine3D.scene.render
 			//检查换装内
 			for each (var ru : RenderUnit3D in _renderUnitMap)
 			{
+				///////////////////////////////////////////////////////////////////////
+				//
+				// 以下为调试代码
+				//
+				//////////////////////////////////////////////////////////////////////
+//				if(ru.type == "hair")
+//				{
+//					trace(1);
+//				}
+				//////////////////////////////////////////////////////////////////////
+//				ru.blendMode = this.blendMode;
 				var funcArgs : Array;
 				if (args)
 					funcArgs = args.concat(ru);

@@ -64,8 +64,8 @@ package com.rpgGame.app.controller.keyboard
 						AppManager.showApp(AppConstant.TASK_PANEL);
 					break;
 				case "8": //F 好友
-					if (!ClientConfig.isBanShu)
-						AppManager.showApp(AppConstant.FRIEND_PANEL);
+//					if (!ClientConfig.isBanShu)
+//						AppManager.showApp(AppConstant.FRIEND_PANEL);
 					break;
 				case "9": //P 队伍
 					if (!ClientConfig.isBanShu)

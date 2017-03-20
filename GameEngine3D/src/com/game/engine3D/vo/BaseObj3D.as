@@ -211,6 +211,7 @@ package com.game.engine3D.vo
 			_alpha = value;
 		}
 		
+		//这里的设置其实只是一个借口的问题，并没有什么实际用途
 		protected var _blendMode:String = BlendMode.NORMAL;
 		
 		public function get blendMode():String
