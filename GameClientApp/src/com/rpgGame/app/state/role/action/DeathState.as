@@ -321,7 +321,10 @@ package com.rpgGame.app.state.role.action
 			if (_machine && !_machine.isDisposed)
 			{
 				var role : SceneRole = _machine.owner as SceneRole;
-//				SceneRoleManager.getInstance().removeSceneRole(role);
+				if(role.type != SceneCharType.PLAYER)
+				{
+					SceneRoleManager.getInstance().removeSceneRole(role);
+				}
 			}
 		}
 
