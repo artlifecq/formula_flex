@@ -85,6 +85,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	import flash.utils.ByteArray;
+	import flash.utils.getTimer;
 	
 	import app.cmd.NpcModuleMessages;
 	import app.cmd.SceneModuleMessages;
@@ -195,8 +196,6 @@ package com.rpgGame.app.cmdlistener.scene
 			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
 			var posX : uint = msg.position.x;
 			var posY : uint = msg.position.y;
-			var walkMoveRef : WalkMoveStateReference = MainRoleManager.actor.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
-			walkMoveRef.isServerStop = true;
 			var stopWalkRef : StopWalkMoveStateReference = MainRoleManager.actor.stateMachine.getReference(StopWalkMoveStateReference) as StopWalkMoveStateReference;
 			stopWalkRef.setParams(posX, posY);
 			role.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, stopWalkRef);
@@ -213,7 +212,10 @@ package com.rpgGame.app.cmdlistener.scene
             if (null == info || info.state == msg.state) {
                 return;
             }
-            SceneManager.removeSceneObjFromScene(info.effect);
+            if (info.effect) {
+                info.effect.stop();
+                SceneManager.removeSceneObjFromScene(info.effect);
+            }
             info.state = msg.state;
             SceneManager.addSceneObjToScene(info.effect, true, false, false);
         }
@@ -568,8 +570,15 @@ package com.rpgGame.app.cmdlistener.scene
                 var trap : RenderUnit3D = unit as RenderUnit3D;
                 if (null != trap && (trap.data is TrapInfo)) {
                     var trapInfo : TrapInfo = trap.data as TrapInfo;
+                    if (trapInfo.effect) {
+                        trapInfo.effect.stop();
+                    }
+                    if (trapInfo.normalEffect) {
+                        trapInfo.normalEffect.stop();
+                    }
                     SceneManager.removeSceneObjFromScene(trapInfo.effect);
                     SceneManager.removeSceneObjFromScene(trapInfo.normalEffect);
+                    return;
                 }
             }
             SceneManager.removeSceneObjFromScene(unit);
@@ -841,15 +850,12 @@ package com.rpgGame.app.cmdlistener.scene
             CharAttributeManager.setAttributeValue(roleData, CharAttributeType.HP, msg.hp);
 			
 			role = SceneRoleManager.getInstance().createHero(roleData as HeroData);
-            
-//            role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
 			
 			//to do 给这个人播放一个复活特效 
 			SpellAnimationHelper.addTargetEffect(role, 
 				RenderUnitID.LEVEL, 
 				RenderUnitType.LEVEL, 
 				EffectUrl.RELIVE_NORMAL);
-            
             if(roleData.id == MainRoleManager.actorID)
             {
                 ReliveManager.autoHideRelive();
