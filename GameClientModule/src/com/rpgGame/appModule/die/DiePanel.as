@@ -137,7 +137,7 @@ package com.rpgGame.appModule.die
 						SceneSender.reqReviveLocalRole(FUHUO_ID,1);
 						this.hide();
 					}else{
-						var alertSet:AlertSetInfo=new AlertSetInfo(LangQ_BackPack.ITEM_dropItemToScene_3);
+						var alertSet:AlertSetInfo=new AlertSetInfo(LangQ_BackPack.ITEM_less_1);
 						GameAlert.showAlert(alertSet,alertToBuy);
 					}
 					break;
@@ -175,7 +175,7 @@ package com.rpgGame.appModule.die
 		private function showByFuHuo():void
 		{
 			// TODO Auto Generated method stub
-			this.hide();
+//			this.hide();
 		}
 		
 		private function updateSeeItem(isNext:Boolean,showAni:Boolean=true):void
