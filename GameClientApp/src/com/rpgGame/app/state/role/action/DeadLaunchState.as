@@ -271,12 +271,14 @@ package com.rpgGame.app.state.role.action
 							if (RoleStateUtil.deathStateEffectType == RoleStateUtil.DEATH_STATE_EFFECT_CORRODE)
 							{
 								if (!_corrodeMethodData)
+								{
 									GlobalTexture.addTexture(ClientConfig.getDynTexture("corrode"), onCorrodeTextureComplete);
-								_corrodeTween = TweenLite.delayedCall(totalTime * 0.001, onRoleDiedDelay);
+								}
+								TweenLite.delayedCall(totalTime * 0.001, onRoleDiedDelay);
 							}
 							else
 							{
-								_corrodeTween = TweenLite.delayedCall((totalTime + 2000) * 0.001, onRoleDiedDelay);
+								TweenLite.delayedCall((totalTime + 2000) * 0.001, onRoleDiedDelay);
 							}
 
 							ref = _machine.getReference(DeadLaunchMoveStateReference) as DeadLaunchMoveStateReference;
