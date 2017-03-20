@@ -205,6 +205,10 @@ package com.rpgGame.app.manager.fight
 				case EnumHurtType.SPELL_HURT_TYPE_JUMP_SHIELD: //跳闪
 					break;
 				case EnumHurtType.SPELL_HURT_TYPE_INVINCIBLE: //无敌
+					typeRes = "";
+					scaleAgo = 1.5;
+					scaleLater = 0.5;
+					numberType = NUMBER_NPC_HIT;
 					break;
 				case EnumHurtType.SPELL_HURT_TYPE_ABSORB: //目标吸收伤害
 					break;
@@ -213,6 +217,8 @@ package com.rpgGame.app.manager.fight
 				case EnumHurtType.SPELL_HURT_TYPE_MAGICAL_IMMUNE: //法术免疫
 					break;
 				case EnumHurtType.SPELL_HURT_TYPE_REBOUND: //反弹
+					break;
+				default:
 					break;
 			}
 

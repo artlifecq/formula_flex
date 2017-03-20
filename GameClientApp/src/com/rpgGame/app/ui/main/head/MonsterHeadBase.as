@@ -48,6 +48,7 @@ package com.rpgGame.app.ui.main.head
 		protected function initEvent():void
 		{
 			EventManager.addEvent(MainPlayerEvent.NOWHP_CHANGE, changeHp);
+			EventManager.addEvent(MainPlayerEvent.MAXHP_CHANGE, changeHp);
 		}
 		
 		protected function changeHp(data:RoleData):void

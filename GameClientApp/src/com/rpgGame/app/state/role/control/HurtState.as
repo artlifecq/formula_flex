@@ -24,8 +24,6 @@ package com.rpgGame.app.state.role.control
 	{
 		/** 伤害状态引用 **/
 		private var _stateReference : HurtStateReference;
-		/** 伤害延迟 TweenLite.delayedCall **/
-		private var _delayHurtTws : Dictionary;
 		private var _count : int;
 		private var _effectTween : TweenLite;
 
@@ -33,7 +31,6 @@ package com.rpgGame.app.state.role.control
 		{
 			super(RoleStateType.CONTROL_HURT);
 			_count = 0;
-			_delayHurtTws = new Dictionary();
 		}
 
 		override public function execute() : void
@@ -73,9 +70,8 @@ package com.rpgGame.app.state.role.control
 				}
 				_count++;
 
-				var tw : TweenLite = TweenLite.delayedCall(0.3 * i, showSingleHurt, [_count, hurtVo, hurtType, hurtAmount]);
+				showSingleHurt(_count, hurtVo, hurtType, hurtAmount);//立马飘字
 
-				_delayHurtTws[_count] = tw;
 				i++;
 			}
 		}
@@ -107,27 +103,12 @@ package com.rpgGame.app.state.role.control
 
 		private function showSingleHurt(key : int, hortVo:FightHurtResult, hurtType : uint, hurtAmount : int) : void
 		{
-			var tw : TweenLite = _delayHurtTws[key];
-			tw.kill();
-			tw = null;
-			_delayHurtTws[key] = null;
-			delete _delayHurtTws[key];
-
 			playEffect();
 			SpellHitHelper.showSingleHurt(hortVo, hortVo.atkorID, hortVo.targetID, hurtType, hurtAmount);
 		}
 
 		private function clearDelayHurtTws() : void
 		{
-			_count = 0;
-			for (var key : * in _delayHurtTws)
-			{
-				var tw : TweenLite = _delayHurtTws[key];
-				tw.kill();
-				tw = null;
-				_delayHurtTws[key] = null;
-				delete _delayHurtTws[key];
-			}
 			_stateReference = null;
 		}
 

@@ -10,6 +10,7 @@ package com.rpgGame.app.display2D
 	
 	import starling.display.Image;
 	import starling.display.Sprite;
+	import starling.events.Event;
 	import starling.textures.IStarlingTexture;
 	
 	/**
@@ -51,7 +52,6 @@ package com.rpgGame.app.display2D
 		private var _typeRes:String = "";
 		/** 数字类型 **/
 		private var _numberRes:String;
-		/** 值(可以是数字,也可以是字符串) **/
 		private var _value:*=0;
 		/** 特殊类型会有组合(例如暴击...) **/
 		private var _specialType:String;
@@ -71,6 +71,13 @@ package com.rpgGame.app.display2D
 			reSet([  $typeRes, $numberRes, $value, $specialType,_specialOffsetPos]);
 		}
 		
+		
+		/** 值(可以是数字,也可以是字符串) **/
+		public function get value():*
+		{
+			return _value;
+		}
+
 		/**
 		 * 创建一个AttackFace
 		 * @param $typeRes 指定类型的URL
