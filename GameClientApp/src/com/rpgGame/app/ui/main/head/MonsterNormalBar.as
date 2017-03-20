@@ -1,5 +1,7 @@
 package com.rpgGame.app.ui.main.head
 {
+	import com.rpgGame.coreData.role.RoleData;
+	
 	import org.mokylin.skin.mainui.head.Head_small;
 	
 	/**
@@ -15,6 +17,15 @@ package com.rpgGame.app.ui.main.head
 		{
 			_skin=new Head_small();
 			super(_skin);
+		}
+		
+		override protected function changeHp(data:RoleData):void
+		{
+			if(data.id!=_monsterData.id){
+				return;
+			}
+			super.changeHp(data);
+			
 		}
 	}
 }
