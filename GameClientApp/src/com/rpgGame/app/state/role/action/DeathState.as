@@ -14,6 +14,8 @@ package com.rpgGame.app.state.role.action
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
 	import com.rpgGame.coreData.role.MonsterData;
+	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleActionType;
@@ -321,7 +323,10 @@ package com.rpgGame.app.state.role.action
 			if (_machine && !_machine.isDisposed)
 			{
 				var role : SceneRole = _machine.owner as SceneRole;
-				SceneRoleManager.getInstance().removeSceneRole(role);
+				if(role.type != SceneCharType.PLAYER)
+				{
+					SceneRoleManager.getInstance().removeSceneRole(role);
+				}
 			}
 		}
 

@@ -831,15 +831,18 @@ package com.rpgGame.app.cmdlistener.scene
 			SceneRoleManager.getInstance().createDropGoods(dropGoodsData)
 		}
         
-        private function onResReviveSuccessMessage(msg : ResReviveSuccessMessage) : void {
+        private function onResReviveSuccessMessage(msg : ResReviveSuccessMessage) : void 
+		{
             var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
             if (!role)
                 return;
             var roleData : RoleData = role.data as RoleData;
             
             CharAttributeManager.setAttributeValue(roleData, CharAttributeType.HP, msg.hp);
+			
+			role = SceneRoleManager.getInstance().createHero(roleData as HeroData);
             
-            role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
+//            role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
 			
 			//to do 给这个人播放一个复活特效 
 			SpellAnimationHelper.addTargetEffect(role, 
