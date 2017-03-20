@@ -2,6 +2,9 @@ package com.rpgGame.app.state.role.control
 {
 	import com.rpgGame.core.state.role.control.ControlState;
 	
+	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;
+	
 	import gs.TweenLite;
 
 	/**
@@ -44,7 +47,13 @@ package com.rpgGame.app.state.role.control
 				}
 			}
 		}
-
+		
+		override public function get tribe():String
+		{
+			return getQualifiedClassName(BuffState);
+		}
+		
+		
 		protected function onRemoveBuff() : void
 		{
 			removeSelf();

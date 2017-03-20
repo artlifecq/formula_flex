@@ -1,6 +1,8 @@
 package com.rpgGame.app.state.role.control
 {
 	import com.rpgGame.coreData.type.RoleStateType;
+	
+	import flash.utils.getQualifiedClassName;
 
 	/**
 	 *
@@ -32,5 +34,11 @@ package com.rpgGame.app.state.role.control
 				}
 			}
 		}
+		
+		override public function get tribe():String
+		{
+			return getQualifiedClassName(UnmovableState);
+		}
+		
 	}
 }

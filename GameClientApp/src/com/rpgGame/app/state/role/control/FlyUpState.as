@@ -10,6 +10,8 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
+	import flash.utils.getQualifiedClassName;
+	
 	import away3d.animators.transitions.CrossfadeTransition;
 	
 	import gs.TweenLite;
@@ -43,7 +45,7 @@ package com.rpgGame.app.state.role.control
 				_stateReference = _ref as FlyUpStateReference;
 				
 //				FLY_HEIGHT = Number(_stateReference.buffData.clientData.h);
-				hitTime = 200;
+				hitTime = Number(_stateReference.buffData.clientData.hit);
 				upTime = Number(_stateReference.buffData.clientData.up);
 				flyTime = Number(_stateReference.buffData.clientData.stay);
 				fallTime = Number(_stateReference.buffData.clientData.down);
@@ -51,26 +53,34 @@ package com.rpgGame.app.state.role.control
 				var startTime:Number = _stateReference.buffData.totalTime - _stateReference.buffData.disappearTime;
 				if(startTime>0)
 				{
-					if(startTime > upTime + flyTime + fallTime)
+					if(startTime > upTime + flyTime + fallTime + hitTime)
 					{
+						hitTime = 0;
 						upTime = 0;
 						flyTime = 0;
 						fallTime = 0;
 					}
-					else if(startTime > upTime + flyTime)
+					else if(startTime > upTime + flyTime + hitTime)
 					{
+						hitTime = 0;
 						upTime = 0;
 						flyTime = 0;
-						fallTime = upTime + flyTime + fallTime - startTime;
+						fallTime = hitTime + upTime + flyTime + fallTime - startTime;
 					}
-					else if(startTime > upTime)
+					else if(startTime > upTime + hitTime)
 					{
+						hitTime = 0;
 						upTime = 0;
-						flyTime = upTime + flyTime - startTime;
+						flyTime = hitTime + upTime + flyTime - startTime;
+					}
+					else if(startTime > hitTime)
+					{
+						hitTime = 0;
+						upTime = upTime + hitTime - startTime;
 					}
 					else
 					{
-						upTime = upTime - startTime;
+						hitTime = hitTime - startTime;
 					}
 				}
 				
@@ -294,5 +304,11 @@ package com.rpgGame.app.state.role.control
 			_stateReference = null;
 			super.dispose();
 		}
+		
+		override public function get tribe():String
+		{
+			return getQualifiedClassName(FlyUpState);
+		}
+		
 	}
 }

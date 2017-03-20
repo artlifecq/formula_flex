@@ -142,7 +142,7 @@ package com.rpgGame.app.manager
 			{
 				spellData = spellList[i];
 				skillLastCd = CDDataManager.getCdLostTm(getSkillKey(spellData.q_skillID));
-				if (skillLastCd < curGcd)1
+				if (skillLastCd < curGcd)
 				{
 					CDDataManager.playCD(getSkillKey(spellData.q_skillID), curGcd, 0);
 				}

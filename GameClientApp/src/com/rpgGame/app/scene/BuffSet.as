@@ -100,7 +100,7 @@ package com.rpgGame.app.scene
 					}
 				}
 			}
-			_buffEffectTweenMap.add(buffData.cfgId,buffData.cfgId);
+			_buffEffectTweenMap.add(buffData.cfgId,buffData.buffId);
 		}
 		
 		/**
@@ -135,7 +135,7 @@ package com.rpgGame.app.scene
 			var buffExist : Boolean = false;
 			for each (var currData : BuffData in buffList)
 			{
-				if (currData.cfgId == buffData.cfgId)
+				if (currData.buffId == buffData.buffId)
 				{
 					buffExist = true;
 					break;
@@ -145,7 +145,6 @@ package com.rpgGame.app.scene
 			{
 				buffList.push(buffData);
 			}
-            handlerRoleState(buffData);
 			addBuffEffect(buffData);
 			handlerRoleState(buffData);
 			EventManager.dispatchEvent(BuffEvent.ADD_BUFF, buffData);
@@ -176,7 +175,7 @@ package com.rpgGame.app.scene
 				}
 			}
 			
-			EventManager.dispatchEvent(BuffEvent.REMOVE_BUFF, _role.id, currData.cfgId);
+			EventManager.dispatchEvent(BuffEvent.REMOVE_BUFF, _role.id, currData.buffId);
 		}	
 		
 		/**
@@ -184,13 +183,13 @@ package com.rpgGame.app.scene
 		 * @param stateId
 		 * 
 		 */		
-		private function removeBuffEffect(stateId : int) : void
+		private function removeBuffEffect(cfgId : int) : void
 		{
 			if (_role)
 			{
-				_role.avatar.removeRenderUnitsByType(RenderUnitType.BUFF + stateId);
+				_role.avatar.removeRenderUnitsByType(RenderUnitType.BUFF + cfgId);
 			}
-			_buffEffectTweenMap.remove(stateId);
+			_buffEffectTweenMap.remove(cfgId);
 		}
 		
 		public function BuffSet(role : SceneRole)
@@ -207,11 +206,11 @@ package com.rpgGame.app.scene
 		private function clear() : void
 		{
 			var keys : Array = _buffEffectTweenMap.keys();
-			for each (var stateId : * in keys)
+			for each (var cfgId : * in keys)
 			{
 				if (_role)
 				{
-					_role.avatar.removeRenderUnitsByType(RenderUnitType.BUFF + stateId);
+					_role.avatar.removeRenderUnitsByType(RenderUnitType.BUFF + cfgId);
 				}
 			}
 			_buffEffectTweenMap.clear();

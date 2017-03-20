@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.main
 {
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.main.chat.ChatBar;
@@ -37,6 +38,7 @@ package com.rpgGame.app.ui.main
 	import app.message.MonsterDataProto.MonsterType;
 	
 	import feathers.controls.UIAsset;
+	import feathers.utils.filter.GrayFilter;
 	
 	import gs.TweenLite;
 	
@@ -241,7 +243,7 @@ package com.rpgGame.app.ui.main
 			var value:int=MainRoleManager.actorInfo.totalStat.hp;
 			var max:int=MainRoleManager.actorInfo.totalStat.life;
 			var per:Number=value/max;
-			if(per<=SHOW_BLOOD_TIPS){
+			if(per<=SHOW_BLOOD_TIPS&&per!=0){
 				this.addChild(_lowBloodBg);
 				lowBloodTween=TweenLite.to(_lowBloodBg,0.5,{alpha:0.5,onComplete:tweenLowBood});
 			}else{
@@ -251,6 +253,7 @@ package com.rpgGame.app.ui.main
 					lowBloodTween=null;
 				}
 			}
+			
 		}
 		
 		private function tweenLowBood():void

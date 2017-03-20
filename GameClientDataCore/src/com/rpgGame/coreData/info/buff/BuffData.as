@@ -17,6 +17,7 @@ package com.rpgGame.coreData.info.buff
 	 */	
 	public class BuffData extends BaseFaceInfo
 	{
+		private var _serverID:String;
 		private var _buffId:Number = 0;//服务器生成id
 		private var _roleId : Number = 0;
 		private var _data : Q_buff = null;
@@ -142,6 +143,7 @@ package com.rpgGame.coreData.info.buff
 		{
 			_buffInfo = value;
 			
+			_serverID = _buffInfo.buffId.ToString();
 			_buffId = _buffInfo.buffId.ToGID();
 			cfgId = _buffInfo.buffModelId;
 			_disappearTime = _buffInfo.remainTime.fValue;
@@ -238,5 +240,14 @@ package com.rpgGame.coreData.info.buff
 			_srcRole = value;
 		}
 
+		public function get serverID():String
+		{
+			return _serverID;
+		}
+
+		public function set serverID(value:String):void
+		{
+			_serverID = value;
+		}
 	}
 }

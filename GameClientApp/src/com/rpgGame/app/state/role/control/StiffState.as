@@ -2,6 +2,8 @@ package com.rpgGame.app.state.role.control
 {
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.coreData.type.RoleStateType;
+	
+	import flash.utils.getQualifiedClassName;
 
 	/**
 	 *
@@ -43,5 +45,11 @@ package com.rpgGame.app.state.role.control
 //				(_machine as RoleStateMachine).actionResume();
 			}
 		}
+		
+		override public function get tribe():String
+		{
+			return getQualifiedClassName(StiffState);
+		}
+		
 	}
 }

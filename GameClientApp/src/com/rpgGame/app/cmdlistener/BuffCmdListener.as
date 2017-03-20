@@ -1,5 +1,6 @@
 package com.rpgGame.app.cmdlistener
 {
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -44,6 +45,7 @@ package com.rpgGame.app.cmdlistener
 			if (tarObj != null)
 			{
 				tarObj.buffSet.removeBuffByBuffID( msg.buffId.ToGID());
+				GameLog.addShow("*************************删除一条buff，buffID为： \t" + msg.buffId.ToGID());
 			}
 		}
 		
@@ -87,8 +89,9 @@ package com.rpgGame.app.cmdlistener
 				buffData.buffInfo = msg.buff;
 				buffData.srcRole = srcObj;
 				tarObj.buffSet.addBuff(buffData);
+				
+				GameLog.addShow("*************************增加一条buff，buffID为： \t" + msg.buff.buffId);
 			}
 		}
-		
 	}
 }

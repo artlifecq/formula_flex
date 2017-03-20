@@ -45,6 +45,7 @@ package com.rpgGame.app.manager
 			if (data)
 			{
 				var offset : int = 0;
+				data.totalStat.setStatValue(attributeType,attributeValue);
 				switch (attributeType)
 				{
 					case CharAttributeType.HP:
@@ -81,7 +82,6 @@ package com.rpgGame.app.manager
 //						data.spriteStat.addStatValue();
 						break;
 				}
-				data.totalStat.setStatValue(attributeType,attributeValue);
 				dispatchEvent(data.id, attributeType, attributeValue);
 			}
 		}

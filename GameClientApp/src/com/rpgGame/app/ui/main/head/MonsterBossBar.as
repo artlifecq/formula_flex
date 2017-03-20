@@ -2,9 +2,8 @@ package com.rpgGame.app.ui.main.head
 {
 	import com.rpgGame.coreData.role.RoleData;
 	
-	import feathers.controls.UIAsset;
-	
 	import org.mokylin.skin.mainui.head.Head_boss;
+	
 	import starling.display.DisplayObject;
 	
 	/**
@@ -80,6 +79,7 @@ package com.rpgGame.app.ui.main.head
 			var allSubHp:int=data.totalStat.life-data.totalStat.hp;
 			curBloodNum=Math.ceil(_monsterData.totalStat.hp/_monsterCfg.q_per_blood);
 			showBloodIndex=curBloodNum%bloodBarNum;
+			_skin.uim_xuetiao.label="x"+curBloodNum;
 			var leftHp:int;
 			var maxBlood:int=_monsterCfg.q_per_blood;
 			if(curBloodNum==maxBloodNum){

@@ -289,7 +289,7 @@ package com.game.engine3D.scene.render
 			super.blendMode = value;
 			if (_renderUnitData)
 			{
-//				_renderUnitData.blendMode = value;
+				_renderUnitData.blendMode = value;
 			}
 		}
 		
@@ -2098,6 +2098,8 @@ package com.game.engine3D.scene.render
 					_resReady = true;
 					_resSwitch = false;
 					_renderUnitData = SceneRenderCache.getRenderUnitData(resData, this.type, this.id);
+					
+					_renderUnitData.blendMode = _blendMode;
 
 					validateGraphic();
 					validateProperties();

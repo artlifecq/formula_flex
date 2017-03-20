@@ -41,6 +41,7 @@ package com.rpgGame.app.ui.main.shortcut
 			imgAutoUse.x = 4;
 			imgAutoUse.y = 4;
 			imgAutoUse.styleName = ClientConfig.getSpellAutoIco();
+			setIsShowCdTm(true);
 		}
 
 		override  protected function updateIconImagePosition( posx:Number=0, posy:Number=0 ):void
