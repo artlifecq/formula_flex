@@ -622,9 +622,6 @@ package com.rpgGame.app.ui.main.chat {
 			//死亡面板测试
 //			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_CRIT,5000);
 //			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_NORMAL,8000);
-			var loginfo:String = "未处理的伤害类型:"+1111;
-			GameLog.addError(loginfo);
-			AlertPanel.showMsg( loginfo, null );
 			
 			if("" == this._inputText.text )
 			{
