@@ -10,6 +10,7 @@ package com.rpgGame.app.scene.animator
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
@@ -208,6 +209,7 @@ package com.rpgGame.app.scene.animator
 				_renderSet.y = 0;
 				_renderSet.offsetY = _destHeightOffset;
 			}
+            GameLog.add2("[CommonTrajectoryAnimator] [onStartMove] pos:" + this._renderSet.position + ", rolePos:" + MainRoleManager.actor.position);
 			updateMove();
 			_isMoving = true;
 		}
