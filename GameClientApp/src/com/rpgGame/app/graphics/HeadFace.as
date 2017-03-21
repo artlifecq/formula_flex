@@ -456,6 +456,13 @@ package com.rpgGame.app.graphics
 			if (_bloodBar)
 			{
 				_bloodBar.update(_bloodPercent);
+				if(showBloodTween){
+					showBloodTween.kill();
+					showBloodTween=null;
+				}
+				if(_bloodPercent==0){
+					onHideBlood();
+				}
 			}
 
 			if (_isSelected)
@@ -1070,8 +1077,10 @@ package com.rpgGame.app.graphics
 		
 		private function onHideBlood():void
 		{
-			showBloodTween.kill();
-			showBloodTween=null;
+			if(showBloodTween){
+				showBloodTween.kill();
+				showBloodTween=null;
+			}
 			showAndHideElement(_bloodBar,false);
 		}
 	}
