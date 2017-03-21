@@ -127,6 +127,7 @@ package com.rpgGame.app.ui.main.shortcut {
 			var sp:Sprite=new Sprite();
 			sp.graphics.beginFill(0xff0000);
 			sp.graphics.drawCircle(0,0,10);
+            sp.graphics.endFill();
 			sp.x=110;
 			sp.y=50;
 			hp3D.mask=sp;
