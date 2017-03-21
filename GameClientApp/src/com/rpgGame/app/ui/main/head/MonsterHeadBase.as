@@ -14,6 +14,7 @@ package com.rpgGame.app.ui.main.head
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.mokylin.skin.mainui.head.Head_small;
 	
 	public class MonsterHeadBase extends SkinUI
 	{
@@ -67,11 +68,14 @@ package com.rpgGame.app.ui.main.head
 		private function updateNormal():void
 		{
 			_stateSkin["lbl_name"].text=_monsterData.name + " (" + _monsterCfg.q_level +"级)";
+			if(_stateSkin is Head_small){
+				return;
+			}
 			if(_stateSkin["uim_zhandouli"]){
-				if(!_monsterData.fightingAmount){
+				if(!_monsterCfg.q_fighting){
 					_stateSkin["uim_zhandouli"].visible=_stateSkin["zhan_bg"].visible=false;
 				}else{
-					_stateSkin["uim_zhandouli"].number=int(_monsterData.fightingAmount);
+					_stateSkin["uim_zhandouli"].number=int(_monsterCfg.q_fighting);
 					_stateSkin["uim_zhandouli"].visible=_stateSkin["zhan_bg"].visible=true;
 				}
 			}

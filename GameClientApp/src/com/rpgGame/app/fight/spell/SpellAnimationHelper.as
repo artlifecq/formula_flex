@@ -582,44 +582,18 @@ package com.rpgGame.app.fight.spell
 			{
 				if (animatData.scene_res)
 				{
-					var atkorPosition : Vector3D = null;
-					var atkorRotationY : Number = 0;
-					var destPosition : Vector3D = null;
-					/** 施法者 **/
-					var atkor : SceneRole = info.atkor;
-					if (atkor == null || !atkor.usable)
-					{
-//						var scene : GameScene3D = SceneManager.getScene();
-//						var posY : Number = scene.sceneMapLayer.queryHeightAt(info.atkorPos.x, info.atkorPos.y);
-						var posY:Number = 0;//2.5d没有高度值，因为只有2维的，默认为0
-						atkorPosition = new Vector3D(info.atkorPos.x, posY, info.atkorPos.y);
-						atkorRotationY = info.releaseAngle;
-						destPosition = new Vector3D(info.atkorPos.x, posY, info.atkorPos.y);
-					}
-					else
-					{
-						atkorPosition = atkor.position.clone();
-						atkorRotationY = atkor.rotationY;
-						if (info.passAni.bind_bone)
-							destPosition = atkor.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, info.passAni.bind_bone);
-						else
-							destPosition = atkor.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_02);
-						if (!destPosition)
-							destPosition = atkor.position.clone();
-					}
-					
 					var effectQueue : Vector.<IRenderAnimator> = new Vector.<IRenderAnimator>();
 					var locusPoints : Vector.<AnimatorLocusPoint> = new Vector.<AnimatorLocusPoint>();
 					for (var i : int = 0; i < info.flyTargetPosList.length; i++)
 					{
 						var targetPosition:Vector3D = new Vector3D(info.flyTargetPosList[i].x,0,info.flyTargetPosList[i].y);
-						TweenLite.delayedCall((info.throwDelayTime + info.flyInterval * i) * 0.001, addFlyEffectOnce, [info, animatData.scene_res, atkorPosition, atkorRotationY, destPosition,targetPosition,null, 0, 0,effectQueue, locusPoints]);
+						TweenLite.delayedCall((info.throwDelayTime + info.flyInterval * i) * 0.001, addFlyEffectOnce, [info, animatData.scene_res, targetPosition,null, 0, 0,effectQueue, locusPoints]);
 					}
 					
 					var startTime:Number = info.flyTargetPosList.length * info.flyInterval;
 					for(var j:int = 0;j<info.flyTargets.length;j++)
 					{
-						TweenLite.delayedCall((startTime + info.throwDelayTime + info.flyInterval * j) * 0.001, addFlyEffectOnce, [info, animatData.scene_res, atkorPosition, atkorRotationY, destPosition,info.flyTargets[j].position,info.flyTargets[j],0, 0, effectQueue, locusPoints]);
+						TweenLite.delayedCall((startTime + info.throwDelayTime + info.flyInterval * j) * 0.001, addFlyEffectOnce, [info, animatData.scene_res, info.flyTargets[j].position,info.flyTargets[j],0, 0, effectQueue, locusPoints]);
 					}
 //					addFlyEffectOnce(info, animatData.scene_res, atkorPosition, atkorRotationY, destPosition, info.throwDelayTime, info.hitFrameTime/*, info.delayTime*/, effectQueue, locusPoints);
 //					for (var i : int = 1; i < info.flyCount; i++)
@@ -647,11 +621,38 @@ package com.rpgGame.app.fight.spell
 		 * @param locusPoints
 		 * 
 		 */		
-		private static function addFlyEffectOnce(info : ReleaseSpellInfo, effectRes : String, atkorPosition : Vector3D, atkorRotationY : Number, destPosition : Vector3D,
+		private static function addFlyEffectOnce(info : ReleaseSpellInfo, 
+                                                 effectRes : String, 
 												 targetPosition:Vector3D,targetRole:SceneRole,
 												 moveDelay : int, playDelay : int, /*releaseDelayTime : int,*/ 
 												 effectQueue : Vector.<IRenderAnimator>, locusPoints : Vector.<AnimatorLocusPoint>) : void
 		{
+            var atkorPosition : Vector3D = null;
+            var atkorRotationY : Number = 0;
+            var destPosition : Vector3D = null;
+            /** 施法者 **/
+            var atkor : SceneRole = info.atkor;
+            if (atkor == null || !atkor.usable)
+            {
+                //						var scene : GameScene3D = SceneManager.getScene();
+                //						var posY : Number = scene.sceneMapLayer.queryHeightAt(info.atkorPos.x, info.atkorPos.y);
+                var posY:Number = 0;//2.5d没有高度值，因为只有2维的，默认为0
+                atkorPosition = new Vector3D(info.atkorPos.x, posY, info.atkorPos.y);
+                atkorRotationY = info.releaseAngle;
+                destPosition = new Vector3D(info.atkorPos.x, posY, info.atkorPos.y);
+            }
+            else
+            {
+                atkorPosition = atkor.position.clone();
+                atkorRotationY = atkor.rotationY;
+                if (info.passAni.bind_bone)
+                    destPosition = atkor.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, info.passAni.bind_bone);
+                else
+                    destPosition = atkor.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_02);
+                if (!destPosition)
+                    destPosition = atkor.position.clone();
+            }
+            
 			var effectSet : RenderSet3D = RenderSet3D.create(SceneCharType.SCENE_FLY_SPELL/* + info.flySceneObjID*/, flySceneObjID,true);
 			var rud : RenderParamData3D = new RenderParamData3D(1, "effect", ClientConfig.getEffect(effectRes), effectRes);
 			

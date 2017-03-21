@@ -109,7 +109,7 @@ package com.rpgGame.app.fight.spell
 				}
 				if (hurtResultVO.targetID == MainRoleManager.actorID) //判定主角是否被攻击
 				{
-					if (hurtResultVO.atkor && hurtResultVO.atkor.data is HeroData) //是玩家才自动反击
+					if (hurtResultVO.atkor /*&& hurtResultVO.atkor.data is HeroData*/) //是玩家才自动反击
 					{
 						isHited = true;
 					}
