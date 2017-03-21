@@ -3,10 +3,13 @@ package com.rpgGame.app.manager.shell
     import com.game.engine2D.Scene;
     import com.game.engine3D.core.AreaMap;
     import com.game.engine3D.display.shapeArea.ShapeArea3D;
+    import com.game.engine3D.loader.GlobalTexture;
     import com.game.engine3D.manager.Stage3DLayerManager;
     import com.game.engine3D.scene.render.RenderSet3D;
     import com.game.engine3D.scene.render.RenderUnit3D;
+    import com.game.engine3D.scene.render.vo.MethodData;
     import com.game.engine3D.scene.render.vo.RenderParamData3D;
+    import com.game.engine3D.utils.EffectMethodUtil;
     import com.game.engine3D.utils.MathUtil;
     import com.game.engine3D.vo.AreaMapData;
     import com.game.engine3D.vo.BaseObj3D;
@@ -53,6 +56,10 @@ package com.rpgGame.app.manager.shell
     import flash.utils.setTimeout;
     
     import away3d.core.math.Plane3D;
+    import away3d.materials.methods.CorrodeMethod;
+    
+    import gs.TweenLite;
+    import gs.easing.Linear;
     
     import org.game.netCore.data.long;
     import org.game.netCore.net_protobuff.ByteBuffer;
@@ -90,7 +97,106 @@ package com.rpgGame.app.manager.shell
             this._funcs["changeTrap".toLowerCase()] = this.changeTrap;
 			this._funcs["test".toLowerCase()] = this.test;
 			this._funcs["removeTest".toLowerCase()] = this.removeTest;
+			
+			this._funcs["corred".toLowerCase()] = this.corredMethodTest;
+			this._funcs["stopCorrode".toLowerCase()] = this.stopCorrode;
         }
+		
+		private function corredMethodTest():void
+		{
+			_valueObj = {alpha: 1};
+			GlobalTexture.addTexture(ClientConfig.getDynTexture("corrode"), onCorrodeTextureComplete);
+		}
+		
+		private var _corrodeMethodData : MethodData;
+		private var _corrodeTween : TweenLite;
+		private var _valueObj : Object;
+		private function onCorrodeTextureComplete(globalTexture : GlobalTexture) : void
+		{
+			GlobalTexture.removeTextureCallBack(ClientConfig.getDynTexture("corrode"), onCorrodeTextureComplete);
+			
+			if (globalTexture.texture)
+			{
+				var corrodeMethod : CorrodeMethod = EffectMethodUtil.createCorrodeMethod(globalTexture.texture);
+				_corrodeMethodData = new MethodData(corrodeMethod);
+				var role : SceneRole = MainRoleManager.actor;
+				role.avatar.forEachRenderUnit(function(render : RenderUnit3D) : void
+				{
+					switch (render.type)
+					{
+						case RenderUnitType.BODY:
+						case RenderUnitType.HAIR:
+						case RenderUnitType.WEAPON:
+						case RenderUnitType.DEPUTY_WEAPON:
+						case RenderUnitType.MOUNT:
+							render.addMethod(_corrodeMethodData);
+							break;
+					}
+				});
+				corrodeMethod.corrodeAlpha = 1 - _valueObj.alpha;
+			}
+			
+			role.avatar.forEachRenderUnit(function(render : RenderUnit3D) : void
+			{
+				switch (render.type)
+				{
+					case RenderUnitType.BODY:
+					case RenderUnitType.HAIR:
+					case RenderUnitType.WEAPON:
+					case RenderUnitType.DEPUTY_WEAPON:
+					case RenderUnitType.MOUNT:
+						render.castsShadows = false;
+						break;
+				}
+			});
+			if (_corrodeMethodData)
+			{
+				role.avatar.forEachRenderUnit(function(render : RenderUnit3D) : void
+				{
+					switch (render.type)
+					{
+						case RenderUnitType.BODY:
+						case RenderUnitType.HAIR:
+						case RenderUnitType.WEAPON:
+						case RenderUnitType.DEPUTY_WEAPON:
+						case RenderUnitType.MOUNT:
+							render.addMethod(_corrodeMethodData);
+							break;
+					}
+				});
+				CorrodeMethod(_corrodeMethodData.method).corrodeAlpha = 1 - _valueObj.alpha;
+			}
+			_corrodeTween = TweenLite.to(_valueObj, 2, {alpha: 0, onComplete: stopCorrode, onUpdate: function() : void
+			{
+				if (_corrodeMethodData)
+					CorrodeMethod(_corrodeMethodData.method).corrodeAlpha = 1 - _valueObj.alpha;
+			}, ease: Linear.easeNone});
+		}
+		
+		private function stopCorrode() : void
+		{
+			
+				var role : SceneRole = MainRoleManager.actor;
+				role.avatar.forEachRenderUnit(function(render : RenderUnit3D) : void
+				{
+					switch (render.type)
+					{
+						case RenderUnitType.BODY:
+						case RenderUnitType.HAIR:
+						case RenderUnitType.WEAPON:
+						case RenderUnitType.DEPUTY_WEAPON:
+						case RenderUnitType.MOUNT:
+							render.removeMethod(_corrodeMethodData);
+							break;
+					}
+				});
+				GlobalTexture.removeTextureCallBack(ClientConfig.getDynTexture("corrode"), onCorrodeTextureComplete);
+				if (_corrodeTween)
+				{
+					_corrodeTween.kill();
+					_corrodeTween = null;
+				}		
+		}
 		
 		private function test(alpha:Number):void
 		{
