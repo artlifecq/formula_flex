@@ -16,6 +16,8 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.coreData.type.AttachDisplayType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
+	import flash.utils.getTimer;
+	
 	import app.message.MonsterDataProto.MonsterType;
 	
 	import feathers.controls.UIAsset;
@@ -25,6 +27,7 @@ package com.rpgGame.app.graphics
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
+	
 	import starling.display.DisplayObject;
 
 	/**
@@ -427,7 +430,7 @@ package com.rpgGame.app.graphics
 			{
 				//原来没有血条添加一个
 				_bloodBar = HeadBloodBar.create(_role);
-				//				_bloodBar.state = HeadBloodUtil.getRoleBloodState( _role );
+//				_bloodBar.state = HeadBloodUtil.getRoleBloodState( _role );
 //				this.addChild(_bloodBar); //更新一下容器，从临时的到模型真正容器
 			}
 			//更新一下数据
@@ -459,9 +462,6 @@ package com.rpgGame.app.graphics
 				if(showBloodTween){
 					showBloodTween.kill();
 					showBloodTween=null;
-				}
-				if(_bloodPercent==0){
-					onHideBlood();
 				}
 			}
 
@@ -1071,7 +1071,7 @@ package com.rpgGame.app.graphics
 				showBloodTween.kill();
 				showBloodTween=null;
 			}
-			showBloodTween=TweenLite.delayedCall(5,onHideBlood);
+			showBloodTween=TweenLite.delayedCall(2,onHideBlood);
 			sortAttackFace();
 		}
 		

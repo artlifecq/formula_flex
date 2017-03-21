@@ -175,7 +175,7 @@ package com.rpgGame.app.scene
 				}
 			}
 			
-			EventManager.dispatchEvent(BuffEvent.REMOVE_BUFF, _role.id, currData.buffId);
+			EventManager.dispatchEvent(BuffEvent.REMOVE_BUFF, currData);
 		}	
 		
 		/**

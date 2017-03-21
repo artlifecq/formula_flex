@@ -4,6 +4,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.app.ui.main.buff.BuffBar;
 	import com.rpgGame.app.ui.main.chat.ChatBar;
 	import com.rpgGame.app.ui.main.chat.SystemMsgBar;
 	import com.rpgGame.app.ui.main.head.MainRoleHeadBar;
@@ -92,6 +93,8 @@ package com.rpgGame.app.ui.main
         private var _chatBar : ChatBar;
 		//系统消息条
 		private var _systemMsgBar:SystemMsgBar;
+		//buff
+		private var _buffBar:BuffBar;
 		
 		private var _lowBloodBg:UIAsset;
 		
@@ -165,6 +168,10 @@ package com.rpgGame.app.ui.main
             this.addChild(this._chatBar);
 			this._systemMsgBar=new SystemMsgBar();
 			this.addChild(_systemMsgBar);
+			
+			_buffBar=new BuffBar();
+			this.addChild(_buffBar);
+			
 			_playerHead=new RoleHeadBar();
 			_bossHead=new MonsterBossBar();
 			_eliteHead=new MonsterEliteBar();
@@ -427,6 +434,7 @@ package com.rpgGame.app.ui.main
 			this._bossHead.resize(sWidth, sHeight);
 			this._eliteHead.resize(sWidth, sHeight);
 			this._normalHead.resize(sWidth, sHeight);
+			this._buffBar.resize(sWidth, sHeight);
 			
 			_lowBloodBg.width=sWidth;
 			_lowBloodBg.height=sHeight;
