@@ -291,7 +291,7 @@ package com.rpgGame.app.ui.main
 						this.addChild(_normalHead);
 					}else if(type== MonsterType.ELITE){
 						this.addChild(_eliteHead);
-					}else{
+					}else if(type== MonsterType.BOSS){
 						this.addChild(_bossHead);
 					}
 					break;
