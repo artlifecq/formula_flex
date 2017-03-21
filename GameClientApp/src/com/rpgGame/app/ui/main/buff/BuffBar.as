@@ -1,0 +1,123 @@
+package com.rpgGame.app.ui.main.buff
+{
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.view.icon.BuffIcon;
+	import com.rpgGame.core.events.BuffEvent;
+	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.info.buff.BuffData;
+	import com.rpgGame.coreData.role.RoleData;
+	
+	import feathers.controls.StateSkin;
+	
+	import org.client.mainCore.manager.EventManager;
+	
+	/**
+	 *buff显示条 
+	 * @author dik
+	 * 
+	 */
+	public class BuffBar extends SkinUI
+	{
+		private var roleId:int;
+		private var goodBuffs:Vector.<BuffIcon>;
+		private var badBuffs:Vector.<BuffIcon>;
+		
+		public function BuffBar(skin:StateSkin=null)
+		{
+			super(skin);
+		}
+		
+		override protected function  onShow() : void
+		{
+			initEvent();
+			initBuff();
+		}
+		
+		private function initBuff():void
+		{
+			goodBuffs=new Vector.<BuffIcon>();
+			badBuffs=new Vector.<BuffIcon>();
+			roleId=MainRoleManager.actor.id;
+			var buffList : Vector.<BuffData>=(MainRoleManager.actor.data as RoleData).buffList;
+			var num:int=buffList.length;
+			for(var i:int=0;i<num;i++){
+				var data:BuffData=buffList[i];
+				createIcon(data);
+			}
+		}
+		
+		private function createIcon(data:BuffData):void
+		{
+			var icon:BuffIcon=BuffIcon.create(IcoSizeEnum.ICON_36);
+			icon.buffData=data;
+			var xx:int;
+			var gap:int=5;
+			if(data.buffData.q_effect_type==2){//负面
+				if(badBuffs.length==0){
+					xx=20;
+				}else{
+					xx=badBuffs[badBuffs.length-1].x+IcoSizeEnum.ICON_36+gap;
+				}
+				badBuffs.push(icon);
+			}else{
+				if(goodBuffs.length==0){
+					xx=-20;
+				}else{
+					xx=badBuffs[badBuffs.length-1].x-IcoSizeEnum.ICON_36-gap;
+				}
+				goodBuffs.push(icon);
+			}
+			icon.x=xx;
+			this.addChild(icon);
+		}
+		
+		private function initEvent():void
+		{
+			EventManager.addEvent(BuffEvent.ADD_BUFF, addBuff);
+			EventManager.addEvent(BuffEvent.REMOVE_BUFF, removeBuff);
+		}
+		
+		private function removeBuff(buffData:BuffData):void
+		{
+			if(buffData.roleId!=roleId){
+				return;
+			}
+			if(buffData.buffData.q_effect_type==2){//负面
+				removeForDatas(buffData,badBuffs);
+			}else{
+				removeForDatas(buffData,goodBuffs);
+			}
+		}
+		
+		private function removeForDatas(data:BuffData,datas:Vector.<BuffIcon>):void
+		{
+			var icon:BuffIcon;
+			var num:int=datas.length;
+			for  (var i:int=0;i<num;i++) 
+			{
+				icon=datas[i];
+				if(icon.buffData==data){
+					datas.splice(i,1);
+					BuffIcon.recycle(icon);
+					break;
+				}
+			}
+		}
+		
+		private function addBuff(buffData:BuffData):void
+		{
+			if(buffData.roleId!=roleId){
+				return;
+			}
+			createIcon(buffData);
+		}
+		
+		public function resize(w : int, h : int) : void 
+		{
+			this.x=(w-this.width)/2;
+			this.y=h-150;
+		}
+	}
+}

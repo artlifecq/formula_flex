@@ -44,17 +44,26 @@ package com.rpgGame.app.ui.main.head
 			if(_bloodBar){
 				_bloodBar.visible=false;
 			}
+			if(_bloodBarBg){
+				_bloodBarBg.visible=false;
+			}
 			_showBloodIndex = value;
 			_bloodBar=_bloodBars[_showBloodIndex];
-			if(_showBloodIndex!=0){
-				_bloodBarBg=_bloodBars[_showBloodIndex];
+			if(curBloodNum!=1){//不是最后一管血就显示背景血条
+				if(_showBloodIndex!=0){
+					_bloodBarBg=_bloodBars[_showBloodIndex-1];
+				}else{
+					_bloodBarBg=_bloodBars[_bloodBars.length-1];
+				}
+				_skin.grp_xueyiao.addChild(_bloodBarBg);
+				_bloodBarBg.scaleX=1;
+				_bloodBarBg.visible=true;
 			}else{
-				_bloodBarBg=_bloodBars[_bloodBars.length-1];
+				_bloodBarBg=null;
 			}
-			_skin.grp_xueyiao.addChild(_bloodBarBg);
-			_skin.grp_xueyiao.addChild(_bloodBar);
-			_bloodBarBg.scaleX=_bloodBar.scaleX=1;
+			_bloodBar.scaleX=1;
 			_bloodBar.visible=true;
+			_skin.grp_xueyiao.addChild(_bloodBar);
 		}
 
 		override public function refresh():void
@@ -70,7 +79,6 @@ package com.rpgGame.app.ui.main.head
 			}else{
 				maxBloodIndex=maxBloodNum;
 			}
-			showBloodIndex=maxBloodIndex;
 			
 			if(_monsterData.totalStat.life%_monsterCfg.q_per_blood==0){
 				firstBlood=_monsterCfg.q_per_blood;
@@ -94,8 +102,13 @@ package com.rpgGame.app.ui.main.head
 			super.changeHp(data);
 			var allSubHp:int=data.totalStat.life-data.totalStat.hp;
 			curBloodNum=Math.ceil(_monsterData.totalStat.hp/_monsterCfg.q_per_blood);
-			showBloodIndex=curBloodNum%bloodBarNum;
-			_skin.uim_xuetiao.label="x"+curBloodNum;
+//			curBloodNum=2;
+			var leftNum:int=curBloodNum-1;
+			leftNum=leftNum<0?0:leftNum;
+			showBloodIndex=leftNum%bloodBarNum;
+//			showBloodIndex=1;
+			_skin.uim_xuetiao.label="x"+leftNum;
+			_skin.uim_xuetiao.visible=leftNum==0?false:true;
 			var leftHp:int;
 			var maxBlood:int=_monsterCfg.q_per_blood;
 			if(curBloodNum==maxBloodNum){
