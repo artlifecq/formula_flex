@@ -51,7 +51,7 @@ package com.rpgGame.app.state.role
 
 		public static const DEATH_STATE_EFFECT_CORRODE : int = 1;
 		public static const DEATH_STATE_EFFECT_COLOR : int = 2;
-		public static var deathStateEffectType : int = DEATH_STATE_EFFECT_CORRODE;
+		public static var deathStateEffectType : int = DEATH_STATE_EFFECT_COLOR;
 
 		public function RoleStateUtil()
 		{

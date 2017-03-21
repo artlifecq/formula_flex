@@ -145,13 +145,17 @@ package com.rpgGame.app.fight.spell
 			SpellAnimationHelper.removeTrapEffectsByAtkorID(target.id);
 			EventManager.dispatchEvent(SceneCharacterEvent.SCENE_CHAR_DEATH, target);
 			target.mouseEnable = false;
+			
 			var deadLaunchHeight : int = hortVo.deadLaunchHeight;
 			var deadLaunchDistance : int = hortVo.deadLaunchDistance;
 			var deadLaunchSpeed : int = hortVo.deadLaunchSpeed;
+			
 			var deadBeatDistance : int = hortVo.deadBeatDistance;
 			var deadBeatSpeed : int = hortVo.deadBeatSpeed;
+			
 			var deadBeatProbability : int = hortVo.deadBeatProbability;
 			var deadLaunchProbability : int = hortVo.deadLaunchProbability;
+			
 			var prob : int = ((deadBeatDistance > 0 && deadBeatSpeed > 0) || (deadLaunchHeight > 0 && deadLaunchDistance > 0 && deadLaunchSpeed > 0)) ? 100 * Math.random() : 0;
 			if (prob < deadBeatProbability) //击退
 			{
