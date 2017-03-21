@@ -120,15 +120,16 @@ package com.rpgGame.app.ui.main.shortcut {
 			renderUint.removeAddedCallBack(onAddHpEft);
 			
 			renderUint.scaleX=renderUint.scaleY=this._skin.left_xuecao.width/270;
-			hp3D.x=this._skin.left_xuecao.x+17;
-			hp3D.y=this._skin.left_xuecao.y+this._skin.left_xuecao.height-12;
+			//hp3D.x=this._skin.left_xuecao.x+17;
+			//hp3D.y=this._skin.left_xuecao.y+this._skin.left_xuecao.height-12;
 			this._skin.left_xuecao.visible=false;			
 			
 			var sp:Sprite=new Sprite();
 			sp.graphics.beginFill(0xff0000);
 			sp.graphics.drawCircle(0,0,10);
-			sp.x=110;
-			sp.y=50;
+            sp.graphics.endFill();
+			//sp.x=110;
+			//sp.y=50;
 			hp3D.mask=sp;
 			this.addChild(sp);
 		}
