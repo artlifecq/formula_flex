@@ -10,7 +10,7 @@ package com.rpgGame.coreData.type
 		public static const EQUIP_MENUS : Array = [LangMenu.WEAR, LangMenu.MOVE, LangMenu.SELL, LangMenu.DISCARDED, LangMenu.SHOW];
 		public static const GEM_MENUS : Array = [LangMenu.MOSAIC, LangMenu.MOVE, LangMenu.SPLIT, LangMenu.SELL, LangMenu.DISCARDED, LangMenu.SHOW];
 		public static const MATERIAL_MENUS : Array = [LangMenu.SYNTHETIC, LangMenu.MOVE, LangMenu.SPLIT, LangMenu.SELL, LangMenu.DISCARDED, LangMenu.SHOW];
-		public static const ITEM_MENUS : Array = [LangMenu.USE_ITEM, /*LangMenu.BATCH_ITM, */LangMenu.MOVE, LangMenu.SPLIT, LangMenu.SELL, LangMenu.DISCARDED, LangMenu.SHOW];
+		public static const ITEM_MENUS : Array = [LangMenu.USE_ITEM, LangMenu.BATCH_ITM, LangMenu.MOVE, LangMenu.SPLIT, LangMenu.SELL, LangMenu.DISCARDED, LangMenu.SHOW];
 		public static const ITEM_MENUS_DEPOT : Array = [LangMenu.MOVE];
 		public static const ITEM_MENUS_NOMOVE : Array = [LangMenu.USE_ITEM,LangMenu.SPLIT, LangMenu.SELL, LangMenu.DISCARDED, LangMenu.SHOW];
 		/**好友列表选择**/

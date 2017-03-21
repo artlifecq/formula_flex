@@ -48,7 +48,7 @@ package com.rpgGame.appModule.role
 			_skin.txt_mingzhonglv.text=_roleData.totalStat.getStatValue(CharAttributeType.HIT)/100+"%";
 			_skin.txt_baojikangxing.text=_roleData.totalStat.getStatValueString(CharAttributeType.ANTI_CRIT_PER);
 			_skin.txt_bishanlv.text=_roleData.totalStat.getStatValue(CharAttributeType.MISS)/100+"%";
-			_skin.txt_fangyubaifenbi.text=_roleData.totalStat.getStatValue(CharAttributeType.DEFENSE_PER)/100+"%";
+			_skin.txt_fangyubaifenbi.text=_roleData.totalStat.getStatValue(CharAttributeType.DEFENSE_PER)+"";
 			_skin.txt_shengminhuifu.text=_roleData.totalStat.getStatValueString(CharAttributeType.HP_REC)+"/5秒";
 			_skin.txt_zhiliaotishen.text=_roleData.totalStat.getStatValue(CharAttributeType.CURE_LIFT)/100+"%";
 			_skin.txt_baojilv.text=_roleData.totalStat.getStatValue(CharAttributeType.CRIT_PER)/100+"%";

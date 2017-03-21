@@ -37,10 +37,10 @@ package com.rpgGame.app.ui.main.head
 			updateNormal();
 			updateAttInfo();
 			
-			this.x=_stage.mouseX;
-			this.y=_stage.mouseY;
-			this.alpha=0;
 			var toX:int=(_stage.stageWidth-this.width)/2;
+			this.x=toX;
+			this.y=toY;
+			this.alpha=0;
 			tween=TweenLite.to(this,0.5,{x:toX,y:toY,alpha:1,onComplete:onTween});
 			initEvent();
 		}

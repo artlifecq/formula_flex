@@ -1,4 +1,6 @@
 package com.rpgGame.app.ui.main.chat {
+    import com.gameClient.alert.AlertPanel;
+    import com.gameClient.log.GameLog;
     import com.rpgGame.app.manager.chat.ChatGoodsManager;
     import com.rpgGame.app.manager.chat.ChatInputManager;
     import com.rpgGame.app.manager.chat.ChatManager;
@@ -620,7 +622,6 @@ package com.rpgGame.app.ui.main.chat {
 			//死亡面板测试
 //			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_CRIT,5000);
 //			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_NORMAL,8000);
-			
 			
 			if("" == this._inputText.text )
 			{
