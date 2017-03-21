@@ -21,6 +21,8 @@ package com.rpgGame.app.ui.main.head
 		private var maxBloodNum:int;
 		private var _showBloodIndex:int;
 		private var _bloodBar:DisplayObject;
+		private var _bloodBarBg:DisplayObject;
+		private var _bloodBars:Vector.<DisplayObject>;
 		private var curBloodNum:int;
 		private var firstBlood:int;
 		private var maxBloodIndex:int;
@@ -29,6 +31,10 @@ package com.rpgGame.app.ui.main.head
 		public function MonsterBossBar()
 		{
 			_skin=new Head_boss();
+			_bloodBars=new Vector.<DisplayObject>();
+			for(var i:int=0;i<_skin.grp_xueyiao.numChildren;i++){
+				_bloodBars.push(_skin.grp_xueyiao.getChildAt(i));
+			}
 			super(_skin);
 		}
 		
@@ -39,7 +45,15 @@ package com.rpgGame.app.ui.main.head
 				_bloodBar.visible=false;
 			}
 			_showBloodIndex = value;
-			_bloodBar=_skin.grp_xueyiao.getChildAt(_showBloodIndex);
+			_bloodBar=_bloodBars[_showBloodIndex];
+			if(_showBloodIndex!=0){
+				_bloodBarBg=_bloodBars[_showBloodIndex];
+			}else{
+				_bloodBarBg=_bloodBars[_bloodBars.length-1];
+			}
+			_skin.grp_xueyiao.addChild(_bloodBarBg);
+			_skin.grp_xueyiao.addChild(_bloodBar);
+			_bloodBarBg.scaleX=_bloodBar.scaleX=1;
 			_bloodBar.visible=true;
 		}
 
@@ -63,6 +77,8 @@ package com.rpgGame.app.ui.main.head
 			}else{
 				firstBlood=_monsterData.totalStat.life%_monsterCfg.q_per_blood;
 			}
+			
+			changeHp(_monsterData);
 		}
 		
 		override protected function updateAttInfo():void
@@ -89,7 +105,9 @@ package com.rpgGame.app.ui.main.head
 				allSubHp-=firstBlood;
 				leftHp=maxBlood-allSubHp%maxBlood;
 			}
-			_bloodBar.scaleX=leftHp/maxBlood;
+			var scaleX:Number=leftHp/maxBlood;
+			scaleX=scaleX>1?1:scaleX;
+			_bloodBar.scaleX=scaleX;
 		}
 	}
 }

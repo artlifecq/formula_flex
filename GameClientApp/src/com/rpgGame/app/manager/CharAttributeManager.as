@@ -19,8 +19,6 @@ package com.rpgGame.app.manager
 	import flash.events.EventDispatcher;
 	
 	import org.client.mainCore.manager.EventManager;
-	
-	import starling.core.starling_internal;
 
 	/**
 	 * 场景所有角色属性变更的管理...
@@ -45,6 +43,7 @@ package com.rpgGame.app.manager
 			if (data)
 			{
 				var offset : int = 0;
+				var oldValue:Number=data.totalStat.getStatValue(attributeType);
 				data.totalStat.setStatValue(attributeType,attributeValue);
 				switch (attributeType)
 				{
@@ -55,16 +54,18 @@ package com.rpgGame.app.manager
 						{
 							EventManager.dispatchEvent(TaoNiEvent.TAO_NI_LIANG_CANG_STATE_CHANGE, data, CharAttributeType.HP);
 						}
+						offset=data.totalStat.hp-oldValue;
+						if (data.id == MainRoleManager.actorID && offset > 0) //自己看到就好了
+						{
+							FightFaceHelper.showAttChange(EnumHurtType.ADDHP, offset);
+						}
 						break;
 					case CharAttributeType.MAX_HP:
 						data.totalStat.life = attributeValue;
 						EventManager.dispatchEvent(MainPlayerEvent.MAXHP_CHANGE,data);//通知最大血量改变
 						break;
 					case CharAttributeType.MP:
-						offset = attributeValue - data.totalStat.mp;
-						
-//						data.mp = attributeValue;
-						
+						offset = attributeValue - oldValue;
 						updateMpBar(data);
 						EventManager.dispatchEvent(MainPlayerEvent.NOWMP_CHANGE, data);
 						if (data.id == MainRoleManager.actorID && offset > 0) //自己看到就好了

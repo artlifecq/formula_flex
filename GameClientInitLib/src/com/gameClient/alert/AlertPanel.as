@@ -115,6 +115,7 @@ package com.gameClient.alert
             
             
             perContiainer.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+			btnClose.addEventListener(MouseEvent.CLICK, closeHandler );
 		}
         
         protected function keyDownHandler(event:KeyboardEvent):void
@@ -174,6 +175,7 @@ package com.gameClient.alert
 		private function closeHandler(event:MouseEvent):void
 		{
 			btnClose.removeEventListener(MouseEvent.CLICK, closeHandler );
+			perContiainer.stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
 			if(this.parent)
 			{
 				this.parent.removeChild(this);

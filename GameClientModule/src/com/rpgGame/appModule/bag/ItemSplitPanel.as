@@ -111,7 +111,7 @@ package com.rpgGame.appModule.bag
 			targetIcon.alwayShowCount=split1.alwayShowCount=split2.alwayShowCount=true;
 			
 			skin.slider.minimum=1;
-			skin.slider.maximum=_iteminfo.itemInfo.num;
+			skin.slider.maximum=_iteminfo.itemInfo.num-1;
 			skin.slider.step=1;
 			
 			skin.slider.value=Math.floor(allNum/2);//默认对半拆分

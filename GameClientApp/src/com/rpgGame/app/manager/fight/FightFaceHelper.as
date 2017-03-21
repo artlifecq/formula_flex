@@ -2,6 +2,8 @@ package com.rpgGame.app.manager.fight
 {
 	import com.game.engine3D.controller.CameraController;
 	import com.game.mainCore.libCore.handle.HandleThread;
+	import com.gameClient.alert.AlertPanel;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.display2D.AttackFace;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -11,8 +13,6 @@ package com.rpgGame.app.manager.fight
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
-	
-	import away3d.core.math.Matrix3DUtils;
 	
 	import gs.TimelineLite;
 	import gs.TweenLite;
@@ -160,7 +160,9 @@ package com.rpgGame.app.manager.fight
 
 			switch (hurtType)
 			{
-				case EnumHurtType.SPELL_HURT_TYPE_NORMAL: //无文字
+				case EnumHurtType.SPELL_HURT_TYPE_REBOUND:
+				case EnumHurtType.SPELL_HURT_TYPE_INVINCIBLE: 
+				case EnumHurtType.SPELL_HURT_TYPE_NORMAL: 
 					typeRes = "";
 					isUsefulBmp = hurter.isMainChar;
 					scaleAgo = 1.5;
@@ -182,37 +184,12 @@ package com.rpgGame.app.manager.fight
 					scaleLater = 1;
 					numberType = NUMBER_NPC_CRIT;
 					break;
-				case EnumHurtType.SPELL_HURT_TYPE_THUMP: //重击
-					isUsefulBmp = hurter.isMainChar;
-					if (isUsefulBmp)
-					{
-						numberType = NUMBER_RED1;
+				default:
+					CONFIG::Debug {
+					var loginfo:String = "未处理的伤害类型:"+hurtType;
+					GameLog.addError(loginfo);
+					AlertPanel.showMsg( loginfo, null );
 					}
-					else
-					{
-						from = new Point(0, -80);
-						tweenDis = 150 + Math.random() * 100;
-						dirVec = Matrix3DUtils.CALCULATION_VECTOR3D;
-						dirVec.x = hurter.boneNameContainer.x - mainPlayer.boneNameContainer.x;
-						dirVec.y = hurter.boneNameContainer.y - mainPlayer.boneNameContainer.y;
-						dirVec.normalize();
-						dirVec.scaleBy(tweenDis);
-
-						end = new Point(dirVec.x, dirVec.y - 60);
-						numberType = NUMBER_ORANGE1;
-					}
-					break;
-				case EnumHurtType.SPELL_HURT_TYPE_JUMP_SHIELD: //跳闪
-					break;
-				case EnumHurtType.SPELL_HURT_TYPE_INVINCIBLE: //无敌
-					break;
-				case EnumHurtType.SPELL_HURT_TYPE_ABSORB: //目标吸收伤害
-					break;
-				case EnumHurtType.SPELL_HURT_TYPE_PHYSICAL_IMMUNE: //物理免疫
-					break;
-				case EnumHurtType.SPELL_HURT_TYPE_MAGICAL_IMMUNE: //法术免疫
-					break;
-				case EnumHurtType.SPELL_HURT_TYPE_REBOUND: //反弹
 					break;
 			}
 

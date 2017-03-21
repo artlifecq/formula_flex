@@ -84,6 +84,7 @@ package com.rpgGame.app.ui.main.head
 		private function intiEvent():void
 		{
 			EventManager.addEvent(MainPlayerEvent.NOWHP_CHANGE, changeAtt);			
+			EventManager.addEvent(MainPlayerEvent.MAXHP_CHANGE, changeAtt);			
 		}
 		
 		override protected function onTouchTarget(target : DisplayObject) : void 
@@ -117,6 +118,7 @@ package com.rpgGame.app.ui.main.head
 		{
 			super.onHide();
 			EventManager.removeEvent(MainPlayerEvent.NOWHP_CHANGE, changeAtt);			
+			EventManager.removeEvent(MainPlayerEvent.MAXHP_CHANGE, changeAtt);			
 		}
 		
 		private function changeAtt(data:RoleData):void
@@ -131,8 +133,9 @@ package com.rpgGame.app.ui.main.head
 		{
 			var maxHp:int=_roleData.totalStat.life;
 			var hp:int=_roleData.totalStat.hp;
-			
-			_skin.role_xuecao.scaleX=hp/maxHp;
+			var scaleX:Number=hp/maxHp;
+			scaleX=scaleX>1?1:scaleX;
+			_skin.role_xuecao.scaleX=scaleX;
 			this._skin.lbl_num.text=hp+"/"+maxHp;
 		}
 		

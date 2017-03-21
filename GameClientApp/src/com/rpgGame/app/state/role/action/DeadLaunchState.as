@@ -8,7 +8,6 @@ package com.rpgGame.app.state.role.action
 	import com.game.engine3D.vo.BaseRole;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.control.DeadLaunchMoveStateReference;
 	import com.rpgGame.core.state.role.action.ActionState;
@@ -141,7 +140,7 @@ package com.rpgGame.app.state.role.action
 					});
 					CorrodeMethod(_corrodeMethodData.method).corrodeAlpha = 1 - _valueObj.alpha;
 				}
-				_corrodeTween = TweenLite.to(_valueObj, 2, {alpha: 0, onComplete: stopCorrode, onUpdate: function() : void
+				_corrodeTween = TweenLite.to(_valueObj, 2, {alpha: 0, onComplete: onStopCorrode, onUpdate: function() : void
 				{
 					if (_corrodeMethodData)
 						CorrodeMethod(_corrodeMethodData.method).corrodeAlpha = 1 - _valueObj.alpha;
@@ -168,7 +167,7 @@ package com.rpgGame.app.state.role.action
 			}
 			else
 			{
-				stopCorrode();
+				onStopCorrode();
 			}
 		}
 
@@ -189,7 +188,7 @@ package com.rpgGame.app.state.role.action
 						break;
 				}
 			});
-			_corrodeTween = TweenLite.to(_valueObj, 0.5, {alpha: 0, onComplete: stopCorrode, onUpdate: function() : void
+			_corrodeTween = TweenLite.to(_valueObj, 0.5, {alpha: 0, onComplete: onStopCorrode, onUpdate: function() : void
 			{
 				role.avatar.forEachRenderUnit(function(render : RenderUnit3D) : void
 				{
@@ -211,18 +210,17 @@ package com.rpgGame.app.state.role.action
 		{
 			super.playAnimation(role, render, isFreeze, time, speedRatio);
 
-			var statusType : String = RoleActionType.getActionType(_statusType, (_machine as RoleStateMachine).isRiding);
 			switch (render.type)
 			{
 				case RenderUnitType.BODY:
 				case RenderUnitType.HAIR:
 				case RenderUnitType.WEAPON:
 				case RenderUnitType.DEPUTY_WEAPON:
-					render.visible = true;
 					render.repeat = 1;
-					render.setStatus(statusType, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
+					render.setStatus(_statusType, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
 					if (isFreeze)
 						render.stop(time);
+					render.visible = true;
 					break;
 				case RenderUnitType.MOUNT:
 					render.repeat = 1;
@@ -231,6 +229,7 @@ package com.rpgGame.app.state.role.action
 						render.stop(time);
 					break;
 				case RenderUnitType.KNIFE_LIGHT:
+					render.visible = false;
 					break;
 				case RenderUnitType.WEAPON_EFFECT:
 					render.visible = true;
@@ -246,14 +245,13 @@ package com.rpgGame.app.state.role.action
 		override public function afterExecute() : void
 		{
 			super.afterExecute();
-			syncAnimation(false, 0);
 
 			if (_machine && !_machine.isDisposed)
 			{
 				var role : SceneRole = _machine.owner as SceneRole;
 				if (role.type == SceneCharType.BIAO_CHE || role.type == SceneCharType.FAMILY_WAR_FLAG)
 				{
-					stopCorrode();
+					onStopCorrode();
 				}
 				else
 				{
@@ -276,7 +274,7 @@ package com.rpgGame.app.state.role.action
 							}
 							else
 							{
-								_corrodeTween = TweenLite.delayedCall((totalTime + 2000) * 0.001, onRoleDiedDelay);
+								_corrodeTween = TweenLite.delayedCall(totalTime * 0.001, onRoleDiedDelay);
 							}
 
 							ref = _machine.getReference(DeadLaunchMoveStateReference) as DeadLaunchMoveStateReference;
@@ -284,7 +282,7 @@ package com.rpgGame.app.state.role.action
 							transition(RoleStateType.CONTROL_DEAD_LAUNCH_MOVE, ref);
 						}
 						else
-							stopCorrode();
+							onStopCorrode();
 					}
 					else
 					{
@@ -301,7 +299,10 @@ package com.rpgGame.app.state.role.action
 			if (_machine && !_machine.isDisposed)
 			{
 				var role : SceneRole = _machine.owner as SceneRole;
-				SceneRoleManager.getInstance().removeSceneRole(role);
+				if(role.type != SceneCharType.PLAYER)
+				{
+					SceneRoleManager.getInstance().removeSceneRole(role);
+				}
 			}
 		}
 
@@ -309,6 +310,22 @@ package com.rpgGame.app.state.role.action
 		{
 			super.leave();
 			stopCorrode();
+		}
+
+		private function onStopCorrode() : void
+		{
+			if (_machine && !_machine.isDisposed)
+			{
+				stopCorrode();
+				if (_isLaunching)
+				{
+					var role : SceneRole = _machine.owner as SceneRole;
+					if (role.type != SceneCharType.PLAYER)
+					{
+						roleDied();
+					}
+				}
+			}
 		}
 
 		private function stopCorrode() : void
@@ -337,7 +354,6 @@ package com.rpgGame.app.state.role.action
 						_corrodeTween.kill();
 						_corrodeTween = null;
 					}
-					roleDied();
 				}
 			}
 		}
@@ -345,6 +361,12 @@ package com.rpgGame.app.state.role.action
 		override public function leavePass(nextState : IState, force : Boolean = false) : Boolean
 		{
 			if (nextState.type == RoleStateType.ACTION_IDLE)
+			{
+				if (force)
+					return true;
+				return false;
+			}
+			else if (nextState.type == RoleStateType.ACTION_PREWAR)
 			{
 				if (force)
 					return true;
