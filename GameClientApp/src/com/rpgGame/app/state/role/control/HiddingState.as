@@ -52,9 +52,15 @@ package com.rpgGame.app.state.role.control
 			render.blendMode = BlendMode.NORMAL;
 			render.alpha = 1;
 			render.castsShadows = true;
-			if(render.type == RenderUnitType.HAIR)
+			switch(render.type)
 			{
-				render.visible = true;
+				case RenderUnitType.HAIR:
+				case RenderUnitType.WEAPON_EFFECT:
+				case RenderUnitType.WEAPON:
+				case RenderUnitType.DEPUTY_WEAPON:
+				case RenderUnitType.DEPUTY_WEAPON_EFFECT:
+					render.visible = true;
+					break;
 			}
 		}
 		
@@ -64,9 +70,15 @@ package com.rpgGame.app.state.role.control
 			render.blendMode = BlendMode.LAYER;
 			render.alpha = 0;
 			render.castsShadows = false;
-			if(render.type == RenderUnitType.HAIR)
+			switch(render.type)
 			{
-				render.visible = false;
+				case RenderUnitType.HAIR:
+				case RenderUnitType.WEAPON_EFFECT:
+				case RenderUnitType.WEAPON:
+				case RenderUnitType.DEPUTY_WEAPON:
+				case RenderUnitType.DEPUTY_WEAPON_EFFECT:
+					render.visible = false;
+					break;
 			}
 		}
 		

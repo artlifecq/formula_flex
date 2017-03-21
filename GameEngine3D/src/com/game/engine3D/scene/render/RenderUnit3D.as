@@ -1950,6 +1950,13 @@ package com.game.engine3D.scene.render
 		
 		override public function set visible(value : Boolean) : void
 		{
+			if(isHiding)
+			{
+				if(value)
+				{
+					return;
+				}
+			}
 			if (_visible != value)
 			{
 				super.visible = value;
