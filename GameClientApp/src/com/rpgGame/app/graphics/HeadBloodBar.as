@@ -5,6 +5,8 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.utils.HeadBloodUtil;
 	
+	import flash.utils.getTimer;
+	
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	
@@ -242,8 +244,7 @@ package com.rpgGame.app.graphics
 			if (_hpBar is Quad)
 				Quad(_hpBar).color = _color;
 			
-			_hpBar.width = (BLOOD_WIDTH - 2) * value;
-			
+			_hpBar.scaleX = value;
 			_lastPercent = value;
 		}
 		

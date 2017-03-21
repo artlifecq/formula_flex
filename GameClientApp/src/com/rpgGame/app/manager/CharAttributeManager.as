@@ -129,7 +129,6 @@ package com.rpgGame.app.manager
 		{
 			setAttributeValue(data, CharAttributeType.MAX_HP, value);
 			updateBloodBar(data);
-
 			//-----------------这个地方派发MAXHP_CHANGE事件意义不大，当时实际属性并没有开始改变-------
 //			if( data.id == MainRoleManager.actorID )
 //				EventManager.dispatchEvent(MainPlayerEvent.MAXHP_CHANGE);
