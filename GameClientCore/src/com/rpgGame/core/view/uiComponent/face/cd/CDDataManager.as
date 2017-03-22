@@ -29,6 +29,22 @@ package com.rpgGame.core.view.uiComponent.face.cd
 		}
 		
 		/**
+		 *当前时间 
+		 * @param $cdType
+		 * @return 
+		 * 
+		 */
+		public static function getCdNowTm( $cdType:* ):uint
+		{
+			var cdData:CDData = _map.getValue($cdType);
+			if(cdData)
+			{
+				return cdData.now;
+			}
+			return 0;
+		}
+		
+		/**
 		 * 让CD转起来
 		 * @param $cdType
 		 * @param $cd

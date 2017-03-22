@@ -10,6 +10,7 @@ package com.rpgGame.app.view.icon
 	import com.rpgGame.coreData.info.face.IBaseFaceInfo;
 	
 	import flash.text.TextFieldAutoSize;
+	import flash.text.TextFormat;
 	
 	import feathers.dragDrop.IDragSource;
 	import feathers.dragDrop.IDropTarget;
@@ -53,6 +54,11 @@ package com.rpgGame.app.view.icon
 			super($iconSize);
 
 			sortLayer();
+		}
+
+		public function get cdFace():CDFace
+		{
+			return _cdFace;
 		}
 
 		private function onAddToStg(event : Event) : void
@@ -234,7 +240,7 @@ package com.rpgGame.app.view.icon
 				_shortcutKeyLab = new TextField(40, 20, "");
 				_shortcutKeyLab.touchable = false;
 				_shortcutKeyLab.autoSize = TextFieldAutoSize.LEFT;
-				var tf:TextFormat=new TextFormat();
+				var tf:starling.text.TextFormat=new starling.text.TextFormat();
 				tf.horizontalAlign="left";
 				_shortcutKeyLab.format=tf;
 				_shortcutKeyLab.color = StaticValue.COLOR_CODE_4;
@@ -247,14 +253,14 @@ package com.rpgGame.app.view.icon
 
 		private var _isShwoTm : Boolean = false;
 
-		public function setIsShowCdTm(isShow : Boolean) : void
+		public function setIsShowCdTm(isShow : Boolean,txtFormat : flash.text.TextFormat = null) : void
 		{
 			_isShwoTm = isShow;
 			if (_cdFace == null)
 				return;
 
 			if (isShow)
-				_cdFace.showTmTxt();
+				_cdFace.showTmTxt(txtFormat);
 			else
 				_cdFace.hideTmTxt();
 		}

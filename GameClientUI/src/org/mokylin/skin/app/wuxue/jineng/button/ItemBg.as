@@ -1,4 +1,4 @@
-package org.mokylin.skin.app.jineng
+package org.mokylin.skin.app.wuxue.jineng.button
 {
 	import feathers.controls.StateSkin;
 
@@ -7,17 +7,20 @@ package org.mokylin.skin.app.jineng
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class sssssssSkin extends feathers.controls.StateSkin
+	public class ItemBg extends feathers.controls.StateSkin
 	{
 
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function sssssssSkin()
+		public function ItemBg()
 		{
 			super();
 			
-			this.currentState = "normal";
+			this.currentState = "upAndSelected";
+			this.height = 59;
+			this.width = 241;
+			this.elementsContent = [];
 			
 			states = {
 			};
