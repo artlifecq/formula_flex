@@ -4,7 +4,9 @@ package com.rpgGame.app.ui.main.buff
 	import com.rpgGame.app.view.icon.BuffIcon;
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.enum.face.FaceTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.role.RoleData;
@@ -23,6 +25,7 @@ package com.rpgGame.app.ui.main.buff
 		private var roleId:int;
 		private var goodBuffs:Vector.<BuffIcon>;
 		private var badBuffs:Vector.<BuffIcon>;
+		private var gridW:int;
 		
 		public function BuffBar(skin:StateSkin=null)
 		{
@@ -42,6 +45,7 @@ package com.rpgGame.app.ui.main.buff
 			roleId=MainRoleManager.actor.id;
 			var buffList : Vector.<BuffData>=(MainRoleManager.actor.data as RoleData).buffList;
 			var num:int=buffList.length;
+			gridW=IcoSizeEnum.ICON_36+5
 			for(var i:int=0;i<num;i++){
 				var data:BuffData=buffList[i];
 				createIcon(data);
@@ -53,24 +57,30 @@ package com.rpgGame.app.ui.main.buff
 			var icon:BuffIcon=BuffIcon.create(IcoSizeEnum.ICON_36);
 			icon.buffData=data;
 			var xx:int;
-			var gap:int=5;
 			if(data.buffData.q_effect_type==2){//负面
 				if(badBuffs.length==0){
 					xx=20;
 				}else{
-					xx=badBuffs[badBuffs.length-1].x+IcoSizeEnum.ICON_36+gap;
+					xx=badBuffs[badBuffs.length-1].x+gridW;
 				}
 				badBuffs.push(icon);
 			}else{
 				if(goodBuffs.length==0){
 					xx=-20;
 				}else{
-					xx=badBuffs[badBuffs.length-1].x-IcoSizeEnum.ICON_36-gap;
+					xx=badBuffs[badBuffs.length-1].x-gridW;
 				}
 				goodBuffs.push(icon);
 			}
 			icon.x=xx;
+			
+			CDDataManager.playCD(getKey(data.buffData.q_buff_id), data.buffData.q_effect_time, 0);
 			this.addChild(icon);
+		}
+		
+		private  function getKey(id : int) : String
+		{
+			return FaceTypeEnum.BUFF+"_"+roleId + "_" + id;
 		}
 		
 		private function initEvent():void
@@ -103,6 +113,19 @@ package com.rpgGame.app.ui.main.buff
 					BuffIcon.recycle(icon);
 					break;
 				}
+			}
+			num=datas.length;
+			var changW:int;
+			if(datas==goodBuffs){
+				changW=gridW;
+			}else{
+				changW=-1*gridW;
+			}
+			
+			while(i<num){
+				icon=datas[i];
+				icon.x+=changW;
+				i++;
 			}
 		}
 		

@@ -43,6 +43,7 @@ package com.rpgGame.app.view.icon
 		public function BuffIcon($iconSize:int=IcoSizeEnum.ICON_36)
 		{
 			super($iconSize);
+			this.setIsShowCdTm( true );
 		}
 		
 		override public function sortLayer():void
@@ -65,7 +66,7 @@ package com.rpgGame.app.view.icon
 //			this.setIconResName(ClientConfig.getBuffIcon(_buffData.buffData.q_icon, IcoSizeEnum.ICON_36 ));
 			this.setIconResName(ClientConfig.getItemIcon("101", IcoSizeEnum.ICON_36 ));
 			sortLayer();
-			
+			this.faceInfo=buffData;
 			var info:Q_tipsinfo=new Q_tipsinfo();
 			info.q_describe_tittle=_buffData.buffData.q_buff_name;
 			info.q_describe=_buffData.buffData.q_description;
@@ -80,6 +81,7 @@ package com.rpgGame.app.view.icon
 			if( _iconImage){
 				_iconImage.removeFromParent();
 			}
+			_buffData=null;
 		}
 		
 		public	function instanceDestroy() : void

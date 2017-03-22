@@ -1,14 +1,21 @@
 package com.rpgGame.app.ui.main.head
 {
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.LookSender;
+	import com.rpgGame.app.view.icon.BuffIcon;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.core.events.LookEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
 	import com.rpgGame.coreData.enum.JobEnum;
+	import com.rpgGame.coreData.enum.face.FaceTypeEnum;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.AssetUrl;
@@ -35,6 +42,7 @@ package com.rpgGame.app.ui.main.head
 		private var _headImg:UIAsset;
 		private var _roleData:HeroData;
 		private var tween:TweenLite;
+		private var buffIcons:Vector.<BuffIcon>;
 		
 		public function RoleHeadBar()
 		{
@@ -50,6 +58,7 @@ package com.rpgGame.app.ui.main.head
 			_headImg.x=18;
 			_headImg.y=-9;
 			_skin.container.addChildAt(_headImg,3);
+			buffIcons=new Vector.<BuffIcon>();
 		}
 		
 		override public function refresh():void
@@ -58,12 +67,70 @@ package com.rpgGame.app.ui.main.head
 			_roleData=SceneRoleSelectManager.selectedRole.data as HeroData;
 			updateNormal();
 			updateAttInfo();
+			updateBuff();
 			
 			this.x=330;
 			this.y=42;
 			this.alpha=0.5;
 			tween=	TweenLite.to(this, 0.5, {x:283,y:42,alpha:1, ease:Bounce.easeOut,onComplete:onTween});
-			intiEvent();
+			initEvent();
+		}
+		
+		private function updateBuff():void
+		{
+			var buffList : Vector.<BuffData>=_roleData.buffList;
+			var num:int=buffList.length;			
+			for(var i:int=0;i<num;i++){
+				var data:BuffData=buffList[i];
+				createIcon(data);
+			}
+		}
+		
+		private function createIcon(data:BuffData):void
+		{
+			var icon:BuffIcon=BuffIcon.create(IcoSizeEnum.ICON_24);
+			icon.buffData=data;
+			buffIcons.push(icon);
+			icon.x=buffIcons.length*(IcoSizeEnum.ICON_24+2);
+			icon.buffData=data;
+			
+			CDDataManager.playCD(getKey(data.buffData.q_buff_id), data.buffData.q_effect_time, 0);
+			this.addChild(icon);
+		}
+		
+		private function addBuff(buffData:BuffData):void
+		{
+			if(buffData.roleId!=_roleData.id){
+				return;
+			}
+			createIcon(buffData);
+		}
+		
+		private function removeBuff(data:BuffData):void
+		{
+			var icon:BuffIcon;
+			var num:int=buffIcons.length;
+			for  (var i:int=0;i<num;i++) 
+			{
+				icon=buffIcons[i];
+				if(icon.buffData==data){
+					buffIcons.splice(i,1);
+					BuffIcon.recycle(icon);
+					break;
+				}
+			}
+			num=buffIcons.length;
+			var changW:int=(IcoSizeEnum.ICON_24+2)*-1;
+			while(i<num){
+				icon=buffIcons[i];
+				icon.x+=changW;
+				i++;
+			}
+		}
+		
+		private  function getKey(id : int) : String
+		{
+			return FaceTypeEnum.BUFF+"_"+_roleData.id + "_" + id;
 		}
 		
 		private function onTween():void
@@ -81,10 +148,12 @@ package com.rpgGame.app.ui.main.head
 			this.y = 42;//28;
 		}
 		
-		private function intiEvent():void
+		private function initEvent():void
 		{
 			EventManager.addEvent(MainPlayerEvent.NOWHP_CHANGE, changeAtt);			
 			EventManager.addEvent(MainPlayerEvent.MAXHP_CHANGE, changeAtt);			
+			EventManager.addEvent(BuffEvent.ADD_BUFF, addBuff);
+			EventManager.addEvent(BuffEvent.REMOVE_BUFF, removeBuff);
 		}
 		
 		override protected function onTouchTarget(target : DisplayObject) : void 
@@ -119,6 +188,8 @@ package com.rpgGame.app.ui.main.head
 			super.onHide();
 			EventManager.removeEvent(MainPlayerEvent.NOWHP_CHANGE, changeAtt);			
 			EventManager.removeEvent(MainPlayerEvent.MAXHP_CHANGE, changeAtt);			
+			EventManager.removeEvent(BuffEvent.ADD_BUFF, addBuff);
+			EventManager.removeEvent(BuffEvent.REMOVE_BUFF, removeBuff);
 		}
 		
 		private function changeAtt(data:RoleData):void
