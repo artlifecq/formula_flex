@@ -57,9 +57,9 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			SocketConnection.addCmdListener(102105,onResFightFailedBroadcastMessage);
 			SocketConnection.addCmdListener(102101,onResFightBroadcastMessage);
-//			SocketConnection.addCmdListener(102102,onResAttackResultMessage);
+			SocketConnection.addCmdListener(102102,onResAttackResultMessage);
 			SocketConnection.addCmdListener(102107,onResAttackVentToClientMessage);
-			SocketConnection.addCmdListener(102114,onSCAttackerResultMessage);
+//			SocketConnection.addCmdListener(102114,onSCAttackerResultMessage);
 			SocketConnection.addCmdListener(102103,onResAttackRangeMessage);
 //			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_YOUR_SPELL_RELEASED, onYouSpellRelease);
 			//
@@ -128,9 +128,8 @@ package com.rpgGame.app.cmdlistener.scene
 		 * @param msg
 		 * 
 		 */		
-		private function onSCAttackerResultMessage(msg:SCAttackerResultMessage):void
+		private function onResAttackResultMessage(msg:ResAttackResultMessage):void
 		{
-			GameLog.addShow("*************************技能伤害流水号为： \t" + msg.uid);
 			var info : SpellResultInfo = SpellResultInfo.setSpellResultInfo(msg);
 			SpellHitHelper.fightSpellHitEffect(info);
 			effectCharAttribute(info);

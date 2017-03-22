@@ -46,7 +46,7 @@ package com.game.engine2D.scene.layers
 		public var loadComplete:Boolean = false;
 		
 		/**场景*/
-		private var _scene : Scene;
+		private var _mapScene : Scene;
 		private var _camera : SceneCamera;
 		/**
 		 * 缓存场景的每个格子地图容器
@@ -72,7 +72,7 @@ package com.game.engine2D.scene.layers
 		
 		public function SceneZoneMapLayer($scene : Scene)
 		{
-			_scene = $scene;
+			_mapScene = $scene;
 			_camera = $scene.sceneCamera;
 		}
 		
@@ -84,8 +84,8 @@ package com.game.engine2D.scene.layers
 		final private function getMapZone($zoneX : int, $zoneY : int) : MapZone
 		{
 			//判断范围合法性
-			var hNum : int = Math.ceil(_scene.mapConfig.gridH / SceneConfig.ZONE_SCALE_WIDTH);
-			var vNum : int = Math.ceil(_scene.mapConfig.gridV / SceneConfig.ZONE_SCALE_HEIGHT);
+			var hNum : int = Math.ceil(_mapScene.mapConfig.gridH / SceneConfig.ZONE_SCALE_WIDTH);
+			var vNum : int = Math.ceil(_mapScene.mapConfig.gridV / SceneConfig.ZONE_SCALE_HEIGHT);
 			if ($zoneX < 0 || $zoneX >= hNum)
 				return null;
 			if ($zoneY < 0 || $zoneY >= vNum)
@@ -125,7 +125,7 @@ package com.game.engine2D.scene.layers
 		 */
 		final public function run() : void
 		{
-			if (!_scene.mapConfig) //没有地图配置信息的时候，直接返回吧。。。
+			if (!_mapScene.mapConfig) //没有地图配置信息的时候，直接返回吧。。。
 			{
 				_isNeedSortZone = true;
 				return;
@@ -215,8 +215,8 @@ package com.game.engine2D.scene.layers
 				var cameraZoneRangeY : uint = _camera.zoneRangeXY.y;
 				//得到新区域的可视点数组
 				var pointArr : Array = SceneUtil.findViewZonePoints(newMapZone.tile_x, newMapZone.tile_y, cameraZoneRangeX, cameraZoneRangeY);
-				var zoneMaxX : int = Math.ceil(_scene.mapConfig.gridH / SceneConfig.ZONE_SCALE_WIDTH); //注意这个是向上取整
-				var zoneMaxY : int = Math.ceil(_scene.mapConfig.gridV / SceneConfig.ZONE_SCALE_HEIGHT); //注意这个是向上取整
+				var zoneMaxX : int = Math.ceil(_mapScene.mapConfig.gridH / SceneConfig.ZONE_SCALE_WIDTH); //注意这个是向上取整
+				var zoneMaxY : int = Math.ceil(_mapScene.mapConfig.gridV / SceneConfig.ZONE_SCALE_HEIGHT); //注意这个是向上取整
 				var p : Point;
 				var key : *;
 				var newMapZoneMap : Dictionary = new Dictionary();
@@ -359,7 +359,7 @@ package com.game.engine2D.scene.layers
 			var hasData : Boolean = MapCache.getInstance().hasZoneBmpData(key);
 			if (!$mapZone.isLoaded && !$mapZone.isLoading && !hasData)
 			{
-				var filePath : String = _scene.mapConfig.zoneMapUrl.replace("#", key);
+				var filePath : String = _mapScene.mapConfig.zoneMapUrl.replace("#", key);
 				var userData : Object = {};
 				userData.zoneKey = key;
 				userData.mapZone = $mapZone;
