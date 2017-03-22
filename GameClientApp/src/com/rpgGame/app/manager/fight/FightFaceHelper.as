@@ -171,6 +171,15 @@ package com.rpgGame.app.manager.fight
 					if(isUsefulBmp){
 						numberType=NUMBER_PC_HPSUB;
 					}
+					
+					if (atkor.id == MainRoleManager.actorID||hurter.id == MainRoleManager.actorID) 
+					{
+						if( hurtAmount> 0){
+							showAttChange(EnumHurtType.ADDHP, hurtAmount);//回血
+							return;
+						}
+					}	
+					
 					break;
 				case EnumHurtType.SPELL_HURT_TYPE_MISS: //闪避
 					typeRes = ROOT+USESFUL_EFFECT+"weimingzhong.png";
