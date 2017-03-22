@@ -45,10 +45,10 @@ package com.rpgGame.app.state.role.control
 				_stateReference = _ref as FlyUpStateReference;
 				
 //				FLY_HEIGHT = Number(_stateReference.buffData.clientData.h);
-				hitTime = Number(_stateReference.buffData.clientData.hit);
-				upTime = Number(_stateReference.buffData.clientData.up);
-				flyTime = Number(_stateReference.buffData.clientData.stay);
-				fallTime = Number(_stateReference.buffData.clientData.down);
+				hitTime = 1000;//Number(_stateReference.buffData.clientData.hit);
+				upTime = 700;//Number(_stateReference.buffData.clientData.up);
+				flyTime = 500;//Number(_stateReference.buffData.clientData.stay);
+				fallTime = 200;//Number(_stateReference.buffData.clientData.down);
 				
 				var startTime:Number = _stateReference.buffData.totalTime - _stateReference.buffData.disappearTime;
 				if(startTime>0)
@@ -193,7 +193,7 @@ package com.rpgGame.app.state.role.control
 		{
 			if (_machine && !_machine.isDisposed)
 			{
-				changeAction(RoleActionType.FLY_HIT,0);
+				changeAction(RoleActionType.FLY_HIT,1);
 				var totalTime : int = flyTime;
 				if(totalTime > 0)
 				{
@@ -264,38 +264,11 @@ package com.rpgGame.app.state.role.control
 		
 		override public function leavePass(nextState : IState, force : Boolean = false) : Boolean
 		{
-//			if ((_machine as RoleStateMachine).isBingDong)//如果是冰冻状态，且是非强制的话，则要永远保持这个跳跃状态
-//			{
-//				if (!force)
-//					return false;
-//			}
 			return true;
 		}
 		
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
 		{
-//			if ((_machine as RoleStateMachine).isDead)//死亡的时候，不能进入跳跃状态
-//			{
-//				return false;
-//			}
-//			else if ((_machine as RoleStateMachine).isDeadLaunch)//击飞死亡状态，不能进入跳跃状态
-//			{
-//				return false;
-//			}
-//			else if ((_machine as RoleStateMachine).isTrailMoving)//如果是轨迹行走阶状态，也不能进入跳跃状态
-//			{
-//				return false;
-//			}
-//			else if ((_machine as RoleStateMachine).isStiff)
-//			{
-//				if (!force)
-//					return false;
-//			}
-//			else if ((_machine as RoleStateMachine).isStun)
-//			{
-//				if (!force)
-//					return false;
-//			}
 			return true;
 		}
 		
