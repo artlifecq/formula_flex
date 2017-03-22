@@ -1,5 +1,6 @@
 package com.rpgGame.app.state.role.control
 {
+	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.utils.getQualifiedClassName;
@@ -37,6 +38,17 @@ package com.rpgGame.app.state.role.control
 		override public function get tribe():String
 		{
 			return getQualifiedClassName(UseSpellState);
+		}
+		
+		override public function leave():void
+		{
+			super.leave();
+			
+			transition(RoleStateType.CONTROL_STOP_WALK_MOVE);
+			if ((_machine as RoleStateMachine).isPrewarWaiting)
+				transition(RoleStateType.ACTION_PREWAR);
+			else
+				transition(RoleStateType.ACTION_IDLE);
 		}
 	}
 }

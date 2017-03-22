@@ -210,7 +210,7 @@ package com.game.engine3D.scene.render
 		private var _waitAddUnitList : Vector.<RenderUnitChild>;
 		private var _currChildUnitList : Vector.<RenderUnitChild>;
 
-		protected var _compositeMesh : CompositeMesh;
+		protected var _compositeAMesh : CompositeMesh;
 		
 		private var _methodDatas : Vector.<MethodData>;
 		//private var _boneChildrenByName : Dictionary;
@@ -973,6 +973,10 @@ package com.game.engine3D.scene.render
 			{
 			}
 			else
+			{
+				layerType = 0;
+			}
+			if(!_visible)
 			{
 				layerType = 0;
 			}
@@ -1950,13 +1954,6 @@ package com.game.engine3D.scene.render
 		
 		override public function set visible(value : Boolean) : void
 		{
-			if(isHiding)
-			{
-				if(value)
-				{
-					return;
-				}
-			}
 			if (_visible != value)
 			{
 				super.visible = value;
@@ -2297,7 +2294,7 @@ package com.game.engine3D.scene.render
 						if (element is Mesh)
 						{
 							childData.renderUnit._renderResourceData.isSkinMesh = true;
-							childData.renderUnit._compositeMesh = compositeMesh;
+							childData.renderUnit._compositeAMesh = compositeMesh;
 							compositeMesh.addUnit(Mesh(element));
 							if (ru != this)
 							{
@@ -2332,6 +2329,10 @@ package com.game.engine3D.scene.render
 
 		private function doWaitAddBone(childData : RenderUnitChild) : void
 		{
+			if(childData.renderUnit.type == "hair")
+			{
+				trace(1);
+			}
 			if (childData.compositeIndex > -1)
 			{
 				if (_animatorElements && childData.compositeIndex < _animatorElements.length)
@@ -2849,7 +2850,7 @@ package com.game.engine3D.scene.render
 			_pickDummyBindBone = null;
 			_defalutStatus = null;
 			_secondStatusGetter = null;
-			_compositeMesh = null;
+			_compositeAMesh = null;
 			_repeat = 0;
 			_lifecycle = 0;
 			_playCount = 0;
@@ -3064,15 +3065,15 @@ package com.game.engine3D.scene.render
 						element.hookingJointName = null;
 						_graphicDis.addChild(element);
 					}
-					if (_compositeMesh && (element is Mesh))
+					if (_compositeAMesh && (element is Mesh))
 					{
-						var index : int = _compositeMesh.getUnitIndex(Mesh(element));
+						var index : int = _compositeAMesh.getUnitIndex(Mesh(element));
 						if (index > -1)
-							_compositeMesh.removeUnitByIndex(index);
+							_compositeAMesh.removeUnitByIndex(index);
 					}
 				}
 			}
-			_compositeMesh = null;
+			_compositeAMesh = null;
 			this.parent = parent;
 		}
 
@@ -3576,13 +3577,13 @@ package com.game.engine3D.scene.render
 			{
 				for each (var element : ObjectContainer3D in _drawElements)
 				{
-					if (_compositeMesh)
+					if (_compositeAMesh)
 					{
 						if (element is Mesh)
 						{
-							var index : int = _compositeMesh.getUnitIndex(Mesh(element));
+							var index : int = _compositeAMesh.getUnitIndex(Mesh(element));
 							if (index > -1)
-								_compositeMesh.removeUnitByIndex(index);
+								_compositeAMesh.removeUnitByIndex(index);
 						}
 					}
 					if (element.parent)
@@ -3593,7 +3594,7 @@ package com.game.engine3D.scene.render
 				}
 				_drawElements = null;
 			}
-			_compositeMesh = null;
+			_compositeAMesh = null;
 			if (_meshes)
 			{
 				for each (var mesh : Mesh in _meshes)
@@ -3872,6 +3873,11 @@ package com.game.engine3D.scene.render
 					}
 				}
 			}
+		}
+
+		public function get compositeAMesh():CompositeMesh
+		{
+			return _compositeAMesh;
 		}
 	}
 }

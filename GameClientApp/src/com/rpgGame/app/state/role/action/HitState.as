@@ -179,6 +179,10 @@ package com.rpgGame.app.state.role.action
 				{
 					return false;
 				}
+				else if((_machine as RoleStateMachine).isUseSpell)
+				{
+					return false;
+				}
 			}
 			return true;
 		}
