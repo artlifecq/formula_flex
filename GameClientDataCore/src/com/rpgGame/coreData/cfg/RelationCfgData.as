@@ -35,12 +35,12 @@ package com.rpgGame.coreData.cfg
                 return true;
             }
             for (var i : int = 0, len : int = relation.length; i < len; ++i) {
-                if (attack.relation == relation[i]) {
-                    return false;
+                if (target.relation == relation[i]) {
+                    return true;
                 }
             }
             // 判断阵营关系
-            return true;
+            return false;
         }
         
         public function RelationCfgData()
