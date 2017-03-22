@@ -58,6 +58,11 @@ package com.rpgGame.app.manager.fight
                 var roleInfo : RoleData = role.data as RoleData;
                 if (SceneCharType.MONSTER == role.type) {
                     // 是怪物
+                    if (roleInfo.ownerId == MainRoleManager.actorInfo.id) {
+                        // 是自己的从属怪
+                        modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
+                        break;
+                    }
                     modeState = RelationCfgData.isEnemy(MainRoleManager.actorInfo, roleInfo) ?
                         FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY : FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
                     if (FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY == modeState && 

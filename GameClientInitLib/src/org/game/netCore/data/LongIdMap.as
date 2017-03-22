@@ -41,6 +41,11 @@ package org.game.netCore.data
 			
 			return gid;
 		}
+        
+        public static function getGidByStringValue(value : String) : int {
+            var gid : * = map[value];
+            return null == gid ? -1 : gid;
+        }
 		
 		public static function get NEXTGID():int
 		{
