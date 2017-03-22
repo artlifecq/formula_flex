@@ -23,7 +23,6 @@ package com.rpgGame.app.scene
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
-	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
 	
 	/**
@@ -111,7 +110,7 @@ package com.rpgGame.app.scene
 				return;
 			for each (var buffData : BuffData in buffList)
 			{
-				addBuff(buffData);
+//				addBuff(buffData);
 			}
 		}
 		

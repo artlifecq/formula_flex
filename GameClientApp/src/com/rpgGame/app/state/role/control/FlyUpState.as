@@ -116,7 +116,7 @@ package com.rpgGame.app.state.role.control
 				playAnimation(role, render,actionType,repeat);
 		}
 		
-		private function playAnimation(role : BaseRole, render : RenderUnit3D,actionType:String,repeat:int, isFreeze : Boolean = false, time : int = -1, speedRatio : Number = 1) : void
+		private function playAnimation(role : BaseRole, render : RenderUnit3D,actionType:String,repeat:int, isFreeze : Boolean = false, time : int = 0, speedRatio : Number = 1) : void
 		{
 			var statusType : String = actionType;
 			switch (render.type)
@@ -238,8 +238,8 @@ package com.rpgGame.app.state.role.control
 		
 		override public function leave() : void
 		{
-			super.leave();
 			stopFly();
+			super.leave();
 		}
 		
 		/**
@@ -257,6 +257,10 @@ package com.rpgGame.app.state.role.control
 		
 		override public function leavePass(nextState : IState, force : Boolean = false) : Boolean
 		{
+			if((_machine as RoleStateMachine).isStiff)
+			{
+				return false;
+			}	
 			return true;
 		}
 		
