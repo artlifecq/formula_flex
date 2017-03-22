@@ -23,6 +23,15 @@ package com.rpgGame.coreData.cfg
 //		public static var clearSpellCost:UpgradeProtoInfo;
 		/** 技能洗点免费等级<该等级，可以免费洗点 **/
 //		public static var clearSpellFreeLevel:int;
+		
+		/**
+		 *其他技能 
+		 */
+		public static var otherSpells:Vector.<Q_skill_model>=new Vector.<Q_skill_model>();
+		/**
+		 *职业阶数 
+		 */
+		private static var _jobGradeMap:HashMap=new HashMap();
 
 		public function SpellDataManager()
 		{
@@ -38,11 +47,16 @@ package com.rpgGame.coreData.cfg
 			var arr:Array = data.readObject();
 			if (arr == null)
 				return;
-
 			for each (var skillData : Q_skill_model in arr)
 			{
 				_map.add(skillData.q_skillID,skillData);
+				_jobGradeMap.add(skillData.q_job+"_"+skillData.q_grade,skillData);
 			}
+		}
+		
+		public static function getJobGradeData(job:int,grade:int):Q_skill_model
+		{
+			return _jobGradeMap.getValue(job+"_"+grade) as Q_skill_model;
 		}
 
 		/**

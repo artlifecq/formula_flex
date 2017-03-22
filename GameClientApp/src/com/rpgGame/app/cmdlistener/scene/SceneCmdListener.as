@@ -79,6 +79,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.map.message.SCAttachStateChangeMessage;
 	import com.rpgGame.netData.map.message.SCSceneObjMoveMessage;
 	import com.rpgGame.netData.player.message.BroadcastPlayerAttriChangeMessage;
+	import com.rpgGame.netData.player.message.ResChangePKStateMessage;
 	import com.rpgGame.netData.player.message.ResPlayerDieMessage;
 	import com.rpgGame.netData.player.message.ResReviveSuccessMessage;
 	
@@ -143,6 +144,11 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			// 陷阱状态改变
             SocketConnection.addCmdListener(101151, onRecvSCAttachStateChangeMessage);
+            SocketConnection.addCmdListener(101151, onRecvSCAttachStateChangeMessage);
+			
+            SocketConnection.addCmdListener(103110, onResChangePKStateMessage);
+			
+			
 			
 //			SocketConnection.addCmdListener(SceneModuleMessages.S2C_TRIGGER_CLIENT_EVENT, onTriggerClientEvent);
 			
@@ -189,6 +195,14 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			
 			finish();
+		}
+		
+		private function onResChangePKStateMessage(msg:ResChangePKStateMessage):void
+		{
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+			if(role){
+				(role.data as HeroData).pkMode=msg.pkState;
+			}
 		}
 		
 		private function onResChangePositionMessage(msg:ResChangePositionMessage):void
@@ -720,7 +734,7 @@ package com.rpgGame.app.cmdlistener.scene
 				return;
 			var roleData : RoleData = role.data as RoleData;
 			
-			CharAttributeManager.setAttributeValue(roleData,msg.attributeChange.type, msg.attributeChange.value);
+			CharAttributeManager.setAttributeValue(roleData,msg.attributeChange.type, msg.attributeChange.value,msg.showEffect);
 			
 			if(msg.attributeChange.type==CharAttributeType.LV){//升级了
 				var animatData : Q_SpellAnimation=AnimationDataManager.getData(9999);//获取升级动画

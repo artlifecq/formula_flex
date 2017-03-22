@@ -144,16 +144,6 @@ package com.rpgGame.app.cmdlistener.scene
 				var role : SceneRole = SceneManager.getSceneObjByID(hurtResult.targetID) as SceneRole;
 				if (role && role.usable)
 				{
-					var data:RoleData=role.data as RoleData;
-					if (data.id == MainRoleManager.actorID) //自己看到就好了
-					{
-						var offset:int=hurtResult.curLife*-1;
-						if( offset< 0){
-							FightFaceHelper.showAttChange(EnumHurtType.SUBHP, offset);//掉血
-						}else if( offset>0){
-							FightFaceHelper.showAttChange(EnumHurtType.ADDHP, offset);//回血
-						}
-					}	
 //					CharAttributeManager.setCharHp(role.data as RoleData, hurtResult.curLife);
 					CharAttributeManager.setCharMp(role.data as RoleData, hurtResult.curMana);
 				}
