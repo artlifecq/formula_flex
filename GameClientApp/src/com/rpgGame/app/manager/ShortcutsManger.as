@@ -9,6 +9,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
+	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.shortcuts.ShortcutsData;
 	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	
@@ -290,11 +291,11 @@ package com.rpgGame.app.manager
 			return true;
 		}
         
-        private function onRemoveBuffEventHandler(id : Number, buffId : Number) : void {
-            if (id != MainRoleManager.actor.id) {
+        private function onRemoveBuffEventHandler(buffData:BuffData) : void {
+            if (buffData.roleId != MainRoleManager.actor.id) {
                 return;
             }
-            if (2003 == buffId) {
+            if (2003 == buffData.cfgId) {
                 // 疯狂连弩技能产生的buff
                 this._isUsed = false;
             }
