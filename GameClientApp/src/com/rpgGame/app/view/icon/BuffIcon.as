@@ -63,8 +63,8 @@ package com.rpgGame.app.view.icon
 		public function set buffData(value:BuffData):void
 		{
 			_buffData = value;
-//			this.setIconResName(ClientConfig.getBuffIcon(_buffData.buffData.q_icon, IcoSizeEnum.ICON_36 ));
-			this.setIconResName(ClientConfig.getItemIcon("101", IcoSizeEnum.ICON_36 ));
+			this.setIconResName(ClientConfig.getBuffIcon(_buffData.buffData.q_icon, _iconSize ));
+//			this.setIconResName(ClientConfig.getItemIcon("101", IcoSizeEnum.ICON_36 ));
 			sortLayer();
 			this.faceInfo=buffData;
 			var info:Q_tipsinfo=new Q_tipsinfo();
@@ -75,23 +75,14 @@ package com.rpgGame.app.view.icon
 		
 		public  function instanceDispose() : void
 		{
-			if( _bgImage){
-				_bgImage.removeFromParent();
-			}
-			if( _iconImage){
-				_iconImage.removeFromParent();
-			}
+			clear();
 			_buffData=null;
 		}
 		
 		public	function instanceDestroy() : void
 		{
-			if( _bgImage){
-				_bgImage.removeFromParent(true);
-			}
-			if( _iconImage){
-				_iconImage.removeFromParent(true);
-			}
+			clear();
+			_buffData=null;
 		}
 		
 		public	function reSet(parameters : Array) : void

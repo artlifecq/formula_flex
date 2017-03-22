@@ -16,8 +16,10 @@ package com.rpgGame.coreData.clientConfig
 		public var q_buff_id:int;
 		 /**  BUFF名称 */
 		public var q_buff_name:String;
-		 /**  客户端显示的图标 */
+		 /**  客户端显示的图标资源 */
 		public var q_icon:String;
+		 /**  UI上是否展示图标0显示 1不显示 */
+		public var q_icon_show:int;
 		 /**  描述 */
 		public var q_description:String;
 		 /**  获得状态的初始化动画 */

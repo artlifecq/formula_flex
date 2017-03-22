@@ -46,7 +46,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_blink_speed:int;
 		 /**  跳劈的高度，可以不配置 */
 		public var q_blink_height:int;
-		 /**  技能伤害类型（0默认攻击技能，1友好技能 2，特殊技能） */
+		 /**  技能伤害类型（0默认攻击技能，1友好技能 2，通用敌对友好） */
 		public var q_hurt_type:int;
 		 /**  作用对象（1自己，2友好目标，3敌对目标，4当前目标，5场景中鼠标的当前坐标点，6组队 7无目标） */
 		public var q_target:int;
@@ -66,7 +66,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_cancel_time:int;
 		 /**  取消清除CD类型（0不清除，1清除） */
 		public var q_cancel_cd:int;
-		 /**  是否可以和别的技能同时释放（0不可以，1可以，1的状态下相当于施法者同时释放多个技能，但是同一个技能同时只能释放一个，受CD检查的限制） */
+		 /**  是否可以和别的技能同时释放（0不可以;1可以，1的状态下相当于施法者同时释放多个技能，但是同一个技能同时只能释放一个，受CD检查的限制;2不检查释放状态） */
 		public var q_performAtTime:int;
 		 /**  是否可以激活自动施法(0激活) */
 		public var q_is_allow_auto_combat:int;
@@ -166,7 +166,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_summon_attack:int;
 		 /**  召唤的怪物/幻象分身持续时间（单位：秒） */
 		public var q_summon_last:int;
-		 /**  召唤类型，1为累加召唤，2为替换召唤3地面特效 */
+		 /**  召唤类型，1为怪物累加召唤，2为怪物替换召唤3地面特效累加，4为地面特效替换 */
 		public var q_summon_type:int;
 		 /**  BUFF触发器，JSON格式用于描述改技能释放后如如何触发各种BUFF。格式为:{t, id, max }{触发类型,作用目标，BuffID}t=触发类型: 1:命中，2:未命中,3:暴击 4:杀死 5攻击开始时触发被动技能，6技能释放后触发，7召唤触发BUFF , 8技能释放前触发，攻击目标id=buff的ID对应BUFF表。Max=一次攻击最多触发多少次.例子:[{t:1, id:1001, r:10000},{t:3, id:5040001, r:10000}]可以把里边值复制到http://www.json.cn.网站去查看 */
 		public var q_buff_trigger:String;

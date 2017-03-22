@@ -92,6 +92,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_die:String = "data.Q_die";
 		/**  物品基本信息数据库																																																																																		 */
 		public static const Q_item:String = "data.Q_item";
+		/**  阵营关系				 */
+		public static const Q_relation:String = "data.Q_relation";
 		/**  tipsid	标题	描述 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
 		/**  职业对应的名字		 */
@@ -106,11 +108,11 @@ package com.rpgGame.coreData.clientConfig
 		public static const SceneCharPatrolInfo:String = "data.SceneCharPatrolInfo";
 		/**  socket返回错误码提示			 */
 		public static const SocketErrorNoteInfo:String = "data.SocketErrorNoteInfo";
-		/**  对象绑定器,绑定器可绑定在玩家，怪物，地面特效等，用来加强效果和增强功能，实现功能的组合								 */
+		/**  对象绑定器,绑定器可绑定在玩家，怪物，地面特效等，用来加强效果和增强功能，实现功能的组合									 */
 		public static const Attach:String = "data.spell.Attach";
 		/**  地面特效			 */
 		public static const Attach_effect:String = "data.spell.Attach_effect";
-		/**  BUFF效果配置数据表																																						 */
+		/**  BUFF效果配置数据表																																							 */
 		public static const Q_buff:String = "data.spell.Q_buff";
 		/**  公共CD表	 */
 		public static const Q_GCD:String = "data.spell.Q_GCD";
@@ -166,6 +168,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_att_values", com.rpgGame.coreData.clientConfig.Q_att_values);
 			regClass("data.Q_die", com.rpgGame.coreData.clientConfig.Q_die);
 			regClass("data.Q_item", com.rpgGame.coreData.clientConfig.Q_item);
+			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);
 			regClass("data.Q_tipsinfo", com.rpgGame.coreData.clientConfig.Q_tipsinfo);
 			regClass("data.RaceNameInfo", com.rpgGame.coreData.clientConfig.RaceNameInfo);
 			regClass("data.RacingInfo", com.rpgGame.coreData.clientConfig.RacingInfo);
