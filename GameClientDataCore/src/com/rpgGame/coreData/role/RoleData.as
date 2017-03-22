@@ -8,6 +8,9 @@
 	import com.rpgGame.netData.map.bean.NpcInfo;
 	
 	import flash.geom.Point;
+	
+	import org.game.netCore.data.LongIdMap;
+	import org.game.netCore.data.long;
 
 	/**
 	 *
@@ -164,13 +167,24 @@
 			data.totalStat.life = info.maxHp;
 //			data.mp = info;
 //			data.totalStat.mana = ;
-			for(var i:int=0;i<info.buffs.length;i++)
+            var i : int = 0;
+			for(i=0;i<info.buffs.length;i++)
 			{
 				var buffData:BuffData = new BuffData(data.id);
 				buffData.buffInfo = info.buffs[i];
 				data.buffList.push(buffData);
 			}
 			readGeneric(data,new Point(info.position.x,info.position.y));
+            if (null == info.sign) {
+                data.ownerId = -1;
+            } else {
+                var ownerId : String = info.sign;
+                for (i = ownerId.length; i < 16; ++i) {
+                    ownerId = "0" + ownerId;
+                }
+                data.ownerId = LongIdMap.getGidByStringValue(ownerId);
+            }
+
 		}
 		
 		public static function readNpc(data : RoleData, info : NpcInfo):void
