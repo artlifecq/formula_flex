@@ -17,7 +17,7 @@ package org.mokylin.skin.app.wuxue
 		//==========================================================================
 		public var btn_jineng:feathers.controls.Radio;
 
-		public var btn_juese:feathers.controls.Radio;
+		public var btn_juexue:feathers.controls.Radio;
 
 
 		//==========================================================================
@@ -30,7 +30,7 @@ package org.mokylin.skin.app.wuxue
 			this.currentState = "normal";
 			this.height = 51;
 			this.width = 285;
-			this.elementsContent = [btn_juese_i(),btn_jineng_i()];
+			this.elementsContent = [btn_jineng_i(),btn_juexue_i()];
 			
 			states = {
 			};
@@ -47,20 +47,20 @@ package org.mokylin.skin.app.wuxue
 			btn_jineng = temp;
 			temp.name = "btn_jineng";
 			temp.groupName = "rdoBtn";
-			temp.styleClass = org.mokylin.skin.app.wuxue.button.ButtonJuexue;
-			temp.x = 144;
+			temp.styleClass = org.mokylin.skin.app.wuxue.button.ButtonJineng;
+			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function btn_juese_i():feathers.controls.Radio
+		private function btn_juexue_i():feathers.controls.Radio
 		{
 			var temp:feathers.controls.Radio = new feathers.controls.Radio();
-			btn_juese = temp;
-			temp.name = "btn_juese";
+			btn_juexue = temp;
+			temp.name = "btn_juexue";
 			temp.groupName = "rdoBtn";
-			temp.styleClass = org.mokylin.skin.app.wuxue.button.ButtonJineng;
-			temp.x = 0;
+			temp.styleClass = org.mokylin.skin.app.wuxue.button.ButtonJuexue;
+			temp.x = 144;
 			temp.y = 0;
 			return temp;
 		}

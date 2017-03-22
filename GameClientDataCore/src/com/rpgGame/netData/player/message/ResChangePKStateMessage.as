@@ -19,9 +19,6 @@ package com.rpgGame.netData.player.message{
 		//pk状态
 		private var _pkState: int;
 		
-		//是否自动切换
-		private var _auto: int;
-		
 		
 		/**
 		 * 写入字节缓存
@@ -30,9 +27,7 @@ package com.rpgGame.netData.player.message{
 			//角色Id
 			writeLong(_personId);
 			//pk状态
-			writeInt(_pkState);
-			//是否自动切换
-			writeInt(_auto);
+			writeByte(_pkState);
 			return true;
 		}
 		
@@ -43,9 +38,7 @@ package com.rpgGame.netData.player.message{
 			//角色Id
 			_personId = readLong();
 			//pk状态
-			_pkState = readInt();
-			//是否自动切换
-			_auto = readInt();
+			_pkState = readByte();
 			return true;
 		}
 		
@@ -85,21 +78,6 @@ package com.rpgGame.netData.player.message{
 		 */
 		public function set pkState(value: int): void{
 			this._pkState = value;
-		}
-		
-		/**
-		 * get 是否自动切换
-		 * @return 
-		 */
-		public function get auto(): int{
-			return _auto;
-		}
-		
-		/**
-		 * set 是否自动切换
-		 */
-		public function set auto(value: int): void{
-			this._auto = value;
 		}
 		
 	}

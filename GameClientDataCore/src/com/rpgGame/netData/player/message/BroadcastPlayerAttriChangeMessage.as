@@ -20,6 +20,9 @@ package com.rpgGame.netData.player.message{
 		//变更的属性
 		private var _attributeChange: AttributeItem;
 		
+		//是否显示特效（0不显示，1显示）
+		private var _showEffect: int;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -29,6 +32,8 @@ package com.rpgGame.netData.player.message{
 			writeLong(_playerid);
 			//变更的属性
 			writeBean(_attributeChange);
+			//是否显示特效（0不显示，1显示）
+			writeByte(_showEffect);
 			return true;
 		}
 		
@@ -40,6 +45,8 @@ package com.rpgGame.netData.player.message{
 			_playerid = readLong();
 			//变更的属性
 			_attributeChange = readBean(AttributeItem) as AttributeItem;
+			//是否显示特效（0不显示，1显示）
+			_showEffect = readByte();
 			return true;
 		}
 		
@@ -79,6 +86,21 @@ package com.rpgGame.netData.player.message{
 		 */
 		public function set attributeChange(value: AttributeItem): void{
 			this._attributeChange = value;
+		}
+		
+		/**
+		 * get 是否显示特效（0不显示，1显示）
+		 * @return 
+		 */
+		public function get showEffect(): int{
+			return _showEffect;
+		}
+		
+		/**
+		 * set 是否显示特效（0不显示，1显示）
+		 */
+		public function set showEffect(value: int): void{
+			this._showEffect = value;
 		}
 		
 	}
