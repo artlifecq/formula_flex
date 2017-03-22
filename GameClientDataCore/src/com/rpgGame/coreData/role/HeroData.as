@@ -210,7 +210,9 @@ package com.rpgGame.coreData.role
 			data.cloths = heroInfo.cloths;
 			data.hair = heroInfo.hair;
 			data.mount = heroInfo.mount;
-			data.pkType = heroInfo.pkType;
+            data.pkMode = heroInfo.pkType;
+            data.relation = heroInfo.relation;
+			//data.pkType = heroInfo.pkType;
 			data.weapon = heroInfo.weapon;
 			data.deputyWeapon = heroInfo.second_weapon;
 			data.sex = heroInfo.sex;
@@ -291,6 +293,8 @@ package com.rpgGame.coreData.role
 			data.hair = info.hair;
 			data.cloths = info.cloths;
 			data.mount = info.mount;
+            data.pkMode = info.pkType;
+            data.relation = info.relation;
 			data.pkType = info.pkType;
 			data.weapon = info.weapon;
 			data.deputyWeapon = info.second_weapon;

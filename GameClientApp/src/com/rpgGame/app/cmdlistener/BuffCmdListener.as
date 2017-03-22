@@ -90,7 +90,7 @@ package com.rpgGame.app.cmdlistener
 				buffData.srcRole = srcObj;
 				tarObj.buffSet.addBuff(buffData);
 				
-				GameLog.addShow("*************************增加一条buff，buffID为： \t" + msg.buff.buffId);
+				GameLog.addShow("*************************增加一条buff，buffID为： \t" + msg.buff.buffId.ToGID());
 			}
 		}
 	}

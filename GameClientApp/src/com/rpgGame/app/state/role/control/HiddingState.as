@@ -6,7 +6,6 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
-	import flash.display.BlendMode;
 	import flash.utils.getQualifiedClassName;
 
 	/**
@@ -45,28 +44,38 @@ package com.rpgGame.app.state.role.control
 			return getQualifiedClassName(HiddingState);
 		}
 		
+		private var layerType:int = 0;
 		
 		private function eachVisible(role : BaseRole, render : RenderUnit3D) : void
 		{
 			role.isHiding = false;
-			render.blendMode = BlendMode.NORMAL;
-			render.alpha = 1;
 			render.castsShadows = true;
-			if(render.type == RenderUnitType.HAIR)
+			switch(render.type)
 			{
-				render.visible = true;
+				case RenderUnitType.WEAPON_EFFECT:
+				case RenderUnitType.DEPUTY_WEAPON_EFFECT:
+					render.visible = true;
+					break;
+				case RenderUnitType.BODY:
+					render.compositeAMesh.layerType = layerType;
+					break;
 			}
 		}
 		
 		private function eachUnVisible(role : BaseRole, render : RenderUnit3D) : void
 		{
 			role.isHiding = true;
-			render.blendMode = BlendMode.LAYER;
-			render.alpha = 0;
 			render.castsShadows = false;
-			if(render.type == RenderUnitType.HAIR)
+			switch(render.type)
 			{
-				render.visible = false;
+				case RenderUnitType.WEAPON_EFFECT:
+				case RenderUnitType.DEPUTY_WEAPON_EFFECT:
+					render.visible = false;
+					break;
+				case RenderUnitType.BODY:
+					layerType = render.compositeAMesh.layerType;
+					render.compositeAMesh.layerType = 0;
+					break;
 			}
 		}
 		

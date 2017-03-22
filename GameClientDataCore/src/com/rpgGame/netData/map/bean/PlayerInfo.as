@@ -54,8 +54,11 @@ package com.rpgGame.netData.map.bean{
 		//坐骑
 		private var _mount: int;
 		
-		//PK类型
+		//PK类型(0-和平 1-组队 2-帮会 3-全体 4-阵营 5-善恶)
 		private var _pkType: int;
+		
+		//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
+		private var _relation: int;
 		
 		//角色属性信息
 		private var _attributes: Vector.<com.rpgGame.netData.player.bean.AttributeItem> = new Vector.<com.rpgGame.netData.player.bean.AttributeItem>();
@@ -91,8 +94,10 @@ package com.rpgGame.netData.map.bean{
 			writeInt(_second_weapon);
 			//坐骑
 			writeInt(_mount);
-			//PK类型
-			writeInt(_pkType);
+			//PK类型(0-和平 1-组队 2-帮会 3-全体 4-阵营 5-善恶)
+			writeByte(_pkType);
+			//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
+			writeByte(_relation);
 			//角色属性信息
 			writeShort(_attributes.length);
 			for (var i: int = 0; i < _attributes.length; i++) {
@@ -139,8 +144,10 @@ package com.rpgGame.netData.map.bean{
 			_second_weapon = readInt();
 			//坐骑
 			_mount = readInt();
-			//PK类型
-			_pkType = readInt();
+			//PK类型(0-和平 1-组队 2-帮会 3-全体 4-阵营 5-善恶)
+			_pkType = readByte();
+			//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
+			_relation = readByte();
 			//角色属性信息
 			var attributes_length : int = readShort();
 			for (var i: int = 0; i < attributes_length; i++) {
@@ -340,7 +347,7 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * get PK类型
+		 * get PK类型(0-和平 1-组队 2-帮会 3-全体 4-阵营 5-善恶)
 		 * @return 
 		 */
 		public function get pkType(): int{
@@ -348,10 +355,25 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * set PK类型
+		 * set PK类型(0-和平 1-组队 2-帮会 3-全体 4-阵营 5-善恶)
 		 */
 		public function set pkType(value: int): void{
 			this._pkType = value;
+		}
+		
+		/**
+		 * get 阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
+		 * @return 
+		 */
+		public function get relation(): int{
+			return _relation;
+		}
+		
+		/**
+		 * set 阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
+		 */
+		public function set relation(value: int): void{
+			this._relation = value;
 		}
 		
 		/**

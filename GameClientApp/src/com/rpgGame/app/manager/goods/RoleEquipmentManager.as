@@ -234,11 +234,11 @@ package com.rpgGame.app.manager.goods
 				if(tip)NoticeManager.showHint(EnumHintInfo.EQUIPMENT_ERROR_SEX, [SexType.getName(sex)]);
 				return false;
 			}
-			if(!isSuitRace(race))
+		/*	if(!isSuitRace(race))
 			{
 				if(tip)NoticeManager.showHint(EnumHintInfo.EQUIPMENT_ERROR_RACE, [RaceUtil.getRaceTitle(race)]);
 				return false;
-			}
+			}*/
 			var lv:int = ItemConfig.getItemRequireLevel(item.cfgId);
 			if(lv > MainRoleManager.actorInfo.totalStat.level)
 			{

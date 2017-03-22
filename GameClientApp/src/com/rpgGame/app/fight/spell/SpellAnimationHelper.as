@@ -593,6 +593,7 @@ package com.rpgGame.app.fight.spell
 					var startTime:Number = info.flyTargetPosList.length * info.flyInterval;
 					for(var j:int = 0;j<info.flyTargets.length;j++)
 					{
+						if(info.flyTargets[j] == null)continue;
 						TweenLite.delayedCall((startTime + info.throwDelayTime + info.flyInterval * j) * 0.001, addFlyEffectOnce, [info, animatData.scene_res, info.flyTargets[j].position,info.flyTargets[j],0, 0, effectQueue, locusPoints]);
 					}
 //					addFlyEffectOnce(info, animatData.scene_res, atkorPosition, atkorRotationY, destPosition, info.throwDelayTime, info.hitFrameTime/*, info.delayTime*/, effectQueue, locusPoints);

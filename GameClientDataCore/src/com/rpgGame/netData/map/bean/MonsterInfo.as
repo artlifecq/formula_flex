@@ -32,8 +32,8 @@ package com.rpgGame.netData.map.bean{
 		//怪物头像造型
 		private var _monsterIcon: int;
 		
-		//怪物敌对类型 0-全体玩家敌对， 1-全体玩家友好， 2-帮派敌对
-		private var _friend: int;
+		//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
+		private var _relation: int;
 		
 		//怪物等级
 		private var _level: int;
@@ -74,8 +74,8 @@ package com.rpgGame.netData.map.bean{
 			writeInt(_monsterRes);
 			//怪物头像造型
 			writeInt(_monsterIcon);
-			//怪物敌对类型 0-全体玩家敌对， 1-全体玩家友好， 2-帮派敌对
-			writeByte(_friend);
+			//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
+			writeByte(_relation);
 			//怪物等级
 			writeShort(_level);
 			//怪物所在地图
@@ -117,8 +117,8 @@ package com.rpgGame.netData.map.bean{
 			_monsterRes = readInt();
 			//怪物头像造型
 			_monsterIcon = readInt();
-			//怪物敌对类型 0-全体玩家敌对， 1-全体玩家友好， 2-帮派敌对
-			_friend = readByte();
+			//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
+			_relation = readByte();
 			//怪物等级
 			_level = readShort();
 			//怪物所在地图
@@ -222,18 +222,18 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * get 怪物敌对类型 0-全体玩家敌对， 1-全体玩家友好， 2-帮派敌对
+		 * get 阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
 		 * @return 
 		 */
-		public function get friend(): int{
-			return _friend;
+		public function get relation(): int{
+			return _relation;
 		}
 		
 		/**
-		 * set 怪物敌对类型 0-全体玩家敌对， 1-全体玩家友好， 2-帮派敌对
+		 * set 阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
 		 */
-		public function set friend(value: int): void{
-			this._friend = value;
+		public function set relation(value: int): void{
+			this._relation = value;
 		}
 		
 		/**

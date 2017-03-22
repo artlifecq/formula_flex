@@ -3,10 +3,13 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.SpellSender;
+	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
+	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.shortcuts.ShortcutsData;
 	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	
@@ -23,11 +26,12 @@ package com.rpgGame.app.manager
 		public static const SHORTCUTS_LEN : uint = 10;
 		private var shortcutsDataMap : HashMap;
 		private var _tempSpells:HashMap;
-		private var _isDown : Boolean = false;
+		private var _isUsed : Boolean = false;
 
 		public function ShortcutsManger()
 		{
 			shortcutsDataMap = new HashMap();
+            EventManager.addEvent(BuffEvent.REMOVE_BUFF, onRemoveBuffEventHandler);
 		}
 
 		private static var _instance : ShortcutsManger;
@@ -52,7 +56,6 @@ package com.rpgGame.app.manager
 				return;
 			if (shortcutsHasValue(ShortcutsTypeEnum.SKILL_TYPE, spellProto.q_skillID))
 			{
-				trace("快捷栏中已经存在这个技能", spellProto.q_skillName);
 				return;
 			}
 			var i : int = 0;
@@ -271,11 +274,8 @@ package com.rpgGame.app.manager
 					//使用这个技能，走释放技能的流程
                     var config : Q_skill_model = CastSpellHelper.getSpellData(shortData.id);
                     if (isKeyboard && null != config && 1 == config.q_skill_state) {//技能持续状态
-						if (_isDown) {
-							return true;
-						}
-                        SpellSender.reqSkillContiState(shortData.id, 1);
-						this._isDown = true;
+                        SpellSender.reqSkillContiState(shortData.id, this._isUsed ? 0 : 1);
+						this._isUsed = !this._isUsed;
                         return true;
                     }
 					CastSpellHelper.shortcutsTryCaseSpell(shortData.id);
@@ -291,31 +291,14 @@ package com.rpgGame.app.manager
 			return true;
 		}
         
-        public function unUseShortcuts(shortcutPos : uint, isKeyboard : Boolean = false) : Boolean {
-            var shortData : ShortcutsData = getShortcutsDataByPos(shortcutPos);
-            if (shortData == null)
-            {
-                return false; //这个快捷键没有设置数据
+        private function onRemoveBuffEventHandler(buffData:BuffData) : void {
+            if (buffData.roleId != MainRoleManager.actor.id) {
+                return;
             }
-            
-            switch (shortData.type)
-            {
-                case ShortcutsTypeEnum.SKILL_TYPE:
-                    //使用这个技能，走释放技能的流程
-                    var config : Q_skill_model = CastSpellHelper.getSpellData(shortData.id);
-                    if (this._isDown && isKeyboard && null != config && 1 == config.q_skill_state) {
-						this._isDown = false;
-                        SpellSender.reqSkillContiState(shortData.id, 0);
-                        return true;
-                    }
-                    return true;
-                case ShortcutsTypeEnum.ITEM_TYPE:
-                    //使用这个物品，走物品流程
-                    return true;
+            if (2003 == buffData.cfgId) {
+                // 疯狂连弩技能产生的buff
+                this._isUsed = false;
             }
-            
-            //没有这个类型
-            return true;
         }
 
 		//-------------------------------------------------------
