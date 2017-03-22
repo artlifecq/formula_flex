@@ -9,6 +9,9 @@ package com.rpgGame.app.view.icon
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.type.TipType;
+	
+	import flash.text.TextFormat;
+	import flash.text.TextFormatAlign;
 
 	/**
 	 *buff图标 
@@ -43,7 +46,8 @@ package com.rpgGame.app.view.icon
 		public function BuffIcon($iconSize:int=IcoSizeEnum.ICON_36)
 		{
 			super($iconSize);
-			this.setIsShowCdTm( true );
+			var txtFormat:TextFormat=new TextFormat(null, 12, 0x8b8d7b, true, null, null, null, null, TextFormatAlign.CENTER);
+			this.setIsShowCdTm( true ,txtFormat);
 		}
 		
 		override public function sortLayer():void

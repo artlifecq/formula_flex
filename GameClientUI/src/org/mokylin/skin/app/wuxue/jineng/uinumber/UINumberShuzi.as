@@ -1,0 +1,40 @@
+package org.mokylin.skin.app.wuxue.jineng.uinumber
+{
+	import feathers.controls.StateSkin;
+
+	/**
+	 * @private
+	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
+	 * @author DXMLCompilerForFeathers
+	 */
+	public class UINumberShuzi extends feathers.controls.StateSkin
+	{
+
+		//==========================================================================
+		//                                定义构造函数
+		//==========================================================================
+		public function UINumberShuzi()
+		{
+			super();
+			
+			this.currentState = "5";
+			this.elementsContent = [];
+			
+			states = {
+			};
+			skinNames={"0":"ui/app/wuxue/jineng/uinumber/shuzi/0.png",
+			"1":"ui/app/wuxue/jineng/uinumber/shuzi/1.png",
+			"2":"ui/app/wuxue/jineng/uinumber/shuzi/2.png",
+			"3":"ui/app/wuxue/jineng/uinumber/shuzi/3.png",
+			"4":"ui/app/wuxue/jineng/uinumber/shuzi/4.png",
+			"5":"ui/app/wuxue/jineng/uinumber/shuzi/5.png",
+			"6":"ui/app/wuxue/jineng/uinumber/shuzi/6.png",
+			"7":"ui/app/wuxue/jineng/uinumber/shuzi/7.png",
+			"8":"ui/app/wuxue/jineng/uinumber/shuzi/8.png",
+			"9":"ui/app/wuxue/jineng/uinumber/shuzi/9.png",
+			"x":"ui/app/wuxue/jineng/uinumber/shuzi/x.png"};
+		}
+
+
+	}
+}
