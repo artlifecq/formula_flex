@@ -57,7 +57,10 @@ package com.rpgGame.app.state.role.control
 					render.visible = true;
 					break;
 				case RenderUnitType.BODY:
-					render.compositeAMesh.layerType = layerType;
+					if(render.compositeAMesh)
+					{
+						render.compositeAMesh.layerType = layerType;
+					}
 					break;
 			}
 		}
@@ -73,8 +76,11 @@ package com.rpgGame.app.state.role.control
 					render.visible = false;
 					break;
 				case RenderUnitType.BODY:
-					layerType = render.compositeAMesh.layerType;
-					render.compositeAMesh.layerType = 0;
+					if(render.compositeAMesh)
+					{
+						layerType = render.compositeAMesh.layerType;
+						render.compositeAMesh.layerType = 0;
+					}
 					break;
 			}
 		}
