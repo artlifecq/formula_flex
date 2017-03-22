@@ -200,17 +200,55 @@ package com.rpgGame.app.manager.shell
 		
 		private function test(alpha:Number):void
 		{
-			MainRoleManager.actor.isHiding = true;
-			MainRoleManager.actor.blendMode = BlendMode.LAYER;
-			MainRoleManager.actor.alpha = alpha;
-			MainRoleManager.actor.avatar.castsShadows = false;
+			if(alpha == 1)
+			{
+				MainRoleManager.actor.forEachRenderUnit(setFunc);
+			}
+			else
+			{
+				MainRoleManager.actor.forEachRenderUnit(setFunc1);
+			}
+		}
+		
+		private var layerType:int=0;
+		//显示
+		private function setFunc(role : BaseRole, render : RenderUnit3D):void
+		{
+			role.isHiding = false;
+			render.castsShadows = true;
+			switch(render.type)
+			{
+				case RenderUnitType.WEAPON_EFFECT:
+				case RenderUnitType.DEPUTY_WEAPON_EFFECT:
+					render.visible = true;
+					break;
+				case RenderUnitType.BODY:
+					render.compositeAMesh.layerType = layerType;
+					break;
+			}
+		}
+		
+		//隐藏
+		private function setFunc1(role : BaseRole, render : RenderUnit3D):void
+		{
+			role.isHiding = true;
+			render.castsShadows = false;
+			switch(render.type)
+			{
+				case RenderUnitType.WEAPON_EFFECT:
+				case RenderUnitType.DEPUTY_WEAPON_EFFECT:
+					render.visible = false;
+					break;
+				case RenderUnitType.BODY:
+					layerType = render.compositeAMesh.layerType;
+					render.compositeAMesh.layerType = 0;
+					break;
+			}
 		}
 		
 		private function removeTest():void
 		{
-			MainRoleManager.actor.isHiding = false;
-			MainRoleManager.actor.blendMode = BlendMode.NORMAL;
-			MainRoleManager.actor.avatar.castsShadows = true;
+//			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_HIDDING);
 		}
 		
 		private var arr:Vector.<ShapeArea3D> = new Vector.<ShapeArea3D>();	

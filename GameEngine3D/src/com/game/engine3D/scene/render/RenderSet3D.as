@@ -698,10 +698,10 @@ package com.game.engine3D.scene.render
 		 * 移除指定ID的RenderUnit(此函数执行后,会检查主体换装，如果为空则启用默认换装)
 		 * @param $renderUnitID 换装类型
 		 */
-		public function removeRenderUnitByID(renderUnitType : String, renderUnitID : int) : void
+		public function removeRenderUnitByID(renderUnitType : String, renderUnitID : int) : RenderUnit3D
 		{
 			if (renderUnitType == null || renderUnitType == "")
-				return; //注意这个判断
+				return null; //注意这个判断
 
 			//检查换装内
 			var key : String = renderUnitType + "_" + renderUnitID;
@@ -710,8 +710,9 @@ package com.game.engine3D.scene.render
 			{
 				//从表中移除
 				recycleRenderUnit(ru);
-				ru = null;
+				return ru;
 			}
+			return null;
 		}
 
 		/**
@@ -881,17 +882,6 @@ package com.game.engine3D.scene.render
 			//检查换装内
 			for each (var ru : RenderUnit3D in _renderUnitMap)
 			{
-				///////////////////////////////////////////////////////////////////////
-				//
-				// 以下为调试代码
-				//
-				//////////////////////////////////////////////////////////////////////
-//				if(ru.type == "hair")
-//				{
-//					trace(1);
-//				}
-				//////////////////////////////////////////////////////////////////////
-//				ru.blendMode = this.blendMode;
 				var funcArgs : Array;
 				if (args)
 					funcArgs = args.concat(ru);
