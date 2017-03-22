@@ -45,10 +45,10 @@ package com.rpgGame.app.state.role.control
 				_stateReference = _ref as FlyUpStateReference;
 				
 //				FLY_HEIGHT = Number(_stateReference.buffData.clientData.h);
-				hitTime = 1000;//Number(_stateReference.buffData.clientData.hit);
-				upTime = 700;//Number(_stateReference.buffData.clientData.up);
-				flyTime = 500;//Number(_stateReference.buffData.clientData.stay);
-				fallTime = 200;//Number(_stateReference.buffData.clientData.down);
+				hitTime = Number(_stateReference.buffData.clientData.hit);
+				upTime = Number(_stateReference.buffData.clientData.up);
+				flyTime = Number(_stateReference.buffData.clientData.stay);
+				fallTime = Number(_stateReference.buffData.clientData.down);
 				
 				var startTime:Number = _stateReference.buffData.totalTime - _stateReference.buffData.disappearTime;
 				if(startTime>0)
