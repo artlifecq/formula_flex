@@ -78,13 +78,16 @@ package com.game.engine2D.controller
 				_camera.y = _lookAtPosition.y;
 				_camera.z = - LOCK_DISTANCE;
 				_camera.lookAt(_lookAtPosition);
-				
-				for each(var animator:iCamera3DAnimator in  _camera.camera3DAnimators)
-				{
-					var cameraVibrateAnimator:CameraVibrateAnimator = animator as CameraVibrateAnimator;
-					if(cameraVibrateAnimator)
-						_camera.y += animator.offset;
-				}
+			}
+		}
+		
+		public static function screenVibration():void
+		{
+			for each(var animator:iCamera3DAnimator in  _camera.camera3DAnimators)
+			{
+				var cameraVibrateAnimator:CameraVibrateAnimator = animator as CameraVibrateAnimator;
+				if(cameraVibrateAnimator)
+					_camera.y += animator.offset;
 			}
 		}
 		

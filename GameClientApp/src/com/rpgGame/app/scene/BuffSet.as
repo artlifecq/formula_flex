@@ -70,11 +70,6 @@ package com.rpgGame.app.scene
 		
 		private var _role : SceneRole;
 		/**
-		 * 缓存角色身上的每个buff计时器 
-		 */		
-		private var _buffEffectTweenMap : HashMap;
-		
-		/**
 		 * 为角色身上添加buff效果及buff的计时器 
 		 * @param buffData
 		 * 
@@ -100,7 +95,6 @@ package com.rpgGame.app.scene
 					}
 				}
 			}
-			_buffEffectTweenMap.add(buffData.cfgId,buffData.buffId);
 		}
 		
 		/**
@@ -117,7 +111,7 @@ package com.rpgGame.app.scene
 				return;
 			for each (var buffData : BuffData in buffList)
 			{
-				addBuffEffect(buffData);
+				addBuff(buffData);
 			}
 		}
 		
@@ -189,12 +183,10 @@ package com.rpgGame.app.scene
 			{
 				_role.avatar.removeRenderUnitsByType(RenderUnitType.BUFF + cfgId);
 			}
-			_buffEffectTweenMap.remove(cfgId);
 		}
 		
 		public function BuffSet(role : SceneRole)
 		{
-			_buffEffectTweenMap = new HashMap();
 			reSet([role]);
 		}
 		
@@ -205,15 +197,14 @@ package com.rpgGame.app.scene
 		
 		private function clear() : void
 		{
-			var keys : Array = _buffEffectTweenMap.keys();
-			for each (var cfgId : * in keys)
-			{
-				if (_role)
-				{
-					_role.avatar.removeRenderUnitsByType(RenderUnitType.BUFF + cfgId);
-				}
-			}
-			_buffEffectTweenMap.clear();
+//			var buffList : Vector.<BuffData> = (_role.data as RoleData).buffList;
+//			if (!buffList)
+//				return;
+//			for each (var buffData : BuffData in buffList)
+//			{
+//				addBuffEffect(buffData);
+//				handlerRoleState(buffData);
+//			}
 		}
 		
 		private function removeRoleState(buffData : BuffData):void

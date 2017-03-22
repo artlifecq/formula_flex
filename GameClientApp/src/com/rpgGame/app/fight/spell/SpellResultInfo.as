@@ -8,8 +8,8 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.info.fight.FightSingleHurt;
-	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.fight.bean.AttackResultInfo;
+	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
 	import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
 	
 	import flash.geom.Point;
@@ -35,7 +35,7 @@ package com.rpgGame.app.fight.spell
 		{
 		}
 		
-		public static function setSpellResultInfo(msg:SCAttackerResultMessage):SpellResultInfo
+		public static function setSpellResultInfo(msg:ResAttackResultMessage):SpellResultInfo
 		{
 			var info : SpellResultInfo = new SpellResultInfo();
 			createResults(info, msg);
@@ -49,19 +49,18 @@ package com.rpgGame.app.fight.spell
 		 * @param buffer
 		 *
 		 */
-		private static function createResults(info : SpellResultInfo, msg : SCAttackerResultMessage) : void
+		private static function createResults(info : SpellResultInfo, msg : ResAttackResultMessage) : void
 		{
 			//类型和血量
-			var stateList : Vector.<BuffData> = new Vector.<BuffData>;
 			var hurtList : Vector.<FightHurtResult> = new Vector.<FightHurtResult>;
 			var hurtCharList : Vector.<SceneRole> = new Vector.<SceneRole>;
 			var isHited : Boolean = false;
 			var resultInfo:AttackResultInfo;
 			var isState : Boolean = false;//现在还没有技能触发buff的功能，暂时不走这里面的逻辑
 			
-			for(var i:uint = 0;i<msg.infos.length;i++)
-			{
-				resultInfo = msg.infos[i];
+//			for(var i:uint = 0;i<msg.infos.length;i++)
+//			{
+				resultInfo = msg.state;
 				
 				var hurtResultVO : FightHurtResult = new FightHurtResult();
 				
@@ -131,10 +130,9 @@ package com.rpgGame.app.fight.spell
 					hurtResultVO.addHurt(sVo);
 				}
 				hurtList.push(hurtResultVO);
-			}
+//			}
 			
 			info.hurtList = hurtList;
-			info.stateList = stateList;
 			info.isMainCharHited = isHited;
 		}
 	}

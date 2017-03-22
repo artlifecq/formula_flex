@@ -232,14 +232,7 @@ package com.rpgGame.app.state.role.control
 			if (_machine && !_machine.isDisposed)
 			{
 				removeSelf();
-				if ((_machine as RoleStateMachine).isWalkMoving)
-				{
-					transition(RoleStateType.ACTION_RUN);
-				}
-				else
-				{
-					transition(RoleStateType.ACTION_PREWAR);
-				}
+				transition(RoleStateType.ACTION_GETUP);
 			}
 		}
 		
