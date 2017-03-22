@@ -24,6 +24,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_enterBuff:int;
 		 /**  执行次数（超过次数则会被移除,0不移除） */
 		public var q_executeCount:int;
+		 /**  开始冷却时间 */
+		public var q_startDuration:int;
 		 /**  延迟移除时间(毫秒) */
 		public var q_removeDuration:int;
 		 /**  检查范围 */

@@ -27,6 +27,10 @@ package com.rpgGame.coreData.enum.item
 		/**
 		 *36icon 
 		 */
+		public static const ICON_24:int=24;
+		/**
+		 *36icon 
+		 */
 		public static const ICON_36:int=36;
 		/**
 		 *42icon 

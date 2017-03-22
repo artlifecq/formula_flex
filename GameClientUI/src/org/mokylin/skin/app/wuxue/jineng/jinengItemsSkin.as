@@ -1,9 +1,13 @@
-package org.mokylin.skin.app.jineng
+package org.mokylin.skin.app.wuxue.jineng
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
+	import feathers.controls.Radio;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import feathers.controls.UIMovieClip;
+	import org.mokylin.skin.app.wuxue.jineng.button.ItemBg;
+	import org.mokylin.skin.app.wuxue.jineng.mc.dengjiSkin;
 
 	/**
 	 * @private
@@ -16,6 +20,10 @@ package org.mokylin.skin.app.jineng
 		//                                定义成员变量
 		//==========================================================================
 		public var Icon:feathers.controls.UIAsset;
+
+		public var mc_dengjie:feathers.controls.UIMovieClip;
+
+		public var rdo_select:feathers.controls.Radio;
 
 		public var tips:feathers.controls.UIAsset;
 
@@ -40,7 +48,7 @@ package org.mokylin.skin.app.jineng
 			this.currentState = "normal";
 			this.height = 59;
 			this.width = 241;
-			this.elementsContent = [__jinengItemsSkin_UIAsset1_i(),Icon_i(),txt_Name_i(),txt_Inacitve_i(),txt_xianzhi_i(),txt_Acitve_i(),txt_level_i(),tips_i()];
+			this.elementsContent = [__jinengItemsSkin_UIAsset1_i(),Icon_i(),txt_Name_i(),txt_Inacitve_i(),txt_xianzhi_i(),txt_Acitve_i(),txt_level_i(),tips_i(),rdo_select_i(),mc_dengjie_i()];
 			
 			states = {
 			};
@@ -56,6 +64,8 @@ package org.mokylin.skin.app.jineng
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			Icon = temp;
 			temp.name = "Icon";
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
 			temp.x = 5;
 			temp.y = 3;
@@ -65,7 +75,32 @@ package org.mokylin.skin.app.jineng
 		private function __jinengItemsSkin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/jineng/jineng_di.png";
+			temp.styleName = "ui/app/wuxue/jineng/jineng_di.png";
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function mc_dengjie_i():feathers.controls.UIMovieClip
+		{
+			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
+			mc_dengjie = temp;
+			temp.name = "mc_dengjie";
+			temp.autoPlay = false;
+			temp.height = 10;
+			temp.styleClass = org.mokylin.skin.app.wuxue.jineng.mc.dengjiSkin;
+			temp.width = 10;
+			temp.x = 43;
+			temp.y = 38;
+			return temp;
+		}
+
+		private function rdo_select_i():feathers.controls.Radio
+		{
+			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			rdo_select = temp;
+			temp.name = "rdo_select";
+			temp.styleClass = org.mokylin.skin.app.wuxue.jineng.button.ItemBg;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -76,6 +111,8 @@ package org.mokylin.skin.app.jineng
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			tips = temp;
 			temp.name = "tips";
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.styleName = "ui/common/tubiao/tishi.png";
 			temp.x = 211;
 			temp.y = 36;
@@ -87,6 +124,8 @@ package org.mokylin.skin.app.jineng
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			txt_Acitve = temp;
 			temp.name = "txt_Acitve";
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.text = "已激活进阶效果";
 			temp.color = 0xc9b722;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
@@ -101,6 +140,8 @@ package org.mokylin.skin.app.jineng
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			txt_Inacitve = temp;
 			temp.name = "txt_Inacitve";
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.text = "未激活进阶效果";
 			temp.color = 0x8b8d7b;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
@@ -114,6 +155,8 @@ package org.mokylin.skin.app.jineng
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			txt_Name = temp;
 			temp.name = "txt_Name";
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.text = "侵略如火";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
@@ -127,6 +170,8 @@ package org.mokylin.skin.app.jineng
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			txt_level = temp;
 			temp.name = "txt_level";
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.text = "等级:1/200";
 			temp.color = 0x5cb006;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
@@ -140,6 +185,8 @@ package org.mokylin.skin.app.jineng
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			txt_xianzhi = temp;
 			temp.name = "txt_xianzhi";
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.text = "60级后自动获得";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];

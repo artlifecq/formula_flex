@@ -278,11 +278,16 @@ package com.rpgGame.core.view.uiComponent.face.cd
 			var $angle : Number = $now / $cdTotal * 360;
 			if (_tmTxt)
 			{
-				_tmTxt.numberText = (($cdTotal - $now) * 0.001).toFixed(1);
+				updateTimeTxt($now,$cdTotal);
 			}
 			drawRectMask($angle);
 		}
-
+		
+		private function updateTimeTxt($now : Number, $cdTotal : Number):void
+		{
+			_tmTxt.numberText = (($cdTotal - $now) * 0.001).toFixed(1);			
+		}
+		
 		private function drawRectMask($angle : Number) : void
 		{
 			$angle = Math.floor($angle)

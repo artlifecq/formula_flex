@@ -1,11 +1,10 @@
-package org.mokylin.skin.app.jineng
+package org.mokylin.skin.app.wuxue.jineng
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.app.jineng.button.ButtonJinjie;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 
 	/**
@@ -20,27 +19,33 @@ package org.mokylin.skin.app.jineng
 		//==========================================================================
 		public var Icon_jineng:feathers.controls.UIAsset;
 
-		public var btn_jinjie:feathers.controls.Button;
+		public var arrow1:feathers.controls.UIAsset;
+
+		public var arrow2:feathers.controls.UIAsset;
 
 		public var btn_shengji:feathers.controls.Button;
 
-		public var txt_dengji:feathers.controls.Label;
+		public var lb_dengji:feathers.controls.Label;
 
-		public var txt_leixing:feathers.controls.Label;
+		public var lb_leixing:feathers.controls.Label;
 
-		public var txt_lengque:feathers.controls.Label;
+		public var lb_lengque:feathers.controls.Label;
 
-		public var txt_miaoshu:feathers.controls.Label;
+		public var lb_miaoshu:feathers.controls.Label;
 
-		public var txt_renwudengji:feathers.controls.Label;
+		public var lb_name:feathers.controls.Label;
 
-		public var txt_shengji:feathers.controls.Label;
+		public var lb_renwudengji:feathers.controls.Label;
 
-		public var txt_xiaohao:feathers.controls.Label;
+		public var lb_shanghai:feathers.controls.Label;
 
-		public var txt_yinliang:feathers.controls.Label;
+		public var lb_shengji:feathers.controls.Label;
 
-		public var txt_zhenqi:feathers.controls.Label;
+		public var lb_xiaohao:feathers.controls.Label;
+
+		public var lb_yinliang:feathers.controls.Label;
+
+		public var lb_zhenqi:feathers.controls.Label;
 
 
 		//==========================================================================
@@ -51,9 +56,9 @@ package org.mokylin.skin.app.jineng
 			super();
 			
 			this.currentState = "normal";
-			this.height = 435;
+			this.height = 422;
 			this.width = 362;
-			this.elementsContent = [__jineng_shengji_UIAsset2_i(),__jineng_shengji_UIAsset3_i(),__jineng_shengji_UIAsset4_i(),__jineng_shengji_UIAsset5_i(),Icon_jineng_i(),__jineng_shengji_Label1_i(),txt_dengji_i(),txt_xiaohao_i(),txt_leixing_i(),txt_lengque_i(),__jineng_shengji_Label2_i(),txt_miaoshu_i(),__jineng_shengji_Label3_i(),txt_shengji_i(),__jineng_shengji_Label4_i(),__jineng_shengji_Label5_i(),__jineng_shengji_Label6_i(),__jineng_shengji_Label7_i(),txt_renwudengji_i(),txt_zhenqi_i(),txt_yinliang_i(),btn_shengji_i(),btn_jinjie_i()];
+			this.elementsContent = [__jineng_shengji_UIAsset3_i(),__jineng_shengji_UIAsset4_i(),__jineng_shengji_UIAsset5_i(),Icon_jineng_i(),lb_name_i(),lb_dengji_i(),lb_xiaohao_i(),lb_leixing_i(),lb_lengque_i(),__jineng_shengji_Label1_i(),lb_miaoshu_i(),__jineng_shengji_Label2_i(),arrow1_i(),arrow2_i(),lb_shengji_i(),lb_shanghai_i(),__jineng_shengji_Label3_i(),lb_renwudengji_i(),lb_zhenqi_i(),lb_yinliang_i(),btn_shengji_i()];
 			
 			states = {
 			};
@@ -69,9 +74,9 @@ package org.mokylin.skin.app.jineng
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			Icon_jineng = temp;
 			temp.name = "Icon_jineng";
-			temp.styleName = "ui/app/jineng/jinengkuang.png";
+			temp.styleName = "ui/app/wuxue/jineng/jinengkuang.png";
 			temp.x = 16;
-			temp.y = 48;
+			temp.y = 21;
 			return temp;
 		}
 
@@ -79,11 +84,11 @@ package org.mokylin.skin.app.jineng
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.fontSize = 16;
-			temp.text = "侵掠如火";
-			temp.color = 0xcfc6ae;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 83;
-			temp.y = 41;
+			temp.text = "技能效果";
+			temp.color = 0xe8c958;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.x = 146;
+			temp.y = 98;
 			return temp;
 		}
 
@@ -91,11 +96,11 @@ package org.mokylin.skin.app.jineng
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.fontSize = 16;
-			temp.text = "技能效果";
-			temp.color = 0xe8c958;
+			temp.text = "升级效果";
+			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 147;
-			temp.y = 127;
+			temp.x = 146;
+			temp.y = 198;
 			return temp;
 		}
 
@@ -103,106 +108,63 @@ package org.mokylin.skin.app.jineng
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.fontSize = 16;
-			temp.text = "升级效果";
-			temp.color = 0xE8C958;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 147;
-			temp.y = 227;
-			return temp;
-		}
-
-		private function __jineng_shengji_Label4_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.fontSize = 16;
 			temp.text = "升级条件";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 147;
-			temp.y = 289;
-			return temp;
-		}
-
-		private function __jineng_shengji_Label5_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "人物等级：";
-			temp.color = 0x8B8D7B;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 120;
-			temp.y = 316;
-			return temp;
-		}
-
-		private function __jineng_shengji_Label6_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "消耗真气：";
-			temp.color = 0x8B8D7B;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 120;
-			temp.y = 338;
-			return temp;
-		}
-
-		private function __jineng_shengji_Label7_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "消耗绑银：";
-			temp.color = 0x8B8D7B;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 120;
-			temp.y = 362;
-			return temp;
-		}
-
-		private function __jineng_shengji_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/jineng/fengexian.png";
-			temp.width = 332;
-			temp.x = 14;
-			temp.y = 116;
+			temp.x = 146;
+			temp.y = 258;
 			return temp;
 		}
 
 		private function __jineng_shengji_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/jineng/fengexian.png";
+			temp.styleName = "ui/app/wuxue/jineng/fengexian.png";
 			temp.width = 332;
 			temp.x = 14;
-			temp.y = 218;
+			temp.y = 89;
 			return temp;
 		}
 
 		private function __jineng_shengji_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/jineng/fengexian.png";
+			temp.styleName = "ui/app/wuxue/jineng/fengexian.png";
 			temp.width = 332;
 			temp.x = 14;
-			temp.y = 277;
+			temp.y = 191;
 			return temp;
 		}
 
 		private function __jineng_shengji_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/jineng/jinengshengji.png";
-			temp.x = 127;
-			temp.y = 9;
+			temp.styleName = "ui/app/wuxue/jineng/fengexian.png";
+			temp.width = 332;
+			temp.x = 14;
+			temp.y = 250;
 			return temp;
 		}
 
-		private function btn_jinjie_i():feathers.controls.Button
+		private function arrow1_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_jinjie = temp;
-			temp.name = "btn_jinjie";
-			temp.styleClass = org.mokylin.skin.app.jineng.button.ButtonJinjie;
-			temp.x = 293;
-			temp.y = 371;
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			arrow1 = temp;
+			temp.name = "arrow1";
+			temp.styleName = "ui/common/tubiao/tu_up.png";
+			temp.x = 29;
+			temp.y = 227;
+			return temp;
+		}
+
+		private function arrow2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			arrow2 = temp;
+			temp.name = "arrow2";
+			temp.styleName = "ui/common/tubiao/tu_up.png";
+			temp.x = 205;
+			temp.y = 227;
 			return temp;
 		}
 
@@ -216,54 +178,54 @@ package org.mokylin.skin.app.jineng
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.width = 90;
 			temp.x = 136;
-			temp.y = 394;
+			temp.y = 367;
 			return temp;
 		}
 
-		private function txt_dengji_i():feathers.controls.Label
+		private function lb_dengji_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			txt_dengji = temp;
-			temp.name = "txt_dengji";
+			lb_dengji = temp;
+			temp.name = "lb_dengji";
 			temp.text = "等级:1/30";
 			temp.color = 0x8b8d7b;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 84;
-			temp.y = 70;
+			temp.y = 43;
 			return temp;
 		}
 
-		private function txt_leixing_i():feathers.controls.Label
+		private function lb_leixing_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			txt_leixing = temp;
-			temp.name = "txt_leixing";
+			lb_leixing = temp;
+			temp.name = "lb_leixing";
 			temp.text = "技能类型：瞬发";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 227;
-			temp.y = 70;
+			temp.y = 43;
 			return temp;
 		}
 
-		private function txt_lengque_i():feathers.controls.Label
+		private function lb_lengque_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			txt_lengque = temp;
-			temp.name = "txt_lengque";
+			lb_lengque = temp;
+			temp.name = "lb_lengque";
 			temp.text = "时间冷却：无";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 227;
-			temp.y = 88;
+			temp.y = 61;
 			return temp;
 		}
 
-		private function txt_miaoshu_i():feathers.controls.Label
+		private function lb_miaoshu_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			txt_miaoshu = temp;
-			temp.name = "txt_miaoshu";
+			lb_miaoshu = temp;
+			temp.name = "lb_miaoshu";
 			temp.height = 66;
 			temp.htmlText = "挥动长枪扫除一片火焰，对自身前方<font color='#5DBD37'>60</font>度半径<font color='#5DBD37'>10</font>米的扇形范围内的敌人造成<font color='#5DBD37'>3</font>次伤害，每次伤害<font color='#5DBD37'>25%</font>秒伤，每击中<font color='#5DBD37'>1</font>个目标可产生<font color='#5DBD37'>2</font>点怒气值";
 			temp.leading = 6;
@@ -272,78 +234,109 @@ package org.mokylin.skin.app.jineng
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 337;
 			temp.x = 15;
-			temp.y = 151;
+			temp.y = 124;
 			return temp;
 		}
 
-		private function txt_renwudengji_i():feathers.controls.Label
+		private function lb_name_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			txt_renwudengji = temp;
-			temp.name = "txt_renwudengji";
+			lb_name = temp;
+			temp.name = "lb_name";
+			temp.fontSize = 16;
+			temp.text = "侵掠如火";
+			temp.color = 0xcfc6ae;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 83;
+			temp.y = 14;
+			return temp;
+		}
+
+		private function lb_renwudengji_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_renwudengji = temp;
+			temp.name = "lb_renwudengji";
+			temp.height = 19;
+			temp.htmlText = "人物等级：<font color='#CFC6AE'>56</font>";
 			temp.letterSpacing = 1;
-			temp.text = "56";
+			temp.textAlign = "left";
+			temp.color = 0x8B8D7B;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 146;
+			temp.x = 117;
+			temp.y = 289;
+			return temp;
+		}
+
+		private function lb_shanghai_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_shanghai = temp;
+			temp.name = "lb_shanghai";
+			temp.htmlText = "<font color='#5DBD37'>8%</font>单次伤害秒伤";
+			temp.letterSpacing = 1;
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 192;
-			temp.y = 316;
+			temp.x = 218;
+			temp.y = 224;
 			return temp;
 		}
 
-		private function txt_shengji_i():feathers.controls.Label
+		private function lb_shengji_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			txt_shengji = temp;
-			temp.name = "txt_shengji";
-			temp.height = 19;
-			temp.htmlText = "技能可升至<font color='#5DBD31'>60</font>级，<font color='#5DBD37'>8%</font>单次伤害秒伤";
+			lb_shengji = temp;
+			temp.name = "lb_shengji";
+			temp.htmlText = "技能可升至<font color='#5DBD37'>31</font>级";
 			temp.letterSpacing = 1;
-			temp.color = 0xcfc6ae;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 288;
-			temp.x = 64;
-			temp.y = 252;
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 39;
+			temp.y = 224;
 			return temp;
 		}
 
-		private function txt_xiaohao_i():feathers.controls.Label
+		private function lb_xiaohao_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			txt_xiaohao = temp;
-			temp.name = "txt_xiaohao";
+			lb_xiaohao = temp;
+			temp.name = "lb_xiaohao";
 			temp.text = "消耗：无";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 84;
-			temp.y = 88;
+			temp.y = 61;
 			return temp;
 		}
 
-		private function txt_yinliang_i():feathers.controls.Label
+		private function lb_yinliang_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			txt_yinliang = temp;
-			temp.name = "txt_yinliang";
+			lb_yinliang = temp;
+			temp.name = "lb_yinliang";
+			temp.htmlText = "消耗绑银：<font color='#CFC6AE'>214461</font>";
 			temp.letterSpacing = 1;
-			temp.text = "214461";
-			temp.color = 0xCFC6AE;
+			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 192;
-			temp.y = 362;
+			temp.width = 146;
+			temp.x = 117;
+			temp.y = 335;
 			return temp;
 		}
 
-		private function txt_zhenqi_i():feathers.controls.Label
+		private function lb_zhenqi_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			txt_zhenqi = temp;
-			temp.name = "txt_zhenqi";
+			lb_zhenqi = temp;
+			temp.name = "lb_zhenqi";
+			temp.htmlText = "消耗真气：<font color='#CFC6AE'>54124</font>";
 			temp.letterSpacing = 1;
-			temp.text = "54124";
-			temp.color = 0xCFC6AE;
+			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 192;
-			temp.y = 338;
+			temp.width = 146;
+			temp.x = 117;
+			temp.y = 311;
 			return temp;
 		}
 

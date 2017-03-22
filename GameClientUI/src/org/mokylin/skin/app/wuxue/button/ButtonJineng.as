@@ -1,4 +1,4 @@
-package org.mokylin.skin.app.jineng.button
+package org.mokylin.skin.app.wuxue.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.app.jineng.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonShengji extends feathers.controls.StateSkin
+	public class ButtonJineng extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,11 +22,11 @@ package org.mokylin.skin.app.jineng.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonShengji()
+		public function ButtonJineng()
 		{
 			super();
 			
-			this.currentState = "down";
+			this.currentState = "upAndSelected";
 			this.elementsContent = [];
 			
 			states = {
@@ -47,7 +47,12 @@ package org.mokylin.skin.app.jineng.button
 						}
 					]
 			};
-			skinNames={"down":"ui/app/jineng/button/shengji/down.png", "hover":"ui/app/jineng/button/shengji/over.png", "up":"ui/app/jineng/button/shengji/up.png"};
+			skinNames={"down":"ui/app/wuxue/button/jineng/down.png",
+			"downAndSelected":"ui/app/wuxue/button/jineng/select.png",
+			"hover":"ui/app/wuxue/button/jineng/over.png",
+			"overAndSelected":"ui/app/wuxue/button/jineng/select.png",
+			"up":"ui/app/wuxue/button/jineng/up.png",
+			"upAndSelected":"ui/app/wuxue/button/jineng/select.png"};
 		}
 
 
