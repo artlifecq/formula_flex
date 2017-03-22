@@ -4,24 +4,28 @@ package com.rpgGame.coreData.type
 
 	public class PKModeType
 	{
-		/** 未知PK模式(默认) */
-		public static const UNKNOWN:int = 0;
 		/** 和平模式 */
-		public static const PEACE:int = 1;
+		public static const PEACE:int = 0;
+        /** 组队模式 */
+        public static const TEAM:int = 1;
+        /** 帮派模式 */
+        public static const GUILD:int = 2;
+        /** 全体模式 */
+        public static const ALL:int = 3;
+        /** 阵营 */
+        public static const GROUP : int = 4;
+        /** 善恶模式 */
+        public static const KIND_OR_EVIL:int = 5;
+        
+        
+        /** 未知PK模式(默认) */
+        public static const UNKNOWN:int = 0;
 		/** 国家模式 */		
 		public static const COUNTRY:int = 2;
 		/** 盟国模式 */
 		public static const ALLIANCE:int = 3;
-		/** 全体模式 */
-		public static const ALL:int = 4;
-		/** 组队模式 */
-		public static const TEAM:int = 5;
-		/** 帮派模式 */
-		public static const GUILD:int = 6;
 		/** 家族模式 */
 		public static const FAMILY:int = 7;
-		/** 善恶模式 */
-		public static const KIND_OR_EVIL:int = 8;
 		/** 跨服模式 */
 		public static const DIFFERENT_SEVER:int = 9;
 		

@@ -102,6 +102,8 @@
 		public var buffList : Vector.<BuffData> = new Vector.<BuffData>();
 		/** 坐骑槽数 **/
 		public var mountSlotCount : int = 0;
+        /** 阵营关系 **/
+        public var relation : int;
 
 		/**
 		 *
@@ -155,6 +157,7 @@
 		
 		public static function readMonster(data : RoleData, info : MonsterInfo):void
 		{
+            data.relation = info.relation;
 			data.totalStat.level = info.level;
 			
 			data.totalStat.hp = info.hp;
