@@ -81,7 +81,7 @@ package com.rpgGame.app.ui.main.buff
 				if(goodBuffs.length==0){
 					xx=-1*gridW;
 				}else{
-					xx=goodBuffs[badBuffs.length-1].x-gridW;
+					xx=goodBuffs[goodBuffs.length-1].x-gridW;
 				}
 				icon.x=xx;
 				goodBuffs.push(icon);
