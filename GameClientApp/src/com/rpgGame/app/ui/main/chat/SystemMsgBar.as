@@ -86,7 +86,7 @@ package com.rpgGame.app.ui.main.chat
 
 		private function initType():void
 		{
-			_isShowAll=false;
+			_isShowAll=true;
 			changeShowStage();
 		}
 		

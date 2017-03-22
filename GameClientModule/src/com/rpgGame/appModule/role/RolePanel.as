@@ -36,7 +36,6 @@ package com.rpgGame.appModule.role
 		
 		private function initView():void
 		{
-			_skin.jineng.visible=false;
 			_skin.juese.visible=true;
 			basicView=new BasicRoleView(_skin.juese.skin as juese_Skin);
 			avatarView=new AvatarView(_skin.juese.skin as juese_Skin);

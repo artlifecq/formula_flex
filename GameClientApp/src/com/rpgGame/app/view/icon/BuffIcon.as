@@ -9,6 +9,9 @@ package com.rpgGame.app.view.icon
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.type.TipType;
+	
+	import flash.text.TextFormat;
+	import flash.text.TextFormatAlign;
 
 	/**
 	 *buff图标 
@@ -43,6 +46,8 @@ package com.rpgGame.app.view.icon
 		public function BuffIcon($iconSize:int=IcoSizeEnum.ICON_36)
 		{
 			super($iconSize);
+			var txtFormat:TextFormat=new TextFormat(null, 12, 0x8b8d7b, true, null, null, null, null, TextFormatAlign.CENTER);
+			this.setIsShowCdTm( true ,txtFormat);
 		}
 		
 		override public function sortLayer():void
@@ -62,10 +67,10 @@ package com.rpgGame.app.view.icon
 		public function set buffData(value:BuffData):void
 		{
 			_buffData = value;
-//			this.setIconResName(ClientConfig.getBuffIcon(_buffData.buffData.q_icon, IcoSizeEnum.ICON_36 ));
-			this.setIconResName(ClientConfig.getItemIcon("101", IcoSizeEnum.ICON_36 ));
+			this.setIconResName(ClientConfig.getBuffIcon(_buffData.buffData.q_icon, _iconSize ));
+//			this.setIconResName(ClientConfig.getItemIcon("101", IcoSizeEnum.ICON_36 ));
 			sortLayer();
-			
+			this.faceInfo=buffData;
 			var info:Q_tipsinfo=new Q_tipsinfo();
 			info.q_describe_tittle=_buffData.buffData.q_buff_name;
 			info.q_describe=_buffData.buffData.q_description;
@@ -74,22 +79,14 @@ package com.rpgGame.app.view.icon
 		
 		public  function instanceDispose() : void
 		{
-			if( _bgImage){
-				_bgImage.removeFromParent();
-			}
-			if( _iconImage){
-				_iconImage.removeFromParent();
-			}
+			clear();
+			_buffData=null;
 		}
 		
 		public	function instanceDestroy() : void
 		{
-			if( _bgImage){
-				_bgImage.removeFromParent(true);
-			}
-			if( _iconImage){
-				_iconImage.removeFromParent(true);
-			}
+			clear();
+			_buffData=null;
 		}
 		
 		public	function reSet(parameters : Array) : void

@@ -1,66 +1,64 @@
-package org.mokylin.skin.app.beibao
+package org.mokylin.skin.app.wuxue.jineng.mc
 {
-	import feathers.controls.Group;
-	import feathers.controls.Radio;
 	import feathers.controls.StateSkin;
-	import org.mokylin.skin.app.beibao.button.ButtonJuese;
+	import feathers.controls.UIAsset;
 
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class daohang_Skin extends feathers.controls.StateSkin
+	public class dengjiSkin extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var btn_juese:feathers.controls.Radio;
+		public var __dengjiSkin_UIAsset1:feathers.controls.UIAsset;
 
-		public var btn_nv:feathers.controls.Group;
+		public var __dengjiSkin_UIAsset2:feathers.controls.UIAsset;
 
 
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function daohang_Skin()
+		public function dengjiSkin()
 		{
 			super();
 			
-			this.currentState = "normal";
-			this.height = 51;
-			this.width = 141;
-			this.elementsContent = [btn_nv_i()];
+			this.currentState = "1";
+			this.height = 12;
+			this.width = 9;
+			this.elementsContent = [];
+			__dengjiSkin_UIAsset1_i();
+			__dengjiSkin_UIAsset2_i();
+			
 			
 			states = {
 			};
-			skinNames={};
+			skinNames={"1":"ui/app/wuxue/jineng/dengji/1.png", "2":"ui/app/wuxue/jineng/dengji/2.png"};
 		}
 
 
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function btn_juese_i():feathers.controls.Radio
+		private function __dengjiSkin_UIAsset1_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Radio = new feathers.controls.Radio();
-			btn_juese = temp;
-			temp.name = "btn_juese";
-			temp.groupName = "rdoBtn";
-			temp.styleClass = org.mokylin.skin.app.beibao.button.ButtonJuese;
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			__dengjiSkin_UIAsset1 = temp;
+			temp.styleName = "ui/app/wuxue/jineng/dengji/1.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function btn_nv_i():feathers.controls.Group
+		private function __dengjiSkin_UIAsset2_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			btn_nv = temp;
-			temp.name = "btn_nv";
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			__dengjiSkin_UIAsset2 = temp;
+			temp.styleName = "ui/app/wuxue/jineng/dengji/2.png";
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [btn_juese_i()];
 			return temp;
 		}
 

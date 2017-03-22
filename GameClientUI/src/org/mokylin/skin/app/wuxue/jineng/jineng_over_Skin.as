@@ -1,4 +1,4 @@
-package org.mokylin.skin.app.jineng
+package org.mokylin.skin.app.wuxue.jineng
 {
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;

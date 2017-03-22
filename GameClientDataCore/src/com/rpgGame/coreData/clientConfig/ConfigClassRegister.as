@@ -112,7 +112,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Attach:String = "data.spell.Attach";
 		/**  地面特效			 */
 		public static const Attach_effect:String = "data.spell.Attach_effect";
-		/**  BUFF效果配置数据表																																						 */
+		/**  BUFF效果配置数据表																																							 */
 		public static const Q_buff:String = "data.spell.Q_buff";
 		/**  公共CD表	 */
 		public static const Q_GCD:String = "data.spell.Q_GCD";
