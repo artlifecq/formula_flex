@@ -13,8 +13,11 @@ package com.rpgGame.netData.player.message{
 	 */
 	public class ResPlayerAddExpMessage extends Message {
 	
-		//玩家增加经验
+		//玩家当前经验
 		private var _exp: long;
+		
+		//经验增量
+		private var _addExp: long;
 		
 		//玩家增加经验原因ID
 		private var _reason: int;
@@ -24,8 +27,10 @@ package com.rpgGame.netData.player.message{
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//玩家增加经验
+			//玩家当前经验
 			writeLong(_exp);
+			//经验增量
+			writeLong(_addExp);
 			//玩家增加经验原因ID
 			writeInt(_reason);
 			return true;
@@ -35,8 +40,10 @@ package com.rpgGame.netData.player.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//玩家增加经验
+			//玩家当前经验
 			_exp = readLong();
+			//经验增量
+			_addExp = readLong();
 			//玩家增加经验原因ID
 			_reason = readInt();
 			return true;
@@ -51,7 +58,7 @@ package com.rpgGame.netData.player.message{
 		}
 		
 		/**
-		 * get 玩家增加经验
+		 * get 玩家当前经验
 		 * @return 
 		 */
 		public function get exp(): long{
@@ -59,10 +66,25 @@ package com.rpgGame.netData.player.message{
 		}
 		
 		/**
-		 * set 玩家增加经验
+		 * set 玩家当前经验
 		 */
 		public function set exp(value: long): void{
 			this._exp = value;
+		}
+		
+		/**
+		 * get 经验增量
+		 * @return 
+		 */
+		public function get addExp(): long{
+			return _addExp;
+		}
+		
+		/**
+		 * set 经验增量
+		 */
+		public function set addExp(value: long): void{
+			this._addExp = value;
 		}
 		
 		/**
