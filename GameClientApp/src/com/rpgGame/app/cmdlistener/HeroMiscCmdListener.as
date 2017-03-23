@@ -125,8 +125,7 @@ package com.rpgGame.app.cmdlistener
 		
 		private function RecvResPlayerAddExpMessage(msg:ResPlayerAddExpMessage):void
 		{
-			var offset:int=msg.exp.fValue-MainRoleManager.actorInfo.curExp;
-			FightFaceHelper.showAttChange(EnumHurtType.EXP,offset);
+			FightFaceHelper.showAttChange(EnumHurtType.EXP,msg.addExp.fValue);
 			MainRoleManager.actorInfo.curExp=msg.exp.fValue;
 			EventManager.dispatchEvent(MainPlayerEvent.NOWEXP_CHANGE);
 		}
