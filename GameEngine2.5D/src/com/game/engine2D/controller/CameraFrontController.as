@@ -1,6 +1,5 @@
 package com.game.engine2D.controller
 {
-	import com.game.engine2D.Scene;
 	import com.game.engine2D.scene.SceneCamera;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	
@@ -78,16 +77,22 @@ package com.game.engine2D.controller
 				_camera.y = _lookAtPosition.y;
 				_camera.z = - LOCK_DISTANCE;
 				_camera.lookAt(_lookAtPosition);
+                screenVibration();
 			}
 		}
 		
 		public static function screenVibration():void
 		{
+            if (null == _camera) {
+                return;
+            }
+			_camera.y = _lookAtPosition.y;
 			for each(var animator:iCamera3DAnimator in  _camera.camera3DAnimators)
 			{
 				var cameraVibrateAnimator:CameraVibrateAnimator = animator as CameraVibrateAnimator;
-				if(cameraVibrateAnimator)
+				if(cameraVibrateAnimator) {
 					_camera.y += animator.offset;
+                }
 			}
 		}
 		
