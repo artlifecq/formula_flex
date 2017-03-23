@@ -45,10 +45,10 @@ package com.rpgGame.app.state.role.control
 				_stateReference = _ref as FlyUpStateReference;
 				
 //				FLY_HEIGHT = Number(_stateReference.buffData.clientData.h);
-				hitTime = 1000;//Number(_stateReference.buffData.clientData.hit);
-				upTime = 700;//Number(_stateReference.buffData.clientData.up);
-				flyTime = 500;//Number(_stateReference.buffData.clientData.stay);
-				fallTime = 200;//Number(_stateReference.buffData.clientData.down);
+				hitTime = Number(_stateReference.buffData.clientData.hit);
+				upTime = Number(_stateReference.buffData.clientData.up);
+				flyTime = Number(_stateReference.buffData.clientData.stay);
+				fallTime = Number(_stateReference.buffData.clientData.down);
 				
 				var startTime:Number = _stateReference.buffData.totalTime - _stateReference.buffData.disappearTime;
 				if(startTime>0)
@@ -116,7 +116,7 @@ package com.rpgGame.app.state.role.control
 				playAnimation(role, render,actionType,repeat);
 		}
 		
-		private function playAnimation(role : BaseRole, render : RenderUnit3D,actionType:String,repeat:int, isFreeze : Boolean = false, time : int = -1, speedRatio : Number = 1) : void
+		private function playAnimation(role : BaseRole, render : RenderUnit3D,actionType:String,repeat:int, isFreeze : Boolean = false, time : int = 0, speedRatio : Number = 1) : void
 		{
 			var statusType : String = actionType;
 			switch (render.type)
@@ -238,8 +238,8 @@ package com.rpgGame.app.state.role.control
 		
 		override public function leave() : void
 		{
-			super.leave();
 			stopFly();
+			super.leave();
 		}
 		
 		/**
@@ -257,6 +257,10 @@ package com.rpgGame.app.state.role.control
 		
 		override public function leavePass(nextState : IState, force : Boolean = false) : Boolean
 		{
+			if((_machine as RoleStateMachine).isStiff)
+			{
+				return false;
+			}	
 			return true;
 		}
 		

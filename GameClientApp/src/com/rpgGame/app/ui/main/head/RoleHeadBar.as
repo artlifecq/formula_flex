@@ -93,14 +93,14 @@ package com.rpgGame.app.ui.main.head
 			var num:int=goodBuffs.length;
 			for(var i:int=0;i<num;i++){
 				icon=goodBuffs[i];
-				if(icon.buffData==data){
+				if(icon.buffData.buffData.q_buff_id==data.buffData.q_buff_id){
 					return true;
 				}
 			}
 			num=badBuffs.length;
 			for(i=0;i<num;i++){
 				icon=badBuffs[i];
-				if(icon.buffData==data){
+				if(icon.buffData.buffData.q_buff_id==data.buffData.q_buff_id){
 					return true;
 				}
 			}
@@ -113,7 +113,7 @@ package com.rpgGame.app.ui.main.head
 			if(data.buffData.q_icon_show==0||isCreate(data)){
 				return;
 			}
-			var icon:BuffIcon=BuffIcon.create(IcoSizeEnum.ICON_24);
+			var icon:BuffIcon=new BuffIcon(IcoSizeEnum.ICON_24);
 			icon.buffData=data;
 			
 			if(data.buffData.q_effect_type==2){//负面
@@ -121,8 +121,6 @@ package com.rpgGame.app.ui.main.head
 			}else{
 				goodBuffs.push(icon);
 			}
-			var lostTim:int=CDDataManager.getCdNowTm(getKey(data.buffData.q_buff_id));
-			CDDataManager.playCD(getKey(data.buffData.q_buff_id), data.buffData.q_effect_time,lostTim);
 			var gridW:int=IcoSizeEnum.ICON_24+2;
 			var startX:int=95;
 			for(var i:int=0;i<goodBuffs.length;i++){//buff
@@ -168,9 +166,9 @@ package com.rpgGame.app.ui.main.head
 			for  (var i:int=0;i<num;i++) 
 			{
 				icon=datas[i];
-				if(icon.buffData==data){
+				if(icon.buffData.buffData.q_buff_id==data.buffData.q_buff_id){
 					datas.splice(i,1);
-					BuffIcon.recycle(icon);
+					icon.dispose();
 					break;
 				}
 			}
@@ -179,10 +177,20 @@ package com.rpgGame.app.ui.main.head
 			var gridW:int=IcoSizeEnum.ICON_24+2;
 			changW=-1*gridW;
 			
-			while(i<num){
-				icon=datas[i];
-				icon.x+=changW;
-				i++;
+			var startX:int=95;
+			for(i=0;i<goodBuffs.length;i++){//buff
+				icon=goodBuffs[i];
+				icon.x=startX;
+				icon.y=52;
+				this.addChild(icon);
+				startX=icon.x+gridW;
+			}
+			for(i=0;i<badBuffs.length;i++){//debuff
+				icon=badBuffs[i];
+				icon.x=startX;
+				icon.y=52;
+				this.addChild(icon);
+				startX=icon.x+gridW;
 			}
 		}
 		
@@ -252,11 +260,11 @@ package com.rpgGame.app.ui.main.head
 			var icon:BuffIcon;
 			while(goodBuffs.length>0){
 				icon=goodBuffs.pop();
-				BuffIcon.recycle(icon);
+				icon.dispose();
 			}
 			while(badBuffs.length>0){
 				icon=badBuffs.pop();
-				BuffIcon.recycle(icon);
+				icon.dispose();
 			}
 		}
 		

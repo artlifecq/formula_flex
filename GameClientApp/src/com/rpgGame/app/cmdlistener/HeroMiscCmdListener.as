@@ -8,6 +8,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.PlayerAttributeManager;
 	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
@@ -23,6 +24,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
+	import com.rpgGame.coreData.type.EnumHurtType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.netData.client.message.ResClientCustomTagMessage;
@@ -123,6 +125,8 @@ package com.rpgGame.app.cmdlistener
 		
 		private function RecvResPlayerAddExpMessage(msg:ResPlayerAddExpMessage):void
 		{
+			var offset:int=msg.exp.fValue-MainRoleManager.actorInfo.curExp;
+			FightFaceHelper.showAttChange(EnumHurtType.EXP,offset);
 			MainRoleManager.actorInfo.curExp=msg.exp.fValue;
 			EventManager.dispatchEvent(MainPlayerEvent.NOWEXP_CHANGE);
 		}
