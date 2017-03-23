@@ -60,12 +60,33 @@ package com.rpgGame.app.ui.main.buff
 			}
 		}
 		
+		private function isCreate(data:BuffData):Boolean
+		{
+			var icon:BuffIcon;
+			var num:int=goodBuffs.length;
+			for(var i:int=0;i<num;i++){
+				icon=goodBuffs[i];
+				if(icon.buffData.buffData.q_buff_id==data.buffData.q_buff_id){
+					return true;
+				}
+			}
+			num=badBuffs.length;
+			for(i=0;i<num;i++){
+				icon=badBuffs[i];
+				if(icon.buffData.buffData.q_buff_id==data.buffData.q_buff_id){
+					return true;
+				}
+			}
+			
+			return false;
+		}
+		
 		private function createIcon(data:BuffData):void
 		{
-			if(data.buffData.q_icon_show==0){
+			if(data.buffData.q_icon_show==0||isCreate(data)){
 				return;
 			}
-			var icon:BuffIcon=BuffIcon.create(IcoSizeEnum.ICON_36);
+			var icon:BuffIcon=new BuffIcon(IcoSizeEnum.ICON_36);
 			icon.buffData=data;
 			var xx:int;
 			if(data.buffData.q_effect_type==2){//负面
@@ -87,11 +108,6 @@ package com.rpgGame.app.ui.main.buff
 				goodBuffs.push(icon);
 				buffSp.addChild(icon);
 			}
-			
-			var lostTim:int=CDDataManager.getCdNowTm(getKey(data.buffData.q_buff_id));
-			CDDataManager.playCD(getKey(data.buffData.q_buff_id), data.buffData.q_effect_time, lostTim);
-			
-			resize(Starling.current.stage.stageWidth, Starling.current.stage.stageHeight);
 		}
 		
 		private  function getKey(id : int) : String
@@ -124,9 +140,9 @@ package com.rpgGame.app.ui.main.buff
 			for  (var i:int=0;i<num;i++) 
 			{
 				icon=datas[i];
-				if(icon.buffData==data){
+				if(icon.buffData.buffData.q_buff_id==data.buffData.q_buff_id){
 					datas.splice(i,1);
-					BuffIcon.recycle(icon);
+					icon.dispose();
 					break;
 				}
 			}

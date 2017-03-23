@@ -18,29 +18,8 @@ package com.rpgGame.app.view.icon
 	 * @author dik
 	 * 
 	 */
-	public class BuffIcon extends IconCDFace   implements IInstancePoolClass
+	public class BuffIcon extends IconCDFace
 	{
-		private static var _pool : InstancePool = new InstancePool("BuffIcon", 100);
-
-		/**
-		 *创建一个buff图标 
-		 * @param size
-		 * @return 
-		 * 
-		 */
-		public static function create(size:int) : BuffIcon
-		{
-			return _pool.createObj(BuffIcon, size) as BuffIcon;
-		}
-		
-		public static function recycle(icon : BuffIcon) : void
-		{
-			if (!icon)
-				return;
-			_pool.disposeObj(icon);
-		}
-		
-		
 		private var _buffData:BuffData;
 		
 		public function BuffIcon($iconSize:int=IcoSizeEnum.ICON_36)
@@ -74,24 +53,17 @@ package com.rpgGame.app.view.icon
 			var info:Q_tipsinfo=new Q_tipsinfo();
 			info.q_describe_tittle=_buffData.buffData.q_buff_name;
 			info.q_describe=_buffData.buffData.q_description;
+			TipTargetManager.remove(this);
 			TipTargetManager.show(this, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,info));
 		}
 		
-		public  function instanceDispose() : void
+		override public function dispose():void
 		{
+			super.dispose();
 			clear();
+			TipTargetManager.remove(this);
 			_buffData=null;
 		}
-		
-		public	function instanceDestroy() : void
-		{
-			clear();
-			_buffData=null;
-		}
-		
-		public	function reSet(parameters : Array) : void
-		{
 			
-		}
 	}
 }
