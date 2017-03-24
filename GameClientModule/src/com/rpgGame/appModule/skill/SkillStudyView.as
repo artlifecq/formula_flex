@@ -2,6 +2,7 @@ package com.rpgGame.appModule.skill
 {
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.role.HeroData;
 	
 	import feathers.controls.Scroller;
 	
@@ -52,13 +53,15 @@ package com.rpgGame.appModule.skill
 			_skillContainer.addChild(_jobTl1);
 			_skillContainer.addChild(_jobTl2);
 			
+			var skills:Array=MainRoleManager.actorInfo.getActiveSpells();//已经学习的技能
+			
 //			skillNum=SpellDataManager.
 			var skillNum:int;
 			var job:int=MainRoleManager.actorInfo.job;
 			var item:SkillItem;
 			var i:int;
 			var row:int;
-			skillNum=8;
+			skillNum=skills.length;
 			for(i=0;i<skillNum;i++){
 				item=new SkillItem();
 				row=Math.floor(i/2);
@@ -97,7 +100,16 @@ package com.rpgGame.appModule.skill
 		
 		public function onShow():void
 		{
+			updateZhenqi();
 			_skin.tab_zizhi.addEventListener(Event.CHANGE, onTab);
+		}
+		
+		private function updateZhenqi():void
+		{
+			var _roleData:HeroData=MainRoleManager.actorInfo;
+			_skin.pro_zhenqi.maximum=_roleData.maxZhenqi;
+			_skin.pro_zhenqi.value=_roleData.curZhenqi;
+			_skin.lb_zhenqi.text=_roleData.curZhenqi+"/"+_roleData.maxZhenqi;			
 		}
 		
 		public function onHide():void
