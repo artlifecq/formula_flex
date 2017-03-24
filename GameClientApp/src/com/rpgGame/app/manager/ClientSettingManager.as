@@ -62,6 +62,9 @@ package com.rpgGame.app.manager
 				}
 				else if (type == EnumCustomTagType.SCENEEFFECT_INTERACT)
 				{
+				}else if(type == EnumCustomTagType.SYSTEMSET_INFO){
+					//系统设置数据
+					SystemSetManager.getinstance().setData(value);
 				}
 			}
 		}
