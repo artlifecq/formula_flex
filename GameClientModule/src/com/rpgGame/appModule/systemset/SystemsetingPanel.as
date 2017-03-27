@@ -3,10 +3,6 @@ package com.rpgGame.appModule.systemset
 	import com.rpgGame.app.manager.SystemSetManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	
-	import feathers.controls.ComboBox;
-	import feathers.data.ListCollection;
-	import feathers.events.FeathersEventType;
-	
 	import org.mokylin.skin.app.systemSet.systemSet_Skin;
 	
 	import starling.display.DisplayObjectContainer;
@@ -58,7 +54,7 @@ package com.rpgGame.appModule.systemset
 			var index:int = this._skin.tab_set.selectedIndex;
 			_viewList[index].visible = true;
 		}
-		override public function hide():void
+		override protected function onHide() : void
 		{
 			SystemSetManager.getinstance().saveData();
 			super.hide();

@@ -2,7 +2,10 @@ package com.rpgGame.app.manager
 {
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.sender.HeroMiscSender;
+	import com.rpgGame.core.events.SystemEvent;
 	import com.rpgGame.coreData.enum.EnumCustomTagType;
+	
+	import org.client.mainCore.manager.EventManager;
 
 	public class SystemSetManager
 	{
@@ -177,22 +180,46 @@ package com.rpgGame.app.manager
 			switch(index)
 			{
 				case SYSTEMSET_HP_PERCENT:
-					_lifeauot = value;
+					if(_lifeauot != value)
+					{
+						_lifeauot = value;
+						EventManager.dispatchEvent(SystemEvent.SYS_SET);
+					}
 					break;
 				case SYSTEMSET_FORCE_PERCENT:
-					_forceauot = value;
+					if(_forceauot != value)
+					{
+						_forceauot = value;
+						EventManager.dispatchEvent(SystemEvent.SYS_SET);
+					}
 					break; 
 				case SYSTEMSET_USEITEM_PERCENT:
-					_itemUse = value;
+					if(_itemUse != value)
+					{
+						_itemUse = value;
+						EventManager.dispatchEvent(SystemEvent.SYS_SET);
+					}
 					break;
 				case SYSTEMSET_HOOK_TYPE:
-					_hookType = value;
+					if(_hookType != value)
+					{
+						_hookType = value;
+						EventManager.dispatchEvent(SystemEvent.SYS_SET);
+					}
 					break;
 				case SYSTEMSET_SOUND_BG:
-					_soundBg = value;
+					if(_soundBg != value)
+					{
+						_soundBg = value;
+						EventManager.dispatchEvent(SystemEvent.SYS_SET);
+					}
 					break;
 				case SYSTEMSET_SOUND_EFFECT:
-					_soundEffect = value;
+					if(_soundEffect != value)
+					{
+						_soundEffect = value;
+						EventManager.dispatchEvent(SystemEvent.SYS_SET);
+					}
 					break;
 			}
 		}
@@ -200,22 +227,28 @@ package com.rpgGame.app.manager
 		{
 			var index :int = Math.floor(type/32);
 			var pos:int = 1<<(type%32);
+			var chageValue:uint ;
 			if(index==0)
 			{
-				if(bool)
-				{
-					_allData =_allData|pos;
-				}else{
-					_allData = _allData&(~pos);
-				}
+				chageValue = _allData;
 			}else{
-				if(bool)
-				{
-					_autoGetData =_autoGetData|pos;
-				}else{
-					_autoGetData = _autoGetData&(~pos);
-				}
+				chageValue = _autoGetData;
 			}
+			
+			if(bool)
+			{
+				chageValue =chageValue|pos;
+			}else{
+				chageValue = chageValue&(~pos);
+			}
+			
+			if(index==0)
+			{
+				 _allData = chageValue;
+			}else{
+				_autoGetData = chageValue;
+			}
+			EventManager.dispatchEvent(SystemEvent.SYS_SET);
 		}
 		
 		private function stringToUint(str:String):uint
