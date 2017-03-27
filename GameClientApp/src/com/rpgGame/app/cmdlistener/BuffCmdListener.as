@@ -13,6 +13,8 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.buff.message.ResRemoveBuffMessage;
 	import com.rpgGame.netData.buff.message.ResShowBuffInfoMessage;
 	
+	import flash.utils.getTimer;
+	
 	import org.client.mainCore.bean.BaseBean;
 	import org.game.netCore.connection.SocketConnection;
 
@@ -46,7 +48,7 @@ package com.rpgGame.app.cmdlistener
 			if (tarObj != null)
 			{
 				tarObj.buffSet.removeBuffByBuffID( msg.buffId.ToGID());
-				GameLog.addShow("*************************删除一条buff，buffID为： \t" + msg.buffId.ToGID());
+				GameLog.addShow("*************************删除一条buff，buffID为： \t" + msg.buffId.ToGID() + "\t当前时间：\t" + getTimer());
 			}
 		}
 		
@@ -92,7 +94,7 @@ package com.rpgGame.app.cmdlistener
 				tarObj.buffSet.addBuff(buffData);
 				BuffCdManager.playBuffCd(buffData);
 				
-				GameLog.addShow("*************************增加一条buff，buffID为： \t" + msg.buff.buffId.ToGID());
+				GameLog.addShow("*************************增加一条buff，buffID为： \t" + msg.buff.buffId.ToGID() + "\t当前时间：\t" + getTimer());
 			}
 		}
 	}
