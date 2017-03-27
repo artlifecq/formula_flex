@@ -206,6 +206,8 @@ package org.mokylin.skin.app.beibao
 			lbl_title = temp;
 			temp.name = "lbl_title";
 			temp.bold = true;
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.letterSpacing = 2;
 			temp.fontSize = 16;
 			temp.text = "物品拆分";

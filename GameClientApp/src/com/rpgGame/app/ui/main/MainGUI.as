@@ -1,7 +1,6 @@
 package com.rpgGame.app.ui.main
 {
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.main.buff.BuffBar;
@@ -29,7 +28,6 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangYuMaQiShou;
-	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
@@ -39,7 +37,6 @@ package com.rpgGame.app.ui.main
 	import app.message.MonsterDataProto.MonsterType;
 	
 	import feathers.controls.UIAsset;
-	import feathers.utils.filter.GrayFilter;
 	
 	import gs.TweenLite;
 	
@@ -274,7 +271,7 @@ package com.rpgGame.app.ui.main
 		
 		private  function showHead(role : SceneRole) : void
 		{
-			if(selectedRole==role){
+			if(selectedRole==role||role==MainRoleManager.actor){
 				return;
 			}
 			

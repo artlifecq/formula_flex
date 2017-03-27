@@ -28,6 +28,10 @@ package com.rpgGame.coreData.clientConfig
 		public var q_map_max_level:int;
 		 /**  是否安全区(0战斗区域,1安全区域) */
 		public var q_map_safe:int;
+		 /**  地图默认PK类型（-1为不设置PK类型,0和平，1组队，2帮会，3全体，4阵营，5善恶（暂时没用）） */
+		public var q_default_pk:int;
+		 /**  是否允许手动切换PK状态（0不可以，1可以） */
+		public var q_allow_change_pk:int;
 		 /**  是否可打坐(0不可打坐,1可打坐) */
 		public var q_map_sit:int;
 		 /**  是否可跳跃(0不可跳跃,1可跳跃) */

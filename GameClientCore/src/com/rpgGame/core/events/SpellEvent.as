@@ -12,5 +12,8 @@ package com.rpgGame.core.events
 		public static const SPELL_HERO_RELEASE_SPELL:int = UNIQUEID.NEXT;
 		/**主角快捷键释放技能**/
 		public static const SPELL_KEY_RELEASE:int = UNIQUEID.NEXT;
+		
+		/**选择技能**/
+		public static const SELECTE_SPELL:int = UNIQUEID.NEXT;
 	}
 }

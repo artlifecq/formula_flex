@@ -135,7 +135,7 @@ package com.rpgGame.coreData.info.fight
 		
 		public function readSpellEffectData(spellID:int):void
 		{
-			_spellData = SpellDataManager.getSpellData(spellID);
+			_spellData = SpellDataManager.getSpellDataWithID(spellID);
 			_spellEffectID = _spellData.q_spell_effect;
 			_spellEffectData = SpellEffectDataManager.getData(_spellEffectID);
 			if (_spellEffectData)

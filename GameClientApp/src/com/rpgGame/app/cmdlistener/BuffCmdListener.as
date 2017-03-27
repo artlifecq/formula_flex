@@ -1,6 +1,7 @@
 package com.rpgGame.app.cmdlistener
 {
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.app.manager.BuffCdManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -89,6 +90,7 @@ package com.rpgGame.app.cmdlistener
 				buffData.buffInfo = msg.buff;
 				buffData.srcRole = srcObj;
 				tarObj.buffSet.addBuff(buffData);
+				BuffCdManager.playBuffCd(buffData);
 				
 				GameLog.addShow("*************************增加一条buff，buffID为： \t" + msg.buff.buffId.ToGID());
 			}

@@ -101,6 +101,8 @@ package com.rpgGame.app.manager.shell
 			this._funcs["corred".toLowerCase()] = this.corredMethodTest;
 			this._funcs["stopCorrode".toLowerCase()] = this.stopCorrode;
 			this._funcs["tw".toLowerCase()] = this.twtest;
+
+            this._funcs["playerCamerVibrate".toLowerCase()] = this.playerCamerVibrate;
         }
 		
 		private function twtest():void
@@ -637,7 +639,20 @@ package com.rpgGame.app.manager.shell
                 }
                 SceneManager.removeSceneObjFromScene(unit);
             }, 376);
-
+        }
+        
+        private function playerCamerVibrate() : void {
+            var rud : RenderParamData3D = new RenderParamData3D(1, SceneCharType.SCENE_DEST_EFFECT, ClientConfig.getEffect("camerVibrate"));
+            
+            var effectRu : RenderUnit3D = RenderUnit3D.create(rud,true);
+            effectRu.allowCameraAnimator = true;
+            effectRu.repeat = 1;
+            effectRu.x = MainRoleManager.actor.x;
+            effectRu.z = MainRoleManager.actor.z;
+            effectRu.rotationY = MainRoleManager.actor.rotationY;
+            effectRu.completeWhenInvisible = true;
+            SceneManager.addSceneObjToScene(effectRu, true);
+            effectRu.play(0);
         }
       
         private function handler(command : String, ...params) : Boolean {

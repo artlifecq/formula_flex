@@ -18,6 +18,8 @@ package org.mokylin.skin.app.systemSet
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var bg:feathers.controls.UIAsset;
+
 		public var chk_hideAllEffect:feathers.controls.Check;
 
 		public var chk_hideBanghui:feathers.controls.Check;
@@ -57,7 +59,7 @@ package org.mokylin.skin.app.systemSet
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [__pingbiset_Skin_UIAsset1_i(),__pingbiset_Skin_UIAsset2_i(),__pingbiset_Skin_UIAsset3_i(),grp_xingneng_i(),grp_pingbi_i(),grp_huamian_i()];
+			this.elementsContent = [bg_i(),__pingbiset_Skin_UIAsset1_i(),__pingbiset_Skin_UIAsset2_i(),grp_xingneng_i(),grp_pingbi_i(),grp_huamian_i()];
 			
 			states = {
 			};
@@ -249,11 +251,9 @@ package org.mokylin.skin.app.systemSet
 		private function __pingbiset_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 470;
-			temp.styleName = "ui/common/background/neikuang_2.png";
-			temp.width = 405;
-			temp.x = 0;
-			temp.y = 0;
+			temp.styleName = "ui/app/systemSet/fen.png";
+			temp.x = 17;
+			temp.y = 105;
 			return temp;
 		}
 
@@ -262,16 +262,20 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/systemSet/fen.png";
 			temp.x = 17;
-			temp.y = 105;
+			temp.y = 292;
 			return temp;
 		}
 
-		private function __pingbiset_Skin_UIAsset3_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/systemSet/fen.png";
-			temp.x = 17;
-			temp.y = 292;
+			bg = temp;
+			temp.name = "bg";
+			temp.height = 470;
+			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.width = 405;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 

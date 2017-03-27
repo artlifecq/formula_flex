@@ -171,7 +171,7 @@ package com.rpgGame.app.fight.spell
 			if(msg is ResFightBroadcastMessage)
 			{
 				var fightTargetMsg:ResFightBroadcastMessage = msg as ResFightBroadcastMessage;
-				_spellData = SpellDataManager.getSpellData(fightTargetMsg.skillModelId);
+				_spellData = SpellDataManager.getSpellDataWithID(fightTargetMsg.skillModelId);
 				
 				_releaseAngle = fightTargetMsg.fightDirection;
 				_releaseAngle = (_releaseAngle + 270) % 360;
@@ -220,7 +220,7 @@ package com.rpgGame.app.fight.spell
 			else if(msg is ResAttackVentToClientMessage)
 			{
 				var fightPosMsg:ResAttackVentToClientMessage = msg as ResAttackVentToClientMessage;
-				_spellData = SpellDataManager.getSpellData(fightPosMsg.fightType);
+				_spellData = SpellDataManager.getSpellDataWithID(fightPosMsg.fightType);
 				
 				_releaseAngle = fightPosMsg.fightDirection;
 				_releaseAngle = (_releaseAngle + 270) % 360;
