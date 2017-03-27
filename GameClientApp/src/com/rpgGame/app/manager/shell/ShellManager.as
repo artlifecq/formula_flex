@@ -100,9 +100,20 @@ package com.rpgGame.app.manager.shell
 			
 			this._funcs["corred".toLowerCase()] = this.corredMethodTest;
 			this._funcs["stopCorrode".toLowerCase()] = this.stopCorrode;
-            
+			this._funcs["tw".toLowerCase()] = this.twtest;
+
             this._funcs["playerCamerVibrate".toLowerCase()] = this.playerCamerVibrate;
         }
+		
+		private function twtest():void
+		{
+			TweenLite.to(MainRoleManager.actor,5,{x: 1000, z: -1000, ease: Linear.easeNone, overwrite: 0, onComplete: onMoveComplete});
+		}
+		
+		private function onMoveComplete():void
+		{
+			trace("aaaaaa");
+		}
 		
 		private function corredMethodTest():void
 		{
