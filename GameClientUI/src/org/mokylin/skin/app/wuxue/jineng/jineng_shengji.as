@@ -25,6 +25,8 @@ package org.mokylin.skin.app.wuxue.jineng
 
 		public var btn_shengji:feathers.controls.Button;
 
+		public var eft_name:feathers.controls.Label;
+
 		public var lb_dengji:feathers.controls.Label;
 
 		public var lb_leixing:feathers.controls.Label;
@@ -58,7 +60,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			this.currentState = "normal";
 			this.height = 422;
 			this.width = 362;
-			this.elementsContent = [__jineng_shengji_UIAsset3_i(),__jineng_shengji_UIAsset4_i(),__jineng_shengji_UIAsset5_i(),Icon_jineng_i(),lb_name_i(),lb_dengji_i(),lb_xiaohao_i(),lb_leixing_i(),lb_lengque_i(),__jineng_shengji_Label1_i(),lb_miaoshu_i(),__jineng_shengji_Label2_i(),arrow1_i(),arrow2_i(),lb_shengji_i(),lb_shanghai_i(),__jineng_shengji_Label3_i(),lb_renwudengji_i(),lb_zhenqi_i(),lb_yinliang_i(),btn_shengji_i()];
+			this.elementsContent = [__jineng_shengji_UIAsset3_i(),__jineng_shengji_UIAsset4_i(),__jineng_shengji_UIAsset5_i(),Icon_jineng_i(),lb_name_i(),lb_dengji_i(),lb_xiaohao_i(),lb_leixing_i(),lb_lengque_i(),__jineng_shengji_Label1_i(),lb_miaoshu_i(),eft_name_i(),arrow1_i(),arrow2_i(),lb_shengji_i(),lb_shanghai_i(),__jineng_shengji_Label2_i(),lb_renwudengji_i(),lb_zhenqi_i(),lb_yinliang_i(),btn_shengji_i()];
 			
 			states = {
 			};
@@ -93,18 +95,6 @@ package org.mokylin.skin.app.wuxue.jineng
 		}
 
 		private function __jineng_shengji_Label2_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.fontSize = 16;
-			temp.text = "升级效果";
-			temp.color = 0xE8C958;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 146;
-			temp.y = 198;
-			return temp;
-		}
-
-		private function __jineng_shengji_Label3_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.fontSize = 16;
@@ -179,6 +169,20 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.width = 90;
 			temp.x = 136;
 			temp.y = 367;
+			return temp;
+		}
+
+		private function eft_name_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			eft_name = temp;
+			temp.name = "eft_name";
+			temp.fontSize = 16;
+			temp.text = "升级效果";
+			temp.color = 0xE8C958;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.x = 146;
+			temp.y = 198;
 			return temp;
 		}
 

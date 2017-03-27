@@ -480,7 +480,7 @@ package com.rpgGame.app.cmdlistener.scene
 			for(var i:int=0;i<delArr.length;i++)
 			{
 				var roleID:uint = delArr[i].ToGID();
-				onSceneRemoveObject(roleID);
+//				onSceneRemoveObject(roleID);
 				GameLog.addShow("删除对象客户端id：" + roleID);
 				GameLog.addShow("删除对象服务器id：" + delArr[i].ToString());
 			}

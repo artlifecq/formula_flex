@@ -52,7 +52,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_target:int;
 		 /**  作用目标上限 */
 		public var q_target_max:int;
-		 /**  技能表现类型（服务端区分） 0.常规类型 2.召唤类型  4有位移类型,5灭世金针6多段伤害 */
+		 /**  技能表现类型（服务端区分） 0.常规类型 2.召唤类型  4有位移类型,5灭世金针6多段伤害,3矩形辐射递进伤害 */
 		public var q_skill_type:int;
 		 /**  使用方式（1主动技能，2被动技能） */
 		public var q_trigger_type:int;
@@ -72,6 +72,12 @@ package com.rpgGame.coreData.clientConfig
 		public var q_is_allow_auto_combat:int;
 		 /**  是否可以设为默认技能（0不可设为默认技能，1可以设为默认技能） */
 		public var q_default_enable:int;
+		 /**  在无目标情况下是否自动寻找锁定目标(0否1是，如果选中目标不符合敌对关系，也算作没用无目标) */
+		public var q_auto_lock:int;
+		 /**  是否检查敌对关系（0不检查，1检查） */
+		public var q_check_relation:int;
+		 /**  在检查敌对关系不符的时候，是否自动选择一个目标(0不选择 1选择) */
+		public var q_check_relation_auto_lock:int;
 		 /**  是否是锁定技能，必须指定一个目标的技能（0不锁定，1锁定,2锁定死亡） */
 		public var q_is_locking_spell:int;
 		 /**  显示所需人物等级 */
@@ -150,7 +156,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_underHP_Damage_per:int;
 		 /**  是否可以注册快捷栏（1可以，0不可以） */
 		public var q_shortcut:int;
-		 /**  位置编号（0:不在人物面板,，1：人物主动技能面板，2：人物被动技能面板，3，抵抗技能） */
+		 /**  位置编号（0不在技能面板,，1：未升阶，2升阶后 3 其他 */
 		public var q_index:int;
 		 /**  召唤怪物ID（1是幻象分身） */
 		public var q_summon_id:int;

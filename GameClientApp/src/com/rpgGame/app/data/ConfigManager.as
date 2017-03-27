@@ -11,7 +11,6 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ChangeModelCfgData;
-	import com.rpgGame.coreData.cfg.RelationCfgData;
 	import com.rpgGame.coreData.cfg.ChatCfgData;
 	import com.rpgGame.coreData.cfg.ClientAreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientBuffCfgData;
@@ -33,8 +32,10 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.MailCfgData;
 	import com.rpgGame.coreData.cfg.MazeCfgData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
+	import com.rpgGame.coreData.cfg.RelationCfgData;
 	import com.rpgGame.coreData.cfg.ReliveCfgData;
 	import com.rpgGame.coreData.cfg.ShopCfgData;
+	import com.rpgGame.coreData.cfg.SkillLvLDataManager;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.SpellEffectDataManager;
 	import com.rpgGame.coreData.cfg.StallCfgData;
@@ -168,6 +169,7 @@ package com.rpgGame.app.data
 			AttFormulaConfig.setup(dic[ConfigClassRegister.Q_att_transfer]);
 			DieCfgData.setup(dic[ConfigClassRegister.Q_die]);
 			GCDCfgData.setup(dic[ConfigClassRegister.Q_GCD]);
+			SkillLvLDataManager.setup(dic[ConfigClassRegister.Q_skill_ignore]);
 //			CountryUnionStatCfgData.setup(null); //待解决
 
 			
