@@ -72,8 +72,9 @@ package com.rpgGame.app.controller.keyboard
 						AppManager.showApp(AppConstant.TEAM_PANEL);
 					break;
 				case "10": //O 商城
-					if (!ClientConfig.isBanShu)
-						AppManager.showApp(AppConstant.SHOP_SYSTEM_PANEL);
+					/*if (!ClientConfig.isBanShu)
+						AppManager.showApp(AppConstant.SHOP_SYSTEM_PANEL);*/
+					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
 					break;
 				case "11": //J 社会
 					if (!ClientConfig.isBanShu)
