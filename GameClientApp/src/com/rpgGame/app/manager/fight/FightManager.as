@@ -58,23 +58,29 @@ package com.rpgGame.app.manager.fight
                 var roleInfo : RoleData = role.data as RoleData;
                 if (SceneCharType.MONSTER == role.type) {
                     // 是怪物
-                    if (roleInfo.ownerId == MainRoleManager.actorInfo.id) {
-                        // 是自己的从属怪
-                        modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
+                    if (-1 != roleInfo.ownerId) {
+                        // 从属怪
+                        if (MainRoleManager.actorInfo.id == roleInfo.ownerId) {
+                            // 是自己的从属怪
+                            modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
+                        } else {
+                            goto checkPlayer;
+                        }
                         break;
                     }
                     modeState = RelationCfgData.isEnemy(MainRoleManager.actorInfo, roleInfo) ?
                         FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY : FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
                     if (FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY == modeState && 
                         null != spellData &&
-                        SpellTargetType.ENEMY == spellData.q_target) {
-                        modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
+                        (SpellTargetType.FRIEND == spellData.q_target ||
+                         SpellTargetType.TEAM == spellData.q_target)) {
+                        modeState = FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND;
                     }
                     break;
                 }
                 if (SceneCharType.PLAYER == role.type) {
                     // 是玩家
-                    switch (MainRoleManager.actorInfo.pkMode) {
+                    checkPlayer:switch (MainRoleManager.actorInfo.pkMode) {
                         case PKModeType.ALL:
                             // 全体
                             modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
@@ -97,11 +103,13 @@ package com.rpgGame.app.manager.fight
                         case PKModeType.KIND_OR_EVIL:
                             break;
                     }
-                    if (FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY == modeState && null != spellData) {
+                    if (FIGHT_ROLE_STATE_CAN_NOT_FIGHT == modeState && null != spellData) {
                         if (SpellTargetType.FRIEND == spellData.q_target) {
                             // TODO 现在没有好友故可攻击
+                            modeState = FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND;
                         } else if (SpellTargetType.TEAM == spellData.q_target) {
                             // TODO 现在没有队伍故可攻击
+                            modeState = FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND;
                         }
                     }
                     break;
