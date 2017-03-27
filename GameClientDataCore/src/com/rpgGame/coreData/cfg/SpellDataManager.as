@@ -57,10 +57,15 @@ package com.rpgGame.coreData.cfg
 			{
 				_map.add(skillData.q_skillID_q_grade,skillData);
 				skills=_jobAllMap.getValue(skillData.q_job);
-				skills.push(skillData);
+				if(skills){
+					skills.push(skillData);
+				}
 				if(skillData.q_grade==1&&skillData.q_index!=0){
 					skills=_jobBasicMap.getValue(skillData.q_job);
-					skills.push(skillData);
+					if(skills){
+						skills.push(skillData);
+					}
+						
 				}
 			}
 		}
