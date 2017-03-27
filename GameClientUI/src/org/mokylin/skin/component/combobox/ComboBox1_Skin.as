@@ -1,10 +1,11 @@
 package org.mokylin.skin.component.combobox
 {
 	import feathers.controls.Button;
+	import feathers.controls.List;
 	import feathers.controls.StateSkin;
 	import feathers.controls.TextInput;
-	import feathers.controls.UIAsset;
 	import org.mokylin.skin.component.button.ButtonSkin_xiala;
+	import org.mokylin.skin.component.text.TextAreaDwonSkin;
 	import org.mokylin.skin.component.text.textInput1_Skin;
 
 	/**
@@ -17,9 +18,11 @@ package org.mokylin.skin.component.combobox
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var __ComboBox1_Skin_UIAsset1:feathers.controls.UIAsset;
+		public var dropDown:feathers.controls.List;
 
-		public var btn:feathers.controls.Button;
+		public var openButton:feathers.controls.Button;
+
+		public var textInput:feathers.controls.TextInput;
 
 
 		//==========================================================================
@@ -30,20 +33,20 @@ package org.mokylin.skin.component.combobox
 			super();
 			
 			this.currentState = "disabled";
-			this.height = 22;
+			this.height = 24;
 			this.width = 70;
-			this.elementsContent = [__ComboBox1_Skin_TextInput1_i(),btn_i(),__ComboBox1_Skin_UIAsset1_i()];
+			this.elementsContent = [textInput_i(),openButton_i(),dropDown_i()];
 			
 			states = {
 				disabled:[
-						{target:"__ComboBox1_Skin_UIAsset1",
+						{target:"dropDown",
 							name:"visible",
 							value:false
 						}
 					]
 				,
 				normal:[
-						{target:"__ComboBox1_Skin_UIAsset1",
+						{target:"dropDown",
 							name:"visible",
 							value:false
 						}
@@ -56,36 +59,41 @@ package org.mokylin.skin.component.combobox
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __ComboBox1_Skin_TextInput1_i():feathers.controls.TextInput
+		private function dropDown_i():feathers.controls.List
 		{
-			var temp:feathers.controls.TextInput = new feathers.controls.TextInput();
-			temp.height = 24;
-			temp.styleClass = org.mokylin.skin.component.text.textInput1_Skin;
-			temp.width = 70;
-			temp.x = 0;
-			temp.y = -1;
-			return temp;
-		}
-
-		private function __ComboBox1_Skin_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__ComboBox1_Skin_UIAsset1 = temp;
+			var temp:feathers.controls.List = new feathers.controls.List();
+			dropDown = temp;
+			temp.name = "dropDown";
 			temp.height = 86;
-			temp.styleName = "ui/common/tips/tips_2.png";
-			temp.width = 70;
-			temp.x = 0;
+			temp.left = 0;
+			temp.right = 0;
+			temp.styleClass = org.mokylin.skin.component.text.TextAreaDwonSkin;
 			temp.y = 23;
 			return temp;
 		}
 
-		private function btn_i():feathers.controls.Button
+		private function openButton_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn = temp;
-			temp.name = "btn";
+			openButton = temp;
+			temp.name = "openButton";
+			temp.bold = false;
+			temp.right = 0;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_xiala;
-			temp.x = 48;
+			temp.width = 22;
+			temp.y = 1;
+			return temp;
+		}
+
+		private function textInput_i():feathers.controls.TextInput
+		{
+			var temp:feathers.controls.TextInput = new feathers.controls.TextInput();
+			textInput = temp;
+			temp.name = "textInput";
+			temp.height = 24;
+			temp.left = 0;
+			temp.right = 0;
+			temp.styleClass = org.mokylin.skin.component.text.textInput1_Skin;
 			temp.y = 0;
 			return temp;
 		}

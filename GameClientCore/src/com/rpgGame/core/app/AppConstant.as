@@ -338,5 +338,7 @@ package com.rpgGame.core.app
 		public static var STALL_SELL_GOODS_TO_STALL : String = createAppInfo("stall.SellGoodsToStallPanel","stall");
 		/**查看摊位区域**/
 		public static var STALL_AREA_PANEL : String = createAppInfo("stall.StallAreaPanel");
+		/**系统设置**/
+		public static var SYSTEMSET_PANEL:String = createAppInfo("systemset.SystemsetingPanel","systemSet");
 	}
 }

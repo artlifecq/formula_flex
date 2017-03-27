@@ -1,5 +1,6 @@
-package org.mokylin.skin.component.slider.skin_Slider.button
+package org.mokylin.skin.app.systemSet
 {
+	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -9,7 +10,7 @@ package org.mokylin.skin.component.slider.skin_Slider.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonSkin_track extends feathers.controls.StateSkin
+	public class ListItem_Skin extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,13 +23,13 @@ package org.mokylin.skin.component.slider.skin_Slider.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonSkin_track()
+		public function ListItem_Skin()
 		{
 			super();
 			
 			this.currentState = "down";
-			this.height = 7;
-			this.width = 8;
+			this.height = 22;
+			this.width = 68;
 			this.elementsContent = [];
 			
 			states = {
@@ -40,7 +41,12 @@ package org.mokylin.skin.component.slider.skin_Slider.button
 						,
 						{target:"labelDisplay",
 							name:"color",
-							value:0xFFFFFF
+							value:0x5CB006
+						}
+						,
+						{target:"labelDisplay",
+							name:"nativeFilters",
+							value:Fontter.filterObj["textFilterBlackGreen"]
 						}
 						,
 						{target:"labelDisplay",
@@ -49,7 +55,7 @@ package org.mokylin.skin.component.slider.skin_Slider.button
 						}
 					]
 			};
-			skinNames={"down":"ui/component/slider/skin_Slider/button/anniudi.png", "hover":"ui/component/slider/skin_Slider/button/anniudi.png", "up":"ui/component/slider/skin_Slider/button/anniudi.png"};
+			skinNames={"down":"ui/common/hover/xuanqukuang.png", "hover":"ui/common/hover/xuanqukuang.png", "up":"ui/common/hover/xuanqukuang.png"};
 		}
 
 
@@ -69,11 +75,14 @@ package org.mokylin.skin.component.slider.skin_Slider.button
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
+			temp.bottom = 0;
 			temp.left = 0;
 			temp.right = 0;
-			temp.text = "";
+			temp.text = "2倍";
 			temp.textAlign = "center";
-			temp.color = 0xFFFFFF;
+			temp.color = 0x5CB006;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.top = 0;
 			temp.verticalAlign = "middle";
 			return temp;
 		}
