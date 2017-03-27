@@ -54,7 +54,7 @@ package com.rpgGame.app.manager
 	{
 		private static const simpleShadowBaseScale : Number = 0.01;
 		
-		public static function updateAvatar(role : SceneRole) : void
+		public static function updateAvatar(role : SceneRole,updataBuff:Boolean = true) : void
 		{
 			if (role == null || !role.usable)
 				return;
@@ -118,7 +118,8 @@ package com.rpgGame.app.manager
 			}
 			
 			role.stateMachine.transition(RoleStateType.CONTROL_AVATAR);
-			role.buffSet.updateBuffEffects();
+			if(updataBuff)
+				role.buffSet.updateBuffEffects();
 			RoleStateUtil.updateRoleBaseWalkActionSpeed(role);
 			
 			if (avatarInfo.rpd_body)
@@ -473,6 +474,7 @@ package com.rpgGame.app.manager
 				role.avatar.removeRenderUnitByID(RenderUnitType.WEAPON, RenderUnitID.WEAPON);
 			}
 			
+			role.avatar.removeRenderUnitsByType(RenderUnitType.WEAPON_EFFECT);
 			var rpd_weapon_effect : RenderParamData3D = avatarInfo.rpd_weapon_effect;
 			if (rpd_weapon_effect != null)
 			{
@@ -588,6 +590,7 @@ package com.rpgGame.app.manager
 				role.avatar.removeRenderUnitByID(RenderUnitType.DEPUTY_WEAPON, RenderUnitID.DEPUTY_WEAPON);
 			}
 			
+			role.avatar.removeRenderUnitsByType(RenderUnitType.DEPUTY_WEAPON_EFFECT);
 			var rpd_deputyWeapon_effect : RenderParamData3D = avatarInfo.rpd_deputyWeapon_effect;
 			if (rpd_deputyWeapon_effect != null)
 			{

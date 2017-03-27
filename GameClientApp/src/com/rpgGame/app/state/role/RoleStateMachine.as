@@ -59,8 +59,6 @@ package com.rpgGame.app.state.role
 	
 	import flash.utils.Dictionary;
 	
-	import app.message.BoolArrayProto;
-	
 	/**
 	 *
 	 * 场景角色状态机
@@ -433,6 +431,12 @@ package com.rpgGame.app.state.role
 		public function get isFasting() : Boolean
 		{
 			var state : IState = getCurrState(FastingState);
+			return state != null;
+		}
+		
+		public function get isShapeshifting():Boolean
+		{
+			var state : IState = getCurrState(ShapeshiftingState);
 			return state != null;
 		}
 		

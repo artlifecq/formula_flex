@@ -54,8 +54,6 @@ package com.rpgGame.app.scene
 		{
 //			dispose();
 		}
-		
-		
 		/**
 		 * @private
 		 * 回收一个BuffSet
@@ -67,7 +65,110 @@ package com.rpgGame.app.scene
 			buffSetPool.disposeObj(buffSet);
 		}
 		
+		public function BuffSet(role : SceneRole)
+		{
+			_buffDatas = new Vector.<BuffData>();
+			reSet([role]);
+		}
+		
+		public function reSet($parameters : Array) : void
+		{
+			_role = $parameters[0];
+		}
+		
+		private function clear() : void
+		{
+			for each (var buffData : BuffData in _buffDatas)
+			{
+				removeRoleState(buffData);
+				removeBuffEffect(buffData.cfgId);
+			}
+			_buffDatas.splice(0,_buffDatas.length);
+		}
+		
 		private var _role : SceneRole;
+		/**
+		 * 存放已经有效的buff数据 
+		 */		
+		private var _buffDatas:Vector.<BuffData>;
+		
+		/**
+		 * 更新角色身上的所有buff效果
+		 * 
+		 */		
+		public function updateBuffEffects() : void
+		{
+			if (!_role)
+				return;
+			clear();
+			var buffList : Vector.<BuffData> = (_role.data as RoleData).buffList;
+			if (!buffList)
+				return;
+			for each (var buffData : BuffData in buffList)
+			{
+				addBuffEffect(buffData);
+				handlerRoleState(buffData);
+			}
+		}
+		
+		
+		/**
+		 * 在角色的buff数据里再添加一条数据 
+		 * @param buffData
+		 * 
+		 */		
+		public function addBuff(buffData : BuffData) : void
+		{
+			var buffList : Vector.<BuffData> = (_role.data as RoleData).buffList;
+			if (!buffList)
+				return;
+			var buffExist : Boolean = false;
+			for each (var currData : BuffData in buffList)
+			{
+				if (currData.buffId == buffData.buffId)
+				{
+					buffExist = true;
+					break;
+				}
+			}
+			if (!buffExist)
+			{
+				_buffDatas.push(buffData);
+				buffList.push(buffData);
+			}
+			addBuffEffect(buffData);
+			handlerRoleState(buffData);
+			EventManager.dispatchEvent(BuffEvent.ADD_BUFF, buffData);
+		}
+		
+		/**
+		 * 根据后台的buffID删除buff 
+		 * @param buffID
+		 * 
+		 */		
+		public function removeBuffByBuffID(buffID:Number):void
+		{
+			if (!_role)
+				return;
+			var buffList : Vector.<BuffData> = (_role.data as RoleData).buffList;
+			if (!buffList || buffList.length == 0)
+				return;
+			var len : int = buffList.length;
+			for (var i : int = 0; i < len; i++)
+			{
+				var currData : BuffData = buffList[i];
+				if (currData.buffId == buffID)
+				{
+					_buffDatas.splice(i, 1);
+					buffList.splice(i, 1);
+					removeRoleState(currData);
+					removeBuffEffect(currData.cfgId);
+					EventManager.dispatchEvent(BuffEvent.REMOVE_BUFF, currData);
+					break;
+				}
+			}
+		}
+		
 		/**
 		 * 为角色身上添加buff效果及buff的计时器 
 		 * @param buffData
@@ -97,81 +198,6 @@ package com.rpgGame.app.scene
 		}
 		
 		/**
-		 * 更新角色身上的所有buff效果
-		 * 
-		 */		
-		public function updateBuffEffects() : void
-		{
-			if (!_role)
-				return;
-			clear();
-			var buffList : Vector.<BuffData> = (_role.data as RoleData).buffList;
-			if (!buffList)
-				return;
-			for each (var buffData : BuffData in buffList)
-			{
-//				addBuff(buffData);
-			}
-		}
-		
-		
-		/**
-		 * 在角色的buff数据里再添加一条数据 
-		 * @param buffData
-		 * 
-		 */		
-		public function addBuff(buffData : BuffData) : void
-		{
-			var buffList : Vector.<BuffData> = (_role.data as RoleData).buffList;
-			if (!buffList)
-				return;
-			var buffExist : Boolean = false;
-			for each (var currData : BuffData in buffList)
-			{
-				if (currData.buffId == buffData.buffId)
-				{
-					buffExist = true;
-					break;
-				}
-			}
-			if (!buffExist)
-			{
-				buffList.push(buffData);
-			}
-			addBuffEffect(buffData);
-			handlerRoleState(buffData);
-			EventManager.dispatchEvent(BuffEvent.ADD_BUFF, buffData);
-		}
-		
-		/**
-		 * 根据后台的buffID删除buff 
-		 * @param buffID
-		 * 
-		 */		
-		public function removeBuffByBuffID(buffID:Number):void
-		{
-			if (!_role)
-				return;
-			var buffList : Vector.<BuffData> = (_role.data as RoleData).buffList;
-			if (!buffList || buffList.length == 0)
-				return;
-			var len : int = buffList.length;
-			for (var i : int = 0; i < len; i++)
-			{
-				var currData : BuffData = buffList[i];
-				if (currData.buffId == buffID)
-				{
-					buffList.splice(i, 1);
-					removeRoleState(currData);
-					removeBuffEffect(currData.cfgId);
-					break;
-				}
-			}
-			
-			EventManager.dispatchEvent(BuffEvent.REMOVE_BUFF, currData);
-		}	
-		
-		/**
 		 * 删掉角色身上的buff效果及计时器 
 		 * @param stateId
 		 * 
@@ -182,28 +208,6 @@ package com.rpgGame.app.scene
 			{
 				_role.avatar.removeRenderUnitsByType(RenderUnitType.BUFF + cfgId);
 			}
-		}
-		
-		public function BuffSet(role : SceneRole)
-		{
-			reSet([role]);
-		}
-		
-		public function reSet($parameters : Array) : void
-		{
-			_role = $parameters[0];
-		}
-		
-		private function clear() : void
-		{
-//			var buffList : Vector.<BuffData> = (_role.data as RoleData).buffList;
-//			if (!buffList)
-//				return;
-//			for each (var buffData : BuffData in buffList)
-//			{
-//				addBuffEffect(buffData);
-//				handlerRoleState(buffData);
-//			}
 		}
 		
 		private function removeRoleState(buffData : BuffData):void
@@ -272,6 +276,7 @@ package com.rpgGame.app.scene
 			var stateTypes:Array = buffStatesStr.split(",");
 			for(var i:uint=0;i<stateTypes.length;i++)
 			{
+				removeRoleBuffState(int(stateTypes[i]));
 				everyRoleBuffState(int(stateTypes[i]),buffData);
 			}
 		}
@@ -382,9 +387,9 @@ package com.rpgGame.app.scene
 						_role.stateMachine.transition(RoleStateType.CONTROL_SYNC_SPELLACTION, buffRef, true); //切换到“技能动作同步状态”
 						break;
                     case 34:// 变身
-                        buffRef = _role.stateMachine.getReference(ShapeshiftingStateReference) as ShapeshiftingStateReference;
-                        buffRef.setParams(buffData);
-                        _role.stateMachine.transition(RoleStateType.CONTROL_SHAPESHIFTING, buffRef);
+						buffRef = _role.stateMachine.getReference(ShapeshiftingStateReference) as ShapeshiftingStateReference;
+                   		buffRef.setParams(buffData);
+                    	_role.stateMachine.transition(RoleStateType.CONTROL_SHAPESHIFTING, buffRef);
                         break;
 					case 199://冰冻
 						buffRef = _role.stateMachine.getReference(BingDongStateReference) as BingDongStateReference;

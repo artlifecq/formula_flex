@@ -308,9 +308,38 @@ package com.rpgGame.app.cmdlistener.scene
 			//				EventManager.dispatchEvent(MainPlayerEvent.PK_MODE_CHANGE);
 		}
 		
+		/**
+		 * 这个协议本来没有用的，但是现在有一个情况是当主角释放技能失败时，服务器会让主角停止走路，而客户端的主角本来是客户端自己
+		 * 控制的，所以，主角一直到不了目标点，导致，主角一直在播行走的动作。停不下来了，所以这里临时处理下当主角释放技能失败，服务器要求停止主角
+		 * 寻路的话，就让主角停下来
+		 * @param msg
+		 * 
+		 */		
 		private function RecvResPlayerStopMessage(msg:ResPlayerStopMessage):void
 		{
-			
+			var objId : Number = msg.personId.ToGID();
+			if(MainRoleManager.actorID == objId)
+			{
+				var posX : int = msg.position.x;
+				var posY : int = msg.position.y;
+				
+				var role : SceneRole = SceneManager.getSceneObjByID(objId) as SceneRole;
+				if (role && role.usable)
+				{
+					var walkMoveRef : WalkMoveStateReference;
+					var stopWalkRef : StopWalkMoveStateReference;
+					walkMoveRef = role.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+					walkMoveRef.isServerStop = true;
+					stopWalkRef = role.stateMachine.getReference(StopWalkMoveStateReference) as StopWalkMoveStateReference;
+					stopWalkRef.setParams(posX, posY);
+					role.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, stopWalkRef);
+					if (role.stateMachine.isPrewarWaiting)
+						role.stateMachine.transition(RoleStateType.ACTION_PREWAR);
+					else
+						role.stateMachine.transition(RoleStateType.ACTION_IDLE);
+				}
+				return;
+			}
 		}
 		
 		/**
@@ -325,7 +354,7 @@ package com.rpgGame.app.cmdlistener.scene
 //				trace("主角自己，不用同步了吧！不然，场景会跳一下，体验不好！");
 				return;
 			}
-			//			var speed : int = buffer.readVarint32();
+			
 			var posX : int = msg.position.x;
 			var posY : int = msg.position.y;
 			GameLog.addShow("%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 收到对象停止消息 :   " + posX + "   " + posY);
@@ -337,8 +366,7 @@ package com.rpgGame.app.cmdlistener.scene
 				var stopWalkRef : StopWalkMoveStateReference;
 				
 				GameLog.addShow("角色深度值为：  ****** " + role.z);
-//				trace(SystemTimeManager.sysDateTimeStr);
-				
+			
 				/////////////////伪装者停止移动
 				var camouflageEntity : SceneRole = SceneRole(role.getCamouflageEntity());
 				if (camouflageEntity)

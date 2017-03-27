@@ -2329,7 +2329,7 @@ package com.game.engine3D.scene.render
 
 		private function doWaitAddBone(childData : RenderUnitChild) : void
 		{
-			if(childData.renderUnit.type == "hair")
+			if(childData.renderUnit.type == "weapon_effect")
 			{
 				trace(1);
 			}

@@ -7,9 +7,7 @@ package com.rpgGame.app.scene.animator
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.game.mainCore.libCore.utils.ZMath;
-	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
-	import com.rpgGame.app.fight.spell.SpellHitHelper;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;

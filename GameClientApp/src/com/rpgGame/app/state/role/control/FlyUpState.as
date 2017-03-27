@@ -29,7 +29,7 @@ package com.rpgGame.app.state.role.control
 		 */
 		public static var FLY_HEIGHT : int = 0;
 		
-		public var hitTime:Number;
+//		public var hitTime:Number;
 		public var upTime:Number;
 		public var flyTime:Number;
 		public var fallTime:Number;
@@ -45,7 +45,7 @@ package com.rpgGame.app.state.role.control
 				_stateReference = _ref as FlyUpStateReference;
 				
 //				FLY_HEIGHT = Number(_stateReference.buffData.clientData.h);
-				hitTime = Number(_stateReference.buffData.clientData.hit);
+//				hitTime = Number(_stateReference.buffData.clientData.hit);
 				upTime = Number(_stateReference.buffData.clientData.up);
 				flyTime = Number(_stateReference.buffData.clientData.stay);
 				fallTime = Number(_stateReference.buffData.clientData.down);
@@ -53,34 +53,26 @@ package com.rpgGame.app.state.role.control
 				var startTime:Number = _stateReference.buffData.totalTime - _stateReference.buffData.disappearTime;
 				if(startTime>0)
 				{
-					if(startTime > upTime + flyTime + fallTime + hitTime)
+					if(startTime > upTime + flyTime + fallTime)
 					{
-						hitTime = 0;
 						upTime = 0;
 						flyTime = 0;
 						fallTime = 0;
 					}
-					else if(startTime > upTime + flyTime + hitTime)
+					else if(startTime > upTime + flyTime)
 					{
-						hitTime = 0;
 						upTime = 0;
 						flyTime = 0;
-						fallTime = hitTime + upTime + flyTime + fallTime - startTime;
+						fallTime = upTime + flyTime + fallTime - startTime;
 					}
-					else if(startTime > upTime + hitTime)
+					else if(startTime > upTime)
 					{
-						hitTime = 0;
 						upTime = 0;
-						flyTime = hitTime + upTime + flyTime - startTime;
-					}
-					else if(startTime > hitTime)
-					{
-						hitTime = 0;
-						upTime = upTime + hitTime - startTime;
+						flyTime = upTime + flyTime - startTime;
 					}
 					else
 					{
-						hitTime = hitTime - startTime;
+						upTime = upTime - startTime;
 					}
 				}
 				
@@ -99,7 +91,7 @@ package com.rpgGame.app.state.role.control
 					}
 				}
 				
-				doHit();
+				doFly();
 			}
 			else
 				throw new Error("击飞上升状态引用必须是JumpRiseStateReference类型！");
@@ -146,23 +138,23 @@ package com.rpgGame.app.state.role.control
 			}
 		}
 		
-		private function doHit():void
-		{
-			if (_machine && !_machine.isDisposed)
-			{
-				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {offsetZ: true});
-				changeAction(RoleActionType.HIT,1);
-				var totalTime : int = hitTime;
-				if(totalTime > 0)
-				{
-					TweenLite.to(_machine.owner as SceneRole, totalTime * 0.001, {offsetZ: FLY_HEIGHT, ease: Cubic.easeOut, overwrite: 0, onComplete: doFly});
-				}
-				else
-				{
-					doFly();
-				}
-			}
-		}
+//		private function doHit():void
+//		{
+//			if (_machine && !_machine.isDisposed)
+//			{
+//				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {offsetZ: true});
+//				changeAction(RoleActionType.HIT,1);
+//				var totalTime : int = hitTime;
+//				if(totalTime > 0)
+//				{
+//					TweenLite.to(_machine.owner as SceneRole, totalTime * 0.001, {offsetZ: FLY_HEIGHT, ease: Cubic.easeOut, overwrite: 0, onComplete: doFly});
+//				}
+//				else
+//				{
+//					doFly();
+//				}
+//			}
+//		}
 		
 		/**
 		 * 上升阶段 
@@ -172,6 +164,7 @@ package com.rpgGame.app.state.role.control
 		{
 			if (_machine && !_machine.isDisposed)
 			{
+				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {offsetZ: true});
 				changeAction(RoleActionType.FLY,1);
 				var totalTime : int = upTime;
 				if(totalTime > 0)

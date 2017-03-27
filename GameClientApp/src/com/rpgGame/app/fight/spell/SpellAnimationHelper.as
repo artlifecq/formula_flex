@@ -566,6 +566,14 @@ package com.rpgGame.app.fight.spell
 			}
 		}
 		
+		public static function addLightEffect(info:ReleaseSpellInfo):void
+		{
+			if (SceneManager.isSceneOtherRenderLimit)
+				return;
+			var imgUrl:String = info.ribbonImg;
+			if()
+		}
+		
 		
 		/**
 		 * 添加弹道特效 
