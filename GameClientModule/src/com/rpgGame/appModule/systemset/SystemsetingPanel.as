@@ -57,7 +57,7 @@ package com.rpgGame.appModule.systemset
 		override protected function onHide() : void
 		{
 			SystemSetManager.getinstance().saveData();
-			super.hide();
+			super.onHide();
 		}
 	}
 }

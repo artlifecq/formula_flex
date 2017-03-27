@@ -1,8 +1,13 @@
 package com.rpgGame.appModule.systemset
 {
+	import com.rpgGame.app.richText.RichTextCustomUnitType;
+	import com.rpgGame.app.richText.component.RichTextUnit;
+	import com.rpgGame.app.richText.component.RichTextUnitData;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.utils.TweenUtil;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
+	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	
 	import org.mokylin.skin.app.systemSet.WupinSelect_Skin;
@@ -37,22 +42,23 @@ package com.rpgGame.appModule.systemset
 			return _instance;
 		}
 		
-		private var _bindDisplay:DisplayObject;
+		private var _bindDisplay:Label;
 
-		public function get bindDisplay():DisplayObject
+		public function get bindDisplay():Label
 		{
 			return _bindDisplay;
 		}
-		public function set bindDisplay(value:DisplayObject):void
+		public function set bindDisplay(value:Label):void
 		{
 			if(_bindDisplay!=null)
 			{
 				this.touchToState = null;
 			}
 			_bindDisplay = value;
+			
+			_bindDisplay.htmlText = HtmlTextUtil.underLine(_bindDisplay.text);
 			this.touchToState = new TouchToState(_bindDisplay, this.changeState);
 		}
-		
 		protected function changeState(touch:Touch):void
 		{
 			if(touch.phase == TouchPhase.ENDED)

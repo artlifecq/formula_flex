@@ -285,7 +285,7 @@ package com.rpgGame.coreData.role
 			}
 			
 			data.job = info.job; // 职业，按照原来的就可以了
-			
+			data.direction=info.dir;
 			//			data.vipLv = info.viplevel; // vip等级
 			
 			//avatar相关

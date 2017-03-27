@@ -138,6 +138,17 @@ package org.mokylin.skin.app.systemSet
 		private function __guajiset_Skin_Label14_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.htmlText = "自动拾取勾选的";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.x = 29;
+			temp.y = 121;
+			return temp;
+		}
+
+		private function __guajiset_Skin_Label15_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "任务死亡自动使用还魂丹复活";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
@@ -392,7 +403,7 @@ package org.mokylin.skin.app.systemSet
 			temp.name = "grp_guaji";
 			temp.x = 9;
 			temp.y = 246;
-			temp.elementsContent = [__guajiset_Skin_Label10_i(),__guajiset_Skin_Label11_i(),__guajiset_Skin_Label12_i(),rdo_dingdian_i(),rdo_dangqian_i(),rdo_quantu_i(),chk_type_i(),chk_zidong_i(),chk_fuhuo_i(),__guajiset_Skin_Label13_i(),lb_zidongshiqu_i(),__guajiset_Skin_Label14_i()];
+			temp.elementsContent = [__guajiset_Skin_Label10_i(),__guajiset_Skin_Label11_i(),__guajiset_Skin_Label12_i(),rdo_dingdian_i(),rdo_dangqian_i(),rdo_quantu_i(),chk_type_i(),chk_zidong_i(),chk_fuhuo_i(),__guajiset_Skin_Label13_i(),__guajiset_Skin_Label14_i(),__guajiset_Skin_Label15_i(),lb_zidongshiqu_i()];
 			return temp;
 		}
 
@@ -433,10 +444,10 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_zidongshiqu = temp;
 			temp.name = "lb_zidongshiqu";
-			temp.htmlText = "自动拾取勾选的<font color='#5DBD37'>地面物品</font>";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 29;
+			temp.text = "地面物品";
+			temp.color = 0x5CB006;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 128;
 			temp.y = 121;
 			return temp;
 		}

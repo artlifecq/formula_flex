@@ -1,19 +1,22 @@
 package com.rpgGame.appModule.systemset
 {
 	import com.rpgGame.app.manager.SystemSetManager;
-	import com.rpgGame.appModule.bag.ItemBatchPanel;
+	import com.rpgGame.app.richText.RichTextCustomUnitType;
+	import com.rpgGame.app.richText.RichTextCustomUtil;
+	import com.rpgGame.app.richText.component.RichTextArea3D;
+	import com.rpgGame.app.richText.component.RichTextUnit;
+	import com.rpgGame.app.richText.component.RichTextUnitData;
+	
+	import flash.events.TextEvent;
 	
 	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
-	import feathers.controls.renderers.DefaultListItemRenderer;
 	import feathers.core.ToggleGroup;
 	import feathers.data.ListCollection;
 	
 	import org.mokylin.skin.app.systemSet.guajiset_Skin;
 	
 	import starling.events.Event;
-	import starling.events.Touch;
-	import starling.events.TouchPhase;
 
 	public class HookSetingView extends BasePaneView
 	{
@@ -47,8 +50,8 @@ package com.rpgGame.appModule.systemset
 			var arr:Array =["1.5倍","2倍","3倍","4倍","5倍","6倍","7倍","8倍"];
 			_skin.cmb_danyao.dataProvider = new ListCollection(arr);
 			_skin.cmb_danyao.selectedIndex =SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_USEITEM_PERCENT);
+			_skin.cmb_danyao.addEventListener(Event.CHANGE,comboboxChangehandler);
 			ItemGetPaneView.GetInstance().bindDisplay = _skin.lb_zidongshiqu;
-			var list:List = _skin.cmb_danyao.getList();
 		}
 		
 	

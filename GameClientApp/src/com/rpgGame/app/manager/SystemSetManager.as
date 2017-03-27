@@ -1,6 +1,7 @@
 package com.rpgGame.app.manager
 {
 	import com.gameClient.log.GameLog;
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.sender.HeroMiscSender;
 	import com.rpgGame.core.events.SystemEvent;
 	import com.rpgGame.coreData.enum.EnumCustomTagType;
@@ -134,14 +135,17 @@ package com.rpgGame.app.manager
 		private var _autoGetData:uint = 0;
 		public function setData(value:String):void
 		{
-			_allData 			= stringToUint(value.substr(0,4));
-			_lifeauot 			= stringToUint(value.substr(4,1));
-			_forceauot 		= stringToUint(value.substr(5,1));
-			_itemUse 			= stringToUint(value.substr(6,1));
-			_hookType		= stringToUint(value.substr(7,1));
-			_soundBg 		= stringToUint(value.substr(8,1));
-			_soundEffect 	= stringToUint(value.substr(9,1));
-			_autoGetData	= stringToUint(value.substr(10,1));
+			var strlists:Array = JSONUtil.decode( value ).split("|");
+			_allData 			= uint("0x"+strlists[0]);
+			_lifeauot 			= uint("0x"+strlists[1]);
+			_forceauot 		= uint("0x"+strlists[2]);
+			_itemUse 			= uint("0x"+strlists[3]);
+			_hookType		= uint("0x"+strlists[4]);
+			_soundBg 		= uint("0x"+strlists[5]);
+			_soundEffect 	= uint("0x"+strlists[6]);
+			_autoGetData	= uint("0x"+strlists[7]);
+			
+			trace("SystemSetManager:"+getAllValueToString());
 			_lastValue = value;
 		}
 		
@@ -150,14 +154,14 @@ package com.rpgGame.app.manager
 			var index :int = Math.floor(type/32);
 			type = type%32;
 			if(index==0)
-				return (_allData&(1<<index))>0;
+				return (_allData&(1<<type))>0;
 			else
-				return (_autoGetData&(1<<index))>0;
+				return (_autoGetData&(1<<type))>0;
 		}
 		
-		public function getValueByIndex(index:int):int
+		public function getValueByIndex(type:int):int
 		{
-			switch(index)
+			switch(type)
 			{
 				case SYSTEMSET_HP_PERCENT:
 					return _lifeauot;
@@ -175,50 +179,50 @@ package com.rpgGame.app.manager
 					return 0;
 			}
 		}
-		public function setValueByIndex(index:int,value:int):void
+		public function setValueByIndex(type:int,value:int):void
 		{
-			switch(index)
+			switch(type)
 			{
 				case SYSTEMSET_HP_PERCENT:
 					if(_lifeauot != value)
 					{
 						_lifeauot = value;
-						EventManager.dispatchEvent(SystemEvent.SYS_SET);
+						EventManager.dispatchEvent(SystemEvent.SYS_SET,type);
 					}
 					break;
 				case SYSTEMSET_FORCE_PERCENT:
 					if(_forceauot != value)
 					{
 						_forceauot = value;
-						EventManager.dispatchEvent(SystemEvent.SYS_SET);
+						EventManager.dispatchEvent(SystemEvent.SYS_SET,type);
 					}
 					break; 
 				case SYSTEMSET_USEITEM_PERCENT:
 					if(_itemUse != value)
 					{
 						_itemUse = value;
-						EventManager.dispatchEvent(SystemEvent.SYS_SET);
+						EventManager.dispatchEvent(SystemEvent.SYS_SET,type);
 					}
 					break;
 				case SYSTEMSET_HOOK_TYPE:
 					if(_hookType != value)
 					{
 						_hookType = value;
-						EventManager.dispatchEvent(SystemEvent.SYS_SET);
+						EventManager.dispatchEvent(SystemEvent.SYS_SET,type);
 					}
 					break;
 				case SYSTEMSET_SOUND_BG:
 					if(_soundBg != value)
 					{
 						_soundBg = value;
-						EventManager.dispatchEvent(SystemEvent.SYS_SET);
+						EventManager.dispatchEvent(SystemEvent.SYS_SET,type);
 					}
 					break;
 				case SYSTEMSET_SOUND_EFFECT:
 					if(_soundEffect != value)
 					{
 						_soundEffect = value;
-						EventManager.dispatchEvent(SystemEvent.SYS_SET);
+						EventManager.dispatchEvent(SystemEvent.SYS_SET,type);
 					}
 					break;
 			}
@@ -248,7 +252,7 @@ package com.rpgGame.app.manager
 			}else{
 				_autoGetData = chageValue;
 			}
-			EventManager.dispatchEvent(SystemEvent.SYS_SET);
+			EventManager.dispatchEvent(SystemEvent.SYS_SET,type);
 		}
 		
 		private function stringToUint(str:String):uint
@@ -272,26 +276,20 @@ package com.rpgGame.app.manager
 			var nowValue:String = getAllValueToString();
 			if(lastValue!= nowValue)
 			{
-				HeroMiscSender.reqSetClientCustomTag(EnumCustomTagType.SYSTEMSET_INFO , nowValue);
+				HeroMiscSender.reqSetClientCustomTag(EnumCustomTagType.SYSTEM_SET , JSONUtil.encode(nowValue));
 			}
 		}
 		private function getAllValueToString():String
 		{
 			var alldata:uint = _allData;
-			var value:String = "";
-			for(var i:int=0;i<4;i++)
-			{
-				var char:int = (alldata&0xff);
-				value = String.fromCharCode(char)+value;
-				alldata=alldata>>8;
-			}
-			value  += String.fromCharCode(_lifeauot&0xff);
-			value  += String.fromCharCode(_forceauot&0xff);
-			value  += String.fromCharCode(_itemUse&0xff);
-			value  += String.fromCharCode(_hookType&0xff);
-			value  += String.fromCharCode(_soundBg&0xff);
-			value  += String.fromCharCode(_soundEffect&0xff);
-			value  += String.fromCharCode(_autoGetData&0xff);
+			var value:String = _allData.toString(16);
+			value  += "|"+_lifeauot.toString(16);
+			value  += "|"+_forceauot.toString(16);
+			value  += "|"+_itemUse.toString(16);
+			value  += "|"+_hookType.toString(16);
+			value  += "|"+_soundBg.toString(16);
+			value  += "|"+_soundEffect.toString(16);
+			value  += "|"+_autoGetData.toString(16);
 			return value;
 		}
 	}

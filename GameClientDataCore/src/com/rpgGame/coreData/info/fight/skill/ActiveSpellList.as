@@ -22,6 +22,7 @@ package com.rpgGame.coreData.info.fight.skill
 		/**额外获得的技能点数**/
 		public var obtainSpellPoint : int;
 
+		private var _skillInfoMap : HashMap;
 		private var _spellMap : HashMap;
 		private var _autoSpellMap : Array;
 		private var _autoLastSpellID : int;
@@ -29,6 +30,7 @@ package com.rpgGame.coreData.info.fight.skill
 		public function ActiveSpellList()
 		{
 			_spellMap = new HashMap;
+			_skillInfoMap=new HashMap();
 			_autoSpellMap = [];
 			_autoLastSpellID = 0;
 		}
@@ -45,12 +47,24 @@ package com.rpgGame.coreData.info.fight.skill
 //				addSpell(spellData);
 //			}
             _spellMap.clear();
+			_skillInfoMap.clear();
 			for each (var spellInfo : SkillInfo in msg.skills)
 			{
 				addSpell(SpellDataManager.getSpellData(spellInfo.skillModelId));
+				addSkillInfo(spellInfo);
 			}
 		}
-
+		
+		private function addSkillInfo(spellInfo:SkillInfo):void
+		{
+			_skillInfoMap.add(spellInfo.skillModelId,spellInfo);
+		}
+		
+		public function getSkillInfo(spellID : int):SkillInfo
+		{
+			return _skillInfoMap.getValue(spellID);
+		}
+		
 		public function addSpell(spellData : Q_skill_model) : void
 		{
 			_spellMap.add(spellData.q_skillID, spellData);

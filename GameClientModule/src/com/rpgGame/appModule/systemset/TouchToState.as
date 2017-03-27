@@ -7,18 +7,12 @@ accordance with the terms of the accompanying license agreement.
 */
 package com.rpgGame.appModule.systemset
 {
-	import feathers.controls.ButtonState;
-
-	import flash.geom.Point;
-
 	import starling.display.DisplayObject;
-	import starling.display.DisplayObjectContainer;
 	import starling.display.Stage;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	import starling.utils.Pool;
 
 	/**
 	 * Changes a target's state based on the <code>TouchPhase</code> when the
