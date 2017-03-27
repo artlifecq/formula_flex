@@ -27,7 +27,7 @@ package org.mokylin.skin.component.text
 		{
 			super();
 			
-			this.currentState = "normal";
+			this.currentState = "disable";
 			this.elementsContent = [bg_i(),textDisplay_i()];
 			
 			states = {

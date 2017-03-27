@@ -56,6 +56,8 @@ package com.rpgGame.app.manager
 				}
 				else if ( type == EnumCustomTagType.SYSTEM_SET )
 				{
+					//系统设置数据
+					SystemSetManager.getinstance().setData(value);
 				}
 				else if(type == EnumCustomTagType.GET_JUE_MING_ATTRIBUTE_EFFECT)
 				{

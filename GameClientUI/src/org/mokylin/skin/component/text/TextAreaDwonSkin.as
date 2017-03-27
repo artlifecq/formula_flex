@@ -1,16 +1,17 @@
 package org.mokylin.skin.component.text
 {
-	import feathers.controls.text.Fontter;
 	import feathers.controls.text.TextFieldTextEditor;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import feathers.controls.ScrollContainer;
+	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class textInput1_Skin extends feathers.controls.StateSkin
+	public class TextAreaDwonSkin extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -19,24 +20,24 @@ package org.mokylin.skin.component.text
 
 		public var textDisplay:feathers.controls.text.TextFieldTextEditor;
 
+		public var vBar:feathers.controls.ScrollContainer;
+
 
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function textInput1_Skin()
+		public function TextAreaDwonSkin()
 		{
 			super();
 			
-			this.currentState = "focused";
-			this.height = 25;
-			this.width = 65;
-			this.elementsContent = [textDisplay_i()];
-			bg_i();
-			
+			this.currentState = "normal";
+			this.height = 150;
+			this.width = 100;
+			this.elementsContent = [bg_i(),textDisplay_i(),vBar_i()];
 			
 			states = {
 			};
-			skinNames={"disabled":"ui/common/background/xiaobiaotibeijing.png", "enabled":"ui/common/background/xiaobiaotibeijing.png", "focused":"ui/common/background/xiaobiaotibeijing.png"};
+			skinNames={};
 		}
 
 
@@ -48,10 +49,11 @@ package org.mokylin.skin.component.text
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
+			temp.bottom = 0;
 			temp.left = 0;
 			temp.right = 0;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
-			temp.y = 0;
+			temp.styleName = "ui/common/tips/tips_2.png";
+			temp.top = 0;
 			return temp;
 		}
 
@@ -60,14 +62,22 @@ package org.mokylin.skin.component.text
 			var temp:feathers.controls.text.TextFieldTextEditor = new feathers.controls.text.TextFieldTextEditor();
 			textDisplay = temp;
 			temp.name = "textDisplay";
-			temp.height = 18;
+			temp.bottom = 5;
 			temp.left = 5;
-			temp.right = 15;
-			temp.text = "标签";
-			temp.color = 0x5cb006;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.verticalCenter = 1;
-			temp.y = 4;
+			temp.right = 7;
+			temp.top = 5;
+			return temp;
+		}
+
+		private function vBar_i():feathers.controls.ScrollContainer
+		{
+			var temp:feathers.controls.ScrollContainer = new feathers.controls.ScrollContainer();
+			vBar = temp;
+			temp.name = "vBar";
+			temp.bottom = 5;
+			temp.right = 5;
+			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
+			temp.top = 5;
 			return temp;
 		}
 
