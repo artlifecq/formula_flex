@@ -103,7 +103,7 @@ package com.rpgGame.appModule.skill
 				data=list[i];
 				skillInfo=MainRoleManager.actorInfo.spellList.getSkillInfo(list[i].q_skillID);
 				item.updateItem(data,skillInfo);
-				item.y=row*(item.height+10)+_jobTl2.y+20;
+				item.y=row*(item.height+10)+_jobTl2.y+40;
 				_skillContainer.addChild(item);
 				if(i%2==0){
 					item.x=10;
@@ -151,9 +151,9 @@ package com.rpgGame.appModule.skill
 			var skin:jineng_jinjie=_skin.jinjie.skin as jineng_jinjie;
 			skin.lb_name.text=selectedCfg.q_skillName;
 			skin.lb_dengji.text=getTitleText("等级",selectedInfo.skillChildLv+"/"+selectedCfg.q_max_level);
-			skin.lb_leixing.text=getTitleText("技能类型",selectedCfg.q_skill_type.toString());
-			skin.lb_xiaohao.text=getTitleText("消耗",selectedCfg.q_need_mp.toString());
-			skin.lb_lengque.text=getTitleText("冷却时间",selectedCfg.q_cd.toString());
+			skin.lb_leixing.text=getTitleText("技能类型",selectedCfg.q_skill_type);
+			skin.lb_xiaohao.text=getTitleText("消耗",selectedCfg.q_need_mp);
+			skin.lb_lengque.text=getTitleText("冷却时间",selectedCfg.q_cd/1000);
 		}
 		
 		private function updateShenji():void
@@ -161,9 +161,9 @@ package com.rpgGame.appModule.skill
 			var skin:jineng_shengji=_skin.shengji.skin as jineng_shengji;
 			skin.lb_name.text=selectedCfg.q_skillName;
 			skin.lb_dengji.text=getTitleText("等级",selectedInfo.skillChildLv+"/"+selectedCfg.q_max_level);
-			skin.lb_leixing.text=getTitleText("技能类型",selectedCfg.q_skill_type.toString());
-			skin.lb_xiaohao.text=getTitleText("消耗",selectedCfg.q_need_mp.toString());
-			skin.lb_lengque.text=getTitleText("冷却时间",selectedCfg.q_cd.toString());
+			skin.lb_leixing.text=getTitleText("技能类型",selectedCfg.q_skill_type);
+			skin.lb_xiaohao.text=getTitleText("消耗",selectedCfg.q_need_mp);
+			skin.lb_lengque.text=getTitleText("冷却时间",selectedCfg.q_cd/1000);
 			
 			skin.lb_miaoshu.htmlText=selectedCfg.q_skillpanel_description1;
 			
@@ -179,32 +179,40 @@ package com.rpgGame.appModule.skill
 			var key:String=id+"_"+lv;
 			var playerLv:int=0;
 			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(key);
-			needMp+=lvData.q_energy;
-			needMy+=lvData.q_copper;
-			playerLv=lvData.q_playerlevel;
-			while(lv<selectedCfg.q_max_level){
-				lv++;
-				upNum++;
-				key=id+"_"+lv;
-				lvData=SkillLvLDataManager.getData(key);
-				if(needMp+lvData.q_energy>myMp){
-					break;
-				}
-				if(needMy+lvData.q_copper>myMon){
-					break;
-				}
-				if(lvData.q_playerlevel>myLv){
-					break;
-				}
+			if(lvData){
 				needMp+=lvData.q_energy;
 				needMy+=lvData.q_copper;
-				if(lvData.q_playerlevel!=0){
-					playerLv=lvData.q_playerlevel;
+				playerLv=lvData.q_playerlevel;
+				while(lv<selectedCfg.q_max_level){
+					lv++;
+					upNum++;
+					key=id+"_"+lv;
+				
+					lvData=SkillLvLDataManager.getData(key);
+					if(lvData){
+						if(needMp+lvData.q_energy>myMp){
+							break;
+						}
+						if(needMy+lvData.q_copper>myMon){
+							break;
+						}
+						if(lvData.q_playerlevel>myLv){
+							break;
+						}
+						needMp+=lvData.q_energy;
+						needMy+=lvData.q_copper;
+						if(lvData.q_playerlevel!=0){
+							playerLv=lvData.q_playerlevel;
+						}
+					}else{
+						break;
+					}
 				}
 			}
+		
 			
-			skin.lb_shengji.htmlText=selectedCfg.q_skillpanel_description1;
-			skin.lb_shanghai.htmlText=selectedCfg.q_skillpanel_description1;
+//			skin.lb_shengji.htmlText=selectedCfg.q_skillpanel_description1;
+//			skin.lb_shanghai.htmlText=selectedCfg.q_skillpanel_description1;
 			
 			//升级条件
 			skin.lb_renwudengji.htmlText=getTitleText("人物等级",playerLv.toString());
@@ -219,6 +227,9 @@ package com.rpgGame.appModule.skill
 				if(value==0){
 					value="无";
 				}
+			}
+			if(title=="冷却时间"&&value!="无"){
+				value+="s";
 			}
 			return title+":"+value;
 		}
