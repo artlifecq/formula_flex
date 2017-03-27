@@ -571,7 +571,10 @@ package com.rpgGame.app.fight.spell
 			if (SceneManager.isSceneOtherRenderLimit)
 				return;
 			var imgUrl:String = info.ribbonImg;
-			if()
+			if(imgUrl != null || imgUrl != null)
+			{
+				
+			}
 		}
 		
 		

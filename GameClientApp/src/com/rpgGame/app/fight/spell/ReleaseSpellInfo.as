@@ -269,7 +269,7 @@ package com.rpgGame.app.fight.spell
 				_selfAni = AnimationDataManager.getData(_spellEffectData.self_dest_animation);
 				_posSingleAni = AnimationDataManager.getData(_spellEffectData.dest_animation);
 				_passSingleAni = AnimationDataManager.getData(_spellEffectData.fly_animation);
-				_ribbonImg = AnimationDataManager.getData(_spellEffectData.ribbon_img);
+				_ribbonImg = _spellEffectData.ribbon_img;
 				
 				_startSelfFrameTime = _spellEffectData.start_frame_time;//抬手特效开始时间
 				_caromStartFrameTime = _spellEffectData.carom_start_frame_time;//动作从那帧开始播放
