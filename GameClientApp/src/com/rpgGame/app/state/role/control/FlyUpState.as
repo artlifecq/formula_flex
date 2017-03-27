@@ -29,7 +29,6 @@ package com.rpgGame.app.state.role.control
 		 */
 		public static var FLY_HEIGHT : int = 0;
 		
-//		public var hitTime:Number;
 		public var upTime:Number;
 		public var flyTime:Number;
 		public var fallTime:Number;
@@ -44,8 +43,6 @@ package com.rpgGame.app.state.role.control
 			{
 				_stateReference = _ref as FlyUpStateReference;
 				
-//				FLY_HEIGHT = Number(_stateReference.buffData.clientData.h);
-//				hitTime = Number(_stateReference.buffData.clientData.hit);
 				upTime = Number(_stateReference.buffData.clientData.up);
 				flyTime = Number(_stateReference.buffData.clientData.stay);
 				fallTime = Number(_stateReference.buffData.clientData.down);
@@ -97,15 +94,15 @@ package com.rpgGame.app.state.role.control
 				throw new Error("击飞上升状态引用必须是JumpRiseStateReference类型！");
 		}
 		
-		private function changeAction(actionType:String,repeat:int=1):void
+		private function changeAction(actionType:String,repeat:int=1,time:int=0):void
 		{
-			(_machine.owner as BaseRole).forEachRenderUnit(eachPlayAnimation,[actionType,repeat]);
+			(_machine.owner as BaseRole).forEachRenderUnit(eachPlayAnimation,[actionType,repeat,time]);
 		}
 		
-		private function eachPlayAnimation(actionType:String,repeat:int,role : BaseRole, render : RenderUnit3D) : void
+		private function eachPlayAnimation(actionType:String,repeat:int,time:int,role : BaseRole, render : RenderUnit3D) : void
 		{
 			if (role && render)
-				playAnimation(role, render,actionType,repeat);
+				playAnimation(role, render,actionType,repeat,false,time);
 		}
 		
 		private function playAnimation(role : BaseRole, render : RenderUnit3D,actionType:String,repeat:int, isFreeze : Boolean = false, time : int = 0, speedRatio : Number = 1) : void
@@ -186,7 +183,7 @@ package com.rpgGame.app.state.role.control
 		{
 			if (_machine && !_machine.isDisposed)
 			{
-				changeAction(RoleActionType.FLY_HIT,1);
+				changeAction(RoleActionType.FLY_HIT,1,-1);
 				var totalTime : int = flyTime;
 				if(totalTime > 0)
 				{
