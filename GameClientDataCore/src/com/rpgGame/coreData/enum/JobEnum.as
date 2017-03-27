@@ -2,6 +2,8 @@ package com.rpgGame.coreData.enum
 {
 	public class JobEnum
 	{
+		/** 公共的 */		
+		public static const ROLE_0_TYPE:int =0;
 		/** 兵家 */		
 		public static const ROLE_1_TYPE:int = 1;
 		/** 墨家男*/		

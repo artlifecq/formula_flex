@@ -4,6 +4,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.RoleHpStatusManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.yunBiao.YunBiaoManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -13,6 +14,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.state.role.control.HurtStateReference;
 	import com.rpgGame.core.events.SceneCharacterEvent;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
+	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
@@ -146,7 +148,11 @@ package com.rpgGame.app.fight.spell
 		{
 			SpellAnimationHelper.removeTrapEffectsByAtkorID(target.id);
 			EventManager.dispatchEvent(SceneCharacterEvent.SCENE_CHAR_DEATH, target);
-			target.mouseEnable = false;
+			if(target.type== SceneCharType.PLAYER){
+				target.mouseEnable = true;
+			}else{
+				target.mouseEnable = false;
+			}
 			
 			var deadLaunchHeight : int = hortVo.deadLaunchHeight;
 			var deadLaunchDistance : int = hortVo.deadLaunchDistance;

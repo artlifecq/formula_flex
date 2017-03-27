@@ -146,6 +146,7 @@
 		{
 			return spellList.getSpellList();
 		}
+		
 		/**
 		 * 一般通用的属性 
 		 * @param data

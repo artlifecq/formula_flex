@@ -100,8 +100,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.touchable = false;
 			temp.touchGroup = false;
 			temp.styleName = "ui/app/wuxue/wuxue.png";
-			temp.x = 456;
-			temp.y = 10;
+			temp.x = 441;
+			temp.y = 11;
 			return temp;
 		}
 

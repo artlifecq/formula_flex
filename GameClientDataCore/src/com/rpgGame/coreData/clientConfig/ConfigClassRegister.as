@@ -46,7 +46,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const HintTypeSetInfo:String = "data.HintTypeSetInfo";
 		/**  区域数据库					 */
 		public static const Q_area:String = "data.map.Q_area";
-		/**  							本列取消，安全区改为刷格方式				本列取消																																										 */
+		/**  							本列取消，安全区改为刷格方式						本列取消																																										 */
 		public static const Q_map:String = "data.map.Q_map";
 		/**  地图传送点数据库											 */
 		public static const Q_map_transfer:String = "data.map.Q_map_transfer";
@@ -76,7 +76,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const HeroModel:String = "data.model.HeroModel";
 		/**  坐骑模型表	功能名称	动画资源名称 */
 		public static const MountModel:String = "data.model.MountModel";
-		/**  怪物列表																																																														 */
+		/**  怪物列表																																																															 */
 		public static const Q_monster:String = "data.monster.Q_monster";
 		/**  NPC配置数据库																																																 */
 		public static const Q_npc:String = "data.monster.Q_npc";
@@ -116,7 +116,9 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_buff:String = "data.spell.Q_buff";
 		/**  公共CD表	 */
 		public static const Q_GCD:String = "data.spell.Q_GCD";
-		/**  技能基本信息配置数据表																																																																																																																				 */
+		/**  技能无视防御伤害数据库														 */
+		public static const Q_skill_ignore:String = "data.spell.Q_skill_ignore";
+		/**  技能基本信息配置数据表																																																																																																																							 */
 		public static const Q_skill_model:String = "data.spell.Q_skill_model";
 		/**  技能效果配置表																			 */
 		public static const Q_SpellAnimation:String = "data.spell.Q_SpellAnimation";
@@ -180,6 +182,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.spell.Attach_effect", com.rpgGame.coreData.clientConfig.Attach_effect);
 			regClass("data.spell.Q_buff", com.rpgGame.coreData.clientConfig.Q_buff);
 			regClass("data.spell.Q_GCD", com.rpgGame.coreData.clientConfig.Q_GCD);
+			regClass("data.spell.Q_skill_ignore", com.rpgGame.coreData.clientConfig.Q_skill_ignore);
 			regClass("data.spell.Q_skill_model", com.rpgGame.coreData.clientConfig.Q_skill_model);
 			regClass("data.spell.Q_SpellAnimation", com.rpgGame.coreData.clientConfig.Q_SpellAnimation);
 			regClass("data.spell.Q_SpellEffect", com.rpgGame.coreData.clientConfig.Q_SpellEffect);

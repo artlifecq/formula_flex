@@ -34,6 +34,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_animation:int;
 		 /**  受击特效，如果配置了此处，那么怪物受到攻击时只会播放这个特效，而忽略本来的受击特效 */
 		public var q_been_hurt_animation:int;
+		 /**  是否有鼠标事件（1是，0否） */
+		public var q_mouse_event:int;
 		 /**  默认是否显示名字（1是，0否）显示名字会默认显示血条非BOSS类不要显示 */
 		public var q_monster_dropdesc:String;
 		 /**  怪物朝向角度，配置0-359 */

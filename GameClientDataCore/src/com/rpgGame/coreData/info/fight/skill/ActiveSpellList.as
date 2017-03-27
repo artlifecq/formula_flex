@@ -50,7 +50,7 @@ package com.rpgGame.coreData.info.fight.skill
 			_skillInfoMap.clear();
 			for each (var spellInfo : SkillInfo in msg.skills)
 			{
-				addSpell(SpellDataManager.getSpellData(spellInfo.skillModelId));
+				addSpell(SpellDataManager.getSpellData(spellInfo.skillModelId,spellInfo.skillLevel));
 				addSkillInfo(spellInfo);
 			}
 		}
@@ -73,6 +73,26 @@ package com.rpgGame.coreData.info.fight.skill
 		public function hasTypeSpell(spellID : int) : Boolean
 		{
 			return _spellMap.getValue(spellID);
+		}
+		
+		/**
+		 *获取学习技能信息 
+		 * @return 
+		 * 
+		 */
+		public function getStudySpell(spellID:int):Q_skill_model
+		{
+			var spell : Q_skill_model;
+			var spells : Array = _spellMap.getValues();
+			var len : int = spells.length;
+			for (var i : int = 0; i < len; i++)
+			{
+				spell = spells[i];
+				if(spell.q_skillID==spellID){
+					return spell;
+				}
+			}
+			return null;
 		}
 
 		public function getSpell(spellID : int) : Q_skill_model
