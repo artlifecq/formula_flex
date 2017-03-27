@@ -317,29 +317,29 @@ package com.rpgGame.app.cmdlistener.scene
 		 */		
 		private function RecvResPlayerStopMessage(msg:ResPlayerStopMessage):void
 		{
-			var objId : Number = msg.personId.ToGID();
-			if(MainRoleManager.actorID == objId)
-			{
-				var posX : int = msg.position.x;
-				var posY : int = msg.position.y;
-				
-				var role : SceneRole = SceneManager.getSceneObjByID(objId) as SceneRole;
-				if (role && role.usable)
-				{
-					var walkMoveRef : WalkMoveStateReference;
-					var stopWalkRef : StopWalkMoveStateReference;
-					walkMoveRef = role.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
-					walkMoveRef.isServerStop = true;
-					stopWalkRef = role.stateMachine.getReference(StopWalkMoveStateReference) as StopWalkMoveStateReference;
-					stopWalkRef.setParams(posX, posY);
-					role.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, stopWalkRef);
-					if (role.stateMachine.isPrewarWaiting)
-						role.stateMachine.transition(RoleStateType.ACTION_PREWAR);
-					else
-						role.stateMachine.transition(RoleStateType.ACTION_IDLE);
-				}
-				return;
-			}
+//			var objId : Number = msg.personId.ToGID();
+//			if(MainRoleManager.actorID == objId)
+//			{
+//				var posX : int = msg.position.x;
+//				var posY : int = msg.position.y;
+//				
+//				var role : SceneRole = SceneManager.getSceneObjByID(objId) as SceneRole;
+//				if (role && role.usable)
+//				{
+//					var walkMoveRef : WalkMoveStateReference;
+//					var stopWalkRef : StopWalkMoveStateReference;
+//					walkMoveRef = role.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+//					walkMoveRef.isServerStop = true;
+//					stopWalkRef = role.stateMachine.getReference(StopWalkMoveStateReference) as StopWalkMoveStateReference;
+//					stopWalkRef.setParams(posX, posY);
+//					role.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, stopWalkRef);
+//					if (role.stateMachine.isPrewarWaiting)
+//						role.stateMachine.transition(RoleStateType.ACTION_PREWAR);
+//					else
+//						role.stateMachine.transition(RoleStateType.ACTION_IDLE);
+//				}
+//				return;
+//			}
 		}
 		
 		/**
@@ -508,7 +508,7 @@ package com.rpgGame.app.cmdlistener.scene
 			for(var i:int=0;i<delArr.length;i++)
 			{
 				var roleID:uint = delArr[i].ToGID();
-//				onSceneRemoveObject(roleID);
+				onSceneRemoveObject(roleID);
 				GameLog.addShow("删除对象客户端id：" + roleID);
 				GameLog.addShow("删除对象服务器id：" + delArr[i].ToString());
 			}
