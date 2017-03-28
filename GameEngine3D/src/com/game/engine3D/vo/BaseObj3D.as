@@ -998,7 +998,7 @@ package com.game.engine3D.vo
 		{
 			if (_renderAnimator)
 			{
-				_renderAnimator.update();
+				_renderAnimator.update(gapTm);
 			}
 		}
 
