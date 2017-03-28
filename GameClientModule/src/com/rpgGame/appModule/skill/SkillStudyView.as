@@ -2,13 +2,10 @@ package com.rpgGame.appModule.skill
 {
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.events.SpellEvent;
-	import com.rpgGame.coreData.cfg.SkillLvLDataManager;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
-	import com.rpgGame.coreData.clientConfig.Q_skill_ignore;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.role.HeroData;
-	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
 	import feathers.controls.Scroller;
@@ -39,8 +36,9 @@ package com.rpgGame.appModule.skill
 		private var _jobTl2:Sprite;
 		private var _lastSp:Sprite;
 		private var selectedItem:SkillItem;
-		private var selectedCfg:Q_skill_model;
-		private var selectedInfo:SkillInfo;
+		
+		private var skillUpgrade:SkillUpgradeView;
+		private var skillRise:SkillRiseView;
 		
 		public function SkillStudyView(skin:jineng_Skin)
 		{
@@ -64,6 +62,8 @@ package com.rpgGame.appModule.skill
 			_jobTl2=_jobTitle2.toSprite();
 			_skillContainer.addChild(_jobTl1);
 			_skillContainer.addChild(_jobTl2);
+			skillUpgrade=new SkillUpgradeView(_skin.shengji.skin as jineng_shengji);
+			skillRise=new SkillRiseView(_skin.jinjie.skin as jineng_jinjie);
 			
 			var skillNum:int;
 			var job:int=MainRoleManager.actorInfo.job;
@@ -89,6 +89,9 @@ package com.rpgGame.appModule.skill
 					item.x=10;
 				}else{
 					item.x=item.width+30;
+				}
+				if(i==0){
+					selecteSpell(item);					
 				}
 			}
 			row++;
@@ -140,98 +143,10 @@ package com.rpgGame.appModule.skill
 				selectedItem.selected=false;
 			}
 			selectedItem=skillItem;
-			selectedCfg=selectedItem.skillCfg;
-			selectedInfo=selectedItem.skillInfo;
-			updateShenji();
-			updateJinjie();
-		}
-		
-		private function updateJinjie():void
-		{
-			var skin:jineng_jinjie=_skin.jinjie.skin as jineng_jinjie;
-			skin.lb_name.text=selectedCfg.q_skillName;
-			skin.lb_dengji.text=getTitleText("等级",selectedInfo.skillChildLv+"/"+selectedCfg.q_max_level);
-			skin.lb_leixing.text=getTitleText("技能类型",selectedCfg.q_skill_type);
-			skin.lb_xiaohao.text=getTitleText("消耗",selectedCfg.q_need_mp);
-			skin.lb_lengque.text=getTitleText("冷却时间",selectedCfg.q_cd/1000);
-		}
-		
-		private function updateShenji():void
-		{
-			var skin:jineng_shengji=_skin.shengji.skin as jineng_shengji;
-			skin.lb_name.text=selectedCfg.q_skillName;
-			skin.lb_dengji.text=getTitleText("等级",selectedInfo.skillChildLv+"/"+selectedCfg.q_max_level);
-			skin.lb_leixing.text=getTitleText("技能类型",selectedCfg.q_skill_type);
-			skin.lb_xiaohao.text=getTitleText("消耗",selectedCfg.q_need_mp);
-			skin.lb_lengque.text=getTitleText("冷却时间",selectedCfg.q_cd/1000);
+			selectedItem.selected=true;
 			
-			skin.lb_miaoshu.htmlText=selectedCfg.q_skillpanel_description1;
-			
-			//升级效果
-			var myLv:int=MainRoleManager.actorInfo.totalStat.level;
-			var myMp:int=MainRoleManager.actorInfo.curZhenqi;
-			var myMon:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY);
-			var upNum:int=1;
-			var needMp:int=0;
-			var needMy:int=0;
-			var lv:int=selectedInfo.skillChildLv;
-			var id:int=selectedCfg.q_skillID;
-			var key:String=id+"_"+lv;
-			var playerLv:int=0;
-			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(key);
-			if(lvData){
-				needMp+=lvData.q_energy;
-				needMy+=lvData.q_copper;
-				playerLv=lvData.q_playerlevel;
-				while(lv<selectedCfg.q_max_level){
-					lv++;
-					upNum++;
-					key=id+"_"+lv;
-				
-					lvData=SkillLvLDataManager.getData(key);
-					if(lvData){
-						if(needMp+lvData.q_energy>myMp){
-							break;
-						}
-						if(needMy+lvData.q_copper>myMon){
-							break;
-						}
-						if(lvData.q_playerlevel>myLv){
-							break;
-						}
-						needMp+=lvData.q_energy;
-						needMy+=lvData.q_copper;
-						if(lvData.q_playerlevel!=0){
-							playerLv=lvData.q_playerlevel;
-						}
-					}else{
-						break;
-					}
-				}
-			}
-		
-			
-//			skin.lb_shengji.htmlText=selectedCfg.q_skillpanel_description1;
-//			skin.lb_shanghai.htmlText=selectedCfg.q_skillpanel_description1;
-			
-			//升级条件
-			skin.lb_renwudengji.htmlText=getTitleText("人物等级",playerLv.toString());
-			skin.lb_renwudengji.htmlText=getTitleText("消耗真气",needMp.toString());
-			skin.lb_renwudengji.htmlText=getTitleText("消耗绑银",needMy.toString());
-		}
-		
-		
-		private function getTitleText(title:String,value:*):String
-		{
-			if(value is int){
-				if(value==0){
-					value="无";
-				}
-			}
-			if(title=="冷却时间"&&value!="无"){
-				value+="s";
-			}
-			return title+":"+value;
+			skillUpgrade.update(selectedItem.skillCfg,selectedItem.skillInfo);
+			skillRise.update(selectedItem.skillCfg,selectedItem.skillInfo);
 		}
 		
 		private function updateZhenqi():void

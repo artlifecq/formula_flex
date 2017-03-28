@@ -1,8 +1,11 @@
 package com.rpgGame.appModule.skill
 {
+	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -24,11 +27,14 @@ package com.rpgGame.appModule.skill
 		private var _skillInfo:SkillInfo;
 		private var _skillCfg:Q_skill_model;
 		private var _selected:Boolean;
+		private var _icon:BgIcon;
 		
 		public function SkillItem()
 		{
 			_skin=new jinengItemsSkin();
 			selected=false;
+			_icon=new BgIcon(IcoSizeEnum.ICON_48);
+			_icon.touchable=false;
 			super(_skin);
 		}
 		
@@ -51,6 +57,8 @@ package com.rpgGame.appModule.skill
 				_skin.txt_level.text="等级:"+info.skillLevel+"/"+cfg.q_max_level;
 			}
 			
+			_icon.setIconResName(ClientConfig.getSkillIcon(cfg.q_skillID.toString(),48));
+			this.addChild(_icon);
 		}
 		
 		override protected function onTouch(e:TouchEvent):void
@@ -83,7 +91,6 @@ package com.rpgGame.appModule.skill
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
-			selected=true;
 			EventManager.dispatchEvent(SpellEvent.SELECTE_SPELL,this);
 		}
 	}
