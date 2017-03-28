@@ -134,9 +134,16 @@ package com.rpgGame.app.state.role.action
 				}
 			}
 			
-//			if (!force && (_machine as RoleStateMachine).isUseSpell)
-//				return false;
-//			
+			if(!force && (_machine as RoleStateMachine).isFly)
+			{
+				return false;
+			}
+			
+			if (!force && (_machine as RoleStateMachine).isUseSpell)
+			{
+				return false;
+			}
+			
 			if ((_machine.owner as SceneRole).isMainChar)
 			{
 				if (KeyMoveManager.getInstance().keyMoving)
