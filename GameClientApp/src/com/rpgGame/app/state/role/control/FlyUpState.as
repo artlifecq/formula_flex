@@ -15,7 +15,6 @@ package com.rpgGame.app.state.role.control
 	import away3d.animators.transitions.CrossfadeTransition;
 	
 	import gs.TweenLite;
-	import gs.easing.Cubic;
 
 	public class FlyUpState extends BuffState
 	{
@@ -29,10 +28,13 @@ package com.rpgGame.app.state.role.control
 		 */
 		public static var FLY_HEIGHT : int = 0;
 		
-		public var hitTime:Number;
 		public var upTime:Number;
 		public var flyTime:Number;
 		public var fallTime:Number;
+		
+		private var _upTween:TweenLite;
+		private var _flyTween:TweenLite;
+		private var _fallTween:TweenLite;
 		
 		private var _stateReference : FlyUpStateReference;
 		
@@ -44,8 +46,6 @@ package com.rpgGame.app.state.role.control
 			{
 				_stateReference = _ref as FlyUpStateReference;
 				
-//				FLY_HEIGHT = Number(_stateReference.buffData.clientData.h);
-				hitTime = Number(_stateReference.buffData.clientData.hit);
 				upTime = Number(_stateReference.buffData.clientData.up);
 				flyTime = Number(_stateReference.buffData.clientData.stay);
 				fallTime = Number(_stateReference.buffData.clientData.down);
@@ -53,34 +53,26 @@ package com.rpgGame.app.state.role.control
 				var startTime:Number = _stateReference.buffData.totalTime - _stateReference.buffData.disappearTime;
 				if(startTime>0)
 				{
-					if(startTime > upTime + flyTime + fallTime + hitTime)
+					if(startTime > upTime + flyTime + fallTime)
 					{
-						hitTime = 0;
 						upTime = 0;
 						flyTime = 0;
 						fallTime = 0;
 					}
-					else if(startTime > upTime + flyTime + hitTime)
+					else if(startTime > upTime + flyTime)
 					{
-						hitTime = 0;
 						upTime = 0;
 						flyTime = 0;
-						fallTime = hitTime + upTime + flyTime + fallTime - startTime;
+						fallTime = upTime + flyTime + fallTime - startTime;
 					}
-					else if(startTime > upTime + hitTime)
+					else if(startTime > upTime)
 					{
-						hitTime = 0;
 						upTime = 0;
-						flyTime = hitTime + upTime + flyTime - startTime;
-					}
-					else if(startTime > hitTime)
-					{
-						hitTime = 0;
-						upTime = upTime + hitTime - startTime;
+						flyTime = upTime + flyTime - startTime;
 					}
 					else
 					{
-						hitTime = hitTime - startTime;
+						upTime = upTime - startTime;
 					}
 				}
 				
@@ -99,24 +91,112 @@ package com.rpgGame.app.state.role.control
 					}
 				}
 				
-				doHit();
+				doFly();
 			}
 			else
 				throw new Error("击飞上升状态引用必须是JumpRiseStateReference类型！");
 		}
 		
-		private function changeAction(actionType:String,repeat:int=1):void
+		/**
+		 * 上升阶段 
+		 * 
+		 */		
+		private function doFly() : void
 		{
-			(_machine.owner as BaseRole).forEachRenderUnit(eachPlayAnimation,[actionType,repeat]);
+			if (_machine && !_machine.isDisposed)
+			{
+				if(_upTween)
+				{
+					_upTween.kill();
+					_upTween = null;
+				}
+				
+				changeAction(RoleActionType.FLY);
+				var totalTime : int = upTime;
+				if(totalTime > 0)
+				{
+					_upTween = TweenLite.delayedCall(totalTime * 0.001,onFlyUpComplete);
+				}
+				else
+				{
+					onFlyUpComplete();
+				}
+			}
 		}
 		
-		private function eachPlayAnimation(actionType:String,repeat:int,role : BaseRole, render : RenderUnit3D) : void
+		/**
+		 * 下降阶段 
+		 * 
+		 */		
+		private function onFlyUpComplete() : void
+		{
+			if (_machine && !_machine.isDisposed)
+			{
+				if(_flyTween)
+				{
+					_flyTween.kill();
+					_flyTween = null;
+				}
+				changeAction(RoleActionType.FLY_HIT,10);
+				var totalTime : int = 5000;
+				if(totalTime > 0)
+				{
+					_flyTween = TweenLite.delayedCall(totalTime * 0.001,onFlyComplete);
+				}
+				else
+				{
+					onFlyComplete();
+				}
+			}
+		}
+		
+		/**
+		 * 准备落地了 
+		 * 
+		 */		
+		private function onFlyComplete() : void
+		{
+			if (_machine && !_machine.isDisposed)
+			{
+				if(_fallTween)
+				{
+					_fallTween.kill();
+					_fallTween = null;
+				}
+				changeAction(RoleActionType.DROPOUT);
+				var totalTime : int = fallTime;
+				if(totalTime > 0)
+				{
+					_fallTween = TweenLite.delayedCall(totalTime * 0.001, onFlyFallComplete);
+				}
+				else
+				{
+					onFlyFallComplete();
+				}
+			}
+		}
+		
+		private function onFlyFallComplete():void
+		{
+			if (_machine && !_machine.isDisposed)
+			{
+				removeSelf();
+				transition(RoleStateType.ACTION_GETUP);
+			}
+		}
+		
+		private function changeAction(actionType:String,repeat:int=1,time:int=0):void
+		{
+			(_machine.owner as BaseRole).forEachRenderUnit(eachPlayAnimation,[actionType,repeat,time]);
+		}
+		
+		private function eachPlayAnimation(actionType:String,repeat:int,time:int,role : BaseRole, render : RenderUnit3D) : void
 		{
 			if (role && render)
-				playAnimation(role, render,actionType,repeat);
+				playAnimation(role, render,actionType,repeat,false,time);
 		}
 		
-		private function playAnimation(role : BaseRole, render : RenderUnit3D,actionType:String,repeat:int, isFreeze : Boolean = false, time : int = 0, speedRatio : Number = 1) : void
+		private function playAnimation(role : BaseRole, render : RenderUnit3D,actionType:String,repeat:int, isFreeze : Boolean = false, time : int = -1, speedRatio : Number = 1) : void
 		{
 			var statusType : String = actionType;
 			switch (render.type)
@@ -146,96 +226,6 @@ package com.rpgGame.app.state.role.control
 			}
 		}
 		
-		private function doHit():void
-		{
-			if (_machine && !_machine.isDisposed)
-			{
-				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {offsetZ: true});
-				changeAction(RoleActionType.HIT,1);
-				var totalTime : int = hitTime;
-				if(totalTime > 0)
-				{
-					TweenLite.to(_machine.owner as SceneRole, totalTime * 0.001, {offsetZ: FLY_HEIGHT, ease: Cubic.easeOut, overwrite: 0, onComplete: doFly});
-				}
-				else
-				{
-					doFly();
-				}
-			}
-		}
-		
-		/**
-		 * 上升阶段 
-		 * 
-		 */		
-		private function doFly() : void
-		{
-			if (_machine && !_machine.isDisposed)
-			{
-				changeAction(RoleActionType.FLY,1);
-				var totalTime : int = upTime;
-				if(totalTime > 0)
-				{
-					TweenLite.to(_machine.owner as SceneRole, totalTime * 0.001, {offsetZ: FLY_HEIGHT, ease: Cubic.easeOut, overwrite: 0, onComplete: onFlyUpComplete});
-				}
-				else
-				{
-					onFlyUpComplete();
-				}
-			}
-		}
-		
-		/**
-		 * 下降阶段 
-		 * 
-		 */		
-		private function onFlyUpComplete() : void
-		{
-			if (_machine && !_machine.isDisposed)
-			{
-				changeAction(RoleActionType.FLY_HIT,1);
-				var totalTime : int = flyTime;
-				if(totalTime > 0)
-				{
-					TweenLite.to(_machine.owner as SceneRole, totalTime * 0.001, {offsetZ: FLY_HEIGHT, ease: Cubic.easeIn, overwrite: 0, onComplete: onFlyComplete});
-				}
-				else
-				{
-					onFlyComplete();
-				}
-			}
-		}
-		
-		/**
-		 * 准备落地了 
-		 * 
-		 */		
-		private function onFlyComplete() : void
-		{
-			if (_machine && !_machine.isDisposed)
-			{
-				changeAction(RoleActionType.DROPOUT,1);
-				var totalTime : int = fallTime;
-				if(totalTime > 0)
-				{
-					TweenLite.to(_machine.owner as SceneRole, totalTime * 0.001, {offsetZ: 0, ease: Cubic.easeIn, overwrite: 0, onComplete: onFlyFallComplete});
-				}
-				else
-				{
-					onFlyFallComplete();
-				}
-			}
-		}
-		
-		private function onFlyFallComplete():void
-		{
-			if (_machine && !_machine.isDisposed)
-			{
-				removeSelf();
-				transition(RoleStateType.ACTION_GETUP);
-			}
-		}
-		
 		override public function leave() : void
 		{
 			stopFly();
@@ -251,7 +241,21 @@ package com.rpgGame.app.state.role.control
 			if (_machine && !_machine.isDisposed)
 			{
 				(_machine.owner as SceneRole).offsetZ = 0;
-				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {offsetZ: true});
+			}
+			if(_fallTween)
+			{
+				_fallTween.kill();
+				_fallTween = null;
+			}
+			if(_flyTween)
+			{
+				_flyTween.kill();
+				_flyTween = null;
+			}
+			if(_upTween)
+			{
+				_upTween.kill();
+				_upTween = null;
 			}
 		}
 		
@@ -273,6 +277,21 @@ package com.rpgGame.app.state.role.control
 		{
 			_stateReference = null;
 			super.dispose();
+			if(_fallTween)
+			{
+				_fallTween.kill();
+				_fallTween = null;
+			}
+			if(_flyTween)
+			{
+				_flyTween.kill();
+				_flyTween = null;
+			}
+			if(_upTween)
+			{
+				_upTween.kill();
+				_upTween = null;
+			}
 		}
 		
 		override public function get tribe():String

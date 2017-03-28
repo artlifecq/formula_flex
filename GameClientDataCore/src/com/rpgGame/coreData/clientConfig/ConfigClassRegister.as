@@ -122,7 +122,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_skill_model:String = "data.spell.Q_skill_model";
 		/**  技能效果配置表																			 */
 		public static const Q_SpellAnimation:String = "data.spell.Q_SpellAnimation";
-		/**  单个技能效果的数据配置																							 */
+		/**  单个技能效果的数据配置																								 */
 		public static const Q_SpellEffect:String = "data.spell.Q_SpellEffect";
 		/**  召唤物表												 */
 		public static const Q_summon:String = "data.spell.Q_summon";

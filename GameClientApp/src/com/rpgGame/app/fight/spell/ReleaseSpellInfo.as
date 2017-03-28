@@ -56,6 +56,7 @@ package com.rpgGame.app.fight.spell
 		
 		private var _posSingleAni : Q_SpellAnimation; //对地动画
 		private var _passSingleAni : Q_SpellAnimation; //弹道动画
+		private var _ribbonImg:String;
 
 		/**
 		 * 动作完成
@@ -268,6 +269,7 @@ package com.rpgGame.app.fight.spell
 				_selfAni = AnimationDataManager.getData(_spellEffectData.self_dest_animation);
 				_posSingleAni = AnimationDataManager.getData(_spellEffectData.dest_animation);
 				_passSingleAni = AnimationDataManager.getData(_spellEffectData.fly_animation);
+				_ribbonImg = _spellEffectData.ribbon_img;
 				
 				_startSelfFrameTime = _spellEffectData.start_frame_time;//抬手特效开始时间
 				_caromStartFrameTime = _spellEffectData.carom_start_frame_time;//动作从那帧开始播放
@@ -687,6 +689,11 @@ package com.rpgGame.app.fight.spell
 		public function get passAni() : Q_SpellAnimation
 		{
 			return _passSingleAni;
+		}
+		
+		public function get ribbonImg():String
+		{
+			return _ribbonImg;
 		}
 
 		/**

@@ -1,11 +1,10 @@
 package com.rpgGame.app.state.role.control
 {
-	import com.gameClient.log.GameLog;
+	import com.game.engine3D.state.IState;
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.coreData.AvatarInfo;
 	import com.rpgGame.coreData.cfg.ChangeModelCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarWeapontResCfgData;
@@ -71,7 +70,7 @@ package com.rpgGame.app.state.role.control
 						heroData.avatarInfo.deputyWeaponEffectOffset = new Vector3D(deputyWeaponRes.effectOffsetX, deputyWeaponRes.effectOffsetY, deputyWeaponRes.effectOffsetZ);
 					}
 
-					AvatarManager.updateAvatar(role);
+					AvatarManager.updateAvatar(role,false);
                     if (role.isMainChar)
 					{
                         ShortcutsManger.getInstance().replaceToTempSpellByVector(MainRoleManager.actorInfo.spellList.getShortcutSpellList());
@@ -96,6 +95,19 @@ package com.rpgGame.app.state.role.control
                 }
 			}
 		}
+		
+		override public function enterPass(prevState:IState, force:Boolean=false):Boolean
+		{
+			// TODO Auto Generated method stub
+			return super.enterPass(prevState, force);
+		}
+		
+		override public function leavePass(nextState:IState, force:Boolean=false):Boolean
+		{
+			// TODO Auto Generated method stub
+			return super.leavePass(nextState, force);
+		}
+		
 		
 		override public function dispose():void
 		{
