@@ -1374,6 +1374,7 @@ package com.game.engine3D.scene.render
 									if (activeStatus)
 									{
 										(currAnimator as SkeletonAnimator).play(activeStatus, _animationTransition, offsetTime);
+										trace("====================================\t"+currAnimator.name + "\t动作：\t" + activeStatus);
 									}
 									else
 									{
