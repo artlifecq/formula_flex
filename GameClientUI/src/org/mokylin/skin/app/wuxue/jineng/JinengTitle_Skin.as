@@ -39,8 +39,6 @@ package org.mokylin.skin.app.wuxue.jineng
 		private function __JinengTitle_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.touchable = false;
-			temp.touchGroup = false;
 			temp.styleName = "ui/app/wuxue/jineng/biaotilan.png";
 			temp.width = 528;
 			temp.x = 0;
@@ -55,7 +53,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.name = "labelDisplay";
 			temp.bold = true;
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.letterSpacing = -1;
 			temp.text = "职业技能";
 			temp.color = 0xA6A07B;

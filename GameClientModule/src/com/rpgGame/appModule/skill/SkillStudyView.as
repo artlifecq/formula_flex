@@ -8,7 +8,10 @@ package com.rpgGame.appModule.skill
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
+	import feathers.controls.ScrollBarDisplayMode;
+	import feathers.controls.ScrollPolicy;
 	import feathers.controls.Scroller;
+	import feathers.layout.RelativePosition;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.wuxue.jineng.JinengTitle_Skin;
@@ -48,13 +51,15 @@ package com.rpgGame.appModule.skill
 		
 		private function initView():void
 		{
-			this._skin.vs_bar.verticalScrollBarPosition = Scroller.VERTICAL_SCROLL_BAR_POSITION_RIGHT;
-			this._skin.vs_bar.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
-			this._skin.vs_bar.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
-			this._skin.vs_bar.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_FIXED;
 			_skillContainer=new Sprite();
 			this._skin.vs_bar.width=550;
 			this._skin.vs_bar.x=20;
+			this._skin.vs_bar.scrollBarDisplayMode = ScrollBarDisplayMode.FIXED;
+			this._skin.vs_bar.verticalScrollBarPosition =RelativePosition.RIGHT;
+//			this._skin.vs_bar.horizontalScrollPolicy = ScrollPolicy.OFF;
+			this._skin.vs_bar.verticalScrollPolicy = ScrollPolicy.OFF;
+			
+			
 			_jobTitle1=new JinengTitle_Skin();
 			_jobTitle2=new JinengTitle_Skin();
 			_jobTitle2.labelDisplay.text="其他技能";
@@ -103,8 +108,11 @@ package com.rpgGame.appModule.skill
 			for(i=0;i<skillNum;i++){
 				item=new SkillItem();
 				row=Math.floor(i/2);
-				data=list[i];
+				data=MainRoleManager.actorInfo.spellList.getStudySpell(list[i].q_skillID);
 				skillInfo=MainRoleManager.actorInfo.spellList.getSkillInfo(list[i].q_skillID);
+				if(!data){
+					data=list[i];
+				}
 				item.updateItem(data,skillInfo);
 				item.y=row*(item.height+10)+_jobTl2.y+40;
 				_skillContainer.addChild(item);
@@ -115,13 +123,20 @@ package com.rpgGame.appModule.skill
 				}
 			}
 			_lastSp=new Sprite();
-			_lastSp.y=item.y+item.height;
+			_lastSp.y=item.y+item.height+40;
 			_skillContainer.addChild(_lastSp);
 			this._skin.vs_bar.addChild(_skillContainer);
 		}
 		
 		public function onTouchTarget(target:DisplayObject):Boolean
 		{
+			if(skillUpgrade.onTouchTarget(target)){
+				return true;
+			}
+			if(skillRise.onTouchTarget(target)){
+				return true;
+			}
+			
 			return false;
 		}
 		
@@ -135,6 +150,7 @@ package com.rpgGame.appModule.skill
 			updateZhenqi();
 			_skin.tab_zizhi.addEventListener(Event.CHANGE, onTab);
 			EventManager.addEvent(SpellEvent.SELECTE_SPELL,selecteSpell);
+			this._skin.vs_bar.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 		}
 		
 		private function selecteSpell(skillItem:SkillItem):void

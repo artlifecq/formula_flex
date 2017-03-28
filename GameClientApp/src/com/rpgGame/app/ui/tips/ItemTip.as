@@ -53,7 +53,6 @@ package com.rpgGame.app.ui.tips
 		 */
 		private function initTip() : void
 		{
-			
 			_iconFace=new DragDropItem(IcoSizeEnum.ICON_64,0);
 			_iconFace.gridInfo=new GridInfo(ItemContainerID.BackPack,0);
 			addChild(_iconFace);

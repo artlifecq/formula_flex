@@ -29,6 +29,12 @@ package com.game.engine3D.utils
 		 */
 		public static function showAwayStats(stage : Stage, stage3DProxy : Stage3DProxy = null) : void
 		{
+			if (_awayStatView && _awayStatView.parent)
+			{
+				_awayStatView.parent.removeChild(_awayStatView);
+				return;
+			}
+			
 			if (stage3DProxy == null)
 			{
 				stage3DProxy = Stage3DLayerManager.stage3DProxy;
