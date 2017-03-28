@@ -38,7 +38,7 @@ package com.rpgGame.app.ui.main.top
 			super(this._skin);
 			
 			addEft();
-			addTips();
+			setTips();
 			initEvent();
 		}
 		/**添加特效*/	
@@ -49,13 +49,17 @@ package com.rpgGame.app.ui.main.top
 			_yellowEffect= this.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINGYANTIAO_JINDUHUANG),0,0,0);
 			
 		}
-		/**添加提示框*/	
-		private function addTips():void
+		private function setTips():void
 		{
 			_skin.top_bar.isEnabled=false;
 			_skin.top_bar2.isEnabled=false;
+		}
+		/**添加提示框*/	
+		private function addTips():void
+		{
 			TipTargetManager.remove(this);
-			
+			var tipString:String="升级经验："+MainRoleManager.actorInfo.curExp+"/"+MainRoleManager.actorInfo.maxExp
+			trace(tipString);
 			TipTargetManager.show(this, TargetTipsMaker.makeSimpleTextTips("升级经验："+MainRoleManager.actorInfo.curExp+"/"+MainRoleManager.actorInfo.maxExp));
 		}
 		
@@ -104,6 +108,7 @@ package com.rpgGame.app.ui.main.top
 		private var _isFirst:Boolean=true;
 		private function updateExpBar():void
 		{
+			addTips();
 			if(_isFirst)
 			{
 				initExpBar();
