@@ -28,5 +28,6 @@ package com.rpgGame.coreData.enum
 		/** 开启地域信息 		 */		
 		public static const ENABLE_CHAT_LOCATION_INFO:int = 10;
 		
+		
 	}
 }

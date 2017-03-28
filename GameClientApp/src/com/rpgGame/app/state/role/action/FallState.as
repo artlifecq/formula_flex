@@ -52,12 +52,6 @@ package com.rpgGame.app.state.role.action
 						_stateReference = _ref as FallStateReference;
 						
 						doFlyBack();
-//						if (_hardStiffTween)
-//						{
-//							_hardStiffTween.kill();
-//							_hardStiffTween = null;
-//						}
-//						_hardStiffTween = TweenLite.delayedCall(_stateReference.stiffTime * 0.001, onStopHardStiff);
 					}
 					else
 						throw new Error("击倒状态引用必须是FallStateRef类型！");
@@ -76,11 +70,11 @@ package com.rpgGame.app.state.role.action
 				var atkorX : int = _stateReference.atkorPos.x;
 				var atkorZ : int = _stateReference.atkorPos.y;
 				var distance : Number = MathUtil.getDistance((_machine.owner as SceneRole).x, (_machine.owner as SceneRole).z, targetX, targetZ);
-				_totalTime = distance / _stateReference.moveSpeed * 1000;
+				_totalTime = distance / _stateReference.moveSpeed;
 				
 				(_machine.owner as SceneRole).faceToGround(atkorX, atkorZ, 0);
 				if (_totalTime > 0)
-					TweenLite.to(_machine.owner as SceneRole, _totalTime * 0.001, {x: targetX, z: targetZ, ease: Linear.easeNone, overwrite: 0, onComplete: onMoveComplete});
+					TweenLite.to(_machine.owner as SceneRole, _totalTime, {x: targetX, z: targetZ, ease: Linear.easeNone, overwrite: 0, onComplete: onMoveComplete});
 				else
 					onMoveComplete();
 				
@@ -100,18 +94,6 @@ package com.rpgGame.app.state.role.action
 				
 				stopHardStiff();
 				transition(RoleStateType.ACTION_GETUP, null, false, false, [RoleStateType.CONTROL_WALK_MOVE]);
-			}
-		}
-		
-		private function stopBeatBack() : void
-		{
-			if (_machine && !_machine.isDisposed)
-			{
-				var targetX : int = _stateReference.targetPos.x;
-				var targetZ : int = _stateReference.targetPos.y;
-				(_machine.owner as SceneRole).x = targetX;
-				(_machine.owner as SceneRole).z = targetZ;
-				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, z: true});
 			}
 		}
 
@@ -205,7 +187,7 @@ package com.rpgGame.app.state.role.action
 			super.leave();
 			stopFall();
 			stopHardStiff();
-			_hardStiffFinished = false;
+			TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, z: true});
 		}
 
 		private function stopHardStiff() : void
@@ -226,6 +208,14 @@ package com.rpgGame.app.state.role.action
 			else if (nextState.type == RoleStateType.ACTION_TRAIL)
 			{
 				return true;
+			}
+			else if(nextState.type == RoleStateType.ACTION_RUN)
+			{
+				return true;
+			}
+			else if(nextState.type == RoleStateType.ACTION_WALK)
+			{
+				return true;	
 			}
 			else if ((_machine as RoleStateMachine).isBingDong)
 			{

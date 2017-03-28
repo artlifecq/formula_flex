@@ -27,7 +27,7 @@ package org.mokylin.skin.component.slider.skin_Slider.button
 			super();
 			
 			this.currentState = "down";
-			this.height = 11;
+			this.height = 7;
 			this.width = 8;
 			this.elementsContent = [];
 			

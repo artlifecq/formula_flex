@@ -20,6 +20,8 @@ package org.mokylin.skin.app.systemSet
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var bg:feathers.controls.UIAsset;
+
 		public var chk_jujuebanghui:feathers.controls.Check;
 
 		public var chk_jujuehaoyou:feathers.controls.Check;
@@ -38,6 +40,10 @@ package org.mokylin.skin.app.systemSet
 
 		public var grp_sound:feathers.controls.Group;
 
+		public var lb_yinxiao:feathers.controls.Label;
+
+		public var lb_yinyue:feathers.controls.Label;
+
 		public var sld_yinxiao:feathers.controls.Slider;
 
 		public var sld_yinyue:feathers.controls.Slider;
@@ -51,7 +57,7 @@ package org.mokylin.skin.app.systemSet
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [__xitong_Skin_UIAsset1_i(),__xitong_Skin_UIAsset2_i(),grp_sound_i(),grp_shejiao_i()];
+			this.elementsContent = [bg_i(),__xitong_Skin_UIAsset1_i(),grp_sound_i(),grp_shejiao_i()];
 			
 			states = {
 			};
@@ -62,28 +68,6 @@ package org.mokylin.skin.app.systemSet
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __xitong_Skin_Label10_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "拒绝他人帮会邀请";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 36;
-			temp.y = 167;
-			return temp;
-		}
-
-		private function __xitong_Skin_Label11_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "默认加入其他人的组队邀请";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 36;
-			temp.y = 207;
-			return temp;
-		}
-
 		private function __xitong_Skin_Label1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -102,7 +86,7 @@ package org.mokylin.skin.app.systemSet
 			temp.color = 0xcfc6ae;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 38;
-			temp.y = 44;
+			temp.y = 48;
 			return temp;
 		}
 
@@ -113,37 +97,11 @@ package org.mokylin.skin.app.systemSet
 			temp.color = 0xcfc6ae;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 38;
-			temp.y = 82;
+			temp.y = 86;
 			return temp;
 		}
 
 		private function __xitong_Skin_Label4_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "30%";
-			temp.textAlign = "right";
-			temp.color = 0xcfc6ae;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 41;
-			temp.x = 323;
-			temp.y = 45;
-			return temp;
-		}
-
-		private function __xitong_Skin_Label5_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "30%";
-			temp.textAlign = "right";
-			temp.color = 0xcfc6ae;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 41;
-			temp.x = 323;
-			temp.y = 83;
-			return temp;
-		}
-
-		private function __xitong_Skin_Label6_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.fontSize = 16;
@@ -155,56 +113,80 @@ package org.mokylin.skin.app.systemSet
 			return temp;
 		}
 
-		private function __xitong_Skin_Label7_i():feathers.controls.Label
+		private function __xitong_Skin_Label5_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "拒绝他人加我好友";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 36;
-			temp.y = 36;
+			temp.y = 42;
 			return temp;
 		}
 
-		private function __xitong_Skin_Label8_i():feathers.controls.Label
+		private function __xitong_Skin_Label6_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "拒绝接受私聊信息";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 36;
-			temp.y = 78;
+			temp.y = 84;
 			return temp;
 		}
 
-		private function __xitong_Skin_Label9_i():feathers.controls.Label
+		private function __xitong_Skin_Label7_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "拒绝他人组队邀请";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 36;
-			temp.y = 124;
+			temp.y = 130;
+			return temp;
+		}
+
+		private function __xitong_Skin_Label8_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "拒绝他人帮会邀请";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.x = 36;
+			temp.y = 173;
+			return temp;
+		}
+
+		private function __xitong_Skin_Label9_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "默认加入其他人的组队邀请";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.x = 36;
+			temp.y = 213;
 			return temp;
 		}
 
 		private function __xitong_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/systemSet/fen.png";
+			temp.x = 17;
+			temp.y = 163;
+			return temp;
+		}
+
+		private function bg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg = temp;
+			temp.name = "bg";
 			temp.height = 470;
 			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 405;
 			temp.x = 0;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function __xitong_Skin_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/systemSet/fen.png";
-			temp.x = 17;
-			temp.y = 163;
 			return temp;
 		}
 
@@ -292,7 +274,7 @@ package org.mokylin.skin.app.systemSet
 			temp.name = "grp_shejiao";
 			temp.x = 11;
 			temp.y = 198;
-			temp.elementsContent = [__xitong_Skin_Label6_i(),chk_jujuehaoyou_i(),chk_jujuesiliao_i(),chk_jujuezudui_i(),chk_jujuebanghui_i(),chk_moren_i(),__xitong_Skin_Label7_i(),__xitong_Skin_Label8_i(),__xitong_Skin_Label9_i(),__xitong_Skin_Label10_i(),__xitong_Skin_Label11_i()];
+			temp.elementsContent = [__xitong_Skin_Label4_i(),chk_jujuehaoyou_i(),chk_jujuesiliao_i(),chk_jujuezudui_i(),chk_jujuebanghui_i(),chk_moren_i(),__xitong_Skin_Label5_i(),__xitong_Skin_Label6_i(),__xitong_Skin_Label7_i(),__xitong_Skin_Label8_i(),__xitong_Skin_Label9_i()];
 			return temp;
 		}
 
@@ -303,7 +285,37 @@ package org.mokylin.skin.app.systemSet
 			temp.name = "grp_sound";
 			temp.x = 11;
 			temp.y = 18;
-			temp.elementsContent = [__xitong_Skin_Label1_i(),chk_yinyue_i(),chk_yinxiao_i(),__xitong_Skin_Label2_i(),__xitong_Skin_Label3_i(),__xitong_Skin_Label4_i(),__xitong_Skin_Label5_i(),sld_yinyue_i(),sld_yinxiao_i()];
+			temp.elementsContent = [__xitong_Skin_Label1_i(),chk_yinyue_i(),chk_yinxiao_i(),__xitong_Skin_Label2_i(),__xitong_Skin_Label3_i(),lb_yinyue_i(),lb_yinxiao_i(),sld_yinyue_i(),sld_yinxiao_i()];
+			return temp;
+		}
+
+		private function lb_yinxiao_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_yinxiao = temp;
+			temp.name = "lb_yinxiao";
+			temp.text = "30%";
+			temp.textAlign = "right";
+			temp.color = 0xcfc6ae;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 41;
+			temp.x = 323;
+			temp.y = 86;
+			return temp;
+		}
+
+		private function lb_yinyue_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_yinyue = temp;
+			temp.name = "lb_yinyue";
+			temp.text = "30%";
+			temp.textAlign = "right";
+			temp.color = 0xcfc6ae;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 41;
+			temp.x = 323;
+			temp.y = 48;
 			return temp;
 		}
 
@@ -312,12 +324,13 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Slider = new feathers.controls.Slider();
 			sld_yinxiao = temp;
 			temp.name = "sld_yinxiao";
+			temp.height = 7;
 			temp.direction = Slider.DIRECTION_HORIZONTAL
 			temp.styleClass = org.mokylin.skin.component.slider.skin_Slider2;
 			temp.value = 3;
 			temp.width = 240;
 			temp.x = 85;
-			temp.y = 81;
+			temp.y = 87;
 			return temp;
 		}
 
@@ -326,12 +339,13 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Slider = new feathers.controls.Slider();
 			sld_yinyue = temp;
 			temp.name = "sld_yinyue";
+			temp.height = 7;
 			temp.direction = Slider.DIRECTION_HORIZONTAL
 			temp.styleClass = org.mokylin.skin.component.slider.skin_Slider2;
 			temp.value = 3;
 			temp.width = 240;
 			temp.x = 85;
-			temp.y = 44;
+			temp.y = 50;
 			return temp;
 		}
 

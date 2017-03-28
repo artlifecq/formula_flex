@@ -1,7 +1,7 @@
 package org.mokylin.skin.component.text
 {
 	import feathers.controls.text.Fontter;
-	import feathers.controls.Label;
+	import feathers.controls.text.TextFieldTextEditor;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 
@@ -17,7 +17,7 @@ package org.mokylin.skin.component.text
 		//==========================================================================
 		public var bg:feathers.controls.UIAsset;
 
-		public var textDisplay:feathers.controls.Label;
+		public var textDisplay:feathers.controls.text.TextFieldTextEditor;
 
 
 		//==========================================================================
@@ -27,12 +27,16 @@ package org.mokylin.skin.component.text
 		{
 			super();
 			
-			this.currentState = "normal";
-			this.elementsContent = [bg_i(),textDisplay_i()];
+			this.currentState = "focused";
+			this.height = 25;
+			this.width = 65;
+			this.elementsContent = [textDisplay_i()];
+			bg_i();
+			
 			
 			states = {
 			};
-			skinNames={};
+			skinNames={"disabled":"ui/common/background/xiaobiaotibeijing.png", "enabled":"ui/common/background/xiaobiaotibeijing.png", "focused":"ui/common/background/xiaobiaotibeijing.png"};
 		}
 
 
@@ -51,17 +55,19 @@ package org.mokylin.skin.component.text
 			return temp;
 		}
 
-		private function textDisplay_i():feathers.controls.Label
+		private function textDisplay_i():feathers.controls.text.TextFieldTextEditor
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
+			var temp:feathers.controls.text.TextFieldTextEditor = new feathers.controls.text.TextFieldTextEditor();
 			textDisplay = temp;
 			temp.name = "textDisplay";
+			temp.height = 18;
+			temp.left = 5;
+			temp.right = 15;
 			temp.text = "标签";
 			temp.color = 0x5cb006;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 38;
-			temp.x = 5;
-			temp.y = 3;
+			temp.verticalCenter = 1;
+			temp.y = 4;
 			return temp;
 		}
 

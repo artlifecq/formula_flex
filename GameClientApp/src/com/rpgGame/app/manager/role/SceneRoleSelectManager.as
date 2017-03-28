@@ -2,7 +2,6 @@ package com.rpgGame.app.manager.role
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
-	import com.game.engine3D.scene.render.vo.VolumeBounds;
 	import com.game.engine3D.vo.SoftOutlineData;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.fight.FightManager;
@@ -13,16 +12,13 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.core.events.SceneInteractiveEvent;
 	import com.rpgGame.core.manager.EscActionManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
-	import away3d.containers.ObjectContainer3D;
-	import away3d.entities.CompositeMesh;
 	import away3d.filters.OutlineGlowFilter3D;
-	
-	import gameEngine2D.NetDebug;
 	
 	import org.client.mainCore.manager.EventManager;
 
@@ -119,7 +115,7 @@ package com.rpgGame.app.manager.role
 				_selectedRole.avatar.removeRenderUnitByID(RenderUnitType.SELECTED_RING, RenderUnitID.SELECTED_RING);
 			}
 			_selectedRole = value;
-			if (_selectedRole && _selectedRole.usable && !_selectedRole.stateMachine.isDeadState)
+			if (_selectedRole && _selectedRole.usable && (!_selectedRole.stateMachine.isDeadState||MainRoleManager.actorInfo.job==JobEnum.ROLE_4_TYPE))
 			{
 				if (_selectedRole.headFace is HeadFace)
 					(_selectedRole.headFace as HeadFace).isSelected = true;

@@ -34,6 +34,8 @@ package com.rpgGame.coreData.clientConfig
 		public var dest_animation:int;
 		 /**  飞行弹道特效 */
 		public var fly_animation:int;
+		 /**  形成带状的图片素材（给图片名字就行了） */
+		public var ribbon_img:String;
 		 /**  暂时没用 */
 		public var delay_time:int;
 		 /**  抬手特效出现时间（若不填则直接播放特效） */

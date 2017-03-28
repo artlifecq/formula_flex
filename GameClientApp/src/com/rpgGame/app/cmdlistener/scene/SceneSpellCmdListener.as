@@ -94,7 +94,8 @@ package com.rpgGame.app.cmdlistener.scene
 			var failID : int = msg.failType;
 			var failReason : String;
 			failReason = LangQ_NoticeInfo["SkillError_"+failID];
-			if(!failReason){
+			if(!failReason)
+			{
 				failReason="未配置的技能错误码!----failID";
 				GameLog.addShow(failReason);
 			}

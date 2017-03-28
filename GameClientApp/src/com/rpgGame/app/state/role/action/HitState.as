@@ -175,14 +175,14 @@ package com.rpgGame.app.state.role.action
 					return false;
 				else if (prevState.type == RoleStateType.ACTION_BEAT_BACK)
 					return false;
-				else if((_machine as RoleStateMachine).isFly)
-				{
-					return false;
-				}
-				else if((_machine as RoleStateMachine).isUseSpell)
-				{
-					return false;
-				}
+			}
+			if(!force && (_machine as RoleStateMachine).isFly)
+			{
+				return false;
+			}
+			if(!force && (_machine as RoleStateMachine).isUseSpell)
+			{
+				return false;
 			}
 			return true;
 		}
