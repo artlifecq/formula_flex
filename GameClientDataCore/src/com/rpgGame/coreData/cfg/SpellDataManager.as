@@ -7,8 +7,6 @@ package com.rpgGame.coreData.cfg
 	import flash.utils.ByteArray;
 	
 	import org.client.mainCore.ds.HashMap;
-	import org.client.mainCore.utils.BitUtil;
-	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *

@@ -18,6 +18,9 @@ package com.rpgGame.netData.skill.message{
 		//升级类型 0-等级 1-阶数
 		private var _skilltype: int;
 		
+		//是否升到最大级  1 是，0否
+		private var _bMaxLevel: int;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -27,6 +30,8 @@ package com.rpgGame.netData.skill.message{
 			writeInt(_skillModelId);
 			//升级类型 0-等级 1-阶数
 			writeByte(_skilltype);
+			//是否升到最大级  1 是，0否
+			writeByte(_bMaxLevel);
 			return true;
 		}
 		
@@ -38,6 +43,8 @@ package com.rpgGame.netData.skill.message{
 			_skillModelId = readInt();
 			//升级类型 0-等级 1-阶数
 			_skilltype = readByte();
+			//是否升到最大级  1 是，0否
+			_bMaxLevel = readByte();
 			return true;
 		}
 		
@@ -77,6 +84,21 @@ package com.rpgGame.netData.skill.message{
 		 */
 		public function set skilltype(value: int): void{
 			this._skilltype = value;
+		}
+		
+		/**
+		 * get 是否升到最大级  1 是，0否
+		 * @return 
+		 */
+		public function get bMaxLevel(): int{
+			return _bMaxLevel;
+		}
+		
+		/**
+		 * set 是否升到最大级  1 是，0否
+		 */
+		public function set bMaxLevel(value: int): void{
+			this._bMaxLevel = value;
 		}
 		
 	}

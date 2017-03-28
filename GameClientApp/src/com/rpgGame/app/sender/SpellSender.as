@@ -1,16 +1,11 @@
 package com.rpgGame.app.sender
 {
 	import com.gameClient.log.GameLog;
-	import com.rpgGame.app.manager.fight.FightFaceHelper;
-	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.role.SceneRoleManager;
-	import com.rpgGame.app.manager.scene.SceneManager;
-	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
-	import com.rpgGame.coreData.type.EnumHurtType;
 	import com.rpgGame.netData.fight.message.CSPerformPosSkillMessage;
 	import com.rpgGame.netData.fight.message.CSPerformTargetSkillMessage;
 	import com.rpgGame.netData.fight.message.CSSkillContiStateMessage;
+	import com.rpgGame.netData.skill.message.ReqLevelUpSkillMessage;
 	
 	import app.cmd.SpellModuleMessages;
 	
@@ -81,6 +76,22 @@ package com.rpgGame.app.sender
 			SocketConnection.send(msg);
 		}
         
+		/**
+		 * 技能升级
+		 * @param id 技能id
+		 * @param type 升级还是升阶
+		 * @param isTomax 是否是一键升级
+		 * 
+		 */
+		public static function reqSkillLevelUp(id:int,type:int,isTomax:int):void
+		{
+			var msg:ReqLevelUpSkillMessage=new ReqLevelUpSkillMessage();
+			msg.skillModelId=id;
+			msg.skilltype=type;
+			msg.bMaxLevel=isTomax;
+			SocketConnection.send(msg);
+		}
+		
         public static function reqSkillContiState(skillId : int, state : int) : void {
             var msg : CSSkillContiStateMessage = new CSSkillContiStateMessage();
             msg.skillId = skillId;

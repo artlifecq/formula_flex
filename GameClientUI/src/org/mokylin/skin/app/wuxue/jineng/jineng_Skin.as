@@ -98,7 +98,7 @@ package org.mokylin.skin.app.wuxue.jineng
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/app/wuxue/wuxue.png";
 			temp.x = 441;
 			temp.y = 11;

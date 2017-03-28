@@ -49,6 +49,12 @@ package org.mokylin.skin.app.wuxue.jineng
 
 		public var lb_zhenqi:feathers.controls.Label;
 
+		public var line1:feathers.controls.UIAsset;
+
+		public var line2:feathers.controls.UIAsset;
+
+		public var tj_name:feathers.controls.Label;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -60,7 +66,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			this.currentState = "normal";
 			this.height = 422;
 			this.width = 362;
-			this.elementsContent = [__jineng_shengji_UIAsset3_i(),__jineng_shengji_UIAsset4_i(),__jineng_shengji_UIAsset5_i(),Icon_jineng_i(),lb_name_i(),lb_dengji_i(),lb_xiaohao_i(),lb_leixing_i(),lb_lengque_i(),__jineng_shengji_Label1_i(),lb_miaoshu_i(),eft_name_i(),arrow1_i(),arrow2_i(),lb_shengji_i(),lb_shanghai_i(),__jineng_shengji_Label2_i(),lb_renwudengji_i(),lb_zhenqi_i(),lb_yinliang_i(),btn_shengji_i()];
+			this.elementsContent = [__jineng_shengji_UIAsset3_i(),line1_i(),line2_i(),Icon_jineng_i(),lb_name_i(),lb_dengji_i(),lb_xiaohao_i(),lb_leixing_i(),lb_lengque_i(),__jineng_shengji_Label1_i(),lb_miaoshu_i(),eft_name_i(),arrow1_i(),arrow2_i(),lb_shengji_i(),lb_shanghai_i(),tj_name_i(),lb_renwudengji_i(),lb_zhenqi_i(),lb_yinliang_i(),btn_shengji_i()];
 			
 			states = {
 			};
@@ -94,18 +100,6 @@ package org.mokylin.skin.app.wuxue.jineng
 			return temp;
 		}
 
-		private function __jineng_shengji_Label2_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.fontSize = 16;
-			temp.text = "升级条件";
-			temp.color = 0xE8C958;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 146;
-			temp.y = 258;
-			return temp;
-		}
-
 		private function __jineng_shengji_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -113,26 +107,6 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.width = 332;
 			temp.x = 14;
 			temp.y = 89;
-			return temp;
-		}
-
-		private function __jineng_shengji_UIAsset4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/wuxue/jineng/fengexian.png";
-			temp.width = 332;
-			temp.x = 14;
-			temp.y = 191;
-			return temp;
-		}
-
-		private function __jineng_shengji_UIAsset5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/wuxue/jineng/fengexian.png";
-			temp.width = 332;
-			temp.x = 14;
-			temp.y = 250;
 			return temp;
 		}
 
@@ -341,6 +315,44 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.width = 146;
 			temp.x = 117;
 			temp.y = 311;
+			return temp;
+		}
+
+		private function line1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			line1 = temp;
+			temp.name = "line1";
+			temp.styleName = "ui/app/wuxue/jineng/fengexian.png";
+			temp.width = 332;
+			temp.x = 14;
+			temp.y = 191;
+			return temp;
+		}
+
+		private function line2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			line2 = temp;
+			temp.name = "line2";
+			temp.styleName = "ui/app/wuxue/jineng/fengexian.png";
+			temp.width = 332;
+			temp.x = 14;
+			temp.y = 250;
+			return temp;
+		}
+
+		private function tj_name_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			tj_name = temp;
+			temp.name = "tj_name";
+			temp.fontSize = 16;
+			temp.text = "升级条件";
+			temp.color = 0xE8C958;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.x = 146;
+			temp.y = 258;
 			return temp;
 		}
 

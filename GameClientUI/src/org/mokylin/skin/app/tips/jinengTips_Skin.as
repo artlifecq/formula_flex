@@ -5,6 +5,8 @@ package org.mokylin.skin.app.tips
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import feathers.controls.UIMovieClip;
+	import org.mokylin.skin.app.wuxue.jineng.mc.dengjiSkin;
 
 	/**
 	 * @private
@@ -28,6 +30,8 @@ package org.mokylin.skin.app.tips
 
 		public var grp_time:feathers.controls.Group;
 
+		public var is_act:feathers.controls.Label;
+
 		public var lbl_dengji:feathers.controls.Label;
 
 		public var lbl_jinengName:feathers.controls.Label;
@@ -38,11 +42,15 @@ package org.mokylin.skin.app.tips
 
 		public var lbl_name:feathers.controls.Label;
 
-		public var lbl_time_type:feathers.controls.Label;
-
 		public var lbl_xiaohao:feathers.controls.Label;
 
 		public var line1:feathers.controls.UIAsset;
+
+		public var mc_dengjie:feathers.controls.UIMovieClip;
+
+		public var rise_des:feathers.controls.Label;
+
+		public var rise_name:feathers.controls.Label;
 
 
 		//==========================================================================
@@ -55,7 +63,7 @@ package org.mokylin.skin.app.tips
 			this.currentState = "normal";
 			this.height = 320;
 			this.width = 298;
-			this.elementsContent = [bg_i(),grp_line_i(),Icon_i(),grp_head_i(),grp_shuoming_i(),grp_time_i(),__jinengTips_Skin_Group1_i()];
+			this.elementsContent = [bg_i(),grp_line_i(),Icon_i(),grp_head_i(),grp_shuoming_i(),grp_time_i(),__jinengTips_Skin_Group1_i(),mc_dengjie_i()];
 			
 			states = {
 			};
@@ -82,7 +90,7 @@ package org.mokylin.skin.app.tips
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 47;
 			temp.y = 211;
-			temp.elementsContent = [__jinengTips_Skin_UIAsset2_i(),__jinengTips_Skin_UIAsset3_i(),__jinengTips_Skin_Label5_i()];
+			temp.elementsContent = [__jinengTips_Skin_UIAsset2_i(),__jinengTips_Skin_UIAsset3_i(),__jinengTips_Skin_Label3_i()];
 			return temp;
 		}
 
@@ -109,30 +117,6 @@ package org.mokylin.skin.app.tips
 		}
 
 		private function __jinengTips_Skin_Label3_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "怒火中烧";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 75;
-			temp.y = 1;
-			return temp;
-		}
-
-		private function __jinengTips_Skin_Label4_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.height = 36;
-			temp.text = "每击中一个目标额外产生3点怒气";
-			temp.color = 0x8B8D7B;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 167;
-			temp.x = 75;
-			temp.y = 23;
-			return temp;
-		}
-
-		private function __jinengTips_Skin_Label5_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.bold = true;
@@ -224,7 +208,20 @@ package org.mokylin.skin.app.tips
 			temp.name = "grp_time";
 			temp.x = 25;
 			temp.y = 248;
-			temp.elementsContent = [__jinengTips_Skin_UIAsset1_i(),__jinengTips_Skin_Label3_i(),lbl_time_type_i(),__jinengTips_Skin_Label4_i()];
+			temp.elementsContent = [__jinengTips_Skin_UIAsset1_i(),rise_name_i(),is_act_i(),rise_des_i()];
+			return temp;
+		}
+
+		private function is_act_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			is_act = temp;
+			temp.name = "is_act";
+			temp.text = "【已激活】";
+			temp.color = 0x6BCC08;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 133;
+			temp.y = 1;
 			return temp;
 		}
 
@@ -306,19 +303,6 @@ package org.mokylin.skin.app.tips
 			return temp;
 		}
 
-		private function lbl_time_type_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbl_time_type = temp;
-			temp.name = "lbl_time_type";
-			temp.text = "【已激活】";
-			temp.color = 0x6BCC08;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 133;
-			temp.y = 1;
-			return temp;
-		}
-
 		private function lbl_xiaohao_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -341,6 +325,48 @@ package org.mokylin.skin.app.tips
 			temp.width = 267;
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function mc_dengjie_i():feathers.controls.UIMovieClip
+		{
+			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
+			mc_dengjie = temp;
+			temp.name = "mc_dengjie";
+			temp.autoPlay = false;
+			temp.height = 10;
+			temp.styleClass = org.mokylin.skin.app.wuxue.jineng.mc.dengjiSkin;
+			temp.width = 10;
+			temp.x = 69;
+			temp.y = 68;
+			return temp;
+		}
+
+		private function rise_des_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			rise_des = temp;
+			temp.name = "rise_des";
+			temp.height = 36;
+			temp.text = "每击中一个目标额外产生3点怒气";
+			temp.color = 0x8B8D7B;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 167;
+			temp.x = 75;
+			temp.y = 23;
+			return temp;
+		}
+
+		private function rise_name_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			rise_name = temp;
+			temp.name = "rise_name";
+			temp.text = "怒火中烧";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 75;
+			temp.y = 1;
 			return temp;
 		}
 

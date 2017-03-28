@@ -65,10 +65,10 @@ package org.mokylin.skin.app.wuxue.jineng
 			Icon = temp;
 			temp.name = "Icon";
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 5;
-			temp.y = 3;
+			temp.x = 4;
+			temp.y = 2;
 			return temp;
 		}
 
@@ -114,7 +114,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			tips = temp;
 			temp.name = "tips";
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/common/tubiao/tishi.png";
 			temp.x = 211;
 			temp.y = 36;
@@ -127,7 +127,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			txt_Acitve = temp;
 			temp.name = "txt_Acitve";
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.text = "已激活进阶效果";
 			temp.color = 0xc9b722;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
@@ -143,7 +143,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			txt_Inacitve = temp;
 			temp.name = "txt_Inacitve";
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.text = "未激活进阶效果";
 			temp.color = 0x8b8d7b;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
@@ -158,7 +158,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			txt_Name = temp;
 			temp.name = "txt_Name";
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.text = "侵略如火";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
@@ -173,7 +173,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			txt_level = temp;
 			temp.name = "txt_level";
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.text = "等级:1/200";
 			temp.color = 0x5cb006;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
@@ -188,7 +188,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			txt_xianzhi = temp;
 			temp.name = "txt_xianzhi";
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.text = "60级后自动获得";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
