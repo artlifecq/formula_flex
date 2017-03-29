@@ -3,8 +3,6 @@ package com.rpgGame.app.fight.spell
 	import com.game.engine2D.config.SceneConfig;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.utils.MathUtil;
-	import com.game.engine3D.utils.PathFinderUtil;
-	import com.game.engine3D.vo.map.MapAreaTypeEnum;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.AreaMapManager;
 	import com.rpgGame.app.manager.ShortcutsManger;
@@ -25,7 +23,6 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
-	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.role.BaseEntityData;
 	import com.rpgGame.coreData.role.HeroData;
@@ -39,7 +36,6 @@ package com.rpgGame.app.fight.spell
 	
 	import away3d.pathFinding.DistrictWithPath;
 	
-	import gameEngine2D.NetDebug;
 	import gameEngine2D.PolyUtil;
 	
 	import org.client.mainCore.manager.EventManager;

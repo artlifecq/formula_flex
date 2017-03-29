@@ -141,6 +141,7 @@ package com.rpgGame.app.process
                 CONFIG::Debug {
 					Stage3DLayerManager.stage.addEventListener(KeyboardEvent.KEY_UP,onShowFrameState);
                     initMM();
+					showFrameState();
                 }
 			}
 
@@ -150,17 +151,17 @@ package com.rpgGame.app.process
 		
 		private function onShowFrameState(e:KeyboardEvent):void
 		{
-			var bool:Boolean = false;
-			if(e.ctrlKey&&e.keyCode==Keyboard.F)
+			if(e.shiftKey&&e.keyCode==Keyboard.D)
 			{
-				bool = !bool;
-				if(bool)
-				{
-					StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
-				}
-				LayerManager.showOrHideMM();
-				ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
+				showFrameState();
 			}
+		}
+		
+		private function showFrameState():void
+		{
+			StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
+			LayerManager.showOrHideMM();
+			ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
 		}
 		
 		private function tipsSetup() : void

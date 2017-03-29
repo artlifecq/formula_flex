@@ -179,7 +179,8 @@ package com.rpgGame.app.manager.role
 //			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(bornData ? bornData.q_body_res : "");
 			if (bornData.q_animation>0)
 			{
-				data.avatarInfo.effectResID = AnimationDataManager.getData(bornData.q_animation).role_res;
+				data.avatarInfo.bodyEffectID = AnimationDataManager.getData(bornData.q_animation).role_res;
+//				data.avatarInfo.effectResID = AnimationDataManager.getData(bornData.q_animation).role_res;
 			}
 			data.sizeScale = (bornData && bornData.q_scale > 0) ? (bornData.q_scale * 0.01) : 1;
 			//			data.totalStat.level = bornData ? bornData.q_grade : 0;

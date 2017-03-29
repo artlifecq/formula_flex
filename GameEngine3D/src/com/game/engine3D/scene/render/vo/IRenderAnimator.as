@@ -12,7 +12,7 @@ package com.game.engine3D.scene.render.vo
 	public interface IRenderAnimator
 	{
 		function setOwner(owner : BaseObj3D) : void;
-		function update() : void;
+		function update(gapTm:uint) : void;
 		function dispose() : void;
 	}
 }
