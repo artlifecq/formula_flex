@@ -167,7 +167,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.letterSpacing = 1;
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 250;
+			temp.width = 320;
 			temp.x = 0;
 			temp.y = 106;
 			return temp;
@@ -280,7 +280,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.letterSpacing = 1;
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 170;
+			temp.width = 320;
 			temp.x = 0;
 			temp.y = 28;
 			return temp;
@@ -322,7 +322,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.letterSpacing = 1;
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 170;
+			temp.width = 320;
 			temp.x = 0;
 			temp.y = 79;
 			return temp;
@@ -337,7 +337,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.letterSpacing = 1;
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 170;
+			temp.width = 320;
 			temp.x = 0;
 			temp.y = 52;
 			return temp;

@@ -49,6 +49,7 @@ package com.rpgGame.app.state.role.action
 			if (_machine && !_machine.isDisposed)
 			{
 				super.execute();
+				var role : SceneRole = _machine.owner as SceneRole;
 				transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
 				if (_corrodeTween)
 				{

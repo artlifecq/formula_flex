@@ -133,6 +133,7 @@ package com.rpgGame.app.manager.fight
 			return ROOT + numberType + number + ".png";
 		}
 
+		
 		/**
 		 * 伤害飘字
 		 * @param atkor 场景角色

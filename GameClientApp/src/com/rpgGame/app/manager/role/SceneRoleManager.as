@@ -45,6 +45,8 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
+	import flash.utils.setInterval;
+	
 	import app.message.StallTypeDataProto;
 	
 	import org.client.mainCore.manager.EventManager;

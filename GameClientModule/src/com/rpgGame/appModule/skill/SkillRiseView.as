@@ -2,6 +2,7 @@ package com.rpgGame.appModule.skill
 {
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.sender.SpellSender;
 	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
@@ -28,6 +29,7 @@ package com.rpgGame.appModule.skill
 	{
 		private var skin:jineng_jinjie;
 		private var _icon:BgIcon;
+		private var cfg:Q_skill_model;
 		
 		public function SkillRiseView(_skin:jineng_jinjie)
 		{
@@ -35,10 +37,13 @@ package com.rpgGame.appModule.skill
 			_icon.touchable=false;
 			skin=_skin;
 			skin.container.addChild(_icon);
+			skin.lb_yinliang.wordWrap=false;
+			skin.lb_daoju.wordWrap=false;
 		}
 		
 		public function update(selectedCfg:Q_skill_model, selectedInfo:SkillInfo):void
 		{
+			cfg=selectedCfg;
 			skin.lb_name.text=selectedCfg.q_skillName;
 			skin.lb_dengji.text=getTitleText("等级",selectedInfo.skillChildLv+"/"+selectedCfg.q_max_level);
 			skin.lb_leixing.text=getTitleText("技能类型",selectedCfg.q_skill_type);
@@ -72,15 +77,22 @@ package com.rpgGame.appModule.skill
 			skin.btn_jinjie.visible=true;
 			skin.Icon_jineng2.visible=true;
 			
+			
 			skin.lb_name2.text=riseData.q_skillName;
 			skin.lb_miaoshu.text=riseData.q_skillpanel_description2;
-			if(selectedInfo.skillLevel==2){
+			if(selectedInfo&&selectedInfo.skillLevel==2){
 				skin.lb_jihuo.visible=true;
+				skin.Icon_lock.visible=false;
+				skin.grp_tiaojian.visible=false;
+				skin.btn_jinjie.visible=false;
+				skin.lb_weijihuo.visible=!skin.lb_jihuo.visible;			
+				skin.lb_jihuo.x=skin.lb_weijihuo.x=skin.lb_name2.x+skin.lb_name2.textWidth+5;
+				return;
 			}else{
 				skin.lb_jihuo.visible=false;
+				skin.lb_weijihuo.visible=!skin.lb_jihuo.visible;			
+				skin.lb_jihuo.x=skin.lb_weijihuo.x=skin.lb_name2.x+skin.lb_name2.textWidth+5;
 			}
-			skin.lb_jihuo.visible=!skin.lb_weijihuo.visible;			
-			skin.lb_jihuo.x=skin.lb_weijihuo.x=skin.lb_name2.x+skin.lb_name2.textWidth+5;
 			
 			if(selectedInfo.skillChildLv==selectedCfg.q_max_level){
 				skin.eft_name.visible=false;
@@ -89,7 +101,7 @@ package com.rpgGame.appModule.skill
 			
 			var myLv:int=MainRoleManager.actorInfo.totalStat.level;
 			var myMp:int=MainRoleManager.actorInfo.curZhenqi;
-			var myMon:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY);
+			var myMon:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
 			var needLv:int=riseData.q_level_up;
 			var needMp:int=riseData.q_energy_up;
 			var needMon:int=riseData.q_cost_up;
@@ -106,9 +118,9 @@ package com.rpgGame.appModule.skill
 				
 				skin.eft_name.visible=true;
 				
-				skin.lb_renwudengji.htmlText=getTitleText("人物等级:",needLv,myLv);
-				skin.lb_zhenqi.htmlText=getTitleText("消耗真气:",needMp,myMp);
-				skin.lb_yinliang.htmlText=getTitleText("消耗绑银:",needMon,myMon);
+				skin.lb_renwudengji.htmlText=getTitleText("人物等级",needLv,myLv);
+				skin.lb_zhenqi.htmlText=getTitleText("消耗真气",needMp,myMp);
+				skin.lb_yinliang.htmlText=getTitleText("消耗绑银",needMon,myMon);
 				skin.lb_daoju.htmlText="消耗道具:";
 				for(i=0;i<itemDes.length;i++){
 					obj=itemDes[i];
@@ -152,8 +164,18 @@ package com.rpgGame.appModule.skill
 		
 		public function onTouchTarget(target:DisplayObject):Boolean
 		{
-			// TODO Auto Generated method stub
+			switch(target){
+				case skin.btn_jinjie:
+					SpellSender.reqSkillLevelUp(cfg.q_skillID,1,0);
+					return true;
+			}
 			return false;
+		}
+		
+		public function onHide():void
+		{
+			// TODO Auto Generated method stub
+			
 		}
 	}
 }

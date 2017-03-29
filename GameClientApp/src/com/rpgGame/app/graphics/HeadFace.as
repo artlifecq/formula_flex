@@ -1066,6 +1066,10 @@ package com.rpgGame.app.graphics
 		
 		public function showBloodBar():void
 		{
+			if(_bloodPercent==0){
+				onHideBlood();
+				return;
+			}
 			this.addChildAt(_bloodBar,0);
 			if(showBloodTween){
 				showBloodTween.kill();

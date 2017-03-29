@@ -51,10 +51,8 @@ package com.rpgGame.appModule.role
 	import org.mokylin.skin.app.beibao.juese_Skin;
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 	
-	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.events.Event;
-	import starling.events.TouchEvent;
 
 	/**
 	 *背包部分 

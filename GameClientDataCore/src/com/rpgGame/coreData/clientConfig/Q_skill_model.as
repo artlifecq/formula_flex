@@ -46,7 +46,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_blink_speed:int;
 		 /**  跳劈的高度，可以不配置 */
 		public var q_blink_height:int;
-		 /**  技能伤害类型（0默认攻击技能，1友好技能 2，通用敌对友好） */
+		 /**  技能伤害类型（0默认攻击技能，1友好技能 ） */
 		public var q_hurt_type:int;
 		 /**  作用对象（1自己，2友好目标，3敌对目标，4当前目标，5场景中鼠标的当前坐标点，6组队 7无目标） */
 		public var q_target:int;
@@ -72,14 +72,14 @@ package com.rpgGame.coreData.clientConfig
 		public var q_is_allow_auto_combat:int;
 		 /**  是否可以设为默认技能（0不可设为默认技能，1可以设为默认技能） */
 		public var q_default_enable:int;
+		 /**  是否是锁定技能，必须指定一个目标的技能（0不锁定，1锁定,2锁定死亡） */
+		public var q_is_locking_spell:int;
 		 /**  在无目标情况下是否自动寻找锁定目标(0否1是，如果选中目标不符合敌对关系，也算作没用无目标) */
 		public var q_auto_lock:int;
 		 /**  是否检查敌对关系（0不检查，1检查） */
 		public var q_check_relation:int;
 		 /**  在检查敌对关系不符的时候，是否自动选择一个目标(0不选择 1选择) */
 		public var q_check_relation_auto_lock:int;
-		 /**  是否是锁定技能，必须指定一个目标的技能（0不锁定，1锁定,2锁定死亡） */
-		public var q_is_locking_spell:int;
 		 /**  显示所需人物等级 */
 		public var q_show_needgrade:int;
 		 /**  战斗力加成 */
@@ -174,7 +174,9 @@ package com.rpgGame.coreData.clientConfig
 		public var q_summon_last:int;
 		 /**  召唤类型，1为怪物累加召唤，2为怪物替换召唤3地面特效累加，4为地面特效替换 */
 		public var q_summon_type:int;
-		 /**  BUFF触发器，JSON格式用于描述改技能释放后如如何触发各种BUFF。格式为:{t, id, max }{触发类型,作用目标，BuffID}t=触发类型: 1:命中，2:未命中,3:暴击 4:杀死 5攻击开始时触发被动技能，6技能释放后触发，7召唤触发BUFF , 8技能释放前触发，攻击目标id=buff的ID对应BUFF表。Max=一次攻击最多触发多少次.例子:[{t:1, id:1001, r:10000},{t:3, id:5040001, r:10000}]可以把里边值复制到http://www.json.cn.网站去查看 */
+		 /**  召唤物移除类型(1召唤者下线，2召唤者切换场景，3召唤者死亡，所有类型在召唤物时间到了都会移除) */
+		public var q_summon_remove_type:int;
+		 /**  BUFF触发器，JSON格式用于描述改技能释放后如如何触发各种BUFF。格式为:{t, id, max }{触发类型,作用目标，BuffID}t=触发类型: 1:命中，2:未命中,3:暴击 4:杀死 5攻击开始时触发被动技能，6技能释放后触发，7召唤触发BUFF , 8技能释放前触发，9防御触发，10死亡触发，11添加技能触发被动技能，攻击目标id=buff的ID对应BUFF表。Max=一次攻击最多触发多少次.例子:[{t:1, id:1001, r:10000},{t:3, id:5040001, r:10000}]可以把里边值复制到http://www.json.cn.网站去查看 */
 		public var q_buff_trigger:String;
 		 /**  技能回复消耗触发（tt=触发类型(和BUFF触发一致),tv=触发值,（目前支持命中数量）rt=回复类型(可回复资源类型，)，,rv=回复数值（为负则为扣除）），可支持多个触发，[{tt:1, tv:1001, rt:1,rv:10}],回复类型：100=仇恨，101=血量上限回复比例，102=魔法（能量），怒气12，金针13，弩塔14 */
 		public var q_recovers:String;

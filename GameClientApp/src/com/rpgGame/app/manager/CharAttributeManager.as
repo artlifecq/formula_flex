@@ -69,10 +69,6 @@ package com.rpgGame.app.manager
 						offset = attributeValue - oldValue;
 						updateMpBar(data);
 						EventManager.dispatchEvent(MainPlayerEvent.NOWMP_CHANGE, data);
-						if (data.id == MainRoleManager.actorID && offset > 0) //自己看到就好了
-						{
-							FightFaceHelper.showAttChange(EnumHurtType.ADDMP, offset);
-						}
 						break;
 					case CharAttributeType.PK_MODE:
 						//HeroData(data).pkMode = attributeValue;
