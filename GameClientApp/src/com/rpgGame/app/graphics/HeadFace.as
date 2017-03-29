@@ -8,17 +8,10 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.app.utils.Render3DTextUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
-	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
-	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.role.HeroData;
-	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.AttachDisplayType;
 	import com.rpgGame.coreData.type.SceneCharType;
-	
-	import flash.utils.getTimer;
-	
-	import app.message.MonsterDataProto.MonsterType;
 	
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
@@ -992,7 +985,8 @@ package com.rpgGame.app.graphics
 			showAndHideElement(_junXianBar, false);
 			showAndHideElement(_countryWarIcon, false);
 			showAndHideElement(_biaoFlagIcon, false);
-			showAndHideElement(_bloodBar, false);
+            onHideBlood();
+			//showAndHideElement(_bloodBar, false);
 			showAndHideElement(_icoImage, false);
 			showAndHideElement(_guildNameBar, false);
 			showAndHideElement(_familNameBar, false);

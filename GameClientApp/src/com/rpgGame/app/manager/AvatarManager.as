@@ -763,7 +763,7 @@ package com.rpgGame.app.manager
 		 * @param isUseforRacing 用于赛马模型，不显示坐骑
 		 *
 		 */
-		public static function callEquipmentChange(role : SceneRole, isUseforAvatar : Boolean = false, isMountBlank : Boolean = false) : void
+		public static function callEquipmentChange(role : SceneRole, isUseforAvatar : Boolean = false, isMountBlank : Boolean = false, updateBuff : Boolean = true) : void
 		{
 			if (!role || !role.usable)
 				return;
@@ -1121,7 +1121,7 @@ package com.rpgGame.app.manager
 				}
 				else
 				{
-					updateAvatar(role);
+					updateAvatar(role, updateBuff);
 				}
 			}
 			EventManager.dispatchEvent(AvatarEvent.EQUIP_CHANGE, role);

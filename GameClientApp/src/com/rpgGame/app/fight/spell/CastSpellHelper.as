@@ -3,6 +3,7 @@ package com.rpgGame.app.fight.spell
 	import com.game.engine2D.config.SceneConfig;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.utils.MathUtil;
+	import com.game.engine3D.utils.PathFinderUtil;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.AreaMapManager;
 	import com.rpgGame.app.manager.ShortcutsManger;
@@ -429,13 +430,20 @@ package com.rpgGame.app.fight.spell
                 if (0 == spellData.q_blink_type) {
                     angle = MathUtil.getAngle(selfPos.x, selfPos.y, releaseTargetPos.x, releaseTargetPos.y);
                     radian = angle * Math.PI / 180;
-                    dist = Point.distance(selfPos, releaseTargetPos);
+                    var temp : Number = Point.distance(selfPos, releaseTargetPos);
+                    dist = temp;
                     if (0 != releaseRange && dist > releaseRange) {
-                        // 距离大于最大释放距离
                         dist = dist - releaseRange;
-                        dist = dist < 0 ? 0 : dist;
-                        releasePos.x = selfPos.x + dist * Math.cos(radian);
-                        releasePos.y = selfPos.y + dist * Math.sin(radian);
+                        // 距离大于最大释放距离
+                        while (dist < temp) {
+                            dist = dist < 0 ? 0 : dist;
+                            releasePos.x = selfPos.x + dist * Math.cos(radian);
+                            releasePos.y = selfPos.y + dist * Math.sin(radian);
+                            if (PathFinderUtil.isPointInSide(SceneManager.getDistrict(), new Vector3D(releasePos.x, releasePos.y, 0))) {
+                                break;
+                            }
+                            dist += SceneConfig.TILE_HEIGHT;
+                        }
                     }
                 } else {
                     angle = 270 - MainRoleManager.actor.rotationY;
@@ -1020,7 +1028,7 @@ package com.rpgGame.app.fight.spell
                 if (0 == skillInfo.q_check_relation) {
                     return SceneRoleSelectManager.selectedRole;
                 }
-                modeState = FightManager.getFightRoleState(SceneRoleSelectManager.selectedRole, skillInfo);
+                modeState = FightManager.getFightRoleState(SceneRoleSelectManager.selectedRole, skillInfo, isDie);
                 if (FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT != modeState) {
                     return SceneRoleSelectManager.selectedRole;
                 }
@@ -1045,7 +1053,7 @@ package com.rpgGame.app.fight.spell
                 if (0 == skillInfo.q_check_relation) {
                     return role;
                 }
-                modeState = FightManager.getFightRoleState(role, skillInfo);
+                modeState = FightManager.getFightRoleState(role, skillInfo, isDie);
                 if (FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT == modeState) {
                     continue;
                 }
