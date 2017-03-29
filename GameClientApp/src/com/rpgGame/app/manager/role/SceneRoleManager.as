@@ -108,7 +108,7 @@ package com.rpgGame.app.manager.role
 			role.headFace = HeadFace.create(role);
 			
 			//执行主换装更新
-			AvatarManager.callEquipmentChange(role);
+			AvatarManager.callEquipmentChange(role, false, false, false);
 			
 			var renderLimitable : Boolean = false;
 			if (!isMainChar)
@@ -127,8 +127,12 @@ package com.rpgGame.app.manager.role
 			
 			role.setScale(data.sizeScale);
 			role.setGroundXY(data.x, data.y);
-			role.rotationY = data.direction;
+			role.rotationY = (270 + data.direction) % 360;
 			SceneManager.addSceneObjToScene(role, true, true, renderLimitable);
+            // 在换装时还未把role添加到场景 添加的buff无效
+            if (data.buffList.length > 0) {
+                role.buffSet.updateBuffEffects();
+            }
 			
 			CharAttributeManager.setCharHp(data, data.totalStat.hp);
 			CharAttributeManager.setCharMaxLife(data, data.totalStat.life); //需要提供初始化方法,优化一下!
@@ -181,7 +185,8 @@ package com.rpgGame.app.manager.role
 //			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(bornData ? bornData.q_body_res : "");
 			if (bornData.q_animation>0)
 			{
-				data.avatarInfo.effectResID = AnimationDataManager.getData(bornData.q_animation).role_res;
+				data.avatarInfo.bodyEffectID = AnimationDataManager.getData(bornData.q_animation).role_res;
+//				data.avatarInfo.effectResID = AnimationDataManager.getData(bornData.q_animation).role_res;
 			}
 			data.sizeScale = (bornData && bornData.q_scale > 0) ? (bornData.q_scale * 0.01) : 1;
 			//			data.totalStat.level = bornData ? bornData.q_grade : 0;

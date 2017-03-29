@@ -156,6 +156,13 @@ package com.rpgGame.coreData.type
 		 */
 		public static const UI_JIEMIAN_ZHANDOULI:String="ui_jiemian_zhandouli";
 
+		
+		
+		/**顶部经验条特效*/
+		public static const UI_JINGYANTIAO_JINDUHUANG:String="ui_jingyantiaojinduhuang";
+		public static const UI_JINGYANTIAO_JINDULV:String="ui_jingyantiaojindulv";
+		
+		
 		public function EffectUrl()
 		{
 		}

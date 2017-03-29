@@ -7,14 +7,10 @@ package game.rpgGame.login.scene
 	
 	import flash.geom.Vector3D;
 	
-	import game.rpgGame.login.ClientConfig;
 	import game.rpgGame.login.data.AvatarInfo;
 	import game.rpgGame.login.data.BoneNameEnum;
 	import game.rpgGame.login.data.RoleData;
-	import game.rpgGame.login.state.RoleStateMachine;
 	import game.rpgGame.login.state.RoleStateType;
-	
-	import org.client.mainCore.manager.EventManager;
 	
 	/**
 	 *

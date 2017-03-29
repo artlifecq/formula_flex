@@ -244,7 +244,7 @@ package com.rpgGame.app.manager.fight
 //				}
 					if(hurter.data.id!=MainRoleManager.actorID){
 						var headFace:HeadFace=hurter.headFace as HeadFace;
-						if(headFace){
+						if(headFace && !hurter.stateMachine.isDeadState){
 							headFace.showBloodBar();
 						}
 					}

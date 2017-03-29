@@ -10,6 +10,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.scene.animator.AnimatorLocusPoint;
 	import com.rpgGame.app.scene.animator.CommonTrajectoryAnimator;
 	import com.rpgGame.app.scene.animator.FrontAxleDoubleAroundAnimator;
+	import com.rpgGame.app.scene.animator.RibbonAnimator;
 	import com.rpgGame.coreData.AvatarInfo;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
@@ -566,14 +567,33 @@ package com.rpgGame.app.fight.spell
 			}
 		}
 		
-		public static function addLightEffect(info:ReleaseSpellInfo):void
+		private static var ribbonEffectID:uint = 0;
+		public static function addRibbonEffect(info:ReleaseSpellInfo):void
 		{
 			if (SceneManager.isSceneOtherRenderLimit)
 				return;
 			var imgUrl:String = info.ribbonImg;
 			if(imgUrl != null || imgUrl != null)
 			{
+				var effectSet : RenderSet3D = RenderSet3D.create(SceneCharType.SCENE_RIBBON_SPELL, ribbonEffectID,true);
+				effectSet.setGroundXY(info.atkor.x,info.atkor.z);
+				if (info.matchTerrain)
+				{
+					SceneManager.addSceneObjToScene(effectSet, true);
+				}
+				else
+				{
+					SceneManager.addSceneObjToScene(effectSet);
+				}
+				var ribbonAnimator : IRenderAnimator;
+				if (!ribbonAnimator)
+				{
+					ribbonAnimator = new RibbonAnimator();
+					(ribbonAnimator as RibbonAnimator).initRibbonData(imgUrl,info.flyTargets,info.atkor);
+					effectSet.setRenderAnimator(ribbonAnimator);
+				}
 				
+				ribbonEffectID++;
 			}
 		}
 		
