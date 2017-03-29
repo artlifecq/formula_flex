@@ -125,7 +125,7 @@ package com.rpgGame.app.manager.role
 			
 			role.setScale(data.sizeScale);
 			role.setGroundXY(data.x, data.y);
-			role.rotationY = data.direction;
+			role.rotationY = (270 + data.direction) % 360;
 			SceneManager.addSceneObjToScene(role, true, true, renderLimitable);
 			
 			CharAttributeManager.setCharHp(data, data.totalStat.hp);
