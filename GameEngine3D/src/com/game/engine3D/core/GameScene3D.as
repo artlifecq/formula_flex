@@ -1040,7 +1040,7 @@ package com.game.engine3D.core
 					_sceneAreaDirectionalLight = _entityAreaDirectionalLight;
 				validateAreaDirectionalLight();
 				//开始渲染
-				sceneRender.startRender();
+				sceneRender.startRender(true);
 				var baseObjList : Array = _sceneObjMap.getValues();
 				for (var i : int = baseObjList.length - 1; i > 0; i--)
 				{

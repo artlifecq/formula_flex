@@ -3,6 +3,7 @@ package com.rpgGame.app.fight.spell
 	import com.game.engine2D.config.SceneConfig;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.utils.MathUtil;
+	import com.game.engine3D.utils.PathFinderUtil;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.AreaMapManager;
 	import com.rpgGame.app.manager.ShortcutsManger;
