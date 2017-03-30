@@ -30,7 +30,7 @@ package com.rpgGame.appModule.skill
 		
 		private function initView():void
 		{
-			_skillStudyView=new SkillStudyView(_skin.jineng.skin as jineng_Skin);	
+			_skillStudyView=new SkillStudyView(_skin.jineng.skin as jineng_Skin,this);	
 			_navSkin=_skin.daohang.skin as Wuxue_Daohang;
 			_navSkin.btn_juexue.visible=false;
 		}

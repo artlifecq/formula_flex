@@ -1284,13 +1284,8 @@ package com.rpgGame.app.manager.goods
 			return getMrg(containerId).setAllItem(items);
 		}
 		
-		public static var waitingDropItem:ClientItemInfo;
 		public static function dropItem(item:ClientItemInfo):void
 		{
-			if(waitingDropItem != null)
-			{
-				return;
-			}
 			if(!item.canDelete)
 			{
 				GameAlert.showAlertUtil(LangAlertInfo.ITEM_CANT_DELETE,null,item.name);
@@ -1306,32 +1301,9 @@ package com.rpgGame.app.manager.goods
 //				GameAlert.debugShow("这个时候不能丢弃物品");
 				return;
 			}
-			waitingDropItem = item;
-			GameAlert.showAlertUtil(LangAlertInfo.DELETE_ITEM,onDeleteItemClick);
+			EventManager.dispatchEvent(ItemEvent.ITEM_DISCARDED, item);
 		}
 		
-		private static function onDeleteItemClick(gameAlert:GameAlert):void
-		{
-			switch(gameAlert.clickType)
-			{
-				case AlertClickTypeEnum.TYPE_SURE:
-					onDeleteItem();
-					break;
-				case AlertClickTypeEnum.TYPE_CANCEL:
-					onDeleteItemFail();
-					break;
-			}
-		}
-		
-		private static function onDeleteItem():void
-		{
-//			ItemSender.reqDropGoods(waitingDropItem.containerID,waitingDropItem.index, waitingDropItem.cfgId);
-		}
-		
-		private static function onDeleteItemFail():void
-		{
-			waitingDropItem = null;
-		}
 		/**设置容器是否显示锁定**/
 		public static function setShowLockAssetIndex(container:int,index:int):void
 		{

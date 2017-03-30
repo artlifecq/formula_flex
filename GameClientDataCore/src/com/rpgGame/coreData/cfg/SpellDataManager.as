@@ -29,6 +29,15 @@ package com.rpgGame.coreData.cfg
 		 */
 		private static var _jobBasicMap:HashMap=new HashMap();
 		
+		/**
+		 *一键升级 
+		 */
+		public static var oneKeyup:Boolean=false;
+		/**
+		 *不弹窗
+		 */
+		public static var unAlert:Boolean=false;
+		
 		public function SpellDataManager()
 		{
 		}
