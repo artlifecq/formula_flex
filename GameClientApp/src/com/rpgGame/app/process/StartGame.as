@@ -137,7 +137,6 @@ package com.rpgGame.app.process
 				//
 				MainRoleManager.initActor();
 				GlobalSettingManager.init();
-                RollManager.INSTANCE.init();
 				//
 
                 CONFIG::Debug {

@@ -30,8 +30,6 @@ package org.mokylin.skin.mainui.shortcut
 
 		public var fangun_n3:feathers.controls.UIAsset;
 
-		public var fangun_point:feathers.controls.UIAsset;
-
 		public var fangun_tiao:feathers.controls.UIAsset;
 
 		public var fangun_tishi:feathers.controls.UIAsset;
@@ -239,7 +237,7 @@ package org.mokylin.skin.mainui.shortcut
 			temp.width = 80;
 			temp.x = 88;
 			temp.y = 54;
-			temp.elementsContent = [fangun_n1_i(),fangun_n2_i(),fangun_n3_i(),fangun_tiao_i(),fangun_point_i(),fangun_tishi_i(),lbl_times_i()];
+			temp.elementsContent = [fangun_n1_i(),fangun_n2_i(),fangun_n3_i(),fangun_tiao_i(),fangun_tishi_i(),lbl_times_i()];
 			return temp;
 		}
 
@@ -273,17 +271,6 @@ package org.mokylin.skin.mainui.shortcut
 			temp.styleName = "ui/mainui/shortcut/lvse/lvse_3.png";
 			temp.x = 59;
 			temp.y = 13;
-			return temp;
-		}
-
-		private function fangun_point_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			fangun_point = temp;
-			temp.name = "fangun_point";
-			temp.styleName = "ui/mainui/shortcut/chengguang.png";
-			temp.x = 62;
-			temp.y = 41;
 			return temp;
 		}
 
@@ -429,11 +416,14 @@ package org.mokylin.skin.mainui.shortcut
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbl_times = temp;
 			temp.name = "lbl_times";
+			temp.height = 16;
 			temp.fontSize = 12;
 			temp.text = "15s";
+			temp.textAlign = "center";
 			temp.color = 0xB1ACA6;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 27;
+			temp.width = 80;
+			temp.x = 0;
 			temp.y = 29;
 			return temp;
 		}
