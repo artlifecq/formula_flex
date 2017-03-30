@@ -95,7 +95,10 @@ package com.rpgGame.app.ui.main.head {
                     this.showPKMode(target);
                     break;
                 case this._headImg:
-                    SceneRoleSelectManager.selectedRole = MainRoleManager.actor;
+                    // 医家
+                    if (JobEnum.ROLE_4_TYPE == MainRoleManager.actorInfo.job) {
+                        SceneRoleSelectManager.selectedRole = MainRoleManager.actor;
+                    }
                     break;
             }
         }
