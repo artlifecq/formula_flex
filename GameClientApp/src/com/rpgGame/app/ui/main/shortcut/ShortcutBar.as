@@ -1,7 +1,6 @@
 package com.rpgGame.app.ui.main.shortcut {
     import com.game.engine3D.display.InterObject3D;
     import com.game.engine3D.scene.render.RenderUnit3D;
-    import com.rpgGame.app.manager.RollManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.core.events.society.SocietyEvent;
     import com.rpgGame.core.ui.SkinUI;
@@ -17,7 +16,6 @@ package com.rpgGame.app.ui.main.shortcut {
     import org.mokylin.skin.mainui.shortcut.shortcut_Skin;
     
     import starling.display.DisplayObject;
-    import starling.display.Shape;
     import starling.display.Sprite;
     
     public class ShortcutBar extends SkinUI {
@@ -29,11 +27,11 @@ package com.rpgGame.app.ui.main.shortcut {
 		private var _jumpState:Vector.<UIAsset>;
 
 		private var renderUint:RenderUnit3D;
-        
+        private var _rollprogress:RollProgress;
         public function ShortcutBar() {
             this._skin = new shortcut_Skin();
             super(this._skin);
-			
+			 
 			init();
         }
 		
@@ -51,8 +49,8 @@ package com.rpgGame.app.ui.main.shortcut {
 		
 		private function init() : void
 		{
-			
 			skillBar = new ShortcutSkillBar(this);
+			_rollprogress = new RollProgress(this._skin);
 			//skillBar.layerBatch = true;
 //			_skin.grpTopGrids.visible = false;
 			this._skin.Icons.addChild(skillBar);
@@ -74,7 +72,6 @@ package com.rpgGame.app.ui.main.shortcut {
 //			_skin.botBgBar.touchable = false;
 //			_skin.botBgBar.touchAcross = true;
 			
-			initFanGunDis();
 			
 			initExp();
 			addSheHuiTab();
@@ -126,52 +123,15 @@ package com.rpgGame.app.ui.main.shortcut {
 			
 			var sp:Sprite=new Sprite();
 			sp.graphics.beginFill(0xff0000);
-			sp.graphics.drawCircle(0,0,10);
+			sp.graphics.drawRect(0,0,100,100);
             sp.graphics.endFill();
-			sp.x=110;
-			sp.y=50;
-			hp3D.mask=sp;
-			this.addChild(sp);
-		}
-		
-		private function initFanGunDis():void
-		{
-			_jumpState=new Vector.<UIAsset>();
-			_jumpState.push(_skin.fangun_n3);
-			_jumpState.push(_skin.fangun_n2);
-			_jumpState.push(_skin.fangun_n1);
-            EventManager.addEvent(RollManager.EVENT_UPDATE, onRollUpdate);
-            EventManager.addEvent(RollManager.EVENT_STARTCD, onRollStartCd);
-            EventManager.addEvent(RollManager.EVENT_ENDCD, onRollEndCd);
-            EventManager.addEvent(RollManager.EVENT_UPDATECD, onRollUpdateCd);
-            EventManager.addEvent(RollManager.EVENT_UPDATEUSECD, onRollUpdateUseCd);
-
-            var _mask : Shape = new Shape();
+//			sp.x=110;
+//			sp.y=50;
+			this._skin.left_xuecao.mask=sp;
+			this.addChild(sp);  
 		}
 
-        private function onRollUpdate(times : int) : void {
-            times = 3 - times;
-            for (var i : int = 0; i < 3; ++i) {
-                _jumpState[i].visible = i >= times;
-            }
-        }
-
-        private function onRollStartCd() : void {
-            this._skin.lbl_times.text = "15s";
-        }
-
-        private function onRollEndCd() : void {
-            this._skin.lbl_times.text = "0s";
-        }
-
-        private function onRollUpdateCd(useTime : int) : void {
-            this._skin.lbl_times.text = useTime + "s";
-        }
-
-        private function onRollUpdateUseCd(useTime : int) : void {
-            this._skin.lbl_times.text = (15 - useTime) + "s";
-        }
-		
+      
 		public function getBtnGlobalPos(btnName : String) : Point
 		{
 			if (btnName == null || btnName == "")
