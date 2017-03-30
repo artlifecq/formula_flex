@@ -6,9 +6,12 @@ package com.rpgGame.appModule.skill
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.SpellEvent;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.JobEnum;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.lang.LangSpell;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
@@ -71,7 +74,7 @@ package com.rpgGame.appModule.skill
 			
 			_jobTitle1=new JinengTitle_Skin();
 			_jobTitle2=new JinengTitle_Skin();
-			_jobTitle2.labelDisplay.text="其他技能";
+			_jobTitle2.labelDisplay.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT13);
 			_jobTl1=_jobTitle1.toSprite();
 			_jobTl2=_jobTitle2.toSprite();
 			_skillContainer.addChild(_jobTl1);
@@ -193,7 +196,7 @@ package com.rpgGame.appModule.skill
 			_skin.tab_zizhi.removeEventListener(Event.CHANGE, onTab);
 			EventManager.removeEvent(SpellEvent.SELECTE_SPELL,selecteSpell);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateChange);
-			EventManager.removeEvent(SpellEvent.SPELL_UPDATE,updateSkillList);
+			EventManager.removeEvent(SpellEvent.SPELL_ADD,updateSkillList);
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,updateChange);
 			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateChange);
 			skillUpgrade.onHide();
@@ -207,18 +210,24 @@ package com.rpgGame.appModule.skill
 			_skin.tab_zizhi.addEventListener(Event.CHANGE, onTab);
 			EventManager.addEvent(SpellEvent.SELECTE_SPELL,selecteSpell);
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateChange);
-			EventManager.addEvent(SpellEvent.SPELL_UPDATE,updateSkillList);
-			EventManager.addEvent(ItemEvent.ITEM_ADD,updateChange);
+			EventManager.addEvent(SpellEvent.SPELL_ADD,updateSkillList);
+			EventManager.addEvent(ItemEvent.ITEM_ADD,addItem);
 			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateChange);
 			EventManager.addEvent(SpellEvent.SPELL_UPGRADE,spellUpgrade);
 			EventManager.addEvent(SpellEvent.SPELL_RISE,spellRise);
 		}
 		
+		private function addItem(itemInfo : ClientItemInfo) : void
+		{
+			if (!itemInfo)
+				return;
+			updateChange();			
+		}
+		
 		private function spellRise(lv:int):void
 		{
 			UIPopManager.showPopUI(SkillOkPop,lv);
-			skillUpgrade.update(selectedItem.skillCfg,selectedItem.skillInfo);
-			skillRise.update(selectedItem.skillCfg,selectedItem.skillInfo);
+			updateSkillList();
 		}
 		
 		private function spellUpgrade(lv:int):void

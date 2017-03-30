@@ -19,7 +19,7 @@ package com.rpgGame.core.events
 		/**
 		 *技能更新 
 		 */
-		public static const SPELL_UPDATE:int = UNIQUEID.NEXT;
+		public static const SPELL_ADD:int = UNIQUEID.NEXT;
 		/**
 		 *技能升级 
 		 */

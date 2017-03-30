@@ -6,9 +6,7 @@ package com.rpgGame.app.fight.spell
 	
 	import gs.TimelineLite;
 	import gs.TweenLite;
-	import gs.easing.Elastic;
 	
-	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow;
 	import org.mokylin.skin.mainui.zhandouli.ZhandouliTipSkin;
 	
 	/**

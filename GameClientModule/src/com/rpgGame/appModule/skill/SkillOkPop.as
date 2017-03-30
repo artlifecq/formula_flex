@@ -3,6 +3,7 @@ package com.rpgGame.appModule.skill
 	import com.rpgGame.app.display2D.PopSkinUI;
 	
 	import gs.TweenLite;
+	import gs.easing.Cubic;
 	
 	import org.mokylin.skin.app.wuxue.jineng.Jineng_UpSkin;
 	
@@ -35,7 +36,9 @@ package com.rpgGame.appModule.skill
 		
 		private function tweenMis():void
 		{
-			TweenLite.to(this._skin.container,1,{y:this._skin.container.y-20,alpha:0,onComplete:popComplete});			
+			
+			var endy:int=this._skin.container.y-40;
+			TweenLite.to(this._skin.container,1,{y:endy,alpha:0,onComplete:popComplete,ease:Cubic.easeOut});		
 		}
 		
 		override protected function onStageResize(sw : int, sh : int) : void

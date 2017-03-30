@@ -22,6 +22,10 @@ package com.rpgGame.coreData.clientConfig
 		public var q_skillpanel_description1:String;
 		 /**  技能面板上的技能进阶效果描述 */
 		public var q_skillpanel_description2:String;
+		 /**  技能类型 */
+		public var q_type_description:String;
+		 /**  技能升级属性对应字段(0伤害加深 1召唤物秒伤 2仇恨值 3血量上限比例) */
+		public var q_skill_attr_type:int;
 		 /**  职业技能(1:兵家 2：墨家男3：墨家女 4：医家 0：不分职业-公共技能) */
 		public var q_job:int;
 		 /**  技能阶数(不能超过255) */

@@ -12,6 +12,38 @@ package com.rpgGame.coreData.lang
 	*/
 	public class LangSpell
 	{
+		 /**  等级: */
+		public static const SPELL_PANEL_TEXT1:String = "SPELL_PANEL_TEXT1";
+		 /**  未激活进阶效果 */
+		public static const SPELL_PANEL_TEXT2:String = "SPELL_PANEL_TEXT2";
+		 /**  已激活进阶效果 */
+		public static const SPELL_PANEL_TEXT3:String = "SPELL_PANEL_TEXT3";
+		 /**  冷却时间 */
+		public static const SPELL_PANEL_TEXT4:String = "SPELL_PANEL_TEXT4";
+		 /**  消耗 */
+		public static const SPELL_PANEL_TEXT5:String = "SPELL_PANEL_TEXT5";
+		 /**  技能类型 */
+		public static const SPELL_PANEL_TEXT6:String = "SPELL_PANEL_TEXT6";
+		 /**  消耗绑银 */
+		public static const SPELL_PANEL_TEXT7:String = "SPELL_PANEL_TEXT7";
+		 /**  消耗真气 */
+		public static const SPELL_PANEL_TEXT8:String = "SPELL_PANEL_TEXT8";
+		 /**  下级效果 */
+		public static const SPELL_PANEL_TEXT9:String = "SPELL_PANEL_TEXT9";
+		 /**  人物等级 */
+		public static const SPELL_PANEL_TEXT10:String = "SPELL_PANEL_TEXT10";
+		 /**  升级效果 */
+		public static const SPELL_PANEL_TEXT11:String = "SPELL_PANEL_TEXT11";
+		 /**  无 */
+		public static const SPELL_PANEL_TEXT12:String = "SPELL_PANEL_TEXT12";
+		 /**  其他技能 */
+		public static const SPELL_PANEL_TEXT13:String = "SPELL_PANEL_TEXT13";
+		 /**  技能可升至$级 */
+		public static const SPELL_PANEL_TEXT14:String = "SPELL_PANEL_TEXT14";
+		 /**  人物等级 */
+		public static const SPELL_PANEL_TEXT15:String = "SPELL_PANEL_TEXT15";
+		 /**  级自动获得 */
+		public static const SPELL_PANEL_TEXT16:String = "SPELL_PANEL_TEXT16";
 		 /**  左键单击释放 */
 		public static const SPELL_TIPS_INFO1:String = "SPELL_TIPS_INFO1";
 		 /**  攻击距离：$米 */

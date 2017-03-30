@@ -75,9 +75,9 @@ package com.rpgGame.core.ui
 		private function __onRemoveFromStage(e : Event = null) : void
 		{
 			stopRender3D();
-			onHide();
 			_stage.removeEventListener(Event.RESIZE, __onStageResize);
 			this.removeEventListener(starling.events.TouchEvent.TOUCH, onTouch);
+			onHide();
 		}
 
 		protected function onStageResize(sw : int, sh : int) : void

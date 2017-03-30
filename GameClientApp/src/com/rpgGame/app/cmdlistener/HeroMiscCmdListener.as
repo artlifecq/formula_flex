@@ -2,6 +2,7 @@ package com.rpgGame.app.cmdlistener
 {
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.FightChangePop;
+	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.ClientSettingManager;
@@ -109,7 +110,8 @@ package com.rpgGame.app.cmdlistener
 		{
 			var roleData : HeroData = MainRoleManager.actorInfo;
 			roleData.spellList.addSkillData(msg.skillInfo);
-			EventManager.dispatchEvent(SpellEvent.SPELL_UPDATE);
+			UIPopManager.showPopUI(SkillAddPop,msg.skillInfo);
+			EventManager.dispatchEvent(SpellEvent.SPELL_ADD);
 		}
 		
 		private function RecvResSkillChangeMessage(msg:ResSkillChangeMessage):void

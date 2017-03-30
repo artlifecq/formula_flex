@@ -26,5 +26,10 @@ package com.rpgGame.app.display2D
 			showEnd();
 			StarlingLayerManager.topUILayer.removeChild(this);
 		}
+		
+		override protected function onHide():void
+		{
+			this.dispose();
+		}
 	}
 }
