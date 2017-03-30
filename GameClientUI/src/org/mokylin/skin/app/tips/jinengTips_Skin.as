@@ -26,9 +26,11 @@ package org.mokylin.skin.app.tips
 
 		public var grp_line:feathers.controls.Group;
 
-		public var grp_shuoming:feathers.controls.Group;
+		public var grp_rise_content:feathers.controls.Group;
 
-		public var grp_time:feathers.controls.Group;
+		public var grp_rise_tite:feathers.controls.Group;
+
+		public var grp_shuoming:feathers.controls.Group;
 
 		public var is_act:feathers.controls.Label;
 
@@ -63,7 +65,7 @@ package org.mokylin.skin.app.tips
 			this.currentState = "normal";
 			this.height = 320;
 			this.width = 298;
-			this.elementsContent = [bg_i(),grp_line_i(),Icon_i(),grp_head_i(),grp_shuoming_i(),grp_time_i(),__jinengTips_Skin_Group1_i(),mc_dengjie_i()];
+			this.elementsContent = [bg_i(),grp_line_i(),Icon_i(),grp_head_i(),grp_shuoming_i(),grp_rise_content_i(),grp_rise_tite_i(),mc_dengjie_i()];
 			
 			states = {
 			};
@@ -82,15 +84,6 @@ package org.mokylin.skin.app.tips
 			temp.styleName = "ui/common/gezikuang/tubiaodikuang/64.png";
 			temp.x = 10;
 			temp.y = 12;
-			return temp;
-		}
-
-		private function __jinengTips_Skin_Group1_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.x = 47;
-			temp.y = 211;
-			temp.elementsContent = [__jinengTips_Skin_UIAsset2_i(),__jinengTips_Skin_UIAsset3_i(),__jinengTips_Skin_Label3_i()];
 			return temp;
 		}
 
@@ -190,6 +183,28 @@ package org.mokylin.skin.app.tips
 			return temp;
 		}
 
+		private function grp_rise_content_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			grp_rise_content = temp;
+			temp.name = "grp_rise_content";
+			temp.x = 25;
+			temp.y = 248;
+			temp.elementsContent = [__jinengTips_Skin_UIAsset1_i(),rise_name_i(),is_act_i(),rise_des_i()];
+			return temp;
+		}
+
+		private function grp_rise_tite_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			grp_rise_tite = temp;
+			temp.name = "grp_rise_tite";
+			temp.x = 47;
+			temp.y = 211;
+			temp.elementsContent = [__jinengTips_Skin_UIAsset2_i(),__jinengTips_Skin_UIAsset3_i(),__jinengTips_Skin_Label3_i()];
+			return temp;
+		}
+
 		private function grp_shuoming_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -198,17 +213,6 @@ package org.mokylin.skin.app.tips
 			temp.x = 7;
 			temp.y = 107;
 			temp.elementsContent = [lbl_jinengName_i(),lbl_miaosu_i()];
-			return temp;
-		}
-
-		private function grp_time_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			grp_time = temp;
-			temp.name = "grp_time";
-			temp.x = 25;
-			temp.y = 248;
-			temp.elementsContent = [__jinengTips_Skin_UIAsset1_i(),rise_name_i(),is_act_i(),rise_des_i()];
 			return temp;
 		}
 

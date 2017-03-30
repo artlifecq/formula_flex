@@ -241,9 +241,9 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.textAlign = "left";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 146;
-			temp.x = 117;
-			temp.y = 289;
+			temp.width = 330;
+			temp.x = 16;
+			temp.y = 287;
 			return temp;
 		}
 
@@ -297,9 +297,9 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.letterSpacing = 1;
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 146;
-			temp.x = 117;
-			temp.y = 335;
+			temp.width = 330;
+			temp.x = 16;
+			temp.y = 333;
 			return temp;
 		}
 
@@ -312,9 +312,9 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.letterSpacing = 1;
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 146;
-			temp.x = 117;
-			temp.y = 311;
+			temp.width = 330;
+			temp.x = 16;
+			temp.y = 309;
 			return temp;
 		}
 

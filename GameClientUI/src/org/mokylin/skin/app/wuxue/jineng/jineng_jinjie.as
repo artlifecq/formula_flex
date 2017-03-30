@@ -163,11 +163,12 @@ package org.mokylin.skin.app.wuxue.jineng
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_daoju = temp;
 			temp.name = "lb_daoju";
-			temp.htmlText = "消耗道具：<font color='#5DBD37'>技能书残页</font><font color='#CFC6AE'>（0/1）</font>";
+			temp.height = 24;
 			temp.letterSpacing = 1;
+			temp.text = "消耗道具：";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 250;
+			temp.width = 80;
 			temp.x = 0;
 			temp.y = 106;
 			return temp;
@@ -280,7 +281,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.letterSpacing = 1;
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 170;
+			temp.width = 320;
 			temp.x = 0;
 			temp.y = 28;
 			return temp;
@@ -322,7 +323,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.letterSpacing = 1;
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 170;
+			temp.width = 320;
 			temp.x = 0;
 			temp.y = 79;
 			return temp;
@@ -337,7 +338,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.letterSpacing = 1;
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 170;
+			temp.width = 320;
 			temp.x = 0;
 			temp.y = 52;
 			return temp;

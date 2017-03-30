@@ -50,9 +50,14 @@ package com.rpgGame.coreData.info.fight.skill
 			_skillInfoMap.clear();
 			for each (var spellInfo : SkillInfo in msg.skills)
 			{
-				addSpell(SpellDataManager.getSpellData(spellInfo.skillModelId,spellInfo.skillLevel));
-				addSkillInfo(spellInfo);
+				addSkillData(spellInfo);
 			}
+		}
+		
+		public function addSkillData(spellInfo:SkillInfo):void
+		{
+			addSpell(SpellDataManager.getSpellData(spellInfo.skillModelId,spellInfo.skillLevel));
+			addSkillInfo(spellInfo);
 		}
 		
 		private function addSkillInfo(spellInfo:SkillInfo):void

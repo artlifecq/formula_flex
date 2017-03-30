@@ -32,8 +32,12 @@ package com.rpgGame.coreData.clientConfig
 		public var q_playerlevel:int;
 		 /**  召唤物继承召唤者的生命值比例（万分比分子），如果不填，和档案表属性是叠加关系 */
 		public var q_summon_hp:int;
-		 /**  召唤的幻象分身，攻击力比例（万分比分子） */
-		public var q_summon_attack:int;
+		 /**  召唤的幻象分身秒伤比例（万分比分子） */
+		public var q_summon_shang:int;
+		 /**  仇恨值 */
+		public var q_hatred:int;
+		 /**  血量上限比例(万分比) */
+		public var q_maxhp_per:int;
 		 /**  升级所需军衔等级(从本级升至下一级) */
 		public var q_militaryrank:int;
 		 /**  BUFF触发率额外系数(万分比) */

@@ -12,6 +12,38 @@ package com.rpgGame.coreData.lang
 	*/
 	public class LangSpell
 	{
+		 /**  等级: */
+		public static const SPELL_PANEL_TEXT1:String = "SPELL_PANEL_TEXT1";
+		 /**  未激活进阶效果 */
+		public static const SPELL_PANEL_TEXT2:String = "SPELL_PANEL_TEXT2";
+		 /**  已激活进阶效果 */
+		public static const SPELL_PANEL_TEXT3:String = "SPELL_PANEL_TEXT3";
+		 /**  冷却时间 */
+		public static const SPELL_PANEL_TEXT4:String = "SPELL_PANEL_TEXT4";
+		 /**  消耗 */
+		public static const SPELL_PANEL_TEXT5:String = "SPELL_PANEL_TEXT5";
+		 /**  技能类型 */
+		public static const SPELL_PANEL_TEXT6:String = "SPELL_PANEL_TEXT6";
+		 /**  消耗绑银 */
+		public static const SPELL_PANEL_TEXT7:String = "SPELL_PANEL_TEXT7";
+		 /**  消耗真气 */
+		public static const SPELL_PANEL_TEXT8:String = "SPELL_PANEL_TEXT8";
+		 /**  下级效果 */
+		public static const SPELL_PANEL_TEXT9:String = "SPELL_PANEL_TEXT9";
+		 /**  人物等级 */
+		public static const SPELL_PANEL_TEXT10:String = "SPELL_PANEL_TEXT10";
+		 /**  升级效果 */
+		public static const SPELL_PANEL_TEXT11:String = "SPELL_PANEL_TEXT11";
+		 /**  无 */
+		public static const SPELL_PANEL_TEXT12:String = "SPELL_PANEL_TEXT12";
+		 /**  其他技能 */
+		public static const SPELL_PANEL_TEXT13:String = "SPELL_PANEL_TEXT13";
+		 /**  技能可升至$级 */
+		public static const SPELL_PANEL_TEXT14:String = "SPELL_PANEL_TEXT14";
+		 /**  人物等级 */
+		public static const SPELL_PANEL_TEXT15:String = "SPELL_PANEL_TEXT15";
+		 /**  级自动获得 */
+		public static const SPELL_PANEL_TEXT16:String = "SPELL_PANEL_TEXT16";
 		 /**  左键单击释放 */
 		public static const SPELL_TIPS_INFO1:String = "SPELL_TIPS_INFO1";
 		 /**  攻击距离：$米 */
@@ -136,6 +168,54 @@ package com.rpgGame.coreData.lang
 		public static const SPELL_RELEASE_FAIL_29:String = "SPELL_RELEASE_FAIL_29";
 		 /**  禁技 */
 		public static const SPELL_RELEASE_FAIL_30:String = "SPELL_RELEASE_FAIL_30";
+		 /**  $每次攻击造成的秒伤伤害 */
+		public static const SPELL_1001:String = "SPELL_1001";
+		 /**  $冲锋造成的秒伤伤害 */
+		public static const SPELL_1002:String = "SPELL_1002";
+		 /**  $对敌方造成的秒伤伤害 */
+		public static const SPELL_1003:String = "SPELL_1003";
+		 /**  $刺出的每枪造成的秒伤伤害 */
+		public static const SPELL_1004:String = "SPELL_1004";
+		 /**  $骑兵每次攻击造成的秒伤伤害 */
+		public static const SPELL_1005:String = "SPELL_1005";
+		 /**  $伤害减免效果 */
+		public static const SPELL_1006:String = "SPELL_1006";
+		 /**  $嘲讽增加的仇恨值 */
+		public static const SPELL_1007:String = "SPELL_1007";
+		 /**  $六连击总计造成的秒伤伤害 */
+		public static const SPELL_1008:String = "SPELL_1008";
+		 /**  $对敌方造成的秒伤伤害 */
+		public static const SPELL_2001:String = "SPELL_2001";
+		 /**  $弩塔对应的角色秒伤伤害 */
+		public static const SPELL_2002:String = "SPELL_2002";
+		 /**  $陷阱触发时的秒伤伤害 */
+		public static const SPELL_2003:String = "SPELL_2003";
+		 /**  $对敌方造成的秒伤伤害 */
+		public static const SPELL_2004:String = "SPELL_2004";
+		 /**  $每根箭矢造成的秒伤伤害 */
+		public static const SPELL_2005:String = "SPELL_2005";
+		 /**   */
+		public static const SPELL_2006:String = "SPELL_2006";
+		 /**   */
+		public static const SPELL_2007:String = "SPELL_2007";
+		 /**  $防御减伤效果 */
+		public static const SPELL_2008:String = "SPELL_2008";
+		 /**  $对敌方造成的秒伤伤害 */
+		public static const SPELL_3001:String = "SPELL_3001";
+		 /**  $对第一个目标造成的秒伤伤害 */
+		public static const SPELL_3002:String = "SPELL_3002";
+		 /**  $每0.5s造成的秒伤伤害 */
+		public static const SPELL_3003:String = "SPELL_3003";
+		 /**  $复活时的血量 */
+		public static const SPELL_3004:String = "SPELL_3004";
+		 /**  $恢复血量效果 */
+		public static const SPELL_3005:String = "SPELL_3005";
+		 /**  $恢复血量效果 */
+		public static const SPELL_3006:String = "SPELL_3006";
+		 /**  $恢复血量效果 */
+		public static const SPELL_3007:String = "SPELL_3007";
+		 /**  $金针单次攻击造成的秒伤伤害 */
+		public static const SPELL_3008:String = "SPELL_3008";
 
 	}
 }
