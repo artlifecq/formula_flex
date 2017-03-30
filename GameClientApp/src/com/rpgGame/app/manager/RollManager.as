@@ -58,6 +58,10 @@ package com.rpgGame.app.manager {
 				EventManager.dispatchEvent(RollManager.ROLL_STARTROLL);
 			} 
 			_curCount --;
+			if(_curCount ==0)
+			{
+				_beginUseTime = SystemTimeManager.curtTm - USE_TIMES;
+			}
 			EventManager.dispatchEvent(RollManager.ROLL_USE);
 			return true;
 		}

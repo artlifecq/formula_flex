@@ -62,6 +62,7 @@ package com.rpgGame.app.ui.main.shortcut
 			_stateList.push(_skin.fangun_n1);
 			_stateList.push(_skin.fangun_n2);
 			_stateList.push(_skin.fangun_n3);
+			advanceTime(0);
 		}
 		
 		private function formatNumber(num:Number):String
@@ -110,10 +111,10 @@ package com.rpgGame.app.ui.main.shortcut
 				endAngle = 2*Math.PI;
 			}
 			_mask.rotation = endAngle;
-			_skin.fangun_point.rotation = endAngle;
+			/*_skin.fangun_point.rotation = endAngle;
 			endAngle -=0.2;
 			_skin.fangun_point.x = Math.cos(endAngle) * 23 + 41;
-			_skin.fangun_point.y = Math.sin(endAngle) * 23+ 45;
+			_skin.fangun_point.y = Math.sin(endAngle) * 23+ 45;*/
 		}
 	}
 }
