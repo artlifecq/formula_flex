@@ -33,6 +33,14 @@ package com.rpgGame.coreData.type
 		 *红血条 
 		 */
 		public static const XUE_TIAO_HONG : String = "ui_xuetiaohong";
+		/**
+		 *金血条 
+		 */
+		public static const XUE_TIAO_JIN : String = "ui_xuetiaojin";
+		/**
+		 *蓝血条 
+		 */
+		public static const XUE_TIAO_LAN : String = "ui_xuetiaolan";
 
 		/**偷经0 白**/
 		public static const SCRIPTURES0 : String = "tx_duojin_bai";

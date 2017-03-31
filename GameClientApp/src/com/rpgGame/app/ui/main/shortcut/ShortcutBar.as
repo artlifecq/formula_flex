@@ -2,10 +2,12 @@ package com.rpgGame.app.ui.main.shortcut {
     import com.game.engine3D.display.InterObject3D;
     import com.game.engine3D.scene.render.RenderUnit3D;
     import com.rpgGame.app.manager.role.MainRoleManager;
+    import com.rpgGame.core.events.MainPlayerEvent;
     import com.rpgGame.core.events.society.SocietyEvent;
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.enum.JobEnum;
+    import com.rpgGame.coreData.role.RoleData;
     import com.rpgGame.coreData.type.EffectUrl;
     
     import flash.geom.Point;
@@ -47,10 +49,28 @@ package com.rpgGame.app.ui.main.shortcut {
 			}
 		}
 		
+		public function addChild3DAt(child : InterObject3D,index:int) : void
+		{
+			this.addChildAt(child,index);
+			if (!_inter3DObjs)
+			{
+				_inter3DObjs = new Vector.<InterObject3D>();
+			}
+			if (_inter3DObjs.indexOf(child) < 0)
+			{
+				_inter3DObjs.push(child);
+				
+				_numChildren3D++;
+			}
+			child.start();
+		}
+		
 		private function init() : void
 		{
 			skillBar = new ShortcutSkillBar(this);
 			_rollprogress = new RollProgress(this._skin);
+			var leftp:HpPropgressBar = new HpPropgressBar(this,0,_skin);
+			var rightp:HpPropgressBar = new HpPropgressBar(this,1,_skin);
 			//skillBar.layerBatch = true;
 //			_skin.grpTopGrids.visible = false;
 			this._skin.Icons.addChild(skillBar);
@@ -76,8 +96,6 @@ package com.rpgGame.app.ui.main.shortcut {
 			initExp();
 			addSheHuiTab();
 			
-			addEft();
-			
 			this._skin.jingzhen_yijia.visible=MainRoleManager.actorInfo.job==JobEnum.ROLE_3_TYPE;
 			
 			if (!ClientConfig.isBanShu)
@@ -102,15 +120,10 @@ package com.rpgGame.app.ui.main.shortcut {
 			//			{
 			//				_skin.btnMount.visible = false;
 			//			}
+			
 		}
 		
-		private function addEft():void
-		{
-			var hp3D:InterObject3D= this.playInter3DAt(ClientConfig.getEffect(EffectUrl.XUE_TIAO_HONG),0,0,0);
-			hp3D.touchable=false;
-			renderUint=RenderUnit3D(hp3D.baseObj3D);
-			renderUint.setAddedCallBack(onAddHpEft,hp3D);
-		}
+		
 		
 		private function onAddHpEft(hp3D:InterObject3D,renderUint:RenderUnit3D):void
 		{
