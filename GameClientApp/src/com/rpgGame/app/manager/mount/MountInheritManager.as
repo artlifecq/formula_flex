@@ -4,7 +4,7 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.events.mount.MountEvent;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.MountBeastCardInfo;
 	import com.rpgGame.coreData.info.mount.MountInfoData;
 	
@@ -68,7 +68,7 @@ package com.rpgGame.app.manager.mount
 		 */		
 		private static function updateMountBreadCarInfo( idx:int, inheritNewVitality:int, inheritNewVitalityExp:int, isInheritMountVitalityExp:Boolean, isInheritMountSpell:Boolean, index:int ):void
 		{
-			var itemInfo:ItemInfo = BackPackManager.instance.getItemInfoByIndex( index );
+			var itemInfo:ClientItemInfo = BackPackManager.instance.getItemInfoByIndex( index );
 			if( itemInfo == null )
 				return;
 			
@@ -135,7 +135,7 @@ package com.rpgGame.app.manager.mount
 			mountCardInfo.exp = mountBreastCardInfo.exp;
 			mountCardInfo.hungerDegree = mountBreastCardInfo.hungerDegree;
 			mountCardInfo.isBreed = mountBreastCardInfo.isBreed;
-			mountCardInfo.mountLevel = mountBreastCardInfo.level;
+//			mountCardInfo.mountLevel = mountBreastCardInfo.level;
 			mountCardInfo.lifeTime = mountBreastCardInfo.lifeTime;
 			mountCardInfo.sex = mountBreastCardInfo.sex;
 			mountCardInfo.unidentified = mountBreastCardInfo.unidentified;

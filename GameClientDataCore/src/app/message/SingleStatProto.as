@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STAT_TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.SingleStatProto.stat_type", "statType", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.StatType);
+		public static const STAT_TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.SingleStatProto.stat_type", "statType", (1 << 3) | com.netease.protobuf.WireType.VARINT, Object);
 
 		private var stat_type$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const VALUE:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.SingleStatProto.value", "value", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const VALUE:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.SingleStatProto.value", "value", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var value$field:Int64;
 
@@ -65,7 +65,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PERCENT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SingleStatProto.percent", "percent", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PERCENT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SingleStatProto.percent", "percent", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var percent$field:int;
 
@@ -93,15 +93,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasStatType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, stat_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, stat_type$field);
 			}
 			if (hasValue) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, value$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, value$field);
 			}
 			if (hasPercent) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, percent$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, percent$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -116,28 +116,28 @@ package app.message {
 			var value$count:uint = 0;
 			var percent$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (stat_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SingleStatProto.statType cannot be set twice.');
 					}
 					++stat_type$count;
-					this.statType = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.statType = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 2:
 					if (value$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SingleStatProto.value cannot be set twice.');
 					}
 					++value$count;
-					this.value = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.value = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 3:
 					if (percent$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SingleStatProto.percent cannot be set twice.');
 					}
 					++percent$count;
-					this.percent = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.percent = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

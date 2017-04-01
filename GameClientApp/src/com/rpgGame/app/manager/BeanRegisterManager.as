@@ -3,10 +3,9 @@
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.cmdlistener.AddSpriteStatCmdListener;
 	import com.rpgGame.app.cmdlistener.BaZhenTuCmdListener;
-	import com.rpgGame.app.cmdlistener.BiaoJuCmdListener;
+	import com.rpgGame.app.cmdlistener.BuffCmdListener;
 	import com.rpgGame.app.cmdlistener.ChatCmdListener;
 	import com.rpgGame.app.cmdlistener.DaTiCmdListener;
-	import com.rpgGame.app.cmdlistener.EquipmentCmdListener;
 	import com.rpgGame.app.cmdlistener.FriendCmdListener;
 	import com.rpgGame.app.cmdlistener.GMCmdListener;
 	import com.rpgGame.app.cmdlistener.GoodsContainerCmdListener;
@@ -15,7 +14,6 @@
 	import com.rpgGame.app.cmdlistener.HeroSearchCmdListener;
 	import com.rpgGame.app.cmdlistener.LookCmdListener;
 	import com.rpgGame.app.cmdlistener.MailCmdListener;
-	import com.rpgGame.app.cmdlistener.MazeCmdListener;
 	import com.rpgGame.app.cmdlistener.MiscCmdListener;
 	import com.rpgGame.app.cmdlistener.NpcCmdListener;
 	import com.rpgGame.app.cmdlistener.RoleStateCmdListener;
@@ -26,17 +24,9 @@
 	import com.rpgGame.app.cmdlistener.TeamCmdListener;
 	import com.rpgGame.app.cmdlistener.TeamMemberPosCmdListener;
 	import com.rpgGame.app.cmdlistener.TradeCmdlistener;
-	import com.rpgGame.app.cmdlistener.YunBiaoCmdListener;
 	import com.rpgGame.app.cmdlistener.clientConfig.ClientConfigCmdListener;
-	import com.rpgGame.app.cmdlistener.country.CountryCmdListener;
-	import com.rpgGame.app.cmdlistener.country.CountryTaoNiCmdListener;
-	import com.rpgGame.app.cmdlistener.country.CountryWarCmdListener;
-	import com.rpgGame.app.cmdlistener.country.TransferCmdListener;
-	import com.rpgGame.app.cmdlistener.crown.CrownCmdListener;
 	import com.rpgGame.app.cmdlistener.engine.InteractiveCmdListener;
 	import com.rpgGame.app.cmdlistener.engine.KeyboardCmdListener;
-	import com.rpgGame.app.cmdlistener.familyWar.FamilyWarCmdListener;
-	import com.rpgGame.app.cmdlistener.login.LoginCmdListener;
 	import com.rpgGame.app.cmdlistener.mount.MountCmdListener;
 	import com.rpgGame.app.cmdlistener.scene.SceneCmdListener;
 	import com.rpgGame.app.cmdlistener.scene.SceneReleliveCmdListener;
@@ -45,12 +35,6 @@
 	import com.rpgGame.app.cmdlistener.scene.SceneUICmdListener;
 	import com.rpgGame.app.cmdlistener.scene.StoryDungeonCmdListener;
 	import com.rpgGame.app.cmdlistener.society.SocietyCmdListener;
-	import com.rpgGame.app.cmdlistener.task.DailyTasksCmdListener;
-	import com.rpgGame.app.cmdlistener.task.MiXinCmdListener;
-	import com.rpgGame.app.cmdlistener.task.TaskCmdListener;
-	import com.rpgGame.app.cmdlistener.task.TouJingCmdListener;
-	import com.rpgGame.app.cmdlistener.task.TouZhuCmdListener;
-	import com.rpgGame.app.cmdlistener.yuMaQiShou.YuMaQiShouCmdListener;
 	
 	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
@@ -100,25 +84,26 @@
 			register("ClientConfigCmdListener", ClientConfigCmdListener);
 			register("MiscCmdListener", MiscCmdListener);
 			register("HeroMiscCmdListener", HeroMiscCmdListener);
-			register("LoginCmdListener", LoginCmdListener);
+//			register("LoginCmdListener", LoginCmdListener);
 			register("SceneCmdListener", SceneCmdListener);
 			register("StoryDungeonCmdListener", StoryDungeonCmdListener);
 			register("SceneSpellCmdListener", SceneSpellCmdListener);
-			register("EquipmentCmdListener", EquipmentCmdListener);
+			register("BuffCmdListener",BuffCmdListener);
+//			register("EquipmentCmdListener", EquipmentCmdListener);
 			register("SummonCmdListener", SummonCmdListener);
 			register("GMCmdListener", GMCmdListener);
 			register("SceneReleliveCmdListener", SceneReleliveCmdListener);
-			register("CountryWarCmdListener", CountryWarCmdListener); //模块号98
-			register("CountryCmdListener", CountryCmdListener); //模块号104
-			register("CountryTaoNiCmdListener", CountryTaoNiCmdListener); //讨逆
-			register("TransferCmdListener", TransferCmdListener); //模块号42
-			register("CrownCmdListener", CrownCmdListener); //王权
+//			register("CountryWarCmdListener", CountryWarCmdListener); //模块号98
+//			register("CountryCmdListener", CountryCmdListener); //模块号104
+//			register("CountryTaoNiCmdListener", CountryTaoNiCmdListener); //讨逆
+//			register("TransferCmdListener", TransferCmdListener); //模块号42
+//			register("CrownCmdListener", CrownCmdListener); //王权
 			register("SceneSwitchCmdListener", SceneSwitchCmdListener);
 			register("SceneUICmdListener", SceneUICmdListener);
-			register("TaskCmdListener", TaskCmdListener); //模块号13
-			register("MiXinCmdListener", MiXinCmdListener); //模块号13
-			register("TouZhuCmdListener", TouZhuCmdListener); //模块号13
-			register("TouJingCmdListener", TouJingCmdListener); //模块号13
+//			register("TaskCmdListener", TaskCmdListener); //模块号13
+//			register("MiXinCmdListener", MiXinCmdListener); //模块号13
+//			register("TouZhuCmdListener", TouZhuCmdListener); //模块号13
+//			register("TouJingCmdListener", TouJingCmdListener); //模块号13
 			register("ChatCmdListener", ChatCmdListener); //模块号12
 			register("SociecyCmdListener", SocietyCmdListener); //模块号19
 			register("ShopCmdListener", ShopCmdListener); //模块号7
@@ -130,19 +115,19 @@
 			register("TeamMemberPosCmdListener", TeamMemberPosCmdListener); //模块号15
 			register("GoodsContainerCmdListener", GoodsContainerCmdListener);
 			register("AddSpriteStatCmdListener", AddSpriteStatCmdListener);
-			register("FamilyWarCmdListener", FamilyWarCmdListener); //王城战
+//			register("FamilyWarCmdListener", FamilyWarCmdListener); //王城战
 			register("NpcCmdListener", NpcCmdListener); //王城战
-			register("YunBiaoCmdListener", YunBiaoCmdListener); //王城战
+//			register("YunBiaoCmdListener", YunBiaoCmdListener); //王城战
 			register("MountCmdListener", MountCmdListener); //坐骑
 			register("TradeCmdlistener", TradeCmdlistener); //王城战
 			register("BaZhenTuCmdListener", BaZhenTuCmdListener); //八阵图
-			register("DailyTasksCmdListener", DailyTasksCmdListener); //日常任务追踪栏事件监听
+//			register("DailyTasksCmdListener", DailyTasksCmdListener); //日常任务追踪栏事件监听
 			register("GuildCmdListener", GuildCmdListener); //帮派
 			register("DaTiCmdListener", DaTiCmdListener); //答题
-			register("BiaoJuCmdListener", BiaoJuCmdListener); //镖局
-			register("MazeCmdListener", MazeCmdListener); //迷宫
+//			register("BiaoJuCmdListener", BiaoJuCmdListener); //镖局
+//			register("MazeCmdListener", MazeCmdListener); //迷宫
 			register("StallCmdListener",StallCmdListener);//摆摊
-			register("YuMaQiShouCmdListener", YuMaQiShouCmdListener); //御马场、奇兽苑
+//			register("YuMaQiShouCmdListener", YuMaQiShouCmdListener); //御马场、奇兽苑
 		}
 	}
 }

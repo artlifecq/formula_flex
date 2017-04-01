@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const START:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Rectangle.start", "start", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.Point2D; });
+		public static const START:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Rectangle.start", "start", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.Point2D; });
 
 		private var start$field:app.message.Point2D;
 
@@ -38,7 +38,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const END:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.Rectangle.end", "end", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.Point2D; });
+		public static const END:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.Rectangle.end", "end", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.Point2D; });
 
 		private var end$field:app.message.Point2D;
 
@@ -64,11 +64,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasStart) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, start$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, start$field);
 			}
 			if (hasEnd) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, end$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, end$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -82,7 +82,7 @@ package app.message {
 			var start$count:uint = 0;
 			var end$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (start$count != 0) {
@@ -90,7 +90,7 @@ package app.message {
 					}
 					++start$count;
 					this.start = new app.message.Point2D();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.start);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.start);
 					break;
 				case 2:
 					if (end$count != 0) {
@@ -98,7 +98,7 @@ package app.message {
 					}
 					++end$count;
 					this.end = new app.message.Point2D();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.end);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.end);
 					break;
 				default:
 					super.readUnknown(input, tag);

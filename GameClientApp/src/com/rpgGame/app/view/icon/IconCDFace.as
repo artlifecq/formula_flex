@@ -8,18 +8,19 @@ package com.rpgGame.app.view.icon
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.face.IBaseFaceInfo;
-	import com.rpgGame.coreData.utils.ColorUtils;
-
+	
 	import flash.text.TextFieldAutoSize;
-
+	import flash.text.TextFormat;
+	
 	import feathers.dragDrop.IDragSource;
 	import feathers.dragDrop.IDropTarget;
 	import feathers.utils.filter.GrayFilter;
-
+	
 	import org.client.mainCore.manager.EventManager;
-
+	
 	import starling.events.Event;
 	import starling.text.TextField;
+	import starling.text.TextFormat;
 
 	/**
 	 * 1、带cd的ico
@@ -53,6 +54,11 @@ package com.rpgGame.app.view.icon
 			super($iconSize);
 
 			sortLayer();
+		}
+
+		public function get cdFace():CDFace
+		{
+			return _cdFace;
 		}
 
 		private function onAddToStg(event : Event) : void
@@ -234,24 +240,27 @@ package com.rpgGame.app.view.icon
 				_shortcutKeyLab = new TextField(40, 20, "");
 				_shortcutKeyLab.touchable = false;
 				_shortcutKeyLab.autoSize = TextFieldAutoSize.LEFT;
+				var tf:starling.text.TextFormat=new starling.text.TextFormat();
+				tf.horizontalAlign="left";
+				_shortcutKeyLab.format=tf;
 				_shortcutKeyLab.color = StaticValue.COLOR_CODE_4;
-				_shortcutKeyLab.x = 0;
-				_shortcutKeyLab.y = 0;
 			}
+			_shortcutKeyLab.x=5;
+			_shortcutKeyLab.y=5;
 			_shortcutKeyLab.text = value;
 			addChild(_shortcutKeyLab);
 		}
 
 		private var _isShwoTm : Boolean = false;
 
-		public function setIsShowCdTm(isShow : Boolean) : void
+		public function setIsShowCdTm(isShow : Boolean,txtFormat : flash.text.TextFormat = null) : void
 		{
+			_isShwoTm = isShow;
 			if (_cdFace == null)
 				return;
 
-			_isShwoTm = isShow;
 			if (isShow)
-				_cdFace.showTmTxt();
+				_cdFace.showTmTxt(txtFormat);
 			else
 				_cdFace.hideTmTxt();
 		}
@@ -301,7 +310,6 @@ package com.rpgGame.app.view.icon
 			_faceInfo = null;
 
 			TipTargetManager.remove(this);
-
 			super.clear();
 		}
 

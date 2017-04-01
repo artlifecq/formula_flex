@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.BranchTaskConfig.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.BranchTaskConfig.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var id$field:int;
 
@@ -43,7 +43,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BRANCH_TASK_TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.BranchTaskConfig.branch_task_type", "branchTaskType", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BRANCH_TASK_TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.BranchTaskConfig.branch_task_type", "branchTaskType", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var branch_task_type$field:int;
 
@@ -68,7 +68,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TASK_DESC:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.BranchTaskConfig.task_desc", "taskDesc", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const TASK_DESC:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.BranchTaskConfig.task_desc", "taskDesc", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var task_desc$field:flash.utils.ByteArray;
 
@@ -91,7 +91,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DUNGEON_TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.BranchTaskConfig.dungeon_type", "dungeonType", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DUNGEON_TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.BranchTaskConfig.dungeon_type", "dungeonType", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var dungeon_type$field:int;
 
@@ -116,7 +116,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DUNGEON_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.BranchTaskConfig.dungeon_id", "dungeonId", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DUNGEON_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.BranchTaskConfig.dungeon_id", "dungeonId", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var dungeon_id$field:int;
 
@@ -141,7 +141,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.BranchTaskConfig.times", "times", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.BranchTaskConfig.times", "times", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var times$field:int;
 
@@ -166,7 +166,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PRIZE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.BranchTaskConfig.prize", "prize", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
+		public static const PRIZE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.BranchTaskConfig.prize", "prize", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
 
 		private var prize$field:app.message.PrizeProto;
 
@@ -192,31 +192,31 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, id$field);
 			}
 			if (hasBranchTaskType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, branch_task_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, branch_task_type$field);
 			}
 			if (hasTaskDesc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, task_desc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, task_desc$field);
 			}
 			if (hasDungeonType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, dungeon_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, dungeon_type$field);
 			}
 			if (hasDungeonId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, dungeon_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, dungeon_id$field);
 			}
 			if (hasTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, times$field);
 			}
 			if (hasPrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, prize$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -235,49 +235,49 @@ package app.message {
 			var times$count:uint = 0;
 			var prize$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BranchTaskConfig.id cannot be set twice.');
 					}
 					++id$count;
-					this.id = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.id = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (branch_task_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BranchTaskConfig.branchTaskType cannot be set twice.');
 					}
 					++branch_task_type$count;
-					this.branchTaskType = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.branchTaskType = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (task_desc$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BranchTaskConfig.taskDesc cannot be set twice.');
 					}
 					++task_desc$count;
-					this.taskDesc = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.taskDesc = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 4:
 					if (dungeon_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BranchTaskConfig.dungeonType cannot be set twice.');
 					}
 					++dungeon_type$count;
-					this.dungeonType = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.dungeonType = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (dungeon_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BranchTaskConfig.dungeonId cannot be set twice.');
 					}
 					++dungeon_id$count;
-					this.dungeonId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.dungeonId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BranchTaskConfig.times cannot be set twice.');
 					}
 					++times$count;
-					this.times = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.times = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (prize$count != 0) {
@@ -285,7 +285,7 @@ package app.message {
 					}
 					++prize$count;
 					this.prize = new app.message.PrizeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.prize);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.prize);
 					break;
 				default:
 					super.readUnknown(input, tag);

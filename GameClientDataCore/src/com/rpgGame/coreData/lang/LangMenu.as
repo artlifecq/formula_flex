@@ -7,9 +7,7 @@ package com.rpgGame.coreData.lang
 	* 【**不可手动修改此类**】，
 	*	
 	* 【任何修改都将被生成工具覆盖，如需修改请直接修改具体的config文件】
-	* @author fly.AutoUICreater
-	* @modifier L.L.M.Sunny
-	* 修改时间：2015-7-2 上午10:05:12
+	* @author NEIL
 	* 
 	*/
 	public class LangMenu
@@ -94,6 +92,10 @@ package com.rpgGame.coreData.lang
 		public static const SET_UP_VICE_LEADER:String = "SET_UP_VICE_LEADER";
 		 /**  卸任副帮主 */
 		public static const REMOVE_VICE_LEADER:String = "REMOVE_VICE_LEADER";
+		 /**  取出 */
+		public static const GET_ITEM:String = "GET_ITEM";
+		 /**  批量 */
+		public static const BATCH_ITM:String = "BATCH_ITM";
 
 	}
 }

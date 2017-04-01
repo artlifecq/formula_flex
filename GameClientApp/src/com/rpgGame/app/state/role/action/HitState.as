@@ -49,9 +49,12 @@ package com.rpgGame.app.state.role.action
 					}
 					if (!fixDirection)
 					{
-						var atkorX : int = _stateReference.atkorPos.x;
-						var atkorY : int = _stateReference.atkorPos.y;
-						(_machine.owner as SceneRole).faceToGround(atkorX, atkorY, 0);
+						if(_stateReference.atkorPos != null)
+						{
+							var atkorX : int = _stateReference.atkorPos.x;
+							var atkorY : int = _stateReference.atkorPos.y;
+							(_machine.owner as SceneRole).faceToGround(atkorX, atkorY, 0);
+						}
 					}
 				}
 				else
@@ -172,6 +175,14 @@ package com.rpgGame.app.state.role.action
 					return false;
 				else if (prevState.type == RoleStateType.ACTION_BEAT_BACK)
 					return false;
+			}
+			if(!force && (_machine as RoleStateMachine).isFly)
+			{
+				return false;
+			}
+			if(!force && (_machine as RoleStateMachine).isUseSpell)
+			{
+				return false;
 			}
 			return true;
 		}

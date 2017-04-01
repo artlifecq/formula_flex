@@ -3,7 +3,6 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.country.CountryManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -33,11 +32,11 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.type.TaskTargetType;
-
+	
 	import flash.utils.Dictionary;
-
+	
 	import gs.TweenLite;
-
+	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -74,12 +73,12 @@ package com.rpgGame.app.manager
 
 		private static function onSwitchCmp() : void
 		{
-			if (CountryManager.isAtMyCountry())
-			{
-				triggerCreateSceneEffect(_createEffectTrigger);
-				triggerCreateSceneCollect(_createCollectTrigger);
-				triggerPlotDialog(_plotDialogTrigger);
-			}
+//			if (CountryManager.isAtMyCountry())
+//			{
+//				triggerCreateSceneEffect(_createEffectTrigger);
+//				triggerCreateSceneCollect(_createCollectTrigger);
+//				triggerPlotDialog(_plotDialogTrigger);
+//			}
 		}
 
 		public static function triggerById(triggerId : int, roleId : Number = 0) : Boolean
@@ -219,7 +218,7 @@ package com.rpgGame.app.manager
 						}
 						else if (target.type == SceneCharType.PROTECT_NPC)
 						{
-							var curHP : Number = (target.data as RoleData).hp;
+							var curHP : Number = (target.data as RoleData).totalStat.hp;
 							var maxHP : Number = (target.data as RoleData).totalStat.life;
 							var rate : Number = curHP / maxHP;
 							if (rate <= 0.5)
@@ -339,12 +338,12 @@ package com.rpgGame.app.manager
 							}
 							if (index > -1)
 							{
-								(sceneRole.headFace as HeadFace).addWordFrame(contents[index], clientDialog.duration);
+								sceneRole.dialogFace.addWordFrame(RenderUnitType.HAIR, RenderUnitID.HAIR,contents[index], clientDialog.duration);
 							}
 						}
 						else
 						{
-							(sceneRole.headFace as HeadFace).addWordFrame(contents[0], clientDialog.duration);
+							sceneRole.dialogFace.addWordFrame(RenderUnitType.HAIR, RenderUnitID.HAIR,contents[0], clientDialog.duration);
 						}
 					}
 				}
@@ -384,15 +383,13 @@ package com.rpgGame.app.manager
 						var sceneRoles : Vector.<SceneRole> = SceneManager.getSceneRolesByModelId(clientDialog.npcModelId);
 						for each (sceneRole in sceneRoles)
 						{
-							if (sceneRole.headFace is HeadFace)
-								(sceneRole.headFace as HeadFace).addWordFrame(clientDialog.content, clientDialog.duration);
+							sceneRole.dialogFace.addWordFrame(RenderUnitType.HAIR, RenderUnitID.HAIR,clientDialog.content, clientDialog.duration);
 						}
 					}
 					else
 					{
 						sceneRole = MainRoleManager.actor;
-						if (sceneRole.headFace is HeadFace)
-							(sceneRole.headFace as HeadFace).addWordFrame(clientDialog.content, clientDialog.duration);
+						sceneRole.dialogFace.addWordFrame(RenderUnitType.HAIR, RenderUnitID.HAIR,clientDialog.content, clientDialog.duration);
 					}
 				}
 				else

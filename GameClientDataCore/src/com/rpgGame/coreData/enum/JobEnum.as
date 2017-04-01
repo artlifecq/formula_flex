@@ -2,18 +2,22 @@ package com.rpgGame.coreData.enum
 {
 	public class JobEnum
 	{
-		/** 霸刀 */		
+		/** 公共的 */		
+		public static const ROLE_0_TYPE:int =0;
+		/** 兵家 */		
 		public static const ROLE_1_TYPE:int = 1;
-		/** 弓箭手*/		
+		/** 墨家男*/		
 		public static const ROLE_2_TYPE:int = 2;
-		/** 法师 */		
+		/** 墨家女 */		
 		public static const ROLE_3_TYPE:int = 3;
+		/** 医家 */		
+		public static const ROLE_4_TYPE:int = 4;
 		
-		/** 霸刀 */		
-		public static const ROLE_1_NAME:String = "霸刀";
-		/** 弓箭手 */		
-		public static const ROLE_2_NAME:String = "弓箭手";
-		/** 法师 */		
-		public static const ROLE_3_NAME:String = "法师";
+		/** 兵家 */		
+		public static const ROLE_1_NAME:String = "兵家";
+		/** 墨家 */		
+		public static const ROLE_2_NAME:String = "墨家";
+		/** 医家 */		
+		public static const ROLE_3_NAME:String = "医家";
 	}
 }

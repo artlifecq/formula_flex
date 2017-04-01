@@ -5,45 +5,54 @@ package com.game.engine3D.scene.render.vo
 	import com.game.engine3D.utils.CallBackUtil;
 	import com.game.engine3D.vo.CallBackData;
 	import com.game.mainCore.libCore.share.CountShareData;
-
+	
 	import flash.utils.Dictionary;
-
+	
 	import away3d.audio.SoundBox;
+	import away3d.cameras.Camera3D;
 	import away3d.containers.ObjectContainer3D;
 	import away3d.entities.CompositeMesh;
 	import away3d.lights.LightBase;
 	import away3d.materials.lightpickers.LightPickerBase;
 	import away3d.materials.methods.EffectMethodBase;
-
+	
 	import org.client.mainCore.ds.HashMap;
 
 	/**
 	 *
 	 * 渲染资源数据
-	 * @author L.L.M.Sunny
-	 * 创建时间：2015-6-4 下午1:26:38
+	 * 主要是用来加载模型及模型动画的数据
+	 * @author neil
+	 * 创建时间
 	 *
 	 */
 	public class RenderResourceData extends CountShareData
 	{
 		private var _meshElements : Vector.<ObjectContainer3D>;
 		private var _animatorElements : Vector.<CompositeMesh>;
-		private var _layerTypeByName : Dictionary;
-		private var _visibleByName : Dictionary;
+		private var _baseVirtualElements : Vector.<ObjectContainer3D>;
+		
 		private var _soundBox : SoundBox;
+		private var _camera : Camera3D;
+		
 		private var _materialMap : Dictionary;
 		private var _materialLightPickerMap : Dictionary;
+		
 		private var _meshSourcePath : String;
 		private var _animatorSourcePath : String;
+		
 		private var _renderMeshLoader : RenderUnitLoader;
 		private var _renderAnimatorLoader : RenderUnitLoader;
+		
 		private var _isOnlyInstance : Boolean;
 		private var _lightPickerMap : HashMap;
 		private var _lights : Vector.<LightBase>;
 		private var _methods : Vector.<EffectMethodBase>;
+		
 		private var _resCompleteCallBackList : Vector.<CallBackData>;
 		private var _asyncResCompleteCallBackList : Vector.<CallBackData>;
 		private var _resErrorCallBackList : Vector.<CallBackData>;
+		
 		private var _isSkinMesh : Boolean;
 
 		public function get isSkinMesh() : Boolean
@@ -68,8 +77,6 @@ package com.game.engine3D.scene.render.vo
 			_resCompleteCallBackList = new Vector.<CallBackData>();
 			_asyncResCompleteCallBackList = new Vector.<CallBackData>();
 			_resErrorCallBackList = new Vector.<CallBackData>();
-			_layerTypeByName = new Dictionary();
-			_visibleByName = new Dictionary();
 		}
 
 		/**
@@ -100,13 +107,16 @@ package com.game.engine3D.scene.render.vo
 					}
 				}
 
-				if (_renderMeshLoader.isAsyncLoaded)
+				if (_renderMeshLoader)
 				{
-					onMeshAsyncComplete(_renderMeshLoader);
-				}
-				else
-				{
-					_renderMeshLoader.setSyncResCompleteCallBack(onMeshAsyncComplete);
+					if (_renderMeshLoader.isAsyncLoaded)
+					{
+						onMeshAsyncComplete(_renderMeshLoader);
+					}
+					else
+					{
+						_renderMeshLoader.setSyncResCompleteCallBack(onMeshAsyncComplete);
+					}
 				}
 			}
 			if (_animatorSourcePath && !_renderAnimatorLoader)
@@ -133,27 +143,12 @@ package com.game.engine3D.scene.render.vo
 			if (!_renderMeshLoader)
 				return;
 			_meshElements = _renderMeshLoader.elements;
-			var name : String;
-			var meshLayerType : Dictionary = _renderMeshLoader.layerTypeByName;
-			if (meshLayerType)
-			{
-				for (name in meshLayerType)
-				{
-					_layerTypeByName[name] = meshLayerType[name];
-				}
-			}
-			var meshVisible : Dictionary = _renderMeshLoader.visibleByName;
-			if (meshVisible)
-			{
-				for (name in meshVisible)
-				{
-					_visibleByName[name] = meshVisible[name];
-				}
-			}
+			
 			_lightPickerMap = _renderMeshLoader.lightPickerMap;
 			_lights = _renderMeshLoader.lights;
 			_methods = _renderMeshLoader.methods;
 			_soundBox = _renderMeshLoader.soundBox;
+			_camera = _renderMeshLoader.camera;
 			_materialMap = _renderMeshLoader.materialMap;
 			_materialLightPickerMap = _renderMeshLoader.materialLightPickerMap;
 			tryResourceComplete();
@@ -174,31 +169,19 @@ package com.game.engine3D.scene.render.vo
 			if (elements)
 			{
 				_animatorElements = new Vector.<CompositeMesh>();
+				_baseVirtualElements = new Vector.<ObjectContainer3D>();
 				for each (var element : ObjectContainer3D in elements)
 				{
 					if (element is CompositeMesh)
 					{
 						_animatorElements.push(CompositeMesh(element));
+					} else if (element is ObjectContainer3D) {
+						_baseVirtualElements.push(ObjectContainer3D(element));
 					}
 				}
+				
 			}
-			var name : String;
-			var meshLayerType : Dictionary = _renderAnimatorLoader.layerTypeByName;
-			if (meshLayerType)
-			{
-				for (name in meshLayerType)
-				{
-					_layerTypeByName[name] = meshLayerType[name];
-				}
-			}
-			var meshVisible : Dictionary = _renderAnimatorLoader.visibleByName;
-			if (meshVisible)
-			{
-				for (name in meshVisible)
-				{
-					_visibleByName[name] = meshVisible[name];
-				}
-			}
+			
 			tryResourceComplete();
 			tryResourceAsyncComplete();
 		}
@@ -330,6 +313,11 @@ package com.game.engine3D.scene.render.vo
 		{
 			return _soundBox;
 		}
+		
+		public function get camera() : Camera3D
+		{
+			return _camera;
+		}
 
 		public function cloneMeshElements() : Vector.<ObjectContainer3D>
 		{
@@ -366,15 +354,19 @@ package com.game.engine3D.scene.render.vo
 			}
 			return elements;
 		}
-
-		public function get layerTypeByName() : Dictionary
-		{
-			return _layerTypeByName;
-		}
-
-		public function get visibleByName() : Dictionary
-		{
-			return _visibleByName;
+		
+		public function cloneBaseVirtualElements() : Vector.<ObjectContainer3D> {
+			if (!_baseVirtualElements) {
+				return null;
+			}
+			if (_isOnlyInstance) {
+				return _baseVirtualElements;
+			}
+			var elements : Vector.<ObjectContainer3D> = new Vector.<ObjectContainer3D>();
+			for each(var element : ObjectContainer3D in _baseVirtualElements) {
+				elements.push(ObjectContainer3D(element.clone()));
+			}
+			return elements;
 		}
 
 		public function get materialMap() : Dictionary
@@ -460,29 +452,13 @@ package com.game.engine3D.scene.render.vo
 			_renderAnimatorLoader = null;
 			_meshElements = null;
 			_animatorElements = null;
-			var name : String;
-			if (_layerTypeByName)
-			{
-				for (name in _layerTypeByName)
-				{
-					_layerTypeByName[name] = null;
-					delete _layerTypeByName[name];
-				}
-				_layerTypeByName = null;
-			}
-			if (_visibleByName)
-			{
-				for (name in _visibleByName)
-				{
-					_visibleByName[name] = null;
-					delete _visibleByName[name];
-				}
-				_visibleByName = null;
-			}
+			_baseVirtualElements = null;
+			
 			_lightPickerMap = null;
 			_lights = null;
 			_methods = null;
 			_soundBox = null;
+			_camera = null;
 			_materialMap = null;
 			_materialLightPickerMap = null;
 			_meshSourcePath = null;

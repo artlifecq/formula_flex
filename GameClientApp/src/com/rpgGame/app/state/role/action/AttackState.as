@@ -11,9 +11,9 @@ package com.rpgGame.app.state.role.action
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
-
+	
 	import away3d.animators.transitions.CrossfadeTransition;
-
+	
 	import gs.TweenLite;
 
 	/**
@@ -26,16 +26,26 @@ package com.rpgGame.app.state.role.action
 	public class AttackState extends ActionState
 	{
 		private var _stateReference : AttackStateReference;
+		/**
+		 * 攻速--暂时还没有启用，等后面有了这个属性，再启用 
+		 */		
 		private var _speed : Number = 1;
+		/**
+		 * 动作名称 
+		 */		
 		private var _statusType : String;
+		
+		private var _startSelfFrameTween:TweenLite;
 		private var _hitFrameTween : TweenLite;
 		private var _totalFrameTween : TweenLite;
 		private var _breakFrameTween : TweenLite;
+		
 		private var _attackFinished : Boolean;
 		private var _attackBroken : Boolean;
 		private var _canWalkRelease : Boolean;
+		
+		private var _startSelfFrameTime:int;
 		private var _startFrameTime : int;
-		private var _breakFrameTime : int;
 		private var _hitFrameTime : int;
 
 		public function AttackState()
@@ -57,16 +67,23 @@ package com.rpgGame.app.state.role.action
 				{
 					_stateReference = _ref as AttackStateReference;
 					if (_stateReference.speed > 0)
+					{
 						_speed = _stateReference.speed;
+					}
 					else
+					{
 						_speed = ((_machine.owner as SceneRole).data as RoleData).totalStat.attackSpeed;
+					}
 					_canWalkRelease = _stateReference.spellInfo.canWalkRelease;
 				}
 				else
 					throw new Error("攻击状态引用必须是AttackStateReference类型！");
 
-				if (!_canWalkRelease)
+				if (!_canWalkRelease)//不可边走边放技能
+				{
 					transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
+				}
+				
 				_statusType = _stateReference.statusType;
 				if (_statusType)
 				{
@@ -74,15 +91,15 @@ package com.rpgGame.app.state.role.action
 //						_startFrameTime = caromStartFrameTime || _stateReference.spellInfo.caromStartFrameTime;
 //					else
 					_startFrameTime = 0;
-					_breakFrameTime = _stateReference.spellInfo.breakFrameTime - _startFrameTime;
+					_startSelfFrameTime = _stateReference.spellInfo.startFrameTime - _startFrameTime;
 					_hitFrameTime = _stateReference.spellInfo.hitFrameTime - _startFrameTime;
 					var frameTime : int = _stateReference.spellInfo.throwDelayTime - _startFrameTime;
 					_stateReference.setThrowFrameTime(frameTime > 0 ? frameTime : 0);
 				}
 				else
 				{
+					_startSelfFrameTime = 0;
 					_startFrameTime = 0;
-					_breakFrameTime = 0;
 					_hitFrameTime = 0;
 					_stateReference.setThrowFrameTime(0);
 				}
@@ -120,7 +137,16 @@ package com.rpgGame.app.state.role.action
 		{
 			super.playAnimation(role, render, isFreeze, time, speedRatio);
 
-			var status : String = _statusType ? _statusType : RoleActionType.IDLE;
+			var status : String = _statusType ? _statusType : RoleActionType.STAND;
+			
+			if(_canWalkRelease)
+			{
+				if((_machine.owner as SceneRole).stateMachine.isWalkMoving)
+				{
+					status = RoleActionType.RUN;
+				}
+			}
+			
 			var matchStatus : String = RoleActionType.getActionType(status, (_machine as RoleStateMachine).isRiding);
 			switch (render.type)
 			{
@@ -240,15 +266,35 @@ package com.rpgGame.app.state.role.action
 					var bodyAp : RenderUnit3D = (_machine.owner as SceneRole).avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
 					totalFrameTm = (bodyAp ? bodyAp.totalDuration - _startFrameTime : 200);
 				}
-				//				keyFrameTm /= _speed;
-				//				totalFrameTm /= _speed;
-				var breakFrameTime : int = (_breakFrameTime > 0 ? _breakFrameTime : totalFrameTm);
+//				keyFrameTm /= _speed;
+//				totalFrameTm /= _speed;
+				/*var breakFrameTime : int = (_breakFrameTime > 0 ? _breakFrameTime : totalFrameTm);
 				if (breakFrameTime > totalFrameTm)
 					breakFrameTime = totalFrameTm;
 				var hitFrameTime : int = (_hitFrameTime > 0 ? _hitFrameTime : breakFrameTime);
 				if (hitFrameTime > breakFrameTime)
-					hitFrameTime = breakFrameTime;
+					hitFrameTime = breakFrameTime;*/
+				
+				var startSelfFrameTime:int = (_startSelfFrameTime > 0 ? _startSelfFrameTime : 0);
+				if(startSelfFrameTime > totalFrameTm)
+				{
+					startSelfFrameTime = totalFrameTm;
+				}
+				
+				var hitFrameTime : int = (_hitFrameTime > 0 ? _hitFrameTime : totalFrameTm);
+				if (hitFrameTime > totalFrameTm)
+				{
+					hitFrameTime = totalFrameTm;
+				}
+				
+				var castTime:int = _stateReference.castTime > 0 ? _stateReference.castTime : totalFrameTm;
+				
 				_stateReference.setHitFrameTime(hitFrameTime);
+				if(_startSelfFrameTween)
+				{
+					_startSelfFrameTween.kill();
+					_startSelfFrameTween = null;
+				}
 				if (_hitFrameTween)
 				{
 					_hitFrameTween.kill();
@@ -266,14 +312,15 @@ package com.rpgGame.app.state.role.action
 				}
 				if (totalFrameTm > 0)
 				{
+					_startSelfFrameTween = TweenLite.delayedCall(startSelfFrameTime * 0.001,onStartFrameCmp);
 					_hitFrameTween = TweenLite.delayedCall(hitFrameTime * 0.001, onHitFrameCmp);
-					_breakFrameTween = TweenLite.delayedCall(breakFrameTime * 0.001, onBreakFrameCmp);
+					_breakFrameTween = TweenLite.delayedCall(castTime * 0.001, onBreakFrameCmp);
 					_totalFrameTween = TweenLite.delayedCall(totalFrameTm * 0.001, onTotalFrameCmp);
 				}
 				else
 				{
 					onHitFrameCmp();
-					onBreakFrameCmp();
+					onStartFrameCmp();
 					onTotalFrameCmp();
 				}
 			}
@@ -284,6 +331,11 @@ package com.rpgGame.app.state.role.action
 			_attackBroken = true;
 			_attackFinished = true;
 			_canWalkRelease = false;
+			if(_startSelfFrameTween)
+			{
+				_startSelfFrameTween.kill();
+				_startSelfFrameTween = null;
+			}
 			if (_hitFrameTween)
 			{
 				_hitFrameTween.kill();
@@ -308,6 +360,17 @@ package com.rpgGame.app.state.role.action
 			_attackBroken = false;
 			_attackFinished = false;
 			_canWalkRelease = false;
+		}
+		
+		private function onStartFrameCmp() : void
+		{
+			if(_startSelfFrameTween)
+			{
+				_startSelfFrameTween.kill();
+				_startSelfFrameTween = null;
+			}
+			if (_stateReference)
+				_stateReference.startFrame();
 		}
 
 		private function onHitFrameCmp() : void
@@ -345,6 +408,7 @@ package com.rpgGame.app.state.role.action
 		private function onBreakFrameCmp() : void
 		{
 			_attackBroken = true;
+			_attackFinished = true;
 			if (_machine && !_machine.isDisposed)
 			{
 				if (_breakFrameTween)
@@ -387,12 +451,12 @@ package com.rpgGame.app.state.role.action
 			}
 			else if (nextState.type == RoleStateType.ACTION_BLINK)
 			{
-				if (!force && !_attackBroken)
+				if (/*!force && */!_attackBroken)
 					return false;
 			}
 			else if (nextState.type == RoleStateType.ACTION_ATTACK)
 			{
-				if (!force && !_attackBroken)
+				if (/*!force && */!_attackBroken)
 					return false;
 			}
 			else if (nextState.type == RoleStateType.ACTION_HIT)
@@ -407,17 +471,17 @@ package com.rpgGame.app.state.role.action
 			}
 			else if (nextState.type == RoleStateType.ACTION_WALK)
 			{
-				if (!force && !_attackBroken)
+				if (/*!force && */!_attackBroken)
 					return false;
 			}
 			else if (nextState.type == RoleStateType.ACTION_RUN)
 			{
-				if (!force && !_attackBroken)
+				if (/*!force && */!_attackBroken)
 					return false;
 			}
 			else if (nextState.type == RoleStateType.ACTION_JUMP)
 			{
-				if (!force && !_attackBroken)
+				if (/*!force && */!_attackBroken)
 					return false;
 			}
 			else if (nextState.type == RoleStateType.ACTION_BEAT_BACK)
@@ -449,6 +513,10 @@ package com.rpgGame.app.state.role.action
 				return false;
 			if (!force && (_machine as RoleStateMachine).isHush)
 				return false;
+			if (!force && (_machine as RoleStateMachine).isFall)
+				return false;
+//			if (!force && (_machine as RoleStateMachine).isUseSpell)
+//				return false;
 			return true;
 		}
 
@@ -459,6 +527,11 @@ package com.rpgGame.app.state.role.action
 			_attackBroken = false;
 			_attackFinished = false;
 			_canWalkRelease = false;
+			if(_startSelfFrameTween)
+			{
+				_startSelfFrameTween.kill();
+				_startSelfFrameTween = null;
+			}
 			if (_hitFrameTween)
 			{
 				_hitFrameTween.kill();

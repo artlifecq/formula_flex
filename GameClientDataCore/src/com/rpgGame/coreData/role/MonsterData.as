@@ -1,11 +1,9 @@
 package com.rpgGame.coreData.role
 {
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_monster;
 	
-	import app.message.MonsterDataProto;
 	import app.message.MonsterDataProto.MonsterType;
-	
-	import org.game.netCore.net.BytesUtil;
 
 	/**
 	 *
@@ -20,7 +18,7 @@ package com.rpgGame.coreData.role
 		public var isJihuo : Boolean = false;
 		public var spellId : int = 0;
 		protected var _modelID : uint;
-		private var _monsterDataProto : MonsterDataProto;
+		private var _monsterData : Q_monster;
 		/** 远离视野是否可见 **/
 		public var needInViewDist:Boolean;
 
@@ -46,24 +44,24 @@ package com.rpgGame.coreData.role
 			super(type);
 		}
 
-		public function get monsterDataProto() : MonsterDataProto
+		public function get monsterData() : Q_monster
 		{
-			if (!_monsterDataProto)
-				_monsterDataProto = MonsterDataManager.getData(_modelID);
-			return _monsterDataProto;
+			if (!_monsterData)
+				_monsterData = MonsterDataManager.getData(_modelID);
+			return _monsterData;
 		}
 
 		public function get farDistance() : int
 		{
-			if (monsterDataProto && monsterDataProto.npc)
-				return monsterDataProto.npc.farDistance;
+//			if (monsterData && monsterData.npc)
+//				return monsterData.npc.farDistance;
 			return 300;
 		}
 
 		override public function get fixDirection() : Boolean
 		{
-			if (monsterDataProto)
-				return monsterDataProto.fixDirection;
+			if (monsterData)
+				return monsterData.q_is_direction_fixed;
 			return false;
 		}
 
@@ -74,8 +72,8 @@ package com.rpgGame.coreData.role
 		 */
 		public function get isNormal() : Boolean
 		{
-			if (monsterDataProto)
-				return monsterDataProto.monsterType == MonsterType.NORMAL;
+			if (monsterData)
+				return monsterData.q_monster_type == MonsterType.NORMAL;
 			return false;
 		}
 
@@ -86,8 +84,8 @@ package com.rpgGame.coreData.role
 		 */
 		public function get isElite() : Boolean
 		{
-			if (monsterDataProto)
-				return monsterDataProto.monsterType == MonsterType.ELITE;
+			if (monsterData)
+				return monsterData.q_monster_type == MonsterType.ELITE;
 			return false;
 		}
 
@@ -98,15 +96,15 @@ package com.rpgGame.coreData.role
 		 */
 		public function get isBoss() : Boolean
 		{
-			if (monsterDataProto)
-				return monsterDataProto.monsterType == MonsterType.BOSS;
+			if (monsterData)
+				return monsterData.q_monster_type == MonsterType.BOSS;
 			return false;
 		}
 
 		public function get dialog() : String
 		{
-			if (monsterDataProto && monsterDataProto.npc)
-				return BytesUtil.bytes2UTF(monsterDataProto.npc.dialog);
+//			if (monsterData && monsterData.npc)
+//				return BytesUtil.bytes2UTF(monsterData.npc.dialog);
 			return "";
 		}
 	}

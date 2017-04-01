@@ -6,7 +6,7 @@ package com.game.engine3D.utils
 	
 	import away3d.core.managers.Stage3DProxy;
 	import away3d.debug.AwayStats;
-
+	
 	/**
 	 *
 	 * 性能监测工具
@@ -18,18 +18,24 @@ package com.game.engine3D.utils
 	{
 		/** 3D监测工具 **/
 		private static var _awayStatView : AwayStats;
-
+		
 		public function StatsUtil()
 		{
 		}
-
+		
 		/**
-		 * 显示或者隐藏3D监测工具
+		 * 显示3D监测工具
 		 *
 		 */
-		public static function showOrHideAwayStats(stage : Stage, stage3DProxy:Stage3DProxy = null) : void
+		public static function showAwayStats(stage : Stage, stage3DProxy : Stage3DProxy = null) : void
 		{
-			if(stage3DProxy == null)
+			if (_awayStatView && _awayStatView.parent)
+			{
+				_awayStatView.parent.removeChild(_awayStatView);
+				return;
+			}
+			
+			if (stage3DProxy == null)
 			{
 				stage3DProxy = Stage3DLayerManager.stage3DProxy;
 			}
@@ -38,16 +44,24 @@ package com.game.engine3D.utils
 			{
 				_awayStatView = new AwayStats(stage3DProxy);
 			}
-
+			
 			if (_awayStatView.parent == null)
 			{
 				stage.addChild(_awayStatView);
 				_awayStatView.x = 0;
 				_awayStatView.y = 400;
 			}
-			else
+		}
+		
+		/**
+		 * 隐藏3D监测工具
+		 *
+		 */
+		public static function hideAwayStats() : void
+		{
+			if (_awayStatView && _awayStatView.parent)
 			{
-				stage.removeChild(_awayStatView);
+				_awayStatView.parent.removeChild(_awayStatView);
 			}
 		}
 	}

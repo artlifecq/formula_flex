@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FLAG:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.GuildFlagProto.flag", "flag", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const FLAG:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.GuildFlagProto.flag", "flag", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var flag$field:String;
 
@@ -37,7 +37,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DI_WEN:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GuildFlagProto.di_wen", "diWen", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DI_WEN:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GuildFlagProto.di_wen", "diWen", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var di_wen$field:int;
 
@@ -64,7 +64,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DI_KUANG:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GuildFlagProto.di_kuang", "diKuang", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DI_KUANG:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GuildFlagProto.di_kuang", "diKuang", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var di_kuang$field:int;
 
@@ -92,15 +92,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasFlag) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, flag$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, flag$field);
 			}
 			if (hasDiWen) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, di_wen$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, di_wen$field);
 			}
 			if (hasDiKuang) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, di_kuang$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, di_kuang$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -115,28 +115,28 @@ package app.message {
 			var di_wen$count:uint = 0;
 			var di_kuang$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (flag$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildFlagProto.flag cannot be set twice.');
 					}
 					++flag$count;
-					this.flag = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.flag = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 2:
 					if (di_wen$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildFlagProto.diWen cannot be set twice.');
 					}
 					++di_wen$count;
-					this.diWen = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.diWen = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (di_kuang$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildFlagProto.diKuang cannot be set twice.');
 					}
 					++di_kuang$count;
-					this.diKuang = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.diKuang = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

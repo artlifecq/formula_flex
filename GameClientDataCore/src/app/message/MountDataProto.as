@@ -17,7 +17,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountDataProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountDataProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var id$field:int;
 
@@ -44,7 +44,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.MountDataProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.MountDataProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var name$field:String;
 
@@ -67,7 +67,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MOUNT_TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.MountDataProto.mount_type", "mountType", (3 << 3) | com.netease.protobuf.WireType.VARINT, app.message.MountType);
+		public static const MOUNT_TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.MountDataProto.mount_type", "mountType", (3 << 3) | com.netease.protobuf.WireType.VARINT, app.message.MountType);
 
 		private var mount_type$field:int;
 
@@ -92,7 +92,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PREFIX_TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.MountDataProto.prefix_type", "prefixType", (4 << 3) | com.netease.protobuf.WireType.VARINT, app.message.PrefixType);
+		public static const PREFIX_TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.MountDataProto.prefix_type", "prefixType", (4 << 3) | com.netease.protobuf.WireType.VARINT, app.message.PrefixType);
 
 		private var prefix_type$field:int;
 
@@ -117,7 +117,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const QUALITY:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.MountDataProto.quality", "quality", (5 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Quality);
+		public static const QUALITY:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.MountDataProto.quality", "quality", (5 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Quality);
 
 		private var quality$field:int;
 
@@ -142,7 +142,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SPECIES_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountDataProto.species_id", "speciesId", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SPECIES_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountDataProto.species_id", "speciesId", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var species_id$field:int;
 
@@ -167,7 +167,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const UPGRADE_EXP_ADDITIONAL:FieldDescriptor$TYPE_FLOAT = new FieldDescriptor$TYPE_FLOAT("app.message.MountDataProto.upgrade_exp_additional", "upgradeExpAdditional", (7 << 3) | com.netease.protobuf.WireType.FIXED_32_BIT);
+		public static const UPGRADE_EXP_ADDITIONAL:FieldDescriptor_TYPE_FLOAT = new FieldDescriptor_TYPE_FLOAT("app.message.MountDataProto.upgrade_exp_additional", "upgradeExpAdditional", (7 << 3) | com.netease.protobuf.WireType.FIXED_32_BIT);
 
 		private var upgrade_exp_additional$field:Number;
 
@@ -192,7 +192,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RESOURCE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountDataProto.resource", "resource", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RESOURCE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountDataProto.resource", "resource", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var resource$field:int;
 
@@ -217,7 +217,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RIDE_MOVE_SPEED:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountDataProto.ride_move_speed", "rideMoveSpeed", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RIDE_MOVE_SPEED:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountDataProto.ride_move_speed", "rideMoveSpeed", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var ride_move_speed$field:int;
 
@@ -242,7 +242,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const VITALITY_EXP:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.MountDataProto.vitality_exp", "vitalityExp", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const VITALITY_EXP:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.MountDataProto.vitality_exp", "vitalityExp", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var vitalityExp:Array = [];
@@ -250,7 +250,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MOUNT_REFINE_ADD_VITALITY_EXP:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountDataProto.mount_refine_add_vitality_exp", "mountRefineAddVitalityExp", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MOUNT_REFINE_ADD_VITALITY_EXP:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountDataProto.mount_refine_add_vitality_exp", "mountRefineAddVitalityExp", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var mount_refine_add_vitality_exp$field:int;
 
@@ -278,47 +278,47 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, id$field);
 			}
 			if (hasName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, name$field);
 			}
 			if (hasMountType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, mount_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, mount_type$field);
 			}
 			if (hasPrefixType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, prefix_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, prefix_type$field);
 			}
 			if (hasQuality) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, quality$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, quality$field);
 			}
 			if (hasSpeciesId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, species_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, species_id$field);
 			}
 			if (hasUpgradeExpAdditional) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.FIXED_32_BIT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_FLOAT(output, upgrade_exp_additional$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_FLOAT(output, upgrade_exp_additional$field);
 			}
 			if (hasResource) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, resource$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, resource$field);
 			}
 			if (hasRideMoveSpeed) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, ride_move_speed$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, ride_move_speed$field);
 			}
 			for (var vitalityExp$index:uint = 0; vitalityExp$index < this.vitalityExp.length; ++vitalityExp$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.vitalityExp[vitalityExp$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.vitalityExp[vitalityExp$index]);
 			}
 			if (hasMountRefineAddVitalityExp) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, mount_refine_add_vitality_exp$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, mount_refine_add_vitality_exp$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -340,84 +340,84 @@ package app.message {
 			var ride_move_speed$count:uint = 0;
 			var mount_refine_add_vitality_exp$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountDataProto.id cannot be set twice.');
 					}
 					++id$count;
-					this.id = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.id = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountDataProto.name cannot be set twice.');
 					}
 					++name$count;
-					this.name = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.name = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (mount_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountDataProto.mountType cannot be set twice.');
 					}
 					++mount_type$count;
-					this.mountType = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.mountType = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 4:
 					if (prefix_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountDataProto.prefixType cannot be set twice.');
 					}
 					++prefix_type$count;
-					this.prefixType = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.prefixType = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 5:
 					if (quality$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountDataProto.quality cannot be set twice.');
 					}
 					++quality$count;
-					this.quality = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.quality = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 6:
 					if (species_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountDataProto.speciesId cannot be set twice.');
 					}
 					++species_id$count;
-					this.speciesId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.speciesId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (upgrade_exp_additional$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountDataProto.upgradeExpAdditional cannot be set twice.');
 					}
 					++upgrade_exp_additional$count;
-					this.upgradeExpAdditional = com.netease.protobuf.ReadUtils.read$TYPE_FLOAT(input);
+					this.upgradeExpAdditional = com.netease.protobuf.ReadUtils.read_TYPE_FLOAT(input);
 					break;
 				case 8:
 					if (resource$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountDataProto.resource cannot be set twice.');
 					}
 					++resource$count;
-					this.resource = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.resource = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 9:
 					if (ride_move_speed$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountDataProto.rideMoveSpeed cannot be set twice.');
 					}
 					++ride_move_speed$count;
-					this.rideMoveSpeed = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.rideMoveSpeed = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 10:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.vitalityExp);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.vitalityExp);
 						break;
 					}
-					this.vitalityExp.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.vitalityExp.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				case 11:
 					if (mount_refine_add_vitality_exp$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountDataProto.mountRefineAddVitalityExp cannot be set twice.');
 					}
 					++mount_refine_add_vitality_exp$count;
-					this.mountRefineAddVitalityExp = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.mountRefineAddVitalityExp = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

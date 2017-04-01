@@ -1,13 +1,11 @@
 package com.rpgGame.app.manager.chat
 {
+	import com.rpgGame.core.app.AppLoadManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	
-	import flash.events.Event;
 	import flash.events.ProgressEvent;
 	
 	import away3d.loaders.multi.MultiLoadData;
-	
-	import feathers.themes.ThemeLoader;
 	
 	import org.client.mainCore.ds.HashMap;
 
@@ -31,20 +29,28 @@ package com.rpgGame.app.manager.chat
 		{
 			if (_isLoad)
 			{
-				fun && fun.apply(null,params);
+				if(fun != null)
+				{
+					fun && fun.apply(null,params);
+				}
 				return;
 			}
 			if(_completeFunMap == null)
 			{
 				_completeFunMap = new HashMap();
 			}
-			_completeFunMap.add(fun,params);
-			var loader : ThemeLoader = new ThemeLoader();
-			var url : String = ClientConfig.getUI(FACE_RESOURCE);
-			loader.load(url, onFinish, onPorgress, onError);
+			if(fun != null)
+			{
+				_completeFunMap.add(fun,params);
+			}
+//			var loader : ThemeLoader = new ThemeLoader();
+//			var url : String = ClientConfig.getUI(FACE_RESOURCE);
+//			loader.load(url, onFinish, onPorgress, onError);
+			var loadUrl : String = ClientConfig.getUI(FACE_RESOURCE);
+			AppLoadManager.instace().loadByUrl(loadUrl, "", onFinish, onError);
 		}
 
-		private static function onError(ld : MultiLoadData, e : Event) : void
+		private static function onError(_appUrl:* = null) : void
 		{
 			trace("表情素材载入失败！！！");
 		}
@@ -53,8 +59,12 @@ package com.rpgGame.app.manager.chat
 		{
 
 		}
+		
+		public static function get isLoad():Boolean{
+			return _isLoad;
+		}
 
-		private static function onFinish(loader : ThemeLoader) : void
+		private static function onFinish(_appUrl:* = null) : void
 		{
 			trace("表情素材载入成功");
 			_isLoad = true;
@@ -65,6 +75,13 @@ package com.rpgGame.app.manager.chat
 				var call:Function = keys[i];
 				var params:Array = _completeFunMap.getValue(call);
 				call.apply(null,params);
+			}
+			_completeFunMap.clear();
+		}
+		
+		public static function removeFunKey(fun : Function):void{
+			if(fun!=null && _completeFunMap!=null){
+				_completeFunMap.remove(fun);
 			}
 		}
 

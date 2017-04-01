@@ -14,7 +14,7 @@ package app.message.MountSpeciesDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountSpeciesDatasProto.MountSpeciesDataProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountSpeciesDatasProto.MountSpeciesDataProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var id$field:int;
 
@@ -41,7 +41,7 @@ package app.message.MountSpeciesDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.MountSpeciesDatasProto.MountSpeciesDataProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.MountSpeciesDatasProto.MountSpeciesDataProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var name$field:String;
 
@@ -64,7 +64,7 @@ package app.message.MountSpeciesDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const REQUIRED_LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountSpeciesDatasProto.MountSpeciesDataProto.required_level", "requiredLevel", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const REQUIRED_LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountSpeciesDatasProto.MountSpeciesDataProto.required_level", "requiredLevel", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var required_level$field:int;
 
@@ -89,7 +89,7 @@ package app.message.MountSpeciesDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const MAX_LIFE_TIME:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountSpeciesDatasProto.MountSpeciesDataProto.max_life_time", "maxLifeTime", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MAX_LIFE_TIME:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountSpeciesDatasProto.MountSpeciesDataProto.max_life_time", "maxLifeTime", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var max_life_time$field:int;
 
@@ -114,7 +114,7 @@ package app.message.MountSpeciesDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const INDENTIFY_MONEY_COST:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountSpeciesDatasProto.MountSpeciesDataProto.indentify_money_cost", "indentifyMoneyCost", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const INDENTIFY_MONEY_COST:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountSpeciesDatasProto.MountSpeciesDataProto.indentify_money_cost", "indentifyMoneyCost", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var indentify_money_cost$field:int;
 
@@ -139,7 +139,7 @@ package app.message.MountSpeciesDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAN_RIDE_LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountSpeciesDatasProto.MountSpeciesDataProto.can_ride_level", "canRideLevel", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_RIDE_LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountSpeciesDatasProto.MountSpeciesDataProto.can_ride_level", "canRideLevel", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_ride_level$field:int;
 
@@ -164,7 +164,7 @@ package app.message.MountSpeciesDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAN_RIDE_FIGHT_LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountSpeciesDatasProto.MountSpeciesDataProto.can_ride_fight_level", "canRideFightLevel", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_RIDE_FIGHT_LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountSpeciesDatasProto.MountSpeciesDataProto.can_ride_fight_level", "canRideFightLevel", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_ride_fight_level$field:int;
 
@@ -192,31 +192,31 @@ package app.message.MountSpeciesDatasProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, id$field);
 			}
 			if (hasName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, name$field);
 			}
 			if (hasRequiredLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, required_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, required_level$field);
 			}
 			if (hasMaxLifeTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, max_life_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, max_life_time$field);
 			}
 			if (hasIndentifyMoneyCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, indentify_money_cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, indentify_money_cost$field);
 			}
 			if (hasCanRideLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, can_ride_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, can_ride_level$field);
 			}
 			if (hasCanRideFightLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, can_ride_fight_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, can_ride_fight_level$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -235,56 +235,56 @@ package app.message.MountSpeciesDatasProto {
 			var can_ride_level$count:uint = 0;
 			var can_ride_fight_level$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountSpeciesDataProto.id cannot be set twice.');
 					}
 					++id$count;
-					this.id = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.id = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountSpeciesDataProto.name cannot be set twice.');
 					}
 					++name$count;
-					this.name = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.name = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (required_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountSpeciesDataProto.requiredLevel cannot be set twice.');
 					}
 					++required_level$count;
-					this.requiredLevel = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.requiredLevel = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (max_life_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountSpeciesDataProto.maxLifeTime cannot be set twice.');
 					}
 					++max_life_time$count;
-					this.maxLifeTime = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.maxLifeTime = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (indentify_money_cost$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountSpeciesDataProto.indentifyMoneyCost cannot be set twice.');
 					}
 					++indentify_money_cost$count;
-					this.indentifyMoneyCost = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.indentifyMoneyCost = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (can_ride_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountSpeciesDataProto.canRideLevel cannot be set twice.');
 					}
 					++can_ride_level$count;
-					this.canRideLevel = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.canRideLevel = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (can_ride_fight_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountSpeciesDataProto.canRideFightLevel cannot be set twice.');
 					}
 					++can_ride_fight_level$count;
-					this.canRideFightLevel = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.canRideFightLevel = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

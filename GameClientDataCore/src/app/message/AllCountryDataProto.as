@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SELF_COUNTRY:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.AllCountryDataProto.self_country", "selfCountry", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryDataProto; });
+		public static const SELF_COUNTRY:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.AllCountryDataProto.self_country", "selfCountry", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryDataProto; });
 
 		private var self_country$field:app.message.CountryDataProto;
 
@@ -39,7 +39,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const OTHER_COUNTRIES:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.AllCountryDataProto.other_countries", "otherCountries", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.OtherCountryDataProto; });
+		public static const OTHER_COUNTRIES:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.AllCountryDataProto.other_countries", "otherCountries", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.OtherCountryDataProto; });
 
 		[ArrayElementType("app.message.OtherCountryDataProto")]
 		public var otherCountries:Array = [];
@@ -50,11 +50,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasSelfCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, self_country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, self_country$field);
 			}
 			for (var otherCountries$index:uint = 0; otherCountries$index < this.otherCountries.length; ++otherCountries$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.otherCountries[otherCountries$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.otherCountries[otherCountries$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -67,7 +67,7 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var self_country$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (self_country$count != 0) {
@@ -75,10 +75,10 @@ package app.message {
 					}
 					++self_country$count;
 					this.selfCountry = new app.message.CountryDataProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.selfCountry);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.selfCountry);
 					break;
 				case 2:
-					this.otherCountries.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.OtherCountryDataProto()));
+					this.otherCountries.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.OtherCountryDataProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

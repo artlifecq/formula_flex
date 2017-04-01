@@ -1,7 +1,5 @@
 package com.rpgGame.core.loader
 {
-	import flash.system.ApplicationDomain;
-	
 	public class Resource3DLoadRequest
 	{
 		/**
@@ -20,7 +18,7 @@ package com.rpgGame.core.loader
 		public var errorCallBack:Function;
 		
 		/**
-		 * 资源加载进度回调函数，需要提供三个个参数,形如：fun(url:String,bytesLoaded:int,bytesTotal:int),url表示资源的地址,bytesLoaded是已经加载的字节数，bytesTotal是总的需要加载的字节数，bytesTotal是总的需要加载的字节数
+		 * 资源加载进度回调函数，需要提供三个个参数,形如：fun(url:String,bytesLoaded:int,bytesTotal:int),url表示资源的地址,bytesLoaded是已经加载的字节数，bytesTotal是总的需要加载的字节数
 		 */		
 		public var progressCallBack:Object;
 		
@@ -49,7 +47,7 @@ package com.rpgGame.core.loader
 		 * @param url 请求加载的资源地址 
 		 * @param completeCallBack 资源加载成功的回调函数，回调函数需要提供一个参数，形如func(resource3D:Resource3D):void 
 		 * @param errorCallBack 资源加载失败回调函数，回调函数需要提供一个参数，形如func(url:String):void, 其中url表示加载的资源地址
-		 * @param progressCallBack 资源加载进度回调函数，需要提供三个个参数,形如：fun(url:String,bytesLoaded:int,bytesTotal:int),url表示资源的地址,bytesLoaded是已经加载的字节数，bytesTotal是总的需要加载的字节数，bytesTotal是总的需要加载的字节数
+		 * @param progressCallBack 资源加载进度回调函数，需要提供三个个参数,形如：fun(url:String,bytesLoaded:int,bytesTotal:int),url表示资源的地址,bytesLoaded是已经加载的字节数，bytesTotal是总的需要加载的字节数
 		 * @param priority 资源加载优先级,数值越大，优先级越高
 		 * @param args 在资源加载完成之后，希望在回调函数里依旧返回回来的参数，如果这个参数不为空，那么completeCallBack就需要提供两个参数,形如 func(resource3D:Resource3D,args:Object):void 
 		 * @param loaderType 加载资源的类

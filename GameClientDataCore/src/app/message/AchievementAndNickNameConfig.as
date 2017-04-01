@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ACHIEVEMENTS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.AchievementAndNickNameConfig.achievements", "achievements", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AchievementsProto; });
+		public static const ACHIEVEMENTS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.AchievementAndNickNameConfig.achievements", "achievements", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AchievementsProto; });
 
 		private var achievements$field:app.message.AchievementsProto;
 
@@ -39,7 +39,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NICKNAMES:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.AchievementAndNickNameConfig.nicknames", "nicknames", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NicknamesProto; });
+		public static const NICKNAMES:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.AchievementAndNickNameConfig.nicknames", "nicknames", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NicknamesProto; });
 
 		private var nicknames$field:app.message.NicknamesProto;
 
@@ -65,11 +65,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasAchievements) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, achievements$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, achievements$field);
 			}
 			if (hasNicknames) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, nicknames$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, nicknames$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -83,7 +83,7 @@ package app.message {
 			var achievements$count:uint = 0;
 			var nicknames$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (achievements$count != 0) {
@@ -91,7 +91,7 @@ package app.message {
 					}
 					++achievements$count;
 					this.achievements = new app.message.AchievementsProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.achievements);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.achievements);
 					break;
 				case 2:
 					if (nicknames$count != 0) {
@@ -99,7 +99,7 @@ package app.message {
 					}
 					++nicknames$count;
 					this.nicknames = new app.message.NicknamesProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.nicknames);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.nicknames);
 					break;
 				default:
 					super.readUnknown(input, tag);

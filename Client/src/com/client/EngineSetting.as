@@ -1,8 +1,6 @@
 package com.client
 {
 	import com.game.engine2D.Engine;
-	import com.game.engine2D.config.GlobalConfig2D;
-	import com.game.engine2D.vo.PoolFrontMesh;
 	import com.game.engine3D.config.GlobalConfig;
 	import com.gameClient.utils.VersionUtils;
 	
@@ -29,8 +27,9 @@ package com.client
 		{
 			GlobalConfig.radiusForEntity = 32;
 			GlobalConfig.use2DMap = true;
-			GlobalConfig.MAP_2D_CAMERA_ANGLE = 45;
-			GlobalConfig2D.MapZoneClass = PoolFrontMesh;
+//			GlobalConfig.MAP_2D_CAMERA_ANGLE = 45;
+			GlobalConfig.mapCameraAngle = -40;
+			
 			GlobalConfig.setGlobalConfig(null, VersionUtils.getVersionPath);
 			
 			Engine.initEngine(60,null,VersionUtils.getVersionPath,50,50,256,256);
@@ -52,8 +51,6 @@ package com.client
 			Away3D.EVIL3D_VERSION = Math.random() * int.MAX_VALUE;
 			MultiUrlLoadManager.getUrlWithVersion = VersionUtils.getVersionPath;
 			Away3D.USE_TEXTURES_BPG_FORMAT = ClientGlobal.useBpgFormat;
-			trace("EngineSetting.initAway3D():",Away3D.USE_TEXTURES_BPG_FORMAT);
-			
 			if (ClientGlobal.uiCompressed)
 			{
 				GuiTheme.defaultTextureFormat = TextureFormatEnum.BPG;
@@ -66,7 +63,7 @@ package com.client
 		{
 			GuiTheme.RES_ROOT = ClientGlobal.baseDir + ClientGlobal.resURL;
 			GuiTheme.decodeURL = VersionUtils.getVersionPath;
-			GuiTheme.useWorkerLoadTextureBytes = true;
+//			GuiTheme.useWorkerLoadTextureBytes = true;
 			GuiTheme.useCompressedTexture = false; //ClientGlobal.uiCompressed;
 		}
 	}

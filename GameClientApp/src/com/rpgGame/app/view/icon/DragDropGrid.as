@@ -21,6 +21,7 @@ package com.rpgGame.app.view.icon
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.events.Touch;
+	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	
 	import utils.KeyboardMananger;
@@ -143,7 +144,7 @@ package com.rpgGame.app.view.icon
 				
 				if (touch.phase == TouchPhase.MOVED)
 				{
-					if( _gridInfo == null || iconResURL == "" )
+					if( _gridInfo == null || iconResURL == "" ||(checkDrag&&checkDrag()))
 						return;
 					
 					
@@ -284,8 +285,8 @@ package com.rpgGame.app.view.icon
 		
 		protected function dragSourceOutChange():void
 		{
-//			clear();
-//			TipTargetManager.removeTxtTipTarget(this);
+			clear();
+			TipTargetManager.remove(this);
 		}
 		
 		protected function dragSourceBack():void
@@ -342,6 +343,7 @@ package com.rpgGame.app.view.icon
 		
 		//---------------------@author luguozheng----------------------------- 
 		private var _rightMouseClickFun:Function;
+		public var checkDrag:Function;
 		public function get rightMouseClickFun():Function
 		{
 			return _rightMouseClickFun;

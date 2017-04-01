@@ -13,5 +13,6 @@ package com.rpgGame.core.events
 		public static const PAGE_RESIZE:int = UNIQUEID.NEXT;//网页高宽变化
 		
 		public static const SYS_TIME:int = UNIQUEID.NEXT;
+		public static const SYS_SET:int = UNIQUEID.NEXT;//系统设置
 	}
 }

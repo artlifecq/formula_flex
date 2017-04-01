@@ -19,6 +19,7 @@ package com.client.view.loading
 	import gs.easing.Linear;
 	
 	import org.mokylin.skin.loading.ResLoadingViewSkin;
+	import org.mokylin.skin.loading.loadingBarSkin;
 	
 	import starling.core.Starling;
 	import starling.display.Shape;
@@ -26,9 +27,9 @@ package com.client.view.loading
 
 	/**
 	 *
-	 * 资源加载视图
-	 * @author L.L.M.Sunny
-	 * 创建时间：2015-4-7 下午5:30:13
+	 * 资源加载界面
+	 * @author NEIL
+	 * 创建时间：2016-11-17 下午5:30:13
 	 *
 	 */
 	public class ResLoadingView
@@ -76,7 +77,7 @@ package com.client.view.loading
 			removeFirstLoadMc();
 			_resLoadingViewSkin = new ResLoadingViewSkin();
 			_resLoadingViewSkin.toSprite(_container);
-			if (ClientGlobal.isBanShu)
+	/*		if (ClientGlobal.isBanShu)
 			{
 				_resLoadingViewSkin.healthInfoGroup.visible = true;
 				_resLoadingViewSkin.healthInfoTxt1.nativeFilters = getDefaultStrokeFilter();
@@ -85,7 +86,7 @@ package com.client.view.loading
 			else
 			{
 				_resLoadingViewSkin.healthInfoGroup.visible = false;
-			}
+			}*/
 			barPercent = _barPercent;
 			title = _title;
 			onStageResize();
@@ -203,8 +204,8 @@ package com.client.view.loading
 			if (_resLoadingViewSkin)
 			{
 				_resLoadingViewSkin.progressTxt.text = "总进度：" + int(_barPercent * 100) + "%";
-				_resLoadingViewSkin.barLine.width = _resLoadingViewSkin.bgImage.width * _barPercent;
-				_resLoadingViewSkin.barHead.x = _offsetX - _resLoadingViewSkin.barGroup.x + _resLoadingViewSkin.bgImage.width * _barPercent;
+				var bar:loadingBarSkin=_resLoadingViewSkin.loadingBar.skin as loadingBarSkin;
+				bar.barLine.width=bar.load_bg.width*_barPercent;
 			}
 		}
 
@@ -223,7 +224,7 @@ package com.client.view.loading
 				{
 					_container.y = int((_stage.stageHeight - _resLoadingViewSkin.bgImage.height) * 0.5);
 				}
-				_resLoadingViewSkin.leftTxtGroup.x = (_stage.stageWidth < _resLoadingViewSkin.bgImage.width ? 38 + (_resLoadingViewSkin.bgImage.width - _stage.stageWidth) * 0.5 : 38);
+//				_resLoadingViewSkin.leftTxtGroup.x = (_stage.stageWidth < _resLoadingViewSkin.bgImage.width ? 38 + (_resLoadingViewSkin.bgImage.width - _stage.stageWidth) * 0.5 : 38);
 			}
 
 			if (_firstLoadMc)

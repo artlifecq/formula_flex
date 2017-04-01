@@ -1,7 +1,5 @@
 package com.game.engine3D.core.poolObject
 {
-	import com.game.mainCore.libCore.pool.IPoolClass;
-	import com.game.mainCore.libCore.pool.Pool;
 
 	import away3d.containers.ObjectContainer3D;
 
@@ -12,9 +10,9 @@ package com.game.engine3D.core.poolObject
 	 * 创建时间：2015-6-5 上午10:26:35
 	 *
 	 */
-	public class PoolContainer3D extends ObjectContainer3D implements IPoolClass
+	public class PoolContainer3D extends ObjectContainer3D implements IInstancePoolClass
 	{
-		private static var _pool : Pool = new Pool("PoolContainer3D", 600);
+		private static var _pool : InstancePool = new InstancePool("PoolContainer3D", 600);
 		private static var _cnt : int = 0;
 
 		public static function create() : PoolContainer3D
@@ -43,6 +41,40 @@ package com.game.engine3D.core.poolObject
 			super();
 			reSet(null);
 		}
+		
+		/*override public function set zOffset(value:int):void
+		{
+			super.zOffset = value;
+			if (value != 0 && GlobalConfig.use2DMap)
+			{
+				updateZoffset(this, value);
+			}
+		}
+
+		override public function addChild(child : ObjectContainer3D) : ObjectContainer3D
+		{
+			if (GlobalConfig.use2DMap)
+			{
+				var offset : int = this.zOffset;
+				if (offset != 0)
+				{
+					child.zOffset += offset;
+					updateZoffset(child, offset);
+				}
+			}
+			return super.addChild(child);
+		}
+
+		static private function updateZoffset(graphicDis : ObjectContainer3D, offset : Number) : void
+		{
+			for (var i : int = graphicDis.numChildren - 1; i >= 0; i--)
+			{
+				var child : ObjectContainer3D = graphicDis.getChildAt(i);
+				child.zOffset += offset;
+				if (child.numChildren > 0)
+					updateZoffset(child, offset);
+			}
+		}*/
 
 		override public function dispose() : void
 		{
@@ -50,6 +82,7 @@ package com.game.engine3D.core.poolObject
 			{
 				this.removeChildAt(0);
 			}
+			this.zOffset = 0;
 			this.x = 0;
 			this.y = 0;
 			this.z = 0;
@@ -68,6 +101,16 @@ package com.game.engine3D.core.poolObject
 
 		public function reSet($parameters : Array) : void
 		{
+		}
+
+		public function instanceDestroy() : void
+		{
+			dispose();
+		}
+
+		public function instanceDispose() : void
+		{
+			dispose();
 		}
 	}
 }

@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const X:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.Point2D.x", "x", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const X:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.Point2D.x", "x", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var x$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const Y:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.Point2D.y", "y", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const Y:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.Point2D.y", "y", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var y$field:int;
 
@@ -69,11 +69,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasX) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, x$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, x$field);
 			}
 			if (hasY) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, y$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, y$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -87,21 +87,21 @@ package app.message {
 			var x$count:uint = 0;
 			var y$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (x$count != 0) {
 						throw new flash.errors.IOError('Bad data format: Point2D.x cannot be set twice.');
 					}
 					++x$count;
-					this.x = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.x = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (y$count != 0) {
 						throw new flash.errors.IOError('Bad data format: Point2D.y cannot be set twice.');
 					}
 					++y$count;
-					this.y = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.y = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

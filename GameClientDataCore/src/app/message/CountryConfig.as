@@ -17,7 +17,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MISC:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryConfig.misc", "misc", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryMiscProto; });
+		public static const MISC:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryConfig.misc", "misc", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryMiscProto; });
 
 		private var misc$field:app.message.CountryMiscProto;
 
@@ -40,7 +40,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY_NAME:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryConfig.country_name", "countryName", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryNameProto; });
+		public static const COUNTRY_NAME:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryConfig.country_name", "countryName", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryNameProto; });
 
 		private var country_name$field:app.message.CountryNameProto;
 
@@ -63,7 +63,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const OFFICER_DATAS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.CountryConfig.officer_datas", "officerDatas", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryOfficerDatasProto; });
+		public static const OFFICER_DATAS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.CountryConfig.officer_datas", "officerDatas", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryOfficerDatasProto; });
 
 		private var officer_datas$field:app.message.CountryOfficerDatasProto;
 
@@ -89,15 +89,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasMisc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, misc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, misc$field);
 			}
 			if (hasCountryName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, country_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, country_name$field);
 			}
 			if (hasOfficerDatas) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, officer_datas$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, officer_datas$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -112,7 +112,7 @@ package app.message {
 			var country_name$count:uint = 0;
 			var officer_datas$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (misc$count != 0) {
@@ -120,7 +120,7 @@ package app.message {
 					}
 					++misc$count;
 					this.misc = new app.message.CountryMiscProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.misc);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.misc);
 					break;
 				case 3:
 					if (country_name$count != 0) {
@@ -128,7 +128,7 @@ package app.message {
 					}
 					++country_name$count;
 					this.countryName = new app.message.CountryNameProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.countryName);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.countryName);
 					break;
 				case 4:
 					if (officer_datas$count != 0) {
@@ -136,7 +136,7 @@ package app.message {
 					}
 					++officer_datas$count;
 					this.officerDatas = new app.message.CountryOfficerDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.officerDatas);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.officerDatas);
 					break;
 				default:
 					super.readUnknown(input, tag);

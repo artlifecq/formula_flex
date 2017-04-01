@@ -17,7 +17,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LIFE:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.SceneModuleObjOtherProto.life", "life", (13 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LIFE:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.SceneModuleObjOtherProto.life", "life", (13 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var life$field:Int64;
 
@@ -40,7 +40,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MANA:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.SceneModuleObjOtherProto.mana", "mana", (14 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MANA:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.SceneModuleObjOtherProto.mana", "mana", (14 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var mana$field:Int64;
 
@@ -63,7 +63,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_STAT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SceneModuleObjOtherProto.total_stat", "totalStat", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
+		public static const TOTAL_STAT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SceneModuleObjOtherProto.total_stat", "totalStat", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
 
 		private var total_stat$field:app.message.SpriteStatProto;
 
@@ -86,7 +86,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PK_STATUS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SceneModuleObjOtherProto.pk_status", "pkStatus", (31 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SceneModuleObjOtherProto.OtherHeroPKStatusProto; });
+		public static const PK_STATUS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SceneModuleObjOtherProto.pk_status", "pkStatus", (31 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SceneModuleObjOtherProto.OtherHeroPKStatusProto; });
 
 		private var pk_status$field:app.message.SceneModuleObjOtherProto.OtherHeroPKStatusProto;
 
@@ -109,7 +109,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HERO_LEVEL:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SceneModuleObjOtherProto.hero_level", "heroLevel", (46 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.HeroLevelProto; });
+		public static const HERO_LEVEL:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SceneModuleObjOtherProto.hero_level", "heroLevel", (46 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.HeroLevelProto; });
 
 		private var hero_level$field:app.message.HeroLevelProto;
 
@@ -132,7 +132,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FIGHTING_AMOUNT:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.SceneModuleObjOtherProto.fighting_amount", "fightingAmount", (16 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FIGHTING_AMOUNT:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.SceneModuleObjOtherProto.fighting_amount", "fightingAmount", (16 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var fighting_amount$field:Int64;
 
@@ -158,27 +158,27 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasLife) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, life$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, life$field);
 			}
 			if (hasMana) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 14);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, mana$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, mana$field);
 			}
 			if (hasTotalStat) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, total_stat$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, total_stat$field);
 			}
 			if (hasPkStatus) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 31);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, pk_status$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, pk_status$field);
 			}
 			if (hasHeroLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 46);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, hero_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, hero_level$field);
 			}
 			if (hasFightingAmount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 16);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, fighting_amount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, fighting_amount$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -196,21 +196,21 @@ package app.message {
 			var hero_level$count:uint = 0;
 			var fighting_amount$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 13:
 					if (life$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneModuleObjOtherProto.life cannot be set twice.');
 					}
 					++life$count;
-					this.life = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.life = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 14:
 					if (mana$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneModuleObjOtherProto.mana cannot be set twice.');
 					}
 					++mana$count;
-					this.mana = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.mana = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 6:
 					if (total_stat$count != 0) {
@@ -218,7 +218,7 @@ package app.message {
 					}
 					++total_stat$count;
 					this.totalStat = new app.message.SpriteStatProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.totalStat);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.totalStat);
 					break;
 				case 31:
 					if (pk_status$count != 0) {
@@ -226,7 +226,7 @@ package app.message {
 					}
 					++pk_status$count;
 					this.pkStatus = new app.message.SceneModuleObjOtherProto.OtherHeroPKStatusProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.pkStatus);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.pkStatus);
 					break;
 				case 46:
 					if (hero_level$count != 0) {
@@ -234,14 +234,14 @@ package app.message {
 					}
 					++hero_level$count;
 					this.heroLevel = new app.message.HeroLevelProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.heroLevel);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.heroLevel);
 					break;
 				case 16:
 					if (fighting_amount$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SceneModuleObjOtherProto.fightingAmount cannot be set twice.');
 					}
 					++fighting_amount$count;
-					this.fightingAmount = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.fightingAmount = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

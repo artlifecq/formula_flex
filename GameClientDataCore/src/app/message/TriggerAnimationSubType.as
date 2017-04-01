@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TIMING:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TriggerAnimationSubType.timing", "timing", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TIMING:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TriggerAnimationSubType.timing", "timing", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var timing$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_REPEAT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.TriggerAnimationSubType.is_repeat", "isRepeat", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_REPEAT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.TriggerAnimationSubType.is_repeat", "isRepeat", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_repeat$field:Boolean;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_REMOVE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.TriggerAnimationSubType.is_remove", "isRemove", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_REMOVE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.TriggerAnimationSubType.is_remove", "isRemove", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_remove$field:Boolean;
 
@@ -91,7 +91,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TIME:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TriggerAnimationSubType.time", "time", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TIME:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TriggerAnimationSubType.time", "time", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var time$field:int;
 
@@ -119,19 +119,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasTiming) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, timing$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, timing$field);
 			}
 			if (hasIsRepeat) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_repeat$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_repeat$field);
 			}
 			if (hasIsRemove) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_remove$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_remove$field);
 			}
 			if (hasTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, time$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -147,35 +147,35 @@ package app.message {
 			var is_remove$count:uint = 0;
 			var time$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (timing$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TriggerAnimationSubType.timing cannot be set twice.');
 					}
 					++timing$count;
-					this.timing = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.timing = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (is_repeat$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TriggerAnimationSubType.isRepeat cannot be set twice.');
 					}
 					++is_repeat$count;
-					this.isRepeat = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isRepeat = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 3:
 					if (is_remove$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TriggerAnimationSubType.isRemove cannot be set twice.');
 					}
 					++is_remove$count;
-					this.isRemove = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isRemove = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 4:
 					if (time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TriggerAnimationSubType.time cannot be set twice.');
 					}
 					++time$count;
-					this.time = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.time = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

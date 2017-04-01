@@ -20,12 +20,17 @@ package com.game.engine3D.config
 
 		public static const DEBUG_HEAD : String = "[GameEngine3D Debug]";
 
-		public static var transformPlanarRotation:Boolean = true;
-		
-		private static var _use25DMap : Boolean = false;
 		private static var _use2DMap : Boolean = false;
-		private static var _map_2D_scale_z_dir : Number = 1;
-		private static var _map_2D_camera_angle : int = 30; //2d场景中的摄像头角度
+//		private static var _map_2D_scale_z_dir : Number = 1;
+//		private static var _map_2D_camera_angle : int = 30; //2d场景中的摄像头角度
+		
+		private static var _mapCameraAngle:Number = 40;
+		private static var _mapCameraRadian:Number;
+		private static var _map2dScaleZDir:Number = 1;
+		
+		private static var _transformPlanared : Boolean = true;
+		
+		private static var _kernelVersion : String = "";
 
 		public function GlobalConfig()
 		{
@@ -51,33 +56,73 @@ package com.game.engine3D.config
 		public static function set use2DMap(value : Boolean) : void
 		{
 			_use2DMap = value;
-			_map_2D_scale_z_dir = value ? Math.sin(MAP_2D_CAMERA_ANGLE * Math.PI / 180) : 1;
 		}
 
-		public static function get use25DMap() : Boolean
+		public static function get2DMapDepth(value : int) : int
 		{
-			return _use25DMap;
-		}
-
-		public static function set use25DMap(value : Boolean) : void
-		{
-			_use25DMap = value;
-		}
-
-		public static function get MAP_2D_CAMERA_ANGLE() : int
-		{
-			return _map_2D_camera_angle;
-		}
-
-		public static function set MAP_2D_CAMERA_ANGLE(value : int) : void
-		{
-			_map_2D_camera_angle = value;
-			_map_2D_scale_z_dir = _use2DMap ? Math.sin(_map_2D_camera_angle * Math.PI / 180) : 1;
+			return (value>0?value:-value)<<7;
 		}
 		
-		public static function transformCoord_2d_3d(y : Number) : Number
+		public static function get transformPlanared():Boolean
 		{
-			return int(y / _map_2D_scale_z_dir);
+			return _transformPlanared;
+		}
+		
+		public static function set transformPlanared(value:Boolean):void
+		{
+			_transformPlanared = value;
+		}
+		
+		public static function get mapCameraAngle():Number
+		{
+			return _mapCameraAngle;
+		}
+
+		public static function set mapCameraAngle(value:Number):void
+		{
+			_mapCameraAngle = value;
+			_mapCameraRadian = (_mapCameraAngle *Math.PI)/180.0;
+			_map2dScaleZDir = Math.tan(Math.abs(_mapCameraRadian));
+		}
+
+		public static function get mapCameraRadian():Number
+		{
+			return _mapCameraRadian;
+		}
+		
+		public static function transform2dValue(y:Number):Number
+		{
+			return y*_map2dScaleZDir;
+		}
+
+		public static function get map2dScaleZDir():Number
+		{
+			return _map2dScaleZDir;
+		}
+		
+		public static function set kernelVersion(value : String) : void
+		{
+			_kernelVersion = value;
+		}
+		
+		public static function get kernelVersion() : String
+		{
+			return _kernelVersion;
+		}
+		
+		public static function get kernelIsIE() : Boolean
+		{
+			return Boolean(_kernelVersion == "IE");
+		}
+		
+		public static function get kernelIsChrome() : Boolean
+		{
+			return Boolean(_kernelVersion == "Chrome");
+		}
+		
+		public static function get kernelIsFireFox() : Boolean
+		{
+			return Boolean(_kernelVersion == "Firefox");
 		}
 	}
 }

@@ -7,9 +7,7 @@ package com.rpgGame.coreData.clientConfig
 	* 【**不可手动修改此类**】，
 	*	
 	* 【任何修改都将被生成工具覆盖，如需修改请直接修改具体的config文件】
-	* @author fly.AutoUICreater
-	* @modifier L.L.M.Sunny
-	* 修改时间：2015-7-2 上午10:05:12
+	* @author NEIL
 	* 
 	*/
 	public class AvatarClothesRes
@@ -18,16 +16,16 @@ package com.rpgGame.coreData.clientConfig
 		public var id:int;
 		 /**  资源名称 */
 		public var name:String;
-		 /**  头发资源ID */
+		 /**  身体资源名称 */
+		public var bodyRes:String;
+		 /**  特效资源路径 */
+		public var effectRes:String;
+		 /**  武器资源ID(作废) */
+		public var weaponResId:int;
+		 /**  副武器资源ID(作废) */
+		public var deputyWeaponResId:int;
+		 /**  头发资源ID(作废) */
 		public var hairResId:int;
-		 /**  男身体资源名称 */
-		public var bodyRes_man:String;
-		 /**  男特效资源路径 */
-		public var effectRes_man:String;
-		 /**  女身体资源名称 */
-		public var bodyRes_woman:String;
-		 /**  女特效资源路径 */
-		public var effectRes_woman:String;
 
 	}
 }

@@ -7,9 +7,7 @@ package com.rpgGame.coreData.lang
 	* 【**不可手动修改此类**】，
 	*	
 	* 【任何修改都将被生成工具覆盖，如需修改请直接修改具体的config文件】
-	* @author fly.AutoUICreater
-	* @modifier L.L.M.Sunny
-	* 修改时间：2015-7-2 上午10:05:12
+	* @author NEIL
 	* 
 	*/
 	public class LangAlertInfo
@@ -174,6 +172,8 @@ package com.rpgGame.coreData.lang
 		public static const COUNTRY_WAR_START:String = "COUNTRY_WAR_START";
 		 /**  知识竞赛开始了，是否立即参与答题？ */
 		public static const datiStartAlert:String = "datiStartAlert";
+		 /**  $秒后您可以再次免费发送弹幕，立刻发送需要消耗银两$两 */
+		public static const COUNTRY_WAR_DAN_MU:String = "COUNTRY_WAR_DAN_MU";
 
 	}
 }

@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NAME:RepeatedFieldDescriptor$TYPE_STRING = new RepeatedFieldDescriptor$TYPE_STRING("app.message.CountryNameProto.name", "name", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:RepeatedFieldDescriptor_TYPE_STRING = new RepeatedFieldDescriptor_TYPE_STRING("app.message.CountryNameProto.name", "name", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		[ArrayElementType("String")]
 		public var name:Array = [];
@@ -25,7 +25,7 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			for (var name$index:uint = 0; name$index < this.name.length; ++name$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, this.name[name$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, this.name[name$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -37,10 +37,10 @@ package app.message {
 		 */
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
-					this.name.push(com.netease.protobuf.ReadUtils.read$TYPE_STRING(input));
+					this.name.push(com.netease.protobuf.ReadUtils.read_TYPE_STRING(input));
 					break;
 				default:
 					super.readUnknown(input, tag);

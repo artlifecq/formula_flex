@@ -70,13 +70,24 @@ package com.rpgGame.core.app
 		/** 测试面板 **/
 		public static var UIDEMO_PANEL:String = createAppInfo("demo.UIDemoPanel");
 		/** 人物面板 **/
-		public static var ROLE_PANEL:String = createAppInfo("role.RolePanel","role");
+		public static var ROLE_PANEL:String = createAppInfo("role.RolePanel","beibao");
+		/** 玩家信息面板 **/
+		public static var PLAYERINFO_PANEL:String = createAppInfo("role.PlayerInfoPanel","beibao");
 		/** 查看面板*/
 		public static var LOOK_PANEL:String = createAppInfo("look.LookPanel","look");
 		/** 背包面板 **/
-		public static var BACK_PACK_PANEL:String = createAppInfo("backpack.BackpackPanel","backpack");
+		public static var BACK_PACK_PANEL:String = createAppInfo("bag.BagPanel","beibao");
 		public static var STORAGE_PANEL:String = createAppInfo("storage.StoragePanel");
 		public static var RELIVE_PANEL:String = createAppInfo( "relive.RelivePanel","relive");
+		/**
+		 *死亡复活 
+		 */
+		public static var DIE_PANEL:String = createAppInfo( "die.DiePanel","siwangfuhuo");
+		/**
+		 *武学面板 
+		 */
+		public static var SKILL_PANL:String = createAppInfo( "skill.SkillPanel","wuxue");
+		
 		
 		/**世界地图**/
 		public static var WORLD_MAP_PANEL:String = createAppInfo( "worldMap.WorldMapPanel" ,"worldmap");
@@ -327,5 +338,7 @@ package com.rpgGame.core.app
 		public static var STALL_SELL_GOODS_TO_STALL : String = createAppInfo("stall.SellGoodsToStallPanel","stall");
 		/**查看摊位区域**/
 		public static var STALL_AREA_PANEL : String = createAppInfo("stall.StallAreaPanel");
+		/**系统设置**/
+		public static var SYSTEMSET_PANEL:String = createAppInfo("systemset.SystemsetingPanel","systemSet");
 	}
 }

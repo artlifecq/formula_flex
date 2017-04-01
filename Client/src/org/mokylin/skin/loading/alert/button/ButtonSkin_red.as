@@ -75,15 +75,15 @@ package org.mokylin.skin.loading.alert.button
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
-			temp.height = 42;
+			temp.height = 35;
 			temp.left = 0;
+			temp.right = 0;
 			temp.fontSize = 16;
-			temp.text = "已 阅 读 并 同 意 声 明";
+			temp.text = "已 阅 读";
 			temp.textAlign = "center";
 			temp.color = 0xF9F0CC;
 			temp.top = 0;
 			temp.verticalAlign = "middle";
-			temp.width = 211;
 			return temp;
 		}
 

@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BASE_TASK:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.StoryTaskProto.base_task", "baseTask", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TaskProto; });
+		public static const BASE_TASK:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.StoryTaskProto.base_task", "baseTask", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TaskProto; });
 
 		private var base_task$field:app.message.TaskProto;
 
@@ -41,7 +41,7 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasBaseTask) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, base_task$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, base_task$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -54,7 +54,7 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var base_task$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (base_task$count != 0) {
@@ -62,7 +62,7 @@ package app.message {
 					}
 					++base_task$count;
 					this.baseTask = new app.message.TaskProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.baseTask);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.baseTask);
 					break;
 				default:
 					super.readUnknown(input, tag);

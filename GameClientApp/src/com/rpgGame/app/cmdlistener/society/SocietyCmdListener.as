@@ -20,9 +20,9 @@ package com.rpgGame.app.cmdlistener.society
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.ds.HashMap;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
-	import org.game.netCore.net.BytesUtil;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
+	import org.game.netCore.net_protobuff.BytesUtil;
 
 	/**
 	 *
@@ -40,75 +40,75 @@ package com.rpgGame.app.cmdlistener.society
 
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_CREATE_FAMILY_FAIL, onRecCreateFamilyFail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_CREATE_FAMILY_SUCCESS, onRecCreateFamilySuccess);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_NEW_FAMILY_CREATED_BROADCAST, onRecNewFamilyCreatedBroadcast);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_REPLY_SELF_FAMILY_LIST, onRecReplySelfFamilyList);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_REPLY_OTHER_FAMILY_LIST, onRecReplyOtherFamilyList);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_GET_SELF_FAMILY_INFO_FAIL, onRecGetSelfFamilyInfoFail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_REPLY_SELF_FAMILY_INFO, onRecGetSelfFamilyInfo);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_CHANGE_ANNOUNCEMENT_FAIL, onRecChangeAnnouncementFail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_CHANGE_ANNOUNCEMENT_SUCCESS, onRecChangeAnnouncementSuccess);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_ANNOUNCEMENT_CHANGED_BROADCAST, onRecAnnouncementChangedBroadcast);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_DO_DONATE_FAIL, onRecDoDonateFail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_DO_DONATE_SUCCESS, onRecDoDonateSuccess);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_OTHER_DO_DONATE_BROADCAST, onRecOtherDoDonateBroadcast);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_FAMILY_UPGRADE_BUILDING_FAIL, onFamilyUpgradeBuildingFail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_FAMILY_UPGRADE_BUILDING_SUCCESS, onFamilyUpgradeBuildingSuccess);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_FAMILY_UPGRADE_BUILDING_BROADCAST, onFamilyUpgradeBuildingBroadcast);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_IMPEACH_FAMILY_LEADER, onImpeachFamilyLeader);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_IMPEACH_FAMILY_LEADER_FAIL, onImpeachFamilyLeaderFail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_LEARN_FAMILY_COLLAGE_SPELL, onLearnFamilyCollageSpell);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_LEARN_FAMILY_COLLAGE_SPELL_FAIL, onLearnFamilyCollageSpellFail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_GET_NEWS_FAIL, onGetNewsFail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_REPLY_NEWS, onReplyNews);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_DISMISS_FAMILY_FAIL, onRecDismissFamilyFail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_DISMISS_FAMILY_SUCCESS, onRecDismissFamilySuccess);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_LEAVE_FAMILY_FAIL, onRecLeaveFamilyFail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_LEAVE_FAMILY_SUCCESS, onRecLeaveFamilySuccess);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_OTHER_LEAVE_FAMILY_BROADCAST, onRecOtherLeaveFamilyBroadcast);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_KICK_MEMBER_FAIL, onRecKickMemberFail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_KICK_MEMBER_SUCCESS, onRecKickMemberSuccess);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_YOU_BEEN_KICKED, onRecYouBeenKicked);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_SOMEONE_BEEN_KICKED_BROADCAST, onRecSomeoneBeenKickEdBroadcast);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_SET_FAMILY_AUTO_ACCEPT_JOIN_REQUEST_FAIL, onRecSetFamilyAutoAcceptJoinRequestFail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_SET_FAMILY_AUTO_ACCEPT_JOIN_REQUEST_SUCCESS, onRecSetFamilyAutoAcceptJoinRequestSucces);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_FAMILY_DISMISSED_BROADCAST, onRecDismissFamilyBroadcast);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_FAMILY_DISMISSED_LOW_ACTIVITY, onRecDismissFamilyLowActivity);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_LOW_ACTIVITY_WARNING, onRecLowActivityWarning);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_JOIN_FAMILY_IN_CD, onRecJoinFamilyInCd);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_SET_POSITION_FAIL, onRecSetPositionFail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_SET_POSITION_SUCCESS, onRecSetPositionSuccess);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_POSITION_CHANGE_BROADCAST, onRecPositionChangeBroadcast);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_REQUEST_JOIN_FAIL, onRecRequestJoinFail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_REQUEST_JOIN_SUCCESS, onRecRequestJoinSuccess);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_REQUEST_JOIN_SUCCESS_WAIT_OTHER_REPLY, onRequestJoinSuccessWaitOtherReply);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_OTHER_JOIN_FAMILY, onRecOtherJoinFamily);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_YOU_JOIN_FAMILY, onRecYouJoinFamily);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_HAS_REQUEST_JOIN_FAMILYS, onRecRequestJoinFamilys);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_GET_REQUEST_JOIN_DETAIL, onRecGetRequestJoinDetail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_GET_REQUEST_JOIN_DETAIL_FAIL, onRecGetRequestJoinDetailFail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_HAS_REQUEST_JOIN, onRecHasRequestJoin);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_REPLY_JOIN_REQUEST_SUCCESS, onRecReplyJoinRequestSuccess);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_REPLY_JOIN_REQUEST_FAIL, onRecReplyJoinRequestFail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_YOUR_JOIN_REQUEST_CANCEL, onRecYourJoinRequestCancel);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_OTHER_REJECTED_YOUR_JOIN_REQUEST, onRecOtherRejectedYourJoinRequest);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_OTHER_ACCEPTED_YOUR_JOIN_REQUEST, onRecOtherAcceptedYourJoinRequest);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_INVITE_JOIN_FAIL, onRecInvieJoinFail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_INVITE_JOIN_SUCCESS, onRecInvieJoinSuccess);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_INVITE_JOIN_SUCCESS_AND_WAIT_OTHER_REPLY, onRecInvieJoinSuccessAndWaitOtherReply);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_RECEIVE_JOIN_INVITE, onRecReceiveJoinInvite);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_REPLY_JOIN_INVITE_FAIL, onRecReplyJoinInviteFail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_REPLY_JOIN_INVITE_SUCCESS, onRecReplyJoinInviteSuccess);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_OTHER_REJECTED_YOUR_JOIN_INVITE, onRecOtherRefectedYourJoinInvite);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_OTHER_ACCEPTED_YOUR_JOIN_INVITE, onRecOtherAcceptedYourJoinInvite);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_OPEN_FAMILY_ANIMAL_DUNGEON, onRecOpenFamilyAnimalDungeon);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_OPEN_FAMILY_ANIMAL_DUNGEON_FAIL, onRecOpenFamilyAnimalDungeonFail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_FAMILY_ANIMAL_DUNGEON_START, onRecFamilyAnimalDungeonStart);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_FAMILY_ANIMAL_DUNGEON_END, onRecFamilyAnimalDungeonEnd);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_TRY_ENTER_FAMILY_ANIMAL_DUNGOEN, onRecTryEnterFamilyAnimalDungeon);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_TRY_ENTER_FAMILY_ANIMAL_DUNGOEN_FAIL, onRecTryEnterFamilyAnimalDungeonFail);
-			SocketConnection.addCmdListener(FamilyModuleMessages.S2C_ENTER_FAMILY_ANIMAL_DUNGEON, onRecEnterFamilyAnimalDungeon);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_CREATE_FAMILY_FAIL, onRecCreateFamilyFail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_CREATE_FAMILY_SUCCESS, onRecCreateFamilySuccess);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_NEW_FAMILY_CREATED_BROADCAST, onRecNewFamilyCreatedBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_REPLY_SELF_FAMILY_LIST, onRecReplySelfFamilyList);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_REPLY_OTHER_FAMILY_LIST, onRecReplyOtherFamilyList);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_GET_SELF_FAMILY_INFO_FAIL, onRecGetSelfFamilyInfoFail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_REPLY_SELF_FAMILY_INFO, onRecGetSelfFamilyInfo);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_CHANGE_ANNOUNCEMENT_FAIL, onRecChangeAnnouncementFail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_CHANGE_ANNOUNCEMENT_SUCCESS, onRecChangeAnnouncementSuccess);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_ANNOUNCEMENT_CHANGED_BROADCAST, onRecAnnouncementChangedBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_DO_DONATE_FAIL, onRecDoDonateFail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_DO_DONATE_SUCCESS, onRecDoDonateSuccess);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_OTHER_DO_DONATE_BROADCAST, onRecOtherDoDonateBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_FAMILY_UPGRADE_BUILDING_FAIL, onFamilyUpgradeBuildingFail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_FAMILY_UPGRADE_BUILDING_SUCCESS, onFamilyUpgradeBuildingSuccess);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_FAMILY_UPGRADE_BUILDING_BROADCAST, onFamilyUpgradeBuildingBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_IMPEACH_FAMILY_LEADER, onImpeachFamilyLeader);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_IMPEACH_FAMILY_LEADER_FAIL, onImpeachFamilyLeaderFail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_LEARN_FAMILY_COLLAGE_SPELL, onLearnFamilyCollageSpell);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_LEARN_FAMILY_COLLAGE_SPELL_FAIL, onLearnFamilyCollageSpellFail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_GET_NEWS_FAIL, onGetNewsFail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_REPLY_NEWS, onReplyNews);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_DISMISS_FAMILY_FAIL, onRecDismissFamilyFail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_DISMISS_FAMILY_SUCCESS, onRecDismissFamilySuccess);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_LEAVE_FAMILY_FAIL, onRecLeaveFamilyFail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_LEAVE_FAMILY_SUCCESS, onRecLeaveFamilySuccess);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_OTHER_LEAVE_FAMILY_BROADCAST, onRecOtherLeaveFamilyBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_KICK_MEMBER_FAIL, onRecKickMemberFail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_KICK_MEMBER_SUCCESS, onRecKickMemberSuccess);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_YOU_BEEN_KICKED, onRecYouBeenKicked);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_SOMEONE_BEEN_KICKED_BROADCAST, onRecSomeoneBeenKickEdBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_SET_FAMILY_AUTO_ACCEPT_JOIN_REQUEST_FAIL, onRecSetFamilyAutoAcceptJoinRequestFail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_SET_FAMILY_AUTO_ACCEPT_JOIN_REQUEST_SUCCESS, onRecSetFamilyAutoAcceptJoinRequestSucces);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_FAMILY_DISMISSED_BROADCAST, onRecDismissFamilyBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_FAMILY_DISMISSED_LOW_ACTIVITY, onRecDismissFamilyLowActivity);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_LOW_ACTIVITY_WARNING, onRecLowActivityWarning);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_JOIN_FAMILY_IN_CD, onRecJoinFamilyInCd);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_SET_POSITION_FAIL, onRecSetPositionFail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_SET_POSITION_SUCCESS, onRecSetPositionSuccess);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_POSITION_CHANGE_BROADCAST, onRecPositionChangeBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_REQUEST_JOIN_FAIL, onRecRequestJoinFail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_REQUEST_JOIN_SUCCESS, onRecRequestJoinSuccess);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_REQUEST_JOIN_SUCCESS_WAIT_OTHER_REPLY, onRequestJoinSuccessWaitOtherReply);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_OTHER_JOIN_FAMILY, onRecOtherJoinFamily);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_YOU_JOIN_FAMILY, onRecYouJoinFamily);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_HAS_REQUEST_JOIN_FAMILYS, onRecRequestJoinFamilys);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_GET_REQUEST_JOIN_DETAIL, onRecGetRequestJoinDetail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_GET_REQUEST_JOIN_DETAIL_FAIL, onRecGetRequestJoinDetailFail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_HAS_REQUEST_JOIN, onRecHasRequestJoin);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_REPLY_JOIN_REQUEST_SUCCESS, onRecReplyJoinRequestSuccess);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_REPLY_JOIN_REQUEST_FAIL, onRecReplyJoinRequestFail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_YOUR_JOIN_REQUEST_CANCEL, onRecYourJoinRequestCancel);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_OTHER_REJECTED_YOUR_JOIN_REQUEST, onRecOtherRejectedYourJoinRequest);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_OTHER_ACCEPTED_YOUR_JOIN_REQUEST, onRecOtherAcceptedYourJoinRequest);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_INVITE_JOIN_FAIL, onRecInvieJoinFail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_INVITE_JOIN_SUCCESS, onRecInvieJoinSuccess);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_INVITE_JOIN_SUCCESS_AND_WAIT_OTHER_REPLY, onRecInvieJoinSuccessAndWaitOtherReply);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_RECEIVE_JOIN_INVITE, onRecReceiveJoinInvite);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_REPLY_JOIN_INVITE_FAIL, onRecReplyJoinInviteFail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_REPLY_JOIN_INVITE_SUCCESS, onRecReplyJoinInviteSuccess);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_OTHER_REJECTED_YOUR_JOIN_INVITE, onRecOtherRefectedYourJoinInvite);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_OTHER_ACCEPTED_YOUR_JOIN_INVITE, onRecOtherAcceptedYourJoinInvite);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_OPEN_FAMILY_ANIMAL_DUNGEON, onRecOpenFamilyAnimalDungeon);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_OPEN_FAMILY_ANIMAL_DUNGEON_FAIL, onRecOpenFamilyAnimalDungeonFail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_FAMILY_ANIMAL_DUNGEON_START, onRecFamilyAnimalDungeonStart);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_FAMILY_ANIMAL_DUNGEON_END, onRecFamilyAnimalDungeonEnd);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_TRY_ENTER_FAMILY_ANIMAL_DUNGOEN, onRecTryEnterFamilyAnimalDungeon);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_TRY_ENTER_FAMILY_ANIMAL_DUNGOEN_FAIL, onRecTryEnterFamilyAnimalDungeonFail);
+			SocketConnection_protoBuffer.addCmdListener(FamilyModuleMessages.S2C_ENTER_FAMILY_ANIMAL_DUNGEON, onRecEnterFamilyAnimalDungeon);
 
 			/////////////////////////////////////
 			finish();
@@ -286,7 +286,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecReplyJoinRequestFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REPLY_JOIN_REQUEST);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REPLY_JOIN_REQUEST);
 
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
@@ -332,7 +332,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecYourJoinRequestCancel(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REPLY_JOIN_REQUEST);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REPLY_JOIN_REQUEST);
 			var familyName : String = BytesUtil.readRemainUTF(buffer);
 			SocietyManager.removeJoinFamily(familyName);
 		}
@@ -344,7 +344,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecReplyJoinRequestSuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REPLY_JOIN_REQUEST);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REPLY_JOIN_REQUEST);
 		}
 
 		/**
@@ -393,7 +393,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecInvieJoinFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_INVITE_JOIN);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_INVITE_JOIN);
 
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
@@ -446,7 +446,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecInvieJoinSuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_INVITE_JOIN);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_INVITE_JOIN);
 			NoticeManager.showNotify("邀请成功，对方自动接受了您的邀请");
 		}
 
@@ -457,7 +457,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecInvieJoinSuccessAndWaitOtherReply(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_INVITE_JOIN);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_INVITE_JOIN);
 			NoticeManager.showNotify("邀请成功，请等待对方的回复");
 		}
 
@@ -548,7 +548,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecReplyJoinInviteSuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REPLY_JOIN_INVITE);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REPLY_JOIN_INVITE);
 		}
 
 		/**
@@ -710,7 +710,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecChangeAnnouncementFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_CHANGE_ANNOUNCEMENT);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_CHANGE_ANNOUNCEMENT);
 
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
@@ -740,7 +740,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecChangeAnnouncementSuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_CHANGE_ANNOUNCEMENT);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_CHANGE_ANNOUNCEMENT);
 			NoticeManager.showNotify(LangSociety.CHANGE_ANNOUNCEMENT_SUCCESS);
 			SocietyManager.submitAnnouncement();
 		}
@@ -767,7 +767,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecDoDonateFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_DO_DONATE);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_DO_DONATE);
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
 			switch (failID)
@@ -803,7 +803,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecDoDonateSuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_DO_DONATE);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_DO_DONATE);
 			NoticeManager.showNotify(LangSociety.SOCIETY_DO_DONATE_SUCCESS);
 		}
 
@@ -968,7 +968,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onLearnFamilyCollageSpell(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_LEARN_FAMILY_COLLAGE_SPELL);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_LEARN_FAMILY_COLLAGE_SPELL);
 			var index : int = buffer.readVarint32();
 			var level : int = buffer.readVarint32();
 			SocietyManager.setSocietySpellLevel(index, level);
@@ -987,7 +987,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onLearnFamilyCollageSpellFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_LEARN_FAMILY_COLLAGE_SPELL);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_LEARN_FAMILY_COLLAGE_SPELL);
 
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
@@ -1064,7 +1064,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecLeaveFamilyFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_LEAVE_FAMILY);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_LEAVE_FAMILY);
 
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
@@ -1091,7 +1091,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecLeaveFamilySuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_LEAVE_FAMILY);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_LEAVE_FAMILY);
 			SocietyManager.leaveSociety();
 		}
 
@@ -1105,7 +1105,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecDismissFamilyFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_DISMISS_FAMILY);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_DISMISS_FAMILY);
 
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
@@ -1134,7 +1134,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecDismissFamilySuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_DISMISS_FAMILY);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_DISMISS_FAMILY);
 			SocietyManager.leaveSociety();
 		}
 
@@ -1162,7 +1162,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecKickMemberFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_KICK_MEMBER);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_KICK_MEMBER);
 
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
@@ -1193,7 +1193,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecKickMemberSuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_KICK_MEMBER);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_KICK_MEMBER);
 		}
 
 		/**
@@ -1238,7 +1238,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecSetFamilyAutoAcceptJoinRequestFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_SET_FAMILY_AUTO_ACCEPT_JOIN_REQUEST);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_SET_FAMILY_AUTO_ACCEPT_JOIN_REQUEST);
 
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
@@ -1259,7 +1259,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecSetFamilyAutoAcceptJoinRequestSucces(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_SET_FAMILY_AUTO_ACCEPT_JOIN_REQUEST);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_SET_FAMILY_AUTO_ACCEPT_JOIN_REQUEST);
 		}
 
 		/**
@@ -1339,7 +1339,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecSetPositionFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_SET_POSITION);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_SET_POSITION);
 
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
@@ -1392,7 +1392,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecSetPositionSuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_SET_POSITION);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_SET_POSITION);
 
 			NoticeManager.showNotify("设置官职成功");
 		}
@@ -1456,7 +1456,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecRequestJoinFail(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REQUEST_JOIN);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REQUEST_JOIN);
 
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
@@ -1510,7 +1510,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRecRequestJoinSuccess(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REQUEST_JOIN);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REQUEST_JOIN);
 
 			var isApplyJoin : Boolean = buffer.readBoolean();
 			var societyName : String = buffer.readUTFBytes(buffer.bytesAvailable);
@@ -1536,7 +1536,7 @@ package com.rpgGame.app.cmdlistener.society
 		 */
 		private function onRequestJoinSuccessWaitOtherReply(buffer : ByteBuffer) : void
 		{
-			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REQUEST_JOIN);
+//			ReqLockUtil.unlockReq(FamilyModuleMessages.C2S_REQUEST_JOIN);
 
 			var outTime : Number = buffer.readVarint64();
 			var societyName : String = buffer.readUTFBytes(buffer.bytesAvailable);

@@ -2,6 +2,7 @@ package com.rpgGame.app.state.role.action
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.state.IState;
+	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.BaseRole;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
@@ -10,14 +11,15 @@ package com.rpgGame.app.state.role.action
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
-
+	
 	import away3d.animators.transitions.CrossfadeTransition;
-
+	
 	import gs.TweenLite;
+	import gs.easing.Linear;
 
 	/**
 	 *
-	 * 场景角色击倒状态
+	 * 场景角色击飞状态
 	 * @author L.L.M.Sunny
 	 * 创建时间：2015-8-7 下午5:25:12
 	 *
@@ -25,7 +27,9 @@ package com.rpgGame.app.state.role.action
 	public class FallState extends ActionState
 	{
 		private var _stateReference : FallStateReference;
-		private var _hardStiffTween : TweenLite;
+		
+		private var _totalTime : int;
+		
 		private var _totalFrameTween : TweenLite;
 		private var _hardStiffFinished : Boolean;
 
@@ -46,16 +50,50 @@ package com.rpgGame.app.state.role.action
 					if (_ref is FallStateReference)
 					{
 						_stateReference = _ref as FallStateReference;
-						if (_hardStiffTween)
-						{
-							_hardStiffTween.kill();
-							_hardStiffTween = null;
-						}
-						_hardStiffTween = TweenLite.delayedCall(_stateReference.stiffTime * 0.001, onStopHardStiff);
+						
+						doFlyBack();
 					}
 					else
 						throw new Error("击倒状态引用必须是FallStateRef类型！");
 				}
+			}
+		}
+		
+		private function doFlyBack() : void
+		{
+			if (_machine && !_machine.isDisposed)
+			{
+				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, z: true});
+				
+				var targetX : int = _stateReference.targetPos.x;
+				var targetZ : int = _stateReference.targetPos.y;
+				var atkorX : int = _stateReference.atkorPos.x;
+				var atkorZ : int = _stateReference.atkorPos.y;
+				var distance : Number = MathUtil.getDistance((_machine.owner as SceneRole).x, (_machine.owner as SceneRole).z, targetX, targetZ);
+				_totalTime = distance / _stateReference.moveSpeed;
+				
+				(_machine.owner as SceneRole).faceToGround(atkorX, atkorZ, 0);
+				if (_totalTime > 0)
+					TweenLite.to(_machine.owner as SceneRole, _totalTime, {x: targetX, z: targetZ, ease: Linear.easeNone, overwrite: 0, onComplete: onMoveComplete});
+				else
+					onMoveComplete();
+				
+				_stateReference.move();
+			}
+		}
+		
+		private function onMoveComplete() : void
+		{
+			if (_machine && !_machine.isDisposed)
+			{
+				var targetX : int = _stateReference.targetPos.x;
+				var targetZ : int = _stateReference.targetPos.y;
+				(_machine.owner as SceneRole).x = targetX;
+				(_machine.owner as SceneRole).z = targetZ;
+				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, z: true});
+				
+				stopHardStiff();
+				transition(RoleStateType.ACTION_GETUP, null, false, false, [RoleStateType.CONTROL_WALK_MOVE]);
 			}
 		}
 
@@ -149,22 +187,11 @@ package com.rpgGame.app.state.role.action
 			super.leave();
 			stopFall();
 			stopHardStiff();
-			_hardStiffFinished = false;
-		}
-
-		private function onStopHardStiff() : void
-		{
-			stopHardStiff();
-			transition(RoleStateType.ACTION_GETUP, null, false, false, [RoleStateType.CONTROL_WALK_MOVE]);
+			TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, z: true});
 		}
 
 		private function stopHardStiff() : void
 		{
-			if (_hardStiffTween)
-			{
-				_hardStiffTween.kill();
-				_hardStiffTween = null;
-			}
 			_hardStiffFinished = true;
 		}
 
@@ -181,6 +208,14 @@ package com.rpgGame.app.state.role.action
 			else if (nextState.type == RoleStateType.ACTION_TRAIL)
 			{
 				return true;
+			}
+			else if(nextState.type == RoleStateType.ACTION_RUN)
+			{
+				return true;
+			}
+			else if(nextState.type == RoleStateType.ACTION_WALK)
+			{
+				return true;	
 			}
 			else if ((_machine as RoleStateMachine).isBingDong)
 			{
@@ -214,11 +249,7 @@ package com.rpgGame.app.state.role.action
 				_totalFrameTween.kill();
 				_totalFrameTween = null;
 			}
-			if (_hardStiffTween)
-			{
-				_hardStiffTween.kill();
-				_hardStiffTween = null;
-			}
+		
 			super.dispose();
 		}
 	}

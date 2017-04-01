@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EQUIPMENT_LIST:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroEquipmentListProto.equipment_list", "equipmentList", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentListProto; });
+		public static const EQUIPMENT_LIST:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroEquipmentListProto.equipment_list", "equipmentList", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentListProto; });
 
 		private var equipment_list$field:app.message.EquipmentListProto;
 
@@ -38,7 +38,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const REFINE_TAOZ_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.HeroEquipmentListProto.refine_taoz_id", "refineTaozId", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const REFINE_TAOZ_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.HeroEquipmentListProto.refine_taoz_id", "refineTaozId", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var refine_taoz_id$field:int;
 
@@ -65,7 +65,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const QUALITY_TAOZ_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.HeroEquipmentListProto.quality_taoz_id", "qualityTaozId", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const QUALITY_TAOZ_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.HeroEquipmentListProto.quality_taoz_id", "qualityTaozId", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var quality_taoz_id$field:int;
 
@@ -93,15 +93,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasEquipmentList) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, equipment_list$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, equipment_list$field);
 			}
 			if (hasRefineTaozId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, refine_taoz_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, refine_taoz_id$field);
 			}
 			if (hasQualityTaozId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, quality_taoz_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, quality_taoz_id$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -116,7 +116,7 @@ package app.message {
 			var refine_taoz_id$count:uint = 0;
 			var quality_taoz_id$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (equipment_list$count != 0) {
@@ -124,21 +124,21 @@ package app.message {
 					}
 					++equipment_list$count;
 					this.equipmentList = new app.message.EquipmentListProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.equipmentList);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.equipmentList);
 					break;
 				case 2:
 					if (refine_taoz_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroEquipmentListProto.refineTaozId cannot be set twice.');
 					}
 					++refine_taoz_id$count;
-					this.refineTaozId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.refineTaozId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (quality_taoz_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroEquipmentListProto.qualityTaozId cannot be set twice.');
 					}
 					++quality_taoz_id$count;
-					this.qualityTaozId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.qualityTaozId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

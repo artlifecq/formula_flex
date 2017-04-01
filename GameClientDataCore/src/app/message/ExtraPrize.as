@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RANK:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ExtraPrize.rank", "rank", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RANK:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ExtraPrize.rank", "rank", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var rank$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PRIZE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.ExtraPrize.prize", "prize", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
+		public static const PRIZE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.ExtraPrize.prize", "prize", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
 
 		private var prize$field:app.message.PrizeProto;
 
@@ -65,7 +65,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EXTRAPERCENT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ExtraPrize.extraPercent", "extraPercent", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const EXTRAPERCENT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ExtraPrize.extraPercent", "extraPercent", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var extraPercent$field:int;
 
@@ -93,15 +93,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasRank) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, rank$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, rank$field);
 			}
 			if (hasPrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, prize$field);
 			}
 			if (hasExtraPercent) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, extraPercent$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, extraPercent$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -116,14 +116,14 @@ package app.message {
 			var prize$count:uint = 0;
 			var extraPercent$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (rank$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ExtraPrize.rank cannot be set twice.');
 					}
 					++rank$count;
-					this.rank = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.rank = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (prize$count != 0) {
@@ -131,14 +131,14 @@ package app.message {
 					}
 					++prize$count;
 					this.prize = new app.message.PrizeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.prize);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.prize);
 					break;
 				case 3:
 					if (extraPercent$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ExtraPrize.extraPercent cannot be set twice.');
 					}
 					++extraPercent$count;
-					this.extraPercent = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.extraPercent = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

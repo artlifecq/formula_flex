@@ -10,7 +10,6 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.ChatSender;
-	import com.rpgGame.app.ui.main.chat.ChatWindowPanel;
 	import com.rpgGame.core.events.ChatEvent;
 	import com.rpgGame.core.events.FunctionMessageBarEvent;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
@@ -20,6 +19,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.info.chat.PrivateChaterVo;
 	import com.rpgGame.coreData.type.EnumFunctionMessageBarIcoType;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
+	import com.rpgGame.netData.chat.message.ResChatMessage;
 	
 	import flash.utils.ByteArray;
 	
@@ -30,8 +30,9 @@ package com.rpgGame.app.cmdlistener
 	import org.client.mainCore.manager.EventManager;
 	import org.client.mainCore.utils.Delegate;
 	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
-	import org.game.netCore.net.BytesUtil;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
+	import org.game.netCore.net_protobuff.BytesUtil;
 	
 	/**
 	 * 聊天
@@ -52,54 +53,62 @@ package com.rpgGame.app.cmdlistener
 //			SocketConnection.addCmdListener(ChatModuleMessages.S2C_GOODS_INFO_REPLY, onGetItemInfo);
 //			SocketConnection.addCmdListener(ChatModuleMessages.S2C_GOODS_INFO_REPLY_ERROR, onGetItemInfoError);
 			
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_COUNTRY_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_COUNTRY));
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_COUNTRY_CHAT_FAIL, onSendWorldFaile);
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_COUNTRY_CHAT_BROADCAST, getCountryBroadCast);
 			
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_WORLD_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_WORLD));
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_WORLD_CHAT_FAIL, onSendWorldFaile);
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_WORLD_CHAT_BROADCAST, getWorldBroadCast);
+			SocketConnection.addCmdListener(112101, onResChatMessage );
 			
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_SCENE_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_NORMAL));
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_SCENE_CHAT_FAIL, onSendNormalFaile);
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_SCENE_CHAT_BROADCAST, getNormalBroadCast);
+//			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_COUNTRY_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_COUNTRY));
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_COUNTRY_CHAT_FAIL, onSendWorldFaile);
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_COUNTRY_CHAT_BROADCAST, getCountryBroadCast);
 			
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_PAID_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_LABA));
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_PAID_CHAT_FAIL, onSendChuanyinFaile);
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_PAID_CHAT_FORBIDDEN, onSendChuanyinFaileStop);
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_PAID_CHAT_BROADCAST, getChuanyinBroadCast);
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_WORLD_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_WORLD));
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_WORLD_CHAT_FAIL, onSendWorldFaile);
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_WORLD_CHAT_BROADCAST, getWorldBroadCast);
 			
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_NORMAL_PRIVATE_CHAT_SUCCESS_AND_TARGET_ONLINE, Delegate.create(onGetPrivateChatBack,true));
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_NORMAL_PRIVATE_CHAT_SUCCESS_AND_TARGET_OFFLINE, Delegate.create(onGetPrivateChatBack,false));
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_NORMAL_PRIVATE_CHAT_FAIL, onGetPrivateChatFaile);
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_RECEIVED_NORMAL_PRIVATE_CHAT, getPrivateChatCast);
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_SCENE_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_NORMAL));
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_SCENE_CHAT_FAIL, onSendNormalFaile);
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_SCENE_CHAT_BROADCAST, getNormalBroadCast);
 			
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_WINDOW_CHAT_OPEN_REPLY_MOOD, onGetStateAndMood);
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_WINDOW_CHAT_OPEN_ERROR, onGetChaterConditionFaile);
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_PAID_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_LABA));
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_PAID_CHAT_FAIL, onSendChuanyinFaile);
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_PAID_CHAT_FORBIDDEN, onSendChuanyinFaileStop);
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_PAID_CHAT_BROADCAST, getChuanyinBroadCast);
 			
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_SEND_WINDOW_CHAT_SUCCESS_AND_TARGET_ONLINE, Delegate.create(onGetWindowChatBack,true));
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_SEND_WINDOW_CHAT_SUCCESS_AND_TARGET_OFFLINE, Delegate.create(onGetWindowChatBack,false));
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_SEND_WINDOW_CHAT_FAIL, onGetPrivateChatFaile);
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_NORMAL_PRIVATE_CHAT_SUCCESS_AND_TARGET_ONLINE, Delegate.create(onGetPrivateChatBack,true));
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_NORMAL_PRIVATE_CHAT_SUCCESS_AND_TARGET_OFFLINE, Delegate.create(onGetPrivateChatBack,false));
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_NORMAL_PRIVATE_CHAT_FAIL, onGetPrivateChatFaile);
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_RECEIVED_NORMAL_PRIVATE_CHAT, getPrivateChatCast);
 			
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_RECEIVED_WINDOW_CHAT, getWindowChatCast);
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_OTHER_IS_TYPING, Delegate.create(getChaterIsTyping,true));
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_OTHER_STOPPED_TYPING, Delegate.create(getChaterIsTyping,false));
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_GET_CHAT_HISTORY_FAIL, onGetChatRecordFaile);
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_GET_CHAT_HISTORY_RESULT, onGetChatRecordBack);
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_THEY_LEFT_MSG_WHEN_YOU_OFFLINE, getSomeOffLineMsg);
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_WINDOW_CHAT_OPEN_REPLY_MOOD, onGetStateAndMood);
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_WINDOW_CHAT_OPEN_ERROR, onGetChaterConditionFaile);
+			
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_SEND_WINDOW_CHAT_SUCCESS_AND_TARGET_ONLINE, Delegate.create(onGetWindowChatBack,true));
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_SEND_WINDOW_CHAT_SUCCESS_AND_TARGET_OFFLINE, Delegate.create(onGetWindowChatBack,false));
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_SEND_WINDOW_CHAT_FAIL, onGetPrivateChatFaile);
+			
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_RECEIVED_WINDOW_CHAT, getWindowChatCast);
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_OTHER_IS_TYPING, Delegate.create(getChaterIsTyping,true));
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_OTHER_STOPPED_TYPING, Delegate.create(getChaterIsTyping,false));
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_GET_CHAT_HISTORY_FAIL, onGetChatRecordFaile);
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_GET_CHAT_HISTORY_RESULT, onGetChatRecordBack);
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_THEY_LEFT_MSG_WHEN_YOU_OFFLINE, getSomeOffLineMsg);
 		
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_TEAM_CHAT_FAIL, onSendTeamFaile);
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_TEAM_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_TEAM));
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_TEAM_CHAT_BROADCAST, getTeamBroadCast);
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_TEAM_CHAT_FAIL, onSendTeamFaile);
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_TEAM_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_TEAM));
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_TEAM_CHAT_BROADCAST, getTeamBroadCast);
 			
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_BROADCAST_MOOD, onBroadcastMoodSuccess);
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_BROADCAST_MOOD_FAIL, onBroadcastMoodFail);
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_BROADCAST_MOOD, onBroadcastMoodSuccess);
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_BROADCAST_MOOD_FAIL, onBroadcastMoodFail);
 			
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_FAMILY_CHAT_FAIL, onSendFamilyFaile);
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_FAMILY_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_FAMILY));
-			SocketConnection.addCmdListener(ChatModuleMessages.S2C_FAMILY_CHAT_BROADCAST, getFamilyBroadCast);
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_FAMILY_CHAT_FAIL, onSendFamilyFaile);
+//			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_FAMILY_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_FAMILY));
+			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_FAMILY_CHAT_BROADCAST, getFamilyBroadCast);
 			
 			finish();
+		}
+		
+		private function onResChatMessage(msg:ResChatMessage):void
+		{
+			EventManager.dispatchEvent(ChatEvent.SEND_SUCCESS,msg);
 		}
 		
 		/**
@@ -209,7 +218,7 @@ package com.rpgGame.app.cmdlistener
 		 */
 		private function getCountryBroadCast(buffer:ByteBuffer):void
 		{
-			showGetChatMessage(EnumChatChannelType.CHAT_CHANNEL_COUNTRY, getChatProto(buffer));
+//			showGetChatMessage(EnumChatChannelType.CHAT_CHANNEL_COUNTRY, getChatProto(buffer));
 		}
 		
 		/**
@@ -361,7 +370,7 @@ package com.rpgGame.app.cmdlistener
 		private function getWindowChatCast(buffer:ByteBuffer):void
 		{
 			var talkTime:Number = buffer.readVarint64();
-			var chatInfo:ChatInfo = getChatInfo(EnumChatChannelType.CHAT_CHANNEL_WINDOW, buffer);
+			/*var chatInfo:ChatInfo = getChatInfo(EnumChatChannelType.CHAT_CHANNEL_WINDOW, buffer);
 			chatInfo.talkTime = talkTime;
 			if(chatInfo)
 			{
@@ -370,7 +379,7 @@ package com.rpgGame.app.cmdlistener
 				chatInfo.realShowName = chatInfo.name;
 				ChatWindowManager.addPrivateChatData(chatInfo.id,chatInfo,false,false,true);
 				ChatWindowManager.addWindowChatTargetId(chatInfo.id);
-				var isPrivateWindowShowing:Boolean = ChatWindowPanel.isShowing();
+				var isPrivateWindowShowing:Boolean = false;//ChatWindowPanel.isShowing();
 				if(isPrivateWindowShowing)
 				{
 					EventManager.dispatchEvent(ChatEvent.GET_NEW_WHISPER_DATA,chatInfo);
@@ -379,7 +388,7 @@ package com.rpgGame.app.cmdlistener
 				{
 					EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_SHOW_TYPE, EnumFunctionMessageBarIcoType.CHAT_TYPE);
 				}
-			}
+			}*/
 		}
 		
 		/**
@@ -540,7 +549,7 @@ package com.rpgGame.app.cmdlistener
 				ChatWindowManager.addPrivateChatOfflineData(id,name,level);
 				ChatWindowManager.addWindowChatTargetId(id);
 				showIcon = true;
-				ChatSender.requestChatRecord(id);
+//				ChatSender.requestChatRecord(id);
 			}
 			if(showIcon)
 			{
@@ -555,12 +564,12 @@ package com.rpgGame.app.cmdlistener
 		 */
 		private function onGetUnionChatBroadCast(buffer:ByteBuffer):void
 		{
-			showGetChatMessage(EnumChatChannelType.CHAT_CHANNEL_COUNTRY, getChatProto(buffer) );
+//			showGetChatMessage(EnumChatChannelType.CHAT_CHANNEL_COUNTRY, getChatProto(buffer) );
 		}
 		
 		private function showGetChatMessage(channel:int, chatMessage:ChatContentProto):void
 		{
-			var chatInfo:ChatInfo = getChatInfoByChatMessage(channel,chatMessage);
+			/*var chatInfo:ChatInfo = getChatInfoByChatMessage(channel,chatMessage);
 			//不显示黑名单聊天内容
 			if(FriendManager.checkIsBlackList(chatInfo.id))
 			{
@@ -575,7 +584,7 @@ package com.rpgGame.app.cmdlistener
 			}
 			ChatDataManager.GetInstance().putChatData( chatInfo );
 			
-			EventManager.dispatchEvent( ChatEvent.GET_NEW_NORMAL_DATA, chatInfo );
+			EventManager.dispatchEvent( ChatEvent.GET_NEW_NORMAL_DATA, chatInfo );*/
 		}
 		
 		/**
@@ -703,10 +712,10 @@ package com.rpgGame.app.cmdlistener
 			}
 			privateChaterVo.hasMoreRecord = haveMore;
 			
-			if(ChatWindowPanel.isShowing())
-			{
-				ChatWindowPanel.instance.freshRecore(chaterID,true);
-			}
+//			if(ChatWindowPanel.isShowing())
+//			{
+//				ChatWindowPanel.instance.freshRecore(chaterID,true);
+//			}
 		}
 		
 		/**
@@ -801,7 +810,7 @@ package com.rpgGame.app.cmdlistener
 		 */
 		private function getFamilyBroadCast(buffer:ByteBuffer):void
 		{
-			showGetChatMessage(EnumChatChannelType.CHAT_CHANNEL_FAMILY,getChatProto(buffer));
+//			showGetChatMessage(EnumChatChannelType.CHAT_CHANNEL_FAMILY,getChatProto(buffer));
 		}
 		
 		/** 解析聊天附带 chatMessage proto */

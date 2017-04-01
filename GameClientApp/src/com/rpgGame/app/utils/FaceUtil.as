@@ -3,6 +3,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
 	import com.rpgGame.app.manager.mount.MountEquipmentManager;
 	import com.rpgGame.app.manager.mount.MountManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.manager.StarlingLayerManager;
@@ -10,16 +11,20 @@ package com.rpgGame.app.utils
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.cfg.mount.MountConfigData;
 	import com.rpgGame.coreData.cfg.mount.MountUnitData;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.face.FaceTypeEnum;
-	import com.rpgGame.coreData.info.buff.BuffInfo;
+	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
 	import com.rpgGame.coreData.info.face.IBaseFaceInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
 	import com.rpgGame.coreData.info.mount.MountInfoData;
 	import com.rpgGame.coreData.lang.LangMount;
+	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.coreData.type.AssetUrl;
 	import com.rpgGame.coreData.type.ShopType;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.GridBGType;
@@ -27,7 +32,6 @@ package com.rpgGame.app.utils
 	import flash.geom.Point;
 	
 	import app.message.GoodsType;
-	import app.message.SpellProto;
 	
 	import feathers.controls.UIAsset;
 	
@@ -48,9 +52,9 @@ package com.rpgGame.app.utils
 		//----------------------------------------------------------
 		
 		
-		public static function getUnItemInfo( type:int, count:int ):ItemInfo
+		public static function getUnItemInfo( type:int, count:int ):ClientItemInfo
 		{
-			var itemInfo:ItemInfo = new ItemInfo();
+			var itemInfo:ClientItemInfo = new ClientItemInfo();
 			itemInfo.cfgId = 1111;
 			itemInfo.name = ShopType.getMoneyStrByType( type );
 			itemInfo.count = count;
@@ -63,7 +67,7 @@ package com.rpgGame.app.utils
 		 * @param itemInfo
 		 * 
 		 */		
-		public static function SetUnItemGrid( grid:IconCDFace, itemInfo:ItemInfo, type:int ):void
+		public static function SetUnItemGrid( grid:IconCDFace, itemInfo:ClientItemInfo, type:int ):void
 		{ 
 			var size:int = grid.iconSize;
 			grid.setIconResName( ClientConfig.getItemIcon( ShopType.getMoneyIco( type ), size ) );
@@ -84,11 +88,11 @@ package com.rpgGame.app.utils
 		 * @return 
 		 * 
 		 */		
-		public static function chanceSpellToFaceInfo( skillData:SpellProto ):BaseFaceInfo
+		public static function chanceSpellToFaceInfo( skillData:Q_skill_model ):BaseFaceInfo
 		{
-			var info:BaseFaceInfo = new BaseFaceInfo( skillData.spellType,skillData.spellType, FaceTypeEnum.SKILL );
-			info.icoName = skillData.icon;
-			info.name = skillData.name;
+			var info:BaseFaceInfo = new BaseFaceInfo( skillData.q_skillID,skillData.q_skillID, FaceTypeEnum.SKILL );
+			info.icoName = skillData.q_icon;
+			info.name = skillData.q_skillName;
 			info.data = skillData;
 			return info;
 		}
@@ -103,7 +107,7 @@ package com.rpgGame.app.utils
 		 * 方法未完成，慎用。。。。<br>
 		 * 期望做成可以一键完成所有物品的设置，如TIPS、图标、CD、数量等
 		 */		
-		public static function SetItemGrid( grid:IconCDFace, itemInfo:ItemInfo, isTips:Boolean = true ):void
+		public static function SetItemGrid( grid:IconCDFace, itemInfo:ClientItemInfo, isTips:Boolean = true ):void
 		{
 			if(!grid)
 				return;
@@ -113,6 +117,7 @@ package com.rpgGame.app.utils
 			if(!itemInfo)
 			{
 				TipTargetManager.remove( grid );
+				grid.selectImgVisible = false;
 				return;
 			}
 			
@@ -125,12 +130,24 @@ package com.rpgGame.app.utils
 			grid.faceInfo = itemInfo;
 			grid.setIsShowCdTm( true );
 			grid.sortLayer();
+			grid.setIsBind(itemInfo.binded);
+			grid.selectImgVisible = true;
 			
 			if(itemInfo is EquipInfo)
 			{
-				grid.setIsBind(itemInfo.binded);
 				grid.setIsWear( RoleEquipmentManager.equipIsWearing(itemInfo));
 				grid.setIsWear( MountEquipmentManager.instance.equipIsWearing(itemInfo));
+			}
+			var hero:HeroData=MainRoleManager.actorInfo;
+			switch( itemInfo.type )
+			{
+				case GoodsType.EQUIPMENT://装备
+				case GoodsType.EQUIPMENT1://装备
+				case GoodsType.EQUIPMENT2://装备
+					grid.setLV(itemInfo.qItem.q_levelnum);
+					break;
+				default:
+					break;
 			}
 			
 			if( isTips )
@@ -138,12 +155,33 @@ package com.rpgGame.app.utils
 				switch( itemInfo.type )
 				{
 					case GoodsType.EQUIPMENT://装备
+					case GoodsType.EQUIPMENT1://装备
+					case GoodsType.EQUIPMENT2://装备
 						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.EQUIP_TIP, itemInfo ) );
+						if(itemInfo.containerID==ItemContainerID.BackPack){
+							if(hero.job!=itemInfo.qItem.q_job&&itemInfo.qItem.q_job!=0){
+								grid.setJobState(AssetUrl.EQUIP_JOB_NO);
+							}else{
+								var equipItemInfo:ClientItemInfo=RoleEquipmentManager.instance.getEquipInfoByIndex(itemInfo.qItem.q_kind);
+								var equipFight:int;
+								if(equipItemInfo){
+									equipFight=equipItemInfo.itemInfo.fightPower;
+								}
+								var targetFight:int=itemInfo.itemInfo.fightPower;
+								if(equipFight>targetFight){
+									grid.setJobState(AssetUrl.EQUIP_JOB_DOWN);
+								}else if(equipFight<targetFight){
+									grid.setJobState(AssetUrl.EQUIP_JOB_UP);
+								}else{
+									grid.setJobState(null);
+								}
+							}
+						}
 						break;
-					case GoodsType.BEAST_CARD://兽牌
+					/*case GoodsType.BEAST_CARD://兽牌
 						grid.setIsBind(itemInfo.binded);
 						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.MOUNT_BEAST_CARD_TIP, itemInfo ) );
-						break;
+						break;*/
 					default:
 						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.ITEM_TIP, itemInfo ) );
 						break;
@@ -159,7 +197,7 @@ package com.rpgGame.app.utils
 		 * @param data
 		 * 
 		 */		
-		public static function setBuffGrid( grid:IconCDFace, data:BuffInfo, isTips:Boolean = false ):void
+		public static function setBuffGrid( grid:IconCDFace, data:BuffData, isTips:Boolean = false ):void
 		{
 			grid.clear();
 			
@@ -192,9 +230,8 @@ package com.rpgGame.app.utils
 			grid.faceInfo = data;
 			grid.setIconResName( ClientConfig.getSkillIcon( data.icoName, size ) );
 			grid.setIsShowCdTm( true );
-			grid.setQualityImageIconPoint( -2, -2 );
+//			grid.setQualityImageIconPoint( -2, -2 );
 			grid.sortLayer();
-			
 			if( isTips )
 				TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.SPELL_TIP, data,false,new Point(grid.x,grid.y)) );
 			else
@@ -270,8 +307,8 @@ package com.rpgGame.app.utils
 			if( data == null )
 				return;
 			
-			if(data is ItemInfo)
-				SetItemGrid(grid, data as ItemInfo, isTips);
+			if(data is ClientItemInfo)
+				SetItemGrid(grid, data as ClientItemInfo, isTips);
 			else
 				SetSkillGrid(grid, data as BaseFaceInfo, isTips);
 		}

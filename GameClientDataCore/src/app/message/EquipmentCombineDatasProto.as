@@ -17,7 +17,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COMBINE_LEVEL_STAGE_GAP:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentCombineDatasProto.combine_level_stage_gap", "combineLevelStageGap", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COMBINE_LEVEL_STAGE_GAP:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentCombineDatasProto.combine_level_stage_gap", "combineLevelStageGap", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var combine_level_stage_gap$field:int;
 
@@ -44,7 +44,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COMBINE_NEED_EQUIP_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentCombineDatasProto.combine_need_equip_count", "combineNeedEquipCount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COMBINE_NEED_EQUIP_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentCombineDatasProto.combine_need_equip_count", "combineNeedEquipCount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var combine_need_equip_count$field:int;
 
@@ -69,7 +69,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CENTER_EQUIP_POINT_MULTIPLE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentCombineDatasProto.center_equip_point_multiple", "centerEquipPointMultiple", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CENTER_EQUIP_POINT_MULTIPLE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentCombineDatasProto.center_equip_point_multiple", "centerEquipPointMultiple", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var center_equip_point_multiple$field:int;
 
@@ -94,7 +94,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COST_DATAS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentCombineDatasProto.cost_datas", "costDatas", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentCombineCostDatasProto; });
+		public static const COST_DATAS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentCombineDatasProto.cost_datas", "costDatas", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentCombineCostDatasProto; });
 
 		private var cost_datas$field:app.message.EquipmentCombineCostDatasProto;
 
@@ -117,7 +117,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RATE_DATAS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentCombineDatasProto.rate_datas", "rateDatas", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentCombineRateDatasProto; });
+		public static const RATE_DATAS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentCombineDatasProto.rate_datas", "rateDatas", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentCombineRateDatasProto; });
 
 		private var rate_datas$field:app.message.EquipmentCombineRateDatasProto;
 
@@ -140,7 +140,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const POINT_DATA:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentCombineDatasProto.point_data", "pointData", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentCombinePointDataProto; });
+		public static const POINT_DATA:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentCombineDatasProto.point_data", "pointData", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentCombinePointDataProto; });
 
 		private var point_data$field:app.message.EquipmentCombinePointDataProto;
 
@@ -166,27 +166,27 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasCombineLevelStageGap) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, combine_level_stage_gap$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, combine_level_stage_gap$field);
 			}
 			if (hasCombineNeedEquipCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, combine_need_equip_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, combine_need_equip_count$field);
 			}
 			if (hasCenterEquipPointMultiple) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, center_equip_point_multiple$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, center_equip_point_multiple$field);
 			}
 			if (hasCostDatas) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, cost_datas$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, cost_datas$field);
 			}
 			if (hasRateDatas) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, rate_datas$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, rate_datas$field);
 			}
 			if (hasPointData) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, point_data$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, point_data$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -204,28 +204,28 @@ package app.message {
 			var rate_datas$count:uint = 0;
 			var point_data$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (combine_level_stage_gap$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentCombineDatasProto.combineLevelStageGap cannot be set twice.');
 					}
 					++combine_level_stage_gap$count;
-					this.combineLevelStageGap = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.combineLevelStageGap = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (combine_need_equip_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentCombineDatasProto.combineNeedEquipCount cannot be set twice.');
 					}
 					++combine_need_equip_count$count;
-					this.combineNeedEquipCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.combineNeedEquipCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (center_equip_point_multiple$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentCombineDatasProto.centerEquipPointMultiple cannot be set twice.');
 					}
 					++center_equip_point_multiple$count;
-					this.centerEquipPointMultiple = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.centerEquipPointMultiple = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (cost_datas$count != 0) {
@@ -233,7 +233,7 @@ package app.message {
 					}
 					++cost_datas$count;
 					this.costDatas = new app.message.EquipmentCombineCostDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.costDatas);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.costDatas);
 					break;
 				case 5:
 					if (rate_datas$count != 0) {
@@ -241,7 +241,7 @@ package app.message {
 					}
 					++rate_datas$count;
 					this.rateDatas = new app.message.EquipmentCombineRateDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.rateDatas);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.rateDatas);
 					break;
 				case 6:
 					if (point_data$count != 0) {
@@ -249,7 +249,7 @@ package app.message {
 					}
 					++point_data$count;
 					this.pointData = new app.message.EquipmentCombinePointDataProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.pointData);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.pointData);
 					break;
 				default:
 					super.readUnknown(input, tag);

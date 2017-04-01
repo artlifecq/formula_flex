@@ -1,6 +1,5 @@
 package com.rpgGame.app.utils
 {
-	import com.rpgGame.app.manager.country.CountryManager;
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -9,7 +8,6 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
-	import com.rpgGame.coreData.role.ZhanCheData;
 	import com.rpgGame.coreData.type.HeadBloodStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
@@ -134,8 +132,8 @@ package com.rpgGame.app.utils
 			if (heroData == null)
 				return StaticValue.COLOR_CODE_13;
 
-			if (CountryManager.isMyEnemyCountry(heroData.countryId))
-				return StaticValue.COLOR_CODE_13; //不是我国与盟国的都是红名
+//			if (CountryManager.isMyEnemyCountry(heroData.countryId))
+//				return StaticValue.COLOR_CODE_13; //不是我国与盟国的都是红名
 
 			return PKModeUtil.getPKAmountColor(heroData.nameColor);
 		}
@@ -149,7 +147,7 @@ package com.rpgGame.app.utils
 			{
 				var monster : MonsterData = _role.data as MonsterData;
 				if (monster)
-					return _role.name + "[" + monster.level + "级]";
+					return _role.name + "[" + monster.totalStat.level + "级]";
 			}
 			if (_role.type != SceneCharType.PLAYER)
 				return _role.name;

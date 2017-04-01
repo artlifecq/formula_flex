@@ -1,17 +1,18 @@
 package com.rpgGame.app.state.role.control
 {
-	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.core.state.role.control.ControlState;
-
+	
+	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;
+	
 	import gs.TweenLite;
 
 	/**
-	 *
-	 * 场景角色buff状态
-	 * @author L.L.M.Sunny
-	 * 创建时间：2015-10-30 下午2:25:12
-	 *
-	 */
+	 * 场景角色的buff状态
+	 * 主要做一个计时处理，时间到了，移除自己 
+	 * @author NEIL
+	 * 
+	 */	
 	public class BuffState extends ControlState
 	{
 		protected var _stateReference : BuffStateReference;
@@ -38,7 +39,7 @@ package com.rpgGame.app.state.role.control
 							_stiffTween.kill();
 							_stiffTween = null;
 						}
-						var duration : Number = _stateReference.disappearTime - SystemTimeManager.curtTm;
+						var duration : Number = _stateReference.buffData.disappearTime;
 						_stiffTween = TweenLite.delayedCall(duration * 0.001, onRemoveBuff);
 					}
 					else
@@ -46,7 +47,13 @@ package com.rpgGame.app.state.role.control
 				}
 			}
 		}
-
+		
+		override public function get tribe():String
+		{
+			return getQualifiedClassName(BuffState);
+		}
+		
+		
 		protected function onRemoveBuff() : void
 		{
 			removeSelf();

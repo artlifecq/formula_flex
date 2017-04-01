@@ -1,8 +1,8 @@
 package com.rpgGame.coreData.info.society
 {
 	import app.message.FamilyInListProto;
-
-	import org.game.netCore.net.BytesUtil;
+	
+	import org.game.netCore.net_protobuff.BytesUtil;
 
 	/**
 	 *

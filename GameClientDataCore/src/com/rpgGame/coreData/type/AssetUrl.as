@@ -27,14 +27,27 @@ package com.rpgGame.coreData.type
 		public static const SELECTED_BORDER:String = "ui/common/grid/select/46.png";
 		/**同组**/
 		public static const TEAM_SAME_GROUP:String = "ui/common/icon/icon_171.png";
-		/**icon上绑字 46* 46**/
-		public static const EQUIP_BIND_46 : String = "ui/common/tubiao/tongyongtubiao_xiao/bang.png";
 		/**icon上穿戴 46 * 46**/
 		public static const EQUIP_WARING_46 : String = "ui/common/tubiao/tongyongtubiao_xiao/chuan.png";
-		/**icon上绑字 60 * 60**/
-		public static const EQUIP_BIND_60 : String = "ui/common/tubiao/tongyongtubiao_xiao/bang_60.png";
 		/**icon上穿戴 60 * 60**/
 		public static const EQUIP_WARING_60 : String = "ui/common/tubiao/tongyongtubiao_xiao/chuan_60.png";
+		
+		/**icon上职业不符合**/
+		public static const EQUIP_JOB_NO : String = "ui/common/grid/normal/jz.png";
+		/**icon上战斗力提升**/
+		public static const EQUIP_JOB_UP : String = "ui/common/grid/normal/jobup.png";
+		/**icon上战斗力下降**/
+		public static const EQUIP_JOB_DOWN : String = "ui/common/grid/normal/jobdown.png";
+		/**icon上绑字 42 * 42**/
+		public static const EQUIP_BIND_42 : String = "ui/common/grid/normal/suo_xiao.png";
+		/**icon上绑字 46* 46**/
+		public static const EQUIP_BIND_64 : String = "ui/common/grid/normal/suo_da.png";
+		
+		/**
+		 *装备阶数 
+		 */
+		public static const EQUIP_LV : String = "ui/common/grid/equip/";
+		
 		/** 组队--经验平局分配 **/
 		public static const TEAM_EXP_MEAN_MODE:String = "ui/app/team/jun.png";
 		/** 组队--经验按伤害分配 **/
@@ -81,6 +94,14 @@ package com.rpgGame.coreData.type
 		public static const MOUNT_MENG_BAN:String = "ui/common/kang/di.png";
 		/** 小队跟随头像 **/
 		public static const TEAM_FOLLOW_HEAD_ICON:String = "ui/mainui/head/renwutouxiang.png";
+		/** 头像兵家 **/
+		public static const HEAD_ICON_1:String = "ui/mainui/head/touxiang/bingjia/zhujue.png";
+		/** 头像墨家男 **/
+		public static const HEAD_ICON_2:String = "ui/mainui/head/touxiang/mojia/zhujue.png";
+		/** 头像墨家女**/
+		public static const HEAD_ICON_3:String = "ui/mainui/head/touxiang/mojia/zhujue.png";
+		/** 头像医家**/
+		public static const HEAD_ICON_4:String = "ui/mainui/head/touxiang/yijia/zhujue.png";
 		/** 喇叭图标 **/
 		public static const LA_BA_ICON:String = "ui/common/version_3/B_bujian/la_ba.png";
 		/** 上升箭头 **/
@@ -125,6 +146,8 @@ package com.rpgGame.coreData.type
 		public static const SPELL_BEI_DONG:String = "ui/app/spell/char_type/bei_dong.png";
 		/** 共用填充贴图 **/
 		public static const COMMON_RECT_ICON : String = "ui/common/version_3/B_bujian/nan.png";
+		
+		
 		public function AssetUrl()
 		{
 		}

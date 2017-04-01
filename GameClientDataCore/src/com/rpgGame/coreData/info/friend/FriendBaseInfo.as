@@ -1,8 +1,6 @@
 package com.rpgGame.coreData.info.friend
 {
 	import app.message.SingleRelation;
-	
-	import org.game.netCore.net.BytesUtil;
 
 	public class FriendBaseInfo
 	{

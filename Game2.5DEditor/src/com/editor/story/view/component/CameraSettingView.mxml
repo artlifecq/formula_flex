@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:HGroup xmlns:fx="http://ns.adobe.com/mxml/2009"
+		  xmlns:s="library://ns.adobe.com/flex/spark"
+		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  width="100%"
+		  height="100%"
+		  horizontalAlign="right"
+		  creationComplete="hgroup1_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.manager.EditorCameraManager;
+			import com.editor.manager.KeyMoveManager;
+			import com.editor.manager.SceneRoleManager;
+			import com.editor.manager.SceneTimeOfTheDayManager;
+			import com.game.engine3D.controller.CameraController;
+			import com.game.engine3D.enum.CameraModeEnum;
+
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+
+			import spark.events.IndexChangeEvent;
+
+			[Bindable]
+			public var datas : ArrayCollection = new ArrayCollection();
+
+			protected function hgroup1_creationCompleteHandler(event : FlexEvent) : void
+			{
+				var item : Object;
+				item = {label: "同步移动模式", type: CameraModeEnum.LOCK_ON_TARGET};
+				datas.addItem(item);
+//				item = {label: "目标移动模式", type: CameraModeEnum.FIXED_CAMERA_LOOK_AT};
+//				datas.addItem(item);
+//				item = {label: "摄像机移动模式", type: CameraModeEnum.FIXED_TARGET_LOOK_AT_TARGET};
+//				datas.addItem(item);
+//				item = {label: "仅摄像机模式", type: CameraModeEnum.DIRECT_CAMERA};
+//				datas.addItem(item);
+//				item = {label: "仅主角移动模式", type: 0};
+//				datas.addItem(item);
+				cameraModeList.selectedIndex = 0;
+				keySpeedSlider_changeHandler();
+				mouseWheelSpeedSlider_changeHandler();
+				mouseRightSpeedSlider_changeHandler();
+
+				timeOfTheDayRatioSlider.value = SceneTimeOfTheDayManager.ratio * 100;
+			}
+
+			protected function cameraModeList_changeHandler(event : IndexChangeEvent) : void
+			{
+				EditorCameraManager.cameraMode = cameraModeList.selectedItem.type;
+
+				switch (cameraModeList.selectedItem.type)
+				{
+					case CameraModeEnum.LOCK_ON_TARGET:
+						CameraController.switchToLockOnControl();
+						break;
+					case CameraModeEnum.FIXED_CAMERA_LOOK_AT:
+						CameraController.switchToFixedCameraLookAtControl();
+						break;
+					case CameraModeEnum.FIXED_TARGET_LOOK_AT_TARGET:
+						CameraController.switchToFixedTargetLookAtControl();
+						break;
+					case CameraModeEnum.DIRECT_CAMERA:
+						CameraController.switchToDirectControl();
+						break;
+				}
+
+				if (EditorCameraManager.cameraMode == 0)
+					SceneRoleManager.getInstance().scenePreviewEntity.visible = true;
+				else
+					SceneRoleManager.getInstance().scenePreviewEntity.visible = false;
+			}
+
+			protected function keySpeedSlider_changeHandler() : void
+			{
+				KeyMoveManager.getInstance().speed = keySpeedSlider.value;
+			}
+
+			protected function mouseWheelSpeedSlider_changeHandler() : void
+			{
+				EditorCameraManager.mouseWheelSpeed = mouseWheelSpeedSlider.value;
+			}
+
+			protected function mouseRightSpeedSlider_changeHandler() : void
+			{
+				EditorCameraManager.mouseRightSpeed = mouseRightSpeedSlider.value / 100;
+				CameraController.directController.mouseRightSpeed = mouseRightSpeedSlider.value / 100;
+			}
+
+			private function hLockClickHandler(event : MouseEvent) : void
+			{
+				CameraController.lockedOnPlayerController.xDegControlable = !hLock.selected;
+				CameraController.directController.xDegControlable = !hLock.selected;
+			}
+
+			private function vLockClickHandler(event : MouseEvent) : void
+			{
+				CameraController.lockedOnPlayerController.yDegControlable = !vLock.selected;
+				CameraController.directController.yDegControlable = !vLock.selected;
+			}
+
+			protected function timeOfTheDayRatioSlider_changeHandler(event : Event) : void
+			{
+				SceneTimeOfTheDayManager.ratio = timeOfTheDayRatioSlider.value / 100;
+			}
+
+			protected function freeMode_clickHandler(event : MouseEvent) : void
+			{
+				EditorCameraManager.isFreeMode = freeMode.selected;
+			}
+		]]>
+	</fx:Script>
+	<s:VGroup width="200"
+			  gap="5"
+			  horizontalAlign="right">
+		<s:DropDownList id="cameraModeList"
+						width="100%"
+						dataProvider="{datas}"
+						labelField="label"
+						change="cameraModeList_changeHandler(event)">
+
+		</s:DropDownList>
+		<s:Label text="W前/S后/A左/D右/R上/F下" color="#ffffff">
+			<s:filters>
+				<s:GlowFilter color="0"
+							  alpha="1"
+							  strength="2"
+							  quality="1">
+				</s:GlowFilter>
+			</s:filters>
+		</s:Label>
+		<s:Label text="移动速度" color="#ffffff">
+			<s:filters>
+				<s:GlowFilter color="0"
+							  alpha="1"
+							  strength="2"
+							  quality="1">
+				</s:GlowFilter>
+			</s:filters>
+		</s:Label>
+		<s:VSlider id="keySpeedSlider"
+				   minimum="1"
+				   maximum="100"
+				   value="50"
+				   liveDragging="true"
+				   mouseFocusEnabled="false"
+				   change="keySpeedSlider_changeHandler();"/>
+		<s:Label text="滚轮速度" color="#ffffff">
+			<s:filters>
+				<s:GlowFilter color="0"
+							  alpha="1"
+							  strength="2"
+							  quality="1">
+				</s:GlowFilter>
+			</s:filters>
+		</s:Label>
+		<s:VSlider id="mouseWheelSpeedSlider"
+				   minimum="1"
+				   maximum="100"
+				   value="50"
+				   liveDragging="true"
+				   mouseFocusEnabled="false"
+				   change="mouseWheelSpeedSlider_changeHandler();"/>
+
+		<s:Label text="右键速度"  color="#ffffff">
+			<s:filters>
+				<s:GlowFilter color="0"
+							  alpha="1"
+							  strength="2"
+							  quality="1">
+				</s:GlowFilter>
+			</s:filters>
+		</s:Label>
+		<s:VSlider id="mouseRightSpeedSlider"
+				   minimum="1"
+				   maximum="100"
+				   value="50"
+				   liveDragging="true"
+				   mouseFocusEnabled="false"
+				   change="mouseRightSpeedSlider_changeHandler();"/>
+		<s:CheckBox id="hLock"
+					label="锁定水平" color="#ffffff"
+					click="hLockClickHandler(event)">
+			<s:filters>
+				<s:GlowFilter color="0"
+							  alpha="1"
+							  strength="2"
+							  quality="1">
+				</s:GlowFilter>
+			</s:filters>
+		</s:CheckBox>
+		<s:CheckBox id="vLock"
+					label="锁定垂直" color="#ffffff"
+					click="vLockClickHandler(event)">
+			<s:filters>
+				<s:GlowFilter color="0"
+							  alpha="1"
+							  strength="2"
+							  quality="1">
+				</s:GlowFilter>
+			</s:filters>
+		</s:CheckBox>
+		<s:CheckBox id="freeMode"
+					label="自由模式" color="#ffffff"
+					click="freeMode_clickHandler(event)">
+			<s:filters>
+				<s:GlowFilter color="0"
+							  alpha="1"
+							  strength="2"
+							  quality="1">
+				</s:GlowFilter>
+			</s:filters>
+		</s:CheckBox>
+		<s:Label text="场景天色系数" color="#ffffff">
+			<s:filters>
+				<s:GlowFilter color="0"
+							  alpha="1"
+							  strength="2"
+							  quality="1">
+				</s:GlowFilter>
+			</s:filters>
+		</s:Label>
+		<s:HSlider id="timeOfTheDayRatioSlider"
+				   minimum="0"
+				   maximum="100"
+				   value="0"
+				   liveDragging="true"
+				   mouseFocusEnabled="false"
+				   change="timeOfTheDayRatioSlider_changeHandler(event)"/>
+	</s:VGroup>
+</s:HGroup>

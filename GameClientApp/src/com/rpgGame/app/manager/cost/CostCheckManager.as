@@ -2,19 +2,19 @@ package com.rpgGame.app.manager.cost
 {
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.enum.cost.CostCheckTypeEnum;
 	import com.rpgGame.coreData.info.cost.CostInfo;
 	import com.rpgGame.coreData.info.cost.CostItem;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.upgrade.AmountInfo;
 	import com.rpgGame.coreData.info.upgrade.UpgradeGoodsInfo;
 	import com.rpgGame.coreData.info.upgrade.UpgradeProtoInfo;
-
+	
 	import app.message.AmountType;
-
+	
 	import org.client.mainCore.ds.HashMap;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 * 消耗检测的工具</br>
@@ -198,8 +198,8 @@ package com.rpgGame.app.manager.cost
 							maxNum = BackPackManager.instance.getBagItemsCountByIdAndBind(costInfo.costItem.cfgId);
 //						if(costInfo.num > maxNum)
 //							continue;
-						var backPackItems : Vector.<ItemInfo> = BackPackManager.instance.getBagItemsByID(costInfo.costItem.cfgId);
-						var itemInfo : ItemInfo;
+						var backPackItems : Vector.<ClientItemInfo> = BackPackManager.instance.getBagItemsByID(costInfo.costItem.cfgId);
+						var itemInfo : ClientItemInfo;
 						var needCount : int = costInfo.costItem.count;
 						for each (itemInfo in backPackItems)
 						{
@@ -406,7 +406,7 @@ package com.rpgGame.app.manager.cost
 				case CostCheckTypeEnum.WUXUN:
 					return "武勋";
 				case CostCheckTypeEnum.ITEM_AND_BAND:
-					return ItemCfgData.getItemName(costInfo.costItem.cfgId);
+					return ItemConfig.getItemName(costInfo.costItem.cfgId);
 					break;
 			}
 			return "";

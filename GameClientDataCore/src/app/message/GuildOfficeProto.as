@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const OFFICERS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.GuildOfficeProto.officers", "officers", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildPosOfficersProto; });
+		public static const OFFICERS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.GuildOfficeProto.officers", "officers", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildPosOfficersProto; });
 
 		[ArrayElementType("app.message.GuildPosOfficersProto")]
 		public var officers:Array = [];
@@ -26,7 +26,7 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			for (var officers$index:uint = 0; officers$index < this.officers.length; ++officers$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.officers[officers$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.officers[officers$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -38,10 +38,10 @@ package app.message {
 		 */
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
-					this.officers.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.GuildPosOfficersProto()));
+					this.officers.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.GuildPosOfficersProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

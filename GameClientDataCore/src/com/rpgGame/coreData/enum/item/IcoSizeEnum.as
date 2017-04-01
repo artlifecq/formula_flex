@@ -1,10 +1,9 @@
 package com.rpgGame.coreData.enum.item
 {
 	/**
-	 *
-	 * ico的大小. 目前我们只有3个标准的ico大小,
-	 * @author fly.liuyang
-	 * 创建时间：2014-8-20 下午2:19:20
+	 *icon大小 ， ICON_开头的才是寻秦记的数据，其他的是其他项目后面要慢慢取代
+	 * @author dik
+	 * 
 	 */
 	public class IcoSizeEnum
 	{
@@ -14,12 +13,37 @@ package com.rpgGame.coreData.enum.item
 		public static const SIZE_22:int = 22;
 		/** ico的大小 40*40 **/
 		public static const SIZE_40:int = 40;
+		/** ico的大小 44*44 **/
+		public static const SIZE_44:int = 44;
 		/** ico的大小 46*46 **/
 		public static const SIZE_46:int = 46;
 		/** ico的大小 50*50 **/
 		public static const SIZE_50:int = 50;
 		/** ico的大小 60*60 **/
 		public static const SIZE_60:int = 60;
+		
+		
+		//寻秦记用以下尺寸
+		/**
+		 *36icon 
+		 */
+		public static const ICON_24:int=24;
+		/**
+		 *36icon 
+		 */
+		public static const ICON_36:int=36;
+		/**
+		 *42icon 
+		 */
+		public static const ICON_42:int=42;
+		/**
+		 *48icon 
+		 */
+		public static const ICON_48:int=48;
+		/**
+		 *60icon 
+		 */
+		public static const ICON_64:int=64;
 		
 	}
 }

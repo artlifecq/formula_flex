@@ -14,7 +14,7 @@ package app.message.SceneModuleObjClientProto {
 		/**
 		 *  @private
 		 */
-		public static const NEXT_REDUCE_PK_AMOUNT_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.SceneModuleObjClientProto.HeroPKStatusProto.next_reduce_pk_amount_time", "nextReducePkAmountTime", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const NEXT_REDUCE_PK_AMOUNT_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.SceneModuleObjClientProto.HeroPKStatusProto.next_reduce_pk_amount_time", "nextReducePkAmountTime", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var next_reduce_pk_amount_time$field:Int64;
 
@@ -37,7 +37,7 @@ package app.message.SceneModuleObjClientProto {
 		/**
 		 *  @private
 		 */
-		public static const PK_AMOUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SceneModuleObjClientProto.HeroPKStatusProto.pk_amount", "pkAmount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PK_AMOUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SceneModuleObjClientProto.HeroPKStatusProto.pk_amount", "pkAmount", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var pk_amount$field:int;
 
@@ -67,11 +67,11 @@ package app.message.SceneModuleObjClientProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasNextReducePkAmountTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, next_reduce_pk_amount_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, next_reduce_pk_amount_time$field);
 			}
 			if (hasPkAmount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, pk_amount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, pk_amount$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -85,21 +85,21 @@ package app.message.SceneModuleObjClientProto {
 			var next_reduce_pk_amount_time$count:uint = 0;
 			var pk_amount$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (next_reduce_pk_amount_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroPKStatusProto.nextReducePkAmountTime cannot be set twice.');
 					}
 					++next_reduce_pk_amount_time$count;
-					this.nextReducePkAmountTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.nextReducePkAmountTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (pk_amount$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroPKStatusProto.pkAmount cannot be set twice.');
 					}
 					++pk_amount$count;
-					this.pkAmount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.pkAmount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

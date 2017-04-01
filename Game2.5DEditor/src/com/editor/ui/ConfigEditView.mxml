@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 配置编辑窗口
+* @author L.L.M.Sunny
+* 创建时间：2015-6-17 上午10:30:12
+*
+-->
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="580"
+			   height="500"
+			   title="配置编辑"
+			   fontFamily="SimSun"
+			   creationComplete="onCreationComplete()"
+			   initialize="onInitialize()"
+			   close="window1_closeHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.cfg.ConfigData;
+			import com.editor.data.ConfigDesc;
+			import com.editor.data.InputType;
+			import com.editor.data.TabelData;
+			import com.editor.data.TabelFieldData;
+			import com.editor.events.ConfigDataEvent;
+			import com.editor.manager.AppManager;
+			import com.editor.manager.DataStructuresManager;
+
+			import flash.utils.Dictionary;
+
+			import mx.managers.PopUpManager;
+
+			import org.client.mainCore.manager.EventManager;
+
+			private static var _windows : Dictionary = new Dictionary();
+
+			public static function open(title : String, uniqueFlag : Object) : ConfigEditView
+			{
+				var window : ConfigEditView = _windows[uniqueFlag] as ConfigEditView;
+				if (!window)
+				{
+					window = new ConfigEditView();
+					window.uniqueFlag = uniqueFlag;
+					PopUpManager.addPopUp(window, AppManager.getInstance().appRoot, false);
+					PopUpManager.centerPopUp(window);
+					_windows[uniqueFlag] = window;
+				}
+				window.setTitle(title);
+				PopUpManager.bringToFront(window);
+				window.x += Math.random() * 200 - 100;
+				window.y += Math.random() * 200 - 100;
+				return window;
+			}
+
+			public static function closeAll() : void
+			{
+				for each (var window : ConfigEditView in _windows)
+				{
+					window.close();
+				}
+			}
+
+			[Bindable]
+			/** 配置数据 **/
+			private var _data : ConfigData;
+			private var _dataItems : Array;
+			private var _inputCallback : Function;
+			private var _validateCallback : Function;
+			private var _dragDropCallback : Function;
+			private var _inputTypes : Dictionary;
+			private var _okCallback : Function;
+			private var _title : String;
+			public var uniqueFlag : Object;
+
+			private function onInitialize() : void
+			{
+				_dataItems = [];
+				visible = false;
+			}
+
+			public function setTitle(title : String) : void
+			{
+				_title = title;
+			}
+
+			private function onCreationComplete() : void
+			{
+				visible = true;
+				updateData(true);
+				EventManager.addEvent(ConfigDataEvent.CONFIG_DATA_CHANGE, onDataChange);
+			}
+
+			private function close() : void
+			{
+				destroy();
+				PopUpManager.removePopUp(this);
+			}
+
+			private function window1_closeHandler(event : Event) : void
+			{
+				restoreDatas();
+				close();
+			}
+
+			public function setData(data : ConfigData, inputCallback : Function, dragDropCallback : Function = null, inputTypes : Dictionary = null, validateCallback : Function = null, okCallback : Function = null) : void
+			{
+				var updateDataType : Boolean = (_data != data);
+				_data = data;
+				_inputCallback = inputCallback;
+				_validateCallback = validateCallback;
+				_dragDropCallback = dragDropCallback;
+				_inputTypes = inputTypes;
+				_okCallback = okCallback;
+				this.title = _title + " id:" + _data.id + " name:" + _data.name;
+				updateData(updateDataType);
+			}
+
+			private function restoreDatas() : void
+			{
+				for each (var item : LabelInputItem in _dataItems)
+				{
+					item.restoreData();
+				}
+			}
+
+			private function destroy() : void
+			{
+				clearItems();
+				_dataItems = null;
+				_data = null;
+				_inputCallback = null;
+				_validateCallback = null;
+				_dragDropCallback = null;
+				_inputTypes = null;
+				_okCallback = null;
+				_windows[uniqueFlag] = null;
+				delete _windows[uniqueFlag];
+				EventManager.removeEvent(ConfigDataEvent.CONFIG_DATA_CHANGE, onDataChange);
+			}
+
+			private function onDataChange(data : ConfigData, fieldName : String = null) : void
+			{
+				if (data == _data)
+					updateData();
+			}
+
+			private function clearItems() : void
+			{
+				data_list.removeAllElements();
+				if (_dataItems)
+				{
+					for each (var item : LabelInputItem in _dataItems)
+					{
+						item.destroy();
+					}
+					_dataItems.length = 0;
+				}
+			}
+
+			private function updateData(updateDataType : Boolean = false) : void
+			{
+				var pn : String;
+				var properties : Array;
+                var tabelField : TabelFieldData = null;
+				if (updateDataType)
+				{
+					clearItems();
+					if (!_data)
+						return;
+					var tabel : TabelData = DataStructuresManager.getInstance().getTabel(_data.tabelName);
+					var configDesc : ConfigDesc = tabel.getConfigDesc();
+					var isTabelField : Boolean;
+					var isMajorKey : Boolean;
+
+					properties = ["id", "name"];
+					for each (pn in properties)
+					{
+						if (_data.hasOwnProperty(pn))
+						{
+                            tabelField = tabel.getFieldByFieldName(pn);
+							isTabelField = tabelField != null;
+							isMajorKey = tabel.majorKeyField && tabel.majorKeyField.mFieldName == pn;
+							createItem(pn, _data, true, configDesc.fieldTips ? configDesc.fieldTips[pn] : null, //
+								(configDesc.fieldLabels && configDesc.fieldLabels[pn]) ? configDesc.fieldLabels[pn] : TabelFieldData.getFieldLabelByName(pn, tabelField), isTabelField, isMajorKey);
+						}
+					}
+
+					properties = _data.getSortProperties();
+					for each (pn in properties)
+					{
+						if (pn == "mx_internal_uid")
+							continue;
+						if (pn == "id")
+							continue;
+						if (pn == "name")
+							continue;
+						if (pn.indexOf(ConfigData.FIELD_INDEX_SEPARATOR) != -1)
+							continue;
+						var hasBuiltIn : Boolean = false;
+						var builtInTables : Array = configDesc.builtInTables;
+						for each (var builtInTabel : TabelData in builtInTables)
+						{
+							if (pn == builtInTabel.builtInFieldName)
+							{
+								hasBuiltIn = true;
+								break;
+							}
+						}
+						if (hasBuiltIn)
+							continue;
+                        tabelField = tabel.getFieldByFieldName(pn);
+						isTabelField = tabelField != null;
+						isMajorKey = tabel.majorKeyField && tabel.majorKeyField.mFieldName == pn;
+						createItem(pn, _data, true, configDesc.fieldTips ? configDesc.fieldTips[pn] : null, //
+							(configDesc.fieldLabels && configDesc.fieldLabels[pn]) ? configDesc.fieldLabels[pn] : TabelFieldData.getFieldLabelByName(pn, tabelField), isTabelField, isMajorKey);
+					}
+				}
+				else
+				{
+					for each (var item : LabelInputItem in _dataItems)
+					{
+						if (item.dataField == "id")
+						{
+							updateItem(item);
+						}
+						else if (item.dataField == "name")
+						{
+							updateItem(item);
+						}
+						else
+						{
+							for (pn in _data.properties)
+							{
+								if (item.dataField == pn)
+								{
+									updateItem(item);
+									break;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			private function createItem(dataField : String, data : ConfigData, editable : Boolean = true, labelTips : String = "", label : String = "", isTabelField : Boolean = false, isMajorKey : Boolean = false) : void
+			{
+				var dataFieldName : String = ConfigData.getOriginalFieldName(dataField);
+				var item : LabelInputItem = new LabelInputItem();
+				item.labelTips = dataFieldName + "：" + (labelTips || label || dataFieldName);
+				item.setLabelWithLimit(label || dataFieldName);
+				item.dataField = dataField;
+				item.dataPropertySetter = onDataPropertySetter;
+				item.dataPropertyGetter = onDataPropertygGetter;
+				item.setStrikingLabel(isMajorKey ? 2 : isTabelField ? 1 : 0);
+				item.editable = editable;
+				if (_inputTypes)
+				{
+					var inputType : InputType = _inputTypes[dataField];
+					if (inputType)
+					{
+						if (inputType.type == "int")
+						{
+							item.minValue = inputType.minValue;
+							item.maxValue = inputType.maxValue;
+							item.period = inputType.period;
+						}
+						else if (inputType.type == "number")
+						{
+							item.minValue = inputType.minValue;
+							item.maxValue = inputType.maxValue;
+							item.period = inputType.period;
+							item.isNumber = true;
+						}
+						else if (inputType.type == "color")
+						{
+							item.isColor = true;
+						}
+						else if (inputType.type == "boolean")
+						{
+							item.isBoolean = true;
+						}
+						else if (inputType.type == "dire")
+						{
+							item.browseTile = "请选择目录";
+							item.browseDesc = "dire";
+							item.browseExtension = "dire";
+						}
+						else if (inputType.type == "*.txt")
+						{
+							item.browseTile = "请选择文件";
+							item.browseDesc = "配置(*.txt)";
+							item.browseExtension = "*.txt;";
+						}
+						else if (inputType.type == "list")
+						{
+							item.listData = inputType.listData;
+						}
+						item.editable = inputType.editable;
+					}
+				}
+				item.dragDropCallback = editable ? callDragDropCallback : null;
+				item.inputCallback = editable ? callInputCallback : null;
+
+				updateItem(item, data);
+				data_list.addElement(item);
+				_dataItems.push(item);
+			}
+
+			private function onDataPropertySetter(item : LabelInputItem, value : Object) : Boolean
+			{
+				if (_inputTypes)
+				{
+					var inputType : InputType = _inputTypes[item.dataField];
+					if (inputType)
+					{
+						if (inputType.setterField)
+						{
+							if (item.data is ConfigData)
+								(item.data as ConfigData).setValue(inputType.setterField, value);
+							else
+								item.data[inputType.setterField] = value;
+							return true;
+						}
+					}
+				}
+				return false;
+			}
+
+			private function onDataPropertygGetter(item : LabelInputItem, value : Object) : Object
+			{
+				if (_inputTypes)
+				{
+					var inputType : InputType = _inputTypes[item.dataField];
+					if (inputType)
+					{
+						if (inputType.getterField)
+						{
+							return item.data[inputType.getterField];
+						}
+					}
+				}
+				return value;
+			}
+
+			private function updateItem(item : LabelInputItem, data : Object = null) : void
+			{
+				if (data)
+					item.setData(data);
+				else
+					item.updateData();
+				checkCorrect(item);
+			}
+
+			private function callDragDropCallback(item : LabelInputItem, dropData : Object) : void
+			{
+				if (_dragDropCallback != null)
+				{
+					_dragDropCallback(item.dataField, _data, dropData);
+				}
+				checkCorrect(item);
+			}
+
+			private function callInputCallback(item : LabelInputItem) : void
+			{
+				checkCorrect(item);
+				if (_inputCallback != null)
+				{
+					_inputCallback(item.dataField, _data);
+				}
+			}
+
+			private function checkCorrect(item : LabelInputItem) : void
+			{
+				if (_validateCallback != null)
+				{
+					var correctValue : Object = _validateCallback(item.dataField, _data);
+					if (correctValue)
+					{
+						if (correctValue.valid)
+							item.striking(correctValue.tips);
+						else
+							item.warning(correctValue.tips);
+					}
+					else
+					{
+						item.normal();
+					}
+				}
+				else
+				{
+					item.normal();
+				}
+			}
+
+			protected function okBtn_clickHandler(event : MouseEvent) : void
+			{
+				if (_okCallback != null)
+					_okCallback(_data);
+				close();
+			}
+		]]>
+	</fx:Script>
+	<s:BorderContainer width="100%"
+					   height="410"
+					   backgroundColor="0x666666"
+					   borderColor="0"
+					   borderStyle="solid">
+		<s:Scroller width="100%"
+					height="100%">
+			<s:Group horizontalScrollPosition="50"
+					 verticalScrollPosition="50"
+					 id="data_list">
+				<s:layout>
+					<s:VerticalLayout paddingTop="10"
+									  paddingLeft="30"/>
+				</s:layout>
+			</s:Group>
+		</s:Scroller>
+	</s:BorderContainer>
+	<s:Button id="okBtn"
+			  x="255"
+			  y="430"
+			  label="确定"
+			  click="okBtn_clickHandler(event)"/>
+</s:TitleWindow>

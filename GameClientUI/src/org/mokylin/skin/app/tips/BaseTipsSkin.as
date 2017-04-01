@@ -21,6 +21,8 @@ package org.mokylin.skin.app.tips
 			super();
 			
 			this.currentState = "normal";
+			this.height = 47;
+			this.width = 44;
 			this.elementsContent = [imgBG_i()];
 			
 			states = {
@@ -34,8 +36,11 @@ package org.mokylin.skin.app.tips
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			imgBG = temp;
 			temp.name = "imgBG";
-			temp.styleName = "ui/common/tip/tips_di.png";
-			temp.y = 0;
+			temp.bottom = 0;
+			temp.left = 0;
+			temp.right = 0;
+			temp.styleName = "ui/common/tips/tips_2.png";
+			temp.top = 0;
 			return temp;
 		}
 

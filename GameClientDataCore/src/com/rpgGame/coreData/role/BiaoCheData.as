@@ -6,7 +6,7 @@ package com.rpgGame.coreData.role
 	import app.message.BiaoResProto;
 	import app.message.BiaoType;
 	
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	public class BiaoCheData extends RoleData
 	{
@@ -53,7 +53,7 @@ package com.rpgGame.coreData.role
 		 */		
 		public function getModeRes():String
 		{
-			var data:BiaoPersonData = BiaoCfgData.getPersonalDataAtLevel(level);
+			var data:BiaoPersonData = BiaoCfgData.getPersonalDataAtLevel(totalStat.level);
 			var biaoRes:BiaoResProto = isBroken ? data.broken_biao_res : data.normal_biao_res;
 			var path:String = biaoRes.res[quality];
 			return path;
@@ -66,23 +66,23 @@ package com.rpgGame.coreData.role
 		 */		
 		public function setYunBiaoProtoOnlogin( byte : ByteBuffer ):void
 		{
-			sceneId = byte.readVarint32();
-			sceneSequence = byte.readVarint32();
-			expirationTime = byte.readVarint64();
-			quality = byte.readVarint32();
-			x = byte.readVarint32();
-			y = byte.readVarint32();
-			hp = byte.readVarint64();
-			totalStat.life = byte.readVarint64();
-			totalStat.moveSpeed = byte.readVarint64();
-			biaoType = byte.readVarint32();
-			switch(biaoType)
-			{
-				case BiaoType.PERSONAL:
-					isBroken = byte.readBoolean();
-					nextIndex = byte.readVarint32();
-					break;
-			}
+//			sceneId = byte.readVarint32();
+//			sceneSequence = byte.readVarint32();
+//			expirationTime = byte.readVarint64();
+//			quality = byte.readVarint32();
+//			x = byte.readVarint32();
+//			y = byte.readVarint32();
+//			hp = byte.readVarint64();
+//			totalStat.life = byte.readVarint64();
+//			totalStat.moveSpeed = byte.readVarint64();
+//			biaoType = byte.readVarint32();
+//			switch(biaoType)
+//			{
+//				case BiaoType.PERSONAL:
+//					isBroken = byte.readBoolean();
+//					nextIndex = byte.readVarint32();
+//					break;
+//			}
 		}
 		
 		/**

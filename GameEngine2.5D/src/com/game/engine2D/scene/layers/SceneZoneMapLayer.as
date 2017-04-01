@@ -30,18 +30,23 @@ package com.game.engine2D.scene.layers
 		/**
 		 * 缓存中保存的地图图片的距离当前摄像机镜头的最大zone格x范围
 		 */
-		private static const MAX_ZONE_CACHE_X : int = 0;
+		private static const MAX_ZONE_CACHE_X : int = 1;
 		/**
 		 * 缓存中保存的地图图片的距离当前摄像机镜头的最大zone格y范围
 		 */
-		private static const MAX_ZONE_CACHE_Y : int = 0;
+		private static const MAX_ZONE_CACHE_Y : int = 1;
 		
-		private static const DISPOSE_TM_GAP : uint = 60 * 3;
-
+		private static const DISPOSE_TM_GAP : uint = 5*60*1000;//5*60s
+		private static const DISPOSE_TM_GAP_STOP : uint = 60*1000;//60s
+		private static const DISPOSE_TM_GAP_WALK : int = 30*1000;//30s
+		
 		public var strongLoadMap : Boolean = false;
-	
+		
+		/**当前窗口所有格子加载完成*/
+		public var loadComplete:Boolean = false;
+		
 		/**场景*/
-		private var _scene : Scene;
+		private var _mapScene : Scene;
 		private var _camera : SceneCamera;
 		/**
 		 * 缓存场景的每个格子地图容器
@@ -61,15 +66,16 @@ package com.game.engine2D.scene.layers
 		private var _immedDispose : Boolean = false;
 		private var _drawZoneList : Vector.<MapZone> = new Vector.<MapZone>();
 		
-		private var _disposeTmCnt : uint = 0;
 		private var _disposeTimer : int = 0;
-
+		private var _stopTimer : int = int.MAX_VALUE;
+		private var _moveTimer : int = int.MAX_VALUE;
+		
 		public function SceneZoneMapLayer($scene : Scene)
 		{
-			_scene = $scene;
+			_mapScene = $scene;
 			_camera = $scene.sceneCamera;
 		}
-
+		
 		/**
 		 * 获取指定位置的MapZone
 		 * $param $zoneX
@@ -78,13 +84,13 @@ package com.game.engine2D.scene.layers
 		final private function getMapZone($zoneX : int, $zoneY : int) : MapZone
 		{
 			//判断范围合法性
-			var hNum : int = Math.ceil(_scene.mapConfig.gridH / SceneConfig.ZONE_SCALE_WIDTH);
-			var vNum : int = Math.ceil(_scene.mapConfig.gridV / SceneConfig.ZONE_SCALE_HEIGHT);
+			var hNum : int = Math.ceil(_mapScene.mapConfig.gridH / SceneConfig.ZONE_SCALE_WIDTH);
+			var vNum : int = Math.ceil(_mapScene.mapConfig.gridV / SceneConfig.ZONE_SCALE_HEIGHT);
 			if ($zoneX < 0 || $zoneX >= hNum)
 				return null;
 			if ($zoneY < 0 || $zoneY >= vNum)
 				return null;
-
+			
 			//直接在缓存中读取
 			var key : * = MapZone.getKey($zoneX, $zoneY);
 			var mapZone : MapZone = _mapZones.getValue(key);
@@ -113,20 +119,20 @@ package com.game.engine2D.scene.layers
 			});
 			return num;
 		}
-
+		
 		/**
 		 * 运行
 		 */
 		final public function run() : void
 		{
-			if (!_scene.mapConfig) //没有地图配置信息的时候，直接返回吧。。。
+			if (!_mapScene.mapConfig) //没有地图配置信息的时候，直接返回吧。。。
 			{
 				_isNeedSortZone = true;
 				return;
 			}
-
+			
 			queueLoad();
-
+			
 			if (_isQueueDraw)
 			{
 				queueDraw();
@@ -134,45 +140,46 @@ package com.game.engine2D.scene.layers
 			//如果位置没有变化则直接返回
 			if (!strongLoadMap)
 			{
-				var tmOut:Boolean;//显存超了
 				var nowTime:int = GlobalConfig2D.nowTime;
-				var isTimeout:Boolean = nowTime - _disposeTimer > 20000;
+				var isMoveTimeout:Boolean = nowTime - _moveTimer > DISPOSE_TM_GAP_WALK;
+				var isDisposeTimeout:Boolean = nowTime - _disposeTimer > DISPOSE_TM_GAP;
 				var isStop:Boolean = _currCameraPos.x == _camera.posX && _currCameraPos.y == _camera.posY;
-				if ( isStop)
+				if (isStop)
 				{
-					_disposeTmCnt++;
-					if (_disposeTmCnt > DISPOSE_TM_GAP) //5S钟内没动,就开干...
+					_moveTimer = nowTime;
+					if (nowTime - _stopTimer > DISPOSE_TM_GAP_STOP) //60s钟内没动,就开干...
 					{
-						_disposeTmCnt = 0;
-						_disposeTimer = nowTime;
+						_disposeTimer = _stopTimer = nowTime;
+						//trace("60S钟内没动了，disposeCacheZone");
 						MapCache.getInstance().disposeCacheZone(_camera);
 					}
 					return;
 				}
-				else if (isTimeout) //刷地图超过20s，开干
+				else if (isMoveTimeout || isDisposeTimeout) //刷地图超过30s，开干
 				{
-					_disposeTmCnt = 0;
-					_disposeTimer = nowTime;
+					_disposeTimer = _stopTimer = _moveTimer = nowTime;
+					//trace("刷地图超过30S，disposeCacheZone");
 					MapCache.getInstance().disposeCacheZone(_camera);
 					return;
 				}
 			}
 			_currCameraPos.x = _camera.posX;
 			_currCameraPos.y = _camera.posY;
-
-			_disposeTmCnt = 0;
-
+			
+			_stopTimer = nowTime;
+			
 			//加载地图
 			loadMap();
 		}
-
+		
 		//加载地图
 		//===================================================================================================
 		private var _cameraZone : MapZone;
 		private var _curtMapZoneMap : Dictionary = new Dictionary();
 		private var _cameraTilePoint : Point = new Point();
 		private var _cameraZonePoint : Point = new Point();
-
+		
+		
 		/**
 		 * @private
 		 * 加载地图
@@ -180,7 +187,7 @@ package com.game.engine2D.scene.layers
 		final private function loadMap() : void
 		{
 			var tempMapZone : MapZone;
-
+			
 			//拿到摄像机(注意不是摄像机跟随元素)所在的区域图块
 			_cameraTilePoint.x = (_camera.posX / SceneConfig.TILE_WIDTH) >> 0;
 			_cameraTilePoint.y = (_camera.posY / SceneConfig.TILE_HEIGHT) >> 0;
@@ -203,13 +210,13 @@ package com.game.engine2D.scene.layers
 				}
 				//还原标识
 				strongLoadMap = false;
-
+				
 				var cameraZoneRangeX : uint = _camera.zoneRangeXY.x;
 				var cameraZoneRangeY : uint = _camera.zoneRangeXY.y;
 				//得到新区域的可视点数组
 				var pointArr : Array = SceneUtil.findViewZonePoints(newMapZone.tile_x, newMapZone.tile_y, cameraZoneRangeX, cameraZoneRangeY);
-				var zoneMaxX : int = Math.ceil(_scene.mapConfig.gridH / SceneConfig.ZONE_SCALE_WIDTH); //注意这个是向上取整
-				var zoneMaxY : int = Math.ceil(_scene.mapConfig.gridV / SceneConfig.ZONE_SCALE_HEIGHT); //注意这个是向上取整
+				var zoneMaxX : int = Math.ceil(_mapScene.mapConfig.gridH / SceneConfig.ZONE_SCALE_WIDTH); //注意这个是向上取整
+				var zoneMaxY : int = Math.ceil(_mapScene.mapConfig.gridV / SceneConfig.ZONE_SCALE_HEIGHT); //注意这个是向上取整
 				var p : Point;
 				var key : *;
 				var newMapZoneMap : Dictionary = new Dictionary();
@@ -261,13 +268,13 @@ package com.game.engine2D.scene.layers
 					//
 					newMapZoneMap[key] = tempMapZone;
 				}
-
+				
 				if (_isNeedSortZone)
 				{
 					_loadMapZoneList.sort(sortOnMapZone);
 					_isNeedSortZone = false;
 				}
-
+				
 				var mZone : MapZone;
 				var len : int;
 				var removeZone : MapZone;
@@ -295,7 +302,7 @@ package com.game.engine2D.scene.layers
 							MapCache.getInstance().disposeZone(removeZone);
 						else
 							MapCache.getInstance().addDisposeCacheZone(key, removeZone);
-
+						
 						if (_isQueueDraw)
 						{
 							len = _drawZoneList.length;
@@ -313,6 +320,7 @@ package com.game.engine2D.scene.layers
 					else //否则存入新的纪录
 					{
 						MapCache.getInstance().removeDisposeCacheZone(key);
+						newMapZoneMap[key] = removeZone;
 					}
 				}
 				_curtMapZoneMap = newMapZoneMap;
@@ -320,7 +328,7 @@ package com.game.engine2D.scene.layers
 			//最后重新赋值新图块数组和中心图块
 			_currentMapZone = newMapZone;
 		}
-
+		
 		final private function sortOnMapZone($zoneA : MapZone, $zoneB : MapZone) : int
 		{
 			if (_cameraZone)
@@ -338,7 +346,7 @@ package com.game.engine2D.scene.layers
 			}
 			return 0;
 		}
-
+		
 		/**
 		 * 显示添加一个新的区域图块
 		 * @param $mapZone
@@ -351,12 +359,7 @@ package com.game.engine2D.scene.layers
 			var hasData : Boolean = MapCache.getInstance().hasZoneBmpData(key);
 			if (!$mapZone.isLoaded && !$mapZone.isLoading && !hasData)
 			{
-				var filePath : String = _scene.mapConfig.zoneMapUrl.replace("#", key);
-				//版本
-				if (GlobalConfig2D.version != null)
-				{
-					filePath = GlobalConfig2D.version(filePath);
-				}
+				var filePath : String = _mapScene.mapConfig.zoneMapUrl.replace("#", key);
 				var userData : Object = {};
 				userData.zoneKey = key;
 				userData.mapZone = $mapZone;
@@ -366,7 +369,7 @@ package com.game.engine2D.scene.layers
 			}
 			return false;
 		}
-
+		
 		final private function onZoneCompleteHandler(mapZone : MapZone) : void
 		{
 			var key : * = MapZone.getKey(mapZone.tile_x, mapZone.tile_y);
@@ -379,7 +382,7 @@ package com.game.engine2D.scene.layers
 				mapZone.draw(MapCache.getInstance().getZoneBmpData(key));
 			}
 		}
-
+		
 		final private function queueLoad() : void
 		{
 			var cnt : uint = 0;
@@ -399,7 +402,7 @@ package com.game.engine2D.scene.layers
 				cnt++;
 			}
 		}
-
+		
 		final private function queueDraw() : void
 		{
 			var mapZone : MapZone;

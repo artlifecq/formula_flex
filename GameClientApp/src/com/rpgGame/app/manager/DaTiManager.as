@@ -3,15 +3,12 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.sender.DaTiSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
-	import com.rpgGame.app.ui.main.activityBar.DaTiIcon;
 	import com.rpgGame.app.utils.TimeData;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
-	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.DaTiCfgData;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
-	import com.rpgGame.coreData.lang.LangAlertInfo;
 	
 	import app.message.ExamQuestionProto;
 	
@@ -56,7 +53,7 @@ package com.rpgGame.app.manager
 		public static var levelNotReach:Boolean;
 		private static var _TimeData:TimeData;
 		
-		private static var _icon:DaTiIcon;
+		private static var _icon:Object;//DaTiIcon;
 		
 		public static function setup():void
 		{
@@ -143,9 +140,9 @@ package com.rpgGame.app.manager
 		{
 			if(_icon == null)
 			{
-				_icon = new DaTiIcon();
+//				_icon = new DaTiIcon();
 			}
-			StarlingLayerManager.mainUILayer.addChild(_icon);
+//			StarlingLayerManager.mainUILayer.addChild(_icon);
 			_icon.onShow();
 			Starling.current.nativeStage.addEventListener(Event.RESIZE, onStageResize);
 			onStageResize();

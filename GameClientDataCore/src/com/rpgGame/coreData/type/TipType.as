@@ -28,7 +28,19 @@ package com.rpgGame.coreData.type
 		/** 地图区域tips */
 		public static const MAP_AREA_TIP : int = rEnum.next;
 		
+		/**
+		 *普通
+		 */
+		public static const NORMAL_TIP : int = rEnum.next;
+		/**
+		 *装备 
+		 */
 		public static const EQUIP_TIP : int = rEnum.next;
+		
+		/**
+		 *货币 
+		 */
+		public static const AMOUNT_TIP : int = rEnum.next;
 
 		/** unlock Gridl tips*/
 		public static const OPEN_GRID_TIP : int = rEnum.next;

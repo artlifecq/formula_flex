@@ -1,8 +1,9 @@
 package com.rpgGame.coreData.cfg
 {
-	import app.message.AnimationConfig;
-	import app.message.AnimationProto;
-
+	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
+	
+	import flash.utils.ByteArray;
+	
 	import org.client.mainCore.ds.HashMap;
 
 	/**
@@ -20,24 +21,25 @@ package com.rpgGame.coreData.cfg
 
 		private static var _map : HashMap = new HashMap();
 
-		public static function setConfig(cfg : AnimationConfig) : void
+		public static function setConfig(data : ByteArray) : void
 		{
-			if(!cfg)
+			var arr:Array = data.readObject();
+			if(!arr)
 				return;
-			for each (var dataProto : AnimationProto in cfg.animations)
+			for each (var dataProto : Q_SpellAnimation in arr)
 			{
 				addData(dataProto);
 			}
 		}
 
-		public static function addData(dataProto : AnimationProto) : void
+		public static function addData(dataProto : Q_SpellAnimation) : void
 		{
 			_map.add(dataProto.id, dataProto);
 		}
 
-		public static function getData(id : int) : AnimationProto
+		public static function getData(id : int) : Q_SpellAnimation
 		{
-			return _map.getValue(id) as AnimationProto;
+			return _map.getValue(id) as Q_SpellAnimation;
 		}
 	}
 }

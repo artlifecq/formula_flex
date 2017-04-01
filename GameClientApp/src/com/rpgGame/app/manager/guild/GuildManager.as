@@ -12,7 +12,6 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.alert.AlertText;
 	import com.rpgGame.app.ui.alert.GameAlert;
-	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.FunctionMessageBarEvent;
@@ -21,8 +20,10 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.core.events.country.CrownEvent;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_monster;
+	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.guild.GuildEventType;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
@@ -30,7 +31,7 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.coreData.info.guild.GuildFamilyData;
 	import com.rpgGame.coreData.info.guild.GuildListItemData;
 	import com.rpgGame.coreData.info.guild.GuildModuleObjData;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.society.SocietyDetailData;
 	import com.rpgGame.coreData.info.society.SocietyMemberData;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
@@ -42,14 +43,12 @@ package com.rpgGame.app.manager.guild
 	
 	import flash.geom.Point;
 	
-	import app.cmd.GuildModuleMessages;
 	import app.message.AmountType;
 	import app.message.GuildModuleObjProto;
 	import app.message.GuildNewsProto;
 	import app.message.GuildOfficerPos;
 	import app.message.GuildPosOfficersProto;
 	import app.message.GuildProto;
-	import app.message.MonsterDataProto;
 	import app.message.GuildLevelDatasProto.GuildLevelDataProto;
 	import app.message.GuildOfficerDatasProto.GuildOfficerDataProto;
 	
@@ -127,12 +126,12 @@ package com.rpgGame.app.manager.guild
 		{
 			seeGuildFamily = family;
 			AppManager.showAppNoHide(AppConstant.GUILD_FAMILY_PANEL);
-			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_GUILD_FAMILY_MEMBERS+family))
-			{
-				EventManager.dispatchEvent(GuildEvent.GUILD_FAMILY_CHANGE);
-				return;
-			}
-			ReqLockUtil.lockReq(GuildModuleMessages.C2S_GUILD_FAMILY_MEMBERS+family,15000);
+//			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_GUILD_FAMILY_MEMBERS+family))
+//			{
+//				EventManager.dispatchEvent(GuildEvent.GUILD_FAMILY_CHANGE);
+//				return;
+//			}
+//			ReqLockUtil.lockReq(GuildModuleMessages.C2S_GUILD_FAMILY_MEMBERS+family,15000);
 			GuildSender.getFamilyData(family);
 		}
 		//------------------------------列表项点击
@@ -244,12 +243,12 @@ package com.rpgGame.app.manager.guild
 		 */
 		public static function getGuildLog():void
 		{
-			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_GUILD_LOG))
-			{
-				EventManager.dispatchEvent(GuildEvent.GUILD_EVENT_CHANGE);
-				return;
-			}
-			ReqLockUtil.lockReq(GuildModuleMessages.C2S_GUILD_LOG,30000);
+//			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_GUILD_LOG))
+//			{
+//				EventManager.dispatchEvent(GuildEvent.GUILD_EVENT_CHANGE);
+//				return;
+//			}
+//			ReqLockUtil.lockReq(GuildModuleMessages.C2S_GUILD_LOG,30000);
 			GuildSender.getGuildLog();	
 		}
 		
@@ -608,9 +607,9 @@ package com.rpgGame.app.manager.guild
 		/**同意或者拒绝别人的请求**/
 		public static function replyJoinReq(isAgree:Boolean,guild:String):void
 		{
-			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_REPLY_JOIN_REQUEST,true))
-				return;
-			ReqLockUtil.lockReq(GuildModuleMessages.C2S_REPLY_JOIN_REQUEST,500);
+//			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_REPLY_JOIN_REQUEST,true))
+//				return;
+//			ReqLockUtil.lockReq(GuildModuleMessages.C2S_REPLY_JOIN_REQUEST,500);
 			GuildSender.replyJoinReq(isAgree,guild);
 			joinGuildList.splice(joinGuildList.indexOf(guild));
 			EventManager.dispatchEvent(GuildEvent.GET_JOIN_GUILD_LIST);
@@ -649,12 +648,12 @@ package com.rpgGame.app.manager.guild
 		 */
 		public static function getReqJoinGuildList():void
 		{
-			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_GET_REQUEST_JOIN_DETAIL) && joinGuildList.length >0)
-			{
-				EventManager.dispatchEvent(GuildEvent.GET_JOIN_GUILD_LIST);
-				return;
-			}
-			ReqLockUtil.lockReq(GuildModuleMessages.C2S_GET_REQUEST_JOIN_DETAIL,30000);
+//			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_GET_REQUEST_JOIN_DETAIL) && joinGuildList.length >0)
+//			{
+//				EventManager.dispatchEvent(GuildEvent.GET_JOIN_GUILD_LIST);
+//				return;
+//			}
+//			ReqLockUtil.lockReq(GuildModuleMessages.C2S_GET_REQUEST_JOIN_DETAIL,30000);
 			GuildSender.getReqJoinGuildList();
 		}
 		
@@ -681,9 +680,9 @@ package com.rpgGame.app.manager.guild
 				GameAlert.showAlertUtil(LangAlertInfo.JOIN_GUILD_HAVE_GUILD);
 				return;
 			}
-			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_REQUEST_JOIN+name,true))
-				return;
-			ReqLockUtil.lockReq(GuildModuleMessages.C2S_REQUEST_JOIN+name,10000);//这里上锁10s
+//			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_REQUEST_JOIN+name,true))
+//				return;
+//			ReqLockUtil.lockReq(GuildModuleMessages.C2S_REQUEST_JOIN+name,10000);//这里上锁10s
 			if(!reqJoinGuildList)
 				reqJoinGuildList = [];
 			//没有长度，找不到申请过这个帮派，走申请流程
@@ -762,12 +761,12 @@ package com.rpgGame.app.manager.guild
 		/**请求帮派列表**/
 		public static function getGuildList():void
 		{
-			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_GET_GUILD_LIST))
-			{
-				EventManager.dispatchEvent(GuildEvent.GET_GUILD_LIST);
-				return;
-			}
-			ReqLockUtil.lockReq(GuildModuleMessages.C2S_GET_GUILD_LIST,15000);
+//			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_GET_GUILD_LIST))
+//			{
+//				EventManager.dispatchEvent(GuildEvent.GET_GUILD_LIST);
+//				return;
+//			}
+//			ReqLockUtil.lockReq(GuildModuleMessages.C2S_GET_GUILD_LIST,15000);
 			GuildSender.getGuildList();
 		}
 		/**请求列表返回回来**/
@@ -784,12 +783,12 @@ package com.rpgGame.app.manager.guild
 				trace("你自己不是帮主，不能请求这个");
 				return;
 			}
-			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_GET_FAMILY_REQUEST_JOIN_GUILD_LIST))
-			{
-				EventManager.dispatchEvent(GuildEvent.GET_GUILD_LIST);
-				return;
-			}
-			ReqLockUtil.lockReq(GuildModuleMessages.C2S_GET_FAMILY_REQUEST_JOIN_GUILD_LIST,15000);
+//			if(ReqLockUtil.isReqLocked(GuildModuleMessages.C2S_GET_FAMILY_REQUEST_JOIN_GUILD_LIST))
+//			{
+//				EventManager.dispatchEvent(GuildEvent.GET_GUILD_LIST);
+//				return;
+//			}
+//			ReqLockUtil.lockReq(GuildModuleMessages.C2S_GET_FAMILY_REQUEST_JOIN_GUILD_LIST,15000);
 			GuildSender.getJoinGuildList();
 		}
 		//-----------------------------------下面是创建帮派的
@@ -848,10 +847,10 @@ package com.rpgGame.app.manager.guild
 			var costItem : int = BackPackManager.instance.getItemCount(GuildCfgData.guildMiscData.createCostGoods);
 			if(costItem<=0)
 			{
-				GameAlert.showAlertUtil(LangAlertInfo.createGuildEroor4,null,ItemCfgData.getItemName(GuildCfgData.guildMiscData.createCostGoods));
+				GameAlert.showAlertUtil(LangAlertInfo.createGuildEroor4,null,ItemConfig.getItemName(GuildCfgData.guildMiscData.createCostGoods));
 				return;
 			}
-			var cost : ItemInfo = BackPackManager.instance.getBagItemsByID(GuildCfgData.guildMiscData.createCostGoods)[0];
+			var cost : ClientItemInfo = BackPackManager.instance.getBagItemsByID(GuildCfgData.guildMiscData.createCostGoods)[0];
 			
 			GuildSender.createGuild(createNpcId,createDialog,cost.index,diwenIndex,dikuangIndex,banner,name);
 		}
@@ -876,7 +875,7 @@ package com.rpgGame.app.manager.guild
 				GameAlert.showAlertUtil(LangAlertInfo.createGuildError_2);
 				return;
 			}
-			if(MainRoleManager.actorInfo.level < MIN_CREATE_LEVEL)
+			if(MainRoleManager.actorInfo.totalStat.level < MIN_CREATE_LEVEL)
 			{
 				GameAlert.showAlertUtil(LangAlertInfo.createGuildError_5,null,MIN_CREATE_LEVEL);
 				return;
@@ -899,12 +898,14 @@ package com.rpgGame.app.manager.guild
 		/**前去创建**/
 		public static function gotoCreate():void
 		{
-			var monsterdata:MonsterDataProto=MonsterDataManager.getData(GuildCfgData.createGuildNpc);
-			var pos : Point = MonsterDataManager.getMonsterPosition(monsterdata);
+			var monsterdata:Q_monster = MonsterDataManager.getData(GuildCfgData.createGuildNpc);
+			var sceneMonsterdata:Q_scene_monster_area=MonsterDataManager.getSceneData(GuildCfgData.createGuildNpc);
+			
+			var pos : Point = MonsterDataManager.getMonsterPosition(sceneMonsterdata);
 			var monsterData : MonsterBornData = new MonsterBornData();
 			monsterData.setProtocData(monsterdata);
-			MainRoleSearchPathManager.gotoTargetData.setData(monsterdata.sceneId,pos.x,pos.y,monsterData);
-			MainRoleSearchPathManager.walkToScene(monsterdata.sceneId,pos.x,pos.y);
+			MainRoleSearchPathManager.gotoTargetData.setData(sceneMonsterdata.q_mapid,pos.x,pos.y,monsterData);
+			MainRoleSearchPathManager.walkToScene(sceneMonsterdata.q_mapid,pos.x,pos.y);
 		}
 		//------------------------------杂项
 		/**获取自己是不是帮主**/

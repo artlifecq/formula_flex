@@ -5,8 +5,6 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
-	import org.mokylin.skin.app.tips.OpenGridTipSkin;
-	
 	import starling.display.Sprite;
 	
 	import utils.TimerServer;
@@ -18,12 +16,12 @@ package com.rpgGame.app.ui.tips
 	 */	
 	public class OpenGridTip extends Sprite implements ITip
 	{
-		private var skin:OpenGridTipSkin;
+		private var skin:Object;//OpenGridTipSkin;
 		private var cdTime:Number;
 		
 		public function OpenGridTip()
 		{
-			skin = new OpenGridTipSkin();
+//			skin = new OpenGridTipSkin();
 			skin.toSprite(this);
 			skin.grp.backgroundSkin = skin.imgBG;
 		}

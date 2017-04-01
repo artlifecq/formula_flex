@@ -6,7 +6,7 @@ package com.rpgGame.app.sender
 
 	import app.cmd.TaskModuleMessages;
 
-	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
 
 	/**
 	 * 任务协议发送
@@ -54,9 +54,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqTaskCompleteReplyNpc(taskId : int, npcId : Number, prizeIndex : int = 0, answerIndex : int = 0) : void
 		{
-			if (ReqLockUtil.isReqLocked(TaskModuleMessages.C2S_TASK_REPLY_NPC_TASK))
-				return;
-			ReqLockUtil.lockReq(TaskModuleMessages.C2S_TASK_REPLY_NPC_TASK, 5000);
+//			if (ReqLockUtil.isReqLocked(TaskModuleMessages.C2S_TASK_REPLY_NPC_TASK))
+//				return;
+//			ReqLockUtil.lockReq(TaskModuleMessages.C2S_TASK_REPLY_NPC_TASK, 5000);
 
 			_bytes.clear();
 			_bytes.writeVarint32(taskId);
@@ -64,7 +64,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint32(answerIndex);
 			_bytes.writeVarint32(prizeIndex);
 
-			SocketConnection.send(TaskModuleMessages.C2S_TASK_REPLY_NPC_TASK, _bytes);
+			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_REPLY_NPC_TASK, _bytes);
 		}
 
 		/**
@@ -74,14 +74,14 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqTaskCompleteSentNpc(taskId : int) : void
 		{
-			if (ReqLockUtil.isReqLocked(TaskModuleMessages.C2S_COMPLETE_SENT_NPC))
-				return;
-			ReqLockUtil.lockReq(TaskModuleMessages.C2S_COMPLETE_SENT_NPC, 5000);
+//			if (ReqLockUtil.isReqLocked(TaskModuleMessages.C2S_COMPLETE_SENT_NPC))
+//				return;
+//			ReqLockUtil.lockReq(TaskModuleMessages.C2S_COMPLETE_SENT_NPC, 5000);
 
 			_bytes.clear();
 			_bytes.writeVarint32(taskId);
 
-			SocketConnection.send(TaskModuleMessages.C2S_COMPLETE_SENT_NPC, _bytes);
+			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_COMPLETE_SENT_NPC, _bytes);
 		}
 
 		/**
@@ -91,14 +91,14 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqTaskCompleteAreaSearch(taskId : int) : void
 		{
-			if (ReqLockUtil.isReqLocked(TaskModuleMessages.C2S_COMPLETE_AREA_SEARCH))
-				return;
-			ReqLockUtil.lockReq(TaskModuleMessages.C2S_COMPLETE_AREA_SEARCH, 5000);
+//			if (ReqLockUtil.isReqLocked(TaskModuleMessages.C2S_COMPLETE_AREA_SEARCH))
+//				return;
+//			ReqLockUtil.lockReq(TaskModuleMessages.C2S_COMPLETE_AREA_SEARCH, 5000);
 
 			_bytes.clear();
 			_bytes.writeVarint32(taskId);
 
-			SocketConnection.send(TaskModuleMessages.C2S_COMPLETE_AREA_SEARCH, _bytes);
+			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_COMPLETE_AREA_SEARCH, _bytes);
 		}
 
 		/**
@@ -109,15 +109,15 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqTaskCompleteClientTask(taskId : int, clientTaskType : int) : void
 		{
-			if (ReqLockUtil.isReqLocked(TaskModuleMessages.C2S_COMPLETE_CLIENT_TASK))
-				return;
-			ReqLockUtil.lockReq(TaskModuleMessages.C2S_COMPLETE_CLIENT_TASK, 5000);
+//			if (ReqLockUtil.isReqLocked(TaskModuleMessages.C2S_COMPLETE_CLIENT_TASK))
+//				return;
+//			ReqLockUtil.lockReq(TaskModuleMessages.C2S_COMPLETE_CLIENT_TASK, 5000);
 
 			_bytes.clear();
 			_bytes.writeVarint32(taskId);
 			_bytes.writeVarint32(clientTaskType);
 
-			SocketConnection.send(TaskModuleMessages.C2S_COMPLETE_CLIENT_TASK, _bytes);
+			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_COMPLETE_CLIENT_TASK, _bytes);
 		}
 
 		/**
@@ -126,7 +126,7 @@ package com.rpgGame.app.sender
 		public static function reqReduceEveryDayDiffiStar() : void
 		{
 			_bytes.clear();
-			SocketConnection.send(TaskModuleMessages.C2S_TASK_REDUCE_DIFFI_STAR, _bytes);
+			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_REDUCE_DIFFI_STAR, _bytes);
 		}
 
 		/**
@@ -135,7 +135,7 @@ package com.rpgGame.app.sender
 		public static function reqEveryDayTaskAddPrizeStar() : void
 		{
 			_bytes.clear();
-			SocketConnection.send(TaskModuleMessages.C2S_TASK_ADD_PRIZE_STAR, _bytes);
+			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_ADD_PRIZE_STAR, _bytes);
 		}
 
 		/**
@@ -144,7 +144,7 @@ package com.rpgGame.app.sender
 		public static function reqAutoCompleteAllEveryDayTask() : void
 		{
 			_bytes.clear();
-			SocketConnection.send(TaskModuleMessages.C2S_TASK_AUTO_COMPLETE_ALL_DAILY_TASK, _bytes);
+			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_AUTO_COMPLETE_ALL_DAILY_TASK, _bytes);
 		}
 
 
@@ -155,7 +155,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(chanceId);
-			SocketConnection.send(TaskModuleMessages.C2S_TASK_AUTO_COMPLETE_CHANCE_TASK, _bytes);
+			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_AUTO_COMPLETE_CHANCE_TASK, _bytes);
 		}
 
 		/**
@@ -170,7 +170,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint32(passiveTask);
 			_bytes.writeVarint32(initiativeTask);
 			_bytes.writeBoolean(yuanbaoBool);
-			SocketConnection.send(TaskModuleMessages.C2S_TASK_SWALLOW_TASK, _bytes);
+			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_SWALLOW_TASK, _bytes);
 		}
 
 		/**
@@ -181,7 +181,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(id);
-			SocketConnection.send(TaskModuleMessages.C2S_TASK_REQUEST_COMPLETED_CHAPTER_TASK, _bytes);
+			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_REQUEST_COMPLETED_CHAPTER_TASK, _bytes);
 		}
 
 		/**
@@ -195,7 +195,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint32(taskId);
 			_bytes.writeVarint32(objectId);
-			SocketConnection.send(TaskModuleMessages.C2S_TASK_COLLECT_GOODS, _bytes);
+			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_COLLECT_GOODS, _bytes);
 		}
 
 		/**
@@ -239,7 +239,7 @@ package com.rpgGame.app.sender
 					_bytes.writeBytes(upgradeItemListVo.getByte());
 				}
 			}
-			SocketConnection.send(TaskModuleMessages.C2S_TASK_TRANSPORT, _bytes);
+			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_TASK_TRANSPORT, _bytes);
 		}
 
 		/**
@@ -250,14 +250,14 @@ package com.rpgGame.app.sender
 		 */
 		public static function reqAcceptSentNpc(taskId : int, npcId : Number) : void
 		{
-			if (ReqLockUtil.isReqLocked(TaskModuleMessages.C2S_ACCEPT_SENT_NPC))
-				return;
-			ReqLockUtil.lockReq(TaskModuleMessages.C2S_ACCEPT_SENT_NPC, 5000);
+//			if (ReqLockUtil.isReqLocked(TaskModuleMessages.C2S_ACCEPT_SENT_NPC))
+//				return;
+//			ReqLockUtil.lockReq(TaskModuleMessages.C2S_ACCEPT_SENT_NPC, 5000);
 
 			_bytes.clear();
 			_bytes.writeVarint32(taskId);
 			_bytes.writeVarint64(npcId);
-			SocketConnection.send(TaskModuleMessages.C2S_ACCEPT_SENT_NPC, _bytes);
+			SocketConnection_protoBuffer.send(TaskModuleMessages.C2S_ACCEPT_SENT_NPC, _bytes);
 		}
 	}
 }

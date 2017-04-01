@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 区域图窗口
+* @author L.L.M.Sunny
+* 创建时间：2015-9-15 上午10:30:12
+*
+-->
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="804"
+			   height="840"
+			   title="区域图"
+			   fontFamily="SimSun"
+			   creationComplete="onCreationComplete()"
+			   initialize="onInitialize()"
+			   close="window1_closeHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.ctrl.AppMenu;
+			import com.editor.data.EnumAreaMapType;
+			import com.editor.manager.AppManager;
+			import com.editor.manager.SceneManager;
+			import com.game.engine3D.core.AreaMap;
+			import com.game.engine3D.core.GameScene3D;
+			
+			import mx.managers.PopUpManager;
+
+			private static var _window : AreaMapView;
+
+			public static function open() : void
+			{
+				if (!_window)
+				{
+					_window = new AreaMapView();
+					PopUpManager.addPopUp(_window, AppManager.getInstance().appRoot, false);
+					_window.move(AppManager.getInstance().appWidth - _window.width - 20, 2);
+					AppMenu.getInstance().toggleAreaMapView.checked = true;
+				}
+				PopUpManager.bringToFront(_window);
+			}
+
+			public static function close() : void
+			{
+				if (_window)
+				{
+					_window.destroy();
+					PopUpManager.removePopUp(_window);
+					AppMenu.getInstance().toggleAreaMapView.checked = false;
+				}
+				_window = null;
+			}
+
+			public static function get window() : AreaMapView
+			{
+				return _window;
+			}
+
+			private var _bitmapData : BitmapData;
+
+			private function onInitialize() : void
+			{
+				visible = false;
+				_bitmapData = new BitmapData(GameScene3D.AREA_MAP_SIZE, GameScene3D.AREA_MAP_SIZE);
+			}
+
+			private function window1_closeHandler(event : Event) : void
+			{
+				close();
+			}
+
+			private function onCreationComplete() : void
+			{
+				visible = true;
+				updateAreaMap();
+			}
+
+			private function destroy() : void
+			{
+				if (_bitmapData)
+				{
+					_bitmapData.dispose();
+					_bitmapData = null;
+				}
+			}
+
+			public function updateAreaMap() : void
+			{
+				if (!SceneManager.getInstance().mainScene.sceneMapLayer.isLoaded)
+					return;
+				_bitmapData.fillRect(_bitmapData.rect, 0);
+				
+				var cameraAreaMap : AreaMap = SceneManager.getInstance().mainScene.getAreaMap(EnumAreaMapType.CAMERA_AREA);
+				copyAreaMapPixels(cameraAreaMap);	
+				var type1AreaMap : AreaMap = SceneManager.getInstance().mainScene.getAreaMap(EnumAreaMapType.TYPE_1_AREA);
+				copyAreaMapPixels(type1AreaMap);
+				var type2AreaMap : AreaMap = SceneManager.getInstance().mainScene.getAreaMap(EnumAreaMapType.TYPE_2_AREA);
+				copyAreaMapPixels(type2AreaMap);
+				var type3AreaMap : AreaMap = SceneManager.getInstance().mainScene.getAreaMap(EnumAreaMapType.TYPE_3_AREA);
+				copyAreaMapPixels(type3AreaMap);
+				
+				imgContainer.source = _bitmapData;
+			}
+			
+			private function copyAreaMapPixels(areaMap : AreaMap):void
+			{
+				var bitmapData:BitmapData = areaMap.getBitmapData();
+				var pt:Point = new Point(0, 0);
+				var rect:Rectangle = new Rectangle(0, 0, bitmapData.width, bitmapData.height);
+				var dataResult:BitmapData=new BitmapData(rect.width,rect.height,true,0);
+				dataResult.copyPixels(bitmapData,bitmapData.rect,pt);
+				var threshold:uint =  0xff000000; 
+				var color:uint = 0x00000000;
+				var maskColor:uint = 0xffffffff;
+				dataResult.threshold(dataResult,rect,pt,"<=",threshold,color,maskColor,false);
+				_bitmapData.draw(dataResult);
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:Image id="imgContainer"
+			 width="800"
+			 height="800"
+			 x="0"
+			 y="0"
+			 backgroundColor="0x666666">
+	</s:Image>
+</s:TitleWindow>

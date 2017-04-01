@@ -6,7 +6,6 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.countryWar.CountryWarWatchManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneCursorHelper;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -14,6 +13,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.state.role.action.BlinkStateReference;
+	import com.rpgGame.app.state.role.action.FallStateReference;
 	import com.rpgGame.app.state.role.action.RunStateReference;
 	import com.rpgGame.app.state.role.control.BeatMoveStateReference;
 	import com.rpgGame.app.state.role.control.BlinkMoveStateReference;
@@ -23,15 +23,17 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
-	import com.rpgGame.coreData.lang.LangNoticeInfo;
+	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SpellBlinkType;
-
+	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	import flash.utils.getTimer;
-
+	
+	import gameEngine2D.NetDebug;
+	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -74,7 +76,8 @@ package com.rpgGame.app.state.role
 		 * @param posy
 		 *
 		 */
-		public static function walk(role : SceneRole, posx : Number, posy : Number, spacing : int = 0, data : Object = null, onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : void
+		public static function walk(role : SceneRole, posx : Number, posy : Number, spacing : int = 0, data : Object = null, 
+									onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : void
 		{
 			if (!role || !role.usable)
 				return;
@@ -86,7 +89,7 @@ package com.rpgGame.app.state.role
 					return;
 				}
 			}
-			var position : Vector3D = new Vector3D(posx, role.y, posy, role.position.w);
+			var position : Vector3D = new Vector3D(posx, posy, 0, role.position.w);
 			walkToPos(role, position, spacing, data, onArrive, onThrough, onUpdate);
 		}
 
@@ -120,10 +123,19 @@ package com.rpgGame.app.state.role
 		 * @param onArrive
 		 *
 		 */
-		public static function walkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : void
+		public static function walkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
+										 onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : void
 		{
 			if (!role || !role.usable)
 				return;
+			
+			var dist:int = Point.distance(new Point(role.position.x,role.position.z),new Point(pos.x,pos.y));
+			if(dist <= spacing)
+			{
+				role.faceToGround(pos.x,pos.y);
+				return;
+			}
+			
 			if (role.isMainChar || role.isMainCamouflage)
 			{
 				var nowTime : int = getTimer();
@@ -136,8 +148,12 @@ package com.rpgGame.app.state.role
 			doWalkToPos(role, pos, spacing, data, onArrive, onThrough, onUpdate);
 		}
 
-		public static function doWalkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : Boolean
+		public static function doWalkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
+										   onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : Boolean
 		{
+            /*CONFIG::netDebug {
+                NetDebug.LOG("[RoleStateUtil] [doWalkToPos]");
+            }*/
 			if (!role || !role.usable)
 				return false;
 			var camouflageEntity : SceneRole = SceneRole(role.getCamouflageEntity());
@@ -157,28 +173,28 @@ package com.rpgGame.app.state.role
 				}
 				if (walkRole.stateMachine.isDeadState)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.WalkMoveIsDead); //"已死亡不能移动"
+					NoticeManager.showNotify(LangQ_NoticeInfo.WalkMoveIsDead); //"已死亡不能移动"
 					return false;
 				}
 				else if (walkRole.stateMachine.isAttackHarding)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.CastSpellIsHarding); //"技能硬直中"
+					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsHarding); //"技能硬直中"
 					return false;
 				}
 				else if (walkRole.stateMachine.isStun)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.WalkMoveIsStun); //"眩晕中不能移动"
+					NoticeManager.showNotify(LangQ_NoticeInfo.WalkMoveIsStun); //"眩晕中不能移动"
 					return false;
 				}
 				else if (walkRole.stateMachine.isStiff)
 				{
-					NoticeManager.showNotify(LangNoticeInfo.WalkMoveIsStiff); //"定身中不能移动"
+					NoticeManager.showNotify(LangQ_NoticeInfo.WalkMoveIsStiff); //"定身中不能移动"
 					return false;
 				}
 				RoleStateUtil.lastWalkTime = nowTime;
 			}
 			var moveSpeed : int = (walkRole.data as RoleData).totalStat.moveSpeed;
-			if (moveSpeed > MAX_WALK_SPEED)
+			if (moveSpeed > MAX_WALK_SPEED || moveSpeed == 0)
 				moveSpeed = MAX_WALK_SPEED;
 			var ref : WalkMoveStateReference = walkRole.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
 			ref.setParams(moveSpeed, spacing, pos);
@@ -195,6 +211,11 @@ package com.rpgGame.app.state.role
 			walkRole.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref);
 			return walkRole.stateMachine.isWalkMoving;
 		}
+		
+		private static function nullFunc():void
+		{
+			
+		}
 
 		private static function onWalkArrivefunction(onArrive : Function, ref : WalkMoveStateReference) : void
 		{
@@ -208,6 +229,9 @@ package com.rpgGame.app.state.role
 
 		private static function onWalkReady(ref : WalkMoveStateReference) : void
 		{
+            CONFIG::netDebug {
+                NetDebug.LOG("[RoleStateUtil] [onWalkReady] MOVE_START");
+            }
 			updateRoleBaseWalkActionSpeed(ref.owner as SceneRole);
 			if ((ref.owner as SceneRole).isMainChar || (ref.owner as SceneRole).isMainCamouflage)
 			{
@@ -244,7 +268,7 @@ package com.rpgGame.app.state.role
 			if ((ref.owner as SceneRole).isMainChar || (ref.owner as SceneRole).isMainCamouflage)
 			{
 				if (!ref.isServerStop)
-					SceneSender.cancelWalk(); //告诉服务器，停止移动。
+					SceneSender.SendPlayerStopMessage(); //告诉服务器，停止移动。
 			}
 		}
 
@@ -260,16 +284,16 @@ package com.rpgGame.app.state.role
 
 		private static function onWalkSync(ref : WalkMoveStateReference) : void
 		{
-			if (CountryWarWatchManager.isWatching)
-			{
-				return;
-			}
+//			if (CountryWarWatchManager.isWatching)
+//			{
+//				return;
+//			}
 
 			if ((ref.owner as SceneRole).isMainChar || (ref.owner as SceneRole).isMainCamouflage)
 			{
 				if (ref.path.length > 1)
 				{
-					SceneSender.mainCharWalk(ref.path);
+					SceneSender.SendNewRunningMessage(ref.path);
 				}
 			}
 		}
@@ -317,16 +341,24 @@ package com.rpgGame.app.state.role
 			ref.onMove(onBeatMove);
 			role.stateMachine.transition(RoleStateType.CONTROL_BEAT_MOVE, ref);
 		}
+		
+		public static function fallToPos(stiffTime:int,role : SceneRole, pos : Point, atkorPos : Point, speed : int):void
+		{
+			var fallRef : FallStateReference = role.stateMachine.getReference(FallStateReference) as FallStateReference;
+			fallRef.setParams(stiffTime,pos, atkorPos, speed);
+			role.stateMachine.transition(RoleStateType.ACTION_FALL, fallRef);
+		}
 
 		private static function onBeatMove(ref : BeatMoveStateReference) : void
 		{
 			(ref.owner as SceneRole).stateMachine.transition(RoleStateType.ACTION_BEAT_BACK);
 		}
 
-		public static function blinkToPos(role : SceneRole, statusType : String, atkorPos : Point, targetPos : Point, speed : int, blinkHeight : int, soarFrameTime : int, hitFrameTime : int, breakFrameTime : int, spellInfo : ReleaseSpellInfo) : void
+		public static function blinkToPos(role : SceneRole, statusType : String, atkorPos : Point, targetPos : Point, speed : int, blinkHeight : int, 
+										  soarFrameTime : int, hitFrameTime : int, spellInfo : ReleaseSpellInfo) : void
 		{
 			var moveRef : BlinkMoveStateReference = role.stateMachine.getReference(BlinkMoveStateReference) as BlinkMoveStateReference;
-			moveRef.setParams(atkorPos, targetPos, speed, blinkHeight, soarFrameTime, hitFrameTime, breakFrameTime, spellInfo);
+			moveRef.setParams(atkorPos, targetPos, speed, blinkHeight, soarFrameTime, hitFrameTime, spellInfo);
 			moveRef.data = spellInfo;
 			moveRef.onAfterExecute(onBlinkExecute, statusType, spellInfo);
 			moveRef.onHitFrame(onBlinkMoveHitFrame, role);
@@ -338,7 +370,7 @@ package com.rpgGame.app.state.role
 			if (!spellInfo.atkor || !spellInfo.atkor.usable)
 				return;
 			var actionRef : BlinkStateReference = spellInfo.atkor.stateMachine.getReference(BlinkStateReference) as BlinkStateReference;
-			actionRef.setParams(statusType, spellInfo.blinkType == SpellBlinkType.TIAO_PI, ref.totalTime, ref.soarFrameTime, ref.hitFrameTime, ref.breakFrameTime, ref.throwDelayTime);
+			actionRef.setParams(statusType, spellInfo.blinkType == SpellBlinkType.TIAO_PI, ref.totalTime, ref.soarFrameTime, ref.hitFrameTime, ref.throwDelayTime);
 			actionRef.data = spellInfo;
 			spellInfo.atkor.stateMachine.transition(RoleStateType.ACTION_BLINK, actionRef, true);
 			SpellAnimationHelper.addKnifeLightEffect(ref.spellInfo);
@@ -349,7 +381,7 @@ package com.rpgGame.app.state.role
 		{
 			var spellInfo : ReleaseSpellInfo = ref.data as ReleaseSpellInfo;
 			SpellAnimationHelper.addDestEffect(ref.targetPos.x, ref.targetPos.y, ref.angle, spellInfo);
-			SpellHitHelper.clientSpellHitEffect(spellInfo);
+//			SpellHitHelper.fightSpellHitEffect(spellInfo);
 		}
 
 		/**

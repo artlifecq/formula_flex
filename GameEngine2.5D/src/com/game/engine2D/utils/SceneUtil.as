@@ -19,10 +19,10 @@ package com.game.engine2D.utils
 		{
 		}
 		
-		static public function transformCoord_2d_3d(value:Number):Number
-		{
-			return GlobalConfig.transformCoord_2d_3d(value);
-		}
+//		static public function transformCoord_2d_3d(value:Number):Number
+//		{
+//			return GlobalConfig.transformCoord_2d_3d(value);
+//		}
 		
 		/**
 		 * 由格子坐标X,得到格子对应的像素坐标点

@@ -2,7 +2,7 @@ package com.rpgGame.app.state.role.action
 {
 	import com.game.engine3D.state.role.RoleStateReference;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
-
+	
 	import flash.geom.Point;
 
 	/**
@@ -18,12 +18,21 @@ package com.rpgGame.app.state.role.action
 		private var _targetRolePos : Point;
 		private var _angle : int;
 		private var _statusType : String;
+		
 		private var _soarFrameTime : int;
 		private var _hitFrameTime : int;
+		/**
+		 * 这个属性在攻击状态里，暂时没有用到 
+		 */		
 		private var _throwFrameTime : int;
+		/**
+		 * 攻速--暂时还没有启用，等后面有了这个属性，再启用 
+		 */		
 		private var _speed : Number;
 		private var _castTime : int;
 		private var _releaseEndHard : int;
+		
+		private var _startFrameFunc:Function;
 		private var _hitFrameFunc : Function;
 		private var _breakFrameFunc : Function;
 		private var _totalFrameFunc : Function;
@@ -32,7 +41,15 @@ package com.rpgGame.app.state.role.action
 		{
 			super();
 		}
-
+		/**
+		 *   
+		 * @param spellInfo      释放技能的信息
+		 * @param statusType     动作名称
+		 * @param speed          攻速
+		 * @param soarFrameTime  抬手时间
+		 * @param releaseEndHard 
+		 * 
+		 */
 		public function setParams(spellInfo : ReleaseSpellInfo, statusType : String, speed : Number = 1, soarFrameTime : int = 0, releaseEndHard : int = 0) : void
 		{
 			_spellInfo = spellInfo;
@@ -83,6 +100,12 @@ package com.rpgGame.app.state.role.action
 		public function get angle() : int
 		{
 			return _angle;
+		}
+		
+		public function onStartFrame(func:Function):AttackStateReference
+		{
+			_startFrameFunc = func;
+			return this;
 		}
 
 		/**
@@ -139,6 +162,14 @@ package com.rpgGame.app.state.role.action
 		internal function setThrowFrameTime(value : int) : void
 		{
 			_throwFrameTime = value;
+		}
+		
+		internal function startFrame():void
+		{
+			if(_startFrameFunc != null)
+			{
+				_startFrameFunc(this);
+			}
 		}
 
 		internal function hitFrame() : void

@@ -42,11 +42,12 @@ package com.rpgGame.app.manager.role
 			}
 			if (dropGoodsData.goodsDatas)
 			{
-				dropGoodsDatasInit(dropGoodsData);
+				SceneSender.requestPickUpGoodsInfo(dropGoodsData.goodsDatas.dropGoodsId);
+//				dropGoodsDatasInit(dropGoodsData);
 			}
 			else
 			{
-				SceneSender.requestPickUpGoodsInfo(dropGoodsData.id);
+//				SceneSender.requestPickUpGoodsInfo(dropGoodsData.goodsDatas.dropGoodsId);
 			}
 		}
 
@@ -66,12 +67,12 @@ package com.rpgGame.app.manager.role
 			var currTime : Number = SystemTimeManager.curtTm;
 			if (currTime > _nextCanPickUpTime)
 			{
-				_nextCanPickUpTime = currTime + dropGoodsData.pickCd;
+				/*_nextCanPickUpTime = currTime + dropGoodsData.pickCd;
 				var index : int = dropGoodsData.goodsDatas.indexOf(goodsItem);
 				if (index > -1)
 				{
 					SceneSender.requestPickUpGoods(dropGoodsData.id, index);
-				}
+				}*/
 			}
 			else
 			{
@@ -112,7 +113,7 @@ package com.rpgGame.app.manager.role
 			if (dropGoods)
 			{
 				var dropGoodsData : SceneDropGoodsData = dropGoods.data as SceneDropGoodsData;
-				dropGoodsData.goodsDatas = goodsItems;
+//				dropGoodsData.goodsDatas = goodsItems;
 				dropGoodsDatasInit(dropGoodsData);
 				EventManager.dispatchEvent(SceneDropGoodsEvent.DROP_GOODS_DATAS_UPDATE, dropGoodsData);
 			}
@@ -124,10 +125,10 @@ package com.rpgGame.app.manager.role
 			if (dropGoods && dropGoods.type == SceneCharType.DROP_GOODS)
 			{
 				var dropGoodsData : SceneDropGoodsData = dropGoods.data as SceneDropGoodsData;
-				if (dropGoodsData.goodsDatas && index > -1 && index < dropGoodsData.goodsDatas.length)
+			/*	if (dropGoodsData.goodsDatas && index > -1 && index < dropGoodsData.goodsDatas.length)
 				{
 					dropGoodsData.goodsDatas[index].isPicked = true;
-				}
+				}*/
 				EventManager.dispatchEvent(SceneDropGoodsEvent.REMOVE_DROP_GOODS_DATA, dropGoodsData);
 			}
 			else

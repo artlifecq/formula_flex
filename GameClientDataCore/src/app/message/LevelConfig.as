@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DATA:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.LevelConfig.data", "data", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.LevelDataProto; });
+		public static const DATA:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.LevelConfig.data", "data", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.LevelDataProto; });
 
 		[ArrayElementType("app.message.LevelDataProto")]
 		public var data:Array = [];
@@ -23,7 +23,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HERO_MAX_LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.LevelConfig.hero_max_level", "heroMaxLevel", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const HERO_MAX_LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.LevelConfig.hero_max_level", "heroMaxLevel", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var hero_max_level$field:int;
 
@@ -50,7 +50,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NEW_HERO_PROTECT_LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.LevelConfig.new_hero_protect_level", "newHeroProtectLevel", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const NEW_HERO_PROTECT_LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.LevelConfig.new_hero_protect_level", "newHeroProtectLevel", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var new_hero_protect_level$field:int;
 
@@ -75,7 +75,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HERO_LEVEL_DIFF_PROTECT_LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.LevelConfig.hero_level_diff_protect_level", "heroLevelDiffProtectLevel", (12 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const HERO_LEVEL_DIFF_PROTECT_LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.LevelConfig.hero_level_diff_protect_level", "heroLevelDiffProtectLevel", (12 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var hero_level_diff_protect_level$field:int;
 
@@ -103,19 +103,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			for (var data$index:uint = 0; data$index < this.data.length; ++data$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.data[data$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.data[data$index]);
 			}
 			if (hasHeroMaxLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, hero_max_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, hero_max_level$field);
 			}
 			if (hasNewHeroProtectLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, new_hero_protect_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, new_hero_protect_level$field);
 			}
 			if (hasHeroLevelDiffProtectLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, hero_level_diff_protect_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, hero_level_diff_protect_level$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -130,31 +130,31 @@ package app.message {
 			var new_hero_protect_level$count:uint = 0;
 			var hero_level_diff_protect_level$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
-					this.data.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.LevelDataProto()));
+					this.data.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.LevelDataProto()));
 					break;
 				case 10:
 					if (hero_max_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: LevelConfig.heroMaxLevel cannot be set twice.');
 					}
 					++hero_max_level$count;
-					this.heroMaxLevel = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.heroMaxLevel = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 11:
 					if (new_hero_protect_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: LevelConfig.newHeroProtectLevel cannot be set twice.');
 					}
 					++new_hero_protect_level$count;
-					this.newHeroProtectLevel = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.newHeroProtectLevel = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 12:
 					if (hero_level_diff_protect_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: LevelConfig.heroLevelDiffProtectLevel cannot be set twice.');
 					}
 					++hero_level_diff_protect_level$count;
-					this.heroLevelDiffProtectLevel = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.heroLevelDiffProtectLevel = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

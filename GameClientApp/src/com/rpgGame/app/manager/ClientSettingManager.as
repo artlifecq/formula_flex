@@ -1,49 +1,111 @@
 package com.rpgGame.app.manager
 {
-	import com.rpgGame.app.manager.chat.ClientSettingChatManager;
-	import com.rpgGame.coreData.enum.EnumClientSettingIndex;
+	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.sender.HeroMiscSender;
+	import com.rpgGame.coreData.enum.EnumCustomTagType;
+	import com.rpgGame.coreData.info.shortcuts.ShortcutsData;
+	import com.rpgGame.netData.client.bean.CustomTaginfo;
 	
-	import flash.utils.ByteArray;
-	
-	import app.message.ClientConfigsProto;
-	import app.message.ClientConfigsProto.ClientConfigProto;
+	import org.client.mainCore.ds.HashMap;
 
 	/**
-	 * 客户端设置数据存储到server管理
-	 * 由EnumClientSettingIndex定义存到server的key值
-	 * server接收的是数据ByteArray，为了客户端使用方便又减小数据体积，客户端采用自定义protoBuf，然后转换成ByteArray发送给server，接收时逆操作即可
-	 * 客户端的protoBuf定义路径为GameClientDataCore/proto/client_custom/proto文件夹下*.proto文件，可参考已有文件,定义完后执行client_custom文件夹下的"编译proto.bat"文件生成AS文件
-	 * 客户端的protoBuf生成的AS文件路径为GameClientDataCore/app/client_proto
-	 * 由子Manager负责具体系统设置的存储，子Manager代码逻辑部分具体可以参考ClientSettingChatManager
-	 * @author Guodong.Zhang
+	 * 客户端一些设置保存到服务器上的 
+	 * @author NEIL
 	 * 
-	 */
+	 */	
 	public class ClientSettingManager
 	{
-		public static function setup(clientConfig:ClientConfigsProto) : void
+		public function ClientSettingManager()
 		{
-			var mainByte:ByteArray;
-			var chatByte:ByteArray;
-			if (clientConfig != null && clientConfig.datas != null)
+		}
+		
+		private static var _hash :HashMap = null;
+		public static function setup(tags : Vector.<CustomTaginfo>) : void
+		{
+			var isFirst :Boolean = false;
+			if ( _hash == null )
 			{
-				var len:int = clientConfig.datas.length;
-				for(var i:int = 0; i < len; i++)
+				// 第一次收到
+				_hash = new HashMap();
+				isFirst = true;
+			}
+			else
+			{
+				// 改变
+			}
+			for each ( var info :CustomTaginfo in tags ) 
+			{
+				var value :String = info.value;
+				var type:int = parseInt(info.key);
+				if ( value == null )
+					value = "";
+				
+				if ( type == EnumCustomTagType.BOSS_REFRESH_NOTICE )
 				{
-					var configProto:ClientConfigProto = clientConfig.datas[i];
-					switch(configProto.index)
-					{
-						case EnumClientSettingIndex.INDEX_MAIN:
-							mainByte = configProto.data;
-							break;
-						case EnumClientSettingIndex.INDEX_CHAT:
-							chatByte = configProto.data;
-							break;
-					}
+				}
+				else if ( type == EnumCustomTagType.DEFAULT_USE_SKILL_MID )
+				{
+				}
+				else if ( type == EnumCustomTagType.CHAT_CHANNEL_SHOW )
+				{
+				}
+				else if ( type == EnumCustomTagType.SHORTCUT_CONFIG )
+				{
+					//快捷键设置
+					initShortCutsConfig(value , isFirst);
+				}
+				else if ( type == EnumCustomTagType.SYSTEM_SET )
+				{
+					//系统设置数据
+					SystemSetManager.getinstance().setData(value);
+				}
+				else if(type == EnumCustomTagType.GET_JUE_MING_ATTRIBUTE_EFFECT)
+				{
+				}
+				else if (type == EnumCustomTagType.SCENEEFFECT_INTERACT)
+				{
 				}
 			}
-			ClientSettingOldManager.initData(mainByte);
-			ClientSettingChatManager.initData(chatByte);
 		}
-
+/////////////////////////////////////////////////设置快捷键这块代码逻辑/////////////////////////////////////////////////////////////		
+		/**
+		 * 设置指定数据		保存的是数字类
+		 * @param index			参考：EnumClientIntSetting
+		 * @param value
+		 *
+		 */
+		public static function savaClientShortCutsToServer(map:HashMap):void
+		{
+			var data :Array = [];
+			var values :Array = map.getValues();
+			var vo :ShortcutsData;
+			for each ( vo in values ) 
+			{
+				data.push( {t :vo.type , mid :vo.id , k :vo.shortcutPos} );
+			}
+			HeroMiscSender.reqSetClientCustomTag(EnumCustomTagType.SHORTCUT_CONFIG , JSONUtil.encode( data ));
+		}
+		
+		private static var shortCutsData:Object;
+		public static function getShortCutDataByKey(shortcutPos:int):Object
+		{
+			for each( var obj :Object in shortCutsData )
+			{
+				if(int(obj.k) == shortcutPos)
+				{
+					return obj;
+				}
+			}
+			return null;
+		}
+		private static function initShortCutsConfig( dataStr :String , isFirst :Boolean ):void
+		{
+			shortCutsData  = JSONUtil.decode( dataStr );
+			
+			/*if ( isFirst )
+			{
+				shortCutsData  = JSONUtil.decode( dataStr );
+			}*/
+		}
 	}
 }

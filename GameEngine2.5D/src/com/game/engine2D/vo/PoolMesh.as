@@ -1,13 +1,11 @@
 package com.game.engine2D.vo
 {
 	import com.game.engine2D.core.ATFSubTexture;
-	import com.game.engine2D.interfaces.IZoneMesh;
+	import com.game.engine2D.scene.render.RenderUnit;
 	import com.game.engine2D.utils.MaterialUtils;
-	import com.game.engine3D.config.GlobalConfig;
-	import com.game.mainCore.libCore.pool.IPoolClass;
-	import com.game.mainCore.libCore.pool.Pool;
+	import com.game.engine3D.core.poolObject.IInstancePoolClass;
+	import com.game.engine3D.core.poolObject.InstancePool;
 	
-	import flash.display.BlendMode;
 	import flash.geom.ColorTransform;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
@@ -25,15 +23,13 @@ package com.game.engine2D.vo
 	 * @author guoqing.wen
 	 * 
 	 */
-	public class PoolMesh extends away3d.entities.PlanarShadowMesh implements IPoolClass,IZoneMesh
+	public class PoolMesh extends away3d.entities.PlanarShadowMesh implements IInstancePoolClass
 	{
 		static private const poolSize:int = 1000;
-		static private var _pool:Pool = new Pool("PoolMesh_pool", poolSize);
+		static private var _pool:InstancePool = new InstancePool("PoolMesh_pool", poolSize);
 		static private var _geometrySize:Number = 100;
-		static private var _geometryPlane:PlaneFrameGeometry = new PlaneFrameGeometry(_geometrySize, _geometrySize);
+		static private var _geometryPlane:PlaneFrameGeometry = new PlaneFrameGeometry(_geometrySize, _geometrySize,false);
 		static private var _positionHelp:Vector3D = new Vector3D();
-		
-		public var blendMode:String = BlendMode.NORMAL;
 		
 		private var _uvTransform:Matrix = new Matrix();
 		private var _colorTransform:ColorTransform;
@@ -53,17 +49,15 @@ package com.game.engine2D.vo
 		private var _alpha:Number = 1.0;
 		private var _smooth:Boolean;
 		
-		public function PoolMesh(subTexture:ATFSubTexture = null, parentBaseObj:BaseObj = null)
+		public function PoolMesh(parentBaseObj:BaseObj = null)
 		{
-			_uvDirty = true;
-			_atfSubTexture = subTexture;
+			super(_geometryPlane, MaterialUtils.default1x1Texture);
 			_parentBaseObj = parentBaseObj;
-			_width = _atfSubTexture ? _atfSubTexture.width : 4;
-			_height = _atfSubTexture ? _atfSubTexture.height : 4;
+			_width = _height = 4;
+			this.visible = false;
 			this.overrideMaterialProps ||= new OverrideMaterialProps();
 			this.overrideMaterialProps.colorTransform = new ColorTransform();
 			this.overrideMaterialProps.appendColorTransform = true;
-			super(_geometryPlane, _atfSubTexture ? _atfSubTexture.parent : MaterialUtils.default1x1Texture);
 		}
 		
 		override public function get y():Number	
@@ -114,7 +108,7 @@ package com.game.engine2D.vo
 				colorTransform.redOffset = 0;
 			}
 		}
-
+		
 		public function get alpha():Number
 		{
 			return _alpha;
@@ -158,11 +152,26 @@ package com.game.engine2D.vo
 			}
 		}
 		
+		public function get object3DScaleX():Number
+		{
+			return super.scaleX;
+		}
+		
+		public function get object3DScaleZ():Number
+		{
+			return super.scaleZ;
+		}
+		
+		public function get object3DScaleY():Number
+		{
+			return super.scaleY;
+		}
+		
 		override public function set scaleX(val:Number):void
 		{
 			_posScale.x = val;
 		}
-
+		
 		override public function set scaleY(val:Number):void
 		{
 			_posScale.y = val;
@@ -185,10 +194,7 @@ package com.game.engine2D.vo
 		
 		public function set width(value:int):void
 		{
-			if (_width != value)
-			{
-				_width = value;
-			}
+			_width = value;
 		}
 		
 		public function get height():int
@@ -198,10 +204,7 @@ package com.game.engine2D.vo
 		
 		public function set height(value:int):void
 		{
-			if (_height != value)
-			{
-				_height = value;
-			}
+			_height = value;
 		}
 		
 		public function set texture(value:ATFSubTexture):void
@@ -218,13 +221,8 @@ package com.game.engine2D.vo
 		
 		override public function set material(value:MaterialBase):void
 		{
-			if (material == value)return;
-			if (value == null)
-			{
-				super.material = value;
+			if (material == value)
 				return;
-			}
-			this.visible = (value != MaterialUtils.default1x1Texture);
 			_uvDirty = true;
 			if (_atfSubTexture == null && value is TextureMaterial)
 			{
@@ -248,14 +246,13 @@ package com.game.engine2D.vo
 		public function set depth(value:int):void
 		{
 			_depth = value;
-			this.zOffset = _depth;
 		}
 		
 		override public function get zOffset():int
 		{
-			if (_parentBaseObj)
-				return super.zOffset + _parentBaseObj.finalShowY*100;
-			return super.zOffset;
+			if (_parentBaseObj && _parentBaseObj.depthEnable)
+				return _depth + (_parentBaseObj.finalShowY<<7);
+			return _depth;
 		}
 		
 		public function get smooth():Boolean
@@ -274,13 +271,9 @@ package com.game.engine2D.vo
 		
 		public function run():void
 		{
-			if (this.material == MaterialUtils.default1x1Texture)
+			this.visible = (this.material != MaterialUtils.default1x1Texture);
+			if (this.visible)
 			{
-				this.visible = false;
-			}
-			else
-			{
-				this.visible = true;
 				if (_atfSubTexture)
 				{
 					if (_width == 0)_width = _atfSubTexture.width;
@@ -302,40 +295,49 @@ package com.game.engine2D.vo
 			}
 		}
 		
-		override public function dispose():void
+		/** 缓存池销毁对象 */
+		public function instanceDestroy():void
 		{
+			this.dispose();
 		}
 		
-		public function destory():void
+		/** 进入缓存池调用 */
+		public function instanceDispose():void
 		{
-			super.dispose();
+			if (this.parent)
+				this.parent.removeChild(this);
+			this.visible = false;
+			this.material = MaterialUtils.default1x1Texture;
+			this.layerType = EntityLayerType.DEFAULT;
+			this.castsShadows = false;
+			_atfSubTexture = null;
+			_parentBaseObj = null;
 		}
 		
 		public function reSet($parameters:Array):void
 		{
 			_smooth = false;
-			blendMode = BlendMode.NORMAL;
 			_alpha = 1.0;
-			depth = _width = _height = 0;
+			_depth = 0;
+			_width = _height = 4;
 			_pos.setTo(0,0,0);
 			_posValue.setTo(0,0,0);
 			_posGeometry.setTo(0,0);
 			_posScale.setTo(1.0,1.0);
-			_atfSubTexture = null;
+			_posGeometryScale.setTo(1.0,1.0);
 			_uvDirty = _positionDirty = true;
 			_colorTransform = null;
 			_uvTransform.identity();
-			this.layerType = EntityLayerType.DEFAULT;
-			this.castsShadows = false;
-			if ($parameters && $parameters.length > 0 && $parameters[0] != null)
-				texture = $parameters[0];
-			else 
-				this.material = MaterialUtils.default1x1Texture;
-			_parentBaseObj = BaseObj($parameters[1]);
+			_parentBaseObj = BaseObj($parameters[0]);
+			
 			this.overrideMaterialProps ||= new OverrideMaterialProps();
 			this.overrideMaterialProps.colorTransform = new ColorTransform();
 			setSize();
 			setPosition();
+			if (this.planarShadowOffsetPoint)
+			{
+				setPlanarShadowOffset(0,0);
+			}
 		}
 		
 		public function setPosition():void
@@ -343,10 +345,7 @@ package com.game.engine2D.vo
 			if (_positionDirty)
 			{
 				_positionDirty = false;
-				_positionHelp.setTo(int(_posValue.x),
-					_posValue.z,
-					GlobalConfig.transformCoord_2d_3d(_posValue.y)
-				);
+				_positionHelp.setTo(int(_posValue.x),int(_posValue.y),_posValue.z);
 				this.position = _positionHelp;
 			}
 		}
@@ -358,39 +357,42 @@ package com.game.engine2D.vo
 				_uvDirty = true;
 				_posGeometry.setTo(_width, _height);
 				_positionDirty = true;
-				_posGeometryScale.setTo(_width/_geometrySize, 
-					GlobalConfig.transformCoord_2d_3d(_height)/_geometrySize
-				);
+				_posGeometryScale.setTo(_width/_geometrySize,_height/_geometrySize);
 				if (this.castsShadows)
 				{
 					this.planarShadowPivotPoint ||= new Vector3D();
-					this.planarShadowPivotPoint.setTo(_width/2, 0, _pos.y < _height ? _pos.y : -_height);
+					this.planarShadowPivotPoint.setTo(_width/2, _pos.y < _height ? _pos.y : -_height, 0);
 				}
 			}
-			super.scaleX = _posGeometryScale.x*_posScale.x;
-			super.scaleZ = _posGeometryScale.y*_posScale.y;
+			var pValueX:Number = _posGeometryScale.x*_posScale.x;
+			var pValueY:Number = _posGeometryScale.y*_posScale.y;
+			if (pValueX == 0 || pValueY == 0)
+			{
+				var msg:String = "xxxx";
+				if (_atfSubTexture)
+					msg = _atfSubTexture.atfPath;
+				else if (_parentBaseObj is RenderUnit)
+					msg = RenderUnit(_parentBaseObj).getFullSourchPath();
+				throw new Error("模型发生宽高为0，res:"+msg);
+			}
+			super.scaleX = pValueX;
+			super.scaleY = pValueY;
 		}
 		
 		public function setPlanarShadowOffset(shadowOffsetX:Number, shadowOffsetY:Number):void
 		{
 			this.planarShadowOffsetPoint ||= new Vector3D();
-			this.planarShadowOffsetPoint.setTo(shadowOffsetX, 0, -shadowOffsetY);
+			this.planarShadowOffsetPoint.setTo(shadowOffsetX, -shadowOffsetY, 0);
 		}
 		
 		static public function recycle($pool:PoolMesh):void
 		{
-			if ($pool)
-			{
-				if ($pool.parent)$pool.parent.removeChild($pool);
-				if (_pool.length >= poolSize)
-					$pool.destory();
-				_pool.disposeObj($pool);
-			}
+			_pool.disposeObj($pool);
 		}
 		
-		static public function create($atfSubTexture:ATFSubTexture, baseObj:BaseObj = null):PoolMesh
+		static public function create(baseObj:BaseObj = null):PoolMesh
 		{
-			return _pool.createObj(PoolMesh, $atfSubTexture, baseObj) as PoolMesh;
+			return _pool.createObj(PoolMesh, baseObj) as PoolMesh;
 		}
 	}
 }

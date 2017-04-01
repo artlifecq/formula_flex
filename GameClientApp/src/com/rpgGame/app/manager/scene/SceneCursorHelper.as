@@ -1,10 +1,11 @@
 package com.rpgGame.app.manager.scene
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.SceneCharType;
-
+	
 	import flash.display3D.Context3DCompareMode;
 	import flash.geom.Vector3D;
 
@@ -35,7 +36,7 @@ package com.rpgGame.app.manager.scene
 
 		public function SceneCursorHelper()
 		{
-			_mouseClickEffectUrl = ClientConfig.getEffect("shubiaodianji");
+			_mouseClickEffectUrl = ClientConfig.getEffect(EffectUrl.SHUBIAO_DIANJI);
 		}
 
 		public function showCursor(position : Vector3D) : void
@@ -57,13 +58,14 @@ package com.rpgGame.app.manager.scene
 		{
 			if (!_mouseClickEffect)
 			{
-				var rud : RenderParamData = new RenderParamData(0, SceneCharType.MOUSE_CLICK_EFFECT, _mouseClickEffectUrl);
+				var rud : RenderParamData3D = new RenderParamData3D(0, SceneCharType.MOUSE_CLICK_EFFECT, _mouseClickEffectUrl);
 				_mouseClickEffect = RenderUnit3D.create(rud);
 				_mouseClickEffect.depthCompareMode = Context3DCompareMode.ALWAYS;
 				_mouseClickEffect.repeat = 0;
 				_mouseClickEffect.play(0);
-				_mouseClickEffect.setScale(0.5);
+//				_mouseClickEffect.setScale(1);
 				_mouseClickEffect.canRemoved = false;
+				_mouseClickEffect.rotationX = -40;
 				SceneManager.addSceneObjToScene(_mouseClickEffect, false, false, false);
 			}
 			_mouseClickEffect.visible = true;

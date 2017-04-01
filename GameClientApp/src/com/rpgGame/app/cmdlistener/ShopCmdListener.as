@@ -4,12 +4,11 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
-	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.core.events.ShopEvent;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.shop.ShopBuyBackGoodsData;
 	import com.rpgGame.coreData.info.shop.ShopItemBuyInfo;
 	import com.rpgGame.coreData.type.ShopType;
@@ -23,8 +22,8 @@ package com.rpgGame.app.cmdlistener
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 	
 	/**
 	 *
@@ -34,18 +33,18 @@ package com.rpgGame.app.cmdlistener
 	{
 		override public function start():void
 		{
-			SocketConnection.addCmdListener(ShopModuleMessages.S2C_OPEN_NPC_SHOP,onOpenNpcShopSuccess);
-			SocketConnection.addCmdListener(ShopModuleMessages.S2C_COMMON_ERROR_CODE,onShopError);
-			SocketConnection.addCmdListener(ShopModuleMessages.S2C_BUY_SHOP_GOODS,onBuyGoodsSuccess);
+			SocketConnection_protoBuffer.addCmdListener(ShopModuleMessages.S2C_OPEN_NPC_SHOP,onOpenNpcShopSuccess);
+			SocketConnection_protoBuffer.addCmdListener(ShopModuleMessages.S2C_COMMON_ERROR_CODE,onShopError);
+			SocketConnection_protoBuffer.addCmdListener(ShopModuleMessages.S2C_BUY_SHOP_GOODS,onBuyGoodsSuccess);
 //			SocketConnection.addCmdListener(ShopModuleMessages.S2C_BUY_SHOP_GOODS_FAIL,onBuyGoodsFail);
-			SocketConnection.addCmdListener(ShopModuleMessages.S2C_BUY_BACK_GOODS,onBuyBackGoodsSuccess);
+			SocketConnection_protoBuffer.addCmdListener(ShopModuleMessages.S2C_BUY_BACK_GOODS,onBuyBackGoodsSuccess);
 //			SocketConnection.addCmdListener(ShopModuleMessages.S2C_BUY_BACK_GOODS_FAIL,onBuyBackGoodsFail);
-			SocketConnection.addCmdListener(ShopModuleMessages.S2C_SELL_GOODS,onSellGoodsSuccess);
+			SocketConnection_protoBuffer.addCmdListener(ShopModuleMessages.S2C_SELL_GOODS,onSellGoodsSuccess);
 //			SocketConnection.addCmdListener(ShopModuleMessages.S2C_SELL_GOODS_FAIL,onSellGoodsFail);
-			SocketConnection.addCmdListener(ShopModuleMessages.S2C_BUY_JINZI_SHOP_GOODS,onRecBuyJinziShopGoods);
+			SocketConnection_protoBuffer.addCmdListener(ShopModuleMessages.S2C_BUY_JINZI_SHOP_GOODS,onRecBuyJinziShopGoods);
 //			SocketConnection.addCmdListener(ShopModuleMessages.S2C_BUY_JINZI_SHOP_GOODS_FAIL,onRecBuyJinziShopGoodsFail);
-			SocketConnection.addCmdListener(ShopModuleMessages.S2C_REPAIR_GOODS_SUCCESS,onRepairSuccess);
-			SocketConnection.addCmdListener(ShopModuleMessages.S2C_REPAIR_GOODS_ALL_SUCCESS,onRepairAllSuccess);
+			SocketConnection_protoBuffer.addCmdListener(ShopModuleMessages.S2C_REPAIR_GOODS_SUCCESS,onRepairSuccess);
+			SocketConnection_protoBuffer.addCmdListener(ShopModuleMessages.S2C_REPAIR_GOODS_ALL_SUCCESS,onRepairAllSuccess);
 			
 			finish();
 		}	
@@ -56,7 +55,7 @@ package com.rpgGame.app.cmdlistener
 		 */
 		private function onOpenNpcShopSuccess(buffer:ByteBuffer):void
 		{
-			ReqLockUtil.unlockReq( ShopModuleMessages.C2S_OPEN_NPC_SHOP );
+//			ReqLockUtil.unlockReq( ShopModuleMessages.C2S_OPEN_NPC_SHOP );
 			
 			var bytes:ByteArray = new ByteArray();
 			buffer.readBytes(bytes);
@@ -115,7 +114,7 @@ package com.rpgGame.app.cmdlistener
 			
 			NoticeManager.showHint( EnumHintInfo.BUY_GOODS_SUCCESS, [ itemQualityColorName, shopItemBuyInfo.count, shopItemBuyInfo.cost + ShopType.getMoneyStrByType(shopItemBuyInfo.priceType)] );
 			
-			ReqLockUtil.unlockReq( ShopModuleMessages.C2S_BUY_SHOP_GOODS );
+//			ReqLockUtil.unlockReq( ShopModuleMessages.C2S_BUY_SHOP_GOODS );
 		}
 		
 		/**
@@ -183,13 +182,13 @@ package com.rpgGame.app.cmdlistener
 			var buyBackPos:int = buffer.readVarint32();
 			var backPackGridId:int = buffer.readVarint32();
 			
-			var itemInfo:ItemInfo = SmallShopItemManager.delBackBuyItem( buyBackPos ).itemInfo;
+			var itemInfo:ClientItemInfo = SmallShopItemManager.delBackBuyItem( buyBackPos ).itemInfo;
 			if( itemInfo != null )
 			{
 				itemInfo.setIndex( backPackGridId );
 				
 				var qualityColor:int = ItemQualityType.getColorValue(itemInfo.quality)
-				var itemQualityColorName:String = HtmlTextUtil.getTextColor( qualityColor, ItemCfgData.getItemName( itemInfo.cfgId ) );
+				var itemQualityColorName:String = HtmlTextUtil.getTextColor( qualityColor, ItemConfig.getItemName( itemInfo.cfgId ) );
 				
 				NoticeManager.showHint( EnumHintInfo.BUY_BACK_GOODS_SUCCESS, [ itemQualityColorName ] );
 			}
@@ -199,7 +198,7 @@ package com.rpgGame.app.cmdlistener
 			
 			EventManager.dispatchEvent(ShopEvent.BUY_BACK_CHANGE );
 			
-			ReqLockUtil.unlockReq( ShopModuleMessages.C2S_BUY_BACK_GOODS );
+//			ReqLockUtil.unlockReq( ShopModuleMessages.C2S_BUY_BACK_GOODS );
 		}
 		
 		/**
@@ -242,11 +241,11 @@ package com.rpgGame.app.cmdlistener
 			var gridId:int = buffer.readVarint32();
 			var extime:Number = buffer.readVarint64();
 			
-			var itemInfo:ItemInfo = BackPackManager.instance.getItemInfoByIndex( gridId );
+			var itemInfo:ClientItemInfo = BackPackManager.instance.getItemInfoByIndex( gridId );
 			if( itemInfo != null )
 			{
 				var qualityColor:int = ItemQualityType.getColorValue(itemInfo.quality)
-				var itemQualityColorName:String = HtmlTextUtil.getTextColor( qualityColor, ItemCfgData.getItemName( itemInfo.cfgId ) );
+				var itemQualityColorName:String = HtmlTextUtil.getTextColor( qualityColor, ItemConfig.getItemName( itemInfo.cfgId ) );
 				
 				NoticeManager.showHint( EnumHintInfo.SELL_GOODS_SUCCESS, [ itemQualityColorName ] );
 			}
@@ -317,7 +316,7 @@ package com.rpgGame.app.cmdlistener
 			
 			NoticeManager.showHint( EnumHintInfo.BUY_GOODS_SUCCESS, [ itemQualityColorName, shopItemBuyInfo.count, shopItemBuyInfo.cost + ShopType.getMoneyStrByType(shopItemBuyInfo.priceType)] );
 			
-			ReqLockUtil.unlockReq( ShopModuleMessages.C2S_BUY_JINZI_SHOP_GOODS );
+//			ReqLockUtil.unlockReq( ShopModuleMessages.C2S_BUY_JINZI_SHOP_GOODS );
 		}
 		
 		/**

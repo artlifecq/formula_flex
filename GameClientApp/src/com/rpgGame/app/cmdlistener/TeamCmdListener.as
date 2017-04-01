@@ -20,9 +20,9 @@ package com.rpgGame.app.cmdlistener
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
-	import org.game.netCore.net.BytesUtil;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
+	import org.game.netCore.net_protobuff.BytesUtil;
 	
 	/**
 	 * 组队相关ModuleID==15
@@ -32,68 +32,68 @@ package com.rpgGame.app.cmdlistener
 	{
 		override public function start():void
 		{
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_CREATE_OWN_TEAM_SUCCESS,onCreateTeamSuccess);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_CREATE_OWN_TEAM_FAIL,onCreateTeamFail);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_CREATE_OWN_TEAM_SUCCESS,onCreateTeamSuccess);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_CREATE_OWN_TEAM_FAIL,onCreateTeamFail);
 			
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_LEAVE_TEAM_SUCCESS,onLeaveTeamSucess);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_LEAVE_TEAM_FAIL,onLeaveTeamFail);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_LEAVE_TEAM_SUCCESS,onLeaveTeamSucess);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_LEAVE_TEAM_FAIL,onLeaveTeamFail);
 			
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_OTHER_LEAVE_TEAM,onLeaveTeamBrodcast);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_TEAM_DISMISS,onTeamDissolve);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_OTHER_LEAVE_TEAM,onLeaveTeamBrodcast);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_TEAM_DISMISS,onTeamDissolve);
 			
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_SEND_INVITE_SUCCESS_OTHER_JOIN_TEAM,onAutoAcceptInventJoinTeam);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_SEND_INVITE_SUCCESS_WAIT_OTHER_REPLY,onInventSendSuccessStartTimeOut);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_SEND_INVITE_FAIL,onInventJoinTeamFail);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_SEND_INVITE_SUCCESS_OTHER_JOIN_TEAM,onAutoAcceptInventJoinTeam);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_SEND_INVITE_SUCCESS_WAIT_OTHER_REPLY,onInventSendSuccessStartTimeOut);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_SEND_INVITE_FAIL,onInventJoinTeamFail);
 			
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_OTHER_JOIN_TEAM,onOtherJoinMyTeam);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_YOU_ENTERED_TEAM,onMeJoinOtherTeam);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_RECEIVE_INVITE,onGetJoinTeamInvent);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_REPLY_INVITE_SUCCESS,onAcceptInventSuccess);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_REPLY_INVITE_FAIL,onAcceptInventFail);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_OTHER_REJECTED_YOUR_INVITE,onOtherRejectInvent);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_SEND_REQUEST_SUCCESS_YOU_JOIN_TEAM,onAutoAcceptJoinUnlock);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_SEND_REQUEST_SUCCESS_WAIT_OTHER_REPLY,onSendJoinWaitforReply);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_SEND_REQUEST_FAIL,onReqJoinTeamFail);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_RECEIVE_REQUEST,onGetJoinTeamRequest);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_REPLY_REQUEST_SUCCESS,onAgreeJoinSucessReply);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_REPLY_REQUEST_FAIL,onGetAgreeJoinFail);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_OTHER_REJECTED_YOUR_REQUEST,onGetRejectYourRqestTeam);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_OTHER_JOIN_TEAM,onOtherJoinMyTeam);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_YOU_ENTERED_TEAM,onMeJoinOtherTeam);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_RECEIVE_INVITE,onGetJoinTeamInvent);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_REPLY_INVITE_SUCCESS,onAcceptInventSuccess);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_REPLY_INVITE_FAIL,onAcceptInventFail);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_OTHER_REJECTED_YOUR_INVITE,onOtherRejectInvent);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_SEND_REQUEST_SUCCESS_YOU_JOIN_TEAM,onAutoAcceptJoinUnlock);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_SEND_REQUEST_SUCCESS_WAIT_OTHER_REPLY,onSendJoinWaitforReply);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_SEND_REQUEST_FAIL,onReqJoinTeamFail);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_RECEIVE_REQUEST,onGetJoinTeamRequest);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_REPLY_REQUEST_SUCCESS,onAgreeJoinSucessReply);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_REPLY_REQUEST_FAIL,onGetAgreeJoinFail);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_OTHER_REJECTED_YOUR_REQUEST,onGetRejectYourRqestTeam);
 			
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_KICK_SUCCESS,onGetKickParterSuccess);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_KICK_FAIL,onGetKickParterFail);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_YOU_ARE_KICKED,onBeKickOut);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_KICK_SUCCESS,onGetKickParterSuccess);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_KICK_FAIL,onGetKickParterFail);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_YOU_ARE_KICKED,onBeKickOut);
 			
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_TRANSFER_LEADER_FAIL,onSendChangeCaptionFail);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_LEADER_CHANGED,onGetNewCaptionAppear);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_TRANSFER_LEADER_FAIL,onSendChangeCaptionFail);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_LEADER_CHANGED,onGetNewCaptionAppear);
 			
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_OTHER_OFFLINE,onGetSomeOneOffLine);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_OTHER_ONLINE,onGetSomeOneOnLine);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_YOU_HAVE_TEAM_BEFORE_OFFLINE,onGetOnLineBackTeam);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_OTHER_OFFLINE,onGetSomeOneOffLine);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_OTHER_ONLINE,onGetSomeOneOnLine);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_YOU_HAVE_TEAM_BEFORE_OFFLINE,onGetOnLineBackTeam);
 			
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_OTHER_CHANGE_LEVEL,onGetTeamMembLevUp);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_OTHER_CHANGE_SCENE,onGetTeamMembSceneChange);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_OTHER_CHANGE_LEVEL,onGetTeamMembLevUp);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_OTHER_CHANGE_SCENE,onGetTeamMembSceneChange);
 			
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_TEAMMATE_CHANGE_RES,onGetTeamMembEquipChanged);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_TEAMMATE_DEAD,onGetTeamMembBeKill);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_GET_TEAMMATE_POS_FAIL,onGetSameSceneTeamMembPosFail);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_REPLY_TEAMMATE_POS,onGetSameSceneTeamMembPosSuccess);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_TEAMMATE_CHANGE_RES,onGetTeamMembEquipChanged);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_TEAMMATE_DEAD,onGetTeamMembBeKill);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_GET_TEAMMATE_POS_FAIL,onGetSameSceneTeamMembPosFail);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_REPLY_TEAMMATE_POS,onGetSameSceneTeamMembPosSuccess);
 			
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_GET_TEAM_MEMBER_POS,onGetTeamMembPosSuccess);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_GET_TEAM_MEMBER_POS_FAIL,onGetTeamMembPosFail);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_TEAM_MEMBER_TRANSPORT,onGetTeamMembPosTransportSuccess);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_TEAM_MEMBER_TRANSPORT_FAIL,onGetTeamMembPosTransportFail);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_GET_TEAM_MEMBER_POS,onGetTeamMembPosSuccess);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_GET_TEAM_MEMBER_POS_FAIL,onGetTeamMembPosFail);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_TEAM_MEMBER_TRANSPORT,onGetTeamMembPosTransportSuccess);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_TEAM_MEMBER_TRANSPORT_FAIL,onGetTeamMembPosTransportFail);
 			
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_TEAM_BROADCAST_FOLLOW,onTeamBroadcastFollow);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_TEAM_BROADCAST_FOLLOW_FAIL,onTeamBroadcastFollowFail);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_TEAM_LEADER_INVITE_FOLLOW,onTeamLeaderInviteFollow);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_TEAM_LEADER_DOOR_TRANSPORT,onTeamLeaderDoorTransport);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_TEAM_MEMBER_FOLLOW,onTeamMemberFollow);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_TEAM_MEMBER_FOLLOW_FAIL,onTeamMemberFollowFail);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_TEAM_LEADER_MEMBER_FOLLOW,onTeamLeaderMemberFollow);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_SET_TEAM_EXP_ALLOCATE_BROADCAST,onSetTeamExpAllocateBroadcast);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_SET_TEAM_EXP_ALLOCATE_FAIL,onSetTeamExpAllocateFail);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_SET_TEAM_DROP_ALLOCATE_BROADCAST,onSetTeamDropAllocateBroadcast);
-			SocketConnection.addCmdListener(TeamModuleMessages.S2C_SET_TEAM_DROP_ALLOCATE_FAIL,onSetTeamDropAllocateFail);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_TEAM_BROADCAST_FOLLOW,onTeamBroadcastFollow);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_TEAM_BROADCAST_FOLLOW_FAIL,onTeamBroadcastFollowFail);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_TEAM_LEADER_INVITE_FOLLOW,onTeamLeaderInviteFollow);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_TEAM_LEADER_DOOR_TRANSPORT,onTeamLeaderDoorTransport);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_TEAM_MEMBER_FOLLOW,onTeamMemberFollow);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_TEAM_MEMBER_FOLLOW_FAIL,onTeamMemberFollowFail);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_TEAM_LEADER_MEMBER_FOLLOW,onTeamLeaderMemberFollow);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_SET_TEAM_EXP_ALLOCATE_BROADCAST,onSetTeamExpAllocateBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_SET_TEAM_EXP_ALLOCATE_FAIL,onSetTeamExpAllocateFail);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_SET_TEAM_DROP_ALLOCATE_BROADCAST,onSetTeamDropAllocateBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(TeamModuleMessages.S2C_SET_TEAM_DROP_ALLOCATE_FAIL,onSetTeamDropAllocateFail);
 			
 			finish();
 		}
@@ -605,7 +605,7 @@ package com.rpgGame.app.cmdlistener
 		 */
 		private function onGetKickParterSuccess(buffer:ByteBuffer):void
 		{
-			ReqLockUtil.unlockReq(TeamModuleMessages.C2S_KICK);
+//			ReqLockUtil.unlockReq(TeamModuleMessages.C2S_KICK);
 			NoticeManager.showNotify( LangTeam.TEAM_CHATA_TIP19 );
 		}
 		

@@ -1,12 +1,10 @@
 package com.rpgGame.app.ui
 {
-
-
 	/**
 	 *
-	 * 资源加载视图
-	 * @author L.L.M.Sunny
-	 * 创建时间：2015-4-7 下午5:30:13
+	 * 资源加载界面--主要是从client传入进来一个实例，然后调用那个实例
+	 * @author Neil
+	 * 创建时间：2016-11-17 下午5:30:13
 	 *
 	 */
 	public class ResLoadingView

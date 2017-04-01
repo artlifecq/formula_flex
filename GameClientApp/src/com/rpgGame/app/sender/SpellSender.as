@@ -1,12 +1,16 @@
 package com.rpgGame.app.sender
 {
-	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.utils.UpgradeUtil;
-	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
+	import com.rpgGame.netData.fight.message.CSPerformPosSkillMessage;
+	import com.rpgGame.netData.fight.message.CSPerformTargetSkillMessage;
+	import com.rpgGame.netData.fight.message.CSSkillContiStateMessage;
+	import com.rpgGame.netData.skill.message.ReqLevelUpSkillMessage;
 	
-	import app.cmd.SceneModuleMessages;
 	import app.cmd.SpellModuleMessages;
+	
+	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.data.long;
 
 	/**
 	 *
@@ -27,38 +31,6 @@ package com.rpgGame.app.sender
 		}
 
 		/**
-		 * 设置快捷栏 ,服务器不主动改变技能栏, 所有的技能栏设置全由客户端发送消息, 而且此消息没有返回
-		 * @param realID				ID,0表示把这个格子删掉
-		 * @param pos					放的格子位置pos
-		 * @param defaultPos			当前的默认技能是第几个格子, -1 则表示没有设置	2013.11.6 取消了默认技能
-		 * @param type					类型
-		 *
-		 */
-		public static function reqSetShortcut(realID : int, pos : int, type : int) : void
-		{
-		/*GameLog.add("CmdID.C2S_SET_SHORTCUT ：修改快捷栏设置");
-		var shortcut : int = 0;
-		switch (type)
-		{
-			case CDType.SPELL_CD:
-				shortcut = realID << 3;
-				break;
-			case CDType.ITEM_CD:
-				shortcut = (realID << 3) | 1;
-				break;
-//				case CDType.WEAPON:
-//					shortcut = (realID << 3) | 2;
-//					break;
-		}
-		//------------------------------------------
-		_bytes.clear();
-		_bytes.writeVarint32(shortcut);
-		_bytes.writeVarint32(pos);
-		_bytes.writeVarint32(-1);
-		send(CmdID.C2S_SET_SHORTCUT, _bytes);*/
-		}
-
-		/**
 		 * 释放技能
 		 *
 		 * 附带
@@ -71,36 +43,61 @@ package com.rpgGame.app.sender
 		 * varint64 目标id，如果无目标id则发送0，后面附带技能坐标
 		 *
 		 */
-		public static function releaseSpell(spellType : int, x : int, y : int, angle : int, targetID : Number) : void
+		public static function releaseSpell(spellID : int, x : int, y : int, angle : int, targetID : long) : void
 		{
-			_bytes.clear();
-			_bytes.writeVarint32(spellType);
-			_bytes.writeVarint32(x);
-			_bytes.writeVarint32(y);
-			_bytes.writeVarint32(angle);
-			_bytes.writeVarint64(targetID);
-			send(SceneModuleMessages.C2S_SCENE_RELEASE_SPELL, _bytes);
+			GameLog.addShow("马上要释放技能id:\t" + spellID);
+			if(targetID != null)
+			{
+				releaseSpellAtTarget(spellID,angle,targetID);
+			}
+			else
+			{
+				releaseSpellAtPos(spellID,angle,x,y);
+			}
 		}
-
-		public static function updateSpellTarget(targetID : Number = -1, x : int = -1, y : int = -1) : void
+		
+		public static function releaseSpellAtPos(spellID:int,angle:int,x:int,y:int):void
 		{
-		/*targetID = targetID > 0 ? targetID : 0;
-		_bytes.clear();
-		if (targetID)
+			var msg:CSPerformPosSkillMessage = new CSPerformPosSkillMessage();
+			msg.skillId = spellID;
+			msg.fightDirection = angle;
+			msg.x = x;
+			msg.y = y;
+			SocketConnection.send(msg);
+			GameLog.addShow("============================发给服务器的技能点为：\t" + x  + "  _  " +y);
+		}
+		
+		public static function releaseSpellAtTarget(spellID:int,angle:int,targetID:long):void
 		{
-			_bytes.writeVarint64(targetID);
+			var msg:CSPerformTargetSkillMessage = new CSPerformTargetSkillMessage();
+			msg.skillId = spellID;
+			msg.fightDirection = angle;
+			msg.targetId = targetID;
+			SocketConnection.send(msg);
 		}
-		else
+        
+		/**
+		 * 技能升级
+		 * @param id 技能id
+		 * @param type 升级还是升阶
+		 * @param isTomax 是否是一键升级
+		 * 
+		 */
+		public static function reqSkillLevelUp(id:int,type:int,isTomax:int):void
 		{
-			_bytes.writeVarint64(targetID);
-			_bytes.writeVarint32(x);
-			_bytes.writeVarint32(y);
+			var msg:ReqLevelUpSkillMessage=new ReqLevelUpSkillMessage();
+			msg.skillModelId=id;
+			msg.skilltype=type;
+			msg.bMaxLevel=isTomax;
+			SocketConnection.send(msg);
 		}
-		send(SceneSpellCmd.C2S_SCENE_UPDATE_SPELL_TARGET, _bytes);
-
-		//			GameLog.add(getTimer() - _tm);
-		_tm = getTimer();*/
-		}
+		
+        public static function reqSkillContiState(skillId : int, state : int) : void {
+            var msg : CSSkillContiStateMessage = new CSSkillContiStateMessage();
+            msg.skillId = skillId;
+            msg.skillState = state;
+            SocketConnection.send(msg);
+        }
 
 		//-----------------------------------
 
@@ -109,10 +106,10 @@ package com.rpgGame.app.sender
 		 *
 		 * 发送要学习技能的spellType varint32
 		 */
-		public static function learnOrUpgradeActiveSpell(spellType : int, itemListVo:UpgradeItemListVo) : void
+		public static function learnOrUpgradeActiveSpell(spellID : int, itemListVo:UpgradeItemListVo) : void
 		{
 			_bytes.clear();
-			_bytes.writeVarint32(spellType);
+			_bytes.writeVarint32(spellID);
 			_bytes.writeBytes(itemListVo.getByte());
 			
 			send(SpellModuleMessages.C2S_LEARN_OR_UPGRADE_ACTIVE_SPELL, _bytes);
@@ -123,14 +120,14 @@ package com.rpgGame.app.sender
 		 *
 		 * UpgradeProto 洗点的UpgradeProto
 		 */
-		public static function clearSpells() : void
-		{
-			_bytes.clear();
-			if(	MainRoleManager.actorInfo.level >= SpellDataManager.clearSpellFreeLevel)
-			{
-				_bytes.writeBytes(UpgradeUtil.getUpgradeItemListVo(SpellDataManager.clearSpellCost).getByte());
-			}
-			send(SpellModuleMessages.C2S_CLEAR_SPELLS, _bytes);
-		}
+//		public static function clearSpells() : void
+//		{
+//			_bytes.clear();
+//			if(	MainRoleManager.actorInfo.totalStat.level >= SpellDataManager.clearSpellFreeLevel)
+//			{
+//				_bytes.writeBytes(UpgradeUtil.getUpgradeItemListVo(SpellDataManager.clearSpellCost).getByte());
+//			}
+//			send(SpellModuleMessages.C2S_CLEAR_SPELLS, _bytes);
+//		}
 	}
 }

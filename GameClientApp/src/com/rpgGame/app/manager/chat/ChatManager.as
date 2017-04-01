@@ -1,39 +1,43 @@
 package com.rpgGame.app.manager.chat
 {
-	import com.gameClient.utils.StringFilter;
-	import com.rpgGame.app.manager.crown.CrownManager;
-	import com.rpgGame.app.manager.goods.BackPackManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.time.SystemTimeManager;
-	import com.rpgGame.app.richText.RichTextCustomLinkType;
-	import com.rpgGame.app.richText.RichTextCustomUtil;
-	import com.rpgGame.app.richText.component.RichTextConfig;
-	import com.rpgGame.app.richText.component.RichTextUnitData;
-	import com.rpgGame.app.sender.ChatSender;
-	import com.rpgGame.app.sender.GmSender;
-	import com.rpgGame.app.ui.main.chat.ChatUtil;
-	import com.rpgGame.core.events.ChatEvent;
-	import com.rpgGame.coreData.cfg.ChatCfgData;
-	import com.rpgGame.coreData.cfg.LanguageConfig;
-	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
-	import com.rpgGame.coreData.configEnum.EnumHintInfo;
-	import com.rpgGame.coreData.info.chat.ChatInfo;
-	import com.rpgGame.coreData.info.item.GetShowItemVo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
-	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
-	import com.rpgGame.coreData.type.chat.EnumChatTabsType;
-	
-	import flash.utils.Dictionary;
-	
-	import app.client_proto.ChatSetTabProtoC;
-	import app.message.GoodsProto;
-	import app.message.ChatContentProto.PosInfoProto;
-	
-	import feathers.data.ListCollection;
-	
-	import org.client.mainCore.ds.HashMap;
-	import org.client.mainCore.manager.EventManager;
+    import com.gameClient.utils.StringFilter;
+    import com.rpgGame.app.manager.goods.BackPackManager;
+    import com.rpgGame.app.manager.role.MainRoleManager;
+    import com.rpgGame.app.manager.shell.ShellManager;
+    import com.rpgGame.app.manager.time.SystemTimeManager;
+    import com.rpgGame.app.richText.RichTextCustomLinkType;
+    import com.rpgGame.app.richText.RichTextCustomUtil;
+    import com.rpgGame.app.richText.component.RichTextConfig;
+    import com.rpgGame.app.richText.component.RichTextUnitData;
+    import com.rpgGame.app.sender.ChatSender;
+    import com.rpgGame.app.sender.GmSender;
+    import com.rpgGame.app.ui.main.chat.ChatUtil;
+    import com.rpgGame.core.events.ChatEvent;
+    import com.rpgGame.coreData.cfg.ChatCfgData;
+    import com.rpgGame.coreData.cfg.LanguageConfig;
+    import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
+    import com.rpgGame.coreData.cfg.item.ItemConfig;
+    import com.rpgGame.coreData.configEnum.EnumHintInfo;
+    import com.rpgGame.coreData.info.chat.ChatInfo;
+    import com.rpgGame.coreData.info.item.ClientItemInfo;
+    import com.rpgGame.coreData.info.item.GetShowItemVo;
+    import com.rpgGame.coreData.info.item.ItemUtil;
+    import com.rpgGame.coreData.type.chat.EnumChatChannelType;
+    import com.rpgGame.coreData.type.chat.EnumChatTabsType;
+    import com.rpgGame.netData.backpack.bean.ItemInfo;
+    import com.rpgGame.netData.chat.bean.HyperInfo;
+    import com.rpgGame.netData.chat.message.ResChatMessage;
+    
+    import flash.utils.Dictionary;
+    
+    import app.client_proto.ChatSetTabProtoC;
+    import app.message.GoodsProto;
+    import app.message.ChatContentProto.PosInfoProto;
+    
+    import feathers.data.ListCollection;
+    
+    import org.client.mainCore.ds.HashMap;
+    import org.client.mainCore.manager.EventManager;
 
 	/**
 	 * 聊天数据管理
@@ -57,11 +61,17 @@ package com.rpgGame.app.manager.chat
 
 		private static var _chatItemHash : HashMap = new HashMap();
 
-		private static var MAX_CHATSHOWITEMCACEHE : int = 500;
-		private static var _chatShowItemVec : Vector.<GetShowItemVo> = new Vector.<GetShowItemVo>(MAX_CHATSHOWITEMCACEHE);
+		private static var MAX_CHATSHOWITEMCACEHE : int = 300;
+		
+		
+		
+		private static var _systemHearsayMsg:Vector.<ResChatMessage>=new Vector.<ResChatMessage>;
+		private static var _systemMsg:Vector.<ResChatMessage>=new Vector.<ResChatMessage>;
+		private static var _hearsayMsg:Vector.<ResChatMessage>=new Vector.<ResChatMessage>;
+		public  static var sysHearsayMsgChange:Function;
 
 		private static var _currentShowItemInsertIndex : int = 99;
-
+		
 		/**
 		 * 综合频道里，设置各个频道是否显示
 		 */
@@ -69,17 +79,84 @@ package com.rpgGame.app.manager.chat
 		/**
 		 * 社会频道里，设置各个频道是否显示
 		 */
-		private static var _sheHuiChannelShowSetting : Dictionary;
+		private static var _sheJiaoChannelShowSetting : Dictionary;
 		/**
 		 * 个人频道里，设置各个频道是否显示
 		 */
 		private static var _geRenChannelShowSetting : Dictionary;
-		/**
-		 * 喇叭频道里，设置各个频道是否显示
-		 */
-		private static var _labaChannelShowSetting : Dictionary;
 
 		private static var _freeHockUsedTimes : int = 0;
+		
+		
+		/**
+		 *传闻消息缓存 
+		 */
+		public static function get hearsayMsg():Vector.<ResChatMessage>
+		{
+			return _hearsayMsg;
+		}
+
+		/**
+		 *系统消息缓存 
+		 */
+		public static function get systemMsg():Vector.<ResChatMessage>
+		{
+			return _systemMsg;
+		}
+
+		/**
+		 *系统和传闻消息缓存 
+		 */
+		public static function get systemHearsayMsg():Vector.<ResChatMessage>
+		{
+			return _systemHearsayMsg;
+		}
+
+		/**
+		 * 记录系统传闻消息 
+		 * @param msg
+		 * 
+		 */
+		public static function recordSystemHearsayMsg(msg:ResChatMessage):void
+		{
+			_systemHearsayMsg.push(msg);
+			if(msg.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
+				recordSystemMsg(msg);
+			}else if(msg.type==EnumChatChannelType.CHAT_CHANNEL_HEARSAY){
+				recordHearsayMsg(msg);
+			}
+			
+			if(sysHearsayMsgChange){
+				sysHearsayMsgChange();
+			}
+		}
+		
+		/**
+		 * 记录传闻消息 
+		 * @param msg
+		 * 
+		 */
+		private static function recordHearsayMsg(msg:ResChatMessage):void
+		{
+			if(_hearsayMsg.length>=MAX_CHATSHOWITEMCACEHE){
+				_hearsayMsg.shift();
+			}
+			_hearsayMsg.push(msg);
+		}
+		
+		/**
+		 * 记录系统消息 
+		 * @param msg
+		 * 
+		 */
+		private static function recordSystemMsg(msg:ResChatMessage):void
+		{
+			if(_systemMsg.length>=MAX_CHATSHOWITEMCACEHE){
+				_systemMsg.shift();
+			}
+			_systemMsg.push(msg);
+		}
+		
 		
 		public function ChatManager()
 		{
@@ -100,8 +177,6 @@ package com.rpgGame.app.manager.chat
 					return isShowInSheHui(channel);
 				case EnumChatTabsType.TABS_GEREN:
 					return isShowInGeRen(channel);
-				case EnumChatTabsType.TABS_LABA:
-					return isShowInLaba(channel);
 				case EnumChatTabsType.TABS_ZIDINGYIONE:
 					return isShowInZiDingYiOne(channel);
 				case EnumChatTabsType.TABS_ZIDINGYITWO:
@@ -137,13 +212,13 @@ package com.rpgGame.app.manager.chat
 		 */
 		public static function isShowInSheHui(channel : int) : Boolean
 		{
-			if (_sheHuiChannelShowSetting == null)
+			if (_sheJiaoChannelShowSetting == null)
 			{
 				initSheHuiChannelShowDic();
 			}
-			if (_sheHuiChannelShowSetting.hasOwnProperty(channel))
+			if (_sheJiaoChannelShowSetting.hasOwnProperty(channel))
 			{
-				return _sheHuiChannelShowSetting[channel];
+				return _sheJiaoChannelShowSetting[channel];
 			}
 			return false;
 		}
@@ -165,24 +240,9 @@ package com.rpgGame.app.manager.chat
 			}
 			return false;
 		}
-		/**
-		 * 判断此频道信息是否在喇叭里显示
-		 * @param channel
-		 * @return
-		 *
-		 */
-		public static function isShowInLaba(channel : int) : Boolean
-		{
-			if (_labaChannelShowSetting == null)
-			{
-				initLabaChannelShowDic();
-			}
-			if (_labaChannelShowSetting.hasOwnProperty(channel))
-			{
-				return _labaChannelShowSetting[channel];
-			}
-			return false;
-		}
+		
+		
+
 		/**
 		 * 判断此频道信息是否在自定义1里显示
 		 * @param channel
@@ -241,23 +301,25 @@ package com.rpgGame.app.manager.chat
 			_allChannelShowSetting = new Dictionary();
 			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_NORMAL] = true;
 			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_TEAM] = true;
-			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_COUNTRY] = true;
 			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_PARTY] = true;
 			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_WORLD] = true;
 			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_LABA] = true;
 			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_SYSTEM] = true;
-			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_FAMILY] = true;
-			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_MENG_GUO] = true;
+			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_NOTICE] = true;
+			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_HEARSAY] = true;
 			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_KUA_FU] = true;
 			_allChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_SILIAO] = true;
 		}
 		private static function initSheHuiChannelShowDic() : void
 		{
-			_sheHuiChannelShowSetting = new Dictionary();
-			_sheHuiChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_COUNTRY] = true;
-			_sheHuiChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_SYSTEM] = true;
-			_sheHuiChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_WORLD] = true;
-			_sheHuiChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_MENG_GUO] = true;
+			_sheJiaoChannelShowSetting = new Dictionary();
+			_sheJiaoChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_WORLD] = true;
+			_sheJiaoChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_NORMAL] = true;
+			_sheJiaoChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_TEAM] = true;
+			_sheJiaoChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_PARTY] = true;
+			_sheJiaoChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_SILIAO] = true;
+			_sheJiaoChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_LABA] = true;
+			
 		}
 		private static function initGeRenChannelShowDic() : void
 		{
@@ -265,14 +327,8 @@ package com.rpgGame.app.manager.chat
 			_geRenChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_NORMAL] = true;
 			_geRenChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_SILIAO] = true;
 			_geRenChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_TEAM] = true;
-			_geRenChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_SYSTEM] = true;
-			_geRenChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_PARTY] = true;
 		}
-		private static function initLabaChannelShowDic() : void
-		{
-			_labaChannelShowSetting = new Dictionary();
-			_labaChannelShowSetting[EnumChatChannelType.CHAT_CHANNEL_LABA] = true;
-		}
+		
 		
 		//发送一句错误提示
 		public static function showWrongHint(wronginfo : String, isWrong : Boolean = true, replaceArr : Array = null) : void
@@ -322,16 +378,14 @@ package com.rpgGame.app.manager.chat
 			{
 				var itemArr : Array = [];
 				var len : int = chatInfo.chatGoods.length;
-				var chatGoods : GoodsProto;
-				var itemVo : GetShowItemVo;
+				var chatGoods : ItemInfo;
 				var itemCode : String;
 				for (var i : int = 0; i < len; i++)
 				{
 					chatGoods = chatInfo.chatGoods[i];
-					itemVo = new GetShowItemVo();
-					itemVo.decode(chatGoods);
-
-					itemCode = RichTextCustomUtil.getItemCode(chatGoods.id, ItemCfgData.getItemName(chatGoods.id), ItemCfgData.getItemQuality(chatGoods.id));
+					var itemInfo:ClientItemInfo = ItemUtil.convertClientItemInfo(chatGoods);
+					var key:String = ChatGoodsManager.addItemInfo(itemInfo);
+					itemCode = RichTextCustomUtil.getItemCode(key, ItemConfig.getItemName(chatGoods.itemModelId), ItemConfig.getItemQuality(chatGoods.itemModelId));
 					itemArr.push(itemCode);
 				}
 
@@ -382,7 +436,7 @@ package com.rpgGame.app.manager.chat
 				var cd:int = ChatCfgData.getChatCDTime(channel);
 				if (ctime - chatTimeVec[0] < cd)
 				{
-					NoticeManager.showHint(EnumHintInfo.CHAT_WORLD_CHAT_FAIL2);
+					NoticeManager.showHint("发送太频繁");
 					return false;
 				}
 			}
@@ -424,25 +478,20 @@ package com.rpgGame.app.manager.chat
 		 * @param isSendPos
 		 *
 		 */
-		public static function reqSendChat(content : String, channel : int, targetChaterID : Number = 0, targetName:String = null) : void
+		public static function reqSendChat(content : String, channel : int, targetName:String = null,hyperInfos:Vector.<HyperInfo>=null) : void
 		{
 			if (content == "") //空白不发送
 			{
 				NoticeManager.mouseFollowNotify("请先输入你想说的话再发送");
 				return;
 			}
-			if (CrownManager.getDontTalk() && channel == EnumChatChannelType.CHAT_CHANNEL_COUNTRY)
-			{
-				NoticeManager.showNotify("禁言中");
-				return;
-			}
 
 			if (channel == EnumChatChannelType.CHAT_CHANNEL_LABA)
 			{
-				var itemInfo : ItemInfo = BackPackManager.instance.getFirstCanUseItemByCfgId(ChatCfgData.paidChatGoodsID);
+				var itemInfo : ClientItemInfo = BackPackManager.instance.getFirstCanUseItemByCfgId(ChatCfgData.paidChatGoodsID);
 				if (itemInfo == null)
 				{
-					NoticeManager.showHint(EnumHintInfo.CHAT_CHANNEL_NO_LABA_ITEM, [ItemCfgData.getItemName(ChatCfgData.paidChatGoodsID)]);
+					NoticeManager.showHint(EnumHintInfo.CHAT_CHANNEL_NO_LABA_ITEM, [ItemConfig.getItemName(ChatCfgData.paidChatGoodsID)]);
 					return;
 				}
 			}
@@ -454,19 +503,7 @@ package com.rpgGame.app.manager.chat
 			var newContent : String = setShowGoodFormat(content,channel); //解析里面所有的物品
 			var sendMsgStr : String = newContent;
 			sendMsgStr = StringFilter.match(sendMsgStr, "*"); //发送前就把敏感字去掉
-			ChatSender.cs_sendChat(sendMsgStr, channel, _showGoodsList, targetChaterID, _posInfoProto);
-
-			mySendChatInfo = new ChatInfo();
-			mySendChatInfo.id = MainRoleManager.actorID;
-			mySendChatInfo.name = MainRoleManager.actorInfo.name;
-			mySendChatInfo.targetID = targetChaterID;
-			mySendChatInfo.targetName = targetName;
-			mySendChatInfo.channel = channel;
-			mySendChatInfo.countryId = MainRoleManager.actorInfo.countryId;
-			mySendChatInfo.chatGoods = _showGoodsList;
-			mySendChatInfo.posInfo = _posInfoProto
-			mySendChatInfo.speech = sendMsgStr;
-			//			addChatLog( content );
+			ChatSender.cs_sendChat(sendMsgStr, channel, targetName, hyperInfos);
 
 		}
 
@@ -478,6 +515,11 @@ package com.rpgGame.app.manager.chat
 		 */
 		public static function sendGMMsg(msg : String) : Boolean
 		{
+            CONFIG::Debug {
+                if (ShellManager.parse(msg)) {
+//                    return true;
+                }
+            }
 			//验证gm命令
 			var isGm : Boolean = isGmMsg(msg);
 			if (isGm)
@@ -490,7 +532,7 @@ package com.rpgGame.app.manager.chat
 
 		private static function isGmMsg(msg : String) : Boolean
 		{
-			if (msg.indexOf("/") != -1)
+			if (msg.indexOf("&") != -1)
 				return true;
 			return false;
 		}
@@ -529,7 +571,7 @@ package com.rpgGame.app.manager.chat
 				if (unitData.linkType == RichTextCustomLinkType.ITEM_SHOW_TYPE)
 				{
 					data[i] = MSG_GOODS_CODE;
-					_showGoodsList.push(getShowItem(unitData));
+					_showGoodsList.push(getShowItemProto(unitData));
 				}
 
 				if (unitData.linkType == RichTextCustomLinkType.POSITION_FLY_TYPE)
@@ -574,13 +616,24 @@ package com.rpgGame.app.manager.chat
 		 * @return
 		 *
 		 */
-		private static function getShowItem(specialMsg:RichTextUnitData) : GoodsProto
+		public static function getShowItemInfo(specialMsg:RichTextUnitData) : ClientItemInfo
 		{
-			var chatGoodsPro : GoodsProto = new GoodsProto();
 			var arr:Array = specialMsg.linkData.split(",");
-			chatGoodsPro.id = arr[0];
-
-			return chatGoodsPro;
+			var key:String = arr[0];
+			var itemInfo:ClientItemInfo  = ChatGoodsManager.getItemInfo(key);
+			return itemInfo;
+		}
+		/**
+		 * 得到要发给服务器的物品数据
+		 * @param itemid
+		 * @return
+		 *
+		 */
+		private static function getShowItemProto(specialMsg:RichTextUnitData) : GoodsProto
+		{
+//			var itemInfo:ItemInfo  = getShowItemInfo(specialMsg);
+//			return itemInfo.proto;
+			return null;
 		}
 
 
@@ -593,7 +646,7 @@ package com.rpgGame.app.manager.chat
 		private static function checkChatLevelEnable(channel : int) : Boolean
 		{
 			var minLevel:int = ChatCfgData.getChatLevel(channel);
-			if (MainRoleManager.actorInfo.level < minLevel)
+			if (MainRoleManager.actorInfo.totalStat.level < minLevel)
 			{
 				NoticeManager.showHint(EnumHintInfo.CHAT_CHANNEL_LEVEL_FAIL, [minLevel]);
 				return false;

@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BUY_BACK_GOODS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.ShopModuleObjClientProto.buy_back_goods", "buyBackGoods", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AllBuyBackGoodsProto; });
+		public static const BUY_BACK_GOODS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.ShopModuleObjClientProto.buy_back_goods", "buyBackGoods", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AllBuyBackGoodsProto; });
 
 		private var buy_back_goods$field:app.message.AllBuyBackGoodsProto;
 
@@ -41,7 +41,7 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasBuyBackGoods) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, buy_back_goods$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, buy_back_goods$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -54,7 +54,7 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var buy_back_goods$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (buy_back_goods$count != 0) {
@@ -62,7 +62,7 @@ package app.message {
 					}
 					++buy_back_goods$count;
 					this.buyBackGoods = new app.message.AllBuyBackGoodsProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.buyBackGoods);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.buyBackGoods);
 					break;
 				default:
 					super.readUnknown(input, tag);

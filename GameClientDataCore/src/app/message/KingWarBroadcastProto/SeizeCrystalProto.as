@@ -14,7 +14,7 @@ package app.message.KingWarBroadcastProto {
 		/**
 		 *  @private
 		 */
-		public static const GUILD_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.KingWarBroadcastProto.SeizeCrystalProto.guild_name", "guildName", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const GUILD_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.KingWarBroadcastProto.SeizeCrystalProto.guild_name", "guildName", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var guild_name$field:String;
 
@@ -37,7 +37,7 @@ package app.message.KingWarBroadcastProto {
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.KingWarBroadcastProto.SeizeCrystalProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.KingWarBroadcastProto.SeizeCrystalProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var name$field:String;
 
@@ -60,7 +60,7 @@ package app.message.KingWarBroadcastProto {
 		/**
 		 *  @private
 		 */
-		public static const CRYSTAL_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.KingWarBroadcastProto.SeizeCrystalProto.crystal_name", "crystalName", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const CRYSTAL_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.KingWarBroadcastProto.SeizeCrystalProto.crystal_name", "crystalName", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var crystal_name$field:String;
 
@@ -86,15 +86,15 @@ package app.message.KingWarBroadcastProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasGuildName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, guild_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, guild_name$field);
 			}
 			if (hasName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, name$field);
 			}
 			if (hasCrystalName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, crystal_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, crystal_name$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -109,28 +109,28 @@ package app.message.KingWarBroadcastProto {
 			var name$count:uint = 0;
 			var crystal_name$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (guild_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SeizeCrystalProto.guildName cannot be set twice.');
 					}
 					++guild_name$count;
-					this.guildName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.guildName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 2:
 					if (name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SeizeCrystalProto.name cannot be set twice.');
 					}
 					++name$count;
-					this.name = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.name = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (crystal_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SeizeCrystalProto.crystalName cannot be set twice.');
 					}
 					++crystal_name$count;
-					this.crystalName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.crystalName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -4,12 +4,12 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.info.heroSearch.HeroSearchData;
-
+	
 	import app.cmd.SearchByHeroNameModuleMessages;
-
+	
 	import org.client.mainCore.bean.BaseBean;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	public class HeroSearchCmdListener extends BaseBean
 	{
@@ -20,10 +20,10 @@ package com.rpgGame.app.cmdlistener
 
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(SearchByHeroNameModuleMessages.S2C_SEARCH_ERROR, searchError);
-			SocketConnection.addCmdListener(SearchByHeroNameModuleMessages.S2C_SEARCH_SUCCESS, searchSuccess);
-			SocketConnection.addCmdListener(SearchByHeroNameModuleMessages.S2C_SEARCH_HERO_ID_BY_NAME_FAIL, searchHeroError);
-			SocketConnection.addCmdListener(SearchByHeroNameModuleMessages.S2C_SEARCH_HERO_ID_BY_NAME, searchHeroSuccess);
+			SocketConnection_protoBuffer.addCmdListener(SearchByHeroNameModuleMessages.S2C_SEARCH_ERROR, searchError);
+			SocketConnection_protoBuffer.addCmdListener(SearchByHeroNameModuleMessages.S2C_SEARCH_SUCCESS, searchSuccess);
+			SocketConnection_protoBuffer.addCmdListener(SearchByHeroNameModuleMessages.S2C_SEARCH_HERO_ID_BY_NAME_FAIL, searchHeroError);
+			SocketConnection_protoBuffer.addCmdListener(SearchByHeroNameModuleMessages.S2C_SEARCH_HERO_ID_BY_NAME, searchHeroSuccess);
 
 			finish();
 		}

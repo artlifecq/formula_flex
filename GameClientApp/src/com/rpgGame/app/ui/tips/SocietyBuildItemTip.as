@@ -5,11 +5,9 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.type.item.ItemQualityType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
-
-	import org.mokylin.skin.app.tips.SocietyBuildItemTipSkin;
 
 	/**
 	 *
@@ -31,12 +29,12 @@ package com.rpgGame.app.ui.tips
 			return _instance;
 		}
 
-		private var _tipSkin : SocietyBuildItemTipSkin;
+		private var _tipSkin : Object;//SocietyBuildItemTipSkin;
 		private var _iconFace : IconCDFace;
 
 		public function SocietyBuildItemTip()
 		{
-			_tipSkin = new SocietyBuildItemTipSkin();
+//			_tipSkin = new SocietyBuildItemTipSkin();
 			super(_tipSkin);
 			initTip();
 		}
@@ -48,7 +46,7 @@ package com.rpgGame.app.ui.tips
 
 		public function setTipData(data : *) : void
 		{
-			var itemInfo : ItemInfo = data as ItemInfo;
+			var itemInfo : ClientItemInfo = data as ClientItemInfo;
 			FaceUtil.SetItemGrid(_iconFace, itemInfo, false);
 			var nameStr : String = HtmlTextUtil.getTextColor(ItemQualityType.getColorValue(itemInfo.quality), itemInfo.name);
 			_tipSkin.labDesc.htmlText = nameStr + "<br>" + itemInfo.desc;

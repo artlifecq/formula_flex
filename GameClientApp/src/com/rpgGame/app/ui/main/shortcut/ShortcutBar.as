@@ -1,154 +1,172 @@
-package com.rpgGame.app.ui.main.shortcut
-{
-	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.utils.FaceUtil;
-	import com.rpgGame.core.app.AppConstant;
-	import com.rpgGame.core.app.AppManager;
-	import com.rpgGame.core.events.MainPlayerEvent;
-	import com.rpgGame.core.events.society.SocietyEvent;
-	import com.rpgGame.core.manager.tips.TargetTipsMaker;
-	import com.rpgGame.core.manager.tips.TipTargetManager;
-	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.LanguageConfig;
-	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.lang.LangMount;
-	import com.rpgGame.coreData.type.item.GridBGType;
-	
-	import flash.geom.Point;
-	
-	import org.client.mainCore.manager.EventManager;
-	import org.mokylin.skin.mainui.shortcut.ShortcutSkin;
-	
-	import starling.display.DisplayObject;
-
-	/**
-	 * 主界面底部主工具栏
-	 * @author wewell
-	 */
-	public class ShortcutBar extends SkinUI
-	{
+package com.rpgGame.app.ui.main.shortcut {
+    import com.game.engine3D.display.InterObject3D;
+    import com.game.engine3D.scene.render.RenderUnit3D;
+    import com.rpgGame.app.manager.role.MainRoleManager;
+    import com.rpgGame.core.events.MainPlayerEvent;
+    import com.rpgGame.core.events.society.SocietyEvent;
+    import com.rpgGame.core.manager.tips.TargetTipsMaker;
+    import com.rpgGame.core.manager.tips.TipTargetManager;
+    import com.rpgGame.core.ui.SkinUI;
+    import com.rpgGame.coreData.cfg.ClientConfig;
+    import com.rpgGame.coreData.enum.JobEnum;
+    import com.rpgGame.coreData.type.CharAttributeType;
+    
+    import flash.geom.Point;
+    
+    import feathers.controls.UIAsset;
+    
+    import org.client.mainCore.manager.EventManager;
+    import org.mokylin.skin.mainui.shortcut.shortcut_Skin;
+    
+    import starling.display.DisplayObject;
+    
+    public class ShortcutBar extends SkinUI {
+		
 		private var skillBar : ShortcutSkillBar;
-//		/**
-//		 *  消息快捷
-//		 */
-//		private var _shortcutMessageBar : ShortcutMessageBar;
-		private var _buffListBar : BuffListBar;
-		private var skin : ShortcutSkin;
-		private var expWidth : int;
+		
+        private var _skin : shortcut_Skin;
+		
+		private var _jumpState:Vector.<UIAsset>;
 
-		private var expKArr : Array;
-
-		public function ShortcutBar()
-		{
-			skin = new ShortcutSkin();
-			super(skin);
+		private var renderUint:RenderUnit3D;
+        private var _rollprogress:RollProgress;
+		private var _jinzhenList:Vector.<UIAsset>;
+        public function ShortcutBar() {
+            this._skin = new shortcut_Skin();
+            super(this._skin);
+			 
 			init();
+        }
+		
+		public function getSkillGridSeat(index:int):Point
+		{
+			return skillBar.getSkillGridSeat(index);
 		}
-
+		
+		private function useJump():void
+		{
+			var index:int=0;
+			while(index<3){
+				if(_jumpState[index].visible){
+					_jumpState[index].visible=false;
+					break;
+				}
+				index++;
+			}
+		}
+		
+		public function addChild3DAt(child : InterObject3D,index:int) : void
+		{
+			this.addChildAt(child,index);
+			if (!_inter3DObjs)
+			{
+				_inter3DObjs = new Vector.<InterObject3D>();
+			}
+			if (_inter3DObjs.indexOf(child) < 0)
+			{
+				_inter3DObjs.push(child);
+				
+				_numChildren3D++;
+			}
+			child.start();
+		}
+		
 		private function init() : void
 		{
 			skillBar = new ShortcutSkillBar(this);
-			//skillBar.layerBatch = true;
-			skin.grpTopGrids.visible = false;
-			this.addChild(skillBar);
-			skillBar.x = skin.grpTopGrids.x;
-			skillBar.y = skin.grpTopGrids.y;
-
-//			_shortcutMessageBar = new ShortcutMessageBar();
-//			addChild(_shortcutMessageBar);
-//			_shortcutMessageBar.x = int((skin.width - _shortcutMessageBar.barWidth) * 0.5) + 350;
-//			_shortcutMessageBar.y = _shortcutMessageBar.barHeight - 90;
-
-			_buffListBar = new BuffListBar(MainRoleManager.actor, IcoSizeEnum.SIZE_46, GridBGType.GRID_SIZE_46, 55, 55, 15, 15, true);
-			addChild(_buffListBar);
-			_buffListBar.show();
-			_buffListBar.x = int((skin.width - _buffListBar.barWidth) * 0.5);
-			_buffListBar.y = _buffListBar.barHeight - 120;
-
-			FaceUtil.backpackBtn = skin.btnBackpack;
-			skin.botBgBar.touchable = false;
-			skin.botBgBar.touchAcross = true;
-
+			this._skin.Icons.addChildAt(skillBar,0);
+			
+			_rollprogress = new RollProgress(this._skin);
+			var leftp:HpPropgressBar = new HpPropgressBar(this,0,_skin);
+			var rightp:HpPropgressBar = new HpPropgressBar(this,1,_skin);
+			
 			initExp();
 			addSheHuiTab();
-
+			
+			
 			if (!ClientConfig.isBanShu)
-			{
-				TipTargetManager.show(skin.btnBackpack, TargetTipsMaker.makeSimpleTextTips("背包$", null, onlift));
-				TipTargetManager.show(skin.btnRole, TargetTipsMaker.makeSimpleTextTips("人物<br/>快捷键：C"));
-				TipTargetManager.show(skin.btnHaoYou, TargetTipsMaker.makeSimpleTextTips("好友<br/>快捷键：F"));
-				TipTargetManager.show(skin.btnZudui, TargetTipsMaker.makeSimpleTextTips("队伍<br/>快捷键：P"));
-				TipTargetManager.show(skin.btnSheHui, TargetTipsMaker.makeSimpleTextTips("帮派"));
-
-				TipTargetManager.show(skin.btnTask, TargetTipsMaker.makeSimpleTextTips("任务<br/>快捷键：L"));
-				TipTargetManager.show(skin.btnSpell, TargetTipsMaker.makeSimpleTextTips("技能<br/>快捷键：V"));
-				TipTargetManager.show(skin.btnMount, TargetTipsMaker.makeSimpleTextTips("坐骑"));
-				TipTargetManager.show(skin.btnChengJiu, TargetTipsMaker.makeSimpleTextTips("社会<br/>快捷键：J"));
-				TipTargetManager.show(skin.btnSheHui, TargetTipsMaker.makeSimpleTextTips("装备<br/>快捷键：Q"));
-				TipTargetManager.show(skin.btnShangDian, TargetTipsMaker.makeSimpleTextTips("商店<br/>快捷键：O"));
+			{				
+//				TipTargetManager.show(_skin.btnBackpack, TargetTipsMaker.makeSimpleTextTips("背包<br/>快捷键：B"));
+//				TipTargetManager.show(_skin.btnRole, TargetTipsMaker.makeSimpleTextTips("人物<br/>快捷键：C"));
+//				TipTargetManager.show(_skin.btnHaoYou, TargetTipsMaker.makeSimpleTextTips("好友<br/>快捷键：F"));
+//				TipTargetManager.show(_skin.btnZudui, TargetTipsMaker.makeSimpleTextTips("队伍<br/>快捷键：P"));
+//				TipTargetManager.show(_skin.btnSheHui, TargetTipsMaker.makeSimpleTextTips("帮派"));
+//				
+//				TipTargetManager.show(_skin.btnTask, TargetTipsMaker.makeSimpleTextTips("任务<br/>快捷键：L"));
+//				TipTargetManager.show(_skin.btnSpell, TargetTipsMaker.makeSimpleTextTips("技能<br/>快捷键：V"));
+//				TipTargetManager.show(_skin.btnMount, TargetTipsMaker.makeSimpleTextTips("坐骑<br/>快捷键：N"));
+//				TipTargetManager.show(_skin.btnChengJiu, TargetTipsMaker.makeSimpleTextTips("社会<br/>快捷键：J"));
+//				TipTargetManager.show(_skin.btnSheHui, TargetTipsMaker.makeSimpleTextTips("装备<br/>快捷键：Q"));
+//				TipTargetManager.show(_skin.btnShangDian, TargetTipsMaker.makeSimpleTextTips("商店<br/>快捷键：O"));
 			}
-
+			
 			EventManager.addEvent(SocietyEvent.SOCIETY_APPROVE_CHANGE, addSheHuiTab);
-
-			if (ClientConfig.isBanShu)
+			
+			if(MainRoleManager.actorInfo.job == JobEnum.ROLE_4_TYPE)
 			{
-				skin.btnMount.visible = false;
-				skin.btnTask.visible = false;
-				skin.btnRole.x = skin.btnTask.x;
-				skin.btnRole.y = skin.btnTask.y;
-
-				skin.btnSheHui.visible = false;
-				skin.btnShangDian.visible = false;
+				_jinzhenList = new Vector.<UIAsset>();
+				_jinzhenList.push(_skin.jinzhen_12);
+				_jinzhenList.push(_skin.jinzhen_22);
+				_jinzhenList.push(_skin.jinzhen_32);
+				_jinzhenList.push(_skin.jinzhen_42);
+				_jinzhenList.push(_skin.jinzhen_52);
+				EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,refeashJinzhen);
 			}
-			if(ClientConfig.isStable)
+			refeashJinzhen(CharAttributeType.RES_JING_ZHENG);
+		}
+		
+		
+		private function refeashJinzhen(type:int):void
+		{
+			if(MainRoleManager.actorInfo.job!= JobEnum.ROLE_4_TYPE)
 			{
-				skin.btnMount.visible = false;
+				this._skin.jingzhen_yijia.visible=false;
+				if(!EventManager.hasEvent(MainPlayerEvent.STAT_RES_CHANGE,refeashJinzhen))
+				{
+					EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,refeashJinzhen)
+				}
+				TipTargetManager.show(_skin.jingzhen_yijia, null);
+				return ;
 			}
+			if(type != CharAttributeType.RES_JING_ZHENG)
+				return ;
+			this._skin.jingzhen_yijia.visible=true;
+			var count:int = MainRoleManager.actorInfo.totalStat.getResData(type);
+			for(var i:int = 0;i<_jinzhenList.length;i++)
+			{
+				_jinzhenList[i].visible = i<count;
+			}
+			_skin.lbl_lastNum2.text = count.toString()+"/5";
+			var Msg:String = "金针："+count+"/5";
+			Msg += "<br/>施放技能会消耗金针<br/>每10秒恢复1个金针";
+			TipTargetManager.show(_skin.jingzhen_yijia, TargetTipsMaker.makeSimpleTextTips(Msg));
 		}
-
-		public function resize(sWidth : int, sHeight : int) : void
-		{
-			skin.botBgBar.width = sWidth;
-			skin.botBgBar.x = (skin.width - sWidth) / 2;
-
-			this.x = int((sWidth - skin.width) / 2);
-			this.y = int(sHeight - skin.height); //透明像素引起的偏差
-
-			resizeExp(sWidth, sHeight);
-		}
-
-		public function onlift() : Array
-		{
-			return ["<br/>快捷键：B"];
-		}
-
+      
 		public function getBtnGlobalPos(btnName : String) : Point
 		{
 			if (btnName == null || btnName == "")
 				return null;
-			var dis : DisplayObject = skin[btnName];
+			var dis : DisplayObject = _skin[btnName];
 			if (dis && dis.parent)
 			{
 				return dis.parent.localToGlobal(new Point(dis.x + 5, dis.y + 5));
 			}
 			return null;
 		}
-
+		
 		private function initExp() : void
 		{
-			expKArr = [];
-
-			expKArr.push(skin.imgExpK1, skin.imgExpK2, skin.imgExpK3, skin.imgExpK4, skin.imgExpK5, skin.imgExpK6, skin.imgExpK7, skin.imgExpK8, skin.imgExpK9);
-
-			changeExp();
-			EventManager.addEvent(MainPlayerEvent.MAXEXP_CHANGE, changeExp);
-			EventManager.addEvent(MainPlayerEvent.NOWEXP_CHANGE, changeExp);
-
-			TipTargetManager.show(skin.imgExpBg, TargetTipsMaker.makeSimpleTextTips("经验：$/$($%)", null, getExp));
+//			expKArr = [];
+//			
+//			expKArr.push(_skin.imgExpK1, _skin.imgExpK2, _skin.imgExpK3, _skin.imgExpK4, _skin.imgExpK5, _skin.imgExpK6, _skin.imgExpK7, _skin.imgExpK8, _skin.imgExpK9);
+//			
+//			changeExp();
+//			EventManager.addEvent(MainPlayerEvent.MAXEXP_CHANGE, changeExp);
+//			EventManager.addEvent(MainPlayerEvent.NOWEXP_CHANGE, changeExp);
+//			
+//			TipTargetManager.show(_skin.imgExpBg, TargetTipsMaker.makeSimpleTextTips("经验：$/$($%)", null, getExp));
 		}
-
+		
 		/**
 		 * 经验TIPS
 		 * @return
@@ -156,136 +174,120 @@ package com.rpgGame.app.ui.main.shortcut
 		 */
 		private function getExp() : Array
 		{
-			return [MainRoleManager.actorInfo.curExp, MainRoleManager.actorInfo.upgradeExp, (MainRoleManager.actorInfo.curExp / MainRoleManager.actorInfo.upgradeExp * 100).toFixed(2)];
+			return [MainRoleManager.actorInfo.curExp, MainRoleManager.actorInfo.maxExp, (MainRoleManager.actorInfo.curExp / MainRoleManager.actorInfo.maxExp * 100).toFixed(2)];
 		}
-
+		
 		private function changeExp() : void
 		{
-			var p : Number = MainRoleManager.actorInfo.curExp / MainRoleManager.actorInfo.upgradeExp;
+			var p : Number = MainRoleManager.actorInfo.curExp / MainRoleManager.actorInfo.maxExp;
 			if (p > 1)
 				p = 1;
-
-			skin.imgExp.width = p * expWidth;
-
+			
+//			_skin.imgExp.width = p * expWidth;
+			
 			//shortcutSkin.imgCurEffect.x = shortcutSkin.imgExp.x + shortcutSkin.imgExp.width - shortcutSkin.imgCurEffect.width / 2;
 		}
-
+		
 		private function resizeExp(sWidth : int, sHeight : int) : void
 		{
-			expWidth = sWidth - 42;
-
-			skin.imgExpBg.width = sWidth;
-			skin.imgExpBg.x = (skin.width - sWidth) / 2;
-			skin.imgExp.x = skin.imgExpBg.x + 21;
-
+//			expWidth = sWidth - 42;
+//			
+//			_skin.imgExpBg.width = sWidth;
+//			_skin.imgExpBg.x = (_skin.width - sWidth) / 2;
+//			_skin.imgExp.x = _skin.imgExpBg.x + 21;
+			
 			sortExp();
-
+			
 			changeExp();
 		}
-
+		
 		private function sortExp() : void
 		{
-			var d : int = expWidth / 10;
-			var len : int = expKArr.length;
-			var startX : int = skin.imgExp.x;
-			for (var i : int = 0; i < len; i++)
-			{
-				expKArr[i].x = int(startX + d * (i + 1));
-			}
+//			var d : int = expWidth / 10;
+//			var len : int = expKArr.length;
+//			var startX : int = _skin.imgExp.x;
+//			for (var i : int = 0; i < len; i++)
+//			{
+//				expKArr[i].x = int(startX + d * (i + 1));
+//			}
 		}
-
+		
 		override protected function onTouchTarget(target : DisplayObject) : void
 		{
 			switch (target)
 			{
-				case skin.btnBackpack:
-					AppManager.showApp(AppConstant.BACK_PACK_PANEL);
-					break;
-				case skin.btnRole:
-					AppManager.showApp(AppConstant.ROLE_PANEL);
-					break;
-				case skin.btnHaoYou:
-					AppManager.showApp(AppConstant.FRIEND_PANEL);
-					break;
-				case skin.btnZudui:
-					AppManager.showApp(AppConstant.TEAM_PANEL);
-					break;
-				case skin.btnShangDian:
-					AppManager.showApp(AppConstant.SHOP_SYSTEM_PANEL);
-
-					break;
-				case skin.btnTask:
-					AppManager.showApp(AppConstant.TASK_PANEL);
-					break;
-				case skin.btnSheHui:
-					AppManager.showApp(AppConstant.EQUIP_CHANGE);
-					break;
-				case skin.btnMount:
-					var lv : int = int(LanguageConfig.getText(LangMount.MOUNT_TIP_95));
-					if (MainRoleManager.actorInfo.level < lv)
-					{
-						NoticeManager.showNotify(LangMount.MOUNT_CMDLISTENER_FAILD_120);
-						return;
-					}
-					if (AppManager.isAppInScene(AppConstant.MOUNT_CHANGE_PANEL))
-					{
-						NoticeManager.showNotify(LangMount.MOUNT_CMDLISTENER_FAILD_121);
-						return;
-					}
-					if (AppManager.isAppInScene(AppConstant.MOUNT_AUTHENTICATE_PANEL))
-					{
-						NoticeManager.showNotify(LangMount.MOUNT_CMDLISTENER_FAILD_122);
-						return;
-					}
-					if (AppManager.isAppInScene(AppConstant.MOUNT_BREED_PANEL))
-					{
-						NoticeManager.showNotify(LangMount.MOUNT_CMDLISTENER_FAILD_123);
-						return;
-					}
-					if (AppManager.isAppInScene(AppConstant.MOUNT_INHERIT_PANEL))
-					{
-						NoticeManager.showNotify(LangMount.MOUNT_CMDLISTENER_FAILD_120);
-						return;
-					}
-					AppManager.showApp(AppConstant.MOUNT_PANEL);
-					break;
-				case skin.btnSpell:
-					AppManager.showApp(AppConstant.SPELL_PANEL);
-					break;
-//				case skin.btnGm:
-//					AppManager.showApp(AppConstant.GM_PANEL);
+//				case _skin.btnBackpack://背包
+//					AppManager.showApp(AppConstant.BACK_PACK_PANEL);
 //					break;
-				case skin.btnChengJiu:
-					AppManager.showApp(AppConstant.COUNTRY_PANEL);
-					break;
+//				case _skin.btnRole://人物
+//					AppManager.showApp(AppConstant.ROLE_PANEL);
+//					break;
+//				case _skin.btnHaoYou://好友
+//					AppManager.showApp(AppConstant.FRIEND_PANEL);
+//					break;
+//				case _skin.btnZudui://组队
+//					AppManager.showApp(AppConstant.TEAM_PANEL);
+//					break;
+//				case _skin.btnShangDian://商店
+//					AppManager.showApp(AppConstant.SHOP_SYSTEM_PANEL);
+//					break;
+//				case _skin.btnTask://任务
+//					AppManager.showApp(AppConstant.TASK_PANEL);
+//					break;
+//				case _skin.btnSheHui://装备
+//					AppManager.showApp(AppConstant.EQUIP_CHANGE);
+//					break;
+//				case _skin.btnMount://坐骑
+//					if (MainRoleManager.actorInfo.level < int(LanguageConfig.getText(LangMount.MOUNT_TIP_95))) //等级条件
+//					{
+//						NoticeManager.showNotify(LangMount.MOUNT_CMDLISTENER_FAILD_120);
+//						return;
+//					}
+//					MountManager.onCheckOpenPanelCondition(true);
+//					AppManager.showApp(AppConstant.MOUNT_PANEL);
+//					break;
+//				case _skin.btnSpell://技能
+//					AppManager.showApp(AppConstant.SPELL_PANEL);
+//					break;
+//				//				case _skin.btnGm:
+//				//					AppManager.showApp(AppConstant.GM_PANEL);
+//				//					break;
+//				case _skin.btnChengJiu://国家
+//					AppManager.showApp(AppConstant.COUNTRY_PANEL);
+//					break;
 			}
 		}
-
-
-
-
+		
+		
+		
+		
 		/**
 		 * 是否显示有人申请入家族的提示
 		 *
 		 */
 		private function addSheHuiTab() : void
 		{
-//			if (SocietyManager.hasSomeRequest())
-//			{
-//				PromptUtil.addTabIco(PromptUtil.TAB_PRIZE, skin.btnSheHui);
-//			}
-//			else
-//			{
-//				PromptUtil.removeTabIco(PromptUtil.TAB_PRIZE, skin.btnSheHui);
-//			}
+			//			if (SocietyManager.hasSomeRequest())
+			//			{
+			//				PromptUtil.addTabIco(PromptUtil.TAB_PRIZE, _skin.btnSheHui);
+			//			}
+			//			else
+			//			{
+			//				PromptUtil.removeTabIco(PromptUtil.TAB_PRIZE, _skin.btnSheHui);
+			//			}
 		}
-
-//		public function get shortcutMessageBar() : ShortcutMessageBar
-//		{
-//			return _shortcutMessageBar;
-//		}
-
-
-	}
+		
+		//		public function get shortcutMessageBar() : ShortcutMessageBar
+		//		{
+		//			return _shortcutMessageBar;
+		//		}
+        
+        public function resize(w : int, h : int) : void {
+            this.x = (w - this._skin.width) >> 1;
+            this.y = h - this._skin.height;
+            CONFIG::netDebug{
+                NetDebug.LOG("[ShortcutBar] [resize] x:" + this.x + ", y:" + this.y + ", w:" + this._skin.width + ", h:" + this._skin.height);
+            }
+        }
+    }
 }
-

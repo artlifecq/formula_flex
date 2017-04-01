@@ -14,7 +14,7 @@ package app.message.FestivalLotteryRuleConfigProto {
 		/**
 		 *  @private
 		 */
-		public static const COST:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FestivalLotteryRuleConfigProto.FestivalLotteryRuleProto.cost", "cost", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COST:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FestivalLotteryRuleConfigProto.FestivalLotteryRuleProto.cost", "cost", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var cost$field:int;
 
@@ -41,7 +41,7 @@ package app.message.FestivalLotteryRuleConfigProto {
 		/**
 		 *  @private
 		 */
-		public static const COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FestivalLotteryRuleConfigProto.FestivalLotteryRuleProto.count", "count", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FestivalLotteryRuleConfigProto.FestivalLotteryRuleProto.count", "count", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var count$field:int;
 
@@ -66,7 +66,7 @@ package app.message.FestivalLotteryRuleConfigProto {
 		/**
 		 *  @private
 		 */
-		public static const SHOW_GOODS:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.FestivalLotteryRuleConfigProto.FestivalLotteryRuleProto.show_goods", "showGoods", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SHOW_GOODS:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.FestivalLotteryRuleConfigProto.FestivalLotteryRuleProto.show_goods", "showGoods", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		[ArrayElementType("int")]
 		public var showGoods:Array = [];
@@ -77,15 +77,15 @@ package app.message.FestivalLotteryRuleConfigProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, cost$field);
 			}
 			if (hasCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, count$field);
 			}
 			for (var showGoods$index:uint = 0; showGoods$index < this.showGoods.length; ++showGoods$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, this.showGoods[showGoods$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, this.showGoods[showGoods$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -99,28 +99,28 @@ package app.message.FestivalLotteryRuleConfigProto {
 			var cost$count:uint = 0;
 			var count$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (cost$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FestivalLotteryRuleProto.cost cannot be set twice.');
 					}
 					++cost$count;
-					this.cost = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.cost = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FestivalLotteryRuleProto.count cannot be set twice.');
 					}
 					++count$count;
-					this.count = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.count = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.showGoods);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.showGoods);
 						break;
 					}
-					this.showGoods.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.showGoods.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				default:
 					super.readUnknown(input, tag);

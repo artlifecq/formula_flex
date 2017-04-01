@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.HeroLevelProto.level", "level", (22 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.HeroLevelProto.level", "level", (22 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EXP:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.HeroLevelProto.exp", "exp", (23 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const EXP:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.HeroLevelProto.exp", "exp", (23 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var exp$field:Int64;
 
@@ -64,7 +64,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const UPGRADE_EXP:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.HeroLevelProto.upgrade_exp", "upgradeExp", (24 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const UPGRADE_EXP:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.HeroLevelProto.upgrade_exp", "upgradeExp", (24 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var upgrade_exp$field:Int64;
 
@@ -90,15 +90,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 22);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level$field);
 			}
 			if (hasExp) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 23);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, exp$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, exp$field);
 			}
 			if (hasUpgradeExp) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 24);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, upgrade_exp$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, upgrade_exp$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -113,28 +113,28 @@ package app.message {
 			var exp$count:uint = 0;
 			var upgrade_exp$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 22:
 					if (level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroLevelProto.level cannot be set twice.');
 					}
 					++level$count;
-					this.level = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.level = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 23:
 					if (exp$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroLevelProto.exp cannot be set twice.');
 					}
 					++exp$count;
-					this.exp = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.exp = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 24:
 					if (upgrade_exp$count != 0) {
 						throw new flash.errors.IOError('Bad data format: HeroLevelProto.upgradeExp cannot be set twice.');
 					}
 					++upgrade_exp$count;
-					this.upgradeExp = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.upgradeExp = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -2,6 +2,8 @@ package com.rpgGame.app.ui.main.chat.laba
 {
 	import com.rpgGame.coreData.info.chat.ChatInfo;
 	
+	import feathers.controls.Group;
+	
 	import starling.display.Sprite;
 	
 	/**
@@ -9,7 +11,7 @@ package com.rpgGame.app.ui.main.chat.laba
 	 * @author fly.liuyang
 	 * 
 	 */	
-	public class VipChatCanvas extends Sprite
+	public class VipChatCanvas
 	{
 		private static const MAX_DIS_NUM:int = 5;
 		
@@ -19,8 +21,11 @@ package com.rpgGame.app.ui.main.chat.laba
 		private var maxShowNum:int;
 		private var chuanyinList:Array = [];
 		
-		public function VipChatCanvas()
+		private var _skin:Group;
+		
+		public function VipChatCanvas(skin:Group)
 		{
+			_skin=skin;
 			init();
 		}
 		
@@ -28,11 +33,12 @@ package com.rpgGame.app.ui.main.chat.laba
 		{
 			chuanyinCup = new Sprite();
 			chuanyinCup.name = "chuanyinCup";
-			addChild(chuanyinCup);
+			_skin.addChild(chuanyinCup);
 		}
 		
-		public function show():void
+		public function displayVIPChat(display:Boolean):void
 		{
+			_skin.visible=display;
 		}
 		
 		public function addOneChuanYin(info:ChatInfo):void

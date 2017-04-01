@@ -18,12 +18,15 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.type.EnumHurtType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
+	import com.rpgGame.netData.map.bean.PlayerInfo;
+	
+	import flash.utils.ByteArray;
 	
 	import app.cmd.SceneModuleMessages;
 	
 	import org.client.mainCore.bean.BaseBean;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 
 	/**
@@ -40,17 +43,17 @@ package com.rpgGame.app.cmdlistener.scene
 
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SCENE_YOU_ARE_DEAD, sceneYouAreDead);
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_RELIVE_FAIL, heroReliveFail);
+			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_YOU_ARE_DEAD, sceneYouAreDead);
+			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_RELIVE_FAIL, heroReliveFail);
 //			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SCENE_HERO_PERFECT_RELIVE_BROADCAST, perfectReliveBroadcast);
 			//折扣相关的
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_ORIGIN_RELIVE_DISCOUNT_TIME_CHANGED, originReliveDiscountTimeChange);
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_ORIGIN_PERFECT_RELIVE_DISCOUNT_TIME_CHANGED, prefectReliveDiscountTimeChange);
+			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_ORIGIN_RELIVE_DISCOUNT_TIME_CHANGED, originReliveDiscountTimeChange);
+			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_ORIGIN_PERFECT_RELIVE_DISCOUNT_TIME_CHANGED, prefectReliveDiscountTimeChange);
 			
 			//复活之后相关的
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SCENE_HERO_RELIVE_IN_SAME_SCENE, townReliveAndSameScene);
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SCENE_HERO_RELIVED_BROADCAST, heroReliveBroadcast);
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_HERO_RELIVE, heroRelive);
+			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_HERO_RELIVE_IN_SAME_SCENE, townReliveAndSameScene);
+			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_HERO_RELIVED_BROADCAST, heroReliveBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_HERO_RELIVE, heroRelive);
 			ReliveManager.init();
 			finish();
 		}
@@ -180,18 +183,18 @@ package com.rpgGame.app.cmdlistener.scene
 
 			playerData.x = tX;
 			playerData.y = tY;
-			playerData.hp = hp;
+			playerData.totalStat.hp = hp;
 			playerData.totalStat.life = maxHp;
-			playerData.mp = mp;
+			playerData.totalStat.mp = mp;
 			playerData.totalStat.mana = mana;
 			
 			FightFaceHelper.showAttChange(EnumHurtType.ADDHP, hp);
-			FightFaceHelper.showAttChange(EnumHurtType.ADDMP, mp);
+//			FightFaceHelper.showAttChange(EnumHurtType.ADDMP, mp);
 //			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_NORMAL,+hp);
 //			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_NORMAL,+mp);
 //			TrusteeshipManager.getInstance().stopAll();
 			MainRoleManager.updateActorStatus();
-			CharAttributeManager.setCharMp(MainRoleManager.actorInfo, MainRoleManager.actorInfo.mp);
+			CharAttributeManager.setCharMp(MainRoleManager.actorInfo, MainRoleManager.actorInfo.totalStat.mp);
 			GameCameraManager.tryUseCameraProperty();
 			//to do 给自己播放一个复活特效 
 			SpellAnimationHelper.addTargetEffect(MainRoleManager.actor, 
@@ -207,10 +210,14 @@ package com.rpgGame.app.cmdlistener.scene
 		 * 附带添加英雄消息 S2C_ADD_HERO 消息后面的内容
 		 *
 		 */
-		private function heroReliveBroadcast(buffer : ByteBuffer) : void
+		private function heroReliveBroadcast(buffer : ByteArray) : void
 		{
 			var data : HeroData = new HeroData();
-			HeroData.setEnterEyeUserInfo(data, buffer);
+			
+			var info : PlayerInfo = new PlayerInfo();
+			info.read(buffer);
+			
+			HeroData.setEnterEyeUserInfo(data, info);
 			var role : SceneRole = SceneRoleManager.getInstance().createHero(data);
 			//to do 给这个人播放一个复活特效 
 			SpellAnimationHelper.addTargetEffect(role, 

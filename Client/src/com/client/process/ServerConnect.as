@@ -1,6 +1,5 @@
 package com.client.process
 {
-	import com.client.ClientCmdID;
 	import com.client.ClientGlobal;
 	import com.client.cmdlistener.LoginCmdListener;
 	import com.client.sender.HeartSender;
@@ -12,20 +11,26 @@ package com.client.process
 	import com.game.engine3D.vo.SenderReferenceSet;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.adobe.Base64;
-
+	import com.rpgGame.netData.MessagePool;
+	
 	import flash.events.Event;
-	import flash.events.IOErrorEvent;
-	import flash.events.SecurityErrorEvent;
 	import flash.events.TimerEvent;
 	import flash.external.ExternalInterface;
+	import flash.media.Sound;
+	import flash.media.SoundChannel;
+	import flash.media.SoundTransform;
+	import flash.system.ApplicationDomain;
 	import flash.system.Security;
 	import flash.utils.ByteArray;
 	import flash.utils.Timer;
-
+	
 	import gs.TweenLite;
-
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.event.NetEvent;
+	import org.game.netCore.net.MessageMgr;
 
 	/**
 	 *
@@ -89,40 +94,7 @@ package com.client.process
 			//
 			connect();
 		}
-
-		private function connect() : void
-		{
-			_allowReconnect = true;
-			_errMsg = "";
-			TweenLite.killDelayedCallsTo(onConnect);
-			if (_connectDelay > 0)
-			{
-				TweenLite.delayedCall(_connectDelay * 0.001, onConnect);
-			}
-			else
-			{
-				onConnect();
-			}
-		}
-
-		private function onConnect() : void
-		{
-			SocketConnection.mainSocket.addEventListener(Event.CONNECT, onMainSocketConnect);
-			SocketConnection.mainSocket.addEventListener(IOErrorEvent.IO_ERROR, onConnectError);
-			SocketConnection.mainSocket.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onConnectError);
-			SocketConnection.mainSocket.addEventListener(Event.CLOSE, onSocketClose);
-			SocketConnection.mainSocket.connect(ClientGlobal.loginIP, ClientGlobal.loginPort);
-			//
-			_retryConnectCnt = 0;
-			if (!_retryTimer)
-			{
-				_retryTimer = new Timer(1000, 0);
-			}
-			_retryTimer.addEventListener(TimerEvent.TIMER, onRetryConnect);
-			_retryTimer.reset();
-			_retryTimer.start();
-		}
-
+		
 		private function loadPolicys() : void
 		{
 			if (ExternalInterface.available)
@@ -137,15 +109,49 @@ package com.client.process
 			GameLog.addShow("加载跨域文件 : ", policyFileUrl);
 		}
 
-		private function onMainSocketConnect(e : Event = null) : void
+		private function connect() : void
+		{
+			_allowReconnect = true;
+			_errMsg = "";
+			
+			var messagePool:MessagePool = new MessagePool();
+			SocketConnection.messageMgr.msgObjPool = messagePool;
+			
+			TweenLite.killDelayedCallsTo(onConnect);
+			if (_connectDelay > 0)
+			{
+				TweenLite.delayedCall(_connectDelay * 0.001, onConnect);
+			}
+			else
+			{
+				onConnect();
+			}
+		}
+
+		private function onConnect() : void
+		{
+			SocketConnection.messageMgr.addEventListener(MessageMgr.CLIENT_CONNECT_TO_SERVER, socketConnectHandle);
+			SocketConnection.messageMgr.addEventListener(MessageMgr.CLIENT_FAILD_TO_SERVER, socketConnectFailHandle);
+			SocketConnection.messageMgr.Connect(ClientGlobal.loginIP, ClientGlobal.loginPort);
+			//
+			_retryConnectCnt = 0;
+			if (!_retryTimer)
+			{
+				_retryTimer = new Timer(1000, 0);
+			}
+			_retryTimer.addEventListener(TimerEvent.TIMER, onRetryConnect);
+			_retryTimer.reset();
+			_retryTimer.start();
+		}
+
+		protected function socketConnectHandle(event:NetEvent):void
 		{
 			_allowReconnect = true;
 			_errMsg = "";
 			GameAlert.hide();
-			SocketConnection.mainSocket.removeEventListener(Event.CONNECT, onMainSocketConnect);
-			SocketConnection.mainSocket.removeEventListener(IOErrorEvent.IO_ERROR, onConnectError);
-			SocketConnection.mainSocket.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onConnectError);
-			//
+			SocketConnection.messageMgr.removeEventListener(MessageMgr.CLIENT_CONNECT_TO_SERVER, socketConnectHandle);
+			SocketConnection.messageMgr.removeEventListener(MessageMgr.CLIENT_FAILD_TO_SERVER, socketConnectFailHandle);
+			
 			if (_retryTimer)
 			{
 				_retryTimer.stop();
@@ -159,29 +165,34 @@ package com.client.process
 			}
 			else
 			{
-				HeartSender.start();
+//				HeartSender.start();
 				LoginCmdListener.start();
 				sendLogin();
 			}
 		}
+		
+		protected function socketConnectFailHandle(event:NetEvent):void
+		{
+			closeSocket(500, "错误");
+		}
 
 		private function onLoginSuccessHandler() : void
 		{
-			SenderReferenceSet.start();
+			/*SenderReferenceSet.start();
 			completeProcess();
 			if (ClientGlobal.mainEntry)
 			{
 				ClientGlobal.mainEntry.reEnterGame();
-			}
+			}*/
+			GameLog.addShow("登录成功了...",this);
+			completeProcess();
 		}
 
 		private function closeSocket(deley : int, msg : String) : void
 		{
 			_connectDelay = deley;
 			GameLog.addShow("服务器连接" + msg);
-			SocketConnection.mainSocket.removeEventListener(Event.CLOSE, onSocketClose);
-			SenderReferenceSet.stop();
-			SocketConnection.mainSocket.close(); //关闭原来的socket
+//			SenderReferenceSet.stop();
 			//
 			if (_retryTimer)
 			{
@@ -254,48 +265,36 @@ package com.client.process
 			}
 			return 0;
 		}
-
+		
 		private function sendLogin() : void
 		{
 			LoginCmdListener.onLoginSuccessHandler = onLoginSuccessHandler;
-			//
 			var oid : int = getOid(ClientGlobal.loginName);
 			GameLog.addShow("oid:" + oid);
 			if (oid == _tencentOid)
 			{
 				sendTGW(ClientGlobal.loginIP, ClientGlobal.loginPort);
 			}
-			var ret : ByteArray = new ByteArray();
 			if (!ClientGlobal.loginKey)
 			{
-				trace(ClientGlobal.loginName);
-				ret.writeUTF(ClientGlobal.loginName);
-				SocketConnection.send(ClientCmdID.C2S_CREATE_OR_LOGIN_BY_NAME, ret);
+				LoginSender.SendLoginMessage();
 			}
 			else
 			{
-				LoginSender.login(ClientGlobal.loginName, ClientGlobal.loginKey);
+				
 			}
-			//
 			GameLog.addShow("连接socket成功,发送登录消息", ClientGlobal.loginName, ClientGlobal.loginKey);
 		}
 
+		/**
+		 * 断线重链 
+		 * 
+		 */		
 		private function sendReLogin() : void
 		{
 			LoginCmdListener.onLoginSuccessHandler = onLoginSuccessHandler;
 			var auth : String = ClientGlobal.auth;
 			var sign : String = ClientGlobal.sign;
-			//
-			var signBy : ByteArray = new ByteArray();
-			signBy.writeUTF(auth);
-			signBy.writeUTFBytes(sign);
-
-			var by : ByteArray = new ByteArray();
-			by.writeUTFBytes(sign);
-			//
-			SocketConnection.mainSocket.easyProtocolOffset = 0;
-			SocketConnection.send(ClientCmdID.C2S_RECONNECTED, signBy);
-			SocketConnection.mainSocket.easyProtocolOffset = by[0];
 		}
 
 		/**
@@ -313,8 +312,8 @@ package com.client.process
 			GameLog.addShow(str);
 			GameLog.addShow("===========================TGW=================== ");
 			GameLog.addShow("data.length:" + data.length);
-			SocketConnection.mainSocket.writeBytes(data);
-			SocketConnection.mainSocket.flush();
+			SocketConnection_protoBuffer.mainSocket.writeBytes(data);
+			SocketConnection_protoBuffer.mainSocket.flush();
 		}
 
 		private function showErrorMessage(msg : String) : void
@@ -336,53 +335,56 @@ package com.client.process
 			_retryConnectCnt++;
 			GameLog.addShow("连接Socket，第" + _retryConnectCnt + "次尝试: ", ClientGlobal.loginIP, ClientGlobal.loginPort);
 			//
-			SocketConnection.mainSocket.connect(ClientGlobal.loginIP, ClientGlobal.loginPort);
+			SocketConnection_protoBuffer.mainSocket.connect(ClientGlobal.loginIP, ClientGlobal.loginPort);
 			if (_retryConnectCnt > 60)
 			{
 				showErrorMessage("服务器连接不上，继续尝试重新连接中，请检查您的网络环境！");
 			}
 		}
 
-//		private function playCreateCharSound() : void
-//		{
-//			try
-//			{
-//				var obj : * = ApplicationDomain.currentDomain.getDefinition("SOUND_Create_User");
-//				if (obj)
-//				{
-//					var cls : Class = obj as Class;
-//					_sound = new cls();
-//				}
-//				if (_sound)
-//				{
-//					_soundTransform = new SoundTransform(0);
-//					_soundChannel = _sound.play(0, 0, _soundTransform);
-//					updateSoundTransFrom();
-//				}
-//			}
-//			catch (e : Error)
-//			{
-//				GameLog.addShow("播放创角音效error");
-//			}
-//		}
+		private var _sound:Sound;
+		private var _soundTransform:SoundTransform;
+		private var _soundChannel:SoundChannel;
+		private function playCreateCharSound() : void
+		{
+			try
+			{
+				var obj : * = ApplicationDomain.currentDomain.getDefinition("SOUND_Create_User");
+				if (obj)
+				{
+					var cls : Class = obj as Class;
+					_sound = new cls();
+				}
+				if (_sound)
+				{
+					_soundTransform = new SoundTransform(0);
+					_soundChannel = _sound.play(0, 0, _soundTransform);
+					updateSoundTransFrom();
+				}
+			}
+			catch (e : Error)
+			{
+				GameLog.addShow("播放创角音效error");
+			}
+		}
 
-//		private function updateSoundTransFrom() : void
-//		{
-//			ClientGlobal.stage.addEventListener(Event.ENTER_FRAME, onSoundTransFromEnterFrame);
-//		}
-//
-//		protected function onSoundTransFromEnterFrame(event : Event) : void
-//		{
-//			if (_soundTransform.volume < 0.8)
-//			{
-//				_soundTransform.volume += 0.01;
-//				_soundChannel.soundTransform = _soundTransform;
-//			}
-//			else
-//			{
-//				ClientGlobal.stage.removeEventListener(Event.ENTER_FRAME, onSoundTransFromEnterFrame);
-//			}
-//		}
+		private function updateSoundTransFrom() : void
+		{
+			ClientGlobal.stage.addEventListener(Event.ENTER_FRAME, onSoundTransFromEnterFrame);
+		}
+
+		protected function onSoundTransFromEnterFrame(event : Event) : void
+		{
+			if (_soundTransform.volume < 0.8)
+			{
+				_soundTransform.volume += 0.01;
+				_soundChannel.soundTransform = _soundTransform;
+			}
+			else
+			{
+				ClientGlobal.stage.removeEventListener(Event.ENTER_FRAME, onSoundTransFromEnterFrame);
+			}
+		}
 
 		override public function dispose() : void
 		{

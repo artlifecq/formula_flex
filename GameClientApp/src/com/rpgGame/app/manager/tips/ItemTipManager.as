@@ -1,10 +1,9 @@
 package com.rpgGame.app.manager.tips
 {
-	import com.rpgGame.app.sender.ChatSender;
 	import com.rpgGame.core.manager.tips.TipManager;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.info.item.GetShowItemVo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.type.TipType;
 	
 	import flash.geom.Point;
@@ -24,7 +23,7 @@ package com.rpgGame.app.manager.tips
 	public class ItemTipManager
 	{
 		/** 等待显示tip是的iteminfo  */		
-		private static var _waiteItemInfo:ItemInfo;
+		private static var _waiteItemInfo:ClientItemInfo;
 		/** 等待显示tips的itemcfgid  */		
 		private static var _waiteTipsCfgId:int;
 		/** 等待显示tips的坐标位置 */		
@@ -43,9 +42,9 @@ package com.rpgGame.app.manager.tips
 		 * @param pos
 		 * 
 		 */		
-		public static function showItemTips(cfgId:int,itemInfo:ItemInfo = null,pos:Point = null):void
+		public static function showItemTips(cfgId:int,itemInfo:ClientItemInfo = null,pos:Point = null):void
 		{
-			if(ItemCfgData.hasItemCfg(cfgId))
+			if(ItemConfig.hasItemCfg(cfgId))
 			{
 				if(itemInfo != null)
 				{
@@ -62,13 +61,13 @@ package com.rpgGame.app.manager.tips
 				_waiteTipsCfgId = cfgId;
 				_waiteItemInfo = itemInfo;
 				_waitePos = pos;
-				ChatSender.sendToGetItmeInfo(cfgId);
+//				ChatSender.sendToGetItmeInfo(cfgId);
 			}
 		}
 		
 		public static function showChatItemTips(cfgId:int,getShowItemVo:GetShowItemVo, pos:Point = null):void
 		{
-			if(ItemCfgData.hasItemCfg(cfgId))
+			if(ItemConfig.hasItemCfg(cfgId))
 			{
 				showItemTips(getShowItemVo.cfgId,null,pos);
 			}
@@ -77,7 +76,7 @@ package com.rpgGame.app.manager.tips
 				_waiteTipsCfgId = cfgId;
 				_waiteGetShowItemVo = getShowItemVo;
 				_waitePos = pos;
-				ChatSender.sendToGetItmeInfo(cfgId);
+//				ChatSender.sendToGetItmeInfo(cfgId);
 			}
 		}
 

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 配置列表
+* @author L.L.M.Sunny
+* 创建时间：2015-8-26 下午2:10:12
+*
+-->
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="100%"
+		 height="100%"
+		 initialize="onInitialize()"
+		 creationComplete="onCreationComplete()">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.cfg.ConfigData;
+			import com.editor.data.ConfigDesc;
+			import com.editor.data.FuncTagInfo;
+			import com.editor.data.TabelData;
+			import com.editor.data.TabelFieldData;
+			import com.editor.events.ConfigListEvent;
+			import com.editor.manager.ConfigEditorUtil;
+			import com.editor.manager.DataManager;
+			import com.editor.manager.DataStructuresManager;
+			import com.editor.manager.SceneManager;
+			import com.editor.utils.FileUtil;
+
+			import mx.collections.ArrayCollection;
+
+			import org.client.mainCore.manager.EventManager;
+
+			[Bindable]
+			/** 配置数据 **/
+			private var _cfgItems : ArrayCollection;
+			private var _verPos : Number;
+			private var _searchKey : String = "";
+			private var _currSceneChecked : Boolean = false;
+			private var _funcInfo : FuncTagInfo;
+			public var submitCallback : Function = null;
+
+			private function onInitialize() : void
+			{
+			}
+
+			private function onCreationComplete() : void
+			{
+				_verPos = 0;
+				_cfgItems = new ArrayCollection();
+				pullData();
+				EventManager.addEvent(ConfigListEvent.PULL_CONFIG_LIST, pullData);
+				EventManager.addEvent(ConfigListEvent.SELECTED_CONFIG_DATA, onSelectedConfigData);
+			}
+
+			public function destroy() : void
+			{
+				_cfgItems = null;
+				_funcInfo = null;
+				submitCallback = null;
+				EventManager.removeEvent(ConfigListEvent.PULL_CONFIG_LIST, pullData);
+				EventManager.removeEvent(ConfigListEvent.SELECTED_CONFIG_DATA, onSelectedConfigData);
+			}
+
+			private function pullData(name : String = null) : void
+			{
+				if (!_funcInfo || !_cfgItems)
+					return;
+				var tabelName : String = _funcInfo.tabelName;
+				if (name && (tabelName != name))
+					return;
+				var tabel : TabelData = DataStructuresManager.getInstance().getTabel(tabelName);
+				if (!tabel)
+					return;
+				var configDesc : ConfigDesc = tabel.getConfigDesc();
+				_verPos = dataGrid.verticalScrollPosition;
+				var sceneField : TabelFieldData = DataStructuresManager.getInstance().getCorrelationField(tabel, TabelFieldData.SCENE_FIELD);
+
+				currSceneCheck.visible = (sceneField != null);
+				var majorKeyField : TabelFieldData = tabel.majorKeyField;
+				var idFieldName : String = majorKeyField ? majorKeyField.mFieldName : "id";
+				var nameFieldName : String = "name";
+				if (idFieldName == nameFieldName)
+					idFieldName = "id";
+
+				var searchFields : Array = [idFieldName, nameFieldName];
+				if (majorKeyField && searchFields.indexOf(majorKeyField.mFieldName) == -1)
+					searchFields.push(majorKeyField.mFieldName);
+				var absoluteField : String = null;
+				var absoluteValue : String = null;
+				if (sceneField && _currSceneChecked)
+				{
+					absoluteField = sceneField.mFieldName;
+					absoluteValue = String(SceneManager.getInstance().mapId);
+				}
+
+				var cacheDic : Dictionary = DataStructuresManager.getInstance().getCorrelationCacheDatas(configDesc, _searchKey, searchFields, absoluteField, absoluteValue);
+				var datas : Array = FileUtil.dictToArray(cacheDic);
+				FileUtil.sortDatas(datas);
+
+				headerID.dataField = idFieldName;
+				headerID.headerText = (configDesc.fieldLabels && configDesc.fieldLabels[idFieldName]) ? configDesc.fieldLabels[idFieldName] : TabelFieldData.getFieldLabelByName(idFieldName);
+				headerName.dataField = nameFieldName;
+				headerName.headerText = (configDesc.fieldLabels && configDesc.fieldLabels[nameFieldName]) ? configDesc.fieldLabels[nameFieldName] : TabelFieldData.getFieldLabelByName(nameFieldName);
+
+				_cfgItems.source = datas;
+				dataGrid.dataProvider = _cfgItems;
+
+				dataGrid.selectedItem = configDesc.selectedData;
+				var index : int = _cfgItems.getItemIndex(configDesc.selectedData);
+				if (index > -1)
+					callLater(dataGrid.scrollToIndex, [index]);
+
+				//callLater(resetScollPos);
+			}
+
+			private function onSelectedConfigData(data : ConfigData) : void
+			{
+				if (_funcInfo && _funcInfo.tabelName == data.tabelName)
+				{
+					dataGrid.selectedItem = data;
+					var index : int = _cfgItems.getItemIndex(data);
+					if (index > -1)
+						callLater(dataGrid.scrollToIndex, [index]);
+				}
+			}
+
+			private function resetScollPos() : void
+			{
+				if (_verPos > dataGrid.maxVerticalScrollPosition)
+					_verPos = dataGrid.maxVerticalScrollPosition;
+
+				dataGrid.verticalScrollPosition = _verPos;
+			}
+
+			protected function data_selectionChangeHandler(event : MouseEvent) : void
+			{
+				var configData : ConfigData = dataGrid.selectedItem as ConfigData;
+				if (!configData)
+					return;
+				EventManager.dispatchEvent(ConfigListEvent.CONFIG_SELECTED, configData);
+			}
+
+			protected function data_doubleClickHandler(event : MouseEvent) : void
+			{
+				var configData : ConfigData = dataGrid.selectedItem as ConfigData;
+				if (!configData)
+					return;
+				ConfigEditorUtil.showConfigEditView(_funcInfo.funcTag + "配置", configData, onSubmitCallback);
+			}
+
+			private function onSubmitCallback(data : ConfigData) : void
+			{
+				pullData();
+				if (submitCallback != null)
+					submitCallback();
+			}
+
+			private function btn_add_clickHandler(event : MouseEvent) : void
+			{
+				var tabelName : String = _funcInfo.tabelName;
+				var tabel : TabelData = DataStructuresManager.getInstance().getTabel(tabelName);
+				var configDesc : ConfigDesc = tabel.getConfigDesc();
+				var cfg : ConfigData = ConfigData.create(configDesc, null, null, tabel.dataConstructor, true);
+				if (DataManager.getInstance().createDataSetParams(_funcInfo, cfg)) {
+				    pullData();
+                } else {
+                    ConfigData.remove(configDesc, cfg.id);
+                }
+			}
+
+			private function btn_del_clickHandler(event : MouseEvent) : void
+			{
+				var configData : ConfigData = dataGrid.selectedItem as ConfigData;
+				if (!configData)
+					return;
+				var tabelName : String = _funcInfo.tabelName;
+				var tabel : TabelData = DataStructuresManager.getInstance().getTabel(tabelName);
+				var configDesc : ConfigDesc = tabel.getConfigDesc();
+				ConfigData.remove(configDesc, configData.id);
+				DataManager.getInstance().removeData(_funcInfo, configData);
+				pullData();
+			}
+
+			protected function button1_clickHandler(event : MouseEvent) : void
+			{
+				_searchKey = searchText.text;
+				pullData();
+			}
+
+			protected function inputText_keyDownHandler(event : KeyboardEvent) : void
+			{
+				if (event.keyCode == 13)
+				{
+					_searchKey = searchText.text;
+					pullData();
+				}
+			}
+
+			protected function inputText_focusOutHandler(event : FocusEvent) : void
+			{
+				_searchKey = searchText.text;
+				pullData();
+			}
+
+			protected function currSceneCheck_changeHandler(event : Event) : void
+			{
+				_currSceneChecked = currSceneCheck.selected;
+				pullData();
+			}
+
+			public function set funcInfo(value : FuncTagInfo) : void
+			{
+				_funcInfo = value;
+				pullData();
+			}
+
+			private function setDataGridEnabled(value : Boolean) : void
+			{
+				dataGrid.enabled = value;
+			}
+
+			protected function dataGrid_rightClickHandler(event : MouseEvent) : void
+			{
+				var configData : ConfigData = dataGrid.selectedItem as ConfigData;
+				if (!configData)
+					return;
+//				dataGrid.selectedItem = null;
+//				EventManager.dispatchEvent(ConfigListEvent.CONFIG_SELECTED, _funcInfo, configData);
+			}
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<s:TextInput id="searchText"
+				 x="10"
+				 y="2"
+				 width="200"
+				 chromeColor="#FFFFFF"
+				 contentBackgroundColor="#444444"
+				 fontFamily="SimSun"
+				 keyDown="inputText_keyDownHandler(event)"
+				 focusOut="inputText_focusOutHandler(event)">
+	</s:TextInput>
+	<s:Button x="220"
+			  y="2"
+			  label="搜索"
+			  fontFamily="SimSun"
+			  click="button1_clickHandler(event)"/>
+	<s:Button x="10"
+			  y="30"
+			  label="增加项"
+			  id="btn_add"
+			  fontFamily="SimSun"
+			  click="btn_add_clickHandler(event)"/>
+	<s:Button x="100"
+			  y="30"
+			  label="删除项"
+			  id="btn_del"
+			  fontFamily="SimSun"
+			  click="btn_del_clickHandler(event)"/>
+	<s:CheckBox id="currSceneCheck"
+				selected="false"
+				x="200"
+				y="30"
+				label="仅显示当前场景"
+				fontFamily="SimSun"
+				change="currSceneCheck_changeHandler(event)"/>
+	<mx:DataGrid id="dataGrid"
+				 x="0"
+				 y="55"
+				 width="100%"
+				 height="100%"
+				 dataProvider="{_cfgItems}"
+				 click="data_selectionChangeHandler(event)"
+				 rightClick="dataGrid_rightClickHandler(event)"
+				 doubleClickEnabled="true"
+				 doubleClick="data_doubleClickHandler(event)"
+				 editable="false"
+				 dragEnabled="true">
+		<mx:columns>
+			<mx:DataGridColumn id="headerID"
+							   headerText="ID"
+							   dataField="id"
+							   width="50"/>
+			<mx:DataGridColumn id="headerName"
+							   headerText="名称"
+							   dataField="name"/>
+		</mx:columns>
+	</mx:DataGrid>
+</s:Group>

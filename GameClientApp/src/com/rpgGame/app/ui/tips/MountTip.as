@@ -11,7 +11,7 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.StatNameCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.mount.MountConfigData;
 	import com.rpgGame.coreData.cfg.mount.MountMiscData;
 	import com.rpgGame.coreData.cfg.mount.MountSpeciesData;
@@ -26,7 +26,6 @@ package com.rpgGame.app.ui.tips
 	import feathers.controls.Label;
 	
 	import org.client.mainCore.ds.HashMap;
-	import org.mokylin.skin.app.tips.MountTipSkin;
 	
 	/**
 	 * 坐骑tips 
@@ -35,7 +34,7 @@ package com.rpgGame.app.ui.tips
 	 */	
 	public class MountTip extends SkinUI implements ITip
 	{
-		private var _mountTip:MountTipSkin;
+		private var _mountTip:Object;//MountTipSkin;
 		/** 图标icon **/
 		private var titleIconFace:IconCDFace;
 		/** 坐骑数据 **/
@@ -47,7 +46,7 @@ package com.rpgGame.app.ui.tips
 		
 		public function MountTip()
 		{
-			_mountTip = new MountTipSkin();
+//			_mountTip = new MountTipSkin();
 			super( _mountTip );
 			initTip();
 		}
@@ -150,7 +149,7 @@ package com.rpgGame.app.ui.tips
 				var mountStatus:String = LanguageConfig.getText( LangMount.MOUNT_TIPS_5, MountManager.getMountStatue( mountData ) );
 				//携带等级
 				var requiredLevelColor:uint;
-				if( MainRoleManager.actorInfo.level < mountSpeciesData.requiredLevel )
+				if( MainRoleManager.actorInfo.totalStat.level < mountSpeciesData.requiredLevel )
 					requiredLevelColor = StaticValue.COLOR_CODE_13;
 				else
 					requiredLevelColor = StaticValue.COLOR_CODE_15;
@@ -288,7 +287,8 @@ package com.rpgGame.app.ui.tips
 					var cfgId:int = mountData.spellMap.getValue(i);
 					if( cfgId != 0 )
 					{
-						var spellBookGroupName:String = ItemCfgData.getItemNameWithQualityColor(cfgId);
+//						var spellBookGroupName:String = ItemCfgData.getItemNameWithQualityColor(cfgId);
+						var spellBookGroupName:String=ItemConfig.getItemName(cfgId);
 						spellStatStr += "  " + spellBookGroupName + "<br/>";
 					}
 				}

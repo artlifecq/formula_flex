@@ -39,8 +39,8 @@ package com.rpgGame.core.manager.tips
 		 */
 		public static function setup() : void
 		{
-			//Starling.current.nativeStage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveEventHandler);
-			//Starling.current.nativeStage.addEventListener(MouseEvent.CLICK, onMouseClickEventHandler);
+			Starling.current.nativeStage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveEventHandler);
+			Starling.current.nativeStage.addEventListener(MouseEvent.CLICK, onMouseClickEventHandler);
 		}
 
 		/**
@@ -58,7 +58,7 @@ package com.rpgGame.core.manager.tips
 		 */
 		public static function show(target : DisplayObject, info : IBaseTipsInfo) : void
 		{
-			return;
+//			return;
 			if (target != null)
 			{
 				if (_tipDatas.getValue(target) == info)

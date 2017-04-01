@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.SpellCategoryLearnProto.name", "name", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.SpellCategoryLearnProto.name", "name", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var name$field:String;
 
@@ -38,7 +38,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MUTEX:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellCategoryLearnProto.mutex", "mutex", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MUTEX:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellCategoryLearnProto.mutex", "mutex", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var mutex$field:int;
 
@@ -65,7 +65,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SPELLS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.SpellCategoryLearnProto.spells", "spells", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpellLearnProto; });
+		public static const SPELLS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.SpellCategoryLearnProto.spells", "spells", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpellLearnProto; });
 
 		[ArrayElementType("app.message.SpellLearnProto")]
 		public var spells:Array = [];
@@ -76,15 +76,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, name$field);
 			}
 			if (hasMutex) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, mutex$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, mutex$field);
 			}
 			for (var spells$index:uint = 0; spells$index < this.spells.length; ++spells$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.spells[spells$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.spells[spells$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -98,24 +98,24 @@ package app.message {
 			var name$count:uint = 0;
 			var mutex$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellCategoryLearnProto.name cannot be set twice.');
 					}
 					++name$count;
-					this.name = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.name = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 2:
 					if (mutex$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellCategoryLearnProto.mutex cannot be set twice.');
 					}
 					++mutex$count;
-					this.mutex = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.mutex = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
-					this.spells.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.SpellLearnProto()));
+					this.spells.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.SpellLearnProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -5,11 +5,9 @@ package com.rpgGame.app.ui.tips
 	
 	import starling.display.Sprite;
 	
-	import utils.TimerServer;
-	
 	public class BaseTip extends Sprite
 	{
-		private var tipBGSkin:BaseTipsSkin;
+		private var tipBGSkin:Object;//BaseTipsSkin;
 		
 		public function BaseTip()
 		{

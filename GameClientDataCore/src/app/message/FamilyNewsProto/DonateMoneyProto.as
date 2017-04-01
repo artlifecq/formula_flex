@@ -15,7 +15,7 @@ package app.message.FamilyNewsProto {
 		/**
 		 *  @private
 		 */
-		public static const DONATE_MONEY_MEMBER:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.DonateMoneyProto.donate_money_member", "donateMoneyMember", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberIdAndNameProto; });
+		public static const DONATE_MONEY_MEMBER:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.DonateMoneyProto.donate_money_member", "donateMoneyMember", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberIdAndNameProto; });
 
 		private var donate_money_member$field:app.message.FamilyNewsProto.MemberIdAndNameProto;
 
@@ -38,7 +38,7 @@ package app.message.FamilyNewsProto {
 		/**
 		 *  @private
 		 */
-		public static const MONEY:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.FamilyNewsProto.DonateMoneyProto.money", "money", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MONEY:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.FamilyNewsProto.DonateMoneyProto.money", "money", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var money$field:Int64;
 
@@ -61,7 +61,7 @@ package app.message.FamilyNewsProto {
 		/**
 		 *  @private
 		 */
-		public static const CONTRIBUTION:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FamilyNewsProto.DonateMoneyProto.contribution", "contribution", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CONTRIBUTION:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FamilyNewsProto.DonateMoneyProto.contribution", "contribution", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var contribution$field:int;
 
@@ -91,15 +91,15 @@ package app.message.FamilyNewsProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasDonateMoneyMember) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, donate_money_member$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, donate_money_member$field);
 			}
 			if (hasMoney) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, money$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, money$field);
 			}
 			if (hasContribution) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, contribution$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, contribution$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -114,7 +114,7 @@ package app.message.FamilyNewsProto {
 			var money$count:uint = 0;
 			var contribution$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (donate_money_member$count != 0) {
@@ -122,21 +122,21 @@ package app.message.FamilyNewsProto {
 					}
 					++donate_money_member$count;
 					this.donateMoneyMember = new app.message.FamilyNewsProto.MemberIdAndNameProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.donateMoneyMember);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.donateMoneyMember);
 					break;
 				case 2:
 					if (money$count != 0) {
 						throw new flash.errors.IOError('Bad data format: DonateMoneyProto.money cannot be set twice.');
 					}
 					++money$count;
-					this.money = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.money = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 3:
 					if (contribution$count != 0) {
 						throw new flash.errors.IOError('Bad data format: DonateMoneyProto.contribution cannot be set twice.');
 					}
 					++contribution$count;
-					this.contribution = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.contribution = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -5,8 +5,6 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.info.society.SocietySpellTotalData;
 
-	import org.mokylin.skin.app.tips.SocietySpellTotalTipSkin;
-
 	/**
 	 *
 	 * 帮派技能总tips
@@ -27,12 +25,12 @@ package com.rpgGame.app.ui.tips
 			return _instance;
 		}
 
-		private var _tipSkin : SocietySpellTotalTipSkin;
+		private var _tipSkin : Object;//SocietySpellTotalTipSkin;
 		private var _posy : int = 0;
 
 		public function SocietySpellTotalTip()
 		{
-			_tipSkin = new SocietySpellTotalTipSkin();
+//			_tipSkin = new SocietySpellTotalTipSkin();
 			super(_tipSkin);
 			initTip();
 		}

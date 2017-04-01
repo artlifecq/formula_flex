@@ -1,21 +1,28 @@
 package com.rpgGame.app.cmdlistener.engine
 {
 	import com.game.engine3D.manager.Stage3DLayerManager;
+	import com.game.engine3D.utils.PathFinderUtil;
 	import com.game.mainCore.core.events.KeyCodeEvent;
 	import com.game.mainCore.core.info.key.KeysCodeInfo;
+	import com.game.mainCore.core.timer.GameTimer;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.controller.keyboard.KeyFuncProcess;
 	import com.rpgGame.app.controller.keyboard.KeyNormalProcess;
 	import com.rpgGame.app.controller.keyboard.KeySpellProcess;
 	import com.rpgGame.app.manager.input.KeyMoveManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.scene.SceneSwitchManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.state.role.control.ShapeshiftingStateReference;
 	import com.rpgGame.core.manager.input.KeyManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.key.KeyCodeType;
 	import com.rpgGame.coreData.info.key.KeyInfo;
 	import com.rpgGame.coreData.info.key.MulitKeyInfo;
+	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.events.Event;
+	import flash.geom.Vector3D;
 	import flash.ui.Keyboard;
 	
 	import feathers.controls.TextInput;
@@ -44,6 +51,10 @@ package com.rpgGame.app.cmdlistener.engine
 		private static var _singleInfo : KeyInfo;
 		private static var _mixInfo : MulitKeyInfo;
 		private static var _orderInfo : MulitKeyInfo;
+        
+        private var _longPressKey : Vector.<KeyInfo> = new Vector.<KeyInfo>();
+        
+        private var _timer : GameTimer;
 
 		public function KeyboardCmdListener()
 		{
@@ -56,6 +67,9 @@ package com.rpgGame.app.cmdlistener.engine
 			EventManager.addEvent(KeyCodeEvent.KEYS_UP, onKeysUp);
 			EventManager.addEvent(KeyCodeEvent.KEYS_CLEAR, onKeysClear);
 			Stage3DLayerManager.stage.addEventListener(Event.DEACTIVATE, onDeactivate);
+            
+            this._timer = new GameTimer("KeyboardCmdListener", 500, 0, onTimer);
+            this._timer.start();
 
 			super.finish();
 		}
@@ -67,23 +81,10 @@ package com.rpgGame.app.cmdlistener.engine
 			{
 				return;
 			}
-//测试代码，主要用来作场景处理的，临时的，当按回车键时，会执行换场景
-			if (info.code == Keyboard.TAB)
-			{
-				trace("点击了TAB键了！！！要换场景了");
-				if(MainRoleManager.actorInfo.mapID == 6)
-					MainRoleManager.actorInfo.mapID = 8;
-				else
-					MainRoleManager.actorInfo.mapID = 6;
-				SceneSwitchManager.changeMap();
-				return;
-			}
 /////////////////////////////////////////////////////
 			if (info.code == Keyboard.H)
 			{
-				if (!ClientConfig.isRelease)
-				{
-				}
+				
 				return;
 			}
 
@@ -119,6 +120,7 @@ package com.rpgGame.app.cmdlistener.engine
 			}
 			//执行动作(执行已经在down状态的按键逻辑,也执行顺序键按键逻辑)
 			excuteDownKey();
+            this.addLongPressKey(KeyManager.getSingleInfo(info.code));
 		}
 
 		private function onKeysUp(info : KeysCodeInfo) : void
@@ -154,6 +156,7 @@ package com.rpgGame.app.cmdlistener.engine
 					_upKeyList.splice(len, 1);
 				}
 			}
+            this.delLongPressKey(KeyManager.getSingleInfo(info.code));
 		}
 
 		private function onKeysClear() : void
@@ -163,6 +166,7 @@ package com.rpgGame.app.cmdlistener.engine
 			_upKeyList.length = 0;
 			_upKeyInfoList.length = 0;
 			_orderKeyList.length = 0;
+            this._longPressKey.length = 0;
 		}
 
 		private function onDeactivate(e : Event) : void
@@ -304,7 +308,7 @@ package com.rpgGame.app.cmdlistener.engine
 
 		private function singleKeyDownExec(info : KeyInfo) : void
 		{
-			//			GameLog.addShow("singleKeyDownExec--执行单键:"+info.name+"_"+info.type+"_"+info.code);
+//			GameLog.addShow("singleKeyDownExec--:"+info.name+"_"+info.type+"_"+info.code);
 			////////////////////////////////////////// 
 			switch (info.type)
 			{
@@ -337,6 +341,10 @@ package com.rpgGame.app.cmdlistener.engine
 					///////////////////////////////////////////
 					KeyMoveManager.getInstance().setKeyStatus(info, false);
 					break;
+                case KeyCodeType.SKILL:
+                    info.funcS = info.funcID.toString();
+                    KeySpellProcess.execUp(info);
+                    break;
 			}
 		}
 
@@ -363,5 +371,32 @@ package com.rpgGame.app.cmdlistener.engine
 					break;
 			}
 		}
+        
+        private function addLongPressKey(info : KeyInfo) : void {
+            if (null == info || KeyCodeType.SKILL != info.type) {
+                return;
+            }
+            this._longPressKey.push(info);
+        }
+        
+        private function delLongPressKey(info : KeyInfo) : void {
+            if (null == info || KeyCodeType.SKILL != info.type) {
+                return;
+            }
+            for (var i : int = 0; i < this._longPressKey.length;) {
+                if (info.code == this._longPressKey[i].code) {
+                    this._longPressKey.splice(i, 1);
+                } else {
+                    ++i
+                }
+            }
+        }
+        
+        private function onTimer() : void {
+            if (this._longPressKey.length < 1) {
+                return;
+            }
+            this.singleKeyDownExec(this._longPressKey[this._longPressKey.length - 1]);
+        }
 	}
 }

@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BASE_TASK:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.DailyTaskProto.base_task", "baseTask", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TaskProto; });
+		public static const BASE_TASK:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.DailyTaskProto.base_task", "baseTask", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TaskProto; });
 
 		private var base_task$field:app.message.TaskProto;
 
@@ -38,7 +38,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ROUND:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.DailyTaskProto.round", "round", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ROUND:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.DailyTaskProto.round", "round", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var round$field:int;
 
@@ -65,7 +65,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DIFFI_STAR:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.DailyTaskProto.diffi_star", "diffiStar", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DIFFI_STAR:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.DailyTaskProto.diffi_star", "diffiStar", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var diffi_star$field:int;
 
@@ -90,7 +90,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PRIZE_STAR:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.DailyTaskProto.prize_star", "prizeStar", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PRIZE_STAR:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.DailyTaskProto.prize_star", "prizeStar", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var prize_star$field:int;
 
@@ -118,19 +118,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasBaseTask) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, base_task$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, base_task$field);
 			}
 			if (hasRound) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, round$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, round$field);
 			}
 			if (hasDiffiStar) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, diffi_star$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, diffi_star$field);
 			}
 			if (hasPrizeStar) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, prize_star$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, prize_star$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -146,7 +146,7 @@ package app.message {
 			var diffi_star$count:uint = 0;
 			var prize_star$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (base_task$count != 0) {
@@ -154,28 +154,28 @@ package app.message {
 					}
 					++base_task$count;
 					this.baseTask = new app.message.TaskProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.baseTask);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.baseTask);
 					break;
 				case 2:
 					if (round$count != 0) {
 						throw new flash.errors.IOError('Bad data format: DailyTaskProto.round cannot be set twice.');
 					}
 					++round$count;
-					this.round = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.round = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (diffi_star$count != 0) {
 						throw new flash.errors.IOError('Bad data format: DailyTaskProto.diffiStar cannot be set twice.');
 					}
 					++diffi_star$count;
-					this.diffiStar = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.diffiStar = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (prize_star$count != 0) {
 						throw new flash.errors.IOError('Bad data format: DailyTaskProto.prizeStar cannot be set twice.');
 					}
 					++prize_star$count;
-					this.prizeStar = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.prizeStar = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

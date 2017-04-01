@@ -1,13 +1,12 @@
 package com.rpgGame.coreData.cfg
 {
-	import com.rpgGame.coreData.clientConfig.EquipTypeNameInfo;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.clientConfig.RaceNameInfo;
 	
 	import flash.utils.ByteArray;
 	
 	import app.message.RaceConfig;
 	import app.message.RaceDataProto;
-	import app.message.SpellProto;
 	
 	import org.client.mainCore.ds.HashMap;
 
@@ -83,11 +82,12 @@ package com.rpgGame.coreData.cfg
 		 * @return
 		 *
 		 */
-		public static function getDefaultSpell(raceId : int) : SpellProto
+		public static function getDefaultSpell(raceId : int) : Q_skill_model
 		{
 			if (raceDataMap.getValue(raceId) == null)
 				return null;
-			return (raceDataMap.getValue(raceId) as RaceDataProto).defaultSpell;
+//			return (raceDataMap.getValue(raceId) as RaceDataProto).defaultSpell;
+			return null;
 		}
 		/**
 		 *  

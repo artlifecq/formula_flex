@@ -3,6 +3,15 @@ package com.rpgGame.coreData.type
 
 	public class EffectUrl
 	{
+		/////选角色特效//////
+		public static const FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY:String = "tx_xuanzhongtexiao_difang";
+		
+		public static const FIGHT_ROLE_STATE_CAN_NOT_FIGHT:String = "tx_xuanzhongtexiao_jifang";
+		
+		public static const FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND:String = "";
+		
+		/////////////////////////////////////////////////////
+		public static const SHUBIAO_DIANJI:String = "dianji";
 		/**升级**/
 		public static const SHENG_JI : String = "tx_juese_shengji";
 		/**接受任务**/
@@ -19,6 +28,33 @@ package com.rpgGame.coreData.type
 		public static const COMPLETE_TASK_EFFECT : String = "ui_renwushuaxin";
 		/**切场景特效**/
 		public static const SWITCH_SCENE_EFFECT : String = "tx_lianyi";
+		
+		/**
+		 *红血条 
+		 */
+		public static const XUE_TIAO_HONG : String = "ui_xuetiaohong";
+		
+		/**
+		 *红血条遮挡
+		 */
+		public static const XUE_TIAO_HONG1 : String = "ui_xuetiaohong_01";
+		
+		/**
+		 *金血条 
+		 */
+		public static const XUE_TIAO_JIN : String = "ui_xuetiaojin";
+		/**
+		 *金血条遮挡
+		 */
+		public static const XUE_TIAO_JIN1 : String = "ui_xuetiaojin_01";
+		/**
+		 *蓝血条 
+		 */
+		public static const XUE_TIAO_LAN : String = "ui_xuetiaolan";
+		/**
+		 *蓝血条遮挡
+		 */
+		public static const XUE_TIAO_LAN1 : String = "ui_xuetiaolan_01";
 
 		/**偷经0 白**/
 		public static const SCRIPTURES0 : String = "tx_duojin_bai";
@@ -136,7 +172,27 @@ package com.rpgGame.coreData.type
 		public static const HU_GUO_SI_EMPTY_EFFECT : String = "tx_npc_huguosi_001_baics";
 		/**护国寺--真谛**/
 		public static const HU_GUO_SI_PARAMARTHA_EFFECT : String = "tx_npc_huguosi_001_baics";
+		
+		/**
+		 *战斗力特效 
+		 */
+		public static const UI_JIEMIAN_ZHANDOULI:String="ui_jiemian_zhandouli";
+		/**
+		 *进阶成功 
+		 */
+		public static const UI_JINJIE_COMPLETE:String="ui-hechengchenggong_01";
+		/**
+		 *进阶解锁 
+		 */
+		public static const UI_JINJIE_UNLOCK:String="ui_jinengkuang_shanguang";
 
+		
+		
+		/**顶部经验条特效*/
+		public static const UI_JINGYANTIAO_JINDUHUANG:String="ui_jingyantiaojinduhuang";
+		public static const UI_JINGYANTIAO_JINDULV:String="ui_jingyantiaojindulv";
+		
+		
 		public function EffectUrl()
 		{
 		}

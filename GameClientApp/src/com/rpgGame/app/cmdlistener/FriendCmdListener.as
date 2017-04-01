@@ -9,7 +9,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.info.friend.FriendAddedMeInfo;
 	import com.rpgGame.coreData.info.friend.FriendBaseInfo;
 	import com.rpgGame.coreData.info.friend.FriendInfo;
-	import com.rpgGame.coreData.lang.LangNoticeInfo;
+	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.type.FriendType;
 	
 	import flash.utils.ByteArray;
@@ -22,8 +22,8 @@ package com.rpgGame.app.cmdlistener
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
@@ -36,31 +36,31 @@ package com.rpgGame.app.cmdlistener
 	{
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_BASIC_RELATION, onBasicRelation);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_REPLY_RELATION_DETAIL, onRelationDetail);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_REPLY_RELATIONS_ERROR, onRelationFail);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_SEND_ADD_FRIEND_SUCCESS, onAddFriendSuccess);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_FRIEND_ADD_FAIL, onRecFriendAddFail);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_ADD_FRIEND_WAIT_REPLY, onRecOtherAddedYouAsFriend);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_REPLY_ADD_FRIEND_FAIL, onRecReplyAddFriendFail);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_REFUSE_ADD_FRIEND_SUCCESS, onRefuseAddFriend);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_OTHER_REFUSE_ADD_FRIEND, onOtherRefuseAddFriend);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_AGREE_ADD_FRIEND_SUCCESS, onAgreeAddFriend);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_OTHER_AGREE_ADD_FRIEND, onOtherAgreeAddFriend);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_FRIEND_REMOVED, onRecFriendRemoved);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_OTHER_REMOVED_YOU_AS_FRIEND, onRecOtherRemovedYouAsFriend);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_FRIEND_REMOVE_FAIL, onRecFriendRemoveFail);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_BLACK_ADDED, onRecBlackAdded);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_BLACK_ADD_FAIL, onRecBlackAddFail);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_BLACK_REMOVED, onRecBlackRemoved);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_BLACK_REMOVE_FAIL, onRecBlackRemoveFail);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_RELATION_DETAIL_CHANGED, onRecRelationDetailChanged);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_RELATION_OFFLINE, onRecRelationOffLine);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_ENEMY_REMOVED, onEnemyRemoved);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_ENEMY_ADD, onEnemyAdd);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_ENEMY_UPDATE, onEnemyUpdate);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_EDITOR_MOOD, editorMood);
-			SocketConnection.addCmdListener(RelationModuleMessages.S2C_EDITOR_MOOD_FAIL, editorMoodFail);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_BASIC_RELATION, onBasicRelation);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_REPLY_RELATION_DETAIL, onRelationDetail);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_REPLY_RELATIONS_ERROR, onRelationFail);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_SEND_ADD_FRIEND_SUCCESS, onAddFriendSuccess);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_FRIEND_ADD_FAIL, onRecFriendAddFail);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_ADD_FRIEND_WAIT_REPLY, onRecOtherAddedYouAsFriend);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_REPLY_ADD_FRIEND_FAIL, onRecReplyAddFriendFail);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_REFUSE_ADD_FRIEND_SUCCESS, onRefuseAddFriend);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_OTHER_REFUSE_ADD_FRIEND, onOtherRefuseAddFriend);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_AGREE_ADD_FRIEND_SUCCESS, onAgreeAddFriend);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_OTHER_AGREE_ADD_FRIEND, onOtherAgreeAddFriend);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_FRIEND_REMOVED, onRecFriendRemoved);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_OTHER_REMOVED_YOU_AS_FRIEND, onRecOtherRemovedYouAsFriend);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_FRIEND_REMOVE_FAIL, onRecFriendRemoveFail);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_BLACK_ADDED, onRecBlackAdded);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_BLACK_ADD_FAIL, onRecBlackAddFail);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_BLACK_REMOVED, onRecBlackRemoved);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_BLACK_REMOVE_FAIL, onRecBlackRemoveFail);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_RELATION_DETAIL_CHANGED, onRecRelationDetailChanged);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_RELATION_OFFLINE, onRecRelationOffLine);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_ENEMY_REMOVED, onEnemyRemoved);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_ENEMY_ADD, onEnemyAdd);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_ENEMY_UPDATE, onEnemyUpdate);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_EDITOR_MOOD, editorMood);
+			SocketConnection_protoBuffer.addCmdListener(RelationModuleMessages.S2C_EDITOR_MOOD_FAIL, editorMoodFail);
 
 			finish();
 		}
@@ -213,43 +213,43 @@ package com.rpgGame.app.cmdlistener
 			switch (errID)
 			{
 				case 1:
-					failReason = LangNoticeInfo.FriendCmdListener_2;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_2;
 					break;
 				case 2:
-					failReason = LangNoticeInfo.FriendCmdListener_3;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_3;
 					break;
 				case 3:
-					failReason = LangNoticeInfo.FriendCmdListener_4;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_4;
 					break;
 				case 4:
-					failReason = LangNoticeInfo.FriendCmdListener_5;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_5;
 					break;
 				case 5:
-					failReason = LangNoticeInfo.FriendCmdListener_6;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_6;
 					break;
 				case 6:
-					failReason = LangNoticeInfo.FriendCmdListener_46;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_46;
 					break;
 				case 7:
-					failReason = LangNoticeInfo.FriendCmdListener_7;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_7;
 					break;
 				case 8:
-					failReason = LangNoticeInfo.FriendCmdListener_8;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_8;
 					break;
 				case 9:
-					failReason = LangNoticeInfo.FriendCmdListener_47;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_47;
 					break;
 				case 10:
-					failReason = LangNoticeInfo.FriendCmdListener_48;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_48;
 					break;
 				case 11:
-					failReason = LangNoticeInfo.FriendCmdListener_49;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_49;
 					break;
 				case 12:
-					failReason = LangNoticeInfo.FriendCmdListener_50;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_50;
 					break;
 				default:
-					failReason = LangNoticeInfo.FriendCmdListener_51;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_51;
 					break;
 			}
 			NoticeManager.showNotify(failReason, errID);
@@ -395,28 +395,28 @@ package com.rpgGame.app.cmdlistener
 			switch (errID)
 			{
 				case 1:
-					failReason = LangNoticeInfo.FriendCmdListener_2;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_2;
 					break;
 				case 2:
-					failReason = LangNoticeInfo.FriendCmdListener_55;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_55;
 					break;
 				case 3:
-					failReason = LangNoticeInfo.FriendCmdListener_20;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_20;
 					break;
 				case 4:
-					failReason = LangNoticeInfo.FriendCmdListener_21;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_21;
 					break;
 				case 5:
-					failReason = LangNoticeInfo.FriendCmdListener_32;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_32;
 					break;
 				case 6:
-					failReason = LangNoticeInfo.FriendCmdListener_61;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_61;
 					break;
 				case 7:
-					failReason = LangNoticeInfo.FriendCmdListener_33;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_33;
 					break;
 				default:
-					failReason = LangNoticeInfo.FriendCmdListener_62;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_62;
 					break;
 			}
 			NoticeManager.showNotify(failReason, errID);
@@ -549,31 +549,31 @@ package com.rpgGame.app.cmdlistener
 			switch (errID)
 			{
 				case 1:
-					failReason = LangNoticeInfo.FriendCmdListener_52;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_52;
 					break;
 				case 2:
-					failReason = LangNoticeInfo.FriendCmdListener_53;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_53;
 					break;
 				case 3:
-					failReason = LangNoticeInfo.FriendCmdListener_54;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_54;
 					break;
 				case 4:
-					failReason = LangNoticeInfo.FriendCmdListener_55;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_55;
 					break;
 				case 5:
-					failReason = LangNoticeInfo.FriendCmdListener_56;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_56;
 					break;
 				case 6:
-					failReason = LangNoticeInfo.FriendCmdListener_57;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_57;
 					break;
 				case 7:
-					failReason = LangNoticeInfo.FriendCmdListener_58;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_58;
 					break;
 				case 8:
-					failReason = LangNoticeInfo.FriendCmdListener_59;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_59;
 					break;
 				default:
-					failReason = LangNoticeInfo.FriendCmdListener_60;
+					failReason = LangQ_NoticeInfo.FriendCmdListener_60;
 					break;
 			}
 			NoticeManager.showNotify(failReason, errID);

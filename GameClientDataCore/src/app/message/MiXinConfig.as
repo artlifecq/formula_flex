@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MI_XIN_PRIZE:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.MiXinConfig.mi_xin_prize", "miXinPrize", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MiXinConfig.MiXinPrizeProto; });
+		public static const MI_XIN_PRIZE:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.MiXinConfig.mi_xin_prize", "miXinPrize", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MiXinConfig.MiXinPrizeProto; });
 
 		[ArrayElementType("app.message.MiXinConfig.MiXinPrizeProto")]
 		public var miXinPrize:Array = [];
@@ -23,7 +23,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TIMES_PER_DAY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MiXinConfig.times_per_day", "timesPerDay", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TIMES_PER_DAY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MiXinConfig.times_per_day", "timesPerDay", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var times_per_day$field:int;
 
@@ -50,7 +50,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MI_XIN_START_MIN_HOUR:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MiXinConfig.mi_xin_start_min_hour", "miXinStartMinHour", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MI_XIN_START_MIN_HOUR:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MiXinConfig.mi_xin_start_min_hour", "miXinStartMinHour", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var mi_xin_start_min_hour$field:int;
 
@@ -75,7 +75,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MI_XIN_START_MAX_HOUR:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MiXinConfig.mi_xin_start_max_hour", "miXinStartMaxHour", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MI_XIN_START_MAX_HOUR:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MiXinConfig.mi_xin_start_max_hour", "miXinStartMaxHour", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var mi_xin_start_max_hour$field:int;
 
@@ -100,7 +100,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MI_XIN_ADD_MULTIPLE:FieldDescriptor$TYPE_FLOAT = new FieldDescriptor$TYPE_FLOAT("app.message.MiXinConfig.mi_xin_add_multiple", "miXinAddMultiple", (12 << 3) | com.netease.protobuf.WireType.FIXED_32_BIT);
+		public static const MI_XIN_ADD_MULTIPLE:FieldDescriptor_TYPE_FLOAT = new FieldDescriptor_TYPE_FLOAT("app.message.MiXinConfig.mi_xin_add_multiple", "miXinAddMultiple", (12 << 3) | com.netease.protobuf.WireType.FIXED_32_BIT);
 
 		private var mi_xin_add_multiple$field:Number;
 
@@ -128,23 +128,23 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			for (var miXinPrize$index:uint = 0; miXinPrize$index < this.miXinPrize.length; ++miXinPrize$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.miXinPrize[miXinPrize$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.miXinPrize[miXinPrize$index]);
 			}
 			if (hasTimesPerDay) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, times_per_day$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, times_per_day$field);
 			}
 			if (hasMiXinStartMinHour) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, mi_xin_start_min_hour$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, mi_xin_start_min_hour$field);
 			}
 			if (hasMiXinStartMaxHour) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, mi_xin_start_max_hour$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, mi_xin_start_max_hour$field);
 			}
 			if (hasMiXinAddMultiple) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.FIXED_32_BIT, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_FLOAT(output, mi_xin_add_multiple$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_FLOAT(output, mi_xin_add_multiple$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -160,38 +160,38 @@ package app.message {
 			var mi_xin_start_max_hour$count:uint = 0;
 			var mi_xin_add_multiple$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
-					this.miXinPrize.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.MiXinConfig.MiXinPrizeProto()));
+					this.miXinPrize.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.MiXinConfig.MiXinPrizeProto()));
 					break;
 				case 9:
 					if (times_per_day$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MiXinConfig.timesPerDay cannot be set twice.');
 					}
 					++times_per_day$count;
-					this.timesPerDay = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.timesPerDay = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 10:
 					if (mi_xin_start_min_hour$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MiXinConfig.miXinStartMinHour cannot be set twice.');
 					}
 					++mi_xin_start_min_hour$count;
-					this.miXinStartMinHour = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.miXinStartMinHour = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 11:
 					if (mi_xin_start_max_hour$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MiXinConfig.miXinStartMaxHour cannot be set twice.');
 					}
 					++mi_xin_start_max_hour$count;
-					this.miXinStartMaxHour = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.miXinStartMaxHour = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 12:
 					if (mi_xin_add_multiple$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MiXinConfig.miXinAddMultiple cannot be set twice.');
 					}
 					++mi_xin_add_multiple$count;
-					this.miXinAddMultiple = com.netease.protobuf.ReadUtils.read$TYPE_FLOAT(input);
+					this.miXinAddMultiple = com.netease.protobuf.ReadUtils.read_TYPE_FLOAT(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

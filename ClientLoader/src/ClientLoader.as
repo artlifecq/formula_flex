@@ -33,7 +33,7 @@ package
 	public class ClientLoader extends Sprite
 	{
 		/** 加载的主程序地址 **/
-		private const CLIENTSWF_PATH : String = "GameClient.swf";
+		private const CLIENTSWF_PATH : String = "Client.swf";
 		/**加载进度条**/
 		private var _loadingView : LoadProgressView;
 		private var _urlParmar : Object = null;

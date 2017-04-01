@@ -2,8 +2,8 @@ package com.rpgGame.app.sender
 {
 	import app.cmd.TeamModuleMessages;
 	
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 * 组队sender
@@ -16,14 +16,14 @@ package com.rpgGame.app.sender
 		public static function requestCreateMyTeam():void
 		{
 			_bytes.clear();
-			SocketConnection.send(TeamModuleMessages.C2S_CREATE_OWN_TEAM, _bytes);
+			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_CREATE_OWN_TEAM, _bytes);
 		}
 		
 		/** 请求离开队伍 */
 		public static function requestLeaveTeam():void
 		{
 			_bytes.clear();
-			SocketConnection.send(TeamModuleMessages.C2S_LEAVE_TEAM, _bytes);
+			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_LEAVE_TEAM, _bytes);
 		}
 		
 		/** 回复组队邀请 */
@@ -32,21 +32,21 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint64(id);
 			_bytes.writeBoolean(isAccept);
-			SocketConnection.send(TeamModuleMessages.C2S_REPLY_INVITE,_bytes);
+			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_REPLY_INVITE,_bytes);
 		}
 		
 		/** 一次性拒绝所有的入队申请 */
 		public static function refuseAllJoinRequest():void
 		{
 			var by:ByteBuffer = new ByteBuffer();
-			SocketConnection.send(TeamModuleMessages.C2S_REJECT_ALL_REQUESTS,_bytes);
+			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_REJECT_ALL_REQUESTS,_bytes);
 		}
 		
 		/** 一次性拒绝所有的组队邀请*/
 		public static function refuseAllInventRequest():void
 		{
 			_bytes.clear();
-			SocketConnection.send(TeamModuleMessages.C2S_REJECT_ALL_INVITATIONS, _bytes);
+			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_REJECT_ALL_INVITATIONS, _bytes);
 		}
 		
 		/** 请求加入对方的队伍 */
@@ -54,7 +54,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint64(id);
-			SocketConnection.send(TeamModuleMessages.C2S_SEND_REQUEST, _bytes);
+			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_SEND_REQUEST, _bytes);
 		}
 		
 		/** 回复别人的入队申请 */
@@ -63,7 +63,7 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			_bytes.writeVarint64(id);
 			_bytes.writeBoolean(isAgree);
-			SocketConnection.send(TeamModuleMessages.C2S_REPLY_REQUEST, _bytes);
+			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_REPLY_REQUEST, _bytes);
 		}
 		
 		/**
@@ -74,7 +74,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint64(id);
-			SocketConnection.send(TeamModuleMessages.C2S_KICK, _bytes);
+			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_KICK, _bytes);
 		}
 		
 		/**
@@ -85,7 +85,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint64(id);
-			SocketConnection.send(TeamModuleMessages.C2S_TRANSFER_LEADER, _bytes);
+			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_TRANSFER_LEADER, _bytes);
 		}
 		
 		/** 
@@ -96,7 +96,7 @@ package com.rpgGame.app.sender
 		public static function requestSameSceneTeamMembPos():void
 		{
 			_bytes.clear();
-			SocketConnection.send(TeamModuleMessages.C2S_GET_TEAMMATE_POS, _bytes);
+			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_GET_TEAMMATE_POS, _bytes);
 		}
 		
 		/** 是否禁止被邀请加入队伍 */
@@ -115,11 +115,11 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			if(isagree)
 			{
-				SocketConnection.send(TeamModuleMessages.C2S_SET_AUTO_ACCEPT_INVITE, _bytes);
+				SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_SET_AUTO_ACCEPT_INVITE, _bytes);
 			}
 			else
 			{
-				SocketConnection.send(TeamModuleMessages.C2S_SET_NOT_AUTO_ACCEPT_INVITE, _bytes);
+				SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_SET_NOT_AUTO_ACCEPT_INVITE, _bytes);
 			}
 		}
 		
@@ -129,11 +129,11 @@ package com.rpgGame.app.sender
 			_bytes.clear();
 			if(isagree)
 			{
-				SocketConnection.send(TeamModuleMessages.C2S_SET_AUTO_ACCEPT_REQUEST, _bytes);
+				SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_SET_AUTO_ACCEPT_REQUEST, _bytes);
 			}
 			else
 			{
-				SocketConnection.send(TeamModuleMessages.C2S_SET_NOT_AUTO_ACCEPT_REQUEST, _bytes);
+				SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_SET_NOT_AUTO_ACCEPT_REQUEST, _bytes);
 			}
 		}
 		/**设置是否允许邀请我加入队伍**/
@@ -141,9 +141,9 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			if(isAgree)
-				SocketConnection.send(TeamModuleMessages.C2S_SET_FORBID_OTHER_INVITE_ME_JOIN_TEAM, _bytes);
+				SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_SET_FORBID_OTHER_INVITE_ME_JOIN_TEAM, _bytes);
 			else
-				SocketConnection.send(TeamModuleMessages.C2S_SET_NOT_FORBID_OTHER_INVITE_ME_JOIN_TEAM, _bytes);
+				SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_SET_NOT_FORBID_OTHER_INVITE_ME_JOIN_TEAM, _bytes);
 		}
 		
 		/** 邀请对方入队 */
@@ -151,7 +151,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint64(id);
-			SocketConnection.send(TeamModuleMessages.C2S_SEND_INVITE, _bytes);
+			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_SEND_INVITE, _bytes);
 		}
 		
 		/**
@@ -162,7 +162,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint64(id);
-			SocketConnection.send(TeamModuleMessages.C2S_GET_TEAM_MEMBER_POS,_bytes);
+			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_GET_TEAM_MEMBER_POS,_bytes);
 		}
 		
 		/**
@@ -174,7 +174,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint64(id);
-			SocketConnection.send(TeamModuleMessages.C2S_TEAM_MEMBER_TRANSPORT,_bytes);
+			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_TEAM_MEMBER_TRANSPORT,_bytes);
 		}
 
 		/**
@@ -186,7 +186,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeBoolean(isFollowing);
-			SocketConnection.send(TeamModuleMessages.C2S_TEAM_BROADCAST_FOLLOW, _bytes);
+			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_TEAM_BROADCAST_FOLLOW, _bytes);
 		}
 		
 		/**
@@ -198,7 +198,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeBoolean(isFollowing);
-			SocketConnection.send(TeamModuleMessages.C2S_TEAM_MEMBER_FOLLOW, _bytes);
+			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_TEAM_MEMBER_FOLLOW, _bytes);
 		}
 		
 		/**
@@ -210,7 +210,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeBoolean(isBool);
-			SocketConnection.send(TeamModuleMessages.C2S_SET_TEAM_EXP_ALLOCATE, _bytes);
+			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_SET_TEAM_EXP_ALLOCATE, _bytes);
 		}
 		
 		/**
@@ -222,7 +222,7 @@ package com.rpgGame.app.sender
 		{
 			_bytes.clear();
 			_bytes.writeVarint32(type);
-			SocketConnection.send(TeamModuleMessages.C2S_SET_TEAM_DROP_ALLOCATE, _bytes);
+			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_SET_TEAM_DROP_ALLOCATE, _bytes);
 		}
 	}
 }

@@ -13,16 +13,12 @@ package com.rpgGame.app.manager.goods
 	 */	
 	public class StorageManager extends GoodsContainerMamager
 	{
-		public var PAGE_SIZE:int;
 		private var isLoaded:Boolean;
 		private var _hasStorage:Boolean;
 		
 		public function StorageManager()
 		{
 			super(ItemContainerID.Storage)
-			defaultCol = 8;
-			defaultRow = 8;
-			PAGE_SIZE = defaultCol * defaultRow;
 		}
 		
 		private static var _ins:StorageManager;
@@ -59,7 +55,7 @@ package com.rpgGame.app.manager.goods
 		{
 			if(!isLoaded)
 			{
-				ItemSender.reqDepotStorageGetData();
+//				ItemSender.reqDepotStorageGetData();
 				isLoaded = true;
 			}
 		}

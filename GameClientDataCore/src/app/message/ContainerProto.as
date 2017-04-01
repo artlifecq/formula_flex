@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CONTAINER_TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.ContainerProto.container_type", "containerType", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.ContainerProto.ContainerType);
+		public static const CONTAINER_TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.ContainerProto.container_type", "containerType", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.ContainerProto.ContainerType);
 
 		private var container_type$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MISC:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ContainerProto.misc", "misc", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MISC:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ContainerProto.misc", "misc", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var misc$field:int;
 
@@ -70,11 +70,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasContainerType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, container_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, container_type$field);
 			}
 			if (hasMisc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, misc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, misc$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -88,21 +88,21 @@ package app.message {
 			var container_type$count:uint = 0;
 			var misc$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (container_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ContainerProto.containerType cannot be set twice.');
 					}
 					++container_type$count;
-					this.containerType = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.containerType = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 2:
 					if (misc$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ContainerProto.misc cannot be set twice.');
 					}
 					++misc$count;
-					this.misc = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.misc = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

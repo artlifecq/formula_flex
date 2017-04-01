@@ -22,7 +22,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NPC_TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.NpcDialogProto.npc_type", "npcType", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.NpcDialogProto.NpcType);
+		public static const NPC_TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.NpcDialogProto.npc_type", "npcType", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.NpcDialogProto.NpcType);
 
 		private var npc_type$field:int;
 
@@ -49,7 +49,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FUNC_DESC:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.NpcDialogProto.func_desc", "funcDesc", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const FUNC_DESC:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.NpcDialogProto.func_desc", "funcDesc", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var func_desc$field:String;
 
@@ -72,7 +72,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DIALOG_CONTENT:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.NpcDialogProto.dialog_content", "dialogContent", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const DIALOG_CONTENT:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.NpcDialogProto.dialog_content", "dialogContent", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var dialog_content$field:String;
 
@@ -95,7 +95,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY_USABLE_TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.NpcDialogProto.country_usable_type", "countryUsableType", (4 << 3) | com.netease.protobuf.WireType.VARINT, app.message.NpcCountryUsableType);
+		public static const COUNTRY_USABLE_TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.NpcDialogProto.country_usable_type", "countryUsableType", (4 << 3) | com.netease.protobuf.WireType.VARINT, app.message.NpcCountryUsableType);
 
 		private var country_usable_type$field:int;
 
@@ -120,7 +120,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NORMAL:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.NpcDialogProto.normal", "normal", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NpcDialogProto.NormalDialogProto; });
+		public static const NORMAL:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.NpcDialogProto.normal", "normal", (10 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NpcDialogProto.NormalDialogProto; });
 
 		private var normal$field:app.message.NpcDialogProto.NormalDialogProto;
 
@@ -143,7 +143,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NPC_SHOP:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.NpcDialogProto.npc_shop", "npcShop", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NpcDialogProto.NpcShopDialogProto; });
+		public static const NPC_SHOP:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.NpcDialogProto.npc_shop", "npcShop", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NpcDialogProto.NpcShopDialogProto; });
 
 		private var npc_shop$field:app.message.NpcDialogProto.NpcShopDialogProto;
 
@@ -166,7 +166,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TRANSPORT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.NpcDialogProto.transport", "transport", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NpcDialogProto.TransportDialogProto; });
+		public static const TRANSPORT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.NpcDialogProto.transport", "transport", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NpcDialogProto.TransportDialogProto; });
 
 		private var transport$field:app.message.NpcDialogProto.TransportDialogProto;
 
@@ -189,7 +189,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAZE_PRIZE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.NpcDialogProto.maze_prize", "mazePrize", (13 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NpcMazePrizeDialogProto; });
+		public static const MAZE_PRIZE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.NpcDialogProto.maze_prize", "mazePrize", (13 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NpcMazePrizeDialogProto; });
 
 		private var maze_prize$field:app.message.NpcMazePrizeDialogProto;
 
@@ -212,7 +212,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAZE_PRIZE_AND_ENTER_NEXT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.NpcDialogProto.maze_prize_and_enter_next", "mazePrizeAndEnterNext", (14 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NpcMazePrizeAndEnterNextDialogProto; });
+		public static const MAZE_PRIZE_AND_ENTER_NEXT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.NpcDialogProto.maze_prize_and_enter_next", "mazePrizeAndEnterNext", (14 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NpcMazePrizeAndEnterNextDialogProto; });
 
 		private var maze_prize_and_enter_next$field:app.message.NpcMazePrizeAndEnterNextDialogProto;
 
@@ -235,7 +235,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const VEHICLE_PATH:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.NpcDialogProto.vehicle_path", "vehiclePath", (15 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NpcDialogProto.VehiclePathDialogProto; });
+		public static const VEHICLE_PATH:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.NpcDialogProto.vehicle_path", "vehiclePath", (15 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.NpcDialogProto.VehiclePathDialogProto; });
 
 		private var vehicle_path$field:app.message.NpcDialogProto.VehiclePathDialogProto;
 
@@ -261,43 +261,43 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasNpcType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, npc_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, npc_type$field);
 			}
 			if (hasFuncDesc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, func_desc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, func_desc$field);
 			}
 			if (hasDialogContent) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, dialog_content$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, dialog_content$field);
 			}
 			if (hasCountryUsableType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, country_usable_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, country_usable_type$field);
 			}
 			if (hasNormal) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, normal$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, normal$field);
 			}
 			if (hasNpcShop) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, npc_shop$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, npc_shop$field);
 			}
 			if (hasTransport) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, transport$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, transport$field);
 			}
 			if (hasMazePrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, maze_prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, maze_prize$field);
 			}
 			if (hasMazePrizeAndEnterNext) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 14);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, maze_prize_and_enter_next$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, maze_prize_and_enter_next$field);
 			}
 			if (hasVehiclePath) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 15);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, vehicle_path$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, vehicle_path$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -319,35 +319,35 @@ package app.message {
 			var maze_prize_and_enter_next$count:uint = 0;
 			var vehicle_path$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (npc_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NpcDialogProto.npcType cannot be set twice.');
 					}
 					++npc_type$count;
-					this.npcType = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.npcType = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 2:
 					if (func_desc$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NpcDialogProto.funcDesc cannot be set twice.');
 					}
 					++func_desc$count;
-					this.funcDesc = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.funcDesc = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (dialog_content$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NpcDialogProto.dialogContent cannot be set twice.');
 					}
 					++dialog_content$count;
-					this.dialogContent = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.dialogContent = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 4:
 					if (country_usable_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NpcDialogProto.countryUsableType cannot be set twice.');
 					}
 					++country_usable_type$count;
-					this.countryUsableType = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.countryUsableType = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 10:
 					if (normal$count != 0) {
@@ -355,7 +355,7 @@ package app.message {
 					}
 					++normal$count;
 					this.normal = new app.message.NpcDialogProto.NormalDialogProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.normal);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.normal);
 					break;
 				case 11:
 					if (npc_shop$count != 0) {
@@ -363,7 +363,7 @@ package app.message {
 					}
 					++npc_shop$count;
 					this.npcShop = new app.message.NpcDialogProto.NpcShopDialogProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.npcShop);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.npcShop);
 					break;
 				case 12:
 					if (transport$count != 0) {
@@ -371,7 +371,7 @@ package app.message {
 					}
 					++transport$count;
 					this.transport = new app.message.NpcDialogProto.TransportDialogProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.transport);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.transport);
 					break;
 				case 13:
 					if (maze_prize$count != 0) {
@@ -379,7 +379,7 @@ package app.message {
 					}
 					++maze_prize$count;
 					this.mazePrize = new app.message.NpcMazePrizeDialogProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.mazePrize);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.mazePrize);
 					break;
 				case 14:
 					if (maze_prize_and_enter_next$count != 0) {
@@ -387,7 +387,7 @@ package app.message {
 					}
 					++maze_prize_and_enter_next$count;
 					this.mazePrizeAndEnterNext = new app.message.NpcMazePrizeAndEnterNextDialogProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.mazePrizeAndEnterNext);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.mazePrizeAndEnterNext);
 					break;
 				case 15:
 					if (vehicle_path$count != 0) {
@@ -395,7 +395,7 @@ package app.message {
 					}
 					++vehicle_path$count;
 					this.vehiclePath = new app.message.NpcDialogProto.VehiclePathDialogProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.vehiclePath);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.vehiclePath);
 					break;
 				default:
 					super.readUnknown(input, tag);

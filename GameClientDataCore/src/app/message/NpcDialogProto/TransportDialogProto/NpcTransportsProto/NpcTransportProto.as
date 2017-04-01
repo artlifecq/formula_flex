@@ -14,7 +14,7 @@ package app.message.NpcDialogProto.TransportDialogProto.NpcTransportsProto {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.NpcDialogProto.TransportDialogProto.NpcTransportsProto.NpcTransportProto.country", "country", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COUNTRY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.NpcDialogProto.TransportDialogProto.NpcTransportsProto.NpcTransportProto.country", "country", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var country$field:int;
 
@@ -41,7 +41,7 @@ package app.message.NpcDialogProto.TransportDialogProto.NpcTransportsProto {
 		/**
 		 *  @private
 		 */
-		public static const SCENE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.NpcDialogProto.TransportDialogProto.NpcTransportsProto.NpcTransportProto.scene", "scene", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SCENE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.NpcDialogProto.TransportDialogProto.NpcTransportsProto.NpcTransportProto.scene", "scene", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var scene$field:int;
 
@@ -66,7 +66,7 @@ package app.message.NpcDialogProto.TransportDialogProto.NpcTransportsProto {
 		/**
 		 *  @private
 		 */
-		public static const COST:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.NpcDialogProto.TransportDialogProto.NpcTransportsProto.NpcTransportProto.cost", "cost", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COST:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.NpcDialogProto.TransportDialogProto.NpcTransportsProto.NpcTransportProto.cost", "cost", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var cost$field:int;
 
@@ -91,7 +91,7 @@ package app.message.NpcDialogProto.TransportDialogProto.NpcTransportsProto {
 		/**
 		 *  @private
 		 */
-		public static const POS_DESC:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.NpcDialogProto.TransportDialogProto.NpcTransportsProto.NpcTransportProto.pos_desc", "posDesc", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const POS_DESC:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.NpcDialogProto.TransportDialogProto.NpcTransportsProto.NpcTransportProto.pos_desc", "posDesc", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var pos_desc$field:String;
 
@@ -117,19 +117,19 @@ package app.message.NpcDialogProto.TransportDialogProto.NpcTransportsProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, country$field);
 			}
 			if (hasScene) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, scene$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, scene$field);
 			}
 			if (hasCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, cost$field);
 			}
 			if (hasPosDesc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, pos_desc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, pos_desc$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -145,35 +145,35 @@ package app.message.NpcDialogProto.TransportDialogProto.NpcTransportsProto {
 			var cost$count:uint = 0;
 			var pos_desc$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (country$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NpcTransportProto.country cannot be set twice.');
 					}
 					++country$count;
-					this.country = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.country = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (scene$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NpcTransportProto.scene cannot be set twice.');
 					}
 					++scene$count;
-					this.scene = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.scene = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (cost$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NpcTransportProto.cost cannot be set twice.');
 					}
 					++cost$count;
-					this.cost = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.cost = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (pos_desc$count != 0) {
 						throw new flash.errors.IOError('Bad data format: NpcTransportProto.posDesc cannot be set twice.');
 					}
 					++pos_desc$count;
-					this.posDesc = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.posDesc = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

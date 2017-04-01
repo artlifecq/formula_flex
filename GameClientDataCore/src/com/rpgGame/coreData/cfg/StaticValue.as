@@ -70,43 +70,37 @@ package com.rpgGame.coreData.cfg
 		public static const COLOR_CODE_27:uint = 0x76726d;
 		//////////////////////////////品质色///////////////////////////////////////////
 		/**品质白*/		
-		public static const Q_WHITE:uint = COLOR_CODE_1;
+		public static const Q_WHITE:uint = 0x939388;
 		/**品质绿*/		
-		public static const Q_GREEN:uint = COLOR_CODE_16;
+		public static const Q_GREEN:uint = 0x25931b;
 		/**品质蓝色*/		
-		public static const Q_BLUE:uint = COLOR_CODE_19;
+		public static const Q_BLUE:uint = 0x2c87b0;
 		/**品质紫色*/		
-		public static const Q_PURPLE:uint = COLOR_CODE_21;
+		public static const Q_PURPLE:uint = 0x9b4aa8;
 		/**品质橙色  */		
-		public static const Q_YELLOW:uint = COLOR_CODE_25;
+		public static const Q_YELLOW:uint = 0xc2992b;
 		
 		//////////////////////////////聊天文字颜色///////////////////////////////////////////
-		/**系统*/
-//		public static const SYSTEM_CHAT_COLOR:uint = 0xB0E0E6;
-		/**系统*/
-		public static const SYSTEM_CHAT_COLOR:uint = 0xf46868;
+		/**公告*/
+		public static const CHAT_NOTICE_COLOR:uint = 0x3b860d;
 		/**私聊*/
-		public static const CHAT_SI_LIAO_COLOR:uint = 0x7473E7;
-		/**普通*/
-		public static const CHAT_PU_TONG_COLOR:uint = 0xF9F0CC;
+		public static const CHAT_SI_LIAO_COLOR:uint = 0xe58bff;
+		/**当前*/
+		public static const CHAT_PU_TONG_COLOR:uint = 0xb2b08a;
 		/**队伍*/
-		public static const CHAT_DUI_WU_COLOR:uint = 0x00E3FE;
+		public static const CHAT_DUI_WU_COLOR:uint = 0x2dcfab;
 		/**帮派*/
-		public static const CHAT_BANG_PAI_COLOR:uint = 0xF6D621;
-		/**家族*/
-		public static const CHAT_JIA_ZU_COLOR:uint = 0xF6D621;
-		/**国家*/
-		public static const CHAT_GUO_JIA_COLOR:uint = 0x239D02;
-		/**盟国*/
-		public static const CHAT_MENG_GUO_COLOR:uint = 0xEA63A6;
+		public static const CHAT_BANG_PAI_COLOR:uint = 0x18b2cf;
 		/**世界*/
-		public static const CHAT_SHI_JIE_COLOR:uint = 0xE74502;
+		public static const CHAT_SHI_JIE_COLOR:uint = 0xdfb612;
 		/**跨服*/
-		public static const CHAT_KUA_FU_COLOR:uint = 0x4EFD6F;
+		public static const CHAT_KUA_FU_COLOR:uint = 0xd76e44;
 		/**喇叭*/
-		public static const CHAT_LA_BA_COLOR:uint = 0xD60280;	
+		public static const CHAT_LA_BA_COLOR:uint = 0xcf2655;	
 		/**系统*/
-		public static const CHAT_XI_TONG_COLOR:uint = 0xD60280;
+		public static const CHAT_SYSTEM_COLOR:uint = 0xcecece;	
+		/**传闻*/
+		public static const CHAT_HEARSAY_COLOR:uint = 0x8b9bef;	
 		
 		
 		//////////////////////////////PK模式文字颜色///////////////////////////////////////////

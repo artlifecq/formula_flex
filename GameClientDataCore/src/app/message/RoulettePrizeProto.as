@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EXP:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.RoulettePrizeProto.exp", "exp", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ExpPrizeProto; });
+		public static const EXP:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.RoulettePrizeProto.exp", "exp", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ExpPrizeProto; });
 
 		private var exp$field:app.message.ExpPrizeProto;
 
@@ -39,7 +39,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GOODS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.RoulettePrizeProto.goods", "goods", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
+		public static const GOODS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.RoulettePrizeProto.goods", "goods", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
 
 		private var goods$field:app.message.GoodsWrapperProto;
 
@@ -65,11 +65,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasExp) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, exp$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, exp$field);
 			}
 			if (hasGoods) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, goods$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, goods$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -83,7 +83,7 @@ package app.message {
 			var exp$count:uint = 0;
 			var goods$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (exp$count != 0) {
@@ -91,7 +91,7 @@ package app.message {
 					}
 					++exp$count;
 					this.exp = new app.message.ExpPrizeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.exp);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.exp);
 					break;
 				case 2:
 					if (goods$count != 0) {
@@ -99,7 +99,7 @@ package app.message {
 					}
 					++goods$count;
 					this.goods = new app.message.GoodsWrapperProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.goods);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.goods);
 					break;
 				default:
 					super.readUnknown(input, tag);

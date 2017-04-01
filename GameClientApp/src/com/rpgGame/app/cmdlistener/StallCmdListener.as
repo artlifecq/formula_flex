@@ -2,17 +2,15 @@ package com.rpgGame.app.cmdlistener
 {
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.stall.StallManager;
-	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.core.events.StallEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.StallCfgData;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.info.stall.StallItemData;
 	import com.rpgGame.coreData.lang.LangStall;
 	import com.rpgGame.coreData.utils.MoneyUtil;
 	
-	import flash.sampler.getSampleCount;
 	import flash.utils.ByteArray;
 	
 	import app.cmd.StallModuleMessages;
@@ -24,8 +22,8 @@ package com.rpgGame.app.cmdlistener
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 	
 	public class StallCmdListener extends BaseBean
 	{
@@ -36,23 +34,23 @@ package com.rpgGame.app.cmdlistener
 		
 		override public function start():void
 		{
-			SocketConnection.addCmdListener(StallModuleMessages.S2C_STALL_FAIL,stallFail);
-			SocketConnection.addCmdListener(StallModuleMessages.S2C_STALL,stallComplete);
-			SocketConnection.addCmdListener(StallModuleMessages.S2C_STALL_BROADCAST,stallBroadcast);
-			SocketConnection.addCmdListener(StallModuleMessages.S2C_CANCEL_STALL,cancelStall);
-			SocketConnection.addCmdListener(StallModuleMessages.S2C_CANCEL_STALL_BROADCAST,cancelStallBroadcast);
-			SocketConnection.addCmdListener(StallModuleMessages.S2C_CHANGE_TO_SELL_GOODS,changeToSellGoods);
-			SocketConnection.addCmdListener(StallModuleMessages.S2C_CHANGE_TO_SELL_GOODS_UNLOCK,changeToSellGoodsFailUnlock);
-			SocketConnection.addCmdListener(StallModuleMessages.S2C_CHANGE_TO_BUY_GOODS,changeToBuyGoods);
-			SocketConnection.addCmdListener(StallModuleMessages.S2C_CHANGE_TO_BUY_GOODS_UNLOCK,changeToBuyGoodsFailUnlock);
-			SocketConnection.addCmdListener(StallModuleMessages.S2C_STALL_TYPE_LEFT_TIME_CHANGED,buyStallType);
-			SocketConnection.addCmdListener(StallModuleMessages.S2C_GET_STALL_DETAIL,getStallDetail);
-			SocketConnection.addCmdListener(StallModuleMessages.S2C_BUY_STALL_GOODS,buyStallGoods);
-			SocketConnection.addCmdListener(StallModuleMessages.S2C_STALL_OWNER_SELL_SUCCESS,stallOwnerSellSuccess);
-			SocketConnection.addCmdListener(StallModuleMessages.S2C_SELL_GOODS_TO_STALL,sellGoodsToStall);
-			SocketConnection.addCmdListener(StallModuleMessages.S2C_STALL_OWNER_BUY_SUCCESS,stallOwnerBuySuccess);
-			SocketConnection.addCmdListener(StallModuleMessages.S2C_SET_AD,setAdComplete);
-			SocketConnection.addCmdListener(StallModuleMessages.S2C_AD_BROADCAST,adBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(StallModuleMessages.S2C_STALL_FAIL,stallFail);
+			SocketConnection_protoBuffer.addCmdListener(StallModuleMessages.S2C_STALL,stallComplete);
+			SocketConnection_protoBuffer.addCmdListener(StallModuleMessages.S2C_STALL_BROADCAST,stallBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(StallModuleMessages.S2C_CANCEL_STALL,cancelStall);
+			SocketConnection_protoBuffer.addCmdListener(StallModuleMessages.S2C_CANCEL_STALL_BROADCAST,cancelStallBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(StallModuleMessages.S2C_CHANGE_TO_SELL_GOODS,changeToSellGoods);
+			SocketConnection_protoBuffer.addCmdListener(StallModuleMessages.S2C_CHANGE_TO_SELL_GOODS_UNLOCK,changeToSellGoodsFailUnlock);
+			SocketConnection_protoBuffer.addCmdListener(StallModuleMessages.S2C_CHANGE_TO_BUY_GOODS,changeToBuyGoods);
+			SocketConnection_protoBuffer.addCmdListener(StallModuleMessages.S2C_CHANGE_TO_BUY_GOODS_UNLOCK,changeToBuyGoodsFailUnlock);
+			SocketConnection_protoBuffer.addCmdListener(StallModuleMessages.S2C_STALL_TYPE_LEFT_TIME_CHANGED,buyStallType);
+			SocketConnection_protoBuffer.addCmdListener(StallModuleMessages.S2C_GET_STALL_DETAIL,getStallDetail);
+			SocketConnection_protoBuffer.addCmdListener(StallModuleMessages.S2C_BUY_STALL_GOODS,buyStallGoods);
+			SocketConnection_protoBuffer.addCmdListener(StallModuleMessages.S2C_STALL_OWNER_SELL_SUCCESS,stallOwnerSellSuccess);
+			SocketConnection_protoBuffer.addCmdListener(StallModuleMessages.S2C_SELL_GOODS_TO_STALL,sellGoodsToStall);
+			SocketConnection_protoBuffer.addCmdListener(StallModuleMessages.S2C_STALL_OWNER_BUY_SUCCESS,stallOwnerBuySuccess);
+			SocketConnection_protoBuffer.addCmdListener(StallModuleMessages.S2C_SET_AD,setAdComplete);
+			SocketConnection_protoBuffer.addCmdListener(StallModuleMessages.S2C_AD_BROADCAST,adBroadcast);
 			finish();
 		}
 		/**
@@ -137,7 +135,7 @@ package com.rpgGame.app.cmdlistener
 			if(stallItem.num == 0)
 				stallItem.item = null;
 			stallItem.price = price;
-			var itemName : String = ItemCfgData.getItemName(id);
+			var itemName : String = ItemConfig.getItemName(id);
 			NoticeManager.showNotify(LangStall.buyStallItemComplete,itemName,sellNum);
 			StallManager.addStallInfo(LanguageConfig.getText(LangStall.infoSellGoods,TimeUtil.getCurrentTimeFromt(),
 				itemName,
@@ -199,7 +197,7 @@ package com.rpgGame.app.cmdlistener
 		private function changeToBuyGoodsFailUnlock(buffer:ByteBuffer):void
 		{
 //			NoticeManager.showNotify(LangStall.changeToBuyGoodsFailUnlock);
-			ReqLockUtil.unlockReq(StallModuleMessages.C2S_CHANGE_TO_BUY_GOODS);
+//			ReqLockUtil.unlockReq(StallModuleMessages.C2S_CHANGE_TO_BUY_GOODS);
 		}
 		/**
 		 * 修改收购物品成功
@@ -230,7 +228,7 @@ package com.rpgGame.app.cmdlistener
 		private function changeToSellGoodsFailUnlock(buffer:ByteBuffer):void
 		{
 //			NoticeManager.showNotify(LangStall.changeToSellGoodsFailUnlock);
-			ReqLockUtil.unlockReq(StallModuleMessages.C2S_CHANGE_TO_SELL_GOODS);
+//			ReqLockUtil.unlockReq(StallModuleMessages.C2S_CHANGE_TO_SELL_GOODS);
 		}
 		/**
 		 * 要出售的物品变更了

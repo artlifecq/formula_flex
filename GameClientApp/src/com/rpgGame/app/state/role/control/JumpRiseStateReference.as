@@ -11,7 +11,9 @@ package com.rpgGame.app.state.role.control
 	 */
 	public class JumpRiseStateReference extends RoleStateReference
 	{
+			
 		private var _totalTime : int;
+			
 		private var _isSecondJump : Boolean;
 
 		public function JumpRiseStateReference()
@@ -25,11 +27,17 @@ package com.rpgGame.app.state.role.control
 			_isSecondJump = isSecondJump;
 		}
 
+		/**
+		 * 上升过程中总时间 
+		 */	
 		public function get totalTime() : int
 		{
 			return _totalTime;
 		}
 
+		/**
+		 * 是否是2级跳 
+		 */	
 		public function get isSecondJump() : Boolean
 		{
 			return _isSecondJump;

@@ -6,8 +6,8 @@ package com.rpgGame.app.sender
 	
 	import app.cmd.AddSpriteStatModuleMessages;
 	
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 * 人物属性加点消息发送
@@ -28,7 +28,7 @@ package com.rpgGame.app.sender
 			var by:ByteBuffer = new ByteBuffer();
 			by.writeVarint32(statType);
 			by.writeVarint32(value);
-			SocketConnection.send(AddSpriteStatModuleMessages.C2S_ADD_SPRITE_STAT, by);
+			SocketConnection_protoBuffer.send(AddSpriteStatModuleMessages.C2S_ADD_SPRITE_STAT, by);
 		}
 		
 		/**
@@ -37,7 +37,7 @@ package com.rpgGame.app.sender
 		public static function autoAddSpriteStat():void
 		{
 			var by:ByteBuffer = new ByteBuffer();
-			SocketConnection.send(AddSpriteStatModuleMessages.C2S_AUTO_ADD_SPRITE_STAT, by);
+			SocketConnection_protoBuffer.send(AddSpriteStatModuleMessages.C2S_AUTO_ADD_SPRITE_STAT, by);
 		}
 		
 		/**
@@ -51,11 +51,11 @@ package com.rpgGame.app.sender
 		public static function clearSpriteStat(itemListVo:UpgradeItemListVo=null):void
 		{
 			var by:ByteBuffer = new ByteBuffer();
-			if(MainRoleManager.actorInfo.level >= AddSpriteStatCfgData.freeClearSpriteStatPointLevel && itemListVo != null)
+			if(MainRoleManager.actorInfo.totalStat.level >= AddSpriteStatCfgData.freeClearSpriteStatPointLevel && itemListVo != null)
 			{
 				by.writeBytes(itemListVo.getByte());
 			}
-			SocketConnection.send(AddSpriteStatModuleMessages.C2S_CLEAR_SPRITE_STAT, by);
+			SocketConnection_protoBuffer.send(AddSpriteStatModuleMessages.C2S_CLEAR_SPRITE_STAT, by);
 		}
 	}
 }

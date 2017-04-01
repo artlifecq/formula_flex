@@ -19,6 +19,14 @@
 		 */
 		public static const SCENE_MAP_MOUSE_DOWN : String = "scene_map_mouse_down";
 		/**
+		 * 场景地图右键弹起
+		 */
+		public static const SCENE_MAP_RIGHT_MOUSE_UP : String = "scene_map_right_mouse_up";
+		/**
+		 * 场景地图右键按下
+		 */
+		public static const SCENE_MAP_RIGHT_MOUSE_DOWN : String = "scene_map_right_mouse_down";
+		/**
 		 * 场景地图滑动
 		 */
 		public static const SCENE_MAP_MOUSE_MOVE : String = "scene_map_mouse_move";

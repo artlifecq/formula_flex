@@ -1,8 +1,9 @@
 package com.rpgGame.app.controller.keyboard
 {
+	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.TrusteeshipManager;
-	import com.rpgGame.app.manager.countryWar.CountryWarChengMenManager;
 	import com.rpgGame.app.manager.mount.MountManager;
+	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.interfaces.IEscExcute;
@@ -12,10 +13,13 @@ package com.rpgGame.app.controller.keyboard
 	import com.rpgGame.coreData.info.key.KeyInfo;
 	
 	import starling.display.DisplayObjectContainer;
+    
+    import flash.utils.getTimer;
 
 	public class KeyFuncProcess
 	{
 		private static var _keyDownTm : uint;
+		private static var _keyDownTabTm : uint;
 
 		public static function exec(info : KeyInfo) : void
 		{
@@ -45,7 +49,7 @@ package com.rpgGame.app.controller.keyboard
 					break;
 				case "4": //B 背包
 					if (!ClientConfig.isBanShu)
-						AppManager.showApp(AppConstant.BACK_PACK_PANEL);
+						AppManager.showApp(AppConstant.ROLE_PANEL);
 					break;
 				case "5": //C 人物
 					if (!ClientConfig.isBanShu)
@@ -60,16 +64,17 @@ package com.rpgGame.app.controller.keyboard
 						AppManager.showApp(AppConstant.TASK_PANEL);
 					break;
 				case "8": //F 好友
-					if (!ClientConfig.isBanShu)
-						AppManager.showApp(AppConstant.FRIEND_PANEL);
+//					if (!ClientConfig.isBanShu)
+//						AppManager.showApp(AppConstant.FRIEND_PANEL);
 					break;
 				case "9": //P 队伍
 					if (!ClientConfig.isBanShu)
 						AppManager.showApp(AppConstant.TEAM_PANEL);
 					break;
 				case "10": //O 商城
-					if (!ClientConfig.isBanShu)
-						AppManager.showApp(AppConstant.SHOP_SYSTEM_PANEL);
+					/*if (!ClientConfig.isBanShu)
+						AppManager.showApp(AppConstant.SHOP_SYSTEM_PANEL);*/
+					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
 					break;
 				case "11": //J 社会
 					if (!ClientConfig.isBanShu)
@@ -80,13 +85,13 @@ package com.rpgGame.app.controller.keyboard
 						AppManager.showApp(AppConstant.EQUIP_CHANGE);
 					break;
 				case "14": //E
-					CountryWarChengMenManager.testAddChengMen();
+//					CountryWarChengMenManager.testAddChengMen();
 					break;
 				case "17": //H
 					
 					break;
 				case "18": //I
-					CountryWarChengMenManager.testRemoveChengMen();
+//					CountryWarChengMenManager.testRemoveChengMen();
 					break;
 				case "27": //R 聊天框缩放
 					//resizeChatPanel();
@@ -105,6 +110,10 @@ package com.rpgGame.app.controller.keyboard
 				case "50": //BO 切换目标
 					break;
 				case "51": //TAB
+                    var curTime : uint = getTimer();
+                    var next : Boolean = (curTime - _keyDownTabTm) < 500;
+                    _keyDownTabTm = curTime;
+                    SceneRoleSelectManager.selectedRole = CastSpellHelper.getNearestCanAtkRole(null, next);
 					break;
 				case "52": //ESC
 					if (EscActionManager.executeAction() == false)

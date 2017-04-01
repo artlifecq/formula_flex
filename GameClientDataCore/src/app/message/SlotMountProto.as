@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IDX:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SlotMountProto.idx", "idx", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IDX:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SlotMountProto.idx", "idx", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var idx$field:int;
 
@@ -43,7 +43,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EQUIPED_MOUNT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SlotMountProto.equiped_mount", "equipedMount", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipedMountProto; });
+		public static const EQUIPED_MOUNT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SlotMountProto.equiped_mount", "equipedMount", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipedMountProto; });
 
 		private var equiped_mount$field:app.message.EquipedMountProto;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MOUNT_STATUS:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.SlotMountProto.mount_status", "mountStatus", (3 << 3) | com.netease.protobuf.WireType.VARINT, app.message.MountStatus);
+		public static const MOUNT_STATUS:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.SlotMountProto.mount_status", "mountStatus", (3 << 3) | com.netease.protobuf.WireType.VARINT, app.message.MountStatus);
 
 		private var mount_status$field:int;
 
@@ -91,7 +91,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_RIDING:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.SlotMountProto.is_riding", "isRiding", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_RIDING:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.SlotMountProto.is_riding", "isRiding", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_riding$field:Boolean;
 
@@ -119,19 +119,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasIdx) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, idx$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, idx$field);
 			}
 			if (hasEquipedMount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, equiped_mount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, equiped_mount$field);
 			}
 			if (hasMountStatus) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, mount_status$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, mount_status$field);
 			}
 			if (hasIsRiding) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_riding$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_riding$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -147,14 +147,14 @@ package app.message {
 			var mount_status$count:uint = 0;
 			var is_riding$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (idx$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SlotMountProto.idx cannot be set twice.');
 					}
 					++idx$count;
-					this.idx = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.idx = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (equiped_mount$count != 0) {
@@ -162,21 +162,21 @@ package app.message {
 					}
 					++equiped_mount$count;
 					this.equipedMount = new app.message.EquipedMountProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.equipedMount);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.equipedMount);
 					break;
 				case 3:
 					if (mount_status$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SlotMountProto.mountStatus cannot be set twice.');
 					}
 					++mount_status$count;
-					this.mountStatus = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.mountStatus = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 4:
 					if (is_riding$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SlotMountProto.isRiding cannot be set twice.');
 					}
 					++is_riding$count;
-					this.isRiding = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isRiding = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

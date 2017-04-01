@@ -1,14 +1,16 @@
 package com.rpgGame.app.graphics
 {
-	import com.game.mainCore.libCore.pool.IPoolClass;
-	import com.game.mainCore.libCore.pool.Pool;
+	import com.game.engine3D.core.poolObject.IInstancePoolClass;
+	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.utils.HeadBloodUtil;
+	
+	import flash.utils.getTimer;
 	
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	
-	import org.mokylin.skin.mainui.head.MonsterHpBarSkin;
+	import org.mokylin.skin.mainui.head.guai_head_mini;
 	
 	import starling.display.BlendMode;
 	import starling.display.DisplayObject;
@@ -24,17 +26,17 @@ package com.rpgGame.app.graphics
 	 * 创建时间：2015-6-10 上午11:12:28
 	 *
 	 */
-	public class HeadBloodBar extends Sprite implements IPoolClass
+	public class HeadBloodBar extends Sprite implements IInstancePoolClass
 	{
-		private static var headBloodBarPool : Pool = new Pool("HeadBloodBar", 300);
+		private static var headBloodBarPool : InstancePool = new InstancePool("HeadBloodBar", 300);
 		
 		/**
 		 * 生成一个HeadBloodBar
 		 */
-		public static function create($role:SceneRole) : HeadBloodBar
+		public static function create($role : SceneRole) : HeadBloodBar
 		{
 			//利用池生成HeadBloodBar
-			return headBloodBarPool.createObj(HeadBloodBar,$role) as HeadBloodBar;
+			return headBloodBarPool.createObj(HeadBloodBar, $role) as HeadBloodBar;
 		}
 		
 		/**
@@ -49,8 +51,8 @@ package com.rpgGame.app.graphics
 		}
 		
 		private var WIDTH : uint = 114;
-		private var BLOOD_WIDTH:uint = 79;
-		private var BLOOD_HEIGHT:uint = 8;
+		private var BLOOD_WIDTH : uint = 79;
+		private var BLOOD_HEIGHT : uint = 6;
 		/**部件类型**/
 		private var _partType : uint;
 		/**血条颜色**/
@@ -62,26 +64,31 @@ package com.rpgGame.app.graphics
 		/**上次的百分比**/
 		private var _lastPercent : Number;
 		/**状态文本，如：国战中的——攻方，守方**/
-		private var _stateText:TextField;
+		private var _stateText : TextField;
 		/** 状态 参考：HeadBloodStateType **/
-		private var _state:uint;
+		private var _state : uint;
 		
-		private var _hpSkinClass:StateSkin;
+		private var _hpSkinClass : StateSkin;
 		
-		private var _role:SceneRole;
+		private var _role : SceneRole;
 		
-		public function HeadBloodBar($role:SceneRole)
+		public function HeadBloodBar($role : SceneRole)
 		{
 			super();
 			
 			_role = $role;
 			
-			_hpSkinClass = new MonsterHpBarSkin();
+			_hpSkinClass = new guai_head_mini();
 			_hpSkinClass.toSprite(this);
+			
+			_hpSkinClass.width=WIDTH;
 			
 			_hpBackgroundBar = createBarBackground();
 			_hpBar = createBar();
-			
+			if(_hpSkinClass){
+				_hpBackgroundBar.width=WIDTH;
+				_hpBar.width=WIDTH;
+			}
 			WIDTH = _hpBackgroundBar.width;
 			BLOOD_WIDTH = _hpBar.width;
 			BLOOD_HEIGHT = _hpBar.height;
@@ -96,27 +103,27 @@ package com.rpgGame.app.graphics
 			
 		}
 		
-		private function createBarBackground():DisplayObject
+		private function createBarBackground() : DisplayObject
 		{
-			if(_hpSkinClass)
+			if (_hpSkinClass)
 			{
 				return _hpSkinClass["bg"];
 			}
 			
-			var bg:Quad = new Quad(WIDTH, BLOOD_HEIGHT , 0x000000);
+			var bg : Quad = new Quad(WIDTH, BLOOD_HEIGHT, 0x000000);
 			bg.blendMode = BlendMode.NONE;
 			addChild(bg);
 			return bg;
 		}
 		
-		private function createBar():DisplayObject
+		private function createBar() : DisplayObject
 		{
-			if(_hpSkinClass)
+			if (_hpSkinClass)
 			{
 				//				return IHeadHPBar(_hpSkinClass).hpBar;
 				return _hpSkinClass["bar"];
 			}
-			var bar:Quad = new Quad(WIDTH-2, BLOOD_HEIGHT-2, 0xff0000);
+			var bar : Quad = new Quad(WIDTH - 2, BLOOD_HEIGHT - 2, 0xff0000);
 			bar.blendMode = BlendMode.NONE;
 			bar.x = bar.y = 1;
 			addChild(bar);
@@ -126,25 +133,25 @@ package com.rpgGame.app.graphics
 		/**
 		 * 设置状态信息			无特殊情况不用此方法，直接设置 state
 		 * @param info
-		 * 
-		 */		
-		public function updateStateText( info:String ):void
+		 *
+		 */
+		public function updateStateText(info : String) : void
 		{
-			if( info == "" )
-			{	
-				if( _stateText != null )
+			if (info == "")
+			{
+				if (_stateText != null)
 				{
-					_stateText.parent.removeChild( _stateText );
+					_stateText.parent.removeChild(_stateText);
 					_stateText = null;
 				}
 				return;
 			}
 			
-			if( _stateText == null )
+			if (_stateText == null)
 			{
-				_stateText = new TextField(WIDTH,18,"");
+				_stateText = new TextField(WIDTH, 18, "");
 				_stateText.autoSize = TextFieldAutoSize.VERTICAL;
-				addChild( _stateText );
+				addChild(_stateText);
 				_stateText.y = -20;
 				_stateText.touchAcross = true;
 			}
@@ -153,26 +160,26 @@ package com.rpgGame.app.graphics
 			_stateText.text = info;
 		}
 		
-		public function set state( value:uint ):void
+		public function set state(value : uint) : void
 		{
-			if( _state == value )
+			if (_state == value)
 				return;
 			
 			_state = value;
-			var arr:Array = HeadBloodUtil.getTypeData( _state );
+			var arr : Array = HeadBloodUtil.getTypeData(_state);
 			
 			color = arr[0];
-			updateStateText( arr[ 1 ] );
+			updateStateText(arr[1]);
 			
-			if(_hpBar is Quad)
+			if (_hpBar is Quad)
 				Quad(_hpBar).color = color;
-			else if(_hpBar is UIAsset)
+			else if (_hpBar is UIAsset)
 			{
 				(_hpBar as UIAsset).styleName = HeadBloodUtil.getBarStyleName(_state);
 			}
 		}
 		
-		public function get state():uint
+		public function get state() : uint
 		{
 			return _state;
 		}
@@ -194,15 +201,15 @@ package com.rpgGame.app.graphics
 		
 		public function get realHeight() : uint
 		{
-			if( _stateText == null )
+			if (_stateText == null)
 				return BLOOD_HEIGHT;
 			
 			return _stateText.height + BLOOD_HEIGHT;
 		}
 		
-		public function get textHeight():uint
+		public function get textHeight() : uint
 		{
-			if( _stateText == null )
+			if (_stateText == null)
 				return 0;
 			
 			return _stateText.height;
@@ -228,29 +235,30 @@ package com.rpgGame.app.graphics
 			if (_lastPercent == value)
 				return;
 			
-			if( value > 1)
+			if (value > 1)
 				value = 1;
 			
-			if( value < 0 )
+			if (value < 0)
 				value = 0;
 			
-			if(_hpBar is Quad)
+			if (_hpBar is Quad)
 				Quad(_hpBar).color = _color;
 			
-			_hpBar.width = (BLOOD_WIDTH -2) * value;
-			
+			_hpBar.scaleX = value;
 			_lastPercent = value;
 		}
 		
-		/**
-		 * 销毁
-		 */
-		override public function dispose() : void
+		public function instanceDestroy() : void
 		{
-			return;
+			instanceDispose();
+			dispose();
+		}
+		
+		public function instanceDispose() : void
+		{
 			if (parent != null)
 				parent.removeChild(this);
-			super.dispose();
 		}
+		
 	}
 }

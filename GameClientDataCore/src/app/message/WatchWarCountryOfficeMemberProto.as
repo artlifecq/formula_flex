@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ID:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.WatchWarCountryOfficeMemberProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ID:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.WatchWarCountryOfficeMemberProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var id$field:Int64;
 
@@ -37,7 +37,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.WatchWarCountryOfficeMemberProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.WatchWarCountryOfficeMemberProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var name$field:String;
 
@@ -60,7 +60,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_ONLINE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.WatchWarCountryOfficeMemberProto.is_online", "isOnline", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_ONLINE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.WatchWarCountryOfficeMemberProto.is_online", "isOnline", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_online$field:Boolean;
 
@@ -87,7 +87,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SCENE_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.WatchWarCountryOfficeMemberProto.scene_id", "sceneId", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SCENE_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.WatchWarCountryOfficeMemberProto.scene_id", "sceneId", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var scene_id$field:int;
 
@@ -112,7 +112,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SCENE_COUNTRY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.WatchWarCountryOfficeMemberProto.scene_country", "sceneCountry", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SCENE_COUNTRY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.WatchWarCountryOfficeMemberProto.scene_country", "sceneCountry", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var scene_country$field:int;
 
@@ -140,23 +140,23 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, id$field);
 			}
 			if (hasName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, name$field);
 			}
 			if (hasIsOnline) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_online$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_online$field);
 			}
 			if (hasSceneId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, scene_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, scene_id$field);
 			}
 			if (hasSceneCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, scene_country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, scene_country$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -173,42 +173,42 @@ package app.message {
 			var scene_id$count:uint = 0;
 			var scene_country$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: WatchWarCountryOfficeMemberProto.id cannot be set twice.');
 					}
 					++id$count;
-					this.id = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.id = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: WatchWarCountryOfficeMemberProto.name cannot be set twice.');
 					}
 					++name$count;
-					this.name = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.name = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 6:
 					if (is_online$count != 0) {
 						throw new flash.errors.IOError('Bad data format: WatchWarCountryOfficeMemberProto.isOnline cannot be set twice.');
 					}
 					++is_online$count;
-					this.isOnline = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isOnline = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 7:
 					if (scene_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: WatchWarCountryOfficeMemberProto.sceneId cannot be set twice.');
 					}
 					++scene_id$count;
-					this.sceneId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.sceneId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 8:
 					if (scene_country$count != 0) {
 						throw new flash.errors.IOError('Bad data format: WatchWarCountryOfficeMemberProto.sceneCountry cannot be set twice.');
 					}
 					++scene_country$count;
-					this.sceneCountry = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.sceneCountry = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -2,46 +2,42 @@ package com.rpgGame.app.cmdlistener
 {
 	import com.rpgGame.app.manager.BaZhenTuManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.core.events.BaZhenTuEvent;
 	import com.rpgGame.coreData.cfg.BaZhenTuCfgData;
 	import com.rpgGame.coreData.lang.LangBaZhenTu;
-	import com.rpgGame.coreData.lang.LangBackPack;
 	import com.rpgGame.coreData.role.MonsterData;
-	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.role.RoleType;
-	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import app.cmd.BaZhenTuModuleMessages;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	public class BaZhenTuCmdListener extends BaseBean
 	{
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(BaZhenTuModuleMessages.S2C_TRY_START, onTryStartSuccess);
-			SocketConnection.addCmdListener(BaZhenTuModuleMessages.S2C_TRY_START_FAIL, onTryStartFail);
-			SocketConnection.addCmdListener(BaZhenTuModuleMessages.S2C_LEADER_START_DUNGEON, onLeaderStartDungeon);
-			SocketConnection.addCmdListener(BaZhenTuModuleMessages.S2C_REFRUSE, onRefruseSuccess);
-			SocketConnection.addCmdListener(BaZhenTuModuleMessages.S2C_REFRUSE_FAIL, onRefruseFail);
-			SocketConnection.addCmdListener(BaZhenTuModuleMessages.S2C_AGREE, onAgreeSuccess);
-			SocketConnection.addCmdListener(BaZhenTuModuleMessages.S2C_AGREE_FAIL, onAgreeFail);
-			SocketConnection.addCmdListener(BaZhenTuModuleMessages.S2C_OTHER_AGREE, onOtherArgee);
-			SocketConnection.addCmdListener(BaZhenTuModuleMessages.S2C_CANCEL, onCancel);
-			SocketConnection.addCmdListener(BaZhenTuModuleMessages.S2C_WAIT_ENTER_DUNGEON, onWaitEnterDungeon);
-			SocketConnection.addCmdListener(BaZhenTuModuleMessages.S2C_ENTER_TIMES_CHANGED, onEnterTimesChanged);
-			SocketConnection.addCmdListener(BaZhenTuModuleMessages.S2C_DUNGEON_INFO, onDungeonInfo);
-			SocketConnection.addCmdListener(BaZhenTuModuleMessages.S2C_NEW_WAVE, onNewWave);
-			SocketConnection.addCmdListener(BaZhenTuModuleMessages.S2C_STELE_ACTIVATE, onSteleActivate);
-			SocketConnection.addCmdListener(BaZhenTuModuleMessages.S2C_BUFFER_INVALID, onBufferInvalid);
-			SocketConnection.addCmdListener(BaZhenTuModuleMessages.S2C_FINISH, onFinish);
-			SocketConnection.addCmdListener(BaZhenTuModuleMessages.S2C_ADD_MONSTER, onAddMonster);
-			SocketConnection.addCmdListener(BaZhenTuModuleMessages.S2C_ADD_STELE_MONSTER, onAddSteleMonster);
+			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_TRY_START, onTryStartSuccess);
+			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_TRY_START_FAIL, onTryStartFail);
+			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_LEADER_START_DUNGEON, onLeaderStartDungeon);
+			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_REFRUSE, onRefruseSuccess);
+			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_REFRUSE_FAIL, onRefruseFail);
+			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_AGREE, onAgreeSuccess);
+			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_AGREE_FAIL, onAgreeFail);
+			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_OTHER_AGREE, onOtherArgee);
+			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_CANCEL, onCancel);
+			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_WAIT_ENTER_DUNGEON, onWaitEnterDungeon);
+			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_ENTER_TIMES_CHANGED, onEnterTimesChanged);
+			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_DUNGEON_INFO, onDungeonInfo);
+			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_NEW_WAVE, onNewWave);
+			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_STELE_ACTIVATE, onSteleActivate);
+			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_BUFFER_INVALID, onBufferInvalid);
+			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_FINISH, onFinish);
+			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_ADD_MONSTER, onAddMonster);
+			SocketConnection_protoBuffer.addCmdListener(BaZhenTuModuleMessages.S2C_ADD_STELE_MONSTER, onAddSteleMonster);
 			finish();
 		}
 
@@ -332,7 +328,7 @@ package com.rpgGame.app.cmdlistener
 			else
 			{
 				NoticeManager.showNotify(LangBaZhenTu.DUNGEON_FAIL);
-				SceneSender.requestLeaveDungeon();
+//				SceneSender.requestLeaveDungeon();
 			}
 		}
 
@@ -364,15 +360,15 @@ package com.rpgGame.app.cmdlistener
 		private function onAddMonster(buffer : ByteBuffer) : void
 		{
 //			var type:int = 
-			var data : MonsterData = new MonsterData(RoleType.TYPE_MONSTER);
-			data.baGuaType = buffer.readVarint32();
-			data.spellId = buffer.readVarint32();
-			data.id = buffer.readVarint64();
-			data.modelID = buffer.readVarint32();
-			RoleData.readGeneric(data, buffer);
-			SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
-			BaZhenTuManager.setSkillData(data);
-			EventManager.dispatchEvent(BaZhenTuEvent.MONSTER_ENTER_SCENE, data.baGuaType, data.spellId);
+//			var data : MonsterData = new MonsterData(RoleType.TYPE_MONSTER);
+//			data.baGuaType = buffer.readVarint32();
+//			data.spellId = buffer.readVarint32();
+//			data.id = buffer.readVarint64();
+//			data.modelID = buffer.readVarint32();
+//			RoleData.readGeneric(data, buffer);
+//			SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
+//			BaZhenTuManager.setSkillData(data);
+//			EventManager.dispatchEvent(BaZhenTuEvent.MONSTER_ENTER_SCENE, data.baGuaType, data.spellId);
 
 		}
 
@@ -403,15 +399,15 @@ package com.rpgGame.app.cmdlistener
 		private function onAddSteleMonster(buffer : ByteBuffer) : void
 		{
 
-			var data : MonsterData = new MonsterData(RoleType.TYPE_MONSTER);
-			data.baGuaType = buffer.readVarint32();
-			data.isJihuo = buffer.readBoolean();
-			data.id = buffer.readVarint64();
-			data.modelID = buffer.readVarint32();
-			RoleData.readGeneric(data, buffer);
-			SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
-			BaZhenTuManager.setShiBeiData(data);
-			EventManager.dispatchEvent(BaZhenTuEvent.SHIBEI_ENTER_SCENE, data.baGuaType, data.isJihuo);
+//			var data : MonsterData = new MonsterData(RoleType.TYPE_MONSTER);
+//			data.baGuaType = buffer.readVarint32();
+//			data.isJihuo = buffer.readBoolean();
+//			data.id = buffer.readVarint64();
+//			data.modelID = buffer.readVarint32();
+//			RoleData.readGeneric(data, buffer);
+//			SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
+//			BaZhenTuManager.setShiBeiData(data);
+//			EventManager.dispatchEvent(BaZhenTuEvent.SHIBEI_ENTER_SCENE, data.baGuaType, data.isJihuo);
 		}
 	}
 }

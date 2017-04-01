@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const UP_TO_BIAO_MAX_DISTANCE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.BiaoMiscDataProto.up_to_biao_max_distance", "upToBiaoMaxDistance", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const UP_TO_BIAO_MAX_DISTANCE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.BiaoMiscDataProto.up_to_biao_max_distance", "upToBiaoMaxDistance", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var up_to_biao_max_distance$field:int;
 
@@ -44,7 +44,7 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasUpToBiaoMaxDistance) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, up_to_biao_max_distance$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, up_to_biao_max_distance$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -57,14 +57,14 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var up_to_biao_max_distance$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (up_to_biao_max_distance$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BiaoMiscDataProto.upToBiaoMaxDistance cannot be set twice.');
 					}
 					++up_to_biao_max_distance$count;
-					this.upToBiaoMaxDistance = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.upToBiaoMaxDistance = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

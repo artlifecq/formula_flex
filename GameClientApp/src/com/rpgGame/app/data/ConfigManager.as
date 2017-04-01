@@ -1,23 +1,26 @@
 package com.rpgGame.app.data
 {
 	import com.gameClient.log.GameLog;
-	import com.rpgGame.app.manager.BiaoJuManager;
 	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.coreData.cfg.AddSpriteStatCfgData;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
+	import com.rpgGame.coreData.cfg.AreaCfgData;
+	import com.rpgGame.coreData.cfg.AttFormulaConfig;
+	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
+	import com.rpgGame.coreData.cfg.ChangeModelCfgData;
 	import com.rpgGame.coreData.cfg.ChatCfgData;
 	import com.rpgGame.coreData.cfg.ClientAreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientBuffCfgData;
-	import com.rpgGame.coreData.cfg.ClientCountryWarChengMenCfgData;
 	import com.rpgGame.coreData.cfg.ClientDialogCfgData;
-	import com.rpgGame.coreData.cfg.ClientSceneCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneEffectCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneNpcCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneRoleCfgData;
 	import com.rpgGame.coreData.cfg.ClientTriggerCfgData;
 	import com.rpgGame.coreData.cfg.DaTiCfgData;
+	import com.rpgGame.coreData.cfg.DieCfgData;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.cfg.FriendCfgData;
 	import com.rpgGame.coreData.cfg.GCDCfgData;
@@ -29,34 +32,24 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.MailCfgData;
 	import com.rpgGame.coreData.cfg.MazeCfgData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
+	import com.rpgGame.coreData.cfg.RelationCfgData;
 	import com.rpgGame.coreData.cfg.ReliveCfgData;
 	import com.rpgGame.coreData.cfg.ShopCfgData;
+	import com.rpgGame.coreData.cfg.SkillLvLDataManager;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.SpellEffectDataManager;
 	import com.rpgGame.coreData.cfg.StallCfgData;
 	import com.rpgGame.coreData.cfg.StatNameCfgData;
 	import com.rpgGame.coreData.cfg.TaxCfgData;
-	import com.rpgGame.coreData.cfg.TranportsDataManager;
+	import com.rpgGame.coreData.cfg.TipsCfgData;
+	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
 	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryStaticConfigData;
 	import com.rpgGame.coreData.cfg.country.CountryTaoNiCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
-	import com.rpgGame.coreData.cfg.crown.CountryUnionStatCfgData;
-	import com.rpgGame.coreData.cfg.crown.CrownNeiZhengCfgData;
-	import com.rpgGame.coreData.cfg.crown.CrownPanelPagesCfgData;
-	import com.rpgGame.coreData.cfg.demo.GmLevelAddSpellPointData;
-	import com.rpgGame.coreData.cfg.equip.CombineCfgData;
-	import com.rpgGame.coreData.cfg.equip.EquipMainStatCfgData;
-	import com.rpgGame.coreData.cfg.equip.EquipMakeCfgData;
-	import com.rpgGame.coreData.cfg.equip.EquipRefineTimesCfgData;
-	import com.rpgGame.coreData.cfg.equip.EquipTypeNameCfgData;
-	import com.rpgGame.coreData.cfg.equip.EquipmentCombineCfgData;
-	import com.rpgGame.coreData.cfg.equip.EquipmentGeneralCfgData;
-	import com.rpgGame.coreData.cfg.equip.EquipmentRefineDestoryCfgData;
-	import com.rpgGame.coreData.cfg.equip.RefineCfgData;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarHairResCfgData;
@@ -81,7 +74,7 @@ package com.rpgGame.app.data
 	import app.message.Config;
 	import app.message.ServiceConfig;
 	
-	import org.game.netCore.net.BytesUtil;
+	import org.game.netCore.net_protobuff.BytesUtil;
 
 	/**
 	 * 配置数据解析模块，这个模块只提供数据的解析，不提供数据的存储，具体的数据存储到各自模块中
@@ -124,7 +117,12 @@ package com.rpgGame.app.data
 		 */
 		public static function recClientConfig(dic : Dictionary) : void
 		{
-			ClientSceneCfgData.setup(dic[ConfigClassRegister.ClientScene]);
+			////////////////////////////////////////////////////////////////////////
+			//
+			//   以下为客户端专用表
+			//
+			///////////////////////////////////////////////////////////////////////
+			//ClientSceneCfgData.setup(dic[ConfigClassRegister.Q_map]);
 			ClientSceneNpcCfgData.setup(dic[ConfigClassRegister.ClientSceneNPC]);
 			ClientSceneEffectCfgData.setup(dic[ConfigClassRegister.ClientSceneEffect]);
 			ClientSceneRoleCfgData.setup(dic[ConfigClassRegister.ClientSceneRole]);
@@ -135,29 +133,69 @@ package com.rpgGame.app.data
 			GlobalSettingCfgData.setup(dic[ConfigClassRegister.GlobalSetting]);
 			HintConfig.setup(dic[ConfigClassRegister.HintInfo]);
 			GameSoundCfgData.setup(dic[ConfigClassRegister.GameSoundInfo]);
+			
 			HeroModelCfgData.setup(dic[ConfigClassRegister.HeroModel]);
 			MountModelCfgData.setup(dic[ConfigClassRegister.MountModel]);
 			AvatarMountResCfgData.setup(dic[ConfigClassRegister.AvatarMountRes]);
 			AvatarWeapontResCfgData.setup(dic[ConfigClassRegister.AvatarWeaponRes]);
 			AvatarDeputyWeaponResCfgData.setup(dic[ConfigClassRegister.AvatarDeputyWeaponRes]);
 			AvatarClothesResCfgData.setup(dic[ConfigClassRegister.AvatarClothesRes]);
-			BaZhenTuResCfgData.setup(dic[ConfigClassRegister.BaZhenTuRes]);
 			AvatarHairResCfgData.setup(dic[ConfigClassRegister.AvatarHairRes]);
 			AvatarResConfigSetData.setup(dic[ConfigClassRegister.AvatarResConfig]);
+            
+            AttachEffectCfgData.setup(dic[ConfigClassRegister.Attach_effect]);
+            ChangeModelCfgData.setup(dic[ConfigClassRegister.ChangeModel]);
+            RelationCfgData.setup(dic[ConfigClassRegister.Q_relation]);
+			
+			BaZhenTuResCfgData.setup(dic[ConfigClassRegister.BaZhenTuRes]);
+			
+			
 			EffectAnimationCfgData.setup(dic[ConfigClassRegister.EffectAnimation]);
 			FaceCfgData.setup(dic[ConfigClassRegister.FaceInfo]);
-			GmLevelAddSpellPointData.setup(dic[ConfigClassRegister.GmLevelAddSpellPoint]);
+//			GmLevelAddSpellPointData.setup(dic[ConfigClassRegister.GmLevelAddSpellPoint]);
 			StatNameCfgData.setup(dic[ConfigClassRegister.SpriteStatNameInfo]);
-			EquipTypeNameCfgData.setup(dic[ConfigClassRegister.EquipTypeNameInfo]);
-			EquipRefineTimesCfgData.setup(dic[ConfigClassRegister.EquipRefineTimesInfo]);
+//			EquipTypeNameCfgData.setup(dic[ConfigClassRegister.EquipTypeNameInfo]);
+//			EquipRefineTimesCfgData.setup(dic[ConfigClassRegister.EquipRefineTimesInfo]);
 			RaceCfgData.setup(dic[ConfigClassRegister.RaceNameInfo]);
-			CrownNeiZhengCfgData.setup(dic[ConfigClassRegister.CrownNeiZhenInfo]);
-			EquipMainStatCfgData.setup(dic[ConfigClassRegister.EquipMainStat]);
+//			CrownNeiZhengCfgData.setup(dic[ConfigClassRegister.CrownNeiZhenInfo]);
+//			EquipMainStatCfgData.setup(dic[ConfigClassRegister.EquipMainStat]);
 			HintCfgData.setUpHintTypeSet(dic[ConfigClassRegister.HintTypeSetInfo]);
-			ClientCountryWarChengMenCfgData.setup(dic[ConfigClassRegister.CountryWarChengMenInfo]);
-			CrownPanelPagesCfgData.setup(dic[ConfigClassRegister.CrownPageInfo]);
+//			ClientCountryWarChengMenCfgData.setup(dic[ConfigClassRegister.CountryWarChengMenInfo]);
+//			CrownPanelPagesCfgData.setup(dic[ConfigClassRegister.CrownPageInfo]);
 			ClientBuffCfgData.setUpHintTypeSet(dic[ConfigClassRegister.ClientBuff]);
-			CountryUnionStatCfgData.setup(null); //待解决
+			ItemConfig.setup(dic[ConfigClassRegister.Q_item]);
+			TipsCfgData.setup(dic[ConfigClassRegister.Q_tipsinfo]);
+			AttValueConfig.setup(dic[ConfigClassRegister.Q_att_values]);
+			AttFormulaConfig.setup(dic[ConfigClassRegister.Q_att_transfer]);
+			DieCfgData.setup(dic[ConfigClassRegister.Q_die]);
+			GCDCfgData.setup(dic[ConfigClassRegister.Q_GCD]);
+			SkillLvLDataManager.setup(dic[ConfigClassRegister.Q_skill_ignore]);
+//			CountryUnionStatCfgData.setup(null); //待解决
+
+			
+			////////////////////////////////////////////////////////////////////////
+			//
+			//   以下为服务器，客户端公用表
+			//
+			///////////////////////////////////////////////////////////////////////
+			//场景相关
+			MapDataManager.setSceneConfig(dic[ConfigClassRegister.Q_map]);
+            // 地图区域
+            AreaCfgData.setup(dic[ConfigClassRegister.Q_area]);
+            // 传送门
+            TransCfgData.setup(dic[ConfigClassRegister.Q_map_transfer]);
+			//怪物//NPC
+			MonsterDataManager.setMonsterConfig(dic[ConfigClassRegister.Q_monster]);//怪物总表
+			MonsterDataManager.setSceneAreaMonsterConfig(dic[ConfigClassRegister.Q_scene_monster_area]);//怪物刷新表
+			
+			//技能相关
+			SpellDataManager.setConfig(dic[ConfigClassRegister.Q_skill_model]);//技能总表
+			SpellEffectDataManager.setConfig(dic[ConfigClassRegister.Q_SpellEffect]);//每个技能效果，具体参数配置表
+			AnimationDataManager.setConfig(dic[ConfigClassRegister.Q_SpellAnimation]);///技能特效配置表
+			//公共CD配置
+//			GCDCfgData.setConfig(dic[ConfigClassRegister.Q_GCD]);
+			//状态数据buff相关
+			BuffStateDataManager.setConfig(dic[ConfigClassRegister.Q_buff]);
 		}
 
 		/**
@@ -191,25 +229,25 @@ package com.rpgGame.app.data
 			serviceConfig.mergeFrom(serviceConfigBytes);
 
 			//保存场景配置文件   抛出GAMEconfig_GET_SCENEconfig配置文件获取成功事件
-			if (config.hasSceneConfig)
-			{
-				MapDataManager.setSceneConfig(config.sceneConfig);
-			}
+//			if (config.hasSceneConfig)
+//			{
+//				MapDataManager.setSceneConfig(config.sceneConfig);
+//			}
 
-			if (config.hasSpellConfig)
-			{
-				SpellDataManager.setConfig(config.spellConfig.spellLearnConfig);
-				//状态数据buff相关
-				BuffStateDataManager.setConfig(config.spellConfig.stateConfig);
-				SpellEffectDataManager.setConfig(config.spellConfig.spellEffectConfig);
-				AnimationDataManager.setConfig(config.spellConfig.animationConfig);
-				//公共CD配置
-				GCDCfgData.setConfig(config.spellConfig.gcdGroupsConfig);
-			}
-			if (config.hasMonsterConfig)
-			{
-				MonsterDataManager.setConfig(config.monsterConfig); //怪物//NPC
-			}
+//			if (config.hasSpellConfig)
+//			{
+//				SpellDataManager.setConfig(config.spellConfig.spellLearnConfig);
+//				//状态数据buff相关
+//				BuffStateDataManager.setConfig(config.spellConfig.stateConfig);
+//				SpellEffectDataManager.setConfig(config.spellConfig.spellEffectConfig);
+//				AnimationDataManager.setConfig(config.spellConfig.animationConfig);
+//				//公共CD配置
+//				GCDCfgData.setConfig(config.spellConfig.gcdGroupsConfig);
+//			}
+//			if (config.hasMonsterConfig)
+//			{
+//				MonsterDataManager.setConfig(config.monsterConfig); //怪物//NPC
+//			}
 
 			if (config.hasGuildConfig)
 			{
@@ -218,7 +256,7 @@ package com.rpgGame.app.data
 			//传送门
 			if (config.hasSceneTranports)
 			{
-				TranportsDataManager.setConfig(config.sceneTranports);
+				//TranportsDataManager.setConfig(config.sceneTranports);
 			}
 
 			if (config.relationConfig)
@@ -236,7 +274,7 @@ package com.rpgGame.app.data
 			//复活相关配置
 			ReliveCfgData.setConfig(config.reliveConfig);
 			//物品
-			ItemCfgData.setAllCfgData(config.goodsConfig);
+//			ItemCfgData.setAllCfgData(config.goodsConfig);
 			//背包仓库解锁格子数据
 			GoodsContainerMamager.setUnlockDataConfig(config.allUnlockData);
 			//帮派
@@ -252,17 +290,17 @@ package com.rpgGame.app.data
 			//加点配置
 			AddSpriteStatCfgData.setConfig(config.addSpriteStatConfig);
 			//物品合成
-			CombineCfgData.setConfig(config.equipmentConfig.combineDatas);
+//			CombineCfgData.setConfig(config.equipmentConfig.combineDatas);
 			//装备合成
-			EquipmentCombineCfgData.setConfig(config.equipmentConfig.combineEquipDatas);
+//			EquipmentCombineCfgData.setConfig(config.equipmentConfig.combineEquipDatas);
 			//装备打造
-			EquipMakeCfgData.setConfig(config.equipmentConfig.equipBuild);
+//			EquipMakeCfgData.setConfig(config.equipmentConfig.equipBuild);
 			//装备改造
-			EquipmentGeneralCfgData.setConfig(config.equipmentConfig.generalDatas);
+//			EquipmentGeneralCfgData.setConfig(config.equipmentConfig.generalDatas);
 			//装备拆解
-			EquipmentRefineDestoryCfgData.setConfig(config.equipmentConfig.destroyDatas);
+//			EquipmentRefineDestoryCfgData.setConfig(config.equipmentConfig.destroyDatas);
 			//装备强化
-			RefineCfgData.setConfig(config.equipmentConfig.refineDatas);
+//			RefineCfgData.setConfig(config.equipmentConfig.refineDatas);
 			//王城战配置
 			FamilyWarCfgData.setup(config.kingWarConfig.miscData);
 			//运镖配置
@@ -274,7 +312,7 @@ package com.rpgGame.app.data
 
 			if (config.biaoConfig)
 			{ //镖局配置
-				BiaoJuManager.setMiscData(config.biaoConfig.biaoJuMisc);
+//				BiaoJuManager.setMiscData(config.biaoConfig.biaoJuMisc);
 			}
 			//坐骑
 			MountConfigData.setConfig(config.mount);

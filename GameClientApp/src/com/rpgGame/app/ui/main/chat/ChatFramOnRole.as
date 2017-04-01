@@ -4,19 +4,20 @@ package com.rpgGame.app.ui.main.chat
 	import com.rpgGame.app.richText.component.RichTextArea3D;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.utils.ColorUtils;
-
+	
 	import flash.text.TextFormat;
-
+	
 	import feathers.controls.text.Fontter;
-
+	
 	import org.mokylin.skin.mainui.chat.ChatFrameOnRoleSkin;
-
+	
+	
 	public class ChatFramOnRole extends SkinUI
 	{
 		private var _customSkin : ChatFrameOnRoleSkin;
 		private var _richText : RichTextArea3D;
 		private const PAD : int = 8;
-
+		
 		public function ChatFramOnRole()
 		{
 			_customSkin = new ChatFrameOnRoleSkin();
@@ -34,27 +35,31 @@ package com.rpgGame.app.ui.main.chat
 			_richText.defaultTextFormat = defaultFormat;
 			addChild(_richText);
 		}
-
+		
 		public function show(message : String) : void
 		{
+			if (!_richText)
+			{
+				return;
+			}
 			_richText.text = "";
 			_richText.appendRichText(message);
 			_customSkin.bg.width = _richText.textWidth + PAD * 2 + 6;
-			_customSkin.bg.height = _richText.textHeight + PAD * 2 - 2;
+			_customSkin.bg.height = _richText.textHeight + PAD * 2 + (_richText.textHeight > 30 ? 4 : -2);
 			_customSkin.arrow.x = (_customSkin.bg.width - _customSkin.arrow.width) / 2;
 			_customSkin.arrow.y = _customSkin.bg.height - 1;
 		}
-
+		
 		override public function get width() : Number
 		{
 			return _customSkin.bg.width;
 		}
-
+		
 		override public function get height() : Number
 		{
 			return _customSkin.arrow.y + _customSkin.arrow.height;
 		}
-
+		
 		override public function dispose() : void
 		{
 			super.dispose();

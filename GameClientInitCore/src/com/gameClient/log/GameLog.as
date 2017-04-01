@@ -1,7 +1,5 @@
 package com.gameClient.log
 {
-	
-
 	public class GameLog
 	{
 		public static const APPEND_TXT:String = "append_txt";

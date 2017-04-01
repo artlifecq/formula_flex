@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.PhoenixDataProto.type", "type", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.AmountType);
+		public static const TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.PhoenixDataProto.type", "type", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.AmountType);
 
 		private var type$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COST:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.PhoenixDataProto.cost", "cost", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COST:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.PhoenixDataProto.cost", "cost", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var cost$field:int;
 
@@ -67,7 +67,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COEFFICIENT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.PhoenixDataProto.coefficient", "coefficient", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COEFFICIENT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.PhoenixDataProto.coefficient", "coefficient", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var coefficient$field:int;
 
@@ -95,15 +95,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, type$field);
 			}
 			if (hasCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, cost$field);
 			}
 			if (hasCoefficient) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, coefficient$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, coefficient$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -118,28 +118,28 @@ package app.message {
 			var cost$count:uint = 0;
 			var coefficient$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: PhoenixDataProto.type cannot be set twice.');
 					}
 					++type$count;
-					this.type = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.type = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 2:
 					if (cost$count != 0) {
 						throw new flash.errors.IOError('Bad data format: PhoenixDataProto.cost cannot be set twice.');
 					}
 					++cost$count;
-					this.cost = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.cost = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (coefficient$count != 0) {
 						throw new flash.errors.IOError('Bad data format: PhoenixDataProto.coefficient cannot be set twice.');
 					}
 					++coefficient$count;
-					this.coefficient = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.coefficient = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

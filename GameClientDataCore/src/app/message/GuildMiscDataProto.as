@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CREATE_COST_MONEY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GuildMiscDataProto.create_cost_money", "createCostMoney", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CREATE_COST_MONEY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GuildMiscDataProto.create_cost_money", "createCostMoney", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var create_cost_money$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CREATE_COST_GOODS:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GuildMiscDataProto.create_cost_goods", "createCostGoods", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CREATE_COST_GOODS:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GuildMiscDataProto.create_cost_goods", "createCostGoods", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var create_cost_goods$field:int;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const JOIN_GUILD_CD:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.GuildMiscDataProto.join_guild_cd", "joinGuildCd", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const JOIN_GUILD_CD:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.GuildMiscDataProto.join_guild_cd", "joinGuildCd", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var join_guild_cd$field:Int64;
 
@@ -89,7 +89,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DONATE_MONEY_BASE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GuildMiscDataProto.donate_money_base", "donateMoneyBase", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DONATE_MONEY_BASE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GuildMiscDataProto.donate_money_base", "donateMoneyBase", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var donate_money_base$field:int;
 
@@ -114,7 +114,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DONATE_MONEY_GIVE_CONTRIBUTION_POINT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GuildMiscDataProto.donate_money_give_contribution_point", "donateMoneyGiveContributionPoint", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DONATE_MONEY_GIVE_CONTRIBUTION_POINT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GuildMiscDataProto.donate_money_give_contribution_point", "donateMoneyGiveContributionPoint", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var donate_money_give_contribution_point$field:int;
 
@@ -139,7 +139,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAX_DI_WEN:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GuildMiscDataProto.max_di_wen", "maxDiWen", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MAX_DI_WEN:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GuildMiscDataProto.max_di_wen", "maxDiWen", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var max_di_wen$field:int;
 
@@ -164,7 +164,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAX_DI_KUANG:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GuildMiscDataProto.max_di_kuang", "maxDiKuang", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MAX_DI_KUANG:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GuildMiscDataProto.max_di_kuang", "maxDiKuang", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var max_di_kuang$field:int;
 
@@ -189,7 +189,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MIN_GUILD_NAME_LENGTH:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GuildMiscDataProto.min_guild_name_length", "minGuildNameLength", (12 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MIN_GUILD_NAME_LENGTH:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GuildMiscDataProto.min_guild_name_length", "minGuildNameLength", (12 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var min_guild_name_length$field:int;
 
@@ -214,7 +214,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAX_GUILD_NAME_LENGTH:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GuildMiscDataProto.max_guild_name_length", "maxGuildNameLength", (13 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MAX_GUILD_NAME_LENGTH:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GuildMiscDataProto.max_guild_name_length", "maxGuildNameLength", (13 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var max_guild_name_length$field:int;
 
@@ -242,39 +242,39 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasCreateCostMoney) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, create_cost_money$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, create_cost_money$field);
 			}
 			if (hasCreateCostGoods) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, create_cost_goods$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, create_cost_goods$field);
 			}
 			if (hasJoinGuildCd) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, join_guild_cd$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, join_guild_cd$field);
 			}
 			if (hasDonateMoneyBase) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, donate_money_base$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, donate_money_base$field);
 			}
 			if (hasDonateMoneyGiveContributionPoint) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, donate_money_give_contribution_point$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, donate_money_give_contribution_point$field);
 			}
 			if (hasMaxDiWen) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, max_di_wen$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, max_di_wen$field);
 			}
 			if (hasMaxDiKuang) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, max_di_kuang$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, max_di_kuang$field);
 			}
 			if (hasMinGuildNameLength) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, min_guild_name_length$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, min_guild_name_length$field);
 			}
 			if (hasMaxGuildNameLength) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, max_guild_name_length$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, max_guild_name_length$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -295,70 +295,70 @@ package app.message {
 			var min_guild_name_length$count:uint = 0;
 			var max_guild_name_length$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (create_cost_money$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildMiscDataProto.createCostMoney cannot be set twice.');
 					}
 					++create_cost_money$count;
-					this.createCostMoney = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.createCostMoney = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (create_cost_goods$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildMiscDataProto.createCostGoods cannot be set twice.');
 					}
 					++create_cost_goods$count;
-					this.createCostGoods = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.createCostGoods = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (join_guild_cd$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildMiscDataProto.joinGuildCd cannot be set twice.');
 					}
 					++join_guild_cd$count;
-					this.joinGuildCd = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.joinGuildCd = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 4:
 					if (donate_money_base$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildMiscDataProto.donateMoneyBase cannot be set twice.');
 					}
 					++donate_money_base$count;
-					this.donateMoneyBase = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.donateMoneyBase = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (donate_money_give_contribution_point$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildMiscDataProto.donateMoneyGiveContributionPoint cannot be set twice.');
 					}
 					++donate_money_give_contribution_point$count;
-					this.donateMoneyGiveContributionPoint = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.donateMoneyGiveContributionPoint = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 10:
 					if (max_di_wen$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildMiscDataProto.maxDiWen cannot be set twice.');
 					}
 					++max_di_wen$count;
-					this.maxDiWen = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.maxDiWen = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 11:
 					if (max_di_kuang$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildMiscDataProto.maxDiKuang cannot be set twice.');
 					}
 					++max_di_kuang$count;
-					this.maxDiKuang = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.maxDiKuang = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 12:
 					if (min_guild_name_length$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildMiscDataProto.minGuildNameLength cannot be set twice.');
 					}
 					++min_guild_name_length$count;
-					this.minGuildNameLength = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.minGuildNameLength = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 13:
 					if (max_guild_name_length$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildMiscDataProto.maxGuildNameLength cannot be set twice.');
 					}
 					++max_guild_name_length$count;
-					this.maxGuildNameLength = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.maxGuildNameLength = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -4,8 +4,8 @@ package com.rpgGame.app.manager
 	import com.game.mainCore.libCore.handle.HandleThread;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.task.PrizeInfo;
 	
 	import flash.geom.Point;
@@ -25,7 +25,7 @@ package com.rpgGame.app.manager
 		 * @param startPos
 		 * 
 		 */		
-		public static function tweenItemInBag(info:ItemInfo,startPos:Point = null,onCmpFun:Function = null,time:Number = 0.6, interval:int = 200):void
+		public static function tweenItemInBag(info:ClientItemInfo,startPos:Point = null,onCmpFun:Function = null,time:Number = 0.6, interval:int = 200):void
 		{
 			if(info == null)return;
 			tweenItemInBagByCfgId(info.cfgId,info.count,startPos,onCmpFun,time,interval);
@@ -33,13 +33,13 @@ package com.rpgGame.app.manager
 		
 		public static function tweenItemInBagByCfgId(cfgId:int,count:int = 1,startPos:Point = null,onCmpFun:Function = null,time:Number = 0.6,interval:int = 200):void
 		{
-			var icoName:String = ItemCfgData.getItemIcon(cfgId);
+			var icoName:String = ItemConfig.getItemIcon(cfgId);
 			tweenItemInBagByItemIcon(icoName,count,startPos,onCmpFun,time,interval);
 		}
 		
 		public static function tweenItemByCfgId(cfgId:int,count:int,startPos:Point,endPoint:Point,onCmpFun:Function = null,time:Number = 0.6):void
 		{
-			var icoName:String = ItemCfgData.getItemIcon(cfgId);
+			var icoName:String = ItemConfig.getItemIcon(cfgId);
 			tweenItemByIconName(icoName,count,startPos,endPoint,onCmpFun,time);
 		}
 		
@@ -142,9 +142,9 @@ package com.rpgGame.app.manager
 		public static function tweenPrizeInfoToBag(prize:PrizeInfo,startPos:Point = null,onCompFunc:Function = null):void
 		{
 			if(prize == null) return;
-			var arr:Vector.<ItemInfo> = prize.itemInfoList;
+			var arr:Vector.<ClientItemInfo> = prize.itemInfoList;
 			var len:int = arr.length;
-			var itemInfo:ItemInfo;
+			var itemInfo:ClientItemInfo;
 			for (var i:int = 0; i < len; i++) 
 			{
 				itemInfo = arr[i];
@@ -155,7 +155,7 @@ package com.rpgGame.app.manager
 				{
 					tweenItemInBag(itemInfo,startPos);
 				}
-				var str:String = "获得 【" + ItemCfgData.getItemName(itemInfo.cfgId) + "】X" + itemInfo.count;
+				var str:String = "获得 【" + ItemConfig.getItemName(itemInfo.cfgId) + "】X" + itemInfo.count;
 				NoticeManager.showNotify(str);
 			}
 		}

@@ -26,16 +26,21 @@ package com.rpgGame.app.state.role.action
 	{
 		private var _stateReference : BlinkStateReference;
 		private var _statusType : String;
+		
 		private var _totalFrameTime : int;
-		private var _breakFrameTime : int;
+//		private var _breakFrameTime : int;
+		
 		private var _totalFrameTween : TweenLite;
 		private var _breakFrameTween : TweenLite;
 		private var _soarFrameTween : TweenLite;
 		private var _nextSoarFrameTween : TweenLite;
+		
 		private var _isFixedFrame : Boolean;
+		
 		private var _totalTime : int;
 		private var _throwDelayTime : int;
 		private var _soarFrameTime : int;
+		
 		private var _blinkFinished : Boolean;
 		private var _hitFrameTime : int;
 		private var _hitFrameTween : TweenLite;
@@ -66,13 +71,13 @@ package com.rpgGame.app.state.role.action
 						if (_statusType)
 						{
 							_soarFrameTime = _stateReference.soarFrameTime;
-							_breakFrameTime = _stateReference.breakFrameTime;
+//							_breakFrameTime = _stateReference.breakFrameTime;
 							_hitFrameTime = _stateReference.hitFrameTime;
 						}
 						else
 						{
 							_soarFrameTime = 0;
-							_breakFrameTime = 0;
+//							_breakFrameTime = 0;
 							_hitFrameTime = 0;
 						}
 					}
@@ -130,7 +135,7 @@ package com.rpgGame.app.state.role.action
 		{
 			super.playAnimation(role, render, isFreeze, time, speedRatio);
 
-			var status : String = _statusType ? _statusType : RoleActionType.IDLE;
+			var status : String = _statusType ? _statusType : RoleActionType.STAND;
 			var matchStatus : String = RoleActionType.getActionType(status, (_machine as RoleStateMachine).isRiding);
 			switch (render.type)
 			{
@@ -183,12 +188,12 @@ package com.rpgGame.app.state.role.action
 				}
 				_totalFrameTime = _totalFrameTime > moveTotalTime ? _totalFrameTime : moveTotalTime;
 
-				var breakFrameTime : int = (_breakFrameTime > 0 ? _breakFrameTime : _totalFrameTime);
-				if (breakFrameTime > _totalFrameTime)
-					breakFrameTime = _totalFrameTime;
-				var hitFrameTime : int = (_hitFrameTime > 0 ? _hitFrameTime : breakFrameTime);
-				if (hitFrameTime > breakFrameTime)
-					hitFrameTime = breakFrameTime;
+//				var breakFrameTime : int = (_breakFrameTime > 0 ? _breakFrameTime : _totalFrameTime);
+//				if (breakFrameTime > _totalFrameTime)
+//					breakFrameTime = _totalFrameTime;
+				var hitFrameTime : int = (_hitFrameTime > 0 ? _hitFrameTime : _totalFrameTime);
+				if (hitFrameTime > _totalFrameTime)
+					hitFrameTime = _totalFrameTime;
 
 				if (_hitFrameTween)
 				{
@@ -233,14 +238,14 @@ package com.rpgGame.app.state.role.action
 						else
 						{
 							_hitFrameTween = TweenLite.delayedCall(hitFrameTime * 0.001, onHitFrameCmp);
-							_breakFrameTween = TweenLite.delayedCall(breakFrameTime * 0.001, onBreakFrameCmp);
+//							_breakFrameTween = TweenLite.delayedCall(breakFrameTime * 0.001, onBreakFrameCmp);
 							_totalFrameTween = TweenLite.delayedCall(_totalFrameTime * 0.001, onTotalFrameCmp);
 						}
 					}
 					else
 					{
 						_hitFrameTween = TweenLite.delayedCall(hitFrameTime * 0.001, onHitFrameCmp);
-						_breakFrameTween = TweenLite.delayedCall(breakFrameTime * 0.001, onBreakFrameCmp);
+//						_breakFrameTween = TweenLite.delayedCall(breakFrameTime * 0.001, onBreakFrameCmp);
 						_totalFrameTween = TweenLite.delayedCall(_totalFrameTime * 0.001, onTotalFrameCmp);
 					}
 				}
@@ -316,20 +321,20 @@ package com.rpgGame.app.state.role.action
 			}
 		}
 
-		private function onBreakFrameCmp() : void
-		{
-			_blinkBroken = true;
-			if (_machine && !_machine.isDisposed)
-			{
-				if (_breakFrameTween)
-				{
-					_breakFrameTween.kill();
-					_breakFrameTween = null;
-				}
-				if (_stateReference)
-					_stateReference.breakFrame();
-			}
-		}
+//		private function onBreakFrameCmp() : void
+//		{
+//			_blinkBroken = true;
+//			if (_machine && !_machine.isDisposed)
+//			{
+//				if (_breakFrameTween)
+//				{
+//					_breakFrameTween.kill();
+//					_breakFrameTween = null;
+//				}
+//				if (_stateReference)
+//					_stateReference.breakFrame();
+//			}
+//		}
 
 		private function soarPhase1To2() : void
 		{

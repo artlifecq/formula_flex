@@ -1,9 +1,13 @@
 package com.rpgGame.app.manager
 {
+	import com.game.engine2D.controller.CameraFrontController;
+	import com.game.engine2D.scene.CameraOrthographicLens;
+	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.controller.CameraController;
 	import com.game.engine3D.core.AreaMap;
 	import com.game.engine3D.core.GameScene3D;
 	import com.game.engine3D.events.SceneEvent;
+	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.vo.AreaMapData;
 	import com.game.engine3D.vo.map.ClientMapAreaData;
 	import com.game.engine3D.vo.map.ClientMapCameraBokehDepth;
@@ -17,10 +21,12 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.clientConfig.GlobalSetting;
 	import com.rpgGame.coreData.configEnum.EnumGlobalSetting;
 	import com.rpgGame.coreData.enum.EnumAreaMapType;
-
+	
+	import away3d.cameras.lenses.OrthographicLens;
+	import away3d.cameras.lenses.PerspectiveLens;
 	import away3d.containers.ObjectContainer3D;
 	import away3d.filters.RingDepthOfFieldFilter3D;
-
+	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -30,6 +36,9 @@ package com.rpgGame.app.manager
 	 */
 	public class GameCameraManager
 	{
+		private static var orthographicLens:OrthographicLens = new CameraOrthographicLens(1000);
+		private static var perspectiveLens:PerspectiveLens = new PerspectiveLens();
+		
 		private static var _playerModeDistance : int;
 		private static var _playerMode : Boolean;
 
@@ -39,31 +48,42 @@ package com.rpgGame.app.manager
 		 */
 		public static function startPlayerMode(target : ObjectContainer3D) : void
 		{
-			_playerMode = true;
-			CameraController.initcontroller(SceneManager.getScene().camera, target);
-			var setting : GlobalSetting = GlobalSettingCfgData.getSettingInfo(EnumGlobalSetting.DEFAULT_SETTING);
-			if (!setting)
+			if(GlobalConfig.use2DMap)
 			{
-				//setting.cameraOffsetY
-				CameraController.initLockOnControl(setting.cameraOffsetY, setting.cameraXDeg, setting.cameraYDeg, setting.cameraDistance, true, true, true, setting.cameraMinDistance, setting.cameraMaxDistance, setting.cameraMinTiltAngle, setting.cameraMaxTiltAngle, true, setting.cameraBlockMinDistance);
-				CameraController.lockedOnPlayerController.mouseRightSpeed = setting.cameraMouseDragSpeed;
-				CameraController.lockedOnPlayerController.mouseWheelSpeed = setting.cameraMouseWheelSpeed;
+				CameraFrontController.initcontroller(SceneManager.scene.view3d.camera, target);
+				CameraFrontController.LOCK_DISTANCE = 90000;
+				////测试代码////
+				CameraFrontController.startControl(Stage3DLayerManager.stage);
+				CameraFrontController.sceneCamera = SceneManager.scene.sceneCamera;
 			}
 			else
 			{
-				CameraController.initLockOnControl(135, 0, 40, 1800, false, true, false, 500, 20000, 0, 80, true, 200);
-				CameraController.lockedOnPlayerController.mouseRightSpeed = 0.2;
-				CameraController.lockedOnPlayerController.mouseWheelSpeed = 30;
+				_playerMode = true;
+				CameraController.initcontroller(SceneManager.getScene().camera, target);
+				var setting : GlobalSetting = GlobalSettingCfgData.getSettingInfo(EnumGlobalSetting.DEFAULT_SETTING);
+				if (!setting)
+				{
+					//setting.cameraOffsetY
+					CameraController.initLockOnControl(setting.cameraOffsetY, setting.cameraXDeg, setting.cameraYDeg, setting.cameraDistance, true, true, true, setting.cameraMinDistance, setting.cameraMaxDistance, setting.cameraMinTiltAngle, setting.cameraMaxTiltAngle, true, setting.cameraBlockMinDistance);
+					CameraController.lockedOnPlayerController.mouseRightSpeed = setting.cameraMouseDragSpeed;
+					CameraController.lockedOnPlayerController.mouseWheelSpeed = setting.cameraMouseWheelSpeed;
+				}
+				else
+				{
+					CameraController.initLockOnControl(135, 0, 40, 1800, false, true, false, 500, 20000, 0, 80, true, 200);
+					CameraController.lockedOnPlayerController.mouseRightSpeed = 0.2;
+					CameraController.lockedOnPlayerController.mouseWheelSpeed = 30;
+				}
+				CameraController.switchToLockOnControl();
+				//			CameraController.lockedOnPlayerController.distTweenDuration = 0.3;
+				//			if (!_playerMode)
+				//			{
+				//				CameraController.lockedOnPlayerController.distance = _playerModeDistance;
+				//			}
+				
+				
+				EventManager.addEvent(SceneEvent.CAMERA_DISTANCE_CHANGE, onCameraDistanceChange);
 			}
-			CameraController.switchToLockOnControl();
-//			CameraController.lockedOnPlayerController.distTweenDuration = 0.3;
-//			if (!_playerMode)
-//			{
-//				CameraController.lockedOnPlayerController.distance = _playerModeDistance;
-//			}
-
-
-			EventManager.addEvent(SceneEvent.CAMERA_DISTANCE_CHANGE, onCameraDistanceChange);
 		}
 
 		/**

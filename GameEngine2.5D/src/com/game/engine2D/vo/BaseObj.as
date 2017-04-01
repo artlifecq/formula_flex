@@ -2,6 +2,7 @@ package com.game.engine2D.vo{
 	import com.game.engine2D.config.GlobalConfig2D;
 	import com.game.engine2D.interfaces.ISDisplayObject;
 	import com.game.engine3D.vo.BaseObj3D;
+	import com.game.engine3D.vo.IFrameRender;
 	import com.game.mainCore.libCore.pool.IPoolClass;
 	
 	import flash.display.IBitmapDrawable;
@@ -11,8 +12,8 @@ package com.game.engine2D.vo{
 	
 	import away3d.containers.ObjectContainer3D;
 	import away3d.entities.EntityLayerType;
+	import away3d.tick.Tick;
 	
-	import org.client.mainCore.utils.Tick;
 	
 	/**
 	 * 基本元素模型（实现了池接口）
@@ -68,23 +69,24 @@ package com.game.engine2D.vo{
 		 */	
 		public var canRemoved:Boolean = true;
 		
-		private var _isMainChar:Boolean;
+		protected var _isMainChar:Boolean;
 		
 		//*******************************************IFrameRender接口基本参数*******************************************
 		public function startRender():void
 		{
-			Tick.addCallback(onTick);
+			_runTickCnt = 0;
+			Tick.instance.addCallBack(onTick);
 		}
 		
 		public function stopRender():void
 		{
-			Tick.removeCallback(onTick);
+			Tick.instance.removeCallBack(onTick);
 		}
 		
 		//*******************************************IDisplayable接口基本参数*******************************************
 		protected var _x:Number = 0;
 		/**显示位置X*/
-		public function get x():Number
+		final public function get x():Number
 		{
 			return _x;
 		}
@@ -99,7 +101,7 @@ package com.game.engine2D.vo{
 		
 		protected var _y:Number = 0;
 		/**显示位置Y*/
-		public function get y():Number
+		final public function get y():Number
 		{
 			return _y;
 		}
@@ -111,18 +113,34 @@ package com.game.engine2D.vo{
 				updateNow = true;
 			}
 		}
+
+		protected var _z:Number = 0;
+		/**显示位置Z*/
+		final public function get z():Number
+		{
+			return _z;
+		}
+		public function set z(value:Number):void
+		{
+			if(_z != value)
+			{
+				_z = value;
+			}
+		}
 		
 		private var _finalShowY:Number = 0;
-		public function get finalShowY():Number
+		final public function get finalShowY():Number
 		{
 			return _finalShowY;
 		}
+		
 		public function set finalShowY(value:Number):void
 		{
 			_finalShowY = value;
 		}
+		
 		private var _finalShowX:Number = 0;
-		public function get finalShowX():Number
+		final public function get finalShowX():Number
 		{
 			return _finalShowX;
 		}
@@ -133,7 +151,7 @@ package com.game.engine2D.vo{
 		
 		protected var _offsetX:Number = 0;
 		/**偏移量X*/
-		public function get offsetX():Number
+		final public function get offsetX():Number
 		{
 			return _offsetX;
 		}
@@ -148,7 +166,7 @@ package com.game.engine2D.vo{
 		
 		protected var _offsetY:Number = 0;
 		/**偏移量Y*/
-		public function get offsetY():Number
+		final public function get offsetY():Number
 		{
 			return _offsetY;
 		}
@@ -163,7 +181,7 @@ package com.game.engine2D.vo{
 		
 		protected var _visible:Boolean = true;
 		/**是否显示 */
-		public function get visible():Boolean
+		final public function get visible():Boolean
 		{
 			return _visible;
 		}
@@ -177,8 +195,7 @@ package com.game.engine2D.vo{
 		}
 		
 		protected var _smooth:Boolean = false;
-		/**是否显示 */
-		public function get smooth():Boolean
+		final public function get smooth():Boolean
 		{
 			return _smooth;
 		}
@@ -186,6 +203,17 @@ package com.game.engine2D.vo{
 		public function set smooth(value:Boolean):void
 		{
 			_smooth = value;
+		}
+
+		protected var _depthEnable:Boolean = true;
+		final public function get depthEnable():Boolean
+		{
+			return _depthEnable;
+		}
+		
+		public function set depthEnable(value:Boolean):void
+		{
+			_depthEnable = value;
 		}
 		
 		protected var _isInViewDistance:Boolean = false;
@@ -213,7 +241,7 @@ package com.game.engine2D.vo{
 			}
 		}
 		
-		public function get isInViewDistance():Boolean
+		final public function get isInViewDistance():Boolean
 		{
 			return _isInViewDistance;
 		}
@@ -226,7 +254,7 @@ package com.game.engine2D.vo{
 		
 		protected var _colorTransform:ColorTransform = null;
 		
-		public function get colorTransform():ColorTransform
+		final public function get colorTransform():ColorTransform
 		{
 			return _colorTransform;
 		}
@@ -242,7 +270,7 @@ package com.game.engine2D.vo{
 		
 		protected var _alpha:Number = 1;
 		/**透明度 */
-		public function get alpha():Number
+		final public function get alpha():Number
 		{
 			return _alpha;
 		}
@@ -262,7 +290,7 @@ package com.game.engine2D.vo{
 		
 		protected var _scaleX:Number = 0;
 		/**X缩放 */
-		public function get scaleX():Number
+		final public function get scaleX():Number
 		{
 			return _scaleX;
 		}
@@ -276,7 +304,7 @@ package com.game.engine2D.vo{
 		
 		protected var _scaleY:Number = 0;
 		/**X缩放 */
-		public function get scaleY():Number
+		final public function get scaleY():Number
 		{
 			return _scaleY;
 		}
@@ -290,7 +318,7 @@ package com.game.engine2D.vo{
 		
 		protected var _rotation:Number = 0;
 		/**角度 */
-		public function get rotationAngle():Number
+		final public function get rotationAngle():Number
 		{
 			return _rotation;
 		}
@@ -303,7 +331,7 @@ package com.game.engine2D.vo{
 			}
 		}
 		/**角度 */
-		public function get rotation():Number
+		final public function get rotation():Number
 		{
 			return _rotation;
 		}
@@ -314,7 +342,7 @@ package com.game.engine2D.vo{
 		
 		protected var _logicAngle:uint = 0;
 		/**逻辑角度 */
-		public function get logicAngle():uint
+		final public function get logicAngle():uint
 		{
 			return _logicAngle;
 		}
@@ -328,7 +356,7 @@ package com.game.engine2D.vo{
 		}
 		
 		protected var _layerType:uint = 0;
-		public function get layerType():uint
+		final public function get layerType():uint
 		{
 			return _layerType;
 		}
@@ -339,7 +367,7 @@ package com.game.engine2D.vo{
 		
 		protected var _depth:int = 0;
 		/**深度(用于深度排序)*/
-		public function get depth():int
+		final public function get depth():int
 		{
 			return _depth;
 		}
@@ -348,30 +376,19 @@ package com.game.engine2D.vo{
 			if(_depth != value)
 			{
 				_depth = value;
-				
 				updateNow = true;
 			}
 		}
 		
 		protected var _depthIndex:uint = 0;
 		/**深度(用于深度排序)*/
-		public function get depthIndex():uint
+		final public function get depthIndex():uint
 		{
 			return _depthIndex;
 		}
 		
 		public function set depthIndex(value:uint):void
 		{
-			/*if(_parent && _graphicDis && _graphicDis.parent && _graphicDis.parent == _parent)
-			{
-				if(_depthIndex != value)
-				{
-					if(_parent.numChildren > value)
-					{
-						_parent.setChildIndex(_graphicDis,value);
-					}
-				}
-			}*/
 			_depthIndex = value;
 		}
 		
@@ -389,7 +406,7 @@ package com.game.engine2D.vo{
 		
 		protected var _mouseEnabled:Boolean = false;
 		/**是否启用鼠标(区别于AS3中的mouseEnabled，此mouseEnabled=AS3中的mouseEnabled+mouseChildren)*/
-		public function get mouseEnabled():Boolean
+		final public function get mouseEnabled():Boolean
 		{
 			return _mouseEnabled;
 		}
@@ -412,7 +429,7 @@ package com.game.engine2D.vo{
 		
 		protected var _graphicDis:ObjectContainer3D;
 		/**所属渲染容器*/
-		public function get graphicDis():ObjectContainer3D
+		final public function get graphicDis():ObjectContainer3D
 		{
 			return _graphicDis;
 		}
@@ -424,7 +441,7 @@ package com.game.engine2D.vo{
 		
 		protected var _parent:ObjectContainer3D;
 		/**所属显示对象(显示对象容器)*/
-		public function get parent():ObjectContainer3D
+		final public function get parent():ObjectContainer3D
 		{
 			return _parent;
 		}
@@ -436,21 +453,9 @@ package com.game.engine2D.vo{
 				_parent = value;
 			}
 			//--------------------------------------------------------------
-			if(_graphicDis)
+			if(_graphicDis && _visible)
 			{
-				if(_visible)//看不见还添加个毛呀...
-				{
-					/*if(_parent.numChildren > _depthIndex)
-					{
-						_parent.addChild(_graphicDis);
-						_parent.setChildIndex(_graphicDis,_depthIndex);
-					}
-					else
-					{
-						_parent.addChild(_graphicDis);
-					}*/
-					_parent.addChild(_graphicDis);
-				}
+				_parent.addChild(_graphicDis);
 			}
 		}
 		
@@ -476,7 +481,7 @@ package com.game.engine2D.vo{
 		/**
 		 * 是否启用动态阴影
 		 */
-		public function get enableShadow():Boolean
+		final public function get enableShadow():Boolean
 		{
 			return _enableShadow;
 		}
@@ -490,7 +495,7 @@ package com.game.engine2D.vo{
 		/**
 		 * 是否渲染动态阴影(即使启用,但不一定会渲染哦...)
 		 */
-		public function get isDrawShadow():Boolean
+		final public function get isDrawShadow():Boolean
 		{
 			return _isDrawShadow;
 		}
@@ -500,6 +505,16 @@ package com.game.engine2D.vo{
 			_isDrawShadow = value;
 		}
 		
+		protected var _planarRenderLayer:uint = 1;
+		final public function get planarRenderLayer():uint
+		{
+			return _planarRenderLayer;
+		}
+		
+		public function set planarRenderLayer(value:uint):void
+		{
+			_planarRenderLayer = value;
+		}
 		
 		/**
 		 * 是否需要绘制
@@ -508,7 +523,7 @@ package com.game.engine2D.vo{
 		/**
 		 * 是否需要绘制
 		 */
-		public function get needRender():Boolean
+		final public function get needRender():Boolean
 		{
 			return _needRender;
 		}
@@ -526,28 +541,9 @@ package com.game.engine2D.vo{
 			{
 				if(value)
 				{
-					if(_parent)
+					if(_graphicDis.parent != _parent)
 					{
-						if(_parent.numChildren > _depthIndex)
-						{
-							if(_graphicDis.parent != _parent)
-							{
-								_parent.addChild(_graphicDis);
-								//_parent.setChildIndex(_graphicDis,_depthIndex);
-							}
-							//else
-							//{
-							//	_parent.setChildIndex(_graphicDis,_depthIndex);
-							//}
-						}
-						else
-						{
-							if(_graphicDis.parent != _parent)
-							{
-								_parent.addChild(_graphicDis);
-							}
-							_depthIndex = _parent.numChildren - 1;
-						}
+						_parent.addChild(_graphicDis);
 					}
 				}
 				else
@@ -555,7 +551,6 @@ package com.game.engine2D.vo{
 					if(_parent == _graphicDis.parent)
 					{
 						_parent.removeChild(_graphicDis);
-						_depthIndex = 0;
 					}
 				}
 			}
@@ -564,7 +559,7 @@ package com.game.engine2D.vo{
 		//不收全局混合模式开关影响的，强制设置混合模式。
 		protected var _forceEnableBlendMode:Boolean = false;
 		
-		public function get forceEnableBlendMode():Boolean
+		final public function get forceEnableBlendMode():Boolean
 		{
 			return _forceEnableBlendMode;
 		}
@@ -613,13 +608,14 @@ package com.game.engine2D.vo{
 		{
 			//改变唯一ID
 			_uniqueID = (++BaseObj3D.UNIQUE_ID);
-			
+			_runTickCnt = 0;
 			disposing = false;
 			usable = true;
 			updateNow = true;
 			_rotation = 0;
 			_smooth = false;
 			alpha = 1;
+			_planarRenderLayer = 1;
 			_layerType = EntityLayerType.DEFAULT;
 		}
 		
@@ -637,9 +633,8 @@ package com.game.engine2D.vo{
 			name = null;
 			type = null;
 			_depth = 0;
-			
-			disposing=false;
-			usable = false;
+			_smooth = false;
+			_usable = false;
 			_visible = true;
 			_isInViewDistance = false;
 			updateNow = false;
@@ -675,7 +670,7 @@ package com.game.engine2D.vo{
 		/**
 		 * 是否可用(此参数只应在池回收时改变，外部不要改变)
 		 */
-		public function get usable():Boolean
+		final public function get usable():Boolean
 		{
 			return _usable;
 		}
@@ -687,8 +682,6 @@ package com.game.engine2D.vo{
 		{
 			_usable = value;
 		}
-
-		
 	}
 }
 

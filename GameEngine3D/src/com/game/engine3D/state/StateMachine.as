@@ -1,10 +1,10 @@
 package com.game.engine3D.state
 {
-	import com.game.mainCore.libCore.pool.IPoolClass;
-
+	import com.game.engine3D.core.poolObject.IInstancePoolClass;
+	
 	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
-
+	
 	/**
 	 *
 	 * 状态机
@@ -12,7 +12,7 @@ package com.game.engine3D.state
 	 * 创建时间：2015-4-9 下午2:05:15
 	 *
 	 */
-	public class StateMachine implements IPoolClass
+	public class StateMachine implements IInstancePoolClass
 	{
 		public static var isDebug : Boolean = false;
 		protected var _owner : Object;
@@ -23,7 +23,7 @@ package com.game.engine3D.state
 		protected var _referenceMapping : Dictionary;
 		protected var _usePass : Boolean;
 		protected var _isDisposed : Boolean;
-
+		
 		public function StateMachine(owner : Object)
 		{
 			_states = new Dictionary(true);
@@ -33,26 +33,26 @@ package com.game.engine3D.state
 			_referenceMapping = new Dictionary(true);
 			reSet([owner]);
 		}
-
+		
 		public function reSet($parameters : Array) : void
 		{
 			_owner = $parameters[0];
 			_usePass = true;
 			_isDisposed = false;
 		}
-
+		
 		public function get owner() : Object
 		{
 			return _owner;
 		}
-
+		
 		/**
 		 *
 		 * @param type 状态类型
 		 * @param ref 状态引用
 		 * @param force 是否强制，自定义支持
 		 * @param allowQueue 允许队列，不能通过的状态是否置入队列
-		 * @param dumpTypes 倾出类型，如果队列中有该类型的状态则会优先执行
+		 * @param dumpTypes 倾出类型，如果队列中有该类型的状态则会优先执行   （dumpTypes与_blockQueue配合使用）
 		 *
 		 */
 		public function transition(type : int, ref : StateReference = null, force : Boolean = false, allowQueue : Boolean = false, dumpTypes : Array = null) : Boolean
@@ -87,6 +87,8 @@ package com.game.engine3D.state
 					}
 				}
 			}
+			
+			//如果以上没有优先从_blockQueue中取得的状态的话，则新建一个状态，根据传入的type值，来创建对应的state实例
 			if (!transState && type > 0)
 			{
 				transState = extractState(type);
@@ -98,14 +100,18 @@ package com.game.engine3D.state
 				var passEnter : Boolean = false;
 				var currState : IState = _currStates[transState.tribe];
 				currState = currState ? (currState.isDisposed ? null : currState) : null;
-				if (!currState || (currState != transState && currState.tribe == transState.tribe)) //互斥种群
+				
+				//如果currState为null  或者 currState与transState不是一个实例对象且他们的父类是一样的话  ------这样，就要执行2个state的交替工作，
+				//先执行currState相关的退出流程，中间交叉着transState的进入流程。
+				//然后才是transState本身的执行流程
+				if (!currState || (currState != transState && currState.tribe == transState.tribe)) 
 				{
 					if (_blockQueue[type])
 					{
 						_blockQueue[type] = null;
 						delete _blockQueue[type];
 					}
-
+					
 					if (passed)
 					{
 						if (currState)
@@ -140,7 +146,7 @@ package com.game.engine3D.state
 			}
 			return false;
 		}
-
+		
 		public function passTo(transType : int, force : Boolean = false) : Boolean
 		{
 			if (_isDisposed)
@@ -160,7 +166,7 @@ package com.game.engine3D.state
 				trace("====================" + this + "no pass:", currState ? currState.type : "", transState.type);
 			return passed;
 		}
-
+		
 		public function removeState(type : int) : void
 		{
 			if (_isDisposed)
@@ -184,12 +190,12 @@ package com.game.engine3D.state
 				delete _lastStates[state.tribe];
 			}
 		}
-
+		
 		protected function createState(type : int) : IState
 		{
 			return null;
 		}
-
+		
 		public function extractState(type : int) : IState
 		{
 			if (_isDisposed)
@@ -207,26 +213,26 @@ package com.game.engine3D.state
 			}
 			return state;
 		}
-
+		
 		public function getCurrState(tribe : Class) : IState
 		{
 			if (_isDisposed)
 				return null;
 			return _currStates[getQualifiedClassName(tribe)];
 		}
-
+		
 		public function getLastState(tribe : Class) : IState
 		{
 			if (_isDisposed)
 				return null;
 			return _lastStates[getQualifiedClassName(tribe)];
 		}
-
+		
 		public function set usePass(value : Boolean) : void
 		{
 			_usePass = value;
 		}
-
+		
 		public function getReference(referenceType : Class, key : Object = null) : StateReference
 		{
 			if (!_referenceMapping)
@@ -244,7 +250,12 @@ package com.game.engine3D.state
 			reference.reset();
 			return reference;
 		}
-
+		
+		public function get isDisposed() : Boolean
+		{
+			return _isDisposed;
+		}
+		
 		public function dispose() : void
 		{
 			if (_referenceMapping)
@@ -289,13 +300,8 @@ package com.game.engine3D.state
 			_owner = null;
 			_isDisposed = true;
 		}
-
-		public function get isDisposed() : Boolean
-		{
-			return _isDisposed;
-		}
-
-		public function destroy() : void
+		
+		public function instanceDestroy() : void
 		{
 			dispose();
 			if (_states)
@@ -313,6 +319,11 @@ package com.game.engine3D.state
 			_currStates = null;
 			_lastStates = null;
 			_blockQueue = null;
+		}
+		
+		public function instanceDispose() : void
+		{
+			dispose();
 		}
 	}
 }

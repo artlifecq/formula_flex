@@ -15,7 +15,7 @@ package app.message.TaskTargetProto {
 		/**
 		 *  @private
 		 */
-		public static const SEARCH_AREA:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.TaskTargetProto.SearchAreaTargetProto.search_area", "searchArea", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AreaDataProto; });
+		public static const SEARCH_AREA:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.TaskTargetProto.SearchAreaTargetProto.search_area", "searchArea", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AreaDataProto; });
 
 		private var search_area$field:app.message.AreaDataProto;
 
@@ -41,7 +41,7 @@ package app.message.TaskTargetProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasSearchArea) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, search_area$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, search_area$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -54,7 +54,7 @@ package app.message.TaskTargetProto {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var search_area$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (search_area$count != 0) {
@@ -62,7 +62,7 @@ package app.message.TaskTargetProto {
 					}
 					++search_area$count;
 					this.searchArea = new app.message.AreaDataProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.searchArea);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.searchArea);
 					break;
 				default:
 					super.readUnknown(input, tag);

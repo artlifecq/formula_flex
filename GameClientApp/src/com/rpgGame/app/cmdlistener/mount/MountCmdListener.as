@@ -13,7 +13,7 @@ package com.rpgGame.app.cmdlistener.mount
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.cfg.mount.MountConfigData;
 	import com.rpgGame.coreData.cfg.mount.MountSpeciesData;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.item.MountBeastCardInfo;
 	import com.rpgGame.coreData.info.mount.MountInfoData;
@@ -32,9 +32,9 @@ package com.rpgGame.app.cmdlistener.mount
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
-	import org.game.netCore.net.BytesUtil;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
+	import org.game.netCore.net_protobuff.BytesUtil;
 	
 	/**
 	 * 坐骑消息监侦听
@@ -45,56 +45,56 @@ package com.rpgGame.app.cmdlistener.mount
 	{
 		override public function start():void
 		{
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_STATUS_WHEN_ONLINE, onMountBreedStatusWhenOnline );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_IDENTIFY, onMountIdentify );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_IDENTIFY_FAIL, onMountIdentifyFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_TRANS, onMountTrans );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_TRANS_FAIL, onMountTransFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_SLOT_CHANGED, onMountSlotChanged );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_STATUS, onMountStatus );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_STATUS_FAIL, onMountStatusFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_STATUS_WHEN_ONLINE, onMountBreedStatusWhenOnline );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_IDENTIFY, onMountIdentify );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_IDENTIFY_FAIL, onMountIdentifyFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_TRANS, onMountTrans );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_TRANS_FAIL, onMountTransFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_SLOT_CHANGED, onMountSlotChanged );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_STATUS, onMountStatus );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_STATUS_FAIL, onMountStatusFail );
 			
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_RIDE, onMountRide );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_RIDE_FAIL, onMountRideFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_RELEASE, onMountRelease );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_RELEASE_FAIL, onMountReleaseFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_FEED, onMountFeed );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_FEED_FAIL, onMountFeedFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_HUNGER_DEGREE_CHANGED, onMountHungerDegreeChanged );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_REFINE, onMountRefine );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_REFINE_FAIL, onMountRefineFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_RIDE, onMountRide );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_RIDE_FAIL, onMountRideFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_RELEASE, onMountRelease );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_RELEASE_FAIL, onMountReleaseFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_FEED, onMountFeed );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_FEED_FAIL, onMountFeedFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_HUNGER_DEGREE_CHANGED, onMountHungerDegreeChanged );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_REFINE, onMountRefine );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_REFINE_FAIL, onMountRefineFail );
 			
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_LEARN_SPELL, onMountLearnSpell );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_LEARN_SPELL_FAIL, onMountLearnSpellFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_TO_NPC, onMountBreedToNpc );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_TO_NPC_FAIL, onMountBreedToNpcFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_SEND_MOUNT_BREED_TO_NPC_TO_TARGET, onSenderMountBreedToNpcToTarget );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_INVITE_OTHER_BREED, onMountInviteOtherBreed );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_INVITE_OTHER_BREED_FAIL, onMountInviteOtherBreedFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_OTHER_INVITE_YOU, onMountOtherInviteYou );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_REFUSE_OTHER_INVITE_YOU, onMountRefuseOtherInviteYou );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_REFUSE_OTHER_INVITE_YOU_FAIL, onMountRefuseOtherInviteYouFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_TARGET_REFUSE_YOU, onMountTargetRefuseYou );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_LEARN_SPELL, onMountLearnSpell );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_LEARN_SPELL_FAIL, onMountLearnSpellFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_TO_NPC, onMountBreedToNpc );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_TO_NPC_FAIL, onMountBreedToNpcFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_SEND_MOUNT_BREED_TO_NPC_TO_TARGET, onSenderMountBreedToNpcToTarget );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_INVITE_OTHER_BREED, onMountInviteOtherBreed );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_INVITE_OTHER_BREED_FAIL, onMountInviteOtherBreedFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_OTHER_INVITE_YOU, onMountOtherInviteYou );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_REFUSE_OTHER_INVITE_YOU, onMountRefuseOtherInviteYou );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_REFUSE_OTHER_INVITE_YOU_FAIL, onMountRefuseOtherInviteYouFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_TARGET_REFUSE_YOU, onMountTargetRefuseYou );
 			
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_LOCK, onMountBreedLock );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_LOCK_FAIL, onMountBreedLockFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_MAKE_LOVE, onMountBreedMakeLove );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_GET_BREED_BABY_MOUNT, onMountGetBreedBabyMount );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_GET_BREED_BABY_MOUNT_FAIL, onMountGetBreedBabyMountFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_CANCEL, onMountGetBreedCancel );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_CANCEL_FAIL, onMountGetBreedCancelFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_OTHER_BREED_CANCEL, onMountOtherBreedCancel );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_LOCK, onMountBreedLock );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_LOCK_FAIL, onMountBreedLockFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_MAKE_LOVE, onMountBreedMakeLove );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_GET_BREED_BABY_MOUNT, onMountGetBreedBabyMount );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_GET_BREED_BABY_MOUNT_FAIL, onMountGetBreedBabyMountFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_CANCEL, onMountGetBreedCancel );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_BREED_CANCEL_FAIL, onMountGetBreedCancelFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_OTHER_BREED_CANCEL, onMountOtherBreedCancel );
 			
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_COLLECT_BABY_MOUNT, onCollectBabyMount );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_COLLECT_BABY_MOUNT_FAIL, onCollectBabyMountFail );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_ADD_EXP, onMountAddExp );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_DROP_MOUNT_COLLECT_OBJ, onDropMountCollectObj );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_SEE_MOUNT_COLLECT_OBJ, onSeeMountCollectObj );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_COLLECT_MOUNT_COLLECT_OBJ, onCollectMountCollectObj );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_COLLECT_MOUNT_COLLECT_OBJ_FAIL, onCollectMountCollectObjFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_COLLECT_BABY_MOUNT, onCollectBabyMount );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_COLLECT_BABY_MOUNT_FAIL, onCollectBabyMountFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_ADD_EXP, onMountAddExp );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_DROP_MOUNT_COLLECT_OBJ, onDropMountCollectObj );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_SEE_MOUNT_COLLECT_OBJ, onSeeMountCollectObj );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_COLLECT_MOUNT_COLLECT_OBJ, onCollectMountCollectObj );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_COLLECT_MOUNT_COLLECT_OBJ_FAIL, onCollectMountCollectObjFail );
 			
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_INHERIT, onMountInherit );
-			SocketConnection.addCmdListener( MountModuleMessages.S2C_MOUNT_INHERIT_FAIL, onMountInheritFail );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_INHERIT, onMountInherit );
+			SocketConnection_protoBuffer.addCmdListener( MountModuleMessages.S2C_MOUNT_INHERIT_FAIL, onMountInheritFail );
 			
 			super.finish();
 		}
@@ -142,7 +142,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_1;
 					break;
 				case 2:
@@ -156,7 +156,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 5:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_5;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -181,10 +181,10 @@ package com.rpgGame.app.cmdlistener.mount
 			var goodsPro:GoodsProto = new GoodsProto();
 			goodsPro.mergeFrom(buffer);
 			//物品信息
-			var info:MountBeastCardInfo = ItemUtil.convertGoodsProtoToItemInfo( goodsPro ) as MountBeastCardInfo;
+			/*var info:MountBeastCardInfo = ItemUtil.convertGoodsProtoToItemInfo( goodsPro ) as MountBeastCardInfo;
 			info.setContainerId(ItemContainerID.BackPack);
 			BackPackManager.instance.setItemByIndex( index,info );
-			EventManager.dispatchEvent( MountEvent.MOUNT_TRANS_SUCCESS, info );
+			EventManager.dispatchEvent( MountEvent.MOUNT_TRANS_SUCCESS, info );*/
 		}
 		
 		/**
@@ -201,7 +201,7 @@ package com.rpgGame.app.cmdlistener.mount
 		{
 			var failId:int = buffer.readVarint32();
 			var failStr:String = "";
-			switch (failId)
+			/*switch (failId)
 			{
 				case 3:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_3;
@@ -221,7 +221,7 @@ package com.rpgGame.app.cmdlistener.mount
 				case 8:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_10;
 					break;
-			}
+			}*/
 			NoticeManager.showNotify(failStr, failId);
 		}
 		
@@ -289,7 +289,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_11;
 					break;
 				case 2:
@@ -312,7 +312,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 8:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_117;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -344,7 +344,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_18;
 					break;
 				case 2:
@@ -361,7 +361,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 6:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_23;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -388,7 +388,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_25;
 					break;
 				case 2:
@@ -396,7 +396,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 3:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_9;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -433,7 +433,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_3;
 					break;
 				case 2:
@@ -471,7 +471,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 13:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_38;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -533,7 +533,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_39;
 					break;
 				case 2:
@@ -583,7 +583,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 17:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_53;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -603,7 +603,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var index:int = buffer.readVarint32();
 			var skillBooksId:int = buffer.readVarint32();
 			
-			var item:ItemInfo = GoodsContainerMamager.getItemInfo( ItemContainerID.BackPack, index );
+			var item:ClientItemInfo = GoodsContainerMamager.getItemInfo( ItemContainerID.BackPack, index );
 			if( item != null )
 			{
 				item.count -= 1;
@@ -631,7 +631,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_54;
 					break;
 				case 2:
@@ -645,7 +645,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 5:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_57;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -682,7 +682,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_118;
 					break;
 				case 2:
@@ -720,7 +720,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 13:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_99;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -768,7 +768,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_68;
 					break;
 				case 2:
@@ -794,7 +794,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 9:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_75;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -840,7 +840,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_77;
 					break;
 				case 2:
@@ -848,7 +848,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 3:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_9;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -890,7 +890,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_75;
 					break;
 				case 2:
@@ -898,7 +898,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 3:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_80;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -943,7 +943,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_81;
 					break;
 				case 2:
@@ -954,7 +954,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 4:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_83;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -988,7 +988,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_75;
 					break;
 				case 2:
@@ -1002,7 +1002,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 5:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_9;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -1072,7 +1072,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_81;
 					break;
 				case 2:
@@ -1089,7 +1089,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 6:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_91;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -1120,14 +1120,14 @@ package com.rpgGame.app.cmdlistener.mount
 		 */
 		private function onDropMountCollectObj( buffer:ByteBuffer ):void
 		{
-			var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
+			/*var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
 			dropGoodsData.readFromIsMountCollect(buffer);
 			dropGoodsData.isDroped = true;
 			var mountSpeciesId:int = buffer.readVarint32();
 			var mountData:MountSpeciesData = MountConfigData.getMountSpecieById( mountSpeciesId );
 			if( mountData != null )
 				dropGoodsData.name = mountData.name;
-			SceneRoleManager.getInstance().createDropGoods(dropGoodsData);
+			SceneRoleManager.getInstance().createDropGoods(dropGoodsData);*/
 		}
 		
 		/**
@@ -1141,14 +1141,14 @@ package com.rpgGame.app.cmdlistener.mount
 		 */
 		private function onSeeMountCollectObj( buffer:ByteBuffer ):void
 		{
-			var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
+			/*var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
 			dropGoodsData.readFromIsMountCollect(buffer);
 			dropGoodsData.isMount = true;
 			var mountSpeciesId:int = buffer.readVarint32();
 			var mountData:MountSpeciesData = MountConfigData.getMountSpecieById( mountSpeciesId );
 			if( mountData != null )
 				dropGoodsData.name = mountData.name;
-			SceneRoleManager.getInstance().createDropGoods(dropGoodsData);
+			SceneRoleManager.getInstance().createDropGoods(dropGoodsData);*/
 		}
 		
 		/**
@@ -1174,7 +1174,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_93;
 					break;
 				case 2:
@@ -1188,7 +1188,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 5:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_97;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}
@@ -1253,7 +1253,7 @@ package com.rpgGame.app.cmdlistener.mount
 			var failStr:String = "";
 			switch (failId)
 			{
-				case 1:
+				/*case 1:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_104;
 					break;
 				case 2:
@@ -1300,7 +1300,7 @@ package com.rpgGame.app.cmdlistener.mount
 					break;
 				case 16:
 					failStr = LangMount.MOUNT_CMDLISTENER_FAILD_116;
-					break;
+					break;*/
 			}
 			NoticeManager.showNotify(failStr, failId);
 		}

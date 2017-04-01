@@ -16,7 +16,7 @@ package app.message.FamilyModuleObjProto {
 		/**
 		 *  @private
 		 */
-		public static const FAMILY_NAME:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.FamilyModuleObjProto.FamilyInfoProto.family_name", "familyName", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const FAMILY_NAME:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.FamilyModuleObjProto.FamilyInfoProto.family_name", "familyName", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var family_name$field:flash.utils.ByteArray;
 
@@ -39,7 +39,7 @@ package app.message.FamilyModuleObjProto {
 		/**
 		 *  @private
 		 */
-		public static const FAMILY_LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FamilyModuleObjProto.FamilyInfoProto.family_level", "familyLevel", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FAMILY_LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FamilyModuleObjProto.FamilyInfoProto.family_level", "familyLevel", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var family_level$field:int;
 
@@ -66,7 +66,7 @@ package app.message.FamilyModuleObjProto {
 		/**
 		 *  @private
 		 */
-		public static const FAMILY_CONTRIBUTION:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.FamilyModuleObjProto.FamilyInfoProto.family_contribution", "familyContribution", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FAMILY_CONTRIBUTION:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.FamilyModuleObjProto.FamilyInfoProto.family_contribution", "familyContribution", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var family_contribution$field:Int64;
 
@@ -89,7 +89,7 @@ package app.message.FamilyModuleObjProto {
 		/**
 		 *  @private
 		 */
-		public static const FAMILY_MASK:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FamilyModuleObjProto.FamilyInfoProto.family_mask", "familyMask", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FAMILY_MASK:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FamilyModuleObjProto.FamilyInfoProto.family_mask", "familyMask", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var family_mask$field:int;
 
@@ -114,7 +114,7 @@ package app.message.FamilyModuleObjProto {
 		/**
 		 *  @private
 		 */
-		public static const CUR_POS:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.FamilyModuleObjProto.FamilyInfoProto.cur_pos", "curPos", (7 << 3) | com.netease.protobuf.WireType.VARINT, app.message.FamilyOfficerPos);
+		public static const CUR_POS:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.FamilyModuleObjProto.FamilyInfoProto.cur_pos", "curPos", (7 << 3) | com.netease.protobuf.WireType.VARINT, app.message.FamilyOfficerPos);
 
 		private var cur_pos$field:int;
 
@@ -142,23 +142,23 @@ package app.message.FamilyModuleObjProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasFamilyName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, family_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, family_name$field);
 			}
 			if (hasFamilyLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, family_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, family_level$field);
 			}
 			if (hasFamilyContribution) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, family_contribution$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, family_contribution$field);
 			}
 			if (hasFamilyMask) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, family_mask$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, family_mask$field);
 			}
 			if (hasCurPos) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, cur_pos$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, cur_pos$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -175,42 +175,42 @@ package app.message.FamilyModuleObjProto {
 			var family_mask$count:uint = 0;
 			var cur_pos$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (family_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyInfoProto.familyName cannot be set twice.');
 					}
 					++family_name$count;
-					this.familyName = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.familyName = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 2:
 					if (family_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyInfoProto.familyLevel cannot be set twice.');
 					}
 					++family_level$count;
-					this.familyLevel = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.familyLevel = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (family_contribution$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyInfoProto.familyContribution cannot be set twice.');
 					}
 					++family_contribution$count;
-					this.familyContribution = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.familyContribution = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 6:
 					if (family_mask$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyInfoProto.familyMask cannot be set twice.');
 					}
 					++family_mask$count;
-					this.familyMask = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.familyMask = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (cur_pos$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyInfoProto.curPos cannot be set twice.');
 					}
 					++cur_pos$count;
-					this.curPos = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.curPos = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

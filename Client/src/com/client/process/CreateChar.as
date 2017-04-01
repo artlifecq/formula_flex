@@ -11,6 +11,7 @@ package com.client.process
 	import com.game.engine3D.process.BaseProcess;
 	import com.game.engine3D.process.ProcessStateMachine;
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.netData.player.bean.MyPlayerInfo;
 	
 	import flash.display.Loader;
 	import flash.events.Event;
@@ -28,9 +29,6 @@ package com.client.process
 	import away3d.loaders.multi.MultiLoadData;
 	
 	import feathers.themes.ThemeLoader;
-	
-	import org.client.load.loader.multi.vo.LoadData;
-	import org.game.netCore.net.ByteBuffer;
 
 	/**
 	 *
@@ -47,11 +45,9 @@ package com.client.process
 		private var _pkTipsView : PkTipsView;
 		private var _onCreateHeroFail : Function;
 
-		private var _sex : Boolean;
-		private var _headFace : int;
-		private var _body : int;
+		private var _sex : int;
 		private var _nickName : String;
-		private var _countryID : int;
+		private var _job : int;
 
 		public function CreateChar()
 		{
@@ -80,8 +76,8 @@ package com.client.process
 				ResLoadingView.instance.show();
 				ResLoadingView.instance.title = "加载创建角色资源...";
 
-				_themeLoader = new ThemeLoader(true);
-				_themeLoader.load(ClientGlobal.getLoginuiResUrl(), onResLoaded, onPorgress, onResError);
+				_themeLoader = new ThemeLoader();
+				_themeLoader.load(ClientGlobal.getLoginuiResUrl(), onResLoaded, onProgress, onResError);
 			}
 		}
 
@@ -97,10 +93,10 @@ package com.client.process
 			urlLoader.load(new URLRequest(url));
 		}
 
-		private function onPorgress(ld : MultiLoadData, e : ProgressEvent) : void
+		private function onProgress(progress:Number) : void
 		{
-			var currPercent : Number = (e.bytesLoaded / e.bytesTotal) * 0.8;
-			setProcessPercent(currPercent);
+			//			var currPercent : Number = e.bytesLoaded / e.bytesTotal;
+			setProcessPercent(progress);
 		}
 
 		private function onResError(ld : MultiLoadData, e : Event) : void
@@ -142,7 +138,6 @@ package com.client.process
 			_createRoleLoader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, onIoError);
 			var setConfigFun : Function = _createRoleLoader.content["setConfig"];
 			setConfigFun(ClientGlobal.maskWorldDic);
-
 			ClientGlobal.stage.addChild(_createRoleLoader.content);
 
 			_onCreateHeroFail = _createRoleLoader.content["onCreateHeroFail"];
@@ -170,13 +165,11 @@ package com.client.process
 			GameLog.addShow("创建角色程序解析错误：" + event.text);
 		}
 
-		private function onCreateRoleComplete(sex : Boolean, headFace : int, body : int, nickName : String, countryID : int) : void
+		private function onCreateRoleComplete(sex : int, nickName : String, job : int) : void
 		{
 			_sex = sex;
-			_headFace = headFace;
-			_body = body;
 			_nickName = nickName;
-			_countryID = countryID;
+			_job = job;
 			if (_needShowPkTipsView)
 			{
 				if (!_pkTipsView)
@@ -197,15 +190,14 @@ package com.client.process
 			LoginCmdListener.onCreateCharFailHandler = onCreateCharFailHandler;
 			if (ClientGlobal.isSingle)
 			{
-				ClientGlobal.loginData = new ByteBuffer();
-				ClientGlobal.loginData.writeUTF(_nickName);
-				ClientGlobal.loginData.position = 0;
+				ClientGlobal.loginData = new MyPlayerInfo();
+				ClientGlobal.loginData.name = _nickName;
 				onCreateCharSuccessHandler();
 				return;
 			}
 			onCreateCharFailHandler("正在请求创建角色，请稍等...");
 			GameLog.addShow("请求服务器创建新角色");
-			LoginSender.register(_sex, _headFace, _body, _nickName, _countryID);
+			LoginSender.register(_sex, _nickName, _job);
 		}
 
 		private function onExitGame() : void

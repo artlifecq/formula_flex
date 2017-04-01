@@ -2,10 +2,15 @@
 {
 	import com.rpgGame.coreData.AvatarInfo;
 	import com.rpgGame.coreData.SpriteStat;
-	import com.rpgGame.coreData.info.buff.BuffInfo;
+	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.fight.skill.ActiveSpellList;
-
-	import org.game.netCore.net.ByteBuffer;
+	import com.rpgGame.netData.map.bean.MonsterInfo;
+	import com.rpgGame.netData.map.bean.NpcInfo;
+	
+	import flash.geom.Point;
+	
+	import org.game.netCore.data.LongIdMap;
+	import org.game.netCore.data.long;
 
 	/**
 	 *
@@ -33,37 +38,40 @@
 		/**
 		 * 被分配属性,可以被洗掉
 		 */
-		public var spriteStat : SpriteStat;
+//		public var spriteStat : SpriteStat;
 
 		/**总共获得的属性点 */
-		public var totalAddSpriteStatPoint : int;
+//		public var totalAddSpriteStatPoint : int;
 
 		/**
 		 * 额外获得的属性点(不包含升级涨的属性点)
 		 */
-		public var obtainSpriteStatPoint : int;
+//		public var obtainSpriteStatPoint : int;
 
 		/** 被使用的属性点 (未使用的属性点＝升级获得的属性点+额外获得的属性点-被使用的属性点) */
-		public var usedSpriteStatPoint : int;
+//		public var usedSpriteStatPoint : int;
 
 		/**
 		 * 当前血量
 		 */
-		public var hp : int;
+//		public var hp : int;
 		/**
 		 * 当前魔量
 		 */
-		public var mp : int;
+//		public var mp : int;
 		/**
 		 * 等级
 		 */
-		public var level : int = 1;
+//		public var level : int = 1;
 
 		/** 是否在镖车上 **/
 		public var isInBiao : Boolean;
 		/** 乘坐的战车的拥有者的人的id,0表示没有乘车 **/
 		public var zhanCheOwnerID : Number = 0;
 
+		/**
+		 * 角色半径 
+		 */		
 		public var bodyRadius : int = 0;
 		/**
 		 * 战斗力
@@ -82,6 +90,9 @@
 		 * 方向
 		 */
 		public var direction : int = 0;
+		/**
+		 *  
+		 */		
 		private var _fixDirection : Boolean;
 		/**
 		 * 拥有者ID
@@ -91,9 +102,11 @@
 		/** 所有学习过的技能数据 */
 		public var spellList : ActiveSpellList;
 		/** buff列表 **/
-		public var buffList : Vector.<BuffInfo>;
+		public var buffList : Vector.<BuffData> = new Vector.<BuffData>();
 		/** 坐骑槽数 **/
 		public var mountSlotCount : int = 0;
+        /** 阵营关系 **/
+        public var relation : int;
 
 		/**
 		 *
@@ -106,7 +119,7 @@
 			_fixDirection = false;
 			avatarInfo = new AvatarInfo();
 			totalStat = new SpriteStat();
-			spriteStat = new SpriteStat();
+//			spriteStat = new SpriteStat();
 		}
 
 		/**
@@ -133,51 +146,64 @@
 		{
 			return spellList.getSpellList();
 		}
-
-		public static function readGeneric(data : RoleData, buffer : ByteBuffer) : void
+		
+		/**
+		 * 一般通用的属性 
+		 * @param data
+		 * @param pos
+		 * 
+		 */
+		public static function readGeneric(data : RoleData, pos:Point) : void
 		{
-			data.x = buffer.readVarint32();
-			data.y = buffer.readVarint32();
-			data.hp = buffer.readVarint64();
-			data.totalStat.life = buffer.readVarint64();
-			data.mp = buffer.readVarint64();
-			data.totalStat.mana = buffer.readVarint64();
-
-			data.buffList = new Vector.<BuffInfo>();
-			while (buffer.bytesAvailable > 0)
-			{
-				var buffInfo : BuffInfo = new BuffInfo(data.id);
-				buffInfo.cfgId = buffer.readVarint32();
-				buffInfo.curtStackCount = buffer.readVarint32();
-				buffInfo.disappearTime = buffer.readVarint64();
-				data.buffList.push(buffInfo);
-			}
+			data.x = pos.x;
+			data.y = pos.y;
 		}
+		
+		public static function readMonster(data : RoleData, info : MonsterInfo):void
+		{
+            data.relation = info.relation;
+			data.totalStat.level = info.level;
+			
+			data.totalStat.hp = info.hp;
+			data.totalStat.life = info.maxHp;
+//			data.mp = info;
+//			data.totalStat.mana = ;
+            var i : int = 0;
+			for(i=0;i<info.buffs.length;i++)
+			{
+				var buffData:BuffData = new BuffData(data.id);
+				buffData.buffInfo = info.buffs[i];
+				data.buffList.push(buffData);
+			}
+			readGeneric(data,new Point(info.position.x,info.position.y));
+            if (null == info.sign) {
+                data.ownerId = -1;
+            } else {
+                var ownerId : String = info.sign;
+                for (i = ownerId.length; i < 16; ++i) {
+                    ownerId = "0" + ownerId;
+                }
+                data.ownerId = LongIdMap.getGidByStringValue(ownerId);
+            }
 
-//		/**
-//		 * 全部属性=基础属性+可被洗属性
-//		 */
-//		public var totalStat : SpriteStat;
-//		/**
-//		 * 被分配属性,可以被洗掉
-//		 */
-//		public var spriteStat : SpriteStat;
-//		
-//		/**总共获得的属性点 */
-//		public var totalAddSpriteStatPoint : int;
-//		
-//		/**
-//		 * 额外获得的属性点(不包含升级涨的属性点)
-//		 */
-//		public var obtainSpriteStatPoint : int;
-//		
-//		/** 被使用的属性点 (未使用的属性点＝升级获得的属性点+额外获得的属性点-被使用的属性点) */
-//		public var usedSpriteStatPoint : int;
-//
-//		public function setAddSpriteStateModelObj(proto:AddSpriteStatModuleObjProto):void
-//		{
-//			
-//		}
-
+		}
+		
+		public static function readNpc(data : RoleData, info : NpcInfo):void
+		{
+//			data.level = info.level;
+			
+//			data.hp = info.hp;
+			//			data.totalStat.life = info.;
+			//			data.mp = info.;
+			//			data.totalStat.mana = ;
+			
+			for(var i:int=0;i<info.buffs.length;i++)
+			{
+				var buffData:BuffData = new BuffData(data.id);
+				buffData.buffInfo = info.buffs[i];
+				data.buffList.push(buffData);
+			}
+			readGeneric(data,new Point(info.position.x,info.position.y));
+		}
 	}
 }

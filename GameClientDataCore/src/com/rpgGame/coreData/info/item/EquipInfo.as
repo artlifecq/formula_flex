@@ -1,24 +1,22 @@
 package com.rpgGame.coreData.info.item
 {
 	import com.rpgGame.coreData.SpriteStat;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.netData.player.bean.AttributeItem;
 	
-	import app.message.EquipmentProto;
-	import app.message.SpriteStatProto;
-
 	/**
 	 * 装备信息
 	 * @author wewell@163.com
 	 *
 	 */
-	public class EquipInfo extends ItemInfo
+	public class EquipInfo extends ClientItemInfo
 	{
 		/** 评价 **/
 		public var evaluate:int;
 		/** 基础属性Proto **/
-		public var base_stat:SpriteStatProto;
+		public var base_stat:Vector.<AttributeItem>;
 		/** 随机属性Proto **/
-		public var random_stat:SpriteStatProto;
+		public var random_stat:Vector.<AttributeItem>;
 		/** 耐久度 **/
 		public var durability:int;
 		/** 已经使用的耐久度 **/
@@ -26,7 +24,7 @@ package com.rpgGame.coreData.info.item
 		/** 强化等级， 0表示没有强化 **/
 		public var refined_times:int;
 		/** 强化属性Proto，强化等级>0才会提供这个值 **/
-		public var refined_stat:SpriteStatProto;
+		public var refined_stat:Vector.<AttributeItem>;
 		/** 打造者的名字，为空表示没有打造着 **/
 		public var build_signature:String;
 		/** 战斗力 **/
@@ -50,26 +48,6 @@ package com.rpgGame.coreData.info.item
 		public function EquipInfo()
 		{
 
-		}
-		
-		/**
-		 * 装备等阶 
-		 * @return 
-		 * 
-		 */		
-		public function get levelStage():int
-		{
-			return ItemCfgData.getEquipmentLevlStage(cfgId);
-		}
-		
-		/**
-		 * 装备类型 
-		 * @return 
-		 * 
-		 */		
-		public function getEquipType():int
-		{
-			return ItemCfgData.getEquipmentType(cfgId);
 		}
 		
 		/**
@@ -134,32 +112,17 @@ package com.rpgGame.coreData.info.item
 		 */		
 		public function get equipType():int
 		{
-			return ItemCfgData.getEquipmentType(cfgId);
+			return ItemConfig.getItemType(cfgId);
 		}
 		
-		/**
-		 * 属性 
-		 * @return 
-		 * 
-		 */		
-		public function get race():int
-		{
-			return ItemCfgData.getEquipmentRace(cfgId);
-		}
-		
-		public function get sex():int
-		{
-			return ItemCfgData.getEquipmentSex(cfgId);
-		}
-		
-		override public function clone():ItemInfo
+		override public function clone():ClientItemInfo
 		{
 			var equipInfo : EquipInfo = new EquipInfo();
 			equipInfo.count = count;
 			equipInfo.cfgId = cfgId;
 			equipInfo.type = type;
 			equipInfo.name = name;
-			equipInfo.expireTime = expireTime;
+//			equipInfo.expireTime = expireTime;
 			equipInfo.evaluate = evaluate;
 			equipInfo.quality = quality;
 			equipInfo.base_stat = this.base_stat;

@@ -15,7 +15,7 @@ package app.message.MazeDungeonProto {
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.MazeDungeonProto.MazePortalDataProto.name", "name", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.MazeDungeonProto.MazePortalDataProto.name", "name", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var name$field:String;
 
@@ -38,7 +38,7 @@ package app.message.MazeDungeonProto {
 		/**
 		 *  @private
 		 */
-		public static const SOURCE_AREA_DATA:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.MazeDungeonProto.MazePortalDataProto.source_area_data", "sourceAreaData", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AreaDataProto; });
+		public static const SOURCE_AREA_DATA:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.MazeDungeonProto.MazePortalDataProto.source_area_data", "sourceAreaData", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AreaDataProto; });
 
 		private var source_area_data$field:app.message.AreaDataProto;
 
@@ -61,7 +61,7 @@ package app.message.MazeDungeonProto {
 		/**
 		 *  @private
 		 */
-		public static const RES:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.MazeDungeonProto.MazePortalDataProto.res", "res", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const RES:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.MazeDungeonProto.MazePortalDataProto.res", "res", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var res$field:String;
 
@@ -84,7 +84,7 @@ package app.message.MazeDungeonProto {
 		/**
 		 *  @private
 		 */
-		public static const RES_DIRECTION:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MazeDungeonProto.MazePortalDataProto.res_direction", "resDirection", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RES_DIRECTION:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MazeDungeonProto.MazePortalDataProto.res_direction", "resDirection", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var res_direction$field:int;
 
@@ -111,7 +111,7 @@ package app.message.MazeDungeonProto {
 		/**
 		 *  @private
 		 */
-		public static const RES_X:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MazeDungeonProto.MazePortalDataProto.res_x", "resX", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RES_X:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MazeDungeonProto.MazePortalDataProto.res_x", "resX", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var res_x$field:int;
 
@@ -136,7 +136,7 @@ package app.message.MazeDungeonProto {
 		/**
 		 *  @private
 		 */
-		public static const RES_Y:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MazeDungeonProto.MazePortalDataProto.res_y", "resY", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RES_Y:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MazeDungeonProto.MazePortalDataProto.res_y", "resY", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var res_y$field:int;
 
@@ -161,7 +161,7 @@ package app.message.MazeDungeonProto {
 		/**
 		 *  @private
 		 */
-		public static const SHOW_IN_SMALL_MAP_TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MazeDungeonProto.MazePortalDataProto.show_in_small_map_type", "showInSmallMapType", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SHOW_IN_SMALL_MAP_TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MazeDungeonProto.MazePortalDataProto.show_in_small_map_type", "showInSmallMapType", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var show_in_small_map_type$field:int;
 
@@ -186,7 +186,7 @@ package app.message.MazeDungeonProto {
 		/**
 		 *  @private
 		 */
-		public static const RES_OFFSET_UP:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MazeDungeonProto.MazePortalDataProto.res_offset_up", "resOffsetUp", (12 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RES_OFFSET_UP:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MazeDungeonProto.MazePortalDataProto.res_offset_up", "resOffsetUp", (12 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var res_offset_up$field:int;
 
@@ -211,7 +211,7 @@ package app.message.MazeDungeonProto {
 		/**
 		 *  @private
 		 */
-		public static const SCALE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MazeDungeonProto.MazePortalDataProto.scale", "scale", (13 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SCALE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MazeDungeonProto.MazePortalDataProto.scale", "scale", (13 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var scale$field:int;
 
@@ -239,39 +239,39 @@ package app.message.MazeDungeonProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, name$field);
 			}
 			if (hasSourceAreaData) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, source_area_data$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, source_area_data$field);
 			}
 			if (hasRes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, res$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, res$field);
 			}
 			if (hasResDirection) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, res_direction$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, res_direction$field);
 			}
 			if (hasResX) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, res_x$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, res_x$field);
 			}
 			if (hasResY) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, res_y$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, res_y$field);
 			}
 			if (hasShowInSmallMapType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, show_in_small_map_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, show_in_small_map_type$field);
 			}
 			if (hasResOffsetUp) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, res_offset_up$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, res_offset_up$field);
 			}
 			if (hasScale) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, scale$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, scale$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -292,14 +292,14 @@ package app.message.MazeDungeonProto {
 			var res_offset_up$count:uint = 0;
 			var scale$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 7:
 					if (name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MazePortalDataProto.name cannot be set twice.');
 					}
 					++name$count;
-					this.name = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.name = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 1:
 					if (source_area_data$count != 0) {
@@ -307,56 +307,56 @@ package app.message.MazeDungeonProto {
 					}
 					++source_area_data$count;
 					this.sourceAreaData = new app.message.AreaDataProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.sourceAreaData);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.sourceAreaData);
 					break;
 				case 2:
 					if (res$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MazePortalDataProto.res cannot be set twice.');
 					}
 					++res$count;
-					this.res = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.res = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (res_direction$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MazePortalDataProto.resDirection cannot be set twice.');
 					}
 					++res_direction$count;
-					this.resDirection = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.resDirection = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (res_x$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MazePortalDataProto.resX cannot be set twice.');
 					}
 					++res_x$count;
-					this.resX = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.resX = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (res_y$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MazePortalDataProto.resY cannot be set twice.');
 					}
 					++res_y$count;
-					this.resY = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.resY = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (show_in_small_map_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MazePortalDataProto.showInSmallMapType cannot be set twice.');
 					}
 					++show_in_small_map_type$count;
-					this.showInSmallMapType = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.showInSmallMapType = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 12:
 					if (res_offset_up$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MazePortalDataProto.resOffsetUp cannot be set twice.');
 					}
 					++res_offset_up$count;
-					this.resOffsetUp = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.resOffsetUp = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 13:
 					if (scale$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MazePortalDataProto.scale cannot be set twice.');
 					}
 					++scale$count;
-					this.scale = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.scale = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

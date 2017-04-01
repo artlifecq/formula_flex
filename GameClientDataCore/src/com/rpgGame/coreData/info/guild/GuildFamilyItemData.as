@@ -2,7 +2,7 @@ package com.rpgGame.coreData.info.guild
 {
 	import app.message.FamilyOfficerPos;
 	
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	public class GuildFamilyItemData
 	{

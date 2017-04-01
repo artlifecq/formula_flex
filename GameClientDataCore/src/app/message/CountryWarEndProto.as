@@ -17,7 +17,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const WAR_TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.CountryWarEndProto.war_type", "warType", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.CountryWarType);
+		public static const WAR_TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.CountryWarEndProto.war_type", "warType", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.CountryWarType);
 
 		private var war_type$field:int;
 
@@ -44,7 +44,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ATTACK_COUNTRY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryWarEndProto.attack_country", "attackCountry", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ATTACK_COUNTRY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryWarEndProto.attack_country", "attackCountry", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var attack_country$field:int;
 
@@ -69,7 +69,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SUPPORT_ATTACK_COUNTRY_COUNT:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryWarEndProto.support_attack_country_count", "supportAttackCountryCount", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SUPPORT_ATTACK_COUNTRY_COUNT:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryWarEndProto.support_attack_country_count", "supportAttackCountryCount", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var support_attack_country_count$field:Int64;
 
@@ -92,7 +92,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ATTACK_TOP_RANKS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.CountryWarEndProto.attack_top_ranks", "attackTopRanks", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryWarTopRankProto; });
+		public static const ATTACK_TOP_RANKS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.CountryWarEndProto.attack_top_ranks", "attackTopRanks", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryWarTopRankProto; });
 
 		[ArrayElementType("app.message.CountryWarTopRankProto")]
 		public var attackTopRanks:Array = [];
@@ -100,7 +100,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ATTACK_COUNTRY_TOTAL_KILL_HERO_TIMES:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryWarEndProto.attack_country_total_kill_hero_times", "attackCountryTotalKillHeroTimes", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ATTACK_COUNTRY_TOTAL_KILL_HERO_TIMES:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryWarEndProto.attack_country_total_kill_hero_times", "attackCountryTotalKillHeroTimes", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var attack_country_total_kill_hero_times$field:Int64;
 
@@ -123,7 +123,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEFENCE_COUNTRY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryWarEndProto.defence_country", "defenceCountry", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEFENCE_COUNTRY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryWarEndProto.defence_country", "defenceCountry", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var defence_country$field:int;
 
@@ -148,7 +148,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SUPPORT_DEFENCE_COUNTRY_COUNT:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryWarEndProto.support_defence_country_count", "supportDefenceCountryCount", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SUPPORT_DEFENCE_COUNTRY_COUNT:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryWarEndProto.support_defence_country_count", "supportDefenceCountryCount", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var support_defence_country_count$field:Int64;
 
@@ -171,7 +171,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEFENCE_TOP_RANKS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.CountryWarEndProto.defence_top_ranks", "defenceTopRanks", (8 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryWarTopRankProto; });
+		public static const DEFENCE_TOP_RANKS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.CountryWarEndProto.defence_top_ranks", "defenceTopRanks", (8 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryWarTopRankProto; });
 
 		[ArrayElementType("app.message.CountryWarTopRankProto")]
 		public var defenceTopRanks:Array = [];
@@ -179,7 +179,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEFENCE_COUNTRY_TOTAL_KILL_HERO_TIMES:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryWarEndProto.defence_country_total_kill_hero_times", "defenceCountryTotalKillHeroTimes", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEFENCE_COUNTRY_TOTAL_KILL_HERO_TIMES:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryWarEndProto.defence_country_total_kill_hero_times", "defenceCountryTotalKillHeroTimes", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var defence_country_total_kill_hero_times$field:Int64;
 
@@ -202,7 +202,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const WIN_COUNTRY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryWarEndProto.win_country", "winCountry", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const WIN_COUNTRY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryWarEndProto.win_country", "winCountry", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var win_country$field:int;
 
@@ -227,7 +227,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY_WAR_LOGS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.CountryWarEndProto.country_war_logs", "countryWarLogs", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryWarLogProto; });
+		public static const COUNTRY_WAR_LOGS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.CountryWarEndProto.country_war_logs", "countryWarLogs", (11 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryWarLogProto; });
 
 		[ArrayElementType("app.message.CountryWarLogProto")]
 		public var countryWarLogs:Array = [];
@@ -238,47 +238,47 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasWarType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, war_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, war_type$field);
 			}
 			if (hasAttackCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, attack_country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, attack_country$field);
 			}
 			if (hasSupportAttackCountryCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, support_attack_country_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, support_attack_country_count$field);
 			}
 			for (var attackTopRanks$index:uint = 0; attackTopRanks$index < this.attackTopRanks.length; ++attackTopRanks$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.attackTopRanks[attackTopRanks$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.attackTopRanks[attackTopRanks$index]);
 			}
 			if (hasAttackCountryTotalKillHeroTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, attack_country_total_kill_hero_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, attack_country_total_kill_hero_times$field);
 			}
 			if (hasDefenceCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, defence_country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, defence_country$field);
 			}
 			if (hasSupportDefenceCountryCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, support_defence_country_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, support_defence_country_count$field);
 			}
 			for (var defenceTopRanks$index:uint = 0; defenceTopRanks$index < this.defenceTopRanks.length; ++defenceTopRanks$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.defenceTopRanks[defenceTopRanks$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.defenceTopRanks[defenceTopRanks$index]);
 			}
 			if (hasDefenceCountryTotalKillHeroTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, defence_country_total_kill_hero_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, defence_country_total_kill_hero_times$field);
 			}
 			if (hasWinCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, win_country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, win_country$field);
 			}
 			for (var countryWarLogs$index:uint = 0; countryWarLogs$index < this.countryWarLogs.length; ++countryWarLogs$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.countryWarLogs[countryWarLogs$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.countryWarLogs[countryWarLogs$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -298,72 +298,72 @@ package app.message {
 			var defence_country_total_kill_hero_times$count:uint = 0;
 			var win_country$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (war_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryWarEndProto.warType cannot be set twice.');
 					}
 					++war_type$count;
-					this.warType = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.warType = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 2:
 					if (attack_country$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryWarEndProto.attackCountry cannot be set twice.');
 					}
 					++attack_country$count;
-					this.attackCountry = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.attackCountry = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (support_attack_country_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryWarEndProto.supportAttackCountryCount cannot be set twice.');
 					}
 					++support_attack_country_count$count;
-					this.supportAttackCountryCount = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.supportAttackCountryCount = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 4:
-					this.attackTopRanks.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.CountryWarTopRankProto()));
+					this.attackTopRanks.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.CountryWarTopRankProto()));
 					break;
 				case 5:
 					if (attack_country_total_kill_hero_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryWarEndProto.attackCountryTotalKillHeroTimes cannot be set twice.');
 					}
 					++attack_country_total_kill_hero_times$count;
-					this.attackCountryTotalKillHeroTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.attackCountryTotalKillHeroTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 6:
 					if (defence_country$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryWarEndProto.defenceCountry cannot be set twice.');
 					}
 					++defence_country$count;
-					this.defenceCountry = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.defenceCountry = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (support_defence_country_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryWarEndProto.supportDefenceCountryCount cannot be set twice.');
 					}
 					++support_defence_country_count$count;
-					this.supportDefenceCountryCount = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.supportDefenceCountryCount = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 8:
-					this.defenceTopRanks.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.CountryWarTopRankProto()));
+					this.defenceTopRanks.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.CountryWarTopRankProto()));
 					break;
 				case 9:
 					if (defence_country_total_kill_hero_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryWarEndProto.defenceCountryTotalKillHeroTimes cannot be set twice.');
 					}
 					++defence_country_total_kill_hero_times$count;
-					this.defenceCountryTotalKillHeroTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.defenceCountryTotalKillHeroTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 10:
 					if (win_country$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryWarEndProto.winCountry cannot be set twice.');
 					}
 					++win_country$count;
-					this.winCountry = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.winCountry = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 11:
-					this.countryWarLogs.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.CountryWarLogProto()));
+					this.countryWarLogs.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.CountryWarLogProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

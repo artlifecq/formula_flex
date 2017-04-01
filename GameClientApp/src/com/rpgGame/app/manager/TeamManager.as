@@ -22,6 +22,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.npc.NpcCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
@@ -42,7 +43,6 @@ package com.rpgGame.app.manager
 	import flash.geom.Point;
 	
 	import app.cmd.TeamModuleMessages;
-	import app.message.MonsterDataProto;
 	import app.message.RaceId;
 	import app.message.TeamDropAllocateType;
 	import app.message.TeamModuleObjProto;
@@ -187,8 +187,8 @@ package com.rpgGame.app.manager
 			memData.sceneId = mainPlayer.mapID;
 			memData.line = mainPlayer.line;
 			memData.mapCountryId = mainPlayer.sceneSequence;
-			memData.level = mainPlayer.level;
-			memData.raceId = mainPlayer.weaponRace;
+			memData.level = mainPlayer.totalStat.level;
+			memData.raceId = mainPlayer.job;
 			memData.isOnline = true;
 			memData.isInCopy = (MapDataManager.getMapType(memData.sceneId) != EnumMapType.MAP_TYPE_NORMAL);
 			return memData;
@@ -337,9 +337,9 @@ package com.rpgGame.app.manager
 				return;
 			}
 
-			if (!ReqLockUtil.isReqLocked(TeamModuleMessages.C2S_KICK, true))
-				TeamSender.kickParter(id);
-			ReqLockUtil.lockReq(TeamModuleMessages.C2S_KICK);
+//			if (!ReqLockUtil.isReqLocked(TeamModuleMessages.C2S_KICK, true))
+//				TeamSender.kickParter(id);
+//			ReqLockUtil.lockReq(TeamModuleMessages.C2S_KICK);
 		}
 
 		/**
@@ -797,7 +797,7 @@ package com.rpgGame.app.manager
 		 */
 		public static function unLockJoinOtherTeam() : void
 		{
-			ReqLockUtil.unlockReq(TeamModuleMessages.C2S_SEND_REQUEST);
+//			ReqLockUtil.unlockReq(TeamModuleMessages.C2S_SEND_REQUEST);
 		}
 
 		/**
@@ -823,11 +823,11 @@ package com.rpgGame.app.manager
 				return;
 			}
 
-			var key : String = TeamModuleMessages.C2S_SEND_REQUEST;
-			if (ReqLockUtil.isReqLocked(key)) //已经申请加入队伍了
-				return;
-
-			ReqLockUtil.lockReq(key);
+//			var key : String = TeamModuleMessages.C2S_SEND_REQUEST;
+//			if (ReqLockUtil.isReqLocked(key)) //已经申请加入队伍了
+//				return;
+//
+//			ReqLockUtil.lockReq(key);
 			TeamSender.requestJoinOtherTeam(id);
 		}
 
@@ -901,7 +901,7 @@ package com.rpgGame.app.manager
 		public static function otherRejectInvite(id : Number, name : String) : void
 		{
 			var key : String = TeamModuleMessages.C2S_SEND_INVITE + id;
-			ReqLockUtil.unlockReq(key);
+//			ReqLockUtil.unlockReq(key);
 			NoticeManager.showNotify(LangTeam.TEAM_CHATA_TIP16, name);
 		}
 
@@ -949,7 +949,7 @@ package com.rpgGame.app.manager
 		public static function invitePlayerJoinMyTeamWaitComplete() : void
 		{
 			var key : String = TeamModuleMessages.C2S_SEND_INVITE + invitePlayerId;
-			ReqLockUtil.unlockReq(key);
+//			ReqLockUtil.unlockReq(key);
 			invitePlayerId = 0;
 			NoticeManager.showNotify(LangTeam.TEAM_INVITE_PLAER_WAIT_COMPLETE);
 		}
@@ -961,7 +961,7 @@ package com.rpgGame.app.manager
 		public static function invitePlayerJionMyTeamComplete() : void
 		{
 			var key : String = TeamModuleMessages.C2S_SEND_INVITE + invitePlayerId;
-			ReqLockUtil.unlockReq(key);
+//			ReqLockUtil.unlockReq(key);
 			invitePlayerId = 0;
 			NoticeManager.showNotify(LangTeam.TEAM_INVITE_PLAYER_COMPLETE);
 		}
@@ -1437,11 +1437,11 @@ package com.rpgGame.app.manager
 
 			if (MainRoleManager.actorInfo.sceneSequence != curTeamUint.mapCountryId) //跟目标对象是否是同一个国家
 			{
-				var npcData : MonsterDataProto = MonsterDataManager.getData(NpcCfgData.countryTransNPCId);
+				var npcData : Q_scene_monster_area = MonsterDataManager.getSceneData(NpcCfgData.countryTransNPCId);
 				if (npcData == null)
 					return;
 				var point : Point = MonsterDataManager.getMonsterPosition(npcData);
-				sceneID = npcData.sceneId;
+				sceneID = npcData.q_mapid;
 				posx = point.x;
 				posy = point.y;
 			}

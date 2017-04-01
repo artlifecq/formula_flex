@@ -69,6 +69,8 @@
 		private var _isEditable:Boolean;
 		private var _isInputFocus:Boolean;
 		private var _byteA:ByteArray;
+
+		private var wordWrapTxt:TextField;
 		
 		public function RichTextArea3D( $w:int, $h:int = 0, filters:Array = null ) 
 		{
@@ -83,6 +85,7 @@
 			_defaultFormat.letterSpacing = 0;
 			
 			_textField = new TextField();
+			wordWrapTxt=new TextField();
 			_textField.width = $w;
 			_textField.useRichTextClipboard = true;
 			if(filters)
@@ -184,11 +187,36 @@
 			}
 			else
 			{
-				var info:String = _textField.htmlText + $str;
+				var info:String = _textField.htmlText + autoWordWrap($str);;
 				_textField.htmlText = info;
 			}
 			convert();
 		}
+		
+		private function autoWordWrap(text:String):String
+		{
+			wordWrapTxt.defaultTextFormat=_defaultFormat;
+			wordWrapTxt.htmlText=text;
+			wordWrapTxt.width=_textField.width;
+			wordWrapTxt.wordWrap=_textField.wordWrap;
+			wordWrapTxt.visible=false;
+			Starling.current.nativeStage.addChild(wordWrapTxt);
+			
+			var strlen:int = wordWrapTxt.length;
+			var w:Number = 0;
+			for (var i:int = 0; i < strlen; i++)
+			{
+				w +=  wordWrapTxt.getCharBoundaries(i).width;
+				if (w > wordWrapTxt.width - 5)
+				{
+					var temp:String = wordWrapTxt.text.charAt(i - 1) + "\n";
+					wordWrapTxt.replaceText(i - 1, i, temp);
+					w = 0;
+				}
+			}
+			wordWrapTxt.parent.removeChild(wordWrapTxt);
+			return wordWrapTxt.text;
+		}		
 		
 		/**
 		 * 设置文本宽高
@@ -364,6 +392,7 @@
 				_textField.height = _textField.textHeight + 4;
 				reDrawMask();
 			}
+			
 			refreshUnitsPos();
 			if(_textField.parent == null)
 			{

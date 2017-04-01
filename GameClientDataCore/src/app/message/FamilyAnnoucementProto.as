@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CONTENT:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.FamilyAnnoucementProto.content", "content", (16 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const CONTENT:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.FamilyAnnoucementProto.content", "content", (16 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var content$field:String;
 
@@ -37,7 +37,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LAST_CHANGE_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.FamilyAnnoucementProto.last_change_time", "lastChangeTime", (17 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LAST_CHANGE_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.FamilyAnnoucementProto.last_change_time", "lastChangeTime", (17 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var last_change_time$field:Int64;
 
@@ -63,11 +63,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasContent) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 16);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, content$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, content$field);
 			}
 			if (hasLastChangeTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 17);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, last_change_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, last_change_time$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -81,21 +81,21 @@ package app.message {
 			var content$count:uint = 0;
 			var last_change_time$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 16:
 					if (content$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyAnnoucementProto.content cannot be set twice.');
 					}
 					++content$count;
-					this.content = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.content = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 17:
 					if (last_change_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyAnnoucementProto.lastChangeTime cannot be set twice.');
 					}
 					++last_change_time$count;
-					this.lastChangeTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.lastChangeTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -11,19 +11,21 @@ package com.rpgGame.app.manager.scene
 	import com.game.mainCore.core.manager.LayerManager;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.AreaMapManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneDropGoodsManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.task.TouJingManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.ClientSceneNpcCfgData;
-	import com.rpgGame.coreData.cfg.TranportsDataManager;
+	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.ClientSceneNPC;
+	import com.rpgGame.coreData.clientConfig.Q_map_transfer;
+	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.info.collect.CollectObjcetInfo;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleType;
@@ -35,9 +37,6 @@ package com.rpgGame.app.manager.scene
 	
 	import flash.events.Event;
 	import flash.geom.Point;
-	
-	import app.message.MonsterDataProto;
-	import app.message.SceneTransportProto;
 	
 	import away3d.pathFinding.DistrictWithPath;
 	
@@ -52,10 +51,25 @@ package com.rpgGame.app.manager.scene
 	 */
 	public class SceneManager
 	{
+		/**
+		 * 场景中最大渲染的角色的个数 
+		 */		
 		private static var _playerMaxRenderNum : int = 300;
+		/**
+		 * 场景中最大渲染的怪物个数 
+		 */		
 		private static var _monsterMaxRenderNum : int = 100;
+		/**
+		 * 场景中最大渲染的其它种类个数，比如说特效，采集物== 
+		 */		
 		private static var _otherMaxRenderNum : int = 100;
+		/**
+		 * 场景中最大渲染角色名字的个数 
+		 */		
 		private static var _maxRoleHeadNameNum : int = 50;
+		/**
+		 * 场景中的可视范围 
+		 */		
 		private static var _viewDistance : int = 4000;
 
 		public static function setup() : void
@@ -116,6 +130,9 @@ package com.rpgGame.app.manager.scene
 
 		public static function addSceneObjToScene(obj : BaseObj3D, clingGround : Boolean = false, needInViewDist : Boolean = true, renderLimitable : Boolean = true, sceneName : String = GameScene3DType.MAIN_SCENE) : void
 		{
+            if (null == obj) {
+                return;
+            }
 			var scene : GameScene3D = getScene(sceneName);
 			if (scene)
 			{
@@ -371,15 +388,33 @@ package com.rpgGame.app.manager.scene
 		public static function generateSceneTransports() : void
 		{
 			var mapID : int = SceneSwitchManager.currentMapId;
-			var sceneCountry : int = MainRoleManager.actorInfo.sceneSequence;
-			var transportList : Vector.<SceneTransportProto> = TranportsDataManager.getSceneTransport(mapID, sceneCountry);
-			GameLog.add("生成传送门", transportList.length);
-			for each (var info : SceneTransportProto in transportList)
-			{
-				var tranportData : SceneTranportData = new SceneTranportData(RoleType.TYPE_TRANPORT_NORMAL);
-				tranportData.setProtocData(info);
-				SceneRoleManager.getInstance().createTranport(tranportData);
-			}
+			//var sceneCountry : int = MainRoleManager.actorInfo.sceneSequence;
+			//var transportList : Vector.<SceneTransportProto> = TranportsDataManager.getSceneTransport(mapID, sceneCountry);
+            var transportList : Vector.<Q_map_transfer> = TransCfgData.getTranBySceneID(mapID);
+			GameLog.add("[SceneManager] [generateSceneTransports]", "MapID:", mapID, ", transSize:", transportList.length);
+            for each(var info : Q_map_transfer in transportList) {
+                CONFIG::netDebug {
+                    NetDebug.LOG("[ShowTrans] ID:", mapID,
+                        "[ID]:", info.q_tran_id,
+                        "[Name]:", info.q_name,
+                        "[Res]:", info.q_tran_res,
+                        "[SourceAreaID]:", info.q_tran_source_area_id,
+                        "[DestAreaID]:", info.q_tran_dest_area_id,
+                        "[ResDirection]:", info.q_tran_res_direction,
+                        "[ResX]:", info.q_tran_res_x,
+                        "[ResY]:", info.q_tran_res_y,
+                        "[SceneID]:", info.q_map_id);
+                }
+                var tranportData : SceneTranportData = new SceneTranportData(RoleType.TYPE_TRANPORT_NORMAL);
+                tranportData.setConfigData(info);
+                SceneRoleManager.getInstance().createTranport(tranportData);
+            }
+			//for each (var info : SceneTransportProto in transportList)
+			//{
+			//	var tranportData : SceneTranportData = new SceneTranportData(RoleType.TYPE_TRANPORT_NORMAL);
+			//	tranportData.setProtocData(info);
+			//	SceneRoleManager.getInstance().createTranport(tranportData);
+			//}
 		}
 
 		/**
@@ -501,10 +536,10 @@ package com.rpgGame.app.manager.scene
 				var roleData : MonsterData = role.data as MonsterData;
 				if (roleData)
 				{
-					var monsterData : MonsterDataProto = MonsterDataManager.getData(roleData.modelID);
+					var monsterData : Q_monster = MonsterDataManager.getData(roleData.modelID);
 					if (monsterData)
 					{
-						return monsterData.id;
+						return monsterData.q_id;
 					}
 				}
 			}

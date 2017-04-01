@@ -12,22 +12,28 @@ package com.rpgGame.coreData.type
 	public class RoleStateType
 	{
 		public static const NONE : int = 0;
-		public static const ACTION_IDLE : int = rEnum.ENUM_START(1);
-		public static const ACTION_WALK : int = rEnum.next;
-		public static const ACTION_RUN : int = rEnum.next;
-		public static const ACTION_JUMP : int = rEnum.next;
-		public static const ACTION_DEATH : int = rEnum.next;
-		public static const ACTION_DEAD_LAUNCH : int = rEnum.next;
-		public static const ACTION_HIT : int = rEnum.next;
-		public static const ACTION_PREWAR : int = rEnum.next;
-		public static const ACTION_ATTACK : int = rEnum.next;
-		public static const ACTION_BLINK : int = rEnum.next;
-		public static const ACTION_BEAT_BACK : int = rEnum.next;
-		public static const ACTION_FALL : int = rEnum.next;
-		public static const ACTION_GETUP : int = rEnum.next;
-		public static const ACTION_COLLECT : int = rEnum.next;
-		public static const ACTION_PLAY_ACTION : int = rEnum.next;
-		public static const ACTION_TRAIL : int = rEnum.next;
+		public static const ACTION_IDLE : int = rEnum.ENUM_START(1);//待机状态
+		public static const ACTION_SHOW : int = rEnum.next;//展示状态
+		public static const ACTION_WALK : int = rEnum.next; //走路状态
+		public static const ACTION_RUN : int = rEnum.next;//跑步状态
+		public static const ACTION_JUMP : int = rEnum.next;//跳跃状态
+		public static const ACTION_DEATH : int = rEnum.next;//死亡状态
+		public static const ACTION_DEAD_LAUNCH : int = rEnum.next;//
+		public static const ACTION_HIT : int = rEnum.next;//受击状态
+		public static const ACTION_PREWAR : int = rEnum.next;//战斗预备状态
+		public static const ACTION_ATTACK : int = rEnum.next;//攻击状态
+		public static const ACTION_BLINK : int = rEnum.next;//闪烁状态
+		public static const ACTION_BEAT_BACK : int = rEnum.next;//击退状态
+		public static const ACTION_FALL : int = rEnum.next;//掉落状态
+		public static const ACTION_GETUP : int = rEnum.next;//站起来状态
+		public static const ACTION_COLLECT : int = rEnum.next;//采集状态
+		public static const ACTION_PLAY_ACTION : int = rEnum.next;//播放动作状态
+		public static const ACTION_TRAIL : int = rEnum.next;//追踪状态
+		
+		public static const ACTION_PLAY_SPELL:int = rEnum.next;
+		public static const ACTION_FLY_UP:int = rEnum.next;
+		public static const ACTION_FLY_HIT:int = rEnum.next;
+		public static const ACTION_FLY_FALL:int = rEnum.next;
 
 		public static const CONTROL_WALK_MOVE : int = rEnum.next;
 		public static const CONTROL_STOP_WALK_MOVE : int = rEnum.next;
@@ -52,5 +58,20 @@ package com.rpgGame.coreData.type
 		public static const CONTROL_DEAD_LAUNCH_MOVE : int = rEnum.next;
 		public static const CONTROL_PREWAR_WAITING : int = rEnum.next;
 		public static const CONTROL_TRAIL_MOVE : int = rEnum.next;
+		public static const CONTROL_BLIND : int = rEnum.next;
+		public static const CONTROL_SHADOW : int = rEnum.next;
+		public static const CONTROL_SCARED : int = rEnum.next;
+		public static const CONTROL_FASTING : int = rEnum.next;
+		public static const CONTROL_SCARED_MOVE : int = rEnum.next;
+		public static const CONTROL_MOUNT_RIDE : int = rEnum.next;
+		
+		public static const CONTROL_HIDDING:int = rEnum.next;
+		public static const CONTROL_FLY_UP:int = rEnum.next;
+		public static const CONTROL_FLY_HIT:int = rEnum.next;
+		public static const CONTROL_FLY_FALL:int = rEnum.next;
+		public static const CONTROL_SYNC_SPELLACTION:int = rEnum.next;
+        public static const CONTROL_SHAPESHIFTING : int = rEnum.next;
+		
+		public static const CONTROL_USE_SPELL:int = rEnum.next;
 	}
 }

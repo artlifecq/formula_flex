@@ -15,7 +15,7 @@ package app.message.Config {
 		/**
 		 *  @private
 		 */
-		public static const DEPOT_MAX_SIZE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.Config.AllGoodsContainerUnlockProto.depot_max_size", "depotMaxSize", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEPOT_MAX_SIZE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.Config.AllGoodsContainerUnlockProto.depot_max_size", "depotMaxSize", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var depot_max_size$field:int;
 
@@ -42,7 +42,7 @@ package app.message.Config {
 		/**
 		 *  @private
 		 */
-		public static const DEPOT_UNLOCK_MONEY_COST:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.Config.AllGoodsContainerUnlockProto.depot_unlock_money_cost", "depotUnlockMoneyCost", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEPOT_UNLOCK_MONEY_COST:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.Config.AllGoodsContainerUnlockProto.depot_unlock_money_cost", "depotUnlockMoneyCost", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var depot_unlock_money_cost$field:int;
 
@@ -67,7 +67,7 @@ package app.message.Config {
 		/**
 		 *  @private
 		 */
-		public static const DEPOT_UNLOCK_BAND_MONEY_COST:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.Config.AllGoodsContainerUnlockProto.depot_unlock_band_money_cost", "depotUnlockBandMoneyCost", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DEPOT_UNLOCK_BAND_MONEY_COST:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.Config.AllGoodsContainerUnlockProto.depot_unlock_band_money_cost", "depotUnlockBandMoneyCost", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var depot_unlock_band_money_cost$field:int;
 
@@ -92,7 +92,7 @@ package app.message.Config {
 		/**
 		 *  @private
 		 */
-		public static const STORAGE_DATAS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.Config.AllGoodsContainerUnlockProto.storage_datas", "storageDatas", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.Config.AllGoodsContainerUnlockProto.StorageUnlockProto; });
+		public static const STORAGE_DATAS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.Config.AllGoodsContainerUnlockProto.storage_datas", "storageDatas", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.Config.AllGoodsContainerUnlockProto.StorageUnlockProto; });
 
 		[ArrayElementType("app.message.Config.AllGoodsContainerUnlockProto.StorageUnlockProto")]
 		public var storageDatas:Array = [];
@@ -103,19 +103,19 @@ package app.message.Config {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasDepotMaxSize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, depot_max_size$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, depot_max_size$field);
 			}
 			if (hasDepotUnlockMoneyCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, depot_unlock_money_cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, depot_unlock_money_cost$field);
 			}
 			if (hasDepotUnlockBandMoneyCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, depot_unlock_band_money_cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, depot_unlock_band_money_cost$field);
 			}
 			for (var storageDatas$index:uint = 0; storageDatas$index < this.storageDatas.length; ++storageDatas$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.storageDatas[storageDatas$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.storageDatas[storageDatas$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -130,31 +130,31 @@ package app.message.Config {
 			var depot_unlock_money_cost$count:uint = 0;
 			var depot_unlock_band_money_cost$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (depot_max_size$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AllGoodsContainerUnlockProto.depotMaxSize cannot be set twice.');
 					}
 					++depot_max_size$count;
-					this.depotMaxSize = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.depotMaxSize = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (depot_unlock_money_cost$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AllGoodsContainerUnlockProto.depotUnlockMoneyCost cannot be set twice.');
 					}
 					++depot_unlock_money_cost$count;
-					this.depotUnlockMoneyCost = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.depotUnlockMoneyCost = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (depot_unlock_band_money_cost$count != 0) {
 						throw new flash.errors.IOError('Bad data format: AllGoodsContainerUnlockProto.depotUnlockBandMoneyCost cannot be set twice.');
 					}
 					++depot_unlock_band_money_cost$count;
-					this.depotUnlockBandMoneyCost = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.depotUnlockBandMoneyCost = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
-					this.storageDatas.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.Config.AllGoodsContainerUnlockProto.StorageUnlockProto()));
+					this.storageDatas.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.Config.AllGoodsContainerUnlockProto.StorageUnlockProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

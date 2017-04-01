@@ -32,6 +32,13 @@ package com.rpgGame.app.view.icon
 		protected var _wearImage : UIAsset;
 		
 		/**
+		 *是符合符合职业 
+		 */
+		protected var _jobImage:UIAsset;
+		
+		protected var _lvImage:UIAsset;
+		
+		/**
 		 * 格子大小 
 		 * @param $iconSize
 		 * 
@@ -78,18 +85,10 @@ package com.rpgGame.app.view.icon
 				return;
 			switch(_iconSize)
 			{
-//				case  IcoSizeEnum.SIZE_36:
-//					if( posx != 0 || posy != 0 )
-//					{
-//						_iconImage.x = posx;
-//						_iconImage.y = posy;
-//					}
-//					else
-//					{
-//						_iconImage.x = 0;
-//						_iconImage.y = 0;
-//					}
-//					break;
+				case  IcoSizeEnum.ICON_42:
+						_iconImage.x = 1;
+						_iconImage.y = 1;
+					break;
 				case  IcoSizeEnum.SIZE_40:
 					if( posx != 0 || posy != 0 )
 					{
@@ -102,7 +101,7 @@ package com.rpgGame.app.view.icon
 						_iconImage.y = 0;
 					}
 					break;
-				case  IcoSizeEnum.SIZE_46:
+				case  IcoSizeEnum.ICON_48:
 					if( posx != 0 || posy != 0 )
 					{
 						_iconImage.x = posx;
@@ -110,11 +109,11 @@ package com.rpgGame.app.view.icon
 					}
 					else
 					{
-						_iconImage.x = 4;
-						_iconImage.y = 4;
+						_iconImage.x = 6;
+						_iconImage.y = 6;
 					}
 					break;
-				case  IcoSizeEnum.SIZE_60:
+				case  IcoSizeEnum.ICON_64:
 					if( posx != 0 || posy != 0 )
 					{
 						_iconImage.x = posx;
@@ -129,6 +128,29 @@ package com.rpgGame.app.view.icon
 			}
 		}
 		
+		public function setLV(lv:int):void
+		{
+			if(lv<=0||lv>10){
+				return;
+			}
+			
+			if(!_lvImage)
+			{
+				_lvImage = new UIAsset();
+				addChild(_lvImage);
+			}
+			_lvImage.styleName=AssetUrl.EQUIP_LV+lv+".png";
+			_lvImage.x = 0;
+			_lvImage.y = 0;
+			if(_iconSize==IcoSizeEnum.ICON_48){
+				_lvImage.x = 4;
+				_lvImage.y = 4;
+			}else if(_iconSize==IcoSizeEnum.ICON_64){
+				_lvImage.x = 8;
+				_lvImage.y = 8;
+			}
+		}
+		
 		public function setIsBind(v:Boolean):void
 		{
 			if(v)
@@ -140,18 +162,23 @@ package com.rpgGame.app.view.icon
 				}
 				switch(_iconSize)
 				{
-					case IcoSizeEnum.SIZE_60:
-						_bindImage.styleName=AssetUrl.EQUIP_BIND_60;
-						_bindImage.x = 50;
-						_bindImage.y = 50;
+					case IcoSizeEnum.ICON_42:
+						_bindImage.styleName=AssetUrl.EQUIP_BIND_42;
+						_bindImage.x = 6;
+						_bindImage.y = 27;
 						break;
-					case IcoSizeEnum.SIZE_46:
-						_bindImage.styleName=AssetUrl.EQUIP_BIND_46;
-						_bindImage.x = 32;
-						_bindImage.y = 32;
+					case IcoSizeEnum.ICON_64:
+						_bindImage.styleName=AssetUrl.EQUIP_BIND_64;
+						_bindImage.x = 14;
+						_bindImage.y = 47;
+						break;
+					case IcoSizeEnum.ICON_48:
+						_bindImage.styleName=AssetUrl.EQUIP_BIND_42;
+						_bindImage.x = 12;
+						_bindImage.y = 33;
 						break;
 				}
-				this.setChildIndex(_bindImage,numChildren);
+//				this.setChildIndex(_bindImage,numChildren);
 			}else
 			{
 				if(_bindImage && _bindImage.parent)
@@ -159,6 +186,27 @@ package com.rpgGame.app.view.icon
 				_bindImage = null;
 			}
 		}
+		
+		public function setJobState(state:String):void
+		{
+			if(!state){
+				if(_jobImage && _jobImage.parent)
+					_jobImage.parent.removeChild(_jobImage);
+				_jobImage = null;
+				return;
+			}
+			
+			if(!_jobImage)
+			{
+				_jobImage = new UIAsset();
+				addChild(_jobImage);
+			}
+			
+			_jobImage.styleName=state;
+			_jobImage.x = _iconSize-13;
+			_jobImage.y = _iconSize-13;
+		}
+		
 		
 		public function setIsWear(v:Boolean):void
 		{
@@ -209,6 +257,14 @@ package com.rpgGame.app.view.icon
 			if(_wearImage && _wearImage.parent)
 				_wearImage.parent.removeChild(_wearImage);
 			_wearImage = null;
+			
+			if(_jobImage && _jobImage.parent)
+				_jobImage.parent.removeChild(_jobImage);
+			_jobImage = null;
+			
+			if(_lvImage && _lvImage.parent)
+				_lvImage.parent.removeChild(_lvImage);
+			_lvImage = null;
 		}
 		
 		/**

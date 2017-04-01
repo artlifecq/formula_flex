@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 角色动作数据窗口
+* @author L.L.M.Sunny
+* 创建时间：2015-9-22 下午5:30:12
+*
+-->
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="350"
+			   height="170"
+			   title="角色动作数据"
+			   fontFamily="SimSun"
+			   creationComplete="onCreationComplete()"
+			   initialize="onInitialize()"
+			   close="window1_closeHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.cfg.ConfigData;
+			import com.editor.data.RenderUnitID;
+			import com.editor.data.RenderUnitType;
+			import com.editor.enum.AnimationExtraFieldType;
+			import com.editor.manager.AppManager;
+			import com.editor.manager.SceneRoleManager;
+			import com.editor.scene.SceneRole;
+			import com.game.engine3D.scene.render.RenderUnit3D;
+
+			import mx.collections.ArrayCollection;
+			import mx.managers.PopUpManager;
+
+			private static var _window : AnimationExtraDataView;
+
+			public static function open() : void
+			{
+				if (!_window)
+				{
+					_window = new AnimationExtraDataView();
+					PopUpManager.addPopUp(_window, AppManager.getInstance().appRoot, false);
+					_window.move(AppManager.getInstance().appWidth - _window.width - 420, 700);
+				}
+				PopUpManager.bringToFront(_window);
+			}
+
+			public static function close() : void
+			{
+				if (_window)
+				{
+					_window.destroy();
+					PopUpManager.removePopUp(_window);
+				}
+				_window = null;
+			}
+
+			public static function get window() : AnimationExtraDataView
+			{
+				return _window;
+			}
+
+			[Bindable]
+			private var _actionType : String;
+			/** 额外数据 **/
+			[Bindable]
+			public var extraItems : ArrayCollection;
+			[Bindable]
+			public var selectedItem : Object;
+
+			public function get role() : SceneRole
+			{
+				return SceneRoleManager.getInstance().previewEntity;
+			}
+
+			private function onInitialize() : void
+			{
+				extraItems = new ArrayCollection();
+				visible = false;
+			}
+
+			private function onCreationComplete() : void
+			{
+				visible = true;
+				pullData();
+			}
+
+			private function window1_closeHandler(event : Event) : void
+			{
+				close();
+			}
+
+			public function setAvatarData(actionType : String) : void
+			{
+				_actionType = actionType;
+				pullData();
+			}
+
+			private function destroy() : void
+			{
+				extraItems.removeAll();
+				extraItems = null;
+				selectedItem = null;
+			}
+
+			private function pullData() : void
+			{
+				if (!extraItems)
+					return;
+				var ru : RenderUnit3D = (role && role.avatar) ? role.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true) : null;
+				extraItems.removeAll();
+				var extraFieldTypeList : Array = AnimationExtraFieldType.fieldList;
+				var len : int = extraFieldTypeList.length;
+				for (var i : int = 0; i < len; i++)
+				{
+					var extraField : String = extraFieldTypeList[i];
+					var data : ConfigData = new ConfigData();
+					data.name = AnimationExtraFieldType.fieldLabelByType[extraField];
+					data.field = extraField;
+					data.value = ru.renderUnitData.getAnimationExtrasData(_actionType, extraField);
+					extraItems.addItem(data);
+				}
+			}
+		]]>
+	</fx:Script>
+	<s:Group left="0"
+			 right="0"
+			 top="0"
+			 bottom="0"
+			 width="100%"
+			 height="100%">
+		<mx:DataGrid id="data_action"
+					 x="0"
+					 y="0"
+					 width="100%"
+					 height="100%"
+					 dataProvider="{extraItems}"
+					 selectedItem="{selectedItem}"
+					 editable="false"
+					 dragEnabled="true">
+			<mx:columns>
+				<mx:DataGridColumn headerText="标签"
+								   dataField="name"
+								   width="150"
+								   editable="false"/>
+				<mx:DataGridColumn headerText="字段名"
+								   dataField="field"
+								   width="200"
+								   editable="false"/>
+				<mx:DataGridColumn headerText="数据"
+								   dataField="value"
+								   editable="false"/>
+			</mx:columns>
+		</mx:DataGrid>
+	</s:Group>
+</s:TitleWindow>

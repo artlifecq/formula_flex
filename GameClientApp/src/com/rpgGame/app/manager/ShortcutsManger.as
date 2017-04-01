@@ -1,30 +1,37 @@
 package com.rpgGame.app.manager
 {
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.sender.SpellSender;
+	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.core.events.SpellEvent;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
+	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.shortcuts.ShortcutsData;
-	
-	import app.message.SpellProto;
+	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
 
 	/**
-	 * 快捷栏数据
-	 * @author luguozheng
-	 *
-	 */
+	 * 主控面板快捷栏管理器 
+	 * @author NEIL
+	 * 
+	 */	
 	public class ShortcutsManger
 	{
 		public static const SHORTCUTS_LEN : uint = 10;
 		private var shortcutsDataMap : HashMap;
 		private var _tempSpells:HashMap;
+		private var _isUsed : Boolean = false;
 
 		public function ShortcutsManger()
 		{
 			shortcutsDataMap = new HashMap();
+            EventManager.addEvent(BuffEvent.REMOVE_BUFF, onRemoveBuffEventHandler);
 		}
 
 		private static var _instance : ShortcutsManger;
@@ -43,13 +50,12 @@ package com.rpgGame.app.manager
 		 * @param spellProto
 		 *
 		 */
-		public function updateNewSpell(spellProto : SpellProto, saveToServer:Boolean = true) : void
+		public function updateNewSpell(spellProto : Q_skill_model, saveToServer:Boolean = true) : void
 		{
-			if (!spellProto.activeSpell)
+			if (spellProto.q_trigger_type != 1)
 				return;
-			if (shortcutsHasValue(ShortcutsTypeEnum.SKILL_TYPE, spellProto.spellType))
+			if (shortcutsHasValue(ShortcutsTypeEnum.SKILL_TYPE, spellProto.q_skillID))
 			{
-				trace("快捷栏中已经存在这个技能", spellProto.name);
 				return;
 			}
 			var i : int = 0;
@@ -59,7 +65,7 @@ package com.rpgGame.app.manager
 				shortcuts = getShortcutsDataByPos(i);
 				if (!shortcuts)
 				{
-					setShortData(i, ShortcutsTypeEnum.SKILL_TYPE, spellProto.spellType,saveToServer);
+					setShortData(i, ShortcutsTypeEnum.SKILL_TYPE, spellProto.q_skillID,saveToServer);
 					EventManager.dispatchEvent(SpellEvent.SPELL_UPDATE_SHORTCUTS);
 					return;
 				}
@@ -101,33 +107,39 @@ package com.rpgGame.app.manager
 		public function setup() : void
 		{
 			initShortcutData();
+			EventManager.dispatchEvent(SpellEvent.SPELL_UPDATE_SHORTCUTS);
 		}
 
+		/**
+		 *格式如下： 
+		 * {t :vo.type , mid :vo.id , k :vo.shortcutPos}
+		 */		
 		private function initShortcutData() : void
 		{
+			shortcutsDataMap.clear();
 			var shortData : ShortcutsData;
-			var shorts : int;
-			var changeData : Array;
+			var shorts : Object;
 			for (var i : int = 0; i < SHORTCUTS_LEN; i++)
 			{
-				shorts = ClientSettingOldManager.getClientOnlyIntConfig(i);
+				shorts = ClientSettingManager.getShortCutDataByKey(i);
 
-				if (shorts <= -1)
-					continue;
-				shortData = new ShortcutsData();
-				if (shorts > 0)
+				if (shorts == null)
 				{
-					changeData = changeConfig(String(shorts));
-
-					shortData.type = changeData[0];
-					shortData.shortcutPos = changeData[1];
-					shortData.id = changeData[2];
+					//这段注释里写的是测试代码，为了方便调试技能，所以先这么写，后面系统成熟了，再去掉这段代码
+//					setShortData(i,ShortcutsTypeEnum.SKILL_TYPE,(1001 + i));
+					//
+					continue;
 				}
+				shortData = new ShortcutsData();
+				
+				shortData.type = shorts.t;
+				shortData.shortcutPos = shorts.k;
+				shortData.id = shorts.mid;
 
 				shortcutsDataMap.add(shortData.shortcutPos, shortData);
 			}
 		}
-
+		
 		//-------------------------------------------------------
 		/**
 		 * 设置新的快捷栏数据
@@ -158,7 +170,7 @@ package com.rpgGame.app.manager
 			shortcutsDataMap.add(shortData.shortcutPos, shortData);
 			if(saveToServer)
 			{
-				sendShortMsg(shortData.shortcutPos, shortData.type, shortData.id);
+				sendShortMsg();
 			}
 		}
 
@@ -182,7 +194,7 @@ package com.rpgGame.app.manager
 		{
 			shortcutsDataMap.remove(shortcutPos);
 
-			ClientSettingOldManager.reqSetClientOnlyIntConfig(shortcutPos, -1);
+			ClientSettingManager.savaClientShortCutsToServer(shortcutsDataMap);
 		}
 
 		/**
@@ -247,16 +259,25 @@ package com.rpgGame.app.manager
 		 * @return
 		 *
 		 */
-		public function useShortcuts(shortcutPos : uint) : Boolean
+		public function useShortcuts(shortcutPos : uint, isKeyboard : Boolean = false) : Boolean
 		{
 			var shortData : ShortcutsData = getShortcutsDataByPos(shortcutPos);
 			if (shortData == null)
+			{
+                NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellByBinding); //"没有穿戴武器不能释放技能"
 				return false; //这个快捷键没有设置数据
+			}
 
 			switch (shortData.type)
 			{
 				case ShortcutsTypeEnum.SKILL_TYPE:
 					//使用这个技能，走释放技能的流程
+                    var config : Q_skill_model = CastSpellHelper.getSpellData(shortData.id);
+                    if (isKeyboard && null != config && 1 == config.q_skill_state) {//技能持续状态
+                        SpellSender.reqSkillContiState(shortData.id, this._isUsed ? 0 : 1);
+						this._isUsed = !this._isUsed;
+                        return true;
+                    }
 					CastSpellHelper.shortcutsTryCaseSpell(shortData.id);
 					return true;
 
@@ -266,28 +287,25 @@ package com.rpgGame.app.manager
 					return true;
 			}
 			
-			/*var spellInfo:ReleaseSpellInfo=new ReleaseSpellInfo();
-			
-			RoleStateUtil.blinkToPos(MainRoleManager.actor,RoleActionType.BLINK,//
-				new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(MainRoleManager.actor.x+200,MainRoleManager.actor.z),//
-			1000,300,0,10,10,spellInfo);*/
-			
 			//没有这个类型
 			return true;
 		}
+        
+        private function onRemoveBuffEventHandler(buffData:BuffData) : void {
+            if (buffData.roleId != MainRoleManager.actor.id) {
+                return;
+            }
+            if (2003 == buffData.cfgId) {
+                // 疯狂连弩技能产生的buff
+                this._isUsed = false;
+            }
+        }
 
 		//-------------------------------------------------------
 		//----------------------消息相关
-		private function sendShortMsg(gridIndex : int, type : int, id : int) : void
+		private function sendShortMsg() : void
 		{
-			var gridID : String = gridIndex >= 10 ? gridIndex + "" : "0" + gridIndex;
-
-			ClientSettingOldManager.reqSetClientOnlyIntConfig(gridIndex, int(id + "" + gridID + "" + type));
-		}
-
-		private function changeConfig(shorts : String) : Array
-		{
-			return [shorts.charAt(shorts.length - 1), shorts.substring(shorts.length - 3, shorts.length - 1), shorts.substring(0, shorts.length - 3)];
+			ClientSettingManager.savaClientShortCutsToServer(shortcutsDataMap);
 		}
 
 		/**
@@ -308,13 +326,34 @@ package com.rpgGame.app.manager
 				var i:int;
 				for(i = 0; i < len; i++)
 				{
-					var spellProto:SpellProto = spells[i];
-					_tempSpells.add(spellProto.spellType,spellProto);
+					var spellProto:Q_skill_model = spells[i];
+					_tempSpells.add(spellProto.q_skillID,spellProto);
 					updateNewSpell(spellProto,false);
 				}
 			}
 			EventManager.dispatchEvent(SpellEvent.SPELL_UPDATE_SHORTCUTS);
 		}
+        
+        public function replaceToTempSpellByVector(spells:Vector.<Q_skill_model>):void
+        {
+            shortcutsDataMap.clear();
+            if(spells != null)
+            {
+                if(_tempSpells == null)
+                {
+                    _tempSpells = new HashMap();
+                }
+                var len:int = spells.length;
+                var i:int;
+                for(i = 0; i < len; i++)
+                {
+                    var spellProto:Q_skill_model = spells[i];
+                    _tempSpells.add(spellProto.q_skillID,spellProto);
+                    updateNewSpell(spellProto,false);
+                }
+            }
+            EventManager.dispatchEvent(SpellEvent.SPELL_UPDATE_SHORTCUTS);
+        }
 		
 		/**
 		 * 是否是临时技能条
@@ -332,11 +371,11 @@ package com.rpgGame.app.manager
 		 * @return 
 		 * 
 		 */
-		public function getTempSellProto(spellType:int):SpellProto
+		public function getTempSellProto(spellID:int):Q_skill_model
 		{
 			if(_tempSpells)
 			{
-				return _tempSpells.getValue(spellType);
+				return _tempSpells.getValue(spellID);
 			}
 			return null;
 		}

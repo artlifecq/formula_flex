@@ -14,7 +14,7 @@ package app.message.ChatContentProto {
 		/**
 		 *  @private
 		 */
-		public static const SCENE_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChatContentProto.PosInfoProto.scene_id", "sceneId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SCENE_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChatContentProto.PosInfoProto.scene_id", "sceneId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var scene_id$field:int;
 
@@ -41,7 +41,7 @@ package app.message.ChatContentProto {
 		/**
 		 *  @private
 		 */
-		public static const SCENE_X:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChatContentProto.PosInfoProto.scene_x", "sceneX", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SCENE_X:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChatContentProto.PosInfoProto.scene_x", "sceneX", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var scene_x$field:int;
 
@@ -66,7 +66,7 @@ package app.message.ChatContentProto {
 		/**
 		 *  @private
 		 */
-		public static const SCENE_Y:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChatContentProto.PosInfoProto.scene_y", "sceneY", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SCENE_Y:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChatContentProto.PosInfoProto.scene_y", "sceneY", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var scene_y$field:int;
 
@@ -91,7 +91,7 @@ package app.message.ChatContentProto {
 		/**
 		 *  @private
 		 */
-		public static const SCENE_LINE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChatContentProto.PosInfoProto.scene_line", "sceneLine", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SCENE_LINE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChatContentProto.PosInfoProto.scene_line", "sceneLine", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var scene_line$field:int;
 
@@ -116,7 +116,7 @@ package app.message.ChatContentProto {
 		/**
 		 *  @private
 		 */
-		public static const SCENE_COUNTRY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ChatContentProto.PosInfoProto.scene_country", "sceneCountry", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SCENE_COUNTRY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ChatContentProto.PosInfoProto.scene_country", "sceneCountry", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var scene_country$field:int;
 
@@ -144,23 +144,23 @@ package app.message.ChatContentProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasSceneId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, scene_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, scene_id$field);
 			}
 			if (hasSceneX) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, scene_x$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, scene_x$field);
 			}
 			if (hasSceneY) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, scene_y$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, scene_y$field);
 			}
 			if (hasSceneLine) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, scene_line$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, scene_line$field);
 			}
 			if (hasSceneCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, scene_country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, scene_country$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -177,42 +177,42 @@ package app.message.ChatContentProto {
 			var scene_line$count:uint = 0;
 			var scene_country$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (scene_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: PosInfoProto.sceneId cannot be set twice.');
 					}
 					++scene_id$count;
-					this.sceneId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.sceneId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (scene_x$count != 0) {
 						throw new flash.errors.IOError('Bad data format: PosInfoProto.sceneX cannot be set twice.');
 					}
 					++scene_x$count;
-					this.sceneX = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.sceneX = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (scene_y$count != 0) {
 						throw new flash.errors.IOError('Bad data format: PosInfoProto.sceneY cannot be set twice.');
 					}
 					++scene_y$count;
-					this.sceneY = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.sceneY = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (scene_line$count != 0) {
 						throw new flash.errors.IOError('Bad data format: PosInfoProto.sceneLine cannot be set twice.');
 					}
 					++scene_line$count;
-					this.sceneLine = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.sceneLine = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (scene_country$count != 0) {
 						throw new flash.errors.IOError('Bad data format: PosInfoProto.sceneCountry cannot be set twice.');
 					}
 					++scene_country$count;
-					this.sceneCountry = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.sceneCountry = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

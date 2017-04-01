@@ -17,7 +17,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const QUALITY:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.EquipmentProto.quality", "quality", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Quality);
+		public static const QUALITY:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.EquipmentProto.quality", "quality", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Quality);
 
 		private var quality$field:int;
 
@@ -44,7 +44,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EVALUATE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.EquipmentProto.evaluate", "evaluate", (2 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Evaluate);
+		public static const EVALUATE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.EquipmentProto.evaluate", "evaluate", (2 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Evaluate);
 
 		private var evaluate$field:int;
 
@@ -69,7 +69,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BASE_STAT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentProto.base_stat", "baseStat", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
+		public static const BASE_STAT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentProto.base_stat", "baseStat", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
 
 		private var base_stat$field:app.message.SpriteStatProto;
 
@@ -92,7 +92,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RANDOM_STAT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentProto.random_stat", "randomStat", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
+		public static const RANDOM_STAT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentProto.random_stat", "randomStat", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
 
 		private var random_stat$field:app.message.SpriteStatProto;
 
@@ -115,7 +115,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DURABILITY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentProto.durability", "durability", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DURABILITY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentProto.durability", "durability", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var durability$field:int;
 
@@ -140,7 +140,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const USED_DURABILITY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentProto.used_durability", "usedDurability", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const USED_DURABILITY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentProto.used_durability", "usedDurability", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var used_durability$field:int;
 
@@ -165,7 +165,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const REFINED_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentProto.refined_times", "refinedTimes", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const REFINED_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentProto.refined_times", "refinedTimes", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var refined_times$field:int;
 
@@ -190,7 +190,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const REFINED_STAT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentProto.refined_stat", "refinedStat", (8 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
+		public static const REFINED_STAT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentProto.refined_stat", "refinedStat", (8 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
 
 		private var refined_stat$field:app.message.SpriteStatProto;
 
@@ -213,7 +213,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BUILD_SIGNATURE:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.EquipmentProto.build_signature", "buildSignature", (9 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const BUILD_SIGNATURE:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.EquipmentProto.build_signature", "buildSignature", (9 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var build_signature$field:String;
 
@@ -236,7 +236,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FIGHTING_AMOUNT:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.EquipmentProto.fighting_amount", "fightingAmount", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FIGHTING_AMOUNT:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.EquipmentProto.fighting_amount", "fightingAmount", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var fighting_amount$field:Int64;
 
@@ -259,7 +259,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CAN_GENERAL_CHANGE:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.EquipmentProto.can_general_change", "canGeneralChange", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_GENERAL_CHANGE:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.EquipmentProto.can_general_change", "canGeneralChange", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_general_change$field:Boolean;
 
@@ -284,7 +284,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GENERAL_TAOZ_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentProto.general_taoz_id", "generalTaozId", (12 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const GENERAL_TAOZ_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentProto.general_taoz_id", "generalTaozId", (12 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var general_taoz_id$field:int;
 
@@ -309,7 +309,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GENERAL_QUALITY:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.EquipmentProto.general_quality", "generalQuality", (13 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Quality);
+		public static const GENERAL_QUALITY:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.EquipmentProto.general_quality", "generalQuality", (13 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Quality);
 
 		private var general_quality$field:int;
 
@@ -337,55 +337,55 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasQuality) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, quality$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, quality$field);
 			}
 			if (hasEvaluate) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, evaluate$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, evaluate$field);
 			}
 			if (hasBaseStat) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, base_stat$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, base_stat$field);
 			}
 			if (hasRandomStat) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, random_stat$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, random_stat$field);
 			}
 			if (hasDurability) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, durability$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, durability$field);
 			}
 			if (hasUsedDurability) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, used_durability$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, used_durability$field);
 			}
 			if (hasRefinedTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, refined_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, refined_times$field);
 			}
 			if (hasRefinedStat) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, refined_stat$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, refined_stat$field);
 			}
 			if (hasBuildSignature) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, build_signature$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, build_signature$field);
 			}
 			if (hasFightingAmount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, fighting_amount$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, fighting_amount$field);
 			}
 			if (hasCanGeneralChange) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_general_change$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_general_change$field);
 			}
 			if (hasGeneralTaozId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, general_taoz_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, general_taoz_id$field);
 			}
 			if (hasGeneralQuality) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, general_quality$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, general_quality$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -410,21 +410,21 @@ package app.message {
 			var general_taoz_id$count:uint = 0;
 			var general_quality$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (quality$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentProto.quality cannot be set twice.');
 					}
 					++quality$count;
-					this.quality = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.quality = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 2:
 					if (evaluate$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentProto.evaluate cannot be set twice.');
 					}
 					++evaluate$count;
-					this.evaluate = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.evaluate = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 3:
 					if (base_stat$count != 0) {
@@ -432,7 +432,7 @@ package app.message {
 					}
 					++base_stat$count;
 					this.baseStat = new app.message.SpriteStatProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.baseStat);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.baseStat);
 					break;
 				case 4:
 					if (random_stat$count != 0) {
@@ -440,28 +440,28 @@ package app.message {
 					}
 					++random_stat$count;
 					this.randomStat = new app.message.SpriteStatProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.randomStat);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.randomStat);
 					break;
 				case 5:
 					if (durability$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentProto.durability cannot be set twice.');
 					}
 					++durability$count;
-					this.durability = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.durability = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (used_durability$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentProto.usedDurability cannot be set twice.');
 					}
 					++used_durability$count;
-					this.usedDurability = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.usedDurability = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 7:
 					if (refined_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentProto.refinedTimes cannot be set twice.');
 					}
 					++refined_times$count;
-					this.refinedTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.refinedTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 8:
 					if (refined_stat$count != 0) {
@@ -469,42 +469,42 @@ package app.message {
 					}
 					++refined_stat$count;
 					this.refinedStat = new app.message.SpriteStatProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.refinedStat);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.refinedStat);
 					break;
 				case 9:
 					if (build_signature$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentProto.buildSignature cannot be set twice.');
 					}
 					++build_signature$count;
-					this.buildSignature = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.buildSignature = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 10:
 					if (fighting_amount$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentProto.fightingAmount cannot be set twice.');
 					}
 					++fighting_amount$count;
-					this.fightingAmount = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.fightingAmount = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 11:
 					if (can_general_change$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentProto.canGeneralChange cannot be set twice.');
 					}
 					++can_general_change$count;
-					this.canGeneralChange = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canGeneralChange = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 12:
 					if (general_taoz_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentProto.generalTaozId cannot be set twice.');
 					}
 					++general_taoz_id$count;
-					this.generalTaozId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.generalTaozId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 13:
 					if (general_quality$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentProto.generalQuality cannot be set twice.');
 					}
 					++general_quality$count;
-					this.generalQuality = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.generalQuality = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

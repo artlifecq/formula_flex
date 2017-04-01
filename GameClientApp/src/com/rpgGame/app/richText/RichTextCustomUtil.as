@@ -58,7 +58,7 @@
 	inputText.appendRichText(imageCode);
 	//添加一个物品文本链接
 	var goodsCode:String = RichTextCustomUtil.getItemCode(cfgId,name,quality);
-	inputText.appendRichText(goodsCode);	
+	inputText.appendRichText(goodsCode);
 	//添加一个表情动画,快捷键参考RichTextCustomUtil.cloneChatUnitConfigVec配置
 	inputText.appendRichText("表情对应的快捷键");
 	//把富文本单元的代码替换成普通显示的标签
@@ -71,7 +71,7 @@
 	RichTextCustomUtil.onClickFunc
 	RichTextCustomUtil.onMouseOut
 	RichTextCustomUtil.onMouseMove
-	
+
 	!!!扩展富文本单元类型，已有链接文本、图标、动画=================================================================
 	RichTextCustomUnitType
 	RichTextCustomUtil.updateRichUnit
@@ -80,6 +80,7 @@
 package com.rpgGame.app.richText
 {
 	import com.rpgGame.app.manager.MenuManager;
+	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.chat.FaceLoadManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
@@ -93,8 +94,8 @@ package com.rpgGame.app.richText
 	import com.rpgGame.core.manager.tips.TipManager;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.type.AssetUrl;
-	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.ItemQualityType;
 	
 	import feathers.controls.Label;
@@ -108,34 +109,34 @@ package com.rpgGame.app.richText
 	 * 富文本自定义工具类，由项目维护
 	 * @author GuoDong.Zhang
 	 * 创建时间：2016-7-5 下午4:09:36
-	 * 
+	 *
 	 */
 	public class RichTextCustomUtil
 	{
-		
+
 		/**配置回调函数*/
 		RichTextArea3D.onMouseClickUnit = onClickFunc;
 		RichTextArea3D.onMouseMoveUnit = onMouseMove;
 		RichTextArea3D.onMouseOutUnit = onMouseOut;
 		RichTextArea3D.updateUnitDisplayObjFunc = updateRichUnit;
-		
+
 		/**聊天所需富文本单元配置列表*/
-		private static var _chatUnitConfigVect:Vector.<RichTextUnitConfigData>;
-		
+		private static var _chatUnitConfigVect : Vector.<RichTextUnitConfigData>;
+
 		/**
 		 * 克隆聊天所需富文本单元配置列表
-		 * @return 
-		 * 
+		 * @return
+		 *
 		 */
-		public static function cloneChatUnitConfigVec():Vector.<RichTextUnitConfigData>
+		public static function cloneChatUnitConfigVec() : Vector.<RichTextUnitConfigData>
 		{
-			if(_chatUnitConfigVect == null)
+			if (_chatUnitConfigVect == null)
 			{
 				_chatUnitConfigVect = new Vector.<RichTextUnitConfigData>();
 				var faces : Array = FaceCfgData.getAllFace();
 				faces.sort(FaceCfgData.sortByIndex);
-				var unitConfigData:RichTextUnitConfigData;
-				for each (var faceInfo:FaceInfo in faces)
+				var unitConfigData : RichTextUnitConfigData;
+				for each (var faceInfo : FaceInfo in faces)
 				{
 					unitConfigData = new RichTextUnitConfigData();
 					unitConfigData.shortcutCode = faceInfo.str;
@@ -146,62 +147,62 @@ package com.rpgGame.app.richText
 			}
 			return _chatUnitConfigVect.concat();
 		}
-		
-		
+
+
 		/**
 		 * 获得文本链接的代码
 		 * @param label 显示的标签名
 		 * @param labelColor 显示的标签颜色
 		 * @param linkType 链接的数据类型
 		 * @param linkData 链接的数据
-		 * @return 
-		 * 
+		 * @return
+		 *
 		 */
-		public static function getTextLinkCode(label:String = null, labelColor:Number = -1, linkType:String = null, linkData:String = null) : String
+		public static function getTextLinkCode(label : String = null, labelColor : Number = -1, linkType : String = null, linkData : String = null) : String
 		{
-			return RichTextConfig.getCode(RichTextCustomUnitType.LINK,null,label,labelColor,linkType,linkData);
+			return RichTextConfig.getCode(RichTextCustomUnitType.LINK, null, label, labelColor, linkType, linkData);
 		}
-		
+
 		/**
 		 * 获得图标对象的代码
 		 * @param res 对应的图标的资源(UIAsset的styleName)
 		 * @param linkType 链接的数据类型
 		 * @param linkData 链接的数据
-		 * @return 
-		 * 
+		 * @return
+		 *
 		 */
-		public static function getImageLinkCode(res:String, linkType:String = null, linkData:String = null, offsetY:int = 0):String
+		public static function getImageLinkCode(res : String, linkType : String = null, linkData : String = null, offsetY : int = 0) : String
 		{
-			return RichTextConfig.getCode(RichTextCustomUnitType.IMAGE,res,null,-1,linkType,linkData,offsetY);
+			return RichTextConfig.getCode(RichTextCustomUnitType.IMAGE, res, null, -1, linkType, linkData, offsetY);
 		}
-		
+
 		/**
 		 * 获得动画对象的代码
 		 * @param res 对应的动画的资源(可以自定义，最终在updateMovieClip处理)
 		 * @param linkType 链接的数据类型
 		 * @param linkData 链接的数据
-		 * @return 
-		 * 
+		 * @return
+		 *
 		 */
-		public static function getMovieClipLinkCode(res:String, linkType:String = null, linkData:String = null):String
+		public static function getMovieClipLinkCode(res : String, linkType : String = null, linkData : String = null) : String
 		{
-			return RichTextConfig.getCode(RichTextCustomUnitType.MOVIECLIP,res,null,-1,linkType,linkData);
+			return RichTextConfig.getCode(RichTextCustomUnitType.MOVIECLIP, res, null, -1, linkType, linkData);
 		}
-		
+
 		/**
 		 * 物品名称代码
-		 * 
+		 *
 		 * @param id
 		 * @param itemName
 		 * @param qualiy
-		 * @return 
-		 * 
+		 * @return
+		 *
 		 */
-		public static function getItemCode(id : int, itemName : String, qualiy : int) : String
+		public static function getItemCode(id : String, itemName : String, qualiy : int) : String
 		{
-			return getTextLinkCode(itemName,ItemQualityType.getColorValue(qualiy),RichTextCustomLinkType.ITEM_SHOW_TYPE, id.toString() + "," + qualiy.toString());
+			return getTextLinkCode(itemName, ItemQualityType.getColorValue(qualiy), RichTextCustomLinkType.ITEM_SHOW_TYPE, id + "," + qualiy.toString());
 		}
-		
+
 		/**
 		 * 小飞鞋图标代码
 		 * @param sceneId
@@ -209,12 +210,12 @@ package com.rpgGame.app.richText
 		 * @param sceneY
 		 * @param line
 		 * @param sceneCountry
-		 * @return 
-		 * 
+		 * @return
+		 *
 		 */
-		public static function getPositionCode(sceneId : int, sceneX : int, sceneY : int, line : int, sceneCountry : int, offsetY:int = 0) : String
+		public static function getPositionCode(sceneId : int, sceneX : int, sceneY : int, line : int, sceneCountry : int, offsetY : int = 0) : String
 		{
-			return RichTextConfig.getCode(RichTextCustomUnitType.IMAGE,AssetUrl.POSITION_FLY_TYPE_ICORES,null,-1,RichTextCustomLinkType.POSITION_FLY_TYPE, sceneId + "," + sceneX + "," + sceneY + "," + line + "," + sceneCountry,offsetY);
+			return RichTextConfig.getCode(RichTextCustomUnitType.IMAGE, AssetUrl.POSITION_FLY_TYPE_ICORES, null, -1, RichTextCustomLinkType.POSITION_FLY_TYPE, sceneId + "," + sceneX + "," + sceneY + "," + line + "," + sceneCountry, offsetY);
 		}
 
 		/**
@@ -223,15 +224,15 @@ package com.rpgGame.app.richText
 		 * @param data
 		 *
 		 */
-		public static function onClickFunc(unit:RichTextUnit) : void
+		public static function onClickFunc(unit : RichTextUnit) : void
 		{
-			var unitData:RichTextUnitData = unit.unitData;
+			var unitData : RichTextUnitData = unit.unitData;
 			switch (unitData.linkType)
 			{
 				case RichTextCustomLinkType.ROLE_NAME_TYPE:
 					//获取人物名;
 					//trace( "点击打开这个人的属性面板，id：",data.id," 英雄名字：",data.data1 );
-					var userID:Number = Number(unitData.linkData);
+					var userID : Number = Number(unitData.linkData);
 					if (MainRoleManager.isSelf(userID))
 					{
 						return;
@@ -252,7 +253,7 @@ package com.rpgGame.app.richText
 					MainRoleSearchPathManager.walkToScene(flypos[0], flypos[1], flypos[2], null, 200);
 					break;
 				case RichTextCustomLinkType.ITEM_SHOW_TYPE:
-					
+
 
 					break;
 				case RichTextCustomLinkType.TASK_NPC_NAME_TYPE:
@@ -281,7 +282,7 @@ package com.rpgGame.app.richText
 					TaskUtil.collectItemTask(taskId, objectID, collectGoodsType, sceneID, posx, posy);
 					break;
 				case RichTextCustomLinkType.TASK_FLY_TYPE:
-					var taskInfo:Array = unitData.linkData.split(",");
+					var taskInfo : Array = unitData.linkData.split(",");
 					var taskIndex : int = taskInfo[0];
 					var taskType : int = taskInfo[1];
 					TaskUtil.flyToPos(taskType, taskIndex);
@@ -298,42 +299,60 @@ package com.rpgGame.app.richText
 				case RichTextCustomLinkType.TASK_TO_NPC_DIAILOG_TYPE:
 					TaskUtil.toNpcDiailog(parseInt(unitData.linkData));
 					break;
+				case RichTextCustomLinkType.WALK_TO_SCENE_MONSTER_TYPE:
+//					TaskUtil.walkToSceneMonster(parseInt(unitData.linkData));
+					break;
 			}
 		}
-		
+
 		/**
 		 * 鼠标移出事件，可以根据类型来写不同的效果
-		 * 
-		 */		
-		public static function onMouseOut(unit:RichTextUnit):void
+		 *
+		 */
+		public static function onMouseOut(unit : RichTextUnit) : void
 		{
-			var unitData:RichTextUnitData = unit.unitData;
-			if(unitData.type == RichTextCustomUnitType.LINK && unitData.linkType == RichTextCustomLinkType.ITEM_SHOW_TYPE)
+			var unitData : RichTextUnitData = unit.unitData;
+			if (unitData.type == RichTextCustomUnitType.LINK && unitData.linkType == RichTextCustomLinkType.ITEM_SHOW_TYPE)
 			{
 				TipManager.remove();
 			}
 		}
-		
+
 		/**
 		 * 鼠标移动事件，可以根据类型来写不同的效果
-		 * 
-		 */		
-		public static function onMouseMove(unit:RichTextUnit):void
+		 *
+		 */
+		public static function onMouseMove(unit : RichTextUnit) : void
 		{
-			var unitData:RichTextUnitData = unit.unitData;
-			if(unitData.type == RichTextCustomUnitType.LINK && unitData.linkType == RichTextCustomLinkType.ITEM_SHOW_TYPE)
+			var unitData : RichTextUnitData = unit.unitData;
+			if (unitData.type == RichTextCustomUnitType.LINK && unitData.linkType == RichTextCustomLinkType.ITEM_SHOW_TYPE)
 			{
-				TipManager.show(TipType.ITEM_TIP,unitData);
+				var itemInfo:ClientItemInfo = ChatManager.getShowItemInfo(unit.unitData);
+//				switch( itemInfo.type )
+//				{
+//					case GoodsType.EQUIPMENT://装备
+//						TipManager.show( TargetTipsMaker.makeTips( TipType.EQUIP_TIP, itemInfo ) );
+//						break;
+//					case GoodsType.BEAST_CARD://兽牌
+//						TipManager.show( TargetTipsMaker.makeTips( TipType.MOUNT_BEAST_CARD_TIP, itemInfo ) );
+//						break;
+//					case GoodsType.MOUNT_SPELL_BOOK://坐骑技能书
+//						TipManager.show( TargetTipsMaker.makeTips( TipType.ITEM_TIP, itemInfo ) );
+//						break;
+//					default:
+//						TipManager.show( TargetTipsMaker.makeTips( TipType.ITEM_TIP, itemInfo ) );
+//						break;
+//				}
 			}
-		}		
-		
+		}
+
 		/**
 		 * 更新富文本单元
-		 * 
-		 */		
-		public static  function updateRichUnit(unit:RichTextUnit):void
+		 *
+		 */
+		public static function updateRichUnit(unit : RichTextUnit) : void
 		{
-			switch(unit.unitData.type)
+			switch (unit.unitData.type)
 			{
 				case RichTextCustomUnitType.IMAGE:
 					updateImage(unit);
@@ -342,21 +361,21 @@ package com.rpgGame.app.richText
 					updateTextLink(unit);
 					break;
 				case RichTextCustomUnitType.MOVIECLIP:
-					FaceLoadManager.loadFace(updateMovieClip,[unit]);
+					FaceLoadManager.loadFace(updateMovieClip, [unit]);
 					break;
 			}
 		}
-		
+
 		/**
-		 * 生成动态表情 
-		 * 
-		 */		
-		private static function updateMovieClip(unit:RichTextUnit):void
+		 * 生成动态表情
+		 *
+		 */
+		private static function updateMovieClip(unit : RichTextUnit) : void
 		{
 			var movieClass : Class = FaceCfgData.getFaceInfoByKey(unit.unitData.res).faceClass;
-			
-			var movieClip:UIMovieClip = unit.displayObj as UIMovieClip;
-			if(movieClip == null)
+
+			var movieClip : UIMovieClip = unit.displayObj as UIMovieClip;
+			if (movieClip == null)
 			{
 				movieClip = new UIMovieClip();
 				movieClip.autoPlay = true;
@@ -366,37 +385,37 @@ package com.rpgGame.app.richText
 			movieClip.styleClass = movieClass;
 			unit.onDisplayObjLoaded();
 		}
-		
+
 		//-----------------------------------
 		/**
 		 * 设置图标
 		 * @param imageUrl
-		 * 
-		 */		
-		private static function updateImage(unit:RichTextUnit):void
+		 *
+		 */
+		private static function updateImage(unit : RichTextUnit) : void
 		{
-			var image:UIAsset = unit.displayObj as UIAsset;
-			if( image == null )
+			var image : UIAsset = unit.displayObj as UIAsset;
+			if (image == null)
 			{
-				image = new UIAsset( );
+				image = new UIAsset();
 				unit.displayObj = image;
 			}
 			image.onImageLoaded = unit.onDisplayObjLoaded;
 			image.styleName = unit.unitData.res;
 		}
-		
+
 		/**
 		 * 设置文本
 		 * @param title
-		 * 
-		 */		
-		private static function updateTextLink(unit:RichTextUnit):void
+		 *
+		 */
+		private static function updateTextLink(unit : RichTextUnit) : void
 		{
-			var textField:Label = unit.displayObj as Label;
-			var label:String = "<u>" + unit.unitData.label + "</u>";
-			if( textField == null)
+			var textField : Label = unit.displayObj as Label;
+			var label : String = "<u>" + unit.unitData.label + "</u>";
+			if (textField == null)
 			{
-				textField = new Label( );
+				textField = new Label();
 				textField.autoSize = TextFieldAutoSize.HORIZONTAL;
 				textField.fontSize = unit.unitData.labelSize;
 				textField.isHtmlText = true;
@@ -412,7 +431,26 @@ package com.rpgGame.app.richText
 			}
 			unit.displayObj = textField;
 			unit.onDisplayObjLoaded();
+			if (unit.unitData.type == RichTextCustomUnitType.LINK && unit.unitData.linkType == RichTextCustomLinkType.ITEM_SHOW_TYPE)
+			{
+//				var itemInfo:ItemInfo = ChatManager.getShowItemInfo(unit.unitData);
+//				switch( itemInfo.type )
+//				{
+//					case GoodsType.EQUIPMENT://装备
+//						TipTargetManager.show( textField, TargetTipsMaker.makeTips( TipType.EQUIP_TIP, itemInfo ) );
+//						break;
+//					case GoodsType.BEAST_CARD://兽牌
+//						TipTargetManager.show( textField, TargetTipsMaker.makeTips( TipType.MOUNT_BEAST_CARD_TIP, itemInfo ) );
+//						break;
+//					case GoodsType.MOUNT_SPELL_BOOK://坐骑技能书
+//						TipTargetManager.show( textField, TargetTipsMaker.makeTips( TipType.ITEM_TIP, itemInfo ) );
+//						break;
+//					default:
+//						TipTargetManager.show( textField, TargetTipsMaker.makeTips( TipType.ITEM_TIP, itemInfo ) );
+//						break;
+//				}
+			}
 		}
-		
+
 	}
 }

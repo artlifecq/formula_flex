@@ -2,11 +2,11 @@ package com.rpgGame.coreData.info.society
 {
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.lang.LangSociety;
-
+	
 	import app.message.FamilyMemberProto;
 	import app.message.FamilyOfficerPos;
-
-	import org.game.netCore.net.BytesUtil;
+	
+	import org.game.netCore.net_protobuff.BytesUtil;
 
 	/**
 	 *

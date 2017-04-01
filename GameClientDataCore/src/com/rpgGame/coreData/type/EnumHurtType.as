@@ -2,32 +2,47 @@ package com.rpgGame.coreData.type
 {
 	public class EnumHurtType
 	{
-		/** 0.普通，客户端显示掉血，反推需要加入计算 **/
-		public static const SPELL_HURT_TYPE_NORMAL : int = 0;
-		/** 1.闪避，客户端显示闪避，反推不需要加入计算 **/
-		public static const SPELL_HURT_TYPE_MISS : int = 1;
-		/** 2.暴击，客户端显示暴击掉血，反推需要加入计算 **/
-		public static const SPELL_HURT_TYPE_CRIT : int = 2;
+		//0-成功 1-MISS 2-跳闪 4-暴击 8-格挡6-跳闪+暴击 12-格挡+暴击
+		/** 普通，客户端显示掉血，反推需要加入计算 **/
+		public static const SPELL_HURT_TYPE_NORMAL : uint = 0x00000000;
+		/** 闪避，客户端显示闪避，反推不需要加入计算 **/
+		public static const SPELL_HURT_TYPE_MISS : uint = 0x00000001;
+		/** 跳闪，客户端显示跳闪，反推不需要加入计算  **/
+		public static const SPELL_HURT_TYPE_JUMP_SHIELD : uint = 0x00000002;
+		/** 暴击，客户端显示暴击掉血，反推需要加入计算 **/
+		public static const SPELL_HURT_TYPE_CRIT : uint = 0x00000004;
+		/** 格挡 **/
+		public static const SPELL_HURT_TYPE_REBOUND : uint = 0x00000008;
+		
+		/** 无敌 **/
+		public static const SPELL_HURT_TYPE_INVINCIBLE : uint = 0x00000010;
+		
+		/** 死亡中被打 **/
+		public static const SPELL_ATTACK_DEAD : uint = 0x00000020;
+		
+		/** 秒杀 **/
+		public static const SPELL_SEC : uint = 0x00000040;
+		
+		/** 吸收伤害 **/
+		public static const SPELL_HURT_TYPE_ABSORB : uint = 0x00000080;
+		
+		/** 连击 **/
+		public static const SPELL_COMBO : uint = 0x00000100;
+		
 		/** 3.重击，客户端显示暴击掉血，反推需要加入计算 **/
 		public static const SPELL_HURT_TYPE_THUMP : int = 3;
-		/** 4.跳闪，客户端显示跳闪，反推不需要加入计算  **/
-		public static const SPELL_HURT_TYPE_JUMP_SHIELD : int = 4;
-		/** 5.无敌，客户端显示无敌，反推不需要加入计算 **/
-		public static const SPELL_HURT_TYPE_INVINCIBLE : int = 5;
 		/** 6.物理免疫，客户端显示物理免疫，反推不需要加入计算 **/
 		public static const SPELL_HURT_TYPE_PHYSICAL_IMMUNE : int = 6;
 		/** 7.法术免疫，客户端显示法术免疫，反推不需要加入计算 **/
 		public static const SPELL_HURT_TYPE_MAGICAL_IMMUNE : int = 7;
-		/** 8.反弹，客户端显示掉血，返回需要加入计算 **/
-		public static const SPELL_HURT_TYPE_REBOUND : int = 8;
-		/** 9.目标吸收伤害，客户端显示掉血，反推不需要加入计算 **/
-		public static const SPELL_HURT_TYPE_ABSORB : int = 9;
 		//--------------------------------------------------
 		//飘字属性类型
 		/** 经验 **/
-		public static const EXP : String = "exp";
+		public static const EXP : String = "te_bie_jing_yan_jia_cheng";
 		/** 回血 **/
-		public static const ADDHP : String = "sheng_ming_zhi";
+		public static const ADDHP : String = "add_hp";
+		/** 掉血**/
+		public static const SUBHP : String = "sub_hp";
 		/** 回蓝 **/
 		public static const ADDMP : String = "fa_shu_zhi";
 	}

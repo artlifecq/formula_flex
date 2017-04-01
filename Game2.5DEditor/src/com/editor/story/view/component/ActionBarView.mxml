@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 width="100%" height="20">
+	<fx:Script>
+		<![CDATA[
+			[Bindable]
+			public var bgColor:uint = 0xcccccc;
+			private var _targetType:int;
+			public var targetID:int;
+			public var tabType:int;
+			/** 资源路径 标签tips显示 **/
+			public var resPath:String;
+			public function get targetType():int
+			{
+				return _targetType;
+			}
+
+			public function set targetType(value:int):void
+			{
+				_targetType = value;
+			}
+
+			public function set selected(value:Boolean):void
+			{
+				bgColor = value?0xB9D8F7:0xcccccc;
+			}
+		]]>
+	</fx:Script>
+	<s:Rect width="100%" height="100%">
+		<s:fill>
+			<s:SolidColor color="{bgColor}">
+				
+			</s:SolidColor>
+		</s:fill>
+	</s:Rect>
+</s:Group>

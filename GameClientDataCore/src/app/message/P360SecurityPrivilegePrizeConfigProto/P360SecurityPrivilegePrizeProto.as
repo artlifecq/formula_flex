@@ -16,7 +16,7 @@ package app.message.P360SecurityPrivilegePrizeConfigProto {
 		/**
 		 *  @private
 		 */
-		public static const GRADE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.P360SecurityPrivilegePrizeConfigProto.P360SecurityPrivilegePrizeProto.grade", "grade", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const GRADE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.P360SecurityPrivilegePrizeConfigProto.P360SecurityPrivilegePrizeProto.grade", "grade", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var grade$field:int;
 
@@ -43,7 +43,7 @@ package app.message.P360SecurityPrivilegePrizeConfigProto {
 		/**
 		 *  @private
 		 */
-		public static const DESC:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.P360SecurityPrivilegePrizeConfigProto.P360SecurityPrivilegePrizeProto.desc", "desc", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const DESC:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.P360SecurityPrivilegePrizeConfigProto.P360SecurityPrivilegePrizeProto.desc", "desc", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var desc$field:flash.utils.ByteArray;
 
@@ -66,7 +66,7 @@ package app.message.P360SecurityPrivilegePrizeConfigProto {
 		/**
 		 *  @private
 		 */
-		public static const PRIZE:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.P360SecurityPrivilegePrizeConfigProto.P360SecurityPrivilegePrizeProto.prize", "prize", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
+		public static const PRIZE:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.P360SecurityPrivilegePrizeConfigProto.P360SecurityPrivilegePrizeProto.prize", "prize", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
 
 		[ArrayElementType("app.message.GoodsWrapperProto")]
 		public var prize:Array = [];
@@ -77,15 +77,15 @@ package app.message.P360SecurityPrivilegePrizeConfigProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasGrade) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, grade$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, grade$field);
 			}
 			if (hasDesc) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, desc$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, desc$field);
 			}
 			for (var prize$index:uint = 0; prize$index < this.prize.length; ++prize$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.prize[prize$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.prize[prize$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -99,24 +99,24 @@ package app.message.P360SecurityPrivilegePrizeConfigProto {
 			var grade$count:uint = 0;
 			var desc$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (grade$count != 0) {
 						throw new flash.errors.IOError('Bad data format: P360SecurityPrivilegePrizeProto.grade cannot be set twice.');
 					}
 					++grade$count;
-					this.grade = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.grade = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (desc$count != 0) {
 						throw new flash.errors.IOError('Bad data format: P360SecurityPrivilegePrizeProto.desc cannot be set twice.');
 					}
 					++desc$count;
-					this.desc = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.desc = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				case 3:
-					this.prize.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.GoodsWrapperProto()));
+					this.prize.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.GoodsWrapperProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

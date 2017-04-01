@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FLOOR:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MazeAllRankProto.floor", "floor", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FLOOR:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MazeAllRankProto.floor", "floor", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var floor$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ALL:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.MazeAllRankProto.all", "all", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MazeRankProto; });
+		public static const ALL:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.MazeAllRankProto.all", "all", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MazeRankProto; });
 
 		private var all$field:app.message.MazeRankProto;
 
@@ -65,7 +65,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SELF_COUNTRY:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.MazeAllRankProto.self_country", "selfCountry", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MazeRankProto; });
+		public static const SELF_COUNTRY:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.MazeAllRankProto.self_country", "selfCountry", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MazeRankProto; });
 
 		private var self_country$field:app.message.MazeRankProto;
 
@@ -88,7 +88,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ALL_COUNTRY:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.MazeAllRankProto.all_country", "allCountry", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MazeRankProto; });
+		public static const ALL_COUNTRY:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.MazeAllRankProto.all_country", "allCountry", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MazeRankProto; });
 
 		private var all_country$field:app.message.MazeRankProto;
 
@@ -111,7 +111,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FINISH_HERO_COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MazeAllRankProto.finish_hero_count", "finishHeroCount", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const FINISH_HERO_COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MazeAllRankProto.finish_hero_count", "finishHeroCount", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var finish_hero_count$field:int;
 
@@ -139,23 +139,23 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasFloor) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, floor$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, floor$field);
 			}
 			if (hasAll) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, all$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, all$field);
 			}
 			if (hasSelfCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, self_country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, self_country$field);
 			}
 			if (hasAllCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, all_country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, all_country$field);
 			}
 			if (hasFinishHeroCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, finish_hero_count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, finish_hero_count$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -172,14 +172,14 @@ package app.message {
 			var all_country$count:uint = 0;
 			var finish_hero_count$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (floor$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MazeAllRankProto.floor cannot be set twice.');
 					}
 					++floor$count;
-					this.floor = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.floor = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (all$count != 0) {
@@ -187,7 +187,7 @@ package app.message {
 					}
 					++all$count;
 					this.all = new app.message.MazeRankProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.all);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.all);
 					break;
 				case 3:
 					if (self_country$count != 0) {
@@ -195,7 +195,7 @@ package app.message {
 					}
 					++self_country$count;
 					this.selfCountry = new app.message.MazeRankProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.selfCountry);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.selfCountry);
 					break;
 				case 4:
 					if (all_country$count != 0) {
@@ -203,14 +203,14 @@ package app.message {
 					}
 					++all_country$count;
 					this.allCountry = new app.message.MazeRankProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.allCountry);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.allCountry);
 					break;
 				case 5:
 					if (finish_hero_count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MazeAllRankProto.finishHeroCount cannot be set twice.');
 					}
 					++finish_hero_count$count;
-					this.finishHeroCount = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.finishHeroCount = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

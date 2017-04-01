@@ -15,7 +15,7 @@ package app.message.FamilyNewsProto {
 		/**
 		 *  @private
 		 */
-		public static const LEAVE_MEMBER:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FamilyNewsProto.LeaveFamilyProto.leave_member", "leaveMember", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberIdAndNameProto; });
+		public static const LEAVE_MEMBER:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FamilyNewsProto.LeaveFamilyProto.leave_member", "leaveMember", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyNewsProto.MemberIdAndNameProto; });
 
 		private var leave_member$field:app.message.FamilyNewsProto.MemberIdAndNameProto;
 
@@ -41,7 +41,7 @@ package app.message.FamilyNewsProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasLeaveMember) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, leave_member$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, leave_member$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -54,7 +54,7 @@ package app.message.FamilyNewsProto {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var leave_member$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (leave_member$count != 0) {
@@ -62,7 +62,7 @@ package app.message.FamilyNewsProto {
 					}
 					++leave_member$count;
 					this.leaveMember = new app.message.FamilyNewsProto.MemberIdAndNameProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.leaveMember);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.leaveMember);
 					break;
 				default:
 					super.readUnknown(input, tag);

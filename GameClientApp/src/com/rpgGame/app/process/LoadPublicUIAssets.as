@@ -4,6 +4,8 @@ package com.rpgGame.app.process
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.ui.ResLoadingView;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+    
+    import gameEngine2D.NetDebug;
 	
 	import flash.events.Event;
 	import flash.events.ProgressEvent;
@@ -37,19 +39,22 @@ package com.rpgGame.app.process
 		override public function startProcess() : void
 		{
 			super.startProcess();
+            CONFIG::netDebug {
+                NetDebug.init("192.168.56.101", 10000);
+            }
 			_url = ClientConfig.getUI(UI_ASSETS);
 			GameLog.addShow("开始加载公共UI素材...", _url);
 			ResLoadingView.instance.show();
 			ResLoadingView.instance.title = "正在加载公共UI素材...";
 
 			var loader : ThemeLoader = new ThemeLoader();
-			loader.load(_url, onFinish, onPorgress, onResError);
+			loader.load(_url, onFinish, onProgress, onResError);
 		}
 
-		private function onPorgress(ld : MultiLoadData, e : ProgressEvent) : void
+		private function onProgress(progress:Number) : void
 		{
-			var currPercent : Number = e.bytesLoaded / e.bytesTotal;
-			setProcessPercent(currPercent);
+			//			var currPercent : Number = e.bytesLoaded / e.bytesTotal;
+			setProcessPercent(progress);
 		}
 
 		override public function processHandler(percent : Number) : void

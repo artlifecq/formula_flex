@@ -1,12 +1,8 @@
 package com.rpgGame.coreData.info.map
 {
-	import com.rpgGame.coreData.cfg.BaZhenTuCfgData;
-	import com.rpgGame.coreData.cfg.country.CountryTaoNiCfgData;
+	import com.game.engine2D.config.MapConfig;
+	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.enum.SceneReliveEnum;
-	
-	import app.message.FamilyAnimalBarSceneProto;
-	import app.message.NormalSceneProto;
-	import app.message.SceneProto;
 
 
 	/**
@@ -16,7 +12,7 @@ package com.rpgGame.coreData.info.map
 	 */
 	public class SceneData
 	{
-		private var _data : SceneProto;
+		private var _data : Q_map;
 		/**
 		 * 地图类型(与EnumMapType一致)
 		 */
@@ -128,99 +124,100 @@ package com.rpgGame.coreData.info.map
 		public var isRandomFloor : Boolean;
 		/**是否有迷宫奖励NPC**/
 		public var hasMazePrizeNpc : Boolean;
+		
+		public var mapConfig:MapConfig;//引擎地图配置信息。
 
 		public function SceneData()
 		{
 			super();
 		}
 
-		public function setData($data : SceneProto) : void
+		public function setData($scene : Q_map) : void
 		{
-			if ($data == null)
+			if ($scene == null)
 				return;
-			_data = $data;
-			if (_data.normalScene)
+			_data = $scene;
+			if (_data.q_map_public == 1)
 			{
 				_mapType = EnumMapType.MAP_TYPE_NORMAL;
 				this.isNormalScene = true;
 
-				var singleScene : NormalSceneProto = _data.normalScene;
-				this.recommendLevel = singleScene.recommendLevel;
-				this.requiredLevel = singleScene.canEnterLevel;
+				this.recommendLevel = _data.q_map_min_level;
+				this.requiredLevel = _data.q_map_min_level;
 
-				this.isClustered = singleScene.isClustered;
-				isHideInWorldMapTitle = singleScene.isHide;
-				selfCountryDeathReturnSceneId = singleScene.selfCountryDeathReturnSceneId;
-				otherCountryDeathReturnSceneId = singleScene.otherCountryDeathReturnSceneId;
-				isCountryWarMap = singleScene.isCountryWarMap;
-				isCountryMilitarySubsibyMap = singleScene.isCountryMilitarySubsibyMap;
+				this.isClustered = _data.q_map_public == 4;
+//				isHideInWorldMapTitle = _data.isHide;
+//				selfCountryDeathReturnSceneId = _data.selfCountryDeathReturnSceneId;
+//				otherCountryDeathReturnSceneId = _data.otherCountryDeathReturnSceneId;
+//				isCountryWarMap = _data.isCountryWarMap;
+//				isCountryMilitarySubsibyMap = _data.isCountryMilitarySubsibyMap;
 			}
-			else if (_data.jailScene)
-			{
-				_mapType = EnumMapType.MAP_TYPE_JAIL_DUNGEON;
-			}
-			else if (_data.baZhenTuDungeon)
-			{
-				_mapType = EnumMapType.MAP_TYPE_BAZHENTU_SCENE;
-				isBaZhenTuScene = true;
-				BaZhenTuCfgData.setConfig(_data.baZhenTuDungeon);
-			}
-//			else if (_data is FamilyDungeonProto)
+//			else if (_data.jailScene)
 //			{
-//				_mapType = EnumMapType.MAP_TYPE_FAMILY_DUNGEON;
+//				_mapType = EnumMapType.MAP_TYPE_JAIL_DUNGEON;
 //			}
-			else if (_data.kingWarDungeon)
+//			else if (_data.baZhenTuDungeon)
+//			{
+//				_mapType = EnumMapType.MAP_TYPE_BAZHENTU_SCENE;
+//				isBaZhenTuScene = true;
+//				BaZhenTuCfgData.setConfig(_data.baZhenTuDungeon);
+//			}
+////			else if (_data is FamilyDungeonProto)
+////			{
+////				_mapType = EnumMapType.MAP_TYPE_FAMILY_DUNGEON;
+////			}
+//			else if (_data.kingWarDungeon)
+//			{
+//				_mapType = EnumMapType.MAP_TYPE_FAMILY_BATTLE_SCENE;
+//				_sceneReliveType = SceneReliveEnum.DUNGEON_SCENE;
+//				reliveCd = _data.kingWarDungeon.reliveCd.toNumber();
+//			}
+//			else if (_data.familyAnimalBarScene)
+//			{
+//				_mapType = EnumMapType.MAP_TYPE_FAMILY_ANIMAL_SCENE;
+//				isAnimalBarScene = true;
+//				var animalBarScene : FamilyAnimalBarSceneProto = _data.familyAnimalBarScene as FamilyAnimalBarSceneProto;
+//				animalBarBossId = animalBarScene.monsterId;
+//			}
+//			else if (_data.taoNiDungeon)
+//			{
+//				_mapType = EnumMapType.MAP_TYPE_TAO_NI_DUNGEON;
+//				isTaoNiScene = true;
+//				CountryTaoNiCfgData.setSceneConfig(_data.taoNiDungeon);
+//			}
+//			else if (_data.mazeDungeon)
+//			{
+////				_mapType = EnumMapType.
+//				isMazeScene = true;
+//				isRandomFloor = _data.mazeDungeon.isRandomFloor;
+//				floor = _data.mazeDungeon.floor;
+//				hasMazePrizeNpc = _data.mazeDungeon.hasHasMazePrizeNpc;
+//			}
+//			else if (_data.storyDungeon)
+//			{
+//				_mapType = EnumMapType.MAP_TYPE_STORY_DUNGEON;
+//				isStoryDungeonScene = true;
+//			}
+			_sceneId = _data.q_map_id;
+			_map = _data.q_mapres;
+			_name = _data.q_map_name;
+			if (_data/*.hasPoet*/)
 			{
-				_mapType = EnumMapType.MAP_TYPE_FAMILY_BATTLE_SCENE;
-				_sceneReliveType = SceneReliveEnum.DUNGEON_SCENE;
-				reliveCd = _data.kingWarDungeon.reliveCd.toNumber();
-			}
-			else if (_data.familyAnimalBarScene)
-			{
-				_mapType = EnumMapType.MAP_TYPE_FAMILY_ANIMAL_SCENE;
-				isAnimalBarScene = true;
-				var animalBarScene : FamilyAnimalBarSceneProto = _data.familyAnimalBarScene as FamilyAnimalBarSceneProto;
-				animalBarBossId = animalBarScene.monsterId;
-			}
-			else if (_data.taoNiDungeon)
-			{
-				_mapType = EnumMapType.MAP_TYPE_TAO_NI_DUNGEON;
-				isTaoNiScene = true;
-				CountryTaoNiCfgData.setSceneConfig(_data.taoNiDungeon);
-			}
-			else if (_data.mazeDungeon)
-			{
-//				_mapType = EnumMapType.
-				isMazeScene = true;
-				isRandomFloor = _data.mazeDungeon.isRandomFloor;
-				floor = _data.mazeDungeon.floor;
-				hasMazePrizeNpc = _data.mazeDungeon.hasHasMazePrizeNpc;
-			}
-			else if (_data.storyDungeon)
-			{
-				_mapType = EnumMapType.MAP_TYPE_STORY_DUNGEON;
-				isStoryDungeonScene = true;
-			}
-			_sceneId = _data.sceneId;
-			_map = _data.map;
-			_name = _data.name.toString();
-			if (_data.hasPoet)
-			{
-				_poet = _data.poet.toString();
+				_poet = "诗一般的场景呀";//_data.poet.toString();
 			}
 			else
 			{
 				_poet = null;
 			}
-			_fixedPkMode = _data.fixedPkMode;
-			_isHeroLevelProtect = _data.isHeroLevelProtect;
-			_isNewHeroProtect = _data.isNewHeroProtect;
-			_isDeathProtect = _data.isDeathProtect;
-			_isNightAutoProtect = _data.isNightAutoProtect;
-			_isMountLimit = _data.isMountLimit;
-			_mapNameResource = _data.mapNameResource;
-			_sound = _data.sound;
-			isReliveLimit = _data.isReliveLimit;
+//			_fixedPkMode = _data.fixedPkMode;
+//			_isHeroLevelProtect = _data.isHeroLevelProtect;
+//			_isNewHeroProtect = _data.isNewHeroProtect;
+//			_isDeathProtect = _data.isDeathProtect;
+//			_isNightAutoProtect = _data.isNightAutoProtect;
+//			_isMountLimit = _data.isMountLimit;
+			_mapNameResource = _data.q_mapres;
+			_sound = _data.q_music;
+//			isReliveLimit = _data.isReliveLimit;
 			
 		}
 

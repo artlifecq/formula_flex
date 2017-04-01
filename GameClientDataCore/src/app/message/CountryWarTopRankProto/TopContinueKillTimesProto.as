@@ -14,7 +14,7 @@ package app.message.CountryWarTopRankProto {
 		/**
 		 *  @private
 		 */
-		public static const CONTINUE_KILL_HERO_TIMES:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryWarTopRankProto.TopContinueKillTimesProto.continue_kill_hero_times", "continueKillHeroTimes", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CONTINUE_KILL_HERO_TIMES:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryWarTopRankProto.TopContinueKillTimesProto.continue_kill_hero_times", "continueKillHeroTimes", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var continue_kill_hero_times$field:Int64;
 
@@ -40,7 +40,7 @@ package app.message.CountryWarTopRankProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasContinueKillHeroTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, continue_kill_hero_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, continue_kill_hero_times$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -53,14 +53,14 @@ package app.message.CountryWarTopRankProto {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var continue_kill_hero_times$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (continue_kill_hero_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: TopContinueKillTimesProto.continueKillHeroTimes cannot be set twice.');
 					}
 					++continue_kill_hero_times$count;
-					this.continueKillHeroTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.continueKillHeroTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

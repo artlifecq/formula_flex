@@ -1,5 +1,8 @@
 package com.rpgGame.coreData.role
 {
+	import org.game.netCore.data.long;
+	
+
 	/**
 	 *
 	 * 基础实体数据
@@ -9,6 +12,7 @@ package com.rpgGame.coreData.role
 	 */
 	public class BaseEntityData
 	{
+		private var _serverID:long=null;
 		private var _id : Number = 0;
 		/** 名字 */
 		public var name : String = "";
@@ -21,8 +25,14 @@ package com.rpgGame.coreData.role
 		 */
 		public var countryId : int;
 
-		public function BaseEntityData()
+		public function get serverID():long
 		{
+			return _serverID;
+		}
+
+		public function set serverID(value:long):void
+		{
+			_serverID = value;
 		}
 
 		/** 坐标y */
@@ -69,6 +79,10 @@ package com.rpgGame.coreData.role
 		public function set id(value : Number) : void
 		{
 			_id = value;
+		}
+		
+		public function BaseEntityData()
+		{
 		}
 	}
 }

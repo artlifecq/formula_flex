@@ -4,7 +4,7 @@ package com.rpgGame.app.sender
 	
 	import app.cmd.SearchByHeroNameModuleMessages;
 	
-	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
 
 	public class HeroSearchSender extends BaseSender
 	{
@@ -20,15 +20,15 @@ package com.rpgGame.app.sender
 		 */
 		public static function searchWithOffline(reqType : int, name : String,isMyCountry:Boolean = true) : void
 		{
-			if (ReqLockUtil.isReqLocked(SearchByHeroNameModuleMessages.C2S_SEARCH_WITH_OFFLINE))
-				return;
-			ReqLockUtil.lockReq(SearchByHeroNameModuleMessages.C2S_SEARCH_WITH_OFFLINE, 1000);
+//			if (ReqLockUtil.isReqLocked(SearchByHeroNameModuleMessages.C2S_SEARCH_WITH_OFFLINE))
+//				return;
+//			ReqLockUtil.lockReq(SearchByHeroNameModuleMessages.C2S_SEARCH_WITH_OFFLINE, 1000);
 
 			_bytes.clear();
 			_bytes.writeVarint32(reqType);
 			_bytes.writeBoolean(isMyCountry);
 			_bytes.writeUTFBytes(name);
-			SocketConnection.send(SearchByHeroNameModuleMessages.C2S_SEARCH_WITH_OFFLINE, _bytes);
+			SocketConnection_protoBuffer.send(SearchByHeroNameModuleMessages.C2S_SEARCH_WITH_OFFLINE, _bytes);
 		}
 
 		/**
@@ -37,27 +37,27 @@ package com.rpgGame.app.sender
 		 */
 		public static function searchWithoutOffline(reqType : int, name : String,isMyCountry:Boolean = true) : void
 		{
-			if (ReqLockUtil.isReqLocked(SearchByHeroNameModuleMessages.C2S_SEARCH_WITHOUT_OFFLINE))
-				return;
-			ReqLockUtil.lockReq(SearchByHeroNameModuleMessages.C2S_SEARCH_WITHOUT_OFFLINE, 1000);
+//			if (ReqLockUtil.isReqLocked(SearchByHeroNameModuleMessages.C2S_SEARCH_WITHOUT_OFFLINE))
+//				return;
+//			ReqLockUtil.lockReq(SearchByHeroNameModuleMessages.C2S_SEARCH_WITHOUT_OFFLINE, 1000);
 
 			_bytes.clear();
 			_bytes.writeVarint32(reqType);
 			_bytes.writeBoolean(isMyCountry);
 			_bytes.writeUTFBytes(name);
-			SocketConnection.send(SearchByHeroNameModuleMessages.C2S_SEARCH_WITHOUT_OFFLINE, _bytes);
+			SocketConnection_protoBuffer.send(SearchByHeroNameModuleMessages.C2S_SEARCH_WITHOUT_OFFLINE, _bytes);
 		}
 
 		public static function searchHeroIdByName(reqType : int, name : String) : void
 		{
-			if (ReqLockUtil.isReqLocked(SearchByHeroNameModuleMessages.C2S_SEARCH_HERO_ID_BY_NAME))
-				return;
-			ReqLockUtil.lockReq(SearchByHeroNameModuleMessages.C2S_SEARCH_HERO_ID_BY_NAME, 1000);
+//			if (ReqLockUtil.isReqLocked(SearchByHeroNameModuleMessages.C2S_SEARCH_HERO_ID_BY_NAME))
+//				return;
+//			ReqLockUtil.lockReq(SearchByHeroNameModuleMessages.C2S_SEARCH_HERO_ID_BY_NAME, 1000);
 
 			_bytes.clear();
 			_bytes.writeVarint32(reqType);
 			_bytes.writeUTFBytes(name);
-			SocketConnection.send(SearchByHeroNameModuleMessages.C2S_SEARCH_HERO_ID_BY_NAME, _bytes);
+			SocketConnection_protoBuffer.send(SearchByHeroNameModuleMessages.C2S_SEARCH_HERO_ID_BY_NAME, _bytes);
 		}
 	}
 }

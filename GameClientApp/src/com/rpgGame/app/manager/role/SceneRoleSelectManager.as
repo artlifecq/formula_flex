@@ -1,7 +1,7 @@
 package com.rpgGame.app.manager.role
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.vo.SoftOutlineData;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.fight.FightManager;
@@ -12,12 +12,14 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.core.events.SceneInteractiveEvent;
 	import com.rpgGame.core.manager.EscActionManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.enum.JobEnum;
+	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.SceneCharType;
-
+	
 	import away3d.filters.OutlineGlowFilter3D;
-
+	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -32,8 +34,8 @@ package com.rpgGame.app.manager.role
 		private static var _enemyOutlineData : SoftOutlineData = new SoftOutlineData(0xFF0000, 0.8, 0.005, 5);
 		private static var _friendOutlineData : SoftOutlineData = new SoftOutlineData(0x00FF00, 0.8, 0.005, 5);
 		private static var _neutralOutlineData : SoftOutlineData = new SoftOutlineData(0xFFFF00, 0.8, 0.005, 5);
-		private static var _selectedRingRedId : String = "quanhong";
-		private static var _selectedRingGreenId : String = "quanlv";
+		private static var _selectedRingRedId : String = EffectUrl.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
+		private static var _selectedRingGreenId : String = EffectUrl.FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
 		private static var _selectedRingYellowId : String = "quanhuang";
 
 		private static var _selectedRole : SceneRole;
@@ -54,7 +56,7 @@ package com.rpgGame.app.manager.role
 
 		public static function setOutlineData(size : Number = 4, strength : Number = 1, quality : int = 3, enemyColor : uint = 0xFF0000, friendColor : uint = 0x00FF00, neutralColor : uint = 0xFFFF00) : void
 		{
-			var outlineGlowFilter : OutlineGlowFilter3D = new OutlineGlowFilter3D(size, strength, quality);
+			var outlineGlowFilter : OutlineGlowFilter3D = new OutlineGlowFilter3D(size, strength);
 			SceneManager.getScene().setOutlineGlowFilter(outlineGlowFilter);
 			_enemyOutlineData = new SoftOutlineData(enemyColor);
 			_friendOutlineData = new SoftOutlineData(friendColor);
@@ -113,7 +115,7 @@ package com.rpgGame.app.manager.role
 				_selectedRole.avatar.removeRenderUnitByID(RenderUnitType.SELECTED_RING, RenderUnitID.SELECTED_RING);
 			}
 			_selectedRole = value;
-			if (_selectedRole && _selectedRole.usable && !_selectedRole.stateMachine.isDeadState)
+			if (_selectedRole && _selectedRole.usable && (!_selectedRole.stateMachine.isDeadState||MainRoleManager.actorInfo.job==JobEnum.ROLE_4_TYPE))
 			{
 				if (_selectedRole.headFace is HeadFace)
 					(_selectedRole.headFace as HeadFace).isSelected = true;
@@ -142,7 +144,7 @@ package com.rpgGame.app.manager.role
 				selectedRindId = _selectedRingGreenId;
 			else
 				selectedRindId = _selectedRingGreenId;
-			var rud : RenderParamData = new RenderParamData(RenderUnitID.SELECTED_RING, RenderUnitType.SELECTED_RING, ClientConfig.getEffect(selectedRindId));
+			var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.SELECTED_RING, RenderUnitType.SELECTED_RING, ClientConfig.getEffect(selectedRindId));
 			var effectRu : RenderUnit3D = role.avatar.addRenderUnit(rud);
 			effectRu.repeat = 0;
 			effectRu.visible = false;
@@ -159,6 +161,68 @@ package com.rpgGame.app.manager.role
 
 		private static function selectedRolePartAddedCallBack(effectRu : RenderUnit3D, ru : RenderUnit3D) : void
 		{
+            CONFIG::netDebug {
+                function getBounds() : VolumeBounds
+                {
+                    var _animatorElements : Vector.<CompositeMesh> = ru.getAnimatorElements();
+                    var _drawElements : Vector.<ObjectContainer3D> = ru.getDrawElements();
+                    if (!_drawElements)
+                    {
+                        return null;
+                    }
+                    var bounds : VolumeBounds = null;
+                    if (_animatorElements)
+                    {
+                        for each (var animatElement : CompositeMesh in _animatorElements)
+                        {
+                            CONFIG::netDebug {
+                                NetDebug.LOG("[getBounds] [_animatorElements] " +
+                                    "minX:" + animatElement.minX + ", " +
+                                    "minY:" + animatElement.minY + ", " +
+                                    "minZ:" + animatElement.minZ + ", " +
+                                    "maxX:" + animatElement.maxX + ", " +
+                                    "maxY:" + animatElement.maxY + ", " +
+                                    "maxZ:" + animatElement.maxZ + ", " +
+                                    "scaleX:" + animatElement.scaleX + ", " +
+                                    "scaleY:" + animatElement.scaleY + ", " + 
+                                    "scaleZ:" + animatElement.scaleZ);
+                            }
+                                bounds = new VolumeBounds(animatElement.minX * animatElement.scaleX, animatElement.minY * animatElement.scaleY, animatElement.minZ * animatElement.scaleZ, //
+                                    animatElement.maxX * animatElement.scaleX, animatElement.maxY * animatElement.scaleY, animatElement.maxZ * animatElement.scaleZ);
+                            return bounds;
+                        }
+                    }
+                    else
+                    {
+                        for each (var element : ObjectContainer3D in _drawElements)
+                        {
+                            CONFIG::netDebug {
+                                NetDebug.LOG("[getBounds] " +
+                                    "minX:" + element.minX + ", " +
+                                    "minY:" + element.minY + ", " +
+                                    "minZ:" + element.minZ + ", " +
+                                    "maxX:" + element.maxX + ", " +
+                                    "maxY:" + element.maxY + ", " +
+                                    "maxZ:" + element.maxZ + ", " +
+                                    "scaleX:" + element.scaleX + ", " +
+                                    "scaleY:" + element.scaleY + ", " + 
+                                    "scaleZ:" + element.scaleZ);
+                            }
+                                bounds = new VolumeBounds(element.minX * element.scaleX, element.minY * element.scaleY, element.minZ * element.scaleZ, //
+                                    element.maxX * element.scaleX, element.maxY * element.scaleY, element.maxZ * element.scaleZ);
+                            return bounds;
+                        }
+                    }
+                    return null;
+                }
+                var bounds : VolumeBounds = getBounds();
+                if (bounds)
+                {
+                    NetDebug.LOG("load select role part added callback maxX:" + bounds.maxX + ", minX:" + bounds.minX);
+                } else {
+                    NetDebug.LOG("load select role part added callback bounds is null");
+                }
+            }
 			ru.removeAddedCallBack(selectedRolePartAddedCallBack);
 			if (ru && ru.usable && effectRu && effectRu.usable)
 			{

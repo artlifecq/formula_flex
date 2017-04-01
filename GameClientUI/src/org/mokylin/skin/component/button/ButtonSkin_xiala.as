@@ -47,10 +47,7 @@ package org.mokylin.skin.component.button
 						}
 					]
 			};
-			skinNames={"disabled":"ui/component/button/skin_xiala/disabled.png",
-			"down":"ui/component/button/skin_xiala/down.png",
-			"hover":"ui/component/button/skin_xiala/over.png",
-			"up":"ui/component/button/skin_xiala/up.png"};
+			skinNames={"down":"ui/component/button/skin_xiala/down.png", "hover":"ui/component/button/skin_xiala/over.png", "up":"ui/component/button/skin_xiala/up.png"};
 		}
 
 

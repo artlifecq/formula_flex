@@ -9,6 +9,10 @@ package com.rpgGame.coreData.type
 	{
 		/**主体(一般为衣服，也就是默认的换装类型，这是每个角色必备的换装)*/
 		public static const BODY : String = "body";
+		/**
+		 * 身体特效 
+		 */		
+		public static const BODY_EFFECTS : String = "body_effects";
 
 		/**头发*/
 		public static const HAIR : String = "hair";
@@ -21,6 +25,8 @@ package com.rpgGame.coreData.type
 
 		/**武器特效*/
 		public static const WEAPON_EFFECT : String = "weapon_effect";
+		/**副武器特效 */
+		public static const DEPUTY_WEAPON_EFFECT:String = "deputy_weapon_effect";
 
 		/**身体特效*/
 		public static const BODY_EFFECT : String = "body_effect";
@@ -29,6 +35,8 @@ package com.rpgGame.coreData.type
 		public static const MOUNT : String = "mount";
 		/**特效*/
 		public static const EFFECT : String = "effect";
+		
+		public static const BODY_METHOD_TYPE_EFFECT : String = "body_method_type_effect";
 
 		/**刀光*/
 		public static const KNIFE_LIGHT : String = "knight_light";
@@ -52,6 +60,8 @@ package com.rpgGame.coreData.type
 		public static const BUFF : String = "buff";
 		/**嘲讽特效*/
 		public static const TAUNT : String = "taunt";
+		
+		public static const BODY_HEAD_FLOWER_TEXT : String = "body_head_flower_text";
 
 //		/**打坐特效*/
 //		public static const SIT:String = "sit";

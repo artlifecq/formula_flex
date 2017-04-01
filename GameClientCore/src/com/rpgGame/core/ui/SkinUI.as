@@ -49,10 +49,10 @@ package com.rpgGame.core.ui
 				}
 			}
 			_stateSkin = skin;
+			_stage = Starling.current.nativeStage;
 			this.addEventListener(Event.ADDED_TO_STAGE, __onAddedToStage);
 			this.addEventListener(Event.REMOVED_FROM_STAGE, __onRemoveFromStage);
 
-			_stage = Starling.current.nativeStage;
 		}
 
 		private function __onStageResize(e : *) : void
@@ -63,21 +63,21 @@ package com.rpgGame.core.ui
 
 		private function __onAddedToStage(e : Event = null) : void
 		{
+			onStageResize(_stage.stageWidth, _stage.stageHeight);
+			_stage.addEventListener(Event.RESIZE, __onStageResize);
 			startRender3D();
 			onShow();
 			refresh();
-			onStageResize(_stage.stageWidth, _stage.stageHeight);
 			updateFadeAlphaRectPos();
-			_stage.addEventListener(Event.RESIZE, __onStageResize);
 			this.addEventListener(starling.events.TouchEvent.TOUCH, onTouch);
 		}
 
 		private function __onRemoveFromStage(e : Event = null) : void
 		{
 			stopRender3D();
-			onHide();
 			_stage.removeEventListener(Event.RESIZE, __onStageResize);
 			this.removeEventListener(starling.events.TouchEvent.TOUCH, onTouch);
+			onHide();
 		}
 
 		protected function onStageResize(sw : int, sh : int) : void

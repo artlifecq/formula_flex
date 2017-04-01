@@ -3,15 +3,15 @@ package com.game.engine2D.vo
 	import com.game.engine2D.Scene;
 	import com.game.engine2D.events.SceneCameraEvent;
 	import com.game.engine2D.scene.SceneCamera;
+	import com.game.engine3D.core.poolObject.IInstancePoolClass;
+	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.scene.display.BindableSprite;
-	import com.game.mainCore.libCore.pool.IPoolClass;
-	import com.game.mainCore.libCore.pool.Pool;
 	
 	import away3d.containers.ObjectContainer3D;
 	
-	public class HeadBindableContainer extends BindableSprite implements IPoolClass
+	public class HeadBindableContainer extends BindableSprite implements IInstancePoolClass
 	{
-		static private var _pool:Pool = new Pool("HeadBindableContainer_pool", 1000);
+		static private var _pool:InstancePool = new InstancePool("HeadBindableContainer_pool", 1000);
 		private var _sceneCamera:SceneCamera;
 		
 		public function HeadBindableContainer()
@@ -19,11 +19,11 @@ package com.game.engine2D.vo
 			super();
 		}
 		
-		override public function set bindTarget(value:ObjectContainer3D):void
+		override public function bind(bindTarget : ObjectContainer3D, syncTarget : Object = null) : void
 		{
 			if (sceneCamera)
 				_sceneCamera.addEventListener(SceneCameraEvent.CAMERA_SCALE_UPDATE, onSceneCameraScaleUpdate);
-			super.bindTarget = value;
+			super.bind(bindTarget, syncTarget);
 		}
 		
 		private function onSceneCameraScaleUpdate(e:*):void
@@ -39,29 +39,39 @@ package com.game.engine2D.vo
 		
 		override public function updateTranform():void
 		{
-			if (_container && sceneCamera)
-				_container.scale = 1.0/_sceneCamera.scale;
+			if (sceneCamera)
+				this.scale = 1.0/_sceneCamera.scale;
 			super.updateTranform();
+			this.visible = _visible;
 		}
 		
-		override public function dispose():void
+		public function set headVisible(value:Boolean):void
+		{
+			_visible = value;
+		}
+		
+		public function instanceDestroy():void
+		{
+			this.dispose();
+		}
+		
+		public function instanceDispose():void
 		{
 			if (_sceneCamera)
 				_sceneCamera.removeEventListener(SceneCameraEvent.CAMERA_SCALE_UPDATE, onSceneCameraScaleUpdate);
 			_sceneCamera = null;
-			super.dispose();
 		}
 		
 		public function reSet($parameters:Array):void
 		{
-			this.visible = true;
+			_visible = true;
 		}
 		
-		static public function recycle($pool:HeadBindableContainer):void
+		static public function recycle($obj:HeadBindableContainer):void
 		{
-			if ($pool)
+			if ($obj)
 			{
-				_pool.disposeObj($pool);
+				_pool.disposeObj($obj);
 			}
 		}
 		

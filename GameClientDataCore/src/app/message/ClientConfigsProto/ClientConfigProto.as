@@ -15,7 +15,7 @@ package app.message.ClientConfigsProto {
 		/**
 		 *  @private
 		 */
-		public static const INDEX:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ClientConfigsProto.ClientConfigProto.index", "index", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const INDEX:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ClientConfigsProto.ClientConfigProto.index", "index", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var index$field:int;
 
@@ -42,7 +42,7 @@ package app.message.ClientConfigsProto {
 		/**
 		 *  @private
 		 */
-		public static const DATA:FieldDescriptor$TYPE_BYTES = new FieldDescriptor$TYPE_BYTES("app.message.ClientConfigsProto.ClientConfigProto.data", "data", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const DATA:FieldDescriptor_TYPE_BYTES = new FieldDescriptor_TYPE_BYTES("app.message.ClientConfigsProto.ClientConfigProto.data", "data", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var data$field:flash.utils.ByteArray;
 
@@ -68,11 +68,11 @@ package app.message.ClientConfigsProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasIndex) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, index$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, index$field);
 			}
 			if (hasData) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_BYTES(output, data$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BYTES(output, data$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -86,21 +86,21 @@ package app.message.ClientConfigsProto {
 			var index$count:uint = 0;
 			var data$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (index$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ClientConfigProto.index cannot be set twice.');
 					}
 					++index$count;
-					this.index = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.index = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (data$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ClientConfigProto.data cannot be set twice.');
 					}
 					++data$count;
-					this.data = com.netease.protobuf.ReadUtils.read$TYPE_BYTES(input);
+					this.data = com.netease.protobuf.ReadUtils.read_TYPE_BYTES(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

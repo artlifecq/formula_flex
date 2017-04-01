@@ -1,8 +1,6 @@
 package com.rpgGame.app.manager.chat
 {
-	import com.rpgGame.app.sender.MiscSender;
 	import com.rpgGame.core.events.ChatEvent;
-	import com.rpgGame.coreData.enum.EnumClientSettingIndex;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	
 	import flash.utils.ByteArray;
@@ -57,7 +55,7 @@ package com.rpgGame.app.manager.chat
 			_chatSetProto.nonDefault = true;
 			_chatSetProto.writeTo(_byteArray);
 			_byteArray.compress();
-			MiscSender.reqSetClientOnlyIntConfig(EnumClientSettingIndex.INDEX_CHAT,_byteArray);
+//			MiscSender.reqSetClientOnlyIntConfig(EnumClientSettingIndex.INDEX_CHAT,_byteArray);
 			EventManager.dispatchEvent(ChatEvent.CHAT_TABS_SETING);
 		}
 		
@@ -91,7 +89,7 @@ package com.rpgGame.app.manager.chat
 		{
 			var channelProto:ChatSetTabProtoC = new ChatSetTabProtoC();
 			channelProto.name = getNewTabName(1);
-			channelProto.selectedChannelArr = [EnumChatChannelType.CHAT_CHANNEL_SILIAO,EnumChatChannelType.CHAT_CHANNEL_COUNTRY,EnumChatChannelType.CHAT_CHANNEL_FAMILY];
+			channelProto.selectedChannelArr = [EnumChatChannelType.CHAT_CHANNEL_SILIAO];
 			return channelProto;
 		}
 		

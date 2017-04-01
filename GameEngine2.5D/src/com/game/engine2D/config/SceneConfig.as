@@ -9,12 +9,12 @@ package com.game.engine2D.config
 		/**
 		 * 逻辑格宽 
 		 */		
-		public static var TILE_WIDTH:Number = 25;
+		public static var TILE_WIDTH:Number = 50;
 		
 		/**
 		 * 逻辑格高 
 		 */		
-		public static var TILE_HEIGHT:Number = 25;
+		public static var TILE_HEIGHT:Number = 50;
 		
 		/**
 		 * 区域图宽 

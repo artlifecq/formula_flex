@@ -1,26 +1,43 @@
 package com.rpgGame.app.cmdlistener.scene
 {
+	import com.game.engine2D.config.SceneConfig;
+	import com.game.engine3D.display.shapeArea.ShapeArea3D;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
+	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
+	import com.rpgGame.app.fight.spell.SpellResultInfo;
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.coreData.cfg.AnimationDataManager;
+	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
-	import com.rpgGame.coreData.lang.LangNoticeInfo;
+	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.EnumHurtType;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.netData.fight.message.ResAttackRangeMessage;
+	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
+	import com.rpgGame.netData.fight.message.ResAttackVentToClientMessage;
+	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
+	import com.rpgGame.netData.fight.message.ResFightFailedBroadcastMessage;
+	import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
 	
-	import app.cmd.SceneModuleMessages;
-	import app.message.SpellProto;
+	import flash.geom.Point;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
@@ -38,15 +55,150 @@ package com.rpgGame.app.cmdlistener.scene
 
 		override public function start() : void
 		{
-			//技能相关
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_YOUR_SPELL_RELEASED, onYouSpellRelease);
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SPELL_RELEASE_FAIL, onSpellReleaseFail);
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SCENE_SPELL_RELEASED, onSpellReleased);
-			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SCENE_SPELL_EFFECTED, onSpellEffected);
+			SocketConnection.addCmdListener(102105,onResFightFailedBroadcastMessage);
+			SocketConnection.addCmdListener(102101,onResFightBroadcastMessage);
+			SocketConnection.addCmdListener(102102,onResAttackResultMessage);
+			SocketConnection.addCmdListener(102107,onResAttackVentToClientMessage);
+//			SocketConnection.addCmdListener(102114,onSCAttackerResultMessage);
+			SocketConnection.addCmdListener(102103,onResAttackRangeMessage);
+//			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_YOUR_SPELL_RELEASED, onYouSpellRelease);
 			//
 			finish();
 		}
+		/**
+		 * 施法失败, 失败原因
+		 *
+			NONE(0),	//表示没有失败
+			NO_SKILL_ID(1),	//没有技能
+			NO_SCENE(2),	//没有场景
+			NO_SKILL_CFG(3),	//没有技能数据
+			PASSIVE_SKILL(4),	//无法释放被动技能
+			PERFORMING(5),	//释放技能中
+			SINGING(6),		//技能吟唱中
+			PUBLIC_CD(7),	//公共冷却中
+			NO_SKILL_TYPE(8),	/不到技能类型
+			CANT_PERFORM(9),	//无法释放技能
+			NO_MP(10),	//魔法不足
+			NO_COST_CFG(11),	/不到技能消耗配置
+			FAR_AWAY(12),	//释放距离过远
+			SELECT_TARGET(13),	//目标技能没有选定目标
+			NO_TARGET(14),	//没有找到目标
+			TARGET_DIE(15),	//目标死亡
+			SHUI_MIAN(16),	/眠状态
+			BAN_ATTACK(17),	//沉默状态
+			CHANGEMAP(18),	//切换地图中
+		 */
+		private function onResFightFailedBroadcastMessage(msg:ResFightFailedBroadcastMessage):void
+		{
+			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
+			var failID : int = msg.failType;
+			var failReason : String;
+			failReason = LangQ_NoticeInfo["SkillError_"+failID];
+			if(!failReason)
+			{
+				failReason="未配置的技能错误码!----failID";
+				GameLog.addShow(failReason);
+			}
+			
+			NoticeManager.showNotify(failReason, failID);
+		}
+		
+		/**
+		 * 位移技能、普通攻击的起手广播(包括自己)
+		 * @param buffer
+		 *
+		 */
+		private function onResFightBroadcastMessage(msg:ResFightBroadcastMessage):void
+		{
+			GameLog.addShow("技能流水号为： 对目标\t" + msg.uid);
+			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
+			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
+			ReleaseSpellHelper.releaseSpell(info);			
+		}
+		
+		private function onResAttackVentToClientMessage(msg:ResAttackVentToClientMessage):void
+		{
+			GameLog.addShow("技能流水号为： 对地\t" + msg.uid  + "\n" + "服务器给的点为：\t" + msg.pos.x +"_" + msg.pos.y);
+			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
+			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
+			ReleaseSpellHelper.releaseSpell(info);
+		}
+		
+		/**
+		 * 技能伤害列表 
+		 * @param msg
+		 * 
+		 */		
+		private function onResAttackResultMessage(msg:ResAttackResultMessage):void
+		{
+			var info : SpellResultInfo = SpellResultInfo.setSpellResultInfo(msg);
+			SpellHitHelper.fightSpellHitEffect(info);
+			effectCharAttribute(info);
+            lockAttack(info);
+		}
+		
+		private function effectCharAttribute(info : SpellResultInfo) : void
+		{
+			var hurtList : Vector.<FightHurtResult> = info.hurtList;
+			for each (var hurtResult : FightHurtResult in hurtList)
+			{
+				var role : SceneRole = SceneManager.getSceneObjByID(hurtResult.targetID) as SceneRole;
+				if (role && role.usable)
+				{
+//					CharAttributeManager.setCharHp(role.data as RoleData, hurtResult.curLife);
+					CharAttributeManager.setCharMp(role.data as RoleData, hurtResult.curMana);
+				}
+			}
+		}
 
+        // 锁定攻击源
+        private function lockAttack(info : SpellResultInfo):void
+		{
+            if (info.isMainCharHited && null == SceneRoleSelectManager.selectedRole)
+			{
+                var hurtList : Vector.<FightHurtResult> = info.hurtList;
+                if (hurtList.length > 0)
+				{
+                    var attacker : SceneRole = SceneManager.getSceneObjByID(hurtList[0].atkorID) as SceneRole;
+                    if (null != attacker)
+					{
+                        SceneRoleSelectManager.selectedRole = attacker;
+                    }
+                }
+            }
+        }
+		
+		private var attackAreas:Vector.<ShapeArea3D> = new Vector.<ShapeArea3D>();
+		private function onResAttackRangeMessage(msg:ResAttackRangeMessage):void
+		{
+			
+			var gw:int = SceneConfig.TILE_WIDTH;
+			var gh:int = SceneConfig.TILE_HEIGHT;
+			var i:int = 0;
+			for ( i = 0; i < attackAreas.length; i++ )
+			{
+				if (attackAreas[i])
+				{
+					attackAreas[i].dispose();
+					attackAreas[i] = null;
+				}
+			}
+			
+			attackAreas = new Vector.<ShapeArea3D>();
+			for (i = 0; i < msg.grids.length; i++)
+			{
+				var pt:Point = new Point(int(msg.grids[i] / 10000), int(msg.grids[i] % 10000));
+				var _measureShapeArea3D:ShapeArea3D = new ShapeArea3D(SceneManager.getScene().sceneRenderLayer);
+				_measureShapeArea3D.updateFill(pt.x, 0, -pt.y, 0xff0000, 4,25,0);
+				attackAreas.push( _measureShapeArea3D );
+			}
+		}
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		///////////////////////////
+		///////////////////////////  参考协议------
+		///////////////////////////
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/**
 		 * 做技能冷却用
 		 * @param buffer
@@ -54,24 +206,25 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onYouSpellRelease(buffer : ByteBuffer) : void
 		{
-			var spellType : int = buffer.readVarint32();
+			var spellID : int = buffer.readVarint32();
 			//添加单技能CD
-			var spellData : SpellProto = CastSpellHelper.getSpellData(spellType);
+			var spellData : Q_skill_model = CastSpellHelper.getSpellData(spellID);
 			if (!spellData)
 			{
-				var defaultSpell : SpellProto = CastSpellHelper.getDefaultSpell();
+				var defaultSpell : Q_skill_model = CastSpellHelper.getDefaultSpell();
 				if (defaultSpell)
 				{
-					if (spellType == defaultSpell.spellType)
+					if (spellID == defaultSpell.q_skillID)
 					{
 						spellData = defaultSpell;
 					}
 					else
 					{
-						var relateSpells : Array = defaultSpell.activeSpell.relateSpells;
-						for each (var tmpData : SpellProto in relateSpells)
+						//连招
+						var relateSpells : Vector.<Q_skill_model> = SpellDataManager.getRelateSpells(defaultSpell.q_relate_spells);
+						for each (var tmpData : Q_skill_model in relateSpells)
 						{
-							if (spellType == tmpData.spellType)
+							if (spellID == tmpData.q_skillID)
 							{
 								spellData = tmpData;
 								break;
@@ -82,155 +235,24 @@ package com.rpgGame.app.cmdlistener.scene
 			}
 			SkillCDManager.getInstance().addSkillCDTime(spellData);
 		}
-
-		private function onSpellReleaseFail(buffer : ByteBuffer) : void
-		{
-			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
-			var failID : int = buffer.readVarint32();
-			var failReason : String;
-			switch (failID)
-			{
-				case 1:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_10;
-					break;
-				case 2:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_11;
-					break;
-				case 3:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_12;
-					break;
-				case 4:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_13;
-					break;
-				case 5:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_14;
-					break;
-				case 6:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_15;
-					break;
-				case 7:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_16;
-					break;
-				case 8:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_17;
-					break;
-				case 9:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_18;
-					break;
-				case 10:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_19; //（英雄死亡后不会被删除，怪物会被立即删除,所以一般情况下怪物目标不会返还这个消息）
-					break;
-				case 11:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_20;
-					break;
-				case 12:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_21;
-					break;
-				case 13:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_22;
-					break;
-				case 14:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_23;
-					break;
-				case 15:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_24;
-					break;
-				case 16:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_81;
-					break;
-				case 17:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_82;
-					break;
-				case 18:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_83;
-					break;
-				case 19:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_84;
-					break;
-				case 20:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_85;
-					break;
-				case 21:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_86;
-					break;
-				case 22:
-					failReason = "该技能必须在马上才能够释放";
-					break;
-				case 23:
-					failReason = "飞行中，无法释放技能";
-					break;
-				case 24:
-					failReason = "当前坐骑无法骑战";
-					break;
-				case 25:
-					failReason = "在镖车上";
-					break;
-				default:
-					failReason = LangNoticeInfo.ErrorMsgNoticeManager_25;
-					break;
-			}
-
-			NoticeManager.showNotify(failReason, failID);
-		}
-
-		/**
-		 * 位移技能、普通攻击的起手广播(包括自己)
-		 * @param buffer
-		 *
-		 */
-		private function onSpellReleased(buffer : ByteBuffer) : void
-		{
-			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
-			var flySceneObjID : int = buffer.readVarint32();
-			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(flySceneObjID, buffer, true);
-			ReleaseSpellHelper.releaseSpell(info);
-			effectCharsHp(info);
-
-//			if (info.atkor && info.atkor.isMainChar)
-//			{
-//				GameLog.addShow("释放技能" + info.flySceneObjID + "效果：" + info.spellEffectID);
-//			}
-//
-//			for each (var bInfo : BuffInfo in info.stateList)
-//			{
-//				BuffManager.addBuf(bInfo);
-//			}
-		}
-
-		/**
-		 * 技能的后续延时伤害广播(包括自己)(通用)
-		 * @param buffer
-		 *
-		 */
-		private function onSpellEffected(buffer : ByteBuffer) : void
-		{
-			var flySceneObjID : int = buffer.readVarint32();
-			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(flySceneObjID, buffer);
-			SpellHitHelper.serverSpellHitEffect(info);
-			effectCharsHp(info);
-
-//			if (info.atkor && info.atkor.isMainChar)
-//			{
-//				GameLog.addShow("技能伤害" + info.flySceneObjID + "效果：" + (info.hurtList.length > 0 ? "伤害" + info.hurtList[0].hurtAmount : "无"));
-//			}
-
-//			SpellAnimationManager.addPosEffectAnimaton(info);
-//			//
-//			for each (var bInfo : BuffInfo in info.stateList)
-//			{
-//				BuffManager.addBuf(bInfo);
-//			}
-		}
 		
-		private function effectCharsHp(info : ReleaseSpellInfo):void
+		
+		
+		/**
+		 * 触发被动技能，附带varint32类型的技能类型
+		 *
+		 */
+		private function onTriggerHanGuangDunSpell(buffer : ByteBuffer) : void
 		{
-			var hurtList:Vector.<FightHurtResult> = info.hurtList;
-			for each (var hurtResult:FightHurtResult in hurtList) 
+			var roleId : Number = buffer.readVarint64();
+			var animationId : int = buffer.readVarint32();
+			var role : SceneRole = SceneManager.getSceneObjByID(roleId) as SceneRole;
+			if (role)
 			{
-				var role:SceneRole = SceneManager.getSceneObjByID(hurtResult.roleID) as SceneRole;
-				if(role && role.usable)
+				var animationData : Q_SpellAnimation = AnimationDataManager.getData(animationId);
+				if (animationData)
 				{
-					CharAttributeManager.setCharHp(role.data as RoleData, hurtResult.curLife);
+					SpellAnimationHelper.addSelfDestEffect(role, animationData);
 				}
 			}
 		}

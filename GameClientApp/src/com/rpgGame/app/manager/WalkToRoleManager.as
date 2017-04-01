@@ -43,26 +43,28 @@ package com.rpgGame.app.manager
 		{
 			if (!role || !role.usable)
 				return;
-			var targerPos : Vector3D = role.position;
+			var targerPos : Vector3D = role.position.clone();
+            targerPos.y = targerPos.z;
+            targerPos.z = 0;
 			switch (role.type)
 			{
 				case SceneCharType.PLAYER:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 200, role);
+					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role);
 					break;
 				case SceneCharType.MONSTER:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 200, role, onArriveMonster);
+					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveMonster);
 					break;
 				case SceneCharType.LIANG_CANG:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 200, role, onArriveMonster);
+					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveMonster);
 					break;
 				case SceneCharType.NPC:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 200, role, onArriveNpc);
+					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveNpc);
 					break;
 				case SceneCharType.PROTECT_NPC:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 200, role, onArriveNpc);
+					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveNpc);
 					break;
 				case SceneCharType.COLLECT:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 200, role, onArriveCollect);
+					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveCollect);
 					break;
 				case SceneCharType.DROP_GOODS:
 					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveDropGoods);
@@ -103,11 +105,11 @@ package com.rpgGame.app.manager
 				return;
 
 			//如果这只怪是猪，那么是不能杀的，请求抓猪
-			if (TouZhuCfgData.isZhuMonster(monsterData.modelID))
-			{
-				TouZhuManager.reqStratTouZhu(monsterData.id);
-				return;
-			}
+//			if (TouZhuCfgData.isZhuMonster(monsterData.modelID))
+//			{
+//				TouZhuManager.reqStratTouZhu(monsterData.id);
+//				return;
+//			}
 		}
 
 		private static function onArriveNpc(ref : WalkMoveStateReference) : void
@@ -158,16 +160,15 @@ package com.rpgGame.app.manager
 			var role : SceneRole = ref.data as SceneRole;
 			if (role == null || !role.usable)
 				return;
-
 			var actor : SceneRole = MainRoleManager.actor;
 			var dist : int = MathUtil.getDistanceNoSqrt(actor.x, actor.z, role.x, role.z);
 			var dropGoodsData : SceneDropGoodsData = role.data as SceneDropGoodsData;
 			var farDistance : int = dropGoodsData.farDistance;
 			if (dist < farDistance * farDistance)
 			{
-				if (dropGoodsData.isMount)
+				/*if (dropGoodsData.isMount)
 					MountManager.collectMountItem(dropGoodsData.id, dropGoodsData.name);
-				else
+				else*/
 					SceneDropGoodsManager.selectedDropGoods(dropGoodsData);
 			}
 		}

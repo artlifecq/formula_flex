@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 标签输入项
+* @author L.L.M.Sunny
+* 创建时间：2015-6-17 上午10:30:12
+*
+-->
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="100%"
+		 height="20"
+		 dragEnter="group1_dragEnterHandler(event)"
+		 dragDrop="group1_dragDropHandler(event)"
+		 xmlns:ui="com.editor.ui.*">
+	<fx:Script>
+		<![CDATA[
+			import com.editor.cfg.ConfigData;
+			import com.editor.data.ConfigDesc;
+			import com.editor.data.TabelData;
+			import com.editor.manager.ConfigEditorUtil;
+			import com.editor.manager.DataStructuresManager;
+
+			import mx.collections.ArrayCollection;
+			import mx.core.UIComponent;
+			import mx.events.DragEvent;
+			import mx.events.SliderEvent;
+			import mx.managers.DragManager;
+
+			import spark.components.Button;
+			import spark.events.IndexChangeEvent;
+			[Bindable]
+			public var itemWidth : int = 380;
+			[Bindable]
+			public var label : String = "";
+			[Bindable]
+			public var applyLabel : String = "";
+			[Bindable]
+			public var dataField : String = null;
+			[Bindable]
+			private var _data : Object = null;
+			[Bindable]
+			private var _linkData : Object = null;
+			[Bindable]
+			private var _linkDataField : String = null;
+			[Bindable]
+			public var editable : Boolean = true;
+			[Bindable]
+			public var inputTips : String = "";
+			[Bindable]
+			public var listData : ArrayCollection;
+			[Bindable]
+			public var browseDesc : String = "";
+			[Bindable]
+			public var browseTile : String = "";
+			[Bindable]
+			public var browseExtension : String = "";
+			[Bindable]
+			public var labelTips : String = "";
+			private var _inputCallback : Function;
+			private var _dragDropCallback : Function;
+			private var _applyCallback : Function;
+			private var _linkSubmitCallback : Function;
+			private var _applyBtn : Button;
+			private var _lastDataValue : Object;
+
+			public var minValue : Number = -Infinity;
+			public var maxValue : Number = Infinity;
+			public var period : Number = 0;
+			public var isNumber : Boolean = false;
+			public var radix : int = 10;
+			public var isColor : Boolean = false;
+			public var isBoolean : Boolean = false;
+			public var dataPropertySetter : Function;
+			public var dataPropertyGetter : Function;
+
+			public function setData(value : Object) : void
+			{
+				_data = value;
+				if (_data == null)
+					return;
+				if (dataField)
+					_lastDataValue = _data[dataField];
+				else
+					_lastDataValue = _data;
+
+				updateData();
+			}
+
+			public function get data() : Object
+			{
+				return _data;
+			}
+
+			public function updateData() : void
+			{
+				if (_data == null)
+					return;
+				inputSlider.visible = false;
+				inputText.visible = false;
+				filePathItem.visible = false;
+				listItem.visible = false;
+				inputColor.visible = false;
+				checkBox.visible = false;
+				updateLinkBtn();
+				if (minValue != -Infinity && maxValue != Infinity)
+				{
+					inputSlider.visible = true;
+					inputSlider.minimum = Number(minValue.toFixed(2));
+					inputSlider.maximum = Number(maxValue.toFixed(2));
+					inputSlider.labels = [Number(minValue.toFixed(2)), Number((minValue + (maxValue - minValue) * 0.25).toFixed(2)), Number((minValue + (maxValue - minValue) * 0.5).toFixed(2)), Number((minValue + (maxValue - minValue) * 0.75).toFixed(2)), Number(maxValue.toFixed(2))];
+
+					if (dataPropertyGetter != null)
+						inputSlider.value = dataPropertyGetter(this, Number(dataField ? _data[dataField] : _data));
+					else
+						inputSlider.value = Number(dataField ? _data[dataField] : _data);
+				}
+				else if (browseDesc && browseExtension)
+				{
+					filePathItem.visible = true;
+					if (dataPropertyGetter != null)
+						filePathItem.path = dataPropertyGetter(this, String(dataField ? _data[dataField] : _data));
+					else
+						filePathItem.path = String(dataField ? _data[dataField] : _data);
+				}
+				else if (listData)
+				{
+					listItem.visible = true;
+					listItem.dataProvider = listData;
+					var selectedType : String;
+					if (dataPropertyGetter != null)
+						selectedType = dataPropertyGetter(this, String(dataField ? _data[dataField] : _data));
+					else
+						selectedType = String(dataField ? _data[dataField] : _data);
+					for each (var listItemData : Object in listData.source)
+					{
+						if (String(listItemData.type) == selectedType)
+						{
+							listItem.selectedItem = listItemData;
+							break;
+						}
+					}
+				}
+				else if (isColor)
+				{
+					inputColor.visible = true;
+					if (dataPropertyGetter != null)
+						inputColor.selectedColor = dataPropertyGetter(this, uint(dataField ? _data[dataField] : _data));
+					else
+						inputColor.selectedColor = uint(dataField ? _data[dataField] : _data);
+				}
+				else if (isBoolean)
+				{
+					checkBox.visible = true;
+					if (dataPropertyGetter != null)
+						checkBox.selected = dataPropertyGetter(this, Boolean(dataField ? _data[dataField] : _data));
+					else
+						checkBox.selected = Boolean(dataField ? _data[dataField] : _data);
+				}
+				else
+				{
+					var dataEditable : Boolean = true;
+					inputText.visible = true;
+					var dataValue : String;
+					if (dataField)
+					{
+						if (_data[dataField] is ConfigData)
+						{
+							dataValue = "(复合数据)";
+							dataEditable = false;
+						}
+						else
+						{
+							dataValue = String(radix == 16 ? ("0x" + Number(_data[dataField]).toString(16)) : ConfigData.getValueStringWithPropertyType(_data, dataField));
+						}
+					}
+					else
+					{
+						dataValue = String(_data);
+					}
+					inputText.editable = editable && dataEditable;
+					if (dataPropertyGetter != null)
+						inputText.text = dataPropertyGetter(this, dataValue);
+					else
+						inputText.text = dataValue;
+				}
+
+				if (_applyCallback != null)
+				{
+					if (!_applyBtn)
+					{
+						_applyBtn = new Button();
+						addElement(_applyBtn);
+						_applyBtn.label = applyLabel;
+						_applyBtn.x = itemWidth + 130;
+						_applyBtn.y = -5;
+						_applyBtn.addEventListener(MouseEvent.CLICK, applyBtn_clickHandler);
+					}
+				}
+				else
+				{
+					if (_applyBtn)
+					{
+						if (_applyBtn.parent)
+							_applyBtn.parent.removeChild(_applyBtn);
+						_applyBtn = null;
+					}
+				}
+
+				if (dataField && (_data is ConfigData))
+				{
+					var correctData : ConfigData = DataStructuresManager.getInstance().getLinkTabelData(_data as ConfigData, dataField);
+					if (correctData)
+						setLinkData(correctData, dataField, onLinkSubmitCallback);
+					else if (data[dataField] is ConfigData)
+						setLinkData(data[dataField] as ConfigData, dataField, onLinkSubmitCallback);
+					else
+						setLinkData(null);
+				}
+				else
+				{
+					setLinkData(null);
+				}
+			}
+
+			private function onLinkSubmitCallback(data : ConfigData) : void
+			{
+				if (_inputCallback != null)
+					_inputCallback(this);
+			}
+
+			public function restoreData() : void
+			{
+				if (_data == null)
+					return;
+				var hasChanged : Boolean = false;
+				if (dataField)
+				{
+					if (_data is ConfigData)
+					{
+						if (_data[dataField] != _lastDataValue)
+						{
+							(_data as ConfigData).setValue(dataField, _lastDataValue);
+							hasChanged = true;
+						}
+					}
+					else
+					{
+						if (_data[dataField] != _lastDataValue)
+						{
+							_data[dataField] = _lastDataValue;
+							hasChanged = true;
+						}
+					}
+				}
+				else
+				{
+					if (_data != _lastDataValue)
+					{
+						_data = _lastDataValue;
+						hasChanged = true;
+					}
+				}
+
+				if (hasChanged)
+				{
+					if (_inputCallback != null)
+						_inputCallback(this);
+				}
+			}
+
+			public function setLabelWithLimit(value : String) : void
+			{
+				var pattern : RegExp = /^[A-Za-z0-9_]+$/;
+				var result : Object = pattern.exec(value);
+				if (result)
+				{
+					if (value.length > 14)
+						value = value.substr(0, 14) + "...";
+				}
+				else
+				{
+					if (value.length > 7)
+						value = value.substr(0, 7) + "...";
+				}
+				label = value;
+			}
+
+			public function destroy() : void
+			{
+				_data = null;
+				_linkData = null;
+				_linkDataField = null;
+				_inputCallback = null;
+				_dragDropCallback = null;
+				_applyCallback = null;
+				_linkSubmitCallback = null;
+				if (_applyBtn)
+				{
+					if (_applyBtn.parent)
+						_applyBtn.parent.removeChild(_applyBtn);
+					_applyBtn = null;
+				}
+				dataPropertySetter = null;
+				dataPropertyGetter = null;
+				listData = null;
+			}
+
+			protected function group1_dragEnterHandler(event : DragEvent) : void
+			{
+				if (!dropEnabled)
+					return;
+				DragManager.acceptDragDrop(event.target as UIComponent);
+			}
+
+			protected function group1_dragDropHandler(event : DragEvent) : void
+			{
+				if (_data == null)
+					return;
+				if (!dropEnabled)
+					return;
+				var array : Array = event.dragSource.dataForFormat("items") as Array;
+				var dropData : Object = array[0];
+				if (_dragDropCallback != null)
+					_dragDropCallback(this, dropData);
+				var valueObj : Object = dataField ? ConfigData.getValueStringWithPropertyType(_data, dataField) : _data;
+
+				if (minValue != -Infinity && maxValue != Infinity)
+				{
+					if (dataPropertyGetter != null)
+						inputSlider.value = dataPropertyGetter(this, Number(dataField ? _data[dataField] : _data));
+					else
+						inputSlider.value = Number(dataField ? _data[dataField] : _data);
+				}
+				else if (browseDesc && browseExtension)
+				{
+					if (dataPropertyGetter != null)
+						filePathItem.path = dataPropertyGetter(this, String(dataField ? _data[dataField] : _data));
+					else
+						filePathItem.path = String(dataField ? _data[dataField] : _data);
+				}
+				else if (listData)
+				{
+					var selectedType : String;
+					if (dataPropertyGetter != null)
+						selectedType = dataPropertyGetter(this, String(dataField ? _data[dataField] : _data));
+					else
+						selectedType = String(dataField ? _data[dataField] : _data);
+					for each (var listItemData : Object in listData.source)
+					{
+						if (String(listItemData.type) == selectedType)
+						{
+							listItem.selectedItem = listItemData;
+							break;
+						}
+					}
+				}
+				else if (isColor)
+				{
+					if (dataPropertyGetter != null)
+						inputColor.selectedColor = dataPropertyGetter(this, int(dataField ? _data[dataField] : _data));
+					else
+						inputColor.selectedColor = uint(dataField ? _data[dataField] : _data);
+				}
+				else
+				{
+					var textStr : String = String(radix == 16 ? ("0x" + Number(valueObj).toString(16)) : valueObj);
+					if (dataPropertyGetter != null)
+						inputText.text = dataPropertyGetter(this, textStr);
+					else
+						inputText.text = textStr;
+				}
+			}
+
+			public function get dropEnabled() : Boolean
+			{
+				return _dragDropCallback != null;
+			}
+
+			public function set dragDropCallback(value : Function) : void
+			{
+				_dragDropCallback = value;
+			}
+
+			public function set applyCallback(value : Function) : void
+			{
+				_applyCallback = value;
+			}
+
+			public function set inputCallback(value : Function) : void
+			{
+				_inputCallback = value;
+			}
+
+			private function dataTipFormatFunction(value : Number) : String
+			{
+				return String(Number(value.toFixed(2)));
+			}
+
+			private function inputTextChangeHandler() : void
+			{
+				if (_data == null)
+					return;
+				if (!inputText.editable)
+					return;
+				var setted : Boolean = false;
+				if (dataPropertySetter != null)
+				{
+					setted = dataPropertySetter(this, inputText.text);
+				}
+				if (!setted)
+				{
+					if (dataField)
+					{
+						var dataValue : Object = ConfigData.getDataValueWithPropertyType(_data, dataField, inputText.text);
+						if (_data is ConfigData)
+							(_data as ConfigData).setValue(dataField, dataValue);
+						else
+							_data[dataField] = dataValue;
+					}
+					else
+						_data = inputText.text;
+				}
+				if (_inputCallback != null)
+					_inputCallback(this);
+			}
+
+			protected function inputText_keyDownHandler(event : KeyboardEvent) : void
+			{
+				if (event.keyCode == 13)
+				{
+					inputTextChangeHandler();
+				}
+			}
+
+			protected function inputText_focusOutHandler(event : FocusEvent) : void
+			{
+				inputTextChangeHandler();
+			}
+
+			protected function inputSlider_changeHandler(event : SliderEvent) : void
+			{
+				if (_data == null)
+					return;
+				var setted : Boolean = false;
+				if (dataPropertySetter != null)
+				{
+					setted = dataPropertySetter(this, Number(inputSlider.value));
+				}
+				if (!setted)
+				{
+					if (dataField)
+					{
+						if (_data is ConfigData)
+							(_data as ConfigData).setValue(dataField, getPeriodValue(inputSlider.value));
+						else
+							_data[dataField] = getPeriodValue(inputSlider.value);
+					}
+					else
+						_data = getPeriodValue(inputSlider.value);
+				}
+				if (_inputCallback != null)
+					_inputCallback(this);
+			}
+
+			private function getPeriodValue(value : Number) : Number
+			{
+				if (period > 0)
+					return int(value % period);
+				if (isNumber)
+					return Number(value.toFixed(2));
+				else
+					return int(value);
+			}
+
+			private function filePathItemSelected() : void
+			{
+				if (_data == null)
+					return;
+				var setted : Boolean = false;
+				if (dataPropertySetter != null)
+				{
+					setted = dataPropertySetter(this, filePathItem.path);
+				}
+				if (!setted)
+				{
+					if (dataField)
+					{
+						if (_data is ConfigData)
+							(_data as ConfigData).setValue(dataField, filePathItem.path);
+						else
+							_data[dataField] = filePathItem.path;
+					}
+					else
+						_data = filePathItem.path;
+				}
+				if (_inputCallback != null)
+					_inputCallback(this);
+			}
+
+			public function warning(text : String) : void
+			{
+				inputText.setStyle("color", "0xff0000");
+				inputTips = text;
+			}
+
+			public function normal(text : String = "") : void
+			{
+				inputText.setStyle("color", "0xcccccc");
+				inputTips = text;
+			}
+
+			public function striking(text : String) : void
+			{
+				inputText.setStyle("color", "0x00ff00");
+				inputTips = text;
+			}
+
+			public function setStrikingLabel(level : int) : void
+			{
+				if (level == 1)
+					labelTxt.setStyle("color", "0xccff00");
+				else if (level == 2)
+					labelTxt.setStyle("color", "0x00ffcc");
+				else
+					labelTxt.setStyle("color", "0xcccccc");
+			}
+
+			public function setLinkData(data : ConfigData, field : String = null, onLinkSubmit : Function = null) : void
+			{
+				_linkData = data;
+				_linkDataField = field;
+				_linkSubmitCallback = onLinkSubmit;
+				updateLinkBtn();
+			}
+
+			private function updateLinkBtn() : void
+			{
+				if (_linkData)
+				{
+					linkBtn.visible = true;
+					if (_linkData is ConfigData)
+					{
+						linkBtn.toolTip = "打开链接配置：" + (_linkData as ConfigData).tabelName;
+					}
+					else
+					{
+						linkBtn.toolTip = "打开链接配置";
+					}
+				}
+				else
+				{
+					linkBtn.visible = false;
+					linkBtn.toolTip = "";
+				}
+			}
+
+			protected function applyBtn_clickHandler(event : MouseEvent) : void
+			{
+				if (_applyCallback != null)
+					_applyCallback(this);
+			}
+
+			protected function listItem_changeHandler(event : IndexChangeEvent) : void
+			{
+				if (_data == null)
+					return;
+				var setted : Boolean = false;
+				if (dataPropertySetter != null)
+				{
+					setted = dataPropertySetter(this, listItem.selectedItem.type);
+				}
+				if (!setted)
+				{
+					if (dataField)
+					{
+						if (_data is ConfigData)
+							(_data as ConfigData).setValue(dataField, listItem.selectedItem.type);
+						else
+							_data[dataField] = listItem.selectedItem.type;
+					}
+					else
+						_data = listItem.selectedItem.type;
+				}
+				if (_inputCallback != null)
+					_inputCallback(this);
+			}
+
+			protected function colorpicker1_changeHandler(event : Event) : void
+			{
+				if (_data == null)
+					return;
+				var setted : Boolean = false;
+				if (dataPropertySetter != null)
+				{
+					setted = dataPropertySetter(this, inputColor.selectedColor);
+				}
+				if (!setted)
+				{
+					if (dataField)
+					{
+						if (_data is ConfigData)
+							(_data as ConfigData).setValue(dataField, getPeriodValue(inputColor.selectedColor));
+						else
+							_data[dataField] = getPeriodValue(inputColor.selectedColor);
+					}
+					else
+						_data = getPeriodValue(inputColor.selectedColor);
+				}
+				if (_inputCallback != null)
+					_inputCallback(this);
+			}
+
+			protected function linkBtn_clickHandler(event : MouseEvent) : void
+			{
+				if (!_linkData)
+					return;
+				if ((_data is ConfigData) && (_linkData is ConfigData))
+				{
+					var tabel : TabelData = DataStructuresManager.getInstance().getTabel((_data as ConfigData).tabelName);
+					if (tabel)
+					{
+						var configDesc : ConfigDesc = tabel.getConfigDesc();
+						if (configDesc)
+							ConfigEditorUtil.showConfigEditView(((configDesc.fieldLabels && configDesc.fieldLabels[_linkDataField]) ? configDesc.fieldLabels[_linkDataField] : _linkDataField) + ":" + (_linkData as ConfigData).tabelName + "配置", _linkData as ConfigData, _linkSubmitCallback);
+					}
+				}
+			}
+
+			protected function checkBox_changeHandler(event : Event) : void
+			{
+				if (_data == null)
+					return;
+				var setted : Boolean = false;
+				if (dataPropertySetter != null)
+				{
+					setted = dataPropertySetter(this, checkBox.selected);
+				}
+				if (!setted)
+				{
+					if (dataField)
+					{
+						if (_data is ConfigData)
+							(_data as ConfigData).setValue(dataField, checkBox.selected);
+						else
+							_data[dataField] = checkBox.selected;
+					}
+					else
+						_data = checkBox.selected;
+				}
+				if (_inputCallback != null)
+					_inputCallback(this);
+			}
+		]]>
+	</fx:Script>
+	<s:Label id="labelTxt"
+			 x="0"
+			 y="0"
+			 width="120"
+			 chromeColor="#FFFFFF"
+			 fontFamily="SimSun"
+			 fontWeight="normal"
+			 text="{label}："
+			 toolTip="{labelTips}"/>
+	<s:TextInput id="inputText"
+				 x="120"
+				 y="-5"
+				 width="{itemWidth}"
+				 fontFamily="SimSun"
+				 chromeColor="#FFFFFF"
+				 contentBackgroundColor="#444444"
+				 visible="false"
+				 keyDown="inputText_keyDownHandler(event)"
+				 focusOut="inputText_focusOutHandler(event)"
+				 toolTip="{inputTips}"/>
+	<mx:Slider id="inputSlider"
+			   x="120"
+			   y="-5"
+			   width="{itemWidth}"
+			   labelOffset="30"
+			   liveDragging="true"
+			   visible="false"
+			   dataTipFormatFunction="{dataTipFormatFunction}"
+			   change="inputSlider_changeHandler(event)"
+			   toolTip="{inputTips}"/>
+	<ui:BrowseForOpenItem id="filePathItem"
+						  x="10"
+						  y="0"
+						  visible="false"
+						  browseTile="{browseTile}"
+						  browseDesc="{browseDesc}"
+						  browseExtension="{browseExtension}"
+						  onSelected="{filePathItemSelected}"
+						  toolTip="{inputTips}"/>
+	<s:DropDownList x="120"
+					y="-5"
+					width="{itemWidth}"
+					fontFamily="SimSun"
+					id="listItem"
+					visible="false"
+					labelField="name"
+					change="listItem_changeHandler(event)"
+					toolTip="{inputTips}">
+	</s:DropDownList>
+	<ui:ColorPickerExtend x="120"
+						  y="-5"
+						  width="{itemWidth}"
+						  id="inputColor"
+						  visible="false"
+						  change="colorpicker1_changeHandler(event)"
+						  toolTip="{inputTips}">
+	</ui:ColorPickerExtend>
+	<s:CheckBox x="120"
+				y="-5"
+				width="{itemWidth}"
+				id="checkBox"
+				visible="false"
+				change="checkBox_changeHandler(event)"
+				toolTip="{inputTips}">
+	</s:CheckBox>
+	<s:Button id="linkBtn"
+			  x="460"
+			  y="-5"
+			  width="40"
+			  label="+"
+			  click="linkBtn_clickHandler(event)"/>
+</s:Group>

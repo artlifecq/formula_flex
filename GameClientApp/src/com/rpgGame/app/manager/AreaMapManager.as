@@ -17,10 +17,10 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.enum.AreaMapTypeEnum;
 	import com.rpgGame.coreData.enum.EnumAreaMapType;
 	import com.rpgGame.coreData.enum.EnumClientTriggerType;
-	import com.rpgGame.coreData.lang.LangNoticeInfo;
+	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.role.SceneTranportData;
 	import com.rpgGame.coreData.type.SceneCharType;
-
+	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 
@@ -60,12 +60,26 @@ package com.rpgGame.app.manager
 		{
 			var otherAreaMap : AreaMap = SceneManager.getScene().getAreaMap(EnumAreaMapType.OTHER_AREA);
 			var transportList : Array = SceneManager.getScene().getSceneObjsByType(SceneCharType.TRANS);
+            CONFIG::netDebug {
+                NetDebug.LOG("[AreaMapManager] [updateTransportAreaMap] len:" + transportList.length);
+            }
 			for each (var transRole : SceneRole in transportList)
 			{
 				var info : SceneTranportData = transRole.data as SceneTranportData;
+                CONFIG::netDebug {
+                    NetDebug.LOG("[AreaMapManager] [updateTransportAreaMap] data:" + info + ", polygon:" + info.polygon);
+                }
 				var polygon : Vector.<Point> = info.polygon.slice();
 				var areaMapData : AreaMapData = new AreaMapData(polygon, AreaMapTypeEnum.TRANS, info.id, transRole);
-				otherAreaMap.addFlag(areaMapData);
+				var color : String = otherAreaMap.addFlag(areaMapData);
+                CONFIG::netDebug {
+                    var str : String = "[";
+                    for each(var p : Point in polygon) {
+                        str += "(" + p.x + "," + p.y + "),";
+                    }
+                    str += "]";
+                    NetDebug.LOG("[AreaMapManager] [updateTransportAreaMap] polgon:" + str + ", color:" + color);
+                }
 			}
 		}
 
@@ -234,7 +248,7 @@ package com.rpgGame.app.manager
 		 * @return
 		 *
 		 */
-		public static function forbidCastSpellInMapDataArea(role : SceneRole, spellType : int) : Boolean
+		public static function forbidCastSpellInMapDataArea(role : SceneRole, spellID : int) : Boolean
 		{
 			var otherAreaMap : AreaMap = SceneManager.getScene().getAreaMap(EnumAreaMapType.OTHER_AREA);
 			var areaMapData : AreaMapData = otherAreaMap.getFlag(role.x, role.z);
@@ -244,8 +258,8 @@ package com.rpgGame.app.manager
 				var areaData : ClientMapAreaData = flagObj as ClientMapAreaData;
 				if (areaData.type == MapAreaTypeEnum.SPELL_FORBID)
 				{
-					var spellTypes : Array = areaData.getForbidSpells();
-					if (spellTypes && spellTypes.indexOf(spellType) > -1)
+					var spellIDs : Array = areaData.getForbidSpells();
+					if (spellIDs && spellIDs.indexOf(spellID) > -1)
 					{
 						return true;
 					}
@@ -260,27 +274,27 @@ package com.rpgGame.app.manager
 		 */
 		public static function updateActorEnterAreaInfo() : void
 		{
-			var actor : SceneRole = MainRoleManager.actor;
-			var areaType : int = AreaMapManager.getRoleInMapDataAreaType(actor);
-			if (areaType != actor.mapAreaType)
-			{
-				actor.mapAreaType = areaType;
-				switch (areaType)
-				{
-					case MapAreaTypeEnum.ATHLETICS:
-						NoticeManager.showNotify(LangNoticeInfo.ENTER_ATHLETICS_AREA_INFO); //"您已进入竞技区！击杀本国、盟国玩家不会增加恶名值！"
-						break;
-					case MapAreaTypeEnum.SAFE:
-						NoticeManager.showNotify(LangNoticeInfo.ENTER_SAFE_AREA_INFO); //"您已进入安全区！不能攻击其他玩家或被其他玩家攻击！"
-						break;
-					case MapAreaTypeEnum.STALL:
-						NoticeManager.showNotify(LangNoticeInfo.ENTER_STALL_AREA_INFO); //"您已进入摆摊区！可自由摆摊！"
-						break;
-					case MapAreaTypeEnum.SPELL_FORBID:
-						NoticeManager.showNotify(LangNoticeInfo.ENTER_SPELL_FORBID_AREA_INFO); //"您已进入技能禁止区！禁止使用部分技能！"
-						break;
-				}
-			}
+//			var actor : SceneRole = MainRoleManager.actor;
+//			var areaType : int = AreaMapManager.getRoleInMapDataAreaType(actor);
+//			if (areaType != actor.mapAreaType)
+//			{
+//				actor.mapAreaType = areaType;
+//				switch (areaType)
+//				{
+//					case MapAreaTypeEnum.ATHLETICS:
+//						NoticeManager.showNotify(LangQ_NoticeInfo.ENTER_ATHLETICS_AREA_INFO); //"您已进入竞技区！击杀本国、盟国玩家不会增加恶名值！"
+//						break;
+//					case MapAreaTypeEnum.SAFE:
+//						NoticeManager.showNotify(LangQ_NoticeInfo.ENTER_SAFE_AREA_INFO); //"您已进入安全区！不能攻击其他玩家或被其他玩家攻击！"
+//						break;
+//					case MapAreaTypeEnum.STALL:
+//						NoticeManager.showNotify(LangQ_NoticeInfo.ENTER_STALL_AREA_INFO); //"您已进入摆摊区！可自由摆摊！"
+//						break;
+//					case MapAreaTypeEnum.SPELL_FORBID:
+//						NoticeManager.showNotify(LangQ_NoticeInfo.ENTER_SPELL_FORBID_AREA_INFO); //"您已进入技能禁止区！禁止使用部分技能！"
+//						break;
+//				}
+//			}
 		}
 	}
 }

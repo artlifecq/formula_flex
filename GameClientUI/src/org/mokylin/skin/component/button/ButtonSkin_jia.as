@@ -2,6 +2,7 @@ package org.mokylin.skin.component.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
+	import feathers.controls.UIAsset;
 
 	/**
 	 * @private
@@ -10,6 +11,11 @@ package org.mokylin.skin.component.button
 	 */
 	public class ButtonSkin_jia extends feathers.controls.StateSkin
 	{
+		//==========================================================================
+		//                                定义成员变量
+		//==========================================================================
+		public var iconDisplay:feathers.controls.UIAsset;
+
 		public var labelDisplay:feathers.controls.Label;
 
 
@@ -34,11 +40,27 @@ package org.mokylin.skin.component.button
 							name:"color",
 							value:0xFFFFFF
 						}
+						,
+						{target:"labelDisplay",
+							name:"verticalAlign",
+							value:"middle"
+						}
 					]
 			};
 			skinNames={"down":"ui/component/button/skin_jia/down.png", "hover":"ui/component/button/skin_jia/over.png", "up":"ui/component/button/skin_jia/up.png"};
 		}
 
+
+		//==========================================================================
+		//                                定义成员方法
+		//==========================================================================
+		private function iconDisplay_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			iconDisplay = temp;
+			temp.name = "iconDisplay";
+			return temp;
+		}
 
 		private function labelDisplay_i():feathers.controls.Label
 		{
@@ -52,6 +74,7 @@ package org.mokylin.skin.component.button
 			temp.textAlign = "center";
 			temp.color = 0xFFFFFF;
 			temp.top = 0;
+			temp.verticalAlign = "middle";
 			return temp;
 		}
 

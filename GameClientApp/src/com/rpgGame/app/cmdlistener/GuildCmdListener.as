@@ -25,8 +25,8 @@ package com.rpgGame.app.cmdlistener
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 	
 	public class GuildCmdListener extends BaseBean
 	{
@@ -37,72 +37,72 @@ package com.rpgGame.app.cmdlistener
 		
 		override public function start():void
 		{
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_CREATE_GUILD,createGuild);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_CREATE_GUILD_FAIL,createGuildFail);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_CREATE_GUILD_BROADCAST,createGuildBroadcast);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_GUILD_CHANGED,guildChange);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_GET_FAMILY_REQUEST_JOIN_GUILD_LIST,GetJoinGuildList);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_GET_FAMILY_REQUEST_JOIN_GUILD_LIST_FAIL,GetJoinGuildListFail);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_REQUEST_JOIN_FAIL,reqJoinFail);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_CANCEL_REQUEST_JOIN,cancelReqJoin);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_REQUEST_JOIN_SUCCESS_WAIT_OTHER_REPLY,reqJoinGuildComplete);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_OTHER_JOIN_GUILD,otherJoinGuild);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_REPLY_JOIN_REQUEST_FAIL,replyJoinReqFail);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_YOU_JOIN_GUILD,youJoinGuild);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_YOUR_JOIN_REQUEST_CANCEL,yourJoinReqCancel);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_GET_GUILD_LIST,getGuildList);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_REPLY_JOIN_REQUEST_SUCCESS,replyJOinReqSuccess);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_OTHER_REJECTED_YOUR_JOIN_REQUEST,otherRejectedYourJoinReq);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_OTHER_ACCEPTED_YOUR_JOIN_REQUEST,otherAcceptedYourJoinReq);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_HAS_REQUEST_JOIN,hasReqJoin);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_GET_REQUEST_JOIN_DETAIL,getReqJoinDetail);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_GET_REQUEST_JOIN_DETAIL_FAIL,getReqJoinDetailFail);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_INVITE_JOIN_FAIL,inviteJoinFail);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_INVITE_JOIN_SUCCESS_AND_WAIT_OTHER_REPLY,inviteJoinSuccess);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_RECEIVE_JOIN_INVITE,receiveJoinInvite);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_LEAVE_GUILD_FAIL,leaveGuildFail);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_LEAVE_GUILD,leaveGuild);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_LEAVE_GUILD_BROADCAST,leaveGuildBroadcast);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_SELF_FAMILY_LEAVE_GUILD,selfFamilyLeaveGuild);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_KICK_GUILD_MEMBER_BROADCAST,kickGuildMemberBroadcast);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_BEEN_KICK_OUT_GUILD,beenKickGuild);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_GUILD_DISMISS,guildDismiss);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_CREATE_GUILD,createGuild);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_CREATE_GUILD_FAIL,createGuildFail);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_CREATE_GUILD_BROADCAST,createGuildBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_GUILD_CHANGED,guildChange);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_GET_FAMILY_REQUEST_JOIN_GUILD_LIST,GetJoinGuildList);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_GET_FAMILY_REQUEST_JOIN_GUILD_LIST_FAIL,GetJoinGuildListFail);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_REQUEST_JOIN_FAIL,reqJoinFail);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_CANCEL_REQUEST_JOIN,cancelReqJoin);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_REQUEST_JOIN_SUCCESS_WAIT_OTHER_REPLY,reqJoinGuildComplete);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_OTHER_JOIN_GUILD,otherJoinGuild);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_REPLY_JOIN_REQUEST_FAIL,replyJoinReqFail);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_YOU_JOIN_GUILD,youJoinGuild);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_YOUR_JOIN_REQUEST_CANCEL,yourJoinReqCancel);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_GET_GUILD_LIST,getGuildList);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_REPLY_JOIN_REQUEST_SUCCESS,replyJOinReqSuccess);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_OTHER_REJECTED_YOUR_JOIN_REQUEST,otherRejectedYourJoinReq);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_OTHER_ACCEPTED_YOUR_JOIN_REQUEST,otherAcceptedYourJoinReq);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_HAS_REQUEST_JOIN,hasReqJoin);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_GET_REQUEST_JOIN_DETAIL,getReqJoinDetail);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_GET_REQUEST_JOIN_DETAIL_FAIL,getReqJoinDetailFail);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_INVITE_JOIN_FAIL,inviteJoinFail);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_INVITE_JOIN_SUCCESS_AND_WAIT_OTHER_REPLY,inviteJoinSuccess);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_RECEIVE_JOIN_INVITE,receiveJoinInvite);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_LEAVE_GUILD_FAIL,leaveGuildFail);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_LEAVE_GUILD,leaveGuild);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_LEAVE_GUILD_BROADCAST,leaveGuildBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_SELF_FAMILY_LEAVE_GUILD,selfFamilyLeaveGuild);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_KICK_GUILD_MEMBER_BROADCAST,kickGuildMemberBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_BEEN_KICK_OUT_GUILD,beenKickGuild);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_GUILD_DISMISS,guildDismiss);
 			
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_GET_ANNOUCEMENT,getAnnoucement);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_SET_ANNOUNCEMENT,setAnnoucementComplete);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_SET_ANNOUNCEMENT_FAIL,setAnnoucementFail);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_SET_ANNOUNCEMENT_BROADCAST,setAnnouncementBroadcast);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_GET_ANNOUCEMENT_FAIL,getAnnouncementFail);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_GET_ANNOUCEMENT,getAnnoucement);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_SET_ANNOUNCEMENT,setAnnoucementComplete);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_SET_ANNOUNCEMENT_FAIL,setAnnoucementFail);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_SET_ANNOUNCEMENT_BROADCAST,setAnnouncementBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_GET_ANNOUCEMENT_FAIL,getAnnouncementFail);
 			
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_SET_POS,setPos);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_SET_POS_FAIL,setPosFail);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_POS_CHANGED,posChange);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_SET_POS,setPos);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_SET_POS_FAIL,setPosFail);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_POS_CHANGED,posChange);
 			
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_UPGRADE_LEVEL,upgradeLevel);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_UPGRADE_LEVEL_FAIL,upgradeLevelFail);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_LEVEL_CHANGED_BROADCAST,guildLevelCHangeBradecast);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_UPGRADE_LEVEL,upgradeLevel);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_UPGRADE_LEVEL_FAIL,upgradeLevelFail);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_LEVEL_CHANGED_BROADCAST,guildLevelCHangeBradecast);
 			
 			
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_COLLECT_PRIZE,getSalaryComplete);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_COLLECT_PRIZE_FAIL,getSalaryFail);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_COLLECT_PRIZE,getSalaryComplete);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_COLLECT_PRIZE_FAIL,getSalaryFail);
 			
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_COLLECT_KING_PRIZE,getKingSalaryComplete);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_COLLECT_KING_PRIZE_FAIL,getKingSalaryFail);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_COLLECT_KING_PRIZE,getKingSalaryComplete);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_COLLECT_KING_PRIZE_FAIL,getKingSalaryFail);
 			
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_GUILD_LOG,guildLog);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_GUILD_LOG_FAIL,guildLOgFail);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_GUILD_LOG,guildLog);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_GUILD_LOG_FAIL,guildLOgFail);
 			
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_GUILD_BASIC,guildBasic);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_GUILD_BASIC_FAIL,guildBasicFail);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_GUILD_BASIC,guildBasic);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_GUILD_BASIC_FAIL,guildBasicFail);
 			
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_DONATE,donate);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_DONATE_FAIL,donateFail);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_DONATE_BROADCAST,donateBroadcast);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_DONATE,donate);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_DONATE_FAIL,donateFail);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_DONATE_BROADCAST,donateBroadcast);
 			
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_GUILD_FAMILY_MEMBERS,guildFamilyMembers);
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_GUILD_FAMILY_MEMBERS_FAIL,guildFamilyMembersFail);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_GUILD_FAMILY_MEMBERS,guildFamilyMembers);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_GUILD_FAMILY_MEMBERS_FAIL,guildFamilyMembersFail);
 			
-			SocketConnection.addCmdListener(GuildModuleMessages.S2C_KICK_GUILD_MEMBER,kickGuildMember);
+			SocketConnection_protoBuffer.addCmdListener(GuildModuleMessages.S2C_KICK_GUILD_MEMBER,kickGuildMember);
 			finish();
 		}
 		
@@ -586,7 +586,7 @@ package com.rpgGame.app.cmdlistener
 		
 		private function replyJOinReqSuccess(buffer:ByteBuffer):void
 		{
-			ReqLockUtil.unlockReq(GuildModuleMessages.C2S_REPLY_JOIN_REQUEST);
+//			ReqLockUtil.unlockReq(GuildModuleMessages.C2S_REPLY_JOIN_REQUEST);
 		}
 		/**
 		 * 返回本国帮派列表
@@ -652,7 +652,7 @@ package com.rpgGame.app.cmdlistener
 		{
 			var error : int = buffer.readVarint32();
 			NoticeManager.showNotify("replyJoinReqFail"+error);
-			ReqLockUtil.unlockReq(GuildModuleMessages.C2S_REPLY_JOIN_REQUEST);
+//			ReqLockUtil.unlockReq(GuildModuleMessages.C2S_REPLY_JOIN_REQUEST);
 		}
 		
 		private function otherJoinGuild(buffer:ByteBuffer):void
@@ -692,7 +692,7 @@ package com.rpgGame.app.cmdlistener
 		{
 			var error : int = buffer.readVarint32();
 			NoticeManager.showNotify("reqJoinFail"+error);
-			ReqLockUtil.unlockReq(GuildModuleMessages.C2S_REQUEST_JOIN);
+//			ReqLockUtil.unlockReq(GuildModuleMessages.C2S_REQUEST_JOIN);
 		}
 		/**
 		 * 请求失败,返回varint32错误码

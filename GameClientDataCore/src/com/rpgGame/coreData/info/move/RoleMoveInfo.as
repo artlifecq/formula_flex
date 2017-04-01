@@ -1,8 +1,9 @@
 package com.rpgGame.coreData.info.move
 {
+	import com.rpgGame.netData.map.message.SCSceneObjMoveMessage;
+	import com.rpgGame.netData.structs.Position;
+	
 	import flash.geom.Point;
-
-	import org.game.netCore.net.ByteBuffer;
 
 	/**
 	 *
@@ -15,25 +16,24 @@ package com.rpgGame.coreData.info.move
 	{
 		public var roleID : Number;
 		public var speed : int;
-		public var startTm : Number = 0;
+		public var startTm : Number;
 		public var pathList : Vector.<Point>;
 
 		public function RoleMoveInfo()
 		{
 		}
 
-		public function readFrom(buffer : ByteBuffer) : void
+		public function setValue(msg : SCSceneObjMoveMessage) : void
 		{
-			roleID = buffer.readVarint64();
-			speed = buffer.readVarint64();
-			startTm = buffer.readLong();
-			var pathLen : int = buffer.readVarint32();
+			roleID = msg.objId.ToGID();
+			speed = msg.speed;
+			startTm = msg.startTime.fValue;
+			var pathLen : int = msg.positions.length;
 			pathList = new Vector.<Point>;
 			for (var i : uint = 0; i < pathLen; i++)
 			{
-				var tileX : uint = buffer.readVarint32();
-				var tileY : uint = buffer.readVarint32();
-				var curtPos : Point = new Point(tileX, tileY);
+				var pos:Position = msg.positions[i];
+				var curtPos : Point = new Point(pos.x, pos.y);
 				pathList.push(curtPos);
 			}
 		}

@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const POINT:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.SelfCountryWarInfoProto.point", "point", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const POINT:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.SelfCountryWarInfoProto.point", "point", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var point$field:Int64;
 
@@ -37,7 +37,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_KILL_HERO_TIMES:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.SelfCountryWarInfoProto.total_kill_hero_times", "totalKillHeroTimes", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOTAL_KILL_HERO_TIMES:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.SelfCountryWarInfoProto.total_kill_hero_times", "totalKillHeroTimes", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var total_kill_hero_times$field:Int64;
 
@@ -60,7 +60,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_BEEN_KILLED_TIMES:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.SelfCountryWarInfoProto.total_been_killed_times", "totalBeenKilledTimes", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOTAL_BEEN_KILLED_TIMES:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.SelfCountryWarInfoProto.total_been_killed_times", "totalBeenKilledTimes", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var total_been_killed_times$field:Int64;
 
@@ -83,7 +83,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TOTAL_ORIGIN_RELIVE_TIMES:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.SelfCountryWarInfoProto.total_origin_relive_times", "totalOriginReliveTimes", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TOTAL_ORIGIN_RELIVE_TIMES:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.SelfCountryWarInfoProto.total_origin_relive_times", "totalOriginReliveTimes", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var total_origin_relive_times$field:Int64;
 
@@ -106,7 +106,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const OLD_MAX_POINT:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.SelfCountryWarInfoProto.old_max_point", "oldMaxPoint", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const OLD_MAX_POINT:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.SelfCountryWarInfoProto.old_max_point", "oldMaxPoint", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var old_max_point$field:Int64;
 
@@ -132,23 +132,23 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasPoint) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, point$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, point$field);
 			}
 			if (hasTotalKillHeroTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, total_kill_hero_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, total_kill_hero_times$field);
 			}
 			if (hasTotalBeenKilledTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, total_been_killed_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, total_been_killed_times$field);
 			}
 			if (hasTotalOriginReliveTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, total_origin_relive_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, total_origin_relive_times$field);
 			}
 			if (hasOldMaxPoint) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, old_max_point$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, old_max_point$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -165,42 +165,42 @@ package app.message {
 			var total_origin_relive_times$count:uint = 0;
 			var old_max_point$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (point$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SelfCountryWarInfoProto.point cannot be set twice.');
 					}
 					++point$count;
-					this.point = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.point = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (total_kill_hero_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SelfCountryWarInfoProto.totalKillHeroTimes cannot be set twice.');
 					}
 					++total_kill_hero_times$count;
-					this.totalKillHeroTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.totalKillHeroTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 3:
 					if (total_been_killed_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SelfCountryWarInfoProto.totalBeenKilledTimes cannot be set twice.');
 					}
 					++total_been_killed_times$count;
-					this.totalBeenKilledTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.totalBeenKilledTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 4:
 					if (total_origin_relive_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SelfCountryWarInfoProto.totalOriginReliveTimes cannot be set twice.');
 					}
 					++total_origin_relive_times$count;
-					this.totalOriginReliveTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.totalOriginReliveTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 5:
 					if (old_max_point$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SelfCountryWarInfoProto.oldMaxPoint cannot be set twice.');
 					}
 					++old_max_point$count;
-					this.oldMaxPoint = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.oldMaxPoint = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

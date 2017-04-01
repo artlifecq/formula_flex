@@ -412,6 +412,18 @@ package com.rpgGame.coreData.cfg
 		{
 			return "org.mokylin.skin.component.button."+name;
 		}
+		
+		/**
+		 *获取面板icon 
+		 * @param name
+		 * @return 
+		 * 
+		 */
+		public static function getPanelIcon(name:String):String
+		{
+			var url : String = "icon/panel/" + name + eName_PNG;
+			return baseDir + resURL + url;
+		}
 
 		/**
 		 * 得到技能图标
@@ -423,6 +435,19 @@ package com.rpgGame.coreData.cfg
 		public static function getSkillIcon(id : String, size : int = 40) : String
 		{
 			var url : String = "icon/skill/" + size + "/" + id + eName_PNG;
+			return baseDir + resURL + url;
+		}
+		
+		/**
+		 *升阶技能图标 
+		 * @param id
+		 * @param size
+		 * @return 
+		 * 
+		 */
+		public static function getRiseSkillIcon(id : String, size : int = 40) : String
+		{
+			var url : String = "icon/skill/rise/" + size + "/" + id + eName_PNG;
 			return baseDir + resURL + url;
 		}
 
@@ -715,6 +740,12 @@ package com.rpgGame.coreData.cfg
 		public static function getMountIconByMountSpeciesId( speciesId:int ):String
 		{
 			var url:String = "icon/mount/icon/" + speciesId + eName_PNG;
+			return baseDir + resURL + url;
+		}
+		
+		public static function getDynAlphaTexture(name:String):String
+		{
+			var url : String = "icon/common/" + name + eName_PNG;
 			return baseDir + resURL + url;
 		}
 		

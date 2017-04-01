@@ -17,7 +17,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EVALUATE_CALC_DATAS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentGeneralDatasProto.evaluate_calc_datas", "evaluateCalcDatas", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentGeneralEvaluateCalcDatasProto; });
+		public static const EVALUATE_CALC_DATAS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentGeneralDatasProto.evaluate_calc_datas", "evaluateCalcDatas", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentGeneralEvaluateCalcDatasProto; });
 
 		private var evaluate_calc_datas$field:app.message.EquipmentGeneralEvaluateCalcDatasProto;
 
@@ -40,7 +40,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TAOZ_DATAS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentGeneralDatasProto.taoz_datas", "taozDatas", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentGeneralTaozDatasProto; });
+		public static const TAOZ_DATAS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentGeneralDatasProto.taoz_datas", "taozDatas", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentGeneralTaozDatasProto; });
 
 		private var taoz_datas$field:app.message.EquipmentGeneralTaozDatasProto;
 
@@ -63,7 +63,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CHANGE_DATAS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentGeneralDatasProto.change_datas", "changeDatas", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentGeneralChangeDatasProto; });
+		public static const CHANGE_DATAS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentGeneralDatasProto.change_datas", "changeDatas", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentGeneralChangeDatasProto; });
 
 		private var change_datas$field:app.message.EquipmentGeneralChangeDatasProto;
 
@@ -89,15 +89,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasEvaluateCalcDatas) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, evaluate_calc_datas$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, evaluate_calc_datas$field);
 			}
 			if (hasTaozDatas) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, taoz_datas$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, taoz_datas$field);
 			}
 			if (hasChangeDatas) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, change_datas$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, change_datas$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -112,7 +112,7 @@ package app.message {
 			var taoz_datas$count:uint = 0;
 			var change_datas$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (evaluate_calc_datas$count != 0) {
@@ -120,7 +120,7 @@ package app.message {
 					}
 					++evaluate_calc_datas$count;
 					this.evaluateCalcDatas = new app.message.EquipmentGeneralEvaluateCalcDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.evaluateCalcDatas);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.evaluateCalcDatas);
 					break;
 				case 2:
 					if (taoz_datas$count != 0) {
@@ -128,7 +128,7 @@ package app.message {
 					}
 					++taoz_datas$count;
 					this.taozDatas = new app.message.EquipmentGeneralTaozDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.taozDatas);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.taozDatas);
 					break;
 				case 3:
 					if (change_datas$count != 0) {
@@ -136,7 +136,7 @@ package app.message {
 					}
 					++change_datas$count;
 					this.changeDatas = new app.message.EquipmentGeneralChangeDatasProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.changeDatas);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.changeDatas);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ADD_DEGREE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.FlowersGoodDataProto.add_degree", "addDegree", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ADD_DEGREE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.FlowersGoodDataProto.add_degree", "addDegree", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var add_degree$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GOODS_UPGRADE_DATA:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.FlowersGoodDataProto.goods_upgrade_data", "goodsUpgradeData", (9 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.UpgradeProto; });
+		public static const GOODS_UPGRADE_DATA:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.FlowersGoodDataProto.goods_upgrade_data", "goodsUpgradeData", (9 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.UpgradeProto; });
 
 		private var goods_upgrade_data$field:app.message.UpgradeProto;
 
@@ -68,11 +68,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasAddDegree) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, add_degree$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, add_degree$field);
 			}
 			if (hasGoodsUpgradeData) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, goods_upgrade_data$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, goods_upgrade_data$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -86,14 +86,14 @@ package app.message {
 			var add_degree$count:uint = 0;
 			var goods_upgrade_data$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (add_degree$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FlowersGoodDataProto.addDegree cannot be set twice.');
 					}
 					++add_degree$count;
-					this.addDegree = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.addDegree = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 9:
 					if (goods_upgrade_data$count != 0) {
@@ -101,7 +101,7 @@ package app.message {
 					}
 					++goods_upgrade_data$count;
 					this.goodsUpgradeData = new app.message.UpgradeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.goodsUpgradeData);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.goodsUpgradeData);
 					break;
 				default:
 					super.readUnknown(input, tag);

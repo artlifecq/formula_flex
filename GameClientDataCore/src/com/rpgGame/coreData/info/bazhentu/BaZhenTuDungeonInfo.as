@@ -4,7 +4,7 @@ package com.rpgGame.coreData.info.bazhentu
 	
 	import app.message.MonsterDataProto.MonsterType;
 	
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	public class BaZhenTuDungeonInfo
 	{

@@ -4,17 +4,18 @@ package com.game.engine3D.scene.render
 	import com.game.engine3D.utils.CallBackUtil;
 	import com.game.engine3D.vo.CallBackData;
 	import com.game.mainCore.libCore.share.CountShareData;
-
+	
 	import flash.utils.Dictionary;
-
+	
 	import away3d.audio.SoundBox;
+	import away3d.cameras.Camera3D;
 	import away3d.containers.ObjectContainer3D;
 	import away3d.events.Event;
 	import away3d.events.LoaderEvent;
 	import away3d.events.ParserEvent;
 	import away3d.lights.LightBase;
 	import away3d.materials.methods.EffectMethodBase;
-
+	
 	import org.client.mainCore.ds.HashMap;
 
 	/**
@@ -27,13 +28,18 @@ package com.game.engine3D.scene.render
 	public class RenderUnitLoader extends CountShareData
 	{
 		private var _fullSourchPath : String;
+		
 		private var _isLoaded : Boolean;
 		private var _isLoading : Boolean;
+		
 		private var _isAsyncLoaded : Boolean;
+		
 		private var _isUnloaded : Boolean;
+		
 		private var _resCompleteCallBackList : Vector.<CallBackData>;
 		private var _asyncResCompleteCallBackList : Vector.<CallBackData>;
 		private var _resErrorCallBackList : Vector.<CallBackData>;
+		
 		private var _loader : Resource3DLoader;
 
 		public function RenderUnitLoader()
@@ -179,20 +185,6 @@ package com.game.engine3D.scene.render
 			return null;
 		}
 
-		public function get layerTypeByName() : Dictionary
-		{
-			if (_loader)
-				return _loader.layerTypeByName;
-			return null;
-		}
-
-		public function get visibleByName() : Dictionary
-		{
-			if (_loader)
-				return _loader.visibleByName;
-			return null;
-		}
-
 		public function get lightPickerMap() : HashMap
 		{
 			if (_loader)
@@ -211,6 +203,13 @@ package com.game.engine3D.scene.render
 		{
 			if (_loader)
 				return _loader.soundBox;
+			return null;
+		}
+		
+		public function get camera() : Camera3D
+		{
+			if (_loader)
+				return _loader.camera;
 			return null;
 		}
 

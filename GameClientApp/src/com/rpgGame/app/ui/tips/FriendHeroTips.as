@@ -9,8 +9,6 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.type.AssetUrl;
 	import com.rpgGame.coreData.utils.FilterUtil;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
-	
-	import org.mokylin.skin.app.tips.FriendHeroTipsSkin;
 
 
 	/**
@@ -22,11 +20,11 @@ package com.rpgGame.app.ui.tips
 	 */
 	public class FriendHeroTips extends SkinUI implements ITip
 	{
-		private var _tipsSkin : FriendHeroTipsSkin;
+		private var _tipsSkin : Object;//FriendHeroTipsSkin;
 
 		public function FriendHeroTips()
 		{
-			_tipsSkin = new FriendHeroTipsSkin();
+//			_tipsSkin = new FriendHeroTipsSkin();
 			super(_tipsSkin);
 		}
 

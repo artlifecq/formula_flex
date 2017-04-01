@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RELIVE_CD:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.KingWarDungeonProto.relive_cd", "reliveCd", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const RELIVE_CD:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.KingWarDungeonProto.relive_cd", "reliveCd", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var relive_cd$field:Int64;
 
@@ -38,7 +38,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ATTACKER_BORN:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.KingWarDungeonProto.attacker_born", "attackerBorn", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SquareAreaProto; });
+		public static const ATTACKER_BORN:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.KingWarDungeonProto.attacker_born", "attackerBorn", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SquareAreaProto; });
 
 		private var attacker_born$field:app.message.SquareAreaProto;
 
@@ -61,7 +61,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEFENER_BORN:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.KingWarDungeonProto.defener_born", "defenerBorn", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SquareAreaProto; });
+		public static const DEFENER_BORN:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.KingWarDungeonProto.defener_born", "defenerBorn", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SquareAreaProto; });
 
 		private var defener_born$field:app.message.SquareAreaProto;
 
@@ -87,15 +87,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasReliveCd) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, relive_cd$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, relive_cd$field);
 			}
 			if (hasAttackerBorn) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, attacker_born$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, attacker_born$field);
 			}
 			if (hasDefenerBorn) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, defener_born$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, defener_born$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -110,14 +110,14 @@ package app.message {
 			var attacker_born$count:uint = 0;
 			var defener_born$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (relive_cd$count != 0) {
 						throw new flash.errors.IOError('Bad data format: KingWarDungeonProto.reliveCd cannot be set twice.');
 					}
 					++relive_cd$count;
-					this.reliveCd = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.reliveCd = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (attacker_born$count != 0) {
@@ -125,7 +125,7 @@ package app.message {
 					}
 					++attacker_born$count;
 					this.attackerBorn = new app.message.SquareAreaProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.attackerBorn);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.attackerBorn);
 					break;
 				case 3:
 					if (defener_born$count != 0) {
@@ -133,7 +133,7 @@ package app.message {
 					}
 					++defener_born$count;
 					this.defenerBorn = new app.message.SquareAreaProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.defenerBorn);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.defenerBorn);
 					break;
 				default:
 					super.readUnknown(input, tag);

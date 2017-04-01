@@ -1,6 +1,8 @@
 package com.game.engine3D.vo
 {
+	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.core.interfaces.IDisplayObject3D;
+	import com.game.engine3D.core.poolObject.IInstancePoolClass;
 	import com.game.engine3D.core.poolObject.PoolContainer3D;
 	import com.game.engine3D.core.poolObject.PoolEntityContainer3D;
 	import com.game.engine3D.scene.render.vo.BaseEntity;
@@ -10,8 +12,8 @@ package com.game.engine3D.vo
 	import com.game.engine3D.utils.CallBackUtil;
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.utils.Matrix3DUtil;
-	import com.game.mainCore.libCore.pool.IPoolClass;
 	
+	import flash.display.BlendMode;
 	import flash.geom.Matrix3D;
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
@@ -19,16 +21,13 @@ package com.game.engine3D.vo
 	import flash.utils.getTimer;
 	
 	import away3d.containers.ObjectContainer3D;
-	import away3d.containers.View3D;
 	import away3d.core.math.MathConsts;
 	import away3d.core.math.Matrix3DUtils;
-	import away3d.events.Object3DEvent;
-
+	import away3d.tick.Tick;
+	
 	import gs.TweenLite;
 	import gs.easing.Linear;
 	
-	import org.client.mainCore.utils.Tick;
-
 	/**
 	 *
 	 * 基本3D元素模型（实现了池接口）
@@ -36,7 +35,7 @@ package com.game.engine3D.vo
 	 * 创建时间：2015-6-4 上午10:26:37
 	 *
 	 */
-	public class BaseObj3D implements IPoolClass, IDisplayObject3D, IFrameRender,ISceneCameraTarget
+	public class BaseObj3D implements IInstancePoolClass, IDisplayObject3D, IFrameRender,ISceneCameraTarget
 	{
 		//唯一ID(注意用Number而不要用int)--------------------------------------------------------------------
 		/**
@@ -51,7 +50,7 @@ package com.game.engine3D.vo
 		 */
 		private var _uniqueID : Number = 0;
 		protected var _graphicDis : ObjectContainer3D;
-		protected var _view : View3D;
+		protected var _staticGraphicDis : ObjectContainer3D;
 		protected var _parent : ObjectContainer3D;
 		protected var _visible : Boolean;
 		protected var _disposing : Boolean;
@@ -105,7 +104,6 @@ package com.game.engine3D.vo
 		 */
 		protected var _isRendering : Boolean;
 		protected var _needRun : Boolean;
-		private var _lastTime : uint = 0;
 		/**
 		 * 是否需要判断可视距离
 		 * @param value
@@ -118,7 +116,6 @@ package com.game.engine3D.vo
 		 * 是否可被渲染限制
 		 */
 		protected var _renderLimitable : Boolean;
-		protected var _billboardMode : Boolean;
 		/**
 		 * 互动时间
 		 */
@@ -126,6 +123,8 @@ package com.game.engine3D.vo
 		private var _inViewDistanceChangedCallbackVec : Vector.<CallBackData>;
 		private var _disposeCallbackVec : Vector.<CallBackData>;
 		private var _renderAnimator : IRenderAnimator;
+		
+		public var isHiding:Boolean = false;
 
 		public function BaseObj3D(parameters : Array = null)
 		{
@@ -212,6 +211,18 @@ package com.game.engine3D.vo
 			_alpha = value;
 		}
 		
+		//这里的设置其实只是一个借口的问题，并没有什么实际用途
+		protected var _blendMode:String = BlendMode.NORMAL;
+		
+		public function get blendMode():String
+		{
+			return _blendMode;
+		}
+		public function set blendMode(value:String):void
+		{
+			_blendMode = value;
+		}
+		
 		/**显示位置X*/
 		public function get x() : Number
 		{
@@ -244,6 +255,10 @@ package com.game.engine3D.vo
 					_showPosition.y = _position.y + _offset.y;
 					_graphicDis.x = _showPosition.x;
 					_graphicDis.y = _showPosition.y;
+					if (_staticGraphicDis) {
+						_staticGraphicDis.x = _showPosition.x;
+						_staticGraphicDis.y = _showPosition.y;
+					}
 					calculateVolumeBounds();
 					syncInfo(initiator);
 				}
@@ -281,6 +296,9 @@ package com.game.engine3D.vo
 						_position.y = value;
 						_showPosition.y = _position.y + _offset.y;
 						_graphicDis.y = _showPosition.y;
+						if (_staticGraphicDis) {
+							_staticGraphicDis.y = _showPosition.y;
+						}
 						syncInfo(initiator);
 					}
 				}
@@ -318,6 +336,10 @@ package com.game.engine3D.vo
 					_showPosition.z = _position.z + _offset.z;
 					_graphicDis.y = _showPosition.y;
 					_graphicDis.z = _showPosition.z;
+					if (_staticGraphicDis) {
+						_staticGraphicDis.y = _showPosition.y;
+						_staticGraphicDis.z = _showPosition.z;
+					}
 					calculateVolumeBounds();
 					syncInfo(initiator);
 				}
@@ -368,6 +390,9 @@ package com.game.engine3D.vo
 				{
 					_scale.x = value;
 					_graphicDis.scaleX = _scale.x;
+//					if (_staticGraphicDis) {
+//						_staticGraphicDis.scaleX = _scale.x;
+//					}
 				}
 			}
 		}
@@ -385,6 +410,9 @@ package com.game.engine3D.vo
 				{
 					_scale.y = value;
 					_graphicDis.scaleY = _scale.y;
+//					if (_staticGraphicDis) {
+//						_staticGraphicDis.scaleY = _scale.y;
+//					}
 				}
 			}
 		}
@@ -402,6 +430,9 @@ package com.game.engine3D.vo
 				{
 					_scale.z = value;
 					_graphicDis.scaleZ = _scale.z;
+//					if (_staticGraphicDis) {
+//						_staticGraphicDis.scaleZ = _scale.z;
+//					}
 				}
 			}
 		}
@@ -540,6 +571,9 @@ package com.game.engine3D.vo
 					_offset.x = value;
 					_showPosition.x = _position.x + _offset.x;
 					_graphicDis.x = _showPosition.x;
+					if (_staticGraphicDis) {
+						_staticGraphicDis.x = _showPosition.x;
+					}
 					syncInfo(this);
 				}
 			}
@@ -560,6 +594,9 @@ package com.game.engine3D.vo
 					_offset.y = value;
 					_showPosition.y = _position.y + _offset.y;
 					_graphicDis.y = _showPosition.y;
+					if (_staticGraphicDis) {
+						_staticGraphicDis.y = _showPosition.y;
+					}
 					syncInfo(this);
 				}
 			}
@@ -580,6 +617,9 @@ package com.game.engine3D.vo
 					_offset.z = value;
 					_showPosition.z = _position.z + _offset.z;
 					_graphicDis.z = _showPosition.z;
+					if (_staticGraphicDis) {
+						_staticGraphicDis.z = _showPosition.z;
+					}
 					syncInfo(this);
 				}
 			}
@@ -597,17 +637,8 @@ package com.game.engine3D.vo
 			if (_parent == value)
 				return;
 			_parent = value;
-			if (_graphicDis)
-			{
-				if (_visible && _isInViewDistance)
-				{
-					addToGraphic();
-				}
-				else
-				{
-					removeFromGraphic();
-				}
-			}
+			
+			validateGraphic();
 		}
 
 		public function get graphicDis() : ObjectContainer3D
@@ -621,15 +652,21 @@ package com.game.engine3D.vo
 				return;
 			removeFromGraphic();
 			_graphicDis = value;
-			if (_parent && _graphicDis)
+			validateGraphic();
+		}
+		
+		private function validateGraphic() : void
+		{
+			if (_isRendering && _parent && _graphicDis && _visible && _isInViewDistance)
 			{
-				if (_visible && _isInViewDistance)
-				{
-					addToGraphic();
-				}
+				addToGraphic();
+			}
+			else
+			{
+				removeFromGraphic();
 			}
 		}
-
+		
 		/**
 		 * 获取体积法线。@L.L.M.Sunny
 		 * @param minX
@@ -645,7 +682,7 @@ package com.game.engine3D.vo
 			if (_graphicRotation && _clingGroundCalculate != null)
 			{
 				normal = new Vector3D();
-				var radianY : Number = _graphicRotation.y * 0.0175;
+				var radianY : Number = _graphicRotation.y * MathConsts.DEGREES_TO_RADIANS;
 				//求旋转后面区域
 				var dist : Number = MathUtil.getDistance(0, 0, minX, minZ);
 				var radian : Number = Math.atan2(minZ, minX);
@@ -654,6 +691,7 @@ package com.game.engine3D.vo
 				var px1 : Number = _showPosition.x + dist * dx;
 				var pz1 : Number = _showPosition.z + dist * dy;
 				var py1 : Number = _clingGroundCalculate(px1, pz1);
+				//
 				dist = MathUtil.getDistance(0, 0, maxX, minZ);
 				radian = Math.atan2(minZ, maxX);
 				dx = Math.cos(radianY + radian);
@@ -661,6 +699,7 @@ package com.game.engine3D.vo
 				var px2 : Number = _showPosition.x + dist * dx;
 				var pz2 : Number = _showPosition.z + dist * dy;
 				var py2 : Number = _clingGroundCalculate(px2, pz2);
+				//
 				dist = MathUtil.getDistance(0, 0, maxX, maxZ);
 				radian = Math.atan2(maxZ, maxX);
 				dx = Math.cos(radianY + radian);
@@ -679,9 +718,9 @@ package com.game.engine3D.vo
 				var vz : Number = c / e;
 				//trace(vx.toFixed(1), vy.toFixed(1), vz.toFixed(1));
 
-				var normalX : Number = Math.acos(vz) * 57.33 - 90;
+				var normalX : Number = Math.acos(vz) * MathConsts.RADIANS_TO_DEGREES - 90;
 				//var normalY : Number = Math.asin(vy) * 57.33;
-				var normalZ : Number = Math.acos(vx) * 57.33;
+				var normalZ : Number = Math.acos(vx) * MathConsts.RADIANS_TO_DEGREES;
 				//trace("normal:", normalX.toFixed(1) /*, normalY.toFixed(1)*/, normalZ.toFixed(1));
 				normal.setTo(normalX, 0, normalZ);
 			}
@@ -753,8 +792,8 @@ package com.game.engine3D.vo
 				Matrix3DUtil.rotateY(volumeMatrix, _graphicRotation.y - 90, false);
 
 				var rotations : Vector.<Vector3D> = Matrix3DUtils.decompose(volumeMatrix);
-				var tiltAngle : Number = rotations[1].z * 57.33 - 90;
-				var rollAngle : Number = -rotations[1].y * 57.33;
+				var tiltAngle : Number = rotations[1].z * MathConsts.RADIANS_TO_DEGREES - 90;
+				var rollAngle : Number = -rotations[1].y * MathConsts.RADIANS_TO_DEGREES;
 				//trace("rotation:", (rotations[1].x * 57.33).toFixed(1), (rotations[1].y * 57.33).toFixed(1), (rotations[1].z * 57.33).toFixed(1));
 				//trace(tiltAngle, rollAngle);
 
@@ -776,11 +815,19 @@ package com.game.engine3D.vo
 		 */
 		public function setGroundXY(x : Number, y : Number) : void
 		{
-			this.x = x;
-			this.z = y;
+			if(GlobalConfig.use2DMap)//暂时先这么写，因为现在还没有完整的时间去调整坐标系，怕有问题，所以暂时照原样搞，等以后有充足的时间，再来进行重构
+			{
+				this.x = x;
+				this.z = y;
+			}
+			else
+			{
+				this.x = x;
+				this.z = y;
+			}
 		}
 
-		public function faceToGround(x : Number, y : Number, angularVelocity : Number = 0.002, minTweenDuration : Number = 0.1, maxTweenDuration : Number = 0.2) : void
+		public function faceToGround(x : Number, y : Number, angularVelocity : Number = 0.001, minTweenDuration : Number = 0.05, maxTweenDuration : Number = 0.1) : void
 		{
 			if (_graphicDis)
 			{
@@ -820,7 +867,7 @@ package com.game.engine3D.vo
 			}
 		}
 
-		public function turnRoundTo(angle : Number, angularVelocity : Number = 0.002, minTweenDuration : Number = 0.1, maxTweenDuration : Number = 0.2) : void
+		public function turnRoundTo(angle : Number, angularVelocity : Number = 0.001, minTweenDuration : Number = 0.05, maxTweenDuration : Number = 0.1) : void
 		{
 			if (_graphicDis)
 			{
@@ -853,7 +900,7 @@ package com.game.engine3D.vo
 			}
 		}
 
-		public function tiltTo(angle : Number, angularVelocity : Number = 0.002, minTweenDuration : Number = 0.1, maxTweenDuration : Number = 0.2) : void
+		public function tiltTo(angle : Number, angularVelocity : Number = 0.001, minTweenDuration : Number = 0.05, maxTweenDuration : Number = 0.1) : void
 		{
 			if (_graphicDis)
 			{
@@ -886,7 +933,7 @@ package com.game.engine3D.vo
 			}
 		}
 
-		private function onUpdateGraphicRotation() : void
+		protected function onUpdateGraphicRotation() : void
 		{
 			if (_graphicDis)
 			{
@@ -905,18 +952,20 @@ package com.game.engine3D.vo
 			if (_isRendering)
 				return;
 			_isRendering = true;
+			validateGraphic();
 			if (_needRun)
 			{
-				_lastTime = getTimer();
-				Tick.addCallback(onTick);
+				Tick.instance.addCallBack(onTick);
 			}
 		}
-
+		
 		public function stopRender() : void
 		{
+			if (!_isRendering)
+				return;
 			_isRendering = false;
-			_lastTime = 0;
-			Tick.removeCallback(onTick);
+			validateGraphic();
+			Tick.instance.removeCallBack(onTick);
 			TweenLite.killTweensOf(_graphicRotation);
 			TweenLite.killTweensOf(_graphicDis);
 			TweenLite.killTweensOf(this);
@@ -940,8 +989,7 @@ package com.game.engine3D.vo
 		{
 			if (!_isRendering)
 				return;
-			gapTm = getTimer() - _lastTime;
-			_lastTime = getTimer();
+		
 			run(gapTm);
 		}
 
@@ -950,7 +998,7 @@ package com.game.engine3D.vo
 		{
 			if (_renderAnimator)
 			{
-				_renderAnimator.update();
+				_renderAnimator.update(gapTm);
 			}
 		}
 
@@ -964,7 +1012,7 @@ package com.game.engine3D.vo
 		 * @param initiator 发起对象
 		 *
 		 */
-		private function syncInfo(initiator : BaseObj3D) : void
+		protected function syncInfo(initiator : BaseObj3D) : void
 		{
 			if (!_syncInfos)
 			{
@@ -974,7 +1022,7 @@ package com.game.engine3D.vo
 			{
 				if (info.obj != initiator) //阻止互相同步时循环执行。
 				{
-					info.syncPos(_position, _rotation, this);
+					info.syncInfo(_position, _rotation, this);
 				}
 			}
 		}
@@ -1093,6 +1141,16 @@ package com.game.engine3D.vo
 		{
 			return _mouseEnable;
 		}
+		
+		public function set mouseEnabled(value : Boolean) : void
+		{
+			_mouseEnable = value;
+		}
+		
+		public function get mouseEnabled() : Boolean
+		{
+			return _mouseEnable;
+		}
 
 		public function set needInViewDist(value : Boolean) : void
 		{
@@ -1127,6 +1185,11 @@ package com.game.engine3D.vo
 		{
 			_interactTime = getTimer();
 		}
+		
+		public function get isClingGround() : Boolean
+		{
+			return _clingGroundCalculate != null;
+		}
 
 		public function set clingGroundCalculate(value : Function) : void
 		{
@@ -1142,6 +1205,9 @@ package com.game.engine3D.vo
 				}
 				_showPosition.y = _position.y + _offset.y;
 				_graphicDis.y = _showPosition.y;
+				if (_staticGraphicDis) {
+					//_staticGraphicDis.y = _showPosition.y;
+				}
 
 				if (_clingGroundCalculate != null && _volumeBounds)
 				{
@@ -1182,23 +1248,15 @@ package com.game.engine3D.vo
 				_renderAnimator.dispose();
 				_renderAnimator = null;
 			}
-			if (_view)
-			{
-				_view.camera.removeEventListener(Object3DEvent.SCENETRANSFORM_CHANGED, onCameraSceneTransformChanged);
-				_view = null;
-			}
-			Tick.removeCallback(onTick);
+			Tick.instance.removeCallBack(onTick);
 			id = NaN;
 			type = null;
 			name = null;
 			_isRendering = false;
-			_lastTime = 0;
 			_parent = null;
 			if (_graphicDis)
 			{
 				TweenLite.killTweensOf(_graphicDis);
-				_graphicDis.removeEventListener(Object3DEvent.SCENE_CHANGED, onSceneChanged);
-				_graphicDis.removeEventListener(Object3DEvent.SCENETRANSFORM_CHANGED, onSceneTransformChanged);
 				if (_graphicDis.parent)
 					_graphicDis.parent.removeChild(_graphicDis);
 				if (_graphicDis is PoolContainer3D)
@@ -1207,6 +1265,17 @@ package com.game.engine3D.vo
 					PoolEntityContainer3D.recycle(_graphicDis as PoolEntityContainer3D);
 				_graphicDis = null;
 			}
+			//if (_staticGraphicDis) {
+			//	if (_staticGraphicDis.parent) {
+			//		_staticGraphicDis.parent.removeChild(_staticGraphicDis);
+			//	}
+			//	if (_staticGraphicDis is PoolContainer3D) {
+			//		PoolContainer3D.recycle(_staticGraphicDis as PoolContainer3D);
+			//	} else if (_staticGraphicDis is PoolEntityContainer3D) {
+			//		PoolEntityContainer3D.recycle(_staticGraphicDis as PoolEntityContainer3D);
+			//	}
+			//}
+			_staticGraphicDis = null;
 			_data = null;
 			_sceneName = null;
 			_visible = false;
@@ -1220,7 +1289,6 @@ package com.game.engine3D.vo
 			_attachDisplayVisible = null;
 			_needInViewDist = false;
 			_renderLimitable = false;
-			_billboardMode = false;
 			_mouseEnable = false;
 			_interactTime = 0;
 			_clingGroundCalculate = null;
@@ -1260,6 +1328,16 @@ package com.game.engine3D.vo
 			_usable = false;
 			_disposing = false;
 		}
+		
+		public function instanceDestroy() : void
+		{
+			dispose();
+		}
+		
+		public function instanceDispose() : void
+		{
+			dispose();
+		}
 
 		public function reSet($parameters : Array) : void
 		{
@@ -1273,14 +1351,11 @@ package com.game.engine3D.vo
 			_usable = true;
 			_needInViewDist = false;
 			_renderLimitable = false;
-			_billboardMode = false;
-			_view = null;
 			_interactTime = 0;
 			_clingGroundCalculate = null;
 			canRemoved = true;
 			_needRun = false;
 			_isRendering = false;
-			_lastTime = 0;
 			_visible = true;
 			_mouseEnable = false;
 			_isInViewDistance = false;
@@ -1298,6 +1373,7 @@ package com.game.engine3D.vo
 			_volumeBounds = null;
 			_renderAnimator = null;
 			_alpha = 1.0;
+			_zOffset = 0;
 		}
 
 		public function get sceneName() : String
@@ -1353,13 +1429,11 @@ package com.game.engine3D.vo
 			{
 				if (_needRun)
 				{
-					_lastTime = getTimer();
-					Tick.addCallback(onTick);
+					Tick.instance.addCallBack(onTick);
 				}
 				else
 				{
-					_lastTime = 0;
-					Tick.removeCallback(onTick);
+					Tick.instance.removeCallBack(onTick);
 				}
 			}
 		}
@@ -1378,18 +1452,10 @@ package com.game.engine3D.vo
 		/**是否显示 */
 		public function set visible(value : Boolean) : void
 		{
+			if (_visible == value)
+				return;
 			_visible = value;
-			if (_parent && _graphicDis)
-			{
-				if (_visible && _isInViewDistance)
-				{
-					addToGraphic();
-				}
-				else
-				{
-					removeFromGraphic();
-				}
-			}
+			validateGraphic();
 		}
 
 		protected function addToGraphic() : void
@@ -1397,16 +1463,22 @@ package com.game.engine3D.vo
 			if (_parent && _graphicDis)
 			{
 				if (_graphicDis.parent != _parent)
+				{
 					_parent.addChild(_graphicDis);
+					syncInfo(this);
+				}
 			}
 		}
-
+		
 		protected function removeFromGraphic() : void
 		{
 			if (_graphicDis)
 			{
 				if (_graphicDis.parent)
+				{
 					_graphicDis.parent.removeChild(_graphicDis);
+					syncInfo(this);
+				}
 			}
 		}
 
@@ -1419,17 +1491,7 @@ package com.game.engine3D.vo
 			if (_isInViewDistance != value)
 			{
 				_isInViewDistance = value;
-				if (_parent && _graphicDis)
-				{
-					if (_visible && _isInViewDistance)
-					{
-						addToGraphic();
-					}
-					else
-					{
-						removeFromGraphic();
-					}
-				}
+				validateGraphic();
 				//当视野状态变化时回调
 				CallBackUtil.exceteCallBackData(this, _inViewDistanceChangedCallbackVec);
 			}
@@ -1520,99 +1582,6 @@ package com.game.engine3D.vo
 			return true;
 		}
 
-		/**
-		 * 摄像机变化
-		 * @param e
-		 */
-		private function onCameraSceneTransformChanged(e : Object3DEvent) : void
-		{
-			updateTranform();
-		}
-
-		/**
-		 * 更新坐标
-		 * @param e
-		 */
-		private function onSceneTransformChanged(e : Object3DEvent) : void
-		{
-			updateTranform();
-		}
-
-		/**
-		 * 更新变换
-		 */
-		private function updateTranform() : void
-		{
-			if (_billboardMode && _view && _graphicDis.parent)
-			{
-				var comps : Vector.<Vector3D> = _graphicDis.parent.sceneTransform.decompose();
-				var dx : Number = comps[1].x * MathConsts.RADIANS_TO_DEGREES;
-				var dy : Number = comps[1].y * MathConsts.RADIANS_TO_DEGREES;
-				//trace(dx, dy);
-				var cameraAngle : Number = MathUtil.getAngle(comps[0].x, comps[0].z, _view.camera.x, _view.camera.z);
-				//trace(cameraAngle);
-				if (dx > 0)
-				{
-					rotationY = dy - cameraAngle + 90;
-				}
-				else
-				{
-					rotationY = -dy - cameraAngle + 270;
-				}
-			}
-		}
-
-		private function set view(value : View3D) : void
-		{
-			if (_view)
-			{
-				_view.camera.removeEventListener(Object3DEvent.SCENETRANSFORM_CHANGED, onCameraSceneTransformChanged);
-			}
-			_view = value;
-			if (_view)
-			{
-				_view.camera.addEventListener(Object3DEvent.SCENETRANSFORM_CHANGED, onCameraSceneTransformChanged);
-				updateTranform();
-			}
-		}
-
-		private function onSceneChanged(e : Object3DEvent) : void
-		{
-			if (_graphicDis.scene)
-				view = _graphicDis.scene.view;
-			else
-				view = null;
-		}
-
-		public function get billboardMode() : Boolean
-		{
-			return _billboardMode;
-		}
-
-		public function set billboardMode(value : Boolean) : void
-		{
-			if (_billboardMode == value)
-			{
-				return;
-			}
-			if (_view)
-			{
-				_view.camera.removeEventListener(Object3DEvent.SCENETRANSFORM_CHANGED, onCameraSceneTransformChanged);
-				_view = null;
-			}
-			_billboardMode = value;
-			if (_billboardMode)
-			{
-				_graphicDis.addEventListener(Object3DEvent.SCENE_CHANGED, onSceneChanged);
-				_graphicDis.addEventListener(Object3DEvent.SCENETRANSFORM_CHANGED, onSceneTransformChanged);
-			}
-			else
-			{
-				_graphicDis.removeEventListener(Object3DEvent.SCENE_CHANGED, onSceneChanged);
-				_graphicDis.removeEventListener(Object3DEvent.SCENETRANSFORM_CHANGED, onSceneTransformChanged);
-			}
-		}
-
 		/**销毁显示对象 */
 		public function destroy() : void
 		{
@@ -1642,6 +1611,34 @@ package com.game.engine3D.vo
 		public function set pos(value:Point):void
 		{
 			_pos = value;
+		}
+		
+		protected var _zOffset : int;
+		
+		final public function get zOffset() : int
+		{
+			return _zOffset;
+		}
+		
+		public function set zOffset(value : int) : void
+		{
+			_zOffset = value;
+		}
+		
+		protected var _depth : int;
+		
+		final public function get depth() : int
+		{
+			return _depth;
+		}
+		
+		public function set depth(value : int) : void
+		{
+			_depth = value;
+		}
+		
+		public function set staticGraphicDis(value : ObjectContainer3D) : void {
+			this._staticGraphicDis = value;
 		}
 	}
 }

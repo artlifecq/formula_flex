@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SYSTEM_SHOP:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.ShopConfig.system_shop", "systemShop", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ShopProto; });
+		public static const SYSTEM_SHOP:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.ShopConfig.system_shop", "systemShop", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ShopProto; });
 
 		private var system_shop$field:app.message.ShopProto;
 
@@ -38,7 +38,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DEPOT_SHOP:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.ShopConfig.depot_shop", "depotShop", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ShopProto; });
+		public static const DEPOT_SHOP:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.ShopConfig.depot_shop", "depotShop", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ShopProto; });
 
 		private var depot_shop$field:app.message.ShopProto;
 
@@ -61,7 +61,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BUY_BACK_CAPACITY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ShopConfig.buy_back_capacity", "buyBackCapacity", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BUY_BACK_CAPACITY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ShopConfig.buy_back_capacity", "buyBackCapacity", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var buy_back_capacity$field:int;
 
@@ -88,7 +88,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const REPAIR_COST:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ShopConfig.repair_cost", "repairCost", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const REPAIR_COST:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ShopConfig.repair_cost", "repairCost", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var repair_cost$field:int;
 
@@ -116,19 +116,19 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasSystemShop) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, system_shop$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, system_shop$field);
 			}
 			if (hasDepotShop) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, depot_shop$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, depot_shop$field);
 			}
 			if (hasBuyBackCapacity) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, buy_back_capacity$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, buy_back_capacity$field);
 			}
 			if (hasRepairCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, repair_cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, repair_cost$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -144,7 +144,7 @@ package app.message {
 			var buy_back_capacity$count:uint = 0;
 			var repair_cost$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (system_shop$count != 0) {
@@ -152,7 +152,7 @@ package app.message {
 					}
 					++system_shop$count;
 					this.systemShop = new app.message.ShopProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.systemShop);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.systemShop);
 					break;
 				case 2:
 					if (depot_shop$count != 0) {
@@ -160,21 +160,21 @@ package app.message {
 					}
 					++depot_shop$count;
 					this.depotShop = new app.message.ShopProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.depotShop);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.depotShop);
 					break;
 				case 3:
 					if (buy_back_capacity$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ShopConfig.buyBackCapacity cannot be set twice.');
 					}
 					++buy_back_capacity$count;
-					this.buyBackCapacity = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.buyBackCapacity = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (repair_cost$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ShopConfig.repairCost cannot be set twice.');
 					}
 					++repair_cost$count;
-					this.repairCost = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.repairCost = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

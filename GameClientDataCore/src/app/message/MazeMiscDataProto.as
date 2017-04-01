@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TIME_DATA:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.MazeMiscDataProto.time_data", "timeData", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const TIME_DATA:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.MazeMiscDataProto.time_data", "timeData", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var time_data$field:String;
 
@@ -37,7 +37,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PREPARE_DURATION:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.MazeMiscDataProto.prepare_duration", "prepareDuration", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PREPARE_DURATION:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.MazeMiscDataProto.prepare_duration", "prepareDuration", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var prepare_duration$field:Int64;
 
@@ -60,7 +60,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DURATION:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.MazeMiscDataProto.duration", "duration", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DURATION:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.MazeMiscDataProto.duration", "duration", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var duration$field:Int64;
 
@@ -86,15 +86,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasTimeData) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, time_data$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, time_data$field);
 			}
 			if (hasPrepareDuration) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, prepare_duration$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, prepare_duration$field);
 			}
 			if (hasDuration) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, duration$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, duration$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -109,28 +109,28 @@ package app.message {
 			var prepare_duration$count:uint = 0;
 			var duration$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (time_data$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MazeMiscDataProto.timeData cannot be set twice.');
 					}
 					++time_data$count;
-					this.timeData = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.timeData = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 2:
 					if (prepare_duration$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MazeMiscDataProto.prepareDuration cannot be set twice.');
 					}
 					++prepare_duration$count;
-					this.prepareDuration = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.prepareDuration = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 3:
 					if (duration$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MazeMiscDataProto.duration cannot be set twice.');
 					}
 					++duration$count;
-					this.duration = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.duration = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TAX_RATE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.CountryExchequerProto.tax_rate", "taxRate", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TAX_RATE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.CountryExchequerProto.tax_rate", "taxRate", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var tax_rate$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const YESTERDAY_INCOME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryExchequerProto.yesterday_income", "yesterdayIncome", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const YESTERDAY_INCOME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryExchequerProto.yesterday_income", "yesterdayIncome", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var yesterday_income$field:Int64;
 
@@ -64,7 +64,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TODAY_JIN_WEI_SALARY:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.CountryExchequerProto.today_jin_wei_salary", "todayJinWeiSalary", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TODAY_JIN_WEI_SALARY:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.CountryExchequerProto.today_jin_wei_salary", "todayJinWeiSalary", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var today_jin_wei_salary$field:Int64;
 
@@ -90,15 +90,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasTaxRate) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, tax_rate$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, tax_rate$field);
 			}
 			if (hasYesterdayIncome) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, yesterday_income$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, yesterday_income$field);
 			}
 			if (hasTodayJinWeiSalary) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, today_jin_wei_salary$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, today_jin_wei_salary$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -113,28 +113,28 @@ package app.message {
 			var yesterday_income$count:uint = 0;
 			var today_jin_wei_salary$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (tax_rate$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryExchequerProto.taxRate cannot be set twice.');
 					}
 					++tax_rate$count;
-					this.taxRate = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.taxRate = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (yesterday_income$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryExchequerProto.yesterdayIncome cannot be set twice.');
 					}
 					++yesterday_income$count;
-					this.yesterdayIncome = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.yesterdayIncome = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 4:
 					if (today_jin_wei_salary$count != 0) {
 						throw new flash.errors.IOError('Bad data format: CountryExchequerProto.todayJinWeiSalary cannot be set twice.');
 					}
 					++today_jin_wei_salary$count;
-					this.todayJinWeiSalary = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.todayJinWeiSalary = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

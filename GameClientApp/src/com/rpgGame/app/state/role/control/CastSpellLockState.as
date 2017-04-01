@@ -36,8 +36,10 @@ package com.rpgGame.app.state.role.control
 				else
 					throw new Error("投放技能锁定状态必须是CastSpellLockStateReference类型！");
 
-				if (!_stateReference.spellEffectData || !_stateReference.spellEffectData.canWalkRelease)
+				if (!_stateReference.spellData || !_stateReference.spellData.q_can_walk_release) {
 					transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
+                    transition(RoleStateType.ACTION_IDLE);
+                }
 				_lockTween = TweenLite.delayedCall(5, onUnlock);
 			}
 		}

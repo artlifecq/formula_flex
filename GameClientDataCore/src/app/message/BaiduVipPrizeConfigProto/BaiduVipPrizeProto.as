@@ -15,7 +15,7 @@ package app.message.BaiduVipPrizeConfigProto {
 		/**
 		 *  @private
 		 */
-		public static const TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.BaiduVipPrizeConfigProto.BaiduVipPrizeProto.type", "type", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.BaiduVipPrizeConfigProto.BaiduVipPrizeProto.type", "type", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var type$field:int;
 
@@ -42,7 +42,7 @@ package app.message.BaiduVipPrizeConfigProto {
 		/**
 		 *  @private
 		 */
-		public static const SUB_TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.BaiduVipPrizeConfigProto.BaiduVipPrizeProto.sub_type", "subType", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SUB_TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.BaiduVipPrizeConfigProto.BaiduVipPrizeProto.sub_type", "subType", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var sub_type$field:int;
 
@@ -67,7 +67,7 @@ package app.message.BaiduVipPrizeConfigProto {
 		/**
 		 *  @private
 		 */
-		public static const PRIZE:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.BaiduVipPrizeConfigProto.BaiduVipPrizeProto.prize", "prize", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
+		public static const PRIZE:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.BaiduVipPrizeConfigProto.BaiduVipPrizeProto.prize", "prize", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsWrapperProto; });
 
 		[ArrayElementType("app.message.GoodsWrapperProto")]
 		public var prize:Array = [];
@@ -78,15 +78,15 @@ package app.message.BaiduVipPrizeConfigProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, type$field);
 			}
 			if (hasSubType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, sub_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, sub_type$field);
 			}
 			for (var prize$index:uint = 0; prize$index < this.prize.length; ++prize$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.prize[prize$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.prize[prize$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -100,24 +100,24 @@ package app.message.BaiduVipPrizeConfigProto {
 			var type$count:uint = 0;
 			var sub_type$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BaiduVipPrizeProto.type cannot be set twice.');
 					}
 					++type$count;
-					this.type = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.type = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (sub_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: BaiduVipPrizeProto.subType cannot be set twice.');
 					}
 					++sub_type$count;
-					this.subType = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.subType = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
-					this.prize.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.GoodsWrapperProto()));
+					this.prize.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.GoodsWrapperProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

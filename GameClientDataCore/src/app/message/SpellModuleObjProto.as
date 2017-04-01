@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SPELL_COOL_DOWN:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SpellModuleObjProto.spell_cool_down", "spellCoolDown", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpellCoolDownProto; });
+		public static const SPELL_COOL_DOWN:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SpellModuleObjProto.spell_cool_down", "spellCoolDown", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpellCoolDownProto; });
 
 		private var spell_cool_down$field:app.message.SpellCoolDownProto;
 
@@ -39,7 +39,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEARN_RACE_SPELLS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SpellModuleObjProto.learn_race_spells", "learnRaceSpells", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpellModuleObjProto.HeroLearnRaceSpellsProto; });
+		public static const LEARN_RACE_SPELLS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SpellModuleObjProto.learn_race_spells", "learnRaceSpells", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpellModuleObjProto.HeroLearnRaceSpellsProto; });
 
 		private var learn_race_spells$field:app.message.SpellModuleObjProto.HeroLearnRaceSpellsProto;
 
@@ -65,11 +65,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasSpellCoolDown) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, spell_cool_down$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, spell_cool_down$field);
 			}
 			if (hasLearnRaceSpells) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, learn_race_spells$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, learn_race_spells$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -83,7 +83,7 @@ package app.message {
 			var spell_cool_down$count:uint = 0;
 			var learn_race_spells$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (spell_cool_down$count != 0) {
@@ -91,7 +91,7 @@ package app.message {
 					}
 					++spell_cool_down$count;
 					this.spellCoolDown = new app.message.SpellCoolDownProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.spellCoolDown);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.spellCoolDown);
 					break;
 				case 2:
 					if (learn_race_spells$count != 0) {
@@ -99,7 +99,7 @@ package app.message {
 					}
 					++learn_race_spells$count;
 					this.learnRaceSpells = new app.message.SpellModuleObjProto.HeroLearnRaceSpellsProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.learnRaceSpells);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.learnRaceSpells);
 					break;
 				default:
 					super.readUnknown(input, tag);

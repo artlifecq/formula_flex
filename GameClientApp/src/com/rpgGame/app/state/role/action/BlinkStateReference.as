@@ -13,11 +13,13 @@ package com.rpgGame.app.state.role.action
 	{
 		private var _statusType : String;
 		private var _isFixedFrame : Boolean;
+		
 		private var _totalTime : int;
 		private var _soarFrameTime : int;
 		private var _hitFrameTime : int;
-		private var _breakFrameTime : int;
+//		private var _breakFrameTime : int;
 		private var _throwDelayTime : int;
+		
 		private var _hitFrameFunc : Function;
 		private var _hitFrameFuncArgs : Array;
 		private var _breakFrameFunc : Function;
@@ -27,14 +29,14 @@ package com.rpgGame.app.state.role.action
 			super();
 		}
 
-		public function setParams(statusType : String, isFixedFrame : Boolean, totalTime : int, soarFrameTime : int, hitFrameTime : int, breakFrameTime : int, throwDelayTime : int) : void
+		public function setParams(statusType : String, isFixedFrame : Boolean, totalTime : int, soarFrameTime : int, hitFrameTime : int, throwDelayTime : int) : void
 		{
 			_statusType = statusType;
 			_isFixedFrame = isFixedFrame;
 			_totalTime = totalTime;
 			_soarFrameTime = soarFrameTime;
 			_hitFrameTime = hitFrameTime;
-			_breakFrameTime = breakFrameTime;
+//			_breakFrameTime = breakFrameTime;
 			_throwDelayTime = throwDelayTime;
 		}
 
@@ -68,10 +70,10 @@ package com.rpgGame.app.state.role.action
 			return _hitFrameTime;
 		}
 
-		public function get breakFrameTime() : int
-		{
-			return _breakFrameTime;
-		}
+//		public function get breakFrameTime() : int
+//		{
+//			return _breakFrameTime;
+//		}
 
 		/**
 		 * 打断帧

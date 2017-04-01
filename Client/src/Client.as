@@ -5,6 +5,7 @@ package
 	import com.client.manager.BGMManager;
 	import com.client.process.CreateChar;
 	import com.client.process.EnterGame;
+	//	import com.client.process.GetMainPlayerInfo;
 	import com.client.process.LoadDll;
 	import com.client.process.LoadMaskWorld;
 	import com.client.process.LoginInput;
@@ -15,6 +16,7 @@ package
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.process.ProcessGroup;
 	import com.game.engine3D.process.ProcessStateMachine;
+	import com.gameClient.alert.AlertPanel;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.log.GameLogView;
 	import com.gameClient.utils.VersionUtils;
@@ -29,8 +31,6 @@ package
 	import flash.ui.ContextMenuItem;
 	
 	import away3d.loaders.parsers.Parsers;
-	
-	import org.game.netCore.net.ByteBuffer;
 	
 	/**
 	 *
@@ -93,7 +93,8 @@ package
 			ClientGlobal.isStable = isStable;
 			ClientGlobal.GlobalBridge = GlobalBridge;
 			
-			GameLogView.init(this.stage, [188, 190, 191]);
+			GameLogView.init(this.stage, [189, 190, 191]);//-_	189  .>	190  /?	191
+			AlertPanel.initStage(this.stage);
 			//
 			getWebParams();
 			GameLog.addShow("版本号：" + version);
@@ -105,16 +106,16 @@ package
 			GameLog.addShow("UI是否压缩：" + ClientGlobal.uiCompressed);
 			//
 			ClientGlobal.setup(this);
-			ClientGlobal.isSingle = true;
 			ClientUrlManager.setup(ClientGlobal.baseDir, version, ClientGlobal.decodeFun);
 			VersionUtils.setup(versionMap, baseDir, (version && version.length > 0) ? version : Math.random().toFixed(5), ClientGlobal.useVersion);
+			
 			initProcess();
 			//initMenu();
 			BGMManager.setup();
 			//引擎设置
 			EngineSetting.init();
 			//			StarlingLayerManager.setup(root.stage, root.stage, stage3DLayerSetupComplete, 1, 10, CameraController.forceStopPanning);
-			Stage3DLayerManager.setup(this.stage, this.stage, stage3DLayerSetupComplete, 1, 10, null);
+			Stage3DLayerManager.setup(this.stage, this.stage, stage3DLayerSetupComplete,null,null, 1, 10, null);
 		}
 		
 		private function stage3DLayerSetupComplete() : void
@@ -140,6 +141,7 @@ package
 			ProcessStateMachine.getInstance().pushProcess(new ServerConnect());
 			ProcessStateMachine.getInstance().pushProcess(new CreateChar());
 			ProcessStateMachine.getInstance().pushProcess(new LoadDll());
+			//			ProcessStateMachine.getInstance().pushProcess(new GetMainPlayerInfo());
 			ProcessStateMachine.getInstance().pushProcess(new EnterGame());
 		}
 		
@@ -172,25 +174,28 @@ package
 		{
 			GameLog.addShow(ClientGlobal.loginIP, ClientGlobal.loginPort, ClientGlobal.loginName, ClientGlobal.loginKey, ClientGlobal.isRelease);
 			//
-			/*if (!ClientGlobal.loginIP)
+			if (!ClientGlobal.loginIP)
 			{
 				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_SELECT_DEVELOPER);
-			}*/
-			ClientGlobal.loginData = new ByteBuffer();
-			ClientGlobal.loginData.writeUTF("测试");
-			ClientGlobal.loginData.position = 0;
+			}
 			if (!ClientGlobal.loginName)
 			{
 				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOGIN_INPUT);
 			}
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_MASK_WORLD, 0, 0.1);
-			//ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_SERVER_CONNECT, 0.1, 0.2);
+			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_SERVER_CONNECT, 0.1, 0.2);
 			var pg : ProcessGroup = new ProcessGroup();
-			//pg.addPreProcess(ProcessState.STATE_CREATE_CHAR, 0.2);
+			pg.addPreProcess(ProcessState.STATE_CREATE_CHAR, 0.2);
 			pg.addPreProcess(ProcessState.STATE_LOAD_DLL, 0.2, 0.3);
 			ProcessStateMachine.getInstance().addPreGroup(pg);
+			//			ProcessStateMachine.getInstance().addPreProcess(ProcessState.GET_MAINPLAYER_INFO, 0.8, 0.9);
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_ENTER_GAME);
 			ProcessStateMachine.getInstance().run();
+			
+			if (!ClientGlobal.isRelease)
+			{
+				//				MonsterDebugger.initialize(stage);
+			}
 		}
 		
 		private function onSelectClearHc(e : Event) : void

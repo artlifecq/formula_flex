@@ -14,7 +14,7 @@ package app.message.TaskTargetProto {
 		/**
 		 *  @private
 		 */
-		public static const ENTER_STORY_DUNGEON_NPC_ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.TaskTargetProto.FinishStoryDungeonTargetProto.enter_story_dungeon_npc_id", "enterStoryDungeonNpcId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ENTER_STORY_DUNGEON_NPC_ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.TaskTargetProto.FinishStoryDungeonTargetProto.enter_story_dungeon_npc_id", "enterStoryDungeonNpcId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var enter_story_dungeon_npc_id$field:int;
 
@@ -44,7 +44,7 @@ package app.message.TaskTargetProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasEnterStoryDungeonNpcId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, enter_story_dungeon_npc_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, enter_story_dungeon_npc_id$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -57,14 +57,14 @@ package app.message.TaskTargetProto {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var enter_story_dungeon_npc_id$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (enter_story_dungeon_npc_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FinishStoryDungeonTargetProto.enterStoryDungeonNpcId cannot be set twice.');
 					}
 					++enter_story_dungeon_npc_id$count;
-					this.enterStoryDungeonNpcId = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.enterStoryDungeonNpcId = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

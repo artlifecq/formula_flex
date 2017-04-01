@@ -13,9 +13,9 @@ package com.game.engine3D.scene.display
 	 */
 	public interface IBindable
 	{
-		function get bindTarget() : ObjectContainer3D;
-		function set bindTarget(value : ObjectContainer3D) : void;
+		function bind(bindTarget : ObjectContainer3D, syncTarget : Object = null) : void;
 		function set bindOffset(value : Vector3D) : void;
 		function get bindOffset() : Vector3D;
+		function updateTranform() : void;
 	}
 }

@@ -5,17 +5,16 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.utils.RaceUtil;
 	import com.rpgGame.coreData.cfg.ShopCfgData;
-	import com.rpgGame.coreData.cfg.item.ItemCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
 	import com.rpgGame.coreData.role.RoleEquipInfo;
 	import com.rpgGame.coreData.type.SexType;
 	import com.rpgGame.coreData.type.item.EquipmentPos;
 	
 	import app.message.EquipType;
-	import app.message.EquipmentDataProto;
 	import app.message.GoodsType;
 	import app.message.ContainerProto.ContainerType;
 	
@@ -28,7 +27,7 @@ package com.rpgGame.app.manager.goods
 	 */
 	public class RoleEquipmentManager extends GoodsContainerMamager
 	{
-		public static const COUNT:int = 12;
+		public static const COUNT:int = 10;
 		private var typeToPosMap:HashMap;
 		
 		public function RoleEquipmentManager()
@@ -38,13 +37,13 @@ package com.rpgGame.app.manager.goods
 			typeToPosMap = new HashMap();
 			typeToPosMap.add(EquipType.ARMOR, EquipmentPos.POS_ARMOR);
 			typeToPosMap.add(EquipType.WEAPON, EquipmentPos.POS_WEAPON);
-			typeToPosMap.add(EquipType.SECOND_WEAPON, EquipmentPos.POS_SECOND_WEAPON);
+//			typeToPosMap.add(EquipType.SECOND_WEAPON, EquipmentPos.POS_SECOND_WEAPON);
 			typeToPosMap.add(EquipType.HELM, EquipmentPos.POS_HELM);
 			typeToPosMap.add(EquipType.BRACER, [EquipmentPos.POS_LEFT_BRACER, EquipmentPos.POS_RIGHT_BRACER]);
 			typeToPosMap.add(EquipType.NECKLACE, EquipmentPos.POS_NECKLACE);
 			typeToPosMap.add(EquipType.SHOE, EquipmentPos.POS_SHOE);
 			typeToPosMap.add(EquipType.RING, [EquipmentPos.POS_LEFT_RING, EquipmentPos.POS_RIGHT_RING]);
-			typeToPosMap.add(EquipType.BELT, EquipmentPos.POS_BELT);
+//			typeToPosMap.add(EquipType.BELT, EquipmentPos.POS_BELT);
 			
 			initEquipments(MainRoleManager.actorInfo.equipInfo);
 		}
@@ -82,9 +81,9 @@ package com.rpgGame.app.manager.goods
 		/**
 		 *此件装备是否合适放在pos位置上 
 		 */		
-		public function isEquipSuitablePos(item:ItemInfo, pos:int):Boolean
+		public function isEquipSuitablePos(item:ClientItemInfo, pos:int):Boolean
 		{
-			var type:int = ItemCfgData.getEquipmentType(item.cfgId);
+			var type:int = ItemConfig.getItemType(item.cfgId);
 			var tar:* = typeToPosMap.getValue(type);
 			var b:Boolean;
 			if(tar is Array)
@@ -98,14 +97,26 @@ package com.rpgGame.app.manager.goods
 		}
 		
 		/**
+		 * 
+		 * @param index EquipType的值
+		 * @return 
+		 * 
+		 */
+		public function getEquipInfoByIndex(equipType:int):ClientItemInfo
+		{
+			return goodsList[equipType];
+		}
+		
+		
+		/**
 		 * 智能分析该装备穿戴到的最合适的位置 
 		 * @param item
 		 * @return 
 		 * 
 		 */		
-		public function getEquipPos(item:ItemInfo):int
+		public function getEquipPos(item:ClientItemInfo):int
 		{
-			var type:int = ItemCfgData.getEquipmentType(item.cfgId);
+			var type:int = ItemConfig.getItemType(item.cfgId);
 			var pos:* = typeToPosMap.getValue(type);
 			var items:Array = getAllItem();
 			if(pos is Array)
@@ -138,9 +149,9 @@ package com.rpgGame.app.manager.goods
 		 * @return 
 		 * 
 		 */		
-		public function isBetterEquip(item:ItemInfo):Boolean
+		public function isBetterEquip(item:ClientItemInfo):Boolean
 		{
-			var type:int = ItemCfgData.getEquipmentType(item.cfgId);
+			var type:int = ItemConfig.getItemType(item.cfgId);
 			var pos:* = typeToPosMap.getValue(type);
 			var items:Array = getAllItem();
 			var equip:EquipInfo = item as EquipInfo;
@@ -168,7 +179,7 @@ package com.rpgGame.app.manager.goods
 			return equip1 ==  null || equip1.fighting_amount < equip.fighting_amount;
 		}
 		
-		override public function setItemByIndex(index:int, info:ItemInfo):void
+		override public function setItemByIndex(index:int, info:ClientItemInfo):void
 		{
 			super.setItemByIndex(index, info);
 			if(info != null)
@@ -176,7 +187,7 @@ package com.rpgGame.app.manager.goods
 				MainRoleManager.actorInfo.equipInfo.add(index, info);
 				EventManager.dispatchEvent(ItemEvent.ITEM_WEARED_PERSON_EQUIP, info);
 			}else{
-				info = MainRoleManager.actorInfo.equipInfo.remove(index) as ItemInfo;
+				info = MainRoleManager.actorInfo.equipInfo.remove(index) as ClientItemInfo;
 				EventManager.dispatchEvent(ItemEvent.ITEM_TOOK_OFF_PERSON_EQUIP, info);
 			}
 		}
@@ -193,7 +204,7 @@ package com.rpgGame.app.manager.goods
 			return money;
 		}
 		
-		public static function equipIsWearing(equip:ItemInfo):Boolean
+		public static function equipIsWearing(equip:ClientItemInfo):Boolean
 		{
 			if(!equip)
 				return false;
@@ -208,7 +219,7 @@ package com.rpgGame.app.manager.goods
 			return false;
 		}
 		
-		public static function canPutOnEquipAt(item:ItemInfo, pos:int, tip:Boolean=true):Boolean
+		public static function canPutOnEquipAt(item:ClientItemInfo, pos:int, tip:Boolean=true):Boolean
 		{
 			if(!item || item.type != GoodsType.EQUIPMENT || !instance.isEquipSuitablePos(item, pos))
 			{
@@ -216,19 +227,20 @@ package com.rpgGame.app.manager.goods
 				return false;
 			}
 			//装备其它属性检测
-			var equip:EquipmentDataProto = ItemCfgData.getEquipmentDataProto(item.cfgId);
-			if(!isSuitSex(equip.sex))
+			var sex:int=ItemConfig.getItemSex(item.cfgId);
+			var race:int=ItemConfig.getItemRace(item.cfgId);
+			if(!isSuitSex(sex))
 			{
-				if(tip)NoticeManager.showHint(EnumHintInfo.EQUIPMENT_ERROR_SEX, [SexType.getName(equip.sex)]);
+				if(tip)NoticeManager.showHint(EnumHintInfo.EQUIPMENT_ERROR_SEX, [SexType.getName(sex)]);
 				return false;
 			}
-			if(!isSuitRace(equip.race))
+		/*	if(!isSuitRace(race))
 			{
-				if(tip)NoticeManager.showHint(EnumHintInfo.EQUIPMENT_ERROR_RACE, [RaceUtil.getRaceTitle(equip.race)]);
+				if(tip)NoticeManager.showHint(EnumHintInfo.EQUIPMENT_ERROR_RACE, [RaceUtil.getRaceTitle(race)]);
 				return false;
-			}
-			var lv:int = ItemCfgData.getItemRequireLevel(item.cfgId);
-			if(lv > MainRoleManager.actorInfo.level)
+			}*/
+			var lv:int = ItemConfig.getItemRequireLevel(item.cfgId);
+			if(lv > MainRoleManager.actorInfo.totalStat.level)
 			{
 				if(tip)NoticeManager.showHint(EnumHintInfo.EQUIPMENT_ERROR_LEVEL, [ lv ]);
 				return false;
@@ -243,10 +255,10 @@ package com.rpgGame.app.manager.goods
 			return equipSex == sex;
 		}
 		
-		public static function isSuitRace(race:int):Boolean
+		public static function isSuitRace(job:int):Boolean
 		{
-			if(race == 0 || instance.getItemInfoByIndex(EquipmentPos.POS_SECOND_WEAPON) == null)return true;
-			return race == MainRoleManager.actorInfo.weaponRace;
+			if(job == 0 || instance.getItemInfoByIndex(EquipmentPos.POS_SECOND_WEAPON) == null)return true;
+			return job == MainRoleManager.actorInfo.job;
 		}
 	}	
 }

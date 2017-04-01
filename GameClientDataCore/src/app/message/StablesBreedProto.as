@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TYPE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.StablesBreedProto.type", "type", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.StablesBreedType);
+		public static const TYPE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.StablesBreedProto.type", "type", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.StablesBreedType);
 
 		private var type$field:int;
 
@@ -43,7 +43,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BORN_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.StablesBreedProto.born_time", "bornTime", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BORN_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.StablesBreedProto.born_time", "bornTime", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var born_time$field:Int64;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const INVITE_TARGET_ID:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.StablesBreedProto.invite_target_id", "inviteTargetId", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const INVITE_TARGET_ID:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.StablesBreedProto.invite_target_id", "inviteTargetId", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var invite_target_id$field:Int64;
 
@@ -89,7 +89,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const INVITE_EXPIRE_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.StablesBreedProto.invite_expire_time", "inviteExpireTime", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const INVITE_EXPIRE_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.StablesBreedProto.invite_expire_time", "inviteExpireTime", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var invite_expire_time$field:Int64;
 
@@ -112,7 +112,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const INVITOR:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.StablesBreedProto.invitor", "invitor", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.StablesBreedSideProto; });
+		public static const INVITOR:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.StablesBreedProto.invitor", "invitor", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.StablesBreedSideProto; });
 
 		private var invitor$field:app.message.StablesBreedSideProto;
 
@@ -135,7 +135,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BEEN_INVITOR:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.StablesBreedProto.been_invitor", "beenInvitor", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.StablesBreedSideProto; });
+		public static const BEEN_INVITOR:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.StablesBreedProto.been_invitor", "beenInvitor", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.StablesBreedSideProto; });
 
 		private var been_invitor$field:app.message.StablesBreedSideProto;
 
@@ -161,27 +161,27 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, type$field);
 			}
 			if (hasBornTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, born_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, born_time$field);
 			}
 			if (hasInviteTargetId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, invite_target_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, invite_target_id$field);
 			}
 			if (hasInviteExpireTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, invite_expire_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, invite_expire_time$field);
 			}
 			if (hasInvitor) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, invitor$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, invitor$field);
 			}
 			if (hasBeenInvitor) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, been_invitor$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, been_invitor$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -199,35 +199,35 @@ package app.message {
 			var invitor$count:uint = 0;
 			var been_invitor$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StablesBreedProto.type cannot be set twice.');
 					}
 					++type$count;
-					this.type = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.type = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 2:
 					if (born_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StablesBreedProto.bornTime cannot be set twice.');
 					}
 					++born_time$count;
-					this.bornTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.bornTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 3:
 					if (invite_target_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StablesBreedProto.inviteTargetId cannot be set twice.');
 					}
 					++invite_target_id$count;
-					this.inviteTargetId = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.inviteTargetId = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 4:
 					if (invite_expire_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: StablesBreedProto.inviteExpireTime cannot be set twice.');
 					}
 					++invite_expire_time$count;
-					this.inviteExpireTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.inviteExpireTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 6:
 					if (invitor$count != 0) {
@@ -235,7 +235,7 @@ package app.message {
 					}
 					++invitor$count;
 					this.invitor = new app.message.StablesBreedSideProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.invitor);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.invitor);
 					break;
 				case 7:
 					if (been_invitor$count != 0) {
@@ -243,7 +243,7 @@ package app.message {
 					}
 					++been_invitor$count;
 					this.beenInvitor = new app.message.StablesBreedSideProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.beenInvitor);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.beenInvitor);
 					break;
 				default:
 					super.readUnknown(input, tag);

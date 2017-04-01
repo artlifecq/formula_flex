@@ -1,15 +1,16 @@
 package com.rpgGame.app.manager.role
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
+	import com.game.engine3D.vo.BaseObj3D;
 	import com.game.engine3D.vo.map.ClientMapAreaData;
 	import com.game.engine3D.vo.map.ClientMapAreaGridData;
+	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.graphics.StallHeadFace;
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
-	import com.rpgGame.app.manager.country.CountryManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.yunBiao.YunBiaoManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -20,6 +21,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.YunBiaoEvent;
+	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.StallCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
@@ -27,6 +29,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
+	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.info.stall.StallData;
 	import com.rpgGame.coreData.role.BiaoCheData;
 	import com.rpgGame.coreData.role.HeroData;
@@ -41,12 +44,13 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
-
-	import app.message.MonsterDataProto;
+	
+	import flash.utils.setInterval;
+	
 	import app.message.StallTypeDataProto;
-
+	
 	import org.client.mainCore.manager.EventManager;
-
+	
 	/**
 	 *
 	 * 场景角色管理器
@@ -57,7 +61,7 @@ package com.rpgGame.app.manager.role
 	public class SceneRoleManager
 	{
 		private static var _instance : SceneRoleManager;
-
+		
 		public static function getInstance() : SceneRoleManager
 		{
 			if (!_instance)
@@ -66,23 +70,23 @@ package com.rpgGame.app.manager.role
 			}
 			return _instance;
 		}
-
+		
 		/**
 		 * 玩家半径
 		 */
 		private static var radiusForHero : int = 25;
-
+		
 		public function SceneRoleManager()
 		{
 			EventManager.addEvent(MainPlayerEvent.PK_MODE_CHANGE, onPkModeChange);
 			EventManager.addEvent(YunBiaoEvent.UPDATE_BIAOCHE_NAME, updateBiaoName);
 		}
-
+		
 		private function onPkModeChange() : void
 		{
 			SceneRoleSelectManager.updateRoleRingEffect(SceneRoleSelectManager.selectedRole);
 		}
-
+		
 		/**
 		 * 创建英雄
 		 * @param data
@@ -102,16 +106,16 @@ package com.rpgGame.app.manager.role
 			role.name = data.name;
 			data.bodyRadius = radiusForHero;
 			role.headFace = HeadFace.create(role);
-
+			
 			//执行主换装更新
-			AvatarManager.callEquipmentChange(role);
-
+			AvatarManager.callEquipmentChange(role, false, false, false);
+			
 			var renderLimitable : Boolean = false;
 			if (!isMainChar)
 			{
 				renderLimitable = true;
 				role.addAttachLimitable(AttachDisplayType.ROLE_HEAD_NAME);
-				if (data.hp <= 0)
+				if (data.totalStat.hp <= 0)
 				{
 					role.stateMachine.transition(RoleStateType.ACTION_DEATH, null, true);
 				}
@@ -120,18 +124,41 @@ package com.rpgGame.app.manager.role
 					role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
 				}
 			}
-
+			
 			role.setScale(data.sizeScale);
 			role.setGroundXY(data.x, data.y);
+			role.rotationY = (270 + data.direction) % 360;
 			SceneManager.addSceneObjToScene(role, true, true, renderLimitable);
-
-			CharAttributeManager.setCharHp(data, data.hp);
+            // 在换装时还未把role添加到场景 添加的buff无效
+            if (data.buffList.length > 0) {
+                role.buffSet.updateBuffEffects();
+            }
+			
+			CharAttributeManager.setCharHp(data, data.totalStat.hp);
 			CharAttributeManager.setCharMaxLife(data, data.totalStat.life); //需要提供初始化方法,优化一下!
 			if (!isMainChar)
 				EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
 			return role;
 		}
-
+		
+		
+		public function removeBornEffectAndShow(role:SceneRole,mountResID:String,obj:BaseObj3D):void
+		{
+			var objId : Number = obj.id;
+			SceneManager.removeSceneObjFromScene(obj);
+			
+			if (mountResID)
+			{
+				var ref1 : RidingStateReference = role.stateMachine.getReference(RidingStateReference) as RidingStateReference;
+				ref1.setParams(mountResID, null);
+				role.stateMachine.transition(RoleStateType.CONTROL_RIDING, ref1);
+			}
+			else
+			{
+				//执行主换装更新
+				AvatarManager.updateAvatar(role);
+			}
+		}
 		/**
 		 * 创建怪物
 		 * @param data
@@ -143,42 +170,48 @@ package com.rpgGame.app.manager.role
 			//如果场景中存在此类型此ID的角色，则移除之
 			removeSceneRoleByIdAndType(data.id, charType);
 			var role : SceneRole = SceneRole.create(charType, data.id);
-			var bornData : MonsterDataProto = MonsterDataManager.getData(data.modelID);
+			var bornData : Q_monster = MonsterDataManager.getData(data.modelID);
 			//设置VO
 			role.data = data;
 			role.headFace = HeadFace.create(role);
-			var roleNameStr : String = (bornData ? bornData.name.toString() : "未知怪物");
+			var roleNameStr : String = (bornData ? bornData.q_name.toString() : "未知怪物");
 			if (charType == SceneCharType.NPC && data.ownerName)
 			{
 				roleNameStr = roleNameStr + "(" + data.ownerName + ")";
 			}
 			role.name = data.name = roleNameStr;
 			role.ownerIsMainChar = (data.ownerId == MainRoleManager.actorID);
-			data.avatarInfo.setBodyResID(bornData ? bornData.bodyRes : "", null);
-			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(bornData ? bornData.bodyRes : "");
-			if (avatarResConfig)
+			data.avatarInfo.setBodyResID(bornData ? bornData.q_body_res : "", null);
+//			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(bornData ? bornData.q_body_res : "");
+			if (bornData.q_animation>0)
 			{
-				data.avatarInfo.effectResID = avatarResConfig.idleEffect;
+				data.avatarInfo.bodyEffectID = AnimationDataManager.getData(bornData.q_animation).role_res;
+//				data.avatarInfo.effectResID = AnimationDataManager.getData(bornData.q_animation).role_res;
 			}
-			data.sizeScale = (bornData && bornData.scale > 0) ? (bornData.scale * 0.01) : 1;
-			data.level = bornData ? bornData.level : 0;
-			data.bodyRadius = bornData ? bornData.bodyRadius : 0;
-			data.direction = bornData ? bornData.direction : 0;
-			data.immuneDeadBeat = bornData ? bornData.immuneDeadBeat : false;
-
-			var mountResID : String = bornData ? bornData.mountRes : "";
+			data.sizeScale = (bornData && bornData.q_scale > 0) ? (bornData.q_scale * 0.01) : 1;
+			//			data.totalStat.level = bornData ? bornData.q_grade : 0;
+			data.bodyRadius = bornData ? bornData.q_body_radius_pixel : 0;
+			data.direction = bornData ? bornData.q_direction : 0;
+			data.immuneDeadBeat = /*bornData ? bornData.immuneDeadBeat :*/ false;
+			
+			if(bornData.q_born_animation)//有出生特效
+			{
+				trace(data.x+"   "+data.y);
+				SpellAnimationHelper.addBornEffect(role,data.x, data.y,bornData.q_born_animation);
+			}
+			var mountResID : String = bornData ? bornData.q_mount_res : "";
 			if (mountResID)
 			{
-				var ref : RidingStateReference = role.stateMachine.getReference(RidingStateReference) as RidingStateReference;
-				ref.setParams(mountResID, null);
-				role.stateMachine.transition(RoleStateType.CONTROL_RIDING, ref);
+				var ref1 : RidingStateReference = role.stateMachine.getReference(RidingStateReference) as RidingStateReference;
+				ref1.setParams(mountResID, null);
+				role.stateMachine.transition(RoleStateType.CONTROL_RIDING, ref1);
 			}
 			else
 			{
 				//执行主换装更新
 				AvatarManager.updateAvatar(role);
 			}
-
+			
 			if (charType == SceneCharType.NPC)
 			{
 				role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
@@ -189,7 +222,7 @@ package com.rpgGame.app.manager.role
 			}
 			else
 			{
-				if (data.hp <= 0)
+				if (data.totalStat.hp <= 0)
 				{
 					role.stateMachine.transition(RoleStateType.ACTION_DEATH, null, true);
 				}
@@ -198,7 +231,7 @@ package com.rpgGame.app.manager.role
 					role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
 				}
 			}
-
+			
 			role.setScale(data.sizeScale);
 			role.setGroundXY(data.x, data.y);
 			role.rotationY = data.direction;
@@ -222,7 +255,7 @@ package com.rpgGame.app.manager.role
 			EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
 			return role;
 		}
-
+		
 		public function createStall(data : StallData) : void
 		{
 			removeSceneRoleByIdAndType(data.stallId, SceneCharType.STALL);
@@ -261,7 +294,7 @@ package com.rpgGame.app.manager.role
 			var stallType : StallTypeDataProto = StallCfgData.getStallTypeData(data.stallType);
 			data.avatarInfo.setBodyResID(stallType ? stallType.stallRes : "", null);
 			data.sizeScale = 1;
-			data.level = 0;
+			data.totalStat.level = 0;
 			data.bodyRadius = 0;
 			data.direction = 0;
 			//执行主换装更新
@@ -279,30 +312,30 @@ package com.rpgGame.app.manager.role
 			role.rotationY = data.direction;
 			SceneManager.addSceneObjToScene(role, true, true, true);
 		}
-
-
+		
+		
 		public function createZhanChe(data : ZhanCheData) : SceneRole
 		{
 			//如果场景中存在此类型此ID的角色，则移除之
 			removeSceneRoleByIdAndType(data.id, SceneCharType.ZHAN_CHE);
 			var role : SceneRole = SceneRole.create(SceneCharType.ZHAN_CHE, data.id);
 			var monsterCfgID : int = CountryWarCfgData.getMonsterCfgIDOfZhanChe(data.modelID);
-			var bornData : MonsterDataProto = MonsterDataManager.getData(monsterCfgID);
+			var bornData : Q_monster = MonsterDataManager.getData(monsterCfgID);
 			//设置VO
 			role.data = data;
 			role.headFace = HeadFace.create(role);
-			var monsterNameStr : String = (bornData ? bornData.name.toString() : "未知怪物");
+			var monsterNameStr : String = (bornData ? bornData.q_name.toString() : "未知怪物");
 			var roleNameStr : String = monsterNameStr + "(" + data.ownerName + ")";
 			role.name = data.name = roleNameStr;
 			role.ownerIsMainChar = (data.ownerId == MainRoleManager.actorID);
-			data.avatarInfo.setBodyResID(bornData ? bornData.bodyRes : "", null);
-			data.sizeScale = (bornData && bornData.scale > 0) ? (bornData.scale * 0.01) : 1;
-			data.level = bornData ? bornData.level : 0;
-			data.bodyRadius = bornData ? bornData.bodyRadius : 0;
-			data.direction = bornData ? bornData.direction : 0;
+			data.avatarInfo.setBodyResID(bornData ? bornData.q_body_res : "", null);
+			data.sizeScale = (bornData && bornData.q_scale > 0) ? (bornData.q_scale * 0.01) : 1;
+			//			data.totalStat.level = bornData ? bornData.q_grade : 0;
+			data.bodyRadius = bornData ? bornData.q_body_radius_pixel : 0;
+			data.direction = bornData ? bornData.q_direction : 0;
 			AvatarManager.updateAvatar(role);
-
-			if (data.hp <= 0)
+			
+			if (data.totalStat.hp <= 0)
 			{
 				role.stateMachine.transition(RoleStateType.ACTION_DEATH, null, true);
 			}
@@ -310,25 +343,25 @@ package com.rpgGame.app.manager.role
 			{
 				role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
 			}
-
+			
 			role.setScale(data.sizeScale);
 			role.setGroundXY(data.x, data.y);
 			role.rotationY = data.direction;
 			SceneManager.addSceneObjToScene(role, true, true, true);
-			if (CountryManager.isMyEnemyCountry(data.ownerCountry))
-			{
-				if (role.headFace)
-					(role.headFace as HeadFace).bloodState = HeadBloodStateType.MONSTER;
-			}
-			else
-			{
-				if (role.headFace)
-					(role.headFace as HeadFace).bloodState = HeadBloodStateType.MAIN_CHAR;
-			}
+			//			if (CountryManager.isMyEnemyCountry(data.ownerCountry))
+			//			{
+			//				if (role.headFace)
+			//					(role.headFace as HeadFace).bloodState = HeadBloodStateType.MONSTER;
+			//			}
+			//			else
+			//			{
+			if (role.headFace)
+				(role.headFace as HeadFace).bloodState = HeadBloodStateType.MAIN_CHAR;
+			//			}
 			EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
 			return role;
 		}
-
+		
 		/*public function createNpc(data : SceneNpcData) : void
 		{
 		var role : SceneRole = SceneRole.create(SceneCharType.NPC, data.id);
@@ -337,17 +370,17 @@ package com.rpgGame.app.manager.role
 		role.name = data.name;
 		data.avatarInfo.bodyResID = data.avatarRes;
 		data.sizeScale = data.scale > 0 ? (data.scale * 0.01) : 1;
-
+		
 		//执行主换装更新
 		AvatarManager.updateAvatar(role);
 		role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
-
+		
 		role.setScale(data.sizeScale);
 		role.setGroundXY(data.x, data.y);
 		role.rotationY = data.direction;
 		SceneManager.addSceneObjToScene(role, true, false, false);
 		}*/
-
+		
 		/**
 		 * 创建一台镖车
 		 * @param data
@@ -365,11 +398,11 @@ package com.rpgGame.app.manager.role
 			role.data = data;
 			role.headFace = HeadFace.create(role);
 			role.name = YunBiaoManager.setBiaoName(role);
-
+			
 			//执行主换装更新
 			AvatarManager.updateAvatar(role);
-
-			if (data.hp <= 0)
+			
+			if (data.totalStat.hp <= 0)
 			{
 				role.stateMachine.transition(RoleStateType.ACTION_DEATH, null, true);
 			}
@@ -377,14 +410,14 @@ package com.rpgGame.app.manager.role
 			{
 				role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
 			}
-
+			
 			role.setScale(data.sizeScale);
 			role.setGroundXY(data.x, data.y);
 			SceneManager.addSceneObjToScene(role, true, true, true);
-
+			
 			EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
 		}
-
+		
 		/**
 		 * 镖车外观更新
 		 * @param role 镖车
@@ -396,11 +429,11 @@ package com.rpgGame.app.manager.role
 			var biaoCheData : BiaoCheData = role.data as BiaoCheData;
 			if (biaoCheData != null)
 				biaoCheData.avatarInfo.setBodyResID(resPath, null);
-
+			
 			//执行主换装更新
 			AvatarManager.updateAvatar(role);
 		}
-
+		
 		/**
 		 * 更新镖车名字颜色
 		 * @param data
@@ -412,9 +445,9 @@ package com.rpgGame.app.manager.role
 			if (role != null)
 				role.name = YunBiaoManager.setBiaoName(role);
 			if (role.headFace is HeadFace)
-				(role.headFace as HeadFace).updateNameColor();
+				(role.headFace as HeadFace).updateName();
 		}
-
+		
 		/**
 		 * 创建掉落物
 		 * @param data
@@ -435,19 +468,19 @@ package com.rpgGame.app.manager.role
 			{
 				data.avatarInfo.effectResID = avatarResConfig.idleEffect;
 			}
-
+			
 			//执行主换装更新
 			AvatarManager.updateAvatar(role);
 			var ref : PlayActionStateReference = role.stateMachine.getReference(PlayActionStateReference) as PlayActionStateReference;
-			ref.setParams(RoleActionType.IDLE, 1, data.isDroped ? int.MAX_VALUE : 0);
+			ref.setParams(RoleActionType.STAND, 1, data.isDroped ? int.MAX_VALUE : 0);
 			role.stateMachine.transition(RoleStateType.ACTION_PLAY_ACTION, ref, true); //切换到“播放状态”
-
+			
 			role.setScale(data.sizeScale);
 			role.setGroundXY(data.x, data.y);
 			role.rotationY = data.direction;
 			SceneManager.addSceneObjToScene(role, true, false, false);
 		}
-
+		
 		/**
 		 * 创建采集物
 		 * @param data
@@ -468,18 +501,18 @@ package com.rpgGame.app.manager.role
 			{
 				data.avatarInfo.effectResID = avatarResConfig.idleEffect;
 			}
-
+			
 			//执行主换装更新
 			AvatarManager.updateAvatar(role);
 			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
-
+			
 			role.setScale(data.sizeScale);
 			role.setGroundXY(data.x, data.y);
 			role.rotationY = data.direction;
 			SceneManager.addSceneObjToScene(role, true, false, false);
 			ClientTriggerManager.addTriggerCollectEffect(role);
 		}
-
+		
 		/**
 		 * 创建传送门
 		 * @param data
@@ -496,11 +529,11 @@ package com.rpgGame.app.manager.role
 			role.name = data.name;
 			role.headFace = HeadFace.create(role);
 			data.avatarInfo.effectResID = data.effectRes;
-
+			
 			//执行主换装更新
 			AvatarManager.updateAvatar(role);
 			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
-
+			
 			role.setScale(data.sizeScale);
 			role.setGroundXY(data.x, data.y);
 			role.rotationY = data.direction;
@@ -509,7 +542,7 @@ package com.rpgGame.app.manager.role
 			ClientTriggerManager.addTriggerCollectEffect(role);
 			return role;
 		}
-
+		
 		/**
 		 * 创建场景特效
 		 * @param data
@@ -520,8 +553,8 @@ package com.rpgGame.app.manager.role
 		{
 			//如果场景中存在此类型此ID的角色，则移除之
 			removeSceneRoleByIdAndType(id, type);
-			var rud : RenderParamData = new RenderParamData(id, type, ClientConfig.getEffect(data.effectRes));
-
+			var rud : RenderParamData3D = new RenderParamData3D(id, type, ClientConfig.getEffect(data.effectRes));
+			
 			var effectRu : RenderUnit3D = RenderUnit3D.create(rud);
 			effectRu.repeat = 0;
 			effectRu.mouseEnable = true;
@@ -533,7 +566,7 @@ package com.rpgGame.app.manager.role
 			effectRu.play(0);
 			return effectRu;
 		}
-
+		
 		/**
 		 * 角色离开视野
 		 * @param roleID
@@ -544,13 +577,13 @@ package com.rpgGame.app.manager.role
 			var role : SceneRole = SceneManager.getSceneObjByID(roleID) as SceneRole;
 			removeSceneRole(role);
 		}
-
+		
 		public function removeSceneRoleByIdAndType(id : Number, type : String) : void
 		{
 			var role : SceneRole = SceneManager.getScene().getSceneObjByID(id, type) as SceneRole;
 			removeSceneRole(role);
 		}
-
+		
 		public function removeSceneRole(role : SceneRole) : void
 		{
 			if (role && role.usable)

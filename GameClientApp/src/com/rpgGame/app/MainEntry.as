@@ -12,6 +12,7 @@ package com.rpgGame.app
 	import com.rpgGame.app.process.LoadEmbedFonts;
 	import com.rpgGame.app.process.LoadPngxUIAssets;
 	import com.rpgGame.app.process.LoadPublicUIAssets;
+	import com.rpgGame.app.process.LocalConfigData;
 	import com.rpgGame.app.process.ProcessState;
 	import com.rpgGame.app.process.StartGame;
 	import com.rpgGame.app.ui.ResLoadingView;
@@ -19,15 +20,13 @@ package com.rpgGame.app
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.clientConfig.ConfigClassRegister;
+	import com.rpgGame.netData.player.bean.MyPlayerInfo;
 	
 	import flash.display.Sprite;
 	import flash.external.ExternalInterface;
 	
 	import org.client.mainCore.manager.PopUpManager;
 	import org.client.mainCore.manager.ProjectManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
-	import org.game.netCore.net.GameSocketDispatcher;
 
 	/**
 	 * 社区资源都加载完成后程序运行的主入口。
@@ -64,11 +63,15 @@ package com.rpgGame.app
 			ProjectManager.setup(_root, _root.stage);
 			PopUpManager.container = LayerManager.topLevel;
 
-			var loginData : ByteBuffer = clientGlobal.loginData;
+			var loginData : MyPlayerInfo = clientGlobal.loginData;
 			if (ClientConfig.isSingle)
+			{
 				MainRoleManager.initSingleData(loginData);
+			}
 			else
+			{
 				MainRoleManager.setLoginData(loginData);
+			}
 			//
 			ResLoadingView.instance.setActual(loadingActual);
 
@@ -85,9 +88,9 @@ package com.rpgGame.app
 			GameLog.enableTrace = true;
 			ZLog.enableLog = false;
 			ZLog.enableTrace = false;
-			SocketConnection.print = false;
-			GameSocketDispatcher.isPrint = true;
-			KeyController.isPrint = false;
+//			SocketConnection_protoBuffer.print = false;
+//			GameSocketDispatcher.isPrint = true;
+			KeyController.isPrint = true;
 			StarlingLayerManager.setup();
 			GameClientUI.setup();
 			//
@@ -106,21 +109,34 @@ package com.rpgGame.app
 			ProcessStateMachine.getInstance().pushProcess(new LoadPngxUIAssets());
 			ProcessStateMachine.getInstance().pushProcess(new LoadEmbedFonts());
 			ProcessStateMachine.getInstance().pushProcess(new LoadConfigData());
+            if (ClientConfig.isSingle) 
+			{
+                // 如果是单机 则造假数据
+                ProcessStateMachine.getInstance().pushProcess(new LocalConfigData());
+            }
 			ProcessStateMachine.getInstance().pushProcess(new StartGame());
 		}
 
 		private function runProcess() : void
 		{
-			SceneSwitchCmdListener.fromPercent = 0.5;
+			SceneSwitchCmdListener.fromPercent = 0.55;
 			SceneSwitchCmdListener.toPercent = 1;
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_PUBLIC_UI_ASSETS, 0.3, 0.35);
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_PNGX_UI_ASSETS, 0.35, 0.4)
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_FONTS, 0.4, 0.45);
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_CONFIG_DATA, 0.45, 0.5);
+			if (ClientConfig.isSingle) 
+			{
+				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOCAL_CONFIG_DATA, 0.5, 0.5);
+			}
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_START_GAME, 0.5);
 			ProcessStateMachine.getInstance().run();
 		}
 
+		/**
+		 * 被client调用，连上服务器的时候 
+		 * 
+		 */		
 		public function reEnterGame() : void
 		{
 			GameLog.addShow("重新进入游戏...");

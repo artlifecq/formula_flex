@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DAILY_TASK_MAX_ROUND:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.DailyTaskConfig.daily_task_max_round", "dailyTaskMaxRound", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DAILY_TASK_MAX_ROUND:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.DailyTaskConfig.daily_task_max_round", "dailyTaskMaxRound", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var daily_task_max_round$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DAILY_TASK_EXTRA_PRIZE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.DailyTaskConfig.daily_task_extra_prize", "dailyTaskExtraPrize", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
+		public static const DAILY_TASK_EXTRA_PRIZE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.DailyTaskConfig.daily_task_extra_prize", "dailyTaskExtraPrize", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.PrizeProto; });
 
 		private var daily_task_extra_prize$field:app.message.PrizeProto;
 
@@ -65,7 +65,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DAILY_TASK_REDUCE_DIFFI_COST:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.DailyTaskConfig.daily_task_reduce_diffi_cost", "dailyTaskReduceDiffiCost", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DAILY_TASK_REDUCE_DIFFI_COST:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.DailyTaskConfig.daily_task_reduce_diffi_cost", "dailyTaskReduceDiffiCost", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var daily_task_reduce_diffi_cost$field:int;
 
@@ -90,7 +90,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DAILY_TASK_ADD_PRIZE_COST:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.DailyTaskConfig.daily_task_add_prize_cost", "dailyTaskAddPrizeCost", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DAILY_TASK_ADD_PRIZE_COST:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.DailyTaskConfig.daily_task_add_prize_cost", "dailyTaskAddPrizeCost", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var daily_task_add_prize_cost$field:int;
 
@@ -115,7 +115,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DAILY_TASK_AUTO_COMPLETE_COST:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.DailyTaskConfig.daily_task_auto_complete_cost", "dailyTaskAutoCompleteCost", (5 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DAILY_TASK_AUTO_COMPLETE_COST:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.DailyTaskConfig.daily_task_auto_complete_cost", "dailyTaskAutoCompleteCost", (5 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var daily_task_auto_complete_cost$field:int;
 
@@ -143,23 +143,23 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasDailyTaskMaxRound) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, daily_task_max_round$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, daily_task_max_round$field);
 			}
 			if (hasDailyTaskExtraPrize) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, daily_task_extra_prize$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, daily_task_extra_prize$field);
 			}
 			if (hasDailyTaskReduceDiffiCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, daily_task_reduce_diffi_cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, daily_task_reduce_diffi_cost$field);
 			}
 			if (hasDailyTaskAddPrizeCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, daily_task_add_prize_cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, daily_task_add_prize_cost$field);
 			}
 			if (hasDailyTaskAutoCompleteCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, daily_task_auto_complete_cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, daily_task_auto_complete_cost$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -176,14 +176,14 @@ package app.message {
 			var daily_task_add_prize_cost$count:uint = 0;
 			var daily_task_auto_complete_cost$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (daily_task_max_round$count != 0) {
 						throw new flash.errors.IOError('Bad data format: DailyTaskConfig.dailyTaskMaxRound cannot be set twice.');
 					}
 					++daily_task_max_round$count;
-					this.dailyTaskMaxRound = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.dailyTaskMaxRound = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (daily_task_extra_prize$count != 0) {
@@ -191,28 +191,28 @@ package app.message {
 					}
 					++daily_task_extra_prize$count;
 					this.dailyTaskExtraPrize = new app.message.PrizeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.dailyTaskExtraPrize);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.dailyTaskExtraPrize);
 					break;
 				case 3:
 					if (daily_task_reduce_diffi_cost$count != 0) {
 						throw new flash.errors.IOError('Bad data format: DailyTaskConfig.dailyTaskReduceDiffiCost cannot be set twice.');
 					}
 					++daily_task_reduce_diffi_cost$count;
-					this.dailyTaskReduceDiffiCost = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.dailyTaskReduceDiffiCost = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (daily_task_add_prize_cost$count != 0) {
 						throw new flash.errors.IOError('Bad data format: DailyTaskConfig.dailyTaskAddPrizeCost cannot be set twice.');
 					}
 					++daily_task_add_prize_cost$count;
-					this.dailyTaskAddPrizeCost = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.dailyTaskAddPrizeCost = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (daily_task_auto_complete_cost$count != 0) {
 						throw new flash.errors.IOError('Bad data format: DailyTaskConfig.dailyTaskAutoCompleteCost cannot be set twice.');
 					}
 					++daily_task_auto_complete_cost$count;
-					this.dailyTaskAutoCompleteCost = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.dailyTaskAutoCompleteCost = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

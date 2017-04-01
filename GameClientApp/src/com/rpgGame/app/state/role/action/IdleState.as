@@ -10,9 +10,9 @@ package com.rpgGame.app.state.role.action
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
-
+	
 	import away3d.animators.transitions.CrossfadeTransition;
-
+	
 	/**
 	 *
 	 * 场景角色闲置状态
@@ -26,7 +26,7 @@ package com.rpgGame.app.state.role.action
 		{
 			super(RoleStateType.ACTION_IDLE);
 		}
-
+		
 		override public function execute() : void
 		{
 			if (_machine && !_machine.isDisposed)
@@ -35,7 +35,7 @@ package com.rpgGame.app.state.role.action
 				transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
 			}
 		}
-
+		
 		override public function beforeEnter() : void
 		{
 			if (_machine && !_machine.isDisposed)
@@ -48,11 +48,11 @@ package com.rpgGame.app.state.role.action
 				}
 			}
 		}
-
+		
 		override public function playAnimation(role : BaseRole, render : RenderUnit3D, isFreeze : Boolean = false, time : int = -1, speedRatio : Number = 1) : void
 		{
 			super.playAnimation(role, render, isFreeze, time, speedRatio);
-
+			
 			var statusType : String = RoleActionType.getActionType(RoleActionType.IDLE, (_machine as RoleStateMachine).isRiding);
 			switch (render.type)
 			{
@@ -87,25 +87,25 @@ package com.rpgGame.app.state.role.action
 					break;
 			}
 		}
-
+		
 		override public function pause() : void
 		{
 			super.pause();
 			syncAnimation(true);
 		}
-
+		
 		override public function resume() : void
 		{
 			super.resume();
 			syncAnimation(false);
 		}
-
+		
 		override public function afterEnter() : void
 		{
 			super.afterEnter();
 			syncAnimation(false, 0);
 		}
-
+		
 		override public function leavePass(nextState : IState, force : Boolean = false) : Boolean
 		{
 			if ((_machine as RoleStateMachine).isBingDong)
@@ -115,7 +115,7 @@ package com.rpgGame.app.state.role.action
 			}
 			return true;
 		}
-
+		
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
 		{
 			if (prevState)
@@ -133,6 +133,17 @@ package com.rpgGame.app.state.role.action
 					return false;
 				}
 			}
+			
+			if(!force && (_machine as RoleStateMachine).isFly)
+			{
+				return false;
+			}
+			
+			if (!force && (_machine as RoleStateMachine).isUseSpell)
+			{
+				return false;
+			}
+			
 			if ((_machine.owner as SceneRole).isMainChar)
 			{
 				if (KeyMoveManager.getInstance().keyMoving)

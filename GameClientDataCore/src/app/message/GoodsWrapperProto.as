@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GOODS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GoodsWrapperProto.goods", "goods", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsProto; });
+		public static const GOODS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GoodsWrapperProto.goods", "goods", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsProto; });
 
 		private var goods$field:app.message.GoodsProto;
 
@@ -38,7 +38,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GoodsWrapperProto.count", "count", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COUNT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GoodsWrapperProto.count", "count", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var count$field:int;
 
@@ -65,7 +65,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EXPIRE_TIME:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.GoodsWrapperProto.expire_time", "expireTime", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const EXPIRE_TIME:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.GoodsWrapperProto.expire_time", "expireTime", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var expire_time$field:Int64;
 
@@ -88,7 +88,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DURATION:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GoodsWrapperProto.duration", "duration", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const DURATION:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GoodsWrapperProto.duration", "duration", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var duration$field:int;
 
@@ -113,7 +113,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TAB:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GoodsWrapperProto.tab", "tab", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TAB:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GoodsWrapperProto.tab", "tab", (6 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var tab$field:int;
 
@@ -141,23 +141,23 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasGoods) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, goods$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, goods$field);
 			}
 			if (hasCount) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, count$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, count$field);
 			}
 			if (hasExpireTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, expire_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, expire_time$field);
 			}
 			if (hasDuration) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, duration$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, duration$field);
 			}
 			if (hasTab) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, tab$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, tab$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -174,7 +174,7 @@ package app.message {
 			var duration$count:uint = 0;
 			var tab$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (goods$count != 0) {
@@ -182,35 +182,35 @@ package app.message {
 					}
 					++goods$count;
 					this.goods = new app.message.GoodsProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.goods);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.goods);
 					break;
 				case 2:
 					if (count$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GoodsWrapperProto.count cannot be set twice.');
 					}
 					++count$count;
-					this.count = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.count = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (expire_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GoodsWrapperProto.expireTime cannot be set twice.');
 					}
 					++expire_time$count;
-					this.expireTime = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.expireTime = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 4:
 					if (duration$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GoodsWrapperProto.duration cannot be set twice.');
 					}
 					++duration$count;
-					this.duration = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.duration = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 6:
 					if (tab$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GoodsWrapperProto.tab cannot be set twice.');
 					}
 					++tab$count;
-					this.tab = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.tab = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

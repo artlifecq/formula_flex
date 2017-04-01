@@ -18,7 +18,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GuildProto.country", "country", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const COUNTRY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GuildProto.country", "country", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var country$field:int;
 
@@ -45,7 +45,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.GuildProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.GuildProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var name$field:String;
 
@@ -68,7 +68,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GUILD_FLAG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GuildProto.guild_flag", "guildFlag", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildFlagProto; });
+		public static const GUILD_FLAG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GuildProto.guild_flag", "guildFlag", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildFlagProto; });
 
 		private var guild_flag$field:app.message.GuildFlagProto;
 
@@ -91,7 +91,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ANNOUNCEMENT:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.GuildProto.announcement", "announcement", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const ANNOUNCEMENT:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.GuildProto.announcement", "announcement", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var announcement$field:String;
 
@@ -114,7 +114,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FAMILIES:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.GuildProto.families", "families", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildMemberProto; });
+		public static const FAMILIES:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.GuildProto.families", "families", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildMemberProto; });
 
 		[ArrayElementType("app.message.GuildMemberProto")]
 		public var families:Array = [];
@@ -122,7 +122,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const OFFICE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GuildProto.office", "office", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildOfficeProto; });
+		public static const OFFICE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GuildProto.office", "office", (6 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildOfficeProto; });
 
 		private var office$field:app.message.GuildOfficeProto;
 
@@ -145,7 +145,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STORAGE:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.GuildProto.storage", "storage", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildStorageProto; });
+		public static const STORAGE:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.GuildProto.storage", "storage", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildStorageProto; });
 
 		private var storage$field:app.message.GuildStorageProto;
 
@@ -168,7 +168,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.GuildProto.level", "level", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.GuildProto.level", "level", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level$field:int;
 
@@ -196,35 +196,35 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasCountry) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, country$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, country$field);
 			}
 			if (hasName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, name$field);
 			}
 			if (hasGuildFlag) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, guild_flag$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, guild_flag$field);
 			}
 			if (hasAnnouncement) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, announcement$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, announcement$field);
 			}
 			for (var families$index:uint = 0; families$index < this.families.length; ++families$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.families[families$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.families[families$index]);
 			}
 			if (hasOffice) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, office$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, office$field);
 			}
 			if (hasStorage) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, storage$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, storage$field);
 			}
 			if (hasLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -243,21 +243,21 @@ package app.message {
 			var storage$count:uint = 0;
 			var level$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (country$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildProto.country cannot be set twice.');
 					}
 					++country$count;
-					this.country = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.country = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildProto.name cannot be set twice.');
 					}
 					++name$count;
-					this.name = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.name = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (guild_flag$count != 0) {
@@ -265,17 +265,17 @@ package app.message {
 					}
 					++guild_flag$count;
 					this.guildFlag = new app.message.GuildFlagProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.guildFlag);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.guildFlag);
 					break;
 				case 4:
 					if (announcement$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildProto.announcement cannot be set twice.');
 					}
 					++announcement$count;
-					this.announcement = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.announcement = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 5:
-					this.families.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.GuildMemberProto()));
+					this.families.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.GuildMemberProto()));
 					break;
 				case 6:
 					if (office$count != 0) {
@@ -283,7 +283,7 @@ package app.message {
 					}
 					++office$count;
 					this.office = new app.message.GuildOfficeProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.office);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.office);
 					break;
 				case 7:
 					if (storage$count != 0) {
@@ -291,14 +291,14 @@ package app.message {
 					}
 					++storage$count;
 					this.storage = new app.message.GuildStorageProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.storage);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.storage);
 					break;
 				case 8:
 					if (level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: GuildProto.level cannot be set twice.');
 					}
 					++level$count;
-					this.level = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.level = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

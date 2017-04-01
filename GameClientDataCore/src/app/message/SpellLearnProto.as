@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PRE_SPELL_TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellLearnProto.pre_spell_type", "preSpellType", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PRE_SPELL_TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellLearnProto.pre_spell_type", "preSpellType", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var pre_spell_type$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PRE_SPELL_LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellLearnProto.pre_spell_level", "preSpellLevel", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const PRE_SPELL_LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellLearnProto.pre_spell_level", "preSpellLevel", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var pre_spell_level$field:int;
 
@@ -67,7 +67,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CATEGORY_COST_SPELL_POINT:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellLearnProto.category_cost_spell_point", "categoryCostSpellPoint", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CATEGORY_COST_SPELL_POINT:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellLearnProto.category_cost_spell_point", "categoryCostSpellPoint", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var category_cost_spell_point$field:int;
 
@@ -92,7 +92,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SLOT_INDEX:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.SpellLearnProto.slot_index", "slotIndex", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const SLOT_INDEX:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.SpellLearnProto.slot_index", "slotIndex", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var slot_index$field:int;
 
@@ -117,7 +117,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SPELL:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SpellLearnProto.spell", "spell", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpellProto; });
+		public static const SPELL:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SpellLearnProto.spell", "spell", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpellProto; });
 
 		private var spell$field:app.message.SpellProto;
 
@@ -143,23 +143,23 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasPreSpellType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, pre_spell_type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, pre_spell_type$field);
 			}
 			if (hasPreSpellLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, pre_spell_level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, pre_spell_level$field);
 			}
 			if (hasCategoryCostSpellPoint) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, category_cost_spell_point$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, category_cost_spell_point$field);
 			}
 			if (hasSlotIndex) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, slot_index$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, slot_index$field);
 			}
 			if (hasSpell) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, spell$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, spell$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -176,35 +176,35 @@ package app.message {
 			var slot_index$count:uint = 0;
 			var spell$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (pre_spell_type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellLearnProto.preSpellType cannot be set twice.');
 					}
 					++pre_spell_type$count;
-					this.preSpellType = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.preSpellType = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (pre_spell_level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellLearnProto.preSpellLevel cannot be set twice.');
 					}
 					++pre_spell_level$count;
-					this.preSpellLevel = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.preSpellLevel = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
 					if (category_cost_spell_point$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellLearnProto.categoryCostSpellPoint cannot be set twice.');
 					}
 					++category_cost_spell_point$count;
-					this.categoryCostSpellPoint = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.categoryCostSpellPoint = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (slot_index$count != 0) {
 						throw new flash.errors.IOError('Bad data format: SpellLearnProto.slotIndex cannot be set twice.');
 					}
 					++slot_index$count;
-					this.slotIndex = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.slotIndex = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
 					if (spell$count != 0) {
@@ -212,7 +212,7 @@ package app.message {
 					}
 					++spell$count;
 					this.spell = new app.message.SpellProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.spell);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.spell);
 					break;
 				default:
 					super.readUnknown(input, tag);

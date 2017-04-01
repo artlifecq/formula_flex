@@ -14,7 +14,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const VERISON:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.ModelProto.verison", "verison", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const VERISON:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.ModelProto.verison", "verison", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var verison$field:int;
 
@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RESOURCES:RepeatedFieldDescriptor$TYPE_INT32 = new RepeatedFieldDescriptor$TYPE_INT32("app.message.ModelProto.resources", "resources", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const RESOURCES:RepeatedFieldDescriptor_TYPE_INT32 = new RepeatedFieldDescriptor_TYPE_INT32("app.message.ModelProto.resources", "resources", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		[ArrayElementType("int")]
 		public var resources:Array = [];
@@ -52,11 +52,11 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasVerison) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, verison$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, verison$field);
 			}
 			if (this.resources != null && this.resources.length > 0) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.writePackedRepeated(output, com.netease.protobuf.WriteUtils.write$TYPE_INT32, this.resources);
+				com.netease.protobuf.WriteUtils.writePackedRepeated(output, com.netease.protobuf.WriteUtils.write_TYPE_INT32, this.resources);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -69,21 +69,21 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
 			var verison$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (verison$count != 0) {
 						throw new flash.errors.IOError('Bad data format: ModelProto.verison cannot be set twice.');
 					}
 					++verison$count;
-					this.verison = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.verison = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_INT32, this.resources);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_INT32, this.resources);
 						break;
 					}
-					this.resources.push(com.netease.protobuf.ReadUtils.read$TYPE_INT32(input));
+					this.resources.push(com.netease.protobuf.ReadUtils.read_TYPE_INT32(input));
 					break;
 				default:
 					super.readUnknown(input, tag);

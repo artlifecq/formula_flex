@@ -15,7 +15,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const REFINE_TIMES:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentRefineDestoryDataProto.refine_times", "refineTimes", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const REFINE_TIMES:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentRefineDestoryDataProto.refine_times", "refineTimes", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var refine_times$field:int;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MONEY_COST:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentRefineDestoryDataProto.money_cost", "moneyCost", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MONEY_COST:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentRefineDestoryDataProto.money_cost", "moneyCost", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var money_cost$field:int;
 
@@ -67,7 +67,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PRIZE:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.EquipmentRefineDestoryDataProto.prize", "prize", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentDestroyPrizeDataProto; });
+		public static const PRIZE:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.EquipmentRefineDestoryDataProto.prize", "prize", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentDestroyPrizeDataProto; });
 
 		[ArrayElementType("app.message.EquipmentDestroyPrizeDataProto")]
 		public var prize:Array = [];
@@ -78,15 +78,15 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasRefineTimes) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, refine_times$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, refine_times$field);
 			}
 			if (hasMoneyCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, money_cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, money_cost$field);
 			}
 			for (var prize$index:uint = 0; prize$index < this.prize.length; ++prize$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.prize[prize$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.prize[prize$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -100,24 +100,24 @@ package app.message {
 			var refine_times$count:uint = 0;
 			var money_cost$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (refine_times$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentRefineDestoryDataProto.refineTimes cannot be set twice.');
 					}
 					++refine_times$count;
-					this.refineTimes = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.refineTimes = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (money_cost$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentRefineDestoryDataProto.moneyCost cannot be set twice.');
 					}
 					++money_cost$count;
-					this.moneyCost = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.moneyCost = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 3:
-					this.prize.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.EquipmentDestroyPrizeDataProto()));
+					this.prize.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.EquipmentDestroyPrizeDataProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

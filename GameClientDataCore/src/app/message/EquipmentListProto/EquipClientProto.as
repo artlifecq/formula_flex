@@ -15,7 +15,7 @@ package app.message.EquipmentListProto {
 		/**
 		 *  @private
 		 */
-		public static const POS:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentListProto.EquipClientProto.pos", "pos", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const POS:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentListProto.EquipClientProto.pos", "pos", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var pos$field:int;
 
@@ -42,7 +42,7 @@ package app.message.EquipmentListProto {
 		/**
 		 *  @private
 		 */
-		public static const EQUIP:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.EquipmentListProto.EquipClientProto.equip", "equip", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsProto; });
+		public static const EQUIP:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.EquipmentListProto.EquipClientProto.equip", "equip", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsProto; });
 
 		private var equip$field:app.message.GoodsProto;
 
@@ -68,11 +68,11 @@ package app.message.EquipmentListProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasPos) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, pos$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, pos$field);
 			}
 			if (hasEquip) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, equip$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, equip$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -86,14 +86,14 @@ package app.message.EquipmentListProto {
 			var pos$count:uint = 0;
 			var equip$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (pos$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipClientProto.pos cannot be set twice.');
 					}
 					++pos$count;
-					this.pos = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.pos = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (equip$count != 0) {
@@ -101,7 +101,7 @@ package app.message.EquipmentListProto {
 					}
 					++equip$count;
 					this.equip = new app.message.GoodsProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.equip);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.equip);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -9,8 +9,6 @@ package com.rpgGame.app.ui.alert
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.type.item.ItemQualityType;
 	
-	import org.mokylin.skin.common.AutoDressEquipAlertSkin;
-	
 	import starling.display.DisplayObject;
 	
 	/**
@@ -21,14 +19,14 @@ package com.rpgGame.app.ui.alert
 	{
 		private static var _ins:AutoDressAlert;;
 		
-		private var skin:AutoDressEquipAlertSkin;
+		private var skin:Object;//AutoDressEquipAlertSkin;
 		private var okFCallBack:Function;
 		private var closeCallBack:Function;
 		private var equips:Array;
 		
 		public function AutoDressAlert()
 		{
-			skin = new AutoDressEquipAlertSkin(); 
+			//skin = new AutoDressEquipAlertSkin(); 
 			super(skin);
 			
 			var grid:DragDropItem = FaceUtil.creatDragDropItemByUIAsset(skin.grid, IcoSizeEnum.SIZE_60);

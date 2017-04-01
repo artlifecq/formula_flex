@@ -9,14 +9,14 @@ package com.rpgGame.app.cmdlistener.clientConfig
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
 	 * 客户端配置命令侦听器
-	 * @author L.L.M.Sunny
-	 * 创建时间：2015-6-1 下午3:05:12
+	 * --这个协议，目前可能没有用了，因为现在的配置都是客户端自己都。
+	 * @author NEIL
 	 *
 	 */
 	public class ClientConfigCmdListener extends BaseBean
@@ -30,7 +30,7 @@ package com.rpgGame.app.cmdlistener.clientConfig
 
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(MiscModuleMessages.S2C_REPLY_CONFIG4, onRecConfig4);
+			SocketConnection_protoBuffer.addCmdListener(MiscModuleMessages.S2C_REPLY_CONFIG4, onRecConfig4);
 			finish();
 		}
 

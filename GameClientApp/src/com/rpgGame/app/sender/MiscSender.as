@@ -1,8 +1,12 @@
 package com.rpgGame.app.sender
 {
+	import com.rpgGame.netData.login.message.ReqHeartMessage;
+	
 	import flash.utils.ByteArray;
 	
 	import app.cmd.MiscModuleMessages;
+	
+	import org.game.netCore.connection.SocketConnection;
 
 	/**
 	 *
@@ -16,16 +20,23 @@ package com.rpgGame.app.sender
 		public function MiscSender()
 		{
 		}
+		
+		public static function reqHeartAndServerTime(time:Number):void
+		{
+			var msg:ReqHeartMessage = new ReqHeartMessage();
+			msg.time = time;
+			SocketConnection.send(msg);
+		}
 
 		/**
 		 * 请求服务器时间
 		 *
 		 */
-		public static function reqServerTime() : void
-		{
-			_bytes.clear();
-			send(MiscModuleMessages.C2S_GET_SERVER_TIME, _bytes);
-		}
+//		public static function reqServerTime() : void
+//		{
+//			_bytes.clear();
+//			send(MiscModuleMessages.C2S_GET_SERVER_TIME, _bytes);
+//		}
 
 		/**
 		 * 设置客户端的数据

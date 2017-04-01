@@ -17,7 +17,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL_STAGE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentLevelStageQualityEvaluateDestoryDataProto.level_stage", "levelStage", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL_STAGE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentLevelStageQualityEvaluateDestoryDataProto.level_stage", "levelStage", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level_stage$field:int;
 
@@ -44,7 +44,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const QUALITY:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.EquipmentLevelStageQualityEvaluateDestoryDataProto.quality", "quality", (2 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Quality);
+		public static const QUALITY:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.EquipmentLevelStageQualityEvaluateDestoryDataProto.quality", "quality", (2 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Quality);
 
 		private var quality$field:int;
 
@@ -69,7 +69,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EVALUATE:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.EquipmentLevelStageQualityEvaluateDestoryDataProto.evaluate", "evaluate", (3 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Evaluate);
+		public static const EVALUATE:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.EquipmentLevelStageQualityEvaluateDestoryDataProto.evaluate", "evaluate", (3 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Evaluate);
 
 		private var evaluate$field:int;
 
@@ -94,7 +94,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MONEY_COST:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentLevelStageQualityEvaluateDestoryDataProto.money_cost", "moneyCost", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const MONEY_COST:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentLevelStageQualityEvaluateDestoryDataProto.money_cost", "moneyCost", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var money_cost$field:int;
 
@@ -119,7 +119,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const PRIZE:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.EquipmentLevelStageQualityEvaluateDestoryDataProto.prize", "prize", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentDestroyPrizeDataProto; });
+		public static const PRIZE:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.EquipmentLevelStageQualityEvaluateDestoryDataProto.prize", "prize", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentDestroyPrizeDataProto; });
 
 		[ArrayElementType("app.message.EquipmentDestroyPrizeDataProto")]
 		public var prize:Array = [];
@@ -130,23 +130,23 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasLevelStage) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level_stage$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level_stage$field);
 			}
 			if (hasQuality) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, quality$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, quality$field);
 			}
 			if (hasEvaluate) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, evaluate$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, evaluate$field);
 			}
 			if (hasMoneyCost) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, money_cost$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, money_cost$field);
 			}
 			for (var prize$index:uint = 0; prize$index < this.prize.length; ++prize$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.prize[prize$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.prize[prize$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -162,38 +162,38 @@ package app.message {
 			var evaluate$count:uint = 0;
 			var money_cost$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (level_stage$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentLevelStageQualityEvaluateDestoryDataProto.levelStage cannot be set twice.');
 					}
 					++level_stage$count;
-					this.levelStage = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.levelStage = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (quality$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentLevelStageQualityEvaluateDestoryDataProto.quality cannot be set twice.');
 					}
 					++quality$count;
-					this.quality = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.quality = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 3:
 					if (evaluate$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentLevelStageQualityEvaluateDestoryDataProto.evaluate cannot be set twice.');
 					}
 					++evaluate$count;
-					this.evaluate = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.evaluate = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 4:
 					if (money_cost$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentLevelStageQualityEvaluateDestoryDataProto.moneyCost cannot be set twice.');
 					}
 					++money_cost$count;
-					this.moneyCost = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.moneyCost = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 5:
-					this.prize.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.EquipmentDestroyPrizeDataProto()));
+					this.prize.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.EquipmentDestroyPrizeDataProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -2,7 +2,6 @@ package com.rpgGame.app.manager.society
 {
 	import com.rpgGame.app.manager.GameSetting;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.country.CountryManager;
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -23,11 +22,8 @@ package com.rpgGame.app.manager.society
 	import com.rpgGame.coreData.cfg.society.SocietyStaticConfigData;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
-	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
-	import com.rpgGame.coreData.info.country.CountryGovernmentPostData;
-	import com.rpgGame.coreData.info.country.country.CountryOfficeData;
-	import com.rpgGame.coreData.info.item.ItemInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.society.SocietyData;
 	import com.rpgGame.coreData.info.society.SocietyDetailData;
 	import com.rpgGame.coreData.info.society.SocietyJoinApproveData;
@@ -53,8 +49,8 @@ package com.rpgGame.app.manager.society
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.net.ByteBuffer;
-	import org.game.netCore.net.BytesUtil;
+	import org.game.netCore.net_protobuff.ByteBuffer;
+	import org.game.netCore.net_protobuff.BytesUtil;
 	
 	import utils.TimerServer;
 
@@ -223,13 +219,13 @@ package com.rpgGame.app.manager.society
 		/** 获取帮派成员国家官职 **/
 		public static function getMemberCountryPos(memberData : SocietyMemberData) : int
 		{
-			var countryOfficeData : CountryOfficeData = CountryManager.getOfficeDatas();
-			if (countryOfficeData)
-			{
-				var postData : CountryGovernmentPostData = countryOfficeData.getOfficeById(memberData.id);
-				if (postData)
-					return postData.governmentPost;
-			}
+//			var countryOfficeData : CountryOfficeData = CountryManager.getOfficeDatas();
+//			if (countryOfficeData)
+//			{
+//				var postData : CountryGovernmentPostData = countryOfficeData.getOfficeById(memberData.id);
+//				if (postData)
+//					return postData.governmentPost;
+//			}
 			return -1;
 		}
 
@@ -867,7 +863,7 @@ package com.rpgGame.app.manager.society
 //			sceneRole.headFace.addAndUpdateFamilyName();
 		}
 
-		public static function useFamilyLeaderToken(item : ItemInfo) : void
+		public static function useFamilyLeaderToken(item : ClientItemInfo) : void
 		{
 			var selfMemberData : SocietyMemberData = getSelfMemberData();
 			if (!selfMemberData || !selfMemberData.isLeader)
@@ -880,16 +876,16 @@ package com.rpgGame.app.manager.society
 				NoticeManager.showNotify(LangSociety.USE_FAMILY_LEADER_TOKEN_IS_CD);
 				return;
 			}
-			if (!CountryManager.isAtMyCountry() || !MapDataManager.currentScene.isNormalScene)
-			{
-				NoticeManager.showNotify(LangSociety.USE_FAMILY_LEADER_TOKEN_NEED_SAFE);
-				return;
-			}
+//			if (!CountryManager.isAtMyCountry() || !MapDataManager.currentScene.isNormalScene)
+//			{
+//				NoticeManager.showNotify(LangSociety.USE_FAMILY_LEADER_TOKEN_NEED_SAFE);
+//				return;
+//			}
 			var alertSet : AlertSetInfo = new AlertSetInfo(LangAlertInfo.useFamilyLeaderToken);
 			GameAlert.showAlert(alertSet,useFamilyLeaderTokenClick,item);
 		}
 		
-		private static function useFamilyLeaderTokenClick(gameAlert:GameAlert,item : ItemInfo):void
+		private static function useFamilyLeaderTokenClick(gameAlert:GameAlert,item : ClientItemInfo):void
 		{
 			switch(gameAlert.clickType)
 			{
@@ -899,11 +895,11 @@ package com.rpgGame.app.manager.society
 			}			
 		}
 
-		private static function onUseFamilyLeaderToken(item : ItemInfo) : void
+		private static function onUseFamilyLeaderToken(item : ClientItemInfo) : void
 		{
 			var msgBytes : ByteBuffer = new ByteBuffer();
 			msgBytes.writeUTFBytes(LangSociety.FAMILY_LEADER_TOKEN_CONVENE_MSG);
-			ItemSender.reqUseGoods(item.index, 1, msgBytes);
+//			ItemSender.reqUseGoods(item.index, 1, msgBytes);
 		}
 
 		public static function setLeaderSummon(tokenData : SummonTokenData) : void
@@ -938,11 +934,11 @@ package com.rpgGame.app.manager.society
 
 		private static function onReplyGotoSummon(tokenData : SummonTokenData) : void
 		{
-			if (!CountryManager.isAtMyCountry() || !MapDataManager.currentScene.isNormalScene)
-			{
-				NoticeManager.showNotify(LangSociety.REPLY_FAMILY_LEADER_TOKEN_NEED_SAFE);
-				return;
-			}
+//			if (!CountryManager.isAtMyCountry() || !MapDataManager.currentScene.isNormalScene)
+//			{
+//				NoticeManager.showNotify(LangSociety.REPLY_FAMILY_LEADER_TOKEN_NEED_SAFE);
+//				return;
+//			}
 			if (MainRoleManager.actor.stateMachine.isDeadState)
 			{
 				NoticeManager.showNotify(LangSociety.REPLY_FAMILY_LEADER_TOKEN_DEAD);

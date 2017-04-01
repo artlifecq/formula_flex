@@ -19,6 +19,7 @@ package com.game.engine2D.core
 		{
 			super(hasAlpha, false, null);
 			compressed = false;
+			_asyncUpload = false;
 		}
 		
 		public function get baseTexture():TextureBase

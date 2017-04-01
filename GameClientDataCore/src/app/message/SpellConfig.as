@@ -19,7 +19,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GCD_GROUPS_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SpellConfig.gcd_groups_config", "gcdGroupsConfig", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GcdGroupsConfig; });
+		public static const GCD_GROUPS_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SpellConfig.gcd_groups_config", "gcdGroupsConfig", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GcdGroupsConfig; });
 
 		private var gcd_groups_config$field:app.message.GcdGroupsConfig;
 
@@ -42,7 +42,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ANIMATION_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SpellConfig.animation_config", "animationConfig", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AnimationConfig; });
+		public static const ANIMATION_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SpellConfig.animation_config", "animationConfig", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AnimationConfig; });
 
 		private var animation_config$field:app.message.AnimationConfig;
 
@@ -65,7 +65,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SPELL_EFFECT_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SpellConfig.spell_effect_config", "spellEffectConfig", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpellEffectConfig; });
+		public static const SPELL_EFFECT_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SpellConfig.spell_effect_config", "spellEffectConfig", (3 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpellEffectConfig; });
 
 		private var spell_effect_config$field:app.message.SpellEffectConfig;
 
@@ -88,7 +88,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STATE_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SpellConfig.state_config", "stateConfig", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.StateConfig; });
+		public static const STATE_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SpellConfig.state_config", "stateConfig", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.StateConfig; });
 
 		private var state_config$field:app.message.StateConfig;
 
@@ -111,7 +111,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SPELL_LEARN_CONFIG:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.SpellConfig.spell_learn_config", "spellLearnConfig", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpellLearnConfig; });
+		public static const SPELL_LEARN_CONFIG:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.SpellConfig.spell_learn_config", "spellLearnConfig", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpellLearnConfig; });
 
 		private var spell_learn_config$field:app.message.SpellLearnConfig;
 
@@ -137,23 +137,23 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasGcdGroupsConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, gcd_groups_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, gcd_groups_config$field);
 			}
 			if (hasAnimationConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, animation_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, animation_config$field);
 			}
 			if (hasSpellEffectConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, spell_effect_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, spell_effect_config$field);
 			}
 			if (hasStateConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, state_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, state_config$field);
 			}
 			if (hasSpellLearnConfig) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, spell_learn_config$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, spell_learn_config$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -170,7 +170,7 @@ package app.message {
 			var state_config$count:uint = 0;
 			var spell_learn_config$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (gcd_groups_config$count != 0) {
@@ -178,7 +178,7 @@ package app.message {
 					}
 					++gcd_groups_config$count;
 					this.gcdGroupsConfig = new app.message.GcdGroupsConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.gcdGroupsConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.gcdGroupsConfig);
 					break;
 				case 2:
 					if (animation_config$count != 0) {
@@ -186,7 +186,7 @@ package app.message {
 					}
 					++animation_config$count;
 					this.animationConfig = new app.message.AnimationConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.animationConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.animationConfig);
 					break;
 				case 3:
 					if (spell_effect_config$count != 0) {
@@ -194,7 +194,7 @@ package app.message {
 					}
 					++spell_effect_config$count;
 					this.spellEffectConfig = new app.message.SpellEffectConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.spellEffectConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.spellEffectConfig);
 					break;
 				case 4:
 					if (state_config$count != 0) {
@@ -202,7 +202,7 @@ package app.message {
 					}
 					++state_config$count;
 					this.stateConfig = new app.message.StateConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.stateConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.stateConfig);
 					break;
 				case 5:
 					if (spell_learn_config$count != 0) {
@@ -210,7 +210,7 @@ package app.message {
 					}
 					++spell_learn_config$count;
 					this.spellLearnConfig = new app.message.SpellLearnConfig();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.spellLearnConfig);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.spellLearnConfig);
 					break;
 				default:
 					super.readUnknown(input, tag);

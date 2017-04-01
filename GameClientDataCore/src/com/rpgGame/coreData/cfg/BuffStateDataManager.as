@@ -1,7 +1,8 @@
 package com.rpgGame.coreData.cfg
 {
-	import app.message.StateConfig;
-	import app.message.StateProto;
+	import com.rpgGame.coreData.clientConfig.Q_buff;
+	
+	import flash.utils.ByteArray;
 	
 	import org.client.mainCore.ds.HashMap;
 
@@ -38,17 +39,18 @@ package com.rpgGame.coreData.cfg
 		
 		private static var _map:HashMap = new HashMap();
 
-		public static function setConfig(cfg:StateConfig):void
+		public static function setConfig(data:ByteArray):void
 		{
-			if(!cfg)
+			var arr:Array = data.readObject();
+			if(!arr)
 				return;
-			for each(var dataProto:StateProto in cfg.states)
+			for each(var buffData:Q_buff in arr)
 			{
-				_map.add(dataProto.id,dataProto);
+				_map.add(buffData.q_buff_id,buffData);
 			}
 		}
 
-		public static function getData(id:uint):StateProto
+		public static function getData(id:uint):Q_buff
 		{
 			return _map.getValue(id);
 		}

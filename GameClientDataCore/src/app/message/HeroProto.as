@@ -41,7 +41,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HERO_BASIC:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.hero_basic", "heroBasic", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.HeroBasicProto; });
+		public static const HERO_BASIC:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.hero_basic", "heroBasic", (1 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.HeroBasicProto; });
 
 		private var hero_basic$field:app.message.HeroBasicProto;
 
@@ -64,7 +64,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TASK_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.task_module_obj", "taskModuleObj", (20 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TaskModuleObjProto; });
+		public static const TASK_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.task_module_obj", "taskModuleObj", (20 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TaskModuleObjProto; });
 
 		private var task_module_obj$field:app.message.TaskModuleObjProto;
 
@@ -87,7 +87,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ACHIEVEMENT_AND_NICKNAME_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.achievement_and_nickname_module_obj", "achievementAndNicknameModuleObj", (21 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AchievementAndNickNameModuleObjProto; });
+		public static const ACHIEVEMENT_AND_NICKNAME_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.achievement_and_nickname_module_obj", "achievementAndNicknameModuleObj", (21 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AchievementAndNickNameModuleObjProto; });
 
 		private var achievement_and_nickname_module_obj$field:app.message.AchievementAndNickNameModuleObjProto;
 
@@ -110,7 +110,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SPELL_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.spell_module_obj", "spellModuleObj", (22 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpellModuleObjProto; });
+		public static const SPELL_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.spell_module_obj", "spellModuleObj", (22 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpellModuleObjProto; });
 
 		private var spell_module_obj$field:app.message.SpellModuleObjProto;
 
@@ -133,7 +133,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ADD_SPRITE_STAT_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.add_sprite_stat_module_obj", "addSpriteStatModuleObj", (23 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AddSpriteStatModuleObjProto; });
+		public static const ADD_SPRITE_STAT_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.add_sprite_stat_module_obj", "addSpriteStatModuleObj", (23 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.AddSpriteStatModuleObjProto; });
 
 		private var add_sprite_stat_module_obj$field:app.message.AddSpriteStatModuleObjProto;
 
@@ -156,7 +156,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const VIP_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.vip_module_obj", "vipModuleObj", (24 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.VipModuleObjProto; });
+		public static const VIP_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.vip_module_obj", "vipModuleObj", (24 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.VipModuleObjProto; });
 
 		private var vip_module_obj$field:app.message.VipModuleObjProto;
 
@@ -179,7 +179,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HERO_MISC_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.hero_misc_module_obj", "heroMiscModuleObj", (25 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.HeroMiscModuleObjProto; });
+		public static const HERO_MISC_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.hero_misc_module_obj", "heroMiscModuleObj", (25 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.HeroMiscModuleObjProto; });
 
 		private var hero_misc_module_obj$field:app.message.HeroMiscModuleObjProto;
 
@@ -202,7 +202,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RECHARGE_RANK_PROMOTION_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.recharge_rank_promotion_module_obj", "rechargeRankPromotionModuleObj", (26 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.RechargeRankPromotionModuleObjProto; });
+		public static const RECHARGE_RANK_PROMOTION_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.recharge_rank_promotion_module_obj", "rechargeRankPromotionModuleObj", (26 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.RechargeRankPromotionModuleObjProto; });
 
 		private var recharge_rank_promotion_module_obj$field:app.message.RechargeRankPromotionModuleObjProto;
 
@@ -225,7 +225,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const WELFARE_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.welfare_module_obj", "welfareModuleObj", (27 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.WelfareModuleObjProto; });
+		public static const WELFARE_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.welfare_module_obj", "welfareModuleObj", (27 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.WelfareModuleObjProto; });
 
 		private var welfare_module_obj$field:app.message.WelfareModuleObjProto;
 
@@ -248,7 +248,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const CLUSTER_TEAM_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.cluster_team_module_obj", "clusterTeamModuleObj", (28 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ClusterTeamModuleObjProto; });
+		public static const CLUSTER_TEAM_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.cluster_team_module_obj", "clusterTeamModuleObj", (28 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ClusterTeamModuleObjProto; });
 
 		private var cluster_team_module_obj$field:app.message.ClusterTeamModuleObjProto;
 
@@ -271,7 +271,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TEAM_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.team_module_obj", "teamModuleObj", (29 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TeamModuleObjProto; });
+		public static const TEAM_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.team_module_obj", "teamModuleObj", (29 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TeamModuleObjProto; });
 
 		private var team_module_obj$field:app.message.TeamModuleObjProto;
 
@@ -294,7 +294,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const COUNTRY_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.country_module_obj", "countryModuleObj", (30 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryModuleObjProto; });
+		public static const COUNTRY_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.country_module_obj", "countryModuleObj", (30 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.CountryModuleObjProto; });
 
 		private var country_module_obj$field:app.message.CountryModuleObjProto;
 
@@ -317,7 +317,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const FAMILY_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.family_module_obj", "familyModuleObj", (31 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyModuleObjProto; });
+		public static const FAMILY_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.family_module_obj", "familyModuleObj", (31 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.FamilyModuleObjProto; });
 
 		private var family_module_obj$field:app.message.FamilyModuleObjProto;
 
@@ -340,7 +340,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const KING_WAR_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.king_war_module_obj", "kingWarModuleObj", (32 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.KingWarModuleObjProto; });
+		public static const KING_WAR_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.king_war_module_obj", "kingWarModuleObj", (32 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.KingWarModuleObjProto; });
 
 		private var king_war_module_obj$field:app.message.KingWarModuleObjProto;
 
@@ -363,7 +363,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BIAO_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.biao_module_obj", "biaoModuleObj", (33 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BiaoModuleObjProto; });
+		public static const BIAO_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.biao_module_obj", "biaoModuleObj", (33 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BiaoModuleObjProto; });
 
 		private var biao_module_obj$field:app.message.BiaoModuleObjProto;
 
@@ -386,7 +386,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MOUNT_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.mount_module_obj", "mountModuleObj", (34 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MountModuleObjClientProto; });
+		public static const MOUNT_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.mount_module_obj", "mountModuleObj", (34 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MountModuleObjClientProto; });
 
 		private var mount_module_obj$field:app.message.MountModuleObjClientProto;
 
@@ -409,7 +409,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BA_ZHEN_TU_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.ba_zhen_tu_module_obj", "baZhenTuModuleObj", (35 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BaZhenTuModuleObjProto; });
+		public static const BA_ZHEN_TU_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.ba_zhen_tu_module_obj", "baZhenTuModuleObj", (35 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.BaZhenTuModuleObjProto; });
 
 		private var ba_zhen_tu_module_obj$field:app.message.BaZhenTuModuleObjProto;
 
@@ -432,7 +432,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SCENE_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.scene_module_obj", "sceneModuleObj", (36 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SceneModuleObjClientProto; });
+		public static const SCENE_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.scene_module_obj", "sceneModuleObj", (36 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SceneModuleObjClientProto; });
 
 		private var scene_module_obj$field:app.message.SceneModuleObjClientProto;
 
@@ -455,7 +455,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GUILD_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.guild_module_obj", "guildModuleObj", (37 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildModuleObjProto; });
+		public static const GUILD_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.guild_module_obj", "guildModuleObj", (37 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GuildModuleObjProto; });
 
 		private var guild_module_obj$field:app.message.GuildModuleObjProto;
 
@@ -478,7 +478,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const RELATION_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.relation_module_obj", "relationModuleObj", (38 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.RelationModuleObjProto; });
+		public static const RELATION_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.relation_module_obj", "relationModuleObj", (38 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.RelationModuleObjProto; });
 
 		private var relation_module_obj$field:app.message.RelationModuleObjProto;
 
@@ -501,7 +501,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MAIL_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.mail_module_obj", "mailModuleObj", (39 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MailModuleObjClientProto; });
+		public static const MAIL_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.mail_module_obj", "mailModuleObj", (39 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MailModuleObjClientProto; });
 
 		private var mail_module_obj$field:app.message.MailModuleObjClientProto;
 
@@ -524,7 +524,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GOODS_CONTAINER_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.goods_container_module_obj", "goodsContainerModuleObj", (40 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsContainerModuleObjProto; });
+		public static const GOODS_CONTAINER_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.goods_container_module_obj", "goodsContainerModuleObj", (40 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.GoodsContainerModuleObjProto; });
 
 		private var goods_container_module_obj$field:app.message.GoodsContainerModuleObjProto;
 
@@ -547,7 +547,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TRADE_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.trade_module_obj", "tradeModuleObj", (41 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TradeModuleObjProto; });
+		public static const TRADE_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.trade_module_obj", "tradeModuleObj", (41 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TradeModuleObjProto; });
 
 		private var trade_module_obj$field:app.message.TradeModuleObjProto;
 
@@ -570,7 +570,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SHOP_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.shop_module_obj", "shopModuleObj", (42 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ShopModuleObjClientProto; });
+		public static const SHOP_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.shop_module_obj", "shopModuleObj", (42 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.ShopModuleObjClientProto; });
 
 		private var shop_module_obj$field:app.message.ShopModuleObjClientProto;
 
@@ -593,7 +593,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const DB_RANK_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.db_rank_module_obj", "dbRankModuleObj", (43 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.DbRankModuleObjProto; });
+		public static const DB_RANK_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.db_rank_module_obj", "dbRankModuleObj", (43 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.DbRankModuleObjProto; });
 
 		private var db_rank_module_obj$field:app.message.DbRankModuleObjProto;
 
@@ -616,7 +616,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TRANSFER_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.transfer_module_obj", "transferModuleObj", (44 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TransferModuleObjProto; });
+		public static const TRANSFER_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.transfer_module_obj", "transferModuleObj", (44 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.TransferModuleObjProto; });
 
 		private var transfer_module_obj$field:app.message.TransferModuleObjProto;
 
@@ -639,7 +639,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const STALL_MODULE_OBJ:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.HeroProto.stall_module_obj", "stallModuleObj", (45 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.StallModuleObjProto; });
+		public static const STALL_MODULE_OBJ:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.HeroProto.stall_module_obj", "stallModuleObj", (45 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.StallModuleObjProto; });
 
 		private var stall_module_obj$field:app.message.StallModuleObjProto;
 
@@ -665,111 +665,111 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasHeroBasic) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, hero_basic$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, hero_basic$field);
 			}
 			if (hasTaskModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 20);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, task_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, task_module_obj$field);
 			}
 			if (hasAchievementAndNicknameModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 21);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, achievement_and_nickname_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, achievement_and_nickname_module_obj$field);
 			}
 			if (hasSpellModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 22);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, spell_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, spell_module_obj$field);
 			}
 			if (hasAddSpriteStatModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 23);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, add_sprite_stat_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, add_sprite_stat_module_obj$field);
 			}
 			if (hasVipModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 24);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, vip_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, vip_module_obj$field);
 			}
 			if (hasHeroMiscModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 25);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, hero_misc_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, hero_misc_module_obj$field);
 			}
 			if (hasRechargeRankPromotionModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 26);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, recharge_rank_promotion_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, recharge_rank_promotion_module_obj$field);
 			}
 			if (hasWelfareModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 27);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, welfare_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, welfare_module_obj$field);
 			}
 			if (hasClusterTeamModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 28);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, cluster_team_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, cluster_team_module_obj$field);
 			}
 			if (hasTeamModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 29);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, team_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, team_module_obj$field);
 			}
 			if (hasCountryModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 30);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, country_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, country_module_obj$field);
 			}
 			if (hasFamilyModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 31);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, family_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, family_module_obj$field);
 			}
 			if (hasKingWarModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 32);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, king_war_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, king_war_module_obj$field);
 			}
 			if (hasBiaoModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 33);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, biao_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, biao_module_obj$field);
 			}
 			if (hasMountModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 34);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, mount_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, mount_module_obj$field);
 			}
 			if (hasBaZhenTuModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 35);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, ba_zhen_tu_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, ba_zhen_tu_module_obj$field);
 			}
 			if (hasSceneModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 36);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, scene_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, scene_module_obj$field);
 			}
 			if (hasGuildModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 37);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, guild_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, guild_module_obj$field);
 			}
 			if (hasRelationModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 38);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, relation_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, relation_module_obj$field);
 			}
 			if (hasMailModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 39);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, mail_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, mail_module_obj$field);
 			}
 			if (hasGoodsContainerModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 40);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, goods_container_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, goods_container_module_obj$field);
 			}
 			if (hasTradeModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 41);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, trade_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, trade_module_obj$field);
 			}
 			if (hasShopModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 42);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, shop_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, shop_module_obj$field);
 			}
 			if (hasDbRankModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 43);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, db_rank_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, db_rank_module_obj$field);
 			}
 			if (hasTransferModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 44);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, transfer_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, transfer_module_obj$field);
 			}
 			if (hasStallModuleObj) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 45);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, stall_module_obj$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, stall_module_obj$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -808,7 +808,7 @@ package app.message {
 			var transfer_module_obj$count:uint = 0;
 			var stall_module_obj$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (hero_basic$count != 0) {
@@ -816,7 +816,7 @@ package app.message {
 					}
 					++hero_basic$count;
 					this.heroBasic = new app.message.HeroBasicProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.heroBasic);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.heroBasic);
 					break;
 				case 20:
 					if (task_module_obj$count != 0) {
@@ -824,7 +824,7 @@ package app.message {
 					}
 					++task_module_obj$count;
 					this.taskModuleObj = new app.message.TaskModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.taskModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.taskModuleObj);
 					break;
 				case 21:
 					if (achievement_and_nickname_module_obj$count != 0) {
@@ -832,7 +832,7 @@ package app.message {
 					}
 					++achievement_and_nickname_module_obj$count;
 					this.achievementAndNicknameModuleObj = new app.message.AchievementAndNickNameModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.achievementAndNicknameModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.achievementAndNicknameModuleObj);
 					break;
 				case 22:
 					if (spell_module_obj$count != 0) {
@@ -840,7 +840,7 @@ package app.message {
 					}
 					++spell_module_obj$count;
 					this.spellModuleObj = new app.message.SpellModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.spellModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.spellModuleObj);
 					break;
 				case 23:
 					if (add_sprite_stat_module_obj$count != 0) {
@@ -848,7 +848,7 @@ package app.message {
 					}
 					++add_sprite_stat_module_obj$count;
 					this.addSpriteStatModuleObj = new app.message.AddSpriteStatModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.addSpriteStatModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.addSpriteStatModuleObj);
 					break;
 				case 24:
 					if (vip_module_obj$count != 0) {
@@ -856,7 +856,7 @@ package app.message {
 					}
 					++vip_module_obj$count;
 					this.vipModuleObj = new app.message.VipModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.vipModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.vipModuleObj);
 					break;
 				case 25:
 					if (hero_misc_module_obj$count != 0) {
@@ -864,7 +864,7 @@ package app.message {
 					}
 					++hero_misc_module_obj$count;
 					this.heroMiscModuleObj = new app.message.HeroMiscModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.heroMiscModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.heroMiscModuleObj);
 					break;
 				case 26:
 					if (recharge_rank_promotion_module_obj$count != 0) {
@@ -872,7 +872,7 @@ package app.message {
 					}
 					++recharge_rank_promotion_module_obj$count;
 					this.rechargeRankPromotionModuleObj = new app.message.RechargeRankPromotionModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.rechargeRankPromotionModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.rechargeRankPromotionModuleObj);
 					break;
 				case 27:
 					if (welfare_module_obj$count != 0) {
@@ -880,7 +880,7 @@ package app.message {
 					}
 					++welfare_module_obj$count;
 					this.welfareModuleObj = new app.message.WelfareModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.welfareModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.welfareModuleObj);
 					break;
 				case 28:
 					if (cluster_team_module_obj$count != 0) {
@@ -888,7 +888,7 @@ package app.message {
 					}
 					++cluster_team_module_obj$count;
 					this.clusterTeamModuleObj = new app.message.ClusterTeamModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.clusterTeamModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.clusterTeamModuleObj);
 					break;
 				case 29:
 					if (team_module_obj$count != 0) {
@@ -896,7 +896,7 @@ package app.message {
 					}
 					++team_module_obj$count;
 					this.teamModuleObj = new app.message.TeamModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.teamModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.teamModuleObj);
 					break;
 				case 30:
 					if (country_module_obj$count != 0) {
@@ -904,7 +904,7 @@ package app.message {
 					}
 					++country_module_obj$count;
 					this.countryModuleObj = new app.message.CountryModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.countryModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.countryModuleObj);
 					break;
 				case 31:
 					if (family_module_obj$count != 0) {
@@ -912,7 +912,7 @@ package app.message {
 					}
 					++family_module_obj$count;
 					this.familyModuleObj = new app.message.FamilyModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.familyModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.familyModuleObj);
 					break;
 				case 32:
 					if (king_war_module_obj$count != 0) {
@@ -920,7 +920,7 @@ package app.message {
 					}
 					++king_war_module_obj$count;
 					this.kingWarModuleObj = new app.message.KingWarModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.kingWarModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.kingWarModuleObj);
 					break;
 				case 33:
 					if (biao_module_obj$count != 0) {
@@ -928,7 +928,7 @@ package app.message {
 					}
 					++biao_module_obj$count;
 					this.biaoModuleObj = new app.message.BiaoModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.biaoModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.biaoModuleObj);
 					break;
 				case 34:
 					if (mount_module_obj$count != 0) {
@@ -936,7 +936,7 @@ package app.message {
 					}
 					++mount_module_obj$count;
 					this.mountModuleObj = new app.message.MountModuleObjClientProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.mountModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.mountModuleObj);
 					break;
 				case 35:
 					if (ba_zhen_tu_module_obj$count != 0) {
@@ -944,7 +944,7 @@ package app.message {
 					}
 					++ba_zhen_tu_module_obj$count;
 					this.baZhenTuModuleObj = new app.message.BaZhenTuModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.baZhenTuModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.baZhenTuModuleObj);
 					break;
 				case 36:
 					if (scene_module_obj$count != 0) {
@@ -952,7 +952,7 @@ package app.message {
 					}
 					++scene_module_obj$count;
 					this.sceneModuleObj = new app.message.SceneModuleObjClientProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.sceneModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.sceneModuleObj);
 					break;
 				case 37:
 					if (guild_module_obj$count != 0) {
@@ -960,7 +960,7 @@ package app.message {
 					}
 					++guild_module_obj$count;
 					this.guildModuleObj = new app.message.GuildModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.guildModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.guildModuleObj);
 					break;
 				case 38:
 					if (relation_module_obj$count != 0) {
@@ -968,7 +968,7 @@ package app.message {
 					}
 					++relation_module_obj$count;
 					this.relationModuleObj = new app.message.RelationModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.relationModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.relationModuleObj);
 					break;
 				case 39:
 					if (mail_module_obj$count != 0) {
@@ -976,7 +976,7 @@ package app.message {
 					}
 					++mail_module_obj$count;
 					this.mailModuleObj = new app.message.MailModuleObjClientProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.mailModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.mailModuleObj);
 					break;
 				case 40:
 					if (goods_container_module_obj$count != 0) {
@@ -984,7 +984,7 @@ package app.message {
 					}
 					++goods_container_module_obj$count;
 					this.goodsContainerModuleObj = new app.message.GoodsContainerModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.goodsContainerModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.goodsContainerModuleObj);
 					break;
 				case 41:
 					if (trade_module_obj$count != 0) {
@@ -992,7 +992,7 @@ package app.message {
 					}
 					++trade_module_obj$count;
 					this.tradeModuleObj = new app.message.TradeModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.tradeModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.tradeModuleObj);
 					break;
 				case 42:
 					if (shop_module_obj$count != 0) {
@@ -1000,7 +1000,7 @@ package app.message {
 					}
 					++shop_module_obj$count;
 					this.shopModuleObj = new app.message.ShopModuleObjClientProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.shopModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.shopModuleObj);
 					break;
 				case 43:
 					if (db_rank_module_obj$count != 0) {
@@ -1008,7 +1008,7 @@ package app.message {
 					}
 					++db_rank_module_obj$count;
 					this.dbRankModuleObj = new app.message.DbRankModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.dbRankModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.dbRankModuleObj);
 					break;
 				case 44:
 					if (transfer_module_obj$count != 0) {
@@ -1016,7 +1016,7 @@ package app.message {
 					}
 					++transfer_module_obj$count;
 					this.transferModuleObj = new app.message.TransferModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.transferModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.transferModuleObj);
 					break;
 				case 45:
 					if (stall_module_obj$count != 0) {
@@ -1024,7 +1024,7 @@ package app.message {
 					}
 					++stall_module_obj$count;
 					this.stallModuleObj = new app.message.StallModuleObjProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.stallModuleObj);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.stallModuleObj);
 					break;
 				default:
 					super.readUnknown(input, tag);

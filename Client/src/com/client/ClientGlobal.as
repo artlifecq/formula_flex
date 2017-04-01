@@ -1,7 +1,8 @@
 package com.client
 {
 	import com.gameClient.utils.VersionUtils;
-
+	import com.rpgGame.netData.player.bean.MyPlayerInfo;
+	
 	import flash.display.Sprite;
 	import flash.display.Stage;
 	import flash.display.StageAlign;
@@ -11,8 +12,6 @@ package com.client
 	import flash.system.IME;
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
-
-	import org.game.netCore.net.ByteBuffer;
 
 	/**
 	 *
@@ -27,7 +26,7 @@ package com.client
 		public static var urlParmar : Object;
 		public static var loginIP : String;
 		public static var loginPort : uint = 0;
-		public static var policyPort : uint = 48889; //9374;
+		public static var policyPort : uint = 8002; //9374;
 
 		/**
 		 * 是否是发布版本
@@ -62,7 +61,7 @@ package com.client
 		public static var useWorker : Boolean = true;
 
 		public static var maskWorldDic : Dictionary;
-		public static var loginData : ByteBuffer;
+		public static var loginData : MyPlayerInfo;
 		/** 资源根目录*/
 		public static var baseDir : String = "../";
 		public static var resURL : String = "res/";

@@ -16,7 +16,7 @@ package app.message.AllFamilyOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const POS:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.pos", "pos", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.FamilyOfficerPos);
+		public static const POS:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.pos", "pos", (1 << 3) | com.netease.protobuf.WireType.VARINT, app.message.FamilyOfficerPos);
 
 		private var pos$field:int;
 
@@ -43,7 +43,7 @@ package app.message.AllFamilyOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const POS_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.pos_name", "posName", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const POS_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.pos_name", "posName", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var pos_name$field:String;
 
@@ -66,7 +66,7 @@ package app.message.AllFamilyOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAN_INVITE_OTHER:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_invite_other", "canInviteOther", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_INVITE_OTHER:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_invite_other", "canInviteOther", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_invite_other$field:Boolean;
 
@@ -91,7 +91,7 @@ package app.message.AllFamilyOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAN_KICK_OTHER:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_kick_other", "canKickOther", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_KICK_OTHER:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_kick_other", "canKickOther", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_kick_other$field:Boolean;
 
@@ -116,7 +116,7 @@ package app.message.AllFamilyOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAN_SET_OFFICER_POS:RepeatedFieldDescriptor$TYPE_ENUM = new RepeatedFieldDescriptor$TYPE_ENUM("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_set_officer_pos", "canSetOfficerPos", (5 << 3) | com.netease.protobuf.WireType.VARINT, app.message.FamilyOfficerPos);
+		public static const CAN_SET_OFFICER_POS:RepeatedFieldDescriptor_TYPE_ENUM = new RepeatedFieldDescriptor_TYPE_ENUM("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_set_officer_pos", "canSetOfficerPos", (5 << 3) | com.netease.protobuf.WireType.VARINT, app.message.FamilyOfficerPos);
 
 		[ArrayElementType("int")]
 		public var canSetOfficerPos:Array = [];
@@ -124,7 +124,7 @@ package app.message.AllFamilyOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAN_UPGRADE_BUILDING:RepeatedFieldDescriptor$TYPE_ENUM = new RepeatedFieldDescriptor$TYPE_ENUM("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_upgrade_building", "canUpgradeBuilding", (6 << 3) | com.netease.protobuf.WireType.VARINT, app.message.FamilyBuildingType);
+		public static const CAN_UPGRADE_BUILDING:RepeatedFieldDescriptor_TYPE_ENUM = new RepeatedFieldDescriptor_TYPE_ENUM("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_upgrade_building", "canUpgradeBuilding", (6 << 3) | com.netease.protobuf.WireType.VARINT, app.message.FamilyBuildingType);
 
 		[ArrayElementType("int")]
 		public var canUpgradeBuilding:Array = [];
@@ -132,7 +132,7 @@ package app.message.AllFamilyOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAN_CHANGE_ANNOUNCEMENT:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_change_announcement", "canChangeAnnouncement", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_CHANGE_ANNOUNCEMENT:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_change_announcement", "canChangeAnnouncement", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_change_announcement$field:Boolean;
 
@@ -157,7 +157,7 @@ package app.message.AllFamilyOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const IMPEACH_LEADER_OFFLINE_DURATION:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.impeach_leader_offline_duration", "impeachLeaderOfflineDuration", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IMPEACH_LEADER_OFFLINE_DURATION:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.impeach_leader_offline_duration", "impeachLeaderOfflineDuration", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var impeach_leader_offline_duration$field:Int64;
 
@@ -180,7 +180,7 @@ package app.message.AllFamilyOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAN_SET_AUTO_ACCEPT_JOIN_REQUEST:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_set_auto_accept_join_request", "canSetAutoAcceptJoinRequest", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_SET_AUTO_ACCEPT_JOIN_REQUEST:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_set_auto_accept_join_request", "canSetAutoAcceptJoinRequest", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_set_auto_accept_join_request$field:Boolean;
 
@@ -205,7 +205,7 @@ package app.message.AllFamilyOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAN_USE_FAMILY_TOKEN:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_use_family_token", "canUseFamilyToken", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_USE_FAMILY_TOKEN:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_use_family_token", "canUseFamilyToken", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_use_family_token$field:Boolean;
 
@@ -230,7 +230,7 @@ package app.message.AllFamilyOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAN_OPEN_ANIMAL_BAR_DUNGEON:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_open_animal_bar_dungeon", "canOpenAnimalBarDungeon", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_OPEN_ANIMAL_BAR_DUNGEON:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_open_animal_bar_dungeon", "canOpenAnimalBarDungeon", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_open_animal_bar_dungeon$field:Boolean;
 
@@ -255,7 +255,7 @@ package app.message.AllFamilyOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAN_CREATE_GUILD:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_create_guild", "canCreateGuild", (13 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_CREATE_GUILD:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_create_guild", "canCreateGuild", (13 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_create_guild$field:Boolean;
 
@@ -280,7 +280,7 @@ package app.message.AllFamilyOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAN_JOIN_GUILD:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_join_guild", "canJoinGuild", (14 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_JOIN_GUILD:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_join_guild", "canJoinGuild", (14 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_join_guild$field:Boolean;
 
@@ -305,7 +305,7 @@ package app.message.AllFamilyOfficerDatasProto {
 		/**
 		 *  @private
 		 */
-		public static const CAN_LEAVE_GUILD:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_leave_guild", "canLeaveGuild", (15 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const CAN_LEAVE_GUILD:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto.can_leave_guild", "canLeaveGuild", (15 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var can_leave_guild$field:Boolean;
 
@@ -333,59 +333,59 @@ package app.message.AllFamilyOfficerDatasProto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasPos) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, pos$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, pos$field);
 			}
 			if (hasPosName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, pos_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, pos_name$field);
 			}
 			if (hasCanInviteOther) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_invite_other$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_invite_other$field);
 			}
 			if (hasCanKickOther) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_kick_other$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_kick_other$field);
 			}
 			for (var canSetOfficerPos$index:uint = 0; canSetOfficerPos$index < this.canSetOfficerPos.length; ++canSetOfficerPos$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, this.canSetOfficerPos[canSetOfficerPos$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, this.canSetOfficerPos[canSetOfficerPos$index]);
 			}
 			for (var canUpgradeBuilding$index:uint = 0; canUpgradeBuilding$index < this.canUpgradeBuilding.length; ++canUpgradeBuilding$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, this.canUpgradeBuilding[canUpgradeBuilding$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, this.canUpgradeBuilding[canUpgradeBuilding$index]);
 			}
 			if (hasCanChangeAnnouncement) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_change_announcement$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_change_announcement$field);
 			}
 			if (hasImpeachLeaderOfflineDuration) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, impeach_leader_offline_duration$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, impeach_leader_offline_duration$field);
 			}
 			if (hasCanSetAutoAcceptJoinRequest) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_set_auto_accept_join_request$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_set_auto_accept_join_request$field);
 			}
 			if (hasCanUseFamilyToken) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_use_family_token$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_use_family_token$field);
 			}
 			if (hasCanOpenAnimalBarDungeon) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_open_animal_bar_dungeon$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_open_animal_bar_dungeon$field);
 			}
 			if (hasCanCreateGuild) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_create_guild$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_create_guild$field);
 			}
 			if (hasCanJoinGuild) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 14);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_join_guild$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_join_guild$field);
 			}
 			if (hasCanLeaveGuild) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 15);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, can_leave_guild$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, can_leave_guild$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -409,105 +409,105 @@ package app.message.AllFamilyOfficerDatasProto {
 			var can_join_guild$count:uint = 0;
 			var can_leave_guild$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (pos$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyOfficerDataProto.pos cannot be set twice.');
 					}
 					++pos$count;
-					this.pos = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.pos = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 2:
 					if (pos_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyOfficerDataProto.posName cannot be set twice.');
 					}
 					++pos_name$count;
-					this.posName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.posName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (can_invite_other$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyOfficerDataProto.canInviteOther cannot be set twice.');
 					}
 					++can_invite_other$count;
-					this.canInviteOther = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canInviteOther = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 4:
 					if (can_kick_other$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyOfficerDataProto.canKickOther cannot be set twice.');
 					}
 					++can_kick_other$count;
-					this.canKickOther = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canKickOther = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 5:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_ENUM, this.canSetOfficerPos);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_ENUM, this.canSetOfficerPos);
 						break;
 					}
-					this.canSetOfficerPos.push(com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input));
+					this.canSetOfficerPos.push(com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input));
 					break;
 				case 6:
 					if ((tag & 7) == com.netease.protobuf.WireType.LENGTH_DELIMITED) {
-						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read$TYPE_ENUM, this.canUpgradeBuilding);
+						com.netease.protobuf.ReadUtils.readPackedRepeated(input, com.netease.protobuf.ReadUtils.read_TYPE_ENUM, this.canUpgradeBuilding);
 						break;
 					}
-					this.canUpgradeBuilding.push(com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input));
+					this.canUpgradeBuilding.push(com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input));
 					break;
 				case 7:
 					if (can_change_announcement$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyOfficerDataProto.canChangeAnnouncement cannot be set twice.');
 					}
 					++can_change_announcement$count;
-					this.canChangeAnnouncement = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canChangeAnnouncement = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 8:
 					if (impeach_leader_offline_duration$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyOfficerDataProto.impeachLeaderOfflineDuration cannot be set twice.');
 					}
 					++impeach_leader_offline_duration$count;
-					this.impeachLeaderOfflineDuration = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.impeachLeaderOfflineDuration = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 9:
 					if (can_set_auto_accept_join_request$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyOfficerDataProto.canSetAutoAcceptJoinRequest cannot be set twice.');
 					}
 					++can_set_auto_accept_join_request$count;
-					this.canSetAutoAcceptJoinRequest = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canSetAutoAcceptJoinRequest = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 10:
 					if (can_use_family_token$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyOfficerDataProto.canUseFamilyToken cannot be set twice.');
 					}
 					++can_use_family_token$count;
-					this.canUseFamilyToken = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canUseFamilyToken = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 11:
 					if (can_open_animal_bar_dungeon$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyOfficerDataProto.canOpenAnimalBarDungeon cannot be set twice.');
 					}
 					++can_open_animal_bar_dungeon$count;
-					this.canOpenAnimalBarDungeon = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canOpenAnimalBarDungeon = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 13:
 					if (can_create_guild$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyOfficerDataProto.canCreateGuild cannot be set twice.');
 					}
 					++can_create_guild$count;
-					this.canCreateGuild = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canCreateGuild = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 14:
 					if (can_join_guild$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyOfficerDataProto.canJoinGuild cannot be set twice.');
 					}
 					++can_join_guild$count;
-					this.canJoinGuild = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canJoinGuild = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 15:
 					if (can_leave_guild$count != 0) {
 						throw new flash.errors.IOError('Bad data format: FamilyOfficerDataProto.canLeaveGuild cannot be set twice.');
 					}
 					++can_leave_guild$count;
-					this.canLeaveGuild = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.canLeaveGuild = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

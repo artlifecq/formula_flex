@@ -1,26 +1,20 @@
 package com.rpgGame.app.fight.spell
 {
-	import com.rpgGame.app.manager.CharAttributeManager;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.RoleHpStatusManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.yunBiao.YunBiaoManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.action.DeadLaunchStateReference;
-	import com.rpgGame.app.state.role.action.FallStateReference;
 	import com.rpgGame.app.state.role.action.HitStateReference;
-	import com.rpgGame.app.state.role.control.BuffStateReference;
-	import com.rpgGame.app.state.role.control.HunLuanStateReference;
 	import com.rpgGame.app.state.role.control.HurtStateReference;
-	import com.rpgGame.app.state.role.control.HushStateReference;
-	import com.rpgGame.app.state.role.control.StiffStateReference;
-	import com.rpgGame.app.state.role.control.StunStateReference;
-	import com.rpgGame.app.state.role.control.UnmovableStateReference;
 	import com.rpgGame.core.events.SceneCharacterEvent;
-	import com.rpgGame.coreData.cfg.BuffStateDataManager;
-	import com.rpgGame.coreData.info.buff.BuffInfo;
+	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
+	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
@@ -28,9 +22,6 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Point;
-	
-	import app.message.AnimationProto;
-	import app.message.StateProto;
 	
 	import org.client.mainCore.manager.EventManager;
 
@@ -47,148 +38,89 @@ package com.rpgGame.app.fight.spell
 		{
 		}
 
-		public static function serverSpellHitEffect(info : ReleaseSpellInfo) : void
+		public static function fightSpellHitEffect(info : SpellResultInfo) : void
 		{
-			if (!ReleaseSpellInfo.isCurrReleaseInfo(info.flySceneObjID))
-			{
-				showSpellHitEffect(info);
-			}
+			showSpellHitEffect(info);
 		}
 
-		public static function clientSpellHitEffect(info : ReleaseSpellInfo) : void
-		{
-			if (ReleaseSpellInfo.isCurrReleaseInfo(info.flySceneObjID))
-			{
-				showSpellHitEffect(info);
-			}
-			info.motionFinish = true;
-		}
-
-		private static function showSpellHitEffect(info : ReleaseSpellInfo) : void
+		private static function showSpellHitEffect(info : SpellResultInfo) : void
 		{
 			var hurted : Boolean = false;
 			var role : SceneRole;
+			var atkor:SceneRole;
 			if (info.hurtList && info.hurtList.length > 0)
 			{
-				var hurtAnimation : AnimationProto = info.hurtAnimation;
-				var sputteringHurtAnimation : AnimationProto = info.sputteringHurtAnimation;
-				if (!sputteringHurtAnimation)
-					sputteringHurtAnimation = hurtAnimation;
-
 				hurted = true;
 				for each (var hurtVo : FightHurtResult in info.hurtList)
 				{
-					role = SceneManager.getSceneObjByID(hurtVo.roleID) as SceneRole;
+					var hurtAnimation : Q_SpellAnimation = hurtVo.hurtAnimation;
+					var sputteringHurtAnimation : Q_SpellAnimation = hurtVo.sputteringHurtAnimation;
+					if (!sputteringHurtAnimation)
+						sputteringHurtAnimation = hurtAnimation;
+					
+					role = SceneManager.getSceneObjByID(hurtVo.targetID) as SceneRole;
 					if (role && role.usable)
 					{
-						if (RoleHpStatusManager.checkShowHpBarWhenHurt(role, info.atkor))
+						if (RoleHpStatusManager.checkShowHpBarWhenHurt(role, hurtVo.atkor as SceneRole))
 						{
 							role.headFace.show();
 						}
 
-						if (role == info.targetRole)
-							SpellAnimationHelper.addTargetHurtEffect(role, info, hurtAnimation);
-						else
-							SpellAnimationHelper.addTargetHurtEffect(role, info, sputteringHurtAnimation);
-
-						if (role.isMainChar && info.atkor && info.atkor.usable)
+						if (role == hurtVo.targetRole)
 						{
-							info.atkor.updateInteractTime();
+							SpellAnimationHelper.addTargetHurtEffect(role, hurtVo, hurtAnimation);
 						}
-						if (info.atkor && info.atkor.usable && info.atkor.isMainChar)
+						else
+						{
+							SpellAnimationHelper.addTargetHurtEffect(role, hurtVo, sputteringHurtAnimation);
+						}
+
+						if (role.isMainChar && hurtVo.atkor && hurtVo.atkor.usable)
+						{
+							hurtVo.atkor.updateInteractTime();
+						}
+						if (hurtVo.atkor && hurtVo.atkor.usable && hurtVo.atkor.isMainChar)
 						{
 							role.updateInteractTime();
 						}
 						//击退位移
 						if (hurtVo.hasPositionChange)
 						{
-							RoleStateUtil.beatToPos(role, hurtVo.newPosition, info.atkorPos, info.beatBackSpeed);
+							RoleStateUtil.beatToPos(role, hurtVo.newPosition, hurtVo.atkorPos, hurtVo.beatBackSpeed);
 						}
-						else
+						else if(hurtVo.hasPositionFly)//击飞位移
 						{
-							if (hurtVo.stiffTime > 0)
-							{
-								var fallRef : FallStateReference = role.stateMachine.getReference(FallStateReference) as FallStateReference;
-								fallRef.setParams(hurtVo.stiffTime);
-								role.stateMachine.transition(RoleStateType.ACTION_FALL, fallRef);
-							}
+							RoleStateUtil.fallToPos(hurtVo.stiffTime,role, hurtVo.newPosition, hurtVo.atkorPos, hurtVo.deadLaunchSpeed);
 						}
-
+						
+						if(role.isHiding)//如果是隐身的话，就不执行角色的受击动作和伤害变色
+						{
+							return;
+						}
+						
 						//显示被击特效
-						var atkorPos : Point = (info.atkor && info.atkor.usable) ? new Point(info.atkor.x, info.atkor.z) : info.atkorPos;
+						atkor=SceneManager.getSceneObjByID(hurtVo.atkorID) as SceneRole;
+						var atkorPos : Point
+						if(atkor != null)
+						{
+							atkorPos = new Point(atkor.x, atkor.z);
+						}
+						
 						var hitRef : HitStateReference = role.stateMachine.getReference(HitStateReference) as HitStateReference;
 						hitRef.setParams(atkorPos);
 						role.stateMachine.transition(RoleStateType.ACTION_HIT, hitRef);
+						
 						var hurtRef : HurtStateReference = role.stateMachine.getReference(HurtStateReference) as HurtStateReference;
-						hurtRef.setParams(info, hurtVo);
+						hurtRef.setParams(/*info, */hurtVo);
 						role.stateMachine.transition(RoleStateType.CONTROL_HURT, hurtRef);
+						
+						GameLog.addShow("*************************本次伤害值为： \t" + hurtVo.curLife);
 					}
 				}
-			}
-			if (info.stateList && info.stateList.length > 0)
-			{
-				for each (var buffInfo : BuffInfo in info.stateList)
-				{
-					role = SceneManager.getSceneObjByID(buffInfo.roleId) as SceneRole;
-					if (role)
-					{
-						var state : StateProto = BuffStateDataManager.getData(buffInfo.cfgId);
-						if (state)
-						{
-							var buffRef : BuffStateReference;
-							if (state.isStun) //眩晕
-							{
-								buffRef = role.stateMachine.getReference(StunStateReference) as StunStateReference;
-								buffRef.setParams(buffInfo.disappearTime);
-								role.stateMachine.transition(RoleStateType.CONTROL_STUN, buffRef);
-							}
-							else if (state.isUnmovable) //不能移动
-							{
-								buffRef = role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
-								buffRef.setParams(buffInfo.disappearTime);
-								role.stateMachine.transition(RoleStateType.CONTROL_UNMOVABLE, buffRef);
-							}
-							else if (state.isHush) //沉默
-							{
-								buffRef = role.stateMachine.getReference(HushStateReference) as HushStateReference;
-								buffRef.setParams(buffInfo.disappearTime);
-								role.stateMachine.transition(RoleStateType.CONTROL_HUSH, buffRef);
-							}
-							else if (state.isHunLuan) //混乱
-							{
-								buffRef = role.stateMachine.getReference(HunLuanStateReference) as HunLuanStateReference;
-								buffRef.setParams(buffInfo.disappearTime);
-								role.stateMachine.transition(RoleStateType.CONTROL_HUN_LUAN, buffRef);
-							}
-							else if (false) //定身
-							{
-								buffRef = role.stateMachine.getReference(StiffStateReference) as StiffStateReference;
-								buffRef.setParams(buffInfo.disappearTime);
-								role.stateMachine.transition(RoleStateType.CONTROL_STIFF, buffRef);
-							}
-							role.buffSet.addBuff(buffInfo);
-						}
-					}
-				}
-			}
-			if (info.isTrapSpell)
-			{
-				if (hurted)
-				{
-					var expended : Boolean = ReleaseSpellInfo.expendReleaseInfo(info.flySceneObjID);
-					if (expended)
-					{
-						SpellAnimationHelper.removeSceneTrapEffect(info.atkorID, info.flySceneObjID);
-					}
-				}
-			}
-			else
-			{
-				ReleaseSpellInfo.removeReleaseInfo(info.flySceneObjID);
 			}
 		}
 
-		public static function showSingleHurt(info : ReleaseSpellInfo, attackerId : Number, hurtRoleID : Number, hurtType : uint, hurtAmount : int) : void
+		public static function showSingleHurt(hortVo : FightHurtResult, attackerId : Number, hurtRoleID : Number, hurtType : uint, hurtAmount : int) : void
 		{
 			var role : SceneRole = SceneManager.getSceneObjByID(hurtRoleID) as SceneRole;
 			if (role == null)
@@ -200,39 +132,47 @@ package com.rpgGame.app.fight.spell
 			{
 				return;
 			}
-			if (roleData.hp > 0)
+			showHurtText(hortVo.atkor as SceneRole, attackerId, role, hurtType, hurtAmount);
+			if (roleData.totalStat.hp > 0)
 			{
-				showHurtText(info.atkor, attackerId, role, hurtType, hurtAmount);
-				YunBiaoManager.showInvivcibleBiaoEffect(info.atkor, attackerId, role, hurtType, hurtAmount);
+				YunBiaoManager.showInvivcibleBiaoEffect(hortVo.atkor as SceneRole, attackerId, role, hurtType, hurtAmount);
 			}
 
-			if (roleData.hp <= 0)
+			if (roleData.totalStat.hp <= 0)
 			{
-				dealCharDeath(info, role);
+				dealCharDeath(hortVo, role);
 			}
 		}
 
-		private static function dealCharDeath(info : ReleaseSpellInfo, target : SceneRole) : void
+		private static function dealCharDeath(hortVo : FightHurtResult, target : SceneRole) : void
 		{
 			SpellAnimationHelper.removeTrapEffectsByAtkorID(target.id);
 			EventManager.dispatchEvent(SceneCharacterEvent.SCENE_CHAR_DEATH, target);
-			target.mouseEnable = false;
-			var deadLaunchHeight : int = info.deadLaunchHeight;
-			var deadLaunchDistance : int = info.deadLaunchDistance;
-			var deadLaunchSpeed : int = info.deadLaunchSpeed;
-			var deadBeatDistance : int = info.deadBeatDistance;
-			var deadBeatSpeed : int = info.deadBeatSpeed;
-			var deadBeatProbability : int = info.deadBeatProbability;
-			var deadLaunchProbability : int = info.deadLaunchProbability;
+			if(!target.isMainChar && target.type== SceneCharType.PLAYER){
+				target.mouseEnable = true;
+			}else{
+				target.mouseEnable = false;
+			}
+			
+			var deadLaunchHeight : int = hortVo.deadLaunchHeight;
+			var deadLaunchDistance : int = hortVo.deadLaunchDistance;
+			var deadLaunchSpeed : int = hortVo.deadLaunchSpeed;
+			
+			var deadBeatDistance : int = hortVo.deadBeatDistance;
+			var deadBeatSpeed : int = hortVo.deadBeatSpeed;
+			
+			var deadBeatProbability : int = hortVo.deadBeatProbability;
+			var deadLaunchProbability : int = hortVo.deadLaunchProbability;
+			
 			var prob : int = ((deadBeatDistance > 0 && deadBeatSpeed > 0) || (deadLaunchHeight > 0 && deadLaunchDistance > 0 && deadLaunchSpeed > 0)) ? 100 * Math.random() : 0;
 			if (prob < deadBeatProbability) //击退
 			{
 				deadLaunchHeight = 0;
 			}
-			var canDeadBeat : Boolean = (target.type == SceneCharType.MONSTER && !(target.data as MonsterData).immuneDeadBeat && prob < (deadBeatProbability + deadLaunchProbability));
+			var canDeadBeat : Boolean = false;//(target.type == SceneCharType.MONSTER && !(target.data as MonsterData).immuneDeadBeat && prob < (deadBeatProbability + deadLaunchProbability));
 			if (canDeadBeat)
 			{
-				var atkorPos : Point = (info.atkor && info.atkor.usable) ? new Point(info.atkor.x, info.atkor.z) : info.atkorPos;
+				var atkorPos : Point = (hortVo.atkor && hortVo.atkor.usable) ? new Point(hortVo.atkor.x, hortVo.atkor.z) : hortVo.atkorPos;
 				var ref : DeadLaunchStateReference = target.stateMachine.getReference(DeadLaunchStateReference) as DeadLaunchStateReference;
 				if (deadLaunchHeight > 0)
 					ref.setParams(atkorPos, deadLaunchHeight, deadLaunchDistance, deadLaunchSpeed);

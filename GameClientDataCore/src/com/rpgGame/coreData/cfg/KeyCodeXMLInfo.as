@@ -22,7 +22,7 @@ package com.rpgGame.coreData.cfg
 		/** 顺序键HashMap **/
 		private static var _orderHash : HashMap = new HashMap();
 
-		///////////////////整合优化一下这里，好乱好乱 @sunny
+		///////////////////整合优化一下这里， 好乱好乱 @sunny
 		private static var _xml : XML = <root>
 				<!--code 键位编号,dataID动作ID,type按键类型（0:普通动作,1:功能操作 -->
 				<single>
@@ -31,28 +31,16 @@ package com.rpgGame.coreData.cfg
 					<key funcID="2" code="50" name="2" dataID="0" type="3" />
 					<key funcID="3" code="51" name="3" dataID="0" type="3" />
 					<key funcID="4" code="52" name="4" dataID="0" type="3" />
-					<key funcID="5" code="53" name="5" dataID="0" type="3" />
-					<key funcID="6" code="54" name="6" dataID="0" type="3" />
-					<key funcID="7" code="55" name="7" dataID="0" type="3" />
-					<key funcID="8" code="56" name="8" dataID="0" type="3" />
-					<key funcID="9" code="57" name="9" dataID="0" type="3" />
-					<key funcID="10" code="48" name="0" dataID="0" type="3" />
-					<key funcID="11" code="112" name="F1" dataID="" type="3" />
-					<key funcID="12" code="113" name="F2" dataID="" type="3" />
-					<key funcID="13" code="114" name="F3" dataID="" type="3" />
-					<key funcID="14" code="115" name="F4" dataID="" type="3" />
-					<key funcID="15" code="116" name="F5" dataID="" type="3" />
-					<key funcID="16" code="117" name="F6" dataID="" type="3" />
-					<key funcID="17" code="118" name="F7" dataID="" type="3" />
-					<key funcID="18" code="119" name="F8" dataID="" type="3" />
-					<key funcID="19" code="120" name="F9" dataID="" type="3" />
-					<key funcID="20" code="121" name="F10" dataID="" type="3" />
-
-					<!-- 移动快捷键 -->
+					<key funcID="5" code="81" name="Q" dataID="" type="3" />
+					<key funcID="6" code="87" name="W" dataID="" type="3" />
+					<key funcID="7" code="69" name="E" dataID="" type="3" />
+					<key funcID="8" code="82" name="R" dataID="" type="3" />
+<!-- 移动快捷键 
 					<key funcID="1" code="87" name="W" dataID="0" type="4"/>
 					<key funcID="2" code="65" name="A" dataID="0" type="4"/>
 					<key funcID="3" code="83" name="S" dataID="0" type="4"/>
 					<key funcID="4" code="68" name="D" dataID="0" type="4"/>
+-->
 					<key funcID="5" code="38" name="UP" dataID="0" type="4" />
 					<key funcID="6" code="40" name="DOWN" dataID="0" type="4" />
 					<key funcID="7" code="37" name="LEFT" dataID="0" type="4" />
@@ -71,11 +59,11 @@ package com.rpgGame.coreData.cfg
 					<key funcID="9" code="80" name="P" dataID="0" type="2" funName="TaskPanel" />
 					<key funcID="10" code="79" name="O" dataID="0" type="2" funName="ShopSystemPanel" />
 					<key funcID="11" code="74" name="J" dataID="0" type="2" funName="CountryPanel" />
-					<key funcID="12" code="81" name="Q" dataID="0" type="2" funName="EquipChangePanel" />
+<!--					<key funcID="12" code="81" name="Q" dataID="0" type="2" funName="EquipChangePanel" />-->
 					<key funcID="17" code="72" name="H" dataID="" type="2" funName="" />
 					<key funcID="18" code="73" name="I" dataID="" type="2" funName="" />
-					<key funcID="14" code="69" name="E" dataID="2" type="2"/>
-					<key funcID="27" code="82" name="R" dataID="3" type="2"/>
+<!--					<key funcID="14" code="69" name="E" dataID="2" type="2"/>-->
+<!--					<key funcID="27" code="82" name="R" dataID="3" type="2"/>-->
 					<key funcID="20" code="75" name="K" dataID="" type="2" funName="" />
 					<key funcID="23" code="78" name="N" dataID="" type="2" funName="" />
 					<key funcID="29" code="84" name="T" dataID="" type="2" funName="" />

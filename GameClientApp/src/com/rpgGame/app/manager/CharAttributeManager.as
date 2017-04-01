@@ -1,6 +1,8 @@
 package com.rpgGame.app.manager
 {
 	import com.rpgGame.app.graphics.HeadFace;
+	import com.rpgGame.app.manager.fight.FightFaceHelper;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -12,11 +14,10 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.type.CharAttributeType;
-
+	import com.rpgGame.coreData.type.EnumHurtType;
+	
 	import flash.events.EventDispatcher;
-
-	import app.message.StatType;
-
+	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -31,91 +32,61 @@ package com.rpgGame.app.manager
 		}
 
 		/**
-		 * 通过对应的属性ID,和属性值value,设置对应的数据对象值(BaseCharacterInfo) 场景精灵通用
-		 * @param attributeID
+		 * 通过对应的属性ID,和属性值value,设置对应的数据对象值, 场景精灵通用
+		 * @param data
+		 * @param attributeType
 		 * @param attributeValue
-		 * @param info
-		 *
+		 * @param showEffet
+		 * 
 		 */
-		public static function setAttributeValue(info : RoleData, attributeType : int, attributeValue : *) : void
+		public static function setAttributeValue(data : RoleData, attributeType : int, attributeValue : *,showEffet:int=0) : void
 		{
-			if (info)
+			if (data)
 			{
+				var offset : int = 0;
+				var oldValue:Number=data.totalStat.getStatValue(attributeType);
+				data.totalStat.setStatValue(attributeType,attributeValue);
 				switch (attributeType)
 				{
 					case CharAttributeType.HP:
-						info.hp = attributeValue;
+						updateBloodBar(data);
+						EventManager.dispatchEvent(MainPlayerEvent.NOWHP_CHANGE, data);
+						if (data.type == RoleType.TYPE_LIANG_CANG)
+						{
+							EventManager.dispatchEvent(TaoNiEvent.TAO_NI_LIANG_CANG_STATE_CHANGE, data, CharAttributeType.HP);
+						}
+						offset=data.totalStat.hp-oldValue;
+						if (data.id == MainRoleManager.actorID && offset > 0&&showEffet==1) //自己看到就好了
+						{
+							FightFaceHelper.showAttChange(EnumHurtType.ADDHP, offset);
+						}
 						break;
-					case CharAttributeType.MAX_LIFE:
-						info.totalStat.life = attributeValue;
+					case CharAttributeType.MAX_HP:
+						data.totalStat.life = attributeValue;
+						EventManager.dispatchEvent(MainPlayerEvent.MAXHP_CHANGE,data);//通知最大血量改变
 						break;
 					case CharAttributeType.MP:
-						info.mp = attributeValue;
+						offset = attributeValue - oldValue;
+						updateMpBar(data);
+						EventManager.dispatchEvent(MainPlayerEvent.NOWMP_CHANGE, data);
 						break;
-//					case CharAttributeType.MAX_MP:
-//						info.mpMax = attributeValue;
-//						break;
-//					case CharAttributeType.PH:
-//						info.ph = attributeValue;
-//						break;
-//					case CharAttributeType.MAX_PH:
-//						info.phMax = attributeValue;
-//						break;
-//					case CharAttributeType.ATTACK:
-//						info.ap = attributeValue;
-//						break;
-//					case CharAttributeType.PHYSICAL_DEFENCE:
-//						info.dp = attributeValue;
-//						break;
-//					case CharAttributeType.MAGICAL_DEFENCE:
-//						info.magicDef = attributeValue;
-//						break;
-//					case CharAttributeType.CRIT:
-//						info.cp = attributeValue;
-//						break;
-//					case CharAttributeType.PHYSICAL_DODGE:
-//						info.phyDodge = attributeValue;
-//						break;
-//					case CharAttributeType.MAGICAL_DODGE:
-//						info.magicDodge = attributeValue;
-//						break;
-//					case CharAttributeType.HIT:
-//						info.hit = attributeValue;
-//						break;
-//					case CharAttributeType.ADX:
-//						info.adx = attributeValue;
-//						break;
-//					case CharAttributeType.LV:
-//						info.lv = attributeValue;
-//						break;
-//					case CharAttributeType.EXP:
-//						info.expNow = attributeValue;
-//						break;
-//					case CharAttributeType.MAX_EXP:
-//						info.expMax = attributeValue;
-//						break;
 					case CharAttributeType.PK_MODE:
-						//HeroData(info).pkMode = attributeValue;
+						//HeroData(data).pkMode = attributeValue;
 						break;
 					case CharAttributeType.PK:
-						HeroData(info).pkMode = attributeValue;
+						HeroData(data).pkMode = attributeValue;
+						break;
+					default:
+//						data.spriteStat.addStatValue();
 						break;
 				}
-				dispatchEvent(info.id, attributeType, attributeValue);
+				dispatchEvent(data.id, attributeType, attributeValue);
 			}
 		}
-
-		public static function setCharHp(info : RoleData, hpValue : int) : void
+		
+		public static function setCharHp(data : RoleData, hpValue : int) : void
 		{
-			setAttributeValue(info, CharAttributeType.HP, hpValue);
-			updateBloodBar(info);
-
-//			if( info.id == MainRoleManager.actorID )
-			EventManager.dispatchEvent(MainPlayerEvent.NOWHP_CHANGE, info);
-			if (info.type == RoleType.TYPE_LIANG_CANG)
-			{
-				EventManager.dispatchEvent(TaoNiEvent.TAO_NI_LIANG_CANG_STATE_CHANGE, info, CharAttributeType.HP);
-			}
+			setAttributeValue(data, CharAttributeType.HP, hpValue);
 		}
 
 
@@ -123,14 +94,11 @@ package com.rpgGame.app.manager
 		public static function setCharMp(roleData : RoleData, finalValue : int) : void
 		{
 			setAttributeValue(roleData, CharAttributeType.MP, finalValue);
-			updateMpBar(roleData);
-//			if(roleData.id == MainRoleManager.actorID)
-			EventManager.dispatchEvent(MainPlayerEvent.NOWMP_CHANGE, roleData);
 		}
 
-		private static function updateMpBar(info : RoleData) : void
+		private static function updateMpBar(data : RoleData) : void
 		{
-			var role : SceneRole = SceneManager.getSceneObjByID(info.id) as SceneRole;
+			var role : SceneRole = SceneManager.getSceneObjByID(data.id) as SceneRole;
 			if (role)
 			{
 				if (role == SceneRoleSelectManager.selectedRole)
@@ -140,13 +108,13 @@ package com.rpgGame.app.manager
 			}
 		}
 
-		private static function updateBloodBar(info : RoleData) : void
+		private static function updateBloodBar(data : RoleData) : void
 		{
-			var role : SceneRole = SceneManager.getSceneObjByID(info.id) as SceneRole;
+			var role : SceneRole = SceneManager.getSceneObjByID(data.id) as SceneRole;
 			if (role)
 			{
 				if (role.headFace is HeadFace)
-					(role.headFace as HeadFace).bloodPercent = (info.hp / info.totalStat.life);
+					(role.headFace as HeadFace).bloodPercent = (data.totalStat.hp / data.totalStat.life);
 				if (role == SceneRoleSelectManager.selectedRole)
 				{
 					EventManager.dispatchEvent(SceneCharacterEvent.SCENE_CHAR_DATA_UPDATE, role);
@@ -154,13 +122,12 @@ package com.rpgGame.app.manager
 			}
 		}
 
-		public static function setCharMaxLife(info : RoleData, value : int) : void
+		public static function setCharMaxLife(data : RoleData, value : int) : void
 		{
-			setAttributeValue(info, StatType.MAX_LIFE, value);
-			updateBloodBar(info);
-
+			setAttributeValue(data, CharAttributeType.MAX_HP, value);
+			updateBloodBar(data);
 			//-----------------这个地方派发MAXHP_CHANGE事件意义不大，当时实际属性并没有开始改变-------
-//			if( info.id == MainRoleManager.actorID )
+//			if( data.id == MainRoleManager.actorID )
 //				EventManager.dispatchEvent(MainPlayerEvent.MAXHP_CHANGE);
 		}
 

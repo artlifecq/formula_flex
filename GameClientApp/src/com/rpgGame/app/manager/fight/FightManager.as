@@ -1,21 +1,22 @@
 package com.rpgGame.app.manager.fight
 {
 	import com.rpgGame.app.manager.TeamManager;
-	import com.rpgGame.app.manager.country.CountryManager;
 	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.coreData.role.BiaoCheData;
+	import com.rpgGame.coreData.cfg.RelationCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
+	import com.rpgGame.coreData.enum.JobEnum;
+	import com.rpgGame.coreData.enum.RoleEnum;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.role.ZhanCheData;
 	import com.rpgGame.coreData.type.PKModeType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.type.SpellTargetType;
 	
-	import app.message.SpellProto;
-
 	/**
 	 *
 	 * 战斗管理器
@@ -48,152 +49,79 @@ package com.rpgGame.app.manager.fight
 		 * @return
 		 *
 		 */
-		public static function getFightRoleState(role : SceneRole, spellData : SpellProto = null) : int
+		public static function getFightRoleState(role : SceneRole, spellData : Q_skill_model = null) : int
 		{
 			var modeState : int = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
 			var heroData:HeroData = MainRoleManager.actorInfo;
-			if (role == null || !role.usable || role.isMainChar || role.stateMachine.isDeadState)
-			{
-				return modeState;
-			}
-			if (role.type == SceneCharType.PLAYER)
-			{
-				if (MainRoleManager.actorInfo.pkMode == PKModeType.ALL) //全体模式就可以攻击
-				{
-					modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
-				}
-				else if (MainRoleManager.actorInfo.pkMode == PKModeType.COUNTRY)
-				{
-					if (MainRoleManager.actorInfo.countryId != (role.data as RoleData).countryId) //国家模式不同国可以攻击
-					{
-						modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
-					}
-				}
-				else if (MainRoleManager.actorInfo.pkMode == PKModeType.ALLIANCE)
-				{
-					if (MainRoleManager.actorInfo.countryId != (role.data as RoleData).countryId && CountryManager.unionCountry != (role.data as RoleData).countryId) //国家模式不是盟国可以攻击
-					{
-						modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
-					}
-				}
-				else if (MainRoleManager.actorInfo.pkMode == PKModeType.FAMILY)
-				{
-					if (MainRoleManager.actorInfo.societyName != (role.data as HeroData).societyName)
-					{
-						modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
-					}
-				}
-				else if (MainRoleManager.actorInfo.pkMode == PKModeType.KIND_OR_EVIL)
-				{
-					if ((role.data as HeroData).nameColor >= PKModeType.AMOUNT_GRAY)
-						modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
-				}
-				else if (MainRoleManager.actorInfo.pkMode == PKModeType.TEAM)
-				{
-					if (!TeamManager.isMyTeamMember((role.data as HeroData).id))
-						modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
-				}
-				if (modeState == FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY && spellData)
-				{
-					switch (spellData.activeSpell.targetType)
-					{
-						case SpellTargetType.FRIEND:
-							//todo好友系统要判断是否好友
-							if (FriendManager.checkIsFriend((role.data as HeroData).id))
-								modeState = FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND;
-							break;
-						case SpellTargetType.TEAM:
-							//todo组队系统要判断是否队友
-							if (TeamManager.isMyTeamMember((role.data as HeroData).id))
-								modeState = FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND;
-							break;
-					}
-					if ((modeState == FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY || modeState == FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND) && (spellData.affectType & 1) != 0) //不影响玩家
-					{
-						modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
-					}
-				}
-				return modeState;
-			}
-			else if (role.type == SceneCharType.MONSTER || role.type == SceneCharType.LIANG_CANG)
-			{
-				if (MainRoleManager.actorInfo.countryId != (role.data as MonsterData).countryId) //判断国战敌方己方怪物
-				{
-					modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
-				}
-				if ((role.data as MonsterData).ownerName != "" && (role.data as MonsterData).ownerName == MainRoleManager.actorInfo.societyName)
-				{
-					modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
-				}
-				if (modeState == FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY && spellData)
-				{
-					switch (spellData.activeSpell.targetType)
-					{
-						case SpellTargetType.ENEMY:
-							modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
-							break;
-						default:
-							modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
-							break;
-					}
-					if (modeState == FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY)
-					{
-						if ((role.data as MonsterData).isNormal && (spellData.affectType & 2) != 0) //不影响普通怪
-						{
-							modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
-						}
-						else if ((role.data as MonsterData).isElite && (spellData.affectType & 4) != 0) //不影响精英怪
-						{
-							modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
-						}
-						else if ((role.data as MonsterData).isBoss && (spellData.affectType & 8) != 0) //不影响Boss怪
-						{
-							modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
-						}
-					}
-				}
-				return modeState;
-			}
-//			else if (role.type == SceneCharType.PET)
-//			{
-//				if (BiaoCheData(role.data).ownerID != MainRoleManager.actorID)
-//				{
-//					canMode = true;
-//				}
-//				if (canMode && (spellData.affectType & 16) != 0) //不影响宠物
-//				{
-//					canMode = false;
-//				}
-//				return canMode;
-//			}
-			else if (role.type == SceneCharType.BIAO_CHE)
-			{
-				//本国的镖车不能够攻击
-				if ((role.data as BiaoCheData).ownerID != MainRoleManager.actorID && !CountryManager.isAtMyCountry() )
-				{
-					modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
-				}
-				if (modeState == FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY && spellData != null && (spellData.affectType & 32) != 0) //不影响镖车
-				{
-					modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
-				}
-				return modeState;
-			}
-			else if(role.type == SceneCharType.ZHAN_CHE)
-			{
-				var zhancheData:ZhanCheData = role.data as ZhanCheData;
-				if(zhancheData)
-				{
-					if(MainRoleManager.isDriveZhanChe)
-					{
-						if(CountryManager.isMyEnemyCountry(zhancheData.ownerCountry))
-						{
-							modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
-						}
-					}
-				}
-			}
-			return modeState;
+            do {
+                if (null == role || 
+                    !role.usable || 
+                    (role.isMainChar && JobEnum.ROLE_4_TYPE != (role.data as HeroData).job) || 
+                    ((SceneCharType.MONSTER == role.type) && role.stateMachine.isDeadState)) {
+                    // 不存在或者已经死亡 不可攻击
+                    break;
+                }
+                var roleInfo : RoleData = role.data as RoleData;
+                if (SceneCharType.MONSTER == role.type) {
+                    // 是怪物
+                    if (-1 != roleInfo.ownerId) {
+                        // 从属怪
+                        if (MainRoleManager.actorInfo.id == roleInfo.ownerId) {
+                            // 是自己的从属怪
+                            modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
+                        } else {
+                            goto checkPlayer;
+                        }
+                        break;
+                    }
+                    modeState = RelationCfgData.isEnemy(MainRoleManager.actorInfo, roleInfo) ?
+                        FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY : FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
+                    if (FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY == modeState && 
+                        null != spellData &&
+                        (SpellTargetType.FRIEND == spellData.q_target ||
+                         SpellTargetType.TEAM == spellData.q_target)) {
+                        modeState = FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND;
+                    }
+                    break;
+                }
+                if (SceneCharType.PLAYER == role.type) {
+                    // 是玩家
+                    checkPlayer:switch (MainRoleManager.actorInfo.pkMode) {
+                        case PKModeType.ALL:
+                            // 全体
+                            modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
+                            break;
+                        case PKModeType.TEAM:
+                            // 队伍
+                            // TODO 现在没有队伍故可攻击
+                            modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
+                            break;
+                        case PKModeType.GUILD:
+                            // 帮派
+                            // TODO 现在没有帮派故可攻击
+                            modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
+                            break;
+                        case PKModeType.GROUP:
+                            // 阵营
+                            // TODO 现在没有阵营故可攻击
+                            modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
+                            break;
+                        case PKModeType.KIND_OR_EVIL:
+                            break;
+                    }
+                    if (FIGHT_ROLE_STATE_CAN_NOT_FIGHT == modeState && null != spellData) {
+                        if (SpellTargetType.FRIEND == spellData.q_target) {
+                            // TODO 现在没有好友故可攻击
+                            modeState = FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND;
+                        } else if (SpellTargetType.TEAM == spellData.q_target) {
+                            // TODO 现在没有队伍故可攻击
+                            modeState = FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND;
+                        }
+                    }
+                    break;
+                }
+            } while (false);
+            return modeState;
 		}
 	}
 }

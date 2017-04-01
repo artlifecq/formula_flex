@@ -2,6 +2,8 @@ package com.rpgGame.app.state.role.control
 {
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.coreData.type.RoleStateType;
+	
+	import flash.utils.getQualifiedClassName;
 
 	/**
 	 *
@@ -27,7 +29,7 @@ package com.rpgGame.app.state.role.control
 				{
 					if (_stateReference is StiffStateReference)
 					{
-						(_machine as RoleStateMachine).actionPause();
+//						(_machine as RoleStateMachine).actionPause();
 					}
 					else
 						throw new Error("场景角色定身状态引用必须是StiffStateReference类型！");
@@ -40,8 +42,14 @@ package com.rpgGame.app.state.role.control
 			super.afterLeave();
 			if (_machine && !_machine.isDisposed)
 			{
-				(_machine as RoleStateMachine).actionResume();
+//				(_machine as RoleStateMachine).actionResume();
 			}
 		}
+		
+		override public function get tribe():String
+		{
+			return getQualifiedClassName(StiffState);
+		}
+		
 	}
 }

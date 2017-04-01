@@ -14,7 +14,7 @@ package app.message.PhoenixRefineRecordProtos {
 		/**
 		 *  @private
 		 */
-		public static const HERO_ID:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.PhoenixRefineRecordProtos.PhoenixRefineRecordProto.hero_id", "heroId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const HERO_ID:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.PhoenixRefineRecordProtos.PhoenixRefineRecordProto.hero_id", "heroId", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var hero_id$field:Int64;
 
@@ -37,7 +37,7 @@ package app.message.PhoenixRefineRecordProtos {
 		/**
 		 *  @private
 		 */
-		public static const HERO_NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.PhoenixRefineRecordProtos.PhoenixRefineRecordProto.hero_name", "heroName", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const HERO_NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.PhoenixRefineRecordProtos.PhoenixRefineRecordProto.hero_name", "heroName", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var hero_name$field:String;
 
@@ -60,7 +60,7 @@ package app.message.PhoenixRefineRecordProtos {
 		/**
 		 *  @private
 		 */
-		public static const BAO_JI_TIME:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.PhoenixRefineRecordProtos.PhoenixRefineRecordProto.bao_ji_time", "baoJiTime", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const BAO_JI_TIME:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.PhoenixRefineRecordProtos.PhoenixRefineRecordProto.bao_ji_time", "baoJiTime", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var bao_ji_time$field:int;
 
@@ -87,7 +87,7 @@ package app.message.PhoenixRefineRecordProtos {
 		/**
 		 *  @private
 		 */
-		public static const TYPE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.PhoenixRefineRecordProtos.PhoenixRefineRecordProto.type", "type", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const TYPE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.PhoenixRefineRecordProtos.PhoenixRefineRecordProto.type", "type", (4 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var type$field:int;
 
@@ -115,19 +115,19 @@ package app.message.PhoenixRefineRecordProtos {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasHeroId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, hero_id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, hero_id$field);
 			}
 			if (hasHeroName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, hero_name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, hero_name$field);
 			}
 			if (hasBaoJiTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, bao_ji_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, bao_ji_time$field);
 			}
 			if (hasType) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, type$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, type$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -143,35 +143,35 @@ package app.message.PhoenixRefineRecordProtos {
 			var bao_ji_time$count:uint = 0;
 			var type$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (hero_id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: PhoenixRefineRecordProto.heroId cannot be set twice.');
 					}
 					++hero_id$count;
-					this.heroId = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.heroId = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 2:
 					if (hero_name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: PhoenixRefineRecordProto.heroName cannot be set twice.');
 					}
 					++hero_name$count;
-					this.heroName = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.heroName = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (bao_ji_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: PhoenixRefineRecordProto.baoJiTime cannot be set twice.');
 					}
 					++bao_ji_time$count;
-					this.baoJiTime = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.baoJiTime = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
 					if (type$count != 0) {
 						throw new flash.errors.IOError('Bad data format: PhoenixRefineRecordProto.type cannot be set twice.');
 					}
 					++type$count;
-					this.type = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.type = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---
+*
+* 发行首选项面板
+* @author L.L.M.Sunny
+* 创建时间：2016-04-05 上午10:30:12
+*
+-->
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="100%"
+		 height="100%"
+		 creationComplete="group1_creationCompleteHandler(event)"
+		 xmlns:ui="com.editor.ui.*">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+
+			protected function group1_creationCompleteHandler(event : FlexEvent) : void
+			{
+				updateSetUp();
+			}
+
+			public function updateSetUp() : void
+			{
+//				if (tempPathItem)
+//					tempPathItem.path = ProjectConfig.tempPathItem;
+			}
+
+			public function applyChanged() : void
+			{
+//				if (tempPathItem)
+//					ProjectConfig.tempPathItem = tempPathItem.path;
+			}
+		]]>
+	</fx:Script>
+	<s:Group width="100%"
+			 height="100%">
+		<s:layout>
+			<s:VerticalLayout paddingTop="10"
+							  paddingLeft="30"/>
+		</s:layout>
+		<ui:BrowseForOpenItem id="tempPathItem"
+							  title="待扩展目录："
+							  browseTile="请选择待扩展的根目录"
+							  browseDesc="dire"
+							  browseExtension="dire"
+							  toolTip="待扩展的目录"/>
+	</s:Group>
+</s:Group>

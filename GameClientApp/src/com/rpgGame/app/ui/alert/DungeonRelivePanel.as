@@ -6,16 +6,14 @@ package com.rpgGame.app.ui.alert
 	import com.rpgGame.app.ui.UIModel;
 	import com.rpgGame.app.utils.TimeUtil;
 	
-	import org.mokylin.skin.app.relive.DungeonRelivePanelSkin;
-	
 	import utils.TimerServer;
 	
 	public class DungeonRelivePanel extends SkinUIPanel
 	{
-		private var skin : DungeonRelivePanelSkin;
+		private var skin : Object;//DungeonRelivePanelSkin;
 		public function DungeonRelivePanel()
 		{
-			skin = new DungeonRelivePanelSkin();
+			//skin = new DungeonRelivePanelSkin();
 			model = true;
 			super(skin);
 		}

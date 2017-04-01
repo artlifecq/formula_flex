@@ -7,9 +7,7 @@ package com.rpgGame.coreData.lang
 	* 【**不可手动修改此类**】，
 	*	
 	* 【任何修改都将被生成工具覆盖，如需修改请直接修改具体的config文件】
-	* @author fly.AutoUICreater
-	* @modifier L.L.M.Sunny
-	* 修改时间：2015-7-2 上午10:05:12
+	* @author NEIL
 	* 
 	*/
 	public class LangText
@@ -298,6 +296,20 @@ package com.rpgGame.coreData.lang
 		public static const SCENE_ENTER_COUNTRY_NOTIFY_TEXT:String = "SCENE_ENTER_COUNTRY_NOTIFY_TEXT";
 		 /**  <font size='16' color='#f4bd63'>$</fort> */
 		public static const SCENE_ENTER_NOTIFY_TEXT:String = "SCENE_ENTER_NOTIFY_TEXT";
+		 /**  $一二三四<font color='#ff0000' size='20'>五六七八九十一</font>二三四五六七八九十 */
+		public static const GM_TEST1:String = "GM_TEST1";
+		 /**  $一二三四<font color='#ff0000' size='20'>五六七八九十一</font>二三四五六七八九十 */
+		public static const GM_TEST2:String = "GM_TEST2";
+		 /**  $一二三四<font color='#ff0000' size='20'>五六七八九十一</font>二三四五六七八九十 */
+		public static const GM_TEST3:String = "GM_TEST3";
+		 /**  $一二三四<font color='#ff0000' size='20'>五六七八九十一</font>二三四五六七八九十 */
+		public static const GM_TEST4:String = "GM_TEST4";
+		 /**  $一二三四<font color='#ff0000' size='20'>五六七八九十一</font>二三四五六七八九十 */
+		public static const GM_TEST5:String = "GM_TEST5";
+		 /**  $一二三四<font color='#ff0000' size='20'>五六七八九十一</font>二三四五六七八九十 */
+		public static const GM_TEST6:String = "GM_TEST6";
+		 /**  $一二三四<font color='#ff0000' size='20'>五六七八九十一</font>二三四五六七八九十$一二三四<font color='#ff0000' size='20'>五六七八九十一</font>二三四五六七八九十 */
+		public static const GM_TEST101:String = "GM_TEST101";
 
 	}
 }

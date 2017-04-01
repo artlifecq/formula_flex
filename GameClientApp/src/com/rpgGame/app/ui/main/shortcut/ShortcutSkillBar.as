@@ -7,14 +7,15 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
 	import com.rpgGame.coreData.info.shortcuts.ShortcutsData;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	
-	import app.message.SpellProto;
+	import flash.geom.Point;
 	
 	import org.client.mainCore.manager.EventManager;
 	
@@ -23,9 +24,9 @@ package com.rpgGame.app.ui.main.shortcut
 	public class ShortcutSkillBar extends Sprite
 	{
 		private var _shortcutBar : ShortcutBar;
-		private const GRID_COUNT : int = 10;
+		private const GRID_COUNT : int = 8;
 
-		private const SHORTCUTS_KEY : Array = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10"];
+		private const SHORTCUTS_KEY : Array = ["1", "2", "3", "4","Q", "W", "E", "R"];
 
 		private var _gridVect : Vector.<ShortcutGrid>;
 
@@ -33,6 +34,17 @@ package com.rpgGame.app.ui.main.shortcut
 		{
 			_shortcutBar = shortcutBar;
 			initBar();
+		}
+		
+		internal function getSkillGridSeat(index:int):Point
+		{
+			var gd:ShortcutGrid=_gridVect[index];
+			if(!gd){
+				return null;
+			}
+			var p:Point=new Point(gd.x,gd.y);
+			p=gd.parent.localToGlobal(p);
+			return p;
 		}
 
 		override public function get height() : Number
@@ -55,8 +67,14 @@ package com.rpgGame.app.ui.main.shortcut
 			EventManager.addEvent(ItemEvent.ITEM_ADD, onItemChang);
 			EventManager.addEvent(ItemEvent.ITEM_INPUT_SHORTCUT, autoInputItemToShortcutGrid);
 			EventManager.addEvent(SpellEvent.SPELL_UPDATE_SHORTCUTS, onClearSpell);
+			EventManager.addEvent(SpellEvent.SPELL_KEY_RELEASE, onKeySkill);
 		}
-
+		
+		private function onKeySkill(index:int):void
+		{
+			_gridVect[index].tweenGrid();
+		}
+		
 		/**
 		 * 创建格子
 		 *
@@ -64,12 +82,12 @@ package com.rpgGame.app.ui.main.shortcut
 		private function createGrid() : void
 		{
 			_gridVect = new Vector.<ShortcutGrid>();
-			var cd : ShortcutGrid;
-			var size : int = IcoSizeEnum.SIZE_46;
+			var size : int = IcoSizeEnum.ICON_48;
 			var gridInfo : GridInfo;
+			var bgWH:int=54;
 			for (var i : int = 0; i < GRID_COUNT; i++)
 			{
-				cd = new ShortcutGrid(_shortcutBar, size);
+				var cd:ShortcutGrid = new ShortcutGrid(_shortcutBar, size);
 				cd.width = cd.height = size;
 
 				cd.dragAble = true;
@@ -77,31 +95,17 @@ package com.rpgGame.app.ui.main.shortcut
 				cd.gridInfo = gridInfo;
 				cd.onTouchEndCallBack = onTouchGrid;
 				cd.rightMouseClickFun = onRightMouseClick;
-				if (i < 10)
-				{
-					cd.x = 1 + 55 * i;
-					cd.y = 48;
-
-					cd.setBg(GridBGType.GRID_SIZE_46, 0);
-					cd.setIconPoint(0, 0);
-					addChild(cd);
-				}
-				else
-				{
-					cd.x = 1 + 55 * (i - 10);
-					cd.y = -5;
-
-					cd.setBg(GridBGType.GRID_SIZE_46, 0);
-					cd.setIconPoint(0, 0);
-					//addChild(cd);
-				}
+				cd.x = 9 + bgWH * i;
+				cd.y = 4;
+				
+				cd.setBg(GridBGType.GRID_SIZE_48);
+				cd.setIconPoint(0, 0);
+				addChild(cd);
 				_gridVect.push(cd);
-
-				if (i > 9)
-					cd.showShortCutText(SHORTCUTS_KEY[i]);
+//				cd.showShortCutText(SHORTCUTS_KEY[i]);
 			}
 		}
-
+		
 		//---------------------------------------
 		/**
 		 * 设置数据
@@ -126,10 +130,11 @@ package com.rpgGame.app.ui.main.shortcut
 		{
 			if (cd == null)
 				return;
-
-			ShortcutsManger.getInstance().useShortcuts(cd.index);
+			if(ShortcutsManger.getInstance().useShortcuts(cd.index)){
+				cd.tweenGrid();
+			}
 		}
-
+		
 		private function onRightMouseClick(cd : ShortcutGrid) : void
 		{
 			if (cd == null)
@@ -142,7 +147,7 @@ package com.rpgGame.app.ui.main.shortcut
 			switch (shortcutData.type)
 			{
 				case ShortcutsTypeEnum.SKILL_TYPE: //如果是技能那么把这个技能设置成或自动释放的状态
-					var spellProto : SpellProto = MainRoleManager.actorInfo.spellList.getSpell(shortcutData.id);
+					var spellProto : Q_skill_model = MainRoleManager.actorInfo.spellList.getSpell(shortcutData.id);
 					if (spellProto == null)
 						return;
 
@@ -151,7 +156,7 @@ package com.rpgGame.app.ui.main.shortcut
 						//已经设置了那么就取消
 						MainRoleManager.actorInfo.spellList.removeAutoSpell(shortcutData.id);
 
-						if (spellProto.activeSpell && spellProto.activeSpell.isAllowAutoCombat)
+						if (spellProto && spellProto.q_is_allow_auto_combat)
 							cd.showAutoImg(true);
 						else
 							cd.showAutoImg(false);
@@ -159,7 +164,7 @@ package com.rpgGame.app.ui.main.shortcut
 						return;
 					}
 
-					if (spellProto.activeSpell && spellProto.activeSpell.isAllowAutoCombat) //如果这个技能可以设置成自动释放技能就设置它
+					if (spellProto && spellProto.q_is_allow_auto_combat) //如果这个技能可以设置成自动释放技能就设置它
 					{
 						var reqSetted : Boolean = MainRoleManager.actorInfo.spellList.reqAutoSpellMsg(shortcutData.id);
 						if (reqSetted)
@@ -199,7 +204,7 @@ package com.rpgGame.app.ui.main.shortcut
 			switch (shortData.type)
 			{
 				case ShortcutsTypeEnum.SKILL_TYPE:
-					var skillData : SpellProto = ShortcutsManger.getInstance().getTempSellProto(shortData.id);
+					var skillData : Q_skill_model = ShortcutsManger.getInstance().getTempSellProto(shortData.id);
 					if(skillData == null)
 					{
 						skillData = MainRoleManager.actorInfo.spellList.getSpell(shortData.id);
@@ -210,9 +215,9 @@ package com.rpgGame.app.ui.main.shortcut
 						}
 					}
 
-					FaceUtil.SetSkillGrid(grid, FaceUtil.chanceSpellToFaceInfo(skillData), true);
+					FaceUtil.SetSkillGrid(grid, FaceUtil.chanceSpellToFaceInfo(skillData), true);//暂时不展示tips
 
-					var isAutoSpell : Boolean = MainRoleManager.actorInfo.spellList.isAutoSpellId(skillData.spellType);
+					var isAutoSpell : Boolean = MainRoleManager.actorInfo.spellList.isAutoSpellId(skillData.q_skillID);
 					if (isAutoSpell)
 					{
 						grid.showAutoImg(false);
@@ -220,7 +225,7 @@ package com.rpgGame.app.ui.main.shortcut
 					}
 					else
 					{
-						if (skillData.activeSpell && skillData.activeSpell.isAllowAutoCombat)
+						if (skillData.q_is_allow_auto_combat)
 							grid.showAutoImg(true);
 						else
 							grid.showAutoImg(false);
@@ -229,8 +234,7 @@ package com.rpgGame.app.ui.main.shortcut
 					break;
 
 				case ShortcutsTypeEnum.ITEM_TYPE:
-					var itemInfo : ItemInfo = new ItemInfo();
-					itemInfo.cfgId = shortData.id;
+					var itemInfo : ClientItemInfo = new ClientItemInfo( shortData.id);
 					itemInfo.count = BackPackManager.instance.getItemCount(shortData.id);
 					FaceUtil.SetItemGrid(grid, itemInfo);
 					grid.isEnabled = itemInfo.count > 0;
@@ -338,7 +342,7 @@ package com.rpgGame.app.ui.main.shortcut
 			updateGrid(shortCutGridIndex);
 		}
 
-		private function onItemChang(itemInfo : ItemInfo) : void
+		private function onItemChang(itemInfo : ClientItemInfo) : void
 		{
 			if (!itemInfo)
 				return;

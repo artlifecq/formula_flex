@@ -17,7 +17,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var id$field:int;
 
@@ -44,7 +44,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const UNIDENTIFIED:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.MountProto.unidentified", "unidentified", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const UNIDENTIFIED:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.MountProto.unidentified", "unidentified", (2 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var unidentified$field:Boolean;
 
@@ -69,7 +69,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const SEX:FieldDescriptor$TYPE_ENUM = new FieldDescriptor$TYPE_ENUM("app.message.MountProto.sex", "sex", (6 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Sex);
+		public static const SEX:FieldDescriptor_TYPE_ENUM = new FieldDescriptor_TYPE_ENUM("app.message.MountProto.sex", "sex", (6 << 3) | com.netease.protobuf.WireType.VARINT, app.message.Sex);
 
 		private var sex$field:int;
 
@@ -94,7 +94,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountProto.level", "level", (7 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountProto.level", "level", (7 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level$field:int;
 
@@ -119,7 +119,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EXP:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.MountProto.exp", "exp", (16 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const EXP:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.MountProto.exp", "exp", (16 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var exp$field:Int64;
 
@@ -142,7 +142,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const HUNGER_DEGREE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountProto.hunger_degree", "hungerDegree", (8 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const HUNGER_DEGREE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountProto.hunger_degree", "hungerDegree", (8 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var hunger_degree$field:int;
 
@@ -167,7 +167,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const VITALITY:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountProto.vitality", "vitality", (9 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const VITALITY:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountProto.vitality", "vitality", (9 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var vitality$field:int;
 
@@ -192,7 +192,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const VITALITY_EXP:FieldDescriptor$TYPE_INT64 = new FieldDescriptor$TYPE_INT64("app.message.MountProto.vitality_exp", "vitalityExp", (17 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const VITALITY_EXP:FieldDescriptor_TYPE_INT64 = new FieldDescriptor_TYPE_INT64("app.message.MountProto.vitality_exp", "vitalityExp", (17 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var vitality_exp$field:Int64;
 
@@ -215,7 +215,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const IS_BREED:FieldDescriptor$TYPE_BOOL = new FieldDescriptor$TYPE_BOOL("app.message.MountProto.is_breed", "isBreed", (10 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const IS_BREED:FieldDescriptor_TYPE_BOOL = new FieldDescriptor_TYPE_BOOL("app.message.MountProto.is_breed", "isBreed", (10 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var is_breed$field:Boolean;
 
@@ -240,7 +240,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LIFE_TIME:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.MountProto.life_time", "lifeTime", (11 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LIFE_TIME:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.MountProto.life_time", "lifeTime", (11 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var life_time$field:int;
 
@@ -265,7 +265,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const BORN_STAT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.MountProto.born_stat", "bornStat", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
+		public static const BORN_STAT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.MountProto.born_stat", "bornStat", (12 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
 
 		private var born_stat$field:app.message.SpriteStatProto;
 
@@ -288,7 +288,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GROWTH_STAT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.MountProto.growth_stat", "growthStat", (13 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
+		public static const GROWTH_STAT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.MountProto.growth_stat", "growthStat", (13 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
 
 		private var growth_stat$field:app.message.SpriteStatProto;
 
@@ -311,7 +311,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const GROWTH_TRANS_STAT:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.MountProto.growth_trans_stat", "growthTransStat", (14 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
+		public static const GROWTH_TRANS_STAT:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.MountProto.growth_trans_stat", "growthTransStat", (14 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
 
 		private var growth_trans_stat$field:app.message.SpriteStatProto;
 
@@ -334,7 +334,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const MOUNT_SPELLS:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("app.message.MountProto.mount_spells", "mountSpells", (15 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MountSpellsProto; });
+		public static const MOUNT_SPELLS:FieldDescriptor_TYPE_MESSAGE = new FieldDescriptor_TYPE_MESSAGE("app.message.MountProto.mount_spells", "mountSpells", (15 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.MountSpellsProto; });
 
 		private var mount_spells$field:app.message.MountSpellsProto;
 
@@ -360,59 +360,59 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, id$field);
 			}
 			if (hasUnidentified) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, unidentified$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, unidentified$field);
 			}
 			if (hasSex) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
-				com.netease.protobuf.WriteUtils.write$TYPE_ENUM(output, sex$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_ENUM(output, sex$field);
 			}
 			if (hasLevel) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 7);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level$field);
 			}
 			if (hasExp) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 16);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, exp$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, exp$field);
 			}
 			if (hasHungerDegree) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 8);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, hunger_degree$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, hunger_degree$field);
 			}
 			if (hasVitality) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 9);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, vitality$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, vitality$field);
 			}
 			if (hasVitalityExp) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 17);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT64(output, vitality_exp$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT64(output, vitality_exp$field);
 			}
 			if (hasIsBreed) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 10);
-				com.netease.protobuf.WriteUtils.write$TYPE_BOOL(output, is_breed$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_BOOL(output, is_breed$field);
 			}
 			if (hasLifeTime) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 11);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, life_time$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, life_time$field);
 			}
 			if (hasBornStat) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 12);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, born_stat$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, born_stat$field);
 			}
 			if (hasGrowthStat) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 13);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, growth_stat$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, growth_stat$field);
 			}
 			if (hasGrowthTransStat) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 14);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, growth_trans_stat$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, growth_trans_stat$field);
 			}
 			if (hasMountSpells) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 15);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, mount_spells$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, mount_spells$field);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -438,77 +438,77 @@ package app.message {
 			var growth_trans_stat$count:uint = 0;
 			var mount_spells$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountProto.id cannot be set twice.');
 					}
 					++id$count;
-					this.id = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.id = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (unidentified$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountProto.unidentified cannot be set twice.');
 					}
 					++unidentified$count;
-					this.unidentified = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.unidentified = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 6:
 					if (sex$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountProto.sex cannot be set twice.');
 					}
 					++sex$count;
-					this.sex = com.netease.protobuf.ReadUtils.read$TYPE_ENUM(input);
+					this.sex = com.netease.protobuf.ReadUtils.read_TYPE_ENUM(input);
 					break;
 				case 7:
 					if (level$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountProto.level cannot be set twice.');
 					}
 					++level$count;
-					this.level = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.level = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 16:
 					if (exp$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountProto.exp cannot be set twice.');
 					}
 					++exp$count;
-					this.exp = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.exp = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 8:
 					if (hunger_degree$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountProto.hungerDegree cannot be set twice.');
 					}
 					++hunger_degree$count;
-					this.hungerDegree = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.hungerDegree = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 9:
 					if (vitality$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountProto.vitality cannot be set twice.');
 					}
 					++vitality$count;
-					this.vitality = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.vitality = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 17:
 					if (vitality_exp$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountProto.vitalityExp cannot be set twice.');
 					}
 					++vitality_exp$count;
-					this.vitalityExp = com.netease.protobuf.ReadUtils.read$TYPE_INT64(input);
+					this.vitalityExp = com.netease.protobuf.ReadUtils.read_TYPE_INT64(input);
 					break;
 				case 10:
 					if (is_breed$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountProto.isBreed cannot be set twice.');
 					}
 					++is_breed$count;
-					this.isBreed = com.netease.protobuf.ReadUtils.read$TYPE_BOOL(input);
+					this.isBreed = com.netease.protobuf.ReadUtils.read_TYPE_BOOL(input);
 					break;
 				case 11:
 					if (life_time$count != 0) {
 						throw new flash.errors.IOError('Bad data format: MountProto.lifeTime cannot be set twice.');
 					}
 					++life_time$count;
-					this.lifeTime = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.lifeTime = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 12:
 					if (born_stat$count != 0) {
@@ -516,7 +516,7 @@ package app.message {
 					}
 					++born_stat$count;
 					this.bornStat = new app.message.SpriteStatProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.bornStat);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.bornStat);
 					break;
 				case 13:
 					if (growth_stat$count != 0) {
@@ -524,7 +524,7 @@ package app.message {
 					}
 					++growth_stat$count;
 					this.growthStat = new app.message.SpriteStatProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.growthStat);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.growthStat);
 					break;
 				case 14:
 					if (growth_trans_stat$count != 0) {
@@ -532,7 +532,7 @@ package app.message {
 					}
 					++growth_trans_stat$count;
 					this.growthTransStat = new app.message.SpriteStatProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.growthTransStat);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.growthTransStat);
 					break;
 				case 15:
 					if (mount_spells$count != 0) {
@@ -540,7 +540,7 @@ package app.message {
 					}
 					++mount_spells$count;
 					this.mountSpells = new app.message.MountSpellsProto();
-					com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, this.mountSpells);
+					com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, this.mountSpells);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -16,7 +16,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const ID:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentGeneralTaozDataProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const ID:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentGeneralTaozDataProto.id", "id", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var id$field:int;
 
@@ -43,7 +43,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("app.message.EquipmentGeneralTaozDataProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+		public static const NAME:FieldDescriptor_TYPE_STRING = new FieldDescriptor_TYPE_STRING("app.message.EquipmentGeneralTaozDataProto.name", "name", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
 
 		private var name$field:String;
 
@@ -66,7 +66,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const LEVEL_STAGE:FieldDescriptor$TYPE_INT32 = new FieldDescriptor$TYPE_INT32("app.message.EquipmentGeneralTaozDataProto.level_stage", "levelStage", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const LEVEL_STAGE:FieldDescriptor_TYPE_INT32 = new FieldDescriptor_TYPE_INT32("app.message.EquipmentGeneralTaozDataProto.level_stage", "levelStage", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
 		private var level_stage$field:int;
 
@@ -91,7 +91,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const TAOZ_ADD_STATS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.EquipmentGeneralTaozDataProto.taoz_add_stats", "taozAddStats", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentGeneralTaozAddStatProto; });
+		public static const TAOZ_ADD_STATS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.EquipmentGeneralTaozDataProto.taoz_add_stats", "taozAddStats", (4 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.EquipmentGeneralTaozAddStatProto; });
 
 		[ArrayElementType("app.message.EquipmentGeneralTaozAddStatProto")]
 		public var taozAddStats:Array = [];
@@ -99,7 +99,7 @@ package app.message {
 		/**
 		 *  @private
 		 */
-		public static const EVALUATE_ADD_STATS:RepeatedFieldDescriptor$TYPE_MESSAGE = new RepeatedFieldDescriptor$TYPE_MESSAGE("app.message.EquipmentGeneralTaozDataProto.evaluate_add_stats", "evaluateAddStats", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
+		public static const EVALUATE_ADD_STATS:RepeatedFieldDescriptor_TYPE_MESSAGE = new RepeatedFieldDescriptor_TYPE_MESSAGE("app.message.EquipmentGeneralTaozDataProto.evaluate_add_stats", "evaluateAddStats", (5 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return app.message.SpriteStatProto; });
 
 		[ArrayElementType("app.message.SpriteStatProto")]
 		public var evaluateAddStats:Array = [];
@@ -110,23 +110,23 @@ package app.message {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			if (hasId) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, id$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, id$field);
 			}
 			if (hasName) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-				com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, name$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_STRING(output, name$field);
 			}
 			if (hasLevelStage) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-				com.netease.protobuf.WriteUtils.write$TYPE_INT32(output, level_stage$field);
+				com.netease.protobuf.WriteUtils.write_TYPE_INT32(output, level_stage$field);
 			}
 			for (var taozAddStats$index:uint = 0; taozAddStats$index < this.taozAddStats.length; ++taozAddStats$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 4);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.taozAddStats[taozAddStats$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.taozAddStats[taozAddStats$index]);
 			}
 			for (var evaluateAddStats$index:uint = 0; evaluateAddStats$index < this.evaluateAddStats.length; ++evaluateAddStats$index) {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 5);
-				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.evaluateAddStats[evaluateAddStats$index]);
+				com.netease.protobuf.WriteUtils.write_TYPE_MESSAGE(output, this.evaluateAddStats[evaluateAddStats$index]);
 			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
@@ -141,34 +141,34 @@ package app.message {
 			var name$count:uint = 0;
 			var level_stage$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
-				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				var tag:uint = com.netease.protobuf.ReadUtils.read_TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
 					if (id$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentGeneralTaozDataProto.id cannot be set twice.');
 					}
 					++id$count;
-					this.id = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.id = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 2:
 					if (name$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentGeneralTaozDataProto.name cannot be set twice.');
 					}
 					++name$count;
-					this.name = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					this.name = com.netease.protobuf.ReadUtils.read_TYPE_STRING(input);
 					break;
 				case 3:
 					if (level_stage$count != 0) {
 						throw new flash.errors.IOError('Bad data format: EquipmentGeneralTaozDataProto.levelStage cannot be set twice.');
 					}
 					++level_stage$count;
-					this.levelStage = com.netease.protobuf.ReadUtils.read$TYPE_INT32(input);
+					this.levelStage = com.netease.protobuf.ReadUtils.read_TYPE_INT32(input);
 					break;
 				case 4:
-					this.taozAddStats.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.EquipmentGeneralTaozAddStatProto()));
+					this.taozAddStats.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.EquipmentGeneralTaozAddStatProto()));
 					break;
 				case 5:
-					this.evaluateAddStats.push(com.netease.protobuf.ReadUtils.read$TYPE_MESSAGE(input, new app.message.SpriteStatProto()));
+					this.evaluateAddStats.push(com.netease.protobuf.ReadUtils.read_TYPE_MESSAGE(input, new app.message.SpriteStatProto()));
 					break;
 				default:
 					super.readUnknown(input, tag);

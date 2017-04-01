@@ -432,7 +432,7 @@ package com.rpgGame.app.manager.role
 		{
 			if (!hasScene($targetMapId))
 				return false;
-			if (MainRoleManager.actorInfo.hp <= 0)
+			if (MainRoleManager.actorInfo.totalStat.hp <= 0)
 			{
 				if ($notice)
 				{

@@ -6,8 +6,8 @@ package com.rpgGame.app.cmdlistener
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.net.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	public class GMCmdListener extends BaseBean
 	{
@@ -18,7 +18,7 @@ package com.rpgGame.app.cmdlistener
 
 		override public function start() : void
 		{
-			SocketConnection.addCmdListener(GMModuleMessages.S2C_GM_REPLY, onRecGmReply);
+			SocketConnection_protoBuffer.addCmdListener(GMModuleMessages.S2C_GM_REPLY, onRecGmReply);
 
 			finish();
 		}

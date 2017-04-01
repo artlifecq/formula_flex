@@ -15,10 +15,7 @@ package com.rpgGame.app.ui.alert
 	import gs.TweenLite;
 	
 	import org.client.mainCore.ds.HashMap;
-	import org.mokylin.skin.common.AlertOkSkin;
-	import org.mokylin.skin.common.AlertSkin;
-	import org.mokylin.skin.common.AlertTransparentOkCancelSkin;
-	import org.mokylin.skin.common.AlertTransparentOkSkin;
+	import org.mokylin.skin.common.alert.AlertOKCancel;
 	
 	import starling.display.DisplayObject;
 
@@ -42,16 +39,16 @@ package com.rpgGame.app.ui.alert
 			switch (type)
 			{
 				case AlertTypeEnum.ALERT_TYPE_OK:
-					skin = new AlertOkSkin();
+					//skin = new AlertOkSkin();
 					break;
 				case AlertTypeEnum.ALERT_TYPE_OK_CANCEL:
-					skin = new AlertSkin();
+					skin = new AlertOKCancel();
 					break;
 				case AlertTypeEnum.ALERT_TYPE_TRANSPARENT_OK:
-					skin = new AlertTransparentOkSkin();
+					//skin = new AlertTransparentOkSkin();
 					break;
 				case AlertTypeEnum.ALERT_TYPE_TRANSPARENT_OK_CANCEL:
-					skin = new AlertTransparentOkCancelSkin();
+					//skin = new AlertTransparentOkCancelSkin();
 					break;
 			}
 			super(skin);
@@ -173,6 +170,11 @@ package com.rpgGame.app.ui.alert
 			gameAlert.clickCallBack = clickCallBack;
 			if(!isNaN(alertSet.autoCloseTime))
 				gameAlert.autoCloseTime = alertSet.autoCloseTime;
+			
+			if(!gameAlert.skin){
+				return null;
+			}
+			
 			if (gameAlert.cboxTip)
 			{
 				gameAlert.cboxTip.visible = alertSet.isShowCBox;

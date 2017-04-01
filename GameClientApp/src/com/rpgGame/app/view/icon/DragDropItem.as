@@ -1,9 +1,20 @@
 package com.rpgGame.app.view.icon
 {
 	import com.rpgGame.app.utils.FaceUtil;
+	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
-	import com.rpgGame.coreData.info.item.ItemInfo;
 	import com.rpgGame.coreData.type.item.GridBGType;
+	
+	import flash.geom.Point;
+	
+	import feathers.utils.filter.GrayFilter;
+	
+	import starling.core.Starling;
+	import starling.display.DisplayObject;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
 
 	/**
 	 * 可拖拽格子 
@@ -65,8 +76,8 @@ package com.rpgGame.app.view.icon
 					setGridUnlock();
 				}
 			}
-			if(_gridInfo.data is ItemInfo)
-				setIsShowLockAsset(_gridInfo.isShowLockAsset,(_gridInfo.data as ItemInfo).binded);
+			if(_gridInfo.data is ClientItemInfo)
+				setIsShowLockAsset(_gridInfo.isShowLockAsset,(_gridInfo.data as ClientItemInfo).binded);
 			
 			isEnabled = _gridInfo.isEnabled;
 		}
@@ -88,12 +99,62 @@ package com.rpgGame.app.view.icon
 		 */		
 		override protected function dragSourceOutChange():void
 		{
-			super.dragSourceOutChange();
+//			super.dragSourceOutChange();
 			
-//			isGary = true;
-			clear();
+			isGary = true;
+//			clear();
 //			TipTargetManager.removeTxtTipTarget(this);
 		}
+		
+		override public function set isGary(value : Boolean) : void
+		{
+			if (!_gridInfo||_gridInfo.data == null)
+				return;
+			
+			if (value)
+			{
+				if(_iconImage){
+					GrayFilter.gray(_iconImage);
+				}
+				if(_qualityImage){
+					GrayFilter.gray(_qualityImage);
+				}
+				if(_lvImage){
+					GrayFilter.gray(_lvImage);
+				}
+				if(_countText){
+					GrayFilter.gray(_countText);
+				}
+				if(_bindImage){
+					GrayFilter.gray(_bindImage);
+				}
+				if(_jobImage){
+					GrayFilter.gray(_jobImage);
+				}
+			}
+			else
+			{
+				if(_iconImage){
+					_iconImage.filter=null;
+				}
+				if(_qualityImage){
+					_qualityImage.filter=null;
+				}
+				if(_lvImage){
+					_lvImage.filter=null;
+				}
+				if(_countText){
+					_countText.filter=null;
+				}
+				if(_bindImage){
+					_bindImage.filter=null;
+				}
+				if(_jobImage){
+					_jobImage.filter=null;
+				}
+			}
+		}
+
 		
 		/**
 		 * 拖动完成表现
@@ -124,6 +185,20 @@ package com.rpgGame.app.view.icon
 		{
 			super.onBackComplete();
 			FaceUtil.setGridData(this, dragSource.gridInfo.data, true);
+		}
+		
+		override protected function onTouchSelect( e:TouchEvent ):void
+		{
+			var data:ClientItemInfo=this.gridInfo.data as ClientItemInfo
+			if(!data){
+				this.selectImgVisible=false;
+				return;
+			}
+			if(data.containerID!=ItemContainerID.BackPack&&data.containerID!=ItemContainerID.Storage){
+				this.selectImgVisible=false;
+				return;
+			}
+			super.onTouchSelect(e);
 		}
 		
 		override protected function dragSourceBack():void
