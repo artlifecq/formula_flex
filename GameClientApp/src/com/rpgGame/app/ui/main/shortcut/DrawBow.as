@@ -156,8 +156,8 @@ class Bow extends ImmutablePolygon
 		vertices[1] = _y;
 		for (var i:int=0; i<=numSides; ++i)
 		{
-			vertices[i * 2] = Math.cos(angle) * _width + _x;
-			vertices[i * 2 + 1] = Math.sin(angle) * _height + _y;
+			vertices[i * 2+2] = Math.cos(angle) * _width + _x;
+			vertices[i * 2 + 3] = Math.sin(angle) * _height + _y;
 			angle += angleDelta;
 		}
 		
