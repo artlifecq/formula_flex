@@ -1028,7 +1028,7 @@ package com.rpgGame.app.fight.spell
                 if (0 == skillInfo.q_check_relation) {
                     return SceneRoleSelectManager.selectedRole;
                 }
-                modeState = FightManager.getFightRoleState(SceneRoleSelectManager.selectedRole, skillInfo, isDie);
+                modeState = FightManager.getFightRoleState(SceneRoleSelectManager.selectedRole, skillInfo);
                 if (FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT != modeState) {
                     return SceneRoleSelectManager.selectedRole;
                 }
@@ -1053,7 +1053,7 @@ package com.rpgGame.app.fight.spell
                 if (0 == skillInfo.q_check_relation) {
                     return role;
                 }
-                modeState = FightManager.getFightRoleState(role, skillInfo, isDie);
+                modeState = FightManager.getFightRoleState(role, skillInfo);
                 if (FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT == modeState) {
                     continue;
                 }
