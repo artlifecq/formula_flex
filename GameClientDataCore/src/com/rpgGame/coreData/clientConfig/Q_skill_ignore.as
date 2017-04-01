@@ -18,6 +18,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_skillID:int;
 		 /**  技能等级 */
 		public var q_grade:int;
+		 /**  策划备注2 */
+		public var q_skillpanel_description:String;
 		 /**  内力值消耗(若不需要根据等级增加消耗可以在基本数据库中控制) */
 		public var q_mp:int;
 		 /**  升级消耗银两(从本级升至下一级) */

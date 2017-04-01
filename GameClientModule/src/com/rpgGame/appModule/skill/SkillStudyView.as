@@ -68,7 +68,6 @@ package com.rpgGame.appModule.skill
 			this._skin.vs_bar.x=20;
 			this._skin.vs_bar.scrollBarDisplayMode = ScrollBarDisplayMode.FIXED;
 			this._skin.vs_bar.verticalScrollBarPosition =RelativePosition.RIGHT;
-//			this._skin.vs_bar.horizontalScrollPolicy = ScrollPolicy.OFF;
 			this._skin.vs_bar.verticalScrollPolicy = ScrollPolicy.OFF;
 			
 			
@@ -80,7 +79,7 @@ package com.rpgGame.appModule.skill
 			_skillContainer.addChild(_jobTl1);
 			_skillContainer.addChild(_jobTl2);
 			skillUpgrade=new SkillUpgradeView(_skin.shengji.skin as jineng_shengji,_panel);
-			skillRise=new SkillRiseView(_skin.jinjie.skin as jineng_jinjie);
+			skillRise=new SkillRiseView(_skin.jinjie.skin as jineng_jinjie,_panel);
 			
 			var skillNum:int;
 			var job:int=MainRoleManager.actorInfo.job;
@@ -187,7 +186,6 @@ package com.rpgGame.appModule.skill
 			if(skillRise.onTouchTarget(target)){
 				return true;
 			}
-			
 			return false;
 		}
 		
@@ -226,13 +224,14 @@ package com.rpgGame.appModule.skill
 		
 		private function spellRise(lv:int):void
 		{
-			UIPopManager.showPopUI(SkillOkPop,lv);
+			UIPopManager.showAlonePopUI(SkillRisePop);
+			skillRise.unlock();
 			updateSkillList();
 		}
 		
 		private function spellUpgrade(lv:int):void
 		{
-			UIPopManager.showPopUI(SkillOkPop,lv);
+			UIPopManager.showAlonePopUI(SkillGradePop,lv);
 			updateSkillList();
 		}
 		

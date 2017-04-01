@@ -36,6 +36,8 @@ package org.mokylin.skin.app.wuxue.jineng
 
 		public var lb_jihuo:feathers.controls.Label;
 
+		public var lb_jinengdengji:feathers.controls.Label;
+
 		public var lb_leixing:feathers.controls.Label;
 
 		public var lb_lengque:feathers.controls.Label;
@@ -150,11 +152,11 @@ package org.mokylin.skin.app.wuxue.jineng
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_tiaojian = temp;
 			temp.name = "grp_tiaojian";
-			temp.height = 156;
+			temp.height = 131;
 			temp.width = 331;
 			temp.x = 15;
-			temp.y = 196;
-			temp.elementsContent = [tj_name_i(),lb_renwudengji_i(),lb_zhenqi_i(),lb_yinliang_i(),lb_daoju_i()];
+			temp.y = 227;
+			temp.elementsContent = [tj_name_i(),lb_jinengdengji_i(),lb_renwudengji_i(),lb_zhenqi_i(),lb_yinliang_i(),lb_daoju_i()];
 			return temp;
 		}
 
@@ -166,6 +168,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.height = 24;
 			temp.letterSpacing = 1;
 			temp.text = "消耗道具：";
+			temp.textAlign = "left";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 80;
@@ -198,6 +201,22 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 159;
 			temp.y = 127;
+			return temp;
+		}
+
+		private function lb_jinengdengji_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_jinengdengji = temp;
+			temp.name = "lb_jinengdengji";
+			temp.htmlText = "人物等级：<font color='#CFC6AE'>56</font>";
+			temp.letterSpacing = 1;
+			temp.textAlign = "left";
+			temp.color = 0x8B8D7B;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 320;
+			temp.x = 0;
+			temp.y = 28;
 			return temp;
 		}
 
@@ -279,6 +298,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.name = "lb_renwudengji";
 			temp.htmlText = "技能等级：<font color='#CFC6AE'>56</font>";
 			temp.letterSpacing = 1;
+			temp.textAlign = "left";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 320;
@@ -321,6 +341,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.name = "lb_yinliang";
 			temp.htmlText = "消耗绑银：<font color='#CFC6AE'>5636</font>";
 			temp.letterSpacing = 1;
+			temp.textAlign = "left";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 320;
@@ -336,6 +357,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.name = "lb_zhenqi";
 			temp.htmlText = "消耗真气：<font color='#CFC6AE'>54124</font>";
 			temp.letterSpacing = 1;
+			temp.textAlign = "left";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 320;
@@ -364,7 +386,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.styleName = "ui/app/wuxue/jineng/fengexian.png";
 			temp.width = 332;
 			temp.x = 14;
-			temp.y = 191;
+			temp.y = 218;
 			return temp;
 		}
 

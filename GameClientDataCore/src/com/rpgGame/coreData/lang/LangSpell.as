@@ -12,7 +12,7 @@ package com.rpgGame.coreData.lang
 	*/
 	public class LangSpell
 	{
-		 /**  等级: */
+		 /**  等级 */
 		public static const SPELL_PANEL_TEXT1:String = "SPELL_PANEL_TEXT1";
 		 /**  未激活进阶效果 */
 		public static const SPELL_PANEL_TEXT2:String = "SPELL_PANEL_TEXT2";
@@ -44,6 +44,12 @@ package com.rpgGame.coreData.lang
 		public static const SPELL_PANEL_TEXT15:String = "SPELL_PANEL_TEXT15";
 		 /**  级自动获得 */
 		public static const SPELL_PANEL_TEXT16:String = "SPELL_PANEL_TEXT16";
+		 /**  级可进阶 */
+		public static const SPELL_PANEL_TEXT17:String = "SPELL_PANEL_TEXT17";
+		 /**  且人物等级达到$级 */
+		public static const SPELL_PANEL_TEXT18:String = "SPELL_PANEL_TEXT18";
+		 /**  技能等级 */
+		public static const SPELL_PANEL_TEXT19:String = "SPELL_PANEL_TEXT19";
 		 /**  左键单击释放 */
 		public static const SPELL_TIPS_INFO1:String = "SPELL_TIPS_INFO1";
 		 /**  攻击距离：$米 */

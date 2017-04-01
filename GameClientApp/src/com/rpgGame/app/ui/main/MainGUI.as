@@ -127,6 +127,11 @@ package com.rpgGame.app.ui.main
 			init();
 		}
 		
+		public function get shortcutBar():ShortcutBar
+		{
+			return _shortcutBar;
+		}
+
 		/**
 		 * 初始化
 		 *

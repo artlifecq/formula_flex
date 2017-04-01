@@ -1,12 +1,18 @@
 package com.rpgGame.app.fight.spell
 {
 	import com.rpgGame.app.display2D.PopSkinUI;
+	import com.rpgGame.app.manager.MainUIManager;
+	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
+	import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.info.shortcuts.ShortcutsData;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
+	
+	import flash.geom.Point;
 	
 	import gs.TweenLite;
 	import gs.easing.Cubic;
@@ -50,7 +56,24 @@ package com.rpgGame.app.fight.spell
 		private function toMis():void
 		{
 			var endy:int=this._skin.container.y-40;
-			TweenLite.to(this._skin.container,1,{y:endy,alpha:0,onComplete:popComplete,ease:Cubic.easeOut});			
+			var index:int=getNextShortIndex();
+			var cfg:Q_skill_model=SpellDataManager.getSpellData(skillInfo.skillModelId,skillInfo.skillLevel);
+			ShortcutsManger.getInstance().setShortData(index, ShortcutsTypeEnum.SKILL_TYPE, cfg.q_skillID);
+			var toP:Point=MainUIManager.mainui.shortcutBar.getSkillGridSeat(index);
+			TweenLite.to(this._skin.container,1,{x:toP.x,y:toP.y,scale:0.3,onComplete:popComplete,ease:Cubic.easeOut});			
+		}
+		
+		private function getNextShortIndex():int
+		{
+			var index:int;
+			for(var i:int=0;i<8;i++){
+				var shortData : ShortcutsData = ShortcutsManger.getInstance().getShortcutsDataByPos(i);
+				if(!shortData){
+					index=i;
+					break;
+				}
+			}
+			return index;
 		}
 		
 		override protected function onStageResize(sw : int, sh : int) : void

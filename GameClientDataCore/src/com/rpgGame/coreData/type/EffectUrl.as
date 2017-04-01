@@ -177,6 +177,14 @@ package com.rpgGame.coreData.type
 		 *战斗力特效 
 		 */
 		public static const UI_JIEMIAN_ZHANDOULI:String="ui_jiemian_zhandouli";
+		/**
+		 *进阶成功 
+		 */
+		public static const UI_JINJIE_COMPLETE:String="ui-hechengchenggong_01";
+		/**
+		 *进阶解锁 
+		 */
+		public static const UI_JINJIE_UNLOCK:String="ui_jinengkuang_shanguang";
 
 		
 		

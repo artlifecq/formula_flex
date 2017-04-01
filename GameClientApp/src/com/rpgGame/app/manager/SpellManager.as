@@ -1,20 +1,27 @@
 package com.rpgGame.app.manager
 {
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.SpellSender;
 	import com.rpgGame.app.utils.UpgradeUtil;
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.SkillLvLDataManager;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.clientConfig.Q_item;
+	import com.rpgGame.coreData.clientConfig.Q_skill_ignore;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
 	import com.rpgGame.coreData.info.upgrade.UpgradeProtoInfo;
 	import com.rpgGame.coreData.lang.LangSpell;
+	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
 	import app.message.SpellLearnProto;
-	import app.message.SpellProto;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
@@ -31,6 +38,82 @@ package com.rpgGame.app.manager
 		
 		public function SpellManager()
 		{
+		}
+		
+		
+		/**
+		 *是否可以升级或者升阶 
+		 * @param skillId
+		 * @return 
+		 * 
+		 */
+		public static function canUpOrRise(skillId:int):Boolean
+		{
+			var result:Boolean=true;
+			var data:HeroData=MainRoleManager.actorInfo;
+			var skillInfo:SkillInfo=data.spellList.getSkillInfo(skillId);
+			if(!skillInfo){//没学习的技能
+				return false;
+			}
+			var cfg:Q_skill_model=SpellDataManager.getSpellData(skillId,skillInfo.skillLevel);//技能配置
+			var canUp:Boolean=true;
+			var canRise:Boolean=true;
+			var myLv:int=data.totalStat.level;
+			var myMp:int=data.curZhenqi;
+			var myMon:int=data.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ data.totalStat.getResData(CharAttributeType.RES_MONEY);
+			var key:String=skillId+"_"+skillInfo.skillChildLv;
+			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(key);
+			var needMp:int;
+			var needMy:int;
+			var needLv:int;
+			
+			if(!lvData){//找不到升级数据
+				canUp =false;
+			}else{
+				needMp=lvData.q_energy;
+				needMy=lvData.q_copper;
+				needLv=lvData.q_playerlevel;
+				if(needMp>myMp||needLv>myLv||needMy>myMon){//不满足升级条件
+					canUp =false;
+				}
+			}
+			
+			if(skillInfo.skillChildLv==cfg.q_max_level){//不可升级
+				canUp =false;
+			}
+			
+			if(skillInfo.skillLevel==cfg.q_max_grade){//不升阶
+				canRise =false;
+			}
+			cfg=SpellDataManager.getSpellData(cfg.q_skillID,cfg.q_max_grade);
+			var i:int=0;
+			if(!cfg){//不可升阶
+				canRise =false;
+			}else{
+				needLv=cfg.q_level_up;
+				needMp=cfg.q_energy_up;
+				needMy=cfg.q_cost_up;
+				var neeSkill:int=cfg.q_need_skill_level;
+				if(needMp>myMp||needLv>myLv||needMy>myMon||neeSkill>skillInfo.skillChildLv){//不满足升阶条件
+					canRise =false;
+				}
+				if(cfg.q_need_items&&cfg.q_need_items.length!=0){
+					var items:Array=JSON.parse(cfg.q_need_items) as Array;//[{"mod":9017,"num":1}]
+					var itemDes:Array=[];
+					for(i=0;i<items.length;i++){
+						var item:Q_item=ItemConfig.getQItemByID(items[i].mod);
+						var needNum:int=items[i].num;
+						var myNum:int=BackPackManager.instance.getItemCount(items[i].mod);
+						if(needNum>myNum){//物品不足
+							canRise=false;
+							break;
+						}
+					}
+				}
+			}
+			
+			result=canUp||canRise;
+			return result;			
 		}
 		
 		/**

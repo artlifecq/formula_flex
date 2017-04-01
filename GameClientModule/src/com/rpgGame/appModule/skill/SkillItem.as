@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.skill
 {
+	import com.rpgGame.app.manager.SpellManager;
 	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
@@ -13,6 +14,7 @@ package com.rpgGame.appModule.skill
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
+	import feathers.controls.Label;
 	import feathers.utils.filter.GrayFilter;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -64,29 +66,42 @@ package com.rpgGame.appModule.skill
 			_skin.txt_Name.text=cfg.q_skillName;
 			_skillCfg=cfg;
 			_skillInfo=info;
-			_skin.tips.visible=false;
+			_skin.tips.visible=SpellManager.canUpOrRise(cfg.q_skillID);
 			var i:int=0;
 			_icon.setIconResName(ClientConfig.getSkillIcon(cfg.q_skillID.toString(),IcoSizeEnum.ICON_42));
+			var item:DisplayObject;
 			if(info){//学习了的技能
 				_skin.txt_level.visible=true;
 				while(i<_skin.container.numChildren){
-					GrayFilter.unGray(_skin.container.getChildAt(i));
+					item=_skin.container.getChildAt(i);
 					i++;					
+					if(item is Label){
+						continue;
+					}else{
+						GrayFilter.unGray(item);
+					}
 				}
 				this.touchable=true;
 				_skin.txt_level.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT1)+info.skillChildLv+"/"+cfg.q_max_level;
 				if(info.skillLevel==1){
 					_skin.txt_Inacitve.color=0x8b8d7b;
 					_skin.txt_Inacitve.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT2);
+					_skin.mc_dengjie.visible=false;
 				}else{
 					_skin.txt_Inacitve.color=0xc9b722;
 					_skin.txt_Inacitve.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT3);
+					_skin.mc_dengjie.visible=true;
 				}
 				_skin.mc_dengjie.gotoAndStop(info.skillLevel.toString());//阶数
 			}else{
 				while(i<_skin.container.numChildren){
-					GrayFilter.gray(_skin.container.getChildAt(i));
+					item=_skin.container.getChildAt(i);
 					i++;					
+					if(item is Label){
+						continue;
+					}else{
+						GrayFilter.gray(item);
+					}
 				}
 				this.touchable=false;
 				

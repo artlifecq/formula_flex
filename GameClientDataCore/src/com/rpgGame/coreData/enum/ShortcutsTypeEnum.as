@@ -2,6 +2,11 @@ package com.rpgGame.coreData.enum
 {
 	import com.rpgGame.coreData.rEnum;
 
+	/**
+	 *快捷类型 
+	 * @author dik
+	 * 
+	 */
 	public class ShortcutsTypeEnum
 	{
 		/** 技能 **/

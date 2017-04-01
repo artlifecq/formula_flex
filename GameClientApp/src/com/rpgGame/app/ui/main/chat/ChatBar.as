@@ -1,13 +1,10 @@
 package com.rpgGame.app.ui.main.chat {
-    import com.gameClient.alert.AlertPanel;
-    import com.gameClient.log.GameLog;
     import com.rpgGame.app.manager.chat.ChatGoodsManager;
     import com.rpgGame.app.manager.chat.ChatInputManager;
     import com.rpgGame.app.manager.chat.ChatManager;
     import com.rpgGame.app.manager.chat.ChatSpeakHistoryManager;
     import com.rpgGame.app.manager.chat.FaceGroupManager;
     import com.rpgGame.app.manager.chat.NoticeManager;
-    import com.rpgGame.app.manager.fight.FightFaceHelper;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.richText.RichTextCustomLinkType;
     import com.rpgGame.app.richText.RichTextCustomUtil;
@@ -23,7 +20,6 @@ package com.rpgGame.app.ui.main.chat {
     import com.rpgGame.coreData.clientConfig.FaceInfo;
     import com.rpgGame.coreData.info.MapDataManager;
     import com.rpgGame.coreData.info.item.ClientItemInfo;
-    import com.rpgGame.coreData.type.EnumHurtType;
     import com.rpgGame.coreData.type.chat.EnumChatChannelType;
     import com.rpgGame.coreData.utils.ColorUtils;
     import com.rpgGame.netData.chat.message.ResChatMessage;
@@ -622,7 +618,6 @@ package com.rpgGame.app.ui.main.chat {
 			//死亡面板测试
 //			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_CRIT,5000);
 //			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_NORMAL,8000);
-			
 			if("" == this._inputText.text )
 			{
 				return;
