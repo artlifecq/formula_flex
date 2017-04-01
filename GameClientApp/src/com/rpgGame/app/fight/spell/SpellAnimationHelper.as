@@ -300,10 +300,10 @@ package com.rpgGame.app.fight.spell
 		 * 
 		 */		
 		public static function addBuffEffect(target : SceneRole, renderId : int, renderType : String, effectRes : String, bindBone : String = null,
-											 repeat : int = 1, offset : Vector3D = null, needInView : Boolean = true) : void
+											 repeat : int = 1, offset : Vector3D = null, needInView : Boolean = true) : RenderUnit3D
 		{
 			if (target == null || !target.usable || (needInView && !target.isInViewDistance))
-				return;
+				return null;
 			if (effectRes)
 			{
 				if (!offset)
@@ -335,7 +335,9 @@ package com.rpgGame.app.fight.spell
 				effectRu.rotationY = 0;
 				effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, target.avatar);
 				effectRu.play(1);
+                return effectRu;
 			}
+            return null;
 		}
 		
 		private static var hurtEffectObjID : int = 1;

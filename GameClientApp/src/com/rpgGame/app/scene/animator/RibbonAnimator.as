@@ -140,7 +140,9 @@ package com.rpgGame.app.scene.animator
 			{
 				var fromObj : ObjectContainer3D = from.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY).getChildByName(BoneNameEnum.c_0_body_01);
 				var toObj:ObjectContainer3D = to.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY).getChildByName(BoneNameEnum.c_0_body_01);
-				
+				if (null == fromObj || null == toObj) {
+                    return;
+                }
 				trace(fromObj.position);
 				trace(toObj.position);
 				

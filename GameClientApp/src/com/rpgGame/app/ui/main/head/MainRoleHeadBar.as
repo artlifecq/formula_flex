@@ -2,6 +2,7 @@ package com.rpgGame.app.ui.main.head {
     import com.game.engine3D.display.Inter3DContainer;
     import com.game.engine3D.display.InterObject3D;
     import com.rpgGame.app.manager.role.MainRoleManager;
+    import com.rpgGame.app.manager.role.SceneRoleSelectManager;
     import com.rpgGame.core.events.MainPlayerEvent;
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ClientConfig;
@@ -92,6 +93,12 @@ package com.rpgGame.app.ui.main.head {
                 case this._skin.btn_quanti:
                 case this._skin.btn_shane:
                     this.showPKMode(target);
+                    break;
+                case this._headImg:
+                    // 医家
+                    if (JobEnum.ROLE_4_TYPE == MainRoleManager.actorInfo.job) {
+                        SceneRoleSelectManager.selectedRole = MainRoleManager.actor;
+                    }
                     break;
             }
         }

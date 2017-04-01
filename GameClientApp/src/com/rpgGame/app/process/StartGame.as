@@ -49,6 +49,8 @@ package com.rpgGame.app.process
     import flash.events.KeyboardEvent;
     import flash.ui.Keyboard;
     
+    import away3d.log.Log;
+    
     import gameEngine2D.NetDebug;
     
     import org.client.mainCore.bean.BeanEvent;
@@ -135,7 +137,6 @@ package com.rpgGame.app.process
 				//
 				MainRoleManager.initActor();
 				GlobalSettingManager.init();
-                RollManager.INSTANCE.init();
 				//
 
                 CONFIG::Debug {
@@ -162,6 +163,8 @@ package com.rpgGame.app.process
 			StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
 			LayerManager.showOrHideMM();
 			ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
+            // 屏蔽未捕获信息
+            Log.logCallBack = GameLog.logItem;
 		}
 		
 		private function tipsSetup() : void

@@ -174,6 +174,20 @@ package com.rpgGame.coreData.type
 		 */
 		public static const  RES_BOSS_TOTAL:int=11;
 		
+		/**
+		 *怒气值
+		 */
+		public static const  RES_NU_QI:int=12;
+		
+		/**
+		 *金针
+		 */
+		public static const  RES_JING_ZHENG:int=13;
+		
+		/**
+		 *弩塔
+		 */
+		public static const  RES_NU_TA:int=14;
 		
 		/**最大血量（生命）**/	
 //		public static const MAX_LIFE:int = 1;
