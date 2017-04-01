@@ -1,10 +1,16 @@
 package com.rpgGame.app.view.icon
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.AssetUrl;
+	import com.rpgGame.coreData.type.EffectUrl;
 	
 	import flash.geom.Point;
+	
+	import app.message.Quality;
 	
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
@@ -61,6 +67,8 @@ package com.rpgGame.app.view.icon
 		/**是否需要显示选中框**/
 		protected var isShow : Boolean = true;
 		
+		protected var _qualityEft:Inter3DContainer;
+		
 		public function BgIcon( $iconSize:int = IcoSizeEnum.SIZE_40 )
 		{
 			super( $iconSize );
@@ -99,14 +107,44 @@ package com.rpgGame.app.view.icon
 			}
 			_qualityImage.styleName = ClientConfig.getQualityBg( _qualityId ,iconSize);
 			_qualityImage.visible=true;
+			
+			if(qualityID>Quality.YELLOW){
+				showQualityEft();
+			}
+			
 			sortLayer();
 		}
+		
+		private function showQualityEft():void
+		{
+			if(_qualityEft==null){
+				_qualityEft=new Inter3DContainer();
+			}else{
+				_qualityEft.removeChildren();
+			}
+			
+			var inter:InterObject3D=_qualityEft.playInter3DAt(ClientConfig.getEffect(EffectUrl["ITEM_QUALITY"+_qualityId]),0,0,0);
+			var render:RenderUnit3D=RenderUnit3D(inter.baseObj3D);
+			render.setAddedCallBack(addEft);
+			addEft(render);
+			_qualityEft.x=_iconSize/2;
+			_qualityEft.y=_iconSize/2;
+		}		
+		
+		private function addEft( ru : RenderUnit3D):void
+		{
+			ru.removeAddedCallBack(addEft);
+			ru.scaleX=ru.scaleY=_iconSize/60;
+		}		
 		
 		/** 隐藏品质框 */		
 		public function hideQuality():void
 		{
 			if( _qualityImage != null )
 				_qualityImage.visible = false;
+			if(_qualityEft){
+				_qualityEft.removeFromParent();
+			}
 		}
 		
 		/**
@@ -400,6 +438,9 @@ package com.rpgGame.app.view.icon
 			if(_lvImage){
 				addChild( _lvImage );
 			}
+			if(_qualityEft){
+				addChild( _qualityEft );
+			}
 			if( _selectImage != null )
 				addChild( _selectImage );
 		}
@@ -419,6 +460,9 @@ package com.rpgGame.app.view.icon
 			if(_qualityImage)
 				_qualityImage.visible = false;
 			clearLockAsset();
+			if(_qualityEft){
+				_qualityEft.removeFromParent();
+			}
 			super.clear();
 		}
 		

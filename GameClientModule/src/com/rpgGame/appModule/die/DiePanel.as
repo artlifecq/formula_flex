@@ -5,6 +5,7 @@ package com.rpgGame.appModule.die
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.TimeUtil;
+	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.DieCfgData;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
@@ -19,6 +20,7 @@ package com.rpgGame.appModule.die
 	
 	import gs.TweenLite;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.siwangfuhuo.fuhuo_Skin;
 	import org.mokylin.skin.common.Erji_panelbg_Skin;
 	
@@ -104,6 +106,8 @@ package com.rpgGame.appModule.die
 				timer.addEventListener(TimerEvent.TIMER,onTimer);
 				timer.start();
 			}
+			
+			EventManager.addEvent(MainPlayerEvent.REVIVE_SUCCESS,hide);
 		}
 		
 		protected function onTimer(event:TimerEvent):void
@@ -120,6 +124,7 @@ package com.rpgGame.appModule.die
 		override public function hide():void
 		{
 			super.hide();
+			EventManager.removeEvent(MainPlayerEvent.REVIVE_SUCCESS,hide);
 			timer.removeEventListener(TimerEvent.TIMER_COMPLETE,onTimeComplete);
 			timer.removeEventListener(TimerEvent.TIMER,onTimer);
 			timer.stop();
