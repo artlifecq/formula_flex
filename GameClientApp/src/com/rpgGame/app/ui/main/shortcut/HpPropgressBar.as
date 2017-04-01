@@ -5,6 +5,8 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.role.HeroData;
@@ -18,7 +20,6 @@ package com.rpgGame.app.ui.main.shortcut
 	import org.mokylin.skin.mainui.shortcut.shortcut_Skin;
 	
 	import starling.animation.IAnimatable;
-	import starling.core.Starling;
 
 	public class HpPropgressBar implements IAnimatable
 	{
@@ -50,11 +51,13 @@ package com.rpgGame.app.ui.main.shortcut
 				if(_info.job == JobEnum.ROLE_1_TYPE)
 				{
 					effectuls =EffectUrl.XUE_TIAO_JIN;
+					effectuls1 = EffectUrl.XUE_TIAO_JIN1;
 					_skin.right_jintiao.visible =true;
 					EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,statResChangeHandler);
 				}
 				else{
 					effectuls =EffectUrl.XUE_TIAO_LAN;
+					effectuls1 = EffectUrl.XUE_TIAO_LAN1;
 					_skin.right_jintiao.visible =false;
 					EventManager.addEvent(MainPlayerEvent.NOWMP_CHANGE,MpCHangeHandler);
 					EventManager.addEvent(MainPlayerEvent.MAXMP_CHANGE,MpCHangeHandler);
@@ -98,7 +101,6 @@ package com.rpgGame.app.ui.main.shortcut
 			}
 			_mask.y = 117;
 			_display.mask = _mask;
-//			_display.visible = false;
 			_shor.addChild(_mask);
 			if(_diection==1)
 			{
@@ -116,21 +118,36 @@ package com.rpgGame.app.ui.main.shortcut
 		
 		private function statResChangeHandler(type:int):void
 		{
-			if(type== CharAttributeType.RES_NU_QI)
-				percentage(_info.totalStat.getResData(type)/100);
+			if(type!= CharAttributeType.RES_NU_QI)
+				return ;
+			var current:int = _info.totalStat.getResData(type)
+			percentage(current/100);
+			var Msg:String = "怒气："+current+"/100";
+			Msg += "<br/>施放技能会消耗怒气<br/>受到攻击或损失气血会增加怒气";
+			TipTargetManager.show(_skin.mask_blue, TargetTipsMaker.makeSimpleTextTips(Msg));
 		}
 		
 		private function HpCHangeHandler(role:RoleData):void
 		{
-			if(role.id != MainRoleManager.actorID)
+			if(role != _info)
 				return ;
 			percentage(_info.totalStat.hp/_info.totalStat.life);
+			TipTargetManager.show(_skin.mask_red, TargetTipsMaker.makeSimpleTextTips("血量："+_info.totalStat.hp+"/"+_info.totalStat.life+"<br/>使用药品可以恢复血量"));
 		}
 		private function MpCHangeHandler(role:RoleData):void
 		{
-			if(role.id != MainRoleManager.actorID)
+			if(role != _info)
 				return ;
-			percentage(_info.totalStat.getStatValue(CharAttributeType.MP)/_info.totalStat.getStatValue(CharAttributeType.MAX_MP));
+			var currentmp:int = _info.totalStat.getStatValue(CharAttributeType.MP);
+			var maxmp:int = _info.totalStat.getStatValue(CharAttributeType.MAX_MP)
+			percentage(currentmp/maxmp);
+			var Msg:String = "能量："+currentmp+"/"+maxmp;
+			Msg += "<br/>施放技能会消耗能量<br/>";
+			if(_info.job == JobEnum.ROLE_4_TYPE)
+				Msg += "每秒恢复7点能量";
+			else(_info.job == JobEnum.ROLE_4_TYPE)
+				Msg += "每秒恢复5点能量";
+			TipTargetManager.show(_skin.mask_blue, TargetTipsMaker.makeSimpleTextTips(Msg));
 		}
 		private function onAddHpEft(sr3D:InterObject3D,renderUint:RenderUnit3D):void
 		{
@@ -151,11 +168,12 @@ package com.rpgGame.app.ui.main.shortcut
 			renderUint.scaleX=renderUint.scaleY=_display.width/275;
 			if(_diection==1)
 			{
-				sr3D.x=_display.x+_display.width-40;
+				sr3D.x= 681;
+				sr3D.y=_display.y+_display.height;
 			}else{
 				sr3D.x= 127;
+				sr3D.y=_display.y+_display.height-8;
 			}
-			sr3D.y=_display.y+_display.height-8;
 		}
 		private function percentage(value:Number):void
 		{
@@ -164,8 +182,13 @@ package com.rpgGame.app.ui.main.shortcut
 			else if(value>1)
 				value = 1;
 			_mask.rotation = _diectionoff*Math.PI*0.7*value;
-			if(_mask3d!=null)
+			if(_diection==1)
+			{
+				_mask3d.baseObj3D.rotationZ =-(_diectionoff*180*0.7*value)+3;
+			}else{
 				_mask3d.baseObj3D.rotationZ =-(_diectionoff*180*0.74*value-1);
+			}
+				
 		}
 		private var totalNum:Number = 0;
 		public function advanceTime(time:Number):void

@@ -4,11 +4,11 @@ package com.rpgGame.app.ui.main.shortcut {
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.core.events.MainPlayerEvent;
     import com.rpgGame.core.events.society.SocietyEvent;
+    import com.rpgGame.core.manager.tips.TargetTipsMaker;
+    import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.enum.JobEnum;
-    import com.rpgGame.coreData.role.HeroData;
-    import com.rpgGame.coreData.role.RoleData;
     import com.rpgGame.coreData.type.CharAttributeType;
     
     import flash.geom.Point;
@@ -120,6 +120,7 @@ package com.rpgGame.app.ui.main.shortcut {
 				{
 					EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,refeashJinzhen)
 				}
+				TipTargetManager.show(_skin.jingzhen_yijia, null);
 				return ;
 			}
 			if(type != CharAttributeType.RES_JING_ZHENG)
@@ -131,6 +132,9 @@ package com.rpgGame.app.ui.main.shortcut {
 				_jinzhenList[i].visible = i<count;
 			}
 			_skin.lbl_lastNum2.text = count.toString()+"/5";
+			var Msg:String = "金针："+count+"/5";
+			Msg += "<br/>施放技能会消耗金针<br/>每10秒恢复1个金针";
+			TipTargetManager.show(_skin.jingzhen_yijia, TargetTipsMaker.makeSimpleTextTips(Msg));
 		}
       
 		public function getBtnGlobalPos(btnName : String) : Point

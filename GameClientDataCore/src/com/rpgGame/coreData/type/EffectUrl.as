@@ -44,9 +44,17 @@ package com.rpgGame.coreData.type
 		 */
 		public static const XUE_TIAO_JIN : String = "ui_xuetiaojin";
 		/**
+		 *金血条遮挡
+		 */
+		public static const XUE_TIAO_JIN1 : String = "ui_xuetiaojin_01";
+		/**
 		 *蓝血条 
 		 */
 		public static const XUE_TIAO_LAN : String = "ui_xuetiaolan";
+		/**
+		 *蓝血条遮挡
+		 */
+		public static const XUE_TIAO_LAN1 : String = "ui_xuetiaolan_01";
 
 		/**偷经0 白**/
 		public static const SCRIPTURES0 : String = "tx_duojin_bai";
