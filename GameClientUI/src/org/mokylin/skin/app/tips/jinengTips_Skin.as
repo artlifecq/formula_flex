@@ -22,6 +22,8 @@ package org.mokylin.skin.app.tips
 
 		public var bg:feathers.controls.UIAsset;
 
+		public var eft_name:feathers.controls.Label;
+
 		public var grp_head:feathers.controls.Group;
 
 		public var grp_line:feathers.controls.Group;
@@ -63,7 +65,7 @@ package org.mokylin.skin.app.tips
 			super();
 			
 			this.currentState = "normal";
-			this.height = 320;
+			this.height = 334;
 			this.width = 298;
 			this.elementsContent = [bg_i(),grp_line_i(),Icon_i(),grp_head_i(),grp_shuoming_i(),grp_rise_content_i(),grp_rise_tite_i(),mc_dengjie_i()];
 			
@@ -125,7 +127,7 @@ package org.mokylin.skin.app.tips
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
-			temp.x = 0;
+			temp.x = 3;
 			temp.y = -1;
 			return temp;
 		}
@@ -153,11 +155,28 @@ package org.mokylin.skin.app.tips
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 320;
+			temp.height = 335;
 			temp.styleName = "ui/common/tips/tips_2.png";
 			temp.width = 298;
-			temp.x = 0;
-			temp.y = 0;
+			temp.x = -2;
+			temp.y = 2;
+			return temp;
+		}
+
+		private function eft_name_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			eft_name = temp;
+			temp.name = "eft_name";
+			temp.height = 19;
+			temp.fontSize = 12;
+			temp.text = "瀚文的名字";
+			temp.textAlign = "center";
+			temp.color = 0x8B8D7B;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 64;
+			temp.x = 1;
+			temp.y = 58;
 			return temp;
 		}
 
@@ -188,9 +207,11 @@ package org.mokylin.skin.app.tips
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_rise_content = temp;
 			temp.name = "grp_rise_content";
-			temp.x = 25;
+			temp.height = 76;
+			temp.width = 263;
+			temp.x = 22;
 			temp.y = 248;
-			temp.elementsContent = [__jinengTips_Skin_UIAsset1_i(),rise_name_i(),is_act_i(),rise_des_i()];
+			temp.elementsContent = [__jinengTips_Skin_UIAsset1_i(),rise_name_i(),is_act_i(),rise_des_i(),eft_name_i()];
 			return temp;
 		}
 
@@ -355,7 +376,7 @@ package org.mokylin.skin.app.tips
 			temp.text = "每击中一个目标额外产生3点怒气";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 167;
+			temp.width = 183;
 			temp.x = 75;
 			temp.y = 23;
 			return temp;
@@ -369,7 +390,8 @@ package org.mokylin.skin.app.tips
 			temp.text = "怒火中烧";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 75;
+			temp.width = 191;
+			temp.x = 68;
 			temp.y = 1;
 			return temp;
 		}

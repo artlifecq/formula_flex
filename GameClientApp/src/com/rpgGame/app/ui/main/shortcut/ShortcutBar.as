@@ -37,6 +37,11 @@ package com.rpgGame.app.ui.main.shortcut {
 			init();
         }
 		
+		public function getSkillGridSeat(index:int):Point
+		{
+			return skillBar.getSkillGridSeat(index);
+		}
+		
 		private function useJump():void
 		{
 			var index:int=0;

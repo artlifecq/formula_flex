@@ -12,11 +12,11 @@ package com.rpgGame.appModule.skill
 	 * @author dik
 	 * 
 	 */
-	public class SkillOkPop extends PopSkinUI
+	public class SkillGradePop extends PopSkinUI
 	{
 		private var _lv:int;
 		
-		public function SkillOkPop(data:*)
+		public function SkillGradePop(data:*)
 		{
 			_skin=new Jineng_UpSkin();
 			_lv=data;

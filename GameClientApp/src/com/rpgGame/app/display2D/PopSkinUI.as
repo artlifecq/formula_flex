@@ -23,7 +23,9 @@ package com.rpgGame.app.display2D
 		
 		protected function popComplete():void
 		{
-			showEnd();
+			if(showEnd){
+				showEnd();
+			}
 			StarlingLayerManager.topUILayer.removeChild(this);
 		}
 		

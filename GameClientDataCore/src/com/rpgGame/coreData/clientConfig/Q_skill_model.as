@@ -24,6 +24,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_skillpanel_description2:String;
 		 /**  技能类型 */
 		public var q_type_description:String;
+		 /**  进阶名效果名 */
+		public var q_grade_name:String;
 		 /**  技能升级属性对应字段(0伤害加深 1召唤物秒伤 2仇恨值 3血量上限比例) */
 		public var q_skill_attr_type:int;
 		 /**  职业技能(1:兵家 2：墨家男3：墨家女 4：医家 0：不分职业-公共技能) */
@@ -32,6 +34,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_grade:int;
 		 /**  最大等级 */
 		public var q_max_level:int;
+		 /**  最大阶数 */
+		public var q_max_grade:int;
 		 /**  技能图标ICON */
 		public var q_icon:String;
 		 /**  连招技能,逗号分割 */
@@ -122,6 +126,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_fly_cal_line:int;
 		 /**  无目标状态是否触发空弹道（0不触发，1触发） */
 		public var q_fly_empty:int;
+		 /**  弹道是否可取消（0不可取消，1可取消） */
+		public var q_fly_cancel:int;
 		 /**  施法距离限制（自身与目标之间的距离）（单位：格子）,地面行走魔法表示行走距离(小于等于3：判定为近战攻击（处理音效）大于3：判定为远程攻击（处理音效）)   0表示无限距离 */
 		public var q_range_limit:int;
 		 /**  保持间距（单位：像素）（不配默认使用施法范围） */
@@ -228,10 +234,10 @@ package com.rpgGame.coreData.clientConfig
 		public var q_need_study:int;
 		 /**  领悟/升到该阶所需消耗道具 json */
 		public var q_need_items:String;
-		 /**  升级所需人物等级(从上一级升到本级需要的等级，第一条数据为领悟需要的等级） */
+		 /**  升阶所需人物等级(从上一级升到本级需要的等级，第一条数据为领悟需要的等级） */
 		public var q_level_up:int;
-		 /**  升级所需军衔等级(从上一级升到本级需要的军衔等级，第一条数据为领悟需要的军衔等级） */
-		public var q_need_military_rank:int;
+		 /**  升阶所需技能等级(一级升到本级需要的等级 */
+		public var q_need_skill_level:int;
 		 /**  技能描述所需数值 */
 		public var q_introduce:String;
 		 /**  击退格子数 支持负数 */

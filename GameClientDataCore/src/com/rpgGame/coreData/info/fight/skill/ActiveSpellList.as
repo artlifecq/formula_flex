@@ -88,14 +88,13 @@ package com.rpgGame.coreData.info.fight.skill
 		public function getStudySpell(spellID:int):Q_skill_model
 		{
 			var spell : Q_skill_model;
-			var spells : Array = _spellMap.getValues();
-			var len : int = spells.length;
-			for (var i : int = 0; i < len; i++)
-			{
-				spell = spells[i];
-				if(spell.q_skillID==spellID){
-					return spell;
-				}
+			var info:SkillInfo=getSkillInfo(spellID);
+			if(!info){
+				return null;
+			}
+			spell=SpellDataManager.getSpellData(spellID,info.skillLevel);
+			if(spell){
+				return spell;
 			}
 			return null;
 		}

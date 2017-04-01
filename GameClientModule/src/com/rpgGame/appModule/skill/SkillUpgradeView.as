@@ -105,7 +105,7 @@ package com.rpgGame.appModule.skill
 			var id:int=selectedCfg.q_skillID;
 			var key:String=id+"_"+lv;
 			var playerLv:int=0;
-			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(key);
+			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(key);//这儿又是技能id和等级
 			var changeValue:int=0;
 			var changeDes:String=LanguageConfig.getText( LangSpell["SPELL_"+id] );
 			if(lvData){
@@ -160,9 +160,18 @@ package com.rpgGame.appModule.skill
 			skin.arrow2.x=skin.lb_shanghai.x-skin.arrow2.width;
 			
 			//升级条件
-			skin.lb_renwudengji.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT10),playerLv,myLv);
+			var w:int;
+			skin.lb_renwudengji.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT10),playerLv);
 			skin.lb_zhenqi.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT8),needMp,myMp);
-			skin.lb_yinliang.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT7),needMy,myMon);			
+			skin.lb_yinliang.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT7),needMy,myMon);		
+			w=skin.lb_renwudengji.textWidth;
+			w=w>skin.lb_zhenqi.textWidth?w:skin.lb_zhenqi.textWidth;
+			w=w>skin.lb_yinliang.textWidth?w:skin.lb_yinliang.textWidth;
+			
+			var xx:int=(330-w)/2;
+			skin.lb_renwudengji.x=xx;
+			skin.lb_zhenqi.x=xx;
+			skin.lb_yinliang.x=xx;
 		}
 		
 		private function getTitleText(title:String,value:*,value1:int=-1):String

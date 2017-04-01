@@ -15,6 +15,8 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.coreData.info.shortcuts.ShortcutsData;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	
+	import flash.geom.Point;
+	
 	import org.client.mainCore.manager.EventManager;
 	
 	import starling.display.Sprite;
@@ -32,6 +34,17 @@ package com.rpgGame.app.ui.main.shortcut
 		{
 			_shortcutBar = shortcutBar;
 			initBar();
+		}
+		
+		internal function getSkillGridSeat(index:int):Point
+		{
+			var gd:ShortcutGrid=_gridVect[index];
+			if(!gd){
+				return null;
+			}
+			var p:Point=new Point(gd.x,gd.y);
+			p=gd.parent.localToGlobal(p);
+			return p;
 		}
 
 		override public function get height() : Number
@@ -92,7 +105,7 @@ package com.rpgGame.app.ui.main.shortcut
 				cd.showShortCutText(SHORTCUTS_KEY[i]);
 			}
 		}
-
+		
 		//---------------------------------------
 		/**
 		 * 设置数据
@@ -202,7 +215,7 @@ package com.rpgGame.app.ui.main.shortcut
 						}
 					}
 
-					FaceUtil.SetSkillGrid(grid, FaceUtil.chanceSpellToFaceInfo(skillData), false);//暂时不展示tips
+					FaceUtil.SetSkillGrid(grid, FaceUtil.chanceSpellToFaceInfo(skillData), true);//暂时不展示tips
 
 					var isAutoSpell : Boolean = MainRoleManager.actorInfo.spellList.isAutoSpellId(skillData.q_skillID);
 					if (isAutoSpell)

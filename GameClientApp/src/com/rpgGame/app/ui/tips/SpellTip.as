@@ -5,10 +5,13 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.SkillLvLDataManager;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_skill_ignore;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
+	import com.rpgGame.coreData.info.face.BaseFaceInfo;
+	import com.rpgGame.coreData.lang.LangSpell;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
 	import org.mokylin.skin.app.tips.jinengTips_Skin;
@@ -54,7 +57,7 @@ package com.rpgGame.app.ui.tips
 			riseIco=new BgIcon(48);
 			_spellTip.container.addChildAt(mainIco,4);
 			_spellTip.grp_rise_content.addChild(riseIco);
-			riseIco.x=0;
+			riseIco.x=2;
 			riseIco.y=0;
 			mainIco.x=9;
 			mainIco.y=10;
@@ -67,16 +70,22 @@ package com.rpgGame.app.ui.tips
 		 */		
 		public function setTipData( data:* ):void
 		{
-			var id:int=data;
+			var id:int;
+			if(data is int){
+				id=data;
+			}else if(data is BaseFaceInfo){
+				id=data.cfgId;
+			}
 			var info:SkillInfo=MainRoleManager.actorInfo.spellList.getSkillInfo(id);
 			var cfg:Q_skill_model=SpellDataManager.getSpellData(info.skillModelId,info.skillLevel);
 			var riseCfg:Q_skill_model=SpellDataManager.getSpellData(id,2);
 			
 			_spellTip.lbl_name.text=cfg.q_skillName;
 			_spellTip.lbl_dengji.text="Lv."+info.skillChildLv;
-			_spellTip.lbl_lenque.text=cfg.q_cd==0?"无":(cfg.q_cd/1000)+"s";
-			_spellTip.lbl_xiaohao.text=cfg.q_need_mp==0?"无":cfg.q_need_mp+"";
-			_spellTip.lbl_miaosu.htmlText=cfg.q_skillpanel_description1;
+			_spellTip.lbl_lenque.text=cfg.q_cd==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):(cfg.q_cd/1000)+"s";
+			_spellTip.lbl_xiaohao.text=cfg.q_need_mp==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):cfg.q_need_mp+"";
+			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(info.skillModelId+"_"+info.skillChildLv);
+			_spellTip.lbl_miaosu.htmlText=lvData.q_skillpanel_description;
 			
 			if(!riseCfg){
 				_spellTip.bg.height==_spellTip.grp_shuoming.y+_spellTip.lbl_jinengName.height+5+_spellTip.lbl_miaosu.textHeight+20;
@@ -84,7 +93,7 @@ package com.rpgGame.app.ui.tips
 				_spellTip.grp_rise_content.visible=false;
 				return;
 			}
-			
+			_spellTip.rise_name.color=0xcfc6ae;
 			_spellTip.rise_name.text=riseCfg.q_skillName;
 			_spellTip.grp_rise_tite.visible=true;
 			_spellTip.grp_rise_content.visible=true;
@@ -94,21 +103,36 @@ package com.rpgGame.app.ui.tips
 			
 			_spellTip.mc_dengjie.gotoAndStop(info.skillLevel.toString());
 			if(info.skillLevel==1){
-				_spellTip.is_act.color=0xd02525;
-				_spellTip.is_act.text="未激活";
+				_spellTip.is_act.visible=false;
+				_spellTip.mc_dengjie.visible=false;
+				_spellTip.rise_name.color=0x939388;
+				if(riseCfg.q_need_skill_level!=0){
+					_spellTip.rise_name.text="("+riseCfg.q_skillName+riseCfg.q_need_skill_level+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT17)+")";
+					if(riseCfg.q_level_up!=0){
+						_spellTip.rise_name.text+="\n"+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT18).replace("$",riseCfg.q_level_up);
+					}
+				}else{
+					if(riseCfg.q_level_up!=0){
+						_spellTip.rise_name.text+=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT18).replace("$",riseCfg.q_level_up);
+					}
+				}
+				
 			}else{
 				_spellTip.is_act.color=0x6BCC08;
 				_spellTip.is_act.text="已激活";
+				_spellTip.is_act.visible=true;
+				_spellTip.mc_dengjie.visible=true;
 			}
 			_spellTip.is_act.x=_spellTip.rise_name.x+_spellTip.rise_name.textWidth+10;
 			_spellTip.rise_des.htmlText=cfg.q_skillpanel_description2;
+			_spellTip.eft_name.text=riseCfg.q_grade_name;
 			
 			mainIco.setIconResName(ClientConfig.getSkillIcon(cfg.q_skillID.toString(),64));
 			riseIco.setIconResName(ClientConfig.getRiseSkillIcon(cfg.q_skillID.toString(),48));
 			
-			_spellTip.bg.height=_spellTip.grp_rise_content.y+_spellTip.rise_name.height+_spellTip.rise_des.textHeight+20;
-			if(_spellTip.bg.height<280){
-				_spellTip.bg.height=280;
+			_spellTip.bg.height=_spellTip.grp_rise_content.y+_spellTip.rise_name.textHeight+_spellTip.rise_des.textHeight+40+_spellTip.eft_name.textHeight;
+			if(_spellTip.bg.height<330){
+				_spellTip.bg.height=330;
 			}
 		}
 		

@@ -1,6 +1,11 @@
 package com.rpgGame.coreData.cfg
 {
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.coreData.clientConfig.Q_skill_ignore;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
+	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
 	import flash.utils.ByteArray;
 	
@@ -18,8 +23,6 @@ package com.rpgGame.coreData.cfg
 		
 		public static function setup(data : ByteArray) : void
 		{
-			
-			
 			var arr:Array = data.readObject();
 			for each (var skillData : Q_skill_ignore in arr)
 			{
