@@ -89,7 +89,7 @@ package com.rpgGame.app.ui.main.shortcut
 				cd.setIconPoint(0, 0);
 				addChild(cd);
 				_gridVect.push(cd);
-				cd.showShortCutText(SHORTCUTS_KEY[i]);
+//				cd.showShortCutText(SHORTCUTS_KEY[i]);
 			}
 		}
 
