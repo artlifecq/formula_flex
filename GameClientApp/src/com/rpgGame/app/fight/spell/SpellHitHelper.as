@@ -148,7 +148,7 @@ package com.rpgGame.app.fight.spell
 		{
 			SpellAnimationHelper.removeTrapEffectsByAtkorID(target.id);
 			EventManager.dispatchEvent(SceneCharacterEvent.SCENE_CHAR_DEATH, target);
-			if(target.type== SceneCharType.PLAYER){
+			if(!target.isMainChar && target.type== SceneCharType.PLAYER){
 				target.mouseEnable = true;
 			}else{
 				target.mouseEnable = false;
