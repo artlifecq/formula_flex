@@ -26,6 +26,8 @@ package org.mokylin.skin.app.wuxue.jineng
 
 		public var btn_jinjie:feathers.controls.Button;
 
+		public var eft_name:feathers.controls.Label;
+
 		public var grp_tiaojian:feathers.controls.Group;
 
 		public var lb_daoju:feathers.controls.Label;
@@ -58,6 +60,8 @@ package org.mokylin.skin.app.wuxue.jineng
 
 		public var line2:feathers.controls.UIAsset;
 
+		public var tj_name:feathers.controls.Label;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -69,7 +73,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			this.currentState = "normal";
 			this.height = 422;
 			this.width = 362;
-			this.elementsContent = [line1_i(),line2_i(),Icon_jineng_i(),lb_name_i(),lb_dengji_i(),lb_xiaohao_i(),lb_leixing_i(),lb_lengque_i(),__jineng_jinjie_Label1_i(),lb_weijihuo_i(),lb_jihuo_i(),Icon_jineng2_i(),Icon_lock_i(),lb_name2_i(),lb_miaoshu_i(),grp_tiaojian_i(),btn_jinjie_i()];
+			this.elementsContent = [line1_i(),line2_i(),Icon_jineng_i(),lb_name_i(),lb_dengji_i(),lb_xiaohao_i(),lb_leixing_i(),lb_lengque_i(),eft_name_i(),lb_weijihuo_i(),lb_jihuo_i(),Icon_jineng2_i(),Icon_lock_i(),lb_name2_i(),lb_miaoshu_i(),grp_tiaojian_i(),btn_jinjie_i()];
 			
 			states = {
 			};
@@ -113,30 +117,6 @@ package org.mokylin.skin.app.wuxue.jineng
 			return temp;
 		}
 
-		private function __jineng_jinjie_Label1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.fontSize = 16;
-			temp.text = "技能进阶效果";
-			temp.color = 0xe8c958;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 135;
-			temp.y = 99;
-			return temp;
-		}
-
-		private function __jineng_jinjie_Label2_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.fontSize = 16;
-			temp.text = "技能进阶条件";
-			temp.color = 0xE8C958;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 44;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function btn_jinjie_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -151,14 +131,30 @@ package org.mokylin.skin.app.wuxue.jineng
 			return temp;
 		}
 
+		private function eft_name_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			eft_name = temp;
+			temp.name = "eft_name";
+			temp.fontSize = 16;
+			temp.text = "技能进阶效果";
+			temp.color = 0xe8c958;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.x = 135;
+			temp.y = 99;
+			return temp;
+		}
+
 		private function grp_tiaojian_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_tiaojian = temp;
 			temp.name = "grp_tiaojian";
-			temp.x = 91;
+			temp.height = 156;
+			temp.width = 331;
+			temp.x = 15;
 			temp.y = 196;
-			temp.elementsContent = [__jineng_jinjie_Label2_i(),lb_renwudengji_i(),lb_zhenqi_i(),lb_yinliang_i(),lb_daoju_i()];
+			temp.elementsContent = [tj_name_i(),lb_renwudengji_i(),lb_zhenqi_i(),lb_yinliang_i(),lb_daoju_i()];
 			return temp;
 		}
 
@@ -167,11 +163,12 @@ package org.mokylin.skin.app.wuxue.jineng
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_daoju = temp;
 			temp.name = "lb_daoju";
-			temp.htmlText = "消耗道具：<font color='#5DBD37'>技能书残页</font><font color='#CFC6AE'>（0/1）</font>";
+			temp.height = 24;
 			temp.letterSpacing = 1;
+			temp.text = "消耗道具：";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 250;
+			temp.width = 80;
 			temp.x = 0;
 			temp.y = 106;
 			return temp;
@@ -284,7 +281,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.letterSpacing = 1;
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 170;
+			temp.width = 320;
 			temp.x = 0;
 			temp.y = 28;
 			return temp;
@@ -326,7 +323,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.letterSpacing = 1;
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 170;
+			temp.width = 320;
 			temp.x = 0;
 			temp.y = 79;
 			return temp;
@@ -341,7 +338,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.letterSpacing = 1;
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 170;
+			temp.width = 320;
 			temp.x = 0;
 			temp.y = 52;
 			return temp;
@@ -368,6 +365,22 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.width = 332;
 			temp.x = 14;
 			temp.y = 191;
+			return temp;
+		}
+
+		private function tj_name_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			tj_name = temp;
+			temp.name = "tj_name";
+			temp.fontSize = 16;
+			temp.text = "技能进阶条件";
+			temp.textAlign = "center";
+			temp.color = 0xE8C958;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 229;
+			temp.x = 44;
+			temp.y = 0;
 			return temp;
 		}
 

@@ -46,12 +46,12 @@ package com.rpgGame.app.manager.fight
 		 * @return
 		 *
 		 */
-		public static function getFightRoleState(role : SceneRole, spellData : Q_skill_model = null) : int
+		public static function getFightRoleState(role : SceneRole, spellData : Q_skill_model = null, isDie : Boolean = false) : int
 		{
 			var modeState : int = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
 			var heroData:HeroData = MainRoleManager.actorInfo;
             do {
-                if (null == role || !role.usable || role.isMainChar || role.stateMachine.isDeadState) {
+                if (null == role || !role.usable || role.isMainChar || (isDie != role.stateMachine.isDeadState)) {
                     // 不存在或者已经死亡 不可攻击
                     break;
                 }

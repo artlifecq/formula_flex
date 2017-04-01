@@ -115,7 +115,119 @@ package org.mokylin.skin.mainui.shortcut
 			temp.width = 451;
 			temp.x = 179;
 			temp.y = 58;
-			temp.elementsContent = [dian1_i(),dian2_i(),dian3_i(),dian4_i(),dian5_i(),dian6_i(),dian7_i(),dian8_i()];
+			temp.elementsContent = [dian1_i(),dian2_i(),dian3_i(),dian4_i(),dian5_i(),dian6_i(),dian7_i(),dian8_i(),__shortcut_Skin_Label1_i(),__shortcut_Skin_Label2_i(),__shortcut_Skin_Label3_i(),__shortcut_Skin_Label4_i(),__shortcut_Skin_Label5_i(),__shortcut_Skin_Label6_i(),__shortcut_Skin_Label7_i(),__shortcut_Skin_Label8_i()];
+			return temp;
+		}
+
+		private function __shortcut_Skin_Label1_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.bold = false;
+			temp.fontSize = 12;
+			temp.text = "1";
+			temp.color = 0xb8b2a4;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
+			temp.width = 12;
+			temp.x = 31;
+			temp.y = 53;
+			return temp;
+		}
+
+		private function __shortcut_Skin_Label2_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.bold = false;
+			temp.fontSize = 12;
+			temp.text = "2";
+			temp.color = 0xb8b2a4;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
+			temp.width = 12;
+			temp.x = 86;
+			temp.y = 53;
+			return temp;
+		}
+
+		private function __shortcut_Skin_Label3_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.bold = false;
+			temp.fontSize = 12;
+			temp.text = "3";
+			temp.color = 0xb8b2a4;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
+			temp.width = 12;
+			temp.x = 140;
+			temp.y = 53;
+			return temp;
+		}
+
+		private function __shortcut_Skin_Label4_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.bold = false;
+			temp.fontSize = 12;
+			temp.text = "4";
+			temp.color = 0xb8b2a4;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
+			temp.width = 12;
+			temp.x = 194;
+			temp.y = 53;
+			return temp;
+		}
+
+		private function __shortcut_Skin_Label5_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.bold = false;
+			temp.fontSize = 12;
+			temp.text = "Q";
+			temp.color = 0xb8b2a4;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
+			temp.width = 15;
+			temp.x = 249;
+			temp.y = 53;
+			return temp;
+		}
+
+		private function __shortcut_Skin_Label6_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.bold = false;
+			temp.fontSize = 12;
+			temp.text = "W";
+			temp.color = 0xb8b2a4;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
+			temp.width = 20;
+			temp.x = 303;
+			temp.y = 53;
+			return temp;
+		}
+
+		private function __shortcut_Skin_Label7_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.bold = false;
+			temp.fontSize = 12;
+			temp.text = "E";
+			temp.color = 0xb8b2a4;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
+			temp.width = 12;
+			temp.x = 357;
+			temp.y = 53;
+			return temp;
+		}
+
+		private function __shortcut_Skin_Label8_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.bold = false;
+			temp.fontSize = 12;
+			temp.text = "R";
+			temp.color = 0xb8b2a4;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
+			temp.width = 12;
+			temp.x = 412;
+			temp.y = 53;
 			return temp;
 		}
 

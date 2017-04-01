@@ -133,6 +133,7 @@ package com.rpgGame.app.manager.fight
 			return ROOT + numberType + number + ".png";
 		}
 
+		
 		/**
 		 * 伤害飘字
 		 * @param atkor 场景角色
@@ -243,7 +244,7 @@ package com.rpgGame.app.manager.fight
 //				}
 					if(hurter.data.id!=MainRoleManager.actorID){
 						var headFace:HeadFace=hurter.headFace as HeadFace;
-						if(headFace){
+						if(headFace && !hurter.stateMachine.isDeadState){
 							headFace.showBloodBar();
 						}
 					}

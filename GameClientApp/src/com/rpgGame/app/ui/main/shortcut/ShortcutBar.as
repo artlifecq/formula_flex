@@ -7,8 +7,9 @@ package com.rpgGame.app.ui.main.shortcut {
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.enum.JobEnum;
+    import com.rpgGame.coreData.role.HeroData;
     import com.rpgGame.coreData.role.RoleData;
-    import com.rpgGame.coreData.type.EffectUrl;
+    import com.rpgGame.coreData.type.CharAttributeType;
     
     import flash.geom.Point;
     
@@ -18,7 +19,6 @@ package com.rpgGame.app.ui.main.shortcut {
     import org.mokylin.skin.mainui.shortcut.shortcut_Skin;
     
     import starling.display.DisplayObject;
-    import starling.display.Sprite;
     
     public class ShortcutBar extends SkinUI {
 		
@@ -30,6 +30,7 @@ package com.rpgGame.app.ui.main.shortcut {
 
 		private var renderUint:RenderUnit3D;
         private var _rollprogress:RollProgress;
+		private var _jinzhenList:Vector.<UIAsset>;
         public function ShortcutBar() {
             this._skin = new shortcut_Skin();
             super(this._skin);
@@ -68,35 +69,15 @@ package com.rpgGame.app.ui.main.shortcut {
 		private function init() : void
 		{
 			skillBar = new ShortcutSkillBar(this);
+			this._skin.Icons.addChildAt(skillBar,0);
+			
 			_rollprogress = new RollProgress(this._skin);
 			var leftp:HpPropgressBar = new HpPropgressBar(this,0,_skin);
 			var rightp:HpPropgressBar = new HpPropgressBar(this,1,_skin);
-			//skillBar.layerBatch = true;
-//			_skin.grpTopGrids.visible = false;
-			this._skin.Icons.addChild(skillBar);
-//			skillBar.x = _skin.grpTopGrids.x;
-//			skillBar.y = _skin.grpTopGrids.y;
-			
-			//			_shortcutMessageBar = new ShortcutMessageBar();
-			//			addChild(_shortcutMessageBar);
-			//			_shortcutMessageBar.x = int((_skin.width - _shortcutMessageBar.barWidth) * 0.5) + 350;
-			//			_shortcutMessageBar.y = _shortcutMessageBar.barHeight - 90;
-			
-//			_buffListBar = new BuffListBar(MainRoleManager.actor, IcoSizeEnum.SIZE_46, GridBGType.GRID_SIZE_46, 55, 55, 15, 15, true);
-//			addChild(_buffListBar);
-//			_buffListBar.show();
-//			_buffListBar.x = int((_skin.width - _buffListBar.barWidth) * 0.5);
-//			_buffListBar.y = _buffListBar.barHeight - 120;
-//			
-//			Fac_skinl.backpackBtn = _skin.btnBackpack;
-//			_skin.botBgBar.touchable = false;
-//			_skin.botBgBar.touchAcross = true;
-			
 			
 			initExp();
 			addSheHuiTab();
 			
-			this._skin.jingzhen_yijia.visible=MainRoleManager.actorInfo.job==JobEnum.ROLE_3_TYPE;
 			
 			if (!ClientConfig.isBanShu)
 			{				
@@ -116,34 +97,41 @@ package com.rpgGame.app.ui.main.shortcut {
 			
 			EventManager.addEvent(SocietyEvent.SOCIETY_APPROVE_CHANGE, addSheHuiTab);
 			
-			//			if(ClientConfig.isStable)
-			//			{
-			//				_skin.btnMount.visible = false;
-			//			}
-			
+			if(MainRoleManager.actorInfo.job == JobEnum.ROLE_4_TYPE)
+			{
+				_jinzhenList = new Vector.<UIAsset>();
+				_jinzhenList.push(_skin.jinzhen_12);
+				_jinzhenList.push(_skin.jinzhen_22);
+				_jinzhenList.push(_skin.jinzhen_32);
+				_jinzhenList.push(_skin.jinzhen_42);
+				_jinzhenList.push(_skin.jinzhen_52);
+				EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,refeashJinzhen);
+			}
+			refeashJinzhen(CharAttributeType.RES_JING_ZHENG);
 		}
 		
 		
-		
-		private function onAddHpEft(hp3D:InterObject3D,renderUint:RenderUnit3D):void
+		private function refeashJinzhen(type:int):void
 		{
-			renderUint.removeAddedCallBack(onAddHpEft);
-			
-			renderUint.scaleX=renderUint.scaleY=this._skin.left_xuecao.width/270;
-			hp3D.x=this._skin.left_xuecao.x+17;
-			hp3D.y=this._skin.left_xuecao.y+this._skin.left_xuecao.height-12;
-			this._skin.left_xuecao.visible=false;			
-			
-			var sp:Sprite=new Sprite();
-			sp.graphics.beginFill(0xff0000);
-			sp.graphics.drawRect(0,0,100,100);
-            sp.graphics.endFill();
-//			sp.x=110;
-//			sp.y=50;
-			this._skin.left_xuecao.mask=sp;
-			this.addChild(sp);  
+			if(MainRoleManager.actorInfo.job!= JobEnum.ROLE_4_TYPE)
+			{
+				this._skin.jingzhen_yijia.visible=false;
+				if(!EventManager.hasEvent(MainPlayerEvent.STAT_RES_CHANGE,refeashJinzhen))
+				{
+					EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,refeashJinzhen)
+				}
+				return ;
+			}
+			if(type != CharAttributeType.RES_JING_ZHENG)
+				return ;
+			this._skin.jingzhen_yijia.visible=true;
+			var count:int = MainRoleManager.actorInfo.totalStat.getResData(type);
+			for(var i:int = 0;i<_jinzhenList.length;i++)
+			{
+				_jinzhenList[i].visible = i<count;
+			}
+			_skin.lbl_lastNum2.text = count.toString()+"/5";
 		}
-
       
 		public function getBtnGlobalPos(btnName : String) : Point
 		{

@@ -7,6 +7,7 @@ package com.rpgGame.app.manager.shell
     import com.game.engine3D.manager.Stage3DLayerManager;
     import com.game.engine3D.scene.render.RenderSet3D;
     import com.game.engine3D.scene.render.RenderUnit3D;
+    import com.game.engine3D.scene.render.vo.IRenderAnimator;
     import com.game.engine3D.scene.render.vo.MethodData;
     import com.game.engine3D.scene.render.vo.RenderParamData3D;
     import com.game.engine3D.utils.EffectMethodUtil;
@@ -18,15 +19,19 @@ package com.rpgGame.app.manager.shell
     import com.gameClient.log.GameLog;
     import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
     import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
+    import com.rpgGame.app.fight.spell.SpellAnimationHelper;
     import com.rpgGame.app.graphics.HeadFace;
     import com.rpgGame.app.manager.AreaMapManager;
     import com.rpgGame.app.manager.AvatarManager;
     import com.rpgGame.app.manager.ShortcutsManger;
+    import com.rpgGame.app.manager.fight.FightManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.role.SceneRoleManager;
+    import com.rpgGame.app.manager.role.SceneRoleSelectManager;
     import com.rpgGame.app.manager.scene.SceneManager;
     import com.rpgGame.app.manager.task.TouJingManager;
     import com.rpgGame.app.scene.SceneRole;
+    import com.rpgGame.app.scene.animator.RibbonAnimator;
     import com.rpgGame.app.sender.SceneSender;
     import com.rpgGame.app.state.role.control.ShapeshiftingStateReference;
     import com.rpgGame.core.utils.ConsoleDesk;
@@ -34,6 +39,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.cfg.TransCfgData;
     import com.rpgGame.coreData.clientConfig.Q_map_transfer;
+    import com.rpgGame.coreData.clientConfig.Q_skill_model;
     import com.rpgGame.coreData.enum.EnumAreaMapType;
     import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
     import com.rpgGame.coreData.info.buff.BuffData;
@@ -103,7 +109,58 @@ package com.rpgGame.app.manager.shell
 			this._funcs["tw".toLowerCase()] = this.twtest;
 
             this._funcs["playerCamerVibrate".toLowerCase()] = this.playerCamerVibrate;
+			this._funcs["testRibbon".toLowerCase()] = this.testRibbon;
         }
+		
+		private function testRibbon():void
+		{
+			var targetList:Vector.<SceneRole> = getNearestCanAtkRole();
+			
+			var effectSet : RenderSet3D = RenderSet3D.create(SceneCharType.SCENE_RIBBON_SPELL, 100,true);
+			effectSet.setGroundXY(MainRoleManager.actor.x,MainRoleManager.actor.z);
+			
+			SceneManager.addSceneObjToScene(effectSet);
+			
+			var ribbonAnimator : IRenderAnimator;
+			if (!ribbonAnimator)
+			{
+				ribbonAnimator = new RibbonAnimator();
+				(ribbonAnimator as RibbonAnimator).initRibbonData("shandian02",targetList,MainRoleManager.actor);
+				effectSet.setRenderAnimator(ribbonAnimator);
+			}
+		}
+		
+		public static function getNearestCanAtkRole(count:uint = 5) : Vector.<SceneRole>
+		{
+			var result:Vector.<SceneRole> = new Vector.<SceneRole>();
+			var list : Vector.<SceneRole> = SceneManager.getSceneRoleList();
+			for each (var role : SceneRole in list)
+			{
+				if (role && role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
+				{
+					if (MainRoleManager.actor == role) 
+					{
+						// 自己
+						continue;
+					}
+					var dis : Number = MathUtil.getDistanceNoSqrt(MainRoleManager.actor.x, MainRoleManager.actor.z, role.x, role.z);
+					if (dis < 250000) 
+					{
+						if (SceneCharType.MONSTER == role.type)
+						{
+							result.push(role);
+							if(result.length >= count)
+							{
+								break;
+							}
+						}
+					}
+				}
+			}
+			
+			return result;
+		}
+
 		
 		private function twtest():void
 		{

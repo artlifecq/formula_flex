@@ -32,7 +32,6 @@ package com.client.cmdlistener
 		
 		public static function RecvHeartMessage(msg:ResHeartMessage):void
 		{
-			trace("服务器时间："+msg.time);
 			/*_serverTime = msg.time;
 			
 			var needReset:Boolean = ( msg.reset == 1 || ( msg.reset == 0 && msg.time2 >= serverTimeCheck ) )

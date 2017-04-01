@@ -112,10 +112,10 @@ package com.rpgGame.app.state.role.control
 				}
 				
 				changeAction(RoleActionType.FLY);
-				var totalTime : int = upTime;
-				if(totalTime > 0)
+				
+				if(upTime > 0)
 				{
-					_upTween = TweenLite.delayedCall(totalTime * 0.001,onFlyUpComplete);
+					_upTween = TweenLite.delayedCall(upTime * 0.001,onFlyUpComplete);
 				}
 				else
 				{
@@ -137,11 +137,11 @@ package com.rpgGame.app.state.role.control
 					_flyTween.kill();
 					_flyTween = null;
 				}
-				changeAction(RoleActionType.FLY_HIT,10);
-				var totalTime : int = 5000;
-				if(totalTime > 0)
+				changeAction(RoleActionType.FLY_HIT);
+				
+				if(flyTime > 0)
 				{
-					_flyTween = TweenLite.delayedCall(totalTime * 0.001,onFlyComplete);
+					_flyTween = TweenLite.delayedCall(flyTime * 0.001,onFlyComplete);
 				}
 				else
 				{
@@ -164,10 +164,9 @@ package com.rpgGame.app.state.role.control
 					_fallTween = null;
 				}
 				changeAction(RoleActionType.DROPOUT);
-				var totalTime : int = fallTime;
-				if(totalTime > 0)
+				if(fallTime > 0)
 				{
-					_fallTween = TweenLite.delayedCall(totalTime * 0.001, onFlyFallComplete);
+					_fallTween = TweenLite.delayedCall(fallTime * 0.001, onFlyFallComplete);
 				}
 				else
 				{
@@ -264,7 +263,7 @@ package com.rpgGame.app.state.role.control
 			if((_machine as RoleStateMachine).isStiff)
 			{
 				return false;
-			}	
+			}
 			return true;
 		}
 		

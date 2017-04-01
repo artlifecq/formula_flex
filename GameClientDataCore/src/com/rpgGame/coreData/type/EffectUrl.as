@@ -33,6 +33,12 @@ package com.rpgGame.coreData.type
 		 *红血条 
 		 */
 		public static const XUE_TIAO_HONG : String = "ui_xuetiaohong";
+		
+		/**
+		 *红血条遮挡
+		 */
+		public static const XUE_TIAO_HONG1 : String = "ui_xuetiaohong_01";
+		
 		/**
 		 *金血条 
 		 */
@@ -164,6 +170,13 @@ package com.rpgGame.coreData.type
 		 */
 		public static const UI_JIEMIAN_ZHANDOULI:String="ui_jiemian_zhandouli";
 
+		
+		
+		/**顶部经验条特效*/
+		public static const UI_JINGYANTIAO_JINDUHUANG:String="ui_jingyantiaojinduhuang";
+		public static const UI_JINGYANTIAO_JINDULV:String="ui_jingyantiaojindulv";
+		
+		
 		public function EffectUrl()
 		{
 		}

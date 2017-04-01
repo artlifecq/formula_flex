@@ -6,6 +6,7 @@ package com.rpgGame.app.state.role.action
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.utils.EffectMethodUtil;
 	import com.game.engine3D.vo.BaseRole;
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
@@ -49,6 +50,7 @@ package com.rpgGame.app.state.role.action
 			if (_machine && !_machine.isDisposed)
 			{
 				super.execute();
+				var role : SceneRole = _machine.owner as SceneRole;
 				transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
 				if (_corrodeTween)
 				{
@@ -249,6 +251,9 @@ package com.rpgGame.app.state.role.action
 				{
 					if (role.type == SceneCharType.MONSTER)
 					{
+                        // 隐藏头部
+                        (role.headFace as HeadFace).isSelected = false;
+                        (role.headFace as HeadFace).hideHead();
 						var monsterData : MonsterData = role.data as MonsterData;
 						if (monsterData)
 						{
