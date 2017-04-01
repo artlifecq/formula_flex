@@ -50,6 +50,9 @@ package com.rpgGame.appModule.skill
 		
 		public function update(selectedCfg:Q_skill_model, selectedInfo:SkillInfo):void
 		{
+			if(!selectedInfo){
+				return ;
+			}
 			GrayFilter.unGray(skin.btn_shengji);
 			skin.btn_shengji.touchable=true;
 			cfg=selectedCfg;
