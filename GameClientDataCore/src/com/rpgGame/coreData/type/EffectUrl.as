@@ -33,9 +33,30 @@ package com.rpgGame.coreData.type
 		 *红血条 
 		 */
 		public static const XUE_TIAO_HONG : String = "ui_xuetiaohong";
-		
 		public static const ITEM_QUALITY3 : String = "ui_beibaokuang_zise";
 		public static const ITEM_QUALITY4 : String = "ui_beibaokuang_jinse";
+		
+		/**
+		 *红血条遮挡
+		 */
+		public static const XUE_TIAO_HONG1 : String = "ui_xuetiaohong_01";
+		
+		/**
+		 *金血条 
+		 */
+		public static const XUE_TIAO_JIN : String = "ui_xuetiaojin";
+		/**
+		 *金血条遮挡
+		 */
+		public static const XUE_TIAO_JIN1 : String = "ui_xuetiaojin_01";
+		/**
+		 *蓝血条 
+		 */
+		public static const XUE_TIAO_LAN : String = "ui_xuetiaolan";
+		/**
+		 *蓝血条遮挡
+		 */
+		public static const XUE_TIAO_LAN1 : String = "ui_xuetiaolan_01";
 
 		/**偷经0 白**/
 		public static const SCRIPTURES0 : String = "tx_duojin_bai";
