@@ -761,7 +761,6 @@ package com.rpgGame.app.cmdlistener.scene
 			if (!role)
 				return;
 			var roleData : RoleData = role.data as RoleData;
-			
 			CharAttributeManager.setAttributeValue(roleData,msg.attributeChange.type, msg.attributeChange.value,msg.showEffect);
 			
 			if(msg.attributeChange.type==CharAttributeType.LV){//升级了
@@ -905,6 +904,7 @@ package com.rpgGame.app.cmdlistener.scene
             {
                 ReliveManager.autoHideRelive();
 				EventManager.dispatchEvent(MainPlayerEvent.SELFHP_CHANGE);
+				EventManager.dispatchEvent(MainPlayerEvent.REVIVE_SUCCESS);
             }
 			else
 			{

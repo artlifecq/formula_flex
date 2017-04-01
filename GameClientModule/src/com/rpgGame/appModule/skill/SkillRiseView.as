@@ -86,7 +86,7 @@ package com.rpgGame.appModule.skill
 		{
 			cfg=selectedCfg;
 			skin.lb_name.text=selectedCfg.q_skillName;
-			skin.lb_dengji.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT1),selectedInfo.skillLevel,cfg.q_max_grade);
+			skin.lb_dengji.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT1),selectedInfo.skillLevel+"/"+cfg.q_max_grade);
 			skin.lb_leixing.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT6),selectedCfg.q_type_description);
 			skin.lb_xiaohao.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT5),selectedCfg.q_need_mp);
 			skin.lb_lengque.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT4),selectedCfg.q_cd/1000);
@@ -241,6 +241,7 @@ package com.rpgGame.appModule.skill
 			var lb:Label=getLb();
 			lb.color=0x25931b;
 			lb.text=obj.name;
+			lb.textAlign="left";
 			lb.htmlText+=getItemText(obj.num,obj.max);
 			lb.htmlText=HtmlTextUtil.underLine(lb.htmlText);
 			lb.width=lb.textWidth+20;

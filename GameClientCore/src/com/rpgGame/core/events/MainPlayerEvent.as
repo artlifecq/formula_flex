@@ -34,5 +34,7 @@ package com.rpgGame.core.events
 		public static const STAT_MAX_CHANGE:int = UNIQUEID.NEXT;
 		/** RES属性变化*/
 		public static const STAT_RES_CHANGE:int = UNIQUEID.NEXT;
+		/** 复活成功*/
+		public static const REVIVE_SUCCESS:int = UNIQUEID.NEXT;
 	}
 }

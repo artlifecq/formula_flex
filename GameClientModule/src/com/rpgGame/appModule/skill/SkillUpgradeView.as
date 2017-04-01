@@ -63,7 +63,8 @@ package com.rpgGame.appModule.skill
 			skin.lb_xiaohao.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT5),selectedCfg.q_need_mp);
 			skin.lb_lengque.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT4),selectedCfg.q_cd/1000);
 			
-			skin.lb_miaoshu.htmlText=selectedCfg.q_skillpanel_description1;
+			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(selectedInfo.skillModelId+"_"+selectedInfo.skillChildLv);
+			skin.lb_miaoshu.htmlText=lvData.q_skillpanel_description;
 			
 			_icon.setIconResName(ClientConfig.getSkillIcon(selectedCfg.q_skillID.toString(),48));
 			_icon.x=16;

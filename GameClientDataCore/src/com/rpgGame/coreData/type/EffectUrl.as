@@ -33,6 +33,8 @@ package com.rpgGame.coreData.type
 		 *红血条 
 		 */
 		public static const XUE_TIAO_HONG : String = "ui_xuetiaohong";
+		public static const ITEM_QUALITY3 : String = "ui_beibaokuang_zise";
+		public static const ITEM_QUALITY4 : String = "ui_beibaokuang_jinse";
 		
 		/**
 		 *红血条遮挡
