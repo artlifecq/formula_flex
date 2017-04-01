@@ -17,6 +17,8 @@ package com.rpgGame.coreData.cfg
 
         public static function setup(data : ByteArray) : void {
             var arr : Array = data.readObject();
+			
+			
             for each(var info : Q_area in arr) {
                 _dataDic[info.q_area_id] = info;
                 var points : Vector.<Point> = new Vector.<Point>();
@@ -30,6 +32,8 @@ package com.rpgGame.coreData.cfg
                 }
                 _posDic[info.q_area_id] = points;
             }
+			
+			
         }
 
         public static function getAreaByID(id : uint) : Q_area {
