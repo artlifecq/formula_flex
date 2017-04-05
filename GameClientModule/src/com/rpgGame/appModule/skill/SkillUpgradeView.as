@@ -158,7 +158,7 @@ package com.rpgGame.appModule.skill
 			var des:String=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT14);
 			des=des.replace("$",HtmlTextUtil.getTextColor(0x25931b,String(selectedInfo.skillChildLv+upNum-1)));
 			skin.lb_shengji.htmlText=des;
-			var changeValueH:String=HtmlTextUtil.getTextColor(0x25931b,changeValue.toFixed(2)+(selectedCfg.q_skill_attr_type!=2?"%":""));
+			var changeValueH:String=HtmlTextUtil.getTextColor(0x25931b,changeValue.toFixed(1)+(selectedCfg.q_skill_attr_type!=2?"%":""));
 			changeDes=changeDes.replace("$",changeValueH);
 			skin.lb_shanghai.htmlText=changeDes;
 			
@@ -174,6 +174,8 @@ package com.rpgGame.appModule.skill
 				GrayFilter.gray(skin.btn_shengji);
 				skin.btn_shengji.touchable=false;
 				playerStr=HtmlTextUtil.getTextColor(0xd02525,playerLv.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
+			}else{
+				playerStr=HtmlTextUtil.getTextColor(0x6BCC08,playerLv.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
 			}
 			
 			skin.lb_renwudengji.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT10),playerStr);

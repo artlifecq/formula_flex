@@ -195,6 +195,8 @@ package com.rpgGame.appModule.skill
 						GrayFilter.gray(skin.btn_jinjie);
 						skin.btn_jinjie.touchable=false;
 						playerStr=HtmlTextUtil.getTextColor(0xd02525,needSkill.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
+					}else{
+						playerStr=HtmlTextUtil.getTextColor(0x6BCC08,needSkill.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
 					}
 					skin.lb_jinengdengji.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT19),playerStr);
 				}
@@ -204,6 +206,8 @@ package com.rpgGame.appModule.skill
 					GrayFilter.gray(skin.btn_jinjie);
 					skin.btn_jinjie.touchable=false;
 					playerStr=HtmlTextUtil.getTextColor(0xd02525,needSkill.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
+				}else{
+					playerStr=HtmlTextUtil.getTextColor(0x6BCC08,needSkill.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
 				}
 				skin.lb_jinengdengji.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT19),playerStr);
 			}
@@ -231,7 +235,6 @@ package com.rpgGame.appModule.skill
 					obj=itemDes[i];
 					lb=getItemTextLine(obj);
 					skin.grp_tiaojian.addChild(lb);
-					lb.x=skin.lb_daoju.x+skin.lb_daoju.width-10;
 					lb.y=skin.lb_daoju.y+i*(skin.lb_daoju.height+5);
 					w=w>lb.textWidth+80?w:lb.textWidth+80;
 				}
@@ -253,7 +256,7 @@ package com.rpgGame.appModule.skill
 			skin.lb_daoju.x=xx;
 			for(i=0;i<itemDes.length;i++){
 				lb=labelList[i];
-				lb.x=skin.lb_daoju.x+skin.lb_daoju.width;
+				lb.x=skin.lb_daoju.x+skin.lb_daoju.width-10;
 			}
 		}
 		
@@ -261,13 +264,11 @@ package com.rpgGame.appModule.skill
 		private function getItemTextLine(obj:Object):Label
 		{
 			var lb:Label=getLb();
-			lb.color=0x25931b;
-			lb.text=obj.name;
-			lb.textAlign="left";
+			lb.color=ItemConfig.getItemQualityColor(obj.id);
+			lb.htmlText=HtmlTextUtil.underLine(obj.name);
 			lb.htmlText+=getItemText(obj.num,obj.max);
-			lb.htmlText=HtmlTextUtil.underLine(lb.htmlText);
 			lb.width=lb.textWidth+20;
-			var itemInfos:Vector.<ClientItemInfo>=BackPackManager.instance.getBagItemsByID(obj.mod);
+			var itemInfos:Vector.<ClientItemInfo>=BackPackManager.instance.getBagItemsByID(obj.id);
 			var itemInfo:ClientItemInfo;
 			if(itemInfos.length>0){
 				itemInfo=itemInfos[0];
@@ -275,6 +276,7 @@ package com.rpgGame.appModule.skill
 				itemInfo=new ClientItemInfo(obj.id);
 				itemInfo.itemInfo=new ItemInfo();
 			}
+			
 			TipTargetManager.show( lb, TargetTipsMaker.makeTips( TipType.ITEM_TIP, itemInfo ) );
 			labelList.push(lb);
 			return lb;
