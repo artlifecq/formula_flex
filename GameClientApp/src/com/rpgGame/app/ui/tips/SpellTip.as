@@ -14,6 +14,8 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.lang.LangSpell;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
+	import feathers.utils.filter.GrayFilter;
+	
 	import org.mokylin.skin.app.tips.jinengTips_Skin;
 	
 	/**
@@ -78,7 +80,7 @@ package com.rpgGame.app.ui.tips
 			}
 			var info:SkillInfo=MainRoleManager.actorInfo.spellList.getSkillInfo(id);
 			var cfg:Q_skill_model=SpellDataManager.getSpellData(info.skillModelId,info.skillLevel);
-			var riseCfg:Q_skill_model=SpellDataManager.getSpellData(id,2);
+			var riseCfg:Q_skill_model=SpellDataManager.getSpellData(id,info.skillLevel+1);
 			
 			_spellTip.lbl_name.text=cfg.q_skillName;
 			_spellTip.lbl_dengji.text="Lv."+info.skillChildLv;
@@ -88,7 +90,7 @@ package com.rpgGame.app.ui.tips
 			_spellTip.lbl_miaosu.htmlText=lvData.q_skillpanel_description;
 			
 			if(!riseCfg){
-				_spellTip.bg.height==_spellTip.grp_shuoming.y+_spellTip.lbl_jinengName.height+5+_spellTip.lbl_miaosu.textHeight+20;
+				_spellTip.bg.height=_spellTip.grp_shuoming.y+_spellTip.lbl_jinengName.height+5+_spellTip.lbl_miaosu.textHeight+20;
 				_spellTip.grp_rise_tite.visible=false;
 				_spellTip.grp_rise_content.visible=false;
 				return;
@@ -106,6 +108,8 @@ package com.rpgGame.app.ui.tips
 				_spellTip.is_act.visible=false;
 				_spellTip.mc_dengjie.visible=false;
 				_spellTip.rise_name.color=0x939388;
+				GrayFilter.gray(riseIco);
+				riseIco.width=riseIco.height=80;
 				if(riseCfg.q_need_skill_level!=0){
 					_spellTip.rise_name.text="("+riseCfg.q_skillName+riseCfg.q_need_skill_level+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT17)+")";
 					if(riseCfg.q_level_up!=0){
@@ -118,8 +122,9 @@ package com.rpgGame.app.ui.tips
 				}
 				
 			}else{
+				GrayFilter.unGray(riseIco);
 				_spellTip.is_act.color=0x6BCC08;
-				_spellTip.is_act.text="已激活";
+				_spellTip.is_act.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT18);
 				_spellTip.is_act.visible=true;
 				_spellTip.mc_dengjie.visible=true;
 			}

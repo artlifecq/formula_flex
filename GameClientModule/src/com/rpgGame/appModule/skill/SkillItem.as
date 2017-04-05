@@ -8,6 +8,7 @@ package com.rpgGame.appModule.skill
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.lang.LangSpell;
@@ -70,6 +71,7 @@ package com.rpgGame.appModule.skill
 			var i:int=0;
 			_icon.setIconResName(ClientConfig.getSkillIcon(cfg.q_skillID.toString(),IcoSizeEnum.ICON_42));
 			var item:DisplayObject;
+			var riseCfg:Q_skill_model=info?SpellDataManager.getSpellData(cfg.q_skillID,info.skillLevel+1):null;
 			if(info){//学习了的技能
 				_skin.txt_level.visible=true;
 				while(i<_skin.container.numChildren){
@@ -85,12 +87,16 @@ package com.rpgGame.appModule.skill
 				_skin.txt_level.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT1)+info.skillChildLv+"/"+cfg.q_max_level;
 				if(info.skillLevel==1){
 					_skin.txt_Inacitve.color=0x8b8d7b;
-					_skin.txt_Inacitve.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT2);
 					_skin.mc_dengjie.visible=false;
+					if(!riseCfg){
+						_skin.txt_Inacitve.text="";
+					}else{
+						_skin.txt_Inacitve.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT2);
+					}
 				}else{
 					_skin.txt_Inacitve.color=0xc9b722;
-					_skin.txt_Inacitve.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT3);
 					_skin.mc_dengjie.visible=true;
+					_skin.txt_Inacitve.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT3);
 				}
 				_skin.mc_dengjie.gotoAndStop(info.skillLevel.toString());//阶数
 			}else{
@@ -107,23 +113,26 @@ package com.rpgGame.appModule.skill
 				
 				_skin.txt_level.visible=false;
 				_skin.txt_Inacitve.color=0x8b8d7b;
-				_skin.txt_Inacitve.text=cfg.q_show_needgrade+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT16);
+				if(!riseCfg){
+					_skin.txt_Inacitve.text=cfg.q_show_needgrade+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT16);
+				}
 				_skin.mc_dengjie.gotoAndStop("1");//阶数
+				_skin.mc_dengjie.visible=false;
 			}
 			
 			TipTargetManager.remove(this);
 			TipTargetManager.show( this, TargetTipsMaker.makeTips( TipType.SPELL_TIP, cfg.q_skillID));
 		}
 		
-		override protected function onTouch(e:TouchEvent):void
+		public function onTouchItem(e:TouchEvent):void
 		{
-			super.onTouch(e);
 			if(_selected){
 				return;
 			}
 			var t:Touch=e.getTouch(_skin.select_btn);
 			if(!t){
 				_skin.select_btn.alpha=0;
+				return;
 			}
 			t=e.getTouch(_skin.select_btn,TouchPhase.HOVER);
 			if(t){

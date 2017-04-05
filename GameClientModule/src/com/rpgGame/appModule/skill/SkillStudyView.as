@@ -29,6 +29,7 @@ package com.rpgGame.appModule.skill
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.events.TouchEvent;
 
 	/**
 	 *技能学习 
@@ -143,6 +144,21 @@ package com.rpgGame.appModule.skill
 			this._skin.vs_bar.addChild(_skillContainer);
 		}
 		
+		private function onTouch(e:TouchEvent):void
+		{
+			var i:int,num:int,item:SkillItem;
+			num=basicItems.length;
+			for(i=0;i<num;i++){
+				item=basicItems[i];
+				item.onTouchItem(e);
+			}
+			num=otherItems.length;
+			for(i=0;i<num;i++){
+				item=otherItems[i];
+				item.onTouchItem(e);
+			}
+		}
+		
 		private function updateSkillList():void
 		{
 			var list:Vector.<Q_skill_model>=SpellDataManager.getBasicSkills(MainRoleManager.actorInfo.job);//基本职业技能
@@ -197,6 +213,9 @@ package com.rpgGame.appModule.skill
 			EventManager.removeEvent(SpellEvent.SPELL_ADD,updateSkillList);
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,updateChange);
 			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateChange);
+			EventManager.removeEvent(SpellEvent.SPELL_UPGRADE,spellUpgrade);
+			EventManager.removeEvent(SpellEvent.SPELL_RISE,spellRise);
+			_panel.removeEventListener(starling.events.TouchEvent.TOUCH, onTouch);
 			skillUpgrade.onHide();
 			skillRise.onHide();
 		}
@@ -213,6 +232,7 @@ package com.rpgGame.appModule.skill
 			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateChange);
 			EventManager.addEvent(SpellEvent.SPELL_UPGRADE,spellUpgrade);
 			EventManager.addEvent(SpellEvent.SPELL_RISE,spellRise);
+			_panel.addEventListener(starling.events.TouchEvent.TOUCH, onTouch);
 		}
 		
 		private function addItem(itemInfo : ClientItemInfo) : void

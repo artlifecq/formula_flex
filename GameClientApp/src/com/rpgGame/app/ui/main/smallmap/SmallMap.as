@@ -902,7 +902,7 @@ package com.rpgGame.app.ui.main.smallmap
          * @return
          * @author 卢国征  2015-4-28
          */
-        private function moveMap(posx : Number, posy : Number, mapWidth : Number, mapHeight : Number) : void
+		protected function moveMap(posx : Number, posy : Number, mapWidth : Number, mapHeight : Number) : void
         {
             var halfW : int = int(_miniMapWidth * 0.5);
             var halfH : int = int(_miniMapHeight * 0.5);
@@ -1090,6 +1090,7 @@ package com.rpgGame.app.ui.main.smallmap
             var len : int = npcList.length;
             var npcData : MonsterBornData;
             var npcs : Vector.<MonsterBornData> = new Vector.<MonsterBornData>();
+			
             for (var i : int = 0; i < len; i++)
             {
                 npcData = npcList[i];
@@ -1103,6 +1104,7 @@ package com.rpgGame.app.ui.main.smallmap
                 }
                 npcs.push(npcData);
             }
+			
             updateIcos(MapIconType.BORN_NPC, Vector.<BaseEntityData>(npcs), _npcVect);
         }
         
@@ -1183,7 +1185,7 @@ package com.rpgGame.app.ui.main.smallmap
             updateRemoveIcoByKey(type + "_" + id);
         }
         
-        private function updateMoveIco(sceneRole : SceneRole) : void
+        protected function updateMoveIco(sceneRole : SceneRole) : void
         {
             if (sceneRole.isMainChar)
             {

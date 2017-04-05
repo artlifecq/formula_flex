@@ -20,9 +20,9 @@ package com.rpgGame.coreData.type
 		public static const PLAYER : String = rEnum.next.toString();
 		/** 怪物  2 **/
 		public static const MONSTER : String = rEnum.next.toString();
-		/** 坐骑  3 **/
+		/** NPC3 **/
 		public static const NPC : String = rEnum.next.toString();
-		/** NPC 4 **/
+		/** 坐骑  4 **/
 		public static const MOUNT : String = rEnum.next.toString();
 		/** 掉落物 5 **/
 		public static const DROP_GOODS : String = rEnum.next.toString();

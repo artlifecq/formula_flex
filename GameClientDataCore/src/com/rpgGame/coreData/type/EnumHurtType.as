@@ -29,6 +29,15 @@ package com.rpgGame.coreData.type
 		/** 连击 **/
 		public static const SPELL_COMBO : uint = 0x00000100;
 		
+		
+		/**
+		 *伤害类型 
+		 */
+		public static const SPELL_HURT_TYPES:Array=[SPELL_HURT_TYPE_NORMAL,SPELL_HURT_TYPE_MISS,
+			SPELL_HURT_TYPE_JUMP_SHIELD,SPELL_HURT_TYPE_CRIT,SPELL_HURT_TYPE_REBOUND,SPELL_HURT_TYPE_INVINCIBLE,
+			SPELL_ATTACK_DEAD,SPELL_SEC,SPELL_HURT_TYPE_ABSORB,SPELL_COMBO
+		];
+		
 		/** 3.重击，客户端显示暴击掉血，反推需要加入计算 **/
 		public static const SPELL_HURT_TYPE_THUMP : int = 3;
 		/** 6.物理免疫，客户端显示物理免疫，反推不需要加入计算 **/

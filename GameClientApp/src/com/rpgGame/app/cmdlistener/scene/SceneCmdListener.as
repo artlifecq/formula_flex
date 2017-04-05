@@ -32,6 +32,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
+	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
@@ -214,6 +215,7 @@ package com.rpgGame.app.cmdlistener.scene
 			stopWalkRef.setParams(posX, posY);
 			role.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, stopWalkRef);
 			role.stateMachine.transition(RoleStateType.ACTION_IDLE);
+			EventManager.dispatchEvent(UserMoveEvent.MOVE_RESCHANGE);
 		}
 		
         // 陷阱状态改变
