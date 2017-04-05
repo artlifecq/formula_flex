@@ -80,7 +80,7 @@ package com.rpgGame.app.manager.fight
                         null != spellData &&
                         (SpellTargetType.FRIEND == spellData.q_target ||
                          SpellTargetType.TEAM == spellData.q_target)) {
-                        modeState = FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND;
+                        modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
                     }
                     break;
                 }

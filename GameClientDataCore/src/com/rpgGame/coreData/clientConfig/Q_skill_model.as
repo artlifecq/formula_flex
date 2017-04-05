@@ -88,6 +88,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_check_relation:int;
 		 /**  在检查敌对关系不符的时候，是否自动选择一个目标(0不选择 1选择) */
 		public var q_check_relation_auto_lock:int;
+		 /**  寻怪距离(像素)0表示全屏 */
+		public var q_search_range:int;
 		 /**  显示所需人物等级 */
 		public var q_show_needgrade:int;
 		 /**  战斗力加成 */
@@ -128,7 +130,9 @@ package com.rpgGame.coreData.clientConfig
 		public var q_fly_empty:int;
 		 /**  弹道是否可取消（0不可取消，1可取消） */
 		public var q_fly_cancel:int;
-		 /**  施法距离限制（自身与目标之间的距离）（单位：格子）,地面行走魔法表示行走距离(小于等于3：判定为近战攻击（处理音效）大于3：判定为远程攻击（处理音效）)   0表示无限距离 */
+		 /**  弹道指定目标点，指定目标点则只会在指定点发出弹道（0不指定，1指定） */
+		public var q_fly_pos:int;
+		 /**  施法距离限制（自身与目标之间的距离）（单位：格子）,地面行走魔法表示行走距离(小于等于3：判定为近战攻击（处理音效）大于3：判定为远程攻击（处理音效）)   0表示无限距离，客户端会减掉1格 */
 		public var q_range_limit:int;
 		 /**  保持间距（单位：像素）（不配默认使用施法范围） */
 		public var q_keep_spacing:int;
