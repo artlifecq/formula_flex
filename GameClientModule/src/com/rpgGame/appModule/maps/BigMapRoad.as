@@ -84,7 +84,6 @@ package com.rpgGame.appModule.maps
 			
 			updateDrawPath();
 			
-			L.l(pathIcoVect.length);
 		}
 		public function onThrough(px:Number,py:Number) : void
 		{

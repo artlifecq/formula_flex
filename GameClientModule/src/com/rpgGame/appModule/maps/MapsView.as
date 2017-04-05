@@ -151,7 +151,6 @@ package com.rpgGame.appModule.maps
 		/**设置地图名称*/
 		protected function setMapName(name:String):void
 		{
-			L.l("name"+name);
 			this._skin.lbl_mapName.text=name;
 		}
 		
