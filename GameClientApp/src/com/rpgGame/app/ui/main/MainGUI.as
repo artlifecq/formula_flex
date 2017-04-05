@@ -276,7 +276,7 @@ package com.rpgGame.app.ui.main
 		
 		private  function showHead(role : SceneRole) : void
 		{
-			if(selectedRole==role||role==MainRoleManager.actor){
+			if(selectedRole==role/*||role==MainRoleManager.actor*/){
 				return;
 			}
 			
