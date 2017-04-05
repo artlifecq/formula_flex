@@ -97,6 +97,10 @@ package com.rpgGame.app.fight.spell
 						{
 							return;
 						}
+                        if (1 == hurtVo.spellData.q_hurt_type) {
+                            // 加血技能不用受击
+                            return;
+                        }
 						
 						//显示被击特效
 						atkor=SceneManager.getSceneObjByID(hurtVo.atkorID) as SceneRole;
