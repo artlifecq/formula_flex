@@ -31,14 +31,12 @@ package com.rpgGame.appModule.maps
 		{
 			super();
 			
-			ListenerMove()
+			listenerEvent()
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
 		{
-			changeTab();
 			var sceneData : SceneData = MapDataManager.currentScene;
-			_bigMap.skinSpr.addEventListener(TouchEvent.TOUCH, onTouch);
 			if (sceneData) 
 			{
 				super.show(data, openTable, parentContiner);
@@ -51,9 +49,11 @@ package com.rpgGame.appModule.maps
 					updataMapsData();
 					loadBigMapView(sceneId);
 					scollBoxView();
-					siteView();
-					setMapName(sceneData.name);
 				}
+				siteView();
+				setMapName(sceneData.name);
+				changeTab();
+				_bigMap.skinSpr.addEventListener(TouchEvent.TOUCH, onTouch);
 			}
 			
 		}
@@ -74,7 +74,7 @@ package com.rpgGame.appModule.maps
 		}
 		
 		
-		private function ListenerMove() : void
+		private function listenerEvent() : void
 		{
 			_timer = new GameTimer("bigmap", 500, 0, onTimer);
 			EventManager.addEvent(MapEvent.MAP_SWITCH_START, onMapChangeCompleteHandler);
@@ -133,7 +133,6 @@ package com.rpgGame.appModule.maps
 				{
 					if(topchDownPoint.x==touchPoint.x&&topchDownPoint.y==touchPoint.y)
 					{
-						//LOG.a("寻路");
 						_bigMap.mapWalk(touchPoint.x,touchPoint.y);
 						
 					}

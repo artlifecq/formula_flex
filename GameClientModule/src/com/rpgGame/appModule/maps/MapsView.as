@@ -93,9 +93,18 @@ package com.rpgGame.appModule.maps
 				{
 					_bigMap.roleWalk(releData.x,releData.y);
 				}
-				
+			}
+			else if(name==_skin.btn_go.name)
+			{
+				var wx:Number=Number(textInput2_Skin(_skin.locat_x.skin).textDisplay.text);
+				var wy:Number=-Number(textInput2_Skin(_skin.locat_y.skin).textDisplay.text);
+				if(wx&&wy)
+				{
+					_bigMap.roleWalk(wx,wy);
+				}
 				
 			}
+			
 		}
 		
 		protected function changeTab() : void 
@@ -142,6 +151,7 @@ package com.rpgGame.appModule.maps
 		/**设置地图名称*/
 		protected function setMapName(name:String):void
 		{
+			L.l("name"+name);
 			this._skin.lbl_mapName.text=name;
 		}
 		

@@ -1,10 +1,10 @@
 package org.mokylin.skin.component.text
 {
 	import feathers.controls.text.Fontter;
-	import feathers.controls.Label;
+	import feathers.controls.text.TextFieldTextEditor;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-
+	
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -16,10 +16,10 @@ package org.mokylin.skin.component.text
 		//                                定义成员变量
 		//==========================================================================
 		public var bg:feathers.controls.UIAsset;
-
-		public var textDisplay:feathers.controls.Label;
-
-
+		
+		public var textDisplay:feathers.controls.text.TextFieldTextEditor;
+		
+		
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -28,14 +28,17 @@ package org.mokylin.skin.component.text
 			super();
 			
 			this.currentState = "disable";
-			this.elementsContent = [bg_i(),textDisplay_i()];
+			this.width = 66;
+			this.elementsContent = [textDisplay_i()];
+			bg_i();
+			
 			
 			states = {
 			};
-			skinNames={};
+			skinNames={"disabled":"ui/common/background/xiaobiaotibeijing.png", "enabled":"ui/common/background/xiaobiaotibeijing.png", "focused":"ui/common/background/xiaobiaotibeijing.png"};
 		}
-
-
+		
+		
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -50,12 +53,13 @@ package org.mokylin.skin.component.text
 			temp.y = 0;
 			return temp;
 		}
-
-		private function textDisplay_i():feathers.controls.Label
+		
+		private function textDisplay_i():feathers.controls.text.TextFieldTextEditor
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
+			var temp:feathers.controls.text.TextFieldTextEditor = new feathers.controls.text.TextFieldTextEditor();
 			textDisplay = temp;
 			temp.name = "textDisplay";
+			temp.height = 19;
 			temp.left = 3;
 			temp.right = 3;
 			temp.text = "标签";
@@ -65,6 +69,6 @@ package org.mokylin.skin.component.text
 			temp.y = 4;
 			return temp;
 		}
-
+		
 	}
 }
