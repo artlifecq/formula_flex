@@ -8,19 +8,20 @@ package com.rpgGame.appModule.maps
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.app.ui.main.smallmap.MapPathIcon;
 	import com.rpgGame.app.ui.main.smallmap.SmallMapUtil;
-	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
-	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.type.EffectUrl;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	
 	import org.client.mainCore.manager.EventManager;
 	
-	import starling.display.Shape;
 	import starling.display.Sprite;
 
+	/**
+	 * 大地图上寻路小点显示
+	 * @author YT
+	 * 
+	 */	
 	public class BigMapRoad extends Sprite
 	{
 		private var _lastPointPos : Point = new Point();
@@ -41,18 +42,14 @@ package com.rpgGame.appModule.maps
 			pathSpr=new Sprite();
 			addChild(pathSpr);
 			
-		/*	var pathIco : MapPathIcon = SmallMapUtil.getMapIco();
-			var po:Point=new Point(100,100);
-			pathIco.updatePos(po);
-			pathSpr.addChild(pathIco);*/
 		}
 		private var _roadOpend:Boolean;
 		public function openRoad() : void
 		{
+			closeRoad();
 			_roadOpend = true;
 			EventManager.addEvent(UserMoveEvent.MOVE_START, onDrawPath);
-			EventManager.addEvent(UserMoveEvent.MOVE_END, onClearPath);
-			
+			EventManager.addEvent(UserMoveEvent.MOVE_END, closeRoad);
 		}
 		
 		/**
@@ -63,18 +60,6 @@ package com.rpgGame.appModule.maps
 			_roadOpend = false;
 			EventManager.removeEvent(UserMoveEvent.MOVE_START, onDrawPath);
 			EventManager.removeEvent(UserMoveEvent.MOVE_END, onClearPath);
-			
-			/*EventManager.removeEvent(MapEvent.UPDATE_MAP_ROLE_ADD, updateMoveIco);
-			EventManager.removeEvent(MapEvent.UPDATE_MAP_ROLE_MOVE, updateMoveIco);
-			EventManager.removeEvent(MapEvent.UPDATE_MAP_ROLE_REMOVE, updateRemoveIco);
-			
-			if (gTime != null)
-			{
-				gTime.stop();
-			}
-			
-			_lastPath = null;
-			myIco.visible = false;*/
 			onClearPath();
 		}
 		private function onDrawPath() : void
@@ -87,7 +72,6 @@ package com.rpgGame.appModule.maps
 			}
 			else
 			{
-				//寻找镖车的引导路线，在大地图显示不出来的bug（bug单号：31241）2016-08-26-陈鹉光改
 				var ref : WalkMoveStateReference;
 				var camouflageEntity : SceneRole = MainRoleManager.actor.getCamouflageEntity() as SceneRole;
 				if (camouflageEntity)
@@ -96,8 +80,41 @@ package com.rpgGame.appModule.maps
 					ref = MainRoleManager.actor.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
 				_lastPath = (ref && ref.path) ? ref.path : null;
 			}
+			
+			
 			updateDrawPath();
+			
+			L.l(pathIcoVect.length);
 		}
+		public function onThrough(px:Number,py:Number) : void
+		{
+			if(_roadOpend&&pathIcoVect&&pathIcoVect.length>0)
+			{
+				var i:int,length:Number,min:Number;
+				var ioc:MapPathIcon;
+				min=int.MAX_VALUE;
+				
+				while(pathIcoVect.length>0)
+				{
+					ioc=pathIcoVect[0];
+					length=Math.sqrt((ioc.x-px)*(ioc.x-px)+(ioc.y-py)*(ioc.y-py));
+					if(length<min)
+					{
+						min=length;
+						pathIcoVect[0].removeMyself();
+						pathIcoVect.shift();
+					}
+					else
+					{
+						return;
+					}
+				}
+				
+			}
+		
+			
+		}
+		
 		
 		private function updateDrawPath() : void
 		{
@@ -117,6 +134,8 @@ package com.rpgGame.appModule.maps
 			var pos3D : Vector3D;
 			var len : int = _lastPath.length;
 			var pixNextPos : Point;
+			
+			
 			for (var i : int = 0; i < len; i++)
 			{
 				pos3D = _lastPath[i];
@@ -124,48 +143,7 @@ package com.rpgGame.appModule.maps
 				_lastDist = int.MAX_VALUE;
 				addPointOnPaths(_lastDrawPoint, pixNextPos);
 			}
-			/*if (pixNextPos)
-			{
-				_lastPointPos.setTo(pixNextPos.x, pixNextPos.y);
-				if (!_xunluPointEffect)
-				{
-					_xunluPointEffect = _rootUI.playInter3DAt(ClientConfig.getEffect(EffectUrl.XUN_LU_END_POINT_EFFECT), 0, 0, 0);
-				}
-				updateXunluPoint();
-			}*/
 		}
-		
-		/*private function updateXunluPoint() : void
-		{
-			if (_xunluPointEffect)
-			{
-				_xunluPointEffect.x = _lastPointPos.x + _thumbnailX + baseSpr.x;
-				_xunluPointEffect.y = _lastPointPos.y + _thumbnailY + baseSpr.y;
-				
-				var canShow : Boolean = false;
-				if (_xunluPointEffect.x < _thumbnailX)
-				{
-					canShow = false;
-				}
-				else if (_xunluPointEffect.x > _thumbnailX + _miniMapWidth)
-				{
-					canShow = false;
-				}
-				else if (_xunluPointEffect.y < _thumbnailY)
-				{
-					canShow = false;
-				}
-				else if (_xunluPointEffect.y > _thumbnailY + _miniMapHeight)
-				{
-					canShow = false;
-				}
-				else
-				{
-					canShow = true;
-				}
-				_xunluPointEffect.visible = canShow;
-			}
-		}*/
 		
 		/**
 		 * 在两点之间填充连接点数据
@@ -208,7 +186,7 @@ package com.rpgGame.appModule.maps
 		{
 			var pathIco : MapPathIcon = SmallMapUtil.getMapIco();
 			pathIco.updatePos(pos);
-			
+			pathIcoVect.push(pathIco);
 			pathSpr.addChild(pathIco);
 		}
 		/**
@@ -219,19 +197,8 @@ package com.rpgGame.appModule.maps
 			while(pathSpr.numChildren>0){
 				pathSpr.removeChildAt(0);
 			}
+			pathIcoVect=new Vector.<MapPathIcon>();
 			
-			/*if(pathIcoVect==null)return;
-			while (pathIcoVect.length > 0)
-			{
-				//pathIcoVect[0].removeMyself();
-				//SmallMapUtil.putMapIco(pathIcoVect.shift());
-			}
-			if (_xunluPointEffect)
-			{
-				//_rootUI.removeChild3D(_xunluPointEffect);
-				_xunluPointEffect = null;
-			}
-			_lastPointPos.setTo(0, 0);*/
 		}
 		
 		

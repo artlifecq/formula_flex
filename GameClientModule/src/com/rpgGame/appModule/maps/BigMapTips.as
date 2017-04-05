@@ -6,6 +6,11 @@ package com.rpgGame.appModule.maps
 	
 	import starling.display.Sprite;
 
+	/**
+	 * 大地图上鼠标跟随提示坐标点显示
+	 * @author YT
+	 * 
+	 */	
 	public class BigMapTips  extends Sprite
 	{
 		

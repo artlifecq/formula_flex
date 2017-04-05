@@ -81,7 +81,7 @@ package com.rpgGame.core.app
 		public static var RELIVE_PANEL:String = createAppInfo( "relive.RelivePanel","relive");
 		
 		/** 大地图面板 **/
-		public static var BIGMAP_PANEL:String = createAppInfo("maps.MapsInfoPanel","maps");
+		public static var BIGMAP_PANEL:String = createAppInfo("maps.MapsPanel","maps");
 		
 		/**
 		 *死亡复活 

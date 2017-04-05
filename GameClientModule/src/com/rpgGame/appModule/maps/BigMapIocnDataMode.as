@@ -2,6 +2,11 @@ package com.rpgGame.appModule.maps
 {
 	public class BigMapIocnDataMode
 	{
+		
+		/**
+		 *大地图图标显示 数据保存 
+		 */		
+		
 		private var _type:String
 		private var _name:String
 		private var _x:Number

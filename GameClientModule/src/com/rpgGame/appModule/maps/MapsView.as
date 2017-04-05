@@ -9,6 +9,11 @@ package com.rpgGame.appModule.maps
 	
 	import starling.display.DisplayObject;
 
+	/**
+	 *大地图显示类，里面包含所有显示对象 
+	 * @author YT
+	 * 
+	 */	
 	public class MapsView  extends SkinUIPanel
 	{
 		protected var _skin :maps_Skin;
@@ -88,21 +93,15 @@ package com.rpgGame.appModule.maps
 				{
 					_bigMap.roleWalk(releData.x,releData.y);
 				}
-				/*if(releData)
-				{
-					textInput2_Skin(_skin.locat_x.skin).textDisplay.text=""+int(releData.x);
-					textInput2_Skin(_skin.locat_y.skin).textDisplay.text=""+int(-releData.y);
-				}*/
 				
 				
 			}
 		}
 		
-		/**
-		 * 玩家移动监听
-		 */
-		
-		
+		protected function changeTab() : void 
+		{
+			_skin.tab.selectedIndex=1;
+		}
 		
 		
 		

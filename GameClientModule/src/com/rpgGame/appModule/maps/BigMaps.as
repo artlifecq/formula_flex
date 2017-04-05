@@ -8,9 +8,6 @@ package com.rpgGame.appModule.maps
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
-	import com.rpgGame.app.ui.main.smallmap.SmallMapUtil;
-	import com.rpgGame.core.events.MapEvent;
-	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.SceneData;
@@ -19,9 +16,6 @@ package com.rpgGame.appModule.maps
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	
-	import app.message.BoolArrayProto;
-	
-	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.maps.maps_Skin;
 	
 	import starling.display.Image;
@@ -29,6 +23,12 @@ package com.rpgGame.appModule.maps
 	import starling.display.Sprite;
 	import starling.textures.IStarlingTexture;
 	
+	
+	/**
+	 * 处理大地图上的 地图加载和地图上的图标显示控制
+	 * @author YT
+	 * 
+	 */	
 	public class BigMaps
 	{
 		private var _skin :maps_Skin;
@@ -141,9 +141,6 @@ package com.rpgGame.appModule.maps
 			}
 			
 			
-			/*baseSpr.addEventListener(TouchEvent.TOUCH, onMapTouch);
-			Starling.current.nativeStage.addEventListener(MouseEvent.RIGHT_MOUSE_DOWN, onRightDown);
-			Starling.current.nativeStage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);*/
 		}
 		private function onMapDataComplete(sceneMapData : SceneMapData) : void
 		{
@@ -237,6 +234,7 @@ package com.rpgGame.appModule.maps
 				var pot:Point=getChangeSceneToMap(pos3d);
 				myselfSpr.updatePos(pot.x,pot.y);
 				myselfSpr.visible = true;
+				roadSpr.onThrough(pot.x,pot.y);
 			}
 			
 			
@@ -304,9 +302,9 @@ package com.rpgGame.appModule.maps
 		}
 		public function roleWalk(x:Number,y:Number):void
 		{
-			
+			roadSpr.openRoad();
 			RoleStateUtil.walk(MainRoleManager.actor,x,y);
-			//roadSpr.openRoad();
+			
 		}
 		
 		public function clearView():void

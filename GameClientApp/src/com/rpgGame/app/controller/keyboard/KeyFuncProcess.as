@@ -45,7 +45,8 @@ package com.rpgGame.app.controller.keyboard
 						TrusteeshipManager.getInstance().startAutoFight();
 					break;
 				case "3": //m 地图
-					AppManager.showApp(AppConstant.WORLD_MAP_PANEL);
+					//AppManager.showApp(AppConstant.WORLD_MAP_PANEL);
+					AppManager.showApp(AppConstant.BIGMAP_PANEL);
 					break;
 				case "4": //B 背包
 					if (!ClientConfig.isBanShu)

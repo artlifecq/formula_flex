@@ -1,8 +1,5 @@
 package com.rpgGame.appModule.maps
 {
-	import com.rpgGame.core.app.AppConstant;
-	import com.rpgGame.core.app.AppManager;
-	
 	import feathers.controls.ScrollContainer;
 	import feathers.controls.Scroller;
 	import feathers.controls.SkinnableContainer;
@@ -14,7 +11,11 @@ package com.rpgGame.appModule.maps
 	import starling.display.DisplayObject;
 	import starling.display.Shape;
 	import starling.display.Sprite;
-
+	/**
+	 * 处理大地图上的 右边滚动框里面的相关显示和控制
+	 * @author YT
+	 * 
+	 */	
 	public class BigMapScroll
 	{
 		
