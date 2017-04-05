@@ -1,6 +1,9 @@
 package com.rpgGame.app.ui.main.smallmap {
     import com.game.mainCore.core.timer.GameTimer;
     import com.rpgGame.app.manager.role.MainRoleManager;
+    import com.rpgGame.appModule.maps.LOG;
+    import com.rpgGame.core.app.AppConstant;
+    import com.rpgGame.core.app.AppManager;
     import com.rpgGame.core.events.MapEvent;
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.TransCfgData;
@@ -68,6 +71,7 @@ package com.rpgGame.app.ui.main.smallmap {
         }
         
         override protected function onTouchTarget(target:DisplayObject):void {
+			
             switch (target) {
                 case this._skin.btnClose:
                     this.setState(false);
@@ -81,6 +85,12 @@ package com.rpgGame.app.ui.main.smallmap {
                 case this._skin.btnDecrease:
                     this.setMapScale(false);
                     break;
+				case this._skin.btnWord://打开大地图世界地图
+					
+					break;
+				case this._skin.btnM://打开大地图世当前地图
+					AppManager.showApp(AppConstant.BIGMAP_PANEL);
+					break;
             }
         }
         

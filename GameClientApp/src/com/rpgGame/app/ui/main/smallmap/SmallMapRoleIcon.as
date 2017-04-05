@@ -150,6 +150,7 @@ package com.rpgGame.app.ui.main.smallmap
                     }
                     else
                     {
+						
                         if (npcData.smallMapIcon)
                         {
                             iconUrl = ClientConfig.getMapIcon(npcData.smallMapIcon);
