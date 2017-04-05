@@ -104,22 +104,7 @@ package com.rpgGame.app.manager.input
             var canRoll : Boolean = RollManager.getinstance().canUseRoll();
             if (canRoll)
 			{
-                if (1 == MainRoleManager.actorInfo.job)
-				{
-                    CastSpellHelper.shortcutsTryCaseSpell(1, true);
-                }
-				else if (2 == MainRoleManager.actorInfo.job)
-				{
-                    CastSpellHelper.shortcutsTryCaseSpell(2, true);
-                } 
-				else if (3 == MainRoleManager.actorInfo.job) 
-				{
-                    CastSpellHelper.shortcutsTryCaseSpell(3, true);
-                }
-				else
-				{
-					CastSpellHelper.shortcutsTryCaseSpell(3, true);
-				}
+                CastSpellHelper.shortcutsTryCaseSpell(1, true);
 				RollManager.getinstance().useRoll();
              } 
 			else 
