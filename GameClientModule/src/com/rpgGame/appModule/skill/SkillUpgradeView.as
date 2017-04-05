@@ -110,9 +110,9 @@ package com.rpgGame.appModule.skill
 			var key:String=id+"_"+lv;
 			var playerLv:int=0;
 			lvData=SkillLvLDataManager.getData(key);//这儿又是技能id和等级
-			var changeValue:int=0;
-			var preValue:int=SkillLvLDataManager.getAttrValueByType(selectedCfg.q_skill_attr_type,lvData);
-			var nextValue:int;
+			var changeValue:Number=0;
+			var preValue:Number=SkillLvLDataManager.getAttrValueByType(selectedCfg.q_skill_attr_type,lvData);
+			var nextValue:Number;
 			var changeDes:String=LanguageConfig.getText( LangSpell["SPELL_"+id] );
 			if(lvData){
 				needMp+=lvData.q_energy;
@@ -158,7 +158,7 @@ package com.rpgGame.appModule.skill
 			var des:String=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT14);
 			des=des.replace("$",HtmlTextUtil.getTextColor(0x25931b,String(selectedInfo.skillChildLv+upNum-1)));
 			skin.lb_shengji.htmlText=des;
-			var changeValueH:String=HtmlTextUtil.getTextColor(0x25931b,changeValue+(selectedCfg.q_skill_attr_type!=2?"%":""));
+			var changeValueH:String=HtmlTextUtil.getTextColor(0x25931b,changeValue.toFixed(2)+(selectedCfg.q_skill_attr_type!=2?"%":""));
 			changeDes=changeDes.replace("$",changeValueH);
 			skin.lb_shanghai.htmlText=changeDes;
 			

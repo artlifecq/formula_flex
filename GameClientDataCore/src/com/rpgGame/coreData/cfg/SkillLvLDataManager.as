@@ -30,13 +30,13 @@ package com.rpgGame.coreData.cfg
 			return _map.getValue(q_skillID_q_grade);
 		}
 		
-		public static function getAttrValueByType(q_skill_attr_type:int,data:Q_skill_ignore):int
+		public static function getAttrValueByType(q_skill_attr_type:int,data:Q_skill_ignore):Number
 		{
 			var value:int=data[keys[q_skill_attr_type]];
 			var per:int=per_server[q_skill_attr_type];
-			var result:int;
+			var result:Number;
 			if(per!=1){
-				result=Math.floor(value/per);
+				result=value/per;
 			}else{
 				result=value;
 			}
