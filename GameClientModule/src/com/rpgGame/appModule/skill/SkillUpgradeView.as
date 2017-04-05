@@ -109,8 +109,10 @@ package com.rpgGame.appModule.skill
 			var id:int=selectedCfg.q_skillID;
 			var key:String=id+"_"+lv;
 			var playerLv:int=0;
-			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(key);//这儿又是技能id和等级
-			var changeValue:int=0;
+			lvData=SkillLvLDataManager.getData(key);//这儿又是技能id和等级
+			var changeValue:Number=0;
+			var preValue:Number=SkillLvLDataManager.getAttrValueByType(selectedCfg.q_skill_attr_type,lvData);
+			var nextValue:Number;
 			var changeDes:String=LanguageConfig.getText( LangSpell["SPELL_"+id] );
 			if(lvData){
 				needMp+=lvData.q_energy;
@@ -122,7 +124,9 @@ package com.rpgGame.appModule.skill
 					key=id+"_"+lv;
 					
 					lvData=SkillLvLDataManager.getData(key);
-					changeValue+=SkillLvLDataManager.getAttrValueByType(selectedCfg.q_skill_attr_type,lvData);
+					nextValue=SkillLvLDataManager.getAttrValueByType(selectedCfg.q_skill_attr_type,lvData);
+					changeValue+=nextValue-preValue;
+					preValue=nextValue;
 					if(lvData){
 						if(needMp+lvData.q_energy>myMp){
 							break;
@@ -154,7 +158,7 @@ package com.rpgGame.appModule.skill
 			var des:String=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT14);
 			des=des.replace("$",HtmlTextUtil.getTextColor(0x25931b,String(selectedInfo.skillChildLv+upNum-1)));
 			skin.lb_shengji.htmlText=des;
-			var changeValueH:String=HtmlTextUtil.getTextColor(0x25931b,changeValue+"%");
+			var changeValueH:String=HtmlTextUtil.getTextColor(0x25931b,changeValue.toFixed(2)+(selectedCfg.q_skill_attr_type!=2?"%":""));
 			changeDes=changeDes.replace("$",changeValueH);
 			skin.lb_shanghai.htmlText=changeDes;
 			
@@ -165,7 +169,14 @@ package com.rpgGame.appModule.skill
 			
 			//升级条件
 			var w:int;
-			skin.lb_renwudengji.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT10),playerLv);
+			var playerStr:String=playerLv+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21);
+			if(playerLv>myLv){
+				GrayFilter.gray(skin.btn_shengji);
+				skin.btn_shengji.touchable=false;
+				playerStr=HtmlTextUtil.getTextColor(0xd02525,playerLv.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
+			}
+			
+			skin.lb_renwudengji.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT10),playerStr);
 			skin.lb_zhenqi.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT8),needMp,myMp);
 			skin.lb_yinliang.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT7),needMy,myMon);		
 			w=skin.lb_renwudengji.textWidth;
@@ -194,9 +205,9 @@ package com.rpgGame.appModule.skill
 			}
 			var des:String="";
 			if(value<=value1){
-				des=HtmlTextUtil.getTextColor(0xcfc6ae,value+"/"+value1);
+				des=HtmlTextUtil.getTextColor(0x55BD15,value1+"/"+value);
 			}else{
-				des=HtmlTextUtil.getTextColor(0xd02525,value+"/"+value1);
+				des=HtmlTextUtil.getTextColor(0xd02525,value1+"/"+value);
 				GrayFilter.gray(skin.btn_shengji);
 				skin.btn_shengji.touchable=false;
 			}

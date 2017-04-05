@@ -435,6 +435,8 @@ package com.rpgGame.appModule.role
 			this._showAvatarData.avatarInfo.weaponEffectID = _roleData.avatarInfo.weaponEffectID;
 			this._showAvatarData.avatarInfo.weaponEffectScale = _roleData.avatarInfo.weaponEffectScale;
 			this._showAvatarData.avatarInfo.deputyWeaponResID = _roleData.avatarInfo.deputyWeaponResID;
+			this._showAvatarData.avatarInfo.deputyWeaponEffectID=_roleData.avatarInfo.deputyWeaponEffectID;
+			this._showAvatarData.avatarInfo.deputyWeaponEffectScale=_roleData.avatarInfo.deputyWeaponEffectScale;
 			
 			this._avatar.setRoleData(this._showAvatarData);
 			this._avatar.curRole.setScale(1.7);			

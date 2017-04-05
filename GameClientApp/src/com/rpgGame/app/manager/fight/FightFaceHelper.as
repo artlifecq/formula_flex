@@ -7,6 +7,7 @@ package com.rpgGame.app.manager.fight
 	import com.rpgGame.app.display2D.AttackFace;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.EnumHurtType;
@@ -158,96 +159,115 @@ package com.rpgGame.app.manager.fight
 			var end : Point; //结束点
 			var scaleAgo : Number = 0; //飘字缩放--前
 			var scaleLater : Number = 0; //飘字缩放--后
-
-			switch (hurtType)
-			{
-				case EnumHurtType.SPELL_HURT_TYPE_REBOUND:
-				case EnumHurtType.SPELL_HURT_TYPE_INVINCIBLE: 
-				case EnumHurtType.SPELL_HURT_TYPE_NORMAL: 
-					typeRes = "";
-					isUsefulBmp = hurter.isMainChar;
-					scaleAgo = 1.5;
-					scaleLater = 0.5;
-					numberType = NUMBER_NPC_HIT;
-					if(isUsefulBmp){
-						numberType=NUMBER_PC_HPSUB;
+			
+			var num:int=EnumHurtType.SPELL_HURT_TYPES.length;
+			for(var i:int=0;i<num;i++){
+				var type:uint=EnumHurtType.SPELL_HURT_TYPES[i];
+				var result:uint=type&hurtType;
+				if(result!=0||hurtType==0){
+					switch (type)
+					{
+						case EnumHurtType.SPELL_HURT_TYPE_REBOUND:
+						case EnumHurtType.SPELL_HURT_TYPE_INVINCIBLE: 
+						case EnumHurtType.SPELL_HURT_TYPE_NORMAL: 
+							typeRes = "";
+							isUsefulBmp = hurter.isMainChar;
+							scaleAgo = 1.5;
+							scaleLater = 0.5;
+							numberType = NUMBER_NPC_HIT;
+							if(isUsefulBmp){
+								numberType=NUMBER_PC_HPSUB;
+							}
+							if (atkor.id == MainRoleManager.actorID||hurter.id == MainRoleManager.actorID) 
+							{
+								if( hurtAmount> 0){
+									typeRes=getFightURlByAttType(EnumHurtType.ADDHP, true);
+									scaleAgo=1;
+									scaleLater=1;
+									var sc:SceneRole;
+									if(atkor.id == MainRoleManager.actorID){
+										sc=SceneManager.getSceneObjByID(hurter.id) as SceneRole;
+									}else{
+										sc=MainRoleManager.actor;
+									}
+									showQueueAttackFace(sc, typeRes, NUMBER_PC_HPREC, hurtAmount, scaleAgo, scaleLater, null, null, null, null, tweenUp);//回血
+									return;
+								}
+							}	
+							
+							break;
+						case EnumHurtType.SPELL_HURT_TYPE_MISS: //闪避
+							typeRes = ROOT+USESFUL_EFFECT+"weimingzhong.png";
+							scaleAgo = 2;
+							scaleLater = 1;
+							tweenFun=tweenUp;
+							break;
+						case EnumHurtType.SPELL_HURT_TYPE_CRIT: //暴击
+							typeRes = ROOT+USESFUL_EFFECT+"bao_ji_piao_zi.png";
+							scaleAgo = 2;
+							scaleLater = 1;
+							numberType = NUMBER_NPC_CRIT;
+							break;
+						default:
+							CONFIG::Debug {
+							var loginfo:String = "未处理的伤害类型:"+type;
+							GameLog.addError(loginfo);
+							AlertPanel.showMsg( loginfo, null );
+						}
+							break;
 					}
 					
-					if (atkor.id == MainRoleManager.actorID||hurter.id == MainRoleManager.actorID) 
-					{
-						if( hurtAmount> 0){
-							showAttChange(EnumHurtType.ADDHP, hurtAmount);//回血
-							return;
-						}
-					}	
-					
-					break;
-				case EnumHurtType.SPELL_HURT_TYPE_MISS: //闪避
-					typeRes = ROOT+USESFUL_EFFECT+"weimingzhong.png";
-					scaleAgo = 2;
-					scaleLater = 1;
-					tweenFun=tweenUp;
-					break;
-				case EnumHurtType.SPELL_HURT_TYPE_CRIT: //暴击
-					typeRes = ROOT+USESFUL_EFFECT+"bao_ji_piao_zi.png";
-					scaleAgo = 2;
-					scaleLater = 1;
-					numberType = NUMBER_NPC_CRIT;
-					break;
-				default:
-					CONFIG::Debug {
-					var loginfo:String = "未处理的伤害类型:"+hurtType;
-					GameLog.addError(loginfo);
-					AlertPanel.showMsg( loginfo, null );
+					if(!tweenFun){
+						tweenFun = tweenTypeRoleHurt;
 					}
-					break;
-			}
-
-			if(!tweenFun){
-				tweenFun = tweenTypeRoleHurt;
-			}
-			var showFace:Boolean = false;
-			var roleData:RoleData;
-			if(atkor && atkor.usable)
-			{
-				roleData = atkor.data as RoleData;
-				if(roleData)
-				{
-					if(roleData.id == MainRoleManager.actorID || roleData.ownerId == MainRoleManager.actorID)
+					var showFace:Boolean = false;
+					var roleData:RoleData;
+					if(atkor && atkor.usable)
 					{
-						showFace = true;
-					}
-				}
-			}
-			if(hurter && hurter.usable)
-			{
-				roleData = hurter.data as RoleData;
-				if(roleData)
-				{
-					if(roleData.id == MainRoleManager.actorID || roleData.ownerId == MainRoleManager.actorID)
-					{
-						showFace = true;
-					}
-				}
-			}
-			if (showFace) //主角或主角所属角色受伤害/攻击...
-			{
-				var isLeftShow : Boolean = (atkor && hurter) ? (atkor.x - hurter.x >= 0) : false;//攻击者在被攻击者的右侧
-				//是否正面效果，相对主角自己而言的   是主角还是场景其他SceneRole，因为主角同时受到攻击的时候，伤害数值同时出现，造成重叠，所以用队列飘字，避免重叠
-				/*if (isUsefulBmp)
-				{
-					showQueueAttackFace(hurter, typeRes, numberType, hurtAmount, scaleAgo, scaleLater, from, end, null, null, tweenFun, isLeftShow);
-				}
-				elseq
-				{*/
-					showAttackFace(hurter.headFace, typeRes, numberType, hurtAmount, null, null, tweenFun, from, end, scaleAgo, scaleLater, isLeftShow);
-//				}
-					if(hurter.data.id!=MainRoleManager.actorID){
-						var headFace:HeadFace=hurter.headFace as HeadFace;
-						if(headFace && !hurter.stateMachine.isDeadState){
-							headFace.showBloodBar();
+						roleData = atkor.data as RoleData;
+						if(roleData)
+						{
+							if(roleData.id == MainRoleManager.actorID || roleData.ownerId == MainRoleManager.actorID)
+							{
+								showFace = true;
+							}
 						}
 					}
+					if(hurter && hurter.usable)
+					{
+						roleData = hurter.data as RoleData;
+						if(roleData)
+						{
+							if(roleData.id == MainRoleManager.actorID || roleData.ownerId == MainRoleManager.actorID)
+							{
+								showFace = true;
+							}
+						}
+					}
+					if (showFace) //主角或主角所属角色受伤害/攻击...
+					{
+						var isLeftShow : Boolean = (atkor && hurter) ? (atkor.x - hurter.x >= 0) : false;//攻击者在被攻击者的右侧
+						//是否正面效果，相对主角自己而言的   是主角还是场景其他SceneRole，因为主角同时受到攻击的时候，伤害数值同时出现，造成重叠，所以用队列飘字，避免重叠
+						/*if (isUsefulBmp)
+						{
+						showQueueAttackFace(hurter, typeRes, numberType, hurtAmount, scaleAgo, scaleLater, from, end, null, null, tweenFun, isLeftShow);
+						}
+						elseq
+						{*/
+						showAttackFace(hurter.headFace, typeRes, numberType, hurtAmount, null, null, tweenFun, from, end, scaleAgo, scaleLater, isLeftShow);
+						//				}
+						if(hurter.data.id!=MainRoleManager.actorID){
+							var headFace:HeadFace=hurter.headFace as HeadFace;
+							if(headFace && !hurter.stateMachine.isDeadState){
+								headFace.showBloodBar();
+							}
+						}
+					}
+				}
+				
+				if(hurtType==0&&type==0){
+					break;
+				}
 			}
 		}
 		

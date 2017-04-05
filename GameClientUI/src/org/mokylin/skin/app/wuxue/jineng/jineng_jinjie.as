@@ -93,7 +93,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.name = "Icon_jineng2";
 			temp.styleName = "ui/app/wuxue/jineng/64dakuang.png";
 			temp.x = 16;
-			temp.y = 102;
+			temp.y = 118;
 			return temp;
 		}
 
@@ -115,7 +115,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.name = "Icon_lock";
 			temp.styleName = "ui/app/wuxue/jineng/suo.png";
 			temp.x = 21;
-			temp.y = 105;
+			temp.y = 121;
 			return temp;
 		}
 
@@ -140,9 +140,11 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.name = "eft_name";
 			temp.fontSize = 16;
 			temp.text = "技能进阶效果";
+			temp.textAlign = "center";
 			temp.color = 0xe8c958;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 135;
+			temp.width = 330;
+			temp.x = 15;
 			temp.y = 99;
 			return temp;
 		}
@@ -400,9 +402,9 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.textAlign = "center";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 229;
-			temp.x = 44;
-			temp.y = 0;
+			temp.width = 330;
+			temp.x = 0;
+			temp.y = 1;
 			return temp;
 		}
 
