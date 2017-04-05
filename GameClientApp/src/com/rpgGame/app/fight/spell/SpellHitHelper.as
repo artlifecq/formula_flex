@@ -97,10 +97,6 @@ package com.rpgGame.app.fight.spell
 						{
 							return;
 						}
-                        if (1 == hurtVo.spellData.q_hurt_type) {
-                            // 加血技能不用受击
-                            return;
-                        }
 						
 						//显示被击特效
 						atkor=SceneManager.getSceneObjByID(hurtVo.atkorID) as SceneRole;
@@ -110,9 +106,12 @@ package com.rpgGame.app.fight.spell
 							atkorPos = new Point(atkor.x, atkor.z);
 						}
 						
-						var hitRef : HitStateReference = role.stateMachine.getReference(HitStateReference) as HitStateReference;
-						hitRef.setParams(atkorPos);
-						role.stateMachine.transition(RoleStateType.ACTION_HIT, hitRef);
+                        if (1 != hurtVo.spellData.q_hurt_type) {
+                            // 加血技能不用受击
+                            var hitRef : HitStateReference = role.stateMachine.getReference(HitStateReference) as HitStateReference;
+                            hitRef.setParams(atkorPos);
+                            role.stateMachine.transition(RoleStateType.ACTION_HIT, hitRef);
+                        }
 						
 						var hurtRef : HurtStateReference = role.stateMachine.getReference(HurtStateReference) as HurtStateReference;
 						hurtRef.setParams(/*info, */hurtVo);
