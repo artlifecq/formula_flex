@@ -4,7 +4,6 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.RoleHpStatusManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.yunBiao.YunBiaoManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -14,9 +13,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.state.role.control.HurtStateReference;
 	import com.rpgGame.core.events.SceneCharacterEvent;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
-	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
-	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
@@ -106,9 +103,12 @@ package com.rpgGame.app.fight.spell
 							atkorPos = new Point(atkor.x, atkor.z);
 						}
 						
-						var hitRef : HitStateReference = role.stateMachine.getReference(HitStateReference) as HitStateReference;
-						hitRef.setParams(atkorPos);
-						role.stateMachine.transition(RoleStateType.ACTION_HIT, hitRef);
+                        if (1 != hurtVo.spellData.q_hurt_type) {
+                            // 加血技能不用受击
+                            var hitRef : HitStateReference = role.stateMachine.getReference(HitStateReference) as HitStateReference;
+                            hitRef.setParams(atkorPos);
+                            role.stateMachine.transition(RoleStateType.ACTION_HIT, hitRef);
+                        }
 						
 						var hurtRef : HurtStateReference = role.stateMachine.getReference(HurtStateReference) as HurtStateReference;
 						hurtRef.setParams(/*info, */hurtVo);

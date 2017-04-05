@@ -276,7 +276,7 @@ package com.rpgGame.app.ui.main
 		
 		private  function showHead(role : SceneRole) : void
 		{
-			if(selectedRole==role||role==MainRoleManager.actor){
+			if(selectedRole==role/*||role==MainRoleManager.actor*/){
 				return;
 			}
 			
@@ -285,6 +285,10 @@ package com.rpgGame.app.ui.main
 			this.removeChild(_eliteHead);
 			this.removeChild(_normalHead);
 			selectedRole=role;
+            if (role==MainRoleManager.actor) {
+                // 选中自己是不显示
+                return;
+            }
 			if(!role){
 				return;
 			}

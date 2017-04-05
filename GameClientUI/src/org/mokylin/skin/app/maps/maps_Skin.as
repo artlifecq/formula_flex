@@ -28,6 +28,10 @@ package org.mokylin.skin.app.maps
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var UIMap:feathers.controls.UIAsset;
+		
+		public var grp_cont:feathers.controls.Group;
+		
 		public var Item1:feathers.controls.SkinnableContainer;
 
 		public var Item2:feathers.controls.SkinnableContainer;
@@ -67,7 +71,7 @@ package org.mokylin.skin.app.maps
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [bg_i(),tab_i(),__maps_Skin_UIAsset1_i(),__maps_Skin_UIAsset2_i(),Item1_i(),Item2_i(),Item3_i(),scroll_Bar_i(),grp_msg_i()];
+			this.elementsContent = [bg_i(),tab_i(),__maps_Skin_UIAsset1_i(),grp_cont_i(),__maps_Skin_UIAsset2_i(),Item1_i(),Item2_i(),Item3_i(),scroll_Bar_i(),grp_msg_i()];
 			
 			states = {
 			};
@@ -300,6 +304,33 @@ package org.mokylin.skin.app.maps
 			temp.y = 41;
 			temp.layout = __maps_Skin_HorizontalLayout1_i();
 			temp.dataProvider = __maps_Skin_ArrayCollection1_i();
+			return temp;
+		}
+		
+		
+		//==========================================================================
+		//                                定义成员方法
+		//==========================================================================
+		private function UIMap_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			UIMap = temp;
+			temp.name = "UIMap";
+			temp.width = 640;
+			temp.height = 450;
+			
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+		private function grp_cont_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			grp_cont = temp;
+			temp.name = "grp_cont";
+			temp.x = 18;
+			temp.y = 74;
+			temp.elementsContent = [UIMap_i()];
 			return temp;
 		}
 
