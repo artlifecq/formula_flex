@@ -170,7 +170,7 @@ package org.mokylin.skin.app.tips
 			temp.name = "eft_name";
 			temp.height = 19;
 			temp.fontSize = 12;
-			temp.text = "瀚文的名字";
+			temp.text = "的说法是";
 			temp.textAlign = "center";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
