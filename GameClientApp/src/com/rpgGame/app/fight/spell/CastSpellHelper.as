@@ -1024,8 +1024,10 @@ package com.rpgGame.app.fight.spell
             }
             var selectRole : SceneRole = null;
             var modeState : int;
-            if (null != SceneRoleSelectManager.selectedRole &&
-                isDie == SceneRoleSelectManager.selectedRole.stateMachine.isDeadState) {
+            if (null != SceneRoleSelectManager.selectedRole) {
+                if (isDie != SceneRoleSelectManager.selectedRole.stateMachine.isDeadState) {
+                    goto check_relation_auto_lock;
+                }
                 if (0 == skillInfo.q_check_relation) {
                     return SceneRoleSelectManager.selectedRole;
                 }
@@ -1033,7 +1035,7 @@ package com.rpgGame.app.fight.spell
                 if (FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT != modeState) {
                     return SceneRoleSelectManager.selectedRole;
                 }
-                if (1 == skillInfo.q_check_relation_auto_lock) {
+                check_relation_auto_lock:if (1 == skillInfo.q_check_relation_auto_lock) {
                     goto find;
                 }
             }
