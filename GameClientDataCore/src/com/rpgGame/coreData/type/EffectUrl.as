@@ -184,7 +184,7 @@ package com.rpgGame.coreData.type
 		/**
 		 *进阶成功 
 		 */
-		public static const UI_JINJIE_COMPLETE:String="ui-hechengchenggong_01";
+		public static const UI_JINJIE_COMPLETE:String="ui_hechengchenggong_01";
 		/**
 		 *进阶解锁 
 		 */

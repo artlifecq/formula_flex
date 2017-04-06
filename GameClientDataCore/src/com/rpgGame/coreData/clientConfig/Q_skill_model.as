@@ -194,6 +194,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_buff_trigger:String;
 		 /**  技能回复消耗触发（tt=触发类型(和BUFF触发一致),tv=触发值,（目前支持命中数量）rt=回复类型(可回复资源类型，)，,rv=回复数值（为负则为扣除）），可支持多个触发，[{tt:1, tv:1001, rt:1,rv:10}],回复类型：100=仇恨，101=血量上限回复比例，102=魔法（能量），怒气12，金针13，弩塔14 */
 		public var q_recovers:String;
+		 /**  中文注释 */
+		public var q_recovers_detail:String;
 		 /**  被动触发几率（本处填万分比的分子） 如果是被动技能触发才有效，BUFF触发概率通过BUFF表控制 */
 		public var q_passive_prob:int;
 		 /**  触发后附加的BUFF编号序列（格式：BUFF编号;BUFF编号）（该字段已作废） */
