@@ -31,6 +31,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.HintConfig;
 	import com.rpgGame.coreData.cfg.MailCfgData;
 	import com.rpgGame.coreData.cfg.MazeCfgData;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.NpcConfigData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
 	import com.rpgGame.coreData.cfg.RelationCfgData;
@@ -198,6 +199,10 @@ package com.rpgGame.app.data
 //			GCDCfgData.setConfig(dic[ConfigClassRegister.Q_GCD]);
 			//状态数据buff相关
 			BuffStateDataManager.setConfig(dic[ConfigClassRegister.Q_buff]);
+			
+			// 服务器发送 消息ID对应客户端 
+			NotifyCfgData.setup(dic[ConfigClassRegister.Q_notify]);
+			
 		}
 
 		/**
