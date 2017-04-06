@@ -127,14 +127,14 @@ package com.rpgGame.app.view.icon
 			var render:RenderUnit3D=RenderUnit3D(inter.baseObj3D);
 			render.setAddedCallBack(addEft);
 			addEft(render);
-			_qualityEft.x=_iconSize/2;
-			_qualityEft.y=_iconSize/2;
+			_qualityEft.x=_iconSize>>1;
+			_qualityEft.y=_iconSize>>1;
 		}		
 		
 		private function addEft( ru : RenderUnit3D):void
 		{
 			ru.removeAddedCallBack(addEft);
-			ru.scaleX=ru.scaleY=_iconSize/60;
+			ru.scaleX=ru.scaleY=_iconSize/52;
 		}		
 		
 		/** 隐藏品质框 */		
@@ -282,6 +282,10 @@ package com.rpgGame.app.view.icon
 			{
 				_qualityImage.x = x;
 				_qualityImage.y = y;
+				if(_qualityEft){
+					_qualityEft.x+=x;
+					_qualityEft.y+=y;
+				}
 				updateIconImagePosition( x, y );
 			}
 		}

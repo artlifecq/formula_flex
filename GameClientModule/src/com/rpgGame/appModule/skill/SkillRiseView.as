@@ -62,7 +62,7 @@ package com.rpgGame.appModule.skill
 			_icon.x=16;
 			_icon.y=21;
 			_riseIcon.x=15;
-			_riseIcon.y=100;
+			_riseIcon.y=117;
 			skin.lb_yinliang.wordWrap=false;
 			skin.lb_daoju.wordWrap=false;
 			labelList=new Vector.<Label>();
@@ -71,15 +71,19 @@ package com.rpgGame.appModule.skill
 		public function unlock():void
 		{
 			_panel.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINJIE_UNLOCK),612,152,1,playComplete);
-			TweenMax.to(	skin.Icon_lock,0.5,{alpha:0,ease:Expo.easeOut});
+			TweenMax.to(	skin.Icon_lock,0.5,{alpha:0,ease:Expo.easeOut,onComplete:playCompleteTween});
+		}
+		
+		private function playCompleteTween(target:InterObject3D):void
+		{
+			skin.Icon_lock.alpha=1;
+			skin.Icon_lock.visible=false;
+			GrayFilter.unGray(_riseIcon);
 		}
 		
 		private function playComplete(target:InterObject3D):void
 		{
 			target.removeFromParent();
-			skin.Icon_lock.alpha=1;
-			skin.Icon_lock.visible=false;
-			GrayFilter.unGray(_riseIcon);
 		}
 		
 		public function update(selectedCfg:Q_skill_model, selectedInfo:SkillInfo):void
@@ -175,15 +179,37 @@ package com.rpgGame.appModule.skill
 			skin.lb_renwudengji.visible=false;
 			skin.lb_jinengdengji.visible=false;
 			if(needLv!=0){
-				skin.lb_renwudengji.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT10),needLv+"");
+				
+				var playerStr:String=needLv+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21);
+				if(needLv>myLv){
+					GrayFilter.gray(skin.btn_jinjie);
+					skin.btn_jinjie.touchable=false;
+					playerStr=HtmlTextUtil.getTextColor(0xd02525,needLv.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
+				}
+				
+				skin.lb_renwudengji.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT10),playerStr);
 				skin.lb_renwudengji.visible=true;
 				if(needSkill!=0){
 					skin.lb_jinengdengji.visible=true;
-					skin.lb_jinengdengji.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT19),needSkill,selectedInfo.skillChildLv);
+					if(needSkill>selectedInfo.skillChildLv){
+						GrayFilter.gray(skin.btn_jinjie);
+						skin.btn_jinjie.touchable=false;
+						playerStr=HtmlTextUtil.getTextColor(0xd02525,needSkill.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
+					}else{
+						playerStr=HtmlTextUtil.getTextColor(0x6BCC08,needSkill.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
+					}
+					skin.lb_jinengdengji.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT19),playerStr);
 				}
 			}else{
 				skin.lb_jinengdengji.visible=true;
-				skin.lb_jinengdengji.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT19),needSkill,selectedInfo.skillChildLv);
+				if(needSkill>selectedInfo.skillChildLv){
+					GrayFilter.gray(skin.btn_jinjie);
+					skin.btn_jinjie.touchable=false;
+					playerStr=HtmlTextUtil.getTextColor(0xd02525,needSkill.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
+				}else{
+					playerStr=HtmlTextUtil.getTextColor(0x6BCC08,needSkill.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
+				}
+				skin.lb_jinengdengji.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT19),playerStr);
 			}
 			
 			
@@ -209,7 +235,6 @@ package com.rpgGame.appModule.skill
 					obj=itemDes[i];
 					lb=getItemTextLine(obj);
 					skin.grp_tiaojian.addChild(lb);
-					lb.x=skin.lb_daoju.x+skin.lb_daoju.width-10;
 					lb.y=skin.lb_daoju.y+i*(skin.lb_daoju.height+5);
 					w=w>lb.textWidth+80?w:lb.textWidth+80;
 				}
@@ -231,7 +256,7 @@ package com.rpgGame.appModule.skill
 			skin.lb_daoju.x=xx;
 			for(i=0;i<itemDes.length;i++){
 				lb=labelList[i];
-				lb.x=skin.lb_daoju.x+skin.lb_daoju.width;
+				lb.x=skin.lb_daoju.x+skin.lb_daoju.width-10;
 			}
 		}
 		
@@ -239,13 +264,11 @@ package com.rpgGame.appModule.skill
 		private function getItemTextLine(obj:Object):Label
 		{
 			var lb:Label=getLb();
-			lb.color=0x25931b;
-			lb.text=obj.name;
-			lb.textAlign="left";
+			lb.color=ItemConfig.getItemQualityColor(obj.id);
+			lb.htmlText=HtmlTextUtil.underLine(obj.name);
 			lb.htmlText+=getItemText(obj.num,obj.max);
-			lb.htmlText=HtmlTextUtil.underLine(lb.htmlText);
 			lb.width=lb.textWidth+20;
-			var itemInfos:Vector.<ClientItemInfo>=BackPackManager.instance.getBagItemsByID(obj.mod);
+			var itemInfos:Vector.<ClientItemInfo>=BackPackManager.instance.getBagItemsByID(obj.id);
 			var itemInfo:ClientItemInfo;
 			if(itemInfos.length>0){
 				itemInfo=itemInfos[0];
@@ -253,6 +276,7 @@ package com.rpgGame.appModule.skill
 				itemInfo=new ClientItemInfo(obj.id);
 				itemInfo.itemInfo=new ItemInfo();
 			}
+			
 			TipTargetManager.show( lb, TargetTipsMaker.makeTips( TipType.ITEM_TIP, itemInfo ) );
 			labelList.push(lb);
 			return lb;
@@ -296,9 +320,9 @@ package com.rpgGame.appModule.skill
 			}
 			var des:String="";
 			if(value<=value1){
-				des=HtmlTextUtil.getTextColor(0xcfc6ae,value+"/"+value1);
+				des=HtmlTextUtil.getTextColor(0x55BD15,value1+"/"+value);
 			}else{
-				des=HtmlTextUtil.getTextColor(0xd02525,value+"/"+value1);
+				des=HtmlTextUtil.getTextColor(0xd02525,value1+"/"+value);
 				GrayFilter.gray(skin.btn_jinjie);
 				skin.btn_jinjie.touchable=false;
 			}

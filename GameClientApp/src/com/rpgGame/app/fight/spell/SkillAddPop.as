@@ -44,6 +44,7 @@ package com.rpgGame.app.fight.spell
 			icon=new BgIcon(IcoSizeEnum.ICON_64);
 			icon.x=18;
 			icon.y=10;
+			icon.touchable=false;
 			super(data);
 			_skin.container.addChild(icon);
 		}
@@ -59,6 +60,7 @@ package com.rpgGame.app.fight.spell
 			skin.lbl_zhuangbei.text=cfg.q_skillName;
 			icon.setIconResName(ClientConfig.getSkillIcon(cfg.q_skillID.toString(),64));
 			time=5;
+			skin.lbl_time.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT20).replace("$",time);
 			timeID=setInterval(updateTime,1000);
 		}
 		

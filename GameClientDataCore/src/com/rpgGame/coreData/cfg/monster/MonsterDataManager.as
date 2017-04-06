@@ -224,5 +224,42 @@ package com.rpgGame.coreData.cfg.monster
 			var monsterData : Q_scene_monster_area = getSceneData(monsterId);
 			return monsterData.q_mapid;
 		}
+		
+		//////////////////////////////////////////yuantao增加的////////////////////////////////////////////////////////////////////
+		public static function getBigMapMonsterBySceneId(sceneID : uint) :Array
+		{
+			var arr:Array=new Array();
+			var mdata : Q_monster;
+			var npcData:Object;
+			if (SCENE_ID_UNIQ_DIC) 
+			{
+				for each(var sceneMonsterList : Vector3D.<Q_scene_monster_area> in SCENE_ID_UNIQ_DIC)
+				{
+					
+					for each(var sceneMonsterData :Q_scene_monster_area in sceneMonsterList)
+					{
+						if(sceneMonsterData.q_mapid==sceneID)
+						{
+							mdata= getData(sceneMonsterData.q_monster_model);
+							if(mdata)
+							{
+								npcData=new Object();
+								npcData.type=mdata.q_monster_type;
+								npcData.name=mdata.q_name;
+								npcData.x=sceneMonsterData.q_center_x;
+								npcData.y=sceneMonsterData.q_center_y;
+								arr.push(npcData);
+							}
+							
+						}
+					}
+				}
+			}
+			
+			
+			return arr;
+		}
+		
+		
 	}
 }

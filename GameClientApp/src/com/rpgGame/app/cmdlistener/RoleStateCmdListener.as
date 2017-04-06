@@ -76,7 +76,7 @@ package com.rpgGame.app.cmdlistener
 			}
 			if (SceneRoleSelectManager.mouseOverRole == role)
 				SceneRoleSelectManager.mouseOverRole = null;
-			if (SceneRoleSelectManager.selectedRole == role)
+			if (SceneRoleSelectManager.selectedRole == role && SceneCharType.PLAYER != role.type)
 				SceneRoleSelectManager.selectedRole = null;
 		}
 

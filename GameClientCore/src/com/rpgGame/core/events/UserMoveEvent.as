@@ -22,5 +22,8 @@ package com.rpgGame.core.events
 		public static const FOLLOW_MOVE_ENTER : int = UNIQUEID.NEXT;
 		/**跟随移动经过	无参数*/
 		public static const FOLLOW_MOVE_THROUGH : int = UNIQUEID.NEXT;
+		
+		/**移动位置变化	无参数*/
+		public static const MOVE_RESCHANGE : int = UNIQUEID.NEXT;
 	}
 }

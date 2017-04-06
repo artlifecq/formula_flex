@@ -49,6 +49,7 @@ package com.rpgGame.app.ui.main.top
 			_yellowEffect= this.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINGYANTIAO_JINDUHUANG),0,0,0);
 			
 		}
+		/**屏蔽事件*/
 		private function setTips():void
 		{
 			_skin.top_bar.isEnabled=false;
@@ -58,8 +59,6 @@ package com.rpgGame.app.ui.main.top
 		private function addTips():void
 		{
 			TipTargetManager.remove(this);
-			var tipString:String="升级经验："+MainRoleManager.actorInfo.curExp+"/"+MainRoleManager.actorInfo.maxExp
-			trace(tipString);
 			TipTargetManager.show(this, TargetTipsMaker.makeSimpleTextTips("升级经验："+MainRoleManager.actorInfo.curExp+"/"+MainRoleManager.actorInfo.maxExp));
 		}
 		
@@ -106,10 +105,11 @@ package com.rpgGame.app.ui.main.top
 			
 		}
 		private var _isFirst:Boolean=true;
+		/**更新经验条状态*/
 		private function updateExpBar():void
 		{
 			addTips();
-			if(_isFirst)
+			if(_isFirst)//第一次的话经验条初始化
 			{
 				initExpBar();
 				_isFirst=false;
@@ -128,7 +128,7 @@ package com.rpgGame.app.ui.main.top
 			var scale:Number=heroData.curExp/heroData.maxExp;
 			_nowbarWidth=maxW*scale;//缩放系数
 			TweenExpBar();
-			_timeOutId = setTimeout(changeExpBarComplete,YELLOW_SHOW_TIME);
+			_timeOutId = setTimeout(changeExpBarComplete,YELLOW_SHOW_TIME);//设置超时时间，防止缓动类卡住影响。
 		}
 		/**黄色经验条缓动*/
 		private function TweenExpBar():void
@@ -169,7 +169,7 @@ package com.rpgGame.app.ui.main.top
 				_timeOutId = 0;
 			}
 		}
-		
+		/**更改显示经验条颜色*/
 		private function changeExpBarColor(color:String=""):void
 		{
 			if(color=="green")

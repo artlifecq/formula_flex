@@ -52,6 +52,8 @@ package com.rpgGame.coreData.lang
 		public static const SPELL_PANEL_TEXT19:String = "SPELL_PANEL_TEXT19";
 		 /**  $S秒后自动关闭 */
 		public static const SPELL_PANEL_TEXT20:String = "SPELL_PANEL_TEXT20";
+		 /**  级 */
+		public static const SPELL_PANEL_TEXT21:String = "SPELL_PANEL_TEXT21";
 		 /**  左键单击释放 */
 		public static const SPELL_TIPS_INFO1:String = "SPELL_TIPS_INFO1";
 		 /**  攻击距离：$米 */
