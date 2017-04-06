@@ -18,7 +18,6 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.ui.main.top.TopBar;
 	import com.rpgGame.core.app.AppDispather;
 	import com.rpgGame.core.app.AppEvent;
-	import com.rpgGame.core.app.AppInfo;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.SceneInteractiveEvent;
@@ -337,9 +336,9 @@ package com.rpgGame.app.ui.main
 			EventManager.removeEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
 		}
 		
-		private function onAppLoadError(appInfo:AppInfo):void
+		private function onAppLoadError(e:AppEvent):void
 		{
-			GameAlert.showAlertUtil(LangAlertInfo.onAppLoadError,null,appInfo.resName);
+			GameAlert.showAlertUtil(LangAlertInfo.onAppLoadError,null,e.appInfo.resName);
 		}
 		
 		/**
