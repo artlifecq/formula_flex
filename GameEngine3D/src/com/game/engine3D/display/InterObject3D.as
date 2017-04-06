@@ -5,9 +5,9 @@ package com.game.engine3D.display
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.vo.BaseObj3D;
-
+	
 	import away3d.containers.View3D;
-
+	
 	import starling.display.Interoperation3DContainer;
 
 	/**
@@ -43,7 +43,7 @@ package com.game.engine3D.display
 				_unit.stopRender();
 		}
 
-		public function addRenderUnitWith(rend : RenderParamData3D, repeat : int = 1, onPlayComplete : Function = null) : RenderUnit3D
+		public function addRenderUnitWith(rend : RenderParamData3D, repeat : int = 1, onPlayComplete : Function = null,addComplete:Function=null) : RenderUnit3D
 		{
 			if (rend == null)
 			{
@@ -53,11 +53,14 @@ package com.game.engine3D.display
 			var unit : RenderUnit3D;
 			unit = RenderUnit3D.create(rend);
 			unit.setPlayCompleteCallBack(onPlayCompleteCallBack, this);
+			unit.setAddedCallBack(addComplete);
 			setRenderUnit(unit);
 
 			unit.repeat = repeat;
 			unit.rotationY = 0;
-			unit.play(0);
+			if(!addComplete){//有回调的不自动播放
+				unit.play(0);
+			}
 			this.onPlayComplete = onPlayComplete;
 			return unit;
 		}

@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.skill
 {
 	import com.game.engine3D.display.InterObject3D;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.SpellSender;
@@ -70,11 +71,16 @@ package com.rpgGame.appModule.skill
 		
 		public function unlock():void
 		{
-			_panel.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINJIE_UNLOCK),612,152,1,playComplete);
+			_panel.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINJIE_UNLOCK),612,152,1,playComplete,addEft);
 			TweenMax.to(	skin.Icon_lock,0.5,{alpha:0,ease:Expo.easeOut,onComplete:playCompleteTween});
 		}
 		
-		private function playCompleteTween(target:InterObject3D):void
+		private function addEft(render:RenderUnit3D):void
+		{
+			render.play(0);
+		}
+		
+		private function playCompleteTween():void
 		{
 			skin.Icon_lock.alpha=1;
 			skin.Icon_lock.visible=false;
@@ -92,13 +98,14 @@ package com.rpgGame.appModule.skill
 			skin.lb_name.text=selectedCfg.q_skillName;
 			skin.lb_dengji.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT1),selectedInfo.skillLevel+"/"+cfg.q_max_grade);
 			skin.lb_leixing.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT6),selectedCfg.q_type_description);
-			skin.lb_xiaohao.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT5),selectedCfg.q_need_mp);
+			skin.lb_xiaohao.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT5),cfg.q_recovers_detail.length==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):cfg.q_recovers_detail);
 			skin.lb_lengque.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT4),selectedCfg.q_cd/1000);
 			
 			
 			_icon.setIconResName(ClientConfig.getSkillIcon(selectedCfg.q_skillID.toString(),48));
 			_riseIcon.setIconResName(ClientConfig.getRiseSkillIcon(selectedCfg.q_skillID.toString(),IcoSizeEnum.ICON_64));
 			_riseIcon.filter=null;
+			_riseIcon.visible=true;
 			if(selectedInfo&&selectedInfo.skillLevel==cfg.q_max_grade){
 				skin.Icon_lock.visible=false;
 				GrayFilter.unGray(_riseIcon);
@@ -125,6 +132,7 @@ package com.rpgGame.appModule.skill
 				skin.grp_tiaojian.visible=false;
 				skin.btn_jinjie.visible=false;
 				skin.Icon_jineng2.visible=false;
+				_riseIcon.visible=false;
 				return;
 			}
 			skin.Icon_lock.visible=true;
@@ -300,6 +308,8 @@ package com.rpgGame.appModule.skill
 				c=0xD23735;
 				GrayFilter.gray(skin.btn_jinjie);
 				skin.btn_jinjie.touchable=false;
+			}else{
+				c=0x55BD15;
 			}
 			return HtmlTextUtil.getTextColor(c,"("+v1+"/"+v2+")");
 		}

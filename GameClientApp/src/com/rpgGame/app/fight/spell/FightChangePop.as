@@ -94,7 +94,9 @@ package com.rpgGame.app.fight.spell
 		
 		private function updateSeate():void
 		{
-			onStageResize(_stage.stageWidth, _stage.stageHeight);
+			if(_stage){
+				onStageResize(_stage.stageWidth, _stage.stageHeight);
+			}
 		}
 		
 		private function getChangeList(changeV:int):Array
