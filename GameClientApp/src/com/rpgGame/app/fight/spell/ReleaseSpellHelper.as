@@ -6,12 +6,9 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.action.AttackStateReference;
 	import com.rpgGame.app.state.role.control.AttackHardStateReference;
-	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.geom.Point;
-	
-	import gs.TweenLite;
 
 	/**
 	 *

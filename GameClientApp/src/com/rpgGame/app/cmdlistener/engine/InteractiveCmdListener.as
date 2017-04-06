@@ -4,11 +4,9 @@ package com.rpgGame.app.cmdlistener.engine
 	import com.game.engine3D.events.SceneEvent;
 	import com.game.engine3D.events.SceneEventAction3D;
 	import com.game.engine3D.vo.BaseObj3D;
-	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.graphics.StallHeadFace;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.WalkToRoleManager;
-	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.input.KeyMoveManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -20,18 +18,13 @@ package com.rpgGame.app.cmdlistener.engine
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.controller.MouseCursorController;
-	import com.rpgGame.coreData.cfg.task.TouZhuCfgData;
 	import com.rpgGame.coreData.info.stall.StallData;
-	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
-	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Vector3D;
 	import flash.utils.getTimer;
 	
 	import away3d.events.MouseEvent3D;
-	
-	import gameEngine2D.NetDebug;
 	
 	import gs.TweenLite;
 	
