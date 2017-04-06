@@ -429,7 +429,7 @@ package com.rpgGame.app.fight.spell
                 var dy : Number = Math.sin(radian);
                 
                 if (0 == spellData.q_blink_type) {
-                    angle = MathUtil.getAngle(selfPos.x, selfPos.y, releaseTargetPos.x, releaseTargetPos.y);
+                    //angle = MathUtil.getAngle(selfPos.x, selfPos.y, releaseTargetPos.x, releaseTargetPos.y);
                     radian = angle * Math.PI / 180;
                     var temp : Number = Point.distance(selfPos, releaseTargetPos);
                     dist = temp;
