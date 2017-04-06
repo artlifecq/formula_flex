@@ -103,8 +103,10 @@ package com.rpgGame.app.fight.spell
 							atkorPos = new Point(atkor.x, atkor.z);
 						}
 						
-                        if (1 != hurtVo.spellData.q_hurt_type) {
+                        if (1 != hurtVo.spellData.q_hurt_type &&
+                            (SceneCharType.MONSTER != role.type)) {
                             // 加血技能不用受击
+                            // 暂时怪物不用受击
                             var hitRef : HitStateReference = role.stateMachine.getReference(HitStateReference) as HitStateReference;
                             hitRef.setParams(atkorPos);
                             role.stateMachine.transition(RoleStateType.ACTION_HIT, hitRef);
