@@ -390,9 +390,9 @@ package com.game.engine3D.vo
 				{
 					_scale.x = value;
 					_graphicDis.scaleX = _scale.x;
-					if (_staticGraphicDis) {
-						_staticGraphicDis.scaleX = _scale.x;
-					}
+//					if (_staticGraphicDis) {
+//						_staticGraphicDis.scaleX = _scale.x;
+//					}
 				}
 			}
 		}
@@ -410,9 +410,9 @@ package com.game.engine3D.vo
 				{
 					_scale.y = value;
 					_graphicDis.scaleY = _scale.y;
-					if (_staticGraphicDis) {
-						_staticGraphicDis.scaleY = _scale.y;
-					}
+//					if (_staticGraphicDis) {
+//						_staticGraphicDis.scaleY = _scale.y;
+//					}
 				}
 			}
 		}
@@ -430,9 +430,9 @@ package com.game.engine3D.vo
 				{
 					_scale.z = value;
 					_graphicDis.scaleZ = _scale.z;
-					if (_staticGraphicDis) {
-						_staticGraphicDis.scaleZ = _scale.z;
-					}
+//					if (_staticGraphicDis) {
+//						_staticGraphicDis.scaleZ = _scale.z;
+//					}
 				}
 			}
 		}
@@ -998,7 +998,7 @@ package com.game.engine3D.vo
 		{
 			if (_renderAnimator)
 			{
-				_renderAnimator.update();
+				_renderAnimator.update(gapTm);
 			}
 		}
 

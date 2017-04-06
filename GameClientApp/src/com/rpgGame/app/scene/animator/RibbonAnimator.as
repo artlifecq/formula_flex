@@ -1,11 +1,26 @@
 package com.rpgGame.app.scene.animator
 {
+	import com.game.engine3D.scene.render.RenderSet3D;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.IRenderAnimator;
+	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.BaseObj3D;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.enum.BoneNameEnum;
+	import com.rpgGame.coreData.type.RenderUnitID;
+	import com.rpgGame.coreData.type.RenderUnitType;
 	
+	import flash.display.BlendMode;
+	import flash.display3D.Context3DCompareMode;
+	
+	import away3d.animators.CPUSpriteSheetAnimator;
+	import away3d.containers.ObjectContainer3D;
 	import away3d.materials.TextureMaterial;
 	import away3d.ribbon.LightningRibbon;
+	import away3d.textures.AsyncTexture2D;
 	
 	/**
 	 * 条带动画 
@@ -16,16 +31,16 @@ package com.rpgGame.app.scene.animator
 	{
 		private var _from:SceneRole;
 		private var _to:SceneRole;
-		private var _ownerPlayer:SceneRole;
-		
-		private static const BallSpeed:Number = 80;
+		private var _aktor:SceneRole;
 		
 		//自动追踪最多5个目标
-		private var _suffererList:Vector.<SceneRole>;
+		private var _targetList:Vector.<SceneRole>;
 		private static const MAX_COUNT:int = 5;
 		private var _lightList:Vector.<LightningRibbon>;
 		
 		private static var LightMaterial:TextureMaterial;
+		
+		protected var _renderSet : RenderSet3D;
 		
 		public function RibbonAnimator()
 		{
@@ -34,162 +49,135 @@ package com.rpgGame.app.scene.animator
 		
 		public function setOwner(owner:BaseObj3D):void
 		{
-			
+			_renderSet = owner as RenderSet3D;
 		}
 		
-		public function update():void
+		private static const excuteInterval:int = 200;
+		private var _excuteDelay:int = excuteInterval;
+		private var _recycleDelay:int = 500;
+		public function update(gapTm:uint):void
 		{
+			_excuteDelay -= gapTm;
+			_recycleDelay -= gapTm;
+			
+			if(_excuteDelay <= 0)
+			{
+				_excuteDelay = excuteInterval;
+				if(_targetList.length == 0)
+				{
+					dispose();
+				}
+				else
+				{
+					_from = _to;
+					_to = _targetList.shift();
+					light(_from,_to);
+				}
+				
+			}
+			
+			if(_recycleDelay <= 0)
+			{
+				_recycleDelay = excuteInterval;
+				var ribbon:LightningRibbon = _lightList.shift();
+				if(ribbon)
+				{
+					ribbon.stop();
+					ribbon.dispose();
+//					SceneManager.scene.gameScene3d.removeChild(ribbon);
+				}
+			}
 		}
 		
 		public function dispose():void
 		{
+			SceneManager.removeSceneObjFromScene(_renderSet);
+			for each(var ribbon:LightningRibbon in _lightList)
+			{
+				ribbon.stop();
+				ribbon.dispose();
+//				SceneManager.scene.gameScene3d.removeChild(ribbon);
+			}
+			_lightList.length = 0;
+			_excuteDelay = excuteInterval;
+			_recycleDelay = 1000;
+			_from = _to = _aktor = null;
+			_renderSet = null;
 		}
 		
-//		public function initRibbonData(targets:Vector):void
-//		{
-//			if(LightMaterial == null)
-//			{
-//				//				var tex:AsyncTexture2D = Cast.asyncTexture(new EmbedAssets.LightningIMG().bitmapData, true);
-//				var tex:AsyncTexture2D = new AsyncTexture2D(true, true, false);
-//				tex.load(ClientConfig.getDynTexture());
-//				
-//				LightMaterial = new TextureMaterial(tex);
-//				LightMaterial.bothSides = true;
-//				LightMaterial.blendMode = BlendMode.ADD;
-//				LightMaterial.depthCompareMode = Context3DCompareMode.LESS;
-//			}
-//			
-//			_to = _world.getAvatar3D(suffererId);
-//			_from = _ownerPlayer = creater as SceneRole;
-//			
+		public function initRibbonData(imgUrl:String,targetList:Vector.<SceneRole>,aktor:SceneRole):void
+		{
+			if(LightMaterial == null)
+			{
+				var tex:AsyncTexture2D = new AsyncTexture2D(true, true, false);
+				tex.load(ClientConfig.getDynTexture(imgUrl));
+				
+				LightMaterial = new TextureMaterial(tex);
+				LightMaterial.bothSides = true;
+				LightMaterial.blendMode = BlendMode.ADD;
+				LightMaterial.depthCompareMode = Context3DCompareMode.LESS;
+			}
+			
+			_targetList = targetList;
+			_targetList.sort(onSortNearestRole);
+			
+			_to = _targetList.shift();
+			_from = _aktor = aktor;
+			
 //			addTimeHandlerAt(4000, on4000Ms);
-//			
-//			collectMonsters();
-//			
-//			light(_from, _to);
-//		}
-//		
-//		private function collectMonsters():void
-//		{
-//			_suffererList = new Vector.<SceneRole>();
-//			var m:SceneRole;	
-//			//排序
-//			var newList:Vector.<SceneRole> = new Vector.<SceneRole>();
-//			
-//			var last:SceneRole = _to;
-//			var distance:int;
-//			var target:SceneRole;
-//			while(last)
-//			{
-//				if(last != _to)
-//				{
-//					newList.push(last);
-//					if(newList.length >= MAX_COUNT)
-//						break;
-//				}
-//				distance = 1500;//闪电链之间的最大距离，超过这个就断掉了！
-//				target = null;
-//				for each(m in _suffererList)
-//				{
-//					var d:int = last.distanceToPos(m.x, m.z);
-//					if(d < distance)
-//					{
-//						distance = d;
-//						target = m;
-//					}
-//				}
-//				
-//				if(target)
-//				{
-//					_suffererList.splice(_suffererList.indexOf(target), 1);
-//					last = target;
-//				}
-//				else
-//				{
-//					last = null;
-//				}
-//			}
-//			_suffererList = newList;
-//			
-//		}
-//		
-//		
+			
+			light(_from,_to);
+		}
+		
 //		private function on4000Ms():void
 //		{
 //			recycleEnable = true;
 //		}
-//		
-//		private function light(from:SceneRole, to:SceneRole):void
-//		{
-//			if(_from && _to)
-//			{
-//				var ribbon:LightningRibbon = new LightningRibbon(_from.underAttackContainer, _to.underAttackContainer, 16, 128, LightMaterial);
-//				ribbon.shakeTimer = 100;
-//				ribbon.animator = new CPUSpriteSheetAnimator(8, 1, 15, 8);
-//				ribbon.start();
-//				
-//				_lightList.push(ribbon);
-//				SceneManager.addSceneObjToScene(ribbon);
-//			}
-//			var skill:SkillDetailVO = SkillManager.getInstance().getSkillInfo(SkillDefineEnum.SKILL_ATTACK270);
-//			BattleSystemManager.getInstance().singleAttack(_ownerPlayer, _to, skill);
-//		}
-//		
-//		
-//		private static const excuteInterval:int = 100;
-//		private var _excuteDelay:int = excuteInterval;
-//		private var _recycleDelay:int = 200;
-//		
-//		override public function run(deltaTime:uint):void
-//		{
-//			super.run(deltaTime);
-//			_excuteDelay -= deltaTime;
-//			_recycleDelay -= deltaTime;
-//			
-//			if(_excuteDelay <= 0)
-//			{
-//				_excuteDelay = excuteInterval;
-//				if(_suffererList.length == 0)
-//				{
-//					recycleEnable = true;
-//				}
-//				else
-//				{
-//					_from = _to;
-//					_to = _suffererList.shift();
-//					light(_from, _to);
-//				}
-//				
-//			}
-//			
-//			if(_recycleDelay <= 0)
-//			{
-//				_recycleDelay = excuteInterval;
-//				var ribbon:LightningRibbon = _lightList.shift();
-//				if(ribbon)
-//				{
-//					ribbon.stop();
-//					ribbon.dispose();
-//					WorldManager.instance.gameScene3D.removeChild(ribbon);
-//				}
-//			}
-//		}
-//		
-//		
-//		
-//		public function resetMagic(Id:int=0, Name:String=null):void
-//		{
-//			for each(var ribbon:LightningRibbon in _lightList)
-//			{
-//				ribbon.stop();
-//				ribbon.dispose();
-//			}
-//			_lightList.length = 0;
-//			setGroundXY(0, 0);
-//			_excuteDelay = excuteInterval;
-//			_recycleDelay = 1000;
-//			_from = _to = _ownerPlayer = null;
-//			super.resetMagic(Id, Name);
-//		}
+		
+		private function light(from:SceneRole, to:SceneRole):void
+		{
+			if(_from && _to)
+			{
+				var fromObj : ObjectContainer3D = from.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY).getChildByName(BoneNameEnum.c_0_body_01);
+				var toObj:ObjectContainer3D = to.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY).getChildByName(BoneNameEnum.c_0_body_01);
+				if (null == fromObj || null == toObj) {
+                    return;
+                }
+				trace(fromObj.position);
+				trace(toObj.position);
+				
+				var ribbon:LightningRibbon = new LightningRibbon(fromObj, toObj, 16, 64, LightMaterial);
+				ribbon.shakeTimer = 100;
+				ribbon.animator = new CPUSpriteSheetAnimator(8, 1, 15, 8);
+				ribbon.start();
+				
+				_lightList.push(ribbon);
+				SceneManager.scene.gameScene3d.addChild(ribbon);
+			}
+		}
+		
+		/**
+		 * 比较两个角色里主角的距离
+		 * @param charA
+		 * @param charB
+		 * @return
+		 */
+		private static function onSortNearestRole(roleA : SceneRole, roleB : SceneRole) : int
+		{
+			if (roleA.type != roleB.type) {
+				return parseInt(roleA.type) - parseInt(roleB.type);
+			}
+			var disA : Number = MathUtil.getDistanceNoSqrt(MainRoleManager.actor.x, MainRoleManager.actor.z, roleA.x, roleA.z);
+			var disB : Number = MathUtil.getDistanceNoSqrt(MainRoleManager.actor.x, MainRoleManager.actor.z, roleB.x, roleB.z);
+			if (disA > disB)
+			{
+				return 1;
+			}
+			else
+			{
+				return -1;
+			}
+			return 0;
+		}
 	}
 }

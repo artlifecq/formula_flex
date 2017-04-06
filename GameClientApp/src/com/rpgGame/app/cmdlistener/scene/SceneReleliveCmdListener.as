@@ -189,7 +189,7 @@ package com.rpgGame.app.cmdlistener.scene
 			playerData.totalStat.mana = mana;
 			
 			FightFaceHelper.showAttChange(EnumHurtType.ADDHP, hp);
-			FightFaceHelper.showAttChange(EnumHurtType.ADDMP, mp);
+//			FightFaceHelper.showAttChange(EnumHurtType.ADDMP, mp);
 //			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_NORMAL,+hp);
 //			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_NORMAL,+mp);
 //			TrusteeshipManager.getInstance().stopAll();

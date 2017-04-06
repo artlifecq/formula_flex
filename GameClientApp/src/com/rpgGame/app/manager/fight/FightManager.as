@@ -6,9 +6,12 @@ package com.rpgGame.app.manager.fight
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.cfg.RelationCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
+	import com.rpgGame.coreData.enum.JobEnum;
+	import com.rpgGame.coreData.enum.RoleEnum;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.role.ZhanCheData;
 	import com.rpgGame.coreData.type.PKModeType;
 	import com.rpgGame.coreData.type.SceneCharType;
@@ -51,7 +54,10 @@ package com.rpgGame.app.manager.fight
 			var modeState : int = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
 			var heroData:HeroData = MainRoleManager.actorInfo;
             do {
-                if (null == role || !role.usable || role.isMainChar || role.stateMachine.isDeadState) {
+                if (null == role || 
+                    !role.usable || 
+                    (role.isMainChar && JobEnum.ROLE_4_TYPE != (role.data as HeroData).job) || 
+                    ((SceneCharType.MONSTER == role.type) && role.stateMachine.isDeadState)) {
                     // 不存在或者已经死亡 不可攻击
                     break;
                 }
@@ -74,7 +80,7 @@ package com.rpgGame.app.manager.fight
                         null != spellData &&
                         (SpellTargetType.FRIEND == spellData.q_target ||
                          SpellTargetType.TEAM == spellData.q_target)) {
-                        modeState = FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND;
+                        modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
                     }
                     break;
                 }

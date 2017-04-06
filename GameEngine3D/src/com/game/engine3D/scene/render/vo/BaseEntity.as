@@ -39,6 +39,8 @@ package com.game.engine3D.scene.render.vo
 		private var _imposters : Vector.<BaseEntity>;
 		private var _waitAddObjList : Vector.<BaseObjChild>;
 		protected var _view : View3D;
+		
+		
 
 		public function BaseEntity(type : String, id : Number)
 		{

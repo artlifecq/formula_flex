@@ -93,6 +93,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_die:String = "data.Q_die";
 		/**  物品基本信息数据库																																																																																		 */
 		public static const Q_item:String = "data.Q_item";
+		/**  通知列表			 */
+		public static const Q_notify:String = "data.Q_notify";
 		/**  阵营关系				 */
 		public static const Q_relation:String = "data.Q_relation";
 		/**  tipsid	标题	描述 */
@@ -117,9 +119,9 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_buff:String = "data.spell.Q_buff";
 		/**  公共CD表	 */
 		public static const Q_GCD:String = "data.spell.Q_GCD";
-		/**  技能无视防御伤害数据库														 */
+		/**  技能无视防御伤害数据库																	 */
 		public static const Q_skill_ignore:String = "data.spell.Q_skill_ignore";
-		/**  技能基本信息配置数据表																																																																																																																							 */
+		/**  技能基本信息配置数据表																																																																																																																															 */
 		public static const Q_skill_model:String = "data.spell.Q_skill_model";
 		/**  技能效果配置表																			 */
 		public static const Q_SpellAnimation:String = "data.spell.Q_SpellAnimation";
@@ -174,6 +176,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_att_values", com.rpgGame.coreData.clientConfig.Q_att_values);
 			regClass("data.Q_die", com.rpgGame.coreData.clientConfig.Q_die);
 			regClass("data.Q_item", com.rpgGame.coreData.clientConfig.Q_item);
+			regClass("data.Q_notify", com.rpgGame.coreData.clientConfig.Q_notify);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);
 			regClass("data.Q_tipsinfo", com.rpgGame.coreData.clientConfig.Q_tipsinfo);
 			regClass("data.RaceNameInfo", com.rpgGame.coreData.clientConfig.RaceNameInfo);

@@ -1,6 +1,7 @@
 package com.gameClient.log
 {
-    import gameEngine2D.NetDebug;
+    import away3d.log.LogItem;
+    
 	public class GameLog
 	{
 		public static const APPEND_TXT:String = "append_txt";
@@ -53,6 +54,10 @@ package com.gameClient.log
 			enableTrace = enableTrace;
 			max = maxLines;
 		}
+        
+        public static function add2(...args) : void {
+            trace(args);
+        }
 		
 		public static function add(...arg):void
 		{
@@ -154,5 +159,11 @@ package com.gameClient.log
 				fun(str+"\n");
 			}
 		}
+        
+        public static function logItem(logItem : LogItem) : void {
+            if (enableTrace) {
+                trace("[" + logItem.type + "]" + logItem.message);
+            }
+        }
 	}
 }

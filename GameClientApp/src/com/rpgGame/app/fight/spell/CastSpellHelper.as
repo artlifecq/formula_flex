@@ -4,7 +4,6 @@ package com.rpgGame.app.fight.spell
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.utils.PathFinderUtil;
-	import com.game.engine3D.vo.map.MapAreaTypeEnum;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.AreaMapManager;
 	import com.rpgGame.app.manager.ShortcutsManger;
@@ -25,7 +24,6 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
-	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.role.BaseEntityData;
 	import com.rpgGame.coreData.role.HeroData;
@@ -39,7 +37,6 @@ package com.rpgGame.app.fight.spell
 	
 	import away3d.pathFinding.DistrictWithPath;
 	
-	import gameEngine2D.NetDebug;
 	import gameEngine2D.PolyUtil;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -370,6 +367,7 @@ package com.rpgGame.app.fight.spell
                 }
                 releaseRange = releaseRange - DEVIATION_RANGE;
                 releaseRange = releaseRange < 0 ? 0 : releaseRange;
+                var distance : int = spellData.q_search_range * spellData.q_search_range;
                 var enemy_list : Vector.<SceneRole> = _roleList ? _roleList : SceneManager.getSceneRoleList();
                 enemy_list.sort(onSortNearestRole);
                 
@@ -379,14 +377,14 @@ package com.rpgGame.app.fight.spell
                 }
                 if (2 == spellData.q_is_locking_spell) {
                    // 锁定死亡
-                   lockTarget = getCanAtkRole(enemy_list, spellData, true);
+                   lockTarget = getCanAtkRole(enemy_list, spellData, true, distance);
                    if (null == lockTarget) {
                        NoticeManager.showNotify(LangQ_NoticeInfo.SkillError_24);
                        return CASE_STATE_FAIL;
                    }
                 } else if (1 == spellData.q_is_locking_spell) {
                     // 必须锁定目标
-                    lockTarget = getCanAtkRole(enemy_list, spellData, false);
+                    lockTarget = getCanAtkRole(enemy_list, spellData, false, distance);
                     if (null == lockTarget) {
                         switch (spellData.q_target) {
                             case SpellTargetType.FRIEND:
@@ -405,7 +403,7 @@ package com.rpgGame.app.fight.spell
                     if (ignoreLock) {
                         break;
                     }
-                    lockTarget = getCanAtkRole(enemy_list, spellData, false);
+                    lockTarget = getCanAtkRole(enemy_list, spellData, false, distance);
                 }
             } while (false);
             if (null != lockTarget) {
@@ -433,13 +431,20 @@ package com.rpgGame.app.fight.spell
                 if (0 == spellData.q_blink_type) {
                     angle = MathUtil.getAngle(selfPos.x, selfPos.y, releaseTargetPos.x, releaseTargetPos.y);
                     radian = angle * Math.PI / 180;
-                    dist = Point.distance(selfPos, releaseTargetPos);
+                    var temp : Number = Point.distance(selfPos, releaseTargetPos);
+                    dist = temp;
                     if (0 != releaseRange && dist > releaseRange) {
-                        // 距离大于最大释放距离
                         dist = dist - releaseRange;
-                        dist = dist < 0 ? 0 : dist;
-                        releasePos.x = selfPos.x + dist * Math.cos(radian);
-                        releasePos.y = selfPos.y + dist * Math.sin(radian);
+                        // 距离大于最大释放距离
+                        while (dist < temp) {
+                            dist = dist < 0 ? 0 : dist;
+                            releasePos.x = selfPos.x + dist * Math.cos(radian);
+                            releasePos.y = selfPos.y + dist * Math.sin(radian);
+                            if (PathFinderUtil.isPointInSide(SceneManager.getDistrict(), new Vector3D(releasePos.x, releasePos.y, 0))) {
+                                break;
+                            }
+                            dist += SceneConfig.TILE_HEIGHT;
+                        }
                     }
                 } else {
                     angle = 270 - MainRoleManager.actor.rotationY;
@@ -1013,7 +1018,7 @@ package com.rpgGame.app.fight.spell
 			return targetPos;
 		}*/
         
-        private static function getCanAtkRole(list : Vector.<SceneRole>, skillInfo : Q_skill_model, isDie : Boolean) : SceneRole {
+        private static function getCanAtkRole(list : Vector.<SceneRole>, skillInfo : Q_skill_model, isDie : Boolean, distance : int = int.MAX_VALUE) : SceneRole {
             if (null == list || list.length < 1) {
                 return null;
             }
@@ -1046,6 +1051,13 @@ package com.rpgGame.app.fight.spell
                 if (isDie != role.stateMachine.isDeadState) {
                     continue;
                 }
+                if (0 != distance && distance != int.MAX_VALUE) {
+                    var disA : Number = MathUtil.getDistanceNoSqrt(MainRoleManager.actor.x, MainRoleManager.actor.z, role.x, role.z);
+                    if (disA > distance) {
+                        continue;
+                    }
+                }
+                
                 if (0 == skillInfo.q_check_relation) {
                     return role;
                 }

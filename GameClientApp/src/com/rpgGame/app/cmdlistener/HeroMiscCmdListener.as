@@ -1,6 +1,8 @@
 package com.rpgGame.app.cmdlistener
 {
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.app.fight.spell.FightChangePop;
+	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.ClientSettingManager;
@@ -9,7 +11,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
-	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -17,6 +19,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.core.events.SystemTimeEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
@@ -33,10 +36,12 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.player.message.ResPlayerAttributesChangeMessage;
 	import com.rpgGame.netData.player.message.SCCurrencyChangeMessage;
 	import com.rpgGame.netData.player.message.SCMaxValueChangeMessage;
+	import com.rpgGame.netData.skill.bean.SkillInfo;
+	import com.rpgGame.netData.skill.message.ResSkillAddMessage;
+	import com.rpgGame.netData.skill.message.ResSkillChangeMessage;
 	import com.rpgGame.netData.skill.message.ResSkillInfosMessage;
 	
 	import app.cmd.HeroMiscModuleMessages;
-	import app.message.AmountType;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
@@ -64,6 +69,8 @@ package com.rpgGame.app.cmdlistener
 		{
 			SocketConnection.addCmdListener(103106,RecvPlayerAttributesChangeMessage);
 			SocketConnection.addCmdListener(123101,RecvResSkillInfosMessage);
+			SocketConnection.addCmdListener(123102,RecvResSkillAddMessage);
+			SocketConnection.addCmdListener(123107,RecvResSkillChangeMessage);
 			SocketConnection.addCmdListener(301102,RecvResClientCustomTagMessage);
 			SocketConnection.addCmdListener(103103,RecvResPersonalNoticeMessage);
 			SocketConnection.addCmdListener(103102,RecvResPlayerAddExpMessage);
@@ -82,7 +89,6 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_PK_MODE, onChangePkMode);
 			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_PK_MODE_FAIL, onChangePkModeFail);
 			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_SELF_PK_AMOUNT_CHANGED, onPkAmountChanged);
-			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_CHANGE_HERO_FIGHTING_AMOUNT, onFightingAmountChanged);
 			//装备相关
 			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_EQUIPMENT_RESOURCES_CHANGED, onEquipmentResChanged);
 			//防沉迷
@@ -98,6 +104,29 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_ONLINE_STRONG, onRecFangChenMiOnelineStrong);
 			
 			finish();
+		}
+		
+		private function RecvResSkillAddMessage(msg:ResSkillAddMessage):void
+		{
+			var roleData : HeroData = MainRoleManager.actorInfo;
+			roleData.spellList.addSkillData(msg.skillInfo);
+			UIPopManager.showPopUI(SkillAddPop,msg.skillInfo);
+			EventManager.dispatchEvent(SpellEvent.SPELL_ADD);
+		}
+		
+		private function RecvResSkillChangeMessage(msg:ResSkillChangeMessage):void
+		{
+			var roleData : HeroData = MainRoleManager.actorInfo;
+			var oldInfo:SkillInfo=roleData.spellList.getSkillInfo(msg.skillInfo.skillModelId);
+			var lv:int;
+			roleData.spellList.addSkillData(msg.skillInfo);
+			if(oldInfo.skillLevel==msg.skillInfo.skillLevel){//改的是等级
+				lv=msg.skillInfo.skillChildLv-oldInfo.skillChildLv;
+				EventManager.dispatchEvent(SpellEvent.SPELL_UPGRADE,lv);
+			}else{//改的是阶数
+				lv=msg.skillInfo.skillLevel-oldInfo.skillLevel;
+				EventManager.dispatchEvent(SpellEvent.SPELL_RISE,lv);
+			}
 		}
 		
 		private function RecvSCMaxValueChangeMessage(msg:SCMaxValueChangeMessage):void
@@ -141,6 +170,8 @@ package com.rpgGame.app.cmdlistener
 				
 			}
 			
+			var beforeFight:int=MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.FIGHTING);
+			
 			//
 			PlayerAttributeManager.showSpriteStatChg(MainRoleManager.actorInfo.totalStat.statArr, msg.attributeChangeList);
 			//
@@ -149,6 +180,11 @@ package com.rpgGame.app.cmdlistener
 			//EventManager.dispatchEvent(UserEvent.USER_MAIN_FIGHT_ATTRIBUTE_CHANGE);
 			EventManager.dispatchEvent(MainPlayerEvent.STAT_CHANGE);
 			
+			var afterFight:int=MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.FIGHTING);
+			var fightChange:int=afterFight-beforeFight;
+			if(fightChange!=0){
+				UIPopManager.showAlonePopUI(FightChangePop,[afterFight,beforeFight]);
+			}
 			//如果这个协议，改变的属性，包括hp，mp，maxhp，maxmp的话，就要在下面还要写一段逻辑，来更新角色的血条。因为现在还不确定，是不是这样的，所以，暂时先不写。等以后，真正
 			//用上的时候，检查下这里，再补上代码吧！
 			// code!!!
@@ -161,7 +197,6 @@ package com.rpgGame.app.cmdlistener
 			if (roleData == null)
 				return;
 			roleData.spellList.setHeroData(msg);
-			
 			//技能CD
 			//			SkillCDManager.getInstance().setHeroCd(heroProto.spellModuleObj);
 		}
@@ -350,11 +385,6 @@ package com.rpgGame.app.cmdlistener
 			EventManager.dispatchEvent(MainPlayerEvent.PK_AMOUNT_CHANGE);
 		}
 		
-		private function onFightingAmountChanged(buffer : ByteBuffer):void
-		{
-			MainRoleManager.actorInfo.fightingAmount = buffer.readVarint64();
-			EventManager.dispatchEvent(MainPlayerEvent.FIGHTING_AMOUNT_CHANGE);
-		}
 		
 		private function onHeroDailyCleared(buffer : ByteBuffer) : void
 		{

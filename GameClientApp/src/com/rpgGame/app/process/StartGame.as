@@ -49,6 +49,8 @@ package com.rpgGame.app.process
     import flash.events.KeyboardEvent;
     import flash.ui.Keyboard;
     
+    import away3d.log.Log;
+    
     import gameEngine2D.NetDebug;
     
     import org.client.mainCore.bean.BeanEvent;
@@ -135,12 +137,12 @@ package com.rpgGame.app.process
 				//
 				MainRoleManager.initActor();
 				GlobalSettingManager.init();
-                RollManager.INSTANCE.init();
 				//
 
                 CONFIG::Debug {
 					Stage3DLayerManager.stage.addEventListener(KeyboardEvent.KEY_UP,onShowFrameState);
                     initMM();
+					showFrameState();
                 }
 			}
 
@@ -150,17 +152,19 @@ package com.rpgGame.app.process
 		
 		private function onShowFrameState(e:KeyboardEvent):void
 		{
-			var bool:Boolean = false;
-			if(e.ctrlKey&&e.keyCode==Keyboard.F)
+			if(e.shiftKey&&e.keyCode==Keyboard.D)
 			{
-				bool = !bool;
-				if(bool)
-				{
-					StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
-				}
-				LayerManager.showOrHideMM();
-				ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
+				showFrameState();
 			}
+		}
+		
+		private function showFrameState():void
+		{
+			StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
+			LayerManager.showOrHideMM();
+			ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
+            // 屏蔽未捕获信息
+            Log.logCallBack = GameLog.logItem;
 		}
 		
 		private function tipsSetup() : void

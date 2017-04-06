@@ -3870,6 +3870,9 @@ package com.game.engine3D.scene.render
 			}
 			for each(var virtual : ObjectContainer3D in this._baseVirtualElements) 
 			{
+                if (-1 != virtual.name.indexOf("st_")) {
+                    continue;
+                }
 				for each(var unit : RenderUnitChild in _currChildUnitList) 
 				{
 					if (virtual.name == unit.childName) 

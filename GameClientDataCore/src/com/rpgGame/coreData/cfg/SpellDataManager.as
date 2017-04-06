@@ -7,8 +7,6 @@ package com.rpgGame.coreData.cfg
 	import flash.utils.ByteArray;
 	
 	import org.client.mainCore.ds.HashMap;
-	import org.client.mainCore.utils.BitUtil;
-	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
 	 *
@@ -30,6 +28,15 @@ package com.rpgGame.coreData.cfg
 		 *基本职业技能表（未进阶） 
 		 */
 		private static var _jobBasicMap:HashMap=new HashMap();
+		
+		/**
+		 *一键升级 
+		 */
+		public static var oneKeyup:Boolean=false;
+		/**
+		 *不弹窗
+		 */
+		public static var unAlert:Boolean=false;
 		
 		public function SpellDataManager()
 		{

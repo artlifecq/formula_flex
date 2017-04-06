@@ -1,105 +1,106 @@
 package com.rpgGame.app.manager {
-    import com.game.mainCore.core.timer.GameTimer;
+    import com.rpgGame.app.manager.time.SystemTimeManager;
+    import com.rpgGame.core.events.SystemEvent;
+    import com.rpgGame.coreData.UNIQUEID;
     
-    import flash.utils.getTimer;
+    import org.client.mainCore.manager.EventManager;
     
-    import gameEngine2D.NetDebug;
-
-    import org.client.mainCore.manager.EventManager
+    import starling.core.Starling;
 
     public class RollManager {
-        public static const INSTANCE : RollManager = new RollManager();
-
-        public static const EVENT_UPDATE : String = "ROLLMANAGEREVEN_UPDATE";
-        public static const EVENT_STARTCD: String = "ROLLMANAGEREVEN_STARTCD";
-        public static const EVENT_ENDCD: String = "ROLLMANAGEREVEN_ENDCD";
-        public static const EVENT_UPDATECD: String = "ROLLMANAGEREVEN_UPDATECD";
-        public static const EVENT_UPDATEUSECD: String = "ROLLMANAGEREVEN_UPDATEUSECD";
+		private static var _instance:RollManager
+		public static function getinstance():RollManager
+		{
+			if(_instance == null)
+			{
+				_instance = new RollManager();
+				_instance.reset();
+			}
+			return _instance;
+		}
+        public static const ROLL_STARTROLL:int =UNIQUEID.NEXT;
+		public static const ROLL_STARTRESET:int = UNIQUEID.NEXT;
+		public static const ROLL_USE:int = UNIQUEID.NEXT;
         
-        private static const TOTAL_TIMES : int = 3;
-        private static const CD_TIMES : int = 15000;
-        private static const USE_TIMES : int = 15000;
-        
-        private var _curTimes : int = TOTAL_TIMES;
-        private var _beginUseTime : int = -1;
-        private var _beginCdTime : int = -1;
-        private var _timer : GameTimer = null;
-        private var _isCd : Boolean = false;
-        
-        public function RollManager() {
+		public static const RoleState_User:int = 1;
+		public static const RoleState_CD:int = 2;
+		public static const RoleState_Normal:int = 0;
+		
+        public static const TOTAL_TIMES : int = 3;
+        public static const CD_TIMES : int = 15000;
+		public static const USE_TIMES : int = 15000;
+        private var _curCount : int;
+        private var _beginUseTime :Number = -1;
+		private var _currentState:int;
+		public function RollManager():void
+		{
+			if(_instance!=null)
+				throw new Error("老大，这是单例，别在初始化了");
+		}
+        public function canUseRoll() : Boolean 
+		{
+			if(_currentState == RoleState_CD)
+				return false;
+			else
+				return curCount>0;
         }
+		
+		public function useRoll():Boolean
+		{
+			if(_currentState == RoleState_CD)
+				return false;
+			else if(_currentState == RoleState_User && curCount<=0)
+				return false;
+ 			if(curCount ==TOTAL_TIMES)
+			{
+				_beginUseTime = SystemTimeManager.curtTm;
+				refeash();
+				EventManager.dispatchEvent(RollManager.ROLL_STARTROLL);
+			} 
+			_curCount --;
+			if(_curCount ==0)
+			{
+				_beginUseTime = SystemTimeManager.curtTm - USE_TIMES;
+			}
+			EventManager.dispatchEvent(RollManager.ROLL_USE);
+			return true;
+		}
+		
+		public function get   passTime():Number
+		{
+			return SystemTimeManager.curtTm - _beginUseTime;
+		}
         
-        public function init() : void {
-            this._timer = new GameTimer("RollManager", 1000, 0, this.onTimer);
-            this._timer.start();
-        }
-        
-        public function canUseRoll() : Boolean {
-            if (this._isCd) {
-                CONFIG::netDebug {
-                    NetDebug.LOG("RollManager is in cd");
-                }
-                return false;
-            }
-            if (0 == this._curTimes) {
-                CONFIG::netDebug {
-                    NetDebug.LOG("RollManager use times is zero");
-                }
-                return false;
-            }
-            if (-1 == this._beginUseTime) {
-                this._beginUseTime = getTimer();
-            }
-            --this._curTimes;
-            EventManager.dispatchEvent(EVENT_UPDATE, this._curTimes);
-            if (0 == this._curTimes) {
-                this.startCd();
-            }
-            return true;
-        }
-        
-        private function onTimer() : void {
-            var curTime : int = getTimer();
-            var idelTime : int = curTime - this._beginCdTime;
-            if (this._isCd) {
-                if (idelTime > CD_TIMES) {
-                    this.endCd();
-                } else {
-                    EventManager.dispatchEvent(EVENT_UPDATECD, idelTime / 1000);
-                }
-            } else if (-1 != this._beginUseTime) {
-                idelTime = curTime - this._beginUseTime;
-                if (0 == this._curTimes) {
-                    this.startCd();
-                } else if (idelTime >= USE_TIMES) {
-                    this.endCd();
-                } else {
-                    EventManager.dispatchEvent(EVENT_UPDATEUSECD, idelTime / 1000);
-                }
-            }
-        }
-        
-        private function startCd() : void {
-            this._isCd = true;
-            this._beginCdTime = getTimer();
-            EventManager.dispatchEvent(EVENT_UPDATE, this._curTimes);
-            EventManager.dispatchEvent(EVENT_UPDATECD, 0);
-            CONFIG::netDebug {
-                NetDebug.LOG("RollManager start cd");
-            }
-        }
-        
-        private function endCd() : void {
-            this._isCd = false;
-            this._beginCdTime = -1;
-            this._curTimes = TOTAL_TIMES;
-            this._beginUseTime = -1;
-            EventManager.dispatchEvent(EVENT_ENDCD);
-            EventManager.dispatchEvent(EVENT_UPDATE, this._curTimes);
-            EventManager.dispatchEvent(EVENT_UPDATEUSECD, 0);
-            CONFIG::netDebug {
-                NetDebug.LOG("RollManager end cd");
-            }
+		public function get currentState():int
+		{
+			return _currentState;
+		}
+		
+		public function get curCount():int
+		{
+			return _curCount;
+		}
+		
+		public function refeash():void
+		{
+			var curpassTime : Number =  passTime;
+			if((curpassTime>=0)&&(curpassTime<USE_TIMES))
+			{
+				_currentState = RoleState_User;
+			}else if((curpassTime>=USE_TIMES)&&(curpassTime<(USE_TIMES+CD_TIMES)))
+			{
+				_currentState = RoleState_CD;
+				_curCount =Math.floor( (curpassTime-USE_TIMES)/(CD_TIMES/TOTAL_TIMES));
+			}else{
+				reset();
+			}
+		}
+		
+        private function reset() : void {
+			_currentState = RoleState_Normal;
+			_curCount = TOTAL_TIMES;
+			_beginUseTime = -1;
+			EventManager.dispatchEvent(RollManager.ROLL_STARTRESET);
         }
     }
 }

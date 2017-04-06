@@ -138,7 +138,6 @@ package com.client.process
 			_createRoleLoader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, onIoError);
 			var setConfigFun : Function = _createRoleLoader.content["setConfig"];
 			setConfigFun(ClientGlobal.maskWorldDic);
-
 			ClientGlobal.stage.addChild(_createRoleLoader.content);
 
 			_onCreateHeroFail = _createRoleLoader.content["onCreateHeroFail"];

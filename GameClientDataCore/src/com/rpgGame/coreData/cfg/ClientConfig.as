@@ -437,6 +437,19 @@ package com.rpgGame.coreData.cfg
 			var url : String = "icon/skill/" + size + "/" + id + eName_PNG;
 			return baseDir + resURL + url;
 		}
+		
+		/**
+		 *升阶技能图标 
+		 * @param id
+		 * @param size
+		 * @return 
+		 * 
+		 */
+		public static function getRiseSkillIcon(id : String, size : int = 40) : String
+		{
+			var url : String = "icon/skill/rise/" + size + "/" + id + eName_PNG;
+			return baseDir + resURL + url;
+		}
 
 		/**
 		 * 获得Buff图标

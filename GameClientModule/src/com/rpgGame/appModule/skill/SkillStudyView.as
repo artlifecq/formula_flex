@@ -1,17 +1,24 @@
 package com.rpgGame.appModule.skill
 {
+	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.core.events.ItemEvent;
+	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.SpellEvent;
-	import com.rpgGame.coreData.cfg.SkillLvLDataManager;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
-	import com.rpgGame.coreData.clientConfig.Q_skill_ignore;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.JobEnum;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.lang.LangSpell;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
-	import feathers.controls.Scroller;
+	import feathers.controls.ScrollBarDisplayMode;
+	import feathers.controls.ScrollPolicy;
+	import feathers.layout.RelativePosition;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.wuxue.jineng.JinengTitle_Skin;
@@ -22,6 +29,7 @@ package com.rpgGame.appModule.skill
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.events.TouchEvent;
 
 	/**
 	 *技能学习 
@@ -39,31 +47,40 @@ package com.rpgGame.appModule.skill
 		private var _jobTl2:Sprite;
 		private var _lastSp:Sprite;
 		private var selectedItem:SkillItem;
-		private var selectedCfg:Q_skill_model;
-		private var selectedInfo:SkillInfo;
 		
-		public function SkillStudyView(skin:jineng_Skin)
+		private var skillUpgrade:SkillUpgradeView;
+		private var skillRise:SkillRiseView;
+		private var _panel:SkinUIPanel;
+
+		private var basicItems:Vector.<SkillItem>;
+		private var otherItems:Vector.<SkillItem>;
+		
+		public function SkillStudyView(skin:jineng_Skin,panel:SkinUIPanel)
 		{
+			_panel=panel;
 			_skin=skin;
 			initView();
 		}
 		
 		private function initView():void
 		{
-			this._skin.vs_bar.verticalScrollBarPosition = Scroller.VERTICAL_SCROLL_BAR_POSITION_RIGHT;
-			this._skin.vs_bar.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
-			this._skin.vs_bar.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
-			this._skin.vs_bar.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_FIXED;
 			_skillContainer=new Sprite();
 			this._skin.vs_bar.width=550;
 			this._skin.vs_bar.x=20;
+			this._skin.vs_bar.scrollBarDisplayMode = ScrollBarDisplayMode.FIXED;
+			this._skin.vs_bar.verticalScrollBarPosition =RelativePosition.RIGHT;
+			this._skin.vs_bar.verticalScrollPolicy = ScrollPolicy.OFF;
+			
+			
 			_jobTitle1=new JinengTitle_Skin();
 			_jobTitle2=new JinengTitle_Skin();
-			_jobTitle2.labelDisplay.text="其他技能";
+			_jobTitle2.labelDisplay.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT13);
 			_jobTl1=_jobTitle1.toSprite();
 			_jobTl2=_jobTitle2.toSprite();
 			_skillContainer.addChild(_jobTl1);
 			_skillContainer.addChild(_jobTl2);
+			skillUpgrade=new SkillUpgradeView(_skin.shengji.skin as jineng_shengji,_panel);
+			skillRise=new SkillRiseView(_skin.jinjie.skin as jineng_jinjie,_panel);
 			
 			var skillNum:int;
 			var job:int=MainRoleManager.actorInfo.job;
@@ -74,8 +91,11 @@ package com.rpgGame.appModule.skill
 			var data:Q_skill_model;
 			skillNum=list.length;
 			var skillInfo:SkillInfo;
+			basicItems=new Vector.<SkillItem>();
+			otherItems=new Vector.<SkillItem>();
 			for(i=0;i<skillNum;i++){
 				item=new SkillItem();
+				basicItems.push(item);
 				row=Math.floor(i/2);
 				data=MainRoleManager.actorInfo.spellList.getStudySpell(list[i].q_skillID);
 				skillInfo=MainRoleManager.actorInfo.spellList.getSkillInfo(list[i].q_skillID);
@@ -90,6 +110,9 @@ package com.rpgGame.appModule.skill
 				}else{
 					item.x=item.width+30;
 				}
+				if(i==0){
+					selecteSpell(item);					
+				}
 			}
 			row++;
 			_jobTl2.y=row*(item.height+10)+40;
@@ -99,9 +122,13 @@ package com.rpgGame.appModule.skill
 			skillNum=list.length;
 			for(i=0;i<skillNum;i++){
 				item=new SkillItem();
+				otherItems.push(item);
 				row=Math.floor(i/2);
-				data=list[i];
+				data=MainRoleManager.actorInfo.spellList.getStudySpell(list[i].q_skillID);
 				skillInfo=MainRoleManager.actorInfo.spellList.getSkillInfo(list[i].q_skillID);
+				if(!data){
+					data=list[i];
+				}
 				item.updateItem(data,skillInfo);
 				item.y=row*(item.height+10)+_jobTl2.y+40;
 				_skillContainer.addChild(item);
@@ -112,26 +139,130 @@ package com.rpgGame.appModule.skill
 				}
 			}
 			_lastSp=new Sprite();
-			_lastSp.y=item.y+item.height;
+			_lastSp.y=item.y+item.height+40;
 			_skillContainer.addChild(_lastSp);
 			this._skin.vs_bar.addChild(_skillContainer);
 		}
 		
+		private function onTouch(e:TouchEvent):void
+		{
+			var i:int,num:int,item:SkillItem;
+			num=basicItems.length;
+			for(i=0;i<num;i++){
+				item=basicItems[i];
+				item.onTouchItem(e);
+			}
+			num=otherItems.length;
+			for(i=0;i<num;i++){
+				item=otherItems[i];
+				item.onTouchItem(e);
+			}
+		}
+		
+		private function updateSkillList():void
+		{
+			var list:Vector.<Q_skill_model>=SpellDataManager.getBasicSkills(MainRoleManager.actorInfo.job);//基本职业技能
+			var data:Q_skill_model;
+			var i:int;
+			var skillNum:int;
+			var item:SkillItem;
+			skillNum=list.length;
+			var skillInfo:SkillInfo;
+			for(i=0;i<skillNum;i++){
+				item=basicItems[i];
+				data=MainRoleManager.actorInfo.spellList.getStudySpell(list[i].q_skillID);
+				skillInfo=MainRoleManager.actorInfo.spellList.getSkillInfo(list[i].q_skillID);
+				if(!data){
+					data=list[i];
+				}
+				item.updateItem(data,skillInfo);
+			}
+			
+			list=SpellDataManager.getBasicSkills(JobEnum.ROLE_0_TYPE);
+			skillNum=list.length;
+			for(i=0;i<skillNum;i++){
+				item=otherItems[i];
+				data=MainRoleManager.actorInfo.spellList.getStudySpell(list[i].q_skillID);
+				skillInfo=MainRoleManager.actorInfo.spellList.getSkillInfo(list[i].q_skillID);
+				if(!data){
+					data=list[i];
+				}
+				item.updateItem(data,skillInfo);
+			}
+			
+			skillUpgrade.update(selectedItem.skillCfg,selectedItem.skillInfo);
+			skillRise.update(selectedItem.skillCfg,selectedItem.skillInfo);
+		}
+		
 		public function onTouchTarget(target:DisplayObject):Boolean
 		{
+			if(skillUpgrade.onTouchTarget(target)){
+				return true;
+			}
+			if(skillRise.onTouchTarget(target)){
+				return true;
+			}
 			return false;
 		}
 		
 		public function onHide():void
 		{
 			_skin.tab_zizhi.removeEventListener(Event.CHANGE, onTab);
+			EventManager.removeEvent(SpellEvent.SELECTE_SPELL,selecteSpell);
+			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateChange);
+			EventManager.removeEvent(SpellEvent.SPELL_ADD,updateSkillList);
+			EventManager.removeEvent(ItemEvent.ITEM_ADD,updateChange);
+			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateChange);
+			EventManager.removeEvent(SpellEvent.SPELL_UPGRADE,spellUpgrade);
+			EventManager.removeEvent(SpellEvent.SPELL_RISE,spellRise);
+			_panel.removeEventListener(starling.events.TouchEvent.TOUCH, onTouch);
+			skillUpgrade.onHide();
+			skillRise.onHide();
 		}
 		
 		public function onShow():void
 		{
 			updateZhenqi();
+			updateSkillList();
 			_skin.tab_zizhi.addEventListener(Event.CHANGE, onTab);
 			EventManager.addEvent(SpellEvent.SELECTE_SPELL,selecteSpell);
+			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateChange);
+			EventManager.addEvent(SpellEvent.SPELL_ADD,updateSkillList);
+			EventManager.addEvent(ItemEvent.ITEM_ADD,addItem);
+			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateChange);
+			EventManager.addEvent(SpellEvent.SPELL_UPGRADE,spellUpgrade);
+			EventManager.addEvent(SpellEvent.SPELL_RISE,spellRise);
+			_panel.addEventListener(starling.events.TouchEvent.TOUCH, onTouch);
+		}
+		
+		private function addItem(itemInfo : ClientItemInfo) : void
+		{
+			if (!itemInfo)
+				return;
+			updateChange();			
+		}
+		
+		private function spellRise(lv:int):void
+		{
+			UIPopManager.showAlonePopUI(SkillRisePop);
+			skillRise.unlock();
+			updateSkillList();
+		}
+		
+		private function spellUpgrade(lv:int):void
+		{
+			UIPopManager.showAlonePopUI(SkillGradePop,lv);
+			updateSkillList();
+		}
+		
+		private function updateChange(type:int=2):void
+		{
+			if(type!=CharAttributeType.RES_GOLD&&type!=CharAttributeType.RES_MONEY&&
+				type!=CharAttributeType.RES_BIND_GOLD&&type!=CharAttributeType.RES_BIND_MONEY&&type!=CharAttributeType.RES_ZHENQI){
+				return;
+			}
+			updateZhenqi();
+			updateSkillList();
 		}
 		
 		private function selecteSpell(skillItem:SkillItem):void
@@ -140,98 +271,10 @@ package com.rpgGame.appModule.skill
 				selectedItem.selected=false;
 			}
 			selectedItem=skillItem;
-			selectedCfg=selectedItem.skillCfg;
-			selectedInfo=selectedItem.skillInfo;
-			updateShenji();
-			updateJinjie();
-		}
-		
-		private function updateJinjie():void
-		{
-			var skin:jineng_jinjie=_skin.jinjie.skin as jineng_jinjie;
-			skin.lb_name.text=selectedCfg.q_skillName;
-			skin.lb_dengji.text=getTitleText("等级",selectedInfo.skillChildLv+"/"+selectedCfg.q_max_level);
-			skin.lb_leixing.text=getTitleText("技能类型",selectedCfg.q_skill_type);
-			skin.lb_xiaohao.text=getTitleText("消耗",selectedCfg.q_need_mp);
-			skin.lb_lengque.text=getTitleText("冷却时间",selectedCfg.q_cd/1000);
-		}
-		
-		private function updateShenji():void
-		{
-			var skin:jineng_shengji=_skin.shengji.skin as jineng_shengji;
-			skin.lb_name.text=selectedCfg.q_skillName;
-			skin.lb_dengji.text=getTitleText("等级",selectedInfo.skillChildLv+"/"+selectedCfg.q_max_level);
-			skin.lb_leixing.text=getTitleText("技能类型",selectedCfg.q_skill_type);
-			skin.lb_xiaohao.text=getTitleText("消耗",selectedCfg.q_need_mp);
-			skin.lb_lengque.text=getTitleText("冷却时间",selectedCfg.q_cd/1000);
+			selectedItem.selected=true;
 			
-			skin.lb_miaoshu.htmlText=selectedCfg.q_skillpanel_description1;
-			
-			//升级效果
-			var myLv:int=MainRoleManager.actorInfo.totalStat.level;
-			var myMp:int=MainRoleManager.actorInfo.curZhenqi;
-			var myMon:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY);
-			var upNum:int=1;
-			var needMp:int=0;
-			var needMy:int=0;
-			var lv:int=selectedInfo.skillChildLv;
-			var id:int=selectedCfg.q_skillID;
-			var key:String=id+"_"+lv;
-			var playerLv:int=0;
-			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(key);
-			if(lvData){
-				needMp+=lvData.q_energy;
-				needMy+=lvData.q_copper;
-				playerLv=lvData.q_playerlevel;
-				while(lv<selectedCfg.q_max_level){
-					lv++;
-					upNum++;
-					key=id+"_"+lv;
-				
-					lvData=SkillLvLDataManager.getData(key);
-					if(lvData){
-						if(needMp+lvData.q_energy>myMp){
-							break;
-						}
-						if(needMy+lvData.q_copper>myMon){
-							break;
-						}
-						if(lvData.q_playerlevel>myLv){
-							break;
-						}
-						needMp+=lvData.q_energy;
-						needMy+=lvData.q_copper;
-						if(lvData.q_playerlevel!=0){
-							playerLv=lvData.q_playerlevel;
-						}
-					}else{
-						break;
-					}
-				}
-			}
-		
-			
-//			skin.lb_shengji.htmlText=selectedCfg.q_skillpanel_description1;
-//			skin.lb_shanghai.htmlText=selectedCfg.q_skillpanel_description1;
-			
-			//升级条件
-			skin.lb_renwudengji.htmlText=getTitleText("人物等级",playerLv.toString());
-			skin.lb_renwudengji.htmlText=getTitleText("消耗真气",needMp.toString());
-			skin.lb_renwudengji.htmlText=getTitleText("消耗绑银",needMy.toString());
-		}
-		
-		
-		private function getTitleText(title:String,value:*):String
-		{
-			if(value is int){
-				if(value==0){
-					value="无";
-				}
-			}
-			if(title=="冷却时间"&&value!="无"){
-				value+="s";
-			}
-			return title+":"+value;
+			skillUpgrade.update(selectedItem.skillCfg,selectedItem.skillInfo);
+			skillRise.update(selectedItem.skillCfg,selectedItem.skillInfo);
 		}
 		
 		private function updateZhenqi():void

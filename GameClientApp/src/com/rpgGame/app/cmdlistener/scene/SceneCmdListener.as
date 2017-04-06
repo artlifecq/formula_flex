@@ -907,6 +907,7 @@ package com.rpgGame.app.cmdlistener.scene
             {
                 ReliveManager.autoHideRelive();
 				EventManager.dispatchEvent(MainPlayerEvent.SELFHP_CHANGE);
+				EventManager.dispatchEvent(MainPlayerEvent.REVIVE_SUCCESS);
             }
 			else
 			{

@@ -75,6 +75,10 @@ package com.rpgGame.app.fight.spell
 				{
 					SpellAnimationHelper.addFlyEffect(spellInfo);
 				}
+				if(spellInfo.ribbonImg)
+				{
+					SpellAnimationHelper.addRibbonEffect(spellInfo);
+				}
 				else
 				{
 					/*if (ref)
