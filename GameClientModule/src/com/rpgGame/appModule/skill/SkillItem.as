@@ -87,7 +87,10 @@ package com.rpgGame.appModule.skill
 				_skin.txt_level.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT1)+info.skillChildLv+"/"+cfg.q_max_level;
 				if(info.skillLevel==1){
 					_skin.txt_Inacitve.color=0x8b8d7b;
-					_skin.mc_dengjie.visible=false;
+					_skin.mc_dengjie.visible=true;
+					if(info.skillLevel==cfg.q_max_grade){
+						_skin.mc_dengjie.visible=false;
+					}
 					if(!riseCfg){
 						_skin.txt_Inacitve.text="";
 					}else{
@@ -95,7 +98,6 @@ package com.rpgGame.appModule.skill
 					}
 				}else{
 					_skin.txt_Inacitve.color=0xc9b722;
-					_skin.mc_dengjie.visible=true;
 					_skin.txt_Inacitve.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT3);
 				}
 				_skin.mc_dengjie.gotoAndStop(info.skillLevel.toString());//阶数
@@ -113,11 +115,15 @@ package com.rpgGame.appModule.skill
 				
 				_skin.txt_level.visible=false;
 				_skin.txt_Inacitve.color=0x8b8d7b;
+				_skin.mc_dengjie.visible=true;
 				if(!riseCfg){
 					_skin.txt_Inacitve.text=cfg.q_show_needgrade+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT16);
 				}
+				
+				if(cfg.q_max_grade==1){
+					_skin.mc_dengjie.visible=false;
+				}
 				_skin.mc_dengjie.gotoAndStop("1");//阶数
-				_skin.mc_dengjie.visible=false;
 			}
 			
 			TipTargetManager.remove(this);
