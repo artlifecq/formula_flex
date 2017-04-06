@@ -54,6 +54,8 @@ package com.rpgGame.core.view.uiComponent.face.cd
 		public function CDFace($width : Number, $height : Number, $onComplete : Function = null, $isCircle : Boolean = false, isReverse : Boolean = false)
 		{
 			reSet([$width, $height, $onComplete, $isCircle, isReverse]);
+			
+			
 		}
 
 		public static function create($width : Number, $height : Number, $onComplete : Function = null, $isCircle : Boolean = false, isReverse : Boolean = false) : CDFace
@@ -275,6 +277,7 @@ package com.rpgGame.core.view.uiComponent.face.cd
 		 */
 		public function update($now : Number, $cdTotal : Number) : void
 		{
+			L.l($now+"==="+$cdTotal);
 			var $angle : Number = $now / $cdTotal * 360;
 			if (_tmTxt)
 			{
@@ -283,12 +286,12 @@ package com.rpgGame.core.view.uiComponent.face.cd
 			drawRectMask($angle);
 		}
 		
-		private function updateTimeTxt($now : Number, $cdTotal : Number):void
+		public function updateTimeTxt($now : Number, $cdTotal : Number):void
 		{
 			_tmTxt.numberText = (($cdTotal - $now) * 0.001).toFixed(1);			
 		}
 		
-		private function drawRectMask($angle : Number) : void
+		public function drawRectMask($angle : Number) : void
 		{
 			$angle = Math.floor($angle)
 

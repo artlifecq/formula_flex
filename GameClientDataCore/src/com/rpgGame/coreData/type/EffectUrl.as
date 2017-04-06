@@ -22,6 +22,8 @@ package com.rpgGame.coreData.type
 		public static const TASK_JUAN_ZHOU : String = "npc_juanzhou";
 		/**使用自动技能特效**/
 		public static const USE_AUTO_SPELL_EFFECT : String = "ui_sibianxing";
+		
+		
 		/**小地图寻路终点特效**/
 		public static const XUN_LU_END_POINT_EFFECT : String = "ui_xunlu";
 		/**完成任务特效**/
@@ -194,6 +196,8 @@ package com.rpgGame.coreData.type
 		public static const UI_JINGYANTIAO_JINDUHUANG:String="ui_jingyantiaojinduhuang";
 		public static const UI_JINGYANTIAO_JINDULV:String="ui_jingyantiaojindulv";
 		
+		/**技能框转框特效*/
+		public static const UI_JINENGKUANG_MJ:String="ui_jinengkuang_mj";
 		
 		public function EffectUrl()
 		{
