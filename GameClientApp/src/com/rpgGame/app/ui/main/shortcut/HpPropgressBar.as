@@ -172,7 +172,7 @@ package com.rpgGame.app.ui.main.shortcut
 				sr3D.y=_display.y+_display.height;
 			}else{
 				sr3D.x= 127;
-				sr3D.y=_display.y+_display.height-8;
+				sr3D.y=_display.y+_display.height-5;
 			}
 		}
 		private function percentage(value:Number):void
