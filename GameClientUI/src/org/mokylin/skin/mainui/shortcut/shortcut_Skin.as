@@ -95,7 +95,7 @@ package org.mokylin.skin.mainui.shortcut
 			this.currentState = "normal";
 			this.height = 127;
 			this.width = 809;
-			this.elementsContent = [right_nengliang_i(),right_jintiao_i(),right_nengliangMask_i(),mask_blue_i(),left_xuecao_i(),left_xuecaoMask_i(),mask_red_i(),__shortcut_Skin_UIAsset1_i(),Icons_i(),__shortcut_Skin_UIAsset2_i(),btn_juexue_i(),fangun_i(),grp_buff_i(),jingzhen_yijia_i()];
+			this.elementsContent = [right_nengliang_i(),right_jintiao_i(),right_nengliangMask_i(),mask_blue_i(),left_xuecao_i(),left_xuecaoMask_i(),mask_red_i(),__shortcut_Skin_UIAsset1_i(),__shortcut_Skin_UIAsset2_i(),Icons_i(),btn_juexue_i(),fangun_i(),grp_buff_i(),jingzhen_yijia_i()];
 			
 			states = {
 			};

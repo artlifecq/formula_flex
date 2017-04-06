@@ -87,6 +87,10 @@ package com.rpgGame.core.app
 		 *武学面板 
 		 */
 		public static var SKILL_PANL:String = createAppInfo( "skill.SkillPanel","wuxue");
+		/**
+		 *战魂
+		 */
+		public static var Battle_PANL:String = createAppInfo( "battle.BattlePanel","zhanhun");
 		
 		
 		/**世界地图**/
