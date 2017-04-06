@@ -60,7 +60,7 @@ package com.rpgGame.appModule.skill
 			skin.lb_name.text=selectedCfg.q_skillName;
 			skin.lb_dengji.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT1),selectedInfo.skillChildLv+"/"+selectedCfg.q_max_level);
 			skin.lb_leixing.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT6),selectedCfg.q_type_description);
-			skin.lb_xiaohao.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT5),selectedCfg.q_need_mp);
+			skin.lb_xiaohao.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT5),cfg.q_recovers_detail.length==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):cfg.q_recovers_detail);
 			skin.lb_lengque.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT4),selectedCfg.q_cd/1000);
 			
 			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(selectedInfo.skillModelId+"_"+selectedInfo.skillChildLv);
@@ -110,9 +110,9 @@ package com.rpgGame.appModule.skill
 			var key:String=id+"_"+lv;
 			var playerLv:int=0;
 			lvData=SkillLvLDataManager.getData(key);//这儿又是技能id和等级
-			var changeValue:Number=0;
-			var preValue:Number=SkillLvLDataManager.getAttrValueByType(selectedCfg.q_skill_attr_type,lvData);
-			var nextValue:Number;
+			var changeValue:int=0;
+			var preValue:int=SkillLvLDataManager.getAttrValueByType(selectedCfg.q_skill_attr_type,lvData);
+			var nextValue:int;
 			var changeDes:String=LanguageConfig.getText( LangSpell["SPELL_"+id] );
 			if(lvData){
 				needMp+=lvData.q_energy;
@@ -158,7 +158,7 @@ package com.rpgGame.appModule.skill
 			var des:String=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT14);
 			des=des.replace("$",HtmlTextUtil.getTextColor(0x25931b,String(selectedInfo.skillChildLv+upNum-1)));
 			skin.lb_shengji.htmlText=des;
-			var changeValueH:String=HtmlTextUtil.getTextColor(0x25931b,changeValue.toFixed(1)+(selectedCfg.q_skill_attr_type!=2?"%":""));
+			var changeValueH:String=HtmlTextUtil.getTextColor(0x25931b,SkillLvLDataManager.getPercentValue(selectedCfg.q_skill_attr_type,changeValue)+(selectedCfg.q_skill_attr_type!=2?"%":""));
 			changeDes=changeDes.replace("$",changeValueH);
 			skin.lb_shanghai.htmlText=changeDes;
 			

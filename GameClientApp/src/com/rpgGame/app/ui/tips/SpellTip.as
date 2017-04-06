@@ -81,11 +81,14 @@ package com.rpgGame.app.ui.tips
 			var info:SkillInfo=MainRoleManager.actorInfo.spellList.getSkillInfo(id);
 			var cfg:Q_skill_model=SpellDataManager.getSpellData(info.skillModelId,info.skillLevel);
 			var riseCfg:Q_skill_model=SpellDataManager.getSpellData(id,info.skillLevel+1);
+			if(info.skillLevel==cfg.q_max_grade&&info.skillLevel!=1){
+				riseCfg=SpellDataManager.getSpellData(id,cfg.q_max_grade);
+			}
 			
 			_spellTip.lbl_name.text=cfg.q_skillName;
 			_spellTip.lbl_dengji.text="Lv."+info.skillChildLv;
 			_spellTip.lbl_lenque.text=cfg.q_cd==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):(cfg.q_cd/1000)+"s";
-			_spellTip.lbl_xiaohao.text=cfg.q_need_mp==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):cfg.q_need_mp+"";
+			_spellTip.lbl_xiaohao.text=cfg.q_recovers_detail.length==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):cfg.q_recovers_detail;
 			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(info.skillModelId+"_"+info.skillChildLv);
 			_spellTip.lbl_miaosu.htmlText=lvData.q_skillpanel_description;
 			
@@ -104,9 +107,13 @@ package com.rpgGame.app.ui.tips
 			_spellTip.grp_rise_content.y=_spellTip.grp_rise_tite.y+_spellTip.grp_rise_tite.height+20;
 			
 			_spellTip.mc_dengjie.gotoAndStop(info.skillLevel.toString());
+			_spellTip.mc_dengjie.visible=true;
 			if(info.skillLevel==1){
 				_spellTip.is_act.visible=false;
-				_spellTip.mc_dengjie.visible=false;
+				if(cfg.q_max_grade==1){
+					_spellTip.mc_dengjie.visible=false;
+				}
+				
 				_spellTip.rise_name.color=0x939388;
 				GrayFilter.gray(riseIco);
 				riseIco.width=riseIco.height=80;
@@ -124,9 +131,8 @@ package com.rpgGame.app.ui.tips
 			}else{
 				GrayFilter.unGray(riseIco);
 				_spellTip.is_act.color=0x6BCC08;
-				_spellTip.is_act.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT18);
+				_spellTip.is_act.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT3).substr(0,3);
 				_spellTip.is_act.visible=true;
-				_spellTip.mc_dengjie.visible=true;
 			}
 			_spellTip.is_act.x=_spellTip.rise_name.x+_spellTip.rise_name.textWidth+10;
 			_spellTip.rise_des.htmlText=cfg.q_skillpanel_description2;
