@@ -277,7 +277,6 @@ package com.rpgGame.core.view.uiComponent.face.cd
 		 */
 		public function update($now : Number, $cdTotal : Number) : void
 		{
-			L.l($now+"==="+$cdTotal);
 			var $angle : Number = $now / $cdTotal * 360;
 			if (_tmTxt)
 			{

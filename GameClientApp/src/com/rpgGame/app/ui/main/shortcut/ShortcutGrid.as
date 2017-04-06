@@ -54,6 +54,7 @@ package com.rpgGame.app.ui.main.shortcut
 			effectSk.y = _iconSize/2+6;
 			effect3D=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_MJ),0,0,0);
 			effect3D.stop();
+			
 		}
 		
 		override  public function cdUpdate($now : Number, $cdTotal : Number) :void
@@ -67,7 +68,10 @@ package com.rpgGame.app.ui.main.shortcut
 			{
 				_cdFace.updateTimeTxt($now,$cdTotal);
 			}
-			
+			//effect3D.stop();
+			//effect3D.start();
+			//1000-int(1000/$cdTotal*$now)
+			effect3D.gotoAndStop(int(1000/$cdTotal*$now));
 		}
 		override  protected function updateIconImagePosition( posx:Number=0, posy:Number=0 ):void
 		{
@@ -85,8 +89,10 @@ package com.rpgGame.app.ui.main.shortcut
 			timeLine = new TimelineLite();
 			timeLine.append(TweenMax.to(this,0.1,{y:this.y+2,ease:Bounce.easeOut}));
 			timeLine.append(TweenMax.to(this,0.1,{y:this.y,ease:Bounce.easeOut,onComplete:onComplete}));	
-			effect3D.stop();
-			effect3D.start();
+			
+			
+			//effect3D.stop();
+			//effect3D.start();
 			
 		}
 		
