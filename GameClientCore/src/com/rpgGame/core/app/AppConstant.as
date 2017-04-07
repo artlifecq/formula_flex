@@ -95,6 +95,9 @@ package com.rpgGame.core.app
 		 *装备面板
 		 */
 		public static var EQUIP_PANL:String = createAppInfo( "equip.EquipPanel","zhuangbei");
+		 *战魂
+		 */
+		public static var Battle_PANL:String = createAppInfo( "fightsoul.FightSoulPanel","zhanhun");
 		
 		
 		/**世界地图**/

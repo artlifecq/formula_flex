@@ -27,7 +27,6 @@ package org.mokylin.skin.component.progress
 			
 			this.currentState = "normal";
 			this.height = 36;
-			this.width = 264;
 			this.elementsContent = [track_i(),thumb_i()];
 			
 			states = {

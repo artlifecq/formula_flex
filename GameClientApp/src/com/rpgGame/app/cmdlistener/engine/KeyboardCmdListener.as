@@ -1,28 +1,19 @@
 package com.rpgGame.app.cmdlistener.engine
 {
 	import com.game.engine3D.manager.Stage3DLayerManager;
-	import com.game.engine3D.utils.PathFinderUtil;
 	import com.game.mainCore.core.events.KeyCodeEvent;
 	import com.game.mainCore.core.info.key.KeysCodeInfo;
 	import com.game.mainCore.core.timer.GameTimer;
-	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.controller.keyboard.KeyFuncProcess;
 	import com.rpgGame.app.controller.keyboard.KeyNormalProcess;
 	import com.rpgGame.app.controller.keyboard.KeySpellProcess;
 	import com.rpgGame.app.manager.input.KeyMoveManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.scene.SceneManager;
-	import com.rpgGame.app.state.role.control.ShapeshiftingStateReference;
 	import com.rpgGame.core.manager.input.KeyManager;
-	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.key.KeyCodeType;
 	import com.rpgGame.coreData.info.key.KeyInfo;
 	import com.rpgGame.coreData.info.key.MulitKeyInfo;
-	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.events.Event;
-	import flash.geom.Vector3D;
 	import flash.ui.Keyboard;
 	
 	import feathers.controls.TextInput;
@@ -68,7 +59,7 @@ package com.rpgGame.app.cmdlistener.engine
 			EventManager.addEvent(KeyCodeEvent.KEYS_CLEAR, onKeysClear);
 			Stage3DLayerManager.stage.addEventListener(Event.DEACTIVATE, onDeactivate);
             
-            this._timer = new GameTimer("KeyboardCmdListener", 500, 0, onTimer);
+            this._timer = new GameTimer("KeyboardCmdListener", 1000, 0, onTimer);
             this._timer.start();
 
 			super.finish();

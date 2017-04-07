@@ -22,6 +22,8 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.DaTiCfgData;
 	import com.rpgGame.coreData.cfg.DieCfgData;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
+	import com.rpgGame.coreData.cfg.FightsoulData;
+	import com.rpgGame.coreData.cfg.FightsoulPathData;
 	import com.rpgGame.coreData.cfg.FriendCfgData;
 	import com.rpgGame.coreData.cfg.GCDCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSettingCfgData;
@@ -31,6 +33,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.HintConfig;
 	import com.rpgGame.coreData.cfg.MailCfgData;
 	import com.rpgGame.coreData.cfg.MazeCfgData;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.NpcConfigData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
 	import com.rpgGame.coreData.cfg.RelationCfgData;
@@ -44,6 +47,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.TaxCfgData;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.TransCfgData;
+	import com.rpgGame.coreData.cfg.WindowInfoData;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
 	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
@@ -198,6 +202,14 @@ package com.rpgGame.app.data
 //			GCDCfgData.setConfig(dic[ConfigClassRegister.Q_GCD]);
 			//状态数据buff相关
 			BuffStateDataManager.setConfig(dic[ConfigClassRegister.Q_buff]);
+			//窗口信息
+			WindowInfoData.setConfig(dic[ConfigClassRegister.Q_windowInfo]);
+			FightsoulPathData.setConfig(dic[ConfigClassRegister.Q_fightsoul_path]);
+			FightsoulData.setConfig(dic[ConfigClassRegister.Q_fightsoul]);
+			
+			// 服务器发送 消息ID对应客户端 
+			NotifyCfgData.setup(dic[ConfigClassRegister.Q_notify]);
+			
 		}
 
 		/**
