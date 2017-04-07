@@ -10,11 +10,13 @@ package org.mokylin.skin.app.zhanhun
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
-	import org.mokylin.skin.app.siwangfuhuo.button.ButtonSkin_jiantou;
+	import org.mokylin.skin.app.zhanhun.Shuxing_Ohter_Skin;
+	import org.mokylin.skin.app.zhanhun.Shuxing_Skin;
 	import org.mokylin.skin.app.zhanhun.button.Zhanhun_shengji;
 	import org.mokylin.skin.app.zhanhun.progress_jindu;
 	import org.mokylin.skin.app.zhanhun.uinumber.UINumberLv;
 	import org.mokylin.skin.common.yiji_panelbg2_Skin;
+	import org.mokylin.skin.component.button.ButtonSkin_jiantou;
 	import org.mokylin.skin.component.list.ListSkin1;
 	import org.mokylin.skin.component.progress.pro_jindu_Skin;
 	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli;
@@ -48,6 +50,18 @@ package org.mokylin.skin.app.zhanhun
 		public var grp_dengji:feathers.controls.Group;
 
 		public var grp_zhandouli:feathers.controls.Group;
+
+		public var lab_other_prop1:feathers.controls.SkinnableContainer;
+
+		public var lab_other_prop2:feathers.controls.SkinnableContainer;
+
+		public var lab_other_prop3:feathers.controls.SkinnableContainer;
+
+		public var lab_prop1:feathers.controls.SkinnableContainer;
+
+		public var lab_prop2:feathers.controls.SkinnableContainer;
+
+		public var lab_prop3:feathers.controls.SkinnableContainer;
 
 		public var lb_current:feathers.controls.Label;
 
@@ -133,7 +147,7 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 87;
 			temp.y = 399;
-			temp.elementsContent = [];
+			temp.elementsContent = [lab_prop1_i(),lab_prop2_i(),lab_prop3_i(),lab_other_prop1_i(),lab_other_prop2_i(),lab_other_prop3_i()];
 			return temp;
 		}
 
@@ -399,7 +413,7 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_next = temp;
 			temp.name = "btn_next";
-			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.button.ButtonSkin_jiantou;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou;
 			temp.x = 602;
 			temp.y = 209;
 			return temp;
@@ -411,7 +425,7 @@ package org.mokylin.skin.app.zhanhun
 			btn_prev = temp;
 			temp.name = "btn_prev";
 			temp.scaleX = -1;
-			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.button.ButtonSkin_jiantou;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou;
 			temp.x = 70;
 			temp.y = 209;
 			return temp;
@@ -447,6 +461,90 @@ package org.mokylin.skin.app.zhanhun
 			temp.x = 29;
 			temp.y = 345;
 			temp.elementsContent = [__Zhanhun_Skin_UIAsset6_i(),ui_zhandou_i(),Num_zhandouli_i(),arrow_up_i(),__Zhanhun_Skin_Label1_i()];
+			return temp;
+		}
+
+		private function lab_other_prop1_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			lab_other_prop1 = temp;
+			temp.name = "lab_other_prop1";
+			temp.height = 24;
+			var skin:StateSkin = new org.mokylin.skin.app.zhanhun.Shuxing_Ohter_Skin()
+			temp.skin = skin
+			temp.width = 283;
+			temp.x = 137;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function lab_other_prop2_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			lab_other_prop2 = temp;
+			temp.name = "lab_other_prop2";
+			temp.height = 24;
+			var skin:StateSkin = new org.mokylin.skin.app.zhanhun.Shuxing_Ohter_Skin()
+			temp.skin = skin
+			temp.width = 283;
+			temp.x = 137;
+			temp.y = 22;
+			return temp;
+		}
+
+		private function lab_other_prop3_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			lab_other_prop3 = temp;
+			temp.name = "lab_other_prop3";
+			temp.height = 24;
+			var skin:StateSkin = new org.mokylin.skin.app.zhanhun.Shuxing_Ohter_Skin()
+			temp.skin = skin
+			temp.width = 283;
+			temp.x = 137;
+			temp.y = 44;
+			return temp;
+		}
+
+		private function lab_prop1_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			lab_prop1 = temp;
+			temp.name = "lab_prop1";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.app.zhanhun.Shuxing_Skin()
+			temp.skin = skin
+			temp.width = 130;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function lab_prop2_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			lab_prop2 = temp;
+			temp.name = "lab_prop2";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.app.zhanhun.Shuxing_Skin()
+			temp.skin = skin
+			temp.width = 130;
+			temp.x = 0;
+			temp.y = 22;
+			return temp;
+		}
+
+		private function lab_prop3_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			lab_prop3 = temp;
+			temp.name = "lab_prop3";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.app.zhanhun.Shuxing_Skin()
+			temp.skin = skin
+			temp.width = 130;
+			temp.x = 0;
+			temp.y = 44;
 			return temp;
 		}
 
@@ -542,7 +640,7 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ui_zhandou = temp;
 			temp.name = "ui_zhandou";
-			temp.styleName = "ui/app/beibao/zhandouli.png";
+			temp.styleName = "ui/common/zhandouli2.png";
 			temp.x = 0;
 			temp.y = 10;
 			return temp;

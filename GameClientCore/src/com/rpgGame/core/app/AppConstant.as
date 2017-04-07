@@ -94,7 +94,7 @@ package com.rpgGame.core.app
 		/**
 		 *战魂
 		 */
-		public static var Battle_PANL:String = createAppInfo( "battle.BattlePanel","zhanhun");
+		public static var Battle_PANL:String = createAppInfo( "fightsoul.FightSoulPanel","zhanhun");
 		
 		
 		/**世界地图**/

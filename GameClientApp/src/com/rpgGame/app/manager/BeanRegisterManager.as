@@ -6,6 +6,7 @@
 	import com.rpgGame.app.cmdlistener.BuffCmdListener;
 	import com.rpgGame.app.cmdlistener.ChatCmdListener;
 	import com.rpgGame.app.cmdlistener.DaTiCmdListener;
+	import com.rpgGame.app.cmdlistener.FightSoulCmdListener;
 	import com.rpgGame.app.cmdlistener.FriendCmdListener;
 	import com.rpgGame.app.cmdlistener.GMCmdListener;
 	import com.rpgGame.app.cmdlistener.GoodsContainerCmdListener;
@@ -128,6 +129,7 @@
 //			register("MazeCmdListener", MazeCmdListener); //迷宫
 			register("StallCmdListener",StallCmdListener);//摆摊
 //			register("YuMaQiShouCmdListener", YuMaQiShouCmdListener); //御马场、奇兽苑
+			register("FightSoulCmdListener",FightSoulCmdListener);//战魂
 		}
 	}
 }

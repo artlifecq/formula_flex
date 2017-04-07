@@ -145,7 +145,6 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			// 陷阱状态改变
             SocketConnection.addCmdListener(101151, onRecvSCAttachStateChangeMessage);
-            SocketConnection.addCmdListener(101151, onRecvSCAttachStateChangeMessage);
 			
             SocketConnection.addCmdListener(103110, onResChangePKStateMessage);
 			
