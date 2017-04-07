@@ -110,7 +110,7 @@ package com.rpgGame.app.cmdlistener
 		{
 			var roleData : HeroData = MainRoleManager.actorInfo;
 			roleData.spellList.addSkillData(msg.skillInfo);
-			UIPopManager.showPopUI(SkillAddPop,msg.skillInfo);
+			UIPopManager.showAlonePopUI(SkillAddPop,msg.skillInfo);
 			EventManager.dispatchEvent(SpellEvent.SPELL_ADD);
 		}
 		

@@ -261,7 +261,7 @@ package org.mokylin.skin.mainui.shortcut
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/mainui/shortcut/dikuang.png";
 			temp.x = 0;
 			temp.y = 35;

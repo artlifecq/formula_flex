@@ -40,11 +40,12 @@ package com.game.engine3D.display
 		 * @scale 缩放比，美术人员一般输出都比较大，这里需要缩小
 		 *
 		 */
-		public function playInter3DAt(url : String, x : int, y : int, repeat : int = 1, onPlayComplete : Function = null) : InterObject3D
+		public function playInter3DAt(url : String, x : int, y : int, repeat : int = 1, onPlayComplete : Function = null,addComplete:Function=null) : InterObject3D
 		{
 			var sr3D : InterObject3D = new InterObject3D();
 			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", url);
-			sr3D.addRenderUnitWith(data, repeat, onPlayComplete);
+			data.forceLoad=true;//ui上的3d特效强制加载
+			sr3D.addRenderUnitWith(data, repeat, onPlayComplete,addComplete);
 
 			sr3D.x = x;
 			sr3D.y = y;

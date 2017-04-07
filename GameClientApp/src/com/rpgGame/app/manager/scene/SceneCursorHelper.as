@@ -61,7 +61,7 @@ package com.rpgGame.app.manager.scene
 				var rud : RenderParamData3D = new RenderParamData3D(0, SceneCharType.MOUSE_CLICK_EFFECT, _mouseClickEffectUrl);
 				_mouseClickEffect = RenderUnit3D.create(rud);
 				_mouseClickEffect.depthCompareMode = Context3DCompareMode.ALWAYS;
-				_mouseClickEffect.repeat = 0;
+				_mouseClickEffect.repeat = 1;
 				_mouseClickEffect.play(0);
 //				_mouseClickEffect.setScale(1);
 				_mouseClickEffect.canRemoved = false;

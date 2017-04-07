@@ -18,29 +18,50 @@ package com.rpgGame.app.manager.pop
 		private static var isShowing:Boolean;
 
 		private static var currSkin:PopSkinUI;
-		private static var aloneShowMap:HashMap=new HashMap();
+		private static var soleShowMap:HashMap=new HashMap();
 		
 		public function UIPopManager()
 		{
 		}
 		
 		/**
-		 *显示独立的弹窗UI 
+		 *独立弹窗 
+		 * @param cls
+		 * @param data
+		 * @param force
 		 * 
 		 */
 		public static function showAlonePopUI(cls:Class,data:*=null,force:Boolean=false):void
 		{
 			var newUI:PopSkinUI=new cls(data);
 			var clsName:String=getQualifiedClassName(newUI);
-			var showUI:PopSkinUI=aloneShowMap.getValue(clsName);
-			if(showUI){
-				StarlingLayerManager.topUILayer.removeChild(showUI);
-			}
-			aloneShowMap.add(clsName,newUI);
 			StarlingLayerManager.topUILayer.addChild(newUI);
 		}
 		
-		public static function showPopUI(cls:Class,data:*=null,force:Boolean=false):void
+		/**
+		 *显示唯一的弹窗UI 
+		 * 移除之前一样的
+		 */
+		public static function showSolePopUI(cls:Class,data:*=null,force:Boolean=false):void
+		{
+			var newUI:PopSkinUI=new cls(data);
+			var clsName:String=getQualifiedClassName(newUI);
+			var showUI:PopSkinUI=soleShowMap.getValue(clsName);
+			if(showUI){
+				StarlingLayerManager.topUILayer.removeChild(showUI);
+			}
+			soleShowMap.add(clsName,newUI);
+			StarlingLayerManager.topUILayer.addChild(newUI);
+		}
+		
+		/**
+		 *屏幕中央顺序弹窗 
+		 * @param cls
+		 * @param data
+		 * @param force
+		 * 
+		 */
+		public static function showCenterPopUI(cls:Class,data:*=null,force:Boolean=false):void
 		{
 			var ui:PopSkinUI=new cls(data);
 			if(force){
