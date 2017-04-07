@@ -26,10 +26,17 @@ package org.mokylin.skin.app.maps
 		{
 			super();
 			
-			this.currentState = "down";
+			this.currentState = "up";
 			this.elementsContent = [];
 			
 			states = {
+				up:[
+						{target:"labelDisplay",
+							name:"bottom",
+							value:0
+						}
+					]
+				,
 				init:[
 						{target:"labelDisplay",
 							name:"textAlign",
@@ -47,7 +54,7 @@ package org.mokylin.skin.app.maps
 						}
 					]
 			};
-			skinNames={"down":"ui/common/hover/xuanqukuang2.png", "hover":"ui/common/hover/xuanqukuang2.png", "up":"ui/common/hover/xuanqukuang2.png"};
+			skinNames={"down":"ui/common/hover/xuanqukuang2.png", "hover":"ui/common/hover/xuanqukuang2.png", "up":"ui/common/hover/xuanqukuang2_alpha.png"};
 		}
 
 

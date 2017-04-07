@@ -18,18 +18,38 @@ package com.rpgGame.coreData.cfg
 			
 		}
 		/**根据消息ID获取消息*/
-		public static function getNotifyByID(id : uint,values:Vector.<String>) : Q_notify 
+		public static function getNotifyByID(id : uint,values:Vector.<String>=null) : Q_notify 
 		{
 			var noti:Q_notify=_dataDic[id];
-			if(noti!=null)
+			if(noti!=null&&values!=null)
 			{
 				var content:String=noti.q_content;
 				content=substitute(content,values);
 				noti.q_content=content;
+				
 			}
 			
 			return noti;
 		}
+		
+		/**根据消息ID获取消息的文字*/
+		public static function getNotifyTextByID(id : uint,values:Vector.<String>=null) :String 
+		{
+			var noti:Q_notify=_dataDic[id];
+			if(noti!=null)
+			{
+				if(values!=null)
+				{
+					var content:String=noti.q_content;
+					content=substitute(content,values);
+					noti.q_content=content;
+				}
+				return noti.q_content;
+			}
+			
+			return "";
+		}
+		
         /**字符串替换*/		
 		private static function substitute(string:String, value: Vector.<String>=null, start:String="{", end:String="}"):String  
 		{  

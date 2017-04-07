@@ -7,7 +7,7 @@ package org.mokylin.skin.app.maps
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.component.button.ButtonSkin_jia;
 	import org.mokylin.skin.component.button.ButtonSkin_jian;
-
+	
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -19,12 +19,12 @@ package org.mokylin.skin.app.maps
 		//                                定义成员变量
 		//==========================================================================
 		public var btn_jia:feathers.controls.Button;
-
+		
 		public var btn_jian:feathers.controls.Button;
-
+		
 		public var lbl_name:feathers.controls.Label;
-
-
+		
+		
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -39,8 +39,8 @@ package org.mokylin.skin.app.maps
 			};
 			skinNames={};
 		}
-
-
+		
+		
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -49,11 +49,11 @@ package org.mokylin.skin.app.maps
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.left = 0;
 			temp.right = 0;
-			temp.styleName = "ui/app/maps/tiao.png";
+			temp.styleName = "ui/common/titilebg/Item_bg.png";
 			temp.top = 0;
 			return temp;
 		}
-
+		
 		private function btn_jia_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -65,7 +65,7 @@ package org.mokylin.skin.app.maps
 			temp.y = 3;
 			return temp;
 		}
-
+		
 		private function btn_jian_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -76,7 +76,7 @@ package org.mokylin.skin.app.maps
 			temp.y = 3;
 			return temp;
 		}
-
+		
 		private function lbl_name_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -91,6 +91,6 @@ package org.mokylin.skin.app.maps
 			temp.y = 4;
 			return temp;
 		}
-
+		
 	}
 }

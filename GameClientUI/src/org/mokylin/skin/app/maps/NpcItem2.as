@@ -59,7 +59,9 @@ package org.mokylin.skin.app.maps
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_over = temp;
 			temp.name = "btn_over";
+			temp.height = 25;
 			temp.styleClass = org.mokylin.skin.app.maps.SelectBtn;
+			temp.width = 242;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
