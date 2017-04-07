@@ -14,7 +14,7 @@ package org.mokylin.skin.component.combobox
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ComboBox1_Skin extends feathers.controls.StateSkin
+	public class ComboBox2_Skin extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -29,7 +29,7 @@ package org.mokylin.skin.component.combobox
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ComboBox1_Skin()
+		public function ComboBox2_Skin()
 		{
 			super();
 			
@@ -95,7 +95,7 @@ package org.mokylin.skin.component.combobox
 			temp.left = 0;
 			temp.right = 0;
 			temp.styleClass = org.mokylin.skin.component.text.textInput1_Skin;
-			temp.color = 0x5CB006;
+			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.y = 0;
 			return temp;

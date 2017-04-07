@@ -123,6 +123,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.height = 422;
 			var skin:StateSkin = new org.mokylin.skin.app.wuxue.jineng.jineng_jinjie()
 			temp.skin = skin
+			temp.visible = false;
 			temp.width = 356;
 			temp.x = 569;
 			temp.y = 101;

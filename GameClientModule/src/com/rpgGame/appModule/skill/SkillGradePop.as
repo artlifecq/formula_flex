@@ -37,8 +37,8 @@ package com.rpgGame.appModule.skill
 		private function tweenMis():void
 		{
 			
-			var endy:int=this._skin.container.y-40;
-			TweenLite.to(this._skin.container,1,{y:endy,alpha:0,onComplete:popComplete,ease:Cubic.easeOut});		
+			var endy:int=this._skin.container.y-100;
+			TweenLite.to(this._skin.container,2,{y:endy,alpha:0,onComplete:popComplete,ease:Cubic.easeOut});		
 		}
 		
 		override protected function onStageResize(sw : int, sh : int) : void

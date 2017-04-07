@@ -178,11 +178,7 @@ package com.rpgGame.appModule.role
 			updateBaseInfo();
 			
 			if(isMainRole){
-				if(!ItemSender.isReqRole){//等待背包请求装备数据一起返回
-					EventManager.addEvent(ItemEvent.ITEM_INIT,initDatas);
-				}else{
-					updateRoleEquip();
-				}
+				updateRoleEquip();
 			}else{//获取玩家的装备列表
 				updateRoleEquip();
 			}
@@ -254,23 +250,10 @@ package com.rpgGame.appModule.role
 			{
 				NoticeManager.showNotify("有一个格子的数据出错了！！！");
 			}
-			var grid:DragDropItem = getGridByIndex(index);
+			var grid:DragDropItem = equipGrids[index];
 			if(!grid)return;
 			grid.gridInfo = gridInfo;
 			grid.setQualityImageIconPoint(6,6);
-		}
-		
-		/**
-		 * 获得指定索引可拖拽格子 
-		 * @param index
-		 * @return 
-		 * 
-		 */		
-		private function getGridByIndex(index:int):DragDropItem
-		{
-			var gridInfo:GridInfo = listDatas.getItemAt(index) as GridInfo;
-			var i:int = gridInfo.realIndex;
-			return ( i >= 0 && i < equipGrids.length ) ? equipGrids[i] : null;
 		}
 		
 		private function initEvent():void
@@ -370,15 +353,6 @@ package com.rpgGame.appModule.role
 		private function isAcceptDropFromContainer(containerId:int):Boolean
 		{
 			return  (acceptDropFromContainerIdArr && acceptDropFromContainerIdArr.indexOf(containerId) != -1);
-		}
-		
-		private function initDatas(containerId:int):void 
-		{
-			if(containerId!=ItemContainerID.Role){
-				return;
-			}
-			EventManager.removeEvent(ItemEvent.ITEM_INIT,initDatas);
-			updateRoleEquip();
 		}
 		
 		private function setGridsCount(count:int):void

@@ -26,7 +26,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_type_description:String;
 		 /**  进阶名效果名 */
 		public var q_grade_name:String;
-		 /**  技能升级属性对应字段(0伤害加深 1召唤物秒伤 2仇恨值 3血量上限比例) */
+		 /**  技能升级属性对应字段(0伤害加深 1召唤物百分比秒伤 2仇恨值 3血量上限比例 4秒伤值百分比+秒伤值 5伤害加深百分比+血量上限值 6血量上限百分比+血量值 ) */
 		public var q_skill_attr_type:int;
 		 /**  职业技能(1:兵家 2：墨家男3：墨家女 4：医家 0：不分职业-公共技能) */
 		public var q_job:int;

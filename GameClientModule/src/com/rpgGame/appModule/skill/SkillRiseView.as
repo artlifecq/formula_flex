@@ -71,7 +71,7 @@ package com.rpgGame.appModule.skill
 		
 		public function unlock():void
 		{
-			_panel.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINJIE_UNLOCK),612,152,1,playComplete,addEft);
+			_panel.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINJIE_UNLOCK),620,260,1,playComplete,addEft);
 			TweenMax.to(	skin.Icon_lock,0.5,{alpha:0,ease:Expo.easeOut,onComplete:playCompleteTween});
 		}
 		
@@ -168,11 +168,6 @@ package com.rpgGame.appModule.skill
 				skin.lb_jihuo.visible=false;
 				skin.lb_weijihuo.visible=!skin.lb_jihuo.visible;			
 				skin.lb_jihuo.x=skin.lb_weijihuo.x=skin.lb_name2.x+skin.lb_name2.textWidth+5;
-			}
-			
-			if(selectedInfo.skillChildLv==selectedCfg.q_max_level){
-				skin.eft_name.visible=false;
-				return;
 			}
 			
 			var myLv:int=MainRoleManager.actorInfo.totalStat.level;

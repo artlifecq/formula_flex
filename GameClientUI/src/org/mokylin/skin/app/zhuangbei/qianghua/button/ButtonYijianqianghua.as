@@ -1,6 +1,5 @@
-package org.mokylin.skin.component.button
+package org.mokylin.skin.app.zhuangbei.qianghua.button
 {
-	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -10,7 +9,7 @@ package org.mokylin.skin.component.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonSkin_putong2 extends feathers.controls.StateSkin
+	public class ButtonYijianqianghua extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -23,7 +22,7 @@ package org.mokylin.skin.component.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonSkin_putong2()
+		public function ButtonYijianqianghua()
 		{
 			super();
 			
@@ -39,12 +38,7 @@ package org.mokylin.skin.component.button
 						,
 						{target:"labelDisplay",
 							name:"color",
-							value:0xe1d4a9
-						}
-						,
-						{target:"labelDisplay",
-							name:"nativeFilters",
-							value:Fontter.filterObj["labelFilterBlack3"]
+							value:0xFFFFFF
 						}
 						,
 						{target:"labelDisplay",
@@ -53,15 +47,7 @@ package org.mokylin.skin.component.button
 						}
 					]
 			};
-			skinNames={"disabled":"ui/component/button/skin_putong2/disabled.png",
-			"down":"ui/component/button/skin_putong2/down.png",
-			"hover":"ui/common/gezikuang/kuang_hong/36.png",
-			"up":"ui/component/button/skin_putong2/up.png"};
-		}
-		
-		override public function onState(state:String):void
-		{
-			super.onState(state);
+			skinNames={"down":"ui/app/zhuangbei/qianghua/button/yijianqianghua/down.png", "hover":"ui/app/zhuangbei/qianghua/button/yijianqianghua/over.png", "up":"ui/app/zhuangbei/qianghua/button/yijianqianghua/up.png"};
 		}
 
 
@@ -84,13 +70,11 @@ package org.mokylin.skin.component.button
 			temp.bottom = 0;
 			temp.left = 0;
 			temp.right = 0;
-			temp.text = "按钮";
+			temp.text = "";
 			temp.textAlign = "center";
-			temp.color = 0xe1d4a9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack3"];
+			temp.color = 0xFFFFFF;
 			temp.top = 0;
 			temp.verticalAlign = "middle";
-			temp.verticalCenter = -2;
 			return temp;
 		}
 

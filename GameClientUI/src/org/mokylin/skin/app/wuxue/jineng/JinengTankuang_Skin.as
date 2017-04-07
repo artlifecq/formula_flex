@@ -30,6 +30,18 @@ package org.mokylin.skin.app.wuxue.jineng
 
 		public var chk_ok:feathers.controls.Check;
 
+		public var icon1:feathers.controls.UIAsset;
+
+		public var icon2:feathers.controls.UIAsset;
+
+		public var icon3:feathers.controls.UIAsset;
+
+		public var lb1:feathers.controls.Label;
+
+		public var lb2:feathers.controls.Label;
+
+		public var lb3:feathers.controls.Label;
+
 		public var lbl_title:feathers.controls.Label;
 
 
@@ -43,7 +55,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			this.currentState = "normal";
 			this.height = 250;
 			this.width = 337;
-			this.elementsContent = [bg_i(),__JinengTankuang_Skin_UIAsset1_i(),lbl_title_i(),btnClose_i(),btn_ok_i(),btn_cancel_i(),__JinengTankuang_Skin_Label1_i(),__JinengTankuang_Skin_Label2_i(),chk_ok_i()];
+			this.elementsContent = [bg_i(),__JinengTankuang_Skin_UIAsset1_i(),lbl_title_i(),btnClose_i(),btn_ok_i(),btn_cancel_i(),__JinengTankuang_Skin_Label1_i(),__JinengTankuang_Skin_Label2_i(),chk_ok_i(),icon1_i(),lb1_i(),icon2_i(),lb2_i(),icon3_i(),lb3_i()];
 			
 			states = {
 			};
@@ -60,7 +72,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.text = "是否一键升级到技能可升级的最高等级";
 			temp.color = 0xcfc6ae;
 			temp.x = 52;
-			temp.y = 74;
+			temp.y = 53;
 			return temp;
 		}
 
@@ -69,8 +81,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "本次登录不再提示";
 			temp.color = 0x6bcc08;
-			temp.x = 123;
-			temp.y = 123;
+			temp.x = 126;
+			temp.y = 153;
 			return temp;
 		}
 
@@ -143,8 +155,83 @@ package org.mokylin.skin.app.wuxue.jineng
 			chk_ok = temp;
 			temp.name = "chk_ok";
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
-			temp.x = 97;
-			temp.y = 121;
+			temp.x = 100;
+			temp.y = 151;
+			return temp;
+		}
+
+		private function icon1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icon1 = temp;
+			temp.name = "icon1";
+			temp.styleName = "ui/common/tubiao/tu_up.png";
+			temp.x = 72;
+			temp.y = 80;
+			return temp;
+		}
+
+		private function icon2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icon2 = temp;
+			temp.name = "icon2";
+			temp.styleName = "ui/common/tubiao/tu_up.png";
+			temp.x = 72;
+			temp.y = 104;
+			return temp;
+		}
+
+		private function icon3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icon3 = temp;
+			temp.name = "icon3";
+			temp.styleName = "ui/common/tubiao/tu_up.png";
+			temp.x = 72;
+			temp.y = 129;
+			return temp;
+		}
+
+		private function lb1_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb1 = temp;
+			temp.name = "lb1";
+			temp.htmlText = "技能可升至<font color='#5DBD37'>31</font>级";
+			temp.letterSpacing = 1;
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 82;
+			temp.y = 77;
+			return temp;
+		}
+
+		private function lb2_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb2 = temp;
+			temp.name = "lb2";
+			temp.htmlText = "<font color='#5DBD37'>10</font>点物理伤害";
+			temp.letterSpacing = 1;
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 82;
+			temp.y = 101;
+			return temp;
+		}
+
+		private function lb3_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb3 = temp;
+			temp.name = "lb3";
+			temp.htmlText = "<font color='#5DBD37'>3%</font>六连击总计造成的秒伤伤害";
+			temp.letterSpacing = 1;
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 82;
+			temp.y = 126;
 			return temp;
 		}
 

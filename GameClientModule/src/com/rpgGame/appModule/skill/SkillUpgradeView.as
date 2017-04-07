@@ -37,6 +37,7 @@ package com.rpgGame.appModule.skill
 		
 		private var alertPanel:SkillAlertPanel;
 		private var _panel:SkinUIPanel;
+		private var _selectedInfo:SkillInfo;
 		
 		public function SkillUpgradeView(_skin:jineng_shengji,panel:SkinUIPanel)
 		{
@@ -56,6 +57,7 @@ package com.rpgGame.appModule.skill
 			GrayFilter.unGray(skin.btn_shengji);
 			skin.btn_shengji.touchable=true;
 			cfg=selectedCfg;
+			_selectedInfo=selectedInfo;
 			
 			skin.lb_name.text=selectedCfg.q_skillName;
 			skin.lb_dengji.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT1),selectedInfo.skillChildLv+"/"+selectedCfg.q_max_level);
@@ -74,8 +76,8 @@ package com.rpgGame.appModule.skill
 				skin.eft_name.visible=false;
 				skin.arrow1.visible=false;
 				skin.arrow2.visible=false;
-				skin.lb_shengji.visible=false;
-				skin.lb_shanghai.visible=false;
+				skin.eft1.visible=false;
+				skin.eft2.visible=false;
 				skin.tj_name.visible=false;
 				skin.btn_shengji.visible=false;
 				skin.lb_renwudengji.visible=false;
@@ -88,8 +90,8 @@ package com.rpgGame.appModule.skill
 			skin.eft_name.visible=true;
 			skin.arrow1.visible=true;
 			skin.arrow2.visible=true;
-			skin.lb_shengji.visible=true;
-			skin.lb_shanghai.visible=true;
+			skin.eft1.visible=true;
+			skin.eft2.visible=true;
 			skin.tj_name.visible=true;
 			skin.btn_shengji.visible=true;
 			skin.lb_renwudengji.visible=true;
@@ -110,22 +112,43 @@ package com.rpgGame.appModule.skill
 			var key:String=id+"_"+lv;
 			var playerLv:int=0;
 			lvData=SkillLvLDataManager.getData(key);//这儿又是技能id和等级
-			var changeValue:int=0;
-			var preValue:int=SkillLvLDataManager.getAttrValueByType(selectedCfg.q_skill_attr_type,lvData);
-			var nextValue:int;
+			
+			var i:int=0
+			var changeValue:Array=[];
+			var preValue:Array=SkillLvLDataManager.getAttrValueByType(selectedCfg.q_skill_attr_type,lvData);
+			var nextValue:Array;
 			var changeDes:String=LanguageConfig.getText( LangSpell["SPELL_"+id] );
+			var desList:Array=changeDes.split("|");
+			var num:int=desList.length;
+			for(i=0;i<num;i++){
+				changeValue.push(0);
+			}
 			if(lvData){
-				needMp+=lvData.q_energy;
+			/*	needMp+=lvData.q_energy;
 				needMy+=lvData.q_copper;
-				playerLv=lvData.q_playerlevel;
-				while(lv<selectedCfg.q_max_level){
+				playerLv=lvData.q_playerlevel;*/
+				var endLv:int=lv+1;
+				if(SpellDataManager.oneKeyup){//一键升级设置了
+					endLv=selectedCfg.q_max_level;
+				}
+				while(lv<endLv){//计算下一级的情况
 					lv++;
 					upNum++;
 					key=id+"_"+lv;
-					
+					if(lvData){
+						needMp+=lvData.q_energy;
+						needMy+=lvData.q_copper;
+						if(lvData.q_playerlevel!=0){
+							playerLv=lvData.q_playerlevel;
+						}
+					}else{
+						break;
+					}
 					lvData=SkillLvLDataManager.getData(key);
 					nextValue=SkillLvLDataManager.getAttrValueByType(selectedCfg.q_skill_attr_type,lvData);
-					changeValue+=nextValue-preValue;
+					for(i=0;i<nextValue.length;i++){
+						changeValue[i]+=nextValue[i]-preValue[i];
+					}
 					preValue=nextValue;
 					if(lvData){
 						if(needMp+lvData.q_energy>myMp){
@@ -137,38 +160,30 @@ package com.rpgGame.appModule.skill
 						if(lvData.q_playerlevel>myLv){
 							break;
 						}
-						needMp+=lvData.q_energy;
-						needMy+=lvData.q_copper;
-						if(lvData.q_playerlevel!=0){
-							playerLv=lvData.q_playerlevel;
-						}
-					}else{
-						break;
 					}
 				}
 			}
 			
-			
-			if(upNum==1){
-				skin.eft_name.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT9);
-			}else{
-				skin.eft_name.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT11);
+			var w:int;
+			var xx:int
+			for(i=0;i<num;i++){
+				skin["eft"+(i+1)].visible=true;
+				skin["arrow"+(i+1)].visible=true;
+				var changeValueH:String=SkillLvLDataManager.getPercentValue(selectedCfg.q_skill_attr_type,changeValue[i],i);
+				skin["eft"+(i+1)].htmlText=desList[i].replace("$",changeValueH);
+			}
+			if(num==1){
+				skin.eft2.visible=false;
+				skin.arrow2.visible=false;
 			}
 			
-			var des:String=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT14);
-			des=des.replace("$",HtmlTextUtil.getTextColor(0x25931b,String(selectedInfo.skillChildLv+upNum-1)));
-			skin.lb_shengji.htmlText=des;
-			var changeValueH:String=HtmlTextUtil.getTextColor(0x25931b,SkillLvLDataManager.getPercentValue(selectedCfg.q_skill_attr_type,changeValue)+(selectedCfg.q_skill_attr_type!=2?"%":""));
-			changeDes=changeDes.replace("$",changeValueH);
-			skin.lb_shanghai.htmlText=changeDes;
-			
-			skin.arrow1.x=16;
-			skin.lb_shengji.x=skin.arrow1.x+skin.arrow1.width;
-			skin.lb_shanghai.x=362-skin.lb_shanghai.textWidth-10;
-			skin.arrow2.x=skin.lb_shanghai.x-skin.arrow2.width;
+			w=skin.eft1.textWidth+8;
+			w=w>skin.eft2.textWidth+8?w:skin.eft2.textWidth+8;
+			xx=(360-w)>>1;
+			skin.arrow1.x=skin.arrow2.x=xx;
+			skin.eft1.x=skin.eft2.x=xx+8;
 			
 			//升级条件
-			var w:int;
 			var playerStr:String=playerLv+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21);
 			if(playerLv>myLv){
 				GrayFilter.gray(skin.btn_shengji);
@@ -185,7 +200,7 @@ package com.rpgGame.appModule.skill
 			w=w>skin.lb_zhenqi.textWidth?w:skin.lb_zhenqi.textWidth;
 			w=w>skin.lb_yinliang.textWidth?w:skin.lb_yinliang.textWidth;
 			
-			var xx:int=(330-w)/2;
+			xx=(360-w)>>1;
 			skin.lb_renwudengji.x=xx;
 			skin.lb_zhenqi.x=xx;
 			skin.lb_yinliang.x=xx;
@@ -235,7 +250,7 @@ package com.rpgGame.appModule.skill
 								SpellSender.reqSkillLevelUp(cfg.q_skillID,0,0);
 							}
 						}else{
-							alertPanel.show(cfg,"",_panel);
+							alertPanel.show({cfg:cfg,info:_selectedInfo},"",_panel);
 							alertPanel.x=290;
 							alertPanel.y=160;
 						}

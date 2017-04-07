@@ -4,7 +4,7 @@ package org.mokylin.skin.component.text
 	import feathers.controls.text.TextFieldTextEditor;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	
+
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -16,10 +16,10 @@ package org.mokylin.skin.component.text
 		//                                定义成员变量
 		//==========================================================================
 		public var bg:feathers.controls.UIAsset;
-		
+
 		public var textDisplay:feathers.controls.text.TextFieldTextEditor;
-		
-		
+
+
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -35,10 +35,10 @@ package org.mokylin.skin.component.text
 			
 			states = {
 			};
-			skinNames={"disabled":"ui/common/background/xiaobiaotibeijing.png", "enabled":"ui/common/background/xiaobiaotibeijing.png", "focused":"ui/common/background/xiaobiaotibeijing.png"};
+			skinNames={"disabled":"ui/component/text/input_bg.png", "enabled":"ui/component/text/input_bg.png", "focused":"ui/component/text/input_bg.png"};
 		}
-		
-		
+
+
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -49,11 +49,11 @@ package org.mokylin.skin.component.text
 			temp.name = "bg";
 			temp.left = 0;
 			temp.right = 0;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
+			temp.styleName = "ui/component/text/input_bg.png";
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function textDisplay_i():feathers.controls.text.TextFieldTextEditor
 		{
 			var temp:feathers.controls.text.TextFieldTextEditor = new feathers.controls.text.TextFieldTextEditor();
@@ -69,6 +69,6 @@ package org.mokylin.skin.component.text
 			temp.y = 4;
 			return temp;
 		}
-		
+
 	}
 }
