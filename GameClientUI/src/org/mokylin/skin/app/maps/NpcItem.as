@@ -1,9 +1,11 @@
 package org.mokylin.skin.app.maps
 {
 	import feathers.controls.text.Fontter;
+	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.app.maps.SelectBtn;
 
 	/**
 	 * @private
@@ -12,6 +14,11 @@ package org.mokylin.skin.app.maps
 	 */
 	public class NpcItem extends feathers.controls.StateSkin
 	{
+		//==========================================================================
+		//                                定义成员变量
+		//==========================================================================
+		public var btn_over:feathers.controls.Button;
+
 		public var lbl_name:feathers.controls.Label;
 
 
@@ -25,7 +32,7 @@ package org.mokylin.skin.app.maps
 			this.currentState = "normal";
 			this.height = 24;
 			this.width = 242;
-			this.elementsContent = [__NpcItem_UIAsset1_i(),lbl_name_i()];
+			this.elementsContent = [__NpcItem_UIAsset1_i(),lbl_name_i(),btn_over_i()];
 			
 			states = {
 			};
@@ -44,6 +51,19 @@ package org.mokylin.skin.app.maps
 			temp.right = 0;
 			temp.styleName = "ui/app/maps/ItemBg.png";
 			temp.top = 0;
+			return temp;
+		}
+
+		private function btn_over_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_over = temp;
+			temp.name = "btn_over";
+			temp.height = 25;
+			temp.styleClass = org.mokylin.skin.app.maps.SelectBtn;
+			temp.width = 242;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 

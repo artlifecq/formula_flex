@@ -74,7 +74,16 @@ package com.game.engine3D.display
 				stop();
 			}
 		}
-
+		public function gotoAndStop(time : int = -1) : void
+		{
+			if (_unit != null && RenderUnit3D(_unit).repeat <= 1)
+			{
+				
+				RenderUnit3D(_unit).stop(time);
+				_unit.startRender();
+			}
+			
+		}
 		public function get baseObj3D() : BaseObj3D
 		{
 			return this._unit;

@@ -287,7 +287,7 @@ package com.rpgGame.appModule.maps
 				{
 					skin= new NpcItem();
 					skin.lbl_name.htmlText=data[i].name;
-					skin.lbl_name.name="ROLE_"+data[i].type+"_"+i;
+					skin.btn_over.name="ROLE_"+data[i].type+"_"+i;
 					temp.skin = skin;
 				}
 				else

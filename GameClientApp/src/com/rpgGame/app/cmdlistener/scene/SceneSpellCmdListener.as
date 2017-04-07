@@ -18,6 +18,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
@@ -93,7 +94,8 @@ package com.rpgGame.app.cmdlistener.scene
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
 			var failID : int = msg.failType;
 			var failReason : String;
-			failReason = LangQ_NoticeInfo["SkillError_"+failID];
+			failReason=NotifyCfgData.getNotifyTextByID(failID);//yt修改，读取新的消息表格式
+			//failReason = LangQ_NoticeInfo["SkillError_"+failID];
 			if(!failReason)
 			{
 				failReason="未配置的技能错误码!----failID";
