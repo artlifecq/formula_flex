@@ -55,13 +55,8 @@ package org.mokylin.skin.component.button
 			};
 			skinNames={"disabled":"ui/component/button/skin_putong2/disabled.png",
 			"down":"ui/component/button/skin_putong2/down.png",
-			"hover":"ui/common/gezikuang/kuang_hong/36.png",
+			"hover":"ui/component/button/skin_putong2/over.png",
 			"up":"ui/component/button/skin_putong2/up.png"};
-		}
-		
-		override public function onState(state:String):void
-		{
-			super.onState(state);
 		}
 
 
