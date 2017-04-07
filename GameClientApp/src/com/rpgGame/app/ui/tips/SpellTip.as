@@ -140,10 +140,10 @@ package com.rpgGame.app.ui.tips
 			
 			mainIco.setIconResName(ClientConfig.getSkillIcon(cfg.q_skillID.toString(),64));
 			riseIco.setIconResName(ClientConfig.getRiseSkillIcon(cfg.q_skillID.toString(),48));
-			
-			_spellTip.bg.height=_spellTip.grp_rise_content.y+_spellTip.rise_name.textHeight+_spellTip.rise_des.textHeight+40+_spellTip.eft_name.textHeight;
-			if(_spellTip.bg.height<330){
-				_spellTip.bg.height=330;
+			if(_spellTip.rise_name.textHeight+_spellTip.rise_name.textHeight<80){
+				_spellTip.bg.height=_spellTip.grp_rise_content.y+80;
+			}else{
+				_spellTip.bg.height=_spellTip.grp_rise_content.y+_spellTip.rise_name.textHeight+_spellTip.rise_des.textHeight+40+_spellTip.eft_name.textHeight;
 			}
 		}
 		

@@ -36,7 +36,7 @@ package org.mokylin.skin.component.text
 			
 			states = {
 			};
-			skinNames={"disabled":"ui/common/background/xiaobiaotibeijing.png", "enabled":"ui/common/background/xiaobiaotibeijing.png", "focused":"ui/common/background/xiaobiaotibeijing.png"};
+			skinNames={"disabled":"ui/component/text/input_bg.png", "enabled":"ui/component/text/input_bg.png", "focused":"ui/component/text/input_bg.png"};
 		}
 
 
@@ -50,7 +50,7 @@ package org.mokylin.skin.component.text
 			temp.name = "bg";
 			temp.left = 0;
 			temp.right = 0;
-			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
+			temp.styleName = "ui/component/text/input_bg.png";
 			temp.y = 0;
 			return temp;
 		}

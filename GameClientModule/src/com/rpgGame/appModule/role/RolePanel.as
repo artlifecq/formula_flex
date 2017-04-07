@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.role
 {
+	import com.rpgGame.app.manager.goods.ItemManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.coreData.role.HeroData;
@@ -47,10 +48,15 @@ package com.rpgGame.appModule.role
 		{
 			super.show(data, openTable, parentContiner);
 			_roleData=MainRoleManager.actorInfo;
-			packsView.show();
 			attConstrastView.onHide();
+			ItemManager.getBackEquip(initItem);
+		}
+		
+		private function initItem():void
+		{
+			packsView.show();
 			basicView.show(_roleData);
-			avatarView.show(_roleData);
+			avatarView.show(_roleData);			
 		}
 		
 		override protected function onTouch(e:TouchEvent):void
