@@ -1,8 +1,6 @@
 package com.rpgGame.app.ui.main.top
 {
-	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
-	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
@@ -15,8 +13,6 @@ package com.rpgGame.app.ui.main.top
 	
 	import flash.utils.clearTimeout;
 	import flash.utils.setTimeout;
-	
-	import app.message.BoolArrayProto;
 	
 	import gs.TweenLite;
 	

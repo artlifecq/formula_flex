@@ -1,7 +1,11 @@
 package com.rpgGame.app.ui.main.shortcut
 {
+	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
+	import com.game.mainCore.libCore._special.cd.CDFace;
 	import com.rpgGame.app.view.icon.DragDropGrid;
+	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.view.uiComponent.face.cd.MaskCDUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.EffectUrl;
@@ -26,7 +30,9 @@ package com.rpgGame.app.ui.main.shortcut
 		private var offsetY : int = 27;
 
 		private var timeLine:TimelineLite;
-
+		
+		private var effectSk:Inter3DContainer;
+		private var effect3D:InterObject3D;
 		public function ShortcutGrid(shortcutBar : ShortcutBar, size : int)
 		{
 			_shortcutBar = shortcutBar;
@@ -42,8 +48,31 @@ package com.rpgGame.app.ui.main.shortcut
 			imgAutoUse.y = 4;
 			imgAutoUse.styleName = ClientConfig.getSpellAutoIco();
 			setIsShowCdTm(true);
+			
+			effectSk=new Inter3DContainer();
+			effectSk.x = _iconSize/2+6;
+			effectSk.y = _iconSize/2+6;
+			effect3D=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_MJ),0,0,0);
+			effect3D.stop();
+			
 		}
-
+		
+		override  public function cdUpdate($now : Number, $cdTotal : Number) :void
+		{
+		
+			if (!_cdFace || !_cdFace.parent)
+			{
+				addCdFace();
+			}
+			if(_cdFace)
+			{
+				_cdFace.updateTimeTxt($now,$cdTotal);
+			}
+			//effect3D.stop();
+			//effect3D.start();
+			//1000-int(1000/$cdTotal*$now)
+			effect3D.gotoAndStop(int(1000/$cdTotal*$now));
+		}
 		override  protected function updateIconImagePosition( posx:Number=0, posy:Number=0 ):void
 		{
 			if(!_iconImage)
@@ -59,7 +88,12 @@ package com.rpgGame.app.ui.main.shortcut
 			}
 			timeLine = new TimelineLite();
 			timeLine.append(TweenMax.to(this,0.1,{y:this.y+2,ease:Bounce.easeOut}));
-			timeLine.append(TweenMax.to(this,0.1,{y:this.y,ease:Bounce.easeOut,onComplete:onComplete}));			
+			timeLine.append(TweenMax.to(this,0.1,{y:this.y,ease:Bounce.easeOut,onComplete:onComplete}));	
+			
+			
+			//effect3D.stop();
+			//effect3D.start();
+			
 		}
 		
 		private function onComplete():void
@@ -73,7 +107,9 @@ package com.rpgGame.app.ui.main.shortcut
 			if (isShow)
 			{
 				setChildIndex(imgAutoUse, parent.numChildren);
+				addChild(effectSk);
 			}
+			
 		}
 
 		public function showAutoEff(isShow : Boolean) : void

@@ -145,7 +145,6 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			// 陷阱状态改变
             SocketConnection.addCmdListener(101151, onRecvSCAttachStateChangeMessage);
-            SocketConnection.addCmdListener(101151, onRecvSCAttachStateChangeMessage);
 			
             SocketConnection.addCmdListener(103110, onResChangePKStateMessage);
 			
@@ -763,7 +762,6 @@ package com.rpgGame.app.cmdlistener.scene
 			if (!role)
 				return;
 			var roleData : RoleData = role.data as RoleData;
-			
 			CharAttributeManager.setAttributeValue(roleData,msg.attributeChange.type, msg.attributeChange.value,msg.showEffect);
 			
 			if(msg.attributeChange.type==CharAttributeType.LV){//升级了

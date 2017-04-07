@@ -1,38 +1,38 @@
-package org.mokylin.skin.app.maps
+package org.mokylin.skin.app.zhanhun
 {
 	import feathers.controls.text.Fontter;
-	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.app.maps.SelectBtn;
 
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class NpcItem extends feathers.controls.StateSkin
+	public class Shuxing_Skin extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var btn_over:feathers.controls.Button;
+		public var arrow_up:feathers.controls.UIAsset;
 
-		public var lbl_name:feathers.controls.Label;
+		public var lb_Num:feathers.controls.Label;
+
+		public var lb_name:feathers.controls.Label;
 
 
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function NpcItem()
+		public function Shuxing_Skin()
 		{
 			super();
 			
 			this.currentState = "normal";
-			this.height = 24;
-			this.width = 242;
-			this.elementsContent = [__NpcItem_UIAsset1_i(),lbl_name_i(),btn_over_i()];
+			this.height = 20;
+			this.width = 111;
+			this.elementsContent = [lb_name_i(),arrow_up_i(),lb_Num_i()];
 			
 			states = {
 			};
@@ -43,41 +43,41 @@ package org.mokylin.skin.app.maps
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __NpcItem_UIAsset1_i():feathers.controls.UIAsset
+		private function arrow_up_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.bottom = 0;
-			temp.left = 0;
-			temp.right = 0;
-			temp.styleName = "ui/app/maps/ItemBg.png";
-			temp.top = 0;
+			arrow_up = temp;
+			temp.name = "arrow_up";
+			temp.styleName = "ui/common/tubiao/tu_up.png";
+			temp.x = 82;
+			temp.y = 4;
 			return temp;
 		}
 
-		private function btn_over_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_over = temp;
-			temp.name = "btn_over";
-			temp.height = 25;
-			temp.styleClass = org.mokylin.skin.app.maps.SelectBtn;
-			temp.width = 242;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function lbl_name_i():feathers.controls.Label
+		private function lb_Num_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbl_name = temp;
-			temp.name = "lbl_name";
-			temp.text = "标签";
-			temp.color = 0xCFC6AE;
+			lb_Num = temp;
+			temp.name = "lb_Num";
+			temp.text = "20";
+			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 236;
-			temp.x = 3;
-			temp.y = 3;
+			temp.x = 92;
+			temp.y = 2;
+			return temp;
+		}
+
+		private function lb_name_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_name = temp;
+			temp.name = "lb_name";
+			temp.htmlText = "攻击：<font color='#CFC6AE'>9999</font>";
+			temp.color = 0x8B8D7B;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 81;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
