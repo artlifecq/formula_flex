@@ -146,7 +146,7 @@ package com.rpgGame.app.cmdlistener.scene
 				if (role && role.usable)
 				{
 //					CharAttributeManager.setCharHp(role.data as RoleData, hurtResult.curLife);
-					CharAttributeManager.setCharMp(role.data as RoleData, hurtResult.curMana);
+//					CharAttributeManager.setCharMp(role.data as RoleData, hurtResult.curMana);
 				}
 			}
 		}

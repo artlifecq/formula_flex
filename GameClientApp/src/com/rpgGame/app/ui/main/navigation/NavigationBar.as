@@ -41,6 +41,7 @@ package com.rpgGame.app.ui.main.navigation {
 			
 			if (!ClientConfig.isBanShu)
 			{
+				TipTargetManager.show(_skin.btn_zhanhun, TargetTipsMaker.makeSimpleTextTips("战魂<br/>快捷键：C"));
 				TipTargetManager.show(_skin.btn_juese, TargetTipsMaker.makeSimpleTextTips("角色<br/>快捷键：C"));
 				TipTargetManager.show(_skin.btn_beibao, TargetTipsMaker.makeSimpleTextTips("背包<br/>快捷键：B"));
 				TipTargetManager.show(_skin.btn_zuoqi, TargetTipsMaker.makeSimpleTextTips("坐骑<br/>快捷键：V"));
@@ -99,6 +100,9 @@ package com.rpgGame.app.ui.main.navigation {
                 case this._skin.btn_wuxue:
                     AppManager.showApp(AppConstant.SKILL_PANL);
                     break;
+				case this._skin.btn_zhanhun:
+					AppManager.showApp(AppConstant.Battle_PANL);
+					break;
             }
         }
         

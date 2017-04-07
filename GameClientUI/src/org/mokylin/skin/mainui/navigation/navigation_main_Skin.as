@@ -40,6 +40,8 @@ package org.mokylin.skin.mainui.navigation
 
 		public var btn_wuxue:feathers.controls.Button;
 
+		public var btn_zhanhun:feathers.controls.Button;
+
 		public var btn_zhuangbei:feathers.controls.Button;
 
 		public var btn_zuoqi:feathers.controls.Button;
@@ -60,7 +62,7 @@ package org.mokylin.skin.mainui.navigation
 			
 			this.currentState = "normal";
 			this.height = 70;
-			this.width = 351;
+			this.width = 390;
 			this.elementsContent = [btn_close_i(),btn_open_i(),btns_i()];
 			
 			states = {
@@ -100,7 +102,7 @@ package org.mokylin.skin.mainui.navigation
 			btn_close = temp;
 			temp.name = "btn_close";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shouhui;
-			temp.x = 332;
+			temp.x = 371;
 			temp.y = 25;
 			return temp;
 		}
@@ -122,7 +124,7 @@ package org.mokylin.skin.mainui.navigation
 			btn_open = temp;
 			temp.name = "btn_open";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zhankai;
-			temp.x = 332;
+			temp.x = 371;
 			temp.y = 25;
 			return temp;
 		}
@@ -146,6 +148,19 @@ package org.mokylin.skin.mainui.navigation
 			temp.styleClass = org.mokylin.skin.mainui.navigation.button.ButtonSkin_wuxue;
 			temp.x = 178;
 			temp.y = 17;
+			return temp;
+		}
+
+		private function btn_zhanhun_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_zhanhun = temp;
+			temp.name = "btn_zhanhun";
+			temp.height = 22;
+			temp.label = "战魂";
+			temp.width = 50;
+			temp.x = -70;
+			temp.y = 33;
 			return temp;
 		}
 
@@ -178,9 +193,9 @@ package org.mokylin.skin.mainui.navigation
 			temp.name = "btns";
 			temp.height = 70;
 			temp.width = 332;
-			temp.x = 0;
+			temp.x = 39;
 			temp.y = 0;
-			temp.elementsContent = [btn_juese_i(),btn_beibao_i(),btn_zuoqi_i(),btn_zhuangbei_i(),btn_wuxue_i(),btn_banghui_i(),btn_shangcheng_i(),qi_bg_i(),qi_mc_i()];
+			temp.elementsContent = [btn_zhanhun_i(),btn_juese_i(),btn_beibao_i(),btn_zuoqi_i(),btn_zhuangbei_i(),btn_wuxue_i(),btn_banghui_i(),btn_shangcheng_i(),qi_bg_i(),qi_mc_i()];
 			return temp;
 		}
 
