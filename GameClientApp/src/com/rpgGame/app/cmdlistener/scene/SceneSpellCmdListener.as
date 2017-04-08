@@ -12,7 +12,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -25,14 +24,15 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.role.RoleData;
-	import com.rpgGame.coreData.type.EnumHurtType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.netData.fight.message.ResAttackRangeMessage;
 	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
 	import com.rpgGame.netData.fight.message.ResAttackVentToClientMessage;
 	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
 	import com.rpgGame.netData.fight.message.ResFightFailedBroadcastMessage;
-	import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
+	import com.rpgGame.netData.fight.message.SCBuffSkillMessage;
+	import com.rpgGame.netData.fight.message.SCCancelSkillMessage;
+	import com.rpgGame.netData.structs.Position;
 	
 	import flash.geom.Point;
 	
@@ -62,6 +62,8 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(102107,onResAttackVentToClientMessage);
 //			SocketConnection.addCmdListener(102114,onSCAttackerResultMessage);
 			SocketConnection.addCmdListener(102103,onResAttackRangeMessage);
+			SocketConnection.addCmdListener(102115,onCanelSkillMessage);
+            SocketConnection.addCmdListener(102116,onBuffSkillMessage);
 //			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_YOUR_SPELL_RELEASED, onYouSpellRelease);
 			//
 			finish();
@@ -195,6 +197,41 @@ package com.rpgGame.app.cmdlistener.scene
 				attackAreas.push( _measureShapeArea3D );
 			}
 		}
+        
+        private function onCanelSkillMessage(msg : SCCancelSkillMessage) : void {
+            var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
+            if (null == role) {
+                return;
+            }
+        }
+        
+        private function onBuffSkillMessage(msg : SCBuffSkillMessage) : void {
+            var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
+            if (null == role || !role.usable) {
+                return;
+            }
+            if (msg.targets.length < 1) {
+                return;
+            }
+            var skillInfo : Q_skill_model = SpellDataManager.getSpellDataWithID(msg.skillId);
+            if (null == skillInfo) {
+                return;
+            }
+            var info : ReleaseSpellInfo = new ReleaseSpellInfo();
+            info.spellData = skillInfo;
+            info.atkor = role;
+            info.flyTargetPosList = new Vector.<Position>();
+            info.flyTargets = new Vector.<SceneRole>();
+            for (var i : int = 0, len : int = msg.targets.length; i < len; ++i) {
+                var targetRole : SceneRole = SceneManager.getSceneObjByID(msg.targets[i].ToGID()) as SceneRole;
+                if (null == targetRole || !targetRole.usable) {
+                    continue;
+                }
+                info.flyTargets.push(targetRole);
+            }
+            info.readSpellEffectData(info.spellData.q_spell_effect);
+            SpellAnimationHelper.addFlyEffect(info);
+        }
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////

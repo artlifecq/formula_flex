@@ -260,10 +260,10 @@ package com.rpgGame.app.fight.spell
 		 * 
 		 */		
 		public static function addTargetEffect(target : SceneRole, renderId : int, renderType : String, effectRes : String, bindBone : String = null, 
-											   repeat : int = 1, offset : Vector3D = null, needInView : Boolean = true, sizeScale : Number = 1) : void
+											   repeat : int = 1, offset : Vector3D = null, needInView : Boolean = true, sizeScale : Number = 1) : RenderUnit3D
 		{
 			if (target == null || !target.usable || (needInView && !target.isInViewDistance))
-				return;
+				return null;
 			if (effectRes)
 			{
 				if (!offset)
@@ -284,7 +284,9 @@ package com.rpgGame.app.fight.spell
 				effectRu.rotationY = 0;
 				effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, target.avatar);
 				effectRu.play(1);
+                return effectRu;
 			}
+            return null;
 		}
 		
 		/**
@@ -722,7 +724,7 @@ package com.rpgGame.app.fight.spell
 				renderSetAnimator = new CommonTrajectoryAnimator(
                     info, 
                     targetPosition, 
-                    info.targetRole, 
+                    targetRole, 
                     info.flyTm, 
                     info.flySpeed, 
                     info.isTrackTarget, 
