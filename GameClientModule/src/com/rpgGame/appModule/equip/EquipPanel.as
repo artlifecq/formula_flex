@@ -46,7 +46,7 @@ package com.rpgGame.appModule.equip
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			intensifyUI.refresh();
+			intensifyUI.show();
 		}
 	}
 }

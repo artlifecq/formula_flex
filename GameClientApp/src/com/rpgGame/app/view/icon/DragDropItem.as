@@ -6,15 +6,9 @@ package com.rpgGame.app.view.icon
 	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	
-	import flash.geom.Point;
-	
 	import feathers.utils.filter.GrayFilter;
 	
-	import starling.core.Starling;
-	import starling.display.DisplayObject;
-	import starling.events.Touch;
 	import starling.events.TouchEvent;
-	import starling.events.TouchPhase;
 
 	/**
 	 * 可拖拽格子 
@@ -84,7 +78,7 @@ package com.rpgGame.app.view.icon
 		
 		private function setGridUnlock():void
 		{
-			setBg( GridBGType.CHORTCUT_2_MASK );
+//			setBg( GridBGType.CHORTCUT_2_MASK );
 //			if(gridInfo.unlockInfo && !TipTargetManager.hasTipsEventListener(this))
 //			{
 //				TipTargetManager.addTxtTipTarget( this, TargetTipsMaker.makeTips( TipType.OPEN_GRID_TIP, gridInfo.unlockInfo ) );
@@ -189,16 +183,31 @@ package com.rpgGame.app.view.icon
 		
 		override protected function onTouchSelect( e:TouchEvent ):void
 		{
+			if(!this.gridInfo){
+				return;
+			}
 			var data:ClientItemInfo=this.gridInfo.data as ClientItemInfo
 			if(!data){
 				this.selectImgVisible=false;
 				return;
 			}
-			if(data.containerID!=ItemContainerID.BackPack&&data.containerID!=ItemContainerID.Storage){
+			if(this.gridInfo.containerID!=ItemContainerID.BackPack&&this.gridInfo.containerID!=ItemContainerID.Storage){
 				this.selectImgVisible=false;
 				return;
 			}
 			super.onTouchSelect(e);
+		}
+		
+		override public function setJobState(state:String):void
+		{
+			if(this.gridInfo.containerID!=ItemContainerID.BackPack&&this.gridInfo.containerID!=ItemContainerID.Storage){
+				if(_jobImage && _jobImage.parent)
+					_jobImage.parent.removeChild(_jobImage);
+				_jobImage = null;
+				return;
+			}
+			
+			super.setJobState(state);
 		}
 		
 		override protected function dragSourceBack():void

@@ -148,6 +148,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_script:int;
 		 /**  装备最大可强化等级 */
 		public var q_max_strengthen:int;
+		 /**  消耗获得强化值 */
+		public var q_strengthen_num:int;
 		 /**  是否能被转移（1是 0否） */
 		public var q_could_transfer:int;
 		 /**  转移需要的元宝 */

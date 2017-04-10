@@ -297,16 +297,15 @@ package com.rpgGame.appModule.common
 		 * @param datas
 		 * 
 		 */
-		public function refleshGridsByDatas(datas:Array):void
+		public function refleshGridsByDatas(datas:Vector.<ClientItemInfo>):void
 		{
-			var goodsInfo:Array=datas;
 			var i:int =0;
-			var goodsLen:int = goodsInfo ? goodsInfo.length : 0;
+			var goodsLen:int = datas ? datas.length : 0;
 			for (i=0; i<gridCount; i++)
 			{
 				if(i < goodsLen)
 				{
-					setGridInfo(i, goodsInfo[i]);
+					setGridInfo(i, datas[i]);
 				}
 				else
 				{

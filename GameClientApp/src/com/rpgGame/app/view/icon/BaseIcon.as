@@ -47,6 +47,14 @@ package com.rpgGame.app.view.icon
 		{
 			_iconSize = $iconSize;
 			_iconSize = _iconSize <= 0 ? IcoSizeEnum.SIZE_46 : _iconSize;
+			switch(_iconSize){
+				case IcoSizeEnum.ICON_64:
+					_iconPositionX=_iconPositionY=7;
+					break;
+				case IcoSizeEnum.ICON_48:
+					_iconPositionX=_iconPositionY=6;
+					break;
+			}
 			this.width = _iconSize;
 			this.height = _iconSize;
 		}
@@ -69,7 +77,7 @@ package com.rpgGame.app.view.icon
 				_iconImage.height = _iconSize;
 				addChild( _iconImage );
 			}
-			updateIconImagePosition();
+			updateIconImagePosition(_iconPositionX,_iconPositionY);
 			_iconImage.styleName = iconResURL;
 		}
 		
@@ -109,8 +117,8 @@ package com.rpgGame.app.view.icon
 					}
 					else
 					{
-						_iconImage.x = 6;
-						_iconImage.y = 6;
+						_iconImage.x = 0;
+						_iconImage.y = 0;
 					}
 					break;
 				case  IcoSizeEnum.ICON_64:
@@ -121,8 +129,8 @@ package com.rpgGame.app.view.icon
 					}
 					else
 					{
-						_iconImage.x = 8;
-						_iconImage.y = 8;
+						_iconImage.x = 0;
+						_iconImage.y = 0;
 					}
 					break;
 			}

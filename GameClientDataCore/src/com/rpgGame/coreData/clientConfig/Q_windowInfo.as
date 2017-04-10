@@ -12,15 +12,15 @@ package com.rpgGame.coreData.clientConfig
 	*/
 	public class Q_windowInfo
 	{
-		 /**    */
+		 /**  窗口id */
 		public var q_ID:int;
-		 /**  BACK_PACK_PANEL */
-		public var q_windCodeId:int;
-		 /**  背包 */
-		public var q_name:int;
-		 /**    */
+		 /**  窗口代码名 */
+		public var q_windCodeId:String;
+		 /**  窗口名称 */
+		public var q_name:String;
+		 /**  参数 */
 		public var q_arg:int;
-		 /**    */
+		 /**  是否超链接 */
 		public var q_islink:int;
 
 	}

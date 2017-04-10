@@ -16,11 +16,12 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 	import org.mokylin.skin.app.zhuangbei.Zhuangbei_left;
 	import org.mokylin.skin.app.zhuangbei.qianghua.Shuxing2_Skin;
 	import org.mokylin.skin.app.zhuangbei.qianghua.Shuxing_Skin;
-	import org.mokylin.skin.app.zhuangbei.qianghua.button.ButtonShuoming;
 	import org.mokylin.skin.app.zhuangbei.qianghua.button.ButtonYijianqianghua;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
+	import org.mokylin.skin.component.button.ButtonSkin_shuoming;
 	import org.mokylin.skin.component.combobox.ComboBox1_Skin;
 	import org.mokylin.skin.component.combobox.ComboBox2_Skin;
+	import org.mokylin.skin.component.list.ListSkin1;
 	import org.mokylin.skin.component.progress.pro_jindu_Skin;
 
 	/**
@@ -44,6 +45,8 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 		public var cmb_dengjie:feathers.controls.ComboBox;
 
 		public var cmb_pinzhi:feathers.controls.ComboBox;
+
+		public var equip_name:feathers.controls.Label;
 
 		public var lb_current:feathers.controls.Label;
 
@@ -71,6 +74,8 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 
 		public var tab_pack:feathers.controls.TabBar;
 
+		public var use_list:feathers.controls.List;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -82,7 +87,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__Zhuangbei_QianghuaSkin_UIAsset1_i(),__Zhuangbei_QianghuaSkin_UIAsset2_i(),left_i(),__Zhuangbei_QianghuaSkin_UIAsset6_i(),__Zhuangbei_QianghuaSkin_Label2_i(),btn_shuoming_i(),lb_dengji_i(),__Zhuangbei_QianghuaSkin_Label3_i(),__Zhuangbei_QianghuaSkin_Group1_i(),__Zhuangbei_QianghuaSkin_Label4_i(),__Zhuangbei_QianghuaSkin_UIAsset13_i(),lb_current_i(),lb_up_i(),__Zhuangbei_QianghuaSkin_SkinnableContainer3_i(),__Zhuangbei_QianghuaSkin_SkinnableContainer4_i(),__Zhuangbei_QianghuaSkin_SkinnableContainer5_i(),__Zhuangbei_QianghuaSkin_SkinnableContainer6_i(),__Zhuangbei_QianghuaSkin_ProgressBar1_i(),btn_qianhua_i(),cmb_pinzhi_i(),cmb_dengjie_i(),btn_qianghua_all_i(),__Zhuangbei_QianghuaSkin_UIAsset14_i()];
+			this.elementsContent = [left_i(),__Zhuangbei_QianghuaSkin_UIAsset6_i(),equip_name_i(),btn_shuoming_i(),lb_dengji_i(),__Zhuangbei_QianghuaSkin_Label2_i(),__Zhuangbei_QianghuaSkin_Label3_i(),__Zhuangbei_QianghuaSkin_UIAsset7_i(),lb_current_i(),lb_up_i(),__Zhuangbei_QianghuaSkin_SkinnableContainer3_i(),__Zhuangbei_QianghuaSkin_SkinnableContainer4_i(),__Zhuangbei_QianghuaSkin_SkinnableContainer5_i(),__Zhuangbei_QianghuaSkin_SkinnableContainer6_i(),__Zhuangbei_QianghuaSkin_ProgressBar1_i(),btn_qianhua_i(),cmb_pinzhi_i(),cmb_dengjie_i(),btn_qianghua_all_i(),use_list_i()];
 			
 			states = {
 			};
@@ -93,27 +98,15 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __Zhuangbei_QianghuaSkin_Group1_i():feathers.controls.Group
+		private function __Zhuangbei_QianghuaSkin_HorizontalLayout2_i():feathers.layout.HorizontalLayout
 		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.x = 446;
-			temp.y = 255;
-			temp.elementsContent = [__Zhuangbei_QianghuaSkin_UIAsset7_i(),__Zhuangbei_QianghuaSkin_UIAsset8_i(),__Zhuangbei_QianghuaSkin_UIAsset9_i(),__Zhuangbei_QianghuaSkin_UIAsset10_i(),__Zhuangbei_QianghuaSkin_UIAsset11_i(),__Zhuangbei_QianghuaSkin_UIAsset12_i()];
+			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
+			temp.gap = 15;
+			temp.horizontalAlign = "center";
 			return temp;
 		}
 
 		private function __Zhuangbei_QianghuaSkin_Label2_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "装备名字";
-			temp.color = 0xE8C958;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 619;
-			temp.y = 84;
-			return temp;
-		}
-
-		private function __Zhuangbei_QianghuaSkin_Label3_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.fontSize = 12;
@@ -125,7 +118,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			return temp;
 		}
 
-		private function __Zhuangbei_QianghuaSkin_Label4_i():feathers.controls.Label
+		private function __Zhuangbei_QianghuaSkin_Label3_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.fontSize = 12;
@@ -140,7 +133,9 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 		private function __Zhuangbei_QianghuaSkin_ProgressBar1_i():feathers.controls.ProgressBar
 		{
 			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
+			temp.minimum = 0;
 			temp.styleClass = org.mokylin.skin.component.progress.pro_jindu_Skin;
+			temp.value = 100;
 			temp.x = 536;
 			temp.y = 343;
 			return temp;
@@ -194,73 +189,6 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			return temp;
 		}
 
-		private function __Zhuangbei_QianghuaSkin_UIAsset10_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/qianghua/xiaodaojukuang.png";
-			temp.x = 212;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __Zhuangbei_QianghuaSkin_UIAsset11_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/qianghua/xiaodaojukuang.png";
-			temp.x = 283;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __Zhuangbei_QianghuaSkin_UIAsset12_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/qianghua/xiaodaojukuang.png";
-			temp.x = 354;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __Zhuangbei_QianghuaSkin_UIAsset13_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/qianghua/qianghuajiacheng.png";
-			temp.x = 400;
-			temp.y = 329;
-			return temp;
-		}
-
-		private function __Zhuangbei_QianghuaSkin_UIAsset14_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/qianghua/titile.png";
-			temp.x = 447;
-			temp.y = 13;
-			return temp;
-		}
-
-		private function __Zhuangbei_QianghuaSkin_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 453;
-			temp.styleName = "ui/common/background/neikuang_1.png";
-			temp.width = 922;
-			temp.x = 14;
-			temp.y = 69;
-			return temp;
-		}
-
-		private function __Zhuangbei_QianghuaSkin_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 445;
-			temp.styleName = "ui/common/background/neikuang_1.png";
-			temp.width = 350;
-			temp.x = 19;
-			temp.y = 73;
-			return temp;
-		}
-
 		private function __Zhuangbei_QianghuaSkin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -273,27 +201,9 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 		private function __Zhuangbei_QianghuaSkin_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/qianghua/xiaodaojukuang.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __Zhuangbei_QianghuaSkin_UIAsset8_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/qianghua/xiaodaojukuang.png";
-			temp.x = 71;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __Zhuangbei_QianghuaSkin_UIAsset9_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/qianghua/xiaodaojukuang.png";
-			temp.x = 142;
-			temp.y = 0;
+			temp.styleName = "ui/app/zhuangbei/qianghua/qianghuajiacheng.png";
+			temp.x = 400;
+			temp.y = 329;
 			return temp;
 		}
 
@@ -327,9 +237,9 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_shuoming = temp;
 			temp.name = "btn_shuoming";
-			temp.styleClass = org.mokylin.skin.app.zhuangbei.qianghua.button.ButtonShuoming;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shuoming;
 			temp.x = 834;
-			temp.y = 79;
+			temp.y = 83;
 			return temp;
 		}
 
@@ -367,6 +277,21 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			return temp;
 		}
 
+		private function equip_name_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			equip_name = temp;
+			temp.name = "equip_name";
+			temp.text = "装备名字";
+			temp.textAlign = "center";
+			temp.color = 0xE8C958;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 138;
+			temp.x = 583;
+			temp.y = 84;
+			return temp;
+		}
+
 		private function lb_current_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -387,10 +312,11 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_dengji = temp;
 			temp.name = "lb_dengji";
+			temp.height = 25;
 			temp.htmlText = "最大强化等级：<font color='#CFC6AE'>30/30</font>";
-			temp.text = "标签";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 146;
 			temp.x = 782;
 			temp.y = 105;
 			return temp;
@@ -422,6 +348,20 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.width = 340;
 			temp.x = 23;
 			temp.y = 79;
+			return temp;
+		}
+
+		private function use_list_i():feathers.controls.List
+		{
+			var temp:feathers.controls.List = new feathers.controls.List();
+			use_list = temp;
+			temp.name = "use_list";
+			temp.height = 60;
+			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
+			temp.width = 433;
+			temp.x = 438;
+			temp.y = 260;
+			temp.layout = __Zhuangbei_QianghuaSkin_HorizontalLayout2_i();
 			return temp;
 		}
 
