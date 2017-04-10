@@ -90,11 +90,15 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_att_values:String = "data.Q_att_values";
 		/**  复活界面配置表				 */
 		public static const Q_die:String = "data.Q_die";
-		/**  战魂升级数据							 */
+		/**  强化配置表						 */
+		public static const Q_equip_strength:String = "data.Q_equip_strength";
+		/**  战魂升级数据						 */
 		public static const Q_fightsoul:String = "data.Q_fightsoul";
 		/**  战魂升级数据			 */
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
-		/**  物品基本信息数据库																																																																																		 */
+		/**  全局变量表		 */
+		public static const Q_global:String = "data.Q_global";
+		/**  物品基本信息数据库																																																																																			 */
 		public static const Q_item:String = "data.Q_item";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
@@ -124,7 +128,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_buff:String = "data.spell.Q_buff";
 		/**  公共CD表	 */
 		public static const Q_GCD:String = "data.spell.Q_GCD";
-		/**  技能无视防御伤害数据库																	 */
+		/**  技能无视防御伤害数据库																		 */
 		public static const Q_skill_ignore:String = "data.spell.Q_skill_ignore";
 		/**  技能基本信息配置数据表																																																																																																																																 */
 		public static const Q_skill_model:String = "data.spell.Q_skill_model";
@@ -177,8 +181,10 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_att_transfer", com.rpgGame.coreData.clientConfig.Q_att_transfer);
 			regClass("data.Q_att_values", com.rpgGame.coreData.clientConfig.Q_att_values);
 			regClass("data.Q_die", com.rpgGame.coreData.clientConfig.Q_die);
+			regClass("data.Q_equip_strength", com.rpgGame.coreData.clientConfig.Q_equip_strength);
 			regClass("data.Q_fightsoul", com.rpgGame.coreData.clientConfig.Q_fightsoul);
 			regClass("data.Q_fightsoul_path", com.rpgGame.coreData.clientConfig.Q_fightsoul_path);
+			regClass("data.Q_global", com.rpgGame.coreData.clientConfig.Q_global);
 			regClass("data.Q_item", com.rpgGame.coreData.clientConfig.Q_item);
 			regClass("data.Q_notify", com.rpgGame.coreData.clientConfig.Q_notify);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);

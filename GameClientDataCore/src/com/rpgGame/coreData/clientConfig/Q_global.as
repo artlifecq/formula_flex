@@ -10,18 +10,14 @@ package com.rpgGame.coreData.clientConfig
 	* @author NEIL
 	* 
 	*/
-	public class Q_windowInfo
+	public class Q_global
 	{
-		 /**  窗口id */
-		public var q_ID:int;
-		 /**  窗口代码名 */
-		public var q_windCodeId:String;
-		 /**  窗口名称 */
-		public var q_name:String;
-		 /**  参数 */
-		public var q_arg:int;
-		 /**  是否超链接 */
-		public var q_islink:int;
+		 /**  变量id */
+		public var q_id:int;
+		 /**  数值变量值 */
+		public var q_int_value:int;
+		 /**  字符串变量值 */
+		public var q_string_value:String;
 
 	}
 }

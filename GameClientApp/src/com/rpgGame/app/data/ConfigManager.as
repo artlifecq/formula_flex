@@ -27,6 +27,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.FriendCfgData;
 	import com.rpgGame.coreData.cfg.GCDCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSettingCfgData;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.GmConfig;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.cfg.HintCfgData;
@@ -205,6 +206,7 @@ package com.rpgGame.app.data
 			WindowInfoData.setConfig(dic[ConfigClassRegister.Q_windowInfo]);
 			FightsoulPathData.setConfig(dic[ConfigClassRegister.Q_fightsoul_path]);
 			FightsoulData.setConfig(dic[ConfigClassRegister.Q_fightsoul]);
+			GlobalSheetData.setup(dic[ConfigClassRegister.Q_global]);
 		}
 
 		/**
