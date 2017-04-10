@@ -48,7 +48,8 @@ package com.rpgGame.core.view.uiComponent.face.cd
 		private var _imageMask : Canvas;
 
 		private var _tmTxt : NumberBitmap; //guoqing.wen
-
+		
+		
 		private static const circleMaskBmpData : BitmapData = new BitmapData(1, 1, true, 0x0);
 
 		public function CDFace($width : Number, $height : Number, $onComplete : Function = null, $isCircle : Boolean = false, isReverse : Boolean = false)
@@ -77,6 +78,8 @@ package com.rpgGame.core.view.uiComponent.face.cd
 			_w = 0;
 			_h = 0;
 			/*this.graphics.clear();*/ //guoqing.wen
+			
+			
 			if (_tmTxt && _tmTxt.parent)
 			{
 				_tmTxt.parent.removeChild(_tmTxt);
@@ -98,7 +101,7 @@ package com.rpgGame.core.view.uiComponent.face.cd
 			_isCircle = false;
 			_isReverse = false;
 		}
-
+		
 		public function showTmTxt(txtFormat : TextFormat = null) : void
 		{
 			if (!_tmTxt)
@@ -119,7 +122,7 @@ package com.rpgGame.core.view.uiComponent.face.cd
 			}
 			addChild(_tmTxt);
 		}
-
+		
 		public function hideTmTxt() : void
 		{
 			if (_tmTxt != null && _tmTxt.parent != null)
@@ -129,7 +132,7 @@ package com.rpgGame.core.view.uiComponent.face.cd
 			//DisplayUtil.removeForParent(_tmTxt);//guoqing.wen
 //			_tmTxt = null;
 		}
-
+		
 		public function reSet($parameters : Array) : void
 		{
 			_w = $parameters[0] / 2;
@@ -289,7 +292,10 @@ package com.rpgGame.core.view.uiComponent.face.cd
 		{
 			_tmTxt.numberText = (($cdTotal - $now) * 0.001).toFixed(1);			
 		}
-		
+		public function setTimeTxt($txt :String):void
+		{
+			_tmTxt.numberText =$txt;			
+		}
 		public function drawRectMask($angle : Number) : void
 		{
 			$angle = Math.floor($angle)

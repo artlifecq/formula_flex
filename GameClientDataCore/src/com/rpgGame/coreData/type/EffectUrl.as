@@ -198,6 +198,13 @@ package com.rpgGame.coreData.type
 		
 		/**技能框转框特效*/
 		public static const UI_JINENGKUANG_MJ:String="ui_jinengkuang_mj";
+		public static const UI_JINENGKUANG_BJ:String="ui_jinengkuang_bj";
+		public static const UI_JINENGKUANG_YJ:String="ui_jinengkuang_yj";
+		public static const UI_JINENGKUANG_FENGKUANGLIANNU:String="ui_jinengkuang_fengkuangliannu";
+		public static const UI_JINENGKUANG_SHANGUANG:String="ui_jinengkuang_shanguang";
+		public static const UI_TANU_MJ:String="ui_tanu_mj";
+	
+		
 		
 		public function EffectUrl()
 		{

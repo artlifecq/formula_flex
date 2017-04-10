@@ -19,5 +19,9 @@ package com.rpgGame.core.events
 		public static const REMOVE_BUFF : int = UNIQUEID.NEXT;
 		/**更新帮派技能Buff**/
 		public static const UPDATE_SOCIETY_SPELL_BUFF : int = UNIQUEID.NEXT;
+		/**疯狂连弩技能 其它图标置灰**/
+		public static const CHANGE_GRID_BUFF : int = UNIQUEID.NEXT;
+		
+		
 	}
 }
