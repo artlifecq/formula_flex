@@ -216,7 +216,7 @@ package com.rpgGame.app.ui.main.shortcut
 					}
 
 					FaceUtil.SetSkillGrid(grid, FaceUtil.chanceSpellToFaceInfo(skillData), true);//暂时不展示tips
-
+					grid.upData(shortData,skillData);
 					var isAutoSpell : Boolean = MainRoleManager.actorInfo.spellList.isAutoSpellId(skillData.q_skillID);
 					if (isAutoSpell)
 					{
