@@ -10,6 +10,7 @@ package com.rpgGame.app.scene
 	import com.rpgGame.app.state.role.control.HunLuanStateReference;
 	import com.rpgGame.app.state.role.control.HushStateReference;
 	import com.rpgGame.app.state.role.control.ShapeshiftingStateReference;
+	import com.rpgGame.app.state.role.control.ShortcutGridStateReference;
 	import com.rpgGame.app.state.role.control.StiffStateReference;
 	import com.rpgGame.app.state.role.control.StunStateReference;
 	import com.rpgGame.app.state.role.control.SyncSpellActionStateReference;
@@ -253,6 +254,9 @@ package com.rpgGame.app.scene
                     case 34:// 变身
                         _role.stateMachine.removeState(RoleStateType.CONTROL_SHAPESHIFTING);
                         break;
+					case 36:// 变身
+						_role.stateMachine.removeState(RoleStateType.CONTROL_SHORTCUTGRID);
+						break;
 					case 199://冰冻
 						_role.stateMachine.removeState(RoleStateType.CONTROL_BING_DONG);
 						break;
@@ -391,6 +395,12 @@ package com.rpgGame.app.scene
                    		buffRef.setParams(buffData);
                     	_role.stateMachine.transition(RoleStateType.CONTROL_SHAPESHIFTING, buffRef);
                         break;
+					
+					case 36:// 疯狂连弩图标效果
+						buffRef = _role.stateMachine.getReference(ShortcutGridStateReference) as ShortcutGridStateReference;
+						buffRef.setParams(buffData);
+						_role.stateMachine.transition(RoleStateType.CONTROL_SHORTCUTGRID, buffRef);
+						break;
 					case 199://冰冻
 						buffRef = _role.stateMachine.getReference(BingDongStateReference) as BingDongStateReference;
 						buffRef.setParams(buffData);
