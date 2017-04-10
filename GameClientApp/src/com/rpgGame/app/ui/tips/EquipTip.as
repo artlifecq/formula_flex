@@ -13,6 +13,7 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
@@ -150,8 +151,8 @@ package com.rpgGame.app.ui.tips
 				name=HtmlTextUtil.getTextColor(0xE1201C,_itemInfo.qItem.q_level+"级");
 			}
 			_itemTip.lbl_xuqiu.htmlText=name;
-			_itemTip.lbl_zhiye.text=getJobName(_itemInfo.qItem.q_job);
-			_itemTip.lbl_pingzhi.text=getLevele(_itemInfo.qItem.q_levelnum);
+			_itemTip.lbl_zhiye.text=ItemUtil.getJobName(_itemInfo.qItem.q_job);
+			_itemTip.lbl_pingzhi.text=ItemUtil.getLevele(_itemInfo.qItem.q_levelnum);
 			_itemTip.lbl_buwei.text=EquipType.EquipNames[_itemInfo.qItem.q_kind];
 			
 			if(_itemInfo.qItem.q_max_strengthen!=0){
@@ -312,43 +313,7 @@ package com.rpgGame.app.ui.tips
 			_itemTip.imgBG.height=curY+30;
 		}
 		
-		private function getLevele(num:int):String
-		{
-			var result:String=num.toString();
-			switch(num){
-				case 1:
-					result="一阶";
-					break;
-				case 2:
-					result="二阶";
-					break;
-				case 3:
-					result="三阶";
-					break;
-				case 4:
-					result="四阶";
-					break;
-				case 5:
-					result="五阶";
-					break;
-				case 6:
-					result="六阶";
-					break;
-				case 7:
-					result="七阶";
-					break;
-				case 8:
-					result="八阶";
-					break;
-				case 9:
-					result="九阶";
-					break;
-				case 10:
-					result="十阶";
-					break;
-			}
-			return result;
-		}
+		
 		
 		private function showCurrentEquipInfo(equipItemInfo:ClientItemInfo):void
 		{
@@ -368,21 +333,6 @@ package com.rpgGame.app.ui.tips
 			_itemTip.container.addChild(label);
 			labelList.push(label);
 			return label;
-		}
-		
-		private function getJobName(job:int):String
-		{
-			switch (job)
-			{
-				case JobEnum.ROLE_1_TYPE:
-					return JobEnum.ROLE_1_NAME;
-				case JobEnum.ROLE_2_TYPE:
-				case JobEnum.ROLE_3_TYPE:
-					return JobEnum.ROLE_2_NAME;
-				case JobEnum.ROLE_4_TYPE:
-					return JobEnum.ROLE_3_NAME;
-			}
-			return "不存在的职业"
 		}
 		
 		private function createLine(x:int,y:int,w:int):void

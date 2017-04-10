@@ -135,7 +135,7 @@ package org.mokylin.skin.app.zhuangbei.xilian
 		private function __Xilian_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/xilian/push_cailiao.png";
+			temp.styleName = "ui/app/zhuangbei/xilian/push_zhuangbei.png";
 			temp.x = 474;
 			temp.y = 225;
 			return temp;
@@ -144,7 +144,7 @@ package org.mokylin.skin.app.zhuangbei.xilian
 		private function __Xilian_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/xilian/push_zhuangbei.png";
+			temp.styleName = "ui/app/zhuangbei/xilian/push_cailiao.png";
 			temp.x = 730;
 			temp.y = 225;
 			return temp;

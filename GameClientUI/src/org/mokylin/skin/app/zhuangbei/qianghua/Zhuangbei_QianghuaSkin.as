@@ -13,6 +13,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
 	import feathers.layout.HorizontalLayout;
+	import feathers.layout.VerticalLayout;
 	import org.mokylin.skin.app.zhuangbei.Zhuangbei_left;
 	import org.mokylin.skin.app.zhuangbei.qianghua.Shuxing2_Skin;
 	import org.mokylin.skin.app.zhuangbei.qianghua.Shuxing_Skin;
@@ -204,6 +205,12 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.styleName = "ui/app/zhuangbei/qianghua/qianghuajiacheng.png";
 			temp.x = 400;
 			temp.y = 329;
+			return temp;
+		}
+
+		private function __Zhuangbei_QianghuaSkin_VerticalLayout1_i():feathers.layout.VerticalLayout
+		{
+			var temp:feathers.layout.VerticalLayout = new feathers.layout.VerticalLayout();
 			return temp;
 		}
 

@@ -3,6 +3,7 @@ package com.rpgGame.coreData.info.item
 	import com.game.mainCore.core.utils.TextFormatUtil;
 	import com.rpgGame.coreData.cfg.item.ContainerData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.task.PrizeInfo;
 	import com.rpgGame.coreData.type.ShopType;
 	import com.rpgGame.coreData.type.item.ItemQualityType;
@@ -252,6 +253,88 @@ package com.rpgGame.coreData.info.item
 			var container : ContainerData = new ContainerData();
 			container.readBytes(bytes);
 			return container;
+		}
+		
+		public static function getJobName(job:int):String
+		{
+			switch (job)
+			{
+				case JobEnum.ROLE_1_TYPE:
+					return JobEnum.ROLE_1_NAME;
+				case JobEnum.ROLE_2_TYPE:
+				case JobEnum.ROLE_3_TYPE:
+					return JobEnum.ROLE_2_NAME;
+				case JobEnum.ROLE_4_TYPE:
+					return JobEnum.ROLE_3_NAME;
+			}
+			return "不存在的职业"
+		}
+		
+		public static function getLevele(num:int):String
+		{
+			var result:String=num.toString();
+			switch(num){
+				case 1:
+					result="一阶";
+					break;
+				case 2:
+					result="二阶";
+					break;
+				case 3:
+					result="三阶";
+					break;
+				case 4:
+					result="四阶";
+					break;
+				case 5:
+					result="五阶";
+					break;
+				case 6:
+					result="六阶";
+					break;
+				case 7:
+					result="七阶";
+					break;
+				case 8:
+					result="八阶";
+					break;
+				case 9:
+					result="九阶";
+					break;
+				case 10:
+					result="十阶";
+					break;
+			}
+			return result;
+		}
+		
+		/**
+		 *获取品质名 
+		 * @param quality
+		 * @return 
+		 * 
+		 */
+		public static function getQualityName(quality:int):String
+		{
+			var result:String=quality.toString();
+			switch(quality){
+				case 0:
+					result="白色";
+					break;
+				case 1:
+					result="绿色";
+					break;
+				case 2:
+					result="蓝色";
+					break;
+				case 3:
+					result="紫色";
+					break;
+				case 4:
+					result="金色";
+					break;	
+			}
+			return result;
 		}
 	}
 }

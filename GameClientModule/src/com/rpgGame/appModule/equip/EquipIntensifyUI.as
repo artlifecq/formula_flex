@@ -9,14 +9,19 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
-	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.lang.LangUI;
 	import com.rpgGame.coreData.type.item.GridBGType;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import app.message.GoodsType;
+	
+	import feathers.controls.renderers.DefaultListItemRenderer;
+	import feathers.controls.renderers.IListItemRenderer;
+	import feathers.data.ListCollection;
 	
 	import org.mokylin.skin.app.zhuangbei.Zhuangbei_left;
 	import org.mokylin.skin.app.zhuangbei.qianghua.TitileHead;
@@ -32,7 +37,6 @@ package com.rpgGame.appModule.equip
 	public class EquipIntensifyUI extends SkinUI
 	{
 		private const MIN_GRID:int=28;
-		
 		private var _skin:Zhuangbei_QianghuaSkin;
 		private var _leftSkin:Zhuangbei_left;
 		
@@ -48,6 +52,9 @@ package com.rpgGame.appModule.equip
 		private var intensifyItemInfo:ClientItemInfo;
 		
 		private var _strenValue:int;
+		
+		private var lvDatas:Array;
+		private var qualityDatas:Array;
 		
 		public function EquipIntensifyUI()
 		{
@@ -79,18 +86,42 @@ package com.rpgGame.appModule.equip
 			
 			_goodsContainerUse1.setGridsCount(6,false);
 			selectedUse=new Vector.<ClientItemInfo>();
+			
+			lvDatas=new Array();
+			for(var i:int=1;i<11;i++){
+				lvDatas.push(ItemUtil.getLevele(i));
+			}
+			_skin.cmb_dengjie.dataProvider=new ListCollection(lvDatas);
+			_skin.cmb_dengjie.selectedIndex=0;
+			qualityDatas=new Array();
+			for(i=0;i<5;i++){
+				qualityDatas.push(ItemUtil.getQualityName(i));
+			}
+			_skin.cmb_pinzhi.dataProvider=new ListCollection(qualityDatas);
+			_skin.cmb_pinzhi.selectedIndex=0;
+			
+			_skin.cmb_dengjie.addEventListener(Event.COMPLETE,onComplete);
+		}
+		
+		private function onComplete():void
+		{
+			trace("complete");			
 		}
 		
 		private function onCancelIntensify(grid:DragDropItem ):void
 		{
 			if(intensifyItemInfo){
 				upEquips.push(intensifyItemInfo);
+				if(isUse(intensifyItemInfo)){//是消耗品
+					useEquips.push(intensifyItemInfo);
+				}
 				intensifyItemInfo=null;
 			}
 			_intensifyItem.setGridEmpty();
 			_goodsContainerTarget.refleshGridsByDatas(upEquips);
 			updateView();
 			
+			//删除放置的所有消耗
 			var datas:Array=_goodsContainerUse1.dataProvider.data as Array;
 			for each(var info:GridInfo in datas){
 				if(info.data){
@@ -189,10 +220,13 @@ package com.rpgGame.appModule.equip
 				upEquips.push(intensifyItemInfo);
 			}
 			intensifyItemInfo=gridInfo.data as ClientItemInfo;
-			_skin.equip_name.color=ItemConfig.getItemQualityColor(intensifyItemInfo.cfgId);
-			_skin.equip_name.text=intensifyItemInfo.name;
 			deleteItems(upEquips,intensifyItemInfo);
 			_goodsContainerTarget.refleshGridsByDatas(upEquips);
+			
+			//从消耗物里删除掉
+			deleteItems(useEquips,intensifyItemInfo);
+			_goodsContainerUse.refleshGridsByDatas(useEquips);
+			updateView();
 		}
 		
 		private function deleteItems(arr:Vector.<ClientItemInfo>,item:ClientItemInfo):void
@@ -213,7 +247,9 @@ package com.rpgGame.appModule.equip
 		private function updateView():void
 		{
 			if(intensifyItemInfo){
-				
+				_skin.equip_name.color=ItemConfig.getItemQualityColor(intensifyItemInfo.cfgId);
+				_skin.equip_name.text=intensifyItemInfo.name;
+				_skin.lb_dengji.htmlText="最大强化等级:"+1+"/"+intensifyItemInfo.qItem.q_max_strengthen;
 			}else{
 				_skin.lb_dengji.htmlText="请选择要强化的装备!";
 				_leftSkin.lb_yinzi.htmlText="0";
@@ -295,7 +331,7 @@ package com.rpgGame.appModule.equip
 			var result:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
 			for(var i:int=0;i<num;i++){
 				var info:ClientItemInfo=datas[i];
-				if(info.qItem.q_max_strengthen!=0){//可强化的
+				if(isStren(info)){//可强化的
 					result.push(info);
 				}
 			}
@@ -312,12 +348,27 @@ package com.rpgGame.appModule.equip
 			var num:int=datas.length;
 			var result:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
 			for(var i:int=0;i<num;i++){
-				var info:ClientItemInfo=datas[i];
-				if(info.qItem.q_strengthen_num!=0&&RoleEquipmentManager.equipIsWearing(info)==false){//消耗获得的值不为0
-					result.push(info);
+				if(isUse(datas[i])){
+					result.push(datas[i]);
 				}
 			}
 			return result;
+		}
+		
+		private function isStren(info:ClientItemInfo):Boolean
+		{
+			if(info.qItem.q_max_strengthen!=0){//可强化的
+				return true;
+			}
+			return false;
+		}
+		
+		private function isUse(info:ClientItemInfo):Boolean
+		{
+			if(info.qItem.q_strengthen_num!=0&&RoleEquipmentManager.equipIsWearing(info)==false){//消耗获得的值不为0
+				return true;
+			}
+			return false;
 		}
 	}
 }

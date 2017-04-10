@@ -30,7 +30,7 @@ package org.mokylin.skin.app.zhuangbei.jicheng
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [left_i(),__Jicheng_Skin_UIAsset4_i(),btn_shuoming_i()];
+			this.elementsContent = [left_i(),__Jicheng_Skin_UIAsset4_i(),btn_shuoming_i(),__Jicheng_Skin_UIAsset5_i(),__Jicheng_Skin_UIAsset6_i()];
 			
 			states = {
 			};
@@ -44,10 +44,28 @@ package org.mokylin.skin.app.zhuangbei.jicheng
 		private function __Jicheng_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/zuomo/bg.jpg";
+			temp.styleName = "ui/app/zhuangbei/jicheng/bg.jpg";
 			temp.visible = false;
 			temp.x = 371;
 			temp.y = 75;
+			return temp;
+		}
+
+		private function __Jicheng_Skin_UIAsset5_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zhuangbei/jicheng/cailiao.png";
+			temp.x = 470;
+			temp.y = 193;
+			return temp;
+		}
+
+		private function __Jicheng_Skin_UIAsset6_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zhuangbei/jicheng/jieguo.png";
+			temp.x = 739;
+			temp.y = 193;
 			return temp;
 		}
 
