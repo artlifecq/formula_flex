@@ -68,7 +68,7 @@ package com.rpgGame.appModule.bag
 			_iconFace.x=30;
 			_iconFace.y=50;
 			FaceUtil.SetItemGrid(_iconFace, clientItemInfo);
-			_iconFace.setQualityImageIconPoint(6,5);
+			_iconFace.setIconPoint(6,5);
 			_iconFace.selectImgVisible=false;
 			_skin.container.addChild(_iconFace);
 			_skin.input_txt.text=currentNum.toString();

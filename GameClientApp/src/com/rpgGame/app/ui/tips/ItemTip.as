@@ -101,7 +101,6 @@ package com.rpgGame.app.ui.tips
 			
 			//设置装备格子信息
 			FaceUtil.SetItemGrid(_iconFace, _itemInfo);
-			_iconFace.setQualityImageIconPoint(6,4);
 			_iconFace.countText.visible=false;
 			
 			

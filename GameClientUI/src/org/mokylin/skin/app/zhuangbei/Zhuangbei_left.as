@@ -48,7 +48,7 @@ package org.mokylin.skin.app.zhuangbei
 			this.currentState = "normal";
 			this.height = 431;
 			this.width = 340;
-			this.elementsContent = [title1_i(),title2_i(),tab_pack_i(),__Zhuangbei_left_UIAsset1_i(),__Zhuangbei_left_UIAsset2_i(),list1_i(),list2_i(),lb_yinzi_i(),__Zhuangbei_left_Label1_i(),__Zhuangbei_left_UIAsset3_i()];
+			this.elementsContent = [__Zhuangbei_left_UIAsset1_i(),title1_i(),title2_i(),tab_pack_i(),__Zhuangbei_left_UIAsset2_i(),__Zhuangbei_left_UIAsset3_i(),list1_i(),list2_i(),lb_yinzi_i(),__Zhuangbei_left_Label1_i(),__Zhuangbei_left_UIAsset4_i()];
 			
 			states = {
 			};
@@ -101,6 +101,17 @@ package org.mokylin.skin.app.zhuangbei
 		private function __Zhuangbei_left_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.height = 445;
+			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.width = 350;
+			temp.x = -4;
+			temp.y = -6;
+			return temp;
+		}
+
+		private function __Zhuangbei_left_UIAsset2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 185;
 			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 339;
@@ -109,7 +120,7 @@ package org.mokylin.skin.app.zhuangbei
 			return temp;
 		}
 
-		private function __Zhuangbei_left_UIAsset2_i():feathers.controls.UIAsset
+		private function __Zhuangbei_left_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 143;
@@ -120,7 +131,7 @@ package org.mokylin.skin.app.zhuangbei
 			return temp;
 		}
 
-		private function __Zhuangbei_left_UIAsset3_i():feathers.controls.UIAsset
+		private function __Zhuangbei_left_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/tubiao/yinzib_24.png";

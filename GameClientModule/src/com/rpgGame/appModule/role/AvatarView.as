@@ -118,7 +118,7 @@ package com.rpgGame.appModule.role
 			var render:GridItemRender = new GridItemRender(IcoSizeEnum.ICON_48,bg);
 			var grid:DragDropItem = render.getGrid();
 //			grid.onTouchEndCallBack = onTouchGrid;
-			grid.doubleClickFun=onDoubleClick
+			grid.doubleClickFun=onDoubleClick;
 			return grid;
 		}
 		
@@ -253,7 +253,6 @@ package com.rpgGame.appModule.role
 			var grid:DragDropItem = equipGrids[index];
 			if(!grid)return;
 			grid.gridInfo = gridInfo;
-			grid.setQualityImageIconPoint(6,6);
 		}
 		
 		private function initEvent():void

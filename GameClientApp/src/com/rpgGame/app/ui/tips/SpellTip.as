@@ -20,10 +20,9 @@ package com.rpgGame.app.ui.tips
 	
 	/**
 	 * 技能TIPS
-	 * @author luguozheng
-	 * @author 陈鹉光-2016-07-13 改
+	 * @author dik
 	 * 
-	 */	
+	 */
 	public class SpellTip extends SkinUI implements ITip
 	{
 		private var _spellTip:jinengTips_Skin;
@@ -59,7 +58,7 @@ package com.rpgGame.app.ui.tips
 			riseIco=new BgIcon(48);
 			_spellTip.container.addChildAt(mainIco,4);
 			_spellTip.grp_rise_content.addChild(riseIco);
-			riseIco.x=2;
+			riseIco.x=3;
 			riseIco.y=0;
 			mainIco.x=9;
 			mainIco.y=10;

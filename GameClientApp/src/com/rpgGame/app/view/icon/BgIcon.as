@@ -110,8 +110,12 @@ package com.rpgGame.app.view.icon
 			
 			if(qualityID>Quality.YELLOW){
 				showQualityEft();
+			}else{
+				if(_qualityEft){
+					_qualityEft.removeChildren();
+				}
 			}
-			
+			setQualityImageIconPoint();
 			sortLayer();
 		}
 		
@@ -238,9 +242,6 @@ package com.rpgGame.app.view.icon
 		{
 			this.width = _bgImage.width;
 			this.height = _bgImage.height;
-			
-			_iconPositionX=(this.width-iconSize)/2;
-			_iconPositionY=(this.height-iconSize)/2;
 		}
 		
 		public function get bgImage():UIAsset
@@ -258,7 +259,6 @@ package com.rpgGame.app.view.icon
 		{
 			if(_iconPositionX == x && _iconPositionY == y)
 				return;
-			
 			_iconPositionX = x;
 			_iconPositionY = y;
 			
@@ -276,17 +276,16 @@ package com.rpgGame.app.view.icon
 		 * @param y
 		 * 
 		 */		
-		public function setQualityImageIconPoint(x:int,y:int):void
+		private function setQualityImageIconPoint():void
 		{
 			if( _qualityImage != null )
 			{
-				_qualityImage.x = x;
-				_qualityImage.y = y;
+				_qualityImage.x = _iconPositionX;
+				_qualityImage.y = _iconPositionY;
 				if(_qualityEft){
-					_qualityEft.x+=x;
-					_qualityEft.y+=y;
+					_qualityEft.x+=_iconPositionX;
+					_qualityEft.y+=_iconPositionY;
 				}
-				updateIconImagePosition( x, y );
 			}
 		}
 		

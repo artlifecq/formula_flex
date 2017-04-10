@@ -86,6 +86,10 @@ package com.rpgGame.coreData.cfg.item
 		 * 强化装备消耗
 		 */
 		public static const INTENSIFY_USE:int =rEnum.next;
+		/**
+		 * 强化装备消耗1
+		 */
+		public static const INTENSIFY_USE1:int =rEnum.next;
 		
 	}
 }
