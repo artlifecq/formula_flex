@@ -15,19 +15,17 @@ package com.rpgGame.coreData.clientConfig
 		 /**  等级 */
 		public var q_level:int;
 		 /**  战魂名称 */
-		public var q_name:int;
+		public var q_name:String;
 		 /**  品质 */
 		public var q_quality:int;
 		 /**  升级经验 */
 		public var q_exp:int;
 		 /**  基础属性ID */
 		public var q_baseAtt_id:int;
-		 /**  额外属性ID */
-		public var q_otherAtt_id:int;
-		 /**  技能编号 */
-		public var q_skill_id:int;
 		 /**  模型 */
 		public var q_mode:int;
+		 /**  描述 */
+		public var q_doc:String;
 
 	}
 }

@@ -211,7 +211,7 @@ package com.rpgGame.app.manager.goods
 			if(equip.containerID != ContainerType.HERO_EQUIPMENT)
 				return false;
 			var items:Array = instance.getAllItem();
-			for each(var roleEquip : EquipInfo in items)
+			for each(var roleEquip : ClientItemInfo in items)
 			{
 				if(roleEquip && roleEquip.cfgId == equip.cfgId && roleEquip.index == equip.index)
 					return true;
