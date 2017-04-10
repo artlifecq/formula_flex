@@ -284,7 +284,7 @@ package com.rpgGame.app.ui.main.shortcut
 						nutaEffect.stop();
 					}
 					nutaEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_TANU_MJ),0,0,0);
-					nutaEffect.setSpeed(0.15);
+					nutaEffect.setSpeed(0.16);
 					//nutaEffect.start();
 				}
 				else if(num==2)
@@ -436,7 +436,7 @@ package com.rpgGame.app.ui.main.shortcut
 				effect3D=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_MJ),0,0,0);
 				effect3D.stop();
 				
-				if(skillID==FENGKUANGLIANNU)
+				/*if(skillID==FENGKUANGLIANNU)
 				{
 					liannuEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_FENGKUANGLIANNU),0,0,0);
 					liannuEffect.stop();
@@ -445,7 +445,7 @@ package com.rpgGame.app.ui.main.shortcut
 				{
 					nutaEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_TANU_MJ),0,0,0);
 					nutaEffect.stop();
-				}
+				}*/
 				
 			}
 			else if(playerJod==4)
