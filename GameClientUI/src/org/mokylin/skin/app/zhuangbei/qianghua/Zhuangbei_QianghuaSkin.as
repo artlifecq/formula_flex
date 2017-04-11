@@ -13,10 +13,8 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
 	import feathers.layout.HorizontalLayout;
-	import feathers.layout.VerticalLayout;
 	import org.mokylin.skin.app.zhuangbei.Zhuangbei_left;
 	import org.mokylin.skin.app.zhuangbei.qianghua.Shuxing2_Skin;
-	import org.mokylin.skin.app.zhuangbei.qianghua.Shuxing_Skin;
 	import org.mokylin.skin.app.zhuangbei.qianghua.button.ButtonYijianqianghua;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.button.ButtonSkin_shuoming;
@@ -49,6 +47,8 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 
 		public var equip_name:feathers.controls.Label;
 
+		public var grp_pro:feathers.controls.Group;
+
 		public var lb_current:feathers.controls.Label;
 
 		public var lb_dengji:feathers.controls.Label;
@@ -63,6 +63,8 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 
 		public var lb_num1:feathers.controls.Label;
 
+		public var lb_pro:feathers.controls.Label;
+
 		public var lb_up:feathers.controls.Label;
 
 		public var lb_yinzi:feathers.controls.Label;
@@ -73,7 +75,17 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 
 		public var list2:feathers.controls.List;
 
+		public var progressBar:feathers.controls.ProgressBar;
+
 		public var tab_pack:feathers.controls.TabBar;
+
+		public var up0:feathers.controls.SkinnableContainer;
+
+		public var up1:feathers.controls.SkinnableContainer;
+
+		public var up2:feathers.controls.SkinnableContainer;
+
+		public var up3:feathers.controls.SkinnableContainer;
 
 		public var use_list:feathers.controls.List;
 
@@ -88,7 +100,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [left_i(),__Zhuangbei_QianghuaSkin_UIAsset6_i(),equip_name_i(),btn_shuoming_i(),lb_dengji_i(),__Zhuangbei_QianghuaSkin_Label2_i(),__Zhuangbei_QianghuaSkin_Label3_i(),__Zhuangbei_QianghuaSkin_UIAsset7_i(),lb_current_i(),lb_up_i(),__Zhuangbei_QianghuaSkin_SkinnableContainer3_i(),__Zhuangbei_QianghuaSkin_SkinnableContainer4_i(),__Zhuangbei_QianghuaSkin_SkinnableContainer5_i(),__Zhuangbei_QianghuaSkin_SkinnableContainer6_i(),__Zhuangbei_QianghuaSkin_ProgressBar1_i(),btn_qianhua_i(),cmb_pinzhi_i(),cmb_dengjie_i(),btn_qianghua_all_i(),use_list_i()];
+			this.elementsContent = [left_i(),__Zhuangbei_QianghuaSkin_UIAsset6_i(),equip_name_i(),btn_shuoming_i(),lb_dengji_i(),__Zhuangbei_QianghuaSkin_Label2_i(),__Zhuangbei_QianghuaSkin_Label3_i(),__Zhuangbei_QianghuaSkin_UIAsset7_i(),up0_i(),up1_i(),up2_i(),up3_i(),btn_qianhua_i(),cmb_pinzhi_i(),cmb_dengjie_i(),btn_qianghua_all_i(),use_list_i(),grp_pro_i()];
 			
 			states = {
 			};
@@ -115,7 +127,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 484;
-			temp.y = 234;
+			temp.y = 351;
 			return temp;
 		}
 
@@ -124,69 +136,51 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.fontSize = 12;
 			temp.text = "(强化成功后消耗材料将会消失，请慎重选择）";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xD02525;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 576;
-			temp.y = 233;
+			temp.y = 350;
 			return temp;
 		}
 
-		private function __Zhuangbei_QianghuaSkin_ProgressBar1_i():feathers.controls.ProgressBar
+		private function __Zhuangbei_QianghuaSkin_Label4_i():feathers.controls.Label
 		{
-			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
-			temp.minimum = 0;
-			temp.styleClass = org.mokylin.skin.component.progress.pro_jindu_Skin;
-			temp.value = 100;
-			temp.x = 536;
-			temp.y = 343;
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.bold = true;
+			temp.height = 18;
+			temp.fontSize = 12;
+			temp.text = "当前等级";
+			temp.textAlign = "left";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 58;
+			temp.x = 0;
+			temp.y = 34;
 			return temp;
 		}
 
-		private function __Zhuangbei_QianghuaSkin_SkinnableContainer3_i():feathers.controls.SkinnableContainer
+		private function __Zhuangbei_QianghuaSkin_Label5_i():feathers.controls.Label
 		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			temp.height = 20;
-			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.qianghua.Shuxing_Skin()
-			temp.skin = skin
-			temp.width = 57;
-			temp.x = 476;
-			temp.y = 370;
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.bold = true;
+			temp.height = 18;
+			temp.fontSize = 12;
+			temp.text = "强化后等级";
+			temp.textAlign = "left";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 71;
+			temp.x = 316;
+			temp.y = 34;
 			return temp;
 		}
 
-		private function __Zhuangbei_QianghuaSkin_SkinnableContainer4_i():feathers.controls.SkinnableContainer
+		private function __Zhuangbei_QianghuaSkin_UIAsset10_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			temp.height = 20;
-			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.qianghua.Shuxing2_Skin()
-			temp.skin = skin
-			temp.width = 90;
-			temp.x = 798;
-			temp.y = 370;
-			return temp;
-		}
-
-		private function __Zhuangbei_QianghuaSkin_SkinnableContainer5_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			temp.height = 20;
-			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.qianghua.Shuxing_Skin()
-			temp.skin = skin
-			temp.width = 57;
-			temp.x = 476;
-			temp.y = 390;
-			return temp;
-		}
-
-		private function __Zhuangbei_QianghuaSkin_SkinnableContainer6_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			temp.height = 20;
-			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.qianghua.Shuxing2_Skin()
-			temp.skin = skin
-			temp.width = 90;
-			temp.x = 798;
-			temp.y = 390;
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zhuangbei/qianghua/dengjidikuang.png";
+			temp.x = 322;
+			temp.y = 6;
 			return temp;
 		}
 
@@ -202,15 +196,18 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 		private function __Zhuangbei_QianghuaSkin_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/qianghua/qianghuajiacheng.png";
-			temp.x = 400;
-			temp.y = 329;
+			temp.styleName = "ui/app/zhuangbei/qianghua/dangqianqianghua.png";
+			temp.x = 606;
+			temp.y = 390;
 			return temp;
 		}
 
-		private function __Zhuangbei_QianghuaSkin_VerticalLayout1_i():feathers.layout.VerticalLayout
+		private function __Zhuangbei_QianghuaSkin_UIAsset9_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.layout.VerticalLayout = new feathers.layout.VerticalLayout();
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zhuangbei/qianghua/dengjidikuang.png";
+			temp.x = 0;
+			temp.y = 6;
 			return temp;
 		}
 
@@ -220,8 +217,8 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			btn_qianghua_all = temp;
 			temp.name = "btn_qianghua_all";
 			temp.styleClass = org.mokylin.skin.app.zhuangbei.qianghua.button.ButtonYijianqianghua;
-			temp.x = 589;
-			temp.y = 476;
+			temp.x = 659;
+			temp.y = 474;
 			return temp;
 		}
 
@@ -234,8 +231,8 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.label = "强化";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xCFC6AE;
-			temp.x = 631;
-			temp.y = 389;
+			temp.x = 811;
+			temp.y = 474;
 			return temp;
 		}
 
@@ -262,8 +259,8 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 70;
-			temp.x = 535;
-			temp.y = 442;
+			temp.x = 405;
+			temp.y = 479;
 			return temp;
 		}
 
@@ -279,8 +276,8 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 171;
-			temp.x = 605;
-			temp.y = 442;
+			temp.x = 475;
+			temp.y = 479;
 			return temp;
 		}
 
@@ -299,6 +296,17 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			return temp;
 		}
 
+		private function grp_pro_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			grp_pro = temp;
+			temp.name = "grp_pro";
+			temp.x = 471;
+			temp.y = 228;
+			temp.elementsContent = [__Zhuangbei_QianghuaSkin_UIAsset9_i(),__Zhuangbei_QianghuaSkin_UIAsset10_i(),lb_current_i(),__Zhuangbei_QianghuaSkin_Label4_i(),__Zhuangbei_QianghuaSkin_Label5_i(),lb_up_i(),progressBar_i(),lb_pro_i()];
+			return temp;
+		}
+
 		private function lb_current_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -306,11 +314,12 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.name = "lb_current";
 			temp.bold = true;
 			temp.text = "等级1";
+			temp.textAlign = "center";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 48;
-			temp.x = 479;
-			temp.y = 351;
+			temp.width = 54;
+			temp.x = 0;
+			temp.y = 9;
 			return temp;
 		}
 
@@ -329,6 +338,21 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			return temp;
 		}
 
+		private function lb_pro_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_pro = temp;
+			temp.name = "lb_pro";
+			temp.text = "(100/200)";
+			temp.textAlign = "center";
+			temp.color = 0xDFB01F;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 172;
+			temp.x = 101;
+			temp.y = 9;
+			return temp;
+		}
+
 		private function lb_up_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -336,11 +360,12 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.name = "lb_up";
 			temp.bold = true;
 			temp.text = "等级2";
+			temp.textAlign = "center";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 48;
-			temp.x = 799;
-			temp.y = 351;
+			temp.width = 54;
+			temp.x = 323;
+			temp.y = 9;
 			return temp;
 		}
 
@@ -358,6 +383,75 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			return temp;
 		}
 
+		private function progressBar_i():feathers.controls.ProgressBar
+		{
+			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
+			progressBar = temp;
+			temp.name = "progressBar";
+			temp.minimum = 0;
+			temp.styleClass = org.mokylin.skin.component.progress.pro_jindu_Skin;
+			temp.value = 100;
+			temp.x = 58;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function up0_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			up0 = temp;
+			temp.name = "up0";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.qianghua.Shuxing2_Skin()
+			temp.skin = skin
+			temp.width = 120;
+			temp.x = 476;
+			temp.y = 419;
+			return temp;
+		}
+
+		private function up1_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			up1 = temp;
+			temp.name = "up1";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.qianghua.Shuxing2_Skin()
+			temp.skin = skin
+			temp.width = 120;
+			temp.x = 740;
+			temp.y = 418;
+			return temp;
+		}
+
+		private function up2_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			up2 = temp;
+			temp.name = "up2";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.qianghua.Shuxing2_Skin()
+			temp.skin = skin
+			temp.width = 120;
+			temp.x = 476;
+			temp.y = 439;
+			return temp;
+		}
+
+		private function up3_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			up3 = temp;
+			temp.name = "up3";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.qianghua.Shuxing2_Skin()
+			temp.skin = skin
+			temp.width = 120;
+			temp.x = 740;
+			temp.y = 438;
+			return temp;
+		}
+
 		private function use_list_i():feathers.controls.List
 		{
 			var temp:feathers.controls.List = new feathers.controls.List();
@@ -367,7 +461,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
 			temp.width = 433;
 			temp.x = 438;
-			temp.y = 260;
+			temp.y = 286;
 			temp.layout = __Zhuangbei_QianghuaSkin_HorizontalLayout2_i();
 			return temp;
 		}

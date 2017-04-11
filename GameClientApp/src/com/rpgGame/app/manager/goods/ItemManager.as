@@ -1,8 +1,12 @@
 package com.rpgGame.app.manager.goods
 {
+	import com.game.engine3D.utils.MathUtil;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.info.item.EquipInfo;
 	
 	import app.message.GoodsType;
 	
@@ -78,18 +82,54 @@ package com.rpgGame.app.manager.goods
 		public static function getAllEquipDatas():Array
 		{
 			var roleDatas:Array=RoleEquipmentManager.instance.getAllItem();
-			BackPackManager.instance.checkType=[GoodsType.EQUIPMENT];
 			var backDatas:Array=BackPackManager.instance.getAllItem();
 			var allDatas:Array=roleDatas.concat(backDatas);
 			var i:int=0
 			while(i<allDatas.length){
-				if(!allDatas[i]){
+				if(!allDatas[i]||!(allDatas[i] is EquipInfo)){
 					allDatas.splice(i,1);
 					continue;
 				}
 				i++;
 			}
 			return allDatas;
+		}
+		
+		/**
+		 *排序消耗装备 
+		 * @param equipA
+		 * @param equipB
+		 * @return 
+		 * 
+		 */
+		public static function onSortUseEquip(equipA : EquipInfo, equipB : EquipInfo) : int
+		{
+			if(equipA.qItem.q_levelnum==equipB.qItem.q_levelnum){//阶数相同
+				if(equipA.qItem.q_default==equipB.qItem.q_default){//品质相同
+					if(equipA.qItem.q_strengthen_num==equipB.qItem.q_strengthen_num){//消耗值相同
+						return 0;
+					}else{
+						if(equipA.qItem.q_strengthen_num>equipB.qItem.q_strengthen_num){
+							return 1;
+						}else{
+							return -1;
+						}
+					}
+				}else{
+					if(equipA.qItem.q_default>equipB.qItem.q_default){
+						return 1;
+					}else{
+						return -1;
+					}
+				}
+			}else{
+				if(equipA.qItem.q_levelnum>equipB.qItem.q_levelnum){
+					return 1;
+				}else{
+					return -1;
+				}
+			}
+			return 0;
 		}
 	}
 }

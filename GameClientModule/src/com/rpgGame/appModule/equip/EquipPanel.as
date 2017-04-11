@@ -5,6 +5,7 @@ package com.rpgGame.appModule.equip
 	
 	import org.mokylin.skin.app.zhuangbei.Zhuangbei_Skin;
 	
+	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	
 	/**
@@ -47,6 +48,11 @@ package com.rpgGame.appModule.equip
 		{
 			super.show(data,openTable,parentContiner);
 			intensifyUI.show();
+		}
+		
+		override protected function onTouchTarget(target:DisplayObject):void
+		{
+			super.onTouchTarget(target);
 		}
 	}
 }

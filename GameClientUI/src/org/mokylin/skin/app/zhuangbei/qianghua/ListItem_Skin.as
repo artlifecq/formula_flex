@@ -30,7 +30,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			this.currentState = "down";
 			this.height = 22;
 			this.width = 68;
-			this.elementsContent = [];
+			this.elementsContent = [labelDisplay_i()];
 			
 			states = {
 				init:[
@@ -79,7 +79,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.left = 0;
 			temp.right = 0;
 			temp.text = "二阶";
-			temp.textAlign = "center";
+			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.top = 0;

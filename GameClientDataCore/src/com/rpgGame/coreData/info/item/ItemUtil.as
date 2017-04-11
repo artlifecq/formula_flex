@@ -3,6 +3,7 @@ package com.rpgGame.coreData.info.item
 	import com.game.mainCore.core.utils.TextFormatUtil;
 	import com.rpgGame.coreData.cfg.item.ContainerData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.task.PrizeInfo;
 	import com.rpgGame.coreData.type.ShopType;
@@ -12,6 +13,7 @@ package com.rpgGame.coreData.info.item
 	
 	import app.message.AmountType;
 	import app.message.GoodsProto;
+	import app.message.GoodsType;
 	import app.message.PrizeProto;
 	import app.message.ContainerProto.ContainerType;
 	
@@ -28,10 +30,20 @@ package com.rpgGame.coreData.info.item
 		public static function convertClientItemInfo(itemInfo:ItemInfo):ClientItemInfo
 		{
 			var cfgId : int =itemInfo.itemModelId;
-			var clientInfo : ClientItemInfo=new ClientItemInfo(cfgId);
+			var qItem:Q_item=ItemConfig.getQItemByID(cfgId);
+			var clientInfo : ClientItemInfo;
+			if(qItem.q_type==GoodsType.EQUIPMENT||qItem.q_type==GoodsType.EQUIPMENT1||qItem.q_type==GoodsType.EQUIPMENT2){//装备
+				clientInfo=new EquipInfo(cfgId);
+			}else{
+				clientInfo=new ClientItemInfo(cfgId);
+			}
+			clientInfo.qItem=qItem;
 			clientInfo.itemInfo=itemInfo;
 			clientInfo.setIndex(itemInfo.gridId);//格子索引
 			clientInfo.count=itemInfo.num;
+			if(clientInfo is EquipInfo){
+				clientInfo
+			}
 			return clientInfo;
 		}
 

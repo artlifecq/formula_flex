@@ -1,6 +1,7 @@
 package com.rpgGame.app.cmdlistener
 {
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
+	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
@@ -12,6 +13,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.backpack.message.ResItemRemoveMessage;
 	import com.rpgGame.netData.backpack.message.ResUseItemSuccessMessage;
 	import com.rpgGame.netData.equip.message.ResEquipInfoMessage;
+	import com.rpgGame.netData.equip.message.ResEquipOperateResultMessage;
 	import com.rpgGame.netData.equip.message.UnwearEquipItemMessage;
 	import com.rpgGame.netData.equip.message.WearEquipItemMessage;
 	import com.rpgGame.netData.store.message.ResStoreItemAddMessage;
@@ -20,6 +22,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.store.message.ResStoreItemRemoveMessage;
 	
 	import org.client.mainCore.bean.BaseBean;
+	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
 	
 	/**
@@ -48,10 +51,16 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(107101, onWearEquipItemMessage );
 			SocketConnection.addCmdListener(107102, onUnwearEquipItemMessage );
 			SocketConnection.addCmdListener(107105, onResEquipInfoMessage );
+			SocketConnection.addCmdListener(107105, onResEquipOperateResultMessage );
 			
 			
 			
 			finish();
+		}
+		
+		private function onResEquipOperateResultMessage(msg:ResEquipOperateResultMessage):void
+		{
+			EventManager.dispatchEvent(ItemEvent.ITEM_STRENGTH_MSG,msg);
 		}
 		
 		private function onResChangeLimitItemMessage(msg:ResChangeLimitItemMessage):void

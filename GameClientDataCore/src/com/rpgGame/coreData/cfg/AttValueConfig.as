@@ -5,6 +5,8 @@ package com.rpgGame.coreData.cfg
 	
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
+	
+	import org.client.mainCore.ds.HashMap;
 
 	/**
 	 *属性配置表 
@@ -55,6 +57,17 @@ package com.rpgGame.coreData.cfg
 			}
 			
 			return 0;
+		}
+		
+		public static function getTypeValueMap(att:Q_att_values):HashMap
+		{
+			var maps:HashMap=new HashMap();
+			for(var i:int=1;i<CharAttributeType.TYPE_NUM;i++){
+				if(att["q_value"+i]!=0&&att["q_type"+i]!=0){//值和类型都存在
+					maps.add(att["q_type"+i],att["q_value"+i]);					
+				}
+			}
+			return maps;
 		}
 	}
 }

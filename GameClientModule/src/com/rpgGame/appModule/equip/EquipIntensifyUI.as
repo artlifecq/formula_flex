@@ -5,29 +5,50 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.appModule.common.GoodsContainerPanel;
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
+	import com.rpgGame.appModule.common.itemRender.SkinItem;
+	import com.rpgGame.appModule.common.itemRender.SkinItemRender;
+	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.cfg.item.ItemStrength;
+	import com.rpgGame.coreData.clientConfig.Q_att_values;
+	import com.rpgGame.coreData.clientConfig.Q_equip_strength;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.lang.LangUI;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.item.GridBGType;
-	import com.rpgGame.coreData.utils.HtmlTextUtil;
+	import com.rpgGame.netData.equip.message.ResEquipOperateResultMessage;
+	
+	import flash.geom.Point;
 	
 	import app.message.GoodsType;
 	
-	import feathers.controls.renderers.DefaultListItemRenderer;
-	import feathers.controls.renderers.IListItemRenderer;
+	import feathers.controls.ComboBox;
+	import feathers.controls.List;
+	import feathers.controls.Scroller;
+	import feathers.controls.SkinnableContainer;
 	import feathers.data.ListCollection;
 	
+	import org.client.mainCore.ds.HashMap;
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhuangbei.Zhuangbei_left;
+	import org.mokylin.skin.app.zhuangbei.qianghua.ListItem_Skin;
+	import org.mokylin.skin.app.zhuangbei.qianghua.Shuxing2_Skin;
 	import org.mokylin.skin.app.zhuangbei.qianghua.TitileHead;
 	import org.mokylin.skin.app.zhuangbei.qianghua.Zhuangbei_QianghuaSkin;
 	
+	import starling.core.Starling;
+	import starling.display.DisplayObject;
 	import starling.events.Event;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
 	
 	/**
 	 *装备强化
@@ -49,12 +70,18 @@ package com.rpgGame.appModule.equip
 		private var upEquips:Vector.<ClientItemInfo>;//升级数据
 		private var useEquips:Vector.<ClientItemInfo>;//消耗数据
 
-		private var intensifyItemInfo:ClientItemInfo;
+		private var intensifyItemInfo:EquipInfo;
 		
 		private var _strenValue:int;
 		
 		private var lvDatas:Array;
 		private var qualityDatas:Array;
+
+		private var currCfg:Q_equip_strength;
+
+		private var nextCfg:Q_equip_strength;
+		private var needExp:int;//升级所需要的经验值
+		private var currentCom:ComboBox;
 		
 		public function EquipIntensifyUI()
 		{
@@ -91,21 +118,64 @@ package com.rpgGame.appModule.equip
 			for(var i:int=1;i<11;i++){
 				lvDatas.push(ItemUtil.getLevele(i));
 			}
-			_skin.cmb_dengjie.dataProvider=new ListCollection(lvDatas);
-			_skin.cmb_dengjie.selectedIndex=0;
+			_skin.cmb_dengjie.addEventListener("creationComplete",onCreate);
+			
 			qualityDatas=new Array();
 			for(i=0;i<5;i++){
 				qualityDatas.push(ItemUtil.getQualityName(i));
 			}
-			_skin.cmb_pinzhi.dataProvider=new ListCollection(qualityDatas);
-			_skin.cmb_pinzhi.selectedIndex=0;
-			
-			_skin.cmb_dengjie.addEventListener(Event.COMPLETE,onComplete);
+			_skin.cmb_pinzhi.addEventListener("creationComplete",onCreatePinZhi);
 		}
 		
-		private function onComplete():void
+		private function onCreatePinZhi(e:Event):void
 		{
-			trace("complete");			
+			_skin.cmb_pinzhi.removeEventListener("creationComplete",onCreatePinZhi);
+			_skin.cmb_pinzhi.dataProvider=new ListCollection(qualityDatas);
+			_skin.cmb_pinzhi.selectedIndex=0;
+			currentCom=_skin.cmb_pinzhi;
+			var list:List=currentCom.getList();
+			list.itemRendererFactory = createComBoxRender2;
+			list.clipContent = true;
+			list.scrollBarDisplayMode = "fixed";
+			list.verticalScrollBarPosition = "right";
+			list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+			list.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
+			list.padding=2;
+			
+			currentCom.dataProvider=new ListCollection(qualityDatas);
+			currentCom.selectedIndex=0;
+		}
+		
+		private function onCreate(e:Event):void
+		{
+			_skin.cmb_dengjie.removeEventListener("creationComplete",onCreate);
+			currentCom=_skin.cmb_dengjie;
+			var list:List=currentCom.getList();
+			list.itemRendererFactory = createComBoxRender1;
+			list.clipContent = true;
+			list.scrollBarDisplayMode = "fixed";
+			list.verticalScrollBarPosition = "right";
+			list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+			list.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
+			list.padding=2;
+			currentCom.dataProvider=new ListCollection(lvDatas);
+			currentCom.selectedIndex=0;
+		}
+		
+		private function createComBoxRender1():SkinItemRender
+		{
+			var skin:ListItem_Skin=new ListItem_Skin();
+			var skinItem:SkinItem=new SkinItem(_skin.cmb_dengjie,skin);
+			var render:SkinItemRender=new SkinItemRender(skinItem);
+			return render;
+		}
+		
+		private function createComBoxRender2():SkinItemRender
+		{
+			var skin:ListItem_Skin=new ListItem_Skin();
+			var skinItem:SkinItem=new SkinItem(_skin.cmb_pinzhi,skin);
+			var render:SkinItemRender=new SkinItemRender(skinItem);
+			return render;
 		}
 		
 		private function onCancelIntensify(grid:DragDropItem ):void
@@ -122,17 +192,7 @@ package com.rpgGame.appModule.equip
 			updateView();
 			
 			//删除放置的所有消耗
-			var datas:Array=_goodsContainerUse1.dataProvider.data as Array;
-			for each(var info:GridInfo in datas){
-				if(info.data){
-					var item:ClientItemInfo=info.data as ClientItemInfo;
-					deleteItems(selectedUse,item);
-					useEquips.push(item);
-				}
-			}
-			
-			_goodsContainerUse1.refleshGridsByDatas(selectedUse);
-			_goodsContainerUse.refleshGridsByDatas(useEquips);
+			cancelAllUse();
 		}
 		
 		private function createItemRender1():GridItemRender
@@ -207,6 +267,12 @@ package com.rpgGame.appModule.equip
 			deleteItems(useEquips,item);
 			_goodsContainerUse.refleshGridsByDatas(useEquips);
 			_strenValue+=item.qItem.q_strengthen_num;
+			
+			if(_strenValue>=needExp){//只有能升级时才显示对比
+				updateAttShow(currCfg.q_att_type,nextCfg.q_att_type);
+			}else{
+				updateAttShow(currCfg.q_att_type);
+			}
 		}
 		
 		/**
@@ -219,7 +285,12 @@ package com.rpgGame.appModule.equip
 			if(intensifyItemInfo){
 				upEquips.push(intensifyItemInfo);
 			}
-			intensifyItemInfo=gridInfo.data as ClientItemInfo;
+			intensifyItemInfo=gridInfo.data as EquipInfo;
+			
+			currCfg=ItemStrength.getStrengthCfg(intensifyItemInfo.qItem.q_kind,intensifyItemInfo.qItem.q_job,intensifyItemInfo.strengthLevel);
+			nextCfg=ItemStrength.getStrengthCfg(intensifyItemInfo.qItem.q_kind,intensifyItemInfo.qItem.q_job,intensifyItemInfo.strengthLevel+1);
+			needExp=currCfg.q_exp-intensifyItemInfo.strengthExp;
+			
 			deleteItems(upEquips,intensifyItemInfo);
 			_goodsContainerTarget.refleshGridsByDatas(upEquips);
 			
@@ -250,16 +321,121 @@ package com.rpgGame.appModule.equip
 				_skin.equip_name.color=ItemConfig.getItemQualityColor(intensifyItemInfo.cfgId);
 				_skin.equip_name.text=intensifyItemInfo.name;
 				_skin.lb_dengji.htmlText="最大强化等级:"+1+"/"+intensifyItemInfo.qItem.q_max_strengthen;
+				_skin.lb_current.text=intensifyItemInfo.strengthLevel+"级";
+				_skin.lb_up.text=(intensifyItemInfo.strengthLevel+1)+"级";
+				var currentExp:int=intensifyItemInfo.strengthExp;
+				for each (var equip:EquipInfo in selectedUse) 
+				{
+					currentExp+=equip.qItem.q_strengthen_num;
+				}
+				_skin.lb_pro.text=currentExp+"/"+currCfg.q_exp;
+				updateAttShow(currCfg.q_att_type);
 			}else{
 				_skin.lb_dengji.htmlText="请选择要强化的装备!";
 				_leftSkin.lb_yinzi.htmlText="0";
 				_skin.equip_name.text="";
+				for(var i:int=0;i<4;i++){
+					var labelUp:SkinnableContainer=_skin["up"+i];
+					labelUp.visible=false;
+				}
+				_skin.lb_pro.text="";
+				_skin.progressBar.value=0;
 			}
+		}
+		
+		private function updateAttShow(type1:int, type2:int=-1):void
+		{
+			var attValues1:Q_att_values=AttValueConfig.getAttInfoById(type1);
+			var maps1:HashMap=AttValueConfig.getTypeValueMap(attValues1);
+			var keys:Array=maps1.keys();
+			var values1:Array=maps1.getValues();
+			
+			var attValues2:Q_att_values;
+			var maps2:HashMap;
+			var values2:Array;
+			if(type2!=-1){
+				attValues2=AttValueConfig.getAttInfoById(type2);
+				maps2=AttValueConfig.getTypeValueMap(attValues2);
+				values2=maps2.getValues();
+			}
+			
+			for(var i:int=0;i<4;i++){
+				var labelUp:SkinnableContainer=_skin["up"+i];
+				var labelUpSkin:Shuxing2_Skin=_skin["up"+i].skin as Shuxing2_Skin;
+				if(i<values1.length){
+					labelUpSkin.lb_name.text=CharAttributeType.getCNName(keys[i])+":";
+					labelUpSkin.arrow_up.visible=labelUpSkin.lb_up.visible=true;
+					if(values2){
+						labelUpSkin.lb_num.text=values2[i];
+						labelUpSkin.lb_up.text=(values2[i]-values1[i])+"";
+					}else{
+						labelUpSkin.lb_num.text=values1[i];
+						labelUpSkin.arrow_up.visible=labelUpSkin.lb_up.visible=false;
+					}
+					
+					labelUpSkin.lb_num.x=labelUpSkin.lb_name.x+labelUpSkin.lb_name.textWidth;
+					labelUpSkin.arrow_up.x=labelUpSkin.lb_num.x+labelUpSkin.lb_num.textWidth;
+					labelUpSkin.lb_up.x=labelUpSkin.arrow_up.x+labelUpSkin.arrow_up.width;
+				}else{
+					labelUp.visible=false;
+				}
+			}
+		}
+		
+		private function getOneKeyUse():void
+		{
+			cancelAllUse();
+			var lv:int=_skin.cmb_dengjie.selectedIndex+1;
+			var quality:int=_skin.cmb_pinzhi.selectedIndex;
+			var result:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
+			var datas:Array=_goodsContainerUse.dataProvider.data as Array;
+			var item:ClientItemInfo;
+			for each(var info:GridInfo in datas){
+				if(info.data){
+					item=info.data as ClientItemInfo;
+					if(item.qItem.q_levelnum<=lv&&item.quality<=quality){//符合阶数和品质筛选
+						result.push(item);
+					}
+				}
+			}
+			result.sort(ItemManager.onSortUseEquip);
+			var addExp:int=0;
+			var useList:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
+			for(var i:int=0;i<6;i++){
+				if(i==result.length||addExp>=needExp){
+					break;
+				}
+				item=result[i];
+				addExp+=item.qItem.q_strengthen_num;
+				useList.push(item);
+			}
+		}
+		
+		
+		private function cancelAllUse():void
+		{
+			var datas:Array=_goodsContainerUse1.dataProvider.data as Array;
+			for each(var info:GridInfo in datas){
+				if(info.data){
+					var item:ClientItemInfo=info.data as ClientItemInfo;
+					deleteItems(selectedUse,item);
+					useEquips.push(item);
+				}
+			}
+			
+			_goodsContainerUse1.refleshGridsByDatas(selectedUse);
+			_goodsContainerUse.refleshGridsByDatas(useEquips);
 		}
 		
 		private function initEvent():void
 		{
 			_leftSkin.tab_pack.addEventListener(Event.CHANGE, onTab);
+			EventManager.addEvent(ItemEvent.ITEM_STRENGTH_MSG,getStrengthMsg);
+		}
+		
+		private function getStrengthMsg(msg:ResEquipOperateResultMessage):void
+		{
+			
 		}
 		
 		private function getEquipByType(type:int,datas:Vector.<ClientItemInfo>):Vector.<ClientItemInfo>
@@ -299,6 +475,17 @@ package com.rpgGame.appModule.equip
 		public function hide():void
 		{
 			
+		}
+		
+		override protected function onTouchTarget(target:DisplayObject):void
+		{
+			super.onTouchTarget(target);
+			switch(target){
+				case _skin.btn_qianghua_all:
+					break;
+				case _skin.btn_qianhua:
+					break;
+			}
 		}
 		
 		private function initItem():void
