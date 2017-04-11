@@ -171,7 +171,7 @@ package com.rpgGame.app.manager.fightsoul
 				return;
 			}
 			var heroData : HeroData = player.data as HeroData; 
-			heroData.fightSoulLevel = _fightSoulInfo.curModelLv;
+			heroData.fightSoulLevel =1;// _fightSoulInfo.curModelLv;
 			AvatarManager.callEquipmentChange(player);
 		}
 		

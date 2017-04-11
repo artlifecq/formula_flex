@@ -1,5 +1,6 @@
 package org.mokylin.skin.component.check
 {
+	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 
@@ -21,18 +22,24 @@ package org.mokylin.skin.component.check
 			super();
 			
 			this.currentState = "upAndSelected";
+			this.width = 79;
 			this.elementsContent = [];
 			
 			states = {
 				init:[
 						{target:"labelDisplay",
 							name:"textAlign",
-							value:"center"
+							value:"left"
 						}
 						,
 						{target:"labelDisplay",
 							name:"color",
-							value:0xFFFFFF
+							value:0xCFC6AE
+						}
+						,
+						{target:"labelDisplay",
+							name:"nativeFilters",
+							value:Fontter.filterObj["textFilterBlackGreen"]
 						}
 						,
 						{target:"labelDisplay",
@@ -55,12 +62,12 @@ package org.mokylin.skin.component.check
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
-			temp.bottom = 0;
-			temp.left = 0;
-			temp.right = 0;
-			temp.text = "";
-			temp.textAlign = "center";
-			temp.color = 0xFFFFFF;
+			temp.height = 23;
+			temp.left = 28;
+			temp.text = "复选框";
+			temp.textAlign = "left";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.top = 0;
 			temp.verticalAlign = "middle";
 			return temp;

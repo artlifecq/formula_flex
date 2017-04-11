@@ -15,6 +15,7 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.item.ItemChangeType;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -89,6 +90,14 @@ package com.rpgGame.app.manager.goods
 			
 			_goodsList = [];
 			goodsEnableDict = new Dictionary();
+		}
+		
+		public function isEquip(cfg:Q_item):Boolean
+		{
+			if(cfg.q_type==GoodsType.EQUIPMENT||cfg.q_type==GoodsType.EQUIPMENT1||cfg.q_type==GoodsType.EQUIPMENT2){
+				return true;
+			}
+			return false;
 		}
 		
 		/**
@@ -717,7 +726,7 @@ package com.rpgGame.app.manager.goods
 		
 		//---------------排序-------------------
 		
-		private function compareItemInfoSort(itemInfo1:ClientItemInfo,itemInfo2:ClientItemInfo):int
+		protected function compareItemInfoSort(itemInfo1:ClientItemInfo,itemInfo2:ClientItemInfo):int
 		{
 			if(itemInfo1.cfgId == itemInfo2.cfgId)
 			{
@@ -1317,6 +1326,9 @@ package com.rpgGame.app.manager.goods
 		/**获取锁定**/
 		public static function getIsShowLockAsset(container:int,index:int):Boolean
 		{
+			if(!getMrg(container)){
+				return false;
+			}
 			return getMrg(container).getIsShowLockAsset(index);
 		}
 		/**取消锁定**/

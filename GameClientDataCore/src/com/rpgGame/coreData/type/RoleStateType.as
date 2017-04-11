@@ -73,5 +73,6 @@ package com.rpgGame.coreData.type
         public static const CONTROL_SHAPESHIFTING : int = rEnum.next;
 		
 		public static const CONTROL_USE_SPELL:int = rEnum.next;
+		public static const CONTROL_SHORTCUTGRID:int = rEnum.next;
 	}
 }

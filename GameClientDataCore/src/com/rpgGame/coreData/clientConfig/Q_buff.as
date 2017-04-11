@@ -52,6 +52,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_effect_ratio:String;
 		 /**  在指定时间内，对同一个对象添加BUFF的冷却时间，在这个时间内，添加将失败。单位毫秒 */
 		public var q_add_cd:int;
+		 /**  是否针对死亡单位（0否，1是） */
+		public var q_die:int;
 		 /**  效果的总持续时间（单位：毫秒）（填-1为永久生效） */
 		public var q_effect_time:int;
 		 /**  BUFF触发次数，配置后，触发次数用完就会删除该BUFF,{ 触发类型,触发条件,剩余次数 }; t=触发类型 1:命中 2:受伤 3:躲闪 4,暴击 5:死亡 6使用指定技能。 c=触发条件:部分需要触发类型需要配置条件(t=1 时 c=技能id),如:使用指定技能这类。r=剩余次数.例:{t:1,c:0,r:1} */

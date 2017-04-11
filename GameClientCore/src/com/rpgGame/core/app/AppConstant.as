@@ -92,7 +92,11 @@ package com.rpgGame.core.app
 		 */
 		public static var SKILL_PANL:String = createAppInfo( "skill.SkillPanel","wuxue");
 		/**
-		 *战魂
+		 *装备面板
+		 */
+		public static var EQUIP_PANL:String = createAppInfo( "equip.EquipPanel","zhuangbei");
+		/** 
+		*战魂
 		 */
 		public static var Battle_PANL:String = createAppInfo( "fightsoul.FightSoulPanel","zhanhun");
 		

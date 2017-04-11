@@ -128,13 +128,7 @@ package com.rpgGame.appModule.role
 		{
 			_skin.packs.visible=true;
 			initEvent();
-			if(!ItemSender.isReqPack){
-				EventManager.addEvent(ItemEvent.ITEM_INIT,initPackDatas);
-				ItemSender.getItemsByType(ItemContainerID.BackPack);
-			}else{
-				setGridsCount(BackPackManager.instance.hasOpenCount,true);
-			}
-			
+			setGridsCount(BackPackManager.instance.hasOpenCount,true);
 			updateAmount();
 		}
 		
@@ -186,6 +180,7 @@ package com.rpgGame.appModule.role
 		
 		private function setRefleshLock():void
 		{
+			BackPackManager.instance.setCheckType(curType);
 			if(_skin.tab_pack.selectedIndex == 0)
 			{
 				BackPackManager.instance.setUnusableGrid(false);
@@ -293,7 +288,6 @@ package com.rpgGame.appModule.role
 			grid.rightMouseClickFun = onRightMouse;
 			grid.onTouchEndCallBack = onTouchGrid;
 			grid.checkDrag=checkDrag;
-			grid.setQualityImageIconPoint(1,1);
 			
 			return render;
 		}
@@ -485,15 +479,6 @@ package com.rpgGame.appModule.role
 		private function changeAccessState(isSave:Boolean):void
 		{
 			toStorage=isSave;
-		}
-		
-		private function initPackDatas(containerId:int):void 
-		{
-			if(containerId!=ItemContainerID.BackPack){
-				return;
-			}
-			EventManager.removeEvent(ItemEvent.ITEM_INIT,initPackDatas);
-			setGridsCount(BackPackManager.instance.hasOpenCount,true);
 		}
 		
 		private function onTab(e:Event):void

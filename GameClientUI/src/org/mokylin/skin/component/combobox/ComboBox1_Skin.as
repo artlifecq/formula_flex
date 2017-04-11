@@ -1,5 +1,6 @@
 package org.mokylin.skin.component.combobox
 {
+	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.List;
 	import feathers.controls.StateSkin;
@@ -94,6 +95,8 @@ package org.mokylin.skin.component.combobox
 			temp.left = 0;
 			temp.right = 0;
 			temp.styleClass = org.mokylin.skin.component.text.textInput1_Skin;
+			temp.color = 0x5CB006;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.y = 0;
 			return temp;
 		}

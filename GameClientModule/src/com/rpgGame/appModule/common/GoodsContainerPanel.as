@@ -197,8 +197,8 @@ package com.rpgGame.appModule.common
 			if(!gridInfo)
 				return;
 			gridInfo.data = itemInfo;
-			gridInfo.isEnabled = _mgr.isEnabled(index);
-			gridInfo.isUnlock = GoodsContainerMamager.isUnlock(containerId,index);
+			gridInfo.isEnabled = _mgr?_mgr.isEnabled(index):true;
+			gridInfo.isUnlock =  _mgr?_mgr.isUnlock(index):true;
 			if(itemInfo && gridIndex == -1)
 			{
 				gridInfo.isShowLockAsset = GoodsContainerMamager.getIsShowLockAsset(containerId, itemInfo.index);
@@ -282,6 +282,30 @@ package com.rpgGame.appModule.common
 				if(i < goodsLen)
 				{
 					setGridInfo(i, goodsInfo[i]);
+				}
+				else
+				{
+					setGridInfo(i, null);
+				}
+			}
+			updateGridLen && updateGridLen();
+			dataProvider.updateAll();
+		}
+		
+		/**
+		 *通过数据刷新格子 
+		 * @param datas
+		 * 
+		 */
+		public function refleshGridsByDatas(datas:Vector.<ClientItemInfo>):void
+		{
+			var i:int =0;
+			var goodsLen:int = datas ? datas.length : 0;
+			for (i=0; i<gridCount; i++)
+			{
+				if(i < goodsLen)
+				{
+					setGridInfo(i, datas[i]);
 				}
 				else
 				{

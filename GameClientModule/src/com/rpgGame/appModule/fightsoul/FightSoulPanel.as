@@ -200,9 +200,9 @@ package com.rpgGame.appModule.fightsoul
 				_skillIcon.y = 406;
 				addChild(_skillIcon);
 			}
-			FaceUtil.SetSkillGrid(_skillIcon, FaceUtil.chanceSpellToFaceInfo(_skillData), false);//目前Tips有bug,待修改
+			FaceUtil.SetSkillGrid(_skillIcon, FaceUtil.chanceSpellToFaceInfo(_skillData), true);//目前Tips有bug,待修改
 			_skillIcon.setIconPoint(6,7);
-			_skillIcon.setQualityImageIconPoint(6,7);
+//			_skillIcon.setQualityImageIconPoint(6,7);
 			var length:int = FightSoulManager.instance().RewardInfos.length;
 			var icon:IconCDFace
 			 if(_itemIconLists == null)
@@ -226,7 +226,7 @@ package com.rpgGame.appModule.fightsoul
 				 icon = _itemIconLists[index].target as IconCDFace
 				 FaceUtil.setGridData(icon,FightSoulManager.instance().RewardInfos[index],true);
 				 icon.setIconPoint(6,7);
-				 icon.setQualityImageIconPoint(6,7);
+//				 icon.setQualityImageIconPoint(6,7);
 			 }
 			 refeashRewards();
 		}

@@ -35,6 +35,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.HintConfig;
 	import com.rpgGame.coreData.cfg.MailCfgData;
 	import com.rpgGame.coreData.cfg.MazeCfgData;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.NpcConfigData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
 	import com.rpgGame.coreData.cfg.RelationCfgData;
@@ -209,6 +210,10 @@ package com.rpgGame.app.data
 			FightsoulData.setConfig(dic[ConfigClassRegister.Q_fightsoul]);
 			FightsoulModeData.setConfig(dic[ConfigClassRegister.Q_fightsoul_mode]);
 			GlobalSheetData.setup(dic[ConfigClassRegister.Q_global]);
+			
+			// 服务器发送 消息ID对应客户端 
+			NotifyCfgData.setup(dic[ConfigClassRegister.Q_notify]);
+			
 		}
 
 		/**

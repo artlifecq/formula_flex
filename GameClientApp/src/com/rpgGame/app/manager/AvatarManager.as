@@ -6,6 +6,7 @@ package com.rpgGame.app.manager
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.scene.render.vo.RenderUnitChild;
 	import com.game.engine3D.vo.BaseObj3D;
+	import com.rpgGame.app.manager.fightsoul.FightSoulAnimator;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
@@ -14,7 +15,6 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.events.AvatarEvent;
 	import com.rpgGame.coreData.AvatarInfo;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.FightsoulData;
 	import com.rpgGame.coreData.cfg.FightsoulModeData;
 	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
@@ -727,14 +727,7 @@ package com.rpgGame.app.manager
 			{
 				if (rpd_body)
 				{
-					if (rpd_body.animatorSourchPath)
-					{
-						ru = role.avatar.addRenderUnitToComposite(RenderUnitType.FIGHTSOUL, RenderUnitID.FIGHTSOUL, fightsoul);
-					}
-					else
-					{
-						ru = role.avatar.addRenderUnitToBone(RenderUnitType.FIGHTSOUL, RenderUnitID.FIGHTSOUL, BoneNameEnum.c_0_head_01, fightsoul);
-					}
+					ru = role.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.st_zero, fightsoul);
 				}
 				if (ru)
 				{
@@ -744,7 +737,7 @@ package com.rpgGame.app.manager
 					if (role.isMainChar)
 					{
 						//						ru.entityGlass = true;
-					}
+					} 
 					else
 					{
 						ru.entityGlass = false;
@@ -755,6 +748,7 @@ package com.rpgGame.app.manager
 						ru.castsShadows = true;
 					role.avatar.applySyncInfo(RenderUnitType.FIGHTSOUL, RenderUnitID.FIGHTSOUL);
 					ru.play(0);
+					ru.setRenderAnimator(new FightSoulAnimator());
 				}
 			}
 			else
@@ -762,6 +756,7 @@ package com.rpgGame.app.manager
 				role.avatar.removeRenderUnitByID(RenderUnitType.FIGHTSOUL, RenderUnitID.FIGHTSOUL);
 			}
 		}
+		
 		
 		/**部件添加完成*/
 		private static function partAddedCallBack(role : SceneRole, ru : RenderUnit3D) : void

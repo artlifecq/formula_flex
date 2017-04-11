@@ -99,7 +99,6 @@ package com.rpgGame.app.ui.tips
 		{
 			_itemInfo = data as ClientItemInfo;
 			FaceUtil.SetItemGrid(_iconFace, _itemInfo, false);
-			_iconFace.setQualityImageIconPoint(8,7);
 			var info:HeroData=MainRoleManager.actorInfo;
 			while(labelList.length!=0){
 				var l:Label=labelList.shift();
@@ -136,7 +135,7 @@ package com.rpgGame.app.ui.tips
 			_itemTip.yizhuangbei.visible=false;
 			isShowDuiBi=false;
 			if(equipItemInfo){
-				if(_itemInfo==equipItemInfo){
+				if(_itemInfo.itemInfo==equipItemInfo.itemInfo){
 					_itemTip.yizhuangbei.visible=true;
 				}else if(_itemInfo.qItem.q_job==0||_itemInfo.qItem.q_job==equipItemInfo.qItem.q_job){//职业符合
 					isShowDuiBi=true;

@@ -249,7 +249,7 @@ package com.rpgGame.coreData
 			_fightsoulResID = value;
 			if (_fightsoulResID!=null&&_fightsoulResID!="")
 			{
-				_fightsoulMode = new RenderParamData3D(RenderUnitID.FIGHTSOUL, RenderUnitType.FIGHTSOUL, ClientConfig.getAvatar("monster/"+_mountResID));
+				_fightsoulMode = new RenderParamData3D(RenderUnitID.FIGHTSOUL, RenderUnitType.FIGHTSOUL, ClientConfig.getAvatar("monster/"+_fightsoulResID));
 				_fightsoulMode.mouseEnable = true;
 				_fightsoulMode.clearSameType = false;
 			}

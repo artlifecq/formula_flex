@@ -20,10 +20,9 @@ package com.rpgGame.app.ui.tips
 	
 	/**
 	 * 技能TIPS
-	 * @author luguozheng
-	 * @author 陈鹉光-2016-07-13 改
+	 * @author dik
 	 * 
-	 */	
+	 */
 	public class SpellTip extends SkinUI implements ITip
 	{
 		private var _spellTip:jinengTips_Skin;
@@ -59,7 +58,7 @@ package com.rpgGame.app.ui.tips
 			riseIco=new BgIcon(48);
 			_spellTip.container.addChildAt(mainIco,4);
 			_spellTip.grp_rise_content.addChild(riseIco);
-			riseIco.x=2;
+			riseIco.x=3;
 			riseIco.y=0;
 			mainIco.x=9;
 			mainIco.y=10;
@@ -140,10 +139,10 @@ package com.rpgGame.app.ui.tips
 			
 			mainIco.setIconResName(ClientConfig.getSkillIcon(cfg.q_skillID.toString(),64));
 			riseIco.setIconResName(ClientConfig.getRiseSkillIcon(cfg.q_skillID.toString(),48));
-			
-			_spellTip.bg.height=_spellTip.grp_rise_content.y+_spellTip.rise_name.textHeight+_spellTip.rise_des.textHeight+40+_spellTip.eft_name.textHeight;
-			if(_spellTip.bg.height<330){
-				_spellTip.bg.height=330;
+			if(_spellTip.rise_name.textHeight+_spellTip.rise_name.textHeight<80){
+				_spellTip.bg.height=_spellTip.grp_rise_content.y+80;
+			}else{
+				_spellTip.bg.height=_spellTip.grp_rise_content.y+_spellTip.rise_name.textHeight+_spellTip.rise_des.textHeight+40+_spellTip.eft_name.textHeight;
 			}
 		}
 		

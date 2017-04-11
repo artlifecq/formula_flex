@@ -40,6 +40,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_hatred:int;
 		 /**  血量上限比例(万分比) */
 		public var q_maxhp_per:int;
+		 /**  血量上限值 */
+		public var q_maxhp:int;
 		 /**  升级所需军衔等级(从本级升至下一级) */
 		public var q_militaryrank:int;
 		 /**  BUFF触发率额外系数(万分比) */

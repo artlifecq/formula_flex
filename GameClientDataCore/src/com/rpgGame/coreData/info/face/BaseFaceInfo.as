@@ -12,7 +12,6 @@ package com.rpgGame.coreData.info.face
 	{
 		/**所有容器信息,在需要拖曳的容器中(如背包,仓库中才有意义)**/
 		private var _containerID:int = -1;
-		/** 索引 **/
 		private var _index:int = -1;
 		/** ID————可物品ID、技能ID **/
 		protected var _cfgId:int;
@@ -50,6 +49,12 @@ package com.rpgGame.coreData.info.face
 			_faceType = faceType;
 		}
 		
+		/** 索引 **/
+		public function set index(value:int):void
+		{
+			_index = value;
+		}
+
 		public function setContainerId(containerID:int):void
 		{
 			if(containerID<0 || containerID == _containerID)

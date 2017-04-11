@@ -26,7 +26,7 @@ package com.rpgGame.netData.fight.message{
 			//攻击类型
 			writeInt(_fightType);
 			//失败类型
-			writeByte(_failType);
+			writeInt(_failType);
 			return true;
 		}
 		
@@ -37,7 +37,7 @@ package com.rpgGame.netData.fight.message{
 			//攻击类型
 			_fightType = readInt();
 			//失败类型
-			_failType = readByte();
+			_failType = readInt();
 			return true;
 		}
 		

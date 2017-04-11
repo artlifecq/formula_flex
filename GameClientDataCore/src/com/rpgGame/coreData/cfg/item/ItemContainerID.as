@@ -22,6 +22,8 @@ package com.rpgGame.coreData.cfg.item
 		public static const Mount : int = ContainerType.MOUNT_EQUIPMENT;
 		
 		
+		
+		
 		//--------------------客户端自有类型,从10开始
 		/** 快捷栏 10 **/
 		public static const Shortcut:int = rEnum.ENUM_START( 10 );
@@ -75,6 +77,19 @@ package com.rpgGame.coreData.cfg.item
 		public static const STALL : int = rEnum.next;
 		/** 摆摊出售物品 35**/
 		public static const STALL_SELL : int = rEnum.next;
+		
+		/**
+		 * 强化装备列表
+		 */
+		public static const INTENSIFY_LIST:int =rEnum.next;
+		/**
+		 * 强化装备消耗
+		 */
+		public static const INTENSIFY_USE:int =rEnum.next;
+		/**
+		 * 强化装备消耗1
+		 */
+		public static const INTENSIFY_USE1:int =rEnum.next;
 		
 	}
 }

@@ -35,8 +35,10 @@ package com.rpgGame.app.view.icon
 	{
 		protected var _faceInfo : IBaseFaceInfo;
 
-		private var _cdFace : CDFace;
+		public var _cdFace : CDFace;
 		private var _needCD : Boolean = false;
+		private var _isGary : Boolean = false;
+		
 		/** 是否已经侦听cd事件*/
 		private var _isAlreadyListenerCd : Boolean;
 		/** 显示快捷键 */
@@ -225,6 +227,7 @@ package com.rpgGame.app.view.icon
 				}
 			}
 			setIsShowCdTm(_isShwoTm);
+			_cdFace.setTimeTxt("");
 			addChild(_cdFace);
 		}
 
@@ -264,7 +267,7 @@ package com.rpgGame.app.view.icon
 			else
 				_cdFace.hideTmTxt();
 		}
-
+		
 		override public function sortLayer() : void
 		{
 			super.sortLayer();
@@ -278,6 +281,7 @@ package com.rpgGame.app.view.icon
 
 		public function set isGary(value : Boolean) : void
 		{
+			_isGary=value;
 			if (_iconImage == null)
 				return;
 
@@ -290,7 +294,10 @@ package com.rpgGame.app.view.icon
 				_iconImage.filter = null;
 			}
 		}
-
+		public function get isGary() : Boolean
+		{
+			return _isGary;
+		}
 		/** 清空 只是把显示数据清除 并不全部销毁 * */
 		override public function clear() : void
 		{

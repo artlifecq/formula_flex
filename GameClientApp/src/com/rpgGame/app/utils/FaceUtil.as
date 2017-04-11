@@ -232,6 +232,7 @@ package com.rpgGame.app.utils
 			grid.setIsShowCdTm( true );
 //			grid.setQualityImageIconPoint( -2, -2 );
 			grid.sortLayer();
+			
 			if( isTips )
 				TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.SPELL_TIP, data,false,new Point(grid.x,grid.y)) );
 			else
@@ -415,7 +416,6 @@ package com.rpgGame.app.utils
 				if( mountUnitData != null )
 					grid.setIconResName( ClientConfig.getMountIconByMountSpeciesId( mountUnitData.speciesId ) );
 			}
-			grid.setQualityImageIconPoint( -2, -2 );
 			grid.selectImgVisible = false;
 			grid.sortLayer();
 			if( isTips )
