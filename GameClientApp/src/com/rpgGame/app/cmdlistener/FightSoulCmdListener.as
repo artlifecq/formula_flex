@@ -1,11 +1,13 @@
 package com.rpgGame.app.cmdlistener
 {
+	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.netData.fightsoul.message.SCFightSoulChangeCountMessage;
 	import com.rpgGame.netData.fightsoul.message.SCFightSoulChangeModelResultMessage;
 	import com.rpgGame.netData.fightsoul.message.SCFightSoulDatasMessage;
 	import com.rpgGame.netData.fightsoul.message.SCFightSoulExpChangeMessage;
 	import com.rpgGame.netData.fightsoul.message.SCFightSoulLevelUpMessage;
+	import com.rpgGame.netData.fightsoul.message.SCFightSoulRewardResultMessage;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.game.netCore.connection.SocketConnection;
@@ -19,9 +21,13 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(223001, getFightSoulExpChangeMessage);
 			SocketConnection.addCmdListener(223003, getSCFightSoulChangeCountMessage);
 			SocketConnection.addCmdListener(223005, getSCFightSoulChangeModelResultMessage);
+			SocketConnection.addCmdListener(223006, getSCFightSoulRewardResultMessage);
 			finish();
 		}
-		
+		private function getSCFightSoulRewardResultMessage(msg:SCFightSoulRewardResultMessage):void
+		{
+			FightSoulManager.instance().updataReward(msg.rewardBit);
+		}
 		private function getSCFightSoulChangeModelResultMessage(msg:SCFightSoulChangeModelResultMessage):void
 		{
 			FightSoulManager.instance().updateMode(msg.changeModelLv);

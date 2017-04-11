@@ -34,10 +34,8 @@ package com.rpgGame.appModule.systemset
 			this.target = target;
 			this.callback = callback;
 		}
-
-		/**
-		 * @private
-		 */
+		
+		public var data:*;
 		protected var _target:DisplayObject;
 
 		/**
@@ -111,6 +109,22 @@ package com.rpgGame.appModule.systemset
 			}
 			this._callback = value;
 		}
+		
+		private function triggeredHandler(touch:Touch):void
+		{
+			switch(this._callback.length)
+			{
+				case 0:
+					this._callback();
+					break;
+				case 1:
+					this._callback(touch);
+					break;
+				case 2:
+					this._callback(touch,this);
+					break;
+			}
+		}
 		/**
 		 * @private
 		 */
@@ -124,7 +138,7 @@ package com.rpgGame.appModule.systemset
 				{
 					return;
 				}
-				this._callback(touch);
+				this.triggeredHandler(touch);
 				var stage:Stage = this._target.stage;
 				if(stage !== null && touch.phase === TouchPhase.ENDED)
 				{
@@ -137,7 +151,7 @@ package com.rpgGame.appModule.systemset
 				touch = event.getTouch(this._target, TouchPhase.BEGAN);
 				if(touch !== null)
 				{
-					this._callback(touch);
+					this.triggeredHandler(touch);
 					this._touchPointID = touch.id;
 					return;
 				}

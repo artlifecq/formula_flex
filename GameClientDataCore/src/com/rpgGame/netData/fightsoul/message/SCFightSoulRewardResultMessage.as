@@ -8,20 +8,20 @@ package com.rpgGame.netData.fightsoul.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 战魂幻化结果
+	 * 领取奖励结果
 	 */
-	public class SCFightSoulChangeModelResultMessage extends Message {
+	public class SCFightSoulRewardResultMessage extends Message {
 	
-		//幻化后的模型对应等级
-		private var _changeModelLv: int;
+		//奖励领取状态
+		private var _rewardBit: int;
 		
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//幻化后的模型对应等级
-			writeShort(_changeModelLv);
+			//奖励领取状态
+			writeByte(_rewardBit);
 			return true;
 		}
 		
@@ -29,8 +29,8 @@ package com.rpgGame.netData.fightsoul.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//幻化后的模型对应等级
-			_changeModelLv = readShort();
+			//奖励领取状态
+			_rewardBit = readByte();
 			return true;
 		}
 		
@@ -39,22 +39,22 @@ package com.rpgGame.netData.fightsoul.message{
 		 * @return 
 		 */
 		override public function getId(): int {
-			return 223005;
+			return 223006;
 		}
 		
 		/**
-		 * get 幻化后的模型对应等级
+		 * get 奖励领取状态
 		 * @return 
 		 */
-		public function get changeModelLv(): int{
-			return _changeModelLv;
+		public function get rewardBit(): int{
+			return _rewardBit;
 		}
 		
 		/**
-		 * set 幻化后的模型对应等级
+		 * set 奖励领取状态
 		 */
-		public function set changeModelLv(value: int): void{
-			this._changeModelLv = value;
+		public function set rewardBit(value: int): void{
+			this._rewardBit = value;
 		}
 		
 	}

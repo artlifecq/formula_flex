@@ -94,6 +94,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_equip_strength:String = "data.Q_equip_strength";
 		/**  战魂升级数据						 */
 		public static const Q_fightsoul:String = "data.Q_fightsoul";
+		/**  战魂模型数据		 */
+		public static const Q_fightsoul_mode:String = "data.Q_fightsoul_mode";
 		/**  战魂升级数据			 */
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
 		/**  全局变量表		 */
@@ -183,6 +185,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_die", com.rpgGame.coreData.clientConfig.Q_die);
 			regClass("data.Q_equip_strength", com.rpgGame.coreData.clientConfig.Q_equip_strength);
 			regClass("data.Q_fightsoul", com.rpgGame.coreData.clientConfig.Q_fightsoul);
+			regClass("data.Q_fightsoul_mode", com.rpgGame.coreData.clientConfig.Q_fightsoul_mode);
 			regClass("data.Q_fightsoul_path", com.rpgGame.coreData.clientConfig.Q_fightsoul_path);
 			regClass("data.Q_global", com.rpgGame.coreData.clientConfig.Q_global);
 			regClass("data.Q_item", com.rpgGame.coreData.clientConfig.Q_item);

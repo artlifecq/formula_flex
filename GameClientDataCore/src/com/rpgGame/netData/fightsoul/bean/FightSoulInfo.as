@@ -24,6 +24,9 @@ package com.rpgGame.netData.fightsoul.bean{
 		//活跃度
 		private var _vitality: int;
 		
+		//奖励领取状态(低位到高位顺序对应低到高的活跃度奖励)
+		private var _rewardBit: int;
+		
 		//当前模型等级
 		private var _curModelLv: int;
 		
@@ -38,7 +41,9 @@ package com.rpgGame.netData.fightsoul.bean{
 			//经验
 			writeInt(_exp);
 			//活跃度
-			writeInt(_vitality);
+			writeShort(_vitality);
+			//奖励领取状态(低位到高位顺序对应低到高的活跃度奖励)
+			writeByte(_rewardBit);
 			//当前模型等级
 			writeShort(_curModelLv);
 			//当日途径获取次数
@@ -58,7 +63,9 @@ package com.rpgGame.netData.fightsoul.bean{
 			//经验
 			_exp = readInt();
 			//活跃度
-			_vitality = readInt();
+			_vitality = readShort();
+			//奖励领取状态(低位到高位顺序对应低到高的活跃度奖励)
+			_rewardBit = readByte();
 			//当前模型等级
 			_curModelLv = readShort();
 			//当日途径获取次数
@@ -112,6 +119,21 @@ package com.rpgGame.netData.fightsoul.bean{
 		 */
 		public function set vitality(value: int): void{
 			this._vitality = value;
+		}
+		
+		/**
+		 * get 奖励领取状态(低位到高位顺序对应低到高的活跃度奖励)
+		 * @return 
+		 */
+		public function get rewardBit(): int{
+			return _rewardBit;
+		}
+		
+		/**
+		 * set 奖励领取状态(低位到高位顺序对应低到高的活跃度奖励)
+		 */
+		public function set rewardBit(value: int): void{
+			this._rewardBit = value;
 		}
 		
 		/**

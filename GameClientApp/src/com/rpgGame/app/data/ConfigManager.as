@@ -23,6 +23,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.DieCfgData;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.cfg.FightsoulData;
+	import com.rpgGame.coreData.cfg.FightsoulModeData;
 	import com.rpgGame.coreData.cfg.FightsoulPathData;
 	import com.rpgGame.coreData.cfg.FriendCfgData;
 	import com.rpgGame.coreData.cfg.GCDCfgData;
@@ -206,6 +207,7 @@ package com.rpgGame.app.data
 			WindowInfoData.setConfig(dic[ConfigClassRegister.Q_windowInfo]);
 			FightsoulPathData.setConfig(dic[ConfigClassRegister.Q_fightsoul_path]);
 			FightsoulData.setConfig(dic[ConfigClassRegister.Q_fightsoul]);
+			FightsoulModeData.setConfig(dic[ConfigClassRegister.Q_fightsoul_mode]);
 			GlobalSheetData.setup(dic[ConfigClassRegister.Q_global]);
 		}
 
