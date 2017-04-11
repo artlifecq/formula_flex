@@ -20,7 +20,7 @@ package com.rpgGame.coreData.info.buff
 		private var _serverID:String;
 		private var _buffId:Number = 0;//服务器生成id
 		private var _roleId : Number = 0;
-		private var _data : Q_buff = null;
+		public var _data : Q_buff = null;
 		private var _isBuff : Object = null;
 		private var _specialData : Object = null;
 		private var _description : String = "";

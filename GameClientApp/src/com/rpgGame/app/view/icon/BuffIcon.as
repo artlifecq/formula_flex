@@ -32,7 +32,12 @@ package com.rpgGame.app.view.icon
 		override public function sortLayer():void
 		{
 			if( _bgImage != null )
+			{
+				_bgImage.x=-3;
+				_bgImage.y=-3;
 				addChild( _bgImage );
+			}
+				
 			
 			if( _iconImage != null )
 				addChild( _iconImage );

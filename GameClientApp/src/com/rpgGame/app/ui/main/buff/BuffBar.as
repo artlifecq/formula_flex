@@ -5,10 +5,12 @@ package com.rpgGame.app.ui.main.buff
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_buff;
 	import com.rpgGame.coreData.enum.face.FaceTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.item.GridBGType;
 	
 	import feathers.controls.StateSkin;
 	
@@ -30,7 +32,7 @@ package com.rpgGame.app.ui.main.buff
 		private var gridW:int;
 		private var buffSp:Sprite;
 		private var debuffSp:Sprite;
-		
+		private const LINEMAX:int=4;//每行最多个数
 		public function BuffBar(skin:StateSkin=null)
 		{
 			super(skin);
@@ -40,6 +42,25 @@ package com.rpgGame.app.ui.main.buff
 		{
 			initEvent();
 			initBuff();
+			
+			/*
+			var data:BuffData=new BuffData(10001);
+			data._data=new Q_buff();
+			data._data.q_action_type="[33]";
+			data._data.q_buff_id=2005;
+			data._data.q_cast_type=2;
+			data._data.q_effect_type=1;
+			data._data.q_icon_show=1;
+			data._data.q_overlay=5;
+			data._data.q_effect_time=-1;
+			data._data.q_Bonus_skill="2021";
+			data._data.q_effect_cooldown=1000;
+			data.cfgId=2005;
+			data.;
+			
+			
+			
+			createIcon(data);*/
 		}
 		
 		private function initBuff():void
@@ -49,9 +70,13 @@ package com.rpgGame.app.ui.main.buff
 			roleId=MainRoleManager.actor.id;
 			var buffList : Vector.<BuffData>=(MainRoleManager.actor.data as RoleData).buffList;
 			var num:int=buffList.length;
-			gridW=IcoSizeEnum.ICON_36+5;
+			gridW=IcoSizeEnum.ICON_36+8;
 			buffSp=new Sprite();
+			buffSp.x=-52;
+			buffSp.y=33;
 			debuffSp=new Sprite();
+			debuffSp.x=104;
+			debuffSp.y=33;
 			this.addChild(buffSp);
 			this.addChild(debuffSp);
 			for(var i:int=0;i<num;i++){
@@ -83,28 +108,50 @@ package com.rpgGame.app.ui.main.buff
 		
 		private function createIcon(data:BuffData):void
 		{
-			if(data.buffData.q_icon_show==0||isCreate(data)){
+			if(data.buffData.q_icon_show==0/*||isCreate(data)*/){
 				return;
 			}
 			var icon:BuffIcon=new BuffIcon(IcoSizeEnum.ICON_36);
 			icon.buffData=data;
+			icon.setUrlBg("ui/mainui/shortcut/buffkuang.png");
 			var xx:int;
+			var length:int,line:int,row:int;
+			var i:int,j:int;
 			if(data.buffData.q_effect_type==2){//负面
-				if(badBuffs.length==0){
-					xx=0;
-				}else{
-					xx=badBuffs[badBuffs.length-1].x+gridW;
-				}
-				icon.x=xx;
+//				if(badBuffs.length==0){
+//					xx=0;
+//				}else{
+//					xx=badBuffs[badBuffs.length-1].x+gridW;
+//				}
+				//icon.x=xx;
+				//badBuffs.push(icon);
+				//debuffSp.addChild(icon);
+				
+				
+				
+				
+				length=badBuffs.length;
+				line=length%LINEMAX;
+				row=int(length/LINEMAX);
+				icon.x=line*gridW;
+				icon.y=-row*gridW;
 				badBuffs.push(icon);
 				debuffSp.addChild(icon);
 			}else{
-				if(goodBuffs.length==0){
-					xx=-1*gridW;
-				}else{
-					xx=goodBuffs[goodBuffs.length-1].x-gridW;
-				}
-				icon.x=xx;
+//				if(goodBuffs.length==0){
+//					xx=-1*gridW;
+//				}else{
+//					xx=goodBuffs[goodBuffs.length-1].x-gridW;
+//				}
+				//icon.x=xx;
+				
+				//icon.x=0;
+				//icon.y=0;
+				length=goodBuffs.length;
+				line=length%LINEMAX;
+				row=int(length/LINEMAX);
+				icon.x=-line*gridW;
+				icon.y=-row*gridW;
 				goodBuffs.push(icon);
 				buffSp.addChild(icon);
 			}
@@ -166,7 +213,14 @@ package com.rpgGame.app.ui.main.buff
 			if(buffData.roleId!=roleId){
 				return;
 			}
-			createIcon(buffData);
+			
+			for(var i:int=0;i<1;i++)
+			{
+				createIcon(buffData);
+			}
+			
+			
+			
 		}
 		
 		public function resize(w : int, h : int) : void 
