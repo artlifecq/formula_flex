@@ -99,7 +99,6 @@ package com.rpgGame.app.ui.main.shortcut
 				cd.y = 4;
 				
 				cd.setBg(GridBGType.GRID_SIZE_48);
-				cd.setIconPoint(0, 0);
 				addChild(cd);
 				_gridVect.push(cd);
 //				cd.showShortCutText(SHORTCUTS_KEY[i]);

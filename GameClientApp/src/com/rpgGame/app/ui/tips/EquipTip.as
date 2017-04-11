@@ -99,7 +99,6 @@ package com.rpgGame.app.ui.tips
 		{
 			_itemInfo = data as ClientItemInfo;
 			FaceUtil.SetItemGrid(_iconFace, _itemInfo, false);
-			_iconFace.setQualityImageIconPoint(8,7);
 			var info:HeroData=MainRoleManager.actorInfo;
 			while(labelList.length!=0){
 				var l:Label=labelList.shift();

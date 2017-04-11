@@ -416,7 +416,6 @@ package com.rpgGame.app.utils
 				if( mountUnitData != null )
 					grid.setIconResName( ClientConfig.getMountIconByMountSpeciesId( mountUnitData.speciesId ) );
 			}
-			grid.setQualityImageIconPoint( -2, -2 );
 			grid.selectImgVisible = false;
 			grid.sortLayer();
 			if( isTips )

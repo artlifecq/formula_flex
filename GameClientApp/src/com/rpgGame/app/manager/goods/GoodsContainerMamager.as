@@ -1327,7 +1327,7 @@ package com.rpgGame.app.manager.goods
 		public static function getIsShowLockAsset(container:int,index:int):Boolean
 		{
 			if(!getMrg(container)){
-				return true;
+				return false;
 			}
 			return getMrg(container).getIsShowLockAsset(index);
 		}

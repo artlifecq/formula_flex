@@ -1,0 +1,86 @@
+package org.mokylin.skin.app.zhuangbei.xilian
+{
+	import feathers.controls.text.Fontter;
+	import feathers.controls.Check;
+	import feathers.controls.Label;
+	import feathers.controls.StateSkin;
+	import org.mokylin.skin.component.check.CheckBoxSkin_1;
+
+	/**
+	 * @private
+	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
+	 * @author DXMLCompilerForFeathers
+	 */
+	public class XiLianItem extends feathers.controls.StateSkin
+	{
+		//==========================================================================
+		//                                定义成员变量
+		//==========================================================================
+		public var chk_suoding:feathers.controls.Check;
+
+		public var lb_name:feathers.controls.Label;
+
+		public var lb_yuanbao:feathers.controls.Label;
+
+
+		//==========================================================================
+		//                                定义构造函数
+		//==========================================================================
+		public function XiLianItem()
+		{
+			super();
+			
+			this.currentState = "normal";
+			this.elementsContent = [lb_name_i(),chk_suoding_i(),lb_yuanbao_i()];
+			
+			states = {
+			};
+			skinNames={};
+		}
+
+
+		//==========================================================================
+		//                                定义成员方法
+		//==========================================================================
+		private function chk_suoding_i():feathers.controls.Check
+		{
+			var temp:feathers.controls.Check = new feathers.controls.Check();
+			chk_suoding = temp;
+			temp.name = "chk_suoding";
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.label = "锁定";
+			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
+			temp.color = 0xCFC6AE;
+			temp.x = 350;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function lb_name_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_name = temp;
+			temp.name = "lb_name";
+			temp.htmlText = "属性：力道<font color='#5DBD37'>+20</font>";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 0;
+			temp.y = 2;
+			return temp;
+		}
+
+		private function lb_yuanbao_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_yuanbao = temp;
+			temp.name = "lb_yuanbao";
+			temp.htmlText = "（<font color='#5DBD37'>10元宝/次</font>）";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 401;
+			temp.y = 2;
+			return temp;
+		}
+
+	}
+}
