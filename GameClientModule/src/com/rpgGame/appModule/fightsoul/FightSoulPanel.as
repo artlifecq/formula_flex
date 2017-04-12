@@ -2,9 +2,11 @@ package com.rpgGame.appModule.fightsoul
 {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.FaceUtil;
+	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.appModule.systemset.TouchToState;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
@@ -12,13 +14,13 @@ package com.rpgGame.appModule.fightsoul
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.FightsoulData;
 	import com.rpgGame.coreData.cfg.FightsoulPathData;
-	import com.rpgGame.coreData.cfg.GlobalSheetData;
-	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_path;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.lang.LangFightSoul;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.netData.fightsoul.bean.FightSoulInfo;
 	
@@ -62,20 +64,8 @@ package com.rpgGame.appModule.fightsoul
 		}
 		private function initData():void
 		{
-			_currentShowMode = fightSoulInfo.curModelLv;
-			_listdatas = new Vector.<FightSoulPathInfoData>();
-			var datas:Vector.<Q_fightsoul_path> = FightsoulPathData.datas;
-			for each(var q:Q_fightsoul_path in datas)
-			{
-				var data:FightSoulPathInfoData = new FightSoulPathInfoData(q);
-				data.refeash();
-				_listdatas.push(data);
-			}
-			_listdatas.sort(sortList);
-			
-			var spellId:int = int(GlobalSheetData.getSettingInfo(500).q_string_value);
-			_skillData= SpellDataManager.getSpellData(spellId);
-			
+			_currentShowMode = FightSoulManager.instance().currentMode.q_mode;
+			_skillData= FightSoulManager.instance().getSpellData();
 		}
 		
 		private function sortList(q1:FightSoulPathInfoData,q2:FightSoulPathInfoData):int
@@ -100,14 +90,29 @@ package com.rpgGame.appModule.fightsoul
 			EventManager.addEvent(FightSoulManager.FightSoul_ModeLevel,refeahMode);
 			EventManager.addEvent(FightSoulManager.FightSoul_Vitality,refeashVitality);
 			EventManager.addEvent(FightSoulManager.FightSoul_GetReward,refeashRewards);
+			EventManager.addEvent(FightSoulManager.FightSoul_TypeValue,listrefeash);
 		}
 		
+		private function listrefeash():void
+		{
+			_listdatas = new Vector.<FightSoulPathInfoData>();
+			var datas:Vector.<Q_fightsoul_path> = FightsoulPathData.datas;
+			for each(var q:Q_fightsoul_path in datas)
+			{
+				var data:FightSoulPathInfoData = new FightSoulPathInfoData(q);
+				data.refeash();
+				_listdatas.push(data);
+			}
+			_listdatas.sort(sortList);
+			
+			_skin.List.dataProvider.data = _listdatas;
+		}
 		
 		private function refeashRewards():void
 		{
 			for(var index:int = 0;index<_itemIconLists.length;index++)
 			{
-				if(FightSoulManager.instance().getRewardByIndex(index))
+				if(FightSoulManager.instance().isGetReward(index))
 					GrayFilter.gray(_itemIconLists[index].target);
 				else
 					_itemIconLists[index].target.filter = null;
@@ -116,11 +121,6 @@ package com.rpgGame.appModule.fightsoul
 		
 		private function uptriggeredHandler(e:Event):void
 		{
-			if(fightSoulInfo.exp<currentMode.q_exp)
-			{
-				GameAlert.showAlertUtil("经验不足，不能升级");
-				return ;
-			}
 			FightSoulManager.instance().FightSoulLevelUp();
 		}
 		private function buttonTouchHandler(event:Event):void
@@ -187,8 +187,9 @@ package com.rpgGame.appModule.fightsoul
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.gap = 5;
 			_skin.List.layout = layout;
-			_skin.List.dataProvider = new ListCollection(_listdatas);
-			TipTargetManager.show(_skin.pro_shengji, TargetTipsMaker.makeSimpleTextTips("通过完成右侧升级途径获取战魂经验"));
+			_skin.List.dataProvider = new ListCollection();
+			listrefeash();
+			TipTargetManager.show(_skin.pro_shengji, TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText(LangFightSoul.FightSoulExpTip)));
 			_skin.lb_progress.touchable = false;
 			
 			if(_skillIcon==null)
@@ -245,10 +246,21 @@ package com.rpgGame.appModule.fightsoul
 			var currentatt:Q_att_values = AttValueConfig.getAttInfoById(currentMode.q_baseAtt_id);
 			var nextatt:Q_att_values;
 			var nextShet:Q_fightsoul = FightsoulData.getInfobyId(fightSoulInfo.level+1);
+			var job:int = MainRoleManager.actorInfo.job;
+			var currentPower:int = FightValueUtil.calFightPowerByAttValue(currentatt,job);
+			_skin.Num_zhandouli.number = currentPower;
 			if(nextShet!=null)
 			{
 				nextatt = AttValueConfig.getAttInfoById(nextShet.q_baseAtt_id);
+				var nextPower:int = FightValueUtil.calFightPowerByAttValue(nextatt,job);
+				_skin.lab_poweradd.text = (nextPower-currentPower).toString();
+			}else{
+				_skin.lab_poweradd.text = "0";
 			}
+			
+			
+			
+			
 			for each(var view:PropView in _propList)
 			{
 				view.updataAtt(currentatt,nextatt);
@@ -257,20 +269,20 @@ package com.rpgGame.appModule.fightsoul
 		
 		private function refeahExp():void
 		{
-			_skin.lb_current.text = "等级:"+fightSoulInfo.level;
-			_skin.lb_up.text = "等级:"+(fightSoulInfo.level+1);
-			_skin.pro_shengji.value = fightSoulInfo.exp/currentMode.q_exp;
+			_skin.lb_current.text = LanguageConfig.getText(LangFightSoul.FightSoulLevel).replace("$",fightSoulInfo.level);
+			_skin.lb_up.text = LanguageConfig.getText(LangFightSoul.FightSoulLevel).replace("$",fightSoulInfo.level+1);
+			_skin.pro_shengji.value = fightSoulInfo.exp/currentMode.q_exp*_skin.pro_shengji.maximum;
 			_skin.lb_progress.text = fightSoulInfo.exp.toString()+"/"+currentMode.q_exp;
 		}
 		private function refeahMode():void
 		{
 			var cshowshet:Q_fightsoul = FightsoulData.getInfoByMode(_currentShowMode);
-			_skin.btn_huanhua.isEnabled = cshowshet.q_level != fightSoulInfo.level;
+			_skin.btn_huanhua.isEnabled = cshowshet.q_level != FightSoulManager.instance().currentMode.q_level;
 		}
 		private function refeashVitality():void
 		{
-			_skin.pro_zongjindu.value = fightSoulInfo.vitality/200;
-			_skin.lb_jindu.text = "总进度 ："+fightSoulInfo.vitality.toString()+"/200点"
+			_skin.pro_zongjindu.value = fightSoulInfo.vitality/200*_skin.pro_zongjindu.maximum;
+			_skin.lb_jindu.text = LanguageConfig.getText(LangFightSoul.FightSoulProgress).replace("$",fightSoulInfo.vitality);
 		}
 		private function refeashQualityView():void
 		{
@@ -318,6 +330,7 @@ package com.rpgGame.appModule.fightsoul
 			EventManager.removeEvent(FightSoulManager.FightSoul_ModeLevel,refeahMode);
 			EventManager.removeEvent(FightSoulManager.FightSoul_Vitality,refeashVitality);
 			EventManager.removeEvent(FightSoulManager.FightSoul_GetReward,refeashRewards);
+			EventManager.removeEvent(FightSoulManager.FightSoul_TypeValue,listrefeash);
 			super.hide();
 		}
 	}
