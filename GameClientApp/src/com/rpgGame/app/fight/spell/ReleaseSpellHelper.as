@@ -3,6 +3,8 @@ package com.rpgGame.app.fight.spell
 	import com.game.engine3D.utils.MathUtil;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.SkillCDManager;
+	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.action.AttackStateReference;
 	import com.rpgGame.app.state.role.control.AttackHardStateReference;
@@ -101,6 +103,10 @@ package com.rpgGame.app.fight.spell
 				hardRef.setParams(spellInfo.castTime);
 				spellInfo.atkor.stateMachine.transition(RoleStateType.CONTROL_ATTACK_HARD, hardRef, true);
 				SkillCDManager.getInstance().addSkillCDTime(spellInfo.spellData);
+			}
+			if(spellInfo.atkor == MainRoleManager.actor)
+			{
+				TrusteeshipManager.getInstance().startFightSoulFight();
 			}
 		}
 

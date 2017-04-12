@@ -790,5 +790,10 @@ package com.rpgGame.app.fight.spell
 		{
 			_spellData = value;
 		}
+		
+		public function get isAttachUnit():Boolean
+		{
+			return _spellData.q_performType==1;
+		}
 	}
 }

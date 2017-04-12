@@ -123,7 +123,7 @@ package com.rpgGame.app.manager.fightsoul
 		
 		public function FightSoulLevelUp():void
 		{
-			if(fightSoulInfo.exp<currentMode.q_exp)
+			if(fightSoulInfo.exp<currentLeveldata.q_exp)
 			{
 				NoticeManager.showNotify(LanguageConfig.getText(LangFightSoul.FightSoulError1));
 				return ;

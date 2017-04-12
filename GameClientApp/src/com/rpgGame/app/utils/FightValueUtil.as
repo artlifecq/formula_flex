@@ -36,7 +36,8 @@ package com.rpgGame.app.utils
 			combat += list[CharAttributeType.HIT]/0.004;
 			
 			//暴击伤害
-			combat += list[CharAttributeType.CRIT]/0.008;
+			combat = combat +list[CharAttributeType.CRIT]/0.008;
+			
 			return Math.round(combat);
 		}
 		

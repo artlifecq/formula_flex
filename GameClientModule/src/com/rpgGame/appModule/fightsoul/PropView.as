@@ -10,6 +10,7 @@ package com.rpgGame.appModule.fightsoul
 	{
 		private var _skin:Shuxing_Skin;
 		private var _index:int;
+		private var _isSHow:Boolean = false;
 		public function PropView(skin:Shuxing_Skin,index:int):void
 		{
 			_skin = skin;
@@ -22,7 +23,7 @@ package com.rpgGame.appModule.fightsoul
 			_currentatt = currentatt;
 			_nextAtt = nextatt;
 			refeashView();
-			showUpLevelView(false);
+			showUpLevelView(_isSHow);
 		}
 		private function refeashView():void
 		{
@@ -45,6 +46,7 @@ package com.rpgGame.appModule.fightsoul
 		
 		public function showUpLevelView(bool:Boolean):void
 		{
+			_isSHow = bool;
 			_skin.lb_Num.visible = bool;
 			_skin.arrow_up.visible = bool;
 		}

@@ -4,7 +4,6 @@ package com.rpgGame.appModule.fightsoul
 	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -25,6 +24,7 @@ package com.rpgGame.appModule.fightsoul
 	import com.rpgGame.netData.fightsoul.bean.FightSoulInfo;
 	
 	import feathers.data.ListCollection;
+	import feathers.events.FeathersEventType;
 	import feathers.layout.VerticalLayout;
 	import feathers.utils.filter.GrayFilter;
 	
@@ -48,6 +48,7 @@ package com.rpgGame.appModule.fightsoul
 		
 		private var _itemIconLists:Vector.<TouchToState>;
 		private var _fightsoul:FightSoulModePane;
+		private var _touchstate:ButtonTouchState;
 		public function FightSoulPanel():void
 		{
 			_skin=new Zhanhun_Skin();
@@ -71,9 +72,9 @@ package com.rpgGame.appModule.fightsoul
 		private function sortList(q1:FightSoulPathInfoData,q2:FightSoulPathInfoData):int
 		{
 			if(!q1.isOver&&q2.isOver)
-				return 1;
-			else if(q1.isOver&&!q2.isOver)
 				return -1;
+			else if(q1.isOver&&!q2.isOver)
+				return 1;
 			else 
 				return 0;
 		}
@@ -84,7 +85,7 @@ package com.rpgGame.appModule.fightsoul
 			_skin.btn_next.addEventListener(Event.TRIGGERED,triggeredHander);
 			_skin.btn_huanhua.addEventListener(Event.TRIGGERED,huanhuaTriggeredHandler);
 			_skin.btn_up.addEventListener(Event.TRIGGERED,uptriggeredHandler);
-			_skin.btn_up.addEventListener("stageChange",buttonTouchHandler);
+			_skin.btn_up.addEventListener(FeathersEventType.STATE_CHANGE,buttonTouchHandler);
 			EventManager.addEvent(FightSoulManager.FightSoul_Exp,refeahExp);
 			EventManager.addEvent(FightSoulManager.FightSoul_Level,refeahLevel);
 			EventManager.addEvent(FightSoulManager.FightSoul_ModeLevel,refeahMode);
@@ -259,8 +260,6 @@ package com.rpgGame.appModule.fightsoul
 			}
 			
 			
-			
-			
 			for each(var view:PropView in _propList)
 			{
 				view.updataAtt(currentatt,nextatt);
@@ -324,7 +323,7 @@ package com.rpgGame.appModule.fightsoul
 			_skin.btn_next.removeEventListener(Event.TRIGGERED,triggeredHander);
 			_skin.btn_huanhua.removeEventListener(Event.TRIGGERED,huanhuaTriggeredHandler);
 			_skin.btn_up.removeEventListener(Event.TRIGGERED,uptriggeredHandler);
-			_skin.btn_up.removeEventListener("stageChange",buttonTouchHandler);
+			_skin.btn_up.removeEventListener(FeathersEventType.STATE_CHANGE,buttonTouchHandler);
 			EventManager.removeEvent(FightSoulManager.FightSoul_Exp,refeahExp);
 			EventManager.removeEvent(FightSoulManager.FightSoul_Level,refeahLevel);
 			EventManager.removeEvent(FightSoulManager.FightSoul_ModeLevel,refeahMode);

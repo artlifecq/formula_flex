@@ -14,21 +14,8 @@ package com.rpgGame.appModule.systemset
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 
-	/**
-	 * Changes a target's state based on the <code>TouchPhase</code> when the
-	 * target is touched. Conveniently handles all <code>TouchEvent</code> listeners
-	 * automatically. Useful for custom item renderers that should be change
-	 * state based on touch.
-	 * 
-	 * @see feathers.utils.keyboard.KeyToState
-	 *
-	 * @productversion Feathers 3.2.0
-	 */
 	public class TouchToState
 	{
-		/**
-		 * Constructor.
-		 */
 		public function TouchToState(target:DisplayObject = null, callback:Function = null)
 		{
 			this.target = target;
@@ -38,9 +25,6 @@ package com.rpgGame.appModule.systemset
 		public var data:*;
 		protected var _target:DisplayObject;
 
-		/**
-		 * The target component that should change state based on touch phases.
-		 */
 		public function get target():DisplayObject
 		{
 			return this._target;
@@ -110,7 +94,7 @@ package com.rpgGame.appModule.systemset
 			this._callback = value;
 		}
 		
-		private function triggeredHandler(touch:Touch):void
+		protected function triggeredHandler(touch:Touch):void
 		{
 			switch(this._callback.length)
 			{
