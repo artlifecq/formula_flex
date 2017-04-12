@@ -23,7 +23,7 @@ package com.rpgGame.app.ui.main.shortcut {
     public class ShortcutBar extends SkinUI {
 		
 		private var skillBar : ShortcutSkillBar;
-		
+		private var singBar : SingBar;
         private var _skin : shortcut_Skin;
 		
 		private var _jumpState:Vector.<UIAsset>;
@@ -36,6 +36,7 @@ package com.rpgGame.app.ui.main.shortcut {
             super(this._skin);
 			 
 			init();
+			
         }
 		
 		public function getSkillGridSeat(index:int):Point
@@ -75,6 +76,9 @@ package com.rpgGame.app.ui.main.shortcut {
 		{
 			skillBar = new ShortcutSkillBar(this);
 			this._skin.Icons.addChildAt(skillBar,0);
+			singBar= new SingBar();
+			this._skin.Icons.addChild(singBar);
+			
 			
 			_rollprogress = new RollProgress(this._skin);
 			var leftp:HpPropgressBar = new HpPropgressBar(this,0,_skin);
