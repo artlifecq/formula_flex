@@ -46,7 +46,7 @@ package com.rpgGame.app.manager.hint
 			super();
 			_noticeType = noticeType;
 			_hintTypeSet = HintCfgData.getHintTypeSet(_noticeType);
-			_hintTypeSet.bg="ui/common/tips/shubiaotiao_bg.png";
+			//_hintTypeSet.bg="ui/common/tips/shubiaotiao_bg.png";
 			_lastHintValue = null;
 			this.addEventListener(TouchEvent.TOUCH, onTouch);
 			initSprite();
