@@ -389,7 +389,7 @@ package com.rpgGame.appModule.equip
 			initEvent();
 			refresh();
 			
-		/*	var alertOk:AlertSetInfo=new AlertSetInfo(LangUI.UI_TEXT3);//强化成功
+			/*var alertOk:AlertSetInfo=new AlertSetInfo(LangUI.UI_TEXT3);//强化成功
 			alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",10);
 			alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",10);
 			alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",1000);

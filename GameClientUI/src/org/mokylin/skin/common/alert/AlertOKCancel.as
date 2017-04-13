@@ -128,6 +128,8 @@ package org.mokylin.skin.common.alert
 			lbTip = temp;
 			temp.name = "lbTip";
 			temp.height = 141;
+			temp.leading = 2;
+			temp.letterSpacing = 0;
 			temp.text = "标签";
 			temp.color = 0xcfc6ae;
 			temp.width = 311;
