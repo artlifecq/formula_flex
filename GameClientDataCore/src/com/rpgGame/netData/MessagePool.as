@@ -105,6 +105,7 @@ package com.rpgGame.netData{
     import com.rpgGame.netData.fight.handler.ResVirFightObjectAttackResultHandler;
     import com.rpgGame.netData.fight.handler.SCAttackerResultHandler;
     import com.rpgGame.netData.fight.handler.SCBuffSkillHandler;
+    import com.rpgGame.netData.fight.handler.SCCancelSkillHandler;
     import com.rpgGame.netData.fight.message.ResAttackBeautyMessage;
     import com.rpgGame.netData.fight.message.ResAttackBreakSingingToClientMessage;
     import com.rpgGame.netData.fight.message.ResAttackRangeMessage;
@@ -120,6 +121,7 @@ package com.rpgGame.netData{
     import com.rpgGame.netData.fight.message.ResVirFightObjectAttackResultMessage;
     import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
     import com.rpgGame.netData.fight.message.SCBuffSkillMessage;
+    import com.rpgGame.netData.fight.message.SCCancelSkillMessage;
     import com.rpgGame.netData.fightpower.handler.ResFightPowerToClientHandler;
     import com.rpgGame.netData.fightpower.message.ResFightPowerToClientMessage;
     import com.rpgGame.netData.fightsoul.message.SCFightSoulDatasMessage;
@@ -764,6 +766,7 @@ package com.rpgGame.netData{
 			register(102113, ResVirFightObjectAttackResultMessage, ResVirFightObjectAttackResultHandler);
 			register(102114, SCAttackerResultMessage, SCAttackerResultHandler);
             register(102116, SCBuffSkillMessage, SCBuffSkillHandler);
+			register(102115, SCCancelSkillMessage, SCCancelSkillHandler);
 			register(103101, ResMyPlayerInfoMessage, ResMyPlayerInfoHandler);
 			register(103102, ResPlayerAddExpMessage, ResPlayerAddExpHandler);
 			register(103103, ResPersonalNoticeMessage, ResPersonalNoticeHandler);

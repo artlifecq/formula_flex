@@ -16,6 +16,8 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.core.events.SkillEvent;
+	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
@@ -33,10 +35,12 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.fight.message.SCBuffSkillMessage;
 	import com.rpgGame.netData.fight.message.SCCancelSkillMessage;
 	import com.rpgGame.netData.structs.Position;
+	import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
 	
 	import flash.geom.Point;
 	
 	import org.client.mainCore.bean.BaseBean;
+	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
@@ -117,7 +121,9 @@ package com.rpgGame.app.cmdlistener.scene
 			GameLog.addShow("技能流水号为： 对目标\t" + msg.uid);
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
-			ReleaseSpellHelper.releaseSpell(info);			
+			ReleaseSpellHelper.releaseSpell(info);	
+			var skillId:int=msg.skillModelId&0xffffff;
+			EventManager.dispatchEvent(SkillEvent.SKILL_ATTACK,skillId);
 		}
 		
 		private function onResAttackVentToClientMessage(msg:ResAttackVentToClientMessage):void
@@ -126,7 +132,17 @@ package com.rpgGame.app.cmdlistener.scene
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
 			ReleaseSpellHelper.releaseSpell(info);
+			
+			var skillId:int=msg.fightType&0xffffff;
+			EventManager.dispatchEvent(SkillEvent.SKILL_ATTACK,skillId);
 		}
+		
+		private function onResCancelSkillMessage(msg:SCCancelSkillMessage):void
+		{
+			GameLog.addShow("技能打断：" + msg.skillId);
+			EventManager.dispatchEvent(SkillEvent.SKILL_CANCEL);
+		}
+		
 		
 		/**
 		 * 技能伤害列表 
@@ -139,6 +155,8 @@ package com.rpgGame.app.cmdlistener.scene
 			SpellHitHelper.fightSpellHitEffect(info);
 			effectCharAttribute(info);
             lockAttack(info);
+			EventManager.dispatchEvent(SkillEvent.SKILL_RESULT);
+			
 		}
 		
 		private function effectCharAttribute(info : SpellResultInfo) : void
@@ -232,6 +250,10 @@ package com.rpgGame.app.cmdlistener.scene
             info.readSpellEffectData(info.spellData.q_spell_effect);
             SpellAnimationHelper.addFlyEffect(info);
         }
+		
+		
+		
+		
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////
