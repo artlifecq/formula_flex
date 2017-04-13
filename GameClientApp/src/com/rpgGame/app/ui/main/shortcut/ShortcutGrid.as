@@ -1,6 +1,5 @@
 package com.rpgGame.app.ui.main.shortcut
 {
-	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.view.icon.DragDropGrid;
@@ -47,13 +46,16 @@ package com.rpgGame.app.ui.main.shortcut
 		private var offsetY : int = 27;
 
 		private var timeLine:TimelineLite;
-		
+		/*
 		private var effectSk:Inter3DContainer;
 		private var readyEffect:InterObject3D;//技能CD转框
 		private var goEffect:InterObject3D;//技能准备好特效
 		private var liannuEffect:InterObject3D;//疯狂连弩开启特效
 		private var nutaEffect:InterObject3D;//弩塔转动，，
 		
+		private var goEffectRend:RenderUnit3D;
+		private var liannuEffectRend:RenderUnit3D;
+		private var nutaEffectRend:RenderUnit3D;*/
 		private var labTxt : NumberBitmap; 
 		/**技能id*/
 		private var skillID:int;
@@ -85,11 +87,23 @@ package com.rpgGame.app.ui.main.shortcut
 			imgAutoUse.y = 4;
 			imgAutoUse.styleName = ClientConfig.getSpellAutoIco();
 			setIsShowCdTm(true);
-			effectSk=new Inter3DContainer();
+			/*effectSk=new Inter3DContainer();
 			effectSk.x = _iconSize/2+6;
 			effectSk.y = _iconSize/2+6;
 			addChild(effectSk);
-			//nutaEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_TANU_MJ),0,0,0);
+			
+			
+			goEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_SHANGUANG),0,0,0);
+			goEffectRend=goEffect.baseObj3D as RenderUnit3D;
+			goEffectRend.stop();
+			
+			liannuEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_FENGKUANGLIANNU),0,0,0);
+			liannuEffectRend=liannuEffect.baseObj3D as RenderUnit3D;
+			liannuEffectRend.stop();
+			
+			nutaEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_TANU_MJ),0,0,0);
+			nutaEffectRend=nutaEffect.baseObj3D as RenderUnit3D;
+			nutaEffectRend.stop();*/
 			
 			
 			addResEvent();
@@ -136,8 +150,8 @@ package com.rpgGame.app.ui.main.shortcut
 					if(skillID==FENGKUANGLIANNU)
 					{
 						isGary=false;
-						liannuEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_FENGKUANGLIANNU),0,0,0);
-		
+						//liannuEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_FENGKUANGLIANNU),0,0,0);
+						/*liannuEffectRend.play(0);*/
 					}
 					else
 					{
@@ -148,19 +162,19 @@ package com.rpgGame.app.ui.main.shortcut
 				{
 					if(skillID==FENGKUANGLIANNU)
 					{
-						if(liannuEffect)
+						/*if(liannuEffectRend)
 						{
-							liannuEffect.stop();
+							liannuEffectRend.stop();
 						}
-						
+						*/
 					}
 					else
 					{
 						setGary();
 						if(!isGary&&!nutaKey)
 						{
-							goEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_SHANGUANG),0,0,1);
-					
+							//goEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_SHANGUANG),0,0,1);
+							/*goEffectRend.play(0);*/
 						}
 						
 					}
@@ -281,8 +295,10 @@ package com.rpgGame.app.ui.main.shortcut
 					if(!turnKey)//弩塔特效在转的话继续转就是了
 					{
 						
-						nutaEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_TANU_MJ),0,0,0);
-						nutaEffect.setSpeed(0.125);
+						//nutaEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_TANU_MJ),0,0,0);
+						//nutaEffect.setSpeed(0.125);
+						/*nutaEffect.gotoPercent(0);
+						nutaEffectRend.play(0,0.125);*/
 						turnKey=true;
 					}
 					
@@ -290,12 +306,12 @@ package com.rpgGame.app.ui.main.shortcut
 				}
 				else if(num==NUTAMAX)
 				{
-					if(nutaEffect!=null)
+					/*if(nutaEffectRend!=null)
 					{
-						nutaEffect.gotoPercent(0);
+						nutaEffectRend.stop();
 						nutaEffect.stop();
 						turnKey=false;
-					}
+					}*/
 				}
 			}
 		}
@@ -327,15 +343,17 @@ package com.rpgGame.app.ui.main.shortcut
 		override public function removeCDFace() : void
 		{
 			super.removeCDFace();
-			if(readyEffect!=null)
+			/*if(readyEffect!=null)
 			{
 				readyEffect.stop();
 			}
 			if(!isGary&&!nutaKey)
 			{
-				goEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_SHANGUANG),0,0,1);
-				//completeEffect.start();
-			}
+				//goEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_SHANGUANG),0,0,1);
+				//goEffectRend.play(2);
+				//播放cd完成动画
+				goEffectRend.play(0);
+			}*/
 		}
 		override  public function cdUpdate($now : Number, $cdTotal : Number) :void
 		{
@@ -351,10 +369,10 @@ package com.rpgGame.app.ui.main.shortcut
 				{
 					_cdFace.updateTimeTxt($now,$cdTotal);
 				}
-				if(readyEffect!=null)
+				/*if(readyEffect!=null)
 				{
 					readyEffect.gotoPercent($now/$cdTotal);
-				}
+				}*/
 			}
 			else
 			{
@@ -429,8 +447,8 @@ package com.rpgGame.app.ui.main.shortcut
 		/**设置各职业转框特效*/
 		public function setEffect():void
 		{
-			
-			if(playerJod==JobEnum.ROLE_1_TYPE)
+			//L.l("生成转框特效");
+			/*if(playerJod==JobEnum.ROLE_1_TYPE)
 			{
 				readyEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_BJ),0,0,0,null,effectaddComplete);
 				readyEffect.stop();
@@ -439,26 +457,17 @@ package com.rpgGame.app.ui.main.shortcut
 			{
 				readyEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_MJ),0,0,0,effectaddComplete);
 				readyEffect.stop();
-				/*if(skillID==FENGKUANGLIANNU)
-				{
-					liannuEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_FENGKUANGLIANNU),0,0,0,effectaddComplete);
-					//liannuEffect.stop();
-				}
-				if(skillID==NUTA)
-				{
-					nutaEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_TANU_MJ),0,0,0,effectaddComplete);
-					//nutaEffect.stop();
-				}*/
+				
 				
 			}
 			else if(playerJod==JobEnum.ROLE_4_TYPE)
 			{
 				readyEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_YJ),0,0,0,effectaddComplete);
 				readyEffect.stop();
-			}
+			}*/
 			
-			goEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_SHANGUANG),0,0,1,effectaddComplete);
-			goEffect.stop();
+			//goEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_SHANGUANG),0,0,1,effectaddComplete);
+			//goEffect.stop();
 			
 		}
 		
@@ -493,10 +502,10 @@ package com.rpgGame.app.ui.main.shortcut
 			{
 				addChild(labTxt);
 			}
-			if(effectSk!=null)
+			/*if(effectSk!=null)
 			{
 				addChild(effectSk);
-			}
+			}*/
 			
 			
 		}
@@ -522,7 +531,7 @@ package com.rpgGame.app.ui.main.shortcut
 		}
 		private function removeEffect() : void
 		{
-			if(readyEffect!=null)
+			/*if(readyEffect!=null)
 			{
 				effectSk.removeChild3D(readyEffect);
 				effectSk=null;
@@ -541,7 +550,7 @@ package com.rpgGame.app.ui.main.shortcut
 			{
 				effectSk.removeChild3D(nutaEffect);
 				nutaEffect=null;
-			}
+			}*/
 		}
 		/** 清空 只是把显示数据清除 并不全部销毁 * */
 		override public function clear() : void

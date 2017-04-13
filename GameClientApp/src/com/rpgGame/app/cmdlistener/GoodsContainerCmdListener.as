@@ -9,7 +9,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.backpack.message.ResChangeLimitItemMessage;
 	import com.rpgGame.netData.backpack.message.ResItemAddMessage;
 	import com.rpgGame.netData.backpack.message.ResItemChangeMessage;
-	import com.rpgGame.netData.backpack.message.ResItemInfosMessage;
+	import com.rpgGame.netData.backpack.message.ResItemInfoMessage;
 	import com.rpgGame.netData.backpack.message.ResItemRemoveMessage;
 	import com.rpgGame.netData.backpack.message.ResUseItemSuccessMessage;
 	import com.rpgGame.netData.equip.message.ResEquipInfoMessage;
@@ -133,7 +133,7 @@ package com.rpgGame.app.cmdlistener
 			GoodsContainerMamager.getMrg(ItemContainerID.BackPack).addItem(msg.item);
 		}
 		
-		private function onResItemInfoMessage(msg:ResItemInfosMessage):void
+		private function onResItemInfoMessage(msg:ResItemInfoMessage):void
 		{
 			GoodsContainerMamager.getMrg(ItemContainerID.BackPack).setItemsInfo(msg.cellnum,msg.items);
 		}

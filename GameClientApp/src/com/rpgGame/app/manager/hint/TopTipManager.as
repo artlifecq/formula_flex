@@ -139,8 +139,12 @@ package com.rpgGame.app.manager.hint
 		public function addMouseFollowTip(type : int, value : String) : void
 		{
 			var hintBox : HintBaseBox = _hintMap.getValue(type);
+			
 			if (hintBox)
 			{
+				hintBox.hintTypeSet.bg="ui/common/tips/shubiaotiao_bg.png";
+				hintBox.hintTypeSet.textSize=14;
+				hintBox.hintTypeSet.defaultColor="#d02525";
 				hintBox.addHint(value);
 				if (hintBox.hintTypeSet && hintBox.hintTypeSet.posX == 0 && hintBox.hintTypeSet.posY == 0)
 				{
