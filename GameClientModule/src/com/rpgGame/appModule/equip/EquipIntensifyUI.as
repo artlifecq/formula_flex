@@ -46,7 +46,6 @@ package com.rpgGame.appModule.equip
 	import feathers.controls.Scroller;
 	import feathers.controls.SkinnableContainer;
 	import feathers.data.ListCollection;
-	import feathers.events.CollectionEventType;
 	
 	import gs.TweenMax;
 	import gs.easing.Expo;
@@ -371,7 +370,12 @@ package com.rpgGame.appModule.equip
 			currCfg=ItemStrength.getStrengthCfg(targetEquipInfo.qItem.q_kind,targetEquipInfo.qItem.q_job,targetEquipInfo.strengthLevel);
 			addExp=0;
 			
-			_skin.cmb_dengjie.selectedIndex=targetEquipInfo.qItem.q_levelnum>1?targetEquipInfo.qItem.q_levelnum-2:0;
+			var roleLv:int=MainRoleManager.actorInfo.totalStat.level;
+			var index:int=Math.floor(roleLv/10);
+			index=index>10?10:index;
+			index=index-2;
+			index=index<0?0:index;
+			_skin.cmb_dengjie.selectedIndex=index;
 			
 			updateView();
 		}
@@ -718,6 +722,8 @@ package com.rpgGame.appModule.equip
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
+			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
+			
 			GameAlert.closeAlert(LangUI.UI_TEXT3);
 		}
 		
