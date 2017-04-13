@@ -107,6 +107,7 @@ package com.rpgGame.appModule.equip
 		private var useMon:int;
 
 		private var userMon:int;
+		private var isToUp:Boolean;
 		public function EquipIntensifyUI()
 		{
 			_skin=new Zhuangbei_QianghuaSkin();
@@ -572,12 +573,13 @@ package com.rpgGame.appModule.equip
 			result.sort(ItemManager.onSortUseEquip);
 			addExp=0;
 			useListIds=new Vector.<long>();
-			for(var i:int=0;i<6;i++){
-				if(i==result.length){
-					break;
-				}
+			for(var i:int=0;i<result.length;i++){
 				item=result[i];
 				addExp+=item.qItem.q_strengthen_num;
+				if(addExp>upCfg.q_exp){
+					isToUp=true;
+					break;
+				}
 				useListIds.push(item.itemInfo.itemId);
 			}
 			
@@ -590,7 +592,7 @@ package com.rpgGame.appModule.equip
 			}
 			
 			if(useListIds.length==0){
-				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4201));
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4205));
 				return;
 			}
 			ItemSender.strengthEquip(targetEquipInfo.itemInfo.itemId,1,useListIds,1);
@@ -643,13 +645,20 @@ package com.rpgGame.appModule.equip
 				alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",addExp);
 				alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",useListIds.length);
 				alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",addExp*perMon);
-				alertOk.alertInfo.align="center";
+				alertOk.alertInfo.align="left";
+				if(isToUp){
+					alertOk.alertInfo.value="由于本次强化值超出,"+alertOk.alertInfo.value;
+					alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",addExp);
+					alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",useListIds.length);
+					alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",addExp*perMon);
+				}
 				GameAlert.showAlert(alertOk);
 			}
 			if(msg.result==1){
 				UIPopManager.showAlonePopUI(CenterEftPop,"ui_qianghuachenggong");
 			}
 			addExp=0;
+			isToUp=false;
 			updateView();
 		}
 		
@@ -782,7 +791,6 @@ package com.rpgGame.appModule.equip
 			num=num>MIN_GRID?num:MIN_GRID;
 			_goodsContainerUse.setGridsCount(num,false);
 			_goodsContainerUse.refleshGridsByDatas(useEquips);
-			
 			selectedUse.length=0;
 			_goodsContainerUse1.refleshGridsByDatas(selectedUse);
 			

@@ -137,6 +137,12 @@ package com.rpgGame.appModule.common
 		 */		
 		public function setGridsCount(count:int, refleshNow:Boolean):void
 		{
+			if(count<gridCount){
+				for (i=count; i<gridCount; i++)
+				{
+					setGridInfo(i,null);
+				}
+			}
 			gridCount = count;
 			//如果当前容器长度不够，则自动补充
 			var len:int = dataProvider.length;
