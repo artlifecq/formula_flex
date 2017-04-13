@@ -3,7 +3,6 @@ package org.mokylin.skin.common.alert
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Check;
-	import feathers.controls.text.TextFieldTextEditor;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -31,7 +30,7 @@ package org.mokylin.skin.common.alert
 
 		public var cboxTip:feathers.controls.Check;
 
-		public var lbTip:feathers.controls.text.TextFieldTextEditor;
+		public var lbTip:feathers.controls.Label;
 
 		public var title:feathers.controls.Label;
 
@@ -48,7 +47,7 @@ package org.mokylin.skin.common.alert
 			this.currentState = "normal";
 			this.height = 279;
 			this.width = 355;
-			this.elementsContent = [bg_i(),txt_bg_i(),title_i(),btnClose_i(),btnOk_i(),btnCancel_i(),lbTip_i(),cboxTip_i()];
+			this.elementsContent = [bg_i(),txt_bg_i(),title_i(),btnClose_i(),btnOk_i(),btnCancel_i(),cboxTip_i(),lbTip_i()];
 			
 			states = {
 			};
@@ -123,17 +122,17 @@ package org.mokylin.skin.common.alert
 			return temp;
 		}
 
-		private function lbTip_i():feathers.controls.text.TextFieldTextEditor
+		private function lbTip_i():feathers.controls.Label
 		{
-			var temp:feathers.controls.text.TextFieldTextEditor = new feathers.controls.text.TextFieldTextEditor();
+			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbTip = temp;
 			temp.name = "lbTip";
-			temp.height = 145;
-			temp.leading = 2;
-			temp.text = "fgffffffffffffffffffffffffffffffffffffffffffffffffffff";
-			temp.width = 317;
-			temp.x = 19;
-			temp.y = 43;
+			temp.height = 141;
+			temp.text = "标签";
+			temp.color = 0xcfc6ae;
+			temp.width = 311;
+			temp.x = 20;
+			temp.y = 46;
 			return temp;
 		}
 

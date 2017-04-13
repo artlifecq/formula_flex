@@ -466,14 +466,6 @@ package com.rpgGame.netData{
     import com.rpgGame.netData.qiankundai.message.ResQianKunDaiItemRemoveMessage;
     import com.rpgGame.netData.rank.handler.ResRankExchangeInfoHandler;
     import com.rpgGame.netData.rank.message.ResRankExchangeInfoMessage;
-    import com.rpgGame.netData.refining.handler.ResExchangeResultHandler;
-    import com.rpgGame.netData.refining.handler.ResRefiningInfoHandler;
-    import com.rpgGame.netData.refining.handler.ResRefiningItemInfosHandler;
-    import com.rpgGame.netData.refining.handler.ResStrengthenResultHandler;
-    import com.rpgGame.netData.refining.message.ResExchangeResultMessage;
-    import com.rpgGame.netData.refining.message.ResRefiningInfoMessage;
-    import com.rpgGame.netData.refining.message.ResRefiningItemInfosMessage;
-    import com.rpgGame.netData.refining.message.ResStrengthenResultMessage;
     import com.rpgGame.netData.royalCity.handler.ResCityInfosHandler;
     import com.rpgGame.netData.royalCity.handler.ResCityWarStartHandler;
     import com.rpgGame.netData.royalCity.handler.ResEnterCityWarHandler;
@@ -987,10 +979,6 @@ package com.rpgGame.netData{
 			register(193101, ResWarMarkListMessage, ResWarMarkListHandler);
 			register(193102, ResUpdateWarmarkMessage, ResUpdateWarmarkHandler);
 			register(200101, ResGmLevelMessage, ResGmLevelHandler);
-			register(204101, ResRefiningInfoMessage, ResRefiningInfoHandler);
-			register(204102, ResStrengthenResultMessage, ResStrengthenResultHandler);
-			register(204103, ResRefiningItemInfosMessage, ResRefiningItemInfosHandler);
-			register(204104, ResExchangeResultMessage, ResExchangeResultHandler);
 			register(205101, ResSendVitalityInfoMessage, ResSendVitalityInfoHandler);
 			register(209101, ResOfflineAwardPanelMessage, ResOfflineAwardPanelHandler);
 			register(209102, ResOfflineResPanelMessage, ResOfflineResPanelHandler);

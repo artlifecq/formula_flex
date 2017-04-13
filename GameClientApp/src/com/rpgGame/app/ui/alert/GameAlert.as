@@ -12,7 +12,6 @@ package com.rpgGame.app.ui.alert
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import feathers.controls.text.TextFieldTextEditor;
 	
 	import gs.TweenLite;
 	
@@ -121,7 +120,6 @@ package com.rpgGame.app.ui.alert
 			}
 			if (gameAlert.lbTip)
 			{
-				gameAlert.lbTip.isHTML=true;
 				gameAlert.lbTip.text=msg;
 			}
 
@@ -189,12 +187,9 @@ package com.rpgGame.app.ui.alert
 			}
 			if (gameAlert.lbTip)
 			{
-				gameAlert.lbTip.isEditable=false;
 				gameAlert.lbTip.textAlign=alertInfo.align;
-				gameAlert.lbTip.multiline=true;
 				gameAlert.lbTip.wordWrap=true;
-				gameAlert.lbTip.isHTML=true;
-				gameAlert.lbTip.text=alertInfo.value;
+				gameAlert.lbTip.htmlText=alertInfo.value;
 			}
 			if (gameAlert.title)
 				gameAlert.title.htmlText = alertInfo.title;
@@ -292,7 +287,7 @@ package com.rpgGame.app.ui.alert
 			return skin.hasOwnProperty("cboxTip") ? skin["cboxTip"] : null;
 		}
 		
-		private function get lbTip() : TextFieldTextEditor
+		private function get lbTip() : Label
 		{
 			return skin.hasOwnProperty("lbTip") ? skin["lbTip"] : null;
 		}
