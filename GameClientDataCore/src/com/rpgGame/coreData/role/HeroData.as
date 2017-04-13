@@ -118,6 +118,11 @@ package com.rpgGame.coreData.role
 		public var trailMount : String = null;
 		public var trailMountAnimat : String = null;
 		
+		/**
+		 *战魂等级 
+		 */
+		public var fightSoulLevel:int = 0;
+		
 		public function HeroData()
 		{
 			super(RoleType.TYPE_HERO);

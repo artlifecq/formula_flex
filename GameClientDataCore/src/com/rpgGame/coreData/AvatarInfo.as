@@ -52,6 +52,9 @@ package com.rpgGame.coreData
 		
 		private var _bodyMethodTypeEffectResID:String = null;
 		private var _rpd_body_method_type_effect : RenderParamData3D;
+		
+		private var _fightsoulResID:String = null;
+		private var _fightsoulMode:RenderParamData3D;
 
 		public function AvatarInfo()
 		{
@@ -238,7 +241,24 @@ package com.rpgGame.coreData
 				_mountAnimatResID = null;
 			}
 		}
-
+		/**战魂换装资源ID*/
+		public function setFightSoulResID(value : String) : void
+		{
+			if (_fightsoulResID == value)
+				return;
+			_fightsoulResID = value;
+			if (_fightsoulResID!=null&&_fightsoulResID!="")
+			{
+				_fightsoulMode = new RenderParamData3D(RenderUnitID.FIGHTSOUL, RenderUnitType.FIGHTSOUL, ClientConfig.getAvatar("monster/"+_fightsoulResID));
+				_fightsoulMode.mouseEnable = true;
+				_fightsoulMode.clearSameType = false;
+			}
+			else
+			{
+				_fightsoulMode = null;
+				_fightsoulResID = null;
+			}
+		}
 		/**特效换装资源ID*/
 		public function set effectResID(value : String) : void
 		{
@@ -426,7 +446,11 @@ package com.rpgGame.coreData
 		{
 			return _rpd_body_method_type_effect;
 		}
-
+		
+		public function  get fightsoulMode():RenderParamData3D
+		{
+			return _fightsoulMode;
+		}
 		/**清空*/
 		public function clear() : void
 		{
@@ -435,6 +459,7 @@ package com.rpgGame.coreData
 			weaponResID = null;
 			deputyWeaponResID = null;
 			setMountResID(null, null);
+			setFightSoulResID(null);
 			weaponEffectID = null;
 			weaponEffectScale = 0;
 			weaponEffectOffset = null;
@@ -473,6 +498,8 @@ package com.rpgGame.coreData
             info._weaponEffectOffset = this._weaponEffectOffset;
             info._weaponEffectScale = this._weaponEffectScale;
             info._weaponResID = this._weaponResID;
+			info._fightsoulMode = this._fightsoulMode;
+			info._fightsoulResID = this._fightsoulResID;
             return info;
         }
 	}

@@ -41,6 +41,7 @@ package com.rpgGame.app.scene.animator
 		private static var LightMaterial:TextureMaterial;
 		
 		protected var _renderSet : RenderSet3D;
+		private var _isAttachUnit:Boolean;
 		
 		public function RibbonAnimator()
 		{
@@ -84,7 +85,7 @@ package com.rpgGame.app.scene.animator
 				{
 					ribbon.stop();
 					ribbon.dispose();
-//					SceneManager.scene.gameScene3d.removeChild(ribbon);
+					//					SceneManager.scene.gameScene3d.removeChild(ribbon);
 				}
 			}
 		}
@@ -96,7 +97,7 @@ package com.rpgGame.app.scene.animator
 			{
 				ribbon.stop();
 				ribbon.dispose();
-//				SceneManager.scene.gameScene3d.removeChild(ribbon);
+				//				SceneManager.scene.gameScene3d.removeChild(ribbon);
 			}
 			_lightList.length = 0;
 			_excuteDelay = excuteInterval;
@@ -105,7 +106,7 @@ package com.rpgGame.app.scene.animator
 			_renderSet = null;
 		}
 		
-		public function initRibbonData(imgUrl:String,targetList:Vector.<SceneRole>,aktor:SceneRole):void
+		public function initRibbonData(imgUrl:String,targetList:Vector.<SceneRole>,aktor:SceneRole,isAttachUnit:Boolean=false):void
 		{
 			if(LightMaterial == null)
 			{
@@ -118,31 +119,41 @@ package com.rpgGame.app.scene.animator
 				LightMaterial.depthCompareMode = Context3DCompareMode.LESS;
 			}
 			
+			_isAttachUnit = isAttachUnit;
+			
 			_targetList = targetList;
 			_targetList.sort(onSortNearestRole);
 			
 			_to = _targetList.shift();
 			_from = _aktor = aktor;
 			
-//			addTimeHandlerAt(4000, on4000Ms);
+			//			addTimeHandlerAt(4000, on4000Ms);
 			
 			light(_from,_to);
 		}
 		
-//		private function on4000Ms():void
-//		{
-//			recycleEnable = true;
-//		}
+		//		private function on4000Ms():void
+		//		{
+		//			recycleEnable = true;
+		//		}
 		
 		private function light(from:SceneRole, to:SceneRole):void
 		{
 			if(_from && _to)
 			{
-				var fromObj : ObjectContainer3D = from.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY).getChildByName(BoneNameEnum.c_0_body_01);
+				var fromObj : ObjectContainer3D;
+				if(_isAttachUnit)
+				{
+					fromObj = from.avatar.getRenderUnitByID(RenderUnitType.FIGHTSOUL, RenderUnitID.FIGHTSOUL).getChildByName(BoneNameEnum.c_0_body_02);
+				}
+				else
+				{
+					fromObj = from.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY).getChildByName(BoneNameEnum.c_0_body_01);
+				}
 				var toObj:ObjectContainer3D = to.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY).getChildByName(BoneNameEnum.c_0_body_01);
 				if (null == fromObj || null == toObj) {
-                    return;
-                }
+					return;
+				}
 				trace(fromObj.position);
 				trace(toObj.position);
 				
