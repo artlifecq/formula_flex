@@ -26,7 +26,7 @@ package com.rpgGame.netData.fightsoul.message{
 			//当前经验值
 			writeInt(_curExp);
 			//活跃度
-			writeInt(_vitality);
+			writeShort(_vitality);
 			return true;
 		}
 		
@@ -37,7 +37,7 @@ package com.rpgGame.netData.fightsoul.message{
 			//当前经验值
 			_curExp = readInt();
 			//活跃度
-			_vitality = readInt();
+			_vitality = readShort();
 			return true;
 		}
 		

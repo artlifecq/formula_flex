@@ -7,7 +7,7 @@ package com.rpgGame.netData.map.handler{
 	
 		public override function action(): void{
 			var msg: ResRoundPlayerMessage = ResRoundPlayerMessage(this.message);
-			//TODO 添加消息处理
+			//TODO 娣诲姞娑堟伅澶勭悊
 		}
 	}
 }
