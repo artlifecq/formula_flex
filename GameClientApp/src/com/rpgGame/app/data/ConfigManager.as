@@ -55,6 +55,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.country.CountryTaoNiCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.cfg.item.ItemStrength;
 	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarHairResCfgData;
@@ -175,6 +176,7 @@ package com.rpgGame.app.data
 			DieCfgData.setup(dic[ConfigClassRegister.Q_die]);
 			GCDCfgData.setup(dic[ConfigClassRegister.Q_GCD]);
 			SkillLvLDataManager.setup(dic[ConfigClassRegister.Q_skill_ignore]);
+			ItemStrength.setup(dic[ConfigClassRegister.Q_equip_strength]);
 //			CountryUnionStatCfgData.setup(null); //待解决
 
 			

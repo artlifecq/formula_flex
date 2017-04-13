@@ -136,7 +136,6 @@ package com.rpgGame.app.utils
 			if(itemInfo is EquipInfo)
 			{
 				grid.setIsWear( RoleEquipmentManager.equipIsWearing(itemInfo));
-				grid.setIsWear( MountEquipmentManager.instance.equipIsWearing(itemInfo));
 			}
 			var hero:HeroData=MainRoleManager.actorInfo;
 			switch( itemInfo.type )

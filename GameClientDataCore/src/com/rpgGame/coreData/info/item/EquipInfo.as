@@ -3,15 +3,15 @@ package com.rpgGame.coreData.info.item
 	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.netData.player.bean.AttributeItem;
-	
+
 	/**
-	 * 装备信息
-	 * @author wewell@163.com
-	 *
+	 *装备信息 
+	 * @author dik
+	 * 
 	 */
 	public class EquipInfo extends ClientItemInfo
 	{
-		/** 评价 **/
+	   /** 评价 **/
 		public var evaluate:int;
 		/** 基础属性Proto **/
 		public var base_stat:Vector.<AttributeItem>;
@@ -44,22 +44,31 @@ package com.rpgGame.coreData.info.item
 		/** 强化属性 **/
 		private var _refinedStat : SpriteStat;
 		
+		/**
+		 * 强化等级
+		 */
+		public var strengthLevel:int;
+		/**
+		 * 强化经验(值)
+		 */
+		public var strengthExp:int;
 
-		public function EquipInfo()
+		public function EquipInfo(cfgId : int = 0)
 		{
-
+			super(cfgId);
 		}
 		
-		/**
-		 * 装备品质 
-		 * @return 
-		 * 
-		 */		
-		override public function get quality():int
+		override public function updateParameters():void
 		{
-			return _quality;
+			if(!itemInfo||!itemInfo.parameters){
+				return;
+			}
+			var json:Object=JSON.parse(itemInfo.parameters);
+			strengthLevel=json.StrengthLevel;
+			strengthExp=json.StrengthExp;
 		}
-
+		
+		
 		/**
 		 * 获取基础属性
 		 * @return 
@@ -74,7 +83,7 @@ package com.rpgGame.coreData.info.item
 			}
 			return _baseSpriteStat;
 		}
-
+		
 		/**
 		 * 获取随机属性
 		 * @return 
@@ -89,7 +98,7 @@ package com.rpgGame.coreData.info.item
 			}
 			return _randomSpriteStat;
 		}
-
+		
 		/**
 		 * 获取强化属性
 		 * @return 
@@ -104,7 +113,7 @@ package com.rpgGame.coreData.info.item
 			}
 			return _refinedStat;
 		}
-
+		
 		/**
 		 * 装备类型 
 		 * @return 
@@ -122,7 +131,7 @@ package com.rpgGame.coreData.info.item
 			equipInfo.cfgId = cfgId;
 			equipInfo.type = type;
 			equipInfo.name = name;
-//			equipInfo.expireTime = expireTime;
+			//			equipInfo.expireTime = expireTime;
 			equipInfo.evaluate = evaluate;
 			equipInfo.quality = quality;
 			equipInfo.base_stat = this.base_stat;

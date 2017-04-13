@@ -3,7 +3,6 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
-	import feathers.controls.UIAsset;
 
 	/**
 	 * @private
@@ -12,11 +11,6 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 	 */
 	public class ListItem_Skin extends feathers.controls.StateSkin
 	{
-		//==========================================================================
-		//                                定义成员变量
-		//==========================================================================
-		public var iconDisplay:feathers.controls.UIAsset;
-
 		public var labelDisplay:feathers.controls.Label;
 
 
@@ -30,13 +24,13 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			this.currentState = "down";
 			this.height = 22;
 			this.width = 68;
-			this.elementsContent = [];
+			this.elementsContent = [labelDisplay_i()];
 			
 			states = {
 				init:[
 						{target:"labelDisplay",
 							name:"textAlign",
-							value:"center"
+							value:"left"
 						}
 						,
 						{target:"labelDisplay",
@@ -59,17 +53,6 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 		}
 
 
-		//==========================================================================
-		//                                定义成员方法
-		//==========================================================================
-		private function iconDisplay_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			iconDisplay = temp;
-			temp.name = "iconDisplay";
-			return temp;
-		}
-
 		private function labelDisplay_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -79,7 +62,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.left = 0;
 			temp.right = 0;
 			temp.text = "二阶";
-			temp.textAlign = "center";
+			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.top = 0;
