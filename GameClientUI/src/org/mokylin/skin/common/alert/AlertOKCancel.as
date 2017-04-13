@@ -2,11 +2,13 @@ package org.mokylin.skin.common.alert
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
+	import feathers.controls.Check;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
+	import org.mokylin.skin.component.check.CheckBoxSkin_1;
 
 	/**
 	 * @private
@@ -26,9 +28,13 @@ package org.mokylin.skin.common.alert
 
 		public var btnOk:feathers.controls.Button;
 
+		public var cboxTip:feathers.controls.Check;
+
 		public var lbTip:feathers.controls.Label;
 
 		public var title:feathers.controls.Label;
+
+		public var txt_bg:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -39,9 +45,9 @@ package org.mokylin.skin.common.alert
 			super();
 			
 			this.currentState = "normal";
-			this.height = 250;
-			this.width = 337;
-			this.elementsContent = [bg_i(),__AlertOKCancel_UIAsset1_i(),title_i(),btnClose_i(),btnOk_i(),btnCancel_i(),lbTip_i()];
+			this.height = 279;
+			this.width = 355;
+			this.elementsContent = [bg_i(),txt_bg_i(),title_i(),btnClose_i(),btnOk_i(),btnCancel_i(),cboxTip_i(),lbTip_i()];
 			
 			states = {
 			};
@@ -52,25 +58,14 @@ package org.mokylin.skin.common.alert
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __AlertOKCancel_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 142;
-			temp.styleName = "ui/common/background/neikuang_2.png";
-			temp.width = 315;
-			temp.x = 11;
-			temp.y = 41;
-			return temp;
-		}
-
 		private function bg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 250;
+			temp.height = 283;
 			temp.styleName = "ui/common/background/erji_kuang.png";
-			temp.width = 337;
+			temp.width = 356;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -85,8 +80,8 @@ package org.mokylin.skin.common.alert
 			temp.label = "取 消";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.width = 95;
-			temp.x = 187;
-			temp.y = 196;
+			temp.x = 205;
+			temp.y = 229;
 			return temp;
 		}
 
@@ -110,8 +105,20 @@ package org.mokylin.skin.common.alert
 			temp.label = "拆 分";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.width = 95;
-			temp.x = 56;
-			temp.y = 196;
+			temp.x = 74;
+			temp.y = 229;
+			return temp;
+		}
+
+		private function cboxTip_i():feathers.controls.Check
+		{
+			var temp:feathers.controls.Check = new feathers.controls.Check();
+			cboxTip = temp;
+			temp.name = "cboxTip";
+			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
+			temp.width = 202;
+			temp.x = 94;
+			temp.y = 198;
 			return temp;
 		}
 
@@ -120,10 +127,14 @@ package org.mokylin.skin.common.alert
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbTip = temp;
 			temp.name = "lbTip";
-			temp.text = "此装备可分解获得强化材料,是否确认丢弃";
+			temp.height = 141;
+			temp.leading = 2;
+			temp.letterSpacing = 0;
+			temp.text = "标签";
 			temp.color = 0xcfc6ae;
-			temp.x = 37;
-			temp.y = 99;
+			temp.width = 311;
+			temp.x = 20;
+			temp.y = 46;
 			return temp;
 		}
 
@@ -142,6 +153,19 @@ package org.mokylin.skin.common.alert
 			temp.width = 267;
 			temp.x = 30;
 			temp.y = 11;
+			return temp;
+		}
+
+		private function txt_bg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			txt_bg = temp;
+			temp.name = "txt_bg";
+			temp.height = 151;
+			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.width = 323;
+			temp.x = 16;
+			temp.y = 41;
 			return temp;
 		}
 

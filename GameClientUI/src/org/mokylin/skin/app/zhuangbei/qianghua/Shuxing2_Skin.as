@@ -52,7 +52,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.name = "arrow_up";
 			temp.styleName = "ui/common/tubiao/tu_up.png";
 			temp.x = 61;
-			temp.y = 4;
+			temp.y = 2;
 			return temp;
 		}
 

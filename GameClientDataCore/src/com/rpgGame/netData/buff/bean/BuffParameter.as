@@ -10,40 +10,40 @@ package com.rpgGame.netData.buff.bean{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * buffå‚æ•°ç±»
+	 * buff²ÎÊıÀà
 	 */
 	public class BuffParameter extends Bean {
-		
-		//buffå‚æ•°ç±»å‹
+	
+		//buff²ÎÊıÀàĞÍ
 		private var _type: int;
 		
-		//buffå‚æ•°å€¼
+		//buff²ÎÊıÖµ
 		private var _value: int;
 		
 		/**
-		 * å†™å…¥å­—èŠ‚ç¼“å­˜
+		 * Ğ´Èë×Ö½Ú»º´æ
 		 */
 		override protected function writing(): Boolean{
-			//buffå‚æ•°ç±»å‹
+			//buff²ÎÊıÀàĞÍ
 			writeInt(_type);
-			//buffå‚æ•°å€¼
+			//buff²ÎÊıÖµ
 			writeInt(_value);
 			return true;
 		}
 		
 		/**
-		 * è¯»å–å­—èŠ‚ç¼“å­˜
+		 * ¶ÁÈ¡×Ö½Ú»º´æ
 		 */
 		override protected function reading(): Boolean{
-			//buffå‚æ•°ç±»å‹
+			//buff²ÎÊıÀàĞÍ
 			_type = readInt();
-			//buffå‚æ•°å€¼
+			//buff²ÎÊıÖµ
 			_value = readInt();
 			return true;
 		}
 		
 		/**
-		 * get buffå‚æ•°ç±»å‹
+		 * get buff²ÎÊıÀàĞÍ
 		 * @return 
 		 */
 		public function get type(): int{
@@ -51,14 +51,14 @@ package com.rpgGame.netData.buff.bean{
 		}
 		
 		/**
-		 * set buffå‚æ•°ç±»å‹
+		 * set buff²ÎÊıÀàĞÍ
 		 */
 		public function set type(value: int): void{
 			this._type = value;
 		}
 		
 		/**
-		 * get buffå‚æ•°å€¼
+		 * get buff²ÎÊıÖµ
 		 * @return 
 		 */
 		public function get value(): int{
@@ -66,7 +66,7 @@ package com.rpgGame.netData.buff.bean{
 		}
 		
 		/**
-		 * set buffå‚æ•°å€¼
+		 * set buff²ÎÊıÖµ
 		 */
 		public function set value(value: int): void{
 			this._value = value;

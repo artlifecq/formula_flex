@@ -28,9 +28,9 @@ package com.rpgGame.coreData.type
 		/**同组**/
 		public static const TEAM_SAME_GROUP:String = "ui/common/icon/icon_171.png";
 		/**icon上穿戴 46 * 46**/
-		public static const EQUIP_WARING_46 : String = "ui/common/tubiao/tongyongtubiao_xiao/chuan.png";
+		public static const EQUIP_WARING_42 : String = "ui/common/grid/equip/yizhuang_xiao.png";
 		/**icon上穿戴 60 * 60**/
-		public static const EQUIP_WARING_60 : String = "ui/common/tubiao/tongyongtubiao_xiao/chuan_60.png";
+		public static const EQUIP_WARING_64 : String = "ui/common/grid/equip/yizhuang_da.png";
 		
 		/**icon上职业不符合**/
 		public static const EQUIP_JOB_NO : String = "ui/common/grid/normal/jz.png";

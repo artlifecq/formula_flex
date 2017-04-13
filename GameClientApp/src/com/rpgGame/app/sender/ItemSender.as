@@ -11,6 +11,7 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.backpack.message.ReqMoveItemMessage;
 	import com.rpgGame.netData.backpack.message.ReqSplitItemMessage;
 	import com.rpgGame.netData.backpack.message.ReqUseItemMessage;
+	import com.rpgGame.netData.equip.message.ReqEquipStrengthMessage;
 	import com.rpgGame.netData.equip.message.UnwearEquipMessage;
 	import com.rpgGame.netData.equip.message.WearEquipMessage;
 	import com.rpgGame.netData.store.message.ReqBagToStoreMessage;
@@ -258,5 +259,23 @@ package com.rpgGame.app.sender
 			msg.cellId=gridId;
 			SocketConnection.send(msg);
 		}
+		
+		/**
+		 *强化装备 
+		 * @param equipId
+		 * @param type
+		 * @param list
+		 * 
+		 */
+		public static function strengthEquip(equipId:long,type:int,list:Vector.<long>,opaqueType:int):void
+		{
+			var msg:ReqEquipStrengthMessage=new ReqEquipStrengthMessage();
+			msg.equipId=equipId;
+			msg.type=type;
+			msg.useItemIds=list;
+			msg.opaque=opaqueType;//0普通强化，1一键强化
+			SocketConnection.send(msg);
+		}
+		
 	}
 }

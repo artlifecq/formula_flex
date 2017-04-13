@@ -83,8 +83,18 @@ package com.game.engine3D.display
 				var rend:RenderUnit3D=_unit as RenderUnit3D;
 				if(rend.totalDuration>0)
 				{
-					rend.stop(int(percent*rend.totalDuration));
-					rend.startRender();
+					
+					if(percent>=0)
+					{
+						rend.stop(int(percent*rend.totalDuration));
+						rend.startRender();
+					}
+					else
+					{
+						rend.stop(0);
+						rend.stopRender();
+					}
+					
 				}
 				
 				
@@ -94,16 +104,13 @@ package com.game.engine3D.display
 		
 		
 		
-		/**跳转到特效的百分比*/
+		/**设置速度，相对于总时间*/
 		public function setSpeed(speed:Number) : void
 		{
 			if (_unit != null)
 			{
 				var rend:RenderUnit3D=_unit as RenderUnit3D;
-				if(rend.totalDuration>0)
-				{
-					rend.animateSpeed=speed;
-				}
+				rend.animateSpeed=speed;
 				
 				
 			}
@@ -121,7 +128,6 @@ package com.game.engine3D.display
 			if (_unit)
 				_unit.startRender();
 		}
-
 		public function stop() : void
 		{
 			_isStarted = false;

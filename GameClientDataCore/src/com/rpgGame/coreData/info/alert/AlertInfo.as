@@ -21,6 +21,11 @@ package com.rpgGame.coreData.info.alert
 		public var rightValue:String;
 		 /**  备注 */
 		public var note:String;
+		
+		/**
+		 *复选内容 
+		 */
+		public var checkText:String;
 
 	}
 }

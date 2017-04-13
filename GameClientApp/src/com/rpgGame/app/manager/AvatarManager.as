@@ -193,7 +193,7 @@ package com.rpgGame.app.manager
 		 */		
 		public static function updateRoleSimpleShadow(role : SceneRole) : void
 		{
-			if (DisplaySetUpManager.shadowLevel == 0 && role.isClingGround)
+			if (DisplaySetUpManager.shadowLevel == 0)
 			{
 				var data : RoleData = RoleData(role.data);
 				var avatarResConfig : AvatarResConfig;
@@ -202,12 +202,7 @@ package com.rpgGame.app.manager
 					var mountRu : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.MOUNT, RenderUnitID.MOUNT, true);
 					if (mountRu)
 					{
-						avatarResConfig = AvatarResConfigSetData.getInfo(data.avatarInfo.mountResID);
-						if (avatarResConfig /*&& !avatarResConfig.disableSimpleShadow*/)
-						{
-							role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"), mountRu.radius * simpleShadowBaseScale);
-							return;
-						}
+						role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"), mountRu.radius * simpleShadowBaseScale);
 					}
 				}
 				else
@@ -215,12 +210,7 @@ package com.rpgGame.app.manager
 					var bodyRu : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
 					if (bodyRu)
 					{
-						avatarResConfig = AvatarResConfigSetData.getInfo(data.avatarInfo.bodyResID);
-						if (avatarResConfig/* && !avatarResConfig.disableSimpleShadow*/)
-						{
-							role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"), bodyRu.radius * simpleShadowBaseScale);
-							return;
-						}
+						role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"), bodyRu.radius * simpleShadowBaseScale);
 					}
 				}
 			}
