@@ -21,4 +21,4 @@ package com.rpgGame.coreData.clientConfig
 
 	}
 }
-		
+	

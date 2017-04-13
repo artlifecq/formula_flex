@@ -60,5 +60,9 @@ package com.rpgGame.coreData.enum
 			 * 骑马的骨骼点
 		 */		
 		public static const b_0_saddle_01 : String = "b_0_saddle_01";
+		
+		public static const chest:String = "chest";
+		public static const st_zero:String = "st_zero";
+		public static const zero:String = "zero";
 	}
 }

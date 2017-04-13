@@ -591,7 +591,7 @@ package com.rpgGame.app.fight.spell
 				if (!ribbonAnimator)
 				{
 					ribbonAnimator = new RibbonAnimator();
-					(ribbonAnimator as RibbonAnimator).initRibbonData(imgUrl,info.flyTargets,info.atkor);
+					(ribbonAnimator as RibbonAnimator).initRibbonData(imgUrl,info.flyTargets,info.atkor,info.isAttachUnit);
 					effectSet.setRenderAnimator(ribbonAnimator);
 				}
 				

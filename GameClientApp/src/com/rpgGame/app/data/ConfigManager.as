@@ -23,10 +23,12 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.DieCfgData;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.cfg.FightsoulData;
+	import com.rpgGame.coreData.cfg.FightsoulModeData;
 	import com.rpgGame.coreData.cfg.FightsoulPathData;
 	import com.rpgGame.coreData.cfg.FriendCfgData;
 	import com.rpgGame.coreData.cfg.GCDCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSettingCfgData;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.GmConfig;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.cfg.HintCfgData;
@@ -208,6 +210,8 @@ package com.rpgGame.app.data
 			WindowInfoData.setConfig(dic[ConfigClassRegister.Q_windowInfo]);
 			FightsoulPathData.setConfig(dic[ConfigClassRegister.Q_fightsoul_path]);
 			FightsoulData.setConfig(dic[ConfigClassRegister.Q_fightsoul]);
+			FightsoulModeData.setConfig(dic[ConfigClassRegister.Q_fightsoul_mode]);
+			GlobalSheetData.setup(dic[ConfigClassRegister.Q_global]);
 			
 			// 服务器发送 消息ID对应客户端 
 			NotifyCfgData.setup(dic[ConfigClassRegister.Q_notify]);
