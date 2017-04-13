@@ -30,7 +30,7 @@ package com.rpgGame.appModule.fightsoul
 		
 		public function get isOver():Boolean
 		{
-			return _count==0;
+			return _count<=0;
 		}
 	}
 }
