@@ -35,7 +35,7 @@ package com.rpgGame.appModule.fightsoul
 				NoticeManager.showNotify("今日获取已达上限，每日03:00重置");
 				return ;
 			}
-			var winInfo:Q_windowInfo = WindowInfoData.getInfobyId(path.q_id);
+			var winInfo:Q_windowInfo = WindowInfoData.getInfobyId(path.q_winId);
 			if(winInfo.q_islink==1)
 			{
 				AppManager.showApp(winInfo.q_windCodeId,winInfo.q_arg);
@@ -43,7 +43,7 @@ package com.rpgGame.appModule.fightsoul
 		}
 		override protected function commitData():void
 		{
-			var winInfo:Q_windowInfo = WindowInfoData.getInfobyId(path.q_id);
+			var winInfo:Q_windowInfo = WindowInfoData.getInfobyId(path.q_winId);
 			_skin.lb_name.text = winInfo.q_name;
 			_skin.lb_cishu.text = pathinfoData.count.toString()+"/"+path.q_total;
 			_skin.lb_jinyan.text = path.q_reward.toString()+"点";

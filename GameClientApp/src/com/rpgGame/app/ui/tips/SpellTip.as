@@ -86,6 +86,11 @@ package com.rpgGame.app.ui.tips
 				riseCfg=SpellDataManager.getSpellData(id,cfg.q_max_grade);
 			}
 			
+			if(cfg.q_skillpanel_description2==""&&cfg.q_grade_name=="")
+			{
+				riseCfg = null;
+			}
+			
 			_spellTip.lbl_name.text=cfg.q_skillName;
 			_spellTip.lbl_dengji.text="Lv."+info.skillChildLv;
 			_spellTip.lbl_lenque.text=cfg.q_cd==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):(cfg.q_cd/1000)+"s";
@@ -139,8 +144,8 @@ package com.rpgGame.app.ui.tips
 			_spellTip.rise_des.htmlText=cfg.q_skillpanel_description2;
 			_spellTip.eft_name.text=riseCfg.q_grade_name;
 			
-			mainIco.setIconResName(ClientConfig.getSkillIcon(cfg.q_skillID.toString(),64));
-			riseIco.setIconResName(ClientConfig.getRiseSkillIcon(cfg.q_skillID.toString(),48));
+			mainIco.setIconResName(ClientConfig.getSkillIcon(cfg.q_icon.toString(),64));
+			riseIco.setIconResName(ClientConfig.getRiseSkillIcon(cfg.q_icon.toString(),48));
 			if(_spellTip.rise_name.textHeight+_spellTip.rise_name.textHeight<80){
 				_spellTip.bg.height=_spellTip.grp_rise_content.y+80;
 			}else{

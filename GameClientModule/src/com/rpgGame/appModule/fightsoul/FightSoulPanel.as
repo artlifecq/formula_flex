@@ -53,6 +53,7 @@ package com.rpgGame.appModule.fightsoul
 		{
 			_skin=new Zhanhun_Skin();
 			super(_skin);
+			TipTargetManager.show(_skin.pro_shengji, TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText(LangFightSoul.FightSoulExpTip)));
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
@@ -190,7 +191,6 @@ package com.rpgGame.appModule.fightsoul
 			_skin.List.layout = layout;
 			_skin.List.dataProvider = new ListCollection();
 			listrefeash();
-			TipTargetManager.show(_skin.pro_shengji, TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText(LangFightSoul.FightSoulExpTip)));
 			_skin.lb_progress.touchable = false;
 			
 			if(_skillIcon==null)

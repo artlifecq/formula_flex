@@ -202,8 +202,8 @@ package com.rpgGame.app.manager
 				return  ;
 			var skill:Q_skill_model = FightSoulManager.instance().getSpellData();
 			//技能冷却中不能释放技能里
-			/*if(SkillCDManager.getInstance().getSkillHasCDTime(skill))
-				return ;*/
+			if(SkillCDManager.getInstance().getSkillHasCDTime(skill))
+				return ;
 			
 			//不是攻击状态和被攻击状态，不能释放技能
 			if(!MainRoleManager.actor.stateMachine.isAttacking&&!MainRoleManager.actor.stateMachine.isHiting)

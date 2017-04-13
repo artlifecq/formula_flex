@@ -98,13 +98,22 @@ package com.rpgGame.app.manager.fightsoul
 		
 		public function updataCount(type:int,count:int):void
 		{
+			var bool:Boolean = false;
 			for each(var date:TypeValue in fightSoulInfo.values)
 			{
 				if(date.type == type)
 				{
 					date.count = count;
+					bool = true;
 					break;
 				}
+			}
+			if(!bool)
+			{
+				var  bit:TypeValue = new TypeValue();
+				bit.type = type;
+				bit.count = count;
+				fightSoulInfo.values.push(bit); 
 			}
 			EventManager.dispatchEvent(FightSoul_TypeValue);
 		}
