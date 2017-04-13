@@ -14,6 +14,7 @@ package com.rpgGame.app.manager.fightsoul
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.lang.LangFightSoul;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
@@ -66,9 +67,7 @@ package com.rpgGame.app.manager.fightsoul
 				item.itemModelId = iteminfo["mod"];
 				item.num = iteminfo["num"];
 				item.parameters = iteminfo["paras"]["lv"];
-				var client:ClientItemInfo = new ClientItemInfo(item.itemModelId);
-				client.itemInfo = item;
-				_rewards.push(client);
+				_rewards.push(ItemUtil.convertClientItemInfo(item));
 			}
 		}
 		
