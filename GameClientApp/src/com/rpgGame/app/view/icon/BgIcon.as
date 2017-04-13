@@ -175,6 +175,30 @@ package com.rpgGame.app.view.icon
 			sortLayer();
 		}
 		
+		//没找到对应的各种背景自己写了一个
+		/**
+		 * 设置ico的背景图片,传入url
+		 */		
+		public function setUrlBg( value:String, alpha:Number=1 ):void
+		{
+			if(!value|| _bgResName == value )
+				return;
+			
+			_bgResName = value;
+			
+			if( _bgImage == null )
+			{
+				_bgImage = new UIAsset();
+				addChild( _bgImage );
+				_bgImage.imageScaleMode=UIAsset.IMAGE_SCALE_MODE_AUTO;
+			}
+			
+			_bgImage.alpha = alpha;
+			_bgImage.styleName =value;
+			_bgImage.onImageLoaded = onBgImgComplete;
+			
+			sortLayer();
+		}
 		protected function setIsShowLockAsset(value:Boolean,isBind:Boolean):void
 		{
 //			if(isShowLockAsset == value)

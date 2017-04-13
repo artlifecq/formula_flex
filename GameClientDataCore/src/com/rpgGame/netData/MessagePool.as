@@ -79,7 +79,6 @@ package com.rpgGame.netData{
     import com.rpgGame.netData.equip.handler.WearEquipItemHandler;
     import com.rpgGame.netData.equip.message.ResBuTianShenShiKindInfoMessage;
     import com.rpgGame.netData.equip.message.ResEquipInfoMessage;
-    import com.rpgGame.netData.equip.message.ResEquipOperateResultMessage;
     import com.rpgGame.netData.equip.message.ResKindInfosMessage;
     import com.rpgGame.netData.equip.message.UnwearEquipItemMessage;
     import com.rpgGame.netData.equip.message.WearEquipItemMessage;
@@ -105,6 +104,7 @@ package com.rpgGame.netData{
     import com.rpgGame.netData.fight.handler.ResSkillClickFlyHandler;
     import com.rpgGame.netData.fight.handler.ResVirFightObjectAttackResultHandler;
     import com.rpgGame.netData.fight.handler.SCAttackerResultHandler;
+    import com.rpgGame.netData.fight.handler.SCCancelSkillHandler;
     import com.rpgGame.netData.fight.message.ResAttackBeautyMessage;
     import com.rpgGame.netData.fight.message.ResAttackBreakSingingToClientMessage;
     import com.rpgGame.netData.fight.message.ResAttackRangeMessage;
@@ -119,6 +119,7 @@ package com.rpgGame.netData{
     import com.rpgGame.netData.fight.message.ResSkillClickFlyMessage;
     import com.rpgGame.netData.fight.message.ResVirFightObjectAttackResultMessage;
     import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
+    import com.rpgGame.netData.fight.message.SCCancelSkillMessage;
     import com.rpgGame.netData.fightpower.handler.ResFightPowerToClientHandler;
     import com.rpgGame.netData.fightpower.message.ResFightPowerToClientMessage;
     import com.rpgGame.netData.fightsoul.message.SCFightSoulDatasMessage;
@@ -762,6 +763,7 @@ package com.rpgGame.netData{
 			register(102112, ResAttackTargetMessage, ResAttackTargetHandler);
 			register(102113, ResVirFightObjectAttackResultMessage, ResVirFightObjectAttackResultHandler);
 			register(102114, SCAttackerResultMessage, SCAttackerResultHandler);
+			register(102115, SCCancelSkillMessage, SCCancelSkillHandler);
 			register(103101, ResMyPlayerInfoMessage, ResMyPlayerInfoHandler);
 			register(103102, ResPlayerAddExpMessage, ResPlayerAddExpHandler);
 			register(103103, ResPersonalNoticeMessage, ResPersonalNoticeHandler);
@@ -805,7 +807,6 @@ package com.rpgGame.netData{
 			register(107103, ResKindInfosMessage, ResKindInfosHandler);
 			register(107104, ResBuTianShenShiKindInfoMessage, ResBuTianShenShiKindInfoHandler);
 			register(107105, ResEquipInfoMessage, null);
-			register(107106, ResEquipOperateResultMessage);
 			register(108101, ResItemInfosMessage, ResItemInfosHandler);
 			register(108102, ResItemAddMessage, ResItemAddHandler);
 			register(108103, ResItemChangeMessage, ResItemChangeHandler);
@@ -986,6 +987,10 @@ package com.rpgGame.netData{
 			register(193101, ResWarMarkListMessage, ResWarMarkListHandler);
 			register(193102, ResUpdateWarmarkMessage, ResUpdateWarmarkHandler);
 			register(200101, ResGmLevelMessage, ResGmLevelHandler);
+			register(204101, ResRefiningInfoMessage, ResRefiningInfoHandler);
+			register(204102, ResStrengthenResultMessage, ResStrengthenResultHandler);
+			register(204103, ResRefiningItemInfosMessage, ResRefiningItemInfosHandler);
+			register(204104, ResExchangeResultMessage, ResExchangeResultHandler);
 			register(205101, ResSendVitalityInfoMessage, ResSendVitalityInfoHandler);
 			register(209101, ResOfflineAwardPanelMessage, ResOfflineAwardPanelHandler);
 			register(209102, ResOfflineResPanelMessage, ResOfflineResPanelHandler);
