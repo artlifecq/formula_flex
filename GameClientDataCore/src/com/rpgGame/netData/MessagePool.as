@@ -125,6 +125,7 @@ package com.rpgGame.netData{
     import com.rpgGame.netData.fightsoul.handler.SCFightSoulDatasHandler;
     import com.rpgGame.netData.fightsoul.handler.SCFightSoulExpChangeHandler;
     import com.rpgGame.netData.fightsoul.handler.SCFightSoulLevelUpHandler;
+    import com.rpgGame.netData.fightsoul.handler.SCFightSoulRewardResultHandler;
     import com.rpgGame.netData.fightsoul.message.SCFightSoulChangeCountMessage;
     import com.rpgGame.netData.fightsoul.message.SCFightSoulChangeModelResultMessage;
     import com.rpgGame.netData.fightsoul.message.SCFightSoulDatasMessage;
@@ -1043,6 +1044,7 @@ package com.rpgGame.netData{
 			register(223003, SCFightSoulChangeCountMessage, SCFightSoulChangeCountHandler);
 			register(223004, SCFightSoulDatasMessage, SCFightSoulDatasHandler);
 			register(223005, SCFightSoulChangeModelResultMessage, SCFightSoulChangeModelResultHandler);
+			register(223006, SCFightSoulRewardResultMessage, SCFightSoulRewardResultHandler);
 		}
 		
 		private function register(id: int, messageClass: Class, handlerClass: Class=null): void{
