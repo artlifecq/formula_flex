@@ -31,17 +31,19 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 
 		public var arrow_up2:feathers.controls.UIAsset;
 
-		public var btn_qianghua_all:feathers.controls.Button;
-
 		public var btn_shuoming:feathers.controls.Button;
 
 		public var btn_zuomo:feathers.controls.Button;
+
+		public var btn_zuomo_all:feathers.controls.Button;
 
 		public var cmb_dengjie:feathers.controls.ComboBox;
 
 		public var cmb_pinzhi:feathers.controls.ComboBox;
 
 		public var grp_jiacheng:feathers.controls.Group;
+
+		public var lb_baifenbi:feathers.controls.Label;
 
 		public var lb_current:feathers.controls.Label;
 
@@ -68,7 +70,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [left_i(),__Zuomo_Skin_UIAsset3_i(),btn_shuoming_i(),lb_name_i(),btn_zuomo_i(),grp_jiacheng_i(),cmb_pinzhi_i(),cmb_dengjie_i(),btn_qianghua_all_i()];
+			this.elementsContent = [left_i(),__Zuomo_Skin_UIAsset3_i(),btn_shuoming_i(),lb_name_i(),btn_zuomo_i(),grp_jiacheng_i(),cmb_pinzhi_i(),cmb_dengjie_i(),btn_zuomo_all_i(),__Zuomo_Skin_Label4_i(),__Zuomo_Skin_Label5_i(),__Zuomo_Skin_UIAsset13_i()];
 			
 			states = {
 			};
@@ -82,22 +84,22 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 		private function __Zuomo_Skin_Label1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "（当前等级）";
-			temp.color = 0x8B8D7B;
+			temp.text = "当前等级";
+			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 39;
-			temp.y = 44;
+			temp.x = 53;
+			temp.y = 59;
 			return temp;
 		}
 
 		private function __Zuomo_Skin_Label2_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "（琢磨后等级）";
-			temp.color = 0x8B8D7B;
+			temp.text = "琢磨后等级";
+			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 382;
-			temp.y = 44;
+			temp.x = 384;
+			temp.y = 59;
 			return temp;
 		}
 
@@ -108,18 +110,31 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 145;
-			temp.y = 49;
+			temp.y = 59;
 			return temp;
 		}
 
 		private function __Zuomo_Skin_Label4_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "0%";
+			temp.fontSize = 12;
+			temp.text = "请放入强化材料";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 270;
-			temp.y = 49;
+			temp.x = 484;
+			temp.y = 346;
+			return temp;
+		}
+
+		private function __Zuomo_Skin_Label5_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.fontSize = 12;
+			temp.text = "(强化成功后消耗材料将会消失，请慎重选择）";
+			temp.color = 0xD02525;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 576;
+			temp.y = 346;
 			return temp;
 		}
 
@@ -128,16 +143,44 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
 			temp.styleClass = org.mokylin.skin.component.progress.pro_jindu_Skin;
 			temp.x = 118;
-			temp.y = 14;
+			temp.y = 24;
 			return temp;
 		}
 
 		private function __Zuomo_Skin_UIAsset10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/qianghua/qianghuajiacheng.png";
-			temp.x = 0;
+			temp.styleName = "ui/app/zhuangbei/qianghua/dengjidikuang.png";
+			temp.x = 54;
+			temp.y = 29;
+			return temp;
+		}
+
+		private function __Zuomo_Skin_UIAsset11_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zhuangbei/qianghua/dengjidikuang.png";
+			temp.x = 388;
+			temp.y = 29;
+			return temp;
+		}
+
+		private function __Zuomo_Skin_UIAsset12_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zhuangbei/zuomo/jiacheng.png";
+			temp.x = 209;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function __Zuomo_Skin_UIAsset13_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/dianweixiaoguotu/app/zhuangbei/zuomo.jpg";
+			temp.visible = false;
+			temp.x = 0;
+			temp.y = 3;
 			return temp;
 		}
 
@@ -157,7 +200,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.name = "arrow_up2";
 			temp.styleName = "ui/common/tubiao/tu_up.png";
 			temp.x = 296;
-			temp.y = 51;
+			temp.y = 61;
 			return temp;
 		}
 
@@ -168,18 +211,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.name = "arrow_up";
 			temp.styleName = "ui/common/tubiao/tu_up.png";
 			temp.x = 448;
-			temp.y = 25;
-			return temp;
-		}
-
-		private function btn_qianghua_all_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_qianghua_all = temp;
-			temp.name = "btn_qianghua_all";
-			temp.styleClass = org.mokylin.skin.app.zhuangbei.zuomo.button.ButtonZhuomo;
-			temp.x = 598;
-			temp.y = 476;
+			temp.y = 35;
 			return temp;
 		}
 
@@ -191,6 +223,17 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shuoming;
 			temp.x = 834;
 			temp.y = 83;
+			return temp;
+		}
+
+		private function btn_zuomo_all_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_zuomo_all = temp;
+			temp.name = "btn_zuomo_all";
+			temp.styleClass = org.mokylin.skin.app.zhuangbei.zuomo.button.ButtonZhuomo;
+			temp.x = 741;
+			temp.y = 472;
 			return temp;
 		}
 
@@ -221,8 +264,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 70;
-			temp.x = 529;
-			temp.y = 445;
+			temp.x = 459;
+			temp.y = 475;
 			return temp;
 		}
 
@@ -238,8 +281,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 171;
-			temp.x = 599;
-			temp.y = 445;
+			temp.x = 529;
+			temp.y = 475;
 			return temp;
 		}
 
@@ -249,8 +292,21 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			grp_jiacheng = temp;
 			temp.name = "grp_jiacheng";
 			temp.x = 401;
-			temp.y = 344;
-			temp.elementsContent = [__Zuomo_Skin_UIAsset10_i(),lb_current_i(),lb_next_i(),__Zuomo_Skin_ProgressBar1_i(),lb_progress_i(),__Zuomo_Skin_Label1_i(),__Zuomo_Skin_Label2_i(),lb_up1_i(),arrow_up_i(),__Zuomo_Skin_Label3_i(),__Zuomo_Skin_Label4_i(),lb_up2_i(),arrow_up2_i()];
+			temp.y = 377;
+			temp.elementsContent = [__Zuomo_Skin_UIAsset10_i(),__Zuomo_Skin_UIAsset11_i(),lb_current_i(),lb_next_i(),__Zuomo_Skin_ProgressBar1_i(),lb_progress_i(),__Zuomo_Skin_Label1_i(),__Zuomo_Skin_Label2_i(),lb_up1_i(),arrow_up_i(),__Zuomo_Skin_Label3_i(),lb_baifenbi_i(),lb_up2_i(),arrow_up2_i(),__Zuomo_Skin_UIAsset12_i()];
+			return temp;
+		}
+
+		private function lb_baifenbi_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_baifenbi = temp;
+			temp.name = "lb_baifenbi";
+			temp.text = "0%";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 270;
+			temp.y = 59;
 			return temp;
 		}
 
@@ -265,7 +321,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 48;
 			temp.x = 62;
-			temp.y = 22;
+			temp.y = 32;
 			return temp;
 		}
 
@@ -295,7 +351,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 48;
 			temp.x = 395;
-			temp.y = 22;
+			temp.y = 32;
 			return temp;
 		}
 
@@ -310,7 +366,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 139;
 			temp.x = 184;
-			temp.y = 24;
+			temp.y = 34;
 			return temp;
 		}
 
@@ -323,7 +379,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 457;
-			temp.y = 23;
+			temp.y = 33;
 			return temp;
 		}
 
@@ -336,7 +392,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 305;
-			temp.y = 49;
+			temp.y = 59;
 			return temp;
 		}
 

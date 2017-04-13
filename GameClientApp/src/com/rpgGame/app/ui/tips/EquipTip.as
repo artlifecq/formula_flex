@@ -9,10 +9,12 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.cfg.item.ItemStrength;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
-	import com.rpgGame.coreData.enum.JobEnum;
+	import com.rpgGame.coreData.clientConfig.Q_equip_strength;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -37,7 +39,7 @@ package com.rpgGame.app.ui.tips
 
 		private static var _instance:EquipTip=null;
 		private var _iconFace:IconCDFace;
-		private var _itemInfo:ClientItemInfo;
+		private var _itemInfo:EquipInfo;
 		private var isShowDuiBi:Boolean;
 		private var yinIcon:UIAsset;
 		
@@ -98,7 +100,7 @@ package com.rpgGame.app.ui.tips
 		
 		public function setTipData(data:*):void
 		{
-			_itemInfo = data as ClientItemInfo;
+			_itemInfo = data as EquipInfo;
 			FaceUtil.SetItemGrid(_iconFace, _itemInfo, false);
 			var info:HeroData=MainRoleManager.actorInfo;
 			while(labelList.length!=0){
@@ -157,7 +159,14 @@ package com.rpgGame.app.ui.tips
 			
 			if(_itemInfo.qItem.q_max_strengthen!=0){
 				_itemTip.lbl_qianghuatitle.visible=true;
-				_itemTip.lbl_qianghua.visible=_itemInfo.qItem.q_max_strengthen.toString();
+				_itemTip.lbl_qianghua.visible=true;
+				_itemTip.lbl_qianghua.text=_itemInfo.strengthLevel+"/"+_itemInfo.qItem.q_max_strengthen;
+				_itemTip.lbl_qianghua.y=_itemTip.lbl_qianghuatitle.y=170;
+				if(_itemInfo.strengthLevel<_itemInfo.qItem.q_max_strengthen){
+					_itemTip.lbl_qianghua.color=0x6BCC08;
+				}else{
+					_itemTip.lbl_qianghua.color=0xE1201C;
+				}
 			}else{
 				_itemTip.lbl_qianghuatitle.visible=false;
 				_itemTip.lbl_qianghua.visible=false;
@@ -173,15 +182,18 @@ package com.rpgGame.app.ui.tips
 			_itemTip.grp_titlebg.getChildAt(_itemInfo.qItem.q_default).visible=true;
 			
 			_itemTip.lbl_titile.color=ItemConfig.getItemQualityColor(_itemInfo.cfgId);
-			_itemTip.lbl_titile.text=_itemInfo.qItem.q_name;
+			_itemTip.lbl_titile.text=_itemInfo.qItem.q_name+(_itemInfo.strengthLevel!=0?(" +"+_itemInfo.strengthLevel):"");
 			
 			var name:String;
 			var value:String;
 			var attValues1:Q_att_values=AttValueConfig.getAttInfoById(int(_itemInfo.qItem.q_att_type));
+			var stren:Q_equip_strength=ItemStrength.getStrengthCfg(_itemInfo.qItem.q_kind,_itemInfo.qItem.q_job,_itemInfo.strengthLevel);
+			var strenValues:Q_att_values=AttValueConfig.getAttInfoById(stren.q_att_type);
 			if(!attValues1){
 				return ;
 			}
 			var map1:HashMap=new HashMap();
+			var map2:HashMap=new HashMap();
 		
 			var label:Label;
 			var curY:int=170;
@@ -189,6 +201,7 @@ package com.rpgGame.app.ui.tips
 			for(i=1;i<CharAttributeType.TYPE_NUM;i++){
 				if(attValues1["q_value"+i]!=0){
 					map1.add(attValues1["q_type"+i],attValues1["q_value"+i]);
+					map2.add(strenValues["q_type"+i],strenValues["q_value"+i]);
 				}
 			}
 			var ids:Array=CharAttributeType.baseAttrIdArr;
@@ -215,6 +228,10 @@ package com.rpgGame.app.ui.tips
 				}
 				name=HtmlTextUtil.getTextColor(0x8B8D7B,name+":");
 				value=HtmlTextUtil.getTextColor(0xCFC6AE,v+per);
+				var sten:int=map2.getValue(id);
+				if(sten!=0){
+					value+=HtmlTextUtil.getTextColor(0x5CB006,"    (强化+"+sten+")");
+				}
 				label=createLabel(name,value);
 //				if(num%2!=0){
 					label.x=10;
@@ -263,7 +280,7 @@ package com.rpgGame.app.ui.tips
 					_itemTip.tip_down.visible=true;
 				}
 				var attValues2:Q_att_values=AttValueConfig.getAttInfoById(int(equipItemInfo.qItem.q_att_type));
-				var map2:HashMap=new HashMap();
+				map2=new HashMap();
 				
 				for(i=1;i<CharAttributeType.TYPE_NUM;i++){
 					if(attValues2["q_value"+i]!=0){

@@ -63,7 +63,7 @@ package com.rpgGame.coreData.cfg
 		{
 			var maps:HashMap=new HashMap();
 			for(var i:int=1;i<CharAttributeType.TYPE_NUM;i++){
-				if(att["q_value"+i]!=0&&att["q_type"+i]!=0){//值和类型都存在
+				if(att["q_type"+i]!=0){//值和类型都存在
 					maps.add(att["q_type"+i],att["q_value"+i]);					
 				}
 			}

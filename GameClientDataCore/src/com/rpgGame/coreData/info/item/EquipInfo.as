@@ -64,8 +64,8 @@ package com.rpgGame.coreData.info.item
 				return;
 			}
 			var json:Object=JSON.parse(itemInfo.parameters);
-			strengthLevel=json.strengthLevel;
-			strengthExp=json.strengthExp;
+			strengthLevel=json.StrengthLevel;
+			strengthExp=json.StrengthExp;
 		}
 		
 		

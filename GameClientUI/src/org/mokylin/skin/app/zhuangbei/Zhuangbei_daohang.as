@@ -2,6 +2,7 @@ package org.mokylin.skin.app.zhuangbei
 {
 	import feathers.controls.Radio;
 	import feathers.controls.StateSkin;
+	import org.mokylin.skin.app.zhuangbei.button.ButtonHecheng;
 	import org.mokylin.skin.app.zhuangbei.button.ButtonJicheng;
 	import org.mokylin.skin.app.zhuangbei.button.ButtonQianghua;
 	import org.mokylin.skin.app.zhuangbei.button.ButtonXilian;
@@ -17,6 +18,8 @@ package org.mokylin.skin.app.zhuangbei
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var btn_hecheng:feathers.controls.Radio;
+
 		public var btn_jicheng:feathers.controls.Radio;
 
 		public var btn_jineng:feathers.controls.Radio;
@@ -35,7 +38,7 @@ package org.mokylin.skin.app.zhuangbei
 			
 			this.currentState = "normal";
 			this.height = 51;
-			this.elementsContent = [btn_jineng_i(),btn_zuomo_i(),btn_xilian_i(),btn_jicheng_i()];
+			this.elementsContent = [btn_jineng_i(),btn_zuomo_i(),btn_xilian_i(),btn_jicheng_i(),btn_hecheng_i()];
 			
 			states = {
 			};
@@ -46,6 +49,18 @@ package org.mokylin.skin.app.zhuangbei
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function btn_hecheng_i():feathers.controls.Radio
+		{
+			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			btn_hecheng = temp;
+			temp.name = "btn_hecheng";
+			temp.groupName = "rdoBtn";
+			temp.styleClass = org.mokylin.skin.app.zhuangbei.button.ButtonHecheng;
+			temp.x = 576;
+			temp.y = 0;
+			return temp;
+		}
+
 		private function btn_jicheng_i():feathers.controls.Radio
 		{
 			var temp:feathers.controls.Radio = new feathers.controls.Radio();

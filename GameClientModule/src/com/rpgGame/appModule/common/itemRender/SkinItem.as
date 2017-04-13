@@ -20,7 +20,9 @@ package com.rpgGame.appModule.common.itemRender
 		public function SkinItem(com:ComboBox,skin:StateSkin=null)
 		{
 			_comboBox=com;
+			_comboBox.isEditable=false;
 			super(skin);
+			_stateSkin.width=_comboBox.width;
 		}
 		
 		/**
@@ -51,6 +53,7 @@ package com.rpgGame.appModule.common.itemRender
 		{
 			super.onTouchTarget(target);
 			_comboBox.selectedIndex=_comboBox.dataProvider.getItemIndex(_text);
+			_comboBox.getTextInput().htmlText=_text;
 		}
 		
 		public function set text(value:String):void

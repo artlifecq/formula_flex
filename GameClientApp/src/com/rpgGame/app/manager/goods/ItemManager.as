@@ -1,14 +1,9 @@
 package com.rpgGame.app.manager.goods
 {
-	import com.game.engine3D.utils.MathUtil;
-	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.info.item.EquipInfo;
-	
-	import app.message.GoodsType;
 	
 	import org.client.mainCore.manager.EventManager;
 
@@ -82,6 +77,7 @@ package com.rpgGame.app.manager.goods
 		public static function getAllEquipDatas():Array
 		{
 			var roleDatas:Array=RoleEquipmentManager.instance.getAllItem();
+			BackPackManager.instance.setCheckType(null);
 			var backDatas:Array=BackPackManager.instance.getAllItem();
 			var allDatas:Array=roleDatas.concat(backDatas);
 			var i:int=0

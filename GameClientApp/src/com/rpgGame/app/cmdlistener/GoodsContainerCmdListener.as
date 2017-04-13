@@ -51,7 +51,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(107101, onWearEquipItemMessage );
 			SocketConnection.addCmdListener(107102, onUnwearEquipItemMessage );
 			SocketConnection.addCmdListener(107105, onResEquipInfoMessage );
-			SocketConnection.addCmdListener(107105, onResEquipOperateResultMessage );
+			SocketConnection.addCmdListener(107106, onResEquipOperateResultMessage );
 			
 			
 			

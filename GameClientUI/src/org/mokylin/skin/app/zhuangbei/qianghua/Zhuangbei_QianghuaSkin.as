@@ -139,7 +139,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.color = 0xD02525;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 576;
-			temp.y = 350;
+			temp.y = 351;
 			return temp;
 		}
 
@@ -179,6 +179,15 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhuangbei/qianghua/dengjidikuang.png";
+			temp.x = 0;
+			temp.y = 6;
+			return temp;
+		}
+
+		private function __Zhuangbei_QianghuaSkin_UIAsset11_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zhuangbei/qianghua/dengjidikuang.png";
 			temp.x = 322;
 			temp.y = 6;
 			return temp;
@@ -205,9 +214,9 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 		private function __Zhuangbei_QianghuaSkin_UIAsset9_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/qianghua/dengjidikuang.png";
-			temp.x = 0;
-			temp.y = 6;
+			temp.styleName = "ui/component/progress/skin_jindu/thumb.png";
+			temp.x = 54;
+			temp.y = -1;
 			return temp;
 		}
 
@@ -227,10 +236,10 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_qianhua = temp;
 			temp.name = "btn_qianhua";
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.label = "强化";
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.label = "强 化";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xE1D4A9;
 			temp.x = 811;
 			temp.y = 474;
 			return temp;
@@ -303,7 +312,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.name = "grp_pro";
 			temp.x = 471;
 			temp.y = 228;
-			temp.elementsContent = [__Zhuangbei_QianghuaSkin_UIAsset9_i(),__Zhuangbei_QianghuaSkin_UIAsset10_i(),lb_current_i(),__Zhuangbei_QianghuaSkin_Label4_i(),__Zhuangbei_QianghuaSkin_Label5_i(),lb_up_i(),progressBar_i(),lb_pro_i()];
+			temp.elementsContent = [__Zhuangbei_QianghuaSkin_UIAsset9_i(),__Zhuangbei_QianghuaSkin_UIAsset10_i(),__Zhuangbei_QianghuaSkin_UIAsset11_i(),lb_current_i(),__Zhuangbei_QianghuaSkin_Label4_i(),__Zhuangbei_QianghuaSkin_Label5_i(),lb_up_i(),progressBar_i(),lb_pro_i()];
 			return temp;
 		}
 
@@ -349,7 +358,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 172;
 			temp.x = 101;
-			temp.y = 9;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -388,11 +397,13 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
 			progressBar = temp;
 			temp.name = "progressBar";
+			temp.maximum = 100;
 			temp.minimum = 0;
 			temp.styleClass = org.mokylin.skin.component.progress.pro_jindu_Skin;
 			temp.value = 100;
-			temp.x = 58;
-			temp.y = 0;
+			temp.width = 210;
+			temp.x = 80;
+			temp.y = 10;
 			return temp;
 		}
 

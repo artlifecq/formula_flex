@@ -11,9 +11,9 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.backpack.message.ReqMoveItemMessage;
 	import com.rpgGame.netData.backpack.message.ReqSplitItemMessage;
 	import com.rpgGame.netData.backpack.message.ReqUseItemMessage;
+	import com.rpgGame.netData.equip.message.ReqEquipStrengthMessage;
 	import com.rpgGame.netData.equip.message.UnwearEquipMessage;
 	import com.rpgGame.netData.equip.message.WearEquipMessage;
-	import com.rpgGame.netData.refining.message.ReqStrengthenMessage;
 	import com.rpgGame.netData.store.message.ReqBagToStoreMessage;
 	import com.rpgGame.netData.store.message.ReqStoreClearUpMessage;
 	import com.rpgGame.netData.store.message.ReqStoreGetItemsMessage;
@@ -262,17 +262,18 @@ package com.rpgGame.app.sender
 		
 		/**
 		 *强化装备 
-		 * @param itemId
-		 * @param isAuto
+		 * @param equipId
 		 * @param type
+		 * @param list
 		 * 
 		 */
-		public static function strengthEquip(itemId:long,isAuto:Boolean,type:int):void
+		public static function strengthEquip(equipId:long,type:int,list:Vector.<long>,opaqueType:int):void
 		{
-			var msg:ReqStrengthenMessage=new ReqStrengthenMessage();
-			msg.itemId=itemId;
-			msg.isAuto=isAuto?1:0;
+			var msg:ReqEquipStrengthMessage=new ReqEquipStrengthMessage();
+			msg.equipId=equipId;
 			msg.type=type;
+			msg.useItemIds=list;
+			msg.opaque=opaqueType;//0普通强化，1一键强化
 			SocketConnection.send(msg);
 		}
 		

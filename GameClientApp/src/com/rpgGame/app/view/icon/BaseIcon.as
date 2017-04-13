@@ -227,15 +227,15 @@ package com.rpgGame.app.view.icon
 				}
 				switch(_iconSize)
 				{
-					case IcoSizeEnum.SIZE_60:
-						_wearImage.styleName=AssetUrl.EQUIP_WARING_60;
-						_wearImage.x = 8;
-						_wearImage.y = 8;
+					case IcoSizeEnum.ICON_64:
+						_wearImage.styleName=AssetUrl.EQUIP_WARING_64;
+						_wearImage.x = 64-35+_iconPositionX;
+						_wearImage.y=0+_iconPositionY;
 						break;
-					case IcoSizeEnum.SIZE_46:
-						_wearImage.styleName=AssetUrl.EQUIP_WARING_46;
-						_wearImage.x = 4;
-						_wearImage.y = 4;
+					case IcoSizeEnum.ICON_42:
+						_wearImage.styleName=AssetUrl.EQUIP_WARING_42;
+						_wearImage.x = 42-24+_iconPositionX;
+						_wearImage.y=0+_iconPositionY;
 						break;
 				}
 				this.setChildIndex(_wearImage,numChildren);

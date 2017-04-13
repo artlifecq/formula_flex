@@ -34,6 +34,7 @@ package com.rpgGame.netData.equip.message{
 			writeInt(_opaque);
 			//强化装备Id
 			writeLong(_equipId);
+			
 			//强化装备来源,0:装备仓库,1:背包
 			writeByte(_type);
 			//被使用的装备

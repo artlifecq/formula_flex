@@ -11,6 +11,8 @@ package com.rpgGame.app.ui.alert
 	import feathers.controls.Check;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
+	import feathers.controls.UIAsset;
+	import feathers.controls.text.TextFieldTextEditor;
 	
 	import gs.TweenLite;
 	
@@ -32,7 +34,7 @@ package com.rpgGame.app.ui.alert
 		public var clickType : int;
 		public var clickCallBack : Function;
 		public var callBackArgs : Array;
-
+		
 		public function GameAlert(type : int)
 		{
 			alertType = type;
@@ -118,7 +120,11 @@ package com.rpgGame.app.ui.alert
 				gameAlert.cboxTip.isSelected = false;
 			}
 			if (gameAlert.lbTip)
-				gameAlert.lbTip.htmlText = msg;
+			{
+				gameAlert.lbTip.isHTML=true;
+				gameAlert.lbTip.text=msg;
+			}
+
 			if (gameAlert.title)
 				gameAlert.title.htmlText = title;
 			StarlingLayerManager.topUILayer.addChild(gameAlert);
@@ -179,12 +185,16 @@ package com.rpgGame.app.ui.alert
 			{
 				gameAlert.cboxTip.visible = alertSet.isShowCBox;
 				gameAlert.cboxTip.isSelected = false;
+				gameAlert.cboxTip.label=alertInfo.checkText?alertInfo.checkText:"下次不再确认";
 			}
 			if (gameAlert.lbTip)
 			{
-				gameAlert.lbTip.htmlText = alertInfo.value;
-				gameAlert.lbTip.textAlign = alertInfo.align;
-				trace("弹出框TextAlignType:" + alertInfo.align);
+				gameAlert.lbTip.isEditable=false;
+				gameAlert.lbTip.textAlign=alertInfo.align;
+				gameAlert.lbTip.multiline=true;
+				gameAlert.lbTip.wordWrap=true;
+				gameAlert.lbTip.isHTML=true;
+				gameAlert.lbTip.text=alertInfo.value;
 			}
 			if (gameAlert.title)
 				gameAlert.title.htmlText = alertInfo.title;
@@ -192,12 +202,14 @@ package com.rpgGame.app.ui.alert
 				gameAlert.btnOk.label = alertInfo.leftValue ? alertInfo.leftValue : "确认";
 			if (gameAlert.btnCancel)
 				gameAlert.btnCancel.label = alertInfo.rightValue ? alertInfo.rightValue : "取消";
+			
 			gameAlert.callBackArgs = args;
 			StarlingLayerManager.topUILayer.addChild(gameAlert);
 			showAlertMap.add(alertSet.key, gameAlert);
 			return gameAlert;
 		}
-
+		
+		
 		private static var showAlertMap : HashMap = new HashMap();
 		private static var alertPools : HashMap = new HashMap();
 
@@ -265,12 +277,22 @@ package com.rpgGame.app.ui.alert
 			return skin.hasOwnProperty("btnCancel") ? skin["btnCancel"] : null;
 		}
 		
+		private function get txtBg() : UIAsset
+		{
+			return skin.hasOwnProperty("txt_bg") ? skin["txt_bg"] : null;
+		}
+		
+		private function get bg() : UIAsset
+		{
+			return skin.hasOwnProperty("bg") ? skin["bg"] : null;
+		}
+		
 		private function get cboxTip() : Check
 		{
 			return skin.hasOwnProperty("cboxTip") ? skin["cboxTip"] : null;
 		}
 		
-		private function get lbTip() : Label
+		private function get lbTip() : TextFieldTextEditor
 		{
 			return skin.hasOwnProperty("lbTip") ? skin["lbTip"] : null;
 		}

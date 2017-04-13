@@ -180,9 +180,7 @@ package com.rpgGame.appModule.common
 		 */		
 		private function getGridByIndex(index:int):DragDropItem
 		{
-			var gridInfo:GridInfo = dataProvider.getItemAt(index) as GridInfo;
-			var i:int = gridInfo.realIndex;
-			return ( i >= 0 && i < dndGrids.length ) ? dndGrids[i] : null;
+			return index<dndGrids.length?dndGrids[index]:null;
 		}
 		
 		/**
@@ -212,7 +210,7 @@ package com.rpgGame.appModule.common
 			{
 				NoticeManager.showNotify("有一个格子的数据出错了！！！");
 			}
-			var grid:DragDropItem = getGridByIndex(index%gridCount);
+			var grid:DragDropItem = getGridByIndex(index);
 			if(!grid)return;
 			grid.gridInfo = gridInfo;
 			

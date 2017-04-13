@@ -3,7 +3,6 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
-	import feathers.controls.UIAsset;
 
 	/**
 	 * @private
@@ -12,11 +11,6 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 	 */
 	public class ListItem_Skin extends feathers.controls.StateSkin
 	{
-		//==========================================================================
-		//                                定义成员变量
-		//==========================================================================
-		public var iconDisplay:feathers.controls.UIAsset;
-
 		public var labelDisplay:feathers.controls.Label;
 
 
@@ -36,7 +30,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 				init:[
 						{target:"labelDisplay",
 							name:"textAlign",
-							value:"center"
+							value:"left"
 						}
 						,
 						{target:"labelDisplay",
@@ -58,17 +52,6 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			skinNames={"down":"ui/common/hover/xuanqukuang.png", "hover":"ui/common/hover/xuanqukuang.png", "up":"ui/common/hover/xuanqukuang.png"};
 		}
 
-
-		//==========================================================================
-		//                                定义成员方法
-		//==========================================================================
-		private function iconDisplay_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			iconDisplay = temp;
-			temp.name = "iconDisplay";
-			return temp;
-		}
 
 		private function labelDisplay_i():feathers.controls.Label
 		{
