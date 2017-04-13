@@ -10,9 +10,11 @@ package com.rpgGame.app.manager.fightsoul
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.lang.LangFightSoul;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
@@ -58,13 +60,14 @@ package com.rpgGame.app.manager.fightsoul
 			var itemInfos:Object = JSONUtil.decode( GlobalSheetData.getSettingInfo(501).q_string_value);
 			for each(var iteminfo:Object in itemInfos)
 			{
+				var itemModeId:int = iteminfo["mod"];
+				if(ItemConfig.getQItemByID(itemModeId)==null)
+					continue;
 				var item:ItemInfo = new ItemInfo();
 				item.itemModelId = iteminfo["mod"];
 				item.num = iteminfo["num"];
 				item.parameters = iteminfo["paras"]["lv"];
-				var client:ClientItemInfo = new ClientItemInfo(item.itemModelId);
-				client.itemInfo = item;
-				_rewards.push(client);
+				_rewards.push(ItemUtil.convertClientItemInfo(item));
 			}
 		}
 		
