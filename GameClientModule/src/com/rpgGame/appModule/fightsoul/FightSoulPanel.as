@@ -35,6 +35,7 @@ package com.rpgGame.appModule.fightsoul
 	import starling.display.DisplayObjectContainer;
 	import starling.events.Event;
 	import starling.events.Touch;
+	import starling.events.TouchPhase;
 	
 	public class FightSoulPanel extends SkinUIPanel
 	{
@@ -234,8 +235,11 @@ package com.rpgGame.appModule.fightsoul
 		}
 		private function rewardIconTriggeredHandler(touch:Touch,ts:TouchToState):void
 		{
-			var index:int = ts.data as int;
-			FightSoulManager.instance().getRewardByIndex(index);
+			if(touch.phase == TouchPhase.ENDED)
+			{
+				var index:int = ts.data as int;
+				FightSoulManager.instance().getRewardByIndex(index);
+			}
 		}
 		private function refeahLevelView():void
 		{
