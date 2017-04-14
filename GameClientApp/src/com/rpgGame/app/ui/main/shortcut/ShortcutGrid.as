@@ -1,6 +1,8 @@
 package com.rpgGame.app.ui.main.shortcut
 {
+	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.view.icon.DragDropGrid;
 	import com.rpgGame.core.events.BuffEvent;
@@ -46,7 +48,7 @@ package com.rpgGame.app.ui.main.shortcut
 		private var offsetY : int = 27;
 
 		private var timeLine:TimelineLite;
-		/*
+		
 		private var effectSk:Inter3DContainer;
 		private var readyEffect:InterObject3D;//技能CD转框
 		private var goEffect:InterObject3D;//技能准备好特效
@@ -55,7 +57,7 @@ package com.rpgGame.app.ui.main.shortcut
 		
 		private var goEffectRend:RenderUnit3D;
 		private var liannuEffectRend:RenderUnit3D;
-		private var nutaEffectRend:RenderUnit3D;*/
+		private var nutaEffectRend:RenderUnit3D;
 		private var labTxt : NumberBitmap; 
 		/**技能id*/
 		private var skillID:int;
@@ -87,7 +89,7 @@ package com.rpgGame.app.ui.main.shortcut
 			imgAutoUse.y = 4;
 			imgAutoUse.styleName = ClientConfig.getSpellAutoIco();
 			setIsShowCdTm(true);
-			/*effectSk=new Inter3DContainer();
+			effectSk=new Inter3DContainer();
 			effectSk.x = _iconSize/2+6;
 			effectSk.y = _iconSize/2+6;
 			addChild(effectSk);
@@ -103,7 +105,10 @@ package com.rpgGame.app.ui.main.shortcut
 			
 			nutaEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_TANU_MJ),0,0,0);
 			nutaEffectRend=nutaEffect.baseObj3D as RenderUnit3D;
-			nutaEffectRend.stop();*/
+			nutaEffectRend.stop();
+			
+			
+			
 			
 			
 			addResEvent();
@@ -369,10 +374,10 @@ package com.rpgGame.app.ui.main.shortcut
 				{
 					_cdFace.updateTimeTxt($now,$cdTotal);
 				}
-				/*if(readyEffect!=null)
+				if(readyEffect!=null)
 				{
 					readyEffect.gotoPercent($now/$cdTotal);
-				}*/
+				}
 			}
 			else
 			{
@@ -447,7 +452,7 @@ package com.rpgGame.app.ui.main.shortcut
 		/**设置各职业转框特效*/
 		public function setEffect():void
 		{
-			//L.l("生成转框特效");
+			//L.l("生成转框特效:"+skillID);
 			/*if(playerJod==JobEnum.ROLE_1_TYPE)
 			{
 				readyEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_BJ),0,0,0,null,effectaddComplete);
@@ -471,9 +476,9 @@ package com.rpgGame.app.ui.main.shortcut
 			
 		}
 		
-		public function effectaddComplete(effect:InterObject3D):void
+		public function effectaddComplete(effect:RenderUnit3D):void
 		{
-			effect.stop();
+			//effect.stop();
 		}
 		public function tweenGrid():void
 		{
