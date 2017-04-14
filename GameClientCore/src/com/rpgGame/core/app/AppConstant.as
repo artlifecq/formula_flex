@@ -118,6 +118,11 @@ package com.rpgGame.core.app
 		
 		/**任务面板**/
 		public static var TASK_PANEL:String = createAppInfo( "task.TaskPanel" ); 
+		
+		/**主线任务面板**/
+		public static var TASK_LEAD_PANEL:String = createAppInfo( "task.TaskLeadPanel" ); 
+		/**环线任务面板**/
+		public static var TASK_LOOP_PANEL:String = createAppInfo( "task.TaskLoopPanel" ); 
 		/**国家讨逆任务条面板**/
 		public static var COUNTRY_TAO_NI_TASK_BAR_PANEL:String = createAppInfo( "taoni.CountryTaoNiTaskBarPanel" , null,PanelPosType.MIDDLE_RIGHT); 
 	
