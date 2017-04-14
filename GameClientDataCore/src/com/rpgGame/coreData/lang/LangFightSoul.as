@@ -12,18 +12,14 @@ package com.rpgGame.coreData.lang
 	*/
 	public class LangFightSoul
 	{
-		 /**  经验不足，不能升级 */
-		public static const FightSoulError1:String = "FightSoulError1";
 		 /**  通过完成右侧升级途径获取战魂经验 */
 		public static const FightSoulExpTip:String = "FightSoulExpTip";
 		 /**  等级:$ */
 		public static const FightSoulLevel:String = "FightSoulLevel";
 		 /**  总进度 ：$/200点 */
 		public static const FightSoulProgress:String = "FightSoulProgress";
-		 /**  已经领取 */
-		public static const FightSoulIsGetReward:String = "FightSoulIsGetReward";
-		 /**  活跃度不足，不能领取奖励 */
-		public static const FightSoulNotVitality:String = "FightSoulNotVitality";
+		 /**  $点 */
+		public static const FightSoulShowReward:String = "FightSoulShowReward";
 
 	}
 }

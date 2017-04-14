@@ -8,14 +8,13 @@ package com.rpgGame.app.manager.fightsoul
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.FightsoulData;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
-	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
-	import com.rpgGame.coreData.lang.LangFightSoul;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.fightsoul.bean.FightSoulInfo;
@@ -135,9 +134,14 @@ package com.rpgGame.app.manager.fightsoul
 		
 		public function FightSoulLevelUp():void
 		{
+			if(fightSoulInfo.level == 130)
+			{
+				NoticeManager.showNotify(NotifyCfgData.getNotifyTextByID(4002));
+				return ;
+			}
 			if(fightSoulInfo.exp<currentLeveldata.q_exp)
 			{
-				NoticeManager.showNotify(LanguageConfig.getText(LangFightSoul.FightSoulError1));
+				NoticeManager.showNotify(NotifyCfgData.getNotifyTextByID(4003));
 				return ;
 			}
 			SocketConnection.send(new CSFightSoulLevelUpMessage());
@@ -154,13 +158,13 @@ package com.rpgGame.app.manager.fightsoul
 		{
 			if(isGetReward(index))
 			{
-				NoticeManager.showNotify(LanguageConfig.getText(LangFightSoul.FightSoulIsGetReward));
+				NoticeManager.showNotify(NotifyCfgData.getNotifyTextByID(4005));
 				return ;
 			}
 			var reward:ClientItemInfo = _rewards[index];
 			if(int(reward.itemInfo.parameters)>FightSoulManager.instance().fightSoulInfo.vitality)
 			{
-				NoticeManager.showNotify(LanguageConfig.getText(LangFightSoul.FightSoulNotVitality));
+				NoticeManager.showNotify(NotifyCfgData.getNotifyTextByID(4007));
 				return ;
 			}
 			var rewardmsg:CSFightSoulRewardMessage = new CSFightSoulRewardMessage();

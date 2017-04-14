@@ -2,9 +2,12 @@ package com.rpgGame.appModule.fightsoul
 {
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.WindowInfoData;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_path;
 	import com.rpgGame.coreData.clientConfig.Q_windowInfo;
+	import com.rpgGame.coreData.lang.LangFightSoul;
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	import feathers.utils.filter.GrayFilter;
@@ -32,7 +35,7 @@ package com.rpgGame.appModule.fightsoul
 		{
 			if(pathinfoData.isOver)
 			{
-				NoticeManager.showNotify("今日获取已达上限，每日03:00重置");
+				NoticeManager.showNotify(NotifyCfgData.getNotifyTextByID(4010));
 				return ;
 			}
 			var winInfo:Q_windowInfo = WindowInfoData.getInfobyId(path.q_winId);
@@ -46,19 +49,19 @@ package com.rpgGame.appModule.fightsoul
 			var winInfo:Q_windowInfo = WindowInfoData.getInfobyId(path.q_winId);
 			_skin.lb_name.text = winInfo.q_name;
 			_skin.lb_cishu.text = pathinfoData.count.toString()+"/"+path.q_total;
-			_skin.lb_jinyan.text = path.q_reward.toString()+"点";
-			_skin.icon.visible = winInfo.q_islink==1;
+			_skin.lb_jinyan.text =LanguageConfig.getText(LangFightSoul.FightSoulShowReward).replace("$",path.q_reward)
+			_skin.btn_send.visible = winInfo.q_islink==1;
 			if(pathinfoData.isOver)
 			{
 				GrayFilter.gray(_skin.lb_name);
 				GrayFilter.gray(_skin.lb_cishu);
 				GrayFilter.gray(_skin.lb_jinyan);
-				GrayFilter.gray(_skin.icon);
+				GrayFilter.gray(_skin.btn_send);
 			}else{
 				_skin.lb_name.filter = null;
 				_skin.lb_cishu.filter = null;
 				_skin.lb_jinyan.filter = null;
-				_skin.icon.filter = null;
+				_skin.btn_send.filter = null;
 			}
 		}
 		
