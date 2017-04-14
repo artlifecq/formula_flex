@@ -12,6 +12,7 @@ package org.mokylin.skin.mainui.navigation
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_juese;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_shangcheng;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_wuxue;
+	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhanhun;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhuangbei;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zuoqi;
 	import org.mokylin.skin.mainui.navigation.mc.UIMovieClipQipaoNumber;
@@ -62,7 +63,7 @@ package org.mokylin.skin.mainui.navigation
 			
 			this.currentState = "normal";
 			this.height = 70;
-			this.width = 390;
+			this.width = 396;
 			this.elementsContent = [btn_close_i(),btn_open_i(),btns_i()];
 			
 			states = {
@@ -80,7 +81,7 @@ package org.mokylin.skin.mainui.navigation
 			btn_banghui = temp;
 			temp.name = "btn_banghui";
 			temp.styleClass = org.mokylin.skin.mainui.navigation.button.ButtonSkin_banghui;
-			temp.x = 222;
+			temp.x = 267;
 			temp.y = 17;
 			return temp;
 		}
@@ -91,7 +92,7 @@ package org.mokylin.skin.mainui.navigation
 			btn_beibao = temp;
 			temp.name = "btn_beibao";
 			temp.styleClass = org.mokylin.skin.mainui.navigation.button.ButtonSkin_beibao;
-			temp.x = 44;
+			temp.x = 89;
 			temp.y = 17;
 			return temp;
 		}
@@ -102,7 +103,7 @@ package org.mokylin.skin.mainui.navigation
 			btn_close = temp;
 			temp.name = "btn_close";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shouhui;
-			temp.x = 371;
+			temp.x = 377;
 			temp.y = 25;
 			return temp;
 		}
@@ -113,7 +114,7 @@ package org.mokylin.skin.mainui.navigation
 			btn_juese = temp;
 			temp.name = "btn_juese";
 			temp.styleClass = org.mokylin.skin.mainui.navigation.button.ButtonSkin_juese;
-			temp.x = 0;
+			temp.x = 45;
 			temp.y = 17;
 			return temp;
 		}
@@ -124,7 +125,7 @@ package org.mokylin.skin.mainui.navigation
 			btn_open = temp;
 			temp.name = "btn_open";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zhankai;
-			temp.x = 371;
+			temp.x = 377;
 			temp.y = 25;
 			return temp;
 		}
@@ -135,7 +136,7 @@ package org.mokylin.skin.mainui.navigation
 			btn_shangcheng = temp;
 			temp.name = "btn_shangcheng";
 			temp.styleClass = org.mokylin.skin.mainui.navigation.button.ButtonSkin_shangcheng;
-			temp.x = 264;
+			temp.x = 309;
 			temp.y = 0;
 			return temp;
 		}
@@ -146,7 +147,7 @@ package org.mokylin.skin.mainui.navigation
 			btn_wuxue = temp;
 			temp.name = "btn_wuxue";
 			temp.styleClass = org.mokylin.skin.mainui.navigation.button.ButtonSkin_wuxue;
-			temp.x = 178;
+			temp.x = 223;
 			temp.y = 17;
 			return temp;
 		}
@@ -156,11 +157,9 @@ package org.mokylin.skin.mainui.navigation
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_zhanhun = temp;
 			temp.name = "btn_zhanhun";
-			temp.height = 22;
-			temp.label = "战魂";
-			temp.width = 50;
-			temp.x = -70;
-			temp.y = 33;
+			temp.styleClass = org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhanhun;
+			temp.x = 0;
+			temp.y = 17;
 			return temp;
 		}
 
@@ -170,7 +169,7 @@ package org.mokylin.skin.mainui.navigation
 			btn_zhuangbei = temp;
 			temp.name = "btn_zhuangbei";
 			temp.styleClass = org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhuangbei;
-			temp.x = 133;
+			temp.x = 178;
 			temp.y = 17;
 			return temp;
 		}
@@ -181,7 +180,7 @@ package org.mokylin.skin.mainui.navigation
 			btn_zuoqi = temp;
 			temp.name = "btn_zuoqi";
 			temp.styleClass = org.mokylin.skin.mainui.navigation.button.ButtonSkin_zuoqi;
-			temp.x = 89;
+			temp.x = 134;
 			temp.y = 17;
 			return temp;
 		}
@@ -192,8 +191,8 @@ package org.mokylin.skin.mainui.navigation
 			btns = temp;
 			temp.name = "btns";
 			temp.height = 70;
-			temp.width = 332;
-			temp.x = 39;
+			temp.width = 370;
+			temp.x = 0;
 			temp.y = 0;
 			temp.elementsContent = [btn_zhanhun_i(),btn_juese_i(),btn_beibao_i(),btn_zuoqi_i(),btn_zhuangbei_i(),btn_wuxue_i(),btn_banghui_i(),btn_shangcheng_i(),qi_bg_i(),qi_mc_i()];
 			return temp;
@@ -205,7 +204,7 @@ package org.mokylin.skin.mainui.navigation
 			qi_bg = temp;
 			temp.name = "qi_bg";
 			temp.styleName = "ui/common/tubiao/qipao.png";
-			temp.x = 82;
+			temp.x = 127;
 			temp.y = 8;
 			return temp;
 		}
@@ -215,10 +214,11 @@ package org.mokylin.skin.mainui.navigation
 			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
 			qi_mc = temp;
 			temp.name = "qi_mc";
+			temp.autoPlay = false;
 			temp.height = 14;
 			temp.styleClass = org.mokylin.skin.mainui.navigation.mc.UIMovieClipQipaoNumber;
 			temp.width = 13;
-			temp.x = 84;
+			temp.x = 129;
 			temp.y = 9;
 			return temp;
 		}
