@@ -206,11 +206,10 @@ package com.rpgGame.app.manager
 				return ;
 			
 			
-			var role:HeroData = MainRoleManager.actorInfo;
-			SpellSender.releaseSpellAtPos(skill.q_skillID,360*Math.random(),role.x,role.y);
+			SpellSender.releaseSpellAtPos(skill.q_skillID,360*Math.random(),MainRoleManager.actor.x,MainRoleManager.actor.z);
 			SkillCDManager.getInstance().addSkillCDTime(skill);
 			var configCDTime : int = skill.q_cd; //配置的CD时间
-//			TweenLite.delayedCall(configCDTime/1000, startFightSoulFight);
+			TweenLite.delayedCall(configCDTime/1000, startFightSoulFight);
 		}
 	}
 }
