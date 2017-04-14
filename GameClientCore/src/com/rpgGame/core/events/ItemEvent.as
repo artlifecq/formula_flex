@@ -46,6 +46,11 @@ package com.rpgGame.core.events
 		 */
 		public static const LEFT_GRID_CHANG:int = UNIQUEID.NEXT;
 		
+		/**
+		 *强化消息
+		 */
+		public static const ITEM_STRENGTH_MSG:int = UNIQUEID.NEXT;
+		
 		
 		/** 删除物品 **/
 		public static const ITEM_DELETE:int = UNIQUEID.NEXT;

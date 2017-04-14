@@ -5,6 +5,7 @@ package org.mokylin.skin.component.combobox
 	import feathers.controls.List;
 	import feathers.controls.StateSkin;
 	import feathers.controls.TextInput;
+	import feathers.layout.VerticalLayout;
 	import org.mokylin.skin.component.button.ButtonSkin_xiala;
 	import org.mokylin.skin.component.text.TextAreaDwonSkin;
 	import org.mokylin.skin.component.text.textInput1_Skin;
@@ -60,16 +61,24 @@ package org.mokylin.skin.component.combobox
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function __ComboBox2_Skin_VerticalLayout1_i():feathers.layout.VerticalLayout
+		{
+			var temp:feathers.layout.VerticalLayout = new feathers.layout.VerticalLayout();
+			temp.gap = 2;
+			return temp;
+		}
+
 		private function dropDown_i():feathers.controls.List
 		{
 			var temp:feathers.controls.List = new feathers.controls.List();
 			dropDown = temp;
 			temp.name = "dropDown";
-			temp.height = 86;
-			temp.left = 0;
-			temp.right = 0;
+			temp.height = 105;
+			temp.left = -1;
+			temp.right = -1;
 			temp.styleClass = org.mokylin.skin.component.text.TextAreaDwonSkin;
 			temp.y = 23;
+			temp.layout = __ComboBox2_Skin_VerticalLayout1_i();
 			return temp;
 		}
 

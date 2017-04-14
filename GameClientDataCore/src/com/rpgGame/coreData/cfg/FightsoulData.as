@@ -9,28 +9,28 @@ package com.rpgGame.coreData.cfg
 	{	
 		private static var _sheets:Dictionary;
 		private static var _datas:Vector.<Q_fightsoul>;
-		private static var _qualitys:Dictionary;
-		private static var _maxQuality:int = 0;
+		private static var _modes:Dictionary;
+		private static var _maxMode:int = 0;
 		public static function setConfig( data:ByteArray ):void
 		{
 			_sheets=new Dictionary();
-			_qualitys = new Dictionary();
+			_modes = new Dictionary();
 			_datas = new Vector.<Q_fightsoul>();
 			var arr : Array = data.readObject();
 			for each(var info : Q_fightsoul in arr) {
 				_sheets[info.q_level] = info;
 				_datas.push(info);
 				
-				if(_maxQuality < info.q_quality)
-					_maxQuality = info.q_quality;
+				if(_maxMode < info.q_mode)
+					_maxMode = info.q_mode;
 				
-				var lastq:Q_fightsoul = _qualitys[info.q_quality] as Q_fightsoul;
+				var lastq:Q_fightsoul = _modes[info.q_mode] as Q_fightsoul;
 				if(lastq==null)
 				{
-					_qualitys[info.q_quality] = info;
+					_modes[info.q_mode] = info;
 				}else {
 					if(lastq.q_level>info.q_level)
-						_qualitys[info.q_quality] = info;
+						_modes[info.q_mode] = info;
 				}
 			}
 		}
@@ -46,16 +46,21 @@ package com.rpgGame.coreData.cfg
 			return _datas;
 		}
 		
-		public static function getInfoByQuality(quality:int):Q_fightsoul
+		public static function getInfoByMode(mode:int):Q_fightsoul
 		{
-			if(_qualitys[quality]==null)
+			if(_modes[mode]==null)
 				return null;
-			return _qualitys[quality];
+			return _modes[mode];
 		}
 		
-		public static function get maxQuality():int
+		public static function get allModes():Dictionary
 		{
-			return _maxQuality;
+			return _modes;
+		}
+		
+		public static function get maxMode():int
+		{
+			return _maxMode;
 		}
 	}
 }

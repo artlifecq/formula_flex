@@ -3519,6 +3519,7 @@ package com.game.engine3D.scene.render
                     if (_playing && _registeredCamera && _registeredCamera.camera3DAnimators.length > 0) {
                         CameraFrontController.screenVibration();
                     }
+					
 				}
 			}
 		}

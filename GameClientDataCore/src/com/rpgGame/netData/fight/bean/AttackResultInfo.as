@@ -25,7 +25,7 @@ package com.rpgGame.netData.fight.bean{
 		//连击伤害
 		private var _hit: int;
 		
-		//攻击结果0-成功 1-MISS 2-跳闪 4-暴击 8-击退6-跳闪+暴击 12-格挡+暴击 16--击飞，
+		//攻击结果0-成功 1-MISS 2-跳闪 4-暴击 8-格挡6-跳闪+暴击 12-格挡+暴击
 		private var _fightResult: int;
 		
 		//伤害
@@ -53,7 +53,7 @@ package com.rpgGame.netData.fight.bean{
 			writeLong(_targetId);
 			//连击伤害
 			writeInt(_hit);
-			//攻击结果0-成功 1-MISS 2-跳闪 4-暴击 8-击退6-跳闪+暴击 12-格挡+暴击 16--击飞，
+			//攻击结果0-成功 1-MISS 2-跳闪 4-暴击 8-格挡6-跳闪+暴击 12-格挡+暴击
 			writeInt(_fightResult);
 			//伤害
 			writeInt(_damage);
@@ -78,7 +78,7 @@ package com.rpgGame.netData.fight.bean{
 			_targetId = readLong();
 			//连击伤害
 			_hit = readInt();
-			//攻击结果0-成功 1-MISS 2-跳闪 4-暴击 8-击退6-跳闪+暴击 12-格挡+暴击 16--击飞，
+			//攻击结果0-成功 1-MISS 2-跳闪 4-暴击 8-格挡6-跳闪+暴击 12-格挡+暴击
 			_fightResult = readInt();
 			//伤害
 			_damage = readInt();
@@ -139,7 +139,7 @@ package com.rpgGame.netData.fight.bean{
 		}
 		
 		/**
-		 * //攻击结果0-成功 1-MISS 2-跳闪 4-暴击 8-击退6-跳闪+暴击 12-格挡+暴击 16--击飞，
+		 * get 攻击结果0-成功 1-MISS 2-跳闪 4-暴击 8-格挡6-跳闪+暴击 12-格挡+暴击
 		 * @return 
 		 */
 		public function get fightResult(): int{
@@ -147,7 +147,7 @@ package com.rpgGame.netData.fight.bean{
 		}
 		
 		/**
-		 * //攻击结果0-成功 1-MISS 2-跳闪 4-暴击 8-击退6-跳闪+暴击 12-格挡+暴击 16--击飞，
+		 * set 攻击结果0-成功 1-MISS 2-跳闪 4-暴击 8-格挡6-跳闪+暴击 12-格挡+暴击
 		 */
 		public function set fightResult(value: int): void{
 			this._fightResult = value;

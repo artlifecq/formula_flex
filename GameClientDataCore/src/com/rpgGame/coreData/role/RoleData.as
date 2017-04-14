@@ -4,6 +4,7 @@
 	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.fight.skill.ActiveSpellList;
+	import com.rpgGame.coreData.info.fight.skill.PassiveSpellList;
 	import com.rpgGame.netData.map.bean.MonsterInfo;
 	import com.rpgGame.netData.map.bean.NpcInfo;
 	
@@ -99,8 +100,10 @@
 		 */
 		public var ownerId : Number = 0;
 
-		/** 所有学习过的技能数据 */
+		/** 所有学习过的玩家技能数据 */
 		public var spellList : ActiveSpellList;
+		/** 其他技能数据 */
+		public  var otherList:ActiveSpellList;
 		/** buff列表 **/
 		public var buffList : Vector.<BuffData> = new Vector.<BuffData>();
 		/** 坐骑槽数 **/
@@ -119,6 +122,7 @@
 			_fixDirection = false;
 			avatarInfo = new AvatarInfo();
 			totalStat = new SpriteStat();
+			otherList = new ActiveSpellList();
 //			spriteStat = new SpriteStat();
 		}
 

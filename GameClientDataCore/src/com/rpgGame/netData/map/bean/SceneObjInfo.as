@@ -14,7 +14,7 @@ package com.rpgGame.netData.map.bean{
 	 * 场景对象数据
 	 */
 	public class SceneObjInfo extends Bean {
-	
+		
 		//对象类型
 		private var _objType: int;
 		

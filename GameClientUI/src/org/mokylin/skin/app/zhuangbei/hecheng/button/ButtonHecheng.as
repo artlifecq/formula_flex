@@ -1,4 +1,4 @@
-package org.mokylin.skin.app.zhuangbei.zuomo.button
+package org.mokylin.skin.app.zhuangbei.hecheng.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonYijianzhuomo extends feathers.controls.StateSkin
+	public class ButtonHecheng extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,7 +22,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonYijianzhuomo()
+		public function ButtonHecheng()
 		{
 			super();
 			
@@ -47,7 +47,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo.button
 						}
 					]
 			};
-			skinNames={"down":"ui/app/zhuangbei/zuomo/button/yijianzhuomo/down.png", "hover":"ui/app/zhuangbei/zuomo/button/yijianzhuomo/over.png", "up":"ui/app/zhuangbei/zuomo/button/yijianzhuomo/up.png"};
+			skinNames={"down":"ui/app/zhuangbei/hecheng/button/hecheng/down.png", "hover":"ui/app/zhuangbei/hecheng/button/hecheng/over.png", "up":"ui/app/zhuangbei/hecheng/button/hecheng/up.png"};
 		}
 
 

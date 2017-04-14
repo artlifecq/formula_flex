@@ -95,7 +95,7 @@ package com.rpgGame.coreData.type.item
 			if (item is EquipInfo)
 			{
 				equip = item as EquipInfo;
-				return equip?"<font color='" + StaticValue.tran16ToStr(getColorValue(equip.quality)) +"'>" + getEvaluteStr(equip.evaluate) + equip.name + "</font>":item.name;
+				return equip?"<font color='" + StaticValue.tran16ToStr(getColorValue(equip.quality)) +"'>"  /*getEvaluteStr(equip.evaluate)*/ + equip.name + "</font>":item.name;
 			}else if(item is ClientItemInfo)
 				return "<font color='" + StaticValue.tran16ToStr(getColorValue(item.quality)) +"'>" + item.name + "</font>";
 			return "";

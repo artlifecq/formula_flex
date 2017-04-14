@@ -3,6 +3,7 @@ package com.rpgGame.app.fight.spell
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.RoleHpStatusManager;
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.yunBiao.YunBiaoManager;
@@ -75,6 +76,7 @@ package com.rpgGame.app.fight.spell
 						if (role.isMainChar && hurtVo.atkor && hurtVo.atkor.usable)
 						{
 							hurtVo.atkor.updateInteractTime();
+							TrusteeshipManager.getInstance().startFightSoulFight();
 						}
 						if (hurtVo.atkor && hurtVo.atkor.usable && hurtVo.atkor.isMainChar)
 						{

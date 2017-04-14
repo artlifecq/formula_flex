@@ -470,6 +470,10 @@ package com.rpgGame.app.view.icon
 			}
 			if( _selectImage != null )
 				addChild( _selectImage );
+			
+			if(_wearImage){
+				addChild( _wearImage );
+			}
 		}
 		
 		/**

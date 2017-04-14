@@ -65,8 +65,9 @@ package com.rpgGame.coreData.type
 		public static const HU_GUO_SI_EMPTY : int = rEnum.next;
 		/**护国寺--真谛**/
 		public static const HU_GUO_SI_PARAMARTHA : int = rEnum.next;
-
-
+		
+		/**战魂**/
+		public static const FIGHTSOUL : int = rEnum.next;
 
 //	/**角色光环特效ID*/
 //		public static const MAGIC_RING:int = rEnum.next;

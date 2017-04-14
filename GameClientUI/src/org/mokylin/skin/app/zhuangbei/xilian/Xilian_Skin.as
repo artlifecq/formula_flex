@@ -35,7 +35,11 @@ package org.mokylin.skin.app.zhuangbei.xilian
 
 		public var jiahao:feathers.controls.UIAsset;
 
+		public var lb_cailiao:feathers.controls.Label;
+
 		public var lb_name1:feathers.controls.Label;
+
+		public var lb_num:feathers.controls.Label;
 
 		public var lb_yuanbao1:feathers.controls.Label;
 
@@ -52,7 +56,7 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__Xilian_Skin_UIAsset3_i(),__Xilian_Skin_UIAsset4_i(),__Xilian_Skin_UIAsset5_i(),btn_shuoming_i(),Item1_i(),Item2_i(),jiahao_i(),__Xilian_Skin_Label1_i(),btn_xilian_i(),left_i(),__Xilian_Skin_Label2_i(),__Xilian_Skin_Label3_i()];
+			this.elementsContent = [__Xilian_Skin_UIAsset3_i(),__Xilian_Skin_UIAsset4_i(),__Xilian_Skin_UIAsset5_i(),btn_shuoming_i(),Item1_i(),Item2_i(),jiahao_i(),__Xilian_Skin_Label1_i(),btn_xilian_i(),left_i(),lb_cailiao_i(),lb_num_i()];
 			
 			states = {
 			};
@@ -98,31 +102,6 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			return temp;
 		}
 
-		private function __Xilian_Skin_Label2_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "初级图鉴图纸";
-			temp.color = 0xD02525;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.underline = true;
-			temp.x = 818;
-			temp.y = 198;
-			return temp;
-		}
-
-		private function __Xilian_Skin_Label3_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "100/1";
-			temp.textAlign = "right";
-			temp.color = 0xD02525;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 70;
-			temp.x = 480;
-			temp.y = 184;
-			return temp;
-		}
-
 		private function __Xilian_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -135,7 +114,7 @@ package org.mokylin.skin.app.zhuangbei.xilian
 		private function __Xilian_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/xilian/push_cailiao.png";
+			temp.styleName = "ui/app/zhuangbei/xilian/push_zhuangbei.png";
 			temp.x = 474;
 			temp.y = 225;
 			return temp;
@@ -144,7 +123,7 @@ package org.mokylin.skin.app.zhuangbei.xilian
 		private function __Xilian_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/xilian/push_zhuangbei.png";
+			temp.styleName = "ui/app/zhuangbei/xilian/push_cailiao.png";
 			temp.x = 730;
 			temp.y = 225;
 			return temp;
@@ -180,6 +159,35 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			temp.styleName = "ui/app/zhuangbei/xilian/jiahao.png";
 			temp.x = 607;
 			temp.y = 143;
+			return temp;
+		}
+
+		private function lb_cailiao_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_cailiao = temp;
+			temp.name = "lb_cailiao";
+			temp.text = "初级图鉴图纸";
+			temp.color = 0xD02525;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.underline = true;
+			temp.x = 818;
+			temp.y = 198;
+			return temp;
+		}
+
+		private function lb_num_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_num = temp;
+			temp.name = "lb_num";
+			temp.text = "100/1";
+			temp.textAlign = "right";
+			temp.color = 0xD02525;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 70;
+			temp.x = 735;
+			temp.y = 184;
 			return temp;
 		}
 

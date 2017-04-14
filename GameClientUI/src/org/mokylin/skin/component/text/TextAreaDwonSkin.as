@@ -75,7 +75,7 @@ package org.mokylin.skin.component.text
 			vBar = temp;
 			temp.name = "vBar";
 			temp.bottom = 5;
-			temp.right = 5;
+			temp.right = 0;
 			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 			temp.top = 5;
 			return temp;
