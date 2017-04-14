@@ -27,9 +27,10 @@ package com.rpgGame.app.ui.main.Task
 			initX=_skin.task_box.x;
 			leadCont=new TaskLeadCont(_skin);
 			loopCont=new TaskLoopCont(_skin);
+			//leadCont.show(false);
+			//loopCont.show(true);
 			leadCont.show(true);
 			loopCont.show(false);
-			
 		}
 		
 		

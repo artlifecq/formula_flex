@@ -1,17 +1,19 @@
 package org.mokylin.skin.mainui.renwu
 {
-	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
+	import feathers.controls.ScrollContainer;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import feathers.controls.ScrollContainer;
+	import feathers.controls.text.Fontter;
+	
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_shouhui;
 	import org.mokylin.skin.component.button.ButtonSkin_zhankai;
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat;
+	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 	import org.mokylin.skin.mainui.renwu.RenWu_jindu;
 	import org.mokylin.skin.mainui.renwu.Renwu_Item;
 
@@ -375,7 +377,7 @@ package org.mokylin.skin.mainui.renwu
 			scroll_bar = temp;
 			temp.name = "scroll_bar";
 			temp.height = 297;
-			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat;
+			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 			temp.width = 250;
 			temp.x = 0;
 			temp.y = 34;
@@ -537,7 +539,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 177;
 			temp.x = 47;
-			temp.y = 313;
+			temp.y = 278;
 			return temp;
 		}
 
