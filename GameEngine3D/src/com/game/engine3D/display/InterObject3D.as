@@ -75,47 +75,7 @@ package com.game.engine3D.display
 			}
 		}
 		
-		/**跳转到特效的百分比*/
-		public function gotoPercent(percent:Number) : void
-		{
-			if (_unit != null)
-			{
-				var rend:RenderUnit3D=_unit as RenderUnit3D;
-				if(rend.totalDuration>0)
-				{
-					
-					if(percent>=0)
-					{
-						rend.stop(int(percent*rend.totalDuration));
-						rend.startRender();
-					}
-					else
-					{
-						rend.stop(0);
-						rend.stopRender();
-					}
-					
-				}
-				
-				
-			}
-			
-		}
 		
-		
-		
-		/**设置速度，相对于总时间*/
-		public function setSpeed(speed:Number) : void
-		{
-			if (_unit != null)
-			{
-				var rend:RenderUnit3D=_unit as RenderUnit3D;
-				rend.animateSpeed=speed;
-				
-				
-			}
-			
-		}
 		
 		public function get baseObj3D() : BaseObj3D
 		{
