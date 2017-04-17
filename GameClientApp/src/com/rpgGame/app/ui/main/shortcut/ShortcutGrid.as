@@ -581,7 +581,11 @@ package com.rpgGame.app.ui.main.shortcut
 		}
 		public function updateLabTxt($txt:String):void
 		{
-			labTxt.numberText =$txt;			
+			if(labTxt!=null)
+			{
+				labTxt.numberText =$txt;	
+			}
+					
 		}
 	
 		
