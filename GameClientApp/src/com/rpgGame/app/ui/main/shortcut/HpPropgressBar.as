@@ -8,6 +8,7 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.view.ui.tip.vo.BaseTipsInfo;
+	import com.rpgGame.core.view.ui.tip.vo.TextTipsPropChangeData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.role.HeroData;
@@ -41,7 +42,7 @@ package com.rpgGame.app.ui.main.shortcut
 			_skin = skin;
 			init();
 		}
-		private var _tipinfo:BaseTipsInfo;
+		private var _tipinfodata:TextTipsPropChangeData
 		private function init():void
 		{
 			_info=MainRoleManager.actorInfo;
@@ -105,6 +106,7 @@ package com.rpgGame.app.ui.main.shortcut
 			_display.mask = _mask;
 			_shor.addChild(_mask);
 			
+			var tipinfo:BaseTipsInfo
 			var tipString:String;
 			if(_diection==1)
 			{
@@ -115,15 +117,16 @@ package com.rpgGame.app.ui.main.shortcut
 					MpCHangeHandler(_info);
 					tipString = "能量：$/$<br/>施放技能会消耗能量<br/>每秒恢复$点能量";
 				}
-				_tipinfo = TargetTipsMaker.makeSimpleTextTips(tipString,null,tipHandler)
-				TipTargetManager.show(_skin.mask_blue,_tipinfo);
+				tipinfo = TargetTipsMaker.makeSimplePropChangeTextTips(tipString,null,tipHandler)
+				TipTargetManager.show(_skin.mask_blue,tipinfo);
 			}else{
 				HpCHangeHandler(_info);
 				tipString ="血量：$/$<br/>使用药品可以恢复血量";
-				_tipinfo = TargetTipsMaker.makeSimpleTextTips(tipString,null,tipHandler)
-				TipTargetManager.show(_skin.mask_red, _tipinfo);
+				tipinfo = TargetTipsMaker.makeSimplePropChangeTextTips(tipString,null,tipHandler)
+				TipTargetManager.show(_skin.mask_red, tipinfo);
 			}
 			
+			_tipinfodata = tipinfo.getData() as TextTipsPropChangeData
 		}
 		
 		private function tipHandler():Array
@@ -210,6 +213,8 @@ package com.rpgGame.app.ui.main.shortcut
 			}else{
 				_mask3d.baseObj3D.rotationZ =-(_diectionoff*180*0.74*value-1);
 			}
+			if(_tipinfodata!=null)
+				_tipinfodata.refeashValue();
 				
 		}
 		private var totalNum:Number = 0;
