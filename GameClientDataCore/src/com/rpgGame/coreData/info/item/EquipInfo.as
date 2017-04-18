@@ -52,6 +52,14 @@ package com.rpgGame.coreData.info.item
 		 * 强化经验(值)
 		 */
 		public var strengthExp:int;
+		/**
+		 * 琢磨等级
+		 */
+		public var polishLevel:int;
+		/**
+		 * 琢磨等级
+		 */
+		public var polishExp:int;
 
 		public function EquipInfo(cfgId : int = 0)
 		{
@@ -66,6 +74,8 @@ package com.rpgGame.coreData.info.item
 			var json:Object=JSON.parse(itemInfo.parameters);
 			strengthLevel=json.StrengthLevel;
 			strengthExp=json.StrengthExp;
+			polishLevel=json.PolishLevel;
+			polishExp=json.PolishExp;
 		}
 		
 		

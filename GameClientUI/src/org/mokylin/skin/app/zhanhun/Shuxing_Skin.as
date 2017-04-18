@@ -1,6 +1,7 @@
 package org.mokylin.skin.app.zhanhun
 {
 	import feathers.controls.text.Fontter;
+	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -17,6 +18,8 @@ package org.mokylin.skin.app.zhanhun
 		//==========================================================================
 		public var arrow_up:feathers.controls.UIAsset;
 
+		public var grp_up:feathers.controls.Group;
+
 		public var lb_Num:feathers.controls.Label;
 
 		public var lb_name:feathers.controls.Label;
@@ -31,8 +34,7 @@ package org.mokylin.skin.app.zhanhun
 			
 			this.currentState = "normal";
 			this.height = 20;
-			this.width = 111;
-			this.elementsContent = [lb_name_i(),arrow_up_i(),lb_Num_i()];
+			this.elementsContent = [lb_name_i(),grp_up_i()];
 			
 			states = {
 			};
@@ -49,8 +51,19 @@ package org.mokylin.skin.app.zhanhun
 			arrow_up = temp;
 			temp.name = "arrow_up";
 			temp.styleName = "ui/common/tubiao/tu_up.png";
+			temp.x = 0;
+			temp.y = 3;
+			return temp;
+		}
+
+		private function grp_up_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			grp_up = temp;
+			temp.name = "grp_up";
 			temp.x = 82;
-			temp.y = 4;
+			temp.y = 0;
+			temp.elementsContent = [arrow_up_i(),lb_Num_i()];
 			return temp;
 		}
 
@@ -62,8 +75,9 @@ package org.mokylin.skin.app.zhanhun
 			temp.text = "20";
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 92;
-			temp.y = 2;
+			temp.width = 53;
+			temp.x = 10;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -73,9 +87,9 @@ package org.mokylin.skin.app.zhanhun
 			lb_name = temp;
 			temp.name = "lb_name";
 			temp.htmlText = "攻击：<font color='#CFC6AE'>9999</font>";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 81;
+			temp.width = 120;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

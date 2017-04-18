@@ -98,6 +98,8 @@ package com.rpgGame.app.ui.tips
 			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(info.skillModelId+"_"+info.skillChildLv);
 			_spellTip.lbl_miaosu.htmlText=lvData.q_skillpanel_description;
 			
+			mainIco.setIconResName(ClientConfig.getSkillIcon(cfg.q_icon.toString(),64));
+			
 			if(!riseCfg){
 				_spellTip.bg.height=_spellTip.grp_shuoming.y+_spellTip.lbl_jinengName.height+5+_spellTip.lbl_miaosu.textHeight+20;
 				_spellTip.grp_rise_tite.visible=false;
@@ -144,7 +146,7 @@ package com.rpgGame.app.ui.tips
 			_spellTip.rise_des.htmlText=cfg.q_skillpanel_description2;
 			_spellTip.eft_name.text=riseCfg.q_grade_name;
 			
-			mainIco.setIconResName(ClientConfig.getSkillIcon(cfg.q_icon.toString(),64));
+			
 			riseIco.setIconResName(ClientConfig.getRiseSkillIcon(cfg.q_icon.toString(),48));
 			if(_spellTip.rise_name.textHeight+_spellTip.rise_name.textHeight<80){
 				_spellTip.bg.height=_spellTip.grp_rise_content.y+80;

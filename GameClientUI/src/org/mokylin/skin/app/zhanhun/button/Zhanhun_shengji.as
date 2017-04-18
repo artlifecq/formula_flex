@@ -47,7 +47,7 @@ package org.mokylin.skin.app.zhanhun.button
 						}
 					]
 			};
-			skinNames={"down":"ui/app/zhanhun/button/sj.png", "hover":"ui/app/zhanhun/button/sj.png", "up":"ui/app/zhanhun/button/sj.png"};
+			skinNames={"down":"ui/app/zhanhun/button/shengji/down.png", "hover":"ui/app/zhanhun/button/shengji/over.png", "up":"ui/app/zhanhun/button/shengji/up.png"};
 		}
 
 

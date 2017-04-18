@@ -58,14 +58,12 @@ package com.rpgGame.appModule.equip
 			tabUIs.push(new EquipSmeltUI());
 			tabUIs.push(new EquipInheritUI());
 			tabUIs.push(new EquipComboUI());
-			
-			onTouchTarget(_tabSkin.btn_jineng);
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			_currentUI.show();
+			onTouchTarget(_tabSkin.btn_jineng);
 		}
 		
 		override public function hide():void

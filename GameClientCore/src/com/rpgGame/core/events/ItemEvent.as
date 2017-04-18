@@ -50,6 +50,10 @@ package com.rpgGame.core.events
 		 *强化消息
 		 */
 		public static const ITEM_STRENGTH_MSG:int = UNIQUEID.NEXT;
+		/**
+		 *琢磨消息
+		 */
+		public static const ITEM_POLISH_MSG:int = UNIQUEID.NEXT;
 		
 		
 		/** 删除物品 **/

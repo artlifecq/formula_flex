@@ -15,6 +15,7 @@ package com.rpgGame.appModule.fightsoul
 		{
 			_skin = skin;
 			_index = index;
+			_skin.lb_name.width = NaN;
 		}
 		private var _currentatt:Q_att_values;
 		private var _nextAtt:Q_att_values;
@@ -41,7 +42,9 @@ package com.rpgGame.appModule.fightsoul
 			var nextPropValue:int = _nextAtt["q_value"+_index];
 			var attname:String = CharAttributeType.getCNName(attpropId);
 			_skin.lb_name.htmlText = attname+":"+HtmlTextUtil.getTextColor(0xCFC6AE,currentPropValue.toString());
-			_skin.lb_Num.text = nextPropValue.toString();
+			_skin.lb_name.measureText();
+			_skin.grp_up.x = _skin.lb_name.x +_skin.lb_name.width+5;
+			_skin.lb_Num.text = (nextPropValue-currentPropValue).toString();
 		}
 		
 		public function showUpLevelView(bool:Boolean):void

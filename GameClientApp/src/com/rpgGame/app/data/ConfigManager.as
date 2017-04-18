@@ -21,6 +21,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.ClientTriggerCfgData;
 	import com.rpgGame.coreData.cfg.DaTiCfgData;
 	import com.rpgGame.coreData.cfg.DieCfgData;
+	import com.rpgGame.coreData.cfg.EquipPolishCfgData;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.cfg.FightsoulData;
 	import com.rpgGame.coreData.cfg.FightsoulModeData;
@@ -179,6 +180,7 @@ package com.rpgGame.app.data
 			GCDCfgData.setup(dic[ConfigClassRegister.Q_GCD]);
 			SkillLvLDataManager.setup(dic[ConfigClassRegister.Q_skill_ignore]);
 			ItemStrength.setup(dic[ConfigClassRegister.Q_equip_strength]);
+			EquipPolishCfgData.setup(dic[ConfigClassRegister.Q_equip_polish]);
 //			CountryUnionStatCfgData.setup(null); //待解决
 
 			

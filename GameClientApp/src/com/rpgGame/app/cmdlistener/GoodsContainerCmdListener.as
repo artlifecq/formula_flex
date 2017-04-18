@@ -21,6 +21,8 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.store.message.ResStoreItemInfosMessage;
 	import com.rpgGame.netData.store.message.ResStoreItemRemoveMessage;
 	
+	import app.message.EquipOperateType;
+	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
@@ -60,7 +62,16 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onResEquipOperateResultMessage(msg:ResEquipOperateResultMessage):void
 		{
-			EventManager.dispatchEvent(ItemEvent.ITEM_STRENGTH_MSG,msg);
+			switch(msg.opaque){
+				case EquipOperateType.STRENGTH_NORMAL:
+				case EquipOperateType.STRENGTH_ONEKEY:
+					EventManager.dispatchEvent(ItemEvent.ITEM_STRENGTH_MSG,msg);
+					break;
+				case EquipOperateType.POLISH_NORMAL:
+				case EquipOperateType.POLISH_ONEKEY:
+					EventManager.dispatchEvent(ItemEvent.ITEM_POLISH_MSG,msg);
+					break;
+			}
 		}
 		
 		private function onResChangeLimitItemMessage(msg:ResChangeLimitItemMessage):void

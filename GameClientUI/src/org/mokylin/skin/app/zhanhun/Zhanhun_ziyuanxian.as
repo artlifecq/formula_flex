@@ -1,9 +1,12 @@
 package org.mokylin.skin.app.zhanhun
 {
 	import feathers.controls.text.Fontter;
+	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.app.zhanhun.Zhanhun_ItemBtn;
+	import org.mokylin.skin.component.button.ButtonSkin_send;
 
 	/**
 	 * @private
@@ -15,7 +18,9 @@ package org.mokylin.skin.app.zhanhun
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var icon:feathers.controls.UIAsset;
+		public var btn_over:feathers.controls.Button;
+
+		public var btn_send:feathers.controls.Button;
 
 		public var lb_cishu:feathers.controls.Label;
 
@@ -32,9 +37,9 @@ package org.mokylin.skin.app.zhanhun
 			super();
 			
 			this.currentState = "normal";
-			this.height = 34;
-			this.width = 257;
-			this.elementsContent = [__Zhanhun_ziyuanxian_UIAsset1_i(),lb_name_i(),lb_cishu_i(),lb_jinyan_i(),icon_i()];
+			this.height = 29;
+			this.width = 265;
+			this.elementsContent = [btn_over_i(),lb_name_i(),lb_cishu_i(),lb_jinyan_i(),btn_send_i()];
 			
 			states = {
 			};
@@ -45,21 +50,23 @@ package org.mokylin.skin.app.zhanhun
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __Zhanhun_ziyuanxian_UIAsset1_i():feathers.controls.UIAsset
+		private function btn_over_i():feathers.controls.Button
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhanhun/kongzhitiao.png";
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_over = temp;
+			temp.name = "btn_over";
+			temp.styleClass = org.mokylin.skin.app.zhanhun.Zhanhun_ItemBtn;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function icon_i():feathers.controls.UIAsset
+		private function btn_send_i():feathers.controls.Button
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon = temp;
-			temp.name = "icon";
-			temp.styleName = "ui/app/zhanhun/feizou.png";
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_send = temp;
+			temp.name = "btn_send";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_send;
 			temp.x = 235;
 			temp.y = 3;
 			return temp;
@@ -70,12 +77,14 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_cishu = temp;
 			temp.name = "lb_cishu";
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.text = "0/9";
 			temp.textAlign = "center";
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 54;
-			temp.x = 116;
+			temp.x = 128;
 			temp.y = 7;
 			return temp;
 		}
@@ -85,13 +94,15 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_jinyan = temp;
 			temp.name = "lb_jinyan";
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.text = "5点";
-			temp.textAlign = "left";
+			temp.textAlign = "center";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
-			temp.width = 40;
-			temp.x = 202;
+			temp.width = 44;
+			temp.x = 197;
 			temp.y = 7;
 			return temp;
 		}
@@ -101,6 +112,8 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_name = temp;
 			temp.name = "lb_name";
+			temp.touchable = false;
+			temp.touchGroup = false;
 			temp.text = "跨服皇城争霸战";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];

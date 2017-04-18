@@ -11,6 +11,7 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.backpack.message.ReqMoveItemMessage;
 	import com.rpgGame.netData.backpack.message.ReqSplitItemMessage;
 	import com.rpgGame.netData.backpack.message.ReqUseItemMessage;
+	import com.rpgGame.netData.equip.message.ReqEquipPolishMessage;
 	import com.rpgGame.netData.equip.message.ReqEquipStrengthMessage;
 	import com.rpgGame.netData.equip.message.UnwearEquipMessage;
 	import com.rpgGame.netData.equip.message.WearEquipMessage;
@@ -274,6 +275,24 @@ package com.rpgGame.app.sender
 			msg.type=type;
 			msg.useItemIds=list;
 			msg.opaque=opaqueType;//0普通强化，1一键强化
+			SocketConnection.send(msg);
+		}
+		
+		/**
+		 * 琢磨装备 
+		 * @param equipId
+		 * @param type
+		 * @param list
+		 * @param opaqueType
+		 * 
+		 */
+		public static function polishEquip(equipId:long,type:int,list:Vector.<long>,opaqueType:int):void
+		{
+			var msg:ReqEquipPolishMessage=new ReqEquipPolishMessage();
+			msg.equipId=equipId;
+			msg.type=type;
+			msg.useItemIds=list;
+			msg.opaque=opaqueType;//0普通强化，1一键
 			SocketConnection.send(msg);
 		}
 		

@@ -1,9 +1,10 @@
 package com.game.engine3D.display
 {
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
-
+	
 	import flash.geom.Point;
-
+	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
 
@@ -52,7 +53,31 @@ package com.game.engine3D.display
 			addChild3D(sr3D);
 			return sr3D;
 		}
-
+		/**
+		 *在UI上添加一个特效，播放播放只是添加 
+		 * @param url
+		 * @param x
+		 * @param y
+		 * @param repeat
+		 * @param onPlayComplete
+		 * @param addComplete
+		 * @return 
+		 * 
+		 */		
+		public function addInter3D(url : String, x : int=0, y : int=0, repeat : int = 1, onPlayComplete : Function = null,addComplete:Function=null) : EffectObject3D
+		{
+			var sr3D : EffectObject3D = new EffectObject3D();
+			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", url);
+			data.forceLoad=true;
+			var unit:RenderUnit3D=sr3D.addRenderUnitWith(data, repeat, onPlayComplete,addComplete);
+			unit.stop();
+			unit.stopRender();
+			sr3D.stop();
+			sr3D.x = x;
+			sr3D.y = y;
+			addChild3D(sr3D);
+			return sr3D;
+		}
 		public function addChild3D(child : InterObject3D) : void
 		{
 			this.addChild(child);

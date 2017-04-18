@@ -91,5 +91,14 @@ package com.rpgGame.coreData.cfg.item
 		 */
 		public static const INTENSIFY_USE1:int =rEnum.next;
 		
+		/**
+		 * 琢磨装备列表
+		 */
+		public static const POLIST_LIST:int =rEnum.next;
+		/**
+		 * 琢磨装备消耗
+		 */
+		public static const POLIST_USE:int =rEnum.next;
+		
 	}
 }

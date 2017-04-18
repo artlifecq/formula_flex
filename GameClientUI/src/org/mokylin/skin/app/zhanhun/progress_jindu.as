@@ -26,7 +26,8 @@ package org.mokylin.skin.app.zhanhun
 			super();
 			
 			this.currentState = "normal";
-			this.height = 16;
+			this.height = 10;
+			this.width = 241;
 			this.elementsContent = [track_i(),thumb_i()];
 			
 			states = {
@@ -54,7 +55,8 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			track = temp;
 			temp.name = "track";
-			temp.styleName = "ui/app/zhanhun/tiao_di.png";
+			temp.alpha = 0;
+			temp.styleName = "ui/app/zhanhun/tiao_tiao.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
