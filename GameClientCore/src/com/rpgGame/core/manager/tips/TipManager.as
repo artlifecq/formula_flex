@@ -3,6 +3,7 @@ package com.rpgGame.core.manager.tips
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.core.view.ui.tip.vo.TextTipsData;
+	import com.rpgGame.core.view.ui.tip.vo.TextTipsPropChangeData;
 	
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
@@ -79,6 +80,8 @@ package com.rpgGame.core.manager.tips
 				tip.setTipData($tipData);
 				_currentData = $tipData;
 			}else if(_currentData is TextTipsData){
+				tip.setTipData($tipData);
+			}else if(_currentData is TextTipsPropChangeData){
 				tip.setTipData($tipData);
 			}
 			_currentSowTips = tip;

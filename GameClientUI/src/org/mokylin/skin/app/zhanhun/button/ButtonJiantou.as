@@ -9,7 +9,7 @@ package org.mokylin.skin.app.zhanhun.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class Zhanhun_shengji extends feathers.controls.StateSkin
+	public class ButtonJiantou extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,7 +22,7 @@ package org.mokylin.skin.app.zhanhun.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function Zhanhun_shengji()
+		public function ButtonJiantou()
 		{
 			super();
 			
@@ -47,7 +47,7 @@ package org.mokylin.skin.app.zhanhun.button
 						}
 					]
 			};
-			skinNames={"down":"ui/app/zhanhun/button/shengji/down.png", "hover":"ui/app/zhanhun/button/shengji/over.png", "up":"ui/app/zhanhun/button/shengji/up.png"};
+			skinNames={"done":"ui/app/zhanhun/button/jiantou/done.png", "hover":"ui/app/zhanhun/button/jiantou/over.png", "up":"ui/app/zhanhun/button/jiantou/up.png"};
 		}
 
 

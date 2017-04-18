@@ -2,6 +2,7 @@ package com.rpgGame.core.manager.tips
 {
 	import com.rpgGame.core.view.ui.tip.vo.BaseTipsInfo;
 	import com.rpgGame.core.view.ui.tip.vo.TextTipsData;
+	import com.rpgGame.core.view.ui.tip.vo.TextTipsPropChangeData;
 	import com.rpgGame.coreData.type.TipType;
 	
 	import flash.geom.Point;
@@ -32,6 +33,27 @@ package com.rpgGame.core.manager.tips
 			
 			var tipsInfo:BaseTipsInfo = new BaseTipsInfo();
 			tipsInfo.tipsType = TipType.TXT_TIP;
+			tipsInfo.data = tipsData;
+			tipsInfo.isDynamic = (dynamicFunc != null);
+			tipsInfo.point = point;
+			return tipsInfo;
+		}
+		
+		/**
+		 * 得到一个文本TIPS的数据类
+		 * @param info
+		 * @param dynamicData
+		 * @param dynamicFunc
+		 * @param point
+		 * @return 
+		 * 
+		 */		
+		public static function makeSimplePropChangeTextTips( info:String, dynamicData:Array = null, dynamicFunc:Function = null, point:Point = null  ):BaseTipsInfo
+		{
+			var tipsData:TextTipsPropChangeData = new TextTipsPropChangeData( info, dynamicData, dynamicFunc );
+			
+			var tipsInfo:BaseTipsInfo = new BaseTipsInfo();
+			tipsInfo.tipsType = TipType.PROPCHANGE_TIP;
 			tipsInfo.data = tipsData;
 			tipsInfo.isDynamic = (dynamicFunc != null);
 			tipsInfo.point = point;

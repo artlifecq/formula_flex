@@ -1,4 +1,4 @@
-package org.mokylin.skin.app.zhanhun
+package org.mokylin.skin.component.progress
 {
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -8,7 +8,7 @@ package org.mokylin.skin.app.zhanhun
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class progress_jindu extends feathers.controls.StateSkin
+	public class Pro_jindu2_Skin extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -21,13 +21,12 @@ package org.mokylin.skin.app.zhanhun
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function progress_jindu()
+		public function Pro_jindu2_Skin()
 		{
 			super();
 			
 			this.currentState = "normal";
-			this.height = 10;
-			this.width = 241;
+			this.width = 383;
 			this.elementsContent = [track_i(),thumb_i()];
 			
 			states = {
@@ -44,7 +43,7 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			thumb = temp;
 			temp.name = "thumb";
-			temp.styleName = "ui/app/zhanhun/tiao_tiao.png";
+			temp.styleName = "ui/component/progress/skin_jindu2/track.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -56,7 +55,8 @@ package org.mokylin.skin.app.zhanhun
 			track = temp;
 			temp.name = "track";
 			temp.alpha = 0;
-			temp.styleName = "ui/app/zhanhun/tiao_tiao.png";
+			temp.styleName = "ui/component/progress/skin_jindu2/track.png";
+			temp.width = 383;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
