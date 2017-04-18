@@ -9,6 +9,9 @@ package com.rpgGame.core.events
 	 */
 	public class TaskEvent
 	{
+		
+		/**任务加载信息*/
+		public static const TASK_INFOR_MATION : int = UNIQUEID.NEXT;
 		/**剧情任务添加了已完成的章节内容, 带参数   携带章节编号*/
 		public static const TASK_STORY_COMPLETED_CHAPTER_INFO_ADDED : int = UNIQUEID.NEXT;
 		/**剧情任务更新*/

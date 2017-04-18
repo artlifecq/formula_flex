@@ -1,12 +1,15 @@
 package com.rpgGame.app.ui.main.Task
 {
+	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	
 	import gs.TweenMax;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.renwu.RenWuZhuiZong_Skin;
 	import org.mokylin.skin.mainui.renwu.Renwu_Item;
 	
@@ -24,17 +27,40 @@ package com.rpgGame.app.ui.main.Task
 			_skin=new RenWuZhuiZong_Skin();
 			super(_skin);
 			init();
+			addEvent();
+			
 		}
+		
 		
 		private function init():void
 		{
 			initX=_skin.task_box.x;
 			leadCont=new TaskLeadCont(_skin);
 			loopCont=new TaskLoopCont(_skin);
-			leadCont.show(false);
+			/*leadCont.show(false);
 			loopCont.show(true);
 			leadCont.show(true);
-			loopCont.show(false);
+			loopCont.show(false);*/
+		}
+		private function addEvent():void
+		{
+			EventManager.addEvent(TaskEvent.TASK_INFOR_MATION,inforMation);
+		}
+		
+		private function inforMation():void
+		{
+			if(TaskMissionManager.haveDailyTask||TaskMissionManager.haveTreasuerTask)
+			{
+				leadCont.show(false);
+				loopCont.show(true);
+				loopCont.loopTaskView();
+			}
+			else
+			{
+				leadCont.show(true);
+				loopCont.show(false);
+				leadCont.leadTaskView();
+			}
 		}
 		
 		

@@ -226,6 +226,9 @@ package com.rpgGame.app.ui.main.Task
 			
 		}
 		
-		
+		public function loopTaskView():void
+		{
+			
+		}
 	}
 }

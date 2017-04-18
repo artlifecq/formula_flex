@@ -1,8 +1,14 @@
 package com.rpgGame.app.ui.main.Task
 {
+	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.task.TaskCfgData;
+	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.type.TaskType;
+	import com.rpgGame.netData.task.bean.TaskInfo;
 	
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
@@ -75,13 +81,13 @@ package com.rpgGame.app.ui.main.Task
 			killLabel.htmlText="击杀：<u>少林杖僧</u><font color='#cfc6ae'>(2/10)</font>";
 			
 			
-			
+			/*
 			icoList[0].setIconResName(ClientConfig.getItemIcon("201",IcoSizeEnum.ICON_48));
 			icoList[0].visible=true;
 			icoBgList[0].visible=true;
 			icoList[1].setIconResName(ClientConfig.getItemIcon("203",IcoSizeEnum.ICON_48));
 			icoList[1].visible=true;
-			icoBgList[1].visible=true;
+			icoBgList[1].visible=true;*/
 			
 			
 		}
@@ -90,6 +96,62 @@ package com.rpgGame.app.ui.main.Task
 		{
 			_skin.primary_box.visible=key;
 		}
+		
+		
+		public function leadTaskView():void
+		{
+			var task:TaskInfo;
+			var taskData:Q_mission_base;
+			task=TaskMissionManager.currentMainTaskInfo;
+			if(task!=null)
+			{
+				taskData=TaskMissionCfgData.getTaskByID(task.taskModelId);
+			}
+			if(taskData!=null)
+			{
+				titleLable.htmlText="第"+taskData.q_party_id+"章:"+taskData.q_party_name;
+				var i:int;
+				var finiStr:Array;
+				var finiList:Array=taskData.q_finish_information_str.split(";");
+				
+				if(taskData.q_mission_type==TaskType.SUB_CONVERSATION)
+				{
+					
+					jindu.labelDisplay.text="0%";
+					jindu.pro_jindu.maximum=1;
+					jindu.pro_jindu.value=0;
+					priLabel.htmlText=taskData.q_describe;
+					killLabel.htmlText=TaskMissionCfgData.getTaskDescribe(taskData.q_finish_describe,finiList[0]);
+				}
+				else
+				{
+					var max:int,current:int,percent:int;
+					
+					for(i=0;i<finiList.length;i++)
+					{
+						finiStr=finiList[i].split(",");
+						if(finiStr.length==2)
+						{
+							
+						}
+						
+					}
+					//max=
+					jindu.labelDisplay.text="0%";
+					jindu.pro_jindu.maximum=1;
+					jindu.pro_jindu.value=0;
+					priLabel.htmlText=taskData.q_describe;
+					killLabel.htmlText=taskData.q_finish_describe+"<font color='#cfc6ae'>(2/10)</font>";
+				}
+			
+				
+				//jindu.labelDisplay.text="40%";
+				
+				
+			}
+			
+		}
+		
 		
 	}
 }
