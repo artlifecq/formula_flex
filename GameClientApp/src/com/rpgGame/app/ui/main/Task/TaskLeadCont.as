@@ -4,8 +4,6 @@ package com.rpgGame.app.ui.main.Task
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	
-	import flash.utils.setTimeout;
-	
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
 	
@@ -28,8 +26,8 @@ package com.rpgGame.app.ui.main.Task
 		private var killLabel:Label;
 		private var priLabel:Label
 		private var jindu:RenWu_jindu;
-		private var iocList:Vector.<UIAsset>;
-		
+		private var icoBgList:Vector.<UIAsset>;
+		private var icoList:Vector.<BgIcon>;
 		public function TaskLeadCont(skin:RenWuZhuiZong_Skin)
 		{
 			_skin=skin;
@@ -45,18 +43,25 @@ package com.rpgGame.app.ui.main.Task
 			jindu=_skin.pri_probar.skin as RenWu_jindu;
 			killLabel=Renwu_Item(_skin.pri_killbut.skin).labelDisplay;
 			priLabel=_skin.pri_txt;
-			iocList=new Vector.<UIAsset>();
-			iocList.push(_skin.pri_ico0);
-			iocList.push(_skin.pri_ico1);
-			iocList.push(_skin.pri_ico2);
-			iocList.push(_skin.pri_ico3);
-			iocList.push(_skin.pri_ico4);
-			iocList.push(_skin.pri_ico5);
-			/*var i:int;
-			for(i=0;i<6;i++)
+			icoBgList=new Vector.<UIAsset>();
+			icoBgList.push(_skin.pri_ico0);
+			icoBgList.push(_skin.pri_ico1);
+			icoBgList.push(_skin.pri_ico2);
+			icoBgList.push(_skin.pri_ico3);
+			icoBgList.push(_skin.pri_ico4);
+			icoBgList.push(_skin.pri_ico5);
+			icoList=new Vector.<BgIcon>();
+			var i:int;
+			for(i=0;i<icoBgList.length;i++)
 			{
-				
-			}*/
+				var ico:BgIcon=new BgIcon(IcoSizeEnum.ICON_48);
+				ico.x=icoBgList[i].x-6;
+				ico.y=icoBgList[i].y-6;
+				ico.visible=false;
+				icoBgList[i].visible=false;
+				icoList.push(ico);
+				_skin.primary_box.addChild(ico);
+			}
 			
 			
 			titleLable.htmlText="第一章:新手村";
@@ -70,13 +75,15 @@ package com.rpgGame.app.ui.main.Task
 			killLabel.htmlText="击杀：<u>少林杖僧</u><font color='#cfc6ae'>(2/10)</font>";
 			
 			
-			var riseIco:BgIcon=new BgIcon(IcoSizeEnum.ICON_36);
-			riseIco.x=iocList[0].x-6;
-			riseIco.y=iocList[0].y-6;
-			_skin.primary_box.addChild(riseIco);
-			riseIco.setIconResName(ClientConfig.getItemIcon("201",IcoSizeEnum.ICON_36));
 			
-			setTimeout(function(){riseIco.setIconResName(ClientConfig.getItemIcon("505",IcoSizeEnum.ICON_36));},10000)
+			icoList[0].setIconResName(ClientConfig.getItemIcon("201",IcoSizeEnum.ICON_48));
+			icoList[0].visible=true;
+			icoBgList[0].visible=true;
+			icoList[1].setIconResName(ClientConfig.getItemIcon("203",IcoSizeEnum.ICON_48));
+			icoList[1].visible=true;
+			icoBgList[1].visible=true;
+			
+			
 		}
 		
 		public function show(key:Boolean):void

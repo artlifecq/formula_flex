@@ -226,6 +226,9 @@ package com.rpgGame.coreData.cfg.monster
 		}
 		
 		//////////////////////////////////////////yuantao增加的////////////////////////////////////////////////////////////////////
+		/**
+			根据场景ID获取场景的怪物已经NPC列表  
+		 */		
 		public static function getBigMapMonsterBySceneId(sceneID : uint) :Array
 		{
 			var arr:Array=new Array();
@@ -259,7 +262,30 @@ package com.rpgGame.coreData.cfg.monster
 			
 			return arr;
 		}
-		
+		/**
+		 根据ID获取怪物数据
+		 */		
+		public static function getMonsterById(id : uint) :Q_scene_monster_area
+		{
+			if (SCENE_ID_UNIQ_DIC) 
+			{
+				for each(var sceneMonsterList : Vector3D.<Q_scene_monster_area> in SCENE_ID_UNIQ_DIC)
+				{
+					
+					for each(var sceneMonsterData :Q_scene_monster_area in sceneMonsterList)
+					{
+						if(sceneMonsterData.q_id==id)
+						{
+							return sceneMonsterData;
+						}
+						
+					}
+				}
+			}
+			
+			
+			return null;
+		}
 		
 	}
 }

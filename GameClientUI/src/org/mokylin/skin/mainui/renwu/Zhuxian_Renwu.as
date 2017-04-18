@@ -253,8 +253,8 @@ package org.mokylin.skin.mainui.renwu
 			temp.textAlign = "center";
 			temp.color = 0x25931B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 127;
-			temp.x = 88;
+			temp.width = 210;
+			temp.x = 47;
 			temp.y = 291;
 			return temp;
 		}

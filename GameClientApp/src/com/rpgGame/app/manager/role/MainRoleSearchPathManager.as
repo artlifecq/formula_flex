@@ -153,7 +153,8 @@ package com.rpgGame.app.manager.role
 
 			TrusteeshipManager.getInstance().stopAll();
 			var role : SceneRole = MainRoleManager.actor;
-			var position : Vector3D = new Vector3D(posx, role.y, posy);
+			//var position : Vector3D = new Vector3D(posx, role.y, posy);
+			var position : Vector3D = new Vector3D(posx, posy, 0);
 			walkToScenePos(role, targetSceneId, position, onArrive, spacing, data);
 		}
 
@@ -170,7 +171,7 @@ package com.rpgGame.app.manager.role
 			var mapID : int = SceneSwitchManager.currentMapId;
 			if (mapID == targetSceneId)
 			{
-				if (pos.x > -1 && pos.z > -1)
+				if (pos.x > -1 && (-pos.z)> -1)//if (pos.x > -1 && pos.z> -1)
 				{
 					RoleStateUtil.walkToPos(role, pos, spacing, _data, onArrive);
 					EventManager.dispatchEvent(WorldMapEvent.MAP_WAYS_GUILD_UPDATA_PATHS);
