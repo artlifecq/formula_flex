@@ -3,9 +3,13 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.manager.goods.ItemManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.appModule.jingmai.MeridianMainPanelExt;
+	import com.rpgGame.appModule.role.interfaces.ISubPanel;
+	import com.rpgGame.appModule.util.MCUtil;
 	import com.rpgGame.coreData.role.HeroData;
 	
 	import org.mokylin.skin.app.beibao.beibao_Skin;
+	import org.mokylin.skin.app.beibao.daohang_Skin;
 	import org.mokylin.skin.app.beibao.juese_Skin;
 	
 	import starling.display.DisplayObject;
@@ -19,14 +23,14 @@ package com.rpgGame.appModule.role
 	 */
 	public class RolePanel extends SkinUIPanel
 	{
+		public static const SUB_ROLE:String="role_panel";
+		public static const SUB_MERIDIAN:String="meridian_panel";
 		protected var _skin : beibao_Skin;
 		
-		protected var basicView:BasicRoleView;
-		protected var avatarView:AvatarView;
-		protected var packsView:PacksView;
-		protected var attConstrastView:AttContrastView;
-		protected var _roleData:HeroData;
-		
+	
+		private var _subRole:SubRolePanel;
+		private var _subMeridian:MeridianMainPanelExt
+		private var _curSub:ISubPanel;
 		public function RolePanel()
 		{
 			this._skin = new beibao_Skin();
@@ -37,45 +41,70 @@ package com.rpgGame.appModule.role
 		
 		private function initView():void
 		{
-			_skin.juese.visible=true;
-			basicView=new BasicRoleView(_skin.juese.skin as juese_Skin);
-			avatarView=new AvatarView(_skin.juese.skin as juese_Skin);
-			packsView=new PacksView(_skin.juese.skin as juese_Skin);			
-			attConstrastView=new AttContrastView(_skin.juese.skin as juese_Skin);
+			//_skin.juese.visible=true;
+			_subRole=new SubRolePanel();
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
 		{
 			super.show(data, openTable, parentContiner);
-			_roleData=MainRoleManager.actorInfo;
-			attConstrastView.onHide();
-			ItemManager.getBackEquip(initItem);
+			var sub:String=openTable;
+			if (sub=="") 
+			{
+				sub=SUB_ROLE;
+			}
+			showSubPanel(sub);
 		}
-		
-		private function initItem():void
+		public function showSubPanel(subType:String):void
 		{
-			packsView.show();
-			basicView.show(_roleData);
-			avatarView.show(_roleData);			
+			var sub:ISubPanel;
+			switch(subType)
+			{
+				case SUB_ROLE:
+				{
+					sub=_subRole;
+					break;
+				}
+				case SUB_MERIDIAN:
+				{
+					sub=subMeridian;
+					break;
+				}
+				default:
+				{
+					sub=_subRole;
+					break;
+				}
+			}
+			if (sub==_curSub) 
+			{
+				return;
+			}
+			if (_curSub) 
+			{
+				MCUtil.removeSelf(_curSub as DisplayObject);
+				_curSub.onSubHide();
+			}
+			_curSub=sub;
+			(_curSub as DisplayObject).x=0;
+			(_curSub as DisplayObject).y=0;
+			this.addChildAt(_curSub as DisplayObject,1);
+			_curSub.onSubShow();
 		}
 		
-		override protected function onTouch(e:TouchEvent):void
+		override protected function onTouchTarget(target:DisplayObject):void
 		{
-			super.onTouch(e);
-			avatarView.onTouch(e);
-		}
-		
-		override protected function onTouchTarget(target : DisplayObject) : void {
 			super.onTouchTarget(target);
-			
-			if(packsView.onTouchTarget(target)){
-				return;
+			if ( target==(_skin.daohang.skin as daohang_Skin).btn_juese) 
+			{
+				showSubPanel(SUB_ROLE);
 			}
-			
-			if(avatarView.onTouchTarget(target)){
-				return;
+			else if (target==(_skin.daohang.skin as daohang_Skin).btn_jingmai) 
+			{
+				showSubPanel(SUB_MERIDIAN);
 			}
 		}
+	
 		
 		/**
 		 * 当舞台尺寸变化后
@@ -91,10 +120,31 @@ package com.rpgGame.appModule.role
 		override public function hide():void
 		{
 			super.hide();
-			basicView.onHide();
-			avatarView.onHide();
-			packsView.onHide();
-			attConstrastView.onHide();
+		}
+
+		public function get subMeridian():MeridianMainPanelExt
+		{
+			if (_subMeridian==null) 
+			{
+				_subMeridian=new MeridianMainPanelExt();
+			}
+			return _subMeridian;
+		}
+		override protected function onShow():void
+		{
+			super.onShow();
+			if (_curSub) 
+			{
+				_curSub.onSubShow();
+			}
+		}
+		override protected function onHide():void
+		{
+			super.onHide();
+			if (_curSub) 
+			{
+				_curSub.onSubHide();
+			}
 		}
 	}
 }
