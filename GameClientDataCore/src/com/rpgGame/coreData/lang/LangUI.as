@@ -16,6 +16,8 @@ package com.rpgGame.coreData.lang
 		public static const UI_TEXT1:String = "UI_TEXT1";
 		 /**  可消耗的装备 */
 		public static const UI_TEXT2:String = "UI_TEXT2";
+		 /**  强化成功 */
+		public static const UI_TEXT3:String = "UI_TEXT3";
 
 	}
 }

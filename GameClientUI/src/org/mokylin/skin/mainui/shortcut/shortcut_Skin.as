@@ -54,19 +54,7 @@ package org.mokylin.skin.mainui.shortcut
 
 		public var jingzhen_yijia:feathers.controls.Group;
 
-		public var jinzhen_12:feathers.controls.UIAsset;
-
-		public var jinzhen_22:feathers.controls.UIAsset;
-
-		public var jinzhen_32:feathers.controls.UIAsset;
-
-		public var jinzhen_42:feathers.controls.UIAsset;
-
-		public var jinzhen_52:feathers.controls.UIAsset;
-
-		public var jinzhen_bg2:feathers.controls.UIAsset;
-
-		public var lbl_lastNum2:feathers.controls.Label;
+		public var lbl_lastNum:feathers.controls.Label;
 
 		public var lbl_times:feathers.controls.Label;
 
@@ -83,6 +71,16 @@ package org.mokylin.skin.mainui.shortcut
 		public var right_nengliang:feathers.controls.UIAsset;
 
 		public var right_nengliangMask:feathers.controls.UIAsset;
+
+		public var zhenhei_1:feathers.controls.UIAsset;
+
+		public var zhenhei_2:feathers.controls.UIAsset;
+
+		public var zhenhei_3:feathers.controls.UIAsset;
+
+		public var zhenhei_4:feathers.controls.UIAsset;
+
+		public var zhenhei_5:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -261,7 +259,7 @@ package org.mokylin.skin.mainui.shortcut
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
-			temp.touchGroup = true;
+			temp.touchGroup = false;
 			temp.styleName = "ui/mainui/shortcut/dikuang.png";
 			temp.x = 0;
 			temp.y = 35;
@@ -526,88 +524,15 @@ package org.mokylin.skin.mainui.shortcut
 			temp.width = 132;
 			temp.x = 603;
 			temp.y = 59;
-			temp.elementsContent = [jinzhen_bg2_i(),jinzhen_12_i(),jinzhen_22_i(),jinzhen_32_i(),jinzhen_42_i(),jinzhen_52_i(),lbl_lastNum2_i()];
+			temp.elementsContent = [zhenhei_1_i(),zhenhei_2_i(),zhenhei_3_i(),zhenhei_4_i(),zhenhei_5_i(),lbl_lastNum_i()];
 			return temp;
 		}
 
-		private function jinzhen_12_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			jinzhen_12 = temp;
-			temp.name = "jinzhen_12";
-			temp.height = 14;
-			temp.styleName = "ui/mainui/shortcut/zhen_1.png";
-			temp.x = 28;
-			temp.y = 47;
-			return temp;
-		}
-
-		private function jinzhen_22_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			jinzhen_22 = temp;
-			temp.name = "jinzhen_22";
-			temp.height = 30;
-			temp.styleName = "ui/mainui/shortcut/zhen_2.png";
-			temp.width = 24;
-			temp.x = 34;
-			temp.y = 12;
-			return temp;
-		}
-
-		private function jinzhen_32_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			jinzhen_32 = temp;
-			temp.name = "jinzhen_32";
-			temp.styleName = "ui/mainui/shortcut/zhen_3.png";
-			temp.x = 74;
-			temp.y = 1;
-			return temp;
-		}
-
-		private function jinzhen_42_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			jinzhen_42 = temp;
-			temp.name = "jinzhen_42";
-			temp.height = 30;
-			temp.styleName = "ui/mainui/shortcut/zhen_4.png";
-			temp.width = 24;
-			temp.x = 99;
-			temp.y = 12;
-			return temp;
-		}
-
-		private function jinzhen_52_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			jinzhen_52 = temp;
-			temp.name = "jinzhen_52";
-			temp.styleName = "ui/mainui/shortcut/zhen_5.png";
-			temp.width = 36;
-			temp.x = 95;
-			temp.y = 47;
-			return temp;
-		}
-
-		private function jinzhen_bg2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			jinzhen_bg2 = temp;
-			temp.name = "jinzhen_bg2";
-			temp.styleName = "ui/mainui/shortcut/zhenheibai.png";
-			temp.width = 104;
-			temp.x = 27;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function lbl_lastNum2_i():feathers.controls.Label
+		private function lbl_lastNum_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbl_lastNum2 = temp;
-			temp.name = "lbl_lastNum2";
+			lbl_lastNum = temp;
+			temp.name = "lbl_lastNum";
 			temp.fontSize = 12;
 			temp.text = "5/5";
 			temp.color = 0xB1ACA6;
@@ -713,6 +638,64 @@ package org.mokylin.skin.mainui.shortcut
 			temp.width = 122;
 			temp.x = 637;
 			temp.y = 36;
+			return temp;
+		}
+
+		private function zhenhei_1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			zhenhei_1 = temp;
+			temp.name = "zhenhei_1";
+			temp.height = 14;
+			temp.styleName = "ui/mainui/shortcut/zhenhei_1.png";
+			temp.x = 27;
+			temp.y = 47;
+			return temp;
+		}
+
+		private function zhenhei_2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			zhenhei_2 = temp;
+			temp.name = "zhenhei_2";
+			temp.height = 30;
+			temp.styleName = "ui/mainui/shortcut/zhenhei_2.png";
+			temp.width = 24;
+			temp.x = 34;
+			temp.y = 12;
+			return temp;
+		}
+
+		private function zhenhei_3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			zhenhei_3 = temp;
+			temp.name = "zhenhei_3";
+			temp.styleName = "ui/mainui/shortcut/zhenhei_3.png";
+			temp.x = 73;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function zhenhei_4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			zhenhei_4 = temp;
+			temp.name = "zhenhei_4";
+			temp.styleName = "ui/mainui/shortcut/zhenhei_4.png";
+			temp.x = 100;
+			temp.y = 12;
+			return temp;
+		}
+
+		private function zhenhei_5_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			zhenhei_5 = temp;
+			temp.name = "zhenhei_5";
+			temp.styleName = "ui/mainui/shortcut/zhenhei_5.png";
+			temp.x = 96;
+			temp.y = 47;
 			return temp;
 		}
 

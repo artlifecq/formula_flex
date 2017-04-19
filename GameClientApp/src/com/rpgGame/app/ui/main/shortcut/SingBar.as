@@ -77,9 +77,10 @@ package com.rpgGame.app.ui.main.shortcut
 		private function slillAttack(sid:int):void
 		{
 			var skillData:Q_skill_model=SpellDataManager.getSpellData(sid);
-			onCompFun();//开始新的吟唱先取消现在的吟唱
-			if(skillData!=null)
+			
+			if(skillData!=null&&skillData.q_performType==0)
 			{
+				onCompFun();//开始新的吟唱先取消现在的吟唱
 				setSkillName(skillData.q_skillName);
 				startSing(skillData.q_singing_time);
 			}

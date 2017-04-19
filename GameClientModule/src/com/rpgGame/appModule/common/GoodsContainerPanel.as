@@ -137,6 +137,12 @@ package com.rpgGame.appModule.common
 		 */		
 		public function setGridsCount(count:int, refleshNow:Boolean):void
 		{
+			if(count<gridCount){
+				for (i=count; i<gridCount; i++)
+				{
+					setGridInfo(i,null);
+				}
+			}
 			gridCount = count;
 			//如果当前容器长度不够，则自动补充
 			var len:int = dataProvider.length;
@@ -180,9 +186,7 @@ package com.rpgGame.appModule.common
 		 */		
 		private function getGridByIndex(index:int):DragDropItem
 		{
-			var gridInfo:GridInfo = dataProvider.getItemAt(index) as GridInfo;
-			var i:int = gridInfo.realIndex;
-			return ( i >= 0 && i < dndGrids.length ) ? dndGrids[i] : null;
+			return index<dndGrids.length?dndGrids[index]:null;
 		}
 		
 		/**
@@ -212,7 +216,7 @@ package com.rpgGame.appModule.common
 			{
 				NoticeManager.showNotify("有一个格子的数据出错了！！！");
 			}
-			var grid:DragDropItem = getGridByIndex(index%gridCount);
+			var grid:DragDropItem = getGridByIndex(index);
 			if(!grid)return;
 			grid.gridInfo = gridInfo;
 			

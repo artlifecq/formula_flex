@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main.shortcut
 {
+	import com.game.engine3D.display.EffectObject3D;
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -49,11 +50,10 @@ package com.rpgGame.app.ui.main.shortcut
 		private var timeLine:TimelineLite;
 		
 		private var effectSk:Inter3DContainer;
-		private var readyEffect:InterObject3D;//技能CD转框
-		private var goEffect:InterObject3D;//技能准备好特效
-		private var liannuEffect:InterObject3D;//疯狂连弩开启特效
-		private var nutaEffect:InterObject3D;//弩塔转动，，
-		
+		private var readyEffect:EffectObject3D;//技能CD转框
+		private var goEffect:EffectObject3D;//技能准备好特效
+		private var liannuEffect:EffectObject3D;//疯狂连弩开启特效
+		private var nutaEffect:EffectObject3D;//弩塔转动，，
 		private var labTxt : NumberBitmap; 
 		/**技能id*/
 		private var skillID:int;
@@ -89,9 +89,11 @@ package com.rpgGame.app.ui.main.shortcut
 			effectSk.x = _iconSize/2+6;
 			effectSk.y = _iconSize/2+6;
 			addChild(effectSk);
-			//nutaEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_TANU_MJ),0,0,0);
 			
-			
+			/**初始化构建通用特效，只构建一次*/
+			goEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_SHANGUANG));
+			liannuEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_FENGKUANGLIANNU));
+			nutaEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_TANU_MJ));
 			addResEvent();
 			
 			//_cdFace.showTmTxt(22);
@@ -128,7 +130,7 @@ package com.rpgGame.app.ui.main.shortcut
 			{
 				return;
 			}
-			if(playerJod==JobEnum.ROLE_2_TYPE||playerJod==JobEnum.ROLE_3_TYPE)//疯狂连弩开启是否是墨家        一般其它职业不用收到这个事件
+			if(playerJod==JobEnum.ROLE_2_TYPE)//疯狂连弩开启是否是墨家        一般其它职业不用收到这个事件
 			{
 				fklnIsOpen=key;
 				if(key)//疯狂连弩开启而
@@ -136,31 +138,30 @@ package com.rpgGame.app.ui.main.shortcut
 					if(skillID==FENGKUANGLIANNU)
 					{
 						isGary=false;
-						liannuEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_FENGKUANGLIANNU),0,0,0);
-		
+						liannuEffect.playEffect();
 					}
 					else
 					{
 						isGary=true;
 					}
 				}
-				else
+				else//疯狂连弩关闭
 				{
 					if(skillID==FENGKUANGLIANNU)
 					{
 						if(liannuEffect)
 						{
-							liannuEffect.stop();
+							liannuEffect.stopEffect();
 						}
 						
 					}
 					else
 					{
 						setGary();
-						if(!isGary&&!nutaKey)
+						if(!isGary&&!nutaKey&&goEffect)
 						{
-							goEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_SHANGUANG),0,0,1);
-					
+							goEffect.playEffect();
+							
 						}
 						
 					}
@@ -172,6 +173,7 @@ package com.rpgGame.app.ui.main.shortcut
 			
 			
 		}
+		/**根据资源设置技能框是否置灰*/
 		private function setGary():void
 		{
 			if(!renderOk)
@@ -271,31 +273,43 @@ package com.rpgGame.app.ui.main.shortcut
 		{
 			var num:int = MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_NU_TA);
 			
-			if(skillID==NUTA&&nowNuta!=num&&(playerJod==JobEnum.ROLE_2_TYPE||playerJod==JobEnum.ROLE_3_TYPE))//疯狂连弩开启是否是墨家    
+			if(skillID==NUTA&&playerJod==JobEnum.ROLE_2_TYPE)//疯狂连弩开启是否是墨家    
 			{
-				nowNuta=num;
-				updateLabTxt(""+num);
-				if(num<NUTAMAX)
+				if(nowNuta!=num)
 				{
-					
-					if(!turnKey)//弩塔特效在转的话继续转就是了
+					nowNuta=num;
+					updateLabTxt(""+num);
+					if(num<NUTAMAX)
 					{
 						
-						nutaEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_TANU_MJ),0,0,0);
-						nutaEffect.setSpeed(0.125);
-						turnKey=true;
+						if(!turnKey)//弩塔特效在转的话继续转就是了
+						{
+							
+							nutaEffect.playEffect(0,0.2);
+							turnKey=true;
+						}
+						
+						
 					}
-					
-					
-				}
-				else if(num==NUTAMAX)
-				{
-					if(nutaEffect!=null)
+					else if(num==NUTAMAX)
 					{
-						nutaEffect.gotoPercent(0);
-						nutaEffect.stop();
-						turnKey=false;
+						if(nutaEffect!=null)
+						{
+							nutaEffect.stopEffect();
+							turnKey=false;
+						}
 					}
+				}
+				
+			}
+			else//不是弩塔技能了，值空数字
+			{
+				nowNuta=-1;
+				updateLabTxt("");
+				if(nutaEffect!=null)
+				{
+					nutaEffect.stopEffect();
+					turnKey=false;
 				}
 			}
 		}
@@ -323,7 +337,7 @@ package com.rpgGame.app.ui.main.shortcut
 			
 			
 		}
-		
+		/**继承的父类名字，是cd完的时候调用*/
 		override public function removeCDFace() : void
 		{
 			super.removeCDFace();
@@ -333,8 +347,8 @@ package com.rpgGame.app.ui.main.shortcut
 			}
 			if(!isGary&&!nutaKey)
 			{
-				goEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_SHANGUANG),0,0,1);
-				//completeEffect.start();
+				//播放cd完成动画
+				goEffect.playEffect();
 			}
 		}
 		override  public function cdUpdate($now : Number, $cdTotal : Number) :void
@@ -388,6 +402,10 @@ package com.rpgGame.app.ui.main.shortcut
 		public function upData(shortData : ShortcutsData,skillData : Q_skill_model):void
 		{
 			playerJod=skillData.q_job;
+			if(playerJod==JobEnum.ROLE_3_TYPE)
+			{
+				playerJod=JobEnum.ROLE_2_TYPE//如果是墨家女就等于墨家男，因为技能框不分男女
+			}
 			skillID=skillData.q_skillID;
 			cdtime=skillData.q_cd;
 			
@@ -413,7 +431,7 @@ package com.rpgGame.app.ui.main.shortcut
 		/**设置各职业转框特效*/
 		public function setJobLab():void
 		{	
-			if(playerJod==JobEnum.ROLE_2_TYPE||playerJod==JobEnum.ROLE_3_TYPE)
+			if(playerJod==JobEnum.ROLE_2_TYPE)
 			{
 				showLabTxt(14);
 				showNutaNumber();
@@ -425,47 +443,29 @@ package com.rpgGame.app.ui.main.shortcut
 			}
 		}
 		
-		
+		private var readyEffectJod:int=-1;//当前cd技能框的职业，相同时不用重新生成技能
 		/**设置各职业转框特效*/
 		public function setEffect():void
 		{
-			
-			if(playerJod==JobEnum.ROLE_1_TYPE)
+			//L.l("生成转框特效:"+skillID);
+			if(playerJod==JobEnum.ROLE_1_TYPE&&playerJod!=readyEffectJod)
 			{
-				readyEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_BJ),0,0,0,null,effectaddComplete);
-				readyEffect.stop();
+				readyEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_BJ));
 			}
-			else if(playerJod==JobEnum.ROLE_2_TYPE||playerJod==JobEnum.ROLE_3_TYPE)
+			else if(playerJod==JobEnum.ROLE_2_TYPE&&playerJod!=readyEffectJod)
 			{
-				readyEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_MJ),0,0,0,effectaddComplete);
-				readyEffect.stop();
-				/*if(skillID==FENGKUANGLIANNU)
-				{
-					liannuEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_FENGKUANGLIANNU),0,0,0,effectaddComplete);
-					//liannuEffect.stop();
-				}
-				if(skillID==NUTA)
-				{
-					nutaEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_TANU_MJ),0,0,0,effectaddComplete);
-					//nutaEffect.stop();
-				}*/
+				readyEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_MJ));
 				
 			}
-			else if(playerJod==JobEnum.ROLE_4_TYPE)
+			else if(playerJod==JobEnum.ROLE_4_TYPE&&playerJod!=readyEffectJod)
 			{
-				readyEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_YJ),0,0,0,effectaddComplete);
-				readyEffect.stop();
+				readyEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_YJ));
 			}
 			
-			goEffect=effectSk.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_SHANGUANG),0,0,1,effectaddComplete);
-			goEffect.stop();
+			readyEffectJod=playerJod;
 			
 		}
 		
-		public function effectaddComplete(effect:InterObject3D):void
-		{
-			effect.stop();
-		}
 		public function tweenGrid():void
 		{
 			if(timeLine){
@@ -525,7 +525,7 @@ package com.rpgGame.app.ui.main.shortcut
 			if(readyEffect!=null)
 			{
 				effectSk.removeChild3D(readyEffect);
-				effectSk=null;
+				readyEffect=null;
 			}
 			if(goEffect!=null)
 			{
@@ -586,7 +586,11 @@ package com.rpgGame.app.ui.main.shortcut
 		}
 		public function updateLabTxt($txt:String):void
 		{
-			labTxt.numberText =$txt;			
+			if(labTxt!=null)
+			{
+				labTxt.numberText =$txt;	
+			}
+					
 		}
 	
 		

@@ -6,6 +6,7 @@ package com.rpgGame.app.manager
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.scene.render.vo.RenderUnitChild;
 	import com.game.engine3D.vo.BaseObj3D;
+	import com.rpgGame.app.manager.fightsoul.FightSoulAnimator;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
@@ -14,6 +15,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.events.AvatarEvent;
 	import com.rpgGame.coreData.AvatarInfo;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.FightsoulModeData;
 	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarHairResCfgData;
@@ -30,6 +32,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.clientConfig.AvatarWeaponRes;
 	import com.rpgGame.coreData.clientConfig.HeroModel;
 	import com.rpgGame.coreData.clientConfig.MountModel;
+	import com.rpgGame.coreData.clientConfig.Q_fightsoul_mode;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
@@ -86,7 +89,7 @@ package com.rpgGame.app.manager
 			role.avatar.buildSyncInfo(RenderUnitType.DEPUTY_WEAPON, RenderUnitID.DEPUTY_WEAPON);
 			role.avatar.buildSyncInfo(RenderUnitType.MOUNT, RenderUnitID.MOUNT);
 			role.avatar.buildSyncInfo(RenderUnitType.EFFECT, RenderUnitID.EFFECT);
-			
+			role.avatar.buildSyncInfo(RenderUnitType.FIGHTSOUL, RenderUnitID.FIGHTSOUL);
 			//上“坐骑”
 			updateMount(role);
 			//穿“主体”
@@ -101,6 +104,8 @@ package com.rpgGame.app.manager
 			updateEffect(role);
 			//穿“效果方法类型特效”
 			updateMethodTypeEffect(role);
+			//穿 "战魂"
+			updataFightSoul(role);
 			
 			if (role.avatar.hasIDRenderUnit(RenderUnitType.MOUNT, RenderUnitID.MOUNT))
 			{
@@ -188,7 +193,7 @@ package com.rpgGame.app.manager
 		 */		
 		public static function updateRoleSimpleShadow(role : SceneRole) : void
 		{
-			if (DisplaySetUpManager.shadowLevel == 0 && role.isClingGround)
+			if (DisplaySetUpManager.shadowLevel == 0)
 			{
 				var data : RoleData = RoleData(role.data);
 				var avatarResConfig : AvatarResConfig;
@@ -197,12 +202,7 @@ package com.rpgGame.app.manager
 					var mountRu : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.MOUNT, RenderUnitID.MOUNT, true);
 					if (mountRu)
 					{
-						avatarResConfig = AvatarResConfigSetData.getInfo(data.avatarInfo.mountResID);
-						if (avatarResConfig /*&& !avatarResConfig.disableSimpleShadow*/)
-						{
-							role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"), mountRu.radius * simpleShadowBaseScale);
-							return;
-						}
+						role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"), mountRu.radius * simpleShadowBaseScale);
 					}
 				}
 				else
@@ -210,12 +210,7 @@ package com.rpgGame.app.manager
 					var bodyRu : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
 					if (bodyRu)
 					{
-						avatarResConfig = AvatarResConfigSetData.getInfo(data.avatarInfo.bodyResID);
-						if (avatarResConfig/* && !avatarResConfig.disableSimpleShadow*/)
-						{
-							role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"), bodyRu.radius * simpleShadowBaseScale);
-							return;
-						}
+						role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"), bodyRu.radius * simpleShadowBaseScale);
 					}
 				}
 			}
@@ -712,6 +707,47 @@ package com.rpgGame.app.manager
 			}
 		}
 		
+		private static function updataFightSoul(role : SceneRole) : void
+		{
+			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
+			var ru : RenderUnit3D;
+			var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
+			var fightsoul : RenderParamData3D = avatarInfo.fightsoulMode;
+			if (fightsoul != null)
+			{
+				if (rpd_body)
+				{
+					ru = role.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.st_zero, fightsoul);
+				}
+				if (ru)
+				{
+					ru.defalutStatus = RoleActionType.IDLE;
+					ru.setAddedCallBack(partAddedCallBack, role);
+					ru.setErrorCallBack(partErrorCallBack, role);
+					if (role.isMainChar)
+					{
+						//						ru.entityGlass = true;
+					} 
+					else
+					{
+						ru.entityGlass = false;
+					}
+					ru.useLight = true;
+					ru.useFog = true;
+					if (role.type != SceneCharType.DUMMY)
+						ru.castsShadows = true;
+					role.avatar.applySyncInfo(RenderUnitType.FIGHTSOUL, RenderUnitID.FIGHTSOUL);
+					ru.play(0);
+					ru.setRenderAnimator(new FightSoulAnimator());
+				}
+			}
+			else
+			{
+				role.avatar.removeRenderUnitByID(RenderUnitType.FIGHTSOUL, RenderUnitID.FIGHTSOUL);
+			}
+		}
+		
+		
 		/**部件添加完成*/
 		private static function partAddedCallBack(role : SceneRole, ru : RenderUnit3D) : void
 		{
@@ -787,6 +823,7 @@ package com.rpgGame.app.manager
 			var deputyWeaponEffectOffset : Vector3D = null;
 			
 			var bodyEffectResID : String = null;
+			var fightsoulModeID:String = "";
 			
 //			var bodyEffectResIDs : Array = null;
 //			var bodyEffectOnMountResIDs : Array = null;
@@ -795,7 +832,7 @@ package com.rpgGame.app.manager
 			var bodyMethodTypeEffectResID : String = null;
 			var heroModel : HeroModel = HeroModelCfgData.getInfo(roleData.body);
 			var mountModel : MountModel = MountModelCfgData.getInfo(0);
-			
+			var fightsoulInfo:Q_fightsoul_mode = FightsoulModeData.getModeInfoById(roleData.fightSoulLevel);
 //			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(roleData.cloths);
 //			if (!clothesRes)
 //			{
@@ -1005,6 +1042,11 @@ package com.rpgGame.app.manager
 					mountAnimatResID = mountModel.animatRes;
 				}
 				
+				if(fightsoulInfo)
+				{
+					fightsoulModeID = fightsoulInfo.q_mode;
+				}
+				
 				var weaponRes : AvatarWeaponRes = AvatarWeapontResCfgData.getInfo(roleData.weapon);
 				/*	if (!weaponRes)
 				{
@@ -1097,6 +1139,7 @@ package com.rpgGame.app.manager
 			roleData.avatarInfo.deputyWeaponEffectID = deputyWeaponEffectResID;
 			roleData.avatarInfo.deputyWeaponEffectScale = deputyWeaponEffectScale;
 			roleData.avatarInfo.deputyWeaponEffectOffset = deputyWeaponEffectOffset;
+			roleData.avatarInfo.setFightSoulResID(fightsoulModeID);
 			
 //			roleData.avatarInfo.setBodyResID(bodyResID, animatResID);
 //			roleData.avatarInfo.hairResID = hairResID;

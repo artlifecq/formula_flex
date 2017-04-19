@@ -1,4 +1,4 @@
-package org.mokylin.skin.app.zhuangbei.zuomo.button
+package org.mokylin.skin.app.zhuangbei.hecheng.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonYijianzhuomo extends feathers.controls.StateSkin
+	public class ButtonJianding extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,11 +22,11 @@ package org.mokylin.skin.app.zhuangbei.zuomo.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonYijianzhuomo()
+		public function ButtonJianding()
 		{
 			super();
 			
-			this.currentState = "down";
+			this.currentState = "upAndSelected";
 			this.elementsContent = [];
 			
 			states = {
@@ -47,7 +47,12 @@ package org.mokylin.skin.app.zhuangbei.zuomo.button
 						}
 					]
 			};
-			skinNames={"down":"ui/app/zhuangbei/zuomo/button/yijianzhuomo/down.png", "hover":"ui/app/zhuangbei/zuomo/button/yijianzhuomo/over.png", "up":"ui/app/zhuangbei/zuomo/button/yijianzhuomo/up.png"};
+			skinNames={"down":"ui/app/zhuangbei/hecheng/button/jianding/down.png",
+			"downAndSelected":"ui/app/zhuangbei/hecheng/button/jianding/down.png",
+			"hover":"ui/app/zhuangbei/hecheng/button/jianding/over.png",
+			"overAndSelected":"ui/app/zhuangbei/hecheng/button/jianding/down.png",
+			"up":"ui/app/zhuangbei/hecheng/button/jianding/up.png",
+			"upAndSelected":"ui/app/zhuangbei/hecheng/button/jianding/down.png"};
 		}
 
 

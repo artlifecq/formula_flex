@@ -78,10 +78,17 @@ package com.rpgGame.app.ui.tips
 				id=data.cfgId;
 			}
 			var info:SkillInfo=MainRoleManager.actorInfo.spellList.getSkillInfo(id);
+			if(info==null)
+				info = MainRoleManager.actorInfo.otherList.getSkillInfo(id);
 			var cfg:Q_skill_model=SpellDataManager.getSpellData(info.skillModelId,info.skillLevel);
 			var riseCfg:Q_skill_model=SpellDataManager.getSpellData(id,info.skillLevel+1);
 			if(info.skillLevel==cfg.q_max_grade&&info.skillLevel!=1){
 				riseCfg=SpellDataManager.getSpellData(id,cfg.q_max_grade);
+			}
+			
+			if(cfg.q_skillpanel_description2==""&&cfg.q_grade_name=="")
+			{
+				riseCfg = null;
 			}
 			
 			_spellTip.lbl_name.text=cfg.q_skillName;
@@ -90,6 +97,8 @@ package com.rpgGame.app.ui.tips
 			_spellTip.lbl_xiaohao.text=cfg.q_recovers_detail.length==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):cfg.q_recovers_detail;
 			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(info.skillModelId+"_"+info.skillChildLv);
 			_spellTip.lbl_miaosu.htmlText=lvData.q_skillpanel_description;
+			
+			mainIco.setIconResName(ClientConfig.getSkillIcon(cfg.q_icon.toString(),64));
 			
 			if(!riseCfg){
 				_spellTip.bg.height=_spellTip.grp_shuoming.y+_spellTip.lbl_jinengName.height+5+_spellTip.lbl_miaosu.textHeight+20;
@@ -137,8 +146,8 @@ package com.rpgGame.app.ui.tips
 			_spellTip.rise_des.htmlText=cfg.q_skillpanel_description2;
 			_spellTip.eft_name.text=riseCfg.q_grade_name;
 			
-			mainIco.setIconResName(ClientConfig.getSkillIcon(cfg.q_skillID.toString(),64));
-			riseIco.setIconResName(ClientConfig.getRiseSkillIcon(cfg.q_skillID.toString(),48));
+			
+			riseIco.setIconResName(ClientConfig.getRiseSkillIcon(cfg.q_icon.toString(),48));
 			if(_spellTip.rise_name.textHeight+_spellTip.rise_name.textHeight<80){
 				_spellTip.bg.height=_spellTip.grp_rise_content.y+80;
 			}else{

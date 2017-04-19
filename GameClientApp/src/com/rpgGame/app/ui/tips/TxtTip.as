@@ -30,7 +30,6 @@ package com.rpgGame.app.ui.tips
 
 		public function TxtTip()
 		{
-
 			_txtTipTxt = new Label();
 			_txtTipTxt.touchable = false;
 			_txtTipTxt.autoSize = TextFieldAutoSize.BOTH_DIRECTIONS;

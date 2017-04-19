@@ -62,6 +62,9 @@ package com.rpgGame.coreData.type
 		public static const TAUNT : String = "taunt";
 		
 		public static const BODY_HEAD_FLOWER_TEXT : String = "body_head_flower_text";
+		
+		/**战魂**/
+		public static const FIGHTSOUL:String = "FightSoul";
 
 //		/**打坐特效*/
 //		public static const SIT:String = "sit";

@@ -1,12 +1,16 @@
 package com.rpgGame.app.manager
 {
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.fight.FightManager;
+	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.SpellSender;
 	import com.rpgGame.app.state.ai.AIStateMachine;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.coreData.type.RoleStateType;
@@ -189,6 +193,23 @@ package com.rpgGame.app.manager
 				}
 			}
 			_stateMachine.transition(AIStateType.ATTACK_TARGET, null, force);
+		}
+		
+		public function startFightSoulFight():void
+		{
+			//无战魂，不能释放技能
+			if(FightSoulManager.instance().fightSoulInfo==null)
+				return  ;
+			var skill:Q_skill_model = FightSoulManager.instance().getSpellData();
+			//技能冷却中不能释放技能里
+			if(SkillCDManager.getInstance().getSkillHasCDTime(skill))
+				return ;
+			
+			
+			SpellSender.releaseSpellAtPos(skill.q_skillID,360*Math.random(),MainRoleManager.actor.x,MainRoleManager.actor.z);
+			SkillCDManager.getInstance().addSkillCDTime(skill);
+			/*var configCDTime : int = skill.q_cd; //配置的CD时间
+			TweenLite.delayedCall(configCDTime/1000, startFightSoulFight);*/
 		}
 	}
 }

@@ -258,7 +258,11 @@ package com.rpgGame.app.utils
 		 */
 		public static function replyNpcTask(npcId : int) : void
 		{
-			var npcData : Q_scene_monster_area = MonsterDataManager.getSceneData(npcId);
+			
+			//var npcData : Q_scene_monster_area = MonsterDataManager.getSceneData(npcId);
+			
+			var npcData : Q_scene_monster_area = MonsterDataManager.getMonsterById(npcId);
+			
 			if (npcData)
 			{
 				var sceneRole : SceneRole = SceneManager.getSceneNpcByModelId(npcId);
@@ -275,7 +279,7 @@ package com.rpgGame.app.utils
 					var targerId : Number = (searchRoleData.targetData ? searchRoleData.targetData.id : 0);
 					var role : SceneRole = SceneManager.getScene().getSceneObjByID(targerId, SceneCharType.NPC) as SceneRole;
 					SceneRoleSelectManager.selectedRole = role;
-					TaskManager.checkDialogToNpc(targerId);
+					//TaskManager.checkDialogToNpc(targerId);
 				}, 200, searchRoleData);
 			}
 		}

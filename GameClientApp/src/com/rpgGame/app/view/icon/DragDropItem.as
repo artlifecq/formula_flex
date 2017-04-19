@@ -104,7 +104,6 @@ package com.rpgGame.app.view.icon
 		{
 			if (!_gridInfo||_gridInfo.data == null)
 				return;
-			
 			if (value)
 			{
 				if(_iconImage){

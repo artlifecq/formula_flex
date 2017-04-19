@@ -17,10 +17,15 @@ package com.rpgGame.coreData.info.item
 
 		public function ClientItemInfo(cfgId : int = 0)
 		{
-			_qItem=ItemConfig.getQItemByID(cfgId);
 			super(cfgId, type, FaceTypeEnum.ITEM);
 		}
 		
+		
+		public function set qItem(value:Q_item):void
+		{
+			_qItem = value;
+		}
+
 		public function get qItem():Q_item
 		{
 			return _qItem;
@@ -34,8 +39,18 @@ package com.rpgGame.coreData.info.item
 		public function set itemInfo(value:ItemInfo):void
 		{
 			_itemInfo = value;
+			updateParameters();
 		}
-
+		
+		/**
+		 *更新参数 
+		 * 
+		 */
+		public function updateParameters():void
+		{
+			
+		}
+		
 		override public function set cfgId(value:int):void
 		{
 			_cfgId = value;

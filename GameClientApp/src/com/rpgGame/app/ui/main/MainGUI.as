@@ -3,6 +3,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.app.ui.main.Task.TaskBar;
 	import com.rpgGame.app.ui.main.buff.BuffBar;
 	import com.rpgGame.app.ui.main.chat.ChatBar;
 	import com.rpgGame.app.ui.main.chat.SystemMsgBar;
@@ -89,6 +90,9 @@ package com.rpgGame.app.ui.main
         private var _chatBar : ChatBar;
 		//系统消息条
 		private var _systemMsgBar:SystemMsgBar;
+		//任务追踪栏
+		private var _taskBar:TaskBar;
+		
 		//buff
 		private var _buffBar:BuffBar;
 		
@@ -168,7 +172,9 @@ package com.rpgGame.app.ui.main
             this._chatBar = new ChatBar();
             this.addChild(this._chatBar);
 			this._systemMsgBar=new SystemMsgBar();
-			this.addChild(_systemMsgBar);
+			/*this._taskBar=new TaskBar();
+			this.addChild(_taskBar);*/
+			
 			
 			_buffBar=new BuffBar();
 			this.addChild(_buffBar);
@@ -435,7 +441,7 @@ package com.rpgGame.app.ui.main
 			this._expBar.resize(sWidth, sHeight);
 			this._systemMsgBar.resize(sWidth, sHeight);
 			this._playerHead.resize(sWidth, sHeight);
-			
+			//this._taskBar.resize(sWidth, sHeight);
 			this._bossHead.resize(sWidth, sHeight);
 			this._eliteHead.resize(sWidth, sHeight);
 			this._normalHead.resize(sWidth, sHeight);

@@ -153,7 +153,7 @@ package com.client.process
 			setProcessPercent(currPercent);
 		}
 
-		private function onCreateCharError(event : ProgressEvent) : void
+		private function onCreateCharError(event : IOErrorEvent) : void
 		{
 			ResLoadingView.instance.title = "创建角色程序加载错误：" + ClientUrlManager.getLoginURL();
 			GameLog.addShow("创建角色程序加载错误：" + ClientUrlManager.getLoginURL());

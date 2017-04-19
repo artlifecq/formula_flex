@@ -7,6 +7,8 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.view.ui.tip.vo.BaseTipsInfo;
+	import com.rpgGame.core.view.ui.tip.vo.TextTipsPropChangeData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.role.HeroData;
@@ -40,6 +42,7 @@ package com.rpgGame.app.ui.main.shortcut
 			_skin = skin;
 			init();
 		}
+		private var _tipinfodata:TextTipsPropChangeData
 		private function init():void
 		{
 			_info=MainRoleManager.actorInfo;
@@ -102,29 +105,54 @@ package com.rpgGame.app.ui.main.shortcut
 			_mask.y = 117;
 			_display.mask = _mask;
 			_shor.addChild(_mask);
+			
+			var tipinfo:BaseTipsInfo
+			var tipString:String;
 			if(_diection==1)
 			{
 				if(_info.job == JobEnum.ROLE_1_TYPE){
 					statResChangeHandler(CharAttributeType.RES_NU_QI);
-				}
-				else{
+					tipString = "怒气：$/$<br/>施放技能会消耗怒气<br/>受到攻击或损失气血会增加怒气";
+				}else{
 					MpCHangeHandler(_info);
+					tipString = "能量：$/$<br/>施放技能会消耗能量<br/>每秒恢复$点能量";
 				}
+				tipinfo = TargetTipsMaker.makeSimplePropChangeTextTips(tipString,null,tipHandler)
+				TipTargetManager.show(_skin.mask_blue,tipinfo);
 			}else{
 				HpCHangeHandler(_info);
+				tipString ="血量：$/$<br/>使用药品可以恢复血量";
+				tipinfo = TargetTipsMaker.makeSimplePropChangeTextTips(tipString,null,tipHandler)
+				TipTargetManager.show(_skin.mask_red, tipinfo);
 			}
-//			Starling.juggler.add(this);
+			
+			_tipinfodata = tipinfo.getData() as TextTipsPropChangeData
+		}
+		
+		private function tipHandler():Array
+		{
+			if(_diection==1)
+			{
+				if(_info.job == JobEnum.ROLE_1_TYPE){
+					return [_info.totalStat.getResData(CharAttributeType.RES_NU_QI),100];
+				}else{
+					var currentmp:int = _info.totalStat.getStatValue(CharAttributeType.MP);
+					var maxmp:int = _info.totalStat.getStatValue(CharAttributeType.MAX_MP)
+					if(_info.job == JobEnum.ROLE_4_TYPE)
+						return [currentmp,maxmp,7];
+					else(_info.job == JobEnum.ROLE_4_TYPE)
+						return [currentmp,maxmp,5];
+				}
+			}else{
+				return [_info.totalStat.hp,_info.totalStat.life];
+			}
 		}
 		
 		private function statResChangeHandler(type:int):void
 		{
 			if(type!= CharAttributeType.RES_NU_QI)
 				return ;
-			var current:int = _info.totalStat.getResData(type)
-			percentage(current/100);
-			var Msg:String = "怒气："+current+"/100";
-			Msg += "<br/>施放技能会消耗怒气<br/>受到攻击或损失气血会增加怒气";
-			TipTargetManager.show(_skin.mask_blue, TargetTipsMaker.makeSimpleTextTips(Msg));
+			percentage(_info.totalStat.getResData(type)/100);
 		}
 		
 		private function HpCHangeHandler(role:RoleData):void
@@ -132,7 +160,6 @@ package com.rpgGame.app.ui.main.shortcut
 			if(role != _info)
 				return ;
 			percentage(_info.totalStat.hp/_info.totalStat.life);
-			TipTargetManager.show(_skin.mask_red, TargetTipsMaker.makeSimpleTextTips("血量："+_info.totalStat.hp+"/"+_info.totalStat.life+"<br/>使用药品可以恢复血量"));
 		}
 		private function MpCHangeHandler(role:RoleData):void
 		{
@@ -141,13 +168,6 @@ package com.rpgGame.app.ui.main.shortcut
 			var currentmp:int = _info.totalStat.getStatValue(CharAttributeType.MP);
 			var maxmp:int = _info.totalStat.getStatValue(CharAttributeType.MAX_MP)
 			percentage(currentmp/maxmp);
-			var Msg:String = "能量："+currentmp+"/"+maxmp;
-			Msg += "<br/>施放技能会消耗能量<br/>";
-			if(_info.job == JobEnum.ROLE_4_TYPE)
-				Msg += "每秒恢复7点能量";
-			else(_info.job == JobEnum.ROLE_4_TYPE)
-				Msg += "每秒恢复5点能量";
-			TipTargetManager.show(_skin.mask_blue, TargetTipsMaker.makeSimpleTextTips(Msg));
 		}
 		private function onAddHpEft(sr3D:InterObject3D,renderUint:RenderUnit3D):void
 		{
@@ -175,8 +195,13 @@ package com.rpgGame.app.ui.main.shortcut
 				sr3D.y=_display.y+_display.height-5;
 			}
 		}
+		
+		private var _lastValue:Number;
 		private function percentage(value:Number):void
 		{
+			if(_lastValue==value)
+				return ;
+			_lastValue = value;
 			if(value<0)
 				value = 0;
 			else if(value>1)
@@ -188,6 +213,8 @@ package com.rpgGame.app.ui.main.shortcut
 			}else{
 				_mask3d.baseObj3D.rotationZ =-(_diectionoff*180*0.74*value-1);
 			}
+			if(_tipinfodata!=null)
+				_tipinfodata.refeashValue();
 				
 		}
 		private var totalNum:Number = 0;
