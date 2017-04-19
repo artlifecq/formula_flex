@@ -306,6 +306,11 @@ package com.rpgGame.app.ui.main.shortcut
 			{
 				nowNuta=-1;
 				updateLabTxt("");
+				if(nutaEffect!=null)
+				{
+					nutaEffect.stopEffect();
+					turnKey=false;
+				}
 			}
 		}
 		

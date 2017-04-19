@@ -285,6 +285,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.htmlText = "今日完成<font color='#5DBD37'>5</font>环后，额外奖励";
 			temp.color = 0xBEA757;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 220;
 			temp.x = 32;
 			temp.y = 155;
 			return temp;
@@ -340,8 +341,8 @@ package org.mokylin.skin.mainui.renwu
 			temp.textAlign = "center";
 			temp.color = 0x25931B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 139;
-			temp.x = 79;
+			temp.width = 210;
+			temp.x = 43;
 			temp.y = 341;
 			return temp;
 		}
@@ -353,8 +354,10 @@ package org.mokylin.skin.mainui.renwu
 			temp.name = "lb_wancheng";
 			temp.horizontalCenter = 5.5;
 			temp.text = "已完成环数：第2/20环";
+			temp.textAlign = "center";
 			temp.color = 0x25931B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 229;
 			temp.y = 51;
 			return temp;
 		}
@@ -368,7 +371,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 78;
+			temp.width = 93;
 			temp.x = 91;
 			temp.y = 277;
 			return temp;
@@ -383,7 +386,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 78;
+			temp.width = 88;
 			temp.x = 91;
 			temp.y = 236;
 			return temp;
