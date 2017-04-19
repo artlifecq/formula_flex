@@ -442,6 +442,11 @@ package com.rpgGame.app.ui.main.shortcut
 		/**设置各职业转框特效*/
 		public function setEffect():void
 		{
+            if (playerJod != readyEffectJod && readyEffect) {
+                effectSk.removeChild3D(readyEffect);
+                readyEffect.dispose();
+                readyEffect=null;
+            }
 			//L.l("生成转框特效:"+skillID);
 			if(playerJod==JobEnum.ROLE_1_TYPE&&playerJod!=readyEffectJod)
 			{
@@ -520,21 +525,25 @@ package com.rpgGame.app.ui.main.shortcut
 			if(readyEffect!=null)
 			{
 				effectSk.removeChild3D(readyEffect);
+                readyEffect.dispose();
 				readyEffect=null;
 			}
 			if(goEffect!=null)
 			{
 				effectSk.removeChild3D(goEffect);
+                goEffect.dispose();
 				goEffect=null;
 			}
 			if(liannuEffect!=null)
 			{
 				effectSk.removeChild3D(liannuEffect);
+                liannuEffect.dispose();
 				liannuEffect=null;
 			}
 			if(nutaEffect!=null)
 			{
 				effectSk.removeChild3D(nutaEffect);
+                nutaEffect.dispose();
 				nutaEffect=null;
 			}
 		}

@@ -68,6 +68,7 @@ package com.rpgGame.app.view.icon
 		protected var isShow : Boolean = true;
 		
 		protected var _qualityEft:Inter3DContainer;
+        protected var _qualityEffectObj : InterObject3D;
 		
 		public function BgIcon( $iconSize:int = IcoSizeEnum.SIZE_40 )
 		{
@@ -95,7 +96,6 @@ package com.rpgGame.app.view.icon
 		 */		
 		public function showQuality( qualityID:int ):void
 		{
-			_qualityId = qualityID;
 		/*	if( _qualityId <= 0 )
 			{
 				hideQuality();
@@ -105,34 +105,53 @@ package com.rpgGame.app.view.icon
 			{
 				_qualityImage = new UIAsset();
 			}
-			_qualityImage.styleName = ClientConfig.getQualityBg( _qualityId ,iconSize);
+			_qualityImage.styleName = ClientConfig.getQualityBg( qualityID ,iconSize);
 			_qualityImage.visible=true;
 			
 			if(qualityID>Quality.YELLOW){
-				showQualityEft();
+				showQualityEft(qualityID);
 			}else{
+                if (_qualityEffectObj) {
+                    if (_qualityEft) {
+                        _qualityEft.removeChild3D(_qualityEffectObj);
+                    }
+                    _qualityEffectObj.dispose();
+                    _qualityEffectObj = null;
+                }
 				if(_qualityEft){
 					_qualityEft.removeChildren();
 				}
 			}
+            _qualityId = qualityID;
 			setQualityImageIconPoint();
 			sortLayer();
 		}
 		
-		private function showQualityEft():void
+		private function showQualityEft(qualityID:int):void
 		{
 			if(_qualityEft==null){
 				_qualityEft=new Inter3DContainer();
 			}else{
 				_qualityEft.removeChildren();
 			}
-			
-			var inter:InterObject3D=_qualityEft.playInter3DAt(ClientConfig.getEffect(EffectUrl["ITEM_QUALITY"+_qualityId]),0,0,0);
-			var render:RenderUnit3D=RenderUnit3D(inter.baseObj3D);
-			render.setAddedCallBack(addEft);
-			addEft(render);
-			_qualityEft.x=_iconSize>>1;
-			_qualityEft.y=_iconSize>>1;
+			if (_qualityId != qualityID || null == _qualityEffectObj) {
+                if (_qualityEffectObj) {
+                    _qualityEft.removeChild3D(_qualityEffectObj);
+                    _qualityEffectObj.dispose();
+                }
+                _qualityEffectObj = _qualityEft.playInter3DAt(ClientConfig.getEffect(EffectUrl["ITEM_QUALITY"+_qualityId]),0,0,0);
+                var render:RenderUnit3D=RenderUnit3D(_qualityEffectObj.baseObj3D);
+                render.setAddedCallBack(addEft);
+                addEft(render);
+                _qualityEft.x=_iconSize>>1;
+                _qualityEft.y=_iconSize>>1;
+            }
+//			var inter:InterObject3D=_qualityEft.playInter3DAt(ClientConfig.getEffect(EffectUrl["ITEM_QUALITY"+_qualityId]),0,0,0);
+//			var render:RenderUnit3D=RenderUnit3D(inter.baseObj3D);
+//			render.setAddedCallBack(addEft);
+//			addEft(render);
+//			_qualityEft.x=_iconSize>>1;
+//			_qualityEft.y=_iconSize>>1;
 		}		
 		
 		private function addEft( ru : RenderUnit3D):void
@@ -146,6 +165,13 @@ package com.rpgGame.app.view.icon
 		{
 			if( _qualityImage != null )
 				_qualityImage.visible = false;
+            if (_qualityEffectObj) {
+                if (_qualityEft) {
+                    _qualityEft.removeChild3D(_qualityEffectObj);
+                }
+                _qualityEffectObj.dispose();
+                _qualityEffectObj = null;
+            }
 			if(_qualityEft){
 				_qualityEft.removeFromParent();
 			}
@@ -491,6 +517,13 @@ package com.rpgGame.app.view.icon
 			if(_qualityImage)
 				_qualityImage.visible = false;
 			clearLockAsset();
+            if (_qualityEffectObj) {
+                if (_qualityEft) {
+                    _qualityEft.removeChild3D(_qualityEffectObj);
+                }
+                _qualityEffectObj.dispose();
+                _qualityEffectObj = null;
+            }
 			if(_qualityEft){
 				_qualityEft.removeFromParent();
 			}
