@@ -6,11 +6,13 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.state.role.control.MoveState;
 	import com.rpgGame.coreData.type.RoleStateType;
-
+	
 	import flash.geom.Vector3D;
-
+	
 	import away3d.pathFinding.DistrictWithPath;
-
+	
+	import gameEngine2D.PolyUtil;
+	
 	import gs.TweenLite;
 	import gs.easing.Cubic;
 	import gs.easing.Linear;
@@ -67,11 +69,16 @@ package com.rpgGame.app.state.role.control
 
 				var targetX : int = selfX + dx;
 				var targetZ : int = selfZ + dy;
-				tempVector3D.setTo(targetX, 0, targetZ);
+				tempVector3D.setTo(targetX, targetZ, targetZ);
 				var districtWithPath : DistrictWithPath = SceneManager.getDistrict((_machine.owner as SceneRole).sceneName);
 				if (PathFinderUtil.isSolid(districtWithPath, tempVector3D))
 				{
-					var forwardPos : Vector3D = PathFinderUtil.getForwardPointInSide(districtWithPath, (_machine.owner as SceneRole).position, tempVector3D);
+					var forwardPos : Vector3D = 
+                        PolyUtil.getSegmentIntersect(districtWithPath, (_machine.owner as SceneRole).position, tempVector3D);
+                    if (null == forwardPos) {
+                        forwardPos = (_machine.owner as SceneRole).position;
+                    }
+                    //PathFinderUtil.getForwardPointInSide(districtWithPath, (_machine.owner as SceneRole).position, tempVector3D);
 					targetX = forwardPos.x;
 					targetZ = forwardPos.z;
 					dist = MathUtil.getDistance(selfX, selfZ, targetX, targetZ);
