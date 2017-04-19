@@ -377,10 +377,13 @@ package com.rpgGame.coreData.info
 		 * @param mapResName
 		 * 
 		 */		
-		private static function cancelDelayDisposeMap(mapResName:String):void
+		public static function cancelDelayDisposeMap(mapResName:String):void
 		{
 			var fun:Function = _disposeMap.getValue(mapResName);
-			TweenLite.killDelayedCallsTo(fun);
+            if (fun) {
+                TweenLite.killDelayedCallsTo(fun);
+                _disposeMap.remove(mapResName);
+            }
 		}
 		
 		
