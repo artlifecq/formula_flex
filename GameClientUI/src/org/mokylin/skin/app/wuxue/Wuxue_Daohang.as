@@ -46,7 +46,7 @@ package org.mokylin.skin.app.wuxue
 			var temp:feathers.controls.Radio = new feathers.controls.Radio();
 			btn_jineng = temp;
 			temp.name = "btn_jineng";
-			temp.groupName = "rdoBtn";
+			temp.groupName = "rdoWuxue";
 			temp.styleClass = org.mokylin.skin.app.wuxue.button.ButtonJineng;
 			temp.x = 0;
 			temp.y = 0;
@@ -58,7 +58,7 @@ package org.mokylin.skin.app.wuxue
 			var temp:feathers.controls.Radio = new feathers.controls.Radio();
 			btn_juexue = temp;
 			temp.name = "btn_juexue";
-			temp.groupName = "rdoBtn";
+			temp.groupName = "rdoWuxue";
 			temp.styleClass = org.mokylin.skin.app.wuxue.button.ButtonJuexue;
 			temp.x = 144;
 			temp.y = 0;
