@@ -1,10 +1,14 @@
 package com.rpgGame.app.ui.main.Task
 {
+	import com.rpgGame.app.utils.TaskUtil;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.ui.SkinUI;
 	
 	import gs.TweenMax;
 	
 	import org.mokylin.skin.mainui.renwu.RenWuZhuiZong_Skin;
+	import org.mokylin.skin.mainui.renwu.Renwu_Item;
 	
 	import starling.display.DisplayObject;
 
@@ -27,8 +31,8 @@ package com.rpgGame.app.ui.main.Task
 			initX=_skin.task_box.x;
 			leadCont=new TaskLeadCont(_skin);
 			loopCont=new TaskLoopCont(_skin);
-			//leadCont.show(false);
-			//loopCont.show(true);
+			leadCont.show(false);
+			loopCont.show(true);
 			leadCont.show(true);
 			loopCont.show(false);
 		}
@@ -47,7 +51,31 @@ package com.rpgGame.app.ui.main.Task
 						// 关闭
 						setState(false);
 						break;
-					
+					case Renwu_Item(_skin.pri_killbut.skin).btn_send:
+						//L.l("btn_sendbtn_sendbtn_sendbtn_send");
+						break;
+					case Renwu_Item(_skin.pri_killbut.skin).labelDisplay:
+						//L.l("labelDisplaylabelDisplay");
+						TaskUtil.replyNpcTask(1);
+						break;
+					case Renwu_Item(_skin.sec_killbut1.skin).btn_send:
+						//L.l("sec_killbut1");
+						break;
+					case Renwu_Item(_skin.sec_killbut1.skin).labelDisplay:
+						
+						break;
+					case Renwu_Item(_skin.sec_killbut2.skin).btn_send:
+						//L.l("sec_killbut2");
+						break;
+					case Renwu_Item(_skin.sec_killbut2.skin).labelDisplay:
+						
+						break;
+					case _skin.sec_navi1:
+						AppManager.showApp(AppConstant.TASK_LEAD_PANEL);
+						break;
+					case _skin.sec_navi3:
+						AppManager.showApp(AppConstant.TASK_LOOP_PANEL);
+						break;
 				}
 		}
 		
