@@ -10,8 +10,10 @@ package com.rpgGame.appModule.skill
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
 	
 	import feathers.controls.Radio;
+	import feathers.controls.UIAsset;
 	import feathers.core.ToggleGroup;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.wuxue.juexue.Juexue_Skin;
 	import org.mokylin.skin.app.wuxue.juexue.Juexue_jihuo;
 	import org.mokylin.skin.app.wuxue.juexue.Juxue_Shengji;
@@ -26,6 +28,7 @@ package com.rpgGame.appModule.skill
 		private var _radioGroup:ToggleGroup;
 		private var _activit:LostSpellActivate;
 		private var _updataLevel:LostSkillUpLevelView;
+		private var _bgList:Vector.<UIAsset>;
 		public function LostSkillView(skin:Juexue_Skin,panel:SkinUIPanel)
 		{
 			_panel=panel;
@@ -44,13 +47,55 @@ package com.rpgGame.appModule.skill
 			_skillIconList.push(new LostSkillIcon(_skin.sk_shikong,datas[4],gropname));
 			_skillIconList.push(new LostSkillIcon(_skin.sk_canglong,datas[5],gropname));
 			_skillIconList.push(new LostSkillIcon(_skin.sk_shengsheng,datas[6],gropname));
+			
+			_bgList = new Vector.<UIAsset>();
+			_bgList.push(_skin.bg_1);
+			_bgList.push(_skin.bg_2);
+			_bgList.push(_skin.bg_3);
+			_bgList.push(_skin.bg_4);
+			_bgList.push(_skin.bg_5);
+			_bgList.push(_skin.bg_6);
+			_bgList.push(_skin.bg_7);
 			_activit = new LostSpellActivate(_skin.sk_jihuo.skin as Juexue_jihuo);
 			_updataLevel = new LostSkillUpLevelView(_skin.sk_shengji.skin as Juxue_Shengji);
 			_radioGroup = Radio.RADIO_GROUP_NAMES[gropname];
 			_radioGroup.addEventListener(Event.CHANGE,selecteChangeHandler);
-			_radioGroup.selectedIndex = 5;
+			for(var i:int = 0;i<datas.length;i++)
+			{
+				if(datas[i]["q_id"]==LostSkillManager.instance().curSkillId)
+				{
+					_radioGroup.selectedIndex = i;
+					break;
+				}
+			}
 		}
 		
+		public function onShow():void
+		{
+			refeashIconsList();
+			selecteChangeHandler();
+			EventManager.addEvent(LostSkillManager.LostSkill_ChangeSkillId,changeStateHandler);
+			EventManager.addEvent(LostSkillManager.LostSkill_ChangeSkillState,changeStateHandler);
+			EventManager.addEvent(LostSkillManager.LostSkill_UpLevelSkillId,selecteChangeHandler);
+		}
+		public function onHide():void
+		{
+			EventManager.removeEvent(LostSkillManager.LostSkill_ChangeSkillId,changeStateHandler);
+			EventManager.removeEvent(LostSkillManager.LostSkill_ChangeSkillState,changeStateHandler);
+			EventManager.removeEvent(LostSkillManager.LostSkill_UpLevelSkillId,selecteChangeHandler);
+		}
+		private function refeashIconsList():void
+		{
+			for each(var icon:LostSkillIcon in _skillIconList)
+			{
+				icon.refeashView();
+			}
+		}
+		private function changeStateHandler():void
+		{
+			refeashIconsList();
+			selecteChangeHandler();
+		}
 		private function selecteChangeHandler():void
 		{
 			var index:int = _radioGroup.selectedIndex;
@@ -58,13 +103,10 @@ package com.rpgGame.appModule.skill
 			var state:SkillStateInfo = LostSkillManager.instance().getSkillStateInfoById(data.q_id);
 			_activit.updataSkill(data,state);
 			_updataLevel.updataSkill(data,state);
-		}
-		
-		private function updataSelectItem(q_data:Q_lostskill_open):void
-		{
-			for each(var icon:LostSkillIcon in _skillIconList)
+			_skin.mc_name.gotoAndStop(index);
+			for(var i:int = 0;i<_bgList.length;i++)
 			{
-				icon.updataSelected(q_data);
+				_bgList[i].visible = i==index;
 			}
 		}
 	}

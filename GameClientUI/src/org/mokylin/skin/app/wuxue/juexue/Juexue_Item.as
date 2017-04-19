@@ -19,15 +19,13 @@ package org.mokylin.skin.app.wuxue.juexue
 		//==========================================================================
 		public var btn_over:feathers.controls.Radio;
 
-		public var jihuo:feathers.controls.UIAsset;
+		public var icons:feathers.controls.UIAsset;
 
 		public var lb_name:feathers.controls.Label;
 
 		public var lb_weijihuo:feathers.controls.Label;
 
 		public var qiyong:feathers.controls.UIAsset;
-
-		public var weijihuo:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -38,9 +36,9 @@ package org.mokylin.skin.app.wuxue.juexue
 			super();
 			
 			this.currentState = "normal";
-			this.height = 96;
-			this.width = 87;
-			this.elementsContent = [btn_over_i(),weijihuo_i(),jihuo_i(),lb_weijihuo_i(),lb_name_i(),qiyong_i()];
+			this.height = 106;
+			this.width = 94;
+			this.elementsContent = [btn_over_i(),icons_i(),lb_weijihuo_i(),lb_name_i(),qiyong_i()];
 			
 			states = {
 			};
@@ -56,22 +54,24 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.Radio = new feathers.controls.Radio();
 			btn_over = temp;
 			temp.name = "btn_over";
+			temp.height = 82;
 			temp.styleClass = org.mokylin.skin.app.wuxue.juexue.SelectBtn;
+			temp.width = 85;
 			temp.x = 0;
-			temp.y = 0;
+			temp.y = 7;
 			return temp;
 		}
 
-		private function jihuo_i():feathers.controls.UIAsset
+		private function icons_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			jihuo = temp;
-			temp.name = "jihuo";
+			icons = temp;
+			temp.name = "icons";
 			temp.touchable = false;
 			temp.touchGroup = false;
 			temp.styleName = "ui/app/wuxue/juexue/liang.png";
 			temp.x = 18;
-			temp.y = 10;
+			temp.y = 16;
 			return temp;
 		}
 
@@ -87,8 +87,8 @@ package org.mokylin.skin.app.wuxue.juexue
 			temp.color = 0xE3D9BF;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreeni"];
 			temp.width = 73;
-			temp.x = 7;
-			temp.y = 78;
+			temp.x = 5;
+			temp.y = 88;
 			return temp;
 		}
 
@@ -104,8 +104,8 @@ package org.mokylin.skin.app.wuxue.juexue
 			temp.color = 0x6F6F6D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreeni"];
 			temp.width = 50;
-			temp.x = 20;
-			temp.y = 60;
+			temp.x = 18;
+			temp.y = 70;
 			return temp;
 		}
 
@@ -117,21 +117,8 @@ package org.mokylin.skin.app.wuxue.juexue
 			temp.touchable = false;
 			temp.touchGroup = false;
 			temp.styleName = "ui/app/wuxue/juexue/qiyong.png";
-			temp.x = 59;
+			temp.x = 56;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function weijihuo_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			weijihuo = temp;
-			temp.name = "weijihuo";
-			temp.touchable = false;
-			temp.touchGroup = false;
-			temp.styleName = "ui/app/wuxue/juexue/hui.png";
-			temp.x = 18;
-			temp.y = 9;
 			return temp;
 		}
 

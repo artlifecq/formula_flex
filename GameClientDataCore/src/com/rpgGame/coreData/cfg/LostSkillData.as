@@ -17,6 +17,7 @@ package com.rpgGame.coreData.cfg
 				_datas[info.q_id] = info;
 			}
 			_lists = arr;
+			_lists.sortOn("q_level",Array.NUMERIC);
 		}
 		public static function getModeInfoById(id:int):Q_lostskill_open
 		{

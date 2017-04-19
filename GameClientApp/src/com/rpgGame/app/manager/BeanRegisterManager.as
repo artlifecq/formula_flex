@@ -14,6 +14,7 @@
 	import com.rpgGame.app.cmdlistener.HeroMiscCmdListener;
 	import com.rpgGame.app.cmdlistener.HeroSearchCmdListener;
 	import com.rpgGame.app.cmdlistener.LookCmdListener;
+	import com.rpgGame.app.cmdlistener.LostSkillCmdListener;
 	import com.rpgGame.app.cmdlistener.MailCmdListener;
 	import com.rpgGame.app.cmdlistener.MiscCmdListener;
 	import com.rpgGame.app.cmdlistener.NotifyCmdListener;
@@ -132,6 +133,7 @@
 //			register("YuMaQiShouCmdListener", YuMaQiShouCmdListener); //御马场、奇兽苑
 			register("FightSoulCmdListener",FightSoulCmdListener);//战魂
 			register("NotifyCmdListener",NotifyCmdListener);//通知消息管理
+			register("LostSkillCmdListener",LostSkillCmdListener);//绝学
 		}
 	}
 }

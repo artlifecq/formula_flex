@@ -8,6 +8,7 @@ package com.rpgGame.appModule.fightsoul
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_path;
 	import com.rpgGame.coreData.clientConfig.Q_windowInfo;
 	import com.rpgGame.coreData.lang.LangFightSoul;
+	import com.rpgGame.coreData.lang.LangUI_2;
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	import feathers.utils.filter.GrayFilter;
@@ -49,7 +50,7 @@ package com.rpgGame.appModule.fightsoul
 			var winInfo:Q_windowInfo = WindowInfoData.getInfobyId(path.q_winId);
 			_skin.lb_name.text = winInfo.q_name;
 			_skin.lb_cishu.text = pathinfoData.count.toString()+"/"+path.q_total;
-			_skin.lb_jinyan.text =LanguageConfig.getText(LangFightSoul.FightSoulShowReward).replace("$",path.q_reward)
+			_skin.lb_jinyan.text =LanguageConfig.getText(LangUI_2.FightSoulShowReward).replace("$",path.q_reward)
 			_skin.btn_send.visible = winInfo.q_islink==1;
 			if(pathinfoData.isOver)
 			{

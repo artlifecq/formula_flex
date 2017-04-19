@@ -2,10 +2,12 @@ package com.rpgGame.appModule.skill.lostskill
 {
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
+	import com.rpgGame.coreData.lang.LangUI_2;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
 	
 	import org.mokylin.skin.app.wuxue.juexue.Juexue_jihuo;
@@ -24,10 +26,8 @@ package com.rpgGame.appModule.skill.lostskill
 		{
 			if(_state!=null)
 				return ;
-			var str:String = "是否需要花费$元宝激活该技能"
-			var alertSet : AlertSetInfo = new AlertSetInfo(LangAlertInfo.RECEIVE_JOIN_INVITE,_data.q_yuanbao);
+			var alertSet : AlertSetInfo = new AlertSetInfo(LangAlertInfo.LostSkill_ActivitMsg,_data.q_yuanbao);
 			GameAlert.showAlert(alertSet,clickCallBack);
-//			GameAlert.show(str.replace("$",_data.q_yuanbao), "提示");
 		}
 		private function clickCallBack(gameAlert:GameAlert):void
 		{
@@ -50,7 +50,7 @@ package com.rpgGame.appModule.skill.lostskill
 				return ;
 			}
 			_skin.container.visible =true;
-			_skin.lb_tiaojian.htmlText = String("激活条件：人物等级达到$级").replace("$",_data.q_level);
+			_skin.lb_tiaojian.htmlText = LanguageConfig.getText(LangUI_2.Lostskill_activit).replace("$",_data.q_level);
 		}
 	}
 }

@@ -63,10 +63,12 @@ package com.rpgGame.appModule.skill
 				case _navSkin.btn_jineng:
 					_skin.jineng.visible=true;
 					_skin.juexue.visible = false;
+					_lostskillView.onHide();
 					break;
 				case _navSkin.btn_juexue:
 					_skin.jineng.visible=false;
 					_skin.juexue.visible = true;
+					_lostskillView.onShow();
 					break;
 			}
 		}

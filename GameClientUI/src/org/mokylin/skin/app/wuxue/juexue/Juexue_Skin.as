@@ -5,9 +5,11 @@ package org.mokylin.skin.app.wuxue.juexue
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import feathers.controls.UIMovieClip;
 	import org.mokylin.skin.app.wuxue.juexue.Juexue_Item;
 	import org.mokylin.skin.app.wuxue.juexue.Juexue_jihuo;
 	import org.mokylin.skin.app.wuxue.juexue.Juxue_Shengji;
+	import org.mokylin.skin.app.wuxue.juexue.mc.UIMovieClipJuexue_name;
 	import org.mokylin.skin.component.button.ButtonSkin_shuoming2;
 
 	/**
@@ -20,7 +22,27 @@ package org.mokylin.skin.app.wuxue.juexue
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var bg_1:feathers.controls.UIAsset;
+
+		public var bg_2:feathers.controls.UIAsset;
+
+		public var bg_3:feathers.controls.UIAsset;
+
+		public var bg_4:feathers.controls.UIAsset;
+
+		public var bg_5:feathers.controls.UIAsset;
+
+		public var bg_6:feathers.controls.UIAsset;
+
+		public var bg_7:feathers.controls.UIAsset;
+
 		public var btn_shuoming:feathers.controls.Button;
+
+		public var grp_bg:feathers.controls.Group;
+
+		public var grp_btn:feathers.controls.Group;
+
+		public var mc_name:feathers.controls.UIMovieClip;
 
 		public var sk_canglong:feathers.controls.SkinnableContainer;
 
@@ -49,7 +71,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [__Juexue_Skin_UIAsset1_i(),__Juexue_Skin_Group1_i(),__Juexue_Skin_Group2_i(),btn_shuoming_i(),sk_jihuo_i(),sk_shengji_i()];
+			this.elementsContent = [__Juexue_Skin_UIAsset2_i(),__Juexue_Skin_UIAsset3_i(),grp_bg_i(),grp_btn_i(),btn_shuoming_i(),sk_jihuo_i(),sk_shengji_i(),mc_name_i()];
 			
 			states = {
 			};
@@ -60,96 +82,99 @@ package org.mokylin.skin.app.wuxue.juexue
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __Juexue_Skin_Group1_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.visible = false;
-			temp.x = 116;
-			temp.y = 432;
-			temp.elementsContent = [__Juexue_Skin_UIAsset2_i(),__Juexue_Skin_UIAsset3_i(),__Juexue_Skin_UIAsset4_i(),__Juexue_Skin_UIAsset5_i(),__Juexue_Skin_UIAsset6_i(),__Juexue_Skin_UIAsset7_i()];
-			return temp;
-		}
-
-		private function __Juexue_Skin_Group2_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.x = 27;
-			temp.y = 417;
-			temp.elementsContent = [sk_feisheng_i(),sk_wanghun_i(),skin_bindong_i(),sk_renzhe_i(),sk_shikong_i(),sk_canglong_i(),sk_shengsheng_i()];
-			return temp;
-		}
-
-		private function __Juexue_Skin_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/wuxue/juexue/bg.png";
-			temp.x = 20;
-			temp.y = 79;
-			return temp;
-		}
-
 		private function __Juexue_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.touchable = false;
-			temp.touchGroup = false;
-			temp.styleName = "ui/app/wuxue/juexue/xiaotiao.png";
-			temp.x = 0;
-			temp.y = 0;
+			temp.height = 445;
+			temp.styleName = "ui/app/wuxue/juexue/xbg.jpg";
+			temp.width = 650;
+			temp.x = 19;
+			temp.y = 76;
 			return temp;
 		}
 
 		private function __Juexue_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.touchable = false;
-			temp.touchGroup = false;
-			temp.styleName = "ui/app/wuxue/juexue/xiaotiao.png";
-			temp.x = 91;
+			temp.styleName = "ui/app/wuxue/juexue/bg.png";
+			temp.x = 24;
+			temp.y = 411;
+			return temp;
+		}
+
+		private function bg_1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg_1 = temp;
+			temp.name = "bg_1";
+			temp.styleName = "ui/app/wuxue/juexue/bg_1.jpg";
+			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function __Juexue_Skin_UIAsset4_i():feathers.controls.UIAsset
+		private function bg_2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.touchable = false;
-			temp.touchGroup = false;
-			temp.styleName = "ui/app/wuxue/juexue/xiaotiao.png";
-			temp.x = 182;
+			bg_2 = temp;
+			temp.name = "bg_2";
+			temp.styleName = "ui/app/wuxue/juexue/bg_2.jpg";
+			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function __Juexue_Skin_UIAsset5_i():feathers.controls.UIAsset
+		private function bg_3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.touchable = false;
-			temp.touchGroup = false;
-			temp.styleName = "ui/app/wuxue/juexue/xiaotiao.png";
-			temp.x = 274;
+			bg_3 = temp;
+			temp.name = "bg_3";
+			temp.styleName = "ui/app/wuxue/juexue/bg_3.jpg";
+			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function __Juexue_Skin_UIAsset6_i():feathers.controls.UIAsset
+		private function bg_4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.touchable = false;
-			temp.touchGroup = false;
-			temp.styleName = "ui/app/wuxue/juexue/xiaotiao.png";
-			temp.x = 365;
+			bg_4 = temp;
+			temp.name = "bg_4";
+			temp.styleName = "ui/app/wuxue/juexue/bg_4.jpg";
+			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function __Juexue_Skin_UIAsset7_i():feathers.controls.UIAsset
+		private function bg_5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.touchable = false;
-			temp.touchGroup = false;
-			temp.styleName = "ui/app/wuxue/juexue/xiaotiao.png";
-			temp.x = 456;
+			bg_5 = temp;
+			temp.name = "bg_5";
+			temp.styleName = "ui/app/wuxue/juexue/bg_5.jpg";
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function bg_6_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg_6 = temp;
+			temp.name = "bg_6";
+			temp.styleName = "ui/app/wuxue/juexue/bg_6.jpg";
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function bg_7_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg_7 = temp;
+			temp.name = "bg_7";
+			temp.styleName = "ui/app/wuxue/juexue/bg_7.jpg";
+			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
@@ -160,8 +185,44 @@ package org.mokylin.skin.app.wuxue.juexue
 			btn_shuoming = temp;
 			temp.name = "btn_shuoming";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shuoming2;
-			temp.x = 619;
-			temp.y = 100;
+			temp.x = 628;
+			temp.y = 96;
+			return temp;
+		}
+
+		private function grp_bg_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			grp_bg = temp;
+			temp.name = "grp_bg";
+			temp.x = 24;
+			temp.y = 82;
+			temp.elementsContent = [bg_1_i(),bg_2_i(),bg_3_i(),bg_4_i(),bg_5_i(),bg_6_i(),bg_7_i()];
+			return temp;
+		}
+
+		private function grp_btn_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			grp_btn = temp;
+			temp.name = "grp_btn";
+			temp.x = 27;
+			temp.y = 406;
+			temp.elementsContent = [sk_feisheng_i(),sk_wanghun_i(),skin_bindong_i(),sk_renzhe_i(),sk_shikong_i(),sk_canglong_i(),sk_shengsheng_i()];
+			return temp;
+		}
+
+		private function mc_name_i():feathers.controls.UIMovieClip
+		{
+			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
+			mc_name = temp;
+			temp.name = "mc_name";
+			temp.autoPlay = false;
+			temp.height = 119;
+			temp.styleClass = org.mokylin.skin.app.wuxue.juexue.mc.UIMovieClipJuexue_name;
+			temp.width = 54;
+			temp.x = 34;
+			temp.y = 93;
 			return temp;
 		}
 
@@ -170,10 +231,10 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			sk_canglong = temp;
 			temp.name = "sk_canglong";
-			temp.height = 94;
+			temp.height = 106;
 			var skin:StateSkin = new org.mokylin.skin.app.wuxue.juexue.Juexue_Item()
 			temp.skin = skin
-			temp.width = 87;
+			temp.width = 94;
 			temp.x = 457;
 			temp.y = 0;
 			return temp;
@@ -184,10 +245,10 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			sk_feisheng = temp;
 			temp.name = "sk_feisheng";
-			temp.height = 94;
+			temp.height = 106;
 			var skin:StateSkin = new org.mokylin.skin.app.wuxue.juexue.Juexue_Item()
 			temp.skin = skin
-			temp.width = 87;
+			temp.width = 94;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -203,7 +264,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			temp.skin = skin
 			temp.width = 258;
 			temp.x = 670;
-			temp.y = 79;
+			temp.y = 76;
 			return temp;
 		}
 
@@ -212,10 +273,10 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			sk_renzhe = temp;
 			temp.name = "sk_renzhe";
-			temp.height = 94;
+			temp.height = 106;
 			var skin:StateSkin = new org.mokylin.skin.app.wuxue.juexue.Juexue_Item()
 			temp.skin = skin
-			temp.width = 87;
+			temp.width = 94;
 			temp.x = 274;
 			temp.y = 0;
 			return temp;
@@ -231,7 +292,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			temp.skin = skin
 			temp.width = 260;
 			temp.x = 670;
-			temp.y = 79;
+			temp.y = 76;
 			return temp;
 		}
 
@@ -240,10 +301,10 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			sk_shengsheng = temp;
 			temp.name = "sk_shengsheng";
-			temp.height = 94;
+			temp.height = 106;
 			var skin:StateSkin = new org.mokylin.skin.app.wuxue.juexue.Juexue_Item()
 			temp.skin = skin
-			temp.width = 87;
+			temp.width = 94;
 			temp.x = 549;
 			temp.y = 0;
 			return temp;
@@ -254,10 +315,10 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			sk_shikong = temp;
 			temp.name = "sk_shikong";
-			temp.height = 94;
+			temp.height = 106;
 			var skin:StateSkin = new org.mokylin.skin.app.wuxue.juexue.Juexue_Item()
 			temp.skin = skin
-			temp.width = 87;
+			temp.width = 94;
 			temp.x = 366;
 			temp.y = 0;
 			return temp;
@@ -268,10 +329,10 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			sk_wanghun = temp;
 			temp.name = "sk_wanghun";
-			temp.height = 94;
+			temp.height = 106;
 			var skin:StateSkin = new org.mokylin.skin.app.wuxue.juexue.Juexue_Item()
 			temp.skin = skin
-			temp.width = 87;
+			temp.width = 94;
 			temp.x = 92;
 			temp.y = 0;
 			return temp;
@@ -282,10 +343,10 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			skin_bindong = temp;
 			temp.name = "skin_bindong";
-			temp.height = 94;
+			temp.height = 106;
 			var skin:StateSkin = new org.mokylin.skin.app.wuxue.juexue.Juexue_Item()
 			temp.skin = skin
-			temp.width = 87;
+			temp.width = 94;
 			temp.x = 183;
 			temp.y = 0;
 			return temp;

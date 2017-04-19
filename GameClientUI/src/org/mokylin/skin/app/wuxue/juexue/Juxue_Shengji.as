@@ -10,6 +10,7 @@ package org.mokylin.skin.app.wuxue.juexue
 	import org.mokylin.skin.app.wuxue.Title_Skin;
 	import org.mokylin.skin.app.wuxue.juexue.Item_shuxing;
 	import org.mokylin.skin.app.wuxue.juexue.button.ButtonSj;
+	import org.mokylin.skin.app.wuxue.juexue.button.ButtonYingyong;
 
 	/**
 	 * @private
@@ -22,6 +23,8 @@ package org.mokylin.skin.app.wuxue.juexue
 		//                                定义成员变量
 		//==========================================================================
 		public var btn_shengji:feathers.controls.Button;
+
+		public var btn_yinyong:feathers.controls.Button;
 
 		public var currentLevel:feathers.controls.SkinnableContainer;
 
@@ -50,7 +53,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			this.currentState = "normal";
 			this.height = 445;
 			this.width = 260;
-			this.elementsContent = [__Juxue_Shengji_UIAsset1_i(),__Juxue_Shengji_SkinnableContainer1_i(),__Juxue_Shengji_SkinnableContainer2_i(),grp_dengji_i(),currentLevel_i(),nexttLevel_i(),grp_xiaohao_i(),__Juxue_Shengji_UIAsset4_i(),btn_shengji_i(),isopen_i()];
+			this.elementsContent = [__Juxue_Shengji_UIAsset1_i(),__Juxue_Shengji_SkinnableContainer1_i(),__Juxue_Shengji_SkinnableContainer2_i(),grp_dengji_i(),currentLevel_i(),nexttLevel_i(),grp_xiaohao_i(),isopen_i(),btn_shengji_i(),btn_yinyong_i()];
 			
 			states = {
 			};
@@ -136,16 +139,6 @@ package org.mokylin.skin.app.wuxue.juexue
 			return temp;
 		}
 
-		private function __Juxue_Shengji_UIAsset4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/dianweixiaoguotu/app/wuxue/juexue2.png";
-			temp.visible = false;
-			temp.x = -679;
-			temp.y = -91;
-			return temp;
-		}
-
 		private function btn_shengji_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -153,7 +146,18 @@ package org.mokylin.skin.app.wuxue.juexue
 			temp.name = "btn_shengji";
 			temp.styleClass = org.mokylin.skin.app.wuxue.juexue.button.ButtonSj;
 			temp.x = 73;
-			temp.y = 336;
+			temp.y = 332;
+			return temp;
+		}
+
+		private function btn_yinyong_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_yinyong = temp;
+			temp.name = "btn_yinyong";
+			temp.styleClass = org.mokylin.skin.app.wuxue.juexue.button.ButtonYingyong;
+			temp.x = 72;
+			temp.y = 366;
 			return temp;
 		}
 
@@ -199,8 +203,8 @@ package org.mokylin.skin.app.wuxue.juexue
 			isopen = temp;
 			temp.name = "isopen";
 			temp.styleName = "ui/app/wuxue/juexue/yqyong.png";
-			temp.x = 187;
-			temp.y = 370;
+			temp.x = 4;
+			temp.y = 363;
 			return temp;
 		}
 

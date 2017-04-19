@@ -53,6 +53,8 @@ package com.rpgGame.app.manager
 		
 		public function updataSkllState(skillInfo:SkillStateInfo):void
 		{
+			if(skillInfo!=null&&_infos.length==0)
+				curSkillId = skillInfo.skillId;
 			_infos.push(skillInfo);
 			EventManager.dispatchEvent(LostSkill_ChangeSkillState);
 		}
@@ -64,19 +66,15 @@ package com.rpgGame.app.manager
 				if(skill.skillId == skillId)
 					return skill;
 			}
-			
-			var state:SkillStateInfo = new SkillStateInfo();
-			state.skillId = skillId;
-			state.level = 5;
-			return state;
+			return null;
 		}
 		
 		public function activitSkill(data:Q_lostskill_open):void
 		{
-			var myMon:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
+			var myMon:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD);
 			if(myMon<data.q_yuanbao)
 			{
-				NoticeManager.showNotify(NotifyCfgData.getNotifyTextByID(4010));
+				NoticeManager.showNotify(NotifyCfgData.getNotifyTextByID(7011));
 				return ;
 			}
 			var msg:CSActivitSkillMessage = new CSActivitSkillMessage();

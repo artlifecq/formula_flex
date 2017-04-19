@@ -7,16 +7,20 @@ package com.rpgGame.appModule.skill.lostskill
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_up;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
+	import com.rpgGame.coreData.lang.LangUI_2;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
+	import com.rpgGame.netData.lostSkill.message.CSChangeSkillMessage;
 	import com.rpgGame.netData.lostSkill.message.CSLostSkillLeveUpMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
@@ -33,34 +37,49 @@ package com.rpgGame.appModule.skill.lostskill
 		{
 			_skin = skin;
 			initView();
-//			_touchstate = new TouchToState(_skin.lb_xiaohao,touchHandler);
 		}
 		private function initView():void
 		{
 			var content:Item_shuxing = _skin.currentLevel.skin as Item_shuxing;
-			content.lb_name.text = "当前等级效果：";
+			content.lb_name.text = LanguageConfig.getText(LangUI_2.Lostskill_title1);
 			content= _skin.nexttLevel.skin as Item_shuxing;
-			content.lb_name.text = "下一等级效果：";
+			content.lb_name.text = LanguageConfig.getText(LangUI_2.Lostskill_title2);
 			_skin.btn_shengji.addEventListener(Event.TRIGGERED,uplevelTrigeredHandler);
+			_skin.btn_yinyong.addEventListener(Event.TRIGGERED,changeStateHandler);
+		}
+		private function changeStateHandler(e:Event):void
+		{
+			if(_state==null)
+			{
+				return ;
+			}
+			if(_state.skillId == LostSkillManager.instance().curSkillId)
+			{
+				return ;
+			}
+			
+			var msg:CSChangeSkillMessage = new CSChangeSkillMessage();
+			msg.skillId = _state.skillId;
+			SocketConnection.send(msg);
 		}
 		private function uplevelTrigeredHandler(e:Event):void
 		{
 			if(!canupLevel())
 			{
-				NoticeManager.showNotify("已是最大等级");
+				NoticeManager.showNotify(NotifyCfgData.getNotifyTextByID(7009));
 				return ;
 			}
 			
 			var info:HeroData=MainRoleManager.actorInfo;
 			if(_state.level>info.totalStat.level)
 			{
-				NoticeManager.showNotify("升级玩家等级后可操作");
+				NoticeManager.showNotify(NotifyCfgData.getNotifyTextByID(7002));
 				return ;
 			}
 			var total:int = BackPackManager.instance.getBagItemsCountById(_itemInfo.cfgId);
 			if(total<_itemInfo.itemInfo.num)
 			{
-				NoticeManager.showNotify("材料不足");
+				NoticeManager.showNotify(NotifyCfgData.getNotifyTextByID(7010));
 				return ;
 			}
 			var msg:CSLostSkillLeveUpMessage = new CSLostSkillLeveUpMessage();
@@ -84,13 +103,13 @@ package com.rpgGame.appModule.skill.lostskill
 			_skin.lb_dengji.text = state.level+"/"+maxLevel.toString();
 			refeashData(); 
 			
-			
 			updataLevelEffect(_skin.currentLevel.skin as Item_shuxing,_state.level);
 			updataLevelEffect(_skin.nexttLevel.skin as Item_shuxing,_state.level+1);
 			_skin.lb_xiaohao.htmlText = HtmlTextUtil.underLine(_itemInfo.name+"*"+_itemInfo.itemInfo.num);
 			TipTargetManager.remove(_skin.lb_xiaohao);
 			TipTargetManager.show(_skin.lb_xiaohao,TargetTipsMaker.makeTips(TipType.ITEM_TIP,_itemInfo));
 			_skin.isopen.visible = _state.skillId == LostSkillManager.instance().curSkillId;
+			_skin.btn_yinyong.visible = _state.skillId != LostSkillManager.instance().curSkillId;
 		}
 		
 		private function updataLevelEffect(content:Item_shuxing,level:int):void
@@ -99,7 +118,7 @@ package com.rpgGame.appModule.skill.lostskill
 			if(currentupdate!=null)
 				content.labelDisplay.text  = _data.q_desc.replace("$",currentupdate.q_value);
 			else
-				content.labelDisplay.text = "已是最高等级";
+				content.labelDisplay.text = NotifyCfgData.getNotifyTextByID(7009);
 		}
 		
 		private function canupLevel():Boolean
