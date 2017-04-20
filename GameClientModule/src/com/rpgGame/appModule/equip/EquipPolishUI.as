@@ -1,5 +1,7 @@
 package com.rpgGame.appModule.equip
 {
+	import com.game.engine3D.display.InterObject3D;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.ItemManager;
 	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
@@ -18,6 +20,8 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.appModule.common.itemRender.SkinItemRender;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.ui.AwdProgressBar;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.item.EquipPolishCfg;
@@ -97,6 +101,7 @@ package com.rpgGame.appModule.equip
 		private var currCfg:Q_equip_polish;
 		private var useListIds:Vector.<long>;
 		private var isToUp:Boolean;
+		private var _progressBar:AwdProgressBar;
 		
 		public function EquipPolishUI()
 		{
@@ -114,9 +119,11 @@ package com.rpgGame.appModule.equip
 			(_leftSkin.title1.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT9);
 			(_leftSkin.title2.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT2);
 			
+			_progressBar=new AwdProgressBar(_skin.progressBar,"ui_zuomotiao");
+			_skin.grp_jiacheng.addChild(_progressBar);
+			_skin.grp_jiacheng.addChild(_skin.lb_pro);
 			_goodsContainerTarget=new GoodsContainerPanel(_leftSkin.list1,ItemContainerID.POLIST_LIST,createItemRender);
 			_goodsContainerUse=new GoodsContainerPanel(_leftSkin.list2,ItemContainerID.POLIST_USE,createItemRender);
-			
 			selectedUse=new Vector.<ClientItemInfo>();
 			lvDatas=new Array();
 			for(var i:int=1;i<11;i++){
@@ -297,6 +304,10 @@ package com.rpgGame.appModule.equip
 			}
 			
 			var type:int=RoleEquipmentManager.equipIsWearing(targetEquipInfo)?0:1;
+			var p:Point=new Point(this._skin.btn_zuomo.x+this._skin.btn_zuomo.width/2,this._skin.btn_zuomo.y+this._skin.btn_zuomo.height/2);
+			p=this._skin.btn_zuomo_all.parent.localToGlobal(p);
+			p=this._skin.container.globalToLocal(p);
+			this.playInter3DAt(ClientConfig.getEffect("ui_tongyongdianji"),p.x,p.y,1,null,addComplete);
 			ItemSender.polishEquip(targetEquipInfo.itemInfo.itemId,type,useListIds,EquipOperateType.POLISH_NORMAL);
 		}
 		
@@ -342,18 +353,35 @@ package com.rpgGame.appModule.equip
 				useListIds.push(item.itemInfo.itemId);
 			}
 			
+			if(useListIds.length==0){
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4205));
+				return;
+			}
+			
 			useMon=addExp*perMon;
 			if(userMon<useMon||i==0){
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6014));
 				return;
 			}
 			
-			if(useListIds.length==0){
-				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4205));
-				return;
-			}
+			
+			var p:Point=new Point(this._skin.btn_zuomo_all.x+this._skin.btn_zuomo_all.width/2,this._skin.btn_zuomo_all.y+this._skin.btn_zuomo_all.height/2);
+			p=this._skin.btn_zuomo_all.parent.localToGlobal(p);
+			p=this._skin.container.globalToLocal(p);
+			this.playInter3DAt(ClientConfig.getEffect("ui_tongyongdianji"),p.x,p.y,1,onCompletePlay,addComplete);
 			var type:int=RoleEquipmentManager.equipIsWearing(targetEquipInfo)?0:1;
 			ItemSender.polishEquip(targetEquipInfo.itemInfo.itemId,type,useListIds,EquipOperateType.POLISH_ONEKEY);
+		}
+		
+		private function onCompletePlay(intes:InterObject3D,render:RenderUnit3D):void
+		{
+			render
+		}
+		
+		private function addComplete(render:RenderUnit3D):void
+		{
+//			render.speed=0.1;
+			render.play(-1);
 		}
 		
 		private function onTouchGrid( grid:DragDropItem ):void
@@ -459,8 +487,8 @@ package com.rpgGame.appModule.equip
 				_skin.lb_current.text=targetEquipInfo.polishLevel+LanguageConfig.getText(LangUI.UI_TEXT7);
 				_skin.lb_next.text=upCfg.q_equip_polish+LanguageConfig.getText(LangUI.UI_TEXT7);
 				
-				_skin.progressBar.value=currentExp;
-				_skin.progressBar.maximum=allExp;
+				_progressBar.maximum=allExp;
+				_progressBar.value=currentExp;
 				_skin.lb_pro.text=currentExp+"/"+allExp;
 				useMon=addExp*perMon;
 				userMon=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
@@ -476,7 +504,7 @@ package com.rpgGame.appModule.equip
 				_skin.lb_name.text="";
 				_skin.lb_dengji.text="";
 				_skin.lb_pro.text=_skin.lb_baifenbi.text="";
-				_skin.progressBar.value=0;
+				_progressBar.value=0;
 				_skin.arrow_up2.visible=_skin.lb_up2.visible=false;
 				_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),0);
 			}
@@ -797,7 +825,7 @@ package com.rpgGame.appModule.equip
 		private function isUse(info:ClientItemInfo):Boolean
 		{
 			var equip:EquipInfo=info as EquipInfo;
-			if(equip.qItem.q_polish_num!=0&&RoleEquipmentManager.equipIsWearing(equip)==false&&equip.polishLevel==0){//消耗获得的值不为0
+			if(equip.qItem.q_polish_num!=0&&RoleEquipmentManager.equipIsWearing(equip)==false&&equip.polishLevel==0&&equip.polishExp==0){//消耗获得的值不为0
 				return true;
 			}
 			return false;

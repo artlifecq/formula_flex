@@ -13,8 +13,8 @@ package com.rpgGame.app.view.icon
 	import feathers.controls.UIMovieClip;
 	import feathers.controls.text.Fontter;
 	
-	import org.mokylin.skin.mc.UIMovieClipQ_quality_cheng;
-	import org.mokylin.skin.mc.UIMovieClipQ_quality_zi;
+	import org.mokylin.skin.common.mc.UIMovieClipQ_quality_cheng;
+	import org.mokylin.skin.common.mc.UIMovieClipQ_quality_zi;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
@@ -106,7 +106,7 @@ package com.rpgGame.app.view.icon
 				_qualityImage = new UIAsset();
 			}
 			_qualityImage.styleName = ClientConfig.getQualityBg( _qualityId ,iconSize);
-			_qualityImage.visible=true;
+			_qualityImage.visible=true;			
 			
 			if(qualityID>Quality.YELLOW){
 				showQualityEft();
@@ -127,14 +127,15 @@ package com.rpgGame.app.view.icon
 				_qualityEft.removeChildren();
 			}
 			if(_qualityId==Quality.GREEN){
-				_qualityEft.styleClass = UIMovieClipQ_quality_cheng;
+				_qualityEft.styleClass = org.mokylin.skin.common.mc.UIMovieClipQ_quality_cheng;
 			}else{
-				_qualityEft.styleClass = UIMovieClipQ_quality_zi;
+				_qualityEft.styleClass = org.mokylin.skin.common.mc.UIMovieClipQ_quality_zi;
 			}
 			_qualityEft.play();
-			
-			_qualityEft.x=_iconSize>>1;
-			_qualityEft.y=_iconSize>>1;
+			_qualityEft.width=_iconSize;
+			_qualityEft.height=_iconSize;
+//			_qualityEft.x=_iconSize>>1;
+//			_qualityEft.y=_iconSize>>1;
 		}		
 		
 		/** 隐藏品质框 */		
@@ -489,6 +490,9 @@ package com.rpgGame.app.view.icon
 			clearLockAsset();
 			if(_qualityEft){
 				_qualityEft.removeFromParent();
+				_qualityEft.stop();
+				_qualityEft.dispose();
+				_qualityEft=null;
 			}
 			super.clear();
 		}

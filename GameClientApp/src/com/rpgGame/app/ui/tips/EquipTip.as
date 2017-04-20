@@ -230,9 +230,13 @@ package com.rpgGame.app.ui.tips
 				}
 				name=HtmlTextUtil.getTextColor(0x8B8D7B,name+":");
 				value=HtmlTextUtil.getTextColor(0xCFC6AE,v+per);
-				var sten:int=map2.getValue(id);
+				var sten:Number=map2.getValue(id);
 				if(sten!=0){
-					value+=HtmlTextUtil.getTextColor(0x5CB006,"    (强化+"+sten+")");
+					if(per=="%"){
+						sten/=100;
+					}
+						
+					value+=HtmlTextUtil.getTextColor(0x5CB006,"    (强化+"+sten+per+")");
 				}
 				label=createLabel(name,value);
 //				if(num%2!=0){

@@ -17,12 +17,14 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.appModule.common.itemRender.SkinItemRender;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.ui.AwdProgressBar;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
-	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
 	import com.rpgGame.coreData.clientConfig.Q_equip_strength;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -109,6 +111,7 @@ package com.rpgGame.appModule.equip
 
 		private var userMon:int;
 		private var isToUp:Boolean;
+		private var _progressBar:AwdProgressBar;
 		public function EquipIntensifyUI()
 		{
 			_skin=new Zhuangbei_QianghuaSkin();
@@ -122,6 +125,10 @@ package com.rpgGame.appModule.equip
 			
 			(_leftSkin.title1.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT1);
 			(_leftSkin.title2.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT2);
+			
+			_progressBar=new AwdProgressBar(_skin.progressBar,"ui_zuomotiao");
+			_skin.grp_pro.addChild(_progressBar);
+			_skin.grp_pro.addChild(_skin.lb_pro);
 			
 			_goodsContainerTarget=new GoodsContainerPanel(_leftSkin.list1,ItemContainerID.INTENSIFY_LIST,createItemRender);
 			_goodsContainerUse=new GoodsContainerPanel(_leftSkin.list2,ItemContainerID.INTENSIFY_USE,createItemRender);
@@ -423,8 +430,8 @@ package com.rpgGame.appModule.equip
 				}else{
 					updateAttShow(currCfg);
 				}
-				_skin.progressBar.value=currentExp;
-				_skin.progressBar.maximum=allExp;
+				_progressBar.value=currentExp;
+				_progressBar.maximum=allExp;
 				_skin.lb_pro.text=currentExp+"/"+allExp;
 				useMon=addExp*perMon;
 				userMon=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
@@ -443,7 +450,7 @@ package com.rpgGame.appModule.equip
 					labelUp.visible=false;
 				}
 				_skin.lb_pro.text="";
-				_skin.progressBar.value=0;
+				_progressBar.value=0;
 				_skin.lb_current.text=_skin.lb_up.text="";
 				
 				if(_skin.cmb_dengjie.alpha==1&&!tween){
@@ -598,6 +605,10 @@ package com.rpgGame.appModule.equip
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4205));
 				return;
 			}
+			
+			var p:Point=new Point(this._stage.mouseX,this._stage.mouseY);
+			p=this.globalToLocal(p);
+			this.playInter3DAt(ClientConfig.getEffect("ui_tongyongdianji"),p.x,p.y,1);
 			var type:int=RoleEquipmentManager.equipIsWearing(targetEquipInfo)?0:1;
 			ItemSender.strengthEquip(targetEquipInfo.itemInfo.itemId,type,useListIds,EquipOperateType.STRENGTH_ONEKEY);
 		}
@@ -773,6 +784,9 @@ package com.rpgGame.appModule.equip
 				return;
 			}
 			
+			var p:Point=new Point(this._stage.mouseX,this._stage.mouseY);
+			p=this.globalToLocal(p);
+			this.playInter3DAt(ClientConfig.getEffect("ui_tongyongdianji"),p.x,p.y,1);
 			var type:int=RoleEquipmentManager.equipIsWearing(targetEquipInfo)?0:1;
 			ItemSender.strengthEquip(targetEquipInfo.itemInfo.itemId,type,useListIds,EquipOperateType.STRENGTH_NORMAL);
 		}
@@ -881,7 +895,7 @@ package com.rpgGame.appModule.equip
 		private function isUse(info:ClientItemInfo):Boolean
 		{
 			var equip:EquipInfo=info as EquipInfo;
-			if(equip.qItem.q_strengthen_num!=0&&RoleEquipmentManager.equipIsWearing(equip)==false&&equip.strengthLevel==0){//消耗获得的值不为0
+			if(equip.qItem.q_strengthen_num!=0&&RoleEquipmentManager.equipIsWearing(equip)==false&&equip.strengthLevel==0&&equip.strengthExp==0){//消耗获得的值不为0
 				return true;
 			}
 			return false;

@@ -59,6 +59,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 
 		public var progressBar:feathers.controls.ProgressBar;
 
+		public var up_title:feathers.controls.Label;
+
 		public var use0:feathers.controls.UIAsset;
 
 		public var use1:feathers.controls.UIAsset;
@@ -84,7 +86,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [left_i(),__Zuomo_Skin_UIAsset3_i(),btn_shuoming_i(),lb_name_i(),btn_zuomo_i(),use_grp_i(),grp_jiacheng_i(),cmb_pinzhi_i(),cmb_dengjie_i(),btn_zuomo_all_i(),__Zuomo_Skin_Label4_i(),__Zuomo_Skin_Label5_i(),__Zuomo_Skin_UIAsset8_i(),lb_dengji_i()];
+			this.elementsContent = [left_i(),__Zuomo_Skin_UIAsset3_i(),btn_shuoming_i(),lb_name_i(),btn_zuomo_i(),use_grp_i(),grp_jiacheng_i(),cmb_pinzhi_i(),cmb_dengjie_i(),btn_zuomo_all_i(),__Zuomo_Skin_Label3_i(),__Zuomo_Skin_Label4_i(),__Zuomo_Skin_UIAsset8_i(),lb_dengji_i()];
 			
 			states = {
 			};
@@ -120,17 +122,6 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 		private function __Zuomo_Skin_Label3_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "装备基础属性提升：";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 145;
-			temp.y = 59;
-			return temp;
-		}
-
-		private function __Zuomo_Skin_Label4_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.fontSize = 12;
 			temp.text = "请放入消耗材料";
 			temp.color = 0xCFC6AE;
@@ -140,7 +131,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			return temp;
 		}
 
-		private function __Zuomo_Skin_Label5_i():feathers.controls.Label
+		private function __Zuomo_Skin_Label4_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.fontSize = 12;
@@ -213,7 +204,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			arrow_up2 = temp;
 			temp.name = "arrow_up2";
 			temp.styleName = "ui/common/tubiao/tu_up.png";
-			temp.x = 296;
+			temp.x = 267;
 			temp.y = 61;
 			return temp;
 		}
@@ -296,7 +287,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.name = "grp_jiacheng";
 			temp.x = 401;
 			temp.y = 377;
-			temp.elementsContent = [__Zuomo_Skin_UIAsset4_i(),__Zuomo_Skin_UIAsset5_i(),lb_current_i(),lb_next_i(),__Zuomo_Skin_UIAsset6_i(),progressBar_i(),lb_pro_i(),__Zuomo_Skin_Label1_i(),__Zuomo_Skin_Label2_i(),__Zuomo_Skin_Label3_i(),lb_baifenbi_i(),lb_up2_i(),arrow_up2_i(),__Zuomo_Skin_UIAsset7_i()];
+			temp.elementsContent = [__Zuomo_Skin_UIAsset4_i(),__Zuomo_Skin_UIAsset5_i(),lb_current_i(),lb_next_i(),__Zuomo_Skin_UIAsset6_i(),progressBar_i(),lb_pro_i(),__Zuomo_Skin_Label1_i(),__Zuomo_Skin_Label2_i(),up_title_i(),lb_baifenbi_i(),lb_up2_i(),arrow_up2_i(),__Zuomo_Skin_UIAsset7_i()];
 			return temp;
 		}
 
@@ -309,7 +300,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 22;
-			temp.x = 270;
+			temp.x = 243;
 			temp.y = 59;
 			return temp;
 		}
@@ -321,10 +312,11 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.name = "lb_current";
 			temp.bold = true;
 			temp.text = "等级1";
+			temp.textAlign = "center";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 48;
-			temp.x = 62;
+			temp.width = 53;
+			temp.x = 57;
 			temp.y = 32;
 			return temp;
 		}
@@ -366,11 +358,12 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.name = "lb_next";
 			temp.bold = true;
 			temp.text = "等级2";
+			temp.textAlign = "center";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 48;
-			temp.x = 395;
-			temp.y = 32;
+			temp.width = 53;
+			temp.x = 391;
+			temp.y = 31;
 			return temp;
 		}
 
@@ -397,7 +390,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.text = "1%";
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 305;
+			temp.x = 282;
 			temp.y = 59;
 			return temp;
 		}
@@ -421,11 +414,25 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
 			progressBar = temp;
 			temp.name = "progressBar";
+			temp.height = 14;
 			temp.styleClass = org.mokylin.skin.component.progress.pro_jindu_Skin;
 			temp.value = 100;
 			temp.width = 209;
 			temp.x = 147;
 			temp.y = 34;
+			return temp;
+		}
+
+		private function up_title_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			up_title = temp;
+			temp.name = "up_title";
+			temp.text = "装备属性提升：";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 145;
+			temp.y = 59;
 			return temp;
 		}
 

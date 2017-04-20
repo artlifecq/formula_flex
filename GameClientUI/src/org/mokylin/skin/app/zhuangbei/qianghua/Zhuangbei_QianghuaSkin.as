@@ -226,7 +226,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			btn_qianghua_all = temp;
 			temp.name = "btn_qianghua_all";
 			temp.styleClass = org.mokylin.skin.app.zhuangbei.qianghua.button.ButtonYijianqianghua;
-			temp.x = 659;
+			temp.x = 675;
 			temp.y = 474;
 			return temp;
 		}
@@ -268,7 +268,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 70;
-			temp.x = 405;
+			temp.x = 413;
 			temp.y = 479;
 			return temp;
 		}
@@ -284,8 +284,8 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.textAlign = "left";
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 171;
-			temp.x = 475;
+			temp.width = 155;
+			temp.x = 485;
 			temp.y = 479;
 			return temp;
 		}
@@ -297,7 +297,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.name = "equip_name";
 			temp.text = "装备名字";
 			temp.textAlign = "center";
-			temp.color = 0xE8C958;
+			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 138;
 			temp.x = 583;
@@ -397,12 +397,13 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
 			progressBar = temp;
 			temp.name = "progressBar";
+			temp.height = 14;
 			temp.maximum = 100;
 			temp.minimum = 0;
 			temp.styleClass = org.mokylin.skin.component.progress.pro_jindu_Skin;
-			temp.value = 100;
-			temp.width = 210;
-			temp.x = 80;
+			temp.value = 40;
+			temp.width = 209;
+			temp.x = 81;
 			temp.y = 10;
 			return temp;
 		}
