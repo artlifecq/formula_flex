@@ -299,7 +299,12 @@ package com.rpgGame.appModule.equip
 		 */
 		private function addIntensifyUseItem(gridInfo:GridInfo):void
 		{
-			if(!targetEquipInfo||selectedUse.length==6){//没选强化准备
+			if(!targetEquipInfo){//没选强化准备
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4204));
+				return;
+			}
+			if(selectedUse.length==6){
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6016));
 				return;
 			}
 			var itemInfo:ClientItemInfo=gridInfo.data as ClientItemInfo;
@@ -574,7 +579,7 @@ package com.rpgGame.appModule.equip
 			for each(var info:GridInfo in datas){
 				if(info.data){
 					item=info.data as ClientItemInfo;
-					if(item.qItem.q_levelnum<=lv&&item.quality<=quality&&item!=targetEquipInfo){//符合阶数和品质筛选
+					if(item.qItem.q_levelnum<=lv&&item.quality<=quality&&item!=targetEquipInfo&&item["strengthLevel"]==0&&item["strengthExp"]==0){//符合阶数和品质筛选
 						result.push(item);
 					}
 				}
@@ -895,7 +900,7 @@ package com.rpgGame.appModule.equip
 		private function isUse(info:ClientItemInfo):Boolean
 		{
 			var equip:EquipInfo=info as EquipInfo;
-			if(equip.qItem.q_strengthen_num!=0&&RoleEquipmentManager.equipIsWearing(equip)==false&&equip.strengthLevel==0&&equip.strengthExp==0){//消耗获得的值不为0
+			if(equip.qItem.q_strengthen_num!=0&&RoleEquipmentManager.equipIsWearing(equip)==false){//消耗获得的值不为0
 				return true;
 			}
 			return false;

@@ -199,6 +199,9 @@ package com.rpgGame.appModule.common
 			var gridInfo:GridInfo = dataProvider.getItemAt(index) as GridInfo;
 			if(!gridInfo)
 				return;
+			if(gridInfo.data==itemInfo){
+				return;
+			}
 			gridInfo.data = itemInfo;
 			gridInfo.isEnabled = _mgr?_mgr.isEnabled(index):true;
 			gridInfo.isUnlock =  _mgr?_mgr.isUnlock(index):true;

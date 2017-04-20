@@ -1,6 +1,5 @@
 package com.rpgGame.appModule.equip
 {
-	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.ItemManager;
@@ -102,6 +101,7 @@ package com.rpgGame.appModule.equip
 		private var useListIds:Vector.<long>;
 		private var isToUp:Boolean;
 		private var _progressBar:AwdProgressBar;
+		private var isLockRefresh:Boolean;
 		
 		public function EquipPolishUI()
 		{
@@ -303,11 +303,13 @@ package com.rpgGame.appModule.equip
 				return;
 			}
 			
-			var type:int=RoleEquipmentManager.equipIsWearing(targetEquipInfo)?0:1;
 			var p:Point=new Point(this._skin.btn_zuomo.x+this._skin.btn_zuomo.width/2,this._skin.btn_zuomo.y+this._skin.btn_zuomo.height/2);
 			p=this._skin.btn_zuomo_all.parent.localToGlobal(p);
 			p=this._skin.container.globalToLocal(p);
 			this.playInter3DAt(ClientConfig.getEffect("ui_tongyongdianji"),p.x,p.y,1,null,addComplete);
+			
+			
+			var type:int=RoleEquipmentManager.equipIsWearing(targetEquipInfo)?0:1;
 			ItemSender.polishEquip(targetEquipInfo.itemInfo.itemId,type,useListIds,EquipOperateType.POLISH_NORMAL);
 		}
 		
@@ -315,7 +317,7 @@ package com.rpgGame.appModule.equip
 		{
 			cancelAllUse();
 			if(!targetEquipInfo){
-				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6012));
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6016));
 				return;
 			}
 			
@@ -327,7 +329,7 @@ package com.rpgGame.appModule.equip
 			for each(var info:GridInfo in datas){
 				if(info.data){
 					item=info.data as ClientItemInfo;
-					if(item.qItem.q_levelnum<=lv&&item.quality<=quality&&item!=targetEquipInfo){//符合阶数和品质筛选
+					if(item.qItem.q_levelnum<=lv&&item.quality<=quality&&item!=targetEquipInfo&&item["polishLevel"]==0&&item["polishExp"]==0){//符合阶数和品质筛选
 						result.push(item);
 					}
 				}
@@ -368,20 +370,15 @@ package com.rpgGame.appModule.equip
 			var p:Point=new Point(this._skin.btn_zuomo_all.x+this._skin.btn_zuomo_all.width/2,this._skin.btn_zuomo_all.y+this._skin.btn_zuomo_all.height/2);
 			p=this._skin.btn_zuomo_all.parent.localToGlobal(p);
 			p=this._skin.container.globalToLocal(p);
-			this.playInter3DAt(ClientConfig.getEffect("ui_tongyongdianji"),p.x,p.y,1,onCompletePlay,addComplete);
+			this.playInter3DAt(ClientConfig.getEffect("ui_tongyongdianji"),p.x,p.y,1,null,addComplete);
 			var type:int=RoleEquipmentManager.equipIsWearing(targetEquipInfo)?0:1;
+			isLockRefresh=true;
 			ItemSender.polishEquip(targetEquipInfo.itemInfo.itemId,type,useListIds,EquipOperateType.POLISH_ONEKEY);
-		}
-		
-		private function onCompletePlay(intes:InterObject3D,render:RenderUnit3D):void
-		{
-			render
 		}
 		
 		private function addComplete(render:RenderUnit3D):void
 		{
-//			render.speed=0.1;
-			render.play(-1);
+			render.play(0);
 		}
 		
 		private function onTouchGrid( grid:DragDropItem ):void
@@ -399,7 +396,12 @@ package com.rpgGame.appModule.equip
 		
 		private function addUseItem(gridInfo:GridInfo):void
 		{
-			if(!targetEquipInfo||selectedUse.length==6){
+			if(!targetEquipInfo){//没选强化准备
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6012));
+				return;
+			}
+			if(selectedUse.length==6){
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4204));
 				return;
 			}
 			
@@ -620,16 +622,10 @@ package com.rpgGame.appModule.equip
 			
 			EventManager.addEvent(ItemEvent.ITEM_ADD,onFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
-			EventManager.addEvent(ItemEvent.ITEM_CHANG,onChangeFreshItems);
+			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
 		}
 		
-		private function onChangeFreshItems(info:ClientItemInfo=null):void
-		{
-			if((info.containerID==ItemContainerID.Role||info.containerID==ItemContainerID.BackPack)&&(info.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||info.type==GoodsType.EQUIPMENT2)){
-				ItemManager.getBackEquip(initItem);
-			}
-		}
 		
 		override public function hide():void
 		{
@@ -651,7 +647,7 @@ package com.rpgGame.appModule.equip
 			
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
-			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onChangeFreshItems);
+			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
 		}
 		
@@ -670,6 +666,10 @@ package com.rpgGame.appModule.equip
 		
 		private function onFreshItems(info:ClientItemInfo=null):void
 		{
+			if(isLockRefresh){
+				return;
+			}
+				
 			if((info.containerID==ItemContainerID.Role||info.containerID==ItemContainerID.BackPack)&&(info.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||info.type==GoodsType.EQUIPMENT2)){
 				ItemManager.getBackEquip(initItem);
 			}
@@ -696,7 +696,8 @@ package com.rpgGame.appModule.equip
 			}
 			addExp=0;
 			isToUp=false;
-			updateView();
+			isLockRefresh=false;
+			refresh();
 		}
 		
 		private function onTab(e:Event):void
@@ -763,7 +764,6 @@ package com.rpgGame.appModule.equip
 		{
 			var allEquips:Array=ItemManager.getAllEquipDatas();
 			var num:int=allEquips.length;
-			
 			targetEquips=getPolishEquips(allEquips);
 			num=targetEquips.length;
 			num=num>MIN_GRID?num:MIN_GRID;
@@ -774,7 +774,7 @@ package com.rpgGame.appModule.equip
 			num=num>MIN_GRID?num:MIN_GRID;
 			_goodsContainerUse.setGridsCount(num,false);
 			_goodsContainerUse.refleshGridsByDatas(useEquips);
-			
+		
 			selectedUse.length=0;
 			refreshUseEquipGrid();
 			
@@ -800,7 +800,6 @@ package com.rpgGame.appModule.equip
 					TouchableUtil.gray(targetGrid);
 				}
 			}
-			
 			updateView();
 		}
 		
@@ -825,7 +824,7 @@ package com.rpgGame.appModule.equip
 		private function isUse(info:ClientItemInfo):Boolean
 		{
 			var equip:EquipInfo=info as EquipInfo;
-			if(equip.qItem.q_polish_num!=0&&RoleEquipmentManager.equipIsWearing(equip)==false&&equip.polishLevel==0&&equip.polishExp==0){//消耗获得的值不为0
+			if(equip.qItem.q_polish_num!=0&&RoleEquipmentManager.equipIsWearing(equip)==false){//消耗获得的值不为0
 				return true;
 			}
 			return false;
