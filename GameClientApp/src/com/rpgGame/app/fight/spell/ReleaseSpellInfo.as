@@ -256,7 +256,7 @@ package com.rpgGame.app.fight.spell
 			readSpellEffectData(_spellData.q_spell_effect);
 		}
 		
-		private function readSpellEffectData(spellEffectID:int):void
+		public function readSpellEffectData(spellEffectID:int):void
 		{
 			_spellEffectID = spellEffectID;
 			_spellEffectData = SpellEffectDataManager.getData(_spellEffectID);
@@ -655,6 +655,10 @@ package com.rpgGame.app.fight.spell
 		{
 			return _atkor;
 		}
+        
+        public function set atkor(value : SceneRole) : void {
+            this._atkor = value;
+        }
 
 		public function get atkMotion() : String
 		{
@@ -775,11 +779,19 @@ package com.rpgGame.app.fight.spell
 		{
 			return _flyTargetPosList;
 		}
+        
+        public function set flyTargetPosList(value : Vector.<Position>) : void {
+            this._flyTargetPosList = value;
+        }
 
 		public function get flyTargets():Vector.<SceneRole>
 		{
 			return _flyTargets;
 		}
+        
+        public function set flyTargets(value : Vector.<SceneRole>) : void {
+            this._flyTargets = value;
+        }
 
 		public function get spellData():Q_skill_model
 		{
