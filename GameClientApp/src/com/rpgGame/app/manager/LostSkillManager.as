@@ -8,6 +8,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
 	import com.rpgGame.netData.lostSkill.message.CSActivitSkillMessage;
+	import com.rpgGame.netData.lostSkill.message.CSChangeSkillMessage;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
@@ -82,6 +83,21 @@ package com.rpgGame.app.manager
 			SocketConnection.send(msg);
 		}
 		
+		public function changeState(state:SkillStateInfo):void
+		{
+			if(state==null)
+			{
+				return ;
+			}
+			if(state.skillId == this.curSkillId)
+			{
+				return ;
+			}
+			
+			var msg:CSChangeSkillMessage = new CSChangeSkillMessage();
+			msg.skillId = state.skillId;
+			SocketConnection.send(msg);
+		}
 		
 		private static var _instance:LostSkillManager;
 		public static function instance():LostSkillManager

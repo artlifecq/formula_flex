@@ -24,6 +24,7 @@ package com.rpgGame.appModule.skill.lostskill
 		
 		private function initView():void
 		{
+			_skin.icons.styleName = "ui/app/wuxue/juexue/Icon/"+_data.q_icon+".png";
 			_skin.qiyong.touchable = false;
 			_skin.lb_name.touchable = false;
 			_skin.lb_weijihuo.touchable = false;

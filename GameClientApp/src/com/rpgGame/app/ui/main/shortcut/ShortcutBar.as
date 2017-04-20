@@ -88,6 +88,7 @@ package com.rpgGame.app.ui.main.shortcut {
 			
 			initExp();
 			addSheHuiTab();
+			LostSkillEffect.instance().bindBtn = _skin.btn_juexue;
 			
 			
 			if (!ClientConfig.isBanShu)

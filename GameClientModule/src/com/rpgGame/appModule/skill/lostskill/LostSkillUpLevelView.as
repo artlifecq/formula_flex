@@ -42,25 +42,14 @@ package com.rpgGame.appModule.skill.lostskill
 		{
 			var content:Item_shuxing = _skin.currentLevel.skin as Item_shuxing;
 			content.lb_name.text = LanguageConfig.getText(LangUI_2.Lostskill_title1);
-			content= _skin.nexttLevel.skin as Item_shuxing;
+			content= _skin.nexttLevel.skin as Item_shuxing; 
 			content.lb_name.text = LanguageConfig.getText(LangUI_2.Lostskill_title2);
 			_skin.btn_shengji.addEventListener(Event.TRIGGERED,uplevelTrigeredHandler);
 			_skin.btn_yinyong.addEventListener(Event.TRIGGERED,changeStateHandler);
 		}
 		private function changeStateHandler(e:Event):void
 		{
-			if(_state==null)
-			{
-				return ;
-			}
-			if(_state.skillId == LostSkillManager.instance().curSkillId)
-			{
-				return ;
-			}
-			
-			var msg:CSChangeSkillMessage = new CSChangeSkillMessage();
-			msg.skillId = _state.skillId;
-			SocketConnection.send(msg);
+			LostSkillManager.instance().changeState(_state);
 		}
 		private function uplevelTrigeredHandler(e:Event):void
 		{

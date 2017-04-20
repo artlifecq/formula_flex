@@ -16,6 +16,8 @@ package org.mokylin.skin.mainui.juexue
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var bg:feathers.controls.UIAsset;
+
 		public var bg1:feathers.controls.UIAsset;
 
 		public var bg2:feathers.controls.UIAsset;
@@ -68,15 +70,6 @@ package org.mokylin.skin.mainui.juexue
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __juexu_Skin_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/juexue/shanxing.png";
-			temp.x = 0;
-			temp.y = 3;
-			return temp;
-		}
-
 		private function bg1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -143,6 +136,17 @@ package org.mokylin.skin.mainui.juexue
 			return temp;
 		}
 
+		private function bg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg = temp;
+			temp.name = "bg";
+			temp.styleName = "ui/mainui/juexue/shanxing.png";
+			temp.x = 0;
+			temp.y = 3;
+			return temp;
+		}
+
 		private function bg_jineng_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -159,7 +163,6 @@ package org.mokylin.skin.mainui.juexue
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_jineng1 = temp;
 			temp.name = "btn_jineng1";
-			temp.label = "1";
 			temp.styleClass = org.mokylin.skin.mainui.juexue.button.ButtonJuexue_bt;
 			temp.x = 0;
 			temp.y = 53;
@@ -171,7 +174,6 @@ package org.mokylin.skin.mainui.juexue
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_jineng2 = temp;
 			temp.name = "btn_jineng2";
-			temp.label = "2";
 			temp.styleClass = org.mokylin.skin.mainui.juexue.button.ButtonJuexue_bt;
 			temp.x = 37;
 			temp.y = 18;
@@ -183,7 +185,6 @@ package org.mokylin.skin.mainui.juexue
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_jineng3 = temp;
 			temp.name = "btn_jineng3";
-			temp.label = "3";
 			temp.styleClass = org.mokylin.skin.mainui.juexue.button.ButtonJuexue_bt;
 			temp.x = 86;
 			temp.y = 0;
@@ -195,7 +196,6 @@ package org.mokylin.skin.mainui.juexue
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_jineng4 = temp;
 			temp.name = "btn_jineng4";
-			temp.label = "4";
 			temp.styleClass = org.mokylin.skin.mainui.juexue.button.ButtonJuexue_bt;
 			temp.x = 136;
 			temp.y = 0;
@@ -207,7 +207,6 @@ package org.mokylin.skin.mainui.juexue
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_jineng5 = temp;
 			temp.name = "btn_jineng5";
-			temp.label = "5";
 			temp.styleClass = org.mokylin.skin.mainui.juexue.button.ButtonJuexue_bt;
 			temp.x = 183;
 			temp.y = 17;
@@ -219,7 +218,6 @@ package org.mokylin.skin.mainui.juexue
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_jineng6 = temp;
 			temp.name = "btn_jineng6";
-			temp.label = "6";
 			temp.styleClass = org.mokylin.skin.mainui.juexue.button.ButtonJuexue_bt;
 			temp.x = 220;
 			temp.y = 53;
@@ -244,7 +242,7 @@ package org.mokylin.skin.mainui.juexue
 			temp.name = "juexue";
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [__juexu_Skin_UIAsset1_i(),bg_jineng_i(),btn_jineng_i()];
+			temp.elementsContent = [bg_i(),bg_jineng_i(),btn_jineng_i()];
 			return temp;
 		}
 

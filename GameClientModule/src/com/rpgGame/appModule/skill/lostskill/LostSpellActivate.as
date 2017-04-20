@@ -16,7 +16,7 @@ package com.rpgGame.appModule.skill.lostskill
 
 	public class LostSpellActivate
 	{
-		private var _skin:Juexue_jihuo
+		private var _skin:Juexue_jihuo;
 		public function LostSpellActivate(skin:Juexue_jihuo):void
 		{
 			_skin = skin;
