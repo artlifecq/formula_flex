@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.task
 {
+
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.sender.TaskSender;
@@ -16,6 +17,7 @@ package com.rpgGame.appModule.task
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.task.bean.TaskInfo;
+
 	
 	import feathers.controls.Button;
 	import feathers.controls.Label;
@@ -23,8 +25,10 @@ package com.rpgGame.appModule.task
 	
 	import org.mokylin.skin.mainui.renwu.Zhuxian_Renwu;
 	
+
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
+
 	
 	public class TaskLeadPanel  extends SkinUIPanel
 	{
@@ -36,17 +40,19 @@ package com.rpgGame.appModule.task
 		private var timerLabel:Label;
 		private var okBut:Button;
 		private var icoBgList:Vector.<UIAsset>;
+
 		private var icoList:Vector.<IconCDFace>;
 		private var timer:GameTimer;
 		private var currtimer:int;
 		private const TIMERDATA:int=15//倒计时时间
 		
+
 		public function TaskLeadPanel()
 		{
 			_skin=new Zhuxian_Renwu();
 			super(_skin);
+
 			init();
-			
 		}
 		
 		private function init():void
@@ -64,11 +70,13 @@ package com.rpgGame.appModule.task
 			icoBgList.push(_skin.ioc_3);
 			icoBgList.push(_skin.ioc_4);
 			icoBgList.push(_skin.ioc_5);
+
 			icoList=new Vector.<IconCDFace>();
 			var i:int;
 			for(i=0;i<icoBgList.length;i++)
 			{
 				var ico:IconCDFace=new IconCDFace(IcoSizeEnum.ICON_42);
+
 				ico.x=icoBgList[i].x+6;
 				ico.y=icoBgList[i].y+6;
 				ico.visible=false;
@@ -110,9 +118,7 @@ package com.rpgGame.appModule.task
 		{
 			super.show(data, openTable, parentContiner);
 			setView();
-			timeInit()
-			
-			
+			timeInit()		
 		}
 		override public function hide():void 
 		{
@@ -231,6 +237,5 @@ package com.rpgGame.appModule.task
 				
 			}
 		}
-		
 	}
 }

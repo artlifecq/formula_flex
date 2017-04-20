@@ -1,36 +1,20 @@
 package com.rpgGame.coreData.clientConfig
-	
 {
-	
 	import flash.net.registerClassAlias;
-	
 	import org.client.mainCore.ds.HashMap;
-	
 	/**
-	 
-	 * 
-	 
-	 *  根据模块config 文件设置自动生成的代码
-	 
-	 *	
-	 
-	 * 【**不可手动修改此类**】，
-	 
-	 *	
-	 
-	 * 【任何修改都将被生成工具覆盖，如需修改请直接修改具体的config文件】
-	 
-	 * @author NEIL
-	 
-	 */
-	
+	* 
+	*  根据模块config 文件设置自动生成的代码
+	*	
+	* 【**不可手动修改此类**】，
+	*	
+	* 【任何修改都将被生成工具覆盖，如需修改请直接修改具体的config文件】
+	* @author NEIL
+	*/
 	public class ConfigClassRegister
-		
 	{
-		
 		private static var _classMap:HashMap = new HashMap();
-		
-		/**  名称备注	资源路径#资源路径	动画名称#动画名称	碰撞隐藏节点#碰撞隐藏节点，用;分割多个节点	消散时间#消散时间	前轴围绕半径#前轴围绕半径	前轴围绕角速度#前轴围绕角速度（度/秒）	收敛次数#收敛次数	围绕半径#围绕半径	围绕角速度#围绕角速度（度/秒） */
+				/**  名称备注	资源路径#资源路径	动画名称#动画名称	碰撞隐藏节点#碰撞隐藏节点，用;分割多个节点	消散时间#消散时间	前轴围绕半径#前轴围绕半径	前轴围绕角速度#前轴围绕角速度（度/秒）	收敛次数#收敛次数	围绕半径#围绕半径	围绕角速度#围绕角速度（度/秒） */
 		public static const EffectAnimation:String = "data.animat.EffectAnimation";
 		/**  客户端区域数据			 */
 		public static const ClientArea:String = "data.ClientArea";
@@ -58,7 +42,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const GmInfo:String = "data.GmInfo";
 		/**  广播，提示语				 */
 		public static const HintInfo:String = "data.HintInfo";
-		/**  每一种提示类型的配置				宽度	高度	最大宽度	项目宽度	位置X	位置Y																				 */
+		/**  消息提示类型配置表																													 */
 		public static const HintTypeSetInfo:String = "data.HintTypeSetInfo";
 		/**  区域数据库					 */
 		public static const Q_area:String = "data.map.Q_area";
@@ -92,7 +76,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const HeroModel:String = "data.model.HeroModel";
 		/**  坐骑模型表	功能名称	动画资源名称 */
 		public static const MountModel:String = "data.model.MountModel";
-		/**  怪物列表																																																															 */
+		/**  怪物列表																																																																 */
 		public static const Q_monster:String = "data.monster.Q_monster";
 		/**  NPC配置数据库																																																 */
 		public static const Q_npc:String = "data.monster.Q_npc";
@@ -110,6 +94,10 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_equip_polish:String = "data.Q_equip_polish";
 		/**  强化配置表						 */
 		public static const Q_equip_strength:String = "data.Q_equip_strength";
+		/**  					 */
+		public static const Q_equip_wash:String = "data.Q_equip_wash";
+		/**  				 */
+		public static const Q_equip_wash_attr:String = "data.Q_equip_wash_attr";
 		/**  战魂升级数据						 */
 		public static const Q_fightsoul:String = "data.Q_fightsoul";
 		/**  战魂模型数据		 */
@@ -122,14 +110,20 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_hecheng:String = "data.Q_hecheng";
 		/**  物品基本信息数据库																																																																																				 */
 		public static const Q_item:String = "data.Q_item";
-		/**  任务表(所有任务都这里)																																								 */
+		/**  绝学开放表							 */
+		public static const Q_lostskill_open:String = "data.Q_lostskill_open";
+		/**  绝学升级表		 */
+		public static const Q_lostskill_up:String = "data.Q_lostskill_up";
+		/**  经脉冲穴数据库																 */
+		public static const Q_meridian:String = "data.Q_meridian";
+		/**  任务表(所有任务都这里)																																										 */
 		public static const Q_mission_base:String = "data.Q_mission_base";
 		/**  任务奖励配置表	 */
 		public static const Q_mission_reword:String = "data.Q_mission_reword";
 		/**  任务对话配置表(1-20000为主线任务对应的对话id，20001-30000是支线任务对话id)			 */
 		public static const Q_mission_segment:String = "data.Q_mission_segment";
 		/**  通知列表			 */
-		public static const Q_notify:String = "data.Q_notify"
+		public static const Q_notify:String = "data.Q_notify";
 		/**  阵营关系				 */
 		public static const Q_relation:String = "data.Q_relation";
 		/**  tipsid	标题	描述 */
@@ -152,7 +146,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Attach:String = "data.spell.Attach";
 		/**  地面特效			 */
 		public static const Attach_effect:String = "data.spell.Attach_effect";
-		/**  BUFF效果配置数据表																																								 */
+		/**  BUFF效果配置数据表																																									 */
 		public static const Q_buff:String = "data.spell.Q_buff";
 		/**  公共CD表	 */
 		public static const Q_GCD:String = "data.spell.Q_GCD";
@@ -168,12 +162,9 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_summon:String = "data.spell.Q_summon";
 		/**  属性的名字（针对不同的地方可以有不同的配置）	 */
 		public static const SpriteStatNameInfo:String = "data.SpriteStatNameInfo";
-		
-		
+
 		public static function setup():void
-			
 		{
-			
 			regClass("data.animat.EffectAnimation", com.rpgGame.coreData.clientConfig.EffectAnimation);
 			regClass("data.ClientArea", com.rpgGame.coreData.clientConfig.ClientArea);
 			regClass("data.ClientBuff", com.rpgGame.coreData.clientConfig.ClientBuff);
@@ -212,12 +203,19 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_att_transfer", com.rpgGame.coreData.clientConfig.Q_att_transfer);
 			regClass("data.Q_att_values", com.rpgGame.coreData.clientConfig.Q_att_values);
 			regClass("data.Q_die", com.rpgGame.coreData.clientConfig.Q_die);
+			regClass("data.Q_equip_polish", com.rpgGame.coreData.clientConfig.Q_equip_polish);
 			regClass("data.Q_equip_strength", com.rpgGame.coreData.clientConfig.Q_equip_strength);
+			regClass("data.Q_equip_wash", com.rpgGame.coreData.clientConfig.Q_equip_wash);
+			regClass("data.Q_equip_wash_attr", com.rpgGame.coreData.clientConfig.Q_equip_wash_attr);
 			regClass("data.Q_fightsoul", com.rpgGame.coreData.clientConfig.Q_fightsoul);
 			regClass("data.Q_fightsoul_mode", com.rpgGame.coreData.clientConfig.Q_fightsoul_mode);
 			regClass("data.Q_fightsoul_path", com.rpgGame.coreData.clientConfig.Q_fightsoul_path);
 			regClass("data.Q_global", com.rpgGame.coreData.clientConfig.Q_global);
+			regClass("data.Q_hecheng", com.rpgGame.coreData.clientConfig.Q_hecheng);
 			regClass("data.Q_item", com.rpgGame.coreData.clientConfig.Q_item);
+			regClass("data.Q_lostskill_open", com.rpgGame.coreData.clientConfig.Q_lostskill_open);
+			regClass("data.Q_lostskill_up", com.rpgGame.coreData.clientConfig.Q_lostskill_up);
+			regClass("data.Q_meridian", com.rpgGame.coreData.clientConfig.Q_meridian);
 			regClass("data.Q_mission_base", com.rpgGame.coreData.clientConfig.Q_mission_base);
 			regClass("data.Q_mission_reword", com.rpgGame.coreData.clientConfig.Q_mission_reword);
 			regClass("data.Q_mission_segment", com.rpgGame.coreData.clientConfig.Q_mission_segment);
@@ -241,29 +239,17 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.spell.Q_SpellEffect", com.rpgGame.coreData.clientConfig.Q_SpellEffect);
 			regClass("data.spell.Q_summon", com.rpgGame.coreData.clientConfig.Q_summon);
 			regClass("data.SpriteStatNameInfo", com.rpgGame.coreData.clientConfig.SpriteStatNameInfo);
-			
-			
-		}
-		
-		private static function regClass(name:String, cls:Class):void
-			
-		{
-			
-			_classMap.add(name,cls);
-			
-			registerClassAlias(name, cls);
-			
-		}
-		
-		public static function getClass(name:String):Class
-			
-		{
-			
-			return _classMap.getValue(name);
-			
-		}
-		
-	}
-	
-}
 
+		}
+		private static function regClass(name:String, cls:Class):void
+		{
+			_classMap.add(name,cls);
+			registerClassAlias(name, cls);
+		}
+		public static function getClass(name:String):Class
+		{
+			return _classMap.getValue(name);
+		}
+	}
+}
+		

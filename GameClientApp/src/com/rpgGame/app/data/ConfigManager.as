@@ -36,7 +36,6 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.MailCfgData;
 	import com.rpgGame.coreData.cfg.MazeCfgData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
-	import com.rpgGame.coreData.cfg.NpcConfigData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
 	import com.rpgGame.coreData.cfg.RelationCfgData;
 	import com.rpgGame.coreData.cfg.ReliveCfgData;
@@ -56,8 +55,11 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.country.CountryStaticConfigData;
 	import com.rpgGame.coreData.cfg.country.CountryTaoNiCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
+	import com.rpgGame.coreData.cfg.item.EquipPolishCfg;
+	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
+	import com.rpgGame.coreData.cfg.item.EquipWashAttCfg;
+	import com.rpgGame.coreData.cfg.item.EquipWashCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
-	import com.rpgGame.coreData.cfg.item.ItemStrength;
 	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarHairResCfgData;
@@ -179,9 +181,12 @@ package com.rpgGame.app.data
 			DieCfgData.setup(dic[ConfigClassRegister.Q_die]);
 			GCDCfgData.setup(dic[ConfigClassRegister.Q_GCD]);
 			SkillLvLDataManager.setup(dic[ConfigClassRegister.Q_skill_ignore]);
-			ItemStrength.setup(dic[ConfigClassRegister.Q_equip_strength]);
-			//			CountryUnionStatCfgData.setup(null); //待解决
-			
+
+			EquipStrengthCfg.setup(dic[ConfigClassRegister.Q_equip_strength]);
+			EquipPolishCfg.setup(dic[ConfigClassRegister.Q_equip_polish]);
+			EquipWashCfg.setup(dic[ConfigClassRegister.Q_equip_wash]);
+			EquipWashAttCfg.setup(dic[ConfigClassRegister.Q_equip_wash_attr]);
+//			CountryUnionStatCfgData.setup(null); //待解决
 			
 			////////////////////////////////////////////////////////////////////////
 			//

@@ -309,7 +309,7 @@ package com.rpgGame.app.utils
 					var targerId : Number = (searchRoleData.targetData ? searchRoleData.targetData.id : 0);
 					var role : SceneRole = SceneManager.getScene().getSceneObjByID(targerId, SceneCharType.NPC) as SceneRole;
 					SceneRoleSelectManager.selectedRole = role;
-					TaskManager.checkDialogToNpc(targerId);
+					//TaskManager.checkDialogToNpc(targerId);
 				}, 200, searchRoleData);
 			}
 		}

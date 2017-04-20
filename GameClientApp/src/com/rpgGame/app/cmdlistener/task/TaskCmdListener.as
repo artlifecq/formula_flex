@@ -1,6 +1,5 @@
 package com.rpgGame.app.cmdlistener.task
 {
-	
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.netData.task.message.ResTaskAcceptedMessage;
@@ -10,6 +9,7 @@ package com.rpgGame.app.cmdlistener.task
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
+
 	import org.game.netCore.connection.SocketConnection;
 	
 	/**
@@ -25,6 +25,7 @@ package com.rpgGame.app.cmdlistener.task
 		}
 		override public function start() : void
 		{
+
 			SocketConnection.addCmdListener(124101,onResTaskInformationMessage);//登陆获取任务列表
 			SocketConnection.addCmdListener(124102,onResTaskAcceptedMessage);//新任务
 			SocketConnection.addCmdListener(124103,onResTaskChangeMessage);//任务进度改变
@@ -35,7 +36,6 @@ package com.rpgGame.app.cmdlistener.task
 		/**登陆当前所有任务消息	*/
 		private function onResTaskInformationMessage(msg:ResTaskInformationMessage):void
 		{
-			
 			TaskMissionManager.taskModelId=msg.taskModelId;
 			TaskMissionManager.dailyTaskTimes=msg.dailyTaskTimes;
 			TaskMissionManager.setCurrentTaskInfo(msg.acceptedList);

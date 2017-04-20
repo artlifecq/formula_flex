@@ -8,9 +8,11 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.cfg.item.EquipPolishCfg;
+	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
-	import com.rpgGame.coreData.cfg.item.ItemStrength;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
+	import com.rpgGame.coreData.clientConfig.Q_equip_polish;
 	import com.rpgGame.coreData.clientConfig.Q_equip_strength;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -187,7 +189,7 @@ package com.rpgGame.app.ui.tips
 			var name:String;
 			var value:String;
 			var attValues1:Q_att_values=AttValueConfig.getAttInfoById(int(_itemInfo.qItem.q_att_type));
-			var stren:Q_equip_strength=ItemStrength.getStrengthCfg(_itemInfo.qItem.q_kind,_itemInfo.qItem.q_job,_itemInfo.strengthLevel);
+			var stren:Q_equip_strength=EquipStrengthCfg.getStrengthCfg(_itemInfo.qItem.q_kind,_itemInfo.qItem.q_job,_itemInfo.strengthLevel);
 			var strenValues:Q_att_values=AttValueConfig.getAttInfoById(stren.q_att_type);
 			if(!attValues1){
 				return ;
@@ -228,9 +230,13 @@ package com.rpgGame.app.ui.tips
 				}
 				name=HtmlTextUtil.getTextColor(0x8B8D7B,name+":");
 				value=HtmlTextUtil.getTextColor(0xCFC6AE,v+per);
-				var sten:int=map2.getValue(id);
+				var sten:Number=map2.getValue(id);
 				if(sten!=0){
-					value+=HtmlTextUtil.getTextColor(0x5CB006,"    (强化+"+sten+")");
+					if(per=="%"){
+						sten/=100;
+					}
+						
+					value+=HtmlTextUtil.getTextColor(0x5CB006,"    (强化+"+sten+per+")");
 				}
 				label=createLabel(name,value);
 //				if(num%2!=0){
@@ -240,12 +246,33 @@ package com.rpgGame.app.ui.tips
 //				}
 				label.y=curY;
 			}
+			curY+=25;
 			
-			//琢磨等级暂时不管
+			//琢磨等级
+			createLine(10,curY,260);
+			curY+=10;
+			name=HtmlTextUtil.getTextColor(0xCFC6AE,"琢磨等级:");
+			value=HtmlTextUtil.getTextColor(0x5CB006,_itemInfo.polishLevel+"");
+			label=createLabel(name,value);
+			label.x=10;
+			label.y=curY;
+			curY=curY+label.height+5;
+			if(_itemInfo.polishLevel==0){
+				name=HtmlTextUtil.getTextColor(0xE1201C,"未激活");
+			}else{
+				var cfg:Q_equip_polish=EquipPolishCfg.getPolishCfg(_itemInfo.polishLevel);
+				name=HtmlTextUtil.getTextColor(0xCFC6AE,"装备基础属性提升:");
+				value=HtmlTextUtil.getTextColor(0x5CB006,(cfg.q_promote/100).toFixed(1)+"%");
+				label=createLabel(name,value);
+				label.x=10;
+				label.y=curY;
+				curY=curY+label.height+5;
+			}
+			
 			//洗练属性也不管
 			
-			createLine(10,curY+25,260);
-			curY+=35;
+			createLine(10,curY,260);
+			curY+=10;
 			name=HtmlTextUtil.getTextColor(0xCFC6AE,"[装备产出]\n");
 			label=createLabel(name,_itemInfo.qItem.q_output);
 			label.width=250;
