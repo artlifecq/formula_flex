@@ -10,7 +10,7 @@ package com.rpgGame.coreData.info.meridian
 	 */	
 	public class MeridianVo
 	{
-		private var meridianHash:HashMap=new HashMap();
+		private var _meridianHash:HashMap=new HashMap();
 		public function MeridianVo()
 		{
 		}
@@ -40,5 +40,25 @@ package com.rpgGame.coreData.info.meridian
 			}
 			tmp.push(p);
 		}
+		public function getMeridianAcuInfo(merid:int,posId:int):AcuPointInfo
+		{
+			var arr:Array=meridianHash.getValue(merid);
+			if (arr) 
+			{
+				for each (var info:AcuPointInfo in arr) 
+				{
+					if (info.acuPointId==posId) 
+					{
+						return info;
+					}
+				}
+			}
+			return null;
+		}
+		public function get meridianHash():HashMap
+		{
+			return _meridianHash;
+		}
+
 	}
 }

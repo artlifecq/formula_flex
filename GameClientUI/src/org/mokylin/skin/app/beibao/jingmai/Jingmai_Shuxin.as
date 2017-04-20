@@ -23,6 +23,10 @@ package org.mokylin.skin.app.beibao.jingmai
 
 		public var btnClose:feathers.controls.Button;
 
+		public var ib_att1:feathers.controls.Label;
+
+		public var lb_att0:feathers.controls.Label;
+
 		public var titleDisplay:feathers.controls.Label;
 
 
@@ -36,7 +40,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			this.currentState = "normal";
 			this.height = 555;
 			this.width = 245;
-			this.elementsContent = [bg_i(),titleDisplay_i(),btnClose_i(),__Jingmai_Shuxin_UIAsset1_i()];
+			this.elementsContent = [bg_i(),titleDisplay_i(),btnClose_i(),__Jingmai_Shuxin_UIAsset1_i(),ib_att1_i(),lb_att0_i()];
 			
 			states = {
 			};
@@ -77,6 +81,36 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
 			temp.x = 212;
 			temp.y = 7;
+			return temp;
+		}
+
+		private function ib_att1_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			ib_att1 = temp;
+			temp.name = "ib_att1";
+			temp.htmlText = "攻击：12";
+			temp.text = "攻击：12";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 147;
+			temp.x = 62;
+			temp.y = 355;
+			return temp;
+		}
+
+		private function lb_att0_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_att0 = temp;
+			temp.name = "lb_att0";
+			temp.htmlText = "攻击：12";
+			temp.text = "攻击：12";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 147;
+			temp.x = 62;
+			temp.y = 93;
 			return temp;
 		}
 

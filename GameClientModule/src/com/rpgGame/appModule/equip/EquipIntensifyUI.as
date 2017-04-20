@@ -50,7 +50,7 @@ package com.rpgGame.appModule.equip
 	import gs.TweenMax;
 	import gs.easing.Expo;
 	
-	import org.client.mainCore.ds.HashMap;
+
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
 	import org.mokylin.skin.app.zhuangbei.Zhuangbei_left;
@@ -61,6 +61,7 @@ package com.rpgGame.appModule.equip
 	
 	import starling.display.DisplayObject;
 	import starling.events.Event;
+	import com.gameClient.utils.HashMap;
 	
 	/**
 	 *装备强化
@@ -512,7 +513,7 @@ package com.rpgGame.appModule.equip
 			attValues1=AttValueConfig.getAttInfoById(current.q_att_type);
 			maps1=AttValueConfig.getTypeValueMap(attValues1);
 			keys=maps1.keys();
-			values1=maps1.getValues();
+			values1=maps1.values();
 			
 			var attValues2:Q_att_values;
 			var maps2:HashMap;
@@ -520,7 +521,7 @@ package com.rpgGame.appModule.equip
 			if(up){
 				attValues2=AttValueConfig.getAttInfoById(up.q_att_type);
 				maps2=AttValueConfig.getTypeValueMap(attValues2);
-				values2=maps2.getValues();
+				values2=maps2.values();
 			}
 			
 			for(var i:int=0;i<4;i++){

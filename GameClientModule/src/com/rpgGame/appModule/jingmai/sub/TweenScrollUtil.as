@@ -28,6 +28,7 @@ package  com.rpgGame.appModule.jingmai.sub
 		private var _times:int=0;
 		public function TweenScrollUtil( scrollObject:DisplayObject, width:int, height:int, scrollWidth:int, scrollTime:Number = 0.5,isHorizon:Boolean=true)
 		{
+			
 			_scrollObject = scrollObject;
 			if (_scrollObject==null||_scrollObject.parent==null) 
 			{
@@ -51,6 +52,9 @@ package  com.rpgGame.appModule.jingmai.sub
 			
 			_scrollTime = scrollTime;
 			_scrollRect = new Quad(width,height);
+			_scrollRect.touchable=true;
+			_scrollRect.touchAcross=true;
+			
 			_tweenX = 0;
 			_tweenY = 0;
 			_scrollObject.mask = _scrollRect;

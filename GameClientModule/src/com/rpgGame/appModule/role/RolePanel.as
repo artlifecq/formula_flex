@@ -6,6 +6,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.appModule.jingmai.MeridianMainPanelExt;
 	import com.rpgGame.appModule.role.interfaces.ISubPanel;
 	import com.rpgGame.appModule.util.MCUtil;
+	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.role.HeroData;
 	
 	import org.mokylin.skin.app.beibao.beibao_Skin;

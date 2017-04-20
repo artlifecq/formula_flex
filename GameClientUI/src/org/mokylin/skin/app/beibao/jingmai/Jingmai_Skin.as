@@ -223,7 +223,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.text = "62154550";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 96;
+			temp.width = 117;
 			temp.x = 90;
 			temp.y = 44;
 			return temp;

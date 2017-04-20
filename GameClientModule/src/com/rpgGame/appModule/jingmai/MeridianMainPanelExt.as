@@ -2,11 +2,16 @@ package com.rpgGame.appModule.jingmai
 {
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.appModule.role.interfaces.ISubPanel;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipManager;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.type.TipType;
 	
 	import org.mokylin.skin.app.beibao.jingmai.Jingmai_Skin;
 	
 	import starling.display.DisplayObjectContainer;
+	import starling.events.TouchEvent;
 
 	/**
 	 * 经脉面板
@@ -26,6 +31,7 @@ package com.rpgGame.appModule.jingmai
 		private function initView():void
 		{
 			_view=new MeridianView(_skin as Jingmai_Skin);
+		
 //			var content:Sprite=new Sprite();
 //			content.x=15;
 //			content.y=72;
@@ -46,6 +52,15 @@ package com.rpgGame.appModule.jingmai
 //				content.addChild(sp);
 //			}
 //			var tween:TweenScaleScrollUitlExt=new TweenScaleScrollUitlExt(content,dataArr,_skin.btn_prev,_skin.btn_next,0.5,920,500,tx);
+		//	TipTargetManager.show(this,TargetTipsMaker.makeTips(TipType.MERIDIAN_TIP,"sssss"));
+			//this.addEventListener(TouchEvent.TOUCH,onTouchMain);
+		}
+		
+		private function onTouchMain(eve:TouchEvent):void
+		{
+			// TODO Auto Generated method stub
+			trace("touch main");
+			
 		}
 		
 		override protected function onHide():void

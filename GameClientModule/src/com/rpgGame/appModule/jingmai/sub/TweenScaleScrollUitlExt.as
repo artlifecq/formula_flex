@@ -75,7 +75,7 @@ package com.rpgGame.appModule.jingmai.sub
 		{
 			var dataLen:int=dataArr.length;
 			leftBtn.touchable=curIndex>0;
-			rightBtn.touchable=curIndex<dataLen&&dataLen>1;
+			rightBtn.touchable=curIndex<(dataLen-1)&&dataLen>1;
 			if (!leftBtn.touchable) 
 			{
 				leftBtn.filter=FilterUtil.getGrayFilter();
@@ -103,6 +103,7 @@ package com.rpgGame.appModule.jingmai.sub
 			{
 				return;
 			}
+			nextIndex=targetIndex;
 			var tx:Number=-targetIndex*scrollWidth;
 			var t:int=Math.abs(targetIndex-curIndex);
 			if (isHorizon) 
@@ -141,9 +142,10 @@ package com.rpgGame.appModule.jingmai.sub
 		override public function onTweenEnd():void
 		{
 			super.onTweenEnd();
-			checkBtnState();
+			
 			curIndex=nextIndex;
-			if (curIndex>=0&&curIndex<dataArr.length-1) 
+			checkBtnState();
+			if (curIndex>=0&&curIndex<dataArr.length) 
 			{
 				if (callBack) 
 				{

@@ -11,7 +11,7 @@ package org.mokylin.skin.app.beibao.jingmai
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class Dumai_Skin extends feathers.controls.StateSkin
+	public class Chongmai_Skin extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -108,14 +108,14 @@ package org.mokylin.skin.app.beibao.jingmai
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function Dumai_Skin()
+		public function Chongmai_Skin()
 		{
 			super();
 			
 			this.currentState = "normal";
 			this.height = 325;
 			this.width = 325;
-			this.elementsContent = [__Dumai_Skin_UIAsset1_i(),grp_line_i(),grp_icon_i(),grp_label_i()];
+			this.elementsContent = [__Chongmai_Skin_UIAsset1_i(),grp_line_i(),grp_icon_i(),grp_label_i()];
 			
 			states = {
 			};
@@ -126,10 +126,10 @@ package org.mokylin.skin.app.beibao.jingmai
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __Dumai_Skin_UIAsset1_i():feathers.controls.UIAsset
+		private function __Chongmai_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/jingmai/dumai.png";
+			temp.styleName = "ui/app/beibao/jingmai/chongmai.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -142,7 +142,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "grp_icon";
 			temp.x = 22;
 			temp.y = 19;
-			temp.elementsContent = [ico_1_i(),ico_12_i(),ico_13_i(),ico_14_i(),ico_2_i(),ico_3_i(),ico_4_i(),ico_5_i(),ico_6_i(),ico_7_i(),ico_8_i(),ico_9_i(),ico_10_i(),ico_11_i()];
+			temp.elementsContent = [ico_1_i(),ico_12_i(),ico_2_i(),ico_14_i(),ico_13_i(),ico_9_i(),ico_8_i(),ico_7_i(),ico_6_i(),ico_5_i(),ico_4_i(),ico_11_i(),ico_10_i(),ico_3_i()];
 			return temp;
 		}
 
@@ -153,7 +153,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "grp_label";
 			temp.x = 18;
 			temp.y = 10;
-			temp.elementsContent = [lb_1_i(),lb_12_i(),lb_13_i(),lb_14_i(),lb_2_i(),lb_3_i(),lb_4_i(),lb_5_i(),lb_6_i(),lb_7_i(),lb_8_i(),lb_9_i(),lb_10_i(),lb_11_i()];
+			temp.elementsContent = [lb_1_i(),lb_12_i(),lb_2_i(),lb_14_i(),lb_13_i(),lb_9_i(),lb_8_i(),lb_7_i(),lb_6_i(),lb_5_i(),lb_4_i(),lb_11_i(),lb_10_i(),lb_3_i()];
 			return temp;
 		}
 
@@ -185,8 +185,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			ico_11 = temp;
 			temp.name = "ico_11";
 			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
-			temp.x = 171;
-			temp.y = 169;
+			temp.x = 247;
+			temp.y = 125;
 			return temp;
 		}
 
@@ -207,8 +207,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			ico_13 = temp;
 			temp.name = "ico_13";
 			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
-			temp.x = 124;
-			temp.y = 59;
+			temp.x = 125;
+			temp.y = 190;
 			return temp;
 		}
 
@@ -241,7 +241,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "ico_2";
 			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
 			temp.x = 125;
-			temp.y = 190;
+			temp.y = 61;
 			return temp;
 		}
 
@@ -251,8 +251,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			ico_3 = temp;
 			temp.name = "ico_3";
 			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
-			temp.x = 125;
-			temp.y = 249;
+			temp.x = 170;
+			temp.y = 81;
 			return temp;
 		}
 
@@ -262,8 +262,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			ico_4 = temp;
 			temp.name = "ico_4";
 			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
-			temp.x = 40;
-			temp.y = 210;
+			temp.x = 214;
+			temp.y = 38;
 			return temp;
 		}
 
@@ -273,8 +273,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			ico_5 = temp;
 			temp.name = "ico_5";
 			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
-			temp.x = 1;
-			temp.y = 125;
+			temp.x = 125;
+			temp.y = 2;
 			return temp;
 		}
 
@@ -295,8 +295,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			ico_7 = temp;
 			temp.name = "ico_7";
 			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
-			temp.x = 125;
-			temp.y = 2;
+			temp.x = 1;
+			temp.y = 125;
 			return temp;
 		}
 
@@ -306,8 +306,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			ico_8 = temp;
 			temp.name = "ico_8";
 			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
-			temp.x = 214;
-			temp.y = 37;
+			temp.x = 40;
+			temp.y = 210;
 			return temp;
 		}
 
@@ -317,8 +317,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			ico_9 = temp;
 			temp.name = "ico_9";
 			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
-			temp.x = 247;
-			temp.y = 126;
+			temp.x = 125;
+			temp.y = 249;
 			return temp;
 		}
 
@@ -327,9 +327,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			l_10 = temp;
 			temp.name = "l_10";
-			temp.styleName = "ui/app/beibao/jingmai/dumai/10.png";
-			temp.x = 177;
-			temp.y = 178;
+			temp.styleName = "ui/app/beibao/jingmai/chongmai/10.png";
+			temp.x = 213;
+			temp.y = 139;
 			return temp;
 		}
 
@@ -338,9 +338,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			l_11 = temp;
 			temp.name = "l_11";
-			temp.styleName = "ui/app/beibao/jingmai/dumai/11.png";
-			temp.x = 171;
-			temp.y = 139;
+			temp.styleName = "ui/app/beibao/jingmai/chongmai/11.png";
+			temp.x = 203;
+			temp.y = 124;
 			return temp;
 		}
 
@@ -349,9 +349,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			l_12 = temp;
 			temp.name = "l_12";
-			temp.styleName = "ui/app/beibao/jingmai/dumai/12.png";
-			temp.x = 138;
-			temp.y = 55;
+			temp.styleName = "ui/app/beibao/jingmai/chongmai/12.png";
+			temp.x = 137;
+			temp.y = 138;
 			return temp;
 		}
 
@@ -360,9 +360,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			l_13 = temp;
 			temp.name = "l_13";
-			temp.styleName = "ui/app/beibao/jingmai/dumai/13.png";
+			temp.styleName = "ui/app/beibao/jingmai/chongmai/13.png";
 			temp.x = 57;
-			temp.y = 58;
+			temp.y = 140;
 			return temp;
 		}
 
@@ -371,9 +371,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			l_1 = temp;
 			temp.name = "l_1";
-			temp.styleName = "ui/app/beibao/jingmai/dumai/1.png";
+			temp.styleName = "ui/app/beibao/jingmai/chongmai/1.png";
 			temp.x = 119;
-			temp.y = 142;
+			temp.y = 77;
 			return temp;
 		}
 
@@ -382,9 +382,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			l_2 = temp;
 			temp.name = "l_2";
-			temp.styleName = "ui/app/beibao/jingmai/dumai/2.png";
-			temp.x = 119;
-			temp.y = 206;
+			temp.styleName = "ui/app/beibao/jingmai/chongmai/2.png";
+			temp.x = 137;
+			temp.y = 61;
 			return temp;
 		}
 
@@ -393,9 +393,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			l_3 = temp;
 			temp.name = "l_3";
-			temp.styleName = "ui/app/beibao/jingmai/dumai/3.png";
-			temp.x = 50;
-			temp.y = 216;
+			temp.styleName = "ui/app/beibao/jingmai/chongmai/3.png";
+			temp.x = 176;
+			temp.y = 47;
 			return temp;
 		}
 
@@ -404,9 +404,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			l_4 = temp;
 			temp.name = "l_4";
-			temp.styleName = "ui/app/beibao/jingmai/dumai/4.png";
-			temp.x = 0;
-			temp.y = 140;
+			temp.styleName = "ui/app/beibao/jingmai/chongmai/4.png";
+			temp.x = 137;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -415,9 +415,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			l_5 = temp;
 			temp.name = "l_5";
-			temp.styleName = "ui/app/beibao/jingmai/dumai/5.png";
-			temp.x = 1;
-			temp.y = 48;
+			temp.styleName = "ui/app/beibao/jingmai/chongmai/5.png";
+			temp.x = 50;
+			temp.y = 3;
 			return temp;
 		}
 
@@ -426,9 +426,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			l_6 = temp;
 			temp.name = "l_6";
-			temp.styleName = "ui/app/beibao/jingmai/dumai/6.png";
-			temp.x = 50;
-			temp.y = 3;
+			temp.styleName = "ui/app/beibao/jingmai/chongmai/6.png";
+			temp.x = 1;
+			temp.y = 49;
 			return temp;
 		}
 
@@ -437,9 +437,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			l_7 = temp;
 			temp.name = "l_7";
-			temp.styleName = "ui/app/beibao/jingmai/dumai/7.png";
-			temp.x = 137;
-			temp.y = 0;
+			temp.styleName = "ui/app/beibao/jingmai/chongmai/7.png";
+			temp.x = 0;
+			temp.y = 140;
 			return temp;
 		}
 
@@ -448,9 +448,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			l_8 = temp;
 			temp.name = "l_8";
-			temp.styleName = "ui/app/beibao/jingmai/dumai/8.png";
-			temp.x = 218;
-			temp.y = 50;
+			temp.styleName = "ui/app/beibao/jingmai/chongmai/8.png";
+			temp.x = 49;
+			temp.y = 216;
 			return temp;
 		}
 
@@ -459,9 +459,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			l_9 = temp;
 			temp.name = "l_9";
-			temp.styleName = "ui/app/beibao/jingmai/dumai/9.png";
-			temp.x = 213;
-			temp.y = 140;
+			temp.styleName = "ui/app/beibao/jingmai/chongmai/9.png";
+			temp.x = 136;
+			temp.y = 216;
 			return temp;
 		}
 
@@ -490,8 +490,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 60;
-			temp.x = 185;
-			temp.y = 210;
+			temp.x = 266;
+			temp.y = 170;
 			return temp;
 		}
 
@@ -505,8 +505,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 60;
-			temp.x = 217;
-			temp.y = 115;
+			temp.x = 212;
+			temp.y = 170;
 			return temp;
 		}
 
@@ -520,8 +520,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 60;
-			temp.x = 163;
-			temp.y = 63;
+			temp.x = 157;
+			temp.y = 230;
 			return temp;
 		}
 
@@ -565,8 +565,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 60;
-			temp.x = 157;
-			temp.y = 229;
+			temp.x = 163;
+			temp.y = 61;
 			return temp;
 		}
 
@@ -580,8 +580,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 60;
-			temp.x = 166;
-			temp.y = 275;
+			temp.x = 213;
+			temp.y = 103;
 			return temp;
 		}
 
@@ -595,8 +595,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 60;
-			temp.x = 67;
-			temp.y = 253;
+			temp.x = 230;
+			temp.y = 81;
 			return temp;
 		}
 
@@ -610,8 +610,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 60;
-			temp.x = 8;
-			temp.y = 170;
+			temp.x = 167;
+			temp.y = 6;
 			return temp;
 		}
 
@@ -640,8 +640,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 60;
-			temp.x = 167;
-			temp.y = 6;
+			temp.x = 8;
+			temp.y = 170;
 			return temp;
 		}
 
@@ -655,8 +655,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 60;
-			temp.x = 230;
-			temp.y = 81;
+			temp.x = 67;
+			temp.y = 253;
 			return temp;
 		}
 
@@ -670,8 +670,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 60;
-			temp.x = 266;
-			temp.y = 170;
+			temp.x = 166;
+			temp.y = 275;
 			return temp;
 		}
 

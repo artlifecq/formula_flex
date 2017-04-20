@@ -35,13 +35,13 @@ package com.rpgGame.coreData.clientConfig
 		 /**  升级需要消耗真气值 */
 		public var q_need_spirit:int;
 		 /**  附加属性 */
-		public var q_stone_attribute:String;
+		public var q_stone_attribute:int;
 		 /**  镶嵌砭石类型 */
 		public var q_stone_type:int;
 		 /**  穴位点的坐标 */
 		public var q_coord:String;
 		 /**  穴位图标类型 */
-		public var q_huponameurl:int;
+		public var q_huponameurl:String;
 		 /**  激活成功是否全服公告（0不公告，1公告） */
 		public var q_notify:int;
 		 /**  公告内容 */

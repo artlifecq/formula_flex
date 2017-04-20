@@ -1,12 +1,12 @@
-package  com.rpgGame.appModule.util
+package  com.rpgGame.core.utils
 {
 
-	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.utils.clearInterval;
 	import flash.utils.setInterval;
-	import starling.display.DisplayObjectContainer;
+	
 	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
 	
 
 	

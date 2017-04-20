@@ -43,10 +43,6 @@ package com.rpgGame.coreData.cfg.meridian
 				if (level==1)//找等级为1的
 				{
 					merid=int(splitArr[0]);
-					if (merid!=1) //先只取第一个
-					{
-						continue;
-					}
 					tmpArr=hash.getValue(merid);
 					if (!tmpArr) 
 					{
@@ -62,5 +58,11 @@ package com.rpgGame.coreData.cfg.meridian
 			
 			return hash;
 		}
+
+		public static function get dataArr():Array
+		{
+			return _dataArr;
+		}
+
 	}
 }

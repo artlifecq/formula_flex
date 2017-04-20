@@ -28,6 +28,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.FriendHeroTips;
     import com.rpgGame.app.ui.tips.ItemTip;
     import com.rpgGame.app.ui.tips.MapAreaTip;
+    import com.rpgGame.app.ui.tips.MeridainPointTip;
     import com.rpgGame.app.ui.tips.MountBeastCardTip;
     import com.rpgGame.app.ui.tips.MountSpellTips;
     import com.rpgGame.app.ui.tips.MountTip;
@@ -188,6 +189,7 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.MOUNT_BEAST_CARD_TIP, MountBeastCardTip);
 			TipManager.registerTipsParserClass(TipType.MOUNT_SPELL_TIP, MountSpellTips);
 			TipManager.registerTipsParserClass(TipType.NORMAL_TIP, NormalTip);
+			TipManager.registerTipsParserClass(TipType.MERIDIAN_TIP,MeridainPointTip);
 		}
 
 		private function onSwitchCmp() : void
