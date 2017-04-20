@@ -140,6 +140,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_per_blood:int;
 		 /**  关联NPC功能表 */
 		public var q_npc_function:int;
+		 /**  怪物死亡是否可以被击飞或者击退 */
+		public var q_immune_dead_beat:int;
 
 	}
 }

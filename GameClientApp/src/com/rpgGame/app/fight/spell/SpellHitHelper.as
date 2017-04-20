@@ -15,6 +15,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.core.events.SceneCharacterEvent;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
+	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
@@ -171,7 +172,7 @@ package com.rpgGame.app.fight.spell
 			{
 				deadLaunchHeight = 0;
 			}
-			var canDeadBeat : Boolean = false;//(target.type == SceneCharType.MONSTER && !(target.data as MonsterData).immuneDeadBeat && prob < (deadBeatProbability + deadLaunchProbability));
+			var canDeadBeat : Boolean = (target.type == SceneCharType.MONSTER && !(target.data as MonsterData).immuneDeadBeat && prob < (deadBeatProbability + deadLaunchProbability));
 			if (canDeadBeat)
 			{
 				var atkorPos : Point = (hortVo.atkor && hortVo.atkor.usable) ? new Point(hortVo.atkor.x, hortVo.atkor.z) : hortVo.atkorPos;

@@ -8,7 +8,6 @@ package org.mokylin.skin.mainui.renwu
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
-	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.check.CheckBoxSkin_1;
 
 	/**
@@ -48,7 +47,7 @@ package org.mokylin.skin.mainui.renwu
 			this.currentState = "normal";
 			this.height = 250;
 			this.width = 337;
-			this.elementsContent = [bg_i(),__Goumai_tishi_UIAsset1_i(),lbl_title_i(),btnClose_i(),btn_cancel_i(),btn_ok_i(),chk_ok_i(),__Goumai_tishi_UIAsset2_i(),lb_name_i(),__Goumai_tishi_Label1_i(),__Goumai_tishi_UIAsset3_i(),__Goumai_tishi_UIAsset4_i(),lb_yuanbao_i()];
+			this.elementsContent = [bg_i(),__Goumai_tishi_UIAsset1_i(),lbl_title_i(),btnClose_i(),btn_ok_i(),btn_cancel_i(),chk_ok_i(),__Goumai_tishi_UIAsset2_i(),lb_name_i(),__Goumai_tishi_Label1_i(),__Goumai_tishi_UIAsset3_i(),__Goumai_tishi_UIAsset4_i(),lb_yuanbao_i()];
 			
 			states = {
 			};
@@ -142,7 +141,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.label = "取 消";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.width = 95;
-			temp.x = 56;
+			temp.x = 187;
 			temp.y = 196;
 			return temp;
 		}
@@ -153,10 +152,10 @@ package org.mokylin.skin.mainui.renwu
 			btn_ok = temp;
 			temp.name = "btn_ok";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.label = "购买并使用";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.label = "拆 分";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.width = 95;
-			temp.x = 187;
+			temp.x = 56;
 			temp.y = 196;
 			return temp;
 		}

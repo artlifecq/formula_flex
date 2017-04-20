@@ -192,7 +192,7 @@ package com.rpgGame.app.manager.role
 			//			data.totalStat.level = bornData ? bornData.q_grade : 0;
 			data.bodyRadius = bornData ? bornData.q_body_radius_pixel : 0;
 			data.direction = bornData ? bornData.q_direction : 0;
-			data.immuneDeadBeat = /*bornData ? bornData.immuneDeadBeat :*/ false;
+			data.immuneDeadBeat = bornData ? (bornData.q_immune_dead_beat==0): false;
 			
 			if(bornData.q_born_animation)//有出生特效
 			{
