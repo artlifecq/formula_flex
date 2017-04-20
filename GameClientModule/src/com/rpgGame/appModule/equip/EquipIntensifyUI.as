@@ -112,6 +112,7 @@ package com.rpgGame.appModule.equip
 		private var userMon:int;
 		private var isToUp:Boolean;
 		private var _progressBar:AwdProgressBar;
+		private var isLockRefresh:Boolean;
 		public function EquipIntensifyUI()
 		{
 			_skin=new Zhuangbei_QianghuaSkin();
@@ -615,6 +616,7 @@ package com.rpgGame.appModule.equip
 			p=this.globalToLocal(p);
 			this.playInter3DAt(ClientConfig.getEffect("ui_tongyongdianji"),p.x,p.y,1);
 			var type:int=RoleEquipmentManager.equipIsWearing(targetEquipInfo)?0:1;
+			isLockRefresh=true;
 			ItemSender.strengthEquip(targetEquipInfo.itemInfo.itemId,type,useListIds,EquipOperateType.STRENGTH_ONEKEY);
 		}
 		
@@ -635,10 +637,18 @@ package com.rpgGame.appModule.equip
 			_leftSkin.tab_pack.addEventListener(Event.CHANGE, onTab);
 			EventManager.addEvent(ItemEvent.ITEM_STRENGTH_MSG,getStrengthMsg);
 			EventManager.addEvent(ItemEvent.ITEM_ADD,onFreshItems);
-			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
+			EventManager.addEvent(ItemEvent.ITEM_REMOVE_LIST,onRemoveFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
 			
+		}
+		
+		private function onRemoveFreshItems():void
+		{
+			if(isLockRefresh){
+				return;
+			}
+			ItemManager.getBackEquip(initItem);
 		}
 		
 		private function updateAmount(type:int=3):void
@@ -652,6 +662,9 @@ package com.rpgGame.appModule.equip
 		
 		private function onFreshItems(info:ClientItemInfo=null):void
 		{
+			if(isLockRefresh){
+				return;
+			}
 			if((info.containerID==ItemContainerID.Role||info.containerID==ItemContainerID.BackPack)&&(info.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||info.type==GoodsType.EQUIPMENT2)){
 				ItemManager.getBackEquip(initItem);
 			}
@@ -678,7 +691,8 @@ package com.rpgGame.appModule.equip
 			}
 			addExp=0;
 			isToUp=false;
-			updateView();
+			isLockRefresh=false;
+			refresh();
 		}
 		
 		private function getEquipByType(type:int,datas:Vector.<ClientItemInfo>):Vector.<ClientItemInfo>
@@ -748,7 +762,7 @@ package com.rpgGame.appModule.equip
 			cancelAllUse();
 			onCancelIntensify(null);
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,onFreshItems);
-			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
+			EventManager.removeEvent(ItemEvent.ITEM_REMOVE_LIST,onRemoveFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
 			
@@ -793,6 +807,7 @@ package com.rpgGame.appModule.equip
 			p=this.globalToLocal(p);
 			this.playInter3DAt(ClientConfig.getEffect("ui_tongyongdianji"),p.x,p.y,1);
 			var type:int=RoleEquipmentManager.equipIsWearing(targetEquipInfo)?0:1;
+			isLockRefresh=true;
 			ItemSender.strengthEquip(targetEquipInfo.itemInfo.itemId,type,useListIds,EquipOperateType.STRENGTH_NORMAL);
 		}
 		

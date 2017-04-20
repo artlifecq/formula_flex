@@ -257,6 +257,17 @@ package com.rpgGame.app.manager.goods
 		{
 			removeItemByIndex(gridId);
 		}
+		
+		public function removeItems(grids:Vector.<int>):void
+		{
+			for(var i:int=0;i<grids.length;i++){
+				removeItemByIndex(grids[i]);
+			}
+			EventManager.dispatchEvent(ItemEvent.ITEM_REMOVE_LIST);
+		}
+				
+		
+		
 		/**
 		 *改变物品 
 		 * @param msg
