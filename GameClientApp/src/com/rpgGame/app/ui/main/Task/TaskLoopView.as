@@ -14,7 +14,7 @@ package com.rpgGame.app.ui.main.Task
 	import org.mokylin.skin.mainui.renwu.RenWuZhuiZong_Skin;
 	import org.mokylin.skin.mainui.renwu.Renwu_Item;
 
-	public class TaskLoopCont
+	public class TaskLoopView
 	{
 		private var _skin:RenWuZhuiZong_Skin;
 		private var scrollBar :ScrollContainer;
@@ -35,7 +35,7 @@ package com.rpgGame.app.ui.main.Task
 		private var ico2List:Vector.<BgIcon>;
 		private var subBut1:Button;
 		private var subBut2:Button;
-		public function TaskLoopCont(skin:RenWuZhuiZong_Skin)
+		public function TaskLoopView(skin:RenWuZhuiZong_Skin)
 		{
 			_skin=skin;
 			init();

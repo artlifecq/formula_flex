@@ -218,6 +218,8 @@ package com.rpgGame.app.data
 			NotifyCfgData.setup(dic[ConfigClassRegister.Q_notify]);
 			//任务表配置
 			TaskMissionCfgData.setup(dic[ConfigClassRegister.Q_mission_base]);
+			TaskMissionCfgData.setupReword(dic[ConfigClassRegister.Q_mission_reword]);
+			TaskMissionCfgData.setupSegment(dic[ConfigClassRegister.Q_mission_segment]);
 			
 		}
 		

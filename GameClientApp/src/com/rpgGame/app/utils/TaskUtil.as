@@ -10,6 +10,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.TaskManager;
+	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.richText.RichTextCustomLinkType;
 	import com.rpgGame.app.richText.RichTextCustomUtil;
 	import com.rpgGame.app.scene.SceneRole;
@@ -47,6 +48,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.type.TaskTargetType;
 	
 	import flash.geom.Point;
+	import flash.geom.Vector3D;
 	
 	import app.message.MonsterDataProto;
 
@@ -248,6 +250,34 @@ package com.rpgGame.app.utils
 			}
 			return "（" + curProgress + "/" + allProgress + "）"
 		}
+		/**
+		 * 完成任务交NPC任务
+		 * @param npcId
+		 *
+		 */
+		public static function finishNpcTask(npcId : int,onArrive:Function=null) : void
+		{
+			
+			var npcData : Q_scene_monster_area = MonsterDataManager.getMonsterById(npcId);
+			if (npcData)
+			{
+				var pos : Point = MonsterDataManager.getMonsterPosition(npcData);
+				/*var sceneRole : SceneRole = SceneManager.getSceneNpcByModelId(npcId);
+				
+				var searchRoleData : SearchRoleData = new SearchRoleData();
+				searchRoleData.searchId = npcId;
+				searchRoleData.targetData = (sceneRole ? sceneRole.data as MonsterData : null);*/
+				MainRoleSearchPathManager.walkToScene(npcData.q_mapid, pos.x, pos.y,onArrive, 100);
+				/*
+				MainRoleSearchPathManager.walkToScene(npcData.q_mapid, pos.x, pos.y, function openPanel() : void
+				{
+					var targerId : Number = (searchRoleData.targetData ? searchRoleData.targetData.id : 0);
+					var role : SceneRole = SceneManager.getScene().getSceneObjByID(targerId, SceneCharType.NPC) as SceneRole;
+					SceneRoleSelectManager.selectedRole = role;
+					TaskManager.checkDialogToNpc(targerId);
+				}, 200, searchRoleData);*/
+			}
+		}
 
 
 		//------------------------------------------
@@ -279,7 +309,7 @@ package com.rpgGame.app.utils
 					var targerId : Number = (searchRoleData.targetData ? searchRoleData.targetData.id : 0);
 					var role : SceneRole = SceneManager.getScene().getSceneObjByID(targerId, SceneCharType.NPC) as SceneRole;
 					SceneRoleSelectManager.selectedRole = role;
-					//TaskManager.checkDialogToNpc(targerId);
+					TaskManager.checkDialogToNpc(targerId);
 				}, 200, searchRoleData);
 			}
 		}
@@ -502,6 +532,58 @@ package com.rpgGame.app.utils
 			if (role.type == SceneCharType.NPC)
 			{
 				role.avatar.removeRenderUnitsByType(RenderUnitType.TASK);
+			}
+		}
+		
+		public static function nearestTaskNpc(id : int,show:Boolean) : void
+		{
+			var list : Vector.<SceneRole> = SceneManager.getSceneRoleList();
+			var find : Boolean = false;
+			for each (var role : SceneRole in list)
+			{
+				if (role != null &&role.usable)
+				{
+					var monsterData : MonsterData = role.data as MonsterData;
+					if (monsterData != null&&monsterData.modelID==id)
+					{
+						if(show)
+						{
+							tryAddTaskMark(role);
+						}		
+						else
+						{
+							tryRemoveTaskMark(role);
+						}
+					}
+				}
+					
+				
+				
+				
+			}
+			
+		}
+		
+		
+		
+		public static function tryAddTaskMark(role : SceneRole) : void
+		{
+			if (role.type == SceneCharType.MONSTER)
+			{
+				var npcModelId : int = (role.data as MonsterData).modelID;
+				if (!TaskMissionManager.checkHasReplyNpcInStoryTask(npcModelId))
+					return;
+			}
+			var offset : Vector3D=new Vector3D();
+			//offset.
+			SpellAnimationHelper.addTargetEffect(role, RenderUnitID.TASKMARK, RenderUnitType.TASKMARK, EffectUrl.UI_WENHAO, BoneNameEnum.c_0_name_01, 0, null, false);
+
+		}
+		public static function tryRemoveTaskMark(role : SceneRole) : void
+		{
+			if (role.type == SceneCharType.MONSTER)
+			{
+				role.avatar.removeRenderUnitsByType(RenderUnitType.TASKMARK);
 			}
 		}
 	}

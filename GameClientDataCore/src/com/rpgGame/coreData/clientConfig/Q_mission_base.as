@@ -20,6 +20,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_party_id:int;
 		 /**  章节名 */
 		public var q_party_name:String;
+		 /**    */
+		public var q_node_id:int;
 		 /**  任务名称 */
 		public var q_mission_name:String;
 		 /**  任务类型(1主线2日常3宝箱4帮会) */
@@ -34,8 +36,10 @@ package com.rpgGame.coreData.clientConfig
 		public var q_mission_type:int;
 		 /**  任务完成条件,数值类 */
 		public var q_finish_information_int:int;
-		 /**  任务完成条件,字符串类型(道具ID或者怪物ID,数量)(1001,1;1002,1)（副本ID，次数） */
+		 /**  任务完成条件,字符串类型(道具ID或者怪物ID,数量)(1001,1;1002,1)（副本ID，次数）对话填npcid */
 		public var q_finish_information_str:String;
+		 /**  完成任务npc 没有npc为0 */
+		public var q_finish_npc:int;
 		 /**  完成任务后是否没收任务道具(0没收,1不收) */
 		public var q_finish_iscollectitem:int;
 		 /**  完成任务需求文字描述 */

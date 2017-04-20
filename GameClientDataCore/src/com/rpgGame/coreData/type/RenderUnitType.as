@@ -66,6 +66,9 @@ package com.rpgGame.coreData.type
 		/**战魂**/
 		public static const FIGHTSOUL:String = "FightSoul";
 
+		/**任务问号**/
+		public static const TASKMARK : String = "taskMark";
+		
 //		/**打坐特效*/
 //		public static const SIT:String = "sit";
 //		/**怪物光环*/

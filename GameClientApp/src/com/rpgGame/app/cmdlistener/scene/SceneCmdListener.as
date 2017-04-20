@@ -1,6 +1,7 @@
 package com.rpgGame.app.cmdlistener.scene
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
@@ -28,6 +29,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.app.task.TaskInfoDecoder;
 	import com.rpgGame.app.utils.ReqLockUtil;
+	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
@@ -35,6 +37,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.clientConfig.Attach_effect;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
@@ -239,6 +242,7 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			if(msg.personId.ToGID()==MainRoleManager.actor.id){
 				AppManager.showApp(AppConstant.DIE_PANEL,msg);
+				EventManager.dispatchEvent(MainPlayerEvent.PLAYER_DIE);
 			}
 		}
 		
@@ -681,11 +685,22 @@ package com.rpgGame.app.cmdlistener.scene
 			data.modelID = info.modelId;
 			
 			RoleData.readMonster(data,info);
-			SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
-			
+			var sceneRole : SceneRole =SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
+			addTaskmark(sceneRole);
 			
 			GameLog.addShow("添加怪物客户端id：" + data.id);
 			GameLog.addShow("添加怪物服务器id：" + data.serverID.ToString());
+		}
+		
+		/**任务npc投诉挂问号*/
+		private function addTaskmark(sceneRole : SceneRole):void
+		{
+			if(sceneRole!=null)
+			{
+				
+				TaskUtil.tryAddTaskMark(sceneRole);
+			}
+			
 		}
 		
 		/**

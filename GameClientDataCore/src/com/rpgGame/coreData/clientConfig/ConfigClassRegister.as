@@ -124,6 +124,10 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_item:String = "data.Q_item";
 		/**  任务表(所有任务都这里)																																								 */
 		public static const Q_mission_base:String = "data.Q_mission_base";
+		/**  任务奖励配置表	 */
+		public static const Q_mission_reword:String = "data.Q_mission_reword";
+		/**  任务对话配置表(1-20000为主线任务对应的对话id，20001-30000是支线任务对话id)			 */
+		public static const Q_mission_segment:String = "data.Q_mission_segment";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify"
 		/**  阵营关系				 */
@@ -215,6 +219,8 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_global", com.rpgGame.coreData.clientConfig.Q_global);
 			regClass("data.Q_item", com.rpgGame.coreData.clientConfig.Q_item);
 			regClass("data.Q_mission_base", com.rpgGame.coreData.clientConfig.Q_mission_base);
+			regClass("data.Q_mission_reword", com.rpgGame.coreData.clientConfig.Q_mission_reword);
+			regClass("data.Q_mission_segment", com.rpgGame.coreData.clientConfig.Q_mission_segment);
 			regClass("data.Q_notify", com.rpgGame.coreData.clientConfig.Q_notify);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);
 			regClass("data.Q_tipsinfo", com.rpgGame.coreData.clientConfig.Q_tipsinfo);

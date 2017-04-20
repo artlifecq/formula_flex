@@ -1,5 +1,8 @@
 package com.rpgGame.app.manager.task
 {
+	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_mission_base;
+	import com.rpgGame.coreData.info.task.target.TaskTargetReplyInfo;
 	import com.rpgGame.coreData.type.TaskType;
 	import com.rpgGame.netData.task.bean.TaskInfo;
 
@@ -9,38 +12,72 @@ package com.rpgGame.app.manager.task
 		private static var _taskModelId: int;
 		/**当天已经完成日常任务的次数*/
 		private static var _dailyTaskTimes: int;
-		/**当前主线任务信息*/
+		/**当前主线任务服务器信息*/
 		private static var _currentMainTaskInfo : TaskInfo;
+		private static var _currentMainTaskData : Q_mission_base;
+		private static var _currentMainTaskIsfinish:Boolean
+		
 		/**当前支线任务信息*/
 		private static var _currentDailyTaskInfo : TaskInfo;
 		/**当前环式任务信息*/
 		private static var _currentTreasuerTaskInfo : TaskInfo;
-		
-		
-		
-	
+		/**主线任务是否完成*/
+		public static function get currentMainTaskIsfinish():Boolean
+		{
+			return _currentMainTaskIsfinish;
+		}
 
+		/**
+		 * @private
+		 */
+		public static function set currentMainTaskIsfinish(value:Boolean):void
+		{
+			_currentMainTaskIsfinish = value;
+		}
+
+		/**当前主线任务配置信息*/
+		public static function get currentMainTaskData():Q_mission_base
+		{
+			return _currentMainTaskData;
+		}
+
+		/**
+		 * @private
+		 */
+		public static function set currentMainTaskData(value:Q_mission_base):void
+		{
+			_currentMainTaskData = value;
+		}
+		
 		public static function setCurrentTaskInfo(value: Vector.<TaskInfo>) : void
 		{
 			for each(var task:TaskInfo in value)
 			{
-				if(task.taskSubType==TaskType.MAINTYPE_MAINTASK)
-				{
-					setCurrentMainTaskInfo(task);
-				}
-				else if(task.taskSubType==TaskType.MAINTYPE_DAILYTASK)
-				{
-					//currentMainTaskInfo(task);
-				}
-				else if(task.taskSubType==TaskType.MAINTYPE_TREASUREBOX)
-				{
-					//currentMainTaskInfo(task);
-				}
-				
+				setTaskInfo(task);
 			}
 		}
 		
-		
+		public static function setTaskInfo(task:TaskInfo) : void
+		{
+			var taskData:Q_mission_base;
+			taskData=TaskMissionCfgData.getTaskByID(task.taskModelId);
+			if(taskData!=null)
+			{
+				if(taskData.q_mission_mainType==TaskType.MAINTYPE_MAINTASK)
+				{
+					setCurrentMainTaskInfo(task,taskData);
+				}
+				else if(taskData.q_mission_mainType==TaskType.MAINTYPE_DAILYTASK)
+				{
+					//currentMainTaskInfo(task);
+				}
+				else if(taskData.q_mission_mainType==TaskType.MAINTYPE_TREASUREBOX)
+				{
+					//currentMainTaskInfo(task);
+				}
+			}
+			
+		}
 		
 		/**当前支线任务信息*/
 		public static function get currentDailyTaskInfo() : TaskInfo
@@ -93,56 +130,42 @@ package com.rpgGame.app.manager.task
 		/**当前主线任务信息*/
 		public static function get currentMainTaskInfo() : TaskInfo
 		{
-			/*if (_currentMainTaskInfo)
-			{
-			var sceneData : SceneData = MapDataManager.currentScene
-			if (_currentMainTaskInfo.type == TaskType.TASK_TYPE_MAIN_LINE)
-			{
-			if (sceneData && sceneData.isNormalScene)
-			return _currentMainTaskInfo;
-			}
-			else if (_currentMainTaskInfo.type == TaskType.TASK_TYPE_STORY_DUNGEON)
-			{
-			if (sceneData && sceneData.isStoryDungeonScene)
-			return _currentMainTaskInfo;
-			}
-			}
-			return null;*/
 			return _currentMainTaskInfo;
 		}
 
 		/**
 		 * 设置当前任务信息
 		 */
-		public static function setCurrentMainTaskInfo(value : TaskInfo) : void
+		public static function setCurrentMainTaskInfo(value : TaskInfo,taskData:Q_mission_base) : void
 		{
 			if(value == null)return;
-			if (_currentMainTaskInfo)
+			if (_currentMainTaskInfo&&value&&_currentMainTaskInfo.taskId != value.taskId)
 			{
-				if (value == null || _currentMainTaskInfo.taskId != value.taskId)
-				{
-					/*if (_currentMainTaskInfo.dataInfo)
-					{
-						var targetInfo : BaseTaskTargetInfo = _currentMainTaskInfo.dataInfo.getTargetInfoAt(0);
-						if (targetInfo != null)
-						{
-							_preTaskType = targetInfo.type;
-						}
-					}*/
-				}
+				currentMainTaskIsfinish=false;
 			}
 			_currentMainTaskInfo = value;
-			/*var arr : Array = TaskCfgData.getStoryTaskSectionByCountInChapter(currentChapterInfo.order, currentChapterInfo.completedTaskCount + 1);
-			if (arr)
-			{
-				_currentSection = arr[0];
-				_currentCountInSection = arr[1];
-			}*/
+			_currentMainTaskData=taskData;
 		}
 		
 		
 		
-		
+		/**
+		 * 检测npc是否是主线任务回复npc
+		 * @param id
+		 * @return
+		 *
+		 */
+		public static function checkHasReplyNpcInStoryTask(npcId : int) : Boolean
+		{
+			if (_currentMainTaskData)
+			{
+				if (_currentMainTaskData.q_finish_npc == npcId)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 		
 		
 		
