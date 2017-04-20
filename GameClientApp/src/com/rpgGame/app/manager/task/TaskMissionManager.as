@@ -2,7 +2,6 @@ package com.rpgGame.app.manager.task
 {
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
-	import com.rpgGame.coreData.info.task.target.TaskTargetReplyInfo;
 	import com.rpgGame.coreData.type.TaskType;
 	import com.rpgGame.netData.task.bean.TaskInfo;
 
