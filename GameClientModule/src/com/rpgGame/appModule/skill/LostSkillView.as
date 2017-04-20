@@ -1,8 +1,10 @@
 package com.rpgGame.appModule.skill
 {
+	import com.game.engine3D.display.Inter3DContainer;
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.appModule.skill.lostskill.LostSkillIcon;
+	import com.rpgGame.appModule.skill.lostskill.LostSkillModePane;
 	import com.rpgGame.appModule.skill.lostskill.LostSkillUpLevelView;
 	import com.rpgGame.appModule.skill.lostskill.LostSpellActivate;
 	import com.rpgGame.coreData.cfg.LostSkillData;
@@ -29,6 +31,7 @@ package com.rpgGame.appModule.skill
 		private var _activit:LostSpellActivate;
 		private var _updataLevel:LostSkillUpLevelView;
 		private var _bgList:Vector.<UIAsset>;
+		private var _lostSkillModePane:LostSkillModePane;
 		public function LostSkillView(skin:Juexue_Skin,panel:SkinUIPanel)
 		{
 			_panel=panel;
@@ -37,6 +40,15 @@ package com.rpgGame.appModule.skill
 		}
 		private function initView():void
 		{
+			if(_lostSkillModePane==null)
+			{
+				var content:Inter3DContainer = new Inter3DContainer();
+				this._skin.container.addChildAt(content,4);
+				_lostSkillModePane = new LostSkillModePane();
+				_lostSkillModePane.x = 25;
+				_lostSkillModePane.y = 84;
+				content.addChild3D(_lostSkillModePane);
+			}
 			_skillIconList = new Vector.<LostSkillIcon>();
 			var datas:Array = LostSkillData.datas;
 			var gropname:String = "lostSkillgroup";
@@ -103,6 +115,7 @@ package com.rpgGame.appModule.skill
 			var state:SkillStateInfo = LostSkillManager.instance().getSkillStateInfoById(data.q_id);
 			_activit.updataSkill(data,state);
 			_updataLevel.updataSkill(data,state);
+			_lostSkillModePane.setModedata(data);
 			_skin.mc_name.gotoAndStop(index);
 			for(var i:int = 0;i<_bgList.length;i++)
 			{

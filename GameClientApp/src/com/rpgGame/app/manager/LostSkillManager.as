@@ -54,9 +54,12 @@ package com.rpgGame.app.manager
 		
 		public function updataSkllState(skillInfo:SkillStateInfo):void
 		{
-			if(skillInfo!=null&&_infos.length==0)
-				curSkillId = skillInfo.skillId;
+			if(skillInfo ==null)
+				return ;
 			_infos.push(skillInfo);
+			if(_infos.length==1)
+				curSkillId = skillInfo.skillId;
+			
 			EventManager.dispatchEvent(LostSkill_ChangeSkillState);
 		}
 		

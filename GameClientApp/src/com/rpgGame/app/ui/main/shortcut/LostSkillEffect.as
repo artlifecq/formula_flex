@@ -1,13 +1,22 @@
 package com.rpgGame.app.ui.main.shortcut
 {
 	import com.rpgGame.app.manager.LostSkillManager;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.view.ui.tip.vo.BaseTipsInfo;
+	import com.rpgGame.core.view.ui.tip.vo.TextTipsPropChangeData;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.LostSkillData;
+	import com.rpgGame.coreData.cfg.LostSkillUpData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
+	import com.rpgGame.coreData.clientConfig.Q_lostskill_up;
+	import com.rpgGame.coreData.lang.LangUI_2;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
 	
 	import feathers.controls.Button;
 	import feathers.controls.UIAsset;
+	import feathers.controls.UIMovieClip;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.juexue.juexu_Skin;
@@ -55,14 +64,16 @@ package com.rpgGame.app.ui.main.shortcut
 			_selectBgList.push(_skin.bg4);
 			_selectBgList.push(_skin.bg5);
 			_selectBgList.push(_skin.bg6);
+			_selectBgList.push(_skin.bg7);
 			
 			_buttonList = new Vector.<Button>();
-			_buttonList.push(_skin.btn_jineng1);
-			_buttonList.push(_skin.btn_jineng2);
-			_buttonList.push(_skin.btn_jineng3);
-			_buttonList.push(_skin.btn_jineng4);
-			_buttonList.push(_skin.btn_jineng5);
-			_buttonList.push(_skin.btn_jineng6);
+			_buttonList.push(_skin.btn_1);
+			_buttonList.push(_skin.btn_2);
+			_buttonList.push(_skin.btn_3);
+			_buttonList.push(_skin.btn_4);
+			_buttonList.push(_skin.btn_5);
+			_buttonList.push(_skin.btn_6);
+			_buttonList.push(_skin.btn_7);
 		}
 		
 		private function triggeredHandler(e:Event):void
@@ -77,10 +88,11 @@ package com.rpgGame.app.ui.main.shortcut
 			playEnd();
 		}
 		private var _bindBtn:Button;
-
-		public function set bindBtn(value:Button):void
+		
+		public function bind(button:Button):void
 		{
-			_bindBtn = value;
+			_bindBtn = button;
+			refeashState();
 			_bindBtn.addEventListener(Event.TRIGGERED,buttonClickHandler);
 		}
 		
@@ -88,10 +100,9 @@ package com.rpgGame.app.ui.main.shortcut
 		{
 			if(this.parent==null)
 			{
-				var index:int = _bindBtn.parent.getChildIndex(_bindBtn);
-				_bindBtn.parent.addChildAt(this,index);
+				_bindBtn.parent.addChildAt(this,0);
 				this.x = _bindBtn.x +_bindBtn.width/2-_skin.width/2+2;
-				this.y = _bindBtn.y +_bindBtn.height/2-_skin.height+20;
+				this.y = _bindBtn.y +_bindBtn.height/2-_skin.height+15;
 				starPlay();
 			}else{
 				playEnd();
@@ -101,6 +112,7 @@ package com.rpgGame.app.ui.main.shortcut
 		{
 			if(isRuning)
 				return ;
+			_skin.grp_btn.visible = false;
 			_skin.bg_jineng.visible = false;
 			_mask.drawAngle(Math.PI*1.5,Math.PI*1.5);
 			_effectCompleteFun = refeashView;
@@ -111,16 +123,15 @@ package com.rpgGame.app.ui.main.shortcut
 		private function refeashView():void
 		{
 			refeashState();
+			_skin.grp_btn.visible = true;
 			for each(var button:Button in _buttonList)
 			{
 				button.addEventListener(Event.TRIGGERED,triggeredHandler);
 			}
 			Starling.current.stage.addEventListener( TouchEvent.TOUCH, onCloseHandler );
-			EventManager.addEvent(LostSkillManager.LostSkill_ChangeSkillState,refeashState);
 		}
 		private function refeashState():void
-		{
-			var datas:Array = LostSkillData.datas;
+		{	
 			_skin.bg_jineng.visible = true;
 			for(var i:int = 0;i<_selectBgList.length;i++)
 			{
@@ -158,14 +169,15 @@ package com.rpgGame.app.ui.main.shortcut
 			_effectCompleteFun = removeHandler;
 			_timeChangeFun = changeTime;
 			_passTime = 0;
-			_skin.btn_jineng.alpha = 1;
+			_skin.grp_btn.alpha = 1;
+			_skin.grp_mc.alpha = 1;
 			_skin.bg_jineng.visible = false;
+			_skin.grp_btn.visible = false;
 			for each(var button:Button in _buttonList)
 			{
 				button.removeEventListener(Event.TRIGGERED,triggeredHandler);
 			}
 			Starling.current.stage.removeEventListener( TouchEvent.TOUCH, onCloseHandler );
-			EventManager.removeEvent(LostSkillManager.LostSkill_ChangeSkillState,refeashState);
 			addTimer();
 		}
 		
@@ -192,6 +204,13 @@ package com.rpgGame.app.ui.main.shortcut
 			if(isRuning)
 				Starling.juggler.remove(this);
 		}
+		
+		/*override public function dispose():void
+		{
+			EventManager.removeEvent(LostSkillManager.LostSkill_ChangeSkillState,refeashState);
+			EventManager.removeEvent(LostSkillManager.LostSkill_UpLevelSkillId,refeashState);
+			super.dispose();
+		}*/
 		private var _passTime:Number;
 		private static const totalTime:Number = 0.5;
 		private static const maxDrage:Number = 0.41;
@@ -217,9 +236,9 @@ package com.rpgGame.app.ui.main.shortcut
 			_mask.drawAngle(Math.PI*(1.5-drage),Math.PI*(1.5+drage));
 			if(percent <=0.75)
 			{
-				_skin.btn_jineng.alpha=0;
+				_skin.grp_mc.alpha=0;
 			}else{
-				_skin.btn_jineng.alpha = (percent-0.75)/0.25;
+				_skin.grp_mc.alpha = (percent-0.75)/0.25;
 			}
 		}
 		private static var _instance:LostSkillEffect;
