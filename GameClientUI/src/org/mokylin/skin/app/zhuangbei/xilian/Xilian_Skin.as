@@ -1,6 +1,5 @@
 package org.mokylin.skin.app.zhuangbei.xilian
 {
-	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Check;
 	import feathers.controls.Group;
@@ -37,6 +36,10 @@ package org.mokylin.skin.app.zhuangbei.xilian
 
 		public var lb_cailiao:feathers.controls.Label;
 
+		public var lb_item1:feathers.controls.Label;
+
+		public var lb_item2:feathers.controls.Label;
+
 		public var lb_name1:feathers.controls.Label;
 
 		public var lb_num:feathers.controls.Label;
@@ -56,7 +59,7 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__Xilian_Skin_UIAsset3_i(),__Xilian_Skin_UIAsset4_i(),__Xilian_Skin_UIAsset5_i(),btn_shuoming_i(),Item1_i(),Item2_i(),jiahao_i(),__Xilian_Skin_Label1_i(),btn_xilian_i(),left_i(),lb_cailiao_i(),lb_num_i()];
+			this.elementsContent = [__Xilian_Skin_UIAsset3_i(),__Xilian_Skin_UIAsset4_i(),__Xilian_Skin_UIAsset5_i(),btn_shuoming_i(),Item1_i(),Item2_i(),jiahao_i(),__Xilian_Skin_Label1_i(),btn_xilian_i(),left_i(),lb_cailiao_i(),lb_num_i(),lb_item1_i(),lb_item2_i()];
 			
 			states = {
 			};
@@ -96,7 +99,6 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.htmlText = "注：洗练除了获得属性外有机会洗练出特殊效果";
 			temp.color = 0xD02525;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 504;
 			temp.y = 392;
 			return temp;
@@ -169,10 +171,37 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			temp.name = "lb_cailiao";
 			temp.text = "初级图鉴图纸";
 			temp.color = 0xD02525;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
 			temp.x = 818;
 			temp.y = 198;
+			return temp;
+		}
+
+		private function lb_item1_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_item1 = temp;
+			temp.name = "lb_item1";
+			temp.text = "100/1";
+			temp.textAlign = "center";
+			temp.color = 0xD02525;
+			temp.width = 150;
+			temp.x = 438;
+			temp.y = 97;
+			return temp;
+		}
+
+		private function lb_item2_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_item2 = temp;
+			temp.name = "lb_item2";
+			temp.text = "100/1";
+			temp.textAlign = "center";
+			temp.color = 0xD02525;
+			temp.width = 150;
+			temp.x = 692;
+			temp.y = 98;
 			return temp;
 		}
 
@@ -184,7 +213,6 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			temp.text = "100/1";
 			temp.textAlign = "right";
 			temp.color = 0xD02525;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 70;
 			temp.x = 735;
 			temp.y = 184;

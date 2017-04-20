@@ -1,23 +1,70 @@
 package com.rpgGame.appModule.equip
 {
+	import com.game.mainCore.core.manager.SOManager;
+	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.goods.ItemManager;
+	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
+	import com.rpgGame.app.manager.pop.UIPopManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.sender.ItemSender;
+	import com.rpgGame.app.ui.common.CenterEftPop;
+	import com.rpgGame.app.utils.FaceUtil;
+	import com.rpgGame.app.utils.TouchableUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
+	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.appModule.common.GoodsContainerPanel;
 	import com.rpgGame.appModule.common.ViewUI;
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
+	import com.rpgGame.core.events.ItemEvent;
+	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.cfg.item.EquipWashAttCfg;
+	import com.rpgGame.coreData.cfg.item.EquipWashCfg;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.clientConfig.Q_att_values;
+	import com.rpgGame.coreData.clientConfig.Q_buff;
+	import com.rpgGame.coreData.clientConfig.Q_equip_wash;
+	import com.rpgGame.coreData.clientConfig.Q_equip_wash_attr;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
+	import com.rpgGame.coreData.enum.SharedObjectEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
+	import com.rpgGame.coreData.lang.LangSpell;
 	import com.rpgGame.coreData.lang.LangUI;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.item.GridBGType;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
+	import com.rpgGame.netData.backpack.bean.ItemInfo;
+	import com.rpgGame.netData.equip.message.ResEquipOperateResultMessage;
 	
+	import flash.geom.Point;
+	import flash.net.SharedObject;
+	
+	import app.message.GoodsType;
+	
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	
+	import gs.TweenMax;
+	import gs.easing.Expo;
+	
+	import org.client.mainCore.ds.HashMap;
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhuangbei.Zhuangbei_left;
 	import org.mokylin.skin.app.zhuangbei.qianghua.TitileHead;
+	import org.mokylin.skin.app.zhuangbei.xilian.XiLianItem;
 	import org.mokylin.skin.app.zhuangbei.xilian.Xilian_Skin;
+	
+	import starling.display.DisplayObject;
+	import starling.events.Event;
 	
 	/**
 	 *装备洗练
@@ -33,13 +80,29 @@ package com.rpgGame.appModule.equip
 		private var _goodsContainerTarget:GoodsContainerPanel;
 		private var _goodsContainerUse:GoodsContainerPanel;
 		
-		private var _targetEquip:DragDropItem;//目标道具
+		private var _targetEquip:IconCDFace;//目标道具
 		private var targetEquipInfo:EquipInfo;//目标信息
+		
+		private var _useItem:IconCDFace;
+		private var useItemInfo:ClientItemInfo;
+		
+		private var targetEquips:Vector.<ClientItemInfo>;//目标数据
+		private var useItems:Vector.<ClientItemInfo>;//消耗数据
+		private var tweenEquip:TweenMax;
+
+		private var washCfg:Q_equip_wash;
+		
+		private var _sharedObject:SharedObject;
+		private var needMon:int;
+
+		private var userMon:int;
+
+		private var lock:int;
 		
 		public function EquipSmeltUI(skin:StateSkin=null)
 		{
 			_skin=new Xilian_Skin();
-			super(skin);
+			super(_skin);
 			initView();
 		}
 		
@@ -50,8 +113,23 @@ package com.rpgGame.appModule.equip
 			(_leftSkin.title1.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT1);
 			(_leftSkin.title2.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT2);
 			
-			_goodsContainerTarget=new GoodsContainerPanel(_leftSkin.list1,ItemContainerID.INTENSIFY_LIST,createItemRender);
-			_goodsContainerUse=new GoodsContainerPanel(_leftSkin.list2,ItemContainerID.INTENSIFY_USE,createItemRender);
+			_goodsContainerTarget=new GoodsContainerPanel(_leftSkin.list1,ItemContainerID.SMELT_LIST,createItemRender);
+			_goodsContainerUse=new GoodsContainerPanel(_leftSkin.list2,ItemContainerID.SMELT_USE,createItemRender);
+			
+			_targetEquip=new IconCDFace(64);
+			_targetEquip.selectImgVisible=false;
+			_useItem=new IconCDFace(64);
+			_useItem.selectImgVisible=false;
+			_skin.container.addChild(_targetEquip);
+			_skin.container.addChild(_useItem);
+			_skin.container.addChild(_skin.lb_num);
+			_useItem.x=730;
+			_useItem.y=130;
+			
+			useItemInfo=new ClientItemInfo();
+			useItemInfo.itemInfo=new ItemInfo();
+			
+			_sharedObject=SharedObject.getLocal(SharedObjectEnum.EQUIP_WASH);
 		}
 		
 		private function createItemRender():GridItemRender
@@ -74,11 +152,249 @@ package com.rpgGame.appModule.equip
 			if(gridInfo.data==null){
 				return;
 			}
-			if(gridInfo.containerID==ItemContainerID.INTENSIFY_LIST){
-				//				addIntensifyItem(gridInfo);
-			}else if(gridInfo.containerID==ItemContainerID.INTENSIFY_USE){
+			if(gridInfo.containerID==ItemContainerID.SMELT_LIST){
+				addTargetEquip(gridInfo);
+			}else if(gridInfo.containerID==ItemContainerID.SMELT_USE){
 				//				addIntensifyUseItem(gridInfo);
 			}
+		}
+		
+		private function addTargetEquip(gridInfo:GridInfo):void
+		{
+			var targetGrid:DragDropItem;
+			if(targetEquipInfo){
+				targetGrid=_goodsContainerTarget.getDragDropItemByItemInfo(targetEquipInfo);
+				TouchableUtil.ungray(targetGrid);
+			}
+			
+			
+			targetEquipInfo=gridInfo.data as EquipInfo;
+			targetEquipInfo.setContainerId(gridInfo.containerID);
+			FaceUtil.SetItemGrid(_targetEquip,targetEquipInfo);
+			_targetEquip.selectImgVisible=false;
+			targetGrid=_goodsContainerTarget.getDragDropItemByItemInfo(targetEquipInfo);
+			TouchableUtil.gray(targetGrid);
+			var p:Point=new Point(targetGrid.x,targetGrid.y);
+			p=targetGrid.parent.localToGlobal(p);
+			p=_targetEquip.parent.globalToLocal(p);
+			_targetEquip.x=p.x;
+			_targetEquip.y=p.y;
+			if(tweenEquip){
+				tweenEquip.kill();
+			}
+			tweenEquip=TweenMax.to(_targetEquip,1,{x:475,y:130,ease:Expo.easeOut});
+			
+			showUseItem();
+			
+			updateView();
+		}
+		
+		override protected function onTouchTarget(target:DisplayObject):void
+		{
+			super.onTouchTarget(target);
+			switch(target){
+				case _targetEquip:
+					onCancelTarget();
+					break;
+				case _skin.btn_xilian:
+					onWash();
+					break;
+				case _skin.Item1.skin["chk_suoding"]:
+					_sharedObject.data[targetEquipInfo.itemInfo.itemId.ToGID()+"_1"]=getItemSkin(_skin.Item1).chk_suoding.isSelected;
+					lock=getLock();
+					_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),needMon,userMon);
+					break;
+				case _skin.Item2.skin["chk_suoding"]:
+					_sharedObject.data[targetEquipInfo.itemInfo.itemId.ToGID()+"_2"]=getItemSkin(_skin.Item2).chk_suoding.isSelected;
+					lock=getLock();
+					_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),needMon,userMon);
+					break;
+			}
+		}
+		
+		private function onWash():void
+		{
+			if(!targetEquipInfo){
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, "请放入洗炼装备");
+				return;
+			}
+			if(useItemInfo.count<washCfg.q_item_num){
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, "洗炼材料不足");
+				return;
+			}
+			
+			var type:int=RoleEquipmentManager.equipIsWearing(targetEquipInfo)?0:1;
+			if(userMon<needMon){
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6014));
+				return;
+			}
+			ItemSender.washEquip(targetEquipInfo.itemInfo.itemId,type,lock);
+		}
+		
+		private function getLock():int
+		{
+			var lock:int=0;
+			needMon=0;
+			if(getItemSkin(_skin.Item1).chk_suoding.isSelected){
+				lock=1;
+				needMon+=10;
+			}
+			if(getItemSkin(_skin.Item2).chk_suoding.isSelected){
+				if(lock==1){
+					lock=3;
+				}else{
+					lock=2;
+				}
+				needMon+=10;
+			}
+			return lock;
+		}
+		
+		private function onCancelTarget():void
+		{
+			var targetGrid:DragDropItem;
+			if(targetEquipInfo){
+				targetGrid=_goodsContainerTarget.getDragDropItemByItemInfo(targetEquipInfo);
+				TouchableUtil.ungray(targetGrid);
+				targetEquipInfo=null;
+			}
+			
+			_targetEquip.clear();
+			_useItem.clear();
+			updateView();
+		}
+		
+		private function updateView():void
+		{
+			if(targetEquipInfo){
+				useItemInfo.count=BackPackManager.instance.getBagItemsCountById(washCfg.q_item_id);
+				changeAttState(_skin.Item1,true);
+				changeAttState(_skin.Item2,true);
+				if(targetEquipInfo.smeltAtt1!=0){
+					getItemSkin(_skin.Item1).lb_name.htmlText=getAttDes(targetEquipInfo.smeltAtt1);
+					getItemSkin(_skin.Item1).chk_suoding.isSelected=_sharedObject.data[targetEquipInfo.itemInfo.itemId.ToGID()+"_1"];
+				}else{
+					changeAttState(_skin.Item1,false);
+				}
+				if(targetEquipInfo.smeltAtt2!=0){
+					getItemSkin(_skin.Item2).lb_name.htmlText=getAttDes(targetEquipInfo.smeltAtt2);
+					getItemSkin(_skin.Item2).chk_suoding.isSelected=_sharedObject.data[targetEquipInfo.itemInfo.itemId.ToGID()+"_2"];
+				}else{
+					changeAttState(_skin.Item2,false);
+				}
+				
+//				_useItem.setSubString(useItemInfo.count+"/"+washCfg.q_item_num);
+				_useItem.countText.text="";
+				_skin.lb_cailiao.text=targetEquipInfo.name;
+				_skin.lb_item1.color=ItemConfig.getItemQualityColor(targetEquipInfo.cfgId);
+				_skin.lb_item2.color=ItemConfig.getItemQualityColor(useItemInfo.cfgId);
+				_skin.lb_item1.text=targetEquipInfo.name;
+				_skin.lb_item2.text=useItemInfo.name;
+				_skin.lb_num.text=useItemInfo.count+"/"+washCfg.q_item_num;
+				if(useItemInfo.count<washCfg.q_item_num){
+					_skin.lb_num.color=0xd02525;
+				}else{
+					_skin.lb_num.color=0x25931b;
+				}
+			}else{
+				changeAttState(_skin.Item1,false);
+				changeAttState(_skin.Item2,false);
+				_skin.lb_cailiao.text="";
+				_skin.lb_num.text="";
+				_skin.lb_item1.text="";
+				_skin.lb_item2.text="";
+				_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),0);
+			}
+			
+		}
+		
+		private function getTitleText(title:String,value:*,value1:int=-1,noSlip:Boolean=true):String
+		{
+			var wu:String=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12);
+			if(value is int){
+				if(value==0){
+					value=wu;
+					return title+":"+value;
+				}
+			}
+			var des:String="";
+			if(value<=value1){
+				des=noSlip?HtmlTextUtil.getTextColor(0x55BD15,value):HtmlTextUtil.getTextColor(0x55BD15,value+"/"+value1);//绿色
+			}else{
+				des=noSlip?HtmlTextUtil.getTextColor(0xd02525,value):HtmlTextUtil.getTextColor(0xd02525,value+"/"+value1);//红色
+			}
+			return title+":"+des;
+		}
+		
+		private function changeAttState(Item:SkinnableContainer,state:Boolean):void
+		{
+				getItemSkin(Item).lb_name.text="属性:";
+				getItemSkin(Item).chk_suoding.isSelected=state;
+				getItemSkin(Item).chk_suoding.visible=state;
+				getItemSkin(Item).lb_yuanbao.visible=state;
+				getItemSkin(Item).lb_lock.visible=state;
+		}		
+	
+		
+		private function getAttDes(att:int):String
+		{
+			var cfg:Q_equip_wash_attr=EquipWashAttCfg.getEquipWashAttr(att);
+			var result:String="属性:";
+			if(cfg.q_attr_id!=0){
+				result+= getByAttr(cfg.q_attr_id);
+			}else if(cfg.q_buff_id!=0){
+				result+= getByBuff(cfg.q_buff_id);
+			}else if(cfg.q_skill_id!=0){
+				result+= getBySkill(cfg.q_skill_id);
+			}
+			return result;
+		}
+		
+		private function getBySkill(q_skill_id:int):String
+		{
+			var cfg:Q_skill_model=SpellDataManager.getSpellData(q_skill_id);
+			if(cfg){
+				return cfg.q_skillpanel_description1;
+			}
+			return "";
+		}
+		
+		private function getByBuff(q_buff_id:int):String
+		{
+			var cfg:Q_buff=BuffStateDataManager.getData(q_buff_id);
+			if(cfg){
+				return cfg.q_description;
+			}
+			return "";
+		}
+		
+		private function getByAttr(q_attr_id:int):String
+		{
+			var attValue:Q_att_values=AttValueConfig.getAttInfoById(q_attr_id);
+			var maps:HashMap=AttValueConfig.getTypeValueMap(attValue);
+			var keys:Array=maps.keys();
+			var values:Array=maps.getValues();
+			var result:String="";
+			for(var i:int=0;i<keys.length;i++){
+				var name:String=CharAttributeType.getCNName(keys[i]);
+				var value:String=values[i];
+				result+=HtmlTextUtil.getTextColor(0xb2b08a,name)+HtmlTextUtil.getTextColor(0x25931b,"+"+value);
+			}
+			
+			return result;
+		}
+		
+		private function getItemSkin(state:SkinnableContainer):XiLianItem
+		{
+			return state.skin as XiLianItem;
+		}
+		
+		private function showUseItem():void
+		{
+			washCfg=EquipWashCfg.getCfgByLvAndKind(targetEquipInfo.qItem.q_levelnum,targetEquipInfo.qItem.q_kind);
+			useItemInfo.cfgId=washCfg.q_item_id;
+			FaceUtil.SetItemGrid(_useItem,useItemInfo);
+			_useItem.selectImgVisible=false;
 		}
 		
 		override public function show():void
@@ -89,11 +405,91 @@ package com.rpgGame.appModule.equip
 		
 		private function initEvent():void
 		{
+			_leftSkin.tab_pack.addEventListener(Event.CHANGE, onTab);
+			EventManager.addEvent(ItemEvent.ITEM_WASH_MSG,getWashMsg);
 			
+			EventManager.addEvent(ItemEvent.ITEM_ADD,onFreshItems);
+			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
+			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
+			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
+		}
+		
+		private function updateAmount(type:int=3):void
+		{
+			if(type!=CharAttributeType.RES_GOLD&&type!=CharAttributeType.RES_BIND_GOLD){
+				return;
+			}
+			
+			userMon=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_GOLD);
+			updateView();
+		}
+		
+		private function onTab(e:Event):void
+		{
+			var type:int=-1;
+			switch(_leftSkin.tab_pack.selectedIndex){
+				case 1:
+					type=GoodsType.EQUIPMENT;
+					break;
+				case 2:
+					type=GoodsType.EQUIPMENT1;
+					break;
+				case 3:
+					type=GoodsType.EQUIPMENT2;
+					break;
+			}
+			var result:Vector.<ClientItemInfo>=getEquipByType(type,targetEquips);
+			_goodsContainerTarget.refleshGridsByDatas(result);
+			
+			var targetGrid:DragDropItem;
+			for each(var info:ClientItemInfo in result){
+				targetGrid=_goodsContainerTarget.getDragDropItemByItemInfo(info);
+				if(!targetGrid){
+					continue;
+				}
+				if(info==targetEquipInfo){
+					TouchableUtil.gray(targetGrid);
+				}else{
+					TouchableUtil.ungray(targetGrid);
+				}
+			}
+		}
+		
+		private function getEquipByType(type:int,datas:Vector.<ClientItemInfo>):Vector.<ClientItemInfo>
+		{
+			if(type==-1){
+				return datas;
+			}
+			var result:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
+			for each(var item:ClientItemInfo in datas){
+				if(item.type==type){
+					result.push(item);
+				}
+			}
+			return result;
+		}
+		
+		private function onFreshItems(info:ClientItemInfo=null):void
+		{
+			if((info.containerID==ItemContainerID.Role||info.containerID==ItemContainerID.BackPack)&&
+				(info.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||
+				info.type==GoodsType.EQUIPMENT2||isUse(info))){
+				ItemManager.getBackEquip(initItem);
+			}
+		}
+		
+		private function getWashMsg(msg:ResEquipOperateResultMessage):void
+		{
+			if(msg.result==1){
+				UIPopManager.showAlonePopUI(CenterEftPop,"ui_qianghuachenggong");
+				_sharedObject.flush();
+			}
+			updateView();
 		}
 		
 		override public function refresh():void
 		{
+			userMon=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_GOLD);
 			ItemManager.getBackEquip(initItem);
 		}
 		
@@ -102,26 +498,75 @@ package com.rpgGame.appModule.equip
 			var allEquips:Array=ItemManager.getAllEquipDatas();
 			var num:int=allEquips.length;
 			
-		/*	targetEquips=getPolishEquips(allEquips);
+			targetEquips=getSmeltEquips(allEquips);
 			num=targetEquips.length;
 			num=num>MIN_GRID?num:MIN_GRID;
 			_goodsContainerTarget.setGridsCount(num,false);
 			_goodsContainerTarget.refleshGridsByDatas(targetEquips);
 			
-			useEquips=getUseEquips(allEquips);
-			if(targetEquipInfo){
-				for each( var equip:EquipInfo in selectedUse){
-					deleteItems(useEquips,equip);
-				}
-			}else{
-				selectedUse.length=0;
-			}
+			BackPackManager.instance.setCheckType([GoodsType.MATERIAL_COMBO]);//筛选出合成材料
+			var backDatas:Array=BackPackManager.instance.getAllItem();
+			BackPackManager.instance.setCheckType(null);//重置掉筛选
 			
-			num=useEquips.length;
+			useItems=getUseItems(backDatas);
 			num=num>MIN_GRID?num:MIN_GRID;
 			_goodsContainerUse.setGridsCount(num,false);
-			_goodsContainerUse.refleshGridsByDatas(useEquips);
-			updateView();*/
+			_goodsContainerUse.refleshGridsByDatas(useItems);
+			updateView();
+		}
+		
+		/**
+		 *可消耗的装备
+		 * @return 
+		 * 
+		 */
+		private function getUseItems(datas:Array):Vector.<ClientItemInfo>
+		{
+			var num:int=datas.length;
+			var result:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
+			for(var i:int=0;i<num;i++){
+				var info:ClientItemInfo=datas[i];
+				if(isUse(info)){//可消耗
+					result.push(info);
+				}
+			}
+			return result;
+		}
+		
+		private function isUse(info:ClientItemInfo):Boolean
+		{
+			if(EquipWashCfg.washItems.indexOf(info.cfgId)!=-1){
+				return true;
+			}
+			return false;
+		}
+		
+		private function getSmeltEquips(datas:Array):Vector.<ClientItemInfo>
+		{
+			var num:int=datas.length;
+			var result:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
+			for(var i:int=0;i<num;i++){
+				var info:ClientItemInfo=datas[i];
+				if(isSmelt(info as EquipInfo)){
+					if(targetEquipInfo&&info.itemInfo.itemId.ToGID()==targetEquipInfo.itemInfo.itemId.ToGID()){
+						targetEquipInfo=info as EquipInfo;//更新掉
+						targetEquipInfo.setContainerId(info.containerID);
+						FaceUtil.SetItemGrid(_targetEquip, targetEquipInfo, true);
+					}
+					result.push(info);
+				}else{
+					if(targetEquipInfo&&info.itemInfo.itemId.ToGID()==targetEquipInfo.itemInfo.itemId.ToGID()){
+						targetEquipInfo=null;
+						_targetEquip.clear();
+					}
+				}
+			}
+			return result;
+		}
+		
+		private function isSmelt(info:EquipInfo):Boolean
+		{
+			return true;//目前全部都可以洗炼
 		}
 	}
 }

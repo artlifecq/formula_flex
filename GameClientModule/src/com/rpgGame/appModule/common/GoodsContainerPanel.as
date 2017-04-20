@@ -138,9 +138,8 @@ package com.rpgGame.appModule.common
 		public function setGridsCount(count:int, refleshNow:Boolean):void
 		{
 			if(count<gridCount){
-				for (i=count; i<gridCount; i++)
-				{
-					setGridInfo(i,null);
+				while(dataProvider.length>count){//移除超出部分
+					dataProvider.removeItemAt(dataProvider.length-1);
 				}
 			}
 			gridCount = count;
@@ -200,6 +199,9 @@ package com.rpgGame.appModule.common
 			var gridInfo:GridInfo = dataProvider.getItemAt(index) as GridInfo;
 			if(!gridInfo)
 				return;
+			if(gridInfo.data==itemInfo){
+				return;
+			}
 			gridInfo.data = itemInfo;
 			gridInfo.isEnabled = _mgr?_mgr.isEnabled(index):true;
 			gridInfo.isUnlock =  _mgr?_mgr.isUnlock(index):true;

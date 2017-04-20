@@ -4,17 +4,19 @@ package com.rpgGame.app.manager.hint
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.HintTypeSetInfo;
 	import com.rpgGame.coreData.enum.HintMoveDirectionEnum;
-
+	
+	import flash.utils.getTimer;
+	
 	import feathers.controls.Button;
 	import feathers.controls.UIAsset;
-
+	
 	import starling.display.DisplayObject;
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-
+	
 	import utils.TimerServer;
 
 	/**
@@ -40,6 +42,7 @@ package com.rpgGame.app.manager.hint
 		private var _bgMarginRight : int;
 		private var _topOffset : int;
 		private var _lastHintValue : String;
+
 
 		public function HintBaseBox(noticeType : int)
 		{

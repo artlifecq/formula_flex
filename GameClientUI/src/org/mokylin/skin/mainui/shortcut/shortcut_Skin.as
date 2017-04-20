@@ -512,7 +512,7 @@ package org.mokylin.skin.mainui.shortcut
 			temp.name = "grp_buff";
 			temp.x = 236;
 			temp.y = 0;
-			temp.elementsContent = [/*__shortcut_Skin_UIAsset3_i(),__shortcut_Skin_UIAsset4_i(),__shortcut_Skin_UIAsset5_i(),*/__shortcut_Skin_UIAsset6_i(),/*__shortcut_Skin_UIAsset7_i(),__shortcut_Skin_UIAsset8_i(),__shortcut_Skin_UIAsset9_i(),*/__shortcut_Skin_UIAsset10_i(),__shortcut_Skin_Label9_i()];
+			temp.elementsContent = [__shortcut_Skin_UIAsset3_i(),__shortcut_Skin_UIAsset4_i(),__shortcut_Skin_UIAsset5_i(),__shortcut_Skin_UIAsset6_i(),__shortcut_Skin_UIAsset7_i(),__shortcut_Skin_UIAsset8_i(),__shortcut_Skin_UIAsset9_i(),__shortcut_Skin_UIAsset10_i(),__shortcut_Skin_Label9_i()];
 			return temp;
 		}
 

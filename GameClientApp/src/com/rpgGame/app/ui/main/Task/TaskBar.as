@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main.Task
 {
+
 	import com.game.engine3D.utils.MathUtil;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
@@ -26,6 +27,7 @@ package com.rpgGame.app.ui.main.Task
 	import gs.TweenMax;
 	
 	import org.client.mainCore.manager.EventManager;
+
 	import org.mokylin.skin.mainui.renwu.RenWuZhuiZong_Skin;
 	import org.mokylin.skin.mainui.renwu.Renwu_Item;
 	
@@ -34,9 +36,11 @@ package com.rpgGame.app.ui.main.Task
 	public class TaskBar extends SkinUI
 	{
 		private var _skin:RenWuZhuiZong_Skin;
+
 		private var leadCont:TaskLeadView;
 		private var loopCont:TaskLoopView;
 		private var effetCont:TaskEffectView;
+
 		private var barTweenMax:TweenMax;
 		private var initX:Number;
 		public function TaskBar()
@@ -44,8 +48,7 @@ package com.rpgGame.app.ui.main.Task
 			_skin=new RenWuZhuiZong_Skin();
 			super(_skin);
 			init();
-			addEvent();
-			
+			addEvent();		
 		}
 		
 		
@@ -190,8 +193,6 @@ package com.rpgGame.app.ui.main.Task
 			
 		}
 		
-		
-		
 		override protected function onTouchTarget(target : DisplayObject) : void {
 			CONFIG::netDebug {
 				NetDebug.LOG("[MainUI] [onTouchTarget]:" + target.name);
@@ -211,7 +212,6 @@ package com.rpgGame.app.ui.main.Task
 					case Renwu_Item(_skin.pri_killbut1.skin).labelDisplay:
 						//L.l("labelDisplaylabelDisplay");
 						mainlineWalk(0);
-						
 						break;
 					case Renwu_Item(_skin.sec_killbut1.skin).btn_send:
 						//L.l("sec_killbut1");
@@ -233,6 +233,7 @@ package com.rpgGame.app.ui.main.Task
 						break;
 				}
 		}
+
 		/**主线按钮任务处理*/
 		private function mainlineWalk(value:int):void
 		{
