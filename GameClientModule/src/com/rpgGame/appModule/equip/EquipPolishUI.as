@@ -310,6 +310,7 @@ package com.rpgGame.appModule.equip
 			
 			
 			var type:int=RoleEquipmentManager.equipIsWearing(targetEquipInfo)?0:1;
+			isLockRefresh=true;
 			ItemSender.polishEquip(targetEquipInfo.itemInfo.itemId,type,useListIds,EquipOperateType.POLISH_NORMAL);
 		}
 		
@@ -621,9 +622,17 @@ package com.rpgGame.appModule.equip
 			EventManager.addEvent(ItemEvent.ITEM_POLISH_MSG,getPolishMsg);
 			
 			EventManager.addEvent(ItemEvent.ITEM_ADD,onFreshItems);
-			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
+			EventManager.addEvent(ItemEvent.ITEM_REMOVE_LIST,onRemoveFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
+		}
+		
+		private function onRemoveFreshItems():void
+		{
+			if(isLockRefresh){
+				return;
+			}
+			ItemManager.getBackEquip(initItem);
 		}
 		
 		
@@ -646,7 +655,7 @@ package com.rpgGame.appModule.equip
 			EventManager.removeEvent(ItemEvent.ITEM_POLISH_MSG,getPolishMsg);
 			
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,onFreshItems);
-			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
+			EventManager.removeEvent(ItemEvent.ITEM_REMOVE_LIST,onRemoveFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
 		}
