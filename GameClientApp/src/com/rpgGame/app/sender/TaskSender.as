@@ -3,10 +3,14 @@ package com.rpgGame.app.sender
 	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
 	import com.rpgGame.coreData.type.CostItemType;
-
+	import com.rpgGame.netData.map.message.ReqPlayerStopMessage;
+	import com.rpgGame.netData.task.message.ReqfinishTaskMessage;
+	
 	import app.cmd.TaskModuleMessages;
-
+	
+	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.data.long;
 
 	/**
 	 * 任务协议发送
@@ -15,6 +19,27 @@ package com.rpgGame.app.sender
 	 */
 	public class TaskSender extends BaseSender
 	{
+		
+		
+		
+		
+		
+		
+		
+		public static function SendfinishTaskMessage(tid:long):void
+		{
+			var msg:ReqfinishTaskMessage = new ReqfinishTaskMessage();
+			msg.taskId=tid;
+			SocketConnection.send(msg);
+		}
+		
+		
+		
+		
+		
+		
+		
+		
 		/**
 		 *  秒杀剩余所有帮会任务
 		 */

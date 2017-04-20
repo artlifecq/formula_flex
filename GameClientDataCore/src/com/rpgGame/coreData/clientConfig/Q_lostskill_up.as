@@ -16,6 +16,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_id_level:String;
 		 /**  升级消耗材料 */
 		public var q_cost:String;
+		 /**  当前效果值 */
+		public var q_value:int;
 
 	}
 }

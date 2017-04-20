@@ -17,12 +17,14 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.appModule.common.itemRender.SkinItemRender;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.ui.AwdProgressBar;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
-	import com.rpgGame.coreData.cfg.item.ItemStrength;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
 	import com.rpgGame.coreData.clientConfig.Q_equip_strength;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -40,6 +42,7 @@ package com.rpgGame.appModule.equip
 	
 	import flash.geom.Point;
 	
+	import app.message.EquipOperateType;
 	import app.message.GoodsType;
 	
 	import feathers.controls.List;
@@ -108,6 +111,8 @@ package com.rpgGame.appModule.equip
 
 		private var userMon:int;
 		private var isToUp:Boolean;
+		private var _progressBar:AwdProgressBar;
+		private var isLockRefresh:Boolean;
 		public function EquipIntensifyUI()
 		{
 			_skin=new Zhuangbei_QianghuaSkin();
@@ -121,6 +126,10 @@ package com.rpgGame.appModule.equip
 			
 			(_leftSkin.title1.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT1);
 			(_leftSkin.title2.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT2);
+			
+			_progressBar=new AwdProgressBar(_skin.progressBar,"ui_zuomotiao");
+			_skin.grp_pro.addChild(_progressBar);
+			_skin.grp_pro.addChild(_skin.lb_pro);
 			
 			_goodsContainerTarget=new GoodsContainerPanel(_leftSkin.list1,ItemContainerID.INTENSIFY_LIST,createItemRender);
 			_goodsContainerUse=new GoodsContainerPanel(_leftSkin.list2,ItemContainerID.INTENSIFY_USE,createItemRender);
@@ -149,7 +158,7 @@ package com.rpgGame.appModule.equip
 			
 			qualityDatas=new Array();
 			for(i=1;i<4;i++){
-				qualityDatas.push(ItemUtil.getQualityName(i)+"及以下装备");
+				qualityDatas.push(ItemUtil.getQualityName(i)+LanguageConfig.getText(LangUI.UI_TEXT5));
 			}
 			_skin.cmb_pinzhi.addEventListener("creationComplete",onCreatePinZhi);
 			_skin.cmb_pinzhi.alpha=0;
@@ -291,7 +300,12 @@ package com.rpgGame.appModule.equip
 		 */
 		private function addIntensifyUseItem(gridInfo:GridInfo):void
 		{
-			if(!targetEquipInfo||selectedUse.length==6){//没选强化准备
+			if(!targetEquipInfo){//没选强化准备
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4204));
+				return;
+			}
+			if(selectedUse.length==6){
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6016));
 				return;
 			}
 			var itemInfo:ClientItemInfo=gridInfo.data as ClientItemInfo;
@@ -368,7 +382,7 @@ package com.rpgGame.appModule.equip
 				targetGrid=_goodsContainerUse.getDragDropItemByItemInfo(targetEquipInfo);
 				TouchableUtil.gray(targetGrid);
 			}
-			currCfg=ItemStrength.getStrengthCfg(targetEquipInfo.qItem.q_kind,targetEquipInfo.qItem.q_job,targetEquipInfo.strengthLevel);
+			currCfg=EquipStrengthCfg.getStrengthCfg(targetEquipInfo.qItem.q_kind,targetEquipInfo.qItem.q_job,targetEquipInfo.strengthLevel);
 			addExp=0;
 			
 			var roleLv:int=MainRoleManager.actorInfo.totalStat.level;
@@ -410,23 +424,24 @@ package com.rpgGame.appModule.equip
 		private function updateView():void
 		{
 			if(targetEquipInfo){
+				currCfg=EquipStrengthCfg.getStrengthCfg(targetEquipInfo.qItem.q_kind,targetEquipInfo.qItem.q_job,targetEquipInfo.strengthLevel);
 				_skin.equip_name.color=ItemConfig.getItemQualityColor(targetEquipInfo.cfgId);
 				_skin.equip_name.text=targetEquipInfo.name;
-				_skin.lb_dengji.htmlText="最大强化等级:"+targetEquipInfo.strengthLevel+"/"+targetEquipInfo.qItem.q_max_strengthen;
-				_skin.lb_current.text=targetEquipInfo.strengthLevel+"级";
+				_skin.lb_dengji.htmlText=LanguageConfig.getText(LangUI.UI_TEXT6)+":"+targetEquipInfo.strengthLevel+"/"+targetEquipInfo.qItem.q_max_strengthen;
+				_skin.lb_current.text=targetEquipInfo.strengthLevel+LanguageConfig.getText(LangUI.UI_TEXT7);
 				getUpLv();
-				_skin.lb_up.text=upCfg.q_strength+"级";
+				_skin.lb_up.text=upCfg.q_strength+LanguageConfig.getText(LangUI.UI_TEXT7);
 				if(currCfg&&upCfg&&canUpNum!=0){//能升级
 					updateAttShow(currCfg,upCfg);
 				}else{
 					updateAttShow(currCfg);
 				}
-				_skin.progressBar.value=currentExp;
-				_skin.progressBar.maximum=allExp;
+				_progressBar.value=currentExp;
+				_progressBar.maximum=allExp;
 				_skin.lb_pro.text=currentExp+"/"+allExp;
 				useMon=addExp*perMon;
 				userMon=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
-				_leftSkin.lb_yinzi.htmlText=getTitleText("消耗绑银",useMon,userMon);
+				_leftSkin.lb_yinzi.htmlText=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),useMon,userMon);
 				
 				if(_skin.cmb_dengjie.alpha==0&&!tween){
 					tween=TweenMax.fromTo(_skin.cmb_dengjie,1,{x:455,alpha:0},{x:405,alpha:1,ease:Expo.easeOut,onComplete:showComplete});
@@ -434,14 +449,14 @@ package com.rpgGame.appModule.equip
 				}
 			}else{
 				_skin.lb_dengji.htmlText="";
-				_leftSkin.lb_yinzi.htmlText=getTitleText("消耗绑银",0);
+				_leftSkin.lb_yinzi.htmlText=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),0);
 				_skin.equip_name.text="";
 				for(var i:int=0;i<4;i++){
 					var labelUp:SkinnableContainer=_skin["up"+i];
 					labelUp.visible=false;
 				}
 				_skin.lb_pro.text="";
-				_skin.progressBar.value=0;
+				_progressBar.value=0;
 				_skin.lb_current.text=_skin.lb_up.text="";
 				
 				if(_skin.cmb_dengjie.alpha==1&&!tween){
@@ -468,7 +483,7 @@ package com.rpgGame.appModule.equip
 			while(currentLv<=maxLv){
 				currentLv++;
 				upCfg=nextCfg;
-				nextCfg=ItemStrength.getStrengthCfg(targetEquipInfo.qItem.q_kind,targetEquipInfo.qItem.q_job,currentLv);//下一级的配置
+				nextCfg=EquipStrengthCfg.getStrengthCfg(targetEquipInfo.qItem.q_kind,targetEquipInfo.qItem.q_job,currentLv);//下一级的配置
 				upExp=nextCfg.q_exp;//升级所需强化值
 				
 				if(exp<=upExp){//不够升级不查找
@@ -565,7 +580,7 @@ package com.rpgGame.appModule.equip
 			for each(var info:GridInfo in datas){
 				if(info.data){
 					item=info.data as ClientItemInfo;
-					if(item.qItem.q_levelnum<=lv&&item.quality<=quality&&item!=targetEquipInfo){//符合阶数和品质筛选
+					if(item.qItem.q_levelnum<=lv&&item.quality<=quality&&item!=targetEquipInfo&&item["strengthLevel"]==0&&item["strengthExp"]==0){//符合阶数和品质筛选
 						result.push(item);
 					}
 				}
@@ -573,11 +588,12 @@ package com.rpgGame.appModule.equip
 			result.sort(ItemManager.onSortUseEquip);
 			addExp=0;
 			useListIds=new Vector.<long>();
+			isToUp=false;
 			for(var i:int=0;i<result.length;i++){
 				item=result[i];
 				addExp+=item.qItem.q_strengthen_num;
 				if(addExp>upCfg.q_exp){
-					isToUp=true;
+					isToUp=true;//到顶级了
 					break;
 				}
 				useListIds.push(item.itemInfo.itemId);
@@ -595,7 +611,13 @@ package com.rpgGame.appModule.equip
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4205));
 				return;
 			}
-			ItemSender.strengthEquip(targetEquipInfo.itemInfo.itemId,1,useListIds,1);
+			
+			var p:Point=new Point(this._stage.mouseX,this._stage.mouseY);
+			p=this.globalToLocal(p);
+			this.playInter3DAt(ClientConfig.getEffect("ui_tongyongdianji"),p.x,p.y,1);
+			var type:int=RoleEquipmentManager.equipIsWearing(targetEquipInfo)?0:1;
+			isLockRefresh=true;
+			ItemSender.strengthEquip(targetEquipInfo.itemInfo.itemId,type,useListIds,EquipOperateType.STRENGTH_ONEKEY);
 		}
 		
 		
@@ -615,16 +637,23 @@ package com.rpgGame.appModule.equip
 			_leftSkin.tab_pack.addEventListener(Event.CHANGE, onTab);
 			EventManager.addEvent(ItemEvent.ITEM_STRENGTH_MSG,getStrengthMsg);
 			EventManager.addEvent(ItemEvent.ITEM_ADD,onFreshItems);
-			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
+			EventManager.addEvent(ItemEvent.ITEM_REMOVE_LIST,onRemoveFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
 			
 		}
 		
+		private function onRemoveFreshItems():void
+		{
+			if(isLockRefresh){
+				return;
+			}
+			ItemManager.getBackEquip(initItem);
+		}
+		
 		private function updateAmount(type:int=3):void
 		{
-			if(type!=CharAttributeType.RES_GOLD&&type!=CharAttributeType.RES_MONEY&&
-				type!=CharAttributeType.RES_BIND_GOLD&&type!=CharAttributeType.RES_BIND_MONEY){
+			if(type!=CharAttributeType.RES_MONEY&&type!=CharAttributeType.RES_BIND_MONEY){
 				return;
 			}
 			
@@ -633,21 +662,24 @@ package com.rpgGame.appModule.equip
 		
 		private function onFreshItems(info:ClientItemInfo=null):void
 		{
-			if(info.containerID==ItemContainerID.BackPack&&(info.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||info.type==GoodsType.EQUIPMENT2)){
+			if(isLockRefresh){
+				return;
+			}
+			if((info.containerID==ItemContainerID.Role||info.containerID==ItemContainerID.BackPack)&&(info.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||info.type==GoodsType.EQUIPMENT2)){
 				ItemManager.getBackEquip(initItem);
 			}
 		}
 		
 		private function getStrengthMsg(msg:ResEquipOperateResultMessage):void
 		{
-			if(msg.opaque==1&&msg.result==1){
+			if(msg.opaque==EquipOperateType.STRENGTH_ONEKEY&&msg.result==1){
 				var alertOk:AlertSetInfo=new AlertSetInfo(LangUI.UI_TEXT3);//强化成功
 				alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",addExp);
 				alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",useListIds.length);
 				alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",addExp*perMon);
 				alertOk.alertInfo.align="left";
 				if(isToUp){
-					alertOk.alertInfo.value="由于本次强化值超出,"+alertOk.alertInfo.value;
+					alertOk.alertInfo.value=LanguageConfig.getText(LangUI.UI_TEXT8)+alertOk.alertInfo.value;
 					alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",addExp);
 					alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",useListIds.length);
 					alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",addExp*perMon);
@@ -659,7 +691,8 @@ package com.rpgGame.appModule.equip
 			}
 			addExp=0;
 			isToUp=false;
-			updateView();
+			isLockRefresh=false;
+			refresh();
 		}
 		
 		private function getEquipByType(type:int,datas:Vector.<ClientItemInfo>):Vector.<ClientItemInfo>
@@ -729,7 +762,7 @@ package com.rpgGame.appModule.equip
 			cancelAllUse();
 			onCancelIntensify(null);
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,onFreshItems);
-			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
+			EventManager.removeEvent(ItemEvent.ITEM_REMOVE_LIST,onRemoveFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
 			
@@ -770,13 +803,16 @@ package com.rpgGame.appModule.equip
 				return;
 			}
 			
-			ItemSender.strengthEquip(targetEquipInfo.itemInfo.itemId,1,useListIds,0);
+			var p:Point=new Point(this._stage.mouseX,this._stage.mouseY);
+			p=this.globalToLocal(p);
+			this.playInter3DAt(ClientConfig.getEffect("ui_tongyongdianji"),p.x,p.y,1);
+			var type:int=RoleEquipmentManager.equipIsWearing(targetEquipInfo)?0:1;
+			isLockRefresh=true;
+			ItemSender.strengthEquip(targetEquipInfo.itemInfo.itemId,type,useListIds,EquipOperateType.STRENGTH_NORMAL);
 		}
 		
 		private function initItem():void
 		{
-			var targetGrid:DragDropItem;
-			
 			var allEquips:Array=ItemManager.getAllEquipDatas();
 			var num:int=allEquips.length;
 			
@@ -835,15 +871,13 @@ package com.rpgGame.appModule.equip
 					if(targetEquipInfo&&info.itemInfo.itemId.ToGID()==targetEquipInfo.itemInfo.itemId.ToGID()){
 						targetEquipInfo=info as EquipInfo;//更新掉
 						_targetEquip.gridInfo.data=targetEquipInfo;
-						currCfg=ItemStrength.getStrengthCfg(targetEquipInfo.qItem.q_kind,targetEquipInfo.qItem.q_job,targetEquipInfo.strengthLevel);
+						_targetEquip.gridInfo=_targetEquip.gridInfo;//只能这样调用更新才能触发更新tips函数。。。
+						currCfg=EquipStrengthCfg.getStrengthCfg(targetEquipInfo.qItem.q_kind,targetEquipInfo.qItem.q_job,targetEquipInfo.strengthLevel);
 					}
 					result.push(info);
 				}else{
-					if(targetEquipInfo&&info.itemInfo.itemId.ToGID()==targetEquipInfo.itemInfo.itemId.ToGID()){
-						targetEquipInfo=info as EquipInfo;//更新掉
-						if(targetEquipInfo.strengthLevel==info.qItem.q_max_strengthen){
-							targetEquipInfo=null;
-						}
+					if(targetEquipInfo&&info.itemInfo.itemId.ToGID()==targetEquipInfo.itemInfo.itemId.ToGID()){//不可强化，在强化位置
+						targetEquipInfo=null;
 						_targetEquip.gridInfo.data=targetEquipInfo;
 						_targetEquip.setGridEmpty();
 					}
@@ -880,7 +914,8 @@ package com.rpgGame.appModule.equip
 		
 		private function isUse(info:ClientItemInfo):Boolean
 		{
-			if(info.qItem.q_strengthen_num!=0&&RoleEquipmentManager.equipIsWearing(info)==false){//消耗获得的值不为0
+			var equip:EquipInfo=info as EquipInfo;
+			if(equip.qItem.q_strengthen_num!=0&&RoleEquipmentManager.equipIsWearing(equip)==false){//消耗获得的值不为0
 				return true;
 			}
 			return false;

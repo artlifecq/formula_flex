@@ -1073,7 +1073,11 @@ package com.rpgGame.app.fight.spell
             }
             return null;
         }
-
+		
+		
+		
+		
+		/**搜索视野中所有元素*/
 		public static function getNearestCanAtkRole(spellData : Q_skill_model, next : Boolean) : SceneRole
 		{
 			var list : Vector.<SceneRole> = _roleList ? _roleList : SceneManager.getSceneRoleList();

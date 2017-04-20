@@ -16,6 +16,9 @@ package com.rpgGame.netData.backpack.bean{
 	 */
 	public class ItemInfo extends Bean {
 	
+		//包裹类型 0:装备仓库,1:背包
+		private var _type: int;
+		
 		//物品唯一Id
 		private var _itemId: long;
 		
@@ -55,6 +58,8 @@ package com.rpgGame.netData.backpack.bean{
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
+			//包裹类型 0:装备仓库,1:背包
+			writeByte(_type);
 			//物品唯一Id
 			writeLong(_itemId);
 			//物品模板Id
@@ -89,6 +94,8 @@ package com.rpgGame.netData.backpack.bean{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
+			//包裹类型 0:装备仓库,1:背包
+			_type = readByte();
 			//物品唯一Id
 			_itemId = readLong();
 			//物品模板Id
@@ -117,6 +124,21 @@ package com.rpgGame.netData.backpack.bean{
 			//战斗力
 			_fightPower = readInt();
 			return true;
+		}
+		
+		/**
+		 * get 包裹类型 0:装备仓库,1:背包
+		 * @return 
+		 */
+		public function get type(): int{
+			return _type;
+		}
+		
+		/**
+		 * set 包裹类型 0:装备仓库,1:背包
+		 */
+		public function set type(value: int): void{
+			this._type = value;
 		}
 		
 		/**

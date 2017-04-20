@@ -8,6 +8,7 @@ package com.rpgGame.coreData.info.item
 
 
 	/**
+	 * 该类是客户端封装的物品信息类
 	 * 物品信息类
 	 */
 	public class ClientItemInfo extends BaseFaceInfo
@@ -18,6 +19,7 @@ package com.rpgGame.coreData.info.item
 		public function ClientItemInfo(cfgId : int = 0)
 		{
 			super(cfgId, type, FaceTypeEnum.ITEM);
+			qItem=ItemConfig.getQItemByID(cfgId);
 		}
 		
 		

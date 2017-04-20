@@ -3,6 +3,8 @@ package com.rpgGame.coreData.info.item
 	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.netData.player.bean.AttributeItem;
+	
+	import flash.utils.ByteArray;
 
 	/**
 	 *装备信息 
@@ -52,6 +54,23 @@ package com.rpgGame.coreData.info.item
 		 * 强化经验(值)
 		 */
 		public var strengthExp:int;
+		/**
+		 * 琢磨等级
+		 */
+		public var polishLevel:int;
+		/**
+		 * 琢磨等级
+		 */
+		public var polishExp:int;
+		
+		/**
+		 * 洗炼属性1
+		 */
+		public var smeltAtt1:int;
+		/**
+		 * 洗炼属性2
+		 */
+		public var smeltAtt2:int;
 
 		public function EquipInfo(cfgId : int = 0)
 		{
@@ -66,6 +85,15 @@ package com.rpgGame.coreData.info.item
 			var json:Object=JSON.parse(itemInfo.parameters);
 			strengthLevel=json.StrengthLevel;
 			strengthExp=json.StrengthExp;
+			polishLevel=json.PolishLevel;
+			polishExp=json.PolishExp;
+			
+			var wash:uint=json.Wash;
+			var byte:ByteArray=new ByteArray();
+			byte.writeUnsignedInt(wash);
+			byte.position=0;
+			smeltAtt1=byte.readUnsignedShort();
+			smeltAtt2=byte.readUnsignedShort();
 		}
 		
 		

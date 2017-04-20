@@ -24,6 +24,15 @@ package com.rpgGame.coreData.clientConfig
 		public var q_name:int;
 		 /**  特效 */
 		public var q_effect:int;
+		public var q_icon:String;
+		 /**  名字 */
+		public var q_name:String;
+		 /**  特效 */
+		public var q_effect:String;
+		 /**  绝学效果提升类型 */
+		public var q_type:int;
+		 /**  绝学提升描述 */
+		public var q_desc:String;
 
 	}
 }

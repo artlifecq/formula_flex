@@ -1,4 +1,6 @@
 package com.rpgGame.netData.equip.message{
+	import flash.utils.ByteArray;
+	
 	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	

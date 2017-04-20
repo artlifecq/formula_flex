@@ -20,6 +20,7 @@ package com.rpgGame.appModule.fightsoul
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.lang.LangFightSoul;
+	import com.rpgGame.coreData.lang.LangUI_2;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.netData.fightsoul.bean.FightSoulInfo;
 	
@@ -54,7 +55,7 @@ package com.rpgGame.appModule.fightsoul
 		{
 			_skin=new Zhanhun_Skin();
 			super(_skin);
-			TipTargetManager.show(_skin.pro_jindu, TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText(LangFightSoul.FightSoulExpTip)));
+			TipTargetManager.show(_skin.pro_jindu, TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText(LangUI_2.FightSoulExpTip)));
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
@@ -281,7 +282,7 @@ package com.rpgGame.appModule.fightsoul
 		private function refeashVitality():void
 		{
 			_skin.pro_zongjindu.value = fightSoulInfo.vitality/200*_skin.pro_zongjindu.maximum;
-			_skin.lb_jindu.text = LanguageConfig.getText(LangFightSoul.FightSoulProgress).replace("$",fightSoulInfo.vitality);
+			_skin.lb_jindu.text = LanguageConfig.getText(LangUI_2.FightSoulProgress).replace("$",fightSoulInfo.vitality);
 		}
 		private function refeashQualityView():void
 		{

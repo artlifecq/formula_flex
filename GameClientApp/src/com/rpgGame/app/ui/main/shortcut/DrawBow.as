@@ -179,7 +179,18 @@ class Bow extends ImmutablePolygon
 
 	override public function contains(x:Number, y:Number):Boolean
 	{
-		return x >= _x && x <= _x + _width &&y >= _y && y <= _y + _height;
+		var vx:Number = x - _x;
+		var vy:Number = y - _y;
+		
+		var a:Number = vx / _width;
+		var b:Number = vy / _height;
+		
+		if( a * a + b * b > 1)
+			return false;
+		var angle:Number = Math.atan2(vy,vx);
+		while(angle<_startAngle)
+			angle += 2*Math.PI;
+		return angle<=_endAngle;
 	}
 	
 	override public function get area():Number
