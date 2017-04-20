@@ -100,7 +100,7 @@ package com.rpgGame.app.ui.main.shortcut {
 			addSheHuiTab();
 			LostSkillEffect.instance().bind(_skin.btn_juexue);
 			
-			var tipinfo:BaseTipsInfo = TargetTipsMaker.makeSimplePropChangeTextTips(LanguageConfig.getText(LangUI_2.Lostskill_Opentips).replace("$",30));
+			var tipinfo:BaseTipsInfo = TargetTipsMaker.makeSimplePropChangeTextTips(LanguageConfig.getText(LangUI_2.Lostskill_Opentips).replace("$",LostSkillManager.instance().openLevel));
 			_tipsData = tipinfo.getData() as TextTipsPropChangeData;
 			TipTargetManager.show(_skin.btn_juexue,tipinfo);
 			refeashState();
@@ -146,13 +146,13 @@ package com.rpgGame.app.ui.main.shortcut {
 			var currentdata:Q_lostskill_open = LostSkillData.getModeInfoById(LostSkillManager.instance().curSkillId);
 			if(currentdata == null)
 			{
-				_tipsData.info = LanguageConfig.getText(LangUI_2.Lostskill_Opentips).replace("$",30);
+				_tipsData.info = LanguageConfig.getText(LangUI_2.Lostskill_Opentips).replace("$",LostSkillManager.instance().openLevel);
 				_skin.mc_juexue.gotoAndStop(0);
 			}
 			else{
 				var state:SkillStateInfo = LostSkillManager.instance().getSkillStateInfoById(currentdata.q_id);
 				var currentupdate:Q_lostskill_up = LostSkillUpData.getDatabyIdAndLevel(state.skillId,state.level);
-				_tipsData.info = currentdata.q_desc.replace("$",currentupdate.q_value);
+				_tipsData.info = currentdata.q_desc.replace("$",LostSkillManager.instance().getSkillValue(currentdata,currentupdate));
 				var index:int = datas.indexOf(currentdata);
 				_skin.mc_juexue.gotoAndStop(index+1);
 			}

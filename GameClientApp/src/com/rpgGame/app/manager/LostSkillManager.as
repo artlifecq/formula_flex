@@ -5,6 +5,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
+	import com.rpgGame.coreData.clientConfig.Q_lostskill_up;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
 	import com.rpgGame.netData.lostSkill.message.CSActivitSkillMessage;
@@ -57,8 +58,8 @@ package com.rpgGame.app.manager
 			if(skillInfo ==null)
 				return ;
 			_infos.push(skillInfo);
-			if(_infos.length==1)
-				curSkillId = skillInfo.skillId;
+			/*if(_infos.length==1)
+				curSkillId = skillInfo.skillId;*/
 			
 			EventManager.dispatchEvent(LostSkill_ChangeSkillState);
 		}
@@ -111,6 +112,29 @@ package com.rpgGame.app.manager
 			}
 			return _instance;
 		}
+		
+		public function getSkillValue(open:Q_lostskill_open,up:Q_lostskill_up):Number
+		{
+			switch(open.q_type)
+			{
+				case 1:
+				case 2:
+				case 6:
+				case 7:
+					return up.q_value/100;
+				case 3:
+				case 5:
+					return up.q_value/1000; 
+				default:
+					return up.q_value;
+			}
+		}
+		
+		public function get openLevel():int
+		{
+			return 30;
+		}
+			
 		public function LostSkillManager()
 		{
 		}

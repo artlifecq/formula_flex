@@ -55,20 +55,20 @@ package com.rpgGame.appModule.skill.lostskill
 		{
 			if(!canupLevel())
 			{
-				NoticeManager.showNotify(NotifyCfgData.getNotifyTextByID(7009));
+				NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7009));
 				return ;
 			}
 			
 			var info:HeroData=MainRoleManager.actorInfo;
 			if(_state.level>info.totalStat.level)
 			{
-				NoticeManager.showNotify(NotifyCfgData.getNotifyTextByID(7002));
+				NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7002));
 				return ;
 			}
 			var total:int = BackPackManager.instance.getBagItemsCountById(_itemInfo.cfgId);
 			if(total<_itemInfo.itemInfo.num)
 			{
-				NoticeManager.showNotify(NotifyCfgData.getNotifyTextByID(7010));
+				NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7010));
 				return ;
 			}
 			var msg:CSLostSkillLeveUpMessage = new CSLostSkillLeveUpMessage();
@@ -94,7 +94,14 @@ package com.rpgGame.appModule.skill.lostskill
 			
 			updataLevelEffect(_skin.currentLevel.skin as Item_shuxing,_state.level);
 			updataLevelEffect(_skin.nexttLevel.skin as Item_shuxing,_state.level+1);
-			_skin.lb_xiaohao.htmlText = HtmlTextUtil.underLine(_itemInfo.name+"*"+_itemInfo.itemInfo.num);
+			var total:int = BackPackManager.instance.getBagItemsCountById(_itemInfo.cfgId);
+			_skin.lb_xiaohao.htmlText = HtmlTextUtil.underLine(_itemInfo.name+"*"+_itemInfo.itemInfo.num+"("+total+")");
+			if(_itemInfo.itemInfo.num<=total)
+			{
+				_skin.lb_xiaohao.color = 0x5DBD37;
+			}else{
+				_skin.lb_xiaohao.color = 0xd02525;
+			}
 			TipTargetManager.remove(_skin.lb_xiaohao);
 			TipTargetManager.show(_skin.lb_xiaohao,TargetTipsMaker.makeTips(TipType.ITEM_TIP,_itemInfo));
 			_skin.isopen.visible = _state.skillId == LostSkillManager.instance().curSkillId;
@@ -105,7 +112,7 @@ package com.rpgGame.appModule.skill.lostskill
 		{
 			var currentupdate:Q_lostskill_up = LostSkillUpData.getDatabyIdAndLevel(_state.skillId,level);
 			if(currentupdate!=null)
-				content.labelDisplay.text  = _data.q_desc.replace("$",currentupdate.q_value);
+				content.labelDisplay.text  = _data.q_desc.replace("$",LostSkillManager.instance().getSkillValue(_data,currentupdate));
 			else
 				content.labelDisplay.text = NotifyCfgData.getNotifyTextByID(7009);
 		}

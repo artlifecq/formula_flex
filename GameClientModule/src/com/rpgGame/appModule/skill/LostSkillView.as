@@ -14,6 +14,7 @@ package com.rpgGame.appModule.skill
 	import feathers.controls.Radio;
 	import feathers.controls.UIAsset;
 	import feathers.core.ToggleGroup;
+	import feathers.utils.filter.GrayFilter;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.wuxue.juexue.Juexue_Skin;
@@ -115,8 +116,14 @@ package com.rpgGame.appModule.skill
 			var state:SkillStateInfo = LostSkillManager.instance().getSkillStateInfoById(data.q_id);
 			_activit.updataSkill(data,state);
 			_updataLevel.updataSkill(data,state);
-			_lostSkillModePane.setModedata(data);
+			_lostSkillModePane.setModedata(data,state);
 			_skin.mc_name.gotoAndStop(index);
+			if(state==null)
+			{
+				GrayFilter.gray(_skin.mc_name);
+			}else{
+				_skin.mc_name.filter = null;
+			}
 			for(var i:int = 0;i<_bgList.length;i++)
 			{
 				_bgList[i].visible = i==index;

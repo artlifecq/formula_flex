@@ -88,6 +88,7 @@ package com.rpgGame.netData{
 			register(102112, ResAttackTargetMessage, ResAttackTargetHandler);
 			register(102113, ResVirFightObjectAttackResultMessage, ResVirFightObjectAttackResultHandler);
 			register(102114, SCAttackerResultMessage, SCAttackerResultHandler);
+            register(102116, SCBuffSkillMessage, SCBuffSkillHandler);
 			register(102115, SCCancelSkillMessage, SCCancelSkillHandler);
 			register(102116, SCBuffSkillMessage, SCBuffSkillHandler);
 			register(103101, ResMyPlayerInfoMessage, ResMyPlayerInfoHandler);

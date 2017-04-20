@@ -478,8 +478,9 @@ package com.rpgGame.app.ui.main.smallmap
             }
             if (_xunluPointEffect)
             {
-                _rootUI.removeChild3D(_xunluPointEffect);
-                _xunluPointEffect = null;
+                _xunluPointEffect.clear();
+                //_rootUI.removeChild3D(_xunluPointEffect);
+                //_xunluPointEffect = null;
             }
             _lastPointPos.setTo(0, 0);
         }
@@ -671,6 +672,8 @@ package com.rpgGame.app.ui.main.smallmap
                 if (!_xunluPointEffect)
                 {
                     _xunluPointEffect = _rootUI.playInter3DAt(ClientConfig.getEffect(EffectUrl.XUN_LU_END_POINT_EFFECT), 0, 0, 0);
+                } else {
+                    _xunluPointEffect.play();
                 }
                 updateXunluPoint();
             }

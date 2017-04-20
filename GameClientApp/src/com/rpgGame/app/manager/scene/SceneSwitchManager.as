@@ -306,6 +306,7 @@ package com.rpgGame.app.manager.scene
 			{
 				MapDataManager.checkDelayDisposeMap(preMapPackName);
 			}
+            MapDataManager.cancelDelayDisposeMap(_curtMapInfo.mapNameResource);
 		}
 		
 		public static function get lastMapInfo():SceneData

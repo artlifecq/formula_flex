@@ -5,6 +5,7 @@ package com.rpgGame.appModule.skill.lostskill
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
+	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
 	
 	public class LostSkillModePane extends InterObject3D
 	{
@@ -15,12 +16,13 @@ package com.rpgGame.appModule.skill.lostskill
 			super();
 		}
 		
-		
-		public function setModedata(data:Q_lostskill_open):void
+		private var _state:SkillStateInfo;
+		public function setModedata(data:Q_lostskill_open,state:SkillStateInfo):void
 		{
 			if(_qdata==data)
 				return ;
 			_qdata = data;
+			_state = state;
 			addFightSoul();
 		}
 		
@@ -28,7 +30,8 @@ package com.rpgGame.appModule.skill.lostskill
 		{
 			if(_effect != null)
 				RenderUnit3D.recycle(_effect);
-			
+			if(_state==null)
+				return ;
 			var data : RenderParamData3D = new RenderParamData3D(0, "effect", ClientConfig.getEffect(_qdata.q_effect));
 			_effect = this.addRenderUnitWith(data, 0, null);
 		}

@@ -1,24 +1,19 @@
 package com.rpgGame.app.ui.main.shortcut
 {
 	import com.rpgGame.app.manager.LostSkillManager;
-	import com.rpgGame.core.manager.tips.TargetTipsMaker;
-	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.core.view.ui.tip.vo.BaseTipsInfo;
-	import com.rpgGame.core.view.ui.tip.vo.TextTipsPropChangeData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.LostSkillData;
-	import com.rpgGame.coreData.cfg.LostSkillUpData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
-	import com.rpgGame.coreData.clientConfig.Q_lostskill_up;
 	import com.rpgGame.coreData.lang.LangUI_2;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
 	
 	import feathers.controls.Button;
 	import feathers.controls.UIAsset;
-	import feathers.controls.UIMovieClip;
 	
-	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.juexue.juexu_Skin;
 	
 	import starling.animation.IAnimatable;
@@ -98,6 +93,11 @@ package com.rpgGame.app.ui.main.shortcut
 		
 		private function buttonClickHandler(e:Event):void
 		{
+			if(MainRoleManager.actorInfo.totalStat.level<LostSkillManager.instance().openLevel)
+			{
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP,LanguageConfig.getText(LangUI_2.Lostskill_Opentips).replace("$",LostSkillManager.instance().openLevel));
+				return ;
+			}
 			if(this.parent==null)
 			{
 				_bindBtn.parent.addChildAt(this,0);

@@ -148,6 +148,7 @@ package com.rpgGame.app.ui.main.buff
 				{
 					icon=badBuffs[i];
 					if(icon.buffData.buffData.q_buff_id==buffData.buffData.q_buff_id){
+                        icon.dispose();
 						badBuffs.splice(i,1);
 						debuffSp.removeChild(icon);
 						break;
@@ -160,6 +161,7 @@ package com.rpgGame.app.ui.main.buff
 				{
 					icon=goodBuffs[i];
 					if(icon.buffData.buffData.q_buff_id==buffData.buffData.q_buff_id){
+                        icon.dispose();
 						goodBuffs.splice(i,1);
 						buffSp.removeChild(icon);
 						break;
