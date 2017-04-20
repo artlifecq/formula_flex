@@ -172,8 +172,8 @@ package com.rpgGame.app.ui.main
             this._chatBar = new ChatBar();
             this.addChild(this._chatBar);
 			this._systemMsgBar=new SystemMsgBar();
-			/*this._taskBar=new TaskBar();
-			this.addChild(_taskBar);*/
+			this._taskBar=new TaskBar();
+			this.addChild(_taskBar);
 			
 			
 			_buffBar=new BuffBar();
@@ -441,7 +441,7 @@ package com.rpgGame.app.ui.main
 			this._expBar.resize(sWidth, sHeight);
 			this._systemMsgBar.resize(sWidth, sHeight);
 			this._playerHead.resize(sWidth, sHeight);
-			//this._taskBar.resize(sWidth, sHeight);
+			this._taskBar.resize(sWidth, sHeight);
 			this._bossHead.resize(sWidth, sHeight);
 			this._eliteHead.resize(sWidth, sHeight);
 			this._normalHead.resize(sWidth, sHeight);
