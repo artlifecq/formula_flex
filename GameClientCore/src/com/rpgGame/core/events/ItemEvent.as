@@ -54,6 +54,10 @@ package com.rpgGame.core.events
 		 *琢磨消息
 		 */
 		public static const ITEM_POLISH_MSG:int = UNIQUEID.NEXT;
+		/**
+		 *洗炼消息
+		 */
+		public static const ITEM_WASH_MSG:int = UNIQUEID.NEXT;
 		
 		
 		/** 删除物品 **/

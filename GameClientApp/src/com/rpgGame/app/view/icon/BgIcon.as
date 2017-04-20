@@ -1,12 +1,8 @@
 package com.rpgGame.app.view.icon
 {
-	import com.game.engine3D.display.Inter3DContainer;
-	import com.game.engine3D.display.InterObject3D;
-	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.AssetUrl;
-	import com.rpgGame.coreData.type.EffectUrl;
 	
 	import flash.geom.Point;
 	
@@ -14,7 +10,11 @@ package com.rpgGame.app.view.icon
 	
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
+	import feathers.controls.UIMovieClip;
 	import feathers.controls.text.Fontter;
+	
+	import org.mokylin.skin.mc.UIMovieClipQ_quality_cheng;
+	import org.mokylin.skin.mc.UIMovieClipQ_quality_zi;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
@@ -67,7 +67,7 @@ package com.rpgGame.app.view.icon
 		/**是否需要显示选中框**/
 		protected var isShow : Boolean = true;
 		
-		protected var _qualityEft:Inter3DContainer;
+		protected var _qualityEft:UIMovieClip;
 		
 		public function BgIcon( $iconSize:int = IcoSizeEnum.SIZE_40 )
 		{
@@ -122,23 +122,19 @@ package com.rpgGame.app.view.icon
 		private function showQualityEft():void
 		{
 			if(_qualityEft==null){
-				_qualityEft=new Inter3DContainer();
+				_qualityEft=new UIMovieClip();
 			}else{
 				_qualityEft.removeChildren();
 			}
+			if(_qualityId==Quality.GREEN){
+				_qualityEft.styleClass = UIMovieClipQ_quality_cheng;
+			}else{
+				_qualityEft.styleClass = UIMovieClipQ_quality_zi;
+			}
+			_qualityEft.play();
 			
-			var inter:InterObject3D=_qualityEft.playInter3DAt(ClientConfig.getEffect(EffectUrl["ITEM_QUALITY"+_qualityId]),0,0,0);
-			var render:RenderUnit3D=RenderUnit3D(inter.baseObj3D);
-			render.setAddedCallBack(addEft);
-			addEft(render);
 			_qualityEft.x=_iconSize>>1;
 			_qualityEft.y=_iconSize>>1;
-		}		
-		
-		private function addEft( ru : RenderUnit3D):void
-		{
-			ru.removeAddedCallBack(addEft);
-			ru.scaleX=ru.scaleY=_iconSize/52;
 		}		
 		
 		/** 隐藏品质框 */		

@@ -25,7 +25,10 @@ package app.message
 		 * 一键琢磨
 		 */
 		public static const POLISH_ONEKEY:uint = rEnum.next;
-		
+		/**
+		 * 洗炼
+		 */
+		public static const WASH_NORMAL:uint = rEnum.next;
 		
 		public function EquipOperateType()
 		{

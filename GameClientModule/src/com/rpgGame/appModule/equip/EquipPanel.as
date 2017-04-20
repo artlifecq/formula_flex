@@ -77,10 +77,16 @@ package com.rpgGame.appModule.equip
 			super.onTouchTarget(target);
 			if(target is Radio){
 				var index:int=tabBtn.indexOf(target as Radio);
-				if(index!=-1){
-					currentUI=tabUIs[index];
-				}
+				showTab(index);
 			}
+		}
+		
+		private function showTab(index:int):void
+		{
+			tabBtn[index].isSelected=true;
+			if(index!=-1){
+				currentUI=tabUIs[index];
+			}			
 		}
 	}
 }

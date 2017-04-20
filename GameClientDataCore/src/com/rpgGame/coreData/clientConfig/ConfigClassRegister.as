@@ -94,6 +94,10 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_equip_polish:String = "data.Q_equip_polish";
 		/**  强化配置表						 */
 		public static const Q_equip_strength:String = "data.Q_equip_strength";
+		/**  					 */
+		public static const Q_equip_wash:String = "data.Q_equip_wash";
+		/**  q_wash_attr				 */
+		public static const Q_equip_wash_attr:String = "data.Q_equip_wash_attr";
 		/**  战魂升级数据						 */
 		public static const Q_fightsoul:String = "data.Q_fightsoul";
 		/**  战魂模型数据		 */
@@ -106,6 +110,12 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_hecheng:String = "data.Q_hecheng";
 		/**  物品基本信息数据库																																																																																				 */
 		public static const Q_item:String = "data.Q_item";
+		/**  绝学开放表							 */
+		public static const Q_lostskill_open:String = "data.Q_lostskill_open";
+		/**  绝学升级表		 */
+		public static const Q_lostskill_up:String = "data.Q_lostskill_up";
+		/**  经脉冲穴数据库																 */
+		public static const Q_meridian:String = "data.Q_meridian";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
 		/**  阵营关系				 */
@@ -189,12 +199,17 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_die", com.rpgGame.coreData.clientConfig.Q_die);
 			regClass("data.Q_equip_polish", com.rpgGame.coreData.clientConfig.Q_equip_polish);
 			regClass("data.Q_equip_strength", com.rpgGame.coreData.clientConfig.Q_equip_strength);
+			regClass("data.Q_equip_wash", com.rpgGame.coreData.clientConfig.Q_equip_wash);
+			regClass("data.Q_equip_wash_attr", com.rpgGame.coreData.clientConfig.Q_equip_wash_attr);
 			regClass("data.Q_fightsoul", com.rpgGame.coreData.clientConfig.Q_fightsoul);
 			regClass("data.Q_fightsoul_mode", com.rpgGame.coreData.clientConfig.Q_fightsoul_mode);
 			regClass("data.Q_fightsoul_path", com.rpgGame.coreData.clientConfig.Q_fightsoul_path);
 			regClass("data.Q_global", com.rpgGame.coreData.clientConfig.Q_global);
 			regClass("data.Q_hecheng", com.rpgGame.coreData.clientConfig.Q_hecheng);
 			regClass("data.Q_item", com.rpgGame.coreData.clientConfig.Q_item);
+			regClass("data.Q_lostskill_open", com.rpgGame.coreData.clientConfig.Q_lostskill_open);
+			regClass("data.Q_lostskill_up", com.rpgGame.coreData.clientConfig.Q_lostskill_up);
+			regClass("data.Q_meridian", com.rpgGame.coreData.clientConfig.Q_meridian);
 			regClass("data.Q_notify", com.rpgGame.coreData.clientConfig.Q_notify);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);
 			regClass("data.Q_tipsinfo", com.rpgGame.coreData.clientConfig.Q_tipsinfo);

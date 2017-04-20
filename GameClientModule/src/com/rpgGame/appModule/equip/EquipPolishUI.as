@@ -18,9 +18,9 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.appModule.common.itemRender.SkinItemRender;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
-	import com.rpgGame.coreData.cfg.EquipPolishCfgData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.item.EquipPolishCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.clientConfig.Q_equip_polish;
@@ -111,7 +111,7 @@ package com.rpgGame.appModule.equip
 			useListIds=new Vector.<long>();
 			_leftSkin=_skin.left.skin as Zhuangbei_left;
 			
-			(_leftSkin.title1.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT1);
+			(_leftSkin.title1.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT9);
 			(_leftSkin.title2.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT2);
 			
 			_goodsContainerTarget=new GoodsContainerPanel(_leftSkin.list1,ItemContainerID.POLIST_LIST,createItemRender);
@@ -126,7 +126,7 @@ package com.rpgGame.appModule.equip
 			
 			qualityDatas=new Array();
 			for(i=1;i<4;i++){
-				qualityDatas.push(ItemUtil.getQualityName(i)+"及以下装备");
+				qualityDatas.push(ItemUtil.getQualityName(i)+LanguageConfig.getText(LangUI.UI_TEXT5));
 			}
 			_skin.cmb_pinzhi.addEventListener("creationComplete",onCreatePinZhi);
 			
@@ -296,7 +296,8 @@ package com.rpgGame.appModule.equip
 				return;
 			}
 			
-			ItemSender.polishEquip(targetEquipInfo.itemInfo.itemId,1,useListIds,EquipOperateType.POLISH_NORMAL);
+			var type:int=RoleEquipmentManager.equipIsWearing(targetEquipInfo)?0:1;
+			ItemSender.polishEquip(targetEquipInfo.itemInfo.itemId,type,useListIds,EquipOperateType.POLISH_NORMAL);
 		}
 		
 		private function oneKeyPolish():void
@@ -334,7 +335,7 @@ package com.rpgGame.appModule.equip
 					addExp-=item.qItem.q_strengthen_num;
 					break;
 				}
-				if(addExp>EquipPolishCfgData.maxCfg.q_exp){//到顶级了
+				if(addExp>EquipPolishCfg.maxCfg.q_exp){//到顶级了
 					isToUp=true;
 					break;
 				}
@@ -342,7 +343,7 @@ package com.rpgGame.appModule.equip
 			}
 			
 			useMon=addExp*perMon;
-			if(userMon<useMon){
+			if(userMon<useMon||i==0){
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6014));
 				return;
 			}
@@ -351,7 +352,8 @@ package com.rpgGame.appModule.equip
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4205));
 				return;
 			}
-			ItemSender.strengthEquip(targetEquipInfo.itemInfo.itemId,1,useListIds,EquipOperateType.POLISH_ONEKEY);
+			var type:int=RoleEquipmentManager.equipIsWearing(targetEquipInfo)?0:1;
+			ItemSender.polishEquip(targetEquipInfo.itemInfo.itemId,type,useListIds,EquipOperateType.POLISH_ONEKEY);
 		}
 		
 		private function onTouchGrid( grid:DragDropItem ):void
@@ -434,8 +436,6 @@ package com.rpgGame.appModule.equip
 				TouchableUtil.gray(targetGrid);
 			}
 			
-			
-			currCfg=EquipPolishCfgData.getPolishCfg(targetEquipInfo.polishLevel);
 			addExp=0;
 			
 			var roleLv:int=MainRoleManager.actorInfo.totalStat.level;
@@ -451,9 +451,10 @@ package com.rpgGame.appModule.equip
 		private function updateView():void
 		{
 			if(targetEquipInfo){
+				currCfg=EquipPolishCfg.getPolishCfg(targetEquipInfo.polishLevel);
 				_skin.lb_name.color=ItemConfig.getItemQualityColor(targetEquipInfo.cfgId);
 				_skin.lb_name.text=targetEquipInfo.name;
-				_skin.lb_dengji.htmlText="琢磨等级:"+targetEquipInfo.polishLevel;
+				_skin.lb_dengji.htmlText=LanguageConfig.getText(LangUI.UI_TEXT10)+":"+targetEquipInfo.polishLevel+LanguageConfig.getText(LangUI.UI_TEXT7);
 				getUpLv();
 				_skin.lb_current.text=targetEquipInfo.polishLevel+LanguageConfig.getText(LangUI.UI_TEXT7);
 				_skin.lb_next.text=upCfg.q_equip_polish+LanguageConfig.getText(LangUI.UI_TEXT7);
@@ -489,14 +490,19 @@ package com.rpgGame.appModule.equip
 			}else{
 				current_promote=current.q_promote;
 			}
-			_skin.lb_baifenbi.text=current_promote+"%";
+			_skin.lb_baifenbi.text=(current_promote/100).toFixed(1)+"%";
 			if(up){
 				_skin.arrow_up2.visible=_skin.lb_up2.visible=true;
 				_skin.arrow_up2.visible=true;
-				_skin.lb_up2.text=(up.q_promote-current_promote)+"%";
+				_skin.lb_up2.text=((up.q_promote-current_promote)/100).toFixed(1)+"%";
 			}else{
 				_skin.arrow_up2.visible=_skin.lb_up2.visible=false;
 			}
+			
+			_skin.lb_baifenbi.width=_skin.lb_baifenbi.textWidth+15;
+			_skin.lb_baifenbi.width=_skin.lb_baifenbi.width<36?36:_skin.lb_baifenbi.width;
+			_skin.arrow_up2.x=_skin.lb_baifenbi.x+_skin.lb_baifenbi.width+5;
+			_skin.lb_up2.x=_skin.arrow_up2.x+_skin.arrow_up2.width+10;
 		}
 		
 		private function getTitleText(title:String,value:*,value1:int=-1,noSlip:Boolean=true):String
@@ -519,7 +525,7 @@ package com.rpgGame.appModule.equip
 		
 		private function getUpLv():void
 		{
-			var maxLv:int=EquipPolishCfgData.maxLv;
+			var maxLv:int=EquipPolishCfg.maxLv;
 			var exp:int=targetEquipInfo.polishExp+addExp;//总值+消耗后获得的值
 			var currentLv:int=targetEquipInfo.polishLevel;
 			var upExp:int;
@@ -528,7 +534,7 @@ package com.rpgGame.appModule.equip
 			while(currentLv<=maxLv){
 				currentLv++;
 				upCfg=nextCfg;
-				nextCfg=EquipPolishCfgData.getPolishCfg(currentLv);//下一级的配置
+				nextCfg=EquipPolishCfg.getPolishCfg(currentLv);//下一级的配置
 				upExp=nextCfg.q_exp;//升级所需
 				
 				if(exp<=upExp){//不够升级不查找
@@ -564,6 +570,8 @@ package com.rpgGame.appModule.equip
 				}
 				grid.setGridEmpty();
 			}
+			selectedUse.length=0;
+			refreshUseEquipGrid();
 		}
 		
 		override public function show():void
@@ -584,8 +592,15 @@ package com.rpgGame.appModule.equip
 			
 			EventManager.addEvent(ItemEvent.ITEM_ADD,onFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
-			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
+			EventManager.addEvent(ItemEvent.ITEM_CHANG,onChangeFreshItems);
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
+		}
+		
+		private function onChangeFreshItems(info:ClientItemInfo=null):void
+		{
+			if((info.containerID==ItemContainerID.Role||info.containerID==ItemContainerID.BackPack)&&(info.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||info.type==GoodsType.EQUIPMENT2)){
+				ItemManager.getBackEquip(initItem);
+			}
 		}
 		
 		override public function hide():void
@@ -608,14 +623,13 @@ package com.rpgGame.appModule.equip
 			
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
-			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
+			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onChangeFreshItems);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
 		}
 		
 		private function updateAmount(type:int=3):void
 		{
-			if(type!=CharAttributeType.RES_GOLD&&type!=CharAttributeType.RES_MONEY&&
-				type!=CharAttributeType.RES_BIND_GOLD&&type!=CharAttributeType.RES_BIND_MONEY){
+			if(type!=CharAttributeType.RES_MONEY&&type!=CharAttributeType.RES_BIND_MONEY){
 				return;
 			}
 			
@@ -628,7 +642,7 @@ package com.rpgGame.appModule.equip
 		
 		private function onFreshItems(info:ClientItemInfo=null):void
 		{
-			if(info.containerID==ItemContainerID.BackPack&&(info.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||info.type==GoodsType.EQUIPMENT2)){
+			if((info.containerID==ItemContainerID.Role||info.containerID==ItemContainerID.BackPack)&&(info.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||info.type==GoodsType.EQUIPMENT2)){
 				ItemManager.getBackEquip(initItem);
 			}
 		}
@@ -636,13 +650,13 @@ package com.rpgGame.appModule.equip
 		private function getPolishMsg(msg:ResEquipOperateResultMessage):void
 		{
 			if(msg.opaque==EquipOperateType.POLISH_ONEKEY&&msg.result==1){
-				var alertOk:AlertSetInfo=new AlertSetInfo(LangUI.UI_TEXT3);//强化成功
+				var alertOk:AlertSetInfo=new AlertSetInfo(LangUI.UI_TEXT11);//强化成功
 				alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",addExp);
 				alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",useListIds.length);
 				alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",addExp*perMon);
 				alertOk.alertInfo.align="left";
 				if(isToUp){
-					alertOk.alertInfo.value=LanguageConfig.getText(LangUI.UI_TEXT8)+alertOk.alertInfo.value;
+					alertOk.alertInfo.value=LanguageConfig.getText(LangUI.UI_TEXT12)+alertOk.alertInfo.value;
 					alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",addExp);
 					alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",useListIds.length);
 					alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",addExp*perMon);
@@ -733,6 +747,9 @@ package com.rpgGame.appModule.equip
 			_goodsContainerUse.setGridsCount(num,false);
 			_goodsContainerUse.refleshGridsByDatas(useEquips);
 			
+			selectedUse.length=0;
+			refreshUseEquipGrid();
+			
 			updateAll();
 		}
 		
@@ -779,7 +796,8 @@ package com.rpgGame.appModule.equip
 		
 		private function isUse(info:ClientItemInfo):Boolean
 		{
-			if(info.qItem.q_polish_num!=0&&RoleEquipmentManager.equipIsWearing(info)==false){//消耗获得的值不为0
+			var equip:EquipInfo=info as EquipInfo;
+			if(equip.qItem.q_polish_num!=0&&RoleEquipmentManager.equipIsWearing(equip)==false&&equip.polishLevel==0){//消耗获得的值不为0
 				return true;
 			}
 			return false;
@@ -801,6 +819,7 @@ package com.rpgGame.appModule.equip
 					if(targetEquipInfo&&info.itemInfo.itemId.ToGID()==targetEquipInfo.itemInfo.itemId.ToGID()){
 						targetEquipInfo=info as EquipInfo;//更新掉
 						_targetEquip.gridInfo.data=targetEquipInfo;
+						_targetEquip.gridInfo=_targetEquip.gridInfo;//只能这样调用更新才能触发更新tips函数。。。
 					}
 					result.push(info);
 				}else{

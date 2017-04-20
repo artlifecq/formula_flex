@@ -34,35 +34,35 @@ package app.message {
 		/**
 		 *合成材料
 		 */
-		public static const MATERIAL_COMBO:int = 9;
+		public static const MATERIAL_COMBO:int = 7;
 		/**
 		 *进阶材料
 		 */
-		public static const MATERIAL_ADVANCE:int = 10;
+		public static const MATERIAL_ADVANCE:int = 8;
 		/**
 		 *礼包
 		 */
-		public static const GIFT:int = 11;
+		public static const GIFT:int = 9;
 		/**
 		 *属性丹
 		 */
-		public static const PROPERTY:int = 12;
+		public static const PROPERTY:int = 10;
 		/**
 		 *buff
 		 */
-		public static const BUFF:int = 13;
+		public static const BUFF:int = 15;
 		/**
 		 *传送
 		 */
-		public static const TRANSFER:int = 14;
+		public static const TRANSFER:int = 11;
 		/**
 		 *复活
 		 */
-		public static const RESURGENCE:int = 15;
+		public static const RESURGENCE:int = 12;
 		/**
 		 *任务
 		 */
-		public static const TASK:int = 16;
+		public static const TASK:int = 13;
 		/**
 		 *坐骑
 		 */

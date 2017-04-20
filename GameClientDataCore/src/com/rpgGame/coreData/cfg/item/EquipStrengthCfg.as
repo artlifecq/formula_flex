@@ -10,9 +10,9 @@ package com.rpgGame.coreData.cfg.item
 	 *@author dik
 	 *2017-4-10下午4:07:57
 	 */
-	public class ItemStrength
+	public class EquipStrengthCfg
 	{
-		public function ItemStrength()
+		public function EquipStrengthCfg()
 		{
 		}
 		

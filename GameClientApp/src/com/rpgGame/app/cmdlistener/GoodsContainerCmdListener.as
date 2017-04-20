@@ -71,6 +71,9 @@ package com.rpgGame.app.cmdlistener
 				case EquipOperateType.POLISH_ONEKEY:
 					EventManager.dispatchEvent(ItemEvent.ITEM_POLISH_MSG,msg);
 					break;
+				case EquipOperateType.WASH_NORMAL:
+					EventManager.dispatchEvent(ItemEvent.ITEM_WASH_MSG,msg);
+					break;
 			}
 		}
 		
@@ -131,7 +134,11 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onResItemChangeMessage(msg:ResItemChangeMessage):void
 		{
-			GoodsContainerMamager.getMrg(ItemContainerID.BackPack).changItem(msg.item,msg.type);
+			if(msg.item.type==0){
+				GoodsContainerMamager.getMrg(ItemContainerID.Role).changItem(msg.item,msg.type);
+			}else{
+				GoodsContainerMamager.getMrg(ItemContainerID.BackPack).changItem(msg.item,msg.type);
+			}
 		}
 		
 		private function onResItemRemoveMessage(msg:ResItemRemoveMessage):void

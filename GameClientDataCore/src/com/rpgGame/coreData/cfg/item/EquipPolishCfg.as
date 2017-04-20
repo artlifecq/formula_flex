@@ -1,4 +1,4 @@
-package com.rpgGame.coreData.cfg
+package com.rpgGame.coreData.cfg.item
 {
 	import com.rpgGame.coreData.clientConfig.Q_equip_polish;
 	
@@ -10,14 +10,14 @@ package com.rpgGame.coreData.cfg
 	 *@author dik
 	 *2017-4-14下午7:57:58
 	 */
-	public class EquipPolishCfgData
+	public class EquipPolishCfg
 	{
 		private static var _dataDic:Dictionary;
 		
 		public static var maxLv:int;
 		public static var maxCfg:Q_equip_polish;
 		
-		public function EquipPolishCfgData()
+		public function EquipPolishCfg()
 		{
 		}
 		

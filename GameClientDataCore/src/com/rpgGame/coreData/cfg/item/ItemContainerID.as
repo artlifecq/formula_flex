@@ -100,5 +100,14 @@ package com.rpgGame.coreData.cfg.item
 		 */
 		public static const POLIST_USE:int =rEnum.next;
 		
+		/**
+		 * 洗炼装备列表
+		 */
+		public static const SMELT_LIST:int =rEnum.next;
+		/**
+		 * 洗炼装备消耗
+		 */
+		public static const SMELT_USE:int =rEnum.next;
+		
 	}
 }
