@@ -74,6 +74,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.society.SocietyStaticConfigData;
 	import com.rpgGame.coreData.cfg.sound.GameSoundCfgData;
 	import com.rpgGame.coreData.cfg.task.TaskCfgData;
+	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.ConfigClassRegister;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.familyWar.FamilyWarCfgData;
@@ -85,7 +86,7 @@ package com.rpgGame.app.data
 	import app.message.ServiceConfig;
 	
 	import org.game.netCore.net_protobuff.BytesUtil;
-
+	
 	/**
 	 * 配置数据解析模块，这个模块只提供数据的解析，不提供数据的存储，具体的数据存储到各自模块中
 	 * 如果新写数据模块，！！！不要以这个模块为模板来做！！！
@@ -97,7 +98,7 @@ package com.rpgGame.app.data
 		public function ConfigManager()
 		{
 		}
-
+		
 		/**
 		 * 直接使用缓存中的配置(如果缓存为空，向服务端请求配置文件)
 		 */
@@ -113,7 +114,7 @@ package com.rpgGame.app.data
 				setConfig(byte, true);
 			}
 		}
-
+		
 		/**
 		 * 使用服务器下发的配置
 		 */
@@ -121,7 +122,7 @@ package com.rpgGame.app.data
 		{
 			setConfig(byte, false);
 		}
-
+		
 		/**
 		 * 设置只有客户端自己用的数据,配置在clientres/res/config/data 目录下的数据
 		 */
@@ -152,26 +153,26 @@ package com.rpgGame.app.data
 			AvatarClothesResCfgData.setup(dic[ConfigClassRegister.AvatarClothesRes]);
 			AvatarHairResCfgData.setup(dic[ConfigClassRegister.AvatarHairRes]);
 			AvatarResConfigSetData.setup(dic[ConfigClassRegister.AvatarResConfig]);
-            
-            AttachEffectCfgData.setup(dic[ConfigClassRegister.Attach_effect]);
-            ChangeModelCfgData.setup(dic[ConfigClassRegister.ChangeModel]);
-            RelationCfgData.setup(dic[ConfigClassRegister.Q_relation]);
+			
+			AttachEffectCfgData.setup(dic[ConfigClassRegister.Attach_effect]);
+			ChangeModelCfgData.setup(dic[ConfigClassRegister.ChangeModel]);
+			RelationCfgData.setup(dic[ConfigClassRegister.Q_relation]);
 			
 			BaZhenTuResCfgData.setup(dic[ConfigClassRegister.BaZhenTuRes]);
 			
 			
 			EffectAnimationCfgData.setup(dic[ConfigClassRegister.EffectAnimation]);
 			FaceCfgData.setup(dic[ConfigClassRegister.FaceInfo]);
-//			GmLevelAddSpellPointData.setup(dic[ConfigClassRegister.GmLevelAddSpellPoint]);
+			//			GmLevelAddSpellPointData.setup(dic[ConfigClassRegister.GmLevelAddSpellPoint]);
 			StatNameCfgData.setup(dic[ConfigClassRegister.SpriteStatNameInfo]);
-//			EquipTypeNameCfgData.setup(dic[ConfigClassRegister.EquipTypeNameInfo]);
-//			EquipRefineTimesCfgData.setup(dic[ConfigClassRegister.EquipRefineTimesInfo]);
+			//			EquipTypeNameCfgData.setup(dic[ConfigClassRegister.EquipTypeNameInfo]);
+			//			EquipRefineTimesCfgData.setup(dic[ConfigClassRegister.EquipRefineTimesInfo]);
 			RaceCfgData.setup(dic[ConfigClassRegister.RaceNameInfo]);
-//			CrownNeiZhengCfgData.setup(dic[ConfigClassRegister.CrownNeiZhenInfo]);
-//			EquipMainStatCfgData.setup(dic[ConfigClassRegister.EquipMainStat]);
+			//			CrownNeiZhengCfgData.setup(dic[ConfigClassRegister.CrownNeiZhenInfo]);
+			//			EquipMainStatCfgData.setup(dic[ConfigClassRegister.EquipMainStat]);
 			HintCfgData.setUpHintTypeSet(dic[ConfigClassRegister.HintTypeSetInfo]);
-//			ClientCountryWarChengMenCfgData.setup(dic[ConfigClassRegister.CountryWarChengMenInfo]);
-//			CrownPanelPagesCfgData.setup(dic[ConfigClassRegister.CrownPageInfo]);
+			//			ClientCountryWarChengMenCfgData.setup(dic[ConfigClassRegister.CountryWarChengMenInfo]);
+			//			CrownPanelPagesCfgData.setup(dic[ConfigClassRegister.CrownPageInfo]);
 			ClientBuffCfgData.setUpHintTypeSet(dic[ConfigClassRegister.ClientBuff]);
 			ItemConfig.setup(dic[ConfigClassRegister.Q_item]);
 			TipsCfgData.setup(dic[ConfigClassRegister.Q_tipsinfo]);
@@ -180,12 +181,12 @@ package com.rpgGame.app.data
 			DieCfgData.setup(dic[ConfigClassRegister.Q_die]);
 			GCDCfgData.setup(dic[ConfigClassRegister.Q_GCD]);
 			SkillLvLDataManager.setup(dic[ConfigClassRegister.Q_skill_ignore]);
+
 			EquipStrengthCfg.setup(dic[ConfigClassRegister.Q_equip_strength]);
 			EquipPolishCfg.setup(dic[ConfigClassRegister.Q_equip_polish]);
 			EquipWashCfg.setup(dic[ConfigClassRegister.Q_equip_wash]);
 			EquipWashAttCfg.setup(dic[ConfigClassRegister.Q_equip_wash_attr]);
 //			CountryUnionStatCfgData.setup(null); //待解决
-
 			
 			////////////////////////////////////////////////////////////////////////
 			//
@@ -194,10 +195,10 @@ package com.rpgGame.app.data
 			///////////////////////////////////////////////////////////////////////
 			//场景相关
 			MapDataManager.setSceneConfig(dic[ConfigClassRegister.Q_map]);
-            // 地图区域
-            AreaCfgData.setup(dic[ConfigClassRegister.Q_area]);
-            // 传送门
-            TransCfgData.setup(dic[ConfigClassRegister.Q_map_transfer]);
+			// 地图区域
+			AreaCfgData.setup(dic[ConfigClassRegister.Q_area]);
+			// 传送门
+			TransCfgData.setup(dic[ConfigClassRegister.Q_map_transfer]);
 			
 			//怪物//NPC
 			MonsterDataManager.setMonsterConfig(dic[ConfigClassRegister.Q_monster]);//怪物总表
@@ -208,7 +209,7 @@ package com.rpgGame.app.data
 			SpellEffectDataManager.setConfig(dic[ConfigClassRegister.Q_SpellEffect]);//每个技能效果，具体参数配置表
 			AnimationDataManager.setConfig(dic[ConfigClassRegister.Q_SpellAnimation]);///技能特效配置表
 			//公共CD配置
-//			GCDCfgData.setConfig(dic[ConfigClassRegister.Q_GCD]);
+			//			GCDCfgData.setConfig(dic[ConfigClassRegister.Q_GCD]);
 			//状态数据buff相关
 			BuffStateDataManager.setConfig(dic[ConfigClassRegister.Q_buff]);
 			//窗口信息
@@ -220,9 +221,13 @@ package com.rpgGame.app.data
 			
 			// 服务器发送 消息ID对应客户端 
 			NotifyCfgData.setup(dic[ConfigClassRegister.Q_notify]);
+			//任务表配置
+			TaskMissionCfgData.setup(dic[ConfigClassRegister.Q_mission_base]);
+			TaskMissionCfgData.setupReword(dic[ConfigClassRegister.Q_mission_reword]);
+			TaskMissionCfgData.setupSegment(dic[ConfigClassRegister.Q_mission_segment]);
 			
 		}
-
+		
 		/**
 		 * 保存配置文件
 		 * @param	config
@@ -238,42 +243,42 @@ package com.rpgGame.app.data
 			{
 				ver = BytesUtil.readVarint64(byte);
 			}
-
+			
 			var configLen : int = BytesUtil.readVarint32(byte);
 			var configBytes : ByteArray = new ByteArray();
 			byte.readBytes(configBytes, 0, configLen);
 			configBytes.uncompress();
 			var config : Config = new Config();
 			config.mergeFrom(configBytes);
-
+			
 			//ServiceConfig描述这个服的单独配置，如开服时间，是否已合过服等等
 			var serviceConfigLen : int = BytesUtil.readVarint32(byte);
 			var serviceConfigBytes : ByteArray = new ByteArray();
 			byte.readBytes(serviceConfigBytes, 0, serviceConfigLen);
 			var serviceConfig : ServiceConfig = new ServiceConfig();
 			serviceConfig.mergeFrom(serviceConfigBytes);
-
+			
 			//保存场景配置文件   抛出GAMEconfig_GET_SCENEconfig配置文件获取成功事件
-//			if (config.hasSceneConfig)
-//			{
-//				MapDataManager.setSceneConfig(config.sceneConfig);
-//			}
-
-//			if (config.hasSpellConfig)
-//			{
-//				SpellDataManager.setConfig(config.spellConfig.spellLearnConfig);
-//				//状态数据buff相关
-//				BuffStateDataManager.setConfig(config.spellConfig.stateConfig);
-//				SpellEffectDataManager.setConfig(config.spellConfig.spellEffectConfig);
-//				AnimationDataManager.setConfig(config.spellConfig.animationConfig);
-//				//公共CD配置
-//				GCDCfgData.setConfig(config.spellConfig.gcdGroupsConfig);
-//			}
-//			if (config.hasMonsterConfig)
-//			{
-//				MonsterDataManager.setConfig(config.monsterConfig); //怪物//NPC
-//			}
-
+			//			if (config.hasSceneConfig)
+			//			{
+			//				MapDataManager.setSceneConfig(config.sceneConfig);
+			//			}
+			
+			//			if (config.hasSpellConfig)
+			//			{
+			//				SpellDataManager.setConfig(config.spellConfig.spellLearnConfig);
+			//				//状态数据buff相关
+			//				BuffStateDataManager.setConfig(config.spellConfig.stateConfig);
+			//				SpellEffectDataManager.setConfig(config.spellConfig.spellEffectConfig);
+			//				AnimationDataManager.setConfig(config.spellConfig.animationConfig);
+			//				//公共CD配置
+			//				GCDCfgData.setConfig(config.spellConfig.gcdGroupsConfig);
+			//			}
+			//			if (config.hasMonsterConfig)
+			//			{
+			//				MonsterDataManager.setConfig(config.monsterConfig); //怪物//NPC
+			//			}
+			
 			if (config.hasGuildConfig)
 			{
 				GuildCfgData.setup(config.guildConfig); //帮派
@@ -283,13 +288,13 @@ package com.rpgGame.app.data
 			{
 				//TranportsDataManager.setConfig(config.sceneTranports);
 			}
-
+			
 			if (config.relationConfig)
 			{
 				FriendManager.MAX_FRIEND_NUM = config.relationConfig.friendCountLimit;
 				FriendManager.MAX_BLACK_NUM = config.relationConfig.blackCountLimit;
 			}
-
+			
 			//采集
 			CollectCfgData.setConfig(config.collecObjectConfig);
 			//聊天
@@ -299,7 +304,7 @@ package com.rpgGame.app.data
 			//复活相关配置
 			ReliveCfgData.setConfig(config.reliveConfig);
 			//物品
-//			ItemCfgData.setAllCfgData(config.goodsConfig);
+			//			ItemCfgData.setAllCfgData(config.goodsConfig);
 			//背包仓库解锁格子数据
 			GoodsContainerMamager.setUnlockDataConfig(config.allUnlockData);
 			//帮派
@@ -315,17 +320,17 @@ package com.rpgGame.app.data
 			//加点配置
 			AddSpriteStatCfgData.setConfig(config.addSpriteStatConfig);
 			//物品合成
-//			CombineCfgData.setConfig(config.equipmentConfig.combineDatas);
+			//			CombineCfgData.setConfig(config.equipmentConfig.combineDatas);
 			//装备合成
-//			EquipmentCombineCfgData.setConfig(config.equipmentConfig.combineEquipDatas);
+			//			EquipmentCombineCfgData.setConfig(config.equipmentConfig.combineEquipDatas);
 			//装备打造
-//			EquipMakeCfgData.setConfig(config.equipmentConfig.equipBuild);
+			//			EquipMakeCfgData.setConfig(config.equipmentConfig.equipBuild);
 			//装备改造
-//			EquipmentGeneralCfgData.setConfig(config.equipmentConfig.generalDatas);
+			//			EquipmentGeneralCfgData.setConfig(config.equipmentConfig.generalDatas);
 			//装备拆解
-//			EquipmentRefineDestoryCfgData.setConfig(config.equipmentConfig.destroyDatas);
+			//			EquipmentRefineDestoryCfgData.setConfig(config.equipmentConfig.destroyDatas);
 			//装备强化
-//			RefineCfgData.setConfig(config.equipmentConfig.refineDatas);
+			//			RefineCfgData.setConfig(config.equipmentConfig.refineDatas);
 			//王城战配置
 			FamilyWarCfgData.setup(config.kingWarConfig.miscData);
 			//运镖配置
@@ -334,10 +339,10 @@ package com.rpgGame.app.data
 			MazeCfgData.setup(config.mazeConfig);
 			//摆摊
 			StallCfgData.setup(config.stallConfig);
-
+			
 			if (config.biaoConfig)
 			{ //镖局配置
-//				BiaoJuManager.setMiscData(config.biaoConfig.biaoJuMisc);
+				//				BiaoJuManager.setMiscData(config.biaoConfig.biaoJuMisc);
 			}
 			//坐骑
 			MountConfigData.setConfig(config.mount);
@@ -351,7 +356,7 @@ package com.rpgGame.app.data
 			}
 			//国战配置
 			CountryWarCfgData.setConfig(config.countryWarConfig);
-
+			
 			if (config.hasRelationConfig)
 				FriendCfgData.setup(config.relationConfig);
 		}

@@ -53,7 +53,6 @@ package com.rpgGame.app.cmdlistener
 //			SocketConnection.addCmdListener(ChatModuleMessages.S2C_GOODS_INFO_REPLY, onGetItemInfo);
 //			SocketConnection.addCmdListener(ChatModuleMessages.S2C_GOODS_INFO_REPLY_ERROR, onGetItemInfoError);
 			
-			
 			SocketConnection.addCmdListener(112101, onResChatMessage );
 			
 //			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_COUNTRY_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_COUNTRY));
