@@ -201,9 +201,13 @@ package com.rpgGame.app.ui.alert
 			gameAlert.callBackArgs = args;
 			StarlingLayerManager.topUILayer.addChild(gameAlert);
 			showAlertMap.add(alertSet.key, gameAlert);
+			layoutAlert(gameAlert);
 			return gameAlert;
 		}
 		
+		private static function layoutAlert(gameAlert:GameAlert):void
+		{
+		}		
 		
 		private static var showAlertMap : HashMap = new HashMap();
 		private static var alertPools : HashMap = new HashMap();

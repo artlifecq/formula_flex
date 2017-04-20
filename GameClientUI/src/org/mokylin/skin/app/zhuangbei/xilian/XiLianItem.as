@@ -18,6 +18,8 @@ package org.mokylin.skin.app.zhuangbei.xilian
 		//==========================================================================
 		public var chk_suoding:feathers.controls.Check;
 
+		public var lb_lock:feathers.controls.Label;
+
 		public var lb_name:feathers.controls.Label;
 
 		public var lb_yuanbao:feathers.controls.Label;
@@ -31,7 +33,7 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [lb_name_i(),chk_suoding_i(),lb_yuanbao_i()];
+			this.elementsContent = [lb_name_i(),chk_suoding_i(),lb_yuanbao_i(),lb_lock_i()];
 			
 			states = {
 			};
@@ -48,11 +50,22 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			chk_suoding = temp;
 			temp.name = "chk_suoding";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.label = "锁定";
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
 			temp.color = 0xCFC6AE;
 			temp.x = 350;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function lb_lock_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_lock = temp;
+			temp.name = "lb_lock";
+			temp.text = "锁定";
+			temp.color = 0xCFC6AE;
+			temp.x = 377;
+			temp.y = 2;
 			return temp;
 		}
 
@@ -61,9 +74,11 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_name = temp;
 			temp.name = "lb_name";
-			temp.htmlText = "属性：力道<font color='#5DBD37'>+20</font>";
+			temp.height = 19;
+			temp.text = "属性文本";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 340;
 			temp.x = 0;
 			temp.y = 2;
 			return temp;
@@ -74,10 +89,11 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_yuanbao = temp;
 			temp.name = "lb_yuanbao";
-			temp.htmlText = "（<font color='#5DBD37'>10元宝/次</font>）";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 401;
+			temp.height = 19;
+			temp.text = "(10元宝/次)";
+			temp.color = 0x25931b;
+			temp.width = 89;
+			temp.x = 412;
 			temp.y = 2;
 			return temp;
 		}

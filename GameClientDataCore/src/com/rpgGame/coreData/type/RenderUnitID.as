@@ -68,6 +68,9 @@ package com.rpgGame.coreData.type
 		
 		/**战魂**/
 		public static const FIGHTSOUL : int = rEnum.next;
+		
+		/**问号**/
+		public static const TASKMARK : int = rEnum.next;
 
 //	/**角色光环特效ID*/
 //		public static const MAGIC_RING:int = rEnum.next;

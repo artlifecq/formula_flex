@@ -58,14 +58,12 @@ package com.rpgGame.appModule.equip
 			tabUIs.push(new EquipSmeltUI());
 			tabUIs.push(new EquipInheritUI());
 			tabUIs.push(new EquipComboUI());
-			
-			onTouchTarget(_tabSkin.btn_jineng);
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			_currentUI.show();
+			onTouchTarget(_tabSkin.btn_jineng);
 		}
 		
 		override public function hide():void
@@ -79,10 +77,16 @@ package com.rpgGame.appModule.equip
 			super.onTouchTarget(target);
 			if(target is Radio){
 				var index:int=tabBtn.indexOf(target as Radio);
-				if(index!=-1){
-					currentUI=tabUIs[index];
-				}
+				showTab(index);
 			}
+		}
+		
+		private function showTab(index:int):void
+		{
+			tabBtn[index].isSelected=true;
+			if(index!=-1){
+				currentUI=tabUIs[index];
+			}			
 		}
 	}
 }

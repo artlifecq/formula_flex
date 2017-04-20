@@ -30,7 +30,7 @@
 			<filter filterType="GlowFilter" alpha="1.00" blurY="4" color="0x000000" quality="1" blurX="4" inner="false" strength="10" knockout="false" />
 		</filterArr>
 		<filterArr id="labelFilterBlack" desc="黑色滤镜(浅)">
-			<filter filterType="GlowFilter" alpha="0.40" blurY="2" color="0x000000" quality="1" blurX="2" inner="false" strength="4" knockout="false" />
+			<filter filterType="GlowFilter" alpha="0.80" blurY="2" color="0x000000" quality="1" blurX="2" inner="false" strength="4" knockout="false" />
 		</filterArr>
 		
 		<filterArr  id="textFilterYellow" desc="黄色滤镜">
@@ -55,6 +55,9 @@
 		<filterArr  id="textFilterBlackGreen3" desc="墨绿滤镜(暗)">
 			<filter filterType="GlowFilter" alpha="1.00" blurY="2" color="0x0f1a04" quality="1" blurX="2" inner="false" strength="10" knockout="false"/>
 		</filterArr>
+		<filterArr  id="textFilterBlackGreen3" desc="墨绿滤镜(暗)">
+			<filter filterType="GlowFilter" alpha="0.70" blurY="4" color="0x0f1a04" quality="1" blurX="2" inner="false" strength="10" knockout="false"/>
+		</filterArr>
 		
 	</filters>
 	<textFormats>
@@ -71,20 +74,21 @@
 		<textFormat id="110" name="10号 蓝色文字" textColor="0x2c87b0" textFilter="textFilterBlackGreen"/>
 		<textFormat id="111" name="11号 蓝色文字" textColor="0x2083b9" textFilter="textFilterBlackGreen"/>
 		<textFormat id="112" name="12号 紫色文字" textColor="0x9d4aa8" textFilter="textFilterBlackGreen"/>
-		<textFormat id="113" name="13号 黄色文字(提示)" textColor="0xe8c958" textFilter="textFilterBlackGreen"/>
-		<textFormat id="114" name="14号 黄色文字" textColor="0xc2992b" textFilter="textFilterBlackGreen"/>
-		<textFormat id="115" name="15号 淡黄色文字" textColor="0xaea790" textFilter="textFilterBlackGreen"/>
-		<textFormat id="116" name="16号 黄色文字" textColor="0xdfb01f" textFilter="textFilterBlackGreen"/>
+		<textFormat id="113" name="13号 黄色文字(提示)" textColor="0xaea790" textFilter="textFilterBlackGreen"/>
+		<textFormat id="114" name="14号 黄色文字" textColor="0xbea757" textFilter="textFilterBlackGreen"/>
+		<textFormat id="115" name="15号 黄色文字" textColor="0xc2992b" textFilter="textFilterBlackGreen"/>
+		<textFormat id="116" name="16号 淡黄色文字" textColor="0xdfb01f" textFilter="textFilterBlackGreen"/>
 		<textFormat id="117" name="17号 黄色文字" textColor="0xe8c958" textFilter="textFilterBlackGreen"/>
 		<textFormat id="118" name="18号 红色文字" textColor="0xd02525" textFilter="textFilterBlackGreen"/>
 		<textFormat id="119" name="19号 红色文字" textColor="0xd23735" textFilter="textFilterBlackGreen"/>
 		<textFormat id="120" name="20号 红色文字" textColor="0xe1201c" textFilter="textFilterBlackGreen"/>
 		<textFormat id="121" name="21号 装备提示" textColor="0xf9e7b7" textFilter="labelFilterBlue"/>
 		
-		<textFormat id="201" name="1号 灰色文字(默认)无滤镜" textColor="0x939388" textFilter=""/>
-		<textFormat id="203" name="2号 米黄文字无滤镜" textColor="0x8b8d7b" textFilter=""/>
-		<textFormat id="204" name="3号 米黄文字无滤镜" textColor="0xcfc6ae" textFilter=""/>
-		<textFormat id="205" name="4号 黄色文字无滤镜" textColor="0xe1d4a9" textFilter=""/>
+		<textFormat id="201" name="1号 灰色文字(按钮)" textColor="0xcfc6ae" textFilter="labelFilterBlack"/>
+		<textFormat id="202" name="2号 米黄文字" textColor="0xe1d4a9" textFilter="labelFilterBlack"/>
+		<textFormat id="203" name="3号 灰色文字" textColor="0x6f6f6d" textFilter="textFilterBlackGreeni"/>
+		<textFormat id="204" name="4号 米黄文字" textColor="0xe3d9bf" textFilter="textFilterBlackGreeni"/>
+		<textFormat id="205" name="5号 黄色文字无滤镜" textColor="0xe1d4a9" textFilter=""/>
 		
 		<textFormat id="206" name="5号 黄色文字无滤镜" textColor="0xf4bd63" textFilter=""/>
 		<textFormat id="207" name="6号 暗黄文字无滤镜" textColor="0x9c8049" textFilter=""/>

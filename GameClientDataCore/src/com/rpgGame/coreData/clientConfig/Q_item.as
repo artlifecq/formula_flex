@@ -26,7 +26,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_levelnum:int;
 		 /**  物品品质（0白色，1绿色，2蓝色，3紫色，4金色） */
 		public var q_default:int;
-		 /**  佩戴职业需求（0通用 1兵家 2墨家男 3墨家女4 医家） */
+		 /**  佩戴职业需求（0通用 1兵家 2墨家4 医家） */
 		public var q_job:int;
 		 /**  需要性别(0通用 1男 2女) */
 		public var q_sex:int;
@@ -150,6 +150,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_max_strengthen:int;
 		 /**  消耗获得强化值 */
 		public var q_strengthen_num:int;
+		 /**  消耗获得琢磨值 */
+		public var q_polish_num:int;
 		 /**  是否能被转移（1是 0否） */
 		public var q_could_transfer:int;
 		 /**  转移需要的元宝 */

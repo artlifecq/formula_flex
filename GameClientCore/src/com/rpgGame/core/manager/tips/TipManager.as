@@ -75,6 +75,8 @@ package com.rpgGame.core.manager.tips
 			
 			if( tip == null )
 				return;
+			
+			
 			if(_currentData != $tipData)
 			{
 				tip.setTipData($tipData);

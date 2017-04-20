@@ -36,5 +36,8 @@ package com.rpgGame.core.events
 		public static const STAT_RES_CHANGE:int = UNIQUEID.NEXT;
 		/** 复活成功*/
 		public static const REVIVE_SUCCESS:int = UNIQUEID.NEXT;
+		/** 玩家死亡*/
+		public static const PLAYER_DIE:int = UNIQUEID.NEXT;
+		
 	}
 }
