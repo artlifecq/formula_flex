@@ -382,7 +382,7 @@ package com.rpgGame.app.graphics
 			}
 			flowerY = effectGroup.layout();
 //			Render3DTextUtil.refreshHeadFlowerTextLayout(_role); //原来的
-			Render3DTextUtil.addHeadFlowerTextToTarget(_role);
+			//Render3DTextUtil.addHeadFlowerTextToTarget(_role);
 			//-------------------------------------
 			//玩家名字之下的
 			
