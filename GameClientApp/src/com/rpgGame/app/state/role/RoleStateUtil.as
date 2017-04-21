@@ -121,10 +121,10 @@ package com.rpgGame.app.state.role
 		 * @param role
 		 * @param gridPos
 		 * @param onArrive
-		 *
+		 *@param noWalk 寻路路径小不用寻路，也返回方法 返回 role   任务上用到 ---------yt
 		 */
 		public static function walkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
-										 onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : void
+										 onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,noWalk:Function=null) : void
 		{
 			if (!role || !role.usable)
 				return;
@@ -133,6 +133,11 @@ package com.rpgGame.app.state.role
 			if(dist <= spacing)
 			{
 				role.faceToGround(pos.x,pos.y);
+				if(noWalk!=null)
+				{
+					noWalk(data);
+				}
+				
 				return;
 			}
 			

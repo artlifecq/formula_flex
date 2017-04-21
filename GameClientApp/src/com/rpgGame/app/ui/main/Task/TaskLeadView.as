@@ -114,7 +114,7 @@ package com.rpgGame.app.ui.main.Task
 			
 			
 			titleLable.htmlText="";
-			navi1Lable.htmlText="章节任务";
+			navi1Lable.htmlText="章节进度";
 			navi2Lable.htmlText="任务描述";
 			navi3Lable.htmlText="任务进度";
 			jindu.labelDisplay.text="0%";
@@ -168,7 +168,7 @@ package com.rpgGame.app.ui.main.Task
 			
 			if(task!=null&&taskData!=null)
 			{
-				setTitle(taskData.q_party_name,taskData.q_mission_name,taskData.q_describe);
+				setTitle(taskData.q_party_name,taskData.q_name,taskData.q_describe);
 				
 				setTimeout(function():void{
 					setParcent(taskData.q_party_id,taskData.q_node_id);
@@ -231,7 +231,7 @@ package com.rpgGame.app.ui.main.Task
 		/**设置标题详情*/
 		private function setTitle(party:String,name:String,describe:String):void
 		{
-			titleLable.htmlText=party+":"+name;
+			titleLable.htmlText=party+name;
 			priLabel.htmlText=describe;
 		}
 		/**设置完成进度*/
@@ -298,13 +298,14 @@ package com.rpgGame.app.ui.main.Task
 					crrentParcent+=count;
 					allParcent+=finish;
 					
-					killLabelList[i].htmlText=text;
-					killButList[i].visible=true;
+					setKillLabelText(killButList[i],text);
+					
+					
 				}
 				
 			}
 			
-			if(type==TaskType.SUB_CONVERSATION)
+			/*if(type==TaskType.SUB_CONVERSATION)
 			{
 				crrentParcent=0;
 				allParcent=1;
@@ -314,7 +315,7 @@ package com.rpgGame.app.ui.main.Task
 			{
 				TaskMissionManager.currentMainTaskIsfinish=crrentParcent<allParcent?false:true;
 				
-			}
+			}*/
 			
 			
 			
@@ -361,6 +362,23 @@ package com.rpgGame.app.ui.main.Task
 			FaceUtil.SetItemGrid(grid,info,true);
 		}
 		
+		private function setKillLabelText(but:SkinnableContainer,t:String):void
+		{
+			
+			var rItme:Renwu_Item;
+			if(but!=null&&but.skin!=null)
+			{
+				rItme=but.skin as Renwu_Item;
+			}
+			if(rItme!=null)
+			{
+				rItme.labelDisplay.htmlText=t;//t;
+				rItme.btn_send.x=rItme.labelDisplay.textWidth+2;
+				but.visible=true;
+			}
+			
+			
+		}
 		
 		/**设置UI位置*/
 		private function setUisite():void
