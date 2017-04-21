@@ -29,7 +29,7 @@ package com.rpgGame.app.ui.tips
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.mokylin.skin.app.tips.zhuangbeiTips_Skin;
-
+	
 	/**
 	 * 装备tips 
 	 * @author Mandragora
@@ -230,21 +230,19 @@ package com.rpgGame.app.ui.tips
 				}
 				name=HtmlTextUtil.getTextColor(0x8B8D7B,name+":");
 				value=HtmlTextUtil.getTextColor(0xCFC6AE,v+per);
+				label=createLabel(name,value);
+				label.x=10;
+				label.y=curY;
 				var sten:Number=map2.getValue(id);
 				if(sten!=0){
 					if(per=="%"){
 						sten/=100;
 					}
-						
-					value+=HtmlTextUtil.getTextColor(0x5CB006,"    (强化+"+sten+per+")");
+					value=HtmlTextUtil.getTextColor(0x5CB006,"    (强化+"+sten+per+")");
+					label=createLabel("",value);
+					label.x=123;
+					label.y=curY;
 				}
-				label=createLabel(name,value);
-//				if(num%2!=0){
-					label.x=10;
-//				}else{
-//					label.x=155;
-//				}
-				label.y=curY;
 			}
 			curY+=25;
 			
