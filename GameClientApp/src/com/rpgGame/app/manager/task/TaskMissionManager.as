@@ -50,16 +50,24 @@ package com.rpgGame.app.manager.task
 		
 		public static function setCurrentTaskInfo(value: Vector.<TaskInfo>) : void
 		{
-			for each(var task:TaskInfo in value)
+			if(value!=null&&value.length>0)
 			{
-				setTaskInfo(task);
+				for each(var task:TaskInfo in value)
+				{
+					setTaskInfo(task);
+				}
 			}
+			
 		}
 		
 		public static function setTaskInfo(task:TaskInfo) : void
 		{
 			var taskData:Q_mission_base;
-			taskData=TaskMissionCfgData.getTaskByID(task.taskModelId);
+			if(task!=null)
+			{
+				taskData=TaskMissionCfgData.getTaskByID(task.taskModelId);
+			}
+			
 			if(taskData!=null)
 			{
 				if(taskData.q_mission_mainType==TaskType.MAINTYPE_MAINTASK)
