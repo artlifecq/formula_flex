@@ -318,7 +318,7 @@ package com.rpgGame.appModule.equip
 		{
 			cancelAllUse();
 			if(!targetEquipInfo){
-				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6016));
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6012));
 				return;
 			}
 			
@@ -356,14 +356,14 @@ package com.rpgGame.appModule.equip
 				useListIds.push(item.itemInfo.itemId);
 			}
 			
-			if(useListIds.length==0){
-				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4205));
-				return;
-			}
-			
 			useMon=addExp*perMon;
 			if(userMon<useMon||i==0){
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6014));
+				return;
+			}
+			
+			if(useListIds.length==0){
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4205));
 				return;
 			}
 			
@@ -402,7 +402,7 @@ package com.rpgGame.appModule.equip
 				return;
 			}
 			if(selectedUse.length==6){
-				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4204));
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6016));
 				return;
 			}
 			
