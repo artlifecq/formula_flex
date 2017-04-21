@@ -28,7 +28,7 @@ package com.rpgGame.app.ui.main.Task
 			effectSk.x =-150;
 			effectSk.y = 20;
 			_skin.task_effect.addChild(effectSk);
-			finishEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_WANCHENGRENWU),0,0,1,onPlayComple);
+			finishEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_WANCHENGRENWU),0,0,0,onPlayComple);
 			newtaskEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_XINRENWU));
 			
 		}

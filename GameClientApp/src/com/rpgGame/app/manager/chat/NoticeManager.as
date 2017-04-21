@@ -177,7 +177,10 @@ package com.rpgGame.app.manager.chat
 		{
 			notify(CHAT_SYSTEM, $msg, textArgs);
 		}
-
+		
+		
+		
+		
 		/**
 		 * 测试用的，别拿去用。
 		 * @param type
@@ -188,7 +191,7 @@ package com.rpgGame.app.manager.chat
 		{
 			notify(type, msg);
 		}
-
+		
 		/**
 		 * 提示消息
 		 * @param $type			类型

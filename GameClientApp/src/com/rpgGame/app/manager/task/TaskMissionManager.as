@@ -4,6 +4,9 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.type.TaskType;
 	import com.rpgGame.netData.task.bean.TaskInfo;
+	import com.rpgGame.netData.task.bean.TaskSubRateInfo;
+	
+	import app.message.BoolArrayProto;
 
 	public class TaskMissionManager
 	{
@@ -14,26 +17,26 @@ package com.rpgGame.app.manager.task
 		/**当前主线任务服务器信息*/
 		private static var _currentMainTaskInfo : TaskInfo;
 		private static var _currentMainTaskData : Q_mission_base;
-		private static var _currentMainTaskIsfinish:Boolean
+		//private static var _currentMainTaskIsfinish:Boolean
 		
 		/**当前支线任务信息*/
 		private static var _currentDailyTaskInfo : TaskInfo;
 		/**当前环式任务信息*/
 		private static var _currentTreasuerTaskInfo : TaskInfo;
 		/**主线任务是否完成*/
-		public static function get currentMainTaskIsfinish():Boolean
+		/*public static function get currentMainTaskIsfinish():Boolean
 		{
 			return _currentMainTaskIsfinish;
-		}
+		}*/
 
 		/**
 		 * @private
 		 */
-		public static function set currentMainTaskIsfinish(value:Boolean):void
+		/*public static function set currentMainTaskIsfinish(value:Boolean):void
 		{
 			_currentMainTaskIsfinish = value;
 		}
-
+*/
 		/**当前主线任务配置信息*/
 		public static function get currentMainTaskData():Q_mission_base
 		{
@@ -85,6 +88,61 @@ package com.rpgGame.app.manager.task
 			}
 			
 		}
+		/**判断主线任务是否完成*/
+		public static function get currentTaskIsFinish():Boolean
+		{
+			if(currentMainTaskInfo!=null&&currentMainTaskData!=null)
+			{
+				if(currentMainTaskData.q_mission_type==TaskType.SUB_CONVERSATION)
+				{
+					return true;
+				}
+				else
+				{
+					var sub:Vector.<TaskSubRateInfo>=currentMainTaskInfo.taskSubRateInfolist;
+					var crrentParcent:int=0,allParcent:int=0;
+					var i:int,j:int,length:int;
+					var information:String=currentMainTaskData.q_finish_information_str;
+					var informationList:Array=information.split(";");
+					for(i=0;i<informationList.length;i++)
+					{
+						if(informationList[i]!=null&&informationList[i]!="")
+						{
+							var text:String="";
+							var modeid:int=0;
+							var count:int=0,finish:int;
+							var modeArr:Array=informationList[i].split(",");
+							if(modeArr.length==2)
+							{
+								modeid=int(modeArr[0]);
+								finish=int(modeArr[1]);
+							}
+							
+							for(j=0;j<sub.length;j++)
+							{
+								if(modeid==sub[j].modelId)
+								{
+									count=sub[j].num;
+									break;
+								}
+							}
+							crrentParcent+=count;
+							allParcent+=finish;
+							
+						}
+					}
+					if(crrentParcent==allParcent)
+					{
+						return true;
+					}
+					
+				}
+			}
+			
+			
+			return false;
+		}
+		
 		
 		/**当前支线任务信息*/
 		public static function get currentDailyTaskInfo() : TaskInfo
@@ -148,7 +206,7 @@ package com.rpgGame.app.manager.task
 			if(value == null)return;
 			if (_currentMainTaskInfo&&value&&_currentMainTaskInfo.taskId != value.taskId)
 			{
-				currentMainTaskIsfinish=false;
+				//currentMainTaskIsfinish=false;
 			}
 			_currentMainTaskInfo = value;
 			_currentMainTaskData=taskData;

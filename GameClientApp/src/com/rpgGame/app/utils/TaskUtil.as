@@ -15,6 +15,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.app.richText.RichTextCustomUtil;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.TaskSender;
+	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.task.TaskInfoDecoder;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -255,27 +256,16 @@ package com.rpgGame.app.utils
 		 * @param npcId
 		 *
 		 */
-		public static function finishNpcTask(npcId : int,onArrive:Function=null) : void
+		public static function finishNpcTask(npcId : int,onArrive:Function=null,noWalk:Function=null) : void
 		{
 			
 			var npcData : Q_scene_monster_area = MonsterDataManager.getMonsterById(npcId);
 			if (npcData)
 			{
 				var pos : Point = MonsterDataManager.getMonsterPosition(npcData);
-				/*var sceneRole : SceneRole = SceneManager.getSceneNpcByModelId(npcId);
+				var targerPos:Vector3D=new Vector3D();
 				
-				var searchRoleData : SearchRoleData = new SearchRoleData();
-				searchRoleData.searchId = npcId;
-				searchRoleData.targetData = (sceneRole ? sceneRole.data as MonsterData : null);*/
-				MainRoleSearchPathManager.walkToScene(npcData.q_mapid, pos.x, pos.y,onArrive, 100);
-				/*
-				MainRoleSearchPathManager.walkToScene(npcData.q_mapid, pos.x, pos.y, function openPanel() : void
-				{
-					var targerId : Number = (searchRoleData.targetData ? searchRoleData.targetData.id : 0);
-					var role : SceneRole = SceneManager.getScene().getSceneObjByID(targerId, SceneCharType.NPC) as SceneRole;
-					SceneRoleSelectManager.selectedRole = role;
-					TaskManager.checkDialogToNpc(targerId);
-				}, 200, searchRoleData);*/
+				MainRoleSearchPathManager.walkToScene(npcData.q_mapid, pos.x, pos.y,onArrive, 100,null,noWalk);
 			}
 		}
 
@@ -574,10 +564,12 @@ package com.rpgGame.app.utils
 				if (!TaskMissionManager.checkHasReplyNpcInStoryTask(npcModelId))
 					return;
 			}
-			var offset : Vector3D=new Vector3D();
-			//offset.
-			SpellAnimationHelper.addTargetEffect(role, RenderUnitID.TASKMARK, RenderUnitType.TASKMARK, EffectUrl.UI_WENHAO, BoneNameEnum.c_0_name_01, 0, null, false);
-
+			
+			if(TaskMissionManager.currentTaskIsFinish)
+			{
+				SpellAnimationHelper.addTargetEffect(role, RenderUnitID.TASKMARK, RenderUnitType.TASKMARK, EffectUrl.UI_WENHAO, BoneNameEnum.c_0_name_01, 0, null, false);
+			}
+			
 		}
 		public static function tryRemoveTaskMark(role : SceneRole) : void
 		{
