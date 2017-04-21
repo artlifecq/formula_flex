@@ -1,9 +1,15 @@
 package com.rpgGame.app.ui.main.shortcut
 {
+	import com.game.engine3D.display.EffectObject3D;
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
+	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
@@ -12,6 +18,7 @@ package com.rpgGame.app.ui.main.shortcut
 	
 	import feathers.controls.Button;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.juexue.juexu_Skin;
 	
 	import starling.animation.IAnimatable;
@@ -74,10 +81,27 @@ package com.rpgGame.app.ui.main.shortcut
 			_bindBtn = button;
 			refeashState();
 			_bindBtn.addEventListener(Event.TRIGGERED,buttonClickHandler);
+			EventManager.addEvent(LostSkillManager.LostSkill_ChangeSkillState,addEffectHandler);
 		}
-		
+		private var _content:Inter3DContainer;
+		private var _effect:EffectObject3D;
+		private function addEffectHandler():void
+		{
+			if(_content==null)
+			{
+				_content = new Inter3DContainer();
+				_effect = _content.addInter3D(ClientConfig.getEffect("ui_jue_1"),15,15,0)
+				_content.touchable = false;
+				_bindBtn.parent.addChild(_content);
+			}
+			_effect.playEffect();
+		}
 		private function buttonClickHandler(e:Event):void
 		{
+			if(_effect!=null)
+			{
+				_effect.stopEffect();
+			}
 			if(MainRoleManager.actorInfo.totalStat.level<LostSkillManager.instance().openLevel)
 			{
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP,LanguageConfig.getText(LangUI_2.Lostskill_Opentips).replace("$",LostSkillManager.instance().openLevel));
@@ -191,12 +215,6 @@ package com.rpgGame.app.ui.main.shortcut
 				Starling.juggler.remove(this);
 		}
 		
-		/*override public function dispose():void
-		{
-			EventManager.removeEvent(LostSkillManager.LostSkill_ChangeSkillState,refeashState);
-			EventManager.removeEvent(LostSkillManager.LostSkill_UpLevelSkillId,refeashState);
-			super.dispose();
-		}*/
 		private var _passTime:Number;
 		private static const totalTime:Number = 0.5;
 		private static const maxDrage:Number = 0.41;

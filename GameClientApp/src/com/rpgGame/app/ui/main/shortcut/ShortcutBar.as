@@ -134,7 +134,10 @@ package com.rpgGame.app.ui.main.shortcut {
 			
 			EventManager.addEvent(LostSkillManager.LostSkill_ChangeSkillId,refeashState);
 			EventManager.addEvent(LostSkillManager.LostSkill_UpLevelSkillId,refeashState);
+			
 		}
+		
+		
 		
 		private function refeashState():void
 		{
