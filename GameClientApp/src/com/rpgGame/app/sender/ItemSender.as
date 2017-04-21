@@ -23,6 +23,8 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.store.message.ReqStoreMoveItemMessage;
 	import com.rpgGame.netData.store.message.ReqStoreToBagMessage;
 	
+	import app.message.EquipOperateType;
+	
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.data.long;
 	

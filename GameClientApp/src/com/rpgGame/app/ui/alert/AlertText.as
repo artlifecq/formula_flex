@@ -1,6 +1,5 @@
 package com.rpgGame.app.ui.alert
 {
-	import com.game.engine2D.scene.StarlingLayerManager;
 	import com.gameClient.utils.StringFilter;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
