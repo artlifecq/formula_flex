@@ -31,6 +31,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.GmConfig;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
+	import com.rpgGame.coreData.cfg.HeChengData;
 	import com.rpgGame.coreData.cfg.HintCfgData;
 	import com.rpgGame.coreData.cfg.HintConfig;
 	import com.rpgGame.coreData.cfg.LostSkillData;
@@ -220,6 +221,7 @@ package com.rpgGame.app.data
 			FightsoulData.setConfig(dic[ConfigClassRegister.Q_fightsoul]);
 			FightsoulModeData.setConfig(dic[ConfigClassRegister.Q_fightsoul_mode]);
 			GlobalSheetData.setup(dic[ConfigClassRegister.Q_global]);
+			HeChengData.setup(dic[ConfigClassRegister.Q_hecheng]);
 			LostSkillData.setup(dic[ConfigClassRegister.Q_lostskill_open]);
 			LostSkillUpData.setup(dic[ConfigClassRegister.Q_lostskill_up]);
 			// 服务器发送 消息ID对应客户端 

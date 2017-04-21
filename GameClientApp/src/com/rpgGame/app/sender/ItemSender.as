@@ -14,6 +14,7 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.equip.message.ReqEquipPolishMessage;
 	import com.rpgGame.netData.equip.message.ReqEquipStrengthMessage;
 	import com.rpgGame.netData.equip.message.ReqEquipWashMessage;
+	import com.rpgGame.netData.equip.message.ReqItemCompositionMessage;
 	import com.rpgGame.netData.equip.message.UnwearEquipMessage;
 	import com.rpgGame.netData.equip.message.WearEquipMessage;
 	import com.rpgGame.netData.store.message.ReqBagToStoreMessage;
@@ -313,5 +314,19 @@ package com.rpgGame.app.sender
 			SocketConnection.send(msg);
 		}
 		
+		/**
+		 * 合成物品请求
+		 * @opaqueType 
+		 * @recipeid
+		 * @num
+		 * */
+		public static function reqItemCompositionMessage(opaqueType:int,recipeid:int,num:int):void
+		{
+			var msg:ReqItemCompositionMessage=new ReqItemCompositionMessage();
+			msg.opaque=opaqueType;
+			msg.recipeId=recipeid;
+			msg.num=num;
+			SocketConnection.send(msg);
+		}
 	}
 }

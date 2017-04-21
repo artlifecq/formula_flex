@@ -63,6 +63,10 @@ package com.rpgGame.core.events
 		 */
 		public static const ITEM_WASH_MSG:int = UNIQUEID.NEXT;
 		
+		/**
+		 * 合成选择
+		 * */
+		public static const ITEM_HECHENG_SELECT:int=UNIQUEID.NEXT;
 		
 		/** 删除物品 **/
 		public static const ITEM_DELETE:int = UNIQUEID.NEXT;
