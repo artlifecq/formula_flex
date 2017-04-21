@@ -17,7 +17,7 @@ package com.game.engine3D.display
 			if (_unit != null)
 			{
 				var rend:RenderUnit3D=_unit as RenderUnit3D;
-				if(rend.totalDuration>0)
+				if(rend!=null&&rend.totalDuration>0)
 				{
 					
 					if(percent>=0)
@@ -46,7 +46,11 @@ package com.game.engine3D.display
 			if (_unit != null)
 			{
 				var rend:RenderUnit3D=_unit as RenderUnit3D;
-				rend.animateSpeed=speed;
+				if(rend!=null)
+				{
+					rend.animateSpeed=speed;
+				}
+				
 			}
 		}
 		
@@ -59,18 +63,26 @@ package com.game.engine3D.display
 		public function playEffect(repeat:int=0,speed:Number=1):void
 		{
 			var unit:RenderUnit3D=this.baseObj3D as RenderUnit3D;
-			unit.repeat = repeat;
-			unit.play(0);
-			unit.animateSpeed=speed;
-			this.start();
+			if(unit!=null)
+			{
+				unit.repeat = repeat;
+				unit.play(0);
+				unit.animateSpeed=speed;
+				this.start();
+			}
+			
 			
 		}
 		/**停止特效*/
 		public function stopEffect():void
 		{
 			var unit:RenderUnit3D=this.baseObj3D as RenderUnit3D;
-			unit.stop();
-			this.stop();
+			if(unit!=null)
+			{
+				unit.stop();
+				this.stop();	
+			}
+			
 		}
 		
 	}
