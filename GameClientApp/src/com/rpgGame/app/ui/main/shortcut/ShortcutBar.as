@@ -2,15 +2,25 @@ package com.rpgGame.app.ui.main.shortcut {
     import com.game.engine3D.display.Inter3DContainer;
     import com.game.engine3D.display.InterObject3D;
     import com.game.engine3D.scene.render.RenderUnit3D;
+    import com.rpgGame.app.manager.LostSkillManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.core.events.MainPlayerEvent;
     import com.rpgGame.core.events.society.SocietyEvent;
     import com.rpgGame.core.manager.tips.TargetTipsMaker;
     import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
+    import com.rpgGame.core.view.ui.tip.vo.BaseTipsInfo;
+    import com.rpgGame.core.view.ui.tip.vo.TextTipsPropChangeData;
     import com.rpgGame.coreData.cfg.ClientConfig;
+    import com.rpgGame.coreData.cfg.LanguageConfig;
+    import com.rpgGame.coreData.cfg.LostSkillData;
+    import com.rpgGame.coreData.cfg.LostSkillUpData;
+    import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
+    import com.rpgGame.coreData.clientConfig.Q_lostskill_up;
     import com.rpgGame.coreData.enum.JobEnum;
+    import com.rpgGame.coreData.lang.LangUI_2;
     import com.rpgGame.coreData.type.CharAttributeType;
+    import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
     
     import flash.geom.Point;
     
@@ -73,7 +83,7 @@ package com.rpgGame.app.ui.main.shortcut {
 			}
 			child.start();
 		}
-		
+		private var _tipsData:TextTipsPropChangeData;
 		private function init() : void
 		{
 			skillBar = new ShortcutSkillBar(this);
@@ -88,8 +98,12 @@ package com.rpgGame.app.ui.main.shortcut {
 			
 			initExp();
 			addSheHuiTab();
+			LostSkillEffect.instance().bind(_skin.btn_juexue);
 			
-			
+			var tipinfo:BaseTipsInfo = TargetTipsMaker.makeSimplePropChangeTextTips(LanguageConfig.getText(LangUI_2.Lostskill_Opentips).replace("$",LostSkillManager.instance().openLevel));
+			_tipsData = tipinfo.getData() as TextTipsPropChangeData;
+			TipTargetManager.show(_skin.btn_juexue,tipinfo);
+			refeashState();
 			if (!ClientConfig.isBanShu)
 			{				
 //				TipTargetManager.show(_skin.btnBackpack, TargetTipsMaker.makeSimpleTextTips("背包<br/>快捷键：B"));
@@ -121,9 +135,28 @@ package com.rpgGame.app.ui.main.shortcut {
 				EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,refeashJinzhen);
 			}
 			refeashJinzhen(CharAttributeType.RES_JING_ZHENG);
+			
+			EventManager.addEvent(LostSkillManager.LostSkill_ChangeSkillId,refeashState);
+			EventManager.addEvent(LostSkillManager.LostSkill_UpLevelSkillId,refeashState);
 		}
 		
-		
+		private function refeashState():void
+		{
+			var datas:Array = LostSkillData.datas;
+			var currentdata:Q_lostskill_open = LostSkillData.getModeInfoById(LostSkillManager.instance().curSkillId);
+			if(currentdata == null)
+			{
+				_tipsData.info = LanguageConfig.getText(LangUI_2.Lostskill_Opentips).replace("$",LostSkillManager.instance().openLevel);
+				_skin.mc_juexue.gotoAndStop(0);
+			}
+			else{
+				var state:SkillStateInfo = LostSkillManager.instance().getSkillStateInfoById(currentdata.q_id);
+				var currentupdate:Q_lostskill_up = LostSkillUpData.getDatabyIdAndLevel(state.skillId,state.level);
+				_tipsData.info = currentdata.q_desc.replace("$",LostSkillManager.instance().getSkillValue(currentdata,currentupdate));
+				var index:int = datas.indexOf(currentdata);
+				_skin.mc_juexue.gotoAndStop(index+1);
+			}
+		}
 		private function refeashJinzhen(type:int):void
 		{
 			if(MainRoleManager.actorInfo.job!= JobEnum.ROLE_4_TYPE)
