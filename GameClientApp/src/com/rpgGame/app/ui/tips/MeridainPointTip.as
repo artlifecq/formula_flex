@@ -4,15 +4,15 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.utils.FaceUtil;
-	import com.rpgGame.app.view.icon.BaseIcon;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.events.MeridianEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.AttrUtil;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
-	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.meridian.EnumMStoneType;
 	import com.rpgGame.coreData.cfg.meridian.MeridianCfg;
@@ -20,19 +20,17 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.clientConfig.Q_meridian;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.meridian.bean.AcuPointInfo;
 	
+	import flash.events.Event;
 	import flash.geom.Point;
 	
 	import feathers.controls.Label;
-	import feathers.controls.SkinnableContainer;
-	import feathers.controls.StateSkin;
-	import feathers.controls.text.Fontter;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.jingmai.Jingmai_Tips;
-	
-	import starling.display.DisplayObject;
 	
 	public class MeridainPointTip extends SkinUI implements ITip
 	{
@@ -50,6 +48,7 @@ package com.rpgGame.app.ui.tips
 		private var labList:Array;
 		private var _stoneIcon:IconCDFace;
 		private var _initStr:String;
+		private var _chacheData:*;
 		public function MeridainPointTip()
 		{
 			_skin=new Jingmai_Tips();
@@ -63,6 +62,7 @@ package com.rpgGame.app.ui.tips
 		
 		public function setTipData(data:*):void
 		{
+			addEvent();
 			var mp:*=data;
 			if (mp) 
 			{
@@ -102,39 +102,40 @@ package com.rpgGame.app.ui.tips
 			//未激活
 			this._skin.lb_jihuo.visible=false;
 			var startY:int=_skin.lb_Item0.y;
-			if (serverData.level==-1) 
+			if(serverData.level==0)
 			{
-				this._skin.lb_jihuo.text="未激活";
 				this._skin.lb_jihuo.visible=true;
-				
-				this._skin.lb_title1.text="【激活条件】";
-				var qActive:Q_meridian=MeridianCfg.getMeridianCfg(serverData.MeridId+"_"+serverData.acuPointId+"_0");
-				
-				if (qActive) 
+				var canActive:Boolean=Mgr.meridianMgr.getCanActive(serverData);
+				if (!canActive) 
 				{
-					startY=createCondition(qActive,startY);
+					this._skin.lb_jihuo.text="锁定";
+					this._skin.lb_title1.text="【解锁条件】";
 				}
-				
-			}//激活了
-			else if(serverData.level==0)
-			{
-				//冲穴
-				this._skin.lb_jihuo.text="未冲穴";
-				this._skin.lb_jihuo.visible=true;
-				
-				this._skin.lb_title1.text="【冲穴条件】";
-				startY=createCondition(qAcu,startY);
+				else
+				{
+					//冲穴
+					this._skin.lb_jihuo.text="未冲穴";
+					this._skin.lb_title1.text="【冲穴条件】";
+				}
 			}
+			else
+			{
+				this._skin.lb_title1.text="【升级条件】";
+			}
+			startY=createCondition(qAcu,startY);
 			this._skin.imgLine.y=startY;
 			startY+=_skin.imgLine.height+2;
 			var canLevelUp:Boolean=Mgr.meridianMgr.getCanLevelUp(serverData);
-			_skin.lb_tile2.y=startY;
-			startY+=_skin.lb_tile2.height+2;
-			//属性
-			_skin.lb_tile2.text=canLevelUp?"【当前属性】":"【冲穴属性】";
+			_skin.lb_tile2.visible=false;
+			
 			var startPos:Point=new Point(_skin.lb_shengming.x,startY);
 			if (qAcu.q_stone_attribute!=0) 
 			{
+				_skin.lb_tile2.visible=false;
+				_skin.lb_tile2.y=startY;
+				startY+=_skin.lb_tile2.height+2;
+				//属性
+				_skin.lb_tile2.text=canLevelUp?"【当前属性】":"【冲穴属性】";
 				var qAtt:Q_att_values=AttValueConfig.getAttInfoById(qAcu.q_stone_attribute);
 				if (qAtt) 
 				{
@@ -157,7 +158,7 @@ package com.rpgGame.app.ui.tips
 				if (nextMeri) 
 				{
 					var qAttNext:Q_att_values=AttValueConfig.getAttInfoById(nextMeri.q_stone_attribute);
-					var nexth:HashMap = AttValueConfig.getTypeValueMap(qAtt);
+					var nexth:HashMap = AttValueConfig.getTypeValueMap(qAttNext);
 					startPos.y=startY;
 					var labsn:Array=AttrUtil.showAttr(nexth,this,_skin.lb_shengming,1,startPos,_skin.lb_shengming.width,_skin.lb_shengming.height+2);
 					labList=labList.concat(labsn);
@@ -177,7 +178,7 @@ package com.rpgGame.app.ui.tips
 				this.addChild(lb);
 				lb.y=startY;
 				startY+=lb.height+2;
-				isOk=qMer.q_need_level<MainRoleManager.actorInfo.totalStat.level;
+				isOk=qMer.q_need_level<=MainRoleManager.actorInfo.totalStat.level;
 				lb.htmlText=HtmlTextUtil.getTextColor(isOk?GameColorUtil.COLOR_GREEN:GameColorUtil.COLOR_RED,"角色等级:"+MainRoleManager.actorInfo.totalStat.level+"级");
 				lb.width=lb.textWidth;
 			}
@@ -193,8 +194,23 @@ package com.rpgGame.app.ui.tips
 					this.addChild(lb);
 					lb.y=startY;
 					startY+=lb.height+2;
+					//这里要判断石头类型
+					isOk=false;
+					var str:String="";
+					if (needInfo!=null) 
+					{
+						//冲穴
+						if (need.q_showtype==0) 
+						{
+							str=need.q_name+":"+qMer.q_prelvl
+						}
+						else
+						{
+							str=need.q_name+":镶嵌"+qMer.q_prelvl+"级"+EnumMStoneType.getStoneTypeName(need.q_stone_type);
+						}
+					}
 					isOk=needInfo!=null&&needInfo.level>=need.q_prelvl;
-					lb.htmlText=HtmlTextUtil.getTextColor(isOk?GameColorUtil.COLOR_GREEN:GameColorUtil.COLOR_RED,need.q_name+":"+qMer.q_prelvl);
+					lb.htmlText=HtmlTextUtil.getTextColor(isOk?GameColorUtil.COLOR_GREEN:GameColorUtil.COLOR_RED,str);
 					lb.width=lb.textWidth;
 				}
 			}
@@ -220,23 +236,22 @@ package com.rpgGame.app.ui.tips
 			this._skin.lb_jihuo.visible=false;
 			var startY:int=_skin.lb_Item0.y+2;
 			this._skin.lb_title1.text="【砭石效果】";
-			if (serverData.level==-1) 
+			var canActive:Boolean;
+			if (serverData.level==0) 
 			{
-				this._skin.lb_jihuo.text="未激活";
 				this._skin.lb_jihuo.visible=true;
-				
-				this._skin.lb_title1.text="【激活条件】";
-				var qActive:Q_meridian=MeridianCfg.getMeridianCfg(serverData.MeridId+"_"+serverData.acuPointId+"_0");
-				
-				if (qActive) 
+				canActive=Mgr.meridianMgr.getCanActive(serverData);
+				if (!canActive) 
 				{
-					startY=createCondition(qActive,startY);
+					this._skin.lb_jihuo.text="锁定";
+					this._skin.lb_title1.text="【解锁条件】";
 				}
+				startY=createCondition(qAcu,startY);
 				
 			}//激活了
 			//没镶嵌
 			var lb:Label;
-			if(serverData.stone.length==0)
+			if(serverData.stone.length==0&&canActive)
 			{
 				//冲穴
 				this._skin.lb_jihuo.text="未镶嵌";
@@ -247,7 +262,7 @@ package com.rpgGame.app.ui.tips
 				lb.y=startY;
 				startY+=lb.height+2;
 			}
-			else
+			else if(serverData.stone.length>0)
 			{
 				//图标。
 				var citemInfo:ClientItemInfo=new ClientItemInfo(serverData.stone[0].itemModelId);
@@ -308,8 +323,36 @@ package com.rpgGame.app.ui.tips
 			{
 				_stoneIcon.clear();
 			}
+			removeEvent();
 		}
-
+		private function addEvent():void
+		{
+			Mgr.meridianMgr.addEventListener(MeridianEvent.MERIDIAN_CHANGE,onDataChange);
+			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,playerAttrChange);
+			EventManager.addEvent(MainPlayerEvent.STAT_MAX_CHANGE,playerAttrChange);
+		}
+		private function playerAttrChange(type:int=0):void
+		{
+			if (type==CharAttributeType.LV||type==CharAttributeType.ZHENQI_MAX) 
+			{
+				updateTips();
+			}
+		}
+		protected function onDataChange(event:Event):void
+		{
+			// TODO Auto-generated method stub
+			updateTips();
+		}
+		private function updateTips():void
+		{
+			setTipData(_chacheData);
+		}
+		private function removeEvent():void
+		{
+			Mgr.meridianMgr.removeEventListener(MeridianEvent.MERIDIAN_CHANGE,onDataChange);
+			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,playerAttrChange);
+			EventManager.removeEvent(MainPlayerEvent.STAT_MAX_CHANGE,playerAttrChange);
+		}
 		public function get stoneIcon():IconCDFace
 		{
 			if (_stoneIcon==null) 

@@ -204,8 +204,8 @@ package com.rpgGame.coreData.type
 		public static const UI_JINENGKUANG_SHANGUANG:String="ui_jinengkuang_shanguang";
 		public static const UI_TANU_MJ:String="ui_tanu_mj";
 	
-		
-		
+		public static const UI_MERIDIAN_LOOP:String="UI_jingmaiyuan_2";
+		public static const UI_MERIDIAN_LEVELUP:String="UI_jingmaiyuan_baodian";
 		public function EffectUrl()
 		{
 		}

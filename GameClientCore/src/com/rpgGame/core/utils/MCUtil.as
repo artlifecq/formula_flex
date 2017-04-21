@@ -1,6 +1,8 @@
 package  com.rpgGame.core.utils
 {
 
+	import com.gameClient.utils.HashMap;
+	
 	import flash.geom.Point;
 	import flash.utils.clearInterval;
 	import flash.utils.setInterval;
@@ -350,6 +352,29 @@ package  com.rpgGame.core.utils
 			}
 			
 			return pos;
+		}
+		/**
+		 *合并hashmap,注意值只能相加 
+		 * @param dstHash
+		 * @param srcHash
+		 * 
+		 */		
+		public static function mergeValueHashMap(dstHash:HashMap,srcHash:HashMap):void
+		{
+			if (!dstHash||!srcHash) 
+			{
+				return;
+			}
+			var keys:Array=dstHash.keys();
+			var vald:int=0;
+			var vals:int=0;
+			for each (var key:* in keys) 
+			{
+				vald=dstHash.getValue(key);
+				vals=srcHash.getValue(key);
+				dstHash.put(key,vald+vals);
+			}
+			
 		}
 	}
 }

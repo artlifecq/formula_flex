@@ -29,6 +29,10 @@ package com.rpgGame.coreData.info.meridian
 				tmp.push(p);
 			}
 		}
+		public function getMeridianMapData(merdianId:int):Array
+		{
+			return meridianHash.getValue(merdianId);
+		}
 		public function updatePointData(p:AcuPointInfo):void
 		{
 			var tmp:Array;

@@ -57,7 +57,10 @@ package com.rpgGame.appModule.jingmai.sub
 			//this.touchGroup=true;
 			
 		}
-		
+		public function showHideLv(bool:Boolean):void
+		{
+			_stateSkin["grp_label"].visible=bool;
+		}
 		public function updataServerData(data:Array):void
 		{
 			if (data) 
@@ -113,6 +116,16 @@ package com.rpgGame.appModule.jingmai.sub
 				return 1;
 			}
 			return 0;
+		}
+		
+		public function checkForUpdate():void
+		{
+			// TODO Auto Generated method stub
+			var points:Array=pointHash.values();
+			for each (var p:MerdianPoint in points)
+			{
+				p.setData(p.data);
+			}
 		}
 	}
 }
