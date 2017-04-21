@@ -1,13 +1,16 @@
 package com.rpgGame.appModule.common.itemRender
 {
 	import com.netease.protobuf.stringToByteArray;
+	import com.rpgGame.app.manager.HeChengManager;
 	import com.rpgGame.coreData.cfg.HeChengData;
+	import com.rpgGame.coreData.clientConfig.Q_hecheng;
 	import com.rpgGame.coreData.enum.HeChengEnum;
 	
 	import feathers.controls.Button;
 	import feathers.controls.Radio;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
+	import feathers.controls.ToggleButton;
 	import feathers.controls.renderers.BaseDefaultListItemRenderer;
 	import feathers.controls.renderers.DefaultGroupedTreeItemRender;
 	
@@ -19,8 +22,10 @@ package com.rpgGame.appModule.common.itemRender
 	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
+	import starling.events.Event;
+	import starling.events.TouchEvent;
 	
-	public class HeChengItemRender extends DefaultGroupedTreeItemRender
+	public class HeChengItemRender extends BaseDefaultListItemRenderer
 	{
 		public function HeChengItemRender()
 		{
@@ -28,7 +33,7 @@ package com.rpgGame.appModule.common.itemRender
 		}
 		
 		private var btn:Button;
-		private var radioBtn:Radio;
+		private var radioBtn:ToggleButton;
 		
 		private var sonList:Sprite;
 		
@@ -47,40 +52,72 @@ package com.rpgGame.appModule.common.itemRender
 			btn=new Button();				
 			switch(type)
 			{
-				case HeChengEnum.MAIN_TYPE_TUZHI:
-					btn.name = "btntuzhi_"+type;
+				case HeChengEnum.MAIN_TYPE_JIANDING:
+					btn.name = "btnjianding_"+type;
+					btn.styleClass = org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonJianding;
+					break;
+				case HeChengEnum.MAIN_TYPE_BIANSHI:
+					btn.name = "btnbianshi_"+type;
 					btn.styleClass = org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonJianding;
 					break;
 			}
+			btn.addEventListener(Event.TRIGGERED,mainBtnHandler);
 			this.addChild(btn);
 		}
 		
-		override protected function onTouchTarget(target:DisplayObject):void
+		private function initSonList(type:int,list:Vector.<int>):void
 		{
-			var str:Array=target.name.split('_');
-			if(str==null||str.length<=0) return;	
-			if(str.length==3&&str[0]=="HeChengSonBtn")
+			if(list==null) return;
+			if(sonList!=null&&sonList.numChildren>0) sonList.removeChildAt(0);
+			else
+				sonList=new Sprite();
+			for(var i:int=0;i<list.length;i++)
 			{
-				var index:int=parseInt(str[1]);
-				var type:int=parseInt(str[2]);
-				var radbtn:Radio=target as Radio;
-				if(radbtn.isSelected)
+				radioBtn=new ToggleButton();
+				radioBtn.styleClass=org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonErji_bg;
+				radioBtn.name="HeChengSonBtn_"+type+"_"+list[i];
+				radioBtn.label = "";//初级鉴定图纸	
+				radioBtn.y=btn.height+i*radioBtn.height;
+				radioBtn.addEventListener(Event.TRIGGERED,radioBtnHandler);
+				sonList.addChild(radioBtn);
+			}
+		}
+		
+		//设置次子项按钮
+		private function setSonBySonList(type:int,sontype:int,list:Vector.<int>):void
+		{
+			if(sonBySonList!=null&&sonBySonList.numChildren>0) sonBySonList.removeChildAt(0);
+			else sonBySonList=new Sprite();
+			var temp:Button;
+			for(var i:int=0;i<list.length;i++)
+			{
+				temp=new Button();
+				if(i%2==0)
 				{
-					setSonBySonList(HeChengData.getSonTypeListByType(type));
-					(sonList.getChildByName(target.name) as Sprite).addChild(sonBySonList);
+					temp.styleClass=org.mokylin.skin.app.zhuangbei.hecheng.Cont_Item_an;
 				}
 				else
 				{
-					(sonList.getChildByName(target.name) as Sprite).removeChild(sonBySonList);
+					temp.styleClass=org.mokylin.skin.app.zhuangbei.hecheng.Cont_Item_qian;
 				}
+				temp.name="HeChengSonLab_"+type+"_"+sontype+"_"+list[i];
+				temp.y=50+i*temp.height;
+				temp.addEventListener(Event.TRIGGERED,sonSpriteHandler);
+				sonBySonList.addChild(temp);
 			}
-			if(str.length==2&&str[0]=="btntuzhi")
+		}
+		
+		private function mainBtnHandler(e:Event):void
+		{
+			var str:Array=(e.currentTarget as Button).name.split('_');
+			if(str==null||str.length<=0) return;	
+			if(str.length==2)
 			{
-				type=parseInt(str[1]);
+				var type:int=parseInt(str[1]);
 				isUpDownKey=!isUpDownKey;
 				if(isUpDownKey)
 				{
-					initSonList(HeChengData.getSonTypeListByType(type));
+					initSonList(type,HeChengData.getSonTypeListByType(type));
 					this.addChild(sonList);
 				}
 				else
@@ -90,46 +127,40 @@ package com.rpgGame.appModule.common.itemRender
 			}
 		}
 		
-		private function initSonList(list:Vector.<int>):void
+		private function radioBtnHandler(e:Event):void
 		{
-			if(list==null) return;
-			
-			for(var i:int=0;i<list.length;i++)
+			var str:Array=(e.currentTarget as Button).name.split('_');
+			if(str==null||str.length<=0) return;	
+			if(str.length==3&&str[0]=="HeChengSonBtn")
 			{
-				sonList=new Sprite();
-				radioBtn=new Radio();
-				radioBtn.styleClass=org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonErji_bg;
-				radioBtn.name="HeChengSonBtn_"+i+"_"+list[i];
-				radioBtn.label = "初级鉴定图纸";				
-				sonList.addChild(radioBtn);
-			}
-		}
-		
-		//设置次子项按钮
-		private function setSonBySonList(list:Vector.<int>):void
-		{
-			if(sonBySonList.numChildren>0) sonBySonList.removeChildAt(0);
-			var temp:SkinnableContainer;
-			for(var i:int=0;i<list.length;i++)
-			{
-				temp=new SkinnableContainer();
-				if(i%2==0)
+				var type:int=parseInt(str[1]);
+				var sontype:int=parseInt(str[2]);
+				var radbtn:ToggleButton=e.currentTarget as ToggleButton;
+				radbtn.isToggle=!radbtn.isToggle;	
+				if(!radbtn.isToggle)
 				{
-					temp.height = 32;
-					var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.hecheng.Cont_Item_an;
-					temp.skin = skin
-					temp.width = 245;
+					setSonBySonList(type,sontype,HeChengData.getSonTypeListByType(type));
+					(sonList.getChildByName(radbtn.name) as Sprite).addChild(sonBySonList);
 				}
 				else
 				{
-					temp.height = 32;
-					skin = new org.mokylin.skin.app.zhuangbei.hecheng.Cont_Item_qian;
-					temp.skin = skin
-					temp.width = 245;
+					if((sonList.getChildByName(radbtn.name) as Sprite).getChildIndex(sonBySonList)!=-1)
+						(sonList.getChildByName(radbtn.name) as Sprite).removeChild(sonBySonList);
 				}
-				temp.name="HeChengSonLab_"+i+"_"+list[i];
-				temp.y=i*temp.height;
-				sonBySonList.addChild(temp);
+			}
+		}
+		
+		private function sonSpriteHandler(e:Event):void
+		{
+			var str:Array=(e.currentTarget as Button).name.split('_');
+			if(str==null||str.length<=0) return;	
+			if(str.length==4&&str[0]=="HeChengSonLab")
+			{
+				var type:int=parseInt(str[1]);
+				var sontype:int=parseInt(str[2]);
+				var subsontype:int=parseInt(str[3]);
+				var q_hecheng:Q_hecheng=HeChengData.getSonbySonTypeListByType(type,sontype,subsontype);
+				if(q_hecheng!=null) HeChengManager.setHeChengItem(q_hecheng);
 			}
 		}
 	}

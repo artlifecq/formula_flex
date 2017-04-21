@@ -41,7 +41,7 @@ package com.rpgGame.appModule.equip
 			this.addChild(_currentUI);
 			_currentUI.show();
 		}
-
+		
 		private function initUI():void
 		{
 			_tabSkin=_skin.daohang.skin as Zhuangbei_daohang;
@@ -77,6 +77,7 @@ package com.rpgGame.appModule.equip
 			super.onTouchTarget(target);
 			if(target is Radio){
 				var index:int=tabBtn.indexOf(target as Radio);
+				if(index==-1) return;
 				showTab(index);
 			}
 		}

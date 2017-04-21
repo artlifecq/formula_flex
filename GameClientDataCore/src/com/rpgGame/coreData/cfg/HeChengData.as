@@ -70,6 +70,19 @@ package com.rpgGame.coreData.cfg
 			return list;
 		}
 		
+		/**依据类型获取配置表*/
+		public static function getSonbySonTypeListByType(type:int,sontype:int,subsontype:int):Q_hecheng
+		{
+			for each(var info:Q_hecheng in _dataDic)
+			{
+				if(info.q_type==type&&info.q_subson_type==sontype&&info.q_subson_type==subsontype)
+				{
+					return info;
+				}
+			}
+			return null;
+		}
+		
 		private static function isHave(list:Vector.<int>,type:int):Boolean
 		{
 			if(list==null||list.length<=0) return false;

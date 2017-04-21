@@ -75,13 +75,17 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			this.height = 587;
 			this.width = 947;
 			this.elementsContent = [__HeCheng_Skin_UIAsset2_i(),__HeCheng_Skin_UIAsset3_i(),btn_shuoming_i(),__HeCheng_Skin_Group1_i(),grp_exit_i(),btns_i(),btnMax_i(),btn_hecheng_i(),lb_msg_i(),list_Item_i()];
-			
+						
 			states = {
+				normal:[
+						{target:"__HeCheng_Skin_SkinnableContainer3",
+							name:"visible",
+							value:false
+						}
+					]
 			};
-			skinNames={};
+			skinNames={"":"org.mokylin.skin.app.zhuangbei.hecheng.Cont_Item_qian"};
 		}
-
-
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================

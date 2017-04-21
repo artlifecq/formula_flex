@@ -10,13 +10,17 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
 	import com.rpgGame.appModule.common.itemRender.HeChengItem;
 	import com.rpgGame.appModule.common.itemRender.HeChengItemRender;
+	import com.rpgGame.appModule.common.itemRender.SkinItem;
+	import com.rpgGame.appModule.common.itemRender.SkinItemRender;
 	import com.rpgGame.appModule.friend.view.FriendHeadRender;
 	import com.rpgGame.appModule.friend.view.FriendListItemRenderer;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.HeChengData;
+	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.clientConfig.Q_hecheng;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
@@ -35,8 +39,10 @@ package com.rpgGame.appModule.equip
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhuangbei.hecheng.HeCheng_Skin;
 	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonHecheng;
+	import org.mokylin.skin.app.zhuangbei.qianghua.ListItem_Skin;
 	import org.mokylin.skin.component.list.ListSkin1;
 	
+	import starling.display.DisplayObject;
 	import starling.events.Event;
 	
 	/**
@@ -62,8 +68,6 @@ package com.rpgGame.appModule.equip
 		private var _useGold:int=0;
 		//合成需要消耗的银两单价
 		private var _useMoney:int=0;
-		//合成配置表
-		private var _q_hehceng:Q_hecheng;
 		private var tree:GroupedTree;	
 		private var _nowSelect:Q_hecheng;
 		
@@ -78,7 +82,8 @@ package com.rpgGame.appModule.equip
 		private var btn:Button;
 		private function initListBtn():void
 		{
-			_skin.list_Item.itemRendererType = HeChengItemRender;
+			_skin.list_Item.touchAcross=true;
+			_skin.list_Item.itemRendererFactory = createHeChengItemRender;
 			_skin.list_Item.clipContent = true;
 			_skin.list_Item.scrollBarDisplayMode = "fixed";
 			//			_skin.list_Item.verticalScrollBarPosition = "right"
@@ -87,6 +92,12 @@ package com.rpgGame.appModule.equip
 			_skin.list_Item.padding=1;
 			_skin.list_Item.dataProvider=new ListCollection(HeChengData.getTypeLiet());
 			_skin.list_Item.selectedIndex=0;
+		}
+		
+		private function createHeChengItemRender():HeChengItemRender
+		{
+			var render:HeChengItemRender=new HeChengItemRender();
+			return render;
 		}
 		
 		private function initView():void
@@ -105,7 +116,7 @@ package com.rpgGame.appModule.equip
 			for(var i:int=0;i<CAILIAO_NUM;i++)
 			{
 				var ico:BgIcon=new BgIcon(IcoSizeEnum.ICON_48);			
-//				ico.setIconResName(ClientConfig.getItemIcon("1001",IcoSizeEnum.ICON_48));
+				//				ico.setIconResName(ClientConfig.getItemIcon("1001",IcoSizeEnum.ICON_48));
 				var uias:UIAsset=_skin.grp_cailiao.getChildByName("cailiao"+(i+1)) as UIAsset;
 				uias.addChild(ico);
 				ico.x=ico.y=0;
@@ -129,13 +140,12 @@ package com.rpgGame.appModule.equip
 		}
 		
 		//显示合成的对象
-		private function setShowData(id:int):void
+		private function setShowData():void
 		{
-			_q_hehceng=HeChengData.getQ_HeChengByID(id);
-			if(!_q_hehceng) return;
-			_useGold=_q_hehceng.q_gold;
-			_useMoney=_q_hehceng.q_money;
-			icon.setIconResName(ClientConfig.getItemIcon(id.toString(),IcoSizeEnum.ICON_64));		
+			if(!_nowSelect) return;
+			_useGold=_nowSelect.q_gold;
+			_useMoney=_nowSelect.q_money;
+			icon.setIconResName(ClientConfig.getItemIcon(_nowSelect.q_item_id.toString(),IcoSizeEnum.ICON_64));		
 			setCaiLiaoData();
 		}
 		
@@ -143,8 +153,8 @@ package com.rpgGame.appModule.equip
 		private function setCaiLiaoData():void
 		{
 			clearPanel();
-			if(!_q_hehceng) return;
-			var cailiao:Array=JSONUtil.decode(_q_hehceng.q_cost_items);
+			if(!_nowSelect) return;
+			var cailiao:Array=JSONUtil.decode(_nowSelect.q_cost_items);
 			if(cailiao==null) return;
 			var cailiaoId:int=parseInt(cailiao[0]);
 			var cailiaoNum:int=parseInt(cailiao[1]);
@@ -189,6 +199,7 @@ package com.rpgGame.appModule.equip
 			_skin.btn_hecheng.addEventListener(Event.TRIGGERED,btnHeChengHandler);
 			
 			EventManager.addEvent(ItemEvent.ITEM_STRENGTH_MSG,updateHechengHandler);
+			EventManager.addEvent(ItemEvent.ITEM_HECHENG_SELECT,updateHechengHandler);
 		}
 		
 		private function clearEvent():void
@@ -275,8 +286,8 @@ package com.rpgGame.appModule.equip
 		/**合成请求*/
 		private function btnHeChengHandler(e:Event):void
 		{
-			if(!_q_hehceng) return;
-			var cailiao:Array=JSONUtil.decode(_q_hehceng.q_cost_items);
+			if(!_nowSelect) return;
+			var cailiao:Array=JSONUtil.decode(_nowSelect.q_cost_items);
 			if(cailiao==null) return;
 			var cailiaoId:int=parseInt(cailiao[0]);
 			var cailiaoNum:int=parseInt(cailiao[1]);
@@ -306,6 +317,12 @@ package com.rpgGame.appModule.equip
 			{
 				setCaiLiaoData();
 			}
+		}
+		
+		private function setSelectItem(mod:Q_hecheng):void
+		{
+			if(_nowSelect.q_subson_type==mod.q_subson_type) return;
+			setShowData();
 		}
 	}
 }
