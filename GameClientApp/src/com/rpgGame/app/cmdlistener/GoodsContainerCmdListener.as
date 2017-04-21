@@ -143,7 +143,7 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onResItemRemoveMessage(msg:ResItemRemoveMessage):void
 		{
-			GoodsContainerMamager.getMrg(ItemContainerID.BackPack).removeItem(msg.gridId);
+			GoodsContainerMamager.getMrg(ItemContainerID.BackPack).removeItems(msg.gridId);
 		}
 		
 		private function onResItemAddMessage(msg:ResItemAddMessage):void

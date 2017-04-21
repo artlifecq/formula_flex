@@ -10,6 +10,7 @@ package com.rpgGame.app.ui.main.Task
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.app.enum.PanelPosType;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
@@ -21,6 +22,7 @@ package com.rpgGame.app.ui.main.Task
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.TaskType;
 	
+	import flash.geom.Point;
 	import flash.utils.setTimeout;
 	
 	import gs.TweenMax;
@@ -70,10 +72,34 @@ package com.rpgGame.app.ui.main.Task
 			
 			//EventManager.addEvent(TaskEvent.TASK_FINISH_NPC,finishNpc);
 			EventManager.addEvent(TaskEvent.TASK_CLICK_NPC,taskNpc);
-			//EventManager.addEvent(UserMoveEvent.MOVE_END, moveEnd);
+			EventManager.addEvent(UserMoveEvent.MOVE_THROUGH, moveReschange);
 			EventManager.addEvent(MainPlayerEvent.PLAYER_DIE,playerDie);
 		}
 		
+		private var panlIsopen:Boolean=false;
+		/**玩家移动*/
+		private function moveReschange() : void
+		{
+			if(panlIsopen)
+			{
+				
+				var npcData : Q_scene_monster_area = MonsterDataManager.getMonsterById(TaskMissionManager.currentMainTaskData.q_finish_npc);
+				if(npcData!=null)
+				{
+					var dist:int = Point.distance(new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(npcData.q_center_x,npcData.q_center_y));
+					//var dis : Number = MathUtil.getDistanceNoSqrt(MainRoleManager.actor.x, MainRoleManager.actor.z, npcData.q_center_x, npcData.q_center_y);
+					if(dist>200)
+					{
+						AppManager.hideApp(AppConstant.TASK_LEAD_PANEL);
+						panlIsopen=false;
+					}
+					
+				}
+				
+			}
+			
+			
+		}
 		/**移动完成*/
 		private function moveEnd() : void
 		{
@@ -117,6 +143,7 @@ package com.rpgGame.app.ui.main.Task
 			if(npcData!=null&&npcData.q_mapid==SceneSwitchManager.currentMapId&&npcData.q_id==npcId)//点击是任务npc就弹出面板
 			{
 				AppManager.showApp(AppConstant.TASK_LEAD_PANEL);
+				panlIsopen=true;
 			}
 			
 		}
@@ -138,19 +165,22 @@ package com.rpgGame.app.ui.main.Task
 				loopCont.show(false);
 				leadCont.leadTaskView();
 			}
-			
 			showNpcMark(true);
+			
 			
 		}
 		/**完成任务*/
 		private function finishMation():void
 		{
+	
+			effetCont.playFinishEffect();
 			leadCont.hideInfo();
 			showNpcMark(false);
 		}
 		/**新任务*/
 		private function newMation():void
 		{
+
 			effetCont.playNewtaskEffect();
 			inforMation();
 			
@@ -167,6 +197,7 @@ package com.rpgGame.app.ui.main.Task
 		/**任务进度改变*/
 		private function changeMation():void
 		{
+			
 			if(TaskMissionManager.haveDailyTask||TaskMissionManager.haveTreasuerTask)
 			{
 				//loopCont.loopTaskView();
@@ -175,15 +206,17 @@ package com.rpgGame.app.ui.main.Task
 			{
 				leadCont.changeTaskView();
 			}
-			if(TaskMissionManager.currentMainTaskIsfinish)
+			if(TaskMissionManager.currentTaskIsFinish)
 			{
-				effetCont.playFinishEffect();
+				
+				showNpcMark(true);
 			}
 		}
 		private function playerDie():void
 		{
 			AppManager.hideApp(AppConstant.TASK_LEAD_PANEL);
 			AppManager.hideApp(AppConstant.TASK_LOOP_PANEL);
+			panlIsopen=false;
 		}
 		private function setViewData():void
 		{
@@ -213,23 +246,23 @@ package com.rpgGame.app.ui.main.Task
 						mainlineWalk(0);
 						
 						break;
-					case Renwu_Item(_skin.sec_killbut1.skin).btn_send:
+					case Renwu_Item(_skin.pri_killbut2.skin).btn_send:
 						//L.l("sec_killbut1");
 						break;
-					case Renwu_Item(_skin.sec_killbut1.skin).labelDisplay:
-						
+					case Renwu_Item(_skin.pri_killbut2.skin).labelDisplay:
+						mainlineWalk(1);
 						break;
-					case Renwu_Item(_skin.sec_killbut2.skin).btn_send:
+					case Renwu_Item(_skin.pri_killbut3.skin).btn_send:
 						//L.l("sec_killbut2");
 						break;
-					case Renwu_Item(_skin.sec_killbut2.skin).labelDisplay:
-						
+					case Renwu_Item(_skin.pri_killbut3.skin).labelDisplay:
+						mainlineWalk(2);
 						break;
 					case _skin.sec_navi1:
-						AppManager.showApp(AppConstant.TASK_LEAD_PANEL);
+						//AppManager.showApp(AppConstant.TASK_LEAD_PANEL);
 						break;
 					case _skin.sec_navi3:
-						AppManager.showApp(AppConstant.TASK_LOOP_PANEL);
+						//AppManager.showApp(AppConstant.TASK_LOOP_PANEL);
 						break;
 				}
 		}
@@ -248,9 +281,9 @@ package com.rpgGame.app.ui.main.Task
 			}
 			if(taskData!=null)
 			{
-				if(TaskMissionManager.currentMainTaskIsfinish)//假如任务完成，直接去交任务 没有完成寻路到任务点
+				if(TaskMissionManager.currentTaskIsFinish)//假如任务完成，直接去交任务 没有完成寻路到任务点
 				{
-					TaskUtil.finishNpcTask(taskData.q_finish_npc,finishWalk);
+					TaskUtil.finishNpcTask(taskData.q_finish_npc,finishWalk,noWalk);
 				}
 				else
 				{
@@ -286,6 +319,15 @@ package com.rpgGame.app.ui.main.Task
 			}
 		}
 		
+		/**追踪面板已在npc前面不用寻路*/
+		private function noWalk(role:SceneRole):void
+		{
+			
+			if(TaskMissionManager.currentMainTaskData!=null)
+			{
+				finishToNpc(TaskMissionManager.currentMainTaskData.q_finish_npc);
+			}
+		}
 		
 		/**追踪栏开启关闭操作*/
 		private function setState(isOpen : Boolean) : void {

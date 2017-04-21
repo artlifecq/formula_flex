@@ -82,6 +82,7 @@ package com.rpgGame.app.ui.main.shortcut
 			refeashState();
 			_bindBtn.addEventListener(Event.TRIGGERED,buttonClickHandler);
 			EventManager.addEvent(LostSkillManager.LostSkill_ChangeSkillState,addEffectHandler);
+			addEffectHandler();
 		}
 		private var _content:Inter3DContainer;
 		private var _effect:EffectObject3D;

@@ -25,6 +25,10 @@ package com.rpgGame.core.events
 		 *物品删除
 		 */
 		public static const ITEM_REMOVE:int=UNIQUEID.NEXT;
+		/**
+		 *物品删除列表
+		 */
+		public static const ITEM_REMOVE_LIST:int=UNIQUEID.NEXT;
 		
 		/**
 		 *物品改变 

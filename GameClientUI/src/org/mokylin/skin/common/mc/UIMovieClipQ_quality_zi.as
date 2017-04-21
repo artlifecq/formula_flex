@@ -17,29 +17,23 @@ package org.mokylin.skin.common.mc
 		{
 			super();
 			
-			this.currentState = "zi_00010";
+			this.currentState = "00006";
 			this.elementsContent = [];
 			
 			states = {
 			};
-			skinNames={"zi_00001":"ui/common/mc/Q_quality_zi/zi_00001.png",
-			"zi_00002":"ui/common/mc/Q_quality_zi/zi_00002.png",
-			"zi_00003":"ui/common/mc/Q_quality_zi/zi_00003.png",
-			"zi_00004":"ui/common/mc/Q_quality_zi/zi_00004.png",
-			"zi_00005":"ui/common/mc/Q_quality_zi/zi_00005.png",
-			"zi_00006":"ui/common/mc/Q_quality_zi/zi_00006.png",
-			"zi_00007":"ui/common/mc/Q_quality_zi/zi_00007.png",
-			"zi_00008":"ui/common/mc/Q_quality_zi/zi_00008.png",
-			"zi_00009":"ui/common/mc/Q_quality_zi/zi_00009.png",
-			"zi_00010":"ui/common/mc/Q_quality_zi/zi_00010.png",
-			"zi_00011":"ui/common/mc/Q_quality_zi/zi_00011.png",
-			"zi_00012":"ui/common/mc/Q_quality_zi/zi_00012.png",
-			"zi_00013":"ui/common/mc/Q_quality_zi/zi_00013.png",
-			"zi_00014":"ui/common/mc/Q_quality_zi/zi_00014.png",
-			"zi_00015":"ui/common/mc/Q_quality_zi/zi_00015.png",
-			"zi_00016":"ui/common/mc/Q_quality_zi/zi_00016.png",
-			"zi_00017":"ui/common/mc/Q_quality_zi/zi_00017.png",
-			"zi_00018":"ui/common/mc/Q_quality_zi/zi_00018.png"};
+			skinNames={"00000":"ui/common/mc/Q_quality_zi/00000.png",
+			"00001":"ui/common/mc/Q_quality_zi/00001.png",
+			"00002":"ui/common/mc/Q_quality_zi/00002.png",
+			"00003":"ui/common/mc/Q_quality_zi/00003.png",
+			"00004":"ui/common/mc/Q_quality_zi/00004.png",
+			"00005":"ui/common/mc/Q_quality_zi/00005.png",
+			"00006":"ui/common/mc/Q_quality_zi/00006.png",
+			"00007":"ui/common/mc/Q_quality_zi/00007.png",
+			"00008":"ui/common/mc/Q_quality_zi/00008.png",
+			"00009":"ui/common/mc/Q_quality_zi/00009.png",
+			"00010":"ui/common/mc/Q_quality_zi/00010.png",
+			"00011":"ui/common/mc/Q_quality_zi/00011.png"};
 		}
 
 
