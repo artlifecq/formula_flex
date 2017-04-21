@@ -19,11 +19,6 @@ package com.rpgGame.coreData.clientConfig
 		 /**  开放元宝 */
 		public var q_yuanbao:int;
 		 /**  外观 */
-		public var q_icon:int;
-		 /**  名字 */
-		public var q_name:int;
-		 /**  特效 */
-		public var q_effect:int;
 		public var q_icon:String;
 		 /**  名字 */
 		public var q_name:String;
