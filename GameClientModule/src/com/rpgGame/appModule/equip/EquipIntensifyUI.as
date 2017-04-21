@@ -589,14 +589,31 @@ package com.rpgGame.appModule.equip
 			addExp=0;
 			useListIds=new Vector.<long>();
 			isToUp=false;
+			var maxCfg:Q_equip_strength=EquipStrengthCfg.getStrengthCfg(targetEquipInfo.qItem.q_kind,targetEquipInfo.qItem.q_job,targetEquipInfo.qItem.q_max_strengthen);
 			for(var i:int=0;i<result.length;i++){
 				item=result[i];
 				addExp+=item.qItem.q_strengthen_num;
-				if(addExp>upCfg.q_exp){
+				useMon=addExp*perMon;
+				if(userMon<useMon){//钱不够
+					addExp-=item.qItem.q_strengthen_num;
+					break;
+				}
+				if(addExp>maxCfg.q_exp){
 					isToUp=true;//到顶级了
 					break;
 				}
 				useListIds.push(item.itemInfo.itemId);
+			}
+			
+			if(i==0&&result.length!=0){
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4202));
+				return;
+			}
+			
+			
+			if(useListIds.length==0){
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4205));
+				return;
 			}
 			
 			useMon=addExp*perMon;
@@ -604,11 +621,6 @@ package com.rpgGame.appModule.equip
 			
 			if(userMon<useMon){
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4202));
-				return;
-			}
-			
-			if(useListIds.length==0){
-				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4205));
 				return;
 			}
 			
