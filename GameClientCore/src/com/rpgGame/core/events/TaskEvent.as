@@ -55,5 +55,7 @@ package com.rpgGame.core.events
 		public static const TASK_CHANGE_MATION : int = UNIQUEID.NEXT;
 		/**任务中点击NPC*/
 		public static const TASK_CLICK_NPC : int = UNIQUEID.NEXT;
+		/**点击NPC寻路完毕*/
+		public static const TASK_WALKOVER_NPC : int = UNIQUEID.NEXT;
 	}
 }

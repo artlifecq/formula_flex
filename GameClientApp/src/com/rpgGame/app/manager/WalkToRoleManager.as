@@ -55,7 +55,7 @@ package com.rpgGame.app.manager
 					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role);
 					break;
 				case SceneCharType.MONSTER:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveMonster);
+					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveMonster,null,null,noWalk);
 					break;
 				case SceneCharType.LIANG_CANG:
 					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveMonster);
@@ -117,7 +117,20 @@ package com.rpgGame.app.manager
 //				return;
 //			}
 		}
-
+		private static function noWalk( role : SceneRole) : void
+		{
+			if (role == null || !role.usable)
+				return;
+			
+			var monsterData : MonsterData = role.data as MonsterData;
+			if (monsterData == null)
+				return;
+			
+			EventManager.dispatchEvent(TaskEvent.TASK_CLICK_NPC,monsterData.modelID);//交任务用------YT
+			
+		}
+		
+		
 		private static function onArriveNpc(ref : WalkMoveStateReference) : void
 		{
 			var role : SceneRole = ref.data as SceneRole;

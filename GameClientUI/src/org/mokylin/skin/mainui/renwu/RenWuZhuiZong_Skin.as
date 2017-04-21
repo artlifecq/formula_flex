@@ -200,7 +200,7 @@ package org.mokylin.skin.mainui.renwu
 			pri_ico0 = temp;
 			temp.name = "pri_ico0";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 24;
+			temp.x = 20;
 			temp.y = 235;
 			return temp;
 		}
@@ -211,7 +211,7 @@ package org.mokylin.skin.mainui.renwu
 			pri_ico1 = temp;
 			temp.name = "pri_ico1";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 78;
+			temp.x = 74;
 			temp.y = 235;
 			return temp;
 		}
@@ -222,7 +222,7 @@ package org.mokylin.skin.mainui.renwu
 			pri_ico2 = temp;
 			temp.name = "pri_ico2";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 131;
+			temp.x = 127;
 			temp.y = 235;
 			return temp;
 		}
@@ -233,7 +233,7 @@ package org.mokylin.skin.mainui.renwu
 			pri_ico3 = temp;
 			temp.name = "pri_ico3";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 24;
+			temp.x = 20;
 			temp.y = 286;
 			return temp;
 		}
@@ -244,7 +244,7 @@ package org.mokylin.skin.mainui.renwu
 			pri_ico4 = temp;
 			temp.name = "pri_ico4";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 78;
+			temp.x = 74;
 			temp.y = 286;
 			return temp;
 		}
@@ -255,7 +255,7 @@ package org.mokylin.skin.mainui.renwu
 			pri_ico5 = temp;
 			temp.name = "pri_ico5";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 131;
+			temp.x = 127;
 			temp.y = 286;
 			return temp;
 		}
@@ -269,7 +269,7 @@ package org.mokylin.skin.mainui.renwu
 			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item()
 			temp.skin = skin
 			temp.width = 214;
-			temp.x = 22;
+			temp.x = 18;
 			temp.y = 166;
 			return temp;
 		}
@@ -283,7 +283,7 @@ package org.mokylin.skin.mainui.renwu
 			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item()
 			temp.skin = skin
 			temp.width = 214;
-			temp.x = 22;
+			temp.x = 18;
 			temp.y = 189;
 			return temp;
 		}
@@ -297,7 +297,7 @@ package org.mokylin.skin.mainui.renwu
 			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item()
 			temp.skin = skin
 			temp.width = 214;
-			temp.x = 22;
+			temp.x = 18;
 			temp.y = 212;
 			return temp;
 		}
@@ -353,7 +353,7 @@ package org.mokylin.skin.mainui.renwu
 			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.RenWu_jindu()
 			temp.skin = skin
 			temp.width = 215;
-			temp.x = 22;
+			temp.x = 18;
 			temp.y = 55;
 			return temp;
 		}
@@ -385,7 +385,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 216;
-			temp.x = 22;
+			temp.x = 18;
 			temp.y = 96;
 			return temp;
 		}

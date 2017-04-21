@@ -136,7 +136,7 @@ package com.rpgGame.app.manager.role
 		//跨场景寻路静态方法
 		//===========================================================================================================
 
-		public static function walkToScene(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null) : void
+		public static function walkToScene(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,noWalk:Function=null) : void
 		{
 //			var myContry:int = MainRoleManager.actorInfo.countryId;
 //			var currentCountry:int = CountryManager.selfCountryData.sequence;
@@ -155,7 +155,7 @@ package com.rpgGame.app.manager.role
 			var role : SceneRole = MainRoleManager.actor;
 			//var position : Vector3D = new Vector3D(posx, role.y, posy);
 			var position : Vector3D = new Vector3D(posx, posy, 0);
-			walkToScenePos(role, targetSceneId, position, onArrive, spacing, data);
+			walkToScenePos(role, targetSceneId, position, onArrive, spacing, data,noWalk);
 		}
 
 		/**
@@ -165,7 +165,7 @@ package com.rpgGame.app.manager.role
 		 * @param pos
 		 * @param onArrive
 		 */
-		public static function walkToScenePos(role : SceneRole, targetSceneId : int, pos : Vector3D, onArrive : Function = null, spacing : int = 0, data : Object = null) : void
+		public static function walkToScenePos(role : SceneRole, targetSceneId : int, pos : Vector3D, onArrive : Function = null, spacing : int = 0, data : Object = null,noWalk:Function=null) : void
 		{
 			_data = data;
 			var mapID : int = SceneSwitchManager.currentMapId;
@@ -173,7 +173,7 @@ package com.rpgGame.app.manager.role
 			{
 				if (pos.x > -1 && (-pos.z)> -1)//if (pos.x > -1 && pos.z> -1)
 				{
-					RoleStateUtil.walkToPos(role, pos, spacing, _data, onArrive);
+					RoleStateUtil.walkToPos(role, pos, spacing, _data, onArrive,null,null,noWalk);
 					EventManager.dispatchEvent(WorldMapEvent.MAP_WAYS_GUILD_UPDATA_PATHS);
 				}
 			}

@@ -36,27 +36,38 @@ package com.rpgGame.app.cmdlistener.task
 		/**登陆当前所有任务消息	*/
 		private function onResTaskInformationMessage(msg:ResTaskInformationMessage):void
 		{
-			TaskMissionManager.taskModelId=msg.taskModelId;
-			TaskMissionManager.dailyTaskTimes=msg.dailyTaskTimes;
-			TaskMissionManager.setCurrentTaskInfo(msg.acceptedList);
+			if(msg!=null&&msg.acceptedList!=null)
+			{
+				TaskMissionManager.taskModelId=msg.taskModelId;
+				TaskMissionManager.dailyTaskTimes=msg.dailyTaskTimes;
+				TaskMissionManager.setCurrentTaskInfo(msg.acceptedList);
+				EventManager.dispatchEvent(TaskEvent.TASK_INFOR_MATION);
+			}
 			
-				
-			EventManager.dispatchEvent(TaskEvent.TASK_INFOR_MATION);
+			
 			
 		}
 		/**接受新任务消息*/
 		private function onResTaskAcceptedMessage(msg:ResTaskAcceptedMessage):void
 		{
-			TaskMissionManager.setTaskInfo(msg.taskInfo);
+			if(msg!=null&&msg.taskInfo!=null)
+			{
+				TaskMissionManager.setTaskInfo(msg.taskInfo);
+				
+				EventManager.dispatchEvent(TaskEvent.TASK_NEW_MATION);
+			}
 			
-			EventManager.dispatchEvent(TaskEvent.TASK_NEW_MATION);
 		}
 		/**任务改变消息*/
 		private function onResTaskChangeMessage(msg:ResTaskChangeMessage):void
 		{
-			TaskMissionManager.setTaskInfo(msg.taskInfo);
+			if(msg!=null&&msg.taskInfo!=null)
+			{
+				TaskMissionManager.setTaskInfo(msg.taskInfo);
+				
+				EventManager.dispatchEvent(TaskEvent.TASK_CHANGE_MATION);
+			}
 			
-			EventManager.dispatchEvent(TaskEvent.TASK_CHANGE_MATION);
 		}
 		
 		/**任务完成消息	*/

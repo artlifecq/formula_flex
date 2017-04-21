@@ -61,7 +61,8 @@ package com.rpgGame.core.ui
 		{
 			this._bar.value=newValue;
 			if(_eftRender){
-				_eftRender.scaleX=this.value/this.maximum;
+				var scale:Number=this.value/this.maximum;
+				_eftRender.scaleX=scale>1?1:scale;
 			}
 		}
 		
@@ -84,7 +85,8 @@ package com.rpgGame.core.ui
 		{
 			this._bar.maximum=value;
 			if(_eftRender){
-				_eftRender.scaleX=this.value/this.maximum;
+				var scale:Number=this.value/this.maximum;
+				_eftRender.scaleX=scale>1?1:scale;
 			}
 		}
 		

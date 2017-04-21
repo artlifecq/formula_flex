@@ -13,7 +13,7 @@ package com.rpgGame.app.view.icon
 	import feathers.controls.UIMovieClip;
 	import feathers.controls.text.Fontter;
 	
-	import org.mokylin.skin.common.mc.UIMovieClipQ_quality_cheng;
+	import org.mokylin.skin.common.mc.UIMovieClipQ_quality_huang;
 	import org.mokylin.skin.common.mc.UIMovieClipQ_quality_zi;
 	
 	import starling.core.Starling;
@@ -126,16 +126,19 @@ package com.rpgGame.app.view.icon
 			}else{
 				_qualityEft.removeChildren();
 			}
+			_qualityEft.touchable=false;
 			if(_qualityId==Quality.GREEN){
-				_qualityEft.styleClass = org.mokylin.skin.common.mc.UIMovieClipQ_quality_cheng;
+				_qualityEft.styleClass = org.mokylin.skin.common.mc.UIMovieClipQ_quality_huang;
 			}else{
 				_qualityEft.styleClass = org.mokylin.skin.common.mc.UIMovieClipQ_quality_zi;
 			}
-			_qualityEft.play();
+			_qualityEft.frameRate=30;
+//			var scaleV:Number=(90/64);
 			_qualityEft.width=_iconSize;
 			_qualityEft.height=_iconSize;
-//			_qualityEft.x=_iconSize>>1;
-//			_qualityEft.y=_iconSize>>1;
+//			var xy:Number=-1*(_iconSize/64)*(90-64)/2
+//			_qualityEft.x=xy;
+//			_qualityEft.y=xy;
 		}		
 		
 		/** 隐藏品质框 */		

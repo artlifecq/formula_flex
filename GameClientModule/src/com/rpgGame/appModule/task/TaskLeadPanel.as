@@ -117,8 +117,15 @@ package com.rpgGame.appModule.task
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
 		{
 			super.show(data, openTable, parentContiner);
+			
 			setView();
 			timeInit()		
+		}
+		override protected function onStageResize(sw : int, sh : int) : void
+		{
+			//super.onStageResize(sw,sh);
+			this.x=sw-this.width-254;
+			this.y=(sh-this.height)/2+21;
 		}
 		override public function hide():void 
 		{
@@ -126,6 +133,8 @@ package com.rpgGame.appModule.task
 			timer.stop();
 			currtimer=TIMERDATA;
 		}
+		
+		
 		
 		private function subFinish():void
 		{
@@ -145,10 +154,10 @@ package com.rpgGame.appModule.task
 			
 			if(task!=null&&taskData!=null)
 			{
-				setTitle(taskData.q_party_name,taskData.q_mission_name,taskData.q_deal_mission);
+				setTitle(taskData.q_party_name,taskData.q_name,taskData.q_deal_mission);
 				setRewordView(taskData.q_reword_id);
 				
-				if(TaskMissionManager.currentMainTaskIsfinish)
+				if(TaskMissionManager.currentTaskIsFinish)
 				{
 					okBut.isEnabled=true;
 				}
@@ -163,7 +172,7 @@ package com.rpgGame.appModule.task
 		/**设置标题详情*/
 		private function setTitle(party:String,name:String,deal:String):void
 		{
-			nameLabel.htmlText=party+":"+name;
+			nameLabel.htmlText=party+name;
 			speakLabel.htmlText=TaskMissionCfgData.getSegmentTxtById(deal);
 		}
 		
@@ -201,7 +210,7 @@ package com.rpgGame.appModule.task
 		/**判断倒计时*/
 		private function timeInit():void
 		{
-			if(TaskMissionManager.currentMainTaskIsfinish)
+			if(TaskMissionManager.currentTaskIsFinish)
 			{
 				timer.start();
 				currtimer=TIMERDATA;

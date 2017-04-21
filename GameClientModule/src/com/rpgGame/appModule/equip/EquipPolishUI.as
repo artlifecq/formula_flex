@@ -62,6 +62,8 @@ package com.rpgGame.appModule.equip
 	import starling.display.DisplayObject;
 	import starling.events.Event;
 	
+	import utils.TimerServer;
+	
 	/**
 	 *装备琢磨
 	 *@author dik
@@ -153,6 +155,18 @@ package com.rpgGame.appModule.equip
 			_targetEquip.dragAble = true;
 			_targetEquip.checkDrag=checkDrag;
 			_skin.container.addChild(_targetEquip);
+			_skin.cilun_xiao.pivotY=_skin.cilun_xiao.pivotX=259/2;
+			_skin.xilun_da.pivotY=_skin.xilun_da.pivotX=181/2;
+			_skin.cilun_xiao.x+=_skin.cilun_xiao.pivotX;
+			_skin.cilun_xiao.y+=_skin.cilun_xiao.pivotX;
+			_skin.xilun_da.x+=_skin.xilun_da.pivotX;
+			_skin.xilun_da.y+=_skin.xilun_da.pivotX;
+		}
+		
+		private function rotationEft():void
+		{			
+			_skin.cilun_xiao.rotation-=1;
+			_skin.xilun_da.rotation+=1;
 		}
 		
 		private function onCancelUse(grid:DragDropItem):void
@@ -318,7 +332,7 @@ package com.rpgGame.appModule.equip
 		{
 			cancelAllUse();
 			if(!targetEquipInfo){
-				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6016));
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6012));
 				return;
 			}
 			
@@ -356,14 +370,14 @@ package com.rpgGame.appModule.equip
 				useListIds.push(item.itemInfo.itemId);
 			}
 			
-			if(useListIds.length==0){
-				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4205));
-				return;
-			}
-			
 			useMon=addExp*perMon;
 			if(userMon<useMon||i==0){
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6014));
+				return;
+			}
+			
+			if(useListIds.length==0){
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4205));
 				return;
 			}
 			
@@ -402,7 +416,7 @@ package com.rpgGame.appModule.equip
 				return;
 			}
 			if(selectedUse.length==6){
-				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4204));
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6016));
 				return;
 			}
 			
@@ -521,11 +535,11 @@ package com.rpgGame.appModule.equip
 			}else{
 				current_promote=current.q_promote;
 			}
-			_skin.lb_baifenbi.text=(current_promote/100).toFixed(1)+"%";
+			_skin.lb_baifenbi.text=Number((current_promote/100).toFixed(1))+"%";
 			if(up){
 				_skin.arrow_up2.visible=_skin.lb_up2.visible=true;
 				_skin.arrow_up2.visible=true;
-				_skin.lb_up2.text=((up.q_promote-current_promote)/100).toFixed(1)+"%";
+				_skin.lb_up2.text=Number(((up.q_promote-current_promote)/100).toFixed(1))+"%";
 			}else{
 				_skin.arrow_up2.visible=_skin.lb_up2.visible=false;
 			}
@@ -609,6 +623,8 @@ package com.rpgGame.appModule.equip
 		{
 			initEvent();
 			refresh();
+			
+			TimerServer.addLoop(rotationEft,60);
 		}
 		
 		override public function refresh():void
@@ -638,6 +654,7 @@ package com.rpgGame.appModule.equip
 		
 		override public function hide():void
 		{
+			TimerServer.remove(rotationEft);
 			cancelAllUse();
 			if(targetEquipInfo){
 				var targetGrid:DragDropItem=_goodsContainerTarget.getDragDropItemByItemInfo(targetEquipInfo);
