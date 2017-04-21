@@ -5,7 +5,6 @@ package com.rpgGame.app.ui.main.Task
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
-	import com.rpgGame.coreData.cfg.task.TaskCfgData;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
@@ -106,7 +105,10 @@ package com.rpgGame.app.ui.main.Task
 				icoList.push(ico);
 				_skin.primary_box.addChild(ico);
 			}
-			
+			for(i=0;i<killButList.length;i++)
+			{
+				killButList[i].visible=false;
+			}
 			
 			
 			

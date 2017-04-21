@@ -38,6 +38,7 @@
 	import com.rpgGame.app.cmdlistener.scene.SceneUICmdListener;
 	import com.rpgGame.app.cmdlistener.scene.StoryDungeonCmdListener;
 	import com.rpgGame.app.cmdlistener.society.SocietyCmdListener;
+	import com.rpgGame.app.cmdlistener.task.TaskCmdListener;
 	
 	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
@@ -103,7 +104,7 @@
 //			register("CrownCmdListener", CrownCmdListener); //王权
 			register("SceneSwitchCmdListener", SceneSwitchCmdListener);
 			register("SceneUICmdListener", SceneUICmdListener);
-//			register("TaskCmdListener", TaskCmdListener); //模块号13
+			register("TaskCmdListener", TaskCmdListener); //模块号13
 //			register("MiXinCmdListener", MiXinCmdListener); //模块号13
 //			register("TouZhuCmdListener", TouZhuCmdListener); //模块号13
 //			register("TouJingCmdListener", TouJingCmdListener); //模块号13
