@@ -8,11 +8,9 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.lang.LangUI_2;
-	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
 	
 	import feathers.controls.Button;
-	import feathers.controls.UIAsset;
 	
 	import org.mokylin.skin.mainui.juexue.juexu_Skin;
 	
@@ -31,8 +29,9 @@ package com.rpgGame.app.ui.main.shortcut
 		private var _effectCompleteFun:Function;
 		private var _transitionFun:Function;
 		private var _timeChangeFun:Function;
-		private var _selectBgList:Vector.<UIAsset>;
-		private var _buttonList:Vector.<Button>;
+		private var _lostSkillLists:Vector.<LostSkillCell>;
+		/*private var _selectBgList:Vector.<UIAsset>;
+		private var _buttonList:Vector.<Button>;*/
 		public function LostSkillEffect():void
 		{
 			_skin = new juexu_Skin();
@@ -52,33 +51,19 @@ package com.rpgGame.app.ui.main.shortcut
 				this._skin.bg.mask = _mask;
 			}
 			_transitionFun = Transitions.getTransition(Transitions.EASE_IN_OUT);
-			_selectBgList = new Vector.<UIAsset>();
-			_selectBgList.push(_skin.bg1);
-			_selectBgList.push(_skin.bg2);
-			_selectBgList.push(_skin.bg3);
-			_selectBgList.push(_skin.bg4);
-			_selectBgList.push(_skin.bg5);
-			_selectBgList.push(_skin.bg6);
-			_selectBgList.push(_skin.bg7);
 			
-			_buttonList = new Vector.<Button>();
-			_buttonList.push(_skin.btn_1);
-			_buttonList.push(_skin.btn_2);
-			_buttonList.push(_skin.btn_3);
-			_buttonList.push(_skin.btn_4);
-			_buttonList.push(_skin.btn_5);
-			_buttonList.push(_skin.btn_6);
-			_buttonList.push(_skin.btn_7);
+			_lostSkillLists = new Vector.<LostSkillCell>();
+			_lostSkillLists.push(new LostSkillCell(_skin.btn_1,_skin.skill_1,_skin.bg1,0,triggeredHandler));
+			_lostSkillLists.push(new LostSkillCell(_skin.btn_2,_skin.skill_2,_skin.bg2,1,triggeredHandler));
+			_lostSkillLists.push(new LostSkillCell(_skin.btn_3,_skin.skill_3,_skin.bg3,2,triggeredHandler));
+			_lostSkillLists.push(new LostSkillCell(_skin.btn_4,_skin.skill_4,_skin.bg4,3,triggeredHandler));
+			_lostSkillLists.push(new LostSkillCell(_skin.btn_5,_skin.skill_5,_skin.bg5,4,triggeredHandler));
+			_lostSkillLists.push(new LostSkillCell(_skin.btn_6,_skin.skill_6,_skin.bg6,5,triggeredHandler));
+			_lostSkillLists.push(new LostSkillCell(_skin.btn_7,_skin.skill_7,_skin.bg7,6,triggeredHandler));
 		}
 		
-		private function triggeredHandler(e:Event):void
+		private function triggeredHandler(state:SkillStateInfo):void
 		{
-			var btn:Button = e.target as Button;
-			var index:int = _buttonList.indexOf(btn);
-			if(index<0)
-				return ;
-			var data:Q_lostskill_open = getlostskilldata(index);
-			var state:SkillStateInfo = LostSkillManager.instance().getSkillStateInfoById(data.q_id);
 			LostSkillManager.instance().changeState(state);
 			playEnd();
 		}
@@ -124,18 +109,19 @@ package com.rpgGame.app.ui.main.shortcut
 		{
 			refeashState();
 			_skin.grp_btn.visible = true;
-			for each(var button:Button in _buttonList)
+			for each(var cell:LostSkillCell in _lostSkillLists)
 			{
-				button.addEventListener(Event.TRIGGERED,triggeredHandler);
+				cell.addEvent();
 			}
 			Starling.current.stage.addEventListener( TouchEvent.TOUCH, onCloseHandler );
 		}
 		private function refeashState():void
 		{	
 			_skin.bg_jineng.visible = true;
-			for(var i:int = 0;i<_selectBgList.length;i++)
+			
+			for each(var cell:LostSkillCell in _lostSkillLists)
 			{
-				_selectBgList[i].visible = getlostskilldata(i).q_id==LostSkillManager.instance().curSkillId;
+				cell.refeasView();
 			}
 		}
 		private function getlostskilldata(index:int):Q_lostskill_open
@@ -173,9 +159,9 @@ package com.rpgGame.app.ui.main.shortcut
 			_skin.grp_mc.alpha = 1;
 			_skin.bg_jineng.visible = false;
 			_skin.grp_btn.visible = false;
-			for each(var button:Button in _buttonList)
+			for each(var cell:LostSkillCell in _lostSkillLists)
 			{
-				button.removeEventListener(Event.TRIGGERED,triggeredHandler);
+				cell.removeEvent();
 			}
 			Starling.current.stage.removeEventListener( TouchEvent.TOUCH, onCloseHandler );
 			addTimer();

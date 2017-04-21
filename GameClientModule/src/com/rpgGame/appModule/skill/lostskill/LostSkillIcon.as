@@ -1,7 +1,10 @@
 package com.rpgGame.appModule.skill.lostskill
 {
 	import com.rpgGame.app.manager.LostSkillManager;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
+	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
 	
 	import feathers.controls.SkinnableContainer;
@@ -24,6 +27,7 @@ package com.rpgGame.appModule.skill.lostskill
 		
 		private function initView():void
 		{
+			TipTargetManager.show( _skin.btn_over, TargetTipsMaker.makeTips( TipType.LOSTSKILL_TIP, _data));
 			_skin.icons.styleName = "ui/app/wuxue/juexue/Icon/"+_data.q_icon+".png";
 			_skin.qiyong.touchable = false;
 			_skin.lb_name.touchable = false;

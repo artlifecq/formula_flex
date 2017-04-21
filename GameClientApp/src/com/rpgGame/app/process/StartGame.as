@@ -27,6 +27,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.EquipTip;
     import com.rpgGame.app.ui.tips.FriendHeroTips;
     import com.rpgGame.app.ui.tips.ItemTip;
+    import com.rpgGame.app.ui.tips.LostSkillTip;
     import com.rpgGame.app.ui.tips.MapAreaTip;
     import com.rpgGame.app.ui.tips.MountBeastCardTip;
     import com.rpgGame.app.ui.tips.MountSpellTips;
@@ -191,6 +192,7 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.MOUNT_SPELL_TIP, MountSpellTips);
 			TipManager.registerTipsParserClass(TipType.NORMAL_TIP, NormalTip);
 			TipManager.registerTipsParserClass(TipType.PROPCHANGE_TIP, TxtPropChangeTip);
+			TipManager.registerTipsParserClass(TipType.LOSTSKILL_TIP,LostSkillTip);
 		}
 
 		private function onSwitchCmp() : void
