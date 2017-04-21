@@ -3,6 +3,7 @@ package org.mokylin.skin.mainui.renwu
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import org.mokylin.skin.mainui.renwu.Huanshi_Renwu;
+	import org.mokylin.skin.mainui.renwu.RenWuZhuiZong_Skin;
 	import org.mokylin.skin.mainui.renwu.RenWu_open;
 	import org.mokylin.skin.mainui.renwu.Zhuxian_Renwu;
 

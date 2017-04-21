@@ -262,20 +262,11 @@ package org.mokylin.skin.mainui.shortcut
 			return temp;
 		}
 
-		private function __shortcut_Skin_UIAsset10_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/shortcut/tishiyuandi.png";
-			temp.x = 159;
-			temp.y = 37;
-			return temp;
-		}
-
 		private function __shortcut_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/mainui/shortcut/dikuang.png";
 			temp.x = 0;
 			temp.y = 35;
@@ -294,63 +285,18 @@ package org.mokylin.skin.mainui.shortcut
 		private function __shortcut_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/shortcut/buffkuang.png";
-			temp.x = 0;
-			temp.y = 10;
-			return temp;
-		}
-
-		private function __shortcut_Skin_UIAsset4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/shortcut/buffkuang.png";
-			temp.x = 46;
-			temp.y = 10;
-			return temp;
-		}
-
-		private function __shortcut_Skin_UIAsset5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/shortcut/buffkuang.png";
-			temp.x = 92;
-			temp.y = 10;
-			return temp;
-		}
-
-		private function __shortcut_Skin_UIAsset6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/mainui/shortcut/yaoshuikuang.png";
 			temp.x = 143;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function __shortcut_Skin_UIAsset7_i():feathers.controls.UIAsset
+		private function __shortcut_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/shortcut/buffkuang.png";
-			temp.x = 200;
-			temp.y = 10;
-			return temp;
-		}
-
-		private function __shortcut_Skin_UIAsset8_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/shortcut/buffkuang.png";
-			temp.x = 246;
-			temp.y = 10;
-			return temp;
-		}
-
-		private function __shortcut_Skin_UIAsset9_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/shortcut/buffkuang.png";
-			temp.x = 292;
-			temp.y = 10;
+			temp.styleName = "ui/mainui/shortcut/tishiyuandi.png";
+			temp.x = 159;
+			temp.y = 37;
 			return temp;
 		}
 
@@ -528,7 +474,7 @@ package org.mokylin.skin.mainui.shortcut
 			temp.name = "grp_buff";
 			temp.x = 236;
 			temp.y = 0;
-			temp.elementsContent = [__shortcut_Skin_UIAsset3_i(),__shortcut_Skin_UIAsset4_i(),__shortcut_Skin_UIAsset5_i(),__shortcut_Skin_UIAsset6_i(),__shortcut_Skin_UIAsset7_i(),__shortcut_Skin_UIAsset8_i(),__shortcut_Skin_UIAsset9_i(),__shortcut_Skin_UIAsset10_i(),__shortcut_Skin_Label9_i()];
+			temp.elementsContent = [__shortcut_Skin_UIAsset3_i(),__shortcut_Skin_UIAsset4_i(),__shortcut_Skin_Label9_i()];
 			return temp;
 		}
 
