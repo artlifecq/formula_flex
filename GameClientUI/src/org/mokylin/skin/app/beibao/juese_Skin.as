@@ -205,7 +205,7 @@ package org.mokylin.skin.app.beibao
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__juese_Skin_UIAsset1_i(),__juese_Skin_UIAsset2_i(),weapons_i(),headMsg_i(),footMsg_i(),values_i(),packs_i(),duibi_panel_i()];
+			this.elementsContent = [__juese_Skin_UIAsset2_i(),weapons_i(),headMsg_i(),footMsg_i(),values_i(),packs_i(),duibi_panel_i()];
 			
 			states = {
 			};
@@ -328,7 +328,7 @@ package org.mokylin.skin.app.beibao
 		private function __juese_Skin_UIAsset12_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/neikuang.png";
+			temp.styleName = "ui/common/background/neikuang.png";
 			temp.width = 128;
 			temp.x = 0;
 			temp.y = 0;
@@ -339,7 +339,7 @@ package org.mokylin.skin.app.beibao
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 23;
-			temp.styleName = "ui/app/beibao/neikuang.png";
+			temp.styleName = "ui/common/background/neikuang.png";
 			temp.width = 128;
 			temp.x = 0;
 			temp.y = 26;
@@ -349,7 +349,7 @@ package org.mokylin.skin.app.beibao
 		private function __juese_Skin_UIAsset14_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/neikuang.png";
+			temp.styleName = "ui/common/background/neikuang.png";
 			temp.width = 128;
 			temp.x = 163;
 			temp.y = 0;
@@ -360,21 +360,10 @@ package org.mokylin.skin.app.beibao
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 23;
-			temp.styleName = "ui/app/beibao/neikuang.png";
+			temp.styleName = "ui/common/background/neikuang.png";
 			temp.width = 128;
 			temp.x = 163;
 			temp.y = 26;
-			return temp;
-		}
-
-		private function __juese_Skin_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.touchable = false;
-			temp.touchGroup = false;
-			temp.styleName = "ui/app/beibao/juese.png";
-			temp.x = 442;
-			temp.y = 11;
 			return temp;
 		}
 
@@ -475,6 +464,7 @@ package org.mokylin.skin.app.beibao
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "获取元宝";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.color = 0xE1D4A9;
 			temp.width = 79;
 			temp.x = 243;
 			temp.y = 4;
@@ -521,6 +511,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "duibi_panel";
 			temp.height = 463;
 			temp.styleClass = org.mokylin.skin.app.beibao.VS_Skin;
+			temp.visible = false;
 			temp.width = 344;
 			temp.x = 590;
 			temp.y = 65;
@@ -1397,7 +1388,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ui_zhandou = temp;
 			temp.name = "ui_zhandou";
-			temp.styleName = "ui/app/beibao/zhandouli.png";
+			temp.styleName = "ui/common/zhandouli2.png";
 			temp.x = 76;
 			temp.y = 1;
 			return temp;
