@@ -124,7 +124,7 @@ package com.rpgGame.appModule.task
 		override protected function onStageResize(sw : int, sh : int) : void
 		{
 			//super.onStageResize(sw,sh);
-			this.x=sw-this.width-253;
+			this.x=sw-this.width-254;
 			this.y=(sh-this.height)/2+21;
 		}
 		override public function hide():void 

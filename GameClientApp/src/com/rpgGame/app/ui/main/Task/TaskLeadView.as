@@ -114,7 +114,7 @@ package com.rpgGame.app.ui.main.Task
 			
 			
 			titleLable.htmlText="";
-			navi1Lable.htmlText="章节任务";
+			navi1Lable.htmlText="章节进度";
 			navi2Lable.htmlText="任务描述";
 			navi3Lable.htmlText="任务进度";
 			jindu.labelDisplay.text="0%";
@@ -373,7 +373,7 @@ package com.rpgGame.app.ui.main.Task
 			if(rItme!=null)
 			{
 				rItme.labelDisplay.htmlText=t;//t;
-				rItme.btn_send.x=rItme.labelDisplay.width+2;
+				rItme.btn_send.x=rItme.labelDisplay.textWidth+2;
 				but.visible=true;
 			}
 			
