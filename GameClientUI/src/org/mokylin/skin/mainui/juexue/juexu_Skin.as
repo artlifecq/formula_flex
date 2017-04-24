@@ -319,7 +319,7 @@ package org.mokylin.skin.mainui.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			skill_1 = temp;
 			temp.name = "skill_1";
-			temp.styleName = "ui/common/Icon/juexue/feishengjiutian/24.png";
+			temp.styleName = "ui/mainui/juexue/icon/feishengjiutian.png";
 			temp.x = 0;
 			temp.y = 70;
 			return temp;
@@ -330,7 +330,7 @@ package org.mokylin.skin.mainui.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			skill_2 = temp;
 			temp.name = "skill_2";
-			temp.styleName = "ui/common/Icon/juexue/wanghunbeige/24.png";
+			temp.styleName = "ui/mainui/juexue/icon/wanghunbeige.png";
 			temp.x = 28;
 			temp.y = 36;
 			return temp;
@@ -341,7 +341,7 @@ package org.mokylin.skin.mainui.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			skill_3 = temp;
 			temp.name = "skill_3";
-			temp.styleName = "ui/common/Icon/juexue/binfengsudong/24.png";
+			temp.styleName = "ui/mainui/juexue/icon/binfengsudong.png";
 			temp.x = 67;
 			temp.y = 10;
 			return temp;
@@ -352,7 +352,7 @@ package org.mokylin.skin.mainui.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			skill_4 = temp;
 			temp.name = "skill_4";
-			temp.styleName = "ui/common/Icon/juexue/renzheshengui/24.png";
+			temp.styleName = "ui/mainui/juexue/icon/renzheshengui.png";
 			temp.x = 113;
 			temp.y = 0;
 			return temp;
@@ -363,7 +363,7 @@ package org.mokylin.skin.mainui.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			skill_5 = temp;
 			temp.name = "skill_5";
-			temp.styleName = "ui/common/Icon/juexue/shikongliexi/24.png";
+			temp.styleName = "ui/mainui/juexue/icon/shikongliexi.png";
 			temp.x = 162;
 			temp.y = 7;
 			return temp;
@@ -374,7 +374,7 @@ package org.mokylin.skin.mainui.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			skill_6 = temp;
 			temp.name = "skill_6";
-			temp.styleName = "ui/common/Icon/juexue/canglongzhili/24.png";
+			temp.styleName = "ui/mainui/juexue/icon/canglongzhili.png";
 			temp.x = 205;
 			temp.y = 33;
 			return temp;
@@ -385,7 +385,7 @@ package org.mokylin.skin.mainui.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			skill_7 = temp;
 			temp.name = "skill_7";
-			temp.styleName = "ui/common/Icon/juexue/shengshengbuxi/24.png";
+			temp.styleName = "ui/mainui/juexue/icon/shengshengbuxi.png";
 			temp.x = 232;
 			temp.y = 69;
 			return temp;
