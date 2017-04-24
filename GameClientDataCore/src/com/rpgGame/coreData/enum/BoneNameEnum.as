@@ -64,5 +64,10 @@ package com.rpgGame.coreData.enum
 		public static const chest:String = "chest";
 		public static const st_zero:String = "st_zero";
 		public static const zero:String = "zero";
+        
+        /**
+        * 医家金针挂点
+         */
+        public static const c_crossbow : String = "c_crossbow";
 	}
 }
