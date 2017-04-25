@@ -49,13 +49,14 @@ package com.rpgGame.appModule.jingmai.sub
 			for (var i:int = 0; i <len; i++) 
 			{
 				tmpPoint=_stateSkin["ico"+(1+i)];
+				tmpC=configList[i];
 				if (_stateSkin.hasOwnProperty("ico"+(2+i))) 
 				{
 					next=_stateSkin["ico"+(2+i)];
 					if (next) 
 					{
 						posA=[new Point(tmpPoint.x+tmpPoint.width/2,tmpPoint.y+tmpPoint.height/2)];
-						tmpC=configList[i];
+						
 						//有中间拐点
 						if (tmpC.q_coord!=null&&tmpC.q_coord!="") 
 						{
@@ -68,7 +69,7 @@ package com.rpgGame.appModule.jingmai.sub
 					}
 				}
 				tmpLab=_stateSkin["lb_"+(1+i)];
-				mp=new MerdianPoint(tmpPoint,tmpLab,configList[i].q_meridian_id,drawLine);
+				mp=new MerdianPoint(tmpPoint,tmpLab,configList[i].q_meridian_id,drawLine,tmpC.q_showtype);
 				tmpArr=configList[i].q_meridian_id.split("_");
 				key=int(tmpArr[1]);
 				nameDic[tmpPoint.name]=mp;
@@ -168,7 +169,17 @@ package com.rpgGame.appModule.jingmai.sub
 				p.setData(p.data);
 			}
 		}
-		
+		public function checkForUpdateJX():void
+		{
+			var points:Array=pointHash.values();
+			for each (var p:MerdianPoint in points)
+			{
+				if (p.type==1) 
+				{
+					p.setData(p.data);
+				}
+			}
+		}
 		public function hideEffect():void
 		{
 			// TODO Auto Generated method stub

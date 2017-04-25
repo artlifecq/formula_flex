@@ -40,9 +40,11 @@ package com.rpgGame.appModule.jingmai.sub
 	import org.mokylin.skin.app.beibao.mc.UIMovieClipBianshi_guang;
 	
 	import starling.events.Event;
+	import starling.filters.FragmentFilter;
 
 	public class MerdianPoint
 	{
+		private var _GRAY_FILTER:FragmentFilter;
 		public var imgPoint:UIAsset;
 		//有可能是空，没得下一个点的链接了
 	
@@ -56,8 +58,10 @@ package com.rpgGame.appModule.jingmai.sub
 		private var _careAcuId:String;
 		private var _drawLine:MeridianMapLine;
 		private var _tipsInfo:BaseTipsInfo;
-		public function MerdianPoint(point:UIAsset,lab:Label,acupoint:String,mapLine:MeridianMapLine)
+		private var _type:int;
+		public function MerdianPoint(point:UIAsset,lab:Label,acupoint:String,mapLine:MeridianMapLine,ptType:int)
 		{
+			this._type=ptType;
 			this.imgPoint=point;
 			this.imgPoint.touchGroup=true;
 			
@@ -232,7 +236,7 @@ package com.rpgGame.appModule.jingmai.sub
 			{
 				if (bool) 
 				{
-					_imgIcon.filter=FilterUtil.getGrayFilter();
+					_imgIcon.filter=GRAY_FILTER;
 				}
 				else
 				{
@@ -388,6 +392,24 @@ package com.rpgGame.appModule.jingmai.sub
 		public function get careAcuId():String
 		{
 			return _careAcuId;
+		}
+
+		public function get GRAY_FILTER():FragmentFilter
+		{
+			if (_GRAY_FILTER==null) 
+			{
+				_GRAY_FILTER=FilterUtil.getGrayFilter();
+			}
+			return _GRAY_FILTER;
+		}
+		/**
+		 *0冲穴，1奇穴 
+		 * @return 
+		 * 
+		 */
+		public function get type():int
+		{
+			return _type;
 		}
 
 		

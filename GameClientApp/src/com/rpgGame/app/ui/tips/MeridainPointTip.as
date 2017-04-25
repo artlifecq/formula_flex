@@ -289,7 +289,9 @@ package com.rpgGame.app.ui.tips
 			this._skin.lb_name.text=qAcu.q_name;
 			//未激活
 			this._skin.lb_jihuo.visible=false;
-			var startY:int=_skin.lb_Item0.y+2;
+			var startY:int=40;
+			this._skin.lb_title1.y=startY;
+			startY+=this._skin.lb_title1.height+2;
 			this._skin.lb_title1.text="【砭石效果】";
 			var canActive:Boolean;
 			//奇穴等级一直为0,判断解锁没有
@@ -356,11 +358,12 @@ package com.rpgGame.app.ui.tips
 			//镶嵌说明
 			_skin.lb_tile2.y=startY;
 			_skin.lb_tile2.visible=true;
+			_skin.lb_tile2.text="【镶嵌说明】";
 			startY+=_skin.lb_tile2.height+2;
 			_skin.imgStone.y=startY;
 			
 			_skin.lb_Stone.y=startY;
-			_skin.lb_Stone.text=_initStr.replace("@",EnumMStoneType.getStoneTypeName(qAcu.q_stone_type));
+			_skin.lb_Stone.htmlText=_initStr.replace("@",HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,EnumMStoneType.getStoneTypeName(qAcu.q_stone_type)));
 			startY+=_skin.lb_Stone.height;
 			_skin.imgBg.height=startY+2;
 		}

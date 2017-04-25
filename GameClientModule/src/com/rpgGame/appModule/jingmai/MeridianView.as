@@ -5,12 +5,17 @@ package com.rpgGame.appModule.jingmai
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.appModule.jingmai.sub.MeridianMap;
 	import com.rpgGame.appModule.jingmai.sub.TweenScaleScrollUitlExt;
+	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MeridianEvent;
 	import com.rpgGame.coreData.cfg.meridian.MeridianCfg;
+	import com.rpgGame.coreData.clientConfig.Q_item;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.meridian.MeridianVo;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.meridian.bean.AcuPointInfo;
+	
+	import app.message.GoodsType;
 	
 	import feathers.controls.Radio;
 	import feathers.controls.StateSkin;
@@ -222,9 +227,24 @@ package com.rpgGame.appModule.jingmai
 		{
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,onZhenQiChange);
 			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,onLevelChange);
+			EventManager.addEvent(ItemEvent.ITEM_ADD,onAddItem);
+			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onAddItem);
 			Mgr.meridianMgr.addEventListener(MeridianEvent.ALL_DATA_UPATE,onGetAllData);
 			Mgr.meridianMgr.addEventListener(MeridianEvent.MERIDIAN_CHANGE,onDataChange);
+			
 			onZhenQiChange(CharAttributeType.RES_ZHENQI);
+		}
+		
+		private function onAddItem(itemInfo : ClientItemInfo):void
+		{
+			// TODO Auto Generated method stub
+			if (itemInfo&&itemInfo.qItem) 
+			{
+				if (itemInfo.qItem.q_type==GoodsType.MERIDIANSTONE) 
+				{
+					checkForUpdateJX();
+				}
+			}
 		}
 		
 		private function onLevelChange(type:int=0):void
@@ -249,6 +269,20 @@ package com.rpgGame.appModule.jingmai
 				}
 			}
 		}
+		private function checkForUpdateJX():void
+		{
+			var keys:Array=_mapsHash.keys();
+			var tmp:Array;
+			var map:MeridianMap;
+			for each (var key:int in keys) 
+			{
+				map=_mapsHash.getValue(key);
+				if (map) 
+				{
+					map.checkForUpdateJX();
+				}
+			}
+		}
 		private function onZhenQiChange(type:int=0):void
 		{
 			// TODO Auto Generated method stub
@@ -262,6 +296,8 @@ package com.rpgGame.appModule.jingmai
 		{
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,onZhenQiChange);
 			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,onLevelChange);
+			EventManager.removeEvent(ItemEvent.ITEM_ADD,onAddItem);
+			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onAddItem);
 			Mgr.meridianMgr.removeEventListener(MeridianEvent.ALL_DATA_UPATE,onGetAllData);
 			Mgr.meridianMgr.removeEventListener(MeridianEvent.MERIDIAN_CHANGE,onDataChange);
 			clearEffect();
