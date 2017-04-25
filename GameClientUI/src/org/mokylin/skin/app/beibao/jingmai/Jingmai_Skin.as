@@ -73,7 +73,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [imgBg_i(),lb_zhenqi_i(),__Jingmai_Skin_UIAsset1_i(),__Jingmai_Skin_UIAsset2_i(),__Jingmai_Skin_UIAsset3_i(),Num_zhandouli_i(),__Jingmai_Skin_UIAsset4_i(),mc_name_i(),chk_shuxing_i(),chk_dengji_i(),btn_hecheng_i(),btn_prev_i(),btn_next_i(),rdo_renmai_i(),rdo_dumai_i(),rdo_chongmai_i(),rdo_daimai_i(),rdo_yinqiaomai_i(),rdo_yangqiaomai_i()];
+			this.elementsContent = [imgBg_i(),lb_zhenqi_i(),__Jingmai_Skin_UIAsset1_i(),__Jingmai_Skin_UIAsset2_i(),__Jingmai_Skin_UIAsset3_i(),Num_zhandouli_i(),__Jingmai_Skin_UIAsset4_i(),mc_name_i(),chk_shuxing_i(),chk_dengji_i(),btn_hecheng_i(),btn_prev_i(),btn_next_i(),rdo_renmai_i(),rdo_dumai_i(),rdo_chongmai_i(),rdo_daimai_i(),rdo_yinqiaomai_i(),rdo_yangqiaomai_i(),__Jingmai_Skin_UIAsset5_i()];
 			
 			states = {
 			};
@@ -133,6 +133,15 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.styleName = "ui/app/beibao/jingmai/di.png";
 			temp.x = 686;
 			temp.y = 118;
+			return temp;
+		}
+
+		private function __Jingmai_Skin_UIAsset5_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/beibao/jingmai/fengexian.png";
+			temp.x = 174;
+			temp.y = 434;
 			return temp;
 		}
 
@@ -235,9 +244,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			mc_name = temp;
 			temp.name = "mc_name";
 			temp.autoPlay = false;
-			temp.height = 160;
+			temp.height = 133;
 			temp.styleClass = org.mokylin.skin.app.beibao.jingmai.mc.UIMovieClipJingmai;
-			temp.width = 50;
+			temp.width = 52;
 			temp.x = 687;
 			temp.y = 118;
 			return temp;
