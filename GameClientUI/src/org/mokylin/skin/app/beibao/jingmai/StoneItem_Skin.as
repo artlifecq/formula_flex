@@ -1,9 +1,11 @@
 package org.mokylin.skin.app.beibao.jingmai
 {
 	import feathers.controls.text.Fontter;
+	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.component.button.ButtonSkin_Select;
 
 	/**
 	 * @private
@@ -17,11 +19,11 @@ package org.mokylin.skin.app.beibao.jingmai
 		//==========================================================================
 		public var Icon:feathers.controls.UIAsset;
 
-		public var txt_Name:feathers.controls.Label;
+		public var lbJiacheng:feathers.controls.Label;
 
-		public var txt_level:feathers.controls.Label;
+		public var lbName:feathers.controls.Label;
 
-		public var txt_xianzhi:feathers.controls.Label;
+		public var rdo_select:feathers.controls.Button;
 
 
 		//==========================================================================
@@ -32,9 +34,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			super();
 			
 			this.currentState = "normal";
-			this.height = 59;
-			this.width = 330;
-			this.elementsContent = [__StoneItem_Skin_UIAsset1_i(),Icon_i(),txt_Name_i(),txt_xianzhi_i(),txt_level_i()];
+			this.height = 36;
+			this.width = 370;
+			this.elementsContent = [Icon_i(),lbName_i(),lbJiacheng_i(),rdo_select_i(),__StoneItem_Skin_UIAsset1_i()];
 			
 			states = {
 			};
@@ -50,66 +52,61 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			Icon = temp;
 			temp.name = "Icon";
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 4;
-			temp.y = 2;
+			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
+			temp.x = 1;
+			temp.y = 1;
 			return temp;
 		}
 
 		private function __StoneItem_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/wuxue/jineng/jineng_di.png";
-			temp.width = 330;
+			temp.height = 2;
+			temp.styleName = "ui/common/tips/tips_1fengexian.png";
+			temp.width = 369;
 			temp.x = 0;
-			temp.y = 0;
+			temp.y = 34;
 			return temp;
 		}
 
-		private function txt_Name_i():feathers.controls.Label
+		private function lbJiacheng_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			txt_Name = temp;
-			temp.name = "txt_Name";
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.text = "侵略如火";
+			lbJiacheng = temp;
+			temp.name = "lbJiacheng";
+			temp.text = "属性加成明细";
 			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 63;
-			temp.y = 8;
-			return temp;
-		}
-
-		private function txt_level_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			txt_level = temp;
-			temp.name = "txt_level";
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.text = "等级:1/200";
-			temp.color = 0x5cb006;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 136;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 184;
+			temp.x = 177;
 			temp.y = 9;
 			return temp;
 		}
 
-		private function txt_xianzhi_i():feathers.controls.Label
+		private function lbName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			txt_xianzhi = temp;
-			temp.name = "txt_xianzhi";
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.text = "60级后自动获得";
-			temp.color = 0x8B8D7B;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 67;
-			temp.y = 34;
+			lbName = temp;
+			temp.name = "lbName";
+			temp.text = "砭石名称·1层 LV.3";
+			temp.color = 0x9D4AA8;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 137;
+			temp.x = 38;
+			temp.y = 9;
+			return temp;
+		}
+
+		private function rdo_select_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			rdo_select = temp;
+			temp.name = "rdo_select";
+			temp.height = 32;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_Select;
+			temp.width = 366;
+			temp.x = 2;
+			temp.y = 2;
 			return temp;
 		}
 

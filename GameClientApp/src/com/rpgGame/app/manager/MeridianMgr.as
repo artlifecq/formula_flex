@@ -1,9 +1,12 @@
 package com.rpgGame.app.manager
 {
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.events.MeridianEvent;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.cfg.meridian.EnumMStoneType;
 	import com.rpgGame.coreData.cfg.meridian.MeridianCfg;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.clientConfig.Q_meridian;
@@ -41,7 +44,7 @@ package com.rpgGame.app.manager
 		}
 		public function isMaxAcuLevel(acu:AcuPointInfo):Boolean
 		{
-			return getNextLevelAcu(acu)!=null;
+			return getNextLevelAcu(acu)==null;
 		}
 		public function getNextLevelAcu(acu:AcuPointInfo):Q_meridian
 		{
@@ -70,13 +73,14 @@ package com.rpgGame.app.manager
 			{
 				return false;
 			}
+			
 			//没得前置穴位
 			if (now.q_need_meridian_id==null||now.q_need_meridian_id=="") 
 			{
 				return true;
 			}
 			var tmp:Array=now.q_need_meridian_id.split("_");
-			var qNeed:Q_meridian=MeridianCfg.getMeridianCfg(now.q_need_meridian_id);
+			var qNeed:Q_meridian=MeridianCfg.getMeridianCfg(now.q_need_meridian_id+"_0");
 		
 			var needInfo:AcuPointInfo=Mgr.meridianMgr.vo.getMeridianAcuInfo(tmp[0],tmp[1]);
 			if (!needInfo) 
@@ -88,6 +92,7 @@ package com.rpgGame.app.manager
 			{
 				if (needInfo.level<now.q_prelvl) 
 				{
+					
 					return false;
 				}
 			}
@@ -108,7 +113,7 @@ package com.rpgGame.app.manager
 					return false;
 				}
 			}
-			return false;
+			return true;
 		}
 		public function getBetterStone(stoneType:int,compareStone:ItemInfo=null):Vector.<ClientItemInfo>
 		{
@@ -125,6 +130,10 @@ package com.rpgGame.app.manager
 			}
 			for each (var tmp:ClientItemInfo in StoneArr) 
 			{
+				if (tmp.qItem.q_location!=stoneType) 
+				{
+					continue;
+				}
 				if (tmp.qItem.q_levelnum>stoneLv) 
 				{
 					ret.push(tmp);
@@ -138,7 +147,7 @@ package com.rpgGame.app.manager
 		 * @return 
 		 * 
 		 */		
-		public function getCanLevelUp(acu:AcuPointInfo):Boolean
+		public function getCanLevelUp(acu:AcuPointInfo,bShowNotice:Boolean=false):Boolean
 		{
 			var now:Q_meridian=MeridianCfg.getMeridianCfg(acu.MeridId+"_"+acu.acuPointId+"_"+(acu.level));
 			if (!now) 
@@ -152,16 +161,24 @@ package com.rpgGame.app.manager
 			}
 			if (now.q_need_level>MainRoleManager.actorInfo.totalStat.level) 
 			{
+				if (bShowNotice) 
+				{
+					NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7013),[now.q_need_level]);
+				}
 				return false;
 			}
-			if (now.q_need_spirit>MainRoleManager.actorInfo.maxZhenqi) 
+			if (now.q_need_spirit>MainRoleManager.actorInfo.curZhenqi) 
 			{
+				if (bShowNotice) 
+				{
+					NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(705));
+				}
 				return false;
 			}
 			if (now.q_need_meridian_id!=null&&now.q_need_meridian_id!="") 
 			{
 				var tmp:Array=now.q_need_meridian_id.split("_");
-				var qNeed:Q_meridian=MeridianCfg.getMeridianCfg(now.q_need_meridian_id);
+				var qNeed:Q_meridian=MeridianCfg.getMeridianCfg(now.q_need_meridian_id+"_0");
 				var needInfo:AcuPointInfo=Mgr.meridianMgr.vo.getMeridianAcuInfo(tmp[0],tmp[1]);
 				if (!needInfo) 
 				{
@@ -172,6 +189,10 @@ package com.rpgGame.app.manager
 				{
 					if (needInfo.level<now.q_prelvl) 
 					{
+						if (bShowNotice) 
+						{
+							NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7014),[qNeed.q_name,now.q_prelvl]);
+						}
 						return false;
 					}
 				}
@@ -180,6 +201,10 @@ package com.rpgGame.app.manager
 				{
 					if (needInfo.stone.length==0) 
 					{
+						if (bShowNotice) 
+						{
+							NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7018),[qNeed.q_name,now.q_prelvl,EnumMStoneType.getStoneTypeName(qNeed.q_stone_type)]);
+						}
 						return false;
 					}
 					var qItem:Q_item=ItemConfig.getQItemByID(needInfo.stone[0].itemModelId);
@@ -189,6 +214,10 @@ package com.rpgGame.app.manager
 					}
 					if (qItem.q_levelnum<now.q_prelvl) 
 					{
+						if (bShowNotice) 
+						{
+							NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7018),[qNeed.q_name,now.q_prelvl,EnumMStoneType.getStoneTypeName(qNeed.q_stone_type)]);
+						}
 						return false;
 					}
 				}

@@ -36,6 +36,7 @@ package com.rpgGame.appModule.jingmai.sub
 				
 			}
 			addEvent();
+			checkBtnState();
 		}
 		public function setCallBack(fun:Function):void
 		{
@@ -74,8 +75,10 @@ package com.rpgGame.appModule.jingmai.sub
 		private function checkBtnState():void
 		{
 			var dataLen:int=dataArr.length;
-			leftBtn.touchable=curIndex>0;
-			rightBtn.touchable=curIndex<(dataLen-1)&&dataLen>1;
+			leftBtn.visible=leftBtn.touchable=curIndex>0;
+			rightBtn.visible=rightBtn.touchable=curIndex<(dataLen-1)&&dataLen>1;
+			//
+			return;
 			if (!leftBtn.touchable) 
 			{
 				leftBtn.filter=FilterUtil.getGrayFilter();

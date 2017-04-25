@@ -39,10 +39,17 @@ package com.rpgGame.coreData.info.meridian
 			tmp=meridianHash.getValue(p.MeridId);
 			if (!tmp) 
 			{
-				tmp=new Array();
-				meridianHash.put(p.MeridId,tmp);
+				throw new Error("unkonw meridian acudata:"+p.MeridId+"_"+p.acuPointId);
 			}
-			tmp.push(p);
+			var len:int=tmp.length;
+			for (var i:int = 0; i < len; i++) 
+			{
+				if (tmp[i].MeridId==p.MeridId&&tmp[i].acuPointId==p.acuPointId)
+				{
+					tmp[i]=p;
+					break;
+				}
+			}
 		}
 		public function getMeridianAcuInfo(merid:int,posId:int):AcuPointInfo
 		{

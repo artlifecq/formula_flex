@@ -9,7 +9,9 @@ package com.rpgGame.appModule.jingmai
 	import com.rpgGame.core.utils.AttrUtil;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.meridian.MeridianCfg;
+	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.clientConfig.Q_meridian;
 	import com.rpgGame.netData.meridian.bean.AcuPointInfo;
 	
@@ -98,9 +100,9 @@ package com.rpgGame.appModule.jingmai
 			}
 			labArr.length=0;
 			var startPos:Point=new Point(_skin.lb_att0.x,_skin.lb_att0.y);
-			labArr=AttrUtil.showAttr(tmpC,this,_skin.lb_att0,1,startPos,_skin.lb_att0.width,_skin.lb_att0.height+2);
+			labArr=labArr.concat(AttrUtil.showAttr(tmpC,this,_skin.lb_att0,1,startPos,_skin.lb_att0.width,_skin.lb_att0.height+2));
 			startPos.y=_skin.ib_att1.y;
-			labArr=AttrUtil.showAttr(tmpJ,this,_skin.lb_att0,1,startPos,_skin.lb_att0.width,_skin.lb_att0.height+2);
+			labArr=labArr.concat(AttrUtil.showAttr(tmpJ,this,_skin.lb_att0,1,startPos,_skin.lb_att0.width,_skin.lb_att0.height+2));
 			_fightPower.number=FightValueUtil.calFightPowerByHash(tmpC,MainRoleManager.actorInfo.job)+FightValueUtil.calFightPowerByHash(tmpJ,MainRoleManager.actorInfo.job);
 		}
 		protected function onUpdateAll(event:MeridianEvent):void
@@ -125,9 +127,14 @@ package com.rpgGame.appModule.jingmai
 						AttValueConfig.getTypeValue(qMeri.q_stone_attribute,hashC);
 					}
 					//
-					else if (acuInfo.stone.length>0&&qMeri.q_stone_attribute!=0) 
+					else if (acuInfo.stone.length>0) 
 					{
-						AttValueConfig.getTypeValue(qMeri.q_stone_attribute,hashJ);
+						var itemq:Q_item=ItemConfig.getQItemByID(acuInfo.stone[0].itemModelId);
+						if (itemq.q_att_type!=0) 
+						{
+							AttValueConfig.getTypeValue(itemq.q_att_type,hashJ);
+						}
+						
 					}
 				}	
 			}

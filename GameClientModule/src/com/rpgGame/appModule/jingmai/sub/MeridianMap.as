@@ -5,6 +5,7 @@ package com.rpgGame.appModule.jingmai.sub
 	import com.rpgGame.coreData.clientConfig.Q_meridian;
 	import com.rpgGame.netData.meridian.bean.AcuPointInfo;
 	
+	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	
 	import feathers.controls.Label;
@@ -12,7 +13,7 @@ package com.rpgGame.appModule.jingmai.sub
 	import feathers.controls.UIAsset;
 	
 	import starling.display.DisplayObject;
-	import starling.events.TouchEvent;
+	import starling.display.Sprite;
 	
 	public class MeridianMap extends SkinUI
 	{
@@ -22,30 +23,52 @@ package com.rpgGame.appModule.jingmai.sub
 		public var pos:int;
 		//用来快速查找点击对象
 		private var nameDic:Dictionary=new Dictionary();
+		private var linesContianer:Sprite;
 		public function MeridianMap(skin:StateSkin,mid:int,configList:Array)
 		{
 			super(skin);
+			linesContianer=new Sprite();
+			linesContianer.touchable=false;
+			this._stateSkin["grp_icon"].addChildAt(linesContianer,0);
 			this.meridianId=mid;
 			configList.sort(sortData);
 			
 			pointHash=new HashMap();
 			var len:int=configList.length;
 			var tmpPoint:UIAsset;
-			var tmpLine:UIAsset;
+		
 			var tmpLab:Label;
 			var mp:MerdianPoint;
 			var key:int;
 			var tmpArr:Array;
+			var posA:Array;
+			var next:UIAsset;
+			var centerPos:Point;
+			var tmpC:Q_meridian;
+			var drawLine:MeridianMapLine;
 			for (var i:int = 0; i <len; i++) 
 			{
-				tmpPoint=_stateSkin["ico_"+(1+i)];
-				tmpLine=null;
-				if (_stateSkin.hasOwnProperty("l_"+(1+i))) 
+				tmpPoint=_stateSkin["ico"+(1+i)];
+				if (_stateSkin.hasOwnProperty("ico"+(2+i))) 
 				{
-					tmpLine=_stateSkin["l_"+(1+i)];
+					next=_stateSkin["ico"+(2+i)];
+					if (next) 
+					{
+						posA=[new Point(tmpPoint.x+tmpPoint.width/2,tmpPoint.y+tmpPoint.height/2)];
+						tmpC=configList[i];
+						//有中间拐点
+						if (tmpC.q_coord!=null&&tmpC.q_coord!="") 
+						{
+							var coodA:Array=tmpC.q_coord.split(",");
+							posA.push(new Point(int(coodA[0])+tmpPoint.width/2,int(coodA[1])+tmpPoint.height/2));
+						}
+						posA.push(new Point(next.x+next.width/2,next.y+next.height/2));
+						drawLine=new MeridianMapLine("ui/app/beibao/jingmai/line/shang.png","ui/app/beibao/jingmai/line/d2.png",posA);
+						linesContianer.addChild(drawLine);
+					}
 				}
 				tmpLab=_stateSkin["lb_"+(1+i)];
-				mp=new MerdianPoint(tmpPoint,tmpLine,tmpLab,configList[i].q_meridian_id);
+				mp=new MerdianPoint(tmpPoint,tmpLab,configList[i].q_meridian_id,drawLine);
 				tmpArr=configList[i].q_meridian_id.split("_");
 				key=int(tmpArr[1]);
 				nameDic[tmpPoint.name]=mp;
@@ -61,7 +84,7 @@ package com.rpgGame.appModule.jingmai.sub
 		{
 			_stateSkin["grp_label"].visible=bool;
 		}
-		public function updataServerData(data:Array):void
+		public function updataServerData(data:Array,playEff:Boolean=false):void
 		{
 			if (data) 
 			{
@@ -74,6 +97,10 @@ package com.rpgGame.appModule.jingmai.sub
 					mp=pointHash.getValue(acuData.acuPointId);
 					if (mp) 
 					{
+						if (playEff) 
+						{
+							mp.playSuccessEff();
+						}
 						mp.setData(acuData);
 					}
 				}
@@ -88,8 +115,22 @@ package com.rpgGame.appModule.jingmai.sub
 				}
 				
 			}
-			
-			
+		}
+		public function checkCareDataUpdate(acu:AcuPointInfo):void
+		{
+			if (acu) 
+			{
+				var points:Array=pointHash.values();
+				var key:String=acu.MeridId+"_"+acu.acuPointId;
+				for each (var p:MerdianPoint in points)
+				{
+					if (p.careAcuId==key) 
+					{
+						p.setData(p.data,true);
+					}
+				}
+				
+			}
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
@@ -125,6 +166,16 @@ package com.rpgGame.appModule.jingmai.sub
 			for each (var p:MerdianPoint in points)
 			{
 				p.setData(p.data);
+			}
+		}
+		
+		public function hideEffect():void
+		{
+			// TODO Auto Generated method stub
+			var points:Array=pointHash.values();
+			for each (var p:MerdianPoint in points)
+			{
+				p.showLoopEffect(false);
 			}
 		}
 	}

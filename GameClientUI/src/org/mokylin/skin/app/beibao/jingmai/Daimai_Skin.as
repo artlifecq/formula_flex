@@ -20,69 +20,37 @@ package org.mokylin.skin.app.beibao.jingmai
 
 		public var grp_label:feathers.controls.Group;
 
-		public var grp_line:feathers.controls.Group;
+		public var ico1:feathers.controls.UIAsset;
 
-		public var ico_1:feathers.controls.UIAsset;
+		public var ico10:feathers.controls.UIAsset;
 
-		public var ico_10:feathers.controls.UIAsset;
+		public var ico11:feathers.controls.UIAsset;
 
-		public var ico_11:feathers.controls.UIAsset;
+		public var ico12:feathers.controls.UIAsset;
 
-		public var ico_12:feathers.controls.UIAsset;
+		public var ico13:feathers.controls.UIAsset;
 
-		public var ico_13:feathers.controls.UIAsset;
+		public var ico14:feathers.controls.UIAsset;
 
-		public var ico_14:feathers.controls.UIAsset;
+		public var ico15:feathers.controls.UIAsset;
 
-		public var ico_15:feathers.controls.UIAsset;
+		public var ico16:feathers.controls.UIAsset;
 
-		public var ico_16:feathers.controls.UIAsset;
+		public var ico2:feathers.controls.UIAsset;
 
-		public var ico_2:feathers.controls.UIAsset;
+		public var ico3:feathers.controls.UIAsset;
 
-		public var ico_3:feathers.controls.UIAsset;
+		public var ico4:feathers.controls.UIAsset;
 
-		public var ico_4:feathers.controls.UIAsset;
+		public var ico5:feathers.controls.UIAsset;
 
-		public var ico_5:feathers.controls.UIAsset;
+		public var ico6:feathers.controls.UIAsset;
 
-		public var ico_6:feathers.controls.UIAsset;
+		public var ico7:feathers.controls.UIAsset;
 
-		public var ico_7:feathers.controls.UIAsset;
+		public var ico8:feathers.controls.UIAsset;
 
-		public var ico_8:feathers.controls.UIAsset;
-
-		public var ico_9:feathers.controls.UIAsset;
-
-		public var l_1:feathers.controls.UIAsset;
-
-		public var l_10:feathers.controls.UIAsset;
-
-		public var l_11:feathers.controls.UIAsset;
-
-		public var l_12:feathers.controls.UIAsset;
-
-		public var l_13:feathers.controls.UIAsset;
-
-		public var l_14:feathers.controls.UIAsset;
-
-		public var l_15:feathers.controls.UIAsset;
-
-		public var l_2:feathers.controls.UIAsset;
-
-		public var l_3:feathers.controls.UIAsset;
-
-		public var l_4:feathers.controls.UIAsset;
-
-		public var l_5:feathers.controls.UIAsset;
-
-		public var l_6:feathers.controls.UIAsset;
-
-		public var l_7:feathers.controls.UIAsset;
-
-		public var l_8:feathers.controls.UIAsset;
-
-		public var l_9:feathers.controls.UIAsset;
+		public var ico9:feathers.controls.UIAsset;
 
 		public var lb_1:feathers.controls.Label;
 
@@ -125,9 +93,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			super();
 			
 			this.currentState = "normal";
-			this.height = 325;
-			this.width = 325;
-			this.elementsContent = [__Daimai_Skin_UIAsset1_i(),grp_line_i(),grp_icon_i(),grp_label_i()];
+			this.height = 431;
+			this.width = 431;
+			this.elementsContent = [__Daimai_Skin_UIAsset1_i(),grp_icon_i(),grp_label_i()];
 			
 			states = {
 			};
@@ -141,8 +109,8 @@ package org.mokylin.skin.app.beibao.jingmai
 		private function __Daimai_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/jingmai/daimai.png";
-			temp.x = 0;
+			temp.styleName = "ui/app/beibao/jingmai/bg2.png";
+			temp.x = -31;
 			temp.y = 0;
 			return temp;
 		}
@@ -152,9 +120,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_icon = temp;
 			temp.name = "grp_icon";
-			temp.x = 22;
-			temp.y = 19;
-			temp.elementsContent = [ico_1_i(),ico_5_i(),ico_6_i(),ico_16_i(),ico_11_i(),ico_15_i(),ico_14_i(),ico_13_i(),ico_12_i(),ico_9_i(),ico_10_i(),ico_8_i(),ico_7_i(),ico_4_i(),ico_3_i(),ico_2_i()];
+			temp.x = 72;
+			temp.y = 39;
+			temp.elementsContent = [ico1_i(),ico5_i(),ico6_i(),ico16_i(),ico11_i(),ico15_i(),ico14_i(),ico13_i(),ico12_i(),ico9_i(),ico10_i(),ico8_i(),ico7_i(),ico4_i(),ico3_i(),ico2_i()];
 			return temp;
 		}
 
@@ -163,361 +131,185 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_label = temp;
 			temp.name = "grp_label";
-			temp.x = 18;
-			temp.y = 10;
+			temp.x = 69;
+			temp.y = 31;
 			temp.elementsContent = [lb_1_i(),lb_5_i(),lb_7_i(),lb_11_i(),lb_15_i(),lb_16_i(),lb_14_i(),lb_13_i(),lb_12_i(),lb_10_i(),lb_9_i(),lb_8_i(),lb_6_i(),lb_4_i(),lb_3_i(),lb_2_i()];
 			return temp;
 		}
 
-		private function grp_line_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			grp_line = temp;
-			temp.name = "grp_line";
-			temp.x = 43;
-			temp.y = 37;
-			temp.elementsContent = [l_1_i(),l_2_i(),l_3_i(),l_4_i(),l_5_i(),l_6_i(),l_7_i(),l_8_i(),l_9_i(),l_10_i(),l_11_i(),l_12_i(),l_13_i(),l_14_i(),l_15_i()];
-			return temp;
-		}
-
-		private function ico_10_i():feathers.controls.UIAsset
+		private function ico10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_10 = temp;
-			temp.name = "ico_10";
-			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
+			ico10 = temp;
+			temp.name = "ico10";
+			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
 			temp.x = 79;
 			temp.y = 81;
 			return temp;
 		}
 
-		private function ico_11_i():feathers.controls.UIAsset
+		private function ico11_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_11 = temp;
-			temp.name = "ico_11";
-			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
+			ico11 = temp;
+			temp.name = "ico11";
+			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
 			temp.x = 60;
 			temp.y = 125;
 			return temp;
 		}
 
-		private function ico_12_i():feathers.controls.UIAsset
+		private function ico12_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_12 = temp;
-			temp.name = "ico_12";
-			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
+			ico12 = temp;
+			temp.name = "ico12";
+			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
 			temp.x = 1;
 			temp.y = 125;
 			return temp;
 		}
 
-		private function ico_13_i():feathers.controls.UIAsset
+		private function ico13_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_13 = temp;
-			temp.name = "ico_13";
-			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
+			ico13 = temp;
+			temp.name = "ico13";
+			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
 			temp.x = 40;
-			temp.y = 211;
+			temp.y = 210;
 			return temp;
 		}
 
-		private function ico_14_i():feathers.controls.UIAsset
+		private function ico14_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_14 = temp;
-			temp.name = "ico_14";
-			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
+			ico14 = temp;
+			temp.name = "ico14";
+			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
 			temp.x = 125;
 			temp.y = 249;
 			return temp;
 		}
 
-		private function ico_15_i():feathers.controls.UIAsset
+		private function ico15_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_15 = temp;
-			temp.name = "ico_15";
-			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
+			ico15 = temp;
+			temp.name = "ico15";
+			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
 			temp.x = 125;
 			temp.y = 190;
 			return temp;
 		}
 
-		private function ico_16_i():feathers.controls.UIAsset
+		private function ico16_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_16 = temp;
-			temp.name = "ico_16";
-			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
+			ico16 = temp;
+			temp.name = "ico16";
+			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
 			temp.x = 78;
 			temp.y = 169;
 			return temp;
 		}
 
-		private function ico_1_i():feathers.controls.UIAsset
+		private function ico1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_1 = temp;
-			temp.name = "ico_1";
-			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
+			ico1 = temp;
+			temp.name = "ico1";
+			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
 			temp.x = 125;
 			temp.y = 125;
 			return temp;
 		}
 
-		private function ico_2_i():feathers.controls.UIAsset
+		private function ico2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_2 = temp;
-			temp.name = "ico_2";
-			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
+			ico2 = temp;
+			temp.name = "ico2";
+			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
 			temp.x = 172;
 			temp.y = 169;
 			return temp;
 		}
 
-		private function ico_3_i():feathers.controls.UIAsset
+		private function ico3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_3 = temp;
-			temp.name = "ico_3";
-			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
+			ico3 = temp;
+			temp.name = "ico3";
+			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
 			temp.x = 214;
 			temp.y = 210;
 			return temp;
 		}
 
-		private function ico_4_i():feathers.controls.UIAsset
+		private function ico4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_4 = temp;
-			temp.name = "ico_4";
-			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
+			ico4 = temp;
+			temp.name = "ico4";
+			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
 			temp.x = 247;
 			temp.y = 125;
 			return temp;
 		}
 
-		private function ico_5_i():feathers.controls.UIAsset
+		private function ico5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_5 = temp;
-			temp.name = "ico_5";
-			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
+			ico5 = temp;
+			temp.name = "ico5";
+			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
 			temp.x = 189;
 			temp.y = 125;
 			return temp;
 		}
 
-		private function ico_6_i():feathers.controls.UIAsset
+		private function ico6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_6 = temp;
-			temp.name = "ico_6";
-			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
+			ico6 = temp;
+			temp.name = "ico6";
+			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
 			temp.x = 170;
 			temp.y = 81;
 			return temp;
 		}
 
-		private function ico_7_i():feathers.controls.UIAsset
+		private function ico7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_7 = temp;
-			temp.name = "ico_7";
-			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
-			temp.x = 214;
+			ico7 = temp;
+			temp.name = "ico7";
+			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
+			temp.x = 215;
 			temp.y = 38;
 			return temp;
 		}
 
-		private function ico_8_i():feathers.controls.UIAsset
+		private function ico8_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_8 = temp;
-			temp.name = "ico_8";
-			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
+			ico8 = temp;
+			temp.name = "ico8";
+			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
 			temp.x = 125;
 			temp.y = 2;
 			return temp;
 		}
 
-		private function ico_9_i():feathers.controls.UIAsset
+		private function ico9_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_9 = temp;
-			temp.name = "ico_9";
-			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
+			ico9 = temp;
+			temp.name = "ico9";
+			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
 			temp.x = 40;
 			temp.y = 37;
-			return temp;
-		}
-
-		private function l_10_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			l_10 = temp;
-			temp.name = "l_10";
-			temp.styleName = "ui/app/beibao/jingmai/daimai/10.png";
-			temp.x = 59;
-			temp.y = 95;
-			return temp;
-		}
-
-		private function l_11_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			l_11 = temp;
-			temp.name = "l_11";
-			temp.styleName = "ui/app/beibao/jingmai/daimai/11.png";
-			temp.x = 14;
-			temp.y = 123;
-			return temp;
-		}
-
-		private function l_12_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			l_12 = temp;
-			temp.name = "l_12";
-			temp.styleName = "ui/app/beibao/jingmai/daimai/12.png";
-			temp.x = 0;
-			temp.y = 140;
-			return temp;
-		}
-
-		private function l_13_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			l_13 = temp;
-			temp.name = "l_13";
-			temp.styleName = "ui/app/beibao/jingmai/daimai/13.png";
-			temp.x = 50;
-			temp.y = 216;
-			return temp;
-		}
-
-		private function l_14_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			l_14 = temp;
-			temp.name = "l_14";
-			temp.styleName = "ui/app/beibao/jingmai/daimai/14.png";
-			temp.x = 119;
-			temp.y = 206;
-			return temp;
-		}
-
-		private function l_15_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			l_15 = temp;
-			temp.name = "l_15";
-			temp.styleName = "ui/app/beibao/jingmai/daimai/15.png";
-			temp.x = 87;
-			temp.y = 176;
-			return temp;
-		}
-
-		private function l_1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			l_1 = temp;
-			temp.name = "l_1";
-			temp.styleName = "ui/app/beibao/jingmai/daimai/1.png";
-			temp.x = 133;
-			temp.y = 134;
-			return temp;
-		}
-
-		private function l_2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			l_2 = temp;
-			temp.name = "l_2";
-			temp.styleName = "ui/app/beibao/jingmai/daimai/2.png";
-			temp.x = 180;
-			temp.y = 177;
-			return temp;
-		}
-
-		private function l_3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			l_3 = temp;
-			temp.name = "l_3";
-			temp.styleName = "ui/app/beibao/jingmai/daimai/3.png";
-			temp.x = 214;
-			temp.y = 139;
-			return temp;
-		}
-
-		private function l_4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			l_4 = temp;
-			temp.name = "l_4";
-			temp.styleName = "ui/app/beibao/jingmai/daimai/4.png";
-			temp.x = 202;
-			temp.y = 124;
-			return temp;
-		}
-
-		private function l_5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			l_5 = temp;
-			temp.name = "l_5";
-			temp.styleName = "ui/app/beibao/jingmai/daimai/5.png";
-			temp.x = 172;
-			temp.y = 96;
-			return temp;
-		}
-
-		private function l_6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			l_6 = temp;
-			temp.name = "l_6";
-			temp.styleName = "ui/app/beibao/jingmai/daimai/6.png";
-			temp.x = 177;
-			temp.y = 47;
-			return temp;
-		}
-
-		private function l_7_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			l_7 = temp;
-			temp.name = "l_7";
-			temp.styleName = "ui/app/beibao/jingmai/daimai/7.png";
-			temp.x = 138;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function l_8_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			l_8 = temp;
-			temp.name = "l_8";
-			temp.styleName = "ui/app/beibao/jingmai/daimai/8.png";
-			temp.x = 51;
-			temp.y = 3;
-			return temp;
-		}
-
-		private function l_9_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			l_9 = temp;
-			temp.name = "l_9";
-			temp.styleName = "ui/app/beibao/jingmai/daimai/9.png";
-			temp.x = 47;
-			temp.y = 47;
 			return temp;
 		}
 

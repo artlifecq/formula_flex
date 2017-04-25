@@ -1,5 +1,7 @@
 package com.rpgGame.appModule.jingmai.render
 {
+	import com.rpgGame.core.utils.MCUtil;
+	
 	import feathers.controls.renderers.BaseDefaultListItemRenderer;
 	
 	public class StoneSelectCellRender extends BaseDefaultListItemRenderer
@@ -24,6 +26,13 @@ package com.rpgGame.appModule.jingmai.render
 			{
 				cell.clearData();
 			}
+		}
+		override public function dispose():void
+		{
+			super.dispose();
+			cell.clearData();
+			MCUtil.removeSelf(cell);
+			cell=null;
 		}
 	}
 }

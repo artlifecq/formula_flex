@@ -365,7 +365,7 @@ package  com.rpgGame.core.utils
 			{
 				return;
 			}
-			var keys:Array=dstHash.keys();
+			var keys:Array=srcHash.keys();
 			var vald:int=0;
 			var vals:int=0;
 			for each (var key:* in keys) 

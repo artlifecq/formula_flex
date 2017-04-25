@@ -40,7 +40,7 @@ package com.rpgGame.coreData.cfg.meridian
 			{
 				splitArr=info.q_meridian_id.split("_");
 				level=int(splitArr[2]);
-				if (level==1)//找等级为1的
+				if (level==0)//找等级为1的
 				{
 					merid=int(splitArr[0]);
 					tmpArr=hash.getValue(merid);

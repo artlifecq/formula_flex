@@ -12,7 +12,7 @@ package com.rpgGame.appModule.jingmai
 	 * @author yfl
 	 * 
 	 */	
-	public class MeridianMainPanelExt extends SkinUI implements ISubPanel
+	public class MeridianMainPanelExt extends SkinUI 
 	{
 		private var _skin:Jingmai_Skin;
 		private var _view:MeridianView;
@@ -77,13 +77,6 @@ package com.rpgGame.appModule.jingmai
 			}
 		}
 		
-		public function onSubShow():void
-		{
-			onShow();
-		}
-		public function onSubHide():void
-		{
-			onHide();
-		}
+		
 	}
 }

@@ -7,6 +7,7 @@ package com.rpgGame.core.utils
 		public static const COLOR_NORMAL:uint=0xcfc6ae;
 		public static const COLOR_GREEN:uint=0x25931b;
 		public static const COLOR_RED:uint=0xd02525;
+		public static const COLOR_YELLOW:uint=0xe8c958;
 		public function GameColorUtil()
 		{
 		}

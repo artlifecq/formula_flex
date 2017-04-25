@@ -12,7 +12,7 @@ package com.rpgGame.appModule.role
 	import starling.display.DisplayObject;
 	import starling.events.TouchEvent;
 	
-	public class SubRolePanel extends SkinUI implements ISubPanel
+	public class SubRolePanel extends SkinUI 
 	{
 		private var _otherInfo:OthersInfo;
 		protected var basicView:BasicRoleView;
@@ -26,7 +26,7 @@ package com.rpgGame.appModule.role
 			initView();
 		}
 		
-		public function onSubShow():void
+		override protected function onShow():void
 		{
 			_roleData=MainRoleManager.actorInfo;
 			attConstrastView.onHide();
@@ -39,8 +39,9 @@ package com.rpgGame.appModule.role
 			basicView.show(_roleData);
 			avatarView.show(_roleData);			
 		}
-		public function onSubHide():void
+		override protected function onHide():void
 		{
+			super.onHide();
 			basicView.onHide();
 			avatarView.onHide();
 			packsView.onHide();

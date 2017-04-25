@@ -1,14 +1,26 @@
 package com.rpgGame.appModule.jingmai.sub
 {
+	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.MeridianSender;
+	import com.rpgGame.appModule.jingmai.MeridianStoneSelectPanelExt;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.core.view.ui.hint.FloatingText;
+	import com.rpgGame.core.view.ui.tip.vo.BaseTipsInfo;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.meridian.MeridianCfg;
+	import com.rpgGame.coreData.clientConfig.Q_global;
 	import com.rpgGame.coreData.clientConfig.Q_meridian;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.type.EffectUrl;
@@ -16,36 +28,186 @@ package com.rpgGame.appModule.jingmai.sub
 	import com.rpgGame.coreData.utils.FilterUtil;
 	import com.rpgGame.netData.meridian.bean.AcuPointInfo;
 	
+	import flash.utils.setInterval;
+	
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
+	import feathers.controls.UIMovieClip;
+	
+	import gs.TweenMax;
+	
+	import org.mokylin.skin.app.beibao.jingmai.mc.UIMovieClipJingmai;
+	import org.mokylin.skin.app.beibao.mc.UIMovieClipBianshi_guang;
 	
 	import starling.events.Event;
 
 	public class MerdianPoint
 	{
-		private var imgPoint:UIAsset;
+		public var imgPoint:UIAsset;
 		//有可能是空，没得下一个点的链接了
-		private var linkLine:UIAsset;
+	
 		private var labAtt:Label;
 		private var _data:AcuPointInfo;
 		private var _acupointId:String;
-		//0 锁定，1，未激活 2放置了
-		private var _state:int;
+	
 		private var _imgIcon:UIAsset;
-		private var _effect:Inter3DContainer;
-		private var _effect3d:InterObject3D;
-		public function MerdianPoint(point:UIAsset,line:UIAsset,lab:Label,acupoint:String)
+		private var _effect:UIMovieClip;
+
+		private var _careAcuId:String;
+		private var _drawLine:MeridianMapLine;
+		private var _tipsInfo:BaseTipsInfo;
+		public function MerdianPoint(point:UIAsset,lab:Label,acupoint:String,mapLine:MeridianMapLine)
 		{
 			this.imgPoint=point;
 			this.imgPoint.touchGroup=true;
-			this.linkLine=line;
+			
+			//this.linkLine.visible=false;
+			//
 			this.labAtt=lab;
 			this._acupointId=acupoint;
-			TipTargetManager.show( imgPoint, TargetTipsMaker.makeTips( TipType.MERIDIAN_TIP, this ) );
+			this._drawLine=mapLine;
+			_tipsInfo=TargetTipsMaker.makeTips( TipType.MERIDIAN_TIP, this );
+			TipTargetManager.show( imgPoint, _tipsInfo);
 			
 		}
-		
-		public function setData(acp:AcuPointInfo):void
+		private function setLineLink(useTween:Boolean):void
+		{
+			if (_drawLine) 
+			{
+				if (useTween) 
+				{
+					_drawLine.tweenDrawInnerLine();
+				}
+				else
+				{
+					_drawLine.drawInner();
+				}
+			}
+		}
+		private function showSubJX(config:Q_meridian,useTween:Boolean):void
+		{
+			
+			setIconFilter(false);
+			var canActive:Boolean=_data.stone.length>0||Mgr.meridianMgr.getCanActive(_data);
+			var hasBetter:Boolean;
+			if (canActive) 
+			{
+				this.labAtt.visible=true;
+				setIcoUrl("ui/app/beibao/icons/icon/bianshi/"+config.q_huponameurl+".png",30,32);
+				hasBetter=Mgr.meridianMgr.getBetterStone(config.q_stone_type,_data.stone.length>0?_data.stone[0]:null).length>0;
+				//没镶嵌石头置灰
+				if (_data.stone.length==0) 
+				{
+					setIconFilter(true);
+					labAtt.text="0";
+					if (hasBetter) 
+					{
+						labAtt.color=GameColorUtil.COLOR_GREEN;
+					}
+					else
+					{
+						labAtt.color=GameColorUtil.COLOR_GRAY;
+					}
+				}
+				else 
+				{
+					var stoneLv:int=ItemConfig.getItemLevelNum(_data.stone[0].itemModelId);
+					labAtt.text=stoneLv+"";
+					if (hasBetter) 
+					{
+						labAtt.color=GameColorUtil.COLOR_GREEN;
+					}
+					else
+					{
+						var qConfig:Q_global=GlobalSheetData.getSettingInfo(505);
+						var maxStoneLv:int=100;
+						if (qConfig) 
+						{
+							maxStoneLv=qConfig.q_int_value;
+						}
+						if (stoneLv>=maxStoneLv) 
+						{
+							labAtt.color=GameColorUtil.COLOR_YELLOW;
+						}
+						else
+						{
+							labAtt.color=GameColorUtil.COLOR_NORMAL;
+						}
+					}
+				}
+				setLineLink(useTween);
+			}
+			//没激活就是锁
+			else
+			{
+				this.labAtt.visible=false;
+				setIcoUrl("ui/app/beibao/icons/suo.png",19,26);
+			}
+			showLoopEffect(hasBetter);
+		}
+		private function showSubCX(config:Q_meridian,useTween:Boolean):void
+		{
+			//等级为0，判断激活么得
+			var needEff:Boolean=false;
+			setIconFilter(false);
+			labAtt.visible=true;
+			labAtt.text=_data.level+"";
+			if (_data.level==0)
+			{
+				
+				//如果是奇穴判断能否镶嵌石头，如果镶嵌了说明解锁过l
+				var canActive:Boolean=Mgr.meridianMgr.getCanActive(_data);
+				//解锁了
+				if (canActive) 
+				{
+				
+					setIcoUrl("ui/app/beibao/icons/icon/bianshi/"+config.q_huponameurl+".png",30,32);
+					setIconFilter(true);
+					//判断能否升级
+					var canLevelUp:Boolean=Mgr.meridianMgr.getCanLevelUp(_data);
+					if (canLevelUp) 
+					{
+						needEff=true;
+						labAtt.color=GameColorUtil.COLOR_GREEN;
+					}
+					else
+					{
+						labAtt.color=GameColorUtil.COLOR_NORMAL;
+					}
+					setLineLink(useTween);
+				}
+				//锁定状态
+				else
+				{
+					labAtt.visible=false;
+					setIcoUrl("ui/app/beibao/icons/suo.png",19,26);
+				}
+			}
+			else
+			{
+				setIcoUrl("ui/app/beibao/icons/icon/bianshi/"+config.q_huponameurl+".png",28,28);
+				needEff=Mgr.meridianMgr.getCanLevelUp(_data);
+				if (needEff) 
+				{
+					labAtt.color=GameColorUtil.COLOR_GREEN;
+				}
+				else
+				{
+					var isMax:Boolean=Mgr.meridianMgr.isMaxAcuLevel(_data);
+					if (isMax) 
+					{
+						labAtt.color=GameColorUtil.COLOR_YELLOW;
+					}
+					else
+					{
+						labAtt.color=GameColorUtil.COLOR_NORMAL;
+					}
+				}
+				setLineLink(useTween);
+			}
+			showLoopEffect(needEff);
+		}
+		public function setData(acp:AcuPointInfo,useTween:Boolean=false):void
 		{
 			this._data=acp;
 			
@@ -54,51 +216,29 @@ package com.rpgGame.appModule.jingmai.sub
 				this._acupointId=data.MeridId+"_"+data.acuPointId+"_"+data.level;
 			}
 			var config:Q_meridian=MeridianCfg.getMeridianCfg(acupointId);
-			var needEff:Boolean=false;
-			//有数据说明开启了的
-			if (_data&&_data.level>0) 
+			this._careAcuId=config.q_need_meridian_id;
+			if (config.q_showtype==0) 
 			{
-				setIcoUrl("ui/app/beibao/icons/icon/bianshi/"+config.q_huponameurl+".png",28,28);
-				_state=2;
-				this.imgPoint.filter=null;
-				if (config.q_showtype==0) 
-				{
-					var canLevelUp:Boolean=Mgr.meridianMgr.getCanLevelUp(_data);
-					if (canLevelUp) 
-					{
-						needEff=true;
-					}
-				}
-				else
-				{
-					var addStone:Vector.<ClientItemInfo>=Mgr.meridianMgr.getBetterStone(config.q_stone_type,_data.stone.length>0?_data.stone[0]:null);
-					if (addStone.length>0) 
-					{
-						needEff=true;
-					}
-				}
+				showSubCX(config,useTween);
 			}
-			//就是锁定
 			else
 			{
-				//判断是否是未激活
-				var canActive:Boolean=Mgr.meridianMgr.getCanActive(_data);
-				if (canActive) 
+				showSubJX(config,useTween);
+			}
+		}
+		private function setIconFilter(bool:Boolean):void
+		{
+			if (_imgIcon) 
+			{
+				if (bool) 
 				{
-					_state=1;
-					setIcoUrl("ui/app/beibao/icons/icon/bianshi/"+config.q_huponameurl+".png",30,32);
-				//	this.imgPoint.filter=FilterUtil.getGrayFilter();
-					needEff=true;
+					_imgIcon.filter=FilterUtil.getGrayFilter();
 				}
 				else
 				{
-					this.imgPoint.filter=null;
-					_state=0;
-					setIcoUrl("ui/app/beibao/icons/suo.png",19,26);
+					_imgIcon.filter=null;
 				}
-				
 			}
-			showLoopEffect(needEff);
 		}
 		public  function showLoopEffect(bool:Boolean):void
 		{
@@ -106,9 +246,17 @@ package com.rpgGame.appModule.jingmai.sub
 			{
 				if (!_effect) 
 				{
-					_effect=new Inter3DContainer();
-					_effect3d=_effect.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_MERIDIAN_LOOP),this.imgPoint.width/2,this.imgPoint.height/2,0);
-					this.imgPoint.addChildAt(_effect,0);
+					_effect = new feathers.controls.UIMovieClip();
+				
+					_effect.name = "mc_bianshi";
+					_effect.autoPlay = false;
+					_effect.height = 64;
+					_effect.styleClass = UIMovieClipBianshi_guang;
+					_effect.width = 64;
+					_effect.x=(this.imgPoint.width-64)/2;
+					_effect.y=(this.imgPoint.height-64)/2;
+					_effect.play();
+					this.imgPoint.addChild(_effect);
 				}
 			}
 			else
@@ -116,24 +264,35 @@ package com.rpgGame.appModule.jingmai.sub
 				if (_effect) 
 				{
 					MCUtil.removeSelf(_effect);
-					MCUtil.removeSelf(_effect3d);
-					_effect3d.dispose();
-					_effect3d=null;
+					_effect.stop();
 					_effect.dispose();
 					_effect=null;
 				}
 			}
 		}
+		private function addEft(render:RenderUnit3D):void
+		{
+			render.play(0);
+		}
 		public function playSuccessEff():void
 		{
 			var eff:Inter3DContainer=new Inter3DContainer();
-			eff.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_MERIDIAN_LOOP),this.imgPoint.width/2,this.imgPoint.height/2,1,function():void
+			this.imgPoint.addChild(eff);
+			eff.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_MERIDIAN_LEVELUP),this.imgPoint.width/2,this.imgPoint.height/2,1,function():void
 			{
 				eff.dispose();
 				MCUtil.removeSelf(eff);
 			}
-			);
+			,addEft);
 			
+//			if (linkLine) 
+//			{
+//				TweenMax.to(this.linkLine,0.6,{autoAlpha:1});
+//			}
+			if (_drawLine) 
+			{
+				_drawLine.tweenDrawInnerLine();
+			}
 		}
 		private function setIcoUrl(url:String,w:int=0,h:int=0):void
 		{
@@ -160,14 +319,11 @@ package com.rpgGame.appModule.jingmai.sub
 				_imgIcon.x=(imgPoint.width-w)/2;
 				_imgIcon.y=(imgPoint.height-h)/2;
 				_imgIcon.styleName=url;
+				_imgIcon.width=w;
+				_imgIcon.height=h;
 				_imgIcon.visible=true;
 			}
 		}
-		public function get state():int
-		{
-			return _state;
-		}
-
 		public function ClickMe():void
 		{
 			// TODO Auto Generated method stub
@@ -186,11 +342,34 @@ package com.rpgGame.appModule.jingmai.sub
 							{
 								MeridianSender.reqLevelUpPoint(_data.MeridId,_data.acuPointId);
 							}
+							return;
 						}
-						else if (Mgr.meridianMgr.getCanLevelUp(_data)) 
+						 if (Mgr.meridianMgr.getCanLevelUp(_data,true)) 
 						{
 							MeridianSender.reqLevelUpPoint(_data.MeridId,_data.acuPointId);
 						}
+					}
+					//判断能否镶嵌石头
+					else
+					{
+						if (config.q_need_level>MainRoleManager.actorInfo.totalStat.level) 
+						{
+							NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7016),[config.q_need_level]);
+							return;
+						}
+						if (config.q_stone_type!=0) 
+						{
+							var items:Vector.<ClientItemInfo>=Mgr.meridianMgr.getBetterStone(config.q_stone_type);
+							if (items.length>0) 
+							{
+								MeridianStoneSelectPanelExt.setData(items,this);
+							}
+							else
+							{
+								NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7017));
+							}
+						}
+						
 					}
 				}
 			}
@@ -206,6 +385,11 @@ package com.rpgGame.appModule.jingmai.sub
 			return _acupointId;
 		}
 
+		public function get careAcuId():String
+		{
+			return _careAcuId;
+		}
 
+		
 	}
 }

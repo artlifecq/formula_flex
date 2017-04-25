@@ -73,7 +73,7 @@ package com.rpgGame.coreData.cfg
 					maps.put(att["q_type"+i],att["q_value"+i]);					
 				}
 			}
-			return _attrDic[att.id] =maps;
+			_attrDic[att.id] =maps;
 			return maps;
 		}
 		public static function getTypeValue(attId:int,retHash:HashMap):void

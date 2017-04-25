@@ -32,14 +32,33 @@ package com.rpgGame.core.utils
 			{
 				tmpLab=clonelab(lab);
 				tmpLab.x=startPos.x+(i%cellNum)*xGe;
-				tmpLab.y=startPos.y;
+				
 				startPos.y=sty+int(i/cellNum)*yGe;
+				tmpLab.y=startPos.y;
 				contianer.addChild(tmpLab);
 				tmpLab.text=CharAttributeType.getCNName(keys[i])+splitStr+attHash.getValue(keys[i]);
 				ret.push(tmpLab);
 			}
 			startPos.y=sty+Math.ceil(len/cellNum)*yGe;
 			return ret;
+		}
+		public static function showAttrInSingleLab(attHash:HashMap,lab:Label,devide:String=",",splitStr:String=":"):void
+		{
+			var keys:Array=attHash.keys();
+			var len:int=keys.length;
+			var str:String="";
+			var ret:Array=[];
+			
+			for (var i:int = 0; i < len; i++) 
+			{
+			
+				str+=CharAttributeType.getCNName(keys[i])+splitStr+attHash.getValue(keys[i]);
+				if (i!=len-1) 
+				{
+					str+=devide;
+				}
+			}
+			lab.text=str;
 		}
 		public static function clonelab(lab:Label):Label
 		{

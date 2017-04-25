@@ -6,6 +6,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.appModule.jingmai.MeridianMainPanelExt;
 	import com.rpgGame.appModule.role.interfaces.ISubPanel;
 	import com.rpgGame.appModule.util.MCUtil;
+	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.role.HeroData;
 	
@@ -31,7 +32,7 @@ package com.rpgGame.appModule.role
 	
 		private var _subRole:SubRolePanel;
 		private var _subMeridian:MeridianMainPanelExt
-		private var _curSub:ISubPanel;
+		private var _curSub:SkinUI
 		public function RolePanel()
 		{
 			this._skin = new beibao_Skin();
@@ -50,15 +51,16 @@ package com.rpgGame.appModule.role
 		{
 			super.show(data, openTable, parentContiner);
 			var sub:String=openTable;
-			if (sub=="") 
+			if (sub==""&&_curSub==null) 
 			{
 				sub=SUB_ROLE;
+				showSubPanel(sub);
 			}
-			showSubPanel(sub);
+			
 		}
 		public function showSubPanel(subType:String):void
 		{
-			var sub:ISubPanel;
+			var sub:SkinUI;
 			switch(subType)
 			{
 				case SUB_ROLE:
@@ -84,13 +86,11 @@ package com.rpgGame.appModule.role
 			if (_curSub) 
 			{
 				MCUtil.removeSelf(_curSub as DisplayObject);
-				_curSub.onSubHide();
 			}
 			_curSub=sub;
 			(_curSub as DisplayObject).x=0;
 			(_curSub as DisplayObject).y=0;
 			this.addChildAt(_curSub as DisplayObject,1);
-			_curSub.onSubShow();
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -134,18 +134,11 @@ package com.rpgGame.appModule.role
 		override protected function onShow():void
 		{
 			super.onShow();
-			if (_curSub) 
-			{
-				_curSub.onSubShow();
-			}
 		}
 		override protected function onHide():void
 		{
 			super.onHide();
-			if (_curSub) 
-			{
-				_curSub.onSubHide();
-			}
+			
 		}
 	}
 }

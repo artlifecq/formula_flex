@@ -56,7 +56,7 @@ package com.rpgGame.appModule.jingmai
 			//MeridianSender.reqMeridianInfo();
 		}
 		
-		protected function onDataChange(event:MeridianEvent):void
+		protected function onGetAllData(event:MeridianEvent):void
 		{
 			// TODO Auto-generated method stub
 			var data:MeridianVo=Mgr.meridianMgr.vo;
@@ -76,17 +76,21 @@ package com.rpgGame.appModule.jingmai
 			
 		}
 		
-		protected function onGetAllData(event:MeridianEvent):void
+		protected function onDataChange(event:MeridianEvent):void
 		{
 			// TODO Auto-generated method stub
+			//先更新单个数据在更新关联数据
 			var data:AcuPointInfo=event.data;
 			if (data) 
 			{
 				var map:MeridianMap=_mapsHash.getValue(data.MeridId);
 				if (map) 
 				{
-					map.updataServerData([data]);
+					map.updataServerData([data],true);
 				}
+				_mapsHash.eachValue(function(map:MeridianMap):void{
+					map.checkCareDataUpdate(data);
+				});
 			}
 		}
 		
@@ -125,14 +129,14 @@ package com.rpgGame.appModule.jingmai
 				content.addChild(tmp);
 				tmp.pos=i;
 				tmp.x=startX*(i+1);
-				tmp.y=185;
+				tmp.y=225;
 				tmp.updataServerData(hashData.getValue(meridianType));
 				_maps.push(tmp);
 				_mapsHash.put(meridianType,tmp);
 			}
 			tweenScroll=new TweenScaleScrollUitlExt(content,_maps,_skin.btn_prev,_skin.btn_next,0.5,_skin.imgBg.width,_skin.imgBg.height,startX);
 			tweenScroll.setCallBack(tweenCompleteCallBack);
-			
+			_skin.mc_name.gotoAndStop(0);
 			this._skin.chk_dengji.isSelected=true;
 			this._skin.chk_shuxing.isSelected=true;
 			this._skin.btn_hecheng.addEventListener(Event.TRIGGERED,onHeCheng);
@@ -155,7 +159,14 @@ package com.rpgGame.appModule.jingmai
 			});
 			
 		}
-		
+		private function clearEffect():void
+		{
+			// TODO Auto Generated method stub
+			_mapsHash.eachValue(function(map:MeridianMap):void{
+				map.hideEffect();
+			});
+			
+		}
 		private function showHideAttr(eve:Event):void
 		{
 			// TODO Auto Generated method stub
@@ -176,6 +187,7 @@ package com.rpgGame.appModule.jingmai
 			{
 				btn.isSelected=true;
 			}
+			_skin.mc_name.gotoAndStop(sbtnArr.indexOf(btn));
 		}
 		
 		private function getSkinn(meridianType:int):StateSkin
@@ -208,11 +220,11 @@ package com.rpgGame.appModule.jingmai
 		}
 		public function onShow():void
 		{
-			EventManager.addEvent(MainPlayerEvent.STAT_MAX_CHANGE,onZhenQiChange);
+			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,onZhenQiChange);
 			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,onLevelChange);
 			Mgr.meridianMgr.addEventListener(MeridianEvent.ALL_DATA_UPATE,onGetAllData);
 			Mgr.meridianMgr.addEventListener(MeridianEvent.MERIDIAN_CHANGE,onDataChange);
-			onZhenQiChange(CharAttributeType.ZHENQI_MAX);
+			onZhenQiChange(CharAttributeType.RES_ZHENQI);
 		}
 		
 		private function onLevelChange(type:int=0):void
@@ -240,18 +252,19 @@ package com.rpgGame.appModule.jingmai
 		private function onZhenQiChange(type:int=0):void
 		{
 			// TODO Auto Generated method stub
-			if (CharAttributeType.ZHENQI_MAX==type) 
+			if (CharAttributeType.RES_ZHENQI==type) 
 			{
-				_skin.lb_zhenqi.text=MainRoleManager.actorInfo.maxZhenqi.toString();
+				_skin.lb_zhenqi.text=MainRoleManager.actorInfo.curZhenqi.toString();
 			}
 			checkForUpdate();
 		}
 		public function onHide():void
 		{
-			EventManager.removeEvent(MainPlayerEvent.STAT_MAX_CHANGE,onZhenQiChange);
+			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,onZhenQiChange);
 			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,onLevelChange);
 			Mgr.meridianMgr.removeEventListener(MeridianEvent.ALL_DATA_UPATE,onGetAllData);
 			Mgr.meridianMgr.removeEventListener(MeridianEvent.MERIDIAN_CHANGE,onDataChange);
+			clearEffect();
 		}
 	}
 }
