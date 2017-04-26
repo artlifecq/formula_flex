@@ -72,6 +72,9 @@ package com.rpgGame.app.cmdlistener
 				case EquipOperateType.WASH_NORMAL:
 					EventManager.dispatchEvent(ItemEvent.ITEM_WASH_MSG,msg);
 					break;
+				case EquipOperateType.COMBO_NORMAL:
+					EventManager.dispatchEvent(ItemEvent.ITEM_COMBO_MSG,msg);
+					break;
 			}
 		}
 		

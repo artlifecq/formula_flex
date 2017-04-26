@@ -164,7 +164,7 @@ package com.rpgGame.appModule.equip
 			var targetGrid:DragDropItem;
 			if(targetEquipInfo){
 				targetGrid=_goodsContainerTarget.getDragDropItemByItemInfo(targetEquipInfo);
-				TouchableUtil.ungray(targetGrid);
+				targetGrid.isGary=false;
 			}
 			
 			
@@ -173,7 +173,7 @@ package com.rpgGame.appModule.equip
 			FaceUtil.SetItemGrid(_targetEquip,targetEquipInfo);
 			_targetEquip.selectImgVisible=false;
 			targetGrid=_goodsContainerTarget.getDragDropItemByItemInfo(targetEquipInfo);
-			TouchableUtil.gray(targetGrid);
+			targetGrid.isGary=true;
 			var p:Point=new Point(targetGrid.x,targetGrid.y);
 			p=targetGrid.parent.localToGlobal(p);
 			p=_targetEquip.parent.globalToLocal(p);
@@ -255,7 +255,7 @@ package com.rpgGame.appModule.equip
 			var targetGrid:DragDropItem;
 			if(targetEquipInfo){
 				targetGrid=_goodsContainerTarget.getDragDropItemByItemInfo(targetEquipInfo);
-				TouchableUtil.ungray(targetGrid);
+				targetGrid.isGary=false;
 				targetEquipInfo=null;
 			}
 			
@@ -448,9 +448,9 @@ package com.rpgGame.appModule.equip
 					continue;
 				}
 				if(info==targetEquipInfo){
-					TouchableUtil.gray(targetGrid);
+					targetGrid.isGary=true;
 				}else{
-					TouchableUtil.ungray(targetGrid);
+					targetGrid.isGary=false;
 				}
 			}
 		}

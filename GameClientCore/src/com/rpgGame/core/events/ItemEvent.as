@@ -62,6 +62,10 @@ package com.rpgGame.core.events
 		 *洗炼消息
 		 */
 		public static const ITEM_WASH_MSG:int = UNIQUEID.NEXT;
+		/**
+		 *合成消息
+		 */
+		public static const ITEM_COMBO_MSG:int = UNIQUEID.NEXT;
 		
 		/**
 		 * 合成选择

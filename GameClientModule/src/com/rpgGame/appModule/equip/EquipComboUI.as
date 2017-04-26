@@ -1,8 +1,10 @@
 package com.rpgGame.appModule.equip
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.appModule.common.ViewUI;
@@ -11,15 +13,20 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.appModule.equip.combo.MainNodeInfo;
 	import com.rpgGame.appModule.equip.combo.SubNodeInfo;
 	import com.rpgGame.core.events.ItemEvent;
+	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.HeChengData;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.clientConfig.Q_hecheng;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.equip.message.ResEquipOperateResultMessage;
+	
+	import app.message.EquipOperateType;
 	
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.UIAsset;
@@ -54,12 +61,12 @@ package com.rpgGame.appModule.equip
 		private var _hechengNum:int=1;
 		//能合成的最大数量
 		private var _hechengMaxNum:int=1;
-		//合成需要消耗的元宝单价
-		private var _useGold:int=0;
-		//合成需要消耗的银两单价
-		private var _useMoney:int=0;
 		
 		private var _nowSelect:Q_hecheng;
+
+		private var cailiaoId:int;
+		private var userGold:Number;
+		private var userMoney:Number;
 		
 		public function EquipComboUI()
 		{
@@ -192,9 +199,6 @@ package com.rpgGame.appModule.equip
 		private function setShowData():void
 		{
 			if(!_nowSelect) return;
-			_useGold=_nowSelect.q_gold;
-			_useMoney=_nowSelect.q_money;
-			
 			var itemInfo:ClientItemInfo=new ClientItemInfo(_nowSelect.q_item_id);
 			FaceUtil.SetItemGrid(icon,itemInfo);
 			icon.selectImgVisible=false;
@@ -209,7 +213,7 @@ package com.rpgGame.appModule.equip
 			if(!_nowSelect) return;
 			var cailiao:Array=JSONUtil.decode(_nowSelect.q_cost_items);
 			if(cailiao==null) return;
-			var cailiaoId:int=parseInt(cailiao[0]);
+			cailiaoId=parseInt(cailiao[0]);
 			var cailiaoNum:int=parseInt(cailiao[1]);
 			var itemByBagNum:int=BackPackManager.instance.getBagItemsCountById(cailiaoId);
 			_hechengMaxNum=itemByBagNum/cailiaoNum;
@@ -253,10 +257,43 @@ package com.rpgGame.appModule.equip
 			_skin.btnMax.addEventListener(Event.TRIGGERED,btnTomaxHandler);
 			_skin.btn_hecheng.addEventListener(Event.TRIGGERED,btnHeChengHandler);
 			
-			EventManager.addEvent(ItemEvent.ITEM_STRENGTH_MSG,updateHechengHandler);
+			EventManager.addEvent(ItemEvent.ITEM_COMBO_MSG,updateHechengHandler);
 			EventManager.addEvent(ItemEvent.ITEM_HECHENG_SELECT,updateHechengHandler);
 			
 			_skin.tree.addEventListener(Event.SELECT,onSelected);
+			
+			EventManager.addEvent(ItemEvent.ITEM_ADD,onFreshItems);
+			EventManager.addEvent(ItemEvent.ITEM_REMOVE_LIST,onRemoveFreshItems);
+			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
+			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
+		}
+		
+		private function updateAmount(type:int=3):void
+		{
+			if(type!=CharAttributeType.RES_GOLD&&type!=CharAttributeType.RES_BIND_GOLD&&type!=CharAttributeType.RES_MONEY&&type!=CharAttributeType.RES_BIND_MONEY){
+				return;
+			}
+			userGold=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_GOLD);
+			userMoney=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
+			setShowData();
+		}
+		
+		
+		private function onFreshItems(info:ClientItemInfo=null):void
+		{
+			if(info.containerID==ItemContainerID.BackPack&&info.cfgId==cailiaoId){//背包里的合成对应合成材料
+				setShowData();
+			}
+		}
+		
+		private function onRemoveFreshItems(list:Vector.<ClientItemInfo>):void
+		{
+			for each(var item:ClientItemInfo in list){
+				if(item.containerID==ItemContainerID.BackPack&&item.cfgId==cailiaoId){//有一个是就去更新展示了
+					setShowData();
+					break;
+				}
+			}
 		}
 		
 		private function onSelected(e:Event):void
@@ -308,17 +345,18 @@ package com.rpgGame.appModule.equip
 		private function getTitleText(title:String):String
 		{
 			var des:String="";
-			var userGold:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD);
-			var userMoney:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
-			if(_useGold*_hechengNum!=0&&_useGold*_hechengNum<=userGold){
+//			var userGold:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD);
+//			var userMoney:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
+		/*	if(_useGold*_hechengNum!=0&&_useGold*_hechengNum<=userGold){
 				des=HtmlTextUtil.getTextColor(0x55BD15,(_useGold*_hechengNum).toString()+"元宝");//绿色
 			}else if(_useGold*_hechengNum!=0&&_useGold*_hechengNum>userGold){
 				des=HtmlTextUtil.getTextColor(0xd02525,(_useGold*_hechengNum).toString()+"元宝");//红色
-			}
-			if(_useMoney*_hechengNum!=0&&_useMoney*_hechengNum<=userMoney){
-				des+=HtmlTextUtil.getTextColor(0x55BD15,(_useMoney*_hechengNum).toString()+"银两");//绿色
-			}else if(_useMoney*_hechengNum!=0&&_useMoney*_hechengNum>userMoney){
-				des+=HtmlTextUtil.getTextColor(0xd02525,(_useMoney*_hechengNum).toString()+"银两");//红色
+			}*/
+			var needMoney:int=_nowSelect.q_money*_hechengNum;
+			if(needMoney<=userMoney){
+				des+=HtmlTextUtil.getTextColor(0x55BD15,(needMoney).toString()+"银两");//绿色
+			}else if(needMoney>userMoney){
+				des+=HtmlTextUtil.getTextColor(0xd02525,(needMoney).toString()+"银两");//红色
 			}
 			return title+":"+des;
 		}
@@ -366,25 +404,20 @@ package com.rpgGame.appModule.equip
 			if(itemByBagNum<cailiaoNum)
 			{
 				//提示材料不足
-				
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6012));
 				return;
-			}else if(_useGold*_hechengNum!=0&&_useGold*_hechengNum>MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD))
-			{
-				//提示元宝不足
-				
-				return;
-			}else if(_useMoney*_hechengNum!=0&&_useMoney*_hechengNum>MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY)){
+			}else if(_nowSelect.q_money*_hechengNum>userMoney){
 				//提示银两不足
-				
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6012));
 				return;
 			}
-			//			ItemSender.reqItemCompositionMessage(1,_nowSelect.q_id,_hechengNum);
+			ItemSender.reqItemCompositionMessage(EquipOperateType.COMBO_NORMAL,_nowSelect.q_id,_hechengNum);
 		}
 		
 		/**合成结果反馈*/
 		private function updateHechengHandler(msg:ResEquipOperateResultMessage):void
 		{
-			if(msg.opaque==1&&msg.result==1)
+			if(msg.result==1)
 			{
 				setCaiLiaoData();
 			}

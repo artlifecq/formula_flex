@@ -29,6 +29,14 @@ package app.message
 		 * 洗炼
 		 */
 		public static const WASH_NORMAL:uint = rEnum.next;
+		/**
+		 * 继承
+		 */
+		public static const INHERIT_NORMAL:uint = rEnum.next;
+		/**
+		 * 合成
+		 */
+		public static const COMBO_NORMAL:uint = rEnum.next;
 		
 		public function EquipOperateType()
 		{

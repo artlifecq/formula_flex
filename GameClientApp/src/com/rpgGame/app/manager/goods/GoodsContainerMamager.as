@@ -260,10 +260,11 @@ package com.rpgGame.app.manager.goods
 		
 		public function removeItems(grids:Vector.<int>):void
 		{
+			var removeList:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
 			for(var i:int=0;i<grids.length;i++){
-				removeItemByIndex(grids[i]);
+				removeList.push(removeItemByIndex(grids[i]));
 			}
-			EventManager.dispatchEvent(ItemEvent.ITEM_REMOVE_LIST);
+			EventManager.dispatchEvent(ItemEvent.ITEM_REMOVE_LIST,removeList);
 		}
 				
 		
