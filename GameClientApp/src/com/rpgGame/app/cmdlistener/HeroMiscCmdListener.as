@@ -21,6 +21,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.core.events.SystemTimeEvent;
+	import com.rpgGame.core.events.role.RoleEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.lang.LangText;
@@ -143,6 +144,13 @@ package com.rpgGame.app.cmdlistener
 		
 		private function RecvSCCurrencyChangeMessage(msg:SCCurrencyChangeMessage):void
 		{
+            if (CharAttributeType.RES_JING_ZHENG == msg.curType) {
+                EventManager.dispatchEvent(RoleEvent.UPDATE_NEEDLE, 
+                    MainRoleManager.actor, 
+                    msg.value, 
+                    (MainRoleManager.actor.data as HeroData).totalStat.getResData(msg.curType));
+            }
+            
 			MainRoleManager.actorInfo.totalStat.setResData(msg.curType,msg.value);
 			EventManager.dispatchEvent(MainPlayerEvent.STAT_RES_CHANGE,msg.curType);
 		}
