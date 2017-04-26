@@ -157,6 +157,10 @@ package com.rpgGame.app.manager
 			var next:Q_meridian=getNextLevelAcu(acu);
 			if (!next) 
 			{
+				if (bShowNotice) 
+				{
+					NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7019));
+				}
 				return false;
 			}
 			if (now.q_need_level>MainRoleManager.actorInfo.totalStat.level) 
@@ -171,7 +175,7 @@ package com.rpgGame.app.manager
 			{
 				if (bShowNotice) 
 				{
-					NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(705));
+					NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7015));
 				}
 				return false;
 			}
