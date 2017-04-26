@@ -1,7 +1,7 @@
 package app.message
 {
 	import com.rpgGame.coreData.rEnum;
-
+	
 	/**
 	 *装备操作类型
 	 *@author dik
@@ -29,6 +29,10 @@ package app.message
 		 * 洗炼
 		 */
 		public static const WASH_NORMAL:uint = rEnum.next;
+		/**
+		 * 继承
+		 * */
+		public static const JICHENG_NORMAL:uint = rEnum.next;
 		
 		public function EquipOperateType()
 		{
