@@ -32,10 +32,10 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.fight.message.ResAttackVentToClientMessage;
 	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
 	import com.rpgGame.netData.fight.message.ResFightFailedBroadcastMessage;
+	import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
 	import com.rpgGame.netData.fight.message.SCBuffSkillMessage;
 	import com.rpgGame.netData.fight.message.SCCancelSkillMessage;
 	import com.rpgGame.netData.structs.Position;
-	import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
 	
 	import flash.geom.Point;
 	
@@ -128,12 +128,21 @@ package com.rpgGame.app.cmdlistener.scene
 		
 		private function onResAttackVentToClientMessage(msg:ResAttackVentToClientMessage):void
 		{
+			
+			var skillId:int=msg.fightType&0xffffff;
+			var skillData:Q_skill_model=SpellDataManager.getSpellData(skillId);
+			if(skillData!=null&&skillData.q_performType==1&&msg.playerid.ToGID() != MainRoleManager.actorID)//判断是否是战魂但是不是自己的技能  ---yt
+			{
+				return;
+			}
+			
+			
 			GameLog.addShow("技能流水号为： 对地\t" + msg.uid  + "\n" + "服务器给的点为：\t" + msg.pos.x +"_" + msg.pos.y);
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
 			ReleaseSpellHelper.releaseSpell(info);
 			
-			var skillId:int=msg.fightType&0xffffff;
+			
 			EventManager.dispatchEvent(SkillEvent.SKILL_ATTACK,skillId);
 		}
 		

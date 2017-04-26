@@ -15,7 +15,7 @@ package com.rpgGame.netData.fight.bean{
 	 * 游戏实体战斗结果
 	 */
 	public class AttackResultInfo extends Bean {
-	
+		
 		//攻击者Id
 		private var _attackerId: long;
 		
