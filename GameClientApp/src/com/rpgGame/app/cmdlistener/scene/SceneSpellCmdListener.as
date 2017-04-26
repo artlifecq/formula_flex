@@ -139,7 +139,7 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			GameLog.addShow("技能流水号为： 对地\t" + msg.uid  + "\n" + "服务器给的点为：\t" + msg.pos.x +"_" + msg.pos.y);
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
-			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);0
+			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
 			if(skillData.q_performType==1)
 				ReleaseSpellHelper.fightSoulSpell(info);
 			else
