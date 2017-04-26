@@ -6,6 +6,7 @@ package com.rpgGame.appModule.task
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
+	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
@@ -17,7 +18,6 @@ package com.rpgGame.appModule.task
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.task.bean.TaskInfo;
-
 	
 	import feathers.controls.Button;
 	import feathers.controls.Label;
@@ -25,7 +25,6 @@ package com.rpgGame.appModule.task
 	
 	import org.mokylin.skin.mainui.renwu.Zhuxian_Renwu;
 	
-
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 
@@ -138,9 +137,13 @@ package com.rpgGame.appModule.task
 		
 		private function subFinish():void
 		{
-			hide();
-			okBut.isEnabled=false;
-			TaskSender.SendfinishTaskMessage(TaskMissionManager.currentMainTaskInfo.taskId);
+			if(TaskMissionManager.mainTaskInfo!=null&&TaskMissionManager.getMainTaskIsFinish()&&this.visible&&this.parent!=null)
+			{
+				//hide();
+				okBut.isEnabled=false;
+				TaskSender.SendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);	
+			}
+			
 			
 		}
 		
@@ -149,15 +152,15 @@ package com.rpgGame.appModule.task
 		private function setView():void
 		{
 			hideView();
-			var task:TaskInfo=TaskMissionManager.currentMainTaskInfo;
-			var taskData:Q_mission_base=TaskMissionManager.currentMainTaskData;
+			var task:TaskInfo=TaskMissionManager.mainTaskInfo;
+			var taskData:Q_mission_base=TaskMissionManager.mainTaskData;
 			
 			if(task!=null&&taskData!=null)
 			{
 				setTitle(taskData.q_party_name,taskData.q_name,taskData.q_deal_mission);
-				setRewordView(taskData.q_reword_id);
+				TaskUtil.setRewordInfo(taskData.q_reword_id,icoList,icoBgList,true);
 				
-				if(TaskMissionManager.currentTaskIsFinish)
+				if(TaskMissionManager.getMainTaskIsFinish())
 				{
 					okBut.isEnabled=true;
 				}
@@ -176,41 +179,10 @@ package com.rpgGame.appModule.task
 			speakLabel.htmlText=TaskMissionCfgData.getSegmentTxtById(deal);
 		}
 		
-		/**设置奖励物品*/
-		private function setRewordView(rid:int):void
-		{
-			var rewordList:Array=TaskMissionCfgData.getRewordByTaskid(rid);
-			var item:Q_item;
-			var i:int,length:int;
-			length=rewordList.length;
-			for(i=0;i<length;i++)
-			{
-				item=ItemConfig.getQItemByID(rewordList[i].mod);
-				if(item&&i<icoList.length)
-				{
-					icoList[i].setIconResName(ClientConfig.getItemIcon(""+item.q_icon,IcoSizeEnum.ICON_42));
-					icoList[i].setSubString(rewordList[i].num);
-					setItemTips(icoList[i],item,int(rewordList[i].num));
-					icoList[i].visible=true;
-					icoBgList[i].visible=true;
-				}
-				
-			}
-		}
-		private function setItemTips(grid:IconCDFace,qit:Q_item,num:int):void
-		{
-			
-			var item:ItemInfo = new ItemInfo();
-			item.itemModelId = qit.q_id;
-			item.num = num;
-			var info:ClientItemInfo=ItemUtil.convertClientItemInfo(item);
-			FaceUtil.SetItemGrid(grid,info,true);
-		}
-		
 		/**判断倒计时*/
 		private function timeInit():void
 		{
-			if(TaskMissionManager.currentTaskIsFinish)
+			if(TaskMissionManager.getMainTaskIsFinish())
 			{
 				timer.start();
 				currtimer=TIMERDATA;
@@ -226,12 +198,19 @@ package com.rpgGame.appModule.task
 		/**设置倒计时文字*/
 		private function setTimeText():void
 		{
-			timerLabel.htmlText=currtimer+"秒后自动领取奖励";
-			currtimer--;
-			if(currtimer==0)
+			if(this.visible&&this.parent!=null)
+			{
+				timerLabel.htmlText=currtimer+"秒后自动领取奖励";
+				if(currtimer==0)
+				{
+					timer.stop();
+					subFinish();
+				}
+				currtimer--;
+			}
+			else
 			{
 				timer.stop();
-				subFinish();
 			}
 		}
 		

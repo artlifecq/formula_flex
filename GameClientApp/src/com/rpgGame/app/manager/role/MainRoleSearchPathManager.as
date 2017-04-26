@@ -171,7 +171,7 @@ package com.rpgGame.app.manager.role
 			var mapID : int = SceneSwitchManager.currentMapId;
 			if (mapID == targetSceneId)
 			{
-				if (pos.x > -1 && (-pos.z)> -1)//if (pos.x > -1 && pos.z> -1)
+				if (pos.x > -1 && (-pos.y)> -1)//if (pos.x > -1 && pos.z> -1)
 				{
 					RoleStateUtil.walkToPos(role, pos, spacing, _data, onArrive,null,null,noWalk);
 					EventManager.dispatchEvent(WorldMapEvent.MAP_WAYS_GUILD_UPDATA_PATHS);
@@ -188,7 +188,7 @@ package com.rpgGame.app.manager.role
 					//如果路径存在
 					if (sceneArr && sceneArr.length > 0)
 					{
-						sceneArr.push(new SearchMapData(targetSceneId, pos.x, pos.z, spacing));
+						sceneArr.push(new SearchMapData(targetSceneId, pos.x, pos.y, spacing));
 						_scenePath = sceneArr;
 						_isAutoFinding = true;
 						trace("auto_SearchPath_CrossScene_Start");

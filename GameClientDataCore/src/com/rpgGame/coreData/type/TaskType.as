@@ -18,13 +18,13 @@ package com.rpgGame.coreData.type
 		public static var SUB_CONVERSATION:int = 1;
 		/**2为打怪数量*/
 		public static var SUB_MONSTER:int = 2;
-		/**3收集物品*/
+		/**3杀怪获得道具*/
 		public static var SUB_ITEM:int = 3;
 		/**4采集任务*/
 		public static var SUB_GATHER:int = 4;
 		/**5使用道具*/
 		public static var SUB_USEITEM:int = 5;
-		/**6退出副本*/
+		/**6副本*/
 		public static var SUB_QUIT_ZONE:int = 6;
 
 		

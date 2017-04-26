@@ -814,6 +814,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var mapId : int = msg.mapId;
 			MainRoleManager.actorInfo.mapID = mapId;
 			SceneSwitchManager.changeMap();
+			
 		}
 		
 		/**

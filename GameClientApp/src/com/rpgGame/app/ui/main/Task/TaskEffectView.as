@@ -25,18 +25,21 @@ package com.rpgGame.app.ui.main.Task
 		private function init():void
 		{
 			effectSk=new Inter3DContainer();
-			effectSk.x =-150;
+			effectSk.x =-60;
 			effectSk.y = 20;
+			_skin.task_effect.visible=true;
 			_skin.task_effect.addChild(effectSk);
-			finishEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_WANCHENGRENWU),0,0,0,onPlayComple);
+			
+			
+			finishEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_WANCHENGRENWU),false,onPlayComple);//
 			newtaskEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_XINRENWU));
 			
 		}
 		
-		
+		/**播放完成特效*/
 		public function playFinishEffect():void
 		{
-			finishEffect.playEffect(1,0.25);
+			finishEffect.playEffect(1,1);
 			isfinish=true;
 		}
 		private function onPlayComple(self:InterObject3D):void
@@ -49,11 +52,15 @@ package com.rpgGame.app.ui.main.Task
 			}
 			
 		}
+		/**播放新任务特效*/
 		public function playNewtaskEffect():void
 		{
+			
+			
+			//newtaskEffect.playEffect(1,0.25);
 			if(!isfinish)
 			{
-				newtaskEffect.playEffect(1,0.25);
+				newtaskEffect.playEffect(1,1);
 				isNew=false;
 			}
 			else

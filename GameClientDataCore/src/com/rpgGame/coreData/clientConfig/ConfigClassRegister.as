@@ -120,6 +120,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_mission_base:String = "data.Q_mission_base";
 		/**  任务奖励配置表	 */
 		public static const Q_mission_reword:String = "data.Q_mission_reword";
+		/** 		 */
+		public static const Q_mission_section:String = "data.Q_mission_section";
 		/**  任务对话配置表(1-20000为主线任务对应的对话id，20001-30000是支线任务对话id)			 */
 		public static const Q_mission_segment:String = "data.Q_mission_segment";
 		/**  通知列表			 */
@@ -218,6 +220,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_meridian", com.rpgGame.coreData.clientConfig.Q_meridian);
 			regClass("data.Q_mission_base", com.rpgGame.coreData.clientConfig.Q_mission_base);
 			regClass("data.Q_mission_reword", com.rpgGame.coreData.clientConfig.Q_mission_reword);
+			regClass("data.Q_mission_section", com.rpgGame.coreData.clientConfig.Q_mission_section);
 			regClass("data.Q_mission_segment", com.rpgGame.coreData.clientConfig.Q_mission_segment);
 			regClass("data.Q_notify", com.rpgGame.coreData.clientConfig.Q_notify);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);

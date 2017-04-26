@@ -25,11 +25,17 @@ package com.rpgGame.app.sender
 		
 		
 		
-		
-		public static function SendfinishTaskMessage(tid:long):void
+		/**
+		 * 
+		 * @param tid 任务id
+		 * @param multiple 奖励倍数
+		 * 
+		 */		
+		public static function SendfinishTaskMessage(tid:long,multiple=1):void
 		{
 			var msg:ReqfinishTaskMessage = new ReqfinishTaskMessage();
 			msg.taskId=tid;
+			msg.multiple=multiple;
 			SocketConnection.send(msg);
 		}
 		

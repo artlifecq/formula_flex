@@ -2,9 +2,11 @@ package com.rpgGame.app.ui.main.Task
 {
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.utils.FaceUtil;
+	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
@@ -140,6 +142,8 @@ package com.rpgGame.app.ui.main.Task
 			_skin.primary_box.visible=key;
 		}
 		
+		
+		
 		public function hideInfo():void
 		{
 			titleLable.htmlText="";
@@ -160,73 +164,50 @@ package com.rpgGame.app.ui.main.Task
 			
 		}
 		
+		public function hideKillBut():void
+		{
+			
+			var i:int;
+			for(i=0;i<killButList.length;i++)
+			{
+				killButList[i].visible=false;
+			}
+			
+		}
+		
+		
 		public function leadTaskView():void
 		{
+			if(!_skin.primary_box.visible)return;
 			hideInfo();
-			var task:TaskInfo=TaskMissionManager.currentMainTaskInfo;
-			var taskData:Q_mission_base=TaskMissionManager.currentMainTaskData;
+			var task:TaskInfo=TaskMissionManager.mainTaskInfo;
+			var taskData:Q_mission_base=TaskMissionManager.mainTaskData;
 			
 			if(task!=null&&taskData!=null)
 			{
 				setTitle(taskData.q_party_name,taskData.q_name,taskData.q_describe);
-				
-				setTimeout(function():void{
-					setParcent(taskData.q_party_id,taskData.q_node_id);
-					setKillbutView(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist);
-					setRewordView(taskData.q_reword_id);
-					setUisite();
-				},500);
-				
-				
-				/*var i:int;
-				var finiStr:Array;
-				if(taskData.q_mission_type==TaskType.SUB_CONVERSATION)
-				{
-					
-					setParcent(0,1);
-					
-				}
-				else
-				{
-					var max:int,current:int,percent:int;
-					var finiList:Array=taskData.q_finish_information_str.split(";");
-					
-					for(i=0;i<finiList.length;i++)
-					{
-						finiStr=finiList[i].split(",");
-						if(finiStr.length==2)
-						{
-							
-						}
-						
-					}
-					//max=
-					jindu.labelDisplay.text="0%";
-					jindu.pro_jindu.maximum=1;
-					jindu.pro_jindu.value=0;
-					//kill1Label.htmlText=taskData.q_finish_describe+"<font color='#cfc6ae'>(2/10)</font>";
-				}
-				*/
-				
-				//jindu.labelDisplay.text="40%";
+				setParcent(taskData.q_party_id,taskData.q_node_id);
+				setTaskButView(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,taskData.q_finish_npc);
+				TaskUtil.setRewordInfo(taskData.q_reword_id,icoList,icoBgList);
+				setUisite();
+			}
 			
+		}
+		public function upleadTaskView():void
+		{
+			
+			if(!_skin.primary_box.visible)return;
+			var task:TaskInfo=TaskMissionManager.mainTaskInfo;
+			var taskData:Q_mission_base=TaskMissionManager.mainTaskData;
+			
+			if(task!=null&&taskData!=null)
+			{
+				setTaskButView(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,taskData.q_finish_npc);
 				
 			}
 			
 		}
 		
-		public function changeTaskView():void
-		{
-			var task:TaskInfo=TaskMissionManager.currentMainTaskInfo;
-			var taskData:Q_mission_base=TaskMissionManager.currentMainTaskData;
-			if(task!=null&&taskData!=null)
-			{
-				setKillbutView(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist);
-			}
-			
-			
-			
-		}
 		
 		/**设置标题详情*/
 		private function setTitle(party:String,name:String,describe:String):void
@@ -245,140 +226,30 @@ package com.rpgGame.app.ui.main.Task
 			jindu.pro_jindu.value=nid;
 			
 		}
-		/**设置完成进度*/
-		/*private function setParcent(current:int,maximum:int):void
+		
+		private function setTaskButView(type:int,describe:String,information:String,sub:Vector.<TaskSubRateInfo>,npc:int):void
 		{
-			var parcent:int=int((current/maximum)*100);
-			jindu.labelDisplay.text=parcent+"%";
-			jindu.pro_jindu.maximum=maximum;
-			jindu.pro_jindu.value=current;
-			
-		}*/
-		/**设置任务内容*/
-		private function setKillbutView(type:int,describe:String,information:String,sub:Vector.<TaskSubRateInfo>):void
-		{
-			var finiStr:Array;
-			var informationList:Array=information.split(";");
-			var crrentParcent:int=0,allParcent:int=0;
-			var i:int,j:int,length:int;
-			length=informationList.length;
-			for(i=0;i<length;i++)
+			if(type!=TaskType.SUB_CONVERSATION&&TaskMissionManager.getMainTaskIsFinish()&&TaskMissionManager.getMainTaskHaveNpc())
 			{
-				if(informationList[i]&&informationList[i]!="")
-				{
-					var text:String="";
-					var modeid:int=0;
-					var count:int=0,finish:int;
-					var modeArr:Array=informationList[i].split(",");
-					if(modeArr.length==2)
-					{
-						modeid=int(modeArr[0]);
-						finish=int(modeArr[1]);
-					}
-					if(modeid!=0)
-					{
-						text=TaskMissionCfgData.getTaskDescribe(describe,modeid);
-					}
-					for(j=0;j<sub.length;j++)
-					{
-						if(modeid==sub[j].modelId)
-						{
-							count=sub[j].num;
-							break;
-						}
-					}
-					if(type!=TaskType.SUB_CONVERSATION)
-					{
-						text+="<font color='#cfc6ae'>("+count+"/"+finish+")</font>";
-					}
-					if(count==finish)
-					{
-						text+="(已完成)";
-					}
-					crrentParcent+=count;
-					allParcent+=finish;
-					
-					setKillLabelText(killButList[i],text);
-					
-					
-				}
-				
-			}
-			
-			/*if(type==TaskType.SUB_CONVERSATION)
-			{
-				crrentParcent=0;
-				allParcent=1;
-				TaskMissionManager.currentMainTaskIsfinish=true;
+				setSubbutView(npc);
 			}
 			else
 			{
-				TaskMissionManager.currentMainTaskIsfinish=crrentParcent<allParcent?false:true;
-				
-			}*/
-			
-			
-			
-			
-			
-			
-		}
-		/**设置奖励物品*/
-		private function setRewordView(rid:int):void
-		{
-			var rewordList:Array=TaskMissionCfgData.getRewordByTaskid(rid);
-			if(rewordList==null)return;
-			var item:Q_item;
-			var i:int,length:int,idd:int;
-			length=rewordList.length;
-			idd=0;
-			for(i=0;i<length;i++)
-			{
-				if(rewordList[i].show==1)
-				{
-					item=ItemConfig.getQItemByID(rewordList[i].mod);
-					if(item&&i<icoList.length)
-					{
-						icoList[idd].setIconResName(ClientConfig.getItemIcon(""+item.q_icon,IcoSizeEnum.ICON_48));
-						icoList[idd].setSubString(rewordList[i].num);
-						icoList[idd].visible=true;
-						icoBgList[idd].visible=true;
-						setItemTips(icoList[idd],item,int(rewordList[i].num));
-						idd++;
-					}
-				}
-				
-				
+				TaskUtil.setGotargetInfo(type,describe,information,sub,killButList);
 			}
+			
 		}
 		
-		private function setItemTips(grid:IconCDFace,qit:Q_item,num:int):void
+		private function setSubbutView(npcid:int):void
 		{
-			
-			var item:ItemInfo = new ItemInfo();
-			item.itemModelId = qit.q_id;
-			item.num = num;
-			var info:ClientItemInfo=ItemUtil.convertClientItemInfo(item);
-			FaceUtil.SetItemGrid(grid,info,true);
+			hideKillBut();
+			var text:String="回复:<u>"+MonsterDataManager.getMonsterName(npcid)+"</u><font color='#55bd15'>(已完成)</font>";
+			TaskUtil.setGotargetLabelText(1,killButList[0],text);
+			setUisite();
 		}
 		
-		private function setKillLabelText(but:SkinnableContainer,t:String):void
-		{
-			
-			var rItme:Renwu_Item;
-			if(but!=null&&but.skin!=null)
-			{
-				rItme=but.skin as Renwu_Item;
-			}
-			if(rItme!=null)
-			{
-				rItme.labelDisplay.htmlText=t;//t;
-				rItme.btn_send.x=rItme.labelDisplay.textWidth+2;
-				but.visible=true;
-			}
-			
-			
-		}
+		
+	
 		
 		/**设置UI位置*/
 		private function setUisite():void
@@ -388,7 +259,7 @@ package com.rpgGame.app.ui.main.Task
 			{
 				if(skinList[i].visible==true)
 				{
-					skinList[i].y=skinList[count].y+skinList[count].height+5;
+					skinList[i].y=skinList[count].y+skinList[count].height+3;
 					count=i;
 				}
 			}
