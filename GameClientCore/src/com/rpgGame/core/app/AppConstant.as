@@ -255,7 +255,7 @@ package com.rpgGame.core.app
 		public static var CROWN_BEEN_INVITE_UNION_PANEL : String = createAppInfo("crown.CrownBeenInviteUnionPanel");
 		
 		/** 坐骑主面板 **/
-		public static var MOUNT_PANEL:String = createAppInfo( "mount.MountPanel","mount" );
+		public static var MOUNT_PANEL:String = createAppInfo( "mount.MountPanel","zuoqi" );
 		/** 坐骑转化面板 **/
 		public static var MOUNT_CHANGE_PANEL:String = createAppInfo( "mount.panel.MountChangePanel","mount" );
 		/** 坐骑繁育面板 **/
