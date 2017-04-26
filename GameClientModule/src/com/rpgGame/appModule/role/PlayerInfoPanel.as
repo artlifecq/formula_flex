@@ -19,23 +19,23 @@ package com.rpgGame.appModule.role
 			super();
 		}
 		
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
-		{
-			_data = data;
-			_openTab = openTable;
-			if (parentContiner == null)
-			{
-				parentContiner = StarlingLayerManager.appUILayer;
-			}
-			_parentContainer = parentContiner;
-			_roleData=data.roleData as HeroData;
-			_otherInfo=data.info as OthersInfo;
-			packsView.onHide();
-			refresh();
-			_parentContainer.addChild(this);
-			attConstrastView.show(_roleData);
-			basicView.show(_roleData);
-			avatarView.show(_roleData,_otherInfo.equips);
-		}
+//		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
+//		{
+//			_data = data;
+//			_openTab = openTable;
+//			if (parentContiner == null)
+//			{
+//				parentContiner = StarlingLayerManager.appUILayer;
+//			}
+//			_parentContainer = parentContiner;
+//			_roleData=data.roleData as HeroData;
+//			_otherInfo=data.info as OthersInfo;
+//			packsView.onHide();
+//			refresh();
+//			_parentContainer.addChild(this);
+//			attConstrastView.show(_roleData);
+//			basicView.show(_roleData);
+//			avatarView.show(_roleData,_otherInfo.equips);
+//		}
 	}
 }

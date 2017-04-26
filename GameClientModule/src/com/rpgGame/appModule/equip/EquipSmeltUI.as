@@ -56,7 +56,6 @@ package com.rpgGame.appModule.equip
 	import gs.TweenMax;
 	import gs.easing.Expo;
 	
-	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhuangbei.Zhuangbei_left;
 	import org.mokylin.skin.app.zhuangbei.qianghua.TitileHead;
@@ -65,6 +64,7 @@ package com.rpgGame.appModule.equip
 	
 	import starling.display.DisplayObject;
 	import starling.events.Event;
+	import com.gameClient.utils.HashMap;
 	
 	/**
 	 *装备洗练
@@ -373,7 +373,7 @@ package com.rpgGame.appModule.equip
 			var attValue:Q_att_values=AttValueConfig.getAttInfoById(q_attr_id);
 			var maps:HashMap=AttValueConfig.getTypeValueMap(attValue);
 			var keys:Array=maps.keys();
-			var values:Array=maps.getValues();
+			var values:Array=maps.values();
 			var result:String="";
 			for(var i:int=0;i<keys.length;i++){
 				var name:String=CharAttributeType.getCNName(keys[i]);

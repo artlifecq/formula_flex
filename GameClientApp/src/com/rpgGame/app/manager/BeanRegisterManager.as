@@ -16,6 +16,7 @@
 	import com.rpgGame.app.cmdlistener.LookCmdListener;
 	import com.rpgGame.app.cmdlistener.LostSkillCmdListener;
 	import com.rpgGame.app.cmdlistener.MailCmdListener;
+	import com.rpgGame.app.cmdlistener.MeridianCmdListerner;
 	import com.rpgGame.app.cmdlistener.MiscCmdListener;
 	import com.rpgGame.app.cmdlistener.NotifyCmdListener;
 	import com.rpgGame.app.cmdlistener.NpcCmdListener;
@@ -135,6 +136,7 @@
 			register("FightSoulCmdListener",FightSoulCmdListener);//战魂
 			register("NotifyCmdListener",NotifyCmdListener);//通知消息管理
 			register("LostSkillCmdListener",LostSkillCmdListener);//绝学
+			register("MeridianCmdListerner",MeridianCmdListerner);
 		}
 	}
 }
