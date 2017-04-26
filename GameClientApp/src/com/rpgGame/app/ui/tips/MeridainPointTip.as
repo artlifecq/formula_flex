@@ -64,7 +64,7 @@ package com.rpgGame.app.ui.tips
 			MCUtil.removeSelf(_skin.lb_dengji);
 			_initStr=_skin.lb_Stone.text;
 			labList=[];
-			Mgr.meridianMgr.addEventListener(MeridianEvent.MERIDIAN_CHANGE,onDataChange);
+			Mgr.meridianMgr.addEventListener(MeridianEvent.MERDIAN_UPDATE_TIP,onDataChange);
 		}
 		
 		public function setTipData(data:*):void
@@ -225,7 +225,7 @@ package com.rpgGame.app.ui.tips
 				lb.y=startY;
 				startY+=lb.height+2;
 				isOk=qMer.q_need_level<=MainRoleManager.actorInfo.totalStat.level;
-				lb.htmlText=HtmlTextUtil.getTextColor(isOk?GameColorUtil.COLOR_GREEN:GameColorUtil.COLOR_RED,"角色等级:"+MainRoleManager.actorInfo.totalStat.level+"级");
+				lb.htmlText=HtmlTextUtil.getTextColor(isOk?GameColorUtil.COLOR_GREEN:GameColorUtil.COLOR_RED,"角色等级:"+qMer.q_need_level+"级");
 				lb.width=lb.textWidth;
 			}
 			if (qMer.q_need_meridian_id!=""&&qMer.q_need_meridian_id!=null) 

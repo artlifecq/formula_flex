@@ -11,6 +11,7 @@ package com.rpgGame.core.events
 	{
 		public static const ALL_DATA_UPATE:String="all_data_update";
 		public static const MERIDIAN_CHANGE:String="meridian_change";
+		public static const MERDIAN_UPDATE_TIP:String="meridian_update_tip";
 		public var data:*;
 		public function MeridianEvent(type:String,ndata:*=null,bubbles:Boolean=false, cancelable:Boolean=false)
 		{

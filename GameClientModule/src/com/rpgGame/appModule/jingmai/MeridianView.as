@@ -96,6 +96,7 @@ package com.rpgGame.appModule.jingmai
 				_mapsHash.eachValue(function(map:MeridianMap):void{
 					map.checkCareDataUpdate(data);
 				});
+				Mgr.meridianMgr.dispatchEvent(new MeridianEvent(MeridianEvent.MERDIAN_UPDATE_TIP,data));
 			}
 		}
 		

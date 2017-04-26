@@ -90,8 +90,8 @@ package com.rpgGame.appModule.jingmai.sub
 		}
 		private function showSubJX(config:Q_meridian,useTween:Boolean):void
 		{
-			
-			setIconFilter(false);
+			var needFilter:Boolean=false;
+			//setIconFilter(false);
 			var canActive:Boolean=_data.stone.length>0||Mgr.meridianMgr.getCanActive(_data);
 			var hasBetter:Boolean;
 			if (canActive) 
@@ -102,7 +102,8 @@ package com.rpgGame.appModule.jingmai.sub
 				//没镶嵌石头置灰
 				if (_data.stone.length==0) 
 				{
-					setIconFilter(true);
+					//setIconFilter(true);
+					needFilter=true;
 					labAtt.text="0";
 					if (hasBetter) 
 					{
@@ -148,12 +149,14 @@ package com.rpgGame.appModule.jingmai.sub
 				setIcoUrl("ui/app/beibao/icons/suo.png",19,26);
 			}
 			showLoopEffect(hasBetter);
+			setIconFilter(needFilter);
 		}
 		private function showSubCX(config:Q_meridian,useTween:Boolean):void
 		{
 			//等级为0，判断激活么得
 			var needEff:Boolean=false;
-			setIconFilter(false);
+			var needFilter:Boolean=false;
+			//setIconFilter(false);
 			labAtt.visible=true;
 			labAtt.text=_data.level+"";
 			if (_data.level==0)
@@ -166,7 +169,8 @@ package com.rpgGame.appModule.jingmai.sub
 				{
 				
 					setIcoUrl("ui/app/beibao/icons/icon/bianshi/"+config.q_huponameurl+".png",30,32);
-					setIconFilter(true);
+					//setIconFilter(true);
+					needFilter=true;
 					//判断能否升级
 					var canLevelUp:Boolean=Mgr.meridianMgr.getCanLevelUp(_data);
 					if (canLevelUp) 
@@ -210,6 +214,7 @@ package com.rpgGame.appModule.jingmai.sub
 				setLineLink(useTween);
 			}
 			showLoopEffect(needEff);
+			setIconFilter(needFilter);
 		}
 		public function setData(acp:AcuPointInfo,useTween:Boolean=false):void
 		{
@@ -236,11 +241,18 @@ package com.rpgGame.appModule.jingmai.sub
 			{
 				if (bool) 
 				{
-					_imgIcon.filter=GRAY_FILTER;
+					if (_imgIcon.filter==null) 
+					{
+						_imgIcon.filter=GRAY_FILTER;
+					}
 				}
 				else
 				{
-					_imgIcon.filter=null;
+					if (_imgIcon.filter!=null) 
+					{
+						_imgIcon.filter=null;
+					}
+					
 				}
 			}
 		}
