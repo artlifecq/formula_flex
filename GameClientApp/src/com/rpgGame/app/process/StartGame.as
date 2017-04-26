@@ -27,6 +27,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.EquipTip;
     import com.rpgGame.app.ui.tips.FriendHeroTips;
     import com.rpgGame.app.ui.tips.ItemTip;
+    import com.rpgGame.app.ui.tips.LostSkillTip;
     import com.rpgGame.app.ui.tips.MapAreaTip;
     import com.rpgGame.app.ui.tips.MeridainPointTip;
     import com.rpgGame.app.ui.tips.MountBeastCardTip;
@@ -38,11 +39,13 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.SocietyBuildItemTip;
     import com.rpgGame.app.ui.tips.SocietySpellTotalTip;
     import com.rpgGame.app.ui.tips.SpellTip;
+    import com.rpgGame.app.ui.tips.TxtPropChangeTip;
     import com.rpgGame.app.ui.tips.TxtTip;
     import com.rpgGame.core.events.MapEvent;
     import com.rpgGame.core.manager.tips.TipManager;
     import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.utils.ConsoleDesk;
+    import com.rpgGame.core.view.ui.tip.vo.TextTipsPropChangeData;
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.type.TipType;
     
@@ -189,6 +192,8 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.MOUNT_BEAST_CARD_TIP, MountBeastCardTip);
 			TipManager.registerTipsParserClass(TipType.MOUNT_SPELL_TIP, MountSpellTips);
 			TipManager.registerTipsParserClass(TipType.NORMAL_TIP, NormalTip);
+			TipManager.registerTipsParserClass(TipType.PROPCHANGE_TIP, TxtPropChangeTip);
+			TipManager.registerTipsParserClass(TipType.LOSTSKILL_TIP,LostSkillTip);
 			TipManager.registerTipsParserClass(TipType.MERIDIAN_TIP,MeridainPointTip);
 		}
 

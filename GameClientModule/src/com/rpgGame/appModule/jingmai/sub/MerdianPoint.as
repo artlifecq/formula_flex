@@ -219,7 +219,10 @@ package com.rpgGame.appModule.jingmai.sub
 		public function setData(acp:AcuPointInfo,useTween:Boolean=false):void
 		{
 			this._data=acp;
-			
+			if (!_data) 
+			{
+				return;
+			}
 			if (_data) 
 			{
 				this._acupointId=data.MeridId+"_"+data.acuPointId+"_"+data.level;

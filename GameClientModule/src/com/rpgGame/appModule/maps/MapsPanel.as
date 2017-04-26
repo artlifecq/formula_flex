@@ -113,7 +113,7 @@ package com.rpgGame.appModule.maps
 			{
 				touchPoint=touch.getLocation(_bigMap.skinSpr);
 				
-				//LOG.a("onTouch:"+touch.phase);
+
 				if(touch.phase=="hover")
 				{
 					if(touchPoint.x!=touchOldPoint.x||touchPoint.y!=touchOldPoint.y)//over到不同地方就隐藏显示

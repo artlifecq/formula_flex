@@ -9,6 +9,8 @@ package com.rpgGame.core.events
 	 */
 	public class TaskEvent
 	{
+		
+		
 		/**剧情任务添加了已完成的章节内容, 带参数   携带章节编号*/
 		public static const TASK_STORY_COMPLETED_CHAPTER_INFO_ADDED : int = UNIQUEID.NEXT;
 		/**剧情任务更新*/
@@ -41,5 +43,19 @@ package com.rpgGame.core.events
 		public static const TASK_PANEL_LAB_UPDATE_INFO : int = UNIQUEID.NEXT;
 		/** 对话框文本内容更新---返回 **/
 		public static const TASK_PANEL_LAB_UPDATE_INFO_RETURN : int = UNIQUEID.NEXT;
+		
+		
+		/**任务加载信息*/
+		public static const TASK_INFOR_MATION : int = UNIQUEID.NEXT;
+		/**任务完成信息*/
+		public static const TASK_FINISH_MATION : int = UNIQUEID.NEXT;
+		/**新任务信息*/
+		public static const TASK_NEW_MATION : int = UNIQUEID.NEXT;
+		/**任务进度改变*/
+		public static const TASK_CHANGE_MATION : int = UNIQUEID.NEXT;
+		/**任务中点击NPC*/
+		public static const TASK_CLICK_NPC : int = UNIQUEID.NEXT;
+		/**点击NPC寻路完毕*/
+		public static const TASK_WALKOVER_NPC : int = UNIQUEID.NEXT;
 	}
 }

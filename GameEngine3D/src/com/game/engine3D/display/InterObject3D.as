@@ -73,49 +73,12 @@ package com.game.engine3D.display
 			{
 				stop();
 			}
-		}
-		
-		/**跳转到特效的百分比*/
-		public function gotoPercent(percent:Number) : void
-		{
-			if (_unit != null)
-			{
-				var rend:RenderUnit3D=_unit as RenderUnit3D;
-				if(rend.totalDuration>0)
-				{
-					
-					if(percent>=0)
-					{
-						rend.stop(int(percent*rend.totalDuration));
-						rend.startRender();
-					}
-					else
-					{
-						rend.stop(0);
-						rend.stopRender();
-					}
-					
-				}
-				
-				
-			}
-			
+            if (_unit != null && RenderUnit3D(_unit).repeat >= 1) {
+                this.dispose();
+            }
 		}
 		
 		
-		
-		/**设置速度，相对于总时间*/
-		public function setSpeed(speed:Number) : void
-		{
-			if (_unit != null)
-			{
-				var rend:RenderUnit3D=_unit as RenderUnit3D;
-				rend.animateSpeed=speed;
-				
-				
-			}
-			
-		}
 		
 		public function get baseObj3D() : BaseObj3D
 		{
@@ -139,6 +102,38 @@ package com.game.engine3D.display
 		{
 			root3D.rotationY = value;
 		}
+        
+        public function play(timer : uint = 0) : void {
+            if (this.parent && !this.parent.contains(this))
+            {
+                this.parent.addChild(this);
+            }
+            if (_unit)
+            {
+                _unit.startRender();
+                if (_unit is RenderUnit3D)
+                {
+                    (_unit as RenderUnit3D).play(timer);
+                }
+            }
+            _isStarted = true;
+        }
+        
+        public function clear() : void {
+            if (this.parent)
+            {
+                this.parent.removeChild(this);
+            }
+            if (_unit)
+            {
+                _unit.stopRender();
+                if (_unit is RenderUnit3D)
+                {
+                    (_unit as RenderUnit3D).stop();
+                }
+            }
+            _isStarted = false;
+        }
 
 		override public function dispose() : void
 		{
@@ -154,12 +149,13 @@ package com.game.engine3D.display
 			if (_unit)
 			{
 				_unit.stopRender();
-				_unit.parent = null;
-				_unit.graphicDis = null;
-				if (_unit is RenderUnit3D)
-				{
-					(_unit as RenderUnit3D).destroy();
-				}
+//				_unit.parent = null;
+//				_unit.graphicDis = null;
+//				if (_unit is RenderUnit3D)
+//				{
+//					(_unit as RenderUnit3D).destroy();
+//				}
+                _unit.destroy();
 				_unit = null;
 			}
 			_isStarted = false;

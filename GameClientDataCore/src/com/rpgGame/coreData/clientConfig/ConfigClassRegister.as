@@ -42,7 +42,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const GmInfo:String = "data.GmInfo";
 		/**  广播，提示语				 */
 		public static const HintInfo:String = "data.HintInfo";
-		/**  每一种提示类型的配置				宽度	高度	最大宽度	项目宽度	位置X	位置Y																				 */
+		/**  消息提示类型配置表																													 */
 		public static const HintTypeSetInfo:String = "data.HintTypeSetInfo";
 		/**  区域数据库					 */
 		public static const Q_area:String = "data.map.Q_area";
@@ -76,7 +76,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const HeroModel:String = "data.model.HeroModel";
 		/**  坐骑模型表	功能名称	动画资源名称 */
 		public static const MountModel:String = "data.model.MountModel";
-		/**  怪物列表																																																															 */
+		/**  怪物列表																																																																 */
 		public static const Q_monster:String = "data.monster.Q_monster";
 		/**  NPC配置数据库																																																 */
 		public static const Q_npc:String = "data.monster.Q_npc";
@@ -94,6 +94,10 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_equip_polish:String = "data.Q_equip_polish";
 		/**  强化配置表						 */
 		public static const Q_equip_strength:String = "data.Q_equip_strength";
+		/**  					 */
+		public static const Q_equip_wash:String = "data.Q_equip_wash";
+		/**  				 */
+		public static const Q_equip_wash_attr:String = "data.Q_equip_wash_attr";
 		/**  战魂升级数据						 */
 		public static const Q_fightsoul:String = "data.Q_fightsoul";
 		/**  战魂模型数据		 */
@@ -106,12 +110,18 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_hecheng:String = "data.Q_hecheng";
 		/**  物品基本信息数据库																																																																																				 */
 		public static const Q_item:String = "data.Q_item";
-		/**  绝学开放表					 */
+		/**  绝学开放表							 */
 		public static const Q_lostskill_open:String = "data.Q_lostskill_open";
-		/**  绝学升级表	 */
+		/**  绝学升级表		 */
 		public static const Q_lostskill_up:String = "data.Q_lostskill_up";
 		/**  经脉冲穴数据库																 */
 		public static const Q_meridian:String = "data.Q_meridian";
+		/**  任务表(所有任务都这里)																																										 */
+		public static const Q_mission_base:String = "data.Q_mission_base";
+		/**  任务奖励配置表	 */
+		public static const Q_mission_reword:String = "data.Q_mission_reword";
+		/**  任务对话配置表(1-20000为主线任务对应的对话id，20001-30000是支线任务对话id)			 */
+		public static const Q_mission_segment:String = "data.Q_mission_segment";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
 		/**  阵营关系				 */
@@ -136,7 +146,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Attach:String = "data.spell.Attach";
 		/**  地面特效			 */
 		public static const Attach_effect:String = "data.spell.Attach_effect";
-		/**  BUFF效果配置数据表																																								 */
+		/**  BUFF效果配置数据表																																									 */
 		public static const Q_buff:String = "data.spell.Q_buff";
 		/**  公共CD表	 */
 		public static const Q_GCD:String = "data.spell.Q_GCD";
@@ -195,6 +205,8 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_die", com.rpgGame.coreData.clientConfig.Q_die);
 			regClass("data.Q_equip_polish", com.rpgGame.coreData.clientConfig.Q_equip_polish);
 			regClass("data.Q_equip_strength", com.rpgGame.coreData.clientConfig.Q_equip_strength);
+			regClass("data.Q_equip_wash", com.rpgGame.coreData.clientConfig.Q_equip_wash);
+			regClass("data.Q_equip_wash_attr", com.rpgGame.coreData.clientConfig.Q_equip_wash_attr);
 			regClass("data.Q_fightsoul", com.rpgGame.coreData.clientConfig.Q_fightsoul);
 			regClass("data.Q_fightsoul_mode", com.rpgGame.coreData.clientConfig.Q_fightsoul_mode);
 			regClass("data.Q_fightsoul_path", com.rpgGame.coreData.clientConfig.Q_fightsoul_path);
@@ -204,6 +216,9 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_lostskill_open", com.rpgGame.coreData.clientConfig.Q_lostskill_open);
 			regClass("data.Q_lostskill_up", com.rpgGame.coreData.clientConfig.Q_lostskill_up);
 			regClass("data.Q_meridian", com.rpgGame.coreData.clientConfig.Q_meridian);
+			regClass("data.Q_mission_base", com.rpgGame.coreData.clientConfig.Q_mission_base);
+			regClass("data.Q_mission_reword", com.rpgGame.coreData.clientConfig.Q_mission_reword);
+			regClass("data.Q_mission_segment", com.rpgGame.coreData.clientConfig.Q_mission_segment);
 			regClass("data.Q_notify", com.rpgGame.coreData.clientConfig.Q_notify);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);
 			regClass("data.Q_tipsinfo", com.rpgGame.coreData.clientConfig.Q_tipsinfo);

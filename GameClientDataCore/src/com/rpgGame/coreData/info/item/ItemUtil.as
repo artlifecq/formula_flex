@@ -37,13 +37,9 @@ package com.rpgGame.coreData.info.item
 			}else{
 				clientInfo=new ClientItemInfo(cfgId);
 			}
-			clientInfo.qItem=qItem;
 			clientInfo.itemInfo=itemInfo;
 			clientInfo.setIndex(itemInfo.gridId);//格子索引
 			clientInfo.count=itemInfo.num;
-			if(clientInfo is EquipInfo){
-				clientInfo
-			}
 			return clientInfo;
 		}
 

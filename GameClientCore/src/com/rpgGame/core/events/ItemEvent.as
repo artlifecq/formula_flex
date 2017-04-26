@@ -25,6 +25,10 @@ package com.rpgGame.core.events
 		 *物品删除
 		 */
 		public static const ITEM_REMOVE:int=UNIQUEID.NEXT;
+		/**
+		 *物品删除列表
+		 */
+		public static const ITEM_REMOVE_LIST:int=UNIQUEID.NEXT;
 		
 		/**
 		 *物品改变 
@@ -50,6 +54,14 @@ package com.rpgGame.core.events
 		 *强化消息
 		 */
 		public static const ITEM_STRENGTH_MSG:int = UNIQUEID.NEXT;
+		/**
+		 *琢磨消息
+		 */
+		public static const ITEM_POLISH_MSG:int = UNIQUEID.NEXT;
+		/**
+		 *洗炼消息
+		 */
+		public static const ITEM_WASH_MSG:int = UNIQUEID.NEXT;
 		
 		
 		/** 删除物品 **/

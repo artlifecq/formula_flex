@@ -14,6 +14,7 @@
 	import com.rpgGame.app.cmdlistener.HeroMiscCmdListener;
 	import com.rpgGame.app.cmdlistener.HeroSearchCmdListener;
 	import com.rpgGame.app.cmdlistener.LookCmdListener;
+	import com.rpgGame.app.cmdlistener.LostSkillCmdListener;
 	import com.rpgGame.app.cmdlistener.MailCmdListener;
 	import com.rpgGame.app.cmdlistener.MeridianCmdListerner;
 	import com.rpgGame.app.cmdlistener.MiscCmdListener;
@@ -38,6 +39,7 @@
 	import com.rpgGame.app.cmdlistener.scene.SceneUICmdListener;
 	import com.rpgGame.app.cmdlistener.scene.StoryDungeonCmdListener;
 	import com.rpgGame.app.cmdlistener.society.SocietyCmdListener;
+	import com.rpgGame.app.cmdlistener.task.TaskCmdListener;
 	
 	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
@@ -103,7 +105,7 @@
 //			register("CrownCmdListener", CrownCmdListener); //王权
 			register("SceneSwitchCmdListener", SceneSwitchCmdListener);
 			register("SceneUICmdListener", SceneUICmdListener);
-//			register("TaskCmdListener", TaskCmdListener); //模块号13
+			register("TaskCmdListener", TaskCmdListener); //模块号13
 //			register("MiXinCmdListener", MiXinCmdListener); //模块号13
 //			register("TouZhuCmdListener", TouZhuCmdListener); //模块号13
 //			register("TouJingCmdListener", TouJingCmdListener); //模块号13
@@ -133,6 +135,7 @@
 //			register("YuMaQiShouCmdListener", YuMaQiShouCmdListener); //御马场、奇兽苑
 			register("FightSoulCmdListener",FightSoulCmdListener);//战魂
 			register("NotifyCmdListener",NotifyCmdListener);//通知消息管理
+			register("LostSkillCmdListener",LostSkillCmdListener);//绝学
 			register("MeridianCmdListerner",MeridianCmdListerner);
 		}
 	}

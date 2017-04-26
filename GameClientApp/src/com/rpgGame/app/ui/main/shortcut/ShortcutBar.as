@@ -1,6 +1,8 @@
 package com.rpgGame.app.ui.main.shortcut {
+    import com.game.engine3D.display.Inter3DContainer;
     import com.game.engine3D.display.InterObject3D;
     import com.game.engine3D.scene.render.RenderUnit3D;
+    import com.rpgGame.app.manager.LostSkillManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.core.events.MainPlayerEvent;
     import com.rpgGame.core.events.society.SocietyEvent;
@@ -8,8 +10,16 @@ package com.rpgGame.app.ui.main.shortcut {
     import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ClientConfig;
+    import com.rpgGame.coreData.cfg.LanguageConfig;
+    import com.rpgGame.coreData.cfg.LostSkillData;
+    import com.rpgGame.coreData.cfg.LostSkillUpData;
+    import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
+    import com.rpgGame.coreData.clientConfig.Q_lostskill_up;
     import com.rpgGame.coreData.enum.JobEnum;
+    import com.rpgGame.coreData.lang.LangUI_2;
     import com.rpgGame.coreData.type.CharAttributeType;
+    import com.rpgGame.coreData.type.TipType;
+    import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
     
     import flash.geom.Point;
     
@@ -30,7 +40,8 @@ package com.rpgGame.app.ui.main.shortcut {
 
 		private var renderUint:RenderUnit3D;
         private var _rollprogress:RollProgress;
-		private var _jinzhenList:Vector.<UIAsset>;
+		private var _jinzhencontent:Inter3DContainer;
+		private var _jinzhenList:Vector.<JinZhenControl>;
         public function ShortcutBar() {
             this._skin = new shortcut_Skin();
             super(this._skin);
@@ -71,7 +82,6 @@ package com.rpgGame.app.ui.main.shortcut {
 			}
 			child.start();
 		}
-		
 		private function init() : void
 		{
 			skillBar = new ShortcutSkillBar(this);
@@ -86,8 +96,10 @@ package com.rpgGame.app.ui.main.shortcut {
 			
 			initExp();
 			addSheHuiTab();
+			LostSkillEffect.instance().bind(_skin.btn_juexue);
 			
 			
+			refeashState();
 			if (!ClientConfig.isBanShu)
 			{				
 //				TipTargetManager.show(_skin.btnBackpack, TargetTipsMaker.makeSimpleTextTips("背包<br/>快捷键：B"));
@@ -108,18 +120,44 @@ package com.rpgGame.app.ui.main.shortcut {
 			
 			if(MainRoleManager.actorInfo.job == JobEnum.ROLE_4_TYPE)
 			{
-				_jinzhenList = new Vector.<UIAsset>();
-				_jinzhenList.push(_skin.jinzhen_12);
-				_jinzhenList.push(_skin.jinzhen_22);
-				_jinzhenList.push(_skin.jinzhen_32);
-				_jinzhenList.push(_skin.jinzhen_42);
-				_jinzhenList.push(_skin.jinzhen_52);
+				_jinzhencontent = new Inter3DContainer();
+				_skin.jingzhen_yijia.addChild(_jinzhencontent);
+				_jinzhenList = new Vector.<JinZhenControl>();
+				_jinzhenList.push(new JinZhenControl(_jinzhencontent,0));
+				_jinzhenList.push(new JinZhenControl(_jinzhencontent,1));
+				_jinzhenList.push(new JinZhenControl(_jinzhencontent,2));
+				_jinzhenList.push(new JinZhenControl(_jinzhencontent,3));
+				_jinzhenList.push(new JinZhenControl(_jinzhencontent,4));
 				EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,refeashJinzhen);
 			}
 			refeashJinzhen(CharAttributeType.RES_JING_ZHENG);
+			
+			EventManager.addEvent(LostSkillManager.LostSkill_ChangeSkillId,refeashState);
+			EventManager.addEvent(LostSkillManager.LostSkill_UpLevelSkillId,refeashState);
+			
 		}
 		
 		
+		
+		private function refeashState():void
+		{
+			if(TipTargetManager.hasTipsEventListener(_skin.btn_juexue))
+				TipTargetManager.remove(_skin.btn_juexue);
+	
+			var datas:Array = LostSkillData.datas;
+			var currentdata:Q_lostskill_open = LostSkillData.getModeInfoById(LostSkillManager.instance().curSkillId);
+			if(currentdata == null)
+			{
+				TipTargetManager.show(_skin.btn_juexue,TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText(LangUI_2.Lostskill_Opentips).replace("$",LostSkillManager.instance().openLevel)));
+				_skin.mc_juexue.gotoAndStop(0);
+			}else{
+				TipTargetManager.show( _skin.btn_juexue, TargetTipsMaker.makeTips( TipType.LOSTSKILL_TIP, currentdata));
+				var state:SkillStateInfo = LostSkillManager.instance().getSkillStateInfoById(currentdata.q_id);
+				var currentupdate:Q_lostskill_up = LostSkillUpData.getDatabyIdAndLevel(state.skillId,state.level);
+				var index:int = datas.indexOf(currentdata);
+				_skin.mc_juexue.gotoAndStop(index+1);
+			}
+		}
 		private function refeashJinzhen(type:int):void
 		{
 			if(MainRoleManager.actorInfo.job!= JobEnum.ROLE_4_TYPE)
@@ -138,9 +176,9 @@ package com.rpgGame.app.ui.main.shortcut {
 			var count:int = MainRoleManager.actorInfo.totalStat.getResData(type);
 			for(var i:int = 0;i<_jinzhenList.length;i++)
 			{
-				_jinzhenList[i].visible = i<count;
+				_jinzhenList[i].visible( i<count);
 			}
-			_skin.lbl_lastNum2.text = count.toString()+"/5";
+			_skin.lbl_lastNum.text = count.toString()+"/5";
 			var Msg:String = "金针："+count+"/5";
 			Msg += "<br/>施放技能会消耗金针<br/>每10秒恢复1个金针";
 			TipTargetManager.show(_skin.jingzhen_yijia, TargetTipsMaker.makeSimpleTextTips(Msg));

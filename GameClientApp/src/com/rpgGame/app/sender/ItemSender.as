@@ -11,7 +11,9 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.backpack.message.ReqMoveItemMessage;
 	import com.rpgGame.netData.backpack.message.ReqSplitItemMessage;
 	import com.rpgGame.netData.backpack.message.ReqUseItemMessage;
+	import com.rpgGame.netData.equip.message.ReqEquipPolishMessage;
 	import com.rpgGame.netData.equip.message.ReqEquipStrengthMessage;
+	import com.rpgGame.netData.equip.message.ReqEquipWashMessage;
 	import com.rpgGame.netData.equip.message.UnwearEquipMessage;
 	import com.rpgGame.netData.equip.message.WearEquipMessage;
 	import com.rpgGame.netData.store.message.ReqBagToStoreMessage;
@@ -19,6 +21,8 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.store.message.ReqStoreGetItemsMessage;
 	import com.rpgGame.netData.store.message.ReqStoreMoveItemMessage;
 	import com.rpgGame.netData.store.message.ReqStoreToBagMessage;
+	
+	import app.message.EquipOperateType;
 	
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.data.long;
@@ -273,7 +277,39 @@ package com.rpgGame.app.sender
 			msg.equipId=equipId;
 			msg.type=type;
 			msg.useItemIds=list;
-			msg.opaque=opaqueType;//0普通强化，1一键强化
+			msg.opaque=opaqueType;
+			SocketConnection.send(msg);
+		}
+		
+		/**
+		 * 琢磨装备 
+		 * @param equipId
+		 * @param type
+		 * @param list
+		 * @param opaqueType
+		 * 
+		 */
+		public static function polishEquip(equipId:long,type:int,list:Vector.<long>,opaqueType:int):void
+		{
+			var msg:ReqEquipPolishMessage=new ReqEquipPolishMessage();
+			msg.equipId=equipId;
+			msg.type=type;
+			msg.useItemIds=list;
+			msg.opaque=opaqueType;
+			SocketConnection.send(msg);
+		}
+		
+		/**
+		 *洗炼装备 
+		 * 
+		 */
+		public static function washEquip(equipId:long,type:int,lockIndex:int):void
+		{
+			var msg:ReqEquipWashMessage=new ReqEquipWashMessage();
+			msg.equipId=equipId;
+			msg.type=type;
+			msg.lockIndex=lockIndex;
+			msg.opaque=EquipOperateType.WASH_NORMAL;
 			SocketConnection.send(msg);
 		}
 		

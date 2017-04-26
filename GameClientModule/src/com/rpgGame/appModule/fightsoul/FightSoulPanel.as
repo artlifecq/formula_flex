@@ -19,7 +19,7 @@ package com.rpgGame.appModule.fightsoul
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_path;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.lang.LangFightSoul;
+	import com.rpgGame.coreData.lang.LangUI_2;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.netData.fightsoul.bean.FightSoulInfo;
 	
@@ -54,7 +54,7 @@ package com.rpgGame.appModule.fightsoul
 		{
 			_skin=new Zhanhun_Skin();
 			super(_skin);
-			TipTargetManager.show(_skin.pro_shengji, TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText(LangFightSoul.FightSoulExpTip)));
+			TipTargetManager.show(_skin.pro_jindu, TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText(LangUI_2.FightSoulExpTip)));
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
@@ -90,7 +90,7 @@ package com.rpgGame.appModule.fightsoul
 			_skin.btn_up.addEventListener(FeathersEventType.STATE_CHANGE,buttonTouchHandler);
 			EventManager.addEvent(FightSoulManager.FightSoul_Exp,refeahExp);
 			EventManager.addEvent(FightSoulManager.FightSoul_Level,refeahLevel);
-			EventManager.addEvent(FightSoulManager.FightSoul_ModeLevel,refeahMode);
+			EventManager.addEvent(FightSoulManager.FightSoul_ModeLevel,refeashQualityView);
 			EventManager.addEvent(FightSoulManager.FightSoul_Vitality,refeashVitality);
 			EventManager.addEvent(FightSoulManager.FightSoul_GetReward,refeashRewards);
 			EventManager.addEvent(FightSoulManager.FightSoul_TypeValue,listrefeash);
@@ -145,7 +145,7 @@ package com.rpgGame.appModule.fightsoul
 		private function huanhuaTriggeredHandler(e:Event):void
 		{
 			var cshowshet:Q_fightsoul = FightsoulData.getInfoByMode(_currentShowMode);
-			if(cshowshet.q_level !=fightSoulInfo.level)
+			if(cshowshet.q_level !=fightSoulInfo.curModelLv)
 			{
 				FightSoulManager.instance().chageModeLevel(cshowshet.q_level );
 			}
@@ -167,7 +167,7 @@ package com.rpgGame.appModule.fightsoul
 			if(_fightsoul==null)
 			{
 				var content:Inter3DContainer = new Inter3DContainer();
-				this.addChildAt(content,2);
+				_skin.modecontent.addChild(content);
 				_fightsoul = new FightSoulModePane();
 				_fightsoul.x = 340;
 				_fightsoul.y = 400;
@@ -199,13 +199,12 @@ package com.rpgGame.appModule.fightsoul
 				_skillIcon = new IconCDFace(IcoSizeEnum.ICON_48);
 				_skillIcon.width = _skillIcon.height = IcoSizeEnum.ICON_48;
 				_skillIcon.setBg(GridBGType.GRID_SIZE_48);
-				_skillIcon.x = 577;
-				_skillIcon.y = 406;
+				_skillIcon.x = 554;
+				_skillIcon.y = 425;
 				addChild(_skillIcon);
 			}
 			FaceUtil.SetSkillGrid(_skillIcon, FaceUtil.chanceSpellToFaceInfo(_skillData), true);//目前Tips有bug,待修改
 			_skillIcon.setIconPoint(6,7);
-//			_skillIcon.setQualityImageIconPoint(6,7);
 			var length:int = FightSoulManager.instance().RewardInfos.length;
 			var icon:IconCDFace
 			 if(_itemIconLists == null)
@@ -216,8 +215,8 @@ package com.rpgGame.appModule.fightsoul
 					 icon= new IconCDFace(IcoSizeEnum.ICON_48);
 					 icon.width = icon.height = IcoSizeEnum.ICON_48;
 					 icon.setBg(GridBGType.GRID_SIZE_48);
-					 icon.x = 671+60*i;
-					 icon.y = 462;
+					 icon.x = 669+61*i;
+					 icon.y = 448;
 					 addChild(icon);
 					 var touch:TouchToState = new TouchToState(icon,rewardIconTriggeredHandler);
 					 touch.data = i;
@@ -272,20 +271,17 @@ package com.rpgGame.appModule.fightsoul
 		
 		private function refeahExp():void
 		{
-			_skin.lb_current.text = LanguageConfig.getText(LangFightSoul.FightSoulLevel).replace("$",fightSoulInfo.level);
-			_skin.lb_up.text = LanguageConfig.getText(LangFightSoul.FightSoulLevel).replace("$",fightSoulInfo.level+1);
-			_skin.pro_shengji.value = fightSoulInfo.exp/currentMode.q_exp*_skin.pro_shengji.maximum;
+			_skin.num_current.number = fightSoulInfo.level;
+			_skin.num_next.number = fightSoulInfo.level+1;
+			_skin.pro_jindu.maximum = currentMode.q_exp;
+			_skin.pro_jindu.value = fightSoulInfo.exp;
 			_skin.lb_progress.text = fightSoulInfo.exp.toString()+"/"+currentMode.q_exp;
 		}
-		private function refeahMode():void
-		{
-			var cshowshet:Q_fightsoul = FightsoulData.getInfoByMode(_currentShowMode);
-			_skin.btn_huanhua.isEnabled = cshowshet.q_level != FightSoulManager.instance().currentMode.q_level;
-		}
+		
 		private function refeashVitality():void
 		{
 			_skin.pro_zongjindu.value = fightSoulInfo.vitality/200*_skin.pro_zongjindu.maximum;
-			_skin.lb_jindu.text = LanguageConfig.getText(LangFightSoul.FightSoulProgress).replace("$",fightSoulInfo.vitality);
+			_skin.lb_jindu.text = LanguageConfig.getText(LangUI_2.FightSoulProgress).replace("$",fightSoulInfo.vitality);
 		}
 		private function refeashQualityView():void
 		{
@@ -301,15 +297,26 @@ package com.rpgGame.appModule.fightsoul
 			if(cshowshet.q_level>fightSoulInfo.level)
 			{
 				_skin.btn_huanhua.visible = false;
+				_skin.ui_huanhua.visible = false;
 				_skin.grp_dengji.visible = true;
+				_skin.lb_time.visible = true;
+				_skin.Num_dengji.visible = true;
 				_skin.Num_dengji.label = cshowshet.q_level.toString();
 				_skin.lb_time.text = cshowshet.q_doc;
+			}else if(cshowshet.q_level==fightSoulInfo.curModelLv){
+				_skin.btn_huanhua.visible = false;
+				_skin.ui_huanhua.visible = true;
+				_skin.grp_dengji.visible = false;
+				_skin.lb_time.visible = false;
+				_skin.Num_dengji.visible = false;
 			}else{
 				_skin.btn_huanhua.visible = true;
+				_skin.ui_huanhua.visible = false;
 				_skin.grp_dengji.visible = false;
-				refeahMode();
+				_skin.lb_time.visible = false;
+				_skin.Num_dengji.visible = false;
 			}
-			_skin.img_modename.styleName = "ui/app/zhanhun/modename/"+cshowshet.q_mode+".png";
+			_skin.mc_name.gotoAndStop(cshowshet.q_mode);
 			_fightsoul.setModeLevel(cshowshet.q_mode);
 		}
 		
@@ -330,7 +337,7 @@ package com.rpgGame.appModule.fightsoul
 			_skin.btn_up.removeEventListener(FeathersEventType.STATE_CHANGE,buttonTouchHandler);
 			EventManager.removeEvent(FightSoulManager.FightSoul_Exp,refeahExp);
 			EventManager.removeEvent(FightSoulManager.FightSoul_Level,refeahLevel);
-			EventManager.removeEvent(FightSoulManager.FightSoul_ModeLevel,refeahMode);
+			EventManager.removeEvent(FightSoulManager.FightSoul_ModeLevel,refeashQualityView);
 			EventManager.removeEvent(FightSoulManager.FightSoul_Vitality,refeashVitality);
 			EventManager.removeEvent(FightSoulManager.FightSoul_GetReward,refeashRewards);
 			EventManager.removeEvent(FightSoulManager.FightSoul_TypeValue,listrefeash);

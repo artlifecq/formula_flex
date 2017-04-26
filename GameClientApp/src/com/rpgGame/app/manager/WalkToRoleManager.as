@@ -13,6 +13,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.cfg.TranportsDataManager;
 	import com.rpgGame.coreData.cfg.task.TouZhuCfgData;
 	import com.rpgGame.coreData.info.stall.StallData;
@@ -25,6 +26,8 @@ package com.rpgGame.app.manager
 	import flash.geom.Vector3D;
 	
 	import app.message.SceneTransportProto;
+	
+	import org.client.mainCore.manager.EventManager;
 
 	/**
 	 *
@@ -52,7 +55,7 @@ package com.rpgGame.app.manager
 					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role);
 					break;
 				case SceneCharType.MONSTER:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveMonster);
+					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveMonster,null,null,noWalk);
 					break;
 				case SceneCharType.LIANG_CANG:
 					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveMonster);
@@ -103,7 +106,10 @@ package com.rpgGame.app.manager
 			var monsterData : MonsterData = role.data as MonsterData;
 			if (monsterData == null)
 				return;
-
+	
+			
+			EventManager.dispatchEvent(TaskEvent.TASK_CLICK_NPC,monsterData.modelID);//交任务用------YT
+			
 			//如果这只怪是猪，那么是不能杀的，请求抓猪
 //			if (TouZhuCfgData.isZhuMonster(monsterData.modelID))
 //			{
@@ -111,7 +117,20 @@ package com.rpgGame.app.manager
 //				return;
 //			}
 		}
-
+		private static function noWalk( role : SceneRole) : void
+		{
+			if (role == null || !role.usable)
+				return;
+			
+			var monsterData : MonsterData = role.data as MonsterData;
+			if (monsterData == null)
+				return;
+			
+			EventManager.dispatchEvent(TaskEvent.TASK_CLICK_NPC,monsterData.modelID);//交任务用------YT
+			
+		}
+		
+		
 		private static function onArriveNpc(ref : WalkMoveStateReference) : void
 		{
 			var role : SceneRole = ref.data as SceneRole;
@@ -126,6 +145,8 @@ package com.rpgGame.app.manager
 			{
 				TaskManager.checkDialogToNpc(role.id);
 			}
+			
+			
 		}
 
 		/**
