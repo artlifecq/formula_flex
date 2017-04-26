@@ -1,7 +1,7 @@
 package app.message
 {
 	import com.rpgGame.coreData.rEnum;
-
+	
 	/**
 	 *装备操作类型
 	 *@author dik
