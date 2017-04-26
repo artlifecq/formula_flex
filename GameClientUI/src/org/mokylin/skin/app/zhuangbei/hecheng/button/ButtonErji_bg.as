@@ -72,14 +72,14 @@ package org.mokylin.skin.app.zhuangbei.hecheng.button
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
-			temp.height = 36;
+			temp.bottom = 0;
+			temp.left = 0;
+			temp.right = 0;
 			temp.text = "";
 			temp.textAlign = "center";
 			temp.color = 0xFFFFFF;
+			temp.top = 0;
 			temp.verticalAlign = "middle";
-			temp.width = 248;
-			temp.x = 0;
-			temp.y = 0;
 			return temp;
 		}
 

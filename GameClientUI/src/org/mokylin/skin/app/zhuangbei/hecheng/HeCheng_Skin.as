@@ -4,17 +4,18 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 	import feathers.controls.Button;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
-	import feathers.controls.List;
+	import feathers.controls.Radio;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.TextInput;
+	import feathers.controls.Tree;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonHecheng;
+	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonJianding;
 	import org.mokylin.skin.component.button.ButtonSkin_jia;
 	import org.mokylin.skin.component.button.ButtonSkin_jian;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_shuoming;
-	import org.mokylin.skin.component.list.ListSkin1;
 	import org.mokylin.skin.component.text.textInput3_Skin;
 
 	/**
@@ -61,7 +62,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 
 		public var lb_msg:feathers.controls.Label;
 
-		public var list_Item:feathers.controls.List;
+		public var tree:feathers.controls.Tree;
 
 
 		//==========================================================================
@@ -74,18 +75,14 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__HeCheng_Skin_UIAsset2_i(),__HeCheng_Skin_UIAsset3_i(),btn_shuoming_i(),__HeCheng_Skin_Group1_i(),grp_exit_i(),btns_i(),btnMax_i(),btn_hecheng_i(),lb_msg_i(),list_Item_i()];
-						
+			this.elementsContent = [__HeCheng_Skin_UIAsset1_i(),__HeCheng_Skin_UIAsset2_i(),__HeCheng_Skin_UIAsset3_i(),__HeCheng_Skin_UIAsset4_i(),btn_shuoming_i(),__HeCheng_Skin_Group1_i(),grp_exit_i(),btns_i(),btnMax_i(),btn_hecheng_i(),lb_msg_i(),tree_i()];
+			
 			states = {
-				normal:[
-						{target:"__HeCheng_Skin_SkinnableContainer3",
-							name:"visible",
-							value:false
-						}
-					]
 			};
-			skinNames={"":"org.mokylin.skin.app.zhuangbei.hecheng.Cont_Item_qian"};
+			skinNames={};
 		}
+
+
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -143,22 +140,33 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			return temp;
 		}
 
+		private function __HeCheng_Skin_UIAsset1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.height = 446;
+			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.width = 278;
+			temp.x = 14;
+			temp.y = 72;
+			return temp;
+		}
+
 		private function __HeCheng_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 445;
-			temp.styleName = "ui/common/background/neikuang_1.png";
-			temp.width = 274;
-			temp.x = 19;
-			temp.y = 73;
+			temp.styleName = "ui/app/zhuangbei/hecheng/bg.jpg";
+			temp.x = 294;
+			temp.y = 75;
 			return temp;
 		}
 
 		private function __HeCheng_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/hecheng/bg.jpg";
-			temp.x = 293;
+			temp.height = 445;
+			temp.styleClass = org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonJianding;
+			temp.width = 274;
+			temp.x = 15;
 			temp.y = 75;
 			return temp;
 		}
@@ -166,17 +174,17 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 		private function __HeCheng_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/hecheng/xiaoguo.png";
-			temp.x = 3;
-			temp.y = 58;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shuoming;
+			temp.x = 293;
+			temp.y = 75;
 			return temp;
 		}
 
 		private function __HeCheng_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/hecheng/xiaoguo.png";
-			temp.x = 144;
+			temp.styleClass = org.mokylin.skin.component.text.textInput3_Skin;
+			temp.x = 3;
 			temp.y = 58;
 			return temp;
 		}
@@ -184,7 +192,16 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 		private function __HeCheng_Skin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/hecheng/xiaoguo.png";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jian;
+			temp.x = 144;
+			temp.y = 58;
+			return temp;
+		}
+
+		private function __HeCheng_Skin_UIAsset7_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jia;
 			temp.x = 289;
 			temp.y = 58;
 			return temp;
@@ -196,14 +213,14 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			btnMax = temp;
 			temp.name = "btnMax";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.label = "Max";
+			temp.label = "MAX";
 			temp.leading = 0;
 			temp.letterSpacing = 1;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.color = 0xE1D4A9;
 			temp.width = 79;
-			temp.x = 659;
-			temp.y = 420;
+			temp.x = 661;
+			temp.y = 421;
 			return temp;
 		}
 
@@ -302,8 +319,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			exist1 = temp;
 			temp.name = "exist1";
 			temp.styleName = "ui/app/zhuangbei/hecheng/fangruxiaoguo.png";
-			temp.visible = false;
-			temp.x = 24;
+			temp.x = 26;
 			temp.y = 31;
 			return temp;
 		}
@@ -314,8 +330,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			exist2 = temp;
 			temp.name = "exist2";
 			temp.styleName = "ui/app/zhuangbei/hecheng/fangruxiaoguo.png";
-			temp.visible = false;
-			temp.x = 166;
+			temp.x = 168;
 			temp.y = 31;
 			return temp;
 		}
@@ -326,8 +341,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			exist3 = temp;
 			temp.name = "exist3";
 			temp.styleName = "ui/app/zhuangbei/hecheng/fangruxiaoguo.png";
-			temp.visible = false;
-			temp.x = 312;
+			temp.x = 314;
 			temp.y = 31;
 			return temp;
 		}
@@ -338,7 +352,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			existall = temp;
 			temp.name = "existall";
 			temp.styleName = "ui/app/zhuangbei/hecheng/xuetiao.png";
-			temp.x = 27;
+			temp.x = 28;
 			temp.y = 0;
 			return temp;
 		}
@@ -361,7 +375,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			temp.name = "grp_exit";
 			temp.x = 437;
 			temp.y = 265;
-			temp.elementsContent = [grp_cailiao_i(),__HeCheng_Skin_UIAsset4_i(),__HeCheng_Skin_UIAsset5_i(),__HeCheng_Skin_UIAsset6_i(),exist1_i(),exist2_i(),exist3_i(),existall_i()];
+			temp.elementsContent = [grp_cailiao_i(),__HeCheng_Skin_UIAsset5_i(),__HeCheng_Skin_UIAsset6_i(),__HeCheng_Skin_UIAsset7_i(),exist1_i(),exist2_i(),exist3_i(),existall_i()];
 			return temp;
 		}
 
@@ -385,7 +399,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_msg = temp;
 			temp.name = "lb_msg";
-			temp.height = 16;
+			temp.height = 20;
 			temp.textAlign = "center";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
@@ -395,15 +409,14 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			return temp;
 		}
 
-		private function list_Item_i():feathers.controls.List
+		private function tree_i():feathers.controls.Tree
 		{
-			var temp:feathers.controls.List = new feathers.controls.List();
-			list_Item = temp;
-			temp.name = "list_Item";
+			var temp:feathers.controls.Tree = new feathers.controls.Tree();
+			tree = temp;
+			temp.name = "tree";
 			temp.height = 438;
-			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
-			temp.width = 265;
-			temp.x = 23;
+			temp.width = 262;
+			temp.x = 21;
 			temp.y = 76;
 			return temp;
 		}

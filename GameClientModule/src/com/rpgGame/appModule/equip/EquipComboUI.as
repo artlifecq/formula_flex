@@ -3,46 +3,36 @@ package com.rpgGame.appModule.equip
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.sender.ItemSender;
-	import com.rpgGame.app.view.icon.BgIcon;
-	import com.rpgGame.app.view.icon.DragDropItem;
+	import com.rpgGame.app.utils.FaceUtil;
+	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.appModule.common.ViewUI;
-	import com.rpgGame.appModule.common.itemRender.GridItemRender;
-	import com.rpgGame.appModule.common.itemRender.HeChengItem;
-	import com.rpgGame.appModule.common.itemRender.HeChengItemRender;
-	import com.rpgGame.appModule.common.itemRender.SkinItem;
-	import com.rpgGame.appModule.common.itemRender.SkinItemRender;
-	import com.rpgGame.appModule.friend.view.FriendHeadRender;
-	import com.rpgGame.appModule.friend.view.FriendListItemRenderer;
+	import com.rpgGame.appModule.equip.combo.DetailNodeInfo;
+	import com.rpgGame.appModule.equip.combo.EquipComboTreeItemRender;
+	import com.rpgGame.appModule.equip.combo.MainNodeInfo;
+	import com.rpgGame.appModule.equip.combo.SubNodeInfo;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.HeChengData;
-	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_hecheng;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.item.GridInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.type.CharAttributeType;
-	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.equip.message.ResEquipOperateResultMessage;
 	
-	import feathers.controls.Button;
-	import feathers.controls.GroupedTree;
-	import feathers.controls.List;
-	import feathers.controls.Scroller;
-	import feathers.controls.StateSkin;
+	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.UIAsset;
-	import feathers.data.ListCollection;
+	import feathers.data.TreeNode;
+	import feathers.layout.VerticalAlign;
+	import feathers.layout.VerticalLayout;
 	import feathers.themes.GuiThemeStyle;
 	import feathers.utils.filter.GrayFilter;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhuangbei.hecheng.HeCheng_Skin;
-	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonHecheng;
-	import org.mokylin.skin.app.zhuangbei.qianghua.ListItem_Skin;
 	import org.mokylin.skin.component.list.ListSkin1;
 	
-	import starling.display.DisplayObject;
 	import starling.events.Event;
 	
 	/**
@@ -56,8 +46,8 @@ package com.rpgGame.appModule.equip
 		
 		private const CAILIAO_NUM:int=3;
 		
-		private var icon:BgIcon;
-		private var _cailiao:Vector.<BgIcon>;
+		private var icon:IconCDFace;
+		private var _cailiao:Vector.<IconCDFace>;
 		//合成连接线
 		private var _exisList:Vector.<UIAsset>;
 		//合成数量
@@ -68,46 +58,103 @@ package com.rpgGame.appModule.equip
 		private var _useGold:int=0;
 		//合成需要消耗的银两单价
 		private var _useMoney:int=0;
-		private var tree:GroupedTree;	
+		
 		private var _nowSelect:Q_hecheng;
 		
 		public function EquipComboUI()
 		{
 			_skin=new HeCheng_Skin();
 			super(_skin);
-			initListBtn();
 			initView();
-		}
-		//初始化左边按钮
-		private var btn:Button;
-		private function initListBtn():void
-		{
-			_skin.list_Item.touchAcross=true;
-			_skin.list_Item.itemRendererFactory = createHeChengItemRender;
-			_skin.list_Item.clipContent = true;
-			_skin.list_Item.scrollBarDisplayMode = "fixed";
-			//			_skin.list_Item.verticalScrollBarPosition = "right"
-			_skin.list_Item.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
-			_skin.list_Item.verticalScrollPolicy = Scroller.SCROLL_POLICY_AUTO;
-			_skin.list_Item.padding=1;
-			_skin.list_Item.dataProvider=new ListCollection(HeChengData.getTypeLiet());
-			_skin.list_Item.selectedIndex=0;
+			initTree();
 		}
 		
-		private function createHeChengItemRender():HeChengItemRender
+		private function initTree():void
 		{
-			var render:HeChengItemRender=new HeChengItemRender();
-			return render;
+			_skin.tree.rootNode=getTreeNode();
+			_skin.tree.itemRendererType = EquipComboTreeItemRender ;
+			_skin.tree.scrollBarDisplayMode =  ScrollBarDisplayMode.ALWAYS_VISIBLE;
+			GuiThemeStyle.setFeatherSkinClass(_skin.tree, ListSkin1);
+			var lay:VerticalLayout=new VerticalLayout();
+			lay.verticalAlign=VerticalAlign.TOP;
+			lay.hasVariableItemDimensions=true;
+			_skin.tree.layout=lay;
+			_skin.tree.updateTree();
+		}
+		
+		private function getTreeNode():TreeNode
+		{
+			var rootNodeData:Object = {label:"合成"};
+			var rootNode:TreeNode = new TreeNode(rootNodeData);
+			var typeList:Array=HeChengData.getTypeList();
+			var num:int=typeList.length;
+			var tempNodes:Vector.<TreeNode>;
+			var children:Array=[];
+			var i:int,j:int,k:int;
+			var mainNodeInfo:MainNodeInfo;
+			var subNodeInfo:SubNodeInfo;
+			var detailNodeInfo:DetailNodeInfo;
+			for(i=0;i<num;i++){
+				mainNodeInfo=new MainNodeInfo();
+				mainNodeInfo.type=typeList[i];
+				children.push(mainNodeInfo);
+			}
+			tempNodes=rootNode.addChildren(children);//父节点
+			num=tempNodes.length;
+			var tempNode:TreeNode;
+			for(i=0;i<num;i++){
+				tempNode=tempNodes[i];
+				mainNodeInfo= tempNode.data as MainNodeInfo;
+				var subList:Array=HeChengData.getSonTypeListByType(mainNodeInfo.type);
+				var details:Array;
+				if(subList.length==1){
+					details=HeChengData.getSubSonList(mainNodeInfo.type,subList[0]);
+					children=[];
+					for(j=0;j<details.length;j++){
+						detailNodeInfo=new DetailNodeInfo();
+						detailNodeInfo.type=mainNodeInfo.type;
+						detailNodeInfo.subType=subList[0];
+						detailNodeInfo.detailType=details[j];
+						children.push(detailNodeInfo);
+					}
+					tempNode.addChildren(children);//添加根节点
+				}else{
+					children=[];
+					var detailList:Array=[];
+					for(j=0;j<subList.length;j++){
+						subNodeInfo=new SubNodeInfo();
+						subNodeInfo.type=mainNodeInfo.type;
+						subNodeInfo.subType=subList[j];
+						children.push(subNodeInfo);
+						details=HeChengData.getSubSonList(mainNodeInfo.type,subList[j]);
+						var childrens:Array=[];
+						for(k=0;k<details.length;k++){
+							detailNodeInfo=new DetailNodeInfo();
+							detailNodeInfo.type=mainNodeInfo.type;
+							detailNodeInfo.subType=subList[j];
+							detailNodeInfo.detailType=details[k];
+							childrens.push(detailNodeInfo);
+						}
+						detailList.push(childrens);
+					}
+					var nodes:Vector.<TreeNode>=tempNode.addChildren(children);//添加子节点
+					for(j=0;j<nodes.length;j++){
+						var node:TreeNode=nodes[j];
+						node.addChildren(detailList[j]);
+					}
+				}
+			}
+			return rootNode;
 		}
 		
 		private function initView():void
 		{
-			_cailiao=new Vector.<BgIcon>();
+			_cailiao=new Vector.<IconCDFace>();
 			_exisList=new Vector.<UIAsset>();
-			icon=new BgIcon(IcoSizeEnum.ICON_64);
+			icon=new IconCDFace(IcoSizeEnum.ICON_64);
+			icon.selectImgVisible=false;
 			icon.x=572;
 			icon.y=175;
-			icon.touchable=false;
 			_exisList.push(_skin.exist1);
 			_exisList.push(_skin.exist2);
 			_exisList.push(_skin.exist3);
@@ -115,11 +162,13 @@ package com.rpgGame.appModule.equip
 			
 			for(var i:int=0;i<CAILIAO_NUM;i++)
 			{
-				var ico:BgIcon=new BgIcon(IcoSizeEnum.ICON_48);			
+				var ico:IconCDFace=new IconCDFace(IcoSizeEnum.ICON_48);		
+				ico.selectImgVisible=false;
 				//				ico.setIconResName(ClientConfig.getItemIcon("1001",IcoSizeEnum.ICON_48));
 				var uias:UIAsset=_skin.grp_cailiao.getChildByName("cailiao"+(i+1)) as UIAsset;
-				uias.addChild(ico);
-				ico.x=ico.y=0;
+				ico.x=uias.x;
+				ico.y=uias.y;
+				_skin.grp_cailiao.addChild(ico);
 				_cailiao.push(ico);
 			}
 			
@@ -145,7 +194,11 @@ package com.rpgGame.appModule.equip
 			if(!_nowSelect) return;
 			_useGold=_nowSelect.q_gold;
 			_useMoney=_nowSelect.q_money;
-			icon.setIconResName(ClientConfig.getItemIcon(_nowSelect.q_item_id.toString(),IcoSizeEnum.ICON_64));		
+			
+			var itemInfo:ClientItemInfo=new ClientItemInfo(_nowSelect.q_item_id);
+			FaceUtil.SetItemGrid(icon,itemInfo);
+			icon.selectImgVisible=false;
+			icon.setIconResName(ClientConfig.getItemIcon(ItemConfig.getItemIcon(_nowSelect.q_item_id),IcoSizeEnum.ICON_64));		
 			setCaiLiaoData();
 		}
 		
@@ -175,12 +228,14 @@ package com.rpgGame.appModule.equip
 			}
 			for(i=0;i<_cailiao.length;i++)
 			{
-				_cailiao[i].setIconResName(ClientConfig.getItemIcon(cailiaoId.toString(),IcoSizeEnum.ICON_48));	
+				var itemInfo:ClientItemInfo=new ClientItemInfo(cailiaoId);
+				FaceUtil.SetItemGrid(_cailiao[i],itemInfo);
+				_cailiao[i].selectImgVisible=false;
 				if(itemByBagNum>i)
 				{
-					_cailiao[i].filter=null;					
+					_cailiao[i].isGary=false
 				}else{
-					GrayFilter.gray(_cailiao[i]);
+					_cailiao[i].isGary=true;
 				}					
 			}
 		}
@@ -200,6 +255,21 @@ package com.rpgGame.appModule.equip
 			
 			EventManager.addEvent(ItemEvent.ITEM_STRENGTH_MSG,updateHechengHandler);
 			EventManager.addEvent(ItemEvent.ITEM_HECHENG_SELECT,updateHechengHandler);
+			
+			_skin.tree.addEventListener(Event.SELECT,onSelected);
+		}
+		
+		private function onSelected(e:Event):void
+		{
+			var treeNode : TreeNode = _skin.tree.selectedItem as  TreeNode;
+			if(!treeNode)
+				return;
+			var data:DetailNodeInfo=treeNode.data as DetailNodeInfo;
+			if(!data){
+				return;
+			}
+			
+			setSelectItem(HeChengData.getSonbySonTypeListByType(data.type,data.subType,data.detailType));
 		}
 		
 		private function clearEvent():void
@@ -208,6 +278,7 @@ package com.rpgGame.appModule.equip
 			_skin.btn_max.removeEventListener(Event.TRIGGERED,btnmaxHandler);
 			_skin.btnMax.removeEventListener(Event.TRIGGERED,btnTomaxHandler);
 			_skin.btn_hecheng.removeEventListener(Event.TRIGGERED,btnHeChengHandler);
+			_skin.tree.removeEventListener(Event.SELECT,onSelected);
 			
 			EventManager.removeEvent(ItemEvent.ITEM_STRENGTH_MSG,updateHechengHandler);
 		}
@@ -321,7 +392,11 @@ package com.rpgGame.appModule.equip
 		
 		private function setSelectItem(mod:Q_hecheng):void
 		{
-			if(_nowSelect.q_subson_type==mod.q_subson_type) return;
+			if(!mod){
+				return;
+			}
+			if(_nowSelect&&_nowSelect.q_subson_type==mod.q_subson_type) return;
+			_nowSelect=mod;
 			setShowData();
 		}
 	}
