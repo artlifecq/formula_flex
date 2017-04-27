@@ -402,7 +402,7 @@ package com.rpgGame.appModule.equip
 			}
 		}
 		
-		override public function show():void
+		override public function show(data:Object=null):void
 		{
 			initEvent();
 			refresh();
@@ -485,7 +485,7 @@ package com.rpgGame.appModule.equip
 				nextCfg=EquipStrengthCfg.getStrengthCfg(targetEquipInfo.qItem.q_kind,targetEquipInfo.qItem.q_job,currentLv);//下一级的配置
 				upExp=nextCfg.q_exp;//升级所需强化值
 				
-				if(exp<=upExp){//不够升级不查找
+				if(exp<upExp){//不够升级不查找
 					break;
 				}
 				canUpNum++;
@@ -604,7 +604,8 @@ package com.rpgGame.appModule.equip
 				useListIds.push(item.itemInfo.itemId);
 			}
 			
-			if(i==0&&result.length!=0){
+			useMon=addExp*perMon;
+			if(userMon<useMon||(addExp==0&&result.length!=0)){
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4202));
 				return;
 			}
@@ -650,6 +651,7 @@ package com.rpgGame.appModule.equip
 			EventManager.addEvent(ItemEvent.ITEM_ADD,onFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_REMOVE_LIST,onRemoveFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
+			EventManager.addEvent(ItemEvent.UNWEAR_EQUIPITEM,onFreshItems);
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
 			
 		}
@@ -750,7 +752,7 @@ package com.rpgGame.appModule.equip
 				}
 			}
 			
-			result=getEquipByType(type,useEquips);
+			/*result=getEquipByType(type,useEquips);
 			
 			for each(var info1:ClientItemInfo in result){
 				targetGrid=_goodsContainerTarget.getDragDropItemByItemInfo(info1);
@@ -763,7 +765,7 @@ package com.rpgGame.appModule.equip
 					targetGrid.isGary=false;
 				}
 			}
-			_goodsContainerUse.refleshGridsByDatas(result);
+			_goodsContainerUse.refleshGridsByDatas(result);*/
 		}
 		
 		override public function hide():void
@@ -776,7 +778,7 @@ package com.rpgGame.appModule.equip
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE_LIST,onRemoveFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
-			
+			EventManager.removeEvent(ItemEvent.UNWEAR_EQUIPITEM,onFreshItems);
 			GameAlert.closeAlert(LangUI.UI_TEXT3);
 		}
 		
@@ -828,12 +830,15 @@ package com.rpgGame.appModule.equip
 			var num:int=allEquips.length;
 			
 			targetEquips=getUpEquips(allEquips);
+			targetEquips.sort(onSortStrenEquip);
 			num=targetEquips.length;
 			num=num>MIN_GRID?num:MIN_GRID;
 			_goodsContainerTarget.setGridsCount(num,false);
 			_goodsContainerTarget.refleshGridsByDatas(targetEquips);
 			
 			useEquips=getUseEquips(allEquips);
+			useEquips.sort(sortForLevelNum);
+			useEquips.reverse();
 			num=useEquips.length;
 			num=num>MIN_GRID?num:MIN_GRID;
 			_goodsContainerUse.setGridsCount(num,false);
@@ -842,6 +847,63 @@ package com.rpgGame.appModule.equip
 			_goodsContainerUse1.refleshGridsByDatas(selectedUse);
 			
 			updateAll();
+		}
+		
+		/**
+		 *排序提升装备 
+		 * @return 
+		 * 
+		 */
+		private  function onSortStrenEquip(equipA : EquipInfo, equipB : EquipInfo):int
+		{
+			if(RoleEquipmentManager.equipIsWearing(equipA)){//穿着的
+				if(!RoleEquipmentManager.equipIsWearing(equipB)){
+					return -1;
+				}else{//都是穿着的
+					return sortForLevelNum(equipA,equipB);
+				}
+			}else{
+				if(RoleEquipmentManager.equipIsWearing(equipB)){
+					return 1;
+				}else{
+					return sortForLevelNum(equipA,equipB);
+				}
+			}
+			return 0;
+		}
+		
+		private function sortForLevelNum(equipA:EquipInfo, equipB:EquipInfo):int
+		{
+			if(equipA.qItem.q_levelnum==equipB.qItem.q_levelnum){//阶数相同
+				if(equipA.qItem.q_default==equipB.qItem.q_default){//品质相同
+					if(equipA.strengthLevel==equipB.strengthLevel){//强化等级相同
+						if(equipA.qItem.q_kind<equipB.qItem.q_kind){//根据部件排序
+							return -1;
+						}else{
+							return 1;
+						}
+					}else{
+						if(equipA.strengthLevel>equipB.strengthLevel){
+							return -1;
+						}else{
+							return 1;
+						}
+					}
+				}else{
+					if(equipA.qItem.q_default>equipB.qItem.q_default){
+						return -1;
+					}else{
+						return 1;
+					}
+				}
+			}else{
+				if(equipA.qItem.q_levelnum>equipB.qItem.q_levelnum){
+					return -1;
+				}else{
+					return 1;
+				}
+			}
+			return 0;
 		}
 		
 		private function updateAll():void

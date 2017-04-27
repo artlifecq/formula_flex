@@ -1,10 +1,14 @@
 package com.rpgGame.appModule.equip
 {
+	import com.game.engine3D.display.InterObject3D;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
+	import com.rpgGame.app.ui.common.CenterEftPop;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.appModule.common.ViewUI;
@@ -30,6 +34,7 @@ package com.rpgGame.appModule.equip
 	
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.UIAsset;
+	import feathers.data.ListCollection;
 	import feathers.data.TreeNode;
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
@@ -39,6 +44,8 @@ package com.rpgGame.appModule.equip
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhuangbei.hecheng.HeCheng_Skin;
 	import org.mokylin.skin.component.list.ListSkin1;
+	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat;
+	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 	
 	import starling.events.Event;
 	
@@ -67,6 +74,8 @@ package com.rpgGame.appModule.equip
 		private var cailiaoId:int;
 		private var userGold:Number;
 		private var userMoney:Number;
+
+		private var findRootNode:TreeNode;
 		
 		public function EquipComboUI()
 		{
@@ -82,9 +91,14 @@ package com.rpgGame.appModule.equip
 			_skin.tree.itemRendererType = EquipComboTreeItemRender ;
 			_skin.tree.scrollBarDisplayMode =  ScrollBarDisplayMode.ALWAYS_VISIBLE;
 			GuiThemeStyle.setFeatherSkinClass(_skin.tree, ListSkin1);
+//			GuiThemeStyle.setScrollerStyle(_skin.tree, ScrollBarSkin_pack);
 			var lay:VerticalLayout=new VerticalLayout();
-			lay.verticalAlign=VerticalAlign.TOP;
 			lay.hasVariableItemDimensions=true;
+			lay.useVirtualLayout = true;
+			lay.padding = 0;
+			lay.gap = 0;
+			lay.horizontalAlign = "justify";
+			lay.verticalAlign = "top";
 			_skin.tree.layout=lay;
 			_skin.tree.updateTree();
 		}
@@ -119,9 +133,7 @@ package com.rpgGame.appModule.equip
 					children=[];
 					for(j=0;j<details.length;j++){
 						detailNodeInfo=new DetailNodeInfo();
-						detailNodeInfo.type=mainNodeInfo.type;
-						detailNodeInfo.subType=subList[0];
-						detailNodeInfo.detailType=details[j];
+						detailNodeInfo.data=HeChengData.getSonbySonTypeListByType(mainNodeInfo.type,subList[0],details[j]);
 						children.push(detailNodeInfo);
 					}
 					tempNode.addChildren(children);//添加根节点
@@ -137,9 +149,7 @@ package com.rpgGame.appModule.equip
 						var childrens:Array=[];
 						for(k=0;k<details.length;k++){
 							detailNodeInfo=new DetailNodeInfo();
-							detailNodeInfo.type=mainNodeInfo.type;
-							detailNodeInfo.subType=subList[j];
-							detailNodeInfo.detailType=details[k];
+							detailNodeInfo.data=HeChengData.getSonbySonTypeListByType(mainNodeInfo.type,subList[j],details[k]);
 							childrens.push(detailNodeInfo);
 						}
 						detailList.push(childrens);
@@ -182,10 +192,79 @@ package com.rpgGame.appModule.equip
 			clearPanel();
 		}
 		
-		override public function show():void
+		override public function show(data:Object=null):void
 		{
 			super.show();
 			initEvent();
+			userGold=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_GOLD);
+			userMoney=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
+			
+			if(data){
+				var node:TreeNode=_skin.tree.rootNode;
+				var findId:int=data as int;
+				findNode(node,findId);
+				expandedNode(findRootNode);
+				_skin.tree.updateTree();
+				_skin.tree.selectedIndex=getIndexById(findId);
+				onSelected(null);
+			}
+		}
+		
+		private function getIndexById(findId:int):int
+		{
+			var datas:ListCollection=_skin.tree.dataProvider;
+			var arr:Array=datas.data as Array;
+			for(var i:int=0;i<arr.length;i++){
+				var node:TreeNode=arr[i] as TreeNode
+				if(node.data is DetailNodeInfo&&DetailNodeInfo(node.data).data.q_item_id==findId){
+					return i;
+				}
+			}
+			return 0;
+		}
+		
+		private function findNode(node:TreeNode,id:int):Boolean
+		{
+			if(node.data is MainNodeInfo){
+				findRootNode=node;
+			}
+			var len:int=node.children?node.children.length:0;
+			var child:TreeNode = null;
+			var detailInfo:DetailNodeInfo;
+			var hechengData:Q_hecheng;
+			for(var i:int = 0; i < len;i++ )
+			{
+				child = node.children[i];
+				detailInfo=child.data as DetailNodeInfo;
+				if(detailInfo){//是跟节点
+					hechengData=detailInfo.data;
+					if(hechengData.q_item_id==id){//合成目标物
+						return true;
+					}
+				}else{
+					if(findNode(child,id)){
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+		
+		private function expandedNode(node:TreeNode):void
+		{
+			if(!node.expanded&&node.hasChildren)
+			{
+				node.expanded=true;
+			}
+			
+			var len:int= 0;
+			var child:TreeNode = null;
+			len = node.children?node.children.length:0;
+			for(var i:int = 0; i < len;i++ )
+			{
+				child = node.children[i];
+				expandedNode(child);
+			}
 		}
 		
 		override public function hide():void
@@ -193,6 +272,7 @@ package com.rpgGame.appModule.equip
 			super.hide();
 			clearEvent();
 			clearAll();
+			_nowSelect=null;
 		}
 		
 		//显示合成的对象
@@ -281,6 +361,8 @@ package com.rpgGame.appModule.equip
 		
 		private function onFreshItems(info:ClientItemInfo=null):void
 		{
+			_skin.tree.dataProvider.updateAll();
+			
 			if(info.containerID==ItemContainerID.BackPack&&info.cfgId==cailiaoId){//背包里的合成对应合成材料
 				setShowData();
 			}
@@ -294,6 +376,7 @@ package com.rpgGame.appModule.equip
 					break;
 				}
 			}
+			_skin.tree.dataProvider.updateAll();
 		}
 		
 		private function onSelected(e:Event):void
@@ -306,7 +389,7 @@ package com.rpgGame.appModule.equip
 				return;
 			}
 			
-			setSelectItem(HeChengData.getSonbySonTypeListByType(data.type,data.subType,data.detailType));
+			setSelectItem(data.data);
 		}
 		
 		private function clearEvent():void
@@ -352,6 +435,9 @@ package com.rpgGame.appModule.equip
 			}else if(_useGold*_hechengNum!=0&&_useGold*_hechengNum>userGold){
 				des=HtmlTextUtil.getTextColor(0xd02525,(_useGold*_hechengNum).toString()+"元宝");//红色
 			}*/
+			if(!_nowSelect){
+				return "";
+			}
 			var needMoney:int=_nowSelect.q_money*_hechengNum;
 			if(needMoney<=userMoney){
 				des+=HtmlTextUtil.getTextColor(0x55BD15,(needMoney).toString()+"银两");//绿色
@@ -395,7 +481,10 @@ package com.rpgGame.appModule.equip
 		/**合成请求*/
 		private function btnHeChengHandler(e:Event):void
 		{
-			if(!_nowSelect) return;
+			if(!_nowSelect){
+				NoticeManager.showNotifyById(6019);
+				return;
+			}
 			var cailiao:Array=JSONUtil.decode(_nowSelect.q_cost_items);
 			if(cailiao==null) return;
 			var cailiaoId:int=parseInt(cailiao[0]);
@@ -404,11 +493,11 @@ package com.rpgGame.appModule.equip
 			if(itemByBagNum<cailiaoNum)
 			{
 				//提示材料不足
-				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6012));
+				NoticeManager.showNotifyById(6017);
 				return;
 			}else if(_nowSelect.q_money*_hechengNum>userMoney){
 				//提示银两不足
-				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6012));
+				NoticeManager.showNotifyById(6018);
 				return;
 			}
 			ItemSender.reqItemCompositionMessage(EquipOperateType.COMBO_NORMAL,_nowSelect.q_id,_hechengNum);
@@ -420,7 +509,16 @@ package com.rpgGame.appModule.equip
 			if(msg.result==1)
 			{
 				setCaiLiaoData();
+				_skin.tree.dataProvider.updateAll();
+				
+				this.playInter3DAt(ClientConfig.getEffect("ui_hechenghuiju"),0,0,1,null,addEftComple);
+				UIPopManager.showAlonePopUI(CenterEftPop,"ui_qianghuachenggong");
 			}
+		}
+		
+		private function addEftComple(uint:RenderUnit3D):void
+		{
+			uint.play();
 		}
 		
 		private function setSelectItem(mod:Q_hecheng):void

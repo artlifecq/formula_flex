@@ -69,5 +69,7 @@ package com.rpgGame.coreData.cfg
 			}
 			return maps;
 		}
+		
+		
 	}
 }

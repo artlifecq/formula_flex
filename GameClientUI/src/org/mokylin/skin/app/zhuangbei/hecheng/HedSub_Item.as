@@ -1,21 +1,25 @@
 package org.mokylin.skin.app.zhuangbei.hecheng
 {
 	import feathers.controls.text.Fontter;
+	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.Radio;
 	import feathers.controls.StateSkin;
 	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonErji_bg;
+	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonSanjiao_right;
 
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class Cont_Erji_Item extends feathers.controls.StateSkin
+	public class HedSub_Item extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var btnFlag:feathers.controls.Button;
+
 		public var labelDisplay:feathers.controls.Label;
 
 		public var rdo_btn:feathers.controls.Radio;
@@ -24,12 +28,12 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function Cont_Erji_Item()
+		public function HedSub_Item()
 		{
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [rdo_btn_i(),labelDisplay_i()];
+			this.elementsContent = [rdo_btn_i(),labelDisplay_i(),btnFlag_i()];
 			
 			states = {
 			};
@@ -40,6 +44,17 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function btnFlag_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btnFlag = temp;
+			temp.name = "btnFlag";
+			temp.styleClass = org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonSanjiao_right;
+			temp.x = 37;
+			temp.y = 10;
+			return temp;
+		}
+
 		private function labelDisplay_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();

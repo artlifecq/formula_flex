@@ -1121,7 +1121,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "txt_level";
 			temp.height = 22;
 			temp.fontSize = 14;
-			temp.text = "Lv3";
+			temp.text = "Lv100";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
@@ -1287,7 +1287,7 @@ package org.mokylin.skin.app.beibao
 			temp.text = "兵家";
 			temp.color = 0xABAD97;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 31;
+			temp.x = 40;
 			temp.y = 3;
 			return temp;
 		}

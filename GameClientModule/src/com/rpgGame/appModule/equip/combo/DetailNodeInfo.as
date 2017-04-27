@@ -1,5 +1,7 @@
 package com.rpgGame.appModule.equip.combo
 {
+	import com.rpgGame.coreData.clientConfig.Q_hecheng;
+
 	/**
 	 *
 	 *@author dik
@@ -7,9 +9,7 @@ package com.rpgGame.appModule.equip.combo
 	 */
 	public class DetailNodeInfo
 	{
-		public var type:int;
-		public var subType:int;
-		public var detailType:int;
+		public var data:Q_hecheng;
 		
 		public function DetailNodeInfo()
 		{

@@ -1,5 +1,7 @@
 package com.rpgGame.appModule.equip
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.ItemManager;
@@ -104,6 +106,9 @@ package com.rpgGame.appModule.equip
 		private var isToUp:Boolean;
 		private var _progressBar:AwdProgressBar;
 		private var isLockRefresh:Boolean;
+
+		private var eftCon:Inter3DContainer;
+		private var zuomoEft:InterObject3D;
 		
 		public function EquipPolishUI()
 		{
@@ -155,18 +160,10 @@ package com.rpgGame.appModule.equip
 			_targetEquip.dragAble = true;
 			_targetEquip.checkDrag=checkDrag;
 			_skin.container.addChild(_targetEquip);
-			_skin.cilun_xiao.pivotY=_skin.cilun_xiao.pivotX=259/2;
-			_skin.xilun_da.pivotY=_skin.xilun_da.pivotX=181/2;
-			_skin.cilun_xiao.x+=_skin.cilun_xiao.pivotX;
-			_skin.cilun_xiao.y+=_skin.cilun_xiao.pivotX;
-			_skin.xilun_da.x+=_skin.xilun_da.pivotX;
-			_skin.xilun_da.y+=_skin.xilun_da.pivotX;
-		}
-		
-		private function rotationEft():void
-		{			
-			_skin.cilun_xiao.rotation-=1;
-			_skin.xilun_da.rotation+=1;
+			
+			eftCon=new Inter3DContainer();
+			zuomoEft=eftCon.playInter3DAt(ClientConfig.getEffect("ui_zhuomo"),-45,10,0);
+			this._skin.grp_cilun.addChild(eftCon);
 		}
 		
 		private function onCancelUse(grid:DragDropItem):void
@@ -371,7 +368,7 @@ package com.rpgGame.appModule.equip
 			}
 			
 			useMon=addExp*perMon;
-			if(userMon<useMon||i==0){
+			if(userMon<useMon||(addExp==0&&result.length!=0)){
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6014));
 				return;
 			}
@@ -380,7 +377,6 @@ package com.rpgGame.appModule.equip
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(4205));
 				return;
 			}
-			
 			
 			var p:Point=new Point(this._skin.btn_zuomo_all.x+this._skin.btn_zuomo_all.width/2,this._skin.btn_zuomo_all.y+this._skin.btn_zuomo_all.height/2);
 			p=this._skin.btn_zuomo_all.parent.localToGlobal(p);
@@ -399,7 +395,7 @@ package com.rpgGame.appModule.equip
 		private function onTouchGrid( grid:DragDropItem ):void
 		{
 			var gridInfo:GridInfo=grid.gridInfo;
-			if(gridInfo.data==null){
+			if(gridInfo.data==null||grid.isGary){
 				return;
 			}
 			if(gridInfo.containerID==ItemContainerID.POLIST_LIST){
@@ -474,7 +470,7 @@ package com.rpgGame.appModule.equip
 			if(tweenEquip){
 				tweenEquip.kill();
 			}
-			tweenEquip=TweenMax.to(_targetEquip,1,{x:607,y:175,ease:Expo.easeOut});
+			tweenEquip=TweenMax.to(_targetEquip,1,{x:612,y:177,ease:Expo.easeOut});
 			
 			if(isUse(targetEquipInfo)){
 				targetGrid=_goodsContainerUse.getDragDropItemByItemInfo(targetEquipInfo);
@@ -582,7 +578,7 @@ package com.rpgGame.appModule.equip
 				nextCfg=EquipPolishCfg.getPolishCfg(currentLv);//下一级的配置
 				upExp=nextCfg.q_exp;//升级所需
 				
-				if(exp<=upExp){//不够升级不查找
+				if(exp<upExp){//不够升级不查找
 					break;
 				}
 				canUpNum++;
@@ -619,12 +615,11 @@ package com.rpgGame.appModule.equip
 			refreshUseEquipGrid();
 		}
 		
-		override public function show():void
+		override public function show(data:Object=null):void
 		{
 			initEvent();
 			refresh();
-			
-			TimerServer.addLoop(rotationEft,60);
+			zuomoEft.start();
 		}
 		
 		override public function refresh():void
@@ -640,6 +635,8 @@ package com.rpgGame.appModule.equip
 			EventManager.addEvent(ItemEvent.ITEM_ADD,onFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_REMOVE_LIST,onRemoveFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
+			EventManager.addEvent(ItemEvent.UNWEAR_EQUIPITEM,onFreshItems);
+			
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
 		}
 		
@@ -654,7 +651,7 @@ package com.rpgGame.appModule.equip
 		
 		override public function hide():void
 		{
-			TimerServer.remove(rotationEft);
+			zuomoEft.stop();
 			cancelAllUse();
 			if(targetEquipInfo){
 				var targetGrid:DragDropItem=_goodsContainerTarget.getDragDropItemByItemInfo(targetEquipInfo);
@@ -674,6 +671,7 @@ package com.rpgGame.appModule.equip
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE_LIST,onRemoveFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
+			EventManager.removeEvent(ItemEvent.UNWEAR_EQUIPITEM,onFreshItems);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
 		}
 		
@@ -718,7 +716,7 @@ package com.rpgGame.appModule.equip
 				GameAlert.showAlert(alertOk);
 			}
 			if(msg.result==1){
-				UIPopManager.showAlonePopUI(CenterEftPop,"ui_qianghuachenggong");
+				UIPopManager.showAlonePopUI(CenterEftPop,"ui_zhuomochenggong");
 			}
 			addExp=0;
 			isToUp=false;
@@ -756,7 +754,7 @@ package com.rpgGame.appModule.equip
 				}
 			}
 			
-			result=getEquipByType(type,useEquips);
+			/*result=getEquipByType(type,useEquips);
 			
 			for each(var info1:ClientItemInfo in result){
 				targetGrid=_goodsContainerTarget.getDragDropItemByItemInfo(info1);
@@ -769,7 +767,7 @@ package com.rpgGame.appModule.equip
 					targetGrid.isGary=false;
 				}
 			}
-			_goodsContainerUse.refleshGridsByDatas(result);
+			_goodsContainerUse.refleshGridsByDatas(result);*/
 		}
 		
 		private function getEquipByType(type:int,datas:Vector.<ClientItemInfo>):Vector.<ClientItemInfo>
@@ -791,12 +789,15 @@ package com.rpgGame.appModule.equip
 			var allEquips:Array=ItemManager.getAllEquipDatas();
 			var num:int=allEquips.length;
 			targetEquips=getPolishEquips(allEquips);
+			targetEquips.sort(onSortPolishEquip);
 			num=targetEquips.length;
 			num=num>MIN_GRID?num:MIN_GRID;
 			_goodsContainerTarget.setGridsCount(num,false);
 			_goodsContainerTarget.refleshGridsByDatas(targetEquips);
 			
 			useEquips=getUseEquips(allEquips);
+			useEquips.sort(sortForLevelNum);
+			useEquips.reverse();
 			num=num>MIN_GRID?num:MIN_GRID;
 			_goodsContainerUse.setGridsCount(num,false);
 			_goodsContainerUse.refleshGridsByDatas(useEquips);
@@ -805,6 +806,63 @@ package com.rpgGame.appModule.equip
 			refreshUseEquipGrid();
 			
 			updateAll();
+		}
+		
+		/**
+		 *排序提升装备 
+		 * @return 
+		 * 
+		 */
+		private  function onSortPolishEquip(equipA : EquipInfo, equipB : EquipInfo):int
+		{
+			if(RoleEquipmentManager.equipIsWearing(equipA)){//穿着的
+				if(!RoleEquipmentManager.equipIsWearing(equipB)){
+					return -1;
+				}else{//都是穿着的
+					return sortForLevelNum(equipA,equipB);
+				}
+			}else{
+				if(RoleEquipmentManager.equipIsWearing(equipB)){
+					return 1;
+				}else{
+					return sortForLevelNum(equipA,equipB);
+				}
+			}
+			return 0;
+		}
+		
+		private function sortForLevelNum(equipA:EquipInfo, equipB:EquipInfo):int
+		{
+			if(equipA.qItem.q_levelnum==equipB.qItem.q_levelnum){//阶数相同
+				if(equipA.qItem.q_default==equipB.qItem.q_default){//品质相同
+					if(equipA.polishLevel==equipB.polishLevel){//强化等级相同
+						if(equipA.qItem.q_kind<equipB.qItem.q_kind){//根据部件排序
+							return -1;
+						}else{
+							return 1;
+						}
+					}else{
+						if(equipA.polishLevel>equipB.polishLevel){
+							return -1;
+						}else{
+							return 1;
+						}
+					}
+				}else{
+					if(equipA.qItem.q_default>equipB.qItem.q_default){
+						return -1;
+					}else{
+						return 1;
+					}
+				}
+			}else{
+				if(equipA.qItem.q_levelnum>equipB.qItem.q_levelnum){
+					return -1;
+				}else{
+					return 1;
+				}
+			}
+			return 0;
 		}
 		
 		private function updateAll():void

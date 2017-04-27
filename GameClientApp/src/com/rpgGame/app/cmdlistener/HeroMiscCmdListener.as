@@ -151,8 +151,43 @@ package com.rpgGame.app.cmdlistener
                     (MainRoleManager.actor.data as HeroData).totalStat.getResData(msg.curType));
             }
             
+			checkMoney(msg);
+			
 			MainRoleManager.actorInfo.totalStat.setResData(msg.curType,msg.value);
 			EventManager.dispatchEvent(MainPlayerEvent.STAT_RES_CHANGE,msg.curType);
+		}
+		
+		/**
+		 *检测金钱变化 
+		 * @param msg
+		 * 
+		 */
+		private function checkMoney(msg:SCCurrencyChangeMessage):void
+		{
+			var noticeId:int;
+			var oldValue:int;
+			var change:int; 
+			switch(msg.curType){
+				case CharAttributeType.RES_GOLD:
+					change=msg.value-MainRoleManager.actorInfo.totalStat.getResData(msg.curType);
+					noticeId=change>0?11:15;
+					break;
+				case CharAttributeType.RES_BIND_GOLD:
+					change=msg.value-MainRoleManager.actorInfo.totalStat.getResData(msg.curType);
+					noticeId=change>0?14:18;
+					break;
+				case CharAttributeType.RES_MONEY:
+					change=msg.value-MainRoleManager.actorInfo.totalStat.getResData(msg.curType);
+					noticeId=change>0?13:17;
+					break;
+				case CharAttributeType.RES_BIND_MONEY:
+					change=msg.value-MainRoleManager.actorInfo.totalStat.getResData(msg.curType);
+					noticeId=change>0?12:16;
+					break;
+				default:
+				return;
+			}
+			NoticeManager.showNotifyById(noticeId,[change]);
 		}
 		
 		private function RecvResPlayerAddMPMessage(msg:*):void

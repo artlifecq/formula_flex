@@ -337,13 +337,14 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_dengji = temp;
 			temp.name = "lb_dengji";
-			temp.height = 25;
+			temp.height = 20;
 			temp.htmlText = "最大强化等级：<font color='#CFC6AE'>30/30</font>";
+			temp.textAlign = "right";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 146;
-			temp.x = 782;
-			temp.y = 105;
+			temp.x = 775;
+			temp.y = 111;
 			return temp;
 		}
 

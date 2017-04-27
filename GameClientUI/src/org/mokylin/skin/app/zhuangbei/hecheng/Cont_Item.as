@@ -12,11 +12,15 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class Cont_Item_an extends feathers.controls.StateSkin
+	public class Cont_Item extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var bg1:feathers.controls.UIAsset;
+
+		public var bg2:feathers.controls.UIAsset;
+
 		public var btn_over:feathers.controls.Button;
 
 		public var lb_Dispaly:feathers.controls.Label;
@@ -25,14 +29,14 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function Cont_Item_an()
+		public function Cont_Item()
 		{
 			super();
 			
 			this.currentState = "normal";
 			this.height = 32;
 			this.width = 245;
-			this.elementsContent = [__Cont_Item_an_UIAsset1_i(),lb_Dispaly_i(),btn_over_i()];
+			this.elementsContent = [bg1_i(),bg2_i(),lb_Dispaly_i(),btn_over_i()];
 			
 			states = {
 			};
@@ -43,9 +47,24 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __Cont_Item_an_UIAsset1_i():feathers.controls.UIAsset
+		private function bg1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg1 = temp;
+			temp.name = "bg1";
+			temp.height = 32;
+			temp.styleName = "ui/app/zhuangbei/hecheng/qianse_di.jpg";
+			temp.width = 245;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function bg2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg2 = temp;
+			temp.name = "bg2";
 			temp.height = 32;
 			temp.styleName = "ui/app/zhuangbei/hecheng/shense_di.jpg";
 			temp.width = 245;

@@ -26,6 +26,10 @@ package com.rpgGame.core.events
 		 */
 		public static const ITEM_REMOVE:int=UNIQUEID.NEXT;
 		/**
+		 *卸载装备
+		 */
+		public static const UNWEAR_EQUIPITEM:int=UNIQUEID.NEXT;
+		/**
 		 *物品删除列表
 		 */
 		public static const ITEM_REMOVE_LIST:int=UNIQUEID.NEXT;

@@ -524,7 +524,11 @@ package com.rpgGame.app.manager.goods
 		{
 			var info:ClientItemInfo = getItemInfoByIndex(index);
 			_goodsList[index] = null;
-			EventManager.dispatchEvent(ItemEvent.ITEM_REMOVE,info);			
+			if(info.containerID==ItemContainerID.Role){
+				EventManager.dispatchEvent(ItemEvent.UNWEAR_EQUIPITEM,info);//卸载装备
+			}else{
+				EventManager.dispatchEvent(ItemEvent.ITEM_REMOVE,info);			
+			}
 			checkBackGrdi();
 			return info;
 		}

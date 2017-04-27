@@ -1,12 +1,10 @@
 package org.mokylin.skin.app.zhuangbei.hecheng
 {
-	import feathers.controls.text.Fontter;
-	import feathers.controls.Button;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
-	import org.mokylin.skin.app.zhuangbei.hecheng.Cont_Item_qian;
-	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonErji_bg;
-	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonJianding;
+	import org.mokylin.skin.app.zhuangbei.hecheng.Cont_Item;
+	import org.mokylin.skin.app.zhuangbei.hecheng.HedMain_Item;
+	import org.mokylin.skin.app.zhuangbei.hecheng.HedSub_Item;
 
 	/**
 	 * @private
@@ -20,9 +18,9 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 		//==========================================================================
 		public var detail_item:feathers.controls.SkinnableContainer;
 
-		public var main_item:feathers.controls.Button;
+		public var main_item:feathers.controls.SkinnableContainer;
 
-		public var sub_item:feathers.controls.Button;
+		public var sub_item:feathers.controls.SkinnableContainer;
 
 
 		//==========================================================================
@@ -33,7 +31,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [sub_item_i(),main_item_i(),detail_item_i()];
+			this.elementsContent = [detail_item_i(),main_item_i(),sub_item_i()];
 			
 			states = {
 			};
@@ -50,7 +48,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			detail_item = temp;
 			temp.name = "detail_item";
 			temp.height = 32;
-			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.hecheng.Cont_Item_qian()
+			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.hecheng.Cont_Item()
 			temp.skin = skin
 			temp.width = 245;
 			temp.x = 0;
@@ -58,29 +56,28 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			return temp;
 		}
 
-		private function main_item_i():feathers.controls.Button
+		private function main_item_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			main_item = temp;
 			temp.name = "main_item";
 			temp.height = 44;
-			temp.styleClass = org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonJianding;
+			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.hecheng.HedMain_Item()
+			temp.skin = skin
 			temp.width = 244;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function sub_item_i():feathers.controls.Button
+		private function sub_item_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			sub_item = temp;
 			temp.name = "sub_item";
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.height = 36;
-			temp.label = "初级鉴定图纸";
-			temp.styleClass = org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonErji_bg;
-			temp.color = 0xE1D4A9;
+			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.hecheng.HedSub_Item()
+			temp.skin = skin
 			temp.width = 248;
 			temp.x = 0;
 			temp.y = 0;

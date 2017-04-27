@@ -10,8 +10,16 @@ package com.rpgGame.appModule.equip.combo
 	import feathers.controls.renderers.DefaultTreeItemRender;
 	import feathers.data.TreeNode;
 	
-	import org.mokylin.skin.app.zhuangbei.hecheng.Cont_Item_qian;
+	import org.mokylin.skin.app.zhuangbei.hecheng.Cont_Item;
 	import org.mokylin.skin.app.zhuangbei.hecheng.HeChengMenuItemSkin;
+	import org.mokylin.skin.app.zhuangbei.hecheng.HedMain_Item;
+	import org.mokylin.skin.app.zhuangbei.hecheng.HedSub_Item;
+	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonBianshi;
+	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonJiahao;
+	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonJianding;
+	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonJianhao;
+	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonSanjiao_down;
+	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonSanjiao_right;
 	
 	import starling.display.DisplayObject;
 	
@@ -24,6 +32,7 @@ package com.rpgGame.appModule.equip.combo
 	{
 		private var _skin:HeChengMenuItemSkin;
 		private var _renderHeight:Number;
+		private var _mainListStyles:Array=[ButtonJianding,ButtonBianshi];
 		
 		public function EquipComboTreeItemRender()
 		{
@@ -47,9 +56,11 @@ package com.rpgGame.appModule.equip.combo
 			if(treeNode.hasChildren && target != toggleButton)
 			{
 				treeNode.expanded = !treeNode.expanded;
+				renderTreeNode(treeNode);
 				tree.updateTree();
 			}
 		}
+		
 		
 		override protected function renderTreeNode(node:TreeNode):void
 		{
@@ -59,28 +70,45 @@ package com.rpgGame.appModule.equip.combo
 				_skin.sub_item.removeFromParent();
 				_skin.detail_item.removeFromParent();
 				_renderHeight=_skin.main_item.height;
+				var mainSkin:HedMain_Item=_skin.main_item.skin as HedMain_Item;
+				var mainInfo:MainNodeInfo=node.data as MainNodeInfo;
+				mainSkin.btnCont.styleClass=_mainListStyles[mainInfo.type-1];
+				if(node.expanded){
+					mainSkin.btnFlag.styleClass=ButtonJianhao;
+					mainSkin.btnFlag.y=20;
+				}else{
+					mainSkin.btnFlag.styleClass=ButtonJiahao;
+					mainSkin.btnFlag.y=12;
+				}
 			}else if(node.data is SubNodeInfo){
 				this.addChild(_skin.sub_item);
 				_skin.main_item.removeFromParent();
 				_skin.detail_item.removeFromParent();
 				_renderHeight=_skin.sub_item.height;
-				var subSkin:Button=_skin.sub_item;
+				var subSkin:HedSub_Item=_skin.sub_item.skin as HedSub_Item;
 				var subInfo:SubNodeInfo=node.data as SubNodeInfo;
-				subSkin.label=HeChengData.getSubName(subInfo.type,subInfo.subType);
+				subSkin.labelDisplay.text=HeChengData.getSubName(subInfo.type,subInfo.subType);
+				if(node.expanded){
+					subSkin.btnFlag.styleClass=ButtonSanjiao_down;
+				}else{
+					subSkin.btnFlag.styleClass=ButtonSanjiao_right;
+				}
 			}else if(node.data is DetailNodeInfo){
 				this.addChild(_skin.detail_item);
 				_skin.main_item.removeFromParent();
 				_skin.sub_item.removeFromParent();
 				_renderHeight=_skin.detail_item.height;
 				var detailInfo:DetailNodeInfo=node.data as DetailNodeInfo;
-				hechengData=HeChengData.getSonbySonTypeListByType(detailInfo.type,detailInfo.subType,detailInfo.detailType);
+				hechengData=detailInfo.data;
 				if(hechengData==null) return;
 				var cailiao:Array=JSONUtil.decode(hechengData.q_cost_items);
 				var cailiaoId:int=parseInt(cailiao[0]);
 				var itemByBagNum:int=BackPackManager.instance.getBagItemsCountById(cailiaoId);
-				var qianSkin:Cont_Item_qian=_skin.detail_item.skin as Cont_Item_qian;
+				var qianSkin:Cont_Item=_skin.detail_item.skin as Cont_Item;
 				qianSkin.lb_Dispaly.color=ItemConfig.getItemQualityColor(cailiaoId);
 				qianSkin.lb_Dispaly.text=ItemConfig.getItemName(cailiaoId)+"("+itemByBagNum+")";
+				qianSkin.bg1.visible=detailInfo.data.q_subson_type%2==0;
+				qianSkin.bg2.visible=!qianSkin.bg1.visible;
 			}
 		}
 	}
