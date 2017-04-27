@@ -90,7 +90,7 @@ package com.rpgGame.appModule.equip
 					var values1:Array;
 					attValues1=AttValueConfig.getAttInfoById(tragetCfg.q_att_type);
 					maps1=AttValueConfig.getTypeValueMap(attValues1);
-					values1=maps1.getValues();
+					values1=maps1.values();
 					
 					var attValues2:Q_att_values;
 					var maps2:HashMap;
@@ -98,7 +98,7 @@ package com.rpgGame.appModule.equip
 					attValues2=AttValueConfig.getAttInfoById(useCfg.q_att_type);
 					maps2=AttValueConfig.getTypeValueMap(attValues2);
 					keys=maps2.keys();
-					values2=maps2.getValues();
+					values2=maps2.values();
 					if(useInfo.strengthLevel>0&&values2!=null)
 					{
 						_skin.labelDisplay.htmlText="强化等级:"+HtmlTextUtil.getTextColor(0xcfc6ae,tragetInfo.strengthLevel.toString())+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+((useInfo.strengthLevel-tragetInfo.strengthLevel)+")"));
@@ -186,7 +186,7 @@ package com.rpgGame.appModule.equip
 							attValues1=AttValueConfig.getAttInfoById(q_wash_attr.q_attr_id);
 							maps1=AttValueConfig.getTypeValueMap(attValues1);
 							keys=maps1.keys();
-							values1=maps1.getValues();
+							values1=maps1.values();
 							for(i=0;i<values1.length;i++)
 							{
 								lab=new Label;
@@ -218,7 +218,7 @@ package com.rpgGame.appModule.equip
 							attValues1=AttValueConfig.getAttInfoById(q_wash_attr.q_attr_id);
 							maps1=AttValueConfig.getTypeValueMap(attValues1);
 							keys=maps1.keys();
-							values1=maps1.getValues();
+							values1=maps1.values();
 							for(i=0;i<values1.length;i++)
 							{
 								lab=new Label;
