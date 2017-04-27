@@ -58,8 +58,8 @@ package com.rpgGame.app.manager
 			if(skillInfo ==null)
 				return ;
 			_infos.push(skillInfo);
-			/*if(_infos.length==1)
-				curSkillId = skillInfo.skillId;*/
+			if(_infos.length==1)
+				curSkillId = skillInfo.skillId;
 			
 			EventManager.dispatchEvent(LostSkill_ChangeSkillState);
 		}

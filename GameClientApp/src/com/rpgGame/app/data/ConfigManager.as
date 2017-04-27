@@ -62,6 +62,8 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.item.EquipWashAttCfg;
 	import com.rpgGame.coreData.cfg.item.EquipWashCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.cfg.item.ItemStrength;
+	import com.rpgGame.coreData.cfg.meridian.MeridianCfg;
 	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarHairResCfgData;
@@ -189,6 +191,7 @@ package com.rpgGame.app.data
 			EquipWashCfg.setup(dic[ConfigClassRegister.Q_equip_wash]);
 			EquipWashAttCfg.setup(dic[ConfigClassRegister.Q_equip_wash_attr]);
 //			CountryUnionStatCfgData.setup(null); //待解决
+			MeridianCfg.setup(dic[ConfigClassRegister.Q_meridian]);
 			
 			////////////////////////////////////////////////////////////////////////
 			//

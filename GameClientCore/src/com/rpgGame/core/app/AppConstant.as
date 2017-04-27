@@ -357,5 +357,7 @@ package com.rpgGame.core.app
 		public static var STALL_AREA_PANEL : String = createAppInfo("stall.StallAreaPanel");
 		/**系统设置**/
 		public static var SYSTEMSET_PANEL:String = createAppInfo("systemset.SystemsetingPanel","systemSet");
+		/**经脉**/
+		public static var JINGMAI_PANEL:String = createAppInfo("jingmai.JingMaiPanelExt","jingmai");
 	}
 }

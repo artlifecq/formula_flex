@@ -51,14 +51,14 @@ package org.mokylin.skin.mainui.juexue
 			
 			states = {
 			};
-			skinNames={"0":"ui/mainui/juexue/juexue.png",
-			"1":"ui/common/Icon/juexue/feishengjiutian/24.png",
-			"2":"ui/common/Icon/juexue/wanghunbeige/24.png",
-			"3":"ui/common/Icon/juexue/binfengsudong/24.png",
-			"4":"ui/common/Icon/juexue/renzheshengui/24.png",
-			"5":"ui/common/Icon/juexue/shikongliexi/24.png",
-			"6":"ui/common/Icon/juexue/canglongzhili/24.png",
-			"7":"ui/common/Icon/juexue/shengshengbuxi/24.png"};
+			skinNames={"0":"ui/mainui/juexue/icon/juexue.png",
+			"1":"ui/mainui/juexue/icon/feishengjiutian.png",
+			"2":"ui/mainui/juexue/icon/wanghunbeige.png",
+			"3":"ui/mainui/juexue/icon/binfengsudong.png",
+			"4":"ui/mainui/juexue/icon/renzheshengui.png",
+			"5":"ui/mainui/juexue/icon/shikongliexi.png",
+			"6":"ui/mainui/juexue/icon/canglongzhili.png",
+			"7":"ui/mainui/juexue/icon/shengshengbux.png"};
 		}
 
 
@@ -69,7 +69,7 @@ package org.mokylin.skin.mainui.juexue
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__Juexue_mc_UIAsset1 = temp;
-			temp.styleName = "ui/common/Icon/juexue/feishengjiutian/24.png";
+			temp.styleName = "ui/mainui/juexue/icon/feishengjiutian.png";
 			return temp;
 		}
 
@@ -77,7 +77,7 @@ package org.mokylin.skin.mainui.juexue
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__Juexue_mc_UIAsset2 = temp;
-			temp.styleName = "ui/common/Icon/juexue/wanghunbeige/24.png";
+			temp.styleName = "ui/mainui/juexue/icon/wanghunbeige.png";
 			return temp;
 		}
 
@@ -85,7 +85,7 @@ package org.mokylin.skin.mainui.juexue
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__Juexue_mc_UIAsset3 = temp;
-			temp.styleName = "ui/common/Icon/juexue/binfengsudong/24.png";
+			temp.styleName = "ui/mainui/juexue/icon/binfengsudong.png";
 			return temp;
 		}
 
@@ -93,7 +93,7 @@ package org.mokylin.skin.mainui.juexue
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__Juexue_mc_UIAsset4 = temp;
-			temp.styleName = "ui/common/Icon/juexue/renzheshengui/24.png";
+			temp.styleName = "ui/mainui/juexue/icon/renzheshengui.png";
 			return temp;
 		}
 
@@ -101,7 +101,7 @@ package org.mokylin.skin.mainui.juexue
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__Juexue_mc_UIAsset5 = temp;
-			temp.styleName = "ui/common/Icon/juexue/shikongliexi/24.png";
+			temp.styleName = "ui/mainui/juexue/icon/shikongliexi.png";
 			return temp;
 		}
 
@@ -109,7 +109,7 @@ package org.mokylin.skin.mainui.juexue
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__Juexue_mc_UIAsset6 = temp;
-			temp.styleName = "ui/common/Icon/juexue/canglongzhili/24.png";
+			temp.styleName = "ui/mainui/juexue/icon/canglongzhili.png";
 			return temp;
 		}
 
@@ -117,7 +117,7 @@ package org.mokylin.skin.mainui.juexue
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__Juexue_mc_UIAsset7 = temp;
-			temp.styleName = "ui/common/Icon/juexue/shengshengbuxi/24.png";
+			temp.styleName = "ui/mainui/juexue/icon/shengshengbux.png";
 			return temp;
 		}
 
@@ -125,7 +125,7 @@ package org.mokylin.skin.mainui.juexue
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__Juexue_mc_UIAsset8 = temp;
-			temp.styleName = "ui/mainui/juexue/juexue.png";
+			temp.styleName = "ui/mainui/juexue/icon/juexue.png";
 			return temp;
 		}
 

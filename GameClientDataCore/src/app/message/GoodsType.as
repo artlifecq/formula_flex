@@ -77,9 +77,9 @@ package app.message {
 		public static const DUNGOEN:int = 19;
 		
 		/**
-		 *帮会
+		 *砭石
 		 */
-		public static const FACTION:int = 20;
+		public static const MERIDIANSTONE:int = 20;
 		
 		/**
 		 *pk

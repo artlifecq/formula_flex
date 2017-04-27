@@ -1,8 +1,8 @@
 package org.mokylin.skin.app.beibao
 {
-	import feathers.controls.Group;
 	import feathers.controls.Radio;
 	import feathers.controls.StateSkin;
+	import org.mokylin.skin.app.beibao.button.ButtonJingmai;
 	import org.mokylin.skin.app.beibao.button.ButtonJuese;
 
 	/**
@@ -15,9 +15,9 @@ package org.mokylin.skin.app.beibao
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var btn_juese:feathers.controls.Radio;
+		public var btn_jingmai:feathers.controls.Radio;
 
-		public var btn_nv:feathers.controls.Group;
+		public var btn_juese:feathers.controls.Radio;
 
 
 		//==========================================================================
@@ -29,8 +29,7 @@ package org.mokylin.skin.app.beibao
 			
 			this.currentState = "normal";
 			this.height = 51;
-			this.width = 141;
-			this.elementsContent = [btn_nv_i()];
+			this.elementsContent = [btn_juese_i(),btn_jingmai_i()];
 			
 			states = {
 			};
@@ -41,26 +40,27 @@ package org.mokylin.skin.app.beibao
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function btn_jingmai_i():feathers.controls.Radio
+		{
+			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			btn_jingmai = temp;
+			temp.name = "btn_jingmai";
+			temp.groupName = "rdoJuese";
+			temp.styleClass = org.mokylin.skin.app.beibao.button.ButtonJingmai;
+			temp.x = 143;
+			temp.y = 0;
+			return temp;
+		}
+
 		private function btn_juese_i():feathers.controls.Radio
 		{
 			var temp:feathers.controls.Radio = new feathers.controls.Radio();
 			btn_juese = temp;
 			temp.name = "btn_juese";
-			temp.groupName = "rdoBtn";
+			temp.groupName = "rdoJuese";
 			temp.styleClass = org.mokylin.skin.app.beibao.button.ButtonJuese;
 			temp.x = 0;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function btn_nv_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			btn_nv = temp;
-			temp.name = "btn_nv";
-			temp.x = 0;
-			temp.y = 0;
-			temp.elementsContent = [btn_juese_i()];
 			return temp;
 		}
 

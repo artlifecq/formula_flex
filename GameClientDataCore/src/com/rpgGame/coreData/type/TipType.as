@@ -56,5 +56,11 @@ package com.rpgGame.coreData.type
 		public static const MOUNT_SPELL_TIP : int = rEnum.next;
 		/** 属性变化 tips*/
 		public static const PROPCHANGE_TIP : int = rEnum.next;
+		/** 绝学技能 tips*/
+		public static const LOSTSKILL_TIP : int = rEnum.next;
+		/**
+		 *经脉tip 
+		 */		
+		public static const MERIDIAN_TIP:int=rEnum.next;
 	}
 }

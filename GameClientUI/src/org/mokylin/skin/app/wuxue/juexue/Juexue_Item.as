@@ -69,7 +69,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			temp.name = "icons";
 			temp.touchable = false;
 			temp.touchGroup = false;
-			temp.styleName = "ui/app/wuxue/juexue/liang.png";
+			temp.styleName = "ui/app/wuxue/juexue/icon/bingfengsudong.png";
 			temp.x = 18;
 			temp.y = 16;
 			return temp;
