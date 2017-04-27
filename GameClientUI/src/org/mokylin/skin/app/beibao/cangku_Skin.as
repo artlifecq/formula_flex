@@ -152,7 +152,7 @@ package org.mokylin.skin.app.beibao
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 23;
-			temp.styleName = "ui/app/beibao/neikuang.png";
+			temp.styleName = "ui/common/background/neikuang.png";
 			temp.width = 128;
 			temp.x = 16;
 			temp.y = 410;
@@ -164,7 +164,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.styleName = "ui/app/beibao/cangku/title.png";
+			temp.styleName = "ui/common/titilebg/head_bg.png";
 			temp.width = 354;
 			temp.x = 5;
 			temp.y = 4;
@@ -225,7 +225,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "lb_Title";
 			temp.bold = true;
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.letterSpacing = 5;
 			temp.text = "仓库";
 			temp.color = 0xa6a07b;

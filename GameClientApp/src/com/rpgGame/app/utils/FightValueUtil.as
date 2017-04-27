@@ -1,6 +1,7 @@
 package com.rpgGame.app.utils
 {
 	import com.game.engine2D.config.staticdata.CharAngleType;
+	import com.gameClient.utils.HashMap;
 	import com.rpgGame.coreData.cfg.AttFormulaConfig;
 	import com.rpgGame.coreData.clientConfig.ClientAttFormula;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
@@ -48,7 +49,20 @@ package com.rpgGame.app.utils
 //			trace(CharAttributeType.CRIT,list[CharAttributeType.CRIT]/0.008);
 			return Math.round(combat);
 		}
-		
+		public static function calFightPowerByHash(hash:HashMap,job:int):int
+		{
+			if (hash==null) 
+			{
+				return 0;
+			}
+			var list:Vector.<Number> = new Vector.<Number>(30,0);
+			var keys:Array=hash.keys();
+			for each (var key:int in keys) 
+			{
+				list[key]=hash.getValue(key);
+			}
+			return calAtrributeFightPower(list,job);
+		}
 		public static function calFightPowerByAttValue(att:Q_att_values,job:int):int
 		{
 			if(att==null)

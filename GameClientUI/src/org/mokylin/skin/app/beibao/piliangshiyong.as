@@ -157,6 +157,7 @@ package org.mokylin.skin.app.beibao
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "确认使用";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.color = 0xE1D4A9;
 			temp.width = 109;
 			temp.x = 118;
 			temp.y = 195;
@@ -250,7 +251,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "lbl_title";
 			temp.bold = true;
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.letterSpacing = 2;
 			temp.fontSize = 16;
 			temp.text = "批量使用";

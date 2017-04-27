@@ -1,6 +1,7 @@
 package com.rpgGame.coreData.cfg.monster
 {
 	import com.game.engine3D.utils.TemplateUtil;
+	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.role.MonsterBornData;
@@ -32,6 +33,7 @@ package com.rpgGame.coreData.cfg.monster
 		private static var SCENE_ID_UNIQ_INDEX : Array = [INDEX_SCENEID, INDEX_ID];
 		private static var SCENE_ID_UNIQ_DIC : Dictionary;
 
+		private static var _monsterArea : Dictionary=new Dictionary();
 		public static function setMonsterConfig(data : ByteArray) : void
 		{
 			var arr : Array = data.readObject();
@@ -62,6 +64,8 @@ package com.rpgGame.coreData.cfg.monster
 			{
 				for each(var sceneMonsterData : Q_scene_monster_area in arr)
 				{
+					
+					_monsterArea[sceneMonsterData.q_id]=sceneMonsterData;
 					parseMonster(sceneMonsterData);
 				}
 			}
@@ -122,9 +126,11 @@ package com.rpgGame.coreData.cfg.monster
 			{
 				return data.q_name.toString();
 			}
-			return "未知怪物";
+			return "未知名字";
 		}
 
+		
+		
 		public static function getMonsterType(id : uint) : int
 		{
 			var data : Q_monster = getData(id);
@@ -217,13 +223,15 @@ package com.rpgGame.coreData.cfg.monster
 		}
 
 		/**
-		 * 获取怪物所在场景id
+		 * 根据刷新id获取怪物所在场景id
 		 */
 		public static function getMonsterSceneId(monsterId : int) : int
 		{
 			var monsterData : Q_scene_monster_area = getSceneData(monsterId);
 			return monsterData.q_mapid;
 		}
+		
+		
 		
 		//////////////////////////////////////////yuantao增加的////////////////////////////////////////////////////////////////////
 		/**
@@ -286,6 +294,49 @@ package com.rpgGame.coreData.cfg.monster
 			
 			return null;
 		}
+		/**
+		 根据模型ID获取怪物数据
+		 */		
+		public static function getMonsterByModelId(id : uint) :Q_scene_monster_area
+		{
+			if (SCENE_ID_UNIQ_DIC) 
+			{
+				for each(var sceneMonsterList : Vector3D.<Q_scene_monster_area> in SCENE_ID_UNIQ_DIC)
+				{
+					
+					for each(var sceneMonsterData :Q_scene_monster_area in sceneMonsterList)
+					{
+						if(sceneMonsterData.q_monster_model==id)
+						{
+							return sceneMonsterData;
+						}
+						
+					}
+				}
+			}
+			
+			
+			return null;
+		}
 		
+		/**
+		 * 根据刷新id获取怪物模型id
+		 */
+		public static function getMonsterModeidByAreaid(areaid : int) : int
+		{
+			var areaData : Q_scene_monster_area =getAreaByAreaID(areaid);
+			if(areaData!=null)
+			{
+				return areaData.q_monster_model;
+			}
+			
+			
+			return 0;
+		}
+		/**根据任务ID获取任务信息*/
+		public static function getAreaByAreaID(id : uint) : Q_scene_monster_area 
+		{
+			return _monsterArea[id];
+		}
 	}
 }

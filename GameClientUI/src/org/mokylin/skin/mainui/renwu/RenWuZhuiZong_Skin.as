@@ -1,17 +1,19 @@
 package org.mokylin.skin.mainui.renwu
 {
-	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
+	import feathers.controls.ScrollContainer;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import feathers.controls.ScrollContainer;
+	import feathers.controls.text.Fontter;
+	
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_shouhui;
 	import org.mokylin.skin.component.button.ButtonSkin_zhankai;
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat;
+	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 	import org.mokylin.skin.mainui.renwu.RenWu_jindu;
 	import org.mokylin.skin.mainui.renwu.Renwu_Item;
 
@@ -93,11 +95,23 @@ package org.mokylin.skin.mainui.renwu
 
 		public var sec_info:feathers.controls.Label;
 
-		public var sec_killbut1:feathers.controls.SkinnableContainer;
+		public var sec_killbut1_1:feathers.controls.SkinnableContainer;
 
-		public var sec_killbut2:feathers.controls.SkinnableContainer;
+		public var sec_killbut1_2:feathers.controls.SkinnableContainer;
 
-		public var sec_killbut3:feathers.controls.SkinnableContainer;
+		public var sec_killbut1_3:feathers.controls.SkinnableContainer;
+
+		public var sec_killbut2_1:feathers.controls.SkinnableContainer;
+
+		public var sec_killbut2_2:feathers.controls.SkinnableContainer;
+
+		public var sec_killbut2_3:feathers.controls.SkinnableContainer;
+
+		public var sec_killbut3_1:feathers.controls.SkinnableContainer;
+
+		public var sec_killbut3_2:feathers.controls.SkinnableContainer;
+
+		public var sec_killbut3_3:feathers.controls.SkinnableContainer;
 
 		public var sec_navi1:feathers.controls.Label;
 
@@ -265,7 +279,7 @@ package org.mokylin.skin.mainui.renwu
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			pri_killbut1 = temp;
 			temp.name = "pri_killbut1";
-			temp.height = 22;
+			temp.height = 20;
 			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item()
 			temp.skin = skin
 			temp.width = 214;
@@ -279,7 +293,7 @@ package org.mokylin.skin.mainui.renwu
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			pri_killbut2 = temp;
 			temp.name = "pri_killbut2";
-			temp.height = 22;
+			temp.height = 20;
 			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item()
 			temp.skin = skin
 			temp.width = 214;
@@ -293,7 +307,7 @@ package org.mokylin.skin.mainui.renwu
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			pri_killbut3 = temp;
 			temp.name = "pri_killbut3";
-			temp.height = 22;
+			temp.height = 20;
 			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item()
 			temp.skin = skin
 			temp.width = 214;
@@ -396,6 +410,7 @@ package org.mokylin.skin.mainui.renwu
 			primary_box = temp;
 			temp.name = "primary_box";
 			temp.height = 335;
+			temp.visible = false;
 			temp.width = 253;
 			temp.x = 0;
 			temp.y = 0;
@@ -409,7 +424,7 @@ package org.mokylin.skin.mainui.renwu
 			scroll_bar = temp;
 			temp.name = "scroll_bar";
 			temp.height = 297;
-			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat;
+			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 			temp.width = 250;
 			temp.x = 0;
 			temp.y = 34;
@@ -424,7 +439,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.width = 250;
 			temp.x = 0;
 			temp.y = 34;
-			temp.elementsContent = [sec_navi1_i(),sec_killbut1_i(),sec_navi2_i(),sec_killbut2_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico1_2_i(),sec_ico1_3_i(),sec_ico1_4_i(),sec_ico1_5_i(),sec_subbut1_i(),sec_navi3_i(),sec_info_i(),sec_killbut3_i(),sec_ico2_0_i(),sec_ico2_1_i(),sec_ico2_2_i(),sec_ico2_3_i(),sec_ico2_4_i(),sec_ico2_5_i(),sec_subbut2_i()];
+			temp.elementsContent = [sec_navi1_i(),sec_killbut1_1_i(),sec_killbut1_2_i(),sec_killbut1_3_i(),sec_navi2_i(),sec_killbut2_1_i(),sec_killbut2_2_i(),sec_killbut2_3_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico1_2_i(),sec_ico1_3_i(),sec_ico1_4_i(),sec_ico1_5_i(),sec_subbut1_i(),sec_navi3_i(),sec_info_i(),sec_killbut3_1_i(),sec_killbut3_2_i(),sec_killbut3_3_i(),sec_ico2_0_i(),sec_ico2_1_i(),sec_ico2_2_i(),sec_ico2_3_i(),sec_ico2_4_i(),sec_ico2_5_i(),sec_subbut2_i()];
 			return temp;
 		}
 
@@ -434,8 +449,8 @@ package org.mokylin.skin.mainui.renwu
 			sec_ico1_0 = temp;
 			temp.name = "sec_ico1_0";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 45;
-			temp.y = 93;
+			temp.x = 19;
+			temp.y = 184;
 			return temp;
 		}
 
@@ -445,8 +460,8 @@ package org.mokylin.skin.mainui.renwu
 			sec_ico1_1 = temp;
 			temp.name = "sec_ico1_1";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 99;
-			temp.y = 93;
+			temp.x = 73;
+			temp.y = 184;
 			return temp;
 		}
 
@@ -456,8 +471,8 @@ package org.mokylin.skin.mainui.renwu
 			sec_ico1_2 = temp;
 			temp.name = "sec_ico1_2";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 152;
-			temp.y = 93;
+			temp.x = 126;
+			temp.y = 184;
 			return temp;
 		}
 
@@ -467,8 +482,8 @@ package org.mokylin.skin.mainui.renwu
 			sec_ico1_3 = temp;
 			temp.name = "sec_ico1_3";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 45;
-			temp.y = 146;
+			temp.x = 19;
+			temp.y = 237;
 			return temp;
 		}
 
@@ -478,8 +493,8 @@ package org.mokylin.skin.mainui.renwu
 			sec_ico1_4 = temp;
 			temp.name = "sec_ico1_4";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 99;
-			temp.y = 146;
+			temp.x = 73;
+			temp.y = 237;
 			return temp;
 		}
 
@@ -489,8 +504,8 @@ package org.mokylin.skin.mainui.renwu
 			sec_ico1_5 = temp;
 			temp.name = "sec_ico1_5";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 152;
-			temp.y = 146;
+			temp.x = 126;
+			temp.y = 237;
 			return temp;
 		}
 
@@ -500,8 +515,8 @@ package org.mokylin.skin.mainui.renwu
 			sec_ico2_0 = temp;
 			temp.name = "sec_ico2_0";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 45;
-			temp.y = 298;
+			temp.x = 19;
+			temp.y = 426;
 			return temp;
 		}
 
@@ -511,8 +526,8 @@ package org.mokylin.skin.mainui.renwu
 			sec_ico2_1 = temp;
 			temp.name = "sec_ico2_1";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 99;
-			temp.y = 298;
+			temp.x = 73;
+			temp.y = 426;
 			return temp;
 		}
 
@@ -522,8 +537,8 @@ package org.mokylin.skin.mainui.renwu
 			sec_ico2_2 = temp;
 			temp.name = "sec_ico2_2";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 152;
-			temp.y = 298;
+			temp.x = 126;
+			temp.y = 426;
 			return temp;
 		}
 
@@ -533,8 +548,8 @@ package org.mokylin.skin.mainui.renwu
 			sec_ico2_3 = temp;
 			temp.name = "sec_ico2_3";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 45;
-			temp.y = 351;
+			temp.x = 19;
+			temp.y = 479;
 			return temp;
 		}
 
@@ -544,8 +559,8 @@ package org.mokylin.skin.mainui.renwu
 			sec_ico2_4 = temp;
 			temp.name = "sec_ico2_4";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 99;
-			temp.y = 351;
+			temp.x = 73;
+			temp.y = 479;
 			return temp;
 		}
 
@@ -555,8 +570,8 @@ package org.mokylin.skin.mainui.renwu
 			sec_ico2_5 = temp;
 			temp.name = "sec_ico2_5";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 152;
-			temp.y = 351;
+			temp.x = 126;
+			temp.y = 479;
 			return temp;
 		}
 
@@ -567,53 +582,131 @@ package org.mokylin.skin.mainui.renwu
 			temp.name = "sec_info";
 			temp.height = 18;
 			temp.htmlText = "完成<font color='#ff0000'>99</font>环可获得额外奖励：";
+			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 177;
-			temp.x = 47;
+			temp.width = 210;
+			temp.x = 21;
 			temp.y = 313;
 			return temp;
 		}
 
-		private function sec_killbut1_i():feathers.controls.SkinnableContainer
+		private function sec_killbut1_1_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			sec_killbut1 = temp;
-			temp.name = "sec_killbut1";
+			sec_killbut1_1 = temp;
+			temp.name = "sec_killbut1_1";
 			temp.height = 20;
 			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item()
 			temp.skin = skin
-			temp.width = 170;
-			temp.x = 44;
+			temp.width = 214;
+			temp.x = 18;
 			temp.y = 17;
 			return temp;
 		}
 
-		private function sec_killbut2_i():feathers.controls.SkinnableContainer
+		private function sec_killbut1_2_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			sec_killbut2 = temp;
-			temp.name = "sec_killbut2";
+			sec_killbut1_2 = temp;
+			temp.name = "sec_killbut1_2";
 			temp.height = 20;
 			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item()
 			temp.skin = skin
-			temp.width = 170;
-			temp.x = 44;
-			temp.y = 62;
+			temp.x = 18;
+			temp.y = 38;
 			return temp;
 		}
 
-		private function sec_killbut3_i():feathers.controls.SkinnableContainer
+		private function sec_killbut1_3_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			sec_killbut3 = temp;
-			temp.name = "sec_killbut3";
+			sec_killbut1_3 = temp;
+			temp.name = "sec_killbut1_3";
 			temp.height = 20;
 			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item()
 			temp.skin = skin
-			temp.width = 170;
-			temp.x = 44;
-			temp.y = 255;
+			temp.x = 18;
+			temp.y = 59;
+			return temp;
+		}
+
+		private function sec_killbut2_1_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			sec_killbut2_1 = temp;
+			temp.name = "sec_killbut2_1";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item()
+			temp.skin = skin
+			temp.width = 214;
+			temp.x = 18;
+			temp.y = 108;
+			return temp;
+		}
+
+		private function sec_killbut2_2_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			sec_killbut2_2 = temp;
+			temp.name = "sec_killbut2_2";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item()
+			temp.skin = skin
+			temp.x = 18;
+			temp.y = 133;
+			return temp;
+		}
+
+		private function sec_killbut2_3_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			sec_killbut2_3 = temp;
+			temp.name = "sec_killbut2_3";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item()
+			temp.skin = skin
+			temp.x = 18;
+			temp.y = 155;
+			return temp;
+		}
+
+		private function sec_killbut3_1_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			sec_killbut3_1 = temp;
+			temp.name = "sec_killbut3_1";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item()
+			temp.skin = skin
+			temp.x = 18;
+			temp.y = 346;
+			return temp;
+		}
+
+		private function sec_killbut3_2_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			sec_killbut3_2 = temp;
+			temp.name = "sec_killbut3_2";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item()
+			temp.skin = skin
+			temp.x = 18;
+			temp.y = 366;
+			return temp;
+		}
+
+		private function sec_killbut3_3_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			sec_killbut3_3 = temp;
+			temp.name = "sec_killbut3_3";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item()
+			temp.skin = skin
+			temp.x = 18;
+			temp.y = 389;
 			return temp;
 		}
 
@@ -639,7 +732,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
-			temp.y = 45;
+			temp.y = 91;
 			return temp;
 		}
 
@@ -652,7 +745,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
-			temp.y = 238;
+			temp.y = 329;
 			return temp;
 		}
 
@@ -662,12 +755,13 @@ package org.mokylin.skin.mainui.renwu
 			sec_subbut1 = temp;
 			temp.name = "sec_subbut1";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.height = 36;
 			temp.label = "领取奖励";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.color = 0xE1D4A9;
 			temp.width = 79;
-			temp.x = 87;
-			temp.y = 198;
+			temp.x = 17;
+			temp.y = 289;
 			return temp;
 		}
 
@@ -677,12 +771,13 @@ package org.mokylin.skin.mainui.renwu
 			sec_subbut2 = temp;
 			temp.name = "sec_subbut2";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.height = 36;
 			temp.label = "领取奖励";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.color = 0xE1D4A9;
 			temp.width = 79;
-			temp.x = 87;
-			temp.y = 403;
+			temp.x = 17;
+			temp.y = 531;
 			return temp;
 		}
 
@@ -692,7 +787,6 @@ package org.mokylin.skin.mainui.renwu
 			secondary_box = temp;
 			temp.name = "secondary_box";
 			temp.height = 335;
-			temp.visible = false;
 			temp.width = 253;
 			temp.x = 0;
 			temp.y = 0;
@@ -718,6 +812,7 @@ package org.mokylin.skin.mainui.renwu
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			task_effect = temp;
 			temp.name = "task_effect";
+			temp.visible = false;
 			return temp;
 		}
 

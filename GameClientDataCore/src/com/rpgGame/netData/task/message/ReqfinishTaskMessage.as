@@ -16,6 +16,9 @@ package com.rpgGame.netData.task.message{
 		//任务唯一id
 		private var _taskId: long;
 		
+		//领取奖励倍数
+		private var _multiple: int;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -23,6 +26,8 @@ package com.rpgGame.netData.task.message{
 		override protected function writing(): Boolean{
 			//任务唯一id
 			writeLong(_taskId);
+			//领取奖励倍数
+			writeInt(_multiple);
 			return true;
 		}
 		
@@ -32,6 +37,8 @@ package com.rpgGame.netData.task.message{
 		override protected function reading(): Boolean{
 			//任务唯一id
 			_taskId = readLong();
+			//领取奖励倍数
+			_multiple = readInt();
 			return true;
 		}
 		
@@ -56,6 +63,21 @@ package com.rpgGame.netData.task.message{
 		 */
 		public function set taskId(value: long): void{
 			this._taskId = value;
+		}
+		
+		/**
+		 * get 领取奖励倍数
+		 * @return 
+		 */
+		public function get multiple(): int{
+			return _multiple;
+		}
+		
+		/**
+		 * set 领取奖励倍数
+		 */
+		public function set multiple(value: int): void{
+			this._multiple = value;
 		}
 		
 	}
