@@ -1,5 +1,6 @@
 package com.rpgGame.app.manager.mount
 {
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.HorseConfigData;
@@ -9,12 +10,14 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.coreData.clientConfig.Q_horse_skills;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
-	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.netData.horse.bean.HorseDataInfo;
+	import com.rpgGame.netData.horse.message.CSHorseStratumUpToGameMessage;
+	import com.rpgGame.netData.horse.message.CSUseHorseAddtionMessage;
 	import com.rpgGame.netData.horse.message.SCExtraItemNumMessage;
 	import com.rpgGame.netData.horse.message.SCHorseUpResultToClientMessage;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.connection.SocketConnection;
 
 	public class HorseManager
 	{
@@ -24,6 +27,26 @@ package com.rpgGame.app.manager.mount
 		private var _horsedataInfo:HorseDataInfo;
 		private var _spellList:Vector.<BaseFaceInfo>;
 		
+		private var _useExtraItem1:int;
+
+		/**
+		 * 资质丹使用数量
+		 */
+		public function get useExtraItem1():int
+		{
+			return _useExtraItem1;
+		}
+
+		private var _useExtarItem2:int;
+
+		/**
+		 * 成长丹使用数量 
+		 */
+		public function get useExtarItem2():int
+		{
+			return _useExtarItem2;
+		}
+
 		public function get horsedataInfo():HorseDataInfo
 		{
 			return _horsedataInfo;
@@ -47,6 +70,12 @@ package com.rpgGame.app.manager.mount
 		}
 		public function updateExtraItemNum(msg:SCExtraItemNumMessage):void
 		{
+			if(msg.type==1)
+			{
+				_useExtraItem1 = msg.num;
+			}else if(msg.type ==2){
+				_useExtarItem2 = msg.num;
+			}
 			EventManager.dispatchEvent(HorseExtraItemNum);
 		}
 		public function get spellList():Vector.<BaseFaceInfo>
@@ -73,10 +102,38 @@ package com.rpgGame.app.manager.mount
 			return _horsedataInfo.horseModelId;
 		}
 		
-		
-		public function eatItemHorse(item:ClientItemInfo):void
+		public function eatItemHorse(showdata:MountShowData):Boolean
 		{
-			
+			if(showdata.isMaxLevel)
+			{
+				NoticeManager.showNotifyById(9001);
+				return false;
+			}
+			if(!showdata.canUpLevel())
+			{
+				NoticeManager.showNotifyById(9002,showdata.upLevelItem.qItem.q_name);
+				return false;
+			}
+			var msg:CSHorseStratumUpToGameMessage = new CSHorseStratumUpToGameMessage();
+			msg.Automatic = showdata.autoBuyItem?1:0;
+			SocketConnection.send(msg);
+			return true;
+		}
+		
+		public function useExtraItemHorse(showdata:MountShowData,type:int):Boolean
+		{
+			var extraItemInfo:HorseExtraItemInfo = showdata.getOpenLevelBytype(type);
+			var useCount:int = showdata.getUseExtralItem(type);
+			if(!extraItemInfo.canUseItem(showdata.mountLevel,useCount))
+			{
+				NoticeManager.showNotifyById(9004,extraItemInfo.clientItemInfo.qItem.q_name);
+				return false;
+			}
+			var msg:CSUseHorseAddtionMessage = new CSUseHorseAddtionMessage();
+			msg.type = extraItemInfo.eatType;
+			msg.num = 1;
+			SocketConnection.send(msg);
+			return true;
 		}
 		
 		private static var _instance:HorseManager;

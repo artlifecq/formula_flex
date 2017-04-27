@@ -10,6 +10,7 @@ package com.rpgGame.appModule.mount
 	
 	import org.mokylin.skin.app.zuoqi.Shuxing_Item;
 	import org.mokylin.skin.app.zuoqi.Zuoqi_Skin;
+	import com.rpgGame.app.manager.mount.MountShowData;
 
 	public class MountProps
 	{

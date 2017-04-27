@@ -6,8 +6,10 @@ package com.rpgGame.app.manager.chat
 	import com.rpgGame.coreData.rEnum;
 	import com.rpgGame.coreData.cfg.HintConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.HintInfo;
+	import com.rpgGame.coreData.clientConfig.Q_notify;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.coreData.type.chat.EnumChatTabsType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
@@ -152,6 +154,30 @@ package com.rpgGame.app.manager.chat
 						{
 							notify(typeArr[i], msg, textArgs, showTimes);
 						}
+					}
+				}
+			}
+		}
+		
+		public static function showNotifyById(id:int,... args):void
+		{
+			var notiMsg:Q_notify = NotifyCfgData.getNotifyByID(id);
+			if(notiMsg!=null)
+			{
+				var showType:Array=notiMsg.q_show_type.split("|");
+				var words : String = LanguageConfig.replaceStr(notiMsg.q_content,args);
+				if(showType!=null&&showType.length>0)
+				{
+					var i:int,length:int=showType.length;
+					
+					for(i=0;i<length;i++)
+					{
+						var tp:int=int(showType[i])
+						if(tp>0)
+						{
+							NoticeManager.textNotify(tp, words);
+						}
+						
 					}
 				}
 			}

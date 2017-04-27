@@ -3,6 +3,7 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.app.manager.mount.HorseExtraItemInfo;
 	
 	import feathers.controls.Button;
+	import com.rpgGame.app.manager.mount.MountShowData;
 
 	public class ExtraButton
 	{

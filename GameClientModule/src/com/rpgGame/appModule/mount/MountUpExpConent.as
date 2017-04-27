@@ -7,6 +7,7 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	
 	import org.mokylin.skin.app.zuoqi.Zuoqi_Skin;
+	import com.rpgGame.app.manager.mount.MountShowData;
 
 	public class MountUpExpConent
 	{

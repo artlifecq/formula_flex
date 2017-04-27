@@ -1,9 +1,11 @@
 package com.rpgGame.appModule.mount
 {
 	import com.rpgGame.app.manager.mount.HorseManager;
+	import com.rpgGame.app.manager.mount.MountShowData;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.appModule.systemset.TouchToState;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
 	
@@ -12,6 +14,7 @@ package com.rpgGame.appModule.mount
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
+	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -26,6 +29,8 @@ package com.rpgGame.appModule.mount
 		private var _mountupContent:MountUpExpConent;
 		private var _mountShowData:MountShowData;
 		private var _extraItemList:Vector.<ExtraButton>;
+		private var _shopPane:MountShowPane;
+		private var _touchState:TouchToState;
 		public function MountPanel():void
 		{
 			_skin = new Zuoqi_Skin();
@@ -42,9 +47,8 @@ package com.rpgGame.appModule.mount
 		{
 			super.show(data,openTable,parentContiner);
 			_mountShowData.horsedataInfo =  HorseManager.instance().horsedataInfo;
-			_mountShowData.useExtraItem(0,0);
 			_mountContent.refeashMode(_mountShowData.mountLevel);
-			_propContent.updataInfo(_mountShowData);
+			refeashPropHandler();
 			_propContent.refeashPropShow(false);
 			_mountupContent.updataInfo(_mountShowData);
 			refeashLevel();
@@ -71,14 +75,23 @@ package com.rpgGame.appModule.mount
 				case "btn_kaishi":
 					if(_mountShowData.isSelf)
 					{
-						
+						HorseManager.instance().eatItemHorse(_mountShowData);
+						_mountupContent.isAutoing = false;
 					}
 					break;
 				case "btn_zidong":
-					
+					if(_mountShowData.isSelf)
+					{
+						if(HorseManager.instance().eatItemHorse(_mountShowData))
+						{
+							_mountupContent.isAutoing = true;
+						}else{
+							_mountupContent.isAutoing = false;
+						}
+					}
 					break;
 				case "btn_tingzhi":
-					
+					_mountupContent.isAutoing = false;
 					break;
 			}
 		}
@@ -102,6 +115,41 @@ package com.rpgGame.appModule.mount
 			_extraItemList = new Vector.<ExtraButton>();
 			_extraItemList.push(new ExtraButton(_skin.btn_zizhidan,506));
 			_extraItemList.push(new ExtraButton(_skin.btn_chengzhangdan,507));
+			_touchState = new TouchToState(_skin.lab_xuyaowupin,labTouchHandler);
+		}
+		private function labTouchHandler(touch:Touch):void
+		{
+			if(touch.phase!= TouchPhase.ENDED)
+				return ;
+			if(_shopPane!=null&&_shopPane.parent!=null)
+				return ;
+			if(_shopPane==null)
+			{
+				_shopPane = new MountShowPane();
+				_shopPane.addEventListener(Event.REMOVED_FROM_STAGE,changePaneHander);
+			}
+			this.parent.addChild(_shopPane);
+			changePaneHander();
+		}
+		private function changePaneHander():void
+		{
+			onStageResize(_stage.stageWidth,_stage.stageHeight);
+		}
+		override protected function onStageResize(sw : int, sh : int) : void
+		{
+			var gap:int = 20;
+			var w:int = this.width;
+			if(_shopPane!=null&&_shopPane.parent!=null)
+			{
+				w +=gap+_shopPane.width;
+			}
+			this.x =(sw - w)/2;
+			this.y =(sh - this.height)/2;
+			if(_shopPane.parent!=null)
+			{
+				_shopPane.x = this.width+this.x +gap;
+				_shopPane.y = (sh - _shopPane.height)/2;
+			}
 		}
 		private function initEvent():void
 		{
@@ -109,6 +157,12 @@ package com.rpgGame.appModule.mount
 			_skin.btn_zidong.addEventListener(TouchEvent.TOUCH, onTouch);
 			EventManager.addEvent(HorseManager.HorseUpLevel,refeashLevel);
 			EventManager.addEvent(HorseManager.HorseChangeExp,refeashLevel);
+			EventManager.addEvent(HorseManager.HorseExtraItemNum,refeashPropHandler);
+		}
+		private function refeashPropHandler():void
+		{
+			_mountShowData.useExtraItem(HorseManager.instance().useExtraItem1,HorseManager.instance().useExtarItem2);
+			_propContent.updataInfo(_mountShowData);
 		}
 		private function onTouch(e : TouchEvent) : void
 		{
