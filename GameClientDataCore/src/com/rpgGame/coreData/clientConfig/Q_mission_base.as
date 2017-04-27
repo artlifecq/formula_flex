@@ -12,7 +12,7 @@ package com.rpgGame.coreData.clientConfig
 	*/
 	public class Q_mission_base
 	{
-		 /**  任务主id(10000-20000）主线 */
+		 /**  任务主id(10000-10009）主线;（20000-20009）支线;（30000-30009）环式 */
 		public var q_mission_id:int;
 		 /**  任务名称 */
 		public var q_name:String;
@@ -20,11 +20,11 @@ package com.rpgGame.coreData.clientConfig
 		public var q_party_id:int;
 		 /**  章节名 */
 		public var q_party_name:String;
-		 /**    */
+		 /**  任务ID */
 		public var q_node_id:int;
 		 /**  任务名称 */
 		public var q_mission_name:String;
-		 /**  任务类型(1主线2日常3宝箱4帮会) */
+		 /**  任务类型(1主线2支线3环式) */
 		public var q_mission_mainType:int;
 		 /**  自动接取的下一个任务ID 0是没有 */
 		public var q_next_task:int;

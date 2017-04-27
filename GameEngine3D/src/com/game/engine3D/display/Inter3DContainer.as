@@ -56,25 +56,23 @@ package com.game.engine3D.display
 		/**
 		 *在UI上添加一个特效，播放播放只是添加 
 		 * @param url
-		 * @param x
-		 * @param y
-		 * @param repeat
+		 * @param isdispose 是否播放完了销毁
 		 * @param onPlayComplete
 		 * @param addComplete
 		 * @return 
 		 * 
 		 */		
-		public function addInter3D(url : String, x : int=0, y : int=0, repeat : int = 1, onPlayComplete : Function = null,addComplete:Function=null) : EffectObject3D
+		public function addInter3D(url : String, isdispose :Boolean=false, onPlayComplete : Function = null,addComplete:Function=null) : EffectObject3D
 		{
-			var sr3D : EffectObject3D = new EffectObject3D();
+			var sr3D : EffectObject3D = new EffectObject3D(null,isdispose);
 			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", url);
 			data.forceLoad=true;
-			var unit:RenderUnit3D=sr3D.addRenderUnitWith(data, repeat, onPlayComplete,addComplete);
+			var unit:RenderUnit3D=sr3D.addRenderUnitWith(data, 0, onPlayComplete,addComplete);
 			unit.stop();
 			unit.stopRender();
 			sr3D.stop();
-			sr3D.x = x;
-			sr3D.y = y;
+			/*sr3D.x = x;
+			sr3D.y = y;*/
 			addChild3D(sr3D);
 			return sr3D;
 		}

@@ -1,16 +1,33 @@
 package com.game.engine3D.display
 {
+	import com.game.engine3D.core.poolObject.PoolContainer3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	
 	import away3d.containers.View3D;
 
 	public class EffectObject3D extends InterObject3D
 	{
-		public function EffectObject3D(view3D : View3D = null)
+		private var _isdispose:Boolean=false;
+		public function EffectObject3D(view3D : View3D = null,isdispose:Boolean=false)
 		{
 			super(view3D);
+			_isdispose=isdispose;
 		}
 		
+		/**是否需要播放完了销毁*/
+		public function get isdispose():Boolean
+		{
+			return _isdispose;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set isdispose(value:Boolean):void
+		{
+			_isdispose = value;
+		}
+
 		/**跳转到特效的百分比*/
 		public function gotoPercent(percent:Number) : void
 		{
@@ -62,7 +79,19 @@ package com.game.engine3D.display
 		 */		
 		public function playEffect(repeat:int=0,speed:Number=1):void
 		{
-			var unit:RenderUnit3D=this.baseObj3D as RenderUnit3D;
+			if (_unit != null)
+			{
+				var unit:RenderUnit3D=_unit as RenderUnit3D;
+				if(unit!=null)
+				{
+					unit.repeat = repeat;
+					unit.play(0);
+					unit.animateSpeed=speed;
+					this.start();
+				}
+				
+			}
+		/*	var unit:RenderUnit3D=this.baseObj3D as RenderUnit3D;
 			if(unit!=null)
 			{
 				unit.repeat = repeat;
@@ -70,20 +99,37 @@ package com.game.engine3D.display
 				unit.animateSpeed=speed;
 				this.start();
 			}
-			
+			*/
 			
 		}
 		/**停止特效*/
 		public function stopEffect():void
 		{
-			var unit:RenderUnit3D=this.baseObj3D as RenderUnit3D;
+			if (_unit != null)
+			{
+				var unit:RenderUnit3D=_unit as RenderUnit3D;
+				if(unit!=null)
+				{
+					unit.stop();
+					this.stop();	
+				}
+				
+			}
+			
+			/*var unit:RenderUnit3D=this.baseObj3D as RenderUnit3D;
 			if(unit!=null)
 			{
 				unit.stop();
 				this.stop();	
-			}
+			}*/
 			
 		}
-		
+		override public function dispose() : void
+		{
+			if(_isdispose)
+			{
+				super.dispose();
+			}
+		}
 	}
 }

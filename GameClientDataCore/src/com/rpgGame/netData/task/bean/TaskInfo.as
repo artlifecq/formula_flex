@@ -28,6 +28,12 @@ package com.rpgGame.netData.task.bean{
 		//剩余时间(秒),-1 无限 0过期 大于0有剩余时间
 		private var _remainTiime: int;
 		
+		//环式任务id
+		private var _loopRewardId: String;
+		
+		//环式任务当前环数
+		private var _loopNumber: int;
+		
 		//子类型完成进度
 		private var _taskSubRateInfolist: Vector.<TaskSubRateInfo> = new Vector.<TaskSubRateInfo>();
 		/**
@@ -42,6 +48,10 @@ package com.rpgGame.netData.task.bean{
 			writeInt(_taskSubType);
 			//剩余时间(秒),-1 无限 0过期 大于0有剩余时间
 			writeInt(_remainTiime);
+			//环式任务id
+			writeString(_loopRewardId);
+			//环式任务当前环数
+			writeInt(_loopNumber);
 			//子类型完成进度
 			writeShort(_taskSubRateInfolist.length);
 			for (var i: int = 0; i < _taskSubRateInfolist.length; i++) {
@@ -62,6 +72,10 @@ package com.rpgGame.netData.task.bean{
 			_taskSubType = readInt();
 			//剩余时间(秒),-1 无限 0过期 大于0有剩余时间
 			_remainTiime = readInt();
+			//环式任务id
+			_loopRewardId = readString();
+			//环式任务当前环数
+			_loopNumber = readInt();
 			//子类型完成进度
 			var taskSubRateInfolist_length : int = readShort();
 			for (var i: int = 0; i < taskSubRateInfolist_length; i++) {
@@ -128,6 +142,36 @@ package com.rpgGame.netData.task.bean{
 		 */
 		public function set remainTiime(value: int): void{
 			this._remainTiime = value;
+		}
+		
+		/**
+		 * get 环式任务id
+		 * @return 
+		 */
+		public function get loopRewardId(): String{
+			return _loopRewardId;
+		}
+		
+		/**
+		 * set 环式任务id
+		 */
+		public function set loopRewardId(value: String): void{
+			this._loopRewardId = value;
+		}
+		
+		/**
+		 * get 环式任务当前环数
+		 * @return 
+		 */
+		public function get loopNumber(): int{
+			return _loopNumber;
+		}
+		
+		/**
+		 * set 环式任务当前环数
+		 */
+		public function set loopNumber(value: int): void{
+			this._loopNumber = value;
 		}
 		
 		/**

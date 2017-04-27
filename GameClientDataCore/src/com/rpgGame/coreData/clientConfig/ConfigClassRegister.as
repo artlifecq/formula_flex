@@ -90,6 +90,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_att_values:String = "data.Q_att_values";
 		/**  复活界面配置表				 */
 		public static const Q_die:String = "data.Q_die";
+		/**  继承消耗表			 */
+		public static const Q_equip_inherit_cost:String = "data.Q_equip_inherit_cost";
 		/**  琢磨配置表			 */
 		public static const Q_equip_polish:String = "data.Q_equip_polish";
 		/**  强化配置表						 */
@@ -106,8 +108,12 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
 		/**  全局变量表		 */
 		public static const Q_global:String = "data.Q_global";
-		/**  道具合成表								 */
+		/**  道具合成表									 */
 		public static const Q_hecheng:String = "data.Q_hecheng";
+		/**  坐骑基本信息数据库																					 */
+		public static const Q_horse:String = "data.Q_horse";
+		/**  坐骑技能数据库		 */
+		public static const Q_horse_skills:String = "data.Q_horse_skills";
 		/**  物品基本信息数据库																																																																																				 */
 		public static const Q_item:String = "data.Q_item";
 		/**  绝学开放表							 */
@@ -120,6 +126,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_mission_base:String = "data.Q_mission_base";
 		/**  任务奖励配置表	 */
 		public static const Q_mission_reword:String = "data.Q_mission_reword";
+		/**  ??				 */
+		public static const Q_mission_section:String = "data.Q_mission_section";
 		/**  任务对话配置表(1-20000为主线任务对应的对话id，20001-30000是支线任务对话id)			 */
 		public static const Q_mission_segment:String = "data.Q_mission_segment";
 		/**  通知列表			 */
@@ -152,7 +160,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_GCD:String = "data.spell.Q_GCD";
 		/**  技能无视防御伤害数据库																		 */
 		public static const Q_skill_ignore:String = "data.spell.Q_skill_ignore";
-		/**  技能基本信息配置数据表																																																																																																																																	 */
+		/**  技能基本信息配置数据表																																																																																																																																			 */
 		public static const Q_skill_model:String = "data.spell.Q_skill_model";
 		/**  技能效果配置表																			 */
 		public static const Q_SpellAnimation:String = "data.spell.Q_SpellAnimation";
@@ -203,6 +211,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_att_transfer", com.rpgGame.coreData.clientConfig.Q_att_transfer);
 			regClass("data.Q_att_values", com.rpgGame.coreData.clientConfig.Q_att_values);
 			regClass("data.Q_die", com.rpgGame.coreData.clientConfig.Q_die);
+			regClass("data.Q_equip_inherit_cost", com.rpgGame.coreData.clientConfig.Q_equip_inherit_cost);
 			regClass("data.Q_equip_polish", com.rpgGame.coreData.clientConfig.Q_equip_polish);
 			regClass("data.Q_equip_strength", com.rpgGame.coreData.clientConfig.Q_equip_strength);
 			regClass("data.Q_equip_wash", com.rpgGame.coreData.clientConfig.Q_equip_wash);
@@ -212,12 +221,15 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_fightsoul_path", com.rpgGame.coreData.clientConfig.Q_fightsoul_path);
 			regClass("data.Q_global", com.rpgGame.coreData.clientConfig.Q_global);
 			regClass("data.Q_hecheng", com.rpgGame.coreData.clientConfig.Q_hecheng);
+			regClass("data.Q_horse", com.rpgGame.coreData.clientConfig.Q_horse);
+			regClass("data.Q_horse_skills", com.rpgGame.coreData.clientConfig.Q_horse_skills);
 			regClass("data.Q_item", com.rpgGame.coreData.clientConfig.Q_item);
 			regClass("data.Q_lostskill_open", com.rpgGame.coreData.clientConfig.Q_lostskill_open);
 			regClass("data.Q_lostskill_up", com.rpgGame.coreData.clientConfig.Q_lostskill_up);
 			regClass("data.Q_meridian", com.rpgGame.coreData.clientConfig.Q_meridian);
 			regClass("data.Q_mission_base", com.rpgGame.coreData.clientConfig.Q_mission_base);
 			regClass("data.Q_mission_reword", com.rpgGame.coreData.clientConfig.Q_mission_reword);
+			regClass("data.Q_mission_section", com.rpgGame.coreData.clientConfig.Q_mission_section);
 			regClass("data.Q_mission_segment", com.rpgGame.coreData.clientConfig.Q_mission_segment);
 			regClass("data.Q_notify", com.rpgGame.coreData.clientConfig.Q_notify);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);
