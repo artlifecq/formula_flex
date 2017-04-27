@@ -1,5 +1,6 @@
 package com.rpgGame.coreData.type
 {
+	import com.gameClient.utils.HashMap;
 	import com.rpgGame.coreData.rEnum;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
@@ -15,7 +16,6 @@ package com.rpgGame.coreData.type
 	
 	import flash.utils.Dictionary;
 	
-	import org.client.mainCore.ds.HashMap;
 	
 
 	/**
@@ -516,7 +516,7 @@ package com.rpgGame.coreData.type
 			var attValue:Q_att_values=AttValueConfig.getAttInfoById(q_attr_id);
 			var maps:HashMap=AttValueConfig.getTypeValueMap(attValue);
 			var keys:Array=maps.keys();
-			var values:Array=maps.getValues();
+			var values:Array=maps.values();
 			var result:String="";
 			for(var i:int=0;i<keys.length;i++){
 				var name:String=CharAttributeType.getCNName(keys[i]);
