@@ -18,6 +18,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_type:int;
 		 /**  子类型 */
 		public var q_sub_type:int;
+		 /**  二级页签名字 */
+		public var q_sub_name:String;
 		 /**  孙类 */
 		public var q_subson_type:int;
 		 /**  所需道具[itemId,num,itemId,num] */
