@@ -74,6 +74,8 @@ package com.rpgGame.app.cmdlistener
 					break;
 				case EquipOperateType.COMBO_NORMAL:
 					EventManager.dispatchEvent(ItemEvent.ITEM_COMBO_MSG,msg);
+				case EquipOperateType.JICHENG_NORMAL:
+					EventManager.dispatchEvent(ItemEvent.ITEM_JICHENG_MSG,msg);
 					break;
 			}
 		}

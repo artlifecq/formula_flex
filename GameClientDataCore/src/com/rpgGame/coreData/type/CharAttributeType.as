@@ -131,7 +131,6 @@ package com.rpgGame.coreData.type
 		public static const IGNORE_DEFENSE:int =32;
 		/**伤害减免百分比**/	
 		public static const HURT_SUB_PERCENT:int =33;
-		
 		/**攻击速度百分比**/	
 		public static const ATT_SPEED_PER:int =43;
 		/**战斗力**/	
@@ -376,6 +375,10 @@ package com.rpgGame.coreData.type
 			pushAttir(DEFENSE_PER,"防御值");
 			pushAttir(CRIT_PER,"暴击率",100);
 			pushAttir(CRIT,"暴击伤害",100);
+			pushAttir(NEI_GONG,"内功");
+			pushAttir(DEFENSE_PER,"防御百分比");
+			pushAttir(CRIT_PER,"暴击率");
+			pushAttir(CRIT,"暴击伤害");
 			pushAttir(ANTI_CRIT_PER,"暴击抗性");
 			pushAttir(HP_REC,"生命回复",1,"/5秒");
 			pushAttir(MP_REC,"能量回复");
@@ -387,9 +390,10 @@ package com.rpgGame.coreData.type
 			pushAttir(LV,"角色等级");
 			pushAttir(CURE_LIFT,"治疗效果提升",100);
 			pushAttir(SUB_SKILL_CD,"减少技能CD百分比");
-			pushAttir(HURT_ADD_FIX,"伤害加深百分比");
-			pushAttir(HURT_SUB_PERCENT,"伤害加深固定值");
-			pushAttir(ATT_SPEED_PER,"无视防御伤害");
+			pushAttir(HURT_ADD_PERCENT,"伤害加深百分比");
+			pushAttir(IGNORE_DEFENSE,"无视防御伤害");
+			pushAttir(HURT_SUB_PERCENT,"伤害减免百分比");		
+			pushAttir(ATT_SPEED_PER,"攻击速度百分比");
 			pushAttir(FIGHTING,"战斗力");
 			pushAttir(HURT_SEC,"秒伤");
 		}

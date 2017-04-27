@@ -10,7 +10,7 @@ package com.rpgGame.core.events
 	public class ItemEvent 
 	{
 		
-	
+		
 		/**
 		 *初始化物品
 		 */
@@ -75,6 +75,11 @@ package com.rpgGame.core.events
 		 * 合成选择
 		 * */
 		public static const ITEM_HECHENG_SELECT:int=UNIQUEID.NEXT;
+		
+		/**
+		 * 继承消息
+		 * */
+		public static const ITEM_JICHENG_MSG:int=UNIQUEID.NEXT;
 		
 		/** 删除物品 **/
 		public static const ITEM_DELETE:int = UNIQUEID.NEXT;
