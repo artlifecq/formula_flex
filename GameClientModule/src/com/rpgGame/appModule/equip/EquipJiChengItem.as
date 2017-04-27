@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.equip
 {
+	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.utils.TouchableUtil;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
@@ -20,7 +21,6 @@ package com.rpgGame.appModule.equip
 	import feathers.controls.Label;
 	import feathers.controls.text.Fontter;
 	
-	import org.client.mainCore.ds.HashMap;
 	import org.mokylin.skin.app.zhuangbei.jicheng.JiChengType_Item;
 	
 	import starling.display.Sprite;
