@@ -36,6 +36,12 @@ package com.rpgGame.coreData.lang
 		public static const UI_TEXT11:String = "UI_TEXT11";
 		 /**  由于本次琢磨值超出, */
 		public static const UI_TEXT12:String = "UI_TEXT12";
+		 /**  待洗炼的装备 */
+		public static const UI_TEXT13:String = "UI_TEXT13";
+		 /**  继承结果装备 */
+		public static const UI_TEXT14:String = "UI_TEXT14";
+		 /**  继承消耗装备 */
+		public static const UI_TEXT15:String = "UI_TEXT15";
 
 	}
 }
