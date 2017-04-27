@@ -92,7 +92,7 @@ package com.rpgGame.appModule.equip
 			initView();
 		}
 		
-		override public function show():void
+		override public function show(data:Object=null):void
 		{
 			initEvent();
 			refresh();
