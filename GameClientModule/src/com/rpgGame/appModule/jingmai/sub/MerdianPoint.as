@@ -357,11 +357,13 @@ package com.rpgGame.appModule.jingmai.sub
 						if (_data.level==0) 
 						{
 							var canA:Boolean=Mgr.meridianMgr.getCanActive(_data);
-							if (canA) 
+							//没激活
+							if (!canA) 
 							{
-								MeridianSender.reqLevelUpPoint(_data.MeridId,_data.acuPointId);
+								//
+								return;
+								//MeridianSender.reqLevelUpPoint(_data.MeridId,_data.acuPointId);
 							}
-							return;
 						}
 						 if (Mgr.meridianMgr.getCanLevelUp(_data,true)) 
 						{
