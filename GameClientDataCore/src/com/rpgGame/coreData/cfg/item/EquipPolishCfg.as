@@ -43,5 +43,14 @@ package com.rpgGame.coreData.cfg.item
 		{
 			return _dataDic[lv] ;
 		}
+		
+		/**
+		 * 判断是否是最大等级
+		 * */
+		public static function isMax(lv:int):Boolean
+		{
+			if(lv>=maxLv) return true;
+			return false;
+		}
 	}
 }

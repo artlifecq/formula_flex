@@ -6,8 +6,10 @@ package com.rpgGame.app.manager.chat
 	import com.rpgGame.coreData.rEnum;
 	import com.rpgGame.coreData.cfg.HintConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.HintInfo;
+	import com.rpgGame.coreData.clientConfig.Q_notify;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.coreData.type.chat.EnumChatTabsType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
@@ -113,8 +115,24 @@ package com.rpgGame.app.manager.chat
 
 			notify(hintInfo.type, msg, textArgs);
 		}
+		
+		/**
+		 *显示一个提示 根据配置id 
+		 * 
+		 */
+		public static function showNotifyById(id:int,textArgs : Array = null):void
+		{
+			var cfg:Q_notify=NotifyCfgData.getNotifyByID(id);
+			if(!cfg){
+				notify(MOUSE_FOLLOW_TIP, "未配置的提示:"+id);
+				return;
+			}
+			notify(int(cfg.q_show_type), cfg.q_content,textArgs);
+		}
+		
 
 		/**
+		 * 这个是老的接口（以后要干掉）；
 		 * 显示一个提示，强烈推荐统一用这个方法！！！
 		 * @param langType
 		 * @param textArgs
@@ -204,7 +222,6 @@ package com.rpgGame.app.manager.chat
 		{
 			if ($msg == null || $msg == "")
 				return;
-
 			if (textArgs != null)
 			{
 				$msg = LanguageConfig.replaceStr($msg, textArgs);

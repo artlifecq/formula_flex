@@ -161,49 +161,67 @@ package com.rpgGame.app.ui.tips
 				createLabel(name,value);
 				curY+=22;
 			}*/
-			if(_itemInfo.itemInfo.limitType>0){
-				switch(_itemInfo.itemInfo.limitType){
-					case ItemLimitType.LIMIT_DAY:
-						name=HtmlTextUtil.getTextColor(nameColor,"今日使用次数:");
-						
-						break;
-					case ItemLimitType.LIMIT_WEEK:
-						name=HtmlTextUtil.getTextColor(nameColor,"本周使用次数:");
-						break;
-					case ItemLimitType.LIMIT_MONTH:
-						name=HtmlTextUtil.getTextColor(nameColor,"本月使用次数:");
-						break;
-					case ItemLimitType.LIMIT_YEAR:
-						name=HtmlTextUtil.getTextColor(nameColor,"本年使用次数:");
-						break;
+			var label:Label;
+			if(_itemInfo.itemInfo){//物品存在的情况下
+				if(_itemInfo.itemInfo.limitType>0){
+					switch(_itemInfo.itemInfo.limitType){
+						case ItemLimitType.LIMIT_DAY:
+							name=HtmlTextUtil.getTextColor(nameColor,"今日使用次数:");
+							
+							break;
+						case ItemLimitType.LIMIT_WEEK:
+							name=HtmlTextUtil.getTextColor(nameColor,"本周使用次数:");
+							break;
+						case ItemLimitType.LIMIT_MONTH:
+							name=HtmlTextUtil.getTextColor(nameColor,"本月使用次数:");
+							break;
+						case ItemLimitType.LIMIT_YEAR:
+							name=HtmlTextUtil.getTextColor(nameColor,"本年使用次数:");
+							break;
+					}
+					value=HtmlTextUtil.getTextColor(valueColor,_itemInfo.itemInfo.limitValue+"/"+_itemInfo.itemInfo.limitNum);
+					createLabel(name,value);
+					curY+=22;
 				}
-				value=HtmlTextUtil.getTextColor(valueColor,_itemInfo.itemInfo.limitValue+"/"+_itemInfo.itemInfo.limitNum);
+				
+				createLine(10,curY,280);
+				curY+=10;
+				
+				name=HtmlTextUtil.getTextColor(0xcfc6ae,"[物品说明]\n");
+				label=createLabel(name,_itemInfo.qItem.q_describe);
+				label.width=250;
+				label.leading=5;
+				label.wordWrap=true;
+				curY+=label.height+10;
+				
+				createLine(10,curY,280);
+				curY+=10;
+				
+				if(_itemInfo.itemInfo.lostTime==0){
+					name=HtmlTextUtil.getTextColor(nameColor,"类别:");
+					value=HtmlTextUtil.getTextColor(valueColor,"永久");
+				}else{
+					name=HtmlTextUtil.getTextColor(nameColor,"时效:");
+					value=HtmlTextUtil.getTextColor(valueColor,_itemInfo.itemInfo.lostTime.toString());
+				}
+				createLabel(name,value);
+				curY+=22;
+			}else{
+				createLine(10,curY,280);
+				curY+=10;
+				
+				name=HtmlTextUtil.getTextColor(0xcfc6ae,"[物品说明]\n");
+				label=createLabel(name,_itemInfo.qItem.q_describe);
+				label.width=250;
+				label.leading=5;
+				label.wordWrap=true;
+				curY+=label.height+10;
+				name=HtmlTextUtil.getTextColor(nameColor,"类别:");
+				value=HtmlTextUtil.getTextColor(valueColor,"永久");
 				createLabel(name,value);
 				curY+=22;
 			}
-			
-			createLine(10,curY,280);
-			curY+=10;
-			
-			name=HtmlTextUtil.getTextColor(0xcfc6ae,"[物品说明]\n");
-			var label:Label=createLabel(name,_itemInfo.qItem.q_describe);
-			label.width=250;
-			label.leading=5;
-			label.wordWrap=true;
-			curY+=label.height+10;
-			
-			createLine(10,curY,280);
-			curY+=10;
-			
-			if(_itemInfo.itemInfo.lostTime==0){
-				name=HtmlTextUtil.getTextColor(nameColor,"类别:");
-				value=HtmlTextUtil.getTextColor(valueColor,"永久");
-			}else{
-				name=HtmlTextUtil.getTextColor(nameColor,"时效:");
-				value=HtmlTextUtil.getTextColor(valueColor,_itemInfo.itemInfo.lostTime.toString());
-			}
-			createLabel(name,value);
-			curY+=22;
+		
 			
 			createLine(10,curY,280);
 			curY+=10;

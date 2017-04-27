@@ -39,9 +39,13 @@ package com.rpgGame.appModule.equip
 			}
 			_currentUI = value;
 			this.addChild(_currentUI);
-			_currentUI.show();
+			if(_data){
+				_currentUI.show(_data.data);
+			}else{
+				_currentUI.show();
+			}
 		}
-
+		
 		private function initUI():void
 		{
 			_tabSkin=_skin.daohang.skin as Zhuangbei_daohang;
@@ -63,7 +67,11 @@ package com.rpgGame.appModule.equip
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			onTouchTarget(_tabSkin.btn_jineng);
+			if(!data){
+				onTouchTarget(_tabSkin.btn_jineng);
+			}else{
+				showTab(data.tab);
+			}
 		}
 		
 		override public function hide():void
@@ -77,6 +85,7 @@ package com.rpgGame.appModule.equip
 			super.onTouchTarget(target);
 			if(target is Radio){
 				var index:int=tabBtn.indexOf(target as Radio);
+				if(index==-1) return;
 				showTab(index);
 			}
 		}

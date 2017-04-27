@@ -53,6 +53,7 @@ package com.game.engine3D.display
 			addChild3D(sr3D);
 			return sr3D;
 		}
+		
 		/**
 		 *在UI上添加一个特效，播放播放只是添加 
 		 * @param url

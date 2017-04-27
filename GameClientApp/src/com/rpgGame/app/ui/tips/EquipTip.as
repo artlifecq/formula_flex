@@ -267,7 +267,33 @@ package com.rpgGame.app.ui.tips
 				curY=curY+label.height+5;
 			}
 			
-			//洗练属性也不管
+			//洗练属性
+			createLine(10,curY,260);
+			curY+=10;
+			name=HtmlTextUtil.getTextColor(0xCFC6AE,"[洗炼属性]\n");
+			label=createLabel(name,"");
+			label.x=10;
+			label.y=curY;
+			curY=curY+label.height+5;
+			name=HtmlTextUtil.getTextColor(0x8B8D7B,"");
+			if(_itemInfo.smeltAtt1!=0){
+				value=CharAttributeType.getWashAttDes(_itemInfo.smeltAtt1);
+			}else{
+				value=HtmlTextUtil.getTextColor(0xD02525,"未激活");
+			}
+			label=createLabel(name,value);
+			label.x=10;
+			label.y=curY;
+			curY=curY+label.height+5;
+			if(_itemInfo.smeltAtt2!=0){
+				value=CharAttributeType.getWashAttDes(_itemInfo.smeltAtt2);
+			}else{
+				value=HtmlTextUtil.getTextColor(0xD02525,"未激活");
+			}
+			label=createLabel(name,value);
+			label.x=10;
+			label.y=curY;
+			curY=curY+label.height+5;
 			
 			createLine(10,curY,260);
 			curY+=10;

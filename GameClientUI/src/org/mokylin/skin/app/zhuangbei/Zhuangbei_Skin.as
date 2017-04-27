@@ -4,9 +4,6 @@ package org.mokylin.skin.app.zhuangbei
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.zhuangbei.Zhuangbei_daohang;
-	import org.mokylin.skin.app.zhuangbei.qianghua.Zhuangbei_QianghuaSkin;
-	import org.mokylin.skin.app.zhuangbei.xilian.Xilian_Skin;
-	import org.mokylin.skin.app.zhuangbei.zuomo.Zuomo_Skin;
 	import org.mokylin.skin.common.yiji_panelbg2_Skin;
 
 	/**
@@ -23,12 +20,6 @@ package org.mokylin.skin.app.zhuangbei
 
 		public var daohang:feathers.controls.SkinnableContainer;
 
-		public var qianghua:feathers.controls.SkinnableContainer;
-
-		public var xilian:feathers.controls.SkinnableContainer;
-
-		public var zuomo:feathers.controls.SkinnableContainer;
-
 
 		//==========================================================================
 		//                                定义构造函数
@@ -40,7 +31,7 @@ package org.mokylin.skin.app.zhuangbei
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [bg_i(),__Zhuangbei_Skin_UIAsset1_i(),daohang_i(),qianghua_i(),zuomo_i(),xilian_i(),__Zhuangbei_Skin_UIAsset2_i()];
+			this.elementsContent = [bg_i(),__Zhuangbei_Skin_UIAsset1_i(),daohang_i(),__Zhuangbei_Skin_UIAsset2_i()];
 			
 			states = {
 			};
@@ -96,48 +87,6 @@ package org.mokylin.skin.app.zhuangbei
 			temp.width = 722;
 			temp.x = 26;
 			temp.y = 524;
-			return temp;
-		}
-
-		private function qianghua_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			qianghua = temp;
-			temp.name = "qianghua";
-			temp.height = 587;
-			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.qianghua.Zhuangbei_QianghuaSkin()
-			temp.skin = skin
-			temp.width = 947;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function xilian_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			xilian = temp;
-			temp.name = "xilian";
-			temp.height = 587;
-			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.xilian.Xilian_Skin()
-			temp.skin = skin
-			temp.width = 947;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function zuomo_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			zuomo = temp;
-			temp.name = "zuomo";
-			temp.height = 587;
-			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.zuomo.Zuomo_Skin()
-			temp.skin = skin
-			temp.width = 947;
-			temp.x = 0;
-			temp.y = 0;
 			return temp;
 		}
 
