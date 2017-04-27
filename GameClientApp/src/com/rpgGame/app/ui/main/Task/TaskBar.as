@@ -356,6 +356,8 @@ package com.rpgGame.app.ui.main.Task
 		/**目标按钮任务处理*/
 		private function killWalkBut(type:int,num:int,key:int):void
 		{
+			CollectManager.show("caiji",2000,null);
+			return;
 			
 			if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_USEITEM&&!TaskUtil.getIsfinishByType(type))//是使用道具任务且没有完成
 			{

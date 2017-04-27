@@ -230,8 +230,11 @@ package com.rpgGame.app.manager.task
 		/**返回主线任务回复npc模型id*/
 		public static function getMainTaskNpcModeId():int
 		{
-			return MonsterDataManager.getMonsterModeidByAreaid(mainTaskData.q_finish_npc);
-			
+			if(mainTaskData!=null)
+			{
+				return MonsterDataManager.getMonsterModeidByAreaid(mainTaskData.q_finish_npc);
+			}
+			return 0;
 		}
 		/**当前是否只有主线任务*/
 		public static function get isOnlyDailyTask() :Boolean
