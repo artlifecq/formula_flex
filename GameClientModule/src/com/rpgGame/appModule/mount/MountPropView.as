@@ -15,36 +15,36 @@ package com.rpgGame.appModule.mount
 			_skin = skin;
 			_index = index;
 		}
-		private var _currentatt:Q_att_values;
-		private var _nextAtt:Q_att_values;
-		public function updataAtt(currentatt:Q_att_values,nextatt:Q_att_values):void
+		
+		public function get index():int
+		{
+			return _index;
+		}
+		private var _currentatt:Number;
+		private var _nextAtt:Number;
+		private var _attpropId:int;
+		public function updataAtt(type:int,currentatt:Number=0,nextatt:Number=0):void
 		{
 			_currentatt = currentatt;
 			_nextAtt = nextatt;
+			_attpropId = type;
 			refeashView();
 			showUpLevelView(_isSHow);
 		}
 		private function refeashView():void
 		{
-			var attpropId:int = _currentatt["q_type"+_index];
-			if(attpropId ==0&&_nextAtt!=null)
-			{
-				attpropId = _nextAtt["q_type"+_index];
-			}
-			if(attpropId==0)
+			if(_attpropId==0)
 			{
 				_skin.container.visible = false;
 				return ;
 			}
 			_skin.container.visible = true;
-			var currentPropValue:int = _currentatt["q_value"+_index];
-			var attname:String = CharAttributeType.getCNName(attpropId);
+			var attname:String = CharAttributeType.getCNName(_attpropId);
 			_skin.lbName.text = attname;
-			_skin.lbCurrent.text = currentPropValue.toString();
-			if(_nextAtt!=null)
+			_skin.lbCurrent.text = _currentatt.toString();
+			if(_nextAtt>0)
 			{
-				var nextPropValue:int = _nextAtt["q_value"+_index];
-				_skin.lbUp.text = (nextPropValue-currentPropValue).toString();
+				_skin.lbUp.text = _nextAtt.toString();
 			}else{
 				_skin.lbUp.text = "";
 			}
@@ -52,7 +52,7 @@ package com.rpgGame.appModule.mount
 		
 		public function showUpLevelView(bool:Boolean):void
 		{
-			if(_nextAtt==null)
+			if(_nextAtt==0)
 				return ;
 			_isSHow = bool;
 			_skin.lbUp.visible = bool;

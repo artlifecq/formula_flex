@@ -64,6 +64,7 @@ package com.rpgGame.app.ui.main.shortcut
 					_skin.right_jintiao.visible =false;
 					EventManager.addEvent(MainPlayerEvent.NOWMP_CHANGE,MpCHangeHandler);
 					EventManager.addEvent(MainPlayerEvent.MAXMP_CHANGE,MpCHangeHandler);
+					EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,MpCHangeHandler);
 				}
 			}else{
 				_display = _skin.left_xuecaoMask; 
@@ -161,9 +162,9 @@ package com.rpgGame.app.ui.main.shortcut
 				return ;
 			percentage(_info.totalStat.hp/_info.totalStat.life);
 		}
-		private function MpCHangeHandler(role:RoleData):void
+		private function MpCHangeHandler(role:RoleData=null):void
 		{
-			if(role != _info)
+			if(role!=null && role != _info)
 				return ;
 			var currentmp:int = _info.totalStat.getStatValue(CharAttributeType.MP);
 			var maxmp:int = _info.totalStat.getStatValue(CharAttributeType.MAX_MP)

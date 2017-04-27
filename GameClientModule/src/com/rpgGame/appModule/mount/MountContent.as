@@ -5,21 +5,54 @@ package com.rpgGame.appModule.mount
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.clientConfig.Q_horse;
+	
+	import org.mokylin.skin.app.zuoqi.Zuoqi_Skin;
 	
 	import starling.animation.IAnimatable;
 	import starling.core.Starling;
 	
 	public class MountContent extends Inter3DContainer implements IAnimatable
 	{
+		private var _isSHowNext:Boolean;
+		private var _curShowHorse:int = 0;
+		private var _skin:Zuoqi_Skin;
 		private var _curtentInter3D:InterObject3D;
 		private var _nextInter3D:InterObject3D;
 		private var _amationInfos:Vector.<TargetAmationInfo>;
 		private static const TotalTime:Number = 0.3;
 		private static var _passTime:Number = 0;
-		public function MountContent():void
+		public function MountContent(skin:Zuoqi_Skin):void
 		{
+			_skin = skin;
 			super();
+			skin.container.addChildAt(this,skin.container.getChildIndex(skin.bg_2)+1);
+			_isSHowNext = true;
+		}
+		
+		public function buttonLeft():void
+		{
+			refeashMode(_curShowHorse-1);
+		}
+		
+		public function buttonRight():void
+		{
+			refeashMode(_curShowHorse+1);
+		}
+		
+		public function refeashMode(level:int):void
+		{
+			if(_curShowHorse==level)
+				return ;
+			_curShowHorse = level;
+			var housedata:Q_horse = HorseConfigData.getMountDataById(_curShowHorse)
+			var nextShet:Q_horse = HorseConfigData.getMountDataById(_curShowHorse+1);
+			this.addMode(housedata,nextShet);
+			_skin.btn_prev.visible = _curShowHorse>1;
+			_skin.btn_next.visible = _curShowHorse<HorseConfigData.maxCount;
+			_skin.mc_name.gotoAndStop(_curShowHorse-1);
+			_skin.mc_jieshu.gotoAndStop(_curShowHorse-1);
 		}
 		
 		public function addMode(current:Q_horse,next:Q_horse):void
@@ -118,6 +151,9 @@ package com.rpgGame.appModule.mount
 		}
 		public function playTarget(bool:Boolean):void
 		{
+			if(_isSHowNext==bool)
+				return ;
+			_isSHowNext = bool;
 			if(_nextInter3D==null)
 				return ;
 			if(bool)

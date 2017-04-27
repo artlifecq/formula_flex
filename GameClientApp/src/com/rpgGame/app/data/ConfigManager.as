@@ -3,6 +3,7 @@ package com.rpgGame.app.data
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
+	import com.rpgGame.app.manager.mount.HorseExtraItemInfo;
 	import com.rpgGame.coreData.cfg.AddSpriteStatCfgData;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
@@ -234,6 +235,7 @@ package com.rpgGame.app.data
 			//坐骑数据
 			HorseConfigData.setConfig(dic[ConfigClassRegister.Q_horse]);
 			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
+			HorseExtraItemInfo.createInfo();
 		}
 		
 		/**

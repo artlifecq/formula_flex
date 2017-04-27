@@ -14,12 +14,12 @@ package org.mokylin.skin.app.zuoqi
 	import feathers.controls.UINumber;
 	import org.mokylin.skin.app.zuoqi.Shuxing_Item;
 	import org.mokylin.skin.app.zuoqi.button.ButtonZuoqi;
+	import org.mokylin.skin.app.zuoqi.button.ButtonZuoqidan;
 	import org.mokylin.skin.app.zuoqi.mc.UIMovieClipJieshu;
 	import org.mokylin.skin.app.zuoqi.mc.UIMovieClipZuoqiName;
 	import org.mokylin.skin.app.zuoqi.progress_zhufuzhiSkin;
 	import org.mokylin.skin.app.zuoqi.uinumber.UINumberZhanli;
 	import org.mokylin.skin.common.yiji_panelbg_Skin;
-	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.button.ButtonSkin_jiantou;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.check.CheckBoxSkin_1;
@@ -40,7 +40,7 @@ package org.mokylin.skin.app.zuoqi
 
 		public var bg_2:feathers.controls.UIAsset;
 
-		public var btnClose:feathers.controls.Button;
+		public var btn_chengzhangdan:feathers.controls.Button;
 
 		public var btn_kaishi:feathers.controls.Button;
 
@@ -48,7 +48,11 @@ package org.mokylin.skin.app.zuoqi
 
 		public var btn_prev:feathers.controls.Button;
 
+		public var btn_tingzhi:feathers.controls.Button;
+
 		public var btn_zidong:feathers.controls.Button;
+
+		public var btn_zizhidan:feathers.controls.Button;
 
 		public var chk_zidonggoumai:feathers.controls.Check;
 
@@ -92,7 +96,9 @@ package org.mokylin.skin.app.zuoqi
 
 		public var num_zhandouli:feathers.controls.UINumber;
 
-		public var progressbar:feathers.controls.Group;
+		public var progressbar:feathers.controls.ProgressBar;
+
+		public var progressbar_light:feathers.controls.UIAsset;
 
 		public var zhandouli:feathers.controls.UIAsset;
 
@@ -109,7 +115,7 @@ package org.mokylin.skin.app.zuoqi
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [bg_i(),btnClose_i(),bg_1_i(),bg_2_i(),btn_kaishi_i(),btn_zidong_i(),__Zuoqi_Skin_Label1_i(),lab_xuyaowupin_i(),chk_zidonggoumai_i(),progressbar_i(),__Zuoqi_Skin_UIAsset3_i(),lab_zhufuzhi_i(),__Zuoqi_Skin_UIAsset4_i(),grid_1_i(),grid_2_i(),jinjie_i(),__Zuoqi_Skin_UIAsset5_i(),zhandouli_i(),num_zhandouli_i(),__Zuoqi_Skin_Group1_i(),__Zuoqi_Skin_UIAsset6_i(),__Zuoqi_Skin_UIAsset7_i(),zuoqijineng_i(),btn_prev_i(),btn_next_i(),mc_name_i(),mc_jieshu_i(),__Zuoqi_Skin_RadioButton1_i()];
+			this.elementsContent = [bg_i(),bg_1_i(),bg_2_i(),btn_tingzhi_i(),btn_kaishi_i(),btn_zidong_i(),__Zuoqi_Skin_Label1_i(),lab_xuyaowupin_i(),chk_zidonggoumai_i(),__Zuoqi_Skin_Group1_i(),__Zuoqi_Skin_UIAsset2_i(),lab_zhufuzhi_i(),__Zuoqi_Skin_UIAsset3_i(),grid_1_i(),grid_2_i(),jinjie_i(),__Zuoqi_Skin_UIAsset4_i(),zhandouli_i(),num_zhandouli_i(),__Zuoqi_Skin_Group2_i(),btn_zizhidan_i(),btn_chengzhangdan_i(),__Zuoqi_Skin_UIAsset5_i(),zuoqijineng_i(),btn_prev_i(),btn_next_i(),mc_name_i(),mc_jieshu_i(),__Zuoqi_Skin_RadioButton1_i()];
 			
 			states = {
 			};
@@ -121,6 +127,15 @@ package org.mokylin.skin.app.zuoqi
 		//                                定义成员方法
 		//==========================================================================
 		private function __Zuoqi_Skin_Group1_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			temp.x = 687;
+			temp.y = 424;
+			temp.elementsContent = [__Zuoqi_Skin_UIAsset1_i(),progressbar_i(),progressbar_light_i(),lab_progressbar_i()];
+			return temp;
+		}
+
+		private function __Zuoqi_Skin_Group2_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 693;
@@ -137,20 +152,6 @@ package org.mokylin.skin.app.zuoqi
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 686;
 			temp.y = 460;
-			return temp;
-		}
-
-		private function __Zuoqi_Skin_ProgressBar1_i():feathers.controls.ProgressBar
-		{
-			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
-			temp.height = 14;
-			temp.maximum = 200;
-			temp.minimum = 0;
-			temp.styleClass = org.mokylin.skin.app.zuoqi.progress_zhufuzhiSkin;
-			temp.value = 160;
-			temp.width = 220;
-			temp.x = 4;
-			temp.y = 4;
 			return temp;
 		}
 
@@ -176,22 +177,13 @@ package org.mokylin.skin.app.zuoqi
 		private function __Zuoqi_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zuoqi/tiao.png";
-			temp.x = 177;
-			temp.y = 2;
-			return temp;
-		}
-
-		private function __Zuoqi_Skin_UIAsset3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zuoqi/jinjiezhufuzhi.png";
 			temp.x = 690;
 			temp.y = 408;
 			return temp;
 		}
 
-		private function __Zuoqi_Skin_UIAsset4_i():feathers.controls.UIAsset
+		private function __Zuoqi_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zuoqi/jinjiehaoli.png";
@@ -200,7 +192,7 @@ package org.mokylin.skin.app.zuoqi
 			return temp;
 		}
 
-		private function __Zuoqi_Skin_UIAsset5_i():feathers.controls.UIAsset
+		private function __Zuoqi_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zuoqi/jiachengshuxing.png";
@@ -209,16 +201,7 @@ package org.mokylin.skin.app.zuoqi
 			return temp;
 		}
 
-		private function __Zuoqi_Skin_UIAsset6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zuoqi/zuoqidan.png";
-			temp.x = 591;
-			temp.y = 446;
-			return temp;
-		}
-
-		private function __Zuoqi_Skin_UIAsset7_i():feathers.controls.UIAsset
+		private function __Zuoqi_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
@@ -229,7 +212,7 @@ package org.mokylin.skin.app.zuoqi
 			return temp;
 		}
 
-		private function __Zuoqi_Skin_UIAsset8_i():feathers.controls.UIAsset
+		private function __Zuoqi_Skin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zuoqi/zhongxiadiban.png";
@@ -274,14 +257,14 @@ package org.mokylin.skin.app.zuoqi
 			return temp;
 		}
 
-		private function btnClose_i():feathers.controls.Button
+		private function btn_chengzhangdan_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btnClose = temp;
-			temp.name = "btnClose";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 1246;
-			temp.y = 28;
+			btn_chengzhangdan = temp;
+			temp.name = "btn_chengzhangdan";
+			temp.styleClass = org.mokylin.skin.app.zuoqi.button.ButtonZuoqidan;
+			temp.x = 517;
+			temp.y = 446;
 			return temp;
 		}
 
@@ -322,6 +305,20 @@ package org.mokylin.skin.app.zuoqi
 			return temp;
 		}
 
+		private function btn_tingzhi_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_tingzhi = temp;
+			temp.name = "btn_tingzhi";
+			temp.label = "停止进阶";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.visible = false;
+			temp.width = 107;
+			temp.x = 745;
+			temp.y = 479;
+			return temp;
+		}
+
 		private function btn_zidong_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -333,6 +330,17 @@ package org.mokylin.skin.app.zuoqi
 			temp.width = 107;
 			temp.x = 808;
 			temp.y = 479;
+			return temp;
+		}
+
+		private function btn_zizhidan_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_zizhidan = temp;
+			temp.name = "btn_zizhidan";
+			temp.styleClass = org.mokylin.skin.app.zuoqi.button.ButtonZuoqidan;
+			temp.x = 591;
+			temp.y = 446;
 			return temp;
 		}
 
@@ -615,14 +623,30 @@ package org.mokylin.skin.app.zuoqi
 			return temp;
 		}
 
-		private function progressbar_i():feathers.controls.Group
+		private function progressbar_i():feathers.controls.ProgressBar
 		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
+			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
 			progressbar = temp;
 			temp.name = "progressbar";
-			temp.x = 687;
-			temp.y = 424;
-			temp.elementsContent = [__Zuoqi_Skin_UIAsset1_i(),__Zuoqi_Skin_ProgressBar1_i(),__Zuoqi_Skin_UIAsset2_i(),lab_progressbar_i()];
+			temp.height = 14;
+			temp.maximum = 200;
+			temp.minimum = 0;
+			temp.styleClass = org.mokylin.skin.app.zuoqi.progress_zhufuzhiSkin;
+			temp.value = 160;
+			temp.width = 220;
+			temp.x = 4;
+			temp.y = 4;
+			return temp;
+		}
+
+		private function progressbar_light_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			progressbar_light = temp;
+			temp.name = "progressbar_light";
+			temp.styleName = "ui/app/zuoqi/tiao.png";
+			temp.x = 177;
+			temp.y = 2;
 			return temp;
 		}
 
@@ -644,7 +668,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.name = "zuoqijineng";
 			temp.x = 178;
 			temp.y = 415;
-			temp.elementsContent = [__Zuoqi_Skin_UIAsset8_i(),kuang_1_i(),kuang_2_i(),kuang_3_i()];
+			temp.elementsContent = [__Zuoqi_Skin_UIAsset6_i(),kuang_1_i(),kuang_2_i(),kuang_3_i()];
 			return temp;
 		}
 

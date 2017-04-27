@@ -1,26 +1,17 @@
 package com.rpgGame.appModule.mount
 {
-	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.mount.HorseManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
-	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.coreData.cfg.AttValueConfig;
-	import com.rpgGame.coreData.cfg.HorseConfigData;
-	import com.rpgGame.coreData.cfg.item.ItemConfig;
-	import com.rpgGame.coreData.clientConfig.Q_att_values;
-	import com.rpgGame.coreData.clientConfig.Q_horse;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
-	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
-	import org.mokylin.skin.app.zuoqi.Shuxing_Item;
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zuoqi.Zuoqi_Skin;
 	
 	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -29,13 +20,12 @@ package com.rpgGame.appModule.mount
 	{
 		private static var isMouseOut : Boolean = true;
 		private var _skin:Zuoqi_Skin;
-		private var _curShowHorse:int = 0;
 		private var _spellIconList:Vector.<IconCDFace>;
-		private var _itemIconList:Vector.<IconCDFace>;
-		private var _propList:Vector.<MountPropView>;
-		private var _currentPower:int;
-		private var _nextPower:int;
 		private var _mountContent:MountContent;
+		private var _propContent:MountProps;
+		private var _mountupContent:MountUpExpConent;
+		private var _mountShowData:MountShowData;
+		private var _extraItemList:Vector.<ExtraButton>;
 		public function MountPanel():void
 		{
 			_skin = new Zuoqi_Skin();
@@ -44,13 +34,21 @@ package com.rpgGame.appModule.mount
 		}
 		private function init():void
 		{
-			initData();
+			_mountShowData = new MountShowData();
 			initView();
-			initEvent();
 		}
-		private function initData():void
+		
+		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
-			
+			super.show(data,openTable,parentContiner);
+			_mountShowData.horsedataInfo =  HorseManager.instance().horsedataInfo;
+			_mountShowData.useExtraItem(0,0);
+			_mountContent.refeashMode(_mountShowData.mountLevel);
+			_propContent.updataInfo(_mountShowData);
+			_propContent.refeashPropShow(false);
+			_mountupContent.updataInfo(_mountShowData);
+			refeashLevel();
+			initEvent();
 		}
 		override protected function onTouchTarget(target : DisplayObject) : void
 		{
@@ -65,10 +63,22 @@ package com.rpgGame.appModule.mount
 					onMouseOut();
 					break;
 				case "btn_next":
-					refeashPropView(_curShowHorse+1);
+					_mountContent.buttonRight();
 					break;
 				case "btn_prev":
-					refeashPropView(_curShowHorse-1);
+					_mountContent.buttonLeft();
+					break;
+				case "btn_kaishi":
+					if(_mountShowData.isSelf)
+					{
+						
+					}
+					break;
+				case "btn_zidong":
+					
+					break;
+				case "btn_tingzhi":
+					
 					break;
 			}
 		}
@@ -86,32 +96,19 @@ package com.rpgGame.appModule.mount
 			FaceUtil.SetSkillGrid(icon, spellList[2], false);
 			_spellIconList.push(icon);
 			
-			_propList = new Vector.<MountPropView>();
-			_propList.push(new MountPropView(_skin.lab_1.skin as Shuxing_Item,1));
-			_propList.push(new MountPropView(_skin.lab_2.skin as Shuxing_Item,2));
-			_propList.push(new MountPropView(_skin.lab_3.skin as Shuxing_Item,3));
-			_propList.push(new MountPropView(_skin.lab_4.skin as Shuxing_Item,4));
-			_propList.push(new MountPropView(_skin.lab_5.skin as Shuxing_Item,5));
-			_propList.push(new MountPropView(_skin.lab_6.skin as Shuxing_Item,6));
-			_propList.push(new MountPropView(_skin.lab_7.skin as Shuxing_Item,7));
-			_propList.push(new MountPropView(_skin.lab_8.skin as Shuxing_Item,8));
-			
-			_mountContent = new MountContent();
-			this.addChildAt(_mountContent,this.getChildIndex(_skin.bg_2)+1);
-			refeashPropView(HorseManager.instance().houseLevel);
-			refeashPropShow(false);
-			
-			_itemIconList = new Vector.<IconCDFace>();
-			icon = FaceUtil.creatIconCDFaceByUIAsset(_skin.grid_1,IcoSizeEnum.ICON_48);
-			_itemIconList.push(icon);
-			icon = FaceUtil.creatIconCDFaceByUIAsset(_skin.grid_2,IcoSizeEnum.ICON_48);
-			_itemIconList.push(icon);
-			refeashLevel();
+			_mountContent = new MountContent(_skin);
+			_propContent = new MountProps(_skin);
+			_mountupContent = new MountUpExpConent(_skin);
+			_extraItemList = new Vector.<ExtraButton>();
+			_extraItemList.push(new ExtraButton(_skin.btn_zizhidan,506));
+			_extraItemList.push(new ExtraButton(_skin.btn_chengzhangdan,507));
 		}
 		private function initEvent():void
 		{
 			_skin.btn_kaishi.addEventListener(TouchEvent.TOUCH, onTouch);
 			_skin.btn_zidong.addEventListener(TouchEvent.TOUCH, onTouch);
+			EventManager.addEvent(HorseManager.HorseUpLevel,refeashLevel);
+			EventManager.addEvent(HorseManager.HorseChangeExp,refeashLevel);
 		}
 		private function onTouch(e : TouchEvent) : void
 		{
@@ -129,95 +126,30 @@ package com.rpgGame.appModule.mount
 			if (touch != null && isMouseOut)
 			{
 				isMouseOut = false;
-				refeashPropView(HorseManager.instance().houseLevel);
+				_mountContent.refeashMode(_mountShowData.mountLevel);
 				onMouseOver();
 				return;
 			}
 		}
 		private function onMouseOver():void
 		{
-			if(_isSHowNext)
-				return ;
-			refeashPropShow(true);
 			_mountContent.playTarget(true);
+			_propContent.refeashPropShow(true);
 		}
 		private function onMouseOut():void
 		{
-			if(!_isSHowNext)
-				return ;
-			refeashPropShow(false);
 			_mountContent.playTarget(false);
-		}
-		private var _isSHowNext:Boolean = true;
-		private function refeashPropShow(bool:Boolean):void
-		{
-			_isSHowNext = bool;
-			var level:int = _curShowHorse;
-			if(!bool)
-				level -=1;
-			_skin.mc_name.gotoAndStop(level);
-			_skin.mc_jieshu.gotoAndStop(level);
-			for each(var view:MountPropView in _propList)
-			{
-				view.showUpLevelView(bool);
-			}
-			if(bool)
-			{
-				_skin.num_zhandouli.number = _nextPower;
-			}else{
-				_skin.num_zhandouli.number = _currentPower;
-			}
-		}
-		private function refeashPropView(level:int):void
-		{
-			if(_curShowHorse==level)
-				return ;
-			_curShowHorse = level;
-			var housedata:Q_horse = HorseConfigData.getMountDataById(_curShowHorse)
-			var currentatt:Q_att_values = AttValueConfig.getAttInfoById(int(housedata.q_attid));
-			var nextatt:Q_att_values;
-			var nextShet:Q_horse = HorseConfigData.getMountDataById(_curShowHorse+1);
-			var job:int = MainRoleManager.actorInfo.job;
-			_currentPower = FightValueUtil.calFightPowerByAttValue(currentatt,job);
-			_skin.num_zhandouli.number = _currentPower;
-			if(nextShet!=null)
-			{
-				nextatt = AttValueConfig.getAttInfoById(nextShet.q_attid);
-				_nextPower = FightValueUtil.calFightPowerByAttValue(nextatt,job);
-			}
-			
-			for each(var view:MountPropView in _propList)
-			{
-				view.updataAtt(currentatt,nextatt);
-			}
-			_mountContent.addMode(housedata,nextShet);
-			_skin.btn_prev.visible = _curShowHorse>1;
-			_skin.btn_next.visible = _curShowHorse<HorseConfigData.maxCount;
-			_skin.mc_name.gotoAndStop(_curShowHorse-1);
-			_skin.mc_jieshu.gotoAndStop(_curShowHorse-1);
+			_propContent.refeashPropShow(false);
 		}
 		
 		private function refeashLevel():void
 		{
-			var housedata:Q_horse = HorseConfigData.getMountDataById(HorseManager.instance().houseLevel);
-			var itemInfos:Object = JSONUtil.decode( housedata.q_update_gift);
-			var index:int = 0;
-			for each(var iteminfo:Object in itemInfos)
+			_mountupContent.updataInfo(_mountShowData);
+			_propContent.refeashPropValue();
+			_mountContent.refeashMode(_mountShowData.mountLevel);
+			for each(var eb:ExtraButton in _extraItemList)
 			{
-				var itemModeId:int = iteminfo["mod"];
-				if(ItemConfig.getQItemByID(itemModeId)==null)
-					continue;
-				var item:ItemInfo = new ItemInfo();
-				item.itemModelId = iteminfo["mod"];
-				item.num = iteminfo["num"];
-				item.isbind = iteminfo["bind"];
-				_itemIconList[index].visible = true;
-				FaceUtil.SetSkillGrid(_itemIconList[index], ItemUtil.convertClientItemInfo(item), true);
-				index++;
-			}
-			for(;index<_itemIconList.length;index++)
-			{
-				_itemIconList[index].visible = false;
+				eb.refeash(_mountShowData);
 			}
 		}
 	}
