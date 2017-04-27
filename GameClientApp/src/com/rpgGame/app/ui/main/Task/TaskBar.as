@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.main.Task
 {
 	import com.game.engine3D.utils.MathUtil;
+	import com.rpgGame.app.manager.collect.CollectManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
@@ -11,6 +12,7 @@ package com.rpgGame.app.ui.main.Task
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.controller.MouseCursorController;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.TaskEvent;
@@ -63,77 +65,77 @@ package com.rpgGame.app.ui.main.Task
 						setState(false);
 						break;
 					case Renwu_Item(_skin.pri_killbut1.skin).labelDisplay:
-						killWalkBut(1,0);
+						killWalkBut(1,0,1);
 						break;
 					case Renwu_Item(_skin.pri_killbut2.skin).labelDisplay:
-						killWalkBut(1,1);
+						killWalkBut(1,1,1);
 						break;
 					case Renwu_Item(_skin.pri_killbut3.skin).labelDisplay:
-						killWalkBut(1,2);
+						killWalkBut(1,2,1);
 						break;
 					case Renwu_Item(_skin.sec_killbut1_1.skin).labelDisplay:
-						killWalkBut(1,0);
+						killWalkBut(1,0,1);
 						break;
 					case Renwu_Item(_skin.sec_killbut1_2.skin).labelDisplay:
-						killWalkBut(1,1);
+						killWalkBut(1,1,1);
 						break;
 					case Renwu_Item(_skin.sec_killbut1_3.skin).labelDisplay:
-						killWalkBut(1,2);
+						killWalkBut(1,2,1);
 						break;
 					case Renwu_Item(_skin.sec_killbut2_1.skin).labelDisplay:
-						killWalkBut(2,0);
+						killWalkBut(2,0,1);
 						break;
 					case Renwu_Item(_skin.sec_killbut2_2.skin).labelDisplay:
-						killWalkBut(2,1);
+						killWalkBut(2,1,1);
 						break;
 					case Renwu_Item(_skin.sec_killbut2_3.skin).labelDisplay:
-						killWalkBut(2,2);
+						killWalkBut(2,2,1);
 						break;
 					case Renwu_Item(_skin.sec_killbut3_1.skin).labelDisplay:
-						killWalkBut(3,0);
+						killWalkBut(3,0,1);
 						break;
 					case Renwu_Item(_skin.sec_killbut3_2.skin).labelDisplay:
-						killWalkBut(3,1);
+						killWalkBut(3,1,1);
 						break;
 					case Renwu_Item(_skin.sec_killbut3_3.skin).labelDisplay:
-						killWalkBut(3,2);
+						killWalkBut(3,2,1);
 						break;
 					
 					case Renwu_Item(_skin.pri_killbut1.skin).btn_send:
-						sceneMapTransBut(1,0);
+						killWalkBut(1,0,2);
 						break;
 					case Renwu_Item(_skin.pri_killbut2.skin).btn_send:
-						sceneMapTransBut(1,1);
+						killWalkBut(1,1,2);
 						break;
 					case Renwu_Item(_skin.pri_killbut3.skin).btn_send:
-						sceneMapTransBut(1,2);
+						killWalkBut(1,2,2);
 						break;
 					case Renwu_Item(_skin.sec_killbut1_1.skin).btn_send:
-						sceneMapTransBut(1,0);
+						killWalkBut(1,0,2);
 						break;
 					case Renwu_Item(_skin.sec_killbut1_2.skin).btn_send:
-						sceneMapTransBut(1,1);
+						killWalkBut(1,1,2);
 						break;
 					case Renwu_Item(_skin.sec_killbut1_3.skin).btn_send:
-						sceneMapTransBut(1,2);
+						killWalkBut(1,2,2);
 						break;
 					case Renwu_Item(_skin.sec_killbut2_1.skin).btn_send:
-						sceneMapTransBut(2,0);
+						killWalkBut(2,0,2);
 						break;
 					case Renwu_Item(_skin.sec_killbut2_2.skin).btn_send:
-						sceneMapTransBut(2,1);
+						killWalkBut(2,1,2);
 						break;
 					case Renwu_Item(_skin.sec_killbut2_3.skin).btn_send:
-						sceneMapTransBut(2,2);
+						killWalkBut(2,2,2);
 						break;
 					case Renwu_Item(_skin.sec_killbut3_1.skin).btn_send:
-						sceneMapTransBut(3,0);
+						killWalkBut(3,0,2);
 						break;
 					case Renwu_Item(_skin.sec_killbut3_2.skin).btn_send:
-						sceneMapTransBut(3,1);
+						killWalkBut(3,1,2);
 						break;
 					case Renwu_Item(_skin.sec_killbut3_3.skin).btn_send:
-						sceneMapTransBut(3,2);
+						killWalkBut(3,2,2);
 						break;
 					
 					case _skin.sec_subbut1:
@@ -151,7 +153,6 @@ package com.rpgGame.app.ui.main.Task
 			leadCont=new TaskLeadView(_skin);
 			loopCont=new TaskLoopView(_skin);
 			effetCont=new TaskEffectView(_skin);
-			
 			/*leadCont.show(false);
 			loopCont.show(true);
 			leadCont.show(true);
@@ -169,6 +170,7 @@ package com.rpgGame.app.ui.main.Task
 			EventManager.addEvent(UserMoveEvent.MOVE_THROUGH, moveReschange);
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE,flyComplete);
 			EventManager.addEvent(MainPlayerEvent.PLAYER_DIE,playerDie);
+			
 			
 		}
 		
@@ -200,8 +202,8 @@ package com.rpgGame.app.ui.main.Task
 			
 			if(TaskMissionManager.mainTaskData!=null)
 			{
-				var npcData : Q_scene_monster_area = MonsterDataManager.getMonsterById(TaskMissionManager.mainTaskData.q_finish_npc);
-				if(npcData!=null&&npcData.q_mapid==SceneSwitchManager.currentMapId&&npcData.q_id==npcId)//点击是任务npc就弹出面板
+				var npcData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(TaskMissionManager.getMainTaskNpcAreaId());
+				if(npcData!=null&&npcData.q_mapid==SceneSwitchManager.currentMapId&&npcData.q_monster_model==npcId)//点击是任务npc就弹出面板
 				{
 					showLeadPanel();
 				}
@@ -263,7 +265,7 @@ package com.rpgGame.app.ui.main.Task
 			
 			if(TaskMissionManager.mainTaskData!=null)
 			{
-				TaskUtil.nearestTaskNpc(TaskMissionManager.mainTaskData.q_finish_npc,value);
+				TaskUtil.nearestTaskNpc(TaskMissionManager.getMainTaskNpcModeId(),value);
 			}
 		}
 		/**任务进度改变*/
@@ -352,9 +354,9 @@ package com.rpgGame.app.ui.main.Task
 			}
 		}*/
 		/**目标按钮任务处理*/
-		private function killWalkBut(type:int,ite:int):void
+		private function killWalkBut(type:int,num:int,key:int):void
 		{
-			var monsterId:int=TaskUtil.getMonsterByType(type,ite);
+			
 			if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_USEITEM&&!TaskUtil.getIsfinishByType(type))//是使用道具任务且没有完成
 			{
 				showBagPanel();
@@ -363,17 +365,49 @@ package com.rpgGame.app.ui.main.Task
 			{
 				if(TaskMissionManager.getMainTaskHaveNpc())
 				{
-					TaskUtil.monsterTaskWalk(monsterId,finishWalk,noWalk);
+					if(key==1)
+					{
+						TaskUtil.npcTaskWalk(TaskMissionManager.getMainTaskNpcAreaId(),finishWalk,noWalk);
+					}
+					else
+					{
+						TaskUtil.npcTaskFly(TaskMissionManager.getMainTaskNpcAreaId(),finishWalk,noWalk);
+					}
 				}
 				else
 				{
 					showLeadPanel();
 				}
-				
 			}
 			else
 			{
-				TaskUtil.monsterTaskWalk(monsterId);
+				if(type==TaskType.MAINTYPE_TREASUREBOX)
+				{
+					var monsterId:int=TaskMissionManager.getTreasuerMonsterId(num);
+					if(key==1)
+					{
+						TaskUtil.monsterTaskWalk(monsterId);
+					}
+					else
+					{
+						TaskUtil.monsterTaskFly(monsterId);
+					}
+					
+				}
+				else
+				{
+					var post:Array=TaskMissionManager.getPathingByType(type,num);
+					if(key==1)
+					{
+						TaskUtil.postTaskWalk(post);
+					}
+					else
+					{
+						TaskUtil.postTaskFly(post);
+					}
+					
+				}
+				
 			}
 		
 			
@@ -423,7 +457,7 @@ package com.rpgGame.app.ui.main.Task
 			
 			if(TaskMissionManager.mainTaskData!=null)
 			{
-				finishToNpc(TaskMissionManager.mainTaskData.q_finish_npc);
+				finishToNpc(TaskMissionManager.getMainTaskNpcModeId());
 			}
 		}
 		
@@ -433,7 +467,7 @@ package com.rpgGame.app.ui.main.Task
 			
 			if(TaskMissionManager.mainTaskData!=null)
 			{
-				finishToNpc(TaskMissionManager.mainTaskData.q_finish_npc);
+				finishToNpc(TaskMissionManager.getMainTaskNpcModeId());
 			}
 		}
 		
@@ -452,46 +486,7 @@ package com.rpgGame.app.ui.main.Task
 			
 		}
 		
-		/**飞鞋传送*/
-		private function sceneMapTransBut(type:int,ite:int):void
-		{
-			var monsterId:int=TaskUtil.getMonsterByType(type,ite);
-			if(type==1&&TaskMissionManager.getMainTaskIsFinish())
-			{
-				if(TaskMissionManager.getMainTaskHaveNpc())
-				{
-					TaskUtil.monsterTaskFly(monsterId);
-				}
-				else
-				{
-					finishToNpc(monsterId);
-				}
-				
-			}
-			else if(monsterId>=0)
-			{
-				TaskUtil.monsterTaskFly(monsterId);
-			}
-			
-			
-			
-			
-			
-			
-			/*TaskUtil.monsterTaskFly(monsterId);
-			if(type==1)//支线任务领取奖励
-			{
-				
-				
-				
-			}
-			else if(type==2)
-			{
-				
-			}
-			*/
-		}
-		
+	
 		/**追踪栏开启关闭操作*/
 		private function setState(isOpen : Boolean) : void {
 			if (barTweenMax) {

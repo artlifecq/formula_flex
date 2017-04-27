@@ -134,7 +134,7 @@ package com.rpgGame.app.ui.main.Task
 			icoList[1].visible=true;
 			icoBgList[1].visible=true;*/
 			
-			
+			hideInfo();
 		}
 		
 		public function show(key:Boolean):void
@@ -187,7 +187,7 @@ package com.rpgGame.app.ui.main.Task
 			{
 				setTitle(taskData.q_party_name,taskData.q_name,taskData.q_describe);
 				setParcent(taskData.q_party_id,taskData.q_node_id);
-				setTaskButView(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,taskData.q_finish_npc);
+				setTaskButView(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,MonsterDataManager.getMonsterModeidByAreaid(taskData.q_finish_npc));
 				TaskUtil.setRewordInfo(taskData.q_reword_id,icoList,icoBgList);
 				setUisite();
 			}
@@ -202,7 +202,7 @@ package com.rpgGame.app.ui.main.Task
 			
 			if(task!=null&&taskData!=null)
 			{
-				setTaskButView(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,taskData.q_finish_npc);
+				setTaskButView(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,MonsterDataManager.getMonsterModeidByAreaid(taskData.q_finish_npc));
 				
 			}
 			

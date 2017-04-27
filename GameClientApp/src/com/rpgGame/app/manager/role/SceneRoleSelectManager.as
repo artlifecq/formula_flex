@@ -13,6 +13,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.core.manager.EscActionManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.enum.JobEnum;
+	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
@@ -281,8 +282,12 @@ package com.rpgGame.app.manager.role
 						case SceneCharType.PLAYER:
 							MouseCursorController.showFinger();
 							break;
-						case SceneCharType.NPC:
-							MouseCursorController.showTalk();
+						case SceneCharType.MONSTER:
+							var monsterData : MonsterData = _mouseOverRole.data as MonsterData;
+							if (monsterData != null&&monsterData.monsterData.q_monster_type==4)
+							{
+								MouseCursorController.showTalk();
+							}
 							break;
 						case SceneCharType.COLLECT:
 							MouseCursorController.showCollect();

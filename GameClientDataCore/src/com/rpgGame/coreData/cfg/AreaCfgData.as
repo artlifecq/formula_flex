@@ -40,6 +40,16 @@ package com.rpgGame.coreData.cfg
             return _dataDic[id];
         }
         
+		public static function getAreaMapidByID(id : uint) : int {
+			var adata:Q_area=_dataDic[id];
+			if(adata!=null)
+			{
+				return adata.q_map_id;
+			}
+			return 0;
+		}
+		
+		
         public static function getAreaPointsByID(id : uint) : Vector.<Point> {
             return _posDic[id];
         }

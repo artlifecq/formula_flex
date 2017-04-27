@@ -2,6 +2,7 @@ package com.rpgGame.app.manager.task
 {
 	import com.adobe.serialization.json.JSON;
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.clientConfig.Q_mission_section;
@@ -155,6 +156,55 @@ package com.rpgGame.app.manager.task
 			
 		}
 		
+		/**
+		 * 根据类型获取获寻路点
+		 * 返回数组，0：地图id,1:x,2:y
+		 * 
+		 * */
+		public static function getPathingByType(type:int,num:int):Array
+		{
+			var post:Array=new Array();
+			var taskdata:Q_mission_base;
+			if(type==TaskType.MAINTYPE_MAINTASK)
+			{
+				taskdata=mainTaskData;
+			}
+			else if(type==TaskType.MAINTYPE_DAILYTASK)
+			{
+				taskdata=dailyTaskData;
+				
+			}
+			else if(type==TaskType.MAINTYPE_TREASUREBOX)
+			{
+				taskdata=treasuerTaskData;
+			}
+			
+			if(taskdata!=null)
+			{
+				var path:String=taskdata.q_pathing;
+				var pashArr:Array=path.split(";");
+				if(pashArr.length>num)
+				{
+					path=pashArr[num];
+					if(path!=null&&path!="")
+					{
+						pashArr=path.split(",");
+						if(pashArr.length==3)
+						{
+							post.push(int(pashArr[0]));
+							post.push(int(pashArr[1]));
+							post.push(int(pashArr[2]));
+							return post;
+						}
+					}
+				}
+				
+			}
+			
+			
+			return null;
+		}
+		
 		/**判断主线任务是否完成*/
 		public static function getMainTaskIsFinish():Boolean
 		{
@@ -164,14 +214,25 @@ package com.rpgGame.app.manager.task
 		/**判断主线任务是否有回复npc*/
 		public static function getMainTaskHaveNpc():Boolean
 		{
-			if(mainTaskData.q_finish_npc<=0)
+			if(mainTaskData.q_finish_npc>0)
 			{
-				return false;
+				return true;
 			}
-			return true;
+			return false;
 		}
 		
-		
+		/**返回主线任务回复npc刷新表id*/
+		public static function getMainTaskNpcAreaId():int
+		{
+			return mainTaskData.q_finish_npc;
+			
+		}
+		/**返回主线任务回复npc模型id*/
+		public static function getMainTaskNpcModeId():int
+		{
+			return MonsterDataManager.getMonsterModeidByAreaid(mainTaskData.q_finish_npc);
+			
+		}
 		/**当前是否只有主线任务*/
 		public static function get isOnlyDailyTask() :Boolean
 		{
@@ -396,6 +457,24 @@ package com.rpgGame.app.manager.task
 			return "";
 		}
 		
+		/**根据下标获取环式任务怪物ID*/
+		public static function getTreasuerMonsterId(num:int):int
+		{
+			if(treasuerTaskInfo!=null&&treasuerTaskInfo.taskSubRateInfolist!=null&&treasuerTaskInfo.taskSubRateInfolist.length>num)
+			{
+				var sub:TaskSubRateInfo=treasuerTaskInfo.taskSubRateInfolist[num];
+				if(sub!=null)
+				{
+					return sub.modelId;
+				}
+			}
+			return 0;
+		}
+		
+		
+		
+		
+		
 		/**当前主线任务信息*/
 		public static function get mainTaskInfo() : TaskInfo
 		{
@@ -427,7 +506,7 @@ package com.rpgGame.app.manager.task
 		{
 			if (_mainTaskData)
 			{
-				if (_mainTaskData.q_finish_npc == npcId)
+				if (getMainTaskNpcModeId() == npcId)
 				{
 					return true;
 				}

@@ -321,7 +321,7 @@ package com.rpgGame.app.utils
 				taskInfo=TaskMissionManager.mainTaskInfo;
 				if(TaskMissionManager.getMainTaskIsFinish())//主线且完成任务，就返回任务npc
 				{
-					return TaskMissionManager.mainTaskData.q_finish_npc//
+					return TaskMissionManager.getMainTaskNpcModeId();//
 				}
 			}
 			else if(type==TaskType.MAINTYPE_DAILYTASK)
@@ -361,6 +361,7 @@ package com.rpgGame.app.utils
 			
 			return -1;
 		}
+		
 		/**根据任务类型返回之类型*/
 		public static function getSubtypeByType(type : int) : int
 		{
@@ -409,7 +410,7 @@ package com.rpgGame.app.utils
 		{
 			if(TaskMissionManager.mainTaskData!=null)
 			{
-				var npcData : Q_scene_monster_area = MonsterDataManager.getMonsterById(TaskMissionManager.mainTaskData.q_finish_npc);
+				var npcData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(TaskMissionManager.mainTaskData.q_finish_npc);
 				if(npcData!=null)
 				{
 					if(npcData.q_mapid==SceneSwitchManager.currentMapId)
@@ -424,16 +425,15 @@ package com.rpgGame.app.utils
 			
 			return -1;
 		}
-		
 		/**
-		 * 寻路任务怪
-		 * @param npcId
+		 * 寻路Npc
+		 * @param id 刷新的id
 		 *
 		 */
-		public static function monsterTaskWalk(npcId : int,onArrive:Function=null,noWalk:Function=null) : void
+		public static function npcTaskWalk(id : int,onArrive:Function=null,noWalk:Function=null) : void
 		{
 			
-			var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterById(npcId);
+			var monsterData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(id);
 			if (monsterData)
 			{
 				var pos : Point = MonsterDataManager.getMonsterPosition(monsterData);
@@ -444,6 +444,102 @@ package com.rpgGame.app.utils
 		}
 		
 		
+		/**
+		 * 寻路任务怪
+		 * @param modeId
+		 *
+		 */
+		public static function monsterTaskWalk(modeId : int,onArrive:Function=null,noWalk:Function=null) : void
+		{
+			
+			var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterByModelId(modeId);
+			if (monsterData)
+			{
+				var pos : Point = MonsterDataManager.getMonsterPosition(monsterData);
+				var targerPos:Vector3D=new Vector3D();
+				
+				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, pos.x, pos.y,onArrive, 100,null,noWalk);
+			}
+		}
+		/**
+		 * 寻路任务点
+		 * @param modeId
+		 *
+		 */
+		public static function postTaskWalk(post :Array,onArrive:Function=null,noWalk:Function=null) : void
+		{
+			
+			if (post!=null&&post.length==3)
+			{
+				MainRoleSearchPathManager.walkToScene(post[0], post[1], post[2],onArrive, 100,null,noWalk);
+			}
+		}
+		/**
+		 * 飞鞋Npc
+		 * @param id 刷新的id
+		 *
+		 */
+		public static function npcTaskFly(id : int,onArrive:Function=null,noWalk:Function=null) : void
+		{
+			
+			var monsterData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(id);
+			if (monsterData)
+			{
+				var pos : Point = MonsterDataManager.getMonsterPosition(monsterData);
+				var targerPos:Vector3D=new Vector3D();
+				
+				SceneSender.sceneMapTransport(monsterData.q_mapid, pos.x, pos.y);
+			}
+		}
+		
+		
+		/**
+		 * 飞鞋任务怪
+		 * @param modeId
+		 *
+		 */
+		public static function monsterTaskFly(modeId : int,onArrive:Function=null,noWalk:Function=null) : void
+		{
+			
+			var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterByModelId(modeId);
+			if (monsterData)
+			{
+				var pos : Point = MonsterDataManager.getMonsterPosition(monsterData);
+				var targerPos:Vector3D=new Vector3D();
+				
+				SceneSender.sceneMapTransport(monsterData.q_mapid, pos.x, pos.y);
+			}
+		}
+		/**
+		 * 飞鞋任务点
+		 * @param modeId
+		 *
+		 */
+		public static function postTaskFly(post :Array,onArrive:Function=null,noWalk:Function=null) : void
+		{
+			
+			if (post!=null&&post.length==3)
+			{
+				SceneSender.sceneMapTransport(post[0], post[1], post[2]);
+			}
+		}
+		/**
+		 * 飞鞋处理
+		 * @param npcId
+		 *
+		 */
+		public static function TaskFly(npcId : int,onArrive:Function=null,noWalk:Function=null) : void
+		{
+			
+			var monsterData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(npcId);
+			if (monsterData)
+			{
+				var pos : Point = MonsterDataManager.getMonsterPosition(monsterData);
+				//var targerPos:Vector3D=new Vector3D();
+				SceneSender.sceneMapTransport(monsterData.q_mapid,pos.x,pos.y);
+				//MainRoleSearchPathManager.walkToScene(npcData.q_mapid, pos.x, pos.y,onArrive, 100,null,noWalk);
+			}
+		}
 
 		//------------------------------------------
 		/**
@@ -456,7 +552,7 @@ package com.rpgGame.app.utils
 			
 			//var npcData : Q_scene_monster_area = MonsterDataManager.getSceneData(npcId);
 			
-			var npcData : Q_scene_monster_area = MonsterDataManager.getMonsterById(npcId);
+			var npcData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(npcId);
 			
 			if (npcData)
 			{
@@ -511,23 +607,7 @@ package com.rpgGame.app.utils
 			MainRoleSearchPathManager.walkToScene(sceneID, posx, posy, null, 200);
 		}
 		
-		/**
-		 * 飞鞋处理
-		 * @param npcId
-		 *
-		 */
-		public static function monsterTaskFly(npcId : int,onArrive:Function=null,noWalk:Function=null) : void
-		{
-			
-			var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterById(npcId);
-			if (monsterData)
-			{
-				var pos : Point = MonsterDataManager.getMonsterPosition(monsterData);
-				//var targerPos:Vector3D=new Vector3D();
-				SceneSender.sceneMapTransport(monsterData.q_mapid,pos.x,pos.y);
-				//MainRoleSearchPathManager.walkToScene(npcData.q_mapid, pos.x, pos.y,onArrive, 100,null,noWalk);
-			}
-		}
+		
 		
 		
 		/** 小腾翔卷轴功能,直接飞到某个地图某个地点
@@ -836,7 +916,7 @@ package com.rpgGame.app.utils
 			
 			
 		}
-		public static function setGotargetLabelText(type,but:SkinnableContainer,t:String):void
+		public static function setGotargetLabelText(type:int,but:SkinnableContainer,t:String):void
 		{
 			
 			var rItme:Renwu_Item;
@@ -846,11 +926,10 @@ package com.rpgGame.app.utils
 			}
 			if(rItme!=null)
 			{
-				rItme.btn_send.visible=false;
-				rItme.labelDisplay.htmlText=t;//t;
-				//rItme.btn_send.x=rItme.labelDisplay.textWidth+2;
+				rItme.labelDisplay.htmlText=t;
 				but.width=rItme.labelDisplay.textWidth+25;
 				but.visible=true;
+				rItme.btn_send.visible=false;
 				if(type==1||type==2||type==3)
 				{
 					rItme.btn_send.visible=true;

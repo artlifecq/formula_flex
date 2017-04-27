@@ -8,6 +8,7 @@ package com.rpgGame.appModule.task
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_item;
@@ -41,7 +42,9 @@ package com.rpgGame.appModule.task
 		private var ico2List:Vector.<IconCDFace>;
 		private var timer:GameTimer;
 		private var currtimer:int;
-		private const TIMERDATA:int=15//倒计时时间
+		private var TIMERDATA:int=15;//倒计时时间
+		private var TwoData:int;
+		private var ThereData:int;
 		public function TaskLoopPanel()
 		{
 			_skin=new Huanshi_Renwu();
@@ -116,6 +119,20 @@ package com.rpgGame.appModule.task
 			ico2List[0].setIconResName(ClientConfig.getItemIcon("203",IcoSizeEnum.ICON_42));
 			ico2List[0].visible=true;
 			ico2BgList[0].visible=true;*/
+			
+			var mach:String=GlobalSheetData.getSettingInfo(508).q_string_value;
+			var machArr:Array;
+			if(mach!=null&&mach!="")
+			{
+				machArr=mach.split(",");
+			}
+			if(machArr!=null&&machArr.length==2)
+			{
+				TwoData=machArr[0];
+				ThereData=machArr[1];
+			}
+			
+			TIMERDATA=GlobalSheetData.getSettingInfo(509).q_int_value;
 			timer = new GameTimer("TaskLoopPanel", 1000, 0, onTimer);
 			timer.stop();
 		}
@@ -198,7 +215,7 @@ package com.rpgGame.appModule.task
 		{
 			if(TaskMissionManager.treasuerTaskInfo!=null&&TaskMissionManager.getTreasuerTaskIsFinish()&&this.visible&&this.parent!=null)
 			{
-				//hide();
+				hide();
 				TaskSender.SendfinishTaskMessage(TaskMissionManager.treasuerTaskInfo.taskId,type);	
 			}
 			
@@ -239,8 +256,8 @@ package com.rpgGame.appModule.task
 	
 		private function setMoney():void
 		{
-			money1Label.text="0";
-			money2Label.text="0";
+			money1Label.text=""+TwoData;
+			money2Label.text=""+ThereData;
 		}
 		
 		private function hideView():void

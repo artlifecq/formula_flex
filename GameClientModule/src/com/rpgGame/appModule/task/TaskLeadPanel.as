@@ -9,6 +9,7 @@ package com.rpgGame.appModule.task
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_item;
@@ -43,7 +44,7 @@ package com.rpgGame.appModule.task
 		private var icoList:Vector.<IconCDFace>;
 		private var timer:GameTimer;
 		private var currtimer:int;
-		private const TIMERDATA:int=15//倒计时时间
+		private var TIMERDATA:int=15//倒计时时间
 		
 
 		public function TaskLeadPanel()
@@ -94,7 +95,7 @@ package com.rpgGame.appModule.task
 			navLabel.htmlText="任务奖励";
 			speakLabel.htmlText="";
 			timerLabel.htmlText="";
-			
+			TIMERDATA=GlobalSheetData.getSettingInfo(509).q_int_value;
 			timer = new GameTimer("TaskLeadPanel", 1000, 0, onTimer);
 			timer.stop();
 		}
@@ -139,7 +140,7 @@ package com.rpgGame.appModule.task
 		{
 			if(TaskMissionManager.mainTaskInfo!=null&&TaskMissionManager.getMainTaskIsFinish()&&this.visible&&this.parent!=null)
 			{
-				//hide();
+				hide();
 				okBut.isEnabled=false;
 				TaskSender.SendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);	
 			}

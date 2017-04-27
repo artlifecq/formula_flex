@@ -29,6 +29,8 @@ package com.rpgGame.app.ui.main.Task
 	
 	import org.mokylin.skin.mainui.renwu.RenWuZhuiZong_Skin;
 	import org.mokylin.skin.mainui.renwu.Renwu_Item;
+	
+	import starling.display.Shape;
 
 	public class TaskLoopView
 	{
@@ -37,6 +39,7 @@ package com.rpgGame.app.ui.main.Task
 		
 		private var scrollBar :ScrollContainer;
 		private var scrollBox:Group;
+		private var scrollBack : Shape;
 		private var navi1:Label;
 		private var navi2:Label;
 		private var navi3:Label;
@@ -180,6 +183,10 @@ package com.rpgGame.app.ui.main.Task
 			
 			//_skin.sec_killbut1
 			//viewSet();
+			
+			hideMainTaskView();
+			hideDailyTaskView();
+			hideTreasuerTaskView();
 		}
 		
 		private function scrollInit():void
@@ -190,8 +197,23 @@ package com.rpgGame.app.ui.main.Task
 			scrollBar.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			scrollBar.verticalScrollPolicy = Scroller.SCROLL_POLICY_AUTO;
 			scrollBar.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_FIXED;
+			scrollBack = new Shape();
+			scrollBack.graphics.beginFill(0x00FF00);
+			scrollBack.graphics.drawRoundRect(0, 0, 100, 100);
+			scrollBack.graphics.endFill();
+			scrollBack.visible=false;
+			scrollBox.addChild(scrollBack);
+			
+			
+			
+			
+			
 			scrollBox.y=0;
 			scrollBar.addChild(scrollBox);
+			
+			
+			
+			
 		}
 		
 		public function show(key:Boolean):void
@@ -292,7 +314,7 @@ package com.rpgGame.app.ui.main.Task
 				setNavView(TaskType.MAINTYPE_MAINTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getMainTaskIsFinish(),navi1);
 				if(taskData.q_mission_type!=TaskType.SUB_CONVERSATION&&TaskMissionManager.getMainTaskIsFinish()&&TaskMissionManager.getMainTaskHaveNpc())
 				{
-					setSubbutView(taskData.q_finish_npc,killBut1List);
+					setSubbutView(MonsterDataManager.getMonsterModeidByAreaid(taskData.q_finish_npc),killBut1List);
 				}
 				else
 				{
@@ -417,10 +439,7 @@ package com.rpgGame.app.ui.main.Task
 		private function setNavView(type:int,party:String,name:String,isFinish:Boolean,nav:Label,subBut:Button=null):void
 		{
 			nav.visible=true;
-			if(subBut!=null)
-			{
-				subBut.visible=true;
-			}
+			
 			
 			if(type==1)
 			{
@@ -463,8 +482,8 @@ package com.rpgGame.app.ui.main.Task
 			{
 				killButList[i].visible=false;
 			}
-			var text:String="回复:<u>"+MonsterDataManager.getMonsterName(npcid)+"</u><font color='#55bd15'>(已完成)</font>";
-			TaskUtil.setGotargetLabelText(1,killButList[0],text);
+			var text:String="回复:<u>"+MonsterDataManager.getMonsterName(npcid)+"</u>";
+			TaskUtil.setGotargetLabelText(TaskType.MAINTYPE_MAINTASK,killButList[0],text);
 			setUisite();
 		}
 		
@@ -547,6 +566,8 @@ package com.rpgGame.app.ui.main.Task
 				ico2BgList[i].y=ico2BgList[3].y;
 				ico2List[i].y=ico2BgList[3].y-6;
 			}
+			scrollBack.height=skinList[count].y+skinList[count].height+3;
+			scrollBar.addChild(scrollBack);
 			scrollBar.addChild(scrollBox);
 			
 			
