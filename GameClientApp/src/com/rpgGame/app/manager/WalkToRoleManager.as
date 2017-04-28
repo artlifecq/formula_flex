@@ -108,7 +108,7 @@ package com.rpgGame.app.manager
 				return;
 	
 			
-			EventManager.dispatchEvent(TaskEvent.TASK_CLICK_NPC,monsterData.modelID);//交任务用------YT
+			EventManager.dispatchEvent(TaskEvent.TASK_CLICK_NPC,monsterData.modelID,monsterData.serverID);//交任务用------YT
 			
 			//如果这只怪是猪，那么是不能杀的，请求抓猪
 //			if (TouZhuCfgData.isZhuMonster(monsterData.modelID))
@@ -126,7 +126,7 @@ package com.rpgGame.app.manager
 			if (monsterData == null)
 				return;
 			
-			EventManager.dispatchEvent(TaskEvent.TASK_CLICK_NPC,monsterData.modelID);//交任务用------YT
+			EventManager.dispatchEvent(TaskEvent.TASK_CLICK_NPC,monsterData.modelID,monsterData.serverID);//交任务用------YT
 			
 		}
 		

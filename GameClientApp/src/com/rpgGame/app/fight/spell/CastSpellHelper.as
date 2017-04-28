@@ -1132,7 +1132,7 @@ package com.rpgGame.app.fight.spell
 		 * @param charB
 		 * @return
 		 */
-		private static function onSortNearestRole(roleA : SceneRole, roleB : SceneRole) : int
+		public static function onSortNearestRole(roleA : SceneRole, roleB : SceneRole) : int
 		{
             if (roleA.type != roleB.type) {
                 return parseInt(roleA.type) - parseInt(roleB.type);

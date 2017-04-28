@@ -216,7 +216,7 @@ package com.rpgGame.appModule.task
 			if(TaskMissionManager.treasuerTaskInfo!=null&&TaskMissionManager.getTreasuerTaskIsFinish()&&this.visible&&this.parent!=null)
 			{
 				hide();
-				TaskSender.SendfinishTaskMessage(TaskMissionManager.treasuerTaskInfo.taskId,type);	
+				TaskSender.sendfinishTaskMessage(TaskMissionManager.treasuerTaskInfo.taskId,type);	
 			}
 			
 		}
@@ -256,8 +256,8 @@ package com.rpgGame.appModule.task
 	
 		private function setMoney():void
 		{
-			money1Label.text=""+TwoData;
-			money2Label.text=""+ThereData;
+			money1Label.text=""+ThereData;
+			money2Label.text=""+TwoData;
 		}
 		
 		private function hideView():void
