@@ -121,9 +121,18 @@ package com.rpgGame.app.cmdlistener.scene
 			GameLog.addShow("技能流水号为： 对目标\t" + msg.uid);
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
-			ReleaseSpellHelper.releaseSpell(info);	
+			ReleaseSpellHelper.releaseSpell(info);
+			
+			
 			var skillId:int=msg.skillModelId&0xffffff;
-			EventManager.dispatchEvent(SkillEvent.SKILL_ATTACK,skillId);
+			var skillData:Q_skill_model=SpellDataManager.getSpellData(skillId);
+			if(skillData!=null&&skillData.q_performType==0&&msg.personId.ToGID() == MainRoleManager.actorID)//判断是否是自己的技能但不是战魂的技能  ---yt
+			{
+				EventManager.dispatchEvent(SkillEvent.SKILL_ATTACK,skillId);
+			}
+			
+			
+			
 		}
 		
 		private function onResAttackVentToClientMessage(msg:ResAttackVentToClientMessage):void
@@ -131,6 +140,10 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			var skillId:int=msg.fightType&0xffffff;
 			var skillData:Q_skill_model=SpellDataManager.getSpellData(skillId);
+			if(skillData!=null&&skillData.q_performType==0&&msg.playerid.ToGID() == MainRoleManager.actorID)//判断是否是自己的技能但不是战魂的技能  ---yt
+			{
+				EventManager.dispatchEvent(SkillEvent.SKILL_ATTACK,skillId);
+			}
 			if(skillData!=null&&skillData.q_performType==1&&msg.playerid.ToGID() != MainRoleManager.actorID)//判断是否是战魂但是不是自己的技能  ---yt
 			{
 				return;
@@ -146,13 +159,19 @@ package com.rpgGame.app.cmdlistener.scene
 				ReleaseSpellHelper.releaseSpell(info);
 			
 			
-			EventManager.dispatchEvent(SkillEvent.SKILL_ATTACK,skillId);
+			
 		}
 		
 		private function onResCancelSkillMessage(msg:SCCancelSkillMessage):void
 		{
 			GameLog.addShow("技能打断：" + msg.skillId);
-			EventManager.dispatchEvent(SkillEvent.SKILL_CANCEL);
+			var skillId:int=msg.skillId&0xffffff;
+			var skillData:Q_skill_model=SpellDataManager.getSpellData(skillId);
+			if(skillData!=null&&skillData.q_performType==0&&msg.playerId.ToGID() == MainRoleManager.actorID)//判断是否是自己的技能但不是战魂的技能  ---yt
+			{
+				EventManager.dispatchEvent(SkillEvent.SKILL_CANCEL);
+			}
+			
 		}
 		
 		

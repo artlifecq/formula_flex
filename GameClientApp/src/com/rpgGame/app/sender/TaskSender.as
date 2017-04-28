@@ -4,6 +4,9 @@ package com.rpgGame.app.sender
 	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
 	import com.rpgGame.coreData.type.CostItemType;
 	import com.rpgGame.netData.map.message.ReqPlayerStopMessage;
+	import com.rpgGame.netData.npc.message.ReqNpcServicesMessage;
+	import com.rpgGame.netData.npc.message.ResNpcActionMessage;
+	import com.rpgGame.netData.npc.message.ResNpcServicesMessage;
 	import com.rpgGame.netData.task.message.ReqfinishTaskMessage;
 	
 	import app.cmd.TaskModuleMessages;
@@ -26,12 +29,12 @@ package com.rpgGame.app.sender
 		
 		
 		/**
-		 * 
-		 * @param tid 任务id
+		 * 领取任务奖励
+		 * @param tid 任务id 
 		 * @param multiple 奖励倍数
 		 * 
 		 */		
-		public static function SendfinishTaskMessage(tid:long,multiple=1):void
+		public static function sendfinishTaskMessage(tid:long,multiple=1):void
 		{
 			var msg:ReqfinishTaskMessage = new ReqfinishTaskMessage();
 			msg.taskId=tid;
@@ -40,7 +43,18 @@ package com.rpgGame.app.sender
 		}
 		
 		
-		
+		/**
+		 * 开始采集
+		 * @param tid 
+		 * 
+		 * 
+		 */		
+		public static function sendStartGatherMessage(tid:long):void
+		{
+			var msg:ReqNpcServicesMessage = new ReqNpcServicesMessage();
+			msg.npcId=tid;
+			SocketConnection.send(msg);
+		}
 		
 		
 		

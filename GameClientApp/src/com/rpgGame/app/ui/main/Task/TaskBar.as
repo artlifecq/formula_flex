@@ -1,8 +1,10 @@
 package com.rpgGame.app.ui.main.Task
 {
 	import com.game.engine3D.utils.MathUtil;
+	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.collect.CollectManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -15,6 +17,7 @@ package com.rpgGame.app.ui.main.Task
 	import com.rpgGame.core.controller.MouseCursorController;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
+	import com.rpgGame.core.events.SkillEvent;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.core.ui.SkinUI;
@@ -23,6 +26,7 @@ package com.rpgGame.app.ui.main.Task
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
+	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.TaskType;
 	
 	import flash.geom.Point;
@@ -30,6 +34,7 @@ package com.rpgGame.app.ui.main.Task
 	import gs.TweenMax;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.data.long;
 	import org.mokylin.skin.mainui.renwu.RenWuZhuiZong_Skin;
 	import org.mokylin.skin.mainui.renwu.Renwu_Item;
 	
@@ -190,35 +195,44 @@ package com.rpgGame.app.ui.main.Task
 		}
 		
 		/**点击npc寻路完成*/
-		private function taskNpc(npcId:int):void
+		private function taskNpc(npcId:int,serverID:long):void
 		{
-			
-			finishToNpc(npcId);
+			if(TaskMissionManager.isGatherItem(npcId))//如果是采集物就采集
+			{
+				TaskSender.sendStartGatherMessage(serverID);
+			}
+			else if(TaskMissionManager.isMainTaskNpc(npcId))
+			{
+				showLeadPanel();
+			}
 			
 		}
 		/**移动完成*/
 		private function finishToNpc(npcId:int) : void
 		{
-			
-			if(TaskMissionManager.mainTaskData!=null)
+			if(TaskMissionManager.isMainTaskNpc(npcId))
+			{
+				showLeadPanel();
+			}
+			/*if(TaskMissionManager.mainTaskData!=null)
 			{
 				var npcData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(TaskMissionManager.getMainTaskNpcAreaId());
 				if(npcData!=null&&npcData.q_mapid==SceneSwitchManager.currentMapId&&npcData.q_monster_model==npcId)//点击是任务npc就弹出面板
 				{
 					showLeadPanel();
 				}
-			}
+			}*/
+			
+			
 		}
 		/**飞鞋完成*/
 		private function flyComplete():void
 		{
 			var dist:int =TaskUtil.getDistfinishNpc();
-			if(dist>=0&&dist<200)
+			if(dist>=0&&dist<100)
 			{
 				showLeadPanel();
 			}
-			
-			
 		}
 		/**接受任务信息初始化*/
 		private function inforMation():void
@@ -233,7 +247,6 @@ package com.rpgGame.app.ui.main.Task
 		/**完成任务*/
 		private function finishMation(type:int):void
 		{
-			effetCont.playFinishEffect();
 			leadCont.hideInfo();
 			loopCont.hideTaskView(type);
 			setViewShow();
@@ -241,6 +254,7 @@ package com.rpgGame.app.ui.main.Task
 			loopCont.loopTaskView();
 			if(type==TaskType.MAINTYPE_MAINTASK)
 			{
+				effetCont.playFinishEffect();
 				hideLeadPanel();
 			}
 			else if(type==TaskType.MAINTYPE_TREASUREBOX)
@@ -252,7 +266,11 @@ package com.rpgGame.app.ui.main.Task
 		/**新任务*/
 		private function newMation(type:int):void
 		{
-			effetCont.playNewtaskEffect();
+			if(type==TaskType.MAINTYPE_MAINTASK)
+			{
+				effetCont.playNewtaskEffect();
+			}
+			
 			setViewShow();
 			leadCont.leadTaskView();
 			loopCont.loopTaskView(type);
@@ -369,11 +387,11 @@ package com.rpgGame.app.ui.main.Task
 				{
 					if(key==1)
 					{
-						TaskUtil.npcTaskWalk(TaskMissionManager.getMainTaskNpcAreaId(),finishWalk,noWalk);
+						TaskUtil.npcTaskWalk(TaskMissionManager.getMainTaskNpcAreaId(),finishWalk,finishWalk);
 					}
 					else
 					{
-						TaskUtil.npcTaskFly(TaskMissionManager.getMainTaskNpcAreaId(),finishWalk,noWalk);
+						TaskUtil.npcTaskFly(TaskMissionManager.getMainTaskNpcAreaId(),finishWalk,finishWalk);
 					}
 				}
 				else
@@ -383,7 +401,7 @@ package com.rpgGame.app.ui.main.Task
 			}
 			else
 			{
-				if(type==TaskType.MAINTYPE_TREASUREBOX)
+				if(type==TaskType.MAINTYPE_TREASUREBOX)// 环式任务寻怪取刷新点
 				{
 					var monsterId:int=TaskMissionManager.getTreasuerMonsterId(num);
 					if(key==1)
@@ -396,12 +414,23 @@ package com.rpgGame.app.ui.main.Task
 					}
 					
 				}
-				else
+				else//主线和支线的怪取配置坐标点
 				{
 					var post:Array=TaskMissionManager.getPathingByType(type,num);
 					if(key==1)
 					{
-						TaskUtil.postTaskWalk(post);
+						var modeid:int=TaskUtil.getMonsterByType(type,num);
+						var obj:Object=new Object();
+						obj.subType=TaskUtil.getSubtypeByType(type);
+						obj.modeid=modeid;
+						if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_GATHER)//采集任务寻路完成开始采集
+						{
+							TaskUtil.postTaskWalk(post,walkStartGather,nowalkStartGather,obj);
+						}
+						else
+						{
+							TaskUtil.postTaskWalk(post,startGather);
+						}
 					}
 					else
 					{
@@ -454,7 +483,7 @@ package com.rpgGame.app.ui.main.Task
 			
 		}
 		/**追踪面板上寻路完成*/
-		private function finishWalk(ref : WalkMoveStateReference):void
+		private function finishWalk(re : *):void
 		{
 			
 			if(TaskMissionManager.mainTaskData!=null)
@@ -462,23 +491,82 @@ package com.rpgGame.app.ui.main.Task
 				finishToNpc(TaskMissionManager.getMainTaskNpcModeId());
 			}
 		}
+		/*private function finishWalk(ref : WalkMoveStateReference):void
+		{
+			
+			if(TaskMissionManager.mainTaskData!=null)
+			{
+				finishToNpc(TaskMissionManager.getMainTaskNpcModeId());
+			}
+		}*/
 		
 		/**追踪面板已在npc前面不用寻路*/
-		private function noWalk(role:SceneRole):void
+		/*private function noWalk(role:SceneRole):void
 		{
-			
 			if(TaskMissionManager.mainTaskData!=null)
 			{
 				finishToNpc(TaskMissionManager.getMainTaskNpcModeId());
 			}
+		}*/
+		/**采集寻路完成开始采集了*/
+		private function walkStartGather(ref :WalkMoveStateReference):void
+		{
+		
+			var modeid:int=ref.data.modeid;
+			startGather(modeid);
+			
 		}
+		/**采集寻路完成开始采集了*/
+		private function nowalkStartGather(data :Object):void
+		{
+			var modeid:int=data.modeid;
+			startGather(modeid);
+			
+		}
+		/**采集寻路完成开始采集了*/
+		private function startGather(modeid :int):void
+		{
+			var list : Vector.<SceneRole> =SceneManager.getSceneRoleList();
+			list.sort(CastSpellHelper.onSortNearestRole);
+			var moustList: Vector.<MonsterData>=new Vector.<MonsterData>();
+			var monsterData : MonsterData
+			for each(var rdata:SceneRole in list)
+			{
+				if(rdata!=null&&rdata.data!=null)
+				{
+					monsterData=rdata.data as MonsterData;
+					if(monsterData!=null)
+					{
+						if(monsterData.modelID==modeid)
+						{
+							TaskSender.sendStartGatherMessage(monsterData.serverID);
+							return;
+						}
+					}
+				}
+				
+			}
+			
+			//CollectManager.show("caiji",2000,null);
+			
+			
+			//TaskSender.sendStartGatherMessage();
+			
+		}
+		
+		private function gatherItem():void
+		{
+		
+		}
+		
+		
 		
 		/**领取奖励按钮*/
 		private function receiveRewordBut(type:int):void
 		{
 			if(type==1)//支线任务领取奖励
 			{
-				TaskSender.SendfinishTaskMessage(TaskMissionManager.dailyTaskInfo.taskId);
+				TaskSender.sendfinishTaskMessage(TaskMissionManager.dailyTaskInfo.taskId);
 				loopCont.hideDailyTaskView();
 			}
 			else if(type==2)
