@@ -272,7 +272,7 @@ package com.rpgGame.app.manager.task
 						{
 							path=pashArr[j];
 							pathArr=path.split(",");
-							if(pashArr.length==2&&pashArr[0]==id)
+							if(pathArr.length==2&&int(pathArr[0])==id)
 							{
 								return true;
 							}

@@ -291,7 +291,7 @@ package com.rpgGame.app.ui.main.Task
 		{
 			leadCont.upleadTaskView();
 			loopCont.upLoopTaskView(type);
-			if(type==1&&TaskMissionManager.getMainTaskIsFinish())
+			if(type==TaskType.MAINTYPE_MAINTASK&&TaskMissionManager.getMainTaskIsFinish())
 			{
 				if(TaskMissionManager.getMainTaskHaveNpc())
 				{
