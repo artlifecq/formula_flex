@@ -158,10 +158,6 @@ package com.rpgGame.app.ui.main.Task
 			leadCont=new TaskLeadView(_skin);
 			loopCont=new TaskLoopView(_skin);
 			effetCont=new TaskEffectView(_skin);
-			/*leadCont.show(false);
-			loopCont.show(true);
-			leadCont.show(true);
-			loopCont.show(false);*/
 		}
 		private function addEvent():void
 		{
@@ -214,14 +210,6 @@ package com.rpgGame.app.ui.main.Task
 			{
 				showLeadPanel();
 			}
-			/*if(TaskMissionManager.mainTaskData!=null)
-			{
-				var npcData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(TaskMissionManager.getMainTaskNpcAreaId());
-				if(npcData!=null&&npcData.q_mapid==SceneSwitchManager.currentMapId&&npcData.q_monster_model==npcId)//点击是任务npc就弹出面板
-				{
-					showLeadPanel();
-				}
-			}*/
 			
 			
 		}
@@ -354,29 +342,9 @@ package com.rpgGame.app.ui.main.Task
 				
 		}
 		
-		
-		/**主线按钮任务处理*/
-		/*private function mainlineWalkBut(ite:int):void
-		{
-			if(TaskMissionManager.getMainTaskIsFinish())
-			{
-				TaskUtil.monsterTaskWalk(TaskMissionManager.mainTaskData.q_finish_npc,finishWalk,noWalk);
-			}
-			else
-			{
-				var monsterId:int=TaskUtil.getMonsterTaskId(1,ite);
-				if(monsterId>=0)
-				{
-					TaskUtil.monsterTaskWalk(monsterId);
-				}
-			}
-		}*/
 		/**目标按钮任务处理*/
 		private function killWalkBut(type:int,num:int,key:int):void
 		{
-			/*CollectManager.show("caiji",2000,null);
-			return;
-			*/
 			if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_USEITEM&&!TaskUtil.getIsfinishByType(type))//是使用道具任务且没有完成
 			{
 				showBagPanel();
@@ -436,51 +404,8 @@ package com.rpgGame.app.ui.main.Task
 					{
 						TaskUtil.postTaskFly(post);
 					}
-					
 				}
-				
 			}
-		
-			
-			/*if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_USEITEM&&!TaskUtil.getIsfinishByType(type))//是使用道具任务且没有完成
-			{
-				showBagPanel();
-			}
-			else 
-			{
-				var monsterId:int=TaskUtil.getMonsterByType(type,ite);
-				if(type==TaskType.MAINTYPE_MAINTASK&&TaskMissionManager.getMainTaskIsFinish())
-				{
-					if(TaskMissionManager.getMainTaskHaveNpc())
-					{
-						TaskUtil.monsterTaskWalk(monsterId,finishWalk,noWalk);
-					}
-					else
-					{
-						showLeadPanel();
-					}
-					
-				}
-				else
-				{
-					TaskUtil.monsterTaskWalk(monsterId);
-				}
-				
-			}*/
-			
-			/*if(monsterId>=0)
-			{
-				if(type==1&&TaskMissionManager.getMainTaskIsFinish())
-				{
-					
-				}
-				else
-				{
-					TaskUtil.monsterTaskWalk(monsterId);
-				}
-				
-			}	*/
-			
 		}
 		/**追踪面板上寻路完成*/
 		private function finishWalk(re : *):void
@@ -491,23 +416,7 @@ package com.rpgGame.app.ui.main.Task
 				finishToNpc(TaskMissionManager.getMainTaskNpcModeId());
 			}
 		}
-		/*private function finishWalk(ref : WalkMoveStateReference):void
-		{
-			
-			if(TaskMissionManager.mainTaskData!=null)
-			{
-				finishToNpc(TaskMissionManager.getMainTaskNpcModeId());
-			}
-		}*/
 		
-		/**追踪面板已在npc前面不用寻路*/
-		/*private function noWalk(role:SceneRole):void
-		{
-			if(TaskMissionManager.mainTaskData!=null)
-			{
-				finishToNpc(TaskMissionManager.getMainTaskNpcModeId());
-			}
-		}*/
 		/**采集寻路完成开始采集了*/
 		private function walkStartGather(ref :WalkMoveStateReference):void
 		{
@@ -546,17 +455,6 @@ package com.rpgGame.app.ui.main.Task
 				}
 				
 			}
-			
-			//CollectManager.show("caiji",2000,null);
-			
-			
-			//TaskSender.sendStartGatherMessage();
-			
-		}
-		
-		private function gatherItem():void
-		{
-		
 		}
 		
 		
