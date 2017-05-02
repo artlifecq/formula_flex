@@ -18,6 +18,12 @@ package com.rpgGame.core.events
 		public static const SKILL_ATTACK:String = "Skill_Attack";
 		/**技能成功事件*/		
 		public static const SKILL_RESULT:String = "Skill_Result";
+		
+		/**吟唱条开始*/		
+		public static const SING_START:String = "Sing_Start";
+		/**吟唱条停止*/		
+		public static const SING_STOP:String = "Sing_Stop";
+		
 		public var skillID:int;
 		
 		

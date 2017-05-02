@@ -454,6 +454,11 @@ package com.rpgGame.app.ui.main.Task
 				nav.htmlText="[环式]";
 			}
 			nav.htmlText+=party+name;
+			if(type==3)
+			{
+				nav.htmlText+="<font color='#ffffff'>("+TaskMissionManager.treasuerTaskInfo.loopNumber+"/"+TaskMissionManager.getTreasuerAllNum()+")</font>";
+			}
+			
 			if(isFinish)
 			{
 				nav.htmlText+="<font color='#55bd15'>(已完成)</font>";

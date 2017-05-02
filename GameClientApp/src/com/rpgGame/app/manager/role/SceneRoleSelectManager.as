@@ -284,10 +284,19 @@ package com.rpgGame.app.manager.role
 							break;
 						case SceneCharType.MONSTER:
 							var monsterData : MonsterData = _mouseOverRole.data as MonsterData;
-							if (monsterData != null&&monsterData.monsterData.q_monster_type==4)
+							if (monsterData != null)
 							{
-								MouseCursorController.showTalk();
+								if(monsterData.monsterData.q_monster_type==4)
+								{
+									MouseCursorController.showTalk();
+								}
+								else if (monsterData.monsterData.q_monster_type==5)
+								{
+									MouseCursorController.showCollect();
+								}
 							}
+							
+								
 							break;
 						case SceneCharType.COLLECT:
 							MouseCursorController.showCollect();

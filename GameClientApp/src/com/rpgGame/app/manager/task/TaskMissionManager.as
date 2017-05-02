@@ -205,6 +205,88 @@ package com.rpgGame.app.manager.task
 			return null;
 		}
 		
+		/**
+		 * 根据类型和下标返回元素id
+		 * 返回数组，0：地图id,1:x,2:y
+		 * 
+		 * */
+		public static function getModeidByType(type:int,num:int):int
+		{
+			var taskdata:Q_mission_base;
+			if(type==TaskType.MAINTYPE_MAINTASK)
+			{
+				taskdata=mainTaskData;
+			}
+			else if(type==TaskType.MAINTYPE_DAILYTASK)
+			{
+				taskdata=dailyTaskData;
+				
+			}
+			else if(type==TaskType.MAINTYPE_TREASUREBOX)
+			{
+				taskdata=treasuerTaskData;
+			}
+			
+			if(taskdata!=null)
+			{
+				var path:String=taskdata.q_pathing;
+				var pashArr:Array=path.split(";");
+				if(pashArr.length>num)
+				{
+					path=pashArr[num];
+					if(path!=null&&path!="")
+					{
+						pashArr=path.split(",");
+						if(pashArr.length==2)
+						{
+							return int(pashArr[0]);
+						}
+					}
+				}
+				
+			}
+			
+			
+			return 0;
+		}
+		
+		
+		/**判断是否是采集物*/
+		public static function isGatherItem(id:int):Boolean
+		{
+			var taskdata:Q_mission_base;
+			var i:int,j:int;
+			for(i=0;i<3;i++)
+			{
+				if(i==0)taskdata=mainTaskData;
+				else if(i==1)taskdata=dailyTaskData;
+				else if(i==2)taskdata=treasuerTaskData;
+				if(taskdata!=null)
+				{
+					var path:String=taskdata.q_finish_information_str;
+					var pathArr:Array
+					var pashArr:Array=path.split(";");
+					for(j=0;j<pashArr.length;j++)
+					{
+						if(pashArr[j]!=null&&pashArr[j]!="")
+						{
+							path=pashArr[j];
+							pathArr=path.split(",");
+							if(pathArr.length==2&&int(pathArr[0])==id)
+							{
+								return true;
+							}
+						}
+					}
+					
+				}
+				
+			}
+			
+			return false;
+		}
+		
+		
 		/**判断主线任务是否完成*/
 		public static function getMainTaskIsFinish():Boolean
 		{
@@ -236,6 +318,17 @@ package com.rpgGame.app.manager.task
 			}
 			return 0;
 		}
+		
+		/**是否是主线任务回复npc*/
+		public static function isMainTaskNpc(mid:int):Boolean
+		{
+			if(mainTaskData!=null&&MonsterDataManager.getMonsterModeidByAreaid(mainTaskData.q_finish_npc)==mid)
+			{
+				return true
+			}
+			return false;
+		}
+		
 		/**当前是否只有主线任务*/
 		public static function get isOnlyDailyTask() :Boolean
 		{

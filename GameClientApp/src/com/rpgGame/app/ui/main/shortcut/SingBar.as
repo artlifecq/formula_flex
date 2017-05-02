@@ -73,6 +73,8 @@ package com.rpgGame.app.ui.main.shortcut
 			EventManager.addEvent(SkillEvent.SKILL_CANCEL,slillCancel);//技能被打断，取消吟唱
 			EventManager.addEvent(SkillEvent.SKILL_RESULT,slillCancel);//技能释放成功，吟唱没完的话也取消吟唱
 			
+			EventManager.addEvent(SkillEvent.SING_START,startSing);
+			EventManager.addEvent(SkillEvent.SING_STOP,onCompFun);
 		}
 		private function slillAttack(sid:int):void
 		{
@@ -81,8 +83,8 @@ package com.rpgGame.app.ui.main.shortcut
 			if(skillData!=null&&skillData.q_performType==0)
 			{
 				onCompFun();//开始新的吟唱先取消现在的吟唱
-				setSkillName(skillData.q_skillName);
-				startSing(skillData.q_singing_time);
+				//setSkillName(skillData.q_skillName);
+				startSing(skillData.q_singing_time,skillData.q_skillName);
 			}
 			
 		}
@@ -91,9 +93,11 @@ package com.rpgGame.app.ui.main.shortcut
 			onCompFun();
 		}
 		
+		
 		/**开始吟唱*/
-		private function startSing(time:int):void
+		private function startSing(time:int,name:String):void
 		{
+			setSkillName(name);
 			singTime=time*0.001;
 			this.visible=true;
 			_skin.bar.x=barLoac;
