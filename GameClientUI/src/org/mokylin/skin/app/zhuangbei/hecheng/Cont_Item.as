@@ -25,6 +25,8 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 
 		public var lb_Dispaly:feathers.controls.Label;
 
+		public var selectedImg:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -36,7 +38,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			this.currentState = "normal";
 			this.height = 32;
 			this.width = 245;
-			this.elementsContent = [bg1_i(),bg2_i(),lb_Dispaly_i(),btn_over_i()];
+			this.elementsContent = [bg1_i(),bg2_i(),lb_Dispaly_i(),btn_over_i(),selectedImg_i()];
 			
 			states = {
 			};
@@ -99,6 +101,21 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			temp.width = 210;
 			temp.x = 32;
 			temp.y = 6;
+			return temp;
+		}
+
+		private function selectedImg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			selectedImg = temp;
+			temp.name = "selectedImg";
+			temp.bottom = 0;
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.left = 0;
+			temp.right = 0;
+			temp.styleName = "ui/common/hover/xuanqukuang2.png";
+			temp.top = 0;
 			return temp;
 		}
 

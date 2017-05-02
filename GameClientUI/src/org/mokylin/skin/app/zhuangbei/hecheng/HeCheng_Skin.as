@@ -12,6 +12,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonHecheng;
 	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonJianding;
+	import org.mokylin.skin.common.over.SelectBtn;
 	import org.mokylin.skin.component.button.ButtonSkin_jia;
 	import org.mokylin.skin.component.button.ButtonSkin_jian;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
@@ -46,6 +47,8 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 
 		public var cailiao3:feathers.controls.UIAsset;
 
+		public var equip_name:feathers.controls.Label;
+
 		public var exist1:feathers.controls.UIAsset;
 
 		public var exist2:feathers.controls.UIAsset;
@@ -62,6 +65,8 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 
 		public var lb_msg:feathers.controls.Label;
 
+		public var riobtn:feathers.controls.Radio;
+
 		public var tree:feathers.controls.Tree;
 
 
@@ -75,7 +80,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__HeCheng_Skin_UIAsset1_i(),__HeCheng_Skin_UIAsset2_i(),__HeCheng_Skin_UIAsset3_i(),__HeCheng_Skin_UIAsset4_i(),btn_shuoming_i(),__HeCheng_Skin_Group1_i(),grp_exit_i(),btns_i(),btnMax_i(),btn_hecheng_i(),lb_msg_i(),tree_i()];
+			this.elementsContent = [__HeCheng_Skin_UIAsset1_i(),__HeCheng_Skin_UIAsset2_i(),__HeCheng_Skin_UIAsset3_i(),__HeCheng_Skin_UIAsset4_i(),btn_shuoming_i(),__HeCheng_Skin_Group1_i(),grp_exit_i(),btns_i(),btnMax_i(),btn_hecheng_i(),lb_msg_i(),equip_name_i(),tree_i()];
 			
 			states = {
 			};
@@ -310,6 +315,21 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			temp.styleName = "ui/app/zhuangbei/xiaodaojukuang.png";
 			temp.x = 289;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function equip_name_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			equip_name = temp;
+			temp.name = "equip_name";
+			temp.text = "装备名字";
+			temp.textAlign = "center";
+			temp.color = 0xE1D4A9;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 138;
+			temp.x = 539;
+			temp.y = 144;
 			return temp;
 		}
 
