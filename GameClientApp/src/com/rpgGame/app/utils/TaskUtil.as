@@ -466,12 +466,12 @@ package com.rpgGame.app.utils
 		 * @param modeId
 		 *
 		 */
-		public static function postTaskWalk(post :Array,onArrive:Function=null,noWalk:Function=null) : void
+		public static function postTaskWalk(post :Array,onArrive:Function=null,noWalk:Function=null,data:Object=null) : void
 		{
 			
 			if (post!=null&&post.length==3)
 			{
-				MainRoleSearchPathManager.walkToScene(post[0], post[1], post[2],onArrive, 100,null,noWalk);
+				MainRoleSearchPathManager.walkToScene(post[0], post[1], post[2],onArrive, 100,data,noWalk);
 			}
 		}
 		/**
@@ -930,7 +930,7 @@ package com.rpgGame.app.utils
 				but.width=rItme.labelDisplay.textWidth+25;
 				but.visible=true;
 				rItme.btn_send.visible=false;
-				if(type==1||type==2||type==3)
+				if(type==1||type==2||type==3||type==4)
 				{
 					rItme.btn_send.visible=true;
 				}

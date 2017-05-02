@@ -73,7 +73,7 @@ package com.rpgGame.coreData.cfg.task
 		public static function getTaskDescribe(type:int,describe:String,modeid:int) :String 
 		{
 			var mosterName:String;
-			if(type==1||type==2||type==3)
+			if(type==1||type==2||type==3||type==4)
 			{
 				mosterName=MonsterDataManager.getMonsterName(modeid);
 			}

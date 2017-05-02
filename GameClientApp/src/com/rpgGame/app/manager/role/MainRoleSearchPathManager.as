@@ -59,7 +59,8 @@ package com.rpgGame.app.manager.role
 
 		private static var currentSceneId : int;
 		private static var _data : Object;
-
+		private static var _onArrive:Function;
+		
 		/**当前要去的目标地图编号，只为跨地图寻路引导面板使用*/
 		public static var gotoTargetData : GotoTargetData = new GotoTargetData();
 		/**是否使用传送*/
@@ -159,7 +160,6 @@ package com.rpgGame.app.manager.role
 			walkToScenePos(role, targetSceneId, position, onArrive, spacing, data,noWalk);
 		}
 
-		private static var _onArrive:Function;
 		/**
 		 * 跨场景寻路
 		 * @param role

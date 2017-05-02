@@ -142,7 +142,7 @@ package com.rpgGame.appModule.task
 			{
 				hide();
 				okBut.isEnabled=false;
-				TaskSender.SendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);	
+				TaskSender.sendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);	
 			}
 			
 			
