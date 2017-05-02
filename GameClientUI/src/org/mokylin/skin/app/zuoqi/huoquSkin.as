@@ -56,11 +56,19 @@ package org.mokylin.skin.app.zuoqi
 
 		public var input_txt:feathers.controls.TextInput;
 
+		public var itembg:feathers.controls.UIAsset;
+
+		public var itemname:feathers.controls.Label;
+
 		public var kuafuqianwang:feathers.controls.Button;
 
 		public var kuafuzudui:feathers.controls.Label;
 
+		public var lab_lijin:feathers.controls.Label;
+
 		public var lab_num:feathers.controls.Label;
+
+		public var lab_yuanbao:feathers.controls.Label;
 
 		public var lijin:feathers.controls.UIAsset;
 
@@ -89,7 +97,7 @@ package org.mokylin.skin.app.zuoqi
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [bg_i(),__huoquSkin_UIAsset1_i(),btnClose_i(),btn_goumai_i(),btn_chongzhi_i(),zongjia_i(),bizhong_i(),shuliang_i(),__huoquSkin_UIAsset4_i(),benfuzudui_i(),benfuqianwang_i(),kuafuzudui_i(),kuafuqianwang_i(),shijieboss_i(),bossqianwang_i(),titleDisplay_i(),__huoquSkin_UIAsset5_i(),grp_diejia_i(),grp_danjia_i(),__huoquSkin_Label6_i()];
+			this.elementsContent = [bg_i(),__huoquSkin_UIAsset1_i(),btnClose_i(),btn_goumai_i(),btn_chongzhi_i(),zongjia_i(),bizhong_i(),shuliang_i(),__huoquSkin_UIAsset4_i(),benfuzudui_i(),benfuqianwang_i(),kuafuzudui_i(),kuafuqianwang_i(),shijieboss_i(),bossqianwang_i(),titleDisplay_i(),itembg_i(),grp_diejia_i(),grp_danjia_i(),itemname_i()];
 			
 			states = {
 			};
@@ -161,17 +169,6 @@ package org.mokylin.skin.app.zuoqi
 			return temp;
 		}
 
-		private function __huoquSkin_Label6_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "坐骑进阶符";
-			temp.color = 0x5CB006;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 133;
-			temp.y = 77;
-			return temp;
-		}
-
 		private function __huoquSkin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -211,22 +208,13 @@ package org.mokylin.skin.app.zuoqi
 		private function __huoquSkin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/60.png";
-			temp.x = 49;
-			temp.y = 74;
-			return temp;
-		}
-
-		private function __huoquSkin_UIAsset6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/tubiao/yuanbao_24.png";
 			temp.x = 41;
 			temp.y = 1;
 			return temp;
 		}
 
-		private function __huoquSkin_UIAsset7_i():feathers.controls.UIAsset
+		private function __huoquSkin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/tubiao/lijin_24.png";
@@ -288,7 +276,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.name = "bizhong";
 			temp.x = 53;
 			temp.y = 207;
-			temp.elementsContent = [__huoquSkin_Label2_i(),btn_yuanbao_i(),btn_dianquan_i(),__huoquSkin_UIAsset2_i(),__huoquSkin_UIAsset3_i()];
+			temp.elementsContent = [__huoquSkin_Label2_i(),btn_yuanbao_i(),btn_dianquan_i(),__huoquSkin_UIAsset2_i(),__huoquSkin_UIAsset3_i(),lab_yuanbao_i(),lab_lijin_i()];
 			return temp;
 		}
 
@@ -341,9 +329,9 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.Radio = new feathers.controls.Radio();
 			btn_dianquan = temp;
 			temp.name = "btn_dianquan";
-			temp.label = " 礼金";
 			temp.isSelected = true;
 			temp.styleClass = org.mokylin.skin.component.radio.RadioButtonSkin_1;
+			temp.width = 20;
 			temp.x = 73;
 			temp.y = 30;
 			return temp;
@@ -391,9 +379,9 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.Radio = new feathers.controls.Radio();
 			btn_yuanbao = temp;
 			temp.name = "btn_yuanbao";
-			temp.label = " 元宝";
 			temp.isSelected = true;
 			temp.styleClass = org.mokylin.skin.component.radio.RadioButtonSkin_1;
+			temp.width = 20;
 			temp.x = 73;
 			temp.y = 3;
 			return temp;
@@ -406,7 +394,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.name = "grp_danjia";
 			temp.x = 134;
 			temp.y = 97;
-			temp.elementsContent = [__huoquSkin_Label5_i(),num_danjia_i(),__huoquSkin_UIAsset6_i(),__huoquSkin_UIAsset7_i()];
+			temp.elementsContent = [__huoquSkin_Label5_i(),num_danjia_i(),__huoquSkin_UIAsset5_i(),__huoquSkin_UIAsset6_i()];
 			return temp;
 		}
 
@@ -431,6 +419,30 @@ package org.mokylin.skin.app.zuoqi
 			temp.width = 76;
 			temp.x = 85;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function itembg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			itembg = temp;
+			temp.name = "itembg";
+			temp.styleName = "ui/common/gezikuang/tubiaodikuang/60.png";
+			temp.x = 49;
+			temp.y = 74;
+			return temp;
+		}
+
+		private function itemname_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			itemname = temp;
+			temp.name = "itemname";
+			temp.text = "坐骑进阶符";
+			temp.color = 0x5CB006;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 133;
+			temp.y = 77;
 			return temp;
 		}
 
@@ -466,6 +478,19 @@ package org.mokylin.skin.app.zuoqi
 			return temp;
 		}
 
+		private function lab_lijin_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lab_lijin = temp;
+			temp.name = "lab_lijin";
+			temp.text = "礼金";
+			temp.color = 0xE1D4A9;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 139;
+			temp.y = 31;
+			return temp;
+		}
+
 		private function lab_num_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -478,6 +503,19 @@ package org.mokylin.skin.app.zuoqi
 			temp.nativeFilters = Fontter.filterObj[""];
 			temp.x = 105;
 			temp.y = 3;
+			return temp;
+		}
+
+		private function lab_yuanbao_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lab_yuanbao = temp;
+			temp.name = "lab_yuanbao";
+			temp.text = "元宝";
+			temp.color = 0xE1D4A9;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 139;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -559,7 +597,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.name = "shuliang";
 			temp.x = 53;
 			temp.y = 171;
-			temp.elementsContent = [input_txt_i(),btn_jian_i(),btn_jia_i(),__huoquSkin_Label3_i(),max_i()];
+			temp.elementsContent = [max_i(),__huoquSkin_Label3_i(),input_txt_i(),btn_jian_i(),btn_jia_i()];
 			return temp;
 		}
 

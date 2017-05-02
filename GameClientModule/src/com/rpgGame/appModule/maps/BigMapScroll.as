@@ -294,7 +294,7 @@ package com.rpgGame.appModule.maps
 				{
 					skin2 = new NpcItem2();
 					skin2.lbl_name.htmlText=data[i].name;
-					skin2.lbl_name.name="ROLE_"+data[i].type+"_"+i;
+					skin2.btn_over.name="ROLE_"+data[i].type+"_"+i;
 					temp.skin = skin2;
 				}
 				temp.y=i*temp.height;

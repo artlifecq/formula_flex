@@ -21,6 +21,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.YunBiaoEvent;
+	import com.rpgGame.core.events.role.RoleEvent;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.StallCfgData;
@@ -30,6 +31,8 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
+	import com.rpgGame.coreData.enum.BoneNameEnum;
+	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.stall.StallData;
 	import com.rpgGame.coreData.role.BiaoCheData;
 	import com.rpgGame.coreData.role.HeroData;
@@ -41,11 +44,10 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.role.ZhanCheData;
 	import com.rpgGame.coreData.type.AttachDisplayType;
 	import com.rpgGame.coreData.type.HeadBloodStateType;
+	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
-	
-	import flash.utils.setInterval;
 	
 	import app.message.StallTypeDataProto;
 	
@@ -79,6 +81,7 @@ package com.rpgGame.app.manager.role
 		public function SceneRoleManager()
 		{
 			EventManager.addEvent(MainPlayerEvent.PK_MODE_CHANGE, onPkModeChange);
+            EventManager.addEvent(RoleEvent.UPDATE_NEEDLE, onUpdateNeedle);
 			EventManager.addEvent(YunBiaoEvent.UPDATE_BIAOCHE_NAME, updateBiaoName);
 		}
 		
@@ -597,5 +600,29 @@ package com.rpgGame.app.manager.role
 				SceneManager.removeSceneObjFromScene(role);
 			}
 		}
+        
+        private static const needleRoleX : Array = [0, -20, 20, -40, 40];
+        private static const needleRoleY : Array = [0, -20, -20, -40, -40];
+        public function onUpdateNeedle(role : SceneRole, newVal : int, oldVal : int) : void {
+            if (!(role.data is HeroData)) {
+                return;
+            }
+            if (JobEnum.ROLE_4_TYPE != (role.data as HeroData).job) {
+                return;
+            }
+            var i : int = 0;
+            for (i = newVal; i < oldVal; ++i) {
+                role.avatar.removeRenderUnitByID(RenderUnitType.NEEDLEEFFECT, i);
+            }
+            for (i = oldVal; i < newVal; ++i) {
+                SpellAnimationHelper.addTargetEffect(role, i, RenderUnitType.NEEDLEEFFECT, "tx_role_mieshijinzhen_01_5", BoneNameEnum.c_crossbow, 0);
+            }
+            for (i = 0; i < newVal; ++i) {
+                var unit : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT, i);
+                unit.x = needleRoleX[i];
+                unit.y = needleRoleY[i];
+                unit.z = 0;
+            }
+        }
 	}
 }

@@ -172,7 +172,7 @@ package com.rpgGame.app.manager.mount
 			return helpProp;
 		}
 		
-		public function addProps(helpProp:Vector.<Number>):Vector.<Number>
+		public function addProps(helpProp:Vector.<Number> = null):Vector.<Number>
 		{
 			if(_isMaxLevel)
 				return null;

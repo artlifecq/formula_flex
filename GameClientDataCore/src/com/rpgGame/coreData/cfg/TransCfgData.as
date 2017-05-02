@@ -45,7 +45,36 @@ package com.rpgGame.coreData.cfg {
             }
             return arr;
         }
-
+		/**返回当前地图的所有传送点列表
+		 * 数据为Obj  目的地 destMapId  x y
+		 * */
+		public static function getSceneTransportObj(sceneID : uint) : Array
+		{
+			var arr : Array = new Array();
+			var list : Vector3D.<Q_map_transfer> = _dataDic[sceneID];
+			if (null == list) {
+				return [];
+			}
+			for each (var data : Q_map_transfer in list)
+			{
+				if (data.q_map_id == sceneID)
+				{
+					var did:int=AreaCfgData.getAreaMapidByID(data.q_tran_dest_area_id);
+					if(did>0)
+					{
+						var tranportData :Object=new Object();
+						tranportData.destMapId=did;
+						tranportData.x=data.q_tran_res_x;
+						tranportData.y=data.q_tran_res_y;
+						arr.push(tranportData);
+					}
+					
+				}
+			}
+			return arr;
+		}
+		
+		
         public function TransCfgData() {
         }
     }

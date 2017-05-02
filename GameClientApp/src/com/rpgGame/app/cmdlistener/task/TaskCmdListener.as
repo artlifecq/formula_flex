@@ -2,6 +2,8 @@ package com.rpgGame.app.cmdlistener.task
 {
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.core.events.TaskEvent;
+	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.netData.task.message.ResTaskAcceptedMessage;
 	import com.rpgGame.netData.task.message.ResTaskChangeMessage;
 	import com.rpgGame.netData.task.message.ResTaskInformationMessage;
@@ -9,7 +11,6 @@ package com.rpgGame.app.cmdlistener.task
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-
 	import org.game.netCore.connection.SocketConnection;
 	
 	/**
@@ -33,7 +34,7 @@ package com.rpgGame.app.cmdlistener.task
 			
 			finish();
 		}
-		/**登陆当前所有任务消息	*/
+		/**登陆时当前所有任务消息	*/
 		private function onResTaskInformationMessage(msg:ResTaskInformationMessage):void
 		{
 			if(msg!=null&&msg.acceptedList!=null)
@@ -52,9 +53,18 @@ package com.rpgGame.app.cmdlistener.task
 		{
 			if(msg!=null&&msg.taskInfo!=null)
 			{
-				TaskMissionManager.setTaskInfo(msg.taskInfo);
+				var taskData:Q_mission_base=TaskMissionCfgData.getTaskByID(msg.taskInfo.taskModelId);
 				
-				EventManager.dispatchEvent(TaskEvent.TASK_NEW_MATION);
+				if(taskData!=null)
+				{
+					TaskMissionManager.setTaskInfo(msg.taskInfo);
+					EventManager.dispatchEvent(TaskEvent.TASK_NEW_MATION,taskData.q_mission_mainType);
+				}
+				
+				
+				
+				
+				
 			}
 			
 		}
@@ -63,9 +73,13 @@ package com.rpgGame.app.cmdlistener.task
 		{
 			if(msg!=null&&msg.taskInfo!=null)
 			{
-				TaskMissionManager.setTaskInfo(msg.taskInfo);
+				var taskData:Q_mission_base=TaskMissionCfgData.getTaskByID(msg.taskInfo.taskModelId);
 				
-				EventManager.dispatchEvent(TaskEvent.TASK_CHANGE_MATION);
+				if(taskData!=null)
+				{
+					TaskMissionManager.setTaskInfo(msg.taskInfo);
+					EventManager.dispatchEvent(TaskEvent.TASK_CHANGE_MATION,taskData.q_mission_mainType);
+				}
 			}
 			
 		}
@@ -74,7 +88,12 @@ package com.rpgGame.app.cmdlistener.task
 		private function onResTaskSubmitedMessage(msg:ResTaskSubmitedMessage):void
 		{
 			
-			EventManager.dispatchEvent(TaskEvent.TASK_FINISH_MATION);
+			if(msg!=null)
+			{
+				var type:int=TaskMissionManager.getTaskInfoType(msg.taskId);
+				TaskMissionManager.removeTaskInfo(type);
+				EventManager.dispatchEvent(TaskEvent.TASK_FINISH_MATION,type);
+			}
 		}
 	}
 }

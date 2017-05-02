@@ -30,7 +30,7 @@ package com.rpgGame.app.manager
 			newStat.setData( newTotalStat );
 			
 			var oldMap:HashMap = oldStat.getCloneMap();
-			var newMap:HashMap = oldStat.getCloneMap();
+			var newMap:HashMap = newStat.getCloneMap();
 			
 			showChangeAttribute( CharAttributeType.MAX_HP, oldMap, newMap );
 			showChangeAttribute( CharAttributeType.MAX_MP, oldMap, newMap );

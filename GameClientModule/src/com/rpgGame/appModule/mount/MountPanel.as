@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.mount
 {
+	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.mount.MountShowData;
 	import com.rpgGame.app.ui.SkinUIPanel;
@@ -62,17 +63,6 @@ package com.rpgGame.appModule.mount
 			{
 				case "btn_kaishi":
 					onMouseOut();
-					break;
-				case "btn_zidong":
-					onMouseOut();
-					break;
-				case "btn_next":
-					_mountContent.buttonRight();
-					break;
-				case "btn_prev":
-					_mountContent.buttonLeft();
-					break;
-				case "btn_kaishi":
 					if(_mountShowData.isSelf)
 					{
 						HorseManager.instance().eatItemHorse(_mountShowData);
@@ -80,6 +70,7 @@ package com.rpgGame.appModule.mount
 					}
 					break;
 				case "btn_zidong":
+					onMouseOut();
 					if(_mountShowData.isSelf)
 					{
 						if(HorseManager.instance().eatItemHorse(_mountShowData))
@@ -90,10 +81,36 @@ package com.rpgGame.appModule.mount
 						}
 					}
 					break;
+				case "btn_next":
+					_mountContent.buttonRight();
+					break;
+				case "btn_prev":
+					_mountContent.buttonLeft();
+					break;
 				case "btn_tingzhi":
 					_mountupContent.isAutoing = false;
 					break;
 			}
+		}
+		
+		private var _uplevelSuccess:MountUpLevelSucessPane;
+		private function showUplevel():void
+		{
+			if(_uplevelSuccess==null)
+			{
+				_uplevelSuccess = new MountUpLevelSucessPane();
+				_uplevelSuccess.addEventListener(Event.REMOVED_FROM_STAGE,removePropHandler);
+				Stage3DLayerManager.starlingLayer.getLayer("alert").addChild(_uplevelSuccess);
+				_uplevelSuccess.x = int((_uplevelSuccess.stage.stageWidth - _uplevelSuccess.width) / 2);
+				_uplevelSuccess.y = int((_uplevelSuccess.stage.stageHeight - _uplevelSuccess.height) / 2);
+			}
+			_uplevelSuccess.updateinfo(_mountShowData);
+			
+		}
+		private function removePropHandler(e:Event):void
+		{
+			_uplevelSuccess ==  null;
+			refeashExpHandler();
 		}
 		private function initView():void
 		{
@@ -126,12 +143,14 @@ package com.rpgGame.appModule.mount
 			if(_shopPane==null)
 			{
 				_shopPane = new MountShowPane();
-				_shopPane.addEventListener(Event.REMOVED_FROM_STAGE,changePaneHander);
+				_shopPane.addEventListener(Event.REMOVED,panleremoveFormSatgeHander);
 			}
 			this.parent.addChild(_shopPane);
-			changePaneHander();
+			_shopPane.updataItem(_mountShowData.upLevelItem);
+//			changePaneHander();
+			onStageResize(_stage.stageWidth,_stage.stageHeight);
 		}
-		private function changePaneHander():void
+		private function panleremoveFormSatgeHander():void
 		{
 			onStageResize(_stage.stageWidth,_stage.stageHeight);
 		}
@@ -139,13 +158,13 @@ package com.rpgGame.appModule.mount
 		{
 			var gap:int = 20;
 			var w:int = this.width;
-			if(_shopPane!=null&&_shopPane.parent!=null)
+			if(_shopPane!=null&&_shopPane.isAddToStage)
 			{
 				w +=gap+_shopPane.width;
 			}
 			this.x =(sw - w)/2;
 			this.y =(sh - this.height)/2;
-			if(_shopPane.parent!=null)
+			if(_shopPane!=null&&_shopPane.isAddToStage)
 			{
 				_shopPane.x = this.width+this.x +gap;
 				_shopPane.y = (sh - _shopPane.height)/2;
@@ -158,6 +177,29 @@ package com.rpgGame.appModule.mount
 			EventManager.addEvent(HorseManager.HorseUpLevel,refeashLevel);
 			EventManager.addEvent(HorseManager.HorseChangeExp,refeashLevel);
 			EventManager.addEvent(HorseManager.HorseExtraItemNum,refeashPropHandler);
+		}
+		
+		private function refeashExpHandler():void
+		{
+			_mountupContent.updataInfo(_mountShowData);
+			_propContent.refeashPropValue();
+			_mountContent.refeashMode(_mountShowData.mountLevel);
+			for each(var eb:ExtraButton in _extraItemList)
+			{
+				eb.refeash(_mountShowData);
+			}
+		}
+		private function refeashLevel():void
+		{
+			showUplevel();
+		}
+		private function removeEvent():void
+		{
+			_skin.btn_kaishi.removeEventListener(TouchEvent.TOUCH, onTouch);
+			_skin.btn_zidong.removeEventListener(TouchEvent.TOUCH, onTouch);
+			EventManager.removeEvent(HorseManager.HorseUpLevel,refeashLevel);
+			EventManager.removeEvent(HorseManager.HorseChangeExp,refeashLevel);
+			EventManager.removeEvent(HorseManager.HorseExtraItemNum,refeashPropHandler);
 		}
 		private function refeashPropHandler():void
 		{
@@ -196,15 +238,11 @@ package com.rpgGame.appModule.mount
 			_propContent.refeashPropShow(false);
 		}
 		
-		private function refeashLevel():void
+		
+		override public function hide():void
 		{
-			_mountupContent.updataInfo(_mountShowData);
-			_propContent.refeashPropValue();
-			_mountContent.refeashMode(_mountShowData.mountLevel);
-			for each(var eb:ExtraButton in _extraItemList)
-			{
-				eb.refeash(_mountShowData);
-			}
+			removeEvent();
+			super.hide();
 		}
 	}
 }

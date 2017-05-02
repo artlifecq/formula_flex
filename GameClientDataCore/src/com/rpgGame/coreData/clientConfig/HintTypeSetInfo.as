@@ -19,7 +19,7 @@ package com.rpgGame.coreData.clientConfig
 		 /**  层级排序 */
 		public var layerOrder:int;
 		 /**  顺序插入 */
-		public var sequenceInsert:Boolean;
+		public var sequenceInsert:int;
 		 /**  宽度 */
 		public var width:int;
 		 /**  高度 */
@@ -29,9 +29,9 @@ package com.rpgGame.coreData.clientConfig
 		 /**  项目宽度 */
 		public var itemWidth:int;
 		 /**  位置百分比比如居中就写0.5，如果是像素就写大于等于0的值 */
-		public var posX:Number;
+		public var posX:String;
 		 /**  Y百分比，同上 */
-		public var posY:Number;
+		public var posY:String;
 		 /**  最大显示数 */
 		public var maxShowCount:int;
 		 /**  最大保留数 */
@@ -45,7 +45,7 @@ package com.rpgGame.coreData.clientConfig
 		 /**  默认颜色 */
 		public var defaultColor:String;
 		 /**  是否需要等待前面的东西播完，默认是不需要的，需要填1 */
-		public var isWaitMsg:Boolean;
+		public var isWaitMsg:int;
 		 /**  如果要显示背景，就把背景也放进去，背景会拉伸到前面设置的大小 */
 		public var bg:String;
 		 /**  项目背景 */
@@ -65,7 +65,7 @@ package com.rpgGame.coreData.clientConfig
 		 /**  文字移动方向，1、上，2、下，3、左，4、右 */
 		public var hideMoveDirection:int;
 		 /**  是否需要关闭按钮 */
-		public var canClose:Boolean;
+		public var canClose:int;
 		 /**  关闭按钮皮肤，可以在UI编辑器里面找到，把flexlite */
 		public var closeBtnSkin:String;
 		 /**  关闭按钮边距，格式：上;下;左;右 */

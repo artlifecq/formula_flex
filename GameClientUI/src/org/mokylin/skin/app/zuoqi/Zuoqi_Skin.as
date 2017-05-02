@@ -115,7 +115,7 @@ package org.mokylin.skin.app.zuoqi
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [bg_i(),bg_1_i(),bg_2_i(),btn_tingzhi_i(),btn_kaishi_i(),btn_zidong_i(),__Zuoqi_Skin_Label1_i(),lab_xuyaowupin_i(),chk_zidonggoumai_i(),__Zuoqi_Skin_Group1_i(),__Zuoqi_Skin_UIAsset2_i(),lab_zhufuzhi_i(),__Zuoqi_Skin_UIAsset3_i(),grid_1_i(),grid_2_i(),jinjie_i(),__Zuoqi_Skin_UIAsset4_i(),zhandouli_i(),num_zhandouli_i(),__Zuoqi_Skin_Group2_i(),btn_zizhidan_i(),btn_chengzhangdan_i(),__Zuoqi_Skin_UIAsset5_i(),zuoqijineng_i(),btn_prev_i(),btn_next_i(),mc_name_i(),mc_jieshu_i(),__Zuoqi_Skin_RadioButton1_i()];
+			this.elementsContent = [bg_i(),bg_1_i(),bg_2_i(),btn_tingzhi_i(),btn_kaishi_i(),btn_zidong_i(),__Zuoqi_Skin_Label1_i(),lab_xuyaowupin_i(),chk_zidonggoumai_i(),__Zuoqi_Skin_Group1_i(),__Zuoqi_Skin_UIAsset2_i(),lab_zhufuzhi_i(),__Zuoqi_Skin_UIAsset3_i(),grid_1_i(),grid_2_i(),jinjie_i(),__Zuoqi_Skin_UIAsset4_i(),zhandouli_i(),num_zhandouli_i(),__Zuoqi_Skin_Group2_i(),btn_zizhidan_i(),btn_chengzhangdan_i(),__Zuoqi_Skin_UIAsset5_i(),zuoqijineng_i(),btn_prev_i(),btn_next_i(),mc_name_i(),mc_jieshu_i(),__Zuoqi_Skin_RadioButton1_i(),__Zuoqi_Skin_Label2_i()];
 			
 			states = {
 			};
@@ -152,6 +152,17 @@ package org.mokylin.skin.app.zuoqi
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 686;
 			temp.y = 460;
+			return temp;
+		}
+
+		private function __Zuoqi_Skin_Label2_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "自动购买";
+			temp.color = 0x8B8D7B;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 852;
+			temp.y = 458;
 			return temp;
 		}
 
@@ -350,7 +361,6 @@ package org.mokylin.skin.app.zuoqi
 			chk_zidonggoumai = temp;
 			temp.name = "chk_zidonggoumai";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.label = "自动购买";
 			temp.labelOffsetX = -4;
 			temp.labelOffsetY = -2;
 			temp.isSelected = true;

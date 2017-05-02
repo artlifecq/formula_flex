@@ -1,8 +1,21 @@
 package com.rpgGame.coreData.type
 {
+	import com.gameClient.utils.HashMap;
 	import com.rpgGame.coreData.rEnum;
+	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.cfg.BuffStateDataManager;
+	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.cfg.StaticValue;
+	import com.rpgGame.coreData.cfg.item.EquipWashAttCfg;
+	import com.rpgGame.coreData.clientConfig.Q_att_values;
+	import com.rpgGame.coreData.clientConfig.Q_buff;
+	import com.rpgGame.coreData.clientConfig.Q_equip_wash_attr;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
+	import com.rpgGame.coreData.type.item.ItemQualityType;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import flash.utils.Dictionary;
+	
 	
 
 	/**
@@ -118,7 +131,6 @@ package com.rpgGame.coreData.type
 		public static const IGNORE_DEFENSE:int =32;
 		/**伤害减免百分比**/	
 		public static const HURT_SUB_PERCENT:int =33;
-		
 		/**攻击速度百分比**/	
 		public static const ATT_SPEED_PER:int =43;
 		/**战斗力**/	
@@ -360,35 +372,63 @@ package com.rpgGame.coreData.type
 			pushAttir(MAX_MP,"最大能量");
 			pushAttir(WAI_GONG,"外功");
 			pushAttir(NEI_GONG,"最大能量");
+			pushAttir(DEFENSE_PER,"防御值");
+			pushAttir(CRIT_PER,"暴击率",100);
+			pushAttir(CRIT,"暴击伤害",100);
+			pushAttir(NEI_GONG,"内功");
 			pushAttir(DEFENSE_PER,"防御百分比");
 			pushAttir(CRIT_PER,"暴击率");
 			pushAttir(CRIT,"暴击伤害");
 			pushAttir(ANTI_CRIT_PER,"暴击抗性");
-			pushAttir(HP_REC,"生命回复");
+			pushAttir(HP_REC,"生命回复",1,"/5秒");
 			pushAttir(MP_REC,"能量回复");
 			pushAttir(ANTI_EFFECT,"效果抵抗");
-			pushAttir(HIT,"命中率");
-			pushAttir(MISS,"闪避率");
+			pushAttir(HIT,"命中值");
+			pushAttir(MISS,"闪避值");
 			pushAttir(SPEED,"移动速度");
 			pushAttir(ATT_SPEED,"攻击速度");
 			pushAttir(LV,"角色等级");
-			pushAttir(CURE_LIFT,"治疗效果提升");
+			pushAttir(CURE_LIFT,"治疗效果提升",100);
 			pushAttir(SUB_SKILL_CD,"减少技能CD百分比");
-			pushAttir(HURT_ADD_FIX,"伤害加深百分比");
-			pushAttir(HURT_SUB_PERCENT,"伤害加深固定值");
-			pushAttir(ATT_SPEED_PER,"无视防御伤害");
+			pushAttir(HURT_ADD_PERCENT,"伤害加深百分比");
+			pushAttir(IGNORE_DEFENSE,"无视防御伤害");
+			pushAttir(HURT_SUB_PERCENT,"伤害减免百分比");		
+			pushAttir(ATT_SPEED_PER,"攻击速度百分比");
 			pushAttir(FIGHTING,"战斗力");
 			pushAttir(HURT_SEC,"秒伤");
 		}
 		
 		setup();
 		
-		public static function pushAttir(id:int,cn:String):void
+		public static function pushAttir(id:int,cn:String,per:int=1,unit:String=""):void
 		{
 			baseAttrIdArr.push(id);
-			var attri:Object = {id:id, cn:cn};
+			var attri:Object = {id:id, cn:cn,per:per,unit:unit};
 			idMap[id] = attri;
 		}
+		
+		/**
+		 *获取对应属性的转换值 
+		 * @param attributeID
+		 * @return 
+		 * 
+		 */
+		public static function getAttrPer(attributeID:uint):int
+		{
+			return idMap[attributeID]["per"];
+		}
+		
+		/**
+		 *获取单位 
+		 * @param attributeID
+		 * @return 
+		 * 
+		 */
+		public static function getAttrUnit(attributeID:uint):String
+		{
+			return idMap[attributeID]["unit"];
+		}
+		
 		
 		/**
 		 * 通过属性ID,得到对应的属性名 
@@ -420,6 +460,71 @@ package com.rpgGame.coreData.type
 		public static function getAtbtIDByName(attributeName:String):int
 		{
 			return idMap[attributeName]["id"];
+		}
+		
+		
+		/**
+		 *获取洗炼属性描述 
+		 * @param att
+		 * @return 
+		 * 
+		 */
+		public static function getWashAttDes(att:int):String
+		{
+			var cfg:Q_equip_wash_attr=EquipWashAttCfg.getEquipWashAttr(att);
+			var title:String="属性:";
+			var des:String="";
+			if(cfg.q_attr_id!=0){
+				des+= CharAttributeType.getCNNameAddValue(cfg.q_attr_id);
+			}else if(cfg.q_buff_id!=0){
+				des+= CharAttributeType.getDesByBuff(cfg.q_buff_id);
+			}else if(cfg.q_skill_id!=0){
+				des+= CharAttributeType.getDesBySkill(cfg.q_skill_id);
+			}
+			var color:int=ItemQualityType.getColorValue(cfg.q_quality);
+			return HtmlTextUtil.getTextColor(StaticValue.Q_WHITE,title)+HtmlTextUtil.getTextColor(color,des);
+		}
+		
+		public static function getDesBySkill(q_skill_id:int):String
+		{
+			var cfg:Q_skill_model=SpellDataManager.getSpellData(q_skill_id);
+			if(cfg){
+				return cfg.q_skillpanel_description1;
+			}
+			return "";
+		}
+		
+		public static function getDesByBuff(q_buff_id:int):String
+		{
+			var cfg:Q_buff=BuffStateDataManager.getData(q_buff_id);
+			if(cfg){
+				return cfg.q_description;
+			}
+			return "";
+		}
+		
+		
+		
+		/**
+		 * 属性名+值的描述
+		 * @param q_attr_id
+		 * @return 
+		 * 
+		 */
+		public static function getCNNameAddValue(q_attr_id:int):String
+		{
+			var attValue:Q_att_values=AttValueConfig.getAttInfoById(q_attr_id);
+			var maps:HashMap=AttValueConfig.getTypeValueMap(attValue);
+			var keys:Array=maps.keys();
+			var values:Array=maps.values();
+			var result:String="";
+			for(var i:int=0;i<keys.length;i++){
+				var name:String=CharAttributeType.getCNName(keys[i]);
+				var value:String=values[i];
+				result+=name+"+"+value;
+			}
+			
+			return result;
 		}
 	}
 }

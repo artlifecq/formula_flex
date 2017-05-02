@@ -32,6 +32,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.GmConfig;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
+	import com.rpgGame.coreData.cfg.HeChengData;
 	import com.rpgGame.coreData.cfg.HintCfgData;
 	import com.rpgGame.coreData.cfg.HintConfig;
 	import com.rpgGame.coreData.cfg.HorseAdditionData;
@@ -61,11 +62,14 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.country.CountryStaticConfigData;
 	import com.rpgGame.coreData.cfg.country.CountryTaoNiCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
+	import com.rpgGame.coreData.cfg.item.EquipJiChengData;
 	import com.rpgGame.coreData.cfg.item.EquipPolishCfg;
 	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
 	import com.rpgGame.coreData.cfg.item.EquipWashAttCfg;
 	import com.rpgGame.coreData.cfg.item.EquipWashCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.cfg.item.ItemStrength;
+	import com.rpgGame.coreData.cfg.meridian.MeridianCfg;
 	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarHairResCfgData;
@@ -193,6 +197,7 @@ package com.rpgGame.app.data
 			EquipWashCfg.setup(dic[ConfigClassRegister.Q_equip_wash]);
 			EquipWashAttCfg.setup(dic[ConfigClassRegister.Q_equip_wash_attr]);
 //			CountryUnionStatCfgData.setup(null); //待解决
+			MeridianCfg.setup(dic[ConfigClassRegister.Q_meridian]);
 			
 			////////////////////////////////////////////////////////////////////////
 			//
@@ -224,6 +229,9 @@ package com.rpgGame.app.data
 			FightsoulData.setConfig(dic[ConfigClassRegister.Q_fightsoul]);
 			FightsoulModeData.setConfig(dic[ConfigClassRegister.Q_fightsoul_mode]);
 			GlobalSheetData.setup(dic[ConfigClassRegister.Q_global]);
+			HeChengData.setup(dic[ConfigClassRegister.Q_hecheng]);
+			EquipJiChengData.setup(dic[ConfigClassRegister.Q_equip_inherit_cost]);
+			
 			LostSkillData.setup(dic[ConfigClassRegister.Q_lostskill_open]);
 			LostSkillUpData.setup(dic[ConfigClassRegister.Q_lostskill_up]);
 			// 服务器发送 消息ID对应客户端 
@@ -232,6 +240,7 @@ package com.rpgGame.app.data
 			TaskMissionCfgData.setup(dic[ConfigClassRegister.Q_mission_base]);
 			TaskMissionCfgData.setupReword(dic[ConfigClassRegister.Q_mission_reword]);
 			TaskMissionCfgData.setupSegment(dic[ConfigClassRegister.Q_mission_segment]);
+			TaskMissionCfgData.setupSection(dic[ConfigClassRegister.Q_mission_section]);
 			//坐骑数据
 			HorseConfigData.setConfig(dic[ConfigClassRegister.Q_horse]);
 			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);

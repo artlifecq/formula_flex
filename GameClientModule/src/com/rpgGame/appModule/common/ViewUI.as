@@ -16,7 +16,7 @@ package com.rpgGame.appModule.common
 			super(skin);
 		}
 		
-		public function show():void
+		public function show(data:Object=null):void
 		{
 			
 		}

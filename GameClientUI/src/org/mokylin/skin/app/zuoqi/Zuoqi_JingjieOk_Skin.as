@@ -1,7 +1,6 @@
 package org.mokylin.skin.app.zuoqi
 {
 	import feathers.controls.Button;
-	import feathers.controls.Group;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
@@ -24,8 +23,6 @@ package org.mokylin.skin.app.zuoqi
 		public var bg:feathers.controls.UIAsset;
 
 		public var btnOk:feathers.controls.Button;
-
-		public var grp_ico:feathers.controls.Group;
 
 		public var ico1:feathers.controls.UIAsset;
 
@@ -52,7 +49,7 @@ package org.mokylin.skin.app.zuoqi
 			this.currentState = "normal";
 			this.height = 434;
 			this.width = 868;
-			this.elementsContent = [uiGuangquan_i(),bg_i(),mc_name_i(),grp_ico_i(),btnOk_i(),ui_zhandouli_i(),num_zhandouli_i(),num_lv_i()];
+			this.elementsContent = [uiGuangquan_i(),bg_i(),mc_name_i(),btnOk_i(),ui_zhandouli_i(),num_zhandouli_i(),num_lv_i()];
 			
 			states = {
 			};
@@ -82,39 +79,6 @@ package org.mokylin.skin.app.zuoqi
 			temp.styleClass = org.mokylin.skin.app.zuoqi.button.ButtonLingqu;
 			temp.x = 522;
 			temp.y = 331;
-			return temp;
-		}
-
-		private function grp_ico_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			grp_ico = temp;
-			temp.name = "grp_ico";
-			temp.x = 514;
-			temp.y = 251;
-			temp.elementsContent = [ico1_i(),ico2_i()];
-			return temp;
-		}
-
-		private function ico1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico1 = temp;
-			temp.name = "ico1";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/60.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function ico2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico2 = temp;
-			temp.name = "ico2";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/60.png";
-			temp.x = 85;
-			temp.y = 0;
 			return temp;
 		}
 

@@ -20,7 +20,6 @@ package com.rpgGame.appModule.role
 	{
 		private var _skin : juese_Skin;
 		private var _roleData:HeroData;
-		private var PER_SERVER:Number=1000;
 		public function BasicRoleView(skin:juese_Skin)
 		{
 			_skin=skin;
@@ -46,14 +45,14 @@ package com.rpgGame.appModule.role
 			_skin.txt_waigong.text=_roleData.totalStat.getStatValueString(CharAttributeType.WAI_GONG);
 			_skin.txt_neigong.text=_roleData.totalStat.getStatValueString(CharAttributeType.NEI_GONG);
 			_skin.txt_gongsu.text=_roleData.totalStat.getStatValueString(CharAttributeType.ATT_SPEED);
-			_skin.txt_mingzhonglv.text=_roleData.totalStat.getStatValue(CharAttributeType.HIT)/PER_SERVER+"%";
+			_skin.txt_mingzhonglv.text=_roleData.totalStat.getStatValueString(CharAttributeType.HIT);
 			_skin.txt_baojikangxing.text=_roleData.totalStat.getStatValueString(CharAttributeType.ANTI_CRIT_PER);
-			_skin.txt_bishanlv.text=_roleData.totalStat.getStatValue(CharAttributeType.MISS)/PER_SERVER+"%";
-			_skin.txt_fangyubaifenbi.text=_roleData.totalStat.getStatValue(CharAttributeType.DEFENSE_PER)+"";
-			_skin.txt_shengminhuifu.text=_roleData.totalStat.getStatValueString(CharAttributeType.HP_REC)+"/5秒";
-			_skin.txt_zhiliaotishen.text=_roleData.totalStat.getStatValue(CharAttributeType.CURE_LIFT)/PER_SERVER+"%";
-			_skin.txt_baojilv.text=_roleData.totalStat.getStatValue(CharAttributeType.CRIT_PER)/PER_SERVER+"%";
-			_skin.txt_baojijiacheng.text=_roleData.totalStat.getStatValue(CharAttributeType.CRIT)/PER_SERVER+"%";		
+			_skin.txt_bishanlv.text=_roleData.totalStat.getStatValueString(CharAttributeType.MISS);
+			_skin.txt_fangyubaifenbi.text=_roleData.totalStat.getStatValueString(CharAttributeType.DEFENSE_PER);
+			_skin.txt_shengminhuifu.text=_roleData.totalStat.getStatValueString(CharAttributeType.HP_REC);
+			_skin.txt_zhiliaotishen.text=_roleData.totalStat.getStatValueString(CharAttributeType.CURE_LIFT);
+			_skin.txt_baojilv.text=_roleData.totalStat.getStatValueString(CharAttributeType.CRIT_PER);
+			_skin.txt_baojijiacheng.text=_roleData.totalStat.getStatValueString(CharAttributeType.CRIT);		
 			
 			var allW:int=_skin.msIcon.width+_skin.msName.width+_skin.num_miaoshang.width;
 			var xx:int=(185-allW)/2;

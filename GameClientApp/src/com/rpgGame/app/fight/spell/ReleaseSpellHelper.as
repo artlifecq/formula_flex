@@ -24,7 +24,14 @@ package com.rpgGame.app.fight.spell
 		public function ReleaseSpellHelper()
 		{
 		}
-
+		
+		public static function fightSoulSpell(spellInfo : ReleaseSpellInfo) : void
+		{
+			if(spellInfo.ribbonImg)
+			{
+				SpellAnimationHelper.addRibbonEffect(spellInfo);
+			}
+		}
 		public static function releaseSpell(spellInfo : ReleaseSpellInfo) : void
 		{
 			/** 施法者 **/

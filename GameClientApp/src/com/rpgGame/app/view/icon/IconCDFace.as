@@ -37,7 +37,7 @@ package com.rpgGame.app.view.icon
 
 		public var _cdFace : CDFace;
 		private var _needCD : Boolean = false;
-		private var _isGary : Boolean = false;
+		protected var _isGary : Boolean = false;
 		
 		/** 是否已经侦听cd事件*/
 		private var _isAlreadyListenerCd : Boolean;

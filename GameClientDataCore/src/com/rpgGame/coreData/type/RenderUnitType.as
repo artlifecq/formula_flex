@@ -68,6 +68,11 @@ package com.rpgGame.coreData.type
 
 		/**任务问号**/
 		public static const TASKMARK : String = "taskMark";
+        
+        /**
+        * 金针特效
+         */
+        public static const NEEDLEEFFECT : String = "needleEffect";
 		
 //		/**打坐特效*/
 //		public static const SIT:String = "sit";

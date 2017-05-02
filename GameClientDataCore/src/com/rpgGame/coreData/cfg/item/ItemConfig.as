@@ -222,5 +222,15 @@ package com.rpgGame.coreData.cfg.item
 		{
 			return 0;
 		}
+		
+		public static function getItemLevelNum(itemId:int):int
+		{
+			var qItem:Q_item=getQItemByID(itemId);
+			if (qItem) 
+			{
+				return qItem.q_levelnum;
+			}
+			return 0;
+		}
 	}
 }

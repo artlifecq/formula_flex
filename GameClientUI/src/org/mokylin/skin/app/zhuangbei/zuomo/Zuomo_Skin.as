@@ -35,8 +35,6 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 
 		public var btn_zuomo_all:feathers.controls.Button;
 
-		public var cilun_xiao:feathers.controls.UIAsset;
-
 		public var cmb_dengjie:feathers.controls.ComboBox;
 
 		public var cmb_pinzhi:feathers.controls.ComboBox;
@@ -44,6 +42,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 		public var grp_cilun:feathers.controls.Group;
 
 		public var grp_jiacheng:feathers.controls.Group;
+
+		public var ico_zuomo:feathers.controls.UIAsset;
 
 		public var lb_baifenbi:feathers.controls.Label;
 
@@ -79,8 +79,6 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 
 		public var use_grp:feathers.controls.Group;
 
-		public var xilun_da:feathers.controls.UIAsset;
-
 
 		//==========================================================================
 		//                                定义构造函数
@@ -92,7 +90,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [left_i(),__Zuomo_Skin_UIAsset3_i(),btn_shuoming_i(),grp_cilun_i(),lb_name_i(),btn_zuomo_i(),use_grp_i(),grp_jiacheng_i(),cmb_pinzhi_i(),cmb_dengjie_i(),btn_zuomo_all_i(),__Zuomo_Skin_Label3_i(),__Zuomo_Skin_Label4_i(),lb_dengji_i()];
+			this.elementsContent = [left_i(),__Zuomo_Skin_UIAsset3_i(),btn_shuoming_i(),grp_cilun_i(),lb_name_i(),btn_zuomo_i(),ico_zuomo_i(),use_grp_i(),grp_jiacheng_i(),cmb_pinzhi_i(),cmb_dengjie_i(),btn_zuomo_all_i(),__Zuomo_Skin_Label3_i(),__Zuomo_Skin_Label4_i(),lb_dengji_i()];
 			
 			states = {
 			};
@@ -161,22 +159,13 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 		private function __Zuomo_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/zuomo/guang.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __Zuomo_Skin_UIAsset5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhuangbei/qianghua/dengjidikuang.png";
 			temp.x = 54;
 			temp.y = 29;
 			return temp;
 		}
 
-		private function __Zuomo_Skin_UIAsset6_i():feathers.controls.UIAsset
+		private function __Zuomo_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhuangbei/qianghua/dengjidikuang.png";
@@ -185,7 +174,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			return temp;
 		}
 
-		private function __Zuomo_Skin_UIAsset7_i():feathers.controls.UIAsset
+		private function __Zuomo_Skin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/progress/skin_jindu/thumb.png";
@@ -194,7 +183,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			return temp;
 		}
 
-		private function __Zuomo_Skin_UIAsset8_i():feathers.controls.UIAsset
+		private function __Zuomo_Skin_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhuangbei/zuomo/jiacheng.png";
@@ -246,19 +235,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xE1D4A9;
 			temp.width = 77;
-			temp.x = 607;
+			temp.x = 611;
 			temp.y = 264;
-			return temp;
-		}
-
-		private function cilun_xiao_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			cilun_xiao = temp;
-			temp.name = "cilun_xiao";
-			temp.styleName = "ui/app/zhuangbei/zuomo/dachilun.png";
-			temp.x = 113;
-			temp.y = 4;
 			return temp;
 		}
 
@@ -301,9 +279,9 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_cilun = temp;
 			temp.name = "grp_cilun";
-			temp.x = 410;
-			temp.y = 76;
-			temp.elementsContent = [xilun_da_i(),cilun_xiao_i(),__Zuomo_Skin_UIAsset4_i()];
+			temp.x = 412;
+			temp.y = 74;
+			temp.elementsContent = [];
 			return temp;
 		}
 
@@ -314,7 +292,18 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.name = "grp_jiacheng";
 			temp.x = 401;
 			temp.y = 377;
-			temp.elementsContent = [__Zuomo_Skin_UIAsset5_i(),__Zuomo_Skin_UIAsset6_i(),lb_current_i(),lb_next_i(),__Zuomo_Skin_UIAsset7_i(),progressBar_i(),lb_pro_i(),__Zuomo_Skin_Label1_i(),__Zuomo_Skin_Label2_i(),up_title_i(),lb_baifenbi_i(),lb_up2_i(),arrow_up2_i(),__Zuomo_Skin_UIAsset8_i()];
+			temp.elementsContent = [__Zuomo_Skin_UIAsset4_i(),__Zuomo_Skin_UIAsset5_i(),lb_current_i(),lb_next_i(),__Zuomo_Skin_UIAsset6_i(),progressBar_i(),lb_pro_i(),__Zuomo_Skin_Label1_i(),__Zuomo_Skin_Label2_i(),up_title_i(),lb_baifenbi_i(),lb_up2_i(),arrow_up2_i(),__Zuomo_Skin_UIAsset7_i()];
+			return temp;
+		}
+
+		private function ico_zuomo_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico_zuomo = temp;
+			temp.name = "ico_zuomo";
+			temp.styleName = "ui/app/zhuangbei/zuomo/dakuang.png";
+			temp.x = 600;
+			temp.y = 165;
 			return temp;
 		}
 
@@ -353,12 +342,13 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_dengji = temp;
 			temp.name = "lb_dengji";
-			temp.height = 26;
+			temp.height = 20;
 			temp.text = "琢磨等级：1234";
+			temp.textAlign = "right";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 113;
-			temp.x = 813;
+			temp.x = 808;
 			temp.y = 113;
 			return temp;
 		}
@@ -373,7 +363,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 123;
-			temp.x = 584;
+			temp.x = 590;
 			temp.y = 144;
 			return temp;
 		}
@@ -534,20 +524,9 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			use_grp = temp;
 			temp.name = "use_grp";
-			temp.x = 490;
+			temp.x = 495;
 			temp.y = 80;
 			temp.elementsContent = [use0_i(),use1_i(),use4_i(),use3_i(),use5_i(),use2_i()];
-			return temp;
-		}
-
-		private function xilun_da_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			xilun_da = temp;
-			temp.name = "xilun_da";
-			temp.styleName = "ui/app/zhuangbei/zuomo/xiaochilun.png";
-			temp.x = 152;
-			temp.y = 44;
 			return temp;
 		}
 

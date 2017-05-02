@@ -115,8 +115,21 @@ package com.rpgGame.app.manager.chat
 
 			notify(hintInfo.type, msg, textArgs);
 		}
+		
+		/*
+		public static function showNotifyById(id:int,textArgs : Array = null):void
+		{
+			var cfg:Q_notify=NotifyCfgData.getNotifyByID(id);
+			if(!cfg){
+				notify(MOUSE_FOLLOW_TIP, "未配置的提示:"+id);
+				return;
+			}
+			notify(int(cfg.q_show_type), cfg.q_content,textArgs);
+		}*/
+		
 
 		/**
+		 * 这个是老的接口（以后要干掉）；
 		 * 显示一个提示，强烈推荐统一用这个方法！！！
 		 * @param langType
 		 * @param textArgs
@@ -158,7 +171,10 @@ package com.rpgGame.app.manager.chat
 				}
 			}
 		}
-		
+		/**
+		 *显示一个提示 根据配置id 
+		 * 
+		 */
 		public static function showNotifyById(id:int,... args):void
 		{
 			var notiMsg:Q_notify = NotifyCfgData.getNotifyByID(id);
@@ -176,6 +192,7 @@ package com.rpgGame.app.manager.chat
 						if(tp>0)
 						{
 							NoticeManager.textNotify(tp, words);
+							notify(tp, words);
 						}
 						
 					}
@@ -230,7 +247,6 @@ package com.rpgGame.app.manager.chat
 		{
 			if ($msg == null || $msg == "")
 				return;
-
 			if (textArgs != null)
 			{
 				$msg = LanguageConfig.replaceStr($msg, textArgs);

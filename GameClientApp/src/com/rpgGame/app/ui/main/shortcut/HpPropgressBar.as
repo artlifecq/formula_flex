@@ -22,7 +22,7 @@ package com.rpgGame.app.ui.main.shortcut
 	import org.mokylin.skin.mainui.shortcut.shortcut_Skin;
 	
 	import starling.animation.IAnimatable;
-
+	
 	public class HpPropgressBar implements IAnimatable
 	{
 		private var _shor:ShortcutBar;
@@ -142,7 +142,7 @@ package com.rpgGame.app.ui.main.shortcut
 					if(_info.job == JobEnum.ROLE_4_TYPE)
 						return [currentmp,maxmp,7];
 					else(_info.job == JobEnum.ROLE_4_TYPE)
-						return [currentmp,maxmp,5];
+					return [currentmp,maxmp,5];
 				}
 			}else{
 				return [_info.totalStat.hp,_info.totalStat.life];
@@ -216,14 +216,14 @@ package com.rpgGame.app.ui.main.shortcut
 			}
 			if(_tipinfodata!=null)
 				_tipinfodata.refeashValue();
-				
+			
 		}
 		private var totalNum:Number = 0;
 		public function advanceTime(time:Number):void
 		{
 			totalNum +=time/5;
 			percentage(totalNum%1.0);
-//			percentage(0);
+			//			percentage(0);
 		}
 	}
 }
