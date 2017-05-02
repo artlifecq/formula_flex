@@ -54,7 +54,7 @@ package com.rpgGame.coreData.cfg.monster
 			}
 			
 			INDEX_DIC = TemplateUtil.createIndexFromArr(arr, INDEX_ARR);
-//			
+			trace("没有怪物数据！！！");
 		}
 		
 		public static function setSceneAreaMonsterConfig(data : ByteArray):void

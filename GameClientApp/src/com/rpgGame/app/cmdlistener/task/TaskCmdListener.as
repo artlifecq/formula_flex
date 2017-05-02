@@ -1,9 +1,13 @@
 package com.rpgGame.app.cmdlistener.task
 {
+	import com.rpgGame.app.manager.collect.CollectManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
+	import com.rpgGame.core.events.SkillEvent;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
+	import com.rpgGame.netData.npc.message.ResStartGatherMessage;
+	import com.rpgGame.netData.npc.message.ResStopGatherMessage;
 	import com.rpgGame.netData.task.message.ResTaskAcceptedMessage;
 	import com.rpgGame.netData.task.message.ResTaskChangeMessage;
 	import com.rpgGame.netData.task.message.ResTaskInformationMessage;
@@ -31,6 +35,9 @@ package com.rpgGame.app.cmdlistener.task
 			SocketConnection.addCmdListener(124102,onResTaskAcceptedMessage);//新任务
 			SocketConnection.addCmdListener(124103,onResTaskChangeMessage);//任务进度改变
 			SocketConnection.addCmdListener(124104,onResTaskSubmitedMessage);//任务完成
+			SocketConnection.addCmdListener(104102,onResStartGatherMessage);//采集开始
+			SocketConnection.addCmdListener(104103,onResStopGatherMessage);//采集打断
+			
 			
 			finish();
 		}
@@ -95,5 +102,27 @@ package com.rpgGame.app.cmdlistener.task
 				EventManager.dispatchEvent(TaskEvent.TASK_FINISH_MATION,type);
 			}
 		}
+		
+		
+		/**开始采集	*/
+		private function onResStartGatherMessage(msg:ResStartGatherMessage):void
+		{
+			if(msg!=null)
+			{
+				EventManager.dispatchEvent(SkillEvent.SING_START,msg.costtime,"采集中");
+				CollectManager.show("caiji",msg.costtime,null);
+			}
+		}
+		
+		/**开始采集	*/
+		private function onResStopGatherMessage(msg:ResStopGatherMessage):void
+		{
+			EventManager.dispatchEvent(SkillEvent.SING_STOP);
+		}
+		
+		
+		
+		
+		
 	}
 }
