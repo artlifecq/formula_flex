@@ -1,9 +1,9 @@
 package com.rpgGame.app.cmdlistener.mount
 {
-	import com.game.engine3D.vo.BaseRole;
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.horse.message.SCExtraItemNumMessage;
 	import com.rpgGame.netData.horse.message.SCHorseAllInfoToClientMessage;
@@ -30,14 +30,13 @@ package com.rpgGame.app.cmdlistener.mount
 		}
 		private function getSCHorseIllusionToClientMessage(msg:SCHorseIllusionToClientMessage):void
 		{
-			var role:BaseRole = SceneManager.getSceneObjByID(msg.playerId) as BaseRole;
-			var player 
-			if (null == player || !player.usable) {
+			var role:SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
+			if (null == role || role.data ==null) {
 				return;
 			}
-			var heroData : HeroData = player.data as HeroData; 
-			heroData.fightSoulLevel =1;// _fightSoulInfo.curModelLv;
-			AvatarManager.callEquipmentChange(player);
+			var heroData : HeroData = role.data as HeroData; 
+			heroData.mount = msg.horseModelid;
+			AvatarManager.callEquipmentChange(role);
 		}
 		
 		private function getSCHorseUpResultToClientMessage(msg:SCHorseUpResultToClientMessage):void

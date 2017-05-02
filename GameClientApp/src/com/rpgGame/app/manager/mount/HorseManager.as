@@ -1,6 +1,7 @@
 package com.rpgGame.app.manager.mount
 {
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.HorseConfigData;
@@ -10,7 +11,9 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.coreData.clientConfig.Q_horse_skills;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.horse.bean.HorseDataInfo;
+	import com.rpgGame.netData.horse.message.CSHorseIllusionToGameMessage;
 	import com.rpgGame.netData.horse.message.CSHorseStratumUpToGameMessage;
 	import com.rpgGame.netData.horse.message.CSUseHorseAddtionMessage;
 	import com.rpgGame.netData.horse.message.SCExtraItemNumMessage;
@@ -28,7 +31,7 @@ package com.rpgGame.app.manager.mount
 		private var _spellList:Vector.<BaseFaceInfo>;
 		
 		private var _useExtraItem1:int;
-
+		
 		/**
 		 * 资质丹使用数量
 		 */
@@ -134,6 +137,25 @@ package com.rpgGame.app.manager.mount
 			msg.num = 1;
 			SocketConnection.send(msg);
 			return true;
+		}
+		/**
+		 * 请求坐骑切换/上马/下马 
+		 * 
+		 */
+		public function setHouseRide():void
+		{
+			//坐骑未开放
+			if(_horsedataInfo==null)
+				return ;
+			var hoseId:int = _horsedataInfo.horseModelId;
+			var currentHouseid:int = HeroData(MainRoleManager.actor.data).mount;
+			if(currentHouseid ==hoseId)
+			{
+				hoseId = 0;
+			}
+			var msg:CSHorseIllusionToGameMessage = new CSHorseIllusionToGameMessage();
+			msg.horseModelid = hoseId;
+			SocketConnection.send(msg);
 		}
 		
 		private static var _instance:HorseManager;

@@ -1,9 +1,12 @@
 package com.rpgGame.appModule.mount
 {
 	import com.rpgGame.app.manager.mount.HorseExtraItemInfo;
+	import com.rpgGame.app.manager.mount.HorseManager;
+	import com.rpgGame.app.manager.mount.MountShowData;
 	
 	import feathers.controls.Button;
-	import com.rpgGame.app.manager.mount.MountShowData;
+	
+	import starling.events.Event;
 
 	public class ExtraButton
 	{
@@ -13,6 +16,7 @@ package com.rpgGame.appModule.mount
 		{
 			_button = button;
 			_type = type;
+			_button.addEventListener(Event.TRIGGERED,triggeedHandler);
 		}
 		private var _mountShowData:MountShowData;
 		private var _horseExtraItem:HorseExtraItemInfo;
@@ -21,6 +25,10 @@ package com.rpgGame.appModule.mount
 			_mountShowData = mountShowData;
 			_horseExtraItem = _mountShowData.getOpenLevelBytype(_type);
 			_button.visible = _horseExtraItem.getMaxByLevel(_mountShowData.mountLevel)>0;
+		}
+		private function triggeedHandler(e:Event):void
+		{
+			HorseManager.instance().useExtraItemHorse(_mountShowData,_type);
 		}
 	}
 }

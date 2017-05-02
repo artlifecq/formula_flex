@@ -2,6 +2,7 @@ package com.rpgGame.app.controller.keyboard
 {
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.mount.MountManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.core.app.AppConstant;
@@ -12,9 +13,9 @@ package com.rpgGame.app.controller.keyboard
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.info.key.KeyInfo;
 	
+	import flash.utils.getTimer;
+	
 	import starling.display.DisplayObjectContainer;
-    
-    import flash.utils.getTimer;
 
 	public class KeyFuncProcess
 	{
@@ -100,7 +101,8 @@ package com.rpgGame.app.controller.keyboard
 					break;
 				case "29": //T 坐骑上下马
 					if (!ClientConfig.isBanShu)
-						MountManager.setMountRide();
+//						MountManager.setMountRide();
+						HorseManager.instance().setHouseRide();
 					break;
 				case "30": //U
 					break;

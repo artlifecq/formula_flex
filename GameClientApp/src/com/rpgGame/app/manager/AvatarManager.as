@@ -16,6 +16,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.AvatarInfo;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.FightsoulModeData;
+	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarHairResCfgData;
@@ -33,6 +34,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.clientConfig.HeroModel;
 	import com.rpgGame.coreData.clientConfig.MountModel;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_mode;
+	import com.rpgGame.coreData.clientConfig.Q_horse;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
@@ -831,7 +833,7 @@ package com.rpgGame.app.manager
 //			var bodyEffectOnMountBindBones : Array = null;
 			var bodyMethodTypeEffectResID : String = null;
 			var heroModel : HeroModel = HeroModelCfgData.getInfo(roleData.body);
-			var mountModel : MountModel = MountModelCfgData.getInfo(0);
+			var mountModel :Q_horse = HorseConfigData.getMountDataById(roleData.mount);
 			var fightsoulInfo:Q_fightsoul_mode = FightsoulModeData.getModeInfoById(roleData.fightSoulLevel);
 //			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(roleData.cloths);
 //			if (!clothesRes)
@@ -999,11 +1001,7 @@ package com.rpgGame.app.manager
 				//					else
 				//						hairResID = hairRes.hairRes_woman;				
 				
-				var mountRes : AvatarMountRes = AvatarMountResCfgData.getInfo(roleData.mount);
-				if (mountRes)
-				{
-					mountResID = mountRes.mountRes;
-				}
+			
 				switch (roleData.job)
 				{
 					case 1:
@@ -1039,7 +1037,8 @@ package com.rpgGame.app.manager
 				
 				if (mountModel)
 				{
-					mountAnimatResID = mountModel.animatRes;
+					mountResID = mountModel.q_scene_show_url;
+					mountAnimatResID = HorseConfigData.mountAnimatResID;
 				}
 				
 				if(fightsoulInfo)

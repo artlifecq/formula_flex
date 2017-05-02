@@ -50,9 +50,9 @@ package com.rpgGame.appModule.mount
 			_mountShowData.horsedataInfo =  HorseManager.instance().horsedataInfo;
 			_mountContent.refeashMode(_mountShowData.mountLevel);
 			refeashPropHandler();
-			_propContent.refeashPropShow(false);
-			_mountupContent.updataInfo(_mountShowData);
-			refeashLevel();
+			/*_propContent.refeashPropShow(false);
+			_mountupContent.updataInfo(_mountShowData);*/
+			refeashExpHandler();
 			initEvent();
 		}
 		override protected function onTouchTarget(target : DisplayObject) : void
@@ -65,7 +65,11 @@ package com.rpgGame.appModule.mount
 					onMouseOut();
 					if(_mountShowData.isSelf)
 					{
-						HorseManager.instance().eatItemHorse(_mountShowData);
+						if(!HorseManager.instance().eatItemHorse(_mountShowData))
+						{
+							if(!_mountShowData.canUpLevel())
+								showShopPane();
+						}
 						_mountupContent.isAutoing = false;
 					}
 					break;
@@ -77,6 +81,8 @@ package com.rpgGame.appModule.mount
 						{
 							_mountupContent.isAutoing = true;
 						}else{
+							if(!_mountShowData.canUpLevel())
+								showShopPane();
 							_mountupContent.isAutoing = false;
 						}
 					}
@@ -116,14 +122,17 @@ package com.rpgGame.appModule.mount
 		{
 			_spellIconList = new Vector.<IconCDFace>();
 			var spellList:Vector.<BaseFaceInfo> = HorseManager.instance().spellList; 
-			var icon:IconCDFace = FaceUtil.creatIconCDFaceByUIAsset(_skin.kuang_1,IcoSizeEnum.ICON_64);
+			var icon:IconCDFace = FaceUtil.creatIconCDFaceByUIAsset(_skin.kuang_1,IcoSizeEnum.ICON_48);
 			FaceUtil.SetSkillGrid(icon, spellList[0], false);
+			icon.setIconPoint(6,6);
 			_spellIconList.push(icon);
-			icon = FaceUtil.creatIconCDFaceByUIAsset(_skin.kuang_2,IcoSizeEnum.ICON_64);
+			icon = FaceUtil.creatIconCDFaceByUIAsset(_skin.kuang_2,IcoSizeEnum.ICON_48);
 			FaceUtil.SetSkillGrid(icon, spellList[1], false);
+			icon.setIconPoint(6,6);
 			_spellIconList.push(icon);
-			icon = FaceUtil.creatIconCDFaceByUIAsset(_skin.kuang_3,IcoSizeEnum.ICON_64);
+			icon = FaceUtil.creatIconCDFaceByUIAsset(_skin.kuang_3,IcoSizeEnum.ICON_48);
 			FaceUtil.SetSkillGrid(icon, spellList[2], false);
+			icon.setIconPoint(6,6);
 			_spellIconList.push(icon);
 			
 			_mountContent = new MountContent(_skin);
@@ -138,6 +147,10 @@ package com.rpgGame.appModule.mount
 		{
 			if(touch.phase!= TouchPhase.ENDED)
 				return ;
+			showShopPane();
+		}
+		private function showShopPane():void
+		{
 			if(_shopPane!=null&&_shopPane.parent!=null)
 				return ;
 			if(_shopPane==null)
@@ -147,7 +160,7 @@ package com.rpgGame.appModule.mount
 			}
 			this.parent.addChild(_shopPane);
 			_shopPane.updataItem(_mountShowData.upLevelItem);
-//			changePaneHander();
+			//			changePaneHander();
 			onStageResize(_stage.stageWidth,_stage.stageHeight);
 		}
 		private function panleremoveFormSatgeHander():void
@@ -175,7 +188,7 @@ package com.rpgGame.appModule.mount
 			_skin.btn_kaishi.addEventListener(TouchEvent.TOUCH, onTouch);
 			_skin.btn_zidong.addEventListener(TouchEvent.TOUCH, onTouch);
 			EventManager.addEvent(HorseManager.HorseUpLevel,refeashLevel);
-			EventManager.addEvent(HorseManager.HorseChangeExp,refeashLevel);
+			EventManager.addEvent(HorseManager.HorseChangeExp,refeashExpHandler);
 			EventManager.addEvent(HorseManager.HorseExtraItemNum,refeashPropHandler);
 		}
 		
@@ -198,7 +211,7 @@ package com.rpgGame.appModule.mount
 			_skin.btn_kaishi.removeEventListener(TouchEvent.TOUCH, onTouch);
 			_skin.btn_zidong.removeEventListener(TouchEvent.TOUCH, onTouch);
 			EventManager.removeEvent(HorseManager.HorseUpLevel,refeashLevel);
-			EventManager.removeEvent(HorseManager.HorseChangeExp,refeashLevel);
+			EventManager.removeEvent(HorseManager.HorseChangeExp,refeashExpHandler);
 			EventManager.removeEvent(HorseManager.HorseExtraItemNum,refeashPropHandler);
 		}
 		private function refeashPropHandler():void
@@ -241,6 +254,13 @@ package com.rpgGame.appModule.mount
 		
 		override public function hide():void
 		{
+			if(_shopPane!=null)
+			{
+				_shopPane.removeEventListener(Event.REMOVED,panleremoveFormSatgeHander);
+				if(_shopPane.parent!=null)
+					_shopPane.parent.removeChild(_shopPane,true);
+				_shopPane = null;
+			}
 			removeEvent();
 			super.hide();
 		}

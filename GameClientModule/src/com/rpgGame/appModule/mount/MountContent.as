@@ -4,6 +4,7 @@ package com.rpgGame.appModule.mount
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
+	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.clientConfig.Q_horse;
@@ -50,7 +51,7 @@ package com.rpgGame.appModule.mount
 			var nextShet:Q_horse = HorseConfigData.getMountDataById(_curShowHorse+1);
 			this.addMode(housedata,nextShet);
 			_skin.btn_prev.visible = _curShowHorse>1;
-			_skin.btn_next.visible = _curShowHorse<HorseConfigData.maxCount;
+			_skin.btn_next.visible = _curShowHorse<Math.min(HorseConfigData.maxCount,HorseManager.instance().houseLevel);
 			_skin.mc_name.gotoAndStop(_curShowHorse-1);
 			_skin.mc_jieshu.gotoAndStop(_curShowHorse-1);
 		}
@@ -69,9 +70,9 @@ package com.rpgGame.appModule.mount
 				_nextInter3D = null;
 			}
 			_amationInfos = new Vector.<TargetAmationInfo>();
-			var animat : String = ClientConfig.getAvatar("pc/mount/mount_zhanma_animat");
+			var animat : String = ClientConfig.getAvatar(HorseConfigData.mountAnimatResID);
 			_curtentInter3D = new InterObject3D();
-			var data : RenderParamData3D = new RenderParamData3D(0, "mount1",ClientConfig.getAvatar("pc/mount/mount_zhanma_0"+current.q_scene_show_id));
+			var data : RenderParamData3D = new RenderParamData3D(0, "mount1",ClientConfig.getAvatar(current.q_scene_show_url));
 			data.animatorSourchPath = animat;
 			data.forceLoad=true;//ui上的3d特效强制加载
 			var unit : RenderUnit3D = _curtentInter3D.addRenderUnitWith(data, 0);
@@ -103,7 +104,7 @@ package com.rpgGame.appModule.mount
 			if(next ==null)
 				return ;
 			_nextInter3D = new InterObject3D();
-			data = new RenderParamData3D(0, "mount2",ClientConfig.getAvatar("pc/mount/mount_zhanma_0"+next.q_scene_show_id));
+			data = new RenderParamData3D(0, "mount2",ClientConfig.getAvatar(next.q_scene_show_url));
 			data.animatorSourchPath = animat;
 			data.forceLoad=true;//ui上的3d特效强制加载
 			unit = _nextInter3D.addRenderUnitWith(data, 0);
