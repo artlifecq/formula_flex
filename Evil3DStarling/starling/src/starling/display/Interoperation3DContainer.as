@@ -1,9 +1,5 @@
 package starling.display
 {
-	import flash.display3D.Context3DBlendFactor;
-	import flash.display3D.Context3DCompareMode;
-	import flash.display3D.Context3DStencilAction;
-	import flash.display3D.Context3DTriangleFace;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
@@ -13,7 +9,6 @@ package starling.display
 	import away3d.containers.View3D;
 	import away3d.core.managers.Stage3DProxy;
 	import away3d.core.traverse.EntityCollector;
-	import away3d.enum.StencilMask;
 	
 	import starling.rendering.Painter;
 	
@@ -26,6 +21,10 @@ package starling.display
 		private var _root:ObjectContainer3D;
 		private static var _localPoint:Point = new Point();
 		private static var _globalPoint:Point = new Point();
+		private static var _stageViewPort:Rectangle = new Rectangle();
+		
+		private var _hitArea:Rectangle;
+		private var _scisssorRect:Rectangle;
 		
 		public function Interoperation3DContainer(view3D:View3D)
 		{
@@ -40,7 +39,13 @@ package starling.display
 		
 		override public function getBounds(targetSpace:DisplayObject, resultRect:Rectangle=null):Rectangle
 		{
-			return new Rectangle(0,0,0,0);	
+			if (!resultRect)
+			{
+				resultRect = new Rectangle(0, 0, 0, 0);
+			}
+			_hitArea ? resultRect.setTo(_hitArea.x, _hitArea.y, _hitArea.width, _hitArea.height) : resultRect.setEmpty();
+			return resultRect;
+//			return new Rectangle(0,0,0,0);	
 		}
 		
 		public function addChild3D(child:ObjectContainer3D):ObjectContainer3D
@@ -63,8 +68,24 @@ package starling.display
 			_view3D = value;
 		}
 		
+		public function get scisssorRect():Rectangle
+		{
+			return _scisssorRect;
+		}
+		
+		public function set scisssorRect(value:Rectangle):void
+		{
+			_scisssorRect = value;
+		}
+		
+		public function set hitArea(value:Rectangle):void
+		{
+			_hitArea = value;
+		}
+		
 		public override function render(painter:Painter):void
 		{
+			var intersectionRect:Rectangle = null;
 			painter.finishMeshBatch();
 			painter.pushState();
 			
@@ -84,13 +105,34 @@ package starling.display
 				{
 					var time:int = getTimer();
 				}
-				_scene.traversePartitions(_entityCollector, _view3D);
+			_scene.traversePartitions(_entityCollector, _view3D);
 			_entityCollector.sortRenderables();
+			_view3D.updateLights(_entityCollector, _view3D);
+//			_scene.traversePartitions(_entityCollector, _view3D);
+//			_entityCollector.sortRenderables();
 			CONFIG::Scene_Entity_Collect_Debug
 				{
 					trace("traversePartitions in Interoperation3DContainer::render : " + (getTimer() - time) + "ms");
 				}
-			_view3D.renderer.render(_entityCollector, _view3D);
+			if (_scisssorRect)
+			{
+				_stageViewPort.setTo(0, 0, stage3DProxy.width, stage3DProxy.height);
+				_scisssorRect.setTo(_globalPoint.x, _globalPoint.y, _scisssorRect.width, _scisssorRect.height);
+				intersectionRect = _scisssorRect.intersection(_stageViewPort);
+			}
+			if (!_scisssorRect)
+			{
+				_view3D.renderer.render(_entityCollector, _view3D, null, null);
+			}
+			else
+			{
+				if (intersectionRect && intersectionRect.width && intersectionRect.height)
+				{
+					_view3D.renderer.render(_entityCollector, _view3D, null, intersectionRect);
+				}
+			}
+//			_view3D.renderer.render(_entityCollector, _view3D);
+			
 			_entityCollector.cleanUp();
 			
 			//还原starling渲染属性
