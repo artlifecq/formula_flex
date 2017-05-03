@@ -361,14 +361,14 @@ package com.game.engine3D.vo.map
 		{
 			var value : Number = (miniCorrectScaleX > 0 ? miniCorrectScaleX / SCALE_RATIO : 1);
 			value = value == 0 ? 1 : value;
-			return value;
+			return 1;
 		}
 
 		public function get miniScaleY() : Number
 		{
 			var value : Number = (miniCorrectScaleY > 0 ? miniCorrectScaleY / SCALE_RATIO : 1);
 			value = value == 0 ? 1 : value;
-			return value;
+			return 1;
 		}
 
 		public function getDynamicObstacleArea(id : int) : ClientMapAreaData
