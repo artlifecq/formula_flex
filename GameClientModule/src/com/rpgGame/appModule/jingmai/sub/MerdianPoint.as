@@ -36,13 +36,15 @@ package com.rpgGame.appModule.jingmai.sub
 	
 	import gs.TweenMax;
 	
+	import org.game.netCore.data.long;
 	import org.mokylin.skin.app.beibao.jingmai.mc.UIMovieClipJingmai;
 	import org.mokylin.skin.app.beibao.mc.UIMovieClipBianshi_guang;
 	
+	import starling.display.DisplayObject;
 	import starling.events.Event;
 	import starling.filters.FragmentFilter;
 
-	public class MerdianPoint
+	public class MerdianPoint implements IStoneSelector
 	{
 		private var _GRAY_FILTER:FragmentFilter;
 		public var imgPoint:UIAsset;
@@ -428,7 +430,15 @@ package com.rpgGame.appModule.jingmai.sub
 		{
 			return _type;
 		}
-
+		public function getView():DisplayObject
+		{
+			return this.imgPoint;
+		}
+		
+		public function selectStone(item:long):void
+		{
+			MeridianSender.reqSetUpPoint(data.MeridId,data.acuPointId,item);
+		}
 		
 	}
 }

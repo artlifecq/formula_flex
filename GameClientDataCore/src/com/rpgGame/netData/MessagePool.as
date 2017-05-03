@@ -60,6 +60,12 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.chat.message.ResChatMessage;
 	import com.rpgGame.netData.chat.message.ResChatRecordMessage;
 	import com.rpgGame.netData.chat.message.ResOfflineChatCountMessage;
+	import com.rpgGame.netData.cheats.handler.SCCheatsInfoHandler;
+	import com.rpgGame.netData.cheats.handler.SCCheatsListHandler;
+	import com.rpgGame.netData.cheats.handler.SCNodeInfoHandler;
+	import com.rpgGame.netData.cheats.message.SCCheatsInfoMessage;
+	import com.rpgGame.netData.cheats.message.SCCheatsListMessage;
+	import com.rpgGame.netData.cheats.message.SCNodeInfoMessage;
 	import com.rpgGame.netData.client.handler.ResClientCustomTagHandler;
 	import com.rpgGame.netData.client.handler.ResClientMessageHandler;
 	import com.rpgGame.netData.client.handler.TestMessageHandler;
@@ -1085,6 +1091,9 @@ package com.rpgGame.netData{
 			register(301133, TestMessageMessage, TestMessageHandler);
 			register(225101, SCMeridianListMessage, SCMeridianListHandler);
 			register(225102, SCMeridianInfoMessage, SCMeridianInfoHandler);
+			register(226101,SCCheatsListMessage,SCCheatsListHandler);
+			register(226102,SCCheatsInfoMessage,SCCheatsInfoHandler);
+			register(226103, SCNodeInfoMessage, SCNodeInfoHandler);
 		}
 		
 		private function register(id: int, messageClass: Class, handlerClass: Class): void{

@@ -53,6 +53,8 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.WindowInfoData;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
+	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
+	import com.rpgGame.coreData.cfg.cheats.CheatsNodeCfg;
 	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryStaticConfigData;
 	import com.rpgGame.coreData.cfg.country.CountryTaoNiCfgData;
@@ -231,6 +233,9 @@ package com.rpgGame.app.data
 			TaskMissionCfgData.setup(dic[ConfigClassRegister.Q_mission_base]);
 			TaskMissionCfgData.setupReword(dic[ConfigClassRegister.Q_mission_reword]);
 			TaskMissionCfgData.setupSegment(dic[ConfigClassRegister.Q_mission_segment]);
+			//心法
+			CheatsCfg.setup(dic[ConfigClassRegister.Q_cheats]);
+			CheatsNodeCfg.setup(dic[ConfigClassRegister.Q_cheats_node]);
 			
 		}
 		

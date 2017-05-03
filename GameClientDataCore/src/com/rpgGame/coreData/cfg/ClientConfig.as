@@ -437,7 +437,11 @@ package com.rpgGame.coreData.cfg
 			var url : String = "icon/skill/" + size + "/" + id + eName_PNG;
 			return baseDir + resURL + url;
 		}
-		
+		public static function getCheatsIcon(id : int, size : int = 40) : String
+		{
+			var url : String = "icon/item/" + size + "/" +(8000+id) + eName_PNG;
+			return baseDir + resURL + url;
+		}
 		/**
 		 *升阶技能图标 
 		 * @param id

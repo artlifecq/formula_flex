@@ -41,6 +41,9 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.SpellTip;
     import com.rpgGame.app.ui.tips.TxtPropChangeTip;
     import com.rpgGame.app.ui.tips.TxtTip;
+    import com.rpgGame.app.ui.tips.cheats.CheatsIntraductTipExt;
+    import com.rpgGame.app.ui.tips.cheats.CheatsNodePointTip;
+    import com.rpgGame.app.ui.tips.cheats.CheatsTipExt;
     import com.rpgGame.core.events.MapEvent;
     import com.rpgGame.core.manager.tips.TipManager;
     import com.rpgGame.core.manager.tips.TipTargetManager;
@@ -195,6 +198,9 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.PROPCHANGE_TIP, TxtPropChangeTip);
 			TipManager.registerTipsParserClass(TipType.LOSTSKILL_TIP,LostSkillTip);
 			TipManager.registerTipsParserClass(TipType.MERIDIAN_TIP,MeridainPointTip);
+			TipManager.registerTipsParserClass(TipType.CHEATS_NODE_TIP,CheatsNodePointTip);
+			TipManager.registerTipsParserClass(TipType.CHEATS_TIP,CheatsTipExt);
+			TipManager.registerTipsParserClass(TipType.CHEATS_INTRADUCTION_TIP,CheatsIntraductTipExt);
 		}
 
 		private function onSwitchCmp() : void

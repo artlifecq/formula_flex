@@ -162,7 +162,10 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_summon:String = "data.spell.Q_summon";
 		/**  属性的名字（针对不同的地方可以有不同的配置）	 */
 		public static const SpriteStatNameInfo:String = "data.SpriteStatNameInfo";
-
+		/**  心法数据库											 */
+		public static const Q_cheats:String = "data.Q_cheats";
+		/**  经脉冲穴数据库															 */
+		public static const Q_cheats_node:String = "data.Q_cheats_node";
 		public static function setup():void
 		{
 			regClass("data.animat.EffectAnimation", com.rpgGame.coreData.clientConfig.EffectAnimation);
@@ -239,7 +242,8 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.spell.Q_SpellEffect", com.rpgGame.coreData.clientConfig.Q_SpellEffect);
 			regClass("data.spell.Q_summon", com.rpgGame.coreData.clientConfig.Q_summon);
 			regClass("data.SpriteStatNameInfo", com.rpgGame.coreData.clientConfig.SpriteStatNameInfo);
-
+			regClass("data.Q_cheats", com.rpgGame.coreData.clientConfig.Q_cheats);
+			regClass("data.Q_cheats_node", com.rpgGame.coreData.clientConfig.Q_cheats_node);
 		}
 		private static function regClass(name:String, cls:Class):void
 		{
