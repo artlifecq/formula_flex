@@ -2,7 +2,6 @@ package com.rpgGame.appModule.role
 {
 	import com.rpgGame.app.manager.goods.ItemManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.appModule.role.interfaces.ISubPanel;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.player.bean.OthersInfo;

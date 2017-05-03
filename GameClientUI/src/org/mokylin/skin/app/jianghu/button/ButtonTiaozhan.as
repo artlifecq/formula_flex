@@ -1,4 +1,4 @@
-package org.mokylin.skin.common.over
+package org.mokylin.skin.app.jianghu.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.common.over
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class SelectBtn extends feathers.controls.StateSkin
+	public class ButtonTiaozhan extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,23 +22,14 @@ package org.mokylin.skin.common.over
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function SelectBtn()
+		public function ButtonTiaozhan()
 		{
 			super();
 			
-			this.currentState = "up";
-			this.height = 24;
-			this.width = 242;
+			this.currentState = "down";
 			this.elementsContent = [];
 			
 			states = {
-				up:[
-						{target:"labelDisplay",
-							name:"bottom",
-							value:0
-						}
-					]
-				,
 				init:[
 						{target:"labelDisplay",
 							name:"textAlign",
@@ -56,12 +47,7 @@ package org.mokylin.skin.common.over
 						}
 					]
 			};
-			skinNames={"down":"ui/common/hover/xuanqukuang2.png",
-			"downAndSelected":"ui/common/hover/xuanqukuang.png",
-			"hover":"ui/common/hover/xuanqukuang2.png",
-			"hoverAndSelected":"ui/common/hover/xuanqukuang.png",
-			"up":"ui/common/hover/xuanqukuang2_alpha.png",
-			"upAndSelected":"ui/common/hover/xuanqukuang.png"};
+			skinNames={"down":"ui/app/jianghu/button/tiaozhan/down.png", "hover":"ui/app/jianghu/button/tiaozhan/over.png", "up":"ui/app/jianghu/button/tiaozhan/up.png"};
 		}
 
 
@@ -82,9 +68,9 @@ package org.mokylin.skin.common.over
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
 			temp.bottom = 0;
-			temp.left = 20;
+			temp.left = 0;
 			temp.right = 0;
-			temp.text = "2222222";
+			temp.text = "";
 			temp.textAlign = "center";
 			temp.color = 0xFFFFFF;
 			temp.top = 0;

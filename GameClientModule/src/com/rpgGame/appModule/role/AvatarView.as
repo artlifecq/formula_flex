@@ -11,6 +11,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.ItemSender;
+	import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.app.view.uiComponent.menu.Menu;
@@ -147,6 +148,7 @@ package com.rpgGame.appModule.role
 			_avatar.y = _skin.weapons.y + _skin.weapons.height+20;
 			_avatarContainer.addChild3D(_avatar);
 			_showAvatarData = new RoleData(0);
+			
 			
 			_zhandouliEft= _zhandouliEftContaner.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JIEMIAN_ZHANDOULI),135,28,0);
 		}
@@ -412,8 +414,14 @@ package com.rpgGame.appModule.role
 			this._showAvatarData.avatarInfo.deputyWeaponEffectScale=_roleData.avatarInfo.deputyWeaponEffectScale;
 			
 			this._avatar.setRoleData(this._showAvatarData);
-			this._avatar.curRole.setScale(1.7);			
+			this._avatar.curRole.setScale(1.7);		
+		/*	RoleFaceMaskEffectUtil.removeFaceMaskEffect(this._avatar.curRole);
+			RoleFaceMaskEffectUtil.addDialogFaceMaskEffect(this._avatar.curRole);
+			var point : Point = this._avatar.parent.localToGlobal(new Point());
+			RoleFaceMaskEffectUtil.updateFadeAlphaRectPos(this._avatar.curRole, point.x + this._avatar.x+130, point.y + this._avatar.y-270);*/
 		}
+		
+	
 		
 		public function onTouch(e:TouchEvent):void
 		{

@@ -47,6 +47,7 @@ package com.rpgGame.app.utils
 					case RenderUnitType.WEAPON:
 					case RenderUnitType.DEPUTY_WEAPON:
 					case RenderUnitType.MOUNT:
+					case RenderUnitType.WEAPON_EFFECT:
 						render.addFadeAlpha(ClientConfig.getDynTexture("dialogFaceMask"));
 						break;
 				}
@@ -97,6 +98,7 @@ package com.rpgGame.app.utils
 					case RenderUnitType.HAIR:
 					case RenderUnitType.WEAPON:
 					case RenderUnitType.DEPUTY_WEAPON:
+					case RenderUnitType.MOUNT:
 					case RenderUnitType.MOUNT:
 						render.addFadeAlpha(ClientConfig.getDynTexture("bossHeadFaceMask"));
 						break;
