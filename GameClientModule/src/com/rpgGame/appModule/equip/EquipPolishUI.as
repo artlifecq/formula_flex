@@ -782,7 +782,14 @@ package com.rpgGame.appModule.equip
 						}
 					}else{
 						if(equipA.polishLevel==equipB.polishLevel){
-							return 0;
+							if(equipA.polishExp==equipB.polishExp){
+								return 0;
+							}
+							if(equipA.polishExp<equipB.polishExp){
+								return -1;
+							}else{
+								return 1;
+							}
 						}
 						
 						if(equipA.polishLevel<equipB.polishLevel){
