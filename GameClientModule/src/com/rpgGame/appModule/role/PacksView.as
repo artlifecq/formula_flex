@@ -41,6 +41,7 @@ package com.rpgGame.appModule.role
 	
 	import app.message.GoodsType;
 	
+	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
 	import feathers.themes.GuiThemeStyle;
@@ -116,7 +117,7 @@ package com.rpgGame.appModule.role
 			
 			GuiThemeStyle.setScrollerStyle(_skin.lst_pack, org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack);
 			_skin.lst_pack.clipContent = true;
-			_skin.lst_pack.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_FIXED;
+			_skin.lst_pack.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
 //			_skin.lst_pack.verticalScrollBarPosition = Scroller.VERTICAL_SCROLL_BAR_POSITION_RIGHT;
 			_skin.lst_pack.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			_skin.lst_pack.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;

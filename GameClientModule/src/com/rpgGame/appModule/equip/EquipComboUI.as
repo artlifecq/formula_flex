@@ -1,6 +1,5 @@
 package com.rpgGame.appModule.equip
 {
-	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -36,7 +35,6 @@ package com.rpgGame.appModule.equip
 	import feathers.controls.UIAsset;
 	import feathers.data.ListCollection;
 	import feathers.data.TreeNode;
-	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
 	import feathers.themes.GuiThemeStyle;
 	import feathers.utils.filter.GrayFilter;
@@ -44,8 +42,6 @@ package com.rpgGame.appModule.equip
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhuangbei.hecheng.HeCheng_Skin;
 	import org.mokylin.skin.component.list.ListSkin1;
-	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat;
-	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 	
 	import starling.events.Event;
 	
@@ -283,6 +279,10 @@ package com.rpgGame.appModule.equip
 			FaceUtil.SetItemGrid(icon,itemInfo);
 			icon.selectImgVisible=false;
 			icon.setIconResName(ClientConfig.getItemIcon(ItemConfig.getItemIcon(_nowSelect.q_item_id),IcoSizeEnum.ICON_64));		
+			
+			_skin.equip_name.color=ItemConfig.getItemQualityColor(_nowSelect.q_item_id);
+			_skin.equip_name.text=itemInfo.name;
+			
 			setCaiLiaoData();
 		}
 		
@@ -454,6 +454,8 @@ package com.rpgGame.appModule.equip
 			{
 				_hechengNum--;
 				updateShowNum();
+			}else{
+				NoticeManager.showNotifyById(2010);
 			}
 		}
 		
@@ -464,7 +466,9 @@ package com.rpgGame.appModule.equip
 			{
 				_hechengNum++;
 				updateShowNum();
-			}		
+			}else{
+				NoticeManager.showNotifyById(2011);
+			}
 		}
 		
 		/**合成最大数量*/
@@ -475,6 +479,8 @@ package com.rpgGame.appModule.equip
 				_hechengNum=_hechengMaxNum;
 				if(_hechengNum==0) _hechengNum=1;
 				updateShowNum();
+			}else{
+				NoticeManager.showNotifyById(2011);
 			}
 		}
 		
@@ -512,7 +518,7 @@ package com.rpgGame.appModule.equip
 				_skin.tree.dataProvider.updateAll();
 				
 				this.playInter3DAt(ClientConfig.getEffect("ui_hechenghuiju"),0,0,1,null,addEftComple);
-				UIPopManager.showAlonePopUI(CenterEftPop,"ui_qianghuachenggong");
+				UIPopManager.showAlonePopUI(CenterEftPop,"ui_hechengchenggong");
 			}
 		}
 		
@@ -526,7 +532,6 @@ package com.rpgGame.appModule.equip
 			if(!mod){
 				return;
 			}
-			if(_nowSelect&&_nowSelect.q_subson_type==mod.q_subson_type) return;
 			_nowSelect=mod;
 			setShowData();
 		}

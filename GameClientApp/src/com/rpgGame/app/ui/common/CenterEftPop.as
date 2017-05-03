@@ -43,7 +43,7 @@ package com.rpgGame.app.ui.common
 		override protected function onStageResize(sw : int, sh : int) : void
 		{
 			this.x=(sw-this.width)/2;
-			this.y=(sh-this.height)/2;
+			this.y=(sh-this.height)/2-100;
 		}
 	}
 }

@@ -70,9 +70,8 @@ package com.rpgGame.appModule.common.itemRender
 			{
 				gridInfo.realIndex = this.grid.realIndex;
 				grid.setBg(bg);
-				var gray:Boolean=grid.isGary;
 				grid.gridInfo = gridInfo;
-				grid.isGary=gray;
+				grid.isGary=gridInfo.isGray;
 			}
 			else
 			{

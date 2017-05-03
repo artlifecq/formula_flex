@@ -261,7 +261,7 @@ package com.rpgGame.appModule.role
 			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateTxt);//基本属性改变
 			
 			EventManager.addEvent(ItemEvent.ITEM_ADD,onFreshItems);
-			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
+			EventManager.addEvent(ItemEvent.UNWEAR_EQUIPITEM,onFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_GET, getItem);
 			
@@ -297,7 +297,7 @@ package com.rpgGame.appModule.role
 			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateTxt);//基本属性改变
 			
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,onFreshItems);
-			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
+			EventManager.removeEvent(ItemEvent.UNWEAR_EQUIPITEM,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_GET, getItem);
 			EventManager.removeEvent(AvatarEvent.EQUIP_CHANGE, equipChange);

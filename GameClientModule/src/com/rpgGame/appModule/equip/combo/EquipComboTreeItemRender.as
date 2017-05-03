@@ -6,7 +6,7 @@ package com.rpgGame.appModule.equip.combo
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_hecheng;
 	
-	import feathers.controls.Button;
+	import feathers.controls.UIAsset;
 	import feathers.controls.renderers.DefaultTreeItemRender;
 	import feathers.data.TreeNode;
 	
@@ -34,6 +34,8 @@ package com.rpgGame.appModule.equip.combo
 		private var _renderHeight:Number;
 		private var _mainListStyles:Array=[ButtonJianding,ButtonBianshi];
 		
+		private static var selectedImg:UIAsset;
+		
 		public function EquipComboTreeItemRender()
 		{
 			super();
@@ -58,6 +60,15 @@ package com.rpgGame.appModule.equip.combo
 				treeNode.expanded = !treeNode.expanded;
 				renderTreeNode(treeNode);
 				tree.updateTree();
+			}
+			
+			if(treeNode.data is DetailNodeInfo){
+				var qianSkin:Cont_Item=_skin.detail_item.skin as Cont_Item;
+				qianSkin.selectedImg.visible=true;
+				if(selectedImg){
+					selectedImg.visible=false;
+				}
+				selectedImg=qianSkin.selectedImg;
 			}
 		}
 		
@@ -102,11 +113,17 @@ package com.rpgGame.appModule.equip.combo
 				hechengData=detailInfo.data;
 				if(hechengData==null) return;
 				var cailiao:Array=JSONUtil.decode(hechengData.q_cost_items);
-				var cailiaoId:int=parseInt(cailiao[0]);
+				var cailiaoId:int=parseInt(cailiao[0]);//材料id
+				var cailiaoNum:int=parseInt(cailiao[1]);//合成材料数;
 				var itemByBagNum:int=BackPackManager.instance.getBagItemsCountById(cailiaoId);
+				var max:int=Math.floor(itemByBagNum/cailiaoNum);//能合成的数量
+				var itemId:int=hechengData.q_item_id;
 				var qianSkin:Cont_Item=_skin.detail_item.skin as Cont_Item;
-				qianSkin.lb_Dispaly.color=ItemConfig.getItemQualityColor(cailiaoId);
-				qianSkin.lb_Dispaly.text=ItemConfig.getItemName(cailiaoId)+"("+itemByBagNum+")";
+				if(qianSkin.selectedImg!=selectedImg){
+					qianSkin.selectedImg.visible=false;
+				}
+				qianSkin.lb_Dispaly.color=ItemConfig.getItemQualityColor(itemId);
+				qianSkin.lb_Dispaly.text=ItemConfig.getItemName(itemId)+"("+max+")";
 				qianSkin.bg1.visible=detailInfo.data.q_subson_type%2==0;
 				qianSkin.bg2.visible=!qianSkin.bg1.visible;
 			}

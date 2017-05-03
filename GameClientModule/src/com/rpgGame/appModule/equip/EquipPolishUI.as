@@ -64,8 +64,6 @@ package com.rpgGame.appModule.equip
 	import starling.display.DisplayObject;
 	import starling.events.Event;
 	
-	import utils.TimerServer;
-	
 	/**
 	 *装备琢磨
 	 *@author dik
@@ -177,13 +175,10 @@ package com.rpgGame.appModule.equip
 			deleteItems(selectedUse,itemInfo);
 			refreshUseEquipGrid();
 			
-			var targetGrid:DragDropItem;
-			targetGrid=_goodsContainerUse.getDragDropItemByItemInfo(itemInfo);
-			targetGrid.isGary=false;
+			_goodsContainerUse.setGrayForData(itemInfo,false);
 			
 			if(isPolish(itemInfo as EquipInfo)){
-				targetGrid=_goodsContainerTarget.getDragDropItemByItemInfo(itemInfo);
-				targetGrid.isGary=false;
+				_goodsContainerTarget.setGrayForData(itemInfo,false);
 			}
 			
 			addExp-=itemInfo.qItem.q_polish_num;
@@ -203,11 +198,9 @@ package com.rpgGame.appModule.equip
 		{
 			var targetGrid:DragDropItem;
 			if(targetEquipInfo){
-				targetGrid=_goodsContainerTarget.getDragDropItemByItemInfo(targetEquipInfo);
-				targetGrid.isGary=false;
+				_goodsContainerTarget.setGrayForData(targetEquipInfo,false);
 				if(isUse(targetEquipInfo)){//是消耗品
-					targetGrid=_goodsContainerUse.getDragDropItemByItemInfo(targetEquipInfo);
-					targetGrid.isGary=false;
+					_goodsContainerUse.setGrayForData(targetEquipInfo,false);
 				}
 				targetEquipInfo=null;
 			}
@@ -360,11 +353,11 @@ package com.rpgGame.appModule.equip
 					addExp-=item.qItem.q_strengthen_num;
 					break;
 				}
+				useListIds.push(item.itemInfo.itemId);
 				if(addExp>EquipPolishCfg.maxCfg.q_exp){//到顶级了
 					isToUp=true;
 					break;
 				}
-				useListIds.push(item.itemInfo.itemId);
 			}
 			
 			useMon=addExp*perMon;
@@ -399,7 +392,7 @@ package com.rpgGame.appModule.equip
 				return;
 			}
 			if(gridInfo.containerID==ItemContainerID.POLIST_LIST){
-				addTargetItem(gridInfo);
+				addTargetItem(grid);
 			}else if(gridInfo.containerID==ItemContainerID.POLIST_USE){
 				addUseItem(gridInfo);
 			}
@@ -417,13 +410,10 @@ package com.rpgGame.appModule.equip
 			}
 			
 			var itemInfo:ClientItemInfo=gridInfo.data as ClientItemInfo;
-			var targetGrid:DragDropItem;
-			targetGrid=_goodsContainerUse.getDragDropItemByItemInfo(itemInfo);
-			targetGrid.isGary=true;
+			_goodsContainerUse.setGrayForData(itemInfo,true);
 			
 			if(isPolish(itemInfo as EquipInfo)){
-				targetGrid=_goodsContainerTarget.getDragDropItemByItemInfo(itemInfo);
-				targetGrid.isGary=true;
+				_goodsContainerTarget.setGrayForData(itemInfo,true);
 			}
 			selectedUse.push(itemInfo);
 			refreshUseEquipGrid();
@@ -443,15 +433,13 @@ package com.rpgGame.appModule.equip
 			}
 		}
 		
-		private function addTargetItem(gridInfo:GridInfo):void
+		private function addTargetItem(targetGrid:DragDropItem):void
 		{
-			var targetGrid:DragDropItem;
+			var gridInfo:GridInfo=targetGrid.gridInfo;
 			if(targetEquipInfo){
-				targetGrid=_goodsContainerTarget.getDragDropItemByItemInfo(targetEquipInfo);
-				targetGrid.isGary=false;
+				_goodsContainerTarget.setGrayForData(targetEquipInfo,false);
 				if(isUse(targetEquipInfo)){
-					targetGrid=_goodsContainerUse.getDragDropItemByItemInfo(targetEquipInfo);
-					targetGrid.isGary=false;
+					_goodsContainerUse.setGrayForData(targetEquipInfo,false);
 				}
 			}
 			
@@ -460,8 +448,7 @@ package com.rpgGame.appModule.equip
 			_targetEquip.gridInfo=gridInfo;
 			
 			targetEquipInfo=gridInfo.data as EquipInfo;
-			targetGrid=_goodsContainerTarget.getDragDropItemByItemInfo(targetEquipInfo);
-			targetGrid.isGary=true;
+			_goodsContainerTarget.setGrayForData(targetEquipInfo,true);
 			var p:Point=new Point(targetGrid.x,targetGrid.y);
 			p=targetGrid.parent.localToGlobal(p);
 			p=_targetEquip.parent.globalToLocal(p);
@@ -473,8 +460,7 @@ package com.rpgGame.appModule.equip
 			tweenEquip=TweenMax.to(_targetEquip,1,{x:612,y:177,ease:Expo.easeOut});
 			
 			if(isUse(targetEquipInfo)){
-				targetGrid=_goodsContainerUse.getDragDropItemByItemInfo(targetEquipInfo);
-				targetGrid.isGary=true;
+				_goodsContainerUse.setGrayForData(targetEquipInfo,true);
 			}
 			
 			addExp=0;
@@ -521,6 +507,9 @@ package com.rpgGame.appModule.equip
 				_skin.arrow_up2.visible=_skin.lb_up2.visible=false;
 				_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),0);
 			}
+			
+			_goodsContainerTarget.dataProvider.updateAll();
+			_goodsContainerUse.dataProvider.updateAll();
 		}
 		
 		private function updateAttShow(current:Q_equip_polish,up:Q_equip_polish=null):void
@@ -654,11 +643,9 @@ package com.rpgGame.appModule.equip
 			zuomoEft.stop();
 			cancelAllUse();
 			if(targetEquipInfo){
-				var targetGrid:DragDropItem=_goodsContainerTarget.getDragDropItemByItemInfo(targetEquipInfo);
-				targetGrid.isGary=false;
+				_goodsContainerTarget.setGrayForData(targetEquipInfo,false);
 				if(isUse(targetEquipInfo)){//是消耗品
-					targetGrid=_goodsContainerUse.getDragDropItemByItemInfo(targetEquipInfo);
-					targetGrid.isGary=false;
+					_goodsContainerUse.setGrayForData(targetEquipInfo,false);
 				}
 				targetEquipInfo=null;
 			}
@@ -740,34 +727,6 @@ package com.rpgGame.appModule.equip
 			}
 			var result:Vector.<ClientItemInfo>=getEquipByType(type,targetEquips);
 			_goodsContainerTarget.refleshGridsByDatas(result);
-			
-			var targetGrid:DragDropItem;
-			for each(var info:ClientItemInfo in result){
-				targetGrid=_goodsContainerTarget.getDragDropItemByItemInfo(info);
-				if(!targetGrid){
-					continue;
-				}
-				if(info==targetEquipInfo){
-					targetGrid.isGary=true;
-				}else{
-					targetGrid.isGary=false;
-				}
-			}
-			
-			/*result=getEquipByType(type,useEquips);
-			
-			for each(var info1:ClientItemInfo in result){
-				targetGrid=_goodsContainerTarget.getDragDropItemByItemInfo(info1);
-				if(!targetGrid){
-					continue;
-				}
-				if(selectedUse.indexOf(info1)!=-1){
-					targetGrid.isGary=true;
-				}else{
-					targetGrid.isGary=false;
-				}
-			}
-			_goodsContainerUse.refleshGridsByDatas(result);*/
 		}
 		
 		private function getEquipByType(type:int,datas:Vector.<ClientItemInfo>):Vector.<ClientItemInfo>
@@ -867,21 +826,28 @@ package com.rpgGame.appModule.equip
 		
 		private function updateAll():void
 		{
-			var targetGrid:DragDropItem;
-			for each(targetGrid in _goodsContainerTarget.dndGrids){
-				targetGrid.isGary=false;
+			var num:int=_goodsContainerTarget.dataProvider.length;
+			var info:GridInfo;
+			var i:int;
+			for(i=0;i<num;i++){
+				info=_goodsContainerTarget.dataProvider.getItemAt(i) as  GridInfo;
+				if(info){
+					info.isGray=false;
+				}
 			}
+			num=_goodsContainerUse.dataProvider.length;
 			
-			for each( targetGrid in _goodsContainerUse.dndGrids){
-				targetGrid.isGary=false;
+			for(i=0;i<num;i++){
+				info=_goodsContainerUse.dataProvider.getItemAt(i) as  GridInfo;
+				if(info){
+					info.isGray=false;
+				}
 			}
 			
 			if(targetEquipInfo){
-				targetGrid=_goodsContainerTarget.getDragDropItemByItemInfo(targetEquipInfo);
-				targetGrid.isGary=true;
+				_goodsContainerTarget.setGrayForData(targetEquipInfo,true);
 				if(isUse(targetEquipInfo)){
-					targetGrid=_goodsContainerUse.getDragDropItemByItemInfo(targetEquipInfo);
-					targetGrid.isGary=true;
+					_goodsContainerUse.setGrayForData(targetEquipInfo,true);
 				}
 			}
 			updateView();

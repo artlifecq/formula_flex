@@ -39,7 +39,7 @@ package org.mokylin.skin.app.wuxue.jineng
 		private function __JinengTitle_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/wuxue/jineng/biaotilan.png";
+			temp.styleName = "ui/app/wuxue/biaotilan.png";
 			temp.width = 528;
 			temp.x = 0;
 			temp.y = 0;
