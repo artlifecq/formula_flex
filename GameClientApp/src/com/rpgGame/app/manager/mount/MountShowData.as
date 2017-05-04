@@ -179,12 +179,12 @@ package com.rpgGame.app.manager.mount
 		public function useExtraItem(num1:int,num2:int):void
 		{
 			_useItems[506] = num1;
-			_useItems[507] = num1;
+			_useItems[507] = num2;
 		}
 		
 		public function getUseExtralItem(type:int):int
 		{
-			if(type!=506||type!=507)
+			if(type!=506&&type!=507)
 				return 0;
 			return _useItems[type];
 		}
@@ -206,14 +206,19 @@ package com.rpgGame.app.manager.mount
 			if(_isMaxLevel)
 				return null;
 			helpProp = new Vector.<Number>(30,0);
-			var percent:Number = percent;
-			helpProp[CharAttributeType.WAI_GONG]=_disProp[CharAttributeType.WAI_GONG]*addExtraPercent;
-			helpProp[CharAttributeType.NEI_GONG]=_disProp[CharAttributeType.NEI_GONG]*addExtraPercent;
+			var per:Number = percent;
+			helpProp[CharAttributeType.WAI_GONG]=_disProp[CharAttributeType.WAI_GONG]*addExtraPercent*per;
+			helpProp[CharAttributeType.NEI_GONG]=_disProp[CharAttributeType.NEI_GONG]*addExtraPercent*per;
 			if(percent>=0.3)
-				helpProp[CharAttributeType.DEFENSE_PER]=_disProp[CharAttributeType.DEFENSE_PER]*addExtraPercent;
+				helpProp[CharAttributeType.DEFENSE_PER]=_disProp[CharAttributeType.DEFENSE_PER]*addExtraPercent*per;
 			if(percent>=0.5)
-				helpProp[CharAttributeType.MAX_HP]=_disProp[CharAttributeType.MAX_HP]*addExtraPercent;
+				helpProp[CharAttributeType.MAX_HP]=_disProp[CharAttributeType.MAX_HP]*addExtraPercent*per;
 			return helpProp;
+		}
+		
+		public function get disProps():Vector.<Number>
+		{
+			return _disProp;
 		}
 		private function get addExtraPercent():Number
 		{

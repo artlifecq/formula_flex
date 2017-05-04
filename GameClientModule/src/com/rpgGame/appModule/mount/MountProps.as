@@ -50,6 +50,7 @@ package com.rpgGame.appModule.mount
 		private var _foundIndex:int;
 		private var _currentProp:Vector.<Number>;
 		private var _addProp:Vector.<Number>;
+		private var _disProps:Vector.<Number>;
 		public function refeashPropValue():void
 		{
 			_currentProp = _mountShowData.currentProp(_currentProp);
@@ -63,13 +64,14 @@ package com.rpgGame.appModule.mount
 			}
 			_skin.num_zhandouli.number = Math.floor(_currentPower+_nextPower*_mountShowData.percent);
 			_foundIndex = 0;
+			_disProps = _mountShowData.disProps;
 			for each(var view:MountPropView in _propList)
 			{
 				var nextType:int = nextPropIndex();
 				if(_addProp!=null&&_addProp.length >0)
-					view.updataAtt(nextType,_currentProp[nextType],_addProp[nextType]);
+					view.updataAtt(nextType,_currentProp[nextType],_addProp[nextType],_disProps[nextType],_mountShowData.heroJob);
 				else
-					view.updataAtt(nextType,_currentProp[nextType],_addProp[nextType]);
+					view.updataAtt(nextType,_currentProp[nextType],_addProp[nextType],_disProps[nextType],_mountShowData.heroJob);
 			}
 		}
 		public function nextPropIndex():int
@@ -78,7 +80,7 @@ package com.rpgGame.appModule.mount
 				return 0;
 			for(_foundIndex++;_foundIndex<_currentProp.length;_foundIndex++)
 			{
-				if(_currentProp[_foundIndex]!=0)
+				if(_currentProp[_foundIndex]!=0||_disProps[_foundIndex]!=0)
 					return _foundIndex;
 			}
 			return 0;

@@ -69,7 +69,7 @@ package com.rpgGame.appModule.mount
 			_skin.progressbar_light.x = _skin.progressbar.x +_skin.progressbar.width*percent-3;
 			_skin.lab_progressbar.text = _mountShowData.exp.toString()+"/"+housedata.q_blessnum_limit.toString();
 			
-			_skin.lab_xuyaowupin.htmlText = _mountShowData.upLevelItem.name+"*"+_mountShowData.upLevelNeedItemCount+"("+_mountShowData.bagHaveItemCount+")";
+			_skin.lab_xuyaowupin.htmlText = _mountShowData.upLevelItem.name+"*"+_mountShowData.upLevelNeedItemCount;
 			if(_mountShowData.canUpLevel())
 			{
 				_skin.lab_xuyaowupin.color = 0x5DBD37;
@@ -79,10 +79,11 @@ package com.rpgGame.appModule.mount
 		}
 		public function set isAutoing(value:Boolean):void
 		{
-			_mountShowData.isAutoing = value;
-			_skin.btn_kaishi.visible = !_mountShowData.isAutoing;
-			_skin.btn_zidong.visible = !_mountShowData.isAutoing;
-			_skin.btn_tingzhi.visible = _mountShowData.isAutoing;
+			if(_mountShowData!=null)
+				_mountShowData.isAutoing = value;
+			_skin.btn_kaishi.visible = !value;
+			_skin.btn_zidong.visible = !value;
+			_skin.btn_tingzhi.visible = value;
 		}
 		
 	}
