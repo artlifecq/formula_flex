@@ -344,5 +344,12 @@ package com.rpgGame.coreData.info.item
 			}
 			return result;
 		}
+		/**[{"mod":-10,"num":115200},{"mod":154,"num":8}]*/
+		public static function jsonParse2ObjList(str:String):Array
+		{
+			var obj:Object=JSON.parse(str);
+			return obj as Array;
+			
+		}
 	}
 }

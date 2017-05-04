@@ -2,6 +2,7 @@ package com.rpgGame.appModule.jingmai
 {
 	import com.rpgGame.app.sender.MeridianSender;
 	import com.rpgGame.appModule.jingmai.render.StoneSelectCellRender;
+	import com.rpgGame.appModule.jingmai.sub.IStoneSelector;
 	import com.rpgGame.appModule.jingmai.sub.MerdianPoint;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.ui.SkinUI;
@@ -29,7 +30,7 @@ package com.rpgGame.appModule.jingmai
 	{
 		private static var ins:MeridianStoneSelectPanelExt=new MeridianStoneSelectPanelExt();
 		private var _skin:Stone_Skin;
-		private var _target:MerdianPoint;
+		private var _target:IStoneSelector;
 		private var ckickCount:int=0;
 		public function MeridianStoneSelectPanelExt()
 		{
@@ -53,15 +54,15 @@ package com.rpgGame.appModule.jingmai
 			// TODO Auto Generated method stub
 			return new StoneSelectCellRender();
 		}
-		public static function setData(data:Vector.<ClientItemInfo>,meridianPoint:MerdianPoint):void
+		public static function setData(data:Vector.<ClientItemInfo>,selector:IStoneSelector):void
 		{
 			data.sort(ins.onSort);
-			ins._target=meridianPoint;
+			ins._target=selector;
 			ins._skin.lst_pack.dataProvider=new ListCollection(data);
-			if (meridianPoint) 
+			if (selector) 
 			{
-				var local:Point=new Point(meridianPoint.imgPoint.width+2,meridianPoint.imgPoint.height+2);
-				var g:Point=meridianPoint.imgPoint.localToGlobal(local)
+				var local:Point=new Point(selector.getView().width+2,selector.getView().height+2);
+				var g:Point=selector.getView().localToGlobal(local)
 				var layer : DisplayObjectContainer = StarlingLayerManager.appUILayer;
 				ins.x=g.x;
 				ins.y=g.y;
@@ -101,7 +102,7 @@ package com.rpgGame.appModule.jingmai
 			remove();
 			if (ins._target) 
 			{
-				MeridianSender.reqSetUpPoint(ins._target.data.MeridId,ins._target.data.acuPointId,item.itemInfo.itemId);
+				ins._target.selectStone(item.itemInfo.itemId);
 			}
 		}
 		
