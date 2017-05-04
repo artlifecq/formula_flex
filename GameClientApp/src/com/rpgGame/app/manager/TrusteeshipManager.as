@@ -267,7 +267,11 @@ package com.rpgGame.app.manager
 				}
 				
 			}
-			_stateMachine.transition(AIStateType.ATTACK_TARGET, null, force);
+			if(SceneRoleSelectManager.selectedRole != null)
+			{
+				_stateMachine.transition(AIStateType.ATTACK_TARGET, null, force);
+			}
+			
 			//_stateMachine.transition(AIStateType.TASK_WALK, null, force);
 		}
 		

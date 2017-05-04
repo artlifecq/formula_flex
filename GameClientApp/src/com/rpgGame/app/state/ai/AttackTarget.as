@@ -126,7 +126,7 @@ package com.rpgGame.app.state.ai
 			var spellData : Q_skill_model = findUseableSpell();
 			
 			if (spellData)
-			{L.l("spellData"+spellData.q_skillName);
+			{
 				var roleList : Vector.<SceneRole> = TrusteeshipManager.getInstance().getRoleList();
 				CastSpellHelper.tryCaseSpell(new CastSpellInfo(spellData), roleList, true);
 			}
