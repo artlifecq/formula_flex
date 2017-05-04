@@ -2,6 +2,7 @@ package com.rpgGame.appModule.role
 {
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.appModule.jingmai.MeridianMainPanelExt;
+	import com.rpgGame.appModule.xinfa.XinFaMainPanelExt;
 	import com.rpgGame.appModule.zhangong.ZhanGongPanelExt;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.MCUtil;
@@ -33,7 +34,6 @@ package com.rpgGame.appModule.role
 		private var _subZhanGong:ZhanGongPanelExt;
 		private var _curSub:SkinUI;
 		private var _subXinFa:XinFaMainPanelExt;
-		private var _curSub:SkinUI
 		public function RolePanel()
 		{
 			this._skin = new beibao_Skin();
