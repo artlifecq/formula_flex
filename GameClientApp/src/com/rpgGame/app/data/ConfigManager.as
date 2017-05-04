@@ -56,6 +56,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.WindowInfoData;
+	import com.rpgGame.coreData.cfg.ZhanGongData;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
 	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
@@ -233,6 +234,7 @@ package com.rpgGame.app.data
 			GlobalSheetData.setup(dic[ConfigClassRegister.Q_global]);
 			HeChengData.setup(dic[ConfigClassRegister.Q_hecheng]);
 			EquipJiChengData.setup(dic[ConfigClassRegister.Q_equip_inherit_cost]);
+			ZhanGongData.setup(dic[ConfigClassRegister.Q_meritorious]);
 			
 			LostSkillData.setup(dic[ConfigClassRegister.Q_lostskill_open]);
 			LostSkillUpData.setup(dic[ConfigClassRegister.Q_lostskill_up]);

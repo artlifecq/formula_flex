@@ -1,6 +1,7 @@
 package com.rpgGame.netData.zhangong.handler{
 
 	import com.rpgGame.netData.zhangong.message.SCMeritoriousUpgradeResultMessage;
+	
 	import org.game.netCore.net.Handler;
 
 	public class SCMeritoriousUpgradeResultHandler extends Handler {

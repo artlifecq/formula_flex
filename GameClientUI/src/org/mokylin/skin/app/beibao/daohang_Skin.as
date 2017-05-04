@@ -5,6 +5,7 @@ package org.mokylin.skin.app.beibao
 	import org.mokylin.skin.app.beibao.button.ButtonJingmai;
 	import org.mokylin.skin.app.beibao.button.ButtonJuese;
 	import org.mokylin.skin.app.beibao.button.ButtonXinfa;
+	import org.mokylin.skin.app.beibao.button.ButtonZhangong;
 
 	/**
 	 * @private
@@ -22,6 +23,8 @@ package org.mokylin.skin.app.beibao
 
 		public var btn_xinfa:feathers.controls.Radio;
 
+		public var btn_zhangong:feathers.controls.Radio;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -32,7 +35,7 @@ package org.mokylin.skin.app.beibao
 			
 			this.currentState = "normal";
 			this.height = 51;
-			this.elementsContent = [btn_juese_i(),btn_jingmai_i(),btn_xinfa_i()];
+			this.elementsContent = [btn_juese_i(),btn_jingmai_i(),btn_xinfa_i(),btn_zhangong_i()];
 			
 			states = {
 			};
@@ -75,6 +78,18 @@ package org.mokylin.skin.app.beibao
 			temp.groupName = "rdoJuese";
 			temp.styleClass = org.mokylin.skin.app.beibao.button.ButtonXinfa;
 			temp.x = 286;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function btn_zhangong_i():feathers.controls.Radio
+		{
+			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			btn_zhangong = temp;
+			temp.name = "btn_zhangong";
+			temp.groupName = "rdoJuese";
+			temp.styleClass = org.mokylin.skin.app.beibao.button.ButtonZhangong;
+			temp.x = 428;
 			temp.y = 0;
 			return temp;
 		}

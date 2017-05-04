@@ -1,23 +1,18 @@
 package com.rpgGame.appModule.role
 {
-	import com.rpgGame.app.manager.goods.ItemManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.appModule.jingmai.MeridianMainPanelExt;
-	import com.rpgGame.appModule.role.interfaces.ISubPanel;
-	import com.rpgGame.appModule.util.MCUtil;
-	import com.rpgGame.appModule.xinfa.XinFaMainPanelExt;
+	import com.rpgGame.appModule.zhangong.ZhanGongPanelExt;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.MCUtil;
-	import com.rpgGame.coreData.role.HeroData;
 	
 	import org.mokylin.skin.app.beibao.beibao_Skin;
 	import org.mokylin.skin.app.beibao.daohang_Skin;
-	import org.mokylin.skin.app.beibao.juese_Skin;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import starling.events.TouchEvent;
+	
+	
 	
 	/**
 	 *角色面板 
@@ -28,12 +23,15 @@ package com.rpgGame.appModule.role
 	{
 		public static const SUB_ROLE:String="role_panel";
 		public static const SUB_MERIDIAN:String="meridian_panel";
+		public static const SUB_ZHANGONG:String="zhangong_panel";
 		public static const SUB_XINFA:String="xinfa_panel";
 		protected var _skin : beibao_Skin;
 		
-	
+		
 		private var _subRole:SubRolePanel;
 		private var _subMeridian:MeridianMainPanelExt;
+		private var _subZhanGong:ZhanGongPanelExt;
+		private var _curSub:SkinUI;
 		private var _subXinFa:XinFaMainPanelExt;
 		private var _curSub:SkinUI
 		public function RolePanel()
@@ -76,6 +74,11 @@ package com.rpgGame.appModule.role
 					sub=subMeridian;
 					break;
 				}
+				case SUB_ZHANGONG:
+				{
+					sub=subZhanGong;
+					break;
+				}
 				case SUB_XINFA:
 				{
 					sub=subXinfa;
@@ -112,12 +115,16 @@ package com.rpgGame.appModule.role
 			{
 				showSubPanel(SUB_MERIDIAN);
 			}
+			else if(target==(_skin.daohang.skin as daohang_Skin).btn_zhangong)
+			{
+				showSubPanel(SUB_ZHANGONG);
+			}
 			else if (target==(_skin.daohang.skin as daohang_Skin).btn_xinfa) 
 			{
 				showSubPanel(SUB_XINFA);
 			}
 		}
-	
+		
 		
 		/**
 		 * 当舞台尺寸变化后
@@ -134,7 +141,7 @@ package com.rpgGame.appModule.role
 		{
 			super.hide();
 		}
-
+		
 		public function get subMeridian():MeridianMainPanelExt
 		{
 			if (_subMeridian==null) 
@@ -143,6 +150,16 @@ package com.rpgGame.appModule.role
 			}
 			return _subMeridian;
 		}
+		
+		public function get subZhanGong():ZhanGongPanelExt
+		{
+			if(_subZhanGong==null)
+			{
+				_subZhanGong=new ZhanGongPanelExt();
+			}
+			return _subZhanGong;
+		}
+		
 		public function get subXinfa():XinFaMainPanelExt
 		{
 			if (_subXinFa==null) 

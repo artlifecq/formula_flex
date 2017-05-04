@@ -1,5 +1,6 @@
 package com.rpgGame.netData.zhangong.message{
 	import com.rpgGame.netData.zhangong.bean.MeritoriousInfo;
+	
 	import org.game.netCore.net.Message;
 	
 	/** 
