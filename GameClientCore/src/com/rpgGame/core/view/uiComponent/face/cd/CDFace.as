@@ -44,6 +44,17 @@ package com.rpgGame.core.view.uiComponent.face.cd
 		 */
 		private var _isReverse : Boolean = false;
 		//完成回调
+
+		public function get isCircle():Boolean
+		{
+			return _isCircle;
+		}
+
+		public function set isCircle(value:Boolean):void
+		{
+			_isCircle = value;
+		}
+
 		private var _onComplete : Function;
 		private var _imageMask : Canvas;
 
@@ -298,11 +309,16 @@ package com.rpgGame.core.view.uiComponent.face.cd
 		}
 		public function drawRectMask($angle : Number) : void
 		{
-			$angle = Math.floor($angle)
-
-			if ($angle <= 0)
-				return;
-			MaskCDUtil.drawPolygonMask(_imageMask, _isReverse ? (360 - $angle) : $angle);
+			if(isCircle)
+			{
+			
+				$angle = Math.floor($angle)
+				
+				if ($angle <= 0)
+					return;
+				MaskCDUtil.drawPolygonMask(_imageMask, _isReverse ? (360 - $angle) : $angle);
+			}
+			
 		}
 	}
 }

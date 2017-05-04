@@ -261,7 +261,7 @@ package com.rpgGame.app.manager.task
 				if(i==0)taskdata=mainTaskData;
 				else if(i==1)taskdata=dailyTaskData;
 				else if(i==2)taskdata=treasuerTaskData;
-				if(taskdata!=null)
+				if(taskdata!=null&&taskdata.q_mission_type==TaskType.SUB_GATHER)
 				{
 					var path:String=taskdata.q_finish_information_str;
 					var pathArr:Array
@@ -328,6 +328,33 @@ package com.rpgGame.app.manager.task
 			}
 			return false;
 		}
+		/**判定是否是主线任务怪*/
+		public static function isMainTaskMonster(mid:int):Boolean
+		{
+			var j:int;
+			if(mainTaskData!=null)
+			{
+				var path:String=mainTaskData.q_finish_information_str;
+				var pathArr:Array
+				var pashArr:Array=path.split(";");
+				for(j=0;j<pashArr.length;j++)
+				{
+					if(pashArr[j]!=null&&pashArr[j]!="")
+					{
+						path=pashArr[j];
+						pathArr=path.split(",");
+						if(pathArr.length==2&&int(pathArr[0])==mid)
+						{
+							return true;
+						}
+					}
+				}
+				
+			}
+			
+			return false;
+		}
+		
 		
 		/**当前是否只有主线任务*/
 		public static function get isOnlyDailyTask() :Boolean
@@ -339,6 +366,7 @@ package com.rpgGame.app.manager.task
 			
 			return false;
 		}
+		
 		
 		
 		

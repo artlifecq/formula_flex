@@ -29,6 +29,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.role.BaseEntityData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.type.SpellTargetType;
@@ -1231,5 +1232,140 @@ package com.rpgGame.app.fight.spell
 			}
 			return castSpell;
 		}
+		/**找一个合适的技能释放。根据优先级*/
+		public static function getSortCastSpell() : Q_skill_model
+		{
+		
+			var castSpell : Q_skill_model = null;
+			var spellData : Q_skill_model;
+			var spellList:Vector.<Q_skill_model>=MainRoleManager.actorInfo.spellList.getSortSpellList();
+			var i : int = 0;
+			var len : int = spellList.length;
+			for(i=0;i<len;i++)
+			{
+				spellData=spellList[i];
+				if (spellData && !SkillCDManager.getInstance().getSkillHasCDTime(spellData)&&getspellIsOK(spellData))
+				{
+					castSpell = spellData;
+					break;
+				}
+			}
+			
+			if (false&&!castSpell)
+			{
+				spellData = getDefaultSpell();
+				if (spellData)
+				{
+					if (!SkillCDManager.getInstance().getSkillHasCDTime(spellData))
+					{
+						castSpell = spellData;
+					}
+					else
+					{
+						var relateSpells : Vector.<Q_skill_model> = SpellDataManager.getRelateSpells(spellData.q_relate_spells);
+						for each (var tmpData : Q_skill_model in relateSpells)
+						{
+							if (!SkillCDManager.getInstance().getSkillHasCDTime(tmpData))
+							{
+								castSpell = spellData;
+								break;
+							}
+						}
+					}
+				}
+			}
+			
+			if (!castSpell)
+			{
+				castSpell=MainRoleManager.actorInfo.spellList.getFirstSpell();
+			}
+			return castSpell;
+		}
+		
+		/**技能是否满足是否条件*/
+		public static function getspellIsOK(spell : Q_skill_model):Boolean
+		{
+			var nuta:int = MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_NU_TA);
+			var nuqi:int = MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_NU_QI);
+			var nengliang:int = MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.MP);
+			var jingzheng:int = MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_JING_ZHENG);
+			var recovers:String=spell.q_recovers;
+			var recoObj:Object;
+			var recoData:Array;
+			var isGary:Boolean=false;
+			if(recovers!="")
+			{
+				recoObj=JSON.parse(recovers);
+			}
+			
+			if(recoObj!=null)
+			{
+				recoData=recoObj as Array;
+			}
+			
+			if(recoData!=null&&recoData.length>0)
+			{
+				var i:int,length:int;
+				length=recoData.length;
+				for(i=0;i<length;i++)
+				{
+					switch(recoData[i].rt)
+					{
+						case 100://仇恨
+							
+							break;
+						case 101://血量
+							
+							break;
+						case 102://能量
+							if(nengliang>=(-recoData[i].rv))
+							{
+								isGary=true;
+							}
+							else
+							{
+								return false;
+							}
+							break;
+						case 12://怒气
+							if(nuqi>=(-recoData[i].rv))
+							{
+								isGary=true;
+							}
+							else
+							{
+								return false;
+							}
+							break;
+						case 13://金针
+							if(jingzheng>=(-recoData[i].rv))
+							{
+								isGary=true;
+							}
+							else
+							{
+								return false;
+							}
+							break;
+						case 14://弩塔
+							if(nuta>=(-recoData[i].rv))
+							{
+								isGary=true;
+							}
+							else
+							{
+								return false;
+							}
+							break;
+						
+					}
+					
+					
+				}
+			}
+			return isGary;
+		}
+		
+		
 	}
 }

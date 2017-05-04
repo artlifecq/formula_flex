@@ -1,6 +1,7 @@
 package com.rpgGame.coreData.cfg.monster
 {
 	import com.game.engine3D.utils.TemplateUtil;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
@@ -295,10 +296,11 @@ package com.rpgGame.coreData.cfg.monster
 			return null;
 		}
 		/**
-		 根据模型ID获取怪物数据
+		 根据模型ID获取怪物刷新点数据 如果有本地图的优先返回本地图 如果没有，就返回第一个
 		 */		
-		public static function getMonsterByModelId(id : uint) :Q_scene_monster_area
+		public static function getMonsterByModelId(id : uint,currentMapId:int) :Q_scene_monster_area
 		{
+			var sdata:Q_scene_monster_area;
 			if (SCENE_ID_UNIQ_DIC) 
 			{
 				for each(var sceneMonsterList : Vector3D.<Q_scene_monster_area> in SCENE_ID_UNIQ_DIC)
@@ -308,7 +310,15 @@ package com.rpgGame.coreData.cfg.monster
 					{
 						if(sceneMonsterData.q_monster_model==id)
 						{
-							return sceneMonsterData;
+							if(sdata==null)
+							{
+								sdata=sceneMonsterData;
+							}
+							if(sceneMonsterData.q_mapid==currentMapId)
+							{
+								return sceneMonsterData;
+							}
+							
 						}
 						
 					}
@@ -316,7 +326,7 @@ package com.rpgGame.coreData.cfg.monster
 			}
 			
 			
-			return null;
+			return sdata;
 		}
 		
 		/**

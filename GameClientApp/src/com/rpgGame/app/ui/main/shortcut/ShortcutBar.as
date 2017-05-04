@@ -32,6 +32,7 @@ package com.rpgGame.app.ui.main.shortcut {
     
     public class ShortcutBar extends SkinUI {
 		
+		private var autoBar:AutoBar;
 		private var skillBar : ShortcutSkillBar;
 		private var singBar : SingBar;
         private var _skin : shortcut_Skin;
@@ -84,6 +85,8 @@ package com.rpgGame.app.ui.main.shortcut {
 		}
 		private function init() : void
 		{
+			autoBar=new AutoBar();
+			this._skin.Icons.addChild(autoBar);
 			skillBar = new ShortcutSkillBar(this);
 			this._skin.Icons.addChildAt(skillBar,0);
 			singBar= new SingBar();
@@ -258,6 +261,15 @@ package com.rpgGame.app.ui.main.shortcut {
 		{
 			switch (target)
 			{
+				case autoBar.setSkin.btnShezhi:
+					autoBar.setAutoFight();
+					break;
+				case autoBar.setSkin.btnClose:
+					autoBar.fightStop();
+					break;
+				case autoBar.guajiSkin.btnGuaji:
+					autoBar.guajiClick();
+					break;				
 //				case _skin.btnBackpack://背包
 //					AppManager.showApp(AppConstant.BACK_PACK_PANEL);
 //					break;

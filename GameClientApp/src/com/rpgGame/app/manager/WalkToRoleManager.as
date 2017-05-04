@@ -2,6 +2,7 @@ package com.rpgGame.app.manager
 {
 	import com.game.engine3D.utils.MathUtil;
 	import com.rpgGame.app.graphics.StallHeadFace;
+	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.mount.MountManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneDropGoodsManager;
@@ -55,7 +56,7 @@ package com.rpgGame.app.manager
 					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role);
 					break;
 				case SceneCharType.MONSTER:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveMonster,null,null,noWalk);
+					wakMonster(role,targerPos);
 					break;
 				case SceneCharType.LIANG_CANG:
 					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveMonster);
@@ -97,18 +98,42 @@ package com.rpgGame.app.manager
 			}
 		}
 
-		private static function onArriveMonster(ref : WalkMoveStateReference) : void
+		
+		
+		private static function wakMonster(role : SceneRole,targerPos : Vector3D) : void
 		{
-			var role : SceneRole = ref.data as SceneRole;
 			if (role == null || !role.usable)
 				return;
-
+			
 			var monsterData : MonsterData = role.data as MonsterData;
 			if (monsterData == null)
 				return;
-	
+			var modeState : int = FightManager.getFightRoleState(role);
+			if (monsterData.monsterData.q_monster_type>=1&&monsterData.monsterData.q_monster_type<=3&&modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY ||modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)
+			{
+				var targetRoles : Vector.<SceneRole>=new Vector.<SceneRole> ();
+				targetRoles.push(role);
+				TrusteeshipManager.getInstance().startFightTarget(targetRoles);
+				/*var dst:int=MainRoleManager.actorInfo.spellList.getShortcutSpellDistance();
+				RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, dst, role, waikOver,null,null,waikOver);
+				function waikOver():void
+				{
+					var targetRoles : Vector.<SceneRole>=new Vector.<SceneRole> ();
+					targetRoles.push(role);
+					TrusteeshipManager.getInstance().startFightTarget(targetRoles);
+				}*/
+			}
+			else
+			{
+				RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveMonster,null,null,noWalk);
+			}
 			
-			EventManager.dispatchEvent(TaskEvent.TASK_CLICK_NPC,monsterData.modelID,monsterData.serverID);//交任务用------YT
+			
+		}
+		private static function onArriveMonster(ref : WalkMoveStateReference) : void
+		{
+			var role : SceneRole = ref.data as SceneRole;
+			walkComplet(role);
 			
 			//如果这只怪是猪，那么是不能杀的，请求抓猪
 //			if (TouZhuCfgData.isZhuMonster(monsterData.modelID))
@@ -119,6 +144,12 @@ package com.rpgGame.app.manager
 		}
 		private static function noWalk( role : SceneRole) : void
 		{
+			walkComplet(role);
+			
+		}
+		/**寻路完成*/
+		private static function walkComplet( role : SceneRole) : void
+		{
 			if (role == null || !role.usable)
 				return;
 			
@@ -126,9 +157,15 @@ package com.rpgGame.app.manager
 			if (monsterData == null)
 				return;
 			
+			
 			EventManager.dispatchEvent(TaskEvent.TASK_CLICK_NPC,monsterData.modelID,monsterData.serverID);//交任务用------YT
 			
+			
+			
+			
+			
 		}
+		
 		
 		
 		private static function onArriveNpc(ref : WalkMoveStateReference) : void

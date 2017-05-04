@@ -5,7 +5,9 @@ package com.rpgGame.appModule.maps
 	import com.game.engine3D.vo.SceneMapData;
 	import com.game.engine3D.vo.map.ClientMapData;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
@@ -303,8 +305,8 @@ package com.rpgGame.appModule.maps
 		public function roleWalk(x:Number,y:Number):void
 		{
 			roadSpr.openRoad();
-			RoleStateUtil.walk(MainRoleManager.actor,x,y);
-			
+			//RoleStateUtil.walk(MainRoleManager.actor,x,y);
+			MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId,x,y,null, 100,null);
 		}
 		
 		public function clearView():void
