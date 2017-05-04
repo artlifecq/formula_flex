@@ -42,7 +42,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_link_nodes:String;
 		 /**  穴位图标类型 */
 		public var q_huponameurl:String;
-		 /**  激活成功是否全服公告（0不公告，1公告） */
+		 /**  激活成功是否全服公告（0不公告,1公告） */
 		public var q_notify:int;
 		 /**  公告内容 */
 		public var q_notify_str:String;
