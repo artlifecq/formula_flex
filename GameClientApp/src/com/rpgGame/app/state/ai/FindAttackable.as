@@ -65,14 +65,15 @@ package com.rpgGame.app.state.ai
 		private function findAttackableTarget() : SceneRole
 		{
 			var role:SceneRole;
-			if(TaskAutoManager.getInstance().isTaskRunning)
+			/*if(TaskAutoManager.getInstance().isTaskRunning)
 			{
 				role=findNearestMonster(true);
 			}
 			else
 			{
 				role=findNearestMonster(false);
-			}
+			}*/
+			role=findNearestMonster(false);
 			return role;
 		}
 
