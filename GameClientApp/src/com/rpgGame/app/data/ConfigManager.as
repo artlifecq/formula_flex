@@ -35,7 +35,6 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.HeChengData;
 	import com.rpgGame.coreData.cfg.HintCfgData;
 	import com.rpgGame.coreData.cfg.HintConfig;
-	import com.rpgGame.coreData.cfg.HorseAdditionData;
 	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.cfg.HorseSpellData;
 	import com.rpgGame.coreData.cfg.LostSkillData;
@@ -71,7 +70,6 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.item.EquipWashAttCfg;
 	import com.rpgGame.coreData.cfg.item.EquipWashCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
-	import com.rpgGame.coreData.cfg.item.ItemStrength;
 	import com.rpgGame.coreData.cfg.meridian.MeridianCfg;
 	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
@@ -255,9 +253,7 @@ package com.rpgGame.app.data
 			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
 			HorseExtraItemInfo.createInfo();
 
-			//心法
-			CheatsCfg.setup(dic[ConfigClassRegister.Q_cheats]);
-			CheatsNodeCfg.setup(dic[ConfigClassRegister.Q_cheats_node]);
+			
 		}
 		
 		/**
