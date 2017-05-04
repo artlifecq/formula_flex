@@ -62,6 +62,9 @@ package com.rpgGame.coreData.info.fight
 		
 		private var _beatBackSpeed : int = 0;
 		
+		private var _hurtTimes : int = 1;
+		private var _hurtSpacing : Number = 0;
+		
 		private var _hurtAnimation : Q_SpellAnimation; //被击动画
 		private var _sputteringHurtAnimation : Q_SpellAnimation; //溅射被击动画
 		
@@ -155,6 +158,9 @@ package com.rpgGame.coreData.info.fight
 				_deadBeatSpeed = _spellData.q_dead_beat_speed;
 				_deadBeatProbability = _spellData.q_dead_beat_probability;
 				_deadLaunchProbability = _spellData.q_dead_launch_probability;
+				
+				_hurtTimes = _spellData.q_split_count > 0 ? _spellData.q_split_count : 1;
+				_hurtSpacing = _spellData.q_split_spacing;
 			}
 		}
 		
@@ -299,5 +305,27 @@ package com.rpgGame.coreData.info.fight
 		{
 			_targetID = value;
 		}
+
+		public function get hurtTimes():int
+		{
+			return _hurtTimes;
+		}
+
+		public function set hurtTimes(value:int):void
+		{
+			_hurtTimes = value;
+		}
+
+		public function get hurtSpacing():Number
+		{
+			return _hurtSpacing;
+		}
+
+		public function set hurtSpacing(value:Number):void
+		{
+			_hurtSpacing = value;
+		}
+
+
 	}
 }
