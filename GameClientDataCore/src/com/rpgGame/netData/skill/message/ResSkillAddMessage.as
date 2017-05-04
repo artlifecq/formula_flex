@@ -16,6 +16,9 @@ package com.rpgGame.netData.skill.message{
 		//技能增加信息
 		private var _skillInfo: SkillInfo;
 		
+		//技能类型,1主动,2被动
+		private var _skillType: int;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -23,6 +26,8 @@ package com.rpgGame.netData.skill.message{
 		override protected function writing(): Boolean{
 			//技能增加信息
 			writeBean(_skillInfo);
+			//技能类型,1主动,2被动
+			writeByte(_skillType);
 			return true;
 		}
 		
@@ -32,6 +37,8 @@ package com.rpgGame.netData.skill.message{
 		override protected function reading(): Boolean{
 			//技能增加信息
 			_skillInfo = readBean(SkillInfo) as SkillInfo;
+			//技能类型,1主动,2被动
+			_skillType = readByte();
 			return true;
 		}
 		
@@ -56,6 +63,21 @@ package com.rpgGame.netData.skill.message{
 		 */
 		public function set skillInfo(value: SkillInfo): void{
 			this._skillInfo = value;
+		}
+		
+		/**
+		 * get 技能类型,1主动,2被动
+		 * @return 
+		 */
+		public function get skillType(): int{
+			return _skillType;
+		}
+		
+		/**
+		 * set 技能类型,1主动,2被动
+		 */
+		public function set skillType(value: int): void{
+			this._skillType = value;
 		}
 		
 	}

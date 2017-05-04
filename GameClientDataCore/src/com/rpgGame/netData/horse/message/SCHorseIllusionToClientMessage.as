@@ -11,7 +11,7 @@ package com.rpgGame.netData.horse.message{
 	 * 
 	 * 发送当前坐骑ID给地图周围的玩家(改变外观)
 	 */
-	public class ResHorseIllusionToClientMessage extends Message {
+	public class SCHorseIllusionToClientMessage extends Message {
 	
 		//玩家ID
 		private var _playerId: long;

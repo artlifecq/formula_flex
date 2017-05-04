@@ -116,10 +116,7 @@ package com.rpgGame.app.manager.chat
 			notify(hintInfo.type, msg, textArgs);
 		}
 		
-		/**
-		 *显示一个提示 根据配置id 
-		 * 
-		 */
+		/*
 		public static function showNotifyById(id:int,textArgs : Array = null):void
 		{
 			var cfg:Q_notify=NotifyCfgData.getNotifyByID(id);
@@ -128,7 +125,7 @@ package com.rpgGame.app.manager.chat
 				return;
 			}
 			notify(int(cfg.q_show_type), cfg.q_content,textArgs);
-		}
+		}*/
 		
 
 		/**
@@ -170,6 +167,34 @@ package com.rpgGame.app.manager.chat
 						{
 							notify(typeArr[i], msg, textArgs, showTimes);
 						}
+					}
+				}
+			}
+		}
+		/**
+		 *显示一个提示 根据配置id 
+		 * 
+		 */
+		public static function showNotifyById(id:int,... args):void
+		{
+			var notiMsg:Q_notify = NotifyCfgData.getNotifyByID(id);
+			if(notiMsg!=null)
+			{
+				var showType:Array=notiMsg.q_show_type.split("|");
+				var words : String = LanguageConfig.replaceStr(notiMsg.q_content,args);
+				if(showType!=null&&showType.length>0)
+				{
+					var i:int,length:int=showType.length;
+					
+					for(i=0;i<length;i++)
+					{
+						var tp:int=int(showType[i])
+						if(tp>0)
+						{
+							NoticeManager.textNotify(tp, words);
+							notify(tp, words);
+						}
+						
 					}
 				}
 			}
