@@ -49,8 +49,8 @@ package com.rpgGame.core.manager
 			mainUILayer = creatLayer(MAIN_UI_LAYER, 2);
 			appUILayer = creatLayer(APP_LAYER, 3);
 			hintUILayer = creatLayer(HINT_LAYER, 4);
-			tipUILayer = creatLayer(TIP_LAYER, 5);
-			topUILayer = creatLayer(TOP_LAYER, 6);
+			topUILayer = creatLayer(TOP_LAYER, 5);
+			tipUILayer = creatLayer(TIP_LAYER, 6);
 		}
 
 		private static function creatLayer(key : String, index : int) : Sprite

@@ -7,6 +7,7 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
 	import com.rpgGame.coreData.clientConfig.Q_horse;
+	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -23,7 +24,8 @@ package com.rpgGame.app.manager.mount
 		{
 			return _haveChange;
 		}
-
+		
+		public var heroJob:int
 		private var _horsedataInfo:HorseDataInfo;
 		private var _lastLevel:int;
 		private var _upLevelItem:ClientItemInfo;
@@ -96,11 +98,21 @@ package com.rpgGame.app.manager.mount
 				item.isbind = iteminfo["bind"];
 				_rewardItems.push(ItemUtil.convertClientItemInfo(item));
 			}
+			var q_atts:Array = housedata.q_attid.split(",");
+			var adds:int;
+			if(heroJob == JobEnum.ROLE_1_TYPE)
+			{
+				adds = int(q_atts[0]);
+			}else if(heroJob == JobEnum.ROLE_4_TYPE){
+				adds = int(q_atts[2]);
+			}else{
+				adds = int(q_atts[1]);
+			}
 			//当前等级配置属性
 			_currentProp = new Vector.<Number>(30,0);
 			var type:int;
 			var value:int;
-			var currentatt:Q_att_values = AttValueConfig.getAttInfoById(int(housedata.q_attid));
+			var currentatt:Q_att_values = AttValueConfig.getAttInfoById(adds);
 			for(var i:int = 1;i<=15;i++)
 			{
 				type = currentatt["q_type"+i];
@@ -111,19 +123,36 @@ package com.rpgGame.app.manager.mount
 			}
 			
 			//差距
-			currentatt = AttValueConfig.getAttInfoById(int(housedata.q_attid+1));
-			if(currentatt!=null)
+			var nexthousse:Q_horse = HorseConfigData.getMountDataById(mountLevel+1);
+			if(nexthousse!=null)
 			{
-				_disProp = new Vector.<Number>(30,0);
-				for(i = 1;i<=15;i++)
+				var nextq_atts:Array = nexthousse.q_attid.split(",");
+				if(heroJob == JobEnum.ROLE_1_TYPE)
 				{
-					type = currentatt["q_type"+i];
-					if(type==0)
-						continue;
-					value = currentatt["q_value"+i];
-					_disProp[type] = value-_currentProp[type];
+					adds = int(nextq_atts[0]);
+				}else if(heroJob == JobEnum.ROLE_4_TYPE){
+					adds = int(nextq_atts[2]);
+				}else{
+					adds = int(nextq_atts[1]);
 				}
-				_isMaxLevel = false;
+				
+				currentatt = AttValueConfig.getAttInfoById(adds);
+				if(currentatt!=null)
+				{
+					_disProp = new Vector.<Number>(30,0);
+					for(i = 1;i<=15;i++)
+					{
+						type = currentatt["q_type"+i];
+						if(type==0)
+							continue;
+						value = currentatt["q_value"+i];
+						_disProp[type] = value-_currentProp[type];
+					}
+					_isMaxLevel = false;
+				}else{
+					_disProp = null;
+					_isMaxLevel = true;
+				}
 			}else{
 				_disProp = null;
 				_isMaxLevel = true;
@@ -240,10 +269,23 @@ package com.rpgGame.app.manager.mount
 			_isAutoing = value;
 		}
 		
+		private var _isAutoBuyItem:Boolean = false;
+		
+		public function get isAutoBuyItem():Boolean
+		{
+			return _isAutoBuyItem;
+		}
+		
+		public function set isAutoBuyItem(value:Boolean):void
+		{
+			if(value&&!isSelf)
+				return ;
+			_isAutoBuyItem = value;
+		}
+		
 		public function needClearExp():Boolean
 		{
-			return exp<=3;
+			return mountLevel<=3;
 		}
-		public var autoBuyItem :Boolean = false;
 	}
 }

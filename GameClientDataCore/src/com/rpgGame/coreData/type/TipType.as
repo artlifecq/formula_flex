@@ -62,5 +62,10 @@ package com.rpgGame.coreData.type
 		 *经脉tip 
 		 */		
 		public static const MERIDIAN_TIP:int=rEnum.next;
+		
+		/** 被动技能 tips*/
+		public static const PASSIVESKILL_TIP : int = rEnum.next;
+		/** 丹药 tips*/
+		public static const EXTARITEM_TIP : int = rEnum.next;
 	}
 }

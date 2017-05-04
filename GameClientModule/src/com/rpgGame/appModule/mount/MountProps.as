@@ -1,16 +1,11 @@
 package com.rpgGame.appModule.mount
 {
+	import com.rpgGame.app.manager.mount.MountShowData;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.utils.FightValueUtil;
-	import com.rpgGame.coreData.cfg.AttValueConfig;
-	import com.rpgGame.coreData.cfg.HorseConfigData;
-	import com.rpgGame.coreData.clientConfig.Q_att_values;
-	import com.rpgGame.coreData.clientConfig.Q_horse;
-	import com.rpgGame.netData.horse.bean.HorseDataInfo;
 	
 	import org.mokylin.skin.app.zuoqi.Shuxing_Item;
 	import org.mokylin.skin.app.zuoqi.Zuoqi_Skin;
-	import com.rpgGame.app.manager.mount.MountShowData;
 
 	public class MountProps
 	{
@@ -59,15 +54,14 @@ package com.rpgGame.appModule.mount
 		{
 			_currentProp = _mountShowData.currentProp(_currentProp);
 			_addProp = _mountShowData.addProps(_addProp);
-			var job:int = MainRoleManager.actorInfo.job;
-			_currentPower = FightValueUtil.calAtrributeFightPower(_currentProp,job);
+			_currentPower = FightValueUtil.calAtrributeFightPower(_currentProp,_mountShowData.heroJob);
 			if(_addProp!=null)
 			{
-				_nextPower = FightValueUtil.calAtrributeFightPower(_addProp,job);
+				_nextPower = FightValueUtil.calAtrributeFightPower(_addProp,_mountShowData.heroJob);
 			}else{
 				_nextPower = 0;
 			}
-			_skin.num_zhandouli.number = _currentPower+_nextPower;
+			_skin.num_zhandouli.number = Math.floor(_currentPower+_nextPower*_mountShowData.percent);
 			_foundIndex = 0;
 			for each(var view:MountPropView in _propList)
 			{

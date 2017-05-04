@@ -53,12 +53,12 @@ package com.rpgGame.app.fight.spell
 		{
 			return _skin as huode_Jineng;
 		}
-		
+		private var _cfg:Q_skill_model;
 		override  protected function onShow() : void
 		{
-			var cfg:Q_skill_model=SpellDataManager.getSpellData(skillInfo.skillModelId);
-			skin.lbl_zhuangbei.text=cfg.q_skillName;
-			icon.setIconResName(ClientConfig.getSkillIcon(cfg.q_skillID.toString(),64));
+			_cfg=SpellDataManager.getSpellData(skillInfo.skillModelId);
+			skin.lbl_zhuangbei.text=_cfg.q_skillName;
+			icon.setIconResName(ClientConfig.getSkillIcon(_cfg.q_skillID.toString(),64));
 			time=5;
 			skin.lbl_time.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT20).replace("$",time);
 			timeID=setInterval(updateTime,1000);
@@ -76,19 +76,25 @@ package com.rpgGame.app.fight.spell
 		
 		private function toMis():void
 		{
-			var endy:int=this._skin.container.y-40;
-			var index:int=getNextShortIndex();
-			var cfg:Q_skill_model=SpellDataManager.getSpellData(skillInfo.skillModelId,skillInfo.skillLevel);
-			ShortcutsManger.getInstance().setShortData(index, ShortcutsTypeEnum.SKILL_TYPE, cfg.q_skillID);
-			var toP:Point=MainUIManager.mainui.shortcutBar.getSkillGridSeat(index);
-			toP=icon.parent.globalToLocal(toP);
-			for(var i:int=0;i<skin.container.numChildren;i++){
-				var dis:DisplayObject=skin.container.getChildAt(i);
-				if(dis!=icon){
-					dis.visible=false;
+			if(_cfg.q_trigger_type==1)
+			{
+				var endy:int=this._skin.container.y-40;
+				var index:int=getNextShortIndex();
+				var cfg:Q_skill_model=SpellDataManager.getSpellData(skillInfo.skillModelId,skillInfo.skillLevel);
+				ShortcutsManger.getInstance().setShortData(index, ShortcutsTypeEnum.SKILL_TYPE, cfg.q_skillID);
+				var toP:Point=MainUIManager.mainui.shortcutBar.getSkillGridSeat(index);
+				toP=icon.parent.globalToLocal(toP);
+				for(var i:int=0;i<skin.container.numChildren;i++){
+					var dis:DisplayObject=skin.container.getChildAt(i);
+					if(dis!=icon){
+						dis.visible=false;
+					}
 				}
+				TweenLite.to(icon,0.5,{x:toP.x,y:toP.y,width:48,height:48,onComplete:popComplete,ease:Cubic.easeOut});	
+			}else{
+				popComplete();
 			}
-			TweenLite.to(icon,0.5,{x:toP.x,y:toP.y,width:48,height:48,onComplete:popComplete,ease:Cubic.easeOut});			
+					
 		}
 		
 		private function getNextShortIndex():int

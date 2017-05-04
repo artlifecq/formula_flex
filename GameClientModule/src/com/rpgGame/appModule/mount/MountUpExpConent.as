@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.mount
 {
+	import com.rpgGame.app.manager.mount.MountShowData;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.coreData.clientConfig.Q_horse;
@@ -7,7 +8,8 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	
 	import org.mokylin.skin.app.zuoqi.Zuoqi_Skin;
-	import com.rpgGame.app.manager.mount.MountShowData;
+	
+	import starling.events.Event;
 
 	public class MountUpExpConent
 	{
@@ -26,11 +28,18 @@ package com.rpgGame.appModule.mount
 			_itemIconList.push(icon);
 			icon = FaceUtil.creatIconCDFaceByUIAsset(_skin.grid_2,IcoSizeEnum.ICON_48);
 			_itemIconList.push(icon);
+			_skin.chk_zidonggoumai.addEventListener(Event.CHANGE,checkChangeHandler);
+		}
+		
+		private function checkChangeHandler():void
+		{
+			_mountShowData.isAutoBuyItem = _skin.chk_zidonggoumai.isSelected;
 		}
 		private var _mountShowData:MountShowData;
 		public function updataInfo(mountShowData:MountShowData):void
 		{
 			_mountShowData = mountShowData;
+			_skin.chk_zidonggoumai.isSelected = _mountShowData.isAutoBuyItem;
 			this.isAutoing = _mountShowData.isAutoing;
 			const housedata:Q_horse = _mountShowData.housedata;
 			if(_mountShowData.haveChange)

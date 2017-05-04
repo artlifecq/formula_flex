@@ -1,6 +1,7 @@
 package com.rpgGame.app.manager.mount
 {
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.coreData.UNIQUEID;
@@ -112,13 +113,13 @@ package com.rpgGame.app.manager.mount
 				NoticeManager.showNotifyById(9001);
 				return false;
 			}
-			if(!showdata.canUpLevel())
+			if(!showdata.isAutoBuyItem&&!showdata.canUpLevel())
 			{
 				NoticeManager.showNotifyById(9002,showdata.upLevelItem.qItem.q_name);
 				return false;
 			}
 			var msg:CSHorseStratumUpToGameMessage = new CSHorseStratumUpToGameMessage();
-			msg.Automatic = showdata.autoBuyItem?1:0;
+			msg.Automatic = showdata.isAutoBuyItem?1:0;
 			SocketConnection.send(msg);
 			return true;
 		}
@@ -130,6 +131,12 @@ package com.rpgGame.app.manager.mount
 			if(!extraItemInfo.canUseItem(showdata.mountLevel,useCount))
 			{
 				NoticeManager.showNotifyById(9004,extraItemInfo.clientItemInfo.qItem.q_name);
+				return false;
+			}
+			
+			if(BackPackManager.instance.getBagItemsCountById(extraItemInfo.clientItemInfo.cfgId)<=0)
+			{
+				NoticeManager.showNotifyById(9002,extraItemInfo.clientItemInfo.qItem.q_name);
 				return false;
 			}
 			var msg:CSUseHorseAddtionMessage = new CSUseHorseAddtionMessage();

@@ -114,7 +114,7 @@ package com.rpgGame.appModule.mount
 		
 		private function get mountLevel():int
 		{
-			return _mountdata.mountLevel+1;
+			return _mountdata.mountLevel;
 		}
 		override protected function onTouchTarget(target : DisplayObject) : void
 		{

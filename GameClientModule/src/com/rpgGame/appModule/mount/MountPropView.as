@@ -41,10 +41,10 @@ package com.rpgGame.appModule.mount
 			_skin.container.visible = true;
 			var attname:String = CharAttributeType.getCNName(_attpropId);
 			_skin.lbName.text = attname;
-			_skin.lbCurrent.text = _currentatt.toString();
+			_skin.lbCurrent.text = Math.floor(_currentatt).toString();
 			if(_nextAtt>0)
 			{
-				_skin.lbUp.text = _nextAtt.toString();
+				_skin.lbUp.text = Math.floor(_nextAtt).toString();
 			}else{
 				_skin.lbUp.text = "";
 			}

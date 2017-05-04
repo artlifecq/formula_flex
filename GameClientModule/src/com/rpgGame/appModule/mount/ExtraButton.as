@@ -3,6 +3,11 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.app.manager.mount.HorseExtraItemInfo;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.mount.MountShowData;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.coreData.type.TipType;
+	
+	import flash.geom.Point;
 	
 	import feathers.controls.Button;
 	
@@ -25,6 +30,8 @@ package com.rpgGame.appModule.mount
 			_mountShowData = mountShowData;
 			_horseExtraItem = _mountShowData.getOpenLevelBytype(_type);
 			_button.visible = _horseExtraItem.getMaxByLevel(_mountShowData.mountLevel)>0;
+			TipTargetManager.remove(_button);
+			TipTargetManager.show(_button,TargetTipsMaker.makeTips(TipType.EXTARITEM_TIP,[_mountShowData,_type],false,new Point(_button.x,_button.y)));
 		}
 		private function triggeedHandler(e:Event):void
 		{

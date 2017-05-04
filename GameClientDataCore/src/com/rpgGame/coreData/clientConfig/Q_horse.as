@@ -24,8 +24,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_scene_show_url:String;
 		 /**  获得本阶坐骑后学会的坐骑被动技能[ID,ID,ID] */
 		public var q_skill_id:String;
-		 /**  属性id */
-		public var q_attid:int;
+		 /**  属性id([兵家,墨家,医家]) */
+		public var q_attid:String;
 		 /**  上马读条时间（毫秒） */
 		public var q_ride_time:int;
 		 /**  本阶坐骑允许的最大技能等级 */

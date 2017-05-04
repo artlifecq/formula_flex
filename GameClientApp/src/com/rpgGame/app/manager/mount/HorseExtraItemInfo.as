@@ -57,6 +57,8 @@ package com.rpgGame.app.manager.mount
 			var canuse:int = getMaxByLevel(level);
 			return canuse>Math.max(num,0);
 		}
+		
+		public var useCount:int;
 		private static var _list:Dictionary;
 		public static function createInfo():void
 		{

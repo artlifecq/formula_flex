@@ -1,14 +1,21 @@
 package com.rpgGame.appModule.mount
 {
-	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.mount.MountShowData;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.appModule.systemset.TouchToState;
+	import com.rpgGame.core.events.ItemEvent;
+	import com.rpgGame.core.manager.StarlingLayerManager;
+	import com.rpgGame.coreData.cfg.HorseSpellData;
+	import com.rpgGame.coreData.clientConfig.Q_horse_skills;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	
+	import feathers.utils.filter.GrayFilter;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zuoqi.Zuoqi_Skin;
@@ -48,11 +55,13 @@ package com.rpgGame.appModule.mount
 		{
 			super.show(data,openTable,parentContiner);
 			_mountShowData.horsedataInfo =  HorseManager.instance().horsedataInfo;
+			_mountShowData.heroJob = MainRoleManager.actorInfo.job;
 			_mountContent.refeashMode(_mountShowData.mountLevel);
 			refeashPropHandler();
 			/*_propContent.refeashPropShow(false);
 			_mountupContent.updataInfo(_mountShowData);*/
 			refeashExpHandler();
+			refeashSpellIcon();
 			initEvent();
 		}
 		override protected function onTouchTarget(target : DisplayObject) : void
@@ -106,7 +115,7 @@ package com.rpgGame.appModule.mount
 			{
 				_uplevelSuccess = new MountUpLevelSucessPane();
 				_uplevelSuccess.addEventListener(Event.REMOVED_FROM_STAGE,removePropHandler);
-				Stage3DLayerManager.starlingLayer.getLayer("alert").addChild(_uplevelSuccess);
+				StarlingLayerManager.topUILayer.addChild(_uplevelSuccess);
 				_uplevelSuccess.x = int((_uplevelSuccess.stage.stageWidth - _uplevelSuccess.width) / 2);
 				_uplevelSuccess.y = int((_uplevelSuccess.stage.stageHeight - _uplevelSuccess.height) / 2);
 			}
@@ -115,23 +124,43 @@ package com.rpgGame.appModule.mount
 		}
 		private function removePropHandler(e:Event):void
 		{
-			_uplevelSuccess ==  null;
+			_uplevelSuccess =  null;
+			refeashSpellIcon();
 			refeashExpHandler();
+		}
+		
+		private function refeashSpellIcon():void
+		{
+			var arr:Array = HorseSpellData.allSpell;
+			for(var i:int = 0;i<_spellIconList.length;i++)
+			{
+				var icon:IconCDFace = _spellIconList[i];
+				var qdata:Q_horse_skills = arr[i];
+				if(qdata.q_study_needhorselevel>_mountShowData.mountLevel)
+				{
+					if(icon.filter==null)
+					{
+						GrayFilter.gray(icon);
+					}
+				}else{
+					icon.filter = null;
+				}
+			}
 		}
 		private function initView():void
 		{
 			_spellIconList = new Vector.<IconCDFace>();
 			var spellList:Vector.<BaseFaceInfo> = HorseManager.instance().spellList; 
 			var icon:IconCDFace = FaceUtil.creatIconCDFaceByUIAsset(_skin.kuang_1,IcoSizeEnum.ICON_48);
-			FaceUtil.SetSkillGrid(icon, spellList[0], false);
+			FaceUtil.SetSkillGrid(icon, spellList[0], true);
 			icon.setIconPoint(6,6);
 			_spellIconList.push(icon);
 			icon = FaceUtil.creatIconCDFaceByUIAsset(_skin.kuang_2,IcoSizeEnum.ICON_48);
-			FaceUtil.SetSkillGrid(icon, spellList[1], false);
+			FaceUtil.SetSkillGrid(icon, spellList[1], true);
 			icon.setIconPoint(6,6);
 			_spellIconList.push(icon);
 			icon = FaceUtil.creatIconCDFaceByUIAsset(_skin.kuang_3,IcoSizeEnum.ICON_48);
-			FaceUtil.SetSkillGrid(icon, spellList[2], false);
+			FaceUtil.SetSkillGrid(icon, spellList[2], true);
 			icon.setIconPoint(6,6);
 			_spellIconList.push(icon);
 			
@@ -190,8 +219,15 @@ package com.rpgGame.appModule.mount
 			EventManager.addEvent(HorseManager.HorseUpLevel,refeashLevel);
 			EventManager.addEvent(HorseManager.HorseChangeExp,refeashExpHandler);
 			EventManager.addEvent(HorseManager.HorseExtraItemNum,refeashPropHandler);
+			EventManager.addEvent(ItemEvent.ITEM_ADD,addItemHandler);
 		}
 		
+		private function addItemHandler(info:ClientItemInfo):void
+		{
+			if(info.cfgId!= _mountShowData.upLevelItem.cfgId)
+				return ;
+			refeashExpHandler();
+		}
 		private function refeashExpHandler():void
 		{
 			_mountupContent.updataInfo(_mountShowData);
@@ -201,9 +237,14 @@ package com.rpgGame.appModule.mount
 			{
 				eb.refeash(_mountShowData);
 			}
+			if(_mountShowData.isAutoing)
+			{
+				HorseManager.instance().eatItemHorse(_mountShowData)
+			}
 		}
 		private function refeashLevel():void
 		{
+			_mountupContent.isAutoing = false;
 			showUplevel();
 		}
 		private function removeEvent():void
@@ -213,6 +254,7 @@ package com.rpgGame.appModule.mount
 			EventManager.removeEvent(HorseManager.HorseUpLevel,refeashLevel);
 			EventManager.removeEvent(HorseManager.HorseChangeExp,refeashExpHandler);
 			EventManager.removeEvent(HorseManager.HorseExtraItemNum,refeashPropHandler);
+			EventManager.removeEvent(ItemEvent.ITEM_ADD,addItemHandler);
 		}
 		private function refeashPropHandler():void
 		{
