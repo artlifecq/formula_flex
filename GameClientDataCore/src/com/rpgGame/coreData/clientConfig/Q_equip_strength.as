@@ -18,7 +18,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_kind:int;
 		 /**  备注 */
 		public var q_note:String;
-		 /**  佩戴职业需求（0通用 1兵家 2墨家男 3墨家女4 医家） */
+		 /**  佩戴职业需求（0通用 1兵家 2墨家 4 医家） */
 		public var q_job:int;
 		 /**  强化等级 */
 		public var q_strength:int;

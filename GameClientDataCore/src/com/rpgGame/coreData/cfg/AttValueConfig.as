@@ -61,6 +61,46 @@ package com.rpgGame.coreData.cfg
 			return 0;
 		}
 		
+		/**
+		 *获取展示值的字符串带单位
+		 * @param type
+		 * @param value
+		 * @return 
+		 * 
+		 */
+		public static function getDisAttValueStr(type:int,value:int):String
+		{
+			var per:int=CharAttributeType.getAttrPer(type);
+			if(per!=1){
+				var str:String=(value/per).toFixed(2);
+				return Number(str).toString()+CharAttributeType.getAttrUnit(type);
+			}
+			return value.toString()+CharAttributeType.getAttrUnit(type);
+		}
+		
+		/**
+		 *获取要显示的数值 
+		 * @param type
+		 * @param value
+		 * @return 
+		 * 
+		 */
+		public static function getDisAttValue(type:int,value:int):Number
+		{
+			var per:int=CharAttributeType.getAttrPer(type);
+			if(per!=1){
+				var str:String=(value/per).toFixed(2);
+				return Number(str);
+			}
+			return value;
+		}
+		
+		/**
+		 *获取类型值对的表 
+		 * @param att
+		 * @return 
+		 * 
+		 */
 		public static function getTypeValueMap(att:Q_att_values):HashMap
 		{
 			if (_attrDic[att.id]!=undefined) 
@@ -70,12 +110,13 @@ package com.rpgGame.coreData.cfg
 			var maps:HashMap=new HashMap();
 			for(var i:int=1;i<CharAttributeType.TYPE_NUM;i++){
 				if(att["q_type"+i]!=0){//值和类型都存在
-					maps.put(att["q_type"+i],att["q_value"+i]);					
+					maps.put(att["q_type"+i],att["q_value"+i]);	//type为key，value为value			
 				}
 			}
 			_attrDic[att.id] =maps;
 			return maps;
 		}
+		
 		public static function getTypeValue(attId:int,retHash:HashMap):void
 		{
 			if (retHash==null) 

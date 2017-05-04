@@ -26,8 +26,12 @@ package com.rpgGame.coreData.lang
 		public static const Lostskill_title1:String = "Lostskill_title1";
 		 /**  下一等级效果： */
 		public static const Lostskill_title2:String = "Lostskill_title2";
-		 /**  $开启 */
+		 /**  $级开启 */
 		public static const Lostskill_Opentips:String = "Lostskill_Opentips";
+		 /**  已激活 */
+		public static const Skill_jihuo:String = "Skill_jihuo";
+		 /**  未激活 */
+		public static const Skill_weijihuo:String = "Skill_weijihuo";
 
 	}
 }

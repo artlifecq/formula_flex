@@ -131,8 +131,7 @@ package com.rpgGame.coreData.type
 		public static const IGNORE_DEFENSE:int =32;
 		/**伤害减免百分比**/	
 		public static const HURT_SUB_PERCENT:int =33;
-		/**攻击速度百分比**/	
-		public static const ATT_SPEED_PER:int =43;
+
 		/**战斗力**/	
 		public static const FIGHTING:int =44;
 		/**秒伤**/	
@@ -362,40 +361,36 @@ package com.rpgGame.coreData.type
 			idMap = new Dictionary();
 			
 			//对应SpriteStat
-			pushAttir(LIDAO,"力道");
-			pushAttir(GENGU,"根骨");
-			pushAttir(SHENFA,"身法");
-			pushAttir(HUIGEN,"慧根");
-			pushAttir(HP,"气血");
-			pushAttir(MP,"能量");
-			pushAttir(MAX_HP,"最大气血");
-			pushAttir(MAX_MP,"最大能量");
-			pushAttir(WAI_GONG,"外功");
-			pushAttir(NEI_GONG,"最大能量");
-			pushAttir(DEFENSE_PER,"防御值");
-			pushAttir(CRIT_PER,"暴击率",100);
-			pushAttir(CRIT,"暴击伤害",100);
-			pushAttir(NEI_GONG,"内功");
-			pushAttir(DEFENSE_PER,"防御百分比");
-			pushAttir(CRIT_PER,"暴击率");
-			pushAttir(CRIT,"暴击伤害");
-			pushAttir(ANTI_CRIT_PER,"暴击抗性");
-			pushAttir(HP_REC,"生命回复",1,"/5秒");
-			pushAttir(MP_REC,"能量回复");
-			pushAttir(ANTI_EFFECT,"效果抵抗");
-			pushAttir(HIT,"命中值");
-			pushAttir(MISS,"闪避值");
-			pushAttir(SPEED,"移动速度");
-			pushAttir(ATT_SPEED,"攻击速度");
-			pushAttir(LV,"角色等级");
-			pushAttir(CURE_LIFT,"治疗效果提升",100);
-			pushAttir(SUB_SKILL_CD,"减少技能CD百分比");
-			pushAttir(HURT_ADD_PERCENT,"伤害加深百分比");
-			pushAttir(IGNORE_DEFENSE,"无视防御伤害");
-			pushAttir(HURT_SUB_PERCENT,"伤害减免百分比");		
-			pushAttir(ATT_SPEED_PER,"攻击速度百分比");
-			pushAttir(FIGHTING,"战斗力");
-			pushAttir(HURT_SEC,"秒伤");
+			pushAttir(LIDAO,"力道");//1
+			pushAttir(GENGU,"根骨");//2
+			pushAttir(SHENFA,"身法");//3
+			pushAttir(HUIGEN,"慧根");//4
+			pushAttir(HP,"气血");//10
+			pushAttir(MP,"能量");//11
+			pushAttir(MAX_HP,"最大气血");//12
+			pushAttir(MAX_MP,"最大能量");//13
+			pushAttir(WAI_GONG,"外功");//14
+			pushAttir(NEI_GONG,"内功");//15
+			pushAttir(DEFENSE_PER,"防御值");//16
+			pushAttir(CRIT_PER,"暴击率",1000,"%");//17
+			pushAttir(CRIT,"暴击伤害",1000,"%");//18
+			pushAttir(ANTI_CRIT_PER,"暴击抗性");//19
+			pushAttir(HP_REC,"生命回复",1,"/5秒");//20
+			pushAttir(MP_REC,"能量回复");//21
+			pushAttir(ANTI_EFFECT,"效果抵抗");//22
+			pushAttir(HIT,"命中值");//23
+			pushAttir(MISS,"闪避值");//24
+			pushAttir(SPEED,"移动速度");//25
+			pushAttir(ATT_SPEED,"攻击速度");//26
+			pushAttir(LV,"角色等级");//27
+			pushAttir(CURE_LIFT,"治疗效果提升",1000,"%");//28
+			pushAttir(SUB_SKILL_CD,"减少技能CD百分比");//29
+			pushAttir(HURT_ADD_PERCENT,"伤害加深百分比");//30
+			pushAttir(HURT_ADD_FIX,"伤害加深固定值");//31
+			pushAttir(IGNORE_DEFENSE,"无视防御伤害");//32
+			pushAttir(HURT_SUB_PERCENT,"伤害减免百分比");//33		
+			pushAttir(FIGHTING,"战斗力");//44
+			pushAttir(HURT_SEC,"秒伤");//45
 		}
 		
 		setup();

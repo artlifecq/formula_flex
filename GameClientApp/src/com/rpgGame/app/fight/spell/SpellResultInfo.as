@@ -12,7 +12,6 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.netData.fight.bean.AttackResultInfo;
 	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
-	import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
 	
 	import flash.geom.Point;
 
@@ -124,18 +123,17 @@ package com.rpgGame.app.fight.spell
 					}
 				}
 				
-				var stiffTime : Number = 0;//击飞时间，暂时没有，所以先为false
-				if (stiffTime > 0)
-				{
-					hurtResultVO.stiffTime = stiffTime;
-				}
 				
-				var hurtTimes : int = 1; //伤害次数
-				for (var hurtTimeI : int = 0; hurtTimeI < hurtTimes; hurtTimeI++) //hp - 3*50 = curLife
+				var hurtType : int = resultInfo.fightResult
+				var hurtAmount : int = resultInfo.damage / hurtResultVO.hurtTimes; //本次
+				var remainderAmount : int = resultInfo.damage % hurtResultVO.hurtTimes;
+				
+				for (var hurtTimeI : int = 0; hurtTimeI < hurtResultVO.hurtTimes; hurtTimeI++) //hp - 3*50 = curLife
 				{
-					var hurtTypeAmount : int = resultInfo.damage;
-					var hurtType : int = resultInfo.fightResult
-					var hurtAmount : int = resultInfo.damage; //本次
+					if(hurtTimeI == (hurtResultVO.hurtTimes-1) && remainderAmount > 0)
+					{
+						hurtAmount += remainderAmount;
+					}
 					var sVo : FightSingleHurt = new FightSingleHurt(hurtType, hurtAmount, hurtResultVO.targetID);
 					hurtResultVO.addHurt(sVo);
 				}

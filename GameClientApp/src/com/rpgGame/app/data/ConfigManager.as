@@ -3,6 +3,7 @@ package com.rpgGame.app.data
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
+	import com.rpgGame.app.manager.mount.HorseExtraItemInfo;
 	import com.rpgGame.coreData.cfg.AddSpriteStatCfgData;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
@@ -34,6 +35,9 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.HeChengData;
 	import com.rpgGame.coreData.cfg.HintCfgData;
 	import com.rpgGame.coreData.cfg.HintConfig;
+	import com.rpgGame.coreData.cfg.HorseAdditionData;
+	import com.rpgGame.coreData.cfg.HorseConfigData;
+	import com.rpgGame.coreData.cfg.HorseSpellData;
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
 	import com.rpgGame.coreData.cfg.MailCfgData;
@@ -54,6 +58,8 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.WindowInfoData;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
+	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
+	import com.rpgGame.coreData.cfg.cheats.CheatsNodeCfg;
 	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryStaticConfigData;
 	import com.rpgGame.coreData.cfg.country.CountryTaoNiCfgData;
@@ -236,7 +242,20 @@ package com.rpgGame.app.data
 			TaskMissionCfgData.setup(dic[ConfigClassRegister.Q_mission_base]);
 			TaskMissionCfgData.setupReword(dic[ConfigClassRegister.Q_mission_reword]);
 			TaskMissionCfgData.setupSegment(dic[ConfigClassRegister.Q_mission_segment]);
+
+			//心法
+			CheatsCfg.setup(dic[ConfigClassRegister.Q_cheats]);
+			CheatsNodeCfg.setup(dic[ConfigClassRegister.Q_cheats_node]);
+
 			TaskMissionCfgData.setupSection(dic[ConfigClassRegister.Q_mission_section]);
+			//坐骑数据
+			HorseConfigData.setConfig(dic[ConfigClassRegister.Q_horse]);
+			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
+			HorseExtraItemInfo.createInfo();
+
+			//心法
+			CheatsCfg.setup(dic[ConfigClassRegister.Q_cheats]);
+			CheatsNodeCfg.setup(dic[ConfigClassRegister.Q_cheats_node]);
 		}
 		
 		/**

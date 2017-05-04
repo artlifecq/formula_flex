@@ -9,6 +9,8 @@ package com.rpgGame.appModule.jingmai.sub
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.MeridianSender;
 	import com.rpgGame.appModule.jingmai.MeridianStoneSelectPanelExt;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.GameColorUtil;
@@ -36,13 +38,15 @@ package com.rpgGame.appModule.jingmai.sub
 	
 	import gs.TweenMax;
 	
+	import org.game.netCore.data.long;
 	import org.mokylin.skin.app.beibao.jingmai.mc.UIMovieClipJingmai;
 	import org.mokylin.skin.app.beibao.mc.UIMovieClipBianshi_guang;
 	
+	import starling.display.DisplayObject;
 	import starling.events.Event;
 	import starling.filters.FragmentFilter;
 
-	public class MerdianPoint
+	public class MerdianPoint implements IStoneSelector
 	{
 		private var _GRAY_FILTER:FragmentFilter;
 		public var imgPoint:UIAsset;
@@ -387,7 +391,8 @@ package com.rpgGame.appModule.jingmai.sub
 							}
 							else
 							{
-								NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7017));
+								AppManager.showApp(AppConstant.JINGMAI_STONE);
+								//NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7017));
 							}
 						}
 						
@@ -428,7 +433,15 @@ package com.rpgGame.appModule.jingmai.sub
 		{
 			return _type;
 		}
-
+		public function getView():DisplayObject
+		{
+			return this.imgPoint;
+		}
+		
+		public function selectStone(item:long):void
+		{
+			MeridianSender.reqSetUpPoint(data.MeridId,data.acuPointId,item);
+		}
 		
 	}
 }

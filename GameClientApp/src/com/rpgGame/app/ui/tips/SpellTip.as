@@ -80,6 +80,12 @@ package com.rpgGame.app.ui.tips
 			var info:SkillInfo=MainRoleManager.actorInfo.spellList.getSkillInfo(id);
 			if(info==null)
 				info = MainRoleManager.actorInfo.otherList.getSkillInfo(id);
+			if(info == null)
+			{
+				info = new SkillInfo();
+				info.skillModelId = id;
+				info.skillLevel = 1;
+			}
 			var cfg:Q_skill_model=SpellDataManager.getSpellData(info.skillModelId,info.skillLevel);
 			var riseCfg:Q_skill_model=SpellDataManager.getSpellData(id,info.skillLevel+1);
 			if(info.skillLevel==cfg.q_max_grade&&info.skillLevel!=1){

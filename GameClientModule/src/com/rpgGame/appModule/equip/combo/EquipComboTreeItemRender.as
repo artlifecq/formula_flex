@@ -6,7 +6,7 @@ package com.rpgGame.appModule.equip.combo
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_hecheng;
 	
-	import feathers.controls.Button;
+	import feathers.controls.UIAsset;
 	import feathers.controls.renderers.DefaultTreeItemRender;
 	import feathers.data.TreeNode;
 	
@@ -59,6 +59,13 @@ package com.rpgGame.appModule.equip.combo
 				renderTreeNode(treeNode);
 				tree.updateTree();
 			}
+			
+			if(treeNode.data is DetailNodeInfo){
+				var oldindex:int=tree.selectedIndex;
+				tree.selectedItem=treeNode;
+				tree.dataProvider.updateItemAt(tree.selectedIndex);
+				tree.dataProvider.updateItemAt(oldindex);
+			}
 		}
 		
 		
@@ -102,13 +109,23 @@ package com.rpgGame.appModule.equip.combo
 				hechengData=detailInfo.data;
 				if(hechengData==null) return;
 				var cailiao:Array=JSONUtil.decode(hechengData.q_cost_items);
-				var cailiaoId:int=parseInt(cailiao[0]);
+				var cailiaoId:int=parseInt(cailiao[0]);//材料id
+				var cailiaoNum:int=parseInt(cailiao[1]);//合成材料数;
 				var itemByBagNum:int=BackPackManager.instance.getBagItemsCountById(cailiaoId);
+				var max:int=Math.floor(itemByBagNum/cailiaoNum);//能合成的数量
+				var itemId:int=hechengData.q_item_id;
 				var qianSkin:Cont_Item=_skin.detail_item.skin as Cont_Item;
-				qianSkin.lb_Dispaly.color=ItemConfig.getItemQualityColor(cailiaoId);
-				qianSkin.lb_Dispaly.text=ItemConfig.getItemName(cailiaoId)+"("+itemByBagNum+")";
+				qianSkin.lb_Dispaly.color=ItemConfig.getItemQualityColor(itemId);
+				qianSkin.lb_Dispaly.text=ItemConfig.getItemName(itemId)+"("+max+")";
 				qianSkin.bg1.visible=detailInfo.data.q_subson_type%2==0;
 				qianSkin.bg2.visible=!qianSkin.bg1.visible;
+				
+				if(tree.selectedItemRender==this){
+					qianSkin.selectedImg.visible=true;
+				}else{
+					qianSkin.selectedImg.visible=false;
+				}
+				
 			}
 		}
 	}

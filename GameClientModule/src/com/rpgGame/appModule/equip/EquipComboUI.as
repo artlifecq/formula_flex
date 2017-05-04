@@ -1,6 +1,5 @@
 package com.rpgGame.appModule.equip
 {
-	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -26,6 +25,7 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.coreData.clientConfig.Q_hecheng;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ComboItemInfo;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.equip.message.ResEquipOperateResultMessage;
@@ -36,7 +36,6 @@ package com.rpgGame.appModule.equip
 	import feathers.controls.UIAsset;
 	import feathers.data.ListCollection;
 	import feathers.data.TreeNode;
-	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
 	import feathers.themes.GuiThemeStyle;
 	import feathers.utils.filter.GrayFilter;
@@ -44,8 +43,6 @@ package com.rpgGame.appModule.equip
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhuangbei.hecheng.HeCheng_Skin;
 	import org.mokylin.skin.component.list.ListSkin1;
-	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat;
-	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 	
 	import starling.events.Event;
 	
@@ -76,6 +73,8 @@ package com.rpgGame.appModule.equip
 		private var userMoney:Number;
 
 		private var findRootNode:TreeNode;
+		private var firstId:int;
+		private var findId:int;
 		
 		public function EquipComboUI()
 		{
@@ -115,6 +114,7 @@ package com.rpgGame.appModule.equip
 			var mainNodeInfo:MainNodeInfo;
 			var subNodeInfo:SubNodeInfo;
 			var detailNodeInfo:DetailNodeInfo;
+			
 			for(i=0;i<num;i++){
 				mainNodeInfo=new MainNodeInfo();
 				mainNodeInfo.type=typeList[i];
@@ -134,6 +134,9 @@ package com.rpgGame.appModule.equip
 					for(j=0;j<details.length;j++){
 						detailNodeInfo=new DetailNodeInfo();
 						detailNodeInfo.data=HeChengData.getSonbySonTypeListByType(mainNodeInfo.type,subList[0],details[j]);
+						if(firstId==0){
+							firstId=detailNodeInfo.data.q_item_id;
+						}
 						children.push(detailNodeInfo);
 					}
 					tempNode.addChildren(children);//添加根节点
@@ -150,6 +153,9 @@ package com.rpgGame.appModule.equip
 						for(k=0;k<details.length;k++){
 							detailNodeInfo=new DetailNodeInfo();
 							detailNodeInfo.data=HeChengData.getSonbySonTypeListByType(mainNodeInfo.type,subList[j],details[k]);
+							if(firstId==0){
+								firstId=detailNodeInfo.data.q_item_id;
+							}
 							childrens.push(detailNodeInfo);
 						}
 						detailList.push(childrens);
@@ -199,28 +205,66 @@ package com.rpgGame.appModule.equip
 			userGold=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_GOLD);
 			userMoney=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
 			
+			var node:TreeNode=_skin.tree.rootNode;
 			if(data){
-				var node:TreeNode=_skin.tree.rootNode;
-				var findId:int=data as int;
-				findNode(node,findId);
-				expandedNode(findRootNode);
-				_skin.tree.updateTree();
-				_skin.tree.selectedIndex=getIndexById(findId);
-				onSelected(null);
+				var info:ComboItemInfo=data as ComboItemInfo;
+				if(info.targetId!=0){
+					findId=info.targetId;
+				}else{
+					getFindId(node,info.sourceId);
+				}
+			}else{
+				findId=firstId;
 			}
+			
+			findNode(node,findId);
+			expandedNode(findRootNode);
+			_skin.tree.updateTree();
+			var oldindex:int=_skin.tree.selectedIndex;
+			_skin.tree.selectedItem=getDataById(findId);
+			_skin.tree.dataProvider.updateItemAt(oldindex);
+			_skin.tree.dataProvider.updateItemAt(_skin.tree.selectedIndex);
+			onSelected(null);
 		}
 		
-		private function getIndexById(findId:int):int
+		private function getFindId(node:TreeNode,id:int):Boolean
+		{
+			var len:int=node.children?node.children.length:0;
+			var child:TreeNode = null;
+			var detailInfo:DetailNodeInfo;
+			var hechengData:Q_hecheng;
+			for(var i:int = 0; i < len;i++ )
+			{
+				child = node.children[i];
+				detailInfo=child.data as DetailNodeInfo;
+				if(detailInfo){//是跟节点
+					hechengData=detailInfo.data;
+					var cailiao:Array=JSONUtil.decode(hechengData.q_cost_items);
+					cailiaoId=parseInt(cailiao[0]);
+					if(cailiaoId==id){//合成材料正确
+						findId=hechengData.q_item_id;
+						return true;
+					}
+				}else{
+					if(getFindId(child,id)){
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+		
+		private function getDataById(findId:int):TreeNode
 		{
 			var datas:ListCollection=_skin.tree.dataProvider;
 			var arr:Array=datas.data as Array;
 			for(var i:int=0;i<arr.length;i++){
 				var node:TreeNode=arr[i] as TreeNode
 				if(node.data is DetailNodeInfo&&DetailNodeInfo(node.data).data.q_item_id==findId){
-					return i;
+					return node;
 				}
 			}
-			return 0;
+			return null;
 		}
 		
 		private function findNode(node:TreeNode,id:int):Boolean
@@ -272,6 +316,9 @@ package com.rpgGame.appModule.equip
 			super.hide();
 			clearEvent();
 			clearAll();
+			var oldindex:int=_skin.tree.selectedIndex;
+			_skin.tree.selectedItem=null;
+			_skin.tree.dataProvider.updateItemAt(oldindex);
 			_nowSelect=null;
 		}
 		
@@ -283,6 +330,10 @@ package com.rpgGame.appModule.equip
 			FaceUtil.SetItemGrid(icon,itemInfo);
 			icon.selectImgVisible=false;
 			icon.setIconResName(ClientConfig.getItemIcon(ItemConfig.getItemIcon(_nowSelect.q_item_id),IcoSizeEnum.ICON_64));		
+			
+			_skin.equip_name.color=ItemConfig.getItemQualityColor(_nowSelect.q_item_id);
+			_skin.equip_name.text=itemInfo.name;
+			
 			setCaiLiaoData();
 		}
 		
@@ -454,6 +505,8 @@ package com.rpgGame.appModule.equip
 			{
 				_hechengNum--;
 				updateShowNum();
+			}else{
+				NoticeManager.showNotifyById(2010);
 			}
 		}
 		
@@ -464,7 +517,9 @@ package com.rpgGame.appModule.equip
 			{
 				_hechengNum++;
 				updateShowNum();
-			}		
+			}else{
+				NoticeManager.showNotifyById(2011);
+			}
 		}
 		
 		/**合成最大数量*/
@@ -475,6 +530,8 @@ package com.rpgGame.appModule.equip
 				_hechengNum=_hechengMaxNum;
 				if(_hechengNum==0) _hechengNum=1;
 				updateShowNum();
+			}else{
+				NoticeManager.showNotifyById(2011);
 			}
 		}
 		
@@ -512,7 +569,7 @@ package com.rpgGame.appModule.equip
 				_skin.tree.dataProvider.updateAll();
 				
 				this.playInter3DAt(ClientConfig.getEffect("ui_hechenghuiju"),0,0,1,null,addEftComple);
-				UIPopManager.showAlonePopUI(CenterEftPop,"ui_qianghuachenggong");
+				UIPopManager.showAlonePopUI(CenterEftPop,"ui_hechengchenggong");
 			}
 		}
 		
@@ -526,7 +583,6 @@ package com.rpgGame.appModule.equip
 			if(!mod){
 				return;
 			}
-			if(_nowSelect&&_nowSelect.q_subson_type==mod.q_subson_type) return;
 			_nowSelect=mod;
 			setShowData();
 		}

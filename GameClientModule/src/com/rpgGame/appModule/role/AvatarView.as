@@ -11,6 +11,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.ItemSender;
+	import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.app.view.uiComponent.menu.Menu;
@@ -20,6 +21,8 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
+	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
@@ -28,6 +31,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.lang.LangMenu;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.AvatarMaskType;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RoleStateType;
@@ -148,6 +152,7 @@ package com.rpgGame.appModule.role
 			_avatarContainer.addChild3D(_avatar);
 			_showAvatarData = new RoleData(0);
 			
+			
 			_zhandouliEft= _zhandouliEftContaner.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JIEMIAN_ZHANDOULI),135,28,0);
 		}
 		
@@ -261,7 +266,7 @@ package com.rpgGame.appModule.role
 			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateTxt);//基本属性改变
 			
 			EventManager.addEvent(ItemEvent.ITEM_ADD,onFreshItems);
-			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
+			EventManager.addEvent(ItemEvent.UNWEAR_EQUIPITEM,onFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_GET, getItem);
 			
@@ -297,7 +302,7 @@ package com.rpgGame.appModule.role
 			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateTxt);//基本属性改变
 			
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,onFreshItems);
-			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
+			EventManager.removeEvent(ItemEvent.UNWEAR_EQUIPITEM,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_GET, getItem);
 			EventManager.removeEvent(AvatarEvent.EQUIP_CHANGE, equipChange);
@@ -412,8 +417,12 @@ package com.rpgGame.appModule.role
 			this._showAvatarData.avatarInfo.deputyWeaponEffectScale=_roleData.avatarInfo.deputyWeaponEffectScale;
 			
 			this._avatar.setRoleData(this._showAvatarData);
-			this._avatar.curRole.setScale(1.7);			
+			
+			this._avatar.curRole.setScale(1.7);	
+//			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.DIALOG_MASK,_avatar,144,-371,1.7);
 		}
+		
+	
 		
 		public function onTouch(e:TouchEvent):void
 		{

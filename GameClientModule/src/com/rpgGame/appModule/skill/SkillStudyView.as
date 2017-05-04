@@ -67,9 +67,10 @@ package com.rpgGame.appModule.skill
 			_skillContainer=new Sprite();
 			this._skin.vs_bar.width=550;
 			this._skin.vs_bar.x=20;
-			this._skin.vs_bar.scrollBarDisplayMode = ScrollBarDisplayMode.FIXED;
-			this._skin.vs_bar.verticalScrollBarPosition =RelativePosition.RIGHT;
-			this._skin.vs_bar.verticalScrollPolicy = ScrollPolicy.OFF;
+			this._skin.vs_bar.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
+//			this._skin.vs_bar.verticalScrollBarPosition =RelativePosition.RIGHT;
+//			this._skin.vs_bar.verticalScrollPolicy = ScrollPolicy.OFF;
+			this._skin.vs_bar.horizontalScrollPolicy=ScrollPolicy.OFF;
 			
 			
 			_jobTitle1=new JinengTitle_Skin();
@@ -211,7 +212,7 @@ package com.rpgGame.appModule.skill
 			EventManager.removeEvent(SpellEvent.SELECTE_SPELL,selecteSpell);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateChange);
 			EventManager.removeEvent(SpellEvent.SPELL_ADD,updateSkillList);
-			EventManager.removeEvent(ItemEvent.ITEM_ADD,updateChange);
+			EventManager.removeEvent(ItemEvent.ITEM_ADD,addItem);
 			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateChange);
 			EventManager.removeEvent(SpellEvent.SPELL_UPGRADE,spellUpgrade);
 			EventManager.removeEvent(SpellEvent.SPELL_RISE,spellRise);

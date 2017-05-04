@@ -2,6 +2,7 @@ package com.rpgGame.app.controller.keyboard
 {
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.mount.MountManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.core.app.AppConstant;
@@ -12,9 +13,9 @@ package com.rpgGame.app.controller.keyboard
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.info.key.KeyInfo;
 	
+	import flash.utils.getTimer;
+	
 	import starling.display.DisplayObjectContainer;
-    
-    import flash.utils.getTimer;
 
 	public class KeyFuncProcess
 	{
@@ -68,9 +69,9 @@ package com.rpgGame.app.controller.keyboard
 					if (!ClientConfig.isBanShu)
 						AppManager.showApp(AppConstant.ROLE_PANEL);
 					break;
-				case "6": //V 技能
+				case "6": //V 坐骑
 					if (!ClientConfig.isBanShu)
-						AppManager.showApp(AppConstant.SPELL_PANEL);
+						AppManager.showApp(AppConstant.MOUNT_PANEL);
 					break;
 				case "7": //L 任务
 					if (!ClientConfig.isBanShu)
@@ -83,7 +84,7 @@ package com.rpgGame.app.controller.keyboard
 					break;
 				case "9": //P 队伍
 					if (!ClientConfig.isBanShu)
-						AppManager.showApp(AppConstant.TEAM_PANEL);
+						AppManager.showApp(AppConstant.EQUIP_PANL);
 					break;
 				case "10": //O 商城
 					/*if (!ClientConfig.isBanShu)
@@ -112,7 +113,8 @@ package com.rpgGame.app.controller.keyboard
 					break;
 				case "29": //T 坐骑上下马
 					if (!ClientConfig.isBanShu)
-						MountManager.setMountRide();
+//						MountManager.setMountRide();
+						HorseManager.instance().setHouseRide();
 					break;
 				case "30": //U
 					break;

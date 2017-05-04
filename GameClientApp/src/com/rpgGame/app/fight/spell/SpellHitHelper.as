@@ -209,6 +209,11 @@ package com.rpgGame.app.fight.spell
 			{
 				return;
 			}
+			if(atkor == null)
+			{
+				GameLog.addShow("因为移屏导致了攻击者在视野外，所以，攻击者为空，导致了报错！************************");
+				return;
+			}
 			var baseInfo : RoleData = hurter.data as RoleData;
 			if (baseInfo == null)
 			{
