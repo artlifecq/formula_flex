@@ -10,7 +10,7 @@ package com.rpgGame.core.events
 	public class ItemEvent 
 	{
 		
-	
+		
 		/**
 		 *初始化物品
 		 */
@@ -25,6 +25,10 @@ package com.rpgGame.core.events
 		 *物品删除
 		 */
 		public static const ITEM_REMOVE:int=UNIQUEID.NEXT;
+		/**
+		 *卸载装备
+		 */
+		public static const UNWEAR_EQUIPITEM:int=UNIQUEID.NEXT;
 		/**
 		 *物品删除列表
 		 */
@@ -62,7 +66,20 @@ package com.rpgGame.core.events
 		 *洗炼消息
 		 */
 		public static const ITEM_WASH_MSG:int = UNIQUEID.NEXT;
+		/**
+		 *合成消息
+		 */
+		public static const ITEM_COMBO_MSG:int = UNIQUEID.NEXT;
 		
+		/**
+		 * 合成选择
+		 * */
+		public static const ITEM_HECHENG_SELECT:int=UNIQUEID.NEXT;
+		
+		/**
+		 * 继承消息
+		 * */
+		public static const ITEM_JICHENG_MSG:int=UNIQUEID.NEXT;
 		
 		/** 删除物品 **/
 		public static const ITEM_DELETE:int = UNIQUEID.NEXT;

@@ -22,7 +22,7 @@ package com.rpgGame.app.ui.main.shortcut
 	import org.mokylin.skin.mainui.shortcut.shortcut_Skin;
 	
 	import starling.animation.IAnimatable;
-
+	
 	public class HpPropgressBar implements IAnimatable
 	{
 		private var _shor:ShortcutBar;
@@ -64,6 +64,7 @@ package com.rpgGame.app.ui.main.shortcut
 					_skin.right_jintiao.visible =false;
 					EventManager.addEvent(MainPlayerEvent.NOWMP_CHANGE,MpCHangeHandler);
 					EventManager.addEvent(MainPlayerEvent.MAXMP_CHANGE,MpCHangeHandler);
+					EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,MpCHangeHandler);
 				}
 			}else{
 				_display = _skin.left_xuecaoMask; 
@@ -141,7 +142,7 @@ package com.rpgGame.app.ui.main.shortcut
 					if(_info.job == JobEnum.ROLE_4_TYPE)
 						return [currentmp,maxmp,7];
 					else(_info.job == JobEnum.ROLE_4_TYPE)
-						return [currentmp,maxmp,5];
+					return [currentmp,maxmp,5];
 				}
 			}else{
 				return [_info.totalStat.hp,_info.totalStat.life];
@@ -161,9 +162,9 @@ package com.rpgGame.app.ui.main.shortcut
 				return ;
 			percentage(_info.totalStat.hp/_info.totalStat.life);
 		}
-		private function MpCHangeHandler(role:RoleData):void
+		private function MpCHangeHandler(role:RoleData=null):void
 		{
-			if(role != _info)
+			if(role!=null && role != _info)
 				return ;
 			var currentmp:int = _info.totalStat.getStatValue(CharAttributeType.MP);
 			var maxmp:int = _info.totalStat.getStatValue(CharAttributeType.MAX_MP)
@@ -215,14 +216,14 @@ package com.rpgGame.app.ui.main.shortcut
 			}
 			if(_tipinfodata!=null)
 				_tipinfodata.refeashValue();
-				
+			
 		}
 		private var totalNum:Number = 0;
 		public function advanceTime(time:Number):void
 		{
 			totalNum +=time/5;
 			percentage(totalNum%1.0);
-//			percentage(0);
+			//			percentage(0);
 		}
 	}
 }

@@ -108,6 +108,14 @@ package com.rpgGame.coreData.cfg.item
 		 * 洗炼装备消耗
 		 */
 		public static const SMELT_USE:int =rEnum.next;
+		/**
+		 * 继承装备列表
+		 */
+		public static const IHT_LIST:int =rEnum.next;
+		/**
+		 * 继承装备消耗
+		 */
+		public static const IHT_USE:int =rEnum.next;
 		
 	}
 }

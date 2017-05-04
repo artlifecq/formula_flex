@@ -128,11 +128,11 @@ package com.rpgGame.app.view.icon
 			}
 			_qualityEft.touchable=false;
 			if(_qualityId==Quality.GREEN){
-				_qualityEft.styleClass = org.mokylin.skin.common.mc.UIMovieClipQ_quality_huang;
-			}else{
 				_qualityEft.styleClass = org.mokylin.skin.common.mc.UIMovieClipQ_quality_zi;
+			}else{
+				_qualityEft.styleClass = org.mokylin.skin.common.mc.UIMovieClipQ_quality_huang;
 			}
-			_qualityEft.frameRate=30;
+			_qualityEft.frameRate=20;
 //			var scaleV:Number=(90/64);
 			_qualityEft.width=_iconSize;
 			_qualityEft.height=_iconSize;
@@ -465,14 +465,14 @@ package com.rpgGame.app.view.icon
 			if(_lvImage){
 				addChild( _lvImage );
 			}
-			if(_qualityEft){
-				addChild( _qualityEft );
-			}
 			if( _selectImage != null )
 				addChild( _selectImage );
 			
 			if(_wearImage){
 				addChild( _wearImage );
+			}
+			if(_qualityEft){
+				addChild( _qualityEft );
 			}
 		}
 		

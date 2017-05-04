@@ -54,9 +54,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(107102, onUnwearEquipItemMessage );
 			SocketConnection.addCmdListener(107105, onResEquipInfoMessage );
 			SocketConnection.addCmdListener(107106, onResEquipOperateResultMessage );
-			
-			
-			
+	
 			finish();
 		}
 		
@@ -73,6 +71,11 @@ package com.rpgGame.app.cmdlistener
 					break;
 				case EquipOperateType.WASH_NORMAL:
 					EventManager.dispatchEvent(ItemEvent.ITEM_WASH_MSG,msg);
+					break;
+				case EquipOperateType.COMBO_NORMAL:
+					EventManager.dispatchEvent(ItemEvent.ITEM_COMBO_MSG,msg);
+				case EquipOperateType.JICHENG_NORMAL:
+					EventManager.dispatchEvent(ItemEvent.ITEM_JICHENG_MSG,msg);
 					break;
 			}
 		}

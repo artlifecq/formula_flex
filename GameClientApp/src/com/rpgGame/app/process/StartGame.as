@@ -25,6 +25,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.AmountTip;
     import com.rpgGame.app.ui.tips.BuffTip;
     import com.rpgGame.app.ui.tips.EquipTip;
+    import com.rpgGame.app.ui.tips.ExtarItemTip;
     import com.rpgGame.app.ui.tips.FriendHeroTips;
     import com.rpgGame.app.ui.tips.ItemTip;
     import com.rpgGame.app.ui.tips.LostSkillTip;
@@ -36,6 +37,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.NormalTip;
     import com.rpgGame.app.ui.tips.OpenGridTip;
     import com.rpgGame.app.ui.tips.PKModeTip;
+    import com.rpgGame.app.ui.tips.PassiveSpillTip;
     import com.rpgGame.app.ui.tips.SocietyBuildItemTip;
     import com.rpgGame.app.ui.tips.SocietySpellTotalTip;
     import com.rpgGame.app.ui.tips.SpellTip;
@@ -198,6 +200,8 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.PROPCHANGE_TIP, TxtPropChangeTip);
 			TipManager.registerTipsParserClass(TipType.LOSTSKILL_TIP,LostSkillTip);
 			TipManager.registerTipsParserClass(TipType.MERIDIAN_TIP,MeridainPointTip);
+			TipManager.registerTipsParserClass(TipType.PASSIVESKILL_TIP,PassiveSpillTip);
+			TipManager.registerTipsParserClass(TipType.EXTARITEM_TIP,ExtarItemTip);
 			TipManager.registerTipsParserClass(TipType.CHEATS_NODE_TIP,CheatsNodePointTip);
 			TipManager.registerTipsParserClass(TipType.CHEATS_TIP,CheatsTipExt);
 			TipManager.registerTipsParserClass(TipType.CHEATS_INTRADUCTION_TIP,CheatsIntraductTipExt);

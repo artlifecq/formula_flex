@@ -46,8 +46,9 @@ package com.rpgGame.app.manager.collect
 				return;
 
 			isShowing = true;
-
-			AppManager.showAppNoHide(AppConstant.COLLECT_PANEL, [title, time]);
+			
+			
+			//AppManager.showAppNoHide(AppConstant.COLLECT_PANEL, [title, time]);
 			var ref : CollectStateReference = MainRoleManager.actor.stateMachine.getReference(CollectStateReference) as CollectStateReference;
 			ref.setParams(time);
 			ref.onEnd(onCollectComplete, callBack, args);

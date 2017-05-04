@@ -4,7 +4,7 @@ package com.rpgGame.coreData.cfg.item
 	
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
-
+	
 	/**
 	 *装备强化
 	 *@author dik
@@ -18,6 +18,8 @@ package com.rpgGame.coreData.cfg.item
 		
 		private static var _dataDic:Dictionary;
 		
+		public static var maxStrengLv:int=0;
+		
 		public static function setup( data:ByteArray ):void
 		{
 			_dataDic = new Dictionary();
@@ -27,6 +29,7 @@ package com.rpgGame.coreData.cfg.item
 			for each(var info : Q_equip_strength in arr) {
 				var key:String=getKey(info.q_kind,info.q_job,info.q_strength);
 				_dataDic[key] = info;
+				maxStrengLv=maxStrengLv<info.q_strength?info.q_strength:maxStrengLv;
 			}
 		}
 		
@@ -42,6 +45,15 @@ package com.rpgGame.coreData.cfg.item
 		{
 			var key:String=getKey(kind,job,streng);
 			return _dataDic[key];
+		}
+		
+		/**
+		 * 判断是否是最大等级
+		 * */
+		public static function isMax(lv:int):Boolean
+		{
+			if(lv>=maxStrengLv) return true;
+			return false;
 		}
 		
 		/**

@@ -95,37 +95,40 @@ package com.rpgGame.app.manager.hint
 				hintSet = HintCfgData.getHintTypeSet(hintBox.noticeType);
 				if (!hintSet)
 					continue;
-				if (hintSet.posX == 0 && hintSet.posY == 0)
+				//由于导表工具不支持Number型.只能用字符串转了
+				var posX:Number=Number(hintSet.posX);
+				var posY:Number=Number(hintSet.posY);
+				if (posX == 0 && posY == 0)
 					continue;
 
-				if (hintSet.posX >= 0 && hintSet.posX <= 1)
+				if (posX >= 0 && posX <= 1)
 				{
 					//是个小数应该就是百分比
-					hintBox.x = int((Starling.current.stage.stageWidth - hintSet.width) * hintSet.posX);
+					hintBox.x = int((Starling.current.stage.stageWidth - hintSet.width) * posX);
 				}
-				else if (hintSet.posX > 1)
+				else if (posX > 1)
 				{
-					hintBox.x = hintSet.posX;
+					hintBox.x = posX;
 				}
-				else if (hintSet.posX < 0)
+				else if (posX < 0)
 				{
 					//小于0就反向了
-					hintBox.x = int(Starling.current.stage.stageWidth + hintSet.posX);
+					hintBox.x = int(Starling.current.stage.stageWidth + posX);
 				}
 
-				if (hintSet.posY >= 0 && hintSet.posY <= 1)
+				if (posY >= 0 && posY <= 1)
 				{
 					//是个小数应该就是百分比
-					hintBox.y = int((Starling.current.stage.stageHeight - hintSet.height) * hintSet.posY);
+					hintBox.y = int((Starling.current.stage.stageHeight - hintSet.height) * posY);
 				}
-				else if (hintSet.posY > 1)
+				else if (posY > 1)
 				{
-					hintBox.y = hintSet.posY;
+					hintBox.y = posY;
 				}
-				else if (hintSet.posY < 0)
+				else if (posY < 0)
 				{
 					//小于0就反向了
-					hintBox.y = int(Starling.current.stage.stageHeight + hintSet.posY);
+					hintBox.y = int(Starling.current.stage.stageHeight + posY);
 				}
 				trace(hintBox.x, hintBox.y);
 			}

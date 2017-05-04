@@ -78,6 +78,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.map.message.ResPlayerStopMessage;
 	import com.rpgGame.netData.map.message.ResRoundGoodsExtraMessage;
 	import com.rpgGame.netData.map.message.ResRoundGoodsMessage;
+	import com.rpgGame.netData.map.message.ResRoundMonsterDisappearMessage;
 	import com.rpgGame.netData.map.message.ResRoundObjectsMessage;
 	import com.rpgGame.netData.map.message.ResWeaponChangeMessage;
 	import com.rpgGame.netData.map.message.SCAttachStateChangeMessage;
@@ -127,6 +128,8 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(101123, RecvResPlayerRunEndMessage);
 			SocketConnection.addCmdListener(101148, RecvSCSceneObjMoveMessage);
 			SocketConnection.addCmdListener(101125, RecvResRoundObjectsMessage);
+			SocketConnection.addCmdListener(101106, onResRoundMonsterDisappearMessage);
+			
 			SocketConnection.addCmdListener(101128, onResChangePositionMessage);
 			//场景中有对象血量有变化. 可能是因为状态, 可能是因为吃药
 			SocketConnection.addCmdListener(103105, RecvBroadcastPlayerAttriChangeMessage);
@@ -561,6 +564,23 @@ package com.rpgGame.app.cmdlistener.scene
 			}
 		}
 		
+		private function onResRoundMonsterDisappearMessage(msg:ResRoundMonsterDisappearMessage):void
+		{
+			GameLog.addShow("onResRoundMonsterDisappearMessage  通知来了！ 看看通知了什么！ \t 删除对象个数：" + msg.monstersIds.length);
+			var delArr:Vector.<long> = msg.monstersIds;
+			for(var i:int=0;i<delArr.length;i++)
+			{
+				var roleID:uint = delArr[i].ToGID();
+				onSceneRemoveObject(roleID);
+				GameLog.addShow("删除对象客户端id：" + roleID);
+				GameLog.addShow("删除对象服务器id：" + delArr[i].ToString());
+			}
+			
+		}
+		
+		
+		
+		
 		private function addDropGoods(buffer:ByteArray):void
 		{
 			var info:DropGoodsInfo=new DropGoodsInfo();
@@ -814,6 +834,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var mapId : int = msg.mapId;
 			MainRoleManager.actorInfo.mapID = mapId;
 			SceneSwitchManager.changeMap();
+			
 		}
 		
 		/**

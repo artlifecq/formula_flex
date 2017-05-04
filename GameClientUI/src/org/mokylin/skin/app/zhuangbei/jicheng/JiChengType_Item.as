@@ -2,8 +2,8 @@ package org.mokylin.skin.app.zhuangbei.jicheng
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
-	import feathers.controls.Radio;
 	import feathers.controls.StateSkin;
+	import feathers.controls.ToggleButton;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.component.radio.RadioButtonSkin_1;
 
@@ -19,7 +19,7 @@ package org.mokylin.skin.app.zhuangbei.jicheng
 		//==========================================================================
 		public var labelDisplay:feathers.controls.Label;
 
-		public var rdo_type:feathers.controls.Radio;
+		public var rdo_type:feathers.controls.ToggleButton;
 
 
 		//==========================================================================
@@ -66,9 +66,9 @@ package org.mokylin.skin.app.zhuangbei.jicheng
 			return temp;
 		}
 
-		private function rdo_type_i():feathers.controls.Radio
+		private function rdo_type_i():feathers.controls.ToggleButton
 		{
-			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			var temp:feathers.controls.ToggleButton = new feathers.controls.ToggleButton();
 			rdo_type = temp;
 			temp.name = "rdo_type";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];

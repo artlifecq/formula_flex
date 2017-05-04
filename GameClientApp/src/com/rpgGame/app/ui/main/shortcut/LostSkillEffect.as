@@ -90,7 +90,9 @@ package com.rpgGame.app.ui.main.shortcut
 			if(_content==null)
 			{
 				_content = new Inter3DContainer();
-				_effect = _content.addInter3D(ClientConfig.getEffect("ui_jue_1"),15,15,0)
+                _content.x=15;
+                _content.y=15;
+				_effect = _content.addInter3D(ClientConfig.getEffect("ui_jue_1"));
 				_content.touchable = false;
 				_bindBtn.parent.addChild(_content);
 			}

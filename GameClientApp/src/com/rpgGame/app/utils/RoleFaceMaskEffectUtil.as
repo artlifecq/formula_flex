@@ -2,9 +2,12 @@ package com.rpgGame.app.utils
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.vo.FadeAlphaRectData;
+	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.type.RenderUnitType;
+	
+	import flash.geom.Point;
 
 	/**
 	 *
@@ -15,6 +18,8 @@ package com.rpgGame.app.utils
 	 */
 	public class RoleFaceMaskEffectUtil
 	{
+		private static var ZERO_POINT:Point=new Point();
+		
 		public function RoleFaceMaskEffectUtil()
 		{
 		}
@@ -35,6 +40,42 @@ package com.rpgGame.app.utils
 				}
 			});
 		}
+		
+		/**
+		 *添加模型遮罩 
+		 * @param type 遮罩类型基于AvatarMaskType配置
+		 * @param avatar 遮罩模型容器
+		 * @param fadeX 遮罩水平偏移
+		 * @param fadeY 遮罩垂直偏移
+		 * @param scale 遮罩模型缩放
+		 * @param rotationY 模型Y轴旋转
+		 * 
+		 */
+		public static function addAvatarMask(type:String,avatar:InterAvatar3D,fadeX:int,fadeY:int,scale:Number=1,rotationY:Number=0):void
+		{
+			var role:SceneRole=avatar.curRole;
+			if(!role){
+				return;
+			}
+			role.avatar.forEachRenderUnit(function(render : RenderUnit3D) : void
+			{
+				switch (render.type)
+				{
+					case RenderUnitType.BODY:
+					case RenderUnitType.HAIR:
+					case RenderUnitType.WEAPON:
+					case RenderUnitType.DEPUTY_WEAPON:
+					case RenderUnitType.MOUNT:
+					case RenderUnitType.WEAPON_EFFECT:
+						render.addFadeAlpha(ClientConfig.getDynTexture(type));
+						break;
+				}
+			});
+			role.setScale(scale);
+			role.rotationY =rotationY;
+			var point : Point = avatar.parent.localToGlobal(ZERO_POINT);
+			updateFadeAlphaRectPos(role, point.x + avatar.x+fadeX, point.y + avatar.y+fadeY);
+		}
 
 		public static function addDialogFaceMaskEffect(role : SceneRole) : void
 		{
@@ -47,6 +88,7 @@ package com.rpgGame.app.utils
 					case RenderUnitType.WEAPON:
 					case RenderUnitType.DEPUTY_WEAPON:
 					case RenderUnitType.MOUNT:
+					case RenderUnitType.WEAPON_EFFECT:
 						render.addFadeAlpha(ClientConfig.getDynTexture("dialogFaceMask"));
 						break;
 				}
@@ -97,6 +139,7 @@ package com.rpgGame.app.utils
 					case RenderUnitType.HAIR:
 					case RenderUnitType.WEAPON:
 					case RenderUnitType.DEPUTY_WEAPON:
+					case RenderUnitType.MOUNT:
 					case RenderUnitType.MOUNT:
 						render.addFadeAlpha(ClientConfig.getDynTexture("bossHeadFaceMask"));
 						break;

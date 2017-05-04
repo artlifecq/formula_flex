@@ -9,25 +9,36 @@ package com.rpgGame.app.utils
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.task.TaskManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.richText.RichTextCustomLinkType;
 	import com.rpgGame.app.richText.RichTextCustomUtil;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.task.TaskInfoDecoder;
+	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.npc.NpcCfgData;
+	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_item;
+	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.enum.EnumAreaMapType;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.SearchRoleData;
 	import com.rpgGame.coreData.info.collect.CollectObjcetInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.task.target.BaseTaskTargetInfo;
 	import com.rpgGame.coreData.info.task.target.TaskAreaExplorationInfo;
 	import com.rpgGame.coreData.info.task.target.TaskClientTaskInfo;
@@ -47,11 +58,20 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.type.TaskTargetType;
+	import com.rpgGame.coreData.type.TaskType;
+	import com.rpgGame.netData.backpack.bean.ItemInfo;
+	import com.rpgGame.netData.task.bean.TaskInfo;
+	import com.rpgGame.netData.task.bean.TaskSubRateInfo;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	
 	import app.message.MonsterDataProto;
+	
+	import feathers.controls.SkinnableContainer;
+	import feathers.controls.UIAsset;
+	
+	import org.mokylin.skin.mainui.renwu.Renwu_Item;
 
 	/**
 	 * 任务
@@ -251,24 +271,275 @@ package com.rpgGame.app.utils
 			}
 			return "（" + curProgress + "/" + allProgress + "）"
 		}
+		
 		/**
-		 * 完成任务交NPC任务
+		 * 返回任务怪ID
 		 * @param npcId
 		 *
 		 */
-		public static function finishNpcTask(npcId : int,onArrive:Function=null,noWalk:Function=null) : void
+		public static function getMainTaskMonsterId(ite:int) : int
+		{
+			var taskData:Q_mission_base;
+			var finish:String;
+			var finishArr:Array;
+			var finishNum:int;
+			var monsterId:int=-1;
+			taskData=TaskMissionManager.mainTaskData;
+			if(taskData!=null)
+			{
+				
+				finish=taskData.q_finish_information_str;
+				finishArr=finish.split(";");
+				if(finishArr.length>ite)
+				{
+					finish=finishArr[ite];
+					finishArr=finish.split(",");
+					if(finishArr.length==2)
+					{
+						monsterId=int(finishArr[0]);
+						return monsterId;
+					}
+					
+				}
+			}
+			
+			
+			return -1;
+		}
+		/**根据任务类型和下标返回怪物或npcID*/
+		public static function getMonsterByType(type : int,ite:int) : int
+		{
+			var taskData:Q_mission_base;
+			var taskInfo:TaskInfo;
+			var finish:String;
+			var finishArr:Array;
+			var finishNum:int;
+			var monsterId:int=-1;
+			if(type==TaskType.MAINTYPE_MAINTASK)
+			{
+				taskData=TaskMissionManager.mainTaskData;
+				taskInfo=TaskMissionManager.mainTaskInfo;
+				if(TaskMissionManager.getMainTaskIsFinish())//主线且完成任务，就返回任务npc
+				{
+					return TaskMissionManager.getMainTaskNpcModeId();//
+				}
+			}
+			else if(type==TaskType.MAINTYPE_DAILYTASK)
+			{
+				taskData=TaskMissionManager.dailyTaskData;
+				taskInfo=TaskMissionManager.dailyTaskInfo;
+			}
+			else if(type==TaskType.MAINTYPE_TREASUREBOX)
+			{
+				taskData=TaskMissionManager.treasuerTaskData;
+				taskInfo=TaskMissionManager.treasuerTaskInfo;
+			}
+			
+			if(taskData!=null&&taskInfo!=null)
+			{
+				if(taskInfo.taskSubRateInfolist.length>ite) 
+				{
+					return taskInfo.taskSubRateInfolist[ite].modelId;
+				}
+				
+				
+				finish=taskData.q_finish_information_str;
+				finishArr=finish.split(";");
+				if(finishArr.length>ite)
+				{
+					finish=finishArr[ite];
+					finishArr=finish.split(",");
+					if(finishArr.length==2)
+					{
+						monsterId=int(finishArr[0]);
+						return monsterId;
+					}
+					
+				}
+			}
+			
+			
+			return -1;
+		}
+		
+		/**根据任务类型返回之类型*/
+		public static function getSubtypeByType(type : int) : int
+		{
+			var taskData:Q_mission_base;
+			if(type==TaskType.MAINTYPE_MAINTASK)
+			{
+				taskData=TaskMissionManager.mainTaskData;
+				
+			}
+			else if(type==TaskType.MAINTYPE_DAILYTASK)
+			{
+				taskData=TaskMissionManager.dailyTaskData;
+			}
+			else if(type==TaskType.MAINTYPE_TREASUREBOX)
+			{
+				taskData=TaskMissionManager.treasuerTaskData;
+			}
+			if(taskData!=null)
+			{
+				return taskData.q_mission_type;
+			}
+			return -1;
+		}
+		/**根据任务类型返回是否完成*/
+		public static function getIsfinishByType(type : int) : Boolean
+		{
+			if(type==TaskType.MAINTYPE_MAINTASK)
+			{
+				return TaskMissionManager.getMainTaskIsFinish();
+			}
+			else if(type==TaskType.MAINTYPE_DAILYTASK)
+			{
+				return TaskMissionManager.getDailyTaskIsFinish();
+			}
+			else if(type==TaskType.MAINTYPE_TREASUREBOX)
+			{
+				return TaskMissionManager.getTreasuerTaskIsFinish();
+			}
+			
+			
+			return false;
+		}
+		
+		/**获取玩家与主线任务Npc距离*/
+		public static function getDistfinishNpc() : int
+		{
+			if(TaskMissionManager.mainTaskData!=null)
+			{
+				var npcData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(TaskMissionManager.mainTaskData.q_finish_npc);
+				if(npcData!=null)
+				{
+					if(npcData.q_mapid==SceneSwitchManager.currentMapId)
+					{
+						var dist:int = Point.distance(new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(npcData.q_center_x,npcData.q_center_y));
+						
+						return dist;
+					}
+					
+				}
+			}
+			
+			return -1;
+		}
+		/**
+		 * 寻路Npc
+		 * @param id 刷新的id
+		 *
+		 */
+		public static function npcTaskWalk(id : int,onArrive:Function=null,noWalk:Function=null) : void
 		{
 			
-			var npcData : Q_scene_monster_area = MonsterDataManager.getMonsterById(npcId);
-			if (npcData)
+			var monsterData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(id);
+			if (monsterData)
 			{
-				var pos : Point = MonsterDataManager.getMonsterPosition(npcData);
+				var pos : Point = MonsterDataManager.getMonsterPosition(monsterData);
 				var targerPos:Vector3D=new Vector3D();
 				
-				MainRoleSearchPathManager.walkToScene(npcData.q_mapid, pos.x, pos.y,onArrive, 100,null,noWalk);
+				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, pos.x, pos.y,onArrive, 100,null,noWalk);
 			}
 		}
-
+		
+		
+		/**
+		 * 寻路任务怪
+		 * @param modeId
+		 *
+		 */
+		public static function monsterTaskWalk(modeId : int,onArrive:Function=null,noWalk:Function=null) : void
+		{
+			
+			var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterByModelId(modeId);
+			if (monsterData)
+			{
+				var pos : Point = MonsterDataManager.getMonsterPosition(monsterData);
+				var targerPos:Vector3D=new Vector3D();
+				
+				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, pos.x, pos.y,onArrive, 100,null,noWalk);
+			}
+		}
+		/**
+		 * 寻路任务点
+		 * @param modeId
+		 *
+		 */
+		public static function postTaskWalk(post :Array,onArrive:Function=null,noWalk:Function=null,data:Object=null) : void
+		{
+			
+			if (post!=null&&post.length==3)
+			{
+				MainRoleSearchPathManager.walkToScene(post[0], post[1], post[2],onArrive, 100,data,noWalk);
+			}
+		}
+		/**
+		 * 飞鞋Npc
+		 * @param id 刷新的id
+		 *
+		 */
+		public static function npcTaskFly(id : int,onArrive:Function=null,noWalk:Function=null) : void
+		{
+			
+			var monsterData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(id);
+			if (monsterData)
+			{
+				var pos : Point = MonsterDataManager.getMonsterPosition(monsterData);
+				var targerPos:Vector3D=new Vector3D();
+				
+				SceneSender.sceneMapTransport(monsterData.q_mapid, pos.x, pos.y);
+			}
+		}
+		
+		
+		/**
+		 * 飞鞋任务怪
+		 * @param modeId
+		 *
+		 */
+		public static function monsterTaskFly(modeId : int,onArrive:Function=null,noWalk:Function=null) : void
+		{
+			
+			var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterByModelId(modeId);
+			if (monsterData)
+			{
+				var pos : Point = MonsterDataManager.getMonsterPosition(monsterData);
+				var targerPos:Vector3D=new Vector3D();
+				
+				SceneSender.sceneMapTransport(monsterData.q_mapid, pos.x, pos.y);
+			}
+		}
+		/**
+		 * 飞鞋任务点
+		 * @param modeId
+		 *
+		 */
+		public static function postTaskFly(post :Array,onArrive:Function=null,noWalk:Function=null) : void
+		{
+			
+			if (post!=null&&post.length==3)
+			{
+				SceneSender.sceneMapTransport(post[0], post[1], post[2]);
+			}
+		}
+		/**
+		 * 飞鞋处理
+		 * @param npcId
+		 *
+		 */
+		public static function TaskFly(npcId : int,onArrive:Function=null,noWalk:Function=null) : void
+		{
+			
+			var monsterData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(npcId);
+			if (monsterData)
+			{
+				var pos : Point = MonsterDataManager.getMonsterPosition(monsterData);
+				//var targerPos:Vector3D=new Vector3D();
+				SceneSender.sceneMapTransport(monsterData.q_mapid,pos.x,pos.y);
+				//MainRoleSearchPathManager.walkToScene(npcData.q_mapid, pos.x, pos.y,onArrive, 100,null,noWalk);
+			}
+		}
 
 		//------------------------------------------
 		/**
@@ -281,7 +552,7 @@ package com.rpgGame.app.utils
 			
 			//var npcData : Q_scene_monster_area = MonsterDataManager.getSceneData(npcId);
 			
-			var npcData : Q_scene_monster_area = MonsterDataManager.getMonsterById(npcId);
+			var npcData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(npcId);
 			
 			if (npcData)
 			{
@@ -335,7 +606,10 @@ package com.rpgGame.app.utils
 		{
 			MainRoleSearchPathManager.walkToScene(sceneID, posx, posy, null, 200);
 		}
-
+		
+		
+		
+		
 		/** 小腾翔卷轴功能,直接飞到某个地图某个地点
 		 *
 		 *
@@ -565,7 +839,7 @@ package com.rpgGame.app.utils
 					return;
 			}
 			
-			if(TaskMissionManager.currentTaskIsFinish)
+			if(TaskMissionManager.getMainTaskIsFinish())
 			{
 				SpellAnimationHelper.addTargetEffect(role, RenderUnitID.TASKMARK, RenderUnitType.TASKMARK, EffectUrl.UI_WENHAO, BoneNameEnum.c_0_name_01, 0, null, false);
 			}
@@ -578,5 +852,134 @@ package com.rpgGame.app.utils
 				role.avatar.removeRenderUnitsByType(RenderUnitType.TASKMARK);
 			}
 		}
+		
+		
+		
+		
+		/**设置任务目标内容*/
+		public static  function setGotargetInfo(type:int,describe:String,finisstr:String,subList:Vector.<TaskSubRateInfo>,txtButList:Vector.<SkinnableContainer>):void
+		{
+			var finiStr:Array;
+			var informationList:Array=finisstr.split(";");
+			var i:int,j:int,length:int;
+			length=informationList.length;
+			for(i=0;i<length;i++)
+			{
+				if(informationList[i]&&informationList[i]!="")
+				{
+					var text:String="";
+					var modeid:int=0;
+					var count:int=0,finish:int;
+					var modeArr:Array=informationList[i].split(",");
+					if(modeArr.length==2)
+					{
+						modeid=int(modeArr[0]);
+						finish=int(modeArr[1]);
+					}
+					if(subList[i]!=null)
+					{
+						modeid=subList[i].modelId;
+						count=subList[i].num;
+					}
+					if(modeid!=0)
+					{
+						text=TaskMissionCfgData.getTaskDescribe(type,describe,modeid);
+						
+							
+					}
+					
+					/*for(j=0;j<sub.length;j++)
+					{
+					if(modeid==sub[j].modelId)
+					{
+					
+					if(i==j)L.l("能够对应@@@@@@@");
+					else L.l("不能对应￥￥￥￥￥");
+					break;
+					}
+					}*/
+					if(type!=TaskType.SUB_CONVERSATION)
+					{
+						text+="<font color='#cfc6ae'>("+count+"/"+finish+")</font>";
+					}
+					if(count==finish)
+					{
+						//text+="(已完成)";
+					}
+					
+					setGotargetLabelText(type,txtButList[i],text);
+					
+					
+				}
+				
+			}
+			
+			
+		}
+		public static function setGotargetLabelText(type:int,but:SkinnableContainer,t:String):void
+		{
+			
+			var rItme:Renwu_Item;
+			if(but!=null&&but.skin!=null)
+			{
+				rItme=but.skin as Renwu_Item;
+			}
+			if(rItme!=null)
+			{
+				rItme.labelDisplay.htmlText=t;
+				but.width=rItme.labelDisplay.textWidth+25;
+				but.visible=true;
+				rItme.btn_send.visible=false;
+				if(type==1||type==2||type==3||type==4)
+				{
+					rItme.btn_send.visible=true;
+				}
+				
+			}
+			
+			
+		}
+		
+		
+		/**设置奖励物品*/
+		public static function setRewordInfo(rid:int,icoList:Vector.<IconCDFace>,icoBgList:Vector.<UIAsset>,show:Boolean=false):void
+		{
+			var rewordList:Array=TaskMissionCfgData.getRewordById(rid);
+			if(rewordList==null)return;
+			var item:Q_item;
+			var i:int,length:int,idd:int;
+			length=rewordList.length;
+			idd=0;
+			for(i=0;i<length;i++)
+			{
+				if(rewordList[i].show==1||show)
+				{
+					item=ItemConfig.getQItemByID(rewordList[i].mod);
+					if(item&&i<icoList.length)
+					{
+						icoList[idd].setIconResName(ClientConfig.getItemIcon(""+item.q_icon,IcoSizeEnum.ICON_48));
+						icoList[idd].setSubString(rewordList[i].num);
+						icoList[idd].visible=true;
+						icoBgList[idd].visible=true;
+						setItemTips(icoList[idd],item,int(rewordList[i].num));
+						idd++;
+					}
+				}
+				
+				
+			}
+		}
+		public static function setItemTips(grid:IconCDFace,qit:Q_item,num:int):void
+		{
+			
+			var item:ItemInfo = new ItemInfo();
+			item.itemModelId = qit.q_id;
+			item.num = num;
+			var info:ClientItemInfo=ItemUtil.convertClientItemInfo(item);
+			FaceUtil.SetItemGrid(grid,info,true);
+		}
+		
+		
+		
 	}
 }

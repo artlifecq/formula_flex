@@ -1,8 +1,60 @@
 package com.rpgGame.appModule.equip
 {
+	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.manager.goods.ItemManager;
+	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
+	import com.rpgGame.app.manager.pop.UIPopManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.sender.ItemSender;
+	import com.rpgGame.app.ui.common.CenterEftPop;
+	import com.rpgGame.app.utils.FaceUtil;
+	import com.rpgGame.app.utils.TouchableUtil;
+	import com.rpgGame.app.view.icon.DragDropItem;
+	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.appModule.common.GoodsContainerPanel;
 	import com.rpgGame.appModule.common.ViewUI;
+	import com.rpgGame.appModule.common.itemRender.GridItemRender;
+	import com.rpgGame.core.events.ItemEvent;
+	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.item.EquipJiChengData;
+	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
+	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.clientConfig.Q_equip_inherit_cost;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.EquipInfo;
+	import com.rpgGame.coreData.info.item.GridInfo;
+	import com.rpgGame.coreData.lang.LangSpell;
+	import com.rpgGame.coreData.lang.LangUI;
+	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.type.item.GridBGType;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
+	import com.rpgGame.netData.equip.message.ResEquipOperateResultMessage;
 	
+	import flash.geom.Point;
+	
+	import app.message.EquipOperateType;
+	import app.message.GoodsType;
+	
+	import away3d.core.base.data.OverrideMaterialProps;
+	
+	import feathers.controls.ToggleButton;
+	
+	import gs.TweenMax;
+	import gs.easing.Expo;
+	
+	import org.client.mainCore.manager.EventManager;
+	import org.mokylin.skin.app.zhuangbei.Zhuangbei_left;
 	import org.mokylin.skin.app.zhuangbei.jicheng.Jicheng_Skin;
+	import org.mokylin.skin.app.zhuangbei.qianghua.TitileHead;
+	
+	import starling.display.DisplayObject;
+	import starling.events.Event;
 	
 	/**
 	 *装备继承
@@ -11,12 +63,610 @@ package com.rpgGame.appModule.equip
 	 */
 	public class EquipInheritUI extends ViewUI
 	{
+		private const MIN_GRID:int=28;
 		private var _skin:Jicheng_Skin;
+		private var _leftSkin:Zhuangbei_left;
+		
+		//身上的装备列表
+		private var _goodsbyPlayer:GoodsContainerPanel;
+		private var _goodsbyBag:GoodsContainerPanel;
+		
+		private var _targetEquip:IconCDFace;//继承目标道具
+		private var _targetEquipInfo:EquipInfo;//继承目标信息 
+		
+		private var _useEquip:IconCDFace;//消耗源道具
+		private var _useEuipInfo:EquipInfo;//消耗源信息
+		
+		private var targetEquips:Vector.<ClientItemInfo>;//目标数据
+		private var useItems:Vector.<ClientItemInfo>;//消耗数据
+		
+		private var _optionsList:Vector.<EquipJiChengItem>;
+		
+		private var tweenEquip:TweenMax;
+		
 		
 		public function EquipInheritUI()
 		{
 			_skin=new Jicheng_Skin();
 			super(_skin);
+			initView();
+		}
+		
+		override public function show(data:Object=null):void
+		{
+			initEvent();
+			refresh();
+		}
+		
+		override public function hide():void
+		{
+			deleteTargetEquip();
+			_leftSkin.lb_yinzi.htmlText=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),0);
+			clearEvent();
+		}
+		
+		private function initEvent():void
+		{
+			_leftSkin.tab_pack.addEventListener(Event.CHANGE, onTab);
+			EventManager.addEvent(ItemEvent.ITEM_JICHENG_MSG,resEquipOperateResultMessage);
+			
+			EventManager.addEvent(ItemEvent.ITEM_ADD,onFreshItems);
+			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
+			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
+		}
+		
+		private function clearEvent():void
+		{
+			_leftSkin.tab_pack.removeEventListener(Event.CHANGE, onTab);
+			EventManager.removeEvent(ItemEvent.ITEM_JICHENG_MSG,resEquipOperateResultMessage);
+			
+			EventManager.removeEvent(ItemEvent.ITEM_ADD,onFreshItems);
+			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
+			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
+		}
+		
+		override protected function onTouchTarget(target:DisplayObject):void
+		{
+			super.onTouchTarget(target);
+			if(target is ToggleButton)
+			{
+				var index:int=parseInt((target as ToggleButton).name);
+				_optionsList[index].isSelect=(target as ToggleButton).isSelected;
+			}
+			else
+			{
+				switch(target)
+				{
+					case _targetEquip:
+						deleteTargetEquip();
+						break;
+					case _useEquip:
+						deleteUseEquip();
+						break;
+					case _skin.btn_jicheng:
+						onInherit();
+						break;
+				}
+			}
+		}
+		
+		private function initView():void
+		{
+			_optionsList=new Vector.<EquipJiChengItem>();
+			_leftSkin=_skin.left.skin as Zhuangbei_left;
+			_leftSkin.lb_yinzi.htmlText=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),0);
+			//设置格子组标题
+			(_leftSkin.title1.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT1);
+			(_leftSkin.title2.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT2);
+			
+			//初始化格子
+			_goodsbyPlayer=new GoodsContainerPanel(_leftSkin.list1,ItemContainerID.IHT_LIST,createItemRender);
+			_goodsbyBag=new GoodsContainerPanel(_leftSkin.list2,ItemContainerID.IHT_USE,createItemRender);
+			
+			_targetEquip=new IconCDFace(64);
+			_targetEquip.selectImgVisible=false;
+			_useEquip=new IconCDFace(64);
+			_useEquip.selectImgVisible=false;
+			
+			_skin.container.addChild(_targetEquip);
+			_skin.container.addChild(_useEquip);
+			_targetEquip.x=739;
+			_targetEquip.y=105;
+			_useEquip.x=470;
+			_useEquip.y=105;
+			
+			//初始化选项
+			for(var i:int=0;i<3;i++)
+			{
+				var item:EquipJiChengItem=new EquipJiChengItem();
+				item.SetData(i);
+				item.x=388;
+				item.y=232+i*75;
+				_skin.container.addChild(item);
+				_optionsList.push(item);
+			}
+		}
+		
+		private function createItemRender():GridItemRender
+		{
+			var render:GridItemRender = new GridItemRender(IcoSizeEnum.ICON_42,GridBGType.GRID_SIZE_44);
+			var grid:DragDropItem = render.getGrid();
+			grid.onTouchEndCallBack = onTouchGrid;
+			grid.checkDrag=checkDrag;
+			return render;
+		}
+		
+		private function checkDrag():Boolean
+		{
+			return true;
+		}
+		
+		private function onTouchGrid( grid:DragDropItem ):void
+		{
+			var gridInfo:GridInfo=grid.gridInfo;
+			if(gridInfo.data==null){
+				return;
+			}
+			if(gridInfo.containerID==ItemContainerID.IHT_LIST){
+				addTargetEquip(gridInfo);
+			}else if(gridInfo.containerID==ItemContainerID.IHT_USE){
+				addUseEquip(gridInfo);
+			}
+		}
+		
+		//添加继承结果装备
+		private function addTargetEquip(gridInfo:GridInfo):void
+		{
+			var targetGrid:DragDropItem;
+			if(_targetEquipInfo){
+				targetGrid=_goodsbyPlayer.getDragDropItemByItemInfo(_targetEquipInfo);
+				TouchableUtil.ungray(targetGrid);
+				targetGrid=_goodsbyBag.getDragDropItemByItemInfo(_targetEquipInfo);
+				if(targetGrid)
+				{
+					TouchableUtil.ungray(targetGrid);
+				}
+				if(_useEuipInfo)
+				{
+					deleteUseEquip();
+				}
+			}
+			
+			
+			_targetEquipInfo=gridInfo.data as EquipInfo;
+			_targetEquipInfo.setContainerId(gridInfo.containerID);
+			FaceUtil.SetItemGrid(_targetEquip,_targetEquipInfo);
+			_targetEquip.selectImgVisible=false;
+			targetGrid=_goodsbyPlayer.getDragDropItemByItemInfo(_targetEquipInfo);
+			TouchableUtil.gray(targetGrid);
+			var p:Point=new Point(targetGrid.x,targetGrid.y);
+			p=targetGrid.parent.localToGlobal(p);
+			p=_targetEquip.parent.globalToLocal(p);
+			_targetEquip.x=p.x;
+			_targetEquip.y=p.y;
+			if(tweenEquip){
+				tweenEquip.kill();
+			}
+			tweenEquip=TweenMax.to(_targetEquip,1,{x:741,y:100,ease:Expo.easeOut});
+			
+			updateUsePanel();
+			targetGrid=_goodsbyBag.getDragDropItemByItemInfo(_targetEquipInfo);
+			if(targetGrid)
+			{
+				TouchableUtil.gray(targetGrid);
+			}
+			updateRightPanel();
+		}
+		
+		//取消继承选择
+		private function deleteTargetEquip():void
+		{
+			var targetGrid:DragDropItem;
+			if(_targetEquipInfo){
+				targetGrid=_goodsbyPlayer.getDragDropItemByItemInfo(_targetEquipInfo);
+				TouchableUtil.ungray(targetGrid);
+				targetGrid=_goodsbyBag.getDragDropItemByItemInfo(_targetEquipInfo);
+				if(targetGrid)
+					TouchableUtil.ungray(targetGrid);
+				_targetEquipInfo=null;
+			}
+			deleteUseEquip();
+			_targetEquip.clear();
+			initPanel();
+			updateRightPanel();
+		}
+		
+		//添加被继承装备
+		private function addUseEquip(gridInfo:GridInfo):void
+		{
+			var targetGrid:DragDropItem;
+			if(_useEuipInfo){
+				targetGrid=_goodsbyBag.getDragDropItemByItemInfo(_useEuipInfo);
+				TouchableUtil.ungray(targetGrid);
+				targetGrid=_goodsbyPlayer.getDragDropItemByItemInfo(_useEuipInfo);
+				if(targetGrid)
+				{
+					TouchableUtil.ungray(targetGrid);
+				}
+			}
+			
+			_useEuipInfo=gridInfo.data as EquipInfo;
+			_useEuipInfo.setContainerId(gridInfo.containerID);
+			FaceUtil.SetItemGrid(_useEquip,_useEuipInfo);
+			_useEquip.selectImgVisible=false;
+			targetGrid=_goodsbyBag.getDragDropItemByItemInfo(_useEuipInfo);
+			TouchableUtil.gray(targetGrid);
+			var p:Point=new Point(targetGrid.x,targetGrid.y);
+			p=targetGrid.parent.localToGlobal(p);
+			p=_useEquip.parent.globalToLocal(p);
+			_useEquip.x=p.x;
+			_useEquip.y=p.y;
+			if(tweenEquip){
+				tweenEquip.kill();
+			}
+			tweenEquip=TweenMax.to(_useEquip,1,{x:475,y:100,ease:Expo.easeOut});
+			targetGrid=_goodsbyPlayer.getDragDropItemByItemInfo(_useEuipInfo);
+			if(targetGrid)
+			{
+				TouchableUtil.gray(targetGrid);
+			}
+			updateRightPanel();
+		}
+		
+		//取消继承选择
+		private function deleteUseEquip():void
+		{
+			var targetGrid:DragDropItem;
+			if(_useEuipInfo){
+				targetGrid=_goodsbyBag.getDragDropItemByItemInfo(_useEuipInfo);
+				TouchableUtil.ungray(targetGrid);
+				targetGrid=_goodsbyPlayer.getDragDropItemByItemInfo(_useEuipInfo);
+				if(targetGrid)
+					TouchableUtil.ungray(targetGrid);
+				_useEuipInfo=null;
+			}
+			_useEquip.clear();
+			updateRightPanel();
+		}
+		
+		override public function refresh():void
+		{
+			ItemManager.getBackEquip(initPanel);
+		}
+		
+		private function initPanel():void
+		{
+			deleteUseEquip();
+			updateTaragetPanel();
+			updateUsePanel();
+			updateAll();
+		}
+		
+		//刷新可继承装备
+		private function updateTaragetPanel():void
+		{
+			var allEquips:Array=ItemManager.getAllEquipDatas();
+			var num:int=allEquips.length;
+			
+			targetEquips=getInheritanceEquips(allEquips);
+			num=targetEquips.length;
+			num=num>MIN_GRID?num:MIN_GRID;
+			_goodsbyPlayer.setGridsCount(num,false);
+			_goodsbyPlayer.refleshGridsByDatas(targetEquips);
+		}
+		
+		//刷新可被继承装备
+		private function updateUsePanel():void
+		{
+			var backDatas:Array=BackPackManager.instance.getAllItem();		
+			useItems=getUseEquip(backDatas);
+			var num:int=useItems.length;
+			num=num>MIN_GRID?num:MIN_GRID;
+			_goodsbyBag.setGridsCount(num,false);
+			_goodsbyBag.refleshGridsByDatas(useItems);
+		}
+		
+		private function updateAll():void
+		{
+			var targetGrid:DragDropItem;
+			for each(targetGrid in _goodsbyPlayer.dndGrids){
+				TouchableUtil.ungray(targetGrid);
+			}
+			
+			for each( targetGrid in _goodsbyBag.dndGrids){
+				TouchableUtil.ungray(targetGrid);
+			}
+			
+			if(_targetEquipInfo){
+				targetGrid=_goodsbyPlayer.getDragDropItemByItemInfo(_targetEquipInfo);
+				TouchableUtil.gray(targetGrid);
+				targetGrid=_goodsbyBag.getDragDropItemByItemInfo(_targetEquipInfo);
+				if(targetGrid)
+					TouchableUtil.gray(targetGrid);
+				updateUsePanel();
+				updateRightPanel();
+			}
+		}
+		
+		//刷新右侧面板
+		private function updateRightPanel():void
+		{
+			if(_targetEquipInfo!=null&&_useEuipInfo!=null)
+			{
+				for(var i:int=0;i<_optionsList.length;i++)
+				{
+					_optionsList[i].ShowAttribute(_targetEquipInfo,_useEuipInfo);
+				}
+				var q_jicheng:Q_equip_inherit_cost=EquipJiChengData.getJiChengCfg(_targetEquipInfo.qItem.q_kind,_targetEquipInfo.qItem.q_levelnum);
+				if(q_jicheng)
+					var useMon:int=q_jicheng.q_cast;
+				else
+					useMon=0;
+				var userMon:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
+				_leftSkin.lb_yinzi.htmlText=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),useMon,userMon);
+			}
+			else
+			{
+				for(i=0;i<_optionsList.length;i++)
+				{
+					_optionsList[i].ClearAttribute();
+				}
+				_leftSkin.lb_yinzi.htmlText=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),0);
+			}
+		}
+		
+		private function getTitleText(title:String,value:*,value1:int=-1,noSlip:Boolean=true):String
+		{
+			var wu:String=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12);
+			if(value is int){
+				if(value==0){
+					value=wu;
+					return title+":"+value;
+				}
+			}
+			var des:String="";
+			if(value<=value1){
+				des=noSlip?HtmlTextUtil.getTextColor(0x55BD15,value):HtmlTextUtil.getTextColor(0x55BD15,value+"/"+value1);//绿色
+			}else{
+				des=noSlip?HtmlTextUtil.getTextColor(0xd02525,value):HtmlTextUtil.getTextColor(0xd02525,value+"/"+value1);//红色
+			}
+			return title+":"+des;
+		}
+		
+		
+		/**获取可继承的装备*/
+		private function getInheritanceEquips(datas:Array):Vector.<ClientItemInfo>
+		{
+			var num:int=datas.length;
+			var result:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
+			for(var i:int=0;i<num;i++){
+				var info:ClientItemInfo=datas[i];
+				if(isCanInheritance(info as EquipInfo)){
+					if(_targetEquipInfo&&info.itemInfo.itemId.ToGID()==_targetEquipInfo.itemInfo.itemId.ToGID()){
+						_targetEquipInfo=info as EquipInfo;//更新掉
+						_targetEquipInfo.setContainerId(info.containerID);
+						FaceUtil.SetItemGrid(_targetEquip, _targetEquipInfo, true);
+					}
+					result.push(info);
+				}else{
+					if(_targetEquipInfo&&info.itemInfo.itemId.ToGID()==_targetEquipInfo.itemInfo.itemId.ToGID()){
+						_targetEquipInfo=null;
+						_targetEquip.clear();
+					}
+				}
+			}
+			return result;
+		}
+		
+		/**获取背包中可被继承的装备*/
+		private function getUseEquip(datas:Array):Vector.<ClientItemInfo>
+		{
+			var num:int=datas.length;
+			var result:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
+			for(var i:int=0;i<num;i++){
+				var info:ClientItemInfo=datas[i];
+				if(info is EquipInfo)
+				{
+					if(isCanInheritanceTo(info as EquipInfo)){
+						if(_useEuipInfo&&info.itemInfo.itemId.ToGID()==_useEuipInfo.itemInfo.itemId.ToGID()){
+							_useEuipInfo=info as EquipInfo;//更新掉
+							_useEuipInfo.setContainerId(info.containerID);
+							FaceUtil.SetItemGrid(_useEquip, _useEuipInfo, true);
+						}
+						result.push(info);
+					}else{
+						if(_useEuipInfo&&info.itemInfo.itemId.ToGID()==_useEuipInfo.itemInfo.itemId.ToGID()){
+							_useEuipInfo=null;
+							_useEquip.clear();
+						}
+					}
+				}
+			}
+			return result;
+		}
+		
+		//判断是否可以继承
+		private function isCanInheritance(info:EquipInfo):Boolean
+		{
+			if(_useEuipInfo!=null)
+			{
+				if(info.qItem.q_kind==_useEuipInfo.qItem.q_kind&&(info.strengthLevel<_useEuipInfo.strengthLevel
+					||info.polishLevel<_useEuipInfo.polishLevel)&&info.qItem.q_max_strengthen>0&&!EquipStrengthCfg.isMax(info.strengthLevel))
+				{
+					return true;
+				}
+				else return false;
+			}
+			else
+			{
+				if(info.qItem.q_max_strengthen>0&&!EquipStrengthCfg.isMax(info.strengthLevel))
+					return true;
+			}
+			return false;
+		}
+		
+		//判断是否可以被继承
+		private function isCanInheritanceTo(info:EquipInfo):Boolean
+		{
+			if(_targetEquipInfo!=null)
+			{
+				if(info.qItem.q_kind==_targetEquipInfo.qItem.q_kind&&(info.strengthLevel>_targetEquipInfo.strengthLevel||
+					info.polishLevel>_targetEquipInfo.polishLevel||info.smeltAtt1!=0||info.smeltAtt2!=0))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		private function getEquipByType(type:int,datas:Vector.<ClientItemInfo>):Vector.<ClientItemInfo>
+		{
+			if(type==-1){
+				return datas;
+			}
+			var result:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
+			for each(var item:ClientItemInfo in datas){
+				if(item.type==type){
+					result.push(item);
+				}
+			}
+			return result;
+		}
+		
+		private function getLock():int
+		{
+			var lock:int=0;
+			var val:int=0;
+			var tmp:int=0;
+			for(var i:int=0;i<_optionsList.length;i++)
+			{
+				val |= (_optionsList[i].isSelect?1:0) << i;
+			}
+			return val;
+		}
+		
+		private function isCanInherit():Boolean
+		{
+			if(_targetEquipInfo==null){
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6101));
+				return false;
+			}
+			else if(_useEuipInfo==null){
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6102));
+				return false;
+			}
+			else if(!isSelectItem())
+			{
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6103));
+				return false;
+			}
+			else if(_targetEquipInfo!=null&&_useEuipInfo!=null)
+			{
+				var q_jicheng:Q_equip_inherit_cost=EquipJiChengData.getJiChengCfg(_targetEquipInfo.qItem.q_kind,_targetEquipInfo.qItem.q_levelnum);
+				if(q_jicheng)
+					var useMon:int=q_jicheng.q_cast;
+				else useMon=0;
+				var userMon:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
+				if(useMon>userMon)
+				{
+					NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(2007));
+					return false;
+				}
+			}		
+			return true;
+		}
+		
+		private function isSelectItem():Boolean
+		{
+			if(_optionsList==null) return false;
+			for(var i:int=0;i<_optionsList.length;i++)
+			{
+				if(_optionsList[i].isSelect) return true;
+			}
+			return false;
+		}
+		
+		private function onInherit():void
+		{
+			if(isCanInherit())
+			{
+				var type:int=RoleEquipmentManager.equipIsWearing(_targetEquipInfo)?0:1;
+				var lock:int=getLock();
+				var p:Point=new Point(this._skin.btn_jicheng.x+this._skin.btn_jicheng.width/2,this._skin.btn_jicheng.y+this._skin.btn_jicheng.height/2);
+				p=this._skin.btn_jicheng.parent.localToGlobal(p);
+				p=this._skin.container.globalToLocal(p);
+				this.playInter3DAt(ClientConfig.getEffect("ui_tongyongdianji"),p.x,p.y,1,null,addComplete);
+				ItemSender.reqEquipInheritMessage(EquipOperateType.JICHENG_NORMAL,_useEuipInfo.itemInfo.itemId,_targetEquipInfo.itemInfo.itemId,type,lock);		
+			}
+		}
+		
+		private function onTab(e:Event):void
+		{
+			var type:int=-1;
+			switch(_leftSkin.tab_pack.selectedIndex){
+				case 1:
+					type=GoodsType.EQUIPMENT;
+					break;
+				case 2:
+					type=GoodsType.EQUIPMENT1;
+					break;
+				case 3:
+					type=GoodsType.EQUIPMENT2;
+					break;
+			}
+			var result:Vector.<ClientItemInfo>=getEquipByType(type,targetEquips);
+			_goodsbyPlayer.refleshGridsByDatas(result);
+			
+			var targetGrid:DragDropItem;
+			for each(var info:ClientItemInfo in result){
+				targetGrid=_goodsbyPlayer.getDragDropItemByItemInfo(info);
+				if(!targetGrid){
+					continue;
+				}
+				if(info==_targetEquipInfo){
+					TouchableUtil.gray(targetGrid);
+				}else{
+					TouchableUtil.ungray(targetGrid);
+				}
+			}
+		}
+		
+		/**物品发生改变*/
+		private function onFreshItems(info:ClientItemInfo=null):void
+		{
+			if((info.containerID==ItemContainerID.Role||info.containerID==ItemContainerID.BackPack)&&
+				(info.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||
+					info.type==GoodsType.EQUIPMENT2)){
+				ItemManager.getBackEquip(initPanel);
+			}		
+		}
+		
+		private function addComplete(render:RenderUnit3D):void
+		{
+			render.play(0);
+		}
+		
+		/**继承结果反馈*/
+		private function resEquipOperateResultMessage(msg:ResEquipOperateResultMessage):void
+		{
+			var targetGrid:DragDropItem;
+			if(msg.opaque==EquipOperateType.JICHENG_NORMAL&&msg.result==1)
+			{
+				UIPopManager.showAlonePopUI(CenterEftPop,"ui_jichengchenggong");
+				if(_useEuipInfo){
+					targetGrid=_goodsbyBag.getDragDropItemByItemInfo(_useEuipInfo);
+					TouchableUtil.ungray(targetGrid);
+					targetGrid=_goodsbyPlayer.getDragDropItemByItemInfo(_useEuipInfo);
+					if(targetGrid)
+					{
+						TouchableUtil.ungray(targetGrid);
+					}
+				}
+				_useEquip.clear();
+				_useEuipInfo=null;
+				updateUsePanel();
+				updateRightPanel();
+			}
 		}
 	}
 }

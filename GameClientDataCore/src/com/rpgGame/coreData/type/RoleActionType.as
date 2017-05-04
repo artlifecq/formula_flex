@@ -27,11 +27,11 @@ package com.rpgGame.coreData.type
 		/** 二级跳跃 **/
 		public static const SECOND_JUMP : String = "jump2";
 		/** 采集开始 **/
-		public static const COLLECT_START : String = "colletstart";
+		public static const COLLECT_START : String = "show2";
 		/** 采集中 **/
-		public static const COLLECT : String = "collect";
+		public static const COLLECT : String = "jump";
 		/** 采集结束 **/
-		public static const COLLECT_END : String = "collectend";
+		public static const COLLECT_END : String = "stand";
 		/** 战斗待机 **/
 		public static const PREWAR : String = "prewar";
 		/** 冲锋 **/

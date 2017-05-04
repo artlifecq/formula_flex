@@ -25,7 +25,7 @@ package com.rpgGame.coreData.info.cheats
 		//激活属性
 		private var _extendAttr:HashMap=new HashMap();
 		//基本属性每集基本属性
-		private var _baseAttrHash:HashMap=new HashMap();
+		//private var _baseAttrHash:HashMap=new HashMap();
 		//总属性
 		private var _totalValue:HashMap=new HashMap();
 		private var _careCheats:HashMap=new HashMap();
@@ -41,23 +41,12 @@ package com.rpgGame.coreData.info.cheats
 			var num:int=config.q_pointnum;
 			var vo:CheatsNodeVo;
 			var tmp:Q_cheats_node;
-			var nodeMaxLv:int=config.q_maxlevel;
-			for (var k:int = 0; k < nodeMaxLv; k++) 
+			for (var i:int = 1; i <= num; i++) 
 			{
-				var tmpH:HashMap=new HashMap();
-				_baseAttrHash.put(k+1,tmpH);
-				for (var i:int = 1; i <= num; i++) 
-				{
-					tmp=CheatsNodeCfg.getCheatsNode(config.q_id+"_"+i);
-					vo=new CheatsNodeVo(tmp);
-					_subNodeHash.put(i,vo);
-					if (vo.getNodeType()==0) 
-					{
-						AttValueConfig.getTypeValue(vo.getAttrIdAtLevel(k+1),tmpH);
-					}
-				}
+				tmp=CheatsNodeCfg.getCheatsNode(config.q_id+"_"+i);
+				vo=new CheatsNodeVo(tmp);
+				_subNodeHash.put(i,vo);
 			}
-			
 		
 			if (_cheatsConfig.q_each_other!=null&&_cheatsConfig.q_each_other!="") 
 			{
@@ -150,7 +139,7 @@ package com.rpgGame.coreData.info.cheats
 					AttValueConfig.getTypeValue(int(attrArr[_level-1]),_attrHash);
 				}
 				//基本属性=原始属性+子穴位最大等级属性，为了策划好配置，一分为2的
-				HashMap.mergeValueHashMap(_attrHash,_baseAttrHash.getValue(_level-1));
+				//HashMap.mergeValueHashMap(_attrHash,_baseAttrHash.getValue(_level-1));
 				//计算子节点属性
 				var keys:Array=_subNodeHash.keys();
 				var subLen:int=keys.length;
@@ -260,7 +249,14 @@ package com.rpgGame.coreData.info.cheats
 		}
 		public function getBaseAttr():HashMap
 		{
-			return _baseAttrHash.getValue(1);
+			var ret:HashMap=new HashMap();
+			//原始属性
+			var attrArr:Array=JSON.parse(cheatsConfig.q_levelattr) as Array;
+			if (attrArr!=null&&attrArr.length>=0) 
+			{
+				AttValueConfig.getTypeValue(int(attrArr[0]),ret);
+			}
+			return ret;
 		}
 
 	}

@@ -71,6 +71,7 @@ package com.rpgGame.appModule.common.itemRender
 				gridInfo.realIndex = this.grid.realIndex;
 				grid.setBg(bg);
 				grid.gridInfo = gridInfo;
+				grid.isGary=gridInfo.isGray;
 			}
 			else
 			{

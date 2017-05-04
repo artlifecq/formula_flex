@@ -1,8 +1,10 @@
 package com.rpgGame.coreData.cfg.task
 {
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.clientConfig.Q_mission_reword;
+	import com.rpgGame.coreData.clientConfig.Q_mission_section;
 	import com.rpgGame.coreData.clientConfig.Q_mission_segment;
 	
 	import flash.utils.ByteArray;
@@ -19,6 +21,7 @@ package com.rpgGame.coreData.cfg.task
 		private static var _dataDic : Dictionary = new Dictionary();
 		private static var _rewordDic : Dictionary = new Dictionary();
 		private static var _segmentDic : Dictionary = new Dictionary();
+		private static var _sectionDic : Dictionary = new Dictionary();
 		public static function setup(data : ByteArray) : void {
 			var arr : Array = data.readObject();
 			
@@ -49,6 +52,16 @@ package com.rpgGame.coreData.cfg.task
 				_segmentDic[info.q_segment_id] = info;
 			}
 		}
+		/**环式任务表*/
+		public static function setupSection(data : ByteArray) : void {
+			var arr : Array = data.readObject();
+			
+			for each(var info :Q_mission_section in arr) {
+				_sectionDic[info.q_mission_lvsec] = info;
+			}
+		}
+		
+		
 		/**根据任务ID获取任务信息*/
 		public static function getTaskByID(id : uint) : Q_mission_base 
 		{
@@ -57,23 +70,33 @@ package com.rpgGame.coreData.cfg.task
 		
 		
 		/**获取完成任务的条件文字，已经替换好了名字*/
-		public static function getTaskDescribe(describe:String,modeid:int) :String 
+		public static function getTaskDescribe(type:int,describe:String,modeid:int) :String 
 		{
-			var mosterName:String=MonsterDataManager.getMonsterName(modeid);
+			var mosterName:String;
+			if(type==1||type==2||type==3||type==4)
+			{
+				mosterName=MonsterDataManager.getMonsterName(modeid);
+			}
+			else if(type==5)
+			{
+				mosterName=ItemConfig.getItemName(modeid);
+			}
 					
 			return substitute(describe,mosterName);
 			
 			
 		}
 		/**根据任务ID获取奖励物品列表*/
-		public static function getRewordByTaskid(id : int) :Array 
+		public static function getRewordById(id : int) :Array 
 		{
-			var task:Q_mission_base=getTaskByID(id);
+			/*var task:Q_mission_base=getTaskByID(id);
 			var reword:Q_mission_reword;
 			if(task!=null)
 			{
 				reword=getRewordByID(task.q_reword_id);
-			}
+			}*/
+			
+			var reword:Q_mission_reword=getRewordByID(id);
 			if(reword!=null&&reword.q_reward!="")
 			{
 				var reObj:Array;
@@ -137,6 +160,14 @@ package com.rpgGame.coreData.cfg.task
 		{
 			return _segmentDic[id];
 		}
+		
+		
+		/**根据ID获取任务对话信息*/
+		public static function getSectionByID(id :String) : Q_mission_section 
+		{
+			return _sectionDic[id];
+		}
+		
 		
 		
 		

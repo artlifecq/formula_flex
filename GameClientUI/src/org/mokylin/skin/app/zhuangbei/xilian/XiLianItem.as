@@ -22,6 +22,8 @@ package org.mokylin.skin.app.zhuangbei.xilian
 
 		public var lb_name:feathers.controls.Label;
 
+		public var lb_name0:feathers.controls.Label;
+
 		public var lb_yuanbao:feathers.controls.Label;
 
 
@@ -33,7 +35,7 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [lb_name_i(),chk_suoding_i(),lb_yuanbao_i(),lb_lock_i()];
+			this.elementsContent = [lb_name_i(),lb_name0_i(),chk_suoding_i(),lb_yuanbao_i(),lb_lock_i()];
 			
 			states = {
 			};
@@ -69,6 +71,21 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			return temp;
 		}
 
+		private function lb_name0_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_name0 = temp;
+			temp.name = "lb_name0";
+			temp.height = 19;
+			temp.text = "属性文本";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 340;
+			temp.x = 1;
+			temp.y = 1;
+			return temp;
+		}
+
 		private function lb_name_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -79,8 +96,8 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 340;
-			temp.x = 0;
-			temp.y = 2;
+			temp.x = 1;
+			temp.y = 1;
 			return temp;
 		}
 

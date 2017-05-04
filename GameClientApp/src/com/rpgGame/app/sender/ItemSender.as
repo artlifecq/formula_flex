@@ -11,9 +11,11 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.backpack.message.ReqMoveItemMessage;
 	import com.rpgGame.netData.backpack.message.ReqSplitItemMessage;
 	import com.rpgGame.netData.backpack.message.ReqUseItemMessage;
+	import com.rpgGame.netData.equip.message.ReqEquipInheritMessage;
 	import com.rpgGame.netData.equip.message.ReqEquipPolishMessage;
 	import com.rpgGame.netData.equip.message.ReqEquipStrengthMessage;
 	import com.rpgGame.netData.equip.message.ReqEquipWashMessage;
+	import com.rpgGame.netData.equip.message.ReqItemCompositionMessage;
 	import com.rpgGame.netData.equip.message.UnwearEquipMessage;
 	import com.rpgGame.netData.equip.message.WearEquipMessage;
 	import com.rpgGame.netData.store.message.ReqBagToStoreMessage;
@@ -313,5 +315,38 @@ package com.rpgGame.app.sender
 			SocketConnection.send(msg);
 		}
 		
+		/**
+		 * 合成物品请求
+		 * @param opaqueType 
+		 * @param recipeid
+		 * @param num
+		 * */
+		public static function reqItemCompositionMessage(opaqueType:int,recipeid:int,num:int):void
+		{
+			var msg:ReqItemCompositionMessage=new ReqItemCompositionMessage();
+			msg.opaque=opaqueType;
+			msg.recipeId=recipeid;
+			msg.num=num;
+			SocketConnection.send(msg);
+		}
+		
+		/**
+		 * 继承请求
+		 * @param opaqueType 操作ID
+		 * @param fromEquipId 被继承装备
+		 * @param toEquipId 继承装备
+		 * @param toType 继承装备来源 0-角色身上 1-背包
+		 * @param index 继承索引,第一位为继承强化,第二位为继承琢磨,第三位为继承洗炼
+		 * */
+		public static function reqEquipInheritMessage(opaqueType:int,fromEquipId:long,toEquipId:long,toType:int,index:int):void
+		{
+			var msg:ReqEquipInheritMessage=new ReqEquipInheritMessage();
+			msg.opaque=opaqueType;
+			msg.fromEquipId=fromEquipId;
+			msg.toEquipId=toEquipId;
+			msg.toType=toType;
+			msg.index=index;
+			SocketConnection.send(msg);
+		}
 	}
 }

@@ -4,7 +4,6 @@ package com.rpgGame.app.view.icon
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
-	import com.rpgGame.coreData.type.item.GridBGType;
 	
 	import feathers.utils.filter.GrayFilter;
 	
@@ -104,6 +103,7 @@ package com.rpgGame.app.view.icon
 		{
 			if (!_gridInfo||_gridInfo.data == null)
 				return;
+			_isGary=value;
 			if (value)
 			{
 				if(_iconImage){

@@ -48,11 +48,11 @@ package org.mokylin.skin.app.zhuangbei.hecheng.button
 					]
 			};
 			skinNames={"down":"ui/app/zhuangbei/hecheng/button/jianding/down.png",
-			"downAndSelected":"ui/app/zhuangbei/hecheng/button/jianding/down.png",
+			"downAndSelected":"ui/app/zhuangbei/hecheng/button/jianding/select.png",
 			"hover":"ui/app/zhuangbei/hecheng/button/jianding/over.png",
-			"overAndSelected":"ui/app/zhuangbei/hecheng/button/jianding/down.png",
+			"overAndSelected":"ui/app/zhuangbei/hecheng/button/jianding/select.png",
 			"up":"ui/app/zhuangbei/hecheng/button/jianding/up.png",
-			"upAndSelected":"ui/app/zhuangbei/hecheng/button/jianding/down.png"};
+			"upAndSelected":"ui/app/zhuangbei/hecheng/button/jianding/select.png"};
 		}
 
 

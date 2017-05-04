@@ -99,13 +99,18 @@ package com.rpgGame.app.ui.main.navigation {
                     break;
                 case this._skin.btn_wuxue:
                     AppManager.showApp(AppConstant.SKILL_PANL);
-					
                     break;
                 case this._skin.btn_zhuangbei:
                     AppManager.showApp(AppConstant.EQUIP_PANL);
                     break;
 				case this._skin.btn_zhanhun:
 					AppManager.showApp(AppConstant.Battle_PANL);
+					break;
+				case _skin.btn_zuoqi:
+					AppManager.showApp(AppConstant.MOUNT_PANEL);
+					break;
+				case this._skin.btn_lunjian:
+					AppManager.showApp(AppConstant.SWORD_PANL);
 					break;
             }
         }

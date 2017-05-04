@@ -3,6 +3,7 @@ package com.rpgGame.app.data
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
+	import com.rpgGame.app.manager.mount.HorseExtraItemInfo;
 	import com.rpgGame.coreData.cfg.AddSpriteStatCfgData;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
@@ -31,8 +32,12 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.GmConfig;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
+	import com.rpgGame.coreData.cfg.HeChengData;
 	import com.rpgGame.coreData.cfg.HintCfgData;
 	import com.rpgGame.coreData.cfg.HintConfig;
+	import com.rpgGame.coreData.cfg.HorseAdditionData;
+	import com.rpgGame.coreData.cfg.HorseConfigData;
+	import com.rpgGame.coreData.cfg.HorseSpellData;
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
 	import com.rpgGame.coreData.cfg.MailCfgData;
@@ -59,6 +64,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.country.CountryStaticConfigData;
 	import com.rpgGame.coreData.cfg.country.CountryTaoNiCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
+	import com.rpgGame.coreData.cfg.item.EquipJiChengData;
 	import com.rpgGame.coreData.cfg.item.EquipPolishCfg;
 	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
 	import com.rpgGame.coreData.cfg.item.EquipWashAttCfg;
@@ -225,6 +231,9 @@ package com.rpgGame.app.data
 			FightsoulData.setConfig(dic[ConfigClassRegister.Q_fightsoul]);
 			FightsoulModeData.setConfig(dic[ConfigClassRegister.Q_fightsoul_mode]);
 			GlobalSheetData.setup(dic[ConfigClassRegister.Q_global]);
+			HeChengData.setup(dic[ConfigClassRegister.Q_hecheng]);
+			EquipJiChengData.setup(dic[ConfigClassRegister.Q_equip_inherit_cost]);
+			
 			LostSkillData.setup(dic[ConfigClassRegister.Q_lostskill_open]);
 			LostSkillUpData.setup(dic[ConfigClassRegister.Q_lostskill_up]);
 			// 服务器发送 消息ID对应客户端 
@@ -236,7 +245,11 @@ package com.rpgGame.app.data
 			//心法
 			CheatsCfg.setup(dic[ConfigClassRegister.Q_cheats]);
 			CheatsNodeCfg.setup(dic[ConfigClassRegister.Q_cheats_node]);
-			
+			TaskMissionCfgData.setupSection(dic[ConfigClassRegister.Q_mission_section]);
+			//坐骑数据
+			HorseConfigData.setConfig(dic[ConfigClassRegister.Q_horse]);
+			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
+			HorseExtraItemInfo.createInfo();
 		}
 		
 		/**

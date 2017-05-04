@@ -198,7 +198,12 @@ package com.rpgGame.coreData
 		 */
 		public function getStatValueString( type:int ):String
 		{
-			return getStatValue( type ).toString();
+			var per:int=CharAttributeType.getAttrPer(type);
+			if(per!=1){
+				var str:String=(getStatValue( type )/per).toFixed(2);
+				return Number(str).toString()+CharAttributeType.getAttrUnit(type);
+			}
+			return getStatValue( type ).toString()+CharAttributeType.getAttrUnit(type);
 		}
 		
 		/**
