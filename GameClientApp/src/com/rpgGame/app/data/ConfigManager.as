@@ -243,6 +243,10 @@ package com.rpgGame.app.data
 			TaskMissionCfgData.setupReword(dic[ConfigClassRegister.Q_mission_reword]);
 			TaskMissionCfgData.setupSegment(dic[ConfigClassRegister.Q_mission_segment]);
 
+			//心法
+			CheatsCfg.setup(dic[ConfigClassRegister.Q_cheats]);
+			CheatsNodeCfg.setup(dic[ConfigClassRegister.Q_cheats_node]);
+
 			TaskMissionCfgData.setupSection(dic[ConfigClassRegister.Q_mission_section]);
 			//坐骑数据
 			HorseConfigData.setConfig(dic[ConfigClassRegister.Q_horse]);
@@ -252,7 +256,6 @@ package com.rpgGame.app.data
 			//心法
 			CheatsCfg.setup(dic[ConfigClassRegister.Q_cheats]);
 			CheatsNodeCfg.setup(dic[ConfigClassRegister.Q_cheats_node]);
-
 		}
 		
 		/**

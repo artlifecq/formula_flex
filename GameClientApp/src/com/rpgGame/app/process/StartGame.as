@@ -203,7 +203,6 @@ package com.rpgGame.app.process
 
 			TipManager.registerTipsParserClass(TipType.PASSIVESKILL_TIP,PassiveSpellTip);
 			TipManager.registerTipsParserClass(TipType.EXTARITEM_TIP,ExtarItemTip);
-
 			TipManager.registerTipsParserClass(TipType.CHEATS_NODE_TIP,CheatsNodePointTip);
 			TipManager.registerTipsParserClass(TipType.CHEATS_TIP,CheatsTipExt);
 			TipManager.registerTipsParserClass(TipType.CHEATS_INTRADUCTION_TIP,CheatsIntraductTipExt);
