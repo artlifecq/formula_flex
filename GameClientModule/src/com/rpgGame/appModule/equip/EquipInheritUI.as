@@ -113,6 +113,7 @@ package com.rpgGame.appModule.equip
 			EventManager.addEvent(ItemEvent.ITEM_ADD,onFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
+			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateMoney);//金钱变化
 		}
 		
 		private function clearEvent():void
@@ -123,6 +124,7 @@ package com.rpgGame.appModule.equip
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
+			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateMoney);//金钱变化
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -396,21 +398,37 @@ package com.rpgGame.appModule.equip
 				for(var i:int=0;i<_optionsList.length;i++)
 				{
 					_optionsList[i].ShowAttribute(_targetEquipInfo,_useEuipInfo);
-				}
-				var q_jicheng:Q_equip_inherit_cost=EquipJiChengData.getJiChengCfg(_targetEquipInfo.qItem.q_kind,_targetEquipInfo.qItem.q_levelnum);
-				if(q_jicheng)
-					var useMon:int=q_jicheng.q_cast;
-				else
-					useMon=0;
-				var userMon:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
-				_leftSkin.lb_yinzi.htmlText=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),useMon,userMon);
+				}			
 			}
 			else
 			{
 				for(i=0;i<_optionsList.length;i++)
 				{
 					_optionsList[i].ClearAttribute();
-				}
+				}			
+			}
+			showMoney();
+		}
+		
+		//更新消耗
+		private function showMoney():void
+		{
+			if(_targetEquipInfo!=null&&_useEuipInfo!=null)
+			{
+				var q_jicheng:Q_equip_inherit_cost=EquipJiChengData.getJiChengCfg
+					
+					(_targetEquipInfo.qItem.q_kind,_targetEquipInfo.qItem.q_levelnum);
+				if(q_jicheng)
+					var useMon:int=q_jicheng.q_cast;
+				else
+					useMon=0;
+				var userMon:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ 
+					
+					MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
+				_leftSkin.lb_yinzi.htmlText=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),useMon,userMon);
+			}
+			else
+			{
 				_leftSkin.lb_yinzi.htmlText=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),0);
 			}
 		}
@@ -491,7 +509,9 @@ package com.rpgGame.appModule.equip
 			if(_useEuipInfo!=null)
 			{
 				if(info.qItem.q_kind==_useEuipInfo.qItem.q_kind&&(info.strengthLevel<_useEuipInfo.strengthLevel
-					||info.polishLevel<_useEuipInfo.polishLevel)&&info.qItem.q_max_strengthen>0&&!EquipStrengthCfg.isMax(info.strengthLevel))
+					||info.polishLevel<_useEuipInfo.polishLevel)&&info.qItem.q_max_strengthen>0&&!EquipStrengthCfg.isMax
+					
+					(info.strengthLevel))
 				{
 					return true;
 				}
@@ -562,11 +582,15 @@ package com.rpgGame.appModule.equip
 			}
 			else if(_targetEquipInfo!=null&&_useEuipInfo!=null)
 			{
-				var q_jicheng:Q_equip_inherit_cost=EquipJiChengData.getJiChengCfg(_targetEquipInfo.qItem.q_kind,_targetEquipInfo.qItem.q_levelnum);
+				var q_jicheng:Q_equip_inherit_cost=EquipJiChengData.getJiChengCfg
+					
+					(_targetEquipInfo.qItem.q_kind,_targetEquipInfo.qItem.q_levelnum);
 				if(q_jicheng)
 					var useMon:int=q_jicheng.q_cast;
 				else useMon=0;
-				var userMon:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
+				var userMon:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ 
+					
+					MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
 				if(useMon>userMon)
 				{
 					NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(2007));
@@ -639,6 +663,14 @@ package com.rpgGame.appModule.equip
 					info.type==GoodsType.EQUIPMENT2)){
 				ItemManager.getBackEquip(initPanel);
 			}		
+		}
+		
+		private function updateMoney(type:int=3):void
+		{
+			if(type!=CharAttributeType.RES_GOLD&&type!=CharAttributeType.RES_BIND_GOLD){
+				return;
+			}
+			showMoney();
 		}
 		
 		private function addComplete(render:RenderUnit3D):void

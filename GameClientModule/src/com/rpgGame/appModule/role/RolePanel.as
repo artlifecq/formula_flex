@@ -6,6 +6,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.appModule.jingmai.MeridianMainPanelExt;
 	import com.rpgGame.appModule.role.interfaces.ISubPanel;
 	import com.rpgGame.appModule.util.MCUtil;
+	import com.rpgGame.appModule.zhangong.ZhanGongPanelExt;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.role.HeroData;
@@ -27,12 +28,14 @@ package com.rpgGame.appModule.role
 	{
 		public static const SUB_ROLE:String="role_panel";
 		public static const SUB_MERIDIAN:String="meridian_panel";
+		public static const SUB_ZHANGONG:String="zhangong_panel";
 		protected var _skin : beibao_Skin;
 		
-	
+		
 		private var _subRole:SubRolePanel;
-		private var _subMeridian:MeridianMainPanelExt
-		private var _curSub:SkinUI
+		private var _subMeridian:MeridianMainPanelExt;
+		private var _subZhanGong:ZhanGongPanelExt;
+		private var _curSub:SkinUI;
 		public function RolePanel()
 		{
 			this._skin = new beibao_Skin();
@@ -73,6 +76,11 @@ package com.rpgGame.appModule.role
 					sub=subMeridian;
 					break;
 				}
+				case SUB_ZHANGONG:
+				{
+					sub=subZhanGong;
+					break;
+				}
 				default:
 				{
 					sub=_subRole;
@@ -104,8 +112,12 @@ package com.rpgGame.appModule.role
 			{
 				showSubPanel(SUB_MERIDIAN);
 			}
+			else if(target==(_skin.daohang.skin as daohang_Skin).btn_zhangong)
+			{
+				showSubPanel(SUB_ZHANGONG);
+			}
 		}
-	
+		
 		
 		/**
 		 * 当舞台尺寸变化后
@@ -122,7 +134,7 @@ package com.rpgGame.appModule.role
 		{
 			super.hide();
 		}
-
+		
 		public function get subMeridian():MeridianMainPanelExt
 		{
 			if (_subMeridian==null) 
@@ -131,6 +143,16 @@ package com.rpgGame.appModule.role
 			}
 			return _subMeridian;
 		}
+		
+		public function get subZhanGong():ZhanGongPanelExt
+		{
+			if(_subZhanGong==null)
+			{
+				_subZhanGong=new ZhanGongPanelExt();
+			}
+			return _subZhanGong;
+		}
+		
 		override protected function onShow():void
 		{
 			super.onShow();

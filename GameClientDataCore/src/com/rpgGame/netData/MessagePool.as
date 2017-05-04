@@ -670,6 +670,10 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.warmark.handler.ResWarMarkListHandler;
 	import com.rpgGame.netData.warmark.message.ResUpdateWarmarkMessage;
 	import com.rpgGame.netData.warmark.message.ResWarMarkListMessage;
+	import com.rpgGame.netData.zhangong.handler.SCMeritoriousInfoListHandler;
+	import com.rpgGame.netData.zhangong.handler.SCMeritoriousUpgradeResultHandler;
+	import com.rpgGame.netData.zhangong.message.SCMeritoriousInfoListMessage;
+	import com.rpgGame.netData.zhangong.message.SCMeritoriousUpgradeResultMessage;
 	import com.rpgGame.netData.zone.handler.ResBattleZoneBOSSinfoToClientHandler;
 	import com.rpgGame.netData.zone.handler.ResBattleZoneClearanceToClientHandler;
 	import com.rpgGame.netData.zone.handler.ResBattleZoneObtainToClientHandler;
@@ -954,6 +958,8 @@ package com.rpgGame.netData{
 			register(124105, ResTreasureBoxInfoMessage, ResTreasureBoxInfoHandler);
 			register(124106, ResTreasureBoxRewardListMessage, ResTreasureBoxRewardListHandler);
 			register(124107, ResGetTreasureBoxRewardMessage, ResGetTreasureBoxRewardHandler);
+			register(125101, SCMeritoriousInfoListMessage, SCMeritoriousInfoListHandler);
+			register(125103, SCMeritoriousUpgradeResultMessage, SCMeritoriousUpgradeResultHandler);
 			register(137201, ResCardToClientMessage, ResCardToClientHandler);
 			register(141101, ResToplistToClientMessage, ResToplistToClientHandler);
 			register(141102, ResListLeaderToClientMessage, ResListLeaderToClientHandler);
