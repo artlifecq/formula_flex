@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.mount
 {
 	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	
 	import org.mokylin.skin.app.zuoqi.Shuxing_Item;
@@ -22,12 +23,16 @@ package com.rpgGame.appModule.mount
 		}
 		private var _currentatt:Number;
 		private var _nextAtt:Number;
+		private var _addatt:Number;
 		private var _attpropId:int;
-		public function updataAtt(type:int,currentatt:Number=0,nextatt:Number=0):void
+		private var _job:int;
+		public function updataAtt(type:int,currentatt:Number=0,addatt:Number=0,nextatt:Number=0,job:int = 1):void
 		{
 			_currentatt = currentatt;
 			_nextAtt = nextatt;
+			_addatt = addatt;
 			_attpropId = type;
+			_job = job;
 			refeashView();
 			showUpLevelView(_isSHow);
 		}
@@ -39,9 +44,18 @@ package com.rpgGame.appModule.mount
 				return ;
 			}
 			_skin.container.visible = true;
-			var attname:String = CharAttributeType.getCNName(_attpropId);
+			var attpropid:int = _attpropId;
+			if(attpropid== CharAttributeType.WAI_GONG&&_job != JobEnum.ROLE_1_TYPE)
+				attpropid = CharAttributeType.NEI_GONG;
+				
+			var attname:String = CharAttributeType.getCNName(attpropid);
 			_skin.lbName.text = attname;
-			_skin.lbCurrent.text = AttValueConfig.getDisAttValueStr(_attpropId,_currentatt);
+			var labcur:String = AttValueConfig.getDisAttValueStr(_attpropId,_currentatt);
+			if(_addatt>0)
+			{
+				labcur += "  +"+AttValueConfig.getDisAttValueStr(_attpropId,_addatt)+"(临时)";
+			}
+			_skin.lbCurrent.text = labcur;
 			if(_nextAtt>0)
 			{
 				_skin.lbUp.text = AttValueConfig.getDisAttValueStr(_attpropId,_nextAtt);
