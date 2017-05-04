@@ -255,9 +255,7 @@ package com.rpgGame.app.data
 			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
 			HorseExtraItemInfo.createInfo();
 
-			//心法
-			CheatsCfg.setup(dic[ConfigClassRegister.Q_cheats]);
-			CheatsNodeCfg.setup(dic[ConfigClassRegister.Q_cheats_node]);
+			
 		}
 		
 		/**
