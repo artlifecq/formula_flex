@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.tips
 {
+	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.utils.FaceUtil;
@@ -27,7 +28,6 @@ package com.rpgGame.app.ui.tips
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
 	
-	import org.client.mainCore.ds.HashMap;
 	import org.mokylin.skin.app.tips.zhuangbeiTips_Skin;
 	
 	/**
@@ -188,57 +188,43 @@ package com.rpgGame.app.ui.tips
 			
 			var name:String;
 			var value:String;
-			var attValues1:Q_att_values=AttValueConfig.getAttInfoById(int(_itemInfo.qItem.q_att_type));
+			var attValues1:Q_att_values=AttValueConfig.getAttInfoById(int(_itemInfo.qItem.q_att_type));//基本属性
 			var stren:Q_equip_strength=EquipStrengthCfg.getStrengthCfg(_itemInfo.qItem.q_kind,_itemInfo.qItem.q_job,_itemInfo.strengthLevel);
-			var strenValues:Q_att_values=AttValueConfig.getAttInfoById(stren.q_att_type);
+			var strenValues:Q_att_values=AttValueConfig.getAttInfoById(stren.q_att_type);//强化属性
 			if(!attValues1){
 				return ;
 			}
-			var map1:HashMap=new HashMap();
-			var map2:HashMap=new HashMap();
+			var map1:HashMap=AttValueConfig.getTypeValueMap(attValues1);
+			var map2:HashMap=AttValueConfig.getTypeValueMap(strenValues);
 		
 			var label:Label;
 			var curY:int=170;
 			var num:int=0;
-			for(i=1;i<CharAttributeType.TYPE_NUM;i++){
-				if(attValues1["q_value"+i]!=0){
-					map1.add(attValues1["q_type"+i],attValues1["q_value"+i]);
-					map2.add(strenValues["q_type"+i],strenValues["q_value"+i]);
-				}
-			}
 			var ids:Array=CharAttributeType.baseAttrIdArr;
 			name=HtmlTextUtil.getTextColor(0xCFC6AE,"[基础属性]\n");
 			label=createLabel(name,"");
 			label.x=10;
 			label.y=curY;
-			var id:int;
+			var type:int;
 			var per:String="";
-			for each(id in ids){
-				var v:Number=map1.getValue(id);
-				if(v==0){
+			for each(type in ids){
+				var attValue:Number=map1.getValue(type);
+				if(attValue==0){
 					continue;
 				}
 				curY+=25;
 				
 				num++;
-				name=CharAttributeType.getCNName(id);
-				if(name.indexOf("率")!=-1||name.indexOf("百分比")!=-1){
-					per="%";
-					v/=100;
-				}else{
-					per="";
-				}
+				name=CharAttributeType.getCNName(type);
+				
 				name=HtmlTextUtil.getTextColor(0x8B8D7B,name+":");
-				value=HtmlTextUtil.getTextColor(0xCFC6AE,v+per);
+				value=HtmlTextUtil.getTextColor(0xCFC6AE,AttValueConfig.getDisAttValueStr(type,attValue));
 				label=createLabel(name,value);
 				label.x=10;
 				label.y=curY;
-				var sten:Number=map2.getValue(id);
+				var sten:Number=map2.getValue(type);
 				if(sten!=0){
-					if(per=="%"){
-						sten/=100;
-					}
-					value=HtmlTextUtil.getTextColor(0x5CB006,"    (强化+"+sten+per+")");
+					value=HtmlTextUtil.getTextColor(0x5CB006,"    (强化+"+AttValueConfig.getDisAttValueStr(type,sten)+")");
 					label=createLabel("",value);
 					label.x=123;
 					label.y=curY;
@@ -331,21 +317,17 @@ package com.rpgGame.app.ui.tips
 					_itemTip.tip_down.visible=true;
 				}
 				var attValues2:Q_att_values=AttValueConfig.getAttInfoById(int(equipItemInfo.qItem.q_att_type));
-				map2=new HashMap();
-				
-				for(i=1;i<CharAttributeType.TYPE_NUM;i++){
-					if(attValues2["q_value"+i]!=0){
-						map2.add(attValues2["q_type"+i],attValues2["q_value"+i]);
-					}
-				}
+				map2=AttValueConfig.getTypeValueMap(attValues2);
 				
 				curY=curY+5;
 				_itemTip.grp_duibi.y=curY;
 				curY+=25;
 				num=0;
-				for each(id in ids){
-					var value1:int=map1.getValue(id);
-					var value2:int=map2.getValue(id);
+				for each(type in ids){
+					var value1:int=map1.getValue(type);
+					value1=AttValueConfig.getDisAttValue(type,value1);
+					var value2:int=map2.getValue(type);
+					value2=AttValueConfig.getDisAttValue(type,value2);
 					var change:int;
 					if(value1!=0||value2!=0){
 						change=value1-value2;
@@ -353,7 +335,7 @@ package com.rpgGame.app.ui.tips
 					}else{
 						continue;						
 					}
-					var valueName:String= CharAttributeType.getCNName(id);
+					var valueName:String= CharAttributeType.getCNName(type);
 					name=HtmlTextUtil.getTextColor(0xCFC6AE,valueName+":");
 					if(change>=0){
 						value=HtmlTextUtil.getTextColor(0x5CB006,"+"+change.toString());

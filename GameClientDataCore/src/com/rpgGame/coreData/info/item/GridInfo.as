@@ -14,6 +14,11 @@ package com.rpgGame.coreData.info.item
 		//格子下标
 		private var _index:int;
 		
+		/**
+		 *是否灰度 
+		 */
+		public var isGray:Boolean;
+		
 		
 		/**
 		 * 格子信息 

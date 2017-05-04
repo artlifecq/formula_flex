@@ -99,7 +99,7 @@ package com.rpgGame.app.ui.main.navigation {
                     break;
                 case this._skin.btn_wuxue:
                     AppManager.showApp(AppConstant.SKILL_PANL);
-					AppManager.showApp(AppConstant.JINGMAI_PANEL);
+//					AppManager.showApp(AppConstant.JINGMAI_PANEL);
                     break;
                 case this._skin.btn_zhuangbei:
                     AppManager.showApp(AppConstant.EQUIP_PANL);

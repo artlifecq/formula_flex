@@ -5,10 +5,7 @@
     import flash.display3D.Context3D;
     import flash.display3D.Context3DBufferUsage;
     import flash.display3D.Context3DClearMask;
-    import flash.display3D.Context3DMipFilter;
-    import flash.display3D.Context3DTextureFilter;
     import flash.display3D.Context3DTextureFormat;
-    import flash.display3D.Context3DWrapMode;
     import flash.display3D.IndexBuffer3D;
     import flash.display3D.Program3D;
     import flash.display3D.VertexBuffer3D;
@@ -27,7 +24,6 @@
     
     import away3d.Away3D;
     import away3d.arcane;
-    import away3d.containers.View3D;
     import away3d.core.base.CompactSubGeometry;
     import away3d.core.base.IRenderable;
     import away3d.core.base.SubMesh;

@@ -56,7 +56,12 @@ package org.mokylin.skin.common.over
 						}
 					]
 			};
-			skinNames={"down":"ui/common/hover/xuanqukuang2.png", "hover":"ui/common/hover/xuanqukuang2.png", "up":"ui/common/hover/xuanqukuang2_alpha.png"};
+			skinNames={"down":"ui/common/hover/xuanqukuang2.png",
+			"downAndSelected":"ui/common/hover/xuanqukuang.png",
+			"hover":"ui/common/hover/xuanqukuang2.png",
+			"overAndSelected":"ui/common/hover/xuanqukuang.png",
+			"up":"ui/common/hover/xuanqukuang2_alpha.png",
+			"upAndSelected":"ui/common/hover/xuanqukuang.png"};
 		}
 
 
@@ -77,9 +82,9 @@ package org.mokylin.skin.common.over
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
 			temp.bottom = 0;
-			temp.left = 0;
+			temp.left = 20;
 			temp.right = 0;
-			temp.text = "";
+			temp.text = "2222222";
 			temp.textAlign = "center";
 			temp.color = 0xFFFFFF;
 			temp.top = 0;

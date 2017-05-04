@@ -11,6 +11,7 @@ package com.rpgGame.appModule.common
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.enum.item.ItemTypeEnum;
+	import com.rpgGame.coreData.info.face.IBaseFaceInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.lang.LangGoods;
@@ -97,6 +98,18 @@ package com.rpgGame.appModule.common
 			_dndGrids = new Vector.<DragDropItem>;
 			_dataProvider = new ListCollection();
 			initList();
+		}
+		
+		public function setGrayForData(data:IBaseFaceInfo,gray:Boolean):void
+		{
+			var num:int=goodsList.dataProvider.length;
+			for(var i:int=0;i<num;i++){
+				var info:GridInfo=goodsList.dataProvider.getItemAt(i) as GridInfo;
+				if(info&&info.data==data){
+					info.isGray=gray;
+					break;
+				}
+			}
 		}
 		
 		private function initList():void
