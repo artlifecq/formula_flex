@@ -20,7 +20,6 @@ package com.rpgGame.appModule.skill.lostskill
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
-	import com.rpgGame.netData.lostSkill.message.CSChangeSkillMessage;
 	import com.rpgGame.netData.lostSkill.message.CSLostSkillLeveUpMessage;
 	
 	import org.game.netCore.connection.SocketConnection;

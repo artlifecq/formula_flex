@@ -1,5 +1,4 @@
 package com.rpgGame.netData.horse.bean{
-	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
 	
 	import org.game.netCore.net.Bean;
@@ -15,8 +14,6 @@ package com.rpgGame.netData.horse.bean{
 	 */
 	public class HorseDataInfo extends Bean {
 	
-		//坐骑装备列表(4个格子,空的是itemid为0)
-		private var _equips: Vector.<com.rpgGame.netData.backpack.bean.ItemInfo> = new Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>();
 		//坐骑当前祝福值
 		private var _exp: int;
 		
@@ -30,11 +27,6 @@ package com.rpgGame.netData.horse.bean{
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//坐骑装备列表(4个格子,空的是itemid为0)
-			writeShort(_equips.length);
-			for (var i: int = 0; i < _equips.length; i++) {
-				writeBean(_equips[i]);
-			}
 			//坐骑当前祝福值
 			writeInt(_exp);
 			//当前乘骑坐骑ID
@@ -48,11 +40,6 @@ package com.rpgGame.netData.horse.bean{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//坐骑装备列表(4个格子,空的是itemid为0)
-			var equips_length : int = readShort();
-			for (var i: int = 0; i < equips_length; i++) {
-				_equips[i] = readBean(com.rpgGame.netData.backpack.bean.ItemInfo) as com.rpgGame.netData.backpack.bean.ItemInfo;
-			}
 			//坐骑当前祝福值
 			_exp = readInt();
 			//当前乘骑坐骑ID
@@ -60,21 +47,6 @@ package com.rpgGame.netData.horse.bean{
 			//坐骑当前阶数
 			_horseModelId = readInt();
 			return true;
-		}
-		
-		/**
-		 * get 坐骑装备列表(4个格子,空的是itemid为0)
-		 * @return 
-		 */
-		public function get equips(): Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>{
-			return _equips;
-		}
-		
-		/**
-		 * set 坐骑装备列表(4个格子,空的是itemid为0)
-		 */
-		public function set equips(value: Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>): void{
-			this._equips = value;
 		}
 		
 		/**

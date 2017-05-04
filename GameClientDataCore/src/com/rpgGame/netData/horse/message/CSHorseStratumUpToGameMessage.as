@@ -8,20 +8,20 @@ package com.rpgGame.netData.horse.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 请求乘骑或者休息
+	 * 请求坐骑升阶
 	 */
-	public class ReqHorseIllusionToGameMessage extends Message {
+	public class CSHorseStratumUpToGameMessage extends Message {
 	
-		//坐骑ID(0表示休息)
-		private var _horseModelid: int;
+		//自动购买材料
+		private var _Automatic: int;
 		
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//坐骑ID(0表示休息)
-			writeShort(_horseModelid);
+			//自动购买材料
+			writeByte(_Automatic);
 			return true;
 		}
 		
@@ -29,8 +29,8 @@ package com.rpgGame.netData.horse.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//坐骑ID(0表示休息)
-			_horseModelid = readShort();
+			//自动购买材料
+			_Automatic = readByte();
 			return true;
 		}
 		
@@ -39,22 +39,22 @@ package com.rpgGame.netData.horse.message{
 		 * @return 
 		 */
 		override public function getId(): int {
-			return 144203;
+			return 144202;
 		}
 		
 		/**
-		 * get 坐骑ID(0表示休息)
+		 * get 自动购买材料
 		 * @return 
 		 */
-		public function get horseModelid(): int{
-			return _horseModelid;
+		public function get Automatic(): int{
+			return _Automatic;
 		}
 		
 		/**
-		 * set 坐骑ID(0表示休息)
+		 * set 自动购买材料
 		 */
-		public function set horseModelid(value: int): void{
-			this._horseModelid = value;
+		public function set Automatic(value: int): void{
+			this._Automatic = value;
 		}
 		
 	}

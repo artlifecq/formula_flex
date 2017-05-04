@@ -8,11 +8,11 @@ package com.rpgGame.netData.horse.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 请求坐骑信息
+	 * 请求乘骑或者休息
 	 */
-	public class ReqSendHorseInfoToGameMessage extends Message {
+	public class CSHorseIllusionToGameMessage extends Message {
 	
-		//坐骑ID(0表示发送所有坐骑列表)
+		//坐骑ID(0表示休息)
 		private var _horseModelid: int;
 		
 		
@@ -20,8 +20,8 @@ package com.rpgGame.netData.horse.message{
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//坐骑ID(0表示发送所有坐骑列表)
-			writeByte(_horseModelid);
+			//坐骑ID(0表示休息)
+			writeShort(_horseModelid);
 			return true;
 		}
 		
@@ -29,8 +29,8 @@ package com.rpgGame.netData.horse.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//坐骑ID(0表示发送所有坐骑列表)
-			_horseModelid = readByte();
+			//坐骑ID(0表示休息)
+			_horseModelid = readShort();
 			return true;
 		}
 		
@@ -39,11 +39,11 @@ package com.rpgGame.netData.horse.message{
 		 * @return 
 		 */
 		override public function getId(): int {
-			return 144201;
+			return 144203;
 		}
 		
 		/**
-		 * get 坐骑ID(0表示发送所有坐骑列表)
+		 * get 坐骑ID(0表示休息)
 		 * @return 
 		 */
 		public function get horseModelid(): int{
@@ -51,7 +51,7 @@ package com.rpgGame.netData.horse.message{
 		}
 		
 		/**
-		 * set 坐骑ID(0表示发送所有坐骑列表)
+		 * set 坐骑ID(0表示休息)
 		 */
 		public function set horseModelid(value: int): void{
 			this._horseModelid = value;

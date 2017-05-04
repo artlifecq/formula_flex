@@ -10,7 +10,7 @@ package com.rpgGame.netData.horse.message{
 	 * 
 	 * 发送升阶结果信息
 	 */
-	public class ResHorseUpResultToClientMessage extends Message {
+	public class SCHorseUpResultToClientMessage extends Message {
 	
 		//本次升阶是否成功(1表示成功0表示失败)
 		private var _isSuccess: int;
