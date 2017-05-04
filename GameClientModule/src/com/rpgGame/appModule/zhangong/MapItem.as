@@ -83,9 +83,11 @@ package com.rpgGame.appModule.zhangong
 			if (CharAttributeType.LV==type)
 			{
 				if(_lv>MainRoleManager.actorInfo.totalStat.level){
+					_skin.btnBG.isEnabled=false;
 					GrayFilter.gray(_skin.btnBG);
 				}
 				else{
+					_skin.btnBG.isEnabled=true;
 					_skin.btnBG.filter=null;
 				}
 			}
@@ -104,6 +106,9 @@ package com.rpgGame.appModule.zhangong
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
+			if(_lv>MainRoleManager.actorInfo.totalStat.level){
+				return;
+			}
 			EventManager.dispatchEvent(ZhanGongEvent.MAPITEM_SELECT,this);
 		}
 		

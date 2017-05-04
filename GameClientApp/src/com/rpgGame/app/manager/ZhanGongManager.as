@@ -92,7 +92,12 @@ package com.rpgGame.app.manager
 					maxLv+=ZhanGongData.getMaxLvByType(info.type);
 				}
 			}		
-			var par:String=(nowLv/maxLv).toFixed(1)+"%";
+			if(maxLv!=0)
+			{
+			var par:String=(nowLv/maxLv).toFixed(3)+"%";
+			}
+			else
+				par="0%";
 			
 			return par;
 		}

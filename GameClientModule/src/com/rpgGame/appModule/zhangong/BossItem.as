@@ -1,13 +1,17 @@
 package com.rpgGame.appModule.zhangong
 {
+	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.ZhanGongManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
+	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.ZhanGongSender;
 	import com.rpgGame.app.ui.common.CenterEftPop;
+	import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.ZhanGongEvent;
 	import com.rpgGame.core.ui.SkinUI;
@@ -20,7 +24,13 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.role.MonsterBornData;
 	import com.rpgGame.coreData.role.MonsterData;
+	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.role.RoleType;
+	import com.rpgGame.coreData.type.AvatarMaskType;
 	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.coreData.type.SceneCharType;
+	import com.rpgGame.coreData.utils.ZhanGongUtil;
 	import com.rpgGame.netData.zhangong.bean.MeritoriousInfo;
 	import com.rpgGame.netData.zhangong.message.SCMeritoriousUpgradeResultMessage;
 	
@@ -40,11 +50,22 @@ package com.rpgGame.appModule.zhangong
 		private var _type:int=0;
 		private var _info:MeritoriousInfo;
 		private var _q_meritorious:Q_meritorious;
+		
+		private var _avatar : InterAvatar3D;
+		private var _avatarContainer:Inter3DContainer;
+		private var _avatardata:MonsterData;
 		public function BossItem()
 		{
 			_skin=new BossItem_Skin();
 			super(_skin);
 			_skin.conver.visible=false;
+			_avatarContainer=new Inter3DContainer();
+			_avatar = new InterAvatar3D();
+			_avatar.x =100;
+			_avatar.y = 230;
+			_avatarContainer.addChild3D(_avatar);
+			_avatardata=new MonsterData(RoleType.TYPE_MONSTER);
+			_skin.container.addChild(_avatarContainer);
 		}
 		
 		override protected function onShow():void
@@ -104,6 +125,7 @@ package com.rpgGame.appModule.zhangong
 			var id:String=_info.level.toString()+"_"+_type;
 			_q_meritorious= ZhanGongData.getmeritoriousById(id);
 			if(_q_meritorious==null) return ;
+			showMonster(_q_meritorious.q_monsterID);
 			var name:String=MonsterDataManager.getMonsterName(_q_meritorious.q_monsterID);
 			_skin.lbName.text=name;
 			_skin.lbLevelCurrent.text="LV."+_info.level;
@@ -119,6 +141,15 @@ package com.rpgGame.appModule.zhangong
 			var haveNum:int=MainRoleManager.actorInfo.totalStat.getResData(_q_meritorious.q_materil);
 			_skin.lbNum.text=haveNum.toString()+"/"+_q_meritorious.q_num;
 			_skin.pro_bar.value=(haveNum/_q_meritorious.q_num)*100<=100?(haveNum/_q_meritorious.q_num)*100:100;		
+		}
+		
+		private function showMonster(monsterId:int):void
+		{
+			var bornData : Q_monster = MonsterDataManager.getData(monsterId);		
+			_avatardata.avatarInfo.setBodyResID(bornData ? bornData.q_body_res : "", null);
+			_avatar.setRoleData(this._avatardata);
+			var listMask:Vector.<Number>=ZhanGongUtil.getMonsterMaskById(monsterId);
+			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.DIALOG_MASK,_avatar,listMask[0],listMask[1],listMask[2]);
 		}
 		
 		private function setUIType(type:int):void
@@ -149,6 +180,7 @@ package com.rpgGame.appModule.zhangong
 				case CharAttributeType.HUIGEN:
 					_skin.uiType.styleName="ui/app/beibao/zhangong/jiacheng/huigen.png";
 					break;
+				
 			}
 		}
 		
