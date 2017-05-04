@@ -259,7 +259,7 @@ package com.rpgGame.core.app
 		public static var CROWN_BEEN_INVITE_UNION_PANEL : String = createAppInfo("crown.CrownBeenInviteUnionPanel");
 		
 		/** 坐骑主面板 **/
-		public static var MOUNT_PANEL:String = createAppInfo( "mount.MountPanel","mount" );
+		public static var MOUNT_PANEL:String = createAppInfo( "mount.MountPanel","zuoqi" );
 		/** 坐骑转化面板 **/
 		public static var MOUNT_CHANGE_PANEL:String = createAppInfo( "mount.panel.MountChangePanel","mount" );
 		/** 坐骑繁育面板 **/
@@ -362,6 +362,6 @@ package com.rpgGame.core.app
 		/**系统设置**/
 		public static var SYSTEMSET_PANEL:String = createAppInfo("systemset.SystemsetingPanel","systemSet");
 		/**经脉**/
-		public static var JINGMAI_PANEL:String = createAppInfo("jingmai.JingMaiPanelExt","jingmai");
+		public static var JINGMAI_STONE:String = createAppInfo("jingmai.sub.NoStoneNoticePanelExt","beibao");
 	}
 }

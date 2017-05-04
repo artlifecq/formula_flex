@@ -233,8 +233,16 @@ package com.rpgGame.app.utils
 			grid.sortLayer();
 			
 			if( isTips )
-				TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.SPELL_TIP, data,false,new Point(grid.x,grid.y)) );
-			else
+			{
+				var skilldata:Q_skill_model = data.data as Q_skill_model;
+				if(skilldata.q_trigger_type == 1)
+				{
+					TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.SPELL_TIP, data,false,new Point(grid.x,grid.y)) );
+				}else{
+					TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.PASSIVESKILL_TIP, data,false,new Point(grid.x,grid.y)) );
+				}
+				
+			}else
 				TipTargetManager.remove( grid );
 		}
 		

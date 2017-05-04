@@ -88,7 +88,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_att_transfer:String = "data.Q_att_transfer";
 		/**  所有属性相关的数据																														 */
 		public static const Q_att_values:String = "data.Q_att_values";
-		/**  心法数据库											 */
+		/**  心法数据库												 */
 		public static const Q_cheats:String = "data.Q_cheats";
 		/**  经脉冲穴数据库																 */
 		public static const Q_cheats_node:String = "data.Q_cheats_node";
@@ -124,7 +124,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_lostskill_open:String = "data.Q_lostskill_open";
 		/**  绝学升级表		 */
 		public static const Q_lostskill_up:String = "data.Q_lostskill_up";
-		/**  论剑配置表								 */
+		/**  论剑配置表										 */
 		public static const Q_lunjian:String = "data.Q_lunjian";
 		/**  经脉冲穴数据库																 */
 		public static const Q_meridian:String = "data.Q_meridian";
@@ -146,6 +146,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
 		/**  窗口链接				 */
 		public static const Q_windowInfo:String = "data.Q_windowInfo";
+		/**  副本数据表														 */
+		public static const Q_zone:String = "data.Q_zone";
 		/**  职业对应的名字		 */
 		public static const RaceNameInfo:String = "data.RaceNameInfo";
 		/**  赛马模型等配置信息								 */
@@ -168,7 +170,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_GCD:String = "data.spell.Q_GCD";
 		/**  技能无视防御伤害数据库																		 */
 		public static const Q_skill_ignore:String = "data.spell.Q_skill_ignore";
-		/**  技能基本信息配置数据表																																																																																																																																				 */
+		/**  技能基本信息配置数据表																																																																																																																																						 */
 		public static const Q_skill_model:String = "data.spell.Q_skill_model";
 		/**  技能效果配置表																			 */
 		public static const Q_SpellAnimation:String = "data.spell.Q_SpellAnimation";
@@ -247,6 +249,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);
 			regClass("data.Q_tipsinfo", com.rpgGame.coreData.clientConfig.Q_tipsinfo);
 			regClass("data.Q_windowInfo", com.rpgGame.coreData.clientConfig.Q_windowInfo);
+			regClass("data.Q_zone", com.rpgGame.coreData.clientConfig.Q_zone);
 			regClass("data.RaceNameInfo", com.rpgGame.coreData.clientConfig.RaceNameInfo);
 			regClass("data.RacingInfo", com.rpgGame.coreData.clientConfig.RacingInfo);
 			regClass("data.RacingQuestion", com.rpgGame.coreData.clientConfig.RacingQuestion);

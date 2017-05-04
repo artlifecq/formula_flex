@@ -5,6 +5,7 @@
 	import com.rpgGame.app.cmdlistener.BaZhenTuCmdListener;
 	import com.rpgGame.app.cmdlistener.BuffCmdListener;
 	import com.rpgGame.app.cmdlistener.ChatCmdListener;
+	import com.rpgGame.app.cmdlistener.CheatsCmdListerner;
 	import com.rpgGame.app.cmdlistener.DaTiCmdListener;
 	import com.rpgGame.app.cmdlistener.FightSoulCmdListener;
 	import com.rpgGame.app.cmdlistener.FriendCmdListener;
@@ -139,6 +140,7 @@
 			register("LostSkillCmdListener",LostSkillCmdListener);//绝学
 			register("MeridianCmdListerner",MeridianCmdListerner);
 			register("ZhanGongContainerCmdListener", ZhanGongContainerCmdListener); //战功
+			register("CheatsCmdListerner",CheatsCmdListerner);
 		}
 	}
 }

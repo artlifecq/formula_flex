@@ -1,4 +1,4 @@
-package com.rpgGame.netData{
+package com.rpgGame.netData {
 	
 	import com.rpgGame.netData.achievement.handler.ResSendAchievementDataInfoHandler;
 	import com.rpgGame.netData.achievement.handler.ResSendFinishAchievementHandler;
@@ -60,6 +60,12 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.chat.message.ResChatMessage;
 	import com.rpgGame.netData.chat.message.ResChatRecordMessage;
 	import com.rpgGame.netData.chat.message.ResOfflineChatCountMessage;
+	import com.rpgGame.netData.cheats.handler.SCCheatsInfoHandler;
+	import com.rpgGame.netData.cheats.handler.SCCheatsListHandler;
+	import com.rpgGame.netData.cheats.handler.SCNodeInfoHandler;
+	import com.rpgGame.netData.cheats.message.SCCheatsInfoMessage;
+	import com.rpgGame.netData.cheats.message.SCCheatsListMessage;
+	import com.rpgGame.netData.cheats.message.SCNodeInfoMessage;
 	import com.rpgGame.netData.client.handler.ResClientCustomTagHandler;
 	import com.rpgGame.netData.client.handler.ResClientMessageHandler;
 	import com.rpgGame.netData.client.handler.TestMessageHandler;
@@ -200,18 +206,14 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.guild.message.ResSearchGuildMessage;
 	import com.rpgGame.netData.guild.message.ResSendGuildStoreInfoMessage;
 	import com.rpgGame.netData.guild.message.ResUpdateGuildBossMessage;
-	import com.rpgGame.netData.horse.handler.ResHorseEquipChangeToClientHandler;
-	import com.rpgGame.netData.horse.handler.ResHorseEquipSkillInfoToClientHandler;
-	import com.rpgGame.netData.horse.handler.ResHorseIllusionToClientHandler;
-	import com.rpgGame.netData.horse.handler.ResHorseUpResultToClientHandler;
-	import com.rpgGame.netData.horse.handler.ResSendHorseAllInfoToClientHandler;
-	import com.rpgGame.netData.horse.handler.ResSendHorseInfoToClientHandler;
-	import com.rpgGame.netData.horse.message.ResHorseEquipChangeToClientMessage;
-	import com.rpgGame.netData.horse.message.ResHorseEquipSkillInfoToClientMessage;
-	import com.rpgGame.netData.horse.message.ResHorseIllusionToClientMessage;
-	import com.rpgGame.netData.horse.message.ResHorseUpResultToClientMessage;
-	import com.rpgGame.netData.horse.message.ResSendHorseAllInfoToClientMessage;
-	import com.rpgGame.netData.horse.message.ResSendHorseInfoToClientMessage;
+	import com.rpgGame.netData.horse.handler.SCExtraItemNumHandler;
+	import com.rpgGame.netData.horse.handler.SCHorseAllInfoToClientHandler;
+	import com.rpgGame.netData.horse.handler.SCHorseIllusionToClientHandler;
+	import com.rpgGame.netData.horse.handler.SCHorseUpResultToClientHandler;
+	import com.rpgGame.netData.horse.message.SCExtraItemNumMessage;
+	import com.rpgGame.netData.horse.message.SCHorseAllInfoToClientMessage;
+	import com.rpgGame.netData.horse.message.SCHorseIllusionToClientMessage;
+	import com.rpgGame.netData.horse.message.SCHorseUpResultToClientMessage;
 	import com.rpgGame.netData.isle.handler.ResIslePanlHandler;
 	import com.rpgGame.netData.isle.handler.ResIsleTracePanlHandler;
 	import com.rpgGame.netData.isle.message.ResIslePanlMessage;
@@ -718,7 +720,7 @@ package com.rpgGame.netData{
 	import org.game.netCore.net.Handler;
 	import org.game.netCore.net.Message;
 	
-
+	
 	/** 
 	 * @author Commuication Auto Maker
 	 * 
@@ -804,7 +806,6 @@ package com.rpgGame.netData{
 			register(102112, ResAttackTargetMessage, ResAttackTargetHandler);
 			register(102113, ResVirFightObjectAttackResultMessage, ResVirFightObjectAttackResultHandler);
 			register(102114, SCAttackerResultMessage, SCAttackerResultHandler);
-            register(102116, SCBuffSkillMessage, SCBuffSkillHandler);
 			register(102115, SCCancelSkillMessage, SCCancelSkillHandler);
 			register(102116, SCBuffSkillMessage, SCBuffSkillHandler);
 			register(103101, ResMyPlayerInfoMessage, ResMyPlayerInfoHandler);
@@ -971,12 +972,10 @@ package com.rpgGame.netData{
 			register(142103, ResChangeStallNameMessage, ResChangeStallNameHandler);
 			register(142104, ResStallGoodsSearchMessage, ResStallGoodsSearchHandler);
 			register(142105, ResLookStallLogMessage, ResLookStallLogHandler);
-			register(144101, ResSendHorseAllInfoToClientMessage, ResSendHorseAllInfoToClientHandler);
-			register(144102, ResSendHorseInfoToClientMessage, ResSendHorseInfoToClientHandler);
-			register(144103, ResHorseIllusionToClientMessage, ResHorseIllusionToClientHandler);
-			register(144104, ResHorseEquipSkillInfoToClientMessage, ResHorseEquipSkillInfoToClientHandler);
-			register(144105, ResHorseUpResultToClientMessage, ResHorseUpResultToClientHandler);
-			register(144106, ResHorseEquipChangeToClientMessage, ResHorseEquipChangeToClientHandler);
+			register(144101, SCHorseAllInfoToClientMessage, SCHorseAllInfoToClientHandler);
+			register(144103, SCHorseIllusionToClientMessage, SCHorseIllusionToClientHandler);
+			register(144105, SCHorseUpResultToClientMessage, SCHorseUpResultToClientHandler);
+			register(144106, SCExtraItemNumMessage, SCExtraItemNumHandler);
 			register(148101, ResPetDieBroadcastMessage, ResPetDieBroadcastHandler);
 			register(148102, ResPetTargetMessage, ResPetTargetHandler);
 			register(148103, ResPetHpChangeMessage, ResPetHpChangeHandler);
@@ -1085,12 +1084,15 @@ package com.rpgGame.netData{
 			register(224502, SCActvitSkillResultMessage, SCActvitSkillResultHandler);
 			register(224503, SCChangeSkillResultMessage, SCChangeSkillResultHandler);
 			register(224504, SCLostSkillLevelUpResultMessage, SCLostSkillLevelUpResultHandler);
+			register(225101, SCMeridianListMessage, SCMeridianListHandler);
+			register(225102, SCMeridianInfoMessage, SCMeridianInfoHandler);
+			register(226101, SCCheatsListMessage, SCCheatsListHandler);
+			register(226102, SCCheatsInfoMessage, SCCheatsInfoHandler);
+			register(226103, SCNodeInfoMessage, SCNodeInfoHandler);
 			register(250101, ResChangeServerGameToClientMessage, ResChangeServerGameToClientHandler);
 			register(301101, ResClientMessageMessage, ResClientMessageHandler);
 			register(301102, ResClientCustomTagMessage, ResClientCustomTagHandler);
 			register(301133, TestMessageMessage, TestMessageHandler);
-			register(225101, SCMeridianListMessage, SCMeridianListHandler);
-			register(225102, SCMeridianInfoMessage, SCMeridianInfoHandler);
 		}
 		
 		private function register(id: int, messageClass: Class, handlerClass: Class): void{

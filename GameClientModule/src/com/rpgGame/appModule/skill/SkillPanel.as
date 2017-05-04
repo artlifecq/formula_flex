@@ -10,6 +10,7 @@ package com.rpgGame.appModule.skill
 	import org.mokylin.skin.app.wuxue.jineng.jineng_Skin;
 	import org.mokylin.skin.app.wuxue.juexue.Juexue_Skin;
 	
+	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.events.Event;
 	
@@ -41,20 +42,21 @@ package com.rpgGame.appModule.skill
 			_navSkin=_skin.daohang.skin as Wuxue_Daohang;
 			_radioGroup = Radio.RADIO_GROUP_NAMES[_navSkin.btn_jineng.groupName];
 			_radioGroup.addEventListener(Event.CHANGE,selectChangeHandler);
-			_radioGroup.selectedIndex = 0;
+			
 		}
 		
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			_skillStudyView.onShow();
+			_radioGroup.selectedIndex = 0;
 		}
 		
 		override public function hide():void
 		{
 			super.hide();
 			_skillStudyView.onHide();
+			_lostskillView.onHide();
 		}
 		
 		private function selectChangeHandler():void
@@ -64,12 +66,21 @@ package com.rpgGame.appModule.skill
 					_skin.jineng.visible=true;
 					_skin.juexue.visible = false;
 					_lostskillView.onHide();
+					_skillStudyView.onShow();
 					break;
 				case _navSkin.btn_juexue:
 					_skin.jineng.visible=false;
 					_skin.juexue.visible = true;
 					_lostskillView.onShow();
+					_skillStudyView.onHide();
 					break;
+			}
+		}
+		override protected function onTouchTarget(target:DisplayObject):void
+		{
+			super.onTouchTarget(target);
+			if(_skillStudyView.onTouchTarget(target)){
+				return;
 			}
 		}
 	}

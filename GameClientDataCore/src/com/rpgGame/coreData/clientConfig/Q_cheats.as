@@ -20,6 +20,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_id:int;
 		 /**  名字 */
 		public var q_name:String;
+		 /**    */
+		public var q_default:int;
 		 /**  激活道具条件 */
 		public var q_needitem:String;
 		 /**  激活属性Id */
@@ -32,8 +34,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_each_other:String;
 		 /**  节点数量 */
 		public var q_pointnum:int;
-		 /**  心法技能 */
-		public var q_skill:int;
+		 /**  心法技能[[id,1],[id,2]] */
+		public var q_skill:String;
 		 /**  功法图标 */
 		public var q_icon:int;
 

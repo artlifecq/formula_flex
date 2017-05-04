@@ -18,7 +18,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_mission_randomid:String;
 		 /**  对应等级完成任务获得的奖励(JSON) */
 		public var q_single_reward:String;
-		 /**  10环任务额外奖励（JsoN） */
+		 /**  N环任务额外奖励（JsoN） */
 		public var q_sec_rewards:String;
 		 /**  随机怪物id */
 		public var q_monsters:String;

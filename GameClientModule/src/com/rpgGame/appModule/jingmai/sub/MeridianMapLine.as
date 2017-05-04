@@ -41,7 +41,7 @@ package com.rpgGame.appModule.jingmai.sub
 			drawLine(_innerSkin);
 			_isDraw=true;
 		}
-		public function drawLine(skin:String):void
+		public function drawLine(skin:String,h:int=0):void
 		{
 			if (_posArr==null||_posArr.length<2) 
 			{
@@ -56,14 +56,18 @@ package com.rpgGame.appModule.jingmai.sub
 			{
 				startP=_posArr[i];
 				endP=_posArr[i+1];
-				tmp=createLine(skin,startP,endP);
+				tmp=createLine(skin,startP,endP,h);
 				_lineArr.push(tmp);
 				tmp.width=Math.ceil(MathUtil.getDistance(endP.x,endP.y,startP.x,startP.y))+(lineNum>1?int(tmp.height/2):0);
+				if (h!=0) 
+				{
+					tmp.height=h;
+				}
 				this.addChild(tmp);
 			}
 			
 		}
-		private static function createLine(skin:String,startP:Point,endP:Point):UIAsset
+		private static function createLine(skin:String,startP:Point,endP:Point,h:int=0):UIAsset
 		{
 			var r:Number;
 			var tmp:UIAsset;
@@ -71,7 +75,15 @@ package com.rpgGame.appModule.jingmai.sub
 			tmp.touchable=false;
 			tmp.repeatSkin=true;
 			tmp.styleName=skin;
-			tmp.pivotY=tmp.height/2;
+			if (h!=0) 
+			{
+				tmp.pivotY=h/2;
+			}
+			else
+			{
+				tmp.pivotY=tmp.height/2;
+			}
+			
 			
 			tmp.x=startP.x;
 			tmp.y=startP.y;
@@ -103,6 +115,7 @@ package com.rpgGame.appModule.jingmai.sub
 				endP=_posArr[i+1];
 				tmp=createLine(_innerSkin,startP,endP);
 				tmp.width=0;
+				//tmp.height=5;
 				_lineArr.push(tmp);
 				tw=Math.ceil(MathUtil.getDistance(endP.x,endP.y,startP.x,startP.y))+(lineNum>1?int(tmp.height/2):0);
 				

@@ -3,36 +3,6 @@ package com.rpgGame.appModule.zhangong
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.gameClient.utils.HashMap;
-	import com.rpgGame.app.display3D.InterAvatar3D;
-	import com.rpgGame.app.manager.ZhanGongManager;
-	import com.rpgGame.app.manager.pop.UIPopManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
-	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.sender.ZhanGongSender;
-	import com.rpgGame.app.ui.common.CenterEftPop;
-	import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
-	import com.rpgGame.core.events.MainPlayerEvent;
-	import com.rpgGame.core.events.ZhanGongEvent;
-	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.coreData.cfg.AttValueConfig;
-	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.ZhanGongData;
-	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
-	import com.rpgGame.coreData.clientConfig.Q_att_values;
-	import com.rpgGame.coreData.clientConfig.Q_meritorious;
-	import com.rpgGame.coreData.clientConfig.Q_monster;
-	import com.rpgGame.coreData.role.MonsterBornData;
-	import com.rpgGame.coreData.role.MonsterData;
-	import com.rpgGame.coreData.role.RoleData;
-	import com.rpgGame.coreData.role.RoleType;
-	import com.rpgGame.coreData.type.AvatarMaskType;
-	import com.rpgGame.coreData.type.CharAttributeType;
-	import com.rpgGame.coreData.type.RoleStateType;
-	import com.rpgGame.coreData.type.SceneCharType;
-	import com.rpgGame.coreData.utils.ZhanGongUtil;
-	import com.rpgGame.netData.zhangong.bean.MeritoriousInfo;
-	import com.rpgGame.netData.zhangong.message.SCMeritoriousUpgradeResultMessage;
 	
 	import flash.geom.Point;
 	

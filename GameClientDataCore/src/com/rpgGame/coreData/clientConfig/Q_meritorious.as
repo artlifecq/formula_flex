@@ -12,11 +12,11 @@ package com.rpgGame.coreData.clientConfig
 	*/
 	public class Q_meritorious
 	{
-		 /**  编号(等级_类型) */
+		 /**  编号(升级等级_类型) */
 		public var q_id:String;
-		 /**  类型 */
+		 /**  功勋类型 */
 		public var q_type:int;
-		 /**  等级 */
+		 /**  地图页签等级 */
 		public var q_level:int;
 		 /**  地图ID */
 		public var q_mapID:int;
