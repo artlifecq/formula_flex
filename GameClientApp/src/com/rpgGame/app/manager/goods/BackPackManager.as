@@ -218,5 +218,94 @@ package com.rpgGame.app.manager.goods
 		{
 			ItemUseManager.useItem(equip);
 		}
+		
+		
+		
+		
+		
+		////////////////////////////yt//////////////////////////////////
+		
+		/** 查找当前背包中最合适的药品，品质优先，品质相同的等级优先 **/
+		public function searchHPSuitDrugItem( isAutoBuy:Boolean=false ):ClientItemInfo
+		{
+			var itemInfoList:Array = _goodsList;
+			var returnItem:ClientItemInfo;
+			if( isAutoBuy )
+			{
+				for each(var item:ClientItemInfo in itemInfoList)
+				{
+					var cfgId:int = item.cfgId;
+					var requireLevel:int = ItemConfig.getItemRequireLevel( cfgId ) ;
+					var quality:int = ItemConfig.getItemQuality( cfgId );
+					var cfgId1:int;
+					var requireLevel1:int;
+					var quality1:int;
+					
+					if(ItemConfig.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel)
+					{
+						if( returnItem )
+						{
+							cfgId1 = returnItem.cfgId;
+							requireLevel1 = ItemConfig.getItemRequireLevel( cfgId1 ) ;
+						}
+						else
+						{
+							//cfgId1 = _drugShopInfo.itemInfo.cfgId;
+							requireLevel1 = ItemConfig.getItemRequireLevel( cfgId1 ) - 1 ;
+						}
+						quality1 = ItemConfig.getItemQuality( cfgId1 );
+						if( quality > quality1 )
+						{
+							returnItem = item;
+						}
+						else if( quality == quality1 )
+						{
+							if( requireLevel > requireLevel1)
+							{
+								returnItem = item;
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				for each(item in itemInfoList)
+				{
+					cfgId = item.cfgId;
+					requireLevel = ItemConfig.getItemRequireLevel( cfgId ) ;
+					
+					if(ItemConfig.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel)
+					{
+						quality = ItemConfig.getItemQuality( cfgId );
+						if( returnItem )
+						{
+							requireLevel1 = ItemConfig.getItemRequireLevel( returnItem.cfgId );
+							quality1 = ItemConfig.getItemQuality( returnItem.cfgId );
+							if( quality > quality1 )
+							{
+								returnItem = item;
+							}
+							else if( (quality == quality1) && (requireLevel > requireLevel1) )
+							{
+								returnItem = item;
+							}
+						}
+						else
+						{
+							returnItem = item;
+						}
+					}
+				}
+			}
+			return returnItem;
+		}
+		
+		
+		
+		
+		
+		
+		
 	}
 }

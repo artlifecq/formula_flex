@@ -245,6 +245,9 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			if(msg.personId.ToGID()==MainRoleManager.actor.id){
 				AppManager.showApp(AppConstant.DIE_PANEL,msg);
+				TrusteeshipManager.getInstance().broken();
+				TrusteeshipManager.getInstance().stopFightTarget();
+				TrusteeshipManager.getInstance().stopAutoFight();
 				EventManager.dispatchEvent(MainPlayerEvent.PLAYER_DIE);
 			}
 		}

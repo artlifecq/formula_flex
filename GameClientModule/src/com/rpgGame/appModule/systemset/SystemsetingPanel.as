@@ -1,10 +1,16 @@
 package com.rpgGame.appModule.systemset
 {
 	import com.rpgGame.app.manager.SystemSetManager;
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
+	
+	import flash.events.MouseEvent;
 	
 	import org.mokylin.skin.app.systemSet.systemSet_Skin;
 	
+	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.events.Event;
 	
@@ -43,6 +49,18 @@ package com.rpgGame.appModule.systemset
 			_skin.tab_set.selectedIndex = 0;
 			onTab(null);
 		}
+		override protected function onTouchTarget(target:DisplayObject):void 
+		{
+			super.onTouchTarget(target);
+			
+			switch (target) {
+				case _viewList[0]._skin.btn_start:
+					startClick();
+					break;
+			}
+			
+		}
+		
 		
 		private function initEvent():void
 		{
@@ -54,10 +72,20 @@ package com.rpgGame.appModule.systemset
 			var index:int = this._skin.tab_set.selectedIndex;
 			_viewList[index].visible = true;
 		}
+		private function startClick():void
+		{
+			if (!TrusteeshipManager.getInstance().isAutoFightRunning)
+			{
+				TrusteeshipManager.getInstance().startAutoFight();
+			}
+			hide();
+		}
+		
 		override protected function onHide() : void
 		{
 			SystemSetManager.getinstance().saveData();
 			super.onHide();
+			
 		}
 	}
 }

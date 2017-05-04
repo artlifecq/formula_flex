@@ -57,5 +57,10 @@ package com.rpgGame.core.events
 		public static const TASK_CLICK_NPC : int = UNIQUEID.NEXT;
 		/**点击NPC寻路完毕*/
 		public static const TASK_WALKOVER_NPC : int = UNIQUEID.NEXT;
+		
+		/**挂机开始*/
+		public static const AUTO_FIGHT_START:int = UNIQUEID.NEXT;
+		/**挂机结束*/
+		public static const AUTO_FIGHT_STOP:int = UNIQUEID.NEXT;
 	}
 }

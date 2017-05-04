@@ -8,6 +8,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.MiXinManager;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
@@ -146,6 +147,7 @@ package com.rpgGame.app.manager.role
 				}
 				
 				TrusteeshipManager.getInstance().setup(_actor);
+				TaskAutoManager.getInstance().setup(_actor);
 				//设置主角初始状态
 				if (MiXinManager.isSubmitMiXinTask())
 				{

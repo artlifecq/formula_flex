@@ -74,6 +74,12 @@ package com.rpgGame.app.manager
 		public  static const SYSTEMSET_AUOT_GET_TASKITEM:int = 37;
 		/**自动拾取其他物品**/
 		public  static const SYSTEMSET_AUOT_GET_OTHERITEM:int = 38;
+		/**自动拾取职业**/
+		public  static const SYSTEMSET_AUOT_GET_ZHIYE:int = 39;
+		/**自动拾取等阶**/
+		public  static const SYSTEMSET_AUOT_GET_DENGJIE:int = 40;
+		/**自动拾取品质**/
+		public  static const SYSTEMSET_AUOT_GET_PINZHI:int = 41;
 		/**血量百分比**/
 		public static const SYSTEMSET_HP_PERCENT:int = 101;
 		/**内力百分比**/
@@ -123,6 +129,9 @@ package com.rpgGame.app.manager
 			setValueByIndex(SYSTEMSET_HOOK_TYPE,1);
 			setValueByIndex(SYSTEMSET_SOUND_BG,30);
 			setValueByIndex(SYSTEMSET_SOUND_EFFECT,30);
+			setValueByIndex(SYSTEMSET_AUOT_GET_ZHIYE,0);
+			setValueByIndex(SYSTEMSET_AUOT_GET_DENGJIE,0);
+			setValueByIndex(SYSTEMSET_AUOT_GET_PINZHI,0);
 		}
 		private var _lastValue:String="";
 		private var _allData:uint=0;
@@ -133,6 +142,9 @@ package com.rpgGame.app.manager
 		private var _soundBg:uint=0;
 		private var _soundEffect:uint=0;
 		private var _autoGetData:uint = 0;
+		private var _zhiyeData:uint = 0;
+		private var _dengjieData:uint = 0;
+		private var _pinzhiData:uint = 0;
 		public function setData(value:String):void
 		{
 			var strlists:Array = JSONUtil.decode( value ).split("|");
@@ -144,7 +156,9 @@ package com.rpgGame.app.manager
 			_soundBg 		= uint("0x"+strlists[5]);
 			_soundEffect 	= uint("0x"+strlists[6]);
 			_autoGetData	= uint("0x"+strlists[7]);
-			
+			_zhiyeData	= uint("0x"+strlists[8]);
+			_dengjieData	= uint("0x"+strlists[9]);
+			_pinzhiData	= uint("0x"+strlists[10]);
 			trace("SystemSetManager:"+getAllValueToString());
 			_lastValue = value;
 		}
@@ -175,6 +189,13 @@ package com.rpgGame.app.manager
 					return _soundBg;
 				case SYSTEMSET_SOUND_EFFECT:
 					return _soundEffect;
+					
+				case SYSTEMSET_AUOT_GET_ZHIYE:
+					return _zhiyeData;
+				case SYSTEMSET_AUOT_GET_DENGJIE:
+					return _dengjieData;
+				case SYSTEMSET_AUOT_GET_PINZHI:
+					return _pinzhiData;
 				default:
 					return 0;
 			}
@@ -222,6 +243,27 @@ package com.rpgGame.app.manager
 					if(_soundEffect != value)
 					{
 						_soundEffect = value;
+						EventManager.dispatchEvent(SystemEvent.SYS_SET,type);
+					}
+					break;
+				case SYSTEMSET_AUOT_GET_ZHIYE:
+					if(_zhiyeData != value)
+					{
+						_zhiyeData = value;
+						EventManager.dispatchEvent(SystemEvent.SYS_SET,type);
+					}
+					break;
+				case SYSTEMSET_AUOT_GET_DENGJIE:
+					if(_dengjieData != value)
+					{
+						_dengjieData = value;
+						EventManager.dispatchEvent(SystemEvent.SYS_SET,type);
+					}
+					break;
+				case SYSTEMSET_AUOT_GET_PINZHI:
+					if(_pinzhiData != value)
+					{
+						_pinzhiData = value;
 						EventManager.dispatchEvent(SystemEvent.SYS_SET,type);
 					}
 					break;
@@ -290,6 +332,9 @@ package com.rpgGame.app.manager
 			value  += "|"+_soundBg.toString(16);
 			value  += "|"+_soundEffect.toString(16);
 			value  += "|"+_autoGetData.toString(16);
+			value  += "|"+_zhiyeData.toString(16);
+			value  += "|"+_dengjieData.toString(16);
+			value  += "|"+_pinzhiData.toString(16);
 			return value;
 		}
 	}

@@ -88,7 +88,7 @@ package com.rpgGame.app.ui.main.shortcut
 			}
 			
 		}
-		private function slillCancel():void
+		private function slillCancel(kid:int):void
 		{
 			onCompFun();
 		}

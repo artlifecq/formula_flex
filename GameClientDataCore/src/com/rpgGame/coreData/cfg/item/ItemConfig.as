@@ -82,6 +82,16 @@ package com.rpgGame.coreData.cfg.item
 		{
 			return getQItemByID(id).q_type;
 		}
+		/**
+		 * 获得药品的子类型 
+		 * @param cfgId
+		 * @return 
+		 * 
+		 */		
+		public static function getItemLocation(id:int):int
+		{
+			return getQItemByID(id).q_location;
+		}
 		
 		/**
 		 * 通过id获取物品描述
@@ -197,6 +207,8 @@ package com.rpgGame.coreData.cfg.item
 			return 0;
 		}
 		
+		
+		
 		/**
 		 * 判断当前物品是否为加血药水
 		 * @param cfgId
@@ -205,7 +217,7 @@ package com.rpgGame.coreData.cfg.item
 		 */
 		public static function isAddHpItem(cfgId:int):Boolean
 		{
-			if (getItemType(cfgId) == GoodsType.MEDICINE && getMedicEfficacy(cfgId) == NormalEfficacy.LIFE)
+			if (getItemType(cfgId) == GoodsType.MEDICINE && getItemLocation(cfgId) == NormalEfficacy.LIFE)
 			{
 				return true;
 			}

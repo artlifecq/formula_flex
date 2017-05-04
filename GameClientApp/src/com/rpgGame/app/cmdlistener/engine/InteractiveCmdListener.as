@@ -128,6 +128,7 @@ package com.rpgGame.app.cmdlistener.engine
 			{
 				TrusteeshipManager.getInstance().broken();
 				TrusteeshipManager.getInstance().stopFightTarget();
+				TrusteeshipManager.getInstance().stopAutoFight();
 				var isWalking : Boolean = RoleStateUtil.doWalkToPos(MainRoleManager.actor, position);
 				if (isWalking)
 				{

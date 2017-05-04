@@ -1,6 +1,5 @@
 package com.rpgGame.appModule.jingmai.sub
 {
-	import com.rpgGame.core.utils.Filter3DUtil;
 	import com.rpgGame.coreData.utils.FilterUtil;
 	
 	import feathers.controls.Button;
@@ -17,6 +16,7 @@ package com.rpgGame.appModule.jingmai.sub
 		private var dataArr:Array;
 		private var curIndex:int=0;
 		private var nextIndex:int=0;
+		private var _indexStep:int=1;
 		private var tweenScale:Number=1;
 		private var callBack:Function;
 		public function TweenScaleScrollUitlExt(scrollObject:DisplayObject,data:Array,left:Button,right:Button,scale:Number, width:int, height:int, scrollWidth:int, scrollTime:Number=0.5, isHorizon:Boolean=true)
@@ -38,6 +38,12 @@ package com.rpgGame.appModule.jingmai.sub
 			addEvent();
 			checkBtnState();
 		}
+		public function setStep(step:int):void
+		{
+			step=Math.max(1,step);
+			step=Math.min(dataArr.length,step);
+			_indexStep=step;
+		}
 		public function setCallBack(fun:Function):void
 		{
 			this.callBack=fun;
@@ -55,14 +61,14 @@ package com.rpgGame.appModule.jingmai.sub
 		private function onTriggeredRight(e:Event):void
 		{
 			// TODO Auto Generated method stub
-			nextIndex=Math.min(dataArr.length-1,curIndex+1);
+			nextIndex=Math.min(dataArr.length-_indexStep,curIndex+_indexStep);
 			scroll2Index(nextIndex);
 		}
 		
 		private function onTriggeredLeft(e:Event):void
 		{
 			// TODO Auto Generated method stub
-			nextIndex=Math.max(0,curIndex-1);
+			nextIndex=Math.max(0,curIndex-_indexStep);
 			scroll2Index(nextIndex);
 		}
 		
@@ -76,7 +82,7 @@ package com.rpgGame.appModule.jingmai.sub
 		{
 			var dataLen:int=dataArr.length;
 			leftBtn.visible=leftBtn.touchable=curIndex>0;
-			rightBtn.visible=rightBtn.touchable=curIndex<(dataLen-1)&&dataLen>1;
+			rightBtn.visible=rightBtn.touchable=curIndex<(dataLen-_indexStep)&&dataLen>1;
 			//
 			return;
 			if (!leftBtn.touchable) 

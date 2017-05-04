@@ -101,6 +101,8 @@ package com.rpgGame.app.ui.main.shortcut
 		
 		private function addResEvent():void
 		{
+			
+			
 			EventManager.addEvent(MainPlayerEvent.NOWMP_CHANGE,mpCHangeHandler);
 			EventManager.addEvent(MainPlayerEvent.MAXMP_CHANGE,mpCHangeHandler);
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,resChangeHandler);
@@ -343,7 +345,9 @@ package com.rpgGame.app.ui.main.shortcut
 			super.removeCDFace();
 			if(readyEffect!=null)
 			{
-				readyEffect.stop();
+				readyEffect.stopEffect();
+				cdEffectIsPlay=false;
+				_now=0;
 			}
 			if(!isGary&&!nutaKey)
 			{
@@ -351,11 +355,14 @@ package com.rpgGame.app.ui.main.shortcut
 				goEffect.playEffect();
 			}
 		}
+		private var cdEffectIsPlay:Boolean=false;
+		private var _now: Number=0;
 		override  public function cdUpdate($now : Number, $cdTotal : Number) :void
 		{
-		
+			
 			if (!_cdFace || !_cdFace.parent)
 			{
+				
 				addCdFace();
 				
 			}
@@ -363,12 +370,33 @@ package com.rpgGame.app.ui.main.shortcut
 			{
 				if(_cdFace)
 				{
-					_cdFace.updateTimeTxt($now,$cdTotal);
+					//_cdFace.updateTimeTxt($now,$cdTotal);
+					
 				}
-				if(readyEffect!=null)
+				
+				if($cdTotal>_now)
 				{
-					readyEffect.gotoPercent($now/$cdTotal);
+					_now=$now;
+					if(/*!cdEffectIsPlay&&*/readyEffect!=null)
+					{
+						if(!cdEffectIsPlay)
+						{
+							
+						}
+						var pac:Number=$now/$cdTotal;
+						readyEffect.gotoPercent(pac);
+						cdEffectIsPlay=true;
+						/*
+						if(skillID==1006)return;
+						*/
+						//L.l("======"+$cdTotal);
+						//L.l(cdid+"=="+ _faceInfo.coolID);
+						//if(skillID==1006)
+						//cdEffectIsPlay=true;
+						//readyEffect.playEffect(1,1000/$cdTotal);
+					}
 				}
+				
 			}
 			else
 			{
@@ -399,8 +427,10 @@ package com.rpgGame.app.ui.main.shortcut
 			_iconImage.x = 6;
 			_iconImage.y = 6;
 		}
+		private var _skillData : Q_skill_model;
 		public function upData(shortData : ShortcutsData,skillData : Q_skill_model):void
 		{
+			_skillData=skillData;
 			playerJod=skillData.q_job;
 			if(playerJod==JobEnum.ROLE_3_TYPE)
 			{
@@ -408,7 +438,6 @@ package com.rpgGame.app.ui.main.shortcut
 			}
 			skillID=skillData.q_skillID;
 			cdtime=skillData.q_cd;
-			
 			var recovers:String=skillData.q_recovers;
 			var recoObj:Object;
 			if(recovers!="")
@@ -452,7 +481,6 @@ package com.rpgGame.app.ui.main.shortcut
                 readyEffect.dispose();
                 readyEffect=null;
             }
-			//L.l("生成转框特效:"+skillID);
 			if(playerJod==JobEnum.ROLE_1_TYPE&&playerJod!=readyEffectJod)
 			{
 				readyEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_BJ));
@@ -508,6 +536,7 @@ package com.rpgGame.app.ui.main.shortcut
 
 		public function showAutoEff(isShow : Boolean) : void
 		{
+			return ;
 			if (isShow)
 			{
 				if (!effAutoUse)

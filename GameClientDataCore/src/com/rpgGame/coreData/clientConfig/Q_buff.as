@@ -76,10 +76,12 @@ package com.rpgGame.coreData.clientConfig
 		public var q_replace_level:int;
 		 /**  获得者死亡或下线后是否清除（0不清除，1清除，2切换地图清除，3仅下线清除） */
 		public var q_effect_dieordown_clear:int;
-		 /**  BUFF加属性，格式【格式:力道:X,根骨:X,身法:X,慧根:X,气血:X,能量:X,最大气血:X,最大能量:X,外功:X,内功:X,防御百分比:X,暴击率:X,暴击伤害:X,暴击抗性:X,生命回复:X,能量回复:X,效果抵抗:X,命中率:X,闪避:X,移动速度:X,攻击速度:X,角色等级:X,治疗技能效果提升:X,减少技能CD百分比:X,伤害加深百分比:X,伤害加深:X,无视防御伤害:X,伤害减免百分比:X,力道百分比:X,根骨百分比:X,身法百分比:X,慧根百分比:X,最大气血百分比:X,最大能量百分比:X,外功百分比:X,内功百分比:X,移动速度百分比:X,攻击速度百分比:X,气血百分比:X,能量百分比:X】 */
+		 /**  BUFF加属性，格式【格式:力道:X,根骨:X,身法:X,慧根:X,气血:X,能量:X,最大气血:X,最大能量:X,外功:X,内功:X,防御百分比:X,暴击率:X,暴击伤害:X,暴击抗性:X,生命回复:X,能量回复:X,效果抵抗:X,命中率:X,闪避:X,移动速度:X,攻击速度:X,角色等级:X,治疗技能效果提升:X,减少技能CD百分比:X,伤害加深百分比:X,伤害加深:X,无视防御伤害:X,伤害减免百分比:X,力道百分比:X,根骨百分比:X,身法百分比:X,慧根百分比:X,最大气血百分比:X,最大能量百分比:X,外功百分比:X,内功百分比:X,移动速度百分比:X,攻击速度百分比:X,气血百分比:X,能量百分比:X,BOSS伤害加深百分比,玩家攻击深百分比:X】 */
 		public var q_attribute:String;
 		 /**  BUFF参数，技能ID、技能ID */
 		public var q_Bonus_skill:String;
+		 /**  绑定BUFF */
+		public var q_bouns_buff:String;
 		 /**  下线是否计时（0不是，1是） */
 		public var q_Line_time:int;
 		 /**  脚本BUFFID */
