@@ -34,13 +34,15 @@ package com.game.engine3D.display
 			if (_unit != null)
 			{
 				var rend:RenderUnit3D=_unit as RenderUnit3D;
-				if(rend!=null&&rend.totalDuration>0)
+				if(rend!=null)
 				{
 					
-					if(percent>=0)
+					if(percent>0&&percent<1&&rend.totalDuration>0)
 					{
+						rend.stopRender();
 						rend.stop(int(percent*rend.totalDuration));
 						rend.startRender();
+						
 					}
 					else
 					{
@@ -85,8 +87,8 @@ package com.game.engine3D.display
 				if(unit!=null)
 				{
 					unit.repeat = repeat;
-					unit.play(0);
-					unit.animateSpeed=speed;
+					unit.play(0, speed);
+					//unit.animateSpeed=speed;
 					this.start();
 				}
 				

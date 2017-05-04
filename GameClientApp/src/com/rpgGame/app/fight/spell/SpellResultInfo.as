@@ -2,12 +2,14 @@ package com.rpgGame.app.fight.spell
 {
 	import com.game.engine3D.vo.BaseRole;
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.info.fight.FightSingleHurt;
+	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.netData.fight.bean.AttackResultInfo;
 	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
 	
@@ -110,6 +112,14 @@ package com.rpgGame.app.fight.spell
 					if (hurtResultVO.atkor /*&& hurtResultVO.atkor.data is HeroData*/) //是玩家才自动反击
 					{
 						isHited = true;
+						var mdata:MonsterData=hurtResultVO.atkor.data as MonsterData;
+						if(mdata!=null&&mdata.monsterData.q_monster_type>=1&&mdata.monsterData.q_monster_type<=3)
+						{
+							TrusteeshipManager.getInstance().killActor();
+							
+							
+						}
+						
 					}
 				}
 				

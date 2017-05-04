@@ -1,23 +1,13 @@
 package com.rpgGame.app.ui.main.Task
 {
 	import com.rpgGame.app.manager.task.TaskMissionManager;
-	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
-	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
-	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
-	import com.rpgGame.coreData.clientConfig.Q_mission_section;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.type.TaskType;
-	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.task.bean.TaskInfo;
-	import com.rpgGame.netData.task.bean.TaskSubRateInfo;
 	
 	import feathers.controls.Button;
 	import feathers.controls.Group;
@@ -322,6 +312,14 @@ package com.rpgGame.app.ui.main.Task
 				}
 				
 			}
+			else
+			{
+				setKadianNavView("任务等级达到{0}级",navi1);
+				
+				setKadianbutView(killBut1List);
+			}
+			
+			
 			setUisite();
 		}
 		/**设置主线任务隐藏*/
@@ -491,6 +489,27 @@ package com.rpgGame.app.ui.main.Task
 			TaskUtil.setGotargetLabelText(TaskType.MAINTYPE_MAINTASK,killButList[0],text);
 			setUisite();
 		}
+		/**处理卡点*/
+		private function setKadianNavView(name:String,nav:Label):void
+		{
+			//nav.htmlText="[主线]"+name+"<font color='#8b8d7b'>(未完成)</font>";
+			
+		}
+		
+		/**处理卡点显示*/
+		private function setKadianbutView(killButList:Vector.<SkinnableContainer>):void
+		{/*
+			var i:int;
+			for(i=0;i<killButList.length;i++)
+			{
+				killButList[i].visible=false;
+			}
+			var text:String="回复:<u>"+MonsterDataManager.getMonsterName(npcid)+"</u>";
+			TaskUtil.setGotargetLabelText(TaskType.MAINTYPE_MAINTASK,killButList[0],text);
+			setUisite();*/
+		}
+		
+		
 		
 		private function setExtraLabel(num:int):void
 		{
@@ -538,12 +557,20 @@ package com.rpgGame.app.ui.main.Task
 		/**设置UI位置*/
 		private function setUisite():void
 		{
-			var i:int,count:int=0;
-			for(i=1;i<skinList.length;i++)
+			var i:int,count:int=-1;
+			for(i=0;i<skinList.length;i++)
 			{
 				if(skinList[i].visible==true)
 				{
-					skinList[i].y=skinList[count].y+skinList[count].height+3;
+					if(count==-1)
+					{
+						skinList[i].y=0;
+					}
+					else
+					{
+						skinList[i].y=skinList[count].y+skinList[count].height+3;
+					}
+					
 					count=i;
 				}
 				else
@@ -571,7 +598,11 @@ package com.rpgGame.app.ui.main.Task
 				ico2BgList[i].y=ico2BgList[3].y;
 				ico2List[i].y=ico2BgList[3].y-6;
 			}
-			scrollBack.height=skinList[count].y+skinList[count].height+3;
+			if(count>=0)
+			{
+				scrollBack.height=skinList[count].y+skinList[count].height+3;
+			}
+			
 			scrollBar.addChild(scrollBack);
 			scrollBar.addChild(scrollBox);
 			

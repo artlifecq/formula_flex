@@ -6,9 +6,14 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.SpellSender;
 	import com.rpgGame.app.state.ai.AIStateMachine;
+	import com.rpgGame.app.state.ai.AIUseItem;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
@@ -16,6 +21,8 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import gs.TweenLite;
+	
+	import org.client.mainCore.manager.EventManager;
 
 	/**
 	 *
@@ -56,7 +63,46 @@ package com.rpgGame.app.manager
 		{
 			_stateMachine = new AIStateMachine(role);
 		}
-
+		
+		
+		
+		/**玩家被攻击*/
+		public function killActor() : void
+		{
+			if(!isAutoFightRunning&&!isFightTargetRunning)
+			{
+				if(MainRoleManager.actor.stateMachine.isIdle||MainRoleManager.actor.stateMachine.isHiting||MainRoleManager.actor.stateMachine.isPrewar)
+				{
+					startFightSelected();
+				}
+			}
+			
+			
+		}
+		
+		public function startFightSelected() : void
+		{
+			
+			var selectedRole : SceneRole = SceneRoleSelectManager.selectedRole;
+			if(selectedRole!=null)
+			{
+				startFightRole(selectedRole);
+				
+			}
+		
+		}
+		
+		public function startFightRole(targetRole : SceneRole= null) : void
+		{
+			
+			if(targetRole!=null)
+			{
+				var targetRoles : Vector.<SceneRole>=new Vector.<SceneRole>();
+				targetRoles.push(targetRole);
+				startFightTarget(targetRoles);
+			}
+			
+		}
 		public function startFightTarget(targetRoles : Vector.<SceneRole> = null) : void
 		{
 			_gTimer.start();
@@ -81,6 +127,8 @@ package com.rpgGame.app.manager
 			_isBroken = false;
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 			_stateMachine.transition(AIStateType.AI_NONE);
+			EventManager.dispatchEvent(TaskEvent.AUTO_FIGHT_START);
+			
 			onUpdate(true);
 		}
 
@@ -125,6 +173,7 @@ package com.rpgGame.app.manager
 			if (_isFightTargetRunning)
 				return;
 			stop();
+			EventManager.dispatchEvent(TaskEvent.AUTO_FIGHT_STOP);
 		}
 
 		public function stopAll() : void
@@ -159,6 +208,10 @@ package com.rpgGame.app.manager
 		{
 			return _isAutoFightRunning;
 		}
+		public function get isFightTargetRunning() : Boolean
+		{
+			return _isFightTargetRunning;
+		}
 
 		public function getActiveSpellList() : Vector.<Q_skill_model>
 		{
@@ -192,8 +245,38 @@ package com.rpgGame.app.manager
 					return;
 				}
 			}
-			_stateMachine.transition(AIStateType.ATTACK_TARGET, null, force);
+			setAiState(force);
+			
 		}
+		
+		//private function 
+		
+		private function setAiState(force:Boolean):void
+		{
+			
+			
+			if(_isAutoFightRunning)
+			{
+				if(AIUseItem.isUseItem())
+				{
+					_stateMachine.transition(AIStateType.USE_ITEM, null, force);
+				}
+				if(SceneRoleSelectManager.selectedRole == null)
+				{
+					_stateMachine.transition(AIStateType.FIND_ATTACKABLE, null, force);
+				}
+				
+			}
+			if(SceneRoleSelectManager.selectedRole != null)
+			{
+				_stateMachine.transition(AIStateType.ATTACK_TARGET, null, force);
+			}
+			
+			//_stateMachine.transition(AIStateType.TASK_WALK, null, force);
+		}
+		
+		
+		
 		
 		public function startFightSoulFight():void
 		{

@@ -1,17 +1,22 @@
 package com.rpgGame.app.state.ai
 {
 	import com.game.engine3D.state.IState;
+	import com.rpgGame.app.manager.SystemSetManager;
+	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
+	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.core.state.ai.AIState;
+	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
-
+	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 
@@ -59,20 +64,56 @@ package com.rpgGame.app.state.ai
 
 		private function findAttackableTarget() : SceneRole
 		{
-			return findNearestMonster();
+			var role:SceneRole;
+			if(TaskAutoManager.getInstance().isTaskRunning)
+			{
+				role=findNearestMonster(true);
+			}
+			else
+			{
+				role=findNearestMonster(false);
+			}
+			return role;
 		}
 
-		private function findNearestMonster() : SceneRole
+		private function findNearestMonster(istask:Boolean=false) : SceneRole
 		{
 			var roleList : Array = SceneManager.getScene().getSceneObjsByType(SceneCharType.MONSTER);
 			roleList.sort(onSortNearestChar);
+			//var rerlle:SceneRole;
 			while (roleList.length)
 			{
 				var role : SceneRole = roleList.shift();
-				if (role && role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
+				var monsterData : MonsterData = role.data as MonsterData;
+				if (role &&monsterData&& role.usable && monsterData.monsterData.q_monster_type>=1&&monsterData.monsterData.q_monster_type<=3&& !role.stateMachine.isDeadState)//if (role && role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
 				{
-					return role;
+					var dist:int = Point.distance(new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(role.x,role.z));
+					var max:int=int(SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_HOOK_TYPE)*50);
+					if(dist<=max)
+					{
+						var modeState : int = FightManager.getFightRoleState(role);
+						if (modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY ||modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)
+						{
+							if(istask)
+							{
+								if(TaskMissionManager.isMainTaskMonster(monsterData.modelID))
+								{
+									return role;
+								}
+							}
+							else
+							{
+								return role;
+							}
+						}
+					}
+					
+					
 				}
+			}
+			if(istask)
+			{
+				findNearestMonster(false);
 			}
 			return null;
 		}
