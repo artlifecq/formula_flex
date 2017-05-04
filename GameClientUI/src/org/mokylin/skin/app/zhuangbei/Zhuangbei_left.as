@@ -31,6 +31,10 @@ package org.mokylin.skin.app.zhuangbei
 
 		public var list2:feathers.controls.List;
 
+		public var monyIcon:feathers.controls.UIAsset;
+
+		public var monyTips:feathers.controls.Label;
+
 		public var tab_pack:feathers.controls.TabBar;
 
 		public var title1:feathers.controls.SkinnableContainer;
@@ -48,7 +52,7 @@ package org.mokylin.skin.app.zhuangbei
 			this.currentState = "normal";
 			this.height = 431;
 			this.width = 340;
-			this.elementsContent = [__Zhuangbei_left_UIAsset1_i(),title1_i(),title2_i(),tab_pack_i(),__Zhuangbei_left_UIAsset2_i(),__Zhuangbei_left_UIAsset3_i(),list1_i(),list2_i(),lb_yinzi_i(),__Zhuangbei_left_Label1_i(),__Zhuangbei_left_UIAsset4_i()];
+			this.elementsContent = [__Zhuangbei_left_UIAsset1_i(),title1_i(),title2_i(),tab_pack_i(),__Zhuangbei_left_UIAsset2_i(),__Zhuangbei_left_UIAsset3_i(),list1_i(),list2_i(),lb_yinzi_i(),monyTips_i(),monyIcon_i()];
 			
 			states = {
 			};
@@ -70,19 +74,6 @@ package org.mokylin.skin.app.zhuangbei
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
 			temp.gap = -2;
-			return temp;
-		}
-
-		private function __Zhuangbei_left_Label1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.leading = 0;
-			temp.letterSpacing = 0;
-			temp.text = "（绑银不足将消耗非绑定银两）";
-			temp.color = 0x8B8D7B;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 135;
-			temp.y = 413;
 			return temp;
 		}
 
@@ -131,15 +122,6 @@ package org.mokylin.skin.app.zhuangbei
 			return temp;
 		}
 
-		private function __Zhuangbei_left_UIAsset4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tubiao/yinzib_24.png";
-			temp.x = 117;
-			temp.y = 407;
-			return temp;
-		}
-
 		private function lb_yinzi_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -179,6 +161,32 @@ package org.mokylin.skin.app.zhuangbei
 			temp.x = 7;
 			temp.y = 270;
 			temp.layout = __Zhuangbei_left_TileLayout2_i();
+			return temp;
+		}
+
+		private function monyIcon_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			monyIcon = temp;
+			temp.name = "monyIcon";
+			temp.styleName = "ui/common/tubiao/yinzib_24.png";
+			temp.x = 117;
+			temp.y = 407;
+			return temp;
+		}
+
+		private function monyTips_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			monyTips = temp;
+			temp.name = "monyTips";
+			temp.leading = 0;
+			temp.letterSpacing = 0;
+			temp.text = "（绑银不足将消耗非绑定银两）";
+			temp.color = 0x8B8D7B;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 135;
+			temp.y = 413;
 			return temp;
 		}
 

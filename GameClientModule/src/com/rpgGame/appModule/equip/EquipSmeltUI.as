@@ -134,6 +134,8 @@ package com.rpgGame.appModule.equip
 			
 			_sharedObject=SharedObject.getLocal(SharedObjectEnum.EQUIP_WASH);
 			_getPanel=new ItemGetPathPanel();
+			(_skin.left.skin as Zhuangbei_left).monyIcon.removeFromParent(true);
+			(_skin.left.skin as Zhuangbei_left).monyTips.removeFromParent(true);
 		}
 		
 		private function createItemRender():GridItemRender

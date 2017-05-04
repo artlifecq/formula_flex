@@ -21,6 +21,8 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
+	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
@@ -29,6 +31,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.lang.LangMenu;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.AvatarMaskType;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RoleStateType;
@@ -414,11 +417,9 @@ package com.rpgGame.appModule.role
 			this._showAvatarData.avatarInfo.deputyWeaponEffectScale=_roleData.avatarInfo.deputyWeaponEffectScale;
 			
 			this._avatar.setRoleData(this._showAvatarData);
-			this._avatar.curRole.setScale(1.7);		
-		/*	RoleFaceMaskEffectUtil.removeFaceMaskEffect(this._avatar.curRole);
-			RoleFaceMaskEffectUtil.addDialogFaceMaskEffect(this._avatar.curRole);
-			var point : Point = this._avatar.parent.localToGlobal(new Point());
-			RoleFaceMaskEffectUtil.updateFadeAlphaRectPos(this._avatar.curRole, point.x + this._avatar.x+130, point.y + this._avatar.y-270);*/
+			
+			this._avatar.curRole.setScale(1.7);	
+//			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.DIALOG_MASK,_avatar,144,-371,1.7);
 		}
 		
 	
