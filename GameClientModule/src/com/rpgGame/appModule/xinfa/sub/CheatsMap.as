@@ -84,7 +84,7 @@ package  com.rpgGame.appModule.xinfa.sub
 			tmpPoint=_stateSkin["ico_1"];
 			var firstStartPt:Point=imgGrid.localToGlobal(new Point(imgGrid.width/2,imgGrid.height/2));
 			firstStartPt=_stateSkin["grp_icon"].globalToLocal(firstStartPt);
-			firstLine=new MeridianMapLine("ui/app/beibao/jingmai/line/shang.png","ui/app/beibao/jingmai/line/d2.png",[firstStartPt.clone(),new Point(tmpPoint.x+tmpPoint.width/2,tmpPoint.y+tmpPoint.height/2)]);
+			firstLine=new MeridianMapLine("ui/app/beibao/jingmai/line/shang.png","ui/app/beibao/tu/xiaoguoxian/dixian2.png",[firstStartPt.clone(),new Point(tmpPoint.x+tmpPoint.width/2,tmpPoint.y+tmpPoint.height/2)]);
 			linesContianer.addChild(firstLine);
 			//计算链接
 			for (var j:int = 0; j < len; j++) 
@@ -119,7 +119,7 @@ package  com.rpgGame.appModule.xinfa.sub
 								posA.push(new Point(int(coordsArr[k][0])+startObj.width/2,int(coordsArr[k][1])+startObj.height/2));
 							}
 							posA.push(new Point(endObj.x+endObj.width/2,endObj.y+endObj.height/2));
-							drawLine=new MeridianMapLine("ui/app/beibao/jingmai/line/shang.png","ui/app/beibao/jingmai/line/d2.png",posA);
+							drawLine=new MeridianMapLine("ui/app/beibao/jingmai/line/shang.png","ui/app/beibao/tu/xiaoguoxian/dixian2.png",posA);
 							lines.push(drawLine);
 							linesContianer.addChild(drawLine);
 						}

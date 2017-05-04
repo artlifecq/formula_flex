@@ -1,5 +1,6 @@
 package  com.rpgGame.appModule.xinfa.sub
 {
+	import com.game.engine2D.scene.render.ui.UIImage;
 	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
@@ -23,6 +24,7 @@ package  com.rpgGame.appModule.xinfa.sub
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.meridian.MeridianCfg;
 	import com.rpgGame.coreData.clientConfig.Q_cheats_node;
@@ -99,6 +101,18 @@ package  com.rpgGame.appModule.xinfa.sub
 				}
 			}
 		}
+		private var imgQuan:UIAsset;
+		private function setIcoBg(isUnLock:Boolean):void
+		{
+			if (!isUnLock||imgQuan!=null) 
+			{
+				return;
+			}
+			imgQuan=new UIAsset();
+			imgQuan.styleName="ui/app/beibao/tu/quan/"+CheatsCfg.getCheats(_data.cheatsId).q_default+".png";
+			MCUtil.addBefore(imgPoint,imgQuan,_imgIcon);
+		}
+		
 		private function showSubJX(config:Q_cheats_node,useTween:Boolean):void
 		{
 		
@@ -160,6 +174,7 @@ package  com.rpgGame.appModule.xinfa.sub
 				setIcoUrl("ui/app/beibao/icons/suo.png",19,26);
 			}
 			showLoopEffect(hasBetter);
+			setIcoBg(hasUnlock);
 			//setIconFilter(needFilter);
 		}
 		private function showSubCX(config:Q_cheats_node,useTween:Boolean):void
@@ -195,7 +210,7 @@ package  com.rpgGame.appModule.xinfa.sub
 				setIcoUrl("ui/app/beibao/icons/suo.png",19,26);
 			}
 			showLoopEffect(needEff);
-			
+			setIcoBg(hasUnlock);
 		}
 		public function setData(acp:CheatsNodeVo,useTween:Boolean=false):void
 		{
