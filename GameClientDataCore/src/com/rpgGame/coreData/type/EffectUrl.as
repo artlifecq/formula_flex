@@ -209,6 +209,10 @@ package com.rpgGame.coreData.type
 		public static const UI_WANCHENGRENWU:String="ui_wanchengrenwu";
 		public static const UI_XINRENWU:String="ui_xinrenwu";
 		public static const UI_WENHAO:String="ui_wenhao";
+		
+		public static const UI_ZIDONGZHANDOU:String="ui_zidongzhandou";
+		public static const UI_ZIDONGXUNLU:String="ui_zidongxunlu";
+		
 		public function EffectUrl()
 		{
 		}

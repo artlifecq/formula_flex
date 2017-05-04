@@ -138,6 +138,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_fly_cancel:int;
 		 /**  弹道指定目标点，指定目标点则只会在指定点发出弹道（0不指定，1指定） */
 		public var q_fly_pos:int;
+		 /**  自动战斗技能优先级 从1开始 0表示不会被ai用到 越大越高 */
+		public var q_ai_sort:int;
 		 /**  施法距离限制（自身与目标之间的距离）（单位：格子）,地面行走魔法表示行走距离(小于等于3：判定为近战攻击（处理音效）大于3：判定为远程攻击（处理音效）)   0表示无限距离，客户端会减掉1格 */
 		public var q_range_limit:int;
 		 /**  保持间距（单位：像素）（不配默认使用施法范围） */

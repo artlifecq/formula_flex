@@ -6,6 +6,7 @@ package com.rpgGame.app.ui.main.Task
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.SceneSender;
@@ -70,77 +71,77 @@ package com.rpgGame.app.ui.main.Task
 						setState(false);
 						break;
 					case Renwu_Item(_skin.pri_killbut1.skin).labelDisplay:
-						killWalkBut(1,0,1);
+						TaskControl.killWalkBut(1,0,1);
 						break;
 					case Renwu_Item(_skin.pri_killbut2.skin).labelDisplay:
-						killWalkBut(1,1,1);
+						TaskControl.killWalkBut(1,1,1);
 						break;
 					case Renwu_Item(_skin.pri_killbut3.skin).labelDisplay:
-						killWalkBut(1,2,1);
+						TaskControl.killWalkBut(1,2,1);
 						break;
 					case Renwu_Item(_skin.sec_killbut1_1.skin).labelDisplay:
-						killWalkBut(1,0,1);
+						TaskControl.killWalkBut(1,0,1);
 						break;
 					case Renwu_Item(_skin.sec_killbut1_2.skin).labelDisplay:
-						killWalkBut(1,1,1);
+						TaskControl.killWalkBut(1,1,1);
 						break;
 					case Renwu_Item(_skin.sec_killbut1_3.skin).labelDisplay:
-						killWalkBut(1,2,1);
+						TaskControl.killWalkBut(1,2,1);
 						break;
 					case Renwu_Item(_skin.sec_killbut2_1.skin).labelDisplay:
-						killWalkBut(2,0,1);
+						TaskControl.killWalkBut(2,0,1);
 						break;
 					case Renwu_Item(_skin.sec_killbut2_2.skin).labelDisplay:
-						killWalkBut(2,1,1);
+						TaskControl.killWalkBut(2,1,1);
 						break;
 					case Renwu_Item(_skin.sec_killbut2_3.skin).labelDisplay:
-						killWalkBut(2,2,1);
+						TaskControl.killWalkBut(2,2,1);
 						break;
 					case Renwu_Item(_skin.sec_killbut3_1.skin).labelDisplay:
-						killWalkBut(3,0,1);
+						TaskControl.killWalkBut(3,0,1);
 						break;
 					case Renwu_Item(_skin.sec_killbut3_2.skin).labelDisplay:
-						killWalkBut(3,1,1);
+						TaskControl.killWalkBut(3,1,1);
 						break;
 					case Renwu_Item(_skin.sec_killbut3_3.skin).labelDisplay:
-						killWalkBut(3,2,1);
+						TaskControl.killWalkBut(3,2,1);
 						break;
 					
 					case Renwu_Item(_skin.pri_killbut1.skin).btn_send:
-						killWalkBut(1,0,2);
+						TaskControl.killWalkBut(1,0,2);
 						break;
 					case Renwu_Item(_skin.pri_killbut2.skin).btn_send:
-						killWalkBut(1,1,2);
+						TaskControl.killWalkBut(1,1,2);
 						break;
 					case Renwu_Item(_skin.pri_killbut3.skin).btn_send:
-						killWalkBut(1,2,2);
+						TaskControl.killWalkBut(1,2,2);
 						break;
 					case Renwu_Item(_skin.sec_killbut1_1.skin).btn_send:
-						killWalkBut(1,0,2);
+						TaskControl.killWalkBut(1,0,2);
 						break;
 					case Renwu_Item(_skin.sec_killbut1_2.skin).btn_send:
-						killWalkBut(1,1,2);
+						TaskControl.killWalkBut(1,1,2);
 						break;
 					case Renwu_Item(_skin.sec_killbut1_3.skin).btn_send:
-						killWalkBut(1,2,2);
+						TaskControl.killWalkBut(1,2,2);
 						break;
 					case Renwu_Item(_skin.sec_killbut2_1.skin).btn_send:
-						killWalkBut(2,0,2);
+						TaskControl.killWalkBut(2,0,2);
 						break;
 					case Renwu_Item(_skin.sec_killbut2_2.skin).btn_send:
-						killWalkBut(2,1,2);
+						TaskControl.killWalkBut(2,1,2);
 						break;
 					case Renwu_Item(_skin.sec_killbut2_3.skin).btn_send:
-						killWalkBut(2,2,2);
+						TaskControl.killWalkBut(2,2,2);
 						break;
 					case Renwu_Item(_skin.sec_killbut3_1.skin).btn_send:
-						killWalkBut(3,0,2);
+						TaskControl.killWalkBut(3,0,2);
 						break;
 					case Renwu_Item(_skin.sec_killbut3_2.skin).btn_send:
-						killWalkBut(3,1,2);
+						TaskControl.killWalkBut(3,1,2);
 						break;
 					case Renwu_Item(_skin.sec_killbut3_3.skin).btn_send:
-						killWalkBut(3,2,2);
+						TaskControl.killWalkBut(3,2,2);
 						break;
 					
 					case _skin.sec_subbut1:
@@ -184,7 +185,7 @@ package com.rpgGame.app.ui.main.Task
 				var dist:int =TaskUtil.getDistfinishNpc();
 				if(dist>200)
 				{
-					hideLeadPanel();
+					TaskControl.hideLeadPanel();
 				}				
 			}
 			
@@ -197,31 +198,13 @@ package com.rpgGame.app.ui.main.Task
 			{
 				TaskSender.sendStartGatherMessage(serverID);
 			}
-			else if(TaskMissionManager.isMainTaskNpc(npcId))
+			else if(TaskMissionManager.isMainTaskNpc(npcId))//如果是任务NPC就打开面板
 			{
-				showLeadPanel();
+				TaskControl.showLeadPanel();
 			}
 			
 		}
-		/**移动完成*/
-		private function finishToNpc(npcId:int) : void
-		{
-			if(TaskMissionManager.isMainTaskNpc(npcId))
-			{
-				showLeadPanel();
-			}
-			
-			
-		}
-		/**飞鞋完成*/
-		private function flyComplete():void
-		{
-			var dist:int =TaskUtil.getDistfinishNpc();
-			if(dist>=0&&dist<100)
-			{
-				showLeadPanel();
-			}
-		}
+	
 		/**接受任务信息初始化*/
 		private function inforMation():void
 		{
@@ -243,11 +226,11 @@ package com.rpgGame.app.ui.main.Task
 			if(type==TaskType.MAINTYPE_MAINTASK)
 			{
 				effetCont.playFinishEffect();
-				hideLeadPanel();
+				TaskControl.hideLeadPanel();
 			}
 			else if(type==TaskType.MAINTYPE_TREASUREBOX)
 			{
-				hideLoopPanel();
+				TaskControl.hideLoopPanel();
 			}
 			showNpcMark(false);
 		}
@@ -287,17 +270,31 @@ package com.rpgGame.app.ui.main.Task
 				}
 				else
 				{
-					showLeadPanel();
+					TaskControl.showLeadPanel();
 				}
 			}
 			
 		}
-		
+		/**飞鞋完成*/
+		public static function flyComplete():void
+		{
+			TaskControl.flyComplete();
+		}
+		/**领取奖励按钮*/
+		private function receiveRewordBut(type:int):void
+		{
+			if(type==1)//支线任务领取奖励
+			{
+				loopCont.hideDailyTaskView();
+			}
+			TaskControl.receiveRewordBut(type);
+			
+		}
 		
 		private function playerDie():void
 		{
-			hideLeadPanel();
-			hideLoopPanel();
+			TaskControl.hideLeadPanel();
+			TaskControl.hideLoopPanel();
 			
 		}
 		private function setViewShow():void
@@ -315,164 +312,6 @@ package com.rpgGame.app.ui.main.Task
 			}
 		}
 		
-		private function showLeadPanel():void
-		{
-			AppManager.showApp(AppConstant.TASK_LEAD_PANEL);
-			panlIsopen=true;
-		}
-		private function hideLeadPanel():void
-		{
-			AppManager.hideApp(AppConstant.TASK_LEAD_PANEL);
-			panlIsopen=false;
-		}
-		private function showLoopPanel():void
-		{
-			AppManager.showApp(AppConstant.TASK_LOOP_PANEL);
-		}
-		private function hideLoopPanel():void
-		{
-			AppManager.hideApp(AppConstant.TASK_LOOP_PANEL);
-		}
-		private function showBagPanel():void
-		{
-			if (!ClientConfig.isBanShu)
-			{
-				AppManager.showApp(AppConstant.ROLE_PANEL);
-			}
-				
-		}
-		
-		/**目标按钮任务处理*/
-		private function killWalkBut(type:int,num:int,key:int):void
-		{
-			if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_USEITEM&&!TaskUtil.getIsfinishByType(type))//是使用道具任务且没有完成
-			{
-				showBagPanel();
-			}
-			else if(type==TaskType.MAINTYPE_MAINTASK&&TaskMissionManager.getMainTaskIsFinish())//主任务且主任务完成
-			{
-				if(TaskMissionManager.getMainTaskHaveNpc())
-				{
-					if(key==1)
-					{
-						TaskUtil.npcTaskWalk(TaskMissionManager.getMainTaskNpcAreaId(),finishWalk,finishWalk);
-					}
-					else
-					{
-						TaskUtil.npcTaskFly(TaskMissionManager.getMainTaskNpcAreaId(),finishWalk,finishWalk);
-					}
-				}
-				else
-				{
-					showLeadPanel();
-				}
-			}
-			else
-			{
-				if(type==TaskType.MAINTYPE_TREASUREBOX)// 环式任务寻怪取刷新点
-				{
-					var monsterId:int=TaskMissionManager.getTreasuerMonsterId(num);
-					if(key==1)
-					{
-						TaskUtil.monsterTaskWalk(monsterId);
-					}
-					else
-					{
-						TaskUtil.monsterTaskFly(monsterId);
-					}
-					
-				}
-				else//主线和支线的怪取配置坐标点
-				{
-					var post:Array=TaskMissionManager.getPathingByType(type,num);
-					if(key==1)
-					{
-						var modeid:int=TaskUtil.getMonsterByType(type,num);
-						var obj:Object=new Object();
-						obj.subType=TaskUtil.getSubtypeByType(type);
-						obj.modeid=modeid;
-						if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_GATHER)//采集任务寻路完成开始采集
-						{
-							TaskUtil.postTaskWalk(post,walkStartGather,nowalkStartGather,obj);
-						}
-						else
-						{
-							TaskUtil.postTaskWalk(post,startGather);
-						}
-					}
-					else
-					{
-						TaskUtil.postTaskFly(post);
-					}
-				}
-			}
-		}
-		/**追踪面板上寻路完成*/
-		private function finishWalk(re : *):void
-		{
-			
-			if(TaskMissionManager.mainTaskData!=null)
-			{
-				finishToNpc(TaskMissionManager.getMainTaskNpcModeId());
-			}
-		}
-		
-		/**采集寻路完成开始采集了*/
-		private function walkStartGather(ref :WalkMoveStateReference):void
-		{
-		
-			var modeid:int=ref.data.modeid;
-			startGather(modeid);
-			
-		}
-		/**采集寻路完成开始采集了*/
-		private function nowalkStartGather(data :Object):void
-		{
-			var modeid:int=data.modeid;
-			startGather(modeid);
-			
-		}
-		/**采集寻路完成开始采集了*/
-		private function startGather(modeid :int):void
-		{
-			var list : Vector.<SceneRole> =SceneManager.getSceneRoleList();
-			list.sort(CastSpellHelper.onSortNearestRole);
-			var moustList: Vector.<MonsterData>=new Vector.<MonsterData>();
-			var monsterData : MonsterData
-			for each(var rdata:SceneRole in list)
-			{
-				if(rdata!=null&&rdata.data!=null)
-				{
-					monsterData=rdata.data as MonsterData;
-					if(monsterData!=null)
-					{
-						if(monsterData.modelID==modeid)
-						{
-							TaskSender.sendStartGatherMessage(monsterData.serverID);
-							return;
-						}
-					}
-				}
-				
-			}
-		}
-		
-		
-		
-		/**领取奖励按钮*/
-		private function receiveRewordBut(type:int):void
-		{
-			if(type==1)//支线任务领取奖励
-			{
-				TaskSender.sendfinishTaskMessage(TaskMissionManager.dailyTaskInfo.taskId);
-				loopCont.hideDailyTaskView();
-			}
-			else if(type==2)
-			{
-				showLoopPanel();
-			}
-			
-		}
 		
 	
 		/**追踪栏开启关闭操作*/

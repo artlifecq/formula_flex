@@ -193,7 +193,36 @@ package com.rpgGame.coreData.info.fight.skill
             
             return spellVect;
         }
-
+		/**
+		 * 得到所有的自动战斗技能
+		 * @return
+		 *
+		 */
+		public function getSortSpellList() : Vector.<Q_skill_model>
+		{
+			var spellVect : Vector.<Q_skill_model> = new Vector.<Q_skill_model>;
+			
+			var spell : Q_skill_model;
+			var spells : Array = _spellMap.getValues();
+			var len : int = spells.length;
+			for (var i : int = 0; i < len; i++)
+			{
+				spell = spells[i];
+				if(spell.q_ai_sort >0)
+					spellVect.push(spell);
+			}
+			spellVect.sort(function (a:Q_skill_model,b:Q_skill_model):int{
+				if(a.q_ai_sort<b.q_ai_sort)
+				{
+					return 1;
+				}
+				return -1;
+			});
+			
+			return spellVect;
+		}
+		
+		
 		/**
 		 * 得到当前对某个职业总等级
 		 * 就是对这个系加了多少点
@@ -217,7 +246,7 @@ package com.rpgGame.coreData.info.fight.skill
 
 			return allLevel;
 		}
-
+		
 		public function getAllSpellPoint() : int
 		{
 			return obtainSpellPoint + totalAddSpellPoint;
@@ -308,5 +337,59 @@ package com.rpgGame.coreData.info.fight.skill
 				trace("删除一个自动释放技能数据，失败了，说明没有设置过这个技能");
 			}
 		}
+		
+		
+		/**
+		 * 得到默认技能 
+		 * @return 
+		 * 
+		 */		
+		public function getFirstSpell():Q_skill_model
+		{
+			var spell : Q_skill_model;
+			var spells : Array = _spellMap.getValues();
+			var len : int = spells.length;
+			for (var i : int = 0; i < len; i++)
+			{
+				spell = spells[i];
+				if(spell.q_ai_sort==1)
+				{
+					return spell;
+				}
+			}
+			return null;
+		}
+		
+		
+		
+		/**
+		 * 得到所有的主动对敌技能 最短释放距离
+		 * @return
+		 *
+		 */
+		public function getShortcutSpellDistance() :int
+		{
+			var spell : Q_skill_model;
+			var spells : Array = _spellMap.getValues();
+			var dist:int=int.MAX_VALUE;
+			var len : int = spells.length;
+			for (var i : int = 0; i < len; i++)
+			{
+				spell = spells[i];
+				if(spell.q_shortcut == 1&&spell.q_target==3&&spell.q_ai_sort>0)
+				{
+					if(spell.q_range_limit<dist)
+					{
+						dist=spell.q_range_limit;
+					}
+					
+				}
+					
+			}
+			return dist*50;
+		}
+		
+		
+		
 	}
 }

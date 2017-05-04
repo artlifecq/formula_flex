@@ -140,22 +140,9 @@ package com.rpgGame.app.manager.role
 
 		public static function walkToScene(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,noWalk:Function=null) : void
 		{
-//			var myContry:int = MainRoleManager.actorInfo.countryId;
-//			var currentCountry:int = CountryManager.selfCountryData.sequence;
-
-//			if(SceneSwitchManager.isUseTransport)
-//			{
-//				SceneSwitchManager.targetMapId = 7;
-//				SceneSwitchManager.targetX = 15000;
-//				SceneSwitchManager.targetY = 15000;
-//				targetSceneId = SceneSwitchManager.targetMapId;
-//				posx = SceneSwitchManager.targetX;
-//				posy = SceneSwitchManager.targetY;
-//			}
 
 			TrusteeshipManager.getInstance().stopAll();
 			var role : SceneRole = MainRoleManager.actor;
-			//var position : Vector3D = new Vector3D(posx, role.y, posy);
 			var position : Vector3D = new Vector3D(posx, posy, 0);
 			walkToScenePos(role, targetSceneId, position, onArrive, spacing, data,noWalk);
 		}

@@ -65,11 +65,13 @@ package com.rpgGame.core.view.uiComponent.face.cd
 		
 		private static function cdStart( $cdData:CDData ):void
 		{
+			//L.l("cdStart"+$cdData.id);
 			EventManager.dispatchEvent( CDDataEvent.START, $cdData );
 		}
 		
 		private static function cdUpdata( $cdData:CDData ):void
 		{
+			//L.l("$cdData"+$cdData.id);
 			EventManager.dispatchEvent( CDDataEvent.UPDATE, $cdData );
 		}
 		

@@ -3,6 +3,7 @@ package com.rpgGame.app.utils
 	import com.game.engine3D.core.AreaMap;
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.AreaMapData;
+	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -10,6 +11,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.richText.RichTextCustomLinkType;
@@ -18,8 +20,11 @@ package com.rpgGame.app.utils
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.state.role.RoleStateUtil;
+	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.app.task.TaskInfoDecoder;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -436,10 +441,7 @@ package com.rpgGame.app.utils
 			var monsterData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(id);
 			if (monsterData)
 			{
-				var pos : Point = MonsterDataManager.getMonsterPosition(monsterData);
-				var targerPos:Vector3D=new Vector3D();
-				
-				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, pos.x, pos.y,onArrive, 100,null,noWalk);
+				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100,null,noWalk);
 			}
 		}
 		
@@ -452,13 +454,10 @@ package com.rpgGame.app.utils
 		public static function monsterTaskWalk(modeId : int,onArrive:Function=null,noWalk:Function=null) : void
 		{
 			
-			var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterByModelId(modeId);
+			var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterByModelId(modeId,SceneSwitchManager.currentMapId);
 			if (monsterData)
 			{
-				var pos : Point = MonsterDataManager.getMonsterPosition(monsterData);
-				var targerPos:Vector3D=new Vector3D();
-				
-				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, pos.x, pos.y,onArrive, 100,null,noWalk);
+				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100,null,noWalk);
 			}
 		}
 		/**
@@ -485,10 +484,7 @@ package com.rpgGame.app.utils
 			var monsterData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(id);
 			if (monsterData)
 			{
-				var pos : Point = MonsterDataManager.getMonsterPosition(monsterData);
-				var targerPos:Vector3D=new Vector3D();
-				
-				SceneSender.sceneMapTransport(monsterData.q_mapid, pos.x, pos.y);
+				SceneSender.sceneMapTransport(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y);
 			}
 		}
 		
@@ -501,13 +497,10 @@ package com.rpgGame.app.utils
 		public static function monsterTaskFly(modeId : int,onArrive:Function=null,noWalk:Function=null) : void
 		{
 			
-			var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterByModelId(modeId);
+			var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterByModelId(modeId,SceneSwitchManager.currentMapId);
 			if (monsterData)
 			{
-				var pos : Point = MonsterDataManager.getMonsterPosition(monsterData);
-				var targerPos:Vector3D=new Vector3D();
-				
-				SceneSender.sceneMapTransport(monsterData.q_mapid, pos.x, pos.y);
+				SceneSender.sceneMapTransport(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y);
 			}
 		}
 		/**
@@ -941,6 +934,8 @@ package com.rpgGame.app.utils
 		}
 		
 		
+		
+		
 		/**设置奖励物品*/
 		public static function setRewordInfo(rid:int,icoList:Vector.<IconCDFace>,icoBgList:Vector.<UIAsset>,show:Boolean=false):void
 		{
@@ -978,6 +973,22 @@ package com.rpgGame.app.utils
 			var info:ClientItemInfo=ItemUtil.convertClientItemInfo(item);
 			FaceUtil.SetItemGrid(grid,info,true);
 		}
+		
+		
+		
+		
+		
+		
+		
+		/////////////////////////////////////////////////////////////
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		

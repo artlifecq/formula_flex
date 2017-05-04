@@ -12,9 +12,7 @@ package com.rpgGame.app.state.ai
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.coreData.type.RoleStateType;
-	
 	import app.message.SpellProto;
-
 	/**
 	 *
 	 * 攻击对象
@@ -27,8 +25,13 @@ package com.rpgGame.app.state.ai
 		public function AttackTarget()
 		{
 			super(AIStateType.ATTACK_TARGET);
+			
+			//EventManager.addEvent(SkillEvent.SKILL_CANCEL,slillCancel);//技能被打断，取消吟唱
+			//EventManager.addEvent(SkillEvent.SKILL_RESULT,slillCancel);//技能释放成功，吟唱没完的话也取消吟唱
 		}
-
+		
+		
+		
 		override public function execute() : void
 		{
 			super.execute();
@@ -37,7 +40,14 @@ package com.rpgGame.app.state.ai
 
 		private function findUseableSpell() : Q_skill_model
 		{
-			var castSpell : Q_skill_model = CastSpellHelper.getNextCastSpell();
+			//var castSpell : Q_skill_model = CastSpellHelper.getNextCastSpell();
+			//var castSpell : Q_skill_model = SpellDataManager.getSpellData(1001,1);
+			
+			var castSpell : Q_skill_model = CastSpellHelper.getSortCastSpell();
+			//MainRoleManager.actorInfo.spellList.getDefaultSpell();
+			
+			
+			
 			/*var nextSpell : SpellProto = TrusteeshipManager.getInstance().nextSpell;
 			if (nextSpell && !SkillCDManager.getInstance().getSkillHasCDTime(nextSpell))
 				castSpell = nextSpell;*/
@@ -99,18 +109,29 @@ package com.rpgGame.app.state.ai
 			}
 			return castSpell;
 		}
-
+		
+		/*private var currtKill:int=0;
+		private function slillCancel(kid:int):void
+		{
+			L.l("currtKill"+currtKill);
+			if(kid==currtKill)
+			{
+				currtKill=0;
+			}
+			
+		}*/
 		private function releaseSpell() : void
 		{
+			//if(currtKill>0)return;currtKill=spellData.q_skillID;
 			var spellData : Q_skill_model = findUseableSpell();
+			
 			if (spellData)
-			{
+			{L.l("spellData"+spellData.q_skillName);
 				var roleList : Vector.<SceneRole> = TrusteeshipManager.getInstance().getRoleList();
 				CastSpellHelper.tryCaseSpell(new CastSpellInfo(spellData), roleList, true);
 			}
 			transition(AIStateType.AI_NONE);
 		}
-
 		private function onSortSpell(spellA : SpellProto, spellB : SpellProto) : int
 		{
 			if (spellA.spellType > spellA.spellType)

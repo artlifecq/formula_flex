@@ -38,11 +38,23 @@ package com.rpgGame.app.controller.keyboard
 							AppManager.showApp(AppConstant.GM_PANEL);
 					}
 					break;
-				case "2": //Z 自动挂机
-					if (TrusteeshipManager.getInstance().isAutoFightRunning)
+				case "2": //Z 自动挂机   挂机改到A去了
+					/*if (TrusteeshipManager.getInstance().isAutoFightRunning)
 						TrusteeshipManager.getInstance().stopAutoFight();
 					else
+						TrusteeshipManager.getInstance().startAutoFight();*/
+					break;
+				case "65": //A 自动挂机   挂机改到A去了
+					if (TrusteeshipManager.getInstance().isAutoFightRunning)
+					{
+						TrusteeshipManager.getInstance().stopAutoFight();
+					}
+					else
+					{
 						TrusteeshipManager.getInstance().startAutoFight();
+						AppManager.hideApp(AppConstant.SYSTEMSET_PANEL);
+					}
+					
 					break;
 				case "3": //m 地图
 					//AppManager.showApp(AppConstant.WORLD_MAP_PANEL);
