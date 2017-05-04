@@ -146,7 +146,10 @@ package com.rpgGame.app.manager.hint
 			if (hintBox)
 			{
 				hintBox.addHint(value);
-				if (hintBox.hintTypeSet && hintBox.hintTypeSet.posX == 0 && hintBox.hintTypeSet.posY == 0)
+				var posX:Number=Number(hintBox.hintTypeSet.posX);
+				var posY:Number=Number(hintBox.hintTypeSet.posY);
+				if (posX == 0 && posY == 0)
+				if (hintBox.hintTypeSet && posX == 0 && posY == 0)
 				{
 					hintBox.x = int(Starling.current.nativeStage.mouseX); //int(Starling.current.nativeStage.mouseX - (hintBox.width / 2));
 					hintBox.y = Math.max(0,int(Starling.current.nativeStage.mouseY - hintBox.height));
