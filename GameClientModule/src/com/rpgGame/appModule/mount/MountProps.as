@@ -54,10 +54,10 @@ package com.rpgGame.appModule.mount
 		{
 			_currentProp = _mountShowData.currentProp(_currentProp);
 			_addProp = _mountShowData.addProps(_addProp);
-			_currentPower = FightValueUtil.calAtrributeFightPower(_currentProp,_mountShowData.heroJob);
+			_currentPower = FightValueUtil.calAtrributeFightPower(_currentProp.concat(),_mountShowData.heroJob);
 			if(_addProp!=null)
 			{
-				_nextPower = FightValueUtil.calAtrributeFightPower(_addProp,_mountShowData.heroJob);
+				_nextPower = FightValueUtil.calAtrributeFightPower(_addProp.concat(),_mountShowData.heroJob);
 			}else{
 				_nextPower = 0;
 			}

@@ -1,6 +1,6 @@
 package com.rpgGame.appModule.mount
 {
-	import com.rpgGame.coreData.clientConfig.Q_att_values;
+	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	
 	import org.mokylin.skin.app.zuoqi.Shuxing_Item;
@@ -41,12 +41,13 @@ package com.rpgGame.appModule.mount
 			_skin.container.visible = true;
 			var attname:String = CharAttributeType.getCNName(_attpropId);
 			_skin.lbName.text = attname;
-			_skin.lbCurrent.text = Math.floor(_currentatt).toString();
+			_skin.lbCurrent.text = AttValueConfig.getDisAttValueStr(_attpropId,_currentatt);
 			if(_nextAtt>0)
 			{
-				_skin.lbUp.text = Math.floor(_nextAtt).toString();
+				_skin.lbUp.text = AttValueConfig.getDisAttValueStr(_attpropId,_nextAtt);
 			}else{
 				_skin.lbUp.text = "";
+				_skin.ico_up.visible = false;
 			}
 		}
 		

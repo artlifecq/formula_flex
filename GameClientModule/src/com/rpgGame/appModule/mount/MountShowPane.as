@@ -8,6 +8,7 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.coreData.type.CharAttributeType;
 	
 	import feathers.core.ToggleGroup;
+	import feathers.events.FeathersEventType;
 	
 	import org.mokylin.skin.app.zuoqi.huoquSkin;
 	
@@ -30,12 +31,13 @@ package com.rpgGame.appModule.mount
 			_group.addEventListener(Event.CHANGE,useMoneyTypeHandler);
 			_numeric = new GameNumericStepper();
 			_numeric.addEventListener(Event.CHANGE,valueChangeHandler);
+			_numeric.addEventListener(FeathersEventType.FOCUS_OUT,valueChangeHandler);
 			_numeric.minValue = 1;
 			_numeric.maxFun = getMaxNum;
 			_numeric.setSkinInfo(_skin.btn_jian,_skin.btn_jia,_skin.max,_skin.input_txt);
 		}
 		
-		private function valueChangeHandler(e:Event):void
+		private function valueChangeHandler():void
 		{
 			_skin.lab_num.text = int(_numeric.currentValue*_buesses.price).toString();
 		}
