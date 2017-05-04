@@ -3,7 +3,6 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
-	import com.rpgGame.app.manager.goods.ItemManager;
 	import com.rpgGame.app.manager.goods.ItemUseManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;

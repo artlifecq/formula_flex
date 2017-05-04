@@ -72,7 +72,7 @@ package com.rpgGame.app.controller.keyboard
 					break;
 				case "9": //P 队伍
 					if (!ClientConfig.isBanShu)
-						AppManager.showApp(AppConstant.TEAM_PANEL);
+						AppManager.showApp(AppConstant.EQUIP_PANL);
 					break;
 				case "10": //O 商城
 					/*if (!ClientConfig.isBanShu)

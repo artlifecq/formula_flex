@@ -16,6 +16,7 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.MouseCursorEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ComboItemInfo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.role.HeroData;
 	
@@ -318,6 +319,13 @@ package com.rpgGame.app.manager.goods
 				}*/
 				case GoodsType.MEDICINE:
 				{
+					break;
+				}
+				case GoodsType.MATERIAL_COMBO:
+				{
+					var info:ComboItemInfo=new ComboItemInfo();
+					info.sourceId=item.cfgId;
+					AppManager.showAppNoHide(AppConstant.EQUIP_PANL,{tab:4,data:info});
 					break;
 				}
 //				case GoodsType.JINZI_PACKAGE:

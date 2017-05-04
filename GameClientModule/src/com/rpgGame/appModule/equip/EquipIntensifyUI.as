@@ -803,8 +803,7 @@ package com.rpgGame.appModule.equip
 			_goodsContainerTarget.refleshGridsByDatas(targetEquips);
 			
 			useEquips=getUseEquips(allEquips);
-			useEquips.sort(sortForLevelNum);
-			useEquips.reverse();
+			useEquips.sort(sortForUse);
 			num=useEquips.length;
 			num=num>MIN_GRID?num:MIN_GRID;
 			_goodsContainerUse.setGridsCount(num,false);
@@ -813,6 +812,60 @@ package com.rpgGame.appModule.equip
 			_goodsContainerUse1.refleshGridsByDatas(selectedUse);
 			
 			updateAll();
+		}
+		
+		private function sortForUse(equipA:EquipInfo, equipB:EquipInfo):int
+		{
+			if(equipA.qItem.q_levelnum==equipB.qItem.q_levelnum){//阶数相同
+				if(equipA.qItem.q_default==equipB.qItem.q_default){//品质相同
+					if(equipA.strengthLevel==equipB.strengthLevel){//强化等级相同
+						if(isleftKind(equipA.qItem.q_kind,equipB.qItem.q_kind)){//根据部件排序
+							return -1;
+						}else{
+							if(equipA.qItem.q_kind==equipB.qItem.q_kind){
+								return 0;
+							}else{
+								return 1;
+							}
+						}
+					}else{
+						if(equipA.strengthLevel==equipB.strengthLevel){
+							if(equipA.strengthExp==equipA.strengthExp){
+								return 0
+							}
+							if(equipA.strengthExp<equipA.strengthExp){
+								return -1;
+							}else{
+								return 1;
+							}
+						}
+						if(equipA.strengthLevel<equipB.strengthLevel){
+							return -1;
+						}else{
+							return 1;
+						}
+					}
+				}else{
+					if(equipA.qItem.q_default==equipB.qItem.q_default){
+						return 0;
+					}
+					if(equipA.qItem.q_default<equipB.qItem.q_default){
+						return -1;
+					}else{
+						return 1;
+					}
+				}
+			}else{
+				if(equipA.qItem.q_levelnum==equipB.qItem.q_levelnum){
+					return 0;
+				}
+				if(equipA.qItem.q_levelnum<equipB.qItem.q_levelnum){
+					return -1;
+				}else{
+					return 1;
+				}
+			}
+			return 0;
 		}
 		
 		/**
@@ -838,12 +891,21 @@ package com.rpgGame.appModule.equip
 			return 0;
 		}
 		
+		private function isleftKind(kindA:int,kindB:int):Boolean
+		{
+			var kindList:Array=[0,1,4,5,2,3,6,7,8,9];
+			if(kindList.indexOf(kindA)<kindList.indexOf(kindB)){
+				return true;
+			}
+			return false;
+		}
+		
 		private function sortForLevelNum(equipA:EquipInfo, equipB:EquipInfo):int
 		{
 			if(equipA.qItem.q_levelnum==equipB.qItem.q_levelnum){//阶数相同
 				if(equipA.qItem.q_default==equipB.qItem.q_default){//品质相同
 					if(equipA.strengthLevel==equipB.strengthLevel){//强化等级相同
-						if(equipA.qItem.q_kind<equipB.qItem.q_kind){//根据部件排序
+						if(isleftKind(equipA.qItem.q_kind,equipB.qItem.q_kind)){//根据部件排序
 							return -1;
 						}else{
 							if(equipA.qItem.q_kind==equipB.qItem.q_kind){
