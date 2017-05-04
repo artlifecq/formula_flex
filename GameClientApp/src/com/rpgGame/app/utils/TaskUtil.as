@@ -881,16 +881,7 @@ package com.rpgGame.app.utils
 							
 					}
 					
-					/*for(j=0;j<sub.length;j++)
-					{
-					if(modeid==sub[j].modelId)
-					{
 					
-					if(i==j)L.l("能够对应@@@@@@@");
-					else L.l("不能对应￥￥￥￥￥");
-					break;
-					}
-					}*/
 					if(type!=TaskType.SUB_CONVERSATION)
 					{
 						text+="<font color='#cfc6ae'>("+count+"/"+finish+")</font>";
