@@ -67,5 +67,17 @@ package com.rpgGame.coreData.type
 		public static const PASSIVESKILL_TIP : int = rEnum.next;
 		/** 丹药 tips*/
 		public static const EXTARITEM_TIP : int = rEnum.next;
+		/**
+		 *心法node ip 
+		 */		
+		public static const CHEATS_NODE_TIP:int=rEnum.next;
+		/**
+		 *心法 ip 
+		 */		
+		public static const CHEATS_TIP:int=rEnum.next;
+		/**
+		 *心法 ip 
+		 */		
+		public static const CHEATS_INTRADUCTION_TIP:int=rEnum.next;
 	}
 }

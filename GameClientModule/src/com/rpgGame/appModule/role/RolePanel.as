@@ -6,6 +6,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.appModule.jingmai.MeridianMainPanelExt;
 	import com.rpgGame.appModule.role.interfaces.ISubPanel;
 	import com.rpgGame.appModule.util.MCUtil;
+	import com.rpgGame.appModule.xinfa.XinFaMainPanelExt;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.role.HeroData;
@@ -27,11 +28,13 @@ package com.rpgGame.appModule.role
 	{
 		public static const SUB_ROLE:String="role_panel";
 		public static const SUB_MERIDIAN:String="meridian_panel";
+		public static const SUB_XINFA:String="xinfa_panel";
 		protected var _skin : beibao_Skin;
 		
 	
 		private var _subRole:SubRolePanel;
-		private var _subMeridian:MeridianMainPanelExt
+		private var _subMeridian:MeridianMainPanelExt;
+		private var _subXinFa:XinFaMainPanelExt;
 		private var _curSub:SkinUI
 		public function RolePanel()
 		{
@@ -73,6 +76,11 @@ package com.rpgGame.appModule.role
 					sub=subMeridian;
 					break;
 				}
+				case SUB_XINFA:
+				{
+					sub=subXinfa;
+					break;
+				}
 				default:
 				{
 					sub=_subRole;
@@ -104,6 +112,10 @@ package com.rpgGame.appModule.role
 			{
 				showSubPanel(SUB_MERIDIAN);
 			}
+			else if (target==(_skin.daohang.skin as daohang_Skin).btn_xinfa) 
+			{
+				showSubPanel(SUB_XINFA);
+			}
 		}
 	
 		
@@ -130,6 +142,14 @@ package com.rpgGame.appModule.role
 				_subMeridian=new MeridianMainPanelExt();
 			}
 			return _subMeridian;
+		}
+		public function get subXinfa():XinFaMainPanelExt
+		{
+			if (_subXinFa==null) 
+			{
+				_subXinFa=new XinFaMainPanelExt();
+			}
+			return _subXinFa;
 		}
 		override protected function onShow():void
 		{

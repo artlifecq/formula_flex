@@ -5,6 +5,7 @@
 	import com.rpgGame.app.cmdlistener.BaZhenTuCmdListener;
 	import com.rpgGame.app.cmdlistener.BuffCmdListener;
 	import com.rpgGame.app.cmdlistener.ChatCmdListener;
+	import com.rpgGame.app.cmdlistener.CheatsCmdListerner;
 	import com.rpgGame.app.cmdlistener.DaTiCmdListener;
 	import com.rpgGame.app.cmdlistener.FightSoulCmdListener;
 	import com.rpgGame.app.cmdlistener.FriendCmdListener;
@@ -137,6 +138,7 @@
 			register("NotifyCmdListener",NotifyCmdListener);//通知消息管理
 			register("LostSkillCmdListener",LostSkillCmdListener);//绝学
 			register("MeridianCmdListerner",MeridianCmdListerner);
+			register("CheatsCmdListerner",CheatsCmdListerner);
 		}
 	}
 }

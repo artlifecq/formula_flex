@@ -189,6 +189,10 @@ package  com.rpgGame.appModule.jingmai.sub
 
 		public function get scrollWidth():int
 		{
+			if (!_isHorizon) 
+			{
+				return _scrollHeight;
+			}
 			return _scrollWidth;
 		}
 
