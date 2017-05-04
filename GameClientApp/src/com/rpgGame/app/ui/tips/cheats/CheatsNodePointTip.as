@@ -400,10 +400,10 @@ package  com.rpgGame.app.ui.tips.cheats
 		}
 		private function addEvent():void
 		{
-			if (!EventManager.hasEvent(MainPlayerEvent.LEVEL_CHANGE,playerAttrChange)) 
+			if (!EventManager.hasEvent(MainPlayerEvent.LEVEL_CHANGE,playerLvChange)) 
 			{
-				EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,playerAttrChange);
-				EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,playerAttrChange);
+				EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,playerLvChange);
+				EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,playerLvChange);
 			}
 		}
 		private function playerAttrChange(type:int=0):void
@@ -412,6 +412,10 @@ package  com.rpgGame.app.ui.tips.cheats
 			{
 				updateTips();
 			}
+		}
+		private function playerLvChange(type:int=0):void
+		{
+			updateTips();
 		}
 		protected function onDataChange(event:CheatsEvent):void
 		{

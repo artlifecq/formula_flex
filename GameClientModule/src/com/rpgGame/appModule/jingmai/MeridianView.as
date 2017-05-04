@@ -251,7 +251,7 @@ package com.rpgGame.appModule.jingmai
 		private function onLevelChange(type:int=0):void
 		{
 			// TODO Auto Generated method stub
-			if (CharAttributeType.LV==type)
+			//if (CharAttributeType.LV==type)
 			{
 				checkForUpdate();
 			}

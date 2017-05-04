@@ -209,7 +209,7 @@ package com.rpgGame.appModule.xinfa
 				var buff:Q_buff=BuffStateDataManager.getData(buffObj[0]);
 				_skillIcon.setIconResName(ClientConfig.getBuffIcon(buff.q_icon,IcoSizeEnum.ICON_42));
 				_skin.lab_Skill.text=LanguageConfig.replaceStr(buff.q_description,buffObj[1]);
-				_skin.imgSkill.styleName="ui/app/beibao/xinfa/buff/"+buff.q_buff_id+".png"
+				_skin.imgSkill.styleName="ui/app/beibao/xinfa/buff/"+buff.q_icon+".png"
 			}
 			
 			updateActiveContent();
@@ -404,7 +404,7 @@ package com.rpgGame.appModule.xinfa
 		private function onLevelChange(type:int=0):void
 		{
 			// TODO Auto Generated method stub
-			if (CharAttributeType.LV==type)
+			//if (CharAttributeType.LV==type)
 			{
 				checkForUpdate();
 			}
