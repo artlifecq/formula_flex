@@ -7,7 +7,6 @@ package com.rpgGame.appModule.fightsoul
 	import com.rpgGame.coreData.cfg.WindowInfoData;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_path;
 	import com.rpgGame.coreData.clientConfig.Q_windowInfo;
-	import com.rpgGame.coreData.lang.LangFightSoul;
 	import com.rpgGame.coreData.lang.LangUI_2;
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;

@@ -1,6 +1,5 @@
 package com.rpgGame.appModule.jingmai
 {
-	import com.rpgGame.appModule.role.interfaces.ISubPanel;
 	import com.rpgGame.core.ui.SkinUI;
 	
 	import org.mokylin.skin.app.beibao.jingmai.Jingmai_Skin;
