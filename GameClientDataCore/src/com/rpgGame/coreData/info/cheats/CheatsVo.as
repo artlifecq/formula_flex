@@ -25,7 +25,7 @@ package com.rpgGame.coreData.info.cheats
 		//激活属性
 		private var _extendAttr:HashMap=new HashMap();
 		//基本属性每集基本属性
-		//private var _baseAttrHash:HashMap=new HashMap();
+		//private var _baseAttrHash:HashMap=new HashMap(); 
 		//总属性
 		private var _totalValue:HashMap=new HashMap();
 		private var _careCheats:HashMap=new HashMap();
