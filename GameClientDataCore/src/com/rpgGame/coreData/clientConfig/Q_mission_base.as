@@ -31,10 +31,10 @@ package com.rpgGame.coreData.clientConfig
 		 /**  任务接取条件1??玩家等级（填0 表示没有等级条件限制） */
 		public var q_needLevel:int;
 		 /**  任务接取条件2??前置任务id（前置任务完成时才可接取该任务，填0表示没有前置任务） */
-		public var q_needMission:int;
+		public var q_needMission:String;
 		 /**  任务子类型（1为对话类型，2杀怪数量，3杀怪获得道具，4采集获取道具,5使用道具完成任务,6挑战副本）2/4/6类型任务均需自动完成及接取 */
 		public var q_mission_type:int;
-		 /**  任务完成条件,数值类 */
+		 /**  任务完成条件,数值类（该字段未用到） */
 		public var q_finish_information_int:int;
 		 /**  任务完成条件,字符串类型(道具ID或者怪物ID,数量)(1001,1;1002,1)（副本ID，次数）对话填npcid */
 		public var q_finish_information_str:String;

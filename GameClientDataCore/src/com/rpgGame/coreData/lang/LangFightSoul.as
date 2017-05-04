@@ -10,7 +10,7 @@ package com.rpgGame.coreData.lang
 	* @author NEIL
 	* 
 	*/
-	public class LangUI_2
+	public class LangFightSoul
 	{
 		 /**  通过完成右侧升级途径获取战魂经验 */
 		public static const FightSoulExpTip:String = "FightSoulExpTip";
@@ -20,18 +20,6 @@ package com.rpgGame.coreData.lang
 		public static const FightSoulProgress:String = "FightSoulProgress";
 		 /**  $点 */
 		public static const FightSoulShowReward:String = "FightSoulShowReward";
-		 /**  激活条件：人物等级达到$级 */
-		public static const Lostskill_activit:String = "Lostskill_activit";
-		 /**  当前等级效果： */
-		public static const Lostskill_title1:String = "Lostskill_title1";
-		 /**  下一等级效果： */
-		public static const Lostskill_title2:String = "Lostskill_title2";
-		 /**  $级开启 */
-		public static const Lostskill_Opentips:String = "Lostskill_Opentips";
-		 /**  已激活 */
-		public static const Skill_jihuo:String = "Skill_jihuo";
-		 /**  未激活 */
-		public static const Skill_weijihuo:String = "Skill_weijihuo";
 
 	}
 }

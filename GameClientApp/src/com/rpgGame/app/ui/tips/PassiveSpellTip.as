@@ -14,20 +14,20 @@ package com.rpgGame.app.ui.tips
 	
 	import org.mokylin.skin.app.tips.Tips_BeiDongJiNeng;
 	
-	public class PassiveSpillTip extends SkinUI implements ITip
+	public class PassiveSpellTip extends SkinUI implements ITip
 	{
 		private var _skin:Tips_BeiDongJiNeng;
 		
-		private static var _instance:PassiveSpillTip = null;
-		public static function get instance() : PassiveSpillTip
+		private static var _instance:PassiveSpellTip = null;
+		public static function get instance() : PassiveSpellTip
 		{
 			if (null == _instance)
 			{
-				_instance = new PassiveSpillTip();
+				_instance = new PassiveSpellTip();
 			}
 			return _instance;
 		}
-		public function PassiveSpillTip():void
+		public function PassiveSpellTip():void
 		{
 			_skin = new Tips_BeiDongJiNeng();
 			super(_skin);

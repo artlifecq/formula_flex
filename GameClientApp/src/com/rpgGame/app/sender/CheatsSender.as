@@ -3,9 +3,6 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.cheats.message.CSActiveCheatsMessage;
 	import com.rpgGame.netData.cheats.message.CSSetUpNodeMessage;
 	import com.rpgGame.netData.cheats.message.CSlevelUpNodeMessage;
-	import com.rpgGame.netData.meridian.message.CSMeridianInfosMessage;
-	import com.rpgGame.netData.meridian.message.CSSetUpAcuPointsMessage;
-	import com.rpgGame.netData.meridian.message.CSlevelUpAcuPointsMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.data.long;
