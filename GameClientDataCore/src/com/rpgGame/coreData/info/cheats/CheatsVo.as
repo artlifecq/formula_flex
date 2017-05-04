@@ -32,6 +32,8 @@ package com.rpgGame.coreData.info.cheats
 		private var _needItemHash:HashMap=new HashMap();
 		private var _level:int=0;
 		private var _dataGetFunc:Function;
+		private var _buffArr:Array;
+		public var isLevelUp:Boolean;
 		public function CheatsVo(config:Q_cheats,dataFunc:Function)
 		{
 			this._cheatsConfig=config;
@@ -88,12 +90,22 @@ package com.rpgGame.coreData.info.cheats
 			{
 				AttValueConfig.getTypeValue(cheatsConfig.q_attrId,_extendAttr);
 			}
+			_buffArr=JSONUtil.decode(config.q_skill) as Array;
+		}
+		public function getCurBuff():Array
+		{
+			if (_buffArr) 
+			{
+				return _buffArr[Math.max(0,_level-1)];
+			}
+			return null;
 		}
 		public function updateServerData(data:CheatsInfo,needUpdateAttr:Boolean=true):void
 		{
 			
 			if (data) 
 			{
+				isLevelUp=data.level>_level;
 				_level=data.level;
 			}
 			if (data&&data.nodelist.length) 
@@ -133,7 +145,7 @@ package com.rpgGame.coreData.info.cheats
 				HashMap.mergeValueHashMap(_attrHash,_extendAttr);
 				//原始属性
 				var attrArr:Array=JSON.parse(cheatsConfig.q_levelattr) as Array;
-				if (attrArr!=null&&attrArr.length>_level) 
+				if (attrArr!=null&&attrArr.length>=_level) 
 				{
 					AttValueConfig.getTypeValue(int(attrArr[_level-1]),_attrHash);
 				}

@@ -1,18 +1,23 @@
 package com.rpgGame.app.ui.tips.cheats
 {
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.view.icon.BgIcon;
+	import com.rpgGame.core.events.CheatsEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.AttrUtil;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
+	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
+	import com.rpgGame.coreData.clientConfig.Q_buff;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.cheats.CheatsVo;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	
+	import flash.events.Event;
 	import flash.geom.Point;
 	
 	import feathers.controls.Label;
@@ -49,12 +54,22 @@ package com.rpgGame.app.ui.tips.cheats
 			_skillIcon.y=3;
 			_skin.gridSkill.addChild(_skillIcon);
 			labList=[];
-			
+			Mgr.cheatsMgr.addEventListener(CheatsEvent.CHEATS_TIP_CHANGE,onDataChange);
+		}
+		
+		protected function onDataChange(event:CheatsEvent):void
+		{
+			// TODO Auto-generated method stub
+			if (event.data==_chacheData) 
+			{
+				setTipData(event.data);
+			}
 		}
 		
 		public function setTipData(data:*):void
 		{
 			var cheatVo:CheatsVo=data.cheatsVo as CheatsVo;
+			_chacheData=data;
 			if (cheatVo) 
 			{
 				for each (var dis:DisplayObject in labList) 
@@ -64,7 +79,7 @@ package com.rpgGame.app.ui.tips.cheats
 				labList.length=0;
 				
 				//名字
-				_skin.lab_name.text=cheatVo.cheatsConfig.q_name;
+				_skin.lab_name.text=cheatVo.cheatsConfig.q_name+" "+cheatVo.level+"层";
 				var lab:Label;
 				//状态
 				if (cheatVo.level==0) 
@@ -80,7 +95,7 @@ package com.rpgGame.app.ui.tips.cheats
 				else
 				{
 					_skin.mcLevel.visible=true;
-					_skin.mcLevel.gotoAndStop(cheatVo.level-1);
+					_skin.mcLevel.gotoAndStop(cheatVo.level+"");
 				}
 				var starty:int=_skin.mcLevel.y+_skin.mcLevel.height+8;
 				var startPos:Point=new Point(_skin.lab_shuxing.x,starty);
@@ -98,7 +113,8 @@ package com.rpgGame.app.ui.tips.cheats
 				labList=labList.concat(AttrUtil.showAttr(cheatVo.extendAttr,this,_skin.lab_shuxing,2,startPos,_skin.lab_shuxing.width,_skin.lab_shuxing.height+2,":"));
 				starty=startPos.y;
 				//技能
-				if (cheatVo.cheatsConfig.q_skill!=0) 
+				var buffObj:Array=cheatVo.getCurBuff();
+				if (buffObj!=null) 
 				{
 					_skin.imgSkill.visible=true;
 					_skin.gridSkill.visible=true;
@@ -106,7 +122,8 @@ package com.rpgGame.app.ui.tips.cheats
 					starty+=_skin.imgSkill.height+2;
 					_skin.gridSkill.y=starty;
 					starty+=_skin.gridSkill.height+2;
-					_skillIcon.setIconResName(ClientConfig.getSkillIcon(data.cheatsConfig.q_skill.toString(),IcoSizeEnum.ICON_42));
+					var buff:Q_buff=BuffStateDataManager.getData(buffObj[0]);
+					_skillIcon.setIconResName(ClientConfig.getBuffIcon(buff.q_icon,IcoSizeEnum.ICON_42));
 				}
 				else
 				{
@@ -130,10 +147,9 @@ package com.rpgGame.app.ui.tips.cheats
 						var tipStr:String="与《$》相生，本心法$提升$%";
 						var effectArr:Array=cheatVo.careCheats.getValue(keys[i]);
 						tipStr=LanguageConfig.replaceStr(tipStr,[CheatsCfg.getCheats(effectArr[0]).q_name,CharAttributeType.getCNName(effectArr[2]),(effectArr[3]/10000).toFixed(2)]);
+						lab.text=tipStr;
 						starty+=lab.height+2;
 						lab.height=lab.textHeight;
-						
-						lab.text=tipStr;
 						this.addChild(lab);
 					}
 				}

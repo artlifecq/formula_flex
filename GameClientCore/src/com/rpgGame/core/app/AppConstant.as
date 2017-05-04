@@ -358,6 +358,6 @@ package com.rpgGame.core.app
 		/**系统设置**/
 		public static var SYSTEMSET_PANEL:String = createAppInfo("systemset.SystemsetingPanel","systemSet");
 		/**经脉**/
-		public static var JINGMAI_PANEL:String = createAppInfo("jingmai.JingMaiPanelExt","jingmai");
+		public static var JINGMAI_STONE:String = createAppInfo("jingmai.sub.NoStoneNoticePanelExt","beibao");
 	}
 }

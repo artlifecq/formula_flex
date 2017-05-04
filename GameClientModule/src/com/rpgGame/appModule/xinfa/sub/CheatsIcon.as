@@ -28,7 +28,7 @@ package com.rpgGame.appModule.xinfa.sub
 		{
 			_icon.clear();
 			_icon.filter=null;
-			TipTargetManager.remove(_icon);
+			TipTargetManager.remove(this._icon.parent);
 		}
 		/**
 		 *设置数据 
@@ -38,10 +38,10 @@ package com.rpgGame.appModule.xinfa.sub
 		 */		
 		public function setCheatsData(data:CheatsVo,effectArr:Array):void
 		{
-			_icon.setIconResName(ClientConfig.getCheatsIcon(data.cheatsConfig.q_id,IcoSizeEnum.ICON_42));
+			_icon.setIconResName(ClientConfig.getCheatsIcon(data.cheatsConfig.q_icon,IcoSizeEnum.ICON_42));
 			var tipStr:String="与《$》相生，本心法$提升$%";
 			tipStr=LanguageConfig.replaceStr(tipStr,[CheatsCfg.getCheats(effectArr[0]).q_name,CharAttributeType.getCNName(effectArr[2]),(effectArr[3]/10000).toFixed(2)]);
-			TipTargetManager.show( _icon, TargetTipsMaker.makeSimpleTextTips(tipStr));
+			TipTargetManager.show( this._icon.parent, TargetTipsMaker.makeSimpleTextTips(tipStr));
 			if (data.level>0) 
 			{
 				_icon.filter=null;

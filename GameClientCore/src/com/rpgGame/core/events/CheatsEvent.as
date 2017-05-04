@@ -8,10 +8,12 @@ package com.rpgGame.core.events
 		public static const CHEATS_NODE_CHANGE:String="cheats_node_change";
 		public static const CHEATS_CHANGE:String="cheats_change";
 		public static const CHEATS_NODE_TIP_CHANGE:String="cheats_node_tip_change";
+		public static const CHEATS_TIP_CHANGE:String="cheats_tip_change";
 		public var data:*;
-		public function CheatsEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
+		public function CheatsEvent(type:String, tdata:*=null,bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super(type, bubbles, cancelable);
+			this.data=tdata;
 		}
 	}
 }

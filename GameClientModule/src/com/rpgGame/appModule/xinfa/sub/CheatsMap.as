@@ -1,8 +1,12 @@
 package  com.rpgGame.appModule.xinfa.sub
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.view.icon.BaseIcon;
 	import com.rpgGame.appModule.jingmai.sub.MeridianMapLine;
+	import com.rpgGame.core.events.CheatsEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
@@ -12,7 +16,9 @@ package  com.rpgGame.appModule.xinfa.sub
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.cheats.CheatsNodeVo;
 	import com.rpgGame.coreData.info.cheats.CheatsVo;
+	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.TipType;
+	import com.rpgGame.coreData.utils.FilterUtil;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import flash.geom.Point;
@@ -25,6 +31,7 @@ package  com.rpgGame.appModule.xinfa.sub
 	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
+	import starling.filters.FragmentFilter;
 	
 	public class CheatsMap extends SkinUI
 	{
@@ -38,6 +45,7 @@ package  com.rpgGame.appModule.xinfa.sub
 		private var firstLine:MeridianMapLine;
 		private var imgGrid:UIAsset;
 		private var _btn:Radio;
+		private var _grayFilter:FragmentFilter=null;
 		public function CheatsMap(skin:StateSkin,data:CheatsVo,btn:Radio)
 		{
 			super(skin);
@@ -75,8 +83,8 @@ package  com.rpgGame.appModule.xinfa.sub
 			}
 			tmpPoint=_stateSkin["ico_1"];
 			var firstStartPt:Point=imgGrid.localToGlobal(new Point(imgGrid.width/2,imgGrid.height/2));
-			_stateSkin["grp_icon"].globalToLocal(firstStartPt,firstStartPt);
-			firstLine=new MeridianMapLine("ui/app/beibao/jingmai/line/shang.png","ui/app/beibao/jingmai/line/d2.png",[firstStartPt,new Point(tmpPoint.x+tmpPoint.width/2,tmpPoint.y+tmpPoint.height/2)]);
+			firstStartPt=_stateSkin["grp_icon"].globalToLocal(firstStartPt);
+			firstLine=new MeridianMapLine("ui/app/beibao/jingmai/line/shang.png","ui/app/beibao/jingmai/line/d2.png",[firstStartPt.clone(),new Point(tmpPoint.x+tmpPoint.width/2,tmpPoint.y+tmpPoint.height/2)]);
 			linesContianer.addChild(firstLine);
 			//计算链接
 			for (var j:int = 0; j < len; j++) 
@@ -116,9 +124,9 @@ package  com.rpgGame.appModule.xinfa.sub
 							linesContianer.addChild(drawLine);
 						}
 					}
-					(pointHash.getValue(tmpC.chetasNodeId) as CheatsNodePoint).setLineArr(lines);
-					(pointHash.getValue(tmpC.chetasNodeId) as CheatsNodePoint).setData(tmpC);
 				}
+				(pointHash.getValue(tmpC.chetasNodeId) as CheatsNodePoint).setLineArr(lines);
+				(pointHash.getValue(tmpC.chetasNodeId) as CheatsNodePoint).setData(tmpC);
 			}
 			imgGrid.userData=this;
 			_btn.userData=this;
@@ -126,22 +134,28 @@ package  com.rpgGame.appModule.xinfa.sub
 			TipTargetManager.show( _btn, TargetTipsMaker.makeTips( TipType.CHEATS_TIP, this));
 			//===================
 			//this.touchGroup=true;
-			if (data.level>0) 
-			{
-				_btn.htmlText=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,"第"+data.level+"重");
-			}
-			else 
-			{
-				_btn.htmlText=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,"未激活");
-			}
+//			if (data.level>0) 
+//			{
+//				_btn.label=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,"第"+data.level+"重");
+//			}
+//			else 
+//			{
+//				_btn.label=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,"未激活");
+//			}
+			//_btn.label="xxxxxxxxxxxxxxsssssssss";
 			MCUtil.BringToTop(imgGrid);
 			//设置icon
 			var _icon:BaseIcon=new BaseIcon(IcoSizeEnum.ICON_48);
 			_icon.x=7;
 			_icon.y=5;
 			imgGrid.addChild(_icon);
-			_icon.setIconResName(ClientConfig.getCheatsIcon(data.cheatsConfig.q_id,IcoSizeEnum.ICON_48));
+			_icon.setIconResName(ClientConfig.getCheatsIcon(data.cheatsConfig.q_icon,IcoSizeEnum.ICON_48));
 			updateFirstLine(false);
+			updateBtnState();
+		}
+		private function updateBtnState():void
+		{
+			_btn.filter=_cheatsVo.level>0?null:grayFilter;
 		}
 		private function updateFirstLine(useTween:Boolean):void
 		{
@@ -157,29 +171,51 @@ package  com.rpgGame.appModule.xinfa.sub
 				}
 			}
 		}
+		private function addEft(render:RenderUnit3D):void
+		{
+			render.play(0);
+		}
+		public function playSuccessEff():void
+		{
+			var eff:Inter3DContainer=new Inter3DContainer();
+			this.addChild(eff);
+			eff.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_XINFA),imgGrid.x+this.imgGrid.width/2,imgGrid.y+this.imgGrid.height/2,1,function():void
+			{
+				eff.dispose();
+				MCUtil.removeSelf(eff);
+			}
+				,addEft);
+		}
 		public function updatCheatsInfo(data:CheatsVo):void
 		{
-			this._cheatsVo=data;
 			
-			var str:String="未激活";
-			if (data.level>0) 
+			this._cheatsVo=data;
+			if (_cheatsVo.isLevelUp) 
 			{
-				_btn.htmlText=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,"第"+data.level+"重");
+				_cheatsVo.isLevelUp=false;
+				playSuccessEff();
 			}
-			else 
-			{
-				_btn.htmlText=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,"未激活");
-			}
+			updateBtnState();
+//			var str:String="未激活";
+//			if (data.level>0) 
+//			{
+//				_btn.label=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,"第"+data.level+"重");
+//			}
+//			else 
+//			{
+//				_btn.label=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,"未激活");
+//			}
 			
 			updateFirstLine(true);
 			updataServerData(data.subNodeHash.values());
+			Mgr.cheatsMgr.dispatchEvent(new CheatsEvent(CheatsEvent.CHEATS_TIP_CHANGE,this));
 		}
 		public function showHideLv(bool:Boolean):void
 		{
 			_stateSkin["grp_label"].visible=bool;
 		}
 		public function updataServerData(data:Array,playEff:Boolean=false):void
-		{
+		{//playSuccessEff();
 			if (data) 
 			{
 				var len:int=data.length;
@@ -272,5 +308,15 @@ package  com.rpgGame.appModule.xinfa.sub
 				p.resumeEffect();
 			}
 		}
+
+		private function get grayFilter():FragmentFilter
+		{
+			if (!_grayFilter) 
+			{
+				_grayFilter=FilterUtil.getGrayFilter();
+			}
+			return _grayFilter;
+		}
+
 	}
 }

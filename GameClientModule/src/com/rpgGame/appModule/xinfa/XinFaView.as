@@ -4,6 +4,7 @@ package com.rpgGame.appModule.xinfa
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.scene.BuffSet;
 	import com.rpgGame.app.sender.CheatsSender;
 	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.app.view.icon.BgIcon;
@@ -18,9 +19,12 @@ package com.rpgGame.appModule.xinfa
 	import com.rpgGame.core.utils.AttrUtil;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.clientConfig.Q_buff;
 	import com.rpgGame.coreData.clientConfig.Q_cheats;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.cheats.CheatsNodeVo;
@@ -29,6 +33,8 @@ package com.rpgGame.appModule.xinfa
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.TipType;
+	import com.rpgGame.coreData.utils.FilterUtil;
+	import com.rpgGame.coreData.utils.FilterUtility;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import flash.geom.Point;
@@ -67,6 +73,7 @@ package com.rpgGame.appModule.xinfa
 		private var _effectCheatsGridArr:Array;
 		private var _skillIcon:BgIcon;
 		private var _btnStateLabelHash:HashMap=new HashMap();
+		
 		public function XinFaView(s:xinfa_Skin)
 		{
 			_skin=s;
@@ -144,6 +151,11 @@ package com.rpgGame.appModule.xinfa
 				_mapsHash.eachValue(function(map:CheatsMap):void{
 					map.checkCareDataUpdate(data);
 				});
+				//更新属性
+				if (data.cheatsId==_curMap.cheatsVo.cheatsConfig.q_id) 
+				{
+					updateMapAttr();
+				}
 				Mgr.cheatsMgr.dispatchEvent(new CheatsEvent(CheatsEvent.CHEATS_NODE_TIP_CHANGE,data));
 			}
 		}
@@ -174,7 +186,7 @@ package com.rpgGame.appModule.xinfa
 			var data:CheatsVo=map.cheatsVo;
 			_skin.mc_Level.visible=data.level>0;
 			_skin.imgLevelBg.visible=data.level>0;
-			_skin.mc_Name.gotoAndStop(data.cheatsConfig.q_id-1);
+			_skin.mc_Name.gotoAndStop(data.cheatsConfig.q_id+"");
 			if (data.level>0) 
 			{
 				_skin.mc_Level.gotoAndStop(data.level-1);
@@ -188,11 +200,16 @@ package com.rpgGame.appModule.xinfa
 				_skin.imgFight.visible=false;
 				_skin.num_xinfazhanli.visible=false;
 			}
-			if (data.cheatsConfig.q_skill!=0) 
+			var buffObj:Array=_curMap.cheatsVo.getCurBuff();
+			
+			if (buffObj!=null) 
 			{
-				TipTargetManager.remove(_skin.grid_item_1);
-				TipTargetManager.show( _skin.grid_item_1, TargetTipsMaker.makeTips( TipType.SPELL_TIP,data.cheatsConfig.q_skill+"_"+Math.max(1,data.level)));
-				_skillIcon.setIconResName(ClientConfig.getSkillIcon(data.cheatsConfig.q_skill.toString(),IcoSizeEnum.ICON_42));
+//				TipTargetManager.remove(_skin.grid_item_1);
+//				TipTargetManager.show( _skin.grid_item_1, TargetTipsMaker.makeTips( TipType.SPELL_TIP,data.cheatsConfig.q_skill+"_"+Math.max(1,data.level)));
+				var buff:Q_buff=BuffStateDataManager.getData(buffObj[0]);
+				_skillIcon.setIconResName(ClientConfig.getBuffIcon(buff.q_icon,IcoSizeEnum.ICON_42));
+				_skin.lab_Skill.text=LanguageConfig.replaceStr(buff.q_description,buffObj[1]);
+				_skin.imgSkill.styleName="ui/app/beibao/xinfa/buff/"+buff.q_buff_id+".png"
 			}
 			
 			updateActiveContent();

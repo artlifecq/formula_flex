@@ -17,21 +17,21 @@ package org.mokylin.skin.app.beibao.Xinfa.mc
 		{
 			super();
 			
-			this.currentState = "shijue";
+			this.currentState = "2";
 			this.elementsContent = [];
 			
 			states = {
 			};
-			skinNames={"chunyang":"ui/app/beibao/xinfa/mc/mingcheng/chunyang.png",
-			"jiuxiao":"ui/app/beibao/xinfa/mc/mingcheng/jiuxiao.png",
-			"longxiang":"ui/app/beibao/xinfa/mc/mingcheng/longxiang.png",
-			"mingxin":"ui/app/beibao/xinfa/mc/mingcheng/mingxin.png",
-			"qiankun":"ui/app/beibao/xinfa/mc/mingcheng/qiankun.png",
-			"shijue":"ui/app/beibao/xinfa/mc/mingcheng/shijue.png",
-			"wanji":"ui/app/beibao/xinfa/mc/mingcheng/wanji.png",
-			"xaoyao":"ui/app/beibao/xinfa/mc/mingcheng/xaoyao.png",
-			"xijin":"ui/app/beibao/xinfa/mc/mingcheng/xijin.png",
-			"zhenyuan":"ui/app/beibao/xinfa/mc/mingcheng/zhenyuan.png"};
+			skinNames={"1":"ui/app/beibao/xinfa/mc/mingcheng/1.png",
+			"10":"ui/app/beibao/xinfa/mc/mingcheng/10.png",
+			"2":"ui/app/beibao/xinfa/mc/mingcheng/2.png",
+			"3":"ui/app/beibao/xinfa/mc/mingcheng/3.png",
+			"4":"ui/app/beibao/xinfa/mc/mingcheng/4.png",
+			"5":"ui/app/beibao/xinfa/mc/mingcheng/5.png",
+			"6":"ui/app/beibao/xinfa/mc/mingcheng/6.png",
+			"7":"ui/app/beibao/xinfa/mc/mingcheng/7.png",
+			"8":"ui/app/beibao/xinfa/mc/mingcheng/8.png",
+			"9":"ui/app/beibao/xinfa/mc/mingcheng/9.png"};
 		}
 
 

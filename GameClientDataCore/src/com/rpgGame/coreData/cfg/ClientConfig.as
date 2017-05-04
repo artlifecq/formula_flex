@@ -439,7 +439,7 @@ package com.rpgGame.coreData.cfg
 		}
 		public static function getCheatsIcon(id : int, size : int = 40) : String
 		{
-			var url : String = "icon/item/" + size + "/" +(8000+id) + eName_PNG;
+			var url : String = "icon/item/" + size + "/" +(id) + eName_PNG;
 			return baseDir + resURL + url;
 		}
 		/**

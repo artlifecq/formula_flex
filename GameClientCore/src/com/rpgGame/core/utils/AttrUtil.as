@@ -77,7 +77,7 @@ package com.rpgGame.core.utils
 					imgArrow.styleName="ui/common/tubiao/tu_down.png";
 				}
 				imgArrow.x=startPos.x+(i%cellNum)*xGe;
-				startPos.y=sty+int(i/cellNum)*yGe;
+				startPos.y=sty+int(i/cellNum)*yGe+4;
 				imgArrow.y=startPos.y;
 				
 				contianer.addChild(imgArrow);
@@ -85,7 +85,7 @@ package com.rpgGame.core.utils
 				tmpLab.x=12;
 				
 				tmpLab.text=attHash.getValue(keys[i])+CharAttributeType.getCNName(keys[i]);
-				tmpLab.y=(imgArrow.height-tmpLab.textHeight)*0.5;
+				tmpLab.y=(imgArrow.height-tmpLab.height)*0.5;
 				ret.push(imgArrow);
 			}
 			startPos.y=sty+Math.ceil(len/cellNum)*yGe;

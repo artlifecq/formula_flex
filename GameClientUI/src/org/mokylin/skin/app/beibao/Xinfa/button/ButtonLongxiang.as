@@ -78,7 +78,6 @@ package org.mokylin.skin.app.beibao.Xinfa.button
 			temp.name = "labelDisplay";
 			temp.left = 0;
 			temp.right = 0;
-			temp.text = "未激活";
 			temp.textAlign = "right";
 			temp.color = 0xE1201C;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];

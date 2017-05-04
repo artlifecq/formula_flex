@@ -94,14 +94,7 @@ package com.rpgGame.coreData.info.cheats
 		{
 			return _serverData!=null&&(_serverData.level>0||_serverData.stone.length>0);
 		}
-		public function get isMaxLevel():Boolean
-		{
-			if (_serverData) 
-			{
-				return _serverData.level>=_config.q_maxlevel;
-			}
-			return false;
-		}
+		
 		public function get levelUpNeedPlayerLevel():int
 		{
 			return getSafeIndexData(_needLevelArr,_curLevel);

@@ -9,6 +9,8 @@ package com.rpgGame.appModule.jingmai.sub
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.MeridianSender;
 	import com.rpgGame.appModule.jingmai.MeridianStoneSelectPanelExt;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.GameColorUtil;
@@ -389,7 +391,8 @@ package com.rpgGame.appModule.jingmai.sub
 							}
 							else
 							{
-								NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7017));
+								AppManager.showApp(AppConstant.JINGMAI_STONE);
+								//NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7017));
 							}
 						}
 						

@@ -73,7 +73,6 @@ package org.mokylin.skin.app.beibao.Xinfa.button
 			temp.height = 18;
 			temp.left = 0;
 			temp.right = 0;
-			temp.text = "未激活";
 			temp.textAlign = "right";
 			temp.color = 0xFFFFFF;
 			temp.verticalAlign = "middle";

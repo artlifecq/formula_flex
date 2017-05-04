@@ -21,10 +21,10 @@ package  com.rpgGame.app.ui.tips.cheats
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.cheats.CheatsNodeVo;
+	import com.rpgGame.coreData.info.cheats.CheatsVo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
-	import com.rpgGame.netData.meridian.bean.AcuPointInfo;
 	
 	import flash.geom.Point;
 	
@@ -105,30 +105,31 @@ package  com.rpgGame.app.ui.tips.cheats
 			MCUtil.removeSelf(_skin.lb_Stone);
 			//穴位名字
 			this._skin.lb_name.text=qAcu.q_name;
+			var cheatsVo:CheatsVo=Mgr.cheatsMgr.getCheatVo(serverData.cheatsId);
 			//未激活
 			this._skin.lb_jihuo.text=serverData.curLevel+"/"+serverData.getConfig().q_maxlevel;
+			this._skin.lb_jihuo.visible=true;
 			var startY:int=40;
 			this._skin.lb_title1.y=startY;
 			startY+=this._skin.lb_title1.height+2;
+			var isUnlock:Boolean=true;
+			this._skin.lb_title1.text="【升级条件】";
 			if(serverData.curLevel==0)
 			{
 				
-				var isUnlock:Boolean=Mgr.cheatsMgr.getNodeIsUnlock(serverData);
+				isUnlock=Mgr.cheatsMgr.getNodeIsUnlock(serverData);
 				if (!isUnlock) 
 				{
 					this._skin.lb_jihuo.text="锁定";
 					this._skin.lb_title1.text="【解锁条件】";
 				}
 			}
-			else
+			
+			var isMax:Boolean=serverData.curLevel>=cheatsVo.cheatsConfig.q_maxlevel;
+			//不是最高级,或者没解锁
+			if (!isMax||!isUnlock) 
 			{
-				this._skin.lb_title1.text="【升级条件】";
-			}
-			var isMax:Boolean=serverData.isMaxLevel;
-			//不是最高级
-			if (!isMax) 
-			{
-				startY=createCondition(serverData,startY);
+				startY=createCondition(serverData,startY,!isUnlock);
 			}
 			else
 			{
@@ -148,7 +149,7 @@ package  com.rpgGame.app.ui.tips.cheats
 			var startPos:Point=new Point(_skin.lab_condition.x,startY);
 			var curAttrId:int=serverData.getAttrIdAtLevel(serverData.curLevel);
 			//如果是0级显示1级的属性
-			if (serverData.curLevel==0) 
+			if (serverData.curLevel==0&&!isUnlock) 
 			{
 				curAttrId=serverData.getAttrIdAtLevel(1);
 			}
@@ -158,7 +159,7 @@ package  com.rpgGame.app.ui.tips.cheats
 				_skin.lb_tile2.y=startY;
 				startY+=_skin.lb_tile2.height+2;
 				//属性
-				_skin.lb_tile2.text=canLevelUp?"【当前属性】":"【解锁属性】";
+				_skin.lb_tile2.text=canLevelUp||serverData.curLevel>0?"【当前属性】":"【解锁属性】";
 				var qAtt:Q_att_values=AttValueConfig.getAttInfoById(curAttrId);
 				if (qAtt) 
 				{
@@ -171,7 +172,7 @@ package  com.rpgGame.app.ui.tips.cheats
 				
 			}
 			//下一阶属性
-			if (canLevelUp) 
+			if (!isMax&&isUnlock) 
 			{
 				var nextTitle:Label=clonelab(_skin.lb_tile2);
 				nextTitle.y=startY;
@@ -205,10 +206,22 @@ package  com.rpgGame.app.ui.tips.cheats
 		//	this.height=startY;
 			_skin.imgBg.height=startY+2;
 		}
-		private function createCondition(qMer:CheatsNodeVo,startY:int):int
+		private function createCondition(qMer:CheatsNodeVo,startY:int,isUnlockCondion:Boolean):int
 		{
 			var lb:Label;
 			var isOk:Boolean=false;
+			//还要判断心法等级
+			var nextLevel:int=qMer.curLevel+1;
+			if (nextLevel<=qMer.getConfig().q_maxlevel) 
+			{
+				lb=clonelab(_skin.lab_condition);
+				this.addChild(lb);
+				lb.y=startY;
+				startY+=lb.height+2;
+				isOk=nextLevel<=Mgr.cheatsMgr.getCheatVo(qMer.cheatsId).level;
+				lb.htmlText=HtmlTextUtil.getTextColor(isOk?GameColorUtil.COLOR_GREEN:GameColorUtil.COLOR_RED,Mgr.cheatsMgr.getCheatVo(qMer.cheatsId).cheatsConfig.q_name+"等级:"+nextLevel+"重");
+				lb.width=lb.textWidth;
+			}
 			var needLv:int=qMer.levelUpNeedPlayerLevel;
 			if (needLv!=0) 
 			{
@@ -263,7 +276,8 @@ package  com.rpgGame.app.ui.tips.cheats
 				}
 			}
 			var needSprit:int=qMer.levelUpNeedSpirit;
-			if (needSprit!=0) 
+			//解锁不消耗
+			if (needSprit!=0&&!isUnlockCondion) 
 			{
 				lb=clonelab(_skin.lab_condition);
 				this.addChild(lb);
@@ -297,7 +311,7 @@ package  com.rpgGame.app.ui.tips.cheats
 				{
 					this._skin.lb_jihuo.text="锁定";
 					this._skin.lb_title1.text="【解锁条件】";
-					startY=createCondition(serverData,startY);
+					startY=createCondition(serverData,startY,true);
 				}
 				
 				
@@ -402,7 +416,7 @@ package  com.rpgGame.app.ui.tips.cheats
 		protected function onDataChange(event:CheatsEvent):void
 		{
 			// TODO Auto-generated method stub
-			var data:AcuPointInfo=event.data;
+			var data:CheatsNodeVo=event.data;
 			if (_chacheData&&_chacheData.data) 
 			{
 				if (_chacheData.data==data) 

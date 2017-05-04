@@ -12,6 +12,8 @@ package  com.rpgGame.appModule.xinfa.sub
 	import com.rpgGame.appModule.jingmai.MeridianStoneSelectPanelExt;
 	import com.rpgGame.appModule.jingmai.sub.IStoneSelector;
 	import com.rpgGame.appModule.jingmai.sub.MeridianMapLine;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.GameColorUtil;
@@ -291,10 +293,7 @@ package  com.rpgGame.appModule.xinfa.sub
 //			{
 //				TweenMax.to(this.linkLine,0.6,{autoAlpha:1});
 //			}
-			if (_drawLine) 
-			{
-				_drawLine.tweenDrawInnerLine();
-			}
+			setLineLink(true);
 		}
 		private function setIcoUrl(url:String,w:int=0,h:int=0):void
 		{
@@ -359,14 +358,15 @@ package  com.rpgGame.appModule.xinfa.sub
 						
 						if (config.q_stone_type!=0) 
 						{
-							var items:Vector.<ClientItemInfo>=Mgr.meridianMgr.getBetterStone(config.q_stone_type);
+							var items:Vector.<ClientItemInfo>=Mgr.cheatsMgr.getBetterStone(config.q_stone_type);
 							if (items.length>0) 
 							{
 								MeridianStoneSelectPanelExt.setData(items,this);
 							}
 							else
 							{
-								NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7017));
+								AppManager.showApp(AppConstant.JINGMAI_STONE);
+								//NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7017));
 							}
 						}
 						

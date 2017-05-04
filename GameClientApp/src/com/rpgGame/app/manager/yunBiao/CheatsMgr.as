@@ -4,6 +4,8 @@ package com.rpgGame.app.manager.yunBiao
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.CheatsEvent;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
@@ -37,9 +39,9 @@ package com.rpgGame.app.manager.yunBiao
 			{
 				tmp.updateServerData(info);
 				//检查关联属性
-				for each (tmp in _cheatsHash.values()) 
+				for each (var tmp2:CheatsVo in _cheatsHash.values()) 
 				{
-					tmp.checkEffectCheatUpdate(info.cheatsId);
+					tmp2.checkEffectCheatUpdate(info.cheatsId);
 				}
 				
 				this.dispatchEvent(new CheatsEvent(CheatsEvent.CHEATS_CHANGE,tmp));
@@ -232,7 +234,7 @@ package com.rpgGame.app.manager.yunBiao
 			{
 				return false;
 			}
-			if (node.isMaxLevel) 
+			if (node.curLevel>=cheat.level) 
 			{
 				if (bShowNotice) 
 				{

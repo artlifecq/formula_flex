@@ -34,8 +34,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_each_other:String;
 		 /**  节点数量 */
 		public var q_pointnum:int;
-		 /**  心法技能 */
-		public var q_skill:int;
+		 /**  心法技能[[id,1],[id,2]] */
+		public var q_skill:String;
 		 /**  功法图标 */
 		public var q_icon:int;
 
