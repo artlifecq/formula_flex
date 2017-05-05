@@ -126,7 +126,7 @@ package com.rpgGame.app.manager
 			setValueByIndex(SYSTEMSET_HP_PERCENT,85);
 			setValueByIndex(SYSTEMSET_FORCE_PERCENT,85);
 			setValueByIndex(SYSTEMSET_USEITEM_PERCENT,0);
-			setValueByIndex(SYSTEMSET_HOOK_TYPE,1);
+			setValueByIndex(SYSTEMSET_HOOK_TYPE,10);
 			setValueByIndex(SYSTEMSET_SOUND_BG,30);
 			setValueByIndex(SYSTEMSET_SOUND_EFFECT,30);
 			setValueByIndex(SYSTEMSET_AUOT_GET_ZHIYE,0);
