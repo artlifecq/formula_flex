@@ -24,9 +24,9 @@ package com.rpgGame.appModule.mount
 		private function initView():void
 		{
 			_itemIconList = new Vector.<IconCDFace>();
-			var icon:IconCDFace = FaceUtil.creatIconCDFaceByUIAsset(_skin.grid_1,IcoSizeEnum.ICON_48);
+			var icon:IconCDFace = FaceUtil.creatIconCDFaceByUIAsset(_skin.grid_1,IcoSizeEnum.ICON_48,1,5,5);
 			_itemIconList.push(icon);
-			icon = FaceUtil.creatIconCDFaceByUIAsset(_skin.grid_2,IcoSizeEnum.ICON_48);
+			icon = FaceUtil.creatIconCDFaceByUIAsset(_skin.grid_2,IcoSizeEnum.ICON_48,1,5,5);
 			_itemIconList.push(icon);
 			_skin.chk_zidonggoumai.addEventListener(Event.CHANGE,checkChangeHandler);
 		}
@@ -49,7 +49,6 @@ package com.rpgGame.appModule.mount
 				{
 					_itemIconList[index].visible = true;
 					FaceUtil.SetItemGrid(_itemIconList[index], rewards[index], true);
-					_itemIconList[index].setIconPoint(5,5);
 				}
 				for(;index<_itemIconList.length;index++)
 				{
@@ -69,21 +68,34 @@ package com.rpgGame.appModule.mount
 			_skin.progressbar_light.x = _skin.progressbar.x +_skin.progressbar.width*percent-3;
 			_skin.lab_progressbar.text = _mountShowData.exp.toString()+"/"+housedata.q_blessnum_limit.toString();
 			
-			_skin.lab_xuyaowupin.htmlText = _mountShowData.upLevelItem.name+"*"+_mountShowData.upLevelNeedItemCount;
-			if(_mountShowData.canUpLevel())
+			if(_mountShowData.isMaxLevel)
 			{
-				_skin.lab_xuyaowupin.color = 0x5DBD37;
+				_skin.lab_xuyaowupin.visible = false;
 			}else{
-				_skin.lab_xuyaowupin.color = 0xd02525;
+				_skin.lab_xuyaowupin.htmlText = _mountShowData.upLevelItem.name+"*"+_mountShowData.upLevelNeedItemCount;
+				if(_mountShowData.canUpLevel())
+				{
+					_skin.lab_xuyaowupin.color = 0x5DBD37;
+				}else{
+					_skin.lab_xuyaowupin.color = 0xd02525;
+				}
 			}
 		}
 		public function set isAutoing(value:Boolean):void
 		{
 			if(_mountShowData!=null)
 				_mountShowData.isAutoing = value;
-			_skin.btn_kaishi.visible = !value;
-			_skin.btn_zidong.visible = !value;
-			_skin.btn_tingzhi.visible = value;
+			if(_mountShowData.isMaxLevel)
+			{
+				_skin.btn_kaishi.visible = false;
+				_skin.btn_zidong.visible = false;
+				_skin.btn_tingzhi.visible = false;
+			}else{
+				_skin.btn_kaishi.visible = !value;
+				_skin.btn_zidong.visible = !value;
+				_skin.btn_tingzhi.visible = value;
+			}
+			
 		}
 		
 	}

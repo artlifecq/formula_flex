@@ -74,16 +74,22 @@ package com.rpgGame.app.manager.mount
 			_horsedataInfo = info;
 			if(_lastLevel== mountLevel)
 				return ;
-			var iteminfo:Object = JSONUtil.decode( housedata.q_need_items)[0];
-			var itemModeId:int = iteminfo["mod"];
-			if(ItemConfig.getQItemByID(itemModeId)!=null)
+			if(housedata.q_need_items!="")
 			{
-				var item:ItemInfo = new ItemInfo();
-				item.itemModelId = iteminfo["mod"];
-				item.num = iteminfo["num"];
-				item.isbind = iteminfo["bind"];
-				_upLevelItem = ItemUtil.convertClientItemInfo(item);
+				var iteminfo:Object = JSONUtil.decode( housedata.q_need_items)[0];
+				var itemModeId:int = iteminfo["mod"];
+				if(ItemConfig.getQItemByID(itemModeId)!=null)
+				{
+					var item:ItemInfo = new ItemInfo();
+					item.itemModelId = iteminfo["mod"];
+					item.num = iteminfo["num"];
+					item.isbind = iteminfo["bind"];
+					_upLevelItem = ItemUtil.convertClientItemInfo(item);
+				}
+			}else{
+				_upLevelItem = null;
 			}
+			
 			
 			_rewardItems = new Vector.<ClientItemInfo>();
 			var itemInfos:Object = JSONUtil.decode( housedata.q_update_gift);
@@ -121,7 +127,7 @@ package com.rpgGame.app.manager.mount
 				value = currentatt["q_value"+i];
 				_currentProp[type] = value;
 			}
-			
+			_disProp = new Vector.<Number>(30,0);
 			//差距
 			var nexthousse:Q_horse = HorseConfigData.getMountDataById(mountLevel+1);
 			if(nexthousse!=null)
@@ -137,9 +143,9 @@ package com.rpgGame.app.manager.mount
 				}
 				
 				currentatt = AttValueConfig.getAttInfoById(adds);
+				
 				if(currentatt!=null)
 				{
-					_disProp = new Vector.<Number>(30,0);
 					for(i = 1;i<=15;i++)
 					{
 						type = currentatt["q_type"+i];
@@ -150,11 +156,9 @@ package com.rpgGame.app.manager.mount
 					}
 					_isMaxLevel = false;
 				}else{
-					_disProp = null;
 					_isMaxLevel = true;
 				}
 			}else{
-				_disProp = null;
 				_isMaxLevel = true;
 			}
 			
@@ -245,14 +249,14 @@ package com.rpgGame.app.manager.mount
 		
 		public function get exp():int
 		{
-			//测试使用
-			if(_horsedataInfo==null)
-				return 1;
 			return _horsedataInfo.exp;
 		}
 		public function get percent():Number
 		{
-			return this.exp/housedata.q_blessnum_limit;
+			if(isMaxLevel)
+				return 1;
+			else
+				return this.exp/housedata.q_blessnum_limit;
 		}
 		
 		public function get housedata():Q_horse

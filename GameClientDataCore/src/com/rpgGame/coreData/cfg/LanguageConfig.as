@@ -92,6 +92,22 @@ package com.rpgGame.coreData.cfg
 			return str;
 		}
 		
+		public static function replaceStr1(str : String, ... args) : String
+		{
+			args = getArrAgs(args);
+			if (args != null && args.length > 0 && str != null)
+			{
+				var i : int;
+				var len : int = args.length;
+				for (i = 0; i < len; i++)
+				{
+					//					var reg : RegExp = new RegExp("\\$");
+					str = str.replace("{"+i.toString()+"}", args[i]);
+				}
+			}
+			return str;
+		}
+		
 		public static function replaceColor(str:String):String
 		{
 			

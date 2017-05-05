@@ -181,7 +181,7 @@ package com.rpgGame.app.manager.chat
 			if(notiMsg!=null)
 			{
 				var showType:Array=notiMsg.q_show_type.split("|");
-				var words : String = LanguageConfig.replaceStr(notiMsg.q_content,args);
+				var words : String = LanguageConfig.replaceStr1(notiMsg.q_content,args);
 				if(showType!=null&&showType.length>0)
 				{
 					var i:int,length:int=showType.length;

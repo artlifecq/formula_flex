@@ -71,7 +71,7 @@ package com.rpgGame.appModule.mount
 				if(_addProp!=null&&_addProp.length >0)
 					view.updataAtt(nextType,_currentProp[nextType],_addProp[nextType],_disProps[nextType],_mountShowData.heroJob);
 				else
-					view.updataAtt(nextType,_currentProp[nextType],_addProp[nextType],_disProps[nextType],_mountShowData.heroJob);
+					view.updataAtt(nextType,_currentProp[nextType],0,_disProps[nextType],_mountShowData.heroJob);
 			}
 		}
 		public function nextPropIndex():int
