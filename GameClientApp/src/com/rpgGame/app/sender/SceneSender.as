@@ -17,6 +17,8 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.player.message.ReqLocalReviveMessage;
 	import com.rpgGame.netData.player.message.ReqReviveMessage;
 	import com.rpgGame.netData.structs.Position;
+	import com.rpgGame.netData.zone.message.ReqZoneCommonEnterMessage;
+	import com.rpgGame.netData.zone.message.ReqZoneCommonQuitMessage;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
@@ -329,6 +331,28 @@ package com.rpgGame.app.sender
 			var msg:ReqLocalReviveMessage=new ReqLocalReviveMessage();
 			msg.itemmodelid=itemid;
 			msg.type=type;
+			SocketConnection.send(msg);
+		}
+		
+		/**
+		 *请求进入副本 
+		 * 
+		 */
+		public static function reqEnterDungeon(dungeonid:int,data:int=0):void
+		{
+			var msg:ReqZoneCommonEnterMessage=new ReqZoneCommonEnterMessage();
+			msg.zoneModelid=dungeonid;
+			msg.extradata=data;
+			SocketConnection.send(msg);
+		}
+		
+		/**
+		 *请求退出副本 
+		 * 
+		 */
+		public static function reqQuitDungeon():void
+		{
+			var msg:ReqZoneCommonQuitMessage=new ReqZoneCommonQuitMessage();
 			SocketConnection.send(msg);
 		}
 	}
