@@ -22,7 +22,9 @@ package com.rpgGame.app.cmdlistener.engine
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Vector3D;
+	import flash.utils.clearTimeout;
 	import flash.utils.getTimer;
+	import flash.utils.setTimeout;
 	
 	import away3d.events.MouseEvent3D;
 	
@@ -122,6 +124,7 @@ package com.rpgGame.app.cmdlistener.engine
                 NetDebug.LOG("MapDown");
             }
             this._isLeftDown = true;
+			clearTimeout(_timeOutId);
 			if (CameraController.lockedOnPlayerController.ispanning)
 				return;
 			if (!KeyMoveManager.getInstance().keyMoving)
@@ -129,14 +132,22 @@ package com.rpgGame.app.cmdlistener.engine
 				TrusteeshipManager.getInstance().broken();
 				TrusteeshipManager.getInstance().stopFightTarget();
 				TrusteeshipManager.getInstance().stopAutoFight();
-				var isWalking : Boolean = RoleStateUtil.doWalkToPos(MainRoleManager.actor, position);
-				if (isWalking)
-				{
-					SceneCursorHelper.getInstance().showCursor(position);
-				}
+				doWalkTo(position);
 			}
 		}
-        
+		private var _timeOutId:uint;
+        private function doWalkTo(position : Vector3D):void
+		{
+			var isWalking : Boolean = RoleStateUtil.doWalkToPos(MainRoleManager.actor, position);
+			if (isWalking)
+			{
+				SceneCursorHelper.getInstance().showCursor(position);
+			}
+			else
+			{
+				_timeOutId=setTimeout(function():void{doWalkTo(position);},500);
+			}
+		}
         private function sceneMapUp(position : Vector3D) : void {
             this._isLeftDown = false;
             CONFIG::netDebug {

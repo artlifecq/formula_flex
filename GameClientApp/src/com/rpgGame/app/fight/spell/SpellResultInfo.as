@@ -112,13 +112,7 @@ package com.rpgGame.app.fight.spell
 					if (hurtResultVO.atkor /*&& hurtResultVO.atkor.data is HeroData*/) //是玩家才自动反击
 					{
 						isHited = true;
-						var mdata:MonsterData=hurtResultVO.atkor.data as MonsterData;
-						if(mdata!=null&&mdata.monsterData.q_monster_type>=1&&mdata.monsterData.q_monster_type<=3)
-						{
-							TrusteeshipManager.getInstance().killActor();
-							
-							
-						}
+						
 						
 					}
 				}
