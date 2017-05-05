@@ -31,7 +31,6 @@ package com.rpgGame.app.state.ai
 			if (SceneRoleSelectManager.selectedRole != null)
 			{
 				var monsterData : MonsterData = SceneRoleSelectManager.selectedRole.data as MonsterData;
-				L.l("寻路："+monsterData.monsterData.q_name);
 				var targerPos : Vector3D = SceneRoleSelectManager.selectedRole.position;
 			//	RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 200, null, onArrive);
 				walkrun=true;

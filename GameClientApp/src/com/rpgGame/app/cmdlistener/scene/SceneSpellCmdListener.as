@@ -109,8 +109,7 @@ package com.rpgGame.app.cmdlistener.scene
 				failReason="未配置的技能错误码!----failID";
 				GameLog.addShow(failReason);
 			}
-			if(failID==1008)L.l(failReason);
-			
+		
 			NoticeManager.showNotify(failReason, failID);
 		}
 		

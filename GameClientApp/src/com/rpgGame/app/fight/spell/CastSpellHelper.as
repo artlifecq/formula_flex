@@ -197,7 +197,6 @@ package com.rpgGame.app.fight.spell
 					}
 					else if (caseState == CASE_STATE_NOT_IN_RELEASE_RANGE)
 					{
-						L.l("技能不在释放范围："+caseInfo.targetPos.x+"," +caseInfo.targetPos.y);
 						if (caseInfo.targetPos)
 						{
 							RoleStateUtil.walk(MainRoleManager.actor, caseInfo.targetPos.x, caseInfo.targetPos.y, 0, caseInfo, onWalkArriveRelease, onWalkThroughCase);
