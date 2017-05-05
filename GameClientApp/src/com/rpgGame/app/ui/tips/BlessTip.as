@@ -4,8 +4,6 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	
-	import feathers.controls.StateSkin;
-	
 	import org.mokylin.skin.app.zuoqi.Tips_Zhufuzhi;
 	
 	public class BlessTip extends SkinUI implements ITip
