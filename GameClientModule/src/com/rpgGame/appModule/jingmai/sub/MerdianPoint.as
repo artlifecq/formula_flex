@@ -20,6 +20,7 @@ package com.rpgGame.appModule.jingmai.sub
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.meridian.MeridianCfg;
 	import com.rpgGame.coreData.clientConfig.Q_global;
@@ -78,6 +79,17 @@ package com.rpgGame.appModule.jingmai.sub
 			TipTargetManager.show( imgPoint, _tipsInfo);
 			
 		}
+		private var imgQuan:UIAsset;
+		private function setIcoBg(isUnLock:Boolean):void
+		{
+			if (!isUnLock||imgQuan!=null) 
+			{
+				return;
+			}
+			imgQuan=new UIAsset();
+			imgQuan.styleName="ui/app/beibao/tu/quan/4.png";
+			MCUtil.addBefore(imgPoint,imgQuan,_imgIcon);
+		}
 		private function setLineLink(useTween:Boolean):void
 		{
 			if (_drawLine) 
@@ -102,7 +114,7 @@ package com.rpgGame.appModule.jingmai.sub
 			{
 				this.labAtt.visible=true;
 				setIcoUrl("ui/app/beibao/icons/icon/bianshi/"+config.q_huponameurl+".png",30,32);
-				hasBetter=Mgr.meridianMgr.getBetterStone(config.q_stone_type,_data.stone.length>0?_data.stone[0]:null).length>0;
+				hasBetter=(config.q_need_level<=MainRoleManager.actorInfo.totalStat.level)&&Mgr.meridianMgr.getBetterStone(config.q_stone_type,_data.stone.length>0?_data.stone[0]:null).length>0;
 				//没镶嵌石头置灰
 				if (_data.stone.length==0) 
 				{
@@ -154,6 +166,7 @@ package com.rpgGame.appModule.jingmai.sub
 			}
 			showLoopEffect(hasBetter);
 			setIconFilter(needFilter);
+			setIcoBg(labAtt.visible);
 		}
 		private function showSubCX(config:Q_meridian,useTween:Boolean):void
 		{
@@ -219,6 +232,7 @@ package com.rpgGame.appModule.jingmai.sub
 			}
 			showLoopEffect(needEff);
 			setIconFilter(needFilter);
+			setIcoBg(labAtt.visible);
 		}
 		public function setData(acp:AcuPointInfo,useTween:Boolean=false):void
 		{
@@ -355,19 +369,27 @@ package com.rpgGame.appModule.jingmai.sub
 				var config:Q_meridian=MeridianCfg.getMeridianCfg(this._acupointId);
 				if (config) 
 				{
+					var canA:Boolean=Mgr.meridianMgr.getCanActive(_data);
+					//没激活
+					if (!canA) 
+					{
+						//
+						if (config.q_showtype==0) 
+						{
+							NoticeManager.showNotifyById(11001,[config.q_name]);
+						}
+						else
+						{
+							NoticeManager.showNotifyById(11006,[config.q_name]);
+						}
+						return;
+					}
 					//判断可以升级
 					if (config.q_showtype==0) 
 					{
 						if (_data.level==0) 
 						{
-							var canA:Boolean=Mgr.meridianMgr.getCanActive(_data);
-							//没激活
-							if (!canA) 
-							{
-								//
-								return;
-								//MeridianSender.reqLevelUpPoint(_data.MeridId,_data.acuPointId);
-							}
+							
 						}
 						 if (Mgr.meridianMgr.getCanLevelUp(_data,true)) 
 						{
@@ -384,7 +406,7 @@ package com.rpgGame.appModule.jingmai.sub
 						}
 						if (config.q_stone_type!=0) 
 						{
-							var items:Vector.<ClientItemInfo>=Mgr.meridianMgr.getBetterStone(config.q_stone_type);
+							var items:Vector.<ClientItemInfo>=Mgr.meridianMgr.getBetterStone(config.q_stone_type,data.stone.length>0?data.stone[0]:null);
 							if (items.length>0) 
 							{
 								MeridianStoneSelectPanelExt.setData(items,this);

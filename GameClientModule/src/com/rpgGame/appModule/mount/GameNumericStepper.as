@@ -2,6 +2,7 @@ package com.rpgGame.appModule.mount
 {
 	import feathers.controls.Button;
 	import feathers.controls.TextInput;
+	import feathers.events.FeathersEventType;
 	
 	import starling.events.Event;
 	import starling.events.EventDispatcher;
@@ -35,7 +36,16 @@ package com.rpgGame.appModule.mount
 			_addBtn.addEventListener(Event.TRIGGERED,buttonClickHandler);
 			_maxBtn.addEventListener(Event.TRIGGERED,buttonClickHandler);
 			_textInput.addEventListener(Event.CHANGE,changeHandler);
+			_textInput.addEventListener(FeathersEventType.FOCUS_OUT,focusOutHandler);
 			refeashValue();
+		}
+		
+		private function focusOutHandler():void
+		{
+			if(_textInput.text == "")
+			{
+				_textInput.text ="0";
+			}
 		}
 		
 		private function buttonClickHandler(e:Event):void

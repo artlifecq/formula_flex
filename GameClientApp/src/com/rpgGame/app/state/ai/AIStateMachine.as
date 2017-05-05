@@ -63,8 +63,8 @@ package com.rpgGame.app.state.ai
 				case AIStateType.ATTACK_TARGET:
 					state = new AttackTarget();
 					break;
-				case AIStateType.TASK_WALK:
-					state = new AITaskWalk();
+				case AIStateType.ATTACK_WALK:
+					state = new AIAttackWalk();
 					break;
 				case AIStateType.USE_ITEM:
 					state = new AIUseItem();

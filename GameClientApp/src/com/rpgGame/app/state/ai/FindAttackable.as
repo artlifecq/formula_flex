@@ -2,6 +2,7 @@ package com.rpgGame.app.state.ai
 {
 	import com.game.engine3D.state.IState;
 	import com.rpgGame.app.manager.SystemSetManager;
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
@@ -53,34 +54,47 @@ package com.rpgGame.app.state.ai
 			var role : SceneRole = findAttackableTarget();
 			if (role)
 			{
-				SceneRoleSelectManager.selectedRole = role;
-				if (SceneRoleSelectManager.selectedRole == role)
+				if(TrusteeshipManager.getInstance().isAutoFightRunning)
+				{
+					SceneRoleSelectManager.selectedRole = role;
+				}
+				else if(TrusteeshipManager.getInstance().isFightTargetRunning)
+				{
+					SceneRoleSelectManager.selectedRole = null;
+				}
+				TrusteeshipManager.getInstance().setRoleList(role);
+				var monsterData : MonsterData = role.data as MonsterData;
+				transition(AIStateType.AI_NONE);
+				
+				/*if (SceneRoleSelectManager.selectedRole == role)
 				{
 					var targerPos : Vector3D = role.position;
 					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 200, null, onArrive);
-				}
+				}*/
 			}
 		}
 
 		private function findAttackableTarget() : SceneRole
 		{
 			var role:SceneRole;
-			if(TaskAutoManager.getInstance().isTaskRunning)
+			/*if(TaskAutoManager.getInstance().isTaskRunning)
 			{
 				role=findNearestMonster(true);
 			}
 			else
 			{
 				role=findNearestMonster(false);
-			}
+			}*/
+			role=findNearestMonster(false);
 			return role;
 		}
-
+		private var currDist:int;
 		private function findNearestMonster(istask:Boolean=false) : SceneRole
 		{
 			var roleList : Array = SceneManager.getScene().getSceneObjsByType(SceneCharType.MONSTER);
-			roleList.sort(onSortNearestChar);
-			//var rerlle:SceneRole;
+			//roleList.sort(onSortNearestChar);
+			var rerlle:SceneRole;
+			currDist=int.MAX_VALUE;
 			while (roleList.length)
 			{
 				var role : SceneRole = roleList.shift();
@@ -89,7 +103,7 @@ package com.rpgGame.app.state.ai
 				{
 					var dist:int = Point.distance(new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(role.x,role.z));
 					var max:int=int(SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_HOOK_TYPE)*50);
-					if(dist<=max)
+					if(dist<=max&&dist<currDist)
 					{
 						var modeState : int = FightManager.getFightRoleState(role);
 						if (modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY ||modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)
@@ -98,12 +112,14 @@ package com.rpgGame.app.state.ai
 							{
 								if(TaskMissionManager.isMainTaskMonster(monsterData.modelID))
 								{
-									return role;
+									rerlle= role;
+									currDist=dist;
 								}
 							}
 							else
 							{
-								return role;
+								rerlle= role;
+								currDist=dist;
 							}
 						}
 					}
@@ -111,11 +127,11 @@ package com.rpgGame.app.state.ai
 					
 				}
 			}
-			if(istask)
+			if(rerlle==null&&istask)
 			{
-				findNearestMonster(false);
+				rerlle=findNearestMonster(false);
 			}
-			return null;
+			return rerlle;
 		}
 
 		private function onSortNearestChar(roleA : SceneRole, roleB : SceneRole) : int
@@ -131,7 +147,7 @@ package com.rpgGame.app.state.ai
 
 		private function onArrive(ref : WalkMoveStateReference) : void
 		{
-			transition(AIStateType.ATTACK_TARGET);
+			transition(AIStateType.AI_NONE);
 		}
 
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
@@ -171,5 +187,22 @@ package com.rpgGame.app.state.ai
 			}
 			return true;
 		}
+		
+		public static function isFind():Boolean
+		{
+			var targetRoles:Vector.<SceneRole>=TrusteeshipManager.getInstance().getRoleList();
+			if(targetRoles!=null&&targetRoles.length>0)
+			{
+				for each (var role : SceneRole in targetRoles)
+				{
+					if (role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
+					{
+						return false;
+					}
+				}
+			}
+			return true;
+		}	
+		
 	}
 }

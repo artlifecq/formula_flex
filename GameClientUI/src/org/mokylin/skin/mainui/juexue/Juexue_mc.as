@@ -58,7 +58,7 @@ package org.mokylin.skin.mainui.juexue
 			"4":"ui/mainui/juexue/icon/renzheshengui.png",
 			"5":"ui/mainui/juexue/icon/shikongliexi.png",
 			"6":"ui/mainui/juexue/icon/canglongzhili.png",
-			"7":"ui/mainui/juexue/icon/shengshengbux.png"};
+			"7":"ui/mainui/juexue/icon/shengshengbuxi.png"};
 		}
 
 
@@ -117,7 +117,7 @@ package org.mokylin.skin.mainui.juexue
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__Juexue_mc_UIAsset7 = temp;
-			temp.styleName = "ui/mainui/juexue/icon/shengshengbux.png";
+			temp.styleName = "ui/mainui/juexue/icon/shengshengbuxi.png";
 			return temp;
 		}
 

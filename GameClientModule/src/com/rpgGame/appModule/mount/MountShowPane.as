@@ -31,7 +31,6 @@ package com.rpgGame.appModule.mount
 			_group.addEventListener(Event.CHANGE,useMoneyTypeHandler);
 			_numeric = new GameNumericStepper();
 			_numeric.addEventListener(Event.CHANGE,valueChangeHandler);
-			_numeric.addEventListener(FeathersEventType.FOCUS_OUT,valueChangeHandler);
 			_numeric.minValue = 1;
 			_numeric.maxFun = getMaxNum;
 			_numeric.setSkinInfo(_skin.btn_jian,_skin.btn_jia,_skin.max,_skin.input_txt);

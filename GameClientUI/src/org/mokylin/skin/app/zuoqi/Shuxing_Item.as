@@ -23,6 +23,8 @@ package org.mokylin.skin.app.zuoqi
 
 		public var lbUp:feathers.controls.Label;
 
+		public var lbaddprop:feathers.controls.Label;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -32,7 +34,7 @@ package org.mokylin.skin.app.zuoqi
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [lbName_i(),lbCurrent_i(),lbUp_i(),ico_up_i()];
+			this.elementsContent = [lbName_i(),lbCurrent_i(),lbaddprop_i(),lbUp_i(),ico_up_i()];
 			
 			states = {
 			};
@@ -49,7 +51,7 @@ package org.mokylin.skin.app.zuoqi
 			ico_up = temp;
 			temp.name = "ico_up";
 			temp.styleName = "ui/common/tubiao/xiangshang.png";
-			temp.x = 189;
+			temp.x = 204;
 			temp.y = 3;
 			return temp;
 		}
@@ -62,8 +64,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.text = "100";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 85;
-			temp.x = 72;
+			temp.x = 62;
 			temp.y = 1;
 			return temp;
 		}
@@ -89,9 +90,22 @@ package org.mokylin.skin.app.zuoqi
 			temp.text = "+20";
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 62;
-			temp.x = 163;
+			temp.width = 50;
+			temp.x = 178;
 			temp.y = 2;
+			return temp;
+		}
+
+		private function lbaddprop_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbaddprop = temp;
+			temp.name = "lbaddprop";
+			temp.text = "100";
+			temp.color = 0x25931B;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 94;
+			temp.y = 1;
 			return temp;
 		}
 

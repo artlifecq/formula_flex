@@ -7,7 +7,13 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	
+	import flash.events.Event;
 	import flash.geom.Point;
+	
+	import org.client.mainCore.ds.HashMap;
+	
+	import starling.core.Starling;
+	import starling.events.EnterFrameEvent;
 
 	/**
 	 *
@@ -19,6 +25,9 @@ package com.rpgGame.app.utils
 	public class RoleFaceMaskEffectUtil
 	{
 		private static var ZERO_POINT:Point=new Point();
+		
+		private static var roleMap:HashMap=new HashMap();
+		private static var checkPos:Boolean;
 		
 		public function RoleFaceMaskEffectUtil()
 		{
@@ -39,6 +48,12 @@ package com.rpgGame.app.utils
 						break;
 				}
 			});
+			
+			roleMap.remove(role);
+			if(roleMap.length==0&&checkPos){
+				checkPos=false;
+				Starling.current.stage.removeEventListener(Event.ENTER_FRAME,onUpdateMaskPos);
+			}
 		}
 		
 		/**
@@ -73,6 +88,65 @@ package com.rpgGame.app.utils
 			});
 			role.setScale(scale);
 			role.rotationY =rotationY;
+			var point : Point = avatar.parent.localToGlobal(ZERO_POINT);
+			var preX:int= point.x + avatar.x+fadeX;
+			var preY:int=point.y + avatar.y+fadeY;
+			updateFadeAlphaRectPos(role,preX,preY );
+			
+			var info:MaskRoleInfo=new MaskRoleInfo();
+			info.avatar=avatar;
+			info.fadeX=fadeX;
+			info.fadeY=fadeY;
+			info.preX=preX;
+			info.preY=preY;				
+			roleMap.add(role,info);
+			if(roleMap.length!=0&&!checkPos){
+				startCheckPos();
+			}
+		}
+		
+		private static function startCheckPos():void
+		{
+			checkPos=true;
+			Starling.current.stage.addEventListener(Event.ENTER_FRAME,onUpdateMaskPos);
+		}
+		
+		private static function onUpdateMaskPos(event:EnterFrameEvent):void
+		{
+			var roles:Array=roleMap.keys();
+			var infos:Array=roleMap.getValues();
+			var num:int=roles.length;
+			var role:SceneRole;
+			var point : Point;
+			var info:MaskRoleInfo;
+			var preX:int;
+			var preY:int;
+			for(var i:int=0;i<num;i++){
+				role=roles[i] as SceneRole;
+				info=infos[i] as MaskRoleInfo;
+				point=info.avatar.parent.localToGlobal(ZERO_POINT);
+				preX= point.x + info.avatar.x+info.fadeX;
+				preY=point.y + info.avatar.y+info.fadeY;
+				if(preX==info.preX&&preY==info.preY){
+					continue;
+				}else{
+					info.preX=preX;
+					info.preY=preY;		
+					updateFadeAlphaRectPos(role,preX,preY );
+				}
+			}
+		}
+		
+		/**
+		 *更新avatar的位置信息 
+		 * @param avatar
+		 * @param fadeX
+		 * @param fadeY
+		 * 
+		 */
+		public static function updateAvatarPos(avatar:InterAvatar3D,fadeX:int,fadeY:int):void
+		{
+			var role:SceneRole=avatar.curRole;
 			var point : Point = avatar.parent.localToGlobal(ZERO_POINT);
 			updateFadeAlphaRectPos(role, point.x + avatar.x+fadeX, point.y + avatar.y+fadeY);
 		}
@@ -200,4 +274,13 @@ package com.rpgGame.app.utils
 			return int(poses[1]);
 		}
 	}
+}
+import com.rpgGame.app.display3D.InterAvatar3D;
+
+class MaskRoleInfo{
+	public var avatar:InterAvatar3D;
+	public var fadeX:int;
+	public var fadeY:int;
+	public var preX:int;
+	public var preY:int;
 }
