@@ -252,8 +252,6 @@ package com.rpgGame.app.data
 			HorseConfigData.setConfig(dic[ConfigClassRegister.Q_horse]);
 			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
 			HorseExtraItemInfo.createInfo();
-
-			
 		}
 		
 		/**
