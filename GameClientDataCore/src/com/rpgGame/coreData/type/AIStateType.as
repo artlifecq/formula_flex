@@ -19,7 +19,7 @@ package com.rpgGame.coreData.type
 		public static const ATTACK_TARGET : int = rEnum.next;
 
 		/**任务 自动寻路*/
-		public static const TASK_WALK : int = rEnum.next;
+		public static const ATTACK_WALK : int = rEnum.next;
 		/**自动吃药*/
 		public static const USE_ITEM : int = rEnum.next;
 		

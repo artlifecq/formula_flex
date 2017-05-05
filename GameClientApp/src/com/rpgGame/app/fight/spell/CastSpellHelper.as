@@ -197,6 +197,7 @@ package com.rpgGame.app.fight.spell
 					}
 					else if (caseState == CASE_STATE_NOT_IN_RELEASE_RANGE)
 					{
+						L.l("技能不在释放范围："+caseInfo.targetPos.x+"," +caseInfo.targetPos.y);
 						if (caseInfo.targetPos)
 						{
 							RoleStateUtil.walk(MainRoleManager.actor, caseInfo.targetPos.x, caseInfo.targetPos.y, 0, caseInfo, onWalkArriveRelease, onWalkThroughCase);
@@ -234,7 +235,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsHarding); //"技能硬直中"
+					//NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsHarding); //"技能硬直中"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -242,7 +243,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsLock); //"释放技能被锁定"
+					//NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsLock); //"释放技能被锁定"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -250,7 +251,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsBlinking); //"冲锋中不能放技能"
+					//NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsBlinking); //"冲锋中不能放技能"
 				}
 				return CASE_STATE_FAIL;
 			}
@@ -1250,7 +1251,7 @@ package com.rpgGame.app.fight.spell
 					break;
 				}
 			}
-			
+			/*
 			if (false&&!castSpell)
 			{
 				spellData = getDefaultSpell();
@@ -1273,7 +1274,7 @@ package com.rpgGame.app.fight.spell
 						}
 					}
 				}
-			}
+			}*/
 			
 			if (!castSpell)
 			{
@@ -1297,7 +1298,10 @@ package com.rpgGame.app.fight.spell
 			{
 				recoObj=JSON.parse(recovers);
 			}
-			
+			else
+			{
+				return true;
+			}
 			if(recoObj!=null)
 			{
 				recoData=recoObj as Array;
@@ -1364,6 +1368,7 @@ package com.rpgGame.app.fight.spell
 				}
 			}
 			return isGary;
+			
 		}
 		
 		

@@ -438,7 +438,7 @@ package com.rpgGame.app.cmdlistener.scene
 				else
 					camouflageEntity.stateMachine.transition(RoleStateType.ACTION_IDLE);
 			}
-			NoticeManager.showNotify("英雄移动失败");
+			//NoticeManager.showNotify("英雄移动失败");
 		}
 		
 		/**
