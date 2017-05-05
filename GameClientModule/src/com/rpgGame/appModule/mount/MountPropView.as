@@ -50,12 +50,14 @@ package com.rpgGame.appModule.mount
 				
 			var attname:String = CharAttributeType.getCNName(attpropid);
 			_skin.lbName.text = attname;
-			var labcur:String = AttValueConfig.getDisAttValueStr(_attpropId,_currentatt);
+			_skin.lbCurrent.text = AttValueConfig.getDisAttValueStr(_attpropId,_currentatt);
 			if(_addatt>0)
 			{
-				labcur += "  +"+AttValueConfig.getDisAttValueStr(_attpropId,_addatt)+"(临时)";
+				_skin.lbaddprop.text= "  +"+AttValueConfig.getDisAttValueStr(_attpropId,_addatt)+"(临时)";
+			}else{
+				_skin.lbaddprop.text= "";
 			}
-			_skin.lbCurrent.text = labcur;
+			
 			if(_nextAtt>0)
 			{
 				_skin.lbUp.text = AttValueConfig.getDisAttValueStr(_attpropId,_nextAtt);

@@ -8,11 +8,24 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
 	
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
+	import flash.geom.Point;
+	import flash.geom.Rectangle;
+	
+	import away3d.textures.BGRAData;
+	
 	import feathers.controls.Button;
 	import feathers.controls.UIAsset;
+	import feathers.themes.GuiTheme;
 	import feathers.utils.filter.GrayFilter;
 	
+	import starling.display.Image;
 	import starling.events.Event;
+	import starling.textures.ConcreteTexture;
+	import starling.textures.SubTexture;
+	
+	import utils.PngDecoder;
 
 	public class LostSkillCell
 	{
@@ -61,7 +74,7 @@ package com.rpgGame.app.ui.main.shortcut
 				}else{
 					_icon.filter = null;
 				}
-				_light.visible = _qopenData.q_id == LostSkillManager.instance().curSkillId;
+//				_light.visible = _qopenData.q_id == LostSkillManager.instance().curSkillId;
 			}
 		}
 		
@@ -69,6 +82,21 @@ package com.rpgGame.app.ui.main.shortcut
 		public function addEvent():void
 		{
 			_button.addEventListener(Event.TRIGGERED,triggeredHandler);
+		}
+		
+		public function checkTouch(point:Point):void
+		{
+			return ;
+			var p:Point = _light.globalToLocal(point);
+			if(!_light.hitTest(p))
+				return ;
+			var img:Image = _light.getChildAt(0) as Image;
+			
+			var texture:SubTexture = img.texture as SubTexture;
+			var partner:ConcreteTexture = texture.parent as ConcreteTexture;
+			var rect:Rectangle = texture.region;
+			var bit:BitmapData = partner.bgraData.getBitmapData();
+			trace(bit.getPixel32(p.x+rect.x,p.y+rect.y));
 		}
 		
 		public function removeEvent():void

@@ -2,9 +2,6 @@ package com.rpgGame.app.ui.main.shortcut
 {
 	import com.game.engine3D.display.EffectObject3D;
 	import com.game.engine3D.display.Inter3DContainer;
-	import com.game.engine3D.display.InterObject3D;
-	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -16,6 +13,8 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.coreData.lang.LangUI_2;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
 	
+	import flash.geom.Point;
+	
 	import feathers.controls.Button;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -24,10 +23,13 @@ package com.rpgGame.app.ui.main.shortcut
 	import starling.animation.IAnimatable;
 	import starling.animation.Transitions;
 	import starling.core.Starling;
+	import starling.display.Image;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import starling.textures.ConcreteTexture;
+	import starling.textures.SubTexture;
 	
 	public class LostSkillEffect extends SkinUI implements IAnimatable
 	{
@@ -37,12 +39,14 @@ package com.rpgGame.app.ui.main.shortcut
 		private var _transitionFun:Function;
 		private var _timeChangeFun:Function;
 		private var _lostSkillLists:Vector.<LostSkillCell>;
+		private static var _touchHelpPoint:Point = new Point();
 		/*private var _selectBgList:Vector.<UIAsset>;
 		private var _buttonList:Vector.<Button>;*/
 		public function LostSkillEffect():void
 		{
 			_skin = new juexu_Skin();
 			super(_skin);
+			
 			initView();
 		}
 		private function initView():void
@@ -57,6 +61,8 @@ package com.rpgGame.app.ui.main.shortcut
 				this.addChildAt(_mask,0);
 				this._skin.bg.mask = _mask;
 			}
+			
+//			loaderBitmapData();
 			_transitionFun = Transitions.getTransition(Transitions.EASE_IN_OUT);
 			
 			_lostSkillLists = new Vector.<LostSkillCell>();
@@ -67,6 +73,14 @@ package com.rpgGame.app.ui.main.shortcut
 			_lostSkillLists.push(new LostSkillCell(_skin.btn_5,_skin.skill_5,_skin.bg5,4,triggeredHandler));
 			_lostSkillLists.push(new LostSkillCell(_skin.btn_6,_skin.skill_6,_skin.bg6,5,triggeredHandler));
 			_lostSkillLists.push(new LostSkillCell(_skin.btn_7,_skin.skill_7,_skin.bg7,6,triggeredHandler));
+		}
+		
+		private function loaderBitmapData():void
+		{
+			var img:Image = _skin.bg1.getChildAt(0) as Image;
+			var texture:SubTexture = img.texture as SubTexture;
+			var partner:ConcreteTexture = texture.parent as ConcreteTexture;
+//			if(partner.textureData
 		}
 		
 		private function triggeredHandler(state:SkillStateInfo):void
@@ -164,13 +178,25 @@ package com.rpgGame.app.ui.main.shortcut
 			
 			touch = e.getTouch( this, TouchPhase.BEGAN ); 
 			if( touch != null )
+			{
+				touch.getLocation(this.stage,_touchHelpPoint);
+				checkList(_touchHelpPoint);
 				return;//说明点击自己，不隐藏
+			}
 			
 			touch = e.getTouch( _bindBtn, TouchPhase.BEGAN ); 
 			if( touch != null )
 				return;//说明点击关联对象，不隐藏
 			
 			playEnd();
+		}
+		
+		private function checkList(p:Point ):void
+		{
+			for(var i:int = _lostSkillLists.length-1;i>=0;i--)
+			{
+				_lostSkillLists[i].checkTouch(p);
+			}
 		}
 		private function playEnd():void
 		{

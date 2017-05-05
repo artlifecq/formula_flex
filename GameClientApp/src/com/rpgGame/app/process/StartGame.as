@@ -23,6 +23,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.scene.SceneRole;
     import com.rpgGame.app.ui.ResLoadingView;
     import com.rpgGame.app.ui.tips.AmountTip;
+    import com.rpgGame.app.ui.tips.BlessTip;
     import com.rpgGame.app.ui.tips.BuffTip;
     import com.rpgGame.app.ui.tips.EquipTip;
     import com.rpgGame.app.ui.tips.ExtarItemTip;
@@ -206,6 +207,7 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.CHEATS_NODE_TIP,CheatsNodePointTip);
 			TipManager.registerTipsParserClass(TipType.CHEATS_TIP,CheatsTipExt);
 			TipManager.registerTipsParserClass(TipType.CHEATS_INTRADUCTION_TIP,CheatsIntraductTipExt);
+			TipManager.registerTipsParserClass(TipType.BLESS_TIP,BlessTip);
 		}
 
 		private function onSwitchCmp() : void
