@@ -3,9 +3,13 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.app.manager.mount.MountShowData;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipManager;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.clientConfig.Q_horse;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.type.TipType;
 	
 	import org.mokylin.skin.app.zuoqi.Zuoqi_Skin;
 	
@@ -67,11 +71,10 @@ package com.rpgGame.appModule.mount
 			_skin.progressbar.value = _skin.progressbar.maximum*percent;
 			_skin.progressbar_light.x = _skin.progressbar.x +_skin.progressbar.width*percent-3;
 			_skin.lab_progressbar.text = _mountShowData.exp.toString()+"/"+housedata.q_blessnum_limit.toString();
-			
-			if(_mountShowData.isMaxLevel)
+			if(!_mountShowData.isMaxLevel)
 			{
-				_skin.lab_xuyaowupin.visible = false;
-			}else{
+				_skin.grp_jinjie.visible = true;
+				_skin.maximg.visible = false;
 				_skin.lab_xuyaowupin.htmlText = _mountShowData.upLevelItem.name+"*"+_mountShowData.upLevelNeedItemCount;
 				if(_mountShowData.canUpLevel())
 				{
@@ -79,22 +82,27 @@ package com.rpgGame.appModule.mount
 				}else{
 					_skin.lab_xuyaowupin.color = 0xd02525;
 				}
+			}else{
+				_skin.grp_jinjie.visible = false;
+				_skin.maximg.visible = true;
 			}
+			TipTargetManager.remove(_skin.expgroup);
+			TipTargetManager.show(_skin.expgroup,TargetTipsMaker.makeTips(TipType.BLESS_TIP,_mountShowData));
 		}
 		public function set isAutoing(value:Boolean):void
 		{
-			if(_mountShowData!=null)
-				_mountShowData.isAutoing = value;
+			
 			if(_mountShowData.isMaxLevel)
 			{
-				_skin.btn_kaishi.visible = false;
-				_skin.btn_zidong.visible = false;
-				_skin.btn_tingzhi.visible = false;
+				value = false;
 			}else{
 				_skin.btn_kaishi.visible = !value;
 				_skin.btn_zidong.visible = !value;
 				_skin.btn_tingzhi.visible = value;
 			}
+			
+			if(_mountShowData!=null)
+				_mountShowData.isAutoing = value;
 			
 		}
 		

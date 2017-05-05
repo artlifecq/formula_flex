@@ -81,5 +81,7 @@ package com.rpgGame.coreData.type
 		public static const PASSIVESKILL_TIP : int = rEnum.next;
 		/** 丹药 tips*/
 		public static const EXTARITEM_TIP : int = rEnum.next;
+		/** 祝福值 tips*/
+		public static const BLESS_TIP : int = rEnum.next;
 	}
 }
