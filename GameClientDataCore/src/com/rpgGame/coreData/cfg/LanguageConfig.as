@@ -83,11 +83,23 @@ package com.rpgGame.coreData.cfg
 			{
 				var i : int;
 				var len : int = args.length;
-				for (i = 0; i < len; i++)
+				if (str.indexOf("$")!=-1) //为了兼容老逻辑
 				{
-//					var reg : RegExp = new RegExp("\\$");
-					str = str.replace("$", args[i]);
+					for (i = 0; i < len; i++)
+					{
+						//					var reg : RegExp = new RegExp("\\$");
+						str = str.replace("$", args[i]);
+					}
 				}
+				else
+				{
+					for ( i = 0; i < len; i++ ) 
+					{
+						str = str.replace( "{" + i + "}", args[i] );
+					}
+				}
+				
+				
 			}
 			return str;
 		}

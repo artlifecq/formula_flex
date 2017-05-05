@@ -238,7 +238,15 @@ package com.rpgGame.app.manager.yunBiao
 			{
 				if (bShowNotice) 
 				{
-					NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7019));
+					if (node.curLevel==node.getConfig().q_maxlevel) 
+					{
+						NoticeManager.showNotifyById(12002);
+					}
+					else
+					{
+						NoticeManager.showNotifyById(11002,cheat.cheatsConfig.q_name,cheat.level+1);
+					}
+					
 				}
 				return false;
 			}
@@ -247,7 +255,7 @@ package com.rpgGame.app.manager.yunBiao
 			{
 				if (bShowNotice) 
 				{
-					NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7013),[node.levelUpNeedPlayerLevel]);
+					NoticeManager.showNotifyById(12000,node.levelUpNeedPlayerLevel);
 				}
 				return false;
 			}
@@ -255,7 +263,7 @@ package com.rpgGame.app.manager.yunBiao
 			{
 				if (bShowNotice) 
 				{
-					NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7015));
+					NoticeManager.showNotifyById(12003);
 				}
 				return false;
 			}
@@ -276,7 +284,7 @@ package com.rpgGame.app.manager.yunBiao
 					{
 						if (bShowNotice) 
 						{
-							NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7014),[needInfo.getConfig().q_name,node.levelUpNeedPreLv]);
+							NoticeManager.showNotifyById(12001);
 						}
 						return false;
 					}

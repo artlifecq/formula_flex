@@ -111,9 +111,7 @@ package com.rpgGame.app.manager
 			var modeState : int = FightManager.getFightRoleState(role);
 			if (monsterData.monsterData.q_monster_type>=1&&monsterData.monsterData.q_monster_type<=3&&modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY ||modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)
 			{
-				var targetRoles : Vector.<SceneRole>=new Vector.<SceneRole> ();
-				targetRoles.push(role);
-				TrusteeshipManager.getInstance().startFightTarget(targetRoles);
+				TrusteeshipManager.getInstance().startFightSelected();
 				/*var dst:int=MainRoleManager.actorInfo.spellList.getShortcutSpellDistance();
 				RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, dst, role, waikOver,null,null,waikOver);
 				function waikOver():void

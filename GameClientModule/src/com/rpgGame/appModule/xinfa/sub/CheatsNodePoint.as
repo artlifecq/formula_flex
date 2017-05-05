@@ -348,20 +348,25 @@ package  com.rpgGame.appModule.xinfa.sub
 				var config:Q_cheats_node=_data.getConfig();
 				if (config) 
 				{
+					var unLock:Boolean=Mgr.cheatsMgr.getNodeIsUnlock(_data);
+					//没激活
+					if (!unLock) 
+					{
+						//
+						if (config.q_type==0) 
+						{
+							NoticeManager.showNotifyById(11001,[config.q_name]);
+						}
+						else
+						{
+							NoticeManager.showNotifyById(11006,[config.q_name]);
+						}
+						return;
+					}
 					//判断可以升级
 					if (config.q_type==0) 
 					{
-						if (_data.curLevel==0) 
-						{
-							var unLock:Boolean=Mgr.cheatsMgr.getNodeIsUnlock(_data);
-							//没激活
-							if (!unLock) 
-							{
-								//
-								return;
-								//MeridianSender.reqLevelUpPoint(_data.MeridId,_data.acuPointId);
-							}
-						}
+						
 						 if (Mgr.cheatsMgr.getCanLevelUp(_data,true)) 
 						{
 							CheatsSender.reqLevelUpPoint(_data.cheatsId,_data.chetasNodeId);
@@ -373,7 +378,7 @@ package  com.rpgGame.appModule.xinfa.sub
 						
 						if (config.q_stone_type!=0) 
 						{
-							var items:Vector.<ClientItemInfo>=Mgr.cheatsMgr.getBetterStone(config.q_stone_type);
+							var items:Vector.<ClientItemInfo>=Mgr.cheatsMgr.getBetterStone(config.q_stone_type,data.getStone());
 							if (items.length>0) 
 							{
 								MeridianStoneSelectPanelExt.setData(items,this);

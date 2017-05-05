@@ -90,7 +90,7 @@ package com.rpgGame.app.manager.task
 				return;
 			if (_isBroken)
 				return;
-			_stateMachine.transition(AIStateType.TASK_WALK, null, force);
+			_stateMachine.transition(AIStateType.ATTACK_WALK, null, force);
 		}
 		
 		public function get isTaskRunning():Boolean

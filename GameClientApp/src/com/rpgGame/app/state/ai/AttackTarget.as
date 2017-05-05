@@ -124,7 +124,6 @@ package com.rpgGame.app.state.ai
 		{
 			//if(currtKill>0)return;currtKill=spellData.q_skillID;
 			var spellData : Q_skill_model = findUseableSpell();
-			
 			if (spellData)
 			{
 				var roleList : Vector.<SceneRole> = TrusteeshipManager.getInstance().getRoleList();
