@@ -191,7 +191,7 @@ package com.rpgGame.app.manager.chat
 						var tp:int=int(showType[i])
 						if(tp>0)
 						{
-							NoticeManager.textNotify(tp, words);
+							//NoticeManager.textNotify(tp, words);
 							notify(tp, words);
 						}
 						

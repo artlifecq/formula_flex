@@ -5,6 +5,8 @@ package com.rpgGame.appModule.jingmai
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.appModule.jingmai.sub.MeridianMap;
 	import com.rpgGame.appModule.jingmai.sub.TweenScaleScrollUitlExt;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MeridianEvent;
@@ -182,7 +184,7 @@ package com.rpgGame.appModule.jingmai
 		private function onHeCheng(eve:Event):void
 		{
 			// TODO Auto Generated method stub
-			
+			AppManager.showAppNoHide(AppConstant.EQUIP_PANL,{tab:4});
 		}
 		
 		private function tweenCompleteCallBack(map:*):void

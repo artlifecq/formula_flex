@@ -11,6 +11,8 @@ package com.rpgGame.appModule.xinfa
 	import com.rpgGame.appModule.jingmai.sub.TweenScaleScrollUitlExt;
 	import com.rpgGame.appModule.xinfa.sub.CheatsIcon;
 	import com.rpgGame.appModule.xinfa.sub.CheatsMap;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.CheatsEvent;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
@@ -100,6 +102,7 @@ package com.rpgGame.appModule.xinfa
 			
 			TipTargetManager.show(_skin.btn_shuoming,TargetTipsMaker.makeTips(TipType.CHEATS_INTRADUCTION_TIP,null));
 			_skin.btn_jihuo.addEventListener(Event.TRIGGERED,onStartLevelUp);
+			
 		}
 		
 		private function onStartLevelUp(eve:Event):void
@@ -352,7 +355,7 @@ package com.rpgGame.appModule.xinfa
 		private function onHeCheng(eve:Event):void
 		{
 			// TODO Auto Generated method stub
-			
+			AppManager.showAppNoHide(AppConstant.EQUIP_PANL,{tab:4});
 		}
 		
 	
