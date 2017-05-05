@@ -19,14 +19,14 @@ package com.rpgGame.appModule.zhangong.render
 		
 		override protected function commitData():void
 		{
-			if(this._data && this._owner)
-			{
-				cell.setData(this._data);
-			}
-			else
-			{
-				cell.clearData();
-			}
+//			if(this._data && this._owner)
+//			{
+//				cell.setData(this._data);
+//			}
+//			else
+//			{
+//				cell.clearData();
+//			}
 		}
 		
 		override public function dispose():void

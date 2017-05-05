@@ -1,5 +1,6 @@
 package com.rpgGame.app.cmdlistener.scene
 {
+	import com.game.engine2D.config.staticdata.CharAngleType;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.vo.BaseObj3D;
@@ -438,7 +439,7 @@ package com.rpgGame.app.cmdlistener.scene
 				else
 					camouflageEntity.stateMachine.transition(RoleStateType.ACTION_IDLE);
 			}
-			NoticeManager.showNotify("英雄移动失败");
+			//NoticeManager.showNotify("英雄移动失败");
 		}
 		
 		/**
@@ -820,6 +821,10 @@ package com.rpgGame.app.cmdlistener.scene
 			{
 				if(msg.attributeChange.type==CharAttributeType.HP){
 					EventManager.dispatchEvent(MainPlayerEvent.SELFHP_CHANGE);
+				}
+				else if (msg.attributeChange.type==CharAttributeType.LV) 
+				{
+					EventManager.dispatchEvent(MainPlayerEvent.LEVEL_CHANGE);
 				}
 //				ReliveManager.autoHideRelive();
 			}

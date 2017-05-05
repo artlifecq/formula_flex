@@ -50,6 +50,7 @@ package com.rpgGame.appModule.skill
 		{
 			super.show(data,openTable,parentContiner);
 			_radioGroup.selectedIndex = 0;
+			selectChangeHandler();
 		}
 		
 		override public function hide():void

@@ -370,7 +370,7 @@ package com.rpgGame.app.ui.main.shortcut
 			{
 				if(_cdFace)
 				{
-					//_cdFace.updateTimeTxt($now,$cdTotal);
+					_cdFace.updateTimeTxt($now,$cdTotal);
 					
 				}
 				

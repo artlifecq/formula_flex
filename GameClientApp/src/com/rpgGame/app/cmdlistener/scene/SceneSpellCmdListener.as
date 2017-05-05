@@ -11,6 +11,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.fight.spell.SpellResultInfo;
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.SkillCDManager;
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
@@ -25,6 +26,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
+	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.netData.fight.message.ResAttackRangeMessage;
@@ -107,7 +109,7 @@ package com.rpgGame.app.cmdlistener.scene
 				failReason="未配置的技能错误码!----failID";
 				GameLog.addShow(failReason);
 			}
-			
+		
 			NoticeManager.showNotify(failReason, failID);
 		}
 		
@@ -222,7 +224,12 @@ package com.rpgGame.app.cmdlistener.scene
                     var attacker : SceneRole = SceneManager.getSceneObjByID(hurtList[0].atkorID) as SceneRole;
                     if (null != attacker)
 					{
-                        SceneRoleSelectManager.selectedRole = attacker;
+                        //SceneRoleSelectManager.selectedRole = attacker;
+						var mdata:MonsterData=attacker.data as MonsterData;
+						if(mdata!=null&&mdata.monsterData.q_monster_type>=1&&mdata.monsterData.q_monster_type<=3)
+						{
+							TrusteeshipManager.getInstance().killActor();
+						}
                     }
                 }
             }
