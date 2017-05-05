@@ -49,7 +49,7 @@ package org.mokylin.skin.app.zuoqi
 			ico_up = temp;
 			temp.name = "ico_up";
 			temp.styleName = "ui/common/tubiao/xiangshang.png";
-			temp.x = 189;
+			temp.x = 204;
 			temp.y = 3;
 			return temp;
 		}
@@ -62,7 +62,6 @@ package org.mokylin.skin.app.zuoqi
 			temp.text = "100";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 85;
 			temp.x = 72;
 			temp.y = 1;
 			return temp;
@@ -89,8 +88,8 @@ package org.mokylin.skin.app.zuoqi
 			temp.text = "+20";
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 62;
-			temp.x = 163;
+			temp.width = 50;
+			temp.x = 178;
 			temp.y = 2;
 			return temp;
 		}

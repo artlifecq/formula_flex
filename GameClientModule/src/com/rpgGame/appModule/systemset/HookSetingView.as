@@ -96,6 +96,10 @@ package com.rpgGame.appModule.systemset
 			if(_areaNum>5)
 			{
 				_areaNum-=5;
+				if(_areaNum<5)
+				{
+					_areaNum=5;
+				}
 				updateShowNum();
 			}
 		}
@@ -106,6 +110,10 @@ package com.rpgGame.appModule.systemset
 			if(_areaNum<20)
 			{
 				_areaNum+=5;
+				if(_areaNum>20)
+				{
+					_areaNum=20;
+				}
 				updateShowNum();
 			}		
 		}

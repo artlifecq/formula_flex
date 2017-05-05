@@ -1,24 +1,17 @@
 package com.rpgGame.app.ui.main.shortcut
 {
-	import com.client.ClientGlobal;
-	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.core.events.SkillEvent;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	
-	import flash.events.Event;
-	
 	import feathers.controls.SkinnableContainer;
 	
 	import gs.TweenMax;
-	import gs.easing.Bounce;
 	import gs.easing.Linear;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.mokylin.skin.app.tips.jinengTips_Skin;
 	import org.mokylin.skin.mainui.tishi.Sing_TipsSkin;
 	
-	import starling.core.Starling;
 	import starling.display.Shape;
 	import starling.display.Sprite;
 

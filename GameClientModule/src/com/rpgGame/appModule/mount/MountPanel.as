@@ -62,6 +62,7 @@ package com.rpgGame.appModule.mount
 			_mountupContent.updataInfo(_mountShowData);*/
 			refeashExpHandler();
 			refeashSpellIcon();
+			_mountupContent.isAutoing = false;
 			initEvent();
 		}
 		override protected function onTouchTarget(target : DisplayObject) : void
@@ -239,7 +240,7 @@ package com.rpgGame.appModule.mount
 			}
 			if(_mountShowData.isAutoing)
 			{
-				HorseManager.instance().eatItemHorse(_mountShowData)
+				_mountupContent.isAutoing =HorseManager.instance().eatItemHorse(_mountShowData)
 			}
 		}
 		private function refeashLevel():void

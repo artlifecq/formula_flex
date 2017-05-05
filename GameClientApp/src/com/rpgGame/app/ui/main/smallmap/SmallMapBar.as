@@ -1,7 +1,6 @@
 package com.rpgGame.app.ui.main.smallmap {
     import com.game.mainCore.core.timer.GameTimer;
     import com.rpgGame.app.manager.role.MainRoleManager;
-    import com.rpgGame.appModule.maps.LOG;
     import com.rpgGame.core.app.AppConstant;
     import com.rpgGame.core.app.AppManager;
     import com.rpgGame.core.events.MapEvent;
