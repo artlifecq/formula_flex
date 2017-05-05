@@ -79,18 +79,15 @@ package com.rpgGame.appModule.zhangong
 		
 		private function updateBtnState(type:int=0):void
 		{
-			if (CharAttributeType.LV==type)
-			{
-				if(_lv>MainRoleManager.actorInfo.totalStat.level){
-					_skin.btnBG.isEnabled=false;
-					GrayFilter.gray(_skin.btnBG);
-				}
-				else{
-					_skin.btnBG.isEnabled=true;
-					_skin.btnBG.filter=null;
-				}
-				updatePanel();
+			if(_lv>MainRoleManager.actorInfo.totalStat.level){
+				_skin.btnBG.isEnabled=false;
+				GrayFilter.gray(_skin.btnBG);
 			}
+			else{
+				_skin.btnBG.isEnabled=true;
+				_skin.btnBG.filter=null;
+			}
+			updatePanel();
 		}
 		
 		public function setBtnState():void
