@@ -24,6 +24,8 @@ package com.rpgGame.app.ui.main.shortcut
 	import starling.events.Event;
 	import starling.textures.ConcreteTexture;
 	import starling.textures.SubTexture;
+	
+	import utils.PngDecoder;
 
 	public class LostSkillCell
 	{

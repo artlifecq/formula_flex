@@ -23,11 +23,13 @@ package com.rpgGame.app.ui.main.shortcut
 	import starling.animation.IAnimatable;
 	import starling.animation.Transitions;
 	import starling.core.Starling;
-	import starling.display.DisplayObject;
+	import starling.display.Image;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import starling.textures.ConcreteTexture;
+	import starling.textures.SubTexture;
 	
 	public class LostSkillEffect extends SkinUI implements IAnimatable
 	{
@@ -44,6 +46,7 @@ package com.rpgGame.app.ui.main.shortcut
 		{
 			_skin = new juexu_Skin();
 			super(_skin);
+			
 			initView();
 		}
 		private function initView():void
@@ -58,6 +61,8 @@ package com.rpgGame.app.ui.main.shortcut
 				this.addChildAt(_mask,0);
 				this._skin.bg.mask = _mask;
 			}
+			
+//			loaderBitmapData();
 			_transitionFun = Transitions.getTransition(Transitions.EASE_IN_OUT);
 			
 			_lostSkillLists = new Vector.<LostSkillCell>();
@@ -68,6 +73,14 @@ package com.rpgGame.app.ui.main.shortcut
 			_lostSkillLists.push(new LostSkillCell(_skin.btn_5,_skin.skill_5,_skin.bg5,4,triggeredHandler));
 			_lostSkillLists.push(new LostSkillCell(_skin.btn_6,_skin.skill_6,_skin.bg6,5,triggeredHandler));
 			_lostSkillLists.push(new LostSkillCell(_skin.btn_7,_skin.skill_7,_skin.bg7,6,triggeredHandler));
+		}
+		
+		private function loaderBitmapData():void
+		{
+			var img:Image = _skin.bg1.getChildAt(0) as Image;
+			var texture:SubTexture = img.texture as SubTexture;
+			var partner:ConcreteTexture = texture.parent as ConcreteTexture;
+//			if(partner.textureData
 		}
 		
 		private function triggeredHandler(state:SkillStateInfo):void
