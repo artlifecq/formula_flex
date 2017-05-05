@@ -2,7 +2,6 @@ package com.rpgGame.appModule.zhangong
 {
 	import com.rpgGame.app.manager.ZhanGongManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.utils.TouchableUtil;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.ZhanGongEvent;
 	import com.rpgGame.core.ui.SkinUI;
@@ -90,6 +89,7 @@ package com.rpgGame.appModule.zhangong
 					_skin.btnBG.isEnabled=true;
 					_skin.btnBG.filter=null;
 				}
+				updatePanel();
 			}
 		}
 		
@@ -106,9 +106,6 @@ package com.rpgGame.appModule.zhangong
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
-			if(_lv>MainRoleManager.actorInfo.totalStat.level){
-				return;
-			}
 			EventManager.dispatchEvent(ZhanGongEvent.MAPITEM_SELECT,this);
 		}
 		
@@ -124,7 +121,16 @@ package com.rpgGame.appModule.zhangong
 		
 		private function updatePanel():void
 		{
-			_skin.lbMsg.text=ZhanGongManager.getProgressByLv(_lv);
+			if(_lv>MainRoleManager.actorInfo.totalStat.level)
+			{
+				_skin.lbMsg.text="等级不足";
+				_skin.lbMsg.color=0xd02525;
+			}
+			else
+			{
+				_skin.lbMsg.text=ZhanGongManager.getProgressByLv(_lv);
+				_skin.lbMsg.color=0x5cb006;
+			}
 			var num:int=ZhanGongManager.getCanUpNumByLv(_lv);
 			if(num<=0) _skin.grp_dengji.visible=false;
 			else

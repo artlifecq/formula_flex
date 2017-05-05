@@ -30,8 +30,12 @@ package com.rpgGame.coreData.clientConfig
 		public var q_materil:int;
 		 /**  升级需要数量 */
 		public var q_num:int;
-		 /**  总属性ID */
+		 /**  兵家属性 */
 		public var q_att_type:int;
+		 /**  医家属性 */
+		public var q_att_type1:int;
+		 /**  墨家属性 */
+		public var q_att_type2:int;
 		 /**  怪物缩放比例 */
 		public var q_rite:int;
 

@@ -1,5 +1,9 @@
 package com.rpgGame.coreData.utils
 {
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.coreData.clientConfig.Q_meritorious;
+	import com.rpgGame.coreData.enum.JobEnum;
+	
 	public class ZhanGongUtil
 	{
 		/**
@@ -38,6 +42,21 @@ package com.rpgGame.coreData.utils
 			list.push(-po_y);
 			list.push(scale);
 			return list;	
+		}
+		
+		/**
+		 * 依据职业获取属性
+		 * */
+		public static function getAttByJob(q_meritorious:Q_meritorious,job:int):int
+		{
+			switch(job)
+			{
+				case JobEnum.ROLE_1_TYPE: return q_meritorious.q_att_type;
+				case JobEnum.ROLE_2_TYPE:
+				case JobEnum.ROLE_3_TYPE: return q_meritorious.q_att_type2;
+				case JobEnum.ROLE_4_TYPE: return q_meritorious.q_att_type1;
+			}
+			return 0;
 		}
 	}
 }
