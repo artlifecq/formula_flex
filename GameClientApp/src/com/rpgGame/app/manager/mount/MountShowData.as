@@ -25,7 +25,18 @@ package com.rpgGame.app.manager.mount
 			return _haveChange;
 		}
 		
-		public var heroJob:int
+		private var _heroJob:int
+
+		public function get heroJob():int
+		{
+			return _heroJob;
+		}
+
+		public function set heroJob(value:int):void
+		{
+			_heroJob = value;
+		}
+
 		private var _horsedataInfo:HorseDataInfo;
 		private var _lastLevel:int;
 		private var _upLevelItem:ClientItemInfo;
@@ -162,12 +173,13 @@ package com.rpgGame.app.manager.mount
 				_isMaxLevel = true;
 			}
 			
+			
+			
 			//资质丹加成属性
 			if(_addProp ==null)
 			{
 				_addProp = new Vector.<Number>(30,0);
-				var extraIteminfo:HorseExtraItemInfo = getOpenLevelBytype(506);
-				currentatt = AttValueConfig.getAttInfoById(extraIteminfo.clientItemInfo.qItem.q_att_type);
+				currentatt = AttValueConfig.getAttInfoById(exartPropId);
 				for(i = 1;i<=15;i++)
 				{
 					type = currentatt["q_type"+i];
@@ -178,6 +190,11 @@ package com.rpgGame.app.manager.mount
 				}
 			}
 			_haveChange = true;
+		}
+		//获取成长丹属性id
+		public function get exartPropId():int
+		{
+			return HorseExtraItemInfo.getItemPropsByJob(heroJob);
 		}
 		
 		public function useExtraItem(num1:int,num2:int):void

@@ -45,32 +45,7 @@ package com.rpgGame.appModule.mount
 			_mountShowData = mountShowData;
 			_skin.chk_zidonggoumai.isSelected = _mountShowData.isAutoBuyItem;
 			this.isAutoing = _mountShowData.isAutoing;
-			const housedata:Q_horse = _mountShowData.housedata;
-			if(_mountShowData.haveChange)
-			{
-				var rewards:Vector.<ClientItemInfo> = _mountShowData.rewardItems;
-				for(var index:int = 0;index<rewards.length;index++)
-				{
-					_itemIconList[index].visible = true;
-					FaceUtil.SetItemGrid(_itemIconList[index], rewards[index], true);
-				}
-				for(;index<_itemIconList.length;index++)
-				{
-					_itemIconList[index].visible = false;
-				}
-				if(_mountShowData.needClearExp())
-				{
-					_skin.lab_zhufuzhi.text = "本阶祝福值不清零";
-					_skin.lab_zhufuzhi.color = 0x5cb006;
-				}else{
-					_skin.lab_zhufuzhi.text = "祝福值每日0点清零";
-					_skin.lab_zhufuzhi.color = 0xe1201c;
-				}
-			}
-			const percent:Number = _mountShowData.percent;
-			_skin.progressbar.value = _skin.progressbar.maximum*percent;
-			_skin.progressbar_light.x = _skin.progressbar.x +_skin.progressbar.width*percent-3;
-			_skin.lab_progressbar.text = _mountShowData.exp.toString()+"/"+housedata.q_blessnum_limit.toString();
+			
 			if(!_mountShowData.isMaxLevel)
 			{
 				_skin.grp_jinjie.visible = true;
@@ -82,12 +57,40 @@ package com.rpgGame.appModule.mount
 				}else{
 					_skin.lab_xuyaowupin.color = 0xd02525;
 				}
+				_skin.uplevelgroup.visible = true;
+				const housedata:Q_horse = _mountShowData.housedata;
+				if(_mountShowData.haveChange)
+				{
+					var rewards:Vector.<ClientItemInfo> = _mountShowData.rewardItems;
+					for(var index:int = 0;index<rewards.length;index++)
+					{
+						_itemIconList[index].visible = true;
+						FaceUtil.SetItemGrid(_itemIconList[index], rewards[index], true);
+					}
+					for(;index<_itemIconList.length;index++)
+					{
+						_itemIconList[index].visible = false;
+					}
+					if(_mountShowData.needClearExp())
+					{
+						_skin.lab_zhufuzhi.text = "本阶祝福值不清零";
+						_skin.lab_zhufuzhi.color = 0x5cb006;
+					}else{
+						_skin.lab_zhufuzhi.text = "祝福值每日0点清零";
+						_skin.lab_zhufuzhi.color = 0xe1201c;
+					}
+				}
+				const percent:Number = _mountShowData.percent;
+				_skin.progressbar.value = _skin.progressbar.maximum*percent;
+				_skin.progressbar_light.x = _skin.progressbar.x +_skin.progressbar.width*percent-3;
+				_skin.lab_progressbar.text = _mountShowData.exp.toString()+"/"+housedata.q_blessnum_limit.toString();
+				TipTargetManager.remove(_skin.expgroup);
+				TipTargetManager.show(_skin.expgroup,TargetTipsMaker.makeTips(TipType.BLESS_TIP,_mountShowData));
 			}else{
 				_skin.grp_jinjie.visible = false;
+				_skin.uplevelgroup.visible = false;
 				_skin.maximg.visible = true;
 			}
-			TipTargetManager.remove(_skin.expgroup);
-			TipTargetManager.show(_skin.expgroup,TargetTipsMaker.makeTips(TipType.BLESS_TIP,_mountShowData));
 		}
 		public function set isAutoing(value:Boolean):void
 		{
