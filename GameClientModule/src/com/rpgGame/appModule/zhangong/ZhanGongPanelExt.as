@@ -17,6 +17,7 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.netData.zhangong.message.SCMeritoriousUpgradeResultMessage;
 	
 	import feathers.controls.List;
+	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.Scroller;
 	import feathers.controls.UINumber;
 	import feathers.data.ListCollection;
@@ -52,8 +53,9 @@ package com.rpgGame.appModule.zhangong
 			var list:List=_skin.ListMap;
 			list.itemRendererFactory = creatMapItemCell;
 			list.clipContent = true;
-			list.scrollBarDisplayMode = "fixed";
+//			list.scrollBarDisplayMode = "fixed";
 			list.verticalScrollBarPosition = "right";
+			list.scrollBarDisplayMode=ScrollBarDisplayMode.ALWAYS_VISIBLE;
 			list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			list.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			list.padding=0;
@@ -239,14 +241,14 @@ package com.rpgGame.appModule.zhangong
 		private function showBossItemByLv(lv:int):void
 		{
 			yeqian=0;
-			maxNum=ZhanGongData.getMaxYeQian();
-			updateBtnState();
+			maxNum=ZhanGongData.getMaxYeQian();		
 			showBossItem(lv,yeqian);
 		}
 		
 		private function showBossItem(lv:int,yeqian:int):void
 		{
 			var list:Vector.<int>=ZhanGongData.getBossItemTypeList(lv,yeqian);
+			updateBtnState();
 			for(var i:int=0;i<_bossItemList.length;i++)
 			{
 				if(i<list.length)

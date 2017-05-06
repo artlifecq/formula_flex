@@ -23,9 +23,11 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.ZhanGongData;
+	import com.rpgGame.coreData.cfg.ZhanGongMonsterData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
 	import com.rpgGame.coreData.clientConfig.Q_meritorious;
+	import com.rpgGame.coreData.clientConfig.Q_meritorious_monster;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleType;
@@ -70,13 +72,11 @@ package com.rpgGame.appModule.zhangong
 			_skin.conver.visible=false;
 			_avatarContainer=new Inter3DContainer();
 			_avatar = new InterAvatar3D();
-			_avatar.x =100;
-			_avatar.y = 230;
 			_avatarContainer.addChild3D(_avatar);
 			_avatardata=new MonsterData(RoleType.TYPE_MONSTER);
 			_skin.uiBg.addChild(_avatarContainer);
 			
-			_progressBar=new AwdProgressBar(_skin.pro_bar,"ui_zuomotiao");
+			_progressBar=new AwdProgressBar(_skin.pro_bar,"ui_zhangongtexiao");
 			_skin.container.addChild(_progressBar);
 			_skin.lbNumUp.visible=false;
 			_skin.uiUp.visible=false;
@@ -113,7 +113,8 @@ package com.rpgGame.appModule.zhangong
 				case _skin.btnUp:
 					toUpHandler(null);
 					break;
-				case _skin.uiDao:
+				case _skin.btnDao:
+				case _skin.lbName:
 					toWorkMonsterHandler();
 					break;
 			}
@@ -212,7 +213,12 @@ package com.rpgGame.appModule.zhangong
 			var bornData : Q_monster = MonsterDataManager.getData(monsterId);		
 			_avatardata.avatarInfo.setBodyResID(bornData ? bornData.q_body_res : "", null);
 			_avatar.setRoleData(this._avatardata);
-			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.DIALOG_MASK,_avatar,125,-282,1);
+			var meritorious_monster:Q_meritorious_monster=ZhanGongMonsterData.getPointById(monsterId);
+			_avatar.x =meritorious_monster.q_avatar_pointX;
+			_avatar.y = meritorious_monster.q_avatar_pointY;
+			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.DIALOG_MASK,_avatar,meritorious_monster.q_pointX,
+				meritorious_monster.q_pointY,meritorious_monster.q_scale);
+			//			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.DIALOG_MASK,_avatar,125,-282,1);
 		}
 		
 		private function setUIType(type:int):void

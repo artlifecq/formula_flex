@@ -8,8 +8,8 @@ package org.mokylin.skin.app.beibao.zhangong
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
-	import org.mokylin.skin.app.beibao.zhangong.BtnSelectSkin;
 	import org.mokylin.skin.app.beibao.zhangong.Progress_dengji;
+	import org.mokylin.skin.app.beibao.zhangong.button.ButtonZhaodou;
 	import org.mokylin.skin.component.button.ButtonSkin_putong5;
 	import org.mokylin.skin.component.uinumber.UINumberZhanli_min;
 
@@ -23,7 +23,7 @@ package org.mokylin.skin.app.beibao.zhangong
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var btnOver:feathers.controls.Button;
+		public var btnDao:feathers.controls.Button;
 
 		public var btnUp:feathers.controls.Button;
 
@@ -47,8 +47,6 @@ package org.mokylin.skin.app.beibao.zhangong
 
 		public var uiBg:feathers.controls.UIAsset;
 
-		public var uiDao:feathers.controls.UIAsset;
-
 		public var uiDian:feathers.controls.UIAsset;
 
 		public var uiName:feathers.controls.UIAsset;
@@ -66,7 +64,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			this.currentState = "normal";
 			this.height = 192;
 			this.width = 210;
-			this.elementsContent = [uiBg_i(),skBoss_i(),__BossItem_Skin_UIAsset1_i(),__BossItem_Skin_UIAsset2_i(),__BossItem_Skin_UIAsset3_i(),pro_bar_i(),lbNum_i(),conver_i(),lbLevelNext_i(),lbLevelCurrent_i(),lbName_i(),uiDao_i(),btnOver_i(),btnUp_i(),uiDian_i(),uiUp_i(),lbNumUp_i(),uiName_i(),numZhanli_i()];
+			this.elementsContent = [uiBg_i(),skBoss_i(),__BossItem_Skin_UIAsset1_i(),__BossItem_Skin_UIAsset2_i(),__BossItem_Skin_UIAsset3_i(),pro_bar_i(),lbNum_i(),conver_i(),lbLevelNext_i(),lbLevelCurrent_i(),btnDao_i(),lbName_i(),btnUp_i(),uiDian_i(),uiUp_i(),lbNumUp_i(),uiName_i(),numZhanli_i()];
 			
 			states = {
 			};
@@ -81,8 +79,8 @@ package org.mokylin.skin.app.beibao.zhangong
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/zhangong/wenzidi1.png";
-			temp.x = 35;
-			temp.y = 3;
+			temp.x = 20;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -91,7 +89,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/zhangong/guaiwuxinxibg.png";
 			temp.x = 1;
-			temp.y = 123;
+			temp.y = 126;
 			return temp;
 		}
 
@@ -101,18 +99,18 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.styleName = "ui/app/beibao/zhangong/jindutiao/jdtbg.png";
 			temp.width = 99;
 			temp.x = 57;
-			temp.y = 146;
+			temp.y = 152;
 			return temp;
 		}
 
-		private function btnOver_i():feathers.controls.Button
+		private function btnDao_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btnOver = temp;
-			temp.name = "btnOver";
-			temp.styleClass = org.mokylin.skin.app.beibao.zhangong.BtnSelectSkin;
-			temp.x = 0;
-			temp.y = 0;
+			btnDao = temp;
+			temp.name = "btnDao";
+			temp.styleClass = org.mokylin.skin.app.beibao.zhangong.button.ButtonZhaodou;
+			temp.x = 133;
+			temp.y = 10;
 			return temp;
 		}
 
@@ -126,8 +124,8 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong5;
 			temp.color = 0xCFC6AE;
 			temp.width = 64;
-			temp.x = 74;
-			temp.y = 164;
+			temp.x = 75;
+			temp.y = 168;
 			return temp;
 		}
 
@@ -156,7 +154,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 50;
 			temp.x = 7;
-			temp.y = 145;
+			temp.y = 150;
 			return temp;
 		}
 
@@ -171,7 +169,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 50;
 			temp.x = 157;
-			temp.y = 145;
+			temp.y = 150;
 			return temp;
 		}
 
@@ -186,8 +184,8 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 82;
-			temp.x = 25;
-			temp.y = 128;
+			temp.x = 60;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -201,8 +199,8 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 35;
-			temp.x = 165;
-			temp.y = 127;
+			temp.x = 166;
+			temp.y = 132;
 			return temp;
 		}
 
@@ -216,9 +214,9 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 57;
-			temp.x = 78;
-			temp.y = 145;
+			temp.width = 86;
+			temp.x = 65;
+			temp.y = 151;
 			return temp;
 		}
 
@@ -231,8 +229,8 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.label = "x12";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberZhanli_min;
 			temp.width = 55;
-			temp.x = 108;
-			temp.y = 7;
+			temp.x = 71;
+			temp.y = 131;
 			return temp;
 		}
 
@@ -244,7 +242,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.styleClass = org.mokylin.skin.app.beibao.zhangong.Progress_dengji;
 			temp.value = 40;
 			temp.x = 64;
-			temp.y = 148;
+			temp.y = 154;
 			return temp;
 		}
 
@@ -271,25 +269,14 @@ package org.mokylin.skin.app.beibao.zhangong
 			return temp;
 		}
 
-		private function uiDao_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			uiDao = temp;
-			temp.name = "uiDao";
-			temp.styleName = "ui/app/beibao/zhangong/zhandoutubiao.png";
-			temp.x = 92;
-			temp.y = 130;
-			return temp;
-		}
-
 		private function uiDian_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiDian = temp;
 			temp.name = "uiDian";
 			temp.styleName = "ui/common/tubiao/tishi.png";
-			temp.x = 120;
-			temp.y = 168;
+			temp.x = 121;
+			temp.y = 172;
 			return temp;
 		}
 
@@ -299,8 +286,8 @@ package org.mokylin.skin.app.beibao.zhangong
 			uiName = temp;
 			temp.name = "uiName";
 			temp.styleName = "ui/app/beibao/zhangong/jiacheng/shengming.png";
-			temp.x = 60;
-			temp.y = 6;
+			temp.x = 28;
+			temp.y = 130;
 			return temp;
 		}
 
@@ -310,8 +297,8 @@ package org.mokylin.skin.app.beibao.zhangong
 			uiUp = temp;
 			temp.name = "uiUp";
 			temp.styleName = "ui/common/tubiao/tu_up.png";
-			temp.x = 156;
-			temp.y = 127;
+			temp.x = 157;
+			temp.y = 132;
 			return temp;
 		}
 

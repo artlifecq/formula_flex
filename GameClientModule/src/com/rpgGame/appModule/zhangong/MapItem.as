@@ -103,7 +103,11 @@ package com.rpgGame.appModule.zhangong
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
-			EventManager.dispatchEvent(ZhanGongEvent.MAPITEM_SELECT,this);
+			switch(target){
+				case _skin.btnBG:
+					EventManager.dispatchEvent(ZhanGongEvent.MAPITEM_SELECT,this);
+					break;
+			}			
 		}
 		
 		private function bossItemChange(msg:SCMeritoriousUpgradeResultMessage):void

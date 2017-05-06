@@ -116,8 +116,6 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_hecheng:String = "data.Q_hecheng";
 		/**  坐骑基本信息数据库																					 */
 		public static const Q_horse:String = "data.Q_horse";
-		/**  坐骑技能数据库		 */
-		public static const Q_horse_skills:String = "data.Q_horse_skills";
 		/**  2物品基本信息数据库																																																																																				 */
 		public static const Q_item:String = "data.Q_item";
 		/**  绝学开放表							 */
@@ -130,7 +128,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_meridian:String = "data.Q_meridian";
 		/**  战功表												 */
 		public static const Q_meritorious:String = "data.Q_meritorious";
-		/**  战功表			 */
+		/**  战功表					 */
 		public static const Q_meritorious_monster:String = "data.Q_meritorious_monster";
 		/**  任务表(所有任务都这里)																																										 */
 		public static const Q_mission_base:String = "data.Q_mission_base";
@@ -236,7 +234,6 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_global", com.rpgGame.coreData.clientConfig.Q_global);
 			regClass("data.Q_hecheng", com.rpgGame.coreData.clientConfig.Q_hecheng);
 			regClass("data.Q_horse", com.rpgGame.coreData.clientConfig.Q_horse);
-			regClass("data.Q_horse_skills", com.rpgGame.coreData.clientConfig.Q_horse_skills);
 			regClass("data.Q_item", com.rpgGame.coreData.clientConfig.Q_item);
 			regClass("data.Q_lostskill_open", com.rpgGame.coreData.clientConfig.Q_lostskill_open);
 			regClass("data.Q_lostskill_up", com.rpgGame.coreData.clientConfig.Q_lostskill_up);

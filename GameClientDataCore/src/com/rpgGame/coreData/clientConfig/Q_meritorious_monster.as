@@ -20,6 +20,10 @@ package com.rpgGame.coreData.clientConfig
 		public var q_pointY:int;
 		 /**  缩放比例 */
 		public var q_scale:int;
+		 /**  怪物在容器的X位置 */
+		public var q_avatar_pointX:int;
+		 /**  怪物在容器的Y位置 */
+		public var q_avatar_pointY:int;
 
 	}
 }
