@@ -60,7 +60,7 @@ package com.rpgGame.app.manager.scene
 			AppMergeManager.instace.setup();
 			MouseCursorController.setup();
 			SocietyManager.init();
-			TeamManager.setup();
+			//TeamManager.setup();
 
 			//弹出菜单初始化
 			MenuManager.setup();
