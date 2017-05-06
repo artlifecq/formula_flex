@@ -165,10 +165,10 @@ package com.rpgGame.app.ui.main
             this.addChild(this._headBar);
             this._smallMapBar = new SmallMapBar();
             this.addChild(this._smallMapBar);
+			this._navigationBar = new NavigationBar();
+			this.addChild(this._navigationBar);
             this._shortcutBar = new ShortcutBar();
             this.addChild(this._shortcutBar);
-            this._navigationBar = new NavigationBar();
-            this.addChild(this._navigationBar);
             this._chatBar = new ChatBar();
             this.addChild(this._chatBar);
 			this._systemMsgBar=new SystemMsgBar();

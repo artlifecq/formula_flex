@@ -319,6 +319,7 @@ package com.rpgGame.app.manager.goods
 				}*/
 				case GoodsType.MEDICINE:
 				{
+					AppManager.showApp(AppConstant.MOUNT_PANEL);
 					break;
 				}
 				case GoodsType.MATERIAL_COMBO:
