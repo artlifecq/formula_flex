@@ -13,12 +13,13 @@ package com.rpgGame.coreData.cfg
 	 *@author dik
 	 *2017-5-6下午2:01:04
 	 */
-	public class SwordCfg
+	public class LunJianCfg
 	{
 		private static var npcMapData:HashMap;
+		private static var idMapData:HashMap;
 		public static var mapDatas:Array;
 		
-		public function SwordCfg()
+		public function LunJianCfg()
 		{
 		}
 		
@@ -27,6 +28,7 @@ package com.rpgGame.coreData.cfg
 			var arr : Array = data.readObject();
 			var num:int=arr.length;
 			npcMapData=new HashMap();
+			idMapData=new HashMap();
 			mapDatas=new Array();
 			var mapIds:Array=new Array();
 			var info:Q_lunjian;
@@ -36,6 +38,7 @@ package com.rpgGame.coreData.cfg
 				info=arr[i];
 				var key:String=info.q_npc_map+"_"+info.q_type+"_"+info.q_difficult;
 				mapData=npcMapData.getValue(info.q_npc_map);
+				idMapData.add(info.q_id,info);
 				if(!mapData){
 					mapData=new HashMap();
 					npcMapData.add(info.q_npc_map,mapData);
@@ -77,11 +80,33 @@ package com.rpgGame.coreData.cfg
 			return result;
 		}
 		
-		public static function getCfg(mapId:int,type:int,dif:int):Q_lunjian
+		/**
+		 *根据信息获取 
+		 * @param mapId
+		 * @param type
+		 * @param dif
+		 * @return 
+		 * 
+		 */
+		public static function getCfgByInfo(mapId:int,type:int,dif:int):Q_lunjian
 		{
 			var key:String=mapId+"_"+type+"_"+dif;
 			var mapData:HashMap=npcMapData.getValue(mapId);
-			return mapData.getValue(key);
+			if(mapData){
+				return mapData.getValue(key);
+			}
+			return null;
+		}
+		
+		/**
+		 *根据id获取 
+		 * @param id
+		 * @return 
+		 * 
+		 */
+		public static function getCfgByID(id:int):Q_lunjian
+		{
+			return idMapData.getValue(id);
 		}
 	}
 }

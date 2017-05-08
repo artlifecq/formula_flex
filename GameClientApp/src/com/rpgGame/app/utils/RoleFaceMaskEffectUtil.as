@@ -24,7 +24,7 @@ package com.rpgGame.app.utils
 	 */
 	public class RoleFaceMaskEffectUtil
 	{
-		private static var ZERO_POINT:Point=new Point();
+		private static var POINT:Point=new Point();
 		
 		private static var roleMap:HashMap=new HashMap();
 		private static var checkPos:Boolean;
@@ -36,6 +36,9 @@ package com.rpgGame.app.utils
 
 		public static function removeFaceMaskEffect(role : SceneRole) : void
 		{
+			if(!role){
+				return;
+			}
 			role.avatar.forEachRenderUnit(function(render : RenderUnit3D) : void
 			{
 				switch (render.type)
@@ -87,23 +90,19 @@ package com.rpgGame.app.utils
 						break;
 				}
 			});
-			var point : Point = avatar.parent.localToGlobal(ZERO_POINT);
-			var preX:int= point.x + avatar.x+fadeX-maskWH;
-			var preY:int=point.y + avatar.y+fadeY;
-			updateFadeAlphaRectPos(role,preX,preY );
+			role.setScale(scale);
+			role.rotationY =rotationY;
+			POINT.x=avatar.x;
+			POINT.y=avatar.y;
+			var point : Point = avatar.parent.localToGlobal(POINT);
+			role.x=fadeX;
+			role.z=fadeY;
+			updateFadeAlphaRectPos(role,point.x,point.y );
 			
-			var info:MaskRoleInfo=new MaskRoleInfo();
-			info.avatar=avatar;
-			info.fadeX=fadeX;
-			info.fadeY=fadeY;
-			info.preX=preX;
-			info.preY=preY;				
-			roleMap.add(role,info);
+			roleMap.add(role,avatar);
 			if(roleMap.length!=0&&!checkPos){
 				startCheckPos();
 			}
-			role.setScale(scale);
-			role.rotationY =rotationY;
 		}
 		
 		private static function startCheckPos():void
@@ -119,37 +118,17 @@ package com.rpgGame.app.utils
 			var num:int=roles.length;
 			var role:SceneRole;
 			var point : Point;
-			var info:MaskRoleInfo;
+			var avatar:InterAvatar3D;
 			var preX:int;
 			var preY:int;
 			for(var i:int=0;i<num;i++){
 				role=roles[i] as SceneRole;
-				info=infos[i] as MaskRoleInfo;
-				point=info.avatar.parent.localToGlobal(ZERO_POINT);
-				preX= point.x + info.avatar.x+info.fadeX-maskWH;
-				preY=point.y + info.avatar.y+info.fadeY;
-				if(preX==info.preX&&preY==info.preY){
-					continue;
-				}else{
-					info.preX=preX;
-					info.preY=preY;		
-					updateFadeAlphaRectPos(role,preX,preY );
-				}
+				avatar=infos[i] as InterAvatar3D;
+				POINT.x=avatar.x;
+				POINT.y=avatar.y;
+				point=avatar.parent.localToGlobal(POINT);
+				updateFadeAlphaRectPos(role,point.x,point.y );
 			}
-		}
-		
-		/**
-		 *更新avatar的位置信息 
-		 * @param avatar
-		 * @param fadeX
-		 * @param fadeY
-		 * 
-		 */
-		public static function updateAvatarPos(avatar:InterAvatar3D,fadeX:int,fadeY:int):void
-		{
-			var role:SceneRole=avatar.curRole;
-			var point : Point = avatar.parent.localToGlobal(ZERO_POINT);
-			updateFadeAlphaRectPos(role, point.x + avatar.x+fadeX, point.y + avatar.y+fadeY);
 		}
 
 		public static function addDialogFaceMaskEffect(role : SceneRole) : void
@@ -275,13 +254,4 @@ package com.rpgGame.app.utils
 			return int(poses[1]);
 		}
 	}
-}
-import com.rpgGame.app.display3D.InterAvatar3D;
-
-class MaskRoleInfo{
-	public var avatar:InterAvatar3D;
-	public var fadeX:int;
-	public var fadeY:int;
-	public var preX:int;
-	public var preY:int;
 }

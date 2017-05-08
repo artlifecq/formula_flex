@@ -28,7 +28,7 @@ package com.rpgGame.appModule.dungeon
 		private function initUI():void
 		{
 			tabUIs=new Vector.<ViewUI>();
-			tabUIs.push(new SwordUI());
+			tabUIs.push(new LunJianUI());
 			
 		}
 		

@@ -1,12 +1,9 @@
-package com.rpgGame.appModule.dungeon.sword
+package com.rpgGame.appModule.dungeon.lunjian
 {
-	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.core.app.AppManager;
-	import com.rpgGame.coreData.cfg.ZoneCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
-	import com.rpgGame.coreData.clientConfig.Q_zone;
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	
@@ -19,11 +16,11 @@ package com.rpgGame.appModule.dungeon.sword
 	 *@author dik
 	 *2017-5-2下午7:36:11
 	 */
-	public class SwordItemRender extends DefaultListItemRenderer
+	public class LunJianItemRender extends DefaultListItemRenderer
 	{
 		private var _skin:LunJian_TiaoZhanItem;
 		
-		public function SwordItemRender()
+		public function LunJianItemRender()
 		{
 			super();
 		}
@@ -38,9 +35,8 @@ package com.rpgGame.appModule.dungeon.sword
 		{
 			if(target==_skin.btnTiaozhan){
 				AppManager.closeAllApp();
-				var itemData:SwordItemData=_data as SwordItemData;
-//				SceneSender.reqEnterDungeon(itemData.basicCfg.q_zone_id,itemData.basicCfg.q_id);
-				SceneSender.reqEnterDungeon(itemData.basicCfg.q_zone_id,1);
+				var itemData:LunJianItemData=_data as LunJianItemData;
+				SceneSender.reqEnterDungeon(itemData.cfg.q_zone_id,itemData.cfg.q_id);
 			}
 		}
 		
@@ -55,11 +51,12 @@ package com.rpgGame.appModule.dungeon.sword
 		override protected function commitData():void
 		{
 			if(_skin&&this.owner){
-				var itemData:SwordItemData=_data as SwordItemData;
-				var npcCfg:Q_monster=MonsterDataManager.getData(itemData.basicCfg.q_npc);
+				var itemData:LunJianItemData=_data as LunJianItemData;
+				var npcCfg:Q_monster=MonsterDataManager.getData(itemData.cfg.q_npc);
 				_skin.lbName.text=npcCfg.q_name;
-				_skin.lbLevel.text=itemData.basicCfg.q_level+"";
-				_skin.lbZhanli.text=itemData.basicCfg.q_attack_power+"";
+				_skin.lbLevel.text=itemData.cfg.q_level+"";
+				_skin.lbZhanli.text=itemData.cfg.q_attack_power+"";
+				_skin.mc_nandu.gotoAndStop(itemData.diff);
 			}
 		}
 	}

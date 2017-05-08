@@ -1,5 +1,7 @@
-package com.rpgGame.appModule.dungeon.sword
+package com.rpgGame.appModule.dungeon.lunjian
 {
+	import com.rpgGame.coreData.cfg.LunJianCfg;
+	import com.rpgGame.coreData.clientConfig.Q_lunjian;
 	import com.rpgGame.coreData.info.map.SceneData;
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;
@@ -41,6 +43,12 @@ package com.rpgGame.appModule.dungeon.sword
 				var data:SceneData=_data as SceneData;
 				_skin.lbName.text=data.name;
 				_skin.lbLevel.text="("+data.requiredLevel+")";
+				var list:Vector.<Q_lunjian>=LunJianCfg.getCfgByMapId(data.sceneId);
+				var num:int=0;
+				var len:int=list.length;
+				for(var i:int=0;i<len;i++){
+					
+				}
 //				_skin.lbNum.text=data.leftNum.toString();
 //				_skin.lbNum.visible=_skin.numBg.visible=data.leftNum!=0;
 			}
