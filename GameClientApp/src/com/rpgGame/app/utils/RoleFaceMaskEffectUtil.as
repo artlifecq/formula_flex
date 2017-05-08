@@ -28,6 +28,7 @@ package com.rpgGame.app.utils
 		
 		private static var roleMap:HashMap=new HashMap();
 		private static var checkPos:Boolean;
+		private static var maskWH:int=256;
 		
 		public function RoleFaceMaskEffectUtil()
 		{
@@ -86,10 +87,8 @@ package com.rpgGame.app.utils
 						break;
 				}
 			});
-			role.setScale(scale);
-			role.rotationY =rotationY;
 			var point : Point = avatar.parent.localToGlobal(ZERO_POINT);
-			var preX:int= point.x + avatar.x+fadeX;
+			var preX:int= point.x + avatar.x+fadeX-maskWH;
 			var preY:int=point.y + avatar.y+fadeY;
 			updateFadeAlphaRectPos(role,preX,preY );
 			
@@ -103,6 +102,8 @@ package com.rpgGame.app.utils
 			if(roleMap.length!=0&&!checkPos){
 				startCheckPos();
 			}
+			role.setScale(scale);
+			role.rotationY =rotationY;
 		}
 		
 		private static function startCheckPos():void
@@ -125,7 +126,7 @@ package com.rpgGame.app.utils
 				role=roles[i] as SceneRole;
 				info=infos[i] as MaskRoleInfo;
 				point=info.avatar.parent.localToGlobal(ZERO_POINT);
-				preX= point.x + info.avatar.x+info.fadeX;
+				preX= point.x + info.avatar.x+info.fadeX-maskWH;
 				preY=point.y + info.avatar.y+info.fadeY;
 				if(preX==info.preX&&preY==info.preY){
 					continue;

@@ -51,11 +51,14 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.SpellEffectDataManager;
 	import com.rpgGame.coreData.cfg.StallCfgData;
 	import com.rpgGame.coreData.cfg.StatNameCfgData;
+	import com.rpgGame.coreData.cfg.SwordCfg;
 	import com.rpgGame.coreData.cfg.TaxCfgData;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.WindowInfoData;
 	import com.rpgGame.coreData.cfg.ZhanGongData;
+	import com.rpgGame.coreData.cfg.ZhanGongMonsterData;
+	import com.rpgGame.coreData.cfg.ZoneCfgData;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
 	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
@@ -144,7 +147,6 @@ package com.rpgGame.app.data
 			//   以下为客户端专用表
 			//
 			///////////////////////////////////////////////////////////////////////
-			//ClientSceneCfgData.setup(dic[ConfigClassRegister.Q_map]);
 			ClientSceneNpcCfgData.setup(dic[ConfigClassRegister.ClientSceneNPC]);
 			ClientSceneEffectCfgData.setup(dic[ConfigClassRegister.ClientSceneEffect]);
 			ClientSceneRoleCfgData.setup(dic[ConfigClassRegister.ClientSceneRole]);
@@ -170,6 +172,7 @@ package com.rpgGame.app.data
 			RelationCfgData.setup(dic[ConfigClassRegister.Q_relation]);
 			
 			BaZhenTuResCfgData.setup(dic[ConfigClassRegister.BaZhenTuRes]);
+			
 			
 			
 			EffectAnimationCfgData.setup(dic[ConfigClassRegister.EffectAnimation]);
@@ -233,6 +236,7 @@ package com.rpgGame.app.data
 			HeChengData.setup(dic[ConfigClassRegister.Q_hecheng]);
 			EquipJiChengData.setup(dic[ConfigClassRegister.Q_equip_inherit_cost]);
 			ZhanGongData.setup(dic[ConfigClassRegister.Q_meritorious]);
+			ZhanGongMonsterData.setup(dic[ConfigClassRegister.Q_meritorious_monster]);
 			
 			LostSkillData.setup(dic[ConfigClassRegister.Q_lostskill_open]);
 			LostSkillUpData.setup(dic[ConfigClassRegister.Q_lostskill_up]);
@@ -252,6 +256,10 @@ package com.rpgGame.app.data
 			HorseConfigData.setConfig(dic[ConfigClassRegister.Q_horse]);
 			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
 			HorseExtraItemInfo.createInfo();
+			
+			//副本相关配置
+			ZoneCfgData.setup(dic[ConfigClassRegister.Q_zone]);
+			SwordCfg.setup(dic[ConfigClassRegister.Q_lunjian]);
 		}
 		
 		/**

@@ -56,7 +56,12 @@ package org.mokylin.skin.app.jianghu.lunjian
 						}
 					]
 			};
-			skinNames={"down":"ui/common/titilebg/ItemBghei2.png", "hover":"ui/common/titilebg/ItemBghei2.png", "up":"ui/common/hover/xuanqukuang2_alpha.png"};
+			skinNames={"down":"ui/common/titilebg/ItemBghei2.png",
+			"downAndSelected":"ui/common/titilebg/ItemBghei2.png",
+			"hover":"ui/common/titilebg/ItemBghei2.png",
+			"overAndSelected":"ui/common/titilebg/ItemBghei2.png",
+			"up":"ui/common/hover/xuanqukuang2_alpha.png",
+			"upAndSelected":"ui/common/titilebg/ItemBghei2.png"};
 		}
 
 
