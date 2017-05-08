@@ -390,6 +390,9 @@ package com.rpgGame.app.manager.scene
 			//var sceneCountry : int = MainRoleManager.actorInfo.sceneSequence;
 			//var transportList : Vector.<SceneTransportProto> = TranportsDataManager.getSceneTransport(mapID, sceneCountry);
             var transportList : Vector.<Q_map_transfer> = TransCfgData.getTranBySceneID(mapID);
+			if(!transportList){
+				return;
+			}
 			GameLog.add("[SceneManager] [generateSceneTransports]", "MapID:", mapID, ", transSize:", transportList.length);
             for each(var info : Q_map_transfer in transportList) {
                 CONFIG::netDebug {
