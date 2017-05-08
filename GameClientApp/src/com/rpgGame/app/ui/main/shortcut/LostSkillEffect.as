@@ -5,10 +5,13 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.LostSkillData;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.lang.LangUI_2;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
@@ -40,8 +43,6 @@ package com.rpgGame.app.ui.main.shortcut
 		private var _timeChangeFun:Function;
 		private var _lostSkillLists:Vector.<LostSkillCell>;
 		private static var _touchHelpPoint:Point = new Point();
-		/*private var _selectBgList:Vector.<UIAsset>;
-		private var _buttonList:Vector.<Button>;*/
 		public function LostSkillEffect():void
 		{
 			_skin = new juexu_Skin();
@@ -62,7 +63,9 @@ package com.rpgGame.app.ui.main.shortcut
 				this._skin.bg.mask = _mask;
 			}
 			
-//			loaderBitmapData();
+			this.pivotX = half;
+			this.pivotY = half+12;
+			
 			_transitionFun = Transitions.getTransition(Transitions.EASE_IN_OUT);
 			
 			_lostSkillLists = new Vector.<LostSkillCell>();
@@ -80,12 +83,16 @@ package com.rpgGame.app.ui.main.shortcut
 			var img:Image = _skin.bg1.getChildAt(0) as Image;
 			var texture:SubTexture = img.texture as SubTexture;
 			var partner:ConcreteTexture = texture.parent as ConcreteTexture;
-//			if(partner.textureData
 		}
 		
 		private function triggeredHandler(state:SkillStateInfo):void
 		{
-			LostSkillManager.instance().changeState(state);
+			if(state!=null&&state.level>0)
+				LostSkillManager.instance().changeState(state);
+			else{
+				NoticeManager.showNotifyById(7012);
+				AppManager.showApp(AppConstant.SKILL_PANL,null,"lostskill");
+			}
 			playEnd();
 		}
 		private var _bindBtn:Button;
@@ -126,8 +133,9 @@ package com.rpgGame.app.ui.main.shortcut
 			if(this.parent==null)
 			{
 				_bindBtn.parent.addChildAt(this,0);
-				this.x = _bindBtn.x +_bindBtn.width/2-_skin.width/2+2;
-				this.y = _bindBtn.y +_bindBtn.height/2-_skin.height+15;
+				this.rotation = Math.PI*0.1;
+				this.x = _bindBtn.x +_bindBtn.width/2-2;
+				this.y = _bindBtn.y +_bindBtn.height/2+13;
 				starPlay();
 			}else{
 				playEnd();
@@ -195,7 +203,11 @@ package com.rpgGame.app.ui.main.shortcut
 		{
 			for(var i:int = _lostSkillLists.length-1;i>=0;i--)
 			{
-				_lostSkillLists[i].checkTouch(p);
+				if(_lostSkillLists[i].checkTouch(p))
+				{
+					triggeredHandler(_lostSkillLists[i].state);
+					break;
+				}
 			}
 		}
 		private function playEnd():void

@@ -7,8 +7,12 @@ package com.rpgGame.appModule.skill
 	import com.rpgGame.appModule.skill.lostskill.LostSkillModePane;
 	import com.rpgGame.appModule.skill.lostskill.LostSkillUpLevelView;
 	import com.rpgGame.appModule.skill.lostskill.LostSpellActivate;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.LostSkillData;
+	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
+	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
 	
 	import feathers.controls.Radio;
@@ -81,6 +85,7 @@ package com.rpgGame.appModule.skill
 					break;
 				}
 			}
+			TipTargetManager.show( _skin.btn_shuoming,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(22)));
 		}
 		
 		public function onShow():void

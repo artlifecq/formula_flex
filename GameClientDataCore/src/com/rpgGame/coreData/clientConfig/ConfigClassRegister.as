@@ -124,13 +124,13 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_lostskill_open:String = "data.Q_lostskill_open";
 		/**  绝学升级表		 */
 		public static const Q_lostskill_up:String = "data.Q_lostskill_up";
-		/**  论剑配置表										 */
+		/**  论剑配置表											 */
 		public static const Q_lunjian:String = "data.Q_lunjian";
 		/**  经脉冲穴数据库																 */
 		public static const Q_meridian:String = "data.Q_meridian";
 		/**  战功表												 */
 		public static const Q_meritorious:String = "data.Q_meritorious";
-		/**  战功表			 */
+		/**  战功表					 */
 		public static const Q_meritorious_monster:String = "data.Q_meritorious_monster";
 		/**  任务表(所有任务都这里)																																										 */
 		public static const Q_mission_base:String = "data.Q_mission_base";

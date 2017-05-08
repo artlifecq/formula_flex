@@ -49,7 +49,13 @@ package com.rpgGame.appModule.skill
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			_radioGroup.selectedIndex = 0;
+			if(openTable =="lostskill")
+			{
+				_radioGroup.selectedIndex = 1;
+			}else{
+				_radioGroup.selectedIndex = 0;
+			}
+			
 			selectChangeHandler();
 		}
 		

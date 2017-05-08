@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.fightsoul
 {
 	import com.game.engine3D.display.Inter3DContainer;
+	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
@@ -19,9 +20,12 @@ package com.rpgGame.appModule.fightsoul
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_path;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.lang.LangUI_2;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.netData.fightsoul.bean.FightSoulInfo;
+	
+	import flash.geom.Point;
 	
 	import feathers.data.ListCollection;
 	import feathers.events.FeathersEventType;
@@ -32,6 +36,7 @@ package com.rpgGame.appModule.fightsoul
 	import org.mokylin.skin.app.zhanhun.Shuxing_Skin;
 	import org.mokylin.skin.app.zhanhun.Zhanhun_Skin;
 	
+	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.events.Event;
 	import starling.events.Touch;

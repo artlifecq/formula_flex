@@ -4,8 +4,6 @@ package com.rpgGame.app.process
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.ui.ResLoadingView;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-    
-    import gameEngine2D.NetDebug;
 	
 	import flash.events.Event;
 	import flash.events.ProgressEvent;
@@ -13,6 +11,8 @@ package com.rpgGame.app.process
 	import away3d.loaders.multi.MultiLoadData;
 	
 	import feathers.themes.ThemeLoader;
+	
+	import gameEngine2D.NetDebug;
 
 	/**
 	 *
@@ -23,6 +23,7 @@ package com.rpgGame.app.process
 	public class LoadPublicUIAssets extends BaseProcess
 	{
 		private static const UI_ASSETS : String = "theme";
+		private static const UI_AlphaPng:String = "alphapng.png";
 
 		private var _url : String;
 
@@ -48,7 +49,13 @@ package com.rpgGame.app.process
 			ResLoadingView.instance.title = "正在加载公共UI素材...";
 
 			var loader : ThemeLoader = new ThemeLoader();
-			loader.load(_url, onFinish, onProgress, onResError);
+			loader.load(_url, loadAplahaPNg, onProgress, onResError);
+		}
+		
+		private function loadAplahaPNg(loader : ThemeLoader):void
+		{
+			var lader1:ThemeLoader= new ThemeLoader();
+			lader1.load(ClientConfig.getUI(UI_AlphaPng), onFinish, onProgress, onResError);
 		}
 
 		private function onProgress(progress:Number) : void
