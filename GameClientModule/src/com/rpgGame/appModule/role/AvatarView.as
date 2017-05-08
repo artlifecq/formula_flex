@@ -99,6 +99,7 @@ package com.rpgGame.appModule.role
 			initAvatar();
 			initEquips();
 			setGridsCount(equipNum);
+			
 		}
 		
 		private function initEquips():void
