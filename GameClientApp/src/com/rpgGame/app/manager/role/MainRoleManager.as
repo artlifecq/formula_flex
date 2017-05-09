@@ -158,8 +158,8 @@ package com.rpgGame.app.manager.role
                 
                 EventManager.dispatchEvent(RoleEvent.UPDATE_NEEDLE, 
                     _actor, 
-                    0, 
-                    data.totalStat.getResData(CharAttributeType.RES_JING_ZHENG));
+                    data.totalStat.getResData(CharAttributeType.RES_JING_ZHENG), 
+                    0);
 			}
 		}
 
