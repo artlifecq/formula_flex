@@ -56,6 +56,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.WindowInfoData;
 	import com.rpgGame.coreData.cfg.ZhanGongData;
+	import com.rpgGame.coreData.cfg.ZhanGongMonsterData;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
 	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
@@ -233,6 +234,7 @@ package com.rpgGame.app.data
 			HeChengData.setup(dic[ConfigClassRegister.Q_hecheng]);
 			EquipJiChengData.setup(dic[ConfigClassRegister.Q_equip_inherit_cost]);
 			ZhanGongData.setup(dic[ConfigClassRegister.Q_meritorious]);
+			ZhanGongMonsterData.setup(dic[ConfigClassRegister.Q_meritorious_monster]);
 			
 			LostSkillData.setup(dic[ConfigClassRegister.Q_lostskill_open]);
 			LostSkillUpData.setup(dic[ConfigClassRegister.Q_lostskill_up]);
@@ -250,7 +252,7 @@ package com.rpgGame.app.data
 			TaskMissionCfgData.setupSection(dic[ConfigClassRegister.Q_mission_section]);
 			//坐骑数据
 			HorseConfigData.setConfig(dic[ConfigClassRegister.Q_horse]);
-			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
+//			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
 			HorseExtraItemInfo.createInfo();
 		}
 		

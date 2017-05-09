@@ -1,7 +1,7 @@
 package com.rpgGame.core.events
 {
 	import com.rpgGame.coreData.UNIQUEID;
-
+	
 	/**
 	 * 邮件
 	 * @author lpp
@@ -19,5 +19,7 @@ package com.rpgGame.core.events
 		public static const MAIL_COLLECT_CHANGE:int = UNIQUEID.NEXT;
 		/**所有邮件领取发生了变化*/
 		public static const MAIL_ALL_COLLECT_CHANGE:int = UNIQUEID.NEXT;
+		/**选取某一封邮件*/
+		public static const MAIL_SELECT:int = UNIQUEID.NEXT;
 	}
 }

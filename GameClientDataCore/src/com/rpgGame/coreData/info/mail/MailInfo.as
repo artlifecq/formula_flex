@@ -1,7 +1,6 @@
 package com.rpgGame.coreData.info.mail
 {
 	import com.rpgGame.coreData.cfg.MailCfgData;
-	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.utils.MoneyUtil;
 	
 	import app.message.AmountType;
@@ -12,7 +11,7 @@ package com.rpgGame.coreData.info.mail
 	import org.client.mainCore.ds.HashMap;
 	
 	/**
-	 *邮件Vo
+	 *邮件Vo (未使用的INFO)
 	 * @author lpp
 	 */
 	public class MailInfo

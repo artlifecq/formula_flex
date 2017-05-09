@@ -9,7 +9,9 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
+	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.sender.ZhanGongSender;
+	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.common.CenterEftPop;
 	import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
 	import com.rpgGame.core.events.MainPlayerEvent;
@@ -29,6 +31,10 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.coreData.clientConfig.Q_meritorious;
 	import com.rpgGame.coreData.clientConfig.Q_meritorious_monster;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
+	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
+	import com.rpgGame.coreData.info.alert.AlertSetInfo;
+	import com.rpgGame.coreData.lang.LangQ_BackPack;
+	import com.rpgGame.coreData.lang.LangUI;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.type.AvatarMaskType;
@@ -64,6 +70,7 @@ package com.rpgGame.appModule.zhangong
 		private var _isCanUp:Boolean=false;
 		
 		private var _progressBar:AwdProgressBar;
+		private static var noAlertWash:Boolean;
 		
 		public function BossItem()
 		{
@@ -103,7 +110,8 @@ package com.rpgGame.appModule.zhangong
 			_skin.btnUp.removeEventListener(starling.events.TouchEvent.TOUCH, onTouchBtn);
 			EventManager.removeEvent(ZhanGongEvent.BOSSITEM_CHANGE,updatePanel);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,resChange);
-			RoleFaceMaskEffectUtil.removeFaceMaskEffect(_avatar.curRole);
+			if(_avatar!=null&&_avatar.curRole!=null)
+				RoleFaceMaskEffectUtil.removeFaceMaskEffect(_avatar.curRole);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -304,12 +312,26 @@ package com.rpgGame.appModule.zhangong
 				p=this._skin.btnUp.parent.localToGlobal(p);
 				p=this._skin.container.globalToLocal(p);
 				this.playInter3DAt(ClientConfig.getEffect("ui_tongyongdianji"),p.x,p.y,1,null,addComplete);
-				ZhanGongSender.upZhanGongMessage(_type);
+				var alertSet:AlertSetInfo=new AlertSetInfo("继承需要消耗该装备，该装备无法恢复");
+				GameAlert.showAlert(alertSet,onToUp,_type);
 			}
 			else
 			{
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(2010));
 			}
+		}
+		
+		private function onToUp(gameAlert:GameAlert,type:int):void
+		{
+			noAlertWash=gameAlert.isCheckSelected;
+			
+			switch(gameAlert.clickType)
+			{
+				case AlertClickTypeEnum.TYPE_SURE:
+					ZhanGongSender.upZhanGongMessage(type);
+					break;
+			}
+			
 		}
 		
 		private function addComplete(render:RenderUnit3D):void
