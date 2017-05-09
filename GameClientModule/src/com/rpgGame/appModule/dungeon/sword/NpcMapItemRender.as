@@ -1,5 +1,7 @@
 package com.rpgGame.appModule.dungeon.sword
 {
+	import com.rpgGame.coreData.info.map.SceneData;
+	
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	
 	import org.mokylin.skin.app.jianghu.lunjian.LunJian_NameItem;
@@ -35,6 +37,13 @@ package com.rpgGame.appModule.dungeon.sword
 		
 		override protected function commitData():void
 		{
+			if(_skin&&this.owner){
+				var data:SceneData=_data as SceneData;
+				_skin.lbName.text=data.name;
+				_skin.lbLevel.text="("+data.requiredLevel+")";
+//				_skin.lbNum.text=data.leftNum.toString();
+//				_skin.lbNum.visible=_skin.numBg.visible=data.leftNum!=0;
+			}
 		}
 	}
 }

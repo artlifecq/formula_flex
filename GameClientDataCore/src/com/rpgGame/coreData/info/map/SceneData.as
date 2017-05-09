@@ -287,7 +287,7 @@ package com.rpgGame.coreData.info.map
 			return _mapNameResource;
 		}
 
-		public function getData() : Object
+		public function getData() : Q_map
 		{
 			return _data;
 		}

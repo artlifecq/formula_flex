@@ -1,8 +1,8 @@
 package org.mokylin.skin.app.jianghu.lunjian
 {
 	import feathers.controls.text.Fontter;
-	import feathers.controls.Button;
 	import feathers.controls.Label;
+	import feathers.controls.Radio;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.jianghu.lunjian.NameItemSelect;
@@ -17,13 +17,15 @@ package org.mokylin.skin.app.jianghu.lunjian
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var btn_over:feathers.controls.Button;
-
 		public var lbLevel:feathers.controls.Label;
 
 		public var lbName:feathers.controls.Label;
 
 		public var lbNum:feathers.controls.Label;
+
+		public var numBg:feathers.controls.UIAsset;
+
+		public var selectedBtn:feathers.controls.Radio;
 
 
 		//==========================================================================
@@ -36,11 +38,13 @@ package org.mokylin.skin.app.jianghu.lunjian
 			this.currentState = "normal";
 			this.height = 29;
 			this.width = 146;
-			this.elementsContent = [__LunJian_NameItem_UIAsset1_i(),btn_over_i(),lbName_i(),lbLevel_i(),__LunJian_NameItem_UIAsset3_i(),lbNum_i()];
+			this.elementsContent = [__LunJian_NameItem_UIAsset1_i(),lbName_i(),lbLevel_i(),numBg_i(),lbNum_i()];
+			selectedBtn_i();
+			
 			
 			states = {
 			};
-			skinNames={};
+			skinNames={"enabled":"org.mokylin.skin.app.jianghu.lunjian.NameItemSelect"};
 		}
 
 
@@ -57,26 +61,6 @@ package org.mokylin.skin.app.jianghu.lunjian
 			return temp;
 		}
 
-		private function __LunJian_NameItem_UIAsset3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/jianghu/lunjian/szq.png";
-			temp.x = 121;
-			temp.y = 5;
-			return temp;
-		}
-
-		private function btn_over_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_over = temp;
-			temp.name = "btn_over";
-			temp.styleClass = org.mokylin.skin.app.jianghu.lunjian.NameItemSelect;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function lbLevel_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -88,7 +72,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
-			temp.x = 61;
+			temp.x = 78;
 			temp.y = 6;
 			return temp;
 		}
@@ -100,7 +84,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.name = "lbName";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.text = "新手村";
+			temp.text = "新手村村村";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 99;
@@ -119,6 +103,31 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 123;
 			temp.y = 7;
+			return temp;
+		}
+
+		private function numBg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			numBg = temp;
+			temp.name = "numBg";
+			temp.styleName = "ui/app/jianghu/lunjian/szq.png";
+			temp.x = 121;
+			temp.y = 5;
+			return temp;
+		}
+
+		private function selectedBtn_i():feathers.controls.Radio
+		{
+			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			selectedBtn = temp;
+			temp.name = "selectedBtn";
+			temp.groupName = "radioGroup1";
+			temp.height = 29;
+			temp.styleClass = org.mokylin.skin.app.jianghu.lunjian.NameItemSelect;
+			temp.width = 146;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 

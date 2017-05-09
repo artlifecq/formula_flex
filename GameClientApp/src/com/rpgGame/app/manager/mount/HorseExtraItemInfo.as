@@ -60,13 +60,26 @@ package com.rpgGame.app.manager.mount
 		
 		public var useCount:int;
 		private static var _list:Dictionary;
+		private static var _itemPropIds:Object;
 		public static function createInfo():void
 		{
 			_list = new Dictionary();
 			_list[506] = new HorseExtraItemInfo(506);
 			_list[507] = new HorseExtraItemInfo(507);
+			_itemPropIds = new Object();
+			var items:Object = JSONUtil.decode( GlobalSheetData.getSettingInfo(510).q_string_value);
+			for(var key:String in items)
+			{
+				_itemPropIds[int(key)] = int(items[key]);
+			}
 		}
-		
+		public static function getItemPropsByJob(job:int):int
+		{
+			if(_itemPropIds.hasOwnProperty(job))
+				return _itemPropIds[job];
+			else
+				return _itemPropIds[1];
+		}
 		public static function getinfobyId(id:int):HorseExtraItemInfo
 		{
 			return _list[id];

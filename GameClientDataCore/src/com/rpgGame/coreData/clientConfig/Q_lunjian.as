@@ -14,6 +14,8 @@ package com.rpgGame.coreData.clientConfig
 	{
 		 /**  论剑ID */
 		public var q_id:int;
+		 /**  副本编号 */
+		public var q_zone_id:int;
 		 /**  NPC的ID */
 		public var q_npc:int;
 		 /**  NPC出生点X */

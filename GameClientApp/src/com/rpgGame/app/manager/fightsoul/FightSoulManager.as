@@ -136,12 +136,12 @@ package com.rpgGame.app.manager.fightsoul
 		{
 			if(fightSoulInfo.level == 130)
 			{
-				NoticeManager.showNotify(NotifyCfgData.getNotifyTextByID(4002));
+				NoticeManager.showNotifyById(4002);
 				return ;
 			}
 			if(fightSoulInfo.exp<currentLeveldata.q_exp)
 			{
-				NoticeManager.showNotify(NotifyCfgData.getNotifyTextByID(4003));
+				NoticeManager.showNotifyById(4003);
 				return ;
 			}
 			SocketConnection.send(new CSFightSoulLevelUpMessage());
@@ -158,13 +158,13 @@ package com.rpgGame.app.manager.fightsoul
 		{
 			if(isGetReward(index))
 			{
-				NoticeManager.showNotify(NotifyCfgData.getNotifyTextByID(4005));
+				NoticeManager.showNotifyById(4005);
 				return ;
 			}
 			var reward:ClientItemInfo = _rewards[index];
 			if(int(reward.itemInfo.parameters)>FightSoulManager.instance().fightSoulInfo.vitality)
 			{
-				NoticeManager.showNotify(NotifyCfgData.getNotifyTextByID(4007));
+				NoticeManager.showNotifyById(4007);
 				return ;
 			}
 			var rewardmsg:CSFightSoulRewardMessage = new CSFightSoulRewardMessage();

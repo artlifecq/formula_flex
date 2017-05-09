@@ -29,28 +29,8 @@ package com.rpgGame.app.cmdlistener
 		}
 		private function onNoticeMessage(msg:SCNoticeMessage):void
 		{
-			var notiMsg:Q_notify=NotifyCfgData.getNotifyByID(msg.noticeIndex,msg.values);
-			if(notiMsg!=null)
-			{
-				var showType:Array=notiMsg.q_show_type.split("|");
-				
-				if(showType!=null&&showType.length>0)
-				{
-					var i:int,length:int=showType.length;
-					
-					for(i=0;i<length;i++)
-					{
-						var tp:int=int(showType[i])
-						if(tp>0)
-						{
-							NoticeManager.textNotify(tp, notiMsg.q_content);
-						}
-						
-					}
-				}
-				
-				
-			}
+			NoticeManager.showNotifyById(msg.noticeIndex,msg.values);
+			
 			
 			///NoticeManager.showNotify("SCENE_ENTER_NOTIFY_TEXT", ["提示信息"]);
 			//EventManager.dispatchEvent(ChatEvent.SEND_SUCCESS,msg);

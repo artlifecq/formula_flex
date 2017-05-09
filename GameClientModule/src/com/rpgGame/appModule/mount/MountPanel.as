@@ -54,8 +54,8 @@ package com.rpgGame.appModule.mount
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			_mountShowData.horsedataInfo =  HorseManager.instance().horsedataInfo;
 			_mountShowData.heroJob = MainRoleManager.actorInfo.job;
+			_mountShowData.horsedataInfo =  HorseManager.instance().horsedataInfo;
 			_mountContent.refeashMode(_mountShowData.mountLevel);
 			refeashPropHandler();
 			/*_propContent.refeashPropShow(false);

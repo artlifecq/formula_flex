@@ -145,7 +145,6 @@ package com.rpgGame.app.data
 			//   以下为客户端专用表
 			//
 			///////////////////////////////////////////////////////////////////////
-			//ClientSceneCfgData.setup(dic[ConfigClassRegister.Q_map]);
 			ClientSceneNpcCfgData.setup(dic[ConfigClassRegister.ClientSceneNPC]);
 			ClientSceneEffectCfgData.setup(dic[ConfigClassRegister.ClientSceneEffect]);
 			ClientSceneRoleCfgData.setup(dic[ConfigClassRegister.ClientSceneRole]);
@@ -171,6 +170,7 @@ package com.rpgGame.app.data
 			RelationCfgData.setup(dic[ConfigClassRegister.Q_relation]);
 			
 			BaZhenTuResCfgData.setup(dic[ConfigClassRegister.BaZhenTuRes]);
+			
 			
 			
 			EffectAnimationCfgData.setup(dic[ConfigClassRegister.EffectAnimation]);
@@ -254,6 +254,12 @@ package com.rpgGame.app.data
 			HorseConfigData.setConfig(dic[ConfigClassRegister.Q_horse]);
 //			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
 			HorseExtraItemInfo.createInfo();
+			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
+			HorseExtraItemInfo.createInfo();
+			
+			//副本相关配置
+			ZoneCfgData.setup(dic[ConfigClassRegister.Q_zone]);
+			SwordCfg.setup(dic[ConfigClassRegister.Q_lunjian]);
 		}
 		
 		/**

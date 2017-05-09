@@ -99,6 +99,7 @@ package com.rpgGame.appModule.zhangong
 			_skin.btnUp.addEventListener(Event.TRIGGERED,toUpHandler);
 			EventManager.addEvent(ZhanGongEvent.BOSSITEM_CHANGE,updatePanel);
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,resChange);
+			TipTargetManager.remove(_skin.conver);
 			TipTargetManager.show( _skin.conver, TargetTipsMaker.makeSimpleTextTips(TipsCfgData.getTipsInfo(19).q_describe));
 			//			TipTargetManager.show( _skin.conver,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(19)));
 		}
@@ -221,12 +222,11 @@ package com.rpgGame.appModule.zhangong
 			var bornData : Q_monster = MonsterDataManager.getData(monsterId);		
 			_avatardata.avatarInfo.setBodyResID(bornData ? bornData.q_body_res : "", null);
 			_avatar.setRoleData(this._avatardata);
-			var meritorious_monster:Q_meritorious_monster=ZhanGongMonsterData.getPointById(monsterId);
-			_avatar.x =meritorious_monster.q_avatar_pointX;
-			_avatar.y = meritorious_monster.q_avatar_pointY;
-			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.DIALOG_MASK,_avatar,meritorious_monster.q_pointX,
-				meritorious_monster.q_pointY,meritorious_monster.q_scale);
-			//			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.DIALOG_MASK,_avatar,125,-282,1);
+			var cfg:Q_meritorious_monster=ZhanGongMonsterData.getPointById(monsterId);
+			_avatar.x =cfg.q_avatar_pointX;
+			_avatar.y = cfg.q_avatar_pointY;
+			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.BOSS_ITEM,_avatar,cfg.q_pointX,
+				cfg.q_pointY,cfg.q_scale);
 		}
 		
 		private function setUIType(type:int):void
