@@ -1,4 +1,4 @@
-package com.rpgGame.netData.map.message{
+package com.rpgGame.netData.lunjian.message{
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -8,12 +8,15 @@ package com.rpgGame.netData.map.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 论剑计时开始
+	 * 论剑挑战结果
 	 */
-	public class SCLunJianTimeStartMessage extends Message {
+	public class SCLunJianResultMessage extends Message {
 	
 		//论剑ID
 		private var _ljId: int;
+		
+		//挑战是否成功(0否1是)
+		private var _success: int;
 		
 		
 		/**
@@ -22,6 +25,8 @@ package com.rpgGame.netData.map.message{
 		override protected function writing(): Boolean{
 			//论剑ID
 			writeShort(_ljId);
+			//挑战是否成功(0否1是)
+			writeByte(_success);
 			return true;
 		}
 		
@@ -31,6 +36,8 @@ package com.rpgGame.netData.map.message{
 		override protected function reading(): Boolean{
 			//论剑ID
 			_ljId = readShort();
+			//挑战是否成功(0否1是)
+			_success = readByte();
 			return true;
 		}
 		
@@ -39,7 +46,7 @@ package com.rpgGame.netData.map.message{
 		 * @return 
 		 */
 		override public function getId(): int {
-			return 227502;
+			return 227503;
 		}
 		
 		/**
@@ -55,6 +62,21 @@ package com.rpgGame.netData.map.message{
 		 */
 		public function set ljId(value: int): void{
 			this._ljId = value;
+		}
+		
+		/**
+		 * get 挑战是否成功(0否1是)
+		 * @return 
+		 */
+		public function get success(): int{
+			return _success;
+		}
+		
+		/**
+		 * set 挑战是否成功(0否1是)
+		 */
+		public function set success(value: int): void{
+			this._success = value;
 		}
 		
 	}

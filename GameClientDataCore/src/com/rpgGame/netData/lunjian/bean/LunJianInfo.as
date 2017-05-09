@@ -1,4 +1,4 @@
-package com.rpgGame.netData.map.bean{
+package com.rpgGame.netData.lunjian.bean{
 	
 	
 	import org.game.netCore.net.Bean;
@@ -14,8 +14,8 @@ package com.rpgGame.netData.map.bean{
 	 */
 	public class LunJianInfo extends Bean {
 	
-		//论剑ID
-		private var _ljId: int;
+		//论剑类型
+		private var _type: int;
 		
 		//当前难度
 		private var _difficut: int;
@@ -24,8 +24,8 @@ package com.rpgGame.netData.map.bean{
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//论剑ID
-			writeShort(_ljId);
+			//论剑类型
+			writeShort(_type);
 			//当前难度
 			writeByte(_difficut);
 			return true;
@@ -35,26 +35,26 @@ package com.rpgGame.netData.map.bean{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//论剑ID
-			_ljId = readShort();
+			//论剑类型
+			_type = readShort();
 			//当前难度
 			_difficut = readByte();
 			return true;
 		}
 		
 		/**
-		 * get 论剑ID
+		 * get 论剑类型
 		 * @return 
 		 */
-		public function get ljId(): int{
-			return _ljId;
+		public function get type(): int{
+			return _type;
 		}
 		
 		/**
-		 * set 论剑ID
+		 * set 论剑类型
 		 */
-		public function set ljId(value: int): void{
-			this._ljId = value;
+		public function set type(value: int): void{
+			this._type = value;
 		}
 		
 		/**

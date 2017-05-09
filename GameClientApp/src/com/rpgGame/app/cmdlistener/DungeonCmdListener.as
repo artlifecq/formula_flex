@@ -1,7 +1,7 @@
 package com.rpgGame.app.cmdlistener
 {
 	import com.rpgGame.core.events.DungeonEvent;
-	import com.rpgGame.netData.map.message.SCLunJianPanelInfosMessage;
+	import com.rpgGame.netData.lunjian.message.SCLunJianPanelInfosMessage;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;

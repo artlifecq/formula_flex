@@ -1,6 +1,5 @@
-package com.rpgGame.netData.map.message{
-	import com.rpgGame.netData.map.bean.LunJianInfo;
-	
+package com.rpgGame.netData.lunjian.message{
+	import com.rpgGame.netData.lunjian.bean.LunJianInfo;
 	import org.game.netCore.net.Message;
 	
 	/** 

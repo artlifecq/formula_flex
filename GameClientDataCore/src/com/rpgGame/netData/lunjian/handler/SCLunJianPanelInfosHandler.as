@@ -1,6 +1,6 @@
-package com.rpgGame.netData.map.handler{
+package com.rpgGame.netData.lunjian.handler{
 
-	import com.rpgGame.netData.map.message.SCLunJianPanelInfosMessage;
+	import com.rpgGame.netData.lunjian.message.SCLunJianPanelInfosMessage;
 	import org.game.netCore.net.Handler;
 
 	public class SCLunJianPanelInfosHandler extends Handler {

@@ -1,4 +1,4 @@
-package com.rpgGame.netData.map.message{
+package com.rpgGame.netData.lunjian.message{
 	import org.game.netCore.net.Message;
 	
 	/** 

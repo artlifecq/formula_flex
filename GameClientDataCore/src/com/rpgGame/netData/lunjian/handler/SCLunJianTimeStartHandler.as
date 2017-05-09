@@ -1,6 +1,6 @@
-package com.rpgGame.netData.map.handler{
+package com.rpgGame.netData.lunjian.handler{
 
-	import com.rpgGame.netData.map.message.SCLunJianTimeStartMessage;
+	import com.rpgGame.netData.lunjian.message.SCLunJianTimeStartMessage;
 	import org.game.netCore.net.Handler;
 
 	public class SCLunJianTimeStartHandler extends Handler {

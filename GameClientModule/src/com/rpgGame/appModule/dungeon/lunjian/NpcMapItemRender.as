@@ -1,12 +1,11 @@
 package com.rpgGame.appModule.dungeon.lunjian
 {
-	import com.rpgGame.coreData.cfg.LunJianCfg;
-	import com.rpgGame.coreData.clientConfig.Q_lunjian;
-	import com.rpgGame.coreData.info.map.SceneData;
-	
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	
 	import org.mokylin.skin.app.jianghu.lunjian.LunJian_NameItem;
+	import org.mokylin.skin.app.jianghu.lunjian.NameItemSelect;
+	
+	import starling.display.DisplayObject;
 	
 	/**
 	 *npc所在地图渲染器
@@ -29,28 +28,40 @@ package com.rpgGame.appModule.dungeon.lunjian
 			}
 			return 0;
 		}
+		
+		override protected function onTouchTarget(target:DisplayObject):void
+		{
+			super.onTouchTarget(target);
+			if(target==_skin.selectedBtn){
+				_skin.selectedBtn.isSelected=true;
+			}
+		}
 			
 		
 		override protected function initialize():void
 		{
 			_skin=new LunJian_NameItem();
 			_skin.toSprite(this);
+			_skin.selectedBtn.defaultIcon=null;
+			
+			var btnSkin:NameItemSelect=new NameItemSelect();
+			_skin.selectedBtn.upSkin=btnSkin.__NameItemSelect_UIAsset2;
+			_skin.selectedBtn.hoverSkin=btnSkin.__NameItemSelect_UIAsset1;
+			_skin.selectedBtn.selectedUpSkin=btnSkin.__NameItemSelect_UIAsset1;
+			_skin.selectedBtn.selectedDownSkin=btnSkin.__NameItemSelect_UIAsset1;
+			_skin.selectedBtn.selectedHoverSkin=btnSkin.__NameItemSelect_UIAsset1;
+			_skin.selectedBtn.downSkin=btnSkin.__NameItemSelect_UIAsset1;
 		}
 		
 		override protected function commitData():void
 		{
 			if(_skin&&this.owner){
-				var data:SceneData=_data as SceneData;
-				_skin.lbName.text=data.name;
-				_skin.lbLevel.text="("+data.requiredLevel+")";
-				var list:Vector.<Q_lunjian>=LunJianCfg.getCfgByMapId(data.sceneId);
-				var num:int=0;
-				var len:int=list.length;
-				for(var i:int=0;i<len;i++){
-					
-				}
-//				_skin.lbNum.text=data.leftNum.toString();
-//				_skin.lbNum.visible=_skin.numBg.visible=data.leftNum!=0;
+				var data:NpcMapItemData=_data as NpcMapItemData;
+				_skin.lbName.text=data.sceneData.name;
+				_skin.lbLevel.text="("+data.sceneData.requiredLevel+")";
+				_skin.lbNum.text=data.leftNum.toString();
+				_skin.lbNum.visible=_skin.numBg.visible=data.leftNum!=0;
+				_skin.selectedBtn.isSelected=this.owner.selectedItem==data;
 			}
 		}
 	}

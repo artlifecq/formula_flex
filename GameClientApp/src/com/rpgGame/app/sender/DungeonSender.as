@@ -1,6 +1,6 @@
 package com.rpgGame.app.sender
 {
-	import com.rpgGame.netData.map.message.CSLunJianPanelInfosMessage;
+	import com.rpgGame.netData.lunjian.message.CSLunJianPanelInfosMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
 

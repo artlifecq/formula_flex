@@ -56,7 +56,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 				_skin.lbName.text=npcCfg.q_name;
 				_skin.lbLevel.text=itemData.cfg.q_level+"";
 				_skin.lbZhanli.text=itemData.cfg.q_attack_power+"";
-				_skin.mc_nandu.gotoAndStop(itemData.diff);
+				_skin.mc_nandu.gotoAndStop(itemData.diff.toString());
 			}
 		}
 	}

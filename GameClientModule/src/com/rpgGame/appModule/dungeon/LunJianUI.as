@@ -4,12 +4,13 @@ package com.rpgGame.appModule.dungeon
 	import com.rpgGame.appModule.common.ViewUI;
 	import com.rpgGame.appModule.dungeon.lunjian.LunJianItemData;
 	import com.rpgGame.appModule.dungeon.lunjian.LunJianItemRender;
+	import com.rpgGame.appModule.dungeon.lunjian.NpcMapItemData;
 	import com.rpgGame.appModule.dungeon.lunjian.NpcMapItemRender;
 	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.coreData.cfg.LunJianCfg;
 	import com.rpgGame.coreData.clientConfig.Q_lunjian;
 	import com.rpgGame.coreData.info.map.SceneData;
-	import com.rpgGame.netData.map.bean.LunJianInfo;
+	import com.rpgGame.netData.lunjian.bean.LunJianInfo;
 	
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.data.ListCollection;
@@ -32,8 +33,6 @@ package com.rpgGame.appModule.dungeon
 		private var npcDatas:ListCollection;
 		private var diffMap:HashMap;
 		private var mapDatas:ListCollection;
-
-		private var mapIds:Array;
 		
 		public function LunJianUI()
 		{
@@ -50,14 +49,25 @@ package com.rpgGame.appModule.dungeon
 //			_skin.list_npc.clipContent = true;
 			_skin.list_npc.scrollBarDisplayMode=ScrollBarDisplayMode.ALWAYS_VISIBLE;
 			
-			mapDatas=new ListCollection();
-			_skin.list_map.dataProvider=mapDatas;
+			
 			npcDatas=new ListCollection();
 			_skin.list_npc.dataProvider=npcDatas;
 			diffMap=new  HashMap(); 
 			
-			mapIds=LunJianCfg.mapDatas;
+			var mapIds:Array=LunJianCfg.mapDatas;
 			mapIds=mapIds.sort(sortMaps);
+			
+			var num:int=mapIds.length;
+			var mapList:Array=[];
+			for(var i:int=0;i<num;i++){
+				var info:NpcMapItemData=new NpcMapItemData();
+				info.sceneData=mapIds[i];
+				info.leftNum=0;
+				mapList.push(info);
+			}
+			
+			mapDatas=new ListCollection(mapList);
+			_skin.list_map.dataProvider=mapDatas;
 		}
 		
 		private function sortMaps(dataA:SceneData,dataB:SceneData):int
@@ -103,33 +113,56 @@ package com.rpgGame.appModule.dungeon
 		{
 			var num:int=datas.length;
 			for(var i:int=0;i<num;i++){
-				diffMap.add(datas[i].ljId,datas[i].difficut);
+				diffMap.add(datas[i].type,datas[i].difficut);
 			}
 			
-			_skin.list_map.selectedIndex=0;
-			updateNpcdata();
 			updateMapData();
+			updateNpcdata();
 		}
 		
 		private function updateMapData():void
 		{
-			
+			var datas:Array=mapDatas.data as Array;
+			var num:int=datas.length;
+			for(var i:int=0;i<num;i++){
+				var info:NpcMapItemData=datas[i];
+				info.leftNum=getLeftNum(info.sceneData);
+			}
+			_skin.list_map.selectedItem=mapDatas.getItemAt(0);
+			_skin.list_map.dataProvider.updateAll();
+		}
+		
+		private function getLeftNum(sceneData:SceneData):int
+		{
+			var list:Vector.<Q_lunjian>=LunJianCfg.getCfgByMapId(sceneData.sceneId);
+			var num:int=list.length;
+			var leftNum:int=0;
+			var diff:int;
+			for(var i:int=0;i<num;i++){
+				diff=diffMap.getValue(list[i].q_type); 
+				leftNum+=(3-diff);
+			}
+			return leftNum;
 		}
 		
 		private function updateNpcdata():void
 		{
-			var selected:SceneData=_skin.list_map.selectedItem as SceneData;			
+			var selected:NpcMapItemData=_skin.list_map.selectedItem as NpcMapItemData;			
 			if(!selected){
 				return ;
 			}
 			npcDatas.removeAll();
-			var list:Vector.<Q_lunjian>=LunJianCfg.getCfgByMapId(selected.sceneId);
+			var list:Vector.<Q_lunjian>=LunJianCfg.getCfgByMapId(selected.sceneData.sceneId);
 			list=list.sort(sortLunjian);
 			var num:int=list.length;
 			for(var i:int=0;i<num;i++){
 				var data:LunJianItemData=new LunJianItemData();
-				data.cfg=list[i];
-				data.diff=diffMap.getValue(list[i].q_id);
+				data.diff=diffMap.getValue(list[i].q_type);
+				if(data.diff<3){
+					data.cfg=LunJianCfg.getCfgByInfo(selected.sceneData.sceneId,list[i].q_type,data.diff+1);
+				}else{
+					data.cfg=list[i];
+				}
 				npcDatas.addItem(data);
 			}
 			npcDatas.updateAll();

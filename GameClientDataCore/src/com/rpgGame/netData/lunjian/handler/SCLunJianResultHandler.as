@@ -1,6 +1,6 @@
-package com.rpgGame.netData.map.handler{
+package com.rpgGame.netData.lunjian.handler{
 
-	import com.rpgGame.netData.map.message.SCLunJianResultMessage;
+	import com.rpgGame.netData.lunjian.message.SCLunJianResultMessage;
 	import org.game.netCore.net.Handler;
 
 	public class SCLunJianResultHandler extends Handler {
