@@ -71,7 +71,7 @@ package com.rpgGame.app.manager
 					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveCollect);
 					break;
 				case SceneCharType.DROP_GOODS:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveDropGoods);
+					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveDropGoods,null,null,onDropGoods);
 					break;
 				case SceneCharType.STALL:
 					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onWalkToStall);
@@ -226,6 +226,23 @@ package com.rpgGame.app.manager
 					MountManager.collectMountItem(dropGoodsData.id, dropGoodsData.name);
 				else*/
 					SceneDropGoodsManager.selectedDropGoods(dropGoodsData);
+			}
+		}
+		
+		private static function onDropGoods(role : SceneRole):void
+		{
+			if (role == null || !role.usable)
+				return;
+			var actor : SceneRole = MainRoleManager.actor;
+			var dist : int = MathUtil.getDistanceNoSqrt(actor.x, actor.z, role.x, role.z);
+			var dropGoodsData : SceneDropGoodsData = role.data as SceneDropGoodsData;
+			var farDistance : int = dropGoodsData.farDistance;
+			if (dist < farDistance * farDistance)
+			{
+				/*if (dropGoodsData.isMount)
+				MountManager.collectMountItem(dropGoodsData.id, dropGoodsData.name);
+				else*/
+				SceneDropGoodsManager.selectedDropGoods(dropGoodsData);
 			}
 		}
 

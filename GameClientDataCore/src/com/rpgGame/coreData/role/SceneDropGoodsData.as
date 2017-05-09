@@ -1,5 +1,7 @@
 package com.rpgGame.coreData.role
 {
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.type.AvatarUrl;
 	import com.rpgGame.netData.map.bean.DropGoodsInfo;
 	import com.rpgGame.netData.map.message.ResRoundGoodsExtraMessage;
@@ -27,6 +29,7 @@ package com.rpgGame.coreData.role
 		public var farDistance:int=200;
 		
 		private var isBaoXiang:Boolean=true;
+		private var _qitem:Q_item;
 		
 		public function SceneDropGoodsData()
 		{
@@ -55,6 +58,8 @@ package com.rpgGame.coreData.role
 		{
 			goodsDatas=goods;
 			id=goodsDatas.dropGoodsId.ToGID();
+			_qitem = ItemConfig.getQItemByID(goods.itemModelId);
+			this.name = _qitem.q_name;
 			avatarRes="goods/"+goodsDatas.itemModelId+"/"+goodsDatas.itemModelId;
 			if(isBaoXiang){
 				avatarRes=AvatarUrl.BAO_XIANG;

@@ -482,6 +482,7 @@ package com.rpgGame.app.manager.role
 			role.setGroundXY(data.x, data.y);
 			role.rotationY = data.direction;
 			SceneManager.addSceneObjToScene(role, true, false, false);
+			DropGoodsManager.getInstance().addDropGoods(role);
 		}
 		
 		/**

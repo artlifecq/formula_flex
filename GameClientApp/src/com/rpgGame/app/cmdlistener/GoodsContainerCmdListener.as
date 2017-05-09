@@ -11,6 +11,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.backpack.message.ResItemChangeMessage;
 	import com.rpgGame.netData.backpack.message.ResItemInfoMessage;
 	import com.rpgGame.netData.backpack.message.ResItemRemoveMessage;
+	import com.rpgGame.netData.backpack.message.ResTakeUpSuccessMessage;
 	import com.rpgGame.netData.backpack.message.ResUseItemSuccessMessage;
 	import com.rpgGame.netData.equip.message.ResEquipInfoMessage;
 	import com.rpgGame.netData.equip.message.ResEquipOperateResultMessage;
@@ -42,6 +43,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(108103, onResItemChangeMessage );
 			SocketConnection.addCmdListener(108104, onResItemRemoveMessage );
 			SocketConnection.addCmdListener(108105, onResUseItemSuccessMessage );
+			SocketConnection.addCmdListener(108107, onResTakeUpSuccessMessage );
 			SocketConnection.addCmdListener(108115, onResChangeBindItemMessage );
 			SocketConnection.addCmdListener(108116, onResChangeLimitItemMessage );
 			
@@ -58,6 +60,10 @@ package com.rpgGame.app.cmdlistener
 			finish();
 		}
 		
+		private function onResTakeUpSuccessMessage(msg:ResTakeUpSuccessMessage):void
+		{
+			trace(msg.goodsId,msg.goodModelId);
+		}
 		private function onResEquipOperateResultMessage(msg:ResEquipOperateResultMessage):void
 		{
 			switch(msg.opaque){
