@@ -7,6 +7,7 @@
 	import com.rpgGame.app.cmdlistener.ChatCmdListener;
 	import com.rpgGame.app.cmdlistener.CheatsCmdListerner;
 	import com.rpgGame.app.cmdlistener.DaTiCmdListener;
+	import com.rpgGame.app.cmdlistener.DungeonCmdListener;
 	import com.rpgGame.app.cmdlistener.FightSoulCmdListener;
 	import com.rpgGame.app.cmdlistener.FriendCmdListener;
 	import com.rpgGame.app.cmdlistener.GMCmdListener;
@@ -141,6 +142,7 @@
 			register("MeridianCmdListerner",MeridianCmdListerner);
 			register("ZhanGongContainerCmdListener", ZhanGongContainerCmdListener); //战功
 			register("CheatsCmdListerner",CheatsCmdListerner);
+			register("DungeonCmdListener",DungeonCmdListener);
 		}
 	}
 }
