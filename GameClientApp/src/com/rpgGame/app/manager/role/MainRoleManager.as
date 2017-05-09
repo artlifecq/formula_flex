@@ -88,10 +88,6 @@ package com.rpgGame.app.manager.role
 		{
 			//角色信息
 			HeroData.setUserLoginInfo(actorInfo, heroInfo);
-            EventManager.dispatchEvent(RoleEvent.UPDATE_NEEDLE, 
-                MainRoleManager.actor, 
-                0, 
-                (MainRoleManager.actor.data as HeroData).totalStat.getResData(CharAttributeType.RES_JING_ZHENG));
 
 //			if(heroProto.goodsContainerModuleObj)
 //			{
@@ -159,6 +155,11 @@ package com.rpgGame.app.manager.role
 				{
 //					_actor.headFace.addTaskIco(AssetUrl.JIMAOXIN);
 				}
+                
+                EventManager.dispatchEvent(RoleEvent.UPDATE_NEEDLE, 
+                    _actor, 
+                    0, 
+                    data.totalStat.getResData(CharAttributeType.RES_JING_ZHENG));
 			}
 		}
 
