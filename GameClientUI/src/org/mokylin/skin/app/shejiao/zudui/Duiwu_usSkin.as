@@ -66,6 +66,8 @@ package org.mokylin.skin.app.shejiao.zudui
 
 		public var head5:feathers.controls.SkinnableContainer;
 
+		public var imgCaptain:feathers.controls.UIAsset;
+
 		public var jingyanbg:feathers.controls.UIAsset;
 
 		public var jingyanbg2:feathers.controls.UIAsset;
@@ -97,7 +99,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			this.currentState = "normal";
 			this.height = 445;
 			this.width = 912;
-			this.elementsContent = [__Duiwu_usSkin_UIAsset1_i(),__Duiwu_usSkin_UIAsset2_i(),ui_weijiaru_i(),chk_accept_invite_i(),chk_accept_apply_i(),grp_jingyan_i(),btn_exit_i(),btn_add_i(),btn_create_i(),gPlayer1_i(),gPlayer5_i(),gPlayer2_i(),gPlayer3_i(),gPlayer4_i()];
+			this.elementsContent = [__Duiwu_usSkin_UIAsset1_i(),__Duiwu_usSkin_UIAsset2_i(),ui_weijiaru_i(),chk_accept_invite_i(),chk_accept_apply_i(),grp_jingyan_i(),btn_exit_i(),btn_add_i(),btn_create_i(),gPlayer1_i(),gPlayer5_i(),gPlayer2_i(),gPlayer3_i(),gPlayer4_i(),imgCaptain_i()];
 			
 			states = {
 			};
@@ -176,8 +178,10 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Check = new feathers.controls.Check();
 			chk_accept_apply = temp;
 			temp.name = "chk_accept_apply";
+			temp.height = 23;
 			temp.label = "我是队长时，自动接收他人发出的入队申请";
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
+			temp.width = 300;
 			temp.x = 11;
 			temp.y = 417;
 			return temp;
@@ -188,8 +192,10 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Check = new feathers.controls.Check();
 			chk_accept_invite = temp;
 			temp.name = "chk_accept_invite";
+			temp.height = 23;
 			temp.label = "没有组队时，自动接收他人发出的组队邀请";
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
+			temp.width = 300;
 			temp.x = 11;
 			temp.y = 386;
 			return temp;
@@ -388,6 +394,19 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.width = 143;
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function imgCaptain_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			imgCaptain = temp;
+			temp.name = "imgCaptain";
+			temp.height = 83;
+			temp.styleName = "ui/app/shejiao/zudui/duizhang.png";
+			temp.width = 27;
+			temp.x = 7;
+			temp.y = 77;
 			return temp;
 		}
 

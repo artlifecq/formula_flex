@@ -1,6 +1,7 @@
 package  com.rpgGame.appModule.social
 {
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.appModule.social.team.TeamMainPanelExt;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.MCUtil;
 	
@@ -27,7 +28,7 @@ package  com.rpgGame.appModule.social
 		
 		
 		private var _subGuild:*;
-		private var _subTeam:*;
+		private var _subTeam:TeamMainPanelExt;
 		private var _subFriend:*;
 		private var _curSub:SkinUI;
 		
@@ -81,7 +82,7 @@ package  com.rpgGame.appModule.social
 			_curSub=sub;
 			(_curSub as DisplayObject).x=0;
 			(_curSub as DisplayObject).y=0;
-			this.addChildAt(_curSub as DisplayObject,1);
+			this.addChild(_curSub);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -124,8 +125,12 @@ package  com.rpgGame.appModule.social
 			return _subGuild;
 		}
 
-		public function get subTeam():*
+		public function get subTeam():TeamMainPanelExt
 		{
+			if (!_subTeam) 
+			{
+				_subTeam=new TeamMainPanelExt();
+			}
 			return _subTeam;
 		}
 

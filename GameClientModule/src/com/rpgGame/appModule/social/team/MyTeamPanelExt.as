@@ -2,15 +2,18 @@ package com.rpgGame.appModule.social.team
 {
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.SystemSetManager;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.TeamSender;
 	import com.rpgGame.appModule.social.team.mediator.PlayerMediator;
+	import com.rpgGame.core.events.SystemEvent;
 	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.FilterUtil;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.team.bean.TeamInfo;
@@ -22,6 +25,7 @@ package com.rpgGame.appModule.social.team
 	import gs.easing.Back;
 	import gs.easing.Circ;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.shejiao.zudui.Duiwu_usSkin;
 	
 	import starling.events.Event;
@@ -46,9 +50,11 @@ package com.rpgGame.appModule.social.team
 			playerList.push( new PlayerMediator( _skin.gPlayer3,_skin.dui3,_skin.head3,_skin.lab_map3 , this));
 			playerList.push( new PlayerMediator( _skin.gPlayer4,_skin.dui4,_skin.head4,_skin.lab_map4 , this));
 			playerList.push( new PlayerMediator( _skin.gPlayer5,_skin.dui5,_skin.head5,_skin.lab_map5 , this));
+			
+			_skin.imgCaptain.x=_skin.gPlayer1.x+_skin.gPlayer1.width-_skin.imgCaptain.width;
 			registerListeners();
 		}
-		 public function registerListeners():void
+		 private function registerListeners():void
 		{
 			
 			
@@ -57,19 +63,23 @@ package com.rpgGame.appModule.social.team
 			_skin.btn_exit.addEventListener(Event.TRIGGERED , OnExitTeam);
 			
 			
-			_skin.chk_accept_apply.addEventListener(Event.CHANGE,OnStateButton);
-			_skin.chk_accept_invite.addEventListener(Event.CHANGE,OnStateButton);
+			_skin.chk_accept_apply.addEventListener(Event.TRIGGERED,OnStateButton);
+			_skin.chk_accept_invite.addEventListener(Event.TRIGGERED,OnStateButton);
+			var str:String="组队经验加成:<br>";
+			str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,"每多组一个队员，怪物经验总量将会上升5%<br>");
+			str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_YELLOW,"当前上升$%/20%");
 			
+			TipTargetManager.show(_skin.grp_jingyan,TargetTipsMaker.makeSimplePropChangeTextTips(str,null,getTipValue));
 		}
 		private function OnStateButton(event:Event):void
 		{
 			var sbtn:Check = event.currentTarget as Check;
 			if(_skin.chk_accept_apply == sbtn)
 			{
-				Mgr.teamMgr.autoAllowApply = sbtn.isSelected;
+				Mgr.teamMgr.autoAllowApply = !Mgr.teamMgr.autoAllowApply;
 			}else if(_skin.chk_accept_invite == sbtn)
 			{
-				Mgr.teamMgr.autoAcceptInvite = sbtn.isSelected;
+				Mgr.teamMgr.autoAcceptInvite = !Mgr.teamMgr.autoAcceptInvite;
 			}
 			Mgr.teamMgr.UpdateAutoOpration();
 		}
@@ -81,7 +91,7 @@ package com.rpgGame.appModule.social.team
 		{
 			if(Mgr.teamMgr.isTeamFull)
 			{
-			//	FloatingText.showUp( TextUtil.FormatStr("很抱歉，您的队伍已经满员了") );
+				NoticeManager.mouseFollowNotify("很抱歉，您的队伍已经满员了" );
 			}else
 			{
 				Mgr.teamMgr.ShowSearchPanel();
@@ -97,22 +107,22 @@ package com.rpgGame.appModule.social.team
 			var p:PlayerMediator;
 			var teamInfo:TeamInfo = Mgr.teamMgr.teamInfo;
 			var nearNum:int = 0;
+			_skin.imgCaptain.visible=false;
+			_skin.btn_add.visible=false;
+			_skin.btn_create.visible=false;
+			_skin.btn_exit.visible=false;
 			if(teamInfo != null && !teamInfo.teamId.IsZero())
 			{
 				var myMemberInfo:TeamMemberInfo = Mgr.teamMgr.teamMemberMap.getValue(MainRoleManager.actorInfo.id);
 				var len:int = playerList.length;
 				var tLen:int = teamInfo.memberinfo.length;
+				_skin.imgCaptain.visible=true;
 				for (var i:int = 0; i < len; i++) 
 				{
 					p = playerList[i];
 					if(i < tLen)
 					{
 						p.SetData( teamInfo.memberinfo[i] );
-						if(teamInfo.memberinfo[i].memberMapModelID !=MapDataManager.currentScene.sceneId
-							|| !myMemberInfo.memberMapUniqueID.EqualTo( teamInfo.memberinfo[i].memberMapUniqueID))
-							p.toFar = true;
-						else
-							p.toFar = false;
 					}else
 					{
 						p.SetData( null );
@@ -120,7 +130,7 @@ package com.rpgGame.appModule.social.team
 				}
 				_skin.ui_weijiaru.visible = false;
 				
-				
+				_skin.btn_exit.visible=true;
 				if(Mgr.teamMgr.isCaptain)
 				{
 					_skin.btn_add.visible = true;
@@ -132,9 +142,11 @@ package com.rpgGame.appModule.social.team
 			{
 				for each(p in playerList) 
 				{
+					p.clearModel();
 					p.visible = false;
 				}
 				_skin.ui_weijiaru.visible = true;
+				_skin.btn_create.visible=true;
 			}
 			
 			_skin.chk_accept_apply.isSelected=Mgr.teamMgr.autoAllowApply;
@@ -165,8 +177,24 @@ package com.rpgGame.appModule.social.team
 				_skin.jingyanbg2.filter = FilterUtil.getGrayFilter();
 				_skin.num_jingyan.label="0x";
 			}
+			
 		}
-		
+		private function getTipValue():Array
+		{
+			var nearNum:int = 0;
+			for each(var p:PlayerMediator in playerList)
+			{
+				if(p.member != null && !p.toFar)
+				{
+					nearNum ++;
+				}
+			}
+			if (nearNum>1) 
+			{
+				return [(nearNum-1)*5];
+			}
+			return [0];
+		}
 		private function OnTeamInfoChange(event:TeamEvent):void
 		{
 			update();
@@ -187,11 +215,17 @@ package com.rpgGame.appModule.social.team
 		override protected function onHide():void
 		{
 			super.onHide();
-			
+			clearModel();
 			Mgr.teamMgr.removeEventListener(TeamEvent.GET_TEAM_INFO , OnTeamInfoChange);
 			Mgr.teamMgr.removeEventListener(TeamEvent.SYSTEM_SET_CHANGE , OnSystemSetChange);
 		}
-		
+		private function clearModel():void
+		{
+			for each(var p:PlayerMediator in playerList)
+			{
+				p.clearModel();
+			}
+		}
 		override protected function onShow():void
 		{
 			super.onShow();
@@ -206,7 +240,10 @@ package com.rpgGame.appModule.social.team
 			
 			Mgr.teamMgr.addEventListener(TeamEvent.GET_TEAM_INFO , OnTeamInfoChange);
 			Mgr.teamMgr.addEventListener(TeamEvent.SYSTEM_SET_CHANGE , OnSystemSetChange);
+			
 		}
+		
+	
 		
 		private function OnSystemSetChange(evnet:TeamEvent):void
 		{
@@ -215,9 +252,10 @@ package com.rpgGame.appModule.social.team
 		
 		private function UpdateSetInfo():void
 		{
-			if(_skin.chk_accept_invite.isEnabled == !SystemSetManager.SYSTEMSET_REFUSING_TEAM)
+			var isAutoAccept:Boolean=!SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_REFUSING_TEAM)
+			if(_skin.chk_accept_invite.isEnabled ==isAutoAccept )
 				return ;
-			if(SystemSetManager.SYSTEMSET_REFUSING_TEAM)
+			if(!isAutoAccept)
 			{
 				_skin.chk_accept_invite.isEnabled = false;
 				TipTargetManager.show(_skin.chk_accept_invite,TargetTipsMaker.makeSimpleTextTips(HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,"您在设置面板中勾选了“拒绝组队邀请”")));
@@ -226,6 +264,7 @@ package com.rpgGame.appModule.social.team
 				_skin.chk_accept_invite.isEnabled = true;
 				TipTargetManager.remove(_skin.chk_accept_invite);
 			}
+			
 		}
 		
 		public function TweenPanel():void

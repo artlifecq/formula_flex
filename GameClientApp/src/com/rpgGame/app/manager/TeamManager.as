@@ -1,8 +1,16 @@
 package com.rpgGame.app.manager
 {
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.sender.TeamSender;
+	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.SystemEvent;
 	import com.rpgGame.core.events.TeamEvent;
+	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.netData.team.bean.TeamInfo;
 	import com.rpgGame.netData.team.bean.TeamMemberBriefInfo;
 	import com.rpgGame.netData.team.bean.TeamMemberInfo;
@@ -10,6 +18,7 @@ package com.rpgGame.app.manager
 	import flash.events.EventDispatcher;
 	import flash.geom.Point;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
 
 	
@@ -17,13 +26,26 @@ package com.rpgGame.app.manager
 	
 	public class TeamManager extends EventDispatcher
 	{
+		public static const TYPE_TEAM_INVITE:int=0;
+		public static const TYPE_TEAM_JOIN:int=1;
+		public static const TYPE_TEAM_APPOINT_CAPTAIN:int=2;
 		public  static var ins:TeamManager=new TeamManager();
 
 		public function TeamManager()
 		{
+			EventManager.addEvent(SystemEvent.SYS_SET,onSystemSetChange);
 		}
-		/** 推荐加好友		 */
-		public var RECOMMAND_ADD_FRIEND:int = 9000;
+		
+		private function onSystemSetChange(type:int):void
+		{
+			// TODO Auto Generated method stub
+			if (SystemSetManager.SYSTEMSET_REFUSING_TEAM==type) 
+			{
+				//同不同意和自动不自动没关系
+				var isAutoAccept:Boolean=!SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_REFUSING_TEAM);
+				UpdateSystemSet();
+			}
+		}	
 		
 		public static const MAXMEMBER:int = 5; // 队伍最大人数
 		
@@ -35,7 +57,7 @@ package com.rpgGame.app.manager
 		private var _teamMemberMap:HashMap = new HashMap();
 		
 		/** 面板关闭的时候 记录玩家信息是否改变 面板打开时更新面板信息		 */		
-		public var isTeamInfoChange:Boolean = false;
+		public var isTeamInfoChange:Boolean = true;
 		
 		
 		/**
@@ -97,8 +119,7 @@ package com.rpgGame.app.manager
 		
 		public function ShowTeamAskPanel(type:int, teamId:long , member:TeamMemberInfo):void
 		{
-//			var ask:TeamAskPanelExt = Mgr.uiMgr.showPanelbyType( TeamAskPanelExt );
-//			ask.SetData( type , teamId , member);
+			AppManager.showApp(AppConstant.SOCIAL_TEAM_ALERT,{type:type,teamId:teamId,mem:member});
 		}
 		
 		public function FuncPrompRelationTimeOut(type:int , teamId:long, member:TeamMemberInfo):void
@@ -112,7 +133,7 @@ package com.rpgGame.app.manager
 		
 		public function UpdateAutoOpration():void
 		{
-			//TeamMsgUtil.instance.ReqSetTeamOpation( autoAllowApply?1:0,autoAcceptInvite?1:0);
+			TeamSender.ReqSetTeamOpation( autoAllowApply?1:0,autoAcceptInvite?1:0);
 		}
 		
 		/**
@@ -120,31 +141,32 @@ package com.rpgGame.app.manager
 		 */		
 		public function InvitePlayerJoinTeam(playerId:long):void
 		{
-//			if(_teamInfo != null && !_teamInfo.teamId.IsZero())
-//			{
-//				if(isCaptain)
-//				{
-//					if(Mgr.teamMgr.isTeamFull)
-//					{
-//						FloatingText.showUp( TextUtil.FormatStr("很抱歉，您的队伍已经满员了") );
-//					}else
-//					{
-//						TeamMsgUtil.instance.ReqInviteJoinTeam( playerId );
-//					}
-//				}else
-//				{
-//					FloatingText.showUp(TextUtil.FormatStr("很抱歉，只有队长才能发出组队邀请") );
-//				}
-//			}else
-//			{
-//				TeamMsgUtil.instance.ReqInviteJoinTeam( playerId );
-//			}
+			if(_teamInfo != null && !_teamInfo.teamId.IsZero())
+			{
+				if(isCaptain)
+				{
+					if(Mgr.teamMgr.isTeamFull)
+					{
+						NoticeManager.mouseFollowNotify("很抱歉，您的队伍已经满员了") ;
+					}else
+					{
+						TeamSender.ReqInviteJoinTeam( playerId );
+					}
+				}else
+				{
+					NoticeManager.mouseFollowNotify("很抱歉，只有队长才能发出组队邀请") ;
+				}
+			}else
+			{
+				TeamSender.ReqInviteJoinTeam( playerId );
+			}
 		}
 		/** 
 		 * 申请入队通知 
 		 */		
 		public function AddApplyPrompt(teamId:long , player:TeamMemberInfo):void
 		{
+			ShowTeamAskPanel(TYPE_TEAM_JOIN,teamId,player);
 			//Mgr.promptMgr.AddFuncPrompt(EnumFunctionPrompt.TYPE_TEAM_JOIN, [EnumFunctionPrompt.TYPE_TEAM_JOIN ,teamId, player]);
 		}
 		/**
@@ -152,6 +174,7 @@ package com.rpgGame.app.manager
 		 */		
 		public function AddInvitePrompt(teamId:long , member:TeamMemberInfo):void
 		{
+			ShowTeamAskPanel(TYPE_TEAM_INVITE,teamId,member);
 			//Mgr.promptMgr.AddFuncPrompt( EnumFunctionPrompt.TYPE_TEAM_INVITE,[EnumFunctionPrompt.TYPE_TEAM_INVITE , teamId, member ]);
 		}
 		
@@ -162,6 +185,7 @@ package com.rpgGame.app.manager
 		 */		
 		public function AppointCaptain(teamId:long , member:TeamMemberInfo):void
 		{
+			ShowTeamAskPanel(TYPE_TEAM_APPOINT_CAPTAIN,teamId,member);
 //			Mgr.promptMgr.AddFuncPromptWithSameCheck( EnumFunctionPrompt.TYPE_TEAM_APPOINT_CAPTAIN,[EnumFunctionPrompt.TYPE_TEAM_APPOINT_CAPTAIN,teamId,member],
 //				function(param:Array):Boolean
 //				{
@@ -186,31 +210,31 @@ package com.rpgGame.app.manager
 		 */		
 		public function PlayerLeaveTeam(playreId:long):void
 		{
-//			if(teamInfo != null)
-//			{
-//				if(Mgr.mainPlayer.gid != playreId.ToGID())
-//				{
-//					var mem:TeamMemberInfo;
-//					for each(mem in teamInfo.memberinfo)
-//					{
-//						if(mem.memberId.EqualTo( playreId))
-//						{
-//							var idx:int = teamInfo.memberinfo.indexOf( mem );
-//							teamInfo.memberinfo.splice( idx , 1);
-//							break;
-//						}
-//					}
-//				}
-//				var isDismiss:Boolean = false;
-//				if(teamInfo.memberinfo.length <= 1 || Mgr.mainPlayer.gid == playreId.ToGID())
-//				{
-//					teamInfo.memberinfo.length = 0;
-//					teamInfo.teamId.Clear();
-//					isDismiss = true;
-//					captain = null;
-//				}
-//				TeamInfoChange( teamInfo , false , isDismiss );
-//			}
+			if(teamInfo != null)
+			{
+				if(MainRoleManager.actorInfo.id != playreId.ToGID())
+				{
+					var mem:TeamMemberInfo;
+					for each(mem in teamInfo.memberinfo)
+					{
+						if(mem.memberId.EqualTo( playreId))
+						{
+							var idx:int = teamInfo.memberinfo.indexOf( mem );
+							teamInfo.memberinfo.splice( idx , 1);
+							break;
+						}
+					}
+				}
+				var isDismiss:Boolean = false;
+				if(teamInfo.memberinfo.length <= 1 || MainRoleManager.actorInfo.id == playreId.ToGID())
+				{
+					teamInfo.memberinfo.length = 0;
+					teamInfo.teamId.Clear();
+					isDismiss = true;
+					captain = null;
+				}
+				TeamInfoChange( teamInfo , false , isDismiss );
+			}
 		}
 		public function SetTeamInfoMap( teamInfo:TeamInfo ):void
 		{
@@ -227,25 +251,16 @@ package com.rpgGame.app.manager
 		}
 		public function TeamInfoChange( _teamInfo:TeamInfo , isCreated:Boolean = false , isDismiss:Boolean = false):void
 		{
-//			isTeamInfoChange = true;
-//			var playerNumChange:Boolean = isCreated;
-//			if(teamInfo != null && teamInfo.memberinfo.length != _teamInfo.memberinfo.length)
-//				playerNumChange = true;
-//			
-//			teamInfo = _teamInfo;
-//			SetTeamInfoMap( _teamInfo );
-//			DispatchEvent( TeamEvent.GET_TEAM_INFO , _teamInfo , isCreated , isDismiss);
-//			
-//			if(recommandTimeoutId != 0)
-//				FrameMgr.ClearTimeout( recommandTimeoutId );
-//			if(isDismiss)
-//			{
-//				recommandTimeoutId = 0;
-//			}else
-//			{
-//				if(playerNumChange)
-//					recommandTimeoutId = FrameMgr.SetTimeout( CheckRecommandAddFriend , RECOMMAND_ADD_FRIEND );
-//			}
+			isTeamInfoChange = true;
+			var playerNumChange:Boolean = isCreated;
+			if(teamInfo != null && teamInfo.memberinfo.length != _teamInfo.memberinfo.length)
+				playerNumChange = true;
+			
+			teamInfo = _teamInfo;
+			SetTeamInfoMap( _teamInfo );
+			DispatchEvent( TeamEvent.GET_TEAM_INFO , _teamInfo , isCreated , isDismiss);
+			
+	
 		}
 		private var recommandTimeoutId:int;
 		private function CheckRecommandAddFriend():void
@@ -280,19 +295,19 @@ package com.rpgGame.app.manager
 		 */		
 		public function teammateIsSameMap(gid:int):Boolean
 		{
-//			if(teamMemberMap.containsKey( gid ))
-//			{
-//				var myMem:TeamMemberInfo = teamMemberMap.getValue( MainRoleManager.actorInfo.serverID );
-//				var mem:TeamMemberInfo = teamMemberMap.getValue( gid );
-//				if(mem != null && myMem !=null && mem.memberMapModelID == Mgr.sceneMap.mapModelId && mem.memberMapLine == Mgr.sceneMap.mapLine && myMem.memberMapUniqueID.EqualTo( mem.memberMapUniqueID))
-//					return true;
-//				else
-//					return false;
-//			}else
-//			{
-//				return false;
-//			}
-			return false;
+			if(teamMemberMap.containsKey( gid ))
+			{
+				var myMem:TeamMemberInfo = teamMemberMap.getValue( MainRoleManager.actorInfo.serverID );
+				var mem:TeamMemberInfo = teamMemberMap.getValue( gid );
+				if(mem != null && myMem !=null && mem.memberMapModelID == MapDataManager.currentScene.sceneId  && myMem.memberMapUniqueID.EqualTo( mem.memberMapUniqueID))
+					return true;
+				else
+					return false;
+			}else
+			{
+				return false;
+			}
+		
 		}
 		
 		public function isTeamateById(teamId:long):Boolean
@@ -306,8 +321,8 @@ package com.rpgGame.app.manager
 		 */		
 		public function SynMemberInfo(list:Vector.<TeamMemberBriefInfo>):void
 		{
-			trace("===========================================================");
-			trace("SynMemberInfo");
+			
+			DispatchEvent(TeamEvent.TEAM_MEM_ATTR_CHANGE,list);
 		}
 		
 		/**
@@ -395,6 +410,44 @@ package com.rpgGame.app.manager
 		public function get teamMemberMap():HashMap
 		{
 			return _teamMemberMap;
+		}
+		public function loopPlayer(playerId:long):void
+		{
+			
+		}
+		public function move2TeamMember(heroId:*):void
+		{
+			// TODO Auto Generated method stub
+			var mem:TeamMemberInfo=getTeamMember(heroId);
+			if (mem) 
+			{
+				
+			}
+		}
+		private function getTeamMember(playerId:long):TeamMemberInfo
+		{
+			if (teamInfo&&teamInfo.memberinfo.length>0) 
+			{
+				for each (var mem:TeamMemberInfo in teamInfo.memberinfo) 
+				{
+					if (mem.memberId.EqualTo(playerId)) 
+					{
+						return mem;
+					}
+				}
+			}
+			return null;
+		}
+		public function reqJoinToTeam(teamId:long):void
+		{
+			if (hasTeam) 
+			{
+				GameAlert.showAlertUtil("您已有队伍，是否退出现在队伍申请加入其它队伍?",TeamSender.ReqApplyJoinTeam,teamId)
+			}
+			else
+			{
+				TeamSender.ReqApplyJoinTeam(teamId);
+			}
 		}
 	}
 }

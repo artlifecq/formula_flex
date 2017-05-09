@@ -1,6 +1,7 @@
 package com.rpgGame.app.utils
 {
 	import com.rpgGame.app.manager.MenuManager;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.TeamManager;
 	import com.rpgGame.app.manager.chat.ChatWindowManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -174,13 +175,14 @@ package com.rpgGame.app.utils
 			}
 
 			var datas : Array = data as Array;
-			var heroId : Number = datas[0];
+			var heroId : * = datas[0];
 			var heroName : String = datas[1];
 
 			switch (type)
 			{
 				case LangMenu.LOOK_HERO://查看玩家信息
 //					LookSender.reqLook(heroId,true);
+					Mgr.teamMgr.loopPlayer(heroId);
 					break;
 				case LangMenu.INVITE_JOIN_SOCIETY://邀请加入帮派
 					SocietyManager.reqInviteJoin(heroId);
@@ -214,10 +216,10 @@ package com.rpgGame.app.utils
 					TradeManager.invitePlayerTrade(heroId);
 					break;
 				case LangMenu.TRANSFER_THE_CAPTAIN://转移队长
-					//TeamManager.changeCaption( heroId );
+					TeamSender.ReqAppointNewCaptain(Mgr.teamMgr.teamInfo.teamId,heroId);
 					break;
 				case LangMenu.PLEASE_FROM_THE_TEAM://请离队伍
-					//TeamManager.kickPlayer( heroId );
+					TeamSender.ReqKickTeam(heroId);
 					break;
 				case LangMenu.LEAVE_TEAM://离开队伍
 //					if( TeamManager.isTeamLeader( MainRoleManager.actorID ) )//自己是队长
@@ -288,6 +290,9 @@ package com.rpgGame.app.utils
 					break;
 				case LangMenu.KICK_GUILD:
 					GuildManager.kickFamily();
+					break;
+				case LangMenu.MOVE_TO_HERO:
+					Mgr.teamMgr.move2TeamMember(heroId);
 					break;
 				
 			}

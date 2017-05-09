@@ -20,6 +20,9 @@ package com.rpgGame.core.events
 		/** 系统设置改变		 */		
 		public static const SYSTEM_SET_CHANGE:String = "systemSetChange";
 		
+		/***组队玩家状态改变**/
+		public static const TEAM_MEM_ATTR_CHANGE:String="team_mem_attr_change";
+		
 		public var data:*;
 		
 		public var isCreateTeam:Boolean = false;

@@ -5,6 +5,7 @@ package  com.rpgGame.appModule.social.team
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.sender.TeamSender;
+	import com.rpgGame.appModule.social.TimeCountUtil;
 	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.netData.team.bean.MapTeamInfo;
@@ -26,8 +27,7 @@ package  com.rpgGame.appModule.social.team
 	 */	
 	public class TeamListPanelExt extends SkinUI
 	{
-		private var itemList:Vector.<TeamListItemExt> = new Vector.<TeamListItemExt>();
-		private var showList:Vector.<TeamListItemExt> = new Vector.<TeamListItemExt>();
+	
 		
 	
 		private var _skin:Zudui_fujin;
@@ -45,7 +45,7 @@ package  com.rpgGame.appModule.social.team
 			list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			list.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			list.padding=2;
-			
+			registerListeners();
 		}
 		
 		private function createStoneCell():TeamListItemRender
@@ -57,11 +57,11 @@ package  com.rpgGame.appModule.social.team
 		{
 			if(ControlCoolDown.IsCustomCoolDown( EnumCustomCoolDown.TEAM_SEARCH_TEAM))
 			{
-				TeamSender.ReqSearchNearTeam("");
+				doRefresh();
 			}else
 			{
-				setTimeout(TeamSender.ReqSearchNearTeam ,
-					ControlCoolDown.GetCustomCooldownTime( EnumCustomCoolDown.TEAM_SEARCH_TEAM )+100, "");
+				setTimeout(doRefresh ,
+					ControlCoolDown.GetCustomCooldownTime( EnumCustomCoolDown.TEAM_SEARCH_TEAM )+100);
 			}
 		}
 		private function registerListeners():void
@@ -100,17 +100,23 @@ package  com.rpgGame.appModule.social.team
 		
 			if(ControlCoolDown.IsCustomCoolDown( EnumCustomCoolDown.TEAM_SEARCH_TEAM))
 			{
-				TeamSender.ReqSearchNearTeam("");
+				doRefresh();
 			}else
 			{
 				NoticeManager.mouseFollowNotify( "您的刷新太频繁了，请稍等一下" );
 			}
 		}
+		private function doRefresh():void
+		{
+			TeamSender.ReqSearchNearTeam("");
+			TimeCountUtil.ins.addButtonTimeCountDown(_skin.btn_shuaixin,"刷新列表",20);
+		}
 		private function OnApplyJoinTeam(event:Event):void
 		{
 			if(TeamListItemExt.curItem != null)
 			{
-				TeamSender.ReqApplyJoinTeam( TeamListItemExt.curItem.data.teamid );
+				//TeamSender.ReqApplyJoinTeam( TeamListItemExt.curItem.data.teamid );\
+				Mgr.teamMgr.reqJoinToTeam(TeamListItemExt.curItem.data.teamid );
 			}
 			else
 			{
@@ -142,17 +148,17 @@ package  com.rpgGame.appModule.social.team
 		private function SortList(a:MapTeamInfo , b:MapTeamInfo):int
 		{
 			var ret:int=sortSub(a.teamnum,b.teamnum,-1);
-			if (ret==0) 
+			if (ret!=0) 
 			{
 				return ret;
 			}
 			ret=sortSub(a.captainlv,b.captainlv,1);
-			if (ret==0) 
+			if (ret!=0) 
 			{
 				return ret;
 			}
 			ret=sortSub(a.averagelv,b.averagelv,1);
-			if (ret==0) 
+			if (ret!=0) 
 			{
 				return ret;
 			}

@@ -6,6 +6,7 @@ package  com.rpgGame.appModule.social.team
 	import org.mokylin.skin.app.shejiao.zudui.ZuiDuiSkin;
 	
 	import starling.display.DisplayObject;
+	import starling.events.Event;
 	
 
 	
@@ -16,8 +17,8 @@ package  com.rpgGame.appModule.social.team
 		public static const SUB_NEAR_PLAYER:String="team_sub_nearplayer";
 		private var _skin:ZuiDuiSkin;
 		private var _subMyTeam:MyTeamPanelExt;
-//		private var _teamList:TeamListPanelExt;
-//		private var _playerList:PlayerListPanelExt;
+		private var _teamList:TeamListPanelExt;
+		private var _playerList:TeamPlayerListPanelExt;
 		
 		private var _curSub:SkinUI;
 		
@@ -25,12 +26,40 @@ package  com.rpgGame.appModule.social.team
 		{
 			_skin=new ZuiDuiSkin();
 			super(_skin);
-			x = 10;
-			y = 48;
+			_skin.tab_duiwu.touchGroup=false;
+			_skin.tab_duiwu.touchable=true;
+			initEvent();
 		}
-		override protected function onTouchTarget(target:DisplayObject):void
+		private function initEvent():void
 		{
-			super.onTouchTarget(target);
+			_skin.tab_duiwu.addEventListener(Event.CHANGE, onTab);
+		}
+		private function onTab(e:Event):void
+		{
+			var index:int = this._skin.tab_duiwu.selectedIndex;
+			switch(index)
+			{
+				case 0:
+				{
+					showSubPanel(SUB_MY_TEAM);
+					break;
+				}
+				case 1:
+				{
+					showSubPanel(SUB_NEAR_TEAM);
+					break;
+				}
+				case 2:
+				{
+					showSubPanel(SUB_NEAR_PLAYER);
+					break;
+				}
+				default:
+				{
+					showSubPanel(SUB_MY_TEAM);
+					break;
+				}
+			}
 		}
 		public function showSubPanel(subType:String):void
 		{
@@ -42,18 +71,18 @@ package  com.rpgGame.appModule.social.team
 					sub=subMyTeam;
 					break;
 				}
-//				case SUB_FRIEND:
-//				{
-//					sub=subFriend;
-//					break;
-//				}
-//				case SUB_TEAM:
-//				{
-//					sub=subTeam;
-//					break;
-//				}
+				case SUB_NEAR_TEAM:
+				{
+					sub=teamList;
+					break;
+				}
+				case SUB_NEAR_PLAYER:
+				{
+					sub=playerList;
+					break;
+				}
 			}
-			if (sub==_curSub) 
+			if (sub==null||sub==_curSub) 
 			{
 				return;
 			}
@@ -64,7 +93,7 @@ package  com.rpgGame.appModule.social.team
 			_curSub=sub;
 			(_curSub as DisplayObject).x=20;
 			(_curSub as DisplayObject).y=74;
-			this.addChildAt(_curSub as DisplayObject,1);
+			this.addChild(_curSub);
 		}
 
 		/** 组队面板		 */
@@ -83,18 +112,18 @@ package  com.rpgGame.appModule.social.team
 			}
 		}
 		/** 队伍列表		 */
-//		public function get teamList():TeamListPanelExt
-//		{
-//			if(_teamList == null)
-//				_teamList = new TeamListPanelExt();
-//			return _teamList;
-//		}
-//		/** 玩家列表		 */
-//		public function get playerList():PlayerListPanelExt
-//		{
-//			if(_playerList == null)
-//				_playerList = new PlayerListPanelExt();
-//			return _playerList;
-//		}		
+		public function get teamList():TeamListPanelExt
+		{
+			if(_teamList == null)
+				_teamList = new TeamListPanelExt();
+			return _teamList;
+		}
+		/** 玩家列表		 */
+		public function get playerList():TeamPlayerListPanelExt
+		{
+			if(_playerList == null)
+				_playerList = new TeamPlayerListPanelExt();
+			return _playerList;
+		}		
 	}
 }

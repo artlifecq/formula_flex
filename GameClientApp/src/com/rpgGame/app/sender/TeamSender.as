@@ -65,7 +65,7 @@ package com.rpgGame.app.sender
 		 * 邀请玩家加入队伍
 		 * @param playerId
 		 */		
-		internal function ReqInviteJoinTeam( playerId:long ):void
+		public static function ReqInviteJoinTeam( playerId:long ):void
 		{
 			var msg:ReqInviteTeamMessage = new ReqInviteTeamMessage();
 			msg.playerid = playerId;

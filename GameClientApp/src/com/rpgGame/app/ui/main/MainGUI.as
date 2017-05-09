@@ -15,6 +15,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.ui.main.navigation.NavigationBar;
 	import com.rpgGame.app.ui.main.shortcut.ShortcutBar;
 	import com.rpgGame.app.ui.main.smallmap.SmallMapBar;
+	import com.rpgGame.app.ui.main.team.TeamLeftFixedBar;
 	import com.rpgGame.app.ui.main.top.ExpBar;
 	import com.rpgGame.app.ui.main.top.TopBar;
 	import com.rpgGame.core.app.AppDispather;
@@ -93,6 +94,7 @@ package com.rpgGame.app.ui.main
 		//任务追踪栏
 		private var _taskBar:TaskBar;
 		
+		private var _teamFixedBar:TeamLeftFixedBar;
 		//buff
 		private var _buffBar:BuffBar;
 		
@@ -189,7 +191,8 @@ package com.rpgGame.app.ui.main
 			_lowBloodBg=new UIAsset();
 			_lowBloodBg.touchable=false;
 			_lowBloodBg.styleName="ui/common/dyingeffect.png";
-			
+			this._teamFixedBar=new TeamLeftFixedBar();
+			this.addChild(_teamFixedBar);
 //			_chatBar = new ChatBar();
 //			addChild(_chatBar);
 //			
@@ -450,7 +453,7 @@ package com.rpgGame.app.ui.main
 			this._eliteHead.resize(sWidth, sHeight);
 			this._normalHead.resize(sWidth, sHeight);
 			this._buffBar.resize(sWidth, sHeight);
-			
+			this._teamFixedBar.resize(sWidth,sHeight);
 			_lowBloodBg.width=sWidth;
 			_lowBloodBg.height=sHeight;
 			
