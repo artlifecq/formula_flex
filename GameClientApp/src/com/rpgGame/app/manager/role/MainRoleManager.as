@@ -11,8 +11,10 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.events.BuffEvent;
+	import com.rpgGame.core.events.role.RoleEvent;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
