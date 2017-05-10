@@ -287,12 +287,45 @@ package com.rpgGame.app.manager.task
 		}
 		
 		
+		
+		
 		/**判断主线任务是否完成*/
 		public static function getMainTaskIsFinish():Boolean
 		{
-			return getTaskIsFinish(mainTaskInfo,mainTaskData);;
+			return getTaskIsFinish(mainTaskInfo,mainTaskData);
 		}
 		
+		/**判断主线任务单个条件是否完成*/
+		public static function getMainTaskSubIsFinish(num:int):Boolean
+		{
+			
+			if(mainTaskData!=null&&mainTaskInfo!=null)
+			{
+				var information:String=mainTaskData.q_finish_information_str;
+				var informationList:Array=information.split(";");
+				if(informationList.length>num)
+				{
+					return getTaskOneIsFinish(informationList[num],mainTaskInfo.taskSubRateInfolist[num]);
+				}
+				
+			}
+			
+			return false
+		}
+		/**返回主线任务单个条件个数*/
+		public static function getMainTaskSubNum():int
+		{
+			
+			if(mainTaskData!=null&&mainTaskInfo!=null)
+			{
+				var information:String=mainTaskData.q_finish_information_str;
+				var informationList:Array=information.split(";");
+				return informationList.length;
+				
+			}
+			
+			return 0;
+		}
 		/**判断主线任务是否有回复npc*/
 		public static function getMainTaskHaveNpc():Boolean
 		{
@@ -328,6 +361,16 @@ package com.rpgGame.app.manager.task
 			}
 			return false;
 		}
+		/**主线任务类型*/
+		public static function getMainTaskMissionType():int
+		{
+			if(mainTaskData!=null)
+			{
+				return mainTaskData.q_mission_type
+			}
+			return 0;
+		}
+		
 		/**判定是否是主线任务怪*/
 		public static function isMainTaskMonster(mid:int):Boolean
 		{
@@ -355,9 +398,18 @@ package com.rpgGame.app.manager.task
 			return false;
 		}
 		
+		/**当前是否有主线任务*/
+		public static function get haveMainTask() :Boolean
+		{
+			if(mainTaskData!=null&&mainTaskInfo!=null)
+			{
+				return true;
+			}
+			return false;
+		}
 		
 		/**当前是否只有主线任务*/
-		public static function get isOnlyDailyTask() :Boolean
+		public static function get isOnlyMainTask() :Boolean
 		{
 			if(_mainTaskInfo!=null&&_dailyTaskInfo==null&&_treasuerTaskInfo==null)
 			{

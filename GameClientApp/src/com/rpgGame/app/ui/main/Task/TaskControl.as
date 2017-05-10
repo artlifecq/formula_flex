@@ -1,7 +1,8 @@
-package com.rpgGame.app.ui.main.Task
+package com.rpgGame.app.ui.main.task
 {
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
@@ -36,8 +37,12 @@ package com.rpgGame.app.ui.main.Task
 		public static var panlIsopen:Boolean=false;
 		public static function showLeadPanel():void
 		{
-			AppManager.showApp(AppConstant.TASK_LEAD_PANEL);
-			panlIsopen=true;
+			if (!ClientConfig.isBanShu&&!AppManager.isAppInScene(AppConstant.TASK_LEAD_PANEL))
+			{
+				AppManager.showApp(AppConstant.TASK_LEAD_PANEL);
+				panlIsopen=true;
+			}
+			
 		}
 		public static function hideLeadPanel():void
 		{
@@ -54,21 +59,24 @@ package com.rpgGame.app.ui.main.Task
 		}
 		public static function showBagPanel():void
 		{
-			if (!ClientConfig.isBanShu)
+			if (!AppManager.isAppInScene(AppConstant.ROLE_PANEL))
 			{
 				AppManager.showApp(AppConstant.ROLE_PANEL);
 			}
 			
 		}
-		
+		public static function hideBagPanel():void
+		{
+			AppManager.hideApp(AppConstant.ROLE_PANEL);
+			
+		}
 		/**目标按钮任务处理*/
 		public static function killWalkBut(type:int,num:int,key:int):void
 		{
-			if(type==TaskType.MAINTYPE_MAINTASK)//
+			if(type==TaskType.MAINTYPE_MAINTASK&&MainRoleManager.actorInfo.totalStat.level<=TaskAutoManager.AUTOLVE)//
 			{
-				TaskAutoManager.getInstance().startTaskAuto();
-				TrusteeshipManager.getInstance().stopAutoFight();
-				TrusteeshipManager.getInstance().stopFightTarget();
+				TaskAutoManager.getInstance().startTaskAuto(num);
+				return;
 			}
 			
 			if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_USEITEM&&!TaskUtil.getIsfinishByType(type))//是使用道具任务且没有完成
@@ -81,11 +89,11 @@ package com.rpgGame.app.ui.main.Task
 				{
 					if(key==1)
 					{
-						TaskUtil.npcTaskWalk(TaskMissionManager.getMainTaskNpcAreaId(),finishWalk,finishWalk);
+						TaskUtil.npcTaskWalk(TaskMissionManager.getMainTaskNpcAreaId(),finishWalk);
 					}
 					else
 					{
-						TaskUtil.npcTaskFly(TaskMissionManager.getMainTaskNpcAreaId(),finishWalk,finishWalk);
+						TaskUtil.npcTaskFly(TaskMissionManager.getMainTaskNpcAreaId());
 					}
 				}
 				else
@@ -119,7 +127,7 @@ package com.rpgGame.app.ui.main.Task
 						obj.modeid=modeid;
 						if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_GATHER)//采集任务寻路完成开始采集
 						{
-							TaskUtil.postTaskWalk(post,walkStartGather,nowalkStartGather,obj);
+							TaskUtil.postTaskWalk(post,walkStartGather,obj);
 						}
 						else
 						{
@@ -134,7 +142,7 @@ package com.rpgGame.app.ui.main.Task
 			}
 		}
 		/**追踪面板上寻路完成*/
-		public static function finishWalk(re : *):void
+		public static function finishWalk(data :Object):void
 		{
 			
 			if(TaskMissionManager.mainTaskData!=null)
@@ -162,20 +170,13 @@ package com.rpgGame.app.ui.main.Task
 			}
 		}
 		/**采集寻路完成开始采集了*/
-		public static function walkStartGather(ref :WalkMoveStateReference):void
-		{
-			
-			var modeid:int=ref.data.modeid;
-			startGather(modeid);
-			
-		}
-		/**采集寻路完成开始采集了*/
-		public static function nowalkStartGather(data :Object):void
+		public static function walkStartGather(data :Object):void
 		{
 			var modeid:int=data.modeid;
 			startGather(modeid);
 			
 		}
+		
 		/**采集寻路完成开始采集了*/
 		public static function startGather(modeid :int):void
 		{
@@ -205,8 +206,6 @@ package com.rpgGame.app.ui.main.Task
 		public static function startFight(modeid :int):void
 		{
 			TrusteeshipManager.getInstance().startAutoFight();
-			
-			
 		}
 		
 		

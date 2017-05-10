@@ -217,13 +217,23 @@ package com.rpgGame.coreData.cfg.item
 		 */
 		public static function isAddHpItem(cfgId:int):Boolean
 		{
-			if (getItemType(cfgId) == GoodsType.MEDICINE && getItemLocation(cfgId) == NormalEfficacy.LIFE)
+			if (getItemType(cfgId) == GoodsType.MEDICINE && getItemLocation(cfgId) == NormalEfficacy.BUFF)
 			{
 				return true;
 			}
 			return false;
 		}
-		
+		/**
+		 * 判断当前物品是否为复活类型
+		 */
+		public static function isResurgenceItem(cfgId:int):Boolean
+		{
+			if (getItemType(cfgId) == GoodsType.RESURGENCE)
+			{
+				return true;
+			}
+			return false;
+		}
 		/**
 		 * 获取分组ID 
 		 * @param cfgId

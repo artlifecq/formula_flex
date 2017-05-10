@@ -96,6 +96,10 @@ package com.rpgGame.core.app
 		 */
 		public static var SWORD_PANL:String = createAppInfo( "dungeon.JiangHuPanel","jianghu");
 		/**
+		 *多人副本面板
+		 */
+		public static var MULTY_PANL:String = createAppInfo( "dungeon.multy.MultyPanel","fuben");
+		/**
 		 *装备面板
 		 */
 		public static var EQUIP_PANL:String = createAppInfo( "equip.EquipPanel","zhuangbei");
