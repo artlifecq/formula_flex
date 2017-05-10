@@ -1,4 +1,4 @@
-package com.rpgGame.app.ui.main.Task
+package com.rpgGame.app.ui.main.task
 {
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.utils.FaceUtil;

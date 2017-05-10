@@ -5,7 +5,7 @@ package com.rpgGame.app.state.ai
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.task.GatherAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
-	import com.rpgGame.app.ui.main.Task.TaskControl;
+	import com.rpgGame.app.ui.main.task.TaskControl;
 	import com.rpgGame.core.state.ai.AIState;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.type.AIStateType;

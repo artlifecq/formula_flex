@@ -3,7 +3,7 @@ package com.rpgGame.app.manager.task
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.ai.AIStateMachine;
-	import com.rpgGame.app.ui.main.Task.TaskControl;
+	import com.rpgGame.app.ui.main.task.TaskControl;
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.coreData.type.TaskType;
 	
