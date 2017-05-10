@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.dungeon.lunjian
 {
+	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
@@ -36,7 +37,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 			if(target==_skin.btnTiaozhan){
 				AppManager.closeAllApp();
 				var itemData:LunJianItemData=_data as LunJianItemData;
-				SceneSender.reqEnterDungeon(itemData.cfg.q_zone_id,itemData.cfg.q_id);
+				DungeonSender.reqEnterDungeon(itemData.cfg.q_zone_id,itemData.cfg.q_id);
 			}
 		}
 		

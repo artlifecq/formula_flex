@@ -20,10 +20,13 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.appModule.common.itemRender.SkinItemRender;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.AwdProgressBar;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.item.EquipPolishCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
@@ -593,6 +596,8 @@ package com.rpgGame.appModule.equip
 			for each(var grid:DragDropItem in _useEquipGrids){
 				var item:ClientItemInfo=grid.gridInfo?grid.gridInfo.data as ClientItemInfo:null;
 				if(item){
+					addExp-=item.qItem.q_polish_num;
+					
 					var info:GridInfo=getGridInfo(_goodsContainerTarget.dataProvider,grid.gridInfo.data);
 					if(info){
 						info.isGray=false;
@@ -642,6 +647,7 @@ package com.rpgGame.appModule.equip
 			EventManager.addEvent(ItemEvent.UNWEAR_EQUIPITEM,onFreshItems);
 			
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
+			TipTargetManager.show( _skin.btn_shuoming,TargetTipsMaker.makeSimpleTextTips( TipsCfgData.getTipsInfo(25).q_describe));
 		}
 		
 		private function onRemoveFreshItems(list:Vector.<ClientItemInfo>):void
@@ -675,6 +681,7 @@ package com.rpgGame.appModule.equip
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.removeEvent(ItemEvent.UNWEAR_EQUIPITEM,onFreshItems);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
+			TipTargetManager.remove( _skin.btn_shuoming);
 		}
 		
 		private function updateAmount(type:int=3):void
@@ -723,6 +730,7 @@ package com.rpgGame.appModule.equip
 			addExp=0;
 			isToUp=false;
 			isLockRefresh=false;
+			useListIds.length=0;
 			refresh();
 		}
 		

@@ -8,12 +8,15 @@ package com.rpgGame.netData.lunjian.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 论剑计时开始
+	 * 论剑剩余时间
 	 */
-	public class SCLunJianTimeStartMessage extends Message {
+	public class SCLunJianTimeMessage extends Message {
 	
 		//论剑ID
 		private var _ljId: int;
+		
+		//剩余时间
+		private var _remainTime: int;
 		
 		
 		/**
@@ -22,6 +25,8 @@ package com.rpgGame.netData.lunjian.message{
 		override protected function writing(): Boolean{
 			//论剑ID
 			writeShort(_ljId);
+			//剩余时间
+			writeInt(_remainTime);
 			return true;
 		}
 		
@@ -31,6 +36,8 @@ package com.rpgGame.netData.lunjian.message{
 		override protected function reading(): Boolean{
 			//论剑ID
 			_ljId = readShort();
+			//剩余时间
+			_remainTime = readInt();
 			return true;
 		}
 		
@@ -55,6 +62,21 @@ package com.rpgGame.netData.lunjian.message{
 		 */
 		public function set ljId(value: int): void{
 			this._ljId = value;
+		}
+		
+		/**
+		 * get 剩余时间
+		 * @return 
+		 */
+		public function get remainTime(): int{
+			return _remainTime;
+		}
+		
+		/**
+		 * set 剩余时间
+		 */
+		public function set remainTime(value: int): void{
+			this._remainTime = value;
 		}
 		
 	}

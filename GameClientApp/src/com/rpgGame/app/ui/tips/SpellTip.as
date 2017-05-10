@@ -14,6 +14,8 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.lang.LangSpell;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
+	import flash.desktop.Clipboard;
+	
 	import feathers.utils.filter.GrayFilter;
 	
 	import org.mokylin.skin.app.tips.jinengTips_Skin;
@@ -58,6 +60,7 @@ package com.rpgGame.app.ui.tips
 			riseIco=new BgIcon(48);
 			_spellTip.container.addChildAt(mainIco,4);
 			_spellTip.grp_rise_content.addChild(riseIco);
+			_spellTip.rise_des.wordWrap=true;
 			riseIco.x=3;
 			riseIco.y=0;
 			mainIco.x=9;
@@ -97,14 +100,15 @@ package com.rpgGame.app.ui.tips
 				riseCfg = null;
 			}
 			
+			mainIco.setIconResName(ClientConfig.getSkillIcon(cfg.q_icon.toString(),64));
 			_spellTip.lbl_name.text=cfg.q_skillName;
 			_spellTip.lbl_dengji.text="Lv."+info.skillChildLv;
 			_spellTip.lbl_lenque.text=cfg.q_cd==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):(cfg.q_cd/1000)+"s";
 			_spellTip.lbl_xiaohao.text=cfg.q_recovers_detail.length==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):cfg.q_recovers_detail;
 			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(info.skillModelId+"_"+info.skillChildLv);
-			_spellTip.lbl_miaosu.htmlText=lvData.q_skillpanel_description;
+			_spellTip.lbl_miaosu.text=lvData.q_skillpanel_description;
+			_spellTip.lbl_miaosu.isHtmlText=true;
 			
-			mainIco.setIconResName(ClientConfig.getSkillIcon(cfg.q_icon.toString(),64));
 			
 			if(!riseCfg){
 				_spellTip.bg.height=_spellTip.grp_shuoming.y+_spellTip.lbl_jinengName.height+5+_spellTip.lbl_miaosu.textHeight+20;
@@ -154,7 +158,7 @@ package com.rpgGame.app.ui.tips
 			
 			
 			riseIco.setIconResName(ClientConfig.getRiseSkillIcon(cfg.q_icon.toString(),48));
-			if(_spellTip.rise_name.textHeight+_spellTip.rise_name.textHeight<80){
+			if(_spellTip.rise_name.textHeight+_spellTip.rise_des.textHeight<80){
 				_spellTip.bg.height=_spellTip.grp_rise_content.y+80;
 			}else{
 				_spellTip.bg.height=_spellTip.grp_rise_content.y+_spellTip.rise_name.textHeight+_spellTip.rise_des.textHeight+40+_spellTip.eft_name.textHeight;
