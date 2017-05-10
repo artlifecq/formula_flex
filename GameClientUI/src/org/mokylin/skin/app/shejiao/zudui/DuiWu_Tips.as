@@ -30,7 +30,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			super();
 			
 			this.currentState = "normal";
-			this.height = 91;
+			this.height = 163;
 			this.width = 281;
 			this.elementsContent = [imgBG_i(),__DuiWu_Tips_Label1_i(),__DuiWu_Tips_Label2_i(),lbl_miaoshu_i(),lbl_laiyuan_i()];
 			
@@ -80,6 +80,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			imgBG = temp;
 			temp.name = "imgBG";
+			temp.height = 166;
 			temp.styleName = "ui/common/tips/diban3.png";
 			temp.width = 281;
 			temp.x = 0;

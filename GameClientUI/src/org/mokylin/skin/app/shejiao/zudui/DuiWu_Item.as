@@ -1,8 +1,8 @@
 package org.mokylin.skin.app.shejiao.zudui
 {
 	import feathers.controls.text.Fontter;
+	import feathers.controls.Button;
 	import feathers.controls.Label;
-	import feathers.controls.Radio;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.shejiao.zudui.BtnSelect_Skin;
@@ -31,7 +31,9 @@ package org.mokylin.skin.app.shejiao.zudui
 
 		public var lbZhanli:feathers.controls.Label;
 
-		public var rdoSelect:feathers.controls.Radio;
+		public var rdoSelect:feathers.controls.Button;
+
+		public var selectBg:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -44,7 +46,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			this.currentState = "normal";
 			this.height = 23;
 			this.width = 894;
-			this.elementsContent = [bg1_i(),bg2_i(),lbName_i(),lbLevel_i(),lbZhanli_i(),lbNum_i(),lbMap_i(),rdoSelect_i()];
+			this.elementsContent = [bg1_i(),bg2_i(),selectBg_i(),lbName_i(),lbLevel_i(),lbZhanli_i(),lbNum_i(),lbMap_i(),rdoSelect_i()];
 			
 			states = {
 			};
@@ -155,12 +157,26 @@ package org.mokylin.skin.app.shejiao.zudui
 			return temp;
 		}
 
-		private function rdoSelect_i():feathers.controls.Radio
+		private function rdoSelect_i():feathers.controls.Button
 		{
-			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			var temp:feathers.controls.Button = new feathers.controls.Button();
 			rdoSelect = temp;
 			temp.name = "rdoSelect";
+			temp.height = 32;
 			temp.styleClass = org.mokylin.skin.app.shejiao.zudui.BtnSelect_Skin;
+			temp.width = 894;
+			temp.x = 0;
+			temp.y = -4;
+			return temp;
+		}
+
+		private function selectBg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			selectBg = temp;
+			temp.name = "selectBg";
+			temp.styleName = "ui/app/shejiao/zudui/xuanzhongtiao.png";
+			temp.width = 894;
 			temp.x = 0;
 			temp.y = -4;
 			return temp;

@@ -1,7 +1,10 @@
 package com.rpgGame.app.manager.map
 {
+	import com.game.engine3D.manager.SceneMapDataManager;
+	import com.game.engine3D.vo.SceneMapData;
 	import com.game.engine3D.vo.SenderReferenceSet;
 	import com.rpgGame.app.manager.TeamManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.coreData.info.MapDataManager;
@@ -17,13 +20,16 @@ package com.rpgGame.app.manager.map
 	import com.rpgGame.coreData.info.team.TeamNearPlayerInfo;
 	import com.rpgGame.coreData.info.team.TeamUnit;
 	import com.rpgGame.coreData.utils.ByteUtil;
-
+	import com.rpgGame.netData.team.bean.TeamInfo;
+	import com.rpgGame.netData.team.bean.TeamMemberInfo;
+	
 	import flash.utils.ByteArray;
-
+	
 	import app.cmd.SceneModuleMessages;
-
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.data.long;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
@@ -429,21 +435,51 @@ package com.rpgGame.app.manager.map
 		 * 更新周围队友的信息
 		 * @param bytes
 		 */
-		public static function updataTeammate(bytes : ByteBuffer) : void
+		public static function updataTeammate(team:com.rpgGame.netData.team.bean.TeamInfo) : void
 		{
 			_myTeammates = new Vector.<MapTeamMemberInfo>();
 			var info : MapTeamMemberInfo;
-			while (bytes.bytesAvailable)
+			for each (var mem:TeamMemberInfo in team.memberinfo) 
 			{
+				if (mem.memberId.EqualTo(MainRoleManager.actorInfo.serverID)) 
+				{
+					continue;
+				}
+				if (mem.isonline==0) 
+				{
+					continue;
+				}
+				if (mem.memberMapModelID!=MapDataManager.currentScene.sceneId) 
+				{
+					continue;
+				}
 				info = new MapTeamMemberInfo();
-				info.name = bytes.readUTF();
-				info.x = bytes.readVarint32();
-				info.y = bytes.readVarint32();
+				info.name =mem.memberName;
+				info.id=mem.memberId.ToGID();
+				info.serverID=mem.memberId;
+				info.x = mem.x;
+				info.y =mem.y;
+				info.level=mem.memberLevel;
 				_myTeammates.push(info);
 			}
 			EventManager.dispatchEvent(MapUnitEvent.UPDATE_MAP_TEAMMATE);
 		}
-
+		public static function updateTeammatePos(gid:int,x:int,y:int,name:String):void
+		{
+		
+			for (var i:int = 0; i <_myTeammates.length; i++) 
+			{
+				if (_myTeammates[i].id==gid) 
+				{
+					_myTeammates[i].name=name;
+					_myTeammates[i].x =x;
+					_myTeammates[i].y =y;
+					EventManager.dispatchEvent(MapUnitEvent.UPDATE_MAP_TEAMMATE);
+					break;
+				}
+			}
+			
+		}
 		/**
 		 * 更新家族成员信息
 		 * @param bytes

@@ -2,6 +2,7 @@ package com.rpgGame.app.manager
 {
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.map.MapUnitDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.sender.TeamSender;
@@ -56,8 +57,7 @@ package com.rpgGame.app.manager
 		private var _captain:TeamMemberInfo;
 		private var _teamMemberMap:HashMap = new HashMap();
 		
-		/** 面板关闭的时候 记录玩家信息是否改变 面板打开时更新面板信息		 */		
-		public var isTeamInfoChange:Boolean = true;
+	
 		
 		
 		/**
@@ -84,7 +84,7 @@ package com.rpgGame.app.manager
 		}
 		public function get hasTeam():Boolean
 		{
-			return _teamInfo!=null;
+			return _teamInfo!=null&&!_teamInfo.teamId.IsZero();
 		}
 		/**
 		 * 是否队长
@@ -95,7 +95,12 @@ package com.rpgGame.app.manager
 				return false;
 			return _captain.memberId.EqualTo(MainRoleManager.actorInfo.serverID)
 		}
-		
+		public function getPlayerIsCaptain(playerId:long):Boolean
+		{
+			if(_captain == null)
+				return false;
+			return _captain.memberId.EqualTo(playerId);
+		}
 		/**
 		 * 
 		 * @param type 2 组队 1好友
@@ -251,7 +256,7 @@ package com.rpgGame.app.manager
 		}
 		public function TeamInfoChange( _teamInfo:TeamInfo , isCreated:Boolean = false , isDismiss:Boolean = false):void
 		{
-			isTeamInfoChange = true;
+			
 			var playerNumChange:Boolean = isCreated;
 			if(teamInfo != null && teamInfo.memberinfo.length != _teamInfo.memberinfo.length)
 				playerNumChange = true;
@@ -259,7 +264,7 @@ package com.rpgGame.app.manager
 			teamInfo = _teamInfo;
 			SetTeamInfoMap( _teamInfo );
 			DispatchEvent( TeamEvent.GET_TEAM_INFO , _teamInfo , isCreated , isDismiss);
-			
+			MapUnitDataManager.updataTeammate(teamInfo);
 	
 		}
 		private var recommandTimeoutId:int;
@@ -339,12 +344,7 @@ package com.rpgGame.app.manager
 				{
 					teamInfo.memberinfo[i].x = x;
 					teamInfo.memberinfo[i].y = y;
-					var pix:Point = new Point( x , y);
-//					var basePlayerV:ScenePlayer = Mgr.sceneObj.FindObject( gid );
-//					if ( basePlayerV == null )
-//					{
-//						Mgr.miniMapMgr.UpdatePosition( EnumMapPoint.TYPE_TEAM, gid , pix.x , pix.y );
-//					}
+					MapUnitDataManager.updateTeammatePos(gid,x,y,teamInfo.memberinfo[i].memberName);
 					break;
 				}
 			}

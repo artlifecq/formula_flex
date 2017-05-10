@@ -10,6 +10,8 @@ package  com.rpgGame.appModule.social.team
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.netData.team.bean.TeamMemberInfo;
 	
+	import flash.utils.getTimer;
+	
 	import org.game.netCore.data.long;
 	import org.mokylin.skin.app.shejiao.zudui.Duiwu_TanKuang;
 	
@@ -36,7 +38,7 @@ package  com.rpgGame.appModule.social.team
 		}
 		private function registerListeners():void
 		{
-			super.registerListeners();
+			
 			_skin.btn_Look.addEventListener(Event.TRIGGERED, OnViewPlayer);
 			_skin.btn_ok.addEventListener(Event.TRIGGERED, OnAgree);
 			_skin.btn_cancel.addEventListener(Event.TRIGGERED, OnDisagree);
@@ -75,10 +77,10 @@ package  com.rpgGame.appModule.social.team
 			if(roleModel == null)
 			{
 				roleModel = new RoleModelShow();
-				roleModel.setData(member.appearanceInfo);
+				roleModel.setData(member.appearanceInfo,1.7);
 				_skin.dui1.addChild(roleModel);
 			}
-			timeLeft=SystemTimeManager.curtTm+10*1000;
+			timeLeft=getTimer()+10*1000;
 			if (!timer) 
 			{
 				timer=new GameTimer("TeamAskPanelExt",1000);
@@ -89,7 +91,7 @@ package  com.rpgGame.appModule.social.team
 		}
 		private function onTimer():void
 		{
-			var diff:int=(timeLeft-SystemTimeManager.curtTm)/1000;
+			var diff:int=(timeLeft-getTimer())/1000;
 			if (diff>0) 
 			{
 				_skin.lbMsg.htmlText="请问您是否同意？("+diff+"s)";

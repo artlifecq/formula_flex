@@ -5,6 +5,7 @@ package   com.rpgGame.appModule.social.team.mediator
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.appModule.common.RoleModelShow;
 	import com.rpgGame.appModule.social.team.MyTeamPanelExt;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
@@ -29,6 +30,7 @@ package   com.rpgGame.appModule.social.team.mediator
 	import org.mokylin.skin.app.shejiao.zudui.Zudui_Head;
 	
 	import starling.display.DisplayObject;
+	import starling.display.Sprite;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -53,7 +55,9 @@ package   com.rpgGame.appModule.social.team.mediator
 		
 		private var _roleModel:RoleModelShow;
 		private  var isMouseOut : Boolean = true;
-		public function PlayerMediator(player:Group,con:UIAsset,head:SkinnableContainer,map:Label , mainPanel:MyTeamPanelExt)
+		private var scale:Number;
+		private var touchImg:Sprite;
+		public function PlayerMediator(player:Group,con:UIAsset,head:SkinnableContainer,map:Label , mainPanel:MyTeamPanelExt,sc:Number)
 		{
 			super();
 			_player = player;
@@ -63,8 +67,21 @@ package   com.rpgGame.appModule.social.team.mediator
 			_headTitle = head;
 			labNameInitY=_headTitle.y;
 			conInitY=con.y;
+			this.scale=sc;
 			_player.addEventListener(TouchEvent.TOUCH, onTouch);
+			_player.touchGroup=true;
 			
+			touchImg=new Sprite;
+			touchImg.x=0;
+			touchImg.y=0;
+			//touchImg.styleName="ui/common/tips/tips_di2.png";
+			touchImg.graphics.beginFill(0);
+			touchImg.graphics.drawRect(0,0,_player.width,_player.height);
+			touchImg.graphics.endFill();
+//			touchImg.width=_player.width;
+//			touchImg.height=_player.height;
+			touchImg.alpha=0;
+			_player.addChildAt(touchImg,0);
 		}
 		private function onTouch(e:TouchEvent):void
 		{
@@ -94,7 +111,7 @@ package   com.rpgGame.appModule.social.team.mediator
 				return;
 			}
 			touch = e.getTouch(target, TouchPhase.ENDED);
-			if (touch != null && isMouseOut)
+			if (touch != null)
 			{
 				isMouseOut = false;
 				OnPlayerPanel();
@@ -109,9 +126,14 @@ package   com.rpgGame.appModule.social.team.mediator
 //				overEffect.Dispose();
 //				overEffect = null;
 //			}
+			SceneRoleSelectManager.mouseOverRole=null;
 		}
 		private function OnRollOver():void
 		{
+			if (_roleModel) 
+			{
+				//SceneRoleSelectManager.mouseOverRole=_roleModel.avatar.curRole;
+			}
 //			if(selectEffect != null)
 //				return ;
 //			if(overEffect == null)
@@ -125,6 +147,7 @@ package   com.rpgGame.appModule.social.team.mediator
 	//	private var selectEffect:UIEffect2D;
 		private function OnPlayerPanel():void
 		{
+			SceneRoleSelectManager.mouseOverRole=_roleModel.avatar.curRole;
 			if(!_member.memberId.EqualTo( MainRoleManager.actorInfo.serverID))
 			{
 				var showArr:Array=[LangMenu.LOOK_HERO,LangMenu.ADD_FRIEND];
@@ -137,7 +160,7 @@ package   com.rpgGame.appModule.social.team.mediator
 				showArr.push(LangMenu.COPY_THE_NAME);
 				var y : Number = Stage3DLayerManager.stage.mouseY;
 				var x : Number = Stage3DLayerManager.stage.mouseX;
-				MenuManager.showMenu(showArr,[_member.memberId,_member.memberName],x,y,40,this._player);
+				MenuManager.showMenu(showArr,[_member.memberId,_member.memberName],x,y,70,this._player);
 			}
 			if(select != null)
 				select.RemoveSelectEffect();
@@ -173,11 +196,11 @@ package   com.rpgGame.appModule.social.team.mediator
 				gid = member.memberId.ToGID();
 				(_headTitle.skin as Zudui_Head).lab_name.text=member.memberName+"【"+member.memberLevel+"】";
 				
-				var map:Q_map =  ClientSceneCfgData.getSceneInfo( member.memberMapModelID );
+				var map:Q_map =MapDataManager.getMapInfo( member.memberMapModelID ).getData() as Q_map; 
 				//还需要添加线路
 //				UIUtil.connectLabelHtmltext( labMap , ["Lv."+member.memberLevel+" " + ( map != null?map.q_map_name:"") ]);
 				var str:String=map.q_map_name;
-				var isOffline:Boolean=_member.isonline==0;
+				var isOffline:Boolean=_member.isonline==0&&gid!=MainRoleManager.actorInfo.id;
 				if (isOffline) 
 				{
 					str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,"(离线)");
@@ -198,8 +221,9 @@ package   com.rpgGame.appModule.social.team.mediator
 				if(_roleModel == null)
 				{
 					_roleModel=new RoleModelShow();
-					_roleModel.setData(_member.appearanceInfo);
 					this._imgCon.addChild(_roleModel);
+					_roleModel.setData(_member.appearanceInfo,scale);
+					
 				}
 			
 //				roleModel.changeStandModel();
@@ -253,15 +277,15 @@ package   com.rpgGame.appModule.social.team.mediator
 			_toFar = value;
 			if(member != null)
 			{
-				var map:Q_map =ClientSceneCfgData.getSceneInfo( member.memberMapModelID );
+				var map:Q_map =MapDataManager.getMapInfo( member.memberMapModelID ).getData() as Q_map;
 				if(_toFar)
 				{
-					imgCon.filter = FilterUtil.getGrayFilter();
+					//imgCon.filter = FilterUtil.getGrayFilter();
 					
 					TipTargetManager.show(_imgCon,TargetTipsMaker.makeSimpleTextTips(HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,"处于远离或离线状态的队员，将不被计入组队经验加成与生命上限加成的有效人数")));
 				}else
 				{
-					imgCon.filter=null;
+					//imgCon.filter=null;
 					
 					TipTargetManager.remove(_imgCon);
 				}

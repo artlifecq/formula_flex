@@ -7,6 +7,8 @@ package  com.rpgGame.appModule.social.team
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.ClientSceneCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_map;
+	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.team.bean.MapTeamInfo;
 	
@@ -45,11 +47,14 @@ package  com.rpgGame.appModule.social.team
 				_skin.lbNum.text="【已满员】";
 				_skin.lbNum.color=GameColorUtil.COLOR_RED;
 			}
-			_skin.lbMap.text=ClientSceneCfgData.getSceneInfo(_data.line).q_map_name;
+			_skin.lbMap.text=MapDataManager.getMapInfo( _data.captainMap).getData().q_map_name;
 			
-			
+			setSelectbg(false);
 		}
-
+		public function setSelectbg(bool:Boolean):void
+		{
+			_skin.selectBg.visible=bool;
+		}
 		public function get data():MapTeamInfo
 		{
 			return _data;
@@ -63,7 +68,12 @@ package  com.rpgGame.appModule.social.team
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
+			if (curItem) 
+			{
+				curItem.setSelectbg(false);
+			}
 			curItem=this;
+			curItem.setSelectbg(true);
 		}
 	}
 }

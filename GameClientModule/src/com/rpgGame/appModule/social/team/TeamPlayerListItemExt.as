@@ -4,12 +4,13 @@ package  com.rpgGame.appModule.social.team
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.coreData.cfg.ClientSceneCfgData;
-
+	import com.rpgGame.coreData.clientConfig.Q_map;
+	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.netData.team.bean.MapPlayerInfo;
 	
 	import org.mokylin.skin.app.shejiao.zudui.Duiwu_WanjiaItem;
 	
 	import starling.display.DisplayObject;
-	import com.rpgGame.netData.team.bean.MapPlayerInfo;
 
 
 	
@@ -47,9 +48,14 @@ package  com.rpgGame.appModule.social.team
 			{
 				_skin.lbBanghui.text=_data.guildname;
 			}
-			_skin.lbMap.text=ClientSceneCfgData.getSceneInfo(_data.line).q_map_name;
+			//_skin.lbMap.text=ClientSceneCfgData.getSceneInfo(_data.line).q_map_name;
+			//var qMap:Q_map=MapDataManager.getMapInfo( _data.memberMapModelID ).getData() as Q_map;
 			
-			
+			setSelectbg(false);
+		}
+		public function setSelectbg(bool:Boolean):void
+		{
+			_skin.selectBg.visible=bool;
 		}
 
 		public function get data():MapPlayerInfo
@@ -64,7 +70,12 @@ package  com.rpgGame.appModule.social.team
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
+			if (curItem) 
+			{
+				curItem.setSelectbg(false);
+			}
 			curItem=this;
+			curItem.setSelectbg(true);
 		}
 	}
 }

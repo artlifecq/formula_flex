@@ -209,7 +209,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.height = 10;
 			temp.width = 10;
 			temp.x = 67;
-			temp.y = 254;
+			temp.y = 277;
 			return temp;
 		}
 
@@ -221,7 +221,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.height = 10;
 			temp.width = 10;
 			temp.x = 65;
-			temp.y = 281;
+			temp.y = 307;
 			return temp;
 		}
 
@@ -233,7 +233,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.height = 10;
 			temp.width = 10;
 			temp.x = 72;
-			temp.y = 305;
+			temp.y = 334;
 			return temp;
 		}
 
@@ -245,7 +245,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.height = 10;
 			temp.width = 10;
 			temp.x = 62;
-			temp.y = 283;
+			temp.y = 312;
 			return temp;
 		}
 
@@ -256,8 +256,8 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "dui5";
 			temp.height = 10;
 			temp.width = 10;
-			temp.x = 62;
-			temp.y = 254;
+			temp.x = 63;
+			temp.y = 280;
 			return temp;
 		}
 
@@ -266,6 +266,8 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			gPlayer1 = temp;
 			temp.name = "gPlayer1";
+			temp.height = 305;
+			temp.width = 143;
 			temp.x = 37;
 			temp.y = 55;
 			temp.elementsContent = [dui1_i(),head1_i(),lab_map1_i()];
@@ -277,6 +279,8 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			gPlayer2 = temp;
 			temp.name = "gPlayer2";
+			temp.height = 330;
+			temp.width = 143;
 			temp.x = 187;
 			temp.y = 40;
 			temp.elementsContent = [dui2_i(),head2_i(),lab_map2_i()];
@@ -288,6 +292,8 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			gPlayer3 = temp;
 			temp.name = "gPlayer3";
+			temp.height = 350;
+			temp.width = 158;
 			temp.x = 373;
 			temp.y = 20;
 			temp.elementsContent = [dui3_i(),head3_i(),lab_map3_i()];
@@ -299,6 +305,8 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			gPlayer4 = temp;
 			temp.name = "gPlayer4";
+			temp.height = 331;
+			temp.width = 145;
 			temp.x = 572;
 			temp.y = 38;
 			temp.elementsContent = [dui4_i(),head4_i(),lab_map4_i()];
@@ -310,6 +318,8 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			gPlayer5 = temp;
 			temp.name = "gPlayer5";
+			temp.height = 307;
+			temp.width = 143;
 			temp.x = 744;
 			temp.y = 55;
 			temp.elementsContent = [dui5_i(),head5_i(),lab_map5_i()];

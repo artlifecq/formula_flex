@@ -53,8 +53,8 @@ package com.rpgGame.app.ui.tips
 					nameStr+=mem.memberName+flag;
 					lvStr+=mem.memberLevel+flag;
 				}
-				_skin.lbl_miaoshu.text=nameStr;
-				_skin.lbl_laiyuan.text=lvStr;
+				_skin.lbl_miaoshu.htmlText=nameStr;
+				_skin.lbl_laiyuan.htmlText=lvStr;
 			}
 		}
 		

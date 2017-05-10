@@ -2,6 +2,8 @@ package com.rpgGame.app.ctrl
 {
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
+	
+	import flash.utils.getTimer;
 
 	/**
 	 * 冷却管理器
@@ -40,7 +42,7 @@ package com.rpgGame.app.ctrl
 		
 		public static function GetCustomCooldownTime(key:int):int
 		{
-			return GetCoolDownTime(_customCoolDownMap, key) -  SystemTimeManager.curtTm;
+			return GetCoolDownTime(_customCoolDownMap, key) - getTimer();
 		}
 		
 
@@ -61,7 +63,7 @@ package com.rpgGame.app.ctrl
 			}
 			else
 			{
-				map.put(key, ( SystemTimeManager.curtTm + time));
+				map.put(key, ( getTimer() + time));
 			}
 		}
 		
@@ -76,7 +78,7 @@ package com.rpgGame.app.ctrl
 			var v:int = map.get(key);
 			if (v != 0)
 			{
-				if ( SystemTimeManager.curtTm > v)
+				if (getTimer() > v)
 				{
 					map.remove(key);
 					v = 0;
@@ -98,14 +100,14 @@ package com.rpgGame.app.ctrl
 			var v:int = map.get(key);
 			if (v != 0)
 			{
-				if ( SystemTimeManager.curtTm > v)
+				if ( getTimer() > v)
 				{
 					map.remove(key);
 					v = 0;
 				}
 				else
 				{
-					v = v -  SystemTimeManager.curtTm;
+					v = v -  getTimer();
 				}
 			}
 			

@@ -53,7 +53,7 @@ package  com.rpgGame.appModule.social.team
 			// TODO Auto Generated method stub
 			return new TeamListItemRender();
 		}
-		 public function update():void
+		private function update():void
 		{
 			if(ControlCoolDown.IsCustomCoolDown( EnumCustomCoolDown.TEAM_SEARCH_TEAM))
 			{
@@ -64,6 +64,11 @@ package  com.rpgGame.appModule.social.team
 					ControlCoolDown.GetCustomCooldownTime( EnumCustomCoolDown.TEAM_SEARCH_TEAM )+100);
 			}
 		}
+		 override protected function onShow():void
+		 {
+			 super.onShow();
+			 update();
+		 }
 		private function registerListeners():void
 		{
 			_skin.btn_shuaixin.addEventListener( Event.TRIGGERED , OnSearchTeam);
@@ -137,6 +142,7 @@ package  com.rpgGame.appModule.social.team
 		
 			teamList.sort(SortList);
 			_skin.Duiwu_list.dataProvider=new ListCollection(teamList);
+			TeamListItemExt.curItem=null;
 		}
 		/**
 		 * 未满员的队伍排在满员的队伍之前，人数越少越靠前；<br>

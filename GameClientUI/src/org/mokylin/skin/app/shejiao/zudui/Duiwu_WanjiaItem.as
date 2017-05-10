@@ -1,9 +1,11 @@
 package org.mokylin.skin.app.shejiao.zudui
 {
 	import feathers.controls.text.Fontter;
+	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.app.shejiao.zudui.BtnSelect_Skin;
 
 	/**
 	 * @private
@@ -19,8 +21,6 @@ package org.mokylin.skin.app.shejiao.zudui
 
 		public var bg2:feathers.controls.UIAsset;
 
-		public var hoverBg:feathers.controls.UIAsset;
-
 		public var lbBanghui:feathers.controls.Label;
 
 		public var lbLevel:feathers.controls.Label;
@@ -32,6 +32,8 @@ package org.mokylin.skin.app.shejiao.zudui
 		public var lbNum:feathers.controls.Label;
 
 		public var lbZhanli:feathers.controls.Label;
+
+		public var rdoSelect:feathers.controls.Button;
 
 		public var selectBg:feathers.controls.UIAsset;
 
@@ -46,7 +48,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			this.currentState = "normal";
 			this.height = 23;
 			this.width = 894;
-			this.elementsContent = [bg1_i(),bg2_i(),hoverBg_i(),selectBg_i(),lbName_i(),lbLevel_i(),lbZhanli_i(),lbNum_i(),lbBanghui_i(),lbMap_i()];
+			this.elementsContent = [bg1_i(),bg2_i(),selectBg_i(),lbName_i(),lbLevel_i(),lbZhanli_i(),lbNum_i(),lbBanghui_i(),lbMap_i(),rdoSelect_i()];
 			
 			states = {
 			};
@@ -80,18 +82,6 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.width = 894;
 			temp.x = 0;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function hoverBg_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			hoverBg = temp;
-			temp.name = "hoverBg";
-			temp.styleName = "ui/app/shejiao/zudui/shubiaoyishangtiao.png";
-			temp.width = 894;
-			temp.x = 0;
-			temp.y = -4;
 			return temp;
 		}
 
@@ -163,7 +153,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.textAlign = "center";
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 83;
+			temp.width = 100;
 			temp.x = 440;
 			temp.y = 2;
 			return temp;
@@ -181,6 +171,19 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.width = 154;
 			temp.x = 277;
 			temp.y = 2;
+			return temp;
+		}
+
+		private function rdoSelect_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			rdoSelect = temp;
+			temp.name = "rdoSelect";
+			temp.height = 32;
+			temp.styleClass = org.mokylin.skin.app.shejiao.zudui.BtnSelect_Skin;
+			temp.width = 894;
+			temp.x = 0;
+			temp.y = -4;
 			return temp;
 		}
 

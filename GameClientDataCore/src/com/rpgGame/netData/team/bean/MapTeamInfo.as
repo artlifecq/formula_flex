@@ -31,6 +31,9 @@ package com.rpgGame.netData.team.bean{
 		//队长等级
 		private var _captainlv: int;
 		
+		//队长地图
+		private var _captainMap: int;
+		
 		//最高等级
 		private var _highestlv: int;
 		
@@ -42,9 +45,6 @@ package com.rpgGame.netData.team.bean{
 		
 		//所在线路
 		private var _line: int;
-		
-		//玩家是否在线 0否  1是
-		private var _isonline: int;
 		
 		//队伍成员信息列表
 		private var _memberinfo: Vector.<TeamMemberNameInfo> = new Vector.<TeamMemberNameInfo>();
@@ -62,6 +62,8 @@ package com.rpgGame.netData.team.bean{
 			writeByte(_teamnum);
 			//队长等级
 			writeShort(_captainlv);
+			//队长地图
+			writeInt(_captainMap);
 			//最高等级
 			writeShort(_highestlv);
 			//平均等级
@@ -70,8 +72,6 @@ package com.rpgGame.netData.team.bean{
 			writeInt(_avgFightPower);
 			//所在线路
 			writeByte(_line);
-			//玩家是否在线 0否  1是
-			writeByte(_isonline);
 			//队伍成员信息列表
 			writeShort(_memberinfo.length);
 			for (var i: int = 0; i < _memberinfo.length; i++) {
@@ -94,6 +94,8 @@ package com.rpgGame.netData.team.bean{
 			_teamnum = readByte();
 			//队长等级
 			_captainlv = readShort();
+			//队长地图
+			_captainMap = readInt();
 			//最高等级
 			_highestlv = readShort();
 			//平均等级
@@ -102,8 +104,6 @@ package com.rpgGame.netData.team.bean{
 			_avgFightPower = readInt();
 			//所在线路
 			_line = readByte();
-			//玩家是否在线 0否  1是
-			_isonline = readByte();
 			//队伍成员信息列表
 			var memberinfo_length : int = readShort();
 			for (var i: int = 0; i < memberinfo_length; i++) {
@@ -188,6 +188,21 @@ package com.rpgGame.netData.team.bean{
 		}
 		
 		/**
+		 * get 队长地图
+		 * @return 
+		 */
+		public function get captainMap(): int{
+			return _captainMap;
+		}
+		
+		/**
+		 * set 队长地图
+		 */
+		public function set captainMap(value: int): void{
+			this._captainMap = value;
+		}
+		
+		/**
 		 * get 最高等级
 		 * @return 
 		 */
@@ -245,21 +260,6 @@ package com.rpgGame.netData.team.bean{
 		 */
 		public function set line(value: int): void{
 			this._line = value;
-		}
-		
-		/**
-		 * get 玩家是否在线 0否  1是
-		 * @return 
-		 */
-		public function get isonline(): int{
-			return _isonline;
-		}
-		
-		/**
-		 * set 玩家是否在线 0否  1是
-		 */
-		public function set isonline(value: int): void{
-			this._isonline = value;
 		}
 		
 		/**

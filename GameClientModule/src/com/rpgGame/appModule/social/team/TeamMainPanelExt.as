@@ -21,7 +21,7 @@ package  com.rpgGame.appModule.social.team
 		private var _playerList:TeamPlayerListPanelExt;
 		
 		private var _curSub:SkinUI;
-		
+		private var subTypeArr:Array=[SUB_MY_TEAM,SUB_NEAR_TEAM,SUB_NEAR_PLAYER];
 		public function TeamMainPanelExt()
 		{
 			_skin=new ZuiDuiSkin();
@@ -37,48 +37,27 @@ package  com.rpgGame.appModule.social.team
 		private function onTab(e:Event):void
 		{
 			var index:int = this._skin.tab_duiwu.selectedIndex;
+			var sub:SkinUI;
 			switch(index)
 			{
 				case 0:
 				{
-					showSubPanel(SUB_MY_TEAM);
+					sub=subMyTeam;
 					break;
 				}
 				case 1:
 				{
-					showSubPanel(SUB_NEAR_TEAM);
+					sub=teamList;
 					break;
 				}
 				case 2:
 				{
-					showSubPanel(SUB_NEAR_PLAYER);
+					sub=playerList;
 					break;
 				}
 				default:
 				{
-					showSubPanel(SUB_MY_TEAM);
-					break;
-				}
-			}
-		}
-		public function showSubPanel(subType:String):void
-		{
-			var sub:SkinUI;
-			switch(subType)
-			{
-				case SUB_MY_TEAM:
-				{
 					sub=subMyTeam;
-					break;
-				}
-				case SUB_NEAR_TEAM:
-				{
-					sub=teamList;
-					break;
-				}
-				case SUB_NEAR_PLAYER:
-				{
-					sub=playerList;
 					break;
 				}
 			}
@@ -95,6 +74,18 @@ package  com.rpgGame.appModule.social.team
 			(_curSub as DisplayObject).y=74;
 			this.addChild(_curSub);
 		}
+		private function showSubPanelIndex(panelIndex:int):void
+		{
+			if (panelIndex<0||panelIndex>subTypeArr.length-1) 
+			{
+				return;
+			}
+			_skin.tab_duiwu.selectedIndex=panelIndex;
+		}
+		public function showSubPanel(subType:String):void
+		{
+			showSubPanelIndex(subTypeArr.indexOf(subType));
+		}
 
 		/** 组队面板		 */
 		public function get subMyTeam():MyTeamPanelExt
@@ -108,7 +99,7 @@ package  com.rpgGame.appModule.social.team
 			super.onShow();
 			if (_curSub==null) 
 			{
-				showSubPanel(SUB_MY_TEAM);
+				onTab(null);
 			}
 		}
 		/** 队伍列表		 */

@@ -44,18 +44,14 @@ package  com.rpgGame.app.ui.main.team
 		}
 		private function registerListener():void
 		{
-			_skin.btn_up.addEventListener(Event.TRIGGERED,onShowList);
-			_skin.btn_down.addEventListener(Event.TRIGGERED,onHideList);
+			_skin.btn_up.addEventListener(Event.TRIGGERED,onHideList);
+			_skin.btn_down.addEventListener(Event.TRIGGERED,onShowList);
 			_skin.btnExit.addEventListener(Event.TRIGGERED,onExit);
 			Mgr.teamMgr.addEventListener(TeamEvent.GET_TEAM_INFO,updateTeam);
-			Mgr.teamMgr.addEventListener(TeamEvent.TEAM_MEM_ATTR_CHANGE,onTeamAttrChange);
-		}
-		
-		private function onTeamAttrChange(event:TeamEvent):void
-		{
-			// TODO Auto-generated method stub
 			
 		}
+		
+		
 		private function onExit(eve:Event):void
 		{
 			// TODO Auto Generated method stub

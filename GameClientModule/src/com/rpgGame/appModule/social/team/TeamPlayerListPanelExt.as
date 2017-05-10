@@ -53,7 +53,7 @@ package  com.rpgGame.appModule.social.team
 			return new TeamPlayerListItemRender();
 		}
 		
-		public function update():void
+		private function update():void
 		{
 			if(ControlCoolDown.IsCustomCoolDown( EnumCustomCoolDown.TEAM_SEARCH_PLAYER))
 			{
@@ -63,6 +63,11 @@ package  com.rpgGame.appModule.social.team
 				setTimeout(doRefresh,
 					ControlCoolDown.GetCustomCooldownTime( EnumCustomCoolDown.TEAM_SEARCH_PLAYER )+100);
 			}
+		}
+		override protected function onShow():void
+		{
+			super.onShow();
+			update();
 		}
 		private function doRefresh():void
 		{
@@ -136,6 +141,7 @@ package  com.rpgGame.appModule.social.team
 		{
 			playerList.sort(SortList);
 			_skin.Duiwu_list.dataProvider=new ListCollection(playerList);
+			TeamPlayerListItemExt.curItem=null;
 		}
 		/**
 		 *未组队的玩家排在已组队的玩家之前；

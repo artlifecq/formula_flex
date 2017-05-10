@@ -6,14 +6,13 @@ package com.rpgGame.appModule.social.team
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.TeamSender;
 	import com.rpgGame.appModule.social.team.mediator.PlayerMediator;
-	import com.rpgGame.core.events.SystemEvent;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.GameColorUtil;
-	import com.rpgGame.coreData.info.MapDataManager;
-	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.FilterUtil;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.team.bean.TeamInfo;
@@ -25,7 +24,6 @@ package com.rpgGame.appModule.social.team
 	import gs.easing.Back;
 	import gs.easing.Circ;
 	
-	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.shejiao.zudui.Duiwu_usSkin;
 	
 	import starling.events.Event;
@@ -35,21 +33,17 @@ package com.rpgGame.appModule.social.team
 	{
 		private var _skin:Duiwu_usSkin;
 		private var playerList:Vector.<PlayerMediator> = new Vector.<PlayerMediator>();
-		private var tInviteInitY:int;
-		private var tApplyInitY:int;
-		private var tWeijiaruInitY:int;
+
 		public function MyTeamPanelExt()
 		{
 			_skin=new Duiwu_usSkin();
 			super(_skin);
-			tApplyInitY=_skin.chk_accept_apply.y;
-			tInviteInitY=_skin.chk_accept_invite.y;
-			tWeijiaruInitY=_skin.ui_weijiaru.y;
-			playerList.push( new PlayerMediator( _skin.gPlayer1,_skin.dui1,_skin.head1,_skin.lab_map1 , this));
-			playerList.push( new PlayerMediator( _skin.gPlayer2,_skin.dui2,_skin.head2,_skin.lab_map2 , this));
-			playerList.push( new PlayerMediator( _skin.gPlayer3,_skin.dui3,_skin.head3,_skin.lab_map3 , this));
-			playerList.push( new PlayerMediator( _skin.gPlayer4,_skin.dui4,_skin.head4,_skin.lab_map4 , this));
-			playerList.push( new PlayerMediator( _skin.gPlayer5,_skin.dui5,_skin.head5,_skin.lab_map5 , this));
+			
+			playerList.push( new PlayerMediator( _skin.gPlayer1,_skin.dui1,_skin.head1,_skin.lab_map1 , this,1.2));
+			playerList.push( new PlayerMediator( _skin.gPlayer2,_skin.dui2,_skin.head2,_skin.lab_map2 , this,1.4));
+			playerList.push( new PlayerMediator( _skin.gPlayer3,_skin.dui3,_skin.head3,_skin.lab_map3 , this,1.6));
+			playerList.push( new PlayerMediator( _skin.gPlayer4,_skin.dui4,_skin.head4,_skin.lab_map4 , this,1.4));
+			playerList.push( new PlayerMediator( _skin.gPlayer5,_skin.dui5,_skin.head5,_skin.lab_map5 , this,1.2));
 			
 			_skin.imgCaptain.x=_skin.gPlayer1.x+_skin.gPlayer1.width-_skin.imgCaptain.width;
 			registerListeners();
@@ -94,7 +88,8 @@ package com.rpgGame.appModule.social.team
 				NoticeManager.mouseFollowNotify("很抱歉，您的队伍已经满员了" );
 			}else
 			{
-				Mgr.teamMgr.ShowSearchPanel();
+				//Mgr.teamMgr.ShowSearchPanel();
+				(this.parent as TeamMainPanelExt).showSubPanel(TeamMainPanelExt.SUB_NEAR_PLAYER);
 			}
 		}
 		private function OnExitTeam(event:Event):void
@@ -230,11 +225,7 @@ package com.rpgGame.appModule.social.team
 		{
 			super.onShow();
 			
-			if(Mgr.teamMgr.isTeamInfoChange)
-			{
-				update();
-				Mgr.teamMgr.isTeamInfoChange = false;
-			}
+			update();
 			
 			TweenPanel();
 			
@@ -276,31 +267,29 @@ package com.rpgGame.appModule.social.team
 			{
 				TweenTeamList();
 			}
-			TweenMax.to(_skin.chk_accept_invite,0.3,{startAt:{y:tInviteInitY+34, autoAlpha:0}, y:tInviteInitY, autoAlpha:1, ease:Circ.easeInOut});
-			TweenMax.to(_skin.chk_accept_apply,0.3,{startAt:{y:tApplyInitY+34, autoAlpha:0}, y:tApplyInitY, autoAlpha:1, ease:Circ.easeInOut});
+			
 		}
 		
 		public function TweenTeamList():void
 		{
-			for each(var p:PlayerMediator in playerList)
-			{
-				if(p.visible)
-				{
-					p.headTitle.visible = false;
-					p.imgCon.visible = false;
-					p.labMap.visible = false;
-					
-					TweenMax.to(p.labMap,0.6,{startAt:{autoAlpha:0},delay:0.2, autoAlpha:1, ease:Back.easeInOut})
-					TweenMax.to(p.headTitle,0.6,{startAt:{y:p.labNameInitY-50, autoAlpha:0},delay:0.2, y:p.labNameInitY, autoAlpha:1, ease:Back.easeInOut})//玩家名字
-					TweenMax.to(p.imgCon,0.6,{startAt:{y:p.conInitY-50, autoAlpha:0},delay:0.2, y:p.conInitY, autoAlpha:1, ease:Back.easeInOut})//玩家模型	
-				}
-			}
+//			for each(var p:PlayerMediator in playerList)
+//			{
+//				if(p.visible)
+//				{
+//					p.headTitle.visible = false;
+//					p.imgCon.visible = false;
+//					p.labMap.visible = false;
+//					
+//					TweenMax.to(p.labMap,0.6,{startAt:{autoAlpha:0},delay:0.2, autoAlpha:1, ease:Back.easeInOut})
+//					TweenMax.to(p.headTitle,0.6,{startAt:{y:p.labNameInitY-50, autoAlpha:0},delay:0.2, y:p.labNameInitY, autoAlpha:1, ease:Back.easeInOut})//玩家名字
+//					TweenMax.to(p.imgCon,0.6,{startAt:{y:p.conInitY-50, autoAlpha:0},delay:0.2, y:p.conInitY, autoAlpha:1, ease:Back.easeInOut})//玩家模型	
+//				}
+//			}
 		}
 		
 		public function TweenNoTeam():void
 		{
-			var tween:TweenMax;
-			TweenMax.to(_skin.ui_weijiaru,0.5,{startAt:{y:tWeijiaruInitY+40, autoAlpha:0},delay:0.5, y:tWeijiaruInitY, autoAlpha:1, ease:Back.easeOut});
+		
 			
 		}
 		

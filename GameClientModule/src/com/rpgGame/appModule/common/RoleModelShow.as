@@ -1,6 +1,8 @@
 package com.rpgGame.appModule.common
 {
+	import com.game.engine3D.display.Inter3DContainer;
 	import com.rpgGame.app.display3D.InterAvatar3D;
+	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
@@ -23,15 +25,21 @@ package com.rpgGame.appModule.common
 	 * @author yfl
 	 * 
 	 */	
-	public class RoleModelShow extends InterAvatar3D
+	public class RoleModelShow extends Inter3DContainer
 	{
-		
+		private var _avatar:InterAvatar3D;
 		public function RoleModelShow()
 		{
 			super();
+			
 		}
-		public function setData(appearanceInfo:PlayerAppearanceInfo):void
+		public function setData(appearanceInfo:PlayerAppearanceInfo,scaleRole:Number):void
 		{
+			if (!avatar) 
+			{
+				_avatar=new InterAvatar3D();
+				this.addChild3D(avatar);
+			}
 			var _showAvatarData:RoleData = new RoleData(0);
 			
 			var animatResID : String = null;
@@ -142,8 +150,25 @@ package com.rpgGame.appModule.common
 			_showAvatarData.avatarInfo.deputyWeaponEffectID=deputyWeaponEffectResID;
 			_showAvatarData.avatarInfo.deputyWeaponEffectScale=deputyWeaponEffectScale;
 			
-			setRoleData(_showAvatarData);
+			this.avatar.setRoleData(_showAvatarData);
+			this.avatar.curRole.setScale(scaleRole);
 		}
-		
+		override public function dispose():void
+		{
+			
+			if (avatar) 
+			{
+				MCUtil.removeSelf(avatar);
+				avatar.dispose();
+				_avatar=null;
+			}
+			super.dispose();
+		}
+
+		public function get avatar():InterAvatar3D
+		{
+			return _avatar;
+		}
+
 	}
 }

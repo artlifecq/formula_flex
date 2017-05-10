@@ -170,7 +170,7 @@ package com.rpgGame.app.sender
 			var msg:ReqMapSearchPlayerInfoGameMessage = new ReqMapSearchPlayerInfoGameMessage();
 			msg.searchcontent = content;
 			SocketConnection.send(msg);
-			ControlCoolDown.AddCustomCoolDownTime( EnumCustomCoolDown.TEAM_SEARCH_PLAYER , 2000);
+			ControlCoolDown.AddCustomCoolDownTime( EnumCustomCoolDown.TEAM_SEARCH_PLAYER , 20000);
 		}
 		/**
 		 * 搜索附近队伍
@@ -181,7 +181,7 @@ package com.rpgGame.app.sender
 			var msg:ReqMapSearchTeamInfoGameMessage = new ReqMapSearchTeamInfoGameMessage();
 			msg.searchcontent = content;
 			SocketConnection.send(msg);
-			ControlCoolDown.AddCustomCoolDownTime( EnumCustomCoolDown.TEAM_SEARCH_TEAM , 2000);
+			ControlCoolDown.AddCustomCoolDownTime( EnumCustomCoolDown.TEAM_SEARCH_TEAM , 20000);
 		}
 	}
 }

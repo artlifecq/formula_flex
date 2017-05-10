@@ -6,11 +6,11 @@ package com.rpgGame.appModule.social.team
 	
 	public class TeamPlayerListItemRender extends BaseDefaultListItemRenderer
 	{
-		private var cell:TeamListItemExt;
+		private var cell:TeamPlayerListItemExt;
 		public function TeamPlayerListItemRender()
 		{
 			super();
-			cell=new TeamListItemExt();
+			cell=new TeamPlayerListItemExt();
 			this.addChild(cell);
 			this.height=cell.height;
 			this.width=cell.width;

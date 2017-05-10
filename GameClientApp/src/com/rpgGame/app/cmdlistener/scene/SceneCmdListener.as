@@ -1429,7 +1429,7 @@ package com.rpgGame.app.cmdlistener.scene
 			}
 			else if (unitType == (1 << EnumMapUnitType.TYPE_TEAMMATE))
 			{
-				MapUnitDataManager.updataTeammate(bytes);
+				//MapUnitDataManager.updataTeammate(bytes);
 			}
 			else
 			{
