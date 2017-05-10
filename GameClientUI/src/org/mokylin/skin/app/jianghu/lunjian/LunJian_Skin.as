@@ -2,11 +2,13 @@ package org.mokylin.skin.app.jianghu.lunjian
 {
 	import feathers.layout.IVirtualLayout;
 	import feathers.layout.TiledRowsLayout;
+	import feathers.controls.Button;
 	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.layout.VerticalLayout;
+	import org.mokylin.skin.component.button.ButtonSkin_jiantou;
 	import org.mokylin.skin.component.list.ListSkin1;
 
 	/**
@@ -19,6 +21,10 @@ package org.mokylin.skin.app.jianghu.lunjian
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var btnNext:feathers.controls.Button;
+
+		public var btnPrev:feathers.controls.Button;
+
 		public var list_map:feathers.controls.List;
 
 		public var list_npc:feathers.controls.List;
@@ -34,7 +40,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__LunJian_Skin_UIAsset2_i(),list_npc_i(),list_map_i(),__LunJian_Skin_UIAsset3_i()];
+			this.elementsContent = [__LunJian_Skin_UIAsset2_i(),list_npc_i(),list_map_i(),__LunJian_Skin_UIAsset3_i(),btnNext_i(),btnPrev_i()];
 			
 			states = {
 			};
@@ -79,6 +85,29 @@ package org.mokylin.skin.app.jianghu.lunjian
 		{
 			var temp:feathers.layout.VerticalLayout = new feathers.layout.VerticalLayout();
 			temp.gap = 1;
+			return temp;
+		}
+
+		private function btnNext_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btnNext = temp;
+			temp.name = "btnNext";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou;
+			temp.x = 899;
+			temp.y = 257;
+			return temp;
+		}
+
+		private function btnPrev_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btnPrev = temp;
+			temp.name = "btnPrev";
+			temp.scaleX = -1;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou;
+			temp.x = 209;
+			temp.y = 257;
 			return temp;
 		}
 

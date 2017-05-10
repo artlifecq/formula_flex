@@ -18,7 +18,6 @@ package com.rpgGame.appModule.skill
 	
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.ScrollPolicy;
-	import feathers.layout.RelativePosition;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.wuxue.jineng.JinengTitle_Skin;

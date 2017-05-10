@@ -65,7 +65,7 @@ package com.rpgGame.app.manager
 			}
 			if (acu.level>0) 
 			{
-				return false;
+				return true;
 			}
 			
 			var now:Q_meridian=MeridianCfg.getMeridianCfg(acu.MeridId+"_"+acu.acuPointId+"_"+(acu.level));

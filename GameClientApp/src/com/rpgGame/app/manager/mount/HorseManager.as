@@ -12,6 +12,7 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.coreData.clientConfig.Q_horse_skills;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.horse.bean.HorseDataInfo;
 	import com.rpgGame.netData.horse.message.CSHorseIllusionToGameMessage;
@@ -134,9 +135,10 @@ package com.rpgGame.app.manager.mount
 				return false;
 			}
 			
-			if(BackPackManager.instance.getBagItemsCountById(extraItemInfo.clientItemInfo.cfgId)<=0)
+			var clientitem:ClientItemInfo = extraItemInfo.clientItemInfo;
+			if(BackPackManager.instance.getBagItemsCountById(clientitem.cfgId)<=0)
 			{
-				NoticeManager.showNotifyById(9002,extraItemInfo.clientItemInfo.qItem.q_name);
+				NoticeManager.showNotifyById(9002,clientitem.qItem.q_name);
 				return false;
 			}
 			var msg:CSUseHorseAddtionMessage = new CSUseHorseAddtionMessage();

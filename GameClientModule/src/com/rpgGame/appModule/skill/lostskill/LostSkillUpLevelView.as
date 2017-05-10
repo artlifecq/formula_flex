@@ -23,6 +23,7 @@ package com.rpgGame.appModule.skill.lostskill
 	import com.rpgGame.netData.lostSkill.message.CSLostSkillLeveUpMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
+	import org.mokylin.skin.app.wuxue.Title_Skin;
 	import org.mokylin.skin.app.wuxue.juexue.Item_shuxing;
 	import org.mokylin.skin.app.wuxue.juexue.Juxue_Shengji;
 	
@@ -45,6 +46,13 @@ package com.rpgGame.appModule.skill.lostskill
 			content.lb_name.text = LanguageConfig.getText(LangUI_2.Lostskill_title2);
 			_skin.btn_shengji.addEventListener(Event.TRIGGERED,uplevelTrigeredHandler);
 			_skin.btn_yinyong.addEventListener(Event.TRIGGERED,changeStateHandler);
+			setTitleValue(_skin.tile_1.skin as Title_Skin,"职业技能");
+			setTitleValue(_skin.tile_2.skin as Title_Skin,"升级条件");
+		}
+		
+		private function setTitleValue(skin:Title_Skin,title:String):void
+		{
+			skin.labelDisplay.text = title;
 		}
 		private function changeStateHandler(e:Event):void
 		{

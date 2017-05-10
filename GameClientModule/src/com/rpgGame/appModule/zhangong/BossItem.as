@@ -5,6 +5,7 @@ package com.rpgGame.appModule.zhangong
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.ZhanGongManager;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
@@ -13,28 +14,39 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.ZhanGongEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.ui.AwdProgressBar;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.ZhanGongData;
+	import com.rpgGame.coreData.cfg.ZhanGongMonsterData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
 	import com.rpgGame.coreData.clientConfig.Q_meritorious;
+	import com.rpgGame.coreData.clientConfig.Q_meritorious_monster;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.type.AvatarMaskType;
 	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.ZhanGongUtil;
 	import com.rpgGame.netData.zhangong.bean.MeritoriousInfo;
 	import com.rpgGame.netData.zhangong.message.SCMeritoriousUpgradeResultMessage;
 	
 	import flash.geom.Point;
 	
+	import feathers.utils.filter.GrayFilter;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.zhangong.BossItem_Skin;
 	
 	import starling.display.DisplayObject;
+	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -49,6 +61,10 @@ package com.rpgGame.appModule.zhangong
 		private var _avatar : InterAvatar3D;
 		private var _avatarContainer:Inter3DContainer;
 		private var _avatardata:MonsterData;
+		private var _isCanUp:Boolean=false;
+		
+		private var _progressBar:AwdProgressBar;
+		
 		public function BossItem()
 		{
 			_skin=new BossItem_Skin();
@@ -56,11 +72,15 @@ package com.rpgGame.appModule.zhangong
 			_skin.conver.visible=false;
 			_avatarContainer=new Inter3DContainer();
 			_avatar = new InterAvatar3D();
-			_avatar.x =100;
-			_avatar.y = 230;
 			_avatarContainer.addChild3D(_avatar);
 			_avatardata=new MonsterData(RoleType.TYPE_MONSTER);
-			_skin.container.addChild(_avatarContainer);
+			_skin.uiBg.addChild(_avatarContainer);
+			
+			_progressBar=new AwdProgressBar(_skin.pro_bar,"ui_zhangongtexiao");
+			_skin.container.addChild(_progressBar);
+			_skin.lbNumUp.visible=false;
+			_skin.uiUp.visible=false;
+			//			_skin.container.addChild(_avatarContainer);
 		}
 		
 		override protected function onShow():void
@@ -68,16 +88,23 @@ package com.rpgGame.appModule.zhangong
 			super.onShow();
 			updateShow();
 			this.addEventListener(starling.events.TouchEvent.TOUCH, onTouchItem);
+			_skin.btnUp.addEventListener(starling.events.TouchEvent.TOUCH, onTouchBtn);
+			_skin.btnUp.addEventListener(Event.TRIGGERED,toUpHandler);
 			EventManager.addEvent(ZhanGongEvent.BOSSITEM_CHANGE,updatePanel);
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,resChange);
+			TipTargetManager.remove(_skin.conver);
+			TipTargetManager.show( _skin.conver, TargetTipsMaker.makeSimpleTextTips(TipsCfgData.getTipsInfo(19).q_describe));
+			//			TipTargetManager.show( _skin.conver,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(19)));
 		}
 		
 		override protected function onHide():void
 		{
 			super.onHide();
 			this.removeEventListener(starling.events.TouchEvent.TOUCH, onTouchItem);
+			_skin.btnUp.removeEventListener(starling.events.TouchEvent.TOUCH, onTouchBtn);
 			EventManager.removeEvent(ZhanGongEvent.BOSSITEM_CHANGE,updatePanel);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,resChange);
+			RoleFaceMaskEffectUtil.removeFaceMaskEffect(_avatar.curRole);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -85,17 +112,18 @@ package com.rpgGame.appModule.zhangong
 			super.onTouchTarget(target);
 			switch(target){
 				case _skin.btnUp:
-					toUpHandler();
+					toUpHandler(null);
 					break;
-				case _skin.uiDao:
+				case _skin.btnDao:
+				case _skin.lbName:
 					toWorkMonsterHandler();
 					break;
 			}
 		}
 		
-		public function setData(data:*):void
+		public function setData(type:int):void
 		{
-			_type=data as int;
+			_type=type;
 			updateShow();
 		}
 		
@@ -109,6 +137,41 @@ package com.rpgGame.appModule.zhangong
 			t=e.getTouch(this,TouchPhase.HOVER);
 			if(t){
 				_skin.conver.visible=true;
+			}
+		}
+		
+		public function onTouchBtn(e:TouchEvent):void
+		{
+			var t1:Touch=e.getTouch(_skin.btnUp);
+			if(!t1){
+				_skin.lbNumUp.visible=false;
+				_skin.uiUp.visible=false;
+				EventManager.dispatchEvent(ZhanGongEvent.BOSSITEN_CLOSE);
+				return;
+			}
+			t1=e.getTouch(_skin.btnUp,TouchPhase.HOVER);
+			if(t1){
+				updateShuxingShow();
+			}
+		}
+		
+		private function updateShuxingShow():void
+		{
+			var str:String=ZhanGongManager.getNextNumber(_type,_info.level);
+			if(str!=null)
+			{
+				var arr:Array=str.split('_');
+				var attType:int=parseInt(arr[0]);
+				var num:int=parseInt(arr[1]);
+				_skin.lbNumUp.text=num.toString();
+				_skin.lbNumUp.visible=true;
+				_skin.uiUp.visible=true;
+				EventManager.dispatchEvent(ZhanGongEvent.BOSSITEN_SHOW,str);
+			}
+			else
+			{
+				_skin.lbNumUp.visible=false;
+				_skin.uiUp.visible=false;
 			}
 		}
 		
@@ -126,16 +189,24 @@ package com.rpgGame.appModule.zhangong
 			_skin.lbLevelCurrent.text="LV."+_info.level;
 			_skin.lbLevelNext.text="LV."+(_info.level+1);
 			
-			var attValues:Q_att_values=AttValueConfig.getAttInfoById(_q_meritorious.q_att_type);
+			var attValues:Q_att_values=AttValueConfig.getAttInfoById(ZhanGongUtil.getAttByJob(_q_meritorious,MainRoleManager.actorInfo.job));
 			var maps:HashMap=AttValueConfig.getTypeValueMap(attValues);
 			var keys:Array=maps.keys();
 			var values:Array=maps.values();
 			setUIType(keys[0]);
-			_skin.lbShengming.text="+"+values[0];
+			_skin.numZhanli.label="x"+values[0];
 			
 			var haveNum:int=MainRoleManager.actorInfo.totalStat.getResData(_q_meritorious.q_materil);
 			_skin.lbNum.text=haveNum.toString()+"/"+_q_meritorious.q_num;
-			_skin.pro_bar.value=(haveNum/_q_meritorious.q_num)*100<=100?(haveNum/_q_meritorious.q_num)*100:100;		
+			//			_skin.btnUp.isEnabled=haveNum>=_q_meritorious.q_num;
+			_isCanUp=_skin.uiDian.visible=haveNum>=_q_meritorious.q_num;
+			
+			if(_isCanUp) _skin.btnUp.filter=null;
+			else GrayFilter.gray(_skin.btnUp);
+			
+			_progressBar.maximum=100;
+			_progressBar.value=(haveNum/_q_meritorious.q_num)*100<=100?(haveNum/_q_meritorious.q_num)*100:100;	
+			if(_skin.lbNumUp.visible) updateShuxingShow();
 		}
 		
 		private function showMonster(monsterId:int):void
@@ -143,8 +214,9 @@ package com.rpgGame.appModule.zhangong
 			var bornData : Q_monster = MonsterDataManager.getData(monsterId);		
 			_avatardata.avatarInfo.setBodyResID(bornData ? bornData.q_body_res : "", null);
 			_avatar.setRoleData(this._avatardata);
-			var listMask:Vector.<Number>=ZhanGongUtil.getMonsterMaskById(monsterId);
-			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.DIALOG_MASK,_avatar,listMask[0],listMask[1],listMask[2]);
+			var cfg:Q_meritorious_monster=ZhanGongMonsterData.getPointById(monsterId);
+			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.BOSS_ITEM,_avatar,cfg.q_pointX,
+				cfg.q_pointY,cfg.q_scale);
 		}
 		
 		private function setUIType(type:int):void
@@ -152,30 +224,62 @@ package com.rpgGame.appModule.zhangong
 			switch(type)
 			{
 				case CharAttributeType.HP:
-					_skin.uiType.styleName="ui/app/beibao/zhangong/jiacheng/shengming.png";
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/shengming.png";
 					break;
 				case CharAttributeType.CRIT_PER:
-					_skin.uiType.styleName="ui/app/beibao/zhangong/jiacheng/baoji.png";
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/baoji.png";
 					break;
 				case CharAttributeType.ANTI_CRIT_PER:
-					_skin.uiType.styleName="ui/app/beibao/zhangong/jiacheng/baojikangxing.png";
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/baojikangxing.png";
 					break;
 				case CharAttributeType.CRIT:
-					_skin.uiType.styleName="ui/app/beibao/zhangong/jiacheng/baojishanghai.png";
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/baojishanghai.png";
 					break;
 				case CharAttributeType.DEFENSE_PER:
-					_skin.uiType.styleName="ui/app/beibao/zhangong/jiacheng/fangyu.png";
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/fangyu.png";
 					break;
 				case CharAttributeType.GENGU:
-					_skin.uiType.styleName="ui/app/beibao/zhangong/jiacheng/gengu.png";
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/gengu.png";
 					break;
 				case CharAttributeType.ATT_SPEED:
-					_skin.uiType.styleName="ui/app/beibao/zhangong/jiacheng/gongjisudu.png";
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/gongjisudu.png";
 					break;
 				case CharAttributeType.HUIGEN:
-					_skin.uiType.styleName="ui/app/beibao/zhangong/jiacheng/huigen.png";
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/huigen.png";
 					break;
-				
+				case CharAttributeType.LIDAO:
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/lidao.png";
+					break;
+				case CharAttributeType.HIT:
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/mingzhonglv.png";
+					break;
+				case CharAttributeType.NEI_GONG:
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/neigong.png";
+					break;
+				case CharAttributeType.MP:
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/nengliang.png";
+					break;
+				case CharAttributeType.MP_REC:
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/nenglianghuifu.png";
+					break;
+				case CharAttributeType.HP:
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/qixue.png";
+					break;
+				case CharAttributeType.SHENFA:
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/shenfa.png";
+					break;
+				case CharAttributeType.HP_REC:
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/shengminghuifu.png";
+					break;
+				case CharAttributeType.ANTI_EFFECT:
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/xiaoguodikang.png";
+					break;
+				case CharAttributeType.SPEED:
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/yidongsudu.png";
+					break;
+				case CharAttributeType.WAI_GONG:
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/zhangong.png";
+					break;
 			}
 		}
 		
@@ -190,13 +294,20 @@ package com.rpgGame.appModule.zhangong
 			}
 		}
 		
-		private function toUpHandler():void
+		private function toUpHandler(e:Event):void
 		{
-			var p:Point=new Point(this._skin.btnUp.x+this._skin.btnUp.width/2,this._skin.btnUp.y+this._skin.btnUp.height/2);
-			p=this._skin.btnUp.parent.localToGlobal(p);
-			p=this._skin.container.globalToLocal(p);
-			this.playInter3DAt(ClientConfig.getEffect("ui_tongyongdianji"),p.x,p.y,1,null,addComplete);
-			ZhanGongSender.upZhanGongMessage(_type);
+			if(_isCanUp)
+			{
+				var p:Point=new Point(this._skin.btnUp.x+this._skin.btnUp.width/2,this._skin.btnUp.y+this._skin.btnUp.height/2);
+				p=this._skin.btnUp.parent.localToGlobal(p);
+				p=this._skin.container.globalToLocal(p);
+				this.playInter3DAt(ClientConfig.getEffect("ui_tongyongdianji"),p.x,p.y,1,null,addComplete);
+				ZhanGongSender.upZhanGongMessage(_type);
+			}
+			else
+			{
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(2010));
+			}
 		}
 		
 		private function addComplete(render:RenderUnit3D):void
@@ -208,7 +319,7 @@ package com.rpgGame.appModule.zhangong
 		{
 			if(msg.flag==1&&msg.meritoriousInfo.type==_type)
 			{
-				UIPopManager.showAlonePopUI(CenterEftPop,"ui_jichengchenggong");
+				UIPopManager.showAlonePopUI(CenterEftPop,"ui_shengjichenggong");
 				updateShow();
 			}
 		}
@@ -223,9 +334,10 @@ package com.rpgGame.appModule.zhangong
 			_skin.lbName.text="无";
 			_skin.lbLevelCurrent.text="LV.0";
 			_skin.lbLevelNext.text="LV.1";
-			_skin.lbShengming.text="+0";
+			_skin.numZhanli.label="x0";
 			_skin.lbNum.text="0/1";
-			_skin.pro_bar.value=0;
+			_progressBar.value=0;
+			//			_skin.pro_bar.value=0;
 		}
 	}
 }

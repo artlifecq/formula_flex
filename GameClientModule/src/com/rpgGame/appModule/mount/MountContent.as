@@ -86,19 +86,19 @@ package com.rpgGame.appModule.mount
 			var anation:TargetAmationInfo = new TargetAmationInfo();
 			anation.target = _curtentInter3D;
 			anation.propName = "x";
-			anation.setValue(340,80);
+			anation.setValue(340,120);
 			_amationInfos.push(anation);
 			
 			anation = new TargetAmationInfo();
 			anation.target = _curtentInter3D;
 			anation.propName = "y";
-			anation.setValue(440,370);
+			anation.setValue(440,480);
 			_amationInfos.push(anation);
 			
 			anation = new TargetAmationInfo();
 			anation.target = unit;
 			anation.propName = "scale";
-			anation.setValue(1,0.2);
+			anation.setValue(1,0.4);
 			_amationInfos.push(anation);
 			
 			if(next ==null)

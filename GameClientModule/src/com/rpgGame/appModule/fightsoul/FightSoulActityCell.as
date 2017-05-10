@@ -35,7 +35,7 @@ package com.rpgGame.appModule.fightsoul
 		{
 			if(pathinfoData.isOver)
 			{
-				NoticeManager.showNotify(NotifyCfgData.getNotifyTextByID(4010));
+				NoticeManager.showNotifyById(4010);
 				return ;
 			}
 			var winInfo:Q_windowInfo = WindowInfoData.getInfobyId(path.q_winId);

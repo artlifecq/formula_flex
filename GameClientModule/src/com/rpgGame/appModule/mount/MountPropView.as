@@ -44,18 +44,22 @@ package com.rpgGame.appModule.mount
 				return ;
 			}
 			_skin.container.visible = true;
-			var attpropid:int = _attpropId;
-			if(attpropid== CharAttributeType.WAI_GONG&&_job != JobEnum.ROLE_1_TYPE)
-				attpropid = CharAttributeType.NEI_GONG;
 				
-			var attname:String = CharAttributeType.getCNName(attpropid);
+			var attname:String = CharAttributeType.getCNName(_attpropId);
 			_skin.lbName.text = attname;
-			var labcur:String = AttValueConfig.getDisAttValueStr(_attpropId,_currentatt);
+			_skin.lbCurrent.text = AttValueConfig.getDisAttValueStr(_attpropId,_currentatt);
 			if(_addatt>0)
 			{
-				labcur += "  +"+AttValueConfig.getDisAttValueStr(_attpropId,_addatt)+"(临时)";
+				var num:Number = AttValueConfig.getDisAttValue(_attpropId,_addatt);
+				if(num>0)
+				{
+					_skin.lbaddprop.text= "  +"+num+CharAttributeType.getAttrUnit(_attpropId)+"(临时)";
+				}
+				
+			}else{
+				_skin.lbaddprop.text= "";
 			}
-			_skin.lbCurrent.text = labcur;
+			
 			if(_nextAtt>0)
 			{
 				_skin.lbUp.text = AttValueConfig.getDisAttValueStr(_attpropId,_nextAtt);

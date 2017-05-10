@@ -12,16 +12,11 @@ package com.rpgGame.netData.zone.message{
 	 */
 	public class ReqZoneCommonQuitMessage extends Message {
 	
-		//副本ID
-		private var _zoneModelid: int;
-		
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//副本ID
-			writeInt(_zoneModelid);
 			return true;
 		}
 		
@@ -29,8 +24,6 @@ package com.rpgGame.netData.zone.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//副本ID
-			_zoneModelid = readInt();
 			return true;
 		}
 		
@@ -40,21 +33,6 @@ package com.rpgGame.netData.zone.message{
 		 */
 		override public function getId(): int {
 			return 155208;
-		}
-		
-		/**
-		 * get 副本ID
-		 * @return 
-		 */
-		public function get zoneModelid(): int{
-			return _zoneModelid;
-		}
-		
-		/**
-		 * set 副本ID
-		 */
-		public function set zoneModelid(value: int): void{
-			this._zoneModelid = value;
 		}
 		
 	}

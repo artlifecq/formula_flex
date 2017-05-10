@@ -7,7 +7,13 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	
+	import flash.events.Event;
 	import flash.geom.Point;
+	
+	import org.client.mainCore.ds.HashMap;
+	
+	import starling.core.Starling;
+	import starling.events.EnterFrameEvent;
 
 	/**
 	 *
@@ -18,7 +24,11 @@ package com.rpgGame.app.utils
 	 */
 	public class RoleFaceMaskEffectUtil
 	{
-		private static var ZERO_POINT:Point=new Point();
+		private static var POINT:Point=new Point();
+		
+		private static var roleMap:HashMap=new HashMap();
+		private static var checkPos:Boolean;
+		private static var maskWH:int=256;
 		
 		public function RoleFaceMaskEffectUtil()
 		{
@@ -26,6 +36,9 @@ package com.rpgGame.app.utils
 
 		public static function removeFaceMaskEffect(role : SceneRole) : void
 		{
+			if(!role){
+				return;
+			}
 			role.avatar.forEachRenderUnit(function(render : RenderUnit3D) : void
 			{
 				switch (render.type)
@@ -39,6 +52,12 @@ package com.rpgGame.app.utils
 						break;
 				}
 			});
+			
+			roleMap.remove(role);
+			if(roleMap.length==0&&checkPos){
+				checkPos=false;
+				Starling.current.stage.removeEventListener(Event.ENTER_FRAME,onUpdateMaskPos);
+			}
 		}
 		
 		/**
@@ -73,8 +92,43 @@ package com.rpgGame.app.utils
 			});
 			role.setScale(scale);
 			role.rotationY =rotationY;
-			var point : Point = avatar.parent.localToGlobal(ZERO_POINT);
-			updateFadeAlphaRectPos(role, point.x + avatar.x+fadeX, point.y + avatar.y+fadeY);
+			POINT.x=avatar.x;
+			POINT.y=avatar.y;
+			var point : Point = avatar.parent.localToGlobal(POINT);
+			role.x=fadeX;
+			role.z=fadeY;
+			updateFadeAlphaRectPos(role,point.x,point.y );
+			
+			roleMap.add(role,avatar);
+			if(roleMap.length!=0&&!checkPos){
+				startCheckPos();
+			}
+		}
+		
+		private static function startCheckPos():void
+		{
+			checkPos=true;
+			Starling.current.stage.addEventListener(Event.ENTER_FRAME,onUpdateMaskPos);
+		}
+		
+		private static function onUpdateMaskPos(event:EnterFrameEvent):void
+		{
+			var roles:Array=roleMap.keys();
+			var infos:Array=roleMap.getValues();
+			var num:int=roles.length;
+			var role:SceneRole;
+			var point : Point;
+			var avatar:InterAvatar3D;
+			var preX:int;
+			var preY:int;
+			for(var i:int=0;i<num;i++){
+				role=roles[i] as SceneRole;
+				avatar=infos[i] as InterAvatar3D;
+				POINT.x=avatar.x;
+				POINT.y=avatar.y;
+				point=avatar.parent.localToGlobal(POINT);
+				updateFadeAlphaRectPos(role,point.x,point.y );
+			}
 		}
 
 		public static function addDialogFaceMaskEffect(role : SceneRole) : void

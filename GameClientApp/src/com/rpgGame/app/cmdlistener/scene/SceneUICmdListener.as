@@ -74,7 +74,7 @@ package com.rpgGame.app.cmdlistener.scene
 				AppManager.showAppNoHide(AppConstant.COUNTRY_TAO_NI_TASK_BAR_PANEL);
 				MainUIManager.hideTaskBar();
 			}
-			else if (sceneData.mapType == EnumMapType.MAP_TYPE_FAMILY_BATTLE_SCENE)
+			/*else if (sceneData.mapType == EnumMapType.MAP_TYPE_FAMILY_BATTLE_SCENE)
 			{
 				AppManager.showApp(AppConstant.FAMILY_WAR_DUNGEON_INFO_PANEL);
 				AppManager.showApp(AppConstant.FAMILY_WAR_DUNGEON_KILL_RANK_PANEL);
@@ -94,7 +94,7 @@ package com.rpgGame.app.cmdlistener.scene
 			{
 				AppManager.showApp(AppConstant.CROWN_QIU_JIN_END_TIME);
 //				MainUIManager.hideTaskBar();
-			}
+			}*/
 			else if (sceneData.isMazeScene)
 			{
 				AppManager.showAppNoHide(AppConstant.MAZE_RANK_PANEL);

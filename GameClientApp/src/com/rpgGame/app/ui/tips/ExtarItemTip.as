@@ -43,17 +43,18 @@ package com.rpgGame.app.ui.tips
 			_iconFace.y=19;		
 		}
 		private var _item:HorseExtraItemInfo;
+		private var _show:MountShowData;
 		public function setTipData(data:*):void
 		{
-			var show:MountShowData = data[0];
+			_show = data[0];
 			var type:int = data[1];
-			_item=show.getOpenLevelBytype(type);
+			_item=_show.getOpenLevelBytype(type);
 			FaceUtil.SetItemGrid(_iconFace, _item.clientItemInfo);
 			_skin.lbName.text = _item.clientItemInfo.qItem.q_name;
-			var maxUseCount:int = _item.getMaxByLevel(show.mountLevel);
-			var useCount:int = show.getUseExtralItem(type);
+			var maxUseCount:int = _item.getMaxByLevel(_show.mountLevel);
+			var useCount:int = _show.getUseExtralItem(type);
 			_skin.lbCurrentNum.text = useCount.toString()+"/"+maxUseCount.toString()+"个";
-			_skin.lbNextName.text = (_item.getMaxByLevel(show.mountLevel+1)-maxUseCount).toString()+"个";
+			_skin.lbNextName.text = (_item.getMaxByLevel(_show.mountLevel+1)-maxUseCount).toString()+"个";
 			_skin.lbShuxing.width = 240;
 			_skin.lbShuxing.wordWrap = true;
 			refeashAddPropView();
@@ -76,22 +77,11 @@ package com.rpgGame.app.ui.tips
 			if(_item.clientItemInfo.cfgId!=403)
 				return ;
 			_skin.lbShuxing.text = "每颗资质丹永久增加战骑属性：";
-			_skin.grp_type.visible = true;
-			var currentatt:Q_att_values = AttValueConfig.getAttInfoById(_item.clientItemInfo.qItem.q_att_type);
-			var props:Vector.<Number> = new Vector.<Number>(30,0);
-			var type:int;
-			var value:int;
-			for(var i:int = 1;i<=15;i++)
-			{
-				type = currentatt["q_type"+i];
-				if(type==0)
-					continue;
-				value = currentatt["q_value"+i];
-				props[type] = value;
-			}
-			_skin.lbGongJi.text = "+"+props[CharAttributeType.WAI_GONG];
-			_skin.lbFangYu.text = "+"+props[CharAttributeType.DEFENSE_PER];
-			_skin.lbShengMing.text = "+"+props[CharAttributeType.MAX_HP];
+			_skin.grp_type.visible = true; 
+			var currentatt:Q_att_values = AttValueConfig.getAttInfoById(_show.exartPropId);
+			_skin.lbGongJi.text = "+"+currentatt.q_value1;
+			_skin.lbFangYu.text = "+"+currentatt.q_value2;
+			_skin.lbShengMing.text = "+"+currentatt.q_value3;
 			_skin.grp_foot.y = 237;
 			_skin.bg.height = 311;
 		}

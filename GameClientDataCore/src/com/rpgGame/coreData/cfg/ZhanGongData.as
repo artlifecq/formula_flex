@@ -9,6 +9,7 @@ package com.rpgGame.coreData.cfg
 	{
 		private static var _dataDic : Dictionary;
 		private static var _nameDic:Dictionary;
+		private static var _maxNum:int=0;
 		
 		public static function setup(data : ByteArray) : void
 		{
@@ -45,7 +46,7 @@ package com.rpgGame.coreData.cfg
 		/**
 		 * 依据等级获取相应的类型
 		 * */
-		public static function getBossItemTypeList(lv:int):Vector.<int>
+		public static function getBossItemTypeList(lv:int,index:int):Vector.<int>
 		{
 			var list:Vector.<int>=new Vector.<int>();
 			for each(var info:Q_meritorious in _dataDic)
@@ -53,6 +54,30 @@ package com.rpgGame.coreData.cfg
 				if(info.q_level==lv&&!isHave(list,info.q_type))
 				{
 					list.push(info.q_type);
+				}
+			}
+			_maxNum=list.length;
+			list=getListByYeQian(list,index);
+			return list;
+		}
+		
+		/**
+		 * 获取类型的最大页数
+		 * */
+		public static function getMaxYeQian():int
+		{
+			return _maxNum/6;
+		}
+		
+		
+		private static function getListByYeQian(lists:Vector.<int>,index:int):Vector.<int>
+		{
+			var list:Vector.<int>=new Vector.<int>();
+			for(var i:int=0;i<lists.length;i++)
+			{
+				if(i>=index*6&&i<index*6+6)
+				{
+					list.push(lists[i]);
 				}
 			}
 			return list;

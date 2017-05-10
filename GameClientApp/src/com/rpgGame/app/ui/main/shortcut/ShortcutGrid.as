@@ -96,8 +96,17 @@ package com.rpgGame.app.ui.main.shortcut
 			nutaEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_TANU_MJ));
 			addResEvent();
 			
+			this.checkDrag=checkDrags;
+			
 			//_cdFace.showTmTxt(22);
 		}
+		
+		private function checkDrags():Boolean
+		{
+			return true;
+		}
+		
+		
 		
 		private function addResEvent():void
 		{

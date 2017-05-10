@@ -1,7 +1,9 @@
 package com.rpgGame.app.manager
 {
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.ui.common.CenterEftPop;
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
@@ -48,6 +50,7 @@ package com.rpgGame.app.manager
 				if(skill.skillId == skillId)
 				{
 					skill.level = level;
+					UIPopManager.showAlonePopUI(CenterEftPop,"ui_shengjichenggong");
 					EventManager.dispatchEvent(LostSkill_UpLevelSkillId);
 				}
 			}
@@ -79,7 +82,7 @@ package com.rpgGame.app.manager
 			var myMon:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD);
 			if(myMon<data.q_yuanbao)
 			{
-				NoticeManager.showNotify(NotifyCfgData.getNotifyTextByID(7011));
+				NoticeManager.showNotifyById(7011);
 				return ;
 			}
 			var msg:CSActivitSkillMessage = new CSActivitSkillMessage();

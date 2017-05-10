@@ -42,6 +42,10 @@ package org.mokylin.skin.app.wuxue.juexue
 
 		public var nexttLevel:feathers.controls.SkinnableContainer;
 
+		public var tile_1:feathers.controls.SkinnableContainer;
+
+		public var tile_2:feathers.controls.SkinnableContainer;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -53,7 +57,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			this.currentState = "normal";
 			this.height = 445;
 			this.width = 260;
-			this.elementsContent = [__Juxue_Shengji_UIAsset1_i(),__Juxue_Shengji_SkinnableContainer1_i(),__Juxue_Shengji_SkinnableContainer2_i(),grp_dengji_i(),currentLevel_i(),nexttLevel_i(),grp_xiaohao_i(),isopen_i(),btn_shengji_i(),btn_yinyong_i()];
+			this.elementsContent = [__Juxue_Shengji_UIAsset1_i(),tile_1_i(),tile_2_i(),grp_dengji_i(),currentLevel_i(),nexttLevel_i(),grp_xiaohao_i(),isopen_i(),btn_shengji_i(),btn_yinyong_i()];
 			
 			states = {
 			};
@@ -83,30 +87,6 @@ package org.mokylin.skin.app.wuxue.juexue
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 10;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function __Juxue_Shengji_SkinnableContainer1_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			temp.height = 27;
-			var skin:StateSkin = new org.mokylin.skin.app.wuxue.Title_Skin()
-			temp.skin = skin
-			temp.width = 253;
-			temp.x = 4;
-			temp.y = 4;
-			return temp;
-		}
-
-		private function __Juxue_Shengji_SkinnableContainer2_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			temp.height = 27;
-			var skin:StateSkin = new org.mokylin.skin.app.wuxue.Title_Skin()
-			temp.skin = skin
-			temp.width = 253;
-			temp.x = 4;
-			temp.y = 182;
 			return temp;
 		}
 
@@ -171,7 +151,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			temp.skin = skin
 			temp.width = 235;
 			temp.x = 16;
-			temp.y = 81;
+			temp.y = 71;
 			return temp;
 		}
 
@@ -192,7 +172,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			grp_xiaohao = temp;
 			temp.name = "grp_xiaohao";
 			temp.x = 15;
-			temp.y = 220;
+			temp.y = 235;
 			temp.elementsContent = [__Juxue_Shengji_Label2_i(),lb_xiaohao_i(),__Juxue_Shengji_UIAsset3_i(),lb_lujing_i()];
 			return temp;
 		}
@@ -260,7 +240,35 @@ package org.mokylin.skin.app.wuxue.juexue
 			temp.skin = skin
 			temp.width = 235;
 			temp.x = 16;
-			temp.y = 136;
+			temp.y = 116;
+			return temp;
+		}
+
+		private function tile_1_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			tile_1 = temp;
+			temp.name = "tile_1";
+			temp.height = 27;
+			var skin:StateSkin = new org.mokylin.skin.app.wuxue.Title_Skin()
+			temp.skin = skin
+			temp.width = 253;
+			temp.x = 4;
+			temp.y = 4;
+			return temp;
+		}
+
+		private function tile_2_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			tile_2 = temp;
+			temp.name = "tile_2";
+			temp.height = 27;
+			var skin:StateSkin = new org.mokylin.skin.app.wuxue.Title_Skin()
+			temp.skin = skin
+			temp.width = 253;
+			temp.x = 4;
+			temp.y = 197;
 			return temp;
 		}
 

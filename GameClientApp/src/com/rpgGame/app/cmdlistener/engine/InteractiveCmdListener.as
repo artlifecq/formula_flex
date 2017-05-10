@@ -3,6 +3,7 @@ package com.rpgGame.app.cmdlistener.engine
 	import com.game.engine3D.controller.CameraController;
 	import com.game.engine3D.events.SceneEvent;
 	import com.game.engine3D.events.SceneEventAction3D;
+	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.rpgGame.app.graphics.StallHeadFace;
 	import com.rpgGame.app.manager.TrusteeshipManager;
@@ -23,6 +24,7 @@ package com.rpgGame.app.cmdlistener.engine
 	import com.rpgGame.coreData.info.stall.StallData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
+	import flash.events.Event;
 	import flash.geom.Vector3D;
 	import flash.utils.clearTimeout;
 	import flash.utils.getTimer;
@@ -61,6 +63,7 @@ package com.rpgGame.app.cmdlistener.engine
 			EventManager.addEvent(SceneEvent.INTERACTIVE, onSceneInteractive);
 			EventManager.addEvent(SceneEvent.CAMERA_START_PANNING, onCameraStartPanning);
 			EventManager.addEvent(SceneEvent.CAMERA_END_PANNING, onCameraEndPanning);
+            Stage3DLayerManager.stage.addEventListener(Event.DEACTIVATE, onDeactivate);
 			//
 			finish();
 		}
@@ -83,6 +86,10 @@ package com.rpgGame.app.cmdlistener.engine
 		{
 			SceneRoleSelectManager.updateRoleMouseCursor();
 		}
+        
+        private function onDeactivate(e : Event) : void {
+            this._isLeftDown = false;
+        }
 
 		private function onSceneInteractive(action : String, mosEvt : MouseEvent3D, position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
 		{
@@ -142,7 +149,6 @@ package com.rpgGame.app.cmdlistener.engine
 				RoleStateUtil.doWalkTo(MainRoleManager.actor, position)
 			}
 		}
-		
         private function sceneMapUp(position : Vector3D) : void {
             this._isLeftDown = false;
 			TrusteeshipManager.getInstance().isLeftDown=false;

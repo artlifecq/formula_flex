@@ -95,9 +95,9 @@ package org.mokylin.skin.mainui.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg1 = temp;
 			temp.name = "bg1";
-			temp.styleName = "ui/mainui/juexue/shan_1.png";
+			temp.styleName = "ui/alphapng/shan_1.png";
 			temp.x = 0;
-			temp.y = 37;
+			temp.y = 15;
 			return temp;
 		}
 
@@ -106,9 +106,9 @@ package org.mokylin.skin.mainui.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg2 = temp;
 			temp.name = "bg2";
-			temp.styleName = "ui/mainui/juexue/shan_2.png";
-			temp.x = 25;
-			temp.y = 1;
+			temp.styleName = "ui/alphapng/shan_2.png";
+			temp.x = 16;
+			temp.y = -9;
 			return temp;
 		}
 
@@ -117,9 +117,9 @@ package org.mokylin.skin.mainui.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg3 = temp;
 			temp.name = "bg3";
-			temp.styleName = "ui/mainui/juexue/shan_3.png";
-			temp.x = 63;
-			temp.y = -22;
+			temp.styleName = "ui/alphapng/shan_3.png";
+			temp.x = 43;
+			temp.y = -24;
 			return temp;
 		}
 
@@ -128,9 +128,9 @@ package org.mokylin.skin.mainui.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg4 = temp;
 			temp.name = "bg4";
-			temp.styleName = "ui/mainui/juexue/shan_4.png";
-			temp.x = 115;
-			temp.y = -25;
+			temp.styleName = "ui/alphapng/shan_4.png";
+			temp.x = 83;
+			temp.y = -24;
 			return temp;
 		}
 
@@ -139,8 +139,8 @@ package org.mokylin.skin.mainui.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg5 = temp;
 			temp.name = "bg5";
-			temp.styleName = "ui/mainui/juexue/shan_5.png";
-			temp.x = 152;
+			temp.styleName = "ui/alphapng/shan_5.png";
+			temp.x = 128;
 			temp.y = -22;
 			return temp;
 		}
@@ -150,9 +150,9 @@ package org.mokylin.skin.mainui.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg6 = temp;
 			temp.name = "bg6";
-			temp.styleName = "ui/mainui/juexue/shan_6.png";
-			temp.x = 162;
-			temp.y = -2;
+			temp.styleName = "ui/alphapng/shan_6.png";
+			temp.x = 155;
+			temp.y = -8;
 			return temp;
 		}
 
@@ -161,9 +161,9 @@ package org.mokylin.skin.mainui.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg7 = temp;
 			temp.name = "bg7";
-			temp.styleName = "ui/mainui/juexue/shan_7.png";
-			temp.x = 171;
-			temp.y = 37;
+			temp.styleName = "ui/alphapng/shan_7.png";
+			temp.x = 170;
+			temp.y = 17;
 			return temp;
 		}
 

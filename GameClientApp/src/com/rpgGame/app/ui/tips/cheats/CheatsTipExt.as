@@ -79,7 +79,7 @@ package com.rpgGame.app.ui.tips.cheats
 				labList.length=0;
 				
 				//名字
-				_skin.lab_name.text=cheatVo.cheatsConfig.q_name+" "+cheatVo.level+"层";
+				_skin.lab_name.text=cheatVo.cheatsConfig.q_name;
 				var lab:Label;
 				//状态
 				if (cheatVo.level==0) 
