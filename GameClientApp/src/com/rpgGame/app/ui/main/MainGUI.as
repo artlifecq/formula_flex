@@ -196,6 +196,8 @@ package com.rpgGame.app.ui.main
 			_lowBloodBg.touchable=false;
 			_lowBloodBg.styleName="ui/common/dyingeffect.png";
 			
+			onSwitchCmp();
+			
 //			_chatBar = new ChatBar();
 //			addChild(_chatBar);
 //			

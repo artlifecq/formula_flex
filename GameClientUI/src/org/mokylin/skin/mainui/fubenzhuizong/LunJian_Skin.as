@@ -4,13 +4,11 @@ package org.mokylin.skin.mainui.fubenzhuizong
 	import feathers.controls.Button;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
-	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_shouhui;
 	import org.mokylin.skin.component.button.ButtonSkin_zhankai;
-	import org.mokylin.skin.mainui.renwu.Renwu_Item2;
 
 	/**
 	 * @private
@@ -26,11 +24,11 @@ package org.mokylin.skin.mainui.fubenzhuizong
 
 		public var btn_open:feathers.controls.Button;
 
+		public var killName:feathers.controls.Label;
+
 		public var scroll_box:feathers.controls.Group;
 
 		public var sec_info:feathers.controls.Label;
-
-		public var sec_killbut1_1:feathers.controls.SkinnableContainer;
 
 		public var sec_subbut1:feathers.controls.Button;
 
@@ -52,6 +50,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			
 			this.currentState = "normal";
 			this.height = 335;
+			this.width = 253;
 			this.elementsContent = [task_box_i(),btn_open_i(),btn_close_i()];
 			
 			states = {
@@ -142,6 +141,20 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			return temp;
 		}
 
+		private function killName_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			killName = temp;
+			temp.name = "killName";
+			temp.htmlText = "击杀：<u>秦国士兵</u><font color='#cfc6ae'>(0/30)</font>";
+			temp.color = 0x6BCC08;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 186;
+			temp.x = 54;
+			temp.y = 30;
+			return temp;
+		}
+
 		private function scroll_box_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -151,7 +164,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.width = 250;
 			temp.x = 5;
 			temp.y = 39;
-			temp.elementsContent = [__LunJian_Skin_UIAsset5_i(),sec_killbut1_1_i(),sec_subbut1_i(),sec_time_i(),sec_info_i(),__LunJian_Skin_UIAsset6_i()];
+			temp.elementsContent = [__LunJian_Skin_UIAsset5_i(),sec_subbut1_i(),sec_time_i(),sec_info_i(),__LunJian_Skin_UIAsset6_i(),killName_i()];
 			return temp;
 		}
 
@@ -171,20 +184,6 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.width = 202;
 			temp.x = 25;
 			temp.y = 121;
-			return temp;
-		}
-
-		private function sec_killbut1_1_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			sec_killbut1_1 = temp;
-			temp.name = "sec_killbut1_1";
-			temp.height = 20;
-			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item2()
-			temp.skin = skin
-			temp.width = 169;
-			temp.x = 50;
-			temp.y = 25;
 			return temp;
 		}
 

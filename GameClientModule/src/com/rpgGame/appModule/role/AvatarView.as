@@ -11,7 +11,6 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.ItemSender;
-	import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.app.view.uiComponent.menu.Menu;
@@ -21,17 +20,15 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
-	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
-	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.lang.LangGoods;
 	import com.rpgGame.coreData.lang.LangMenu;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
-	import com.rpgGame.coreData.type.AvatarMaskType;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RoleStateType;
@@ -43,6 +40,10 @@ package com.rpgGame.appModule.role
 	import app.message.EquipType;
 	
 	import feathers.data.ListCollection;
+	import feathers.dragDrop.DragData;
+	import feathers.events.DragDropEvent;
+	
+	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.juese_Skin;
@@ -51,6 +52,7 @@ package com.rpgGame.appModule.role
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import starling.filters.GlowFilter;
 
 	/**
 	 *装备部分
@@ -67,6 +69,8 @@ package com.rpgGame.appModule.role
 		private var equipNum:int=10;
 		private var bgList:Array=[GridBGType.EQUIP_WEAPON,GridBGType.EQUIP_HELM,GridBGType.EQUIP_ARMOR,GridBGType.EQUIP_LEGHARNESS,GridBGType.EQUIP_SHOE,GridBGType.EQUIP_SCAPULA,
 			GridBGType.EQUIP_RING,GridBGType.EQUIP_NECKLACE,GridBGType.EQUIP_BRACER,GridBGType.EQUIP_JADE];
+/*		private var equipsTypes:Array=[EquipType.WEAPON,EquipType.HELM,EquipType.ARMOR,EquipType.LEGHARNESS,EquipType.SHOE,EquipType.SCAPULA,
+			EquipType.RING,EquipType.NECKLACE,EquipType.BRACER,EquipType.JADE];*/
 		private var equipsTypes:Array=[EquipType.WEAPON,EquipType.HELM,EquipType.ARMOR,EquipType.LEGHARNESS,EquipType.SHOE,EquipType.SCAPULA,
 			EquipType.RING,EquipType.NECKLACE,EquipType.BRACER,EquipType.JADE];
 		private var equipGrids:Vector.<DragDropItem>;
@@ -84,6 +88,10 @@ package com.rpgGame.appModule.role
 		private var _touchID:int;
 
 		private var startX:Number;
+
+		private var glowfilter:GlowFilter;
+		private var glowTween:TweenLite;
+		private var nextBlur:Number;
 		
 		
 		public function AvatarView(skin:juese_Skin)
@@ -152,7 +160,7 @@ package com.rpgGame.appModule.role
 			_avatar.y = _skin.weapons.y + _skin.weapons.height+20;
 			_avatarContainer.addChild3D(_avatar);
 			_showAvatarData = new RoleData(0);
-			
+			glowfilter=new GlowFilter(0xdfb612,1,1,1);
 			
 			_zhandouliEft= _zhandouliEftContaner.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JIEMIAN_ZHANDOULI),135,28,0);
 		}
@@ -214,7 +222,28 @@ package com.rpgGame.appModule.role
 			}else{
 				goodsInfo=getGoodsInfoForOther();
 			}
+			
 			var i:int =0;
+			var info:ClientItemInfo;
+			var list:Array=[];
+			for (i=0; i<equipNum; i++)
+			{
+				info=goodsInfo?goodsInfo[i]:null;
+				if(info){
+					var index:int=equipsTypes.indexOf(info.qItem.q_kind);
+					info.index=index;
+					list.push(info);
+					goodsInfo[i]=null;
+				}
+			}
+			
+			for (i=0; i<list.length; i++)
+			{
+				info=list[i];
+				goodsInfo[info.index]=info;
+			}
+			
+			
 			var goodsLen:int = goodsInfo ? goodsInfo.length : 0;
 			for (i=0; i<equipNum; i++)
 			{
@@ -272,7 +301,49 @@ package com.rpgGame.appModule.role
 			EventManager.addEvent(ItemEvent.ITEM_GET, getItem);
 			
 			EventManager.addEvent(AvatarEvent.EQUIP_CHANGE, equipChange);
+			
+			EventManager.addEvent(DragDropEvent.DRAG_START,onDragStart);
+			EventManager.addEvent(DragDropEvent.DRAG_COMPLETE,onDragEnd);
 		}
+		
+		private function onDragEnd(data:DragData):void
+		{
+			var item:DragDropItem=data.getDataForFormat("DragDropGrid");
+			var info:EquipInfo=item.faceInfo as EquipInfo;
+			if(info&&info.containerID==0){
+				var index:int=equipsTypes.indexOf(info.qItem.q_kind);
+				equipGrids[index].filter=null;
+			}
+		}
+		
+		private function onDragStart(data:DragData):void
+		{
+			var item:DragDropItem=data.getDataForFormat("DragDropGrid");
+			var info:EquipInfo=item.faceInfo as EquipInfo;
+			if(info&&info.containerID==0){
+				if(glowTween){
+					glowTween.kill();
+				}
+				nextBlur=0;
+				var index:int=equipsTypes.indexOf(info.qItem.q_kind);
+				equipGrids[index].filter=glowfilter;
+				onGlowTween();
+			}
+		}
+		
+		private function onGlowTween():void
+		{
+			if(glowTween){
+				glowTween.kill();
+			}
+			if(nextBlur==0){
+				nextBlur=1;
+			}else{
+				nextBlur=0;
+			}
+			glowTween=TweenLite.to(glowfilter,0.5,{blur:nextBlur,onComplete:onGlowTween});
+		}
+		
 		
 		private function equipChange(role:SceneRole):void
 		{
@@ -307,6 +378,8 @@ package com.rpgGame.appModule.role
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_GET, getItem);
 			EventManager.removeEvent(AvatarEvent.EQUIP_CHANGE, equipChange);
+			EventManager.removeEvent(DragDropEvent.DRAG_START,onDragStart);
+			EventManager.removeEvent(DragDropEvent.DRAG_COMPLETE,onDragEnd);
 		}
 		
 		/**

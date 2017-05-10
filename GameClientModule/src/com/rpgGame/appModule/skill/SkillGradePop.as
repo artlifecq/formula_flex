@@ -31,7 +31,8 @@ package com.rpgGame.appModule.skill
 		override  protected function onShow() : void
 		{
 			skin.num_zhandouli.label="x"+_lv;
-			TweenLite.delayedCall(1,tweenMis);
+//			TweenLite.delayedCall(1,tweenMis);
+			tweenMis();
 		}
 		
 		private function tweenMis():void

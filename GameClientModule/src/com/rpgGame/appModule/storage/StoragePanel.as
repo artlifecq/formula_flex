@@ -3,6 +3,7 @@ package com.rpgGame.appModule.storage
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.goods.StorageManager;
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
@@ -98,7 +99,8 @@ package com.rpgGame.appModule.storage
 		
 		protected function onDoubleClick(grid:IconCDFace):void
 		{
-//			ItemUseManager.useItem(grid.faceInfo as ItemInfo);
+			var item:ClientItemInfo=grid.faceInfo as ClientItemInfo;
+			ItemSender.StoreTobag(item.itemInfo.itemId,-1);
 		}
 		
 		protected function onRightMouse(grid:IconCDFace):void
@@ -223,6 +225,7 @@ package com.rpgGame.appModule.storage
 			if(info.containerID!=ItemContainerID.Storage){
 				return;
 			}
+			
 			var item:ClientItemInfo=info.data as ClientItemInfo;
 			ItemSender.StoreTobag(item.itemInfo.itemId,-1);
 		}
@@ -285,6 +288,7 @@ package com.rpgGame.appModule.storage
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,refreshGrid);
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,refreshGrid);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,refreshGrid);
+			EventManager.dispatchEvent(ItemEvent.CHANGE_ACCESS_STATE,false);
 		}
 	}
 }

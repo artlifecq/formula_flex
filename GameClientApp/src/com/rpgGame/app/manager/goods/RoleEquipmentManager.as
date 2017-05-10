@@ -2,24 +2,19 @@ package com.rpgGame.app.manager.goods
 {
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.core.events.ItemEvent;
-	import com.rpgGame.core.utils.RaceUtil;
 	import com.rpgGame.coreData.cfg.ShopCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
-	import com.rpgGame.coreData.role.RoleEquipInfo;
 	import com.rpgGame.coreData.type.SexType;
 	import com.rpgGame.coreData.type.item.EquipmentPos;
 	
 	import app.message.EquipType;
 	import app.message.GoodsType;
-	import app.message.ContainerProto.ContainerType;
 	
 	import org.client.mainCore.ds.HashMap;
-	import org.client.mainCore.manager.EventManager;
 	
 	/**
 	 * 角色穿戴装备
@@ -33,19 +28,17 @@ package com.rpgGame.app.manager.goods
 		public function RoleEquipmentManager()
 		{
 			super(ItemContainerID.Role)
-			
 			typeToPosMap = new HashMap();
-			typeToPosMap.add(EquipType.ARMOR, EquipmentPos.POS_ARMOR);
 			typeToPosMap.add(EquipType.WEAPON, EquipmentPos.POS_WEAPON);
-//			typeToPosMap.add(EquipType.SECOND_WEAPON, EquipmentPos.POS_SECOND_WEAPON);
 			typeToPosMap.add(EquipType.HELM, EquipmentPos.POS_HELM);
-			typeToPosMap.add(EquipType.BRACER, [EquipmentPos.POS_LEFT_BRACER, EquipmentPos.POS_RIGHT_BRACER]);
-			typeToPosMap.add(EquipType.NECKLACE, EquipmentPos.POS_NECKLACE);
+			typeToPosMap.add(EquipType.ARMOR, EquipmentPos.POS_ARMOR);
+			typeToPosMap.add(EquipType.LEGHARNESS,EquipmentPos.POS_LEGHARNESS);
 			typeToPosMap.add(EquipType.SHOE, EquipmentPos.POS_SHOE);
-			typeToPosMap.add(EquipType.RING, [EquipmentPos.POS_LEFT_RING, EquipmentPos.POS_RIGHT_RING]);
-//			typeToPosMap.add(EquipType.BELT, EquipmentPos.POS_BELT);
-			
-			initEquipments(MainRoleManager.actorInfo.equipInfo);
+			typeToPosMap.add(EquipType.SCAPULA, EquipmentPos.POS_SCAPULA);
+			typeToPosMap.add(EquipType.RING,EquipmentPos.POS_RING);
+			typeToPosMap.add(EquipType.NECKLACE,EquipmentPos.POS_NECKLACE);
+			typeToPosMap.add(EquipType.BRACER,EquipmentPos.POS_BRACER);
+			typeToPosMap.add(EquipType.JADE,EquipmentPos.POS_JADE);
 		}
 		
 		private static var _ins:RoleEquipmentManager;
@@ -68,15 +61,6 @@ package com.rpgGame.app.manager.goods
 			return false;
 		}
 		
-		public function initEquipments( equipInfo:RoleEquipInfo ):void
-		{
-			var equipments:Array = new Array(COUNT);
-			for(var i:int=0; i<COUNT; i++)
-			{
-				equipments[i] = equipInfo.getItemInfoByPos(i);
-			}
-			setAllItem(equipments);
-		}
 		
 		/**
 		 *此件装备是否合适放在pos位置上 
@@ -182,14 +166,14 @@ package com.rpgGame.app.manager.goods
 		override public function setItemByIndex(index:int, info:ClientItemInfo):void
 		{
 			super.setItemByIndex(index, info);
-			if(info != null)
+			/*if(info != null)
 			{
 				MainRoleManager.actorInfo.equipInfo.add(index, info);
 				EventManager.dispatchEvent(ItemEvent.ITEM_WEARED_PERSON_EQUIP, info);
 			}else{
 				info = MainRoleManager.actorInfo.equipInfo.remove(index) as ClientItemInfo;
 				EventManager.dispatchEvent(ItemEvent.ITEM_TOOK_OFF_PERSON_EQUIP, info);
-			}
+			}*/
 		}
 		
 		public function getRepairAllMoney():int
@@ -251,12 +235,6 @@ package com.rpgGame.app.manager.goods
 			if(equipSex == 0)return true;
 			var sex:int = MainRoleManager.actorInfo.sex ? SexType.MALE : SexType.FEMALE;
 			return equipSex == sex;
-		}
-		
-		public static function isSuitRace(job:int):Boolean
-		{
-			if(job == 0 || instance.getItemInfoByIndex(EquipmentPos.POS_SECOND_WEAPON) == null)return true;
-			return job == MainRoleManager.actorInfo.job;
 		}
 	}	
 }

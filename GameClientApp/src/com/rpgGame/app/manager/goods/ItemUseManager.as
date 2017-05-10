@@ -132,6 +132,11 @@ package com.rpgGame.app.manager.goods
 
 			if(item.type == GoodsType.EQUIPMENT)//人物面板在舞台，并且类型是装备
 			{
+				if(item.qItem.q_job!=MainRoleManager.actorInfo.job){
+					NoticeManager.showNotifyById(12009);
+					return;
+				}
+				
 				dstPos = RoleEquipmentManager.instance.getEquipPos(item);
 				if(dstPos != -1)
 				{
@@ -327,12 +332,12 @@ package com.rpgGame.app.manager.goods
 					AppManager.showApp(AppConstant.MOUNT_PANEL);
 					break;
 				}
-				case GoodsType.MATERIAL_COMBO:
+				case GoodsType.MATERIAL_COMBO://合成材料
 				{
 					var info:ComboItemInfo=new ComboItemInfo();
 					info.sourceId=item.cfgId;
 					AppManager.showAppNoHide(AppConstant.EQUIP_PANL,{tab:4,data:info});
-					break;
+					return;
 				}
 //				case GoodsType.JINZI_PACKAGE:
 //				{
