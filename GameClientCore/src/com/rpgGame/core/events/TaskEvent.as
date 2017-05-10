@@ -62,5 +62,10 @@ package com.rpgGame.core.events
 		public static const AUTO_FIGHT_START:int = UNIQUEID.NEXT;
 		/**挂机结束*/
 		public static const AUTO_FIGHT_STOP:int = UNIQUEID.NEXT;
+		
+		/**自动任务开始*/
+		public static const AUTO_TASK_START:int = UNIQUEID.NEXT;
+		/**自动任务结束*/
+		public static const AUTO_TASK_STOP:int = UNIQUEID.NEXT;
 	}
 }

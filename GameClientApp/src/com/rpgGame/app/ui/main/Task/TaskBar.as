@@ -1,36 +1,15 @@
 package com.rpgGame.app.ui.main.Task
 {
-	import com.game.engine3D.utils.MathUtil;
-	import com.rpgGame.app.fight.spell.CastSpellHelper;
-	import com.rpgGame.app.manager.collect.CollectManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.scene.SceneManager;
-	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
-	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.sender.TaskSender;
-	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.app.utils.TaskUtil;
-	import com.rpgGame.core.app.AppConstant;
-	import com.rpgGame.core.app.AppManager;
-	import com.rpgGame.core.controller.MouseCursorController;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
-	import com.rpgGame.core.events.SkillEvent;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
-	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
-	import com.rpgGame.coreData.clientConfig.Q_mission_base;
-	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
-	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.TaskType;
-	
-	import flash.geom.Point;
 	
 	import gs.TweenMax;
 	
@@ -183,7 +162,7 @@ package com.rpgGame.app.ui.main.Task
 			if(panlIsopen)
 			{
 				var dist:int =TaskUtil.getDistfinishNpc();
-				if(dist>200)
+				if(dist>200&&!TaskAutoManager.getInstance().isTaskRunning)
 				{
 					TaskControl.hideLeadPanel();
 				}				
@@ -232,6 +211,8 @@ package com.rpgGame.app.ui.main.Task
 			{
 				TaskControl.hideLoopPanel();
 			}
+			
+			
 			showNpcMark(false);
 		}
 		/**新任务*/
@@ -239,13 +220,22 @@ package com.rpgGame.app.ui.main.Task
 		{
 			if(type==TaskType.MAINTYPE_MAINTASK)
 			{
-				effetCont.playNewtaskEffect();
+				if(TaskMissionManager.haveMainTask)
+				{
+					effetCont.playNewtaskEffect();
+					TaskAutoManager.getInstance().startTaskAuto();
+				}
+				else
+				{
+					TaskAutoManager.getInstance().stopTaskAuto();
+				}
 			}
 			
 			setViewShow();
 			leadCont.leadTaskView();
 			loopCont.loopTaskView(type);
 			showNpcMark(true);
+			
 			
 		}
 		/**隐藏显示npc问号*/
@@ -262,16 +252,21 @@ package com.rpgGame.app.ui.main.Task
 		{
 			leadCont.upleadTaskView();
 			loopCont.upLoopTaskView(type);
-			if(type==TaskType.MAINTYPE_MAINTASK&&TaskMissionManager.getMainTaskIsFinish())
+			if(type==TaskType.MAINTYPE_MAINTASK)
 			{
-				if(TaskMissionManager.getMainTaskHaveNpc())
+				if(TaskMissionManager.getMainTaskIsFinish())
 				{
-					showNpcMark(true);
+					if(TaskMissionManager.getMainTaskHaveNpc())
+					{
+						showNpcMark(true);
+					}
+					else
+					{
+						
+						TaskControl.showLeadPanel();
+					}
 				}
-				else
-				{
-					TaskControl.showLeadPanel();
-				}
+				TaskAutoManager.getInstance().setTaskChange();
 			}
 			
 		}
@@ -299,7 +294,7 @@ package com.rpgGame.app.ui.main.Task
 		}
 		private function setViewShow():void
 		{
-			if(TaskMissionManager.isOnlyDailyTask)//只有主线//if(TaskMissionManager.isOnlyDailyTask)//只有主线
+			if(TaskMissionManager.isOnlyMainTask)//只有主线//if(TaskMissionManager.isOnlyDailyTask)//只有主线
 			{
 				leadCont.show(true);
 				loopCont.show(false);

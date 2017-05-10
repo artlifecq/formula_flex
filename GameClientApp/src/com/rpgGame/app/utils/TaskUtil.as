@@ -435,13 +435,13 @@ package com.rpgGame.app.utils
 		 * @param id 刷新的id
 		 *
 		 */
-		public static function npcTaskWalk(id : int,onArrive:Function=null,noWalk:Function=null) : void
+		public static function npcTaskWalk(id : int,onArrive:Function=null) : void
 		{
 			
 			var monsterData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(id);
 			if (monsterData)
 			{
-				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100,null,noWalk);
+				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100,null,onArrive);
 			}
 		}
 		
@@ -451,13 +451,13 @@ package com.rpgGame.app.utils
 		 * @param modeId
 		 *
 		 */
-		public static function monsterTaskWalk(modeId : int,onArrive:Function=null,noWalk:Function=null) : void
+		public static function monsterTaskWalk(modeId : int,onArrive:Function=null) : void
 		{
 			
 			var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterByModelId(modeId,SceneSwitchManager.currentMapId);
 			if (monsterData)
 			{
-				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100,null,noWalk);
+				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100,null,onArrive);
 			}
 		}
 		/**
@@ -465,12 +465,12 @@ package com.rpgGame.app.utils
 		 * @param modeId
 		 *
 		 */
-		public static function postTaskWalk(post :Array,onArrive:Function=null,noWalk:Function=null,data:Object=null) : void
+		public static function postTaskWalk(post :Array,onArrive:Function=null,data:Object=null) : void
 		{
 			
 			if (post!=null&&post.length==3)
 			{
-				MainRoleSearchPathManager.walkToScene(post[0], post[1], post[2],onArrive, 100,data,noWalk);
+				MainRoleSearchPathManager.walkToScene(post[0], post[1], post[2],onArrive, 100,data,onArrive);
 			}
 		}
 		/**
@@ -478,7 +478,7 @@ package com.rpgGame.app.utils
 		 * @param id 刷新的id
 		 *
 		 */
-		public static function npcTaskFly(id : int,onArrive:Function=null,noWalk:Function=null) : void
+		public static function npcTaskFly(id : int) : void
 		{
 			
 			var monsterData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(id);

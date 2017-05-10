@@ -124,6 +124,7 @@ package com.rpgGame.app.ui.main.Task
 			for(i=0;i<ico1BgList.length;i++)
 			{
 				ico=new IconCDFace(IcoSizeEnum.ICON_48);
+				ico.showCD=false;
 				ico.x=ico1BgList[i].x-6;
 				ico.y=ico1BgList[i].y-6;
 				//ico.visible=false;
@@ -142,6 +143,7 @@ package com.rpgGame.app.ui.main.Task
 			for(i=0;i<ico2BgList.length;i++)
 			{
 				ico=new IconCDFace(IcoSizeEnum.ICON_48);
+				ico.showCD=false;
 				ico.x=ico2BgList[i].x-6;
 				ico.y=ico2BgList[i].y-6;
 				//ico.visible=false;

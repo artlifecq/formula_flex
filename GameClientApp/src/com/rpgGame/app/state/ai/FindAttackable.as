@@ -54,14 +54,15 @@ package com.rpgGame.app.state.ai
 			var role : SceneRole = findAttackableTarget();
 			if (role)
 			{
-				if(TrusteeshipManager.getInstance().isAutoFightRunning)
+				/*if(TrusteeshipManager.getInstance().isAutoFightRunning)
 				{
 					SceneRoleSelectManager.selectedRole = role;
 				}
-				else if(TrusteeshipManager.getInstance().isFightTargetRunning)
+				else if(TrusteeshipManager.getInstance().isFightActorRunning)
 				{
-					SceneRoleSelectManager.selectedRole = null;
-				}
+					SceneRoleSelectManager.selectedRole = role;
+				}*/
+				SceneRoleSelectManager.selectedRole = role;
 				TrusteeshipManager.getInstance().setRoleList(role);
 				var monsterData : MonsterData = role.data as MonsterData;
 				transition(AIStateType.AI_NONE);
@@ -92,7 +93,6 @@ package com.rpgGame.app.state.ai
 		private function findNearestMonster(istask:Boolean=false) : SceneRole
 		{
 			var roleList : Array = SceneManager.getScene().getSceneObjsByType(SceneCharType.MONSTER);
-			//roleList.sort(onSortNearestChar);
 			var rerlle:SceneRole;
 			currDist=int.MAX_VALUE;
 			while (roleList.length)
@@ -149,60 +149,20 @@ package com.rpgGame.app.state.ai
 		{
 			transition(AIStateType.AI_NONE);
 		}
-
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
 		{
+			if(TrusteeshipManager.getInstance().getHasRole()&&SceneRoleSelectManager.selectedRole !=null)
+			{
+				if (!force)
+					return false;
+			}
 			if (MainRoleManager.actor.stateMachine.isWalkMoving)
 			{
 				if (!force)
 					return false;
 			}
-			if (MainRoleManager.actor.stateMachine.isJumpRising)
-			{
-				return false;
-			}
-			if (MainRoleManager.actor.stateMachine.isBlinkMoving)
-			{
-				return false;
-			}
-			if (MainRoleManager.actor.stateMachine.isBeatMoving)
-			{
-				return false;
-			}
-			if (!MainRoleManager.actor.stateMachine.passTo(RoleStateType.ACTION_ATTACK))
-			{
-				return false;
-			}
-			if (MainRoleManager.actor.stateMachine.isDeadState)
-			{
-				return false;
-			}
-			if (MainRoleManager.actor.stateMachine.isAttackHarding)
-			{
-				return false;
-			}
-			if (MainRoleManager.actor.stateMachine.isLockCaseSpell)
-			{
-				return false;
-			}
+			
 			return true;
 		}
-		
-		public static function isFind():Boolean
-		{
-			var targetRoles:Vector.<SceneRole>=TrusteeshipManager.getInstance().getRoleList();
-			if(targetRoles!=null&&targetRoles.length>0)
-			{
-				for each (var role : SceneRole in targetRoles)
-				{
-					if (role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
-					{
-						return false;
-					}
-				}
-			}
-			return true;
-		}	
-		
 	}
 }

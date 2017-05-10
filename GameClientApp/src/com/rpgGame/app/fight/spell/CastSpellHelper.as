@@ -1,6 +1,7 @@
 package com.rpgGame.app.fight.spell
 {
 	import com.game.engine2D.config.SceneConfig;
+	import com.game.engine3D.controller.CameraController;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.utils.PathFinderUtil;
@@ -11,8 +12,10 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.fight.FightManager;
+	import com.rpgGame.app.manager.input.KeyMoveManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
+	import com.rpgGame.app.manager.scene.SceneCursorHelper;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.SpellSender;
@@ -36,6 +39,8 @@ package com.rpgGame.app.fight.spell
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
+	import flash.utils.clearTimeout;
+	import flash.utils.setTimeout;
 	
 	import away3d.pathFinding.DistrictWithPath;
 	
@@ -107,14 +112,47 @@ package com.rpgGame.app.fight.spell
 			
 			return relateSpells[_relateSpellIndex];
 		}
-
+		private static var _shortIng:Boolean=false;
+		private static var _timeOutId:uint;
+		private static var _timeOutNum:int=0;
+		/**玩家主动放技能优先*/
 		public static function shortcutsTryCaseSpell(spellID : int, ignoreLock : Boolean = false) : Boolean
 		{
-            var caseInfo : CastSpellInfo = new CastSpellInfo(getSpellData(spellID));
-			var cased : Boolean = tryCaseSpell(caseInfo, null, false, ignoreLock);
-            return cased;
+			clearTimeout(_timeOutId);
+			_shortIng=true;
+			var caseInfo : CastSpellInfo = new CastSpellInfo(getSpellData(spellID));
+			var spKey:Boolean=tryCaseSpell(caseInfo, null, false, ignoreLock);
+			if(!spKey)
+			{
+				_timeOutNum++;
+				if(_timeOutNum<=10)
+				{
+					_timeOutId=setTimeout(function():void{shortcutsTryCaseSpell(spellID, ignoreLock);},200);
+				}
+				else
+				{
+					_shortIng=false;
+					_timeOutNum=0;
+				}
+			}
+			else
+			{
+				_shortIng=false;
+				_timeOutNum=0;
+			}
+			return false
 		}
-
+			
+		
+		public static function autoTryCaseSpell(caseInfo : CastSpellInfo, roleList : Vector.<SceneRole> = null, autoAtkNearRole : Boolean = false, ignoreLock : Boolean = false) : Boolean
+		{
+			if(!_shortIng)
+			{
+				return tryCaseSpell(caseInfo,roleList,autoAtkNearRole,ignoreLock);
+			}
+			return false;
+		}
+		
 		public static function tryCaseSpell(caseInfo : CastSpellInfo, roleList : Vector.<SceneRole> = null, autoAtkNearRole : Boolean = false, ignoreLock : Boolean = false) : Boolean
 		{
 			_roleList = roleList;
@@ -282,6 +320,9 @@ package com.rpgGame.app.fight.spell
 			{
 				return CASE_STATE_FAIL;
 			}
+			
+			
+			
 			if (_caseSpell)
 			{
 				if (_caseSpell.q_skillID != castInfo.spellData.q_skillID)

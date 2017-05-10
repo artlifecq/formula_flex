@@ -100,6 +100,7 @@ package com.rpgGame.app.ui.main.Task
 			for(i=0;i<icoBgList.length;i++)
 			{
 				var ico:IconCDFace=new IconCDFace(IcoSizeEnum.ICON_48);
+				ico.showCD=false;
 				ico.x=icoBgList[i].x-6;
 				ico.y=icoBgList[i].y-6;
 				ico.visible=false;

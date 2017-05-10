@@ -109,7 +109,9 @@ package com.rpgGame.app.cmdlistener.scene
 				failReason="未配置的技能错误码!----failID";
 				GameLog.addShow(failReason);
 			}
-		
+			
+			if(failID==1014&&TrusteeshipManager.getInstance().isAuto)return;//---------------yt 客户端已经规避目标死亡还是出现，所有在挂机的时候不要这个提示
+				
 			NoticeManager.showNotify(failReason, failID);
 		}
 		
@@ -216,7 +218,7 @@ package com.rpgGame.app.cmdlistener.scene
         // 锁定攻击源
         private function lockAttack(info : SpellResultInfo):void
 		{
-            if (info.isMainCharHited && null == SceneRoleSelectManager.selectedRole)
+            if (info.isMainCharHited)// && null == SceneRoleSelectManager.selectedRole   锁定攻击不需要选择为空
 			{
                 var hurtList : Vector.<FightHurtResult> = info.hurtList;
                 if (hurtList.length > 0)
