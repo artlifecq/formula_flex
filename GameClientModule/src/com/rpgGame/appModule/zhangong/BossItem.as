@@ -10,6 +10,7 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.sender.ZhanGongSender;
+	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.common.CenterEftPop;
 	import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
 	import com.rpgGame.core.events.MainPlayerEvent;
@@ -29,11 +30,13 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.coreData.clientConfig.Q_meritorious;
 	import com.rpgGame.coreData.clientConfig.Q_meritorious_monster;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
+	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
+	import com.rpgGame.coreData.info.alert.AlertSetInfo;
+	import com.rpgGame.coreData.lang.LangUI;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.type.AvatarMaskType;
 	import com.rpgGame.coreData.type.CharAttributeType;
-	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.ZhanGongUtil;
 	import com.rpgGame.netData.zhangong.bean.MeritoriousInfo;
 	import com.rpgGame.netData.zhangong.message.SCMeritoriousUpgradeResultMessage;
@@ -64,6 +67,7 @@ package com.rpgGame.appModule.zhangong
 		private var _isCanUp:Boolean=false;
 		
 		private var _progressBar:AwdProgressBar;
+		private static var noAlertWash:Boolean;
 		
 		public function BossItem()
 		{
@@ -104,7 +108,8 @@ package com.rpgGame.appModule.zhangong
 			_skin.btnUp.removeEventListener(starling.events.TouchEvent.TOUCH, onTouchBtn);
 			EventManager.removeEvent(ZhanGongEvent.BOSSITEM_CHANGE,updatePanel);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,resChange);
-			RoleFaceMaskEffectUtil.removeFaceMaskEffect(_avatar.curRole);
+			if(_avatar!=null&&_avatar.curRole!=null)
+				RoleFaceMaskEffectUtil.removeFaceMaskEffect(_avatar.curRole);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -297,7 +302,7 @@ package com.rpgGame.appModule.zhangong
 		private function toUpHandler(e:Event):void
 		{
 			if(_isCanUp)
-			{
+			{			
 				var p:Point=new Point(this._skin.btnUp.x+this._skin.btnUp.width/2,this._skin.btnUp.y+this._skin.btnUp.height/2);
 				p=this._skin.btnUp.parent.localToGlobal(p);
 				p=this._skin.container.globalToLocal(p);

@@ -2,11 +2,19 @@ package com.rpgGame.app.manager
 {
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.sender.MailSender;
+	import com.rpgGame.core.events.FunctionMessageBarEvent;
 	import com.rpgGame.core.events.MailEvent;
 	import com.rpgGame.coreData.cfg.MailCfgData;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.info.heroSearch.HeroSearchData;
 	import com.rpgGame.coreData.info.mail.MailInfo;
+	import com.rpgGame.coreData.type.EnumFunctionMessageBarIcoType;
+	import com.rpgGame.netData.mail.bean.MailBriefInfo;
+	import com.rpgGame.netData.mail.message.ResAllMailsMessage;
+	import com.rpgGame.netData.mail.message.ResGetMailAttachmentSueccessMessage;
+	import com.rpgGame.netData.mail.message.ResMailDetailInfoMessage;
+	import com.rpgGame.netData.mail.message.ResRecevieNewMailMessage;
+	import com.rpgGame.netData.mail.message.SCDeleteResultMessage;
 	
 	import app.message.AmountType;
 	import app.message.Int64StringPairProto;
@@ -14,7 +22,8 @@ package com.rpgGame.app.manager
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
-
+	import org.game.netCore.data.long;
+	
 	/**
 	 *邮件MailManager
 	 * @author lpp
@@ -338,5 +347,139 @@ package com.rpgGame.app.manager
 			isRefuseReceiveMail = isRefuse;
 		}
 		
+		
+		/*
+		新邮件相关
+		* */
+		
+		/**所有邮件简要信息*/
+		private static var _allMailList:Vector.<MailBriefInfo>=new Vector.<MailBriefInfo>();
+		public static var isALL:Boolean;
+		
+		public static function getallMailList():Vector.<MailBriefInfo>
+		{
+			return _allMailList;
+		}
+		
+		public static function getMailById(id:long):MailBriefInfo
+		{
+			if(_allMailList==null||_allMailList.length<=0) return null;
+			for(var i:int=0;i<_allMailList.length;i++)
+			{
+				if(id.EqualTo(_allMailList[i].mailInfoId)) return _allMailList[i];
+			}
+			return null;
+		}
+		
+		//获取未读邮件的数量
+		public static function getNewMailNum():int
+		{
+			var num:int=0;
+			if(_allMailList==null||_allMailList.length<=0) return num;
+			for(var i:int=0;i<_allMailList.length;i++)
+			{
+				if(_allMailList[i].isRead==0)
+				{
+					num++;
+				}
+			}
+			return num;
+		}
+		
+		private static function setMailIsTiQu(id:long):void
+		{
+			if(_allMailList==null||_allMailList.length<=0) return;
+			for(var i:int=0;i<_allMailList.length;i++)
+			{
+				if(id.EqualTo(_allMailList[i].mailInfoId))
+				{
+					_allMailList[i].items=null;
+				}
+			}
+		}
+		
+		private static function isHaveMailById(mailid:long):Boolean
+		{
+			if(_allMailList==null||_allMailList.length<=0) return false;
+			for(var i:int=0;i<_allMailList.length;i++)
+			{
+				if(mailid.EqualTo(_allMailList[i].mailInfoId)) return true;
+			}
+			return false;
+		}
+		
+		private static function shortList(info1:MailBriefInfo,info2:MailBriefInfo):int
+		{
+			if(info1.sendTime.ToGID()>info2.sendTime.ToGID())
+				return -1;
+			else if(info1.sendTime.ToGID()<info2.sendTime.ToGID())
+				return 1;
+			return 0;
+		}
+		
+		public static function setMailIsRead(id:long):void
+		{
+			if(_allMailList==null||_allMailList.length<=0) return;
+			for(var i:int=0;i<_allMailList.length;i++)
+			{
+				if(id.EqualTo(_allMailList[i].mailInfoId))
+				{
+					_allMailList[i].isRead=1;
+				}
+			}
+		}
+		
+		/**服务端发送所有邮件*/
+		public static function resAllMailsMessage(msg:ResAllMailsMessage):void
+		{
+			_allMailList=msg.mailBriefInfos;
+			_allMailList.sort(shortList);
+		}
+		
+		/**展示某一个邮件的详细信息*/
+		public static function resMailDetailInfoMessage(msg:ResMailDetailInfoMessage):void
+		{
+			EventManager.dispatchEvent( MailEvent.MAIL_DETAILED_INFORMATION,msg.mailDetailInfo);
+		}
+		
+		/**提取附件成功后的消息*/
+		public static function resGetMailAttachmentSueccessMessage(msg:ResGetMailAttachmentSueccessMessage):void
+		{
+			setMailIsTiQu(msg.mailId);
+			setMailIsRead(msg.mailId);
+			EventManager.dispatchEvent( MailEvent.MAIL_COLLECT_CHANGE,msg.mailId);
+		}
+		
+		/**收到新邮件*/
+		public static function resRecevieNewMailMessage(msg:ResRecevieNewMailMessage):void
+		{
+			if(!isHaveMailById(msg.mailInstance.mailInfoId))
+			{
+				_allMailList.push(msg.mailInstance);
+				_allMailList.sort(shortList);
+				EventManager.dispatchEvent(MailEvent.ADD_MAIL_DATA);
+			}
+			var num:int=getNewMailNum();
+			EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_SHOW_TYPE, EnumFunctionMessageBarIcoType.MAIL_TYPE,num);
+		}
+		
+		/**删除邮件*/
+		public static function resDeletMailMessage(msg:SCDeleteResultMessage):void
+		{
+			if(msg.result==1)
+			{
+				if(_allMailList!=null&&_allMailList.length>0)
+				{
+					for(var i:int=0;i<_allMailList.length;i++)
+					{
+						if(_allMailList[i].mailInfoId.EqualTo(msg.mailId))
+						{
+							_allMailList.removeAt(i);
+						}
+					}
+					EventManager.dispatchEvent(MailEvent.DEL_MAIL_DATA);
+				}
+			}
+		}	
 	} 
 }
