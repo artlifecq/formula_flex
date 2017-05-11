@@ -100,6 +100,16 @@ package com.rpgGame.core.app
 		 */
 		public static var MULTY_PANL:String = createAppInfo( "dungeon.multy.MultyPanel","fuben");
 		/**
+		 *多人副本进入确认面板
+		 */
+		public static var MULTYENTER_PANL:String = createAppInfo( "dungeon.multy.MultyEnterPanel");
+		/**
+		 *多人副本倒计时面板
+		 */
+		public static var MULTYSURE_PANL:String = createAppInfo( "dungeon.multy.MultySurePanel");
+		
+		
+		/**
 		 *装备面板
 		 */
 		public static var EQUIP_PANL:String = createAppInfo( "equip.EquipPanel","zhuangbei");
