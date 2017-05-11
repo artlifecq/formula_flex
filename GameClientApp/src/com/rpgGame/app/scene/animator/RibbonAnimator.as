@@ -175,6 +175,12 @@ package com.rpgGame.app.scene.animator
 		 */
 		private static function onSortNearestRole(roleA : SceneRole, roleB : SceneRole) : int
 		{
+            if (null == roleA) {
+                return 1;
+            }
+            if (null == roleB) {
+                return -1;
+            }
 			if (roleA.type != roleB.type) {
 				return parseInt(roleA.type) - parseInt(roleB.type);
 			}
