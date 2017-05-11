@@ -25,8 +25,8 @@ package com.rpgGame.app.ui.main.shortcut
 		private var _numTxt : Label;
 		private var _btnIcon : Button;
 		private var _redPointIcon:UIAsset;
-
-		public function MessageIconBase(skin : StateSkin, numTxt : Label, btnIcon : Button,redPointIcon:UIAsset = null)
+		private var _btnClose:Button;
+		public function MessageIconBase(skin : StateSkin, numTxt : Label, btnIcon : Button,redPointIcon:UIAsset = null,btnClose:Button=null)
 		{
 			super();
 			skin.toSprite(this);
@@ -35,6 +35,7 @@ package com.rpgGame.app.ui.main.shortcut
 			_numTxt.touchable = false;
 			_btnIcon = btnIcon;
 			_redPointIcon = redPointIcon;
+			this._btnClose=btnClose;
 		}
 
 		public function show() : void
@@ -63,13 +64,22 @@ package com.rpgGame.app.ui.main.shortcut
 				case _btnIcon:
 					onTouchIcon();
 					break;
+				default:
+					if (_btnClose&&target==_btnClose) 
+					{
+						onCloseAll();
+					}
+					break
 			}
 		}
 
 		protected function onTouchIcon() : void
 		{
 		}
-
+		protected function onCloseAll():void
+		{
+			
+		}
 		public function setNum(num : int) : void
 		{
 			if (!_numTxt)

@@ -150,6 +150,7 @@ package   com.rpgGame.appModule.social.team.mediator
 	//	private var selectEffect:UIEffect2D;
 		private function OnPlayerPanel():void
 		{
+			
 			//Clipboard.generalClipboard.clear();
 			//Clipboard.generalClipboard.setData(ClipboardFormats.TEXT_FORMAT,"sssss");
 			SceneRoleSelectManager.mouseOverRole=_roleModel.avatar.curRole;
