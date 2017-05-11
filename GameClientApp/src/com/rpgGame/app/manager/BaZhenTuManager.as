@@ -70,7 +70,7 @@ package com.rpgGame.app.manager
 		
 		public static function enterBaZhenTu(npc:int,index:int):void
 		{
-			if(TeamManager.isHaveTeam())
+			if(Mgr.teamMgr.hasTeam)
 			{
 				NpcSender.clickNpc(npc, index);
 			}else

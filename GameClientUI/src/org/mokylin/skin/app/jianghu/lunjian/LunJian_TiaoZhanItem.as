@@ -10,7 +10,6 @@ package org.mokylin.skin.app.jianghu.lunjian
 	import org.mokylin.skin.app.jianghu.button.ButtonTiaozhan;
 	import org.mokylin.skin.app.jianghu.lunjian.LunJian_Nandu;
 	import org.mokylin.skin.app.jianghu.mc.UIMovieClipNandu;
-	import org.mokylin.skin.common.Title_Skin;
 
 	/**
 	 * @private
@@ -32,11 +31,17 @@ package org.mokylin.skin.app.jianghu.lunjian
 
 		public var mc_nandu:feathers.controls.UIMovieClip;
 
+		public var modeBg:feathers.controls.UIAsset;
+
+		public var modeCont:feathers.controls.SkinnableContainer;
+
 		public var sk_emeng:feathers.controls.SkinnableContainer;
 
 		public var sk_jiandan:feathers.controls.SkinnableContainer;
 
 		public var sk_kunnan:feathers.controls.SkinnableContainer;
+
+		public var uiOK:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -47,9 +52,9 @@ package org.mokylin.skin.app.jianghu.lunjian
 			super();
 			
 			this.currentState = "normal";
-			this.height = 285;
+			this.height = 483;
 			this.width = 245;
-			this.elementsContent = [__LunJian_TiaoZhanItem_UIAsset1_i(),lbName_i(),__LunJian_TiaoZhanItem_Label1_i(),__LunJian_TiaoZhanItem_Label2_i(),__LunJian_TiaoZhanItem_Label3_i(),lbLevel_i(),lbZhanli_i(),mc_nandu_i(),btnTiaozhan_i(),__LunJian_TiaoZhanItem_SkinnableContainer1_i(),sk_jiandan_i(),sk_kunnan_i(),sk_emeng_i()];
+			this.elementsContent = [__LunJian_TiaoZhanItem_UIAsset1_i(),modeBg_i(),modeCont_i(),lbName_i(),__LunJian_TiaoZhanItem_UIAsset2_i(),__LunJian_TiaoZhanItem_Label1_i(),__LunJian_TiaoZhanItem_Label2_i(),__LunJian_TiaoZhanItem_Label3_i(),lbLevel_i(),lbZhanli_i(),mc_nandu_i(),btnTiaozhan_i(),sk_jiandan_i(),sk_kunnan_i(),sk_emeng_i(),uiOK_i()];
 			
 			states = {
 			};
@@ -64,10 +69,10 @@ package org.mokylin.skin.app.jianghu.lunjian
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "解锁等级：";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 117;
-			temp.y = 40;
+			temp.x = 54;
+			temp.y = 273;
 			return temp;
 		}
 
@@ -75,10 +80,10 @@ package org.mokylin.skin.app.jianghu.lunjian
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "推荐战力：";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 117;
-			temp.y = 63;
+			temp.x = 54;
+			temp.y = 252;
 			return temp;
 		}
 
@@ -86,31 +91,28 @@ package org.mokylin.skin.app.jianghu.lunjian
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "当前难度：";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 117;
-			temp.y = 85;
-			return temp;
-		}
-
-		private function __LunJian_TiaoZhanItem_SkinnableContainer1_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			temp.height = 27;
-			var skin:StateSkin = new org.mokylin.skin.common.Title_Skin()
-			temp.skin = skin
-			temp.width = 233;
-			temp.x = 6;
-			temp.y = 150;
+			temp.x = 54;
+			temp.y = 296;
 			return temp;
 		}
 
 		private function __LunJian_TiaoZhanItem_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/jianghu/lunjian/bg.jpg";
+			temp.styleName = "ui/app/jianghu/lunjian/bgk.png";
 			temp.x = 0;
-			temp.y = 0;
+			temp.y = 1;
+			return temp;
+		}
+
+		private function __LunJian_TiaoZhanItem_UIAsset2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/jianghu/lunjian/zezao.png";
+			temp.x = 15;
+			temp.y = 250;
 			return temp;
 		}
 
@@ -120,8 +122,8 @@ package org.mokylin.skin.app.jianghu.lunjian
 			btnTiaozhan = temp;
 			temp.name = "btnTiaozhan";
 			temp.styleClass = org.mokylin.skin.app.jianghu.button.ButtonTiaozhan;
-			temp.x = 117;
-			temp.y = 109;
+			temp.x = 63;
+			temp.y = 329;
 			return temp;
 		}
 
@@ -130,12 +132,13 @@ package org.mokylin.skin.app.jianghu.lunjian
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbLevel = temp;
 			temp.name = "lbLevel";
+			temp.fontSize = 16;
 			temp.text = "Lv.45";
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 51;
-			temp.x = 187;
-			temp.y = 41;
+			temp.width = 82;
+			temp.x = 129;
+			temp.y = 273;
 			return temp;
 		}
 
@@ -144,11 +147,14 @@ package org.mokylin.skin.app.jianghu.lunjian
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbName = temp;
 			temp.name = "lbName";
+			temp.fontSize = 16;
 			temp.text = "名字共六个字";
+			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 130;
-			temp.y = 17;
+			temp.width = 131;
+			temp.x = 48;
+			temp.y = 16;
 			return temp;
 		}
 
@@ -157,12 +163,13 @@ package org.mokylin.skin.app.jianghu.lunjian
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbZhanli = temp;
 			temp.name = "lbZhanli";
+			temp.fontSize = 16;
 			temp.text = "123456";
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 51;
-			temp.x = 184;
-			temp.y = 64;
+			temp.width = 88;
+			temp.x = 126;
+			temp.y = 251;
 			return temp;
 		}
 
@@ -175,8 +182,31 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.height = 17;
 			temp.styleClass = org.mokylin.skin.app.jianghu.mc.UIMovieClipNandu;
 			temp.width = 32;
-			temp.x = 191;
-			temp.y = 87;
+			temp.x = 134;
+			temp.y = 298;
+			return temp;
+		}
+
+		private function modeBg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			modeBg = temp;
+			temp.name = "modeBg";
+			temp.styleName = "ui/app/jianghu/lunjian/beijing1.jpg";
+			temp.x = 16;
+			temp.y = 42;
+			return temp;
+		}
+
+		private function modeCont_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			modeCont = temp;
+			temp.name = "modeCont";
+			temp.height = 200;
+			temp.width = 200;
+			temp.x = 16;
+			temp.y = 42;
 			return temp;
 		}
 
@@ -189,8 +219,8 @@ package org.mokylin.skin.app.jianghu.lunjian
 			var skin:StateSkin = new org.mokylin.skin.app.jianghu.lunjian.LunJian_Nandu()
 			temp.skin = skin
 			temp.width = 70;
-			temp.x = 162;
-			temp.y = 180;
+			temp.x = 153;
+			temp.y = 370;
 			return temp;
 		}
 
@@ -203,8 +233,8 @@ package org.mokylin.skin.app.jianghu.lunjian
 			var skin:StateSkin = new org.mokylin.skin.app.jianghu.lunjian.LunJian_Nandu()
 			temp.skin = skin
 			temp.width = 70;
-			temp.x = 8;
-			temp.y = 180;
+			temp.x = 10;
+			temp.y = 370;
 			return temp;
 		}
 
@@ -217,8 +247,19 @@ package org.mokylin.skin.app.jianghu.lunjian
 			var skin:StateSkin = new org.mokylin.skin.app.jianghu.lunjian.LunJian_Nandu()
 			temp.skin = skin
 			temp.width = 70;
-			temp.x = 87;
-			temp.y = 180;
+			temp.x = 82;
+			temp.y = 370;
+			return temp;
+		}
+
+		private function uiOK_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiOK = temp;
+			temp.name = "uiOK";
+			temp.styleName = "ui/app/jianghu/lunjian/ytz.png";
+			temp.x = 174;
+			temp.y = 0;
 			return temp;
 		}
 

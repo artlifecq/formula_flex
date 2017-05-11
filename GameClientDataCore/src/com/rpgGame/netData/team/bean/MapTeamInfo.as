@@ -31,6 +31,9 @@ package com.rpgGame.netData.team.bean{
 		//队长等级
 		private var _captainlv: int;
 		
+		//队长地图
+		private var _captainMap: int;
+		
 		//最高等级
 		private var _highestlv: int;
 		
@@ -59,6 +62,8 @@ package com.rpgGame.netData.team.bean{
 			writeByte(_teamnum);
 			//队长等级
 			writeShort(_captainlv);
+			//队长地图
+			writeInt(_captainMap);
 			//最高等级
 			writeShort(_highestlv);
 			//平均等级
@@ -89,6 +94,8 @@ package com.rpgGame.netData.team.bean{
 			_teamnum = readByte();
 			//队长等级
 			_captainlv = readShort();
+			//队长地图
+			_captainMap = readInt();
 			//最高等级
 			_highestlv = readShort();
 			//平均等级
@@ -178,6 +185,21 @@ package com.rpgGame.netData.team.bean{
 		 */
 		public function set captainlv(value: int): void{
 			this._captainlv = value;
+		}
+		
+		/**
+		 * get 队长地图
+		 * @return 
+		 */
+		public function get captainMap(): int{
+			return _captainMap;
+		}
+		
+		/**
+		 * set 队长地图
+		 */
+		public function set captainMap(value: int): void{
+			this._captainMap = value;
 		}
 		
 		/**

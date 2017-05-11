@@ -38,6 +38,7 @@ package com.rpgGame.app.view.icon
 		public var _cdFace : CDFace;
 		private var _needCD : Boolean = false;
 		protected var _isGary : Boolean = false;
+		private var _showCD : Boolean = true;
 		
 		/** 是否已经侦听cd事件*/
 		private var _isAlreadyListenerCd : Boolean;
@@ -175,14 +176,13 @@ package com.rpgGame.app.view.icon
 		public function removeCdEvent() : void
 		{
 			_isAlreadyListenerCd = false;
-
 			EventManager.removeEvent(CDDataEvent.UPDATE, onCdUpdate);
 			EventManager.removeEvent(CDDataEvent.COMPLETE, onCdComplete);
 		}
 
 		private function onCdUpdate(cdData : CDData) : void
 		{
-			if (_faceInfo != null && cdData.id == _faceInfo.coolID)
+			if (_faceInfo != null && cdData.id == _faceInfo.coolID&&_showCD)
 			{
 				cdUpdate(cdData.now, cdData.cd);
 			}
@@ -190,12 +190,17 @@ package com.rpgGame.app.view.icon
 
 		private function onCdComplete(cdData : CDData) : void
 		{
-			if (_faceInfo != null && cdData.id == _faceInfo.coolID)
+			if (_faceInfo != null && cdData.id == _faceInfo.coolID&&_showCD)
 			{
 				removeCDFace();
+				cdComplete();
 			}
 		}
 
+		public function cdComplete():void
+		{
+			
+		}
 		public function removeCDFace() : void
 		{
 			if (_cdFace)
@@ -356,6 +361,17 @@ package com.rpgGame.app.view.icon
 			iconFace.setBg("");
 			iconFace.clear();
 		}
+
+		public function get showCD():Boolean
+		{
+			return _showCD;
+		}
+
+		public function set showCD(value:Boolean):void
+		{
+			_showCD = value;
+		}
+
 
 	}
 }

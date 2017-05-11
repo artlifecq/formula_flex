@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main.head
 {
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.LookSender;
@@ -29,6 +30,7 @@ package com.rpgGame.app.ui.main.head
 	import org.mokylin.skin.mainui.head.head_max_Skin;
 	
 	import starling.display.DisplayObject;
+	import starling.events.Event;
 	
 	/**
 	 *玩家头像 
@@ -60,7 +62,10 @@ package com.rpgGame.app.ui.main.head
 			_skin.container.addChildAt(_headImg,3);
 			goodBuffs=new Vector.<BuffIcon>();
 			badBuffs=new Vector.<BuffIcon>();
+
 		}
+		
+	
 		
 		override public function refresh():void
 		{
@@ -228,6 +233,9 @@ package com.rpgGame.app.ui.main.head
 					case this._skin.btn_cha:
 						EventManager.addEvent(LookEvent.ROLE_INFO,onRoleInfo);
 						LookSender.lookOtherPlayer(_roleData.serverID);
+						break;
+					case this._skin.btn_zu:
+						Mgr.teamMgr.reqCreateTeamWithPlayer(_roleData.serverID);
 						break;
 				}
 		}

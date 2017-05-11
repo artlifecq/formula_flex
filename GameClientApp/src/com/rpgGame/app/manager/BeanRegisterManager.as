@@ -28,6 +28,7 @@
 	import com.rpgGame.app.cmdlistener.StallCmdListener;
 	import com.rpgGame.app.cmdlistener.SummonCmdListener;
 	import com.rpgGame.app.cmdlistener.TeamCmdListener;
+	import com.rpgGame.app.cmdlistener.TeamCmdListerner;
 	import com.rpgGame.app.cmdlistener.TeamMemberPosCmdListener;
 	import com.rpgGame.app.cmdlistener.TradeCmdlistener;
 	import com.rpgGame.app.cmdlistener.ZhanGongContainerCmdListener;
@@ -119,8 +120,8 @@
 			register("MailCmdListener", MailCmdListener); //模块号18
 			register("HeroSearchCmdListener", HeroSearchCmdListener); //模块号14
 			register("FriendCmdListener", FriendCmdListener);
-			register("TeamCmdListener", TeamCmdListener); //模块号15
-			register("TeamMemberPosCmdListener", TeamMemberPosCmdListener); //模块号15
+			register("TeamCmdListerner", TeamCmdListerner); //模块号15
+//			register("TeamMemberPosCmdListener", TeamMemberPosCmdListener); //模块号15
 			register("GoodsContainerCmdListener", GoodsContainerCmdListener);
 			register("AddSpriteStatCmdListener", AddSpriteStatCmdListener);
 //			register("FamilyWarCmdListener", FamilyWarCmdListener); //王城战

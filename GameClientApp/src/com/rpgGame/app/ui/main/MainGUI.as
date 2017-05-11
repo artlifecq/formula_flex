@@ -3,7 +3,6 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.alert.GameAlert;
-	import com.rpgGame.app.ui.main.Task.TaskBar;
 	import com.rpgGame.app.ui.main.buff.BuffBar;
 	import com.rpgGame.app.ui.main.chat.ChatBar;
 	import com.rpgGame.app.ui.main.chat.SystemMsgBar;
@@ -15,7 +14,10 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.ui.main.head.RoleHeadBar;
 	import com.rpgGame.app.ui.main.navigation.NavigationBar;
 	import com.rpgGame.app.ui.main.shortcut.ShortcutBar;
+	import com.rpgGame.app.ui.main.shortcut.ShortcutMessageBar;
 	import com.rpgGame.app.ui.main.smallmap.SmallMapBar;
+	import com.rpgGame.app.ui.main.task.TaskBar;
+	import com.rpgGame.app.ui.main.team.TeamLeftFixedBar;
 	import com.rpgGame.app.ui.main.top.ExpBar;
 	import com.rpgGame.app.ui.main.top.TopBar;
 	import com.rpgGame.core.app.AppDispather;
@@ -99,6 +101,7 @@ package com.rpgGame.app.ui.main
 		//副本追踪
 		private var _dungeonTrackerBar:DungeonTrackerBar;
 		
+		private var _teamFixedBar:TeamLeftFixedBar;
 		//buff
 		private var _buffBar:BuffBar;
 		
@@ -196,6 +199,9 @@ package com.rpgGame.app.ui.main
 			_lowBloodBg.touchable=false;
 			_lowBloodBg.styleName="ui/common/dyingeffect.png";
 			
+			onSwitchCmp();
+			this._teamFixedBar=new TeamLeftFixedBar();
+			this.addChild(_teamFixedBar);
 //			_chatBar = new ChatBar();
 //			addChild(_chatBar);
 //			
@@ -470,7 +476,7 @@ package com.rpgGame.app.ui.main
 			this._eliteHead.resize(sWidth, sHeight);
 			this._normalHead.resize(sWidth, sHeight);
 			this._buffBar.resize(sWidth, sHeight);
-			
+			this._teamFixedBar.resize(sWidth,sHeight);
 			_lowBloodBg.width=sWidth;
 			_lowBloodBg.height=sHeight;
 			
@@ -484,7 +490,7 @@ package com.rpgGame.app.ui.main
 //			_hintBattleBar.resize(sWidth, sHeight);
 //			_teamBar.resize(sWidth, sHeight);
 //			_taskTrackPanel.resize(sWidth, _taskBar.y + _taskBar.height);
-//			ShortcutMessageBar.instence.resize(sWidth, sHeight);
+			ShortcutMessageBar.instence.resize(sWidth, sHeight);
 //			_yuMaChangActivityBar.resize(sWidth, _taskBar.y);
 		}
 		

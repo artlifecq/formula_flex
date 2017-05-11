@@ -203,7 +203,7 @@ package com.rpgGame.coreData.type
 		public static const UI_JINENGKUANG_FENGKUANGLIANNU:String="ui_jinengkuang_fengkuangliannu";
 		public static const UI_JINENGKUANG_SHANGUANG:String="ui_jinengkuang_shanguang";
 		public static const UI_TANU_MJ:String="ui_tanu_mj";
-		public static const UI_MERIDIAN_LEVELUP:String="UI_jingmaiyuan_baodian";
+		public static const UI_MERIDIAN_LEVELUP:String="ui_jingmaiyuan_baodian";
 		
 		/**任务特效*/
 		public static const UI_WANCHENGRENWU:String="ui_wanchengrenwu";

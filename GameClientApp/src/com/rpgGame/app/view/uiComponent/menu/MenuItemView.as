@@ -33,10 +33,13 @@ package com.rpgGame.app.view.uiComponent.menu
 		{
 			_type = type;
 			_skin.btn.label = MenuUtil.getMenuTitle( type );
-			_skin.btn.width=40;
+			//_skin.btn.width=60;
 			_skin.btn.height=20;
 		}
-		
+		override public function set width(value:Number):void
+		{
+			_skin.btn.width=value;
+		}
 		override protected function onTouchTarget(target : DisplayObject) : void 
 		{
 			super.onTouchTarget(target);

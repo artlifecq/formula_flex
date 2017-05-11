@@ -5,6 +5,7 @@ package com.rpgGame.app.ui.main.chat {
     import com.rpgGame.app.manager.chat.ChatSpeakHistoryManager;
     import com.rpgGame.app.manager.chat.FaceGroupManager;
     import com.rpgGame.app.manager.chat.NoticeManager;
+    import com.rpgGame.app.manager.debug.ClientCommend;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.richText.RichTextCustomLinkType;
     import com.rpgGame.app.richText.RichTextCustomUtil;
@@ -630,7 +631,11 @@ package com.rpgGame.app.ui.main.chat {
 			{
 				return;
 			}
-			
+			if (ClientCommend.doCommand(_inputText.text)) 
+			{
+				_inputText.text="";
+				return;
+			}
 			var sendMsg:String = _inputText.text;
 			if(sendMsg == DEFAULT_CHAT_TEXT)
 			{

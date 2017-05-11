@@ -31,6 +31,9 @@ package com.rpgGame.netData.team.bean{
 		//队员所在地图唯一ID(区分副本用)
 		private var _memberMapUniqueID: long;
 		
+		//玩家是否在线 0否  1是
+		private var _isonline: int;
+		
 		//队员所在地图模组ID
 		private var _memberMapModelID: int;
 		
@@ -63,6 +66,8 @@ package com.rpgGame.netData.team.bean{
 			writeInt(_memberMapLine);
 			//队员所在地图唯一ID(区分副本用)
 			writeLong(_memberMapUniqueID);
+			//玩家是否在线 0否  1是
+			writeByte(_isonline);
 			//队员所在地图模组ID
 			writeInt(_memberMapModelID);
 			//像素坐标x
@@ -92,6 +97,8 @@ package com.rpgGame.netData.team.bean{
 			_memberMapLine = readInt();
 			//队员所在地图唯一ID(区分副本用)
 			_memberMapUniqueID = readLong();
+			//玩家是否在线 0否  1是
+			_isonline = readByte();
 			//队员所在地图模组ID
 			_memberMapModelID = readInt();
 			//像素坐标x
@@ -180,6 +187,21 @@ package com.rpgGame.netData.team.bean{
 		 */
 		public function set memberMapUniqueID(value: long): void{
 			this._memberMapUniqueID = value;
+		}
+		
+		/**
+		 * get 玩家是否在线 0否  1是
+		 * @return 
+		 */
+		public function get isonline(): int{
+			return _isonline;
+		}
+		
+		/**
+		 * set 玩家是否在线 0否  1是
+		 */
+		public function set isonline(value: int): void{
+			this._isonline = value;
 		}
 		
 		/**

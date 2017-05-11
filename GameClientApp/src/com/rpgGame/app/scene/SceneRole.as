@@ -83,6 +83,8 @@ package com.rpgGame.app.scene
 			_buffSet = BuffSet.create(this);
 			mapAreaTypes.length = 0;
 			isWheel = false;
+			
+			
 		}
 		
 		public function get headFace() : BaseHeadFace

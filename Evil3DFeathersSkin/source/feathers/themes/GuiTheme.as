@@ -642,14 +642,14 @@ package feathers.themes{
 					return
 				}
 			}
-			slider.trackScaleMode = Slider.TRACK_SCALE_MODE_EXACT_FIT;
+			/*slider.trackScaleMode = Slider.TRACK_SCALE_MODE_EXACT_FIT;
 			slider.customThumbStyleName = FeathersControl(stateSkins["thumb"]).styleName;
 			slider.customMinimumTrackStyleName = FeathersControl(stateSkins["track"]).styleName;
 			if(stateSkins.hasOwnProperty("trackMax"))
 			{
 				slider.trackLayoutMode = ScrollBar.TRACK_LAYOUT_MODE_MIN_MAX;
 				slider.customMaximumTrackStyleName = FeathersControl(stateSkins["trackMax"]).styleName;
-			}
+			}*/
 		}
 		
 		public function addNumericStepperStyle(styleName:String):void
