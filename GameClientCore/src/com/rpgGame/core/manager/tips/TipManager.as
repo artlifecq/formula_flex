@@ -1,7 +1,6 @@
 package com.rpgGame.core.manager.tips
 {
 	import com.rpgGame.core.manager.StarlingLayerManager;
-	import com.rpgGame.core.view.ui.tip.implement.IDynamicTipData;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.core.view.ui.tip.vo.TextTipsData;
