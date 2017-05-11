@@ -1,5 +1,7 @@
 package com.rpgGame.app.cmdlistener
 {
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.netData.lunjian.message.SCLunJianPanelInfosMessage;
 	import com.rpgGame.netData.lunjian.message.SCLunJianResultMessage;
@@ -32,7 +34,11 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onSCLunJianResultMessage(msg:SCLunJianResultMessage):void
 		{
-			
+			if(msg.success==1){
+				AppManager.showApp(AppConstant.SWORD_RESULT_SUCCESS,msg.ljId);
+			}else{
+				AppManager.showApp(AppConstant.SWORD_RESULT_FAIL,msg.ljId);
+			}
 		}
 		
 		private function onSCLunJianTimeStartMessage(msg:SCLunJianTimeMessage):void

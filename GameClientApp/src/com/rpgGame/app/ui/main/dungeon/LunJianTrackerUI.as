@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main.dungeon
 {
+	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.core.events.DungeonEvent;
@@ -34,6 +35,7 @@ package com.rpgGame.app.ui.main.dungeon
 		override protected function onShow() : void
 		{
 			EventManager.addEvent(DungeonEvent.UPDATE_LUNJIAN_TIME,getLunJianTime);
+			UIPopManager.showAlonePopUI(DungeonFightPop);
 		}
 		
 		/**
