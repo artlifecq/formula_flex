@@ -3,6 +3,7 @@ package com.rpgGame.app.manager.role
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.vo.SoftOutlineData;
+	import com.rpgGame.app.graphics.DropItemHeadFace;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -113,6 +114,8 @@ package com.rpgGame.app.manager.role
 			{
 				if (_selectedRole.headFace is HeadFace)
 					((_selectedRole.headFace as HeadFace) as HeadFace).isSelected = false;
+				else if (_selectedRole.headFace is DropItemHeadFace)
+					(_selectedRole.headFace as DropItemHeadFace).isSelected = false;
 				_selectedRole.avatar.removeRenderUnitByID(RenderUnitType.SELECTED_RING, RenderUnitID.SELECTED_RING);
 			}
 			_selectedRole = value;
@@ -120,7 +123,8 @@ package com.rpgGame.app.manager.role
 			{
 				if (_selectedRole.headFace is HeadFace)
 					(_selectedRole.headFace as HeadFace).isSelected = true;
-
+				else if (_selectedRole.headFace is DropItemHeadFace)
+					(_selectedRole.headFace as DropItemHeadFace).isSelected = true;
 				updateRoleRingEffect(_selectedRole);
 				_selectedRole.updateInteractTime();
 				EscActionManager.addAction(cancelSelectedRole);
@@ -243,6 +247,8 @@ package com.rpgGame.app.manager.role
 				{
 					if (_mouseOverRole.headFace is HeadFace)
 						(_mouseOverRole.headFace as HeadFace).isSelected = false;
+					else if (_mouseOverRole.headFace is DropItemHeadFace)
+						(_mouseOverRole.headFace as DropItemHeadFace).isSelected = false;
 				}
 
 				_mouseOverRole.forEachRenderUnit(setRoleMouseOut);
@@ -254,6 +260,8 @@ package com.rpgGame.app.manager.role
 			{
 				if (_mouseOverRole.headFace is HeadFace)
 					(_mouseOverRole.headFace as HeadFace).isSelected = true;
+				else if (_mouseOverRole.headFace is DropItemHeadFace)
+					(_mouseOverRole.headFace as DropItemHeadFace).isSelected = true;
 				_mouseOverRole.forEachRenderUnit(setRoleMouseOver);
 			}
 			else
@@ -299,6 +307,9 @@ package com.rpgGame.app.manager.role
 								
 							break;
 						case SceneCharType.COLLECT:
+							MouseCursorController.showCollect();
+							break;
+						case SceneCharType.DROP_GOODS:
 							MouseCursorController.showCollect();
 							break;
 						default:

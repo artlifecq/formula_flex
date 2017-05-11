@@ -82,6 +82,12 @@ package com.rpgGame.netData {
 	import com.rpgGame.netData.destiny.handler.ResDestinyInfoHandler;
 	import com.rpgGame.netData.destiny.message.ResAcceptDestinyTaskMessage;
 	import com.rpgGame.netData.destiny.message.ResDestinyInfoMessage;
+	import com.rpgGame.netData.drop.handler.ResDropRollItemInfoHandler;
+	import com.rpgGame.netData.drop.handler.ResDropRollResultInfoHandler;
+	import com.rpgGame.netData.drop.handler.ResGetRollItemHandler;
+	import com.rpgGame.netData.drop.message.ResDropRollItemInfoMessage;
+	import com.rpgGame.netData.drop.message.ResDropRollResultInfoMessage;
+	import com.rpgGame.netData.drop.message.ResGetRollItemMessage;
 	import com.rpgGame.netData.equip.handler.ResBuTianShenShiKindInfoHandler;
 	import com.rpgGame.netData.equip.handler.ResEquipInfoHandler;
 	import com.rpgGame.netData.equip.handler.ResEquipOperateResultHandler;
@@ -1033,6 +1039,9 @@ package com.rpgGame.netData {
 			register(193101, ResWarMarkListMessage, ResWarMarkListHandler);
 			register(193102, ResUpdateWarmarkMessage, ResUpdateWarmarkHandler);
 			register(200101, ResGmLevelMessage, ResGmLevelHandler);
+			register(210101, ResDropRollItemInfoMessage, ResDropRollItemInfoHandler);
+			register(210102, ResDropRollResultInfoMessage, ResDropRollResultInfoHandler);
+			register(210103, ResGetRollItemMessage, ResGetRollItemHandler);
 			register(204101, ResRefiningInfoMessage, ResRefiningInfoHandler);
 			register(204102, ResStrengthenResultMessage, ResStrengthenResultHandler);
 			register(204103, ResRefiningItemInfosMessage, ResRefiningItemInfosHandler);

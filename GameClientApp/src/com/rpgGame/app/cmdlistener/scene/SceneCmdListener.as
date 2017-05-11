@@ -15,6 +15,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
+	import com.rpgGame.app.manager.role.DropGoodsManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneDropGoodsManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
@@ -632,7 +633,9 @@ package com.rpgGame.app.cmdlistener.scene
                             sceneClientRole.visible = true;
                             TouJingManager.setHuGuoSiEffect(data.modelID, sceneClientRole, true);						
                         }
-                    }
+                    }else if(sceneRole.data is SceneDropGoodsData){
+						DropGoodsManager.getInstance().removeDropGoods(sceneRole.data as SceneDropGoodsData);
+					}
                 }
                 SceneRoleManager.getInstance().removeSceneRoleById(roleID);
                 return;

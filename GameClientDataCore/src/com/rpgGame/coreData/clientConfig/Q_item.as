@@ -80,6 +80,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_gift:int;
 		 /**  使用后打开面板编号 */
 		public var q_ui:int;
+		 /**  掉落时是否默认显示名字(0不显示；1显示) */
+		public var q_showDrop_name:int;
 		 /**  装备掉落数量阈值：【从开服/合服开始计算，在一个hour周期内，所有登陆过的等级不低于level的玩家均视为活跃玩家，max(int(活跃玩家数 * pro) , min)为最大掉落数量   】【程序上最小为2小时，建议最小为24小时，误差为1小时】 */
 		public var q_max_create:String;
 		 /**  掉出时发送的公告类型（0不发送公告；1面向个人发送聊天框内公告；2面向个人发送聊天框内与屏幕上方双重公告；3面向全服发送聊天框内公告；4面向全服发送聊天框内与屏幕上方双重公告）【1和2暂时未做，目前只有功能3和4】 */
@@ -88,10 +90,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_log:int;
 		 /**  物品默认图标（42*42） */
 		public var q_icon:int;
-		 /**  物品掉落在场景中图标ID */
-		public var q_dropicon:int;
 		 /**  物品换装资源编号（装备类物品使用）模型ID */
-		public var q_equip_resource:int;
+		public var q_drop_model:String;
 		 /**  是否自动使用（1是，0否） */
 		public var q_auto_use:int;
 		 /**  是否弹出使用提示(背包中的道具数量>=此数值时弹出提示， 0不弹提示) */

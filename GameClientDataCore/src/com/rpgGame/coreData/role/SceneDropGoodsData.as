@@ -2,7 +2,6 @@ package com.rpgGame.coreData.role
 {
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_item;
-	import com.rpgGame.coreData.type.AvatarUrl;
 	import com.rpgGame.netData.map.bean.DropGoodsInfo;
 	import com.rpgGame.netData.map.message.ResRoundGoodsExtraMessage;
 	import com.rpgGame.netData.map.message.ResRoundGoodsMessage;
@@ -28,14 +27,23 @@ package com.rpgGame.coreData.role
 		
 		public var farDistance:int=200;
 		
-		private var isBaoXiang:Boolean=true;
 		private var _qitem:Q_item;
 		
+		
+		public function get qitem():Q_item
+		{
+			return _qitem;
+		}
 		public function SceneDropGoodsData()
 		{
 			super(RoleType.TYPE_DROP_GOODS);
-			this.name = "";
 		}
+		
+		public function get haveowner():Boolean
+		{
+			return goodsDatas.dropGoodsId.IsZero();
+		}
+		
 
 		/**
 		 *掉落数据源 
@@ -60,10 +68,7 @@ package com.rpgGame.coreData.role
 			id=goodsDatas.dropGoodsId.ToGID();
 			_qitem = ItemConfig.getQItemByID(goods.itemModelId);
 			this.name = _qitem.q_name;
-			avatarRes="goods/"+goodsDatas.itemModelId+"/"+goodsDatas.itemModelId;
-			if(isBaoXiang){
-				avatarRes=AvatarUrl.BAO_XIANG;
-			}
+			avatarRes="drop/"+_qitem.q_drop_model;
 			x=goodsDatas.x;
 			y=-1*goodsDatas.y;
 		}
