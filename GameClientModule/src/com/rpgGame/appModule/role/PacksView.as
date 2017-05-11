@@ -348,7 +348,7 @@ package com.rpgGame.appModule.role
 				goodsContainer.onFaceMoveSuccess(grid.gridInfo );
 				return;
 			}
-			
+			Menu.GetInstance().hide();
 			showMenu(grid);
 		}
 		
