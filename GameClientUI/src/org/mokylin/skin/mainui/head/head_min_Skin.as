@@ -96,7 +96,7 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 49;
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/mainui/head/duiyoutouxiangkuang.png";
 			temp.width = 210;
 			temp.x = 7;

@@ -199,8 +199,10 @@ package com.rpgGame.core.app
 		/**游戏更新公告**/
 		public static var GAME_NOTICE:String = createAppInfo( "gameNotice.GameNoticePanel", "game_notice" ); 
 		
-		/**好友面板**/
-		public static var FRIEND_PANEL:String = createAppInfo( "friend.FriendPanel", "friend" ); 
+		/**社交面板**/
+		public static var SOCIAL_PANEL:String = createAppInfo( "social.SocialMainPanelExt", "shejiao" ); 
+		/**组队提示**/
+		public static var SOCIAL_TEAM_ALERT:String = createAppInfo( "social.team.TeamAskPanelExt"); 
 		/**国家面板**/
 		public static var COUNTRY_PANEL:String = createAppInfo( "country.CountryPanel", "country" ); 
 		/**权力印记面板**/
@@ -238,16 +240,8 @@ package com.rpgGame.core.app
 		/**国战进度文本面板*/
 		public static var COUNTRY_WAR_PROGRESS_TEXT_PANEL:String = createAppInfo( "countryWar.CountryWarProgressTextPanel","countryWar",PanelPosType.BOTTOM_CENTRAL,0,-390);
 		
-		/**组队面板**/
-		public static var TEAM_PANEL:String = createAppInfo( "team.TeamPanel","team" );
-		/**组队邀请组队消息面板**/
-		public static var TEAM_INVITE_WAITE_PANEL:String = createAppInfo( "team.TeamInviteWaitPanel" );
-		/**组队申请进队消息面板**/
-		public static var TEAM_APPLY_JOIN_WAITE_PANEL:String = createAppInfo( "team.TeamApplyJoinWaitPanel" );
-		/**组队---小队跟随界面，是队长**/
-		public static var TEAM_FOLLOW_LEADER_PANEL:String = createAppInfo( "team.TeamFollowLeaderPanel" );
-		/**组队---小队跟随界面，是队员**/
-		public static var TEAM_FOLLOW_TEAM_PLAYER_PANEL:String = createAppInfo( "team.TeamFollowTeamPlayerPanel" );
+		
+	
 		
 		/**
 		 * 装备打造 
@@ -376,5 +370,6 @@ package com.rpgGame.core.app
 		public static var SYSTEMSET_PANEL:String = createAppInfo("systemset.SystemsetingPanel","systemSet");
 		/**经脉**/
 		public static var JINGMAI_STONE:String = createAppInfo("jingmai.sub.NoStoneNoticePanelExt","beibao");
+		
 	}
 }

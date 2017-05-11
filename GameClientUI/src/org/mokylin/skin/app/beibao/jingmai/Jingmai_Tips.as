@@ -167,7 +167,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.bold = true;
 			temp.letterSpacing = 0;
 			temp.fontSize = 16;
-			temp.text = "穴位名称·1层";
+			temp.text = "亡魂悲歌";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 19;

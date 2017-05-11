@@ -5,7 +5,6 @@ package com.rpgGame.coreData.role
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.fight.skill.ActiveSpellList;
 	import com.rpgGame.coreData.info.mount.MountModuleObjClientData;
-	import com.rpgGame.coreData.info.team.TeamUnit;
 	import com.rpgGame.coreData.info.upgrade.AmountInfo;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.SpellTargetType;
@@ -319,24 +318,24 @@ package com.rpgGame.coreData.role
 			RoleData.readGeneric(data, new Point(info.position.x,info.position.y));
 		}
 		
-		/**
-		 * 设置队伍成员数据
-		 * @param teamRoleData
-		 * @param teamUint
-		 *
-		 */
-		public static function setTeamRoleData(teamRoleData : HeroData, teamUint : TeamUnit) : void
-		{
-			teamRoleData.id = teamUint.id;
-			teamRoleData.name = teamUint.name;
-			teamRoleData.totalStat.level = teamUint.level;
-			teamRoleData.societyName = teamUint.guildName;
-			teamRoleData.mapID = teamUint.sceneId;
-			teamRoleData.countryId = teamUint.countryId;
-			teamRoleData.x = teamUint.mx;
-			teamRoleData.y = teamUint.my;
-			//			teamRoleData._resources = teamUint.resources;
-		}
+//		/**
+//		 * 设置队伍成员数据
+//		 * @param teamRoleData
+//		 * @param teamUint
+//		 *
+//		 */
+//		public static function setTeamRoleData(teamRoleData : HeroData, teamUint : TeamUnit) : void
+//		{
+//			teamRoleData.id = teamUint.id;
+//			teamRoleData.name = teamUint.name;
+//			teamRoleData.totalStat.level = teamUint.level;
+//			teamRoleData.societyName = teamUint.guildName;
+//			teamRoleData.mapID = teamUint.sceneId;
+//			teamRoleData.countryId = teamUint.countryId;
+//			teamRoleData.x = teamUint.mx;
+//			teamRoleData.y = teamUint.my;
+//			//			teamRoleData._resources = teamUint.resources;
+//		}
 		
 		/**
 		 * 设置队伍成员数据

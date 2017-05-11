@@ -45,9 +45,9 @@ package org.mokylin.skin.mainui.head
 			bar = temp;
 			temp.name = "bar";
 			temp.height = 9;
-			temp.left = 0;
 			temp.styleName = "ui/mainui/head/duiyouxuetiao.png";
-			temp.width = 124;
+			temp.width = 153;
+			temp.x = 1;
 			temp.y = 1;
 			return temp;
 		}

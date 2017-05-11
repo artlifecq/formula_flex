@@ -1,6 +1,7 @@
 package com.rpgGame.app.utils
 {
 	import com.rpgGame.app.manager.MenuManager;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.TeamManager;
 	import com.rpgGame.app.manager.chat.ChatWindowManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -174,13 +175,14 @@ package com.rpgGame.app.utils
 			}
 
 			var datas : Array = data as Array;
-			var heroId : Number = datas[0];
+			var heroId : * = datas[0];
 			var heroName : String = datas[1];
 
 			switch (type)
 			{
 				case LangMenu.LOOK_HERO://查看玩家信息
 //					LookSender.reqLook(heroId,true);
+					Mgr.teamMgr.loopPlayer(heroId);
 					break;
 				case LangMenu.INVITE_JOIN_SOCIETY://邀请加入帮派
 					SocietyManager.reqInviteJoin(heroId);
@@ -214,17 +216,17 @@ package com.rpgGame.app.utils
 					TradeManager.invitePlayerTrade(heroId);
 					break;
 				case LangMenu.TRANSFER_THE_CAPTAIN://转移队长
-					TeamManager.changeCaption( heroId );
+					TeamSender.ReqAppointNewCaptain(Mgr.teamMgr.teamInfo.teamId,heroId);
 					break;
 				case LangMenu.PLEASE_FROM_THE_TEAM://请离队伍
-					TeamManager.kickPlayer( heroId );
+					TeamSender.ReqKickTeam(heroId);
 					break;
 				case LangMenu.LEAVE_TEAM://离开队伍
-					if( TeamManager.isTeamLeader( MainRoleManager.actorID ) )//自己是队长
-						onAgreeLeaveTeam();
-					else
-						GameAlert.showAlertUtil(LangAlertInfo.TEAM_LEAVE_TEAM,leaveTeamClick);
-					break;
+//					if( TeamManager.isTeamLeader( MainRoleManager.actorID ) )//自己是队长
+//						onAgreeLeaveTeam();
+//					else
+//						GameAlert.showAlertUtil(LangAlertInfo.TEAM_LEAVE_TEAM,leaveTeamClick);
+//					break;
 				case LangMenu.INVITE_TEAM_VOICE://邀请队伍语音
 					NoticeManager.showNotify( LangTeam.TEAM_FAIL_TIP );
 					break;
@@ -235,7 +237,7 @@ package com.rpgGame.app.utils
 					EventManager.dispatchEvent(ChatEvent.SWITCH_PRIVATE_CHANNEL,heroId,heroName);
 					break;
 				case LangMenu.INVITE_TEAM://组队
-					TeamManager.invitePlayerJionMyTeam( heroId );
+					//TeamManager.invitePlayerJionMyTeam( heroId );
 					break;
 				case LangMenu.PLAY://切磋
 					NoticeManager.showNotify( LangTeam.TEAM_FAIL_TIP );
@@ -245,29 +247,29 @@ package com.rpgGame.app.utils
 					Clipboard.generalClipboard.setData(ClipboardFormats.TEXT_FORMAT,heroName,false);
 					break;
 				case LangMenu.TEAM_EXP_MEAN_MODE://经验平均分配
-					TeamManager.expIndex = 0;
-					TeamManager.sendSetTeamExpAllocate( false );
-					EventManager.dispatchEvent( TeamEvent.TEAM_EXP_MODE );
+//					TeamManager.expIndex = 0;
+//					TeamManager.sendSetTeamExpAllocate( false );
+//					EventManager.dispatchEvent( TeamEvent.TEAM_EXP_MODE );
 					break;
 				case LangMenu.TEAM_EXP_HURT_MODE://经验按伤害分配
-					TeamManager.expIndex = 1;
-					TeamManager.sendSetTeamExpAllocate( true );
-					EventManager.dispatchEvent( TeamEvent.TEAM_EXP_MODE );
+//					TeamManager.expIndex = 1;
+//					TeamManager.sendSetTeamExpAllocate( true );
+//					EventManager.dispatchEvent( TeamEvent.TEAM_EXP_MODE );
 					break;
 				case LangMenu.TEAM_PICK_UP_MODE://轮流拾取
-					TeamManager.pickupIndex = 0;
-					TeamManager.sendSetTeamDropAllocate( TeamDropAllocateType.TURN );
-					EventManager.dispatchEvent( TeamEvent.TEAM_PICK_UP_MODE );
+//					TeamManager.pickupIndex = 0;
+//					TeamManager.sendSetTeamDropAllocate( TeamDropAllocateType.TURN );
+//					EventManager.dispatchEvent( TeamEvent.TEAM_PICK_UP_MODE );
 					break;
 				case LangMenu.TEAM_KILLER_MODE://猎杀者拾取
-					TeamManager.pickupIndex = 1;
-					TeamManager.sendSetTeamDropAllocate( TeamDropAllocateType.KILLER );
-					EventManager.dispatchEvent( TeamEvent.TEAM_PICK_UP_MODE );
+//					TeamManager.pickupIndex = 1;
+//					TeamManager.sendSetTeamDropAllocate( TeamDropAllocateType.KILLER );
+//					EventManager.dispatchEvent( TeamEvent.TEAM_PICK_UP_MODE );
 					break;
 				case LangMenu.TEAM_FEED_PICK_UP_MODE://自由拾取
-					TeamManager.pickupIndex = 2;
-					TeamManager.sendSetTeamDropAllocate( TeamDropAllocateType.FREE );
-					EventManager.dispatchEvent( TeamEvent.TEAM_PICK_UP_MODE );
+//					TeamManager.pickupIndex = 2;
+//					TeamManager.sendSetTeamDropAllocate( TeamDropAllocateType.FREE );
+//					EventManager.dispatchEvent( TeamEvent.TEAM_PICK_UP_MODE );
 					break;
 				case LangMenu.DUI_HUA://对话
 					if(FriendManager.checkIsFriend(heroId))
@@ -289,6 +291,9 @@ package com.rpgGame.app.utils
 				case LangMenu.KICK_GUILD:
 					GuildManager.kickFamily();
 					break;
+				case LangMenu.MOVE_TO_HERO:
+					Mgr.teamMgr.move2TeamMember(heroId);
+					break;
 				
 			}
 		}
@@ -309,7 +314,7 @@ package com.rpgGame.app.utils
 		 */		
 		private static function onAgreeLeaveTeam():void
 		{
-			TeamSender.requestLeaveTeam();
+			TeamSender.ReqLeaveTeam(1);
 		}
 	}
 }

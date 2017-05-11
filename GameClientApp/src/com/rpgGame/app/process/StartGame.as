@@ -43,6 +43,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.SocietyBuildItemTip;
     import com.rpgGame.app.ui.tips.SocietySpellTotalTip;
     import com.rpgGame.app.ui.tips.SpellTip;
+    import com.rpgGame.app.ui.tips.TeamTipExt;
     import com.rpgGame.app.ui.tips.TxtPropChangeTip;
     import com.rpgGame.app.ui.tips.TxtTip;
     import com.rpgGame.app.ui.tips.cheats.CheatsIntraductTipExt;
@@ -209,6 +210,7 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.CHEATS_TIP,CheatsTipExt);
 			TipManager.registerTipsParserClass(TipType.CHEATS_INTRADUCTION_TIP,CheatsIntraductTipExt);
 			TipManager.registerTipsParserClass(TipType.BLESS_TIP,BlessTip);
+			TipManager.registerTipsParserClass(TipType.TEAM_NEAR_TEAM_TIP,TeamTipExt);
 		}
 
 		private function onSwitchCmp() : void
