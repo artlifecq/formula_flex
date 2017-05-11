@@ -21,17 +21,17 @@ package org.mokylin.skin.app.mail
 
 		public var imgOver:feathers.controls.UIAsset;
 
+		public var imgSelect:feathers.controls.UIAsset;
+
 		public var lbName:feathers.controls.Label;
 
 		public var lbTime:feathers.controls.Label;
 
-		public var uiCai:feathers.controls.UIAsset;
+		public var uiBg:feathers.controls.UIAsset;
 
 		public var uiCurrent:feathers.controls.UIAsset;
 
 		public var uiDian:feathers.controls.UIAsset;
-
-		public var uiNew:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -44,7 +44,7 @@ package org.mokylin.skin.app.mail
 			this.currentState = "normal";
 			this.height = 51;
 			this.width = 373;
-			this.elementsContent = [__Mail_Item_UIAsset1_i(),imgOver_i(),uiCurrent_i(),uiDian_i(),uiCai_i(),uiNew_i(),lbName_i(),lbTime_i(),chkSelect_i()];
+			this.elementsContent = [uiBg_i(),uiCurrent_i(),uiDian_i(),lbName_i(),lbTime_i(),imgOver_i(),imgSelect_i(),chkSelect_i()];
 			
 			states = {
 			};
@@ -55,15 +55,6 @@ package org.mokylin.skin.app.mail
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __Mail_Item_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/mail/youjiantiao.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function chkSelect_i():feathers.controls.Check
 		{
 			var temp:feathers.controls.Check = new feathers.controls.Check();
@@ -80,6 +71,19 @@ package org.mokylin.skin.app.mail
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			imgOver = temp;
 			temp.name = "imgOver";
+			temp.height = 51;
+			temp.styleName = "ui/common/hover/xuanqukuang2.png";
+			temp.width = 373;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function imgSelect_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			imgSelect = temp;
+			temp.name = "imgSelect";
 			temp.height = 51;
 			temp.styleName = "ui/common/hover/xuanqukuang2.png";
 			temp.width = 373;
@@ -117,15 +121,14 @@ package org.mokylin.skin.app.mail
 			return temp;
 		}
 
-		private function uiCai_i():feathers.controls.UIAsset
+		private function uiBg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			uiCai = temp;
-			temp.name = "uiCai";
-			temp.styleName = "ui/app/mail/yj_dakai.png";
-			temp.visible = false;
-			temp.x = 47;
-			temp.y = 7;
+			uiBg = temp;
+			temp.name = "uiBg";
+			temp.styleName = "ui/app/mail/youjiantiao.png";
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -148,18 +151,6 @@ package org.mokylin.skin.app.mail
 			temp.styleName = "ui/app/mail/tixingdiandian.png";
 			temp.x = 76;
 			temp.y = 33;
-			return temp;
-		}
-
-		private function uiNew_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			uiNew = temp;
-			temp.name = "uiNew";
-			temp.styleName = "ui/app/mail/yj_zc.png";
-			temp.visible = false;
-			temp.x = 47;
-			temp.y = 10;
 			return temp;
 		}
 

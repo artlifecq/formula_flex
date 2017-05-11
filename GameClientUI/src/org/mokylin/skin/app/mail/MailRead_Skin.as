@@ -25,6 +25,8 @@ package org.mokylin.skin.app.mail
 
 		public var btnTiqu:feathers.controls.Button;
 
+		public var fujianList:feathers.controls.Group;
+
 		public var lbName:feathers.controls.Label;
 
 		public var lbTime:feathers.controls.Label;
@@ -44,7 +46,7 @@ package org.mokylin.skin.app.mail
 			this.currentState = "normal";
 			this.height = 586;
 			this.width = 434;
-			this.elementsContent = [__MailRead_Skin_SkinnableContainer1_i(),__MailRead_Skin_UIAsset1_i(),__MailRead_Skin_UIAsset2_i(),__MailRead_Skin_UIAsset3_i(),btnCancel_i(),btnTiqu_i(),__MailRead_Skin_UIAsset4_i(),__MailRead_Skin_UIAsset5_i(),__MailRead_Skin_UIAsset6_i(),__MailRead_Skin_UIAsset7_i(),__MailRead_Skin_UIAsset8_i(),__MailRead_Skin_UIAsset9_i(),lbName_i(),lbZhuti_i(),lbTime_i(),lbXiangqing_i(),__MailRead_Skin_Group1_i(),__MailRead_Skin_UIAsset22_i()];
+			this.elementsContent = [__MailRead_Skin_SkinnableContainer1_i(),__MailRead_Skin_UIAsset1_i(),__MailRead_Skin_UIAsset2_i(),__MailRead_Skin_UIAsset3_i(),btnCancel_i(),btnTiqu_i(),__MailRead_Skin_UIAsset4_i(),__MailRead_Skin_UIAsset5_i(),__MailRead_Skin_UIAsset6_i(),__MailRead_Skin_UIAsset7_i(),__MailRead_Skin_UIAsset8_i(),__MailRead_Skin_UIAsset9_i(),lbName_i(),lbZhuti_i(),lbTime_i(),lbXiangqing_i(),fujianList_i(),__MailRead_Skin_UIAsset22_i()];
 			
 			states = {
 			};
@@ -55,15 +57,6 @@ package org.mokylin.skin.app.mail
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __MailRead_Skin_Group1_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.x = 44;
-			temp.y = 393;
-			temp.elementsContent = [__MailRead_Skin_UIAsset10_i(),__MailRead_Skin_UIAsset11_i(),__MailRead_Skin_UIAsset12_i(),__MailRead_Skin_UIAsset13_i(),__MailRead_Skin_UIAsset14_i(),__MailRead_Skin_UIAsset15_i(),__MailRead_Skin_UIAsset16_i(),__MailRead_Skin_UIAsset17_i(),__MailRead_Skin_UIAsset18_i(),__MailRead_Skin_UIAsset19_i(),__MailRead_Skin_UIAsset20_i(),__MailRead_Skin_UIAsset21_i()];
-			return temp;
-		}
-
 		private function __MailRead_Skin_SkinnableContainer1_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
@@ -309,6 +302,17 @@ package org.mokylin.skin.app.mail
 			temp.width = 73;
 			temp.x = 225;
 			temp.y = 531;
+			return temp;
+		}
+
+		private function fujianList_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			fujianList = temp;
+			temp.name = "fujianList";
+			temp.x = 44;
+			temp.y = 393;
+			temp.elementsContent = [__MailRead_Skin_UIAsset10_i(),__MailRead_Skin_UIAsset11_i(),__MailRead_Skin_UIAsset12_i(),__MailRead_Skin_UIAsset13_i(),__MailRead_Skin_UIAsset14_i(),__MailRead_Skin_UIAsset15_i(),__MailRead_Skin_UIAsset16_i(),__MailRead_Skin_UIAsset17_i(),__MailRead_Skin_UIAsset18_i(),__MailRead_Skin_UIAsset19_i(),__MailRead_Skin_UIAsset20_i(),__MailRead_Skin_UIAsset21_i()];
 			return temp;
 		}
 

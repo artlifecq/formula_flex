@@ -10,7 +10,6 @@ package org.mokylin.skin.app.mail
 	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
 	import feathers.layout.HorizontalLayout;
-	import org.mokylin.skin.app.mail.Mail_Item;
 	import org.mokylin.skin.common.Erji_panelbg_Skin;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
@@ -34,6 +33,8 @@ package org.mokylin.skin.app.mail
 
 		public var chkSelect:feathers.controls.Check;
 
+		public var imgNO:feathers.controls.UIAsset;
+
 		public var listMail:feathers.controls.List;
 
 		public var tab_nv:feathers.controls.TabBar;
@@ -49,7 +50,7 @@ package org.mokylin.skin.app.mail
 			this.currentState = "normal";
 			this.height = 586;
 			this.width = 434;
-			this.elementsContent = [__MailReceive_Skin_SkinnableContainer1_i(),__MailReceive_Skin_UIAsset1_i(),tab_nv_i(),__MailReceive_Skin_SkinnableContainer2_i(),chkSelect_i(),__MailReceive_Skin_UIAsset2_i(),btnCancel_i(),btnTiqu_i(),listMail_i(),__MailReceive_Skin_UIAsset3_i()];
+			this.elementsContent = [__MailReceive_Skin_SkinnableContainer1_i(),__MailReceive_Skin_UIAsset1_i(),tab_nv_i(),chkSelect_i(),__MailReceive_Skin_UIAsset2_i(),btnCancel_i(),btnTiqu_i(),listMail_i(),__MailReceive_Skin_UIAsset3_i(),imgNO_i()];
 			
 			states = {
 			};
@@ -83,18 +84,6 @@ package org.mokylin.skin.app.mail
 			temp.width = 434;
 			temp.x = 0;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function __MailReceive_Skin_SkinnableContainer2_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			temp.height = 51;
-			var skin:StateSkin = new org.mokylin.skin.app.mail.Mail_Item()
-			temp.skin = skin
-			temp.width = 373;
-			temp.x = 20;
-			temp.y = 77;
 			return temp;
 		}
 
@@ -167,6 +156,17 @@ package org.mokylin.skin.app.mail
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
 			temp.x = 37;
 			temp.y = 539;
+			return temp;
+		}
+
+		private function imgNO_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			imgNO = temp;
+			temp.name = "imgNO";
+			temp.styleName = "ui/app/mail/dangqian.png";
+			temp.x = 69;
+			temp.y = 236;
 			return temp;
 		}
 

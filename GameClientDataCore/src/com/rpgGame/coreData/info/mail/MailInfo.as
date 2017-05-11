@@ -11,7 +11,7 @@ package com.rpgGame.coreData.info.mail
 	import org.client.mainCore.ds.HashMap;
 	
 	/**
-	 *邮件Vo (未使用的INFO)
+	 *邮件Vo
 	 * @author lpp
 	 */
 	public class MailInfo

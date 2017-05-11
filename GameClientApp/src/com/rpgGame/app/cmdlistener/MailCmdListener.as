@@ -10,17 +10,20 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.info.mail.MailInfo;
 	import com.rpgGame.coreData.type.EnumFunctionMessageBarIcoType;
+	import com.rpgGame.netData.mail.message.ResAllMailsMessage;
+	import com.rpgGame.netData.mail.message.ResGetMailAttachmentSueccessMessage;
+	import com.rpgGame.netData.mail.message.ResMailDetailInfoMessage;
+	import com.rpgGame.netData.mail.message.ResRecevieNewMailMessage;
+	import com.rpgGame.netData.mail.message.SCDeleteResultMessage;
 	
 	import flash.utils.ByteArray;
 	
-	import app.cmd.MailModuleMessages;
-	import app.cmd.MailModuleMessages;
 	import app.message.MailCollectProto;
 	import app.message.MailProto;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 	import org.game.netCore.net_protobuff.BytesUtil;
 	
@@ -38,31 +41,35 @@ package com.rpgGame.app.cmdlistener
 		
 		override public function start():void
 		{
-			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_NEW_MAIL,onNewMail);
-			
-			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_SET_MAIL_READED_FAIL, onSetMailReadedFail );
-			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_SET_MAIL_READED, onSetMailReaded );
-			
-			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL_MONEY_FAIL,onCollectMailMoneyFail );
-			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL_MONEY,onCollectMailMoney );
-			
-			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL_GOODS_FAIL,onCollectMailGoodsFail);
-			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL_GOODS,onCollectMailGoods);
-			
-			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL_FAIL,onCollectMailFail);
-			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL, onCollectMail);
-			
-			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_ALL_MAIL_FAIL, onCollectALlMailFail);
-			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_ALL_MAIL, onCollectALlMail);
-			
-			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_DELETE_MAIL_FAIL, onDeleteMailFail );
-			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_DELETE_MAIL_SUCCESS, onDeleteMailSuccess);
-			
-			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_SEND_MAIL_FAIL, onSendMailFail );
-			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_SEND_MAIL, onSendMail );
-			
-			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_SET_REFUSE_RECEIVE_MAIL, onSetRefuseReceiveMail );
-			
+			//			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_NEW_MAIL,onNewMail);
+			//			
+			//			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_SET_MAIL_READED_FAIL, onSetMailReadedFail );
+			//			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_SET_MAIL_READED, onSetMailReaded );
+			//			
+			//			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL_MONEY_FAIL,onCollectMailMoneyFail );
+			//			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL_MONEY,onCollectMailMoney );
+			//			
+			//			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL_GOODS_FAIL,onCollectMailGoodsFail);
+			//			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL_GOODS,onCollectMailGoods);
+			//			
+			//			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL_FAIL,onCollectMailFail);
+			//			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_MAIL, onCollectMail);
+			//			
+			//			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_ALL_MAIL_FAIL, onCollectALlMailFail);
+			//			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_COLLECT_ALL_MAIL, onCollectALlMail);
+			//			
+			//			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_DELETE_MAIL_FAIL, onDeleteMailFail );
+			//			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_DELETE_MAIL_SUCCESS, onDeleteMailSuccess);
+			//			
+			//			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_SEND_MAIL_FAIL, onSendMailFail );
+			//			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_SEND_MAIL, onSendMail );
+			//			
+			//			SocketConnection_protoBuffer.addCmdListener(MailModuleMessages.S2C_SET_REFUSE_RECEIVE_MAIL, onSetRefuseReceiveMail );
+			SocketConnection.addCmdListener(120101, onResAllMailsMessage);
+			SocketConnection.addCmdListener(120104, onResGetMailAttachmentSueccessMessage);
+			SocketConnection.addCmdListener(120102, onResMailDetailInfoMessage);
+			SocketConnection.addCmdListener(120103, onResRecevieNewMailMessage);
+			SocketConnection.addCmdListener(120105, onSCDeleteResultMessage);
 			finish();
 		}
 		
@@ -438,5 +445,31 @@ package com.rpgGame.app.cmdlistener
 		{
 			MailManager.onSetRefuseReceiveMail( buffer.readBoolean() );
 		}
+		
+		/*新邮件相关*/
+		private function onResAllMailsMessage(msg:ResAllMailsMessage):void
+		{
+			MailManager.resAllMailsMessage(msg);
+		}		
+		
+		private function onResGetMailAttachmentSueccessMessage(msg:ResGetMailAttachmentSueccessMessage):void
+		{
+			MailManager.resGetMailAttachmentSueccessMessage(msg);
+		}
+		
+		private function onResMailDetailInfoMessage(msg:ResMailDetailInfoMessage):void
+		{
+			MailManager.resMailDetailInfoMessage(msg);
+		}	
+		
+		private function onResRecevieNewMailMessage(msg:ResRecevieNewMailMessage):void
+		{
+			MailManager.resRecevieNewMailMessage(msg);
+		}	
+		
+		private function onSCDeleteResultMessage(msg:SCDeleteResultMessage):void
+		{
+			MailManager.resDeletMailMessage(msg);
+		}	
 	}
 }

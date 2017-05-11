@@ -9,7 +9,6 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
-	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.sender.ZhanGongSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.common.CenterEftPop;
@@ -33,13 +32,11 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
-	import com.rpgGame.coreData.lang.LangQ_BackPack;
 	import com.rpgGame.coreData.lang.LangUI;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.type.AvatarMaskType;
 	import com.rpgGame.coreData.type.CharAttributeType;
-	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.ZhanGongUtil;
 	import com.rpgGame.netData.zhangong.bean.MeritoriousInfo;
 	import com.rpgGame.netData.zhangong.message.SCMeritoriousUpgradeResultMessage;
@@ -305,31 +302,17 @@ package com.rpgGame.appModule.zhangong
 		private function toUpHandler(e:Event):void
 		{
 			if(_isCanUp)
-			{
+			{			
 				var p:Point=new Point(this._skin.btnUp.x+this._skin.btnUp.width/2,this._skin.btnUp.y+this._skin.btnUp.height/2);
 				p=this._skin.btnUp.parent.localToGlobal(p);
 				p=this._skin.container.globalToLocal(p);
 				this.playInter3DAt(ClientConfig.getEffect("ui_tongyongdianji"),p.x,p.y,1,null,addComplete);
-				var alertSet:AlertSetInfo=new AlertSetInfo("继承需要消耗该装备，该装备无法恢复");
-				GameAlert.showAlert(alertSet,onToUp,_type);
+				ZhanGongSender.upZhanGongMessage(_type);
 			}
 			else
 			{
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(2010));
 			}
-		}
-		
-		private function onToUp(gameAlert:GameAlert,type:int):void
-		{
-			noAlertWash=gameAlert.isCheckSelected;
-			
-			switch(gameAlert.clickType)
-			{
-				case AlertClickTypeEnum.TYPE_SURE:
-					ZhanGongSender.upZhanGongMessage(type);
-					break;
-			}
-			
 		}
 		
 		private function addComplete(render:RenderUnit3D):void
