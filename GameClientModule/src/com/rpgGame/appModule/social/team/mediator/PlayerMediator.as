@@ -20,6 +20,8 @@ package   com.rpgGame.appModule.social.team.mediator
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.team.bean.TeamMemberInfo;
 	
+	import flash.desktop.Clipboard;
+	import flash.desktop.ClipboardFormats;
 	import flash.geom.Point;
 	
 	import feathers.controls.Group;
@@ -57,6 +59,7 @@ package   com.rpgGame.appModule.social.team.mediator
 		private  var isMouseOut : Boolean = true;
 		private var scale:Number;
 		private var touchImg:Sprite;
+		private var _stateImg:UIAsset;
 		public function PlayerMediator(player:Group,con:UIAsset,head:SkinnableContainer,map:Label , mainPanel:MyTeamPanelExt,sc:Number)
 		{
 			super();
@@ -147,6 +150,8 @@ package   com.rpgGame.appModule.social.team.mediator
 	//	private var selectEffect:UIEffect2D;
 		private function OnPlayerPanel():void
 		{
+			//Clipboard.generalClipboard.clear();
+			//Clipboard.generalClipboard.setData(ClipboardFormats.TEXT_FORMAT,"sssss");
 			SceneRoleSelectManager.mouseOverRole=_roleModel.avatar.curRole;
 			if(!_member.memberId.EqualTo( MainRoleManager.actorInfo.serverID))
 			{
@@ -186,9 +191,39 @@ package   com.rpgGame.appModule.social.team.mediator
 //				_player.addChildAt( selectEffect , 0 );
 //			}
 		}
+		private function setState(state:int):void
+		{
+			if (state==0) 
+			{
+				if (_stateImg) 
+				{
+					_stateImg.visible=false;
+				}
+			}
+			else
+			{
+				if (!_stateImg) 
+				{
+					_stateImg=new UIAsset();
+					this.player.addChild(_stateImg);
+					_stateImg.x=(player.width-93)*0.5;
+					_stateImg.y=(player.height-55)*0.5;
+				}
+				if (state==1) 
+				{
+					_stateImg.styleName="ui/common/yinzhang.png";
+				}
+				else
+				{
+					_stateImg.styleName="ui/common/lixianyinzhang.png";
+				}
+				_stateImg.visible=true;
+			}
+		}
 		public function SetData(member:TeamMemberInfo):void
 		{
 			clearModel();
+			TipTargetManager.remove(this.player);
 			_member = member;
 			toFar = true;
 			if(member != null)
@@ -203,16 +238,21 @@ package   com.rpgGame.appModule.social.team.mediator
 				var isOffline:Boolean=_member.isonline==0&&gid!=MainRoleManager.actorInfo.id;
 				if (isOffline) 
 				{
+					setState(2);
 					str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,"(离线)");
+					TipTargetManager.show(this.player,TargetTipsMaker.makeSimpleTextTips(HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,"处于离线状态的队员，将不被计入组队经验加成的有效人数")));
 				}
 				else
 				{
 					if (member.memberMapModelID!=MapDataManager.currentScene.sceneId) 
 					{
+						setState(1);
 						str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_YELLOW,"(远离)");
+						TipTargetManager.show(this.player,TargetTipsMaker.makeSimpleTextTips(HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,"处于远离状态的队员，将不被计入组队经验加成的有效人数")));
 					}
 					else
 					{
+						setState(0);
 						toFar=false;
 					}
 				}
@@ -225,30 +265,14 @@ package   com.rpgGame.appModule.social.team.mediator
 					_roleModel.setData(_member.appearanceInfo,scale);
 					
 				}
-			
-//				roleModel.changeStandModel();
-//				
-//				imgCon.addChild( roleModel );
-//				
-//				roleModel.x = 10;
-////				if(showModel.sex==1){
-////					roleModel.y = -140;
-////				}else{
-////					roleModel.y = -170;
-////				}
-//				roleModel.y=-140+roleModel.getOffsetY();
 				this.visible = true;
 				
 			}else
 			{
 				gid = 0;
 				this.visible = false;
-//				if(roleModel != null)
-//				{
-//					roleModel.Dispose();
-//					roleModel = null;
-//				}
 				toFar = true;
+				setState(0);
 			}
 		}
 		

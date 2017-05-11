@@ -1,5 +1,7 @@
 package  com.rpgGame.appModule.social.team
 {
+	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.MCUtil;
 	
@@ -101,7 +103,25 @@ package  com.rpgGame.appModule.social.team
 			{
 				onTab(null);
 			}
+			Mgr.teamMgr.addEventListener(TeamEvent.GET_TEAM_INFO,onGetTeamInfo);
 		}
+		override protected function onHide():void
+		{
+			super.onHide();
+			Mgr.teamMgr.removeEventListener(TeamEvent.GET_TEAM_INFO,onGetTeamInfo);
+		}
+		protected function onGetTeamInfo(event:TeamEvent):void
+		{
+			// TODO Auto-generated method stub
+			if (event.isCreateTeam) 
+			{
+				if (_skin.tab_duiwu.selectedIndex!=0) 
+				{
+					_skin.tab_duiwu.selectedIndex=0;
+				}
+			}
+		}
+		
 		/** 队伍列表		 */
 		public function get teamList():TeamListPanelExt
 		{

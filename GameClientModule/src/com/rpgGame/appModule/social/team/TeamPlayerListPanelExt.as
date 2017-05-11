@@ -1,5 +1,6 @@
 package  com.rpgGame.appModule.social.team
 {
+	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.ctrl.ControlCoolDown;
 	import com.rpgGame.app.ctrl.EnumCustomCoolDown;
 	import com.rpgGame.app.manager.Mgr;
@@ -8,8 +9,10 @@ package  com.rpgGame.appModule.social.team
 	import com.rpgGame.appModule.social.TimeCountUtil;
 	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.netData.team.bean.MapPlayerInfo;
 	
+	import flash.utils.getTimer;
 	import flash.utils.setTimeout;
 	
 	import feathers.controls.List;
@@ -30,6 +33,8 @@ package  com.rpgGame.appModule.social.team
 	public class TeamPlayerListPanelExt extends SkinUI
 	{
 		private var _skin:Zudui_wanjia;
+		private var timer:GameTimer;
+		private var lastAutoTime:int;
 		public function TeamPlayerListPanelExt()
 		{
 			_skin=new Zudui_wanjia();
@@ -45,6 +50,18 @@ package  com.rpgGame.appModule.social.team
 			list.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			list.padding=2;
 			registerListeners();
+			timer=new GameTimer("TeamPlayerListPanelExt_timer",1000,0,onTimer);
+		}
+		
+		private function onTimer():void
+		{
+			// TODO Auto Generated method stub
+			var now:int=getTimer();
+			if (lastAutoTime==0||now-lastAutoTime>=30000) 
+			{
+				doRefresh(true);
+				lastAutoTime=now;
+			}
 		}
 		
 		private function createStoneCell():TeamPlayerListItemRender
@@ -55,24 +72,35 @@ package  com.rpgGame.appModule.social.team
 		
 		private function update():void
 		{
-			if(ControlCoolDown.IsCustomCoolDown( EnumCustomCoolDown.TEAM_SEARCH_PLAYER))
-			{
-				doRefresh();
-			}else
-			{
-				setTimeout(doRefresh,
-					ControlCoolDown.GetCustomCooldownTime( EnumCustomCoolDown.TEAM_SEARCH_PLAYER )+100);
-			}
+//			if(ControlCoolDown.IsCustomCoolDown( EnumCustomCoolDown.TEAM_SEARCH_PLAYER))
+//			{
+//				doRefresh();
+//			}else
+//			{
+//				setTimeout(doRefresh,
+//					ControlCoolDown.GetCustomCooldownTime( EnumCustomCoolDown.TEAM_SEARCH_PLAYER )+100);
+//			}
 		}
 		override protected function onShow():void
 		{
 			super.onShow();
 			update();
+			timer.start();
+			onTimer();
 		}
-		private function doRefresh():void
+		override protected function onHide():void
 		{
-			TeamSender.ReqSearchNearPlayer("");
-			TimeCountUtil.ins.addButtonTimeCountDown(_skin.btn_shuaixin,"刷新列表",20);
+			super.onHide();
+			timer.stop();
+		}
+		private function doRefresh(isAuto:Boolean):void
+		{
+			TeamSender.ReqSearchNearPlayer("",isAuto);
+			if (!isAuto) 
+			{
+				TimeCountUtil.ins.addButtonTimeCountDown(_skin.btn_shuaixin,NotifyCfgData.getNotifyByID(13044).q_content,30);
+			}
+			
 		}
 		private function registerListeners():void
 		{
@@ -94,7 +122,8 @@ package  com.rpgGame.appModule.social.team
 			}
 			else	
 			{
-				NoticeManager.mouseFollowNotify("请先选中一位玩家" );
+				//NoticeManager.mouseFollowNotify("请先选中一位玩家" );
+				NoticeManager.showNotifyById(13007);
 			}
 		}
 		private function OnAddFriend(event:Event):void
@@ -104,7 +133,10 @@ package  com.rpgGame.appModule.social.team
 				//Mgr.friendMgr.AddFriend( TeamPlayerListItemExt.curItem.data.playerid );
 			}
 			else
-				NoticeManager.mouseFollowNotify("请先选中一位玩家");
+			{
+				//NoticeManager.mouseFollowNotify("请先选中一位玩家");
+				NoticeManager.showNotifyById(13007);
+			}
 		}
 		private function OnSearchPlayer(event:Event):void
 		{
@@ -114,10 +146,11 @@ package  com.rpgGame.appModule.social.team
 			
 			if(ControlCoolDown.IsCustomCoolDown( EnumCustomCoolDown.TEAM_SEARCH_PLAYER))
 			{
-				doRefresh();
+				doRefresh(false);
 			}else
 			{
-				NoticeManager.mouseFollowNotify( "您的搜索太频繁了，请稍等一下" );
+				//NoticeManager.mouseFollowNotify( "CD中，稍后再试！" );
+				NoticeManager.showNotifyById(13006);
 			}
 		}
 		private function OnInviteJoinTeam(event:Event):void
@@ -125,7 +158,10 @@ package  com.rpgGame.appModule.social.team
 			if(TeamPlayerListItemExt.curItem != null && TeamPlayerListItemExt.curItem.data != null)
 				Mgr.teamMgr.InvitePlayerJoinTeam( TeamPlayerListItemExt.curItem.data.playerid );
 			else
-				NoticeManager.mouseFollowNotify("请先选中一位玩家" );
+			{
+				//NoticeManager.mouseFollowNotify("请先选中一位玩家" );
+				NoticeManager.showNotifyById(13007);
+			}
 		}
 	
 		private var playerList:Vector.<MapPlayerInfo>;
@@ -133,7 +169,11 @@ package  com.rpgGame.appModule.social.team
 		{
 			
 			playerList = event.data as Vector.<MapPlayerInfo>;
-			
+			if (playerList.length==0) 
+			{
+				//NoticeManager.mouseFollowNotify("很抱歉，当前地图没有查到玩家信息");
+				NoticeManager.showNotifyById(13037);
+			}
 			RefreshPlayerList();
 		}
 		

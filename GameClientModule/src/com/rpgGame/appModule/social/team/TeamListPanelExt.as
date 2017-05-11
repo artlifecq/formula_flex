@@ -1,5 +1,6 @@
 package  com.rpgGame.appModule.social.team
 {
+	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.ctrl.ControlCoolDown;
 	import com.rpgGame.app.ctrl.EnumCustomCoolDown;
 	import com.rpgGame.app.manager.Mgr;
@@ -8,8 +9,10 @@ package  com.rpgGame.appModule.social.team
 	import com.rpgGame.appModule.social.TimeCountUtil;
 	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.netData.team.bean.MapTeamInfo;
 	
+	import flash.utils.getTimer;
 	import flash.utils.setTimeout;
 	
 	import feathers.controls.List;
@@ -29,7 +32,8 @@ package  com.rpgGame.appModule.social.team
 	{
 	
 		
-	
+		private var timer:GameTimer;
+		private var lastAutoTime:int;
 		private var _skin:Zudui_fujin;
 		public function TeamListPanelExt()
 		{
@@ -46,6 +50,18 @@ package  com.rpgGame.appModule.social.team
 			list.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			list.padding=2;
 			registerListeners();
+			timer=new GameTimer("TeamPlayerListPanelExt_timer",1000,0,onTimer);
+		}
+		
+		private function onTimer():void
+		{
+			// TODO Auto Generated method stub
+			var now:int=getTimer();
+			if (lastAutoTime==0||now-lastAutoTime>=30000) 
+			{
+				doRefresh(true);
+				lastAutoTime=now;
+			}
 		}
 		
 		private function createStoneCell():TeamListItemRender
@@ -55,19 +71,26 @@ package  com.rpgGame.appModule.social.team
 		}
 		private function update():void
 		{
-			if(ControlCoolDown.IsCustomCoolDown( EnumCustomCoolDown.TEAM_SEARCH_TEAM))
-			{
-				doRefresh();
-			}else
-			{
-				setTimeout(doRefresh ,
-					ControlCoolDown.GetCustomCooldownTime( EnumCustomCoolDown.TEAM_SEARCH_TEAM )+100);
-			}
+//			if(ControlCoolDown.IsCustomCoolDown( EnumCustomCoolDown.TEAM_SEARCH_TEAM))
+//			{
+//				doRefresh();
+//			}else
+//			{
+//				setTimeout(doRefresh ,
+//					ControlCoolDown.GetCustomCooldownTime( EnumCustomCoolDown.TEAM_SEARCH_TEAM )+100);
+//			}
 		}
 		 override protected function onShow():void
 		 {
 			 super.onShow();
 			 update();
+			 timer.start();
+			 onTimer();
+		 }
+		 override protected function onHide():void
+		 {
+			 super.onHide();
+			 timer.stop();
 		 }
 		private function registerListeners():void
 		{
@@ -86,7 +109,8 @@ package  com.rpgGame.appModule.social.team
 			}
 			else
 			{
-				NoticeManager.mouseFollowNotify("请先选中一位队长" );
+				//NoticeManager.mouseFollowNotify("请先选中一位队长" );
+				NoticeManager.showNotifyById(13007);
 			}
 		}
 		private function OnAddFriend(event:Event):void
@@ -97,7 +121,8 @@ package  com.rpgGame.appModule.social.team
 			}
 			else
 			{
-				NoticeManager.mouseFollowNotify("请先选中一位队长");
+				//NoticeManager.mouseFollowNotify("请先选中一位队长");
+				NoticeManager.showNotifyById(13007);
 			}
 		}
 		private function OnSearchTeam(event:Event):void
@@ -105,16 +130,21 @@ package  com.rpgGame.appModule.social.team
 		
 			if(ControlCoolDown.IsCustomCoolDown( EnumCustomCoolDown.TEAM_SEARCH_TEAM))
 			{
-				doRefresh();
+				doRefresh(false);
 			}else
 			{
-				NoticeManager.mouseFollowNotify( "您的刷新太频繁了，请稍等一下" );
+				//NoticeManager.mouseFollowNotify( "CD中，稍后再试！" );
+				NoticeManager.showNotifyById(13006);
 			}
 		}
-		private function doRefresh():void
+		private function doRefresh(isAtuo:Boolean):void
 		{
-			TeamSender.ReqSearchNearTeam("");
-			TimeCountUtil.ins.addButtonTimeCountDown(_skin.btn_shuaixin,"刷新列表",20);
+			TeamSender.ReqSearchNearTeam("",isAtuo);
+			if (!isAtuo) 
+			{
+				TimeCountUtil.ins.addButtonTimeCountDown(_skin.btn_shuaixin,NotifyCfgData.getNotifyByID(13044).q_content,30);
+			}
+			
 		}
 		private function OnApplyJoinTeam(event:Event):void
 		{
@@ -125,7 +155,8 @@ package  com.rpgGame.appModule.social.team
 			}
 			else
 			{
-				NoticeManager.mouseFollowNotify("请先选中一位队长");
+				//NoticeManager.mouseFollowNotify("请先选中一位队长");
+				NoticeManager.showNotifyById(13007);
 			}
 		}
 		
@@ -133,8 +164,15 @@ package  com.rpgGame.appModule.social.team
 		
 		private function OnGetTeams( event:TeamEvent ):void
 		{
+			
 			teamList = event.data as Vector.<MapTeamInfo>;
+			if (teamList.length==0) 
+			{
+				//NoticeManager.mouseFollowNotify("很抱歉，当前地图没有查到队伍信息");
+				NoticeManager.showNotifyById(13030);
+			}
 			RefreshTeamList();
+			
 		}
 		
 		private function RefreshTeamList():void

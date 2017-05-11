@@ -49,8 +49,8 @@ package  com.rpgGame.appModule.social.team
 				_skin.lbBanghui.text=_data.guildname;
 			}
 			//_skin.lbMap.text=ClientSceneCfgData.getSceneInfo(_data.line).q_map_name;
-			//var qMap:Q_map=MapDataManager.getMapInfo( _data.memberMapModelID ).getData() as Q_map;
-			
+			var qMap:Q_map=MapDataManager.getMapInfo( MapDataManager.currentScene.sceneId).getData() as Q_map;
+			_skin.lbMap.text=qMap.q_map_name;
 			setSelectbg(false);
 		}
 		public function setSelectbg(bool:Boolean):void

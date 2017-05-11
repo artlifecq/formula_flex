@@ -85,7 +85,8 @@ package com.rpgGame.appModule.social.team
 		{
 			if(Mgr.teamMgr.isTeamFull)
 			{
-				NoticeManager.mouseFollowNotify("很抱歉，您的队伍已经满员了" );
+//				NoticeManager.mouseFollowNotify("很抱歉，您的队伍已经满员了" );
+				NoticeManager.showNotifyById(13013);
 			}else
 			{
 				//Mgr.teamMgr.ShowSearchPanel();

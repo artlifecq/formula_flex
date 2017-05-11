@@ -2,12 +2,11 @@ package  com.rpgGame.app.ui.main.team
 {
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.TeamManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.TeamSender;
 	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.netData.team.bean.TeamInfo;
-	
-
 	
 	import feathers.controls.List;
 	import feathers.controls.Scroller;
@@ -108,8 +107,28 @@ package  com.rpgGame.app.ui.main.team
 			var teamInfo:TeamInfo=event.data as TeamInfo;
 			if (teamInfo) 
 			{
-				this._skin.list_head.dataProvider=new ListCollection(teamInfo.memberinfo);
+				var arr:Array=[];
+				var len:int=teamInfo.memberinfo.length;
+				for (var i:int = 0; i < len; i++) 
+				{
+					if(!MainRoleManager.actorInfo.serverID.EqualTo(teamInfo.memberinfo[i].memberId))
+					{
+						arr.push(teamInfo.memberinfo[i]);
+					}
+				}
+				
+				this._skin.list_head.dataProvider=new ListCollection(arr);
 				this._skin.lbNum.text=teamInfo.memberinfo.length+"/"+TeamManager.MAXMEMBER;
+				//只有自己
+				if (arr.length==0) 
+				{
+					_skin.btn_down.visible=false;
+					_skin.btn_up.visible=false;
+				}
+				else 
+				{
+					showHideList(_curState);
+				}
 			}
 			
 		}

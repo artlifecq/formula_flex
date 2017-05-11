@@ -39,8 +39,8 @@ package com.rpgGame.appModule.xinfa.sub
 		public function setCheatsData(data:CheatsVo,effectArr:Array):void
 		{
 			_icon.setIconResName(ClientConfig.getCheatsIcon(data.cheatsConfig.q_icon,IcoSizeEnum.ICON_42));
-			var tipStr:String="与《$》相生，本心法$提升$%";
-			tipStr=LanguageConfig.replaceStr(tipStr,[CheatsCfg.getCheats(effectArr[0]).q_name,CharAttributeType.getCNName(effectArr[2]),(effectArr[3]/10000).toFixed(2)]);
+			var tipStr:String="与《$》相生，本心法$提升$";
+			tipStr=LanguageConfig.replaceStr(tipStr,[CheatsCfg.getCheats(effectArr[0]).q_name,CharAttributeType.getCNName(effectArr[2]),(effectArr[3])]);
 			TipTargetManager.show( this._icon.parent, TargetTipsMaker.makeSimpleTextTips(tipStr));
 			if (data.level>0) 
 			{

@@ -6,8 +6,8 @@ package org.mokylin.skin.app.shejiao.zudui
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.component.button.ButtonSkin_close;
-	import org.mokylin.skin.component.button.ButtonSkin_putong;
+	import org.mokylin.skin.app.shejiao.button.ButtonFangdajing;
+	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
 	/**
 	 * @private
@@ -19,10 +19,6 @@ package org.mokylin.skin.app.shejiao.zudui
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
-
-		public var btnClose:feathers.controls.Button;
-
 		public var btn_Look:feathers.controls.Button;
 
 		public var btn_cancel:feathers.controls.Button;
@@ -41,8 +37,6 @@ package org.mokylin.skin.app.shejiao.zudui
 
 		public var lb_ask:feathers.controls.Label;
 
-		public var lbl_title:feathers.controls.Label;
-
 
 		//==========================================================================
 		//                                定义构造函数
@@ -52,9 +46,9 @@ package org.mokylin.skin.app.shejiao.zudui
 			super();
 			
 			this.currentState = "normal";
-			this.height = 272;
-			this.width = 570;
-			this.elementsContent = [bg_i(),__Duiwu_TanKuang_UIAsset1_i(),lbl_title_i(),btnClose_i(),btn_ok_i(),btn_Look_i(),btn_cancel_i(),grpMsg_i(),dui1_i()];
+			this.height = 262;
+			this.width = 515;
+			this.elementsContent = [__Duiwu_TanKuang_UIAsset1_i(),__Duiwu_TanKuang_UIAsset2_i(),btn_ok_i(),btn_Look_i(),btn_cancel_i(),grpMsg_i(),dui1_i()];
 			
 			states = {
 			};
@@ -69,7 +63,7 @@ package org.mokylin.skin.app.shejiao.zudui
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "玩家名：";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xDFB01F;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
 			temp.y = 0;
@@ -80,9 +74,9 @@ package org.mokylin.skin.app.shejiao.zudui
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "等级：";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xDFB01F;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 155;
+			temp.x = 125;
 			temp.y = 0;
 			return temp;
 		}
@@ -90,35 +84,18 @@ package org.mokylin.skin.app.shejiao.zudui
 		private function __Duiwu_TanKuang_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.bottom = 67;
-			temp.left = 253;
-			temp.right = 11;
-			temp.styleName = "ui/common/background/neikuang_2.png";
-			temp.top = 41;
+			temp.styleName = "ui/app/shejiao/zudui/yaoqing_bg.png";
+			temp.x = 139;
+			temp.y = 0;
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function __Duiwu_TanKuang_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			bg = temp;
-			temp.name = "bg";
-			temp.bottom = 0;
-			temp.left = 0;
-			temp.right = 0;
-			temp.styleName = "ui/common/background/erji_kuang.png";
-			temp.top = 0;
-			return temp;
-		}
-
-		private function btnClose_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btnClose = temp;
-			temp.name = "btnClose";
-			temp.right = 8;
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.top = 7;
+			temp.styleName = "ui/app/shejiao/zudui/dizuo1.png";
+			temp.x = 0;
+			temp.y = 215;
 			return temp;
 		}
 
@@ -127,13 +104,9 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_Look = temp;
 			temp.name = "btn_Look";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.label = "查看";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xE1D4A9;
-			temp.width = 64;
-			temp.x = 14;
-			temp.y = 223;
+			temp.styleClass = org.mokylin.skin.app.shejiao.button.ButtonFangdajing;
+			temp.x = 72;
+			temp.y = 229;
 			return temp;
 		}
 
@@ -144,11 +117,11 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "btn_cancel";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "拒 绝";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xE1D4A9;
-			temp.width = 95;
-			temp.x = 407;
-			temp.y = 216;
+			temp.width = 73;
+			temp.x = 342;
+			temp.y = 158;
 			return temp;
 		}
 
@@ -159,11 +132,11 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "btn_ok";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "同 意";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xE1D4A9;
-			temp.width = 95;
-			temp.x = 276;
-			temp.y = 216;
+			temp.width = 73;
+			temp.x = 237;
+			temp.y = 158;
 			return temp;
 		}
 
@@ -174,8 +147,8 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "dui1";
 			temp.height = 10;
 			temp.width = 10;
-			temp.x = 125;
-			temp.y = 234;
+			temp.x = 76;
+			temp.y = 218;
 			return temp;
 		}
 
@@ -184,8 +157,8 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpMsg = temp;
 			temp.name = "grpMsg";
-			temp.x = 276;
-			temp.y = 69;
+			temp.x = 231;
+			temp.y = 74;
 			temp.elementsContent = [__Duiwu_TanKuang_Label1_i(),lbName_i(),__Duiwu_TanKuang_Label2_i(),lbLevel_i(),lb_ask_i(),lbMsg_i()];
 			return temp;
 		}
@@ -196,10 +169,10 @@ package org.mokylin.skin.app.shejiao.zudui
 			lbLevel = temp;
 			temp.name = "lbLevel";
 			temp.text = "XXXX";
-			temp.color = 0x5CB006;
+			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 72;
-			temp.x = 194;
+			temp.width = 65;
+			temp.x = 165;
 			temp.y = 0;
 			return temp;
 		}
@@ -210,10 +183,10 @@ package org.mokylin.skin.app.shejiao.zudui
 			lbMsg = temp;
 			temp.name = "lbMsg";
 			temp.htmlText = "请问您是否同意？（<font color='#5DBD37'>10S</font>）";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 35;
-			temp.y = 62;
+			temp.x = 17;
+			temp.y = 52;
 			return temp;
 		}
 
@@ -223,7 +196,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			lbName = temp;
 			temp.name = "lbName";
 			temp.text = "1111";
-			temp.color = 0x5CB006;
+			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 88;
 			temp.x = 52;
@@ -237,30 +210,10 @@ package org.mokylin.skin.app.shejiao.zudui
 			lb_ask = temp;
 			temp.name = "lb_ask";
 			temp.text = "邀请你加入其队伍";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 58;
-			temp.y = 39;
-			return temp;
-		}
-
-		private function lbl_title_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbl_title = temp;
-			temp.name = "lbl_title";
-			temp.bold = true;
-			temp.horizontalCenter = 2.5;
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.letterSpacing = 2;
-			temp.fontSize = 16;
-			temp.text = "提 示";
-			temp.textAlign = "center";
-			temp.color = 0xb8ad80;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.top = 11;
-			temp.width = 182;
+			temp.x = 38;
+			temp.y = 31;
 			return temp;
 		}
 

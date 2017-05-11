@@ -176,6 +176,8 @@ package com.rpgGame.coreData.lang
 		public static const COUNTRY_WAR_DAN_MU:String = "COUNTRY_WAR_DAN_MU";
 		 /**  是否需要花费$元宝激活该技能? */
 		public static const LostSkill_ActivitMsg:String = "LostSkill_ActivitMsg";
+		 /**  您已有队伍，是否退出现在队伍申请加入其它队伍? */
+		public static const TeamJoinOtherTeam:String = "TeamJoinOtherTeam";
 
 	}
 }

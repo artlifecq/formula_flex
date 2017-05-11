@@ -14,10 +14,12 @@ package   com.rpgGame.app.ui.main.team
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.type.AssetUrl;
+	import com.rpgGame.coreData.utils.FilterUtil;
 	import com.rpgGame.netData.team.bean.TeamMemberBriefInfo;
 	import com.rpgGame.netData.team.bean.TeamMemberInfo;
 	
 	import feathers.controls.UIAsset;
+	import feathers.utils.filter.GrayFilter;
 	
 	import org.mokylin.skin.mainui.head.head_min_Skin;
 
@@ -32,6 +34,7 @@ package   com.rpgGame.app.ui.main.team
 		private var _headImg:UIAsset;
 		private var tipData:Array=["未知","未知",0,0];
 		private var buffIcon:Array=[];
+		private var _stateImg:UIAsset;
 		public function TeamBarListItemExt()
 		{
 			_skin=new head_min_Skin();
@@ -94,6 +97,35 @@ package   com.rpgGame.app.ui.main.team
 			updateDynamic(_data.maxhp,null);
 			_skin.role_name.text=_data.memberName+" ("+data.memberLevel+"级)";
 			_skin.qizi.visible=_data.memberId.EqualTo(Mgr.teamMgr.captain.memberId);
+			var state:int=Mgr.teamMgr.getNearState(_data.memberId);
+			setState(state);
+		}
+		private function setState(state:int):void
+		{
+			if (state==0) 
+			{
+				if (_stateImg) 
+				{
+					_stateImg.visible=false;
+				}
+			}
+			else
+			{
+				if (!_stateImg) 
+				{
+					_stateImg=new UIAsset();
+					this.addChild(_stateImg);
+				}
+				if (state==1) 
+				{
+					_stateImg.styleName="ui/common/yinzhang.png";
+				}
+				else
+				{
+					_stateImg.styleName="ui/common/lixianyinzhang.png";
+				}
+				_stateImg.visible=true;
+			}
 		}
 		public function updateDynamic(hp:int,buff:Vector.<int>):void
 		{

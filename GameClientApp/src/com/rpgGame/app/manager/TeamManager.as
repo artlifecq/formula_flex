@@ -4,20 +4,25 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.sender.TeamSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.app.ui.alert.GameAlertExt;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.SystemEvent;
 	import com.rpgGame.core.events.TeamEvent;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_map;
+	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.netData.team.bean.TeamInfo;
 	import com.rpgGame.netData.team.bean.TeamMemberBriefInfo;
 	import com.rpgGame.netData.team.bean.TeamMemberInfo;
 	
 	import flash.events.EventDispatcher;
-	import flash.geom.Point;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
@@ -152,14 +157,16 @@ package com.rpgGame.app.manager
 				{
 					if(Mgr.teamMgr.isTeamFull)
 					{
-						NoticeManager.mouseFollowNotify("很抱歉，您的队伍已经满员了") ;
+						//NoticeManager.mouseFollowNotify("很抱歉，您的队伍已经满员了") ;
+						NoticeManager.showNotifyById(13013);
 					}else
 					{
 						TeamSender.ReqInviteJoinTeam( playerId );
 					}
 				}else
 				{
-					NoticeManager.mouseFollowNotify("很抱歉，只有队长才能发出组队邀请") ;
+					//NoticeManager.mouseFollowNotify("很抱歉，只有队长才能发出组队邀请") ;
+					NoticeManager.showNotifyById(13011);
 				}
 			}else
 			{
@@ -421,7 +428,35 @@ package com.rpgGame.app.manager
 			var mem:TeamMemberInfo=getTeamMember(heroId);
 			if (mem) 
 			{
-				
+				var qMap:Q_map= MapDataManager.getMapInfo(mem.memberMapModelID).getData() as Q_map;
+				if (qMap) 
+				{
+					//普通，中立，普通加中立
+					if (qMap.q_map_public!=1&&qMap.q_map_public!=2&&qMap.q_map_public!=3) 
+					{
+						//NoticeManager.mouseFollowNotify(qMap.q_map_name+"无法寻路到达");
+						NoticeManager.showNotifyById(13040,qMap.q_map_name);
+					}
+					if (qMap.q_map_min_level>MainRoleManager.actorInfo.totalStat.level) 
+					{
+						//NoticeManager.mouseFollowNotify("等级不足,无法进入地图{0}"+qMap.q_map_name);
+						NoticeManager.showNotifyById(13041,qMap.q_map_name);
+					}
+					else if (qMap.q_map_max_level<MainRoleManager.actorInfo.totalStat.level) 
+					{
+						//NoticeManager.mouseFollowNotify("等级大于"+qMap.q_map_max_level+"级，无法进入地图"+qMap.q_map_name);
+						NoticeManager.showNotifyById(13042,qMap.q_map_max_level,qMap.q_map_name);
+					}
+					else
+					{
+						MainRoleSearchPathManager.walkToScene(qMap.q_map_id, mem.x, -mem.y);
+					}
+				}
+				else
+				{
+					//NoticeManager.mouseFollowNotify("找不到地图"+mem.memberMapModelID);
+					NoticeManager.showNotifyById(13043,mem.memberMapModelID);
+				}
 			}
 		}
 		private function getTeamMember(playerId:long):TeamMemberInfo
@@ -438,16 +473,62 @@ package com.rpgGame.app.manager
 			}
 			return null;
 		}
+		private var reqTeamId:long;
 		public function reqJoinToTeam(teamId:long):void
 		{
+			reqTeamId=teamId;
 			if (hasTeam) 
 			{
-				GameAlert.showAlertUtil("您已有队伍，是否退出现在队伍申请加入其它队伍?",TeamSender.ReqApplyJoinTeam,teamId)
+				//这个接口太难用！！！！！！
+				//GameAlert.showAlertUtil(LangAlertInfo.TeamJoinOtherTeam,checkAlert);
+				GameAlertExt.show(NotifyCfgData.getNotifyByID(13045).q_content,TeamSender.ReqApplyJoinTeam,[reqTeamId]);
 			}
 			else
 			{
 				TeamSender.ReqApplyJoinTeam(teamId);
 			}
+		}
+		private function checkAlert(gameAlert:GameAlert):void
+		{
+			switch(gameAlert.clickType)
+			{	
+				case AlertClickTypeEnum.TYPE_SURE:
+					TeamSender.ReqApplyJoinTeam(reqTeamId);
+					reqTeamId=null;
+					break;
+			}
+		}
+		/**
+		 *获取队友相对于我的状态0同地图1远离2离线3未找到 
+		 * @param playerId
+		 * @return 
+		 * 
+		 */		
+		public function getNearState(playerId:long):int
+		{
+			var mem:TeamMemberInfo = getTeamMember(playerId);
+			if (playerId.EqualTo(MainRoleManager.actorInfo.serverID)) 
+			{
+				return 0;
+			}
+			if (!mem) 
+			{
+				return 3;
+			}
+			if (!mem.isonline) 
+			{
+				return 2;
+			}
+			if (mem.memberMapModelID!=MapDataManager.currentScene.sceneId) 
+			{
+				return 1;
+			}
+			return 0;
+		}
+		/***玩家头像下面组队***/
+		public function reqCreateTeamWithPlayer(player:long):void
+		{
+			TeamSender.reqCreateTeamWithPlayer(player);
 		}
 	}
 }

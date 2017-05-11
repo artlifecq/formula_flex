@@ -1,9 +1,13 @@
 package  com.rpgGame.appModule.social
 {
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.appModule.social.team.TeamMainPanelExt;
+	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.MCUtil;
+	
+	import flash.events.Event;
 	
 	import org.mokylin.skin.app.shejiao.Shejiao_Daohang;
 	import org.mokylin.skin.app.shejiao.Shejiao_Skin;
@@ -113,7 +117,10 @@ package  com.rpgGame.appModule.social
 		override protected function onShow():void
 		{
 			super.onShow();
+			
 		}
+		
+		
 		override protected function onHide():void
 		{
 			super.onHide();

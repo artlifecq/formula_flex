@@ -29,6 +29,11 @@ package com.rpgGame.app.sender
 	public class TeamSender extends BaseSender
 	{
 		//====================== 请求消息 =============================
+		
+		public static function reqCreateTeamWithPlayer(player:long):void
+		{
+			ReqInviteJoinTeam(player);
+		}
 		/**
 		 * 任命新队长
 		 * @param teamId
@@ -165,23 +170,31 @@ package com.rpgGame.app.sender
 		 * 搜索附近玩家
 		 * @param content
 		 */		
-		public static function ReqSearchNearPlayer( content:String ):void
+		public static function ReqSearchNearPlayer( content:String,isAuto:Boolean):void
 		{
 			var msg:ReqMapSearchPlayerInfoGameMessage = new ReqMapSearchPlayerInfoGameMessage();
 			msg.searchcontent = content;
 			SocketConnection.send(msg);
-			ControlCoolDown.AddCustomCoolDownTime( EnumCustomCoolDown.TEAM_SEARCH_PLAYER , 20000);
+			if (!isAuto) 
+			{
+				ControlCoolDown.AddCustomCoolDownTime( EnumCustomCoolDown.TEAM_SEARCH_PLAYER , 30000);
+			}
+			
 		}
 		/**
 		 * 搜索附近队伍
 		 * @param content
 		 */		
-		public static  function ReqSearchNearTeam( content:String ):void
+		public static  function ReqSearchNearTeam( content:String,isAuto:Boolean ):void
 		{
 			var msg:ReqMapSearchTeamInfoGameMessage = new ReqMapSearchTeamInfoGameMessage();
 			msg.searchcontent = content;
 			SocketConnection.send(msg);
-			ControlCoolDown.AddCustomCoolDownTime( EnumCustomCoolDown.TEAM_SEARCH_TEAM , 20000);
+			if (!isAuto) 
+			{
+				ControlCoolDown.AddCustomCoolDownTime( EnumCustomCoolDown.TEAM_SEARCH_TEAM , 30000);
+			}
+			
 		}
 	}
 }
