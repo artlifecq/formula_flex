@@ -1,9 +1,25 @@
 package com.rpgGame.app.sender
 {
-	import app.cmd.TeamModuleMessages;
+	import com.rpgGame.app.ctrl.ControlCoolDown;
+	import com.rpgGame.app.ctrl.EnumCustomCoolDown;
+	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.netData.team.message.ReqApplyGameSelectMessage;
+	import com.rpgGame.netData.team.message.ReqAppointGameMessage;
+	import com.rpgGame.netData.team.message.ReqAppointGameSelectMessage;
+	import com.rpgGame.netData.team.message.ReqCreateTeamMessage;
+	import com.rpgGame.netData.team.message.ReqGenericSearchToGameMessage;
+	import com.rpgGame.netData.team.message.ReqInviteTeamMessage;
+	import com.rpgGame.netData.team.message.ReqInviteTeamSelectMessage;
+	import com.rpgGame.netData.team.message.ReqJoinTeamMessage;
+	import com.rpgGame.netData.team.message.ReqKickTeamMessage;
+	import com.rpgGame.netData.team.message.ReqLeaveTeamMessage;
+	import com.rpgGame.netData.team.message.ReqMapSearchPlayerInfoGameMessage;
+	import com.rpgGame.netData.team.message.ReqMapSearchTeamInfoGameMessage;
+	import com.rpgGame.netData.team.message.ReqSetTeamOptionsGameMessage;
+	import com.rpgGame.netData.team.message.ReqTeamInfoToGameMessage;
 	
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
-	import org.game.netCore.net_protobuff.ByteBuffer;
+	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.data.long;
 
 	/**
 	 * 组队sender
@@ -12,217 +28,173 @@ package com.rpgGame.app.sender
 	 */
 	public class TeamSender extends BaseSender
 	{
-		/** 请求创建个自己一个人的队伍 */
-		public static function requestCreateMyTeam():void
-		{
-			_bytes.clear();
-			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_CREATE_OWN_TEAM, _bytes);
-		}
+		//====================== 请求消息 =============================
 		
-		/** 请求离开队伍 */
-		public static function requestLeaveTeam():void
+		public static function reqCreateTeamWithPlayer(player:long):void
 		{
-			_bytes.clear();
-			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_LEAVE_TEAM, _bytes);
+			ReqInviteJoinTeam(player);
 		}
-		
-		/** 回复组队邀请 */
-		public static function requestBeInventJoinTeam(id:Number,isAccept:Boolean):void
-		{
-			_bytes.clear();
-			_bytes.writeVarint64(id);
-			_bytes.writeBoolean(isAccept);
-			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_REPLY_INVITE,_bytes);
-		}
-		
-		/** 一次性拒绝所有的入队申请 */
-		public static function refuseAllJoinRequest():void
-		{
-			var by:ByteBuffer = new ByteBuffer();
-			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_REJECT_ALL_REQUESTS,_bytes);
-		}
-		
-		/** 一次性拒绝所有的组队邀请*/
-		public static function refuseAllInventRequest():void
-		{
-			_bytes.clear();
-			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_REJECT_ALL_INVITATIONS, _bytes);
-		}
-		
-		/** 请求加入对方的队伍 */
-		public static function requestJoinOtherTeam(id:Number):void
-		{
-			_bytes.clear();
-			_bytes.writeVarint64(id);
-			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_SEND_REQUEST, _bytes);
-		}
-		
-		/** 回复别人的入队申请 */
-		public static function replyJoinTeamRequest(id:Number,isAgree:Boolean):void
-		{
-			_bytes.clear();
-			_bytes.writeVarint64(id);
-			_bytes.writeBoolean(isAgree);
-			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_REPLY_REQUEST, _bytes);
-		}
-		
 		/**
-		 * 踢出一个队员
-		 * @param	id
-		 */
-		public static function kickParter(id:Number):void
+		 * 任命新队长
+		 * @param teamId
+		 * @param playerId
+		 */		
+		public static function ReqAppointNewCaptain(teamId:long , playerId:long):void
 		{
-			_bytes.clear();
-			_bytes.writeVarint64(id);
-			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_KICK, _bytes);
+			var msg:ReqAppointGameMessage = new ReqAppointGameMessage();
+			msg.teamid = teamId;
+			msg.playerid = playerId;
+				SocketConnection.send(msg);
 		}
-		
 		/**
-		 * 更换队长
-		 * @param	id
+		 * 玩家是否同意接受队长任命
+		 * @param teamId
+		 * @param select
+		 */		
+		public static function ReqAcceptAppointNewCaptain( teamId:long , select:int ):void
+		{
+			var msg:ReqAppointGameSelectMessage = new ReqAppointGameSelectMessage();
+			msg.teamid = teamId;
+			msg.select = select;
+			SocketConnection.send(msg);
+		}
+		/**
+		 * 创建队伍
+		 */		
+		public static function ReqCreateTeam():void
+		{
+			var msg:ReqCreateTeamMessage = new ReqCreateTeamMessage();
+			SocketConnection.send(msg);
+		}
+		/**
+		 * 邀请玩家加入队伍
+		 * @param playerId
+		 */		
+		public static function ReqInviteJoinTeam( playerId:long ):void
+		{
+			var msg:ReqInviteTeamMessage = new ReqInviteTeamMessage();
+			msg.playerid = playerId;
+			SocketConnection.send(msg);
+		}
+		/**
+		 * 玩家是否同意被邀请加入到该队伍
+		 * @param teamId
+		 * @param select
+		 */		
+		public static function ReqAcceptInviteJoin( teamId:long , select:int ):void
+		{
+			var msg:ReqInviteTeamSelectMessage = new ReqInviteTeamSelectMessage();
+			msg.teamid = teamId;
+			msg.select = select;
+			SocketConnection.send(msg);
+		}
+		/**
+		 * 玩家申请加入队伍
+		 * @param teamId
+		 */		
+		public static function ReqApplyJoinTeam( teamId:long ):void
+		{
+			var msg:ReqJoinTeamMessage = new ReqJoinTeamMessage();
+			msg.teamid = teamId;
+			SocketConnection.send(msg);
+		}
+		/**
+		 * 队长处理 入队申请
+		 * @param teamId
+		 * @param playerId
+		 * @param select
 		 */
-		public static function changeCaption(id:Number):void
+		public static function ReqAcceptJionTeam( teamId:long , playerId:long , select:int ):void
 		{
-			_bytes.clear();
-			_bytes.writeVarint64(id);
-			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_TRANSFER_LEADER, _bytes);
+			var msg:ReqApplyGameSelectMessage = new ReqApplyGameSelectMessage();
+			msg.teamid = teamId;
+			msg.playerid = playerId;
+			msg.select = select;
+			SocketConnection.send(msg);
 		}
-		
-		/** 
-		 * 每个一秒询问一下.队伍中和我同场景,同一条线的人的坐标
-		 * 打开小地图时,如果有人和场景id相同,线数相同,则请求,如果没有,则不管
-		 * 请求队伍中同场景队友坐标 
-		 * */
-		public static function requestSameSceneTeamMembPos():void
+		/**
+		 * 开除队友
+		 * @param playerId
+		 */		
+		public static function ReqKickTeam( playerId:long ):void
 		{
-			_bytes.clear();
-			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_GET_TEAMMATE_POS, _bytes);
+			var msg:ReqKickTeamMessage = new ReqKickTeamMessage();
+			msg.playerid = playerId;
+			SocketConnection.send(msg);
 		}
-		
-		/** 是否禁止被邀请加入队伍 */
-		public static function reqFobidTobeInventJoinTeam(agree:Boolean):void
+		/**
+		 * 离开队伍
+		 * @param type 1 自己离开 ，2下线
+		 */		
+		public static function ReqLeaveTeam( type:int ):void
 		{
-			_bytes.clear();
-//			if (agree)
-//			SocketConnection.send(TeamModuleMessages.C2S_SET_FORBID_OTHER_INVITE_ME_JOIN_TEAM_TRUE, _bytes);
-//			else 
-//			SocketConnection.send(TeamModuleMessages.C2S_SET_FORBID_OTHER_INVITE_ME_JOIN_TEAM_FLASE, _bytes);
+			var msg:ReqLeaveTeamMessage = new ReqLeaveTeamMessage();
+			msg.type = type;
+			SocketConnection.send(msg);
 		}
-		
-		/** 自动接受别人邀请的勾选 */
-		public static function requestAutoAcceptInvent(isagree:Boolean):void
+		/**
+		 * 组队设置
+		 * @param autoIntoTeamApply 自动允许加入
+		 * @param autoJoinTeam 自动接受邀请
+		 */		
+		public static function ReqSetTeamOpation( autoIntoTeamApply:int , autoJoinTeam:int ):void
 		{
-			_bytes.clear();
-			if(isagree)
+			var msg:ReqSetTeamOptionsGameMessage = new ReqSetTeamOptionsGameMessage();
+			msg.autoIntoTeamApply = autoIntoTeamApply;
+			msg.autoJoinTeam = autoJoinTeam;
+			SocketConnection.send(msg);
+		}
+		/**
+		 * 请求队伍信息
+		 * @param teamId
+		 */		
+		public static function ReqTeamInfo( teamId:long ):void
+		{
+			var msg:ReqTeamInfoToGameMessage = new ReqTeamInfoToGameMessage();
+			msg.teamid = teamId;
+			SocketConnection.send(msg);
+		}
+		/**
+		 * 搜索全服玩家
+		 * @param content
+		 * @type 1 好友 2组队
+		 */		
+		public static function ReqSearchPlayerByServer( type:int,content:String ):void
+		{
+			var msg:ReqGenericSearchToGameMessage = new ReqGenericSearchToGameMessage();
+			msg.searchcontent = content;
+			msg.searType = type;
+			SocketConnection.send(msg);
+		}
+		/**
+		 * 搜索附近玩家
+		 * @param content
+		 */		
+		public static function ReqSearchNearPlayer( content:String,isAuto:Boolean):void
+		{
+			var msg:ReqMapSearchPlayerInfoGameMessage = new ReqMapSearchPlayerInfoGameMessage();
+			msg.searchcontent = content;
+			SocketConnection.send(msg);
+			if (!isAuto) 
 			{
-				SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_SET_AUTO_ACCEPT_INVITE, _bytes);
+				ControlCoolDown.AddCustomCoolDownTime( EnumCustomCoolDown.TEAM_SEARCH_PLAYER , 30000);
 			}
-			else
+			
+		}
+		/**
+		 * 搜索附近队伍
+		 * @param content
+		 */		
+		public static  function ReqSearchNearTeam( content:String,isAuto:Boolean ):void
+		{
+			var msg:ReqMapSearchTeamInfoGameMessage = new ReqMapSearchTeamInfoGameMessage();
+			msg.searchcontent = content;
+			SocketConnection.send(msg);
+			if (!isAuto) 
 			{
-				SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_SET_NOT_AUTO_ACCEPT_INVITE, _bytes);
+				ControlCoolDown.AddCustomCoolDownTime( EnumCustomCoolDown.TEAM_SEARCH_TEAM , 30000);
 			}
-		}
-		
-		/** 自动接受别人的入队的勾选 */
-		public static function requestAutoAcceptJoin(isagree:Boolean):void
-		{
-			_bytes.clear();
-			if(isagree)
-			{
-				SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_SET_AUTO_ACCEPT_REQUEST, _bytes);
-			}
-			else
-			{
-				SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_SET_NOT_AUTO_ACCEPT_REQUEST, _bytes);
-			}
-		}
-		/**设置是否允许邀请我加入队伍**/
-		public static function requestForbidOtherInviteMeJoinTeam(isAgree:Boolean):void
-		{
-			_bytes.clear();
-			if(isAgree)
-				SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_SET_FORBID_OTHER_INVITE_ME_JOIN_TEAM, _bytes);
-			else
-				SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_SET_NOT_FORBID_OTHER_INVITE_ME_JOIN_TEAM, _bytes);
-		}
-		
-		/** 邀请对方入队 */
-		public static function requestInventJoinTeam(id:Number):void
-		{
-			_bytes.clear();
-			_bytes.writeVarint64(id);
-			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_SEND_INVITE, _bytes);
-		}
-		
-		/**
-		 * 通过ID请求队友位置，用于寻路到队友位置时请求
-		 * @param id 
-		 */
-		public static function requestTeamMembPosById(id:Number):void
-		{
-			_bytes.clear();
-			_bytes.writeVarint64(id);
-			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_GET_TEAM_MEMBER_POS,_bytes);
-		}
-		
-		/**
-		 * 通过ID请求队友传送到队友位置，需要客户端自己找好传送物品 vip免费传0
-		 * @param id 
-		 * @param itemid
-		 */
-		public static function requestTransportToTeamMemb(id:Number):void
-		{
-			_bytes.clear();
-			_bytes.writeVarint64(id);
-			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_TEAM_MEMBER_TRANSPORT,_bytes);
-		}
-
-		/**
-		 * 队长广播请跟随，限定频率，最多1S一次
-		 *
-		 * bool true(大家跟我走啊)/false(大家别跟我走啊)
-		 */
-		public static function requestTeamsBroadcastFollow(isFollowing:Boolean):void
-		{
-			_bytes.clear();
-			_bytes.writeBoolean(isFollowing);
-			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_TEAM_BROADCAST_FOLLOW, _bytes);
-		}
-		
-		/**
-		 * 队员跟随，限定频率，最多1S一次
-		 *
-		 * bool true(跟党走)/false(滚一边去)
-		 */
-		public static function requestTeamsMemberFollow(isFollowing:Boolean):void
-		{
-			_bytes.clear();
-			_bytes.writeBoolean(isFollowing);
-			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_TEAM_MEMBER_FOLLOW, _bytes);
-		}
-		
-		/**
-		 * 设置队伍经验分配方式
-		 *
-		 * bool true(伤害分配模式)/false(平均分配模式)
-		 */
-		public static function requestSetTeamExpAllocate(isBool:Boolean):void
-		{
-			_bytes.clear();
-			_bytes.writeBoolean(isBool);
-			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_SET_TEAM_EXP_ALLOCATE, _bytes);
-		}
-		
-		/**
-		 * 设置队伍掉落分配方式
-		 *
-		 * varint32 TeamDropAllocateType
-		 */
-		public static function requestSetTeamDropAllocate(type:int):void
-		{
-			_bytes.clear();
-			_bytes.writeVarint32(type);
-			SocketConnection_protoBuffer.send(TeamModuleMessages.C2S_SET_TEAM_DROP_ALLOCATE, _bytes);
+			
 		}
 	}
 }

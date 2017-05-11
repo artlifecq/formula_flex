@@ -13,6 +13,10 @@ package com.rpgGame.core.events
 		 *更新论剑面板 
 		 */
 		public static const UPDATE_LUNJIAN_PANEL:int = UNIQUEID.NEXT;
+		/**
+		 *更新论剑时间
+		 */
+		public static const UPDATE_LUNJIAN_TIME:int = UNIQUEID.NEXT;
 		
 		public function DungeonEvent()
 		{

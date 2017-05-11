@@ -84,6 +84,8 @@ package com.rpgGame.app.view.uiComponent.menu
 //				menuItem.setWidth( menuWidth, 5 );
 				
 				menuItem.setData( menus[i] );
+				menuItem.width=menuWidth-8;
+				menuItem.x=4;
 				menuItem.visible = true;
 			}
 			
@@ -95,8 +97,7 @@ package com.rpgGame.app.view.uiComponent.menu
 			StarlingLayerManager.hintUILayer.addChild( this );
 			this.addEventListener(Event.REMOVED_FROM_STAGE,onHide);
 			
-			TweenUtil.MenuShowAndHide( this, 0.3, 0, 1, showEnd );
-			
+			TweenUtil.MenuShowAndHide( this, 0, 0, 1, showEnd );
 			if(lastBindHider != bindHideDisplay)
 			{
 				if(lastBindHider != null)unBind();
@@ -185,7 +186,7 @@ package com.rpgGame.app.view.uiComponent.menu
 			
 			removeListener();
 			
-			TweenUtil.MenuShowAndHide( this, 0.3, 1, 0, removeSelf );
+			TweenUtil.MenuShowAndHide( this, 0, 1, 0, removeSelf );
 		}
 		
 		private function clear():void

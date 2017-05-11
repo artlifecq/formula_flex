@@ -1,5 +1,8 @@
 package com.rpgGame.app.sender
 {
+	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.manager.goods.StorageManager;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
@@ -227,6 +230,11 @@ package com.rpgGame.app.sender
 		
 		public static function bagToStore(itemId:long,toCellId:int):void
 		{
+			if(StorageManager.instance.useGridLen()>=StorageManager.instance.hasOpenCount){
+				NoticeManager.showNotifyById(12007);
+				return;
+			}
+			
 			var msg:ReqBagToStoreMessage=new ReqBagToStoreMessage();
 			msg.itemId=itemId;
 			msg.toCellId=toCellId;
@@ -235,6 +243,11 @@ package com.rpgGame.app.sender
 		
 		public static function StoreTobag(itemId:long,toCellId:int):void
 		{
+			if(BackPackManager.instance.useGridLen()>=BackPackManager.instance.hasOpenCount){
+				NoticeManager.showNotifyById(12008);
+				return;
+			}
+			
 			var msg:ReqStoreToBagMessage=new ReqStoreToBagMessage();
 			msg.itemId=itemId;
 			msg.toCellId=toCellId;

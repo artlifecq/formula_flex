@@ -12,7 +12,6 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.common.CenterEftPop;
 	import com.rpgGame.app.utils.FaceUtil;
-	import com.rpgGame.app.utils.TouchableUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.appModule.common.GoodsContainerPanel;
@@ -20,9 +19,12 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.item.EquipJiChengData;
 	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
@@ -44,8 +46,6 @@ package com.rpgGame.appModule.equip
 	
 	import app.message.EquipOperateType;
 	import app.message.GoodsType;
-	
-	import away3d.core.base.data.OverrideMaterialProps;
 	
 	import feathers.controls.ToggleButton;
 	
@@ -119,6 +119,7 @@ package com.rpgGame.appModule.equip
 			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateMoney);//金钱变化
+			TipTargetManager.show( _skin.btn_shuoming,TargetTipsMaker.makeSimpleTextTips( TipsCfgData.getTipsInfo(26).q_describe));
 		}
 		
 		private function clearEvent():void
@@ -130,6 +131,7 @@ package com.rpgGame.appModule.equip
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateMoney);//金钱变化
+			TipTargetManager.remove( _skin.btn_shuoming);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void

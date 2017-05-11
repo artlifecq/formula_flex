@@ -17,5 +17,9 @@ package com.rpgGame.app.manager
 		{
 			return CheatsMgr.ins;
 		}
+		public static function get teamMgr():TeamManager
+		{
+			return TeamManager.ins;
+		}
 	}
 }

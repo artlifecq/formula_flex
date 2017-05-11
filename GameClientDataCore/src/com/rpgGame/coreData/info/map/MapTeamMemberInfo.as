@@ -14,7 +14,6 @@ package com.rpgGame.coreData.info.map
 		public var level : int;
 		public var isOnlin : Boolean;
 		public var job : int;
-
 		public function MapTeamMemberInfo()
 		{
 		}

@@ -2,10 +2,16 @@ package org.mokylin.skin.app.beibao.Xinfa
 {
 	import feathers.controls.Radio;
 	import feathers.controls.StateSkin;
+	import org.mokylin.skin.app.beibao.Xinfa.button.ButtonChunyang;
 	import org.mokylin.skin.app.beibao.Xinfa.button.ButtonJiuxiao;
 	import org.mokylin.skin.app.beibao.Xinfa.button.ButtonLongxiang;
+	import org.mokylin.skin.app.beibao.Xinfa.button.ButtonMingxin;
+	import org.mokylin.skin.app.beibao.Xinfa.button.ButtonQiankun;
+	import org.mokylin.skin.app.beibao.Xinfa.button.ButtonShijue;
+	import org.mokylin.skin.app.beibao.Xinfa.button.ButtonWanji;
 	import org.mokylin.skin.app.beibao.Xinfa.button.ButtonXiaoyao;
 	import org.mokylin.skin.app.beibao.Xinfa.button.ButtonXidong;
+	import org.mokylin.skin.app.beibao.Xinfa.button.ButtonZhenyuan;
 
 	/**
 	 * @private
@@ -46,7 +52,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [btn_longxiang_i(),btn_shijue_i(),btn_xiaoyao_i(),btn_qiankun_i(),btn_chunyang_i(),btn_xijing_i(),btn_zhenyuan_i(),btn_jiuxiao_i(),btn_mingxin_i(),btn_wanji_i()];
+			this.elementsContent = [btn_longxiang_i(),btn_shijue_i(),btn_xiaoyao_i(),btn_qiankun_i(),btn_xijing_i(),btn_chunyang_i(),btn_zhenyuan_i(),btn_jiuxiao_i(),btn_mingxin_i(),btn_wanji_i()];
 			
 			states = {
 			};
@@ -63,7 +69,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			btn_chunyang = temp;
 			temp.name = "btn_chunyang";
 			temp.groupName = "xfradioGroup";
-			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonLongxiang;
+			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonChunyang;
 			temp.x = 0;
 			temp.y = 380;
 			return temp;
@@ -99,7 +105,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			btn_mingxin = temp;
 			temp.name = "btn_mingxin";
 			temp.groupName = "xfradioGroup";
-			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonLongxiang;
+			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonMingxin;
 			temp.x = 0;
 			temp.y = 608;
 			return temp;
@@ -111,7 +117,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			btn_qiankun = temp;
 			temp.name = "btn_qiankun";
 			temp.groupName = "xfradioGroup";
-			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonLongxiang;
+			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonQiankun;
 			temp.x = 0;
 			temp.y = 228;
 			return temp;
@@ -123,7 +129,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			btn_shijue = temp;
 			temp.name = "btn_shijue";
 			temp.groupName = "xfradioGroup";
-			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonLongxiang;
+			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonShijue;
 			temp.x = 0;
 			temp.y = 76;
 			return temp;
@@ -135,7 +141,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			btn_wanji = temp;
 			temp.name = "btn_wanji";
 			temp.groupName = "xfradioGroup";
-			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonLongxiang;
+			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonWanji;
 			temp.x = 0;
 			temp.y = 684;
 			return temp;
@@ -171,7 +177,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			btn_zhenyuan = temp;
 			temp.name = "btn_zhenyuan";
 			temp.groupName = "xfradioGroup";
-			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonLongxiang;
+			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonZhenyuan;
 			temp.x = 0;
 			temp.y = 456;
 			return temp;

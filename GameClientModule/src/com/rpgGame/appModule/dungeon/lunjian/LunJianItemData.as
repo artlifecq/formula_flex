@@ -10,6 +10,9 @@ package com.rpgGame.appModule.dungeon.lunjian
 	public class LunJianItemData
 	{
 		public var cfg:Q_lunjian;
+		/**
+		 *当前该打的打过的难度 
+		 */
 		public var diff:int;
 		
 		public function LunJianItemData()

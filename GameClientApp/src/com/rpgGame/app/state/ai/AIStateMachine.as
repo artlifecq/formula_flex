@@ -70,6 +70,14 @@ package com.rpgGame.app.state.ai
 					state = new AIUseItem();
 					break;
 				
+				case AIStateType.TASK_WALK:
+					state = new AItaskWalk();
+					break;
+				
+				case AIStateType.TASK_GATHER:
+					state = new AItaskGather();
+					break;
+				
 			}
 			if (!state)
 			{

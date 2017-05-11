@@ -4,20 +4,26 @@ package com.rpgGame.appModule.maps
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.SceneMapData;
 	import com.game.engine3D.vo.map.ClientMapData;
+	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.manager.map.MapUnitDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
+	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.map.MapTeamMemberInfo;
+	import com.rpgGame.coreData.info.map.MapUnitEvent;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.maps.maps_Skin;
 	
 	import starling.display.Image;
@@ -68,7 +74,7 @@ package com.rpgGame.appModule.maps
 		//private var _loadSceneid:int;
 		
 		private var tips:BigMapTips;
-		
+		private var teamatesIconList:Vector.<BigMapTeamIcon>=new Vector.<BigMapTeamIcon>();
 		public function BigMaps(skin:maps_Skin): void 
 		{
 			_skin=skin;
@@ -78,6 +84,7 @@ package com.rpgGame.appModule.maps
 			skinSpr.x=_skin.UIMap.x;
 			skinSpr.y=_skin.UIMap.y;
 			this._skin.grp_cont.addChildAt(skinSpr, skin.grp_cont.getChildIndex(_skin.UIMap) + 1);
+			EventManager.addEvent(MapUnitEvent.UPDATE_MAP_TEAMMATE,updateTeamatesPoint);
 		}
 		public function init():void
 		{
@@ -264,7 +271,7 @@ package com.rpgGame.appModule.maps
 			{
 				updateRolePosShow(BigMapsData.mapsThansData[i]);
 			}
-			
+			updateTeamatesPoint();
 		}
 		private function updateRolePosShow(roleData:BigMapIocnDataMode) : void
 		{
@@ -278,7 +285,43 @@ package com.rpgGame.appModule.maps
 			roleSpr.addChild(roleIcon);
 			roleSpr.visible = true;
 		}
-		
+		private function updateTeamatesPoint(...arg):void
+		{
+			var size:int=teamatesIconList.length;
+			for each (var tmp:BigMapTeamIcon in teamatesIconList) 
+			{
+				tmp.visible=false;
+			}
+			var myTeammates:Vector.<MapTeamMemberInfo> = MapUnitDataManager.myTeammates;
+			var len:int=myTeammates.length;
+			
+			var mem:MapTeamMemberInfo;
+			var icon:BigMapTeamIcon;
+			for (var i:int = 0; i < len; i++) 
+			{
+				mem=myTeammates[i];
+				if (i<size) 
+				{
+					icon=teamatesIconList[i];
+				}
+				else
+				{
+					icon=new BigMapTeamIcon();
+					teamatesIconList.push(icon);
+					roleSpr.addChild(icon);
+				}
+				icon.updateData(mem);
+				icon.visible=true;	
+				var point:Point;
+				var pos3d : Vector3D = new Vector3D();
+				pos3d.x = mem.x;
+				pos3d.z = -mem.y;
+				point=getChangeSceneToMap(pos3d);
+				icon.x=point.x;
+				icon.y=point.y;
+			}	
+		}
+
 		public function showTips(x:Number,y:Number):void
 		{
 			var point:Point=getChangeMapToScene((x-baseSpr.x),(y-baseSpr.y));
