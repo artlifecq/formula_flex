@@ -96,9 +96,18 @@ package com.rpgGame.core.app
 		 */
 		public static var SWORD_PANL:String = createAppInfo( "dungeon.JiangHuPanel","jianghu");
 		/**
+		 *论剑结果成功
+		 */
+		public static var SWORD_RESULT_SUCCESS:String = createAppInfo( "dungeon.lunjian.LunJianSuccessPanel","fuben");
+		/**
+		 *论剑结果失败
+		 */
+		public static var SWORD_RESULT_FAIL:String = createAppInfo( "dungeon.lunjian.LunJianFailPanel","fuben");
+		/**
 		 *多人副本面板
 		 */
 		public static var MULTY_PANL:String = createAppInfo( "dungeon.multy.MultyPanel","fuben");
+
 		/**
 		 *装备面板
 		 */

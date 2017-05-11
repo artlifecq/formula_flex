@@ -1,6 +1,7 @@
-package com.rpgGame.appModule.dungeon
+package com.rpgGame.appModule.dungeon.lunjian
 {
 	import com.rpgGame.app.sender.DungeonSender;
+	import com.rpgGame.app.ui.common.PageContainerUI;
 	import com.rpgGame.appModule.common.ViewUI;
 	import com.rpgGame.appModule.dungeon.lunjian.LunJianItemData;
 	import com.rpgGame.appModule.dungeon.lunjian.LunJianItemRender;
@@ -12,7 +13,6 @@ package com.rpgGame.appModule.dungeon
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.netData.lunjian.bean.LunJianInfo;
 	
-	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.data.ListCollection;
 	
 	import org.client.mainCore.ds.HashMap;
@@ -33,6 +33,7 @@ package com.rpgGame.appModule.dungeon
 		private var npcDatas:ListCollection;
 		private var diffMap:HashMap;
 		private var mapDatas:ListCollection;
+		private var pageContainer:PageContainerUI;
 		
 		public function LunJianUI()
 		{
@@ -44,15 +45,18 @@ package com.rpgGame.appModule.dungeon
 		private function initView():void
 		{
 			_skin.list_map.itemRendererType = NpcMapItemRender;
-//			_skin.list_map.clipContent = true;
-			_skin.list_npc.itemRendererType = LunJianItemRender;
-//			_skin.list_npc.clipContent = true;
-			_skin.list_npc.scrollBarDisplayMode=ScrollBarDisplayMode.ALWAYS_VISIBLE;
+			pageContainer=new PageContainerUI(3,_skin.btnPrev,_skin.btnNext);
+			pageContainer.itemRendererType=LunJianItemRender;
+			pageContainer.x=_skin.list_map.x+_skin.list_map.width+5;
+			pageContainer.y=_skin.list_map.y;
 			
+			_skin.container.addChild(pageContainer);
+			_skin.container.addChild(_skin.btnPrev);
+			_skin.container.addChild(_skin.btnNext);
 			
 			npcDatas=new ListCollection();
-			_skin.list_npc.dataProvider=npcDatas;
 			diffMap=new  HashMap(); 
+			pageContainer.dataProvider=npcDatas;
 			
 			var mapIds:Array=LunJianCfg.mapDatas;
 			mapIds=mapIds.sort(sortMaps);
