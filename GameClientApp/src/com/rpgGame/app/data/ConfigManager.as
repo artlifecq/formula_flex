@@ -60,6 +60,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.ZhanGongData;
 	import com.rpgGame.coreData.cfg.ZhanGongMonsterData;
 	import com.rpgGame.coreData.cfg.ZoneCfgData;
+	import com.rpgGame.coreData.cfg.ZoneMultyCfgData;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
 	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
@@ -261,6 +262,7 @@ package com.rpgGame.app.data
 			//副本相关配置
 			ZoneCfgData.setup(dic[ConfigClassRegister.Q_zone]);
 			LunJianCfg.setup(dic[ConfigClassRegister.Q_lunjian]);
+			ZoneMultyCfgData.setup(dic[ConfigClassRegister.Q_zone_multy]);//多人副本
 		}
 		
 		/**
