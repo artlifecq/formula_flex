@@ -24,13 +24,17 @@ package org.mokylin.skin.app.fuben
 
 		public var grpIcon:feathers.controls.Group;
 
-		public var imgBg:feathers.controls.UIAsset;
+		public var imgBg_out:feathers.controls.UIAsset;
+
+		public var imgBg_select:feathers.controls.UIAsset;
 
 		public var lbLevel:feathers.controls.Label;
 
 		public var lbNum:feathers.controls.Label;
 
-		public var uiName:feathers.controls.UIAsset;
+		public var uiName1:feathers.controls.UIAsset;
+
+		public var uiName2:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -41,9 +45,8 @@ package org.mokylin.skin.app.fuben
 			super();
 			
 			this.currentState = "normal";
-			this.height = 91;
 			this.width = 539;
-			this.elementsContent = [imgBg_i(),grpIcon_i(),uiName_i(),lbLevel_i(),lbNum_i(),Icon0_i(),btnSelect_i()];
+			this.elementsContent = [imgBg_select_i(),imgBg_out_i(),grpIcon_i(),uiName1_i(),uiName2_i(),lbLevel_i(),lbNum_i(),Icon0_i(),btnSelect_i()];
 			
 			states = {
 			};
@@ -156,12 +159,25 @@ package org.mokylin.skin.app.fuben
 			return temp;
 		}
 
-		private function imgBg_i():feathers.controls.UIAsset
+		private function imgBg_out_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			imgBg = temp;
-			temp.name = "imgBg";
-			temp.styleName = "ui/app/fuben/duorenfuben/fuben_bg/aofubingxieku/up.jpg";
+			imgBg_out = temp;
+			temp.name = "imgBg_out";
+			temp.height = 91;
+			temp.width = 539;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function imgBg_select_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			imgBg_select = temp;
+			temp.name = "imgBg_select";
+			temp.height = 125;
+			temp.width = 539;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -198,12 +214,21 @@ package org.mokylin.skin.app.fuben
 			return temp;
 		}
 
-		private function uiName_i():feathers.controls.UIAsset
+		private function uiName1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			uiName = temp;
-			temp.name = "uiName";
-			temp.styleName = "ui/app/fuben/duorenfuben/fuben_name/aofubungxiefu/up.png";
+			uiName1 = temp;
+			temp.name = "uiName1";
+			temp.x = 16;
+			temp.y = 28;
+			return temp;
+		}
+
+		private function uiName2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiName2 = temp;
+			temp.name = "uiName2";
 			temp.x = 16;
 			temp.y = 28;
 			return temp;

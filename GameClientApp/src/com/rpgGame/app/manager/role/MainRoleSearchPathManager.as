@@ -13,6 +13,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MapEvent;
+	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.events.WorldMapEvent;
 	import com.rpgGame.coreData.cfg.TranportsDataManager;
 	import com.rpgGame.coreData.cfg.TransCfgData;
@@ -144,7 +145,14 @@ package com.rpgGame.app.manager.role
 			TrusteeshipManager.getInstance().stopAll();
 			var role : SceneRole = MainRoleManager.actor;
 			var position : Vector3D = new Vector3D(posx, posy, 0);
-			walkToScenePos(role, targetSceneId, position, onArrive, spacing, data,noWalk);
+			EventManager.dispatchEvent(TaskEvent.AUTO_TASK_START);
+			walkToScenePos(role, targetSceneId, position,function(ref :WalkMoveStateReference):void{
+				if(onArrive!=null)
+				{
+					onArrive(ref.data);
+				}
+				EventManager.dispatchEvent(TaskEvent.AUTO_TASK_STOP);
+			}, spacing, data,noWalk);
 		}
 
 		/**

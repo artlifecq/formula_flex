@@ -2,6 +2,7 @@ package com.rpgGame.appModule.task
 {
 
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
@@ -44,8 +45,8 @@ package com.rpgGame.appModule.task
 		private var icoList:Vector.<IconCDFace>;
 		private var timer:GameTimer;
 		private var currtimer:int;
-		private var TIMERDATA:int=15//倒计时时间
-		
+		private var TIMERDATA_1:int=15//倒计时时间
+		private var TIMERDATA_2:int=5//倒计时时间
 
 		public function TaskLeadPanel()
 		{
@@ -76,7 +77,7 @@ package com.rpgGame.appModule.task
 			for(i=0;i<icoBgList.length;i++)
 			{
 				var ico:IconCDFace=new IconCDFace(IcoSizeEnum.ICON_42);
-
+				ico.showCD=false;
 				ico.x=icoBgList[i].x+6;
 				ico.y=icoBgList[i].y+6;
 				ico.visible=false;
@@ -95,7 +96,15 @@ package com.rpgGame.appModule.task
 			navLabel.htmlText="任务奖励";
 			speakLabel.htmlText="";
 			timerLabel.htmlText="";
-			TIMERDATA=GlobalSheetData.getSettingInfo(509).q_int_value;
+			if(GlobalSheetData.getSettingInfo(509)!=null)
+			{
+				TIMERDATA_1=GlobalSheetData.getSettingInfo(509).q_int_value;
+			}
+			if(GlobalSheetData.getSettingInfo(513)!=null)
+			{
+				TIMERDATA_2=GlobalSheetData.getSettingInfo(513).q_int_value;
+			}
+			
 			timer = new GameTimer("TaskLeadPanel", 1000, 0, onTimer);
 			timer.stop();
 		}
@@ -110,7 +119,7 @@ package com.rpgGame.appModule.task
 			switch (target) {
 				
 				case this._skin.btn_ok:
-					subFinish();
+					subFinishBut();
 					break;
 			}
 		}
@@ -131,24 +140,25 @@ package com.rpgGame.appModule.task
 		{
 			super.hide();
 			timer.stop();
-			currtimer=TIMERDATA;
+			currtimer=TIMERDATA_1;
+			subFinish();
 		}
 		
 		
 		
-		private function subFinish():void
+		private function subFinishBut():void
 		{
 			if(TaskMissionManager.mainTaskInfo!=null&&TaskMissionManager.getMainTaskIsFinish()&&this.visible&&this.parent!=null)
 			{
 				hide();
-				okBut.isEnabled=false;
-				TaskSender.sendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);	
 			}
-			
-			
 		}
 		
-		
+		private function subFinish():void
+		{
+			okBut.isEnabled=false;
+			TaskSender.sendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);	
+		}
 		
 		private function setView():void
 		{
@@ -183,10 +193,18 @@ package com.rpgGame.appModule.task
 		/**判断倒计时*/
 		private function timeInit():void
 		{
+			if(TaskAutoManager.getInstance().isTaskRunning)
+			{
+				currtimer=TIMERDATA_2;
+			}
+			else
+			{
+				currtimer=TIMERDATA_1;
+			}
+			
 			if(TaskMissionManager.getMainTaskIsFinish())
 			{
 				timer.start();
-				currtimer=TIMERDATA;
 				setTimeText();
 			}
 			else
@@ -205,7 +223,7 @@ package com.rpgGame.appModule.task
 				if(currtimer==0)
 				{
 					timer.stop();
-					subFinish();
+					subFinishBut();
 				}
 				currtimer--;
 			}

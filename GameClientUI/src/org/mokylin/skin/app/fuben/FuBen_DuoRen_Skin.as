@@ -35,8 +35,6 @@ package org.mokylin.skin.app.fuben
 
 		public var btnEnter:feathers.controls.Button;
 
-		public var btnExit:feathers.controls.Button;
-
 		public var grpShuoming:feathers.controls.Group;
 
 		public var lbCishu:feathers.controls.Label;
@@ -46,8 +44,6 @@ package org.mokylin.skin.app.fuben
 		public var lbRenshu:feathers.controls.Label;
 
 		public var lbTiaozhan:feathers.controls.Label;
-
-		public var lbTime:feathers.controls.Label;
 
 		public var lbZhanli:feathers.controls.Label;
 
@@ -259,21 +255,6 @@ package org.mokylin.skin.app.fuben
 			return temp;
 		}
 
-		private function btnExit_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btnExit = temp;
-			temp.name = "btnExit";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.label = "退出匹配";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
-			temp.visible = false;
-			temp.x = 130;
-			temp.y = 374;
-			return temp;
-		}
-
 		private function grpShuoming_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -281,7 +262,7 @@ package org.mokylin.skin.app.fuben
 			temp.name = "grpShuoming";
 			temp.x = 592;
 			temp.y = 79;
-			temp.elementsContent = [__FuBen_DuoRen_Skin_UIAsset5_i(),__FuBen_DuoRen_Skin_UIAsset6_i(),uiName_i(),_info_text_i(),__FuBen_DuoRen_Skin_Label1_i(),__FuBen_DuoRen_Skin_Label2_i(),__FuBen_DuoRen_Skin_Label3_i(),__FuBen_DuoRen_Skin_Label4_i(),lbRenshu_i(),lbDengji_i(),lbZhanli_i(),lbCishu_i(),btnEnter_i(),btnExit_i(),lbTime_i()];
+			temp.elementsContent = [__FuBen_DuoRen_Skin_UIAsset5_i(),__FuBen_DuoRen_Skin_UIAsset6_i(),uiName_i(),_info_text_i(),__FuBen_DuoRen_Skin_Label1_i(),__FuBen_DuoRen_Skin_Label2_i(),__FuBen_DuoRen_Skin_Label3_i(),__FuBen_DuoRen_Skin_Label4_i(),lbRenshu_i(),lbDengji_i(),lbZhanli_i(),lbCishu_i(),btnEnter_i()];
 			return temp;
 		}
 
@@ -341,21 +322,6 @@ package org.mokylin.skin.app.fuben
 			temp.width = 201;
 			temp.x = 38;
 			temp.y = 532;
-			return temp;
-		}
-
-		private function lbTime_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbTime = temp;
-			temp.name = "lbTime";
-			temp.text = "00：59";
-			temp.color = 0x5CB006;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.visible = false;
-			temp.width = 75;
-			temp.x = 215;
-			temp.y = 380;
 			return temp;
 		}
 

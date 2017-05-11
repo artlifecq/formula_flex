@@ -3,7 +3,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.alert.GameAlert;
-	import com.rpgGame.app.ui.main.Task.TaskBar;
+	import com.rpgGame.app.ui.main.task.TaskBar;
 	import com.rpgGame.app.ui.main.buff.BuffBar;
 	import com.rpgGame.app.ui.main.chat.ChatBar;
 	import com.rpgGame.app.ui.main.chat.SystemMsgBar;
