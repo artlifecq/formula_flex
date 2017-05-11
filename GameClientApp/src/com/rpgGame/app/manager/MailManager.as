@@ -459,7 +459,8 @@ package com.rpgGame.app.manager
 				_allMailList.sort(shortList);
 				EventManager.dispatchEvent(MailEvent.ADD_MAIL_DATA);
 			}
-			EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_SHOW_TYPE, EnumFunctionMessageBarIcoType.MAIL_NEWMAIL);
+			var num:int=getNewMailNum();
+			EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_SHOW_TYPE, EnumFunctionMessageBarIcoType.MAIL_TYPE,num);
 		}
 		
 		/**删除邮件*/
@@ -479,6 +480,6 @@ package com.rpgGame.app.manager
 					EventManager.dispatchEvent(MailEvent.DEL_MAIL_DATA);
 				}
 			}
-		}
+		}	
 	} 
 }
