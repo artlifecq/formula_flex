@@ -1,16 +1,13 @@
 package com.rpgGame.app.cmdlistener
 {
-	import com.rpgGame.app.manager.ItemActionManager;
+	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.ItemCDManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
-	import com.rpgGame.app.manager.role.DropGoodsManager;
-	import com.rpgGame.app.manager.role.SceneRoleManager;
-	import com.rpgGame.app.manager.scene.SceneManager;
-	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.core.events.ItemEvent;
+	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
-	import com.rpgGame.coreData.role.SceneDropGoodsData;
-	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.backpack.message.ResChangeBindItemMessage;
 	import com.rpgGame.netData.backpack.message.ResChangeLimitItemMessage;
@@ -18,8 +15,9 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.backpack.message.ResItemChangeMessage;
 	import com.rpgGame.netData.backpack.message.ResItemInfoMessage;
 	import com.rpgGame.netData.backpack.message.ResItemRemoveMessage;
-	import com.rpgGame.netData.backpack.message.ResTakeUpSuccessMessage;
 	import com.rpgGame.netData.backpack.message.ResUseItemSuccessMessage;
+	import com.rpgGame.netData.cooldown.bean.CooldownInfo;
+	import com.rpgGame.netData.cooldown.message.ResCooldownInfoListMessage;
 	import com.rpgGame.netData.equip.message.ResEquipInfoMessage;
 	import com.rpgGame.netData.equip.message.ResEquipOperateResultMessage;
 	import com.rpgGame.netData.equip.message.UnwearEquipItemMessage;
@@ -29,13 +27,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.store.message.ResStoreItemInfosMessage;
 	import com.rpgGame.netData.store.message.ResStoreItemRemoveMessage;
 	
-	import flash.geom.Point;
-	import flash.geom.Vector3D;
-	
 	import app.message.EquipOperateType;
-	
-	import away3d.cameras.Camera3D;
-	import away3d.core.math.Matrix3DUtils;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
@@ -56,7 +48,6 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(108103, onResItemChangeMessage );
 			SocketConnection.addCmdListener(108104, onResItemRemoveMessage );
 			SocketConnection.addCmdListener(108105, onResUseItemSuccessMessage );
-			SocketConnection.addCmdListener(108107, onResTakeUpSuccessMessage );
 			SocketConnection.addCmdListener(108115, onResChangeBindItemMessage );
 			SocketConnection.addCmdListener(108116, onResChangeLimitItemMessage );
 			
@@ -70,17 +61,11 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(107105, onResEquipInfoMessage );
 			SocketConnection.addCmdListener(107106, onResEquipOperateResultMessage );
 	
+			SocketConnection.addCmdListener(228100, onResCooldownInfoListMessage );
+			
 			finish();
 		}
 		
-		private function onResTakeUpSuccessMessage(msg:ResTakeUpSuccessMessage):void
-		{
-			var role : SceneRole = SceneManager.getScene().getSceneObjByID(msg.goodsId.ToGID(), SceneCharType.DROP_GOODS) as SceneRole;
-			
-			var cam:Camera3D = SceneManager.scene.view3d.camera;
-			var point:Point = new Point(role.x-cam.x,cam.y-role.z);
-			ItemActionManager.tweenMode(point);
-		}
 		private function onResEquipOperateResultMessage(msg:ResEquipOperateResultMessage):void
 		{
 			switch(msg.opaque){
@@ -155,6 +140,20 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onResUseItemSuccessMessage(msg:ResUseItemSuccessMessage):void
 		{
+			ItemCDManager.getInstance().addItemCDTimeByid(msg.itemModelId);
+			
+		}
+		
+		private function onResCooldownInfoListMessage(msg:ResCooldownInfoListMessage):void
+		{
+			if(msg&&msg.list)
+			{
+				for each(var cdinfo:CooldownInfo in msg.list)
+				{
+					CDDataManager.playCD(cdinfo.key, cdinfo.cdTime);
+				}
+			}
+			
 			
 		}
 		

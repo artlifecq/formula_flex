@@ -86,13 +86,10 @@ package com.rpgGame.app.graphics
 		}
 		override protected function updateShowAndHide() : void
 		{
-			if(_role.type == SceneCharType.DROP_GOODS) //掉落物，全显示或者全隐藏
-			{
-				var nameVisible:Boolean = _dropdata.qitem.q_showDrop_name==1;
-				showAndHideElement(_nameBar, _isSelected || nameVisible);
-				showAndHideElement(_back, _isSelected || nameVisible);
-				addBackandUpdataState();
-			}
+			var nameVisible:Boolean = (_dropdata.qitem.q_showDrop_name==1);
+			showAndHideElement(_nameBar, _isSelected || nameVisible);
+			showAndHideElement(_back, _isSelected || nameVisible);
+			addBackandUpdataState();
 		}
 		override protected function updateAllBarPosition() : void
 		{

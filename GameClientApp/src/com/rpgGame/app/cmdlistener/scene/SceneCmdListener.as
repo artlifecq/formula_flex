@@ -21,6 +21,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskManager;
 	import com.rpgGame.app.manager.task.TouJingManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
@@ -247,9 +248,7 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			if(msg.personId.ToGID()==MainRoleManager.actor.id){
 				AppManager.showApp(AppConstant.DIE_PANEL,msg);
-				TrusteeshipManager.getInstance().broken();
-				TrusteeshipManager.getInstance().stopFightTarget();
-				TrusteeshipManager.getInstance().stopAutoFight();
+				
 				EventManager.dispatchEvent(MainPlayerEvent.PLAYER_DIE);
 			}
 		}
@@ -958,6 +957,9 @@ package com.rpgGame.app.cmdlistener.scene
 			{
 				role.mouseEnable = true;
 			}
+			
+			TrusteeshipManager.getInstance().stopAll();//死亡复活终止挂机
+			TaskAutoManager.getInstance().stopTaskAuto();
         }
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1432,7 +1434,7 @@ package com.rpgGame.app.cmdlistener.scene
 			}
 			else if (unitType == (1 << EnumMapUnitType.TYPE_TEAMMATE))
 			{
-				MapUnitDataManager.updataTeammate(bytes);
+				//MapUnitDataManager.updataTeammate(bytes);
 			}
 			else
 			{

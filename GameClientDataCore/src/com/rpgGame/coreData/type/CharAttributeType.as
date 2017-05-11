@@ -369,8 +369,8 @@ package com.rpgGame.coreData.type
 			pushAttir(MP,"能量");//11
 			pushAttir(MAX_HP,"最大气血");//12
 			pushAttir(MAX_MP,"最大能量");//13
-			pushAttir(WAI_GONG,"外功");//14
-			pushAttir(NEI_GONG,"内功");//15
+			pushAttir(WAI_GONG,"攻击");//14
+			pushAttir(NEI_GONG,"攻击");//15
 			pushAttir(DEFENSE_PER,"防御值");//16
 			pushAttir(CRIT_PER,"暴击率",1000,"%");//17
 			pushAttir(CRIT,"暴击伤害",1000,"%");//18

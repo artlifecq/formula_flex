@@ -1,9 +1,8 @@
 package com.rpgGame.app.manager.map
 {
 	import com.game.engine3D.vo.SenderReferenceSet;
-	import com.rpgGame.app.manager.TeamManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.events.MapEvent;
-	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.EnumMapUnitType;
 	import com.rpgGame.coreData.info.map.MapCountryMemeberInfo;
@@ -13,15 +12,14 @@ package com.rpgGame.app.manager.map
 	import com.rpgGame.coreData.info.map.MapTeamMemberInfo;
 	import com.rpgGame.coreData.info.map.MapUnitEvent;
 	import com.rpgGame.coreData.info.map.SceneData;
-	import com.rpgGame.coreData.info.team.TeamInfo;
-	import com.rpgGame.coreData.info.team.TeamNearPlayerInfo;
-	import com.rpgGame.coreData.info.team.TeamUnit;
 	import com.rpgGame.coreData.utils.ByteUtil;
-
+	import com.rpgGame.netData.team.bean.TeamInfo;
+	import com.rpgGame.netData.team.bean.TeamMemberInfo;
+	
 	import flash.utils.ByteArray;
-
+	
 	import app.cmd.SceneModuleMessages;
-
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.net_protobuff.ByteBuffer;
@@ -38,10 +36,10 @@ package com.rpgGame.app.manager.map
 	 */
 	public class MapUnitDataManager
 	{
-		/**附近的队伍信息，每个队伍中包含的成员信息*/
-		private static var _nearTeamInfos : Vector.<TeamInfo> = new Vector.<TeamInfo>();
-		/**周围的英雄数据*/
-		private static var _nearHeros : Vector.<TeamNearPlayerInfo> = new Vector.<TeamNearPlayerInfo>();
+//		/**附近的队伍信息，每个队伍中包含的成员信息*/
+//		private static var _nearTeamInfos : Vector.<TeamInfo> = new Vector.<TeamInfo>();
+//		/**周围的英雄数据*/
+//		private static var _nearHeros : Vector.<TeamNearPlayerInfo> = new Vector.<TeamNearPlayerInfo>();
 		/**周围的官员信息*/
 		private static var _countryOfficers : Vector.<MapOfficerInfo> = new Vector.<MapOfficerInfo>();
 		/**周围的队伍成员信息，即队友的信息*/
@@ -187,8 +185,8 @@ package com.rpgGame.app.manager.map
 
 		public static function clear() : void
 		{
-			_nearTeamInfos.length = 0;
-			_nearHeros.length = 0;
+//			_nearTeamInfos.length = 0;
+//			_nearHeros.length = 0;
 			_countryOfficers.length = 0;
 			_myTeammates.length = 0;
 			_familyMembers.length = 0;
@@ -259,17 +257,17 @@ package com.rpgGame.app.manager.map
 			send(SceneModuleMessages.C2S_GET_SURROUNDING_SCENE_INFO, _bytes);
 		}
 
-		/**附近的队伍信息，每个队伍中包含的成员信息*/
-		public static function get nearTeamInfos() : Vector.<TeamInfo>
-		{
-			return _nearTeamInfos;
-		}
-
-		/**周围的英雄数据*/
-		public static function get nearHeros() : Vector.<TeamNearPlayerInfo>
-		{
-			return _nearHeros;
-		}
+//		/**附近的队伍信息，每个队伍中包含的成员信息*/
+//		public static function get nearTeamInfos() : Vector.<TeamInfo>
+//		{
+//			return _nearTeamInfos;
+//		}
+//
+//		/**周围的英雄数据*/
+//		public static function get nearHeros() : Vector.<TeamNearPlayerInfo>
+//		{
+//			return _nearHeros;
+//		}
 
 		/**周围的官员信息*/
 		public static function get countryOfficers() : Vector.<MapOfficerInfo>
@@ -323,49 +321,49 @@ package com.rpgGame.app.manager.map
 		 */
 		public static function updataTeams(bytes : ByteBuffer) : void
 		{
-			_nearTeamInfos = new Vector.<TeamInfo>();
-			var nearTeamArr : Array = [];
-			var i : int = 0;
-			var heroCount : int = 0;
-			var teamInfo : TeamInfo; //队伍数据
-			var index : int = 0;
-			var teamID : int = 0;
-			while (bytes.bytesAvailable)
-			{
-				heroCount = bytes.readVarint32(); //队伍当前人数
-				teamInfo = new TeamInfo();
-				teamInfo.index = index;
-				var aveLv : int = 0; //队伍总等级
-				var membInfo : TeamUnit; //队伍成员数据
-
-				for (i = 0; i < heroCount; i++)
-				{
-					membInfo = new TeamUnit();
-					membInfo.id = bytes.readVarint64();
-					membInfo.name = bytes.readUTF();
-					membInfo.level = bytes.readVarint32();
-					var isOnline : Boolean = bytes.readBoolean();
-					membInfo.isOnline = isOnline
-					teamInfo.teamMemberInfolist.push(membInfo);
-					if (isOnline)
-						membInfo.raceId = bytes.readVarint32();
-
-					aveLv += membInfo.level;
-				}
-				membInfo = teamInfo.teamMemberInfolist[0];
-				teamInfo.teamID = teamID;
-				teamInfo.leaderId = membInfo.id;
-				teamInfo.leaderLv = membInfo.level;
-				teamInfo.leaderName = membInfo.name;
-				teamInfo.teamNumber = heroCount;
-				teamInfo.averageLv = aveLv / heroCount;
-				nearTeamArr.push(teamInfo);
-				_nearTeamInfos.push(teamInfo);
-				index++;
-				teamID++;
-			}
-			TeamManager.nearTeamsArr = nearTeamArr;
-			EventManager.dispatchEvent(TeamEvent.TEAM_NEAR_TEAM_SEARCH_RESULT_UPDATE);
+//			_nearTeamInfos = new Vector.<TeamInfo>();
+//			var nearTeamArr : Array = [];
+//			var i : int = 0;
+//			var heroCount : int = 0;
+//			var teamInfo : TeamInfo; //队伍数据
+//			var index : int = 0;
+//			var teamID : int = 0;
+//			while (bytes.bytesAvailable)
+//			{
+//				heroCount = bytes.readVarint32(); //队伍当前人数
+//				teamInfo = new TeamInfo();
+//				teamInfo.index = index;
+//				var aveLv : int = 0; //队伍总等级
+//				var membInfo : TeamUnit; //队伍成员数据
+//
+//				for (i = 0; i < heroCount; i++)
+//				{
+//					membInfo = new TeamUnit();
+//					membInfo.id = bytes.readVarint64();
+//					membInfo.name = bytes.readUTF();
+//					membInfo.level = bytes.readVarint32();
+//					var isOnline : Boolean = bytes.readBoolean();
+//					membInfo.isOnline = isOnline
+//					teamInfo.teamMemberInfolist.push(membInfo);
+//					if (isOnline)
+//						membInfo.raceId = bytes.readVarint32();
+//
+//					aveLv += membInfo.level;
+//				}
+//				membInfo = teamInfo.teamMemberInfolist[0];
+//				teamInfo.teamID = teamID;
+//				teamInfo.leaderId = membInfo.id;
+//				teamInfo.leaderLv = membInfo.level;
+//				teamInfo.leaderName = membInfo.name;
+//				teamInfo.teamNumber = heroCount;
+//				teamInfo.averageLv = aveLv / heroCount;
+//				nearTeamArr.push(teamInfo);
+//				_nearTeamInfos.push(teamInfo);
+//				index++;
+//				teamID++;
+//			}
+//			TeamManager.nearTeamsArr = nearTeamArr;
+//			EventManager.dispatchEvent(TeamEvent.TEAM_NEAR_TEAM_SEARCH_RESULT_UPDATE);
 		}
 
 		/**
@@ -382,20 +380,20 @@ package com.rpgGame.app.manager.map
 		 */
 		public static function updataNearbyHeros(bytes : ByteBuffer) : void
 		{
-			_nearHeros = new Vector.<TeamNearPlayerInfo>();
-			var index : int = 0;
-			while (bytes.bytesAvailable)
-			{
-				var playerData : TeamNearPlayerInfo = new TeamNearPlayerInfo();
-				playerData.id = bytes.readVarint64();
-				playerData.name = bytes.readUTF()
-				playerData.raceId = bytes.readVarint32();
-				playerData.level = bytes.readVarint32();
-				playerData.fighting = bytes.readVarint32();
-				_nearHeros.push(playerData);
-			}
-			TeamManager.screenNearPlayer(_nearHeros);
-			EventManager.dispatchEvent(TeamEvent.TEAM_NEAR_PLAYER_SEARCH_RESULT_UPDATE);
+//			_nearHeros = new Vector.<TeamNearPlayerInfo>();
+//			var index : int = 0;
+//			while (bytes.bytesAvailable)
+//			{
+//				var playerData : TeamNearPlayerInfo = new TeamNearPlayerInfo();
+//				playerData.id = bytes.readVarint64();
+//				playerData.name = bytes.readUTF()
+//				playerData.raceId = bytes.readVarint32();
+//				playerData.level = bytes.readVarint32();
+//				playerData.fighting = bytes.readVarint32();
+//				_nearHeros.push(playerData);
+//			}
+//			TeamManager.screenNearPlayer(_nearHeros);
+//			EventManager.dispatchEvent(TeamEvent.TEAM_NEAR_PLAYER_SEARCH_RESULT_UPDATE);
 		}
 
 		/**
@@ -429,21 +427,51 @@ package com.rpgGame.app.manager.map
 		 * 更新周围队友的信息
 		 * @param bytes
 		 */
-		public static function updataTeammate(bytes : ByteBuffer) : void
+		public static function updataTeammate(team:com.rpgGame.netData.team.bean.TeamInfo) : void
 		{
 			_myTeammates = new Vector.<MapTeamMemberInfo>();
 			var info : MapTeamMemberInfo;
-			while (bytes.bytesAvailable)
+			for each (var mem:TeamMemberInfo in team.memberinfo) 
 			{
+				if (mem.memberId.EqualTo(MainRoleManager.actorInfo.serverID)) 
+				{
+					continue;
+				}
+				if (mem.isonline==0) 
+				{
+					continue;
+				}
+				if (mem.memberMapModelID!=MapDataManager.currentScene.sceneId) 
+				{
+					continue;
+				}
 				info = new MapTeamMemberInfo();
-				info.name = bytes.readUTF();
-				info.x = bytes.readVarint32();
-				info.y = bytes.readVarint32();
+				info.name =mem.memberName;
+				info.id=mem.memberId.ToGID();
+				info.serverID=mem.memberId;
+				info.x = mem.x;
+				info.y =mem.y;
+				info.level=mem.memberLevel;
 				_myTeammates.push(info);
 			}
 			EventManager.dispatchEvent(MapUnitEvent.UPDATE_MAP_TEAMMATE);
 		}
-
+		public static function updateTeammatePos(gid:int,x:int,y:int,name:String):void
+		{
+		
+			for (var i:int = 0; i <_myTeammates.length; i++) 
+			{
+				if (_myTeammates[i].id==gid) 
+				{
+					_myTeammates[i].name=name;
+					_myTeammates[i].x =x;
+					_myTeammates[i].y =y;
+					EventManager.dispatchEvent(MapUnitEvent.UPDATE_MAP_TEAMMATE);
+					break;
+				}
+			}
+			
+		}
 		/**
 		 * 更新家族成员信息
 		 * @param bytes

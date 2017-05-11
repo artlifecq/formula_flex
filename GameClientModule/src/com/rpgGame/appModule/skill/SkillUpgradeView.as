@@ -66,7 +66,7 @@ package com.rpgGame.appModule.skill
 			skin.lb_lengque.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT4),selectedCfg.q_cd/1000);
 			
 			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(selectedInfo.skillModelId+"_"+selectedInfo.skillChildLv);
-			skin.lb_miaoshu.htmlText=lvData.q_skillpanel_description;
+			skin.ms_txt.htmlText=lvData.q_skillpanel_description;
 			
 			_icon.setIconResName(ClientConfig.getSkillIcon(selectedCfg.q_skillID.toString(),48));
 			_icon.x=16;

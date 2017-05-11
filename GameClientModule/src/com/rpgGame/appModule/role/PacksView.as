@@ -4,6 +4,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.goods.ItemUseManager;
+	import com.rpgGame.app.manager.goods.StorageManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
@@ -74,8 +75,6 @@ package com.rpgGame.appModule.role
 		private var itemBatchPanel:ItemBatchPanel;
 		private var toStorage:Boolean;
 		private var toStorageGridInfo:GridInfo;
-		private var clickTween:TweenLite;
-		private var waitDouble:Boolean;
 		private var cdTime:uint;
 		private var leftCD:int;
 		
@@ -306,22 +305,19 @@ package com.rpgGame.appModule.role
 		
 		protected function onDoubleClick(grid:IconCDFace):void
 		{
-			if(clickTween){
-				clickTween.kill();
-				clickTween=null;
+			if(storagePanel.parent){
+				var item:ClientItemInfo = grid.faceInfo as ClientItemInfo;
+				ItemSender.bagToStore(item.itemInfo.itemId,-1);
+				return;	
 			}
-			waitDouble=true;
-			clickTween=TweenLite.delayedCall(0.2,useItem,[grid.faceInfo]);
+			
+			useItem(grid.faceInfo as ClientItemInfo);
+			Menu.GetInstance().hide();
 		}
 		
 		private function useItem(grid:ClientItemInfo):void
 		{
-			waitDouble=false;
 			ItemUseManager.useItem(grid);
-			if(clickTween){
-				clickTween.kill();
-				clickTween=null;
-			}
 		}
 		
 		protected function onRightMouse(grid:IconCDFace):void
@@ -337,10 +333,6 @@ package com.rpgGame.appModule.role
 		 */		
 		protected function onTouchGrid( grid:DragDropItem ):void
 		{
-			if(waitDouble){
-				return;
-			}
-			
 			if(toStorage){//存到仓库去
 				if(grid.gridInfo.data==null){
 					return;
@@ -356,22 +348,12 @@ package com.rpgGame.appModule.role
 				goodsContainer.onFaceMoveSuccess(grid.gridInfo );
 				return;
 			}
-			
-			if(clickTween){
-				clickTween.kill();
-				clickTween=null;
-			}
 			Menu.GetInstance().hide();
-			clickTween=TweenLite.delayedCall(0.2,showMenu,[grid]);
+			showMenu(grid);
 		}
 		
 		public function showMenu(grid:IconCDFace):void
 		{
-			if(clickTween){
-				clickTween.kill();
-				clickTween=null;
-			}
-			
 			var item:ClientItemInfo = grid.faceInfo as ClientItemInfo;
 			if( item == null )
 				return;
@@ -440,6 +422,10 @@ package com.rpgGame.appModule.role
 				GameAlert.showAlert(alertSet,okDiscard,info);
 
 			}else{
+				if(info.qItem.q_drop==0){//不可丢弃
+					NoticeManager.showNotifyById(12010);
+					return;
+				}
 				ItemSender.discardItem(info);
 			}
 		}
@@ -512,7 +498,24 @@ package com.rpgGame.appModule.role
 				BackPackManager.instance.setUnusableGrid(true);
 				refreshPackGrid();
 			}			
+			_skin.lst_pack.scrollToDisplayIndex(getScrollIndex(info));
 		}		
+		
+		private function getScrollIndex(itemInfo:ClientItemInfo):int
+		{
+			var datas:Array=_skin.lst_pack.dataProvider.data as Array;
+			var num:int=datas.length;
+			for(var i:int=0;i<num;i++){
+				var grid:GridInfo=datas[i];
+				if(grid){
+					var info:ClientItemInfo=grid.data as ClientItemInfo;
+					if(info==itemInfo){
+						return i;
+					}
+				}
+			}
+			return -1;
+		}
 		
 		internal function onTouchTarget(target : DisplayObject):Boolean
 		{

@@ -1,5 +1,6 @@
 package com.rpgGame.app.process
 {
+    import com.game.engine2D.Scene;
     import com.game.engine3D.core.poolObject.PoolContainer3D;
     import com.game.engine3D.manager.Stage3DLayerManager;
     import com.game.engine3D.process.BaseProcess;
@@ -42,6 +43,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.SocietyBuildItemTip;
     import com.rpgGame.app.ui.tips.SocietySpellTotalTip;
     import com.rpgGame.app.ui.tips.SpellTip;
+    import com.rpgGame.app.ui.tips.TeamTipExt;
     import com.rpgGame.app.ui.tips.TxtPropChangeTip;
     import com.rpgGame.app.ui.tips.TxtTip;
     import com.rpgGame.app.ui.tips.cheats.CheatsIntraductTipExt;
@@ -208,6 +210,7 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.CHEATS_TIP,CheatsTipExt);
 			TipManager.registerTipsParserClass(TipType.CHEATS_INTRADUCTION_TIP,CheatsIntraductTipExt);
 			TipManager.registerTipsParserClass(TipType.BLESS_TIP,BlessTip);
+			TipManager.registerTipsParserClass(TipType.TEAM_NEAR_TEAM_TIP,TeamTipExt);
 		}
 
 		private function onSwitchCmp() : void
@@ -251,6 +254,8 @@ package com.rpgGame.app.process
 			LayerManager.addMmItem("RenderUnit", RenderUnit3D, "cnt", 0x00ff00, "RenderUnitCnt");
 			LayerManager.addMmItem("PoolContainer3DCnt", PoolContainer3D, "cnt", 0x00ff00, "PoolContainer3D统计");
 			LayerManager.addMmItem("actorGroundXYTips", MainRoleManager, "actorGroundXYTips", 0x00ff00, "主角地面坐标");
+			LayerManager.addMmItem("sceneScale", Scene.scene.sceneCamera, "scale", 0x00ff00, "场景缩放");
+            LayerManager.addMmItem("projectionHeight", Scene.scene.sceneCamera.lens, "projectionHeight", 0x00ff00, "垂直投影距离");
 		}
 
 		override public function dispose() : void

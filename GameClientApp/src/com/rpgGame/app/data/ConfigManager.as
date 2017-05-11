@@ -39,6 +39,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.HorseSpellData;
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
+	import com.rpgGame.coreData.cfg.LunJianCfg;
 	import com.rpgGame.coreData.cfg.MailCfgData;
 	import com.rpgGame.coreData.cfg.MazeCfgData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
@@ -51,7 +52,6 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.SpellEffectDataManager;
 	import com.rpgGame.coreData.cfg.StallCfgData;
 	import com.rpgGame.coreData.cfg.StatNameCfgData;
-	import com.rpgGame.coreData.cfg.SwordCfg;
 	import com.rpgGame.coreData.cfg.TaxCfgData;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.TransCfgData;
@@ -259,7 +259,7 @@ package com.rpgGame.app.data
 			
 			//副本相关配置
 			ZoneCfgData.setup(dic[ConfigClassRegister.Q_zone]);
-			SwordCfg.setup(dic[ConfigClassRegister.Q_lunjian]);
+			LunJianCfg.setup(dic[ConfigClassRegister.Q_lunjian]);
 		}
 		
 		/**

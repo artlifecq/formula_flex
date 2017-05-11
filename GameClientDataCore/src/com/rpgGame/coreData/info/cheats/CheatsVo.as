@@ -179,7 +179,8 @@ package com.rpgGame.coreData.info.cheats
 						if (tmp.level>=int(careArr[1]))
 						{
 							var val:int=_totalValue.getValue(int(careArr[2]));
-							val=val*(1+int(careArr[3])/10000);
+							//val=val*(1+int(careArr[3])/10000);
+							val+=int(careArr[3]);//改成加固定值了
 							_totalValue.put(int(careArr[2]),val);
 						}
 					}

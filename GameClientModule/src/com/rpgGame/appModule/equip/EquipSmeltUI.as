@@ -19,9 +19,12 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.item.EquipWashCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
@@ -453,6 +456,7 @@ package com.rpgGame.appModule.equip
 			EventManager.addEvent(ItemEvent.UNWEAR_EQUIPITEM,onFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_REMOVE_LIST,onRemoveFreshItems);
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
+			TipTargetManager.show( _skin.btn_shuoming,TargetTipsMaker.makeSimpleTextTips( TipsCfgData.getTipsInfo(21).q_describe));
 		}
 		
 		override public function hide():void
@@ -466,6 +470,7 @@ package com.rpgGame.appModule.equip
 			EventManager.removeEvent(ItemEvent.UNWEAR_EQUIPITEM,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE_LIST,onRemoveFreshItems);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
+			TipTargetManager.remove( _skin.btn_shuoming);
 		}
 		
 		private function onRemoveFreshItems(list:Vector.<ClientItemInfo>):void

@@ -59,7 +59,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.name = "labelDisplay";
 			temp.htmlText = "击杀：<u>少林杖僧</u><font color='#cfc6ae'>(0/30)</font>";
 			temp.left = 0;
-			temp.color = 0x6bcc08;
+			temp.color = 0x6BCC08;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.top = 3;
 			return temp;

@@ -10,6 +10,7 @@ package com.rpgGame.app.view.icon
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
+	import flash.utils.getTimer;
 	
 	import feathers.dragDrop.DragData;
 	import feathers.dragDrop.DragDropManager;
@@ -40,6 +41,8 @@ package com.rpgGame.app.view.icon
 		
 		/** 点击时回调 */		
 		private var _touchEndFun:Function;
+		
+		private var _preTouchTime:uint;
 		
 		public function DragDropGrid($iconSize:int)
 		{
@@ -206,7 +209,18 @@ package com.rpgGame.app.view.icon
 					this._touchID = -1;
 					//trace("TouchPhase.ENDED", index);
 					if ( (_gridInfo && !_gridInfo.isEnabled) || !isEnabled)return;
-					if(_touchEndFun != null)_touchEndFun(this);
+					if(_doubleClickFun){
+						var time:int=getTimer();
+						if(time-_preTouchTime<300){//点击间隔小于300毫秒视为双击
+							_doubleClickFun(this);
+							_preTouchTime=0;
+						}else{
+							if(_touchEndFun != null)_touchEndFun(this);
+						}
+						_preTouchTime=time;
+					}else{
+						if(_touchEndFun != null)_touchEndFun(this);
+					}
 				}
 			}
 			else
@@ -232,6 +246,7 @@ package com.rpgGame.app.view.icon
 		private function dragStartHandler(event : DragDropEvent, dragData : DragData) : void
 		{
 			this.addEventListener(starling.events.TouchEvent.TOUCH, onDragMove);
+			EventManager.dispatchEvent(event.type,dragData);
 		}
 		
 		private function onDragMove(event : starling.events.TouchEvent) : void
@@ -247,6 +262,7 @@ package com.rpgGame.app.view.icon
 		private function dragCompleteHandler(event : DragDropEvent, dragData : DragData) : void
 		{
 			this.removeEventListener(starling.events.TouchEvent.TOUCH, onDragMove);
+			EventManager.dispatchEvent(event.type,dragData);
 			if(dragSource && dragSource.parent != null)
 			{
 				TimerServer.delayCall(droped,1);
@@ -318,28 +334,7 @@ package com.rpgGame.app.view.icon
 				return;
 			
 			_doubleClickFun = value;
-			
-			if( _doubleClickFun != null )
-			{
-				MouseListenerUtil.addEventListener( this, null, mouseOver, mouseOut );
-				Starling.current.nativeStage.addEventListener( MouseEvent.DOUBLE_CLICK, onDoubleClick);
-			}
-			else
-			{
-				removeOverAndOut();
-				Starling.current.nativeStage.removeEventListener( MouseEvent.DOUBLE_CLICK, onDoubleClick);
-			}
 		}
-		
-		private function onDoubleClick( e:MouseEvent ):void
-		{
-			if( !checkClick() )
-				return;
-			
-			if( _doubleClickFun != null )
-				_doubleClickFun( this );
-		}
-		
 		
 		//---------------------@author luguozheng----------------------------- 
 		private var _rightMouseClickFun:Function;

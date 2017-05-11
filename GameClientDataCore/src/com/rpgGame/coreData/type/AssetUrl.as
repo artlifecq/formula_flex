@@ -147,7 +147,14 @@ package com.rpgGame.coreData.type
 		/** 共用填充贴图 **/
 		public static const COMMON_RECT_ICON : String = "ui/common/version_3/B_bujian/nan.png";
 		
-		
+		/** 头像兵家 **/
+		public static const HEAD_ICON_1_SMALL:String = "ui/mainui/head/touxiang/bingjia/zudui.png";
+		/** 头像墨家男 **/
+		public static const HEAD_ICON_2_SMALL:String = "ui/mainui/head/touxiang/mojia/zudui.png";
+		/** 头像墨家女**/
+		public static const HEAD_ICON_3_SMALL:String = "ui/mainui/head/touxiang/mojia/zudui.png";
+		/** 头像医家**/
+		public static const HEAD_ICON_4_SMALL:String = "ui/mainui/head/touxiang/yijia/zudui.png";
 		public function AssetUrl()
 		{
 		}

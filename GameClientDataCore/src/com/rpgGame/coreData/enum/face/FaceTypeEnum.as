@@ -10,8 +10,12 @@ package com.rpgGame.coreData.enum.face
 	 */
 	public class FaceTypeEnum
 	{
+		/**物品公共*/
+		public static const ITEM_PUBLIC : String = "ITEM_PUBLIC";
 		/**物品*/
 		public static const ITEM : String = "ITEM";
+		/**技能公共*/
+		public static const SKILL_PUBLIC : String = "SKILL_PUBLIC";
 		/**技能*/
 		public static const SKILL : String = "SKILL";
 		/**BUFF*/

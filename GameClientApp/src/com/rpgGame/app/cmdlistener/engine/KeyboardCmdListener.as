@@ -7,6 +7,7 @@ package com.rpgGame.app.cmdlistener.engine
 	import com.rpgGame.app.controller.keyboard.KeyFuncProcess;
 	import com.rpgGame.app.controller.keyboard.KeyNormalProcess;
 	import com.rpgGame.app.controller.keyboard.KeySpellProcess;
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.input.KeyMoveManager;
 	import com.rpgGame.core.manager.input.KeyManager;
 	import com.rpgGame.coreData.info.key.KeyCodeType;
@@ -312,6 +313,7 @@ package com.rpgGame.app.cmdlistener.engine
 					KeyFuncProcess.exec(info,true);
 					break;
 				case KeyCodeType.SKILL:
+					TrusteeshipManager.getInstance().stopFightTarget();//放技能就停止被动战斗
 					info.funcS = info.funcID.toString();
 					KeySpellProcess.exec(info);
 					break;

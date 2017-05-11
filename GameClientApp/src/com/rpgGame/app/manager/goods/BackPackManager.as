@@ -1,5 +1,6 @@
 package com.rpgGame.app.manager.goods
 {
+	import com.rpgGame.app.manager.ItemCDManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.mount.MountEquipmentManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -234,68 +235,81 @@ package com.rpgGame.app.manager.goods
 			{
 				for each(var item:ClientItemInfo in itemInfoList)
 				{
-					var cfgId:int = item.cfgId;
-					var requireLevel:int = ItemConfig.getItemRequireLevel( cfgId ) ;
-					var quality:int = ItemConfig.getItemQuality( cfgId );
-					var cfgId1:int;
-					var requireLevel1:int;
-					var quality1:int;
-					
-					if(ItemConfig.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel)
+					if(item!=null)
 					{
-						if( returnItem )
+						var cfgId:int = item.cfgId;
+						var requireLevel:int = ItemConfig.getItemRequireLevel( cfgId ) ;
+						var quality:int = ItemConfig.getItemQuality( cfgId );
+						var cfgId1:int;
+						var requireLevel1:int;
+						var quality1:int;
+						
+						if(ItemConfig.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel&&ItemCDManager.getInstance().getSkillHasCDTime(item.qItem))
 						{
-							cfgId1 = returnItem.cfgId;
-							requireLevel1 = ItemConfig.getItemRequireLevel( cfgId1 ) ;
-						}
-						else
-						{
-							//cfgId1 = _drugShopInfo.itemInfo.cfgId;
-							requireLevel1 = ItemConfig.getItemRequireLevel( cfgId1 ) - 1 ;
-						}
-						quality1 = ItemConfig.getItemQuality( cfgId1 );
-						if( quality > quality1 )
-						{
-							returnItem = item;
-						}
-						else if( quality == quality1 )
-						{
-							if( requireLevel > requireLevel1)
+							if( returnItem )
+							{
+								cfgId1 = returnItem.cfgId;
+								requireLevel1 = ItemConfig.getItemRequireLevel( cfgId1 ) ;
+							}
+							else
+							{
+								//cfgId1 = _drugShopInfo.itemInfo.cfgId;
+								requireLevel1 = ItemConfig.getItemRequireLevel( cfgId1 ) - 1 ;
+							}
+							quality1 = ItemConfig.getItemQuality( cfgId1 );
+							if( requireLevel > requireLevel1 )
 							{
 								returnItem = item;
 							}
+							else if( (requireLevel == requireLevel1) && (quality > quality1) )
+							{
+								returnItem = item;
+							}
+							
 						}
 					}
+					
 				}
 			}
 			else
 			{
 				for each(item in itemInfoList)
 				{
-					cfgId = item.cfgId;
-					requireLevel = ItemConfig.getItemRequireLevel( cfgId ) ;
-					
-					if(ItemConfig.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel)
+					if(item!=null)
 					{
-						quality = ItemConfig.getItemQuality( cfgId );
-						if( returnItem )
+						cfgId = item.cfgId;
+						requireLevel = ItemConfig.getItemRequireLevel( cfgId ) ;
+						if(ItemConfig.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel&&!ItemCDManager.getInstance().getSkillHasCDTime(item.qItem))
 						{
-							requireLevel1 = ItemConfig.getItemRequireLevel( returnItem.cfgId );
-							quality1 = ItemConfig.getItemQuality( returnItem.cfgId );
-							if( quality > quality1 )
+							quality = ItemConfig.getItemQuality( cfgId );
+							if( returnItem )
+							{
+								requireLevel1 = ItemConfig.getItemRequireLevel( returnItem.cfgId );
+								quality1 = ItemConfig.getItemQuality( returnItem.cfgId );
+								if( requireLevel > requireLevel1 )
+								{
+									returnItem = item;
+								}
+								else if( (requireLevel == requireLevel1) && (quality > quality1) )
+								{
+									returnItem = item;
+								}
+								/*if( quality > quality1 )
+								{
+									returnItem = item;
+								}
+								else if( (quality == quality1) && (requireLevel > requireLevel1) )
+								{
+									returnItem = item;
+								}*/
+							}
+							else
 							{
 								returnItem = item;
 							}
-							else if( (quality == quality1) && (requireLevel > requireLevel1) )
-							{
-								returnItem = item;
-							}
-						}
-						else
-						{
-							returnItem = item;
 						}
 					}
+					
 				}
 			}
 			return returnItem;
@@ -303,8 +317,41 @@ package com.rpgGame.app.manager.goods
 		
 		
 		
+		/**返回复活丹*/
+		public function getResurgenceItem():ClientItemInfo
+		{
+			var itemInfoList:Array = _goodsList;
+			var requireLevel:int;
+			for each(var item:ClientItemInfo in itemInfoList)
+			{
+				if(item!=null)
+				{
+					requireLevel = ItemConfig.getItemRequireLevel( item.cfgId ) ;
+					if(item.qItem.q_id==300&& MainRoleManager.actorInfo.totalStat.level >= requireLevel)
+					{
+						return item;
+					}
+				}
+				
+			}
+			return null;
+		}
 		
-		
+		/**返回物品*/
+		public function getItemById(id:int):ClientItemInfo
+		{
+			var itemInfoList:Array = _goodsList;
+			var requireLevel:int;
+			for each(var item:ClientItemInfo in itemInfoList)
+			{
+				if(item!=null&&item.qItem.q_id==id)
+				{
+					return item;
+				}
+				
+			}
+			return null;
+		}
 		
 		
 	}

@@ -215,8 +215,6 @@ package com.rpgGame.appModule.zhangong
 			_avatardata.avatarInfo.setBodyResID(bornData ? bornData.q_body_res : "", null);
 			_avatar.setRoleData(this._avatardata);
 			var cfg:Q_meritorious_monster=ZhanGongMonsterData.getPointById(monsterId);
-			_avatar.x =cfg.q_avatar_pointX;
-			_avatar.y = cfg.q_avatar_pointY;
 			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.BOSS_ITEM,_avatar,cfg.q_pointX,
 				cfg.q_pointY,cfg.q_scale);
 		}

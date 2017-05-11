@@ -4,6 +4,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
 	import com.rpgGame.coreData.cfg.GCDCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
+	import com.rpgGame.coreData.enum.CDTypeEnum;
 	import com.rpgGame.coreData.enum.face.FaceTypeEnum;
 	
 	/**
@@ -14,7 +15,7 @@ package com.rpgGame.app.manager
 	public class SkillCDManager
 	{
 		/** 全局技能CD KEY **/
-		private static const GLOBAL_SKILL_KEY : String = "GLOBAL_SKILL_KEY";
+		//private static const GLOBAL_SKILL_KEY : String = "GLOBAL_SKILL_KEY";
 		
 		
 		public function SkillCDManager()
@@ -75,7 +76,7 @@ package com.rpgGame.app.manager
 			var isGlobal : Boolean = getSkillHasGlobal(spellProto);
 			if (isGlobal)
 			{
-				var lastTime : uint = Math.max(CDDataManager.getCdLostTm(GLOBAL_SKILL_KEY), CDDataManager.getCdLostTm(getSkillKey(spellProto.q_skillID)));
+				var lastTime : uint = Math.max(CDDataManager.getCdLostTm(FaceTypeEnum.SKILL_PUBLIC), CDDataManager.getCdLostTm(getSkillKey(spellProto.q_skillID)));
 				return lastTime;
 			}
 			
@@ -125,7 +126,7 @@ package com.rpgGame.app.manager
 			if (isGlobal) //是否添加全局CD
 			{
 				//直接替换成当前技能的gcd为公共CD，上个公共CD现在一定完了，不然不可能释放这个技能了
-				CDDataManager.playCD(GLOBAL_SKILL_KEY, curGcd);
+				CDDataManager.playCD(FaceTypeEnum.SKILL_PUBLIC, curGcd);
 			}
 			
 			var cdTime : int = 0; //已经经过的时间

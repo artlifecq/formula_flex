@@ -111,7 +111,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			numBg = temp;
 			temp.name = "numBg";
-			temp.styleName = "ui/app/jianghu/lunjian/szq.png";
+			temp.styleName = "ui/common/tubiao/szq.png";
 			temp.x = 121;
 			temp.y = 5;
 			return temp;

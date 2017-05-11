@@ -12,6 +12,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.manager.task.TouJingManager;
 	import com.rpgGame.app.manager.task.TouZhuManager;
 	import com.rpgGame.app.sender.SocietySender;
+	import com.rpgGame.app.ui.main.shortcut.ShortcutMessageBar;
 	import com.rpgGame.core.app.AppMergeManager;
 	import com.rpgGame.core.controller.MouseCursorController;
 	import com.rpgGame.core.events.FunctionMessageBarEvent;
@@ -60,7 +61,7 @@ package com.rpgGame.app.manager.scene
 			AppMergeManager.instace.setup();
 			MouseCursorController.setup();
 			SocietyManager.init();
-			TeamManager.setup();
+			//TeamManager.setup();
 
 			//弹出菜单初始化
 			MenuManager.setup();
@@ -86,6 +87,7 @@ package com.rpgGame.app.manager.scene
 
 			MainUIManager.showMainUI();
 //			CountryTaoNiManager.setup();
+			ShortcutMessageBar.instence;
 		}
 
 		public static function get isEnterScene() : Boolean

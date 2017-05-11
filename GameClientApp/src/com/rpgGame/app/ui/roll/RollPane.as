@@ -1,12 +1,12 @@
 package com.rpgGame.app.ui.roll
 {
 	import com.game.mainCore.core.manager.LayerManager;
-	import com.rpgGame.app.display2D.PopSkinUI;
 	import com.rpgGame.app.manager.role.DropGoodsManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.manager.StarlingLayerManager;
+	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -28,7 +28,7 @@ package com.rpgGame.app.ui.roll
 	import starling.core.Starling;
 	import starling.events.Event;
 	
-	public class RollPane extends PopSkinUI implements IAnimatable
+	public class RollPane extends SkinUI implements IAnimatable
 	{
 		private var _roleItem:RollItemInfo;
 		private var _roleskin:Roll_Skin;
@@ -40,8 +40,7 @@ package com.rpgGame.app.ui.roll
 		{
 			_roleItem = data;
 			_roleskin = new Roll_Skin();
-			_skin = _roleskin;
-			super(null);
+			super(_roleskin);
 			init();
 		}
 		
@@ -68,7 +67,7 @@ package com.rpgGame.app.ui.roll
 		private function onTweenPosComplete():void
 		{
 			this.x = (LayerManager.stage.stageWidth - this.width)/2;
-			StarlingLayerManager.topUILayer.addChildAt(this,0);
+			StarlingLayerManager.hintUILayer.addChildAt(this,0);
 			Starling.juggler.add(this);
 		}
 		private var _currentFun:Function;
@@ -164,7 +163,7 @@ package com.rpgGame.app.ui.roll
 		{
 			if(Starling.juggler.contains(this))
 				Starling.juggler.remove(this);
-			StarlingLayerManager.topUILayer.removeChild(this,true);
+			StarlingLayerManager.hintUILayer.removeChild(this,true);
 		}
 	}
 }

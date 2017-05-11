@@ -33,28 +33,46 @@ package com.rpgGame.app.state.ai
 				var monsterData : MonsterData = SceneRoleSelectManager.selectedRole.data as MonsterData;
 				var targerPos : Vector3D = SceneRoleSelectManager.selectedRole.position;
 			//	RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 200, null, onArrive);
-				walkrun=true;
-				RoleStateUtil.walk(MainRoleManager.actor, targerPos.x, targerPos.z, 200,null, onArrive);
+				//walkrun=true;
+				var position : Vector3D = new Vector3D(targerPos.x, targerPos.z, 0, MainRoleManager.actor.position.w);
+				RoleStateUtil.walkToPos(MainRoleManager.actor, position, 200,null, onArrive,null,null,onArrive);
+			}
+			else
+			{
+				onArrive();
 			}
 		}
 		
-		private function onArrive(ref : WalkMoveStateReference) : void
+		private function onArrive(ref:*=null) : void
 		{
-			walkrun=false;
+			//walkrun=false;
 			transition(AIStateType.AI_NONE);
 		}
 		override public function leavePass(nextState : IState, force : Boolean = false) : Boolean
 		{
 			if (nextState.type == AIStateType.AI_NONE)
 				return true;
+			if (!isWalk())
+				return true;
+			if(!MainRoleManager.actor.stateMachine.isRunning&&!MainRoleManager.actor.stateMachine.isWalking&&!MainRoleManager.actor.stateMachine.isWalkMoving)
+				return true;
 			return false;
 		}
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
 		{
+			
+			if(!force)
+			{
+				return false;
+			}
+			if(!isWalk())
+			{
+				return false;
+			}
+			
 			if (MainRoleManager.actor.stateMachine.isWalkMoving)
 			{
-				if (!force)
-					return false;
+				return false;	
 			}
 			if (MainRoleManager.actor.stateMachine.isJumpRising)
 			{
@@ -76,7 +94,7 @@ package com.rpgGame.app.state.ai
 			{
 				return false;
 			}
-			/*if (MainRoleManager.actor.stateMachine.isAttackHarding)
+			/*if (MainRoleManager.actor.stateMachine.isAttackHarding)a
 			{
 				return false;
 			}
@@ -86,13 +104,13 @@ package com.rpgGame.app.state.ai
 			}*/
 			return true;
 		}
-		private static var walkrun:Boolean=false;
+		//private static var walkrun:Boolean=false;
 		public static function isWalk():Boolean
 		{
 			if (SceneRoleSelectManager.selectedRole != null)
 			{
 				var dist:int = Point.distance(new Point(MainRoleManager.actor.position.x,MainRoleManager.actor.position.z),new Point(SceneRoleSelectManager.selectedRole.position.x,SceneRoleSelectManager.selectedRole.position.z));
-				if(dist>=220||walkrun)
+				if(dist>=220)
 				{
 					return true;
 				}
