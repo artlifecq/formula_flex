@@ -144,7 +144,9 @@ package com.rpgGame.app.scene.animator
 				var fromObj : ObjectContainer3D;
 				if(_isAttachUnit)
 				{
-					fromObj = from.avatar.getRenderUnitByID(RenderUnitType.FIGHTSOUL, RenderUnitID.FIGHTSOUL).getChildByName(BoneNameEnum.c_0_body_02);
+					var fightsoul:RenderUnit3D = from.avatar.getRenderUnitByID(RenderUnitType.FIGHTSOUL, RenderUnitID.FIGHTSOUL);
+					if(fightsoul!=null)
+						fromObj = fightsoul.getChildByName(BoneNameEnum.c_0_body_02);
 				}
 				else
 				{

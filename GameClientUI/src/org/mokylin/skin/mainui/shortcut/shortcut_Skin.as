@@ -56,16 +56,6 @@ package org.mokylin.skin.mainui.shortcut
 
 		public var jingzhen_yijia:feathers.controls.Group;
 
-		public var jinzhen_1:feathers.controls.UIAsset;
-
-		public var jinzhen_2:feathers.controls.UIAsset;
-
-		public var jinzhen_3:feathers.controls.UIAsset;
-
-		public var jinzhen_4:feathers.controls.UIAsset;
-
-		public var jinzhen_5:feathers.controls.UIAsset;
-
 		public var juexuegroup:feathers.controls.Group;
 
 		public var lbl_lastNum:feathers.controls.Label;
@@ -486,68 +476,7 @@ package org.mokylin.skin.mainui.shortcut
 			temp.width = 132;
 			temp.x = 603;
 			temp.y = 59;
-			temp.elementsContent = [zhenhei_1_i(),zhenhei_2_i(),zhenhei_3_i(),zhenhei_4_i(),zhenhei_5_i(),jinzhen_1_i(),jinzhen_2_i(),jinzhen_3_i(),jinzhen_4_i(),jinzhen_5_i(),lbl_lastNum_i()];
-			return temp;
-		}
-
-		private function jinzhen_1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			jinzhen_1 = temp;
-			temp.name = "jinzhen_1";
-			temp.height = 14;
-			temp.styleName = "ui/mainui/shortcut/zhen_1.png";
-			temp.x = 28;
-			temp.y = 47;
-			return temp;
-		}
-
-		private function jinzhen_2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			jinzhen_2 = temp;
-			temp.name = "jinzhen_2";
-			temp.height = 30;
-			temp.styleName = "ui/mainui/shortcut/zhen_2.png";
-			temp.width = 24;
-			temp.x = 34;
-			temp.y = 12;
-			return temp;
-		}
-
-		private function jinzhen_3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			jinzhen_3 = temp;
-			temp.name = "jinzhen_3";
-			temp.styleName = "ui/mainui/shortcut/zhen_3.png";
-			temp.x = 74;
-			temp.y = 1;
-			return temp;
-		}
-
-		private function jinzhen_4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			jinzhen_4 = temp;
-			temp.name = "jinzhen_4";
-			temp.height = 30;
-			temp.styleName = "ui/mainui/shortcut/zhen_4.png";
-			temp.width = 24;
-			temp.x = 99;
-			temp.y = 12;
-			return temp;
-		}
-
-		private function jinzhen_5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			jinzhen_5 = temp;
-			temp.name = "jinzhen_5";
-			temp.styleName = "ui/mainui/shortcut/zhen_5.png";
-			temp.width = 36;
-			temp.x = 95;
-			temp.y = 47;
+			temp.elementsContent = [zhenhei_1_i(),zhenhei_2_i(),zhenhei_3_i(),zhenhei_4_i(),zhenhei_5_i(),lbl_lastNum_i()];
 			return temp;
 		}
 

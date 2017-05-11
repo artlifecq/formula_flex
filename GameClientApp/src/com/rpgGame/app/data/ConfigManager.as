@@ -52,7 +52,6 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.SpellEffectDataManager;
 	import com.rpgGame.coreData.cfg.StallCfgData;
 	import com.rpgGame.coreData.cfg.StatNameCfgData;
-	import com.rpgGame.coreData.cfg.SwordCfg;
 	import com.rpgGame.coreData.cfg.TaxCfgData;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.TransCfgData;

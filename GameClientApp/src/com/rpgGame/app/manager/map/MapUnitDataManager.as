@@ -1,12 +1,8 @@
 package com.rpgGame.app.manager.map
 {
-	import com.game.engine3D.manager.SceneMapDataManager;
-	import com.game.engine3D.vo.SceneMapData;
 	import com.game.engine3D.vo.SenderReferenceSet;
-	import com.rpgGame.app.manager.TeamManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.events.MapEvent;
-	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.EnumMapUnitType;
 	import com.rpgGame.coreData.info.map.MapCountryMemeberInfo;
@@ -16,9 +12,6 @@ package com.rpgGame.app.manager.map
 	import com.rpgGame.coreData.info.map.MapTeamMemberInfo;
 	import com.rpgGame.coreData.info.map.MapUnitEvent;
 	import com.rpgGame.coreData.info.map.SceneData;
-	import com.rpgGame.coreData.info.team.TeamInfo;
-	import com.rpgGame.coreData.info.team.TeamNearPlayerInfo;
-	import com.rpgGame.coreData.info.team.TeamUnit;
 	import com.rpgGame.coreData.utils.ByteUtil;
 	import com.rpgGame.netData.team.bean.TeamInfo;
 	import com.rpgGame.netData.team.bean.TeamMemberInfo;
@@ -29,7 +22,6 @@ package com.rpgGame.app.manager.map
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
-	import org.game.netCore.data.long;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**

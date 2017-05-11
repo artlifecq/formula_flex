@@ -496,7 +496,7 @@ package com.rpgGame.app.ui.main
 		
 		public function getBtnGlobalPos(btnName : String) : Point
 		{
-			return null;//_mainBar.getBtnGlobalPos(btnName);
+			return _navigationBar.getBtnGlobalPos(btnName);
 		}
 		
 		/**

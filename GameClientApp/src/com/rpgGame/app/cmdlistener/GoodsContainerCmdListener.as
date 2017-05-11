@@ -3,6 +3,7 @@ package com.rpgGame.app.cmdlistener
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.ItemCDManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
+	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
