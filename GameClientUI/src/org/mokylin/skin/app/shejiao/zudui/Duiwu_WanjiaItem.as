@@ -154,7 +154,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 100;
-			temp.x = 440;
+			temp.x = 435;
 			temp.y = 2;
 			return temp;
 		}
