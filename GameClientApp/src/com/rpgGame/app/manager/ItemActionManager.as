@@ -1,18 +1,25 @@
 package com.rpgGame.app.manager
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
+	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.mainCore.core.manager.LayerManager;
 	import com.game.mainCore.libCore.handle.HandleThread;
-	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.coreData.cfg.item.ItemConfig;
-	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.core.manager.StarlingLayerManager;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.info.task.PrizeInfo;
 	
 	import flash.geom.Point;
 	
-	import gs.TweenLite;
+	import feathers.controls.UIAsset;
 	
-	import starling.core.Starling;
+	import gs.TweenLite;
+	import gs.easing.Quad;
+	
+	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
 	
 	public class ItemActionManager
 	{
@@ -25,108 +32,68 @@ package com.rpgGame.app.manager
 		 * @param startPos
 		 * 
 		 */		
-		public static function tweenItemInBag(info:ClientItemInfo,startPos:Point = null,onCmpFun:Function = null,time:Number = 0.6, interval:int = 200):void
+		public static function tweenItemInBag(icon:IconCDFace,startPos:Point = null,onCmpFun:Function = null,time:Number = 1):void
 		{
-			if(info == null)return;
-			tweenItemInBagByCfgId(info.cfgId,info.count,startPos,onCmpFun,time,interval);
+			tweenItemByIcon(icon,startPos,null,onCmpFun,time);
 		}
 		
-		public static function tweenItemInBagByCfgId(cfgId:int,count:int = 1,startPos:Point = null,onCmpFun:Function = null,time:Number = 0.6,interval:int = 200):void
+		public static function tweenItemByIcon(icon:IconCDFace,startPos:Point,endPoint:Point,onCmpFun:Function = null,time:Number = 0.6):void
 		{
-			var icoName:String = ItemConfig.getItemIcon(cfgId);
-			tweenItemInBagByItemIcon(icoName,count,startPos,onCmpFun,time,interval);
-		}
-		
-		public static function tweenItemByCfgId(cfgId:int,count:int,startPos:Point,endPoint:Point,onCmpFun:Function = null,time:Number = 0.6):void
-		{
-			var icoName:String = ItemConfig.getItemIcon(cfgId);
-			tweenItemByIconName(icoName,count,startPos,endPoint,onCmpFun,time);
-		}
-		
-		public static function tweenItemInBagByItemIcon($iconName:String,count:int,startPos:Point = null,onCmpFun:Function = null,time:Number = 0.6,interval:int = 200):void
-		{
-			tweenItemByIconName($iconName,count,startPos,null,onCmpFun,time);
-		}
-		
-		public static function tweenItemByIconName($iconName:String,count:int,startPos:Point,endPoint:Point,onCmpFun:Function = null,time:Number = 0.6):void
-		{
+			if(icon == null)return;
 			//获取道具UI
-			var iconFace:IconCDFace = getItemIco();
-			iconFace.count = count;
-//			iconFace.iconName = $iconName;
-			iconFace.touchable = false;
-			iconFace.touchGroup = false;
+			var iconFace:UIAsset = new UIAsset();
+			iconFace.styleName =icon.iconResURL;
 			///////////////////////////////////////////////////////
+			
 			if(!startPos)
 			{
-				startPos = LayerManager.stageCenterPoint;
+				startPos = icon.localToGlobal(new Point(0,0));
 			}
-			if(!endPoint)
-			{
-				endPoint = getBackPackBtnPos();
-			}
+			iconFace.x = startPos.x;
+			iconFace.y = startPos.y;
 			//添加进滑动队列
-			addTweenHT(startPos,endPoint,iconFace,onCmpFun,time);
+			addTweenHT(endPoint,iconFace,onCmpFun,time);
 		}
 		
-		private static function addTweenHT(startPos:Point,endPos:Point,iconFace:IconCDFace,onCmpFun:Function = null, time:Number = 0.6, interval:Number = 200):void
+		public static function tweenMode(startPos:Point,onCmpFun:Function = null,time:Number = 1):void
 		{
-			_tweenHT.push(executeTween,[startPos,endPos,iconFace,onCmpFun,time], interval);
-		}
-		
-		public static function tweenItemInHero($iconName:String,startPos:Point,count:int = 1,onCmpFun:Function=null,dur:Number = 0.5):void
-		{
-			var iconFace:IconCDFace = getItemIco();
-			iconFace.count = count;
-//			iconFace.iconName = $iconName;
-			iconFace.touchable = false;
-			iconFace.touchGroup = false;
-			///////////////////////////////////////////////////////
-			//添加进滑动队列
-			_tweenHT.push(executeTweenInHero,[startPos,iconFace,onCmpFun,dur], 50);
 			
+			startPos = LayerManager.stageCenterPoint.add(startPos);
+			var content:Inter3DContainer = new Inter3DContainer();
+			content.x=startPos.x;
+			content.y=startPos.y;
+			
+			var inter3d:InterObject3D = new InterObject3D();
+			var data : RenderParamData3D = new RenderParamData3D(0, "mount1",ClientConfig.getEffect("ui_jingyantiaoqiu"));
+			data.forceLoad=true;//ui上的3d特效强制加载
+			var unit : RenderUnit3D = inter3d.addRenderUnitWith(data, 0);
+			unit.addUnitAtComposite(unit);
+			content.addChild3D(inter3d);
+			partner.addChild(content);
+			addTweenHT(null,content,onCmpFun,time);
 		}
 		
-		private static function executeTweenInHero($startPos:Point,$iconFace:IconCDFace,onCmpFun:Function = null,time:Number = 0.5):void
+		private static function addTweenHT(endPos:Point,display:DisplayObject,onCmpFun:Function = null, time:Number = 0.6, interval:Number = 200):void
+		{
+			_tweenHT.push(executeTween,[endPos,display,onCmpFun,time], interval);
+		}
+		
+		private static function executeTween($endPos:Point,$display:DisplayObject,onCmpFun:Function = null,time:Number = 0.6):void
 		{
 			//获取目标位置
-		/*	var toPixelP:Point = Scene.localToGlobal(new Point(MainRoleManager.actor.x, MainRoleManager.actor.z+20));
-			toPixelP.x -= 15;
-			toPixelP.y -= 100;
-			
-			$iconFace.x = $startPos.x;
-			$iconFace.y = $startPos.y;
-			Starling.current.stage.addChild($iconFace);
-			var dis:Number = Point.distance($startPos,toPixelP);
-			var dur:Number = dis*0.002;
-			dur = 0.1;
-			TweenLite.to($iconFace, dur, {x:toPixelP.x,alpha:0.8,y:toPixelP.y,onComplete:onTweenFlyComplete,onCompleteParams:[$iconFace,onCmpFun]});*/
-		}
-		
-		private static function executeTween($startPos:Point,$endPos:Point,$iconFace:IconCDFace,onCmpFun:Function = null,time:Number = 0.6):void
-		{
-			//获取目标位置
-			var toPixelP:Point = $endPos;
-			if(toPixelP == null)
+			if($endPos == null)
 			{
-				toPixelP = getBackPackBtnPos();
+				$endPos = getBackPackBtnPos();
 			}
-			$iconFace.x = $startPos.x;
-			$iconFace.y = $startPos.y;
-			Starling.current.stage.addChild($iconFace);
-			TweenLite.to($iconFace, time, {x:toPixelP.x - 5, y:toPixelP.y,onComplete:onTweenFlyComplete,onCompleteParams:[$iconFace,onCmpFun]});
+			partner.addChild($display);
+			TweenLite.to($display, time, {x:$endPos.x - 5, y:$endPos.y,onComplete:onTweenFlyComplete,onCompleteParams:[$display,onCmpFun],ease:Quad.easeIn});
 		}
 		
-		
-		private static function getItemIco():IconCDFace
+	
+		private static function onTweenFlyComplete($display:DisplayObject,onCmpFun:Function):void
 		{
-			return IconCDFace.getIcoFace();
-		}
-		
-		private static function onTweenFlyComplete($iconFace:IconCDFace,onCmpFun:Function):void
-		{
-			TweenLite.killTweensOf($iconFace);
-			IconCDFace.releaseIcoFace($iconFace);
+			TweenLite.killTweensOf($display);
+			partner.removeChild($display,true);
 			if(onCmpFun != null)
 			{
 				onCmpFun();
@@ -134,14 +101,20 @@ package com.rpgGame.app.manager
 		}
 		
 		
+		private static function get partner():DisplayObjectContainer
+		{
+			return StarlingLayerManager.topUILayer;
+		}
+		
+		
 		private static function getBackPackBtnPos():Point
 		{
-			return MainUIManager.getBtnGolbalPos("btnBackpack");
+			return MainUIManager.getBtnGolbalPos("btn_beibao");
 		}
 		
 		public static function tweenPrizeInfoToBag(prize:PrizeInfo,startPos:Point = null,onCompFunc:Function = null):void
 		{
-			if(prize == null) return;
+			/*if(prize == null) return;
 			var arr:Vector.<ClientItemInfo> = prize.itemInfoList;
 			var len:int = arr.length;
 			var itemInfo:ClientItemInfo;
@@ -157,7 +130,7 @@ package com.rpgGame.app.manager
 				}
 				var str:String = "获得 【" + ItemConfig.getItemName(itemInfo.cfgId) + "】X" + itemInfo.count;
 				NoticeManager.showNotify(str);
-			}
+			}*/
 		}
 	}
 }
