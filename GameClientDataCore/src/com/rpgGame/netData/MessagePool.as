@@ -72,6 +72,8 @@ package com.rpgGame.netData {
 	import com.rpgGame.netData.client.message.ResClientCustomTagMessage;
 	import com.rpgGame.netData.client.message.ResClientMessageMessage;
 	import com.rpgGame.netData.client.message.TestMessageMessage;
+	import com.rpgGame.netData.cooldown.handler.ResCooldownInfoListHandler;
+	import com.rpgGame.netData.cooldown.message.ResCooldownInfoListMessage;
 	import com.rpgGame.netData.cross.handler.ResChangeServerGameToClientHandler;
 	import com.rpgGame.netData.cross.message.ResChangeServerGameToClientMessage;
 	import com.rpgGame.netData.desirepond.handler.ResDesirePondPanlHandler;
@@ -1093,6 +1095,7 @@ package com.rpgGame.netData {
 			register(301101, ResClientMessageMessage, ResClientMessageHandler);
 			register(301102, ResClientCustomTagMessage, ResClientCustomTagHandler);
 			register(301133, TestMessageMessage, TestMessageHandler);
+			register(228100, ResCooldownInfoListMessage, ResCooldownInfoListHandler);
 		}
 		
 		private function register(id: int, messageClass: Class, handlerClass: Class): void{

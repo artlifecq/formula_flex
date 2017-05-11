@@ -6,6 +6,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.mount.MountManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneDropGoodsManager;
+	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.stall.StallManager;
 	import com.rpgGame.app.manager.task.TaskManager;
 	import com.rpgGame.app.manager.task.TouZhuManager;
@@ -111,9 +112,10 @@ package com.rpgGame.app.manager
 			var modeState : int = FightManager.getFightRoleState(role);
 			if (monsterData.monsterData.q_monster_type>=1&&monsterData.monsterData.q_monster_type<=3&&modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY ||modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)
 			{
-				var targetRoles : Vector.<SceneRole>=new Vector.<SceneRole> ();
-				targetRoles.push(role);
-				TrusteeshipManager.getInstance().startFightTarget(targetRoles);
+				
+				TrusteeshipManager.getInstance().stopAll();
+				SceneRoleSelectManager.selectedRole=role;
+				TrusteeshipManager.getInstance().startFightSelected();
 				/*var dst:int=MainRoleManager.actorInfo.spellList.getShortcutSpellDistance();
 				RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, dst, role, waikOver,null,null,waikOver);
 				function waikOver():void

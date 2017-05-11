@@ -11,6 +11,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.fight.spell.SpellResultInfo;
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.SkillCDManager;
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
@@ -25,6 +26,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
+	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.netData.fight.message.ResAttackRangeMessage;
@@ -108,6 +110,8 @@ package com.rpgGame.app.cmdlistener.scene
 				GameLog.addShow(failReason);
 			}
 			
+			if(failID==1014&&TrusteeshipManager.getInstance().isAuto)return;//---------------yt 客户端已经规避目标死亡还是出现，所有在挂机的时候不要这个提示
+				
 			NoticeManager.showNotify(failReason, failID);
 		}
 		
@@ -214,7 +218,7 @@ package com.rpgGame.app.cmdlistener.scene
         // 锁定攻击源
         private function lockAttack(info : SpellResultInfo):void
 		{
-            if (info.isMainCharHited && null == SceneRoleSelectManager.selectedRole)
+            if (info.isMainCharHited)// && null == SceneRoleSelectManager.selectedRole   锁定攻击不需要选择为空
 			{
                 var hurtList : Vector.<FightHurtResult> = info.hurtList;
                 if (hurtList.length > 0)
@@ -222,7 +226,12 @@ package com.rpgGame.app.cmdlistener.scene
                     var attacker : SceneRole = SceneManager.getSceneObjByID(hurtList[0].atkorID) as SceneRole;
                     if (null != attacker)
 					{
-                        SceneRoleSelectManager.selectedRole = attacker;
+                        //SceneRoleSelectManager.selectedRole = attacker;
+						var mdata:MonsterData=attacker.data as MonsterData;
+						if(mdata!=null&&mdata.monsterData.q_monster_type>=1&&mdata.monsterData.q_monster_type<=3)
+						{
+							TrusteeshipManager.getInstance().killActor();
+						}
                     }
                 }
             }

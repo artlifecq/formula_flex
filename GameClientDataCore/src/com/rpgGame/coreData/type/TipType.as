@@ -83,5 +83,7 @@ package com.rpgGame.coreData.type
 		public static const EXTARITEM_TIP : int = rEnum.next;
 		/** 队伍list*/
 		public static const TEAM_NEAR_TEAM_TIP : int = rEnum.next;
+		/** 祝福值 tips*/
+		public static const BLESS_TIP : int = rEnum.next;
 	}
 }

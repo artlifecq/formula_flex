@@ -37,8 +37,6 @@ package org.mokylin.skin.app.wuxue.jineng
 
 		public var lb_lengque:feathers.controls.Label;
 
-		public var lb_miaoshu:feathers.controls.Label;
-
 		public var lb_name:feathers.controls.Label;
 
 		public var lb_renwudengji:feathers.controls.Label;
@@ -53,6 +51,8 @@ package org.mokylin.skin.app.wuxue.jineng
 
 		public var line2:feathers.controls.UIAsset;
 
+		public var ms_txt:feathers.controls.Label;
+
 		public var tj_name:feathers.controls.Label;
 
 
@@ -66,7 +66,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			this.currentState = "normal";
 			this.height = 422;
 			this.width = 362;
-			this.elementsContent = [__jineng_shengji_UIAsset3_i(),line1_i(),line2_i(),Icon_jineng_i(),lb_name_i(),lb_dengji_i(),lb_xiaohao_i(),lb_leixing_i(),lb_lengque_i(),__jineng_shengji_Label1_i(),lb_miaoshu_i(),eft_name_i(),arrow1_i(),arrow2_i(),eft1_i(),eft2_i(),tj_name_i(),lb_renwudengji_i(),lb_zhenqi_i(),lb_yinliang_i(),btn_shengji_i()];
+			this.elementsContent = [__jineng_shengji_UIAsset3_i(),line1_i(),line2_i(),Icon_jineng_i(),lb_name_i(),lb_dengji_i(),lb_xiaohao_i(),lb_leixing_i(),lb_lengque_i(),__jineng_shengji_Label1_i(),ms_txt_i(),eft_name_i(),arrow1_i(),arrow2_i(),eft1_i(),eft2_i(),tj_name_i(),lb_renwudengji_i(),lb_zhenqi_i(),lb_yinliang_i(),btn_shengji_i()];
 			
 			states = {
 			};
@@ -140,6 +140,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "技能升级";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.color = 0xE1D4A9;
 			temp.width = 90;
 			temp.x = 136;
 			temp.y = 372;
@@ -225,23 +226,6 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 227;
 			temp.y = 61;
-			return temp;
-		}
-
-		private function lb_miaoshu_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lb_miaoshu = temp;
-			temp.name = "lb_miaoshu";
-			temp.height = 66;
-			temp.htmlText = "挥动长枪扫除一片火焰，对自身前方<font color='#5DBD37'>60</font>度半径<font color='#5DBD37'>10</font>米的扇形范围内的敌人造成<font color='#5DBD37'>3</font>次伤害，每次伤害<font color='#5DBD37'>25%</font>秒伤，每击中<font color='#5DBD37'>1</font>个目标可产生<font color='#5DBD37'>2</font>点怒气值";
-			temp.leading = 6;
-			temp.letterSpacing = 1;
-			temp.color = 0x8b8d7b;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 337;
-			temp.x = 15;
-			temp.y = 124;
 			return temp;
 		}
 
@@ -340,6 +324,23 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.width = 332;
 			temp.x = 14;
 			temp.y = 270;
+			return temp;
+		}
+
+		private function ms_txt_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			ms_txt = temp;
+			temp.name = "ms_txt";
+			temp.height = 66;
+			temp.htmlText = "挥动长枪扫除一片火焰，对自身前方<font color='#5DBD37'>60</font>度半径<font color='#5DBD37'>10</font>米的扇形范围内的敌人造成<font color='#5DBD37'>3</font>次伤害，每次伤害<font color='#5DBD37'>25%</font>秒伤，每击中<font color='#5DBD37'>1</font>个目标可产生<font color='#5DBD37'>2</font>点怒气值";
+			temp.leading = 6;
+			temp.letterSpacing = 1;
+			temp.color = 0x8b8d7b;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 337;
+			temp.x = 15;
+			temp.y = 124;
 			return temp;
 		}
 

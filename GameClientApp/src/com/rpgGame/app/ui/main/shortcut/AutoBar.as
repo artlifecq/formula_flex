@@ -3,26 +3,19 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.game.engine3D.display.EffectObject3D;
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.type.EffectUrl;
 	
-	import flash.events.MouseEvent;
-	import flash.utils.setTimeout;
-	
 	import feathers.controls.SkinnableContainer;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.mokylin.skin.component.button.ButtonSkin_jia;
 	import org.mokylin.skin.mainui.guaji.GuaJi_Skin;
 	import org.mokylin.skin.mainui.guaji.ZiDongZhanDou;
-	import org.mokylin.skin.mainui.guaji.button.ButtonClose;
-	import org.mokylin.skin.mainui.guaji.button.ButtonShezhi;
-	import org.mokylin.skin.mainui.tishi.Sing_TipsSkin;
 	
-	import starling.core.Starling;
 	import starling.display.Sprite;
 
 	/**
@@ -73,36 +66,15 @@ package com.rpgGame.app.ui.main.shortcut
 			fightEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_ZIDONGZHANDOU));
 			walkEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_ZIDONGXUNLU));
 			
-			/*var rreffectSk1:Inter3DContainer=new Inter3DContainer();
-			rreffectSk1.x=0;
-			var readyEffect1:EffectObject3D=rreffectSk1.addInter3D(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_BJ));
-			this.addChild(rreffectSk1);
 			
-			
-			var rreffectSk2:Inter3DContainer=new Inter3DContainer();
-			rreffectSk2.x=100;
-			var readyEffect2:EffectObject3D=rreffectSk2.addInter3D(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_BJ));
-			this.addChild(rreffectSk2);
-			
-			
-			
-			var rreffectSk3:Inter3DContainer=new Inter3DContainer();
-			rreffectSk3.x=200;
-			var readyEffect3:EffectObject3D=rreffectSk3.addInter3D(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_BJ));
-			this.addChild(rreffectSk3);
-			
-			
-			
-			setTimeout(function(){
-				readyEffect1.playEffect(0,0.05);
-				readyEffect2.playEffect(0,0.03);
-				readyEffect3.playEffect(0,0.01);
-			},2000);*/
 		}
 		private function addEvent():void
 		{
-			EventManager.addEvent(TaskEvent.AUTO_FIGHT_START,effctPlay);
-			EventManager.addEvent(TaskEvent.AUTO_FIGHT_STOP,effctStop);
+			EventManager.addEvent(TaskEvent.AUTO_FIGHT_START,fightEffctPlay);
+			EventManager.addEvent(TaskEvent.AUTO_FIGHT_STOP,fightEffctStop);
+			
+			EventManager.addEvent(TaskEvent.AUTO_TASK_START,taskEffctPlay);
+			EventManager.addEvent(TaskEvent.AUTO_TASK_STOP,taskEffctStop);
 		}
 		
 		public function setAutoFight():void
@@ -125,20 +97,39 @@ package com.rpgGame.app.ui.main.shortcut
 		public function fightStop():void
 		{
 			TrusteeshipManager.getInstance().stopAutoFight();
-			effctStop();
+			fightEffctStop();
 		}
 		
-		private function effctPlay():void
+		private function fightEffctPlay():void
 		{
+			taskEffctStop();
 			setUI.visible=true;
 			fightEffect.playEffect(0,1);
 		}
 		
-		private function effctStop():void
+		private function fightEffctStop():void
 		{
 			setUI.visible=false;
 			fightEffect.stopEffect();
+			/*if(TaskAutoManager.getInstance().isTaskRunning)
+			{
+				taskEffctPlay();
+			}*/
+		}
+		private function taskEffctPlay():void
+		{
+			//setUI.visible=true;
+			if(!setUI.visible)
+			{
+				walkEffect.playEffect(0,1);
+			}
+			
 		}
 		
+		private function taskEffctStop():void
+		{
+			//setUI.visible=false;
+			walkEffect.stopEffect();
+		}
 	}
 }

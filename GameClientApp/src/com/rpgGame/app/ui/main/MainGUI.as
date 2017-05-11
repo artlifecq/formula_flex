@@ -3,10 +3,11 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.alert.GameAlert;
-	import com.rpgGame.app.ui.main.Task.TaskBar;
+	import com.rpgGame.app.ui.main.task.TaskBar;
 	import com.rpgGame.app.ui.main.buff.BuffBar;
 	import com.rpgGame.app.ui.main.chat.ChatBar;
 	import com.rpgGame.app.ui.main.chat.SystemMsgBar;
+	import com.rpgGame.app.ui.main.dungeon.DungeonTrackerBar;
 	import com.rpgGame.app.ui.main.head.MainRoleHeadBar;
 	import com.rpgGame.app.ui.main.head.MonsterBossBar;
 	import com.rpgGame.app.ui.main.head.MonsterEliteBar;
@@ -26,7 +27,10 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
+	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangYuMaQiShou;
 	import com.rpgGame.coreData.role.MonsterData;
@@ -93,6 +97,8 @@ package com.rpgGame.app.ui.main
 		private var _systemMsgBar:SystemMsgBar;
 		//任务追踪栏
 		private var _taskBar:TaskBar;
+		//副本追踪
+		private var _dungeonTrackerBar:DungeonTrackerBar;
 		
 		private var _teamFixedBar:TeamLeftFixedBar;
 		//buff
@@ -167,16 +173,16 @@ package com.rpgGame.app.ui.main
             this.addChild(this._headBar);
             this._smallMapBar = new SmallMapBar();
             this.addChild(this._smallMapBar);
+			this._navigationBar = new NavigationBar();
+			this.addChild(this._navigationBar);
             this._shortcutBar = new ShortcutBar();
             this.addChild(this._shortcutBar);
-            this._navigationBar = new NavigationBar();
-            this.addChild(this._navigationBar);
             this._chatBar = new ChatBar();
             this.addChild(this._chatBar);
 			this._systemMsgBar=new SystemMsgBar();
 
 			this._taskBar=new TaskBar();
-			this.addChild(_taskBar);
+			_dungeonTrackerBar=new DungeonTrackerBar();
 
 			
 			
@@ -191,6 +197,8 @@ package com.rpgGame.app.ui.main
 			_lowBloodBg=new UIAsset();
 			_lowBloodBg.touchable=false;
 			_lowBloodBg.styleName="ui/common/dyingeffect.png";
+			
+			onSwitchCmp();
 			this._teamFixedBar=new TeamLeftFixedBar();
 			this.addChild(_teamFixedBar);
 //			_chatBar = new ChatBar();
@@ -388,6 +396,18 @@ package com.rpgGame.app.ui.main
 		 */		
 		private function onSwitchCmp() : void
 		{
+			var mapId:int=MainRoleManager.actorInfo.mapID;
+			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
+			var mapCfg:Q_map=sceneData.getData();
+			if(mapCfg.q_map_zones==1){//副本
+				this.removeChild(_taskBar);
+				this.addChild(_dungeonTrackerBar);
+			}else{
+				this.addChild(_taskBar);
+				this.removeChild(_dungeonTrackerBar);
+			}
+			
+			
 //			if( YuMaQiShouManager.isInBiMaWenActivity() )//在御马场场景，并且在后动时间内
 //			{
 //				_yuMaChangActivityBar.show();
@@ -447,7 +467,9 @@ package com.rpgGame.app.ui.main
 			this._systemMsgBar.resize(sWidth, sHeight);
 			this._playerHead.resize(sWidth, sHeight);
 
-			this._taskBar.resize(sWidth, sHeight);
+			if(_taskBar.parent){
+				this._taskBar.resize(sWidth, sHeight);
+			}
 
 			this._bossHead.resize(sWidth, sHeight);
 			this._eliteHead.resize(sWidth, sHeight);

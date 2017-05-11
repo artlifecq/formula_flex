@@ -4,23 +4,14 @@ package com.rpgGame.appModule.task
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
-	import com.rpgGame.coreData.cfg.item.ItemConfig;
-	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
-	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
-	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
 	
-	import org.game.netCore.data.long;
 	import org.mokylin.skin.mainui.renwu.Huanshi_Renwu;
 	
 	import starling.display.DisplayObject;
@@ -45,6 +36,7 @@ package com.rpgGame.appModule.task
 		private var TIMERDATA:int=15;//倒计时时间
 		private var TwoData:int;
 		private var ThereData:int;
+		private var selectId:int=1;
 		public function TaskLoopPanel()
 		{
 			_skin=new Huanshi_Renwu();
@@ -73,6 +65,7 @@ package com.rpgGame.appModule.task
 			for(i=0;i<ico1BgList.length;i++)
 			{
 				ico=new IconCDFace(IcoSizeEnum.ICON_42);
+				ico.showCD=false;
 				ico.x=ico1BgList[i].x+6;
 				ico.y=ico1BgList[i].y+6;
 				ico.visible=false;
@@ -89,6 +82,7 @@ package com.rpgGame.appModule.task
 			for(i=0;i<ico2BgList.length;i++)
 			{
 				ico=new IconCDFace(IcoSizeEnum.ICON_42);
+				ico.showCD=false;
 				ico.x=ico2BgList[i].x+6;
 				ico.y=ico2BgList[i].y+6;
 				ico.visible=false;
@@ -141,13 +135,13 @@ package com.rpgGame.appModule.task
 			switch (target) {
 				
 				case this._skin.one_but:
-					subFinish(1);
+					subFinishBut(1);
 					break;
 				case this._skin.two_but:
-					subFinish(2);
+					subFinishBut(2);
 					break;
 				case this._skin.three_but:
-					subFinish(3);
+					subFinishBut(3);
 					break;
 			}
 		}
@@ -170,7 +164,7 @@ package com.rpgGame.appModule.task
 			super.hide();
 			timer.stop();
 			currtimer=TIMERDATA;
-			
+			subFinish();
 		}
 		private function onTimer() : void 
 		{
@@ -186,7 +180,7 @@ package com.rpgGame.appModule.task
 				if(currtimer==0)
 				{
 					timer.stop();
-					subFinish(1);
+					subFinishBut(1);
 				}
 				currtimer--;
 			}
@@ -199,6 +193,7 @@ package com.rpgGame.appModule.task
 		/**判断倒计时*/
 		private function timeInit():void
 		{
+			selectId=1;
 			if(TaskMissionManager.getTreasuerTaskIsFinish())
 			{
 				timer.start();
@@ -211,16 +206,20 @@ package com.rpgGame.appModule.task
 				timerLabel.htmlText="任务未完成";
 			}
 		}
-		private function subFinish(type:int):void
+		private function subFinishBut(type:int):void
 		{
 			if(TaskMissionManager.treasuerTaskInfo!=null&&TaskMissionManager.getTreasuerTaskIsFinish()&&this.visible&&this.parent!=null)
 			{
+				selectId=type;
 				hide();
-				TaskSender.sendfinishTaskMessage(TaskMissionManager.treasuerTaskInfo.taskId,type);	
+				
 			}
 			
 		}
-		
+		private function subFinish():void
+		{
+			TaskSender.sendfinishTaskMessage(TaskMissionManager.treasuerTaskInfo.taskId,selectId);	
+		}
 		private var loopNumber:int=-1;
 		private function setView():void
 		{

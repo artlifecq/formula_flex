@@ -167,9 +167,9 @@ package com.rpgGame.app.utils
 			if(data is GridInfo){
 				switch (type)
 				{
-//					case LangMenu.GET_ITEM:
-//						EventManager.dispatchEvent(ItemEvent.ITEM_GET, data);
-//						break;
+					case LangMenu.GET_ITEM:
+						EventManager.dispatchEvent(ItemEvent.ITEM_GET, data);
+						break;
 				}
 				return ;
 			}

@@ -385,14 +385,14 @@ package com.rpgGame.app.manager.scene
 				EventManager.dispatchEvent(MapEvent.MAP_SWITCH_START);
 				if (ClientConfig.isSingle)
 				{
-					var cfg : Q_map = ClientSceneCfgData.getSceneInfo(mapID);
+					/*var cfg : Q_map = ClientSceneCfgData.getSceneInfo(mapID);
                     CONFIG::netDebug {
                         if (null == cfg) {
                             NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " client scene config data not exists");
                         } else {
                             NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " client scene config data exists");
                         }
-                    }
+                    }*/
 					if (mapInfo)
 					{
 						MainRoleManager.actorInfo.x = 2700;

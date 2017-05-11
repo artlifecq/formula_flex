@@ -18,10 +18,18 @@ package com.rpgGame.coreData.type
 		/**自动战斗*/
 		public static const ATTACK_TARGET : int = rEnum.next;
 
-		/**任务 自动寻路*/
-		public static const TASK_WALK : int = rEnum.next;
+		/**战斗 自动寻路*/
+		public static const ATTACK_WALK : int = rEnum.next;
 		/**自动吃药*/
 		public static const USE_ITEM : int = rEnum.next;
+		
+		
+		/**任务 自动寻路*/
+		public static const TASK_WALK : int = rEnum.next;
+		/**任务 面板操作*/
+		public static const TASK_PANEL : int = rEnum.next;
+		/**任务 自动采集*/
+		public static const TASK_GATHER : int = rEnum.next;
 		
 		public function AIStateType()
 		{

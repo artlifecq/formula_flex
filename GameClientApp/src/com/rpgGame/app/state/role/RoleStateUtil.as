@@ -19,6 +19,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.BlinkMoveStateReference;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.core.events.MapEvent;
+	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
@@ -30,7 +31,9 @@ package com.rpgGame.app.state.role
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
+	import flash.utils.clearTimeout;
 	import flash.utils.getTimer;
+	import flash.utils.setTimeout;
 	
 	import gameEngine2D.NetDebug;
 	
@@ -150,9 +153,41 @@ package com.rpgGame.app.state.role
 				}
 				SceneCursorHelper.getInstance().hideCursor();
 			}
-			doWalkToPos(role, pos, spacing, data, onArrive, onThrough, onUpdate);
+			doWalkTo(role, pos, spacing, data,onArrive, onThrough, onUpdate);
+			
 		}
-
+		private static var _timeOutId:uint;
+		private static var _timeOutNum:int=0;
+		public static function doWalkTo(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
+										   onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : Boolean
+		{
+			clearTimeout(_timeOutId);
+			if (!role || !role.usable)
+				return false;
+			var camouflageEntity : SceneRole = SceneRole(role.getCamouflageEntity());
+			var walkRole : SceneRole = camouflageEntity || role;
+			if (walkRole.stateMachine.isAttackHarding)
+			{
+				_timeOutNum++;
+				if(_timeOutNum<=10)
+				{
+					_timeOutId=setTimeout(function():void{doWalkTo(role, pos, spacing, data,onArrive, onThrough, onUpdate);},500);
+					return true;
+				}
+				else
+				{
+					_timeOutNum=0;
+				}
+			}
+			else
+			{
+				_timeOutNum=0;
+				return doWalkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate);
+			}
+			_timeOutNum=0;
+			return false
+		}
+		
 		public static function doWalkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
 										   onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : Boolean
 		{
@@ -183,8 +218,7 @@ package com.rpgGame.app.state.role
 				}
 				else if (walkRole.stateMachine.isAttackHarding)
 				{
-					//L.l("技能中");
-					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsHarding); //"技能硬直中"
+					//NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsHarding); //"技能硬直中"
 					return false;
 				}
 				else if (walkRole.stateMachine.isStun)

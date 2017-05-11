@@ -3,6 +3,7 @@ package com.rpgGame.app.cmdlistener.engine
 	import com.game.engine3D.controller.CameraController;
 	import com.game.engine3D.events.SceneEvent;
 	import com.game.engine3D.events.SceneEventAction3D;
+	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.rpgGame.app.graphics.StallHeadFace;
 	import com.rpgGame.app.manager.TrusteeshipManager;
@@ -13,16 +14,21 @@ package com.rpgGame.app.cmdlistener.engine
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneCursorHelper;
 	import com.rpgGame.app.manager.stall.StallManager;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.controller.MouseCursorController;
+	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.info.stall.StallData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
+	import flash.events.Event;
 	import flash.geom.Vector3D;
+	import flash.utils.clearTimeout;
 	import flash.utils.getTimer;
+	import flash.utils.setTimeout;
 	
 	import away3d.events.MouseEvent3D;
 	
@@ -57,6 +63,7 @@ package com.rpgGame.app.cmdlistener.engine
 			EventManager.addEvent(SceneEvent.INTERACTIVE, onSceneInteractive);
 			EventManager.addEvent(SceneEvent.CAMERA_START_PANNING, onCameraStartPanning);
 			EventManager.addEvent(SceneEvent.CAMERA_END_PANNING, onCameraEndPanning);
+            Stage3DLayerManager.stage.addEventListener(Event.DEACTIVATE, onDeactivate);
 			//
 			finish();
 		}
@@ -79,6 +86,10 @@ package com.rpgGame.app.cmdlistener.engine
 		{
 			SceneRoleSelectManager.updateRoleMouseCursor();
 		}
+        
+        private function onDeactivate(e : Event) : void {
+            this._isLeftDown = false;
+        }
 
 		private function onSceneInteractive(action : String, mosEvt : MouseEvent3D, position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
 		{
@@ -96,6 +107,9 @@ package com.rpgGame.app.cmdlistener.engine
 				case SceneEventAction3D.SCENE_ENTITY_MOUSE_DOWN: //点击实体
 					sceneEntityClick(position, currTarget, target);
 					break;
+				case SceneEventAction3D.SCENE_ENTITY_MOUSE_UP: //实体弹起      -----------加入实体Up 解决鼠标按住不放 在实体上弹起的bug --yt
+					sceneEntityUp(position, currTarget, target);
+					break;
 				case SceneEventAction3D.SCENE_ENTITY_MOUSE_RIGHT_UP: //点击实体
 					sceneEntityRightClick(position, currTarget, target);
 					break;
@@ -108,6 +122,7 @@ package com.rpgGame.app.cmdlistener.engine
 				case SceneEventAction3D.SCENE_ENTITY_MOUSE_OUT: //移出实体
 					sceneEntityOut(position, currTarget, target);
 					break;
+				
 			}
 		}
 
@@ -121,27 +136,26 @@ package com.rpgGame.app.cmdlistener.engine
             CONFIG::netDebug {
                 NetDebug.LOG("MapDown");
             }
-            this._isLeftDown = true;
+			TrusteeshipManager.getInstance().stopAll();///////////////点击地面终止挂机
+			TaskAutoManager.getInstance().stopTaskAuto();
+			EventManager.dispatchEvent(TaskEvent.AUTO_TASK_STOP);
+			TrusteeshipManager.getInstance().isLeftDown=true;
+			this._isLeftDown = true;
 			if (CameraController.lockedOnPlayerController.ispanning)
 				return;
 			if (!KeyMoveManager.getInstance().keyMoving)
 			{
-				TrusteeshipManager.getInstance().broken();
-				TrusteeshipManager.getInstance().stopFightTarget();
-				TrusteeshipManager.getInstance().stopAutoFight();
-				var isWalking : Boolean = RoleStateUtil.doWalkToPos(MainRoleManager.actor, position);
-				if (isWalking)
-				{
-					SceneCursorHelper.getInstance().showCursor(position);
-				}
+				SceneCursorHelper.getInstance().showCursor(position);
+				RoleStateUtil.doWalkTo(MainRoleManager.actor, position)
 			}
 		}
-        
         private function sceneMapUp(position : Vector3D) : void {
             this._isLeftDown = false;
+			TrusteeshipManager.getInstance().isLeftDown=false;
             CONFIG::netDebug {
                 NetDebug.LOG("MapUp");
             }
+			
         }
         
         private function sceneMapMove(position : Vector3D) : void {
@@ -157,9 +171,18 @@ package com.rpgGame.app.cmdlistener.engine
             CONFIG::netDebug {
                 NetDebug.LOG("MapMove vec:" + position);
             }
+				
             RoleStateUtil.doWalkToPos(MainRoleManager.actor, position);
         }
-
+		
+		private function sceneEntityUp(position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
+		{
+			this._isLeftDown = false;
+			TrusteeshipManager.getInstance().isLeftDown=false;
+			CONFIG::netDebug {
+				NetDebug.LOG("sceneEntityUp");
+			}
+		}
 		private function sceneEntityClick(position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
 		{
 			if (CameraController.lockedOnPlayerController.ispanning)
@@ -188,14 +211,16 @@ package com.rpgGame.app.cmdlistener.engine
                         (currTarget as SceneRole).usable + ", pos:" +
                         (currTarget as SceneRole).position + "] isDoubleClick:" + isDoubleClick);
                     }
+					TrusteeshipManager.getInstance().stopAll();  ///////////////点击场景元素终止挂机
+					TaskAutoManager.getInstance().stopTaskAuto();
+					EventManager.dispatchEvent(TaskEvent.AUTO_TASK_STOP);
                     var role:SceneRole = currTarget as SceneRole;
 					var sceneRole : SceneRole = currTarget as SceneRole;
 					if (sceneRole.type == SceneCharType.TRANS) //传送门
 					{
 						if(!MainRoleManager.isTakeZhanChe)//乘坐他人战车时不能点击传送门
 						{
-							TrusteeshipManager.getInstance().broken();
-							TrusteeshipManager.getInstance().stopFightTarget();
+							
 							WalkToRoleManager.walkToTranport(currTarget as SceneRole);
 						}
 					}

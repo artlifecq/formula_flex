@@ -17,16 +17,20 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.appModule.common.itemRender.SkinItemRender;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.AwdProgressBar;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
 	import com.rpgGame.coreData.clientConfig.Q_equip_strength;
+	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -112,6 +116,7 @@ package com.rpgGame.appModule.equip
 		private var isToUp:Boolean;
 		private var _progressBar:AwdProgressBar;
 		private var isLockRefresh:Boolean;
+		private static var noAlertUse:Boolean;
 		public function EquipIntensifyUI()
 		{
 			_skin=new Zhuangbei_QianghuaSkin();
@@ -304,33 +309,36 @@ package com.rpgGame.appModule.equip
 				return;
 			}
 			var itemInfo:ClientItemInfo=gridInfo.data as ClientItemInfo;
-			var targetGrid:DragDropItem;
-			
+			var equip:EquipInfo=itemInfo as EquipInfo;
+			if(equip.strengthExp!=0&&!noAlertUse){
+				var alertOk:AlertSetInfo=new AlertSetInfo(LangUI.UI_TEXT3);
+				alertOk.alertInfo.value="此装备具有锻造属性！是否仍然作为材料消耗？";
+				alertOk.isShowCBox=true;
+				GameAlert.showAlert(alertOk,onAlert,[itemInfo]);
+			}else{
+				setUseItem(itemInfo);
+			}
+				
+		}
+		
+		private function setUseItem(itemInfo:ClientItemInfo):void
+		{
 			_goodsContainerUse.setGrayForData(itemInfo,true);
 			
-	/*		var startP:Point=new Point(targetGrid.x,targetGrid.y);
-			startP=targetGrid.parent.localToGlobal(startP);
-			startP=_skin.container.globalToLocal(startP);
-			var _useTweenGrid:DragDropItem=new DragDropItem(42,0);
-			_useTweenGrid.setBg(GridBGType.GRID_SIZE_42);
-			_useTweenGrid.gridInfo=gridInfo;
-			_useTweenGrid.x=startP.x;
-			_useTweenGrid.y=startP.y;*/
 			if(isStren(itemInfo as EquipInfo)){
 				_goodsContainerTarget.setGrayForData(itemInfo,true);
 			}
 			
 			selectedUse.push(itemInfo);
 			_goodsContainerUse1.refleshGridsByDatas(selectedUse);
-			
-			/*targetGrid=_goodsContainerUse1.getDragDropItemByItemInfo(itemInfo);
-			var endP:Point=new Point(targetGrid.x,targetGrid.y);
-			endP=targetGrid.parent.localToGlobal(endP);
-			endP=_skin.container.globalToLocal(endP);
-			_skin.container.addChild(_useTweenGrid);
-			var tweenUse:TweenMax=TweenMax.to(_useTweenGrid,0.5,{x:endP.x,y:endP.y,ease:Expo.easeOut,onComplete:onCompleteTweenUse,onCompleteParams:[_useTweenGrid,targetGrid]});*/
 			addExp+=itemInfo.qItem.q_strengthen_num;
-			updateView();	
+			updateView();
+		}
+		
+		private  function onAlert(gameAlert:GameAlert,datas:Array):void
+		{
+			noAlertUse=gameAlert.isCheckSelected;
+			setUseItem(datas[0]);
 		}
 		
 		private function onCompleteTweenUse(tweenGrid:DragDropItem,grid:DragDropItem):void
@@ -632,6 +640,7 @@ package com.rpgGame.appModule.equip
 			var datas:Array=_goodsContainerUse1.dataProvider.data as Array;
 			while(datas[0].data){
 				var item:ClientItemInfo=datas[0].data as ClientItemInfo;
+				addExp-=item.qItem.q_strengthen_num;
 				deleteItems(selectedUse,item);
 				cancelIntensifyUseItem(datas[0]);
 			}
@@ -647,7 +656,7 @@ package com.rpgGame.appModule.equip
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.addEvent(ItemEvent.UNWEAR_EQUIPITEM,onFreshItems);
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
-			
+			TipTargetManager.show( _skin.btn_shuoming,TargetTipsMaker.makeSimpleTextTips( TipsCfgData.getTipsInfo(24).q_describe));
 		}
 		
 		private function onRemoveFreshItems(list:Vector.<ClientItemInfo>):void
@@ -699,6 +708,7 @@ package com.rpgGame.appModule.equip
 			addExp=0;
 			isToUp=false;
 			isLockRefresh=false;
+			useListIds.length=0;
 			refresh();
 		}
 		
@@ -745,6 +755,7 @@ package com.rpgGame.appModule.equip
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
 			EventManager.removeEvent(ItemEvent.UNWEAR_EQUIPITEM,onFreshItems);
+			TipTargetManager.remove( _skin.btn_shuoming);
 			GameAlert.closeAlert(LangUI.UI_TEXT3);
 		}
 		

@@ -96,8 +96,17 @@ package com.rpgGame.app.ui.main.shortcut
 			nutaEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_TANU_MJ));
 			addResEvent();
 			
+			this.checkDrag=checkDrags;
+			
 			//_cdFace.showTmTxt(22);
 		}
+		
+		private function checkDrags():Boolean
+		{
+			return true;
+		}
+		
+		
 		
 		private function addResEvent():void
 		{
@@ -340,9 +349,8 @@ package com.rpgGame.app.ui.main.shortcut
 			
 		}
 		/**继承的父类名字，是cd完的时候调用*/
-		override public function removeCDFace() : void
+		override public function cdComplete() : void
 		{
-			super.removeCDFace();
 			if(readyEffect!=null)
 			{
 				readyEffect.stopEffect();
@@ -354,6 +362,7 @@ package com.rpgGame.app.ui.main.shortcut
 				//播放cd完成动画
 				goEffect.playEffect();
 			}
+			setGary();
 		}
 		private var cdEffectIsPlay:Boolean=false;
 		private var _now: Number=0;
@@ -370,7 +379,7 @@ package com.rpgGame.app.ui.main.shortcut
 			{
 				if(_cdFace)
 				{
-					//_cdFace.updateTimeTxt($now,$cdTotal);
+					_cdFace.updateTimeTxt($now,$cdTotal);
 					
 				}
 				
@@ -386,23 +395,11 @@ package com.rpgGame.app.ui.main.shortcut
 						var pac:Number=$now/$cdTotal;
 						readyEffect.gotoPercent(pac);
 						cdEffectIsPlay=true;
-						/*
-						if(skillID==1006)return;
-						*/
-						//L.l("======"+$cdTotal);
-						//L.l(cdid+"=="+ _faceInfo.coolID);
-						//if(skillID==1006)
-						//cdEffectIsPlay=true;
-						//readyEffect.playEffect(1,1000/$cdTotal);
 					}
 				}
 				
 			}
-			else
-			{
-				//_cdFace.updateTimeTxt(100,0);
-				//effect3D.gotoPercent(100);
-			}
+			
 			
 		}
 		
@@ -456,6 +453,7 @@ package com.rpgGame.app.ui.main.shortcut
 			setJobLab();
 			setEffect();
 			renderOk=true;
+			setGary();
 		}
 		/**设置各职业转框特效*/
 		public function setJobLab():void
@@ -507,7 +505,7 @@ package com.rpgGame.app.ui.main.shortcut
 			timeLine = new TimelineLite();
 			timeLine.append(TweenMax.to(this,0.1,{y:this.y+2,ease:Bounce.easeOut}));
 			timeLine.append(TweenMax.to(this,0.1,{y:this.y,ease:Bounce.easeOut,onComplete:onComplete}));	
-			
+			setGary();
 		}
 		
 		private function onComplete():void

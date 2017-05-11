@@ -43,8 +43,6 @@ package com.rpgGame.coreData.role
 		public var pkAmountLeftTime : Number;
 		/** 各种钱消耗  参考： AmountType**/
 		public var amountInfo : AmountInfo;
-		/** 角色穿戴的装备信息**/
-		public var equipInfo : RoleEquipInfo;
 		/** 角色当前经验 **/
 		public var curExp : Number;
 		/** 最大经验 **/
@@ -127,7 +125,6 @@ package com.rpgGame.coreData.role
 			super(RoleType.TYPE_HERO);
 			spellList = new ActiveSpellList();
 			amountInfo = new AmountInfo();
-			equipInfo = new RoleEquipInfo();
 			mounModuletData = new MountModuleObjClientData();
 		}
 		

@@ -19,6 +19,7 @@ package com.rpgGame.app.display2D
 		public function PopSkinUI(data:*)
 		{
 			super(_skin);
+			this.touchable=false;
 		}
 		
 		protected function popComplete():void
