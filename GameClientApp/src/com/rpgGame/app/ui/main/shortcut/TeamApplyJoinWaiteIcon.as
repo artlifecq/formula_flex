@@ -28,7 +28,7 @@ package com.rpgGame.app.ui.main.shortcut
 		override protected function onTouchIcon() : void
 		{
 			super.onTouchIcon();
-			AppManager.showAppNoHide(AppConstant.TEAM_APPLY_JOIN_WAITE_PANEL);
+//			AppManager.showAppNoHide(AppConstant.TEAM_APPLY_JOIN_WAITE_PANEL);
 		}
 		
 	}
