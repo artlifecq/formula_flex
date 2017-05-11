@@ -20,8 +20,8 @@ package com.rpgGame.app.ui.main.shortcut
 		override protected function onTouchIcon() : void
 		{
 //			AppManager.showAppNoHide(AppConstant.GUILD_BEEN_INVITE_PANEL);
-			EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_HIDE_TYPE,
-				EnumFunctionMessageBarIcoType.GUILD_BEEN_INVITE_JOIN_GUILD);
+		/*	EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_HIDE_TYPE,
+				EnumFunctionMessageBarIcoType.GUILD_BEEN_INVITE_JOIN_GUILD);*/
 		}
 	}
 }

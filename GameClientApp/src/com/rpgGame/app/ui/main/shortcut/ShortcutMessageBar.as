@@ -51,7 +51,7 @@ package com.rpgGame.app.ui.main.shortcut
 			_btnRet[EnumFunctionMessageBarIcoType.GUILD_BEEN_KICK_GUILD] = new BeenKickGuildIcon();//帮派 被提出了帮派
 			_btnRet[EnumFunctionMessageBarIcoType.GUILD_JION_COMPLETE] = new JoinGuildIcon();//帮派 被提出了帮派
 			_btnRet[EnumFunctionMessageBarIcoType.MOUNT_BREAD_INVITE_WAITE_TYPE] = new MessageMountBreadInviteWaiteIcon();//坐骑繁育邀请
-			_btnRet[EnumFunctionMessageBarIcoType.GUILD_BEEN_INVITE_JOIN_GUILD] = new BeenInviteJoinGuildIcon();//被邀请加入帮派
+//			_btnRet[EnumFunctionMessageBarIcoType.GUILD_BEEN_INVITE_JOIN_GUILD] = new BeenInviteJoinGuildIcon();//被邀请加入帮派
 			StarlingLayerManager.hintUILayer.addChild(this);
 //			onShowIcon(EnumFunctionMessageBarIcoType.FRIEND_TYPE, 1);
 //			onShowIcon(EnumFunctionMessageBarIcoType.MAIL_TYPE, 0);
