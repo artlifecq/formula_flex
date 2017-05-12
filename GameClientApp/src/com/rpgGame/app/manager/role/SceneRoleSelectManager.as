@@ -248,7 +248,11 @@ package com.rpgGame.app.manager.role
 					if (_mouseOverRole.headFace is HeadFace)
 						(_mouseOverRole.headFace as HeadFace).isSelected = false;
 					else if (_mouseOverRole.headFace is DropItemHeadFace)
+					{
 						(_mouseOverRole.headFace as DropItemHeadFace).isSelected = false;
+						(_mouseOverRole.headFace as DropItemHeadFace).isShow = false;
+					}
+						
 				}
 
 				_mouseOverRole.forEachRenderUnit(setRoleMouseOut);
@@ -261,7 +265,10 @@ package com.rpgGame.app.manager.role
 				if (_mouseOverRole.headFace is HeadFace)
 					(_mouseOverRole.headFace as HeadFace).isSelected = true;
 				else if (_mouseOverRole.headFace is DropItemHeadFace)
+				{
 					(_mouseOverRole.headFace as DropItemHeadFace).isSelected = true;
+					(_mouseOverRole.headFace as DropItemHeadFace).isShow = true;
+				}
 				_mouseOverRole.forEachRenderUnit(setRoleMouseOver);
 			}
 			else
