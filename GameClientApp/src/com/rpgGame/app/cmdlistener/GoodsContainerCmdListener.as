@@ -1,12 +1,14 @@
 package com.rpgGame.app.cmdlistener
 {
 	import com.rpgGame.app.manager.ItemActionManager;
+	import com.rpgGame.app.manager.ItemCDManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.app.manager.role.DropGoodsManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.events.ItemEvent;
+	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
@@ -20,6 +22,8 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.backpack.message.ResItemRemoveMessage;
 	import com.rpgGame.netData.backpack.message.ResTakeUpSuccessMessage;
 	import com.rpgGame.netData.backpack.message.ResUseItemSuccessMessage;
+	import com.rpgGame.netData.cooldown.bean.CooldownInfo;
+	import com.rpgGame.netData.cooldown.message.ResCooldownInfoListMessage;
 	import com.rpgGame.netData.equip.message.ResEquipInfoMessage;
 	import com.rpgGame.netData.equip.message.ResEquipOperateResultMessage;
 	import com.rpgGame.netData.equip.message.UnwearEquipItemMessage;
@@ -69,7 +73,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(107102, onUnwearEquipItemMessage );
 			SocketConnection.addCmdListener(107105, onResEquipInfoMessage );
 			SocketConnection.addCmdListener(107106, onResEquipOperateResultMessage );
-			
+			SocketConnection.addCmdListener(228100, onResCooldownInfoListMessage );
 			finish();
 		}
 		
@@ -155,9 +159,19 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onResUseItemSuccessMessage(msg:ResUseItemSuccessMessage):void
 		{
-			
+			ItemCDManager.getInstance().addItemCDTimeByid(msg.itemModelId);
+
 		}
-		
+		private function onResCooldownInfoListMessage(msg:ResCooldownInfoListMessage):void
+		{
+			if(msg&&msg.list)
+			{
+				for each(var cdinfo:CooldownInfo in msg.list)
+				{
+					CDDataManager.playCD(cdinfo.key, cdinfo.cdTime);
+				}
+			}
+		}
 		private function onResItemChangeMessage(msg:ResItemChangeMessage):void
 		{
 			if(msg.item.type==0){
