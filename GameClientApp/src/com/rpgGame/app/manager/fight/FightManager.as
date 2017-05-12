@@ -38,7 +38,12 @@ package com.rpgGame.app.manager.fight
 		 * 可攻击友方
 		 */
 		public static const FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND : int = 2;
-
+		
+		/**
+		 *虚拟模型，ui只渲染 
+		 * 
+		 */		
+		public static const FIGHT_ROLE_DUMMY:int=101;
 		public function FightManager()
 		{
 		}
@@ -62,6 +67,10 @@ package com.rpgGame.app.manager.fight
                     break;
                 }
                 var roleInfo : RoleData = role.data as RoleData;
+				if (SceneCharType.DUMMY==role.type) 
+				{
+					return FIGHT_ROLE_DUMMY;
+				}
                 if (SceneCharType.MONSTER == role.type) {
                     // 是怪物
                     if (-1 != roleInfo.ownerId) {

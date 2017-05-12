@@ -36,6 +36,7 @@ package com.rpgGame.app.manager.role
 		private static var _enemyOutlineData : SoftOutlineData = new SoftOutlineData(0xFF0000, 0.8, 0.005, 5);
 		private static var _friendOutlineData : SoftOutlineData = new SoftOutlineData(0x00FF00, 0.8, 0.005, 5);
 		private static var _neutralOutlineData : SoftOutlineData = new SoftOutlineData(0xFFFF00, 0.8, 0.005, 5);
+		private static var _dummyOutlineData : SoftOutlineData = new SoftOutlineData(0x00FF00, 0.8, 0.0025, 5);
 		private static var _selectedRingRedId : String = EffectUrl.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
 		private static var _selectedRingGreenId : String = EffectUrl.FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
 		private static var _selectedRingYellowId : String = "quanhuang";
@@ -347,6 +348,10 @@ package com.rpgGame.app.manager.role
 					else if (modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)
 					{
 						ru.setSoftOutline(_friendOutlineData);
+					}
+					else if (modeState==FightManager.FIGHT_ROLE_DUMMY) 
+					{
+						ru.setSoftOutline(_dummyOutlineData);
 					}
 					else
 					{
