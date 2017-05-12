@@ -71,10 +71,11 @@ package   com.rpgGame.appModule.social.team.mediator
 			labNameInitY=_headTitle.y;
 			conInitY=con.y;
 			this.scale=sc;
-			_player.addEventListener(TouchEvent.TOUCH, onTouch);
-			_player.touchGroup=true;
+			
+			//_player.touchGroup=true;
 			
 			touchImg=new Sprite;
+			touchImg.addEventListener(TouchEvent.TOUCH, onTouch);
 			touchImg.x=0;
 			touchImg.y=0;
 			//touchImg.styleName="ui/common/tips/tips_di2.png";
@@ -84,7 +85,7 @@ package   com.rpgGame.appModule.social.team.mediator
 //			touchImg.width=_player.width;
 //			touchImg.height=_player.height;
 			touchImg.alpha=0;
-			_player.addChildAt(touchImg,0);
+			_player.addChild(touchImg);
 		}
 		private function onTouch(e:TouchEvent):void
 		{
@@ -135,7 +136,7 @@ package   com.rpgGame.appModule.social.team.mediator
 		{
 			if (_roleModel) 
 			{
-				//SceneRoleSelectManager.mouseOverRole=_roleModel.avatar.curRole;
+				SceneRoleSelectManager.mouseOverRole=_roleModel.avatar.curRole;
 			}
 //			if(selectEffect != null)
 //				return ;
