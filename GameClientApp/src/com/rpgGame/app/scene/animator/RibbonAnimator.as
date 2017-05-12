@@ -139,7 +139,7 @@ package com.rpgGame.app.scene.animator
 		
 		private function light(from:SceneRole, to:SceneRole):void
 		{
-			if(_from && _to)
+			if(_from && _to&&_from.avatar && _to.avatar)
 			{
 				var fromObj : ObjectContainer3D;
 				if(_isAttachUnit)

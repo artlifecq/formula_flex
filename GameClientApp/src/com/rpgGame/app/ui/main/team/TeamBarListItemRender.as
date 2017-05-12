@@ -1,6 +1,7 @@
 package  com.rpgGame.app.ui.main.team
 {
 	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.coreData.utils.FilterUtil;
 	
 	import feathers.controls.renderers.BaseDefaultListItemRenderer;
 	
@@ -14,6 +15,7 @@ package  com.rpgGame.app.ui.main.team
 			this.addChild(cell);
 			this.height=cell.height;
 			this.width=cell.width;
+			//this.filter=FilterUtil.getGrayFilter();
 		}
 		
 		override protected function commitData():void
