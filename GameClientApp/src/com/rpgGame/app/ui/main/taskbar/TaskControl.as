@@ -1,4 +1,4 @@
-package com.rpgGame.app.ui.main.task
+package com.rpgGame.app.ui.main.taskbar
 {
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.TrusteeshipManager;
