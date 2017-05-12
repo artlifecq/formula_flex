@@ -24,11 +24,13 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.manager.AreaMapManager;
     import com.rpgGame.app.manager.AvatarManager;
     import com.rpgGame.app.manager.ShortcutsManger;
+    import com.rpgGame.app.manager.TrusteeshipManager;
     import com.rpgGame.app.manager.fight.FightManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.role.SceneRoleManager;
     import com.rpgGame.app.manager.role.SceneRoleSelectManager;
     import com.rpgGame.app.manager.scene.SceneManager;
+    import com.rpgGame.app.manager.task.TaskAutoManager;
     import com.rpgGame.app.manager.task.TouJingManager;
     import com.rpgGame.app.scene.SceneRole;
     import com.rpgGame.app.scene.animator.RibbonAnimator;
@@ -110,6 +112,8 @@ package com.rpgGame.app.manager.shell
 
             this._funcs["playerCamerVibrate".toLowerCase()] = this.playerCamerVibrate;
 			this._funcs["testRibbon".toLowerCase()] = this.testRibbon;
+			this._funcs["&tasklevel".toLowerCase()] = this.testTaskLevel;
+			this._funcs["&fight".toLowerCase()] = this.testStopFight;
         }
 		
 		private function testRibbon():void
@@ -711,7 +715,15 @@ package com.rpgGame.app.manager.shell
             SceneManager.addSceneObjToScene(effectRu, true);
             effectRu.play(0);
         }
-      
+		private function testTaskLevel(level:int=-1) : void {
+			TaskAutoManager.getInstance().taskLevel(level);	
+		} 
+		private function testStopFight(level:int=-1) : void {
+			TrusteeshipManager.getInstance().testStop();
+		}
+		
+		
+		
         private function handler(command : String, ...params) : Boolean {
             var func : Function = this._funcs[command.toLowerCase()];
             if (null == func) {
