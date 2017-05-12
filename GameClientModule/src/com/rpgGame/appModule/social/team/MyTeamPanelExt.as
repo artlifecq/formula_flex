@@ -38,14 +38,13 @@ package com.rpgGame.appModule.social.team
 		{
 			_skin=new Duiwu_usSkin();
 			super(_skin);
-			
-			playerList.push( new PlayerMediator( _skin.gPlayer1,_skin.dui1,_skin.head1,_skin.lab_map1 , this,1.2));
-			playerList.push( new PlayerMediator( _skin.gPlayer2,_skin.dui2,_skin.head2,_skin.lab_map2 , this,1.4));
 			playerList.push( new PlayerMediator( _skin.gPlayer3,_skin.dui3,_skin.head3,_skin.lab_map3 , this,1.6));
+			playerList.push( new PlayerMediator( _skin.gPlayer2,_skin.dui2,_skin.head2,_skin.lab_map2 , this,1.4));
 			playerList.push( new PlayerMediator( _skin.gPlayer4,_skin.dui4,_skin.head4,_skin.lab_map4 , this,1.4));
+			playerList.push( new PlayerMediator( _skin.gPlayer1,_skin.dui1,_skin.head1,_skin.lab_map1 , this,1.2));
 			playerList.push( new PlayerMediator( _skin.gPlayer5,_skin.dui5,_skin.head5,_skin.lab_map5 , this,1.2));
 			
-			_skin.imgCaptain.x=_skin.gPlayer1.x+_skin.gPlayer1.width-_skin.imgCaptain.width;
+			_skin.imgCaptain.x=_skin.gPlayer3.x+_skin.gPlayer3.width-_skin.imgCaptain.width;
 			registerListeners();
 		}
 		 private function registerListeners():void
