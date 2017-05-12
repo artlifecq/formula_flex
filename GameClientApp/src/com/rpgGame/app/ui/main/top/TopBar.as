@@ -23,6 +23,9 @@ package com.rpgGame.app.ui.main.top {
 					case this._skin.btn_set:
 						AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
 						break;
+					case this._skin.btn_mail:
+						AppManager.showApp(AppConstant.MAIL_PANEL);
+						break;
 				}
 		}
         public function resize(w : int, h : int) : void {

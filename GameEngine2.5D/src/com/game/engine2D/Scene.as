@@ -767,8 +767,8 @@ package com.game.engine2D
 				sceneRenderLayer.dispose();
 			if (_scene3d)
 				_scene3d.clear();
-			if (_view)
-				_view.filters3d = _filter3ds;
+//			if (_view)
+//				_view.filters3d = _filter3ds;
 			TweenLite.killTweensOf(_current);
 		}
 		

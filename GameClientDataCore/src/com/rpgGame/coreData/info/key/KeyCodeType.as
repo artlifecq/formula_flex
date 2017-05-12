@@ -14,5 +14,6 @@ package com.rpgGame.coreData.info.key
 		public static const FUNC : int = 2; //功能操作
 		public static const SKILL : int = 3; //技能
 		public static const MOVE : int = 4; //移动
+		public static const UpAndDown:int = 5;//按下和抬起
 	}
 }

@@ -18,8 +18,6 @@ package org.mokylin.skin.app.fuben
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var Icon0:feathers.controls.UIAsset;
-
 		public var btnSelect:feathers.controls.Button;
 
 		public var grpIcon:feathers.controls.Group;
@@ -28,9 +26,27 @@ package org.mokylin.skin.app.fuben
 
 		public var imgBg_select:feathers.controls.UIAsset;
 
-		public var lbLevel:feathers.controls.Label;
-
 		public var lbNum:feathers.controls.Label;
+
+		public var pass_group:feathers.controls.Group;
+
+		public var pass_ico:feathers.controls.UIAsset;
+
+		public var prob_ioc_0:feathers.controls.UIAsset;
+
+		public var prob_ioc_1:feathers.controls.UIAsset;
+
+		public var prob_ioc_2:feathers.controls.UIAsset;
+
+		public var prob_ioc_3:feathers.controls.UIAsset;
+
+		public var prob_ioc_4:feathers.controls.UIAsset;
+
+		public var prob_ioc_5:feathers.controls.UIAsset;
+
+		public var prob_ioc_6:feathers.controls.UIAsset;
+
+		public var prob_ioc_7:feathers.controls.UIAsset;
 
 		public var uiName1:feathers.controls.UIAsset;
 
@@ -46,7 +62,7 @@ package org.mokylin.skin.app.fuben
 			
 			this.currentState = "normal";
 			this.width = 539;
-			this.elementsContent = [imgBg_select_i(),imgBg_out_i(),grpIcon_i(),uiName1_i(),uiName2_i(),lbLevel_i(),lbNum_i(),Icon0_i(),btnSelect_i()];
+			this.elementsContent = [imgBg_select_i(),imgBg_out_i(),uiName1_i(),uiName2_i(),lbNum_i(),btnSelect_i(),grpIcon_i(),pass_group_i()];
 			
 			states = {
 			};
@@ -57,21 +73,10 @@ package org.mokylin.skin.app.fuben
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function Icon0_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			Icon0 = temp;
-			temp.name = "Icon0";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
-			temp.x = 458;
-			temp.y = 12;
-			return temp;
-		}
-
 		private function __FuBen_DuoRen_Item_Label1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "几率掉落：";
+			temp.text = "机率掉落：";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 16;
@@ -86,51 +91,6 @@ package org.mokylin.skin.app.fuben
 			temp.styleName = "ui/app/fuben/daojubeijing.png";
 			temp.width = 533;
 			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __FuBen_DuoRen_Item_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
-			temp.x = 101;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __FuBen_DuoRen_Item_UIAsset3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
-			temp.x = 158;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __FuBen_DuoRen_Item_UIAsset4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
-			temp.x = 215;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __FuBen_DuoRen_Item_UIAsset5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
-			temp.x = 271;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __FuBen_DuoRen_Item_UIAsset6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
-			temp.x = 328;
 			temp.y = 0;
 			return temp;
 		}
@@ -155,7 +115,7 @@ package org.mokylin.skin.app.fuben
 			temp.name = "grpIcon";
 			temp.x = 3;
 			temp.y = 75;
-			temp.elementsContent = [__FuBen_DuoRen_Item_UIAsset1_i(),__FuBen_DuoRen_Item_Label1_i(),__FuBen_DuoRen_Item_UIAsset2_i(),__FuBen_DuoRen_Item_UIAsset3_i(),__FuBen_DuoRen_Item_UIAsset4_i(),__FuBen_DuoRen_Item_UIAsset5_i(),__FuBen_DuoRen_Item_UIAsset6_i()];
+			temp.elementsContent = [__FuBen_DuoRen_Item_UIAsset1_i(),__FuBen_DuoRen_Item_Label1_i(),prob_ioc_0_i(),prob_ioc_1_i(),prob_ioc_2_i(),prob_ioc_3_i(),prob_ioc_4_i(),prob_ioc_5_i(),prob_ioc_6_i(),prob_ioc_7_i()];
 			return temp;
 		}
 
@@ -183,21 +143,6 @@ package org.mokylin.skin.app.fuben
 			return temp;
 		}
 
-		private function lbLevel_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbLevel = temp;
-			temp.name = "lbLevel";
-			temp.fontSize = 14;
-			temp.text = "（50级）";
-			temp.color = 0xE8C958;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 77;
-			temp.x = 140;
-			temp.y = 36;
-			return temp;
-		}
-
 		private function lbNum_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -206,11 +151,121 @@ package org.mokylin.skin.app.fuben
 			temp.height = 18;
 			temp.fontSize = 14;
 			temp.text = "2/10通关奖励：";
+			temp.textAlign = "right";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 109;
-			temp.x = 364;
+			temp.width = 121;
+			temp.x = 341;
 			temp.y = 33;
+			return temp;
+		}
+
+		private function pass_group_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			pass_group = temp;
+			temp.name = "pass_group";
+			temp.x = 458;
+			temp.y = 12;
+			temp.elementsContent = [pass_ico_i()];
+			return temp;
+		}
+
+		private function pass_ico_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			pass_ico = temp;
+			temp.name = "pass_ico";
+			temp.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
+			temp.x = 2;
+			return temp;
+		}
+
+		private function prob_ioc_0_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			prob_ioc_0 = temp;
+			temp.name = "prob_ioc_0";
+			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.x = 101;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function prob_ioc_1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			prob_ioc_1 = temp;
+			temp.name = "prob_ioc_1";
+			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.x = 154;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function prob_ioc_2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			prob_ioc_2 = temp;
+			temp.name = "prob_ioc_2";
+			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.x = 207;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function prob_ioc_3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			prob_ioc_3 = temp;
+			temp.name = "prob_ioc_3";
+			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.x = 260;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function prob_ioc_4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			prob_ioc_4 = temp;
+			temp.name = "prob_ioc_4";
+			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.x = 312;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function prob_ioc_5_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			prob_ioc_5 = temp;
+			temp.name = "prob_ioc_5";
+			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.x = 365;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function prob_ioc_6_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			prob_ioc_6 = temp;
+			temp.name = "prob_ioc_6";
+			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.x = 418;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function prob_ioc_7_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			prob_ioc_7 = temp;
+			temp.name = "prob_ioc_7";
+			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.x = 471;
+			temp.y = 0;
 			return temp;
 		}
 

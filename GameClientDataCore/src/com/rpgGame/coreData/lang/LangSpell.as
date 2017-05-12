@@ -210,11 +210,11 @@ package com.rpgGame.coreData.lang
 		public static const SPELL_2007:String = "SPELL_2007";
 		 /**  $变身时血量上限|$防御减伤效果 */
 		public static const SPELL_2008:String = "SPELL_2008";
-		 /**  $对敌方造成的秒伤伤害|$点物理伤害值 */
+		 /**  $对敌方造成的秒伤伤害|$点法术伤害值 */
 		public static const SPELL_3001:String = "SPELL_3001";
-		 /**  $对第一个目标造成的秒伤伤害|$点物理伤害值 */
+		 /**  $对第一个目标造成的秒伤伤害|$点法术伤害值 */
 		public static const SPELL_3002:String = "SPELL_3002";
-		 /**  $每0.5s造成的秒伤伤害|$点物理伤害值 */
+		 /**  $每0.5s造成的秒伤伤害|$点法术伤害值 */
 		public static const SPELL_3003:String = "SPELL_3003";
 		 /**  $复活时的血量比例|$复活时血量值 */
 		public static const SPELL_3004:String = "SPELL_3004";

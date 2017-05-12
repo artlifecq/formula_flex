@@ -16,7 +16,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.ui.main.shortcut.ShortcutBar;
 	import com.rpgGame.app.ui.main.shortcut.ShortcutMessageBar;
 	import com.rpgGame.app.ui.main.smallmap.SmallMapBar;
-	import com.rpgGame.app.ui.main.task.TaskBar;
+	import com.rpgGame.app.ui.main.taskbar.TaskBar;
 	import com.rpgGame.app.ui.main.team.TeamLeftFixedBar;
 	import com.rpgGame.app.ui.main.top.ExpBar;
 	import com.rpgGame.app.ui.main.top.TopBar;
@@ -496,7 +496,7 @@ package com.rpgGame.app.ui.main
 		
 		public function getBtnGlobalPos(btnName : String) : Point
 		{
-			return null;//_mainBar.getBtnGlobalPos(btnName);
+			return _navigationBar.getBtnGlobalPos(btnName);
 		}
 		
 		/**

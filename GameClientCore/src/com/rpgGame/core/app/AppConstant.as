@@ -109,6 +109,16 @@ package com.rpgGame.core.app
 		public static var MULTY_PANL:String = createAppInfo( "dungeon.multy.MultyPanel","fuben");
 
 		/**
+		 *多人副本进入确认面板
+		 */
+		public static var MULTYENTER_PANL:String = createAppInfo( "dungeon.multy.MultyEnterPanel");
+		/**
+		 *多人副本倒计时面板
+		 */
+		public static var MULTYSURE_PANL:String = createAppInfo( "dungeon.multy.MultySurePanel");
+		
+		
+		/**
 		 *装备面板
 		 */
 		public static var EQUIP_PANL:String = createAppInfo( "equip.EquipPanel","zhuangbei");
@@ -190,7 +200,7 @@ package com.rpgGame.core.app
 		public static var SPELL_PANEL:String = createAppInfo( "spell.SpellPanel", "spell" ); 
 		
 		/**邮件面板     可带一个数组为参数，可以直接打开发件邮  [ MailType.SEND, senderId, senderName, 主题 ]**/
-		public static var MAIL_PANEL:String = createAppInfo( "mail.MailPanel", "mail" ); 
+		public static var MAIL_PANEL:String = createAppInfo( "mail.MailPanelExt", "mail" ); 
 		/**答题面板**/
 		public static var DA_TI_PANEL:String = createAppInfo( "daTi.DaTiPanel", "daTi" ); 
 		/**答题结果面板**/

@@ -950,7 +950,7 @@ package com.game.engine3D.scene.render
 				layerType |= EntityLayerType.PHANTOM;
 			if (_softOutlineData)
 			{
-				layerType |= EntityLayerType.OUTLINE_GLOW_LAYER; //EntityLayerType.SOFT_OUTLINE_LAYER//
+				layerType |= EntityLayerType.SOFT_OUTLINE_LAYER;//EntityLayerType.OUTLINE_GLOW_LAYER; //EntityLayerType.SOFT_OUTLINE_LAYER//
 				mesh.outlineColor = _softOutlineData.color;
 				mesh.outlineAlpha = _softOutlineData.alpha;
 				mesh.outlineSize = _softOutlineData.size;
