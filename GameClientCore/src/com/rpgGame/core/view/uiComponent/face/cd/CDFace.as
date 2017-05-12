@@ -301,11 +301,19 @@ package com.rpgGame.core.view.uiComponent.face.cd
 		
 		public function updateTimeTxt($now : Number, $cdTotal : Number):void
 		{
-			_tmTxt.numberText = (($cdTotal - $now) * 0.001).toFixed(1);			
+			if (_tmTxt)
+			{
+				_tmTxt.numberText = (($cdTotal - $now) * 0.001).toFixed(1);		
+			}
+				
 		}
 		public function setTimeTxt($txt :String):void
 		{
-			_tmTxt.numberText =$txt;			
+			if(_tmTxt)
+			{
+				_tmTxt.numberText =$txt;	
+			}
+					
 		}
 		public function drawRectMask($angle : Number) : void
 		{

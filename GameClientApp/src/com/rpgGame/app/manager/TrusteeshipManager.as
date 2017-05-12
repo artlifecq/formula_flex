@@ -308,6 +308,7 @@ package com.rpgGame.app.manager
 		
 		private function onUpdate(force : Boolean = false) : void
 		{
+			if(testStopKey)return;///测试用命令控制
 			if (!_isFightActorRunning && !_isAutoFightRunning&&!_isFightTargetRunning)
 				return;
 			if (_isBroken)
@@ -426,6 +427,13 @@ package com.rpgGame.app.manager
 		public function set isLeftDown(value:Boolean):void
 		{
 			_isLeftDown = value;
+		}
+		
+		
+		private var testStopKey:Boolean=false;
+		public function testStop():void
+		{
+			testStopKey=!testStopKey;
 		}
 		
 
