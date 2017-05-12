@@ -135,6 +135,8 @@ package com.rpgGame.app.manager.task
 			
 			_stateMachine.transition(AIStateType.TASK_WALK, null, force);
 		}
+		
+		
 		private var _techSta:int=0;
 		private function techState():void
 		{
@@ -239,5 +241,18 @@ package com.rpgGame.app.manager.task
 			}
 			
 		}
+		
+		public function taskLevel(level:int):void
+		{
+			if(level<0)
+			{
+				AUTOLVE=GlobalSheetData.getSettingInfo(511).q_int_value;
+			}
+			else
+			{
+				AUTOLVE=level;
+			}
+		}
+		
 	}
 }
