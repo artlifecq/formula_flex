@@ -39,8 +39,8 @@ package com.rpgGame.app.ui.main.shortcut
 			_btnRet[EnumFunctionMessageBarIcoType.PRIVILEGE_MARK_TYPE] = new PrivilegeMarkIcon(); // 权利印记 
 			_btnRet[EnumFunctionMessageBarIcoType.JIN_WEI_APPLICANT_TYPE] = new JinWeiApplicantIcon(); // 禁卫军申请
 			_btnRet[EnumFunctionMessageBarIcoType.SOCIETY_JOIN_INVITE_TYPE] = new SocietyJoinInviteIcon(); // 入帮邀请 
-			_btnRet[EnumFunctionMessageBarIcoType.TEAM_INVITE_WAITE_TYPE] = new TeamInviteWaiteIcon(); // 组队邀请 
-			_btnRet[EnumFunctionMessageBarIcoType.TEAM_APPLY_JOIN_TYPE] = new TeamApplyJoinWaiteIcon(); // 入队申请 
+			//_btnRet[EnumFunctionMessageBarIcoType.TEAM_INVITE_WAITE_TYPE] = new TeamInviteWaiteIcon(); // 组队邀请 
+			_btnRet[EnumFunctionMessageBarIcoType.TEAM_TYPE] = new TeamApplyJoinWaiteIcon(); // 入队申请 
 			_btnRet[EnumFunctionMessageBarIcoType.TRADE_TYPE] = new TradeBeenInviteIcon();
 			_btnRet[EnumFunctionMessageBarIcoType.CHAT_TYPE] = new ChatMsgIcon();//私聊
 			_btnRet[EnumFunctionMessageBarIcoType.RELIVE_TYPE] = new ReliveIcon();//复活
@@ -51,6 +51,7 @@ package com.rpgGame.app.ui.main.shortcut
 			_btnRet[EnumFunctionMessageBarIcoType.GUILD_BEEN_KICK_GUILD] = new BeenKickGuildIcon();//帮派 被提出了帮派
 			_btnRet[EnumFunctionMessageBarIcoType.GUILD_JION_COMPLETE] = new JoinGuildIcon();//帮派 被提出了帮派
 			_btnRet[EnumFunctionMessageBarIcoType.MOUNT_BREAD_INVITE_WAITE_TYPE] = new MessageMountBreadInviteWaiteIcon();//坐骑繁育邀请
+			_btnRet[EnumFunctionMessageBarIcoType.MAIL_TYPE] = new NewMailIcon();//新邮件提示
 //			_btnRet[EnumFunctionMessageBarIcoType.GUILD_BEEN_INVITE_JOIN_GUILD] = new BeenInviteJoinGuildIcon();//被邀请加入帮派
 			StarlingLayerManager.hintUILayer.addChild(this);
 //			onShowIcon(EnumFunctionMessageBarIcoType.FRIEND_TYPE, 1);
@@ -120,9 +121,9 @@ package com.rpgGame.app.ui.main.shortcut
 						break;
 					case EnumFunctionMessageBarIcoType.TEAM_INVITE_WAITE_TYPE:
 					case EnumFunctionMessageBarIcoType.TEAM_APPLY_JOIN_TYPE:
-					case EnumFunctionMessageBarIcoType.MAIL_TYPE:
 						itemBtn.setNum(-1);
 						break;
+					
 					default:
 						itemBtn.setNum(num);
 						break;

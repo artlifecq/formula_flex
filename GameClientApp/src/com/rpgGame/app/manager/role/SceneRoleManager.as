@@ -6,6 +6,7 @@ package com.rpgGame.app.manager.role
 	import com.game.engine3D.vo.map.ClientMapAreaData;
 	import com.game.engine3D.vo.map.ClientMapAreaGridData;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
+	import com.rpgGame.app.graphics.DropItemHeadFace;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.graphics.StallHeadFace;
 	import com.rpgGame.app.manager.AvatarManager;
@@ -464,7 +465,7 @@ package com.rpgGame.app.manager.role
 			//设置VO
 			role.data = data;
 			role.name = data.name;
-			role.headFace = HeadFace.create(role);
+			role.headFace = DropItemHeadFace.create(role);
 			data.avatarInfo.setBodyResID(data.avatarRes, null);
 			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(data.avatarRes);
 			if (avatarResConfig)
@@ -475,13 +476,14 @@ package com.rpgGame.app.manager.role
 			//执行主换装更新
 			AvatarManager.updateAvatar(role);
 			var ref : PlayActionStateReference = role.stateMachine.getReference(PlayActionStateReference) as PlayActionStateReference;
-			ref.setParams(RoleActionType.STAND, 1, data.isDroped ? int.MAX_VALUE : 0);
+			ref.setParams(RoleActionType.STAND, 0, data.isDroped ? int.MAX_VALUE : 0);
 			role.stateMachine.transition(RoleStateType.ACTION_PLAY_ACTION, ref, true); //切换到“播放状态”
 			
 			role.setScale(data.sizeScale);
 			role.setGroundXY(data.x, data.y);
 			role.rotationY = data.direction;
 			SceneManager.addSceneObjToScene(role, true, false, false);
+			DropGoodsManager.getInstance().addDropGoods(role);
 		}
 		
 		/**

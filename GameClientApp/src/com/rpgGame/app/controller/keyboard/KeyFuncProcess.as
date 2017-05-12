@@ -4,6 +4,7 @@ package com.rpgGame.app.controller.keyboard
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.mount.MountManager;
+	import com.rpgGame.app.manager.role.DropGoodsManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -22,12 +23,11 @@ package com.rpgGame.app.controller.keyboard
 		private static var _keyDownTm : uint;
 		private static var _keyDownTabTm : uint;
 
-		public static function exec(info : KeyInfo) : void
+		public static function exec(info : KeyInfo,isdown : Boolean = false) : void
 		{
 			var moduleStr : String;
 			var funcID : String = info.funcS;
-			var state : Boolean = false;
-
+			
 			switch (funcID)
 			{
 				case "1": //G GM命令面板
@@ -123,7 +123,8 @@ package com.rpgGame.app.controller.keyboard
 					break;
 				case "34": //Y
 					break;
-				case "50": //BO 切换目标
+				case "50": //显示掉落物图标
+					DropGoodsManager.getInstance().showScaneName(isdown);
 					break;
 				case "51": //TAB
                     var curTime : uint = getTimer();

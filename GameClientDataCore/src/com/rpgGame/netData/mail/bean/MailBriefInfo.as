@@ -25,6 +25,18 @@ package com.rpgGame.netData.mail.bean{
 		//哪一模块的邮件
 		private var _type: int;
 		
+		//邮件发送时间
+		private var _sendTime: long;
+		
+		//发送者名字
+		private var _senderName: String;
+		
+		//是否已读取  0 未读取   1 已读
+		private var _isRead: int;
+		
+		//剩余天数
+		private var _leftDays: int;
+		
 		//附件简要信息
 		private var _items: Vector.<Attachment> = new Vector.<Attachment>();
 		/**
@@ -37,6 +49,14 @@ package com.rpgGame.netData.mail.bean{
 			writeString(_subject);
 			//哪一模块的邮件
 			writeInt(_type);
+			//邮件发送时间
+			writeLong(_sendTime);
+			//发送者名字
+			writeString(_senderName);
+			//是否已读取  0 未读取   1 已读
+			writeByte(_isRead);
+			//剩余天数
+			writeInt(_leftDays);
 			//附件简要信息
 			writeShort(_items.length);
 			for (var i: int = 0; i < _items.length; i++) {
@@ -55,6 +75,14 @@ package com.rpgGame.netData.mail.bean{
 			_subject = readString();
 			//哪一模块的邮件
 			_type = readInt();
+			//邮件发送时间
+			_sendTime = readLong();
+			//发送者名字
+			_senderName = readString();
+			//是否已读取  0 未读取   1 已读
+			_isRead = readByte();
+			//剩余天数
+			_leftDays = readInt();
 			//附件简要信息
 			var items_length : int = readShort();
 			for (var i: int = 0; i < items_length; i++) {
@@ -106,6 +134,66 @@ package com.rpgGame.netData.mail.bean{
 		 */
 		public function set type(value: int): void{
 			this._type = value;
+		}
+		
+		/**
+		 * get 邮件发送时间
+		 * @return 
+		 */
+		public function get sendTime(): long{
+			return _sendTime;
+		}
+		
+		/**
+		 * set 邮件发送时间
+		 */
+		public function set sendTime(value: long): void{
+			this._sendTime = value;
+		}
+		
+		/**
+		 * get 发送者名字
+		 * @return 
+		 */
+		public function get senderName(): String{
+			return _senderName;
+		}
+		
+		/**
+		 * set 发送者名字
+		 */
+		public function set senderName(value: String): void{
+			this._senderName = value;
+		}
+		
+		/**
+		 * get 是否已读取  0 未读取   1 已读
+		 * @return 
+		 */
+		public function get isRead(): int{
+			return _isRead;
+		}
+		
+		/**
+		 * set 是否已读取  0 未读取   1 已读
+		 */
+		public function set isRead(value: int): void{
+			this._isRead = value;
+		}
+		
+		/**
+		 * get 剩余天数
+		 * @return 
+		 */
+		public function get leftDays(): int{
+			return _leftDays;
+		}
+		
+		/**
+		 * set 剩余天数
+		 */
+		public function set leftDays(value: int): void{
+			this._leftDays = value;
 		}
 		
 		/**

@@ -3,7 +3,6 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.alert.GameAlert;
-	import com.rpgGame.app.ui.main.task.TaskBar;
 	import com.rpgGame.app.ui.main.buff.BuffBar;
 	import com.rpgGame.app.ui.main.chat.ChatBar;
 	import com.rpgGame.app.ui.main.chat.SystemMsgBar;
@@ -15,7 +14,9 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.ui.main.head.RoleHeadBar;
 	import com.rpgGame.app.ui.main.navigation.NavigationBar;
 	import com.rpgGame.app.ui.main.shortcut.ShortcutBar;
+	import com.rpgGame.app.ui.main.shortcut.ShortcutMessageBar;
 	import com.rpgGame.app.ui.main.smallmap.SmallMapBar;
+	import com.rpgGame.app.ui.main.task.TaskBar;
 	import com.rpgGame.app.ui.main.team.TeamLeftFixedBar;
 	import com.rpgGame.app.ui.main.top.ExpBar;
 	import com.rpgGame.app.ui.main.top.TopBar;
@@ -489,13 +490,13 @@ package com.rpgGame.app.ui.main
 //			_hintBattleBar.resize(sWidth, sHeight);
 //			_teamBar.resize(sWidth, sHeight);
 //			_taskTrackPanel.resize(sWidth, _taskBar.y + _taskBar.height);
-//			ShortcutMessageBar.instence.resize(sWidth, sHeight);
+			ShortcutMessageBar.instence.resize(sWidth, sHeight);
 //			_yuMaChangActivityBar.resize(sWidth, _taskBar.y);
 		}
 		
 		public function getBtnGlobalPos(btnName : String) : Point
 		{
-			return null;//_mainBar.getBtnGlobalPos(btnName);
+			return _navigationBar.getBtnGlobalPos(btnName);
 		}
 		
 		/**
