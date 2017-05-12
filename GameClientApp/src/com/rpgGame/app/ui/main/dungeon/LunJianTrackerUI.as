@@ -9,9 +9,12 @@ package com.rpgGame.app.ui.main.dungeon
 	import com.rpgGame.coreData.clientConfig.Q_lunjian;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	
+	import feathers.controls.UIAsset;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.fubenzhuizong.LunJian_Skin;
 	
+	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	
 	import utils.TimerServer;
@@ -35,6 +38,9 @@ package com.rpgGame.app.ui.main.dungeon
 		override protected function onShow() : void
 		{
 			EventManager.addEvent(DungeonEvent.UPDATE_LUNJIAN_TIME,getLunJianTime);
+			var ass:UIAsset=new UIAsset();
+			ass.styleName = "ui/app/fuben/fubenjiesuan/tiaozhankaishi.png";
+			Starling.current.stage.addChild(ass);
 			UIPopManager.showAlonePopUI(DungeonFightPop);
 		}
 		

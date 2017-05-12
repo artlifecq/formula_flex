@@ -87,7 +87,6 @@ package com.rpgGame.app.manager.scene
 
 			MainUIManager.showMainUI();
 //			CountryTaoNiManager.setup();
-			ShortcutMessageBar.instence;
 		}
 
 		public static function get isEnterScene() : Boolean

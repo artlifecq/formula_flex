@@ -43,6 +43,9 @@ package com.rpgGame.app.ui.main.shortcut {
         private var _rollprogress:RollProgress;
 		private var _jinzhencontent:Inter3DContainer;
 		private var _jinzhenList:Vector.<JinZhenControl>;
+		
+		private var _shortcutMessageBar:ShortcutMessageBar;
+		
         public function ShortcutBar() {
             this._skin = new shortcut_Skin();
             super(this._skin);
@@ -92,6 +95,7 @@ package com.rpgGame.app.ui.main.shortcut {
 			singBar= new SingBar();
 			this._skin.Icons.addChild(singBar);
 			
+			_shortcutMessageBar=ShortcutMessageBar.instence;
 			
 			_rollprogress = new RollProgress(this._skin);
 			var leftp:HpPropgressBar = new HpPropgressBar(this,0,_skin);
@@ -331,10 +335,10 @@ package com.rpgGame.app.ui.main.shortcut {
 			//			}
 		}
 		
-		//		public function get shortcutMessageBar() : ShortcutMessageBar
-		//		{
-		//			return _shortcutMessageBar;
-		//		}
+		public function get shortcutMessageBar() : ShortcutMessageBar
+		{
+			return _shortcutMessageBar;
+		}
         
         public function resize(w : int, h : int) : void {
             this.x = (w - this._skin.width) >> 1;

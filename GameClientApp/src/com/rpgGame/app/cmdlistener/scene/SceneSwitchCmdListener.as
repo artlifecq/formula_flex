@@ -2,20 +2,29 @@ package com.rpgGame.app.cmdlistener.scene
 {
 	import com.game.engine3D.events.MapLoadEvent;
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.ui.ResLoadingView;
 	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppInfo;
+	import com.rpgGame.core.app.AppLoadManager;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
-
+	
+	import feathers.controls.UIAsset;
+	import feathers.themes.ThemeLoader;
+	
 	import gs.TweenLite;
-
+	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
+	
+	import starling.core.Starling;
 
 	/**
 	 *
@@ -89,9 +98,27 @@ package com.rpgGame.app.cmdlistener.scene
 		private static function onSwitchCmp() : void
 		{
 			GameLog.addShow("加载场景完成...");
+			var mapId:int=MainRoleManager.actorInfo.mapID;
+			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
+			if(sceneData.getData().q_map_zones==1){//副本
+				var appinfo:AppInfo=AppConstant.getAppinfoByAppName( AppConstant.SWORD_RESULT_SUCCESS);
+				var loadUrl : String = ClientConfig.getUI(appinfo.resName);
+				AppLoadManager.instace().loadByUrl(loadUrl, appinfo.loadingTitle, onLoadComplete, onError);
+			}else{
+				_showSceneDelay = TweenLite.delayedCall(0.2, onShowScene);
+			}
+		}
+		
+		private static function onError(url : String) : void
+		{
+			GameLog.addShow("加载资源"+url+"出错");
+		}
+		
+		private static function onLoadComplete(_appUrl : String = null) : void
+		{
 			_showSceneDelay = TweenLite.delayedCall(0.2, onShowScene);
 		}
-
+		
 		private static function onMapLoadError() : void
 		{
 			var mapRes : String = "";
