@@ -308,7 +308,7 @@ package org.mokylin.skin.app.beibao
 		private function __juese_Skin_UIAsset10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/fengexian.png";
+			temp.styleName = "ui/common/fenyexian.png";
 			temp.width = 333;
 			temp.x = 5;
 			temp.y = 340;
@@ -318,7 +318,7 @@ package org.mokylin.skin.app.beibao
 		private function __juese_Skin_UIAsset11_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/fengexian.png";
+			temp.styleName = "ui/common/fenyexian.png";
 			temp.width = 333;
 			temp.x = 5;
 			temp.y = 398;
@@ -370,7 +370,7 @@ package org.mokylin.skin.app.beibao
 		private function __juese_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/bg.png";
+			temp.styleName = "ui/big_bg/beibao/bg.png";
 			temp.x = 20;
 			temp.y = 76;
 			return temp;
@@ -633,7 +633,7 @@ package org.mokylin.skin.app.beibao
 			lbl_bishanlv = temp;
 			temp.name = "lbl_bishanlv";
 			temp.letterSpacing = -1;
-			temp.text = "避闪率：";
+			temp.text = "避闪值：";
 			temp.color = 0xA79F4F;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 0;
@@ -647,7 +647,7 @@ package org.mokylin.skin.app.beibao
 			lbl_fangyubaifenbi = temp;
 			temp.name = "lbl_fangyubaifenbi";
 			temp.letterSpacing = -1;
-			temp.text = "防御：";
+			temp.text = "防御值：";
 			temp.color = 0xA79F4F;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 0;
@@ -731,7 +731,7 @@ package org.mokylin.skin.app.beibao
 			lbl_minzhonglv = temp;
 			temp.name = "lbl_minzhonglv";
 			temp.letterSpacing = -1;
-			temp.text = "命中率：";
+			temp.text = "命中值：";
 			temp.color = 0xA79F4F;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 0;
