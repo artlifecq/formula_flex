@@ -113,7 +113,7 @@ package com.rpgGame.app.manager.shell
             this._funcs["playerCamerVibrate".toLowerCase()] = this.playerCamerVibrate;
 			this._funcs["testRibbon".toLowerCase()] = this.testRibbon;
 			this._funcs["&tasklevel".toLowerCase()] = this.testTaskLevel;
-			this._funcs["&fight".toLowerCase()] = this.testStopFight;
+			this._funcs["&autofight".toLowerCase()] = this.testStopFight;
         }
 		
 		private function testRibbon():void
