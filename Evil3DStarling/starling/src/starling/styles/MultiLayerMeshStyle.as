@@ -490,13 +490,18 @@ package starling.styles
 }
 import flash.display3D.Context3DProgramType;
 
+import away3d.arcane;
+import away3d.core.data.ShaderCache;
+import away3d.core.managers.AGALProgram3DCache;
 import away3d.core.managers.Stage3DProxy;
 
-import starling.core.Starling;
+import starling.rendering.FilterEffect;
 import starling.rendering.MeshEffect;
-import starling.rendering.Painter;
-import starling.rendering.Program;
+import starling.rendering.ProgramNameID;
 import starling.textures.IStarlingTexture;
+import starling.utils.RenderUtil;
+
+use namespace arcane;
 
 class MultiLayerMeshEffect extends MeshEffect
 {
@@ -516,9 +521,27 @@ class MultiLayerMeshEffect extends MeshEffect
 	{
 	}
 	
-	override protected function beforeDraw(stage3DProxy:Stage3DProxy):void
+	override arcane function updateProgram(stage3DProxy:Stage3DProxy):void
 	{
+		var key:uint = programName;
+		if(_options._invalidateShaderProgramed)
+		{
+			_shaderCache = AGALProgram3DCache.getInstance().setProgram2D(key, getVertexCode(), getFragmentCode());
+		}
+		else
+		{
+			_shaderCache = AGALProgram3DCache.getInstance().getProgram2D(key);
+			if(!_shaderCache)
+			{
+				_shaderCache = AGALProgram3DCache.getInstance().setProgram2D(key, getVertexCode(), getFragmentCode());
+			}
+		}
+	}
+
+	override protected function beforeDraw(stage3DProxy:Stage3DProxy):void
+	{		
 		super.beforeDraw(stage3DProxy);
+		
 		stage3DProxy.setProgramConstantsFromVector(Context3DProgramType.FRAGMENT, 0, _shaderMatrix);
 		stage3DProxy.setProgramConstantsFromVector(Context3DProgramType.FRAGMENT, 5, MIN_COLOR);
 		stage3DProxy.setProgramConstantsFromVector(Context3DProgramType.FRAGMENT, 6, _datas, _multiTexture1 ? 5 : 3);
@@ -537,37 +560,39 @@ class MultiLayerMeshEffect extends MeshEffect
 		super.afterDraw(stage3DProxy);
 	}
 	
-	
-	override protected function get program():Program
-	{
-		var name:String = this.programName;
-		var painter:Painter = Starling.painter;
-		var program:Program = painter.getProgram(name);
-		
-		if (program == null || _options._invalidateShaderProgramed)
-		{
-			_options._invalidateShaderProgramed = false;
-			program = createProgram();
-			painter.registerProgram(name, program);
-		}
-		
-		return program;
+	override protected function get programBaseName():uint 
+	{ 
+		return ProgramNameID.MULTILAYER_MESH_STYLE;
 	}
 	
-	override protected function createProgram():Program
+	override arcane function getVertexCode():String
 	{
-		var vertexShader:String, fragmentShader:String;
+		var vertexCode:String;
+		if (texture)
+		{
+			vertexCode =
+				"m44 op, va0, vc0 \n" + // 4x4 matrix transform to output clip-space
+				"mov v0, va1      \n" + // pass texture coordinates to fragment program
+				"mul v1, va2, vc4 \n";  // multiply alpha (vc4) with color (va2), pass to fp
+		}
+		else
+		{
+			vertexCode =
+				"m44 op, va0, vc0 \n" + // 4x4 matrix transform to output clipspace
+				"mul v0, va2, vc4 \n";  // multiply alpha (vc4) with color (va2)
+		}
+		return vertexCode;
+	}
+	
+	override arcane function getFragmentCode():String
+	{
+		var fragmentCode:String;
 		var code:String = "";
 		
 		if (texture)
 		{
-			vertexShader =
-				"m44 op, va0, vc0 \n" + // 4x4 matrix transform to output clip-space
-				"mov v0, va1      \n" + // pass texture coordinates to fragment program
-				"mul v1, va2, vc4 \n";  // multiply alpha (vc4) with color (va2), pass to fp
-			
 			code = getMultiLayerCode();
-			fragmentShader =
+			fragmentCode =
 				tex("ft0", "v0", 0, texture) +
 				"mul ft0, ft0, v1  \n" +  // multiply color with texel color
 				"max ft0, ft0, fc5 \n" + // avoid division through zero in next step
@@ -580,11 +605,7 @@ class MultiLayerMeshEffect extends MeshEffect
 		}
 		else
 		{
-			vertexShader =
-				"m44 op, va0, vc0 \n" + // 4x4 matrix transform to output clipspace
-				"mul v0, va2, vc4 \n";  // multiply alpha (vc4) with color (va2)
-			
-			fragmentShader =
+			fragmentCode =
 				"max ft0, v0, fc5 \n" + // avoid division through zero in next step
 				"div ft0.xyz, ft0.xyz, ft0.www \n" + // restore original (non-PMA) RGB values
 				"m44 ft0, ft0, fc0 \n" + // multiply color with 4x4 matrix
@@ -592,10 +613,9 @@ class MultiLayerMeshEffect extends MeshEffect
 				"mul ft0.xyz, ft0.xyz, ft0.www \n" + // multiply with alpha again (PMA)
 				"mov oc, ft0 \n";  // copy to output
 		}
-		
-		return Program.fromSource(vertexShader, fragmentShader);
+		return fragmentCode;
 	}
-	
+
 	private function getMultiLayerCode():String
 	{
 		var code:String = "";

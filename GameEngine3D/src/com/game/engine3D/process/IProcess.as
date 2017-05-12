@@ -1,6 +1,5 @@
 package com.game.engine3D.process
 {
-
 	/**
 	 *
 	 * 流程接口
@@ -16,10 +15,17 @@ package com.game.engine3D.process
 		function processHandler(percent : Number) : void;
 		function startProcess() : void;
 		function completeProcess() : void;
+		function holdOnProcess() : void;
 		function get isProcessing() : Boolean;
 		function get isProcessed() : Boolean;
 		function setOnCompleteNotify(fun : Function) : void;
+		function setHoldOnNotify(fun : Function) : void;
 		function getState() : String;
+		function set group(value : IProcessGroup) : void;
+		function get group() : IProcessGroup;
+		function set parallelism(value : Boolean) : void;
+		function get parallelism() : Boolean;
+		function switchMaster() : void;
 		function dispose() : void;
 	}
 }

@@ -201,8 +201,8 @@ package starling.display
             if (endIndex < 0 || endIndex >= numChildren) 
                 endIndex = numChildren - 1;
             
-            for (var i:int=beginIndex; i<=endIndex; ++i)
-                removeChildAt(beginIndex, dispose);
+			for (var i:int=beginIndex; i<=endIndex; ++i)
+				removeChildAt(beginIndex, dispose);
         }
 
         /** Returns a child object at a certain index. If you pass a negative index,
@@ -359,7 +359,7 @@ package starling.display
         }
 		
 		/**
-		 * 优化排序渲染
+		 * 
 		 */		
 		protected function optimizeRenderLayer():void
 		{
@@ -396,6 +396,26 @@ package starling.display
 				_layerDirty = false;
 			}
 		}
+		
+		private  function get canLayerBatch():Boolean
+		{
+			var numChildren:int = _children.length;
+			var child:DisplayObject;
+			var batchNum:int;
+			for (var i:int=0; i<numChildren; ++i)
+			{
+				child = _children[i];
+				if(child.layerBatchId > 0)
+				{
+					batchNum++;
+					if(batchNum >= 2)
+					{
+						return true;
+					}
+				}
+			}
+			return false;
+		}
         
         /** @inheritDoc */
         public override function render(painter:Painter):void
@@ -403,43 +423,49 @@ package starling.display
 			var numChildren:int = _children.length;
             var frameID:uint = painter.frameID;
 			
+            var cacheEnabled:Boolean = frameID !=0;
             var selfOrParentChanged:Boolean = _lastParentOrSelfChangeFrameID == frameID;
 			
 			var temp:Vector.<DisplayObject> = _children;
-			if(_optimizeLayerBatch)
+			if(_layerDirty && _optimizeLayerBatch && numChildren > 1 && canLayerBatch)
 			{
 				if(_layerDirty)optimizeRenderLayer();
 				temp = _optimizeChildren || _children;
 				numChildren = temp.length;
 			}
 			
+			painter.pushState();
+			
             for (var i:int=0; i<numChildren; ++i)
             {
 				var child:DisplayObject = temp[i];
-                var filter:FragmentFilter = child._filter;
-                var mask:DisplayObject = child._mask;
 
                 if (child._hasVisibleArea)
                 {
+					if (i != 0)
+						painter.restoreState();
+					
                     if (selfOrParentChanged)
-                    {
                         child._lastParentOrSelfChangeFrameID = frameID;
-                        if (mask) mask._lastParentOrSelfChangeFrameID = frameID;
-                    }
 
                     if (child._lastParentOrSelfChangeFrameID != frameID &&
                         child._lastChildChangeFrameID != frameID &&
-                        child._tokenFrameID == frameID - 1)
+                        child._tokenFrameID == frameID - 1 && cacheEnabled)
                     {
-                        painter.pushState(sCacheToken);
+                        painter.fillToken(sCacheToken);
                         painter.drawFromCache(child._pushToken, child._popToken);
-                        painter.popState(child._popToken);
+                        painter.fillToken(child._popToken);
 
                         child._pushToken.copyFrom(sCacheToken);
                     }
                     else
                     {
-                        painter.pushState(child._pushToken);
+                        var pushToken:BatchToken  = cacheEnabled ? child._pushToken : null;
+                        var popToken:BatchToken   = cacheEnabled ? child._popToken  : null;
+                        var filter:FragmentFilter = child._filter;
+                        var mask:DisplayObject    = child._mask;
+
+                        painter.fillToken(pushToken);
                         painter.setStateTo(child.transformationMatrix, child.alpha, child.blendMode);
 
                         if (mask) painter.drawMask(mask, child);
@@ -449,12 +475,15 @@ package starling.display
 
                         if (mask) painter.eraseMask(mask, child);
 
-                        painter.popState(child._popToken);
+                        painter.fillToken(popToken);
                     }
 
-                    child._tokenFrameID = frameID;
+                    if (cacheEnabled)
+                        child._tokenFrameID = frameID;
                 }
             }
+			
+			painter.popState();
         }
 
         /** Dispatches an event on all children (recursively). The event must not bubble. */
@@ -563,7 +592,6 @@ package starling.display
             }
         }
 			
-		/**容器鼠标穿透 zhongmao.zhu*/
 		override public function set touchAcross(value:Boolean):void 
 		{
 			super.touchAcross = value;
@@ -579,10 +607,6 @@ package starling.display
 			}
 		}
 		
-		/**优化渲染，当为true时将对所有子对象在渲染前进行优化排序,以减少drawCall被打断的次数。
-		 * 此排序不影响对象原childIndex
-		 *  默认为true
-		 * */
 		public function get optimizeLayerBatch():Boolean{return _optimizeLayerBatch}
 		public function set optimizeLayerBatch(value:Boolean):void
 		{
@@ -596,6 +620,26 @@ package starling.display
 		private var _layerDirty:Boolean;
 		
 		private var _layerBatchs:Array;
+		
+		CONFIG::Mesh2D_Trace
+			{
+				private static var _static_mesh2d_trace_container_id:int;
+				public var mesh2DTraceContinaerName:String;
+				private var _mesh2dTraceId:int;
+				
+				public function  get mesh2DTraceContainerID():int
+				{
+					return _mesh2dTraceId;
+				}
+				
+				public function autoSetMesh2DTraceContainerID():void
+				{
+					if(_mesh2dTraceId < 1)
+					{
+						_mesh2dTraceId = ++_static_mesh2d_trace_container_id;
+					}
+				}
+			}
 		/**--------------------------------------------------------------*/
     }
 }

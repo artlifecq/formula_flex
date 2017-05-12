@@ -6,7 +6,7 @@ package com.game.engine3D.display
 	import flash.geom.Point;
 	
 	import starling.display.DisplayObject;
-	import starling.display.Sprite;
+	import starling.display.Sprite3D;
 
 	/**
 	 * 可以嵌入到Starling层的3D显示对象容器-starling容器
@@ -15,7 +15,7 @@ package com.game.engine3D.display
 	 * 修改时间：2016-05-25 下午3:05:12
 	 *
 	 */
-	public class Inter3DContainer extends Sprite
+	public class Inter3DContainer extends Sprite3D
 	{
 		private static var LOCAL_POINT : Point = new Point();
 
@@ -100,10 +100,10 @@ package com.game.engine3D.display
 			}
 		}
 
-		public function removeChild3D(child : InterObject3D) : void
+		public function removeChild3D(child : InterObject3D, dispose : Boolean = false) : void
 		{
 			if (this.contains(child))
-				this.removeChild(child);
+				this.removeChild(child, dispose);
 
 			if (_numChildren3D > 0)
 			{
@@ -112,6 +112,7 @@ package com.game.engine3D.display
 				{
 					_inter3DObjs.splice(index, 1);
 					_numChildren3D--;
+					if(dispose)child.dispose();
 				}
 			}
 		}
@@ -210,7 +211,7 @@ package com.game.engine3D.display
 		{
 			if (child is Inter3DContainer)
 			{
-				remove3DContainer(child as Inter3DContainer);
+				remove3DContainer(child as Inter3DContainer, dispose);
 			}
 			return super.removeChild(child, dispose);
 		}
@@ -237,7 +238,7 @@ package com.game.engine3D.display
 			}
 		}
 
-		private function remove3DContainer(inter3DContainer : Inter3DContainer) : void
+		private function remove3DContainer(inter3DContainer : Inter3DContainer, dispose : Boolean = false) : void
 		{
 			if (_inter3DContainers)
 			{
@@ -245,6 +246,10 @@ package com.game.engine3D.display
 				if (index >= 0)
 				{
 					_inter3DContainers.splice(index, 1);
+					if(dispose)
+					{
+						inter3DContainer.dispose();
+					}
 				}
 			}
 		}
@@ -297,6 +302,29 @@ package com.game.engine3D.display
 
 		protected function onUpdateFadeAlphaRectPos(sr3D : InterObject3D, x : int, y : int) : void
 		{
+		}
+		
+		override public function dispose():void
+		{
+			var len:int = _inter3DObjs ? _inter3DObjs.length : 0;
+			var i:int;
+			var inter3DObj:InterObject3D;
+			var interContainer:Inter3DContainer;
+			for(i = 0; i<len; i++)
+			{
+				inter3DObj = _inter3DObjs[i];
+				if(inter3DObj)inter3DObj.dispose();
+			}
+			len = _inter3DContainers ? _inter3DContainers.length : 0;
+			for(i=0; i<len; i++)
+			{
+				interContainer = _inter3DContainers[i];
+				if(interContainer)interContainer.dispose();
+			}
+			
+			_inter3DObjs = null;
+			_inter3DContainers = null;
+			super.dispose();
 		}
 	}
 }

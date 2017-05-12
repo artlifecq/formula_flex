@@ -20,6 +20,8 @@ package feathers.controls.text
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	
+	import away3d.debug.Debug;
+	
 	import feathers.core.FeathersControl;
 	import feathers.core.IStateContext;
 	import feathers.core.IStateObserver;
@@ -104,6 +106,7 @@ package feathers.controls.text
 		{
 			super();
 			this.isQuickHitAreaEnabled = true;
+			this._enableTextBatchRender = GuiTheme.ENABLE_TEXT_BATCH_RENDER;
 		}
 
 		/**
@@ -1234,13 +1237,7 @@ package feathers.controls.text
 		{
 			if(this.textSnapshot)
 			{
-				if(!_useLabelTextureAtlas)
-				{
-					this.textSnapshot.texture.dispose();
-				}else
-				{
-					this.textSnapshot.texture = null;
-				}
+				this.textSnapshot.texture.dispose();
 				this.removeChild(this.textSnapshot, true);
 				this.textSnapshot = null;
 			}
@@ -1889,7 +1886,7 @@ package feathers.controls.text
 				//text format has been specified
 				if(!this._textFormat)
 				{
-					this._textFormat = new TextFormat(Fontter.DEFAULT_FONT_NAME, Fontter.DEFAULT_FONT_SIZE, Fontter.DEFAULT_FONT_COLOR);
+					this._textFormat = Fontter.creatDefaultFontTextFormat();
 				}
 				textFormat = this._textFormat;
 				textFormat.align = _textAlign;
@@ -2026,32 +2023,27 @@ package feathers.controls.text
 					bitmapData = this.drawTextFieldRegionToBitmapData(xPosition, yPosition,
 						currentBitmapWidth, currentBitmapHeight, bitmapData);
 					var newTexture:IStarlingTexture;
-					if(_useLabelTextureAtlas)
-					{
-						var  filterId:String = Fontter.getFilterId(_nativeFilters);
-						_textureKey = _textFormat.font+"_"+_textFormat.size+"_"+_textFormat.color+"_"+filterId+"_"+_text;
-						newTexture = GuiTheme.ins.getTexture(_textureKey);
-						
-						//may be has disposed!
-						if(newTexture && newTexture.root.disposed)
-							newTexture = null;
-						
-						if(!newTexture)
-							newTexture = GuiTheme.ins.pushDynamicLabelBitmapData(_textureKey, bitmapData);
-					}
-					
 					if(!this.textSnapshot || this._needsNewTexture)
 					{
 						//skip TextureFactory.fromBitmapData() because we don't want
 						//it to create an onRestore function that will be
 						//immediately discarded for garbage collection. 
 						//get texture cache
-						if(!_useLabelTextureAtlas)
+						var  filterId:String = Fontter.getFilterId(_nativeFilters);
+						_textureKey = _textFormat.font+"_"+_textFormat.size+"_"+_textFormat.color+"_"+filterId+"_"+_text;
+						if(!_enableTextBatchRender)
 						{
 							newTexture = TextureFactory.empty(bitmapData.width, bitmapData.height,
 								false, false);
 							newTexture.root.uploadBitmapData(bitmapData);
+						}else
+						{
+							newTexture = GuiTheme.ins.creatBatchRenderTextTexture(_textureKey, bitmapData);
 						}
+						CONFIG::Debug
+							{
+								newTexture.key = _textureKey;
+							}
 					}
 					var snapshot:Image = null;
 					if(snapshotIndex >= 0)
@@ -2080,27 +2072,30 @@ package feathers.controls.text
 					{
 						if(this._needsNewTexture)
 						{
-							if(!_useLabelTextureAtlas)
-							{
-								snapshot.texture.dispose();
-								snapshot.texture = newTexture;
-							}else{
-								onTextureChange();
-							}
+							snapshot.texture.dispose();
+							snapshot.texture = newTexture;
 						}
 						else
 						{
-							if(!_useLabelTextureAtlas)
+							var existingTexture:IStarlingTexture = snapshot.texture;
+							_textureKey = _textFormat.font+"_"+_textFormat.size+"_"+_textFormat.color+"_"+filterId+"_"+_text;
+							if(!_enableTextBatchRender && existingTexture != null)
 							{
 								//this is faster, if we haven't resized the bitmapdata
-								var existingTexture:IStarlingTexture = snapshot.texture;
 								existingTexture.root.uploadBitmapData(bitmapData);
 								//however, the image won't be notified that its
 								//texture has changed, so we need to do it manually
-								this.textSnapshot.setRequiresRedraw();
+								CONFIG::Debug
+									{
+										existingTexture.key = _textureKey;
+									}
 							}else{
-								onTextureChange();
+								var texture:IStarlingTexture = GuiTheme.ins.creatBatchRenderTextTexture(_textureKey, bitmapData);
+								snapshot.texture = texture;
+								if(existingTexture && existingTexture !=texture)existingTexture.dispose();
 							}
+							
+							this.textSnapshot.setRequiresRedraw();
 						}
 					}
 					if(snapshotIndex >= 0)
@@ -2131,7 +2126,7 @@ package feathers.controls.text
 				totalBitmapHeight = this._snapshotHeight;
 			}
 			while(totalBitmapWidth > 0)
-			bitmapData.dispose();
+			if(!_enableTextBatchRender)bitmapData.dispose();
 			if(this.textSnapshots)
 			{
 				var snapshotCount:int = this.textSnapshots.length;
@@ -2177,17 +2172,6 @@ package feathers.controls.text
 		
 		//------------------------------evil3d-------------------------/
 		private var _textureKey:String;
-		private var _useLabelTextureAtlas:Boolean = true;
-		private function onTextureChange():void
-		{
-			if(textSnapshot)
-			{
-				var texture:IStarlingTexture = GuiTheme.ins.getTexture(_textureKey);
-				if(textSnapshot.texture != texture)
-				{
-					textSnapshot.texture = texture;
-				}
-			}
-		}
+		private var _enableTextBatchRender:Boolean;
 	}
 }

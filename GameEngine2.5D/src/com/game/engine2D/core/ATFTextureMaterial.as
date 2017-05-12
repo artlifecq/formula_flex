@@ -14,6 +14,7 @@ package com.game.engine2D.core
 	public class ATFTextureMaterial extends TextureMaterial implements ITextureMaterial
 	{
 		private var _atfByteTexture:ATFByteTexture;
+		private var _index:int;
 		public function ATFTextureMaterial(texture:ATFByteTexture)
 		{
 			super(texture);
@@ -21,7 +22,7 @@ package com.game.engine2D.core
 			this.colorTransform = new ColorTransform();
 		}
 		
-		public function get isDefaultTexture():Boolean
+		override public function get isDefaultTexture():Boolean
 		{
 			if (_atfByteTexture)
 				return _atfByteTexture.isDefaultTexture;
@@ -39,6 +40,16 @@ package com.game.engine2D.core
 		{
 			if (_atfByteTexture)
 				_atfByteTexture.getTextureForStage3D(Stage3DLayerManager.stage3DProxy);
+		}
+		
+		public function set index(value:int):void
+		{
+			_index = value;
+		}
+		
+		public function get index():int
+		{
+			return _index;
 		}
 		
 		public function get isTextureScale():Boolean
@@ -67,13 +78,17 @@ package com.game.engine2D.core
 			super.dispose();
 		}
 		
-		public function clone():TextureMaterial
+		public function clone():ITextureMaterial
 		{
 			var texture:ATFTextureMaterial = new ATFTextureMaterial(_atfByteTexture);
 			texture.animateUVs = this.animateUVs;
 			texture.writeDepth = this.writeDepth;
 			texture.bothSides = this.bothSides;
 			texture.blendMode = this.blendMode;
+			texture.depthCompareMode = this.depthCompareMode;
+			texture.alphaThreshold = this.alphaThreshold;
+			texture.index = this.index;
+			texture.name = this.name + "-copy";
 			return texture;
 		}
 	}

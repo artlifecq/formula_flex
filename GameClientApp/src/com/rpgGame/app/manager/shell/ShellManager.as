@@ -175,7 +175,7 @@ package com.rpgGame.app.manager.shell
 		private function corredMethodTest():void
 		{
 			_valueObj = {alpha: 1};
-			GlobalTexture.addTexture(ClientConfig.getDynTexture("corrode"), onCorrodeTextureComplete);
+			GlobalTexture.addTexture(ClientConfig.getDynTexture("corrode"),0, onCorrodeTextureComplete);
 		}
 		
 		private var _corrodeMethodData : MethodData;
@@ -618,11 +618,11 @@ package com.rpgGame.app.manager.shell
 			MainRoleManager.actor.forEachRenderUnit(function (role : BaseRole, render : RenderUnit3D) : void {
 				render.restoreTexture();
 				if ("1" == funcName) {
-					render.setIndependentTexture(ClientConfig.getDynTexture(name));
+					render.setIndependentTexture(ClientConfig.getDynTexture(name),0);
 				} else if ("2" == funcName) {
 					render.setIndependentMatarial(name, name2, name3);
 				} else if ("3" == funcName) {
-					render.addFadeAlpha(ClientConfig.getDynTexture(name));
+					render.addFadeAlpha(ClientConfig.getDynTexture(name),0);
 				} else if ("4" == funcName) {
 					render.setIndependentDiffuseColor(parseInt(name));
 				} else if ("5" == funcName) {

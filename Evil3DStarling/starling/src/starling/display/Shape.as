@@ -28,7 +28,7 @@ package starling.display
 		
 		public function lineStyle(thickness:Number = 1.0,  color:uint = 0, alpha:Number=1.0):void
 		{
-			_lineThickness = thickness;
+			_lineThickness = Math.max(thickness, 1.0);
 			this.beginFill(color, alpha);
 		}
 		

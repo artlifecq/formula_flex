@@ -3,6 +3,8 @@ package feathers.controls.renderers
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
+	import feathers.controls.ButtonState;
+	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
@@ -13,7 +15,7 @@ package feathers.controls.renderers
 	
 	/**
 	 * 默认的列表渲染项 
-	 * 已实现单击选中效果切换
+	 * 已实现单击onTouchTarget/鼠标悬停onTouchOver/鼠标离开onTouchOut等响应处理
 	 * 已实现双击doubleClickFunction回调
 	 * @author wewell@163.com
 	 * 
@@ -21,7 +23,6 @@ package feathers.controls.renderers
 	public class DefaultListItemRenderer extends BaseDefaultListItemRenderer
 	{
 		private static var HELP_POINT:Point =  new Point(0,0);
-		private var _isMouseOver:Boolean;
 		
 		public function DefaultListItemRenderer()
 		{
@@ -51,7 +52,7 @@ package feathers.controls.renderers
 		}
 		
 		/**
-		 *当面板被点击时
+		 *本渲染器鼠标响应
 		 */		
 		override protected function basicButton_touchHandler(e:TouchEvent):void
 		{
@@ -74,11 +75,11 @@ package feathers.controls.renderers
 			t = e.getTouch(this, TouchPhase.HOVER);
 			if (t) 
 			{
-				_isMouseOver = true;
+				onTouchOver(t.target);
 			}
-			else
+			else if(!e.getTouch(this))
 			{
-				_isMouseOver = false;
+				onTouchOut();
 			}
 			
 			super.basicButton_touchHandler(e);
@@ -87,6 +88,13 @@ package feathers.controls.renderers
 		private function onTouchItem(target:DisplayObject):void
 		{
 			onTouchTarget(target);
+			
+			//已被移除
+			if(!this.owner)
+			{
+				return;
+			}
+				
 			
 			//上次选中项
 			var clickedItemRender:DefaultListItemRenderer = this.owner.customSelectedItemRender as DefaultListItemRenderer;
@@ -144,12 +152,6 @@ package feathers.controls.renderers
 		public function set doubleClickFunction(value:Function):void
 		{
 			_doubleClickFun = value;
-			if(_doubleClickFun != null)
-			{
-				Starling.current.nativeStage.addEventListener( MouseEvent.DOUBLE_CLICK, _onDoubleClick);
-			}else{
-				Starling.current.nativeStage.removeEventListener( MouseEvent.DOUBLE_CLICK, _onDoubleClick);
-			}
 		}
 		
 		public function get doubleClickFunction():Function
@@ -162,27 +164,39 @@ package feathers.controls.renderers
 			HELP_POINT.x = Starling.current.nativeStage.mouseX;
 			HELP_POINT.y = Starling.current.nativeStage.mouseY;
 			var mousePoint : Point = this.globalToLocal(HELP_POINT);
-			return  hitTest(mousePoint) && isEnabled;
+			var target:DisplayObject =  hitTest(mousePoint);		
+			return  isEnabled && target != null && target == Starling.current.stage.hitTest(HELP_POINT);
 		}
 		
 		/**
 		 *当子对象被点击后的处理。默认已实现关闭按钮被点击后的处理，关闭按钮名称为"btnClose"或"closeBtn"时生效
 		 *子类可以覆盖此方法以实现特定目标被点击后的处理
 		 */		
-		protected function onTouchTarget(target:DisplayObject):void
-		{
-			
-		}
+		protected function onTouchTarget(target:DisplayObject):void{};
 		
-		
-		protected function set isMouseOver(value:Boolean):void
+		private var mouseIn:Boolean;
+		protected function onTouchOver(target:DisplayObject):void
 		{
-			if(_isMouseOver == value)
+			if(!mouseIn)
 			{
-				return;
+				mouseIn = true;
+				changeState(ButtonState.HOVER);
+				if(_doubleClickFun != null)
+				{
+					Starling.current.nativeStage.addEventListener( MouseEvent.DOUBLE_CLICK, _onDoubleClick);
+				}
 			}
-			_isMouseOver = value;
-		}
+		};
+		
+		protected function onTouchOut():void
+		{	
+			mouseIn = false;
+			changeState(ButtonState.UP);
+			if(_doubleClickFun != null)
+			{
+				Starling.current.nativeStage.removeEventListener( MouseEvent.DOUBLE_CLICK, _onDoubleClick);
+			}
+		};
 		
 		/**
 		 * @private
@@ -194,7 +208,7 @@ package feathers.controls.renderers
 		
 		override public function dispose():void
 		{
-//			this.removeEventListener(starling.events.TouchEvent.TOUCH, onTouch);
+			_doubleClickFun = null;
 			Starling.current.nativeStage.removeEventListener( MouseEvent.DOUBLE_CLICK, _onDoubleClick);
 			super.dispose();
 		}

@@ -11,17 +11,23 @@
 package starling.rendering
 {
     import flash.display3D.Context3DProgramType;
-    import flash.display3D.IndexBuffer3D;
-    import flash.display3D.VertexBuffer3D;
-    import flash.events.Event;
     import flash.geom.Matrix3D;
     import flash.utils.Dictionary;
     import flash.utils.getQualifiedClassName;
     
+    import away3d.arcane;
+    import away3d.core.base.IndexBuffer3DProxy;
+    import away3d.core.base.VertexBuffer3DProxy;
+    import away3d.core.data.ShaderCache;
+    import away3d.core.managers.AGALProgram3DCache;
     import away3d.core.managers.Stage3DProxy;
+    import away3d.events.Event;
+    import away3d.events.Stage3DEvent;
     
     import starling.core.Starling;
     import starling.utils.execute;
+	
+	use namespace arcane;
 
     /** An effect encapsulates all steps of a Stage3D draw operation. It configures the
      *  render context and sets up shader programs as well as index- and vertex-buffers, thus
@@ -102,18 +108,24 @@ package starling.rendering
         public static const VERTEX_FORMAT:VertexDataFormat =
             VertexDataFormat.fromString("position:float2");
 
-        private var _vertexBuffer:VertexBuffer3D;
+        private var _vertexBuffer:VertexBuffer3DProxy;
         private var _vertexBufferSize:int; // in bytes
-        private var _indexBuffer:IndexBuffer3D;
+        private var _indexBuffer:IndexBuffer3DProxy;
         private var _indexBufferSize:int;  // in number of indices
         private var _indexBufferUsesQuadLayout:Boolean;
 
         private var _mvpMatrix3D:Matrix3D;
         private var _onRestore:Function;
         private var _programBaseName:String;
+		
+		
+		//internal use
+		public var useSharedBuffer:Boolean;
 
         // helper objects
         private static var sProgramNameCache:Dictionary = new Dictionary();
+		
+		arcane var _shaderCache:ShaderCache;
 
         /** Creates a new effect. */
         public function Effect()
@@ -122,18 +134,22 @@ package starling.rendering
             _programBaseName = getQualifiedClassName(this);
 
             // Handle lost context (using conventional Flash event for weak listener support)
-            Starling.current.stage3D.addEventListener(Event.CONTEXT3D_CREATE,
-                onContextCreated, false, 0, true);
+			Stage3DProxy.getInstance().addEventListener(Stage3DEvent.CONTEXT3D_RECREATED, onContextCreated);
         }
 
         /** Purges the index- and vertex-buffers. */
         public function dispose():void
         {
-            Starling.current.stage3D.removeEventListener(Event.CONTEXT3D_CREATE, onContextCreated);
+			Stage3DProxy.getInstance().removeEventListener(Event.CONTEXT3D_CREATE, onContextCreated);
             purgeBuffers();
+			
+			if (_shaderCache) {
+				AGALProgram3DCache.getInstance().freeProgram3D(_shaderCache);
+				_shaderCache = null;
+			}
         }
 
-        private function onContextCreated(event:Event):void
+        private function onContextCreated(event:Stage3DEvent):void
         {
             purgeBuffers();
             execute(_onRestore, this);
@@ -144,18 +160,23 @@ package starling.rendering
         {
             // We wrap the dispose calls in a try/catch block to work around a stage3D problem.
             // Since they are not re-used later, that shouldn't have any evil side effects.
-			
-            if (_vertexBuffer && vertexBuffer)
-            {
-                try { Stage3DProxy.disposeVertexBuffer(_vertexBuffer); } catch (e:Error) {}
-                _vertexBuffer = null;
-            }
+			if(!useSharedBuffer)
+			{
+	            if (_vertexBuffer && vertexBuffer)
+	            {
+					_vertexBuffer.dispose();
+	                _vertexBuffer = null;
+	            }
+			}
 
-            if (_indexBuffer && indexBuffer)
-            {
-                try { _indexBuffer.dispose(); } catch (e:Error) {}
-                _indexBuffer = null;
-            }
+			if(!useSharedBuffer)
+			{
+	            if (_indexBuffer && indexBuffer)
+	            {
+	                try { _indexBuffer.dispose(); } catch (e:Error) {}
+	                _indexBuffer = null;
+	            }
+			}
         }
 
         /** Uploads the given index data to the internal index buffer. If the buffer is too
@@ -166,37 +187,47 @@ package starling.rendering
          *                     <code>Context3DBufferUsage</code>. Only used when the method call
          *                     causes the creation of a new index buffer.
          */
-        public function uploadIndexData(indexData:IndexData,
-                                        bufferUsage:String="staticDraw"):void
+        public function uploadIndexData(indexData:IndexData):void
         {
             var numIndices:int = indexData.numIndices;
             var isQuadLayout:Boolean = indexData.useQuadLayout;
             var wasQuadLayout:Boolean = _indexBufferUsesQuadLayout;
 
-            if (_indexBuffer)
-            {
-                if (numIndices <= _indexBufferSize)
-                {
-                    if (!isQuadLayout || !wasQuadLayout)
-                    {
-                        indexData.uploadToIndexBuffer(_indexBuffer);
-                        _indexBufferUsesQuadLayout = isQuadLayout && numIndices == _indexBufferSize;
-                    }
-                }
-                else
-                    purgeBuffers(false, true);
-            }
-            if (_indexBuffer == null)
-            {
-				CONFIG::Starling_Debug
-					{
-						if(Starling.current.showTrace)
-							tracing("[Starling]Effect:createIndexBuffer "," | oldBufferSize", _indexBufferSize, " | newBuffSize", numIndices);
-					}
-                _indexBuffer = indexData.createIndexBuffer(true, bufferUsage);
-                _indexBufferSize = numIndices;
-                _indexBufferUsesQuadLayout = isQuadLayout;
-            }
+			if(useSharedBuffer)
+			{
+				if(isQuadLayout)
+				{
+					_indexBuffer = Starling.current.sharedBufferManager.getProperQuadIndexBuffer(numIndices);
+				}
+				else
+				{
+					_indexBuffer = Starling.current.sharedBufferManager.getProperNormalIndexBufferAndUploadData(numIndices, indexData.rawData)
+				}
+				_indexBufferUsesQuadLayout = isQuadLayout;
+				
+			}
+			else
+			{
+	            if (_indexBuffer)
+	            {
+	                if (numIndices <= _indexBufferSize)
+	                {
+	                    if (!isQuadLayout || !wasQuadLayout)
+	                    {
+	                        indexData.uploadToIndexBuffer(_indexBuffer);
+	                        _indexBufferUsesQuadLayout = isQuadLayout && numIndices == _indexBufferSize;
+	                    }
+	                }
+	                else
+	                    purgeBuffers(false, true);
+	            }
+	            if (_indexBuffer == null)
+	            {
+	                _indexBuffer = indexData.createIndexBuffer(true);
+	                _indexBufferSize = numIndices;
+	                _indexBufferUsesQuadLayout = isQuadLayout;
+	            }
+			}
         }
 
         /** Uploads the given vertex data to the internal vertex buffer. If the buffer is too
@@ -210,28 +241,26 @@ package starling.rendering
         public function uploadVertexData(vertexData:VertexData,
                                          bufferUsage:String="staticDraw"):void
         {
-            if (_vertexBuffer)
-            {
-				CONFIG::Starling_Debug
-					{
-						if(Starling.current.showTrace)
-							tracing("[Starling]Effect:uploadVertexData "," oldBufferSize|newBuffSize", _vertexBufferSize+" | "+vertexData.size);
-					}
-                if (vertexData.size <= _vertexBufferSize)
-                    vertexData.uploadToVertexBuffer(_vertexBuffer);
-                else
-                    purgeBuffers(true, false);
-            }
-            if (_vertexBuffer == null)
-            {
-				CONFIG::Starling_Debug
-					{
-						if(Starling.current.showTrace)
-							tracing("[Starling]Effect:createVertexBuffer ","oldBufferSize|newBuffSize", _vertexBufferSize+" | "+vertexData.size);
-					}
-                _vertexBuffer = vertexData.createVertexBuffer(true, bufferUsage);
-                _vertexBufferSize = vertexData.size;
-            }
+			if(useSharedBuffer)
+			{
+				_vertexBuffer = Starling.current.sharedBufferManager.getProperVertexBuffer(vertexData.numVertices, vertexData.vertexSizeIn32Bits);
+				vertexData.uploadToVertexBuffer(_vertexBuffer);
+			}
+			else
+			{
+	            if (_vertexBuffer)
+	            {
+	                if (vertexData.size <= _vertexBufferSize)
+	                    vertexData.uploadToVertexBuffer(_vertexBuffer);
+	                else
+	                    purgeBuffers(true, false);
+	            }
+	            if (_vertexBuffer == null)
+	            {
+	                _vertexBuffer = vertexData.createVertexBuffer(true, bufferUsage);
+	                _vertexBufferSize = vertexData.size;
+	            }
+			}
         }
 
         // rendering
@@ -260,11 +289,34 @@ package starling.rendering
          *  </ul>
          */
         protected function beforeDraw(stage3DProxy:Stage3DProxy):void
-        {
-            program.activate(stage3DProxy);
-            vertexFormat.setVertexBufferAt(stage3DProxy, 0, vertexBuffer, "position");
+		{
+			updateProgram(stage3DProxy);
+			
+			stage3DProxy.setProgramCache(_shaderCache);
+			
+			vertexFormat.setVertexBufferAt(stage3DProxy, 0, vertexBuffer, "position");
 			stage3DProxy.setProgramConstantsFromMatrix(Context3DProgramType.VERTEX, 0, mvpMatrix3D, true);
-        }
+		}
+		
+		arcane function getVertexCode():String
+		{
+			return "m44 op, va0, vc0\n" + "seq v0, va0, va0\n";
+		}
+		
+		arcane function getFragmentCode():String
+		{
+			return "mov oc, v0";
+		}
+		
+		arcane function updateProgram(stage3DProxy:Stage3DProxy):void
+		{
+			var key:uint = programName;
+			_shaderCache = AGALProgram3DCache.getInstance().getProgram2D(key);
+			if(!_shaderCache)
+			{
+				_shaderCache = AGALProgram3DCache.getInstance().setProgram2D(key, getVertexCode(), getFragmentCode());
+			}
+		}
 
         /** This method is called by <code>render</code>, directly after
          *  <code>context.drawTriangles</code>. Resets vertex buffer attributes.
@@ -272,95 +324,6 @@ package starling.rendering
         protected function afterDraw(stage3DProxy:Stage3DProxy):void
         {
 			stage3DProxy.setVertexBufferAt(0, null);
-        }
-
-        // program management
-
-        /** Creates the program (a combination of vertex- and fragment-shader) used to render
-         *  the effect with the current settings. Override this method in a subclass to create
-         *  your shaders. This method will only be called once; the program is automatically stored
-         *  in the <code>Painter</code> and re-used by all instances of this effect.
-         *
-         *  <p>The basic implementation always outputs pure white.</p>
-         */
-        protected function createProgram():Program
-        {
-            var vertexShader:String = [
-                "m44 op, va0, vc0", // 4x4 matrix transform to output clipspace
-                "seq v0, va0, va0"  // this is a hack that always produces "1"
-            ].join("\n");
-
-            var fragmentShader:String =
-                "mov oc, v0";       // output color: white
-
-            return Program.fromSource(vertexShader, fragmentShader);
-        }
-
-        /** Override this method if the effect requires a different program depending on the
-         *  current settings. Ideally, you do this by creating a bit mask encoding all the options.
-         *  This method is called often, so do not allocate any temporary objects when overriding.
-         *
-         *  @default 0
-         */
-        protected function get programVariantName():uint
-        {
-            return 0;
-        }
-
-        /** Returns the base name for the program.
-         *  @default the fully qualified class name
-         */
-        protected function get programBaseName():String { return _programBaseName; }
-        protected function set programBaseName(value:String):void { _programBaseName = value; }
-
-        /** Returns the full name of the program, which is used to register it at the current
-         *  <code>Painter</code>.
-         *
-         *  <p>The default implementation efficiently combines the program's base and variant
-         *  names (e.g. <code>LightEffect#42</code>). It shouldn't be necessary to override
-         *  this method.</p>
-         */
-        protected function get programName():String
-        {
-            var baseName:String  = this.programBaseName;
-            var variantName:uint = this.programVariantName;
-            var nameCache:Dictionary = sProgramNameCache[baseName];
-
-            if (nameCache == null)
-            {
-                nameCache = new Dictionary();
-                sProgramNameCache[baseName] = nameCache;
-            }
-
-            var name:String = nameCache[variantName];
-
-            if (name == null)
-            {
-                if (variantName) name = baseName + "#" + variantName.toString(16);
-                else             name = baseName;
-
-                nameCache[variantName] = name;
-            }
-
-            return name;
-        }
-
-        /** Returns the current program, either by creating a new one (via
-         *  <code>createProgram</code>) or by getting it from the <code>Painter</code>.
-         *  Do not override this method! Instead, implement <code>createProgram</code>. */
-        protected function get program():Program
-        {
-            var name:String = this.programName;
-            var painter:Painter = Starling.painter;
-            var program:Program = painter.getProgram(name);
-
-            if (program == null)
-            {
-                program = createProgram();
-                painter.registerProgram(name, program);
-            }
-
-            return program;
         }
 
         // properties
@@ -380,15 +343,29 @@ package starling.rendering
         public function set mvpMatrix3D(value:Matrix3D):void { _mvpMatrix3D.copyFrom(value); }
 
         /** The internally used index buffer used on rendering. */
-        protected function get indexBuffer():IndexBuffer3D { return _indexBuffer; }
+        protected function get indexBuffer():IndexBuffer3DProxy { return _indexBuffer; }
 
         /** The current size of the index buffer (in number of indices). */
         protected function get indexBufferSize():int { return _indexBufferSize; }
 
         /** The internally used vertex buffer used on rendering. */
-        protected function get vertexBuffer():VertexBuffer3D { return _vertexBuffer; }
+        protected function get vertexBuffer():VertexBuffer3DProxy { return _vertexBuffer; }
         
         /** The current size of the vertex buffer (in blocks of 32 bits). */
         protected function get vertexBufferSize():int { return _vertexBufferSize; }
+		
+		
+
+		protected function get programVariantName():uint
+		{
+			return 0;
+		}
+		
+		protected function get programBaseName():uint { return ProgramNameID.EFFECT; }
+		
+		protected function get programName():uint
+		{
+			return (programBaseName << 24) | programVariantName;
+		}
     }
 }

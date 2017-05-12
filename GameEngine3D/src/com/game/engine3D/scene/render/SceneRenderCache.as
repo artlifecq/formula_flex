@@ -3,12 +3,12 @@ package com.game.engine3D.scene.render
 	import com.game.engine3D.scene.render.vo.IRenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderResourceData;
 	import com.game.engine3D.scene.render.vo.RenderUnitData3D;
-	import com.game.mainCore.libCore.share.CountShare;
-
+	import com.game.engine3D.vo.share.CountShare;
+	
 	import flash.utils.Dictionary;
-
+	
 	import org.client.mainCore.ds.HashMap;
-
+	
 	/**
 	 *
 	 * 场景渲染缓存
@@ -24,15 +24,14 @@ package com.game.engine3D.scene.render
 		 * key:换装地址
 		 */
 		private static var waitingLoadAvatarsMap : HashMap = new HashMap();
-
-		/**
-		 * 换装计数卸载
-		 */
-		private static var renderResourceDataShare : CountShare = new CountShare(120000);
 		/**
 		 * 渲染单元加载器
 		 */
-		private static var renderUnitLoaderShare : CountShare = new CountShare(60000);
+		private static var renderUnitLoaderShare : CountShare = new CountShare(120000);
+		/**
+		 * 资源数据计数卸载
+		 */
+		private static var renderResourceDataShare : CountShare = new CountShare(60000);
 		/**
 		 * 渲染单元数据
 		 */
@@ -41,16 +40,21 @@ package com.game.engine3D.scene.render
 		 * 最大渲染单元数据数量
 		 */
 		public static var MAX_RENDER_UNIT_DATA_SIZE : int = 1000;
-
-		public static function get countShareCnt() : uint
+		
+		public static function get dataShareCnt() : uint
 		{
 			return renderResourceDataShare.getAllCacheKeyList().length;
 		}
-
+		
+		public static function get loaderShareCnt() : uint
+		{
+			return renderUnitLoaderShare.getAllCacheKeyList().length;
+		}
+		
 		public function SceneRenderCache()
 		{
 		}
-
+		
 		/**
 		 * 安装渲染资源数据
 		 * @param fullSourchPath
@@ -75,7 +79,7 @@ package com.game.engine3D.scene.render
 			resData = renderResourceDataShare.installShareData(sourchPathKey, ru) as RenderResourceData;
 			return resData;
 		}
-
+		
 		/**
 		 * 卸载渲染资源数据
 		 * @param meshSourchPath
@@ -100,7 +104,7 @@ package com.game.engine3D.scene.render
 				}
 			}
 		}
-
+		
 		/**
 		 * 安装渲染资源
 		 * @param fullSourchPath
@@ -124,7 +128,7 @@ package com.game.engine3D.scene.render
 			renderLoader = renderUnitLoaderShare.installShareData(fullSourchPath, resourceData) as RenderUnitLoader;
 			return renderLoader;
 		}
-
+		
 		/**
 		 * 卸载渲染资源
 		 * @param fullSourchPath
@@ -147,7 +151,7 @@ package com.game.engine3D.scene.render
 				}
 			}
 		}
-
+		
 		public static function getRenderUnitData(resourceData : RenderResourceData, type : String, id : Number) : RenderUnitData3D
 		{
 			if (!resourceData)
@@ -163,7 +167,7 @@ package com.game.engine3D.scene.render
 			}
 			return renderUnitData;
 		}
-
+		
 		public static function recycleRenderUnitData(resourceData : RenderResourceData, renderUnitData : RenderUnitData3D) : void
 		{
 			if (!resourceData)
@@ -186,7 +190,7 @@ package com.game.engine3D.scene.render
 			else
 				renderUnitData.dispose();
 		}
-
+		
 		public static function disposeRenderUnitDatas(resourceData : RenderResourceData) : void
 		{
 			if (!resourceData)
@@ -201,17 +205,17 @@ package com.game.engine3D.scene.render
 					renderUnitData.dispose();
 				}
 				datas.length = 0;
-				renderUnitDataPool[resourceData] = null;
-				delete renderUnitDataPool[resourceData];
-
-				if (resourceData.renderMeshLoader)
-				{
-					uninstallRenderRes(resourceData.renderMeshLoader.fullSourchPath, resourceData);
-				}
-				if (resourceData.renderAnimatorLoader)
-				{
-					uninstallRenderRes(resourceData.renderAnimatorLoader.fullSourchPath, resourceData);
-				}
+			}
+			renderUnitDataPool[resourceData] = null;
+			delete renderUnitDataPool[resourceData];
+			
+			if (resourceData.renderMeshLoader)
+			{
+				uninstallRenderRes(resourceData.renderMeshLoader.fullSourchPath, resourceData);
+			}
+			if (resourceData.renderAnimatorLoader)
+			{
+				uninstallRenderRes(resourceData.renderAnimatorLoader.fullSourchPath, resourceData);
 			}
 		}
 	}

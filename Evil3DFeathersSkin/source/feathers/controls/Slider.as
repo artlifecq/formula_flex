@@ -7,6 +7,11 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
+	import flash.events.TimerEvent;
+	import flash.geom.Point;
+	import flash.ui.Keyboard;
+	import flash.utils.Timer;
+	
 	import feathers.core.FeathersControl;
 	import feathers.core.IFeathersControl;
 	import feathers.core.IFocusDisplayObject;
@@ -19,12 +24,7 @@ package feathers.controls
 	import feathers.skins.IStyleProvider;
 	import feathers.utils.math.clamp;
 	import feathers.utils.math.roundToNearest;
-
-	import flash.events.TimerEvent;
-	import flash.geom.Point;
-	import flash.ui.Keyboard;
-	import flash.utils.Timer;
-
+	
 	import starling.display.DisplayObject;
 	import starling.events.Event;
 	import starling.events.KeyboardEvent;
@@ -504,8 +504,19 @@ package feathers.controls
 			this.invalidate(INVALIDATION_FLAG_DATA);
 			if(this.liveDragging || !this.isDragging)
 			{
-				this.dispatchEventWith(Event.CHANGE);
+				if(_dispathValueChangeEvent)
+				{
+					this.dispatchEventWith(Event.CHANGE);
+				}
+				_dispathValueChangeEvent = true;
 			}
+		}
+		
+		private var _dispathValueChangeEvent:Boolean=true;
+		public function setValue(newValue:Number, dispathChangeEvent:Boolean = false):void
+		{
+			_dispathValueChangeEvent = dispathChangeEvent;
+			this.value = newValue;
 		}
 		
 		/**
@@ -2263,10 +2274,17 @@ package feathers.controls
 				this.minimumTrack.height = this.actualHeight - maximumTrackHeight;
 				if(this._trackScaleMode === TrackScaleMode.EXACT_FIT)
 				{
-					this.maximumTrack.x = 0;
-					this.maximumTrack.width = this.actualWidth;
-					this.minimumTrack.x = 0;
-					this.minimumTrack.width = this.actualWidth;
+					var feathersControl:FeathersControl = FeathersControl(maximumTrack);
+					var left:Number = feathersControl.left || 0;
+					var right:Number = feathersControl.right || 0;
+					this.maximumTrack.x = left;
+					this.maximumTrack.width = this.actualWidth - left - right;
+					
+					feathersControl = FeathersControl(minimumTrack);
+					left = feathersControl.left || 0;
+					right = feathersControl.right || 0;
+					this.minimumTrack.x = left;
+					this.minimumTrack.width = this.actualWidth - left - right;
 				}
 				else //directional
 				{
@@ -2300,10 +2318,19 @@ package feathers.controls
 
 				if(this._trackScaleMode === TrackScaleMode.EXACT_FIT)
 				{
-					this.minimumTrack.y = 0;
-					this.minimumTrack.height = this.actualHeight;
-					this.maximumTrack.y = 0;
-					this.maximumTrack.height = this.actualHeight;
+					feathersControl = FeathersControl(minimumTrack);
+					var top:Number = feathersControl.top || 0;
+					var bottom:Number = feathersControl.bottom || 0;
+					
+					this.minimumTrack.y = top;
+					this.minimumTrack.height = this.actualHeight - top - bottom;
+					
+					feathersControl =  FeathersControl(maximumTrack);
+					top = feathersControl.top || 0;
+					bottom = feathersControl.bottom || 0;
+					
+					this.maximumTrack.y = top;
+					this.maximumTrack.height = this.actualHeight - top - bottom;
 				}
 				else //directional
 				{

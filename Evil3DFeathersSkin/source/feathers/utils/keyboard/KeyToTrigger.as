@@ -7,11 +7,11 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.utils.keyboard
 {
+	
 	import feathers.core.IFocusDisplayObject;
 	import feathers.events.FeathersEventType;
-
-	import flash.ui.Keyboard;
-
+	import feathers.themes.GuiTheme;
+	
 	import starling.display.Stage;
 	import starling.events.Event;
 	import starling.events.KeyboardEvent;
@@ -96,7 +96,7 @@ package feathers.utils.keyboard
 		/**
 		 * @private
 		 */
-		protected var _keyCode:uint = Keyboard.SPACE;
+		protected var _keyCode:uint = GuiTheme.BUTTON_TRIGGER_KEY;
 
 		/**
 		 * The key that will trigger the target, when pressed.
@@ -119,7 +119,7 @@ package feathers.utils.keyboard
 		/**
 		 * @private
 		 */
-		protected var _cancelKeyCode:uint = Keyboard.ESCAPE;
+		protected var _cancelKeyCode:uint = GuiTheme.BUTTON_CANCEL_KEY;
 
 		/**
 		 * The key that will cancel the trigger if the key is down.

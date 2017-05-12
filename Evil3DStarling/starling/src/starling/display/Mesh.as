@@ -10,13 +10,16 @@
 
 package starling.display
 {
+    import flash.display.Graphics;
     import flash.geom.Point;
     import flash.geom.Rectangle;
+    import flash.utils.Dictionary;
     
-    import away3d.events.Event;
+    import away3d.log.Log;
     
-    import starling.core.Starling;
     import starling.core.starling_internal;
+    import starling.events.Event;
+    import starling.geom.Polygon;
     import starling.rendering.IndexData;
     import starling.rendering.Painter;
     import starling.rendering.VertexData;
@@ -56,6 +59,7 @@ package starling.display
 
         private static var sDefaultStyle:Class = MeshStyle;
         private static var sDefaultStyleFactory:Function = null;
+		private static var sTotalMesh:int;
 
         /** Creates a new mesh with the given vertices and indices.
          *  If you don't pass a style, an instance of <code>MeshStyle</code> will be created
@@ -70,19 +74,114 @@ package starling.display
             _indexData = indexData;
 
             setStyle(style, false);
+			sTotalMesh++;
+			
+			CONFIG::Mesh2D_Trace
+				{
+					if(!(mesh2DTracedContinaerID in mesh2dTraceMap))
+					{
+						mesh2dTraceMap[mesh2DTracedContinaerID] = 0;
+					}
+					mesh2dTraceMap[mesh2DTracedContinaerID]++;
+					
+					this.addEventListener(starling.events.Event.ADDED_TO_STAGE, onMeshAddedToStage);
+				}
         }
+		
+		CONFIG::Mesh2D_Trace
+			{
+				/**
+				 *已创建但未被添加到容器的mesh将被统计到容器id为0的追踪字典中,防止隐形泄漏 
+				 * 一旦被添加到舞台，则此id将变为最新依附的追踪容器id(id>0)
+				 */				
+				protected var mesh2DTracedContinaerID:int;
+				private function onMeshAddedToStage(e:starling.events.Event):void
+				{
+					var oldTracedId:int = this.mesh2DTracedContinaerID;
+					if(oldTracedId < 1)
+					{
+						mesh2dTraceMap[oldTracedId]--;
+					}
+					
+					var par:DisplayObjectContainer = this.parent;
+					while(par)
+					{
+						if(par.mesh2DTraceContainerID > 0)
+						{
+							this.mesh2DTracedContinaerID = par.mesh2DTraceContainerID;
+							
+							if(!(mesh2DTracedContinaerID in mesh2DTraceNameMap))
+							{
+								mesh2DTraceNameMap[mesh2DTracedContinaerID] = par.mesh2DTraceContinaerName;
+							}
+							break;
+						}
+						par = par.parent;
+					}
+					
+					if(mesh2DTracedContinaerID > 0)
+					{
+						if(oldTracedId == this.mesh2DTracedContinaerID)
+						{
+							//do nothing
+						}else
+						{
+							if(oldTracedId > 0)
+							{
+								mesh2dTraceMap[oldTracedId]--;
+							}
+							
+							if(mesh2DTracedContinaerID in mesh2dTraceMap)
+							{
+								mesh2dTraceMap[mesh2DTracedContinaerID]++;
+							}else
+							{
+								mesh2dTraceMap[mesh2DTracedContinaerID] = 1;
+							}
+						}
+					}
+				}
+				
+				private static var mesh2dTraceMap:Dictionary = new Dictionary();
+				private static var mesh2DTraceNameMap:Dictionary = new Dictionary();
+				public static function reportMesh2dTraceMap():void
+				{
+					mesh2DTraceNameMap[0] = "never_added_to_stage_user_meshs";
+					mesh2DTraceNameMap[-1] = "auto_creat_system_meshBatchs";
+					var name:String;
+					var id:*;
+					var msg:String;
+					Log.debug("-------------------------Mesh2D分模块采样----------------------------");
+					for( id in mesh2dTraceMap)
+					{
+						name = mesh2DTraceNameMap[id];
+						msg = name + " : " + mesh2dTraceMap[id];
+						Log.debug(msg);
+					}
+				}
+			}
+		
+		public static function get numInstance():int
+		{
+			return sTotalMesh;
+		}
 
         /** @inheritDoc */
+		private var _isDisposed:Boolean;
         override public function dispose():void
         {
-            _vertexData.clear();
-            _indexData.clear();
-			if(_stats)
+			if(!_isDisposed)
 			{
-				_stats.dispose();
-				_stats = null;
+				_isDisposed = true;
+				sTotalMesh--;
+				_vertexData.clear();
+				_indexData.clear();
+				CONFIG::Mesh2D_Trace
+					{
+						this.removeEventListener(starling.events.Event.ADDED_TO_STAGE, onMeshAddedToStage);
+						mesh2dTraceMap[mesh2DTracedContinaerID]--;
+					}
 			}
-			texture = null;
             super.dispose();
         }
 
@@ -132,11 +231,13 @@ package starling.display
             if (_style)
             {
                 if (mergeWithPredecessor) meshStyle.copyFrom(_style);
-                _style.setTarget(null);
+                _style.setTarget();
             }
 
             _style = meshStyle;
             _style.setTarget(this, _vertexData, _indexData);
+
+            setRequiresRedraw();
         }
 
         private function createDefaultMeshStyle():MeshStyle
@@ -153,6 +254,20 @@ package starling.display
                 meshStyle = new sDefaultStyle() as MeshStyle;
 
             return meshStyle;
+        }
+
+        /** This method is called whenever the mesh's vertex data was changed.
+         *  The base implementation simply forwards to <code>setRequiresRedraw</code>. */
+        public function setVertexDataChanged():void
+        {
+            setRequiresRedraw();
+        }
+
+        /** This method is called whenever the mesh's index data was changed.
+         *  The base implementation simply forwards to <code>setRequiresRedraw</code>. */
+        public function setIndexDataChanged():void
+        {
+            setRequiresRedraw();
         }
 
         // vertex manipulation
@@ -225,10 +340,10 @@ package starling.display
         /** The style that is used to render the mesh. Styles (which are always subclasses of
          *  <code>MeshStyle</code>) provide a means to completely modify the way a mesh is rendered.
          *  For example, they may add support for color transformations or normal mapping.
-         *
-         *  <p>The setter will simply forward the assignee to <code>setStyle(value)</code>.</p>
+         *  Beware: a style instance may only be used on one mesh at a time.
          *
          *  @default MeshStyle
+         *  @see #setStyle()
          */
         public function get style():MeshStyle { return _style; }
         public function set style(value:MeshStyle):void
@@ -237,22 +352,43 @@ package starling.display
         }
 
         /** The texture that is mapped to the mesh (or <code>null</code>, if there is none). */
-        public function get texture():IStarlingTexture { return _style.texture; }
+        public function get texture():IStarlingTexture 
+		{ 
+			return _style ? _style.texture : null; 
+		}
+		
+		CONFIG::Debug
+			{
+				private var _textureChangeCount:int;
+			}
+		
         public function set texture(value:IStarlingTexture):void 
 		{ 
 			if(_style.texture != value)
 			{
 				if(_style.texture)
 				{
-					_style.texture.referencedMeshCount--;
 					_style.texture.removeEventListener(Event.CHANGE, onTextureChange);
 				}
 				
 				if(value)
 				{
-					value.referencedMeshCount++;
 					value.addEventListener(Event.CHANGE, onTextureChange);
 				}
+				
+				CONFIG::Debug
+					{
+						_textureChangeCount++;
+						if(_textureChangeCount > 100)
+						{
+							_textureChangeCount = 0;
+							var key:String = _style.texture ? _style.texture.key : "" + value ? value.key : "";
+							if(key != null && key.indexOf("SimHei_") == 0)
+							{
+								Log.warn("此对象切换纹理次数超过100次，请检查是否异常:"+key);
+							}
+						}
+					}
 			}
 			
 			_style.texture = value; 
@@ -321,18 +457,33 @@ package starling.display
             sDefaultStyleFactory = value;
         }
 		
+		// static methods
+		
+		/** Creates a mesh from the specified polygon.
+		 *  Vertex positions and indices will be set up according to the polygon;
+		 *  any other vertex attributes (e.g. texture coordinates) need to be set up manually.
+		 */
+		public static function fromPolygon(polygon:Polygon, style:MeshStyle=null):Mesh
+		{
+			var vertexData:VertexData = new VertexData(null, polygon.numVertices);
+			var indexData:IndexData = new IndexData(polygon.numTriangles);
+			
+			polygon.copyToVertexData(vertexData);
+			polygon.triangulate(indexData);
+			
+			return new Mesh(vertexData, indexData, style);
+		}
+		
 		//=================================================================
 		/**
 		 *展示Starling显示对象的三角形网格状态，方便查找问题和性能优化
 		 *@authour wewell
 		 */	
-		private function creatMeshStats():Shape
+		public function drawMeshStats(graphics:Graphics, fromX:int, fromY:int):void
 		{
 			var numVertices:int = vertexData.numVertices;
-			if(numVertices < 4)return null;
+			if(numVertices < 4)return;
 			
-			var canvas:Shape = new Shape();
-			canvas.lineStyle(1,0xFFFFFF,0.5);
 			var p:Point = Pool.getPoint();
 			var posAttrName:String = "position";
 			vertexData.getPoint(0, posAttrName, p);
@@ -347,15 +498,15 @@ package starling.display
 				vertexData.getPoint(v+2, posAttrName, c);
 				vertexData.getPoint(v+3, posAttrName, d);
 				
-				canvas.moveTo(a.x * scaleX, a.y * scaleY);
-				canvas.lineTo(b.x * scaleX, b.y * scaleY);
-				canvas.lineTo(c.x * scaleX, c.y * scaleY);
-				canvas.lineTo(a.x * scaleX, a.y * scaleY);
+				graphics.moveTo(fromX + a.x * scaleX, fromY + a.y * scaleY);
+				graphics.lineTo(fromX + b.x * scaleX, fromY + b.y * scaleY);
+				graphics.lineTo(fromX + c.x * scaleX, fromY + c.y * scaleY);
+				graphics.lineTo(fromX + a.x * scaleX, fromY + a.y * scaleY);
 				
-				canvas.moveTo(d.x * scaleX, d.y * scaleY);
-				canvas.lineTo(c.x * scaleX, c.y * scaleY);
-				canvas.lineTo(b.x * scaleX, b.y * scaleY);
-				canvas.lineTo(d.x * scaleX, d.y * scaleY);
+				graphics.moveTo(fromX + d.x * scaleX, fromY + d.y * scaleY);
+				graphics.lineTo(fromX + c.x * scaleX, fromY + c.y * scaleY);
+				graphics.lineTo(fromX + b.x * scaleX, fromY + b.y * scaleY);
+				graphics.lineTo(fromX + d.x * scaleX, fromY + d.y * scaleY);
 			}
 			
 			Pool.putPoint(p);
@@ -363,19 +514,7 @@ package starling.display
 			Pool.putPoint(b);
 			Pool.putPoint(c);
 			Pool.putPoint(d);
-			
-			canvas.isDebugStats = true;
-			return canvas;
-		}
-		
-		private var _stats:Shape;
-		public function getMeshStats():Shape
-		{
-			if(!Starling.current.showMeshStats || isDebugStats)return null;
-			if(!_stats)_stats = creatMeshStats();
-			return _stats;
 		}
 		//=================================================================
-		
     }
 }

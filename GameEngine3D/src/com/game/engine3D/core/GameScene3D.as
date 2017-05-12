@@ -12,7 +12,7 @@ package com.game.engine3D.core
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.game.engine3D.vo.BaseObjSyncInfo;
 	import com.game.engine3D.vo.BaseRole;
-	import com.game.engine3D.vo.SceneMapData;
+	import com.game.engine3D.vo.MapTextureLoader;
 	
 	import flash.geom.Rectangle;
 	import flash.geom.Vector3D;
@@ -33,6 +33,7 @@ package com.game.engine3D.core
 	import away3d.filters.RingDepthOfFieldFilter3D;
 	import away3d.lights.DirectionalLight;
 	import away3d.lights.LightBase;
+	import away3d.log.Log;
 	import away3d.materials.lightpickers.LightPickerBase;
 	import away3d.materials.lightpickers.StaticLightPicker;
 	import away3d.materials.methods.FogMethod;
@@ -138,7 +139,7 @@ package com.game.engine3D.core
 		
 		private var _disableShadowLevel : Boolean;
 		
-		public function GameScene3D(name : String, view : View3D, viewDistance : int, areaMapLayer : int)
+		public function GameScene3D(name : String, view : View3D, viewDistance : int = 1000, areaMapLayer : int = 0, viewFilter : Function = null)
 		{
 			super();
 			_sceneName = name;
@@ -149,10 +150,10 @@ package com.game.engine3D.core
 			_renderUnitList = new Vector.<RenderUnit3D>();
 			
 			_sceneMapLayer = new SceneMapLayer(this);
-			_sceneMapLayer.mousePickerMovable = true;
+//			_sceneMapLayer.mousePickerMovable = true;
 			addChild(_sceneMapLayer);
 			
-			_sceneRenderLayer = new SceneRenderLayer(this);
+			_sceneRenderLayer = new SceneRenderLayer(this, viewFilter);
 			addChild(_sceneRenderLayer);
 			_shadowMethods = new Vector.<ShadingMethodBase>();
 			
@@ -278,12 +279,14 @@ package com.game.engine3D.core
 			if (_shadowLevel == value)
 				return;
 			_shadowLevel = value;
+			Log.warn("修改ShadowLevel,会导致整个场景的shader重新生成，可能会顿卡!");
+			validateShadow();
 			validateAreaDirectionalLight();
 		}
 		
 		private function validateShadow() : void
 		{
-			if (!_entityAreaDirectionalLight || GlobalConfig.use2DMap)
+			if (!_entityAreaDirectionalLight || GlobalConfig.use2DMap|| _disableShadowLevel)
 			{
 				return;
 			}
@@ -361,6 +364,7 @@ package com.game.engine3D.core
 					break;
 				}
 			}
+			_view.virtualRender(); //预渲染，避免opengl进视野卡顿。
 		}
 		
 		public function get cameraNear() : int
@@ -562,7 +566,7 @@ package com.game.engine3D.core
 			{
 				return;
 			}
-			validateShadow();
+//			validateShadow();
 			
 			_entityAreaDirectionalLight.range = _lightRange;
 			_entityAreaDirectionalLight.numSamples = _lightNumSamples;
@@ -887,7 +891,7 @@ package com.game.engine3D.core
 			return _lightNullObject;
 		}
 		
-		public function get cameraTarget() : ObjectContainer3D
+		public function getCameraTarget() : ObjectContainer3D
 		{
 			if (_cameraTarget == null)
 			{
@@ -933,19 +937,22 @@ package com.game.engine3D.core
 				_sceneAreaDirectionalLight.dispose();
 				_sceneAreaDirectionalLight = null;
 			}
-			if (_mainCharSyncPosLight)
-			{
-				_mainCharSyncPosLight.dispose();
-				_mainCharSyncPosLight = null;
-			}
+			
 			_mainCharSyncLightDirection = null;
 			//停止渲染
 			sceneRender.stopRender();
 			clearAllAreaMap();
 			if (_mainChar)
 			{
-				_mainChar.removeAllSyncInfo();
+				_mainChar.removeSyncInfo(_cameraTarget);
+				_mainChar.removeSyncInfo(_mainCharSyncPosLight);
+//				_mainChar.removeAllSyncInfo();
 				_mainChar.avatar.lightPicker = null;
+			}
+			if (_mainCharSyncPosLight)
+			{
+				_mainCharSyncPosLight.dispose();
+				_mainCharSyncPosLight = null;
 			}
 			_sceneMapLayer.clear();
 			
@@ -1008,11 +1015,11 @@ package com.game.engine3D.core
 		 * @param mapDataCompleteHandler
 		 *
 		 */
-		public function switchScene(mapUrl : String, completeHandler : Function = null) : void
+		public function switchScene(mapUrl : String, completeHandler : Function = null, priority : int = 100) : void
 		{
 			_isLoading = true;
 			var gameScene3D : GameScene3D = this;
-			_sceneMapLayer.loadMap(mapUrl, onMapComplete);
+			_sceneMapLayer.loadMap(mapUrl, onMapComplete, null, null, priority);
 			//地图配置加载完毕
 			function onMapComplete(layer : SceneMapLayer) : void
 			{
@@ -1038,9 +1045,9 @@ package com.game.engine3D.core
 				_sceneAreaDirectionalLight = _sceneMapLayer.getObj(SCENE_AREA_DIRECTIONAL_LIGHT_NAME) as DirectionalLight;
 				if (!_sceneAreaDirectionalLight)
 					_sceneAreaDirectionalLight = _entityAreaDirectionalLight;
-				validateAreaDirectionalLight();
+//				validateAreaDirectionalLight();
 				//开始渲染
-				sceneRender.startRender(true);
+				sceneRender.startRender();
 				var baseObjList : Array = _sceneObjMap.getValues();
 				for (var i : int = baseObjList.length - 1; i > 0; i--)
 				{
@@ -1061,7 +1068,7 @@ package com.game.engine3D.core
 				
 				if (_mainChar)
 				{
-					_mainChar.addSyncInfo(new BaseObjSyncInfo(cameraTarget, true));
+					_mainChar.addSyncInfo(new BaseObjSyncInfo(getCameraTarget(), true));
 					
 					_mainCharSyncPosLight = _sceneMapLayer.getObj(MAIN_CHAR_SYNC_POS_LIGHT_NAME) as LightBase;
 					if (_mainCharSyncPosLight)
@@ -1080,7 +1087,8 @@ package com.game.engine3D.core
 						areaMap.setBounds(layer.district.min, layer.district.max);
 					}
 				}
-//				view.virtualRender(); //预渲染，避免opengl进视野卡顿。
+				validateShadow();
+				validateAreaDirectionalLight();
 				_isLoading = false;
 				if (completeHandler != null)
 					completeHandler(gameScene3D);
@@ -1091,7 +1099,7 @@ package com.game.engine3D.core
 		{
 			var gameScene3D : GameScene3D = this;
 			_sceneMapLayer.loadMiniMap(mapName, miniMapUrl, rect, onMiniMapComplete);
-			function onMiniMapComplete(sceneMapData : SceneMapData) : void
+			function onMiniMapComplete(loader : MapTextureLoader) : void
 			{
 				if (completeHandler != null)
 					completeHandler(gameScene3D);
@@ -1102,7 +1110,7 @@ package com.game.engine3D.core
 		{
 			var gameScene3D : GameScene3D = this;
 			_sceneMapLayer.loadRadarMap(mapName, radarMapUrl, rect, onRadarMapComplete);
-			function onRadarMapComplete(sceneMapData : SceneMapData) : void
+			function onRadarMapComplete(loader : MapTextureLoader) : void
 			{
 				if (completeHandler != null)
 					completeHandler(gameScene3D);

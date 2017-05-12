@@ -45,13 +45,14 @@ package com.game.engine2D.core
 			{
 				var stage3DProxy:Stage3DProxy = Stage3DLayerManager.stage3DProxy;
 				//避免锁屏恢复刚好加载完资源创建createTexture
-				if (stage3DProxy && stage3DProxy.driverInfo == "Disposed")
+				if (stage3DProxy && stage3DProxy.recoverFromDisposal())
+					getTextureForStage3D(stage3DProxy);
+				else 
 					return false;
-				getTextureForStage3D(stage3DProxy);
 			}
 			return _isReady;
 		}
-
+		
 		public function get atfData():ATFByteData
 		{
 			return _atfData;
@@ -98,14 +99,7 @@ package com.game.engine2D.core
 		override protected function uploadContent(texture:TextureBase):void
 		{
 			_isReady = !_atfData.isAsync;
-			try
-			{
-				super.uploadContent(texture);
-			}
-			catch(e:Error)
-			{
-				trace("zatf贴图上传出错：",_path, e.message);
-			}
+			super.uploadContent(texture);
 		}
 		
 		override public function invalidateContent():void
@@ -127,7 +121,7 @@ package com.game.engine2D.core
 			_texture = null;
 			_isReady = false;
 		}
-
+		
 		/** 释放Texture对象  */
 		private function disposeTexture():void
 		{

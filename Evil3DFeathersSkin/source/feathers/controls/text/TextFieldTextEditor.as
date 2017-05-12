@@ -51,7 +51,6 @@ package feathers.controls.text
 	import starling.textures.ConcreteTexture;
 	import starling.textures.IStarlingTexture;
 	import starling.textures.TextureFactory;
-	import starling.utils.DynamicFont;
 	import starling.utils.MathUtil;
 	import starling.utils.MatrixUtil;
 	import starling.utils.Pool;
@@ -562,12 +561,12 @@ package feathers.controls.text
 		
 		private function setTextFormatProperty(name:String, value:*):void
 		{
-			if(!textFormat)
+			if(!_textFormat)
 			{
-				textFormat = new TextFormat(mFontName,mFontSize,mColor);
-			}else{
-				textFormat[name] = value;
+				_textFormat = new TextFormat(mFontName,mFontSize,mColor);
 			}
+			_textFormat[name] = value;
+			
 			_previousTextFormat = null;
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
@@ -2108,7 +2107,7 @@ package feathers.controls.text
 				//text format has been specified
 				if(!this._textFormat)
 				{
-					this._textFormat = new TextFormat(Fontter.DEFAULT_FONT_NAME, Fontter.DEFAULT_FONT_SIZE, Fontter.DEFAULT_FONT_COLOR);
+					this._textFormat = Fontter.creatDefaultFontTextFormat();
 				}
 				textFormat = this._textFormat;
 			}

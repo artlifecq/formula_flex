@@ -192,16 +192,12 @@ package com.game.engine3D.scene.render.vo
 		
 		private function addRootElement(element : ObjectContainer3D) : void
 		{
-			if (element is CompositeMesh)
-			{
-				//(element as CompositeMesh).overrideMaterialProps = _overrideMaterialProps;
-			}
-			else if (element is SparticleMesh)
+			if (element is SparticleMesh)
 			{
 				_sparticleMeshByName[element.name] = element;
 				_sparticleMeshes.push(SparticleMesh(element));
 			}
-			else if (element is Mesh)
+			else if (element is Mesh) //CompositeMesh,Mesh//
 			{
 				//(element as Mesh).overrideMaterialProps = _overrideMaterialProps;
 				_meshByName[element.name] = element;
@@ -864,20 +860,35 @@ package com.game.engine3D.scene.render.vo
 		
 		private function validateMeshMeterials(mesh : Mesh) : void
 		{
+			if (!mesh)
+			{
+				return;
+			}
+			if (!_targetMeterialMap)
+			{
+				return;
+			}
 			var subMeshes : Vector.<SubMesh> = mesh.subMeshes;
+			if (!subMeshes)
+			{
+				return;
+			}
 			var subMaterial : MaterialBase;
 			var material : MaterialBase;
 			var subLen : int = subMeshes.length;
 			for (var i : int = 0; i < subLen; i++)
 			{
 				var subMesh : SubMesh = subMeshes[i];
-				material = subMesh.material;
-				var materialData : MaterialData = _targetMeterialMap[getUnitMaterialName(material.name)]
-				subMaterial = materialData.material;
-				if (subMaterial)
+				if (subMesh)
 				{
-					subMesh.material = subMaterial;
-					//subMaterial.depthCompareMode = _depthCompareMode;//暂时不用了，过段时间删掉。
+					material = subMesh.material;
+					var materialData : MaterialData = material ? _targetMeterialMap[getUnitMaterialName(material.name)] : null;
+					subMaterial = materialData ? materialData.material : null;
+					if (subMaterial)
+					{
+						subMesh.material = subMaterial;
+						//subMaterial.depthCompareMode = _depthCompareMode;//暂时不用了，过段时间删掉。
+					}
 				}
 			}
 		}
@@ -966,14 +977,14 @@ package com.game.engine3D.scene.render.vo
 			}
 		}
 		
-		public function setIndependentTexture(url : String, materialName : String = null) : void
+		public function setIndependentTexture(url : String, priority : int = 0, materialName : String = null) : void
 		{
 			if (_textureUrl == url)
 				return;
 			unloadIndependentTexture();
 			_textureUrl = url;
 			_independentMaterialName = materialName;
-			GlobalTexture.addTexture(_textureUrl, onIndependentTextureComplete);
+			GlobalTexture.addTexture(_textureUrl, priority, onIndependentTextureComplete);
 		}
 		
 		private function onIndependentTextureComplete(globalTexture : GlobalTexture) : void
@@ -1357,7 +1368,7 @@ package com.game.engine3D.scene.render.vo
 			return _fadeAlphaMethodData;
 		}
 		
-		public function addFadeAlpha(url : String, rect : FadeAlphaRectData, onFadeAlphaValidate : Function) : void
+		public function addFadeAlpha(url : String, priority : int, rect : FadeAlphaRectData, onFadeAlphaValidate : Function) : void
 		{
 			if (!url)
 				return;
@@ -1372,7 +1383,7 @@ package com.game.engine3D.scene.render.vo
 			_fadeAlphaUrl = url;
 			_fadeAlphaRect = rect;
 			_onFadeAlphaValidate = onFadeAlphaValidate;
-			GlobalTexture.addTexture(_fadeAlphaUrl, onFadeAlphaTextureComplete);
+			GlobalTexture.addTexture(_fadeAlphaUrl, priority, onFadeAlphaTextureComplete);
 		}
 		
 		public function setFadeAlphaRect(rect : FadeAlphaRectData) : void

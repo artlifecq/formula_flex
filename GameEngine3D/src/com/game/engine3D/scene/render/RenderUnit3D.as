@@ -34,7 +34,6 @@ package com.game.engine3D.scene.render
 	import away3d.animators.IAnimator;
 	import away3d.animators.IAnimatorOwner;
 	import away3d.animators.SkeletonAnimator;
-	import away3d.animators.transitions.IAnimationTransition;
 	import away3d.cameras.Camera3D;
 	import away3d.cameras.iCamera3DAnimator;
 	import away3d.containers.ObjectContainer3D;
@@ -82,7 +81,7 @@ package com.game.engine3D.scene.render
 
 		public static function recycle(ru : RenderUnit3D) : void
 		{
-			if (!ru)
+			if (!ru || ru.isDisposed)
 				return;
 			_cnt--;
 			//利用池回收RenderUnit
@@ -105,6 +104,11 @@ package com.game.engine3D.scene.render
 		}
 
 		public static var VISIBLE_NEED_ASYNC_LOADED : Boolean = false;
+		
+		/**
+		 * 单次时的最大持续时间
+		 */
+		public static var ONCE_MAX_DURATION_TIME : int = 10000;
 		
 		private static var pickDummyMaterial : TextureMaterial = null;
 
@@ -157,7 +161,7 @@ package com.game.engine3D.scene.render
 		
 		private var _secondStatusGetter : Function = null;
 		
-		private var _animationTransition : IAnimationTransition;
+		private var _animationTransitionTime : Number = 0;
 		/** 动作开始时间 **/
 		private var _playToTime : int = 0;
 		/**
@@ -180,6 +184,10 @@ package com.game.engine3D.scene.render
 		 * 禁用加载资源逝去时间
 		 */
 		private var _disableLoadResPastTime : Boolean;
+		/**
+		 * 禁用单次时的最大持续
+		 */
+		private var _disableOnceMaxDuration : Boolean;
 		private var _animateSpeed : Number;
 		/** 玻璃效果 **/
 		private var _entityGlass : Boolean;
@@ -232,9 +240,11 @@ package com.game.engine3D.scene.render
 		private var _useLight : Boolean;
 		private var _useVolume : Boolean;
 		private var _fadeAlphaUrl : String;
+		private var _fadeAlphaPriority : int;
 		private var _fadeAlphaRect : FadeAlphaRectData;
 		private var _independentMaterialName : String;
 		private var _textureUrl : String;
+		private var _texturePriority : int;
 		private var _blendMaterialName : String;
 		private var _blendMaskUrl : String;
 		private var _blendUrl : String;
@@ -872,15 +882,11 @@ package com.game.engine3D.scene.render
 			{
 				for each (obj in _rootObj3ds)
 				{
-					if (obj is CompositeMesh)
-					{
-						validateMeshEffect(CompositeMesh(obj));
-					}
-					else if (obj is SparticleMesh)
+					if (obj is SparticleMesh)
 					{
 						validateSparticleMeshEffect(SparticleMesh(obj));
 					}
-					else if (obj is Mesh)
+					else if (obj is Mesh) //CompositeMesh,Mesh//
 					{
 						validateMeshEffect(Mesh(obj));
 					}
@@ -1269,15 +1275,15 @@ package com.game.engine3D.scene.render
 			var offsetTime : Number = NaN;
 			if (_playing)
 			{
-				offsetTime = int(_currDurationTime) % _totalDuration;
+				offsetTime = uint(_currDurationTime) % _totalDuration;
 			}
 			else if (_playToTime > -1)
 			{
 				offsetTime = _playToTime;
-				if (offsetTime > _totalDuration)
-				{
-					offsetTime = _totalDuration;
-				}
+			}
+			if (offsetTime > _totalDuration)
+			{
+				offsetTime = _totalDuration;
 			}
 			var activeStatus : String = null;
 			var currAnimator : AnimatorBase;
@@ -1286,6 +1292,7 @@ package com.game.engine3D.scene.render
 				for each (var element : ObjectContainer3D in _drawElements)
 				{
 					currAnimator = null;
+					var childAnimatOffsetTime : Number = NaN;
 					if (element is IAnimatorOwner)
 					{
 						currAnimator = (element as IAnimatorOwner).animator as AnimatorBase;
@@ -1373,7 +1380,7 @@ package com.game.engine3D.scene.render
 									}
 									if (activeStatus)
 									{
-										(currAnimator as SkeletonAnimator).play(activeStatus, _animationTransition, offsetTime);
+										(currAnimator as SkeletonAnimator).play(activeStatus, _animationTransitionTime, offsetTime);
 										trace("====================================\t"+currAnimator.name + "\t动作：\t" + activeStatus);
 									}
 									else
@@ -1430,12 +1437,10 @@ package com.game.engine3D.scene.render
 										{
 											currAnimator.start(0);
 										}
-										validateChildrenAnimation(element);
 									}
 									else
 									{
 										currAnimator.stop();
-										validateChildrenAnimation(element);
 									}
 									currAnimator.playbackSpeed = 1;
 								}
@@ -1444,7 +1449,6 @@ package com.game.engine3D.scene.render
 									if (_isRendering && _visible && _isInViewDistance)
 									{
 										currAnimator.start(offsetTime);
-										validateChildrenAnimation(element, offsetTime);
 										if (element.visible)
 										{
 											if (_playing)
@@ -1466,19 +1470,16 @@ package com.game.engine3D.scene.render
 											else
 											{
 												currAnimator.stop();
-												validateChildrenAnimation(element);
 											}
 										}
 										else
 										{
 											currAnimator.stop();
-											validateChildrenAnimation(element);
 										}
 									}
 									else
 									{
 										currAnimator.stop();
-										validateChildrenAnimation(element);
 									}
 									currAnimator.playbackSpeed = _animateSpeed;
 									if (!_animator)
@@ -1486,10 +1487,12 @@ package com.game.engine3D.scene.render
 										_animator = currAnimator;
 										_totalDuration = _animator.duration;
 									}
+									childAnimatOffsetTime = offsetTime;
 								}
 							}
 						}
 					}
+					validateChildrenAnimation(element, childAnimatOffsetTime);
 				}
 			}
 			if (_animatorElements)
@@ -1525,7 +1528,7 @@ package com.game.engine3D.scene.render
 								}
 								if (activeStatus)
 								{
-									(currAnimator as SkeletonAnimator).play(activeStatus, _animationTransition, offsetTime);
+									(currAnimator as SkeletonAnimator).play(activeStatus, _animationTransitionTime, offsetTime);
 								}
 								else
 								{
@@ -1592,6 +1595,7 @@ package com.game.engine3D.scene.render
 							_totalDuration = _animator.duration;
 						}
 					}
+					validateChildrenAnimation(animatElement);
 				}
 			}
 			
@@ -1725,7 +1729,7 @@ package com.game.engine3D.scene.render
 			_renderUnitData.setMethods(_methodDatas);
 			if (_textureUrl)
 			{
-				_renderUnitData.setIndependentTexture(_textureUrl, _independentMaterialName);
+				_renderUnitData.setIndependentTexture(_textureUrl, _texturePriority, _independentMaterialName);
 			}
 			if (_blendMaskUrl)
 			{
@@ -1742,19 +1746,20 @@ package com.game.engine3D.scene.render
 			}
 			if (_fadeAlphaUrl)
 			{
-				_renderUnitData.addFadeAlpha(_fadeAlphaUrl, _fadeAlphaRect, validateGraphic);
+				_renderUnitData.addFadeAlpha(_fadeAlphaUrl, _fadeAlphaPriority, _fadeAlphaRect, validateGraphic);
 				validateGraphic();
 			}
-			//_renderUnitData.validateMeterials();
+			//_renderUnitData.validateMeterials();//不需要了
 		}
-
-		public function setIndependentTexture(url : String, materialName : String = null) : void
+		
+		public function setIndependentTexture(url : String, priority : int, materialName : String = null) : void
 		{
 			_textureUrl = url;
+			_texturePriority = priority;
 			_independentMaterialName = materialName;
 			if (_renderUnitData)
 			{
-				_renderUnitData.setIndependentTexture(url, materialName);
+				_renderUnitData.setIndependentTexture(_textureUrl, _texturePriority, _independentMaterialName);
 			}
 		}
 		
@@ -1781,6 +1786,7 @@ package com.game.engine3D.scene.render
 				_renderUnitData.restoreTexture();
 			}
 			_textureUrl = null;
+			_texturePriority = 0;
 			_independentMaterialName = null;
 		}
 
@@ -1824,21 +1830,22 @@ package com.game.engine3D.scene.render
 			}
 		}
 
-		public function addFadeAlpha(url : String, rect : FadeAlphaRectData = null) : void
+		public function addFadeAlpha(url : String, priority : int, rect : FadeAlphaRectData = null) : void
 		{
 			if (!url)
 				return;
 			if (_fadeAlphaUrl == url)
 				return;
 			_fadeAlphaUrl = url;
+			_fadeAlphaPriority = priority;
 			_fadeAlphaRect = rect;
 			if (_renderUnitData)
 			{
-				_renderUnitData.addFadeAlpha(url, rect, validateGraphic);
+				_renderUnitData.addFadeAlpha(_fadeAlphaUrl, _fadeAlphaPriority, _fadeAlphaRect, validateGraphic);
 				validateGraphic();
 			}
 		}
-
+		
 		public function removeFadeAlpha() : void
 		{
 			if (_renderUnitData)
@@ -1846,6 +1853,7 @@ package com.game.engine3D.scene.render
 				_renderUnitData.removeFadeAlpha();
 			}
 			_fadeAlphaUrl = null;
+			_fadeAlphaPriority = 0;
 			_fadeAlphaRect = null;
 		}
 
@@ -2155,17 +2163,17 @@ package com.game.engine3D.scene.render
 					removeUnitChildFromList(childData.renderUnit);
 				}
 			}
-			_waitAddUnitList.length = 0;
+//			_waitAddUnitList.length = 0;
 		}
 
-		private function addWaitRenderUnitChild(childData : RenderUnitChild) : void
-		{
-			var index : int = _waitAddUnitList.indexOf(childData);
-			if (index < 0)
-			{
-				_waitAddUnitList.push(childData);
-			}
-		}
+//		private function addWaitRenderUnitChild(childData : RenderUnitChild) : void
+//		{
+//			var index : int = _waitAddUnitList.indexOf(childData);
+//			if (index < 0)
+//			{
+//				_waitAddUnitList.push(childData);
+//			}
+//		}
 
 		private function addChildDataToList(childData : RenderUnitChild) : void
 		{
@@ -2197,10 +2205,6 @@ package com.game.engine3D.scene.render
 			{
 				doWaitAddBone(childData);
 			}
-			else
-			{
-				addWaitRenderUnitChild(childData);
-			}
 		}
 
 		/**
@@ -2228,10 +2232,6 @@ package com.game.engine3D.scene.render
 			{
 				doWaitAddBone(childData);
 			}
-			else
-			{
-				addWaitRenderUnitChild(childData);
-			}
 		}
 
 		public function addUnitAtBone(ru : RenderUnit3D, boneName : String) : void
@@ -2251,10 +2251,6 @@ package com.game.engine3D.scene.render
 			if (resReady)
 			{
 				doWaitAddBone(childData);
-			}
-			else
-			{
-				addWaitRenderUnitChild(childData);
 			}
 		}
 
@@ -2331,10 +2327,6 @@ package com.game.engine3D.scene.render
 
 		private function doWaitAddBone(childData : RenderUnitChild) : void
 		{
-			if(childData.renderUnit.type == "weapon_effect")
-			{
-				trace(1);
-			}
 			if (childData.compositeIndex > -1)
 			{
 				if (_animatorElements && childData.compositeIndex < _animatorElements.length)
@@ -2404,10 +2396,6 @@ package com.game.engine3D.scene.render
 			{
 				doWaitAddChild(childData);
 			}
-			else
-			{
-				addWaitRenderUnitChild(childData);
-			}
 		}
 		
 		private function doWaitAddChild(childData : RenderUnitChild) : void
@@ -2456,10 +2444,6 @@ package com.game.engine3D.scene.render
 			if (resReady)
 			{
 				doWaitAddUnit(childData);
-			}
-			else
-			{
-				addWaitRenderUnitChild(childData);
 			}
 		}
 
@@ -2527,17 +2511,17 @@ package com.game.engine3D.scene.render
 		{
 			if (!ru)
 				return;
-			var childData : RenderUnitChild;
-			var len : int = _waitAddUnitList.length;
-			for (var i : int = len - 1; i >= 0; i--)
-			{
-				childData = _waitAddUnitList[i];
-				if (childData.renderUnit == ru)
-				{
-					_waitAddUnitList.splice(i, 1);
-					break;
-				}
-			}
+//			var childData : RenderUnitChild;
+//			var len : int = _waitAddUnitList.length;
+//			for (var i : int = len - 1; i >= 0; i--)
+//			{
+//				childData = _waitAddUnitList[i];
+//				if (childData.renderUnit == ru)
+//				{
+//					_waitAddUnitList.splice(i, 1);
+//					break;
+//				}
+//			}
 			removeUnitChildFromList(ru);
 		}
 
@@ -2576,7 +2560,7 @@ package com.game.engine3D.scene.render
 					childData.renderUnit.removeAddedCallBack(doAddCompositeUnit);
 					childData.renderUnit.removeAddedCallBack(doSetUnitChildMethods);
 					childData.renderUnit.removeRemovedCallBack(doUnitChildRemoved);
-					childData.renderUnit.restoreAllChildUnitToParent();
+					childData.renderUnit.restoreAllChildUnits();
 				}
 				_currChildUnitList.splice(index, 1);
 				childData.destroy();
@@ -2618,22 +2602,17 @@ package com.game.engine3D.scene.render
 		/**
 		 * 设置动作状态，且开始播放动作，播放的开始时间为参数time
 		 * @param status
-		 * @param transition "如：new CrossfadeTransition(0.2)"
+		 * @param transition "如：0.2"
 		 * @param time
 		 * @param animateSpeed
 		 *
 		 */
-		public function setStatus(status : String, transition : IAnimationTransition = null, time : int = 0, animateSpeed : Number = 1) : void
+		public function setStatus(status : String, transitionTime : Number = 0, time : int = 0, animateSpeed : Number = 1) : void
 		{
 			if (!_currentStatus)
-				transition = null;
-			//设置状态
-//			if (_secondStatusGetter == null)
-//				_currentStatus = status;
-//			else
-//				_currentStatus = _secondStatusGetter(status);
+				transitionTime = 0;
 			_currentStatus = status;
-			_animationTransition = transition;
+			_animationTransitionTime = transitionTime;
 			play(time, animateSpeed);
 		}
 
@@ -2643,6 +2622,7 @@ package com.game.engine3D.scene.render
 			_playCount = 0;
 			_playComplete = false;
 			_playInited = true;
+			_currDurationTime = 0;
 			_playToTime = time;
 			if (_playToTime > -1)
 			{
@@ -2697,7 +2677,7 @@ package com.game.engine3D.scene.render
 					_renderResourceData.setResErrorCallBack(onRenderResourceDataError);
 					if (!_renderResourceData.isLoading)
 					{
-						_renderResourceData.loadSource(_renderParamData.sourcePath, _renderParamData.animatorSourchPath);
+						_renderResourceData.loadSource(_renderParamData.sourcePath, _renderParamData.animatorSourchPath, _renderParamData.priority);
 					}
 				}
 			}
@@ -2727,7 +2707,7 @@ package com.game.engine3D.scene.render
 						_nextRenderResourceData.setResErrorCallBack(onNextRenderResourceDataError);
 						if (!_nextRenderResourceData.isLoading)
 						{
-							_nextRenderResourceData.loadSource(_nextRenderParamData.sourcePath, _nextRenderParamData.animatorSourchPath);
+							_nextRenderResourceData.loadSource(_nextRenderParamData.sourcePath, _nextRenderParamData.animatorSourchPath, _nextRenderParamData.priority);
 						}
 					}
 				}
@@ -2839,9 +2819,9 @@ package com.game.engine3D.scene.render
 			_playToTime = 0;
 			_completeNotInView = false;
 			_disableLoadResPastTime = false;
+			_disableOnceMaxDuration = false;
 			_animateSpeed = 1;
 			_animator = null;
-			_animationTransition = null;
 			_shareMaterials = true;
 			_lightPicker = null;
 			_useLight = false;
@@ -2870,9 +2850,11 @@ package com.game.engine3D.scene.render
 			_softOutlineData = null;
 			_independentColorTransform = new ColorTransform();
 			_fadeAlphaUrl = null;
+			_fadeAlphaPriority = 0;
 			_fadeAlphaRect = null;
 			_independentMaterialName = null;
 			_textureUrl = null;
+			_texturePriority = 0;
 			_blendMaterialName = null;
 			_blendMaskUrl = null;
 			_blendUrl = null;
@@ -2943,7 +2925,7 @@ package com.game.engine3D.scene.render
 		{
 			if (!info)
 				return;
-			setStatus(info.status, null, info.time, info.animateSpeed);
+			setStatus(info.status, 0, info.time, info.animateSpeed);
 			if (!info.playing)
 			{
 				stop(info.time);
@@ -3038,25 +3020,24 @@ package com.game.engine3D.scene.render
 			_blendBias = 0;
 			_blendMaterialName = null;
 		}
-
-		public function restoreAllChildUnitToParent(parent : ObjectContainer3D = null) : void
+		
+		public function restoreAllChildUnits() : void
 		{
-			if (!_currChildUnitList)
+			if (_currChildUnitList)
 			{
-				return;
-			}
-			for each (var childData : RenderUnitChild in _currChildUnitList)
-			{
-				if (childData.renderUnit && childData.renderUnit.usable)
+				for each (var childData : RenderUnitChild in _currChildUnitList)
 				{
-					childData.renderUnit.removeAddedCallBack(doAddCompositeUnit);
-					childData.renderUnit.removeAddedCallBack(doSetUnitChildMethods);
-					childData.renderUnit.removeRemovedCallBack(doUnitChildRemoved);
-					childData.renderUnit.restoreElementsParent(this, parent);
+					if (childData.renderUnit && childData.renderUnit.usable)
+					{
+						childData.renderUnit.removeAddedCallBack(doAddCompositeUnit);
+						childData.renderUnit.removeAddedCallBack(doSetUnitChildMethods);
+						childData.renderUnit.removeRemovedCallBack(doUnitChildRemoved);
+						childData.renderUnit.restoreElementsParent(this, parent);
+					}
+					childData.destroy();
 				}
-				childData.destroy();
+				_currChildUnitList.length = 0;
 			}
-			_currChildUnitList.length = 0;
 			
 			if (_drawElements)
 			{
@@ -3076,8 +3057,47 @@ package com.game.engine3D.scene.render
 				}
 			}
 			_compositeAMesh = null;
-			this.parent = parent;
 		}
+
+//		public function restoreAllChildUnitToParent(parent : ObjectContainer3D = null) : void
+//		{
+//			if (!_currChildUnitList)
+//			{
+//				return;
+//			}
+//			for each (var childData : RenderUnitChild in _currChildUnitList)
+//			{
+//				if (childData.renderUnit && childData.renderUnit.usable)
+//				{
+//					childData.renderUnit.removeAddedCallBack(doAddCompositeUnit);
+//					childData.renderUnit.removeAddedCallBack(doSetUnitChildMethods);
+//					childData.renderUnit.removeRemovedCallBack(doUnitChildRemoved);
+//					childData.renderUnit.restoreElementsParent(this, parent);
+//				}
+//				childData.destroy();
+//			}
+//			_currChildUnitList.length = 0;
+//			
+//			if (_drawElements)
+//			{
+//				for each (var element : ObjectContainer3D in _drawElements)
+//				{
+//					if (!_renderResourceData.isSkinMesh || !(element is Mesh))
+//					{
+//						element.hookingJointName = null;
+//						_graphicDis.addChild(element);
+//					}
+//					if (_compositeAMesh && (element is Mesh))
+//					{
+//						var index : int = _compositeAMesh.getUnitIndex(Mesh(element));
+//						if (index > -1)
+//							_compositeAMesh.removeUnitByIndex(index);
+//					}
+//				}
+//			}
+//			_compositeAMesh = null;
+//			this.parent = parent;
+//		}
 
 		protected function restoreElementsParent(parentUnit : RenderUnit3D, parent : ObjectContainer3D) : void
 		{
@@ -3490,6 +3510,16 @@ package com.game.engine3D.scene.render
 			_disableLoadResPastTime = value;
 		}
 		
+		/**
+		 * 禁用单次时最大持续
+		 * @param value
+		 *
+		 */
+		public function set disableOnceMaxDuration(value : Boolean) : void
+		{
+			_disableOnceMaxDuration = value;
+		}
+		
 		override public function run(gapTm : uint) : void
 		{
 			super.run(gapTm);
@@ -3507,14 +3537,31 @@ package com.game.engine3D.scene.render
 					{
 						return;
 					}
-					_playCount = _playCount + int(_currDurationTime / _totalDuration);
-					if (_repeat != 0 && _playCount >= _repeat) //非无限循环
+					_playCount = _totalDuration > 0 ? int(_currDurationTime / _totalDuration) : 0;
+					if (_repeat == 0)
 					{
-						callStop();
+						if (_lifecycle > 0 && _playDuration >= _lifecycle)
+						{
+							callStop();
+						}
 					}
-					if (!_playComplete && _lifecycle > 0 && _playDuration >= _lifecycle)
+					else if (_repeat == 1)
 					{
-						callStop();
+						if (_playCount >= _repeat)
+						{
+							callStop();
+						}
+						else if (!_disableOnceMaxDuration && _currDurationTime >= ONCE_MAX_DURATION_TIME)
+						{
+							callStop();
+						}
+					}
+					else //非无限循环
+					{
+						if (_playCount >= _repeat)
+						{
+							callStop();
+						}
 					}
                     if (_playing && _registeredCamera && _registeredCamera.camera3DAnimators.length > 0) {
                         CameraFrontController.screenVibration();
@@ -3676,7 +3723,7 @@ package com.game.engine3D.scene.render
 					delete _zOffsetByName[name];
 				}
 			}
-			_waitAddUnitList.length = 0;
+//			_waitAddUnitList.length = 0;
 			_rootObj3ds = null;
 			_childObj3ds = null;
 			_renderParamData = null;
@@ -3774,6 +3821,7 @@ package com.game.engine3D.scene.render
 			_playing = false;
 			_completeNotInView = false;
 			_disableLoadResPastTime = false;
+			_disableOnceMaxDuration = false;
 			_pickDummyEnable = false;
 			_pickDummyBindBone = null;
 			_totalDuration = 0;
@@ -3783,13 +3831,13 @@ package com.game.engine3D.scene.render
 				_independentAnimator = null;
 			}
 		
-			restoreAllChildUnitToParent();
+			restoreAllChildUnits();
 			_visibleNeedAsyncLoaded = false;
 			_currentStatus = null;
 			_defalutStatus = null;
 			_secondStatusGetter = null;
 			
-			_animationTransition = null;
+//			_animationTransition = null;
 			_playToTime = 0;
 			_currDurationTime = 0;
 			_playDuration = 0;
@@ -3804,9 +3852,11 @@ package com.game.engine3D.scene.render
 			_useLight = false;
 			_useVolume = false;
 			_fadeAlphaUrl = null;
+			_fadeAlphaPriority = 0;
 			_fadeAlphaRect = null;
 			_independentMaterialName = null;
 			_textureUrl = null;
+			_texturePriority = 0;
 			_blendMaterialName = null;
 			_blendMaskUrl = null;
 			_blendUrl = null;

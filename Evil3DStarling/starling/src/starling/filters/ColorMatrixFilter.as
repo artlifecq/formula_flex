@@ -196,10 +196,16 @@ package starling.filters
 
 import flash.display3D.Context3DProgramType;
 
+import away3d.arcane;
+import away3d.core.data.ShaderCache;
+import away3d.core.managers.AGALProgram3DCache;
 import away3d.core.managers.Stage3DProxy;
 
 import starling.rendering.FilterEffect;
-import starling.rendering.Program;
+import starling.rendering.ProgramNameID;
+import starling.utils.RenderUtil;
+
+use namespace arcane;
 
 class ColorMatrixEffect extends FilterEffect
 {
@@ -219,23 +225,31 @@ class ColorMatrixEffect extends FilterEffect
 
         this.matrix = null;
     }
-
-    override protected function createProgram():Program
-    {
-        var vertexShader:String = FilterEffect.STD_VERTEX_SHADER;
-        var fragmentShader:String = [
-            tex("ft0", "v0", 0, texture),      // read texture color
-            "max ft0, ft0, fc5              ", // avoid division through zero in next step
-            "div ft0.xyz, ft0.xyz, ft0.www  ", // restore original (non-PMA) RGB values
-            "m44 ft0, ft0, fc0              ", // multiply color with 4x4 matrix
-            "add ft0, ft0, fc4              ", // add offset
-            "mul ft0.xyz, ft0.xyz, ft0.www  ", // multiply with alpha again (PMA)
-            "mov oc, ft0                    "  // copy to output
-        ].join("\n");
-
-        return Program.fromSource(vertexShader, fragmentShader);
-    }
-
+	
+	override protected function get programBaseName():uint 
+	{ 
+		return ProgramNameID.COLOR_MATRIX_EFFECT;
+	}
+	
+	override arcane function getVertexCode():String
+	{
+		return FilterEffect.STD_VERTEX_SHADER;
+	}
+	
+	override arcane function getFragmentCode():String
+	{
+		var fragmentCode:String = [
+			tex("ft0", "v0", 0, texture),      // read texture color
+			"max ft0, ft0, fc5              ", // avoid division through zero in next step
+			"div ft0.xyz, ft0.xyz, ft0.www  ", // restore original (non-PMA) RGB values
+			"m44 ft0, ft0, fc0              ", // multiply color with 4x4 matrix
+			"add ft0, ft0, fc4              ", // add offset
+			"mul ft0.xyz, ft0.xyz, ft0.www  ", // multiply with alpha again (PMA)
+			"mov oc, ft0                    "  // copy to output
+		].join("\n");
+		return fragmentCode;
+	}
+	
     override protected function beforeDraw(stage3DProxy:Stage3DProxy):void
     {
         super.beforeDraw(stage3DProxy);

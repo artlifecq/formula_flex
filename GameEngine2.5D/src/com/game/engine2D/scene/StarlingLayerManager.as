@@ -53,7 +53,7 @@ package com.game.engine2D.scene
 			Stage3DLayerManager.setup(
 				stage, stage, 
 				stage3DLayerSetupComplete, setupError, userDisabledError, viewCount, 
-				starlingLayerCount,onStarlingEventCapture,
+				starlingLayerCount,onStarlingEventCapture,null,
 				useScreenView
 			);
 		}

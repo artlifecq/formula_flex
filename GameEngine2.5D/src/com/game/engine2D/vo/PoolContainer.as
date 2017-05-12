@@ -16,12 +16,22 @@ package com.game.engine2D.vo
 	{
 		private static var _pool:InstancePool = new InstancePool("PoolContainer3D_pool", 1000);
 		private var _pos:Vector3D = new Vector3D();
-		
 		private var _isDisposed:Boolean = false;
+		private var _isDestroyed:Boolean;
 		
 		public function PoolContainer()
 		{
 			super();
+		}
+
+		public function get isDestroyed():Boolean
+		{
+			return _isDestroyed;
+		}
+		
+		public function get isDisposed():Boolean
+		{
+			return _isDisposed;
 		}
 		
 		override public function get x():Number
@@ -60,7 +70,7 @@ package com.game.engine2D.vo
 			_pos.y = val >> 0;
 			super.y = -_pos.y;
 		}
-		
+
 		override public function set z(val:Number):void
 		{
 			_pos.z = val >> 0;
@@ -78,7 +88,7 @@ package com.game.engine2D.vo
 		/** 缓存池销毁对象 */
 		public function instanceDestroy():void
 		{
-			_isDisposed = true;
+			_isDisposed = true; 
 			this.dispose();
 		}
 		

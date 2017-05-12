@@ -27,6 +27,9 @@ package com.game.engine2D.vo
 		private var _posScale:Point = new Point(1,1);
 		private var _posGeometryScale:Point = new Point(1,1);
 		private var _posGeometry:Point = new Point();
+		private var _isDisposed:Boolean = false;
+		private var _isDestroyed:Boolean;
+		
 		
 		public function PoolFrontMesh()
 		{
@@ -35,12 +38,21 @@ package com.game.engine2D.vo
 			this.overrideMaterialProps.prependedUVTransform = new Matrix();
 			reSet(null);
 		}
+		public function get isDestroyed():Boolean
+		{
+			return _isDestroyed;
+		}
+		
+		public function get isDisposed():Boolean
+		{
+			return _isDisposed;
+		}
 		
 		override public function set scaleX(val:Number):void
 		{
 			_posScale.x = val;
 		}
-		
+
 		override public function set scaleY(val:Number):void
 		{
 			_posScale.y = val;
@@ -114,21 +126,24 @@ package com.game.engine2D.vo
 		{
 			super.y = -val;
 		}
-		
+
 		public function reSet($parameters:Array):void
 		{
 			this.x = this.y = this.z = 0;
 			this.material = MaterialUtils.default1x1Texture;
 			this.layerType = EntityLayerType.DEFAULT;
+			_isDisposed = false;
 		}
 		
 		public function instanceDestroy():void
 		{
+			_isDestroyed = true;
 			this.dispose();
 		}
 		
 		public function instanceDispose():void
 		{
+			_isDisposed = true;
 			if (parent)parent.removeChild(this);
 			this.material = MaterialUtils.default1x1Texture;
 		}

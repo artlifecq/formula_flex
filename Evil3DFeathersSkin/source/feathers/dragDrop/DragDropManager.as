@@ -154,13 +154,17 @@ package feathers.dragDrop
 			{
 				throw new ArgumentError("Drag data cannot be null.");
 			}
+			
+			var stage:Stage = DisplayObject(source).stage;
+			if(!stage)
+				return;
+			
 			_dragSource = source;
 			_dragData = data;
 			_touchPointID = touch.id;
 			avatar = dragAvatar;
 			avatarOffsetX = dragAvatarOffsetX;
 			avatarOffsetY = dragAvatarOffsetY;
-			var stage:Stage = DisplayObject(source).stage;
 			_dragSourceStage = stage;
 			touch.getLocation(stage, HELPER_POINT);
 			if(avatar)

@@ -34,6 +34,7 @@ package starling.display
     import starling.utils.Align;
     import starling.utils.MathUtil;
     import starling.utils.MatrixUtil;
+    import starling.utils.SystemUtil;
 
     use namespace starling_internal;
 
@@ -138,7 +139,7 @@ package starling.display
         private var _transformationMatrix3D:Matrix3D;
         private var _orientationChanged:Boolean;
         private var _is3D:Boolean;
-        private var _isMask:Boolean;
+        private var _maskee:DisplayObject;
 
         // internal members (for fast access on rendering)
 
@@ -164,6 +165,7 @@ package starling.display
         private static var sHelperMatrixAlt:Matrix  = new Matrix();
         private static var sHelperMatrix3D:Matrix3D  = new Matrix3D();
         private static var sHelperMatrixAlt3D:Matrix3D  = new Matrix3D();
+        private static var sMaskWarningShown:Boolean = false;
         
         /** @private */ 
         public function DisplayObject()
@@ -188,7 +190,7 @@ package starling.display
             if (_filter) _filter.dispose();
             if (_mask) _mask.dispose();
             removeEventListeners();
-            mask = null; // revert 'isMask' property, just to be sure.
+            mask = null; // clear 'mask._maskee', just to be sure.
         }
         
         /** Removes the object from its parent, if it has one, and optionally disposes it. */
@@ -316,6 +318,10 @@ package starling.display
                 var helperPoint:Point = localPoint == sHelperPoint ? new Point() : sHelperPoint;
                 MatrixUtil.transformPoint(sHelperMatrixAlt, localPoint, helperPoint);
 				var hitMak:Boolean = _mask.hitTest(helperPoint) != null;
+				if(_mask.maskMode == MaskMode.ERASE)
+				{
+					hitMak = !hitMak;
+				}
 				if(hitMak)
 				{
 					localPoint.copyFrom(sHelperMaskPoint);
@@ -330,7 +336,7 @@ package starling.display
          *  of creating a new object. */
         public function localToGlobal(localPoint:Point, out:Point=null):Point
         {
-            if (is3D)
+            if (is3D && this.stage != null)
             {
                 sHelperPoint3D.setTo(localPoint.x, localPoint.y, 0);
                 return local3DToGlobal(sHelperPoint3D, out);
@@ -347,7 +353,7 @@ package starling.display
          *  of creating a new object. */
         public function globalToLocal(globalPoint:Point, out:Point=null):Point
         {
-            if (is3D)
+            if (is3D && this.stage != null)
             {
                 globalToLocal3D(globalPoint, sHelperPoint3D);
                 stage.getCameraPosition(this, sHelperPointAlt3D);
@@ -526,7 +532,7 @@ package starling.display
         /** @private */
 		internal function get isMask():Boolean
         {
-            return _isMask;
+            return _maskee != null;
         }
 
         // render cache
@@ -544,21 +550,18 @@ package starling.display
          */
         public function setRequiresRedraw():void
         {
-            var parent:DisplayObject = _parent;
+            var parent:DisplayObject = _parent || _maskee;
             var frameID:int = Starling.frameID;
 
-            _hasVisibleArea = _alpha != 0.0 && _visible && !_isMask && _scaleX != 0.0 && _scaleY != 0.0;
             _lastParentOrSelfChangeFrameID = frameID;
+            _hasVisibleArea = _alpha  != 0.0 && _visible && _maskee == null &&
+                              _scaleX != 0.0 && _scaleY != 0.0;
 
             while (parent && parent._lastChildChangeFrameID != frameID)
             {
                 parent._lastChildChangeFrameID = frameID;
-                if (parent._mask) parent._mask.setRequiresRedraw();
-                parent = parent._parent;
+                parent = parent._parent || parent._maskee;
             }
-
-            if (_isMask) Starling.current.setRequiresRedraw(); // notify 'skipUnchangedFrames'
-            else if (_mask) _mask.setRequiresRedraw();         // propagate into mask
         }
 
         /** Indicates if the object needs to be redrawn in the upcoming frame, i.e. if it has
@@ -742,7 +745,8 @@ package starling.display
                     }
                 }
             }
-            
+			_transformationMatrix.tx = _transformationMatrix.tx >> 0;
+			_transformationMatrix.ty = _transformationMatrix.ty >> 0;
             return _transformationMatrix;
         }
 
@@ -911,6 +915,7 @@ package starling.display
             {
                 _scaleX = value;
                 setOrientationChanged();
+				dispatchEventWith(Event.RESIZE);
             }
         }
         
@@ -923,6 +928,7 @@ package starling.display
             {
                 _scaleY = value;
                 setOrientationChanged();
+				dispatchEventWith(Event.RESIZE);
             }
         }
 
@@ -1066,12 +1072,16 @@ package starling.display
          *  <p>For rectangular masks, you can use simple quads; for other forms (like circles
          *  or arbitrary shapes) it is recommended to use a 'Canvas' instance.</p>
          *
-         *  <p>Beware that a mask will typically cause at least two additional draw calls:
-         *  one to draw the mask to the stencil buffer and one to erase it. However, if the
+         *  <p><strong>Note:</strong> a mask will typically cause at least two additional draw
+         *  calls: one to draw the mask to the stencil buffer and one to erase it. However, if the
          *  mask object is an instance of <code>starling.display.Quad</code> and is aligned
          *  parallel to the stage axes, rendering will be optimized: instead of using the
          *  stencil buffer, the object will be clipped using the scissor rectangle. That's
          *  faster and reduces the number of draw calls, so make use of this when possible.</p>
+         *
+         *  <p><strong>Note:</strong> AIR apps require the <code>depthAndStencil</code> node
+         *  in the application descriptor XMLs to be enabled! Otherwise, stencil masking won't
+         *  work.</p>
          *
          *  @see Canvas
          *  @default null
@@ -1081,10 +1091,19 @@ package starling.display
         {
             if (_mask != value)
             {
-                if (_mask) _mask._isMask = false;
+                if (!sMaskWarningShown)
+                {
+                    if (!SystemUtil.supportsDepthAndStencil)
+                        trace("[Starling] Full mask support requires 'depthAndStencil'" +
+                              " to be enabled in the application descriptor.");
+
+                    sMaskWarningShown = true;
+                }
+
+                if (_mask) _mask._maskee = null;
                 if (value)
                 {
-                    value._isMask = true;
+                    value._maskee = this;
                     value._hasVisibleArea = false;
                 }
 
@@ -1092,6 +1111,17 @@ package starling.display
                 setRequiresRedraw();
             }
         }
+		
+		private var _maskMode:String;
+		public function get maskMode():String { return _maskMode};
+		public function set maskMode(value :String):void
+		{
+			if(_maskMode != value)
+			{
+				_maskMode = value;
+				setRequiresRedraw();
+			}
+		}
 
         /** The display object container that contains this display object. */
         public function get parent():DisplayObjectContainer { return _parent; }
@@ -1125,7 +1155,6 @@ package starling.display
 		
 		//---------------------------------------------------------------------------
 		private var _touchAcross:Boolean;//zhuzhongmao
-		public var isDebugStats:Boolean;
 		
 		protected var _layerBatchId:int;//渲染批次, 按批次排列先后顺序，有助于减少drawcall被打断次数
 		public function get layerBatchId():int{return _layerBatchId}

@@ -143,7 +143,7 @@ package com.rpgGame.app.manager.scene
 
 				Scene.scene.switchScene(
 					curtMapInfo.sceneId,
-					curtMapInfo.mapConfig,
+					curtMapInfo.mapConfig,null,
 					ClientConfig.getMapZoneDir(curtMapInfo.mapNameResource),
 					mapUrl + "/" +mapName,
 					onCfgCmp,

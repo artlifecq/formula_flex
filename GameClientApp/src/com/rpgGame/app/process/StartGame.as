@@ -176,7 +176,7 @@ package com.rpgGame.app.process
 			LayerManager.showOrHideMM();
 			ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
             // 屏蔽未捕获信息
-            Log.logCallBack = GameLog.logItem;
+//            Log.logCallBack = GameLog.logItem;
 		}
 		
 		private function tipsSetup() : void

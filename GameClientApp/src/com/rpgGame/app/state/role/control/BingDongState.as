@@ -51,7 +51,7 @@ package com.rpgGame.app.state.role.control
 		
 		private function eachSetBingDongTexture(role : BaseRole, render : RenderUnit3D) : void
 		{
-			render.setIndependentTexture(ClientConfig.getDynTexture("bingdongbuff"));
+			render.setIndependentTexture(ClientConfig.getDynTexture("bingdongbuff"),0);
 		}
 
 		private function eachRestoreTexture(role : BaseRole, render : RenderUnit3D) : void

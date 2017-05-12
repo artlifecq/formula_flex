@@ -27,6 +27,10 @@ package com.game.engine3D.vo.map
 		public var gridDirection : int = 0;
 		public var gridLen : int = 0;
 		public var grids : Vector.<ClientMapAreaGridData> = null;
+		public var depth : int = 0;
+		public var action : int = 0;
+		public var bgSound : String = "";
+		public var envSound : String = "";
 		private var _forbidSpellTypes : Array = null;
 		
 		public function ClientMapAreaData()
@@ -78,6 +82,14 @@ package com.game.engine3D.vo.map
 							gridData = new ClientMapAreaGridData(gridId, gridX, gridY, gridWidth, gridHeight);
 							grids.push(gridData);
 						}
+						break;
+					case MapAreaTypeEnum.SWIM:
+						depth = bytes.readShort();
+						action = bytes.readShort();
+						break;
+					case MapAreaTypeEnum.SOUND:
+						bgSound = bytes.readUTF();
+						envSound = bytes.readUTF();
 						break;
 					default:
 						break;

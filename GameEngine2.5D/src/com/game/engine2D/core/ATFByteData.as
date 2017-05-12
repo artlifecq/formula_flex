@@ -10,7 +10,7 @@ package com.game.engine2D.core
 	
 	public class ATFByteData extends ATFData
 	{
-		public var isAsync:Boolean = false;
+		public var isAsync:Boolean = true;
 		public function ATFByteData(data:ByteArray)
 		{
 			data.position = 0;
@@ -22,9 +22,9 @@ package com.game.engine2D.core
 			if (isAsync)
 			{
 				if(type == TYPE_NORMAL)
-					Texture(texture).uploadCompressedTextureFromByteArray(data, 0, isAsync);
+					Texture(texture).uploadCompressedTextureFromByteArray(data, 0, true);
 				else
-					CubeTexture(texture).uploadCompressedTextureFromByteArray(data, 0, isAsync);
+					CubeTexture(texture).uploadCompressedTextureFromByteArray(data, 0, true);
 			}
 			else
 			{

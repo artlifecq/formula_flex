@@ -160,7 +160,7 @@ package feathers.themes
 		public static function addStyleClass(featherType:Class,styleClass:Class):void
 		{
 			var styleName:String = getQName(styleClass);
-			var hostName:String = getQName(featherType).split(".").pop();
+			var hostName:String = getHostName(featherType);
 			addStyle(styleName, toStateSkin(styleClass), hostName);
 		}
 		
@@ -170,7 +170,7 @@ package feathers.themes
 		public static function setFeatherDefaultStyleClass(featherType:Class, styleClass:Class):void
 		{
 			var styleName:String = getQName(styleClass);
-			var hostName:String = getQName(featherType).split(".").pop();
+			var hostName:String = getHostName(featherType);
 			addStyle(styleName, toStateSkin(styleClass), hostName);
 			defaultStyles[featherType] = styleName;
 		}
@@ -183,9 +183,23 @@ package feathers.themes
 			return defaultStyles ? defaultStyles[featherType] : null;
 		}
 		
+		private static var QNAME_CACHE:Dictionary = new Dictionary();
 		public static function getQName(any:*):String
 		{
-			return getQualifiedClassName(any).replace("::", ".");
+			if(any in QNAME_CACHE)return QNAME_CACHE[any];
+			var name:String = getQualifiedClassName(any).replace("::", ".");
+			QNAME_CACHE[any] = name;
+			
+			return name;
+		}
+		
+		private static var HOSTNAME_CACHE:Dictionary = new Dictionary();
+		private static function getHostName(any:*):String
+		{
+			if(any in HOSTNAME_CACHE)return HOSTNAME_CACHE[any];
+			var hostName:String = getQName(any).split(".").pop();
+			HOSTNAME_CACHE[any] = hostName;
+			return hostName;
 		}
 		
 		/**
@@ -198,7 +212,7 @@ package feathers.themes
 		{
 			if(!feather)return;
 			var styleName:String = getQName(style);
-			var hostName:String = getQName(feather).split(".").pop();
+			var hostName:String = getHostName(feather);
 			
 			if(feather is SkinnableContainer || feather is UIAsset)
 			{

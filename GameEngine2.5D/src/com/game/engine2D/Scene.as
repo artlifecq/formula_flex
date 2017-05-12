@@ -2,6 +2,7 @@ package com.game.engine2D
 {
 	import com.game.engine2D.config.GlobalConfig2D;
 	import com.game.engine2D.config.MapConfig;
+	import com.game.engine2D.config.MapResInfo;
 	import com.game.engine2D.config.SceneConfig;
 	import com.game.engine2D.controller.CameraFrontController;
 	import com.game.engine2D.core.AsyncMapTexture;
@@ -41,7 +42,6 @@ package com.game.engine2D
 	
 	import gs.TweenLite;
 	
-	import org.client.load.loader.multi.DobjLoadManager;
 	import org.client.mainCore.ds.DHash;
 	
 	import starling.core.Starling;
@@ -72,9 +72,11 @@ package com.game.engine2D
 		public var sceneZoneMapLayer:SceneZoneMapLayer;
 		public var sceneInteractiveLayer:SceneInteractiveLayer;
 		public var sceneRenderLayer:SceneRenderLayer;
+		public var customLayer:starling.display.Sprite;
 		public var sceneStarlingLayer:starling.display.Sprite;
 		public var sceneStageLayer:flash.display.Sprite;
-		public var customLayer:starling.display.Sprite;
+		public var sceneHeadLayer:starling.display.Sprite;
+		public var sceneNameLayer:starling.display.Sprite;
 		
 		private var _viewAsset:View3DAsset;
 		private var _mainChar : ISceneCameraTarget;
@@ -123,6 +125,11 @@ package com.game.engine2D
 			customLayer = new starling.display.Sprite();
 			sceneStageLayer = new flash.display.Sprite();
 			sceneStarlingLayer = new starling.display.Sprite();
+			
+			sceneHeadLayer = new starling.display.Sprite();
+			sceneNameLayer = new starling.display.Sprite();
+			sceneStarlingLayer.addChild(sceneHeadLayer);
+			sceneStarlingLayer.addChild(sceneNameLayer);
 			
 			//初始化GameScene3D			
 			_scene3d = GameScene3DManager.createScene(name, _view, viewDistance, areaMapLayer);
@@ -187,12 +194,12 @@ package com.game.engine2D
 			return result;
 		}
 		
-		public function get gameScene3d():GameScene3D
+		final public function get gameScene3d():GameScene3D
 		{
 			return _scene3d;
 		}
 		
-		public function get view3d():View3D
+		final public function get view3d():View3D
 		{
 			return _view;
 		}
@@ -332,6 +339,7 @@ package com.game.engine2D
 		public function switchScene(
 			$mapID:int, 
 			$mapConfigData:MapConfig,
+			$mapResInfo:MapResInfo,
 			$zoneMapUrl:String,
 			$awdMapUrl:String = null,
 			$onComplete:Function=null,
@@ -339,6 +347,7 @@ package com.game.engine2D
 			$isDisposeMapConfig:Boolean=true,
 			$onCompleteParams:Array=null):void
 		{
+//			MapTitleController.changeMap($mapResInfo);
 			//禁用交互
 			disableInteractiveHandle();
 			//停止渲染
@@ -449,7 +458,9 @@ package com.game.engine2D
 				var angle:Number = (_viewAsset.cameraMode2DAngle*Math.PI)/180.0;
 				var plane:Plane3D = new Plane3D(0,Math.cos(angle),-Math.sin(angle));
 				_direction.planarShadowPlane = plane;
+				_direction.planarShadowAlpha = _planarShadowAlpha;
 				_directionModel.planarShadowPlane = plane;
+				_directionModel.planarShadowAlpha = _planarShadowAlpha;
 			}
 		}
 		
