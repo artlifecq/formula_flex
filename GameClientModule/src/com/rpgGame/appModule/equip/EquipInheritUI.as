@@ -8,6 +8,8 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
+	import com.rpgGame.app.sender.ZhanGongSender;
+	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.common.CenterEftPop;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
@@ -27,7 +29,9 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.clientConfig.Q_equip_inherit_cost;
+	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.info.alert.AlertSetInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
@@ -49,6 +53,7 @@ package com.rpgGame.appModule.equip
 	import gs.easing.Expo;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.data.long;
 	import org.mokylin.skin.app.zhuangbei.Zhuangbei_left;
 	import org.mokylin.skin.app.zhuangbei.jicheng.Jicheng_Skin;
 	import org.mokylin.skin.app.zhuangbei.qianghua.TitileHead;
@@ -618,12 +623,26 @@ package com.rpgGame.appModule.equip
 			{
 				var type:int=RoleEquipmentManager.equipIsWearing(_targetEquipInfo)?0:1;
 				var lock:int=getLock();
-				var p:Point=new Point(this._skin.btn_jicheng.x+this._skin.btn_jicheng.width/2,this._skin.btn_jicheng.y+this._skin.btn_jicheng.height/2);
-				p=this._skin.btn_jicheng.parent.localToGlobal(p);
-				p=this._skin.container.globalToLocal(p);
-				this.playInter3DAt(ClientConfig.getEffect("ui_tongyongdianji"),p.x,p.y,1,null,addComplete);
-				ItemSender.reqEquipInheritMessage(EquipOperateType.JICHENG_NORMAL,_useEuipInfo.itemInfo.itemId,_targetEquipInfo.itemInfo.itemId,type,lock);		
+				var alertSet:AlertSetInfo= new AlertSetInfo( LangUI.UI_TEXT15);
+				alertSet.isShowCBox = true;
+				GameAlert.showAlert(alertSet,onToUp,EquipOperateType.JICHENG_NORMAL,_useEuipInfo.itemInfo.itemId,_targetEquipInfo.itemInfo.itemId,type,lock);
+				
+				//				var p:Point=new Point(this._skin.btn_jicheng.x+this._skin.btn_jicheng.width/2,this._skin.btn_jicheng.y+this._skin.btn_jicheng.height/2);
+				//				p=this._skin.btn_jicheng.parent.localToGlobal(p);
+				//				p=this._skin.container.globalToLocal(p);
+				//				this.playInter3DAt(ClientConfig.getEffect("ui_tongyongdianji"),p.x,p.y,1,null,addComplete);
+				
 			}
+		}
+		
+		private function onToUp(gameAlert:GameAlert,opaqueType:int,fromEquipId:long,toEquipId:long,toType:int,index:int):void
+		{
+			switch(gameAlert.clickType)
+			{
+				case AlertClickTypeEnum.TYPE_SURE:
+					ItemSender.reqEquipInheritMessage(opaqueType,fromEquipId,toEquipId,toType,index);		
+					break;
+			}		
 		}
 		
 		private function onTab(e:Event):void

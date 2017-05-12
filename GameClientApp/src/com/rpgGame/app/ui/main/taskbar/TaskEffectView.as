@@ -1,4 +1,4 @@
-package com.rpgGame.app.ui.main.task
+package com.rpgGame.app.ui.main.taskbar
 {
 	import com.game.engine3D.display.EffectObject3D;
 	import com.game.engine3D.display.Inter3DContainer;

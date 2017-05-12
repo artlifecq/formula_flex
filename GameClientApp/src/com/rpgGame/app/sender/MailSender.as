@@ -1,11 +1,18 @@
 package com.rpgGame.app.sender
 {
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.netData.mail.message.CSDeleteMailMessage;
+	import com.rpgGame.netData.mail.message.CSDeleteMailsMessage;
+	import com.rpgGame.netData.mail.message.CSReceiveMailsMessage;
+	import com.rpgGame.netData.mail.message.ReqGetMailAttachmentMessage;
+	import com.rpgGame.netData.mail.message.ReqReceiveMailMessage;
 	
 	import app.cmd.MailModuleMessages;
 	
+	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
-
+	import org.game.netCore.data.long;
+	
 	/**
 	 * @author lpp
 	 * ModuleID==18
@@ -26,7 +33,7 @@ package com.rpgGame.app.sender
 			_bytes.writeVarint32( mailId );
 			SocketConnection_protoBuffer.send( MailModuleMessages.C2S_SET_MAIL_READED, _bytes );
 		}	
-			
+		
 		/**
 		 * 请求领取邮件中的货币
 		 *
@@ -148,6 +155,53 @@ package com.rpgGame.app.sender
 			_bytes.writeBoolean( isRefuse );
 			SocketConnection_protoBuffer.send( MailModuleMessages.C2S_SET_REFUSE_RECEIVE_MAIL , _bytes );
 		}
-			
+		
+		/*
+		新邮件相关 
+		*/
+		
+		/**
+		 * 请求读取邮件的详细信息
+		 * */
+		public static function reqGetMailAttachmentMessage(mailId:long):void
+		{
+			var msg:ReqGetMailAttachmentMessage=new ReqGetMailAttachmentMessage();
+			msg.mailId=mailId;
+			SocketConnection.send(msg);
+		}
+		
+		/**
+		 * 请求领取邮件奖励
+		 * */
+		public static function reqReceiveMailMessage(mailId:long):void
+		{
+			var msg:ReqReceiveMailMessage=new ReqReceiveMailMessage();
+			msg.mailId=mailId;
+			SocketConnection.send(msg);
+		}
+		
+		/**请求一键领取*/
+		public static function reqReceiveAllMailMessage(list:Vector.<long>):void
+		{
+			var msg:CSReceiveMailsMessage=new CSReceiveMailsMessage();
+			msg.mailIds=list;
+			SocketConnection.send(msg);
+		}
+		
+		/**请求删除邮件*/
+		public static function reqDeletMailMessage(mailid:long):void
+		{
+			var msg:CSDeleteMailMessage=new CSDeleteMailMessage();
+			msg.mailId=mailid;
+			SocketConnection.send(msg);
+		}
+		
+		/**请求一键删除*/
+		public static function reqDeletAllMailMessage(list:Vector.<long>):void
+		{
+			var msg:CSDeleteMailsMessage=new CSDeleteMailsMessage();
+			msg.mailIds=list;
+			SocketConnection.send(msg);
+		}
 	}
 }

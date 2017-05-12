@@ -200,7 +200,7 @@ package com.rpgGame.core.app
 		public static var SPELL_PANEL:String = createAppInfo( "spell.SpellPanel", "spell" ); 
 		
 		/**邮件面板     可带一个数组为参数，可以直接打开发件邮  [ MailType.SEND, senderId, senderName, 主题 ]**/
-		public static var MAIL_PANEL:String = createAppInfo( "mail.MailPanel", "mail" ); 
+		public static var MAIL_PANEL:String = createAppInfo( "mail.MailPanelExt", "mail" ); 
 		/**答题面板**/
 		public static var DA_TI_PANEL:String = createAppInfo( "daTi.DaTiPanel", "daTi" ); 
 		/**答题结果面板**/

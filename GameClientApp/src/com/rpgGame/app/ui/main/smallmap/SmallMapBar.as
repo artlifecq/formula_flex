@@ -85,7 +85,6 @@ package com.rpgGame.app.ui.main.smallmap {
                     this.setMapScale(false);
                     break;
 				case this._skin.btnWord://打开大地图世界地图
-					
 					break;
 				case this._skin.btnM://打开大地图世当前地图
 					AppManager.showApp(AppConstant.BIGMAP_PANEL);

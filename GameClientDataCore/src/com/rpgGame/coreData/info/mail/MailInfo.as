@@ -1,7 +1,6 @@
 package com.rpgGame.coreData.info.mail
 {
 	import com.rpgGame.coreData.cfg.MailCfgData;
-	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.utils.MoneyUtil;
 	
 	import app.message.AmountType;

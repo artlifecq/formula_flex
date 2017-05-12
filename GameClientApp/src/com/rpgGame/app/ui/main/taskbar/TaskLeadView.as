@@ -1,4 +1,4 @@
-package com.rpgGame.app.ui.main.task
+package com.rpgGame.app.ui.main.taskbar
 {
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.utils.FaceUtil;

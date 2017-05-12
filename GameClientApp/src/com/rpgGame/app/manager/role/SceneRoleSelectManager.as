@@ -3,6 +3,7 @@ package com.rpgGame.app.manager.role
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.vo.SoftOutlineData;
+	import com.rpgGame.app.graphics.DropItemHeadFace;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -35,6 +36,7 @@ package com.rpgGame.app.manager.role
 		private static var _enemyOutlineData : SoftOutlineData = new SoftOutlineData(0xFF0000, 0.8, 0.005, 5);
 		private static var _friendOutlineData : SoftOutlineData = new SoftOutlineData(0x00FF00, 0.8, 0.005, 5);
 		private static var _neutralOutlineData : SoftOutlineData = new SoftOutlineData(0xFFFF00, 0.8, 0.005, 5);
+		private static var _dummyOutlineData : SoftOutlineData = new SoftOutlineData(0x00FF00, 0.8, 0.0025, 5);
 		private static var _selectedRingRedId : String = EffectUrl.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
 		private static var _selectedRingGreenId : String = EffectUrl.FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
 		private static var _selectedRingYellowId : String = "quanhuang";
@@ -113,6 +115,8 @@ package com.rpgGame.app.manager.role
 			{
 				if (_selectedRole.headFace is HeadFace)
 					((_selectedRole.headFace as HeadFace) as HeadFace).isSelected = false;
+				else if (_selectedRole.headFace is DropItemHeadFace)
+					(_selectedRole.headFace as DropItemHeadFace).isSelected = false;
 				_selectedRole.avatar.removeRenderUnitByID(RenderUnitType.SELECTED_RING, RenderUnitID.SELECTED_RING);
 			}
 			_selectedRole = value;
@@ -120,7 +124,8 @@ package com.rpgGame.app.manager.role
 			{
 				if (_selectedRole.headFace is HeadFace)
 					(_selectedRole.headFace as HeadFace).isSelected = true;
-
+				else if (_selectedRole.headFace is DropItemHeadFace)
+					(_selectedRole.headFace as DropItemHeadFace).isSelected = true;
 				updateRoleRingEffect(_selectedRole);
 				_selectedRole.updateInteractTime();
 				EscActionManager.addAction(cancelSelectedRole);
@@ -243,6 +248,8 @@ package com.rpgGame.app.manager.role
 				{
 					if (_mouseOverRole.headFace is HeadFace)
 						(_mouseOverRole.headFace as HeadFace).isSelected = false;
+					else if (_mouseOverRole.headFace is DropItemHeadFace)
+						(_mouseOverRole.headFace as DropItemHeadFace).isSelected = false;
 				}
 
 				_mouseOverRole.forEachRenderUnit(setRoleMouseOut);
@@ -254,6 +261,8 @@ package com.rpgGame.app.manager.role
 			{
 				if (_mouseOverRole.headFace is HeadFace)
 					(_mouseOverRole.headFace as HeadFace).isSelected = true;
+				else if (_mouseOverRole.headFace is DropItemHeadFace)
+					(_mouseOverRole.headFace as DropItemHeadFace).isSelected = true;
 				_mouseOverRole.forEachRenderUnit(setRoleMouseOver);
 			}
 			else
@@ -301,6 +310,9 @@ package com.rpgGame.app.manager.role
 						case SceneCharType.COLLECT:
 							MouseCursorController.showCollect();
 							break;
+						case SceneCharType.DROP_GOODS:
+							MouseCursorController.showCollect();
+							break;
 						default:
 							MouseCursorController.showNormal();
 							break;
@@ -336,6 +348,10 @@ package com.rpgGame.app.manager.role
 					else if (modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)
 					{
 						ru.setSoftOutline(_friendOutlineData);
+					}
+					else if (modeState==FightManager.FIGHT_ROLE_DUMMY) 
+					{
+						ru.setSoftOutline(_dummyOutlineData);
 					}
 					else
 					{

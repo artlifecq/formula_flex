@@ -76,7 +76,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.text = "等级：";
 			temp.color = 0xDFB01F;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 125;
+			temp.x = 173;
 			temp.y = 0;
 			return temp;
 		}
@@ -157,7 +157,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpMsg = temp;
 			temp.name = "grpMsg";
-			temp.x = 231;
+			temp.x = 192;
 			temp.y = 74;
 			temp.elementsContent = [__Duiwu_TanKuang_Label1_i(),lbName_i(),__Duiwu_TanKuang_Label2_i(),lbLevel_i(),lb_ask_i(),lbMsg_i()];
 			return temp;
@@ -172,7 +172,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 65;
-			temp.x = 165;
+			temp.x = 206;
 			temp.y = 0;
 			return temp;
 		}
@@ -195,10 +195,10 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbName = temp;
 			temp.name = "lbName";
-			temp.text = "1111";
+			temp.text = "[2区]一二三等食物";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 88;
+			temp.width = 125;
 			temp.x = 52;
 			temp.y = 0;
 			return temp;

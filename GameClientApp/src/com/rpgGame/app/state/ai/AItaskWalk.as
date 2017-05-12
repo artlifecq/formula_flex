@@ -7,7 +7,7 @@ package com.rpgGame.app.state.ai
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
-	import com.rpgGame.app.ui.main.task.TaskControl;
+	import com.rpgGame.app.ui.main.taskbar.TaskControl;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.state.ai.AIState;
 	import com.rpgGame.coreData.type.AIStateType;
