@@ -26,6 +26,7 @@ package com.rpgGame.appModule.dungeon.multy
 		{
 			super.show(data,openTable,parentContiner);
 			changeTab();
+			_multyView.showView();
 		}
 		
 		override public function hide():void 
@@ -35,7 +36,7 @@ package com.rpgGame.appModule.dungeon.multy
 		override protected function onTouchTarget(target:DisplayObject):void 
 		{
 			super.onTouchTarget(target);
-			
+			_multyView.onTouchTarget(target);
 			
 		}
 		

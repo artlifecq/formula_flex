@@ -28,16 +28,13 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.core.events.MazeEvent;
 	import com.rpgGame.core.manager.BGMManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.ClientSceneCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
-	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.lang.LangStoryDungeon;
 	import com.rpgGame.coreData.lang.LangText;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RoleStateType;
-    import gameEngine2D.NetDebug;
 	
 	import flash.utils.getDefinitionByName;
 	

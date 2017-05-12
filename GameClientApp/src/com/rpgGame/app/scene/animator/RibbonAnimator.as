@@ -144,7 +144,9 @@ package com.rpgGame.app.scene.animator
 				var fromObj : ObjectContainer3D;
 				if(_isAttachUnit)
 				{
-					fromObj = from.avatar.getRenderUnitByID(RenderUnitType.FIGHTSOUL, RenderUnitID.FIGHTSOUL).getChildByName(BoneNameEnum.c_0_body_02);
+					var fightsoul:RenderUnit3D = from.avatar.getRenderUnitByID(RenderUnitType.FIGHTSOUL, RenderUnitID.FIGHTSOUL);
+					if(fightsoul!=null)
+						fromObj = fightsoul.getChildByName(BoneNameEnum.c_0_body_02);
 				}
 				else
 				{
@@ -175,6 +177,12 @@ package com.rpgGame.app.scene.animator
 		 */
 		private static function onSortNearestRole(roleA : SceneRole, roleB : SceneRole) : int
 		{
+            if (null == roleA) {
+                return 1;
+            }
+            if (null == roleB) {
+                return -1;
+            }
 			if (roleA.type != roleB.type) {
 				return parseInt(roleA.type) - parseInt(roleB.type);
 			}

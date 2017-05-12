@@ -138,11 +138,10 @@ package com.rpgGame.app.ui.main.navigation {
             this._skin.btn_close.visible = isOpen;
             this._skin.btn_open.visible = !isOpen;
         }
-		
 		public function getBtnGlobalPos(btnName : String) : Point
 		{
 			var display:DisplayObject = _skin.btns.getChildByName(btnName);
-			return display.localToGlobal(new Point(display.width/2,display.height/2));
+			return display.localToGlobal(new Point(0,0));
 		}
     }
 }

@@ -142,11 +142,13 @@ package com.rpgGame.app.graphics
 //				case SceneCharType.SHI_BEI:
 				case SceneCharType.COLLECT:
 				case SceneCharType.BIAO_CHE:
-				case SceneCharType.DROP_GOODS:
 				case SceneCharType.MOUNT:
 				case SceneCharType.STALL:
 				case SceneCharType.ZHAN_CHE:
 					addAndUpdateHP();
+					addAndUpdateName();
+					break;
+				case SceneCharType.DROP_GOODS:
 					addAndUpdateName();
 					break;
 //				case SceneCharType.RACING_HERO:
@@ -199,6 +201,16 @@ package com.rpgGame.app.graphics
 				//普通怪在战斗状态显示血条
 				if(monster.q_monster_type==MonsterType.NORMAL&&(_isSelected||(_role.stateMachine&&(_role.stateMachine.isAttacking||_role.stateMachine.isHiting)))){
 					showAndHideElement(_bloodBar, true);
+				}*/
+				
+				showAndHideElement(_nameBar, _isSelected && nameVisible);
+			}
+			else if (_role.type == SceneCharType.DROP_GOODS) //掉落物，全显示或者全隐藏
+			{
+				/*	var monster:Q_monster=MonsterDataManager.getData((_role.data as MonsterData).modelID);
+				//普通怪在战斗状态显示血条
+				if(monster.q_monster_type==MonsterType.NORMAL&&(_isSelected||(_role.stateMachine&&(_role.stateMachine.isAttacking||_role.stateMachine.isHiting)))){
+				showAndHideElement(_bloodBar, true);
 				}*/
 				
 				showAndHideElement(_nameBar, _isSelected && nameVisible);

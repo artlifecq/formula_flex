@@ -23,13 +23,12 @@
 	import com.rpgGame.app.cmdlistener.NotifyCmdListener;
 	import com.rpgGame.app.cmdlistener.NpcCmdListener;
 	import com.rpgGame.app.cmdlistener.RoleStateCmdListener;
+	import com.rpgGame.app.cmdlistener.RollCmdListener;
 	import com.rpgGame.app.cmdlistener.ShopCmdListener;
 	import com.rpgGame.app.cmdlistener.SpellCmdListener;
 	import com.rpgGame.app.cmdlistener.StallCmdListener;
 	import com.rpgGame.app.cmdlistener.SummonCmdListener;
-	import com.rpgGame.app.cmdlistener.TeamCmdListener;
 	import com.rpgGame.app.cmdlistener.TeamCmdListerner;
-	import com.rpgGame.app.cmdlistener.TeamMemberPosCmdListener;
 	import com.rpgGame.app.cmdlistener.TradeCmdlistener;
 	import com.rpgGame.app.cmdlistener.ZhanGongContainerCmdListener;
 	import com.rpgGame.app.cmdlistener.clientConfig.ClientConfigCmdListener;
@@ -143,6 +142,7 @@
 			register("MeridianCmdListerner",MeridianCmdListerner);
 			register("ZhanGongContainerCmdListener", ZhanGongContainerCmdListener); //战功
 			register("CheatsCmdListerner",CheatsCmdListerner);
+			register("RollCmdListener",RollCmdListener);//roll掉落
 			register("DungeonCmdListener",DungeonCmdListener);
 		}
 	}

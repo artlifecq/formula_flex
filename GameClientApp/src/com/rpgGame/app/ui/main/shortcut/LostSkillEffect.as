@@ -2,6 +2,7 @@ package com.rpgGame.app.ui.main.shortcut
 {
 	import com.game.engine3D.display.EffectObject3D;
 	import com.game.engine3D.display.Inter3DContainer;
+	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -11,7 +12,6 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.LostSkillData;
-	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.lang.LangUI_2;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
@@ -121,6 +121,13 @@ package com.rpgGame.app.ui.main.shortcut
 		}
 		private function buttonClickHandler(e:Event):void
 		{
+//			DropGoodsManager.getInstance().addRollGoods(null);
+			/*var item:ItemInfo = new ItemInfo();
+			item.itemModelId = 405;
+			new RollGetItemPane(ItemUtil.convertClientItemInfo(item));*/
+			var point:Point = new Point(0,0);
+			ItemActionManager.tweenMode(point);
+			return ;
 			if(_effect!=null)
 			{
 				_effect.stopEffect();

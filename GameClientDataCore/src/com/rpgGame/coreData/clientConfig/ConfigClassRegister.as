@@ -150,6 +150,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_windowInfo:String = "data.Q_windowInfo";
 		/**  副本数据表														 */
 		public static const Q_zone:String = "data.Q_zone";
+		/**  q_zone_multy						 */
+		public static const Q_zone_multy:String = "data.Q_zone_multy";
 		/**  职业对应的名字		 */
 		public static const RaceNameInfo:String = "data.RaceNameInfo";
 		/**  赛马模型等配置信息								 */
@@ -253,6 +255,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_tipsinfo", com.rpgGame.coreData.clientConfig.Q_tipsinfo);
 			regClass("data.Q_windowInfo", com.rpgGame.coreData.clientConfig.Q_windowInfo);
 			regClass("data.Q_zone", com.rpgGame.coreData.clientConfig.Q_zone);
+			regClass("data.Q_zone_multy", com.rpgGame.coreData.clientConfig.Q_zone_multy);
 			regClass("data.RaceNameInfo", com.rpgGame.coreData.clientConfig.RaceNameInfo);
 			regClass("data.RacingInfo", com.rpgGame.coreData.clientConfig.RacingInfo);
 			regClass("data.RacingQuestion", com.rpgGame.coreData.clientConfig.RacingQuestion);

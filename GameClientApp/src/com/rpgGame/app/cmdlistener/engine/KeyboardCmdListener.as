@@ -310,7 +310,7 @@ package com.rpgGame.app.cmdlistener.engine
 					break;
 				case KeyCodeType.FUNC:
 					info.funcS = info.funcID.toString();
-					KeyFuncProcess.exec(info);
+					KeyFuncProcess.exec(info,true);
 					break;
 				case KeyCodeType.SKILL:
 					TrusteeshipManager.getInstance().stopFightTarget();//放技能就停止被动战斗
@@ -320,6 +320,10 @@ package com.rpgGame.app.cmdlistener.engine
 				case KeyCodeType.MOVE:
 					info.funcS = info.funcID.toString();
 					KeyMoveManager.getInstance().setKeyStatus(info);
+					break;
+				case KeyCodeType.UpAndDown:
+					info.funcS = info.funcID.toString();
+					KeyFuncProcess.exec(info,true);
 					break;
 			}
 		}
@@ -338,6 +342,10 @@ package com.rpgGame.app.cmdlistener.engine
                     info.funcS = info.funcID.toString();
                     KeySpellProcess.execUp(info);
                     break;
+				case KeyCodeType.UpAndDown:
+					info.funcS = info.funcID.toString();
+					KeyFuncProcess.exec(info,false);
+					break;
 			}
 		}
 

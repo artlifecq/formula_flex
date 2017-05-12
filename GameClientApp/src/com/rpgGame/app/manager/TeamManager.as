@@ -2,6 +2,7 @@ package com.rpgGame.app.manager
 {
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
@@ -10,6 +11,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.ui.alert.GameAlertExt;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.FunctionMessageBarEvent;
 	import com.rpgGame.core.events.SystemEvent;
 	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
@@ -18,6 +20,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
+	import com.rpgGame.coreData.type.EnumFunctionMessageBarIcoType;
 	import com.rpgGame.netData.team.bean.TeamInfo;
 	import com.rpgGame.netData.team.bean.TeamMemberBriefInfo;
 	import com.rpgGame.netData.team.bean.TeamMemberInfo;
@@ -36,7 +39,7 @@ package com.rpgGame.app.manager
 		public static const TYPE_TEAM_JOIN:int=1;
 		public static const TYPE_TEAM_APPOINT_CAPTAIN:int=2;
 		public  static var ins:TeamManager=new TeamManager();
-
+		private var noticeArr:Array=[];
 		public function TeamManager()
 		{
 			EventManager.addEvent(SystemEvent.SYS_SET,onSystemSetChange);
@@ -129,9 +132,23 @@ package com.rpgGame.app.manager
 		
 		public function ShowTeamAskPanel(type:int, teamId:long , member:TeamMemberInfo):void
 		{
-			AppManager.showApp(AppConstant.SOCIAL_TEAM_ALERT,{type:type,teamId:teamId,mem:member});
+			//AppManager.showApp(AppConstant.SOCIAL_TEAM_ALERT,{type:type,teamId:teamId,mem:member});
+			noticeArr.push({type:type,teamId:teamId,mem:member});
+			EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_SHOW_TYPE, EnumFunctionMessageBarIcoType.TEAM_TYPE, noticeArr.length);
 		}
-		
+		public function getWaitNoticeData():Object
+		{
+			var ret:Object=noticeArr.shift();
+			if (noticeArr.length!=0) 
+			{
+				EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_SHOW_TYPE, EnumFunctionMessageBarIcoType.TEAM_TYPE, noticeArr.length);
+			}
+			else
+			{
+				EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_HIDE_TYPE, EnumFunctionMessageBarIcoType.TEAM_TYPE);
+			}
+			return ret;
+		}
 		public function FuncPrompRelationTimeOut(type:int , teamId:long, member:TeamMemberInfo):void
 		{
 //			if(Mgr.uiMgr.isPanelShowByType( TeamAskPanelExt))
@@ -529,6 +546,13 @@ package com.rpgGame.app.manager
 		public function reqCreateTeamWithPlayer(player:long):void
 		{
 			TeamSender.reqCreateTeamWithPlayer(player);
+		}
+		
+		public function clearAllNotice():void
+		{
+			// TODO Auto Generated method stub
+			noticeArr.length=0;
+			EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_HIDE_TYPE, EnumFunctionMessageBarIcoType.TEAM_TYPE);
 		}
 	}
 }
