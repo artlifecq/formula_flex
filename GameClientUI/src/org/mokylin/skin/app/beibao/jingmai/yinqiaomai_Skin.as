@@ -113,7 +113,7 @@ package org.mokylin.skin.app.beibao.jingmai
 		private function __yinqiaomai_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/jingmai/bg2.png";
+			temp.styleName = "ui/big_bg/beibao/jingmai/bg2.png";
 			temp.x = -31;
 			temp.y = 0;
 			return temp;

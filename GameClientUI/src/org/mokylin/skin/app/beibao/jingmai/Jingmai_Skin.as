@@ -218,7 +218,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			imgBg = temp;
 			temp.name = "imgBg";
-			temp.styleName = "ui/app/beibao/jingmai/bg.jpg";
+			temp.height = 450;
+			temp.styleName = "ui/big_bg/beibao/jingmai/bg.jpg";
+			temp.width = 911;
 			temp.x = 18;
 			temp.y = 74;
 			return temp;
