@@ -99,6 +99,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			lbNum = temp;
 			temp.name = "lbNum";
 			temp.text = "12";
+			temp.textAlign = "center";
 			temp.color = 0xEFD872;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 123;

@@ -24,6 +24,9 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.map.BaseMapProcess;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.ui.ResLoadingView;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppInfo;
+	import com.rpgGame.core.app.AppLoadManager;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.MazeEvent;
 	import com.rpgGame.core.manager.BGMManager;
@@ -494,8 +497,26 @@ package com.rpgGame.app.manager.scene
 			else
 			{
 //				SceneSender.sceneLoaded(SceneManager.viewDistance);老的代码
-				SceneSender.SendLoadFinishMessage();
+				var mapId:int=MainRoleManager.actorInfo.mapID;
+				var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
+				if(sceneData.getData().q_map_zones==1){//副本
+					var appinfo:AppInfo=AppConstant.getAppinfoByAppName(AppConstant.SWORD_RESULT_SUCCESS);
+					var loadUrl : String = ClientConfig.getUI(appinfo.resName);
+					AppLoadManager.instace().loadByUrl(loadUrl, appinfo.loadingTitle, 	onLoadComplete, onError);
+				}else{
+					onLoadComplete();
+				}
 			}
+		}
+		
+		private static function onLoadComplete(_appUrl:* = null) : void
+		{
+			SceneSender.SendLoadFinishMessage();
+		}
+		
+		private static function onError(url : String) : void
+		{
+			GameLog.addShow("加载资源"+url+"出错");
 		}
 
 		private static function onSwitchCmp() : void
