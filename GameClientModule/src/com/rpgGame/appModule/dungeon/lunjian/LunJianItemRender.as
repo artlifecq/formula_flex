@@ -79,7 +79,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 			_avatar = new InterAvatar3D();
 			_avatarContainer.addChild3D(_avatar);
 			_avatardata=new MonsterData(RoleType.TYPE_MONSTER);
-			
+			_avatarContainer.x=-28;
 			_skin.modeCont.addChild(_avatarContainer);
 			
 			alertOk=new AlertSetInfo(LangAlertInfo.LUNJIAN_FIGHT_MIN);
@@ -91,13 +91,13 @@ package com.rpgGame.appModule.dungeon.lunjian
 			if(target==_skin.btnTiaozhan){
 				var itemData:LunJianItemData=_data as LunJianItemData;
 				if(itemData.diff==3){
-					NoticeManager.showNotifyById(1207);//已经通关
+					NoticeManager.showNotifyById(20001);//已经通关
 					return;
 				}
 				
 				var roleData:HeroData=MainRoleManager.actorInfo;
 				if(roleData.totalStat.level<itemData.cfg.q_level){
-					NoticeManager.showNotifyById(1207);//未达到等级的提示
+					NoticeManager.showNotifyById(20000);//未达到等级的提示
 					return;
 				}
 				
@@ -158,11 +158,11 @@ package com.rpgGame.appModule.dungeon.lunjian
 				_avatardata.avatarInfo.setBodyResID(npcCfg ? npcCfg.q_body_res : "", null);
 				_avatar.setRoleData(this._avatardata);
 				var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(npcCfg.q_body_res);
-				var fadeX : int = RoleFaceMaskEffectUtil.getFaceMaskX(avatarResConfig.headFaceMask);
-				var fadeY : int = RoleFaceMaskEffectUtil.getFaceMaskY(avatarResConfig.headFaceMask);
-				fadeX=130;
-				fadeY=-198;
-				var scale:Number=RoleFaceMaskEffectUtil.getFaceMaskScale(avatarResConfig.headFaceMask);
+				var fadeX : int = RoleFaceMaskEffectUtil.getFaceMaskX(avatarResConfig.dialogFaceMask);
+				var fadeY : int = RoleFaceMaskEffectUtil.getFaceMaskY(avatarResConfig.dialogFaceMask);
+//				fadeX=130;
+//				fadeY=-198;
+				var scale:Number=RoleFaceMaskEffectUtil.getFaceMaskScale(avatarResConfig.dialogFaceMask);
 				RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.DIALOG_MASK,_avatar,fadeX,
 					fadeY,scale);
 				
@@ -189,11 +189,12 @@ package com.rpgGame.appModule.dungeon.lunjian
 				if(itemData.diff!=3){
 					rewardList[itemData.diff].uiLingqu.visible=false;
 					rewardList[itemData.diff].uiBg.visible=true;
-					GrayFilter.gray(_skin.btnTiaozhan);
+					GrayFilter.unGray(_skin.btnTiaozhan);
 				}else{
 					_skin.lbLevel.text="无";
 					_skin.lbZhanli.text="无";
 					_skin.mc_nandu.visible=false;
+					GrayFilter.gray(_skin.btnTiaozhan);
 				}
 				var index:int=itemData.diff-1;
 				while(index>=0){
