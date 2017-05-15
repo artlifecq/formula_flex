@@ -6,7 +6,7 @@ package com.game.engine3D.display
 	import flash.geom.Point;
 	
 	import starling.display.DisplayObject;
-	import starling.display.Sprite3D;
+	import starling.display.Sprite;
 
 	/**
 	 * 可以嵌入到Starling层的3D显示对象容器-starling容器
@@ -15,7 +15,7 @@ package com.game.engine3D.display
 	 * 修改时间：2016-05-25 下午3:05:12
 	 *
 	 */
-	public class Inter3DContainer extends Sprite3D
+	public class Inter3DContainer extends Sprite
 	{
 		private static var LOCAL_POINT : Point = new Point();
 

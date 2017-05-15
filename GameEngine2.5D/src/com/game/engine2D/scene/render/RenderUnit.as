@@ -1430,7 +1430,7 @@ package com.game.engine2D.scene.render
 				if(_drawSourceTexture == null)//清空渲染...
 				{
 					_drawStatus = 4;
-					graphicSp.material = MaterialUtils.default1x1Texture;
+					graphicSp.material = null;
 				}
 				var isNeedDraw:Boolean = false;
 				//可见性判断
@@ -1520,7 +1520,7 @@ package com.game.engine2D.scene.render
 				_drawSourceTexture = renderImg;//取不到的时候,就取原来的吧...
 				if(_drawSourceTexture == null)//清空渲染...
 				{
-					graphicSp.material = MaterialUtils.default1x1Texture;
+					graphicSp.material = null;
 				}
 				if(_drawSourceTexture && ruStatus)
 				{
@@ -1580,7 +1580,7 @@ package com.game.engine2D.scene.render
 				"-BMin:" + int(min.x) +","+ int(min.y) + ","+ int(min.z) +
 				"-H:"+int(bound.halfExtentsX)+"-"+int(bound.halfExtentsY)+"-"+int(bound.halfExtentsZ)+
 				"-RF:" + entityNode.readyForRender()+
-				"-R:" + pm.renderStatus + 
+//				"-R:" + pm.renderStatus + 
 				"-F:" + pm.parent +"," + pm.width +
 				"-P:" + p.x + "," + p.y + "," + p.z+
 				"-S:" + pm.scaleX + "," + pm.scaleY + "," + pm.scaleZ+

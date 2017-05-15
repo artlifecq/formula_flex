@@ -111,11 +111,10 @@ package starling.rendering
         private var _stateStackLength:int;
         // shared data
         private static var sSharedData:Dictionary = new Dictionary();
+		private static var sPoint3D:Vector3D = new Vector3D();
 
         // helper objects
         private static var sMatrix:Matrix = new Matrix();
-        private static var sPoint3D:Vector3D = new Vector3D();
-        private static var sMatrix3D:Matrix3D = new Matrix3D();
         private static var sClipRect:Rectangle = new Rectangle();
         private static var sBufferRect:Rectangle = new Rectangle();
         private static var sScissorRect:Rectangle = new Rectangle();
@@ -369,17 +368,14 @@ package starling.rendering
             {
                 _state.setModelviewMatricesToIdentity();
 
-                if (mask.is3D) matrix3D = mask.getTransformationMatrix3D(null, sMatrix3D);
-                else           matrix   = mask.getTransformationMatrix(null, sMatrix);
+                matrix   = mask.getTransformationMatrix(null, sMatrix);
             }
             else
             {
-                if (mask.is3D) matrix3D = mask.transformationMatrix3D;
-                else           matrix   = mask.transformationMatrix;
+                matrix   = mask.transformationMatrix;
             }
 
-            if (matrix3D) _state.transformModelviewMatrix3D(matrix3D);
-            else          _state.transformModelviewMatrix(matrix);
+           _state.transformModelviewMatrix(matrix);
 
             mask.render(this);
             finishMeshBatch();
@@ -423,9 +419,8 @@ package starling.rendering
         private function isRectangularMask(mask:DisplayObject, maskee:DisplayObject, out:Matrix):Boolean
         {
             var quad:Quad = mask as Quad;
-            var is3D:Boolean = mask.is3D || (maskee && maskee.is3D && mask.stage == null);
 
-            if (quad && !is3D && quad.texture == null)
+            if (quad && quad.texture == null)
             {
                 if (mask.stage) mask.getTransformationMatrix(null, out);
                 else
@@ -535,6 +530,10 @@ package starling.rendering
                 {
                     meshBatch = _batchProcessorPrev.getBatchAt(i);
                     subset.setTo(); // resets subset
+					
+					// todo: 查到bug之后就应该移除
+					if(meshBatch.isDisposed)
+						throw new Error("drawFromCache , meshBatch is disposed!!!!!");
 
 					if(!meshBatch)continue; //this should not occur
 					

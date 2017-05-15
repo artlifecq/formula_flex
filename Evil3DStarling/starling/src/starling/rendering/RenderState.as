@@ -83,7 +83,6 @@ package starling.rendering
         private var _clipRect:Rectangle;
         private var _renderTarget:IStarlingTexture;
         private var _onDrawRequired:Function;
-        private var _modelviewMatrix3D:Matrix3D;
         private var _projectionMatrix3D:Matrix3D;
         private var _projectionMatrix3DRev:uint;
         private var _mvpMatrix3D:Matrix3D;
@@ -129,9 +128,6 @@ package starling.rendering
                 _projectionMatrix3D.copyFrom(renderState._projectionMatrix3D);
             }
 
-            if (_modelviewMatrix3D || renderState._modelviewMatrix3D)
-                this.modelviewMatrix3D = renderState._modelviewMatrix3D;
-
             if (_clipRect || renderState._clipRect)
                 this.clipRect = renderState._clipRect;
         }
@@ -143,7 +139,6 @@ package starling.rendering
             this.alpha = 1.0;
             this.blendMode = BlendMode.NORMAL;
             this.culling = Context3DTriangleFace.NONE;
-            this.modelviewMatrix3D = null;
             this.renderTarget = null;
             this.clipRect = null;
             _projectionMatrix3DRev = 0;
@@ -165,20 +160,6 @@ package starling.rendering
             MatrixUtil.prependMatrix(_modelviewMatrix, matrix);
         }
 
-        /** Prepends the given matrix to the 3D modelview matrix.
-         *  The current contents of the 2D modelview matrix is stored in the 3D modelview matrix
-         *  before doing so; the 2D modelview matrix is then reset to the identity matrix.
-         */
-        public function transformModelviewMatrix3D(matrix:Matrix3D):void
-        {
-            if (_modelviewMatrix3D == null)
-                _modelviewMatrix3D = Pool.getMatrix3D();
-
-            _modelviewMatrix3D.prepend(MatrixUtil.convertTo3D(_modelviewMatrix, sMatrix3D));
-            _modelviewMatrix3D.prepend(matrix);
-            _modelviewMatrix.identity();
-        }
-
         /** Creates a perspective projection matrix suitable for 2D and 3D rendering.
          *
          *  <p>The first 4 parameters define which area of the stage you want to view (the camera
@@ -192,13 +173,12 @@ package starling.rendering
          *  <p>If you pass only the first 4 parameters, the camera will be set up above the center
          *  of the stage, with a field of view of 1.0 rad.</p>
          */
-        public function setProjectionMatrix(x:Number, y:Number, width:Number, height:Number,
-                                            stageWidth:Number=0, stageHeight:Number=0,
-                                            cameraPos:Vector3D=null):void
+        public function setProjectionMatrix(x:Number, y:Number, width:Number, height:Number):void
         {
             _projectionMatrix3DRev = ++sProjectionMatrix3DRev;
+			//TODO: 用更优化的代码实现
             MatrixUtil.createPerspectiveProjectionMatrix(
-                    x, y, width, height, stageWidth, stageHeight, cameraPos, _projectionMatrix3D);
+                    x, y, width, height, 0, 0, null, _projectionMatrix3D);
         }
 
         /** This method needs to be called whenever <code>projectionMatrix3D</code> was changed
@@ -215,7 +195,6 @@ package starling.rendering
         public function setModelviewMatricesToIdentity():void
         {
             _modelviewMatrix.identity();
-            if (_modelviewMatrix3D) _modelviewMatrix3D.identity();
         }
 
         /** Returns the current 2D modelview matrix.
@@ -224,23 +203,6 @@ package starling.rendering
         public function get modelviewMatrix():Matrix { return _modelviewMatrix; }
         public function set modelviewMatrix(value:Matrix):void { _modelviewMatrix.copyFrom(value); }
 
-        /** Returns the current 3D modelview matrix, if there have been 3D transformations.
-         *  CAUTION: Use with care! Each call returns the same instance.
-         *  @default null */
-        public function get modelviewMatrix3D():Matrix3D { return _modelviewMatrix3D; }
-        public function set modelviewMatrix3D(value:Matrix3D):void
-        {
-            if (value)
-            {
-                if (_modelviewMatrix3D == null) _modelviewMatrix3D = Pool.getMatrix3D(false);
-                _modelviewMatrix3D.copyFrom(value);
-            }
-            else if (_modelviewMatrix3D)
-            {
-                Pool.putMatrix3D(_modelviewMatrix3D);
-                _modelviewMatrix3D = null;
-            }
-        }
 
         /** Returns the current projection matrix. You can use the method 'setProjectionMatrix3D'
          *  to set it up in an intuitive way.
@@ -259,7 +221,6 @@ package starling.rendering
         public function get mvpMatrix3D():Matrix3D
         {
             _mvpMatrix3D.copyFrom(_projectionMatrix3D);
-            if (_modelviewMatrix3D) _mvpMatrix3D.prepend(_modelviewMatrix3D);
             _mvpMatrix3D.prepend(MatrixUtil.convertTo3D(_modelviewMatrix, sMatrix3D));
             return _mvpMatrix3D;
         }
@@ -396,10 +357,6 @@ package starling.rendering
         {
             return (_miscOptions & 0xf0) != 0;
         }
-
-        /** Indicates if there have been any 3D transformations.
-         *  Returns <code>true</code> if the 3D modelview matrix contains a value. */
-        public function get is3D():Boolean { return _modelviewMatrix3D != null; }
 
         /** @private
          *

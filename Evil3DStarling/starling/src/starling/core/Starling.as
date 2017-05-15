@@ -417,8 +417,7 @@ package starling.core
                 _viewPort.x < 0 ? -_viewPort.x / scaleX : 0.0,
                 _viewPort.y < 0 ? -_viewPort.y / scaleY : 0.0,
                 _clippedViewPort.width  / scaleX,
-                _clippedViewPort.height / scaleY,
-                _stage3DProxy.width, _stage3DProxy.height, _stage.cameraPosition);
+                _clippedViewPort.height / scaleY);
 
 
             _stage.render(_painter);

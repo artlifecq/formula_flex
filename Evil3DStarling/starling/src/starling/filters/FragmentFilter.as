@@ -169,9 +169,6 @@ package starling.filters
 				trace("[Starling]FragmentFilter render", _target.name, _textureFormat, _helper ?_helper.targetBounds.toString() : "");
 			}
 			
-            if (_target.is3D)
-                _cached = _cacheRequested = false;
-
             if (!_cached || _cacheRequested)
             {
                 renderPasses(painter, _cacheRequested);
@@ -264,8 +261,7 @@ package starling.filters
             painter.state.clipRect = null;
             painter.state.setRenderTarget(input, true, _antiAliasing);
             painter.state.setProjectionMatrix(bounds.x, bounds.y,
-                input.root.width, input.root.height,
-                stage.stageWidth, stage.stageHeight, stage.cameraPosition);
+                input.root.width, input.root.height);
 
             _target.render(painter); // -> draw target object into 'input'
 
@@ -281,8 +277,7 @@ package starling.filters
             {
                 painter.pushState();
 
-                if (_target.is3D) painter.state.setModelviewMatricesToIdentity(); // -> stage coords
-                else              _quad.moveVertices(renderSpace, _target);       // -> local coords
+                _quad.moveVertices(renderSpace, _target);       // -> local coords
 
                 _quad.texture = output;
                 _quad.render(painter);
@@ -634,9 +629,7 @@ class FilterQuad extends Mesh
 
     public function moveVertices(sourceSpace:DisplayObject, targetSpace:DisplayObject):void
     {
-        if (targetSpace.is3D)
-            throw new Error("cannot move vertices into 3D space");
-        else if (sourceSpace != targetSpace)
+        if (sourceSpace != targetSpace)
         {
             targetSpace.getTransformationMatrix(sourceSpace, sMatrix).invert(); // ss could be null!
             vertexData.transformPoints("position", sMatrix);

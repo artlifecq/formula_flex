@@ -239,7 +239,7 @@ package starling.textures
             painter.pushState();
 
             var rootTexture:IStarlingTexture = _activeTexture.root;
-            state.setProjectionMatrix(0, 0, rootTexture.width, rootTexture.height, width, height);
+            state.setProjectionMatrix(0, 0, rootTexture.width, rootTexture.height);
 
             // limit drawing to relevant area
             sClipRect.setTo(0, 0, _activeTexture.width, _activeTexture.height);

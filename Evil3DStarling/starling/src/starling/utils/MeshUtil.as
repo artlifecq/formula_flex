@@ -73,19 +73,8 @@ package starling.utils
         {
             if (out == null) out = new Rectangle();
 
-            var stage:Stage = sourceSpace.stage;
-
-            if (sourceSpace.is3D && stage)
-            {
-                stage.getCameraPosition(targetSpace, sPoint3D);
-                sourceSpace.getTransformationMatrix3D(targetSpace, sMatrix3D);
-                vertexData.getBoundsProjected("position", sMatrix3D, sPoint3D, 0, -1, out);
-            }
-            else
-            {
-                sourceSpace.getTransformationMatrix(targetSpace, sMatrix);
-                vertexData.getBounds("position", sMatrix, 0, -1, out);
-            }
+            sourceSpace.getTransformationMatrix(targetSpace, sMatrix);
+            vertexData.getBounds("position", sMatrix, 0, -1, out);
 
             return out;
         }

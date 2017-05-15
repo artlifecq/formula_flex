@@ -367,7 +367,7 @@ package com.game.engine2D
 				//更新配置
 				mapConfig = $mapConfig;
 				
-				sceneSmallMapLayer.smallMaterial = MaterialUtils.default1x1Texture;
+//				sceneSmallMapLayer.smallMaterial = MaterialUtils.default1x1Texture;
 				
 				if ($awdMapUrl)
 				{

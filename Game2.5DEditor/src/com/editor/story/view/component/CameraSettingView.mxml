@@ -89,13 +89,13 @@
 			private function hLockClickHandler(event : MouseEvent) : void
 			{
 				CameraController.lockedOnPlayerController.xDegControlable = !hLock.selected;
-				CameraController.directController.xDegControlable = !hLock.selected;
+//				CameraController.directController.xDegControlable = !hLock.selected;
 			}
 
 			private function vLockClickHandler(event : MouseEvent) : void
 			{
 				CameraController.lockedOnPlayerController.yDegControlable = !vLock.selected;
-				CameraController.directController.yDegControlable = !vLock.selected;
+//				CameraController.directController.yDegControlable = !vLock.selected;
 			}
 
 			protected function timeOfTheDayRatioSlider_changeHandler(event : Event) : void

@@ -2,7 +2,6 @@ package com.game.engine2D.vo
 {
 	import com.game.engine2D.core.ATFSubTexture;
 	import com.game.engine2D.scene.render.RenderUnit;
-	import com.game.engine2D.utils.MaterialUtils;
 	import com.game.engine3D.core.poolObject.IInstancePoolClass;
 	import com.game.engine3D.core.poolObject.InstancePool;
 	
@@ -40,8 +39,8 @@ package com.game.engine2D.vo
 		private var _depth:int = 0;
 		private var _parentBaseObj:BaseObj = null;
 		private var _uvDirty:Boolean = true;
-		private var _positionDirty:Boolean = true;
-		private var _pos:Vector3D = new Vector3D();//上层用的x,y值
+//		private var _positionDirty:Boolean = true;
+//		private var _pos:Vector3D = new Vector3D();//上层用的x,y值
 		private var _posValue:Vector3D = new Vector3D();//实际用的x,y值
 		private var _posScale:Point = new Point(1,1);//实际用的scaleX,scaleY值
 		private var _posGeometryScale:Point = new Point(1,1);//PlaneFrameGeometry scaleX,scaleY值
@@ -54,7 +53,7 @@ package com.game.engine2D.vo
 		
 		public function PoolMesh(parentBaseObj:BaseObj = null)
 		{
-			super(_geometryPlane, MaterialUtils.default1x1Texture);
+			super(_geometryPlane);
 			_parentBaseObj = parentBaseObj;
 			_width = _height = 4;
 			this.visible = false;
@@ -122,7 +121,7 @@ package com.game.engine2D.vo
 				colorTransform.redOffset = 0;
 			}
 		}
-
+		
 		public function get alpha():Number
 		{
 			return _alpha;
@@ -170,12 +169,12 @@ package com.game.engine2D.vo
 		{
 			return super.scaleX;
 		}
-
+		
 		public function get object3DScaleZ():Number
 		{
 			return super.scaleZ;
 		}
-
+		
 		public function get object3DScaleY():Number
 		{
 			return super.scaleY;
@@ -185,7 +184,7 @@ package com.game.engine2D.vo
 		{
 			_posScale.x = val;
 		}
-
+		
 		override public function set scaleY(val:Number):void
 		{
 			_posScale.y = val;
@@ -277,7 +276,7 @@ package com.game.engine2D.vo
 		public function set smooth(value:Boolean):void
 		{
 			_smooth = value;
-			if (this.material != MaterialUtils.default1x1Texture && this.material is TextureMaterial)
+			if (this.material is TextureMaterial)
 			{
 				TextureMaterial(this.material).texture.smooth = value;
 			}
@@ -285,7 +284,7 @@ package com.game.engine2D.vo
 		
 		public function run():void
 		{
-			this.visible = (this.material != MaterialUtils.default1x1Texture);
+			this.visible = (this.material != null)
 			if (this.visible)
 			{
 				if (_atfSubTexture)
@@ -322,7 +321,7 @@ package com.game.engine2D.vo
 			if (this.parent)
 				this.parent.removeChild(this);
 			this.visible = false;
-			this.material = MaterialUtils.default1x1Texture;
+			this.material = null;
 			this.layerType = EntityLayerType.DEFAULT;
 			this.castsShadows = false;
 			_atfSubTexture = null;

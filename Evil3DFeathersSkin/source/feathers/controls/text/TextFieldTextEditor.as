@@ -2246,20 +2246,9 @@ package feathers.controls.text
 			{
 				gutterPositionOffset = 2 * smallerGlobalScale;
 			}
-			if(this.is3D)
-			{
-				var matrix3D:Matrix3D = Pool.getMatrix3D();
-				var point3D:Vector3D = Pool.getPoint3D();
-				this.getTransformationMatrix3D(this.stage, matrix3D);
-				MatrixUtil.transformCoords3D(matrix3D, -gutterPositionOffset, -gutterPositionOffset, 0, point3D);
-				point.setTo(point3D.x, point3D.y);
-				Pool.putPoint3D(point3D);
-				Pool.putMatrix3D(matrix3D);
-			}
-			else
-			{
-				MatrixUtil.transformCoords(matrix, -gutterPositionOffset, -gutterPositionOffset, point);
-			}
+			
+			MatrixUtil.transformCoords(matrix, -gutterPositionOffset, -gutterPositionOffset, point);
+			
 			var starlingViewPort:Rectangle = starling.viewPort;
 			this.textField.x = Math.round(starlingViewPort.x + (point.x * scaleFactor));
 			this.textField.y = Math.round(starlingViewPort.y + (point.y * scaleFactor));

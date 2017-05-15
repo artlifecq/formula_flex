@@ -17,7 +17,7 @@ package com.game.engine2D.core
 	public class ATFByteTexture extends Texture2DBase
 	{
 		private var _isReady:Boolean = false;
-		private var _texture:TextureBase;
+//		private var _texture:TextureBase;
 		private var _isDispose:Boolean = false;
 		private var _isDisposeTexture:Boolean = false;
 		private var _atfData:ATFByteData;

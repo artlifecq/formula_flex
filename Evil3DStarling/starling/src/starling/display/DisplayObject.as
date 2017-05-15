@@ -138,7 +138,6 @@ package starling.display
         private var _transformationMatrix:Matrix;
         private var _transformationMatrix3D:Matrix3D;
         private var _orientationChanged:Boolean;
-        private var _is3D:Boolean;
         private var _maskee:DisplayObject;
 
         // internal members (for fast access on rendering)
@@ -336,16 +335,8 @@ package starling.display
          *  of creating a new object. */
         public function localToGlobal(localPoint:Point, out:Point=null):Point
         {
-            if (is3D && this.stage != null)
-            {
-                sHelperPoint3D.setTo(localPoint.x, localPoint.y, 0);
-                return local3DToGlobal(sHelperPoint3D, out);
-            }
-            else
-            {
-                getTransformationMatrix(base, sHelperMatrixAlt);
-                return MatrixUtil.transformPoint(sHelperMatrixAlt, localPoint, out);
-            }
+            getTransformationMatrix(base, sHelperMatrixAlt);
+            return MatrixUtil.transformPoint(sHelperMatrixAlt, localPoint, out);
         }
         
         /** Transforms a point from global (stage) coordinates to the local coordinate system.
@@ -353,18 +344,9 @@ package starling.display
          *  of creating a new object. */
         public function globalToLocal(globalPoint:Point, out:Point=null):Point
         {
-            if (is3D && this.stage != null)
-            {
-                globalToLocal3D(globalPoint, sHelperPoint3D);
-                stage.getCameraPosition(this, sHelperPointAlt3D);
-                return MathUtil.intersectLineWithXYPlane(sHelperPointAlt3D, sHelperPoint3D, out);
-            }
-            else
-            {
-                getTransformationMatrix(base, sHelperMatrixAlt);
-                sHelperMatrixAlt.invert();
-                return MatrixUtil.transformPoint(sHelperMatrixAlt, globalPoint, out);
-            }
+            getTransformationMatrix(base, sHelperMatrixAlt);
+            sHelperMatrixAlt.invert();
+            return MatrixUtil.transformPoint(sHelperMatrixAlt, globalPoint, out);
         }
         
         /** Renders the display object with the help of a painter object. Never call this method
@@ -397,115 +379,6 @@ package starling.display
             else throw new ArgumentError("Invalid vertical alignment: " + verticalAlign);
         }
 
-        // 3D transformation
-
-        /** Creates a matrix that represents the transformation from the local coordinate system
-         *  to another. This method supports three dimensional objects created via 'Sprite3D'.
-         *  If you pass an <code>out</code>-matrix, the result will be stored in this matrix
-         *  instead of creating a new object. */
-        public function getTransformationMatrix3D(targetSpace:DisplayObject,
-                                                  out:Matrix3D=null):Matrix3D
-        {
-            var commonParent:DisplayObject;
-            var currentObject:DisplayObject;
-
-            if (out) out.identity();
-            else out = new Matrix3D();
-
-            if (targetSpace == this)
-            {
-                return out;
-            }
-            else if (targetSpace == _parent || (targetSpace == null && _parent == null))
-            {
-                out.copyFrom(transformationMatrix3D);
-                return out;
-            }
-            else if (targetSpace == null || targetSpace == base)
-            {
-                // targetCoordinateSpace 'null' represents the target space of the base object.
-                // -> move up from this to base
-
-                currentObject = this;
-                while (currentObject != targetSpace)
-                {
-                    out.append(currentObject.transformationMatrix3D);
-                    currentObject = currentObject._parent;
-                }
-
-                return out;
-            }
-            else if (targetSpace._parent == this) // optimization
-            {
-                targetSpace.getTransformationMatrix3D(this, out);
-                out.invert();
-
-                return out;
-            }
-
-            // 1. find a common parent of this and the target space
-
-            commonParent = findCommonParent(this, targetSpace);
-
-            // 2. move up from this to common parent
-
-            currentObject = this;
-            while (currentObject != commonParent)
-            {
-                out.append(currentObject.transformationMatrix3D);
-                currentObject = currentObject._parent;
-            }
-
-            if (commonParent == targetSpace)
-                return out;
-
-            // 3. now move up from target until we reach the common parent
-
-            sHelperMatrix3D.identity();
-            currentObject = targetSpace;
-            while (currentObject != commonParent)
-            {
-                sHelperMatrix3D.append(currentObject.transformationMatrix3D);
-                currentObject = currentObject._parent;
-            }
-
-            // 4. now combine the two matrices
-
-            sHelperMatrix3D.invert();
-            out.append(sHelperMatrix3D);
-
-            return out;
-        }
-
-        /** Transforms a 3D point from the local coordinate system to global (stage) coordinates.
-         *  This is achieved by projecting the 3D point onto the (2D) view plane.
-         *
-         *  <p>If you pass an <code>out</code>-point, the result will be stored in this point
-         *  instead of creating a new object.</p> */
-        public function local3DToGlobal(localPoint:Vector3D, out:Point=null):Point
-        {
-            var stage:Stage = this.stage;
-            if (stage == null) throw new IllegalOperationError("Object not connected to stage");
-
-            getTransformationMatrix3D(stage, sHelperMatrixAlt3D);
-            MatrixUtil.transformPoint3D(sHelperMatrixAlt3D, localPoint, sHelperPoint3D);
-            return MathUtil.intersectLineWithXYPlane(stage.cameraPosition, sHelperPoint3D, out);
-        }
-
-        /** Transforms a point from global (stage) coordinates to the 3D local coordinate system.
-         *  If you pass an <code>out</code>-vector, the result will be stored in this vector
-         *  instead of creating a new object. */
-        public function globalToLocal3D(globalPoint:Point, out:Vector3D=null):Vector3D
-        {
-            var stage:Stage = this.stage;
-            if (stage == null) throw new IllegalOperationError("Object not connected to stage");
-
-            getTransformationMatrix3D(stage, sHelperMatrixAlt3D);
-            sHelperMatrixAlt3D.invert();
-            return MatrixUtil.transformCoords3D(
-                sHelperMatrixAlt3D, globalPoint.x, globalPoint.y, 0, out);
-        }
-
         // internal methods
         
         /** @private */
@@ -523,12 +396,6 @@ package starling.display
                 _parent = value;
         }
         
-        /** @private */
-        internal function setIs3D(value:Boolean):void
-        {
-            _is3D = value;
-        }
-
         /** @private */
 		internal function get isMask():Boolean
         {
@@ -791,7 +658,7 @@ package starling.display
          *  matrix. Only the 'Sprite3D' class supports real 3D transformations.</p>
          *
          *  <p>CAUTION: not a copy, but the actual object!</p> */
-        public function get transformationMatrix3D():Matrix3D
+        private function get transformationMatrix3D():Matrix3D
         {
             // this method needs to be overridden in 3D-supporting subclasses (like Sprite3D).
 
@@ -800,9 +667,6 @@ package starling.display
 
             return MatrixUtil.convertTo3D(transformationMatrix, _transformationMatrix3D);
         }
-
-        /** Indicates if this object or any of its parents is a 'Sprite3D' object. */
-        public function get is3D():Boolean { return _is3D; }
 
         /** Indicates if the mouse cursor should transform into a hand while it's over the sprite.
          *  @default false */

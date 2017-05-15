@@ -184,6 +184,11 @@ package starling.display
 			}
             super.dispose();
         }
+		
+		public function get isDisposed():Boolean
+		{
+			return _isDisposed;
+		}
 
         /** @inheritDoc */
         override public function hitTest(localPoint:Point):DisplayObject

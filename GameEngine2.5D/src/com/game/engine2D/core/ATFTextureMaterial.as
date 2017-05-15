@@ -22,12 +22,12 @@ package com.game.engine2D.core
 			this.colorTransform = new ColorTransform();
 		}
 		
-		override public function get isDefaultTexture():Boolean
-		{
-			if (_atfByteTexture)
-				return _atfByteTexture.isDefaultTexture;
-			return true;
-		}
+//		override public function get isDefaultTexture():Boolean
+//		{
+//			if (_atfByteTexture)
+//				return _atfByteTexture.isDefaultTexture;
+//			return true;
+//		}
 		
 		public function get textureReady():Boolean
 		{

@@ -231,16 +231,12 @@ package starling.styles
             var dfEffect:DistanceFieldEffect = effect as DistanceFieldEffect;
             dfEffect.mode = _mode;
 
-            if (state.is3D) dfEffect.scale = 1.0;
-            else
-            {
-                // The softness is adapted automatically with the total scale of the object.
-                // However, this only works for 2D objects.
+            // The softness is adapted automatically with the total scale of the object.
+            // However, this only works for 2D objects.
 
-                var matrix:Matrix = state.modelviewMatrix;
-                var scale:Number = Math.sqrt(matrix.a * matrix.a + matrix.c * matrix.c);
-                dfEffect.scale = scale;
-            }
+            var matrix:Matrix = state.modelviewMatrix;
+            var scale:Number = Math.sqrt(matrix.a * matrix.a + matrix.c * matrix.c);
+            dfEffect.scale = scale;
 
             super.updateEffect(effect, state);
         }

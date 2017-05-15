@@ -35,7 +35,6 @@ package com.game.engine3D.scene.render
 	import away3d.animators.IAnimatorOwner;
 	import away3d.animators.SkeletonAnimator;
 	import away3d.cameras.Camera3D;
-	import away3d.cameras.iCamera3DAnimator;
 	import away3d.containers.ObjectContainer3D;
 	import away3d.containers.SkeletonBone;
 	import away3d.containers.View3D;
@@ -1672,26 +1671,26 @@ package com.game.engine3D.scene.render
 			if (!_graphicDis || !_graphicDis.scene || !_graphicDis.scene.view || !_graphicDis.scene.view.camera)
 				return;
 			_registeredCamera = _graphicDis.scene.view.camera;
-			if (_renderUnitData && _renderUnitData.camera3DAnimators)
-			{
-				for each (var animator : iCamera3DAnimator in _renderUnitData.camera3DAnimators)
-				{
-					_registeredCamera.registerCameraAnimator(animator);
-				}
-			}
+//			if (_renderUnitData && _renderUnitData.camera3DAnimators)
+//			{
+//				for each (var animator : iCamera3DAnimator in _renderUnitData.camera3DAnimators)
+//				{
+//					_registeredCamera.registerCameraAnimator(animator);
+//				}
+//			}
 		}
 
 		private function unregisterCameraAnimator() : void
 		{
 			if (!_registeredCamera)
 				return;
-			if (_renderUnitData && _renderUnitData.camera3DAnimators)
-			{
-				for each (var animator : iCamera3DAnimator in _renderUnitData.camera3DAnimators)
-				{
-					_registeredCamera.unregisterCameraAnimator(animator);
-				}
-			}
+//			if (_renderUnitData && _renderUnitData.camera3DAnimators)
+//			{
+//				for each (var animator : iCamera3DAnimator in _renderUnitData.camera3DAnimators)
+//				{
+//					_registeredCamera.unregisterCameraAnimator(animator);
+//				}
+//			}
 			_registeredCamera = null;
 		}
 

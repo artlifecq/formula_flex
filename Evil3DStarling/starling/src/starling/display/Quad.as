@@ -194,12 +194,6 @@ CONFIG::Starling_Debug
                 if (scaleX < 0) { out.width  *= -1; out.x -= out.width;  }
                 if (scaleY < 0) { out.height *= -1; out.y -= out.height; }
             }
-            else if (is3D && stage)
-            {
-                stage.getCameraPosition(targetSpace, sPoint3D);
-                getTransformationMatrix3D(targetSpace, sMatrix3D);
-                RectangleUtil.getBoundsProjected(_bounds, sMatrix3D, sPoint3D, out);
-            }
             else
             {
                 getTransformationMatrix(targetSpace, sMatrix);

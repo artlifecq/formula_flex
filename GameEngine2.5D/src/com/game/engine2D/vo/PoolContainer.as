@@ -15,7 +15,7 @@ package com.game.engine2D.vo
 	public class PoolContainer extends ObjectContainer3D implements IInstancePoolClass
 	{
 		private static var _pool:InstancePool = new InstancePool("PoolContainer3D_pool", 1000);
-		private var _pos:Vector3D = new Vector3D();
+//		private var _pos:Vector3D = new Vector3D();
 		private var _isDisposed:Boolean = false;
 		private var _isDestroyed:Boolean;
 		
