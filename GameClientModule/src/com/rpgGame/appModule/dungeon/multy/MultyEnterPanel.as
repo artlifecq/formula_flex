@@ -1,32 +1,31 @@
 package com.rpgGame.appModule.dungeon.multy
 {
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	
-	import org.mokylin.skin.app.fuben.FuBen_Skin;
+	import org.mokylin.skin.app.fuben.FuBenTanKuang2;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 
-
 	/**
-	 * 多人副本弹出面板
-	 * @author YT
-	 */	
-	public class MultyPanel  extends SkinUIPanel
+	 * 副本进入提示框
+	 * @author yt
+	 * 
+	 */
+	public class MultyEnterPanel extends SkinUIPanel
 	{
-		private var _skin :FuBen_Skin;
-		private var _multyView:MultyView;
-		public function MultyPanel()
+		private var _skin :FuBenTanKuang2;
+		public function MultyEnterPanel()
 		{
-			_skin=new FuBen_Skin();
+			_skin=new FuBenTanKuang2();
 			super(_skin);
-			_multyView=new MultyView(_skin.duoren_skin);
 		}
+		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			changeTab();
-			_multyView.showView();
 		}
 		
 		override public function hide():void 
@@ -36,15 +35,17 @@ package com.rpgGame.appModule.dungeon.multy
 		override protected function onTouchTarget(target:DisplayObject):void 
 		{
 			super.onTouchTarget(target);
-			_multyView.onTouchTarget(target);
+			
+			switch (target) {
+				case _skin.btn_ok:
+					AppManager.showApp(AppConstant.MULTYSURE_PANL);
+					break;
+				case _skin.btn_cancel:
+					this.hide();
+					break;
+			}
 			
 		}
-		
-		private function changeTab() : void 
-		{
-			_skin.tab_fuben.selectedIndex=1;
-		}
-		
 		
 		
 	}

@@ -192,7 +192,7 @@ package com.rpgGame.appModule.xinfa
 			_skin.mc_Name.gotoAndStop(data.cheatsConfig.q_id+"");
 			if (data.level>0) 
 			{
-				_skin.mc_Level.gotoAndStop(data.level-1);
+				_skin.mc_Level.gotoAndStop(data.level+"");
 				_skin.lab_Weijihuo.visible=false;
 				_skin.imgFight.visible=true;
 				_skin.num_xinfazhanli.visible=true;
