@@ -11,6 +11,7 @@
 package starling.textures
 {
     import flash.geom.Rectangle;
+    import flash.system.System;
     import flash.utils.Dictionary;
     
     import starling.utils.StringUtil;
@@ -92,6 +93,15 @@ package starling.textures
         public function dispose():void
         {
             _atlasTexture.dispose();
+			var sub:SubTexture;
+			for (var name:String in _subTextures)
+			{
+				sub = _subTextures[name];
+				if(sub)sub.dispose();
+			}
+			_subTextureNames = null;
+			_atlasTexture = null;
+			_subTextures = null;
         }
         
         /** This function is called by the constructor and will parse an XML in Starling's 
@@ -114,6 +124,8 @@ package starling.textures
 
 				addRegion(name, region,  rotated);
             }
+			
+			System.disposeXML( atlasXml );
         }
         
         /** Retrieves a SubTexture by name. Returns <code>null</code> if it is not found. */
@@ -178,11 +190,7 @@ package starling.textures
                                   rotated:Boolean=false):void
         {
 			_subTextures[name] = new SubTexture(_atlasTexture, region, false, rotated);
-			
-			CONFIG::Starling_Debug
-			{
-				_subTextures[name].key = name;
-			}
+			_subTextures[name].key = name;
 			
             _subTextureNames = null;
         }
@@ -190,9 +198,12 @@ package starling.textures
         /** Removes a region with a certain name. */
         public function removeRegion(name:String):void
         {
-            var subTexture:SubTexture = _subTextures[name];
-            if (subTexture) subTexture.dispose();
-            delete _subTextures[name];
+			if(name in _subTextures)
+			{
+				var subTexture:SubTexture = _subTextures[name];
+				if (subTexture) subTexture.dispose();
+				delete _subTextures[name];
+			}
             _subTextureNames = null;
         }
         

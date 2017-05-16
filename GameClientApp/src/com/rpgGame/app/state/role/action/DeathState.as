@@ -206,14 +206,14 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.WEAPON:
 				case RenderUnitType.DEPUTY_WEAPON:
 					render.repeat = 1;
-					render.setStatus(statusType, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
+					render.setStatus(statusType, _useCrossfadeTransition ? 0.2 : null, time);
 					if (isFreeze)
 						render.stop(time);
 					render.visible = true;
 					break;
 				case RenderUnitType.MOUNT:
 					render.repeat = 1;
-					render.setStatus(statusType, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
+					render.setStatus(statusType, _useCrossfadeTransition ? 0.2 : null, time);
 					break;
 				case RenderUnitType.KNIFE_LIGHT:
 					render.visible = false;
@@ -274,7 +274,7 @@ package com.rpgGame.app.state.role.action
 							if (RoleStateUtil.deathStateEffectType == RoleStateUtil.DEATH_STATE_EFFECT_CORRODE)
 							{
 								if (!_corrodeMethodData)
-									GlobalTexture.addTexture(ClientConfig.getDynTexture("corrode"), onCorrodeTextureComplete);
+									GlobalTexture.addTexture(ClientConfig.getDynTexture("corrode"),0, onCorrodeTextureComplete);
 								_corrodeTween = TweenLite.delayedCall(totalFrameTm * 0.001, onRoleDiedDelay);
 							}
 							else

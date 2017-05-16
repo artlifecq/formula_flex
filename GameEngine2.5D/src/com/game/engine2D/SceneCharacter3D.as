@@ -30,7 +30,7 @@ package com.game.engine2D
 		{
 			_parentChar = value;
 		}
-		
+
 		public function get castsShadows():Boolean
 		{
 			return _castsShadows;
@@ -41,7 +41,7 @@ package com.game.engine2D
 			_castsShadows = value;
 			this.avatar.castsShadows = value;
 		}
-		
+
 		public function get planarRenderLayer():uint
 		{
 			return _planarRenderLayer;
@@ -50,7 +50,7 @@ package com.game.engine2D
 		public function set planarRenderLayer(value:uint):void
 		{
 			_planarRenderLayer = value;
-//			this.avatar.planarRenderLayer = value;
+			this.avatar.planarRenderLayer = value;
 		}
 		
 		override public function set logicAngle($logicAngle:uint):void
@@ -70,7 +70,7 @@ package com.game.engine2D
 			render.visible = true;
 			render.repeat = 0;
 			render.castsShadows = _castsShadows;
-//			render.planarRenderLayer = _planarRenderLayer;
+			render.planarRenderLayer = _planarRenderLayer;
 			render.setStatus(_statusType);
 		}
 		

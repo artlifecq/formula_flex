@@ -159,7 +159,9 @@ package feathers.core
 			var itemCount:int = this._items.length;
 			if(value < -1 || value >= itemCount)
 			{
-				throw new RangeError("Index " + value + " is out of range " + itemCount + " for ToggleGroup.");
+				value = Math.max(0,itemCount-1);
+				trace("Index " + value + " is out of range " + itemCount + " for ToggleGroup.");
+				//throw new RangeError("Index " + value + " is out of range " + itemCount + " for ToggleGroup.");
 			}
 			var hasChanged:Boolean = this._selectedIndex != value;
 			this._selectedIndex = value;

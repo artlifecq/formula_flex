@@ -1,10 +1,10 @@
 package com.game.engine3D.manager
 {
 	import com.game.engine3D.vo.SceneMapData;
-	import com.game.mainCore.libCore.share.CountShare;
-
+	import com.game.engine3D.vo.share.CountShare;
+	
 	import flash.geom.Rectangle;
-
+	
 	/**
 	 *
 	 * 场景地图数据管理器
@@ -15,22 +15,22 @@ package com.game.engine3D.manager
 	public class SceneMapDataManager
 	{
 		public static var sceneMapDataCountShare : CountShare = new CountShare(120000);
-
+		
 		public function SceneMapDataManager()
 		{
 		}
-
+		
 		public static function get countShareCnt() : uint
 		{
 			return sceneMapDataCountShare.getAllCacheKeyList().length;
 		}
-
+		
 		public static function getMapData(mapName : String) : SceneMapData
 		{
 			var sceneMapData : SceneMapData = sceneMapDataCountShare.getShareData(mapName) as SceneMapData;
 			return sceneMapData;
 		}
-
+		
 		public static function addMapData(refObj : Object, mapName : String, mapDataUrl : String, completeHandler : Function = null, errorHandler : Function = null, useBitmapData : Boolean = false) : SceneMapData
 		{
 			var sceneMapData : SceneMapData = sceneMapDataCountShare.getShareData(mapName) as SceneMapData;
@@ -63,7 +63,7 @@ package com.game.engine3D.manager
 			sceneMapDataCountShare.installShareData(mapName, refObj);
 			return sceneMapData;
 		}
-
+		
 		public static function addMiniMap(mapName : String, miniMapUrl : String, rect : Rectangle = null, completeHandler : Function = null, errorHandler : Function = null) : void
 		{
 			var sceneMapData : SceneMapData = sceneMapDataCountShare.getShareData(mapName) as SceneMapData;
@@ -73,7 +73,7 @@ package com.game.engine3D.manager
 				{
 					if (completeHandler != null)
 					{
-						completeHandler(sceneMapData);
+						completeHandler(sceneMapData.miniMapLoader);
 					}
 				}
 				else
@@ -87,7 +87,7 @@ package com.game.engine3D.manager
 				}
 			}
 		}
-
+		
 		public static function removeMiniMap(mapName : String, completeHandler : Function = null, errorHandler : Function = null) : void
 		{
 			var sceneMapData : SceneMapData = sceneMapDataCountShare.getShareData(mapName) as SceneMapData;
@@ -97,7 +97,7 @@ package com.game.engine3D.manager
 				sceneMapData.removeMiniMapErrorHandler(errorHandler);
 			}
 		}
-
+		
 		public static function addRadarMap(mapName : String, radarMapUrl : String, rect : Rectangle = null, completeHandler : Function = null, errorHandler : Function = null) : void
 		{
 			var sceneMapData : SceneMapData = sceneMapDataCountShare.getShareData(mapName) as SceneMapData;
@@ -107,7 +107,7 @@ package com.game.engine3D.manager
 				{
 					if (completeHandler != null)
 					{
-						completeHandler(sceneMapData);
+						completeHandler(sceneMapData.radarMapLoader);
 					}
 				}
 				else
@@ -121,7 +121,7 @@ package com.game.engine3D.manager
 				}
 			}
 		}
-
+		
 		public static function removeRadarMap(mapName : String, completeHandler : Function = null, errorHandler : Function = null) : void
 		{
 			var sceneMapData : SceneMapData = sceneMapDataCountShare.getShareData(mapName) as SceneMapData;
@@ -131,7 +131,7 @@ package com.game.engine3D.manager
 				sceneMapData.removeRadarMapErrorHandler(errorHandler);
 			}
 		}
-
+		
 		public static function removeMapData(refObj : Object, mapName : String, completeHandler : Function = null, errorHandler : Function = null) : void
 		{
 			sceneMapDataCountShare.uninstallShareData(mapName, refObj);

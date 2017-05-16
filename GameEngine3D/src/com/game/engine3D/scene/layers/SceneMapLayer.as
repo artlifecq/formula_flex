@@ -5,10 +5,12 @@ package com.game.engine3D.scene.layers
 	import com.game.engine3D.events.MapLoadEvent;
 	import com.game.engine3D.events.SceneEvent;
 	import com.game.engine3D.events.SceneEventAction3D;
+	import com.game.engine3D.manager.InputManger;
 	import com.game.engine3D.manager.SceneMapDataManager;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.pathFinding.HeightMapHelperProxy;
 	import com.game.engine3D.vo.MapPointSet;
+	import com.game.engine3D.vo.MapTextureLoader;
 	import com.game.engine3D.vo.SceneMapData;
 	
 	import flash.geom.Rectangle;
@@ -47,6 +49,7 @@ package com.game.engine3D.scene.layers
 	import away3d.loaders.AssetLoader;
 	import away3d.loaders.ResourceBundleInstance;
 	import away3d.loaders.parsers.AWD2Parser;
+	import away3d.log.Log;
 	import away3d.materials.MaterialBase;
 	import away3d.materials.SinglePassMaterialBase;
 	import away3d.materials.lightpickers.LightPickerBase;
@@ -123,6 +126,7 @@ package com.game.engine3D.scene.layers
 		private var _mapResourceReady : Boolean;
 		private var _sceneMapData : SceneMapData;
 		private var _mapUrl : String;
+		private var _priority : int;
 
 		/** 地图加载完成回调 **/
 		private var _onDataErrorHandler : Function = null;
@@ -238,12 +242,12 @@ package com.game.engine3D.scene.layers
 			EventManager.dispatchEvent(MapLoadEvent.MAP_DATA_ERROR);
 		}
 
-		private function onMiniMapErrorHandler(sceneMapData : SceneMapData) : void
+		private function onMiniMapErrorHandler(loader : MapTextureLoader) : void
 		{
 			EventManager.dispatchEvent(MapLoadEvent.MAP_MINI_MAP_ERROR);
 		}
 
-		private function onRadarMapErrorHandler(sceneMapData : SceneMapData) : void
+		private function onRadarMapErrorHandler(loader : MapTextureLoader) : void
 		{
 			EventManager.dispatchEvent(MapLoadEvent.MAP_RADAR_MAP_ERROR);
 		}
@@ -251,20 +255,21 @@ package com.game.engine3D.scene.layers
 		/**
 		 * 开始加载地图
 		 */
-		public function loadMap(mapUrl : String, completeHandler : Function, loadErrorHandler : Function = null, parseErrorHandler : Function = null) : void
+		public function loadMap(mapUrl : String, completeHandler : Function, loadErrorHandler : Function = null, parseErrorHandler : Function = null, priority : int = 100) : void
 		{
 			_mapUrl = mapUrl;
 			_onMapCompleteHandler = completeHandler;
 			_onMapLoadErrorHandler = loadErrorHandler;
 			_onMapParseErrorHandler = parseErrorHandler;
+			_priority = priority;
 
 			_heightMapHelper = HeightMapHelper.getInstance(1024, 1024);
 			_mousePickerList = new Vector.<ObjectContainer3D>();
-
+			
 			trace("开始加载地图：" + mapUrl);
 			_loader = new AssetLoader(); //AssetLoader不可以复用。。。@L.L.M.Sunny 20150618
 			addLoaderEvents();
-			_loader.load(new URLRequest(mapUrl), null, null, new AWD2Parser());
+			_loader.load(new URLRequest(mapUrl), null, null, new AWD2Parser(), _priority);
 		}
 
 		private function onAssetComplete(e : AssetEvent) : void
@@ -625,6 +630,10 @@ package com.game.engine3D.scene.layers
 
 		private function handleMouseUpEvent3D(e : MouseEvent3D) : void
 		{
+			if (InputManger.getInstance().isOperateLocked)
+			{
+				return;
+			}
 			var position : Vector3D = e.scenePosition;
 			//派发事件
 			//function onSceneInteractive(action : String, mosEvt : MouseEvent3D, position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
@@ -633,6 +642,10 @@ package com.game.engine3D.scene.layers
 
 		private function handleMouseDownEvent3D(e : MouseEvent3D) : void
 		{
+			if (InputManger.getInstance().isOperateLocked)
+			{
+				return;
+			}
 			var position : Vector3D = e.scenePosition;
 			//派发事件
 			//function onSceneInteractive(action : String, mosEvt : MouseEvent3D, position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
@@ -641,6 +654,10 @@ package com.game.engine3D.scene.layers
 		
 		private function handleRightMouseUpEvent3D(e : MouseEvent3D) : void
 		{
+			if (InputManger.getInstance().isOperateLocked)
+			{
+				return;
+			}
 			var position : Vector3D = e.scenePosition;
 			//派发事件
 			//function onSceneInteractive(action : String, mosEvt : MouseEvent3D, position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
@@ -649,6 +666,10 @@ package com.game.engine3D.scene.layers
 		
 		private function handleRightMouseDownEvent3D(e : MouseEvent3D) : void
 		{
+			if (InputManger.getInstance().isOperateLocked)
+			{
+				return;
+			}
 			var position : Vector3D = e.scenePosition;
 			//派发事件
 			//function onSceneInteractive(action : String, mosEvt : MouseEvent3D, position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
@@ -657,6 +678,10 @@ package com.game.engine3D.scene.layers
 
 		private function handleMouseMoveEvent3D(e : MouseEvent3D) : void
 		{
+			if (InputManger.getInstance().isOperateLocked)
+			{
+				return;
+			}
 			var position : Vector3D = e.scenePosition;
 			//派发事件
 			//function onSceneInteractive(action : String, mosEvt : MouseEvent3D, position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
@@ -742,6 +767,7 @@ package com.game.engine3D.scene.layers
 
 		private function onParseError(ev : ParserEvent) : void
 		{
+			Log.error(GlobalConfig.DEBUG_HEAD + " " + "地图解析错误：" + _mapUrl);
 			clear();
 			if (_onMapParseErrorHandler != null)
 			{
@@ -752,6 +778,7 @@ package com.game.engine3D.scene.layers
 
 		private function onLoadError(ev : LoaderEvent) : void
 		{
+			Log.error(GlobalConfig.DEBUG_HEAD + " " + "地图加载错误：" + _mapUrl);
 			clear();
 			if (_onMapLoadErrorHandler != null)
 			{
@@ -1226,6 +1253,7 @@ package com.game.engine3D.scene.layers
 			_onMapParseErrorHandler = null;
 			_navMeshCompleteHandler = null;
 			_mapUrl = null;
+			_priority = 0;
 			_cameraNear = 0;
 			_cameraFar = 0;
 			_isLoaded = false;

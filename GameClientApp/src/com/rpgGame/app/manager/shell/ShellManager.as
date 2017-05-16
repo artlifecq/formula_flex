@@ -27,11 +27,13 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.manager.AvatarManager;
     import com.rpgGame.app.manager.MainUIManager;
     import com.rpgGame.app.manager.ShortcutsManger;
+    import com.rpgGame.app.manager.TrusteeshipManager;
     import com.rpgGame.app.manager.fight.FightManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.role.SceneRoleManager;
     import com.rpgGame.app.manager.role.SceneRoleSelectManager;
     import com.rpgGame.app.manager.scene.SceneManager;
+    import com.rpgGame.app.manager.task.TaskAutoManager;
     import com.rpgGame.app.manager.task.TouJingManager;
     import com.rpgGame.app.scene.SceneRole;
     import com.rpgGame.app.scene.animator.RibbonAnimator;
@@ -125,6 +127,8 @@ package com.rpgGame.app.manager.shell
             this._funcs["addGroods".toLowerCase()] = this.addGroods;
             this._funcs["testHeatLayer".toLowerCase()] = this.testHeatLayer;
             this._funcs["getView".toLowerCase()] = this.getView;
+			this._funcs["&tasklevel".toLowerCase()] = this.testTaskLevel;
+			this._funcs["&autofight".toLowerCase()] = this.testStopFight;
         }
 		
 		private function testRibbon():void
@@ -190,7 +194,7 @@ package com.rpgGame.app.manager.shell
 		private function corredMethodTest():void
 		{
 			_valueObj = {alpha: 1};
-			GlobalTexture.addTexture(ClientConfig.getDynTexture("corrode"), onCorrodeTextureComplete);
+			GlobalTexture.addTexture(ClientConfig.getDynTexture("corrode"),0, onCorrodeTextureComplete);
 		}
 		
 		private var _corrodeMethodData : MethodData;
@@ -633,11 +637,11 @@ package com.rpgGame.app.manager.shell
 			MainRoleManager.actor.forEachRenderUnit(function (role : BaseRole, render : RenderUnit3D) : void {
 				render.restoreTexture();
 				if ("1" == funcName) {
-					render.setIndependentTexture(ClientConfig.getDynTexture(name));
+					render.setIndependentTexture(ClientConfig.getDynTexture(name),0);
 				} else if ("2" == funcName) {
 					render.setIndependentMatarial(name, name2, name3);
 				} else if ("3" == funcName) {
-					render.addFadeAlpha(ClientConfig.getDynTexture(name));
+					render.addFadeAlpha(ClientConfig.getDynTexture(name),0);
 				} else if ("4" == funcName) {
 					render.setIndependentDiffuseColor(parseInt(name));
 				} else if ("5" == funcName) {
@@ -726,6 +730,7 @@ package com.rpgGame.app.manager.shell
             SceneManager.addSceneObjToScene(effectRu, true);
             effectRu.play(0);
         }
+<<<<<<< HEAD
         
         private function addMount(on : int) : void {
             var heroData : HeroData = MainRoleManager.actor.data as HeroData;
@@ -883,6 +888,15 @@ package com.rpgGame.app.manager.shell
             }
         }
       
+		private function testTaskLevel(level:int=-1) : void {
+			TaskAutoManager.getInstance().taskLevel(level);	
+		} 
+		private function testStopFight(level:int=-1) : void {
+			TrusteeshipManager.getInstance().testStop();
+		}
+		
+		
+		
         private function handler(command : String, ...params) : Boolean {
             var func : Function = this._funcs[command.toLowerCase()];
             if (null == func) {

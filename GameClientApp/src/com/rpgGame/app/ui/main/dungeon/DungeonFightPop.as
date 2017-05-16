@@ -33,7 +33,7 @@ package com.rpgGame.app.ui.main.dungeon
 		private function tweenMis():void
 		{
 			var endy:int=this._skin.container.y-100;
-			TweenLite.to(this._skin.container,2,{y:endy,alpha:0,onComplete:popComplete,ease:Cubic.easeOut});		
+			TweenLite.to(this._skin.container,2,{y:endy,alpha:0,onComplete:popComplete,ease:Cubic.easeOut,delay:3});		
 		}
 		
 		override protected function onStageResize(sw : int, sh : int) : void

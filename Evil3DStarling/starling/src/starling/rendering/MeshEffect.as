@@ -13,7 +13,10 @@ package starling.rendering
     import flash.display3D.Context3DProgramType;
     import flash.utils.getQualifiedClassName;
     
+    import away3d.arcane;
     import away3d.core.managers.Stage3DProxy;
+	
+	use namespace arcane;
 
     /** An effect drawing a mesh of textured, colored vertices.
      *  This is the standard effect that is the base for all mesh styles;
@@ -51,45 +54,6 @@ package starling.rendering
 
             _alpha = 1.0;
             _optimizeIfNotTinted = getQualifiedClassName(this) == "starling.rendering::MeshEffect";
-        }
-
-        /** @private */
-        override protected function get programVariantName():uint
-        {
-            var noTinting:uint = uint(_optimizeIfNotTinted && !_tinted && _alpha == 1.0);
-            return super.programVariantName | (noTinting << 3);
-        }
-
-        /** @private */
-        override protected function createProgram():Program
-        {
-            var vertexShader:String, fragmentShader:String;
-
-            if (texture)
-            {
-                if (_optimizeIfNotTinted && !_tinted && _alpha == 1.0)
-                    return super.createProgram();
-
-                vertexShader =
-                    "m44 op, va0, vc0 \n" + // 4x4 matrix transform to output clip-space
-                    "mov v0, va1      \n" + // pass texture coordinates to fragment program
-                    "mul v1, va2, vc4 \n";  // multiply alpha (vc4) with color (va2), pass to fp
-
-                fragmentShader =
-                    tex("ft0", "v0", 0, texture) +
-                    "mul oc, ft0, v1  \n";  // multiply color with texel color
-            }
-            else
-            {
-                vertexShader =
-                    "m44 op, va0, vc0 \n" + // 4x4 matrix transform to output clipspace
-                    "mul v0, va2, vc4 \n";  // multiply alpha (vc4) with color (va2)
-
-                fragmentShader =
-                    "mov oc, v0       \n";  // output color
-            }
-
-            return Program.fromSource(vertexShader, fragmentShader);
         }
 
         /** This method is called by <code>render</code>, directly before
@@ -140,5 +104,48 @@ package starling.rendering
          *  ignored by subclasses. */
         public function get tinted():Boolean { return _tinted; }
         public function set tinted(value:Boolean):void { _tinted = value; }
+		
+		override protected function get programBaseName():uint { return ProgramNameID.MESH_EFFECT; }
+		
+		override protected function get programVariantName():uint
+		{
+			var noTinting:uint = uint(_optimizeIfNotTinted && !_tinted && _alpha == 1.0);
+			return super.programVariantName | (noTinting << 3);
+		}
+		
+		override arcane function getVertexCode():String
+		{
+			if (texture)
+			{
+				if (_optimizeIfNotTinted && !_tinted && _alpha == 1.0)
+					return super.getVertexCode();
+				else
+					return "m44 op, va0, vc0 \n" + // 4x4 matrix transform to output clip-space
+						"mov v0, va1      \n" + // pass texture coordinates to fragment program
+						"mul v1, va2, vc4 \n";  // multiply alpha (vc4) with color (va2), pass to fp
+			}
+			else
+			{
+				return "m44 op, va0, vc0 \n" + // 4x4 matrix transform to output clipspace
+					"mul v0, va2, vc4 \n";  // multiply alpha (vc4) with color (va2)
+			}
+		}
+		
+		override arcane function getFragmentCode():String
+		{
+			if (texture)
+			{
+				if (_optimizeIfNotTinted && !_tinted && _alpha == 1.0)
+					return super.getFragmentCode();
+				
+				else
+					return tex("ft0", "v0", 0, texture) +
+					"mul oc, ft0, v1  \n";  // multiply color with texel color
+			}
+			else
+			{
+				return "mov oc, v0       \n";  // output color
+			}
+		}
     }
 }

@@ -4,8 +4,10 @@ package com.game.engine3D.vo
 	import com.game.engine3D.events.SceneEventAction_char;
 	import com.game.engine3D.loader.GlobalTexture;
 	import com.game.engine3D.scene.render.vo.BaseEntity;
+	import com.game.engine3D.utils.CallBackUtil;
 	
 	import flash.display.BlendMode;
+	import flash.utils.getTimer;
 	
 	import away3d.entities.EntityLayerType;
 	import away3d.entities.Mesh;
@@ -32,8 +34,19 @@ package com.game.engine3D.vo
 		private var _useSimpleShadow : Boolean;
 		private var _simpleShadowShowing : Boolean;
 		private var _simpleShadowTextureUrl : String;
+		private var _simpleShadowTexturePriority : int;
 		private var _simpleShadowScale : Number;
 		private var _simpleShadowMesh : Mesh;
+		/**
+		 * 攻击我的时间
+		 */
+		private var _attackMeTime : int;
+		/**
+		 * 生命周期
+		 * */
+		public var lifecycle : int = 0;
+		private var _playDuration : int = 0;
+		private var _lifecycleCallBackList : Vector.<CallBackData>;
 		
 		public function BaseRole(type : String, id : Number)
 		{
@@ -46,8 +59,11 @@ package com.game.engine3D.vo
 			_useSimpleShadow = false;
 			_simpleShadowShowing = false;
 			_simpleShadowTextureUrl = null;
+			_simpleShadowTexturePriority = 0;
 			_simpleShadowScale = 0;
 			_simpleShadowMesh = null;
+			_attackMeTime = 0;
+			_playDuration = 0;
 		}
 		
 		override public function setCamouflageEntity(entity : BaseEntity) : void
@@ -95,12 +111,13 @@ package com.game.engine3D.vo
 			return _logicAngle;
 		}
 		
-		public function addSimpleShadow(textureUrl : String, scale : Number = 1) : void
+		public function addSimpleShadow(textureUrl : String, texturePriority : int, scale : Number) : void
 		{
 			if (_useSimpleShadow)
 				return;
 			_useSimpleShadow = true;
 			_simpleShadowTextureUrl = textureUrl;
+			_simpleShadowTexturePriority = texturePriority;
 			_simpleShadowScale = scale;
 			validateSimpleShadow();
 		}
@@ -113,8 +130,8 @@ package com.game.engine3D.vo
 			_useSimpleShadow = false;
 			_simpleShadowShowing = false;
 			_simpleShadowTextureUrl = null;
+			_simpleShadowTexturePriority = 0;
 			_simpleShadowScale = 0;
-			
 			if (_simpleShadowMesh)
 			{
 				if (_simpleShadowMesh.parent)
@@ -127,7 +144,7 @@ package com.game.engine3D.vo
 		{
 			if (_useSimpleShadow)
 			{
-				GlobalTexture.addTexture(_simpleShadowTextureUrl, onShadowTextureComplete);
+				GlobalTexture.addTexture(_simpleShadowTextureUrl, _simpleShadowTexturePriority, onShadowTextureComplete);
 			}
 		}
 		
@@ -151,10 +168,24 @@ package com.game.engine3D.vo
 			{
 				if (_graphicDis.parent)
 					_graphicDis.parent.addChild(_simpleShadowMesh);
-				addSyncInfo(new BaseObjSyncInfo(_simpleShadowMesh, true, false,true));
+				addSyncInfo(new BaseObjSyncInfo(_simpleShadowMesh, true, false, true));
 			}
 			_simpleShadowMesh.scaleX = _simpleShadowMesh.scaleZ = _simpleShadowScale;
 			_simpleShadowShowing = true;
+		}
+		
+		/**
+		 * 更新攻击我时间
+		 *
+		 */
+		public function updateAttackMeTime() : void
+		{
+			_attackMeTime = getTimer();
+		}
+		
+		public function get attackMeTime() : int
+		{
+			return _attackMeTime;
 		}
 		
 		override protected function addToGraphic() : void
@@ -164,6 +195,30 @@ package com.game.engine3D.vo
 			{
 				if (_graphicDis.parent)
 					_graphicDis.parent.addChild(_simpleShadowMesh);
+			}
+		}
+		
+		public function setLifecycleCallBack(value : Function, ... args) : void
+		{
+			if (!_lifecycleCallBackList)
+			{
+				_lifecycleCallBackList = new Vector.<CallBackData>;
+			}
+			CallBackUtil.addCallBackData(_lifecycleCallBackList, value, args);
+		}
+		
+		public function removeLifecycleCallBack(value : Function) : void
+		{
+			CallBackUtil.removeCallBackData(_lifecycleCallBackList, value);
+		}
+		
+		override public function run(gapTm : uint) : void
+		{
+			super.run(gapTm);
+			_playDuration += gapTm;
+			if (lifecycle > 0 && _playDuration >= lifecycle)
+			{
+				CallBackUtil.exceteCallBackData(this, _lifecycleCallBackList);
 			}
 		}
 		
@@ -187,6 +242,12 @@ package com.game.engine3D.vo
 			isMainChar = false;
 			isMainCamouflage = false;
 			ownerIsMainChar = false;
+			_attackMeTime = 0;
+			_playDuration = 0;
+			if (_lifecycleCallBackList)
+			{
+				_lifecycleCallBackList.length = 0;
+			}
 			super.dispose();
 		}
 	}

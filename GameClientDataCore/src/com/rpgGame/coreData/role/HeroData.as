@@ -120,6 +120,8 @@ package com.rpgGame.coreData.role
 		 */
 		public var fightSoulLevel:int = 0;
 		
+		public var loginDay:int = 0;
+		
 		public function HeroData()
 		{
 			super(RoleType.TYPE_HERO);

@@ -18,6 +18,7 @@ package starling.utils
     import flash.geom.Vector3D;
     
     import starling.display.Image;
+    import starling.display.Quad;
     import starling.errors.AbstractClassError;
     import starling.textures.IStarlingTexture;
 
@@ -40,6 +41,7 @@ package starling.utils
         private static var sRectangles:Vector.<Rectangle> = new <Rectangle>[];
 		
 		private static var sImages:Vector.<Image> = new <Image>[];
+		private static var sQuads:Vector.<Quad> = new <Quad>[];
 
         /** @private */
         public function Pool() { throw new AbstractClassError(); }
@@ -66,7 +68,7 @@ package starling.utils
         /** Retrieves a Vector3D instance from the pool. */
         public static function getPoint3D(x:Number = 0, y:Number = 0, z:Number = 0):Vector3D
         {
-            if (sPoints.length == 0) return new Vector3D(x, y, z);
+            if (sPoints3D.length == 0) return new Vector3D(x, y, z);
             else
             {
                 var point:Vector3D = sPoints3D.pop();
@@ -147,15 +149,36 @@ package starling.utils
 		
 		public static function putImage(image:Image):void
 		{
-			sImages.push(image);
+			if(image != null)
+			{
+				image.removeFromParent();
+				image.tileGrid = null;
+				image.scale9Grid = null;
+				sImages.push(image);
+			}
 		}
 		
 		public static function getImage(texture:IStarlingTexture):Image
 		{
 			var image:Image = sImages.length ? sImages.pop() : new Image(texture);
 			image.texture = texture;
-			image.readjustSize();
 			return image;
+		}
+		
+		public static function putQuad(quad:Quad):void
+		{
+			sQuads.push(quad);
+		}
+		
+		public static function getQuad(texture:IStarlingTexture):Quad
+		{
+			var quad:Quad = sQuads.length ? sQuads.pop() : new Quad(10,10);
+			quad.texture = texture;
+			if(texture)
+			{
+				quad.readjustSize(texture.width, texture.height);
+			}
+			return quad;
 		}
     }
 }

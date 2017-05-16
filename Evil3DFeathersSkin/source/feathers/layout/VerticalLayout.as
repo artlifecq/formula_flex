@@ -1528,7 +1528,10 @@ package feathers.layout
 		public function addToVariableVirtualCacheAtIndex(index:int, item:DisplayObject = null):void
 		{
 			var heightValue:* = item ? item.height : undefined;
-			this._heightCache.insertAt(index, heightValue);
+			if (this._heightCache.hasOwnProperty("insertAt"))
+				this._heightCache.insertAt(index, heightValue);
+			else
+				this._heightCache.splice(index, 0, heightValue);
 		}
 
 		/**
@@ -1536,7 +1539,10 @@ package feathers.layout
 		 */
 		public function removeFromVariableVirtualCacheAtIndex(index:int):void
 		{
-			this._heightCache.removeAt(index);
+			if (this._heightCache.hasOwnProperty("removeAt"))
+				this._heightCache.removeAt(index);
+			else
+				this._heightCache.splice(index, 1);
 		}
 
 		/**
@@ -1794,12 +1800,12 @@ package feathers.layout
 					var itemHeight:Number = this._heightCache[index];
 					if(itemHeight !== itemHeight) //isNaN
 					{
-						itemHeight = this._typicalItem.height;
+						itemHeight =  _typicalItem　? _typicalItem.height : 0;
 					}
 				}
 				else
 				{
-					itemHeight = this._typicalItem.height;
+					itemHeight = _typicalItem　? _typicalItem.height : 0;
 				}
 			}
 			else

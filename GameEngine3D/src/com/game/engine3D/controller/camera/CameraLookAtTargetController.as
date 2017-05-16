@@ -2,11 +2,11 @@ package com.game.engine3D.controller.camera
 {
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	
-	import away3d.events.Event;
-	
+	import away3d.cameras.Camera3D;
 	import away3d.containers.ObjectContainer3D;
 	import away3d.controllers.LookAtController;
 	import away3d.entities.Entity;
+	import away3d.events.Event;
 	
 	/**
 	 * 镜头定点看向指定目标控制
@@ -15,7 +15,7 @@ package com.game.engine3D.controller.camera
 	 */
 	public class CameraLookAtTargetController extends LookAtController
 	{
-		public function CameraLookAtTargetController(targetObject:Entity=null, lookAtObject:ObjectContainer3D=null)
+		public function CameraLookAtTargetController(targetObject:Camera3D=null, lookAtObject:ObjectContainer3D=null)
 		{
 			super(targetObject, lookAtObject);
 		}

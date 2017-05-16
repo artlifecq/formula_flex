@@ -9,11 +9,10 @@ package com.game.engine3D.scene.display
 	import away3d.containers.View3D;
 	import away3d.core.math.Matrix3DUtils;
 	import away3d.events.Event;
-	import away3d.events.LensEvent;
 	import away3d.events.Object3DEvent;
 	
 	import starling.display.Sprite;
-
+	
 	/**
 	 *
 	 * 可绑定显示对象
@@ -31,12 +30,12 @@ package com.game.engine3D.scene.display
 		/**偏移位移**/
 		protected var _bindOffset : Vector3D;
 		protected var _visible : Boolean = true;
-
+		
 		public function BindableSprite()
 		{
 			super();
 		}
-
+		
 		/**
 		 *
 		 * @param value ObjectContainer3D 或者 BaseObj3D
@@ -85,34 +84,38 @@ package com.game.engine3D.scene.display
 				else
 					view = null;
 			}
+			else
+			{
+				view = null;
+			}
 		}
-
+		
 		private function set view(value : View3D) : void
 		{
 			if (_view)
 			{
 				_view.camera.removeEventListener(Object3DEvent.SCENETRANSFORM_CHANGED, onCameraSceneTransformChanged);
-				_view.camera.removeEventListener(LensEvent.MATRIX_CHANGED, onCameraSceneTransformChanged);
+				_view.camera.removeEventListener(Event.CHANGE, onCameraSceneTransformChanged);
 			}
 			_view = value;
 			if (_view)
 			{
 				_view.camera.addEventListener(Object3DEvent.SCENETRANSFORM_CHANGED, onCameraSceneTransformChanged);
-				_view.camera.addEventListener(LensEvent.MATRIX_CHANGED, onCameraSceneTransformChanged);
+				_view.camera.addEventListener(Event.CHANGE, onCameraSceneTransformChanged);
 				updateTranform();
 			}
 		}
-
+		
 		public function get bindOffset() : Vector3D
 		{
 			return _bindOffset;
 		}
-
+		
 		public function set bindOffset(value : Vector3D) : void
 		{
 			_bindOffset = value;
 		}
-
+		
 		/**
 		 * 更新变换
 		 */
@@ -122,8 +125,12 @@ package com.game.engine3D.scene.display
 			{
 				var pos3D : Vector3D = _bindTarget.scenePosition;
 				if (_bindOffset)
-					pos3D = pos3D.add(_bindOffset);
-
+				{
+					Matrix3DUtils.CALCULATION_VECTOR3D.copyFrom(pos3D);
+					pos3D = Matrix3DUtils.CALCULATION_VECTOR3D;
+					pos3D.incrementBy(_bindOffset);
+				}
+				
 				var pos2D : Vector3D = _view.project(pos3D, Matrix3DUtils.CALCULATION_VECTOR3D);
 				if (pos2D.z > 0 && pos2D.z < 4000)
 				{
@@ -142,7 +149,7 @@ package com.game.engine3D.scene.display
 				this.visible = false;
 			}
 		}
-
+		
 		private function onBindTargetSceneChanged(e : Object3DEvent) : void
 		{
 			if (_bindTarget && _bindTarget.scene)
@@ -150,7 +157,7 @@ package com.game.engine3D.scene.display
 			else
 				view = null;
 		}
-
+		
 		/**
 		 * 更新坐标
 		 * @param e
@@ -159,7 +166,7 @@ package com.game.engine3D.scene.display
 		{
 			updateTranform();
 		}
-
+		
 		/**
 		 * 摄像机变化
 		 * @param e
@@ -168,7 +175,7 @@ package com.game.engine3D.scene.display
 		{
 			updateTranform();
 		}
-
+		
 		override public function dispose() : void
 		{
 			bind(null, null);

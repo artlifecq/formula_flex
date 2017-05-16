@@ -34,6 +34,7 @@ package starling.display
     import starling.utils.Align;
     import starling.utils.MathUtil;
     import starling.utils.MatrixUtil;
+    import starling.utils.SystemUtil;
 
     use namespace starling_internal;
 
@@ -137,8 +138,7 @@ package starling.display
         private var _transformationMatrix:Matrix;
         private var _transformationMatrix3D:Matrix3D;
         private var _orientationChanged:Boolean;
-        private var _is3D:Boolean;
-        private var _isMask:Boolean;
+        private var _maskee:DisplayObject;
 
         // internal members (for fast access on rendering)
 
@@ -164,6 +164,7 @@ package starling.display
         private static var sHelperMatrixAlt:Matrix  = new Matrix();
         private static var sHelperMatrix3D:Matrix3D  = new Matrix3D();
         private static var sHelperMatrixAlt3D:Matrix3D  = new Matrix3D();
+        private static var sMaskWarningShown:Boolean = false;
         
         /** @private */ 
         public function DisplayObject()
@@ -188,7 +189,7 @@ package starling.display
             if (_filter) _filter.dispose();
             if (_mask) _mask.dispose();
             removeEventListeners();
-            mask = null; // revert 'isMask' property, just to be sure.
+            mask = null; // clear 'mask._maskee', just to be sure.
         }
         
         /** Removes the object from its parent, if it has one, and optionally disposes it. */
@@ -316,6 +317,10 @@ package starling.display
                 var helperPoint:Point = localPoint == sHelperPoint ? new Point() : sHelperPoint;
                 MatrixUtil.transformPoint(sHelperMatrixAlt, localPoint, helperPoint);
 				var hitMak:Boolean = _mask.hitTest(helperPoint) != null;
+				if(_mask.maskMode == MaskMode.ERASE)
+				{
+					hitMak = !hitMak;
+				}
 				if(hitMak)
 				{
 					localPoint.copyFrom(sHelperMaskPoint);
@@ -330,16 +335,8 @@ package starling.display
          *  of creating a new object. */
         public function localToGlobal(localPoint:Point, out:Point=null):Point
         {
-            if (is3D)
-            {
-                sHelperPoint3D.setTo(localPoint.x, localPoint.y, 0);
-                return local3DToGlobal(sHelperPoint3D, out);
-            }
-            else
-            {
-                getTransformationMatrix(base, sHelperMatrixAlt);
-                return MatrixUtil.transformPoint(sHelperMatrixAlt, localPoint, out);
-            }
+            getTransformationMatrix(base, sHelperMatrixAlt);
+            return MatrixUtil.transformPoint(sHelperMatrixAlt, localPoint, out);
         }
         
         /** Transforms a point from global (stage) coordinates to the local coordinate system.
@@ -347,18 +344,9 @@ package starling.display
          *  of creating a new object. */
         public function globalToLocal(globalPoint:Point, out:Point=null):Point
         {
-            if (is3D)
-            {
-                globalToLocal3D(globalPoint, sHelperPoint3D);
-                stage.getCameraPosition(this, sHelperPointAlt3D);
-                return MathUtil.intersectLineWithXYPlane(sHelperPointAlt3D, sHelperPoint3D, out);
-            }
-            else
-            {
-                getTransformationMatrix(base, sHelperMatrixAlt);
-                sHelperMatrixAlt.invert();
-                return MatrixUtil.transformPoint(sHelperMatrixAlt, globalPoint, out);
-            }
+            getTransformationMatrix(base, sHelperMatrixAlt);
+            sHelperMatrixAlt.invert();
+            return MatrixUtil.transformPoint(sHelperMatrixAlt, globalPoint, out);
         }
         
         /** Renders the display object with the help of a painter object. Never call this method
@@ -391,115 +379,6 @@ package starling.display
             else throw new ArgumentError("Invalid vertical alignment: " + verticalAlign);
         }
 
-        // 3D transformation
-
-        /** Creates a matrix that represents the transformation from the local coordinate system
-         *  to another. This method supports three dimensional objects created via 'Sprite3D'.
-         *  If you pass an <code>out</code>-matrix, the result will be stored in this matrix
-         *  instead of creating a new object. */
-        public function getTransformationMatrix3D(targetSpace:DisplayObject,
-                                                  out:Matrix3D=null):Matrix3D
-        {
-            var commonParent:DisplayObject;
-            var currentObject:DisplayObject;
-
-            if (out) out.identity();
-            else out = new Matrix3D();
-
-            if (targetSpace == this)
-            {
-                return out;
-            }
-            else if (targetSpace == _parent || (targetSpace == null && _parent == null))
-            {
-                out.copyFrom(transformationMatrix3D);
-                return out;
-            }
-            else if (targetSpace == null || targetSpace == base)
-            {
-                // targetCoordinateSpace 'null' represents the target space of the base object.
-                // -> move up from this to base
-
-                currentObject = this;
-                while (currentObject != targetSpace)
-                {
-                    out.append(currentObject.transformationMatrix3D);
-                    currentObject = currentObject._parent;
-                }
-
-                return out;
-            }
-            else if (targetSpace._parent == this) // optimization
-            {
-                targetSpace.getTransformationMatrix3D(this, out);
-                out.invert();
-
-                return out;
-            }
-
-            // 1. find a common parent of this and the target space
-
-            commonParent = findCommonParent(this, targetSpace);
-
-            // 2. move up from this to common parent
-
-            currentObject = this;
-            while (currentObject != commonParent)
-            {
-                out.append(currentObject.transformationMatrix3D);
-                currentObject = currentObject._parent;
-            }
-
-            if (commonParent == targetSpace)
-                return out;
-
-            // 3. now move up from target until we reach the common parent
-
-            sHelperMatrix3D.identity();
-            currentObject = targetSpace;
-            while (currentObject != commonParent)
-            {
-                sHelperMatrix3D.append(currentObject.transformationMatrix3D);
-                currentObject = currentObject._parent;
-            }
-
-            // 4. now combine the two matrices
-
-            sHelperMatrix3D.invert();
-            out.append(sHelperMatrix3D);
-
-            return out;
-        }
-
-        /** Transforms a 3D point from the local coordinate system to global (stage) coordinates.
-         *  This is achieved by projecting the 3D point onto the (2D) view plane.
-         *
-         *  <p>If you pass an <code>out</code>-point, the result will be stored in this point
-         *  instead of creating a new object.</p> */
-        public function local3DToGlobal(localPoint:Vector3D, out:Point=null):Point
-        {
-            var stage:Stage = this.stage;
-            if (stage == null) throw new IllegalOperationError("Object not connected to stage");
-
-            getTransformationMatrix3D(stage, sHelperMatrixAlt3D);
-            MatrixUtil.transformPoint3D(sHelperMatrixAlt3D, localPoint, sHelperPoint3D);
-            return MathUtil.intersectLineWithXYPlane(stage.cameraPosition, sHelperPoint3D, out);
-        }
-
-        /** Transforms a point from global (stage) coordinates to the 3D local coordinate system.
-         *  If you pass an <code>out</code>-vector, the result will be stored in this vector
-         *  instead of creating a new object. */
-        public function globalToLocal3D(globalPoint:Point, out:Vector3D=null):Vector3D
-        {
-            var stage:Stage = this.stage;
-            if (stage == null) throw new IllegalOperationError("Object not connected to stage");
-
-            getTransformationMatrix3D(stage, sHelperMatrixAlt3D);
-            sHelperMatrixAlt3D.invert();
-            return MatrixUtil.transformCoords3D(
-                sHelperMatrixAlt3D, globalPoint.x, globalPoint.y, 0, out);
-        }
-
         // internal methods
         
         /** @private */
@@ -518,15 +397,9 @@ package starling.display
         }
         
         /** @private */
-        internal function setIs3D(value:Boolean):void
-        {
-            _is3D = value;
-        }
-
-        /** @private */
 		internal function get isMask():Boolean
         {
-            return _isMask;
+            return _maskee != null;
         }
 
         // render cache
@@ -544,21 +417,18 @@ package starling.display
          */
         public function setRequiresRedraw():void
         {
-            var parent:DisplayObject = _parent;
+            var parent:DisplayObject = _parent || _maskee;
             var frameID:int = Starling.frameID;
 
-            _hasVisibleArea = _alpha != 0.0 && _visible && !_isMask && _scaleX != 0.0 && _scaleY != 0.0;
             _lastParentOrSelfChangeFrameID = frameID;
+            _hasVisibleArea = _alpha  != 0.0 && _visible && _maskee == null &&
+                              _scaleX != 0.0 && _scaleY != 0.0;
 
             while (parent && parent._lastChildChangeFrameID != frameID)
             {
                 parent._lastChildChangeFrameID = frameID;
-                if (parent._mask) parent._mask.setRequiresRedraw();
-                parent = parent._parent;
+                parent = parent._parent || parent._maskee;
             }
-
-            if (_isMask) Starling.current.setRequiresRedraw(); // notify 'skipUnchangedFrames'
-            else if (_mask) _mask.setRequiresRedraw();         // propagate into mask
         }
 
         /** Indicates if the object needs to be redrawn in the upcoming frame, i.e. if it has
@@ -742,7 +612,8 @@ package starling.display
                     }
                 }
             }
-            
+			_transformationMatrix.tx = _transformationMatrix.tx >> 0;
+			_transformationMatrix.ty = _transformationMatrix.ty >> 0;
             return _transformationMatrix;
         }
 
@@ -787,7 +658,7 @@ package starling.display
          *  matrix. Only the 'Sprite3D' class supports real 3D transformations.</p>
          *
          *  <p>CAUTION: not a copy, but the actual object!</p> */
-        public function get transformationMatrix3D():Matrix3D
+        private function get transformationMatrix3D():Matrix3D
         {
             // this method needs to be overridden in 3D-supporting subclasses (like Sprite3D).
 
@@ -796,9 +667,6 @@ package starling.display
 
             return MatrixUtil.convertTo3D(transformationMatrix, _transformationMatrix3D);
         }
-
-        /** Indicates if this object or any of its parents is a 'Sprite3D' object. */
-        public function get is3D():Boolean { return _is3D; }
 
         /** Indicates if the mouse cursor should transform into a hand while it's over the sprite.
          *  @default false */
@@ -911,6 +779,7 @@ package starling.display
             {
                 _scaleX = value;
                 setOrientationChanged();
+				dispatchEventWith(Event.RESIZE);
             }
         }
         
@@ -923,6 +792,7 @@ package starling.display
             {
                 _scaleY = value;
                 setOrientationChanged();
+				dispatchEventWith(Event.RESIZE);
             }
         }
 
@@ -1066,12 +936,16 @@ package starling.display
          *  <p>For rectangular masks, you can use simple quads; for other forms (like circles
          *  or arbitrary shapes) it is recommended to use a 'Canvas' instance.</p>
          *
-         *  <p>Beware that a mask will typically cause at least two additional draw calls:
-         *  one to draw the mask to the stencil buffer and one to erase it. However, if the
+         *  <p><strong>Note:</strong> a mask will typically cause at least two additional draw
+         *  calls: one to draw the mask to the stencil buffer and one to erase it. However, if the
          *  mask object is an instance of <code>starling.display.Quad</code> and is aligned
          *  parallel to the stage axes, rendering will be optimized: instead of using the
          *  stencil buffer, the object will be clipped using the scissor rectangle. That's
          *  faster and reduces the number of draw calls, so make use of this when possible.</p>
+         *
+         *  <p><strong>Note:</strong> AIR apps require the <code>depthAndStencil</code> node
+         *  in the application descriptor XMLs to be enabled! Otherwise, stencil masking won't
+         *  work.</p>
          *
          *  @see Canvas
          *  @default null
@@ -1081,10 +955,19 @@ package starling.display
         {
             if (_mask != value)
             {
-                if (_mask) _mask._isMask = false;
+                if (!sMaskWarningShown)
+                {
+                    if (!SystemUtil.supportsDepthAndStencil)
+                        trace("[Starling] Full mask support requires 'depthAndStencil'" +
+                              " to be enabled in the application descriptor.");
+
+                    sMaskWarningShown = true;
+                }
+
+                if (_mask) _mask._maskee = null;
                 if (value)
                 {
-                    value._isMask = true;
+                    value._maskee = this;
                     value._hasVisibleArea = false;
                 }
 
@@ -1092,6 +975,17 @@ package starling.display
                 setRequiresRedraw();
             }
         }
+		
+		private var _maskMode:String;
+		public function get maskMode():String { return _maskMode};
+		public function set maskMode(value :String):void
+		{
+			if(_maskMode != value)
+			{
+				_maskMode = value;
+				setRequiresRedraw();
+			}
+		}
 
         /** The display object container that contains this display object. */
         public function get parent():DisplayObjectContainer { return _parent; }
@@ -1125,7 +1019,6 @@ package starling.display
 		
 		//---------------------------------------------------------------------------
 		private var _touchAcross:Boolean;//zhuzhongmao
-		public var isDebugStats:Boolean;
 		
 		protected var _layerBatchId:int;//渲染批次, 按批次排列先后顺序，有助于减少drawcall被打断次数
 		public function get layerBatchId():int{return _layerBatchId}

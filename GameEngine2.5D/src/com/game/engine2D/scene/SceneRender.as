@@ -51,8 +51,8 @@ package com.game.engine2D.scene
 			{
 				Tick.instance.addCallBack(render);
 				_isRendering = true;
-				//
 				Stage3DLayerManager.stage.addEventListener(Event.ENTER_FRAME,onSceneRender);
+				_tickCnt = 0;
 			}
 		}
 		/**
@@ -63,10 +63,9 @@ package com.game.engine2D.scene
 			if(_isRendering)
 			{
 				Tick.instance.removeCallBack(render);
-				//
 				Stage3DLayerManager.stage.removeEventListener(Event.ENTER_FRAME,onSceneRender);
-				//
 				_isRendering = false;
+				_tickCnt = 0;
 			}
 		}
 		
@@ -95,10 +94,14 @@ package com.game.engine2D.scene
 			var isInRender:Boolean = Boolean(_tickCnt & 1);
 			if(isInRender)
 			{
-				_scene.sceneRenderLayer.run();
-				//地图刷新
-				if (_scene.sceneZoneMapLayer)
-					_scene.sceneZoneMapLayer.run();
+				var recoverDisposal:Boolean = Stage3DLayerManager.stage3DProxy.recoverFromDisposal();//锁屏恢复还未完成
+				if (recoverDisposal)
+				{
+					_scene.sceneRenderLayer.run();
+					
+					if (_scene.sceneZoneMapLayer)//地图刷新
+						_scene.sceneZoneMapLayer.run();
+				}
 			}
 		}
 	}

@@ -23,7 +23,7 @@ package com.editor.fight.spell
 	import com.game.engine3D.scene.render.RenderSet3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.IRenderAnimator;
-	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.vo.BaseObj3D;
 
 	import flash.geom.Vector3D;
@@ -57,7 +57,7 @@ package com.editor.fight.spell
 			if (info.spellData)
 			{
 				var effectRu : RenderUnit3D;
-				var rud : RenderParamData;
+				var rud : RenderParamData3D;
 				var mRoleRes : String = TabelFieldHelper.getReleaseRoleEffect(info.spellData, atkor.stateMachine.isRiding);
 				var mSceneRes : String = TabelFieldHelper.getReleaseSceneEffect(info.spellData, atkor.stateMachine.isRiding);
 				var mBindBone : String = TabelFieldHelper.getReleaseBindBone(info.spellData, atkor.stateMachine.isRiding);
@@ -65,7 +65,7 @@ package com.editor.fight.spell
 				var scale : Vector3D = TabelFieldHelper.getReleaseEffectScale(info.spellData);
 				if (mRoleRes)
 				{
-					rud = new RenderParamData(RenderUnitID.KNIFE_LIGHT, RenderUnitType.KNIFE_LIGHT, GlobalConfig.getEffectFilePath(mRoleRes));
+					rud = new RenderParamData3D(RenderUnitID.KNIFE_LIGHT, RenderUnitType.KNIFE_LIGHT, GlobalConfig.getEffectFilePath(mRoleRes));
 					rud.clearSameType = true;
 
 					if (mBindBone)
@@ -94,7 +94,7 @@ package com.editor.fight.spell
 					if (!destPosition)
 						destPosition = atkor.position;
 
-					rud = new RenderParamData(knifeLightObjID, SceneCharType.KNIFE_LIGHT_EFFECT, GlobalConfig.getEffectFilePath(mSceneRes));
+					rud = new RenderParamData3D(knifeLightObjID, SceneCharType.KNIFE_LIGHT_EFFECT, GlobalConfig.getEffectFilePath(mSceneRes));
 
 					effectRu = RenderUnit3D.create(rud);
 					effectRu.allowCameraAnimator = true;
@@ -126,7 +126,7 @@ package com.editor.fight.spell
 			if (info.spellData)
 			{
 				var effectRu : RenderUnit3D;
-				var rud : RenderParamData;
+				var rud : RenderParamData3D;
 				var mRoleRes : String = TabelFieldHelper.getSelfRoleEffect(info.spellData, atkor.stateMachine.isRiding);
 				var mSceneRes : String = TabelFieldHelper.getSelfSceneEffect(info.spellData, atkor.stateMachine.isRiding);
 				var mBindBone : String = TabelFieldHelper.getSelfBindBone(info.spellData, atkor.stateMachine.isRiding);
@@ -134,7 +134,7 @@ package com.editor.fight.spell
 				var scale : Vector3D = TabelFieldHelper.getSelfEffectScale(info.spellData);
 				if (mRoleRes)
 				{
-					rud = new RenderParamData(RenderUnitID.SPELL_SELF_EFFECT, RenderUnitType.SPELL_SELF_EFFECT, GlobalConfig.getEffectFilePath(mRoleRes));
+					rud = new RenderParamData3D(RenderUnitID.SPELL_SELF_EFFECT, RenderUnitType.SPELL_SELF_EFFECT, GlobalConfig.getEffectFilePath(mRoleRes));
 					rud.clearSameType = true;
 
 					if (mBindBone)
@@ -163,7 +163,7 @@ package com.editor.fight.spell
 					if (!destPosition)
 						destPosition = atkor.position;
 
-					rud = new RenderParamData(selfEffectObjID, SceneCharType.SCENE_SELF_EFFECT, GlobalConfig.getEffectFilePath(mSceneRes));
+					rud = new RenderParamData3D(selfEffectObjID, SceneCharType.SCENE_SELF_EFFECT, GlobalConfig.getEffectFilePath(mSceneRes));
 
 					effectRu = RenderUnit3D.create(rud);
 					effectRu.allowCameraAnimator = true;
@@ -191,7 +191,7 @@ package com.editor.fight.spell
 			{
 				if (!offset)
 					offset = new Vector3D();
-				var rud : RenderParamData = new RenderParamData(renderId, renderType, GlobalConfig.getEffectFilePath(roleRes));
+				var rud : RenderParamData3D = new RenderParamData3D(renderId, renderType, GlobalConfig.getEffectFilePath(roleRes));
 				rud.clearSameType = clearSameType;
 				var effectRu : RenderUnit3D;
 				if (bindBone)
@@ -220,13 +220,13 @@ package com.editor.fight.spell
 					offset = new Vector3D();
 				if (!scale)
 					scale = new Vector3D();
-				var rud : RenderParamData = new RenderParamData(renderId, renderType, GlobalConfig.getEffectFilePath(roleRes));
+				var rud : RenderParamData3D = new RenderParamData3D(renderId, renderType, GlobalConfig.getEffectFilePath(roleRes));
 				rud.clearSameType = clearSameType;
 				var effectRu : RenderUnit3D;
 				if (bindBone)
 				{
 					var avatarInfo : AvatarInfo = (target.data as RoleData).avatarInfo;
-					var rpd_mount : RenderParamData = avatarInfo.rpd_mount;
+					var rpd_mount : RenderParamData3D = avatarInfo.rpd_mount;
 					if (rpd_mount)
 					{
 						effectRu = target.avatar.addRenderUnitToChild(RenderUnitType.MOUNT, RenderUnitID.MOUNT, bindBone, rud);
@@ -263,11 +263,11 @@ package com.editor.fight.spell
 			if (info.spellData)
 			{
 				var effectRu : RenderUnit3D;
-				var rud : RenderParamData;
+				var rud : RenderParamData3D;
 
 				if (mRoleRes)
 				{
-					rud = new RenderParamData(hurtEffectObjID, RenderUnitType.HURT, GlobalConfig.getEffectFilePath(mRoleRes));
+					rud = new RenderParamData3D(hurtEffectObjID, RenderUnitType.HURT, GlobalConfig.getEffectFilePath(mRoleRes));
 					if (mBindBone)
 						effectRu = targetRole.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, mBindBone, rud);
 					else
@@ -297,7 +297,7 @@ package com.editor.fight.spell
 					if (!destPosition)
 						destPosition = targetRole.position;
 
-					rud = new RenderParamData(hurtEffectObjID, SceneCharType.SCENE_HURT_EFFECT, GlobalConfig.getEffectFilePath(mSceneRes));
+					rud = new RenderParamData3D(hurtEffectObjID, SceneCharType.SCENE_HURT_EFFECT, GlobalConfig.getEffectFilePath(mSceneRes));
 
 					effectRu = RenderUnit3D.create(rud);
 					effectRu.allowCameraAnimator = true;
@@ -328,7 +328,7 @@ package com.editor.fight.spell
 
 				var mSceneRes : String = TabelFieldHelper.getDestSceneEffect(info.spellData, isRiding);
 				var effectRu : RenderUnit3D;
-				var rud : RenderParamData;
+				var rud : RenderParamData3D;
 				var repeat : int = 1;
 				var lifecycle : int = 0;
 				if (info.isTrapSpell)
@@ -338,7 +338,7 @@ package com.editor.fight.spell
 				}
 				if (mSceneRes)
 				{
-					rud = new RenderParamData(info.flySceneObjID, SceneCharType.SCENE_DEST_EFFECT, GlobalConfig.getEffectFilePath(mSceneRes));
+					rud = new RenderParamData3D(info.flySceneObjID, SceneCharType.SCENE_DEST_EFFECT, GlobalConfig.getEffectFilePath(mSceneRes));
 
 					effectRu = RenderUnit3D.create(rud);
 					effectRu.allowCameraAnimator = true;
@@ -481,7 +481,7 @@ package com.editor.fight.spell
 		private static function addFlyEffectOnce(info : ReleaseSpellInfo, effectRes : String, atkorPosition : Vector3D, atkorRotationY : Number, destPosition : Vector3D, moveDelay : int, playDelay : int, releaseDelayTime : int, mFlyTime : int, mFlySpeed : int, throwHeight : int, throwWeightRatio : int, effectQueue : Vector.<IRenderAnimator>, locusPoints : Vector.<AnimatorLocusPoint>) : void
 		{
 			var effectSet : RenderSet3D = RenderSet3D.create(SceneCharType.SCENE_FLY_SPELL + info.flySceneObjID, flySceneObjID);
-			var rud : RenderParamData = new RenderParamData(1, "effect", GlobalConfig.getEffectFilePath(effectRes), effectRes);
+			var rud : RenderParamData3D = new RenderParamData3D(1, "effect", GlobalConfig.getEffectFilePath(effectRes), effectRes);
 
 			var effectRu : RenderUnit3D = effectSet.addRenderUnit(rud);
 			effectRu.allowCameraAnimator = true;

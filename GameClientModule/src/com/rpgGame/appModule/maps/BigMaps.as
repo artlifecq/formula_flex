@@ -2,6 +2,7 @@ package com.rpgGame.appModule.maps
 {
 	import com.game.engine3D.manager.SceneMapDataManager;
 	import com.game.engine3D.utils.MathUtil;
+	import com.game.engine3D.vo.MapTextureLoader;
 	import com.game.engine3D.vo.SceneMapData;
 	import com.game.engine3D.vo.map.ClientMapData;
 	import com.gameClient.utils.HashMap;
@@ -11,8 +12,10 @@ package com.rpgGame.appModule.maps
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
+
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.core.utils.MCUtil;
+
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.MapTeamMemberInfo;
@@ -154,27 +157,28 @@ package com.rpgGame.appModule.maps
 		private function onMapDataComplete(sceneMapData : SceneMapData) : void
 		{
 			
-			if (sceneMapData.miniMapData)
-			{
-				onLoadBitmapDataComplete(sceneMapData);
-			}
-			else
-			{
+//			if (sceneMapData.miniMapData)
+//			{
+//				onLoadBitmapDataComplete(sceneMapData);
+//			}
+//			else
+//			{
+				absMaxWidth = sceneMapData.clientMapData.boundMaxX;
+				absMaxHeight = sceneMapData.clientMapData.boundMaxY;
 				var senceData : SceneData = MapDataManager.getMapInfo(_currentMapId);
 				var mapUrl : String = ClientConfig.getMap(senceData.map);
 				var mapName : String = ClientConfig.getMapName(senceData.map);
 				var miniMapName : String = ClientConfig.getMiniMapName(sceneMapData.clientMapData.miniMapRes);
 				SceneMapDataManager.addMiniMap(mapName, mapUrl + "_2d/" + miniMapName, sceneMapData.clientMapData.miniMapRect, onLoadBitmapDataComplete, onMapDataFaild);
-			}
+//			}
 		}
-		private function onMapDataFaild(sceneMapData : SceneMapData) : void
+		private function onMapDataFaild(loader : MapTextureLoader) : void
 		{
 		}
-		private function onLoadBitmapDataComplete(sceneMapData : SceneMapData) : void
+		private function onLoadBitmapDataComplete(loader : MapTextureLoader) : void
 		{
-			var texture : IStarlingTexture = sceneMapData.miniMapTexture;
-			absMaxWidth = sceneMapData.clientMapData.boundMaxX;
-			absMaxHeight = sceneMapData.clientMapData.boundMaxY;
+			var texture : IStarlingTexture = loader.subTexture;
+			
 			if (!texture)
 			{
 				return;

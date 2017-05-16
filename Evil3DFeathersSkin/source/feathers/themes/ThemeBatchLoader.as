@@ -1,9 +1,5 @@
 package feathers.themes
 {
-	import flash.events.ProgressEvent;
-	
-	import away3d.loaders.multi.MultiLoadData;
-
 	/**
 	 * 皮肤包批量加载器
 	 * @author wewell@163.com
@@ -12,19 +8,15 @@ package feathers.themes
 	public class ThemeBatchLoader
 	{
 		private var _urls:Array;
-		private var _needBmdUrls:Array;
+		private var _urlsLoaded:int;
 		private var _urlsTotal:int;
+		
 		private var _onLoad:Function;
 		private var _onProgress:Function;
 		private var _onError:Function;
 		
 		public function ThemeBatchLoader()
 		{
-		}
-		
-		public function setNeedBitmapUrls(urls:Array):void
-		{
-			_needBmdUrls = urls;
 		}
 		
 		public function loadBatch(urls : Array, onLoad : Function = null, onProgress : Function=null, onError:Function=null) : void
@@ -50,24 +42,25 @@ package feathers.themes
 			}
 			
 			var url:String = _urls.pop();
-			var needBmd:Boolean = _needBmdUrls ? _needBmdUrls.indexOf(url) != -1 : false;
-			var loader:ThemeLoader = new ThemeLoader( needBmd );
+			var loader:ThemeLoader = new ThemeLoader();
 			loader.load(url, onOneLoad, onOneProgress, _onError);
 		}
 		
 		private function onOneLoad(loader:ThemeLoader):void
 		{
+			_urlsLoaded++;
+			
 			loadNext();
 		}
 		
-		private function onOneProgress(ld:MultiLoadData, e:ProgressEvent):void
+		private function onOneProgress(p:Number):void
 		{
-			var progress:Number = (_urlsTotal -1 - _urls.length)/_urlsTotal;
-			var curProgress:Number = 1/_urlsTotal * e.bytesLoaded/e.bytesTotal;
+			var totalProgress:Number = _urlsLoaded/_urlsTotal + 1/_urlsTotal * p;
 			if(_onProgress != null)
 			{
-				_onProgress(progress + curProgress);
+				_onProgress(totalProgress);
 			}
 		}
+		
 	}
 }

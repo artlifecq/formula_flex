@@ -5,11 +5,11 @@ package com.game.engine3D.loader
 	import flash.net.URLRequest;
 	import flash.utils.Dictionary;
 	
+	import away3d.animators.IAnimator;
 	import away3d.audio.SoundBox;
 	import away3d.cameras.Camera3D;
 	import away3d.containers.ObjectContainer3D;
 	import away3d.core.base.SubMesh;
-	import away3d.entities.CompositeMesh;
 	import away3d.entities.Mesh;
 	import away3d.entities.SparticleMesh;
 	import away3d.events.AssetEvent;
@@ -22,6 +22,7 @@ package com.game.engine3D.loader
 	import away3d.lights.LightBase;
 	import away3d.loaders.AssetLoader;
 	import away3d.loaders.parsers.AWD2Parser;
+	import away3d.log.Log;
 	import away3d.materials.MaterialBase;
 	import away3d.materials.lightpickers.LightPickerBase;
 	import away3d.materials.methods.EffectMethodBase;
@@ -40,11 +41,12 @@ package com.game.engine3D.loader
 	public class Resource3DLoader extends EventDispatcher
 	{
 		private var _loader : AssetLoader;
+		private var _priority : int;
 		private var _url : String;
 		private var _isLoaded : Boolean;
 		private var _isAsyncLoaded : Boolean;
 		private var _meshByName : Dictionary;
-		private var _objMap : HashMap;//装载awd里面所有的对象
+		private var _objMap : HashMap;
 		private var _elements : Vector.<ObjectContainer3D>;
 		private var _methods : Vector.<EffectMethodBase>;
 		private var _soundBox : SoundBox;
@@ -55,6 +57,7 @@ package com.game.engine3D.loader
 		private var _lightPickerMap : HashMap;
 		/** 灯，包含顶灯 **/
 		private var _lights : Vector.<LightBase>;
+		private var _animators : Vector.<IAnimator>;
 		public static var dabugDelayComplete : int = 0;
 		
 		public function Resource3DLoader()
@@ -68,6 +71,7 @@ package com.game.engine3D.loader
 			_methods = new Vector.<EffectMethodBase>();
 			_lightPickerMap = new HashMap();
 			_lights = new Vector.<LightBase>();
+			_animators = new Vector.<IAnimator>();
 			_soundBox = null;
 			_camera = null;
 		}
@@ -82,13 +86,14 @@ package com.game.engine3D.loader
 			return _isAsyncLoaded;
 		}
 		
-		public function load(url : String) : void
+		public function load(url : String, priority : int = 100) : void
 		{
 			if (!_loader)
 			{
 				_isLoaded = false;
 				_isAsyncLoaded = false;
 				_url = url;
+				_priority = priority;
 				_loader = new AssetLoader();
 				
 				_loader.addEventListener(LoaderEvent.RESOURCE_COMPLETE, onResourceComplete);
@@ -96,8 +101,11 @@ package com.game.engine3D.loader
 				_loader.addEventListener(LoaderEvent.ASYNC_TEXTURES_COMPLETE, onAsyncTexturesComplete);
 				_loader.addEventListener(LoaderEvent.LOAD_ERROR, onLoadError);
 				_loader.addEventListener(ParserEvent.PARSE_ERROR, onParseError);
-				_loader.load(new URLRequest(_url), null, null, new AWD2Parser());
-				trace(GlobalConfig.DEBUG_HEAD + " " + "加载资源：" + _url);
+				_loader.load(new URLRequest(_url), null, null, new AWD2Parser(), _priority);
+				CONFIG::GameEngine3D_Debug
+					{
+						trace(GlobalConfig.DEBUG_HEAD + " " + "加载资源：" + _url);
+					}
 			}
 		}
 		
@@ -120,13 +128,10 @@ package com.game.engine3D.loader
 						var mesh : Mesh = e.asset as Mesh; //CompositeMesh,SparticleMesh//
 						if (mesh)
 						{
-							if (mesh is CompositeMesh)
+							if (mesh is SparticleMesh)
 							{
 							}
-							else if (mesh is SparticleMesh)
-							{
-							}
-							else
+							else //CompositeMesh,Mesh// 
 							{
 								_meshByName[mesh.name] = mesh;
 							}
@@ -137,6 +142,7 @@ package com.game.engine3D.loader
 						}
 						break;
 					case AssetType.ANIMATOR:
+						_animators.push(obj as IAnimator);
 						break;
 					case AssetType.MATERIAL:
 						//					if (e.asset is MaterialBase)
@@ -194,6 +200,8 @@ package com.game.engine3D.loader
 		{
 			if (dabugDelayComplete == 0)
 				completeHandler(e);
+			else if (dabugDelayComplete > 100000)
+				TweenLite.delayedCall(int(Math.random() * (dabugDelayComplete % 100000)) * 0.001, completeHandler, [e]);
 			else
 				TweenLite.delayedCall(dabugDelayComplete * 0.001, completeHandler, [e]);
 		}
@@ -204,11 +212,6 @@ package com.game.engine3D.loader
 			this.dispatchEvent(e);
 		}
 		
-		/**
-		 * 主要处理材质的收集 
-		 * @param e
-		 * 
-		 */		
 		private function completeHandler(e : Event) : void
 		{
 			for (var name : String in _meshByName)
@@ -230,14 +233,14 @@ package com.game.engine3D.loader
 		
 		private function onParseError(e : ParserEvent) : void
 		{
-			trace(GlobalConfig.DEBUG_HEAD + " " + "解析错误：" + _url);
+			Log.error(GlobalConfig.DEBUG_HEAD + " " + "解析错误：" + _url);
 			this.dispatchEvent(e);
 			unload();
 		}
 		
 		private function onLoadError(e : LoaderEvent) : void
 		{
-			trace(GlobalConfig.DEBUG_HEAD + " " + "加载错误：" + _url);
+			Log.error(GlobalConfig.DEBUG_HEAD + " " + "加载错误：" + _url);
 			this.dispatchEvent(e);
 			unload();
 		}
@@ -299,6 +302,11 @@ package com.game.engine3D.loader
 			return _lights;
 		}
 		
+		public function get animators() : Vector.<IAnimator>
+		{
+			return _animators;
+		}
+		
 		public function get soundBox() : SoundBox
 		{
 			return _soundBox;
@@ -313,6 +321,7 @@ package com.game.engine3D.loader
 		{
 			_isLoaded = false;
 			_isAsyncLoaded = false;
+			_priority = 0;
 			removeLoaderEvents();
 			if (_loader)
 			{
@@ -324,26 +333,30 @@ package com.game.engine3D.loader
 		
 		public function dispose() : void
 		{
-			if (_elements)
-			{
-				for each (var element : ObjectContainer3D in _elements)
+			CONFIG::GameEngine3D_Debug
 				{
-					element.dispose();
+					trace(GlobalConfig.DEBUG_HEAD + " " + "销毁资源：" + _url);
 				}
-				_elements.length = 0;
-				_elements = null;
-			}
-			if (_methods)
-			{
-				_methods.length = 0;
-				_methods = null;
-			}
-			if (_objMap)
-			{
-				_objMap.clear();
-				_objMap = null;
-			}
-			var name : String;
+				if (_elements)
+				{
+					for each (var element : ObjectContainer3D in _elements)
+					{
+						element.dispose();
+					}
+					_elements.length = 0;
+					_elements = null;
+				}
+				if (_methods)
+				{
+					_methods.length = 0;
+					_methods = null;
+				}
+				if (_objMap)
+				{
+					_objMap.clear();
+					_objMap = null;
+				}
+				var name : String;
 			if (_materialMap)
 			{
 				for (name in _materialMap)

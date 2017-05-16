@@ -214,8 +214,8 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 86;
-			temp.x = 65;
+			temp.width = 57;
+			temp.x = 78;
 			temp.y = 151;
 			return temp;
 		}
