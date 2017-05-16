@@ -108,7 +108,7 @@ package com.rpgGame.app.ui.main.taskbar
 					var monsterId:int=TaskMissionManager.getTreasuerMonsterId(num);
 					if(key==1)
 					{
-						TaskUtil.monsterTaskWalk(monsterId);
+						TaskUtil.monsterTaskWalk(monsterId,startFight);
 					}
 					else
 					{
