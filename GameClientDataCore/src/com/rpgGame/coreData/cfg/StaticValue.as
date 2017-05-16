@@ -3,8 +3,6 @@ package com.rpgGame.coreData.cfg
 {
 	import com.gameClient.log.GameLog;
 	
-	import org.client.mainCore.ds.HashMap;
-	
 	/**
 	 * 常用公用常量
 	 * 
@@ -68,6 +66,35 @@ package com.rpgGame.coreData.cfg
 		public static const COLOR_CODE_26:uint = 0x6e3117;
 		/**灰色文字 27 */		
 		public static const COLOR_CODE_27:uint = 0x76726d;
+		//上面是老的现在暂时保留
+		
+		/**
+		 * 绿色
+		 */
+		public static const UI_GREEN:uint=0x55bd15;
+		/**
+		 *黄 
+		 */
+		public static const UI_YELLOW:uint=0xe8c958;
+		/**
+		 *浅黄
+		 */
+		public static const UI_YELLOW1:uint=0xcfc6ae;
+		/**
+		 *普通文本
+		 */
+		public static const UI_NORMAL:uint=0x8b8d7b;
+		
+		/**
+		 *特殊文本蓝
+		 */
+		public static const UI_SPECIAL_BLUE:uint=0x2482b4;
+		/**
+		 *特殊文本红
+		 */
+		public static const UI_SPECIAL_RED:uint=0xe1201c;
+		
+		
 		//////////////////////////////品质色///////////////////////////////////////////
 		/**品质白*/		
 		public static const Q_WHITE:uint = 0x939388;
