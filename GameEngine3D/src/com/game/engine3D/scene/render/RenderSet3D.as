@@ -50,7 +50,7 @@ package com.game.engine3D.scene.render
 
 		public static function recycle(rs : RenderSet3D) : void
 		{
-			if (!rs)
+			if (!rs || rs.isDisposed)
 				return;
 			_cnt--;
 			//利用池回收
@@ -569,7 +569,8 @@ package com.game.engine3D.scene.render
 			//从表中移除
 			_renderUnitMap[key] = null;
 			delete _renderUnitMap[key];
-			ru.restoreAllChildUnitToParent(_graphicDis);
+			ru.restoreAllChildUnits();
+			//			ru.restoreAllChildUnitToParent(_graphicDis);
 			ru.removeMouseUpCallBack(handleMouseUp);
 			ru.removeMouseDownCallBack(handleMouseDown);
 			ru.removeMouseOverCallBack(handlerMouseOver);

@@ -268,10 +268,13 @@ package starling.styles
 
 import flash.display3D.Context3DProgramType;
 
+import away3d.arcane;
 import away3d.core.managers.Stage3DProxy;
 
 import starling.rendering.MeshEffect;
-import starling.rendering.Program;
+import starling.rendering.ProgramNameID;
+
+use namespace arcane;
 
 class ColorMatrixEffect extends MeshEffect
 {
@@ -291,21 +294,31 @@ class ColorMatrixEffect extends MeshEffect
 		stage3DProxy.setProgramConstantsFromVector(Context3DProgramType.FRAGMENT, 5, MIN_COLOR);
 	}
 	
+	override protected function get programBaseName():uint 
+	{ 
+		return ProgramNameID.COLOR_MATRIX_MESH_EFFECT;
+	}
 	
-	override protected function createProgram():Program
+	override arcane function getVertexCode():String
 	{
-		var vertexShader:String, fragmentShader:String;
-		
 		if (texture)
 		{
-			
-			vertexShader =
-				"m44 op, va0, vc0 \n" + // 4x4 matrix transform to output clip-space
+			return "m44 op, va0, vc0 \n" + // 4x4 matrix transform to output clip-space
 				"mov v0, va1      \n" + // pass texture coordinates to fragment program
 				"mul v1, va2, vc4 \n";  // multiply alpha (vc4) with color (va2), pass to fp
-			
-			fragmentShader =
-				tex("ft0", "v0", 0, texture) +
+		}
+		else
+		{
+			return "m44 op, va0, vc0 \n" + // 4x4 matrix transform to output clipspace
+				"mul v0, va2, vc4 \n";  // multiply alpha (vc4) with color (va2)
+		}
+	}
+	
+	override arcane function getFragmentCode():String
+	{
+		if (texture)
+		{
+			return tex("ft0", "v0", 0, texture) +
 				"mul ft0, ft0, v1  \n" +  // multiply color with texel color
 				"max ft0, ft0, fc5 \n" + // avoid division through zero in next step
 				"div ft0.xyz, ft0.xyz, ft0.www \n" + // restore original (non-PMA) RGB values
@@ -316,19 +329,12 @@ class ColorMatrixEffect extends MeshEffect
 		}
 		else
 		{
-			vertexShader =
-				"m44 op, va0, vc0 \n" + // 4x4 matrix transform to output clipspace
-				"mul v0, va2, vc4 \n";  // multiply alpha (vc4) with color (va2)
-			
-			fragmentShader =
-				"max ft0, v0, fc5 \n" + // avoid division through zero in next step
+			return "max ft0, v0, fc5 \n" + // avoid division through zero in next step
 				"div ft0.xyz, ft0.xyz, ft0.www \n" + // restore original (non-PMA) RGB values
 				"m44 ft0, ft0, fc0 \n" + // multiply color with 4x4 matrix
 				"add ft0, ft0, fc4 \n" + // add offset
 				"mul ft0.xyz, ft0.xyz, ft0.www \n" + // multiply with alpha again (PMA)
 				"mov oc, ft0 \n";  // copy to output
 		}
-		
-		return Program.fromSource(vertexShader, fragmentShader);
 	}
 }

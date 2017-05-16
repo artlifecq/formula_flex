@@ -24,6 +24,15 @@ package com.game.engine2D.core
 		{
 		}
 		
+		public function get index():int
+		{
+			return 0;
+		}
+		
+		public function set index(value:int):void
+		{
+		}
+		
 		public function get isTextureScale():Boolean
 		{
 			return false;
@@ -48,13 +57,16 @@ package com.game.engine2D.core
 			return 0;
 		}
 		
-		public function clone():TextureMaterial
+		public function clone():ITextureMaterial
 		{
 			var singleTexture:SingleTextureMaterial = new SingleTextureMaterial(texture);
 			singleTexture.animateUVs = this.animateUVs;
 			singleTexture.writeDepth = this.writeDepth;
 			singleTexture.bothSides = this.bothSides;
 			singleTexture.blendMode = this.blendMode;
+			singleTexture.depthCompareMode = this.depthCompareMode;
+			singleTexture.alphaThreshold = this.alphaThreshold;
+			singleTexture.name = this.name + "-copy";
 			return singleTexture;
 		}
 	}

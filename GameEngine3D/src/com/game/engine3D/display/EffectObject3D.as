@@ -1,6 +1,5 @@
 package com.game.engine3D.display
 {
-	import com.game.engine3D.core.poolObject.PoolContainer3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	
 	import away3d.containers.View3D;
@@ -31,9 +30,9 @@ package com.game.engine3D.display
 		/**跳转到特效的百分比*/
 		public function gotoPercent(percent:Number) : void
 		{
-			if (_unit != null)
+			if (_obj3d != null)
 			{
-				var rend:RenderUnit3D=_unit as RenderUnit3D;
+				var rend:RenderUnit3D=_obj3d as RenderUnit3D;
 				if(rend!=null)
 				{
 					
@@ -62,9 +61,9 @@ package com.game.engine3D.display
 		/**设置速度，相对于总时间*/
 		public function setSpeed(speed:Number) : void
 		{
-			if (_unit != null)
+			if (_obj3d != null)
 			{
-				var rend:RenderUnit3D=_unit as RenderUnit3D;
+				var rend:RenderUnit3D=_obj3d as RenderUnit3D;
 				if(rend!=null)
 				{
 					rend.animateSpeed=speed;
@@ -81,9 +80,9 @@ package com.game.engine3D.display
 		 */		
 		public function playEffect(repeat:int=0,speed:Number=1):void
 		{
-			if (_unit != null)
+			if (_obj3d != null)
 			{
-				var unit:RenderUnit3D=_unit as RenderUnit3D;
+				var unit:RenderUnit3D=_obj3d as RenderUnit3D;
 				if(unit!=null)
 				{
 					unit.repeat = repeat;
@@ -107,9 +106,9 @@ package com.game.engine3D.display
 		/**停止特效*/
 		public function stopEffect():void
 		{
-			if (_unit != null)
+			if (_obj3d != null)
 			{
-				var unit:RenderUnit3D=_unit as RenderUnit3D;
+				var unit:RenderUnit3D=_obj3d as RenderUnit3D;
 				if(unit!=null)
 				{
 					unit.stop();

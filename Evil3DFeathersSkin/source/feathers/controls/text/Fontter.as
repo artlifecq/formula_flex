@@ -69,7 +69,7 @@ package feathers.controls.text
 				return;
 			}
 			_defautFontName = value;
-			GuiTheme.updateDefaultFont(_defautFontName, _defaultFontSize);
+			updateDefaultFontTextFormat();
 		}
 		
 		public static function get DEFAULT_FONT_NAME():String
@@ -89,12 +89,63 @@ package feathers.controls.text
 				return;
 			}
 			_defaultFontSize = value;
-			GuiTheme.updateDefaultFont(_defautFontName, _defaultFontSize);
+			updateDefaultFontTextFormat();
 		}
 		
 		public static function get DEFAULT_FONT_SIZE():int
 		{
 			return _defaultFontSize;
+		}
+		
+		/**
+		 *全局默认文本行间距
+		 */		
+		private static var _defaultFontLeading:int = 2;
+		public static function set DEFAULT_FONT_LEADING(value:int):void
+		{
+			if(_defaultFontLeading == value)
+			{
+				return;
+			}
+			_defaultFontLeading = value;
+			updateDefaultFontTextFormat();
+		}
+		
+		public static function get DEFAULT_FONT_LEADING():int
+		{
+			return _defaultFontLeading;
+		}
+		
+		/**
+		 *全局默认字间距
+		 */		
+		private static var _defaultFontLetterSpacing:Number = 0;
+		public static function set DEFAULT_FONT_LETTERSPACING(value:Number):void
+		{
+			if(_defaultFontLetterSpacing == value)
+			{
+				return;
+			}
+			_defaultFontLetterSpacing = value;
+			updateDefaultFontTextFormat();
+		}
+		
+		public static function get DEFAULT_FONT_LETTERSPACING():Number
+		{
+			return _defaultFontLetterSpacing;
+		}
+		
+		private static function updateDefaultFontTextFormat():void
+		{
+			GuiTheme.updateDefaultFont(_defautFontName, _defaultFontSize, _defaultFontLeading, _defaultFontLetterSpacing);
+		}
+		
+		public static function creatDefaultFontTextFormat():TextFormat
+		{
+			var format:TextFormat = new TextFormat(_defautFontName,_defaultFontSize, DEFAULT_FONT_COLOR);
+			format.leading = _defaultFontLeading;
+			format.letterSpacing = _defaultFontLetterSpacing;
+			return format;
 		}
 		
 		private static var _filters:Dictionary = new Dictionary();

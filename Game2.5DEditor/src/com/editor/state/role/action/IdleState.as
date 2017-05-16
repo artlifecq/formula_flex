@@ -8,7 +8,6 @@ package com.editor.state.role.action
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.vo.BaseRole;
 
-	import away3d.animators.transitions.CrossfadeTransition;
 
 	/**
 	 *
@@ -57,21 +56,21 @@ package com.editor.state.role.action
 				case RenderUnitType.DEPUTY_WEAPON:
 					render.visible = true;
 					render.repeat = 0;
-					render.setStatus(statusType, _preStateIsDead ? null : new CrossfadeTransition(0.2), time);
+					render.setStatus(statusType, _preStateIsDead ? null : 0.2, time);
 					if (isFreeze)
 						render.stop(time);
 					break;
 				case RenderUnitType.MOUNT:
 					render.visible = true;
 					render.repeat = 0;
-					render.setStatus(RoleActionType.IDLE, _preStateIsDead ? null : new CrossfadeTransition(0.2), time);
+					render.setStatus(RoleActionType.IDLE, _preStateIsDead ? null : 0.2, time);
 					if (isFreeze)
 						render.stop(time);
 					break;
 				case RenderUnitType.EFFECT:
 					render.visible = true;
 					render.repeat = 0;
-					render.setStatus(RoleActionType.IDLE, null, time);
+					render.setStatus(RoleActionType.IDLE, 0, time);
 					break;
 				case RenderUnitType.KNIFE_LIGHT:
 					break;

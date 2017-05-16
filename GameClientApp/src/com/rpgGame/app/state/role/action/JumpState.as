@@ -122,13 +122,13 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.DEPUTY_WEAPON:
 					render.visible = true;
 					render.repeat = 1;
-					render.setStatus(statusType, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time, speedRatio);
+					render.setStatus(statusType, _useCrossfadeTransition ? 0.2 : null, time, speedRatio);
 					if (isFreeze)
 						render.stop(time);
 					break;
 				case RenderUnitType.MOUNT:
 					render.repeat = 1;
-					render.setStatus(jumpState, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time, speedRatio);
+					render.setStatus(jumpState, _useCrossfadeTransition ? 0.2 : null, time, speedRatio);
 					if (isFreeze)
 						render.stop(time);
 					break;

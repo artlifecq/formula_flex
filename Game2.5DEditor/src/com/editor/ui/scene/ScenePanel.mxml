@@ -85,7 +85,7 @@
 
                 LayerManager.setup(container);
 				Stage3DLayerManager.errorChecking = true;
-				Stage3DLayerManager.setup(container.stage, container, stage3DLayerSetupComplete, 1, 10);
+				Stage3DLayerManager.setup(container.stage, container, stage3DLayerSetupComplete,null,null, 1, 10);
 			}
 
 			private function stage3DLayerSetupComplete() : void

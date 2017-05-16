@@ -2,7 +2,6 @@ package com.game.engine2D.vo
 {
 	import com.game.engine2D.core.ATFSubTexture;
 	import com.game.engine2D.scene.render.RenderUnit;
-	import com.game.engine2D.utils.MaterialUtils;
 	import com.game.engine3D.core.poolObject.IInstancePoolClass;
 	import com.game.engine3D.core.poolObject.InstancePool;
 	
@@ -16,6 +15,7 @@ package com.game.engine2D.vo
 	import away3d.entities.PlanarShadowMesh;
 	import away3d.materials.MaterialBase;
 	import away3d.materials.TextureMaterial;
+	import away3d.textures.AsyncTexture2D;
 	
 	
 	/**
@@ -39,8 +39,8 @@ package com.game.engine2D.vo
 		private var _depth:int = 0;
 		private var _parentBaseObj:BaseObj = null;
 		private var _uvDirty:Boolean = true;
-		private var _positionDirty:Boolean = true;
-		private var _pos:Vector3D = new Vector3D();//上层用的x,y值
+//		private var _positionDirty:Boolean = true;
+//		private var _pos:Vector3D = new Vector3D();//上层用的x,y值
 		private var _posValue:Vector3D = new Vector3D();//实际用的x,y值
 		private var _posScale:Point = new Point(1,1);//实际用的scaleX,scaleY值
 		private var _posGeometryScale:Point = new Point(1,1);//PlaneFrameGeometry scaleX,scaleY值
@@ -48,16 +48,29 @@ package com.game.engine2D.vo
 		
 		private var _alpha:Number = 1.0;
 		private var _smooth:Boolean;
+		private var _isDisposed:Boolean = false;
+		private var _isDestroyed:Boolean;
 		
 		public function PoolMesh(parentBaseObj:BaseObj = null)
 		{
-			super(_geometryPlane, MaterialUtils.default1x1Texture);
+			super(_geometryPlane);
 			_parentBaseObj = parentBaseObj;
 			_width = _height = 4;
 			this.visible = false;
 			this.overrideMaterialProps ||= new OverrideMaterialProps();
 			this.overrideMaterialProps.colorTransform = new ColorTransform();
 			this.overrideMaterialProps.appendColorTransform = true;
+		}
+		
+		
+		public function get isDestroyed():Boolean
+		{
+			return _isDestroyed;
+		}
+		
+		public function get isDisposed():Boolean
+		{
+			return _isDisposed;
 		}
 		
 		override public function get y():Number	
@@ -263,7 +276,7 @@ package com.game.engine2D.vo
 		public function set smooth(value:Boolean):void
 		{
 			_smooth = value;
-			if (this.material != MaterialUtils.default1x1Texture && this.material is TextureMaterial)
+			if (this.material is TextureMaterial)
 			{
 				TextureMaterial(this.material).texture.smooth = value;
 			}
@@ -271,7 +284,7 @@ package com.game.engine2D.vo
 		
 		public function run():void
 		{
-			this.visible = (this.material != MaterialUtils.default1x1Texture);
+			this.visible = (this.material != null)
 			if (this.visible)
 			{
 				if (_atfSubTexture)
@@ -298,6 +311,7 @@ package com.game.engine2D.vo
 		/** 缓存池销毁对象 */
 		public function instanceDestroy():void
 		{
+			this._isDestroyed = true;
 			this.dispose();
 		}
 		
@@ -307,15 +321,17 @@ package com.game.engine2D.vo
 			if (this.parent)
 				this.parent.removeChild(this);
 			this.visible = false;
-			this.material = MaterialUtils.default1x1Texture;
+			this.material = null;
 			this.layerType = EntityLayerType.DEFAULT;
 			this.castsShadows = false;
 			_atfSubTexture = null;
 			_parentBaseObj = null;
+			_isDisposed = true;
 		}
 		
 		public function reSet($parameters:Array):void
 		{
+			_isDisposed = false;
 			_smooth = false;
 			_alpha = 1.0;
 			_depth = 0;
@@ -370,10 +386,20 @@ package com.game.engine2D.vo
 			{
 				var msg:String = "xxxx";
 				if (_atfSubTexture)
+				{
 					msg = _atfSubTexture.atfPath;
+				}
 				else if (_parentBaseObj is RenderUnit)
+				{
 					msg = RenderUnit(_parentBaseObj).getFullSourchPath();
-				throw new Error("模型发生宽高为0，res:"+msg);
+				}
+				else if (this.material is TextureMaterial)
+				{
+					var tm:TextureMaterial = this.material as TextureMaterial
+					if (tm.texture is AsyncTexture2D)
+						msg = AsyncTexture2D(tm.texture).url;
+				}
+				throw new Error("PoolMesh发生宽高为0:" + _width + "-" +  _height + "，res:"+msg);
 			}
 			super.scaleX = pValueX;
 			super.scaleY = pValueY;

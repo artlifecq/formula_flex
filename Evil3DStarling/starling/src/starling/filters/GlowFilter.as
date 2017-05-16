@@ -15,6 +15,12 @@ package starling.filters
 
     /** The GlowFilter class lets you apply a glow effect to display objects.
      *  It is similar to the drop shadow filter with the distance and angle properties set to 0.
+     *
+     *  <p>This filter can also be used to create outlines around objects. The trick is to
+     *  assign an alpha value that's (much) greater than <code>1.0</code>, and full resolution.
+     *  For example, the following code will yield a nice black outline:</p>
+     *
+     *  <listing>object.filter = new GlowFilter(0x0, 30, 1, 1.0);</listing>
      */
     public class GlowFilter extends FragmentFilter
     {
@@ -32,7 +38,7 @@ package starling.filters
          *                   '0.5' half resolution, etc.
          */
         public function GlowFilter(color:uint=0xffff00, alpha:Number=1.0, blur:Number=1.0,
-                                   resolution:Number=0.5)
+                                   resolution:Number=1.0)
         {
             _blurFilter = new BlurFilter(blur, blur, resolution);
             _compositeFilter = new CompositeFilter();
@@ -52,7 +58,7 @@ package starling.filters
         }
 
         /** @private */
-        override public function process(painter:Painter, helper:IFilterHelper,
+        override public function process(painter:Painter, helper:FilterHelper,
                                          input0:IStarlingTexture = null, input1:IStarlingTexture = null,
                                          input2:IStarlingTexture = null, input3:IStarlingTexture = null):IStarlingTexture
         {

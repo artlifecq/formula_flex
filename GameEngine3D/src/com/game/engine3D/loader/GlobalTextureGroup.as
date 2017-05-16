@@ -2,11 +2,11 @@ package com.game.engine3D.loader
 {
 	import com.game.engine3D.utils.CallBackUtil;
 	import com.game.engine3D.vo.CallBackData;
-
+	
 	import flash.utils.Dictionary;
-
+	
 	import org.client.mainCore.utils.ArrayUtil;
-
+	
 	/**
 	 *
 	 * 全局贴图组
@@ -17,7 +17,7 @@ package com.game.engine3D.loader
 	public class GlobalTextureGroup
 	{
 		private static var globalTextureGroupByUrls : Dictionary = new Dictionary();
-
+		
 		public static function addTextureGroup(urls : Array, onComplete : Function, ... onCompleteArgs) : void
 		{
 			var groupUrls : String = urls.join("_");
@@ -37,7 +37,7 @@ package com.game.engine3D.loader
 				globalTextureGroup.load(urls);
 			}
 		}
-
+		
 		public static function removeGroupTextureCallBack(urls : Array, onComplete : Function) : void
 		{
 			var groupUrls : String = urls.join("_");
@@ -45,24 +45,24 @@ package com.game.engine3D.loader
 			if (globalTextureGroup)
 				globalTextureGroup.removeLoadCompleteCallBack(onComplete);
 		}
-
+		
 		private var _isLoaded : Boolean;
 		private var _textureByUrl : Dictionary;
 		private var _urls : Array;
 		private var _surplusUrls : Array;
 		private var _loadCompleteCallBackList : Vector.<CallBackData>;
-
+		
 		public function GlobalTextureGroup()
 		{
 			_loadCompleteCallBackList = new Vector.<CallBackData>();
 		}
-
+		
 		public function get isLoaded() : Boolean
 		{
 			return _isLoaded;
 		}
-
-		public function load(urls : Array, useAssetLoader : Boolean = true) : void
+		
+		public function load(urls : Array, priority : int = 0, useAssetLoader : Boolean = true) : void
 		{
 			if (!urls)
 			{
@@ -78,10 +78,10 @@ package com.game.engine3D.loader
 			_surplusUrls = _urls.slice();
 			for each (var url : String in _urls)
 			{
-				GlobalTexture.addTexture(url, onTextureComplete);
+				GlobalTexture.addTexture(url, priority, onTextureComplete);
 			}
 		}
-
+		
 		private function onTextureComplete(globalTexture : GlobalTexture) : void
 		{
 			GlobalTexture.removeTextureCallBack(globalTexture.url, onTextureComplete);
@@ -96,7 +96,7 @@ package com.game.engine3D.loader
 				onLoadComplete();
 			}
 		}
-
+		
 		public function unload() : void
 		{
 			_isLoaded = false;
@@ -117,24 +117,24 @@ package com.game.engine3D.loader
 			_textureByUrl = null;
 			_loadCompleteCallBackList.length = 0;
 		}
-
+		
 		public function setLoadCompleteCallBack(value : Function, args : Array) : void
 		{
 			CallBackUtil.addCallBackData(_loadCompleteCallBackList, value, args);
 		}
-
+		
 		public function removeLoadCompleteCallBack(value : Function) : void
 		{
 			CallBackUtil.removeCallBackData(_loadCompleteCallBackList, value);
 		}
-
+		
 		private function onLoadComplete() : void
 		{
 			_isLoaded = true;
 			CallBackUtil.exceteCallBackData(this, _loadCompleteCallBackList);
 			_loadCompleteCallBackList.length = 0;
 		}
-
+		
 		public function getTexture(url : String) : GlobalTexture
 		{
 			if (_textureByUrl)
@@ -143,7 +143,7 @@ package com.game.engine3D.loader
 			}
 			return null;
 		}
-
+		
 		public function dispose() : void
 		{
 			unload();

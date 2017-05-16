@@ -14,6 +14,7 @@ package com.editor.core
 	import com.editor.manager.SceneBlockManager;
 	import com.editor.manager.SceneManager;
 	import com.editor.utils.FileUtil;
+	import com.game.engine3D.pathFinding.HeightMapHelperProxy;
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.map.ClientMapAreaGridData;
 	
@@ -383,9 +384,9 @@ package com.editor.core
 
 						navMapData.numBlocksX = SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper.worldMaxX;
                         navMapData.numBlocksY = 0;
-                        if (HeightMapHelper.MODE_XY == SceneManager.getInstance().xyzMode) {
+                        if (HeightMapHelperProxy.MODE_XY == SceneManager.getInstance().xyzMode) {
                             navMapData.numBlocksY = -SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper.worldMinY;
-                        } else if (HeightMapHelper.MODE_XZ == SceneManager.getInstance().xyzMode) {
+                        } else if (HeightMapHelperProxy.MODE_XZ == SceneManager.getInstance().xyzMode) {
                             navMapData.numBlocksY = SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper.worldMaxZ;
                         }
 						
@@ -397,9 +398,9 @@ package com.editor.core
                         function checkAndAdd(list : Array, point : Vector3D) : void {
                             var x : Number = point.x;
                             var y : Number = 0;
-                            if (HeightMapHelper.MODE_XY == SceneManager.getInstance().xyzMode) {
+                            if (HeightMapHelperProxy.MODE_XY == SceneManager.getInstance().xyzMode) {
                                 y = -point.y;
-                            } else if (HeightMapHelper.MODE_XZ == SceneManager.getInstance().xyzMode) {
+                            } else if (HeightMapHelperProxy.MODE_XZ == SceneManager.getInstance().xyzMode) {
                                 y = point.z;
                             }
                             if (x < 0 || y < 0) {

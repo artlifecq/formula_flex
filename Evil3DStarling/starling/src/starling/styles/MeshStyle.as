@@ -205,10 +205,24 @@ package starling.styles
         }
 
         /** Call this method if the target needs to be redrawn.
-         *  The call is simply forwarded to the mesh. */
+         *  The call is simply forwarded to the target mesh. */
         protected function setRequiresRedraw():void
         {
             if (_target) _target.setRequiresRedraw();
+        }
+
+        /** Call this method when the vertex data changed.
+         *  The call is simply forwarded to the target mesh. */
+        protected function setVertexDataChanged():void
+        {
+            if (_target) _target.setVertexDataChanged();
+        }
+
+        /** Call this method when the index data changed.
+         *  The call is simply forwarded to the target mesh. */
+        protected function setIndexDataChanged():void
+        {
+            if (_target) _target.setIndexDataChanged();
         }
 
         /** Called when assigning a target mesh. Override to plug in class-specific logic. */
@@ -282,7 +296,7 @@ package starling.styles
         public function setVertexPosition(vertexID:int, x:Number, y:Number):void
         {
             _vertexData.setPoint(vertexID, "position", x, y);
-            setRequiresRedraw();
+            setVertexDataChanged();
         }
 
         /** Returns the alpha value of the vertex at the specified index. */
@@ -295,7 +309,7 @@ package starling.styles
         public function setVertexAlpha(vertexID:int, alpha:Number):void
         {
             _vertexData.setAlpha(vertexID, "color", alpha);
-            setRequiresRedraw();
+            setVertexDataChanged();
         }
 
         /** Returns the RGB color of the vertex at the specified index. */
@@ -308,7 +322,7 @@ package starling.styles
         public function setVertexColor(vertexID:int, color:uint):void
         {
             _vertexData.setColor(vertexID, "color", color);
-            setRequiresRedraw();
+            setVertexDataChanged();
         }
 
         /** Returns the texture coordinates of the vertex at the specified index. */
@@ -324,7 +338,7 @@ package starling.styles
             if (_texture) TextureHelper.setTexCoords(_texture,_vertexData, vertexID, "texCoords", u, v);
             else _vertexData.setPoint(vertexID, "texCoords", u, v);
 
-            setRequiresRedraw();
+            setVertexDataChanged();
         }
 
         // properties
@@ -361,7 +375,7 @@ package starling.styles
             if (value == 0xffffff && _vertexData.tinted)
                 _vertexData.updateTinted();
 
-            setRequiresRedraw();
+            setVertexDataChanged();
         }
 
         /** The format used to store the vertices. */
@@ -386,11 +400,13 @@ package starling.styles
                         getTexCoords(i, sPoint);
                         TextureHelper.setTexCoords(value,_vertexData, i, "texCoords", sPoint.x, sPoint.y);
                     }
+
+                    setVertexDataChanged();
                 }
+                else setRequiresRedraw();
 
                 _texture = value;
                 _textureBase = value ? value.root : null;
-                setRequiresRedraw();
             }
         }
 

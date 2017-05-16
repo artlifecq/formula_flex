@@ -27,15 +27,27 @@ package feathers.controls
 		/**根据当前显示对象宽高自由缩放**/
 		public static const IMAGE_SCALE_MODE_AUTO:int = 1;
 		
+		/**普通图像格式,jpg, png, atf**/
+		public static const IMAGE_FORMAT_BITMAP:int = 0;
+		/**自定义atfx格式，即非2的幂图像打包成atfx**/
+		public static const IMAGE_FORMAT_ATFX:int = 1;
+		
 		public var onImageLoaded:Function;
 		
 		private var _content:DisplayObject;
+		
+		private var _styleName:String;
+		
+		public var loadPriorityType:int = 6000;
+		
+		public var imageFormat:int = IMAGE_FORMAT_BITMAP;
 		
 		/**
 		 * 有tileGrid 或 scale9Grid的image必定使用IMAGE_SCALE_MODE_AUTO模式
 		 * 其它普通素材默认为IMAGE_SCALE_MODE_AUTO,如不需要拉伸,请在外部将此属性设置为IMAGE_SCALE_MODE_NO_SCALE
 		 */
 		private var _imgScaleMode:int = IMAGE_SCALE_MODE_AUTO;
+		private var _imgVisible:Boolean = true;
 		
 		public function UIAsset()
 		{
@@ -51,8 +63,11 @@ package feathers.controls
 		 */		
 		override public function set styleName(value:String):void
 		{
+			imageVisible = false;
+			
 			if(GuiTheme.isErrorStr(value))
 			{
+				onCompelte();
 				return;
 			}
 			
@@ -60,43 +75,49 @@ package feathers.controls
 			{
 				value = value.split("?")[0];
 			}
-			if(styleName==value && _content != null)
+			
+			if(_styleName == value && _content != null)
+			{
+				if(!_imgVisible)imageVisible = true;
+				onCompelte();
 				return;
-			super.styleName = value;
+			}
+			
+			_styleName = value;
+			
 			if(GuiTheme.ins.hasTexture(value))
 			{
 				setTexture(GuiTheme.ins.getTexture(value), value);
-			}else if(this.stage != null){
-				onAddedToStage();
 			}else{
-				this.addEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
+				GuiTheme.ins.LoadAsset(styleName, onAssetLoad, loadPriorityType, imageFormat);
 			}
 		}
 		
-		private function onAddedToStage():void
+		override public function get styleName():String
 		{
-			this.removeEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
-			if(!styleName)return;
-			
-			if(!GuiTheme.ins.hasTexture(styleName))
-			{
-				GuiTheme.ins.LoadAsset(styleName, onAssetLoad);
-			}
+			return _styleName;
 		}
 		
-		private function onAssetLoad():void
+		private function onAssetLoad(texture:IStarlingTexture):void
 		{
+			if(!_styleName)return;
 			setTexture(GuiTheme.ins.getTexture(styleName));
 		}
 		
 		public function setTexture(texture:IStarlingTexture, key:String = null):void{
-			if(!texture)return;
-			if(_repeatScale9Skin)
+			if(!texture)
+			{
+				onCompelte();
+				return;
+			}
+			
+			if(_repeatScale9Skin && GuiTheme.ins.isCanRepeatWithGpu(key))
 			{
 				setRepeatSacle9Texture(key);
 			}else{
 				setImageTexture(texture, key);
 			}
+			if(!_imgVisible)imageVisible = true;
 		}
 		
 		private function setRepeatSacle9Texture(key:String = null):void
@@ -104,7 +125,7 @@ package feathers.controls
 			var texture:RepeatScale9Textures = GuiTheme.ins.getRepeatScale9Textures(key);
 			if(!texture)return;
 			
-			if(_content && !(_content is RepeatScale9Image))
+			if(_content is Image)
 			{
 				_content.removeFromParent(true);
 				_content = null;
@@ -122,7 +143,7 @@ package feathers.controls
 		{
 			if(!texture)return;
 			
-			if(_content && !(_content is Image))
+			if(_content is RepeatScale9Image)
 			{
 				_content.removeFromParent(true);
 				_content = null;
@@ -205,7 +226,8 @@ package feathers.controls
 			{
 				var image:Image = img as Image;
 				useOriginalSize &&= ( image.tileGrid == null && image.scale9Grid == null);
-				style = _style;
+				if(_style != null)Image(img).setStyle(_style);
+				if(_uv && !repeatSkin)Image(img).setTextureUVCoords(_uv.x, _uv.y, _uv.width, _uv.height);
 			}
 		
 			if(!img.parent)this.addChildAt(img, 0);
@@ -220,17 +242,9 @@ package feathers.controls
 				img.height = this.height;
 			}
 			img.touchAcross = _touchAcross;
+			img.visible = _imgVisible;
 			
-			if(onImageLoaded != null)
-			{
-				onImageLoaded(this);
-			}
-			
-			if (hasEventListener(Event.COMPLETE)){
-//				TimerServer.callAfterFrame(dispatchComplete, 1);
-				dispatchComplete();
-			}
-			
+			onCompelte();
 			invalidate(INVALIDATION_FLAG_STYLES);
 		}
 		
@@ -240,6 +254,21 @@ package feathers.controls
 			if(_touchAcross == value)return;
 			_touchAcross = value;
 			if(_content)_content.touchAcross = value;
+		}
+		
+		/**
+		 *派发完成事件，无论加载成功还是失败 
+		 */		
+		private function onCompelte():void
+		{
+			if(onImageLoaded != null)
+			{
+				onImageLoaded(this);
+			}
+			
+			if (hasEventListener(Event.COMPLETE)){
+				dispatchComplete();
+			}
 		}
 		
 		private function dispatchComplete():void
@@ -277,6 +306,14 @@ package feathers.controls
 			this.height = height;
 		}
 		
+		private function set imageVisible(value:Boolean):void
+		{
+			if(_imgVisible == value)return;
+			_imgVisible = value;
+			if(_content && _content.visible != value)
+				_content.visible = value;
+		}
+		
 		/**
 		 * 有tileGrid 或 scale9Grid的image必定使用IMAGE_SCALE_MODE_AUTO模式
 		 * 其它普通素材默认为IMAGE_SCALE_MODE_NO_SCALE,如需要拉伸,请在外部将此属性设置为IMAGE_SCALE_MODE_AUTO
@@ -312,6 +349,44 @@ package feathers.controls
 			{
 				IMeshStyle(_content).style = value;
 			}
+		}
+		
+		/** A Quad represents a colored and/or textured rectangle.
+		 *  <pre>
+		 *  0 - 1
+		 *  | / |
+		 *  2 - 3
+		 *  </pre>
+		 * 
+		 *Point 0(u1,v1), Point 3(u2, v2);
+		 * 
+		 * @param    u1        [optional]    The horizontal coordinate of the texture value. Defaults to 0.0
+		 * @param    v1        [optional]    The vertical coordinate of the texture value. Defaults to 0.0
+		 * @param    u2        [optional]    The horizontal coordinate of the texture value. Defaults to 1.0
+		 * @param    v2        [optional]    The vertical coordinate of the texture value. Defaults to 1.0
+		 */
+		private var _uv:Rectangle;
+		public function setTextureUVCoords(u1:Number, v1:Number, u2:Number, v2:Number):void
+		{
+			_uv ||= new Rectangle();
+			_uv.setTo(u1, v1, u2, v2);
+			
+			if(_content is Image && !repeatSkin)
+			{
+				Image(_content).setTextureUVCoords(u1, v1, u2, v2);
+			}else if(_content !=  null){
+				throw new Error("非法使用uv坐标设置,此功能仅适用于普通贴图(不包括平铺或九宫拉伸)");
+			}
+		}
+		
+		override public function dispose():void
+		{
+			super.dispose();
+			
+			_style = null;
+			_content = null;
+			_styleName = null;
+			onImageLoaded = null;
 		}
 	}
 }

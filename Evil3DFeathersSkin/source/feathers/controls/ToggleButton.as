@@ -1074,10 +1074,10 @@ package feathers.controls
 				this.tapToSelect = new TapToSelect(this);
 				this.longPress.tapToSelect = this.tapToSelect;
 			}
-			if(!this.keyToSelect)
+/*			if(!this.keyToSelect)
 			{
 				this.keyToSelect = new KeyToSelect(this);
-			}
+			}*/
 		}
 
 		/**
@@ -1149,8 +1149,8 @@ package feathers.controls
 		{
 			this.tapToSelect.isEnabled = this._isEnabled && this._isToggle;
 			this.tapToSelect.tapToDeselect = this._isToggle;
-			this.keyToSelect.isEnabled = this._isEnabled && this._isToggle;
-			this.keyToSelect.keyToDeselect = this._isToggle;
+/*			this.keyToSelect.isEnabled = this._isEnabled && this._isToggle;
+			this.keyToSelect.keyToDeselect = this._isToggle;*/
 		}
 	}
 }

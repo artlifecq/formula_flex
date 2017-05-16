@@ -20,19 +20,15 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarHairResCfgData;
-	import com.rpgGame.coreData.cfg.model.AvatarMountResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarWeapontResCfgData;
 	import com.rpgGame.coreData.cfg.model.HeroModelCfgData;
-	import com.rpgGame.coreData.cfg.model.MountModelCfgData;
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
 	import com.rpgGame.coreData.clientConfig.AvatarClothesRes;
 	import com.rpgGame.coreData.clientConfig.AvatarDeputyWeaponRes;
 	import com.rpgGame.coreData.clientConfig.AvatarHairRes;
-	import com.rpgGame.coreData.clientConfig.AvatarMountRes;
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.clientConfig.AvatarWeaponRes;
 	import com.rpgGame.coreData.clientConfig.HeroModel;
-	import com.rpgGame.coreData.clientConfig.MountModel;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_mode;
 	import com.rpgGame.coreData.clientConfig.Q_horse;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
@@ -204,7 +200,7 @@ package com.rpgGame.app.manager
 					var mountRu : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.MOUNT, RenderUnitID.MOUNT, true);
 					if (mountRu)
 					{
-						role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"), mountRu.radius * simpleShadowBaseScale);
+						role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"),0, mountRu.radius * simpleShadowBaseScale);
 					}
 				}
 				else
@@ -212,7 +208,7 @@ package com.rpgGame.app.manager
 					var bodyRu : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
 					if (bodyRu)
 					{
-						role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"), bodyRu.radius * simpleShadowBaseScale);
+						role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"),0, bodyRu.radius * simpleShadowBaseScale);
 					}
 				}
 			}

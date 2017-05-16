@@ -10,12 +10,13 @@ package com.game.engine2D.scene.render.loader
 	import com.game.engine2D.tools.SceneCache;
 	import com.game.engine2D.vo.BaseObj;
 	
+	import away3d.loaders.multi.MultiUrlBlacklistManager;
+	
 	/**
-	 * @private
 	 * 换装加载器
 	 * @author Carver
-	 * @modifier L.L.M.Sunny
-	 * 修改时间：2015-4-21 上午10:33:37
+	 * @modifier guoqing.wen
+	 * 修改时间：2017-2-25 16:33:37
 	 */
 	public class RenderUnitLoader
 	{
@@ -41,12 +42,13 @@ package com.game.engine2D.scene.render.loader
 			)
 			{
 				var fullSourchPath:String = apd.getFullSourcePath($status);
-//				var is404Error:Boolean = MultiBlackManager.is404ErrorUrl(fullSourchPath); 
-//				if(is404Error)
-//				{
-//					trace("Black 404Error : ",fullSourchPath);
-//					return;
-//				}
+				
+				var is404Error:Boolean = MultiUrlBlacklistManager.check(fullSourchPath); 
+				if(is404Error)
+				{
+					trace("Black 404Error : ",fullSourchPath);
+					return;
+				}
 				var xid:XmlImgData = SceneCache.renderUnitCountShare.getShareData(fullSourchPath) as XmlImgData;
 				if(!xid)//如果不在xml缓存中，则加载 
 				{
@@ -89,7 +91,6 @@ package com.game.engine2D.scene.render.loader
 		
 		private static function dataError($iap:IRenderUnit):void
 		{
-			//			trace("靠,靠,靠....avatarPart加载出错啊.....");
 			var $ap:RenderUnit = $iap as RenderUnit;
 			if($ap)
 			{

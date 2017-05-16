@@ -24,7 +24,6 @@ package com.game.engine3D.manager
 	import away3d.cameras.lenses.OrthographicOffCenterLens;
 	import away3d.containers.ObjectContainer3D;
 	import away3d.containers.View3D;
-	import away3d.core.managers.Stage3DManager;
 	import away3d.core.managers.Stage3DProxy;
 	import away3d.core.math.Matrix3DUtils;
 	import away3d.core.pick.PickingCollisionVO;
@@ -41,9 +40,9 @@ package com.game.engine3D.manager
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.events.Event;
-
+	
 	use namespace arcane;
-
+	
 	/**
 	 *
 	 * Stage3D层管理器
@@ -76,7 +75,7 @@ package com.game.engine3D.manager
 		 * starling层
 		 */
 		private static var _starlingLayer : StarlingLayer;
-
+		
 		/** 安装完成 **/
 		private static var _setupCompleteFunc : Function;
 		private static var _setupCompleted : Boolean;
@@ -84,6 +83,7 @@ package com.game.engine3D.manager
 		private static var _userDisabledError : Function;
 		/** 截获2D层鼠标事件 **/
 		private static var _view2DCaptureEventFunc : Function;
+		private static var _onMemoryTooHighedFunc : Function;
 		/**
 		 * 是否能够渲染
 		 */
@@ -91,11 +91,10 @@ package com.game.engine3D.manager
 		/** 3D场景父容器 **/
 		private static var _viewContainer : DisplayObjectContainer;
 		private static var _viewCount : int;
-		
 		private static var _viewAntiAlias : int = 0;
 		private static var _screenAntiAlias : int = 0;
 		private static var _errorChecking : Boolean = false;
-
+		
 		/**
 		 * 布局相关
 		 */
@@ -107,25 +106,24 @@ package com.game.engine3D.manager
 		private static var _viewMarginRight : int = 0;
 		private static var _viewWidth : int = 0;
 		private static var _viewHeight : int = 0;
-
+		
 		private static var _screenViewMarginTop : int = 0;
 		private static var _screenViewMarginBottom : int = 0;
 		private static var _screenViewMarginLeft : int = 0;
 		private static var _screenViewMarginRight : int = 0;
 		private static var _screenViewWidth : int = 0;
 		private static var _screenViewHeight : int = 0;
-
+		
 		private static var _lastTime : int = 0;
 		private static var _frame : int = 0;
 		private static var _fps : Number = 0;
 		private static var _averageFps : Array = [];
-		
 		private static var _screenViewInternalScale : Number = 0;
-
+		
 		public function Stage3DLayerManager()
 		{
 		}
-
+		
 		/**
 		 * 安装
 		 * @param stage
@@ -142,7 +140,7 @@ package com.game.engine3D.manager
 		public static function setup(stage : Stage, viewContainer : DisplayObjectContainer, //
 									 setupComplete : Function, setupError : Function, userDisabledError : Function, //
 									 viewCount : int = 1, starlingLayerCount : int = 0, //
-									 onStarlingEventCapture : Function = null, useScreenView : Boolean = true, //
+									 onStarlingEventCapture : Function = null, onMemoryTooHighed : Function = null, useScreenView : Boolean = true, //
 									 profile : String = "baseline", forceSoftware : Boolean = false) : void
 		{
 			_stage = stage;
@@ -161,11 +159,13 @@ package com.game.engine3D.manager
 			_userDisabledError = userDisabledError;
 			_viewCount = viewCount;
 			_view2DCaptureEventFunc = onStarlingEventCapture;
+			_onMemoryTooHighedFunc = onMemoryTooHighed;
 			_starlingLayerCount = starlingLayerCount;
 			_useScreenView = useScreenView;
 			_renderable = false;
 			_setupCompleted = false;
-			_stage3DProxy = Stage3DManager.getInstance(_stage).getFreeStage3DProxy(forceSoftware, profile);//Stage3DProxy.initEngine(stage, profile);
+			Log.addLogCallBack(onLogCallBack);
+			_stage3DProxy = Stage3DProxy.initEngine(stage, profile);
 			if (_stage3DProxy)
 			{
 				_stage3DProxy.antiAlias = _screenAntiAlias;
@@ -173,7 +173,14 @@ package com.game.engine3D.manager
 				_stage3DProxy.addEventListener(Stage3DEvent.CONTEXT3D_CREATED, onContextCreated);
 				_stage3DProxy.addEventListener(Stage3DEvent.CONTEXT3D_USER_DISABLED_ERROR, showSecurityPanel);
 				_stage3DProxy.addEventListener(Stage3DEvent.CONTEXT3D_UNKONW_ERROR, onContextError);
-//				_stage3DProxy.addEventListener(Stage3DEvent.CONTEXT3D_BACKBUFFER_INVALID, onContextError);
+				_stage3DProxy.addEventListener(Stage3DEvent.CONTEXT3D_BACKBUFFER_INVALID, onContextError);
+			}
+			else
+			{
+				if (_onMemoryTooHighedFunc != null)
+				{
+					_onMemoryTooHighedFunc();
+				}
 			}
 		}
 		
@@ -195,14 +202,13 @@ package com.game.engine3D.manager
 		{
 			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_UNKONW_ERROR, onContextError);
 			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_USER_DISABLED_ERROR, showSecurityPanel);
-//			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_BACKBUFFER_INVALID, onContextError);
+			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_BACKBUFFER_INVALID, onContextError);
 			if (_setupError != null)
 			{
 				_setupError();
 			}
 		}
-
-
+		
 		/**
 		 * 创建成功
 		 */
@@ -210,7 +216,7 @@ package com.game.engine3D.manager
 		{
 			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_USER_DISABLED_ERROR, showSecurityPanel);
 			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_UNKONW_ERROR, onContextError);
-//			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_BACKBUFFER_INVALID, onContextError);
+			_stage3DProxy.removeEventListener(Stage3DEvent.CONTEXT3D_BACKBUFFER_INVALID, onContextError);
 			_views = new Vector.<View3D>();
 			for (var i : int = 0; i < _viewCount; i++)
 			{
@@ -221,59 +227,53 @@ package com.game.engine3D.manager
 				_viewContainer.addChildAt(view, 0);
 				view.mousePicker.layerMask = EntityLayerType.TERRAIN | EntityLayerType.DEFAULT;
 				view.visible = true;
-
+				
 				if (_viewCount != 0)
 					view.layeredView = true;
-
+				
 				//guoqing.wen add
 				view.entityCollector.collectPlanarShadow = GlobalConfig.use2DMap;
 				view.lodEnabled = !GlobalConfig.use2DMap;
-
+				
 				_views.push(view);
 			}
 			if (_starlingLayerCount > 0)
 			{
-//				_starlingView2D = new Starling(StarlingLayer, _stage, _stage3DProxy, _stage3DProxy.viewPort, _stage3DProxy.stage3D);
 				_starlingView2D = new Starling(StarlingLayer, _stage, _stage3DProxy);
 				_starlingView2D.addEventListener(starling.events.Event.ROOT_CREATED, starlingViewCreated);
 				_starlingView2D.start();
 			}
-
+			
 			if (_useScreenView)
 			{
 				_screenView = new View3D();
 				_screenView.stage3DProxy = _stage3DProxy;
 				_screenView.layeredView = true;
-//				_screenView.camera.lens.near = 1;
-//				_screenView.camera.lens.far = 12000;
-//				_screenView.camera.position = new Vector3D(0, 0, -1000);
+				//				_screenView.camera.lens.near = 1;
+				//				_screenView.camera.lens.far = 12000;
+				//				_screenView.camera.position = new Vector3D(0, 0, -1000);
 				_screenView.camera.lens = new OrthographicOffCenterLens(0, 1000, 0, 1000);
 				_screenView.mouseEnabled = false;
 				_screenView.mouseChildren = false;
 				_viewContainer.addChild(_screenView);
 				_screenView.visible = false;
-
+				
 				_screenLight = new DirectionalLight(0.345, -0.379, 0.857);
 				_screenLight.ambient = 0.5;
 				_screenLight.ambientColor = 0xcdd2ea;
 				_screenLight.diffuse = 1;
 				_screenLight.color = 0xffffff;
 				_screenLight.specular = 1;
-//				_screenLight.castsPlanarShadows = true;
-//				_screenLight.castsShadows = false;
-//				_screenLight.planarShadowAlpha = 1;
-//				var plane:Plane3D = new Plane3D(0,Math.cos(GlobalConfig.mapCameraRadian),Math.sin(GlobalConfig.mapCameraRadian));
-//				_screenLight.planarShadowPlane = plane;
 				_screenLightPicker = new StaticLightPicker([_screenLight]);
 				_screenView.scene.addChild(_screenLight);
 			}
-
+			
 			if (_starlingLayerCount == 0)
 			{
 				stage3DCreated();
 			}
 		}
-
+		
 		private static function starlingViewCreated(e : starling.events.Event) : void
 		{
 			_starlingView2D.removeEventListener(starling.events.Event.ROOT_CREATED, starlingViewCreated);
@@ -301,12 +301,12 @@ package com.game.engine3D.manager
 			_setupCompleted = true;
 			_renderable = true;
 		}
-
+		
 		public static function get screenAntiAlias() : int
 		{
 			return _screenAntiAlias;
 		}
-
+		
 		/**
 		 * 最大值是4
 		 * @param value
@@ -317,12 +317,12 @@ package com.game.engine3D.manager
 			_screenAntiAlias = value;
 			_stage3DProxy.antiAlias = _screenAntiAlias;
 		}
-
+		
 		public static function get viewAntiAlias() : int
 		{
 			return _viewAntiAlias;
 		}
-
+		
 		/**
 		 * 最大值是4
 		 * @param value
@@ -339,7 +339,7 @@ package com.game.engine3D.manager
 				}
 			}
 		}
-
+		
 		public static function set errorChecking(value : Boolean) : void
 		{
 			_errorChecking = value;
@@ -348,12 +348,12 @@ package com.game.engine3D.manager
 				_stage3DProxy.context3D.enableErrorChecking = _errorChecking;
 			}
 		}
-
+		
 		public static function get errorChecking() : Boolean
 		{
 			return _errorChecking;
 		}
-
+		
 		/**
 		 * 屏幕适配
 		 */
@@ -412,7 +412,7 @@ package com.game.engine3D.manager
 				//				}
 			}
 		}
-
+		
 		public static function resizeView(x : int = 0, y : int = 0, width : int = 0, height : int = 0, marginLeft : int = 0, marginRight : int = 0, marginTop : int = 0, marginBottom : int = 0) : void
 		{
 			_viewX = x;
@@ -425,7 +425,7 @@ package com.game.engine3D.manager
 			_viewMarginBottom = marginBottom;
 			handleScreenSize(null);
 		}
-
+		
 		public static function resizeScreenView(width : int = 0, height : int = 0, marginLeft : int = 0, marginRight : int = 0, marginTop : int = 0, marginBottom : int = 0) : void
 		{
 			_screenViewWidth = width;
@@ -436,7 +436,7 @@ package com.game.engine3D.manager
 			_screenViewMarginBottom = marginBottom;
 			handleScreenSize(null);
 		}
-
+		
 		/**
 		 * 开始渲染，开始摇滚了@L.L.M.Sunny
 		 * @param e
@@ -446,7 +446,7 @@ package com.game.engine3D.manager
 		{
 			if (!_renderable)
 				return;
-
+			
 			_stage3DProxy.mouse3DManager.enabled = true;
 			if (_starlingView2D)
 			{
@@ -459,7 +459,7 @@ package com.game.engine3D.manager
 						_view2DCaptureEventFunc();
 				}
 			}
-
+			
 			if (_views)
 			{
 				for each (var view : View3D in _views)
@@ -467,12 +467,12 @@ package com.game.engine3D.manager
 					view.render();
 				}
 			}
-
+			
 			if (_starlingView2D)
 			{
 				_starlingView2D.render();
 			}
-
+			
 			if (_screenView && _screenView.visible)
 			{
 				_screenView.render();
@@ -493,29 +493,29 @@ package com.game.engine3D.manager
 				}
 			}
 		}
-
+		
 		public static function startRender() : void
 		{
 			_renderable = true;
 		}
-
+		
 		public static function stopRender() : void
 		{
 			_renderable = false;
 		}
-
+		
 		public static function getPickPositonByMousePositon(view : View3D, mouseX : int, mouseY : int) : Vector3D
 		{
 			if (view == null)
 				return null;
-
+			
 			var vo : PickingCollisionVO = view.mousePicker.getViewCollision(mouseX, mouseY, view);
 			if (vo == null || vo.entity == null)
 				return null;
 			var scenePosition : Vector3D = Matrix3DUtils.transformVector(vo.entity.sceneTransform, vo.localPosition);
 			return scenePosition;
 		}
-
+		
 		/**
 		 * 根据当前屏幕坐标点得到场景实际的坐标点
 		 * @param posx
@@ -537,7 +537,7 @@ package com.game.engine3D.manager
 				pickPosition = rayCastPicker.getXZPlaneCollison(mouseX, mouseY, height, view);
 			return pickPosition;
 		}
-
+		
 		/**
 		 * 获得3D场景中的最大矩形
 		 * @return 矩形
@@ -546,10 +546,10 @@ package com.game.engine3D.manager
 		{
 			var min : Vector3D = new Vector3D(Infinity, Infinity, Infinity);
 			var max : Vector3D = new Vector3D(-Infinity, -Infinity, -Infinity);
-
+			
 			var ctr : int = 0;
 			var ocCount : int = view.scene.numChildren;
-
+			
 			// Get all scene child container bounds		
 			while (ctr < ocCount)
 			{
@@ -570,7 +570,7 @@ package com.game.engine3D.manager
 			}
 			return Vector.<Number>([min.x, min.y, min.z, max.x, max.y, max.z]);
 		}
-
+		
 		/**
 		 * 更新摄像机的景深
 		 *
@@ -589,35 +589,35 @@ package com.game.engine3D.manager
 				vec.x = (vec.x * 0.5) + bounds[0];
 				vec.y = (vec.y * 0.5) + bounds[1];
 				vec.z = (vec.z * 0.5) + bounds[2];
-
+				
 				// Far plane is distance from camera position to scene bounds center + the radius of the scene bounds
 				view.camera.lens.far = Vector3D.distance(view.camera.position, vec) + objRadius;
 			}
 		}
-
+		
 		public static function get isRenderable() : Boolean
 		{
 			return _renderable;
 		}
-
+		
 		/** 舞台 **/
 		public static function get stage() : Stage
 		{
 			return _stage;
 		}
-
+		
 		/** starling对象 **/
 		public static function get starlingView2D() : Starling
 		{
 			return _starlingView2D;
 		}
-
+		
 		/** starling层 **/
 		public static function get starlingLayer() : StarlingLayer
 		{
 			return _starlingLayer;
 		}
-
+		
 		/**
 		 * 鼠标当前是否与starling层有碰撞
 		 * @author wewell@163.com
@@ -634,7 +634,7 @@ package com.game.engine3D.manager
 				return false;
 			return !target.touchAcross;
 		}
-
+		
 		/** 视口对象 **/
 		public static function getView(index : int = 0) : View3D
 		{
@@ -642,34 +642,34 @@ package com.game.engine3D.manager
 				return _views[index];
 			return null;
 		}
-
+		
 		/** 视口对象 仅用于界面上显示3D对象 **/
 		public static function get screenView() : View3D
 		{
 			return _screenView;
 		}
-
+		
 		public static function get screenLight() : DirectionalLight
 		{
 			return _screenLight;
 		}
-
+		
 		public static function get screenLightPicker() : StaticLightPicker
 		{
 			return _screenLightPicker;
 		}
-
+		
 		/** 3D舞台 **/
 		public static function get stage3DProxy() : Stage3DProxy
 		{
 			return _stage3DProxy;
 		}
-
+		
 		public static function get screenViewInternalScale() : Number
 		{
 			return _screenViewInternalScale;
 		}
-
+		
 		/**
 		 * 驱动信息
 		 * @return
@@ -681,12 +681,12 @@ package com.game.engine3D.manager
 				return _stage3DProxy.context3D.driverInfo;
 			return "n/a (no view)";
 		}
-
+		
 		public static function fullScreen() : void
 		{
 			_stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
 		}
-
+		
 		public static function get isWindows() : Boolean
 		{
 			return Capabilities.os.toLowerCase().indexOf("windows") != -1;
@@ -701,7 +701,7 @@ package com.game.engine3D.manager
 		{
 			return driverInfo.toLowerCase().indexOf("standard constrained") != -1;
 		}
-
+		
 		public static function set frameRate(value : int) : void
 		{
 			_frameRate = value;
@@ -713,11 +713,12 @@ package com.game.engine3D.manager
 			_frame = 0;
 			_averageFps.length = 0;
 		}
-
+		
 		public static function get frameRate() : int
 		{
 			return _frameRate;
 		}
+		
 		public static function get fps() : int
 		{
 			return _fps;
@@ -742,7 +743,7 @@ package com.game.engine3D.manager
 		
 		public static function registerApplicationLoader(loader : Loader) : void
 		{
-//			Stage3DProxy.registerApplicationLoader(loader);
+			Stage3DProxy.registerApplicationLoader(loader);
 		}
 		
 		private static function onLogCallBack(item : LogItem) : void
@@ -752,6 +753,7 @@ package com.game.engine3D.manager
 				UnCatchErrorReport.sendErroLog(item.message);
 			}
 		}
+		
 		/** ---------------------------------编辑器使用代码------------------------- */
 		public static function set stage3DProxy(value : Stage3DProxy) : void
 		{

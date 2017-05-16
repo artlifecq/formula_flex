@@ -394,5 +394,33 @@ package com.rpgGame.app.utils
 			
 			return retTime;
 		}
+		
+		/**
+		 * 获得活动下次时间毫秒数 （例：为了避免getNextTime方法在17:00活动开启后上线，获取是第二天的17:00时间）
+		 * @param duration 活动的持续时间(毫秒数)
+		 * @return
+		 */
+		public function getCheackNextTime( duration:int ):Number
+		{
+			var curTime:Date = new Date();
+			curTime.time = SystemTimeManager.curtTm - duration;
+			
+			curTime.time += 60000;
+			var retTime:Date = null;
+			// 从今年开始搜，最多往后搜十年
+			for ( var idx:int = 0; idx < 10; idx++ )
+			{
+				retTime = getTimeWithYear( curTime );
+				if ( null != retTime )
+					break;
+				
+				curTime.fullYear = getNextYear( curTime );
+				curTime.month = getFirstMonth();
+				curTime.date = getFirstDate();
+				cleanHour( curTime );
+			}
+			
+			return retTime.time ;
+		}
 	}
 }

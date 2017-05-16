@@ -7,6 +7,12 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
+	import flash.events.MouseEvent;
+	import flash.geom.Point;
+	import flash.geom.Rectangle;
+	import flash.ui.Keyboard;
+	import flash.utils.getTimer;
+	
 	import feathers.controls.supportClasses.IViewPort;
 	import feathers.core.FeathersControl;
 	import feathers.core.IFeathersControl;
@@ -24,13 +30,7 @@ package feathers.controls
 	import feathers.utils.math.roundToNearest;
 	import feathers.utils.math.roundUpToNearest;
 	import feathers.utils.skins.resetFluidChildDimensionsForMeasurement;
-
-	import flash.events.MouseEvent;
-	import flash.geom.Point;
-	import flash.geom.Rectangle;
-	import flash.ui.Keyboard;
-	import flash.utils.getTimer;
-
+	
 	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
@@ -347,6 +347,12 @@ package feathers.controls
 		 * <a target="_top" href="../../../help/deprecation-policy.html">Feathers deprecation policy</a>.</p>
 		 */
 		public static const SCROLL_BAR_DISPLAY_MODE_FIXED_FLOAT:String = "fixedFloat";
+		
+		/**
+		 * The scroll bars are always visible and appear next to the scroller's
+		 * view port.
+		 */
+		public static const  SCROLL_BAR_DISPLAY_MODE_ALWAYS_VISIBLE:String = "alwaysVisible";
 
 		/**
 		 * @private
@@ -1363,7 +1369,8 @@ package feathers.controls
 			if(value !== value) //isNaN
 			{
 				//there isn't any recovery from this, so stop it early
-				throw new ArgumentError("horizontalScrollPosition cannot be NaN.");
+				//throw new ArgumentError("horizontalScrollPosition cannot be NaN.");
+				return;
 			}
 			this._horizontalScrollPosition = value;
 			this.invalidate(INVALIDATION_FLAG_SCROLL);
@@ -1647,7 +1654,8 @@ package feathers.controls
 			if(value !== value) //isNaN
 			{
 				//there isn't any recovery from this, so stop it early
-				throw new ArgumentError("verticalScrollPosition cannot be NaN.");
+				//throw new ArgumentError("verticalScrollPosition cannot be NaN.");
+				return;
 			}
 			this._verticalScrollPosition = value;
 			this.invalidate(INVALIDATION_FLAG_SCROLL);
@@ -2073,7 +2081,7 @@ package feathers.controls
 		 */
 		protected var _scrollBarDisplayMode:String = ScrollBarDisplayMode.FLOAT;
 
-		[Inspectable(type="String",enumeration="float,fixed,none")]
+		[Inspectable(type="String",enumeration="float,fixed,fixedFloat,alwaysVisible,none")]
 		/**
 		 * Determines how the scroll bars are displayed.
 		 *
@@ -3821,6 +3829,7 @@ package feathers.controls
 				{
 					ScrollBar(horizontalScrollBar).showSliderMode = _showSliderMode;
 					ScrollBar(horizontalScrollBar).thumbAutoResize = _thumbAutoResize;
+					ScrollBar(horizontalScrollBar).alwaysVisible = _scrollBarDisplayMode == SCROLL_BAR_DISPLAY_MODE_ALWAYS_VISIBLE;
 				}
 				//===============================================
 				for(var propertyName:String in this._horizontalScrollBarProperties)
@@ -3842,6 +3851,7 @@ package feathers.controls
 				{
 					ScrollBar(verticalScrollBar).showSliderMode = _showSliderMode;
 					ScrollBar(verticalScrollBar).thumbAutoResize = _thumbAutoResize;
+					ScrollBar(verticalScrollBar).alwaysVisible = _scrollBarDisplayMode == SCROLL_BAR_DISPLAY_MODE_ALWAYS_VISIBLE;
 				}
 				//===============================================
 				for(propertyName in this._verticalScrollBarProperties)
@@ -4435,13 +4445,13 @@ package feathers.controls
 			}
 			if(this.verticalScrollBar)
 			{
-				this.verticalScrollBar.visible = this._hasVerticalScrollBar;
+				this.verticalScrollBar.visible = this._hasVerticalScrollBar || _scrollBarDisplayMode == SCROLL_BAR_DISPLAY_MODE_ALWAYS_VISIBLE;
 				this.verticalScrollBar.touchable = this._hasVerticalScrollBar && this._interactionMode != ScrollInteractionMode.TOUCH;
 				this.setRawChildIndexInternal(DisplayObject(this.verticalScrollBar), childCount - 1);
 			}
 			if(this.horizontalScrollBar)
 			{
-				this.horizontalScrollBar.visible = this._hasHorizontalScrollBar;
+				this.horizontalScrollBar.visible = this._hasHorizontalScrollBar || _scrollBarDisplayMode == SCROLL_BAR_DISPLAY_MODE_ALWAYS_VISIBLE;
 				this.horizontalScrollBar.touchable = this._hasHorizontalScrollBar && this._interactionMode != ScrollInteractionMode.TOUCH;
 				if(this.verticalScrollBar)
 				{
@@ -5434,7 +5444,7 @@ package feathers.controls
 			{
 				return;
 			}
-			if(this._hideScrollBarAnimationDuration == 0 && delay == 0)
+			if(this._hideScrollBarAnimationDuration == 0 && delay == 0 && _scrollBarDisplayMode != SCROLL_BAR_DISPLAY_MODE_ALWAYS_VISIBLE)
 			{
 				this.horizontalScrollBar.alpha = 0;
 			}
@@ -5461,7 +5471,7 @@ package feathers.controls
 			{
 				return;
 			}
-			if(this._hideScrollBarAnimationDuration == 0 && delay == 0)
+			if(this._hideScrollBarAnimationDuration == 0 && delay == 0 && _scrollBarDisplayMode != SCROLL_BAR_DISPLAY_MODE_ALWAYS_VISIBLE)
 			{
 				this.verticalScrollBar.alpha = 0;
 			}
@@ -6043,6 +6053,7 @@ package feathers.controls
 		 */
 		protected function nativeStage_mouseWheelHandler(event:MouseEvent):void
 		{
+			if(!this.stage)return;
 			if(!this._isEnabled)
 			{
 				this._touchPointID = -1;
@@ -6307,6 +6318,15 @@ package feathers.controls
 			}
 			this.completeScroll();
 		}
+		
+		private var _keyboardShortcutsEnable:Boolean;
+		public function set keyboardShortcutsEnable(value:Boolean):void
+		{
+			_keyboardShortcutsEnable = value;
+			if(!value && this.stage != null)
+				this.stage.removeEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
+		}
+		
 
 		/**
 		 * @private
@@ -6314,7 +6334,8 @@ package feathers.controls
 		override protected function focusInHandler(event:Event):void
 		{
 			super.focusInHandler(event);
-			this.stage.addEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
+			if(_keyboardShortcutsEnable)
+				this.stage.addEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
 		}
 
 		/**
@@ -6323,7 +6344,8 @@ package feathers.controls
 		override protected function focusOutHandler(event:Event):void
 		{
 			super.focusOutHandler(event);
-			this.stage.removeEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
+			if(_keyboardShortcutsEnable)
+				this.stage.removeEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
 		}
 
 		/**
@@ -6331,6 +6353,8 @@ package feathers.controls
 		 */
 		protected function stage_keyDownHandler(event:KeyboardEvent):void
 		{
+			if(!_keyboardShortcutsEnable)
+				return;
 			if(event.keyCode == Keyboard.HOME)
 			{
 				this.verticalScrollPosition = this._minVerticalScrollPosition;

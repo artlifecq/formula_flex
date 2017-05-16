@@ -205,7 +205,7 @@ package com.rpgGame.app.state.role.control
 				case RenderUnitType.WEAPON:
 				case RenderUnitType.DEPUTY_WEAPON:
 					render.repeat = repeat;
-					render.setStatus(statusType, new CrossfadeTransition(0.2), time);
+					render.setStatus(statusType, 0.2, time);
 					if (isFreeze)
 						render.stop(time);
 					break;

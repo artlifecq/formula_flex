@@ -10,14 +10,16 @@
 
 package starling.rendering
 {
-    import flash.display3D.Context3D;
-    import flash.display3D.IndexBuffer3D;
     import flash.errors.EOFError;
-    import flash.utils.ByteArray;
-    import flash.utils.Endian;
-
-    import starling.core.Starling;
-    import starling.errors.MissingContextError;
+    
+    import away3d.core.base.IndexBuffer3DProxy;
+    import away3d.core.managers.Stage3DProxy;
+    import away3d.premium.DomainMemoryOprator;
+    import away3d.premium.heap.HeapAllocator;
+    import away3d.premium.heap.MemoryItem;
+    import away3d.premium.heap.MemoryItemTypes;
+    
+    import starling.premium.IndexDataHelper;
     import starling.utils.StringUtil;
 
     /** The IndexData class manages a raw list of vertex indices, allowing direct upload
@@ -63,18 +65,11 @@ package starling.rendering
         /** The number of bytes per index element. */
         private static const INDEX_SIZE:int = 2;
 
-        private var _rawData:ByteArray;
+        private var _rawData:MemoryItem;
         private var _numIndices:int;
         private var _initialCapacity:int;
         private var _useQuadLayout:Boolean;
 
-        // basic quad layout
-        private static var sQuadData:ByteArray = new ByteArray();
-        private static var sQuadDataNumIndices:uint = 0;
-
-        // helper objects
-        private static var sVector:Vector.<uint> = new <uint>[];
-        private static var sTrimData:ByteArray = new ByteArray();
 
         /** Creates an empty IndexData instance with the given capacity (in indices).
          *
@@ -105,8 +100,9 @@ package starling.rendering
          *  Quad layout will be restored (until adding data violating that layout). */
         public function clear():void
         {
-            if (_rawData)
-                _rawData.clear();
+			if(_rawData)
+				HeapAllocator.free(_rawData);
+			_rawData = null;
 
             _numIndices = 0;
             _useQuadLayout = true;
@@ -119,8 +115,8 @@ package starling.rendering
 
             if (!_useQuadLayout)
             {
-                clone.switchToGenericData();
-                clone._rawData.writeBytes(_rawData);
+                clone.switchToGenericData(false);
+				clone._rawData.writeMemoryItem(0, _rawData, 0, _rawData.length);
             }
 
             clone._numIndices = _numIndices;
@@ -140,15 +136,13 @@ package starling.rendering
             if (numIndices < 0 || indexID + numIndices > _numIndices)
                 numIndices = _numIndices - indexID;
 
-            var sourceData:ByteArray, targetData:ByteArray;
+            var sourceData:MemoryItem, targetData:MemoryItem;
             var newNumIndices:int = targetIndexID + numIndices;
 
             if (target._numIndices < newNumIndices)
             {
                 target._numIndices = newNumIndices;
 
-                if (sQuadDataNumIndices  < newNumIndices)
-                    ensureQuadDataCapacity(newNumIndices);
             }
 
             if (_useQuadLayout)
@@ -189,14 +183,13 @@ package starling.rendering
                     else target.switchToGenericData();
                 }
 
-                sourceData = sQuadData;
+                sourceData = IndexDataHelper.sQuadData;
                 targetData = target._rawData;
 
                 if ((offset & 3) == 0) // => offset % 4 == 0
                 {
                     indexID += 6 * offset / 4;
                     offset = 0;
-                    ensureQuadDataCapacity(indexID + numIndices);
                 }
             }
             else
@@ -208,44 +201,23 @@ package starling.rendering
                 targetData = target._rawData;
             }
 
-            targetData.position = targetIndexID * INDEX_SIZE;
+			var targetPos:int = targetIndexID * INDEX_SIZE;
 
+			if(targetData.length < numIndices * INDEX_SIZE + targetPos)
+			{
+				HeapAllocator.realloc(targetData, numIndices * INDEX_SIZE + targetPos);
+			}
+			
             if (offset == 0)
-                targetData.writeBytes(sourceData, indexID * INDEX_SIZE, numIndices * INDEX_SIZE);
+			{
+				targetData.writeMemoryItem(targetPos, sourceData, indexID * INDEX_SIZE, numIndices * INDEX_SIZE);
+			}
             else
             {
-                sourceData.position = indexID * INDEX_SIZE;
-
-                // by reading junks of 32 instead of 16 bits, we can spare half the time
-                while (numIndices > 1)
-                {
-                    var indexAB:uint = sourceData.readUnsignedInt();
-                    var indexA:uint  = ((indexAB & 0xffff0000) >> 16) + offset;
-                    var indexB:uint  = ((indexAB & 0x0000ffff)      ) + offset;
-                    targetData.writeUnsignedInt(indexA << 16 | indexB);
-                    numIndices -= 2;
-                }
-
-                if (numIndices)
-                    targetData.writeShort(sourceData.readUnsignedShort() + offset);
+				IndexDataHelper.copyIndexDataTo(sourceData, indexID * INDEX_SIZE, targetData, targetPos, offset, numIndices);
             }
         }
 
-        /** Sets an index at the specified position. */
-        public function setIndex(indexID:int, index:uint):void
-        {
-            if (_numIndices < indexID + 1)
-                 numIndices = indexID + 1;
-
-            if (_useQuadLayout)
-            {
-                if (getBasicQuadIndexAt(indexID) == index) return;
-                else switchToGenericData();
-            }
-
-            _rawData.position = indexID * INDEX_SIZE;
-            _rawData.writeShort(index);
-        }
 
         /** Reads the index from the specified position. */
         public function getIndex(indexID:int):int
@@ -259,21 +231,8 @@ package starling.rendering
             }
             else
             {
-                _rawData.position = indexID * INDEX_SIZE;
-                return _rawData.readUnsignedShort();
+				return _rawData.getInt16(indexID * INDEX_SIZE);
             }
-        }
-
-        /** Adds an offset to all indices in the specified range. */
-        public function offsetIndices(offset:int, indexID:int=0, numIndices:int=-1):void
-        {
-            if (numIndices < 0 || indexID + numIndices > _numIndices)
-                numIndices = _numIndices - indexID;
-
-            var endIndex:int = indexID + numIndices;
-
-            for (var i:int=indexID; i<endIndex; ++i)
-                setIndex(i, getIndex(i) + offset);
         }
 
         /** Appends three indices representing a triangle. Reference the vertices clockwise,
@@ -291,7 +250,6 @@ package starling.rendering
                          (oddTriangleID && c == a + 1 && b == c + 1))
                     {
                         _numIndices += 3;
-                        ensureQuadDataCapacity(_numIndices);
                         return;
                     }
                 }
@@ -299,10 +257,12 @@ package starling.rendering
                 switchToGenericData();
             }
 
-            _rawData.position = _numIndices * INDEX_SIZE;
-            _rawData.writeShort(a);
-            _rawData.writeShort(b);
-            _rawData.writeShort(c);
+			var startPos:int = _numIndices * INDEX_SIZE;
+			if(_rawData.length < startPos + 6)
+			{
+				HeapAllocator.realloc(_rawData, startPos + 6);
+			}
+			IndexDataHelper.addTriangle(_rawData, startPos, a, b, c);
             _numIndices += 3;
         }
 
@@ -326,93 +286,45 @@ package starling.rendering
                     b == a + 1 && c == b + 1 && d == c + 1)
                 {
                     _numIndices += 6;
-                    ensureQuadDataCapacity(_numIndices);
                     return;
                 }
                 else switchToGenericData();
             }
 
-            _rawData.position = _numIndices * INDEX_SIZE;
-            _rawData.writeShort(a);
-            _rawData.writeShort(b);
-            _rawData.writeShort(c);
-            _rawData.writeShort(b);
-            _rawData.writeShort(d);
-            _rawData.writeShort(c);
+			var startPos:int = _numIndices * INDEX_SIZE;
+			if(_rawData.length < startPos + 12)
+			{
+				HeapAllocator.realloc(_rawData, startPos + 12);
+			}
+			IndexDataHelper.addQuad(_rawData, startPos, a, b, c, d);
             _numIndices += 6;
-        }
-
-        /** Creates a vector containing all indices. If you pass an existing vector to the method,
-         *  its contents will be overwritten. */
-        public function toVector(out:Vector.<uint>=null):Vector.<uint>
-        {
-            if (out == null) out = new Vector.<uint>(_numIndices);
-            else out.length = _numIndices;
-
-            var rawData:ByteArray = _useQuadLayout ? sQuadData : _rawData;
-            rawData.position = 0;
-
-            for (var i:int=0; i<_numIndices; ++i)
-                out[i] = rawData.readUnsignedShort();
-
-            return out;
         }
 
         /** Returns a string representation of the IndexData object,
          *  including a comma-separated list of all indices. */
         public function toString():String
         {
-            var string:String = StringUtil.format("[IndexData numIndices={0} indices=\"{1}\"]",
-                _numIndices, toVector(sVector).join());
+            var string:String = StringUtil.format("[IndexData numIndices={0}]",
+                _numIndices);
 
-            sVector.length = 0;
             return string;
         }
 
         // private helpers
 
-        private function switchToGenericData():void
+        private function switchToGenericData(initWithQuadData:Boolean = true):void
         {
             if (_useQuadLayout)
             {
                 _useQuadLayout = false;
 
-                if (_rawData == null)
-                {
-                    _rawData = new ByteArray();
-                    _rawData.endian = Endian.LITTLE_ENDIAN;
-                    _rawData.length = _initialCapacity * INDEX_SIZE; // -> allocated memory
-                    _rawData.length = _numIndices * INDEX_SIZE;      // -> actual length
-                }
-
-                if (_numIndices)
-                    _rawData.writeBytes(sQuadData, 0, _numIndices * INDEX_SIZE);
-            }
-        }
-
-        /** Makes sure that the ByteArray containing the normalized, basic quad data contains at
-         *  least <code>numIndices</code> indices. The array might grow, but it will never be
-         *  made smaller. */
-        private function ensureQuadDataCapacity(numIndices:int):void
-        {
-            if (sQuadDataNumIndices >= numIndices) return;
-
-            var i:int;
-            var oldNumQuads:int = sQuadDataNumIndices / 6;
-            var newNumQuads:int = Math.ceil(numIndices / 6);
-
-            sQuadData.endian = Endian.LITTLE_ENDIAN;
-            sQuadData.position = sQuadData.length;
-            sQuadDataNumIndices = newNumQuads * 6;
-
-            for (i = oldNumQuads; i < newNumQuads; ++i)
-            {
-                sQuadData.writeShort(4 * i);
-                sQuadData.writeShort(4 * i + 1);
-                sQuadData.writeShort(4 * i + 2);
-                sQuadData.writeShort(4 * i + 1);
-                sQuadData.writeShort(4 * i + 3);
-                sQuadData.writeShort(4 * i + 2);
+                if (_rawData)
+					throw new Error("invalid code path!");
+				
+				var max:int = _initialCapacity > _numIndices ? _initialCapacity * INDEX_SIZE : _numIndices * INDEX_SIZE;
+				_rawData = HeapAllocator.calloc(max, MemoryItemTypes.STARLING);
+                if (initWithQuadData && _numIndices)
+					_rawData.writeMemoryItem(0, IndexDataHelper.sQuadData, 0, _numIndices * INDEX_SIZE);
             }
         }
 
@@ -435,50 +347,27 @@ package starling.rendering
 
         /** Creates an index buffer object with the right size to fit the complete data.
          *  Optionally, the current data is uploaded right away. */
-        public function createIndexBuffer(upload:Boolean=false,
-                                          bufferUsage:String="staticDraw"):IndexBuffer3D
+        public function createIndexBuffer(upload:Boolean=false):IndexBuffer3DProxy
         {
-            var context:Context3D = Starling.context;
-            if (context == null) throw new MissingContextError();
             if (_numIndices == 0) return null;
 
-            var buffer:IndexBuffer3D = context.createIndexBuffer(_numIndices, bufferUsage);
+			var buffer:IndexBuffer3DProxy = Stage3DProxy.getInstance().createIndexBuffer(_numIndices, false, Stage3DProxy.STARLING_TYPE); 
 
             if (upload) uploadToIndexBuffer(buffer);
             return buffer;
         }
 
         /** Uploads the complete data (or a section of it) to the given index buffer. */
-        public function uploadToIndexBuffer(buffer:IndexBuffer3D, indexID:int=0, numIndices:int=-1):void
+        public function uploadToIndexBuffer(buffer:IndexBuffer3DProxy, indexID:int=0, numIndices:int=-1):void
         {
             if (numIndices < 0 || indexID + numIndices > _numIndices)
                 numIndices = _numIndices - indexID;
 
             if (numIndices > 0)
-                buffer.uploadFromByteArray(rawData, 0, indexID, numIndices);
-			
-/*			CONFIG::Starling_Debug
-				{
-					tracing("[Starling]IndexData:uploadToIndexBuffer ","| startOffset",indexID," | count", numIndices);
-				}*/
-        }
-
-        /** Optimizes the ByteArray so that it has exactly the required capacity, without
-         *  wasting any memory. If your IndexData object grows larger than the initial capacity
-         *  you passed to the constructor, call this method to avoid the 4k memory problem. */
-        public function trim():void
-        {
-            if (_useQuadLayout) return;
-
-            sTrimData.length = _rawData.length;
-            sTrimData.position = 0;
-            sTrimData.writeBytes(_rawData);
-
-            _rawData.clear();
-            _rawData.length = sTrimData.length;
-            _rawData.writeBytes(sTrimData);
-
-            sTrimData.clear();
+			{
+				var data:MemoryItem = rawData;
+                buffer.uploadFromByteArray(DomainMemoryOprator.getBufferRam(), data.heapPtr, indexID, numIndices);
+			}
         }
 
         // properties
@@ -495,9 +384,18 @@ package starling.rendering
         {
             if (value != _numIndices)
             {
-                if (_useQuadLayout) ensureQuadDataCapacity(value);
-                else _rawData.length = value * INDEX_SIZE;
-                if (value == 0) _useQuadLayout = true;
+                if (_useQuadLayout) 
+				{
+					//do nothing
+				}
+                else
+				{
+					var newLength:int = value * INDEX_SIZE;
+					if (_rawData.length < newLength)
+					{
+						HeapAllocator.realloc(_rawData, newLength);
+					}
+				}
 
                 _numIndices = value;
             }
@@ -538,8 +436,9 @@ package starling.rendering
             {
                 if (value)
                 {
-                    ensureQuadDataCapacity(_numIndices);
-                    _rawData.length = 0;
+					if(_rawData)
+						HeapAllocator.free(_rawData);
+					_rawData = null;
                     _useQuadLayout = true;
                 }
                 else switchToGenericData();
@@ -548,9 +447,9 @@ package starling.rendering
 
         /** The raw index data; not a copy! Beware: the referenced ByteArray may change any time.
          *  Never store a reference to it, and never modify its contents manually. */
-        public function get rawData():ByteArray
+        public function get rawData():MemoryItem
         {
-            if (_useQuadLayout) return sQuadData;
+            if (_useQuadLayout) return IndexDataHelper.sQuadData;
             else return _rawData;
         }
     }

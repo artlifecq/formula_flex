@@ -30,7 +30,7 @@ package com.game.engine2D.core
 		private var mTransformationMatrix:Matrix;
 		
 		/**
-		 *  ATFTexture构造函数
+		 *  ATFSubTexture构造函数
 		 * @param parent:大图集Texture
 		 * @param region：在大图中的位置rect
 		 * @param hinderBytes：障碍数据
@@ -43,23 +43,24 @@ package com.game.engine2D.core
 			_atfPath = path;
 			_hinderStart = hinderStart;
 			_hitSize = hitSize;
-			_hinderBytes = hinderBytes;
-			if (hinderBytes)
-				_hinderLen = hinderBytes.length;
-			else
-				_hinderLen = 0;
-			_textureWidth = region.width;
 			
-			updateTexture(parent, region);
+			updateTexture(parent, hinderBytes, region);
 		}
 		
 		/** 更新parent贴图 */
-		public function updateTexture(parent:ITextureMaterial, region:Rectangle=null):void
+		public function updateTexture(parent:ITextureMaterial, hinderBytes:ByteArray, region:Rectangle=null):void
 		{
 			mParent = parent;
 			mRegion = region ? region.clone() : new Rectangle(0, 0, parent.width, parent.height);
 			mWidth  = mRegion.width;
 			mHeight = mRegion.height;
+			_hinderBytes = hinderBytes;
+			if (hinderBytes)
+				_hinderLen = hinderBytes.length;
+			else
+				_hinderLen = 0;
+			_textureWidth = mRegion.width;
+			
 			if (parent.isTextureScale)
 			{
 				var textureScale:Number = parent.textureScale;

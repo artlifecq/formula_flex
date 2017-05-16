@@ -1,7 +1,7 @@
 ﻿package com.game.engine3D.core.poolObject
 {
 	import org.client.mainCore.utils.ClassConstruct;
-
+	
 	/**
 	 *
 	 * 实例对象池
@@ -13,8 +13,8 @@
 	{
 		private var _name : String;
 		private var _maxSize : int;
-		private var _objArr : Vector.<IInstancePoolClass>;
-
+		private var _instanceArr : Vector.<IInstancePoolClass>;
+		
 		public function InstancePool(name : String = "", size : int = 2147483647)
 		{
 			if (size < 0)
@@ -23,48 +23,51 @@
 			}
 			_name = name;
 			_maxSize = size;
-			_objArr = new Vector.<IInstancePoolClass>;
+			_instanceArr = new Vector.<IInstancePoolClass>;
 		}
-
+		
 		public function createObj(clazz : Class, ... args) : IInstancePoolClass
 		{
 			var instance : IInstancePoolClass = null;
-			if (_objArr.length == 0)
+			if (_instanceArr.length == 0)
 			{
 				instance = ClassConstruct.construct(clazz, args);
 			}
 			else
 			{
-				instance = _objArr.pop();
+				instance = _instanceArr.pop();
 				instance.reSet(args);
 			}
 			return instance;
 		}
-
-		public function disposeObj(obj : IInstancePoolClass) : void
+		
+		public function disposeObj(instance : IInstancePoolClass) : void
 		{
-			if (obj == null)
+			if (instance == null)
 			{
 				return;
 			}
-			obj.instanceDispose();
-			if (_objArr.indexOf(obj) == -1)
+			if (!instance.isDisposed)
 			{
-				_objArr[_objArr.length] = obj;
+				instance.instanceDispose();
+			}
+			if (_instanceArr.indexOf(instance) == -1)
+			{
+				_instanceArr[_instanceArr.length] = instance;
 				resize(_maxSize);
 			}
 		}
-
+		
 		public function get name() : String
 		{
 			return _name;
 		}
-
+		
 		public function get length() : int
 		{
-			return _objArr.length;
+			return _instanceArr.length;
 		}
-
+		
 		public function resize(size : int) : void
 		{
 			if (size < 0)
@@ -73,38 +76,47 @@
 			}
 			_maxSize = size;
 			var instance : IInstancePoolClass = null;
-			while (_objArr.length > _maxSize)
+			while (_instanceArr.length > _maxSize)
 			{
-				instance = _objArr.pop();
-				instance.instanceDestroy();
+				instance = _instanceArr.pop();
+				if (!instance.isDestroyed)
+				{
+					instance.instanceDestroy();
+				}
 			}
 		}
-
-		public function removeObj(obj : IInstancePoolClass) : void
+		
+		public function removeObj(instance : IInstancePoolClass) : void
 		{
-			if (obj == null)
+			if (instance == null)
 			{
 				return;
 			}
-			obj.instanceDestroy();
-			var index : int = _objArr.indexOf(obj);
+			if (!instance.isDestroyed)
+			{
+				instance.instanceDestroy();
+			}
+			var index : int = _instanceArr.indexOf(instance);
 			if (index > -1)
 			{
-				_objArr.splice(index, 1);
+				_instanceArr.splice(index, 1);
 			}
 		}
-
+		
 		public function removeAllObjs() : void
 		{
 			var instance : IInstancePoolClass = null;
-			var len : int = _objArr.length;
+			var len : int = _instanceArr.length;
 			while (len > 0)
 			{
 				len--;
-				instance = _objArr[len];
-				instance.instanceDestroy();
+				instance = _instanceArr[len];
+				if (!instance.isDestroyed)
+				{
+					instance.instanceDestroy();
+				}
 			}
-			_objArr.length = 0;
+			_instanceArr.length = 0;
 		}
 	}
 }

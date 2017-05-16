@@ -250,6 +250,34 @@ package com.rpgGame.app.utils
 			ret += temp;
 			return ret;
 		}
+		
+		public static function intTime3String(time:int):String
+		{
+			var secondStr:String = intTime2String(time);
+			if (secondStr.length == 2)
+			{
+				secondStr = secondStr + "秒";
+			}
+			return secondStr;
+		}
+		
+		public static function intTimeActivityString(time:int):String
+		{
+			var timeStr:String = "";
+			if (time >= 3600)
+			{
+				timeStr = timeFormatCH(time, 1);
+			}
+			else
+			{
+				timeStr = intTime2String(time);
+				if (timeStr.length == 2)
+				{
+					timeStr = timeStr + "秒";
+				}
+			}
+			return timeStr;
+		}
 
 		/**
 		 * 把秒数转换成。2h:2m:2s

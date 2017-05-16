@@ -16,7 +16,11 @@ package starling.display
     import flash.geom.Rectangle;
     import flash.geom.Vector3D;
     
-    import starling.core.Starling;
+CONFIG::Starling_Debug
+{
+    import away3d.log.Log;
+}
+    
     import starling.rendering.IndexData;
     import starling.rendering.VertexData;
     import starling.styles.MeshStyle;
@@ -54,6 +58,7 @@ package starling.display
     public class Quad extends Mesh
     {
         private var _bounds:Rectangle;
+		private var _u1:Number, _v1:Number, _u2:Number, _v2:Number;
 
         // helper objects
         private static var sPoint3D:Vector3D = new Vector3D();
@@ -64,18 +69,21 @@ package starling.display
         public function Quad(width:Number, height:Number, color:uint=0xffffff)
         {
             _bounds = new Rectangle(0, 0, width, height);
+			_u1 = _v1 = 0.0;
+			_u2 = _v2 = 1.0;
 
             var vertexData:VertexData = new VertexData(MeshStyle.VERTEX_FORMAT, 4);
             var indexData:IndexData = new IndexData(6);
 
             super(vertexData, indexData);
 
+CONFIG::Starling_Debug
+{
             if (width == 0.0 || height == 0.0)
 			{
-				if(Starling.current.showTrace)trace("[Starling]Quad Invalid size: width and height must not be zero");
-				//throw new ArgumentError("Invalid size: width and height must not be zero");
+				Log.error("[Starling]Quad Invalid size: width and height must not be zero");
 			}
-                
+}
 
             setupVertices();
             this.color = color;
@@ -115,20 +123,56 @@ package starling.display
                 vertexData.setPoint(2, posAttr, _bounds.left,  _bounds.bottom);
                 vertexData.setPoint(3, posAttr, _bounds.right, _bounds.bottom);
 
-                vertexData.setPoint(0, texAttr, 0.0, 0.0);
-                vertexData.setPoint(1, texAttr, 1.0, 0.0);
-                vertexData.setPoint(2, texAttr, 0.0, 1.0);
-                vertexData.setPoint(3, texAttr, 1.0, 1.0);
+                vertexData.setPoint(0, texAttr, _u1, _v1);
+                vertexData.setPoint(1, texAttr, _u2, _v1);
+                vertexData.setPoint(2, texAttr, _u1, _v2);
+                vertexData.setPoint(3, texAttr, _u2, _v2);
             }
-			
-			CONFIG::Starling_Debug
-				{
-					var ti:String = texture ? texture.key + " "+texture.width + "x" + texture.height : color.toString(16);
-					if(Starling.current.showTrace)trace("[Starling]Quad : _setupVertices | texture:", ti, " | size:", _bounds.width+"x"+_bounds.height);
-				}
 
             setRequiresRedraw();
         }
+		
+		/** A Quad represents a colored and/or textured rectangle.
+		 *  <pre>
+		 *  0 - 1
+		 *  | / |
+		 *  2 - 3
+		 *  </pre>
+		 * 
+		 *Point 0(u1,v1), Point 3(u2, v2);
+		 * 
+		 * @param    u1        [optional]    The horizontal coordinate of the texture value. Defaults to 0.0
+		 * @param    v1        [optional]    The vertical coordinate of the texture value. Defaults to 0.0
+		 * @param    u2        [optional]    The horizontal coordinate of the texture value. Defaults to 1.0
+		 * @param    v2        [optional]    The vertical coordinate of the texture value. Defaults to 1.0
+		 */
+		public function setTextureUVCoords(u1:Number, v1:Number, u2:Number, v2:Number):void
+		{
+			if(_u1 == u1 && _v1 == v1 && _u2 == u2 && _v2 == v2)
+			{
+				return;
+			}
+			
+			_u1 = u1;
+			_u2 = u2;
+			_v1 = v1;
+			_v2 = v2;
+			
+			indexData.numIndices = 0;
+			indexData.addQuad(0, 1, 2, 3);
+			
+			if (vertexData.numVertices != 4)
+			{
+				vertexData.numVertices = 4;
+			}
+			
+			setTexCoords(0, u1, v1);
+			setTexCoords(1, u2, v1);
+			setTexCoords(2, u1, v2);
+			setTexCoords(3, u2, v2);
+			
+			setRequiresRedraw();
+		}
 
         /** @inheritDoc */
         public override function getBounds(targetSpace:DisplayObject, out:Rectangle=null):Rectangle
@@ -149,12 +193,6 @@ package starling.display
 
                 if (scaleX < 0) { out.width  *= -1; out.x -= out.width;  }
                 if (scaleY < 0) { out.height *= -1; out.y -= out.height; }
-            }
-            else if (is3D && stage)
-            {
-                stage.getCameraPosition(targetSpace, sPoint3D);
-                getTransformationMatrix3D(targetSpace, sMatrix3D);
-                RectangleUtil.getBoundsProjected(_bounds, sMatrix3D, sPoint3D, out);
             }
             else
             {

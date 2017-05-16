@@ -359,8 +359,8 @@ package com.editor.display
 				for (var xi : uint = 0; xi <= _segmentsW; ++xi)
 				{
 					data.position = index << 2;
-					data.writeFloat((xi / _segmentsW) * target.scaleU);
-					data.writeFloat((1 - yi / _segmentsH) * target.scaleV);
+					data.writeFloat((xi / _segmentsW));
+					data.writeFloat((1 - yi / _segmentsH));
 					index++;
 					index++;
 					index += skip;
@@ -368,8 +368,8 @@ package com.editor.display
 					if (_doubleSided)
 					{
 						data.position = index << 2;
-						data.writeFloat((xi / _segmentsW) * target.scaleU);
-						data.writeFloat((1 - yi / _segmentsH) * target.scaleV);
+						data.writeFloat((xi / _segmentsW));
+						data.writeFloat((1 - yi / _segmentsH));
 						index++;
 						index++;
 						index += skip;

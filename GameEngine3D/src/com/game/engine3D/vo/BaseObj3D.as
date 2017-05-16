@@ -124,6 +124,9 @@ package com.game.engine3D.vo
 		private var _disposeCallbackVec : Vector.<CallBackData>;
 		private var _renderAnimator : IRenderAnimator;
 		
+		private var _isDestroyed : Boolean;
+		private var _isDisposed : Boolean;
+		
 		public var isHiding:Boolean = false;
 
 		public function BaseObj3D(parameters : Array = null)
@@ -136,7 +139,18 @@ package com.game.engine3D.vo
 			_offset = new Vector3D(0, 0, 0, 0);
 			_rotation = new Vector3D(0, 0, 0, 0);
 			_graphicRotation = new Vector3D(0, 0, 0, 0);
+			_isDestroyed = false;
 			reSet(parameters);
+		}
+		
+		public function get isDestroyed() : Boolean
+		{
+			return _isDestroyed;
+		}
+		
+		public function get isDisposed() : Boolean
+		{
+			return _isDisposed;
 		}
 
 		/**
@@ -260,7 +274,7 @@ package com.game.engine3D.vo
 						_staticGraphicDis.y = _showPosition.y;
 					}
 					calculateVolumeBounds();
-					syncInfo(initiator);
+					syncAllInfo(initiator);
 				}
 			}
 		}
@@ -299,7 +313,7 @@ package com.game.engine3D.vo
 						if ((this is BaseEntity) && _staticGraphicDis) {
 							_staticGraphicDis.y = _showPosition.y;
 						}
-						syncInfo(initiator);
+						syncAllInfo(initiator);
 					}
 				}
 			}
@@ -341,7 +355,7 @@ package com.game.engine3D.vo
 						_staticGraphicDis.z = _showPosition.z;
 					}
 					calculateVolumeBounds();
-					syncInfo(initiator);
+					syncAllInfo(initiator);
 				}
 			}
 		}
@@ -472,7 +486,7 @@ package com.game.engine3D.vo
 						_graphicDis.rotationX = _showRotation.x;
 						_graphicRotation.x = _graphicDis.rotationX;
 					}
-					syncInfo(initiator);
+					syncAllInfo(initiator);
 				}
 			}
 		}
@@ -512,7 +526,7 @@ package com.game.engine3D.vo
 						_graphicDis.rotationY = _showRotation.y;
 						_graphicRotation.y = _graphicDis.rotationY;
 					}
-					syncInfo(initiator);
+					syncAllInfo(initiator);
 				}
 			}
 		}
@@ -551,7 +565,7 @@ package com.game.engine3D.vo
 						_graphicDis.rotationZ = _showRotation.z;
 						_graphicRotation.z = _graphicDis.rotationZ;
 					}
-					syncInfo(initiator);
+					syncAllInfo(initiator);
 				}
 			}
 		}
@@ -574,7 +588,7 @@ package com.game.engine3D.vo
 					if ((this is BaseEntity) && _staticGraphicDis) {
 						_staticGraphicDis.x = _showPosition.x;
 					}
-					syncInfo(this);
+					syncAllInfo(this);
 				}
 			}
 		}
@@ -597,7 +611,7 @@ package com.game.engine3D.vo
 					if ((this is BaseEntity) && _staticGraphicDis) {
 						_staticGraphicDis.y = _showPosition.y;
 					}
-					syncInfo(this);
+					syncAllInfo(this);
 				}
 			}
 		}
@@ -620,7 +634,7 @@ package com.game.engine3D.vo
 					if ((this is BaseEntity) && _staticGraphicDis) {
 						_staticGraphicDis.z = _showPosition.z;
 					}
-					syncInfo(this);
+					syncAllInfo(this);
 				}
 			}
 		}
@@ -634,7 +648,7 @@ package com.game.engine3D.vo
 		/**所属显示对象(显示对象容器)*/
 		public function set parent(value : ObjectContainer3D) : void
 		{
-			if (_parent == value)
+			if (value == _parent || (value && value == _graphicDis))
 				return;
 			_parent = value;
 			
@@ -648,11 +662,27 @@ package com.game.engine3D.vo
 
 		public function set graphicDis(value : ObjectContainer3D) : void
 		{
-			if (_graphicDis == value)
+			if (value == _graphicDis || (value && value == _parent))
 				return;
 			removeFromGraphic();
+			recycleGraphic();
 			_graphicDis = value;
 			validateGraphic();
+		}
+		
+		private function recycleGraphic() : void
+		{
+			if (_graphicDis)
+			{
+				TweenLite.killTweensOf(_graphicDis);
+				if (_graphicDis.parent)
+					_graphicDis.parent.removeChild(_graphicDis);
+				if (_graphicDis is PoolContainer3D)
+					PoolContainer3D.recycle(_graphicDis as PoolContainer3D);
+				else if (_graphicDis is PoolEntityContainer3D)
+					PoolEntityContainer3D.recycle(_graphicDis as PoolEntityContainer3D);
+				_graphicDis = null;
+			}
 		}
 		
 		private function validateGraphic() : void
@@ -665,6 +695,15 @@ package com.game.engine3D.vo
 			{
 				removeFromGraphic();
 			}
+		}
+		
+		public function isInScene() : Boolean
+		{
+			if (_graphicDis)
+			{
+				return _graphicDis.scene != null;
+			}
+			return false;
 		}
 		
 		/**
@@ -933,16 +972,16 @@ package com.game.engine3D.vo
 			}
 		}
 
-		protected function onUpdateGraphicRotation() : void
+		private function onUpdateGraphicRotation() : void
 		{
 			if (_graphicDis)
 			{
 				_graphicDis.rotationX = _graphicRotation.x;
 				_graphicDis.rotationY = _graphicRotation.y;
 				_graphicDis.rotationZ = _graphicRotation.z;
-
+				
 				calculateVolumeBounds();
-				syncInfo(this);
+				syncAllInfo(this);
 			}
 		}
 
@@ -1012,7 +1051,7 @@ package com.game.engine3D.vo
 		 * @param initiator 发起对象
 		 *
 		 */
-		protected function syncInfo(initiator : BaseObj3D) : void
+		private function syncAllInfo(initiator : BaseObj3D) : void
 		{
 			if (!_syncInfos)
 			{
@@ -1057,7 +1096,7 @@ package com.game.engine3D.vo
 			{
 				(info.obj as BaseEntity).addDisposeCallback(onSyncObjDispose);
 			}
-			syncInfo(this);
+			info.syncInfo(_position, _rotation, this);
 		}
 
 		public function removeSyncInfo(obj : Object) : void
@@ -1227,7 +1266,7 @@ package com.game.engine3D.vo
 					_graphicRotation.y = _graphicDis.rotationY;
 					_graphicRotation.z = _graphicDis.rotationZ;
 				}
-				syncInfo(this);
+				syncAllInfo(this);
 			}
 		}
 
@@ -1254,17 +1293,8 @@ package com.game.engine3D.vo
 			name = null;
 			_isRendering = false;
 			_parent = null;
-			if (_graphicDis)
-			{
-				TweenLite.killTweensOf(_graphicDis);
-				if (_graphicDis.parent)
-					_graphicDis.parent.removeChild(_graphicDis);
-				if (_graphicDis is PoolContainer3D)
-					PoolContainer3D.recycle(_graphicDis as PoolContainer3D);
-				else if (_graphicDis is PoolEntityContainer3D)
-					PoolEntityContainer3D.recycle(_graphicDis as PoolEntityContainer3D);
-				_graphicDis = null;
-			}
+			
+			recycleGraphic();
 			//if (_staticGraphicDis) {
 			//	if (_staticGraphicDis.parent) {
 			//		_staticGraphicDis.parent.removeChild(_staticGraphicDis);
@@ -1301,21 +1331,10 @@ package com.game.engine3D.vo
 			TweenLite.killTweensOf(_graphicRotation);
 			_graphicRotation.setTo(0, 0, 0);
 			_volumeBounds = null;
-			if (_syncInfos)
-			{
-				for (var obj : Object in _syncInfos)
-				{
-					var info : BaseObjSyncInfo = _syncInfos[obj];
-					if (info.obj is BaseEntity)
-					{
-						(info.obj as BaseEntity).removeDisposeCallback(onSyncObjDispose);
-					}
-					info.dispose();
-					_syncInfos[obj] = null;
-					delete _syncInfos[obj];
-				}
-				_syncInfos = null;
-			}
+			
+			removeAllSyncInfo();
+			_syncInfos = null;
+			
 			if (_syncTarget)
 			{
 				if (_syncTarget.usable)
@@ -1327,11 +1346,13 @@ package com.game.engine3D.vo
 			TweenLite.killTweensOf(this);
 			_usable = false;
 			_disposing = false;
+			
+			_isDisposed = true;
 		}
 		
 		public function instanceDestroy() : void
 		{
-			dispose();
+			destroy();
 		}
 		
 		public function instanceDispose() : void
@@ -1374,6 +1395,7 @@ package com.game.engine3D.vo
 			_renderAnimator = null;
 			_alpha = 1.0;
 			_zOffset = 0;
+			_isDisposed = false;
 		}
 
 		public function get sceneName() : String
@@ -1411,7 +1433,7 @@ package com.game.engine3D.vo
 					_graphicRotation.y = _graphicDis.rotationY;
 					_graphicRotation.z = _graphicDis.rotationZ;
 				}
-				syncInfo(this);
+				syncAllInfo(this);
 			}
 		}
 
@@ -1465,7 +1487,7 @@ package com.game.engine3D.vo
 				if (_graphicDis.parent != _parent)
 				{
 					_parent.addChild(_graphicDis);
-					syncInfo(this);
+					syncAllInfo(this);
 				}
 			}
 		}
@@ -1477,7 +1499,7 @@ package com.game.engine3D.vo
 				if (_graphicDis.parent)
 				{
 					_graphicDis.parent.removeChild(_graphicDis);
-					syncInfo(this);
+					syncAllInfo(this);
 				}
 			}
 		}
@@ -1586,6 +1608,7 @@ package com.game.engine3D.vo
 		public function destroy() : void
 		{
 			dispose();
+			_isDestroyed = true;
 		}
 		
 		//===========================================摄像机相关=====================================================
