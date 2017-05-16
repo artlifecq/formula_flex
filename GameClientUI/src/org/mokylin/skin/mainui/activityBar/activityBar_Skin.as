@@ -5,6 +5,7 @@ package org.mokylin.skin.mainui.activityBar
 	import feathers.controls.StateSkin;
 	import org.mokylin.skin.component.button.ButtonSkin_shouhui;
 	import org.mokylin.skin.component.button.ButtonSkin_zhankai;
+	import org.mokylin.skin.mainui.activityBar.button.ButtonLunjian;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonMeiribizuo;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonWanfatuijian;
 
@@ -19,6 +20,8 @@ package org.mokylin.skin.mainui.activityBar
 		//                                定义成员变量
 		//==========================================================================
 		public var btn_close:feathers.controls.Button;
+
+		public var btn_lunjian:feathers.controls.Button;
 
 		public var btn_meiri:feathers.controls.Button;
 
@@ -38,7 +41,7 @@ package org.mokylin.skin.mainui.activityBar
 			
 			this.currentState = "normal";
 			this.height = 65;
-			this.width = 157;
+			this.width = 223;
 			this.elementsContent = [btn_close_i(),btn_opem_i(),grp_active_i()];
 			
 			states = {
@@ -56,8 +59,19 @@ package org.mokylin.skin.mainui.activityBar
 			btn_close = temp;
 			temp.name = "btn_close";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shouhui;
-			temp.x = 138;
+			temp.x = 204;
 			temp.y = 2;
+			return temp;
+		}
+
+		private function btn_lunjian_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_lunjian = temp;
+			temp.name = "btn_lunjian";
+			temp.styleClass = org.mokylin.skin.mainui.activityBar.button.ButtonLunjian;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -67,7 +81,7 @@ package org.mokylin.skin.mainui.activityBar
 			btn_meiri = temp;
 			temp.name = "btn_meiri";
 			temp.styleClass = org.mokylin.skin.mainui.activityBar.button.ButtonMeiribizuo;
-			temp.x = 0;
+			temp.x = 66;
 			temp.y = 0;
 			return temp;
 		}
@@ -78,7 +92,7 @@ package org.mokylin.skin.mainui.activityBar
 			btn_opem = temp;
 			temp.name = "btn_opem";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zhankai;
-			temp.x = 138;
+			temp.x = 204;
 			temp.y = 2;
 			return temp;
 		}
@@ -89,7 +103,7 @@ package org.mokylin.skin.mainui.activityBar
 			btn_wanfa = temp;
 			temp.name = "btn_wanfa";
 			temp.styleClass = org.mokylin.skin.mainui.activityBar.button.ButtonWanfatuijian;
-			temp.x = 66;
+			temp.x = 132;
 			temp.y = 0;
 			return temp;
 		}
@@ -101,7 +115,7 @@ package org.mokylin.skin.mainui.activityBar
 			temp.name = "grp_active";
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [btn_meiri_i(),btn_wanfa_i()];
+			temp.elementsContent = [btn_meiri_i(),btn_lunjian_i(),btn_wanfa_i()];
 			return temp;
 		}
 
