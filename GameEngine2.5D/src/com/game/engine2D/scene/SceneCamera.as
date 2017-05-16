@@ -138,7 +138,7 @@ package com.game.engine2D.scene
 		
 		public function updateScale($scale:Number):void
 		{
-			if (_scale != $scale)
+			if (_scale != $scale && $scale > 0)
 			{
 				_scale = $scale;
 				_lens.viewportScale = $scale;

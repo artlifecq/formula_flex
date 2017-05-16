@@ -53,7 +53,7 @@ package com.editor.utils
 					case RenderUnitType.WEAPON:
 					case RenderUnitType.DEPUTY_WEAPON:
 					case RenderUnitType.MOUNT:
-						render.addFadeAlpha(GlobalConfig.getDynTextureFilePath("dialogFaceMask"));
+						render.addFadeAlpha(GlobalConfig.getDynTextureFilePath("dialogFaceMask"),0);
 						break;
 				}
 			});
@@ -70,7 +70,7 @@ package com.editor.utils
 					case RenderUnitType.WEAPON:
 					case RenderUnitType.DEPUTY_WEAPON:
 					case RenderUnitType.MOUNT:
-						render.addFadeAlpha(GlobalConfig.getDynTextureFilePath("headFaceMask"));
+						render.addFadeAlpha(GlobalConfig.getDynTextureFilePath("headFaceMask"),0);
 						break;
 				}
 			});
@@ -87,7 +87,7 @@ package com.editor.utils
 					case RenderUnitType.WEAPON:
 					case RenderUnitType.DEPUTY_WEAPON:
 					case RenderUnitType.MOUNT:
-						render.addFadeAlpha(GlobalConfig.getDynTextureFilePath("bossHeadFaceMask"));
+						render.addFadeAlpha(GlobalConfig.getDynTextureFilePath("bossHeadFaceMask"),0);
 						break;
 				}
 			});

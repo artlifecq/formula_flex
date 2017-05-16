@@ -7,7 +7,7 @@ package com.game.engine2D.parser
 	import com.game.engine2D.scene.render.vo.xml.RenderUnitStatus;
 	import com.game.engine2D.tools.SceneCache;
 	import com.game.mainCore.libCore.utils.LoadBlackListUtils;
-
+	
 	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
@@ -16,11 +16,11 @@ package com.game.engine2D.parser
 	import flash.system.ApplicationDomain;
 	import flash.system.ImageDecodingPolicy;
 	import flash.utils.Dictionary;
-
+	
 	import org.client.load.loader.multi.DobjLoadManager;
 	import org.client.load.loader.multi.loader.DobjLoader;
 	import org.client.load.loader.multi.vo.LoadData;
-
+	
 	/**
 	 *
 	 * 换装Swf资源解析器
@@ -36,11 +36,11 @@ package com.game.engine2D.parser
 		private var _loaderInfo : LoaderInfo;
 		private var _isLoaded : Boolean = false;
 		private var _isLoading : Boolean = false;
-
+		
 		public function AvatarSwfParser()
 		{
 		}
-
+		
 		final public function load(fullSourchPath : String, priority : int, userData : Object = null) : void
 		{
 			if (_isLoaded || _isLoading)
@@ -57,13 +57,13 @@ package com.game.engine2D.parser
 			_loadData.userData = userData;
 			DobjLoadManager.load(_loadData);
 		}
-
+		
 		private function loadSourceComplete(ld : LoadData, e : Event) : void
 		{
 			LoadBlackListUtils.removeLoadUrl(ld.url);
 			parseComplete(ld, e.target as DobjLoader);
 		}
-
+		
 		private function loadError(ld : LoadData, e : Event = null) : void
 		{
 			var fullSourchPath : String = ld.url;
@@ -73,11 +73,11 @@ package com.game.engine2D.parser
 			SceneCache.dowithWaiting(fullSourchPath);
 			//
 			LoadBlackListUtils.addLoadUrl(ld.url);
-
+			
 			if (_loadErrorFunc != null)
 				_loadErrorFunc(this);
 		}
-
+		
 		private function parseComplete(ld : LoadData, dLoader : DobjLoader) : void
 		{
 			var dobj : DisplayObject = dLoader.content;
@@ -103,6 +103,7 @@ package com.game.engine2D.parser
 				xid.aps.initForBitmapData(fullSourchPath, stand, 0, 0, bm.width, bm.height)
 				xid.aid = new RenderImgData();
 				xid.aid.initForBitmapData(xid.aps, stand, 0, 0, bm.bitmapData);
+				xid.isParserComplete = true;
 				bm = null;
 				SceneCache.dowithWaiting(fullSourchPath, xid.aps);
 			}
@@ -111,6 +112,7 @@ package com.game.engine2D.parser
 				var dic : Dictionary = GlobalConfig2D.resParseFunc(fullSourchPath, _loaderInfo);
 				xid.initStatus(fullSourchPath, dic);
 				xid.initImgData(dic);
+				xid.isParserComplete = true;
 				SceneCache.dowithWaiting(fullSourchPath, xid.aps);
 			}
 			else
@@ -122,7 +124,7 @@ package com.game.engine2D.parser
 			if (_loadCompleteFunc != null)
 				_loadCompleteFunc(this);
 		}
-
+		
 		final public function extractor(className : String) : Object
 		{
 			if (_loaderInfo)
@@ -136,24 +138,24 @@ package com.game.engine2D.parser
 			}
 			return null;
 		}
-
+		
 		final public function get loadData() : LoadData
 		{
 			return _loadData;
 		}
-
+		
 		final public function onLoadComplete(func : Function) : IResParser
 		{
 			_loadCompleteFunc = func;
 			return this;
 		}
-
+		
 		final public function onLoadError(func : Function) : IResParser
 		{
 			_loadErrorFunc = func;
 			return this;
 		}
-
+		
 		final public function unload() : void
 		{
 			_isLoading = false;
@@ -169,7 +171,7 @@ package com.game.engine2D.parser
 			_loadErrorFunc = null;
 			_loaderInfo = null;
 		}
-
+		
 		final public function dispose() : void
 		{
 			unload();

@@ -86,7 +86,7 @@ package com.rpgGame.app.utils
 					case RenderUnitType.DEPUTY_WEAPON:
 					case RenderUnitType.MOUNT:
 					case RenderUnitType.WEAPON_EFFECT:
-						render.addFadeAlpha(ClientConfig.getDynTexture(type));
+						render.addFadeAlpha(ClientConfig.getDynTexture(type),0);
 						break;
 				}
 			});
@@ -143,7 +143,7 @@ package com.rpgGame.app.utils
 					case RenderUnitType.DEPUTY_WEAPON:
 					case RenderUnitType.MOUNT:
 					case RenderUnitType.WEAPON_EFFECT:
-						render.addFadeAlpha(ClientConfig.getDynTexture("dialogFaceMask"));
+						render.addFadeAlpha(ClientConfig.getDynTexture("dialogFaceMask"),0);
 						break;
 				}
 			});
@@ -160,7 +160,7 @@ package com.rpgGame.app.utils
 					case RenderUnitType.WEAPON:
 					case RenderUnitType.DEPUTY_WEAPON:
 					case RenderUnitType.MOUNT:
-						render.addFadeAlpha(ClientConfig.getDynTexture("headFaceMask"));
+						render.addFadeAlpha(ClientConfig.getDynTexture("headFaceMask"),0);
 						break;
 				}
 			});
@@ -177,7 +177,7 @@ package com.rpgGame.app.utils
 					case RenderUnitType.WEAPON:
 					case RenderUnitType.DEPUTY_WEAPON:
 					case RenderUnitType.MOUNT:
-						render.addFadeAlpha(ClientConfig.getDynTexture("headFaceMaskCountryWar"));
+						render.addFadeAlpha(ClientConfig.getDynTexture("headFaceMaskCountryWar"),0);
 						break;
 				}
 			});
@@ -195,7 +195,7 @@ package com.rpgGame.app.utils
 					case RenderUnitType.DEPUTY_WEAPON:
 					case RenderUnitType.MOUNT:
 					case RenderUnitType.MOUNT:
-						render.addFadeAlpha(ClientConfig.getDynTexture("bossHeadFaceMask"));
+						render.addFadeAlpha(ClientConfig.getDynTexture("bossHeadFaceMask"),0);
 						break;
 				}
 			});

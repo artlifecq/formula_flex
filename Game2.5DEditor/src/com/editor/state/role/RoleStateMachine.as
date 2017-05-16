@@ -31,11 +31,11 @@ package com.editor.state.role
 	import com.editor.state.role.control.StopWalkMoveState;
 	import com.editor.state.role.control.TrailMoveState;
 	import com.editor.state.role.control.WalkMoveState;
+	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.state.StateMachine;
 	import com.game.engine3D.state.StateReference;
-	import com.game.mainCore.libCore.pool.Pool;
-
+	
 	import flash.utils.Dictionary;
 
 	/**
@@ -47,7 +47,7 @@ package com.editor.state.role
 	 */
 	public class RoleStateMachine extends StateMachine
 	{
-		private static var machinePool : Pool = new Pool("RoleStateMachine", 300);
+		private static var machinePool : InstancePool = new InstancePool("RoleStateMachine", 300);
 
 		/**
 		 * 生成一个RoleStateMachine

@@ -61,7 +61,7 @@ package starling.filters
         }
 
         /** @private */
-        override public function process(painter:Painter, helper:IFilterHelper,
+        override public function process(painter:Painter, helper:FilterHelper,
                                          input0:IStarlingTexture = null, input1:IStarlingTexture = null,
                                          input2:IStarlingTexture = null, input3:IStarlingTexture = null):IStarlingTexture
         {

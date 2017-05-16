@@ -27,6 +27,8 @@ package com.game.engine2D.vo
 			this.visible = true;
 			this.alpha = 1;
 			this.scale = 1;
+			this.x = 0;
+			this.y = 0;
 		}
 		
 		public function get filters():Array

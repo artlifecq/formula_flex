@@ -10,8 +10,15 @@
 
 package starling.core
 {
+    import flash.display.BitmapData;
     import flash.system.System;
+    import flash.utils.getTimer;
     
+    import away3d.debug.LogPanel;
+    
+    import starling.debug.StarlingLogPanel;
+    import starling.display.Button;
+    import starling.display.Mesh;
     import starling.display.Quad;
     import starling.display.Sprite;
     import starling.events.EnterFrameEvent;
@@ -21,6 +28,10 @@ package starling.core
     import starling.text.BitmapFont;
     import starling.text.TextField;
     import starling.textures.ConcreteTexture;
+    import starling.textures.IStarlingTexture;
+    import starling.textures.LabelTextureAtlas;
+    import starling.textures.SubTexture;
+    import starling.textures.TextureFactory;
     import starling.utils.Align;
 
     /** A small, lightweight box that displays the current framerate, memory consumption and
@@ -33,13 +44,12 @@ package starling.core
         private var _background:Quad;
         private var _labels:TextField;
         private var _values:TextField;
+		private var _logBtn:Button;
         
 		private var _frameCount:int = 0;
 		private var _totalTime:Number = 0;
 		private var _runTime:Number = 0;
 		private static const DAY:int = 3600*24;
-		private var _textNormal:String;
-		private var _textMeshs:String;
 
         private var _fps:Number = 0;
         private var _memory:Number = 0;
@@ -50,21 +60,22 @@ package starling.core
         /** Creates a new Statistics Box. */
         public function StatsDisplay()
         {
-			isDebugStats = true;
-			
             const fontName:String = BitmapFont.MINI;
             const fontSize:Number = BitmapFont.NATIVE_SIZE;
             const fontColor:uint  = 0xffffff;
-            const width:Number    = 90;
-            const height:Number   = supportsGpuMem ? 51 : 43;
-            const gpuLabel:String = supportsGpuMem ? "\ngpu memory:" : "";
-			const labels:String   = "frames/sec:\nstd memory:" + gpuLabel + 
+            const width:Number    = 120;
+            const height:Number   = 99;
+			const labels:String   = "Time:"+
+				"\nframes/sec:"+
+				"\nstd memory:" +  
+				"\ngpu memory:"+
 				"\ndraw calls:"+
-				"\nTex"+
-				"\nrunTime:";
-			
-			_textNormal = labels;
-			_textMeshs = labels + "\nmeshs:"+"\nstack:";
+				"\nMesh:"+
+				"\nConcreteTexture:"+
+				"\nSubTexture:"+
+				"\nLabelAtlas:"+
+				"\nstageMeshs:"+
+				"\nmaxStack:";
 
             _labels = new TextField(width, height, labels);
             _labels.format.setTo(fontName, fontSize, fontColor, Align.LEFT);
@@ -76,6 +87,12 @@ package starling.core
             _values.batchable = true;
 
             _background = new Quad(width, height, 0x0);
+			
+			var bd:BitmapData = new BitmapData(10, 10, false, 0xFFFFFF);
+			var btnTexture:IStarlingTexture = TextureFactory.fromBitmapData(bd, false, false, "bgra", false);
+			_logBtn = new Button(btnTexture,"L");
+			_logBtn.addEventListener(Event.TRIGGERED, _onLogBtnClick);
+			_logBtn.x = width;
 
             // make sure that rendering takes 2 draw calls
             if (_background.style.type != MeshStyle) _background.style = new MeshStyle();
@@ -83,19 +100,36 @@ package starling.core
             if (_values.style.type     != MeshStyle) _values.style     = new MeshStyle();
 
             addChild(_background);
+			addChild(_logBtn);
             addChild(_labels);
             addChild(_values);
             
             addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
             addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
+			
+			_layerBatchId = int.MAX_VALUE;
+			this.y = 216;
         }
         
+		private var _logPanel:LogPanel;
         private function onAddedToStage():void
         {
             addEventListener(Event.ENTER_FRAME, onEnterFrame);
             _totalTime = _frameCount = _skipCount = 0;
+			_runTime = getTimer();
             update();
+			
+			if(!_logPanel)
+			{
+				_logPanel = new StarlingLogPanel(Starling.current.nativeStage, false);
+				_logPanel.startLog();
+			}
         }
+		
+		private function _onLogBtnClick(ev:*):void
+		{
+			_logPanel.showOrHide();
+		}
         
         private function onRemovedFromStage():void
         {
@@ -125,10 +159,20 @@ package starling.core
             _memory = System.totalMemory * B_TO_MB;
             _gpuMemory = supportsGpuMem ? Starling.context['totalGPUMemory'] * B_TO_MB : -1;
 
+/*			const labels:String   = "frames/sec:"+
+				"\nstd memory:" +  
+				"\ngpu memory:"+
+				"\ndraw calls:"+
+				"\nTime:"+
+				"\nMesh:"+
+				"\nConcreteTexture:"+
+				"\nSubTexture:"+
+				"\nLabelAtlas:";*/
+			
             var fpsText:String = _fps.toFixed(_fps < 100 ? 1 : 0);
             var memText:String = _memory.toFixed(_memory < 100 ? 1 : 0);
-            var gpuMemText:String = _gpuMemory.toFixed(_gpuMemory < 100 ? 1 : 0);
-            var drwText:String = (_totalTime > 0 ? _drawCount-2 : _drawCount).toString(); // ignore self
+            var gpuMemText:String = _gpuMemory < 1 ? "NaN": _gpuMemory.toFixed(_gpuMemory < 100 ? 1 : 0);
+            var drwCall:String = (_totalTime > 0 ? _drawCount : _drawCount).toString(); // contains self :2
 
 			var day:int = _runTime/DAY;
 			var hour:int = (_runTime - day*DAY)/3600;
@@ -136,13 +180,16 @@ package starling.core
 			var sec:int = (_runTime - day*DAY - hour*3600 - min*60);
 			var time:String =  (day ? day+":" : "") +( hour < 10 ? "0"+hour : hour)+ ":"+( min < 10 ? "0"+min : min) + ":"+( sec < 10 ? "0"+sec : sec);
 			
-			_values.text = fpsText + "\n" + memText + "\n" + drwText +
-				"\n"+time;
+			_values.text =  time +"\n"+fpsText + "\n" + memText + "\n" +gpuMemText +"\n"+ drwCall;
+			_values.text += "\n"+Mesh.numInstance+"\n"+ConcreteTexture.numInstance+"\n"+SubTexture.numInstance+"\n"+LabelTextureAtlas.numInstance;
 			
 			var meshStats:Boolean = Starling.current.showMeshStats;
-			_labels.text = meshStats ? _textMeshs : _textNormal;
-			if(meshStats)_values.text += "\n"+Starling.current.numStageMeshs+"\n"+Starling.current.maxStack;
-			_background.height = _labels.height = _values.height = meshStats ? 78 : 63;
+			if(meshStats)
+			{
+				_values.text += "\n"+Starling.current.numStageMeshs+"\n"+Starling.current.maxStack;
+			}else{
+				_values.text += "\nNaN\nNaN";
+			}
         }
 
         /** Call this once in every frame that can skip rendering because nothing changed. */

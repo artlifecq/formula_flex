@@ -17,7 +17,7 @@ package com.editor.manager
 	import com.editor.state.role.RoleStateUtil;
 	import com.editor.state.role.control.RidingStateReference;
 	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	
 	import org.client.mainCore.manager.EventManager;
 
@@ -87,8 +87,8 @@ package com.editor.manager
 		private static function updateBody(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			var rpd_body : RenderParamData = avatarInfo.rpd_body;
-			var rpd_mount : RenderParamData = avatarInfo.rpd_mount;
+			var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
+			var rpd_mount : RenderParamData3D = avatarInfo.rpd_mount;
 			if (rpd_body != null)
 			{
 				var ru : RenderUnit3D;
@@ -145,7 +145,7 @@ package com.editor.manager
 			}
 
 			role.avatar.removeRenderUnitsByType(RenderUnitType.BODY_EFFECTS);
-			var rpd_body_effects : Vector.<RenderParamData> = avatarInfo.rpd_body_effects;
+			var rpd_body_effects : Vector.<RenderParamData3D> = avatarInfo.rpd_body_effects;
 			var bodyEffectBindBones : Array = avatarInfo.bodyEffectBindBones;
 			if (rpd_body_effects != null)
 			{
@@ -153,7 +153,7 @@ package com.editor.manager
 				for (var i : int = 0; i < len; i++)
 				{
 					var effectRu : RenderUnit3D = null;
-					var rpd_effect : RenderParamData = rpd_body_effects[i];
+					var rpd_effect : RenderParamData3D = rpd_body_effects[i];
 					var effectBindBone : String = bodyEffectBindBones[i];
 					if (rpd_body)
 					{
@@ -191,11 +191,11 @@ package com.editor.manager
 		private static function updateHair(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			var rpd_hair : RenderParamData = avatarInfo.rpd_hair;
+			var rpd_hair : RenderParamData3D = avatarInfo.rpd_hair;
 			if (rpd_hair != null)
 			{
 				var ru : RenderUnit3D;
-				var rpd_body : RenderParamData = avatarInfo.rpd_body;
+				var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
 				if (rpd_body)
 				{
 					if (rpd_body.animatorSourchPath)
@@ -235,8 +235,8 @@ package com.editor.manager
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
 			var ru : RenderUnit3D;
-			var rpd_weapon : RenderParamData = avatarInfo.rpd_weapon;
-			var rpd_body : RenderParamData = avatarInfo.rpd_body;
+			var rpd_weapon : RenderParamData3D = avatarInfo.rpd_weapon;
+			var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
 			if (rpd_weapon != null)
 			{
 				if (rpd_body)
@@ -274,7 +274,7 @@ package com.editor.manager
 			}
 
 			role.avatar.removeRenderUnitsByType(RenderUnitType.WEAPON_EFFECTS);
-			var rpd_weapon_effects : Vector.<RenderParamData> = avatarInfo.rpd_weapon_effects;
+			var rpd_weapon_effects : Vector.<RenderParamData3D> = avatarInfo.rpd_weapon_effects;
 			var weaponEffectBindBones : Array = avatarInfo.weaponEffectBindBones;
 			if (rpd_weapon_effects != null)
 			{
@@ -282,7 +282,7 @@ package com.editor.manager
 				for (var i : int = 0; i < len; i++)
 				{
 					var effectRu : RenderUnit3D = null;
-					var rpd_effect : RenderParamData = rpd_weapon_effects[i];
+					var rpd_effect : RenderParamData3D = rpd_weapon_effects[i];
 					var effectBindBone : String = weaponEffectBindBones[i];
 					if (rpd_weapon)
 					{
@@ -320,11 +320,11 @@ package com.editor.manager
 		private static function updateDeputyWeapon(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			var rpd_deputy_weapon : RenderParamData = avatarInfo.rpd_deputy_weapon;
+			var rpd_deputy_weapon : RenderParamData3D = avatarInfo.rpd_deputy_weapon;
 			if (rpd_deputy_weapon != null)
 			{
 				var ru : RenderUnit3D;
-				var rpd_body : RenderParamData = avatarInfo.rpd_body;
+				var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
 				if (rpd_body)
 				{
 					if (rpd_body.animatorSourchPath)
@@ -363,7 +363,7 @@ package com.editor.manager
 		private static function updateMethodTypeEffect(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			var rpd_method_type_effect : RenderParamData = avatarInfo.rpd_body_method_type_effect;
+			var rpd_method_type_effect : RenderParamData3D = avatarInfo.rpd_body_method_type_effect;
 			if (rpd_method_type_effect != null)
 			{
 				var effectRu : RenderUnit3D = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_method_type_effect);
@@ -385,7 +385,7 @@ package com.editor.manager
 		private static function updateEffect(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			var rpd_effect : RenderParamData = avatarInfo.rpd_effect;
+			var rpd_effect : RenderParamData3D = avatarInfo.rpd_effect;
 			if (rpd_effect != null)
 			{
 				var ru : RenderUnit3D = ru = role.avatar.addRenderUnit(rpd_effect);
@@ -405,7 +405,7 @@ package com.editor.manager
 		private static function updateMount(role : SceneRole) : void
 		{
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			var rpd_mount : RenderParamData = avatarInfo.rpd_mount;
+			var rpd_mount : RenderParamData3D = avatarInfo.rpd_mount;
 			if (rpd_mount != null)
 			{
 				var ru : RenderUnit3D = role.avatar.addRenderUnit(rpd_mount);

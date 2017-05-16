@@ -36,7 +36,8 @@ package com.rpgGame.app.scene
 	public class BuffSet implements IInstancePoolClass
 	{
 		private static var buffSetPool : InstancePool = new InstancePool("BuffSet", 300);
-		
+		private var _isDisposed:Boolean;
+		private var _isDestroyed:Boolean;
 		/**
 		 * 生成一个BuffSet
 		 */
@@ -49,11 +50,13 @@ package com.rpgGame.app.scene
 		public function instanceDestroy():void
 		{
 			dispose();
+			_isDestroyed = true;
 		}
 		
 		public function instanceDispose():void
 		{
 //			dispose();
+			_isDisposed = true;
 		}
 		/**
 		 * @private
@@ -68,12 +71,14 @@ package com.rpgGame.app.scene
 		
 		public function BuffSet(role : SceneRole)
 		{
+			_isDestroyed = false;
 			_buffDatas = new Vector.<BuffData>();
 			reSet([role]);
 		}
 		
 		public function reSet($parameters : Array) : void
 		{
+			_isDisposed = false;
 			_role = $parameters[0];
 		}
 		
@@ -419,6 +424,16 @@ package com.rpgGame.app.scene
 		{
 			clear();
 			_role = null;
+		}
+		
+		public function get isDestroyed():Boolean
+		{
+			return _isDestroyed;
+		}
+		
+		public function get isDisposed():Boolean
+		{
+			return _isDisposed;
 		}
 	}
 }

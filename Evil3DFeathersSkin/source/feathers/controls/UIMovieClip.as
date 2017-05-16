@@ -1,25 +1,16 @@
 package feathers.controls
 {
-	import flash.display.BitmapData;
-	import flash.display.DisplayObject;
-	import flash.display.MovieClip;
-	import flash.events.Event;
-	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	
 	import avmplus.getQualifiedClassName;
 	
-	import away3d.loaders.multi.MultiDobjLoadManager;
-	import away3d.loaders.multi.MultiDobjLoader;
-	import away3d.loaders.multi.MultiLoadData;
-	
 	import feathers.core.IMovieClip;
-	import feathers.drawer.MovieClipData;
 	import feathers.themes.GuiTheme;
 	import feathers.themes.GuiThemeStyle;
 	import feathers.themes.ThemeLoader;
 	
 	import starling.events.Event;
+	import starling.textures.IStarlingTexture;
 	
 	import utils.TimerServer;
 	
@@ -34,7 +25,7 @@ package feathers.controls
 		private static var BmdId:int;
 		private var _frameLabels:Vector.<String>;
 		private var _frameStyles:Vector.<String>;
-		private var _frameOffsets:Vector.<Point>;
+		private var _frameInfos:Vector.<Object>;
 		
 		/**
 		 * 帧间隔，毫秒
@@ -52,7 +43,7 @@ package feathers.controls
 		private var _frameCalls:Dictionary;
 		private var _isPlaying:Boolean;
 		private var _isLoaded:Boolean;
-		private var _autoPlay:Boolean;
+		private var _autoPlay:Boolean = true;
 		
 		/**
 		 * 构造函数
@@ -106,37 +97,6 @@ package feathers.controls
 			return _autoPlay;
 		}
 		
-		public function set nativeMovieClipUrl(url:String):void
-		{
-			var loadData:MultiLoadData = new MultiLoadData(url, onSwfLoad);
-			MultiDobjLoadManager.load(loadData);
-		}
-		
-		private function onSwfLoad($ld : MultiLoadData, event : flash.events.Event):void
-		{
-			var loader : MultiDobjLoader = event.currentTarget as MultiDobjLoader;
-			var mc : MovieClip = loader.content as MovieClip;
-			nativeMocieClip = mc;
-		}
-		
-		private var mcData:MovieClipData;
-		public function set nativeMocieClip(nativeDisp:flash.display.DisplayObject):void
-		{
-			if(mcData == null)mcData = new MovieClipData();
-			mcData.draw(nativeDisp, false, true);
-			_totalFrames = mcData.totalFrames;
-			var bd:BitmapData;
-			var subStyle:String;
-			for(var i:int=0; i<_totalFrames; i++)
-			{
-				bd = mcData.getBitmapData(i);
-				subStyle = "__UIMovieClip"+(BmdId++);
-				GuiTheme.ins.pushDynamicSubTexture(bd,subStyle);
-				_frameLabels.push(i+"");
-				_frameStyles.push(subStyle);
-			}
-		}
-		
 		private var _themeUrl:String;
 		/**
 		 * 设置外部加载的纹理url 
@@ -175,7 +135,7 @@ package feathers.controls
 			var label:String;
 			_frameLabels = new Vector.<String>;
 			_frameStyles = new Vector.<String>;
-			_frameOffsets = new Vector.<Point>;
+			_frameInfos = new Vector.<Object>;
 			for (label in styles)
 			{
 				_frameLabels.push(label);
@@ -185,34 +145,33 @@ package feathers.controls
 			_frameLabels = _frameLabels.sort(sortString);
 			//trace(_frameLabels);
 			
-			var p:Point;
+			var sub:Object
 			numAssets = 0;
 			for each(label in _frameLabels)
 			{
 				subStyle = styles[label];
 				_frameStyles.push(subStyle);
 				
-				p = GuiTheme.ins.getOffSet(subStyle);
-				_frameOffsets.push(p);
+				sub = GuiTheme.ins.getSubThemeInfo(subStyle);
+				_frameInfos.push(sub);
 				
 				if(GuiTheme.ins.hasTexture(subStyle))
 				{
 					numAssets++;
 					
-					if(!this.width || !this.height)
+					if(sub)
 					{
-						var sub:Object = GuiTheme.ins.getSubThemeInfo(subStyle);
-						if(sub)
-						{
-							this.width = sub.width;
-							this.height = sub.height;
-						}
+						if(!this.width)this.width = sub.width;
+						if(!this.height)this.height = sub.height;
 					}
+				}else
+				{
+					trace("UIMovieClip | ", _mcStyle,"未找到帧贴图:", subStyle, "此帧将当成空白帧播放");
 				}
 			}
 			
 			_totalFrames = frameLabels.length;
-			if(numAssets == _totalFrames)
+			if(numAssets > 0 || numAssets == _totalFrames)
 			{
 				_isLoaded = true;
 			}
@@ -220,14 +179,21 @@ package feathers.controls
 			if(this.stage != null)
 			{
 				checkLoad();
+			}else
+			{
+				this.addEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
 			}
-			this.addEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 		
 		override public function set styleClass(value:Class):void
 		{
 			if(!value)return;
-			styleName = getQualifiedClassName(value).replace("::", ".");
+			styleName = GuiThemeStyle.getQName(value);
+		}
+		
+		override public function get styleName():String
+		{
+			return _mcStyle;
 		}
 		
 		private function sortString(a:String, b:String):int
@@ -244,7 +210,7 @@ package feathers.controls
 		
 		private function checkLoad():void
 		{
-			TimerServer.callAfterFrame(_loadNow);
+			_loadNow();
 		}
 		
 		private function _loadNow():void
@@ -298,28 +264,24 @@ package feathers.controls
 		{
 			_isLoaded = true;
 			if(_isPlaying || (_autoPlay && stage != null))play();
-			this.dispatchEvent(new starling.events.Event(starling.events.Event.COMPLETE));
+			this.dispatchEventWith(starling.events.Event.COMPLETE);
 		}
 		
 		private function onThemeLoaded(loader:ThemeLoader):void
 		{
-			var p:Point;
+			var sub:Object 
 			var label:String;
 			var len:int = _frameLabels.length;
 			for (var i:int=0; i<len; i++)
 			{
 				var subStyle:String = _frameStyles[i];
-				p = GuiTheme.ins.getOffSet(subStyle);
-				_frameOffsets[i] = p;
+				sub = GuiTheme.ins.getSubThemeInfo(subStyle);
+				_frameInfos[i] = sub;
 				
-				if(!this.width || !this.height)
+				if(sub)
 				{
-					var sub:Object = GuiTheme.ins.getSubThemeInfo(subStyle);
-					if(sub)
-					{
-						this.width = sub.width;
-						this.height = sub.height;
-					}
+					if(!this.width)this.width = sub.width;
+					if(!this.height)this.height = sub.height;
 				}
 			}
 			onLoadFinish();
@@ -332,11 +294,11 @@ package feathers.controls
 		
 		private function onRemoveFromStage():void
 		{
-			stop();
+			_stop();
 		}
 		
 		private var numAssets:int;
-		private function onAssetLoad():void
+		private function onAssetLoad(texture:IStarlingTexture):void
 		{
 			numAssets++;
 			if(numAssets == frameLabels.length)
@@ -349,7 +311,7 @@ package feathers.controls
 		{
 			if( !this.stage || !visible)
 			{
-				stop();
+				_stop();
 				return;
 			}
 			
@@ -361,7 +323,7 @@ package feathers.controls
 					_curFrame =0;
 				}else
 				{
-					stop();
+					_stop();
 				}
 			}
 			
@@ -373,19 +335,20 @@ package feathers.controls
 			if(frame < 0 || frame >= totalFrames)frame = 0;
 			_curFrame = frame;
 			
+			if(_curFrame >= _frameStyles.length)
+			{
+				return;
+			}
 			//切换显示
 			super.styleName = _frameStyles[frame];
 			
-			if(mcData)
+			frameInfo = _frameInfos[frame];
+			if(frameInfo)
 			{
-				offset = mcData.getFrameOffset(frame);
-			}else{
-				offset = _frameOffsets[frame];
-			}
-			if(offset)
-			{
-				super.x = mX + offset.x;
-				super.y = mY + offset.y;
+				super.x = mX + int(frameInfo.offx);
+				super.y = mY + int(frameInfo.offy);
+				if(!this.width)this.width = frameInfo.width;
+				if(!this.height)this.height = frameInfo.height;
 			}
 			
 			if(_frameCalls && _frameCalls[frame])
@@ -396,34 +359,24 @@ package feathers.controls
 		
 		//=======================override==================================
 		
-		private var offset:Point;
+		private var frameInfo:Object;
 		private var mX:int;
 		private var mY:int;
 		override public function set x(value:Number):void
 		{
-			if(x==value)
+			if(mX==value)
 				return;
 			super.x = value;
 			mX = value;
 		}
-		override public function get x():Number
-		{
-			return mX + (offset ? offset.x : 0);
-		}
-		
 		
 		override public function set y(value:Number):void
 		{
-			if(y==value)
+			if(mY==value)
 				return;
 			super.y = value;
 			mY = value;
 		}
-		override public function get y():Number
-		{
-			return mY + (offset ? offset.y : 0);
-		}
-		
 		
 		//=======================IMovieClip==================================
 		/**
@@ -470,8 +423,8 @@ package feathers.controls
 		public function gotoAndPlay(frame:Object):void
 		{
 			var f:int = frame is String ? _frameLabels.indexOf(frame as String) : int(frame);
-			gotoFrame( f );
 			play();
+			gotoFrame( f );
 		}
 		/**
 		 * 跳到指定帧并停止
@@ -480,8 +433,8 @@ package feathers.controls
 		public function gotoAndStop(frame:Object):void
 		{
 			var f:int = frame is String ? _frameLabels.indexOf(frame as String) : int(frame);
-			gotoFrame( f );
 			stop();
+			gotoFrame( f );
 		}
 		/**
 		 * 从当期帧开始播放
@@ -489,6 +442,7 @@ package feathers.controls
 		public function play():void
 		{
 			if(_isLoaded)TimerServer.addLoop(renderFrame, _frameTime);
+			
 			_isPlaying = true;
 		}
 		/**
@@ -496,9 +450,16 @@ package feathers.controls
 		 */		
 		public function stop():void
 		{
+			_autoPlay = false;
+			_stop();
+		}
+		
+		private function _stop():void
+		{
 			TimerServer.remove(renderFrame);
 			_isPlaying = false;
 		}
+		
 		/**
 		 * 为指定帧添加回调函数。注意：同一帧只能添加一个回调函数。后添加的回调函数将会覆盖之前的。
 		 * @param frame 要添加回调的帧标签或者帧索引。
@@ -529,7 +490,7 @@ package feathers.controls
 			_frameLabels = null;
 			_frameStyles = null;
 			_frameCalls = null;
-			_frameOffsets = null;
+			_frameInfos = null;
 			
 			super.dispose();
 		}

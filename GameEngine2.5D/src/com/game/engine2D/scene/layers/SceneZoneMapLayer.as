@@ -428,15 +428,7 @@ package com.game.engine2D.scene.layers
 			MapCache.getInstance().clearWaitingLoadDatas();
 			MapCache.getInstance().clearDisposeCacheZone();
 			MapCache.getInstance().disposeAllZoneBmpData();
-			_mapZones.forEach(function(key : *, mZone : MapZone) : void
-			{
-				if (mZone)
-				{
-					mZone.clear();
-					mZone = null;
-				}
-				key = null;
-			});
+			_mapZones.forEach(clearMapZone);
 			//清空
 			_mapZones.clear();
 			
@@ -446,6 +438,16 @@ package com.game.engine2D.scene.layers
 			_curtMapZoneMap = new Dictionary();
 			
 			strongLoadMap = false;
+		}
+		
+		private function clearMapZone(key : *, mZone : MapZone) : void
+		{
+			if (mZone)
+			{
+				mZone.clear();
+				mZone = null;
+			}
+			key = null;
 		}
 	}
 }

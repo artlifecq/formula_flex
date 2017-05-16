@@ -98,6 +98,8 @@ package com.game.engine2D.core
 				
 				if (texture)
 				{
+					if (!texture.parent)
+						texture.updateTexture(getTextureAtlas(info.textureIndex),info.region);
 					return texture;
 				}
 				texture = new ATFStarlingTexture(

@@ -26,11 +26,11 @@ package starling.rendering
     import away3d.core.managers.Stage3DProxy;
     import away3d.enum.StencilMask;
     import away3d.events.Stage3DEvent;
-    import away3d.tick.Tick;
     
     import starling.core.starling_internal;
     import starling.display.BlendMode;
     import starling.display.DisplayObject;
+    import starling.display.MaskMode;
     import starling.display.Mesh;
     import starling.display.MeshBatch;
     import starling.display.Quad;
@@ -78,26 +78,26 @@ package starling.rendering
      */
     public class Painter
     {
-        // the key for the programs stored in 'sharedData'
-        private static const PROGRAM_DATA_NAME:String = "starling.rendering.Painter.Programs";
-
         // members
 
         private var _stage3D:Stage3D;
 		private var _stage3DProxy:Stage3DProxy;
 		private var _context:Context3D;
-        private var _shareContext:Boolean;
         private var _drawCount:int;
         private var _frameID:uint;
         private var _pixelSize:Number;
         private var _enableErrorChecking:Boolean;
         private var _stencilReferenceValues:Dictionary;
         private var _clipRectStack:Vector.<Rectangle>;
-        private var _batchProcessor:BatchProcessor;
-        private var _batchCache:BatchProcessor;
         private var _batchCacheExclusions:Vector.<DisplayObject>;
 
+        private var _batchProcessor:BatchProcessor;
+        private var _batchProcessorCurr:BatchProcessor; // current  processor
+        private var _batchProcessorPrev:BatchProcessor; // previous processor (cache)
+        private var _batchProcessorSpec:BatchProcessor; // special  processor (no cache)
+
         private var _actualRenderTarget:TextureBase;
+        private var _actualRenderTargetOptions:uint;
         private var _actualCulling:String;
         private var _actualBlendMode:String;
 
@@ -111,11 +111,10 @@ package starling.rendering
         private var _stateStackLength:int;
         // shared data
         private static var sSharedData:Dictionary = new Dictionary();
+		private static var sPoint3D:Vector3D = new Vector3D();
 
         // helper objects
         private static var sMatrix:Matrix = new Matrix();
-        private static var sPoint3D:Vector3D = new Vector3D();
-        private static var sMatrix3D:Matrix3D = new Matrix3D();
         private static var sClipRect:Rectangle = new Rectangle();
         private static var sBufferRect:Rectangle = new Rectangle();
         private static var sScissorRect:Rectangle = new Rectangle();
@@ -130,18 +129,22 @@ package starling.rendering
 			_stage3DProxy = stage3DProxy;
 			_stage3DProxy.addEventListener(Stage3DEvent.CONTEXT3D_RECREATED, onContextCreated);
             _context = stage3DProxy.context3D;
-            _shareContext = _context && _context.driverInfo != "Disposed";
             _backBufferWidth  = viewPort ? viewPort.width  : 0;
             _backBufferHeight = viewPort ? viewPort.height : 0;//backBufferWidth/backBufferHeight (Flash Player 15, AIR 15) wewell
             _backBufferScaleFactor = _pixelSize = 1.0;
             _stencilReferenceValues = new Dictionary(true);
             _clipRectStack = new <Rectangle>[];
 
-            _batchProcessor = new BatchProcessor();
-            _batchProcessor.onBatchComplete = drawBatch;
+            _batchProcessorCurr = new BatchProcessor();
+            _batchProcessorCurr.onBatchComplete = drawBatch;
 
-            _batchCache = new BatchProcessor();
-            _batchCache.onBatchComplete = drawBatch;
+            _batchProcessorPrev = new BatchProcessor();
+            _batchProcessorPrev.onBatchComplete = drawBatch;
+
+            _batchProcessorSpec = new BatchProcessor();
+            _batchProcessorSpec.onBatchComplete = drawBatch;
+
+            _batchProcessor = _batchProcessorCurr;
             _batchCacheExclusions = new Vector.<DisplayObject>();
 
             _state = new RenderState(stage3DProxy);
@@ -160,35 +163,17 @@ package starling.rendering
          *  the render context. */
         public function dispose():void
         {
-            _batchProcessor.dispose();
-            _batchCache.dispose();
-
-            if (!_shareContext)
-            {
-                _context.dispose(false);
-                sSharedData = new Dictionary();
-            }
-        }
-
-        // context handling
-
-        /** Requests a context3D object from the stage3D object.
-         *  This is called by Starling internally during the initialization process.
-         *  You normally don't need to call this method yourself. (For a detailed description
-         *  of the parameters, look at the documentation of the method with the same name in the
-         *  "RenderUtil" class.)
-         *
-         *  @see starling.utils.RenderUtil
-         */
-        public function requestContext3D(renderMode:String, profile:*):void
-        {
-            RenderUtil.requestContext3D(_stage3D, renderMode, profile);
+            _batchProcessorCurr.dispose();
+            _batchProcessorPrev.dispose();
+            _batchProcessorSpec.dispose();
         }
 
         private function onContextCreated(event:Object):void
         {
             _context = _stage3DProxy.context3D;
             _context.enableErrorChecking = _enableErrorChecking;
+            _context.setDepthTest(false, Context3DCompareMode.ALWAYS);
+
             _actualBlendMode = null;
             _actualCulling = null;
         }
@@ -211,76 +196,11 @@ package starling.rendering
          *                                this setting in the app-xml (application descriptor);
          *                                otherwise, this setting will be silently ignored.
          */
-        public function configureBackBuffer(viewPort:Rectangle, contentScaleFactor:Number,
-                                            antiAlias:int, enableDepthAndStencil:Boolean):void
+        public function configureBackBuffer(viewPort:Rectangle, contentScaleFactor:Number, antiAlias:int):void
         {
-            if (!_shareContext)
-            {
-                enableDepthAndStencil &&= SystemUtil.supportsDepthAndStencil;
-
-                // Changing the stage3D position might move the back buffer to invalid bounds
-                // temporarily. To avoid problems, we set it to the smallest possible size first.
-
-                if (_context.profile == "baselineConstrained")
-                    _context.configureBackBuffer(32, 32, antiAlias, enableDepthAndStencil);
-
-                // If supporting HiDPI mode would exceed the maximum buffer size
-                // (can happen e.g in software mode), we stick to the low resolution.
-
-				//(Flash Player 15, AIR 15)
-				if(_context.hasOwnProperty("maxBackBufferWidth") && _context.hasOwnProperty("maxBackBufferHeight"))
-				{
-					if (viewPort.width  * contentScaleFactor > _context["maxBackBufferWidth"] ||
-						viewPort.height * contentScaleFactor > _context["maxBackBufferHeight"])
-					{
-						contentScaleFactor = 1.0;
-					}
-				}
-
-                _stage3D.x = viewPort.x;
-                _stage3D.y = viewPort.y;
-
-                _context.configureBackBuffer(viewPort.width, viewPort.height,
-                    antiAlias, enableDepthAndStencil, contentScaleFactor != 1.0);
-            }
-
             _backBufferWidth  = viewPort.width;
             _backBufferHeight = viewPort.height;
             _backBufferScaleFactor = contentScaleFactor;
-        }
-
-        // program management
-
-        /** Registers a program under a certain name.
-         *  If the name was already used, the previous program is overwritten. */
-        public function registerProgram(name:String, program:Program):void
-        {
-            deleteProgram(name);
-            programs[name] = program;
-        }
-
-        /** Deletes the program of a certain name. */
-        public function deleteProgram(name:String):void
-        {
-            var program:Program = getProgram(name);
-            if (program)
-            {
-                program.dispose();
-                delete programs[name];
-            }
-        }
-
-        /** Returns the program registered under a certain name, or null if no program with
-         *  this name has been registered. */
-        public function getProgram(name:String):Program
-        {
-            return programs[name] as Program;
-        }
-
-        /** Indicates if a program is registered under a certain name. */
-        public function hasProgram(name:String):Boolean
-        {
-            return name in programs;
         }
 
         // state stack
@@ -334,6 +254,24 @@ package starling.rendering
 
             if (token) _batchProcessor.fillToken(token);
         }
+		
+		/** Restores the render state that was last pushed to the stack, but does NOT remove
+		 *  it from the stack. */
+		public function restoreState():void
+		{
+			if (_stateStackPos < 0)
+				throw new IllegalOperationError("Cannot restore from empty state stack");
+			
+			_state.copyFrom(_stateStack[_stateStackPos]); // -> might cause 'finishMeshBatch'
+		}
+		
+		/** Updates all properties of the given token so that it describes the current position
+		 *  within the render cache. */
+		public function fillToken(token:BatchToken):void
+		{
+			if (token) _batchProcessor.fillToken(token);
+		}
+
 
         // masks
 
@@ -368,13 +306,14 @@ package starling.rendering
             else
             {
                 _context.setStencilActions(Context3DTriangleFace.FRONT_AND_BACK,
-                    Context3DCompareMode.EQUAL, Context3DStencilAction.INCREMENT_SATURATE);
+					Context3DCompareMode.EQUAL, Context3DStencilAction.INCREMENT_SATURATE);
 
                 renderMask(mask);
                 stencilReferenceValue++;
 
+				var compareMode:String = mask.maskMode == MaskMode.ERASE ?  Context3DCompareMode.GREATER :  Context3DCompareMode.EQUAL;
                 _context.setStencilActions(Context3DTriangleFace.FRONT_AND_BACK,
-                    Context3DCompareMode.EQUAL, Context3DStencilAction.KEEP);
+					compareMode, Context3DStencilAction.KEEP);
             }
 
             excludeFromCache(maskee);
@@ -400,20 +339,26 @@ package starling.rendering
             }
             else
             {
+				var isMaskEraseMode:Boolean = mask.maskMode == MaskMode.ERASE;
+				var compareMode:String = isMaskEraseMode ?  Context3DCompareMode.GREATER :  Context3DCompareMode.EQUAL;
                 _context.setStencilActions(Context3DTriangleFace.FRONT_AND_BACK,
-                    Context3DCompareMode.EQUAL, Context3DStencilAction.DECREMENT_SATURATE);
+					compareMode, Context3DStencilAction.DECREMENT_SATURATE);
 
                 renderMask(mask);
                 stencilReferenceValue--;
 
+				compareMode = isMaskEraseMode ?  Context3DCompareMode.LESS_EQUAL :  Context3DCompareMode.EQUAL;
                 _context.setStencilActions(Context3DTriangleFace.FRONT_AND_BACK,
-                    Context3DCompareMode.EQUAL, Context3DStencilAction.KEEP);
+					compareMode, Context3DStencilAction.KEEP);
             }
         }
 
         private function renderMask(mask:DisplayObject):void
         {
+            var wasCacheEnabled:Boolean = cacheEnabled;
+
             pushState();
+            cacheEnabled = false;
             _state.alpha = 0.0;
 
             var matrix:Matrix = null;
@@ -423,21 +368,19 @@ package starling.rendering
             {
                 _state.setModelviewMatricesToIdentity();
 
-                if (mask.is3D) matrix3D = mask.getTransformationMatrix3D(null, sMatrix3D);
-                else           matrix   = mask.getTransformationMatrix(null, sMatrix);
+                matrix   = mask.getTransformationMatrix(null, sMatrix);
             }
             else
             {
-                if (mask.is3D) matrix3D = mask.transformationMatrix3D;
-                else           matrix   = mask.transformationMatrix;
+                matrix   = mask.transformationMatrix;
             }
 
-            if (matrix3D) _state.transformModelviewMatrix3D(matrix3D);
-            else          _state.transformModelviewMatrix(matrix);
+           _state.transformModelviewMatrix(matrix);
 
             mask.render(this);
             finishMeshBatch();
 
+            cacheEnabled = wasCacheEnabled;
             popState();
         }
 
@@ -476,9 +419,8 @@ package starling.rendering
         private function isRectangularMask(mask:DisplayObject, maskee:DisplayObject, out:Matrix):Boolean
         {
             var quad:Quad = mask as Quad;
-            var is3D:Boolean = mask.is3D || (maskee && maskee.is3D && mask.stage == null);
 
-            if (quad && !is3D && quad.texture == null)
+            if (quad && quad.texture == null)
             {
                 if (mask.stage) mask.getTransformationMatrix(null, out);
                 else
@@ -517,20 +459,12 @@ package starling.rendering
         /** Completes all unfinished batches, cleanup procedures. */
         public function finishFrame():void
         {
-            if (_frameID % 99 == 0) // odd number -> alternating processors
-                _batchProcessor.trim();
+            if (_frameID %  99 == 0) _batchProcessorCurr.trim(); // odd number -> alternating processors
+            if (_frameID % 150 == 0) _batchProcessorSpec.trim();
 
             _batchProcessor.finishBatch();
-            swapBatchProcessors();
-            _batchProcessor.clear();
+            _batchProcessor = _batchProcessorSpec; // no cache between frames
             processCacheExclusions();
-        }
-
-        private function swapBatchProcessors():void
-        {
-            var tmp:BatchProcessor = _batchProcessor;
-            _batchProcessor = _batchCache;
-            _batchCache = tmp;
         }
 
         private function processCacheExclusions():void
@@ -554,6 +488,11 @@ package starling.rendering
          *  clipping rectangle, and draw count. Furthermore, depth testing is disabled. */
         public function nextFrame():void
         {
+            // update batch processors
+            _batchProcessor = swapBatchProcessors();
+            _batchProcessor.clear();
+            _batchProcessorSpec.clear();
+
             // enforce reset of basic context settings
             _actualBlendMode = null;
             _actualCulling = null;
@@ -564,8 +503,14 @@ package starling.rendering
             _clipRectStack.length = 0;
             _drawCount = 0;
             _stateStackPos = -1;
-            _batchProcessor.clear();
             _state.reset();
+        }
+
+        private function swapBatchProcessors():BatchProcessor
+        {
+            var tmp:BatchProcessor = _batchProcessorPrev;
+            _batchProcessorPrev = _batchProcessorCurr;
+            return _batchProcessorCurr = tmp;
         }
 
         /** Draws all meshes from the render cache between <code>startToken</code> and
@@ -583,9 +528,15 @@ package starling.rendering
 				var endTokenID:int = endToken.batchID;
                 for (var i:int = startToken.batchID; i <= endTokenID; ++i)
                 {
-                    meshBatch = _batchCache.getBatchAt(i);
+                    meshBatch = _batchProcessorPrev.getBatchAt(i);
                     subset.setTo(); // resets subset
+					
+					// todo: 查到bug之后就应该移除
+					if(meshBatch.isDisposed)
+						throw new Error("drawFromCache , meshBatch is disposed!!!!!");
 
+					if(!meshBatch)continue; //this should not occur
+					
                     if (i == startToken.batchID)
                     {
                         subset.vertexID = startToken.vertexID;
@@ -610,14 +561,6 @@ package starling.rendering
 
                 popState();
             }
-        }
-
-        /** Removes all parts of the render cache past the given token. Beware that some display
-         *  objects might still reference those parts of the cache! Only call it if you know
-         *  exactly what you're doing. */
-        public function rewindCacheTo(token:BatchToken):void
-        {
-            _batchProcessor.rewindTo(token);
         }
 
         /** Prevents the object from being drawn from the render cache in the next frame.
@@ -702,14 +645,16 @@ package starling.rendering
         private function applyRenderTarget():void
         {
             var target:TextureBase = _state.renderTargetBase;
+            var options:uint = _state.renderTargetOptions;
 
-            if (target != _actualRenderTarget)
+            if (target != _actualRenderTarget || options != _actualRenderTargetOptions)
             {
                 var antiAlias:int  = _state.renderTargetAntiAlias;
                 var depthAndStencil:Boolean = _state.renderTargetSupportsDepthAndStencil;
 				_stage3DProxy.setRenderTarget(target, depthAndStencil, 0, antiAlias, Stage3DProxy.STARLING_TYPE);
 
-                _context.setStencilReferenceValue(stencilReferenceValue, StencilMask.STARLING_USED_MASK, StencilMask.STARLING_USED_MASK);
+                _context.setStencilReferenceValue(stencilReferenceValue);
+                _actualRenderTargetOptions = options;
                 _actualRenderTarget = target;
             }
         }
@@ -784,8 +729,27 @@ package starling.rendering
             var key:Object = _state.renderTarget ? _state.renderTargetBase : this;
             _stencilReferenceValues[key] = value;
 
-            if (contextValid)
+            if (_stage3DProxy.recoverFromDisposal())
                 _context.setStencilReferenceValue(value, StencilMask.STARLING_USED_MASK, StencilMask.STARLING_USED_MASK);
+        }
+
+        /** Indicates if the render cache is enabled. Normally, this should be left at the default;
+         *  however, some custom rendering logic might require to change this property temporarily.
+         *  Also note that the cache is automatically reactivated each frame, right before the
+         *  render process.
+         *
+         *  @default true
+         */
+        public function get cacheEnabled():Boolean { return _batchProcessor == _batchProcessorCurr; }
+        public function set cacheEnabled(value:Boolean):void
+        {
+            if (value != cacheEnabled)
+            {
+                finishMeshBatch();
+
+                if (value) _batchProcessor = _batchProcessorCurr;
+                else       _batchProcessor = _batchProcessorSpec;
+            }
         }
 
         /** The current render state, containing some of the context settings, projection- and
@@ -804,18 +768,18 @@ package starling.rendering
         /** The Context3D instance this painter renders into. */
         public function get context():Context3D { return _context; }
 
-        /** The number of frames that have been rendered with the current Starling instance. */
-        public function get frameID():uint { return _frameID; }
+        /** Returns the index of the current frame <strong>if</strong> the render cache is enabled;
+         *  otherwise, returns zero. To get the frameID regardless of the render cache, call
+         *  <code>Starling.frameID</code> instead. */
         public function set frameID(value:uint):void { _frameID = value; }
+        public function get frameID():uint
+        {
+            return _batchProcessor == _batchProcessorCurr ? _frameID : 0;
+        }
 
         /** The size (in points) that represents one pixel in the back buffer. */
         public function get pixelSize():Number { return _pixelSize; }
         public function set pixelSize(value:Number):void { _pixelSize = value; }
-
-        /** Indicates if another Starling instance (or another Stage3D framework altogether)
-         *  uses the same render context. @default false */
-        public function get shareContext():Boolean { return _shareContext; }
-        public function set shareContext(value:Boolean):void { _shareContext = value; }
 
         /** Indicates if Stage3D render methods will report errors. Activate only when needed,
          *  as this has a negative impact on performance. @default false */
@@ -845,25 +809,14 @@ package starling.rendering
          *  this will always return '1'. */
         public function get backBufferScaleFactor():Number { return _backBufferScaleFactor; }
 
-        /** Indicates if the Context3D object is currently valid (i.e. it hasn't been lost or
-         *  disposed). */
-        public function get contextValid():Boolean
-        {
-            if (_context)
-            {
-                const driverInfo:String = _context.driverInfo;
-                return driverInfo != null && driverInfo != "" && driverInfo != "Disposed";
-            }
-            else return false;
-        }
-
         /** The Context3D profile of the current render context, or <code>null</code>
          *  if the context has not been created yet. */
-        public function get profile():String
-        {
-            if (_context) return _context.profile;
-            else return null;
-        }
+		public function get profile():String
+		{
+			if(_context && _stage3D.hasOwnProperty("requestContext3DMatchingProfiles"))
+				return _context["profile"];
+			return null;
+		}
 
         /** A dictionary that can be used to save custom data related to the render context.
          *  If you need to share data that is bound to the render context (e.g. textures), use
@@ -878,17 +831,6 @@ package starling.rendering
                 sSharedData[stage3D] = data;
             }
             return data;
-        }
-
-        private function get programs():Dictionary
-        {
-            var programs:Dictionary = sharedData[PROGRAM_DATA_NAME] as Dictionary;
-            if (programs == null)
-            {
-                programs = new Dictionary();
-                sharedData[PROGRAM_DATA_NAME] = programs;
-            }
-            return programs;
         }
     }
 }

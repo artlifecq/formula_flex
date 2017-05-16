@@ -39,7 +39,6 @@ package feathers.controls
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	import starling.rendering.LayerBatchID;
 	import starling.utils.Pool;
 
 	/**
@@ -378,7 +377,6 @@ package feathers.controls
 			super();
 			this.addEventListener(TouchEvent.TOUCH, textInput_touchHandler);
 			this.addEventListener(Event.REMOVED_FROM_STAGE, textInput_removedFromStageHandler);
-			_layerBatchId = LayerBatchID.TEXTINPUT;
 		}
 
 		/**
@@ -566,6 +564,7 @@ package feathers.controls
 				return;
 			}
 			this._text = value;
+			this.textEditorProperties.isHTML = false;
 			this.invalidate(INVALIDATION_FLAG_DATA);
 			this.dispatchEventWith(Event.CHANGE);
 		}
@@ -2230,7 +2229,6 @@ package feathers.controls
 			{
 				this._isWaitingToSetFocus = false;
 				this.textEditor.setFocus();
-				trace("setFocus");
 			}
 			else
 			{
@@ -2250,7 +2248,6 @@ package feathers.controls
 				return;
 			}
 			this.textEditor.clearFocus();
-			trace("clearFocus");
 		}
 
 		/**
@@ -3327,6 +3324,8 @@ package feathers.controls
 			if(autoClearFocusOnEnterKeyDown)
 			{
 				textEditor_focusOutHandler(null);
+			}else{
+				parseTextInputValue();
 			}
 			this.dispatchEventWith(FeathersEventType.ENTER);
 		}
@@ -3374,6 +3373,7 @@ package feathers.controls
 			{
 				this.dispatchEventWith(FeathersEventType.FOCUS_IN);
 			}
+			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
 
 		/**
@@ -3381,6 +3381,8 @@ package feathers.controls
 		 */
 		protected function textEditor_focusOutHandler(event:Event):void
 		{
+			parseTextInputValue();
+			
 			this._textEditorHasFocus = false;
 			this.refreshState();
 			if(this.callout)
@@ -3400,6 +3402,31 @@ package feathers.controls
 			else
 			{
 				this.dispatchEventWith(FeathersEventType.FOCUS_OUT);
+			}
+			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+		
+		protected var _valueParseFunction:Function;
+		
+		public function get valueParseFunction():Function
+		{
+			return this._valueParseFunction;
+		}
+		
+		public function set valueParseFunction(value:Function):void
+		{
+			this._valueParseFunction = value;
+		}
+		
+		/**
+		 * @private
+		 */
+		protected function parseTextInputValue():void
+		{
+			if(this._valueParseFunction != null)
+			{
+				var newValue:String = this._valueParseFunction(this._text);
+				this.text = newValue;
 			}
 		}
 		

@@ -1,15 +1,19 @@
 package feathers.themes
 {
-	import flash.events.Event;
 	import flash.events.ProgressEvent;
+	import flash.net.URLLoaderDataFormat;
 	import flash.utils.ByteArray;
 	
+	import away3d.enum.LoadPriorityType;
 	import away3d.events.Event;
 	import away3d.events.TextureDataLoaderEvent;
 	import away3d.loaders.multi.MultiLoadData;
 	import away3d.loaders.multi.MultiUrlLoadManager;
+	import away3d.textures.ATFData;
 	
+	import starling.textures.AsyncStarlingTexture;
 	import starling.textures.ConcreteTexture;
+	import starling.textures.IStarlingTexture;
 	
 	import utils.TimerServer;
 
@@ -27,13 +31,12 @@ package feathers.themes
 		private var _url : String;
 		private var _xml:XML;
 		private var _textureUrl:String;
-		private var _textureFormat:int;
+		private var _texture:IStarlingTexture;
 		
 		private var _onProgress:Function;
 		private var _onError:Function;
 		private var _onResolver : Function;
 		
-		private var _needBitmapData:Boolean = false;
 		private var _extensionName:String;
 		private var _priority:int;
 		
@@ -42,12 +45,11 @@ package feathers.themes
 		private var _infBytesTotal:int;
 		private var _loadToken:MultiLoadData;
 		
-		public function ThemeLoader(needBitmapData:Boolean=false)
+		public function ThemeLoader()
 		{
-			_needBitmapData = needBitmapData;
 		}
 		
-		public function load(url : String, onLoad : Function = null, onProgress : Function=null, onError:Function=null, priority:int = 1000) : void
+		public function load(url : String, onLoad : Function = null, onProgress : Function=null, onError:Function=null, priority:int = LoadPriorityType.LEVEL_2D_UI_DEFAULT) : void
 		{
 			_textureUrl = _url = url;
 			_onResolver = onLoad;
@@ -56,11 +58,6 @@ package feathers.themes
 			_priority = priority;
 			
 			_textureUrl = GuiTheme.checkAddExtensionName(_textureUrl);
-			
-			if(GuiTheme.decodeURL != null)
-			{
-				_textureUrl = GuiTheme.decodeURL(_textureUrl);
-			}
 			
 			loadInf();
 		}
@@ -78,81 +75,140 @@ package feathers.themes
 			paths[paths.length-1] = name + _extensionName;
 			
 			var infPath:String = paths.join(SPLICE);
-			if(GuiTheme.decodeURL != null)
-			{
-				infPath = GuiTheme.decodeURL(infPath);
-			}
 			
-			_loadToken = new MultiLoadData(infPath, onInfLoad, onInfFileProgress, _onError, "", "", _priority, "binary");
+			_loadToken = new MultiLoadData(infPath, onInfLoad, onInfFileProgress, _onError, "","",_priority, URLLoaderDataFormat.BINARY);
 			MultiUrlLoadManager.load(_loadToken);
-			
-//			MultiUrlLoadManager.load(new MultiLoadData(infPath, onInfLoad, _onProgress, _onError, "","",_priority, URLLoaderDataFormat.BINARY));
 			CONFIG::Starling_Debug
 				{
 					tracing("load inf:", infPath);
 				}
 		}
 		
+		private var _numRetryUncompress:int;
 		private function onInfLoad(ld : MultiLoadData, event : flash.events.Event) : void
 		{
 			var bytes:ByteArray = (event.currentTarget).data;
-			if(_extensionName == FILE_INF )bytes.uncompress();
+			try
+			{
+				bytes.position = 0;
+				if(_extensionName == FILE_INF )bytes.uncompress();
+			} 
+			catch(error:Error) 
+			{
+				throw new Error("ThemeLoader  Error! Repeated requests or invalid file：",  ld.url );
+				return;
+			}
+		
+			bytes.position = 0;
 			var xml:XML = XML(bytes.readUTFBytes(bytes.length));
 			_xml = xml;
-
-			var texture:ConcreteTexture = new ConcreteTexture();
-			texture.addEventListener(away3d.events.Event.COMPLETE,onTextureComplete);
-			texture.addEventListener("loadProgress", onDataFileProgress);
-			texture.load(_textureUrl);
+			
+			
+			if(_textureUrl.indexOf(".atf") > 0)
+			{
+				var atfToken:MultiLoadData = new MultiLoadData(_textureUrl, onAtfLoad, onAtfFileProgress, _onError, "","",_priority, URLLoaderDataFormat.BINARY);
+				MultiUrlLoadManager.load(atfToken);
+			}else
+			{
+				var texture:ConcreteTexture = new ConcreteTexture(false,false,true,false);
+				texture.addEventListener(away3d.events.Event.COMPLETE,onBitmapTextureComplete);
+				texture.addEventListener(TextureDataLoaderEvent.LOAD_PROGRESS, onBitmapFileProgress);
+				texture.load(_textureUrl, _priority);
+			}
+		}
+		
+		private function onBitmapTextureComplete(e:away3d.events.Event):void
+		{
+			var texture:ConcreteTexture = e.currentTarget as ConcreteTexture;
+			texture.removeEventListener(away3d.events.Event.COMPLETE,onBitmapTextureComplete);
+			texture.removeEventListener(TextureDataLoaderEvent.LOAD_PROGRESS, onBitmapFileProgress);
+			GuiTheme.ins.pushTexture(_url, texture, _xml);
+			TimerServer.callAfterFrame(dispatchCompleteEvent);
+		}
+		
+		private function onBitmapFileProgress(event:TextureDataLoaderEvent):void
+		{
+			_bytesLoaded = event.bytesLoaded + _infBytesTotal;
+			_bytesTotal = event.bytesTotal + _infBytesTotal;
+			dispacthProgressEvent();
+		}
+		
+		private function onAtfFileProgress(loader:MultiLoadData, event:ProgressEvent):void
+		{
+			_bytesLoaded = event.bytesLoaded + _infBytesTotal;
+			_bytesTotal = event.bytesTotal + _infBytesTotal;
+			dispacthProgressEvent();
+		}
+		
+		private function onAtfLoad(ld : MultiLoadData, event : flash.events.Event) : void
+		{
+			var bytes:ByteArray = (event.currentTarget).data;
+			bytes.position = 0;
+			var atfTexture:IStarlingTexture;
+			if(GuiTheme.ATF_ASYNC_UPLOAD)
+			{
+				atfTexture = new AsyncStarlingTexture(bytes, ld.url, false, true);
+				_texture = atfTexture;
+				if(!AsyncStarlingTexture(atfTexture).isReady)
+					atfTexture.addEventListener(Event.TEXTURE_READY, onTextureReady);
+			}else{
+				var atfData:ATFData = new ATFData(bytes, false);
+				var concreteTexture:ConcreteTexture = new ConcreteTexture(false, atfData.compressed, atfData.hasAlpha, false); 
+				concreteTexture.textureData = atfData;
+				concreteTexture.url = ld.url;
+				_texture = concreteTexture;
+				onTextureReady();
+			}
+		}
+		
+		private function onATFTextureComplete(e:away3d.events.Event):void
+		{
+			var texture:ConcreteTexture = e.currentTarget as ConcreteTexture;
+			texture.removeEventListener(away3d.events.Event.COMPLETE,onATFTextureComplete);
+			GuiTheme.ins.pushTexture(_url, texture, _xml);
+			TimerServer.callAfterFrame(dispatchCompleteEvent);
 		}
 		
 		private function onInfFileProgress(loader:MultiLoadData, event:ProgressEvent):void
 		{
 			_bytesLoaded = event.bytesLoaded;
-			_infBytesTotal = event.bytesTotal;
-			_bytesTotal = event.bytesTotal;
-		}
-		
-		private function onDataFileProgress(event:TextureDataLoaderEvent):void
-		{
-			_bytesLoaded = (event.bytesLoaded + _infBytesTotal);
-			_bytesTotal = (event.bytesTotal + _infBytesTotal);
-			dispacthProgressEvent();
+			_bytesTotal = _infBytesTotal = event.bytesTotal;
 		}
 		
 		private function dispacthProgressEvent():void
 		{
-			if (_onProgress != null)
+			if(_onProgress != null)
 			{
-				_onProgress(_bytesLoaded / _bytesTotal);
+				_onProgress(_bytesLoaded/_bytesTotal);
 			}
 		}
 		
-		private function onTextureComplete(e:away3d.events.Event):void
+		private function onTextureReady(e:away3d.events.Event=null):void
 		{
-			var texture:ConcreteTexture = e.currentTarget as ConcreteTexture;
-			texture.removeEventListener(away3d.events.Event.COMPLETE,onTextureComplete);
-			GuiTheme.ins.pushTexture(_url, texture, _xml);
-			
-			TimerServer.callAfterFrame(dispatchCompleteEvent);
+			_texture.removeEventListener(Event.TEXTURE_READY, onTextureReady);
+			if(!_texture.disposed)
+			{
+				GuiTheme.ins.pushTexture(_url, _texture, _xml);
+				TimerServer.callAfterFrame(dispatchCompleteEvent);
+			}
 		}
 		
 		private function dispatchCompleteEvent():void
 		{
 			if (_onResolver != null)
-			{
 				_onResolver(this);
-			}
+			
 			_loadToken = null;
 			_onResolver = null;
 			_onProgress = null;
 			_onError = null;
+			_extensionName = null;
 		}
 		
 		/**
 		 * 获取文件名
 		 */		
-		public static function fileName(path:String):String
+		private static function fileName(path:String):String
 		{
 			path = path.split("?")[0];
 			var i1:int = path.lastIndexOf("/");
@@ -166,7 +222,7 @@ package feathers.themes
 			return path;
 		}
 		
-		public function dispose():void
+		public function dispose() : void
 		{
 			if (_textureUrl)
 			{
@@ -175,15 +231,19 @@ package feathers.themes
 			}
 			if (_url)
 			{
-				GuiTheme.ins.popBitmapTexture(_url);
+				GuiTheme.ins.popTexture(_url);
 				_url = null;
 			}
 			TimerServer.remove(dispatchCompleteEvent);
+			
+			_loadToken = null;
 			_onResolver = null;
 			_onProgress = null;
 			_onError = null;
 			_xml = null;
 			_loadToken = null;
+			_url = null;
+			_extensionName = null;
 		}
 	}
 }

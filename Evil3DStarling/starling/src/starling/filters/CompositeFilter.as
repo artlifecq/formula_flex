@@ -29,7 +29,7 @@ package starling.filters
 
         /** Combines up to four input textures into one new texture,
          *  adhering to the properties of each layer. */
-        override public function process(painter:Painter, helper:IFilterHelper,
+        override public function process(painter:Painter, helper:FilterHelper,
                                          input0:IStarlingTexture = null, input1:IStarlingTexture = null,
                                          input2:IStarlingTexture = null, input3:IStarlingTexture = null):IStarlingTexture
         {
@@ -108,15 +108,21 @@ package starling.filters
 
 import flash.display3D.Context3DProgramType;
 
+import away3d.arcane;
+import away3d.core.data.ShaderCache;
+import away3d.core.managers.AGALProgram3DCache;
 import away3d.core.managers.Stage3DProxy;
 
 import starling.rendering.FilterEffect;
-import starling.rendering.Program;
+import starling.rendering.ProgramNameID;
 import starling.rendering.VertexDataFormat;
 import starling.textures.IStarlingTexture;
 import starling.utils.Color;
 import starling.utils.RenderUtil;
 import starling.utils.StringUtil;
+
+use namespace arcane;
+
 
 class CompositeEffect extends FilterEffect
 {
@@ -157,87 +163,109 @@ class CompositeEffect extends FilterEffect
         return out;
     }
 
-    override protected function createProgram():Program
-    {
-        var layers:Array = getUsedLayers(sLayers);
-        var numLayers:int = layers.length;
-        var i:int;
-
-        if (numLayers)
-        {
-            var vertexShader:Array = ["m44 op, va0, vc0"]; // transform position to clip-space
-            var layer:CompositeLayer = _layers[0];
-
-            for (i=0; i<numLayers; ++i) // v0-4 -> texture coords
-                vertexShader.push(
-                    StringUtil.format("add v{0}, va{1}, vc{2}", i, i + 1, i + 4) // add offset
-                );
-
-            var fragmentShader:Array = [
-                "seq ft5, v0, v0" // ft5 -> 1, 1, 1, 1
-            ];
-
-            for (i=0; i<numLayers; ++i)
-            {
-                var fti:String = "ft" + i;
-                var fci:String = "fc" + i;
-                var vi:String  = "v"  + i;
-
-                layer = _layers[i];
-
-                fragmentShader.push(
-                    tex(fti, vi, i, layers[i].texture)  // fti => texture i color
-                );
-
-                if (layer.replaceColor)
-                    fragmentShader.push(
-                        "mul " + fti + ".w,   " + fti + ".w,   " + fci + ".w",
-                        "sat " + fti + ".w,   " + fti + ".w    ", // make sure alpha <= 1.0
-                        "mul " + fti + ".xyz, " + fci + ".xyz, " + fti + ".www"
-                    );
-                else
-                    fragmentShader.push(
-                        "mul " + fti + ", " + fti + ", " + fci // fti *= color
-                    );
-
-                if (i != 0)
-                {
-                    // "normal" blending: src × ONE + dst × ONE_MINUS_SOURCE_ALPHA
-                    fragmentShader.push(
-                        "sub ft4, ft5, " + fti + ".wwww", // ft4 => 1 - src.alpha
-                        "mul ft0, ft0, ft4",              // ft0 => dst * (1 - src.alpha)
-                        "add ft0, ft0, " + fti            // ft0 => src + (dst * 1 - src.alpha)
-                    );
-                }
-            }
-
-            fragmentShader.push("mov oc, ft0"); // done! :)
-
-            return Program.fromSource(vertexShader.join("\n"), fragmentShader.join("\n"));
-        }
-        else
-        {
-            return super.createProgram();
-        }
-    }
-
-    override protected function get programVariantName():uint
-    {
-        var bits:uint;
-        var totalBits:uint = 0;
-        var layer:CompositeLayer;
-        var layers:Array = getUsedLayers(sLayers);
-        var numLayers:int = layers.length;
-
-        for (var i:int=0; i<numLayers; ++i)
-        {
-            layer = layers[i];
-            bits = RenderUtil.getTextureVariantBits(layer.texture) | (int(layer.replaceColor) << 3);
-            totalBits |= bits << (i * 4);
-        }
-
-        return totalBits;
-    }
+	override protected function get programVariantName():uint
+	{
+		var bits:uint;
+		var totalBits:uint = 0;
+		var layer:CompositeLayer;
+		var layers:Array = getUsedLayers(sLayers);	
+		var numLayers:int = layers.length;		
+		
+		for (var i:int=0; i<numLayers; ++i)		
+		{		
+			layer = layers[i];		
+			bits = RenderUtil.getTextureVariantBits(layer.texture) | (int(layer.replaceColor) << 3);		
+			totalBits |= bits << (i * 4);		
+		}		
+		
+		return totalBits;
+	}
+	
+	override protected function get programBaseName():uint 
+	{ 
+		return ProgramNameID.COMPOSITE_FILTER;
+	}
+	
+	override arcane function getVertexCode():String
+	{
+		var layers:Array = getUsedLayers(sLayers);
+		var numLayers:int = layers.length;
+		var i:int;
+		
+		if (numLayers)
+		{
+			var vertexCode:Array = ["m44 op, va0, vc0"]; // transform position to clip-space
+			
+			for (i=0; i<numLayers; ++i) // v0-4 -> texture coords
+				vertexCode.push(
+					StringUtil.format("add v{0}, va{1}, vc{2}", i, i + 1, i + 4) // add offset
+				);
+			
+			return vertexCode.join("\n");
+		}
+		else
+		{
+			return super.getVertexCode();
+		}
+	}
+	
+	override arcane function getFragmentCode():String
+	{
+		var layers:Array = getUsedLayers(sLayers);
+		var numLayers:int = layers.length;
+		var i:int;
+		
+		if (numLayers)
+		{
+			var layer:CompositeLayer = _layers[0];
+			
+			var fragmentCode:Array = [
+				"seq ft5, v0, v0" // ft5 -> 1, 1, 1, 1
+			];
+			
+			for (i=0; i<numLayers; ++i)
+			{
+				var fti:String = "ft" + i;
+				var fci:String = "fc" + i;
+				var vi:String  = "v"  + i;
+				
+				layer = _layers[i];
+				
+				fragmentCode.push(
+					tex(fti, vi, i, layers[i].texture)  // fti => texture i color
+				);
+				
+				if (layer.replaceColor)
+					fragmentCode.push(
+						"mul " + fti + ".w,   " + fti + ".w,   " + fci + ".w",
+						"sat " + fti + ".w,   " + fti + ".w    ", // make sure alpha <= 1.0
+						"mul " + fti + ".xyz, " + fci + ".xyz, " + fti + ".www"
+					);
+				else
+					fragmentCode.push(
+						"mul " + fti + ", " + fti + ", " + fci // fti *= color
+					);
+				
+				if (i != 0)
+				{
+					// "normal" blending: src × ONE + dst × ONE_MINUS_SOURCE_ALPHA
+					fragmentCode.push(
+						"sub ft4, ft5, " + fti + ".wwww", // ft4 => 1 - src.alpha
+						"mul ft0, ft0, ft4",              // ft0 => dst * (1 - src.alpha)
+						"add ft0, ft0, " + fti            // ft0 => src + (dst * 1 - src.alpha)
+					);
+				}
+			}
+			
+			fragmentCode.push("mov oc, ft0"); // done! :)
+			
+			return fragmentCode.join("\n");
+		}
+		else
+		{
+			return super.getFragmentCode();
+		}
+	}
 
     /** vc0-vc3  — MVP matrix
      *  vc4-vc7  — layer offsets
@@ -275,7 +303,8 @@ class CompositeEffect extends FilterEffect
             for (i=1; i<numLayers; ++i)
                 vertexFormat.setVertexBufferAt(stage3DProxy, i + 1, vertexBuffer, "texCoords" + i);
         }
-
+		
+		
         super.beforeDraw(stage3DProxy);
     }
 
@@ -316,7 +345,7 @@ class CompositeLayer
     public var y:Number;
     public var color:uint;
     public var alpha:Number;
-    public var replaceColor:Boolean;
+	public var replaceColor:Boolean;
 
     public function CompositeLayer()
     {
@@ -324,4 +353,5 @@ class CompositeLayer
         alpha = 1.0;
         color = 0xffffff;
     }
+
 }

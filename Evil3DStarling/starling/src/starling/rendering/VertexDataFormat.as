@@ -10,9 +10,9 @@
 
 package starling.rendering
 {
-    import flash.display3D.VertexBuffer3D;
     import flash.utils.Dictionary;
     
+    import away3d.core.base.VertexBuffer3DProxy;
     import away3d.core.managers.Stage3DProxy;
     
     import starling.utils.StringUtil;
@@ -168,7 +168,7 @@ package starling.rendering
          *  program input. This wraps the <code>Context3D</code>-method with the same name,
          *  automatically replacing <code>attrName</code> with the corresponding values for
          *  <code>bufferOffset</code> and <code>format</code>. */
-        public function setVertexBufferAt(stage3DProxy:Stage3DProxy, index:int, buffer:VertexBuffer3D, attrName:String):void
+        public function setVertexBufferAt(stage3DProxy:Stage3DProxy, index:int, buffer:VertexBuffer3DProxy, attrName:String):void
         {
             var attribute:VertexDataAttribute = getAttribute(attrName);
             stage3DProxy.setVertexBufferAt(index, buffer, attribute.offset / 4, attribute.format);

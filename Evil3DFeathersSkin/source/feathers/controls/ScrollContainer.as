@@ -563,7 +563,7 @@ package feathers.controls
 				return super.addChildAt(child, index);
 			}
 			var result:DisplayObject = DisplayObjectContainer(this.viewPort).addChildAt(child, index);
-			if(result is IFeathersControl)
+//			if(result is IFeathersControl)
 			{
 				result.addEventListener(Event.RESIZE, child_resizeHandler);
 			}
@@ -613,7 +613,7 @@ package feathers.controls
 				return super.removeChildAt(index, dispose);
 			}
 			var result:DisplayObject = DisplayObjectContainer(this.viewPort).removeChildAt(index, dispose);
-			if(result is IFeathersControl)
+//			if(result is IFeathersControl)
 			{
 				result.removeEventListener(Event.RESIZE, child_resizeHandler);
 			}

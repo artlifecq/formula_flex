@@ -60,6 +60,7 @@ package feathers.textures
 			_styleName = styleName;
 			
 			var texture:IStarlingTexture = GuiTheme.ins.getTexture(styleName);
+			texture.root.autoRecycleEnable = texture.root.autoRecycleDataEnable = false;
 			var scale9Grid:Rectangle  =  new Rectangle();
 			GuiTheme.ins.copyScale9GridRect( styleName , scale9Grid);
 			

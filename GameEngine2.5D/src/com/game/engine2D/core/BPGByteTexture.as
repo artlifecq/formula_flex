@@ -1,15 +1,9 @@
 package com.game.engine2D.core
 {
-	import com.game.engine2D.config.GlobalConfig2D;
-	import com.game.engine3D.manager.Stage3DLayerManager;
-	
 	import flash.events.Event;
 	import flash.utils.ByteArray;
-	import flash.utils.Endian;
 	
 	import away3d.arcane;
-	import away3d.core.managers.Stage3DProxy;
-	import away3d.premium.ImageAreaAvgScale;
 	import away3d.textures.ATFData;
 	import away3d.textures.BGRAData;
 	import away3d.textures.BPGData;
@@ -54,17 +48,18 @@ package com.game.engine2D.core
 		{
 			_isParseBgraData = true;
 			_bpgTextureScale = false;
-			if (_enableTextureScale && GlobalConfig2D.avatarBpgResScale)
+			/*if (_enableTextureScale && GlobalConfig2D.avatarBpgResScale)
 			{
-				var proxy:Stage3DProxy = Stage3DLayerManager.stage3DProxy;
-				var totalMemory:int = proxy.textureMemory2D + proxy.textureMemory3D;
-				var scaleMemory:int = GlobalConfig2D.avatarBpgResScaleMemory;
-				if (totalMemory + scaleMemory >= proxy.maxTextureMemory)
-				{
-					_bpgTextureScale = bpgData.width > 64 && bpgData.height > 64;
-					_bpgTextureScaleValue = GlobalConfig2D.avatarBpgResScaleValue;
-				}
+			var proxy:Stage3DProxy = Stage3DLayerManager.stage3DProxy;
+			var totalMemory:int =  TextureManager.getInstance().textureMemory2D + TextureManager.getInstance().textureMemory3D //proxy.textureMemory2D + proxy.textureMemory3D;
+			var scaleMemory:int = GlobalConfig2D.avatarBpgResScaleMemory;
+			
+			if (totalMemory + scaleMemory >= TextureManager.getInstance().maxTextureMemory) 
+			{
+			_bpgTextureScale = bpgData.width > 64 && bpgData.height > 64;
+			_bpgTextureScaleValue = GlobalConfig2D.avatarBpgResScaleValue;
 			}
+			}*/
 			_smooth = _bpgTextureScale;
 			_width = _bpgTextureScale ? bpgData.width/_bpgTextureScaleValue : bpgData.width;
 			_height = _bpgTextureScale ? bpgData.height/_bpgTextureScaleValue : bpgData.height;
@@ -84,21 +79,22 @@ package com.game.engine2D.core
 			}
 			else
 			{
-				if (_bpgTextureScale)
+				/*if (_bpgTextureScale)
 				{
-					var w:Number = _bpgData.width, h:Number = _bpgData.height;
-					var halfW:Number = w/_bpgTextureScaleValue,halfH:Number = h/_bpgTextureScaleValue;
-					var scaleBytes:ByteArray = new ByteArray();
-					scaleBytes.endian = Endian.LITTLE_ENDIAN;
-					ImageAreaAvgScale.scaleToByteArray(bytes,w,h,halfW,halfH,scaleBytes);
-					scaleBytes.position = 0;
-					bytes.clear();
-					_bgraData = new BGRAData(scaleBytes,halfW, halfH, _bpgData.hasAlpha);
+				var w:Number = _bpgData.width, h:Number = _bpgData.height;
+				var halfW:Number = w/_bpgTextureScaleValue,halfH:Number = h/_bpgTextureScaleValue;
+				var scaleBytes:ByteArray = new ByteArray();
+				scaleBytes.endian = Endian.LITTLE_ENDIAN;
+				ImageAreaAvgScale.scaleToByteArray(bytes,w,h,halfW,halfH,scaleBytes);
+				scaleBytes.position = 0;
+				bytes.clear();
+				_bgraData = new BGRAData(scaleBytes,halfW, halfH, _bpgData.hasAlpha);
 				}
 				else
 				{
-					_bgraData = new BGRAData(bytes,_bpgData.width, _bpgData.height, _bpgData.hasAlpha);
-				}
+				_bgraData = new BGRAData(bytes,_bpgData.width, _bpgData.height, _bpgData.hasAlpha);
+				}*/
+				_bgraData = new BGRAData(bytes,_bpgData.width, _bpgData.height, _bpgData.hasAlpha);
 				_compressed = true;
 				_hasAlpha = _bgraData.hasAlpha;
 				_hasMipmaps = false;

@@ -323,9 +323,9 @@ package com.editor.story.view
 				_view.valueText.text =  "m" + CameraModeEnum.DIRECT_CAMERA + ","
 					+ int(CameraController.directController.targetObject.x).toString() + ","
 					+ int(CameraController.directController.targetObject.y).toString() + ","
-					+ int(CameraController.directController.targetObject.z).toString() + ","
+					+ int(CameraController.directController.targetObject.z).toString()/* + ","
 					+ int(CameraController.directController.xDeg).toString() + ","
-					+ int(CameraController.directController.yDeg).toString();
+					+ int(CameraController.directController.yDeg).toString()*/;
 			}
 			else if(CameraController.mode == CameraModeEnum.FIXED_CAMERA_LOOK_AT || CameraController.mode == CameraModeEnum.FIXED_TARGET_LOOK_AT_TARGET)
 			{

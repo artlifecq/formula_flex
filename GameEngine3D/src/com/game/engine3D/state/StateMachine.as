@@ -22,7 +22,8 @@ package com.game.engine3D.state
 		protected var _blockQueue : Dictionary;
 		protected var _referenceMapping : Dictionary;
 		protected var _usePass : Boolean;
-		protected var _isDisposed : Boolean;
+		private var _isDestroyed : Boolean;
+		private var _isDisposed : Boolean;
 		
 		public function StateMachine(owner : Object)
 		{
@@ -31,7 +32,18 @@ package com.game.engine3D.state
 			_lastStates = new Dictionary(true);
 			_blockQueue = new Dictionary(true);
 			_referenceMapping = new Dictionary(true);
+			_isDestroyed = false;
 			reSet([owner]);
+		}
+		
+		public function get isDestroyed() : Boolean
+		{
+			return _isDestroyed;
+		}
+		
+		public function get isDisposed() : Boolean
+		{
+			return _isDisposed;
 		}
 		
 		public function reSet($parameters : Array) : void
@@ -251,11 +263,6 @@ package com.game.engine3D.state
 			return reference;
 		}
 		
-		public function get isDisposed() : Boolean
-		{
-			return _isDisposed;
-		}
-		
 		public function dispose() : void
 		{
 			if (_referenceMapping)
@@ -301,7 +308,7 @@ package com.game.engine3D.state
 			_isDisposed = true;
 		}
 		
-		public function instanceDestroy() : void
+		public function destroy() : void
 		{
 			dispose();
 			if (_states)
@@ -319,6 +326,12 @@ package com.game.engine3D.state
 			_currStates = null;
 			_lastStates = null;
 			_blockQueue = null;
+			_isDestroyed = true;
+		}
+		
+		public function instanceDestroy() : void
+		{
+			destroy();
 		}
 		
 		public function instanceDispose() : void

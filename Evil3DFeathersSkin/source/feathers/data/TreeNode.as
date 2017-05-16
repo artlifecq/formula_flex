@@ -58,7 +58,7 @@ package feathers.data
 		{
 			var index:int = _children ?  _children.indexOf(node) : -1;
 			if(index < 0)return;
-			removeChildren(index);
+			removeChild(index);
 		}
 		
 		public function removeFromParent():void
@@ -87,7 +87,7 @@ package feathers.data
 			}
 		}
 		
-		public function removeChildren(index:int):void
+		public function removeChild(index:int):void
 		{
 			if(_children && _children.length > index)
 			{

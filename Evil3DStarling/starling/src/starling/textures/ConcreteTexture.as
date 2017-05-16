@@ -14,11 +14,14 @@ package starling.textures
     import flash.display.BitmapData;
     import flash.display3D.textures.TextureBase;
     import flash.geom.Matrix;
+    import flash.geom.Rectangle;
     import flash.utils.ByteArray;
     import flash.utils.Endian;
+    import flash.utils.getTimer;
     
     import away3d.core.managers.Stage3DProxy;
     import away3d.events.Stage3DEvent;
+    import away3d.log.Log;
     import away3d.textures.ATFData;
     import away3d.textures.AsyncTexture2D;
     import away3d.textures.BGRAData;
@@ -38,11 +41,10 @@ package starling.textures
      */
     public class ConcreteTexture extends AsyncTexture2D implements IStarlingTexture
     {
-		private var _key:String;		
+		private var _isDynamic:Boolean;
 		
-		private var _disposed:Boolean;
-		
-		protected var _referencedMeshCount:uint;
+		protected var _referencedMeshCount:int;
+		private static var totalConcreteTexture:int;
 		
         /** @private
          *
@@ -57,34 +59,58 @@ package starling.textures
         {
             super(hasAlpha,mipMapping,false,compressed)
 			_optimizeForRenderToTexture = optimizedForRenderTexture;
-			_textureType = Stage3DProxy.STARLING_TYPE;
 			_autoRecycleEnable = true;
 			_autoRecycleDataEnable = false;
+			_smooth = false;
+			_hasMipmaps = false;
+			totalConcreteTexture++;
         }
         
 		public function get key():String
 		{
-			return _key;
+			return url;
 		}
 		
 		public function set key(value:String):void
 		{
-			_key = value;
+			url = value;
 		}
 		
-		public function get disposed():Boolean
+		override public function get textureType():int
 		{
-			return _disposed;
+			return Stage3DProxy.STARLING_TYPE;	
 		}
 		
-		public function get referencedMeshCount():uint
+		CONFIG::Debug
+			{
+				override public function get base():TextureBase
+				{
+						if(!_texture)
+						{
+							Log.error("当前访问的textureBase不存在!"+url);
+						}
+						return _texture;
+				}
+			}
+		
+		public function get referencedMeshCount():int
 		{
 			return _referencedMeshCount;
 		}
 		
-		public function set referencedMeshCount(value:uint):void
+		public function set referencedMeshCount(value:int):void
 		{
 			_referencedMeshCount = value;
+		}
+		
+		public function get isDynamic():Boolean
+		{
+			return _isDynamic;
+		}
+		
+		public function set isDynamic(value:Boolean):void
+		{
+			_isDynamic = value;
 		}
 		
 		public function get transformationMatrix():Matrix { return null; }
@@ -94,10 +120,42 @@ package starling.textures
         /** Disposes the TextureBase object. */
         override public function dispose():void
         {
-           	super.dispose();
+			if(_referencedMeshCount > 0)
+			{
+				_referencedMeshCount--;
+			}
 			
-			_disposed = true;
+			if(_isDynamic)
+				return;
+			
+			if(_referencedMeshCount < 1)
+			{
+				if(!_disposed)
+				{
+					CONFIG::Debug
+						{
+							if(getTimer() - lastUsedTime < 10)
+							{
+								Log.warn("贴图仍正在被使用,立即回收可能会引起#3605运行时错误 取样器 %1 绑定的纹理无效:"+url);
+								return;
+							}
+						}
+
+					totalConcreteTexture--;
+					super.dispose();
+				}
+			}
         }
+		
+		public static function get numInstance():int
+		{
+			return totalConcreteTexture;
+		}
+		
+		override public function  load(url:String, priority:int=6000):void
+		{
+			super.load(url, priority);
+		}
         
 		public function loadBitmapClass(bitmapClass:Class):void
 		{
@@ -109,14 +167,15 @@ package starling.textures
 			uploadBitmapData(bp.bitmapData);
 		}
 		
-		public function uploadBitmapData(bitmapData:BitmapData):void
+		public function uploadBitmapData(bitmapData:BitmapData, rect:Rectangle = null):void
 		{
 			if(!_bgraData)
 			{
+				if(!rect) rect = bitmapData.rect;
 				var bgraBytes:ByteArray = new ByteArray();
 				bgraBytes.endian = Endian.LITTLE_ENDIAN;
-				bitmapData.copyPixelsToByteArray(bitmapData.rect,bgraBytes);
-				_bgraData = new BGRAData(bgraBytes,bitmapData.width,bitmapData.height,hasAlpha);
+				bitmapData.copyPixelsToByteArray(rect, bgraBytes);
+				_bgraData = new BGRAData(bgraBytes,rect.width,rect.height,hasAlpha);
 				this.textureData = bgraData;
 			}
 			else
@@ -138,14 +197,25 @@ package starling.textures
 			}
 		}
 		
+		public function uploadBitmapDataByMemoryItem(bitmapData:BitmapData,  rect:Rectangle = null):void
+		{
+/*			if(!rect) rect = bitmapData.rect;
+			var memoryItem:MemoryItem = HeapAllocator.malloc(rect.width*rect.height*4);
+			_hasAlpha = bitmapData.transparent;
+			var data:MemoryItemBgraData = new MemoryItemBgraData(memoryItem, rect.width, rect.height, hasAlpha);		
+			data.bgraBytes.position = memoryItem.heapPtr;
+			bitmapData.copyPixelsToByteArray(rect, data.bgraBytes);
+			setBgraData(data);*/
+			
+			uploadBitmapData(bitmapData, rect);
+		}
+		
 		public function uploadAtfDataByteArray(data:ByteArray):void
 		{
 			disposeOldData();
-			var atfData:ATFData = new ATFData(data);
-			_atfData = atfData;
-			this.compressed = atfData.compressed;
-			this.hasAlpha = atfData.hasAlpha;
-			this.textureData = atfData;
+			_atfData = new ATFData(data);
+			this.hasAlpha = _atfData.hasAlpha;
+			this.textureData = _atfData;
 		}
 		
 		override protected function createTexture(stage3DProxy:Stage3DProxy):TextureBase
@@ -164,6 +234,11 @@ package starling.textures
 				clear();
 		}
 
+		override protected function showAlphaChangeWarning():void
+		{
+			//do nothing	
+		}
+		
         public function clear():void
         {
 			if(_stage3DProxy)

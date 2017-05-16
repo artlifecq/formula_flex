@@ -2,12 +2,16 @@ package feathers.controls
 {
 	import flash.text.TextFormat;
 	
+	import away3d.debug.Debug;
+	import away3d.entities.Mesh;
+	
 	import feathers.controls.text.Fontter;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.ILayout;
 	import feathers.layout.ILayoutDisplayObject;
 	import feathers.layout.IVirtualLayout;
 	import feathers.layout.ViewPortBounds;
+	import feathers.themes.GuiThemeStyle;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
@@ -42,8 +46,8 @@ package feathers.controls
 		/**皮肤对应的显示对象容器**/ 
 		public var container:Sprite;
 		
-		private static const defaultTextFormat:TextFormat = new TextFormat(Fontter.DEFAULT_FONT_NAME, Fontter.DEFAULT_FONT_SIZE, Fontter.DEFAULT_FONT_COLOR);
-		
+		private static var defaultTextFormat:TextFormat;
+			
 		public function StateSkin()
 		{
 		}
@@ -58,7 +62,8 @@ package feathers.controls
 			this.container = container;
 			
 			var d:DisplayObject;
-			for each(d in elementsContent){
+			for each(d in elementsContent)
+			{
 				container.addChild(d);
 				
 				//皮肤内某对象中有存在布局数据, 则皮肤所附容器需要动态布局
@@ -79,7 +84,6 @@ package feathers.controls
 			{
 				container.addEventListener(Event.ADDED_TO_STAGE, onAddToStage);
 			}
-			
 			return container;
 		}
 		
@@ -138,6 +142,9 @@ package feathers.controls
 			}
 			
 			//间接属性设置(子元件的textFormat属性)
+			if(!defaultTextFormat)
+				defaultTextFormat = Fontter.creatDefaultFontTextFormat();
+			
 			var tfmPropName:String;
 			for (t in ts)
 			{
@@ -262,6 +269,21 @@ package feathers.controls
 		private function initDefaultLayout():void
 		{
 			if(needAnchorLayout && !layout )layout = new AnchorLayout();
+		}
+		
+		public function dispose():void
+		{
+			var len:int = elementsContent ? elementsContent.length : 0;
+			var d:DisplayObject;
+			for(var i:int=0; i<len; i++)
+			{
+				d = elementsContent[i] as DisplayObject;
+				if(d != null)d.dispose();
+			}
+			elementsContent.length = 0;
+			elementsContent = null;
+			skinNames = null;
+			states = null;
 		}
 	}
 }

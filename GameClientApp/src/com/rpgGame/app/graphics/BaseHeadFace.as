@@ -25,6 +25,7 @@ package com.rpgGame.app.graphics
 		public function BaseHeadFace()
 		{
 			super();
+			_isDestroyed = false;
 		}
 		/**是否临时资源**/
 		protected var isTemporary : Boolean;
@@ -33,8 +34,12 @@ package com.rpgGame.app.graphics
 		protected var _role : SceneRole;
 //		protected var _nameBar : HeadNameBar;
 		
+		private var _isDestroyed : Boolean;
+		private var _isDisposed : Boolean;
+		
 		public function reSet(parameters : Array) : void
 		{
+			_isDisposed = false;
 		}
 		
 		public function displayVisible(attachType : String, visible : Boolean) : void
@@ -222,6 +227,7 @@ package com.rpgGame.app.graphics
 		{
 			instanceDispose();
 			dispose();
+			_isDestroyed = true;
 		}
 		
 		public function instanceDispose() : void
@@ -230,6 +236,7 @@ package com.rpgGame.app.graphics
 			{
 				parent.removeChild(this);
 			}
+			_isDisposed = true;
 		}
 		/**
 		 * 销毁自身，需要重写 
@@ -238,6 +245,16 @@ package com.rpgGame.app.graphics
 		public function recycleSelf():void
 		{
 			
+		}
+		
+		public function get isDestroyed():Boolean
+		{
+			return _isDestroyed;
+		}
+		
+		public function get isDisposed():Boolean
+		{
+			return _isDisposed;
 		}
 		
 	}

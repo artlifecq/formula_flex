@@ -146,7 +146,7 @@ package com.rpgGame.app.manager.role
 				}
 				else
 				{
-					GameCameraManager.startPlayerMode(SceneManager.getScene().cameraTarget);
+					GameCameraManager.startPlayerMode(SceneManager.getScene().getCameraTarget());
 				}
 				
 				TrusteeshipManager.getInstance().setup(_actor);

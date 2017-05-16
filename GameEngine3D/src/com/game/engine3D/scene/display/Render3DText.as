@@ -1,15 +1,15 @@
 package com.game.engine3D.scene.display
 {
+	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.scene.render.RenderSet3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.utils.CallBackUtil;
 	import com.game.engine3D.vo.CallBackData;
 	import com.game.engine3D.vo.Render3DTextData;
-	import com.game.engine3D.core.poolObject.InstancePool;
-
+	
 	import flash.utils.Dictionary;
-
+	
 	/**
 	 *
 	 * 3D文字渲染
@@ -21,9 +21,9 @@ package com.game.engine3D.scene.display
 	{
 		//---------------------------对象池---------------------------
 		private static var _cnt : int = 0;
-
+		
 		private static var _pool : InstancePool = new InstancePool("Render3DText", 1000);
-
+		
 		/**
 		 * 生成一个RenderUnit
 		 * @param $type
@@ -35,23 +35,23 @@ package com.game.engine3D.scene.display
 			//利用池生成
 			return _pool.createObj(Render3DText, type, id) as Render3DText;
 		}
-
-		public static function recycle(rs : Render3DText) : void
+		
+		public static function recycle(text : Render3DText) : void
 		{
-			if (!rs)
+			if (!text || text.isDisposed)
 				return;
 			_cnt--;
 			//利用池回收
-			_pool.disposeObj(rs);
+			_pool.disposeObj(text);
 		}
-
+		
 		public static function get cnt() : int
 		{
 			return _cnt;
 		}
-
+		
 		//------------------------------------------------------------
-
+		
 		private var _textDatas : Vector.<Render3DTextData>;
 		private var _textRenderUnits : Vector.<RenderUnit3D>;
 		private var _text : String;
@@ -61,12 +61,12 @@ package com.game.engine3D.scene.display
 		private var _textHeight : int;
 		private var _addedCallBackList : Vector.<CallBackData>;
 		private var _isLoaded : Boolean;
-
+		
 		public function Render3DText(type : String, id : Number)
 		{
 			super(type, id);
 		}
-
+		
 		/**
 		 * @private
 		 * 换装添加回调
@@ -80,7 +80,7 @@ package com.game.engine3D.scene.display
 			}
 			CallBackUtil.addCallBackData(_addedCallBackList, value, args);
 		}
-
+		
 		/**
 		 * @private
 		 * 移除换装添加回调
@@ -90,7 +90,7 @@ package com.game.engine3D.scene.display
 		{
 			CallBackUtil.removeCallBackData(_addedCallBackList, value);
 		}
-
+		
 		override public function removeAllRenderUnits(recycle : Boolean = true) : void
 		{
 			super.removeAllRenderUnits(recycle);
@@ -99,7 +99,7 @@ package com.game.engine3D.scene.display
 				_textRenderUnits.length = 0;
 			}
 		}
-
+		
 		public function setStyle(styleName : String, style : String) : void
 		{
 			_styleByName[styleName] = style;
@@ -119,12 +119,12 @@ package com.game.engine3D.scene.display
 			}
 			tryShowText();
 		}
-
+		
 		public function get text() : String
 		{
 			return _text;
 		}
-
+		
 		public function set text(value : String) : void
 		{
 			_text = value;
@@ -151,7 +151,7 @@ package com.game.engine3D.scene.display
 			}
 			tryShowText();
 		}
-
+		
 		public function setTextDatas(datas : Vector.<Render3DTextData>) : void
 		{
 			_textDatas = datas.slice();
@@ -169,17 +169,17 @@ package com.game.engine3D.scene.display
 				_textRenderUnits.push(ru);
 			}
 		}
-
+		
 		public function get isLoaded() : Boolean
 		{
 			return _isLoaded;
 		}
-
+		
 		private function doAddUnit(data : Render3DTextData, ru : RenderUnit3D) : void
 		{
 			tryShowText();
 		}
-
+		
 		private function tryShowText() : void
 		{
 			var allResReady : Boolean = true;
@@ -210,7 +210,7 @@ package com.game.engine3D.scene.display
 			_graphicDis.visible = _isLoaded;
 			layoutText();
 		}
-
+		
 		private function layoutText() : void
 		{
 			if (!_textDatas)
@@ -264,12 +264,12 @@ package com.game.engine3D.scene.display
 				}
 			}
 		}
-
+		
 		public function get align() : String
 		{
 			return _align;
 		}
-
+		
 		public function set align(value : String) : void
 		{
 			if (_align == value)
@@ -277,23 +277,23 @@ package com.game.engine3D.scene.display
 			_align = value;
 			layoutText();
 		}
-
+		
 		public function get textWidth() : int
 		{
 			return _textWidth;
 		}
-
+		
 		public function get textHeight() : int
 		{
 			return _textHeight;
 		}
-
+		
 		/**销毁显示对象 */
 		override public function destroy() : void
 		{
 			recycle(this);
 		}
-
+		
 		override public function reSet($parameters : Array) : void
 		{
 			super.reSet($parameters);
@@ -306,7 +306,7 @@ package com.game.engine3D.scene.display
 			_isLoaded = false;
 			_styleByName = new Dictionary(true);
 		}
-
+		
 		override public function dispose() : void
 		{
 			//标识正在释放中
