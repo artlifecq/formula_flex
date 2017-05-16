@@ -51,9 +51,10 @@ package com.game.engine2D.utils
 		{
 			if(!_defaultTexture)
 			{
-				var bmT:AsyncTexture2D = Cast.asyncTexture(new BitmapData(4,4,true,0xffff0000), true, false);
+				var bmT:AsyncTexture2D = Cast.asyncTexture(new BitmapData(4,4,true,0x00110000), true, false);
 				_defaultTexture = new TextureMaterial(bmT);
 				_defaultTexture.name = "default1x1";
+				_defaultTexture.blendMode = BlendMode.LAYER;
 			}
 			return _defaultTexture;
 		}
@@ -99,7 +100,7 @@ package com.game.engine2D.utils
 			texture.bothSides = true;
 			texture.blendMode = BlendMode.LAYER;
 			texture.alphaThreshold = 0.05;
-			texture.name += "-atf";
+			texture.name = "atf";
 			return texture;
 		}
 		
@@ -113,7 +114,7 @@ package com.game.engine2D.utils
 			texture.bothSides = true;
 			texture.blendMode = BlendMode.LAYER;
 			texture.alphaThreshold = 0.05;
-			texture.name += "-bpg";
+			texture.name = "bpg";
 			return texture;
 		}
 		

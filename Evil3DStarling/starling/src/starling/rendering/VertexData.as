@@ -11,17 +11,17 @@
 package starling.rendering
 {
     import flash.display3D.Context3D;
-    import flash.display3D.VertexBuffer3D;
     import flash.geom.Matrix;
     import flash.geom.Matrix3D;
     import flash.geom.Point;
     import flash.geom.Rectangle;
     import flash.geom.Vector3D;
-    import flash.utils.ByteArray;
     
+    import away3d.core.base.VertexBuffer3DProxy;
     import away3d.core.managers.Stage3DProxy;
     import away3d.premium.heap.HeapAllocator;
     import away3d.premium.heap.MemoryItem;
+    import away3d.premium.heap.MemoryItemTypes;
     
     import starling.core.Starling;
     import starling.errors.MissingContextError;
@@ -161,7 +161,7 @@ package starling.rendering
             _numVertices = 0;
             _premultipliedAlpha = true;
 			
-			_rawData = HeapAllocator.malloc(initialCapacity * _vertexSize);
+			_rawData = HeapAllocator.malloc(initialCapacity * _vertexSize, MemoryItemTypes.STARLING);
 			if(!_rawData)
 				throw new Error("Memory exceed!!");
         }
@@ -169,7 +169,8 @@ package starling.rendering
         /** Explicitly frees up the memory used by the ByteArray. */
         public function clear():void
         {
-			HeapAllocator.free(_rawData);
+			if(_rawData)
+				HeapAllocator.free(_rawData);
 			_rawData = null;
             _numVertices = 0;
             _tinted = false;
@@ -179,7 +180,8 @@ package starling.rendering
         public function clone():VertexData
         {
             var clone:VertexData = new VertexData(_format, _numVertices);
-			HeapAllocator.copyData(_rawData, clone._rawData); 
+			if(_numVertices>0)
+				clone._rawData.writeMemoryItem(0, _rawData, 0, _numVertices*_vertexSize);
             clone._numVertices = _numVertices;
             clone._premultipliedAlpha = _premultipliedAlpha;
             clone._tinted = _tinted;
@@ -604,27 +606,28 @@ package starling.rendering
         /** Creates a vertex buffer object with the right size to fit the complete data.
          *  Optionally, the current data is uploaded right away. */
         public function createVertexBuffer(upload:Boolean=false,
-                                           bufferUsage:String="staticDraw"):VertexBuffer3D
+                                           bufferUsage:String="staticDraw"):VertexBuffer3DProxy
         {
             var context:Context3D = Starling.context;
             if (context == null) throw new MissingContextError();
             if (_numVertices == 0) return null;
 
-            var buffer:VertexBuffer3D = Starling.current.stage3DProxy.createVertexBuffer(
-                _numVertices, _vertexSize / 4, bufferUsage, Stage3DProxy.STARLING_TYPE);
+			var isDynamic:Boolean = bufferUsage != "staticDraw";
+            var buffer:VertexBuffer3DProxy = Starling.current.stage3DProxy.createVertexBuffer(
+                _numVertices, _vertexSize / 4, isDynamic, Stage3DProxy.STARLING_TYPE);
 
             if (upload) uploadToVertexBuffer(buffer);
             return buffer;
         }
 
         /** Uploads the complete data (or a section of it) to the given vertex buffer. */
-        public function uploadToVertexBuffer(buffer:VertexBuffer3D, vertexID:int=0, numVertices:int=-1):void
+        public function uploadToVertexBuffer(buffer:VertexBuffer3DProxy, vertexID:int=0, numVertices:int=-1):void
         {
             if (numVertices < 0 || vertexID + numVertices > _numVertices)
                 numVertices = _numVertices - vertexID;
 
             if (numVertices > 0)
-				Starling.current.stage3DProxy.uploadFromDomainMemory(buffer, _rawData, 0, vertexID, numVertices);
+					buffer.uploadFromDomainMemory(_rawData, 0, vertexID, numVertices);
         }
 
         [Inline]
@@ -697,7 +700,7 @@ package starling.rendering
             {
                 var newLength:int = value * _vertexSize;
 				
-				if (_rawData.blockSize < newLength)
+				if (_rawData.length < newLength)
 				{
 					HeapAllocator.realloc(_rawData, newLength)
 				}

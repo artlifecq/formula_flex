@@ -381,6 +381,12 @@ package feathers.controls
 		protected var _tabToItem:Dictionary = new Dictionary(true);
 
 		/**
+		 * @public
+		 */
+		public static var defalutSoundData:Object;
+		public var soundData:Object;
+		
+		/**
 		 * @private
 		 */
 		override protected function get defaultStyleProvider():IStyleProvider
@@ -1889,6 +1895,7 @@ package feathers.controls
 					tab.styleNameList.add(this.firstTabStyleName);
 				}
 				tab.isToggle = true;
+				tab.soundData = this.soundData || defalutSoundData;
 				this.addChild(tab);
 			}
 			this._tabInitializer(tab, item);
@@ -1933,6 +1940,7 @@ package feathers.controls
 					tab.styleNameList.add(this.lastTabStyleName);
 				}
 				tab.isToggle = true;
+				tab.soundData = this.soundData || defalutSoundData;
 				this.addChild(tab);
 			}
 			this._tabInitializer(tab, item);
@@ -1966,6 +1974,7 @@ package feathers.controls
 					tab.styleNameList.add(this.tabStyleName);
 				}
 				tab.isToggle = true;
+				tab.soundData = this.soundData || defalutSoundData;
 				this.addChild(tab);
 			}
 			else
@@ -2082,7 +2091,7 @@ package feathers.controls
 		 */
 		protected function hideFocusedTab():void
 		{
-			if(this._focusedTabIndex < 0)
+			if(this._focusedTabIndex < 0 || _focusedTabIndex >= activeTabs.length)
 			{
 				return;
 			}

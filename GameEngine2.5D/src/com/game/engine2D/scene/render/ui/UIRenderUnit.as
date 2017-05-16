@@ -42,7 +42,7 @@ package com.game.engine2D.scene.render.ui
 	 */	
 	public class UIRenderUnit extends UIBaseObj implements IRenderUnit
 	{
-		private static var _pool:Pool = new Pool("UIRenderUnit",2000);
+		private static var _pool:Pool = new Pool("UIRenderUnit",1000);
 		
 		//显示和更新控制*********************************************************************************************************
 		private var _resReady:Boolean = false;
@@ -82,10 +82,6 @@ package com.game.engine2D.scene.render.ui
 		public var drawHeightOffset:Number = 0;
 		
 		//*********************************************原始参数数据************************************************************
-		/**设置之前的初始记录*/
-		//		private var _isColorTF:Boolean;
-		//		private var _initColorTF:FragmentFilter;
-		//		private var _initColorF:ColorTransform;
 		/**
 		 * 生成此RenderUnit的换装源参数
 		 */	
@@ -680,35 +676,6 @@ package com.game.engine2D.scene.render.ui
 		 */
 		private var _drawSourceObj:Object;
 		private var _drawSourceBitmapData:BitmapData;
-		
-		//		private var _enableFilters:Boolean = true;
-		//		
-		//		public function get enableFilters():Boolean
-		//		{
-		//			return _enableFilters;
-		//		}
-		//		
-		//		public function set enableFilters(value:Boolean):void
-		//		{
-		//			_enableFilters = value;
-		//			if(value)
-		//			{
-		//				if(_graphicDis && _bitmapFilters.length > 0)
-		//				{
-		//					_graphicDis.filter = FragmentFilterUtils.getFragmentFilter(_bitmapFilters[0]);
-		//				}
-		//			}
-		//			else
-		//			{
-		//				if(_graphicDis is UIImage)
-		//				{
-		//					if (_graphicDis.filter)
-		//						_graphicDis.filter.dispose();
-		//					_graphicDis.filter = null;
-		//				}
-		//			}
-		//		}
-		
 		private var _blendMode:String = "normal";
 		public function get blendMode():String
 		{
@@ -723,88 +690,6 @@ package com.game.engine2D.scene.render.ui
 				_graphicDis.blendMode = _blendMode;
 			}
 		}
-		
-		//		/**应用滤镜数组*/
-		//		private const _bitmapFilters:Array = [];
-		//		/**应用滤镜数组*/
-		//		public function get bitmapFilters():Array{return _bitmapFilters};
-		
-		/**添加滤镜*/
-		//		public function addFilter($bf:BitmapFilter):void
-		//		{
-		//			if($bf)
-		//			{
-		//				var index:int = _bitmapFilters.indexOf($bf);
-		//				if(index != -1)
-		//				{
-		//					_bitmapFilters.splice(index,1);
-		//				}
-		//				_bitmapFilters.push($bf);
-		//				
-		//				if(_graphicDis is UIImage && _enableFilters)
-		//				{
-		//					if (_graphicDis.filter != _initColorTF)
-		//						_graphicDis.filter.dispose();
-		//					_graphicDis.filter = FragmentFilterUtils.getFragmentFilter($bf);
-		//				}
-		//			}
-		//		}
-		
-		//		/**移除滤镜*/
-		//		public function removeFilter($bf:BitmapFilter):void
-		//		{
-		//			var index:int = _bitmapFilters.indexOf($bf);
-		//			if(index!=-1)
-		//			{
-		//				_bitmapFilters.splice(index,1);
-		//			}
-		//			if(_graphicDis is UIImage)
-		//			{
-		//				if (_bitmapFilters.length > 0)
-		//					_graphicDis.filter = FragmentFilterUtils.getFragmentFilter(_bitmapFilters[0]);
-		//			}
-		//		}
-		//		
-		//		/**清除所有滤镜*/
-		//		public function removeAllFilters():void
-		//		{
-		//			_bitmapFilters.length = 0;
-		//			if(_graphicDis is UIImage)
-		//			{
-		//				if (_graphicDis.filter && (_graphicDis.filter != _initColorTF))
-		//					_graphicDis.filter.dispose();
-		//				_graphicDis.filter = null;
-		//			}
-		//		}
-		
-		//		/**添加滤镜*/
-		//		public function addColorTransform($colorTrans:*):void
-		//		{
-		//			if(_graphicDis && $colorTrans)
-		//			{
-		//				if (_graphicDis is UIImage)
-		//				{
-		//					_isColorTF = ($colorTrans is ColorTransform);
-		//					_graphicDis.filter = _isColorTF ? FragmentFilterUtils.getColorMatrixFilter($colorTrans) : $colorTrans;
-		//					if(_initColorTF == null)
-		//					{
-		//						_initColorTF = _graphicDis.filter;
-		//					}
-		//				}
-		//			}
-		//		}
-		//		
-		//		/**移除滤镜*/
-		//		public function removeColorTransform():void
-		//		{
-		//			if(_graphicDis is UIImage)
-		//			{
-		//				if(_initColorTF)
-		//				{
-		//					_graphicDis.filter = _initColorTF;
-		//				}
-		//			}
-		//		}
 		
 		public var finalShowX:Number;
 		public var finalShowY:Number;
@@ -1095,8 +980,8 @@ package com.game.engine2D.scene.render.ui
 		 */	
 		public function setStatus($status:uint):void
 		{
-			if (_currentStatus == $status)
-				return;
+			//			if (_currentStatus == $status)
+			//				return;
 			if (!_needRender)
 				return;
 			
@@ -1585,10 +1470,8 @@ package com.game.engine2D.scene.render.ui
 			_renderUnitData = null;
 			
 			alpha = 1;
-			//			removeAllFilters();
 			_renderScaleX = 1;
 			
-			//			_enableFilters = true;
 			_needRender = true;
 			_enableShadow = false;
 			_isDrawShadow = false;
@@ -1645,7 +1528,6 @@ package com.game.engine2D.scene.render.ui
 			_resReady = false;
 			_renderImgData = null;
 			_drawSourceBitmapData = null;
-			//			_bitmapFilters.length = 0;
 			_currentStatus = 0;
 			_currentFullSourchPath = null;
 			_currentRenderUnitStatus = null;

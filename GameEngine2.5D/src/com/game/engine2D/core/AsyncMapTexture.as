@@ -17,7 +17,7 @@ package com.game.engine2D.core
 		private var _isDispose:Boolean;
 		public function AsyncMapTexture(hasAlpha:Boolean = false)
 		{
-			super(hasAlpha, false, null);
+			super(hasAlpha, false);
 			compressed = false;
 			_asyncUpload = false;
 		}

@@ -2,7 +2,9 @@ package com.editor.scene
 {
 	import com.editor.cfg.ConfigData;
 	import com.editor.state.role.RoleStateMachine;
+	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.vo.BaseRole;
+	import com.game.mainCore.libCore.pool.IPoolClass;
 	import com.game.mainCore.libCore.pool.Pool;
 
 	/**
@@ -15,7 +17,7 @@ package com.editor.scene
 	public class SceneRole extends BaseRole
 	{
 		//---------------------------对象池---------------------------
-		private static var _pool : Pool = new Pool("SceneRole", 600);
+		private static var _pool : InstancePool = new InstancePool("SceneRole", 600);
 
 		private static var _cnt : int = 0;
 

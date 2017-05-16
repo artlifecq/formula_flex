@@ -390,8 +390,7 @@ package feathers.text
 			this._textField.addEventListener(KeyboardEvent.KEY_DOWN, textField_eventHandler);
 			this._textField.addEventListener(KeyboardEvent.KEY_UP, textField_eventHandler);
 			this._textField.addEventListener(FocusEvent.KEY_FOCUS_CHANGE, textField_keyFocusChangeHandler);
-			this._textFormat = new TextFormat(Fontter.DEFAULT_FONT_NAME, Fontter.DEFAULT_FONT_SIZE, Fontter.DEFAULT_FONT_COLOR, false, false, false);
-			this._textField.defaultTextFormat = this._textFormat;
+			this._textFormat = Fontter.creatDefaultFontTextFormat();
 		}
 
 		private function textField_eventHandler(event:Event):void

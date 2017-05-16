@@ -88,9 +88,9 @@ package feathers.controls
 			gotoPage(value);
 		}
 		
-		private var _totalPages:int = 0;
+		private var _totalPages:int = 1;
 		/**
-		 * 总页数。
+		 * 总页数,最小值1。
 		 */
 		public function get totalPages():int
 		{
@@ -102,6 +102,8 @@ package feathers.controls
 		 */		
 		public function set totalPages(value:int):void
 		{
+			if(value < 1)
+				value = 1;
 			if(value == _totalPages)return;
 			_totalPages = value;
 			if(_currentPage>_totalPages-1)

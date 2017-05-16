@@ -178,6 +178,8 @@ package feathers.controls
 			{
 				this.resetTouchState();
 			}
+			
+			invalidate();
 		}
 
 		/**
@@ -647,6 +649,16 @@ package feathers.controls
 		{
 			this.resetTouchState();
 		}
+		
+		/**
+		 * @public
+		 */
+		public static var playSoundOnTriggerFunction:Function;
+		
+		/**
+		 * sound data
+		 */		
+		public var soundData:Object;
 
 		/**
 		 * @private
@@ -662,7 +674,7 @@ package feathers.controls
 			if(this.touchPointID >= 0)
 			{
 				var touch:Touch = event.getTouch(this, null, this.touchPointID);
-				if(!touch)
+				if(!touch || !this.stage)
 				{
 					//this should never happen
 					return;
@@ -684,6 +696,11 @@ package feathers.controls
 				else if(touch.phase === TouchPhase.ENDED)
 				{
 					this.resetTouchState(touch);
+					//play sound if need
+					if(playSoundOnTriggerFunction != null)
+					{
+						playSoundOnTriggerFunction(soundData);
+					}
 				}
 				return;
 			}

@@ -1,5 +1,7 @@
 package com.game.engine3D.display
 {
+	import com.game.engine3D.config.GlobalConfig;
+	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
 

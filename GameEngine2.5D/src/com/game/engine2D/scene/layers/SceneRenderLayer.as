@@ -77,7 +77,8 @@ package com.game.engine2D.scene.layers
 						else
 							bo.isInViewDistance = true;
 						
-						if(bo.enableMask)
+						//不在视野里， 要变个屁的alpha 啊
+						if(bo.enableMask && bo.isInViewDistance)
 						{
 							var isInMask:Boolean = SceneUtil.isMaskXY(bo.x,bo.y);//这个暂时先这样，回头还是得优化下。。。
 							bo.alpha = isInMask ? 0.5 : 1;

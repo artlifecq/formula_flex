@@ -1,7 +1,6 @@
 package com.game.engine2D.vo
 {
 	
-	import com.game.engine2D.utils.MaterialUtils;
 	import com.game.engine3D.core.poolObject.IInstancePoolClass;
 	import com.game.engine3D.core.poolObject.InstancePool;
 	
@@ -27,6 +26,9 @@ package com.game.engine2D.vo
 		private var _posScale:Point = new Point(1,1);
 		private var _posGeometryScale:Point = new Point(1,1);
 		private var _posGeometry:Point = new Point();
+		private var _isDisposed:Boolean = false;
+		private var _isDestroyed:Boolean;
+		
 		
 		public function PoolFrontMesh()
 		{
@@ -34,6 +36,15 @@ package com.game.engine2D.vo
 			this.overrideMaterialProps ||= new OverrideMaterialProps();
 			this.overrideMaterialProps.prependedUVTransform = new Matrix();
 			reSet(null);
+		}
+		public function get isDestroyed():Boolean
+		{
+			return _isDestroyed;
+		}
+		
+		public function get isDisposed():Boolean
+		{
+			return _isDisposed;
 		}
 		
 		override public function set scaleX(val:Number):void
@@ -84,7 +95,7 @@ package com.game.engine2D.vo
 		
 		public function run():void
 		{
-			this.visible = !(this.material == MaterialUtils.default1x1Texture);
+			this.visible = (this.material != null);
 		}
 		
 		public function setSize(width:Number, height:Number):void
@@ -118,19 +129,22 @@ package com.game.engine2D.vo
 		public function reSet($parameters:Array):void
 		{
 			this.x = this.y = this.z = 0;
-			this.material = MaterialUtils.default1x1Texture;
+			this.material = null;
 			this.layerType = EntityLayerType.DEFAULT;
+			_isDisposed = false;
 		}
 		
 		public function instanceDestroy():void
 		{
+			_isDestroyed = true;
 			this.dispose();
 		}
 		
 		public function instanceDispose():void
 		{
+			_isDisposed = true;
 			if (parent)parent.removeChild(this);
-			this.material = MaterialUtils.default1x1Texture;
+			this.material = null;
 		}
 		
 		static public function recycle($pool:PoolFrontMesh):void

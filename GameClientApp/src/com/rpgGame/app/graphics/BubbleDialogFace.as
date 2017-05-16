@@ -56,15 +56,19 @@ package com.rpgGame.app.graphics
 		private static var bodyBindOffset : Vector3D = new Vector3D(0, 10);
 		private static var manMountBindOffset : Vector3D = new Vector3D(0, 40);
 		private static var womanMountBindOffset : Vector3D = new Vector3D(0, 30);
+		private var _isDestroyed : Boolean;
+		private var _isDisposed : Boolean;
 
 		public function BubbleDialogFace(owner : BaseObj3D)
 		{
 			super();
+			_isDestroyed = false;
 			reSet([owner]);
 		}
 
 		public function reSet($parameters : Array) : void
 		{
+			_isDisposed = false;
 			_owner = $parameters[0] as BaseObj3D;
 			setTemporary();
 		}
@@ -136,6 +140,7 @@ package com.rpgGame.app.graphics
 		{
 			instanceDispose();
 			dispose();
+			_isDestroyed = true;
 		}
 
 		public function instanceDispose() : void
@@ -146,6 +151,7 @@ package com.rpgGame.app.graphics
 			{
 				parent.removeChild(this);
 			}
+			_isDisposed = true;
 		}
 
 		private function removeBodyRender() : void
@@ -247,5 +253,17 @@ package com.rpgGame.app.graphics
 				_wordFrame.y = -_wordFrame.height;
 			}
 		}
+		
+		public function get isDestroyed():Boolean
+		{
+			return _isDestroyed;
+		}
+		
+		public function get isDisposed():Boolean
+		{
+			// TODO Auto Generated method stub
+			return _isDisposed;
+		}
+		
 	}
 }

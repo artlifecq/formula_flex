@@ -6,6 +6,8 @@ package com.game.engine2D.scene
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Stage;
 	
+	import away3d.Away3D;
+	import away3d.arcane;
 	import away3d.loaders.parsers.Parsers;
 	
 	import starling.display.Sprite;
@@ -46,14 +48,15 @@ package com.game.engine2D.scene
 									 viewCount : int = 1, 
 									 starlingLayerCount : int = 0, 
 									 onStarlingEventCapture : Function = null, 
-									 useScreenView : Boolean = true) : void
+									 useScreenView : Boolean = true,
+									 onMemoryTooHighed : Function = null) : void
 		{
 			_stage = stage;
 			_setupComplete = setupComplete;
 			Stage3DLayerManager.setup(
 				stage, stage, 
 				stage3DLayerSetupComplete, setupError, userDisabledError, viewCount, 
-				starlingLayerCount,onStarlingEventCapture,
+				starlingLayerCount,onStarlingEventCapture,onMemoryTooHighed,
 				useScreenView
 			);
 		}
@@ -132,6 +135,42 @@ package com.game.engine2D.scene
 		{
 			return _stage.stageHeight;
 		}
+		
+//		public static function get textureMrmory2D():Number
+//		{
+//			return TextureManager.getInstance().arcane::textureMemory2D;
+//		}
+//		
+//		public static function get maxTextureMemory():Number
+//		{
+//			return TextureManager.getInstance().arcane::maxTextureMemory;
+//		}
+//		
+//		public static function get textureCount2D():Number
+//		{
+//			return TextureManager.getInstance().arcane::textureCount2D;
+//		}
+//		
+//		public static function get textureCount3D():Number
+//		{
+//			return TextureManager.getInstance().arcane::textureCount3D;
+//		}
+		
+		public static function get totalVertexBuffer2D():Number
+		{
+			return Stage3DLayerManager.stage3DProxy.vertexBufferManager.totalVertexBuffer2D;
+		}
+		
+		public static function get totalVertexBuffer3D():Number
+		{
+			return Stage3DLayerManager.stage3DProxy.vertexBufferManager.totalVertexBuffer3D;
+		}
+		
+		/** 当前可用的heap内存 */
+//		public static function get heapMemory():Number
+//		{
+//			return Away3D.MIN_HEAP_SIZE - HeapAllocator.sizeAvailable;
+//		}
 		
 	}
 }

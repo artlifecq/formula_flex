@@ -19,6 +19,7 @@ package starling.display
     import starling.rendering.VertexData;
     import starling.textures.IStarlingTexture;
     import starling.textures.TextureHelper;
+    import starling.utils.MathUtil;
     import starling.utils.Padding;
     import starling.utils.Pool;
     import starling.utils.RectangleUtil;
@@ -36,7 +37,7 @@ package starling.display
      *  the size of the image with the displayed texture.</p>
      *
      *  <p>Furthermore, it adds support for a "Scale9" grid. This splits up the image into
-     *  nine regions, the corners of which will always maintain their original aspect ratio.
+     *  nine regions, the corners of which will always maintain their original size.
      *  The center region stretches in both directions to fill the remaining space; the side
      *  regions will stretch accordingly in either horizontal or vertical direction.</p>
      *
@@ -64,7 +65,7 @@ package starling.display
         /** Creates an image with a texture mapped onto it. */
         public function Image(texture:IStarlingTexture)
         {
-			super(100, 100);
+			super(1, 1);
 			this.texture = texture;
 			readjustSize();
         }
@@ -72,8 +73,8 @@ package starling.display
         /** The current scaling grid that is in effect. If set to null, the image is scaled just
          *  like any other display object; assigning a rectangle will divide the image into a grid
          *  of nine regions, based on the center rectangle. The four corners of this grid will
-         *  always maintain their original aspect ratio; the other regions will stretch accordingly
-         *  (horizontally, vertically, or both) to fill the complete area.
+         *  always maintain their original size; the other regions will stretch (horizontally,
+         *  vertically, or both) to fill the complete area.
          *
          *  <p>Notes:</p>
          *
@@ -81,6 +82,8 @@ package starling.display
          *  <li>Assigning a Scale9 rectangle will change the number of vertices to a maximum of 16
          *  (less if possible) and all vertices will be colored like vertex 0 (the top left vertex).
          *  </li>
+         *  <li>For Scale3-grid behavior, assign a zero size for all but the center row / column.
+         *  This will cause the 'caps' to scale in a way that leaves the aspect ratio intact.</li>
          *  <li>An image can have either a <code>scale9Grid</code> or a <code>tileGrid</code>, but
          *  not both. Assigning one will delete the other.</li>
          *  <li>Changes will only be applied on assignment. To force an update, simply call
@@ -164,7 +167,7 @@ package starling.display
 				{
 					setupTileGridQuick();
 				}else{
-					setupTileGrid();
+					super.setupVertices();//非2的幂不允许平铺;setupTileGrid();
 				}
 			}
 			else super.setupVertices();
@@ -201,6 +204,15 @@ package starling.display
             var texture:IStarlingTexture = this.texture;
             var absScaleX:Number = scaleX > 0 ? scaleX : -scaleX;
             var absScaleY:Number = scaleY > 0 ? scaleY : -scaleY;
+
+            // If top and bottom row / left and right column are empty, this is actually
+            // a scale3 grid. In that case, we want the 'caps' to maintain their aspect ratio.
+
+            if (MathUtil.isEquivalent(_scale9Grid.width, texture.width))
+                absScaleY /= absScaleX;
+            else if (MathUtil.isEquivalent(_scale9Grid.height, texture.height))
+                absScaleX /= absScaleY;
+
             var invScaleX:Number = 1.0 / absScaleX;
             var invScaleY:Number = 1.0 / absScaleY;
             var vertexData:VertexData = this.vertexData;
@@ -277,26 +289,23 @@ package starling.display
             // if the total width / height becomes smaller than the outer columns / rows,
             // we hide the center column / row and scale the rest normally.
 
-            if (sPosCols[1] < 0)
+            if (sPosCols[1] <= 0)
             {
                 correction = textureBounds.width / (textureBounds.width - gridCenter.width) * absScaleX;
                 sPadding.left *= correction;
                 sPosCols[0] *= correction;
-                sPosCols[1]  = 0.0001; // losing the column altogether would mix up texture coords
+                sPosCols[1]  = 0.0;
                 sPosCols[2] *= correction;
             }
 
-            if (sPosRows[1] < 0)
+            if (sPosRows[1] <= 0)
             {
                 correction = textureBounds.height / (textureBounds.height - gridCenter.height) * absScaleY;
                 sPadding.top *= correction;
                 sPosRows[0] *= correction;
-                sPosRows[1]  = 0.0001; // losing the row altogether would mix up texture coords
+                sPosRows[1]  = 0.0;
                 sPosRows[2] *= correction;
             }
-
-            numVertices = setupScale9GridAttributes(
-                sPadding.left, sPadding.top, sPosCols, sPosRows, setupScale9GridVertexPosition);
 
             // now set the texture coordinates
 
@@ -308,7 +317,8 @@ package starling.display
             sTexRows[2] = sBasRows[2] / pixelBounds.height;
             sTexRows[1] = 1.0 - sTexRows[0] - sTexRows[2];
 
-            setupScale9GridAttributes(0, 0, sTexCols, sTexRows, setupScale9GridVertexTexCoords);
+            numVertices = setupScale9GridAttributes(
+                sPadding.left, sPadding.top, sPosCols, sPosRows, sTexCols, sTexRows);
 
             // update indices
 
@@ -336,56 +346,72 @@ package starling.display
 			
 			CONFIG::Starling_Debug
 				{
-					if(Starling.current.showTrace)tracing("[Starling ]Image:texture",texture.key,texture.width+"x"+texture.height, " | scale9Grid:", _scale9Grid, " | size:",this.width,this.height);
+					if(Starling.current.showTrace)tracing("[Starling ]Image:texture",texture.width+"x"+texture.height, " | scale9Grid:", _scale9Grid, " | size:",this.width,this.height);
 				}
 
             setRequiresRedraw();
         }
 
-        private function setupScale9GridVertexPosition(vertexData:VertexData, texture:IStarlingTexture,
-                                                       vertexID:int, x:Number, y:Number):void
-        {
-            vertexData.setPoint(vertexID, "position", x, y);
-        }
-
-        private function setupScale9GridVertexTexCoords(vertexData:VertexData, texture:IStarlingTexture,
-                                                        vertexID:int, x:Number, y:Number):void
-        {
-			TextureHelper.setTexCoords(texture,vertexData, vertexID, "texCoords", x, y);
-        }
-
         private function setupScale9GridAttributes(startX:Number, startY:Number,
-                                                   colWidths:Vector.<Number>,
-                                                   rowHeights:Vector.<Number>,
-                                                   callback:Function):int
+                                                   posCols:Vector.<Number>, posRows:Vector.<Number>,
+                                                   texCols:Vector.<Number>, texRows:Vector.<Number>):int
         {
-            var row:int, col:int, colWidth:Number, rowHeight:Number;
+            const posAttr:String = "position";
+            const texAttr:String = "texCoords";
+
+            var row:int, col:int;
+            var colWidthPos:Number, rowHeightPos:Number;
+            var colWidthTex:Number, rowHeightTex:Number;
             var vertexData:VertexData = this.vertexData;
             var texture:IStarlingTexture = this.texture;
             var currentX:Number = startX;
             var currentY:Number = startY;
+            var currentU:Number = 0.0;
+            var currentV:Number = 0.0;
             var vertexID:int = 0;
 
             for (row = 0; row < 3; ++row)
             {
-                rowHeight = rowHeights[row];
-                if (rowHeight > 0)
+                rowHeightPos = posRows[row];
+                rowHeightTex = texRows[row];
+
+                if (rowHeightPos > 0)
                 {
                     for (col = 0; col < 3; ++col)
                     {
-                        colWidth = colWidths[col];
-                        if (colWidth > 0)
+                        colWidthPos = posCols[col];
+                        colWidthTex = texCols[col];
+
+                        if (colWidthPos > 0)
                         {
-                            callback(vertexData, texture, vertexID++, currentX, currentY);
-                            callback(vertexData, texture, vertexID++, currentX + colWidth, currentY);
-                            callback(vertexData, texture, vertexID++, currentX, currentY + rowHeight);
-                            callback(vertexData, texture, vertexID++, currentX + colWidth, currentY + rowHeight);
-                            currentX += colWidth;
+                            vertexData.setPoint(vertexID, posAttr, currentX, currentY);
+							TextureHelper.setTexCoords(texture, vertexData, vertexID, texAttr, currentU, currentV);
+                            vertexID++;
+
+                            vertexData.setPoint(vertexID, posAttr, currentX + colWidthPos, currentY);
+							TextureHelper.setTexCoords(texture, vertexData, vertexID, texAttr, currentU + colWidthTex, currentV);
+                            vertexID++;
+
+                            vertexData.setPoint(vertexID, posAttr, currentX, currentY + rowHeightPos);
+							TextureHelper.setTexCoords(texture, vertexData, vertexID, texAttr, currentU, currentV + rowHeightTex);
+                            vertexID++;
+
+                            vertexData.setPoint(vertexID, posAttr, currentX + colWidthPos, currentY + rowHeightPos);
+							TextureHelper.setTexCoords(texture, vertexData, vertexID, texAttr, currentU + colWidthTex, currentV + rowHeightTex);
+                            vertexID++;
+
+                            currentX += colWidthPos;
                         }
+
+                        currentU += colWidthTex;
                     }
-                    currentY += rowHeight;
+
+                    currentY += rowHeightPos;
                 }
+
                 currentX = startX;
+                currentU = 0.0;
+                currentV += rowHeightTex;
             }
 
             return vertexID;
@@ -477,7 +503,7 @@ package starling.display
 			
 			CONFIG::Starling_Debug
 			{
-				if(Starling.current.showTrace)tracing("[Starling]Image: texture:",texture.key, texture.width+"x"+texture.height," | tile repeat with CPU,size:",this.width+"x"+this.height," | numTiles:", vertexID/4, " | numVertices:",vertexID);
+				if(Starling.current.showTrace)tracing("[Starling]Image: texture:", texture.width+"x"+texture.height," | tile repeat with CPU,size:",this.width+"x"+this.height," | numTiles:", vertexID/4, " | numVertices:",vertexID);
 			}
 
             for (var i:int = prevNumVertices; i < vertexID; ++i)
@@ -531,7 +557,7 @@ package starling.display
 			vertexData.numVertices = vertexID;
 			CONFIG::Starling_Debug
 			{
-				if(Starling.current.showTrace)tracing("[Starling]Image: texture:",texture.key, texture.width+"x"+texture.height," | repeat with GPU,  size:",this.width+"x"+this.height, " | numTiles:", Math.ceil(scaleX*scaleY), " | numVertices:",vertexID);
+				if(Starling.current.showTrace)tracing("[Starling]Image: texture:", texture.width+"x"+texture.height," | repeat with GPU,  size:",this.width+"x"+this.height, " | numTiles:", Math.ceil(scaleX*scaleY), " | numVertices:",vertexID);
 			}
 			
 			for (var i:int = prevNumVertices; i < vertexID; ++i)

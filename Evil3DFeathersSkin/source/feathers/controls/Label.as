@@ -13,6 +13,8 @@ package feathers.controls
 	import flash.text.TextFormat;
 	import flash.utils.Dictionary;
 	
+	import away3d.log.Log;
+	
 	import feathers.controls.text.Fontter;
 	import feathers.events.FeathersEventType;
 	import feathers.layout.AnchorLayoutData;
@@ -35,9 +37,12 @@ package feathers.controls
 	import starling.styles.MeshStyle;
 	import starling.text.TextFieldAutoSize;
 	import starling.textures.IStarlingTexture;
+	import starling.textures.TextureFactory;
 	import starling.utils.Pool;
 	import starling.utils.RectangleUtil;
 	import starling.utils.deg2rad;
+	
+	import utils.TimerServer;
 
 /** A TextField displays text, either using standard true type fonts or custom bitmap fonts.
  *  
@@ -98,6 +103,7 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 	private var _fontSize:Number;
 	private var _color:uint;
 	private var _text:String;
+	private var _charText:String;
 	private var _fontName:String;
 	private var _horizontalAlign:String;
 	private var _verticalAlign:String;
@@ -129,7 +135,8 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 	private var _textWidth:int;
 	private var _textHeight:int;
 	private var _textureKey:String;
-	private var _charImages:Vector.<Image>;
+	private var _charImages:Vector.<Quad>;
+	private var _isDisposed:Boolean;
 	
 	private static const MAX_WIDTH:int = 1980;
 	private static const MAX_HEIGHT:int = 800;
@@ -137,6 +144,7 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 	/** Helper objects. */
 	private static var sHelperMatrix:Matrix = new Matrix();
 	private static var sNativeTextField:flash.text.TextField = new flash.text.TextField();
+	private static var _helperBitmapData:BitmapData;
 	
 	public function Label()
 	{
@@ -157,12 +165,8 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 		
 		_horizontalAlign = HorizontalAlign.LEFT;
 		_verticalAlign = VerticalAlign.TOP;
-		_layerBatchId = LayerBatchID.LABEL;
+		_layerBatchId = 1;//LayerBatchID.LABEL;
 		
-		CONFIG::Starling_Debug
-		{
-			border = true;
-		}
 		touchable =  true;
 		touchGroup = true;
 	}
@@ -301,7 +305,27 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 	/** Disposes the underlying texture data. */
 	public override function dispose():void
 	{
-		super.dispose();
+		if(_charImages)
+		{
+			var image:Quad;
+			while(_charImages.length)
+			{
+				image = _charImages.pop();
+				if(image != null)
+				{
+					image.removeFromParent();
+					if(image.texture)image.texture.dispose();
+				}
+			}
+			_charImages = null;
+		}
+		
+		if(_image)
+		{
+			_image.removeFromParent(true);
+			if(_image.texture)_image.texture.dispose();
+			_image = null;
+		}
 		
 		if(_border)
 		{
@@ -309,15 +333,24 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 			_border = null;
 		}
 		
+		_charImages = null;
 		_hitArea = null;
 		_image = null;
+		_bitmapFontsBounds = null;
+		
+		TimerServer.remove(checkChangeCount);
+		_isDisposed = true;
+		super.dispose();
 	}
 	
 	/** @inheritDoc */
 	public override function render(painter:Painter):void
 	{
-		if(! painter.contextValid )
+		if(_isDisposed)
+		{
+			Log.error("Label被disposed掉了还在使用,dispose前请先调用removeFromParent()或直接调用removeFromParent(true)!!! "+text);	
 			return;
+		}
 		
 		if (_requiresRedraw) 
 		{
@@ -354,28 +387,41 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 	// TrueType font rendering
 	private function createRenderedContents():void
 	{
+		if(_charImages)
+		{
+			var image:Quad;
+			while(_charImages.length)
+			{
+				image = _charImages.pop();
+				if(image != null)
+				{
+					image.removeFromParent();
+				}
+			}
+			_charImages = null;
+		}
+		
+		if(_image)
+		{
+			_image.removeFromParent();
+		}
+		
 		if(!_text)return;
 		
-		var texture:IStarlingTexture;
-		var scale:Number = Starling.contentScaleFactor;
 		
-		//get texture cache
+		var texture:IStarlingTexture = null;
 		_textureKey = getTextureKey(_text);
-		
-		texture = GuiTheme.ins.getTexture(_textureKey);
-		
-		//may be has disposed!
-		if(texture && texture.disposed)
-		{
-			texture = null;
-		}
+		var scale:Number = Starling.contentScaleFactor;
 		
 		var bitmapData:BitmapData = renderText(scale);
 		
 		if(bitmapData.width < 1 || bitmapData.height < 1 || bitmapData.width > MAX_WIDTH || bitmapData.height > MAX_HEIGHT)
 		{
-			if(Starling.current.showTrace)tracing("[Starling]Label: can't render size:",bitmapData.width, bitmapData.height, text);
-			bitmapData.dispose();
+			//if(Starling.current.showTrace)tracing("[Starling]Label: can't render size:",bitmapData.width, bitmapData.height, text);
+			if(bitmapData != _helperBitmapData)
+			{
+				bitmapData.dispose();
+			}
 			return;
 		}
 		
@@ -383,32 +429,41 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 		var clip:Rectangle = bitmapData.getColorBoundsRect(0xFF000000, 0x00000000, false);
 		if(!clip || clip.width < 1 || clip.height < 1)
 		{
-			if(Starling.current.showTrace)tracing("[Starling]Label:can't render clip size:", clip.width, clip.height);
+			//if(Starling.current.showTrace)tracing("[Starling]Label:can't render clip size:", clip.width, clip.height);
 			return;
+		}
+		
+		var disposeBmd:Boolean = bitmapData != _helperBitmapData;
+		if(GuiTheme.ENABLE_TEXT_BATCH_RENDER)
+		{
+			texture = GuiTheme.ins.creatBatchRenderTextTexture(_textureKey, bitmapData, clip, false, disposeBmd);
+		}else
+		{
+			texture = TextureFactory.fromBitmapDataByMemoryItem(bitmapData, false, false, "bgra", disposeBmd, clip);
 		}
 		
 		if (_image == null) 
 		{
-			_image = new Quad(clip.width, clip.height);
+			_image = new Quad(texture.width, texture.height);
 			_image.touchable = false;
 			_image.pixelSnapping = true;
-			addChild(_image);
 		}
 		_image.x = clip ?  int(clip.x) : 0;
 		_image.y = clip ? int(clip.y) : 0;
 		
-		if(!texture)
+		var oldTexture:IStarlingTexture = _image.texture;
+		_image.texture = texture;
+		if(oldTexture && oldTexture != texture)oldTexture.dispose();
+		
+		if(!_image.parent)
 		{
-			texture = GuiTheme.ins.pushDynamicLabelBitmapData(_textureKey, bitmapData, clip);
+			addChild(_image);
 		}
 		
-		//立即释放内存
-		bitmapData.dispose();
-		bitmapData = null;
-		
-		_image.texture = texture;
-		
-		if(Starling.current.showTrace)tracing("[Starling]Label:render size:",_image.texture.width, _image.texture.height, text );
+		CONFIG::Starling_Debug
+			{
+				trace("[Starling]Label:render size:",_image.texture.width, _image.texture.height, text );
+			}
 	}
 	
 	protected function getTextuerFormat():String
@@ -429,24 +484,21 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 	/**
 	 * @inheritDoc
 	 */
-	public function measureText(result:Point = null):Point
+	public function measureText():Rectangle
 	{
-		if(!result)
-		{
-			result = new Point();
-		}
-		
-		if(_requiresRedraw)
-		{
-			measure();
-		}
-		result.x = _textWidth;
-		result.y = _textHeight;
-		return result;
+		outTextBounds ||= new Rectangle();
+		var useFonts:Boolean = _useBitmapFonts;
+		_useBitmapFonts = false;
+		measure();
+		outTextBounds.copyFrom(_textBounds);
+		_useBitmapFonts = useFonts;
+		return outTextBounds;
 	}
 	
 	protected function measure():void
 	{
+		if(!_hitArea)return;
+		
 		var width:Number  = _hitArea.width;
 		var height:Number = _hitArea.height;
 		
@@ -459,7 +511,7 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 			height = maxHeight ? maxHeight : MAX_HEIGHT;
 		}
 		
-		if(_textFormat == null)_textFormat = new TextFormat();
+		if(_textFormat == null)_textFormat = Fontter.creatDefaultFontTextFormat();
 		_textFormat.font = _fontName;
 		_textFormat.size = _fontSize;
 		_textFormat.color = _color;
@@ -487,7 +539,7 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 		formatText(sNativeTextField, _textFormat);
 		
 		if (_isHtmlText) sNativeTextField.htmlText = _text;
-		else             sNativeTextField.text     = _text;
+		else             sNativeTextField.text     = _useBitmapFonts ? (_charText ? _charText : "") : _text;
 		
 		sNativeTextField.filters = _nativeFilters;
 		
@@ -559,8 +611,17 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 		var filterOffset:Point = calculateFilterOffset(sNativeTextField, hAlign, vAlign);
 		
 		// finally: draw text field to bitmap data
-		var bitmapData:BitmapData = null;
-		bitmapData = new BitmapData(width, height, true, 0x0);
+		if(_helperBitmapData == null)
+		{
+			_helperBitmapData = new BitmapData(512, 128, true, 0x0);
+		}
+		var useHelperBitmapData:Boolean = (width <= 512 && height <= 128);
+		var bitmapData:BitmapData = useHelperBitmapData  ? _helperBitmapData : new BitmapData(width, height, true, 0x0);
+		if(useHelperBitmapData)
+		{
+			_helperBitmapData.fillRect(_helperBitmapData.rect, 0x0);
+		}
+		
 		var drawMatrix:Matrix = new Matrix(1, 0, 0, 1,
 			filterOffset.x, filterOffset.y + textOffsetY);
 		
@@ -668,13 +729,7 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 	private var outTextBounds:Rectangle;
 	public function get textBounds():Rectangle
 	{
-		if(_requiresRedraw)
-		{
-			measure();
-		}
-		if(outTextBounds == null)outTextBounds = new Rectangle();
-		outTextBounds.copyFrom(_textBounds);
-		return outTextBounds;
+		return measureText();
 	}
 	
 	/** @inheritDoc */
@@ -691,7 +746,7 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 	/** @inheritDoc */
 	public override function hitTest(localPoint:Point):DisplayObject
 	{
-		if ((!visible || !touchable)) return null;
+		if (!stage || !_hitArea || !visible || !touchable) return null;
 		else if (_hitArea.containsPoint(localPoint) && hitTestMask(localPoint)) return this;
 		else return null;
 	}
@@ -709,7 +764,7 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 			maxWidth = value;
 		}
 		
-		if(_hitArea.width != value)
+		if(_hitArea && _hitArea.width != value)
 		{
 			_hitArea.width = value;
 			invalidate();
@@ -718,6 +773,11 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 	
 	public override function get width():Number
 	{
+		if(!_hitArea)
+		{
+			trace("Label instance has been disposed! label.width is invalid!" );
+			return 0;
+		}
 		if(_requiresRedraw)
 		{
 			measure();
@@ -733,7 +793,7 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 		{
 			maxHeight = value;
 		}
-		if(_hitArea.height != value)
+		if(_hitArea && _hitArea.height != value)
 		{
 			_hitArea.height = value;
 			invalidate();
@@ -742,6 +802,12 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 
 	public override function get height():Number
 	{
+		if(!_hitArea)
+		{
+			trace("Label instance has been disposed! label.height is invalid!" );
+			return 0;
+		}
+		
 		if(_requiresRedraw)
 		{
 			measure();
@@ -757,8 +823,20 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 		if(_image)_image.visible = value;
 		if (_text != value)
 		{
+			//_changeCount++;
+			//if(!TimerServer.has(checkChangeCount))
+				//TimerServer.delayCall(checkChangeCount, 5);
 			_text = value;
 			invalidate();
+		}
+	}
+	
+	private var _changeCount:int;
+	private function checkChangeCount():void
+	{
+		if(_changeCount >= 4 && _text && _text.length <20)
+		{
+			registerBitmapFonts(_text);	
 		}
 	}
 	
@@ -1339,8 +1417,9 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 	}
 	
 	//============================动态位图字体=======================
-	private var _styleName:String;
 	private var _useBitmapFonts:Boolean;
+	private var _bitmapFontsBounds:Rectangle;
+	
 	public function set autoCreateBitmapFonts(value:Boolean):void
 	{
 		_useBitmapFonts = value;
@@ -1348,77 +1427,119 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 	
 	public function registerBitmapFonts(chars:String):void
 	{
+		_useBitmapFonts = true;
+		
 		var len:int = chars.length;
 		for(var i:int=0; i<len; i++)
 		{
 			drawCharToTexture( chars.charAt(i) );
 		}
-		_useBitmapFonts = true;
 	}
-	
+
 	private function renderBitmapFonts():void
 	{
 		var chars:String = _text;
 		
 		if(!chars)return;
+		if(_image)
+		{
+			_image.removeFromParent(true);
+			_image = null;
+		}
 		
-		var bitmapData:BitmapData = renderText(scale);
-		var clip:Rectangle = bitmapData.getColorBoundsRect(0xFF000000, 0x00000000, false);
-		bitmapData.dispose();
-		bitmapData = null;
+		_bitmapFontsBounds = measureText();
 		
-		_charImages ||= new <Image>[];
-		
+		_charImages ||= new Vector.<Quad>();
 		
 		var len:int = chars.length;
-		var image:Image;
+		var image:Quad;
 		var key:String;
 		var texture:IStarlingTexture;
-		var startX:int = clip.x;
-		var startY:int = clip.y;
+		var startX:Number = _bitmapFontsBounds.x;
+		var startY:int = 0;
 		var offset:Point;
 		var gui:GuiTheme = GuiTheme.ins;
+		var char:String;
+		var charWidth:Number;
 		for(var i:int=0; i<len; i++)
 		{
-			key =getTextureKey( chars.charAt(i) );
+			char = chars.charAt(i);
+			
+			key =getTextureKey(  char );
 			texture = gui.getTexture( key );
 			
 			if(!texture)
 			{
-				texture = drawCharToTexture( chars.charAt(i) );
+				texture = drawCharToTexture( char );
 			}
 			
-			if(!texture)continue;
+			if(!texture)
+			{
+				//空白" ";
+				if(chars.charCodeAt(i) == 10 || chars.charCodeAt(i) == 13)
+				{
+					startY += _fontSize + leading;
+					startX = _bitmapFontsBounds.x;
+				}else
+				{
+					startX += _fontSize + letterSpacing;
+				}
+				
+				image = _charImages[i]; 
+				_charImages[i] = null;
+				if(image)
+				{
+					image.removeFromParent();
+					Pool.putQuad(image);
+				}
+				continue;
+			}
 			
 			offset = gui.getOffSet(key);
-			image = i < _charImages.length ? _charImages[i] : Pool.getImage( texture );
+			
+			image = i < _charImages.length ? _charImages[i] : Pool.getQuad( texture );
+			if(!image)
+			{
+				image = _charImages[i] = Pool.getQuad( texture )
+			}
+			
+			charWidth = chars.charCodeAt(i) < 0x4e00 ? _fontSize/2 : _fontSize;
+			texture.smooth = false;
 			image.texture = texture;
 			image.readjustSize();
-			image.x = startX;
-			image.y = offset.y;
+			image.x = Math.round(startX);
+			image.y = startY + Math.round(offset.y);
+			image.pixelSnapping = true;
 			Pool.putPoint(offset);
 			
-			startX += texture.width + letterSpacing;
+			startX += charWidth + letterSpacing;
+			if(maxWidth > 0 && startX > maxWidth)
+			{
+				startX = _bitmapFontsBounds.x;
+				startY += _fontSize + leading;
+			}
 			
 			this.addChild(image);
 			
 			_charImages[i] = image;
 		}
 		
+		//删除多余的文字图片,此状况在文本由长变短的时候会发生
 		while(_charImages.length > len)
 		{
 			image = _charImages.pop();
-			image.removeFromParent();
-			Pool.putImage(image);
+			if(image != null)
+			{
+				image.removeFromParent();
+				Pool.putQuad(image);
+			}
 		}
 	}
 	
 	
 	private function drawCharToTexture(char:String):IStarlingTexture
 	{
-		var oldText:String = _text;
-		
-		_text = char;
+		_charText = char;
 		
 		var id:String = getTextureKey(char)
 		
@@ -1432,21 +1553,21 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 		
 		if(bitmapData.width < 1 || bitmapData.height < 1 || bitmapData.width > MAX_WIDTH || bitmapData.height > MAX_HEIGHT)
 		{
+			if(bitmapData != _helperBitmapData)
+				bitmapData.dispose();
 			return null;
 		}
 		
 		var clip:Rectangle = bitmapData.getColorBoundsRect(0xFF000000, 0x00000000, false);
 		if(!clip || clip.width < 1 || clip.height < 1)
 		{
+			if(bitmapData != _helperBitmapData)
+				bitmapData.dispose();
 			return null;
 		}
 		
-		t = GuiTheme.ins.pushDynamicLabelBitmapData(id, bitmapData, clip, true);
 		
-		bitmapData.dispose();
-		bitmapData = null;
-		
-		_text = oldText;
+		t = GuiTheme.ins.creatBatchRenderTextTexture(id, bitmapData, clip, true, (bitmapData != _helperBitmapData));
 		
 		return t;
 	}

@@ -99,8 +99,6 @@ package com.game.engine3D.process
 				_currProcess.dispose();
 				_currProcess = null;
 			}
-			_isProcessing = false;
-			_isProcessed = true;
 		}
 
 		private function nextProcess() : void
@@ -119,7 +117,10 @@ package com.game.engine3D.process
 				trace(this, _currProcess.getState() + "开始...");
 				_currProcess.setOnCompleteNotify(onCompleteNotify);
 				_startTime = getTimer();
-				_currProcess.startProcess();
+				if (!_currProcess.isProcessing)
+				{
+					_currProcess.startProcess();
+				}
 			}
 			else
 			{
@@ -143,7 +144,10 @@ package com.game.engine3D.process
 				trace(this, _currProcess.getState() + "开始...");
 				_currProcess.setOnCompleteNotify(onCompleteNotify);
 				_startTime = getTimer();
-				_currProcess.startProcess();
+				if (!_currProcess.isProcessing)
+				{
+					_currProcess.startProcess();
+				}
 			}
 			else
 			{
@@ -166,7 +170,10 @@ package com.game.engine3D.process
 				trace(this, _currProcess.getState() + "开始...");
 				_currProcess.setOnCompleteNotify(onCompleteNotify);
 				_startTime = getTimer();
-				_currProcess.startProcess();
+				if (!_currProcess.isProcessing)
+				{
+					_currProcess.startProcess();
+				}
 			}
 			else
 			{
@@ -186,8 +193,7 @@ package com.game.engine3D.process
 				else
 				{
 					free();
-					if (_onCompleteNotify != null)
-						_onCompleteNotify(this);
+					completeProcess();
 				}
 			}
 		}

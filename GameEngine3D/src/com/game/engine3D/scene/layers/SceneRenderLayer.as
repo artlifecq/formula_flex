@@ -43,8 +43,9 @@ package com.game.engine3D.scene.layers
 		private var _renderObjCnt : int = 0;
 		private var _tickCnt : uint = 0;
 		private var _viewDistanceSquare : Number = 0;
+		private var _viewFilter : Function = null;
 
-		public function SceneRenderLayer(scene : GameScene3D)
+		public function SceneRenderLayer(scene : GameScene3D, viewFilter : Function = null)
 		{
 			super();
 			_scene3D = scene;
@@ -57,6 +58,7 @@ package com.game.engine3D.scene.layers
 			_maxOtherRenderLimitNum = -1;
 			_currOtherRenderLimitNum = 0;
 			_renderObjCnt = 0;
+			_viewFilter = viewFilter;
 		}
 
 		/**
@@ -110,6 +112,7 @@ package com.game.engine3D.scene.layers
 		public function destroy() : void
 		{
 			clear();
+			_viewFilter = null;
 			dispose();
 		}
 
@@ -412,7 +415,11 @@ package com.game.engine3D.scene.layers
 				if (baseObj.usable)
 				{
 					var inViewDistance : Boolean = true;
-					if (baseObj.needInViewDist)
+					if (_viewFilter != null)
+					{
+						inViewDistance = _viewFilter(baseObj);
+					}
+					if (inViewDistance && baseObj.needInViewDist)
 					{
 						if (_scene3D.mainChar)
 						{
@@ -420,7 +427,7 @@ package com.game.engine3D.scene.layers
 							inViewDistance = dist < _viewDistanceSquare;
 						}
 					}
-					if (baseObj.renderLimitable && inViewDistance)
+					if (inViewDistance && baseObj.renderLimitable)
 					{
 						if (_maxRenderLimitNumByType[baseObj.type] != null)
 						{

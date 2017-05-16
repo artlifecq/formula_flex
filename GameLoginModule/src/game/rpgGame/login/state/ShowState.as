@@ -34,7 +34,7 @@ package game.rpgGame.login.state
 				case RenderUnitType.DEPUTY_WEAPON:
 					render.visible = true;
 					render.repeat = _repeatNum;
-					render.setStatus(statusType, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
+					render.setStatus(statusType, _useCrossfadeTransition ? 0.2 : null, time);
 					
 					if (isFreeze)
 						render.stop(time);
@@ -42,7 +42,7 @@ package game.rpgGame.login.state
 				case RenderUnitType.MOUNT:
 					render.visible = true;
 					render.repeat = _repeatNum;
-					render.setStatus(statusType, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
+					render.setStatus(statusType, _useCrossfadeTransition ? 0.2 : null, time);
 					if (isFreeze)
 						render.stop(time);
 					break;

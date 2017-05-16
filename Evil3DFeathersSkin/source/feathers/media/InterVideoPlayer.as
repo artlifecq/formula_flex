@@ -230,7 +230,7 @@ package feathers.media
 		private function renderNextFrame():void
 		{
 			var context:Context3D = Starling.current.context;
-			if(!_video || context == null || context.profile == null || context.driverInfo == "Disposed")return;
+			if(!_video || context == null || context.driverInfo == "Disposed")return;
 			
 			_videoBmd.draw(_video);
 			var lastTextrue:IStarlingTexture = _videoTexture;

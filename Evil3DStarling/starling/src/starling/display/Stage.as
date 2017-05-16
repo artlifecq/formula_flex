@@ -140,7 +140,7 @@ package starling.display
 
             painter.pushState();
             state.renderTarget = null;
-            state.setProjectionMatrix(0, 0, _width, _height, _width, _height, cameraPosition);
+            state.setProjectionMatrix(0, 0, _width, _height);
             
             if (transparent) painter.clear();
             else             painter.clear(_color, 1);
@@ -165,22 +165,6 @@ package starling.display
             getTransformationMatrix(targetSpace, sMatrix);
 
             return RectangleUtil.getBounds(out, sMatrix, out);
-        }
-
-        // camera positioning
-
-        /** Returns the position of the camera within the local coordinate system of a certain
-         *  display object. If you do not pass a space, the method returns the global position.
-         *  To change the position of the camera, you can modify the properties 'fieldOfView',
-         *  'focalDistance' and 'projectionOffset'.
-         */
-        public function getCameraPosition(space:DisplayObject=null, out:Vector3D=null):Vector3D
-        {
-            getTransformationMatrix3D(space, sMatrix3D);
-
-            return MatrixUtil.transformCoords3D(sMatrix3D,
-                _width / 2 + _projectionOffset.x, _height / 2 + _projectionOffset.y,
-                -focalLength, out);
         }
 
         // enter frame event optimization
@@ -281,12 +265,20 @@ package starling.display
         /** The width of the stage coordinate system. Change it to scale its contents relative
          *  to the <code>viewPort</code> property of the Starling object. */ 
         public function get stageWidth():int { return _width; }
-        public function set stageWidth(value:int):void { _width = value; }
+        public function set stageWidth(value:int):void 
+		{ 
+			_width = value; 
+			setRequiresRedraw();
+		}
         
         /** The height of the stage coordinate system. Change it to scale its contents relative
          *  to the <code>viewPort</code> property of the Starling object. */
         public function get stageHeight():int { return _height; }
-        public function set stageHeight(value:int):void { _height = value; }
+        public function set stageHeight(value:int):void 
+		{ 
+			_height = value; 
+			setRequiresRedraw();
+		}
 
         /** The Starling instance this stage belongs to. */
         public function get starling():Starling
@@ -333,18 +325,6 @@ package starling.display
         public function set projectionOffset(value:Point):void
         {
             _projectionOffset.setTo(value.x, value.y);
-        }
-
-        /** The global position of the camera. This property can only be used to find out the
-         *  current position, but not to modify it. For that, use the 'projectionOffset',
-         *  'fieldOfView' and 'focalLength' properties. If you need the camera position in
-         *  a certain coordinate space, use 'getCameraPosition' instead.
-         *
-         *  <p>CAUTION: not a copy, but the actual object!</p>
-         */
-        public function get cameraPosition():Vector3D
-        {
-            return getCameraPosition(null, _cameraPosition);
         }
     }
 }

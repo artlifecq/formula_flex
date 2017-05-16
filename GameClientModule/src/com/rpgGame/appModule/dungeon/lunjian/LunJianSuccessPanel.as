@@ -36,6 +36,8 @@ package com.rpgGame.appModule.dungeon.lunjian
 			super(_skin);
 			_icon=new IconCDFace(IcoSizeEnum.ICON_64);
 			_skin.container.addChild(_icon);
+			_icon.x=_skin.icon1.x;
+			_icon.y=_skin.icon1.y;
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
@@ -75,6 +77,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 			_skin.lbTime.text=leftTime+"秒后自动退出";
 			if(leftTime<0){
 				TimerServer.remove(updateTime);
+				this.onHide();
 			}
 		}
 		

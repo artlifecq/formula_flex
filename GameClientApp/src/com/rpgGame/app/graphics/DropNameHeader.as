@@ -75,5 +75,18 @@ package com.rpgGame.app.graphics
 		public function reSet(parameters:Array):void
 		{
 		}
+		
+		public function get isDestroyed():Boolean
+		{
+			// TODO Auto Generated method stub
+			return false;
+		}
+		
+		public function get isDisposed():Boolean
+		{
+			// TODO Auto Generated method stub
+			return false;
+		}
+		
 	}
 }

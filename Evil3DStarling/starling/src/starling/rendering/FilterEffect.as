@@ -10,10 +10,13 @@
 
 package starling.rendering
 {
+    import away3d.arcane;
     import away3d.core.managers.Stage3DProxy;
     
     import starling.textures.IStarlingTexture;
     import starling.utils.RenderUtil;
+
+	use namespace arcane;
 
     /** An effect drawing a mesh of textured vertices.
      *  This is the standard effect that is the base for all fragment filters;
@@ -40,37 +43,11 @@ package starling.rendering
             "m44 op, va0, vc0 \n"+  // 4x4 matrix transform to output clip-space
             "mov v0, va1";          // pass texture coordinates to fragment program
 
-        private var _texture:IStarlingTexture;
+        protected var _texture:IStarlingTexture;
 
         /** Creates a new FilterEffect instance. */
         public function FilterEffect()
         {
-        }
-
-        /** Override this method if the effect requires a different program depending on the
-         *  current settings. Ideally, you do this by creating a bit mask encoding all the options.
-         *  This method is called often, so do not allocate any temporary objects when overriding.
-         *
-         *  <p>Reserve 4 bits for the variant name of the base class.</p>
-         */
-        override protected function get programVariantName():uint
-        {
-            return RenderUtil.getTextureVariantBits(_texture);
-        }
-
-        /** @private */
-        override protected function createProgram():Program
-        {
-            if (_texture)
-            {
-                var vertexShader:String = STD_VERTEX_SHADER;
-                var fragmentShader:String = tex("oc", "v0", 0, _texture);
-                return Program.fromSource(vertexShader, fragmentShader);
-            }
-            else
-            {
-                return super.createProgram();
-            }
         }
 
         /** This method is called by <code>render</code>, directly before
@@ -127,6 +104,37 @@ package starling.rendering
 
         /** The texture to be mapped onto the vertices. */
         public function get texture():IStarlingTexture { return _texture; }
-        public function set texture(value:IStarlingTexture):void { _texture = value; }
+        public function set texture(value:IStarlingTexture):void 
+		{
+				_texture = value;
+		}
+		
+		override protected function get programVariantName():uint
+		{
+			return RenderUtil.getTextureVariantBits(_texture);
+		}
+		
+		override protected function get programBaseName():uint 
+		{ 
+			return ProgramNameID.FILTER_EFFECT;
+		}
+		
+		override arcane function getVertexCode():String
+		{
+			if(_texture)
+			{
+				return STD_VERTEX_SHADER;
+			}
+			else
+				return super.getVertexCode();
+		}
+		
+		override arcane function getFragmentCode():String
+		{
+			if(_texture)
+				return tex("oc", "v0", 0, _texture);
+			else
+				return super.getFragmentCode();
+		}
     }
 }

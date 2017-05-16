@@ -1,5 +1,6 @@
 package com.game.engine3D.config
 {
+	import flash.utils.getTimer;
 
 	/**
 	 * 引擎主配置
@@ -18,7 +19,10 @@ package com.game.engine3D.config
 		/**实体统一半径*/
 		public static var radiusForEntity : int = 32;
 
-		public static const DEBUG_HEAD : String = "[GameEngine3D Debug]";
+		public static function get DEBUG_HEAD() : String
+		{
+			return "[GameEngine3D Debug] " + getTimer() + " ";
+		}
 
 		private static var _use2DMap : Boolean = false;
 //		private static var _map_2D_scale_z_dir : Number = 1;

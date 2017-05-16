@@ -12,7 +12,6 @@ package feathers.controls
 	 */
 	public class ScrollBarDisplayMode
 	{
-		public static const ALWAYS_VISIBLE:String = "alwaysVisible";
 		/**
 		 * The scroll bars appear above the scroller's view port, overlapping
 		 * the content, and they fade out when not in use.
@@ -24,6 +23,12 @@ package feathers.controls
 		 * view port, making the view port smaller than the scroller.
 		 */
 		public static const FIXED:String = "fixed";
+		
+		/**
+		 * The scroll bars are always visible and appear next to the scroller's
+		 * view port.
+		 */
+		public static const ALWAYS_VISIBLE:String = "alwaysVisible";
 
 		/**
 		 * The scroll bars appear above the scroller's view port, overlapping

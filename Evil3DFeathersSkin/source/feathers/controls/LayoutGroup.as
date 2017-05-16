@@ -427,15 +427,14 @@ package feathers.controls
 				child.addEventListener(FeathersEventType.LAYOUT_DATA_CHANGE, child_layoutDataChangeHandler);
 			}
 			var oldIndex:int = this.items.indexOf(child);
-			if(oldIndex == index)
+			if(oldIndex != index)
 			{
-				return child;
+				if(oldIndex >= 0)
+				{
+					this.items.splice(oldIndex, 1);
+				}
+				this.items.splice(index, 0, child);
 			}
-			if(oldIndex >= 0)
-			{
-				this.items.splice(oldIndex, 1);
-			}
-			this.items.splice(index, 0, child);
 			this.invalidate(INVALIDATION_FLAG_LAYOUT);
 			return super.addChildAt(child, index);
 		}

@@ -65,5 +65,7 @@ package com.rpgGame.coreData.type
 		public static const GUILD_BEEN_KICK_GUILD : int = rEnum.next;
 		/**加入帮派成功了**/
 		public static const GUILD_JION_COMPLETE : int = rEnum.next;
+		
+		public static const GUILD_BEEN_INVITE_JOIN_GUILD : int = rEnum.next;
 	}
 }

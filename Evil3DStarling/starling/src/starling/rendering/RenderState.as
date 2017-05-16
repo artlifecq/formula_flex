@@ -19,7 +19,6 @@ package starling.rendering
     
     import away3d.core.managers.Stage3DProxy;
     
-    import starling.core.Starling;
     import starling.display.BlendMode;
     import starling.textures.IStarlingTexture;
     import starling.utils.MatrixUtil;
@@ -73,17 +72,24 @@ package starling.rendering
         /** @private */ internal var _modelviewMatrix:Matrix;
 		
 		private var _stage3DProxy:Stage3DProxy;
-        private var _renderTarget:IStarlingTexture;
         private var _renderTargetOptions:uint;
         private var _culling:String;
+
+        private static const CULLING_VALUES:Vector.<String> = new <String>
+            [Context3DTriangleFace.NONE, Context3DTriangleFace.FRONT,
+             Context3DTriangleFace.BACK, Context3DTriangleFace.FRONT_AND_BACK];
+
+        private var _miscOptions:uint;
         private var _clipRect:Rectangle;
+        private var _renderTarget:IStarlingTexture;
         private var _onDrawRequired:Function;
-        private var _modelviewMatrix3D:Matrix3D;
         private var _projectionMatrix3D:Matrix3D;
+        private var _projectionMatrix3DRev:uint;
         private var _mvpMatrix3D:Matrix3D;
 
         // helper objects
         private static var sMatrix3D:Matrix3D = new Matrix3D();
+        private static var sProjectionMatrix3DRev:uint = 0;
 
         /** Creates a new render state with the default settings. */
         public function RenderState(stage3DProxy:Stage3DProxy)
@@ -99,11 +105,12 @@ package starling.rendering
             {
                 var currentTarget:TextureBase = _renderTarget ? _renderTarget.root.getTextureForStage3D(_stage3DProxy) : null;
                 var nextTarget:TextureBase = renderState._renderTarget ? renderState._renderTarget.root.getTextureForStage3D(_stage3DProxy) : null;
+                var cullingChanges:Boolean = (_miscOptions & 0xf00) != (renderState._miscOptions & 0xf00);
                 var clipRectChanges:Boolean = _clipRect || renderState._clipRect ?
                     !RectangleUtil.compare(_clipRect, renderState._clipRect) : false;
 
-                if (_blendMode != renderState._blendMode || _culling != renderState._culling ||
-                    currentTarget != nextTarget || clipRectChanges)
+                if (_blendMode != renderState._blendMode ||
+                    currentTarget != nextTarget || clipRectChanges || cullingChanges)
                 {
                     _onDrawRequired();
                 }
@@ -112,13 +119,14 @@ package starling.rendering
             _alpha = renderState._alpha;
             _blendMode = renderState._blendMode;
             _renderTarget = renderState._renderTarget;
-            _renderTargetOptions = renderState._renderTargetOptions;
-            _culling = renderState._culling;
+            _miscOptions = renderState._miscOptions;
             _modelviewMatrix.copyFrom(renderState._modelviewMatrix);
-            _projectionMatrix3D.copyFrom(renderState._projectionMatrix3D);
 
-            if (_modelviewMatrix3D || renderState._modelviewMatrix3D)
-                this.modelviewMatrix3D = renderState._modelviewMatrix3D;
+            if (_projectionMatrix3DRev != renderState._projectionMatrix3DRev)
+            {
+                _projectionMatrix3DRev = renderState._projectionMatrix3DRev;
+                _projectionMatrix3D.copyFrom(renderState._projectionMatrix3D);
+            }
 
             if (_clipRect || renderState._clipRect)
                 this.clipRect = renderState._clipRect;
@@ -131,9 +139,9 @@ package starling.rendering
             this.alpha = 1.0;
             this.blendMode = BlendMode.NORMAL;
             this.culling = Context3DTriangleFace.NONE;
-            this.modelviewMatrix3D = null;
             this.renderTarget = null;
             this.clipRect = null;
+            _projectionMatrix3DRev = 0;
 
             if (_modelviewMatrix) _modelviewMatrix.identity();
             else _modelviewMatrix = new Matrix();
@@ -152,20 +160,6 @@ package starling.rendering
             MatrixUtil.prependMatrix(_modelviewMatrix, matrix);
         }
 
-        /** Prepends the given matrix to the 3D modelview matrix.
-         *  The current contents of the 2D modelview matrix is stored in the 3D modelview matrix
-         *  before doing so; the 2D modelview matrix is then reset to the identity matrix.
-         */
-        public function transformModelviewMatrix3D(matrix:Matrix3D):void
-        {
-            if (_modelviewMatrix3D == null)
-                _modelviewMatrix3D = Pool.getMatrix3D();
-
-            _modelviewMatrix3D.prepend(MatrixUtil.convertTo3D(_modelviewMatrix, sMatrix3D));
-            _modelviewMatrix3D.prepend(matrix);
-            _modelviewMatrix.identity();
-        }
-
         /** Creates a perspective projection matrix suitable for 2D and 3D rendering.
          *
          *  <p>The first 4 parameters define which area of the stage you want to view (the camera
@@ -179,12 +173,20 @@ package starling.rendering
          *  <p>If you pass only the first 4 parameters, the camera will be set up above the center
          *  of the stage, with a field of view of 1.0 rad.</p>
          */
-        public function setProjectionMatrix(x:Number, y:Number, width:Number, height:Number,
-                                            stageWidth:Number=0, stageHeight:Number=0,
-                                            cameraPos:Vector3D=null):void
+        public function setProjectionMatrix(x:Number, y:Number, width:Number, height:Number):void
         {
+            _projectionMatrix3DRev = ++sProjectionMatrix3DRev;
+			//TODO: 用更优化的代码实现
             MatrixUtil.createPerspectiveProjectionMatrix(
-                    x, y, width, height, stageWidth, stageHeight, cameraPos, _projectionMatrix3D);
+                    x, y, width, height, 0, 0, null, _projectionMatrix3D);
+        }
+
+        /** This method needs to be called whenever <code>projectionMatrix3D</code> was changed
+         *  other than via <code>setProjectionMatrix</code>.
+         */
+        public function setProjectionMatrixChanged():void
+        {
+            _projectionMatrix3DRev = ++sProjectionMatrix3DRev;
         }
 
         /** Changes the modelview matrices (2D and, if available, 3D) to identity matrices.
@@ -193,7 +195,6 @@ package starling.rendering
         public function setModelviewMatricesToIdentity():void
         {
             _modelviewMatrix.identity();
-            if (_modelviewMatrix3D) _modelviewMatrix3D.identity();
         }
 
         /** Returns the current 2D modelview matrix.
@@ -202,37 +203,24 @@ package starling.rendering
         public function get modelviewMatrix():Matrix { return _modelviewMatrix; }
         public function set modelviewMatrix(value:Matrix):void { _modelviewMatrix.copyFrom(value); }
 
-        /** Returns the current 3D modelview matrix, if there have been 3D transformations.
-         *  CAUTION: Use with care! Each call returns the same instance.
-         *  @default null */
-        public function get modelviewMatrix3D():Matrix3D { return _modelviewMatrix3D; }
-        public function set modelviewMatrix3D(value:Matrix3D):void
-        {
-            if (value)
-            {
-                if (_modelviewMatrix3D == null) _modelviewMatrix3D = Pool.getMatrix3D(false);
-                _modelviewMatrix3D.copyFrom(value);
-            }
-            else if (_modelviewMatrix3D)
-            {
-                Pool.putMatrix3D(_modelviewMatrix3D);
-                _modelviewMatrix3D = null;
-            }
-        }
 
         /** Returns the current projection matrix. You can use the method 'setProjectionMatrix3D'
          *  to set it up in an intuitive way.
-         *  CAUTION: Use with care! Each call returns the same instance.
+         *  CAUTION: Use with care! Each call returns the same instance. If you modify the matrix
+         *           in place, you have to call <code>setProjectionMatrixChanged</code>.
          *  @default identity matrix */
         public function get projectionMatrix3D():Matrix3D { return _projectionMatrix3D; }
-        public function set projectionMatrix3D(value:Matrix3D):void { _projectionMatrix3D.copyFrom(value); }
+        public function set projectionMatrix3D(value:Matrix3D):void
+        {
+            setProjectionMatrixChanged();
+            _projectionMatrix3D.copyFrom(value);
+        }
 
         /** Calculates the product of modelview and projection matrix and stores it in a 3D matrix.
          *  CAUTION: Use with care! Each call returns the same instance. */
         public function get mvpMatrix3D():Matrix3D
         {
             _mvpMatrix3D.copyFrom(_projectionMatrix3D);
-            if (_modelviewMatrix3D) _mvpMatrix3D.prepend(_modelviewMatrix3D);
             _mvpMatrix3D.prepend(MatrixUtil.convertTo3D(_modelviewMatrix, sMatrix3D));
             return _mvpMatrix3D;
         }
@@ -244,7 +232,7 @@ package starling.rendering
          *  @param target     Either a texture or <code>null</code> to render into the back buffer.
          *  @param enableDepthAndStencil  Indicates if depth and stencil testing will be available.
          *                    This parameter affects only texture targets.
-         *  @param antiAlias  The anti-aliasing quality (<code>0</code> meaning: no anti-aliasing).
+         *  @param antiAlias  The anti-aliasing quality (range: <code>0 - 4</code>).
          *                    This parameter affects only texture targets. Note that at the time
          *                    of this writing, AIR supports anti-aliasing only on Desktop.
          */
@@ -254,13 +242,14 @@ package starling.rendering
             var currentTarget:TextureBase = _renderTarget ? _renderTarget.root.getTextureForStage3D(_stage3DProxy) : null;
             var newTarget:TextureBase = target ? target.root.getTextureForStage3D(_stage3DProxy) : null;
             var newOptions:uint = uint(enableDepthAndStencil) | antiAlias << 4;
+            var optionsChange:Boolean = newOptions != (_miscOptions & 0xff);
 
-            if (currentTarget != newTarget || _renderTargetOptions != newOptions)
+            if (currentTarget != newTarget || optionsChange)
             {
                 if (_onDrawRequired != null) _onDrawRequired();
 
                 _renderTarget = target;
-                _renderTargetOptions = newOptions;
+                _miscOptions = (_miscOptions & 0xffffff00) | newOptions;
             }
         }
 
@@ -301,17 +290,32 @@ package starling.rendering
             return _renderTarget ? _renderTarget.root.getTextureForStage3D(_stage3DProxy) : null;
         }
 
+        /** @private */
+        internal function get renderTargetOptions():uint
+        {
+            return _miscOptions & 0xff;
+        }
+
         /** Sets the triangle culling mode. Allows to exclude triangles from rendering based on
          *  their orientation relative to the view plane.
          *  @default Context3DTriangleFace.NONE
          */
-        public function get culling():String { return _culling; }
+        public function get culling():String
+        {
+            var index:int = (_miscOptions & 0xf00) >> 8;
+            return CULLING_VALUES[index];
+        }
+
         public function set culling(value:String):void
         {
-            if (_culling != value)
+            if (this.culling != value)
             {
                 if (_onDrawRequired != null) _onDrawRequired();
-                _culling = value;
+
+                var index:int = CULLING_VALUES.indexOf(value);
+                if (index == -1) throw new ArgumentError("Invalid culling mode");
+
+                _miscOptions = (_miscOptions & 0xfffff0ff) | (index << 8);
             }
         }
 
@@ -344,19 +348,15 @@ package starling.rendering
          *  via <code>setRenderTarget</code>. */
         public function get renderTargetAntiAlias():int
         {
-            return _renderTargetOptions >> 4;
+            return _miscOptions & 0xf;
         }
 
         /** Indicates if the render target (set via <code>setRenderTarget</code>)
          *  has its depth and stencil buffers enabled. */
         public function get renderTargetSupportsDepthAndStencil():Boolean
         {
-            return (_renderTargetOptions & 0xf) != 0;
+            return (_miscOptions & 0xf0) != 0;
         }
-
-        /** Indicates if there have been any 3D transformations.
-         *  Returns <code>true</code> if the 3D modelview matrix contains a value. */
-        public function get is3D():Boolean { return _modelviewMatrix3D != null; }
 
         /** @private
          *

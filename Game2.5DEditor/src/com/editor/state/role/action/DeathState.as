@@ -17,7 +17,6 @@ package com.editor.state.role.action
 	import com.game.engine3D.utils.EffectMethodUtil;
 	import com.game.engine3D.vo.BaseRole;
 
-	import away3d.animators.transitions.CrossfadeTransition;
 	import away3d.materials.methods.CorrodeMethod;
 
 	import gs.TweenLite;
@@ -203,11 +202,11 @@ package com.editor.state.role.action
 				case RenderUnitType.DEPUTY_WEAPON:
 					render.visible = true;
 					render.repeat = 1;
-					render.setStatus(statusType, new CrossfadeTransition(0.2), time);
+					render.setStatus(statusType, 0.2, time);
 					break;
 				case RenderUnitType.MOUNT:
 					render.repeat = 1;
-					render.setStatus(RoleActionType.DIE, new CrossfadeTransition(0.2), time);
+					render.setStatus(RoleActionType.DIE, 0.2, time);
 					break;
 				case RenderUnitType.KNIFE_LIGHT:
 					break;
@@ -234,7 +233,7 @@ package com.editor.state.role.action
 						if (RoleStateUtil.deathStateEffectType == RoleStateUtil.DEATH_STATE_EFFECT_CORRODE)
 						{
 							if (!_corrodeMethodData)
-								GlobalTexture.addTexture(GlobalConfig.getDynTextureFilePath("corrode"), onCorrodeTextureComplete);
+								GlobalTexture.addTexture(GlobalConfig.getDynTextureFilePath("corrode"),0, onCorrodeTextureComplete);
 							_corrodeTween = TweenLite.delayedCall(totalFrameTm * 0.001, onRoleDiedDelay);
 						}
 						else
