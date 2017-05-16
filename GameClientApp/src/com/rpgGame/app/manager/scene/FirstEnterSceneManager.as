@@ -5,7 +5,9 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.manager.MainUIManager;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.TeamManager;
+	import com.rpgGame.app.manager.activity.ActivityBarManager;
 	import com.rpgGame.app.manager.collect.CollectManager;
+	import com.rpgGame.app.manager.hud.ActivityBarManager;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
 	import com.rpgGame.app.manager.society.SocietyManager;
 	import com.rpgGame.app.manager.task.MiXinManager;
@@ -80,7 +82,7 @@ package com.rpgGame.app.manager.scene
 //			CountryWarPrepareManager.setup();
 
 //			MazeManager.firstEnterScene();
-
+//			ActivityBarManager.setup();
 			SocietySender.reqGetSelfFamilyInfo();
 
 			MapUnitDataManager.setup();
