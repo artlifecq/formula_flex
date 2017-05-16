@@ -844,7 +844,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var mapId : int = msg.mapId;
 			MainRoleManager.actorInfo.mapID = mapId;
 			SceneSwitchManager.changeMap();
-			
+			AppManager.closeAllApp();//切换场景关闭所有面板
 		}
 		
 		/**

@@ -265,7 +265,7 @@ package com.game.engine3D.scene.layers
 
 			_heightMapHelper = HeightMapHelper.getInstance(1024, 1024);
 			_mousePickerList = new Vector.<ObjectContainer3D>();
-
+			
 			trace("开始加载地图：" + mapUrl);
 			_loader = new AssetLoader(); //AssetLoader不可以复用。。。@L.L.M.Sunny 20150618
 			addLoaderEvents();
