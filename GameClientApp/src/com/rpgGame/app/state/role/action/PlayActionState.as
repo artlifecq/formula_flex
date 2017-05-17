@@ -8,8 +8,6 @@ package com.rpgGame.app.state.role.action
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
 
-	import away3d.animators.transitions.CrossfadeTransition;
-
 	/**
 	 *
 	 * 场景角色播放动作状态
