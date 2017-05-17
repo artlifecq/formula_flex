@@ -55,10 +55,7 @@ package com.rpgGame.app.controller.keyboard
 						{
 							
 						}*/
-						L.l("--------------------------------------");
-						L.l(point);
-						L.l(areadata.points);
-						L.l(areadata.id+"-----"+MathUtil.pointInArea(areadata.points,point));
+						
 						
 					}
 					
