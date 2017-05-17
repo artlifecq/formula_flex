@@ -730,7 +730,6 @@ package com.rpgGame.app.manager.shell
             SceneManager.addSceneObjToScene(effectRu, true);
             effectRu.play(0);
         }
-<<<<<<< HEAD
         
         private function addMount(on : int) : void {
             var heroData : HeroData = MainRoleManager.actor.data as HeroData;
