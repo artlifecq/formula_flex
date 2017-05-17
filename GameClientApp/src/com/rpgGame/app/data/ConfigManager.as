@@ -21,6 +21,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.ClientSceneRoleCfgData;
 	import com.rpgGame.coreData.cfg.ClientTriggerCfgData;
 	import com.rpgGame.coreData.cfg.DaTiCfgData;
+	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
 	import com.rpgGame.coreData.cfg.DieCfgData;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.cfg.FightsoulData;
@@ -264,6 +265,7 @@ package com.rpgGame.app.data
 			ZoneCfgData.setup(dic[ConfigClassRegister.Q_zone]);
 			LunJianCfg.setup(dic[ConfigClassRegister.Q_lunjian]);
 			ZoneMultyCfgData.setup(dic[ConfigClassRegister.Q_zone_multy]);//多人副本
+			DailyZoneCfgData.setup(dic[ConfigClassRegister.Q_daily_zone]);//日常副本
 		}
 		
 		/**

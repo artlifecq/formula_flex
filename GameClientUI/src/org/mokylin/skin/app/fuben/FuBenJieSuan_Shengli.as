@@ -89,7 +89,7 @@ package org.mokylin.skin.app.fuben
 		private function __FuBenJieSuan_Shengli_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/fuben/fubenjiesuan/shengli.png";
+			temp.styleName = "ui/big_bg/fuben/fubenjiesuan/shengli.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
