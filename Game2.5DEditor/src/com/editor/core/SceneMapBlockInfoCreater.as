@@ -33,7 +33,6 @@ package com.editor.core
 	import app.message.NavMapData.WalkablePolygonData;
 	import app.message.NavMapData.StallPolygonProto.StallPolyGridProto;
 	
-	import away3d.pathFinding.HeightMapHelper;
 	import away3d.pathFinding.PointsSet;
 	
 	import mapProtoV1.app.message.NavMapData_V1;
@@ -75,6 +74,13 @@ package com.editor.core
 					mapData.boundMinY = SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper.worldMinZ;
 					mapData.boundMaxX = SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper.worldMaxX;
 					mapData.boundMaxY = SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper.worldMaxZ;
+                    if (HeightMapHelperProxy.MODE_XY == SceneManager.getInstance().xyzMode) {
+                        mapData.boundMaxY = -SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper.worldMinY;
+                        mapData.boundMinY = -SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper.worldMaxY;
+                    } else if (HeightMapHelperProxy.MODE_XZ == SceneManager.getInstance().xyzMode) {
+                        mapData.boundMaxY = SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper.worldMaxZ;
+                        mapData.boundMinY = SceneManager.getInstance().mainScene.sceneMapLayer.heightMapHelper.worldMinZ;
+                    }
 				}
 
 				var tabel : TabelData = DataStructuresManager.getInstance().getTabel(InternalTabelName.MapDataAreaConfigName);
@@ -168,7 +174,7 @@ package com.editor.core
 			{
 //				if (!SceneBlockManager.getInstance().exportMapArea(exortBlockInfo))
 //				{
-				convertImages(mapData);
+				//convertImages(mapData);
 				exportMapAreas(mapData);
 				exortBlockInfo(mapData, sceneMapBlockVersion);
 //				}
@@ -544,10 +550,10 @@ package com.editor.core
 			if (mapData)
 			{
 				var convert : PowerOfTwoConvert;
-				var miniMapUrl : String = GlobalConfig.getMiniMapName(mapData.mMiniMapRes);
+				var miniMapUrl : String = GlobalConfig.getMiniMapName(/*mapData.mMapRes,*/ mapData.mMiniMapRes);
 				convert = new PowerOfTwoConvert();
 				convert.convert(miniMapUrl);
-				var radarMapUrl : String = GlobalConfig.getRadarMapName(mapData.mRadarMapRes);
+				var radarMapUrl : String = GlobalConfig.getRadarMapName(/*mapData.mMapRes,*/ mapData.mRadarMapRes);
 				convert = new PowerOfTwoConvert();
 				convert.convert(radarMapUrl);
 			}
