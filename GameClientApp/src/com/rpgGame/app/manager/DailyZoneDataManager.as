@@ -45,13 +45,28 @@ package com.rpgGame.app.manager
 			return _allList.getValue(id) as DailyZonePanelInfo;
 		}
 		
-		public function buyCount(info:DailyZonePanelInfo):void
+		public function buyCount(info:DailyZonePanelInfo,isSure:Boolean = false):void
 		{
+			if(info==null)
+				return ;
+			
 			if(info.canBuyCount<=0)
 			{
 				NoticeManager.showNotifyById(4002);
 				return ;
 			}
+			if(isSure)
+			{
+				
+			}else{
+				srueBuyInfo(true,info);
+			}
+		}
+		
+		private function srueBuyInfo(res:Boolean,info:DailyZonePanelInfo):void
+		{
+			if(!res)
+				return;
 			var stat:SpriteStat=MainRoleManager.actorInfo.totalStat;
 			if(info.price<stat.getResData(CharAttributeType.RES_GOLD))
 			{

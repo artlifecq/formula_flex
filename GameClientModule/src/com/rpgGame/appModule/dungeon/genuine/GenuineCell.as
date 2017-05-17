@@ -31,11 +31,11 @@ package com.rpgGame.appModule.dungeon.genuine
 			_skin = new FuBenItem_Zhenqi();
 			_skin.toSprite(this);
 			this.setSize(_skin.width,_skin.height);
-			_fistIcon = FaceUtil.creatIconCDFaceByUIAsset(_skin.iconFirst,IcoSizeEnum.SIZE_60,1,5,5);
+			_fistIcon = FaceUtil.creatIconCDFaceByUIAsset(_skin.iconFirst,IcoSizeEnum.ICON_64,1,5,5);
 			_rewardIcons = new Vector.<IconCDFace>();
-			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_1,IcoSizeEnum.SIZE_40,1,5,5));
-			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_2,IcoSizeEnum.SIZE_40,1,5,5));
-			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_3,IcoSizeEnum.SIZE_40,1,5,5));
+			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_1,IcoSizeEnum.ICON_42,1,5,5));
+			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_2,IcoSizeEnum.ICON_42,1,5,5));
+			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_3,IcoSizeEnum.ICON_42,1,5,5));
 			_skin.btnEnter.addEventListener(Event.TRIGGERED,triggeredHandler);
 		}
 		private function triggeredHandler(e:Event):void

@@ -3,6 +3,7 @@ package com.rpgGame.appModule.dungeon.multy
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.UITableGroup;
 	import com.rpgGame.appModule.dungeon.equip.EquipDungeon;
+	import com.rpgGame.appModule.dungeon.exp.ExpDungeon;
 	import com.rpgGame.appModule.dungeon.genuine.GenuineDungeon;
 	
 	import org.mokylin.skin.app.fuben.FuBen_Skin;
@@ -31,6 +32,7 @@ package com.rpgGame.appModule.dungeon.multy
 			_table.addModePane(new MultyView());
 			_table.addModePane(new EquipDungeon());
 			_table.addModePane(new GenuineDungeon());
+			_table.addModePane(new ExpDungeon());
 		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{

@@ -57,7 +57,7 @@ package com.rpgGame.appModule.dungeon.equip
 				item = new ItemInfo();
 				item.itemModelId = itemInfos[i]["mod"];
 				item.num = itemInfos[i]["num"];
-				icon = FaceUtil.creatIconCDFaceByUIAsset(_skin["ico_"+(i+1)],IcoSizeEnum.SIZE_40,1,5,5)
+				icon = FaceUtil.creatIconCDFaceByUIAsset(_skin["ico_"+(i+1)],IcoSizeEnum.ICON_48,1,5,5)
 				FaceUtil.SetItemGrid(icon,ItemUtil.convertClientItemInfo(item), true);
 			}
 			refeashValue();
