@@ -92,8 +92,7 @@ package com.rpgGame.app.ui.main.shortcut
 			
 			/**初始化构建通用特效，只构建一次*/
 			goEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_SHANGUANG));
-			liannuEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_FENGKUANGLIANNU));
-			nutaEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_TANU_MJ));
+			
 			addResEvent();
 			
 			this.checkDrag=checkDrags;
@@ -293,7 +292,7 @@ package com.rpgGame.app.ui.main.shortcut
 					if(num<NUTAMAX)
 					{
 						
-						if(!turnKey)//弩塔特效在转的话继续转就是了
+						if(!turnKey&&nutaEffect!=null)//弩塔特效在转的话继续转就是了
 						{
 							
 							nutaEffect.playEffect(0,0.2);
@@ -369,20 +368,16 @@ package com.rpgGame.app.ui.main.shortcut
 		override  public function cdUpdate($now : Number, $cdTotal : Number) :void
 		{
 			
-			if (!_cdFace || !_cdFace.parent)
+			if (!cdFace || !cdFace.parent)
 			{
-				
 				addCdFace();
-				
 			}
 			if(!nutaKey)
 			{
-				if(_cdFace)
+				if(cdFace)
 				{
-					_cdFace.updateTimeTxt($now,$cdTotal);
-					
+					cdFace.updateTimeTxt($now,$cdTotal);
 				}
-				
 				if($cdTotal>_now)
 				{
 					_now=$now;
@@ -397,10 +392,7 @@ package com.rpgGame.app.ui.main.shortcut
 						cdEffectIsPlay=true;
 					}
 				}
-				
 			}
-			
-			
 		}
 		
 		private function get nutaKey():Boolean
@@ -450,8 +442,9 @@ package com.rpgGame.app.ui.main.shortcut
 			{
 				recoData=new Array();
 			}
-			setJobLab();
 			setEffect();
+			setJobLab();
+			
 			renderOk=true;
 			setGary();
 		}
@@ -486,6 +479,14 @@ package com.rpgGame.app.ui.main.shortcut
 			else if(playerJod==JobEnum.ROLE_2_TYPE&&playerJod!=readyEffectJod)
 			{
 				readyEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_MJ));
+				if(skillID==FENGKUANGLIANNU)
+				{
+					liannuEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_FENGKUANGLIANNU));
+				}
+				else if(skillID==NUTA)
+				{
+					nutaEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_TANU_MJ));
+				}
 				
 			}
 			else if(playerJod==JobEnum.ROLE_4_TYPE&&playerJod!=readyEffectJod)

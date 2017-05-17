@@ -132,8 +132,13 @@ package com.rpgGame.app.manager.scene
 			onEnterScene();
 		}
 		
+        private static var needLoadCmpCnt : int = 0;
+        private static var onLoadSceneCmpParam : GameScene3D = null;
 		private static function onEnterScene():void
 		{	
+            if (0 != needLoadCmpCnt) {
+                return;
+            }
 			if(_isSameResMap)
 			{
 				onCfgCmp();
@@ -144,6 +149,8 @@ package com.rpgGame.app.manager.scene
 				var mapName : String = ClientConfig.getMapName(_mapRes);
 				var mapDataName : String = ClientConfig.getMapDataName();
 
+                needLoadCmpCnt = 2;
+                onLoadSceneCmpParam = null;
 				Scene.scene.switchScene(
 					curtMapInfo.sceneId,
 					curtMapInfo.mapConfig,null,
@@ -435,35 +442,71 @@ package com.rpgGame.app.manager.scene
 
 		private static function enterSceneSuccessed(scene : GameScene3D) : void
 		{
-			if (SceneManager.clientMapData)
-			{
-				var obstacleAreas : Vector.<ClientMapAreaData> = SceneManager.clientMapData.getObstacleAreas();
-				var mapPointSets : Vector.<MapPointSet> = new Vector.<MapPointSet>();
-				for each (var areaData : ClientMapAreaData in obstacleAreas)
-				{
-					mapPointSets.push(new MapPointSet("MapDataObstacleArea" + areaData.id, areaData.getVector3Ds()));
-				}
-				scene.sceneMapLayer.addObstaclePoints(mapPointSets);
-				AreaMapManager.updateCameraAreaMap();
-				SceneTimeOfTheDayManager.initScene(SceneManager.clientMapData.timeOfTheDayData, scene);
-
-				BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
-			}
-
-			sendSceneLoaded();
+            --needLoadCmpCnt;
+            onLoadSceneCmpParam = scene;
+            onLoadSceneComplete();
+//			if (SceneManager.clientMapData)
+//			{
+//				var obstacleAreas : Vector.<ClientMapAreaData> = SceneManager.clientMapData.getObstacleAreas();
+//				var mapPointSets : Vector.<MapPointSet> = new Vector.<MapPointSet>();
+//				for each (var areaData : ClientMapAreaData in obstacleAreas)
+//				{
+//					mapPointSets.push(new MapPointSet("MapDataObstacleArea" + areaData.id, areaData.getVector3Ds()));
+//				}
+//				scene.sceneMapLayer.addObstaclePoints(mapPointSets);
+//				AreaMapManager.updateCameraAreaMap();
+//				SceneTimeOfTheDayManager.initScene(SceneManager.clientMapData.timeOfTheDayData, scene);
+//
+//				BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
+//			}
+//
+//			sendSceneLoaded();
 		}
 
 		private static function onMapDataComplete(mapData : SceneMapData) : void
 		{
-			if (SceneManager.clientMapData)
-			{
-				var mapUrl : String = ClientConfig.getMap(_mapRes);
-				var miniMapName : String = ClientConfig.getMiniMapName(SceneManager.clientMapData.miniMapRes);
-				SceneManager.getScene().loadMiniMap(mapUrl, miniMapName, SceneManager.clientMapData.miniMapRect, onMiniMapComplete);
-				var radarMapName : String = ClientConfig.getRadarMapName(SceneManager.clientMapData.radarMapRes);
-				SceneManager.getScene().loadRadarMap(mapUrl, radarMapName, SceneManager.clientMapData.radarMapRect, onRadarMapComplete);
-			}
+            --needLoadCmpCnt;
+            onLoadSceneComplete();
+//			if (SceneManager.clientMapData)
+//			{
+//				var mapUrl : String = ClientConfig.getMap(_mapRes);
+//				var miniMapName : String = ClientConfig.getMiniMapName(SceneManager.clientMapData.miniMapRes);
+//				SceneManager.getScene().loadMiniMap(mapUrl, miniMapName, SceneManager.clientMapData.miniMapRect, onMiniMapComplete);
+//				var radarMapName : String = ClientConfig.getRadarMapName(SceneManager.clientMapData.radarMapRes);
+//				SceneManager.getScene().loadRadarMap(mapUrl, radarMapName, SceneManager.clientMapData.radarMapRect, onRadarMapComplete);
+//			}
 		}
+        
+        private static function onLoadSceneComplete() : void {
+            if (0 != needLoadCmpCnt) {
+                return;
+            }
+            if (SceneManager.clientMapData)
+            {
+                var obstacleAreas : Vector.<ClientMapAreaData> = SceneManager.clientMapData.getObstacleAreas();
+                var mapPointSets : Vector.<MapPointSet> = new Vector.<MapPointSet>();
+                for each (var areaData : ClientMapAreaData in obstacleAreas)
+                {
+                    mapPointSets.push(new MapPointSet("MapDataObstacleArea" + areaData.id, areaData.getVector3Ds()));
+                }
+                onLoadSceneCmpParam.sceneMapLayer.addObstaclePoints(mapPointSets);
+                AreaMapManager.updateCameraAreaMap();
+                SceneTimeOfTheDayManager.initScene(SceneManager.clientMapData.timeOfTheDayData, onLoadSceneCmpParam);
+                
+                BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
+            }
+            
+            if (SceneManager.clientMapData)
+            {
+                var mapUrl : String = ClientConfig.getMap(_mapRes);
+                var miniMapName : String = ClientConfig.getMiniMapName(SceneManager.clientMapData.miniMapRes);
+                SceneManager.getScene().loadMiniMap(mapUrl, miniMapName, SceneManager.clientMapData.miniMapRect, onMiniMapComplete);
+                var radarMapName : String = ClientConfig.getRadarMapName(SceneManager.clientMapData.radarMapRes);
+                SceneManager.getScene().loadRadarMap(mapUrl, radarMapName, SceneManager.clientMapData.radarMapRect, onRadarMapComplete);
+            }
+            
+            sendSceneLoaded();
+        }
 
 		private static function onMiniMapComplete(scene : GameScene3D) : void
 		{
