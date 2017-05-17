@@ -369,20 +369,16 @@ package com.rpgGame.app.ui.main.shortcut
 		override  public function cdUpdate($now : Number, $cdTotal : Number) :void
 		{
 			
-			if (!_cdFace || !_cdFace.parent)
+			if (!cdFace || !cdFace.parent)
 			{
-				
 				addCdFace();
-				
 			}
 			if(!nutaKey)
 			{
-				if(_cdFace)
+				if(cdFace)
 				{
-					_cdFace.updateTimeTxt($now,$cdTotal);
-					
+					cdFace.updateTimeTxt($now,$cdTotal);
 				}
-				
 				if($cdTotal>_now)
 				{
 					_now=$now;
@@ -397,10 +393,7 @@ package com.rpgGame.app.ui.main.shortcut
 						cdEffectIsPlay=true;
 					}
 				}
-				
 			}
-			
-			
 		}
 		
 		private function get nutaKey():Boolean

@@ -113,7 +113,7 @@ package org.mokylin.skin.app.beibao
 		private function __cangku_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/fengexian.png";
+			temp.styleName = "ui/common/fenyexian.png";
 			temp.width = 348;
 			temp.x = 8;
 			temp.y = 343;
@@ -123,7 +123,7 @@ package org.mokylin.skin.app.beibao
 		private function __cangku_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/fengexian.png";
+			temp.styleName = "ui/common/fenyexian.png";
 			temp.width = 348;
 			temp.x = 8;
 			temp.y = 382;

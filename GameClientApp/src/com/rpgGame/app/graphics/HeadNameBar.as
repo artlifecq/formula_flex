@@ -3,7 +3,7 @@ package com.rpgGame.app.graphics
 	import com.game.engine3D.core.poolObject.IInstancePoolClass;
 	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.rpgGame.coreData.utils.ColorUtils;
-
+	
 	import feathers.controls.Label;
 	import feathers.controls.text.Fontter;
 
@@ -17,7 +17,8 @@ package com.rpgGame.app.graphics
 	public class HeadNameBar extends Label implements IInstancePoolClass
 	{
 		private static var headNameBarPool : InstancePool = new InstancePool("HeadNameBar", 300);
-
+		private var _isDestroyed : Boolean;
+		private var _isDisposed : Boolean;
 		/**
 		 * 生成一个HeadNameBar
 		 */
@@ -41,6 +42,7 @@ package com.rpgGame.app.graphics
 		public function HeadNameBar()
 		{
 			super();
+			_isDestroyed = false;
 			reSet(null);
 			touchable = touchGroup = false;
 			touchAcross = true;
@@ -78,6 +80,7 @@ package com.rpgGame.app.graphics
 
 		public function reSet($parameters : Array) : void
 		{
+			_isDisposed = false;
 			htmlText = "";
 			fontName = Fontter.FONT_Hei;
 			fontSize = 14;
@@ -93,12 +96,25 @@ package com.rpgGame.app.graphics
 		{
 			instanceDispose();
 			dispose();
+			_isDestroyed = true;
 		}
 
 		public function instanceDispose() : void
 		{
 			if (parent)
 				parent.removeChild(this);
+			_isDisposed = true;
 		}
+		
+		public function get isDestroyed():Boolean
+		{
+			return _isDestroyed;
+		}
+		
+		public function get isDisposed():Boolean
+		{
+			return _isDisposed;
+		}
+		
 	}
 }

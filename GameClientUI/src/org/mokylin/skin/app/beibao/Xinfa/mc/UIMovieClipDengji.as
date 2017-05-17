@@ -17,12 +17,21 @@ package org.mokylin.skin.app.beibao.Xinfa.mc
 		{
 			super();
 			
-			this.currentState = "10";
+			this.currentState = "5";
 			this.elementsContent = [];
 			
 			states = {
 			};
-			skinNames={"10":"ui/app/beibao/xinfa/mc/dengji/10.png"};
+			skinNames={"1":"ui/app/beibao/xinfa/mc/dengji/1.png",
+			"10":"ui/app/beibao/xinfa/mc/dengji/10.png",
+			"2":"ui/app/beibao/xinfa/mc/dengji/2.png",
+			"3":"ui/app/beibao/xinfa/mc/dengji/3.png",
+			"4":"ui/app/beibao/xinfa/mc/dengji/4.png",
+			"5":"ui/app/beibao/xinfa/mc/dengji/5.png",
+			"6":"ui/app/beibao/xinfa/mc/dengji/6.png",
+			"7":"ui/app/beibao/xinfa/mc/dengji/7.png",
+			"8":"ui/app/beibao/xinfa/mc/dengji/8.png",
+			"9":"ui/app/beibao/xinfa/mc/dengji/9.png"};
 		}
 
 

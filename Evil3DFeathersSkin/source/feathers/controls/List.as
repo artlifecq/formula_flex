@@ -29,7 +29,8 @@ package feathers.controls
 	import starling.events.Event;
 	import starling.events.KeyboardEvent;
 	import starling.utils.Pool;
-	import starling.utils.callLater;
+	
+	import utils.TimerServer;
 
 	/**
 	 * Dispatched when the selected item changes.
@@ -1349,13 +1350,14 @@ package feathers.controls
 		override public function scrollToPosition(horizontalScrollPosition:Number, verticalScrollPosition:Number, animationDuration:Number = NaN):void
 		{
 			this.pendingItemIndex = -1;
+			TimerServer.remove(__scrollToBottom);
 			super.scrollToPosition(horizontalScrollPosition, verticalScrollPosition, animationDuration);
 		}
 		
 		public function scrollToBottom(animationDuration:Number = 0.2):void
 		{
 			this.pendingItemIndex = -1;
-			callLater(__scrollToBottom, [animationDuration], 1);
+			TimerServer.callAfterFrame(__scrollToBottom,1,  [animationDuration]);
 		}
 		
 		private function __scrollToBottom(animationDuration:Number = 0.2):void

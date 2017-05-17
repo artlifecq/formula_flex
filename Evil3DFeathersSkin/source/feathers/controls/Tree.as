@@ -33,6 +33,7 @@ package feathers.controls
 		{
 			if(_nodeList == null)_nodeList = new Vector.<TreeNode>();
 			_nodeList.length = 0;
+			_lastSelectedNode = selectedItem as TreeNode;
 			if(!_rootNode.expanded)_rootNode.expanded = true;
 			findAllExpandedNode(_rootNode);
 			return _nodeList;
@@ -84,12 +85,18 @@ package feathers.controls
 			
 			for(i=oldLen; i>len; i--)
 				dataProvider.removeItemAt(i-1);
+			
+			if(_nodeList.indexOf(_lastSelectedNode) != -1)
+			{
+				selectedItem = _lastSelectedNode;
+			}
 		}
 		
 		/**
 		 * 记录最后一次最选中的叶节点 
 		 */		
 		private var _lastSelectedLeafNode:TreeNode;
+		private var _lastSelectedNode:TreeNode;
 		override public function set selectedItem(value:Object):void
 		{
 			super.selectedItem = value;

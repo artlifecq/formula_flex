@@ -223,8 +223,10 @@ package com.rpgGame.app.manager.chat
 			notify(CHAT_SYSTEM, $msg, textArgs);
 		}
 		
-		
-		
+		public static function marqueeNotify($msg:String, textArgs:Array=null):void
+		{
+			notify(SYSTEM_ROLL, $msg, textArgs);
+		}
 		
 		/**
 		 * 测试用的，别拿去用。

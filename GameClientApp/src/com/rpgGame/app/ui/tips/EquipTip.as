@@ -9,6 +9,7 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.item.EquipPolishCfg;
 	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
@@ -148,11 +149,11 @@ package com.rpgGame.app.ui.tips
 			}
 			
 			if(_itemInfo.qItem.q_level==0){
-				name=HtmlTextUtil.getTextColor(0xCFC6AE,"无限制");
+				name=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,"无限制");
 			}else if(info.totalStat.level>=_itemInfo.qItem.q_level){
-				name=HtmlTextUtil.getTextColor(0xCFC6AE,_itemInfo.qItem.q_level+"级");
+				name=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,_itemInfo.qItem.q_level+"级");
 			}else{
-				name=HtmlTextUtil.getTextColor(0xE1201C,_itemInfo.qItem.q_level+"级");
+				name=HtmlTextUtil.getTextColor(StaticValue.UI_SPECIAL_RED,_itemInfo.qItem.q_level+"级");
 			}
 			_itemTip.lbl_xuqiu.htmlText=name;
 			_itemTip.lbl_zhiye.text=ItemUtil.getJobName(_itemInfo.qItem.q_job);
@@ -165,9 +166,9 @@ package com.rpgGame.app.ui.tips
 				_itemTip.lbl_qianghua.text=_itemInfo.strengthLevel+"/"+_itemInfo.qItem.q_max_strengthen;
 				_itemTip.lbl_qianghua.y=_itemTip.lbl_qianghuatitle.y=170;
 				if(_itemInfo.strengthLevel<_itemInfo.qItem.q_max_strengthen){
-					_itemTip.lbl_qianghua.color=0x6BCC08;
+					_itemTip.lbl_qianghua.color=StaticValue.UI_GREEN;
 				}else{
-					_itemTip.lbl_qianghua.color=0xE1201C;
+					_itemTip.lbl_qianghua.color=StaticValue.UI_SPECIAL_RED;
 				}
 			}else{
 				_itemTip.lbl_qianghuatitle.visible=false;
@@ -201,7 +202,7 @@ package com.rpgGame.app.ui.tips
 			var curY:int=170;
 			var num:int=0;
 			var ids:Array=CharAttributeType.baseAttrIdArr;
-			name=HtmlTextUtil.getTextColor(0xCFC6AE,"[基础属性]\n");
+			name=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,"[基础属性]\n");
 			label=createLabel(name,"");
 			label.x=10;
 			label.y=curY;
@@ -217,14 +218,14 @@ package com.rpgGame.app.ui.tips
 				num++;
 				name=CharAttributeType.getCNName(type);
 				
-				name=HtmlTextUtil.getTextColor(0x8B8D7B,name+":");
-				value=HtmlTextUtil.getTextColor(0xCFC6AE,AttValueConfig.getDisAttValueStr(type,attValue));
+				name=HtmlTextUtil.getTextColor(StaticValue.UI_NORMAL,name+":");
+				value=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,AttValueConfig.getDisAttValueStr(type,attValue));
 				label=createLabel(name,value);
 				label.x=10;
 				label.y=curY;
 				var sten:Number=map2.getValue(type);
 				if(sten!=0){
-					value=HtmlTextUtil.getTextColor(0x5CB006,"    (强化+"+AttValueConfig.getDisAttValueStr(type,sten)+")");
+					value=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,"    (强化+"+AttValueConfig.getDisAttValueStr(type,sten)+")");
 					label=createLabel("",value);
 					label.x=123;
 					label.y=curY;
@@ -235,18 +236,18 @@ package com.rpgGame.app.ui.tips
 			//琢磨等级
 			createLine(10,curY,260);
 			curY+=10;
-			name=HtmlTextUtil.getTextColor(0xCFC6AE,"琢磨等级:");
-			value=HtmlTextUtil.getTextColor(0x5CB006,_itemInfo.polishLevel+"");
+			name=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,"琢磨等级:");
+			value=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,_itemInfo.polishLevel+"");
 			label=createLabel(name,value);
 			label.x=10;
 			label.y=curY;
 			curY=curY+label.height+5;
 			if(_itemInfo.polishLevel==0){
-				name=HtmlTextUtil.getTextColor(0xE1201C,"未激活");
+				name=HtmlTextUtil.getTextColor(StaticValue.UI_SPECIAL_RED,"未激活");
 			}else{
 				var cfg:Q_equip_polish=EquipPolishCfg.getPolishCfg(_itemInfo.polishLevel);
-				name=HtmlTextUtil.getTextColor(0xCFC6AE,"装备基础属性提升:");
-				value=HtmlTextUtil.getTextColor(0x5CB006,(cfg.q_promote/100).toFixed(1)+"%");
+				name=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,"装备基础属性提升:");
+				value=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,(cfg.q_promote/100).toFixed(1)+"%");
 				label=createLabel(name,value);
 				label.x=10;
 				label.y=curY;
@@ -256,16 +257,16 @@ package com.rpgGame.app.ui.tips
 			//洗练属性
 			createLine(10,curY,260);
 			curY+=10;
-			name=HtmlTextUtil.getTextColor(0xCFC6AE,"[洗炼属性]\n");
+			name=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,"[洗炼属性]\n");
 			label=createLabel(name,"");
 			label.x=10;
 			label.y=curY;
 			curY=curY+label.height+5;
-			name=HtmlTextUtil.getTextColor(0x8B8D7B,"");
+			name=HtmlTextUtil.getTextColor(StaticValue.UI_NORMAL,"");
 			if(_itemInfo.smeltAtt1!=0){
 				value=CharAttributeType.getWashAttDes(_itemInfo.smeltAtt1);
 			}else{
-				value=HtmlTextUtil.getTextColor(0xD02525,"未激活");
+				value=HtmlTextUtil.getTextColor(StaticValue.UI_SPECIAL_RED,"未激活");
 			}
 			label=createLabel(name,value);
 			label.x=10;
@@ -274,7 +275,7 @@ package com.rpgGame.app.ui.tips
 			if(_itemInfo.smeltAtt2!=0){
 				value=CharAttributeType.getWashAttDes(_itemInfo.smeltAtt2);
 			}else{
-				value=HtmlTextUtil.getTextColor(0xD02525,"未激活");
+				value=HtmlTextUtil.getTextColor(StaticValue.UI_SPECIAL_RED,"未激活");
 			}
 			label=createLabel(name,value);
 			label.x=10;
@@ -283,7 +284,7 @@ package com.rpgGame.app.ui.tips
 			
 			createLine(10,curY,260);
 			curY+=10;
-			name=HtmlTextUtil.getTextColor(0xCFC6AE,"[装备产出]\n");
+			name=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,"[装备产出]\n");
 			label=createLabel(name,_itemInfo.qItem.q_output);
 			label.width=250;
 			label.leading=5;
@@ -293,8 +294,8 @@ package com.rpgGame.app.ui.tips
 			curY=curY+label.height+5;
 			createLine(10,curY,260);
 			
-			name=HtmlTextUtil.getTextColor(0x8B8D7B,"售价:");
-			value=HtmlTextUtil.getTextColor(0x5CB006,"     "+_itemInfo.qItem.q_sell_price.toString());
+			name=HtmlTextUtil.getTextColor(StaticValue.UI_NORMAL,"售价:");
+			value=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,"     "+_itemInfo.qItem.q_sell_price.toString());
 			_itemTip.container.addChild(yinIcon);
 			label=createLabel(name,value);
 			curY=curY+5
@@ -336,11 +337,11 @@ package com.rpgGame.app.ui.tips
 						continue;						
 					}
 					var valueName:String= CharAttributeType.getCNName(type);
-					name=HtmlTextUtil.getTextColor(0xCFC6AE,valueName+":");
+					name=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,valueName+":");
 					if(change>=0){
-						value=HtmlTextUtil.getTextColor(0x5CB006,"+"+change.toString());
+						value=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,"+"+change.toString());
 					}else{
-						value=HtmlTextUtil.getTextColor(0xE1201C,change.toString());
+						value=HtmlTextUtil.getTextColor(StaticValue.UI_SPECIAL_RED,change.toString());
 					}
 					
 					label=createLabel(name,value);

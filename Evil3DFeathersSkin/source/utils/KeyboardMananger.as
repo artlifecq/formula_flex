@@ -2,7 +2,6 @@ package utils
 {
 	import flash.display.Stage;
 	import flash.events.Event;
-	import flash.events.FocusEvent;
 	import flash.events.KeyboardEvent;
 	
 	/**
@@ -15,17 +14,18 @@ package utils
 		{
 			stage.addEventListener(KeyboardEvent.KEY_DOWN,onKeyDown,true,2000);
 			stage.addEventListener(KeyboardEvent.KEY_UP,onKeyUp,true,2000);
-			stage.addEventListener(FocusEvent.FOCUS_OUT,onDeactive);
+			stage.addEventListener(Event.DEACTIVATE,onDeactive);
+			downKeyCodes = {};
 		}
 		
 		private function onDeactive(event:Event):void
 		{
-			downKeyCodes = [];
+			downKeyCodes = {};
 		}
 		/**
 		 * 按下的键代码列表
 		 */		
-		private static var downKeyCodes:Array = [];
+		private static var downKeyCodes:Object;
 		
 		private function onKeyDown(event:KeyboardEvent):void
 		{
@@ -41,7 +41,7 @@ package utils
 		
 		public static function isKeyDown(keyCode:uint):Boolean
 		{
-			return Boolean(downKeyCodes[keyCode]);
+			return (keyCode in downKeyCodes) && Boolean(downKeyCodes[keyCode]);
 		}
 	}
 }

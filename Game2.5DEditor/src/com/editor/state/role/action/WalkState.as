@@ -8,8 +8,6 @@ package com.editor.state.role.action
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.vo.BaseRole;
 
-	import away3d.animators.transitions.CrossfadeTransition;
-
 	/**
 	 *
 	 * 场景角色行走状态
@@ -63,13 +61,13 @@ package com.editor.state.role.action
 				case RenderUnitType.DEPUTY_WEAPON:
 					render.visible = true;
 					render.repeat = 0;
-					render.setStatus(statusType, new CrossfadeTransition(0.2), time, speedRatio);
+					render.setStatus(statusType, 0.2, time, speedRatio);
 					if (isFreeze)
 						render.stop(time);
 					break;
 				case RenderUnitType.MOUNT:
 					render.repeat = 0;
-					render.setStatus(RoleActionType.WALK, new CrossfadeTransition(0.2), time, speedRatio);
+					render.setStatus(RoleActionType.WALK, 0.2, time, speedRatio);
 					if (isFreeze)
 						render.stop(time);
 					break;

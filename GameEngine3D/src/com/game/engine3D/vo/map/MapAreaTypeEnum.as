@@ -1,6 +1,7 @@
 package com.game.engine3D.vo.map
 {
-
+	import flash.utils.Dictionary;
+	
 	/**
 	 *
 	 * 地图区域类型
@@ -46,7 +47,38 @@ package com.game.engine3D.vo.map
 		 * 摆摊区域（重叠：技能禁止区域）
 		 */
 		public static const STALL : int = 8;
-
+		/**
+		 * 游泳区域
+		 */
+		public static const SWIM : int = 9;
+		/**
+		 * 音频区域
+		 */
+		public static const SOUND : int = 10;
+		
+		public static var nameByType : Dictionary = new Dictionary();
+		nameByType[CUSTOM] = "自定义区域";
+		nameByType[OBSTACLE] = "固定障碍区域";
+		nameByType[ATHLETICS] = "竞技区域";
+		nameByType[EVENT] = "事件区域";
+		nameByType[DYNAMIC_OBSTACLE] = "动态障碍区域";
+		nameByType[CAMERA_PROPERTY] = "摄像头属性区域";
+		nameByType[SAFE] = "安全区域";
+		nameByType[SPELL_FORBID] = "技能禁止区域";
+		nameByType[STALL] = "摆摊区域";
+		nameByType[SWIM] = "游泳区域";
+		nameByType[SOUND] = "音频区域";
+		
+		public static function getTypeList() : Array
+		{
+			var types : Array = [];
+			for (var type : * in nameByType)
+			{
+				types.push({type: type, name: nameByType[type]});
+			}
+			return types;
+		}
+		
 		public function MapAreaTypeEnum()
 		{
 		}

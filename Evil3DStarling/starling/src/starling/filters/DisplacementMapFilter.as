@@ -54,7 +54,7 @@ package starling.filters
         }
 
         /** @private */
-        override public function process(painter:Painter, pool:IFilterHelper,
+        override public function process(painter:Painter, pool:FilterHelper,
                                          input0:IStarlingTexture = null, input1:IStarlingTexture = null,
                                          input2:IStarlingTexture = null, input3:IStarlingTexture = null):IStarlingTexture
         {
@@ -187,14 +187,16 @@ import flash.display.BitmapDataChannel;
 import flash.display3D.Context3DProgramType;
 import flash.geom.Matrix3D;
 
+import away3d.arcane;
 import away3d.core.managers.Stage3DProxy;
 
 import starling.core.Starling;
 import starling.rendering.FilterEffect;
-import starling.rendering.Program;
+import starling.rendering.ProgramNameID;
 import starling.rendering.VertexDataFormat;
 import starling.textures.IStarlingTexture;
-import starling.utils.RenderUtil;
+
+use namespace arcane;
 
 class DisplacementMapEffect extends FilterEffect
 {
@@ -218,41 +220,59 @@ class DisplacementMapEffect extends FilterEffect
         _componentX = _componentY = 0;
         _scaleX = _scaleY = 0;
     }
-
-    override protected function createProgram():Program
-    {
-        if (_mapTexture)
-        {
-            // vc0-3: mvpMatrix
-            // va0:   vertex position
-            // va1:   input texture coords
-            // va2:   map texture coords
-
-            var vertexShader:String = [
-                "m44  op, va0, vc0", // 4x4 matrix transform to output space
-                "mov  v0, va1",      // pass input texture coordinates to fragment program
-                "mov  v1, va2"       // pass map texture coordinates to fragment program
-            ].join("\n");
-
-            // v0:    input texCoords
-            // v1:    map texCoords
-            // fc0:   offset (0.5, 0.5)
-            // fc1-4: matrix
-
-            var fragmentShader:String = [
-                tex("ft0", "v1", 1, _mapTexture, false), // read map texture
-                "sub ft1, ft0, fc0",          // subtract 0.5 -> range [-0.5, 0.5]
-                "mul ft1.xy, ft1.xy, ft0.ww", // zero displacement when alpha == 0
-                "m44 ft2, ft1, fc1",          // multiply matrix with displacement values
-                "add ft3,  v0, ft2",          // add displacement values to texture coords
-                tex("oc", "ft3", 0, texture)  // read input texture at displaced coords
-            ].join("\n");
-
-            return Program.fromSource(vertexShader, fragmentShader);
-        }
-        else return super.createProgram();
-    }
-
+	
+	override protected function get programVariantName():uint
+	{
+		return super.programVariantName | (_mapTexture ? 1 << 4 : 0);
+	}
+	
+	override protected function get programBaseName():uint 
+	{ 
+		return ProgramNameID.DISPLACEMENT_MAP_FILTER;
+	}
+	
+	override arcane function getVertexCode():String
+	{
+		if (_mapTexture)
+		{
+			// vc0-3: mvpMatrix
+			// va0:   vertex position
+			// va1:   input texture coords
+			// va2:   map texture coords
+			
+			var vertexCode:String = [
+				"m44  op, va0, vc0", // 4x4 matrix transform to output space
+				"mov  v0, va1",      // pass input texture coordinates to fragment program
+				"mov  v1, va2"       // pass map texture coordinates to fragment program
+			].join("\n");
+			
+			return vertexCode;
+		}
+		else return super.getVertexCode();
+	}
+	
+	override arcane function getFragmentCode():String
+	{
+		if (_mapTexture)
+		{
+			// v0:    input texCoords
+			// v1:    map texCoords
+			// fc0:   offset (0.5, 0.5)
+			// fc1-4: matrix
+			
+			var fragmentCode:String = [
+				tex("ft0", "v1", 1, _mapTexture, false), // read map texture
+				"sub ft1, ft0, fc0",          // subtract 0.5 -> range [-0.5, 0.5]
+				"mul ft1.xy, ft1.xy, ft0.ww", // zero displacement when alpha == 0
+				"m44 ft2, ft1, fc1",          // multiply matrix with displacement values
+				"add ft3,  v0, ft2",          // add displacement values to texture coords
+				tex("oc", "ft3", 0, texture)  // read input texture at displaced coords
+			].join("\n");
+			return fragmentCode;
+		}
+		else return super.getFragmentCode();
+	}
+	
     override protected function beforeDraw(stage3DProxy:Stage3DProxy):void
     {
         super.beforeDraw(stage3DProxy);
@@ -337,5 +357,8 @@ class DisplacementMapEffect extends FilterEffect
     public function set scaleY(value:Number):void { _scaleY = value; }
 
     public function get mapTexture():IStarlingTexture { return _mapTexture; }
-    public function set mapTexture(value:IStarlingTexture):void { _mapTexture = value; }
+    public function set mapTexture(value:IStarlingTexture):void
+	{ 
+		_mapTexture = value;
+	}
 }

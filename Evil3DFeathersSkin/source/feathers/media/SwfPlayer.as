@@ -1,13 +1,19 @@
 package feathers.media
 {
 	import flash.display.BitmapData;
+	import flash.display.Loader;
+	import flash.display.LoaderInfo;
 	import flash.display.MovieClip;
 	import flash.display3D.Context3D;
+	import flash.events.IOErrorEvent;
 	import flash.geom.Point;
+	import flash.system.ApplicationDomain;
+	import flash.system.LoaderContext;
+	import flash.utils.ByteArray;
 	
-	import away3d.loaders.multi.MultiDobjLoadManager;
-	import away3d.loaders.multi.MultiDobjLoader;
 	import away3d.loaders.multi.MultiLoadData;
+	import away3d.loaders.multi.MultiUrlLoadManager;
+	import away3d.loaders.multi.MultiUrlLoader;
 	
 	import feathers.themes.GuiTheme;
 	
@@ -49,7 +55,6 @@ package feathers.media
 		private var _isPlaying:Boolean;
 		private var _isPause:Boolean;
 		
-		private var ld:MultiLoadData;
 		private var _isLoading:Boolean = false;
 		
 		/**
@@ -97,7 +102,6 @@ package feathers.media
 			}
 		}
 		
-		
 		public function play(url:String, decode:Function = null):void
 		{
 			if(GuiTheme.isErrorStr(url))return;
@@ -113,15 +117,40 @@ package feathers.media
 			}else if(!_isLoading)
 			{
 				_isLoading = true;
-				ld = new MultiLoadData(_url,onLoadComplete,null,onIoError,"","",0,MultiLoadData.LOADER_DISPLAYOBJECT,decode);
-				MultiDobjLoadManager.load(ld);
+				var ld:MultiLoadData = new MultiLoadData(_url,onLoadUrlComplete,null,onIoError,"","",0,MultiLoadData.URLLOADER_BINARY,decode);
+				MultiUrlLoadManager.load(ld);
 			}
 		}
 		
-		private function onLoadComplete(ld:MultiLoadData, e:*):void
+		private function onLoadUrlComplete(ld:MultiLoadData, e:*):void
 		{
-			var loader:MultiDobjLoader = e.currentTarget as MultiDobjLoader;
-			var targetDis:MovieClip = loader.loaderInfo.content as MovieClip;
+			var multiLoader:MultiUrlLoader = e.target as MultiUrlLoader;
+			var fileBytes:ByteArray = multiLoader.data as ByteArray;
+			var loader:Loader = new Loader();
+			loader.contentLoaderInfo.addEventListener(flash.events.Event.COMPLETE, onLoaderLoadBytesComplete);
+			var loaderContext:LoaderContext = new LoaderContext(false,ApplicationDomain.currentDomain);
+			if(loaderContext.hasOwnProperty("allowCodeImport"))
+			{
+				loaderContext["allowCodeImport"] = true; 
+			}
+			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,onIOError);
+			loader.loadBytes(fileBytes,loaderContext);
+		}
+		
+		private function onIOError(event:IOErrorEvent):void
+		{
+			trace("SwfPlayer:loadBytes Error!:",event.text);
+		}
+		
+		private function onLoaderLoadBytesComplete(event:*):void
+		{
+			var loaderInfo:LoaderInfo = event.target as LoaderInfo;
+			var targetDis:MovieClip = loaderInfo ? loaderInfo.content as MovieClip : null;
+			if(!targetDis)
+			{
+				trace("SwfPlayer:contentLoaderInfo.content Error! MovieClip  is invalid!!!");
+				return;
+			}
 			if(targetDis.totalFrames > 1)
 			{
 				_swfVideo = targetDis;
@@ -156,7 +185,7 @@ package feathers.media
 			this.dispatchEventWith(Event.READY);
 		}
 		
-		private function onIoError(ld:MultiLoadData, e:Event):void
+		private function onIoError(ld:MultiLoadData, e:*):void
 		{
 			trace("onIoError", ld.url);
 			this.dispatchEventWith(Event.IO_ERROR);
@@ -165,7 +194,7 @@ package feathers.media
 		public function cancelLoad():void
 		{
 			_isLoading = false;
-			MultiDobjLoadManager.cancelLoadByUrl(_url);
+			MultiUrlLoadManager.cancelLoadByUrl(_url);
 			this.dispatchEventWith(Event.CANCEL);
 		}
 		
@@ -206,7 +235,7 @@ package feathers.media
 		private function renderNextFrame():void
 		{
 			var context:Context3D = Starling.current.context;
-			if(!_swfVideo || context == null || context.profile == null || context.driverInfo == "Disposed")return;
+			if(!_swfVideo || context == null || context.driverInfo == "Disposed")return;
 			var i:int = TimerServer.loopCount(renderNextFrame)%_swfVideo.totalFrames;
 			
 			//视频mc有个bug,即play()之后,isPlaying为true,但是currentFrame一直为1,直到再次调用play()
@@ -308,7 +337,6 @@ package feathers.media
 			_swfVideoBmd = null;
 			_swfVideo = null;
 			_url = null;
-			ld = null;
 		}
 		
 	}

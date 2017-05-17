@@ -24,6 +24,7 @@ package com.game.engine2D.core
 		
 		/** 是否正在解析bpg */
 		private var _bpgParsed:Boolean = false;
+		private var _index:int;
 		
 		public function BPGTextureMaterial(texture:BPGByteTexture)
 		{
@@ -35,10 +36,25 @@ package com.game.engine2D.core
 			this.colorTransform = new ColorTransform();
 		}
 		
+		public function set index(value:int):void
+		{
+			_index = value;
+		}
+		
+		public function get index():int
+		{
+			return _index;
+		}
+		
 		public function get textureReady():Boolean
 		{
 			return !_bpgParsed;
 		}
+		
+//		override public function get isDefaultTexture():Boolean
+//		{
+//			return _bpgParsed;
+//		}
 		
 		public function uploadTexture():void
 		{
@@ -127,7 +143,7 @@ package com.game.engine2D.core
 			super.copyFrom(material);
 		}
 		
-		public function clone():TextureMaterial
+		public function clone():ITextureMaterial
 		{
 			var texture:BPGTextureMaterial = new BPGTextureMaterial(_bpgTexture);
 			if (!_bpgTexture.isParseBgraData){
@@ -137,6 +153,10 @@ package com.game.engine2D.core
 			texture.writeDepth = this.writeDepth;
 			texture.bothSides = this.bothSides;
 			texture.blendMode = this.blendMode;
+			texture.depthCompareMode = this.depthCompareMode;
+			texture.alphaThreshold = this.alphaThreshold;
+			texture.index = this.index;
+			texture.name = this.name + "-copy";
 			return texture;
 		}
 		

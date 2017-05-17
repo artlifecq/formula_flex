@@ -10,8 +10,6 @@ package com.editor.state.role.action
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.vo.BaseRole;
 	
-	import away3d.animators.transitions.CrossfadeTransition;
-	
 	import gs.TweenLite;
 
 	/**
@@ -137,13 +135,13 @@ package com.editor.state.role.action
 				case RenderUnitType.DEPUTY_WEAPON:
 					render.visible = true;
 					render.repeat = 1;
-					render.setStatus(matchStatus, new CrossfadeTransition(0.2), time, speedRatio);
+					render.setStatus(matchStatus, 0.2, time, speedRatio);
 					if (isFreeze)
 						render.stop(time);
 					break;
 				case RenderUnitType.MOUNT:
 					render.repeat = 1;
-					render.setStatus(status, new CrossfadeTransition(0.2), time, speedRatio);
+					render.setStatus(status, 0.2, time, speedRatio);
 					if (isFreeze)
 						render.stop(time);
 					break;

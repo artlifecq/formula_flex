@@ -62,7 +62,7 @@ package com.game.engine3D.vo
 				}
 				if (_syncVisible)
 				{
-					ObjectContainer3D(_obj).visible = initiator.graphicDis.parent;
+					ObjectContainer3D(_obj).visible = initiator.graphicDis.parent != null;
 				}
 				ObjectContainer3D(_obj).sceneTransform; //执行变换 
 			}
@@ -84,13 +84,17 @@ package com.game.engine3D.vo
 					}
 					if (_syncVisible)
 					{
-						BaseObj3D(_obj).visible = initiator.graphicDis.parent;
+						BaseObj3D(_obj).visible = initiator.graphicDis.parent != null;
 					}
 				}
 			}
 			else if (_obj is IBindable)
 			{
 				IBindable(_obj).updateTranform();
+			}
+			else if (_obj is IBaseObjSync)
+			{
+				IBaseObjSync(_obj).syncInfo(initiator, position, rotation, initiator.graphicDis.parent != null);
 			}
 		}
 		

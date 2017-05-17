@@ -21,6 +21,7 @@ package feathers.core
 	import feathers.layout.ILayoutData;
 	import feathers.layout.ILayoutDisplayObject;
 	import feathers.skins.IStyleProvider;
+	import feathers.themes.GuiThemeStyle;
 	import feathers.utils.display.getDisplayObjectDepthFromStage;
 	import feathers.utils.display.stageToStarling;
 	
@@ -325,7 +326,7 @@ package feathers.core
 				defautStyleClassParseFunction(this, value);
 			}else
 			{
-				styleName = getQualifiedClassName(value).replace("::", ".");
+				styleName = GuiThemeStyle.getQName(value);
 			}
 		}
 

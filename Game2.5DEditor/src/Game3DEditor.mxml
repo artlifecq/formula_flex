@@ -17,8 +17,6 @@
 		<![CDATA[
             import com.editor.manager.AppManager;
             import com.game.engine2D.Engine;
-            import com.game.engine2D.config.GlobalConfig2D;
-            import com.game.engine2D.vo.PoolFrontMesh;
             import com.game.engine3D.config.GlobalConfig;
             import com.game.engine3D.manager.Stage3DLayerManager;
             
@@ -81,19 +79,16 @@
                 //				Away3D.MIPMAP_WITH_BITMAPDATA = false;
                 Away3D.PARSE_JPG_IN_WORKER = true;
                 Away3D.PARSE_PNG_IN_WORKER = true;
-                Away3D.EVIL3D_VERSION = Math.random() * int.MAX_VALUE;
+//                Away3D.EVIL3D_VERSION = Math.random() * int.MAX_VALUE;
                 
                 Away3D.LOAD_FILE_WITH_LIB = true;
                 Away3D.PARSE_JPG_IN_WORKER = true;
                 Away3D.PARSE_PNG_IN_WORKER = true;
                 Away3D.PLANAR_STENCIL_AVAILABLE = true;
-                Away3D.EVIL3D_VERSION = Math.random() * int.MAX_VALUE;
+//                Away3D.EVIL3D_VERSION = Math.random() * int.MAX_VALUE;
                 
                 GlobalConfig.radiusForEntity = 32;
                 GlobalConfig.use2DMap = true;
-                GlobalConfig.use25DMap = true;
-                GlobalConfig.MAP_2D_CAMERA_ANGLE = 45;
-                GlobalConfig2D.MapZoneClass = PoolFrontMesh;
                 Stage3DLayerManager.errorChecking = true;
                 
                 Engine.initEngine(60,null,null,50,50,256,256);

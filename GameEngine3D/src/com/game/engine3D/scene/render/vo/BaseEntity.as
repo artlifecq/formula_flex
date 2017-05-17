@@ -5,6 +5,7 @@ package com.game.engine3D.scene.render.vo
 	import com.game.engine3D.core.poolObject.PoolEntityContainer3D;
 	import com.game.engine3D.events.SceneEvent;
 	import com.game.engine3D.events.SceneEventAction3D;
+	import com.game.engine3D.manager.InputManger;
 	import com.game.engine3D.scene.render.RenderSet3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.utils.MathUtil;
@@ -113,10 +114,11 @@ package com.game.engine3D.scene.render.vo
 			{
 				return;
 			}
-			removeBaseObjByID(baseObj.type, baseObj.id, false);
+			
 			var ru : RenderUnit3D = _renderSet.getRenderUnitByID(renderUnitType, renderUnitId);
-			if (ru)
+			if (ru != baseObj)
 			{
+				removeBaseObjByID(baseObj.type, baseObj.id, false);
 				var childData : BaseObjChild = new BaseObjChild(ru, baseObj, childName, billboardMode);
 				addChildDataToList(childData);
 				if (ru.resReady && !ru.resSwitch)
@@ -521,6 +523,10 @@ package com.game.engine3D.scene.render.vo
 		 */
 		private function handleMouseUp(e : MouseEvent3D, ru : RenderUnit3D, rs : RenderSet3D) : void
 		{
+			if (InputManger.getInstance().isOperateLocked)
+			{
+				return;
+			}
 			//派发事件
 			//function onSceneInteractive(action : String, mosEvt : MouseEvent3D, position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
 			EventManager.dispatchEvent(SceneEvent.INTERACTIVE, SceneEventAction3D.SCENE_ENTITY_MOUSE_UP, e, position, this, ru);
@@ -533,6 +539,10 @@ package com.game.engine3D.scene.render.vo
 		 */
 		private function handleMouseDown(e : MouseEvent3D, ru : RenderUnit3D, rs : RenderSet3D) : void
 		{
+			if (InputManger.getInstance().isOperateLocked)
+			{
+				return;
+			}
 			//派发事件
 			//function onSceneInteractive(action : String, mosEvt : MouseEvent3D, position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
 			EventManager.dispatchEvent(SceneEvent.INTERACTIVE, SceneEventAction3D.SCENE_ENTITY_MOUSE_DOWN, e, position, this, ru);
@@ -545,6 +555,10 @@ package com.game.engine3D.scene.render.vo
 		 */
 		private function handlerMouseOver(e : MouseEvent3D, ru : RenderUnit3D, rs : RenderSet3D) : void
 		{
+			if (InputManger.getInstance().isOperateLocked)
+			{
+				return;
+			}
 			//派发事件
 			//function onSceneInteractive(action : String, mosEvt : MouseEvent3D, position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
 			EventManager.dispatchEvent(SceneEvent.INTERACTIVE, SceneEventAction3D.SCENE_ENTITY_MOUSE_OVER, e, position, this, ru);
@@ -557,6 +571,10 @@ package com.game.engine3D.scene.render.vo
 		 */
 		private function handlerMouseOut(e : MouseEvent3D, ru : RenderUnit3D, rs : RenderSet3D) : void
 		{
+			if (InputManger.getInstance().isOperateLocked)
+			{
+				return;
+			}
 			//派发事件
 			//function onSceneInteractive(action : String, mosEvt : MouseEvent3D, position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
 			EventManager.dispatchEvent(SceneEvent.INTERACTIVE, SceneEventAction3D.SCENE_ENTITY_MOUSE_OUT, e, position, this, ru);
@@ -569,6 +587,10 @@ package com.game.engine3D.scene.render.vo
 		 */
 		private function handleMouseRightUp(e : MouseEvent3D, ru : RenderUnit3D, rs : RenderSet3D) : void
 		{
+			if (InputManger.getInstance().isOperateLocked)
+			{
+				return;
+			}
 			//派发事件
 			//function onSceneInteractive(action : String, mosEvt : MouseEvent3D, position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
 			EventManager.dispatchEvent(SceneEvent.INTERACTIVE, SceneEventAction3D.SCENE_ENTITY_MOUSE_RIGHT_UP, e, position, this, ru);
@@ -581,6 +603,10 @@ package com.game.engine3D.scene.render.vo
 		 */
 		private function handleMouseRightDown(e : MouseEvent3D, ru : RenderUnit3D, rs : RenderSet3D) : void
 		{
+			if (InputManger.getInstance().isOperateLocked)
+			{
+				return;
+			}
 			//派发事件
 			//function onSceneInteractive(action : String, mosEvt : MouseEvent3D, position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
 			EventManager.dispatchEvent(SceneEvent.INTERACTIVE, SceneEventAction3D.SCENE_ENTITY_MOUSE_RIGHT_DOWN, e, position, this, ru);

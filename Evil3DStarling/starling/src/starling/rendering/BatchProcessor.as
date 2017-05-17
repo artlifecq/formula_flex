@@ -14,7 +14,6 @@ package starling.rendering
     
     import starling.display.Mesh;
     import starling.display.MeshBatch;
-    import starling.utils.MathUtil;
     import starling.utils.MeshSubset;
 
     /** This class manages a list of mesh batches of different types;
@@ -49,6 +48,7 @@ package starling.rendering
             _batches.length = 0;
             _batchPool.purge();
             _currentBatch = null;
+            _onBatchComplete = null;
         }
 
         /** Adds a mesh to the current batch, or to a new one if the current one does not support
@@ -135,32 +135,18 @@ package starling.rendering
         /** Returns the batch at a certain index. */
         public function getBatchAt(batchID:int):MeshBatch
         {
+			if(batchID < 0 || batchID >= _batches.length)
+			{
+				trace("BatchProcessor.getBatchAt RangeError: Error #1125 _batches.length =",_batches.length, "batchID=",batchID);
+				return null;
+			}
             return _batches[batchID];
         }
 
         /** Disposes all batches that are currently unused. */
         public function trim():void
         {
-            _batchPool.purge();
-        }
-
-        public function rewindTo(token:BatchToken):void
-        {
-            if (token.batchID > _cacheToken.batchID)
-                throw new RangeError("Token outside available range");
-
-            for (var i:int = _cacheToken.batchID; i > token.batchID; --i)
-                _batchPool.put(_batches.pop());
-
-            if (_batches.length > token.batchID)
-            {
-                var batch:MeshBatch = _batches[token.batchID];
-                batch.numIndices  = MathUtil.min(batch.numIndices,  token.indexID);
-                batch.numVertices = MathUtil.min(batch.numVertices, token.vertexID);
-            }
-
-            _currentBatch = null;
-            _cacheToken.copyFrom(token);
+            _batchPool.purgeUnactivated();
         }
 
         /** Sets all properties of the given token so that it describes the current position
@@ -248,7 +234,7 @@ class BatchPool
         }
 
         if (batchList.length > 0) return batchList.pop();
-        else return new MeshBatch();
+        else return new MeshBatch(true);
     }
 
     public function put(meshBatch:MeshBatch):void
@@ -260,6 +246,12 @@ class BatchPool
             batchList = new <MeshBatch>[];
             _batchLists[styleType] = batchList;
         }
+		
+		/* 为了保证性能，这里注释掉
+		if(batchList.indexOf(meshBatch) != -1)
+		{
+			return;
+		}*/
 		
 		meshBatch.clear();
         batchList[batchList.length] = meshBatch;

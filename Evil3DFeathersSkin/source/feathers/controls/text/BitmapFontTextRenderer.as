@@ -1300,7 +1300,7 @@ package feathers.controls.text
 					//if it's not registered, do that first
 					if(!TextField.getBitmapFont(BitmapFont.MINI))
 					{
-						TextField.registerBitmapFont(new BitmapFont());
+						TextField.registerCompositor(new BitmapFont(), BitmapFont.MINI);
 					}
 					this._textFormat = new BitmapFontTextFormat(BitmapFont.MINI, NaN, 0x000000);
 				}
