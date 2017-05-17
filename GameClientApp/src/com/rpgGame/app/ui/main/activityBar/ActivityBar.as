@@ -147,7 +147,7 @@
             {
                 _activityButtonList.stopEffect();
 				setConfig = {
-                    "x":this.x ,
+                    "x":btnLeft.x ,
                     "scaleX":0,
                     "scaleY":0,
                     "alpha":0,
