@@ -117,6 +117,7 @@ package com.editor.display
 			_parent.addChild(_polygon);
             var p : Vector3D = _position.clone();
             p.y = p.z;
+            p.z = 0;
 			_polygon.position = p;
 			_polygon.mouseEnabled = _mouseEnabled;
 			_polygon.visible = _visible;
