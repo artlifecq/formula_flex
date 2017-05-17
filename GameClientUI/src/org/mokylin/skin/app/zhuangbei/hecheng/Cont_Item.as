@@ -1,8 +1,8 @@
 package org.mokylin.skin.app.zhuangbei.hecheng
 {
 	import feathers.controls.text.Fontter;
-	import feathers.controls.Button;
 	import feathers.controls.Label;
+	import feathers.controls.Radio;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.common.over.SelectBtn;
@@ -21,11 +21,9 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 
 		public var bg2:feathers.controls.UIAsset;
 
-		public var btn_over:feathers.controls.Button;
-
 		public var lb_Dispaly:feathers.controls.Label;
 
-		public var selectedImg:feathers.controls.UIAsset;
+		public var selectedBtn:feathers.controls.Radio;
 
 
 		//==========================================================================
@@ -38,7 +36,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			this.currentState = "normal";
 			this.height = 32;
 			this.width = 245;
-			this.elementsContent = [bg1_i(),bg2_i(),lb_Dispaly_i(),btn_over_i(),selectedImg_i()];
+			this.elementsContent = [bg1_i(),bg2_i(),lb_Dispaly_i(),selectedBtn_i()];
 			
 			states = {
 			};
@@ -75,25 +73,14 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			return temp;
 		}
 
-		private function btn_over_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_over = temp;
-			temp.name = "btn_over";
-			temp.height = 32;
-			temp.styleClass = org.mokylin.skin.common.over.SelectBtn;
-			temp.width = 245;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function lb_Dispaly_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_Dispaly = temp;
 			temp.name = "lb_Dispaly";
 			temp.htmlText = "中级鉴定图纸<font color='#bea757'>(10)</font>";
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.letterSpacing = -1;
 			temp.fontSize = 16;
 			temp.color = 0xCFC6AE;
@@ -104,18 +91,17 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			return temp;
 		}
 
-		private function selectedImg_i():feathers.controls.UIAsset
+		private function selectedBtn_i():feathers.controls.Radio
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			selectedImg = temp;
-			temp.name = "selectedImg";
-			temp.bottom = 0;
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.left = 0;
-			temp.right = 0;
-			temp.styleName = "ui/common/hover/xuanqukuang2.png";
-			temp.top = 0;
+			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			selectedBtn = temp;
+			temp.name = "selectedBtn";
+			temp.groupName = "radioGroup2";
+			temp.height = 32;
+			temp.styleClass = org.mokylin.skin.common.over.SelectBtn;
+			temp.width = 245;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
