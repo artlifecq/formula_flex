@@ -38,6 +38,7 @@ package com.rpgGame.core.view.uiComponent.face.cd
 		//
 		private var _circleMask : Shape;
 		private var _isCircle : Boolean = false;
+		private var _isCdShow:Boolean = false;
 		/**
 		 * 是否反转
 		 * @L.L.M.Sunny
@@ -151,7 +152,6 @@ package com.rpgGame.core.view.uiComponent.face.cd
 			_onComplete = $parameters[2];
 			_isCircle = $parameters[3];
 			_isReverse = $parameters[4];
-
 //			if (!_mask)
 //			{
 //				_mask = new Shape();
@@ -167,7 +167,7 @@ package com.rpgGame.core.view.uiComponent.face.cd
 			_imageMask.y = _h;
 			_imageMask.scaleX = (_isReverse ? -_w : _w) / MaskCDUtil.MASK_RADIUS;
 			_imageMask.scaleY = _h / MaskCDUtil.MASK_RADIUS;
-
+			
 			if (_isCircle)
 			{
 				if (!_circleMask)
@@ -317,9 +317,8 @@ package com.rpgGame.core.view.uiComponent.face.cd
 		}
 		public function drawRectMask($angle : Number) : void
 		{
-			if(isCircle)
+			if(isCdShow)
 			{
-			
 				$angle = Math.floor($angle)
 				
 				if ($angle <= 0)
@@ -328,5 +327,16 @@ package com.rpgGame.core.view.uiComponent.face.cd
 			}
 			
 		}
+
+		public function get isCdShow():Boolean
+		{
+			return _isCdShow;
+		}
+
+		public function set isCdShow(value:Boolean):void
+		{
+			_isCdShow = value;
+		}
+
 	}
 }

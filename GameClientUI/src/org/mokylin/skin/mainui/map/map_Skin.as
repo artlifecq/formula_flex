@@ -195,8 +195,8 @@ package org.mokylin.skin.mainui.map
 			temp.text = "(294,145)";
 			temp.color = 0x989772;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
-			temp.width = 84;
-			temp.x = 107;
+			temp.width = 97;
+			temp.x = 118;
 			temp.y = 6;
 			return temp;
 		}
@@ -209,11 +209,12 @@ package org.mokylin.skin.mainui.map
 			temp.leading = 1;
 			temp.letterSpacing = 0;
 			temp.fontSize = 16;
-			temp.text = "野外副本";
+			temp.text = "野外副本副本副";
+			temp.textAlign = "right";
 			temp.color = 0xC3C198;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
-			temp.width = 69;
-			temp.x = 36;
+			temp.width = 119;
+			temp.x = 5;
 			temp.y = 6;
 			return temp;
 		}

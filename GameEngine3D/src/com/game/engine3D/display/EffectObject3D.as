@@ -88,7 +88,7 @@ package com.game.engine3D.display
 					unit.repeat = repeat;
 					unit.play(0, speed);
 					//unit.animateSpeed=speed;
-					this.start();
+					unit.startRender();
 				}
 				
 			}
