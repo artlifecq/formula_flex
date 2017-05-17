@@ -165,7 +165,6 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 		
 		_horizontalAlign = HorizontalAlign.LEFT;
 		_verticalAlign = VerticalAlign.TOP;
-		_layerBatchId = 1;//LayerBatchID.LABEL;
 		
 		touchable =  true;
 		touchGroup = true;

@@ -57,6 +57,10 @@ package feathers.media
 		
 		private var _isLoading:Boolean = false;
 		
+		private var _repeat:int = 0;
+		private var _repeatCompleteTimes:int = 0;
+		
+		
 		/**
 		 *	 
 		 * @param $width 
@@ -77,6 +81,16 @@ package feathers.media
 			this.addEventListener(Event.REMOVED_FROM_STAGE,removeFromStage);
 		}
 		
+		public function get repeat():int
+		{
+			return _repeat;
+		}
+
+		public function set repeat(value:int):void
+		{
+			_repeat = value;
+		}
+
 		private function addToStage(evt:Event):void
 		{
 			if(_isPause)
@@ -112,7 +126,7 @@ package feathers.media
 			
 			if(_swfVideo != null)
 			{
-				_swfVideo.play();
+				_swfVideo.gotoAndPlay(1);
 				startRenderFrame();
 			}else if(!_isLoading)
 			{
@@ -242,6 +256,17 @@ package feathers.media
 			if(_swfVideo.currentFrame == 1 && i > 1)
 			{
 				_swfVideo.play();
+			}
+			if(_swfVideo.currentFrame == _swfVideo.totalFrames && _repeat > 0)
+			{
+				_repeatCompleteTimes ++;
+				if(_repeatCompleteTimes >= _repeat)
+				{
+					_repeatCompleteTimes = 0;
+					close()
+					dispatchEventWith(Event.COMPLETE);
+					return ;
+				}
 			}
 			
 			_swfVideoBmd.draw(_swfVideo);
