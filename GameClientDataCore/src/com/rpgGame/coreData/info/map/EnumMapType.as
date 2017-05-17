@@ -13,5 +13,9 @@ package com.rpgGame.coreData.info.map
 		 *论剑副本 
 		 */
 		public static const MAP_TYPE_LUNJIAN : int = rEnum.next;//1
+		/**
+		 *多人副本 
+		 */
+		public static const MAP_TYPE_MULTY : int = rEnum.next;//2
 	}
 }
