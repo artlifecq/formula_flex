@@ -83,6 +83,11 @@
             ui.txtTitle.htmlText = endTxt;
             return endTxt;
         }
+		
+		override protected function onTextEmpty():void
+		{
+			ui.txtTitle.htmlText = "";
+		}
 
         override protected function onTextColse():String
         {

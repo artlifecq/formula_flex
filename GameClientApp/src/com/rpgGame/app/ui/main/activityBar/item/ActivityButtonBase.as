@@ -256,13 +256,21 @@
 					}
 					this.onTextColse();
 				}
-            }
+            }else {//一直开启
+				this.onTextEmpty();
+				activityStateType = ActivityOpenStateType.OPEN;
+			}
             if (activityStateType != ActivityOpenStateType.CLOSE && !onActivityUpdate())
             {
 				activityStateType = ActivityOpenStateType.CLOSE;
             }
             return activityStateType;
         }
+		
+		protected function onTextEmpty():void
+		{
+			
+		}
 
         public function checkCanOpen():Boolean
         {

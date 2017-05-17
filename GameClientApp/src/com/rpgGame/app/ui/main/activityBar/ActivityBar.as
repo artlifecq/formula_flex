@@ -10,7 +10,6 @@
     import gs.easing.Sine;
     
     import org.client.mainCore.manager.EventManager;
-    import org.mokylin.skin.mainui.activityBar.ActivityButtonSkin;
     
     import starling.display.DisplayObject;
     import starling.display.Sprite;
@@ -20,7 +19,6 @@
 
         private static const FOLD_TIME:Number = 0.5;
 
-        private var _skin:ActivityButtonSkin;
         private var activitySprite:Sprite;
         private var _tweenLiteToFold:TweenLite;
         private var _activityButtonList:ActivityButtonList;
@@ -30,15 +28,12 @@
 
         public function ActivityBar()
         {
-            _skin = new ActivityButtonSkin();
-            super(_skin);
             init();
         }
 
         private function init():void
         {
             _activityButtonList = new ActivityButtonList();
-            addChild(_activityButtonList);
             activitySprite = new Sprite();
             addChild(activitySprite);
             activitySprite.addChild(_activityButtonList);
@@ -118,7 +113,7 @@
                 _tweenLiteToFold.kill();
                 _tweenLiteToFold = null;
             }
-            x = (sWidth - _skin.width) - 260;
+            x = (sWidth - _activityButtonList.width) - 260;
             y = 25;
         }
 

@@ -4,6 +4,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.app.manager.mount.HorseExtraItemInfo;
+	import com.rpgGame.coreData.cfg.ActivityBarCfgData;
 	import com.rpgGame.coreData.cfg.AddSpriteStatCfgData;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
@@ -248,6 +249,8 @@ package com.rpgGame.app.data
 			TaskMissionCfgData.setup(dic[ConfigClassRegister.Q_mission_base]);
 			TaskMissionCfgData.setupReword(dic[ConfigClassRegister.Q_mission_reword]);
 			TaskMissionCfgData.setupSegment(dic[ConfigClassRegister.Q_mission_segment]);
+			
+			ActivityBarCfgData.setup(dic[ConfigClassRegister.ActivityBarInfo]);
 
 			//心法
 			CheatsCfg.setup(dic[ConfigClassRegister.Q_cheats]);
