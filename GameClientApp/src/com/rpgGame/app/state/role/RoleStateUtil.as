@@ -4,7 +4,6 @@ package com.rpgGame.app.state.role
 	import com.game.engine3D.utils.MathUtil;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
-	import com.rpgGame.app.fight.spell.SpellHitHelper;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneCursorHelper;
@@ -19,7 +18,6 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.BlinkMoveStateReference;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.core.events.MapEvent;
-	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
@@ -34,8 +32,6 @@ package com.rpgGame.app.state.role
 	import flash.utils.clearTimeout;
 	import flash.utils.getTimer;
 	import flash.utils.setTimeout;
-	
-	import gameEngine2D.NetDebug;
 	
 	import org.client.mainCore.manager.EventManager;
 
