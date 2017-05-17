@@ -18,7 +18,6 @@ package com.rpgGame.app.state.role.action
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
-	import away3d.animators.transitions.CrossfadeTransition;
 	import away3d.materials.methods.CorrodeMethod;
 	
 	import gs.TweenLite;

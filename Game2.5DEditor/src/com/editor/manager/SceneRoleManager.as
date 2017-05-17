@@ -19,9 +19,9 @@ package com.editor.manager
 	import com.editor.state.role.action.PlayActionStateReference;
 	import com.editor.utils.RoleFaceMaskEffectUtil;
 	import com.game.engine3D.manager.Stage3DLayerManager;
-
+	
 	import flash.geom.Vector3D;
-
+	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -145,11 +145,13 @@ package com.editor.manager
 			role.mouseEnable = false;
 		}
 
-		public function cancelSelect() : void
+		public function cancelSelect() : Boolean
 		{
+            var rs : Boolean = null != _selectedAvatarId;
 			_selectedAvatarId = null;
 			EventManager.dispatchEvent(AvatarFileListEvent.CANCEL_SELECTED_AVATAR);
 			setPreviewAvatar(null);
+            return rs;
 		}
 
 		public function setSelectedAvatarId(avatarId : String) : void
