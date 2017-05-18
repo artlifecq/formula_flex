@@ -8,10 +8,15 @@ package com.rpgGame.appModule.shop
 	import com.rpgGame.appModule.common.PageSelectUICtrl;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.ShopEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipManager;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.enum.EnumShopType;
 	import com.rpgGame.coreData.info.shop.ShopItemVo;
 	import com.rpgGame.coreData.info.shop.ShopVo;
 	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.type.TipType;
 	
 	import feathers.data.ListCollection;
 	
@@ -56,6 +61,8 @@ package com.rpgGame.appModule.shop
 				this.addChild(cell);
 			}
 			//_skin.tab_nv.dataProvider=new ListCollection();
+			TipTargetManager.show(this._skin.grpYuanbao,TargetTipsMaker.makeSimpleTextTips(ItemConfig.getItemName(CharAttributeType.RES_GOLD)));
+			TipTargetManager.show(this._skin.grpLijing,TargetTipsMaker.makeSimpleTextTips(ItemConfig.getItemName(CharAttributeType.RES_BIND_GOLD)));
 		}
 		private function initEvent():void
 		{

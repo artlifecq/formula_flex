@@ -152,7 +152,7 @@ package com.rpgGame.app.utils
 			//随身商店里面的要判断等级
 			if (itemInfo.containerID==ItemContainerID.BACKPACK_SHOP) 
 			{
-				if (itemInfo.qItem.q_levelnum>MainRoleManager.actorInfo.totalStat.level) 
+				if (itemInfo.qItem.q_level>MainRoleManager.actorInfo.totalStat.level) 
 				{
 					grid.setJobState(AssetUrl.EQUIP_JOB_NO);
 				}
