@@ -321,11 +321,12 @@ package org.mokylin.skin.loginui
 			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
 			num_saizi = temp;
 			temp.name = "num_saizi";
-			temp.height = 34;
+			temp.autoPlay = false;
+			temp.height = 64;
 			temp.styleClass = org.mokylin.skin.loginui.mc.UIMovieClipSaizi;
-			temp.width = 34;
-			temp.x = 238;
-			temp.y = 2;
+			temp.width = 64;
+			temp.x = 220;
+			temp.y = -13;
 			return temp;
 		}
 

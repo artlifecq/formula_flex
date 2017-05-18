@@ -36,7 +36,7 @@ package org.mokylin.skin.component.scrollbar.skin_chat.button
 			
 			states = {
 			};
-			skinNames={"down":"ui/component/scrollbar/skin_chat/button/skin_decre/decre_down.png", "hover":"ui/component/scrollbar/skin_chat/button/skin_decre/decre_over.png", "up":"ui/component/scrollbar/skin_chat/button/skin_decre/decre_up.png"};
+			skinNames={"down":"ui/component/scrollbar/skin_chat/button/skin_decre/down.png", "hover":"ui/component/scrollbar/skin_chat/button/skin_decre/over.png", "up":"ui/component/scrollbar/skin_chat/button/skin_decre/up.png"};
 		}
 
 
@@ -47,7 +47,7 @@ package org.mokylin.skin.component.scrollbar.skin_chat.button
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__ScrollBarSkin_decre_UIAsset1 = temp;
-			temp.styleName = "ui/component/scrollbar/skin_chat/button/skin_decre/decre_down.png";
+			temp.styleName = "ui/component/scrollbar/skin_chat/button/skin_decre/down.png";
 			return temp;
 		}
 
@@ -55,7 +55,7 @@ package org.mokylin.skin.component.scrollbar.skin_chat.button
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__ScrollBarSkin_decre_UIAsset2 = temp;
-			temp.styleName = "ui/component/scrollbar/skin_chat/button/skin_decre/decre_over.png";
+			temp.styleName = "ui/component/scrollbar/skin_chat/button/skin_decre/over.png";
 			return temp;
 		}
 
@@ -63,7 +63,7 @@ package org.mokylin.skin.component.scrollbar.skin_chat.button
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__ScrollBarSkin_decre_UIAsset3 = temp;
-			temp.styleName = "ui/component/scrollbar/skin_chat/button/skin_decre/decre_up.png";
+			temp.styleName = "ui/component/scrollbar/skin_chat/button/skin_decre/up.png";
 			return temp;
 		}
 

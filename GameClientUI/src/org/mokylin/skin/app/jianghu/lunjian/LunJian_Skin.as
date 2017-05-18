@@ -6,7 +6,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.layout.VerticalLayout;
-	import org.mokylin.skin.component.button.ButtonSkin_jiantou;
+	import org.mokylin.skin.component.button.ButtonSkin_jiantou2;
 	import org.mokylin.skin.component.list.ListSkin1;
 
 	/**
@@ -19,9 +19,9 @@ package org.mokylin.skin.app.jianghu.lunjian
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var btnNext:feathers.controls.Button;
+		public var btnN:feathers.controls.Button;
 
-		public var btnPrev:feathers.controls.Button;
+		public var btnP:feathers.controls.Button;
 
 		public var list_map:feathers.controls.List;
 
@@ -36,7 +36,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__LunJian_Skin_UIAsset2_i(),list_map_i(),__LunJian_Skin_UIAsset3_i(),btnNext_i(),btnPrev_i()];
+			this.elementsContent = [__LunJian_Skin_UIAsset2_i(),list_map_i(),__LunJian_Skin_UIAsset3_i(),btnP_i(),btnN_i()];
 			
 			states = {
 			};
@@ -73,26 +73,26 @@ package org.mokylin.skin.app.jianghu.lunjian
 			return temp;
 		}
 
-		private function btnNext_i():feathers.controls.Button
+		private function btnN_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btnNext = temp;
-			temp.name = "btnNext";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou;
-			temp.x = 899;
-			temp.y = 277;
+			btnN = temp;
+			temp.name = "btnN";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou2;
+			temp.x = 896;
+			temp.y = 288;
 			return temp;
 		}
 
-		private function btnPrev_i():feathers.controls.Button
+		private function btnP_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btnPrev = temp;
-			temp.name = "btnPrev";
+			btnP = temp;
+			temp.name = "btnP";
 			temp.scaleX = -1;
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou;
-			temp.x = 209;
-			temp.y = 277;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou2;
+			temp.x = 215;
+			temp.y = 289;
 			return temp;
 		}
 

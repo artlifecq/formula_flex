@@ -31,6 +31,8 @@ package com.rpgGame.coreData.role
 	{
 		/** 地图ID */
 		public var mapID : int;
+		/** 上一个地图ID */
+		public var preMapID : int;
 		/** 职业 **/
 		public var job : int;
 		/** vip等级 **/

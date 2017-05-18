@@ -21,8 +21,10 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.ui.main.team.TeamLeftFixedBar;
 	import com.rpgGame.app.ui.main.top.ExpBar;
 	import com.rpgGame.app.ui.main.top.TopBar;
+	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppDispather;
 	import com.rpgGame.core.app.AppEvent;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.SceneInteractiveEvent;
@@ -32,6 +34,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.map.EnumMapType;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangYuMaQiShou;

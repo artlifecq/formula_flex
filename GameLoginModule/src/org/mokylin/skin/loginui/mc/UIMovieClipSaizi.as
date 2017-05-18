@@ -17,12 +17,19 @@ package org.mokylin.skin.loginui.mc
 		{
 			super();
 			
-			this.currentState = "00001";
+			this.currentState = "00004";
 			this.elementsContent = [];
 			
 			states = {
 			};
-			skinNames={"00001":"ui/loginui/mc/saizi/00001.png"};
+			skinNames={"00000":"ui/loginui/mc/saizi/00000.png",
+			"00001":"ui/loginui/mc/saizi/00001.png",
+			"00002":"ui/loginui/mc/saizi/00002.png",
+			"00003":"ui/loginui/mc/saizi/00003.png",
+			"00004":"ui/loginui/mc/saizi/00004.png",
+			"00005":"ui/loginui/mc/saizi/00005.png",
+			"00006":"ui/loginui/mc/saizi/00006.png",
+			"00007":"ui/loginui/mc/saizi/00007.png"};
 		}
 
 

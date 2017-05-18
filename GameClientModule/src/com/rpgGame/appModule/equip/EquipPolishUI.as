@@ -610,6 +610,9 @@ package com.rpgGame.appModule.equip
 				grid.setGridEmpty();
 			}
 			selectedUse.length=0;
+			if(addExp<0){
+				addExp=0;
+			}
 			refreshUseEquipGrid();
 		}
 		
@@ -1012,7 +1015,11 @@ package com.rpgGame.appModule.equip
 		
 		private function isPolish(info:EquipInfo):Boolean
 		{
-			return true;//目前全部都可以琢磨
+			var job:int=MainRoleManager.actorInfo.job;
+			if(info.qItem.q_job==job){
+				return true;
+			}
+			return false;
 		}
 	}
 }

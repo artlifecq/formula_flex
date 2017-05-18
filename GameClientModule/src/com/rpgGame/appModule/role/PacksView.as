@@ -4,7 +4,6 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.goods.ItemUseManager;
-	import com.rpgGame.app.manager.goods.StorageManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
@@ -46,8 +45,6 @@ package com.rpgGame.appModule.role
 	import feathers.data.ListCollection;
 	import feathers.themes.GuiThemeStyle;
 	import feathers.utils.filter.GrayFilter;
-	
-	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.juese_Skin;
@@ -92,7 +89,7 @@ package com.rpgGame.appModule.role
 			currentListData=new ListCollection();
 			TAB_TYPE= [
 				[GoodsType.ALL_GOODS],
-				[GoodsType.EQUIPMENT], 
+				[GoodsType.EQUIPMENT,GoodsType.EQUIPMENT1,GoodsType.EQUIPMENT2], 
 				[GoodsType.MEDICINE],
 				[GoodsType.MATERIAL_COMBO,GoodsType.MATERIAL_ADVANCE], 
 				[GoodsType.CHAT,GoodsType.GIFT,GoodsType.PROPERTY,GoodsType.BUFF,GoodsType.TRANSFER,GoodsType.RESURGENCE,

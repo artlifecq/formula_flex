@@ -29,7 +29,6 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ComboItemInfo;
 	import com.rpgGame.coreData.type.CharAttributeType;
-	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.equip.message.ResEquipOperateResultMessage;
 	
@@ -142,7 +141,7 @@ package com.rpgGame.appModule.equip
 						}
 						children.push(detailNodeInfo);
 					}
-					tempNode.addChildren(children);//添加根节点
+					tempNode.addChildren(children);//添加节点
 				}else{
 					children=[];
 					var detailList:Array=[];
@@ -220,6 +219,7 @@ package com.rpgGame.appModule.equip
 				findId=firstId;
 			}
 			
+			closeNode(node);
 			findNode(node,findId);
 			expandedNode(findRootNode);
 			_skin.tree.updateTree();
@@ -228,6 +228,23 @@ package com.rpgGame.appModule.equip
 			_skin.tree.dataProvider.updateItemAt(oldindex);
 			_skin.tree.dataProvider.updateItemAt(_skin.tree.selectedIndex);
 			onSelected(null);
+		}
+		
+		private function closeNode(node:TreeNode):void
+		{
+			if(node.expanded&&node.hasChildren)
+			{
+				node.expanded=false;
+			}
+			
+			var len:int= 0;
+			var child:TreeNode = null;
+			len = node.children?node.children.length:0;
+			for(var i:int = 0; i < len;i++ )
+			{
+				child = node.children[i];
+				closeNode(child);
+			}
 		}
 		
 		private function getFindId(node:TreeNode,id:int):Boolean
