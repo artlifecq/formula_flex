@@ -272,7 +272,7 @@ package com.rpgGame.app.data
 			//道具获取路径
 			SourceGetCfg.setup(dic[ConfigClassRegister.Q_source]);//多人副本
 			//功能开启
-			ClientFunctionOpenCfgData.setup(dic["data.ClientFunctionOpen"]);
+			//ClientFunctionOpenCfgData.setup(dic["data.ClientFunctionOpen"]);
 		}
 		
 		/**
