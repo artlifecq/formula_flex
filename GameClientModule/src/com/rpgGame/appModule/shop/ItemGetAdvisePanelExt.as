@@ -306,17 +306,17 @@ package com.rpgGame.appModule.shop
 		}
 		
 		
-		public static function showBuyItem(itemMod:int,container:DisplayObjectContainer,forceBuyNum:int=0):void
+		public static function showBuyItem(itemMod:int,container:DisplayObjectContainer,forceBuyNum:int=0):int
 		{
 			var qSource:Q_source=SourceGetCfg.getSource(itemMod);
 			if (!qSource) 
 			{
-				return;
+				return 0;
 			}
 			var shopItems:Array=Mgr.shopMgr.getMallItemShopVo(itemMod,qSource.q_shoptype,JSONUtil.decode(qSource.q_sub_shop_type));
 			if (shopItems==null||shopItems.length==0) 
 			{
-				return;
+				return 0;
 			}
 			if (!_ins) 
 			{
@@ -326,6 +326,7 @@ package com.rpgGame.appModule.shop
 			_ins.y=(container.height-_ins.height)/2;
 			container.addChild(_ins);
 			_ins.setData(shopItems,qSource,forceBuyNum);
+			return _ins.width;
 		}
 		public static function remove(con:DisplayObjectContainer):void
 		{
