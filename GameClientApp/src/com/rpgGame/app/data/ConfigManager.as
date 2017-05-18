@@ -39,6 +39,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.HintConfig;
 	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.cfg.HorseSpellData;
+	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
 	import com.rpgGame.coreData.cfg.LunJianCfg;
@@ -241,6 +242,7 @@ package com.rpgGame.app.data
 			EquipJiChengData.setup(dic[ConfigClassRegister.Q_equip_inherit_cost]);
 			ZhanGongData.setup(dic[ConfigClassRegister.Q_meritorious]);
 			ZhanGongMonsterData.setup(dic[ConfigClassRegister.Q_meritorious_monster]);
+			JunJieData.setup(dic[ConfigClassRegister.Q_junjie]);
 			
 			LostSkillData.setup(dic[ConfigClassRegister.Q_lostskill_open]);
 			LostSkillUpData.setup(dic[ConfigClassRegister.Q_lostskill_up]);

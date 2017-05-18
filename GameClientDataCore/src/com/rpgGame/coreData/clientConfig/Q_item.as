@@ -86,12 +86,16 @@ package com.rpgGame.coreData.clientConfig
 		public var q_max_create:String;
 		 /**  掉出时发送的公告类型（0不发送公告；1面向个人发送聊天框内公告；2面向个人发送聊天框内与屏幕上方双重公告；3面向全服发送聊天框内公告；4面向全服发送聊天框内与屏幕上方双重公告）【1和2暂时未做，目前只有功能3和4】 */
 		public var q_notice:int;
+		 /**  掉落地面模型ID */
+		public var q_drop_model:String;
 		 /**  是否记录产出与操作日志（0不记录；1记录） */
 		public var q_log:int;
 		 /**  物品默认图标（42*42） */
 		public var q_icon:int;
+		 /**  物品掉落在场景中图标ID */
+		public var q_dropicon:int;
 		 /**  物品换装资源编号（装备类物品使用）模型ID */
-		public var q_drop_model:String;
+		public var q_equip_resource:int;
 		 /**  是否自动使用（1是，0否） */
 		public var q_auto_use:int;
 		 /**  是否弹出使用提示(背包中的道具数量>=此数值时弹出提示， 0不弹提示) */
@@ -169,13 +173,13 @@ package com.rpgGame.coreData.clientConfig
 		 /**  回购需要熔炼值 */
 		public var q_recycle_smelting:int;
 		 /**  物品拖拽时的音效编号（0无声音 1通用 2武器 3项链、戒指、宝石 4其他装备 5药水 6卷轴 7箱子盒子 8货币 */
-		public var q_drag_music:int;
+		public var q_drag_music:String;
 		 /**  物品掉出时播放的音效资源编号 */
-		public var q_drop_music:int;
+		public var q_drop_music:String;
 		 /**  物品使用时播放的音效资源编号 */
-		public var q_use_music:int;
+		public var q_use_music:String;
 		 /**  物品脱下时播放的音效资源编号 */
-		public var q_unuse_music:int;
+		public var q_unuse_music:String;
 		 /**  装备最大可觉醒等级 */
 		public var q_max_awaken:int;
 		 /**  装备最大可注灵等级 */
