@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.shop
 {
+	import com.rpgGame.appModule.LinkUtil;
 	import com.rpgGame.core.ui.SkinUI;
 	
 	import org.mokylin.skin.app.zuoqi.huoquItemSkin;
@@ -26,6 +27,7 @@ package com.rpgGame.appModule.shop
 		{
 			// TODO Auto Generated method stub
 			//MenuUtil.doMenu(_menuStr);
+			LinkUtil.LinkDo(_menuStr);
 		}
 	}
 }

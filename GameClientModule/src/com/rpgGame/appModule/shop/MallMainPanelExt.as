@@ -17,6 +17,7 @@ package com.rpgGame.appModule.shop
 	
 	import gs.TweenMax;
 	import gs.easing.Bounce;
+	import gs.easing.Quad;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.shangcheng.ShangCheng_Skin;
@@ -126,6 +127,7 @@ package com.rpgGame.appModule.shop
 			for each (cell in cellList) 
 			{
 				cell.visible=false;
+				cell.x=cell.initX+225*3
 				cell.clearData();
 				TweenMax.killTweensOf(cell);
 			}
@@ -135,8 +137,8 @@ package com.rpgGame.appModule.shop
 				cell=cellList[i];
 				cell.visible=true;
 				cell.setData(arr[i]);
-				TweenMax.fromTo(cell,0.5,{x:cell.initX,y:cell.initY+30,delay:delay,ease:Bounce.easeOut},{x:cell.initX,y:cell.initY,ease:Bounce.easeOut});
-				delay+=0.2;
+				TweenMax.fromTo(cell,0.15*(3-i%3),{x:cell.initX+225*3,y:cell.initY,delay:delay,ease:Quad.easeIn,alpha:0.5},{x:cell.initX,y:cell.initY,ease:Quad.easeIn,delay:delay,alpha:1});
+				delay+=0.05;
 			}
 			
 		}

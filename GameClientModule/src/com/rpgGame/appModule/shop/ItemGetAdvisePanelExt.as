@@ -107,8 +107,8 @@ package com.rpgGame.appModule.shop
 			this._skin.btn_goumai.addEventListener(Event.TRIGGERED,onBuy);
 			this._skin.btn_jian.addEventListener(TouchEvent.TOUCH,onDecTouch);
 			this._skin.btn_jia.addEventListener(TouchEvent.TOUCH,onAddTouch);
-			this._skin.btn_jian.addEventListener(Event.TRIGGERED,onDecCout);
-			this._skin.btn_jia.addEventListener(Event.TRIGGERED,onAddCount);
+//			this._skin.btn_jian.addEventListener(Event.TRIGGERED,onDecCout);
+//			this._skin.btn_jia.addEventListener(Event.TRIGGERED,onAddCount);
 			
 			_group = new ToggleGroup();
 			_skin.btn_yuanbao.toggleGroup = _group;
@@ -290,7 +290,7 @@ package com.rpgGame.appModule.shop
 			var data:ShopItemVo=getSelectShopItem();
 			var allRes:Number=Mgr.shopMgr.getCurrency(data.data.priceType);
 			maxCount=int(allRes/price);
-			if (data().data.limitType!=0) 
+			if (data.data.limitType!=0) 
 			{
 				maxCount=Math.min(maxCount,getSelectShopItem().data.limitNum-data.data.todayBuyNum);
 				MAX_ALLOW=Math.min(999,data.data.limitNum-data.data.todayBuyNum);
@@ -344,22 +344,6 @@ package com.rpgGame.appModule.shop
 			}
 			resetRadioState();
 			updateBuyInfo();
-			this.forceNum=forceBuyNum;
-			if (forceBuyNum!=0) 
-			{
-				TouchableUtil.gray(_skin.btn_jia);
-				TouchableUtil.gray(_skin.btn_jian);
-				TouchableUtil.gray(_skin.max);
-				setBuyNum(forceBuyNum);
-			}
-			else
-			{
-				TouchableUtil.ungray(_skin.btn_jia);
-				TouchableUtil.ungray(_skin.btn_jian);
-				TouchableUtil.ungray(_skin.max);
-				setBuyNum(1);
-			}
-			
 			var itemInfo:ClientItemInfo=new ClientItemInfo(config.q_itemid);
 			
 			FaceUtil.SetItemGrid(_grid,itemInfo);
@@ -376,6 +360,23 @@ package com.rpgGame.appModule.shop
 			{
 				this._skin.num_zuida.text=qitem.q_max+"";
 			}
+			this.forceNum=forceBuyNum;
+			if (forceBuyNum!=0) 
+			{
+				TouchableUtil.gray(_skin.btn_jia);
+				TouchableUtil.gray(_skin.btn_jian);
+				TouchableUtil.gray(_skin.max);
+				setBuyNum(forceBuyNum);
+			}
+			else
+			{
+				TouchableUtil.ungray(_skin.btn_jia);
+				TouchableUtil.ungray(_skin.btn_jian);
+				TouchableUtil.ungray(_skin.max);
+				setBuyNum(1);
+			}
+			
+			
 			
 			createAdvise(config);
 		}
