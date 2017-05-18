@@ -404,7 +404,7 @@ package com.rpgGame.app.ui.main
 			var mapId:int=MainRoleManager.actorInfo.mapID;
 			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
 			var mapCfg:Q_map=sceneData.getData();
-			if(mapCfg.q_map_zones==1){//副本
+			if(/*mapCfg.q_map_zones==1*/true){//副本
 				this.removeChild(_taskBar);
 				this.addChild(_dungeonTrackerBar);
 			}else{
