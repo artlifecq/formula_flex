@@ -19,8 +19,6 @@ package com.rpgGame.app.ui.common
 	{
 		private var _renderGroup:LayoutGroup;
 		private var _tileLayout:TiledRowsLayout;
-		private var _preBtn:Button;
-		private var _nextBtn:Button;
 		private var _itemRendererType:Class;
 		
 		/**
@@ -31,15 +29,11 @@ package com.rpgGame.app.ui.common
 		 *每页显示的数量 
 		 */
 		private var _onePageNum:int;
-		/**
-		 *当前页面 
-		 */
-		private var currentPage:int=1;
-		private var dataIndex:int;
+		private var _currentPage:int=1;
 		private var renderList:Vector.<DefaultPageItemRender>;
 		private var maxPage:int;
-		private var _next:Button;
-		private var _pre:Button;
+		private var _nextBtn:Button;
+		private var _preBtn:Button;
 		
 		public function PageContainerUI(onePageNum:int,pre:Button,next:Button)
 		{
@@ -51,27 +45,42 @@ package com.rpgGame.app.ui.common
 			renderList=new Vector.<DefaultPageItemRender>();
 			this.addChild(_renderGroup);
 			
-			_pre=pre;
-			_next=next;
+			_preBtn=pre;
+			_nextBtn=next;
 			
-			_pre.addEventListener(Event.TRIGGERED,onPre);
-			_next.addEventListener(Event.TRIGGERED,onNext);
+			_preBtn.addEventListener(Event.TRIGGERED,onPre);
+			_nextBtn.addEventListener(Event.TRIGGERED,onNext);
 		}
 		
+		/**
+		 *当前页面 
+		 */
+		public function set currentPage(value:int):void
+		{
+			_currentPage = value;
+			if(_currentPage>maxPage){
+				_currentPage=maxPage;
+			}
+			if(_currentPage<1){
+				_currentPage=1;
+			}
+			updateItemView();
+		}
+
 		private function onNext(event:Event):void
 		{
-			currentPage++;
-			if(currentPage>maxPage){
-				currentPage=maxPage;
+			_currentPage++;
+			if(_currentPage>maxPage){
+				_currentPage=maxPage;
 			}
 			updateItemView();
 		}
 		
 		private function onPre(event:Event):void
 		{
-			currentPage--;
-			if(currentPage<1){
-				currentPage=1;
+			_currentPage--;
+			if(_currentPage<1){
+				_currentPage=1;
 			}
 			updateItemView();
 		}
@@ -141,7 +150,7 @@ package com.rpgGame.app.ui.common
 		private function updateItemView():void
 		{
 			maxPage=Math.ceil(_dataProvider.length/_onePageNum);
-			var index:int=(currentPage-1)*_onePageNum;
+			var index:int=(_currentPage-1)*_onePageNum;
 			var data:Object;
 			var item:DefaultPageItemRender;
 			for(var i:int=0;i<_onePageNum;i++){
@@ -155,6 +164,9 @@ package com.rpgGame.app.ui.common
 				}
 				index++;
 			}
+			
+			_preBtn.visible=_currentPage!=1;
+			_nextBtn.visible=_currentPage!=maxPage;
 		}
 		
 		override public function dispose():void
@@ -168,8 +180,8 @@ package com.rpgGame.app.ui.common
 				this._dataProvider.removeEventListener(CollectionEventType.RESET, resetHandler);
 				this._dataProvider.removeEventListener(Event.CHANGE, changeHandler);
 			}
-			_pre.removeEventListener(Event.TRIGGERED,onPre);
-			_next.removeEventListener(Event.TRIGGERED,onNext);
+			_preBtn.removeEventListener(Event.TRIGGERED,onPre);
+			_nextBtn.removeEventListener(Event.TRIGGERED,onNext);
 		}
 	}
 }
