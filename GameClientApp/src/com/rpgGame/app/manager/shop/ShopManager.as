@@ -191,6 +191,7 @@ package  com.rpgGame.app.manager.shop
 				{
 					price=vo.data.discountPrice;
 				}
+				var needGold:int=0;
 				var allNeed:int=buyNum*price;
 				var priceType:int=vo.data.priceType;
 				var have:int=Mgr.shopMgr.getCurrency(priceType);
@@ -202,12 +203,21 @@ package  com.rpgGame.app.manager.shop
 						return;
 					}
 						//礼金+元宝
-					else if (CharAttributeType.RES_BIND_GOLD) 
+					else if (CharAttributeType.RES_BIND_GOLD==priceType) 
 					{
-						var needGold:int=allNeed-have;
+						needGold=allNeed-have;
 						if (Mgr.shopMgr.getCurrency(CharAttributeType.RES_GOLD)>=needGold) 
 						{
-							GameAlertYellowBtnExt.show("礼金不足，是否再使用用"+(needGold)+"元宝支付？",Mgr.shopMgr.ReqBuyItem,[vo.data,buyNum]);
+							GameAlertYellowBtnExt.show("礼金不足，是否再使用"+(needGold)+"元宝支付？",Mgr.shopMgr.ReqBuyItem,[vo.data,buyNum]);
+							return;
+						}
+					}
+					else if (CharAttributeType.RES_BIND_MONEY==priceType) 
+					{
+						needGold=allNeed-have;
+						if (Mgr.shopMgr.getCurrency(CharAttributeType.RES_MONEY)>=needGold) 
+						{
+							GameAlertYellowBtnExt.show("绑定银两不足，是否再使用"+(needGold)+"银两支付？",Mgr.shopMgr.ReqBuyItem,[vo.data,buyNum]);
 							return;
 						}
 					}
