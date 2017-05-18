@@ -61,6 +61,8 @@ package com.rpgGame.app.process
     import flash.events.KeyboardEvent;
     import flash.ui.Keyboard;
     
+    import app.message.BoolArrayProto;
+    
     import away3d.log.Log;
     
     import gameEngine2D.NetDebug;
@@ -162,11 +164,22 @@ package com.rpgGame.app.process
 			SceneSwitchManager.changeMap();
 		}
 		
+		private var isShow:Boolean = true;
 		private function onShowFrameState(e:KeyboardEvent):void
 		{
 			if(e.shiftKey&&e.keyCode==Keyboard.D)
 			{
-				showFrameState();
+				isShow = !isShow;
+				if(isShow)
+				{
+					StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
+				}
+				else
+				{
+					StatsUtil.hideAwayStats();
+				}
+				LayerManager.showOrHideMM();
+				ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
 			}
 		}
 		
@@ -176,7 +189,7 @@ package com.rpgGame.app.process
 			LayerManager.showOrHideMM();
 			ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
             // 屏蔽未捕获信息
-            Log.logCallBack = GameLog.logItem;
+//            Log.logCallBack = GameLog.logItem;
 		}
 		
 		private function tipsSetup() : void
@@ -222,19 +235,6 @@ package com.rpgGame.app.process
             CONFIG::netDebug {
                 NetDebug.LOG("[StarGame] 开始游戏");
             }
-				
-			//buff测试，过段时间删除 
-//			MainRoleManager.actorInfo.buffList = new Vector.<BuffInfo>();
-//			for (var i : int = 1; i < 30; i++)
-//			{
-//				var buff : BuffInfo = new BuffInfo(MainRoleManager.actorID);
-//				buff.curtStackCount = 2;
-//				buff.cfgId = i;
-//				buff.disappearTime = SystemTimeManager.curtTm + buff.totalTime;
-//				//EventManager.dispatchEvent(BuffEvent.ADD_BUFF, buff);
-//				MainRoleManager.actorInfo.buffList.push(buff);
-//			}
-//			EventManager.dispatchEvent(BuffEvent.UPDATE_BUFF, MainRoleManager.actorID);
 		}
 
 		private function initMM() : void

@@ -11,14 +11,17 @@ package starling.textures
 		
 		function get transformationMatrixToRoot():Matrix;
 		
-		function get key():String;
-		function set key(value:String):void;
-		
 		function get root():ConcreteTexture;
 
 		function get disposed():Boolean;
 		
-		function get referencedMeshCount():uint;
-		function set referencedMeshCount(value:uint):void;
+		function get referencedMeshCount():int;
+		function set referencedMeshCount(value:int):void;
+		
+		function set isDynamic(value:Boolean):void;
+		function get isDynamic():Boolean;
+		
+		function set key(value:String):void;
+		function get key():String;
 	}
 }

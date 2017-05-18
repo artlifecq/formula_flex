@@ -353,10 +353,11 @@ package feathers.controls
 			{
 				this.selectedIndex = -1;
 			}
-			else
+			//不需要默认选中第一个
+/*			else
 			{
 				this.selectedIndex = 0;
-			}
+			}*/
 			//this ensures that Event.CHANGE will dispatch for selectedItem
 			//changing, even if selectedIndex has not changed.
 			if(this.selectedIndex == oldSelectedIndex && this.selectedItem != oldSelectedItem)
@@ -1777,8 +1778,11 @@ package feathers.controls
 			{
 				this.textInput.setFocus();
 				this.textInput.selectRange(0, this.textInput.text.length);
+			}else if(!this.textInput.isEditable && isInBounds)
+			{
+				openList();
 			}
-			this.stage.addEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
+			Starling.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
 		}
 		
 		/**
@@ -1788,7 +1792,7 @@ package feathers.controls
 		{
 			super.focusOutHandler(event);
 			this.textInput.clearFocus();
-			this.stage.removeEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
+			Starling.current.stage.removeEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
 		}
 		
 		/**

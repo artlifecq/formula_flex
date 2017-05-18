@@ -178,6 +178,10 @@ package com.rpgGame.coreData.lang
 		public static const LostSkill_ActivitMsg:String = "LostSkill_ActivitMsg";
 		 /**  您已有队伍，是否退出现在队伍申请加入其它队伍? */
 		public static const TeamJoinOtherTeam:String = "TeamJoinOtherTeam";
+		 /**  您当前的战斗力低于推荐战斗力，挑战会无比艰难，确认要进入挑战么？ */
+		public static const LUNJIAN_FIGHT_MIN:String = "LUNJIAN_FIGHT_MIN";
+		 /**  此装备具有锻造属性！是否仍然作为材料消耗？ */
+		public static const EQUIP_USE_TIPS:String = "EQUIP_USE_TIPS";
 
 	}
 }

@@ -450,7 +450,7 @@ package com.editor.scene.animator
 			TweenLite.killDelayedCallsTo(onTimeOutRemove);
 		}
 
-		public function update() : void
+		public function update(gapTm:uint) : void
 		{
 		}
 

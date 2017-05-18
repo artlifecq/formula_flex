@@ -13,10 +13,10 @@ package starling.textures
     import flash.display3D.textures.TextureBase;
     import flash.geom.Matrix;
     import flash.geom.Rectangle;
-    import flash.utils.ByteArray;
     
     import away3d.core.managers.Stage3DProxy;
     import away3d.events.EventDispatcher;
+    import away3d.textures.TextureProxyBase;
     
     import starling.core.starling_internal;
 
@@ -37,12 +37,13 @@ package starling.textures
         private var _transformationMatrixToRoot:Matrix;
 
 		private var _key:String;
-		protected var _bgraBytes:ByteArray;
-		protected var _referencedMeshCount:uint;
+		protected var _referencedMeshCount:int;
+		private var _isDynamic:Boolean;
+		private static var totalSubTexture:int;
 		
 		public function get key():String
 		{
-			return _key;
+			return _key || "sub_"+( parent ? parent.key : "no_parant");
 		}
 		
 		public function set key(value:String):void
@@ -76,11 +77,8 @@ package starling.textures
                                    ownsParent:Boolean=false,
                                    rotated:Boolean=false)
         {
+			totalSubTexture++;
             starling_internal::setTo(parent, region, ownsParent, rotated);
-			CONFIG::Starling_Debug
-				{
-					this.key = parent.key;
-				}
         }
 
         /** @private
@@ -137,20 +135,44 @@ package starling.textures
         /** Disposes the parent texture if this texture owns it. */
         public function dispose():void
         {
-			_disposed = true;
-            if (_ownsParent) _parent.dispose();
-            //super.dispose();
+			if(_referencedMeshCount > 0)
+				_referencedMeshCount--;
+			
+			if(_isDynamic)
+				return;
+			
+			if(_referencedMeshCount < 1)
+			{
+				if(!_disposed)
+					totalSubTexture--;
+				_disposed = true;
+				if (_ownsParent) _parent.dispose();
+			}
         }
 		
+		public static function get numInstance():int
+		{
+			return totalSubTexture;
+		}
 		
-		public function get referencedMeshCount():uint
+		public function get referencedMeshCount():int
 		{
 			return _referencedMeshCount;
 		}
 		
-		public function set referencedMeshCount(value:uint):void
+		public function set referencedMeshCount(value:int):void
 		{
 			_referencedMeshCount = value;
+		}
+		
+		public function get isDynamic():Boolean
+		{
+			return _isDynamic;
+		}
+		
+		public function set isDynamic(value:Boolean):void
+		{
+			_isDynamic = value;
 		}
 
         /** The texture which the SubTexture is based on. */
@@ -192,6 +214,11 @@ package starling.textures
 		
 		public function set optimizeForRenderToTexture(value:Boolean):void{ _parent.optimizeForRenderToTexture = value;}
 		
+		public function get textureType():int
+		{
+			return Stage3DProxy.STARLING_TYPE;	
+		}
+		
 		/** 更新parent贴图  guoqing.wen add*/
 		public function updateTexture(parent:IStarlingTexture, region:Rectangle=null,
 									  ownsParent:Boolean=false,
@@ -207,13 +234,13 @@ package starling.textures
 		
 		public function invalidateContent():void
 		{
-			if (_parent)
-				_parent.invalidateContent();
+//			if (_parent)
+//				_parent.invalidateContent();
 		}
 		
 		public function set autoRecycleEnable(value:Boolean):void
 		{
-			_parent.autoRecycleEnable = value;
+//			_parent.autoRecycleEnable = value;
 		}
 		
 		public function get autoRecycleEnable():Boolean
@@ -223,7 +250,7 @@ package starling.textures
 		
 		public function set autoRecycleDataEnable(value:Boolean):void
 		{
-			_parent.autoRecycleDataEnable = value;
+//			_parent.autoRecycleDataEnable = value;
 		}
 		
 		public function get autoRecycleDataEnable():Boolean
@@ -264,12 +291,12 @@ package starling.textures
 		
 		final public function set repeat(value:Boolean):void
 		{
-			root.repeat = value;
+//			root.repeat = value;
 		}
 		
 		final public function set smooth(value:Boolean):void
 		{
-			root.smooth = value;
+//			root.smooth = value;
 		}
     }
 }

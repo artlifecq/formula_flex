@@ -34,6 +34,8 @@ package com.rpgGame.core.events.country
 		public static const COUNTRY_DATA_ONLINE : int = UNIQUEID.NEXT;
 		/**国家面板打开的时候切换到哪个面板**/
 		public static const COUNTRY_PANEL_TABBAR_SELECT : int = UNIQUEID.NEXT;
+		
+		public static const SOCIETY_ITEM_PANEL_SHOW_PAGE : int = UNIQUEID.NEXT;
 
 		public function CountryEvent()
 		{

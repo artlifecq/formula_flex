@@ -48,7 +48,7 @@ package com.client
 			Away3D.PARSE_JPG_IN_WORKER = true;
 			Away3D.PARSE_PNG_IN_WORKER = true;
 //			Away3D.PARSE_TERRAIN_WITH_WORKER = true;
-			Away3D.EVIL3D_VERSION = Math.random() * int.MAX_VALUE;
+//			Away3D.EVIL3D_VERSION = Math.random() * int.MAX_VALUE;
 			MultiUrlLoadManager.getUrlWithVersion = VersionUtils.getVersionPath;
 			Away3D.USE_TEXTURES_BPG_FORMAT = ClientGlobal.useBpgFormat;
 			if (ClientGlobal.uiCompressed)

@@ -2727,7 +2727,7 @@ package feathers.controls
 		 */
 		protected function layoutStepButtons():void
 		{
-			var showButtons:Boolean = this._maximum != this._minimum;
+			var showButtons:Boolean = this._maximum != this._minimum || alwaysVisible;
 			this.decrementButton.visible = showButtons && !_showSliderMode;
 			this.incrementButton.visible = showButtons && !_showSliderMode;
 			if(!showButtons)return;
@@ -2747,15 +2747,15 @@ package feathers.controls
 			if(this._direction == Direction.VERTICAL)
 			{
 				this.decrementButton.x = (this.actualWidth - this.decrementButton.width) / 2;
-				this.decrementButton.y = 0;
+				this.decrementButton.y = 0 + int(decrementButton.paddingTop);
 				this.incrementButton.x = (this.actualWidth - this.incrementButton.width) / 2;
-				this.incrementButton.y = this.actualHeight - this.incrementButton.height;
+				this.incrementButton.y = this.actualHeight - this.incrementButton.height - int(this.incrementButton.paddingBottom);
 			}
 			else
 			{
-				this.decrementButton.x = 0;
+				this.decrementButton.x = 0 + int(this.decrementButton.paddingLeft);
 				this.decrementButton.y = (this.actualHeight - this.decrementButton.height) / 2;
-				this.incrementButton.x = this.actualWidth - this.incrementButton.width;
+				this.incrementButton.x = this.actualWidth - this.incrementButton.width - int(this.incrementButton.paddingRight);
 				this.incrementButton.y = (this.actualHeight - this.incrementButton.height) / 2;
 			}
 		}
@@ -2776,6 +2776,8 @@ package feathers.controls
 		{
 			_thumbAutoResize = value;
 		}
+		
+		public var alwaysVisible:Boolean = false;
 		//==========================zhuzhongmao=================================
 
 		/**
@@ -2784,7 +2786,8 @@ package feathers.controls
 		protected function layoutThumb():void
 		{
 			var range:Number = this._maximum - this._minimum;
-			this.thumb.visible = range > 0 && range < Number.POSITIVE_INFINITY && this._isEnabled;
+			var showButtons:Boolean = range > 0 && range < Number.POSITIVE_INFINITY && this._isEnabled;
+			this.thumb.visible = showButtons;// || alwaysVisible;
 			if(!this.thumb.visible)
 			{
 				return;
@@ -2858,7 +2861,7 @@ package feathers.controls
 		 */
 		protected function layoutTrackWithMinMax():void
 		{
-			var showButtons:Boolean = this._maximum != this._minimum;
+			var showButtons:Boolean = this._maximum != this._minimum || alwaysVisible;
 			this.minimumTrack.visible = this.maximumTrack.visible = showButtons;
 			if(!showButtons)return;
 			var range:Number = this._maximum - this._minimum;
@@ -2954,7 +2957,7 @@ package feathers.controls
 		 */
 		protected function layoutTrackWithSingle():void
 		{
-			var showButtons:Boolean = this._maximum != this._minimum;
+			var showButtons:Boolean = this._maximum != this._minimum || alwaysVisible;
 			this.minimumTrack.visible = showButtons;
 //			if(!showButtons)return;
 			var range:Number = this._maximum - this._minimum;

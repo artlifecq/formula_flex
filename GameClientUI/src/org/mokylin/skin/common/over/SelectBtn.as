@@ -1,6 +1,5 @@
 package org.mokylin.skin.common.over
 {
-	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 
@@ -14,9 +13,9 @@ package org.mokylin.skin.common.over
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var iconDisplay:feathers.controls.UIAsset;
+		public var __SelectBtn_UIAsset1:feathers.controls.UIAsset;
 
-		public var labelDisplay:feathers.controls.Label;
+		public var __SelectBtn_UIAsset2:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -26,69 +25,49 @@ package org.mokylin.skin.common.over
 		{
 			super();
 			
-			this.currentState = "up";
+			this.currentState = "upAndSelected";
 			this.height = 24;
 			this.width = 242;
 			this.elementsContent = [];
+			__SelectBtn_UIAsset1_i();
+			__SelectBtn_UIAsset2_i();
+			
 			
 			states = {
-				up:[
-						{target:"labelDisplay",
-							name:"bottom",
-							value:0
-						}
-					]
-				,
-				init:[
-						{target:"labelDisplay",
-							name:"textAlign",
-							value:"center"
-						}
-						,
-						{target:"labelDisplay",
-							name:"color",
-							value:0xFFFFFF
-						}
-						,
-						{target:"labelDisplay",
-							name:"verticalAlign",
-							value:"middle"
-						}
-					]
 			};
 			skinNames={"down":"ui/common/hover/xuanqukuang2.png",
-			"downAndSelected":"ui/common/hover/xuanqukuang.png",
+			"downAndSelected":"ui/common/hover/xuanqukuang2.png",
 			"hover":"ui/common/hover/xuanqukuang2.png",
-			"hoverAndSelected":"ui/common/hover/xuanqukuang.png",
+			"overAndSelected":"ui/common/hover/xuanqukuang2.png",
 			"up":"ui/common/hover/xuanqukuang2_alpha.png",
-			"upAndSelected":"ui/common/hover/xuanqukuang.png"};
+			"upAndSelected":"ui/common/hover/xuanqukuang2.png"};
 		}
 
 
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function iconDisplay_i():feathers.controls.UIAsset
+		private function __SelectBtn_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			iconDisplay = temp;
-			temp.name = "iconDisplay";
+			__SelectBtn_UIAsset1 = temp;
+			temp.bottom = 0;
+			temp.left = 0;
+			temp.right = 0;
+			temp.styleName = "ui/common/hover/xuanqukuang2.png";
+			temp.top = 0;
 			return temp;
 		}
 
-		private function labelDisplay_i():feathers.controls.Label
+		private function __SelectBtn_UIAsset2_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			labelDisplay = temp;
-			temp.name = "labelDisplay";
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			__SelectBtn_UIAsset2 = temp;
 			temp.bottom = 0;
-			temp.left = 20;
+			temp.left = 0;
 			temp.right = 0;
-			temp.text = "2222222";
-			temp.textAlign = "center";
-			temp.color = 0xFFFFFF;
+			temp.styleName = "ui/common/hover/xuanqukuang2_alpha.png";
 			temp.top = 0;
-			temp.verticalAlign = "middle";
 			return temp;
 		}
 

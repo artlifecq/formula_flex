@@ -10,9 +10,7 @@ package com.rpgGame.app.state.role.action
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
-
-	import away3d.animators.transitions.CrossfadeTransition;
-
+	
 	import gs.TweenLite;
 
 	/**
@@ -145,13 +143,13 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.DEPUTY_WEAPON:
 					render.visible = true;
 					render.repeat = 1;
-					render.setStatus(matchStatus, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
+					render.setStatus(matchStatus, _useCrossfadeTransition ? 0.2 : null, time);
 					if (isFreeze)
 						render.stop(time);
 					break;
 				case RenderUnitType.MOUNT:
 					render.repeat = 1;
-					render.setStatus(status, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
+					render.setStatus(status, _useCrossfadeTransition ? 0.2 : null, time);
 					if (isFreeze)
 						render.stop(time);
 					break;

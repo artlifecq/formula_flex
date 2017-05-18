@@ -1,5 +1,6 @@
 package com.game.engine2D.scene.render
 {
+	import com.game.engine2D.SceneCharacter;
 	import com.game.engine2D.scene.render.vo.IRenderUnitData;
 	import com.game.engine2D.scene.render.vo.RenderParamData;
 	import com.game.engine2D.scene.render.vo.img.RenderFaceData;
@@ -47,7 +48,7 @@ package com.game.engine2D.scene.render
 				}
 			}
 		}
-		 
+		
 		/**
 		 * 是否在可视范围内 
 		 * @param value
@@ -337,10 +338,11 @@ package com.game.engine2D.scene.render
 		{
 			super.reSet(null);
 			mouseEnabled = true;
-			
 			_graphicDis = PoolContainer.create();
-			
 			_graphicDis.name = "RenderSet";
+			_graphicDis.rotationX = 0;
+			_graphicDis.rotationY = 0;
+			_graphicDis.rotationZ = 0;
 		}
 		
 		//---------------------------对象池---------------------------
@@ -400,7 +402,7 @@ package com.game.engine2D.scene.render
 			_renderUnitList.length = 0;
 			
 			_parent = null;
-
+			
 			if (_graphicDis)
 				PoolContainer.recycle(_graphicDis as PoolContainer);
 			_graphicDis = null;
@@ -602,7 +604,7 @@ package com.game.engine2D.scene.render
 			ap.finalShowY = this.finalShowY;
 			ap.isMainChar = isMainChar;
 			ap.depthEnable = this.depthEnable;
-			ap.layerType = this.layerType;
+			//			ap.layerType = this.layerType;
 			ap.renderSet = this;
 			////////////////////////////////////
 			if($apd.playCompleteAutoRecycle)
@@ -896,7 +898,7 @@ package com.game.engine2D.scene.render
 				ap.depthEnable = value;
 			}
 		}
-	
+		
 		//运行相关
 		//-----------------------------------------------------------------------------------------------------------
 		/**
@@ -904,7 +906,7 @@ package com.game.engine2D.scene.render
 		 * @param $fun 第一个参数是参数sceneCharacter, 第二个参数是RenderUnit
 		 * 
 		 */		
-		public function forEachRenderUnit($fun:Function,...args):void
+		public function forEachRenderUnit($fun:Function,scene:*):void
 		{
 			//检查换装内
 			var ap:RenderUnit;
@@ -912,8 +914,9 @@ package com.game.engine2D.scene.render
 			while(len-- > 0)
 			{
 				ap = _renderUnitList[len];
-				var arr:Array = args.concat(ap);
-				$fun.apply($fun,arr);               
+				//				var arr:Array = args.concat(ap);
+				//				$fun.apply($fun,[scene,ap]);      
+				$fun(scene,ap);
 			}
 		}
 		

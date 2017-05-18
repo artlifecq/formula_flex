@@ -51,7 +51,7 @@ package starling.styles
      *  <p>Another advantage of this rendering technique: it supports very efficient rendering of
      *  some popular filter effects, in just one pass, directly on the GPU. You can add an
      *  <em>outline</em> around the shape, let it <em>glow</em> in an arbitrary color, or add
-     *  a <em>shadow</em>.</p>
+     *  a <em>drop shadow</em>.</p>
      *
      *  <p>The type of effect currently used is called the 'mode'.
      *  Meshes with the same mode will be batched together on rendering.</p>
@@ -94,13 +94,13 @@ package starling.styles
 
         /** Creates a new distance field style.
          *
-         *  @param threshold  the value separating the inside from the outside of the shape.
-         *                    Range: 0 - 1.
          *  @param softness   adds a soft transition between the inside and the outside.
          *                    This should typically be 1.0 divided by the spread used when
          *                    creating the distance field texture.
+         *  @param threshold  the value separating the inside from the outside of the shape.
+         *                    Range: 0 - 1.
          */
-        public function DistanceFieldStyle(threshold:Number=0.5, softness:Number=0.125)
+        public function DistanceFieldStyle(softness:Number=0.125, threshold:Number=0.5)
         {
             _mode = MODE_BASIC;
             _threshold = threshold;
@@ -191,7 +191,7 @@ package starling.styles
                 vertexData.setUnsignedInt(i, "outerColor", outerColor);
             }
 
-            setRequiresRedraw();
+            setVertexDataChanged();
         }
 
         /** @private */
@@ -231,16 +231,12 @@ package starling.styles
             var dfEffect:DistanceFieldEffect = effect as DistanceFieldEffect;
             dfEffect.mode = _mode;
 
-            if (state.is3D) dfEffect.scale = 1.0;
-            else
-            {
-                // The softness is adapted automatically with the total scale of the object.
-                // However, this only works for 2D objects.
+            // The softness is adapted automatically with the total scale of the object.
+            // However, this only works for 2D objects.
 
-                var matrix:Matrix = state.modelviewMatrix;
-                var scale:Number = Math.sqrt(matrix.a * matrix.a + matrix.c * matrix.c);
-                dfEffect.scale = scale;
-            }
+            var matrix:Matrix = state.modelviewMatrix;
+            var scale:Number = Math.sqrt(matrix.a * matrix.a + matrix.c * matrix.c);
+            dfEffect.scale = scale;
 
             super.updateEffect(effect, state);
         }
@@ -297,7 +293,7 @@ package starling.styles
          *
          *  <p>Beware that the style can only act within the limits of the mesh's vertices.
          *  This means that not all combinations of blur and offset are possible; too high values
-         *  will appear the shadow to be cut off on the sides. Reduce either blur or offset to
+         *  will cause the shadow to be cut off on the sides. Reduce either blur or offset to
          *  compensate.</p>
          */
         public function setupDropShadow(blur:Number=0.2, offsetX:Number=2, offsetY:Number=2,
@@ -318,8 +314,14 @@ package starling.styles
 
         // properties
 
-        /** The current render mode, as determined by the 'setup...'-methods. @default basic */
+        /** The current render mode. It's recommended to use one of the 'setup...'-methods to
+         *  change the mode, as those provide useful standard settings, as well. @default basic */
         public function get mode():String { return _mode; }
+        public function set mode(value:String):void
+        {
+            _mode = value;
+            setRequiresRedraw();
+        }
 
         /** The threshold that will separate the inside from the outside of the shape. On the
          *  distance field texture, '0' means completely outside, '1' completely inside; the
@@ -456,13 +458,16 @@ package starling.styles
 
 import flash.display3D.Context3DProgramType;
 
+import away3d.arcane;
 import away3d.core.managers.Stage3DProxy;
 
 import starling.rendering.MeshEffect;
-import starling.rendering.Program;
+import starling.rendering.ProgramNameID;
 import starling.rendering.VertexDataFormat;
 import starling.styles.DistanceFieldStyle;
 import starling.utils.StringUtil;
+
+use namespace arcane;
 
 class DistanceFieldEffect extends MeshEffect
 {
@@ -480,123 +485,165 @@ class DistanceFieldEffect extends MeshEffect
         _scale = 1.0;
         _mode = DistanceFieldStyle.MODE_BASIC;
     }
-
-    override protected function createProgram():Program
-    {
-        if (texture)
-        {
-            // va0 - position
-            // va1 - tex coords
-            // va2 - color
-            // va3 - basic settings (threshold, alpha, softness, local scale [encoded])
-            // va4 - outer settings (outerThreshold, outerAlphaEnd, outerOffsetX/Y)
-            // va5 - outer color (rgb, outerAlphaStart)
-            // vc5 - shadow offset multiplier (x, y), max local scale (z), global scale (w)
-
-            var isBasicMode:Boolean  = _mode == DistanceFieldStyle.MODE_BASIC;
-            var isShadowMode:Boolean = _mode == DistanceFieldStyle.MODE_SHADOW;
-
-            /// *** VERTEX SHADER ***
-
-            var vertexShader:Vector.<String> = new <String>[
-                "m44 op, va0, vc0", // 4x4 matrix transform to output clip-space
-                "mov v0, va1     ", // pass texture coordinates to fragment program
-                "mul v1, va2, vc4", // multiply alpha (vc4) with color (va2), pass to fp
-                "mov v3, va3     ",
-                "mov v4, va4     ",
-                "mov v5, va5     ",
-
-                // update softness to take current scale into account
-                "mul vt0.x, va3.w, vc5.z", // vt0.x = local scale [decoded]
-                "mul vt0.x, vt0.x, vc5.w", // vt0.x *= global scale
-                "div vt0.x, va3.z, vt0.x", // vt0.x = softness / total scale
-
-                // calculate min-max of threshold
-                "mov vt1, vc4",             // initialize vt1 with something (anything)
-                "sub vt1.x, va3.x, vt0.x",  // vt1.x = thresholdMin
-                "add vt1.y, va3.x, vt0.x"   // vt1.y = thresholdMax
-            ];
-
-            if (!isBasicMode)
-            {
-                vertexShader.push(
-                    // calculate min-max of outer threshold
-                    "sub vt1.z, va4.x, vt0.x",     // vt1.z = outerThresholdMin
-                    "add vt1.w, va4.x, vt0.x"      // vt1.w = outerThresholdMax
-                );
-            }
-
-            vertexShader.push("sat v6, vt1"); // v6.xyzw = thresholdMin/Max, outerThresholdMin/Max
-
-            if (isShadowMode)
-            {
-                vertexShader.push(
-                    // calculate shadow offset
-                    "mul vt0.xy, va4.zw, vc6.zz", // vt0.x/y = outerOffsetX/Y * 2
-                    "sub vt0.xy, vt0.xy, vc6.yy", // vt0.x/y -= 1   -> range -1, 1
-                    "mul vt0.xy, vt0.xy, vc5.xy", // vt0.x/y = outerOffsetX/Y in point size
-                    "sub v7, va1, vt0.xyxy",      // v7.xy = shadow tex coords
-
-                    // on shadows, the inner threshold is further inside than on glow & outline
-                    "sub vt0.z, va3.x, va4.x",    // get delta between threshold and outer threshold
-                    "add v7.z, va3.x, vt0.z"      // v7.z = inner threshold of shadow
-                );
-            }
-
-            /// *** FRAGMENT SHADER ***
-
-            var fragmentShader:Vector.<String> = new <String>[
-                // create basic inner area
-                tex("ft0", "v0", 0, texture),     // ft0 = texture color
-                "mov ft1, ft0",                   // ft1 = texture color
-                step("ft1.w", "v6.x", "v6.y"),    // make soft inner mask
-                "mov ft3, ft1",                   // store copy of inner mask in ft3 (for outline)
-                "mul ft1, v1, ft1.wwww"           // multiply with color
-            ];
-
-            if (isShadowMode)
-            {
-                fragmentShader.push(
-                    tex("ft0", "v7", 0, texture), // sample at shadow tex coords
-                    "mov ft5.x, v7.z"             // ft5.x = inner threshold of shadow
-                );
-            }
-            else if (!isBasicMode)
-            {
-                fragmentShader.push(
-                    "mov ft5.x, v6.x"             // ft5.x = inner threshold of outer area
-                );
-            }
-
-            if (!isBasicMode)
-            {
-                fragmentShader.push(
-                    // outer area
-                    "mov ft2, ft0",                 // ft2 = texture color
-                    step("ft2.w", "v6.z", "v6.w"),  // make soft outer mask
-                    "sub ft2.w, ft2.w, ft3.w",      // subtract inner area
-                    "sat ft2.w, ft2.w",             // but stay within 0-1
-
-                    // add alpha gradient to outer area
-                    "mov ft4, ft0",                 // ft4 = texture color
-                    step("ft4.w", "v6.z", "ft5.x"), // make soft mask ranging between thresholds
-                    "sub ft6.w, v5.w, v4.y",        // ft6.w  = alpha range (outerAlphaStart - End)
-                    "mul ft4.w, ft4.w, ft6.w",      // ft4.w *= alpha range
-                    "add ft4.w, ft4.w, v4.y",       // ft4.w += alpha end
-
-                    // colorize outer area
-                    "mul ft2.w, ft2.w, ft4.w",      // get final outline alpha at this position
-                    "mul ft2.xyz, v5.xyz, ft2.www"  // multiply with outerColor
-                );
-            }
-
-            if (isBasicMode) fragmentShader.push("mov oc, ft1");
-            else             fragmentShader.push("add oc, ft1, ft2");
-
-            return Program.fromSource(vertexShader.join("\n"), fragmentShader.join("\n"));
-        }
-        else return super.createProgram();
-    }
+	
+	override protected function get programVariantName():uint
+	{
+		var modeBits:uint;		
+		
+		switch (_mode)		
+		{		
+			case DistanceFieldStyle.MODE_SHADOW:  modeBits = 3; break;		
+			case DistanceFieldStyle.MODE_GLOW:    modeBits = 2; break;		
+			case DistanceFieldStyle.MODE_OUTLINE: modeBits = 1; break;		
+			default:                              modeBits = 0;		
+		}		
+		
+		return super.programVariantName | (modeBits << 8);
+	}
+	
+	override protected function get programBaseName():uint 
+	{ 
+		return ProgramNameID.DISTANE_FIELD_STLYE;
+	}
+	
+	override arcane function getVertexCode():String
+	{
+		if (texture)
+		{
+			// va0 - position
+			// va1 - tex coords
+			// va2 - color
+			// va3 - basic settings (threshold, alpha, softness, local scale [encoded])
+			// va4 - outer settings (outerThreshold, outerAlphaEnd, outerOffsetX/Y)
+			// va5 - outer color (rgb, outerAlphaStart)
+			// vc5 - shadow offset multiplier (x, y), max local scale (z), global scale (w)
+			
+			var isBasicMode:Boolean  = _mode == DistanceFieldStyle.MODE_BASIC;
+			var isShadowMode:Boolean = _mode == DistanceFieldStyle.MODE_SHADOW;
+			
+			/// *** VERTEX SHADER ***
+			
+			var vertexCode:Vector.<String> = new <String>[
+				"m44 op, va0, vc0", // 4x4 matrix transform to output clip-space
+				"mov v0, va1     ", // pass texture coordinates to fragment program
+				"mul v1, va2, vc4", // multiply alpha (vc4) with color (va2), pass to fp
+				"mov v3, va3     ",
+				"mov v4, va4     ",
+				"mov v5, va5     ",
+				
+				// update softness to take current scale into account
+				"mul vt0.x, va3.w, vc5.z", // vt0.x = local scale [decoded]
+				"mul vt0.x, vt0.x, vc5.w", // vt0.x *= global scale
+				"div vt0.x, va3.z, vt0.x", // vt0.x = softness / total scale
+				
+				// calculate min-max of threshold
+				"mov vt1, vc4",             // initialize vt1 with something (anything)
+				"sub vt1.x, va3.x, vt0.x",  // vt1.x = thresholdMin
+				"add vt1.y, va3.x, vt0.x"   // vt1.y = thresholdMax
+			];
+			
+			if (!isBasicMode)
+			{
+				vertexCode.push(
+					// calculate min-max of outer threshold
+					"sub vt1.z, va4.x, vt0.x",     // vt1.z = outerThresholdMin
+					"add vt1.w, va4.x, vt0.x"      // vt1.w = outerThresholdMax
+				);
+			}
+			
+			vertexCode.push("sat v6, vt1"); // v6.xyzw = thresholdMin/Max, outerThresholdMin/Max
+			
+			if (isShadowMode)
+			{
+				vertexCode.push(
+					// calculate shadow offset
+					"mul vt0.xy, va4.zw, vc6.zz", // vt0.x/y = outerOffsetX/Y * 2
+					"sub vt0.xy, vt0.xy, vc6.yy", // vt0.x/y -= 1   -> range -1, 1
+					"mul vt0.xy, vt0.xy, vc5.xy", // vt0.x/y = outerOffsetX/Y in point size
+					"sub v7, va1, vt0.xyxy",      // v7.xy = shadow tex coords
+					
+					// on shadows, the inner threshold is further inside than on glow & outline
+					"sub vt0.z, va3.x, va4.x",    // get delta between threshold and outer threshold
+					"add v7.z, va3.x, vt0.z"      // v7.z = inner threshold of shadow
+				);
+			}
+			return vertexCode.join("\n");
+		}
+		else
+			return super.getVertexCode();
+			
+	}
+	
+	override arcane function getFragmentCode():String
+	{
+		if (texture)
+		{
+			// va0 - position
+			// va1 - tex coords
+			// va2 - color
+			// va3 - basic settings (threshold, alpha, softness, local scale [encoded])
+			// va4 - outer settings (outerThreshold, outerAlphaEnd, outerOffsetX/Y)
+			// va5 - outer color (rgb, outerAlphaStart)
+			// vc5 - shadow offset multiplier (x, y), max local scale (z), global scale (w)
+			
+			var isBasicMode:Boolean  = _mode == DistanceFieldStyle.MODE_BASIC;
+			var isShadowMode:Boolean = _mode == DistanceFieldStyle.MODE_SHADOW;
+						
+			/// *** FRAGMENT SHADER ***
+			
+			var fragmentCode:Vector.<String> = new <String>[
+				// create basic inner area
+				tex("ft0", "v0", 0, texture),     // ft0 = texture color
+				"mov ft1, ft0",                   // ft1 = texture color
+				step("ft1.w", "v6.x", "v6.y"),    // make soft inner mask
+				"mov ft3, ft1",                   // store copy of inner mask in ft3 (for outline)
+				"mul ft1, v1, ft1.wwww"           // multiply with color
+			];
+			
+			if (isShadowMode)
+			{
+				fragmentCode.push(
+					tex("ft0", "v7", 0, texture), // sample at shadow tex coords
+					"mov ft5.x, v7.z"             // ft5.x = inner threshold of shadow
+				);
+			}
+			else if (!isBasicMode)
+			{
+				fragmentCode.push(
+					"mov ft5.x, v6.x"             // ft5.x = inner threshold of outer area
+				);
+			}
+			
+			if (!isBasicMode)
+			{
+				fragmentCode.push(
+					// outer area
+					"mov ft2, ft0",                 // ft2 = texture color
+					step("ft2.w", "v6.z", "v6.w"),  // make soft outer mask
+					"sub ft2.w, ft2.w, ft3.w",      // subtract inner area
+					"sat ft2.w, ft2.w",             // but stay within 0-1
+					
+					// add alpha gradient to outer area
+					"mov ft4, ft0",                 // ft4 = texture color
+					step("ft4.w", "v6.z", "ft5.x"), // make soft mask ranging between thresholds
+					"sub ft6.w, v5.w, v4.y",        // ft6.w  = alpha range (outerAlphaStart - End)
+					"mul ft4.w, ft4.w, ft6.w",      // ft4.w *= alpha range
+					"add ft4.w, ft4.w, v4.y",       // ft4.w += alpha end
+					
+					// colorize outer area
+					"mul ft2.w, ft2.w, ft4.w",      // get final outline alpha at this position
+					"mul ft2.xyz, v5.xyz, ft2.www"  // multiply with outerColor
+				);
+			}
+			
+			if (isBasicMode) fragmentCode.push("mov oc, ft1");
+			else             fragmentCode.push("add oc, ft1, ft2");
+			
+			return fragmentCode.join("\n");
+		}
+		else
+			return super.getFragmentCode();
+	}
 
     private static function step(inOutReg:String, minReg:String, maxReg:String,
                                  tmpReg:String="ft6"):String
@@ -656,24 +703,12 @@ class DistanceFieldEffect extends MeshEffect
         return VERTEX_FORMAT;
     }
 
-    override protected function get programVariantName():uint
-    {
-        var modeBits:uint;
-
-        switch (_mode)
-        {
-            case DistanceFieldStyle.MODE_SHADOW:  modeBits = 3; break;
-            case DistanceFieldStyle.MODE_GLOW:    modeBits = 2; break;
-            case DistanceFieldStyle.MODE_OUTLINE: modeBits = 1; break;
-            default:                              modeBits = 0;
-        }
-
-        return super.programVariantName | (modeBits << 8);
-    }
-
     public function get scale():Number { return _scale; }
     public function set scale(value:Number):void { _scale = value; }
 
     public function get mode():String { return _mode; }
-    public function set mode(value:String):void { _mode = value; }
+    public function set mode(value:String):void 
+	{
+		_mode = value;
+	}
 }

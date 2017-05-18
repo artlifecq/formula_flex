@@ -23,7 +23,7 @@ package com.game.engine2D.scene
 		private var _smallScaleY:Number;
 		private var _smallMapTransform:Matrix;
 		private var _smallMapTextureMaterial:TextureMaterial;
-		private var _smallMaterial:TextureMaterial;
+//		private var _smallMaterial:TextureMaterial;
 		private var _smallMapTexture:AsyncMapTexture;
 		private var _sceneCurrent:Scene;
 		private var _smallVisible:Boolean;
@@ -66,15 +66,15 @@ package com.game.engine2D.scene
 			drawSmallMapTranslate();
 		}
 		
-		public function get smallMaterial():TextureMaterial
-		{
-			return _smallMaterial;
-		}
-		
-		public function set smallMaterial(value:TextureMaterial):void
-		{
-			_smallMaterial = value;
-		}
+//		public function get smallMaterial():TextureMaterial
+//		{
+//			return _smallMaterial;
+//		}
+//		
+//		public function set smallMaterial(value:TextureMaterial):void
+//		{
+//			_smallMaterial = value;
+//		}
 		
 		public function drawSmallMapScale():void
 		{

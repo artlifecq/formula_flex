@@ -3,7 +3,7 @@ package com.editor.scene.animator
 	import com.editor.fight.spell.ReleaseSpellInfo;
 	import com.editor.scene.SceneRole;
 	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.BaseObj3D;
 
@@ -45,7 +45,7 @@ package com.editor.scene.animator
 		override protected function onStartMove() : void
 		{
 			super.onStartMove();
-			var rud : RenderParamData = new RenderParamData(1, "FrontAxleDoubleAroundAnimator", _renderUnit.renderParamData.sourcePath, _renderUnit.renderParamData.sourceName);
+			var rud : RenderParamData3D = new RenderParamData3D(1, "FrontAxleDoubleAroundAnimator", _renderUnit.renderParamData.sourcePath, _renderUnit.renderParamData.sourceName);
 			_subEffectRu = _renderSet.addRenderUnit(rud);
 			_subEffectRu.repeat = 0;
 

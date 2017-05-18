@@ -1,10 +1,13 @@
 package com.rpgGame.appModule.dungeon.lunjian
 {
+	import com.game.engine3D.display.InterObject3D;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LunJianCfg;
 	import com.rpgGame.coreData.clientConfig.Q_lunjian;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -29,6 +32,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 		private var _skin:FuBenJieSuan2_Shengli;
 		private var _icon:IconCDFace;
 		private var leftTime:int;
+		private var eftRender:RenderUnit3D;
 		
 		public function LunJianSuccessPanel()
 		{
@@ -36,11 +40,30 @@ package com.rpgGame.appModule.dungeon.lunjian
 			super(_skin);
 			_icon=new IconCDFace(IcoSizeEnum.ICON_64);
 			_skin.container.addChild(_icon);
+			_icon.x=_skin.icon1.x;
+			_icon.y=_skin.icon1.y;
+			this.playInter3DAt(ClientConfig.getEffect("ui_tiaozhanshengli"),250,130,1,playComplete,addEft);
+		}
+		
+		private function addEft(render:RenderUnit3D):void
+		{
+			eftRender=render;
+			if(!this.parent){
+				eftRender.stop(0);
+			}else{
+				eftRender.play();
+			}
+		}
+		
+		private function playComplete(target:InterObject3D):void
+		{
+//			target.removeFromParent();
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
+			data=1;
 			var ljid:int=data;
 			var cfg:Q_lunjian=LunJianCfg.getCfgByID(ljid);
 			var rewads:Array=JSONUtil.decode(cfg.q_rewards);
@@ -67,6 +90,9 @@ package com.rpgGame.appModule.dungeon.lunjian
 			leftTime=10;
 			TimerServer.addLoop(updateTime,1000);
 			_skin.lbTime.text=leftTime+"秒后自动退出";
+			if(eftRender){
+				eftRender.play(0);
+			}
 		}
 		
 		private function updateTime():void
@@ -75,6 +101,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 			_skin.lbTime.text=leftTime+"秒后自动退出";
 			if(leftTime<0){
 				TimerServer.remove(updateTime);
+				this.onHide();
 			}
 		}
 		

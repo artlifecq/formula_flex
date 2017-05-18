@@ -30,6 +30,7 @@ package com.editor.manager
 	import com.game.engine3D.core.AreaMap;
 	import com.game.engine3D.core.GameScene3D;
 	import com.game.engine3D.manager.Stage3DLayerManager;
+	import com.game.engine3D.pathFinding.HeightMapHelperProxy;
 	import com.game.engine3D.utils.PathFinderUtil;
 	import com.game.engine3D.vo.AreaMapData;
 	import com.game.engine3D.vo.BaseObj3D;
@@ -91,7 +92,8 @@ package com.editor.manager
 		private var _mapData : EditorClientMapData;
 		private var _previewMap : Boolean;
         
-        private var _xyzMode : int = HeightMapHelper.MODE_XY;
+		private var _xyzMode : int = HeightMapHelperProxy.MODE_XY;
+//        private var _xyzMode : int = HeightMapHelper.MODE_XY;
 
 		public function SceneManager()
 		{
@@ -264,7 +266,7 @@ package com.editor.manager
                 mapConfig.gridV = mapConfigByteArray.readInt();
                 mapConfig.width = mapConfig.gridH * 50;
                 mapConfig.height = mapConfig.gridV * 50;
-                this._scene.switchScene(1, mapConfig, mapConfig.zoneMapUrl, mapFileUrl, this.onCfgCmp, this.enterSceneSuccessed, false, null);
+                this._scene.switchScene(1, mapConfig,null, mapConfig.zoneMapUrl, mapFileUrl, this.onCfgCmp, this.enterSceneSuccessed, false, null);
 				EventManager.dispatchEvent(MapFileListEvent.SELECTED_MAP_ID, mapRes);
 			}
 			else

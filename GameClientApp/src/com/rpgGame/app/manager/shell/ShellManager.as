@@ -2,6 +2,8 @@ package com.rpgGame.app.manager.shell
 {
     import com.game.engine2D.Scene;
     import com.game.engine3D.core.AreaMap;
+    import com.game.engine3D.display.EffectObject3D;
+    import com.game.engine3D.display.Inter3DContainer;
     import com.game.engine3D.display.shapeArea.ShapeArea3D;
     import com.game.engine3D.loader.GlobalTexture;
     import com.game.engine3D.manager.Stage3DLayerManager;
@@ -23,6 +25,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.graphics.HeadFace;
     import com.rpgGame.app.manager.AreaMapManager;
     import com.rpgGame.app.manager.AvatarManager;
+    import com.rpgGame.app.manager.MainUIManager;
     import com.rpgGame.app.manager.ShortcutsManger;
     import com.rpgGame.app.manager.TrusteeshipManager;
     import com.rpgGame.app.manager.fight.FightManager;
@@ -35,7 +38,9 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.scene.SceneRole;
     import com.rpgGame.app.scene.animator.RibbonAnimator;
     import com.rpgGame.app.sender.SceneSender;
+    import com.rpgGame.app.state.role.control.RidingStateReference;
     import com.rpgGame.app.state.role.control.ShapeshiftingStateReference;
+    import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
     import com.rpgGame.core.utils.ConsoleDesk;
     import com.rpgGame.coreData.cfg.AreaCfgData;
     import com.rpgGame.coreData.cfg.ClientConfig;
@@ -48,8 +53,11 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.role.HeroData;
     import com.rpgGame.coreData.role.MonsterData;
     import com.rpgGame.coreData.role.RoleType;
+    import com.rpgGame.coreData.role.SceneDropGoodsData;
     import com.rpgGame.coreData.role.SceneTranportData;
     import com.rpgGame.coreData.role.TrapInfo;
+    import com.rpgGame.coreData.type.AvatarUrl;
+    import com.rpgGame.coreData.type.EffectUrl;
     import com.rpgGame.coreData.type.RenderUnitID;
     import com.rpgGame.coreData.type.RenderUnitType;
     import com.rpgGame.coreData.type.RoleStateType;
@@ -112,6 +120,13 @@ package com.rpgGame.app.manager.shell
 
             this._funcs["playerCamerVibrate".toLowerCase()] = this.playerCamerVibrate;
 			this._funcs["testRibbon".toLowerCase()] = this.testRibbon;
+            this._funcs["addRoleMask".toLowerCase()] = this.addRoleMask;
+            this._funcs["addMount".toLowerCase()] = this.addMount;
+            this._funcs["showCd".toLowerCase()] = this.showCd;
+            this._funcs["showSameEffect".toLowerCase()] = this.showSameEffect;
+            this._funcs["addGroods".toLowerCase()] = this.addGroods;
+            this._funcs["testHeatLayer".toLowerCase()] = this.testHeatLayer;
+            this._funcs["getView".toLowerCase()] = this.getView;
 			this._funcs["&tasklevel".toLowerCase()] = this.testTaskLevel;
 			this._funcs["&autofight".toLowerCase()] = this.testStopFight;
         }
@@ -179,7 +194,7 @@ package com.rpgGame.app.manager.shell
 		private function corredMethodTest():void
 		{
 			_valueObj = {alpha: 1};
-			GlobalTexture.addTexture(ClientConfig.getDynTexture("corrode"), onCorrodeTextureComplete);
+			GlobalTexture.addTexture(ClientConfig.getDynTexture("corrode"),0, onCorrodeTextureComplete);
 		}
 		
 		private var _corrodeMethodData : MethodData;
@@ -622,11 +637,11 @@ package com.rpgGame.app.manager.shell
 			MainRoleManager.actor.forEachRenderUnit(function (role : BaseRole, render : RenderUnit3D) : void {
 				render.restoreTexture();
 				if ("1" == funcName) {
-					render.setIndependentTexture(ClientConfig.getDynTexture(name));
+					render.setIndependentTexture(ClientConfig.getDynTexture(name),0);
 				} else if ("2" == funcName) {
 					render.setIndependentMatarial(name, name2, name3);
 				} else if ("3" == funcName) {
-					render.addFadeAlpha(ClientConfig.getDynTexture(name));
+					render.addFadeAlpha(ClientConfig.getDynTexture(name),0);
 				} else if ("4" == funcName) {
 					render.setIndependentDiffuseColor(parseInt(name));
 				} else if ("5" == funcName) {
@@ -715,6 +730,163 @@ package com.rpgGame.app.manager.shell
             SceneManager.addSceneObjToScene(effectRu, true);
             effectRu.play(0);
         }
+        
+        private function addMount(on : int) : void {
+            var heroData : HeroData = MainRoleManager.actor.data as HeroData;
+            //heroData.avatarInfo.setBodyResID("pc/body/binjia_skin", "pc/body/binjia_animat");
+            
+            if (on) {
+                var ref1 : RidingStateReference = MainRoleManager.actor.stateMachine.getReference(RidingStateReference) as RidingStateReference;
+                //ref1.setParams(null, null);
+                ref1.setParams("pc/mount/mount_zhanma_01", "pc/mount/mount_zhanma_animat");
+                MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_RIDING, ref1);
+                //heroData.avatarInfo.setMountResID("pc/mount/mount_zhanma_01", "pc/mount/mount_zhanma_animat");
+            } else {
+                heroData.avatarInfo.setMountResID(null, null);
+                MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_RIDING);
+            }
+            AvatarManager.updateAvatar(MainRoleManager.actor, false);
+        }
+        
+        private function showCd() : void {
+            var cd1 : Inter3DContainer = new Inter3DContainer();
+            cd1.x = 100;
+            cd1.y = 500;
+            var cd2 : Inter3DContainer = new Inter3DContainer();
+            cd2.x = 200;
+            cd2.y = 500;
+            var cd3 : Inter3DContainer = new Inter3DContainer();
+            cd3.x = 400;
+            cd3.y = 500;
+            
+            var ef1 : EffectObject3D = cd1.addInter3D(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_BJ));
+            var ef2 : EffectObject3D = cd2.addInter3D(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_BJ));
+            var ef3 : EffectObject3D = cd3.addInter3D(ClientConfig.getEffect(EffectUrl.UI_JINENGKUANG_BJ));
+            
+            MainUIManager.mainui.addChild(cd1);
+            MainUIManager.mainui.addChild(cd2);
+            MainUIManager.mainui.addChild(cd3);
+            
+            var rud1 : RenderParamData3D = new RenderParamData3D(1, "1", ClientConfig.getEffect("ui_jinengkuang_mj"));
+            var rud2 : RenderParamData3D = new RenderParamData3D(2, "1", ClientConfig.getEffect("ui_jinengkuang_mj"));
+            var rud3 : RenderParamData3D = new RenderParamData3D(3, "1", ClientConfig.getEffect("ui_jinengkuang_mj"));
+            
+            var effectRu1 : RenderUnit3D = RenderUnit3D.create(rud1,true);
+            effectRu1.allowCameraAnimator = true;
+            effectRu1.repeat = 1;
+            effectRu1.x = MainRoleManager.actor.x;
+            effectRu1.z = MainRoleManager.actor.z;
+            //effectRu1.rotationY = MainRoleManager.actor.rotationY;
+            effectRu1.completeWhenInvisible = true;
+            SceneManager.addSceneObjToScene(effectRu1, true);
+            
+            
+            var effectRu2 : RenderUnit3D = RenderUnit3D.create(rud2,true);
+            effectRu2.allowCameraAnimator = true;
+            effectRu2.repeat = 1;
+            effectRu2.x = MainRoleManager.actor.x + 300;
+            effectRu2.z = MainRoleManager.actor.z;
+            //effectRu2.rotationY = MainRoleManager.actor.rotationY;
+            effectRu2.completeWhenInvisible = true;
+            SceneManager.addSceneObjToScene(effectRu2, true);
+            
+            var effectRu3 : RenderUnit3D = RenderUnit3D.create(rud3,true);
+            effectRu3.allowCameraAnimator = true;
+            effectRu3.repeat = 1;
+            effectRu3.x = MainRoleManager.actor.x + 500;
+            effectRu3.z = MainRoleManager.actor.z;
+            //effectRu2.rotationY = MainRoleManager.actor.rotationY;
+            effectRu3.completeWhenInvisible = true;
+            SceneManager.addSceneObjToScene(effectRu3, true);
+            
+            setTimeout(function() : void {
+                ef1.playEffect(0, 0.01);
+                ef2.playEffect(0, 0.02);
+                //ef3.playEffect(0, 0.03);
+                
+                effectRu1.play(0, 0.04);
+                effectRu2.play(0, 0.05);
+                //effectRu3.play(0, 0.06);
+            }, 2000);
+        }
+        
+        private function showSameEffect() : void {
+            var rud1 : RenderParamData3D = new RenderParamData3D(1, "1", ClientConfig.getEffect("ui_jinengkuang_mj"));
+            var rud2 : RenderParamData3D = new RenderParamData3D(2, "1", ClientConfig.getEffect("ui_jinengkuang_mj"));
+            var rud3 : RenderParamData3D = new RenderParamData3D(3, "1", ClientConfig.getEffect("ui_jinengkuang_mj"));
+            
+            var effectRu1 : RenderUnit3D = RenderUnit3D.create(rud1,true);
+            effectRu1.allowCameraAnimator = true;
+            effectRu1.repeat = 1;
+            effectRu1.x = MainRoleManager.actor.x;
+            effectRu1.z = MainRoleManager.actor.z;
+            //effectRu1.rotationY = MainRoleManager.actor.rotationY;
+            effectRu1.completeWhenInvisible = true;
+            SceneManager.addSceneObjToScene(effectRu1, true);
+            
+            
+            var effectRu2 : RenderUnit3D = RenderUnit3D.create(rud2,true);
+            effectRu2.allowCameraAnimator = true;
+            effectRu2.repeat = 1;
+            effectRu2.x = MainRoleManager.actor.x + 300;
+            effectRu2.z = MainRoleManager.actor.z;
+            //effectRu2.rotationY = MainRoleManager.actor.rotationY;
+            effectRu2.completeWhenInvisible = true;
+            SceneManager.addSceneObjToScene(effectRu2, true);
+            
+            var effectRu3 : RenderUnit3D = RenderUnit3D.create(rud3,true);
+            effectRu3.allowCameraAnimator = true;
+            effectRu3.repeat = 1;
+            effectRu3.x = MainRoleManager.actor.x + 500;
+            effectRu3.z = MainRoleManager.actor.z;
+            //effectRu2.rotationY = MainRoleManager.actor.rotationY;
+            effectRu3.completeWhenInvisible = true;
+            SceneManager.addSceneObjToScene(effectRu3, true);
+            
+            
+            setTimeout(function() : void {
+                effectRu1.play(0, 0.04);
+                //effectRu2.play(0, 0.05);
+                //effectRu3.play(0, 0.06);
+            }, 2000);
+        }
+        
+        private function addRoleMask() : void {
+            RoleFaceMaskEffectUtil.removeFaceMaskEffect(MainRoleManager.actor);
+            RoleFaceMaskEffectUtil.addDialogFaceMaskEffect(MainRoleManager.actor);
+        }
+        
+        private function addGroods(goodsId : String) : void {
+            var data:SceneDropGoodsData=new SceneDropGoodsData();
+            data.goodsDatas=null;
+            data.id=1;
+            data.avatarRes="goods/"+ goodsId + "/" + goodsId;
+            //data.avatarRes=AvatarUrl.BAO_XIANG;
+            data.x=MainRoleManager.actor.x;
+            data.y=MainRoleManager.actor.z;
+            data.isDroped=true;
+            SceneRoleManager.getInstance().createDropGoods(data);
+        }
+        
+        private function testHeatLayer() : void {
+            var rud1 : RenderParamData3D = new RenderParamData3D(1, "1", "../res/map/common/tx_YJ_shuimian_01.awd");
+            var effectRu1 : RenderUnit3D = RenderUnit3D.create(rud1,true);
+            effectRu1.allowCameraAnimator = true;
+            effectRu1.repeat = 0;
+            effectRu1.x = MainRoleManager.actor.x;
+            effectRu1.z = MainRoleManager.actor.z;
+            //effectRu1.rotationY = MainRoleManager.actor.rotationY;
+            effectRu1.completeWhenInvisible = true;
+            SceneManager.addSceneObjToScene(effectRu1);
+            effectRu1.play(0);
+        }
+        
+        private function getView() : void {
+            while (true) {
+                Scene.scene.view3d;
+            }
+        }
+      
 		private function testTaskLevel(level:int=-1) : void {
 			TaskAutoManager.getInstance().taskLevel(level);	
 		} 

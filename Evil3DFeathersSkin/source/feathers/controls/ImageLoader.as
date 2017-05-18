@@ -26,6 +26,8 @@ package feathers.controls
 	import flash.utils.ByteArray;
 	import flash.utils.setTimeout;
 	
+	import away3d.core.managers.Stage3DProxy;
+	
 	import feathers.core.FeathersControl;
 	import feathers.events.FeathersEventType;
 	import feathers.layout.HorizontalAlign;
@@ -1924,8 +1926,7 @@ package feathers.controls
 		 */
 		protected function replaceBitmapDataTexture(bitmapData:BitmapData):void
 		{
-			var starling:Starling = this.stage !== null ? this.stage.starling : Starling.current;
-			if(!starling.contextValid)
+			if(!Stage3DProxy.getInstance().recoverFromDisposal())
 			{
 				//this trace duplicates the behavior of AssetManager
 				trace(CONTEXT_LOST_WARNING);
@@ -1990,8 +1991,7 @@ package feathers.controls
 		 */
 		protected function replaceRawTextureData(rawData:ByteArray):void
 		{
-			var starling:Starling = this.stage !== null ? this.stage.starling : Starling.current;
-			if(!starling.contextValid)
+			if(!Stage3DProxy.getInstance().recoverFromDisposal())
 			{
 				//this trace duplicates the behavior of AssetManager
 				trace(CONTEXT_LOST_WARNING);

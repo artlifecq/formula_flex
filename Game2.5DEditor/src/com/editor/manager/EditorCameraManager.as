@@ -86,6 +86,7 @@ package com.editor.manager
 			CameraController.switchToLockOnControl();
 			
 			///以下是针对2d地图特殊处理，暂时写到这里
+            CameraController.lockedOnPlayerController.mouseLeftControlable = false;
 			CameraController.lockedOnPlayerController.mouseRightControlable = false;
 			CameraController.lockedOnPlayerController.offsetY = 0;
 			CameraController.lockedOnPlayerController.xDeg = 0;

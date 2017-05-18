@@ -134,8 +134,11 @@ package com.editor.display
 				{
 					pv = _polygonVertexes[i];
 					position = pv.position.clone();
-                    position.y = position.z;
-                    position.z = 0;
+                    // TODO
+                    if (0 != position.z) {
+                        position.y = position.z;
+                        position.z = 0;
+                    }
 					if (!PathFinderUtil.isSolid(SceneManager.getInstance().mainDistrict, position))
 						valid = true;
 				}

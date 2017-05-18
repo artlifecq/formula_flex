@@ -1022,6 +1022,9 @@ package feathers.controls
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
 		
+		protected var _labelY:Number = NaN;
+		protected var _labelX:Number = NaN;
+		
 		//======================================textFormat properties===========================
 		//
 		protected var mFontName:String = Fontter.DEFAULT_FONT_NAME;
@@ -2579,7 +2582,7 @@ package feathers.controls
 			}
 
 			//code by wewell
-			if(this._iconPosition == RelativePosition.MANUAL && labelRenderer != null)
+			if(this._iconPosition == RelativePosition.MANUAL)
 			{
 				if(this.currentIcon !== null )
 				{
@@ -2768,6 +2771,10 @@ package feathers.controls
 				if(Object(this.labelTextRenderer).hasOwnProperty(propertyName))
 				{
 					this.labelTextRenderer[propertyName] = propertyValue;
+					
+					if(propertyName == "x")_labelX = int(propertyValue);
+					if(propertyName == "y")_labelY = int(propertyValue);
+					
 				}else if(this.hasOwnProperty(propertyName))
 				{
 					this[propertyName] = propertyValue;
@@ -2833,12 +2840,12 @@ package feathers.controls
 			var iconIsInLayout:Boolean = this.currentIcon && this._iconPosition != RelativePosition.MANUAL;
 			if(labelRenderer && iconIsInLayout)
 			{
-				this.positionSingleChild(labelRenderer);
+				this.positionLabelRender();
 				this.positionLabelAndIcon();
 			}
 			else if(labelRenderer)
 			{
-				this.positionSingleChild(labelRenderer);
+				this.positionLabelRender();
 			}
 			else if(iconIsInLayout)
 			{
@@ -2939,6 +2946,49 @@ package feathers.controls
 			else //middle
 			{
 				displayObject.y = this._paddingTop + Math.round((this.actualHeight - this._paddingTop - this._paddingBottom - displayObject.height) / 2);
+			}
+		}
+		
+		/**
+		 * @private
+		 */
+		protected function positionLabelRender():void
+		{
+			if(isNaN(_labelX))
+			{
+				if(this._horizontalAlign == HorizontalAlign.LEFT)
+				{
+					labelTextRenderer.x = this._paddingLeft;
+				}
+				else if(this._horizontalAlign == HorizontalAlign.RIGHT)
+				{
+					labelTextRenderer.x = this.actualWidth - this._paddingRight - labelTextRenderer.width;
+				}
+				else //center
+				{
+					labelTextRenderer.x = this._paddingLeft + Math.round((this.actualWidth - this._paddingLeft - this._paddingRight - labelTextRenderer.width) / 2);
+				}
+			}else if(labelTextRenderer.x != _labelX){
+				labelTextRenderer.x = _labelX;
+			}
+
+			if(isNaN(_labelY))
+			{
+				if(this._verticalAlign == VerticalAlign.TOP)
+				{
+					labelTextRenderer.y = this._paddingTop;
+				}
+				else if(this._verticalAlign == VerticalAlign.BOTTOM)
+				{
+					labelTextRenderer.y = this.actualHeight - this._paddingBottom - labelTextRenderer.height;
+				}
+				else //middle
+				{
+					labelTextRenderer.y = this._paddingTop + Math.round((this.actualHeight - this._paddingTop - this._paddingBottom - labelTextRenderer.height) / 2);
+				}
+			}else if(labelTextRenderer.y != _labelY)
+			{
+				labelTextRenderer.y = _labelY;
 			}
 		}
 		
@@ -3095,16 +3145,6 @@ package feathers.controls
 				playSoundOnTriggerFunction(soundData);
 			}
 		}
-		
-		/**
-		 * @public
-		 */
-		public static var playSoundOnTriggerFunction:Function;
-		
-		/**
-		 * sound data
-		 */		
-		public var soundData:Object;
 
 		/**
 		 * @private
@@ -3120,8 +3160,8 @@ package feathers.controls
 		override protected function focusInHandler(event:Event):void
 		{
 			super.focusInHandler(event);
-			this.stage.addEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
-			this.stage.addEventListener(KeyboardEvent.KEY_UP, stage_keyUpHandler);
+//			this.stage.addEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
+//			this.stage.addEventListener(KeyboardEvent.KEY_UP, stage_keyUpHandler);
 		}
 
 		/**
@@ -3130,12 +3170,15 @@ package feathers.controls
 		override protected function focusOutHandler(event:Event):void
 		{
 			super.focusOutHandler(event);
-			this.stage.removeEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
-			this.stage.removeEventListener(KeyboardEvent.KEY_UP, stage_keyUpHandler);
+//			this.stage.removeEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
+//			this.stage.removeEventListener(KeyboardEvent.KEY_UP, stage_keyUpHandler);
 
 			if(this.touchPointID >= 0)
 			{
 				this.touchPointID = -1;
+				
+				if(!this.stage)return;
+				
 				if(this._isEnabled)
 				{
 					this.changeState(ButtonState.UP);
@@ -3150,7 +3193,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected function stage_keyDownHandler(event:KeyboardEvent):void
+/*		protected function stage_keyDownHandler(event:KeyboardEvent):void
 		{
 			if(event.keyCode === Keyboard.ESCAPE)
 			{
@@ -3162,13 +3205,13 @@ package feathers.controls
 				return;
 			}
 			this.touchPointID = int.MAX_VALUE;
-			this.changeState(ButtonState.DOWN);
-		}
+    			this.changeState(ButtonState.DOWN);
+		}*/
 
 		/**
 		 * @private
 		 */
-		protected function stage_keyUpHandler(event:KeyboardEvent):void
+/*		protected function stage_keyUpHandler(event:KeyboardEvent):void
 		{
 			if(this.touchPointID !== int.MAX_VALUE || event.keyCode !== Keyboard.SPACE)
 			{
@@ -3176,7 +3219,7 @@ package feathers.controls
 			}
 			this.resetTouchState();
 			this.trigger();
-		}
+		}*/
 
 		/**
 		 * @private

@@ -39,7 +39,7 @@ package starling.filters
         }
 
         /** @private */
-        override public function process(painter:Painter, helper:IFilterHelper,
+        override public function process(painter:Painter, helper:FilterHelper,
                                          input0:IStarlingTexture = null, input1:IStarlingTexture = null,
                                          input2:IStarlingTexture = null, input3:IStarlingTexture = null):IStarlingTexture
         {
@@ -134,11 +134,14 @@ package starling.filters
 
 import flash.display3D.Context3DProgramType;
 
+import away3d.arcane;
 import away3d.core.managers.Stage3DProxy;
 
 import starling.rendering.FilterEffect;
-import starling.rendering.Program;
+import starling.rendering.ProgramNameID;
 import starling.utils.MathUtil;
+
+use namespace arcane;
 
 class BlurEffect extends FilterEffect
 {
@@ -167,49 +170,57 @@ class BlurEffect extends FilterEffect
         this.direction = direction;
     }
 
-    override protected function createProgram():Program
-    {
-        if (_strength == 0) return super.createProgram();
-
-        var vertexShader:String = [
-            "m44 op, va0, vc0     ", // 4x4 matrix transform to output space
-            "mov v0, va1          ", // pos:  0 |
-            "sub v1, va1, vc4.zwxx", // pos: -2 |
-            "sub v2, va1, vc4.xyxx", // pos: -1 | --> kernel positions
-            "add v3, va1, vc4.xyxx", // pos: +1 |     (only 1st two values are relevant)
-            "add v4, va1, vc4.zwxx"  // pos: +2 |
-        ].join("\n");
-
-        // v0-v4 - kernel position
-        // fs0   - input texture
-        // fc0   - weight data
-        // ft0-4 - pixel color from texture
-        // ft5   - output color
-
-        var fragmentShader:String = [
-            tex("ft0", "v0", 0, texture),    // read center pixel
-            "mul ft5, ft0, fc0.xxxx       ", // multiply with center weight
-
-            tex("ft1", "v1", 0, texture),    // read pixel -2
-            "mul ft1, ft1, fc0.zzzz       ", // multiply with weight
-            "add ft5, ft5, ft1            ", // add to output color
-
-            tex("ft2", "v2", 0, texture),    // read pixel -1
-            "mul ft2, ft2, fc0.yyyy       ", // multiply with weight
-            "add ft5, ft5, ft2            ", // add to output color
-
-            tex("ft3", "v3", 0, texture),    // read pixel +1
-            "mul ft3, ft3, fc0.yyyy       ", // multiply with weight
-            "add ft5, ft5, ft3            ", // add to output color
-
-            tex("ft4", "v4", 0, texture),    // read pixel +2
-            "mul ft4, ft4, fc0.zzzz       ", // multiply with weight
-            "add  oc, ft5, ft4            "  // add to output color
-        ].join("\n");
-
-        return Program.fromSource(vertexShader, fragmentShader);
-    }
-
+	override arcane function getVertexCode():String
+	{
+		if (_strength == 0)
+			return super.getVertexCode();
+		
+		var vertexCode:String = [
+			"m44 op, va0, vc0     ", // 4x4 matrix transform to output space
+			"mov v0, va1          ", // pos:  0 |
+			"sub v1, va1, vc4.zwxx", // pos: -2 |
+			"sub v2, va1, vc4.xyxx", // pos: -1 | --> kernel positions
+			"add v3, va1, vc4.xyxx", // pos: +1 |     (only 1st two values are relevant)
+			"add v4, va1, vc4.zwxx"  // pos: +2 |
+		].join("\n");
+		
+		return vertexCode;
+	}
+	
+	override arcane function getFragmentCode():String
+	{
+		if (_strength == 0)
+			return super.getFragmentCode();
+		
+		// v0-v4 - kernel position
+		// fs0   - input texture
+		// fc0   - weight data
+		// ft0-4 - pixel color from texture
+		// ft5   - output color
+		var fragmentCode:String = [
+			tex("ft0", "v0", 0, texture),    // read center pixel
+			"mul ft5, ft0, fc0.xxxx       ", // multiply with center weight
+			
+			tex("ft1", "v1", 0, texture),    // read pixel -2
+			"mul ft1, ft1, fc0.zzzz       ", // multiply with weight
+			"add ft5, ft5, ft1            ", // add to output color
+			
+			tex("ft2", "v2", 0, texture),    // read pixel -1
+			"mul ft2, ft2, fc0.yyyy       ", // multiply with weight
+			"add ft5, ft5, ft2            ", // add to output color
+			
+			tex("ft3", "v3", 0, texture),    // read pixel +1
+			"mul ft3, ft3, fc0.yyyy       ", // multiply with weight
+			"add ft5, ft5, ft3            ", // add to output color
+			
+			tex("ft4", "v4", 0, texture),    // read pixel +2
+			"mul ft4, ft4, fc0.zzzz       ", // multiply with weight
+			"add  oc, ft5, ft4            "  // add to output color
+		].join("\n");
+		
+		return fragmentCode;
+	}
+	
     override protected function beforeDraw(stage3DProxy:Stage3DProxy):void
     {
         super.beforeDraw(stage3DProxy);
@@ -221,11 +232,6 @@ class BlurEffect extends FilterEffect
 			stage3DProxy.setProgramConstantsFromVector(Context3DProgramType.VERTEX,   4, _offsets);
 			stage3DProxy.setProgramConstantsFromVector(Context3DProgramType.FRAGMENT, 0, _weights);
         }
-    }
-
-    override protected function get programVariantName():uint
-    {
-        return super.programVariantName | (_strength ? 1 << 4 : 0);
     }
 
     private function updateParameters():void
@@ -303,4 +309,14 @@ class BlurEffect extends FilterEffect
     {
         _strength = MathUtil.clamp(value, 0, 1);
     }
+	
+	override protected function get programVariantName():uint
+	{
+		return super.programVariantName | (_strength ? 1 << 4 : 0);
+	}
+	
+	override protected function get programBaseName():uint 
+	{ 
+		return ProgramNameID.BLUR_EFFECT;
+	}
 }

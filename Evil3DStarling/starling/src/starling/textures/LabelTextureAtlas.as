@@ -7,13 +7,15 @@ package starling.textures
 	import flash.utils.Dictionary;
 	import flash.utils.Endian;
 	
+	import away3d.Away3D;
 	import away3d.events.Event;
 	import away3d.textures.BGRAData;
 	
-	import starling.core.Starling;
+	import starling.utils.callLater;
 	
 	public class LabelTextureAtlas  extends TextureAtlas
 	{
+		private var _atlasId:int;
 		private var _topBrushX:int;
 		private var _topBrushY:int;
 		private var _topLineY:int;
@@ -28,26 +30,35 @@ package starling.textures
 		
 		private var _uploadWithAtf:Boolean;
 		private var _converting:Boolean;
-		private var _convertFinish:Boolean;
+		private var _uploaded:Boolean;
 		private var _uploadFinishHandler:Function;
 		
 		private static var _point:Point = new Point();
 		private static var _region:Rectangle = new Rectangle();
 		
 		private static const BOTTOM_TO_TOP_TEXTURE_HEIGHT:int = 36;
+		private static var totalLabelTextureAtlas:int;
 		
-		public function LabelTextureAtlas(texture:IStarlingTexture, canvas:BitmapData, uploadWithAtf:Boolean=true)
+		public function LabelTextureAtlas(texture:IStarlingTexture, canvas:BitmapData, atlasId:int, uploadWithAtf:Boolean=true)
 		{
 			super(texture);
 			
+			texture.autoRecycleDataEnable = false;
 			_canvas = canvas;
-			_uploadWithAtf = uploadWithAtf;
+			_uploadWithAtf = uploadWithAtf && Away3D.WORKER_COUNT > 0 && Away3D.PARSE_PNG_IN_WORKER;
 			_botBrushY = _botLineY = texture.height;
+			_atlasId = atlasId;
+			totalLabelTextureAtlas++;
+			
+//			CONFIG::Debug
+				{
+					ConcreteTexture(texture).key = "LabelTextureAtlas_"+_atlasId;
+				}
 		}
 		
 		public function pushTest(clipRect:Rectangle, brushRegion:Boolean=false):Boolean
 		{
-			if(_convertFinish || _converting)
+			if(_uploaded || _converting)
 			{
 				return false;
 			}
@@ -103,30 +114,33 @@ package starling.textures
 			return true;
 		}
 		
-		public function addLabelBitmapData(name:String, bitmapData:BitmapData,  clipRect:Rectangle):IStarlingTexture
+		public function addLabelBitmapData(name:String, bitmapData:BitmapData,  clipRect:Rectangle):void
 		{
-			var t:IStarlingTexture = getTexture(name);
-			if(t != null)
-				return t;
-			
-			if(_convertFinish || _converting)
+			if(name in _subTextures)
 			{
-				if(Starling.current.showTrace)trace("[Starling]LabelTextureAtlas.addLabelBitmapData | 已转换或正在转换成ATF,不能再插入子贴图")
-				return null;
+				return;
+			}
+			
+			if(_uploaded || _converting)
+			{
+				CONFIG::Starling_Debug
+					{
+						trace("[Starling]LabelTextureAtlas.addLabelBitmapData fail !!!| canvas if full !!")
+					}
+				return;
 			}
 			
 			if(!clipRect)clipRect = bitmapData.rect;
 			
 			if(!pushTest(clipRect, true))
-				return null
+				return;
 			
 			_canvas.copyPixels(bitmapData, clipRect, _point);
 			
-			t = new SubTexture(_atlasTexture, _region);
-			t.key = name;
+			var t:IStarlingTexture = new SubTexture(_atlasTexture, _region);
 			_subTextures[name] = t;
-			
-			return getTexture(name);
+			t.isDynamic = true;
+			t.key = texture.key + " | "+name;
 		}
 		
 		public function canInsertSize(width:int, height:int):Boolean
@@ -137,8 +151,12 @@ package starling.textures
 		/** Retrieves a SubTexture by name. Returns <code>null</code> if it is not found. */
 		override public function getTexture(name:String):IStarlingTexture
 		{
-			if(!_convertFinish)
+			if(!_uploaded)
+			{
+				trace("LabelTextureAtlas have not upload", name);
 				return null;
+			}
+				
 			
 			return _subTextures[name];
 		}
@@ -148,22 +166,25 @@ package starling.textures
 			return _subTextures;
 		}
 		
+		public function get isUploaded():Boolean
+		{
+			return _uploaded;
+		}
+		
 		public function upload(uploadFinishHandler:Function = null):void
 		{
-			if(_convertFinish || _converting)
+			if(_uploaded || _converting)
 			{
-				if(Starling.current.showTrace)trace("[Starling]LabelTextureAtlas.upload | 已upload或正在uploadATF,重复调用被忽略")
+				CONFIG::Starling_Debug
+					{
+						trace("[Starling]LabelTextureAtlas.upload return !!!|  repetitive execution")
+					}
 				return;
 			}
 			
 			this._uploadFinishHandler = uploadFinishHandler;
 			
-			if (bgraBytes) {
-				bgraBytes.clear();
-			} else {
-				bgraBytes = new ByteArray();
-			}
-			// 小端:bgra格式
+			bgraBytes = new ByteArray();
 			bgraBytes.endian = Endian.LITTLE_ENDIAN;
 			
 			_canvas.copyPixelsToByteArray(_canvas.rect, bgraBytes);
@@ -182,6 +203,7 @@ package starling.textures
 				ct.addEventListener(Event.COMPLETE, onConvertToATFComplete);
 			}else{
 				ct.uploadBitmapDataByteArray(bgraBytes);
+				callLater(onUploadComplete, null, 1);
 			}
 		}
 		
@@ -189,19 +211,58 @@ package starling.textures
 		{
 			ConcreteTexture(texture).removeEventListener(Event.COMPLETE, onConvertToATFComplete);
 			_converting = false;
-			_convertFinish = true;
+			onUploadComplete();
+		}
+		
+		private function onUploadComplete():void
+		{
+			_uploaded = true;
 			if(_uploadFinishHandler != null)
 			{
-				if(Starling.current.showTrace)trace("[Starling]LabelTextureAtlas.onConvertToATFComplete");
 				_uploadFinishHandler(this);
+				_uploadFinishHandler = null;
+				_canvas = null;
+				CONFIG::Starling_Debug
+					{
+						trace("[Starling]LabelTextureAtlas.onUploadComplete | atlasId:", atlasId);
+					}
 			}
+		}
+		
+		public function get atlasId():int
+		{
+			return _atlasId;
+		}
+		
+		public static function get numInstance():int
+		{
+			return totalLabelTextureAtlas;
 		}
 		
 		override public function dispose():void
 		{
-			if(Starling.current.showTrace)trace("[Starling]LabelTextureAtlas.dispose");
+			if(texture != null)
+			{
+				totalLabelTextureAtlas--;
+				texture.removeEventListener(Event.COMPLETE, onConvertToATFComplete);
+			}
+			
+			CONFIG::Starling_Debug
+				{
+					trace("[Starling]LabelTextureAtlas.dispose !!!!!!!!!!!!!!!!!| atlasId:", _atlasId);
+				}
+			
 			super.dispose();
+			_subTextures = null;
+			_subTextureNames = null;
+			_uploadFinishHandler = null;
 			_atlasTexture = null;
+			_canvas = null;
+			if(bgraBytes)
+			{
+				bgraBytes.clear();
+				bgraBytes = null;
+			}
 		}
 	}
 }

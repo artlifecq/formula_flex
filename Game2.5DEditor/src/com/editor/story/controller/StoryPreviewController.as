@@ -38,7 +38,7 @@ package com.editor.story.controller
 	import com.game.engine3D.enum.CameraModeEnum;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.game.engine3D.scene.render.vo.RenderParamData;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.vo.BaseRole;
 	import com.game.mainCore.core.manager.SoundManager;
 
@@ -67,7 +67,7 @@ package com.editor.story.controller
 		private static var _effectHash : HashMap = new HashMap();
 		public static var _roleX : int;
 		public static var _roleZ : int;
-		private static var _selectedRu : RenderParamData = new RenderParamData(RenderUnitID.SELECTED_RING, RenderUnitType.SELECTED_RING, GlobalConfig.getEffectFilePath("ring/quanlv"));
+		private static var _selectedRu : RenderParamData3D = new RenderParamData3D(RenderUnitID.SELECTED_RING, RenderUnitType.SELECTED_RING, GlobalConfig.getEffectFilePath("ring/quanlv"));
 		private static var _selectedRole : SceneRole;
 		private static var _mode : int;
 		private static var _textLabel : TextField;
@@ -147,8 +147,8 @@ package com.editor.story.controller
 				CameraController.directController.targetObject.x = actionVO.cx;
 				CameraController.directController.targetObject.y = actionVO.cy;
 				CameraController.directController.targetObject.z = actionVO.cz;
-				CameraController.directController.xDeg = actionVO.xDeg;
-				CameraController.directController.yDeg = actionVO.yDeg;
+//				CameraController.directController.xDeg = actionVO.xDeg;
+//				CameraController.directController.yDeg = actionVO.yDeg;
 			}
 			else if (actionVO.mode == CameraModeEnum.FIXED_CAMERA_LOOK_AT)
 			{

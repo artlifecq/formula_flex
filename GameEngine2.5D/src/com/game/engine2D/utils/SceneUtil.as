@@ -2,13 +2,14 @@ package com.game.engine2D.utils
 {
 	import com.game.engine2D.Scene;
 	import com.game.engine2D.config.SceneConfig;
+	import com.game.engine2D.controller.MapTitleController;
 	import com.game.engine2D.scene.map.vo.MapTile;
 	import com.game.engine2D.vo.BaseCharacter;
 	import com.game.engine3D.config.GlobalConfig;
 	import com.game.mainCore.libCore.utils.ZMath;
 	
 	import flash.geom.Point;
-
+	
 	/**
 	 * 场景通用函数
 	 * @author Carver
@@ -18,11 +19,6 @@ package com.game.engine2D.utils
 		public function SceneUtil()
 		{
 		}
-		
-//		static public function transformCoord_2d_3d(value:Number):Number
-//		{
-//			return GlobalConfig.transformCoord_2d_3d(value);
-//		}
 		
 		/**
 		 * 由格子坐标X,得到格子对应的像素坐标点
@@ -146,43 +142,7 @@ package com.game.engine2D.utils
 		 */	
 		public static function getMapTile($tileX:int, $tileY:int):MapTile
 		{
-			if(Scene.scene.mapConfig==null)
-			{
-				return null;
-			}
-			var vecX:Vector.<Vector.<MapTile>> = Scene.scene.mapConfig.mapTiles;
-			var vecY:Vector.<MapTile>;
-			if($tileX > 0 && vecX && vecX.length > $tileX)
-			{
-				vecY = vecX[$tileX];
-				if($tileY > 0 && vecY.length > $tileY)
-				{
-					return vecY[$tileY];
-				}
-			}
-			return null;
-		}
-		/**
-		 * 设置障碍信息
-		 * @param $tileX
-		 * @param $tileY
-		 * @param $value
-		 * @return 
-		 * 
-		 * 
-		 */	
-		public static function setSolid($tileX:int, $tileY:int, $value:Boolean):MapTile
-		{
-			var mt:MapTile = getMapTile($tileX, $tileY);
-			if(mt!=null)
-			{
-				mt.isSolid = $value;
-				
-				//注意同时更新AStar用的快速字典
-//				Scene.scene.mapConfig.mapSolids[$tileX+"_"+$tileY] = ($value?1:0);
-				Scene.scene.mapConfig.mapSolids[$tileX][$tileY] = ($value?1:0);
-			}
-			return mt;
+			return MapTitleController.getMapTile($tileX,$tileY);
 		}
 		/**
 		 * 得到指定逻辑坐标是否是障碍（出界亦算障碍）
@@ -367,12 +327,12 @@ package com.game.engine2D.utils
 			{
 				//如果连点距离小于一个跨度，则认定为同一点,直接返回起始点
 				if(($fromMT.tile_x-target.tile_x)*($fromMT.tile_x-target.tile_x)+ ($fromMT.tile_y-target.tile_y)*($fromMT.tile_y-target.tile_y)<2) 
-				//if(Math.abs($fromMT.tile_x-target.tile_x)<1 && Math.abs($fromMT.tile_y-target.tile_y)<1) 
+					//if(Math.abs($fromMT.tile_x-target.tile_x)<1 && Math.abs($fromMT.tile_y-target.tile_y)<1) 
 				{
 					return $fromMT;
 				}
-				//如果新位置不是障碍则返回该位置
-				var mt:MapTile = getMapTile(target.tile_x, target.tile_y);
+				//				如果新位置不是障碍则返回该位置
+				var mt:MapTile =  getMapTile(target.tile_x, target.tile_y);
 				if(!mt.isSolid)
 				{
 					return mt;
@@ -383,138 +343,138 @@ package com.game.engine2D.utils
 			}
 			return $fromMT;
 		}
-		/**
-		 * 获取距$toMT最近的一个非障碍逻辑点（如果$toMT自身不是障碍则返回自身）
-		 * @param $fromMT 开始的MapTile
-		 * @param $toMT 目标的MapTile
-		 */		
-		public static function getRoundMapTile($fromMT:MapTile, $toMT:MapTile):MapTile {
-			if(!$toMT.isSolid)return $toMT;
-			
-			var toPiexlP:Point = new Point($toMT.x, $toMT.y);
-			var toTileP:Point = new Point($toMT.tile_x, $toMT.tile_y);
-			var leftRight:Point = new Point(toTileP.x, toTileP.x);
-			var topBottom:Point = new Point(toTileP.y, toTileP.y);
-			//循环递减
-			while(true)
-			{
-				//向外扩展一圈
-				leftRight.x -= 1;
-				leftRight.y += 1;
-				topBottom.x -= 1;
-				topBottom.y += 1;
-				
-				//遍历该圈
-				var tileP:Point;
-				var piexlP:Point;
-				var mapTile:MapTile;
-				var i:int;
-				var tilePArr:Array = [];
-				//上下两行
-				for(i=leftRight.x; i<=leftRight.y; i++)
-				{
-					tilePArr.push(new Point(i, topBottom.x),new Point(i, topBottom.y));
-				}
-				//左右两行
-				for(i=topBottom.x+1; i<topBottom.y-1; i++)
-				{
-					tilePArr.push(new Point(leftRight.x, i),new Point(leftRight.y, i));	
-				}
-				//检测
-				var num:int = tilePArr.length;
-				for(i=0; i<num; i++)
-				{
-					tileP = tilePArr[i];
-					//判断同一性
-					piexlP = Transformer.transTilePoint2PixelPoint(tileP); 
-					if($fromMT==null || $fromMT.tile_x==tileP.x && $fromMT.tile_y==tileP.y)
-					{
-						return $fromMT;
-					}
-					//注意应该用判断同一性，而不能用距离判断
-//					//判断距离
-//					piexlP = Transformer.transTilePoint2PixelPoint(tileP); 
-//					if(Point.distance(toPiexlP, piexlP)>=$maxDis)
-//					{
-//						return null;//注意这里是跳出循环
-//					}
-					//查看存在性
-					mapTile = getMapTile(tileP.x, tileP.y);
-					if(mapTile==null)
-					{
-						continue;
-					}
-					//判断障碍
-					if(!mapTile.isSolid)
-					{
-						return mapTile;
-					}
-				}
-			}
-			return null;
-		}
-		/**
-		 * 获取距$mt最近的一个非障碍逻辑点（如果$mt自身不是障碍则返回自身）
-		 * @param $mt 开始的MapTile
-		 * @param $maxDis 最大距离(像素距离)，为0则不限制
-		 */		
-		public static function getRoundMapTile2($mt:MapTile, $maxDis:Number=0):MapTile {
-			if(!$mt.isSolid)return $mt;
-			
-			var piexlP:Point = new Point($mt.x, $mt.y);
-			var tileP:Point = new Point($mt.tile_x, $mt.tile_y);
-			var leftRight:Point = new Point(tileP.x, tileP.x);
-			var topBottom:Point = new Point(tileP.y, tileP.y);
-			//循环递减
-			while(true)
-			{
-				//向外扩展一圈
-				leftRight.x -= 1;
-				leftRight.y += 1;
-				topBottom.x -= 1;
-				topBottom.y += 1;
-				
-				//遍历该圈
-				var tileP2:Point;
-				var piexlP2:Point;
-				var mapTile:MapTile;
-				var i:int;
-				var tilePArr:Array = [];
-				//上下两行
-				for(i=leftRight.x; i<=leftRight.y; i++)
-				{
-					tilePArr.push(new Point(i, topBottom.x),new Point(i, topBottom.y));
-				}
-				//左右两行
-				for(i=topBottom.x+1; i<topBottom.y-1; i++)
-				{
-					tilePArr.push(new Point(leftRight.x, i),new Point(leftRight.y, i));	
-				}
-				//检测
-				var num:int = tilePArr.length;
-				for(i=0; i<num; i++)
-				{
-					tileP2 = tilePArr[i];
-					//判断距离
-					piexlP2 = Transformer.transTilePoint2PixelPoint(tileP2); 
-					if(Point.distance(piexlP, piexlP2)>=$maxDis)
-					{
-						return null;//注意这里是跳出循环
-					}
-					//查看存在性
-					mapTile =  getMapTile(tileP2.x, tileP2.y);
-					if(mapTile==null)
-					{
-						continue;
-					}
-					//判断障碍
-					if(!mapTile.isSolid)
-					{
-						return mapTile;
-					}
-				}
-			}
-			return null;
-		}
+		//		/**
+		//		 * 获取距$toMT最近的一个非障碍逻辑点（如果$toMT自身不是障碍则返回自身）
+		//		 * @param $fromMT 开始的MapTile
+		//		 * @param $toMT 目标的MapTile
+		//		 */		
+		//		public static function getRoundMapTile($fromMT:MapTile, $toMT:MapTile):MapTile {
+		//			if(!$toMT.isSolid)return $toMT;
+		//			
+		//			var toPiexlP:Point = new Point($toMT.x, $toMT.y);
+		//			var toTileP:Point = new Point($toMT.tile_x, $toMT.tile_y);
+		//			var leftRight:Point = new Point(toTileP.x, toTileP.x);
+		//			var topBottom:Point = new Point(toTileP.y, toTileP.y);
+		//			//循环递减
+		//			while(true)
+		//			{
+		//				//向外扩展一圈
+		//				leftRight.x -= 1;
+		//				leftRight.y += 1;
+		//				topBottom.x -= 1;
+		//				topBottom.y += 1;
+		//				
+		//				//遍历该圈
+		//				var tileP:Point;
+		//				var piexlP:Point;
+		//				var mapTile:MapTile;
+		//				var i:int;
+		//				var tilePArr:Array = [];
+		//				//上下两行
+		//				for(i=leftRight.x; i<=leftRight.y; i++)
+		//				{
+		//					tilePArr.push(new Point(i, topBottom.x),new Point(i, topBottom.y));
+		//				}
+		//				//左右两行
+		//				for(i=topBottom.x+1; i<topBottom.y-1; i++)
+		//				{
+		//					tilePArr.push(new Point(leftRight.x, i),new Point(leftRight.y, i));	
+		//				}
+		//				//检测
+		//				var num:int = tilePArr.length;
+		//				for(i=0; i<num; i++)
+		//				{
+		//					tileP = tilePArr[i];
+		//					//判断同一性
+		//					piexlP = Transformer.transTilePoint2PixelPoint(tileP); 
+		//					if($fromMT==null || $fromMT.tile_x==tileP.x && $fromMT.tile_y==tileP.y)
+		//					{
+		//						return $fromMT;
+		//					}
+		//					//注意应该用判断同一性，而不能用距离判断
+		////					//判断距离
+		////					piexlP = Transformer.transTilePoint2PixelPoint(tileP); 
+		////					if(Point.distance(toPiexlP, piexlP)>=$maxDis)
+		////					{
+		////						return null;//注意这里是跳出循环
+		////					}
+		//					//查看存在性
+		//					mapTile = getMapTile(tileP.x, tileP.y);
+		//					if(mapTile==null)
+		//					{
+		//						continue;
+		//					}
+		//					//判断障碍
+		//					if(!mapTile.isSolid)
+		//					{
+		//						return mapTile;
+		//					}
+		//				}
+		//			}
+		//			return null;
+		//		}
+		//		/**
+		//		 * 获取距$mt最近的一个非障碍逻辑点（如果$mt自身不是障碍则返回自身）
+		//		 * @param $mt 开始的MapTile
+		//		 * @param $maxDis 最大距离(像素距离)，为0则不限制
+		//		 */		
+		//		public static function getRoundMapTile2($mt:MapTile, $maxDis:Number=0):MapTile {
+		//			if(!$mt.isSolid)return $mt;
+		//			
+		//			var piexlP:Point = new Point($mt.x, $mt.y);
+		//			var tileP:Point = new Point($mt.tile_x, $mt.tile_y);
+		//			var leftRight:Point = new Point(tileP.x, tileP.x);
+		//			var topBottom:Point = new Point(tileP.y, tileP.y);
+		//			//循环递减
+		//			while(true)
+		//			{
+		//				//向外扩展一圈
+		//				leftRight.x -= 1;
+		//				leftRight.y += 1;
+		//				topBottom.x -= 1;
+		//				topBottom.y += 1;
+		//				
+		//				//遍历该圈
+		//				var tileP2:Point;
+		//				var piexlP2:Point;
+		//				var mapTile:MapTile;
+		//				var i:int;
+		//				var tilePArr:Array = [];
+		//				//上下两行
+		//				for(i=leftRight.x; i<=leftRight.y; i++)
+		//				{
+		//					tilePArr.push(new Point(i, topBottom.x),new Point(i, topBottom.y));
+		//				}
+		//				//左右两行
+		//				for(i=topBottom.x+1; i<topBottom.y-1; i++)
+		//				{
+		//					tilePArr.push(new Point(leftRight.x, i),new Point(leftRight.y, i));	
+		//				}
+		//				//检测
+		//				var num:int = tilePArr.length;
+		//				for(i=0; i<num; i++)
+		//				{
+		//					tileP2 = tilePArr[i];
+		//					//判断距离
+		//					piexlP2 = Transformer.transTilePoint2PixelPoint(tileP2); 
+		//					if(Point.distance(piexlP, piexlP2)>=$maxDis)
+		//					{
+		//						return null;//注意这里是跳出循环
+		//					}
+		//					//查看存在性
+		//					mapTile =  getMapTile(tileP2.x, tileP2.y);
+		//					if(mapTile==null)
+		//					{
+		//						continue;
+		//					}
+		//					//判断障碍
+		//					if(!mapTile.isSolid)
+		//					{
+		//						return mapTile;
+		//					}
+		//				}
+		//			}
+		//			return null;
+		//		}
 	}
 }

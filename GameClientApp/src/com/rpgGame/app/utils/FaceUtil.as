@@ -129,7 +129,8 @@ package com.rpgGame.app.utils
 			grid.count = itemInfo.count;
 			grid.showQuality( itemInfo.quality );
 			grid.faceInfo = itemInfo;
-			grid.setIsShowCdTm( true );
+			grid.setIsShowCdTm(false);
+			grid.setIsShowCdCircle(true);
 			grid.sortLayer();
 			grid.setIsBind(itemInfo.binded);
 			grid.selectImgVisible = true;
@@ -237,7 +238,7 @@ package com.rpgGame.app.utils
 			grid.clear();
 			
 			var size:int = grid.iconSize;
-			grid.showQuality( -1 );
+//			grid.showQuality( -1 );
 			grid.faceInfo = data;
 			grid.setIconResName( ClientConfig.getSkillIcon( data.icoName, size ) );
 			grid.setIsShowCdTm( true );

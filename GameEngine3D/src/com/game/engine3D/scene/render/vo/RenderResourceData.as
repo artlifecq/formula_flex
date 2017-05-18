@@ -4,7 +4,7 @@ package com.game.engine3D.scene.render.vo
 	import com.game.engine3D.scene.render.SceneRenderCache;
 	import com.game.engine3D.utils.CallBackUtil;
 	import com.game.engine3D.vo.CallBackData;
-	import com.game.mainCore.libCore.share.CountShareData;
+	import com.game.engine3D.vo.share.CountShareData;
 	
 	import flash.utils.Dictionary;
 	
@@ -86,7 +86,7 @@ package com.game.engine3D.scene.render.vo
 		 * @param completeHandler
 		 *
 		 */
-		final public function loadSource(meshSourcePath : String, animatorSourcePath : String = null) : void
+		final public function loadSource(meshSourcePath : String, animatorSourcePath : String = null, priority : int = 100) : void
 		{
 			_meshSourcePath = meshSourcePath;
 			_animatorSourcePath = animatorSourcePath;
@@ -103,7 +103,7 @@ package com.game.engine3D.scene.render.vo
 					_renderMeshLoader.setResErrorCallBack(onMeshError);
 					if (!_renderMeshLoader.isLoading)
 					{
-						_renderMeshLoader.loadSource(_meshSourcePath);
+						_renderMeshLoader.loadSource(_meshSourcePath, priority);
 					}
 				}
 
@@ -132,7 +132,7 @@ package com.game.engine3D.scene.render.vo
 					_renderAnimatorLoader.setResErrorCallBack(onAnimatorError);
 					if (!_renderAnimatorLoader.isLoading)
 					{
-						_renderAnimatorLoader.loadSource(_animatorSourcePath);
+						_renderAnimatorLoader.loadSource(_animatorSourcePath, priority);
 					}
 				}
 			}

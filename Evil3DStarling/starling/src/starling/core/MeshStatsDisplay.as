@@ -1,14 +1,13 @@
 package starling.core
 {
+	import flash.display.Graphics;
+	import flash.display.Shape;
+	import flash.events.Event;
 	import flash.geom.Point;
-	import flash.utils.Dictionary;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Mesh;
-	import starling.display.Shape;
-	import starling.display.Sprite;
-	import starling.events.Event;
 	import starling.utils.Pool;
 	
 	/**
@@ -17,11 +16,16 @@ package starling.core
 	 * @author WEWELL
 	 * 
 	 */	
-	public class MeshStatsDisplay extends Sprite
+	public class MeshStatsDisplay extends flash.display.Sprite
 	{
+		private var canvas:flash.display.Shape;
+		
 		public function MeshStatsDisplay()
 		{
-			isDebugStats = true;
+			canvas = new flash.display.Shape();
+			this.addChild(canvas);
+			this.mouseEnabled = this.mouseChildren = false;
+			
 			addEventListener(Event.ADDED_TO_STAGE,_addedToStage);
 			addEventListener(Event.REMOVED_FROM_STAGE,_removeFromStage);
 		}
@@ -47,7 +51,7 @@ package starling.core
 			{
 				if(_stackMesh && _stackMesh.parent)
 				{
-					_stackMesh.removeFromParent();
+					_stackMesh.parent.removeChild(_stackMesh);
 				}
 				return;
 			}
@@ -55,11 +59,11 @@ package starling.core
 			if(!_stackMesh)
 			{
 				_stackMesh = new Shape();
-				_stackMesh.lineStyle(5, 0xFF0000);
-				_stackMesh.moveTo(0,0);
-				_stackMesh.lineTo(40,0);
-				_stackMesh.moveTo(0,0);
-				_stackMesh.lineTo(0,40);
+				_stackMesh.graphics.lineStyle(5, 0xFF0000);
+				_stackMesh.graphics.moveTo(0,0);
+				_stackMesh.graphics.lineTo(40,0);
+				_stackMesh.graphics.moveTo(0,0);
+				_stackMesh.graphics.lineTo(0,40);
 			}
 			
 			var pos:Array = _maxStackKey.split(",");
@@ -71,10 +75,12 @@ package starling.core
 		
 		private function updateTriangles():void
 		{
+			canvas.graphics.clear();
+			
 			_numStageMeshs = 0;
 			_maxStack = 0;
 			
-			_stacks = new Dictionary();
+			_stacks = {};
 			drawTriangles(Starling.current.stage);
 			
 			_curNumStageMeshs = _numStageMeshs;
@@ -83,32 +89,34 @@ package starling.core
 			updateMaxStackStats();
 		}
 		
-		private function drawTriangles(container:DisplayObjectContainer):void
+		private function drawTriangles(container:DisplayObjectContainer, parentVisible:Boolean=true, pSacleX:Number=1, pScaleY:Number=1):void
 		{
 			var len:int = container.numChildren;
 			var p:Point = Pool.getPoint();
 			var out:Point =Pool.getPoint();
-			var state:Shape;
-			var hasVisibleArea:Boolean;
+			var g:Graphics = canvas.graphics;
+			var color:uint = 0xFFFFFF;
 			for (var i:int=0; i<len; i++)
 			{
 				var mesh:DisplayObject = container.getChildAt(i);
+				
+				if(mesh.layerBatchId == int.MAX_VALUE)
+				{
+					continue;
+				}
+				
 				if(mesh is DisplayObjectContainer)
 				{
-					if(mesh.isDebugStats)
-					{
-						continue;
-					}
-					drawTriangles(mesh as DisplayObjectContainer);
+					drawTriangles(mesh as DisplayObjectContainer, mesh.visible && parentVisible && mesh.alpha > 0.0, mesh.scaleX, mesh.scaleY);
 				}else if(mesh is Mesh)
 				{
 					p.setTo(this.x, this.y);
 					mesh.localToGlobal(p, out);
-					state = Mesh(mesh).getMeshStats();
-					if(!state)continue;
-					
-					state.x = out.x;
-					state.y = out.y;
+					color = (parentVisible && mesh.visible && mesh.alpha > 0.0) ? 0xFF0000 : (mesh.alpha <=0.01 ? 0xFF00FF : 0x00FF00);
+					g.lineStyle(1, color, 0.5, true);
+					if(pSacleX < 0)out.x -= mesh.width;
+					if(pScaleY < 0)out.y -= mesh.height;
+					Mesh(mesh).drawMeshStats(g, out.x, out.y);
 					
 					_x = out.x;
 					_y = out.y;
@@ -128,11 +136,6 @@ package starling.core
 					{
 						_stacks[_stackKey] = 0;
 					}
-					
-					if(state.parent == null)	this.addChild(state);
-					
-					if(!mesh.hasEventListener(Event.REMOVED_FROM_STAGE, onMeshRemoveFromStage))
-						mesh.addEventListener(Event.REMOVED_FROM_STAGE, onMeshRemoveFromStage);
 				}
 			}
 			
@@ -140,19 +143,11 @@ package starling.core
 			Pool.putPoint(out)	
 		}
 		
-		private function onMeshRemoveFromStage(e:Event):void
-		{
-			var mesh:Mesh = e.currentTarget as Mesh;
-			mesh.removeEventListener(Event.REMOVED_FROM_STAGE, onMeshRemoveFromStage);
-			var state:Shape = mesh.getMeshStats();
-			if(state != null)state.removeFromParent();
-		}
-		
 		private var _x:int, _y:int;
 		private var _maxStack:Number, _maxStackKey:String, _curMaxStack:Number, _stackMesh:Shape;
 		private var _numStageMeshs:Number, _curNumStageMeshs:Number;
 		
-		private var _stacks:Dictionary, _stackKey:String;
+		private var _stacks:Object, _stackKey:String;
 		
 		public function get maxStack():Number{return _curMaxStack};
 		public function get numStageMeshs():Number{return _curNumStageMeshs};

@@ -38,13 +38,11 @@ package org.mokylin.skin.app.jianghu.lunjian
 			this.currentState = "normal";
 			this.height = 29;
 			this.width = 146;
-			this.elementsContent = [__LunJian_NameItem_UIAsset1_i(),lbName_i(),lbLevel_i(),numBg_i(),lbNum_i()];
-			selectedBtn_i();
-			
+			this.elementsContent = [__LunJian_NameItem_UIAsset1_i(),selectedBtn_i(),lbName_i(),lbLevel_i(),numBg_i(),lbNum_i()];
 			
 			states = {
 			};
-			skinNames={"enabled":"org.mokylin.skin.app.jianghu.lunjian.NameItemSelect"};
+			skinNames={};
 		}
 
 
@@ -99,6 +97,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			lbNum = temp;
 			temp.name = "lbNum";
 			temp.text = "12";
+			temp.textAlign = "center";
 			temp.color = 0xEFD872;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 123;

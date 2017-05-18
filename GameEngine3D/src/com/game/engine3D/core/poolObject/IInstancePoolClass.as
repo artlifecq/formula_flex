@@ -17,5 +17,7 @@
 		function instanceDispose() : void;
 		function instanceDestroy() : void;
 		function reSet(parameters : Array) : void;
+		function get isDisposed() : Boolean;
+		function get isDestroyed() : Boolean;
 	}
 }

@@ -11,8 +11,6 @@ package com.rpgGame.app.state.role.action
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
 
-	import away3d.animators.transitions.CrossfadeTransition;
-
 	/**
 	 *
 	 * 场景角色备战状态
@@ -46,11 +44,11 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.DEPUTY_WEAPON:
 					render.visible = true;
 					render.repeat = 0;
-					render.setStatus(statusType, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
+					render.setStatus(statusType, _useCrossfadeTransition ? 0.2 : null, time);
 					break;
 				case RenderUnitType.MOUNT:
 					render.repeat = 0;
-					render.setStatus(RoleActionType.PREWAR, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time);
+					render.setStatus(RoleActionType.PREWAR, _useCrossfadeTransition ? 0.2 : null, time);
 					break;
 				case RenderUnitType.KNIFE_LIGHT:
 					break;

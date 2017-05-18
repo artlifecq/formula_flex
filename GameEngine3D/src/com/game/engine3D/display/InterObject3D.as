@@ -20,7 +20,7 @@ package com.game.engine3D.display
 	{
 		private var onPlayComplete : Function;
 		private var _isStarted : Boolean = false;
-		protected var _unit : BaseObj3D;
+		protected var _obj3d : BaseObj3D;
 		protected var _container3D : PoolContainer3D;
 
 		public function InterObject3D(view3D : View3D = null)
@@ -30,17 +30,23 @@ package com.game.engine3D.display
 			this.addChild3D(_container3D);
 		}
 
-		public function setRenderUnit(unit : BaseObj3D) : void
+		public function setRenderUnit(obj3d : BaseObj3D) : void
 		{
-			_unit = unit;
-			_unit.needInViewDist = false;
-			_unit.isInViewDistance = true;
-			_unit.needRun = true;
-			_unit.parent = _container3D;
+			_obj3d = obj3d;
+			_obj3d.needInViewDist = false;
+			_obj3d.isInViewDistance = true;
+			_obj3d.needRun = true;
+			_obj3d.parent = _container3D;
+			_obj3d.rotationY = 0;
 			if (_isStarted)
-				_unit.startRender();
+				_obj3d.startRender();
 			else
-				_unit.stopRender();
+				_obj3d.stopRender();
+			if (_obj3d is RenderUnit3D)
+			{
+				RenderUnit3D(_obj3d).disableOnceMaxDuration = true;
+				RenderUnit3D(_obj3d).play(0);
+			}
 		}
 
 		public function addRenderUnitWith(rend : RenderParamData3D, repeat : int = 1, onPlayComplete : Function = null,addComplete:Function=null) : RenderUnit3D
@@ -49,19 +55,18 @@ package com.game.engine3D.display
 			{
 				return null;
 			}
-
+			this.onPlayComplete = onPlayComplete;
 			var unit : RenderUnit3D;
 			unit = RenderUnit3D.create(rend);
+			unit.repeat = repeat;
 			unit.setPlayCompleteCallBack(onPlayCompleteCallBack, this);
 			unit.setAddedCallBack(addComplete);
 			setRenderUnit(unit);
 
-			unit.repeat = repeat;
-			unit.rotationY = 0;
 			if(!addComplete){//有回调的不自动播放
 				unit.play(0);
 			}
-			this.onPlayComplete = onPlayComplete;
+			
 			return unit;
 		}
 
@@ -69,11 +74,11 @@ package com.game.engine3D.display
 		{
 			if (this.onPlayComplete != null)
 				onPlayComplete(self);
-			if (_unit != null && RenderUnit3D(_unit).repeat <= 1)
+			if (_obj3d != null && RenderUnit3D(_obj3d).repeat <= 1)
 			{
 				stop();
 			}
-            if (_unit != null && RenderUnit3D(_unit).repeat >= 1) {
+            if (_obj3d != null && RenderUnit3D(_obj3d).repeat >= 1) {
                 this.dispose();
             }
 		}
@@ -82,20 +87,24 @@ package com.game.engine3D.display
 		
 		public function get baseObj3D() : BaseObj3D
 		{
-			return this._unit;
+			return this._obj3d;
 		}
 
 		public function start() : void
 		{
 			_isStarted = true;
-			if (_unit)
-				_unit.startRender();
+			if (_obj3d)
+				_obj3d.startRender();
+			if (_obj3d is RenderUnit3D)
+			{
+				RenderUnit3D(_obj3d).play(0);
+			}
 		}
 		public function stop() : void
 		{
 			_isStarted = false;
-			if (_unit)
-				_unit.stopRender();
+			if (_obj3d)
+				_obj3d.stopRender();
 		}
 
 		public function set rotationY(value : Number) : void
@@ -108,12 +117,12 @@ package com.game.engine3D.display
             {
                 this.parent.addChild(this);
             }
-            if (_unit)
+            if (_obj3d)
             {
-                _unit.startRender();
-                if (_unit is RenderUnit3D)
+                _obj3d.startRender();
+                if (_obj3d is RenderUnit3D)
                 {
-                    (_unit as RenderUnit3D).play(timer);
+                    (_obj3d as RenderUnit3D).play(timer);
                 }
             }
             _isStarted = true;
@@ -124,12 +133,12 @@ package com.game.engine3D.display
             {
                 this.parent.removeChild(this);
             }
-            if (_unit)
+            if (_obj3d)
             {
-                _unit.stopRender();
-                if (_unit is RenderUnit3D)
+                _obj3d.stopRender();
+                if (_obj3d is RenderUnit3D)
                 {
-                    (_unit as RenderUnit3D).stop();
+                    (_obj3d as RenderUnit3D).stop();
                 }
             }
             _isStarted = false;
@@ -146,17 +155,11 @@ package com.game.engine3D.display
 				PoolContainer3D.recycle(_container3D);
 				_container3D = null;
 			}
-			if (_unit)
+			if (_obj3d)
 			{
-				_unit.stopRender();
-//				_unit.parent = null;
-//				_unit.graphicDis = null;
-//				if (_unit is RenderUnit3D)
-//				{
-//					(_unit as RenderUnit3D).destroy();
-//				}
-                _unit.destroy();
-				_unit = null;
+//				_obj3d.stopRender();
+                _obj3d.destroy();
+				_obj3d = null;
 			}
 			_isStarted = false;
 			onPlayComplete = null;

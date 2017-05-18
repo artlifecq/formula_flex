@@ -1,6 +1,7 @@
 package com.game.engine3D.controller.camera
 {
 	import com.game.engine3D.events.SceneEvent;
+	import com.game.engine3D.manager.InputManger;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.mainCore.core.controller.KeyController;
 	
@@ -19,7 +20,7 @@ package com.game.engine3D.controller.camera
 	import gs.easing.Linear;
 	
 	import org.client.mainCore.manager.EventManager;
-
+	
 	/**
 	 * 镜头跟随目标控制器
 	 * @ author Guodong.Zhang
@@ -45,22 +46,22 @@ package com.game.engine3D.controller.camera
 		private var _mouseLeftControlable : Boolean = true; // 是否启用鼠标左键拖动镜头。Note:OSX平台下面按住右键之后，stage不会在触发MouseMove事件，以及更新stage.mouseX,stage.mouseY。Windows平台下面Air可能会出现上述问题
 		private var _mouseRightControlable : Boolean = true;
 		private var _mouseDownPosition : Point = new Point(); // 鼠标按下位置
-
+		
 		public function get mouseLeftControlable() : Boolean
 		{
 			return _mouseLeftControlable;
 		}
-
+		
 		public function get mouseRightControlable() : Boolean
 		{
 			return _mouseRightControlable;
 		}
-
+		
 		public function set mouseRightControlable(value : Boolean) : void
 		{
 			_mouseRightControlable = value;
 		}
-
+		
 		/**
 		 * 是否启用坐标拖动镜头
 		 * @param value
@@ -70,84 +71,84 @@ package com.game.engine3D.controller.camera
 		{
 			_mouseLeftControlable = value;
 		}
-
+		
 		public function get mouseDownPosition() : Point
 		{
 			return _mouseDownPosition;
 		}
-
+		
 		public function get enable() : Boolean
 		{
 			return _enable;
 		}
-
+		
 		public function set enable(value : Boolean) : void
 		{
 			_enable = value;
 		}
-
+		
 		private var _mouseWheelSpeed : Number = 5;
-
+		
 		/**鼠标滚轮速度*/
 		public function get mouseWheelSpeed() : Number
 		{
 			return _mouseWheelSpeed;
 		}
-
+		
 		public function set mouseWheelSpeed(value : Number) : void
 		{
 			_mouseWheelSpeed = value;
 		}
-
+		
 		private var _mouseRightSpeed : Number = 0.8;
-
+		
 		/**鼠标滚轮速度*/
 		public function get mouseRightSpeed() : Number
 		{
 			return _mouseRightSpeed;
 		}
-
+		
 		public function set mouseRightSpeed(value : Number) : void
 		{
 			_mouseRightSpeed = value;
 		}
-
+		
 		private var _xDegControlable : Boolean = true;
-
+		
 		public function get xDegControlable() : Boolean
 		{
 			return _xDegControlable;
 		}
-
+		
 		/**是否能控制水平角度旋转视角*/
 		public function set xDegControlable(value : Boolean) : void
 		{
 			_xDegControlable = value;
 		}
-
+		
 		private var _yDegControlable : Boolean = true;
-
+		
 		public function get yDegControlable() : Boolean
 		{
 			return _yDegControlable;
 		}
-
+		
 		/**是否能控制垂直角度旋转视角*/
 		public function set yDegControlable(value : Boolean) : void
 		{
 			_yDegControlable = value;
 		}
-
+		
 		private var _distanceControlable : Boolean;
-
+		
 		/**是否能控制滚轮调整*/
 		public function set distanceControlable(value : Boolean) : void
 		{
 			_distanceControlable = value;
 		}
-
+		
 		private var _xDeg : Number = 0;
-
+		
 		/**水平角度*/
 		public function set xDeg(value : Number) : void
 		{
@@ -163,14 +164,14 @@ package com.game.engine3D.controller.camera
 			}
 			EventManager.dispatchEvent(SceneEvent.CAMERA_PAN_CHANGE);
 		}
-
+		
 		public function get xDeg() : Number
 		{
 			return _xDeg;
 		}
-
+		
 		private var _yDeg : Number = 0;
-
+		
 		/**垂直角度*/
 		public function set yDeg(value : Number) : void
 		{
@@ -190,12 +191,12 @@ package com.game.engine3D.controller.camera
 			}
 			EventManager.dispatchEvent(SceneEvent.CAMERA_TILT_CHANGE);
 		}
-
+		
 		public function get yDeg() : Number
 		{
 			return _yDeg;
 		}
-
+		
 		/**摄像机与目标的距离*/
 		override public function set distance(val : Number) : void
 		{
@@ -223,32 +224,32 @@ package com.game.engine3D.controller.camera
 			}
 			EventManager.dispatchEvent(SceneEvent.CAMERA_DISTANCE_CHANGE);
 		}
-
+		
 		override public function get distance() : Number
 		{
 			return _distance;
 		}
-
+		
 		public function set superDistance(val : Number) : void
 		{
 			super.distance = val;
 		}
-
+		
 		public function get superDistance() : Number
 		{
 			return super.distance;
 		}
-
+		
 		public function get active() : Boolean
 		{
 			return enable && !_mouseOutDetected;
 		}
-
+		
 		public function CameraLockOnTargetController()
 		{
 			super(null, null);
 		}
-
+		
 		public function updateControl() : void
 		{
 			if (_listenerTarget)
@@ -271,7 +272,7 @@ package com.game.engine3D.controller.camera
 				}
 			}
 		}
-
+		
 		public function startControl($listenerTarget : InteractiveObject) : void
 		{
 			_listenerTarget = $listenerTarget;
@@ -288,7 +289,7 @@ package com.game.engine3D.controller.camera
 				startMouseRightControl();
 			}
 		}
-
+		
 		public function stopControl() : void
 		{
 			enable = false;
@@ -301,14 +302,14 @@ package com.game.engine3D.controller.camera
 				stopMouseRightControl();
 			}
 		}
-
+		
 		public function forceStopPanning() : void
 		{
 			endPanning();
 			_isMouseDown = false;
 			_isMouseRightDown = false;
 		}
-
+		
 		private function startMouseRightControl() : void
 		{
 			_listenerTarget.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
@@ -320,7 +321,7 @@ package com.game.engine3D.controller.camera
 			_listenerTarget.addEventListener(MouseEvent.RIGHT_MOUSE_UP, onMouseRightUp);
 			Stage3DLayerManager.stage3DProxy.addEventListener(away3d.events.Event.ENTER_FRAME, loop);
 		}
-
+		
 		private function stopMouseRightControl() : void
 		{
 			_listenerTarget.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
@@ -332,17 +333,17 @@ package com.game.engine3D.controller.camera
 			_listenerTarget.removeEventListener(MouseEvent.RIGHT_MOUSE_UP, onMouseRightUp);
 			Stage3DLayerManager.stage3DProxy.removeEventListener(away3d.events.Event.ENTER_FRAME, loop);
 		}
-
+		
 		public function get isMouseRightDown() : Boolean
 		{
 			return _isMouseRightDown;
 		}
-
+		
 		public function get isMouseDown() : Boolean
 		{
 			return _isMouseDown;
 		}
-
+		
 		private function loop(e : away3d.events.Event) : void
 		{
 			if (active)
@@ -381,7 +382,7 @@ package com.game.engine3D.controller.camera
 				}
 			}
 		}
-
+		
 		private function updateMouseRotation() : void
 		{
 			var stage : Stage = Stage3DLayerManager.stage;
@@ -403,9 +404,9 @@ package com.game.engine3D.controller.camera
 			{
 				xDeg += (dx * mouseRightSpeed);
 			}
-
+			
 		}
-
+		
 		private function checkIfMoved(dx : Number, dy : Number) : Boolean
 		{
 			if (Multitouch.supportsGestureEvents)
@@ -420,14 +421,18 @@ package com.game.engine3D.controller.camera
 			}
 			return false;
 		}
-
+		
 		private function onMouseWheel(event : MouseEvent) : void
 		{
+			if (InputManger.getInstance().isOperateLocked)
+			{
+				return;
+			}
 			if (Stage3DLayerManager.hitTestStarling(event.stageX, event.stageY))
 			{
 				return;
 			}
-
+			
 			if (active)
 			{
 				if (mouseWheelCallback != null)
@@ -440,9 +445,13 @@ package com.game.engine3D.controller.camera
 				}
 			}
 		}
-
+		
 		private function onMouseRightDown(e : MouseEvent) : void
 		{
+			if (InputManger.getInstance().isOperateLocked)
+			{
+				return;
+			}
 			_isMouseRightDown = true;
 			if (!_mouseRightControlable)
 			{
@@ -461,7 +470,7 @@ package com.game.engine3D.controller.camera
 				startPanning();
 			}
 		}
-
+		
 		private function onMouseRightUp(e : MouseEvent) : void
 		{
 			_isMouseRightDown = false;
@@ -477,7 +486,7 @@ package com.game.engine3D.controller.camera
 			}
 			endPanning();
 		}
-
+		
 		private function startPanning() : void
 		{
 			if (active)
@@ -485,7 +494,7 @@ package com.game.engine3D.controller.camera
 				var stage : Stage = Stage3DLayerManager.stage;
 				if (!stage)
 					return;
-				if(Stage3DLayerManager.hitTestStarling(stage.mouseX, stage.mouseY))
+				if (Stage3DLayerManager.hitTestStarling(stage.mouseX, stage.mouseY))
 				{
 					return;
 				}
@@ -498,7 +507,7 @@ package com.game.engine3D.controller.camera
 				}
 			}
 		}
-
+		
 		private function endPanning() : void
 		{
 			if (_ispanning)
@@ -507,14 +516,18 @@ package com.game.engine3D.controller.camera
 				_ispanning = false;
 			}
 		}
-
+		
 		public function get ispanning() : Boolean
 		{
 			return _ispanning;
 		}
-
+		
 		private function onMouseDown(event : MouseEvent) : void
 		{
+			if (InputManger.getInstance().isOperateLocked)
+			{
+				return;
+			}
 			_isMouseDown = true;
 			if (!_mouseLeftControlable)
 			{
@@ -533,7 +546,7 @@ package com.game.engine3D.controller.camera
 				startPanning();
 			}
 		}
-
+		
 		private function onMouseUp(event : MouseEvent) : void
 		{
 			_isMouseDown = false;
@@ -549,12 +562,12 @@ package com.game.engine3D.controller.camera
 			}
 			endPanning();
 		}
-
+		
 		private function onMouseOver(event : MouseEvent) : void
 		{
 			_mouseOutDetected = false;
 		}
-
+		
 		private function onMouseOut(event : MouseEvent) : void
 		{
 			_mouseOutDetected = true;
@@ -562,7 +575,7 @@ package com.game.engine3D.controller.camera
 			_isMouseDown = false;
 			_isMouseRightDown = false;
 		}
-
+		
 		private function onMouseLeave(event : flash.events.Event) : void
 		{
 			_mouseOutDetected = true;

@@ -6,7 +6,8 @@ package starling.textures
 	import flash.display3D.Context3DTextureFormat;
 	import flash.geom.Rectangle;
 	import flash.utils.ByteArray;
-	import flash.utils.getQualifiedClassName;
+	
+	import away3d.enum.LoadPriorityType;
 	
 	import starling.core.Starling;
 	import starling.errors.MissingContextError;
@@ -15,10 +16,10 @@ package starling.textures
 	{
 		private static var sDefaultOptions:TextureOptions = new TextureOptions();
 	
-		public static function fromUrl(url:String, mipMapping:Boolean = false,optimizeForRenderToTexture:Boolean=false,format:String="bgra"):IStarlingTexture
+		public static function fromUrl(url:String, mipMapping:Boolean = false,optimizeForRenderToTexture:Boolean=false,format:String="bgra", priority:int = LoadPriorityType.LEVEL_2D_UI_DEFAULT):IStarlingTexture
 		{
 			var texture:ConcreteTexture = TextureFactory.empty(4,4,mipMapping,optimizeForRenderToTexture,format) as ConcreteTexture;
-			texture.load(url);
+			texture.load(url, priority);
 			return texture;
 		}
 		
@@ -38,7 +39,7 @@ package starling.textures
 		 *                     efficient "RectangleTexture". (Only applicable to bitmaps; ATF
 		 *                     textures are always POT-textures, anyway.)
 		 */
-		public static function fromEmbeddedAsset(assetClass:Class, mipMapping:Boolean=false,
+/*		public static function fromEmbeddedAsset(assetClass:Class, mipMapping:Boolean=false,
 												 optimizeForRenderToTexture:Boolean=false,
 												 format:String="bgra"):IStarlingTexture
 		{
@@ -61,7 +62,7 @@ package starling.textures
 			
 			asset = null; // avoid that object stays in memory (through 'onRestore' functions)
 			return texture;
-		}
+		}*/
 		
 		/** Creates a texture object from a bitmap.
 		 *  Beware: you must not dispose the bitmap's data if Starling should handle a lost device
@@ -109,13 +110,29 @@ package starling.textures
 											  format:String="bgra",disposeBitmapData:Boolean = true):IStarlingTexture
 		{
 			var texture:IStarlingTexture = TextureFactory.empty(data.width, data.height,generateMipMaps, optimizeForRenderToTexture,format);
-			
+			texture.autoRecycleDataEnable = false;
 			texture.root.uploadBitmapData(data);
 			
 			if(disposeBitmapData)data.dispose();
 			
 			return texture;
 		}
+		
+		public static function fromBitmapDataByMemoryItem(data:BitmapData, generateMipMaps:Boolean=false,
+											  optimizeForRenderToTexture:Boolean=false,
+											  format:String="bgra",disposeBitmapData:Boolean = true, clipRect:Rectangle=null):IStarlingTexture
+		{
+			clipRect ||= data.rect;
+			var texture:IStarlingTexture = TextureFactory.empty(clipRect.width, clipRect.height,generateMipMaps, optimizeForRenderToTexture,format);
+			texture.autoRecycleDataEnable = false;
+			texture.root.uploadBitmapDataByMemoryItem(data, clipRect);
+			
+			if(disposeBitmapData)data.dispose();
+			
+			return texture;
+		}
+		
+		
 		
 		public static function fromAtfBytes(data:ByteArray,useMipMaps:Boolean=true):IStarlingTexture
 		{

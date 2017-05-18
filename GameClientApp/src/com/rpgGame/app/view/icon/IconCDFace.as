@@ -35,11 +35,11 @@ package com.rpgGame.app.view.icon
 	{
 		protected var _faceInfo : IBaseFaceInfo;
 
-		public var _cdFace : CDFace;
+		private var _cdFace : CDFace;
 		private var _needCD : Boolean = false;
 		protected var _isGary : Boolean = false;
 		private var _showCD : Boolean = true;
-		
+		private var _showCircle: Boolean = false;
 		/** 是否已经侦听cd事件*/
 		private var _isAlreadyListenerCd : Boolean;
 		/** 显示快捷键 */
@@ -215,7 +215,7 @@ package com.rpgGame.app.view.icon
 		{
 			if (!_cdFace || !_cdFace.parent)
 				addCdFace();
-
+			_cdFace.isCdShow=_showCircle;
 			_cdFace.update($now, $cdTotal);
 		}
 
@@ -224,11 +224,12 @@ package com.rpgGame.app.view.icon
 			if (_cdFace == null)
 			{
 				_cdFace = CDFace.create(_iconSize, _iconSize, null, isCircleCD, isReverse);
-
+				
 				if (_iconImage != null)
 				{
 					_cdFace.x = _iconImage.x;
 					_cdFace.y = _iconImage.y;
+					
 				}
 			}
 			setIsShowCdTm(_isShwoTm);
@@ -272,7 +273,12 @@ package com.rpgGame.app.view.icon
 			else
 				_cdFace.hideTmTxt();
 		}
-		
+		public function setIsShowCdCircle(isShow : Boolean) : void
+		{
+			_showCircle=isShow;
+			
+				
+		}
 		override public function sortLayer() : void
 		{
 			super.sortLayer();

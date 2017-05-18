@@ -12,6 +12,7 @@ package com.game.engine2D.scene.map.vo
 	
 	import away3d.containers.ObjectContainer3D;
 	import away3d.entities.EntityLayerType;
+	import away3d.enum.LoadPriorityType;
 	import away3d.events.Event;
 	import away3d.materials.TextureMaterial;
 	
@@ -63,26 +64,9 @@ package com.game.engine2D.scene.map.vo
 				container.addChild(_mesh);
 			_mesh.x = x;
 			_mesh.y = y;
-//			_mesh.z = 400;
+			_mesh.z = 400;
 			_mesh.run();
 			_mesh.layerType = EntityLayerType.DEFAULT | EntityLayerType.POST_GLASS;
-		}
-		
-		final public function drawMask(textureMaterial : TextureMaterial, smallScaleX : Number, smallScaleY : Number) : void
-		{
-			/*if (_mesh)
-			{
-			_mesh.material = textureMaterial;
-			_mesh.width = SceneConfig.ZONE_WIDTH;
-			_mesh.height = SceneConfig.ZONE_HEIGHT;
-			_mesh.run();
-			var transformationMatrix:Matrix = _mesh.overrideMaterialProps.prependedUVTransform;
-			transformationMatrix.identity();
-			transformationMatrix.scale(SceneConfig.ZONE_WIDTH/(smallScaleX*textureMaterial.texture.width), 
-			SceneConfig.ZONE_HEIGHT/(smallScaleX*textureMaterial.texture.height));
-			transformationMatrix.translate(Math.round(piexl_x / smallScaleX)/textureMaterial.texture.width,
-			Math.round(piexl_y / smallScaleY)/textureMaterial.texture.height);
-			}*/
 		}
 		
 		final public function load(filePath : String, priority : int, userData : Object, completeHandler : Function) : Boolean
@@ -100,7 +84,7 @@ package com.game.engine2D.scene.map.vo
 			_asyncTexture = new AsyncByteTexture(false);
 			_asyncTexture.userData = userData;
 			_asyncTexture.addEventListener(Event.COMPLETE, onLoaderComplete);
-			_asyncTexture.load(filePath);
+			_asyncTexture.load(filePath, LoadPriorityType.LEVEL_CUSTOM_5);
 			
 			//_txtStr = getKey(this.tile_x, this.tile_y) + _loadStr; 
 			//addTxt(_txtStr);

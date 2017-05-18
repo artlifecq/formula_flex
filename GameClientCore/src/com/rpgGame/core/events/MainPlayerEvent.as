@@ -39,5 +39,7 @@ package com.rpgGame.core.events
 		/** 玩家死亡*/
 		public static const PLAYER_DIE:int = UNIQUEID.NEXT;
 		
+		public static const OPEN_NEW_FUNCTION:int = UNIQUEID.NEXT;
+		
 	}
 }
