@@ -37,7 +37,7 @@ package com.rpgGame.core.utils
 				}
 				else
 				{
-					tmpLab=clonelab(lab);
+					tmpLab=MCUtil.clonelab(lab);
 				}
 				
 				tmpLab.x=startPos.x+(i%cellNum)*xGe;
@@ -63,7 +63,7 @@ package com.rpgGame.core.utils
 			var imgArrow:UIAsset;
 			for (var i:int = 0; i < len; i++) 
 			{
-				tmpLab=clonelab(lab);
+				tmpLab=MCUtil.clonelab(lab);
 				
 				
 				val=attHash.getValue(keys[i]);
@@ -109,18 +109,6 @@ package com.rpgGame.core.utils
 			}
 			lab.text=str;
 		}
-		public static function clonelab(lab:Label):Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.name =lab.name;
-			temp.letterSpacing = lab.letterSpacing;
-			temp.text = lab.text;
-			temp.color =lab.color;
-			temp.nativeFilters = lab.nativeFilters;
-			temp.width = lab.width;
-			temp.x = lab.x;
-			temp.y = lab.y;
-			return temp;
-		}
+	
 	}
 }

@@ -35,11 +35,15 @@ package org.mokylin.skin.app.beibao
 
 		public var chkSelect:feathers.controls.Check;
 
+		public var gCheck:feathers.controls.Group;
+
 		public var lbMsg:feathers.controls.Label;
 
 		public var lb_Title:feathers.controls.Label;
 
-		public var lst_pack:feathers.controls.List;
+		public var lst_pack0:feathers.controls.List;
+
+		public var lst_pack1:feathers.controls.List;
 
 		public var tab_pack:feathers.controls.TabBar;
 
@@ -56,7 +60,7 @@ package org.mokylin.skin.app.beibao
 			this.currentState = "normal";
 			this.height = 447;
 			this.width = 364;
-			this.elementsContent = [__ShangDian_Skin_Group1_i(),bg_i(),lb_Title_i(),btnClose_i(),lst_pack_i(),tab_pack_i(),__ShangDian_Skin_Label1_i(),chkSelect_i(),__ShangDian_Skin_UIAsset4_i(),uiNo_i(),lbMsg_i()];
+			this.elementsContent = [__ShangDian_Skin_Group1_i(),lst_pack0_i(),lst_pack1_i(),bg_i(),lb_Title_i(),btnClose_i(),tab_pack_i(),__ShangDian_Skin_Label1_i(),gCheck_i(),uiNo_i(),lbMsg_i()];
 			
 			states = {
 			};
@@ -93,7 +97,7 @@ package org.mokylin.skin.app.beibao
 		private function __ShangDian_Skin_Label1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "单击购买商店";
+			temp.text = "单击购买商品";
 			temp.color = 0xD23735;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 251;
@@ -104,8 +108,12 @@ package org.mokylin.skin.app.beibao
 		private function __ShangDian_Skin_TileLayout1_i():feathers.layout.TiledRowsLayout
 		{
 			var temp:feathers.layout.TiledRowsLayout = new feathers.layout.TiledRowsLayout();
-			temp.requestedColumnCount = 7;
-			temp.requestedRowCount = 6;
+			return temp;
+		}
+
+		private function __ShangDian_Skin_TileLayout2_i():feathers.layout.TiledRowsLayout
+		{
+			var temp:feathers.layout.TiledRowsLayout = new feathers.layout.TiledRowsLayout();
 			return temp;
 		}
 
@@ -145,8 +153,8 @@ package org.mokylin.skin.app.beibao
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/shangdian/wdqkyd.png";
-			temp.x = 49;
-			temp.y = 407;
+			temp.x = 31;
+			temp.y = 3;
 			return temp;
 		}
 
@@ -179,8 +187,19 @@ package org.mokylin.skin.app.beibao
 			chkSelect = temp;
 			temp.name = "chkSelect";
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function gCheck_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			gCheck = temp;
+			temp.name = "gCheck";
 			temp.x = 18;
 			temp.y = 404;
+			temp.elementsContent = [chkSelect_i(),__ShangDian_Skin_UIAsset4_i()];
 			return temp;
 		}
 
@@ -214,17 +233,31 @@ package org.mokylin.skin.app.beibao
 			return temp;
 		}
 
-		private function lst_pack_i():feathers.controls.List
+		private function lst_pack0_i():feathers.controls.List
 		{
 			var temp:feathers.controls.List = new feathers.controls.List();
-			lst_pack = temp;
-			temp.name = "lst_pack";
+			lst_pack0 = temp;
+			temp.name = "lst_pack0";
 			temp.height = 326;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
 			temp.width = 346;
-			temp.x = 9;
-			temp.y = 60;
+			temp.x = 8;
+			temp.y = 59;
 			temp.layout = __ShangDian_Skin_TileLayout1_i();
+			return temp;
+		}
+
+		private function lst_pack1_i():feathers.controls.List
+		{
+			var temp:feathers.controls.List = new feathers.controls.List();
+			lst_pack1 = temp;
+			temp.name = "lst_pack1";
+			temp.height = 326;
+			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
+			temp.width = 346;
+			temp.x = 8;
+			temp.y = 59;
+			temp.layout = __ShangDian_Skin_TileLayout2_i();
 			return temp;
 		}
 

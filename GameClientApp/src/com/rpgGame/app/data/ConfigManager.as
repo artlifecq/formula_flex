@@ -51,6 +51,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.ReliveCfgData;
 	import com.rpgGame.coreData.cfg.ShopCfgData;
 	import com.rpgGame.coreData.cfg.SkillLvLDataManager;
+	import com.rpgGame.coreData.cfg.SourceGetCfg;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.SpellEffectDataManager;
 	import com.rpgGame.coreData.cfg.StallCfgData;
@@ -270,9 +271,10 @@ package com.rpgGame.app.data
 			ZoneCfgData.setup(dic[ConfigClassRegister.Q_zone]);
 			LunJianCfg.setup(dic[ConfigClassRegister.Q_lunjian]);
 			ZoneMultyCfgData.setup(dic[ConfigClassRegister.Q_zone_multy]);//多人副本
-			
+			//道具获取路径
+			SourceGetCfg.setup(dic[ConfigClassRegister.Q_source]);//多人副本
 			//功能开启
-//			ClientFunctionOpenCfgData.setup(dic["data.ClientFunctionOpen"]);
+			//ClientFunctionOpenCfgData.setup(dic["data.ClientFunctionOpen"]);
 		}
 		
 		/**
@@ -357,7 +359,7 @@ package com.rpgGame.app.data
 			//帮派
 			SocietyStaticConfigData.setConfig(config.family);
 			//商店配置
-			ShopCfgData.setConfig(config.shopConfig);
+			//ShopCfgData.setConfig(config.shopConfig);
 			//职业数据
 			RaceCfgData.setConfig(config.raceConfig);
 			//邮箱

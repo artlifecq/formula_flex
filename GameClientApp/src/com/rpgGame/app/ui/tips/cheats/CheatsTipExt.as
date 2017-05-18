@@ -105,13 +105,22 @@ package com.rpgGame.app.ui.tips.cheats
 					labList=labList.concat(AttrUtil.showAttr(cheatVo.totalValue,this,_skin.lab_shuxing,2,startPos,_skin.lab_shuxing.width,_skin.lab_shuxing.height+2,":"));
 					starty=startPos.y;
 				}
-				//激活属性
-				_skin.imgJiHuoTitle.y=starty;
-				starty+=_skin.imgJiHuoTitle.height+2;
-				startPos.y=starty;
-				//激活属性
-				labList=labList.concat(AttrUtil.showAttr(cheatVo.extendAttr,this,_skin.lab_shuxing,2,startPos,_skin.lab_shuxing.width,_skin.lab_shuxing.height+2,":"));
-				starty=startPos.y;
+				if (cheatVo.extendAttr.size()>0) 
+				{
+					_skin.imgJiHuoTitle.visible=true;
+					//激活属性
+					_skin.imgJiHuoTitle.y=starty;
+					starty+=_skin.imgJiHuoTitle.height+2;
+					startPos.y=starty;
+					//激活属性
+					labList=labList.concat(AttrUtil.showAttr(cheatVo.extendAttr,this,_skin.lab_shuxing,2,startPos,_skin.lab_shuxing.width,_skin.lab_shuxing.height+2,":"));
+					starty=startPos.y;
+				}
+				else
+				{
+					_skin.imgJiHuoTitle.visible=false;
+				}
+			
 				//技能
 				var buffObj:Array=cheatVo.getCurBuff();
 				if (buffObj!=null) 

@@ -244,7 +244,7 @@ package com.rpgGame.appModule.xinfa
 				_attrLabArr=_attrLabArr.concat(AttrUtil.showAttr(_curMap.cheatsVo.totalValue,this._skin.btn_next.parent,_skin.lab_shuxing,1,new Point(_skin.lab_shuxing.x,_skin.lab_shuxing.y),0,_skin.lab_shuxing.height+2,":",_attrLabArr));
 			}
 			//名字
-			
+			_skin.gExtends.visible=_curMap.cheatsVo.extendAttr.size()>0;
 			_extendsLabArr=_extendsLabArr.concat(AttrUtil.showAttr(_curMap.cheatsVo.extendAttr,this._skin.btn_next.parent,_skin.lab_jiangli,1,new Point(_skin.lab_jiangli.x,_skin.lab_jiangli.y),0,_skin.lab_jiangli.height+2,":",_extendsLabArr));
 		}
 		private function updateEffectCheats():void

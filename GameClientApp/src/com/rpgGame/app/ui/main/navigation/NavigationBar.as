@@ -115,6 +115,9 @@ package com.rpgGame.app.ui.main.navigation {
 				case this._skin.btn_banghui:
 					AppManager.showApp(AppConstant.SOCIAL_PANEL);
 					break;
+				case this._skin.btn_shangcheng:
+					AppManager.showApp(AppConstant.MALL_PANEL);
+					break;
             }
         }
         

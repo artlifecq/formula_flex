@@ -15,9 +15,6 @@ package com.rpgGame.netData.shop.message{
 		//模型编号
 		private var _shopModelId: int;
 		
-		//商店页面编号
-		private var _shopPageId: int;
-		
 		
 		/**
 		 * 写入字节缓存
@@ -25,8 +22,6 @@ package com.rpgGame.netData.shop.message{
 		override protected function writing(): Boolean{
 			//模型编号
 			writeInt(_shopModelId);
-			//商店页面编号
-			writeInt(_shopPageId);
 			return true;
 		}
 		
@@ -36,8 +31,6 @@ package com.rpgGame.netData.shop.message{
 		override protected function reading(): Boolean{
 			//模型编号
 			_shopModelId = readInt();
-			//商店页面编号
-			_shopPageId = readInt();
 			return true;
 		}
 		
@@ -62,21 +55,6 @@ package com.rpgGame.netData.shop.message{
 		 */
 		public function set shopModelId(value: int): void{
 			this._shopModelId = value;
-		}
-		
-		/**
-		 * get 商店页面编号
-		 * @return 
-		 */
-		public function get shopPageId(): int{
-			return _shopPageId;
-		}
-		
-		/**
-		 * set 商店页面编号
-		 */
-		public function set shopPageId(value: int): void{
-			this._shopPageId = value;
 		}
 		
 	}

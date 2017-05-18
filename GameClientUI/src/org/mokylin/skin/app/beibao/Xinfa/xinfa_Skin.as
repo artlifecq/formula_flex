@@ -2,6 +2,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
+	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
@@ -42,6 +43,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 		public var btn_prev:feathers.controls.Button;
 
 		public var btn_shuoming:feathers.controls.Button;
+
+		public var gExtends:feathers.controls.Group;
 
 		public var grid_1:feathers.controls.UIAsset;
 
@@ -88,7 +91,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 1013;
-			this.elementsContent = [Bg_i(),imgYuan_i(),__xinfa_Skin_UIAsset1_i(),__xinfa_Skin_UIAsset2_i(),lab_Weijihuo_i(),lab_jiangli_i(),lab_Skill_i(),lab_shuxing_i(),__xinfa_Skin_UIAsset3_i(),__xinfa_Skin_UIAsset4_i(),__xinfa_Skin_UIAsset5_i(),__xinfa_Skin_UIAsset6_i(),__xinfa_Skin_UIAsset7_i(),imgSkill_i(),__xinfa_Skin_UIAsset8_i(),imgFight_i(),imgLevelBg_i(),mc_Level_i(),__xinfa_Skin_UIAsset9_i(),Num_zhandouli_i(),num_xinfazhanli_i(),grid_1_i(),grid_2_i(),grid_3_i(),__xinfa_Skin_UIAsset10_i(),num_zhenqi_i(),btn_hecheng_i(),grid_item_1_i(),btn_jihuo_i(),btn_shuoming_i(),btn_prev_i(),btnGroup_i(),btn_next_i(),lab_Content_i(),mc_Name_i()];
+			this.elementsContent = [Bg_i(),imgYuan_i(),__xinfa_Skin_UIAsset1_i(),__xinfa_Skin_UIAsset2_i(),lab_Weijihuo_i(),lab_jiangli_i(),lab_Skill_i(),lab_shuxing_i(),__xinfa_Skin_UIAsset3_i(),gExtends_i(),__xinfa_Skin_UIAsset6_i(),__xinfa_Skin_UIAsset7_i(),imgSkill_i(),__xinfa_Skin_UIAsset8_i(),imgFight_i(),imgLevelBg_i(),mc_Level_i(),__xinfa_Skin_UIAsset9_i(),Num_zhandouli_i(),num_xinfazhanli_i(),grid_1_i(),grid_2_i(),grid_3_i(),__xinfa_Skin_UIAsset10_i(),num_zhenqi_i(),btn_hecheng_i(),grid_item_1_i(),btn_jihuo_i(),btn_shuoming_i(),btn_prev_i(),btnGroup_i(),btn_next_i(),lab_Content_i(),mc_Name_i()];
 			
 			states = {
 			};
@@ -158,7 +161,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/xinfa/wenzidi2.png";
 			temp.x = 773;
-			temp.y = 380;
+			temp.y = 195;
 			return temp;
 		}
 
@@ -166,8 +169,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/xinfa/wenzidi2.png";
-			temp.x = 773;
-			temp.y = 195;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -175,8 +178,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/xinfa/jihuojiangli.png";
-			temp.x = 776;
-			temp.y = 383;
+			temp.x = 3;
+			temp.y = 3;
 			return temp;
 		}
 
@@ -291,6 +294,17 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shuoming2;
 			temp.x = 732;
 			temp.y = 437;
+			return temp;
+		}
+
+		private function gExtends_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			gExtends = temp;
+			temp.name = "gExtends";
+			temp.x = 773;
+			temp.y = 380;
+			temp.elementsContent = [__xinfa_Skin_UIAsset4_i(),__xinfa_Skin_UIAsset5_i()];
 			return temp;
 		}
 
