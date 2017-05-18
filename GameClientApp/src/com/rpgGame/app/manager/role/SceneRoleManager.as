@@ -138,6 +138,9 @@ package com.rpgGame.app.manager.role
                 role.buffSet.updateBuffEffects();
             }
 			
+			if (role.headFace is HeadFace)
+				(role.headFace as HeadFace).updateTitle(data.junjieLv);
+			
 			CharAttributeManager.setCharHp(data, data.totalStat.hp);
 			CharAttributeManager.setCharMaxLife(data, data.totalStat.life); //需要提供初始化方法,优化一下!
 			if (!isMainChar)

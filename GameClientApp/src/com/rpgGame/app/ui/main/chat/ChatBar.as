@@ -12,6 +12,8 @@ package com.rpgGame.app.ui.main.chat {
     import com.rpgGame.app.richText.component.RichTextArea3D;
     import com.rpgGame.app.scene.SceneRole;
     import com.rpgGame.app.ui.main.chat.laba.VipChatCanvas;
+    import com.rpgGame.core.app.AppConstant;
+    import com.rpgGame.core.app.AppManager;
     import com.rpgGame.core.events.ChatEvent;
     import com.rpgGame.core.events.SceneInteractiveEvent;
     import com.rpgGame.core.manager.tips.TargetTipsMaker;

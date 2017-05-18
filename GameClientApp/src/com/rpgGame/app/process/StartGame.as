@@ -169,25 +169,29 @@ package com.rpgGame.app.process
 		{
 			if(e.shiftKey&&e.keyCode==Keyboard.D)
 			{
-				isShow = !isShow;
-				if(isShow)
-				{
-					StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
+				CONFIG::Debug {
+					isShow = !isShow;
+					if(isShow)
+					{
+						StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
+					}
+					else
+					{
+						StatsUtil.hideAwayStats();
+					}
+					LayerManager.showOrHideMM();
+					ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
 				}
-				else
-				{
-					StatsUtil.hideAwayStats();
-				}
-				LayerManager.showOrHideMM();
-				ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
 			}
 		}
 		
 		private function showFrameState():void
 		{
-			StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
-			LayerManager.showOrHideMM();
-			ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
+			CONFIG::Debug {
+				StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
+				LayerManager.showOrHideMM();
+				ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
+			}			
             // 屏蔽未捕获信息
 //            Log.logCallBack = GameLog.logItem;
 		}

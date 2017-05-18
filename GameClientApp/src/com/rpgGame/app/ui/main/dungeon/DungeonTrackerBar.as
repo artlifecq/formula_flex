@@ -34,6 +34,8 @@ package com.rpgGame.app.ui.main.dungeon
 		{
 			uiClsMap=new HashMap();
 			uiClsMap.add(EnumMapType.MAP_TYPE_LUNJIAN,LunJianTrackerUI);
+			uiClsMap.add(EnumMapType.MAP_TYPE_MULTY,MultyTrackerUI);
+			
 		}
 		
 		override protected function onShow() : void
@@ -41,7 +43,12 @@ package com.rpgGame.app.ui.main.dungeon
 			var mapId:int=MainRoleManager.actorInfo.mapID;
 			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
 			var cls:Class=uiClsMap.getValue(sceneData.mapType);
-			currentUI= new cls();
+			/*if(cls!=null)
+			{
+				currentUI= new cls();
+				this.addChild(currentUI);
+			}*/
+			currentUI= new MultyTrackerUI();
 			this.addChild(currentUI);
 		}
 		

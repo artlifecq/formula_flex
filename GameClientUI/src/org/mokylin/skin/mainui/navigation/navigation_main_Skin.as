@@ -36,8 +36,6 @@ package org.mokylin.skin.mainui.navigation
 
 		public var btn_juese:feathers.controls.Button;
 
-		public var btn_lunjian:feathers.controls.Button;
-
 		public var btn_open:feathers.controls.Button;
 
 		public var btn_shangcheng:feathers.controls.Button;
@@ -66,7 +64,7 @@ package org.mokylin.skin.mainui.navigation
 			
 			this.currentState = "normal";
 			this.height = 70;
-			this.width = 465;
+			this.width = 428;
 			this.elementsContent = [btns_i(),btn_close_i(),btn_open_i(),qi_bg_i(),qi_mc_i()];
 			
 			states = {
@@ -114,7 +112,7 @@ package org.mokylin.skin.mainui.navigation
 			btn_close = temp;
 			temp.name = "btn_close";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shouhui;
-			temp.x = 445;
+			temp.x = 402;
 			temp.y = 23;
 			return temp;
 		}
@@ -130,24 +128,13 @@ package org.mokylin.skin.mainui.navigation
 			return temp;
 		}
 
-		private function btn_lunjian_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_lunjian = temp;
-			temp.name = "btn_lunjian";
-			temp.styleClass = org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhanhun;
-			temp.x = 63;
-			temp.y = 17;
-			return temp;
-		}
-
 		private function btn_open_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_open = temp;
 			temp.name = "btn_open";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zhankai;
-			temp.x = 445;
+			temp.x = 402;
 			temp.y = 23;
 			return temp;
 		}
@@ -213,11 +200,11 @@ package org.mokylin.skin.mainui.navigation
 			btns = temp;
 			temp.name = "btns";
 			temp.height = 70;
-			temp.width = 442;
+			temp.width = 429;
 			temp.x = -1;
 			temp.y = 0;
 			temp.layout = __navigation_main_Skin_HorizontalLayout1_i();
-			temp.elementsContent = [btn_lunjian_i(),btn_zhanhun_i(),btn_juese_i(),btn_beibao_i(),btn_zuoqi_i(),btn_zhuangbei_i(),btn_wuxue_i(),btn_banghui_i(),btn_shangcheng_i()];
+			temp.elementsContent = [btn_zhanhun_i(),btn_juese_i(),btn_beibao_i(),btn_zuoqi_i(),btn_zhuangbei_i(),btn_wuxue_i(),btn_banghui_i(),btn_shangcheng_i()];
 			return temp;
 		}
 

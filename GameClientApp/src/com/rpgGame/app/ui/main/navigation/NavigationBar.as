@@ -112,11 +112,11 @@ package com.rpgGame.app.ui.main.navigation {
 				case _skin.btn_zuoqi:
 					AppManager.showApp(AppConstant.MOUNT_PANEL);
 					break;
-				case this._skin.btn_lunjian:
-					AppManager.showApp(AppConstant.SWORD_PANL);
-					break;
 				case this._skin.btn_banghui:
 					AppManager.showApp(AppConstant.SOCIAL_PANEL);
+					break;
+				case this._skin.btn_shangcheng:
+					AppManager.showApp(AppConstant.MALL_PANEL);
 					break;
             }
         }

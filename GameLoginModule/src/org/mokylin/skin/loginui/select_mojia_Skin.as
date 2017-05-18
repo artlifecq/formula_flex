@@ -201,7 +201,7 @@ package org.mokylin.skin.loginui
 			icon_sk1 = temp;
 			temp.name = "icon_sk1";
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/loginui/skillIcons/mojia/1_chuanxinnu/48.png";
 			temp.x = 22;
 			temp.y = 480;
@@ -214,7 +214,7 @@ package org.mokylin.skin.loginui
 			icon_sk2 = temp;
 			temp.name = "icon_sk2";
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/loginui/skillIcons/mojia/2_qianjibian/48.png";
 			temp.x = 107;
 			temp.y = 480;
@@ -227,7 +227,7 @@ package org.mokylin.skin.loginui
 			icon_sk3 = temp;
 			temp.name = "icon_sk3";
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/loginui/skillIcons/mojia/3_jiguanxianjing/48.png";
 			temp.x = 193;
 			temp.y = 480;

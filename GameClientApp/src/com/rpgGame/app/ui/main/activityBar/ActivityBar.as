@@ -2,15 +2,21 @@
 {
     import com.game.engine3D.display.InterObject3D;
     import com.rpgGame.core.events.ActivityEvent;
+    import com.rpgGame.core.manager.tips.TargetTipsMaker;
+    import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ActivityBarCfgData;
+    import com.rpgGame.coreData.cfg.LanguageConfig;
     import com.rpgGame.coreData.clientConfig.ActivityBarInfo;
+    
+    import feathers.controls.Button;
     
     import gs.TweenLite;
     import gs.easing.Sine;
     
     import org.client.mainCore.manager.EventManager;
-    import org.mokylin.skin.mainui.activityBar.ActivityButtonSkin;
+    import org.mokylin.skin.component.button.ButtonSkin_shouhui;
+    import org.mokylin.skin.component.button.ButtonSkin_zhankai;
     
     import starling.display.DisplayObject;
     import starling.display.Sprite;
@@ -20,38 +26,44 @@
 
         private static const FOLD_TIME:Number = 0.5;
 
-        private var _skin:ActivityButtonSkin;
         private var activitySprite:Sprite;
         private var _tweenLiteToFold:TweenLite;
         private var _activityButtonList:ActivityButtonList;
         private var _isShowPanel:Boolean;
         private var _isFlag:Boolean;
         private var _effect3D:InterObject3D;
+		
+		private var btnLeft:Button;
+		private var btnRight:Button;
 
         public function ActivityBar()
         {
-            _skin = new ActivityButtonSkin();
-            super(_skin);
             init();
         }
 
         private function init():void
         {
             _activityButtonList = new ActivityButtonList();
-            addChild(_activityButtonList);
             activitySprite = new Sprite();
             addChild(activitySprite);
             activitySprite.addChild(_activityButtonList);
-//            addChild(_skin.btnRight);
-//            addChild(_skin.btnLeft);
-//            _skin.btnRight.visible = false;
-//            _skin.btnLeft.visible = false;
+			
+			btnLeft=new Button();
+			btnLeft.styleClass=ButtonSkin_zhankai;
+			btnRight=new Button();
+			btnRight.styleClass=ButtonSkin_shouhui;
+			
+            addChild(btnRight);
+            addChild(btnLeft);
+			btnLeft.x=btnRight.x=_activityButtonList.width;
+            btnRight.visible = false;
+            btnLeft.visible = false;
 //            _skin.arrowImg.visible = false;
 //            _skin.labMessage.visible = false;
             tweenToOpen();
 //            _skin.groupBtn.visible = false;
-//            TipTargetManager.show(_skin.btnRight, TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText("ACTIVITY_BUTTON_RIGHT")));
-//            TipTargetManager.show(_skin.btnLeft, TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText("ACTIVITY_BUTTON_LEFT")));
+            TipTargetManager.show(btnRight, TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText("ACTIVITY_BUTTON_RIGHT")));
+            TipTargetManager.show(btnLeft, TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText("ACTIVITY_BUTTON_LEFT")));
             EventManager.addEvent(ActivityEvent.SHOW_HIDE_ALL, onShowHide);
             EventManager.addEvent(ActivityEvent.SHOW_NEW_ACTIVITY_BUTTON, onShowNewActivityButton);
         }
@@ -118,15 +130,15 @@
                 _tweenLiteToFold.kill();
                 _tweenLiteToFold = null;
             }
-            x = (sWidth - _skin.width) - 260;
+            x = (sWidth - _activityButtonList.width) - 260;
             y = 25;
         }
 
         private function tweenToClose():void
         {
             var setConfig:Object = null;
-//            _skin.btnRight.visible = false;
-//            _skin.btnLeft.visible = true;
+            btnRight.visible = false;
+            btnLeft.visible = true;
             if (_tweenLiteToFold)
             {
                 _tweenLiteToFold.kill();
@@ -135,8 +147,7 @@
             {
                 _activityButtonList.stopEffect();
 				setConfig = {
-//                    "x":(_activityButtonList.width + (_skin.btnRight.width / 2)),
-//                    "y":((_skin.btnRight.height / 2) + 10),
+                    "x":btnLeft.x ,
                     "scaleX":0,
                     "scaleY":0,
                     "alpha":0,
@@ -150,8 +161,8 @@
         private function tweenToOpen():void
         {
             var setConfig:Object = null;
-//            _skin.btnRight.visible = true;
-//            _skin.btnLeft.visible = false;
+            btnRight.visible = true;
+            btnLeft.visible = false;
             if (_tweenLiteToFold)
             {
                 _tweenLiteToFold.kill();
@@ -181,16 +192,16 @@
         {
             switch (target)
             {
-//                case _skin.btnLeft:
-//                    tweenToOpen();
-//                    if (_effect3D)
-//                    {
-//                        _effect3D.stop();
-//                    }
-//                    return;
-//                case _skin.btnRight:
-//                    tweenToClose();
-//                    return;
+                case btnLeft:
+                    tweenToOpen();
+                    if (_effect3D)
+                    {
+                        _effect3D.stop();
+                    }
+                    return;
+                case btnRight:
+                    tweenToClose();
+                    return;
 //                case _skin.arrowImg:
 //                    _skin.arrowImg.visible = false;
 //                    _skin.labMessage.visible = false;

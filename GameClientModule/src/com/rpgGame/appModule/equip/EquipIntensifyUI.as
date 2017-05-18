@@ -1040,7 +1040,8 @@ package com.rpgGame.appModule.equip
 		
 		private function isStren(info:EquipInfo):Boolean
 		{
-			if(info.qItem.q_max_strengthen!=0&&info.strengthLevel<info.qItem.q_max_strengthen){//可强化的
+			var job:int=MainRoleManager.actorInfo.job;
+			if(info.qItem.q_max_strengthen!=0&&info.strengthLevel<info.qItem.q_max_strengthen&&info.qItem.q_job==job){//可强化的
 				return true;
 			}
 			return false;

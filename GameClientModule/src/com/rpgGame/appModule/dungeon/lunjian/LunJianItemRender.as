@@ -139,9 +139,6 @@ package com.rpgGame.appModule.dungeon.lunjian
 				var npcCfg:Q_monster=MonsterDataManager.getData(itemData.cfg.q_npc);
 				var mapId:int=itemData.cfg.q_npc_map;
 				var roleData:HeroData=MainRoleManager.actorInfo;
-				_skin.lbName.text=npcCfg.q_name;
-				_skin.lbLevel.text=itemData.cfg.q_level+"";
-				_skin.lbZhanli.text=itemData.cfg.q_attack_power+"";
 				_skin.uiOK.visible=itemData.diff==3;
 				if(roleData.totalStat.level>=itemData.cfg.q_level){
 					_skin.lbLevel.color=StaticValue.UI_GREEN;
@@ -150,10 +147,13 @@ package com.rpgGame.appModule.dungeon.lunjian
 				}
 				var fight:int=roleData.totalStat.getStatValue(CharAttributeType.FIGHTING);
 				if(fight>=itemData.cfg.q_attack_power){
-					_skin.lbLevel.color=StaticValue.UI_GREEN;
+					_skin.lbZhanli.color=StaticValue.UI_GREEN;
 				}else{
-					_skin.lbLevel.color=StaticValue.UI_SPECIAL_RED;
+					_skin.lbZhanli.color=StaticValue.UI_SPECIAL_RED;
 				}
+				_skin.lbName.text=npcCfg.q_name;
+				_skin.lbLevel.text=itemData.cfg.q_level+"";
+				_skin.lbZhanli.text=itemData.cfg.q_attack_power+"";
 				
 				_avatardata.avatarInfo.setBodyResID(npcCfg ? npcCfg.q_body_res : "", null);
 				_avatar.setRoleData(this._avatardata);

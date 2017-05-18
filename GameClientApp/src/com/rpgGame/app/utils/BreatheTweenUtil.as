@@ -47,25 +47,21 @@ package com.rpgGame.app.utils
 			{
 				return false;
 			};
-//			var filter:GlowFilter = new GlowFilter();
-//			filter.color = _color;
-//			filter.blurX = 0;
-//			filter.blurY = 0;
-//			filter.strength = 8;
-//			filter.quality = BitmapFilterQuality.LOW;
-//			filter.inner = _inner;
-//			filter.alpha = 0.8;
-			object.filter = new GlowFilter();
-			var data:Object = {};
-			data["glowFilter"] = {
-				blurX:blurValue,
-				blurY:blurValue
-			};
+			var filter:GlowFilter = new GlowFilter();
+			filter.color = _color;
+			filter.blur = 0;
+		
+			filter.alpha = 0.8;
+			object.filter = filter;
+			var data:Object = {blur:blurValue};
+//			data["glowFilter"] = {
+//				blur:blurValue
+//			};
 			data["yoyo"] = true;
 			data["repeat"] = _repeat;
 			data["onComplete"] = remove;
 			data["onCompleteParams"] = [object];
-			var tween:TweenMax = TweenMax.to(object, _duration, data);
+			var tween:TweenMax = TweenMax.to(object.filter, _duration, data);
 			_tweenList.push(tween);
 			return true;
 		}

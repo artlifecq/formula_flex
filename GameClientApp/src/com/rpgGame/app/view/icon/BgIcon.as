@@ -133,6 +133,7 @@ package com.rpgGame.app.view.icon
 				_qualityEft.styleClass = org.mokylin.skin.common.mc.UIMovieClipQ_quality_huang;
 			}
 			_qualityEft.frameRate=20;
+			_qualityEft.autoPlay=true;
 //			var scaleV:Number=(90/64);
 			_qualityEft.width=_iconSize;
 			_qualityEft.height=_iconSize;

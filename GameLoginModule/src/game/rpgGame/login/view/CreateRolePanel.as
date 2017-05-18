@@ -84,7 +84,7 @@ package game.rpgGame.login.view
 			_skin.toSprite(this);
 			toCreate=onCreateCharFunc;
 			
-			
+			_skin.num_saizi.gotoAndStop(0);
 			sexGroup=new ToggleGroup();
 			sexGroup.addItem(_skin.btn_man);
 			sexGroup.addItem(_skin.btn_woman);
