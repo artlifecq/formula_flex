@@ -30,6 +30,12 @@ package org.mokylin.skin.app.fuben
 
 		public var grp_xin:feathers.controls.Group;
 
+		public var icon_1:feathers.controls.UIAsset;
+
+		public var icon_2:feathers.controls.UIAsset;
+
+		public var icon_3:feathers.controls.UIAsset;
+
 		public var lbJingyan:feathers.controls.Label;
 
 		public var lbTime:feathers.controls.Label;
@@ -53,7 +59,7 @@ package org.mokylin.skin.app.fuben
 			this.currentState = "normal";
 			this.height = 612;
 			this.width = 436;
-			this.elementsContent = [__FuBenJieSuan_Shengli_UIAsset1_i(),__FuBenJieSuan_Shengli_UIAsset2_i(),__FuBenJieSuan_Shengli_UIAsset3_i(),grp_dixin_i(),grp_xin_i(),__FuBenJieSuan_Shengli_Label1_i(),__FuBenJieSuan_Shengli_Label2_i(),lbJingyan_i(),lbTongqian_i(),__FuBenJieSuan_Shengli_UIAsset4_i(),__FuBenJieSuan_Shengli_UIAsset5_i(),__FuBenJieSuan_Shengli_UIAsset6_i(),btnOk_i(),lbTime_i()];
+			this.elementsContent = [__FuBenJieSuan_Shengli_UIAsset1_i(),__FuBenJieSuan_Shengli_UIAsset2_i(),__FuBenJieSuan_Shengli_UIAsset3_i(),grp_dixin_i(),grp_xin_i(),__FuBenJieSuan_Shengli_Label1_i(),__FuBenJieSuan_Shengli_Label2_i(),lbJingyan_i(),lbTongqian_i(),icon_1_i(),icon_2_i(),icon_3_i(),btnOk_i(),lbTime_i()];
 			
 			states = {
 			};
@@ -110,33 +116,6 @@ package org.mokylin.skin.app.fuben
 			temp.styleName = "ui/app/fuben/fubenjiesuan/huodejiangli.png";
 			temp.x = 168;
 			temp.y = 308;
-			return temp;
-		}
-
-		private function __FuBenJieSuan_Shengli_UIAsset4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/60.png";
-			temp.x = 88;
-			temp.y = 348;
-			return temp;
-		}
-
-		private function __FuBenJieSuan_Shengli_UIAsset5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/60.png";
-			temp.x = 171;
-			temp.y = 348;
-			return temp;
-		}
-
-		private function __FuBenJieSuan_Shengli_UIAsset6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/60.png";
-			temp.x = 254;
-			temp.y = 348;
 			return temp;
 		}
 
@@ -203,6 +182,39 @@ package org.mokylin.skin.app.fuben
 			temp.x = 108;
 			temp.y = 188;
 			temp.elementsContent = [xin1_i(),xin2_i(),xin3_i()];
+			return temp;
+		}
+
+		private function icon_1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icon_1 = temp;
+			temp.name = "icon_1";
+			temp.styleName = "ui/common/gezikuang/tubiaodikuang/60.png";
+			temp.x = 88;
+			temp.y = 348;
+			return temp;
+		}
+
+		private function icon_2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icon_2 = temp;
+			temp.name = "icon_2";
+			temp.styleName = "ui/common/gezikuang/tubiaodikuang/60.png";
+			temp.x = 171;
+			temp.y = 348;
+			return temp;
+		}
+
+		private function icon_3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icon_3 = temp;
+			temp.name = "icon_3";
+			temp.styleName = "ui/common/gezikuang/tubiaodikuang/60.png";
+			temp.x = 254;
+			temp.y = 348;
 			return temp;
 		}
 

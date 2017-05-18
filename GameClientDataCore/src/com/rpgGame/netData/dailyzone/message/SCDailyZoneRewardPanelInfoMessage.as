@@ -11,7 +11,13 @@ package com.rpgGame.netData.dailyzone.message{
 	 * 副本结算面板
 	 */
 	public class SCDailyZoneRewardPanelInfoMessage extends Message {
-	
+		
+		//每日副本ID
+		private var _dailyZoneId: int;
+		
+		//1首通
+		private var _firstPass: int;
+		
 		//0失败,1成功
 		private var _success: int;
 		
@@ -23,6 +29,10 @@ package com.rpgGame.netData.dailyzone.message{
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
+			//每日副本ID
+			writeInt(_dailyZoneId);
+			//1首通
+			writeByte(_firstPass);
 			//0失败,1成功
 			writeByte(_success);
 			//获得星数
@@ -34,6 +44,10 @@ package com.rpgGame.netData.dailyzone.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
+			//每日副本ID
+			_dailyZoneId = readInt();
+			//1首通
+			_firstPass = readByte();
 			//0失败,1成功
 			_success = readByte();
 			//获得星数
@@ -47,6 +61,36 @@ package com.rpgGame.netData.dailyzone.message{
 		 */
 		override public function getId(): int {
 			return 400104;
+		}
+		
+		/**
+		 * get 每日副本ID
+		 * @return 
+		 */
+		public function get dailyZoneId(): int{
+			return _dailyZoneId;
+		}
+		
+		/**
+		 * set 每日副本ID
+		 */
+		public function set dailyZoneId(value: int): void{
+			this._dailyZoneId = value;
+		}
+		
+		/**
+		 * get 1首通
+		 * @return 
+		 */
+		public function get firstPass(): int{
+			return _firstPass;
+		}
+		
+		/**
+		 * set 1首通
+		 */
+		public function set firstPass(value: int): void{
+			this._firstPass = value;
 		}
 		
 		/**

@@ -2,10 +2,10 @@ package com.rpgGame.app.ui.main.shortcut
 {
 	import com.game.engine3D.display.EffectObject3D;
 	import com.game.engine3D.display.Inter3DContainer;
-	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.ui.main.dungeon.ExpTracjerBar;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.ui.SkinUI;
@@ -19,6 +19,7 @@ package com.rpgGame.app.ui.main.shortcut
 	import flash.geom.Point;
 	
 	import feathers.controls.Button;
+	import feathers.core.PopUpManager;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.juexue.juexu_Skin;
@@ -121,6 +122,8 @@ package com.rpgGame.app.ui.main.shortcut
 		}
 		private function buttonClickHandler(e:Event):void
 		{
+			AppManager.showApp(AppConstant.DAILY_DUNGEON_SUCCESS);
+			return ;
 			if(_effect!=null)
 			{
 				_effect.stopEffect();

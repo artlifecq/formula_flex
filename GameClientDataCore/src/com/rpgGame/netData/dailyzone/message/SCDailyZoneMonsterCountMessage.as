@@ -12,8 +12,8 @@ package com.rpgGame.netData.dailyzone.message{
 	 */
 	public class SCDailyZoneMonsterCountMessage extends Message {
 	
-		//当前波数
-		private var _currentWave: int;
+		//当前波数对应刷怪表中的ID
+		private var _currentWaveId: int;
 		
 		//当前波数击杀数
 		private var _currentWaveKill: int;
@@ -23,8 +23,8 @@ package com.rpgGame.netData.dailyzone.message{
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//当前波数
-			writeInt(_currentWave);
+			//当前波数对应刷怪表中的ID
+			writeInt(_currentWaveId);
 			//当前波数击杀数
 			writeInt(_currentWaveKill);
 			return true;
@@ -34,8 +34,8 @@ package com.rpgGame.netData.dailyzone.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//当前波数
-			_currentWave = readInt();
+			//当前波数对应刷怪表中的ID
+			_currentWaveId = readInt();
 			//当前波数击杀数
 			_currentWaveKill = readInt();
 			return true;
@@ -50,18 +50,18 @@ package com.rpgGame.netData.dailyzone.message{
 		}
 		
 		/**
-		 * get 当前波数
+		 * get 当前波数对应刷怪表中的ID
 		 * @return 
 		 */
-		public function get currentWave(): int{
-			return _currentWave;
+		public function get currentWaveId(): int{
+			return _currentWaveId;
 		}
 		
 		/**
-		 * set 当前波数
+		 * set 当前波数对应刷怪表中的ID
 		 */
-		public function set currentWave(value: int): void{
-			this._currentWave = value;
+		public function set currentWaveId(value: int): void{
+			this._currentWaveId = value;
 		}
 		
 		/**

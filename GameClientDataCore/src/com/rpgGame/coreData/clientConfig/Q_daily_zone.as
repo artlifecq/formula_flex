@@ -26,6 +26,10 @@ package com.rpgGame.coreData.clientConfig
 		public var q_count_type:String;
 		 /**  总波数 */
 		public var q_wave_total:int;
+		 /**  经验 */
+		public var q_rewards_exp:int;
+		 /**  金币 */
+		public var q_rewards_money:int;
 		 /**  通关奖励 */
 		public var q_rewards_show:String;
 		 /**  首通奖励展示 */
