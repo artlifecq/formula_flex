@@ -112,6 +112,8 @@ package com.rpgGame.coreData.role
 		
 		public var sex:int;
 		
+		public var junjieLv:int;
+		
 		
 		private var _customMount : int = 0;
 		public var trailMount : String = null;
@@ -215,8 +217,8 @@ package com.rpgGame.coreData.role
 			data.cloths = heroInfo.cloths;
 			data.hair = heroInfo.hair;
 			data.mount = heroInfo.mount;
-            data.pkMode = heroInfo.pkType;
-            data.relation = heroInfo.relation;
+			data.pkMode = heroInfo.pkType;
+			data.relation = heroInfo.relation;
 			//data.pkType = heroInfo.pkType;
 			data.weapon = heroInfo.weapon;
 			data.deputyWeapon = heroInfo.second_weapon;
@@ -298,11 +300,12 @@ package com.rpgGame.coreData.role
 			data.hair = info.hair;
 			data.cloths = info.cloths;
 			data.mount = info.mount;
-            data.pkMode = info.pkType;
-            data.relation = info.relation;
+			data.pkMode = info.pkType;
+			data.relation = info.relation;
 			data.pkType = info.pkType;
 			data.weapon = info.weapon;
 			data.deputyWeapon = info.second_weapon;
+			data.junjieLv=info.junJieId;
 			
 			data.totalStat.setData(info.attributes);
 			
@@ -311,7 +314,7 @@ package com.rpgGame.coreData.role
 			//			data.mp = info.mp;
 			//			data.totalStat.mana = info.maxMp;
 			//			
-
+			
 			for(var i:int=0;i<info.buffs.length;i++)
 			{
 				var buffData:BuffData = new BuffData(data.id);
@@ -322,24 +325,24 @@ package com.rpgGame.coreData.role
 			RoleData.readGeneric(data, new Point(info.position.x,info.position.y));
 		}
 		
-//		/**
-//		 * 设置队伍成员数据
-//		 * @param teamRoleData
-//		 * @param teamUint
-//		 *
-//		 */
-//		public static function setTeamRoleData(teamRoleData : HeroData, teamUint : TeamUnit) : void
-//		{
-//			teamRoleData.id = teamUint.id;
-//			teamRoleData.name = teamUint.name;
-//			teamRoleData.totalStat.level = teamUint.level;
-//			teamRoleData.societyName = teamUint.guildName;
-//			teamRoleData.mapID = teamUint.sceneId;
-//			teamRoleData.countryId = teamUint.countryId;
-//			teamRoleData.x = teamUint.mx;
-//			teamRoleData.y = teamUint.my;
-//			//			teamRoleData._resources = teamUint.resources;
-//		}
+		//		/**
+		//		 * 设置队伍成员数据
+		//		 * @param teamRoleData
+		//		 * @param teamUint
+		//		 *
+		//		 */
+		//		public static function setTeamRoleData(teamRoleData : HeroData, teamUint : TeamUnit) : void
+		//		{
+		//			teamRoleData.id = teamUint.id;
+		//			teamRoleData.name = teamUint.name;
+		//			teamRoleData.totalStat.level = teamUint.level;
+		//			teamRoleData.societyName = teamUint.guildName;
+		//			teamRoleData.mapID = teamUint.sceneId;
+		//			teamRoleData.countryId = teamUint.countryId;
+		//			teamRoleData.x = teamUint.mx;
+		//			teamRoleData.y = teamUint.my;
+		//			//			teamRoleData._resources = teamUint.resources;
+		//		}
 		
 		/**
 		 * 设置队伍成员数据

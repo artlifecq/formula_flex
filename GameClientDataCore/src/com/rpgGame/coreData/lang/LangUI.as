@@ -42,6 +42,8 @@ package com.rpgGame.coreData.lang
 		public static const UI_TEXT14:String = "UI_TEXT14";
 		 /**  继承消耗装备 */
 		public static const UI_TEXT15:String = "UI_TEXT15";
+		 /**  继承需要消耗该装备，该装备无法恢复 */
+		public static const UI_TEXT16:String = "UI_TEXT16";
 
 	}
 }

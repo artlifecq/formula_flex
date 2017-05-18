@@ -1,12 +1,16 @@
 package com.rpgGame.app.ui.main.shortcut
 {
-	import com.rpgGame.app.manager.MailManager;
-	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.sender.ItemSender;
+	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.FunctionMessageBarEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
+	import com.rpgGame.coreData.info.alert.AlertSetInfo;
+	import com.rpgGame.coreData.lang.LangMAILUI;
+	import com.rpgGame.coreData.lang.LangMAIL_UI;
 	import com.rpgGame.coreData.type.EnumFunctionMessageBarIcoType;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -25,9 +29,33 @@ package com.rpgGame.app.ui.main.shortcut
 		override protected function onTouchIcon() : void
 		{
 			super.onTouchIcon();
-			AppManager.showAppNoHide(AppConstant.MAIL_PANEL);
-			EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_HIDE_TYPE, EnumFunctionMessageBarIcoType.MAIL_TYPE);
+			var num:int=parseInt(_skin.lbNum.text);
+			if(num>=90)
+			{
+				var alertSet:AlertSetInfo= new AlertSetInfo(LangMAIL_UI.MAIL_TEXT1);
+				alertSet.isShowCBox = false;
+				alertSet.alertInfo.title="邮件提示";
+				alertSet.alertInfo.leftValue="前往整理";
+				GameAlert.showAlert(alertSet,onToUp);
+			}
+			else
+			{
+				AppManager.showAppNoHide(AppConstant.MAIL_PANEL);
+				EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_HIDE_TYPE, EnumFunctionMessageBarIcoType.MAIL_TYPE);
+			}
 		}
+		
+		private function onToUp(gameAlert:GameAlert):void
+		{
+			switch(gameAlert.clickType)
+			{
+				case AlertClickTypeEnum.TYPE_SURE:
+					AppManager.showAppNoHide(AppConstant.MAIL_PANEL);
+					EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_HIDE_TYPE, EnumFunctionMessageBarIcoType.MAIL_TYPE);
+					break;
+			}				
+		}
+		
 		override protected function onCloseAll():void
 		{
 			super.onCloseAll();

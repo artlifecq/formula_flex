@@ -214,6 +214,7 @@ package com.rpgGame.coreData.type
 		public static const UI_ZIDONGXUNLU:String="ui_zidongxunlu";
 		
 		public static const UI_XINFA:String="ui_qiehuanjiemian";
+		
 		public function EffectUrl()
 		{
 		}
