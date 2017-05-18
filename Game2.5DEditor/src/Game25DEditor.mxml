@@ -6,7 +6,7 @@
 					   height="900"
 					   frameRate="60"
 					   backgroundAlpha="0"
-					   title="3D游戏编辑器 V{AppManager.getInstance().version} - {AppManager.getInstance().workspacePath} "
+					   title="2.5D游戏编辑器 V{AppManager.getInstance().version} - {AppManager.getInstance().workspacePath} "
 					   initialize="windowedapplication1_initializeHandler(event)"
 					   addedToStage="onAddToStage(event)"
 					   creationComplete="windowedapplication1_creationCompleteHandler(event)"
@@ -15,21 +15,21 @@
 					   xmlns:scene="com.editor.ui.scene.*" xmlns:controls="awaybuilder.view.components.controls.*">
 	<fx:Script>
 		<![CDATA[
-            import com.editor.manager.AppManager;
-            import com.game.engine2D.Engine;
-            import com.game.engine3D.config.GlobalConfig;
-            import com.game.engine3D.manager.Stage3DLayerManager;
-            
-            import mx.controls.Alert;
-            import mx.core.UIComponent;
-            import mx.events.FlexEvent;
-            
-            import away3d.Away3D;
-            import away3d.events.Stage3DEvent;
-            
-
+			import com.editor.manager.AppManager;
+			import com.game.engine2D.Engine;
+			import com.game.engine3D.config.GlobalConfig;
+			import com.game.engine3D.manager.Stage3DLayerManager;
+			
+			import mx.controls.Alert;
+			import mx.core.UIComponent;
+			import mx.events.FlexEvent;
+			
+			import away3d.Away3D;
+			import away3d.events.Stage3DEvent;
+			
+			
 			private const FLASH_VERSION : Number = 11.5;
-
+			
 			protected function windowedapplication1_creationCompleteHandler(event : FlexEvent) : void
 			{
 				initGame();
@@ -38,7 +38,7 @@
 				{
 					var textF : TextFormat = new TextFormat();
 					textF.align = TextFormatAlign.CENTER;
-
+					
 					var textfiled : TextField = new TextField();
 					textfiled.setTextFormat(textF);
 					textfiled.width = 500;
@@ -50,49 +50,49 @@
 					ui.addChild(textfiled);
 					return;
 				}
-
+				
 				visible = true;
 			}
-
+			
 			private function initGame() : void
 			{
 				Alert.okLabel = "确定";
 				Alert.cancelLabel = "取消";
 			}
-
+			
 			protected function onAddToStage(event : Event) : void
 			{
-                //Scene3DManager.init(this.sceneView.viewScope, this.sceneView.customCameraScope, this.sceneView.debugViewScope);
-                //Away3DEventDispatcher.addEventListener(Scene3DManager.instance, Stage3DEvent.CONTEXT3D_CREATED, onContext3DCreated);
+				//Scene3DManager.init(this.sceneView.viewScope, this.sceneView.customCameraScope, this.sceneView.debugViewScope);
+				//Away3DEventDispatcher.addEventListener(Scene3DManager.instance, Stage3DEvent.CONTEXT3D_CREATED, onContext3DCreated);
 			}
-            
-            private function onContext3DCreated(e : Stage3DEvent) : void {
-                //Scene3DManager.enter2DMode = true;
-            }
-
+			
+			private function onContext3DCreated(e : Stage3DEvent) : void {
+				//Scene3DManager.enter2DMode = true;
+			}
+			
 			protected function windowedapplication1_initializeHandler(event : FlexEvent) : void
 			{
 				visible = false;
-                
-                Away3D.LOAD_FILE_WITH_LIB = true;
-                //				Away3D.USE_ASYNC_TEXTURES = true;
-                //				Away3D.MIPMAP_WITH_BITMAPDATA = false;
-                Away3D.PARSE_JPG_IN_WORKER = true;
-                Away3D.PARSE_PNG_IN_WORKER = true;
-//                Away3D.EVIL3D_VERSION = Math.random() * int.MAX_VALUE;
-                
-                Away3D.LOAD_FILE_WITH_LIB = true;
-                Away3D.PARSE_JPG_IN_WORKER = true;
-                Away3D.PARSE_PNG_IN_WORKER = true;
-                Away3D.PLANAR_STENCIL_AVAILABLE = true;
-//                Away3D.EVIL3D_VERSION = Math.random() * int.MAX_VALUE;
-                
-                GlobalConfig.radiusForEntity = 32;
-                GlobalConfig.use2DMap = true;
-                Stage3DLayerManager.errorChecking = true;
-                
-                Engine.initEngine(60,null,null,50,50,256,256);
-                
+				
+				Away3D.LOAD_FILE_WITH_LIB = true;
+				//				Away3D.USE_ASYNC_TEXTURES = true;
+				//				Away3D.MIPMAP_WITH_BITMAPDATA = false;
+				Away3D.PARSE_JPG_IN_WORKER = true;
+				Away3D.PARSE_PNG_IN_WORKER = true;
+				//                Away3D.EVIL3D_VERSION = Math.random() * int.MAX_VALUE;
+				
+				Away3D.LOAD_FILE_WITH_LIB = true;
+				Away3D.PARSE_JPG_IN_WORKER = true;
+				Away3D.PARSE_PNG_IN_WORKER = true;
+				Away3D.PLANAR_STENCIL_AVAILABLE = true;
+				//                Away3D.EVIL3D_VERSION = Math.random() * int.MAX_VALUE;
+				
+				GlobalConfig.radiusForEntity = 32;
+				GlobalConfig.use2DMap = true;
+				Stage3DLayerManager.errorChecking = true;
+				
+				Engine.initEngine(60,null,null,50,50,256,256);
+				
 				StyleManager.getStyleDeclaration("mx.controls.ToolTip").setStyle("fontSize", "14");
 				AppManager.getInstance().init();
 			}
@@ -136,7 +136,7 @@
 				</mx:Canvas>
 			</mx:VDividedBox>
 		</mx:Canvas>
-        
+		
 		<mx:Canvas width="100%"
 				   height="100%"
 				   backgroundAlpha="0"
