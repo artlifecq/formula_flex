@@ -4,6 +4,8 @@ package com.game.engine2D.scene.render.vo
 	
 	import flash.display.BlendMode;
 	
+	import away3d.enum.LoadPriorityType;
+	
 	/**
 	 * 某个换装部件 的 基本参数数据
 	 * @author Carver
@@ -14,11 +16,33 @@ package com.game.engine2D.scene.render.vo
 		private var _id:int = -1;
 		private var _type:String;
 		/**部件加载列表里的优先级*/
-		public var priority:int = 0;
+		public var priority:int = LoadPriorityType.LEVEL_CUSTOM_3;
 		/**部件资源释放延长时间，想加快释放设置为负值，要减慢释放设置为正值*/
 		public var destoryTm:int = 0;
 		/** 是否自动回收显存 */
 		public var autoRecycleEnable:Boolean = true;
+		
+		private var _fullPathDic:Object = {};
+		
+		/**
+		 * 换装资源绝对地址(此参数只做对比用， 取地址时一般用getFullSourcePath， getFullSourcePath内封装了版本控制)
+		 * 注意：如果此值为null，则换装为空，但依然可执行vars中的回调
+		 * 使用"#"号作为状态占位符（代表：stand,walk等）
+		 * 例如：http://..../mid135/#.tsa 站立最终会被替换为 http://..../mid135/stand.tsa
+		 */
+		public function get sourcePath():String
+		{
+			return _sourcePath;
+		}
+		
+		/**
+		 * @private
+		 */
+		public function set sourcePath(value:String):void
+		{
+			_sourcePath = value;
+			_fullPathDic = {};
+		}
 		
 		/**
 		 * ID 某角色换装的唯一标识,注意该ID必须唯一
@@ -104,13 +128,14 @@ package com.game.engine2D.scene.render.vo
 			_speed = value;
 		}
 		
+		
 		/**
 		 * 换装资源绝对地址(此参数只做对比用， 取地址时一般用getFullSourcePath， getFullSourcePath内封装了版本控制)
 		 * 注意：如果此值为null，则换装为空，但依然可执行vars中的回调
 		 * 使用"#"号作为状态占位符（代表：stand,walk等）
 		 * 例如：http://..../mid135/#.tsa 站立最终会被替换为 http://..../mid135/stand.tsa
 		 */
-		public var sourcePath:String;
+		private var _sourcePath:String;
 		
 		/**
 		 * 换装资源绝对地址
@@ -118,13 +143,20 @@ package com.game.engine2D.scene.render.vo
 		public function getFullSourcePath($status:uint):String
 		{
 			if(sourcePath==null || sourcePath=="")return null;
-			var resName:String = GlobalConfig2D.resUrlFunc($status);
-			//替换占位符
-			var fullPath:String = isBitmap?sourcePath:sourcePath.replace("#",resName);
-			//获取版本地址
-			if(GlobalConfig2D.avatarFileVersion!=null)
+			
+			var fullPath:String = _fullPathDic[$status];
+			if(fullPath == null || fullPath == "")
 			{
-				fullPath = GlobalConfig2D.avatarFileVersion(fullPath);
+				//把int型的动作id ， 转换成字母的动作资源名称， 比如，站立动作1 --> a
+				var resName:String = GlobalConfig2D.resUrlFunc($status);
+				//替换占位符
+				fullPath = isBitmap?sourcePath:sourcePath.replace("#",resName);
+				//获取版本地址
+				if(GlobalConfig2D.avatarFileVersion!=null)
+				{
+					fullPath = GlobalConfig2D.avatarFileVersion(fullPath);
+				}
+				_fullPathDic[$status] = fullPath;
 			}
 			return fullPath;
 		}

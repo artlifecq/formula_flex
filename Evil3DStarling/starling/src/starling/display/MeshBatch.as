@@ -12,6 +12,7 @@ package starling.display
 {
     import flash.geom.Matrix;
     
+    import starling.events.Event;
     import starling.rendering.IndexData;
     import starling.rendering.MeshEffect;
     import starling.rendering.Painter;
@@ -52,26 +53,47 @@ package starling.display
         private var _batchable:Boolean;
         private var _vertexSyncRequired:Boolean;
         private var _indexSyncRequired:Boolean;
+		
+		private var _useSharedBuffer:Boolean;
 
         // helper object
         private static var sFullMeshSubset:MeshSubset = new MeshSubset();
 
         /** Creates a new, empty MeshBatch instance. */
-        public function MeshBatch()
+        public function MeshBatch(useSharedBuffer:Boolean = false)
         {
             var vertexData:VertexData = new VertexData();
             var indexData:IndexData = new IndexData();
 
+	CONFIG::Mesh2D_Trace
+	{
+			mesh2DTracedContinaerID = -1;
+	}
+			_useSharedBuffer = useSharedBuffer
             super(vertexData, indexData);
         }
-
-        // display object overrides
 
         /** @inheritDoc */
         override public function dispose():void
         {
             if (_effect) _effect.dispose();
             super.dispose();
+        }
+
+        /** This method must be called whenever the mesh's vertex data was changed. Makes
+         *  sure that the vertex buffer is synchronized before rendering, and forces a redraw. */
+        override public function setVertexDataChanged():void
+        {
+            _vertexSyncRequired = true;
+            super.setVertexDataChanged();
+        }
+
+        /** This method must be called whenever the mesh's index data was changed. Makes
+         *  sure that the index buffer is synchronized before rendering, and forces a redraw. */
+        override public function setIndexDataChanged():void
+        {
+            _indexSyncRequired = true;
+            super.setIndexDataChanged();
         }
 
         private function setVertexAndIndexDataChanged():void
@@ -178,10 +200,16 @@ package starling.display
             var meshStyle:MeshStyle = mesh._style;
             var meshStyleType:Class = meshStyle.type;
 
-            if (_style.type != meshStyleType)
-                setStyle(new meshStyleType() as MeshStyle, false);
-
-            _style.copyFrom(meshStyle);
+			if (_style.type != meshStyleType)
+			{
+				var newStyle:MeshStyle = new meshStyleType() as MeshStyle;
+				newStyle.copyFrom(meshStyle);
+				setStyle(newStyle, false);
+			}
+			else
+			{
+				_style.copyFrom(meshStyle);
+			}
         }
 
         /** Indicates if the given mesh instance fits to the current state of the batch.
@@ -226,8 +254,11 @@ package starling.display
                 painter.prepareToDraw();
                 painter.excludeFromCache(this);
 
-                if (_vertexSyncRequired) syncVertexBuffer();
-                if (_indexSyncRequired)  syncIndexBuffer();
+                if (_useSharedBuffer || _vertexSyncRequired) 
+					syncVertexBuffer();
+
+				if (_useSharedBuffer || _indexSyncRequired)  
+					syncIndexBuffer();
 
                 _style.updateEffect(_effect, painter.state);
                 _effect.render(0, _indexData.numTriangles);
@@ -245,6 +276,9 @@ package starling.display
 
             _effect = style.createEffect();
             _effect.onRestore = setVertexAndIndexDataChanged;
+			_effect.useSharedBuffer = _useSharedBuffer;
+
+            setVertexAndIndexDataChanged(); // we've got a new set of buffers!
         }
 
         /** The total number of vertices in the mesh. If you change this to a smaller value,

@@ -2,18 +2,18 @@ package feathers.themes{
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display3D.Context3DTextureFormat;
-	import flash.events.Event;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.system.System;
 	import flash.text.TextFormat;
+	import flash.ui.Keyboard;
 	import flash.utils.Dictionary;
 	import flash.utils.getDefinitionByName;
 	
+	import away3d.debug.Debug;
+	import away3d.enum.LoadPriorityType;
 	import away3d.events.Event;
-	import away3d.loaders.multi.MultiDobjLoadManager;
-	import away3d.loaders.multi.MultiDobjLoader;
-	import away3d.loaders.multi.MultiLoadData;
+	import away3d.log.Log;
 	import away3d.textures.TextureFormatEnum;
 	import away3d.tools.utils.TextureUtils;
 	
@@ -42,6 +42,7 @@ package feathers.themes{
 	import feathers.controls.text.TextFieldTextEditor;
 	import feathers.core.FeathersControl;
 	import feathers.skins.ImageSkin;
+	import feathers.textures.DynamicLabelTextureAtlas;
 	import feathers.textures.FastDynamicBitmapTexture;
 	import feathers.textures.RepeatScale9Textures;
 	
@@ -49,7 +50,6 @@ package feathers.themes{
 	import starling.display.Image;
 	import starling.textures.ConcreteTexture;
 	import starling.textures.DynamicBitmapTexture;
-	import starling.textures.DynamicLabelTextureAtlas;
 	import starling.textures.IStarlingTexture;
 	import starling.textures.TextureAtlas;
 	import starling.textures.TextureFactory;
@@ -66,17 +66,6 @@ package feathers.themes{
 	 */
 	public class GuiTheme extends DefaultTheme
 	{
-		/**
-		 * @private
-		 */
-		[Embed(source="./../../../assets/images/aeon_desktop.xml",mimeType="application/octet-stream")]
-		protected static const ATLAS_XML:Class;
-		/**
-		 * @private
-		 */
-		[Embed(source="./../../../assets/images/aeon_desktop.png")]
-		protected static const ATLAS_BITMAP:Class;
-		
 		
 		/**
 		 * 记录纹理所在纹理集的关键字
@@ -93,11 +82,6 @@ package feathers.themes{
 		public static var RES_ROOT:String = "../res/";
 		
 		/**
-		 * 是否采用worker来解压纹理数据
-		 */
-		public static var useWorkerLoadTextureBytes:Boolean = true;
-		
-		/**
 		 * 是否采用压缩纹理
 		 */
 		public static var useCompressedTexture:Boolean = false;
@@ -107,11 +91,18 @@ package feathers.themes{
 		 * */
 		public static var defaultTextureFormat:int = TextureFormatEnum.UNKNOWN;
 		
+		/**
+		 * 指定采用ATFX格式纹理,由DIR_NAMES定义相对路径名
+		 * */
+		public static var ATFX_ROOT_PATH:String = "/ui/big_bg";
 		
 		/**
-		 *当纹理上载完成后是否释放bgraBytes所占用的内存 
-		 */		
-		public static var disposeBgraBytesOnUploaded:Boolean = true;
+		 * 是否开启UI上的ATF异步上传
+		 * */
+		public static var ATF_ASYNC_UPLOAD:Boolean = false;
+
+		public static var BUTTON_TRIGGER_KEY:uint = Keyboard.SPACE;
+		public static var BUTTON_CANCEL_KEY:uint = Keyboard.ESCAPE;
 		
 		/**
 		 *当平铺超过这个数时将偿试使用GPU填充,会增加一次drawCall
@@ -156,6 +147,8 @@ package feathers.themes{
 		 */
 		private var mSubScale9Textures:Dictionary;
 		
+		private var pushAssetToAtlasMap:Dictionary;
+		
 		/**
 		 * 系统自动生成的动态变化的纹理集序号,递增ID
 		 * 动态纹理<尺寸2048x2048>,当一张贴图满载时,开辟下一张
@@ -165,13 +158,27 @@ package feathers.themes{
 		/**
 		 *仅当纹理尺寸大于等于SINGLE_TEXTURE_MIN_SIZE时 系统会为此单独开辟一张纹理
 		 */	
-		public static const SINGLE_TEXTURE_MIN_SIZE:Point = new Point(256, 256);
+		private static const SINGLE_TEXTURE_MIN_SIZE:Point = new Point(256, 256);
 		private static const HELPER_POINT:Point = new Point(0,0);
 		
 		/**
 		 * 默认自动补充灰度纹理的图片像素总值,如100x100的图片像素总值为10000;不希望生成时，赋值为0
 		 */	
 		private static var CREAT_GRAY_IMG_PIXES:int = 0;
+		
+		/**
+		 *文本批次渲染,打开此开关会影响文本贴图的生成方式以及文本控件深度
+		 */	
+		private static var _enable_text_batch_render:Boolean;
+		public static function set ENABLE_TEXT_BATCH_RENDER(value:Boolean):void
+		{
+			//Log.debug("文本批次渲染:"+(value ? "开" : "关"));
+			//_enable_text_batch_render = value;
+		}
+		public static function get ENABLE_TEXT_BATCH_RENDER():Boolean
+		{
+			return _enable_text_batch_render;
+		}
 		
 		/**
 		 *自定义的纹理集key所包含的subKeys
@@ -256,16 +263,20 @@ package feathers.themes{
 		 */
 		protected function initializeTextureAtlas():void
 		{
-			var atlasTexture:IStarlingTexture = TextureFactory.fromEmbeddedAsset(ATLAS_BITMAP, false, false);
+			var atlasTexture:IStarlingTexture = TextureFactory.fromBitmapData(DEFAULT_TEXTURE_BITMAPDATA || new BitmapData(256, 512, false, 0xFFFFFF));
 			
-			this.atlas = new TextureAtlas(atlasTexture, XML(new ATLAS_XML()) );
+			this.atlas = new TextureAtlas(atlasTexture, DEAFULT_TEXTURE_XML );
 			
 			//creat the static helperTexture for imageSkin defautlTexture
 			var bd:BitmapData = new BitmapData(4,4,true,0);
 			helperTexture = TextureFactory.fromBitmapData(bd);
+			CONFIG::Debug
+				{
+					helperTexture.key = "helperTexture_bgra_4_4";
+				}
 		}
 
-		private function updateDefaultTextFormat(name:String, size:int):void
+		private function updateDefaultTextFormat(name:String, size:int, leading:int, letterSpacing:Number):void
 		{
 			this.defaultTextFormat.font = name;
 			this.disabledTextFormat.font = name;
@@ -282,12 +293,28 @@ package feathers.themes{
 			this.detailTextFormat.size = size;
 			this.detailDisabledTextFormat.size = size;
 			this.invertedTextFormat.size = size;
+			
+			this.defaultTextFormat.leading = leading;
+			this.disabledTextFormat.leading = leading;
+			this.headingTextFormat.leading = leading;
+			this.headingDisabledTextFormat.leading = leading;
+			this.detailTextFormat.leading = leading;
+			this.detailDisabledTextFormat.leading = leading;
+			this.invertedTextFormat.leading = leading;
+			
+			this.defaultTextFormat.letterSpacing = letterSpacing;
+			this.disabledTextFormat.letterSpacing = letterSpacing;
+			this.headingTextFormat.letterSpacing = letterSpacing;
+			this.headingDisabledTextFormat.letterSpacing = letterSpacing;
+			this.detailTextFormat.letterSpacing = letterSpacing;
+			this.detailDisabledTextFormat.letterSpacing = letterSpacing;
+			this.invertedTextFormat.letterSpacing = letterSpacing;
 		}
 		
-		public static function updateDefaultFont(name:String, size:int):void
+		public static function updateDefaultFont(name:String, size:int, leading:int, letterSpacing:Number):void
 		{
 			if(!_ins)return;
-			ins.updateDefaultTextFormat(name, size);
+			ins.updateDefaultTextFormat(name, size, leading, letterSpacing);
 		}
 		
 		//==========================================================================
@@ -306,7 +333,7 @@ package feathers.themes{
 				 return;
 			}
 			if(!button.styleName)button.styleName = styleName;
-			button.defaultSkin = creatImageSkin(styleName);
+			button.defaultSkin = creatImageSkin(styleName, false, button.defaultSkin as ImageSkin);
 			button.stateToLabelPropertiesFunction = updateButtonLabelState;
 		}
 		
@@ -323,7 +350,7 @@ package feathers.themes{
 				return;
 			}
 			if(!button.styleName)button.styleName = styleName;
-			button.defaultIcon = creatImageSkin(styleName);
+			button.defaultIcon = creatImageSkin(styleName, false, button.defaultIcon as ImageSkin);
 			button.stateToLabelPropertiesFunction = updateButtonLabelState;
 		}
 		
@@ -363,37 +390,28 @@ package feathers.themes{
 				return;
 			}
 			if(!input.styleName)input.styleName = styleName;
-			input.backgroundSkin = creatImageSkin(styleName);
+			input.backgroundSkin = creatImageSkin(styleName, false, input.backgroundSkin as ImageSkin);
 			var stateSkin:StateSkin = GuiThemeStyle.getStateSkin(styleName);
 			var textDisplay:TextFieldTextEditor = stateSkin[UIState.TEXT_DISPLAY];
-			var initProps:Array = stateSkin.states[UIState.INIT];
-			var tfm:TextFormat =  input.textEditorProperties.textFormat;
 			
-			if(!tfm)
+			if(input.prompt && !input.promptProperties.textFormat)
 			{
-				var temp:TextFormat = new TextFormat(Fontter.DEFAULT_FONT_NAME, Fontter.DEFAULT_FONT_SIZE, Fontter.DEFAULT_FONT_COLOR);
-				temp.align = "left";
-				tfm = temp;
-			}
-			
-			//tfm = UIStateSetHelper.clone(tfm);
-			if(input.prompt)
-			{
+				var tfm:TextFormat =  input.textEditorProperties.textFormat;
+				if(!tfm)
+				{
+					var temp:TextFormat = Fontter.creatDefaultFontTextFormat();
+					tfm = temp;
+				}
 				input.promptProperties.textFormat = tfm;
+				input.promptProperties.textAlign = input.textAlign;
 				input.promptProperties.alpha = 0.5;
 			}
 			
 			if(textDisplay != null)
 			{
 				input.paddingLeft = textDisplay.left;
-//				input.paddingTop = textDisplay.top;
 				input.paddingRight = textDisplay.right;
-//				input.paddingBottom = textDisplay.bottom;
-				tfm.color = textDisplay.color;
-				tfm.size = textDisplay.fontSize;
-				tfm.align = textDisplay.textAlign;
 			}
-			input.textEditorProperties.textFormat = tfm;
 		}
 		
 		//textArea
@@ -410,12 +428,12 @@ package feathers.themes{
 				return;
 			}
 			if(!input.styleName)input.styleName = styleName;
-			input.backgroundSkin = creatImageSkin(styleName);
+			input.backgroundSkin = creatImageSkin(styleName, false, input.backgroundSkin as ImageSkin);
 			var stateSkin:StateSkin = GuiThemeStyle.getStateSkin(styleName);
 			var textDisplay:TextFieldTextEditor = stateSkin.hasOwnProperty(UIState.TEXT_DISPLAY) ? stateSkin[UIState.TEXT_DISPLAY] : null;
 //			var initProps:Array = stateSkin.states[UIState.INIT]; 
 			var tfm:TextFormat =  input.textEditorProperties.textFormat;
-			if(!tfm)tfm =	new TextFormat(Fontter.DEFAULT_FONT_NAME, Fontter.DEFAULT_FONT_SIZE, Fontter.DEFAULT_FONT_COLOR);
+			if(!tfm)tfm =	Fontter.creatDefaultFontTextFormat();
 //			input.padding = 2;
 			if(textDisplay != null)
 			{
@@ -585,8 +603,11 @@ package feathers.themes{
 			{
 				var bg:UIAsset = stateSkin["bg"] as UIAsset;
 				var  newBg:UIAsset = new UIAsset();
+				UIStateSetHelper.copyAnchorLayoutData(bg, newBg);
+				newBg.repeatScale9Skin = bg.repeatScale9Skin;
+				newBg.repeatSkin = bg.repeatSkin;
 				newBg.styleName = bg.styleName;
-				list.backgroundSkin = bg != null ? newBg : null;
+				list.backgroundSkin = newBg;
 			}else{
 				list.backgroundSkin = null;
 			}
@@ -642,14 +663,38 @@ package feathers.themes{
 					return
 				}
 			}
-			/*slider.trackScaleMode = Slider.TRACK_SCALE_MODE_EXACT_FIT;
+			
+			slider.trackScaleMode = Slider.TRACK_SCALE_MODE_EXACT_FIT;
 			slider.customThumbStyleName = FeathersControl(stateSkins["thumb"]).styleName;
-			slider.customMinimumTrackStyleName = FeathersControl(stateSkins["track"]).styleName;
-			if(stateSkins.hasOwnProperty("trackMax"))
+			
+			var track:FeathersControl = stateSkins.hasOwnProperty("trackMax") ? stateSkins["trackMax"] : null;
+			if(!track && stateSkins.hasOwnProperty("track"))
+			{
+				track = stateSkins["track"];
+			}
+			
+			
+			slider.customMaximumTrackStyleName = track.styleName;
+			slider.maximumTrackProperties.top = track.top;
+			slider.maximumTrackProperties.bottom = track.bottom;
+			slider.maximumTrackProperties.left = track.left;
+			slider.maximumTrackProperties.right = track.right;
+			
+			var trackMin:FeathersControl = stateSkins.hasOwnProperty("trackMin") ? stateSkins["trackMin"] : null;
+			if(trackMin)
+			{
+				slider.customMinimumTrackStyleName = trackMin.styleName;
+				slider.minimumTrackProperties.top = trackMin.top;
+				slider.minimumTrackProperties.bottom = trackMin.bottom;
+				slider.minimumTrackProperties.left = trackMin.left;
+				slider.minimumTrackProperties.right = trackMin.right;
+			}
+			
+			slider.trackLayoutMode = Slider.TRACK_LAYOUT_MODE_SINGLE;
+			if(stateSkins.hasOwnProperty("trackMax") || stateSkins.hasOwnProperty("trackMin"))
 			{
 				slider.trackLayoutMode = ScrollBar.TRACK_LAYOUT_MODE_MIN_MAX;
-				slider.customMaximumTrackStyleName = FeathersControl(stateSkins["trackMax"]).styleName;
-			}*/
+			}
 		}
 		
 		public function addNumericStepperStyle(styleName:String):void
@@ -711,11 +756,12 @@ package feathers.themes{
 			//set ProgressBar fillSkin
 			if(stateSkin.hasOwnProperty("thumb"))
 			{
-				progressBar.fillSkin = stateSkin["thumb"];
-				if( !progressBar.paddingLeft ) progressBar.paddingLeft = progressBar.fillSkin.x;
-				if( !progressBar.paddingRight ) progressBar.paddingRight = progressBar.paddingLeft;
-				if( !progressBar.paddingTop ) progressBar.paddingTop = progressBar.fillSkin.y;
-				if( !progressBar.paddingBottom ) progressBar.paddingBottom = progressBar.paddingTop;
+				var asset:UIAsset = stateSkin["thumb"] as UIAsset;
+				progressBar.fillSkin = asset;
+				if( !progressBar.paddingLeft ) progressBar.paddingLeft = asset.x || asset.left || 0;
+				if( !progressBar.paddingRight ) progressBar.paddingRight = asset.right || progressBar.paddingRight || 0;
+				if( !progressBar.paddingTop ) progressBar.paddingTop = asset.y || asset.top || 0;
+				if( !progressBar.paddingBottom ) progressBar.paddingBottom = asset.bottom || progressBar.paddingTop || 0;
 				
 				progressBar.fillSkin.width = progressBar.width-progressBar.paddingLeft-progressBar.paddingRight;
 				progressBar.fillSkin.height = progressBar.height-progressBar.paddingTop-progressBar.paddingBottom;
@@ -813,14 +859,14 @@ package feathers.themes{
 		private static const STATE_UP_PNG:String="up.png";
 		private static const STATE_NORMAL_PNG:String = "normal.png";
 		private static const STATE_DISABLED_PNG:String = "disabled.png";
-		private function creatImageSkin(styleName:String, isIcon:Boolean=false):ImageSkin
+		private function creatImageSkin(styleName:String, isIcon:Boolean=false, skinSelector:ImageSkin = null):ImageSkin
 		{
 			if(!styleName)
 			{
 				throw new Error("FeathersControl styleName undefined");
 			}
 			var stateSkins:Object = GuiThemeStyle.getStyle(styleName);
-			var skinSelector:ImageSkin = new ImageSkin( );
+			skinSelector ||= new ImageSkin();
 			var key:String = stateSkins[UIState.UP] || stateSkins[UIState.NORMAL] || stateSkins[UIState.ENABLED];
 			if(key)
 			{
@@ -964,9 +1010,9 @@ package feathers.themes{
 			{
 				propties = labelStateCacheProperties[state];
 				//应用最新的textFormat
-				if(propties  && caches  && propties.textFormat)
+				tfm = state == UIState.DISABLED ? propties.disabledTextFormat: propties.textFormat;
+				if(propties  && caches  && tfm)
 				{
-					tfm = propties.textFormat;
 					for(tfmProp in caches)
 					{
 						if(tfm.hasOwnProperty(tfmProp)){
@@ -1021,7 +1067,7 @@ package feathers.themes{
 				propsets = propsets.concat(states[state]);
 			}
 			
-			var tfm:TextFormat = new TextFormat(btn.fontName, btn.fontSize, btn.color);
+			var tfm:TextFormat = Fontter.creatDefaultFontTextFormat();
 			for each(sets in propsets)
 			{
 				t = sets[UIState.TARGET];
@@ -1042,7 +1088,7 @@ package feathers.themes{
 			{
 				Fontter.transTextFormat(tfm);
 			}
-			propties.textFormat = tfm;
+			state == UIState.DISABLED ? propties.disabledTextFormat = tfm : propties.textFormat = tfm;
 			labelStateCacheProperties[state] = propties;
 			return propties;
 		}
@@ -1050,11 +1096,11 @@ package feathers.themes{
 		//==========================================================================
 		//                                纹理相关方法
 		//==========================================================================
-		public function LoadAsset(key:String, onComplete:Function=null):void
+		public function LoadAsset(key:String, onComplete:Function=null, priority:int=LoadPriorityType.LEVEL_2D_UI_DEFAULT, format:int = UIAsset.IMAGE_FORMAT_BITMAP):void
 		{
 			if(isErrorStr(key))
 			{
-				if(onComplete !=  null)onComplete();
+				if(onComplete !=  null)onComplete(null);
 				return;
 			}
 				
@@ -1066,15 +1112,23 @@ package feathers.themes{
 				url = RES_ROOT+key;
 			}
 			
-			url = checkAddExtensionName(url);
+			//url = checkAddExtensionName(url);
 			
-			if(decodeURL != null)
+/*			if(decodeURL != null)
 			{
 				url = decodeURL(url);
-			}
+			}*/
 			
 			key = nanoKey(key);
 			
+			var iStarlingTexture:IStarlingTexture = getTexture(key);
+			
+			//缓存中已经有了
+			if(iStarlingTexture != null)
+			{
+				if(onComplete !=  null)onComplete(iStarlingTexture);
+				return;
+			}
 			//已经在加载中
 			if(loadingAssets[url])
 			{
@@ -1082,11 +1136,22 @@ package feathers.themes{
 				return;
 			}
 			loadingAssets[url] = [onComplete];
+			loadingKeys[url] = key;
 			
-			if(Starling.current.showTrace)
-				trace("[Feathers]GuiTheme.LoadAsset :	"+url);
+			CONFIG::Starling_Debug
+				{
+					trace("[Feathers]GuiTheme.LoadAsset :	"+url);
+				}
 			
-			if(useWorkerLoadTextureBytes)
+			//atfx
+			if(!ATFX_ROOT_PATH && (format  == UIAsset.IMAGE_FORMAT_ATFX || url.indexOf(ATFX_ROOT_PATH)) >= 0)
+			{
+				var atfLoader:AtfAtlasLoader = new AtfAtlasLoader();
+				atfLoader.load(url, function():void
+				{
+					onAssetsLoaded(url);
+				}, null, null, priority);
+			}else
 			{
 				var texture:ConcreteTexture;
 				var onTextureComplete:Function = function():void
@@ -1095,32 +1160,42 @@ package feathers.themes{
 					texture.removeEventListener(away3d.events.Event.COMPLETE,onTextureComplete);
 					onAssetsLoaded(url);
 				}
-				
-				texture = new ConcreteTexture();
+				var hasAlpha:Boolean = TextureUtils.checkHasAlphaFromUrl(url);
+				texture = new ConcreteTexture(false, false, hasAlpha, false);
 				texture.addEventListener(away3d.events.Event.COMPLETE,onTextureComplete);
-				texture.load(url);
-			}
-			else
-			{
-				var onAssetLoad:Function = function($ld : MultiLoadData, event : flash.events.Event):void
-				{
-					var loader : MultiDobjLoader = event.currentTarget as MultiDobjLoader;
-					var bmp : Bitmap = loader.content as Bitmap;
-					if(bmp != null)
-					{
-						pushDynamicSubTexture(bmp.bitmapData, key);
-					}
-					onAssetsLoaded(url);
-				}
+				texture.load(url, priority);
 				
-				var loadData:MultiLoadData = new MultiLoadData(url, onAssetLoad);
-				MultiDobjLoadManager.load(loadData);
+				CONFIG::Debug
+					{
+						texture.key = url;
+					}
 			}
 		}
 		
-		public static function checkAddExtensionName(url:String):String
+		public function pushAssetToAtlas(assetKey:String, atlasKey:String):void
 		{
-			var format:int = GuiTheme.defaultTextureFormat;
+			if(!atlasKey)return;
+			if(atlasKey.indexOf(".atf") > 0)
+			{
+				trace("[Feathers]GuiTheme.pushAssetToAtlas warning! unsupported ATF textureAtlas:", atlasKey);
+				return;
+			}
+			pushAssetToAtlasMap ||= new Dictionary();
+			var assets:Vector.<String> = atlasKey in pushAssetToAtlasMap ? pushAssetToAtlasMap[atlasKey] : new Vector.<String>();
+			if(assets.indexOf(assetKey) < 0)
+			{
+				assets[assets.length] = assetKey;
+			}
+			
+			if(assetKey.length > 10)
+			{
+				//合并插入图集并上传
+			}
+		}
+		
+		public static function checkAddExtensionName(url:String, format:int=-1):String
+		{
+			format = format > -1 ? format : GuiTheme.defaultTextureFormat;
 			if(format != TextureFormatEnum.UNKNOWN && needAddExtenName(url))
 			{
 				var ext:String = TextureUtils.getTextureFileExtensionFromTextureFormat(format);
@@ -1178,11 +1253,14 @@ package feathers.themes{
 		private function onAssetsLoaded(url:String):void
 		{
 			var callbacks:Array = loadingAssets[url];
+			var key:String = loadingKeys[url];
+			var texture:IStarlingTexture = textureMap[key];
 			for each(var fun:Function in callbacks)
 			{
-				if(fun != null)fun();
+				if(fun != null)fun(texture);
 			}
 			delete loadingAssets[url];
+			delete loadingKeys[url];
 		}
 		
 		/**
@@ -1196,10 +1274,16 @@ package feathers.themes{
 				format = Context3DTextureFormat.COMPRESSED_ALPHA;
 			}
 			
-			return TextureFactory.fromBitmapData(bd, false, false,format, repeat);
+			var texture:IStarlingTexture = TextureFactory.fromBitmapData(bd, false, false,format, repeat);
+			CONFIG::Debug
+				{
+					texture.key = key;
+				}
+			return texture;
 		}
 		
 		private var loadingAssets:Dictionary = new Dictionary();
+		private var loadingKeys:Dictionary = new Dictionary();
 		
 		public function hasTexture(key:String):Boolean
 		{
@@ -1220,6 +1304,31 @@ package feathers.themes{
 			var atlas:* = getTextureAtlasBySubKey(key);
 			var t:IStarlingTexture = atlas ? atlas.getTexture(key) : null;
 			return t;
+		}
+		
+		/**
+		 * destroy texture 
+		 * @param key
+		 * 
+		 */		
+		public function removeTexture(key:String):void
+		{
+			key = nanoKey(key);
+			if(key in textureMap)
+			{
+				var t:IStarlingTexture = textureMap[key];
+				delete  textureMap[key];
+				if(t)t.dispose();
+			}
+			var atlas:* = getTextureAtlasBySubKey(key);
+			if(atlas != null)
+			{
+				atlas.removeRegion(key);
+			}
+			if(key in themeInfo)
+			{
+				delete themeInfo[key];
+			}
 		}
 		
 		/**
@@ -1250,7 +1359,10 @@ package feathers.themes{
 			
 			if(!textureBdMap[parentKey])
 			{
-				textureBdMap[parentKey] = ConcreteTexture(TextureAtlas(atlas).texture).bgraData.getBitmapData();
+				var texture:ConcreteTexture = (atlas as TextureAtlas).texture as ConcreteTexture;
+				if(!texture.bgraData)return null;
+				
+				textureBdMap[parentKey] =texture.bgraData.getBitmapData();
 			}
 			
 			var parentBd:BitmapData = textureBdMap[parentKey];
@@ -1306,7 +1418,7 @@ package feathers.themes{
 			return bd;
 		}
 		
-		public function getBitmapDataClipTexture(key:String, clip:Rectangle, forcePotTexture:Boolean=true):IStarlingTexture
+		public function getBitmapDataClipTexture(key:String, clip:Rectangle):IStarlingTexture
 		{
 			var clipKey:String = key+"_"+clip.x+"_"+clip.y+"_"+clip.width+"_"+clip.height;
 			var t:IStarlingTexture = textureMap[clipKey];
@@ -1315,12 +1427,11 @@ package feathers.themes{
 				var bd:BitmapData = GuiTheme.ins.getBitmapDataClip(key, clip);
 				if(bd != null)
 				{
-					t = TextureFactory.fromBitmapData(bd, false, false,"bgra", forcePotTexture);
+					t = TextureFactory.fromBitmapData(bd);
 					textureMap[clipKey] = t;
-					
-					CONFIG::Starling_Debug
+					CONFIG::Debug
 						{
-							t.name = clipKey;
+							t.key = clipKey;
 						}
 				}
 			}
@@ -1383,6 +1494,23 @@ package feathers.themes{
 				mSubScale9Textures[skinName] = sub;
 			}
 			return sub;
+		}
+		
+		public function isCanRepeatWithGpu(key:String):Boolean
+		{
+			key = nanoKey(key);
+			var rect:Rectangle = getScale9GridRect(key);
+			if(!rect)return false;
+			
+			var fun:Function = TextureUtils.isPowerOfTwo;
+			var pot:Boolean = fun(rect.x) && fun(rect.y) && fun(rect.width) && fun(rect.height);
+			var bmd:BitmapData = getTextureBitmapData(key);
+			
+			//严格模式，五个缩放区域必须同时满足2的幂
+//			return pot && bmd && fun(bmd.width-rect.width-rect.x) && fun(bmd.height-rect.height-rect.y);
+			
+			//宽松模式，三个缩放区域满足2的幂
+			return pot && bmd
 		}
 		
 /*		public function getScale3Textures(skinName:String):Scale3Textures{
@@ -1634,6 +1762,10 @@ package feathers.themes{
 		{
 			key = nanoKey(key);
 			var atlasTexture:IStarlingTexture = TextureFactory.fromBitmapData(bd, false, false);
+			CONFIG::Debug
+				{
+					atlasTexture.key = key;
+				}
 			var atlas:TextureAtlas = new TextureAtlas(atlasTexture, xml);
 			var subs:Object = parseAtlasXml(xml);
 			var keys:Vector.<String> = new Vector.<String>;
@@ -1715,8 +1847,10 @@ package feathers.themes{
 		 * @return Boolean 是否执行成功
 		 * 
 		 */		
-		public function popBitmapTexture(key:String):Boolean
+		public function popTexture(key:String):Boolean
 		{
+			Log.warn("贴图即将被注销:"+key);
+			
 			key = nanoKey(key);
 			var atlas:TextureAtlas = textureAtlasMap[key];
 			if(atlas)atlas.dispose();
@@ -1876,14 +2010,19 @@ package feathers.themes{
 		}
 		
 		private static const LABEL_TEXTURE_ID:String = "__LabelTexture";
-		public function pushDynamicLabelBitmapData(key:String, bitmapData:BitmapData,  clipRect:Rectangle=null, isBitmapFont:Boolean=false):IStarlingTexture
+		public function creatBatchRenderTextTexture(key:String, bitmapData:BitmapData,  clipRect:Rectangle=null, isBitmapFont:Boolean=false, disposeBitmapData:Boolean=true):IStarlingTexture
 		{
 			var a:DynamicLabelTextureAtlas = textureAtlasMap[LABEL_TEXTURE_ID];
 			if(!a)textureAtlasMap[LABEL_TEXTURE_ID] = a = new DynamicLabelTextureAtlas();
 			clipRect ||= bitmapData.rect;
-			var t:IStarlingTexture = a.addLabelBitmapData(key, bitmapData, clipRect, isBitmapFont);
+			var t:IStarlingTexture = a.creatTextureFromBitmapData(key, bitmapData, clipRect, isBitmapFont, disposeBitmapData);
 			addThemeSub(key, {key:key,width:t.width,height:t.height,offx:clipRect.x,offy:clipRect.y},LABEL_TEXTURE_ID);
 			return t;
+		}
+		
+		public function deleteSubThemeInfo(key:String):void
+		{
+			delete themeInfo[key];
 		}
 		
 		/**
@@ -1916,7 +2055,7 @@ package feathers.themes{
 				pushSingleStaticTexture(key, bd);
 			}
 			var dynamic:FastDynamicBitmapTexture = getAtlas(dynamicIndex);
-			if(dynamic.addBitmapData(key, bd) != true)
+			if(dynamic.addBitmapData(key, bd) == null)
 			{
 				//纹理超过限制
 				dynamic = getAtlas(dynamicIndex++);

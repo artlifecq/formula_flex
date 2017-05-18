@@ -15,13 +15,15 @@ package starling.filters
     import flash.geom.Matrix3D;
     import flash.geom.Rectangle;
     
+    import away3d.core.managers.Stage3DProxy;
+    import away3d.events.Stage3DEvent;
+    
     import starling.core.Starling;
     import starling.core.starling_internal;
     import starling.display.DisplayObject;
     import starling.display.Stage;
     import starling.events.Event;
     import starling.events.EventDispatcher;
-    import starling.rendering.BatchToken;
     import starling.rendering.FilterEffect;
     import starling.rendering.IndexData;
     import starling.rendering.Painter;
@@ -101,17 +103,17 @@ package starling.filters
         private var _effect:FilterEffect;
         private var _vertexData:VertexData;
         private var _indexData:IndexData;
-        private var _token:BatchToken;
         private var _padding:Padding;
         private var _helper:FilterHelper;
         private var _resolution:Number;
+        private var _antiAliasing:int;
         private var _textureFormat:String;
         private var _alwaysDrawToBackBuffer:Boolean;
         private var _cacheRequested:Boolean;
         private var _cached:Boolean;
 
         // helpers
-        private static var sMatrix3D:Matrix3D;
+		private static var sMatrix3D:Matrix3D = new Matrix3D();
 		
 		private static var _numragmentFilter:int;
 
@@ -123,9 +125,7 @@ package starling.filters
             _textureFormat = Context3DTextureFormat.BGRA;
 
             // Handle lost context (using conventional Flash event for weak listener support)
-            Starling.current.stage3D.addEventListener(Event.CONTEXT3D_CREATE,
-                onContextCreated, false, 0, true);
-			
+			Stage3DProxy.getInstance().addEventListener(Stage3DEvent.CONTEXT3D_RECREATED, onContextCreated);
 			_numragmentFilter++;
 			trace("[Starling]new FragmentFilter!,numFragmentFilter:",_numragmentFilter );
         }
@@ -133,7 +133,7 @@ package starling.filters
         /** Disposes all resources that have been created by the filter. */
         public function dispose():void
         {
-            Starling.current.stage3D.removeEventListener(Event.CONTEXT3D_CREATE, onContextCreated);
+			Stage3DProxy.getInstance().removeEventListener(Stage3DEvent.CONTEXT3D_RECREATED, onContextCreated);
 
             if (_helper) _helper.dispose();
             if (_effect) _effect.dispose();
@@ -164,11 +164,11 @@ package starling.filters
             if (_target == null)
                 throw new IllegalOperationError("Cannot render filter without target");
 			
-			if(Starling.current.showTrace)("[Starling]FragmentFilter render", _target.name, _textureFormat, _helper ?_helper.targetBounds.toString() : "");
+			CONFIG::Starling_Debug
+			{
+				trace("[Starling]FragmentFilter render", _target.name, _textureFormat, _helper ?_helper.targetBounds.toString() : "");
+			}
 			
-            if (_target.is3D)
-                _cached = _cacheRequested = false;
-
             if (!_cached || _cacheRequested)
             {
                 renderPasses(painter, _cacheRequested);
@@ -183,7 +183,6 @@ package starling.filters
 
         private function renderPasses(painter:Painter, forCache:Boolean):void
         {
-            if (_token == null) _token = new BatchToken();
             if (_helper  == null) _helper = new FilterHelper(_textureFormat);
             if (_quad  == null) _quad  = new FilterQuad();
             else { _helper.putTexture(_quad.texture); _quad.texture = null; }
@@ -200,8 +199,12 @@ package starling.filters
             {
                 // If 'requiresRedraw' is true, the object is non-static, and we guess that this
                 // will be the same in the next frame. So we render directly to the back buffer.
+                //
+                // -- That, however, is only possible for full alpha values, because
+                // (1) 'FilterEffect' can't handle alpha (and that will do the rendering)
+                // (2) we don't want lower layers (CompositeFilter!) to shine through.
 
-                drawLastPassToBackBuffer = true;
+                drawLastPassToBackBuffer = painter.state.alpha == 1.0;
                 painter.excludeFromCache(_target);
             }
 
@@ -239,6 +242,7 @@ package starling.filters
 
             _helper.projectionMatrix3D = painter.state.projectionMatrix3D;
             _helper.renderTarget = painter.state.renderTarget;
+            _helper.clipRect = painter.state.clipRect;
             _helper.targetBounds = bounds;
             _helper.target = _target;
             _helper.start(numPasses, drawLastPassToBackBuffer);
@@ -247,40 +251,33 @@ package starling.filters
             _resolution = 1.0; // applied via '_helper.textureScale' already;
                                // only 'child'-filters use resolution directly (in 'process')
 
+            var wasCacheEnabled:Boolean = painter.cacheEnabled;
             var input:IStarlingTexture = _helper.getTexture();
-            var frameID:int = painter.frameID;
             var output:IStarlingTexture;
 
-            // By temporarily setting the frameID to zero, the render cache is effectively
-            // disabled while we draw the target object. That is necessary because we rewind the
-            // cache later; if we didn't deactivate the cache, redrawing one of the target objects
-            // later might reference data that does not exist any longer.
-
-            painter.frameID = 0;
-            painter.pushState(_token);
-            painter.state.renderTarget = input;
+            painter.cacheEnabled = false; // -> what follows should not be cached
+            painter.pushState();
+            painter.state.alpha = 1.0;
+            painter.state.clipRect = null;
+            painter.state.setRenderTarget(input, true, _antiAliasing);
             painter.state.setProjectionMatrix(bounds.x, bounds.y,
-                input.root.width, input.root.height,
-                stage.stageWidth, stage.stageHeight, stage.cameraPosition);
+                input.root.width, input.root.height);
 
             _target.render(painter); // -> draw target object into 'input'
 
             painter.finishMeshBatch();
             painter.state.setModelviewMatricesToIdentity();
-            painter.state.clipRect = null;
 
             output = process(painter, _helper, input); // -> feed 'input' to actual filter code
 
             painter.popState();
-            painter.frameID = frameID;
-            painter.rewindCacheTo(_token); // -> render cache forgets all that happened above :)
+            painter.cacheEnabled = wasCacheEnabled; // -> cache again
 
             if (output) // indirect rendering
             {
                 painter.pushState();
 
-                if (_target.is3D) painter.state.setModelviewMatricesToIdentity(); // -> stage coords
-                else              _quad.moveVertices(renderSpace, _target);       // -> local coords
+                _quad.moveVertices(renderSpace, _target);       // -> local coords
 
                 _quad.texture = output;
                 _quad.render(painter);
@@ -312,7 +309,7 @@ package starling.filters
          *  not need them any longer. Ownership of both input textures and returned texture
          *  lies at the caller; only temporary textures should be put into the helper.</p>
          */
-        public function process(painter:Painter, helper:IFilterHelper,
+        public function process(painter:Painter, helper:FilterHelper,
                                 input0:IStarlingTexture=null, input1:IStarlingTexture=null,
                                 input2:IStarlingTexture=null, input3:IStarlingTexture=null):IStarlingTexture
         {
@@ -339,6 +336,10 @@ package starling.filters
                 bounds = helper.targetBounds;
                 renderTarget = (helper as FilterHelper).renderTarget;
                 projectionMatrix = (helper as FilterHelper).projectionMatrix3D;
+
+                // restore clipRect (projection matrix influences clipRect!)
+                painter.state.clipRect = (helper as FilterHelper).clipRect;
+                painter.state.projectionMatrix3D.copyFrom(projectionMatrix);
             }
 
             painter.state.renderTarget = renderTarget;
@@ -506,6 +507,18 @@ package starling.filters
         }
 
 
+        /** The anti-aliasing level. This is only used for rendering the target object
+         *  into a texture, not for the filter passes. 0 - none, 4 - maximum. @default 0 */
+        public function get antiAliasing():int { return _antiAliasing; }
+        public function set antiAliasing(value:int):void
+        {
+            if (value != _antiAliasing)
+            {
+                _antiAliasing = value;
+                setRequiresRedraw();
+            }
+        }
+
         /** The format of the filter texture. @default BGRA */
         public function get textureFormat():String { return _textureFormat; }
         public function set textureFormat(value:String):void
@@ -552,12 +565,6 @@ package starling.filters
                     if (_helper) _helper.purge();
                     if (_effect) _effect.purgeBuffers();
                     if (_quad)   _quad.disposeTexture();
-					
-					CONFIG::Starling_Debug
-					{
-						var ti:String = prevTarget  ? prevTarget.localToGlobal(Pool.getPoint())+" "+prevTarget.width+" "+prevTarget.height : "null";
-						if(Starling.current.showTrace)tracing("[Starling]FragmentFilter, setTarget:null | prevTarget",ti, " | numragmentFilter", _numragmentFilter);
-					}
                 }
 
                 if (prevTarget)
@@ -572,12 +579,6 @@ package starling.filters
                         target.addEventListener(Event.ENTER_FRAME, onEnterFrame);
 
                     onTargetAssigned(target);
-					
-					CONFIG::Starling_Debug
-						{
-							ti = target  ?  target.localToGlobal(Pool.getPoint())+" "+target.width+" "+target.height  : "null";
-							if(Starling.current.showTrace)tracing("[Starling]FragmentFilter, setTarget:",ti, " | numragmentFilter", _numragmentFilter);
-						}
                 }
             }
         }
@@ -628,9 +629,7 @@ class FilterQuad extends Mesh
 
     public function moveVertices(sourceSpace:DisplayObject, targetSpace:DisplayObject):void
     {
-        if (targetSpace.is3D)
-            throw new Error("cannot move vertices into 3D space");
-        else if (sourceSpace != targetSpace)
+        if (sourceSpace != targetSpace)
         {
             targetSpace.getTransformationMatrix(sourceSpace, sMatrix).invert(); // ss could be null!
             vertexData.transformPoints("position", sMatrix);

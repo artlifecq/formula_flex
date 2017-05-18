@@ -356,14 +356,17 @@ package com.editor.manager
 			return false;
 		}
 
-		public function cancelSelect() : void
+		public function cancelSelect() : Boolean
 		{
+            var rs : Boolean = false;
 			if (selectedEntity)
 			{
 				selectedEntity.selected = false;
 				selectedEntity = null;
+                rs = true;
 			}
 			updateAllAreaMouseEnabled();
+            return rs;
 		}
 
 		public function initAddArea(data : ConfigData) : String

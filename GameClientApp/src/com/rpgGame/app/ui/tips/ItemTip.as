@@ -5,6 +5,7 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -119,10 +120,10 @@ package com.rpgGame.app.ui.tips
 				}
 			}
 			
-			var nameColor:uint=0x8b8d7b;
-			var valueColor:uint=0xcfc6ae;
-			var valueColor1:uint=0xE1201C;
-			var valueColor2:uint=0x6BCC08;
+			var nameColor:uint=StaticValue.UI_NORMAL;
+			var valueColor:uint=StaticValue.UI_YELLOW1;
+			var valueColor1:uint=StaticValue.UI_SPECIAL_RED;
+			var valueColor2:uint=StaticValue.UI_GREEN;
 			
 			curY=93;
 			curX=10;
@@ -187,7 +188,7 @@ package com.rpgGame.app.ui.tips
 				createLine(10,curY,280);
 				curY+=10;
 				
-				name=HtmlTextUtil.getTextColor(0xcfc6ae,"[物品说明]\n");
+				name=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,"[物品说明]\n");
 				label=createLabel(name,_itemInfo.qItem.q_describe);
 				label.width=250;
 				label.leading=5;
@@ -210,7 +211,7 @@ package com.rpgGame.app.ui.tips
 				createLine(10,curY,280);
 				curY+=10;
 				
-				name=HtmlTextUtil.getTextColor(0xcfc6ae,"[物品说明]\n");
+				name=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,"[物品说明]\n");
 				label=createLabel(name,_itemInfo.qItem.q_describe);
 				label.width=250;
 				label.leading=5;

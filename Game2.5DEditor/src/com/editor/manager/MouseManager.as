@@ -49,7 +49,7 @@ package com.editor.manager
 
 		public static function setOutlineData(size : Number = 4, strength : Number = 1, quality : int = 3, enemyColor : uint = 0xFF0000, friendColor : uint = 0x00FF00, neutralColor : uint = 0xFFFF00) : void
 		{
-			var outlineGlowFilter : OutlineGlowFilter3D = new OutlineGlowFilter3D(size, strength, quality);
+			var outlineGlowFilter : OutlineGlowFilter3D = new OutlineGlowFilter3D(size, strength);
 			SceneManager.getInstance().mainScene.setOutlineGlowFilter(outlineGlowFilter);
 			_previewOutlineIndex = 0;
 			_previewOutlineDatas.length = 0;

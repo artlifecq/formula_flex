@@ -1,5 +1,7 @@
 package feathers.controls
 {
+	import flash.utils.Dictionary;
+	
 	import avmplus.getQualifiedClassName;
 	
 	import feathers.core.IToggle;
@@ -17,6 +19,7 @@ package feathers.controls
 	{
 		protected var _styleName:String;
 		protected var _skin:StateSkin;
+		private var _cacheSkins:Dictionary;
 		
 		public function SkinnableContainer()
 		{
@@ -36,6 +39,14 @@ package feathers.controls
 			}
 		}
 		
+		public function disposeSkin():void
+		{
+			removeChildren(0, -1, true);
+			
+			if(_cacheSkins != null && _styleName in _cacheSkins)
+				delete _cacheSkins[_styleName];
+		}
+		
 		override public function get styleName():String
 		{
 			return _styleName;
@@ -43,10 +54,31 @@ package feathers.controls
 		
 		override public function set styleName(value:String):void
 		{
-			if(_styleName == value )
+			if(_styleName == value)
 				return;
+			
+			if(!value)
+			{
+				_styleName = value;
+				removeChildren();
+				return;
+			}
+			
+			if(_cacheSkins != null && value in _cacheSkins)
+			{
+				skin = _cacheSkins[value];
+			}else
+			{
+				_cacheSkins ||= new Dictionary();
+				_cacheSkins[value] = skin = GuiThemeStyle.getStateSkin(value);
+				
+				var isNewStyle:Boolean = _styleName && value && _styleName != value;
+				if(isNewStyle)
+				{
+					trace("[SkinableContainer] warning! 创建新的Skin："+value+"; 原有的skin: "+_styleName+" 将自动缓存以备下次使用；如果不需要缓存，请在切换styleName或styleClass之前先调用disposeSkin()");
+				}
+			}
 			_styleName = value;
-			skin = GuiThemeStyle.getStateSkin(_styleName);
 		}
 		
 		override public function set styleClass(value:Class):void

@@ -2,18 +2,22 @@ package com.rpgGame.app.cmdlistener.scene
 {
 	import com.game.engine3D.events.MapLoadEvent;
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.ui.ResLoadingView;
 	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppInfo;
+	import com.rpgGame.core.app.AppLoadManager;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
-
+	
 	import gs.TweenLite;
-
+	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
 
@@ -91,7 +95,17 @@ package com.rpgGame.app.cmdlistener.scene
 			GameLog.addShow("加载场景完成...");
 			_showSceneDelay = TweenLite.delayedCall(0.2, onShowScene);
 		}
-
+		
+		private static function onError(url : String) : void
+		{
+			GameLog.addShow("加载资源"+url+"出错");
+		}
+		
+		private static function onLoadComplete(_appUrl : String = null) : void
+		{
+			_showSceneDelay = TweenLite.delayedCall(0.2, onShowScene);
+		}
+		
 		private static function onMapLoadError() : void
 		{
 			var mapRes : String = "";

@@ -8,7 +8,9 @@ accordance with the terms of the accompanying license agreement.
 package feathers.core
 {
 	import flash.utils.Dictionary;
-
+	
+	import away3d.core.managers.Stage3DProxy;
+	
 	import starling.animation.IAnimatable;
 	import starling.core.Starling;
 
@@ -138,7 +140,7 @@ package feathers.core
 		 */
 		public function advanceTime(time:Number):void
 		{
-			if(this._isValidating || !this._starling.contextValid)
+			if(this._isValidating || !Stage3DProxy.getInstance().recoverFromDisposal())
 			{
 				return;
 			}

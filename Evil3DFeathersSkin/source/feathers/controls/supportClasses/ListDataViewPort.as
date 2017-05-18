@@ -1205,7 +1205,7 @@ package feathers.controls.supportClasses
 						}
 						else
 						{
-							throw new IllegalOperationError("ListDataViewPort: renderer map contains bad data. This may be caused by duplicate items in the data provider, which is not allowed.");
+							throw new IllegalOperationError("数据错误！listDataProvider中不允许包含重复的对象!请检查并过滤数据源!");
 						}
 					}
 					this._layoutItems[index + this._layoutIndexOffset] = DisplayObject(itemRenderer);

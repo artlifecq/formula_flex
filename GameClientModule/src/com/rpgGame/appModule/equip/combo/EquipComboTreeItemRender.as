@@ -6,7 +6,6 @@ package com.rpgGame.appModule.equip.combo
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_hecheng;
 	
-	import feathers.controls.UIAsset;
 	import feathers.controls.renderers.DefaultTreeItemRender;
 	import feathers.data.TreeNode;
 	
@@ -20,6 +19,7 @@ package com.rpgGame.appModule.equip.combo
 	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonJianhao;
 	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonSanjiao_down;
 	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonSanjiao_right;
+	import org.mokylin.skin.common.over.SelectBtn;
 	
 	import starling.display.DisplayObject;
 	
@@ -43,6 +43,17 @@ package com.rpgGame.appModule.equip.combo
 		{
 			_skin=new HeChengMenuItemSkin();
 			_skin.toSprite(this);
+			
+			var detailskin:Cont_Item=_skin.detail_item.skin as Cont_Item;
+			detailskin.selectedBtn.defaultIcon=null;
+			var btnSkin:SelectBtn=new SelectBtn();
+			detailskin.selectedBtn.upSkin=btnSkin.__SelectBtn_UIAsset2;
+			detailskin.selectedBtn.hoverSkin=btnSkin.__SelectBtn_UIAsset1;
+			detailskin.selectedBtn.selectedUpSkin=btnSkin.__SelectBtn_UIAsset1;
+			detailskin.selectedBtn.selectedDownSkin=btnSkin.__SelectBtn_UIAsset1;
+			detailskin.selectedBtn.selectedHoverSkin=btnSkin.__SelectBtn_UIAsset1;
+			detailskin.selectedBtn.downSkin=btnSkin.__SelectBtn_UIAsset1;
+			detailskin.selectedBtn.isSelected=false;
 		}
 		
 		override public function get height():Number
@@ -67,7 +78,6 @@ package com.rpgGame.appModule.equip.combo
 				tree.dataProvider.updateItemAt(oldindex);
 			}
 		}
-		
 		
 		override protected function renderTreeNode(node:TreeNode):void
 		{
@@ -119,13 +129,12 @@ package com.rpgGame.appModule.equip.combo
 				qianSkin.lb_Dispaly.text=ItemConfig.getItemName(itemId)+"("+max+")";
 				qianSkin.bg1.visible=detailInfo.data.q_subson_type%2==0;
 				qianSkin.bg2.visible=!qianSkin.bg1.visible;
-				
-				if(tree.selectedItemRender==this){
-					qianSkin.selectedImg.visible=true;
-				}else{
-					qianSkin.selectedImg.visible=false;
+				var isSelected:Boolean=this.owner.selectedItem.data==node.data;
+				qianSkin.selectedBtn.isSelected=isSelected;
+				qianSkin.selectedBtn.defaultIcon=null;
+				if(this.owner.selectedItem.data is DetailNodeInfo==false){
+					qianSkin.selectedBtn.toggleGroup.selectedIndex=-1;
 				}
-				
 			}
 		}
 	}

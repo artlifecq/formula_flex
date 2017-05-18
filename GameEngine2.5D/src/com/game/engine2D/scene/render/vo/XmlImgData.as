@@ -79,7 +79,7 @@ package com.game.engine2D.scene.render.vo
 				_parser.onLoadComplete(completeHandler).onLoadError(errorHandler);
 				_parser.load(fullSourchPath,apd.priority);
 			}
-			else if (!MultiUrlLoadManager.hasLoadByUrl(fullSourchPath))
+			else if (!MultiUrlLoadManager.isLoading(fullSourchPath))
 			{
 				var ld:MultiLoadData = new MultiLoadData(fullSourchPath, loadSourceComplete,null,loadError,"","",
 					apd.priority,format);

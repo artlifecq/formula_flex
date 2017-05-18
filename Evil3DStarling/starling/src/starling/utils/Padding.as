@@ -28,7 +28,10 @@ package starling.utils
         /** Creates a new instance with the given properties. */
         public function Padding(left:Number=0, right:Number=0, top:Number=0, bottom:Number=0)
         {
-            setTo(left, right, top, bottom);
+			_left   = left;
+			_right  = right;
+			_top    = top;
+			_bottom = bottom;
         }
 
         /** Sets all four values at once. */

@@ -9,8 +9,6 @@ package com.rpgGame.app.state.role.action
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
 
-	import away3d.animators.transitions.CrossfadeTransition;
-
 	/**
 	 *
 	 * 场景角色行走状态
@@ -64,13 +62,13 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.DEPUTY_WEAPON:
 					render.visible = true;
 					render.repeat = 0;
-					render.setStatus(statusType, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time, speedRatio);
+					render.setStatus(statusType, _useCrossfadeTransition ? 0.2 : null, time, speedRatio);
 					if (isFreeze)
 						render.stop(time);
 					break;
 				case RenderUnitType.MOUNT:
 					render.repeat = 0;
-					render.setStatus(RoleActionType.WALK, _useCrossfadeTransition ? new CrossfadeTransition(0.2) : null, time, speedRatio);
+					render.setStatus(RoleActionType.WALK, _useCrossfadeTransition ? 0.2 : null, time, speedRatio);
 					if (isFreeze)
 						render.stop(time);
 					break;

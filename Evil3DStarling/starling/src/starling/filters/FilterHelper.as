@@ -22,6 +22,7 @@ package starling.filters
     import starling.textures.SubTexture;
     import starling.textures.TextureFactory;
     import starling.utils.MathUtil;
+    import starling.utils.Pool;
 
     use namespace starling_internal;
 
@@ -30,7 +31,7 @@ package starling.filters
      *  This class manages texture creation, pooling and disposal of all textures
      *  during filter processing.
      */
-    internal class FilterHelper implements IFilterHelper
+    internal class FilterHelper
     {
         private var _width:Number;
         private var _height:Number;
@@ -43,6 +44,7 @@ package starling.filters
         private var _renderTarget:IStarlingTexture;
         private var _targetBounds:Rectangle;
         private var _target:DisplayObject;
+        private var _clipRect:Rectangle;
 
         // helpers
         private var sRegion:Rectangle = new Rectangle();
@@ -63,6 +65,9 @@ package starling.filters
         /** Purges the pool. */
         public function dispose():void
         {
+            Pool.putRectangle(_clipRect);
+            _clipRect = null;
+
             purge();
         }
 
@@ -88,8 +93,15 @@ package starling.filters
             if (_pool.length)
                 texture = _pool.pop();
             else
-                texture = TextureFactory.empty(_width, _height,
-                    false, true, _textureFormat);
+			{
+				texture = TextureFactory.empty(_width, _height,
+					false, true, _textureFormat);
+				CONFIG::Debug
+					{
+						texture.key = "Filter_"+_textureFormat+"_"+_width+"_"+_height;
+					}
+			}
+
 
             if (!MathUtil.isEquivalent(texture.width,  _width,  0.1) ||
                 !MathUtil.isEquivalent(texture.height, _height, 0.1))
@@ -100,7 +112,14 @@ package starling.filters
                 if (subTexture)
                     subTexture.setTo(texture.root, sRegion, true, false);
                 else
-                    texture = new SubTexture(texture.root, sRegion, true, false);
+				{
+					texture = new SubTexture(texture.root, sRegion, true, false);
+					CONFIG::Debug
+						{
+							texture.key = "Subtexture_Filter_"+_textureFormat+"_"+_width+"_"+_height;
+						}
+				}
+                   
             }
 			clearTexture(texture);
             return texture;
@@ -171,9 +190,22 @@ package starling.filters
 
         /** The render target that was active when the filter started processing. */
         public function get renderTarget():IStarlingTexture { return _renderTarget; }
-        public function set renderTarget(value:IStarlingTexture):void
+        public function set renderTarget(value:IStarlingTexture):void { _renderTarget = value; }
+
+        /** The clipping rectangle that was active when the filter started processing. */
+        public function get clipRect():Rectangle { return _clipRect; }
+        public function set clipRect(value:Rectangle):void
         {
-            _renderTarget = value;
+            if (value)
+            {
+                if (_clipRect) _clipRect.copyFrom(value);
+                else _clipRect = Pool.getRectangle(value.x, value.y, value.width, value.height);
+            }
+            else if (_clipRect)
+            {
+                Pool.putRectangle(_clipRect);
+                _clipRect = null;
+            }
         }
 
         /** @inheritDoc */

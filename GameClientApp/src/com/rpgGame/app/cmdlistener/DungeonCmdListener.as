@@ -27,7 +27,7 @@ package com.rpgGame.app.cmdlistener
 		{
 			SocketConnection.addCmdListener(227501, onSCLunJianPanelInfosMessage );
 			SocketConnection.addCmdListener(227502, onSCLunJianTimeStartMessage );
-			SocketConnection.addCmdListener(227502, onSCLunJianResultMessage );
+			SocketConnection.addCmdListener(227503, onSCLunJianResultMessage );
 			
 			finish();
 		}

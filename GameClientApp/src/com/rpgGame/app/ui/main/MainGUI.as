@@ -3,6 +3,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.app.ui.main.activityBar.ActivityBar;
 	import com.rpgGame.app.ui.main.buff.BuffBar;
 	import com.rpgGame.app.ui.main.chat.ChatBar;
 	import com.rpgGame.app.ui.main.chat.SystemMsgBar;
@@ -20,8 +21,10 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.ui.main.team.TeamLeftFixedBar;
 	import com.rpgGame.app.ui.main.top.ExpBar;
 	import com.rpgGame.app.ui.main.top.TopBar;
+	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppDispather;
 	import com.rpgGame.core.app.AppEvent;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.SceneInteractiveEvent;
@@ -31,6 +34,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.map.EnumMapType;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangYuMaQiShou;
@@ -119,8 +123,8 @@ package com.rpgGame.app.ui.main
 //		private var _taskBar : TaskBar;
 //		/** 聊天栏 **/
 //		private var _chatBar : ChatBar;
-//		/** 活动栏 **/
-//		private var _activityBar : ActivityBar;
+		/** 活动栏 **/
+		private var _activityBar : ActivityBar;
 //		/** 右边的进度提示 **/
 //		private var _hintBattleBar : HintBattleBar;
 //		/** 夺经、刺探、运镖追踪栏 **/
@@ -214,8 +218,8 @@ package com.rpgGame.app.ui.main
 //			_taskBar = new TaskBar();
 //			addChild(_taskBar);
 //			
-//			_activityBar = new ActivityBar();
-//			addChild(_activityBar);
+			_activityBar = new ActivityBar();
+			addChild(_activityBar);
 //			
 //			_hintBattleBar = new HintBattleBar();
 //			addChild(_hintBattleBar);
@@ -486,7 +490,7 @@ package com.rpgGame.app.ui.main
 //			_miniMapBar.resize(sWidth, sHeight);
 //			_taskBar.resize(sWidth, sHeight);
 //			_chatBar.resize(sWidth, sHeight);
-//			_activityBar.resize(sWidth, sHeight);
+			_activityBar.resize(sWidth, sHeight);
 //			_hintBattleBar.resize(sWidth, sHeight);
 //			_teamBar.resize(sWidth, sHeight);
 //			_taskTrackPanel.resize(sWidth, _taskBar.y + _taskBar.height);

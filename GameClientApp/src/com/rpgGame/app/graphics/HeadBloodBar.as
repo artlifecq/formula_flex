@@ -72,9 +72,13 @@ package com.rpgGame.app.graphics
 		
 		private var _role : SceneRole;
 		
+		private var _isDestroyed : Boolean;
+		private var _isDisposed : Boolean;
+		
 		public function HeadBloodBar($role : SceneRole)
 		{
 			super();
+			_isDestroyed = false;
 			
 			_role = $role;
 			
@@ -100,7 +104,7 @@ package com.rpgGame.app.graphics
 		
 		public function reSet($parameters : Array) : void
 		{
-			
+			_isDisposed = false;
 		}
 		
 		private function createBarBackground() : DisplayObject
@@ -252,13 +256,24 @@ package com.rpgGame.app.graphics
 		{
 			instanceDispose();
 			dispose();
+			_isDestroyed = true;
 		}
 		
 		public function instanceDispose() : void
 		{
 			if (parent != null)
 				parent.removeChild(this);
+			_isDisposed = true;
 		}
 		
+		public function get isDestroyed():Boolean
+		{
+			return _isDestroyed;
+		}
+		
+		public function get isDisposed():Boolean
+		{
+			return _isDisposed;
+		}
 	}
 }

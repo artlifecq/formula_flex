@@ -16,6 +16,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_id:int;
 		 /**    */
 		public var q_combat_type:int;
+		 /**    */
+		public var q_bgicon:String;
 		 /**  副本ID */
 		public var q_zone_id:int;
 		 /**  挑战限制等级 */

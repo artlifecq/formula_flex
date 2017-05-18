@@ -14,7 +14,7 @@ package starling.display
     import flash.geom.Matrix3D;
     import flash.geom.Point;
     import flash.geom.Vector3D;
-
+    
     import starling.events.Event;
     import starling.rendering.Painter;
     import starling.utils.MathUtil;
@@ -62,7 +62,7 @@ package starling.display
      *  3D coordinate systems. Flat contents within the Sprite3D will be cached, though.</p>
      *
      */
-    public class Sprite3D extends DisplayObjectContainer
+    public class Sprite3D extends Sprite
     {
         private static const E:Number = 0.00001;
 

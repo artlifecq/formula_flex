@@ -44,6 +44,11 @@ package com.game.engine3D.core
 				{
 					layer.name = name;
 					_layers.add(name, layer);
+					CONFIG::Mesh2D_Trace
+						{
+							layer.autoSetMesh2DTraceContainerID();
+							layer.mesh2DTraceContinaerName = name;
+						}
 				}
 				else
 				{

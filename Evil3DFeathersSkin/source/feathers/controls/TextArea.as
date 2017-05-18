@@ -350,7 +350,6 @@ package feathers.controls
 			this._measureViewPort = false;
 			this.addEventListener(TouchEvent.TOUCH, textArea_touchHandler);
 			this.addEventListener(Event.REMOVED_FROM_STAGE, textArea_removedFromStageHandler);
-			_layerBatchId = LayerBatchID.TEXTAREA;
 		}
 
 		/**
@@ -540,6 +539,8 @@ package feathers.controls
 				return;
 			}
 			this._text = value;
+			
+			this.textEditorProperties.isHTML = false;
 			if(this.textEditorViewPort && this.textEditorViewPort.text != value)
 			{
 				this.textEditorViewPort.text = value;
@@ -1126,7 +1127,7 @@ package feathers.controls
 			}
 			if(!this._textEditorProperties.textFormat)
 			{
-				this._textEditorProperties.textFormat = new TextFormat(Fontter.DEFAULT_FONT_NAME, Fontter.DEFAULT_FONT_SIZE, Fontter.DEFAULT_FONT_COLOR);
+				this._textEditorProperties.textFormat = Fontter.creatDefaultFontTextFormat();
 			}
 			return this._textEditorProperties;
 		}

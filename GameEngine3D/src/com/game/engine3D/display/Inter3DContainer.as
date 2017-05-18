@@ -68,12 +68,19 @@ package com.game.engine3D.display
 			var sr3D : EffectObject3D = new EffectObject3D(null,isdispose);
 			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", url);
 			data.forceLoad=true;
-			var unit:RenderUnit3D=sr3D.addRenderUnitWith(data, 0, onPlayComplete,addComplete);
-			unit.stop();
-			unit.stopRender();
-			sr3D.stop();
-			/*sr3D.x = x;
-			sr3D.y = y;*/
+			var unit:RenderUnit3D=sr3D.addRenderUnitWith(data, 0, onPlayComplete,addEft);
+			function addEft(render:RenderUnit3D):void
+			{
+				unit.stop();
+				unit.stopRender();
+				sr3D.stop();
+				sr3D.stopEffect();
+				if(addComplete!=null)
+				{
+					addComplete(render);
+				}
+				
+			}
 			addChild3D(sr3D);
 			return sr3D;
 		}
@@ -100,10 +107,10 @@ package com.game.engine3D.display
 			}
 		}
 
-		public function removeChild3D(child : InterObject3D) : void
+		public function removeChild3D(child : InterObject3D, dispose : Boolean = false) : void
 		{
 			if (this.contains(child))
-				this.removeChild(child);
+				this.removeChild(child, dispose);
 
 			if (_numChildren3D > 0)
 			{
@@ -112,6 +119,7 @@ package com.game.engine3D.display
 				{
 					_inter3DObjs.splice(index, 1);
 					_numChildren3D--;
+					if(dispose)child.dispose();
 				}
 			}
 		}
@@ -210,7 +218,7 @@ package com.game.engine3D.display
 		{
 			if (child is Inter3DContainer)
 			{
-				remove3DContainer(child as Inter3DContainer);
+				remove3DContainer(child as Inter3DContainer, dispose);
 			}
 			return super.removeChild(child, dispose);
 		}
@@ -237,7 +245,7 @@ package com.game.engine3D.display
 			}
 		}
 
-		private function remove3DContainer(inter3DContainer : Inter3DContainer) : void
+		private function remove3DContainer(inter3DContainer : Inter3DContainer, dispose : Boolean = false) : void
 		{
 			if (_inter3DContainers)
 			{
@@ -245,6 +253,10 @@ package com.game.engine3D.display
 				if (index >= 0)
 				{
 					_inter3DContainers.splice(index, 1);
+					if(dispose)
+					{
+						inter3DContainer.dispose();
+					}
 				}
 			}
 		}
@@ -297,6 +309,29 @@ package com.game.engine3D.display
 
 		protected function onUpdateFadeAlphaRectPos(sr3D : InterObject3D, x : int, y : int) : void
 		{
+		}
+		
+		override public function dispose():void
+		{
+			var len:int = _inter3DObjs ? _inter3DObjs.length : 0;
+			var i:int;
+			var inter3DObj:InterObject3D;
+			var interContainer:Inter3DContainer;
+			for(i = 0; i<len; i++)
+			{
+				inter3DObj = _inter3DObjs[i];
+				if(inter3DObj)inter3DObj.dispose();
+			}
+			len = _inter3DContainers ? _inter3DContainers.length : 0;
+			for(i=0; i<len; i++)
+			{
+				interContainer = _inter3DContainers[i];
+				if(interContainer)interContainer.dispose();
+			}
+			
+			_inter3DObjs = null;
+			_inter3DContainers = null;
+			super.dispose();
 		}
 	}
 }

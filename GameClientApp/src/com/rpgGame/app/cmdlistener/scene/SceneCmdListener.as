@@ -842,9 +842,10 @@ package com.rpgGame.app.cmdlistener.scene
 			//			ReqLockUtil.unlockReq(MazeModuleMessages.C2S_TRY_TRANSPORT);
 			
 			var mapId : int = msg.mapId;
+			MainRoleManager.actorInfo.preMapID=MainRoleManager.actorInfo.mapID;
 			MainRoleManager.actorInfo.mapID = mapId;
 			SceneSwitchManager.changeMap();
-			
+			AppManager.closeAllApp();//切换场景关闭所有面板
 		}
 		
 		/**

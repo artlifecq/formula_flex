@@ -24,12 +24,17 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.map.BaseMapProcess;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.ui.ResLoadingView;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppInfo;
+	import com.rpgGame.core.app.AppLoadManager;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.MazeEvent;
 	import com.rpgGame.core.manager.BGMManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
 	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.map.EnumMapType;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.lang.LangStoryDungeon;
 	import com.rpgGame.coreData.lang.LangText;
@@ -129,8 +134,13 @@ package com.rpgGame.app.manager.scene
 			onEnterScene();
 		}
 		
+        private static var needLoadCmpCnt : int = 0;
+        private static var onLoadSceneCmpParam : GameScene3D = null;
 		private static function onEnterScene():void
 		{	
+            if (0 != needLoadCmpCnt) {
+                return;
+            }
 			if(_isSameResMap)
 			{
 				onCfgCmp();
@@ -141,9 +151,11 @@ package com.rpgGame.app.manager.scene
 				var mapName : String = ClientConfig.getMapName(_mapRes);
 				var mapDataName : String = ClientConfig.getMapDataName();
 
+                needLoadCmpCnt = 2;
+                onLoadSceneCmpParam = null;
 				Scene.scene.switchScene(
 					curtMapInfo.sceneId,
-					curtMapInfo.mapConfig,
+					curtMapInfo.mapConfig,null,
 					ClientConfig.getMapZoneDir(curtMapInfo.mapNameResource),
 					mapUrl + "/" +mapName,
 					onCfgCmp,
@@ -432,35 +444,71 @@ package com.rpgGame.app.manager.scene
 
 		private static function enterSceneSuccessed(scene : GameScene3D) : void
 		{
-			if (SceneManager.clientMapData)
-			{
-				var obstacleAreas : Vector.<ClientMapAreaData> = SceneManager.clientMapData.getObstacleAreas();
-				var mapPointSets : Vector.<MapPointSet> = new Vector.<MapPointSet>();
-				for each (var areaData : ClientMapAreaData in obstacleAreas)
-				{
-					mapPointSets.push(new MapPointSet("MapDataObstacleArea" + areaData.id, areaData.getVector3Ds()));
-				}
-				scene.sceneMapLayer.addObstaclePoints(mapPointSets);
-				AreaMapManager.updateCameraAreaMap();
-				SceneTimeOfTheDayManager.initScene(SceneManager.clientMapData.timeOfTheDayData, scene);
-
-				BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
-			}
-
-			sendSceneLoaded();
+            --needLoadCmpCnt;
+            onLoadSceneCmpParam = scene;
+            onLoadSceneComplete();
+//			if (SceneManager.clientMapData)
+//			{
+//				var obstacleAreas : Vector.<ClientMapAreaData> = SceneManager.clientMapData.getObstacleAreas();
+//				var mapPointSets : Vector.<MapPointSet> = new Vector.<MapPointSet>();
+//				for each (var areaData : ClientMapAreaData in obstacleAreas)
+//				{
+//					mapPointSets.push(new MapPointSet("MapDataObstacleArea" + areaData.id, areaData.getVector3Ds()));
+//				}
+//				scene.sceneMapLayer.addObstaclePoints(mapPointSets);
+//				AreaMapManager.updateCameraAreaMap();
+//				SceneTimeOfTheDayManager.initScene(SceneManager.clientMapData.timeOfTheDayData, scene);
+//
+//				BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
+//			}
+//
+//			sendSceneLoaded();
 		}
 
 		private static function onMapDataComplete(mapData : SceneMapData) : void
 		{
-			if (SceneManager.clientMapData)
-			{
-				var mapUrl : String = ClientConfig.getMap(_mapRes);
-				var miniMapName : String = ClientConfig.getMiniMapName(SceneManager.clientMapData.miniMapRes);
-				SceneManager.getScene().loadMiniMap(mapUrl, miniMapName, SceneManager.clientMapData.miniMapRect, onMiniMapComplete);
-				var radarMapName : String = ClientConfig.getRadarMapName(SceneManager.clientMapData.radarMapRes);
-				SceneManager.getScene().loadRadarMap(mapUrl, radarMapName, SceneManager.clientMapData.radarMapRect, onRadarMapComplete);
-			}
+            --needLoadCmpCnt;
+            onLoadSceneComplete();
+//			if (SceneManager.clientMapData)
+//			{
+//				var mapUrl : String = ClientConfig.getMap(_mapRes);
+//				var miniMapName : String = ClientConfig.getMiniMapName(SceneManager.clientMapData.miniMapRes);
+//				SceneManager.getScene().loadMiniMap(mapUrl, miniMapName, SceneManager.clientMapData.miniMapRect, onMiniMapComplete);
+//				var radarMapName : String = ClientConfig.getRadarMapName(SceneManager.clientMapData.radarMapRes);
+//				SceneManager.getScene().loadRadarMap(mapUrl, radarMapName, SceneManager.clientMapData.radarMapRect, onRadarMapComplete);
+//			}
 		}
+        
+        private static function onLoadSceneComplete() : void {
+            if (0 != needLoadCmpCnt) {
+                return;
+            }
+            if (SceneManager.clientMapData)
+            {
+                var obstacleAreas : Vector.<ClientMapAreaData> = SceneManager.clientMapData.getObstacleAreas();
+                var mapPointSets : Vector.<MapPointSet> = new Vector.<MapPointSet>();
+                for each (var areaData : ClientMapAreaData in obstacleAreas)
+                {
+                    mapPointSets.push(new MapPointSet("MapDataObstacleArea" + areaData.id, areaData.getVector3Ds()));
+                }
+                onLoadSceneCmpParam.sceneMapLayer.addObstaclePoints(mapPointSets);
+                AreaMapManager.updateCameraAreaMap();
+                SceneTimeOfTheDayManager.initScene(SceneManager.clientMapData.timeOfTheDayData, onLoadSceneCmpParam);
+                
+                BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
+            }
+            
+            if (SceneManager.clientMapData)
+            {
+                var mapUrl : String = ClientConfig.getMap(_mapRes);
+                var miniMapName : String = ClientConfig.getMiniMapName(SceneManager.clientMapData.miniMapRes);
+                SceneManager.getScene().loadMiniMap(mapUrl, miniMapName, SceneManager.clientMapData.miniMapRect, onMiniMapComplete);
+                var radarMapName : String = ClientConfig.getRadarMapName(SceneManager.clientMapData.radarMapRes);
+                SceneManager.getScene().loadRadarMap(mapUrl, radarMapName, SceneManager.clientMapData.radarMapRect, onRadarMapComplete);
+            }
+            
+            sendSceneLoaded();
+        }
 
 		private static function onMiniMapComplete(scene : GameScene3D) : void
 		{
@@ -494,8 +542,26 @@ package com.rpgGame.app.manager.scene
 			else
 			{
 //				SceneSender.sceneLoaded(SceneManager.viewDistance);老的代码
-				SceneSender.SendLoadFinishMessage();
+				var mapId:int=MainRoleManager.actorInfo.mapID;
+				var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
+				if(sceneData.getData().q_map_zones==1){//副本
+					var appinfo:AppInfo=AppConstant.getAppinfoByAppName(AppConstant.SWORD_RESULT_SUCCESS);
+					var loadUrl : String = ClientConfig.getUI(appinfo.resName);
+					AppLoadManager.instace().loadByUrl(loadUrl, appinfo.loadingTitle, 	onLoadComplete, onError);
+				}else{
+					onLoadComplete();
+				}
 			}
+		}
+		
+		private static function onLoadComplete(_appUrl:* = null) : void
+		{
+			SceneSender.SendLoadFinishMessage();
+		}
+		
+		private static function onError(url : String) : void
+		{
+			GameLog.addShow("加载资源"+url+"出错");
 		}
 
 		private static function onSwitchCmp() : void
@@ -515,8 +581,23 @@ package com.rpgGame.app.manager.scene
 			showSceneTips();
 			showSceneEffect();
 			MapDataManager.lastScene = MapDataManager.currentScene;
+			showScenePanel();
 		}
-
+		
+		private static function showScenePanel():void
+		{
+			var mapId:int=MainRoleManager.actorInfo.preMapID;
+			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
+			if(!sceneData){
+				return;
+			}
+			switch(sceneData.mapType){
+				case EnumMapType.MAP_TYPE_LUNJIAN://打开论剑
+					AppManager.showApp(AppConstant.SWORD_PANL);
+					break;
+			}
+		}
+		
 		private static function generateSceneEntities() : void
 		{
 			SceneManager.generateClientSceneNpcs();

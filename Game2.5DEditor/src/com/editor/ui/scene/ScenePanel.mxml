@@ -18,7 +18,6 @@
 		 xmlns:scene="com.editor.ui.scene.*" xmlns:controls="awaybuilder.view.components.controls.*">
 	<fx:Script>
 		<![CDATA[
-            import com.editor.display.PolygonVertex3D;
             import com.editor.events.MapEvent;
             import com.editor.manager.AppManager;
             import com.editor.manager.EditorCameraManager;
@@ -29,7 +28,6 @@
             import com.editor.story.view.component.CameraSettingView;
             import com.editor.story.view.component.StoryTextView;
             import com.editor.utils.Status;
-            import com.game.engine2D.Scene;
             import com.game.engine3D.events.MapLoadEvent;
             import com.game.engine3D.manager.Stage3DLayerManager;
             import com.game.mainCore.core.manager.LayerManager;
@@ -43,9 +41,6 @@
             import away3d.loaders.parsers.Parsers;
             
             import org.client.mainCore.manager.EventManager;
-
-
-
 
 			protected function onCreateComplete(event : FlexEvent) : void
 			{
@@ -85,7 +80,7 @@
 
                 LayerManager.setup(container);
 				Stage3DLayerManager.errorChecking = true;
-				Stage3DLayerManager.setup(container.stage, container, stage3DLayerSetupComplete, 1, 10);
+				Stage3DLayerManager.setup(container.stage, container, stage3DLayerSetupComplete,null,null, 1, 10);
 			}
 
 			private function stage3DLayerSetupComplete() : void
@@ -103,6 +98,8 @@
 				Stage3DLayerManager.screenView.filters3d = Vector.<Filter3DBase>([new HeatFilter3D()]);
 				Stage3DLayerManager.screenView.backgroundColor = 0x333333;
 				Stage3DLayerManager.screenView.scene.addChild(SceneRoleManager.getInstance().previewEntity.graphicDis);
+				
+				Stage3DLayerManager.getView().backgroundColor = 0x333333;
 
 				EditorCameraManager.updateProperty();
 				SceneRoleManager.getInstance().updatePreviewState();
@@ -179,7 +176,6 @@
 			  visible="false">
 		<s:Label id="lab_bar"
 				 fontFamily="SimSun"
-				 text="加载地图中:"
-				 color="#FFFFFF"/>
+				 text="加载地图中:" color="0xffffff"/>
 	</s:VGroup>
 </s:Group>

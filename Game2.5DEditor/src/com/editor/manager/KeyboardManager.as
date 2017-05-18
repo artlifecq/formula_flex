@@ -57,10 +57,13 @@ package com.editor.manager
 			var subInfo : FuncTagInfo = FuncTagManager.getInstance().currSelectedSubFuncTag;
 			if (e.keyCode == Keyboard.ESCAPE)
 			{
-				DecorateEntitiesManager.getInstance().cancelSelect();
-				TrailManager.getInstance().cancelSelect();
-				SceneRoleManager.getInstance().cancelSelect();
-				DataManager.getInstance().cancelSelect();
+                var rs : int = 0x00;
+				rs |= DecorateEntitiesManager.getInstance().cancelSelect() ? 0x01 : 0x00;
+				rs |= TrailManager.getInstance().cancelSelect() ? 0x02 : 0x00;
+				rs |= SceneRoleManager.getInstance().cancelSelect() ? 0x04 : 0x00;
+                if (0 == rs) {
+				    DataManager.getInstance().cancelSelect();
+                }
 				plus = false;
 				minus = false;
 			}

@@ -48,6 +48,8 @@ package com.game.engine2D.core
 					texture = MaterialUtils.getAtfMaterialByData(pack.atfDataArr[i],pack.path,pack.autoRecycleEnable, pack.isAsync);
 				else 
 					texture = MaterialUtils.getBpgMaterialByData(pack.atfDataArr[i],pack.path,pack.enableScaleTexture,pack.autoRecycleEnable);
+				texture.name += i;
+				texture.index = i;
 				_atlasTextures.push(texture);
 			}
 		}
@@ -107,6 +109,8 @@ package com.game.engine2D.core
 				
 				if (texture)
 				{
+					if (!texture.parent)
+						texture.updateTexture(getTextureAtlas(info.textureIndex),_texturePack.hinderBytes, info.region);
 					return texture;
 				}
 				texture = new ATFSubTexture(

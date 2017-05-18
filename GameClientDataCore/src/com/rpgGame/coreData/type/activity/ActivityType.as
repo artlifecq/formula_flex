@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.type.activity
 {
-	import com.rpgGame.coreData.rEnum;
+	
 
 	/**
 	 *
@@ -11,8 +11,8 @@ package com.rpgGame.coreData.type.activity
 	 */
 	public class ActivityType
 	{
-		/** 讨逆*/
-		public static const TAO_NI : uint = rEnum.ENUM_START(1);
+		/** 论剑*/
+		public static const LUNJIAN : String = "LUNJIAN"
 
 		public function ActivityType()
 		{

@@ -2,7 +2,7 @@ package com.game.engine3D.vo.map
 {
 	import flash.geom.Rectangle;
 	import flash.utils.ByteArray;
-
+	
 	/**
 	 *
 	 * 客户端地图数据
@@ -23,6 +23,7 @@ package com.game.engine3D.vo.map
 		public var radarMapRes : String = "";
 		public var radarMapRect : Rectangle = new Rectangle();
 		public var bgSoundRes : String = "";
+		public var envSoundRes : String = "";
 		public var miniCorrectOffsetX : int = 0;
 		public var miniCorrectOffsetY : int = 0;
 		public var miniCorrectScaleX : int = 0;
@@ -34,16 +35,16 @@ package com.game.engine3D.vo.map
 		public var boundMinY : int = 0;
 		public var boundMaxX : int = 0;
 		public var boundMaxY : int = 0;
-
+		
 		public var mapAreaCount : int = 0;
 		public var areaDatas : Array = [];
 		public var timeOfTheDayData : ClientMapTimeOfTheDayData;
 		public var cameraPropertyData : ClientMapCameraPropertyData;
-
+		
 		public function ClientMapData()
 		{
 		}
-
+		
 		public function readFrom(bytes : ByteArray) : void
 		{
 			version = bytes.readByte();
@@ -51,7 +52,7 @@ package com.game.engine3D.vo.map
 			var areaData : ClientMapAreaData;
 			var hasTimeOfTheDayData : Boolean;
 			var hasCameraPropertyData : Boolean;
-			if (version == 10)
+			if (version == 11)
 			{
 				mapRes = bytes.readUTF();
 				miniMapRes = bytes.readUTF();
@@ -59,14 +60,15 @@ package com.game.engine3D.vo.map
 				miniMapRect.y = bytes.readUnsignedShort();
 				miniMapRect.width = bytes.readUnsignedShort();
 				miniMapRect.height = bytes.readUnsignedShort();
-
+				
 				radarMapRes = bytes.readUTF();
 				radarMapRect.x = bytes.readUnsignedShort();
 				radarMapRect.y = bytes.readUnsignedShort();
 				radarMapRect.width = bytes.readUnsignedShort();
 				radarMapRect.height = bytes.readUnsignedShort();
-
+				
 				bgSoundRes = bytes.readUTF();
+				envSoundRes = bytes.readUTF();
 				miniCorrectOffsetX = bytes.readInt();
 				miniCorrectOffsetY = bytes.readInt();
 				miniCorrectScaleX = bytes.readInt();
@@ -78,7 +80,7 @@ package com.game.engine3D.vo.map
 				boundMinY = bytes.readInt();
 				boundMaxX = bytes.readInt();
 				boundMaxY = bytes.readInt();
-
+				
 				mapAreaVersion = bytes.readByte();
 				areaDatas.length = 0;
 				if (bytes.bytesAvailable)
@@ -91,7 +93,63 @@ package com.game.engine3D.vo.map
 						areaDatas.push(areaData);
 					}
 				}
-
+				
+				timeOfTheDayDataVersion = bytes.readByte();
+				hasTimeOfTheDayData = bytes.readBoolean();
+				if (hasTimeOfTheDayData)
+				{
+					timeOfTheDayData = new ClientMapTimeOfTheDayData();
+					timeOfTheDayData.readFrom(timeOfTheDayDataVersion, bytes);
+				}
+				cameraPropertyDataVersion = bytes.readByte();
+				hasCameraPropertyData = bytes.readBoolean();
+				if (hasCameraPropertyData)
+				{
+					cameraPropertyData = new ClientMapCameraPropertyData()
+					cameraPropertyData.readFrom(cameraPropertyDataVersion, bytes);
+				}
+			}
+			else if (version == 10)
+			{
+				mapRes = bytes.readUTF();
+				miniMapRes = bytes.readUTF();
+				miniMapRect.x = bytes.readUnsignedShort();
+				miniMapRect.y = bytes.readUnsignedShort();
+				miniMapRect.width = bytes.readUnsignedShort();
+				miniMapRect.height = bytes.readUnsignedShort();
+				
+				radarMapRes = bytes.readUTF();
+				radarMapRect.x = bytes.readUnsignedShort();
+				radarMapRect.y = bytes.readUnsignedShort();
+				radarMapRect.width = bytes.readUnsignedShort();
+				radarMapRect.height = bytes.readUnsignedShort();
+				
+				bgSoundRes = bytes.readUTF();
+				miniCorrectOffsetX = bytes.readInt();
+				miniCorrectOffsetY = bytes.readInt();
+				miniCorrectScaleX = bytes.readInt();
+				miniCorrectScaleY = bytes.readInt();
+				miniCorrectTilt = bytes.readInt();
+				miniCorrectRoll = bytes.readInt();
+				miniCorrectPan = bytes.readInt();
+				boundMinX = bytes.readInt();
+				boundMinY = bytes.readInt();
+				boundMaxX = bytes.readInt();
+				boundMaxY = bytes.readInt();
+				
+				mapAreaVersion = bytes.readByte();
+				areaDatas.length = 0;
+				if (bytes.bytesAvailable)
+				{
+					mapAreaCount = bytes.readUnsignedByte();
+					for (i = 0; i < mapAreaCount; i++)
+					{
+						areaData = new ClientMapAreaData();
+						areaData.readFrom(mapAreaVersion, bytes);
+						areaDatas.push(areaData);
+					}
+				}
+				
 				timeOfTheDayDataVersion = bytes.readByte();
 				hasTimeOfTheDayData = bytes.readBoolean();
 				if (hasTimeOfTheDayData)
@@ -114,13 +172,13 @@ package com.game.engine3D.vo.map
 				miniMapRect.y = bytes.readUnsignedShort();
 				miniMapRect.width = bytes.readUnsignedShort();
 				miniMapRect.height = bytes.readUnsignedShort();
-
+				
 				radarMapRes = bytes.readUTF();
 				radarMapRect.x = bytes.readUnsignedShort();
 				radarMapRect.y = bytes.readUnsignedShort();
 				radarMapRect.width = bytes.readUnsignedShort();
 				radarMapRect.height = bytes.readUnsignedShort();
-
+				
 				bgSoundRes = bytes.readUTF();
 				miniCorrectOffsetX = bytes.readInt();
 				miniCorrectOffsetY = bytes.readInt();
@@ -133,7 +191,7 @@ package com.game.engine3D.vo.map
 				boundMinY = bytes.readInt();
 				boundMaxX = bytes.readInt();
 				boundMaxY = bytes.readInt();
-
+				
 				mapAreaVersion = bytes.readByte();
 				areaDatas.length = 0;
 				if (bytes.bytesAvailable)
@@ -146,7 +204,7 @@ package com.game.engine3D.vo.map
 						areaDatas.push(areaData);
 					}
 				}
-
+				
 				timeOfTheDayDataVersion = bytes.readByte();
 				hasTimeOfTheDayData = bytes.readBoolean();
 				if (hasTimeOfTheDayData)
@@ -178,7 +236,7 @@ package com.game.engine3D.vo.map
 				boundMinY = bytes.readInt();
 				boundMaxX = bytes.readInt();
 				boundMaxY = bytes.readInt();
-
+				
 				mapAreaVersion = bytes.readByte();
 				areaDatas.length = 0;
 				if (bytes.bytesAvailable)
@@ -191,7 +249,7 @@ package com.game.engine3D.vo.map
 						areaDatas.push(areaData);
 					}
 				}
-
+				
 				timeOfTheDayDataVersion = bytes.readByte();
 				hasTimeOfTheDayData = bytes.readBoolean();
 				if (hasTimeOfTheDayData)
@@ -222,7 +280,7 @@ package com.game.engine3D.vo.map
 				boundMinY = bytes.readInt();
 				boundMaxX = bytes.readInt();
 				boundMaxY = bytes.readInt();
-
+				
 				mapAreaVersion = bytes.readByte();
 				areaDatas.length = 0;
 				if (bytes.bytesAvailable)
@@ -235,7 +293,7 @@ package com.game.engine3D.vo.map
 						areaDatas.push(areaData);
 					}
 				}
-
+				
 				timeOfTheDayDataVersion = bytes.readByte();
 				hasTimeOfTheDayData = bytes.readBoolean();
 				if (hasTimeOfTheDayData)
@@ -262,7 +320,7 @@ package com.game.engine3D.vo.map
 				miniCorrectTilt = bytes.readInt();
 				miniCorrectRoll = bytes.readInt();
 				miniCorrectPan = bytes.readInt();
-
+				
 				mapAreaVersion = bytes.readByte();
 				areaDatas.length = 0;
 				if (bytes.bytesAvailable)
@@ -275,7 +333,7 @@ package com.game.engine3D.vo.map
 						areaDatas.push(areaData);
 					}
 				}
-
+				
 				timeOfTheDayDataVersion = bytes.readByte();
 				hasTimeOfTheDayData = bytes.readBoolean();
 				if (hasTimeOfTheDayData)
@@ -301,7 +359,7 @@ package com.game.engine3D.vo.map
 				miniCorrectTilt = bytes.readInt();
 				miniCorrectRoll = bytes.readInt();
 				miniCorrectPan = bytes.readInt();
-
+				
 				mapAreaVersion = bytes.readByte();
 				areaDatas.length = 0;
 				if (bytes.bytesAvailable)
@@ -314,7 +372,7 @@ package com.game.engine3D.vo.map
 						areaDatas.push(areaData);
 					}
 				}
-
+				
 				timeOfTheDayDataVersion = bytes.readByte();
 				hasTimeOfTheDayData = bytes.readBoolean();
 				if (hasTimeOfTheDayData)
@@ -333,7 +391,7 @@ package com.game.engine3D.vo.map
 				miniCorrectTilt = bytes.readInt();
 				miniCorrectRoll = bytes.readInt();
 				miniCorrectPan = bytes.readInt();
-
+				
 				mapAreaVersion = 0;
 				areaDatas.length = 0;
 				if (bytes.bytesAvailable)
@@ -346,7 +404,7 @@ package com.game.engine3D.vo.map
 						areaDatas.push(areaData);
 					}
 				}
-
+				
 				timeOfTheDayDataVersion = 0;
 				hasTimeOfTheDayData = bytes.readBoolean();
 				if (hasTimeOfTheDayData)
@@ -356,21 +414,21 @@ package com.game.engine3D.vo.map
 				}
 			}
 		}
-
+		
 		public function get miniScaleX() : Number
 		{
 			var value : Number = (miniCorrectScaleX > 0 ? miniCorrectScaleX / SCALE_RATIO : 1);
 			value = value == 0 ? 1 : value;
 			return 1;
 		}
-
+		
 		public function get miniScaleY() : Number
 		{
 			var value : Number = (miniCorrectScaleY > 0 ? miniCorrectScaleY / SCALE_RATIO : 1);
 			value = value == 0 ? 1 : value;
 			return 1;
 		}
-
+		
 		public function getDynamicObstacleArea(id : int) : ClientMapAreaData
 		{
 			for each (var areaData : ClientMapAreaData in areaDatas)
@@ -380,7 +438,7 @@ package com.game.engine3D.vo.map
 			}
 			return null;
 		}
-
+		
 		public function getObstacleAreas() : Vector.<ClientMapAreaData>
 		{
 			var areaSet : Vector.<ClientMapAreaData> = new Vector.<ClientMapAreaData>();
@@ -391,7 +449,7 @@ package com.game.engine3D.vo.map
 			}
 			return areaSet;
 		}
-
+		
 		public function getCameraPropertyAreas() : Vector.<ClientMapAreaData>
 		{
 			var areaSet : Vector.<ClientMapAreaData> = new Vector.<ClientMapAreaData>();
@@ -402,7 +460,7 @@ package com.game.engine3D.vo.map
 			}
 			return areaSet;
 		}
-
+		
 		public function getAthleticsAreas() : Vector.<ClientMapAreaData>
 		{
 			var areaSet : Vector.<ClientMapAreaData> = new Vector.<ClientMapAreaData>();
@@ -413,7 +471,7 @@ package com.game.engine3D.vo.map
 			}
 			return areaSet;
 		}
-
+		
 		public function getSafeAreas() : Vector.<ClientMapAreaData>
 		{
 			var areaSet : Vector.<ClientMapAreaData> = new Vector.<ClientMapAreaData>();
@@ -424,7 +482,7 @@ package com.game.engine3D.vo.map
 			}
 			return areaSet;
 		}
-
+		
 		public function getSpellForbidAreas() : Vector.<ClientMapAreaData>
 		{
 			var areaSet : Vector.<ClientMapAreaData> = new Vector.<ClientMapAreaData>();
@@ -435,13 +493,35 @@ package com.game.engine3D.vo.map
 			}
 			return areaSet;
 		}
-
+		
 		public function getStallAreas() : Vector.<ClientMapAreaData>
 		{
 			var areaSet : Vector.<ClientMapAreaData> = new Vector.<ClientMapAreaData>();
 			for each (var areaData : ClientMapAreaData in areaDatas)
 			{
 				if (areaData.type == MapAreaTypeEnum.STALL)
+					areaSet.push(areaData);
+			}
+			return areaSet;
+		}
+		
+		public function getSwimAreas() : Vector.<ClientMapAreaData>
+		{
+			var areaSet : Vector.<ClientMapAreaData> = new Vector.<ClientMapAreaData>();
+			for each (var areaData : ClientMapAreaData in areaDatas)
+			{
+				if (areaData.type == MapAreaTypeEnum.SWIM)
+					areaSet.push(areaData);
+			}
+			return areaSet;
+		}
+		
+		public function getSoundAreas() : Vector.<ClientMapAreaData>
+		{
+			var areaSet : Vector.<ClientMapAreaData> = new Vector.<ClientMapAreaData>();
+			for each (var areaData : ClientMapAreaData in areaDatas)
+			{
+				if (areaData.type == MapAreaTypeEnum.SOUND)
 					areaSet.push(areaData);
 			}
 			return areaSet;

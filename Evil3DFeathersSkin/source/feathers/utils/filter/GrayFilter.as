@@ -31,5 +31,11 @@ package feathers.utils.filter
 		{
 			if(starlingDisplay != null)starlingDisplay.filter = null;
 		}
+		
+		public static var grayFilterMatrix:Vector.<Number> = Vector.<Number>(
+			[0.3, 0.59, 0.11, 0, 0,
+				0.3, 0.59, 0.11, 0, 0,
+				0.3, 0.59, 0.11, 0, 0,
+				0, 0, 0, 1, 0])
 	}
 }

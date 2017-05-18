@@ -1810,6 +1810,7 @@ package feathers.controls
 			this.textInput = TextInput(factory());
 			this.textInput.styleNameList.add(textInputStyleName);
 			this.textInput.addEventListener(FeathersEventType.ENTER, textInput_enterHandler);
+			this.textInput.addEventListener(Event.CHANGE, textInput_textChangHandler);
 			this.textInput.addEventListener(FeathersEventType.FOCUS_IN, textInput_focusInHandler);
 			this.textInput.addEventListener(FeathersEventType.FOCUS_OUT, textInput_focusOutHandler);
 			//while we're setting isFocusEnabled to false on the text input when
@@ -2077,6 +2078,14 @@ package feathers.controls
 		protected function textInput_enterHandler(event:Event):void
 		{
 			this.parseTextInputValue();
+		}
+		
+		/**
+		 * @private
+		 */
+		protected function textInput_textChangHandler(event:Event):void
+		{
+			dispatchEvent(event);
 		}
 
 		/**

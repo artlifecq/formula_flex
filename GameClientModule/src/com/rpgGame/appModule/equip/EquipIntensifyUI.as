@@ -30,13 +30,13 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
 	import com.rpgGame.coreData.clientConfig.Q_equip_strength;
-	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
+	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangSpell;
 	import com.rpgGame.coreData.lang.LangUI;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -117,6 +117,8 @@ package com.rpgGame.appModule.equip
 		private var _progressBar:AwdProgressBar;
 		private var isLockRefresh:Boolean;
 		private static var noAlertUse:Boolean;
+
+		private var alertOk:AlertSetInfo;
 		public function EquipIntensifyUI()
 		{
 			_skin=new Zhuangbei_QianghuaSkin();
@@ -166,6 +168,9 @@ package com.rpgGame.appModule.equip
 			}
 			_skin.cmb_pinzhi.addEventListener("creationComplete",onCreatePinZhi);
 			_skin.cmb_pinzhi.alpha=0;
+			
+			alertOk=new AlertSetInfo(LangAlertInfo.EQUIP_USE_TIPS);
+			alertOk.isShowCBox=true;
 		}
 		
 		private function onCreatePinZhi(e:Event):void
@@ -311,9 +316,6 @@ package com.rpgGame.appModule.equip
 			var itemInfo:ClientItemInfo=gridInfo.data as ClientItemInfo;
 			var equip:EquipInfo=itemInfo as EquipInfo;
 			if(equip.strengthExp!=0&&!noAlertUse){
-				var alertOk:AlertSetInfo=new AlertSetInfo(LangUI.UI_TEXT3);
-				alertOk.alertInfo.value="此装备具有锻造属性！是否仍然作为材料消耗？";
-				alertOk.isShowCBox=true;
 				GameAlert.showAlert(alertOk,onAlert,[itemInfo]);
 			}else{
 				setUseItem(itemInfo);
@@ -1038,7 +1040,8 @@ package com.rpgGame.appModule.equip
 		
 		private function isStren(info:EquipInfo):Boolean
 		{
-			if(info.qItem.q_max_strengthen!=0&&info.strengthLevel<info.qItem.q_max_strengthen){//可强化的
+			var job:int=MainRoleManager.actorInfo.job;
+			if(info.qItem.q_max_strengthen!=0&&info.strengthLevel<info.qItem.q_max_strengthen&&info.qItem.q_job==job){//可强化的
 				return true;
 			}
 			return false;

@@ -14,7 +14,9 @@ package com.rpgGame.coreData.clientConfig
 	public class ConfigClassRegister
 	{
 		private static var _classMap:HashMap = new HashMap();
-				/**  名称备注	资源路径#资源路径	动画名称#动画名称	碰撞隐藏节点#碰撞隐藏节点，用;分割多个节点	消散时间#消散时间	前轴围绕半径#前轴围绕半径	前轴围绕角速度#前轴围绕角速度（度/秒）	收敛次数#收敛次数	围绕半径#围绕半径	围绕角速度#围绕角速度（度/秒） */
+				/**  								 */
+		public static const ActivityBarInfo:String = "data.ActivityBarInfo";
+		/**  名称备注	资源路径#资源路径	动画名称#动画名称	碰撞隐藏节点#碰撞隐藏节点，用;分割多个节点	消散时间#消散时间	前轴围绕半径#前轴围绕半径	前轴围绕角速度#前轴围绕角速度（度/秒）	收敛次数#收敛次数	围绕半径#围绕半径	围绕角速度#围绕角速度（度/秒） */
 		public static const EffectAnimation:String = "data.animat.EffectAnimation";
 		/**  客户端区域数据			 */
 		public static const ClientArea:String = "data.ClientArea";
@@ -150,6 +152,10 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_notify:String = "data.Q_notify";
 		/**  阵营关系				 */
 		public static const Q_relation:String = "data.Q_relation";
+		/**  16商城道具配置表													 */
+		public static const Q_shop:String = "data.Q_shop";
+		/**  购买界面其他途径提示数据库				 */
+		public static const Q_source:String = "data.Q_source";
 		/**  tipsid	标题	描述 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
 		/**  窗口链接				 */
@@ -193,6 +199,7 @@ package com.rpgGame.coreData.clientConfig
 
 		public static function setup():void
 		{
+			regClass("data.ActivityBarInfo", com.rpgGame.coreData.clientConfig.ActivityBarInfo);
 			regClass("data.animat.EffectAnimation", com.rpgGame.coreData.clientConfig.EffectAnimation);
 			regClass("data.ClientArea", com.rpgGame.coreData.clientConfig.ClientArea);
 			regClass("data.ClientBuff", com.rpgGame.coreData.clientConfig.ClientBuff);
@@ -261,6 +268,8 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_mission_segment", com.rpgGame.coreData.clientConfig.Q_mission_segment);
 			regClass("data.Q_notify", com.rpgGame.coreData.clientConfig.Q_notify);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);
+			regClass("data.Q_shop", com.rpgGame.coreData.clientConfig.Q_shop);
+			regClass("data.Q_source", com.rpgGame.coreData.clientConfig.Q_source);
 			regClass("data.Q_tipsinfo", com.rpgGame.coreData.clientConfig.Q_tipsinfo);
 			regClass("data.Q_windowInfo", com.rpgGame.coreData.clientConfig.Q_windowInfo);
 			regClass("data.Q_zone", com.rpgGame.coreData.clientConfig.Q_zone);

@@ -3,6 +3,7 @@ package com.rpgGame.app.ui.main.smallmap
     import com.game.engine3D.display.InterObject3D;
     import com.game.engine3D.manager.SceneMapDataManager;
     import com.game.engine3D.utils.MathUtil;
+    import com.game.engine3D.vo.MapTextureLoader;
     import com.game.engine3D.vo.SceneMapData;
     import com.game.engine3D.vo.map.ClientMapData;
     import com.game.mainCore.core.controller.KeyController;
@@ -342,12 +343,14 @@ package com.rpgGame.app.ui.main.smallmap
         
         private function onMapDataComplete(sceneMapData : SceneMapData) : void
         {
-            if (sceneMapData.miniMapData)
-            {
-                onLoadBitmapDataComplete(sceneMapData);
-            }
-            else
-            {
+//            if (sceneMapData.miniMapData)
+//            {
+//                onLoadBitmapDataComplete(sceneMapData);
+//            }
+//            else
+//            {
+				absMaxWidth = sceneMapData.clientMapData.boundMaxX;
+				absMaxHeight = sceneMapData.clientMapData.boundMaxY;
                 var senceData : SceneData = MapDataManager.getMapInfo(_currentMapId);
                 var mapUrl : String = ClientConfig.getMap(senceData.map);
                 var mapName : String = ClientConfig.getMapName(senceData.map);
@@ -361,14 +364,13 @@ package com.rpgGame.app.ui.main.smallmap
                     var miniMapName : String = ClientConfig.getMiniMapName(sceneMapData.clientMapData.miniMapRes);
                     SceneMapDataManager.addMiniMap(mapName, mapUrl + "_2d/" + miniMapName, sceneMapData.clientMapData.miniMapRect, onLoadBitmapDataComplete, onMapDataFaild);
                 }
-            }
+//            }
         }
         
-        private function onLoadBitmapDataComplete(sceneMapData : SceneMapData) : void
+        private function onLoadBitmapDataComplete(loader : MapTextureLoader) : void
         {
-            var texture : IStarlingTexture = isRadarMap ? sceneMapData.radarMapTexture : sceneMapData.miniMapTexture;
-            absMaxWidth = sceneMapData.clientMapData.boundMaxX;
-            absMaxHeight = sceneMapData.clientMapData.boundMaxY;
+            var texture : IStarlingTexture = loader.subTexture;//isRadarMap ? sceneMapData.radarMapTexture : sceneMapData.miniMapTexture;
+            
             if (!texture)
             {
                 return;
@@ -377,7 +379,7 @@ package com.rpgGame.app.ui.main.smallmap
             updateMiniMap(texture);
         }
         
-        private function onMapDataFaild(sceneMapData : SceneMapData) : void
+        private function onMapDataFaild(loader : MapTextureLoader) : void
         {
         }
         

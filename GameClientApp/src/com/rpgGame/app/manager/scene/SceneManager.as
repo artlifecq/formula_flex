@@ -53,11 +53,11 @@ package com.rpgGame.app.manager.scene
 		/**
 		 * 场景中最大渲染的角色的个数 
 		 */		
-		private static var _playerMaxRenderNum : int = 300;
+		private static var _playerMaxRenderNum : int = 100;
 		/**
 		 * 场景中最大渲染的怪物个数 
 		 */		
-		private static var _monsterMaxRenderNum : int = 100;
+		private static var _monsterMaxRenderNum : int = 300;
 		/**
 		 * 场景中最大渲染的其它种类个数，比如说特效，采集物== 
 		 */		
@@ -65,7 +65,7 @@ package com.rpgGame.app.manager.scene
 		/**
 		 * 场景中最大渲染角色名字的个数 
 		 */		
-		private static var _maxRoleHeadNameNum : int = 50;
+		private static var _maxRoleHeadNameNum : int = 100;
 		/**
 		 * 场景中的可视范围 
 		 */		
@@ -137,7 +137,9 @@ package com.rpgGame.app.manager.scene
 			{
 				scene.addSceneObj(obj, null, needInViewDist, renderLimitable);
 				if (clingGround)
+				{
 					obj.clingGroundCalculate = scene.clingGround;
+				}
 			}
 		}
 
@@ -370,7 +372,7 @@ package com.rpgGame.app.manager.scene
 				AreaMapManager.updateEscortAreaMap();
 				AreaMapManager.updateExplorationAreaMap();
 				AreaMapManager.updateMapDataAreaMap();
-				AreaMapManager.updateTriggerAreaMap();
+//				AreaMapManager.updateTriggerAreaMap();
 			}
 		}
 

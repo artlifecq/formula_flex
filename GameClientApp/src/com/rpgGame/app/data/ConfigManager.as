@@ -4,6 +4,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.app.manager.mount.HorseExtraItemInfo;
+	import com.rpgGame.coreData.cfg.ActivityBarCfgData;
 	import com.rpgGame.coreData.cfg.AddSpriteStatCfgData;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
@@ -16,6 +17,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.ClientAreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientBuffCfgData;
 	import com.rpgGame.coreData.cfg.ClientDialogCfgData;
+	import com.rpgGame.coreData.cfg.ClientFunctionOpenCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneEffectCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneNpcCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneRoleCfgData;
@@ -249,6 +251,8 @@ package com.rpgGame.app.data
 			TaskMissionCfgData.setup(dic[ConfigClassRegister.Q_mission_base]);
 			TaskMissionCfgData.setupReword(dic[ConfigClassRegister.Q_mission_reword]);
 			TaskMissionCfgData.setupSegment(dic[ConfigClassRegister.Q_mission_segment]);
+			
+			ActivityBarCfgData.setup(dic[ConfigClassRegister.ActivityBarInfo]);
 
 			//心法
 			CheatsCfg.setup(dic[ConfigClassRegister.Q_cheats]);
@@ -266,6 +270,9 @@ package com.rpgGame.app.data
 			ZoneCfgData.setup(dic[ConfigClassRegister.Q_zone]);
 			LunJianCfg.setup(dic[ConfigClassRegister.Q_lunjian]);
 			ZoneMultyCfgData.setup(dic[ConfigClassRegister.Q_zone_multy]);//多人副本
+			
+			//功能开启
+//			ClientFunctionOpenCfgData.setup(dic["data.ClientFunctionOpen"]);
 		}
 		
 		/**

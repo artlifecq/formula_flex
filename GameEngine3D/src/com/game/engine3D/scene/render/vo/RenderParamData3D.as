@@ -17,7 +17,7 @@ package com.game.engine3D.scene.render.vo
 		/**部件类型*/
 		public var type : String = null;
 		/**部件加载列表里的优先级*/
-		public var priority : int = 0;
+		public var priority : int = 100;
 		public var sourcePath : String = null;
 		public var animatorSourchPath : String = null;
 		public var sourceName : String = null;

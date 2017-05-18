@@ -3,7 +3,7 @@ package com.game.engine3D.utils
 	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.vo.ErrorReportData;
-
+	
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.events.TimerEvent;
@@ -14,9 +14,10 @@ package com.game.engine3D.utils
 	import flash.system.System;
 	import flash.utils.Timer;
 	import flash.utils.getTimer;
-
+	
 	import away3d.arcane;
 	import away3d.core.managers.Stage3DProxy;
+	import away3d.core.managers.TextureManager;
 	import away3d.premium.heap.HeapAllocator;
 
 	/**
@@ -63,14 +64,14 @@ package com.game.engine3D.utils
 			var stage3DProxy : Stage3DProxy = Stage3DLayerManager.stage3DProxy;
 			var reportData : ErrorReportData = new ErrorReportData();
 			reportData.memory = System.totalMemory / 1024 / 1024; //报错时的内存
-			reportData.displayMemory = stage3DProxy.textureMemory3D / 1024 / 1024; //报错时的显存
-			reportData.maxDM = stage3DProxy.maxTextureMemory / 1024 / 1024; //最大可用显存
+//			reportData.displayMemory = TextureManager.getInstance().textureMemory3D / 1024 / 1024; //报错时的显存
+//			reportData.maxDM = TextureManager.getInstance().maxTextureMemory / 1024 / 1024; //最大可用显存
 			reportData.stageWidth = Stage3DLayerManager.stage.stageWidth; //舞台宽度
 			reportData.stageHeight = Stage3DLayerManager.stage.stageHeight; //舞台高度
 			reportData.runTime = int(getTimer() / 1000 / 60); //客户端运行时间 
-			reportData.vex2D = stage3DProxy.totalVertexBuffer2D; //2D顶点数
-			reportData.vex3D = stage3DProxy.totalVertexBuffer3D; //3D顶点数
-			reportData.heap = (HeapAllocator.CACHE_SIZE - HeapAllocator.sizeAvailable) / 1024 / 1024; //domainMemory
+			reportData.vex2D = stage3DProxy.vertexBufferManager.totalVertexBuffer2D; //2D顶点数
+			reportData.vex3D = stage3DProxy.vertexBufferManager.totalVertexBuffer3D; //3D顶点数
+//			reportData.heap = (HeapAllocator.totalHeapSize - HeapAllocator.sizeAvailable) / 1024 / 1024; //domainMemory
 			reportData.draw2D = stage3DProxy.drawCount2D; //2D drawCall
 			reportData.draw3D = stage3DProxy.drawCount3D; //3D drawCall
 			reportData.fps = Stage3DLayerManager.fps; //报错时的帧率
