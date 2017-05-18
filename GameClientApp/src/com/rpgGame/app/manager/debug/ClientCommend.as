@@ -4,6 +4,7 @@ package   com.rpgGame.app.manager.debug
 	import com.game.engine3D.utils.StatsUtil;
 	import com.game.mainCore.core.manager.LayerManager;
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.manager.Mgr;
 	
 	import org.game.netCore.net.MessageMgr;
 
@@ -15,14 +16,13 @@ package   com.rpgGame.app.manager.debug
 	public class ClientCommend
 	{
 		private static var ins:ClientCommend=new ClientCommend();
+		private static var _isDevelop:Boolean;
 		public function ClientCommend():void
 		{
 			initCommend();
+			_isDevelop=MessageMgr.Ins.ip.indexOf("192.168")!=-1
 		}
-		public static function isDevelop():Boolean
-		{
-			return MessageMgr.Ins.ip.indexOf("192.168")!=-1;
-		}
+		
 		private  var commandList:HashMap = new HashMap();
 		private  var docommandList:Vector.<String> = new Vector.<String>;
 		
@@ -40,12 +40,20 @@ package   com.rpgGame.app.manager.debug
 				LayerManager.showOrHideMM();
 				StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
 			});
+			commandList.put( ".vip", function (...arg):void
+			{
+				Mgr.vipMgr.vipLv=arg[0];
+			});
+			commandList.put( ".buy", function (...arg):void
+			{
+				
+			});
 		}
 		
 		
 		public static function doCommand(str:String):Boolean 
 		{
-			if (!isDevelop()) 
+			if (!_isDevelop) 
 			{
 				return false;
 			}

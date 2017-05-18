@@ -1,5 +1,6 @@
 package com.rpgGame.app.manager
 {
+	import com.rpgGame.app.manager.shop.ShopManager;
 	import com.rpgGame.app.manager.yunBiao.CheatsMgr;
 
 	public class Mgr
@@ -20,6 +21,15 @@ package com.rpgGame.app.manager
 		public static function get teamMgr():TeamManager
 		{
 			return TeamManager.ins;
+		}
+		
+		public static function get shopMgr():ShopManager
+		{
+			return ShopManager.ins;
+		}
+		public static function get vipMgr():VipManager
+		{
+			return VipManager.ins;
 		}
 	}
 }

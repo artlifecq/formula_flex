@@ -7,6 +7,11 @@ package  com.rpgGame.core.utils
 	import flash.utils.clearInterval;
 	import flash.utils.setInterval;
 	
+	import feathers.controls.Label;
+	import feathers.controls.List;
+	
+	import org.mokylin.skin.component.list.ListSkin1;
+	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	
@@ -375,6 +380,19 @@ package  com.rpgGame.core.utils
 				dstHash.put(key,vald+vals);
 			}
 			
+		}
+		public static function clonelab(lab:Label):Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.name =lab.name;
+			temp.letterSpacing = lab.letterSpacing;
+			temp.text = lab.text;
+			temp.color =lab.color;
+			temp.nativeFilters = lab.nativeFilters;
+			temp.width = lab.width;
+			temp.x = lab.x;
+			temp.y = lab.y;
+			return temp;
 		}
 	}
 }

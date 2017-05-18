@@ -1,30 +1,27 @@
 package com.rpgGame.core.events
 {
-	import com.rpgGame.coreData.UNIQUEID;
-	
-	
+	import flash.events.Event;
 	/**
 	 *
 	 * @author lpp
 	 */
-	public class ShopEvent 
+	public class ShopEvent  extends Event
 	{
 		/**回购物品改变**/
-		public static const BUY_BACK_CHANGE:int = UNIQUEID.NEXT;
-		
-		/** 请求NPC商店物品数据成功*/
-		public static const NPC_SHOP_ITEM_DATA:int = UNIQUEID.NEXT;
-		
-		public static const REPAIR_SUCCESS:int = UNIQUEID.NEXT;
-		
-		public static const REPAIR_ALL_SUCCESS:int = UNIQUEID.NEXT;
-		
-		public static const ENTER_SELL_MODE:int = UNIQUEID.NEXT;
-		
-		public static const EXIT_SELL_MODE:int = UNIQUEID.NEXT;
-		
-		public static const ENTER_REPAIR_MODE:int = UNIQUEID.NEXT;
-		
-		public static const EXIT_REPAIR_MODE:int = UNIQUEID.NEXT;
+		public static const BUY_BACK_CHANGE:String= "buy_back_item_change";
+		/**
+		 *获取到商城商品信息 
+		 */		
+		public static const SHOP_ITEM_DATA:String="get_shop_items_data";
+		/**
+		 *单个商品信息数量改变 
+		 */		
+		public static const SHOP_ITEM_DATA_CHANGE:String="shop_item_change";
+		public var data:*;
+		public function ShopEvent(type:String, tdata:*=null,bubbles:Boolean=false, cancelable:Boolean=false)
+		{
+			super(type, bubbles, cancelable);
+			this.data=tdata;
+		}
 	}
 }
