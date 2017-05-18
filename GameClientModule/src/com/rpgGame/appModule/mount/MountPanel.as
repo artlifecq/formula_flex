@@ -192,8 +192,12 @@ package com.rpgGame.appModule.mount
 //			this.parent.addChild(_shopPane);
 //			_shopPane.updataItem(_mountShowData.upLevelItem);
 			//			changePaneHander();
-			ItemGetAdvisePanelExt.showBuyItem(_mountShowData.upLevelItem.qItem.q_id,this);
-			onStageResize(_stage.stageWidth-ItemGetAdvisePanelExt.ins.width,_stage.stageHeight);
+			var retw:int=ItemGetAdvisePanelExt.showBuyItem(_mountShowData.upLevelItem.qItem.q_id,this);
+			if (retw!=0) 
+			{
+				onStageResize(_stage.stageWidth-retw,_stage.stageHeight);
+			}
+			
 		}
 		private function panleremoveFormSatgeHander():void
 		{
