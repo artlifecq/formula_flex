@@ -76,7 +76,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const HeroModel:String = "data.model.HeroModel";
 		/**  坐骑模型表	功能名称	动画资源名称 */
 		public static const MountModel:String = "data.model.MountModel";
-		/**  怪物列表																																																																 */
+		/**  3 怪物基本信息数据库																																																																	 */
 		public static const Q_monster:String = "data.monster.Q_monster";
 		/**  NPC配置数据库																									 */
 		public static const Q_npc:String = "data.monster.Q_npc";
@@ -92,6 +92,10 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_cheats:String = "data.Q_cheats";
 		/**  经脉冲穴数据库																 */
 		public static const Q_cheats_node:String = "data.Q_cheats_node";
+		/**  资源副本数据库	副本类型 （1真气,2装备,3经验）	背景图													 */
+		public static const Q_daily_zone:String = "data.Q_daily_zone";
+		/**  每日副本刷怪配置表								 */
+		public static const Q_dailyzone_monster:String = "data.Q_dailyzone_monster";
 		/**  复活界面配置表				 */
 		public static const Q_die:String = "data.Q_die";
 		/**  继承消耗表			 */
@@ -118,8 +122,10 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_horse:String = "data.Q_horse";
 		/**  坐骑技能数据库		 */
 		public static const Q_horse_skills:String = "data.Q_horse_skills";
-		/**  2物品基本信息数据库																																																																																				 */
+		/**  2物品基本信息数据库																																																																																						 */
 		public static const Q_item:String = "data.Q_item";
+		/**  军阶数据表					 */
+		public static const Q_junjie:String = "data.Q_junjie";
 		/**  绝学开放表							 */
 		public static const Q_lostskill_open:String = "data.Q_lostskill_open";
 		/**  绝学升级表		 */
@@ -150,7 +156,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_windowInfo:String = "data.Q_windowInfo";
 		/**  副本数据表														 */
 		public static const Q_zone:String = "data.Q_zone";
-		/**  q_zone_multy						 */
+		/**  多人副本数据表						 */
 		public static const Q_zone_multy:String = "data.Q_zone_multy";
 		/**  职业对应的名字		 */
 		public static const RaceNameInfo:String = "data.RaceNameInfo";
@@ -174,7 +180,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_GCD:String = "data.spell.Q_GCD";
 		/**  技能无视防御伤害数据库																		 */
 		public static const Q_skill_ignore:String = "data.spell.Q_skill_ignore";
-		/**  技能基本信息配置数据表																																																																																																																																						 */
+		/**  技能基本信息配置数据表																																																																																																																																								 */
 		public static const Q_skill_model:String = "data.spell.Q_skill_model";
 		/**  技能效果配置表																			 */
 		public static const Q_SpellAnimation:String = "data.spell.Q_SpellAnimation";
@@ -226,6 +232,8 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_att_values", com.rpgGame.coreData.clientConfig.Q_att_values);
 			regClass("data.Q_cheats", com.rpgGame.coreData.clientConfig.Q_cheats);
 			regClass("data.Q_cheats_node", com.rpgGame.coreData.clientConfig.Q_cheats_node);
+			regClass("data.Q_daily_zone", com.rpgGame.coreData.clientConfig.Q_daily_zone);
+			regClass("data.Q_dailyzone_monster", com.rpgGame.coreData.clientConfig.Q_dailyzone_monster);
 			regClass("data.Q_die", com.rpgGame.coreData.clientConfig.Q_die);
 			regClass("data.Q_equip_inherit_cost", com.rpgGame.coreData.clientConfig.Q_equip_inherit_cost);
 			regClass("data.Q_equip_polish", com.rpgGame.coreData.clientConfig.Q_equip_polish);
@@ -240,6 +248,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_horse", com.rpgGame.coreData.clientConfig.Q_horse);
 			regClass("data.Q_horse_skills", com.rpgGame.coreData.clientConfig.Q_horse_skills);
 			regClass("data.Q_item", com.rpgGame.coreData.clientConfig.Q_item);
+			regClass("data.Q_junjie", com.rpgGame.coreData.clientConfig.Q_junjie);
 			regClass("data.Q_lostskill_open", com.rpgGame.coreData.clientConfig.Q_lostskill_open);
 			regClass("data.Q_lostskill_up", com.rpgGame.coreData.clientConfig.Q_lostskill_up);
 			regClass("data.Q_lunjian", com.rpgGame.coreData.clientConfig.Q_lunjian);

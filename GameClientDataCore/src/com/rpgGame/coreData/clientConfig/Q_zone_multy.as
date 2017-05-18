@@ -22,9 +22,9 @@ package com.rpgGame.coreData.clientConfig
 		public var q_count:int;
 		 /**  通关前几次会获得通关奖励 */
 		public var q_front:int;
-		 /**  通关奖励（奖励可以多个。显示只能显示一个） */
+		 /**  通关奖励 */
 		public var q_pass_reward:String;
-		 /**  概率掉落物品 （先客户端使用后面可能会绑在boss身上） */
+		 /**  概率掉落物品 */
 		public var q_prob_reward:String;
 
 	}

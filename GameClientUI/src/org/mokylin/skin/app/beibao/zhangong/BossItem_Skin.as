@@ -8,9 +8,9 @@ package org.mokylin.skin.app.beibao.zhangong
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
-	import org.mokylin.skin.app.beibao.zhangong.Progress_dengji;
 	import org.mokylin.skin.app.beibao.zhangong.button.ButtonZhaodou;
 	import org.mokylin.skin.component.button.ButtonSkin_putong5;
+	import org.mokylin.skin.component.progress.progress_jindutiao;
 	import org.mokylin.skin.component.uinumber.UINumberZhanli_min;
 
 	/**
@@ -96,7 +96,7 @@ package org.mokylin.skin.app.beibao.zhangong
 		private function __BossItem_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/zhangong/jindutiao/jdtbg.png";
+			temp.styleName = "ui/component/progress/jindutiao/jdtbg.png";
 			temp.width = 99;
 			temp.x = 57;
 			temp.y = 152;
@@ -214,8 +214,8 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 57;
-			temp.x = 78;
+			temp.width = 86;
+			temp.x = 65;
 			temp.y = 151;
 			return temp;
 		}
@@ -239,7 +239,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
 			pro_bar = temp;
 			temp.name = "pro_bar";
-			temp.styleClass = org.mokylin.skin.app.beibao.zhangong.Progress_dengji;
+			temp.styleClass = org.mokylin.skin.component.progress.progress_jindutiao;
 			temp.value = 40;
 			temp.x = 64;
 			temp.y = 154;
@@ -263,7 +263,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiBg = temp;
 			temp.name = "uiBg";
-			temp.styleName = "ui/app/beibao/zhangong/guaiwubeijing.jpg";
+			temp.styleName = "ui/big_bg/beibao/zhangong/guaiwubeijing.jpg";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

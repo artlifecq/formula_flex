@@ -2,6 +2,7 @@ package com.rpgGame.appModule.role
 {
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.appModule.jingmai.MeridianMainPanelExt;
+	import com.rpgGame.appModule.junjie.JunJiePanelExt;
 	import com.rpgGame.appModule.xinfa.XinFaMainPanelExt;
 	import com.rpgGame.appModule.zhangong.ZhanGongPanelExt;
 	import com.rpgGame.core.ui.SkinUI;
@@ -26,12 +27,14 @@ package com.rpgGame.appModule.role
 		public static const SUB_MERIDIAN:String="meridian_panel";
 		public static const SUB_ZHANGONG:String="zhangong_panel";
 		public static const SUB_XINFA:String="xinfa_panel";
+		public static const SUB_JUNJIE:String="Junjie_panel";
 		protected var _skin : beibao_Skin;
 		
 		
 		private var _subRole:SubRolePanel;
 		private var _subMeridian:MeridianMainPanelExt;
 		private var _subZhanGong:ZhanGongPanelExt;
+		private var _subJunJie:JunJiePanelExt;
 		private var _curSub:SkinUI;
 		private var _subXinFa:XinFaMainPanelExt;
 		public function RolePanel()
@@ -84,6 +87,11 @@ package com.rpgGame.appModule.role
 					sub=subXinfa;
 					break;
 				}
+				case SUB_JUNJIE:
+				{
+					sub=subJunJie;
+					break;
+				}
 				default:
 				{
 					sub=_subRole;
@@ -112,7 +120,7 @@ package com.rpgGame.appModule.role
 				showSubPanel(SUB_ROLE);
 			}
 			else if (target==(_skin.daohang.skin as daohang_Skin).btn_jingmai) 
-			{
+			{ 
 				showSubPanel(SUB_MERIDIAN);
 			}
 			else if(target==(_skin.daohang.skin as daohang_Skin).btn_zhangong)
@@ -122,6 +130,10 @@ package com.rpgGame.appModule.role
 			else if (target==(_skin.daohang.skin as daohang_Skin).btn_xinfa) 
 			{
 				showSubPanel(SUB_XINFA);
+			}
+			else if (target==(_skin.daohang.skin as daohang_Skin).btn_junjie) 
+			{
+				showSubPanel(SUB_JUNJIE);
 			}
 		}
 		
@@ -158,6 +170,15 @@ package com.rpgGame.appModule.role
 				_subZhanGong=new ZhanGongPanelExt();
 			}
 			return _subZhanGong;
+		}
+		
+		public function get subJunJie():JunJiePanelExt
+		{
+			if(_subJunJie==null)
+			{
+				_subJunJie=new JunJiePanelExt();
+			}
+			return _subJunJie;
 		}
 		
 		public function get subXinfa():XinFaMainPanelExt
