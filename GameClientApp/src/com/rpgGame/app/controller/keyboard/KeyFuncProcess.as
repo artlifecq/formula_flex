@@ -1,11 +1,15 @@
 package com.rpgGame.app.controller.keyboard
 {
+	import com.game.engine3D.utils.MathUtil;
+	import com.game.engine3D.vo.map.ClientMapAreaData;
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.mount.MountManager;
 	import com.rpgGame.app.manager.role.DropGoodsManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.interfaces.IEscExcute;
@@ -14,6 +18,7 @@ package com.rpgGame.app.controller.keyboard
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.info.key.KeyInfo;
 	
+	import flash.geom.Point;
 	import flash.utils.getTimer;
 	
 	import starling.display.DisplayObjectContainer;
@@ -40,10 +45,23 @@ package com.rpgGame.app.controller.keyboard
 					}
 					break;
 				case "2": //Z 自动挂机   挂机改到A去了
-					/*if (TrusteeshipManager.getInstance().isAutoFightRunning)
-						TrusteeshipManager.getInstance().stopAutoFight();
-					else
-						TrusteeshipManager.getInstance().startAutoFight();*/
+					
+					for(var i:int=0;i<SceneManager.clientMapData.areaDatas.length;i++)
+					{
+						var areadata:ClientMapAreaData=SceneManager.clientMapData.areaDatas[i];
+						var point:Point=new Point(MainRoleManager.actor.x,MainRoleManager.actor.z);
+						//areadata.type
+						/*for(var j:int=0;j<areadata.points.length;j++)
+						{
+							
+						}*/
+						
+						
+					}
+					
+					
+					
+					
 					break;
 				case "65": //A 自动挂机   挂机改到A去了
 					if (TrusteeshipManager.getInstance().isAutoFightRunning)

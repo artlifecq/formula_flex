@@ -68,12 +68,19 @@ package com.game.engine3D.display
 			var sr3D : EffectObject3D = new EffectObject3D(null,isdispose);
 			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", url);
 			data.forceLoad=true;
-			var unit:RenderUnit3D=sr3D.addRenderUnitWith(data, 0, onPlayComplete,addComplete);
-			unit.stop();
-			unit.stopRender();
-			sr3D.stop();
-			/*sr3D.x = x;
-			sr3D.y = y;*/
+			var unit:RenderUnit3D=sr3D.addRenderUnitWith(data, 0, onPlayComplete,addEft);
+			function addEft(render:RenderUnit3D):void
+			{
+				unit.stop();
+				unit.stopRender();
+				sr3D.stop();
+				sr3D.stopEffect();
+				if(addComplete!=null)
+				{
+					addComplete(render);
+				}
+				
+			}
 			addChild3D(sr3D);
 			return sr3D;
 		}

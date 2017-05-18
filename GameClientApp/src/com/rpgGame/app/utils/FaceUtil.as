@@ -128,8 +128,8 @@ package com.rpgGame.app.utils
 			grid.count = itemInfo.count;
 			grid.showQuality( itemInfo.quality );
 			grid.faceInfo = itemInfo;
-			grid.setIsShowCdTm( false );
-			grid.isCircleCD=true;
+			grid.setIsShowCdTm(false);
+			grid.setIsShowCdCircle(true);
 			grid.sortLayer();
 			grid.setIsBind(itemInfo.binded);
 			grid.selectImgVisible = true;
